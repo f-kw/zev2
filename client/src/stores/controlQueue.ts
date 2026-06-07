@@ -1,0 +1,168 @@
+import { defineStore } from 'pinia';
+import {
+  createInitialState,
+  type RequestDraftInput,
+  type WorkflowStep,
+  type Zev2State
+} from '@zev2/shared';
+import {
+  approveDraft,
+  createDraft,
+  fetchState,
+  fetchWorkflow
+} from '../api';
+
+interface ControlQueueStoreState {
+  workflowSteps: WorkflowStep[];
+  state: Zev2State;
+  loading: boolean;
+  message: string;
+  errorMessage: string;
+  lastChangedAt: string;
+  activeDraftId: string;
+  activePurpose: string;
+  runPhase: 'idle' | 'saving' | 'handing_off' | 'running' | 'completed' | 'error';
+  runNumber: number;
+}
+
+function wait(milliseconds: number): Promise<void> {
+  return new Promise((resolve) => {
+    window.setTimeout(resolve, milliseconds);
+  });
+}
+
+function hasActiveAgentRequests(state: Zev2State): boolean {
+  return state.agentRequests.some((request) => ['queued', 'waiting', 'running'].includes(request.status));
+}
+
+async function keepPhaseVisible(startedAt: number, minimumMilliseconds: number): Promise<void> {
+  const remainingMilliseconds = minimumMilliseconds - (Date.now() - startedAt);
+
+  if (remainingMilliseconds > 0) {
+    await wait(remainingMilliseconds);
+  }
+}
+
+function formatApiError(error: unknown): string {
+  const response = (error as {
+    response?: {
+      data?: {
+        error?: string;
+        errors?: string[];
+      };
+    };
+  }).response;
+
+  if (response?.data?.errors?.length) {
+    return response.data.errors.join(' / ');
+  }
+
+  if (response?.data?.error) {
+    return response.data.error;
+  }
+
+  if (error instanceof Error) {
+    return error.message;
+  }
+
+  return 'API呼び出しに失敗しました';
+}
+
+export const useControlQueueStore = defineStore('controlQueue', {
+  state: (): ControlQueueStoreState => ({
+    workflowSteps: [],
+    state: createInitialState(),
+    loading: false,
+    message: '',
+    errorMessage: '',
+    lastChangedAt: '',
+    activeDraftId: '',
+    activePurpose: '',
+    runPhase: 'idle',
+    runNumber: 0
+  }),
+  actions: {
+    async refresh() {
+      this.loading = true;
+      try {
+        const [{ steps }, state] = await Promise.all([fetchWorkflow(), fetchState()]);
+        this.workflowSteps = steps;
+        this.state = state;
+        this.errorMessage = '';
+      } finally {
+        this.loading = false;
+      }
+    },
+    async createRequestDraft(input: RequestDraftInput) {
+      this.loading = true;
+      this.errorMessage = '';
+      this.activeDraftId = '';
+      this.activePurpose = input.purpose;
+      this.runPhase = 'saving';
+      this.runNumber += 1;
+      this.lastChangedAt = new Date().toISOString();
+      this.message = '依頼を保存しています';
+      try {
+        const { draft } = await createDraft(input);
+        this.activeDraftId = draft.id;
+        this.lastChangedAt = new Date().toISOString();
+        this.runPhase = 'handing_off';
+        this.message = '承認済み依頼をAIエージェントへ渡しています';
+        this.state = await approveDraft(draft.id);
+        this.lastChangedAt = new Date().toISOString();
+        this.runPhase = 'running';
+        await this.refreshUntilAgentSettled(Date.now());
+      } catch (error) {
+        this.errorMessage = formatApiError(error);
+        this.message = '';
+        this.runPhase = 'error';
+        this.lastChangedAt = new Date().toISOString();
+      } finally {
+        this.loading = false;
+      }
+    },
+    async approveRequestDraft(id: string) {
+      this.loading = true;
+      this.errorMessage = '';
+      this.activeDraftId = id;
+      this.activePurpose = this.state.requestDrafts.find((draft) => draft.id === id)?.purpose ?? '';
+      this.runPhase = 'handing_off';
+      this.runNumber += 1;
+      this.lastChangedAt = new Date().toISOString();
+      this.message = '依頼をAIエージェントへ渡しています';
+      try {
+        this.state = await approveDraft(id);
+        this.lastChangedAt = new Date().toISOString();
+        this.runPhase = 'running';
+        await this.refreshUntilAgentSettled(Date.now());
+      } catch (error) {
+        this.errorMessage = formatApiError(error);
+        this.message = '';
+        this.runPhase = 'error';
+        this.lastChangedAt = new Date().toISOString();
+      } finally {
+        this.loading = false;
+      }
+    },
+    async refreshUntilAgentSettled(startedAt = Date.now()) {
+      for (let attempt = 0; attempt < 30; attempt += 1) {
+        if (!hasActiveAgentRequests(this.state)) {
+          await keepPhaseVisible(startedAt, 700);
+          this.message = 'AIエージェントのdry-run実行が完了しました';
+          this.runPhase = 'completed';
+          this.lastChangedAt = new Date().toISOString();
+          return;
+        }
+
+        this.message = 'AIエージェントがAPI経由で処理中です';
+        this.runPhase = 'running';
+        await wait(300);
+        this.state = await fetchState();
+        this.lastChangedAt = new Date().toISOString();
+      }
+
+      this.message = 'AIエージェント実行中です';
+      this.runPhase = 'running';
+    }
+  }
+});

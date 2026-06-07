@@ -1,0 +1,24 @@
+{
+  "name": "backend",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "pnpm --filter @zev2/shared build && tsx watch src/index.ts",
+    "build": "pnpm --filter @zev2/shared build && tsc -p tsconfig.json",
+    "start": "pnpm run build && node dist/index.js",
+    "type-check": "pnpm --filter @zev2/shared build && tsc -p tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "@zev2/shared": "workspace:*",
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1",
+    "nanoid": "^5.1.6"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.6",
+    "@types/node": "^25.0.1",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3"
+  }
+}

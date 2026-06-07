@@ -1,0 +1,30 @@
+{
+  "name": "zev2",
+  "private": true,
+  "packageManager": "pnpm@10.28.0",
+  "scripts": {
+    "dev:client": "pnpm --filter client dev",
+    "dev:backend": "pnpm --filter backend dev",
+    "build:client": "pnpm --filter client build",
+    "build:backend": "pnpm --filter backend build",
+    "build:runner": "pnpm --filter @zev2/agent-runner build",
+    "build:shared": "pnpm --filter @zev2/shared build",
+    "runner:dry-run": "pnpm --filter @zev2/agent-runner dry-run",
+    "type-check": "pnpm run build:shared && pnpm --filter backend type-check && pnpm --filter client type-check && pnpm --filter @zev2/agent-runner type-check"
+  },
+  "pnpm": {
+    "supportedArchitectures": {
+      "os": [
+        "darwin"
+      ],
+      "cpu": [
+        "x64",
+        "arm64"
+      ]
+    },
+    "onlyBuiltDependencies": [
+      "esbuild",
+      "vue-demi"
+    ]
+  }
+}

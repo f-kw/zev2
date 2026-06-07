@@ -1,0 +1,16 @@
+packages:
+  - client
+  - backend
+  - runner
+  - packages/shared
+
+onlyBuiltDependencies:
+  - esbuild
+  - vue-demi
+
+supportedArchitectures:
+  os:
+    - darwin
+  cpu:
+    - x64
+    - arm64
