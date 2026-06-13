@@ -3,6 +3,9 @@ import { computed, onMounted, reactive, ref } from 'vue';
 import type {
   AgentRequest,
   AgentRequestStatus,
+  ControlReviewItem,
+  ControlReviewStatus,
+  HumanReviewActionType,
   RequestDraftInput,
   RequestDraftStatus
 } from '@zev2/shared';
@@ -12,6 +15,7 @@ const store = useControlQueueStore();
 const selectedHistoryDraftId = ref('');
 const currentView = ref<'main' | 'history'>('main');
 const showSuccessfulSteps = ref(false);
+const reviewReasons = reactive<Record<string, string>>({});
 
 const draftInput = reactive<RequestDraftInput>({
   purpose: 'この配信からショート候補を作って、切り抜き理由とテロップ案まで出す',
@@ -44,10 +48,26 @@ const operationStatusColor = {
   failed: 'error'
 } satisfies Record<AgentRequestStatus, string>;
 
+const controlReviewStatusLabel = {
+  review_required: '確認待ち',
+  approved: '承認済み',
+  rejected: '却下',
+  changes_requested: '修正依頼'
+} satisfies Record<ControlReviewStatus, string>;
+
+const controlReviewStatusColor = {
+  review_required: 'warning',
+  approved: 'success',
+  rejected: 'error',
+  changes_requested: 'warning'
+} satisfies Record<ControlReviewStatus, string>;
+
 const pendingDrafts = computed(() =>
   store.state.requestDrafts.filter((draft) => draft.status === 'draft')
 );
-const transientRunActive = computed(() => ['saving', 'handing_off', 'running'].includes(store.runPhase));
+const transientRunActive = computed(() =>
+  ['saving', 'handing_off', 'running', 'review_required'].includes(store.runPhase)
+);
 const focusedDraftId = computed(() => {
   if (transientRunActive.value && store.activeDraftId) {
     return store.activeDraftId;
@@ -72,6 +92,20 @@ const failedOperations = computed(() => selectedOperations.value.filter((request
 const completedOperations = computed(() =>
   selectedOperations.value.filter((request) => request.status === 'succeeded')
 );
+const selectedControlReviews = computed(() => {
+  const draft = latestDraft.value;
+  if (!draft) {
+    return [];
+  }
+
+  return store.state.controlReviewItems
+    .filter((item) => item.requestDraftId === draft.id)
+    .sort((left, right) => right.createdAt.localeCompare(left.createdAt));
+});
+const pendingControlReviews = computed(() =>
+  selectedControlReviews.value.filter((item) => item.status === 'review_required')
+);
+const currentControlReview = computed(() => pendingControlReviews.value[0] ?? selectedControlReviews.value[0]);
 const currentOperation = computed<AgentRequest | undefined>(
   () =>
     runningOperations.value[0] ??
@@ -121,6 +155,10 @@ const visibleDraftStatus = computed(() => {
     return { label: 'AI実行中', color: 'primary' };
   }
 
+  if (store.runPhase === 'review_required' || pendingControlReviews.value.length > 0) {
+    return { label: '人間確認待ち', color: 'warning' };
+  }
+
   if (store.runPhase === 'completed') {
     return { label: '実行完了', color: 'success' };
   }
@@ -141,6 +179,9 @@ const visibleDraftStatus = computed(() => {
 const runHistory = computed(() =>
   store.state.requestDrafts.map((draft) => {
     const operations = store.state.agentRequests.filter((request) => request.requestDraftId === draft.id);
+    const reviews = store.state.controlReviewItems.filter((item) => item.requestDraftId === draft.id);
+    const pendingReviews = reviews.filter((item) => item.status === 'review_required').length;
+    const stoppedReviews = reviews.filter((item) => ['rejected', 'changes_requested'].includes(item.status)).length;
     const completed = operations.filter((request) => request.status === 'succeeded').length;
     const failed = operations.filter((request) => request.status === 'failed').length;
     const active = operations.filter((request) => ['queued', 'waiting', 'running'].includes(request.status)).length;
@@ -155,6 +196,14 @@ const runHistory = computed(() =>
       statusLabel = '失敗';
       color = 'error';
       summary = `${failed}件の工程で確認が必要です`;
+    } else if (pendingReviews > 0) {
+      statusLabel = '人間確認待ち';
+      color = 'warning';
+      summary = `${pendingReviews}件の判断が承認待ちです`;
+    } else if (stoppedReviews > 0) {
+      statusLabel = '人間判断済み';
+      color = 'warning';
+      summary = '却下または修正依頼で後続工程を止めています';
     } else if (active > 0) {
       statusLabel = '実行中';
       color = 'primary';
@@ -187,6 +236,10 @@ const stage = computed(() => {
 
   if (store.runPhase === 'running') {
     return { text: 'AI実行中', color: 'primary' };
+  }
+
+  if (store.runPhase === 'review_required' || pendingControlReviews.value.length > 0) {
+    return { text: '人間確認待ち', color: 'warning' };
   }
 
   if (store.runPhase === 'completed' && selectedOperations.value.length > 0) {
@@ -266,6 +319,13 @@ const executionSummary = computed(() => {
     };
   }
 
+  if (store.runPhase === 'review_required' || pendingControlReviews.value.length > 0) {
+    return {
+      title: 'AIエージェント: 人間確認待ち',
+      detail: currentControlReview.value?.summary ?? 'AI判断の確認が必要です'
+    };
+  }
+
   if (store.runPhase === 'completed' && selectedOperations.value.length > 0) {
     return {
       title: 'AIエージェント: 待機中',
@@ -311,7 +371,9 @@ const executionSummary = computed(() => {
   if (waitingOperations.value.length > 0) {
     return {
       title: 'AIエージェント: 待機中',
-      detail: `${waitingOperations.value[0].label} の開始待ちです`
+      detail: pendingControlReviews.value.length > 0
+        ? '人間確認が終わるまで次の工程を開始しません'
+        : `${waitingOperations.value[0].label} の開始待ちです`
     };
   }
 
@@ -347,6 +409,13 @@ const actionSummary = computed(() => {
     return {
       title: '確認が必要',
       detail: `${failedOperations.value[0].label} で止まっています`
+    };
+  }
+
+  if (pendingControlReviews.value.length > 0) {
+    return {
+      title: '確認が必要',
+      detail: currentControlReview.value?.humanQuestion ?? 'AI判断を確認してください'
     };
   }
 
@@ -401,6 +470,22 @@ const visibleStepRows = computed(() =>
     return row.status === 'queued' || row.status === 'waiting' || row.status === 'running' || row.status === 'failed';
   })
 );
+const controlReviewDecision = computed(() => {
+  const review = currentControlReview.value;
+  if (!review) {
+    return undefined;
+  }
+
+  return store.state.decisionLogs.find((item) => item.id === review.decisionLogId);
+});
+const controlReviewAction = computed(() => {
+  const review = currentControlReview.value;
+  if (!review?.resolvedByActionId) {
+    return undefined;
+  }
+
+  return store.state.humanReviewActions.find((item) => item.id === review.resolvedByActionId);
+});
 
 function flowIcon(status?: AgentRequestStatus): string {
   if (status === 'succeeded') {
@@ -462,6 +547,12 @@ function openHistory() {
 
 function closeHistory() {
   currentView.value = 'main';
+}
+
+async function submitControlReview(review: ControlReviewItem, action: HumanReviewActionType) {
+  const reason = reviewReasons[review.id] ?? '';
+  await store.submitControlReview(review.id, action, reason);
+  reviewReasons[review.id] = '';
 }
 
 onMounted(() => {
@@ -572,6 +663,90 @@ onMounted(() => {
             <div class="action-summary">
               <span>{{ actionSummary.title }}</span>
               <strong>{{ actionSummary.detail }}</strong>
+            </div>
+
+            <div v-if="currentControlReview" class="control-review-panel">
+              <div class="control-review-heading">
+                <div>
+                  <span>人間確認</span>
+                  <strong>{{ currentControlReview.title }}</strong>
+                </div>
+                <v-chip
+                  size="small"
+                  :color="controlReviewStatusColor[currentControlReview.status]"
+                  variant="tonal"
+                >
+                  {{ controlReviewStatusLabel[currentControlReview.status] }}
+                </v-chip>
+              </div>
+              <p>{{ currentControlReview.summary }}</p>
+              <dl class="control-review-details">
+                <div>
+                  <dt>AIの判断</dt>
+                  <dd>{{ controlReviewDecision?.decision ?? currentControlReview.summary }}</dd>
+                </div>
+                <div>
+                  <dt>理由</dt>
+                  <dd>{{ currentControlReview.reason }}</dd>
+                </div>
+                <div>
+                  <dt>次に起きる処理</dt>
+                  <dd>{{ currentControlReview.proposedNextState }}</dd>
+                </div>
+                <div v-if="currentControlReview.evidenceRefs.length > 0">
+                  <dt>根拠</dt>
+                  <dd>
+                    <span
+                      v-for="evidence in currentControlReview.evidenceRefs"
+                      :key="`${evidence.kind}-${evidence.refId}`"
+                    >
+                      {{ evidence.meaning }}
+                    </span>
+                  </dd>
+                </div>
+                <div v-if="controlReviewAction">
+                  <dt>人間の判断</dt>
+                  <dd>{{ controlReviewAction.reason }}</dd>
+                </div>
+              </dl>
+              <div v-if="currentControlReview.status === 'review_required'" class="review-actions">
+                <v-textarea
+                  v-model="reviewReasons[currentControlReview.id]"
+                  label="理由"
+                  rows="2"
+                  auto-grow
+                  density="compact"
+                  hide-details
+                />
+                <div class="review-button-row">
+                  <v-btn
+                    color="primary"
+                    prepend-icon="mdi-check"
+                    :loading="store.loading"
+                    @click="submitControlReview(currentControlReview, 'approve')"
+                  >
+                    承認して続行
+                  </v-btn>
+                  <v-btn
+                    color="warning"
+                    variant="tonal"
+                    prepend-icon="mdi-pencil"
+                    :loading="store.loading"
+                    @click="submitControlReview(currentControlReview, 'request_changes')"
+                  >
+                    修正依頼
+                  </v-btn>
+                  <v-btn
+                    color="error"
+                    variant="tonal"
+                    prepend-icon="mdi-close"
+                    :loading="store.loading"
+                    @click="submitControlReview(currentControlReview, 'reject')"
+                  >
+                    却下
+                  </v-btn>
+                </div>
+              </div>
             </div>
 
             <div class="flow-panel">
@@ -1001,6 +1176,7 @@ h2 {
 
 .request-card,
 .action-summary,
+.control-review-panel,
 .operation-card,
 .step-list {
   border-top: 1px solid #e2e8ef;
@@ -1050,6 +1226,75 @@ h2 {
 .action-summary strong {
   display: block;
   margin-top: 4px;
+}
+
+.control-review-panel {
+  display: grid;
+  gap: 10px;
+}
+
+.control-review-heading {
+  align-items: start;
+  display: grid;
+  gap: 8px;
+  grid-template-columns: minmax(0, 1fr) auto;
+}
+
+.control-review-heading span {
+  color: #607080;
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.control-review-heading strong {
+  display: block;
+  margin-top: 3px;
+}
+
+.control-review-panel p,
+.control-review-details {
+  color: #465666;
+}
+
+.control-review-details {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+}
+
+.control-review-details div {
+  background: #f4f6f8;
+  border-radius: 8px;
+  display: grid;
+  gap: 3px;
+  padding: 8px;
+}
+
+.control-review-details dt {
+  color: #607080;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.control-review-details dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.control-review-details dd span {
+  display: block;
+}
+
+.review-actions {
+  display: grid;
+  gap: 8px;
+}
+
+.review-button-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
 }
 
 .empty {

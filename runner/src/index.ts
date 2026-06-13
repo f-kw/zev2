@@ -65,8 +65,7 @@ function buildDryRunCompletion(request: AgentRequest): AgentCompletionInput {
   const kind = getFileRefKindForRequest(request.type);
   const safeDraftId = encodeURIComponent(request.requestDraftId);
   const safeRequestId = encodeURIComponent(request.id);
-
-  return {
+  const completion: AgentCompletionInput = {
     meaning: getDryRunMeaningForRequest(request.type),
     fileRef: {
       uri: `zev2://dry-run/${safeDraftId}/${safeRequestId}/${kind}`,
@@ -74,6 +73,46 @@ function buildDryRunCompletion(request: AgentRequest): AgentCompletionInput {
       access: 'internal'
     }
   };
+
+  if (request.type === 'find_candidates') {
+    completion.decision = {
+      decisionType: 'candidate_selection',
+      decision: '候補探索結果を人間確認へ進める',
+      reason: 'dry-runでは候補参照を作成した段階で、人間が映像確認へ進めるか判断できる状態になるため',
+      evidenceRefs: [
+        {
+          refId: request.id,
+          kind: 'agent_request',
+          meaning: '候補探索工程のAI作業'
+        }
+      ],
+      proposedNextState: 'review_required',
+      requiresHumanReview: true,
+      humanQuestion: 'この候補探索結果を映像確認へ進めてよいか',
+      ruleIds: ['control-plane:candidate-review-required']
+    };
+  }
+
+  if (request.type === 'apply_adjustment') {
+    completion.decision = {
+      decisionType: 'render_readiness',
+      decision: '動画生成前に人間確認へ進める',
+      reason: '動画生成は初回依頼承認とは別の重要操作であり、生成前に編集案と修正反映を人間が確認する必要があるため',
+      evidenceRefs: [
+        {
+          refId: request.id,
+          kind: 'agent_request',
+          meaning: '動画生成前の微調整工程'
+        }
+      ],
+      proposedNextState: 'review_required',
+      requiresHumanReview: true,
+      humanQuestion: 'この編集案で動画生成へ進めてよいか',
+      ruleIds: ['control-plane:render-approval-required']
+    };
+  }
+
+  return completion;
 }
 
 async function claimRequest(request: AgentRequest): Promise<void> {

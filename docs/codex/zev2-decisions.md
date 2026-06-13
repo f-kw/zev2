@@ -145,53 +145,75 @@
 
 - Decision ID: ZC-D-013
 - Date: 2026-06-13
-- Status: pending
+- Status: accepted
 - Decision: control plane spec を作成してから実装に進む。
 - Reason: 現行実装ではAI処理完了、判断ログ、人間承認ゲート、投稿可能状態、最終完了状態が分離されていない。仕様書なしで実装に進むと、状態と承認の意味が混ざる。
 - Alternatives considered: 既存APIに直接判断ログを追加する。先にUIだけ追加する。既存dry-runをそのまま拡張する。
 - Related files: `docs/codex/control-plane-spec.md`, `docs/codex/zev2-progress.md`
-- Review condition: ユーザーが `docs/codex/control-plane-spec.md` を確認し、実装に進む範囲を承認したとき。
+- Review condition: control plane spec の前提に問題が見つかり、実装設計前に見直す必要が出たとき。
 
 ## Decision ZC-D-014
 
 - Decision ID: ZC-D-014
 - Date: 2026-06-13
-- Status: pending
+- Status: accepted
 - Decision: agent completed と human approved を状態として分離する。
 - Reason: 現行のAI作業完了は、AIエージェントが処理を終えたことだけを意味する。人間が候補、編集案、生成結果、投稿可否を承認したこととは別である。
 - Alternatives considered: 現行 `succeeded` を人間承認済みとして扱う。UI表示だけで区別する。状態名を全面的に置き換える。
 - Related files: `docs/codex/control-plane-spec.md`, `packages/shared/src/index.ts`, `backend/src/routes/control.ts`
-- Review condition: ユーザーがAI処理完了と人間承認済みを別状態として扱うことを承認したとき。
+- Review condition: AI処理完了と人間承認済みを分離すると既存の作業管理が過度に複雑になることが確認されたとき。
 
 ## Decision ZC-D-015
 
 - Decision ID: ZC-D-015
 - Date: 2026-06-13
-- Status: pending
+- Status: accepted
 - Decision: `review_required` を導入する。
 - Reason: 人間確認が必要な対象を明示しないと、AI処理完了後に重要状態へ自動で進む危険がある。現行の `waiting` は前工程待ちであり、人間確認待ちとは意味が違う。
 - Alternatives considered: `waiting` で代用する。UIだけで確認待ちを表示する。判断ログだけで確認待ちを表現する。
 - Related files: `docs/codex/control-plane-spec.md`, `client/src/App.vue`, `client/src/stores/controlQueue.ts`
-- Review condition: ユーザーが人間確認待ちを独立したcontrol stateとして扱うことを承認したとき。
+- Review condition: 人間確認待ちを独立状態にしない方が明確な保存設計が見つかったとき。
 
 ## Decision ZC-D-016
 
 - Decision ID: ZC-D-016
 - Date: 2026-06-13
-- Status: pending
+- Status: accepted
 - Decision: `decision_log` を重要なAI判断で必須化する。
 - Reason: 候補選択、映像確認、編集案、投稿可能化などの判断が自由文や成果物参照だけに残ると、後から理由と根拠を追えない。
 - Alternatives considered: 完了理由の自由文だけを残す。成果物JSONの中にだけ判断を残す。監査ログだけで代用する。
 - Related files: `docs/codex/control-plane-spec.md`, `docs/task-006-AI操作ログと監査履歴.md`
-- Review condition: ユーザーが判断ログの必須項目と保存先を承認したとき。
+- Review condition: 最小実装設計で、必須化する工程や保存項目をさらに絞る必要が出たとき。
 
 ## Decision ZC-D-017
 
 - Decision ID: ZC-D-017
 - Date: 2026-06-13
-- Status: pending
+- Status: accepted
 - Decision: `human_review_action` を保存する。
 - Reason: 承認、却下、修正要求の理由を保存しないと、人間がどの判断を変えたのか、後続工程が何を反映すべきか追跡できない。
 - Alternatives considered: 人間判断を状態遷移だけにする。理由入力をUIだけに残す。監査ログだけに保存する。
 - Related files: `docs/codex/control-plane-spec.md`, `docs/task-007-人間制御APIとUI整理.md`
-- Review condition: ユーザーが人間判断の保存項目、最小アクション、理由コードの扱いを承認したとき。
+- Review condition: 承認、却下、修正要求以外の人間操作が初期実装に必要になったとき。
+
+## Decision ZC-D-018
+
+- Decision ID: ZC-D-018
+- Date: 2026-06-13
+- Status: accepted
+- Decision: 初期control planeの停止ポイントは、候補生成後と動画生成前を優先する。
+- Reason: 候補選びを誤ると後工程がすべて無駄になる。動画生成はコストと成果物の意味が重いため、初回依頼承認とは別に人間が止められる必要がある。すべての工程に承認ゲートを入れるより、最初は判断の影響が大きい箇所に絞る。
+- Alternatives considered: すべての工程で承認を要求する。動画生成後だけ確認する。初回依頼承認だけで動画生成まで進める。
+- Related files: `docs/codex/control-plane-spec.md`, `docs/codex/zev2-progress.md`
+- Review condition: 候補生成後または動画生成前より先に止めるべき工程が、実装設計またはユーザーレビューで明確になったとき。
+
+## Decision ZC-D-019
+
+- Decision ID: ZC-D-019
+- Date: 2026-06-13
+- Status: accepted
+- Decision: 初期UIはJSONログ閲覧ではなく、判断要約、理由、根拠参照、次に起きる処理、承認、却下、修正依頼に絞る。
+- Reason: control plane の目的は、AIの判断を人間が運用上確認できるようにすることである。巨大なJSON、STT全文、LLM全文、詳細ダッシュボードを主導線にすると、人間が止める、通す、戻す判断がしづらくなる。
+- Alternatives considered: JSONログビューを主導線にする。詳細ダッシュボードから作る。UIは作らずAPIだけで確認する。
+- Related files: `docs/codex/control-plane-spec.md`, `client/src/App.vue`, `client/src/stores/controlQueue.ts`
+- Review condition: 初期UIの最小表示だけでは、人間が承認、却下、修正依頼を判断できないことが確認されたとき。

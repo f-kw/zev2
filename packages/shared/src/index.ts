@@ -50,6 +50,26 @@ export type FileRefKind = WorkflowStep['outputKind'];
 export type RequestDraftStatus = 'draft' | 'approved' | 'rejected';
 export type AgentRequestStatus = 'queued' | 'running' | 'waiting' | 'succeeded' | 'failed';
 export type FileRefAccess = 'internal' | 'external';
+export type ControlReviewKind = 'candidate_generation' | 'render_readiness';
+export type ControlReviewStatus = 'review_required' | 'approved' | 'rejected' | 'changes_requested';
+export type HumanReviewActionType = 'approve' | 'reject' | 'request_changes';
+export type DecisionLogActor = 'agent' | 'runner' | 'backend' | 'system' | 'user';
+export type DecisionLogType =
+  | 'candidate_selection'
+  | 'candidate_review'
+  | 'edit_plan'
+  | 'render_readiness'
+  | 'post_readiness'
+  | 'risk_check'
+  | 'state_transition'
+  | 'external_ai_needed'
+  | 'external_ai_skipped';
+
+export interface ControlReference {
+  refId: string;
+  kind: 'request_draft' | 'agent_request' | 'file_ref' | 'output' | 'time_range' | 'rule' | 'state';
+  meaning: string;
+}
 
 export interface RequestDraftInput {
   purpose: string;
@@ -128,11 +148,23 @@ export interface FileRef {
 
 export interface AgentCompletionInput {
   meaning?: string;
+  decision?: AgentDecisionInput;
   fileRef?: {
     uri: string;
     mimeType: string;
     access?: FileRefAccess;
   };
+}
+
+export interface AgentDecisionInput {
+  decisionType: DecisionLogType;
+  decision: string;
+  reason: string;
+  evidenceRefs?: ControlReference[];
+  proposedNextState: string;
+  requiresHumanReview: boolean;
+  humanQuestion?: string | null;
+  ruleIds?: string[];
 }
 
 export interface AgentFailureInput {
@@ -155,6 +187,56 @@ export interface Zev2State {
   agentRequests: AgentRequest[];
   fileRefs: FileRef[];
   outputs: OutputEntity[];
+  decisionLogs: DecisionLog[];
+  controlReviewItems: ControlReviewItem[];
+  humanReviewActions: HumanReviewAction[];
+}
+
+export interface DecisionLog {
+  id: string;
+  requestDraftId: string;
+  agentRequestId: string;
+  stepType: AgentRequestType;
+  actor: DecisionLogActor;
+  decisionType: DecisionLogType;
+  decision: string;
+  reason: string;
+  evidenceRefs: ControlReference[];
+  inputRefs: ControlReference[];
+  artifactRefs: ControlReference[];
+  proposedNextState: string;
+  requiresHumanReview: boolean;
+  humanQuestion: string | null;
+  ruleIds: string[];
+  createdAt: string;
+}
+
+export interface ControlReviewItem {
+  id: string;
+  requestDraftId: string;
+  agentRequestId: string;
+  kind: ControlReviewKind;
+  status: ControlReviewStatus;
+  title: string;
+  summary: string;
+  reason: string;
+  evidenceRefs: ControlReference[];
+  proposedNextState: string;
+  humanQuestion: string;
+  decisionLogId: string;
+  createdAt: string;
+  updatedAt: string;
+  resolvedAt?: string;
+  resolvedByActionId?: string;
+}
+
+export interface HumanReviewAction {
+  id: string;
+  reviewItemId: string;
+  requestDraftId: string;
+  action: HumanReviewActionType;
+  reason: string;
+  createdAt: string;
 }
 
 const OUTPUT_TYPE_BY_REQUEST_TYPE = {
@@ -182,7 +264,10 @@ export function createInitialState(): Zev2State {
     requestDrafts: [],
     agentRequests: [],
     fileRefs: [],
-    outputs: []
+    outputs: [],
+    decisionLogs: [],
+    controlReviewItems: [],
+    humanReviewActions: []
   };
 }
 
@@ -236,11 +321,63 @@ export function isAgentRequestReady(state: Zev2State, request: AgentRequest): bo
   }
 
   const dependency = findAgentRequestDependency(state, request);
-  return !dependency || dependency.status === 'succeeded';
+  return (!dependency || dependency.status === 'succeeded') && !findBlockingControlReview(state, request);
 }
 
 export function findReadyAgentRequest(state: Zev2State): AgentRequest | undefined {
   return state.agentRequests.find((request) => isAgentRequestReady(state, request));
+}
+
+export function hasHumanReviewRequired(state: Zev2State): boolean {
+  return state.controlReviewItems.some((item) => item.status === 'review_required');
+}
+
+export function findBlockingControlReview(
+  state: Zev2State,
+  request: AgentRequest
+): ControlReviewItem | undefined {
+  const candidateReview = state.controlReviewItems.find(
+    (item) =>
+      item.requestDraftId === request.requestDraftId &&
+      item.kind === 'candidate_generation' &&
+      item.status !== 'approved'
+  );
+  const requestStepIndex = WORKFLOW_STEPS.findIndex((step) => step.type === request.type);
+  const candidateStepIndex = WORKFLOW_STEPS.findIndex((step) => step.type === 'find_candidates');
+
+  if (candidateReview && requestStepIndex > candidateStepIndex) {
+    return candidateReview;
+  }
+
+  if (request.type !== 'render_video') {
+    return undefined;
+  }
+
+  return state.controlReviewItems.find(
+    (item) =>
+      item.requestDraftId === request.requestDraftId &&
+      item.kind === 'render_readiness' &&
+      item.status !== 'approved'
+  );
+}
+
+export function getRequiredControlReviewKind(
+  state: Zev2State,
+  request: AgentRequest
+): ControlReviewKind | undefined {
+  if (request.type === 'find_candidates') {
+    return 'candidate_generation';
+  }
+
+  if (request.type !== 'apply_adjustment') {
+    return undefined;
+  }
+
+  const hasRenderRequest = state.agentRequests.some(
+    (item) => item.requestDraftId === request.requestDraftId && item.type === 'render_video'
+  );
+
+  return hasRenderRequest ? 'render_readiness' : undefined;
 }
 
 export function validateRequestDraftInput(input: Partial<RequestDraftInput>): string[] {

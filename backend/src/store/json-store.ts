@@ -13,6 +13,23 @@ function createEmptyState(): Zev2State {
   return createInitialState();
 }
 
+function isZev2State(value: unknown): value is Zev2State {
+  if (!value || typeof value !== 'object') {
+    return false;
+  }
+
+  const state = value as Partial<Record<keyof Zev2State, unknown>>;
+  return (
+    Array.isArray(state.requestDrafts) &&
+    Array.isArray(state.agentRequests) &&
+    Array.isArray(state.fileRefs) &&
+    Array.isArray(state.outputs) &&
+    Array.isArray(state.decisionLogs) &&
+    Array.isArray(state.controlReviewItems) &&
+    Array.isArray(state.humanReviewActions)
+  );
+}
+
 export async function loadState(): Promise<Zev2State> {
   await mkdir(runtimeDir, { recursive: true });
 
@@ -30,7 +47,16 @@ export async function loadState(): Promise<Zev2State> {
   }
 
   try {
-    return JSON.parse(raw) as Zev2State;
+    const state = JSON.parse(raw) as unknown;
+    if (isZev2State(state)) {
+      return state;
+    }
+
+    const brokenStatePath = `${statePath}.broken-${Date.now()}`;
+    await rename(statePath, brokenStatePath);
+    const initialState = createEmptyState();
+    await saveState(initialState);
+    return initialState;
   } catch {
     const brokenStatePath = `${statePath}.broken-${Date.now()}`;
     await rename(statePath, brokenStatePath);

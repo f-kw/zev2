@@ -3,6 +3,7 @@ import type {
   AgentCompletionInput,
   AgentFailureInput,
   AgentRequest,
+  HumanReviewActionType,
   RequestDraft,
   RequestDraftInput,
   Zev2State,
@@ -53,5 +54,16 @@ export async function completeAgentRequest(id: string, input: AgentCompletionInp
 
 export async function failAgentRequest(id: string, input: AgentFailureInput): Promise<Zev2State> {
   const response = await api.post(`/agent-requests/${id}/fail`, input);
+  return response.data.state;
+}
+
+export async function submitHumanReviewAction(
+  id: string,
+  action: HumanReviewActionType,
+  reason: string
+): Promise<Zev2State> {
+  const actionPath =
+    action === 'approve' ? 'approve' : action === 'reject' ? 'reject' : 'request-changes';
+  const response = await api.post(`/control-reviews/${id}/${actionPath}`, { reason });
   return response.data.state;
 }
