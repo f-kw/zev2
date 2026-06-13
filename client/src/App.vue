@@ -5,10 +5,12 @@ import type {
   AgentRequestStatus,
   ControlReviewItem,
   ControlReviewStatus,
+  FileRef,
   HumanReviewActionType,
   RequestDraftInput,
   RequestDraftStatus
 } from '@zev2/shared';
+import { fetchArtifactText } from './api';
 import { useControlQueueStore } from './stores/controlQueue';
 
 const store = useControlQueueStore();
@@ -16,6 +18,7 @@ const selectedHistoryDraftId = ref('');
 const currentView = ref<'main' | 'history'>('main');
 const showSuccessfulSteps = ref(false);
 const reviewReasons = reactive<Record<string, string>>({});
+const artifactPreviews = reactive<Record<string, string>>({});
 
 const draftInput = reactive<RequestDraftInput>({
   purpose: 'この配信からショート候補を作って、切り抜き理由とテロップ案まで出す',
@@ -329,7 +332,7 @@ const executionSummary = computed(() => {
   if (store.runPhase === 'completed' && selectedOperations.value.length > 0) {
     return {
       title: 'AIエージェント: 待機中',
-      detail: '最後のdry-runは動画生成まで到達しました。実動画はまだ作っていません'
+      detail: '仮実装は動画生成まで到達しました。成果物から生成動画を確認できます'
     };
   }
 
@@ -380,7 +383,7 @@ const executionSummary = computed(() => {
   if (selectedOperations.value.length > 0) {
     return {
       title: 'AIエージェント: 待機中',
-      detail: '最後のdry-runは動画生成まで到達しました。実動画はまだ作っていません'
+      detail: '仮実装は動画生成まで到達しました。成果物から生成動画を確認できます'
     };
   }
 
@@ -436,7 +439,7 @@ const actionSummary = computed(() => {
   if (selectedOperations.value.length > 0) {
     return {
       title: '次の操作',
-      detail: 'dry-runは最後まで通りました。実処理はまだ接続していません'
+      detail: '仮実装は最後まで通りました。成果物を見ながら次の差し替え箇所を確認できます'
     };
   }
 
@@ -485,6 +488,33 @@ const controlReviewAction = computed(() => {
   }
 
   return store.state.humanReviewActions.find((item) => item.id === review.resolvedByActionId);
+});
+const selectedArtifacts = computed(() => {
+  const artifactRows: Array<{
+    operation: AgentRequest;
+    fileRef: FileRef;
+    outputType: string;
+  }> = [];
+
+  for (const operation of selectedOperations.value) {
+    const fileRefId = operation.result?.fileRefId;
+    if (!fileRefId) {
+      continue;
+    }
+
+    const fileRef = store.state.fileRefs.find((item) => item.id === fileRefId);
+    if (!fileRef) {
+      continue;
+    }
+
+    artifactRows.push({
+      operation,
+      fileRef,
+      outputType: operation.result?.outputType ?? fileRef.kind
+    });
+  }
+
+  return artifactRows;
 });
 
 function flowIcon(status?: AgentRequestStatus): string {
@@ -553,6 +583,14 @@ async function submitControlReview(review: ControlReviewItem, action: HumanRevie
   const reason = reviewReasons[review.id] ?? '';
   await store.submitControlReview(review.id, action, reason);
   reviewReasons[review.id] = '';
+}
+
+async function loadArtifactPreview(fileRef: FileRef) {
+  if (!fileRef.mimeType.includes('json')) {
+    return;
+  }
+
+  artifactPreviews[fileRef.id] = await fetchArtifactText(fileRef.uri);
 }
 
 onMounted(() => {
@@ -626,7 +664,7 @@ onMounted(() => {
                   <strong>{{ executionSummary.title }}</strong>
                   <p>{{ executionSummary.detail }}</p>
                   <div class="status-meta">
-                    <v-chip size="small" color="blue-grey" variant="tonal">dry-run: 実処理未接続</v-chip>
+                    <v-chip size="small" color="blue-grey" variant="tonal">仮実装: ZEV参照</v-chip>
                     <span v-if="store.lastChangedAt">最終更新 {{ formatTime(store.lastChangedAt) }}</span>
                   </div>
                 </div>
@@ -795,6 +833,44 @@ onMounted(() => {
             </div>
             <div v-else-if="selectedOperations.length === 0" class="collapsed-note">
               承認前のため、工程の詳細はまだありません。
+            </div>
+
+            <div v-if="selectedArtifacts.length > 0" class="artifact-panel">
+              <div class="artifact-heading">
+                <span>成果物</span>
+                <strong>{{ selectedArtifacts.length }}件</strong>
+              </div>
+              <article v-for="artifact in selectedArtifacts" :key="artifact.fileRef.id" class="artifact-card">
+                <div class="artifact-card-heading">
+                  <div>
+                    <strong>{{ artifact.operation.label }}</strong>
+                    <p>{{ artifact.operation.result?.meaning }}</p>
+                  </div>
+                  <v-chip size="small" color="blue-grey" variant="tonal">
+                    {{ artifact.outputType }}
+                  </v-chip>
+                </div>
+                <a :href="artifact.fileRef.uri" target="_blank" rel="noreferrer">
+                  {{ artifact.fileRef.uri }}
+                </a>
+                <video
+                  v-if="artifact.fileRef.mimeType.startsWith('video/')"
+                  class="artifact-video"
+                  controls
+                  :src="artifact.fileRef.uri"
+                />
+                <div v-else-if="artifact.fileRef.mimeType.includes('json')" class="artifact-preview">
+                  <v-btn
+                    size="small"
+                    variant="tonal"
+                    prepend-icon="mdi-file-eye-outline"
+                    @click="loadArtifactPreview(artifact.fileRef)"
+                  >
+                    中身を見る
+                  </v-btn>
+                  <pre v-if="artifactPreviews[artifact.fileRef.id]">{{ artifactPreviews[artifact.fileRef.id] }}</pre>
+                </div>
+              </article>
             </div>
 
             <div v-if="currentOperation && currentOperation.status !== 'succeeded'" class="operation-card">
@@ -1177,6 +1253,7 @@ h2 {
 .request-card,
 .action-summary,
 .control-review-panel,
+.artifact-panel,
 .operation-card,
 .step-list {
   border-top: 1px solid #e2e8ef;
@@ -1295,6 +1372,73 @@ h2 {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
+}
+
+.artifact-panel {
+  display: grid;
+  gap: 8px;
+}
+
+.artifact-heading,
+.artifact-card-heading {
+  align-items: start;
+  display: grid;
+  gap: 8px;
+  grid-template-columns: minmax(0, 1fr) auto;
+}
+
+.artifact-heading span {
+  color: #607080;
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.artifact-card {
+  border-top: 1px solid #edf1f5;
+  display: grid;
+  gap: 8px;
+  padding-top: 8px;
+}
+
+.artifact-card:first-of-type {
+  border-top: 0;
+}
+
+.artifact-card p,
+.artifact-card a {
+  color: #465666;
+  margin-top: 3px;
+  overflow-wrap: anywhere;
+}
+
+.artifact-card a {
+  font-size: 12px;
+}
+
+.artifact-preview {
+  display: grid;
+  gap: 8px;
+}
+
+.artifact-preview pre {
+  background: #101820;
+  border-radius: 8px;
+  color: #f8fafc;
+  font-size: 12px;
+  line-height: 1.5;
+  max-height: 260px;
+  overflow: auto;
+  padding: 10px;
+  white-space: pre-wrap;
+}
+
+.artifact-video {
+  aspect-ratio: 9 / 16;
+  background: #101820;
+  border-radius: 8px;
+  max-height: 420px;
+  width: min(100%, 260px);
 }
 
 .empty {

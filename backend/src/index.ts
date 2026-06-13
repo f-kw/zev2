@@ -1,9 +1,14 @@
 import 'dotenv/config';
 import express from 'express';
+import path from 'node:path';
 import controlRouter from './routes/control.js';
 
 const app = express();
 app.use(express.json());
+const runtimeDir = process.env.ZEV2_RUNTIME_DIR
+  ? path.resolve(process.env.ZEV2_RUNTIME_DIR)
+  : path.resolve(process.cwd(), '../runtime');
+app.use('/api/artifacts', express.static(path.join(runtimeDir, 'artifacts')));
 app.use('/api', controlRouter);
 
 const port = process.env.PORT || 8080;

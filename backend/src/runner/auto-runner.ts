@@ -31,7 +31,7 @@ export async function runDryRunRunner(): Promise<void> {
     return runningDryRun;
   }
 
-  // 承認後にAPI経由のdry-run実行を最後まで進める。
+  // 承認後にAPI経由の仮実装実行を最後まで進める。
   const runPromise = new Promise<void>((resolve, reject) => {
     const output: string[] = [];
     const child = spawn(
@@ -59,7 +59,7 @@ export async function runDryRunRunner(): Promise<void> {
         return;
       }
 
-      reject(new Error(`dry-run runner failed with code ${code ?? 'unknown'}\n${output.join('')}`));
+      reject(new Error(`fixture runner failed with code ${code ?? 'unknown'}\n${output.join('')}`));
     });
   }).finally(() => {
     runningDryRun = null;
@@ -71,7 +71,7 @@ export async function runDryRunRunner(): Promise<void> {
 
 export function startDryRunRunner(): void {
   void runDryRunRunner().catch((error: unknown) => {
-    const message = error instanceof Error ? error.message : 'dry-run runnerで不明な失敗が発生しました';
+    const message = error instanceof Error ? error.message : '仮実装runnerで不明な失敗が発生しました';
     console.error(message);
   });
 }

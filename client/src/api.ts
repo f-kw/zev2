@@ -67,3 +67,8 @@ export async function submitHumanReviewAction(
   const response = await api.post(`/control-reviews/${id}/${actionPath}`, { reason });
   return response.data.state;
 }
+
+export async function fetchArtifactText(uri: string): Promise<string> {
+  const response = await axios.get(uri, { responseType: 'text' });
+  return typeof response.data === 'string' ? response.data : JSON.stringify(response.data, null, 2);
+}

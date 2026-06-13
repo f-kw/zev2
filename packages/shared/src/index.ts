@@ -250,13 +250,13 @@ const OUTPUT_TYPE_BY_REQUEST_TYPE = {
 } satisfies Record<AgentRequestType, OutputEntityType>;
 
 const DRY_RUN_MEANING_BY_REQUEST_TYPE = {
-  prepare_video: '対象動画をAI処理用の入力として登録したdry-run結果',
-  run_stt: '音声を書き起こす工程のdry-run結果',
-  find_candidates: 'ショート候補区間を探す工程のdry-run結果',
-  gemini_candidate_review: 'STTで絞った候補区間をGeminiで映像確認する工程のdry-run結果',
-  create_edit_plan: 'テロップ、構成、編集方針を作る工程のdry-run結果',
-  apply_adjustment: '修正内容を編集案へ反映する工程のdry-run結果',
-  render_video: '承認済み編集案から動画を生成する工程のdry-run結果'
+  prepare_video: '対象動画をAI処理用の入力として登録した仮実装結果',
+  run_stt: '音声を書き起こす工程の仮実装結果',
+  find_candidates: 'ショート候補区間を探す工程の仮実装結果',
+  gemini_candidate_review: 'STTで絞った候補区間をGeminiで映像確認する工程の仮実装結果',
+  create_edit_plan: 'テロップ、構成、編集方針を作る工程の仮実装結果',
+  apply_adjustment: '修正内容を編集案へ反映する工程の仮実装結果',
+  render_video: '承認済み編集案から動画を生成する工程の仮実装結果'
 } satisfies Record<AgentRequestType, string>;
 
 export function createInitialState(): Zev2State {
