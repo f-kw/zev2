@@ -7,7 +7,7 @@
 ## 目的
 
 - UIで依頼を作り、AIエージェントrunnerがAPIだけで全工程を最後まで完了できる状態を作る。
-- 実STT、実LLM、実動画生成、実Gemini評価はまだ動かさない。
+- 実STT、実LLM、実動画生成、実Gemini候補確認はまだ動かさない。
 - ただし各工程はdry-run成果物参照を返し、システム全体として「最後まで実行済み」になるようにする。
 
 ## 本来の目的確認
@@ -23,7 +23,7 @@ AIエージェントがAPIで作業を取得し、全工程を進め、成果物
 - runnerが `GET /api/agent-requests/next` を呼び、作業がなくなるまで繰り返す。
 - runnerが各作業を `claim` してから処理する。
 - 承認後にbackendがrunnerを自動起動する。
-- `prepare_video`、`gemini_video_review`、`run_stt`、`find_candidates`、`create_edit_plan`、`apply_adjustment`、`render_video` のdry-run handlerを用意する。
+- `prepare_video`、`run_stt`、`find_candidates`、`gemini_candidate_review`、`create_edit_plan`、`apply_adjustment`、`render_video` のdry-run handlerを用意する。
 - 各handlerは実処理をせず、工程の意味に合うdry-run成果物参照を `complete` へ返す。
 - 失敗した場合は `fail` へ失敗理由を返す。
 - UIで全工程完了、進捗、最新成果物参照が確認できるようにする。
@@ -31,7 +31,7 @@ AIエージェントがAPIで作業を取得し、全工程を進め、成果物
 
 今回やらないこと:
 
-- 実Gemini評価、実STT、実LLM、実動画生成を実行しない。
+- 実Gemini候補確認、実STT、実LLM、実動画生成を実行しない。
 - UIを自動操作してキューを進めない。
 - backend内で各工程の実処理をしない。
 - 認証、強い排他制御、claimタイムアウト復旧、再実行、キャンセルはこのタスクでは作らない。
@@ -41,7 +41,7 @@ AIエージェントがAPIで作業を取得し、全工程を進め、成果物
 
 - 新規依頼をUIから作成し、承認済み作業キューが作られる。
 - 承認するとrunnerが起動し、全作業をAPI経由で順番に処理できる。
-- `gemini_video_review` もdry-run成果物として完了できる。
+- `gemini_candidate_review` もdry-run成果物として完了できる。
 - すべての作業が `succeeded` になり、`GET /api/agent-requests/next` が `null` を返す。
 - 成果物参照が工程ごとに作られる。
 - UIで完了状態と成果物参照が確認できる。
@@ -61,6 +61,6 @@ AIエージェントがAPIで作業を取得し、全工程を進め、成果物
 - APIでdry-run確認用の依頼を作成し、承認済み作業キューを作成した。
 - `pnpm run runner:dry-run` 成功。
 - 承認APIが正常応答し、dry-run runnerがバックグラウンドで全作業を完了することを確認した。
-- `prepare_video`、`gemini_video_review`、`run_stt`、`find_candidates`、`create_edit_plan`、`apply_adjustment`、`render_video` のdry-run完了を確認した。
+- `prepare_video`、`run_stt`、`find_candidates`、`gemini_candidate_review`、`create_edit_plan`、`apply_adjustment`、`render_video` のdry-run完了を確認した。
 - `GET /api/agent-requests/next` が `{"request":null}` を返すことを確認した。
 - UIで `完了`、APIキュー `0件`、成果物参照ありの状態を確認した。

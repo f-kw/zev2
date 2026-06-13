@@ -7,7 +7,7 @@
 
 - 対象: [task-001-最小E2E-dry-run実行.md](./task-001-最小E2E-dry-run実行.md)
 - UIで依頼を作り、AIエージェントrunnerがAPIだけで全工程を最後まで完了できる状態を作る。
-- 実STT、実LLM、実動画生成、実Gemini評価は動かさず、各工程はdry-run成果物参照を返して完了する。
+- 実STT、実LLM、実動画生成、実Gemini候補確認は動かさず、各工程はdry-run成果物参照を返して完了する。
 - 確認済み: 承認APIが正常応答し、runnerがバックグラウンドで全作業を完了し、`GET /api/agent-requests/next` が `null` を返した。
 
 ## task-002 AIエージェントAPI契約テストと仕様固定
@@ -46,11 +46,11 @@
 - 人間が停止、再実行、差し戻し、却下をAPI経由で指示できるようにし、UIはその状態確認と操作だけに絞る。
 - AIエージェントの実行ボタンをUI主導に戻さない。
 
-## task-008 CodexからGeminiを使った動画評価機能
+## task-008 CodexからGeminiを使った候補確認機能
 
-- 対象: [task-008-CodexからGeminiを使った動画評価機能.md](./task-008-CodexからGeminiを使った動画評価機能.md)
-- dry-runで形を固定した `gemini_video_review` を、CodexからGeminiを使う実評価へ差し替える。
-- STT、LLM、動画生成とは別の評価工程として扱い、評価基準は勝手な係数を使わず明示された観点だけで整理する。
+- 対象: [task-008-CodexからGeminiを使った候補確認機能.md](./task-008-CodexからGeminiを使った候補確認機能.md)
+- dry-runで形を固定した `gemini_candidate_review` を、CodexからGeminiを使う実確認へ差し替える。
+- STTで絞った候補区間だけを映像確認し、評価基準は勝手な係数を使わず明示された観点だけで整理する。
 
 ## task-009 セキュリティ境界と実処理接続方針
 

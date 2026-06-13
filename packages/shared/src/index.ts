@@ -6,12 +6,6 @@ export const WORKFLOW_STEPS = [
     requiresHumanApproval: false
   },
   {
-    type: 'gemini_video_review',
-    label: 'Gemini動画評価',
-    outputKind: 'video_review_json',
-    requiresHumanApproval: false
-  },
-  {
     type: 'run_stt',
     label: 'STT',
     outputKind: 'transcript_json',
@@ -21,6 +15,12 @@ export const WORKFLOW_STEPS = [
     type: 'find_candidates',
     label: '候補探索',
     outputKind: 'candidate_json',
+    requiresHumanApproval: false
+  },
+  {
+    type: 'gemini_candidate_review',
+    label: 'Gemini候補確認',
+    outputKind: 'candidate_review_json',
     requiresHumanApproval: false
   },
   {
@@ -141,9 +141,9 @@ export interface AgentFailureInput {
 
 export type OutputEntity =
   | { id: string; type: 'Video'; meaning: string; fileRefId: string }
-  | { id: string; type: 'VideoReview'; meaning: string; fileRefId: string }
   | { id: string; type: 'Transcript'; meaning: string; fileRefId: string }
   | { id: string; type: 'Candidate'; meaning: string; fileRefId: string }
+  | { id: string; type: 'CandidateReview'; meaning: string; fileRefId: string }
   | { id: string; type: 'EditPlan'; meaning: string; fileRefId: string }
   | { id: string; type: 'Patch'; meaning: string; fileRefId: string }
   | { id: string; type: 'OutputVideo'; meaning: string; fileRefId: string };
@@ -159,9 +159,9 @@ export interface Zev2State {
 
 const OUTPUT_TYPE_BY_REQUEST_TYPE = {
   prepare_video: 'Video',
-  gemini_video_review: 'VideoReview',
   run_stt: 'Transcript',
   find_candidates: 'Candidate',
+  gemini_candidate_review: 'CandidateReview',
   create_edit_plan: 'EditPlan',
   apply_adjustment: 'Patch',
   render_video: 'OutputVideo'
@@ -169,9 +169,9 @@ const OUTPUT_TYPE_BY_REQUEST_TYPE = {
 
 const DRY_RUN_MEANING_BY_REQUEST_TYPE = {
   prepare_video: '対象動画をAI処理用の入力として登録したdry-run結果',
-  gemini_video_review: 'CodexからGeminiで動画評価する工程のdry-run結果',
   run_stt: '音声を書き起こす工程のdry-run結果',
   find_candidates: 'ショート候補区間を探す工程のdry-run結果',
+  gemini_candidate_review: 'STTで絞った候補区間をGeminiで映像確認する工程のdry-run結果',
   create_edit_plan: 'テロップ、構成、編集方針を作る工程のdry-run結果',
   apply_adjustment: '修正内容を編集案へ反映する工程のdry-run結果',
   render_video: '承認済み編集案から動画を生成する工程のdry-run結果'

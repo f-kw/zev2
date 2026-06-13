@@ -9,7 +9,7 @@
 
 人間が依頼を入力し、AIエージェントがAPIで作業を進める基盤。
 
-backendはSTT、LLM、動画生成、Gemini評価を直接実行しない。
+backendはSTT、LLM、動画生成、Gemini候補確認を直接実行しない。
 実処理はAIエージェントrunnerやCodex側の処理が行い、backendには結果と成果物参照だけを返す。
 
 ## 現時点の形
@@ -18,10 +18,10 @@ backendはSTT、LLM、動画生成、Gemini評価を直接実行しない。
 - 内部状態では、依頼作成と承認済み作業を分ける。
 - AIエージェントは承認済み作業だけをAPIで取得する。
 - UIは依頼、API実行状態、成果物確認だけに絞る。
-- Gemini動画評価は作業種別の形だけ最初から入れる。
+- Gemini候補確認は作業種別の形だけ最初から入れる。
 - dry-run runnerで、実処理なしに全工程を最後まで進められる。
 - 「承認してAIに渡す」後、backendがdry-run runnerをバックグラウンド起動する。
-- 実STT、実LLM、実動画生成、実Gemini評価はまだ動かさない。
+- 実STT、実LLM、実動画生成、実Gemini候補確認はまだ動かさない。
 
 ## 依頼と承認を内部で分けるメリット
 
@@ -82,23 +82,23 @@ runnerの最低限の内訳:
 - 成果物参照の返却。
 - 失敗報告。
 
-実STT、実LLM、実動画生成、実Gemini評価はまだ動かさない。
+実STT、実LLM、実動画生成、実Gemini候補確認はまだ動かさない。
 ただし各工程はdry-run成果物参照を返し、全工程が `succeeded` になることを優先する。
 
 ## 最初から形を入れる作業種別
 
 ```text
 prepare_video
-gemini_video_review
 run_stt
 find_candidates
+gemini_candidate_review
 create_edit_plan
 apply_adjustment
 render_video
 ```
 
-`gemini_video_review` は最初から作業種別に入れる。
-ただし実Gemini操作は後続で、CodexがGeminiを使い、結果だけをAPIへ返す。
+`gemini_candidate_review` は最初から作業種別に入れる。
+ただし実Gemini操作は後続で、CodexがSTTで絞った候補区間をGeminiで確認し、結果だけをAPIへ返す。
 
 ## まだ作っていないもの
 
@@ -109,7 +109,7 @@ render_video
 - 操作ログ。
 - 認証。
 - 停止、再実行、差し戻し、却下API。
-- 実Gemini動画評価。
+- 実Gemini候補確認。
 - 実STT、実LLM、実動画生成。
 
 ## 現時点で確認してほしいこと
@@ -118,7 +118,7 @@ render_video
 2. UIに残す情報量。現状は依頼、状態、成果物参照に絞っている。
 3. 成果物確認の粒度。現状は成果物種別、参照URI、要約を最小単位にしている。
 4. AIエージェントAPI。現状は `next -> claim -> complete/fail` で作業取得、担当中化、完了、失敗を分けている。
-5. Gemini動画評価工程。現状はdry-run対象に含め、実Gemini操作は後続で差し替える。
+5. Gemini候補確認工程。現状はdry-run対象に含め、実Gemini操作は後続で差し替える。
 
 ## レビュー後の着手候補
 

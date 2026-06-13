@@ -6,7 +6,7 @@
 
 dry-run runner は、AIエージェントがbackend APIだけで作業を最後まで進められることを確認するための最小runnerです。
 
-実STT、実LLM、実動画生成、実Gemini評価は実行しません。
+実STT、実LLM、実動画生成、実Gemini候補確認は実行しません。
 各工程はdry-run成果物参照を返して完了します。
 
 ## 起動
@@ -36,9 +36,9 @@ pnpm run runner:dry-run -- --max-steps=100
 
 ```text
 prepare_video
-gemini_video_review
 run_stt
 find_candidates
+gemini_candidate_review
 create_edit_plan
 apply_adjustment
 render_video
@@ -69,4 +69,4 @@ render_video
 ## 実処理との差し替え
 
 後続タスクでは、各dry-run handlerを実処理へ差し替えます。
-ただし、backendが直接STT、LLM、動画生成、Gemini評価を実行する方針にはしません。
+ただし、backendが直接STT、LLM、動画生成、Gemini候補確認を実行する方針にはしません。

@@ -41,6 +41,7 @@ pnpm run runner:dry-run
 
 ## ドキュメント
 
+- 開発方針(必要なこと・必要ないこと、Claude作成): `docs/claude/development-policy.md`
 - レビュー用の要点: `docs/review-brief.md`
 - 現在の実装: `docs/current-implementation.md`
 - AIエージェント向けAPI仕様: `docs/ai-agent-api.md`
@@ -66,7 +67,7 @@ pnpm run type-check
 - `POST /api/agent-requests/:id/fail`
 
 AIエージェントは `next` で作業を取得し、`claim` で着手状態にし、外部処理の結果だけを `complete` または `fail` で返します。
-この段階では backend 内で STT、LLM、動画生成、Gemini評価は実行しません。
+この段階では backend 内で STT、LLM、動画生成、Gemini候補確認は実行しません。
 backendが行うのは、承認後にdry-run runnerプロセスを起動してAPI実行を開始するところまでです。
 
 AIエージェントに渡す実行仕様は `docs/ai-agent-api.md` にまとめています。
