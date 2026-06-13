@@ -129,6 +129,10 @@ const OUTPUT_FILE_NAME_BY_KIND = {
   output_video: 'output.mp4'
 } satisfies Record<FileRefKind, string>;
 const ZEV_SPEECH_UNIT_LONG_GAP_MS = 1200;
+const SHORTS_DEFAULT_RENDER_TARGET = {
+  width: 1080,
+  height: 1920
+} as const;
 
 function parseOptions(): RunnerOptions {
   const options: RunnerOptions = {
@@ -478,24 +482,144 @@ function runCommand(command: string, args: string[]): Promise<void> {
   });
 }
 
+function millisecondsToSeconds(valueMs: number): string {
+  return (valueMs / 1000).toFixed(3);
+}
+
+function resolveLocalSourcePath(sourceUri: string): string | undefined {
+  if (sourceUri.startsWith('file://')) {
+    const url = new URL(sourceUri);
+    if (url.hostname && url.hostname !== 'localhost') {
+      return undefined;
+    }
+
+    const filePath = decodeURIComponent(url.pathname);
+    return existsSync(filePath) ? filePath : undefined;
+  }
+
+  if (path.isAbsolute(sourceUri) && existsSync(sourceUri)) {
+    return sourceUri;
+  }
+
+  const workspacePath = path.resolve(workspaceRoot(), sourceUri);
+  return existsSync(workspacePath) ? workspacePath : undefined;
+}
+
+function selectRenderRange(editPlan: EditPlanArtifact): { sourceStartMs: number; sourceEndMs: number } {
+  const sortedSegments = [...editPlan.renderSegments].sort((left, right) => left.sourceStartMs - right.sourceStartMs);
+  const firstSegment = sortedSegments[0];
+  const lastSegment = sortedSegments[sortedSegments.length - 1];
+
+  if (firstSegment && lastSegment && firstSegment.sourceStartMs < lastSegment.sourceEndMs) {
+    return {
+      sourceStartMs: firstSegment.sourceStartMs,
+      sourceEndMs: lastSegment.sourceEndMs
+    };
+  }
+
+  return {
+    sourceStartMs: editPlan.sourceStartMs,
+    sourceEndMs: editPlan.sourceEndMs
+  };
+}
+
+async function writeRenderPlan(
+  request: AgentRequest,
+  payload: {
+    mode: 'source-file-trim' | 'fixture-pattern';
+    sourceUri: string;
+    sourcePath?: string;
+    sourceStartMs: number;
+    sourceEndMs: number;
+    target: typeof SHORTS_DEFAULT_RENDER_TARGET;
+    fallbackReason?: string;
+  }
+): Promise<void> {
+  const directory = requestArtifactDir(request);
+  await mkdir(directory, { recursive: true });
+  await writeFile(path.join(directory, 'render-plan.json'), `${JSON.stringify(payload, null, 2)}\n`, 'utf8');
+}
+
 async function renderFixtureVideo(request: AgentRequest, editPlan: EditPlanArtifact): Promise<ArtifactInfo> {
   const directory = requestArtifactDir(request);
   const outputPath = path.join(directory, OUTPUT_FILE_NAME_BY_KIND.output_video);
   const titleFile = path.join(directory, 'output-title.txt');
   await mkdir(directory, { recursive: true });
   await writeFile(titleFile, `${editPlan.title}\n${editPlan.hookText}`, 'utf8');
-  const durationSeconds = Math.max(1, (editPlan.sourceEndMs - editPlan.sourceStartMs) / 1000);
+  const renderRange = selectRenderRange(editPlan);
+  const durationMs = Math.max(1, renderRange.sourceEndMs - renderRange.sourceStartMs);
+  const durationSeconds = millisecondsToSeconds(durationMs);
+  const sourcePath = resolveLocalSourcePath(request.target.sourceUri);
+  const videoFilter = [
+    `scale=${SHORTS_DEFAULT_RENDER_TARGET.width}:${SHORTS_DEFAULT_RENDER_TARGET.height}:force_original_aspect_ratio=increase`,
+    `crop=${SHORTS_DEFAULT_RENDER_TARGET.width}:${SHORTS_DEFAULT_RENDER_TARGET.height}`
+  ].join(',');
+
+  if (sourcePath) {
+    await writeRenderPlan(request, {
+      mode: 'source-file-trim',
+      sourceUri: request.target.sourceUri,
+      sourcePath,
+      sourceStartMs: renderRange.sourceStartMs,
+      sourceEndMs: renderRange.sourceEndMs,
+      target: SHORTS_DEFAULT_RENDER_TARGET
+    });
+
+    await runCommand('ffmpeg', [
+      '-y',
+      '-ss',
+      millisecondsToSeconds(renderRange.sourceStartMs),
+      '-t',
+      durationSeconds,
+      '-i',
+      sourcePath,
+      '-map',
+      '0:v:0',
+      '-map',
+      '0:a?',
+      '-vf',
+      videoFilter,
+      '-c:v',
+      'libx264',
+      '-pix_fmt',
+      'yuv420p',
+      '-c:a',
+      'aac',
+      '-shortest',
+      '-movflags',
+      '+faststart',
+      outputPath
+    ]);
+
+    return {
+      path: outputPath,
+      uri: artifactUrl(request, OUTPUT_FILE_NAME_BY_KIND.output_video),
+      mimeType: 'video/mp4',
+      access: 'internal'
+    };
+  }
+
+  await writeRenderPlan(request, {
+    mode: 'fixture-pattern',
+    sourceUri: request.target.sourceUri,
+    sourceStartMs: renderRange.sourceStartMs,
+    sourceEndMs: renderRange.sourceEndMs,
+    target: SHORTS_DEFAULT_RENDER_TARGET,
+    fallbackReason: '入力動画をローカルファイルとして読めないため、編集案の尺に合わせた確認用映像を生成する'
+  });
 
   await runCommand('ffmpeg', [
     '-y',
     '-f',
     'lavfi',
     '-i',
-    `testsrc2=s=1080x1920:d=${durationSeconds}`,
+    `testsrc2=s=${SHORTS_DEFAULT_RENDER_TARGET.width}x${SHORTS_DEFAULT_RENDER_TARGET.height}:d=${durationSeconds}`,
     '-c:v',
     'libx264',
     '-pix_fmt',
     'yuv420p',
+    '-movflags',
+    '+faststart',
     outputPath
   ]);
 
