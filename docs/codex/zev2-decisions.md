@@ -217,3 +217,14 @@
 - Alternatives considered: JSONログビューを主導線にする。詳細ダッシュボードから作る。UIは作らずAPIだけで確認する。
 - Related files: `docs/codex/control-plane-spec.md`, `client/src/App.vue`, `client/src/stores/controlQueue.ts`
 - Review condition: 初期UIの最小表示だけでは、人間が承認、却下、修正依頼を判断できないことが確認されたとき。
+
+## Decision ZC-D-020
+
+- Decision ID: ZC-D-020
+- Date: 2026-06-13
+- Status: accepted
+- Decision: ZEVの既存実装は、zev2の実処理接続の参考として自由に使う。ただし後方互換や実装移植を目的にしない。
+- Reason: ZEVにはSTT、Gemini、候補生成、Remotion、ffmpeg、投稿候補パッケージなど、zev2の実処理接続で参考になる実装がある。一方でzev2は新規プロジェクトであり、backendに実STT、実LLM、実Gemini、実動画生成を直接抱え込まない責務分離を守る必要がある。
+- Alternatives considered: ZEVを参照しない。ZEVの実装構造へ寄せる。ZEV互換の分岐をzev2へ入れる。
+- Related files: `/Users/kawafmm/workspace/zev`, `/Users/kawafmm/workspace/zev_backend`, `/Users/kawafmm/workspace/zev_client`, `docs/codex/zev2-progress.md`
+- Review condition: ZEV参照によりzev2の責務分離、pnpm固定、Electron非採用、後方互換禁止に反する設計が入りそうになったとき。
