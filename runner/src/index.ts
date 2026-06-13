@@ -485,16 +485,13 @@ async function renderFixtureVideo(request: AgentRequest, editPlan: EditPlanArtif
   await mkdir(directory, { recursive: true });
   await writeFile(titleFile, `${editPlan.title}\n${editPlan.hookText}`, 'utf8');
   const durationSeconds = Math.max(1, (editPlan.sourceEndMs - editPlan.sourceStartMs) / 1000);
-  const drawText = `textfile=${titleFile}:fontcolor=white:fontsize=54:line_spacing=18:box=1:boxcolor=black@0.55:boxborderw=24:x=(w-text_w)/2:y=(h-text_h)/2`;
 
   await runCommand('ffmpeg', [
     '-y',
     '-f',
     'lavfi',
     '-i',
-    `color=c=0x1b2633:s=1080x1920:d=${durationSeconds}`,
-    '-vf',
-    drawText,
+    `testsrc2=s=1080x1920:d=${durationSeconds}`,
     '-c:v',
     'libx264',
     '-pix_fmt',
