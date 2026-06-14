@@ -1,0 +1,118 @@
+{
+  "kind": "zev_stt_sample",
+  "sampleSource": {
+    "project": "ZEV",
+    "path": "client/data/shorts/info_task195-canonical-telops-preview.json",
+    "title": "チーム連携で掴んだ劇的勝利",
+    "sourceRange": {
+      "sourceStartMs": 35000,
+      "sourceEndMs": 90000
+    }
+  },
+  "language": "ja-JP",
+  "durationSec": 55,
+  "notes": [
+    "ZEVのショート情報に保存されていた書き起こしを、zev2の候補確認で読める粒度へ正規化したサンプルです。",
+    "実STT接続ではありません。STT工程の成果物形式と候補確認の判断材料を確認するために使います。"
+  ],
+  "segments": [
+    {
+      "id": 1,
+      "startMs": 34000,
+      "endMs": 38347,
+      "text": "見ていきまーす。",
+      "speaker": "SPEAKER_00"
+    },
+    {
+      "id": 2,
+      "startMs": 38347,
+      "endMs": 42809,
+      "text": "え、なんか吹き飛ばしとる？",
+      "speaker": "SPEAKER_00"
+    },
+    {
+      "id": 3,
+      "startMs": 44000,
+      "endMs": 46000,
+      "text": "裏来てます、かがすみさんここ来てますよ。",
+      "speaker": "SPEAKER_00"
+    },
+    {
+      "id": 4,
+      "startMs": 46000,
+      "endMs": 49000,
+      "text": "決めます、今ここいます。",
+      "speaker": "SPEAKER_00"
+    },
+    {
+      "id": 5,
+      "startMs": 49000,
+      "endMs": 53000,
+      "text": "後ろ！後ろ！すぐ！どうやって戻すか！やばい！やばい！",
+      "speaker": "SPEAKER_00"
+    },
+    {
+      "id": 6,
+      "startMs": 53000,
+      "endMs": 58500,
+      "text": "大丈夫、大丈夫。俺の離脱できない、ごめんなさい！ごめんなさい！",
+      "speaker": "SPEAKER_00"
+    },
+    {
+      "id": 7,
+      "startMs": 73000,
+      "endMs": 75800,
+      "text": "クズオさんいける！あそこ帰るのか、あ、全然いける！",
+      "speaker": "SPEAKER_00"
+    },
+    {
+      "id": 8,
+      "startMs": 76000,
+      "endMs": 77000,
+      "text": "うまい！",
+      "speaker": "SPEAKER_00"
+    },
+    {
+      "id": 9,
+      "startMs": 77000,
+      "endMs": 79000,
+      "text": "うおおおおお！",
+      "speaker": "SPEAKER_00"
+    },
+    {
+      "id": 10,
+      "startMs": 80000,
+      "endMs": 83000,
+      "text": "おお！おお！",
+      "speaker": "SPEAKER_00"
+    }
+  ],
+  "speechUnitGroups": [
+    [1, 2],
+    [3, 4, 5, 6],
+    [7, 8, 9, 10]
+  ],
+  "candidateWindows": [
+    {
+      "title": "裏取りへの即反応から勝ち筋を作る場面",
+      "hookText": "裏来てます、かがすみさんここ来てますよ。",
+      "speechIds": [3, 4, 5, 6],
+      "reason": "敵の接近への気づき、戻し方の焦り、謝りながら耐える反応までが一続きで入り、短尺でも状況の緊張が伝わるため。",
+      "reviewFocus": "裏取りに気づく瞬間、後ろを警戒する声、耐えている画面が同じ流れとして見えるかを確認します。"
+    },
+    {
+      "title": "クラッチ成功で一気に盛り上がる場面",
+      "hookText": "クズオさんいける！あ、全然いける！",
+      "speechIds": [7, 8, 9, 10],
+      "reason": "勝てるかもしれない期待から、うまい、歓声へ上がる流れがあり、短い確認動画でも見せ場の山を判断しやすいため。",
+      "reviewFocus": "プレイの成功が画面で見えるか、歓声のタイミングと映像の山がずれていないかを確認します。"
+    },
+    {
+      "title": "開幕で異変に気づく場面",
+      "hookText": "え、なんか吹き飛ばしとる？",
+      "speechIds": [1, 2],
+      "reason": "冒頭で状況変化に気づく言葉があり、短尺の入りとして使えるかを比較する候補になるため。",
+      "reviewFocus": "何が起きたかが画面だけで伝わるか、短すぎて前後説明が必要にならないかを確認します。"
+    }
+  ]
+}

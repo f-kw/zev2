@@ -40,16 +40,37 @@ type SttSegment = {
   speaker?: string;
 };
 
+type TranscriptMode = 'zev-sample-stt';
+
+type TranscriptCandidateWindow = {
+  title?: string;
+  hookText?: string;
+  speechIds: number[];
+  reason?: string;
+  reviewFocus?: string;
+};
+
 type TranscriptArtifact = {
   kind: 'transcript_json';
-  mode: 'zev-inspired-fixture-stt';
+  mode: TranscriptMode;
   sourceUri: string;
+  sampleSource?: {
+    project?: string;
+    path?: string;
+    title?: string;
+    sourceRange?: {
+      sourceStartMs?: number;
+      sourceEndMs?: number;
+    };
+  };
+  notes: string[];
   generatedAt: string;
   language: 'ja-JP';
   durationSec: number;
   segmentCount: number;
   segments: SttSegment[];
   speechUnitGroups: number[][];
+  candidateWindows?: TranscriptCandidateWindow[];
 };
 
 type CandidateArtifact = {
@@ -66,6 +87,7 @@ type CandidateArtifact = {
     transcriptText: string;
     speechIds: number[];
     reason: string;
+    reviewFocus?: string;
     evidenceRefs: Array<{ kind: string; refId: string; meaning: string }>;
   }>;
 };
@@ -133,6 +155,7 @@ const SHORTS_DEFAULT_RENDER_TARGET = {
   width: 1080,
   height: 1920
 } as const;
+const ZEV_STT_SAMPLE_PATH = path.join(workspaceRoot(), 'runner', 'fixtures', 'zev-stt-sample.json');
 
 function parseOptions(): RunnerOptions {
   const options: RunnerOptions = {
@@ -310,29 +333,156 @@ function buildSpeechUnitGroupsFromSegments(segments: SttSegment[]): number[][] {
   return groups;
 }
 
-function buildFixtureSegments(request: AgentRequest): SttSegment[] {
-  const sourceLabel = request.target.sourceUri.startsWith('file:')
-    ? 'ローカル素材'
-    : '配信素材';
-  const baseTexts = [
-    `${sourceLabel}の状況を確認します。`,
-    'ここで話題が切り替わります。',
-    'え、今の展開はかなり使えます。',
-    '理由は前後の流れが短くまとまっているからです。',
-    'この部分なら冒頭で視聴者に伝わります。',
-    '最後に反応が返って、短尺の締めになります。'
-  ];
+function recordFrom(value: unknown): Record<string, unknown> {
+  if (value && typeof value === 'object' && !Array.isArray(value)) {
+    return value as Record<string, unknown>;
+  }
 
-  return baseTexts.map((text, index) => {
-    const startMs = index * 4500;
+  return {};
+}
+
+function stringArrayFrom(value: unknown): string[] {
+  return Array.isArray(value) ? value.filter((item): item is string => typeof item === 'string') : [];
+}
+
+function sourceRangeFrom(value: unknown) {
+  const record = recordFrom(value);
+  const sourceStartMs = record.sourceStartMs;
+  const sourceEndMs = record.sourceEndMs;
+
+  return {
+    ...(typeof sourceStartMs === 'number' ? { sourceStartMs } : {}),
+    ...(typeof sourceEndMs === 'number' ? { sourceEndMs } : {})
+  };
+}
+
+function normalizeSampleSource(value: unknown): TranscriptArtifact['sampleSource'] {
+  const record = recordFrom(value);
+  const sourceRange = sourceRangeFrom(record.sourceRange);
+
+  return {
+    ...(typeof record.project === 'string' ? { project: record.project } : {}),
+    ...(typeof record.path === 'string' ? { path: record.path } : {}),
+    ...(typeof record.title === 'string' ? { title: record.title } : {}),
+    ...(Object.keys(sourceRange).length > 0 ? { sourceRange } : {})
+  };
+}
+
+function normalizeSegments(value: unknown): SttSegment[] {
+  if (!Array.isArray(value) || value.length === 0) {
+    throw new Error('ZEVサンプルSTTの発話が空です');
+  }
+
+  const seenIds = new Set<number>();
+  return value.map((item, index) => {
+    const record = recordFrom(item);
+    const id = record.id;
+    const startMs = record.startMs;
+    const endMs = record.endMs;
+    const text = record.text;
+    const speaker = record.speaker;
+
+    if (
+      typeof id !== 'number' ||
+      !Number.isInteger(id) ||
+      id <= 0 ||
+      seenIds.has(id) ||
+      typeof startMs !== 'number' ||
+      typeof endMs !== 'number' ||
+      startMs >= endMs ||
+      typeof text !== 'string' ||
+      text.trim().length === 0
+    ) {
+      throw new Error(`ZEVサンプルSTTの発話 ${index + 1} 件目が不正です`);
+    }
+
+    seenIds.add(id);
     return {
-      id: index + 1,
+      id,
       startMs,
-      endMs: startMs + 3200,
+      endMs,
       text,
-      speaker: index % 2 === 0 ? 'speaker_1' : 'speaker_2'
+      ...(typeof speaker === 'string' && speaker.trim() ? { speaker } : {})
     };
   });
+}
+
+function normalizeSpeechUnitGroups(value: unknown, segments: SttSegment[]): number[][] {
+  const knownIds = new Set(segments.map((segment) => segment.id));
+  if (!Array.isArray(value) || value.length === 0) {
+    return buildSpeechUnitGroupsFromSegments(segments);
+  }
+
+  const groups = value.map((item, groupIndex) => {
+    if (!Array.isArray(item) || item.length === 0) {
+      throw new Error(`ZEVサンプルSTTの発話まとまり ${groupIndex + 1} 件目が不正です`);
+    }
+
+    return item.map((rawId, idIndex) => {
+      if (typeof rawId !== 'number' || !Number.isInteger(rawId) || !knownIds.has(rawId)) {
+        throw new Error(`ZEVサンプルSTTの発話まとまり ${groupIndex + 1}-${idIndex + 1} が不正です`);
+      }
+
+      return rawId;
+    });
+  });
+
+  return groups;
+}
+
+function normalizeCandidateWindows(value: unknown, segments: SttSegment[]): TranscriptCandidateWindow[] | undefined {
+  if (!Array.isArray(value) || value.length === 0) {
+    return undefined;
+  }
+
+  const knownIds = new Set(segments.map((segment) => segment.id));
+  return value.map((item, index) => {
+    const record = recordFrom(item);
+    const rawSpeechIds = record.speechIds;
+    if (!Array.isArray(rawSpeechIds) || rawSpeechIds.length === 0) {
+      throw new Error(`ZEVサンプルSTTの候補窓 ${index + 1} 件目に発話参照がありません`);
+    }
+
+    const speechIds = rawSpeechIds.map((rawId, idIndex) => {
+      if (typeof rawId !== 'number' || !Number.isInteger(rawId) || !knownIds.has(rawId)) {
+        throw new Error(`ZEVサンプルSTTの候補窓 ${index + 1}-${idIndex + 1} が不正です`);
+      }
+
+      return rawId;
+    });
+
+    return {
+      ...(typeof record.title === 'string' ? { title: record.title } : {}),
+      ...(typeof record.hookText === 'string' ? { hookText: record.hookText } : {}),
+      speechIds,
+      ...(typeof record.reason === 'string' ? { reason: record.reason } : {}),
+      ...(typeof record.reviewFocus === 'string' ? { reviewFocus: record.reviewFocus } : {})
+    };
+  });
+}
+
+async function buildZevSampleTranscript(request: AgentRequest): Promise<TranscriptArtifact> {
+  const raw = await readFile(ZEV_STT_SAMPLE_PATH, 'utf8');
+  const payload = recordFrom(JSON.parse(raw));
+  const segments = normalizeSegments(payload.segments);
+  const speechUnitGroups = normalizeSpeechUnitGroups(payload.speechUnitGroups, segments);
+  const lastEndMs = segments[segments.length - 1]?.endMs ?? 0;
+  const durationSec = typeof payload.durationSec === 'number' ? payload.durationSec : lastEndMs / 1000;
+
+  return {
+    kind: 'transcript_json',
+    mode: 'zev-sample-stt',
+    sourceUri: request.target.sourceUri,
+    sampleSource: normalizeSampleSource(payload.sampleSource),
+    notes: stringArrayFrom(payload.notes),
+    generatedAt: new Date().toISOString(),
+    language: 'ja-JP',
+    durationSec,
+    segmentCount: segments.length,
+    segments,
+    speechUnitGroups,
+    candidateWindows: normalizeCandidateWindows(payload.candidateWindows, segments)
+  };
 }
 
 function segmentTextByIds(transcript: TranscriptArtifact, ids: number[]): string {
@@ -345,10 +495,14 @@ function segmentTextByIds(transcript: TranscriptArtifact, ids: number[]): string
 
 function buildCandidates(transcript: TranscriptArtifact, request: AgentRequest): CandidateArtifact {
   const requestedCount = parseCount(request.constraints.candidateCountLabel);
-  const windows = transcript.speechUnitGroups.length > 0
-    ? transcript.speechUnitGroups
-    : transcript.segments.map((segment) => [segment.id]);
-  const candidates = windows.slice(0, requestedCount).map((speechIds, index) => {
+  const windows: TranscriptCandidateWindow[] = transcript.candidateWindows?.length
+    ? transcript.candidateWindows
+    : (transcript.speechUnitGroups.length > 0
+        ? transcript.speechUnitGroups
+        : transcript.segments.map((segment) => [segment.id])
+      ).map((speechIds) => ({ speechIds }));
+  const candidates = windows.slice(0, requestedCount).map((window, index) => {
+    const speechIds = window.speechIds;
     const segments = transcript.segments.filter((segment) => speechIds.includes(segment.id));
     const first = segments[0] ?? transcript.segments[0];
     const last = segments[segments.length - 1] ?? first;
@@ -358,11 +512,12 @@ function buildCandidates(transcript: TranscriptArtifact, request: AgentRequest):
       id: `candidate_${candidateNumber}`,
       sourceStartMs: first.startMs,
       sourceEndMs: last.endMs,
-      title: `候補${candidateNumber}: ${transcriptText.slice(0, 18)}`,
-      hookText: transcriptText.slice(0, 28),
+      title: window.title ?? `候補${candidateNumber}: ${transcriptText.slice(0, 18)}`,
+      hookText: window.hookText ?? transcriptText.slice(0, 28),
       transcriptText,
       speechIds,
-      reason: 'ZEVの発話まとまり方式を参考に、話者切替、長い間、文末で区切ったまとまりを候補にした',
+      reason: window.reason ?? '発話のまとまりだけで意味が通じる区間として候補にした',
+      reviewFocus: window.reviewFocus,
       evidenceRefs: speechIds.map((speechId) => ({
         kind: 'time_range',
         refId: `speech_${speechId}`,
@@ -387,7 +542,8 @@ function buildCandidateReview(candidates: CandidateArtifact): CandidateReviewArt
     generatedAt: new Date().toISOString(),
     reviewedCandidates: candidates.candidates.map((candidate, index) => ({
       candidateId: candidate.id,
-      visualCheck: '仮Gemini確認として、候補区間の前後関係、字幕化しやすさ、短尺の始点と終点を確認対象にした',
+      visualCheck: candidate.reviewFocus
+        ?? '候補区間の前後関係、字幕化しやすさ、短尺の始点と終点を確認します',
       captionHint: candidate.hookText,
       risk: index === 0 ? 'low' : 'medium',
       nextAction: index === 0 ? 'use_for_edit_plan' : 'needs_manual_check'
@@ -645,19 +801,7 @@ async function buildArtifactForRequest(request: AgentRequest): Promise<ArtifactI
   }
 
   if (request.type === 'run_stt') {
-    const segments = buildFixtureSegments(request);
-    const transcript: TranscriptArtifact = {
-      kind: 'transcript_json',
-      mode: 'zev-inspired-fixture-stt',
-      sourceUri: request.target.sourceUri,
-      generatedAt: new Date().toISOString(),
-      language: 'ja-JP',
-      durationSec: Math.round((segments[segments.length - 1]?.endMs ?? 0) / 100) / 10,
-      segmentCount: segments.length,
-      segments,
-      speechUnitGroups: buildSpeechUnitGroupsFromSegments(segments)
-    };
-    return writeJsonArtifact(request, 'transcript_json', transcript);
+    return writeJsonArtifact(request, 'transcript_json', await buildZevSampleTranscript(request));
   }
 
   if (request.type === 'find_candidates') {
@@ -719,7 +863,7 @@ function buildCompletion(request: AgentRequest, artifact: ArtifactInfo): AgentCo
     completion.decision = {
       decisionType: 'candidate_selection',
       decision: '候補探索結果を人間確認へ進める',
-      reason: 'ZEVの発話まとまり方式を参考に、STT発話から候補JSONを作成したため、映像確認へ進める前に人間が確認できる',
+      reason: 'ZEVサンプルの書き起こしから候補区間、候補理由、映像で見る観点を作成したため、映像確認へ進める前に人間が確認できる',
       evidenceRefs: [
         {
           refId: artifact.uri,
@@ -730,7 +874,7 @@ function buildCompletion(request: AgentRequest, artifact: ArtifactInfo): AgentCo
       proposedNextState: 'review_required',
       requiresHumanReview: true,
       humanQuestion: 'この候補探索結果を映像確認へ進めてよいか',
-      ruleIds: ['control-plane:candidate-review-required', 'zev-reference:speech-unit-groups']
+      ruleIds: ['control-plane:candidate-review-required', 'zev-reference:stt-sample']
     };
   }
 

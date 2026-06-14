@@ -168,8 +168,8 @@ const operationUserLabel = {
 
 const operationUserMeaning = {
   prepare_video: 'この実行で使う動画を確認するための情報です',
-  run_stt: '現時点では実STTではなく、検証用の仮書き起こしです',
-  find_candidates: '仮書き起こしから作った候補区間と、選んだ理由です',
+  run_stt: '現時点では実STT接続ではなく、ZEVサンプルの書き起こしを使っています',
+  find_candidates: 'ZEVサンプルの書き起こしから作った候補区間と、選んだ理由です',
   gemini_candidate_review: '現時点では実Gemini確認ではなく、検証用の映像確認メモです',
   create_edit_plan: 'どの区間を使い、どんな流れで動画にするかの仮編集案です',
   apply_adjustment: '動画を作る前に確定した仮の変更点と確認結果です',
@@ -773,12 +773,12 @@ const activeImplementationNotes = computed(() => {
   const notes = {
     request: ['対象動画の登録は検証用です。動画解析そのものはまだ行っていません。'],
     candidates: [
-      'STTは実接続ではありません。仮の書き起こしから候補を作っています。',
+      'STTは実接続ではありません。ZEVサンプルの書き起こしから候補を作っています。',
       'Geminiの映像確認は実接続ではありません。仮の確認メモを表示しています。',
-      'この段階では候補の品質ではなく、確認の流れと判断材料の出し方を見てください。'
+      'この段階では実動画の品質評価ではなく、候補確認で見る材料の出し方を確認してください。'
     ],
     edit: [
-      '編集案は仮データから作られています。候補の内容が薄い場合、編集案も判断材料としては不足します。',
+      '編集案はZEVサンプル由来の候補から作られています。実動画の最終品質評価はまだできません。',
       'テロップ案と変更点は検証用です。実STTと実映像確認の接続後に品質評価します。'
     ],
     video: [
@@ -809,6 +809,7 @@ const candidateSummaries = computed<CandidateReviewSummary[]>(() => {
     const rawTitle = stringField(candidateRecord, 'title') || `候補 ${index + 1}`;
     const hookText = stringField(candidateRecord, 'hookText') || '';
     const transcriptText = stringField(candidateRecord, 'transcriptText') || '';
+    const sourceReviewFocus = stringField(candidateRecord, 'reviewFocus');
     const review = reviewedCandidates
       .map((item) => recordValue(item))
       .find((item) => stringField(item, 'candidateId') === id);
@@ -824,9 +825,9 @@ const candidateSummaries = computed<CandidateReviewSummary[]>(() => {
       reason: candidateReasonForDisplay(candidateRecord, placeholder),
       visualCheck: review
         ? visualCheckForDisplay(stringField(review, 'visualCheck'))
-        : '映像確認メモはまだありません',
+        : '映像確認工程は次の段階で作成されます。今は候補区間、発話内容、確認観点で判断します。',
       contentSummary: candidateContentSummary(placeholder, transcriptText),
-      reviewFocus: candidateReviewFocus(placeholder),
+      reviewFocus: sourceReviewFocus || candidateReviewFocus(placeholder),
       limitationLabel: placeholder ? '仮STTのため内容判断は保留' : '内容を確認できます',
       riskLabel: riskLabel(stringField(review, 'risk')),
       nextActionLabel: nextActionLabel(stringField(review, 'nextAction')),

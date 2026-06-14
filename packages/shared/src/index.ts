@@ -250,9 +250,9 @@ const OUTPUT_TYPE_BY_REQUEST_TYPE = {
 } satisfies Record<AgentRequestType, OutputEntityType>;
 
 const DRY_RUN_MEANING_BY_REQUEST_TYPE = {
-  prepare_video: '対象動画をAI処理用の入力として登録した仮実装結果',
-  run_stt: '音声を書き起こす工程の仮実装結果',
-  find_candidates: 'ショート候補区間を探す工程の仮実装結果',
+  prepare_video: '対象動画をAI処理用の入力として登録した結果',
+  run_stt: 'ZEVサンプル書き起こしを候補探索用の材料として保存した結果',
+  find_candidates: '書き起こしからショート候補区間と判断材料を作った結果',
   gemini_candidate_review: 'STTで絞った候補区間をGeminiで映像確認する工程の仮実装結果',
   create_edit_plan: 'テロップ、構成、編集方針を作る工程の仮実装結果',
   apply_adjustment: '修正内容を編集案へ反映する工程の仮実装結果',
