@@ -433,155 +433,6 @@ const operationProgressPercent = computed(() => {
   return Math.round((completedOperations.value.length / selectedOperations.value.length) * 100);
 });
 
-const executionSummary = computed(() => {
-  if (store.runPhase === 'saving') {
-    return {
-      title: 'AIの作業: まだ開始前',
-      detail: '依頼を保存しています'
-    };
-  }
-
-  if (store.runPhase === 'handing_off') {
-    return {
-      title: 'AIの作業: 受け取り中',
-      detail: '承認済み依頼から作業順を作っています'
-    };
-  }
-
-  if (store.runPhase === 'running') {
-    return {
-      title: 'AIの作業: 実行中',
-      detail: currentOperation.value ? `${currentOperation.value.label} を処理しています` : '作業キューを確認しています'
-    };
-  }
-
-  if (store.runPhase === 'review_required' || pendingControlReviews.value.length > 0) {
-    return {
-      title: 'AIの作業: 確認待ち',
-      detail: currentControlReview.value?.summary ?? 'あなたの判断が必要です'
-    };
-  }
-
-  if (store.runPhase === 'completed' && selectedOperations.value.length > 0) {
-    return {
-      title: 'AIの作業: 待機中',
-      detail: '仮実装は動画生成まで到達しました。生成後レビューで結果を確認できます'
-    };
-  }
-
-  if (store.runPhase === 'error') {
-    return {
-      title: 'AIの作業: 停止',
-      detail: store.errorMessage || '依頼をAIへ渡せませんでした'
-    };
-  }
-
-  if (!activeDraft.value) {
-    return {
-      title: 'AIの作業: 未開始',
-      detail: '依頼はまだ渡されていません'
-    };
-  }
-
-  if (activeDraft.value.status === 'draft') {
-    return {
-      title: 'AIの作業: 未開始',
-      detail: '承認後に作業順を作ります'
-    };
-  }
-
-  if (failedOperations.value.length > 0) {
-    return {
-      title: 'AIの作業: 停止',
-      detail: `${failedOperations.value[0].label} で止まっています`
-    };
-  }
-
-  if (runningOperations.value.length > 0) {
-    return {
-      title: 'AIの作業: 実行中',
-      detail: `${runningOperations.value[0].label} を実行中です`
-    };
-  }
-
-  if (waitingOperations.value.length > 0) {
-    return {
-      title: 'AIの作業: 待機中',
-      detail: pendingControlReviews.value.length > 0
-        ? '確認が終わるまで次の工程を開始しません'
-        : `${waitingOperations.value[0].label} の開始待ちです`
-    };
-  }
-
-  if (selectedOperations.value.length > 0) {
-    return {
-      title: 'AIの作業: 待機中',
-      detail: '仮実装は動画生成まで到達しました。生成後レビューで結果を確認できます'
-    };
-  }
-
-  return {
-    title: 'AIの作業: 準備中',
-    detail: '作業順の作成待ちです'
-  };
-});
-
-const actionSummary = computed(() => {
-  if (!activeDraft.value) {
-    return {
-      title: '次の操作',
-      detail: '依頼内容と対象動画を入力して、AIへ渡します'
-    };
-  }
-
-  if (activeDraft.value.status === 'draft') {
-    return {
-      title: '次の操作',
-      detail: '内容を確認して作成を始めます'
-    };
-  }
-
-  if (failedOperations.value.length > 0) {
-    return {
-      title: '確認が必要',
-      detail: `${failedOperations.value[0].label} で止まっています`
-    };
-  }
-
-  if (pendingControlReviews.value.length > 0) {
-    return {
-      title: '確認が必要',
-      detail: currentControlReview.value?.humanQuestion ?? 'AI判断を確認してください'
-    };
-  }
-
-  if (runningOperations.value.length > 0) {
-    return {
-      title: '今動いている工程',
-      detail: runningOperations.value[0].label
-    };
-  }
-
-  if (waitingOperations.value.length > 0) {
-    return {
-      title: '次に動く工程',
-      detail: waitingOperations.value[0].label
-    };
-  }
-
-  if (selectedOperations.value.length > 0) {
-    return {
-      title: '次の操作',
-      detail: '仮実装は最後まで通りました。成果物を見ながら次の差し替え箇所を確認できます'
-    };
-  }
-
-  return {
-    title: '次の操作',
-    detail: 'AIが進める作業の作成を待っています'
-  };
-});
-
 const stepRows = computed(() =>
   (activeDraft.value?.steps ?? store.workflowSteps).map((step) => {
     const operation = selectedOperations.value.find((request) => request.type === step.type);
@@ -785,40 +636,107 @@ const userInstructionSummary = computed(() => ({
     ? `${visibleSourceStatus.value}。指定は ${activeDraft.value.settings.durationLabel} / ${activeDraft.value.settings.candidateCountLabel} です。`
     : `${visibleSourceStatus.value}。作りたい内容と対象動画を入力してください。`
 }));
-const aiWorkSummary = computed(() => ({
-  label: 'AIの作業',
-  title: executionSummary.value.title.replace('AIの作業: ', ''),
-  detail: executionSummary.value.detail
-}));
-const videoInfoSummary = computed(() => {
+const currentStatusSummary = computed(() => {
+  const artifactCount = selectedArtifacts.value.length;
+  const artifactLabel = artifactCount > 0 ? `成果物 ${artifactCount}件` : '成果物はまだありません';
+
+  if (requestFormVisible.value) {
+    return {
+      tone: 'idle',
+      icon: 'mdi-plus-circle-outline',
+      label: '現在状況',
+      title: '新しい依頼を入力中です',
+      detail: '作りたいショートと対象動画を入れると、AIへ渡す前の依頼が作られます。'
+    };
+  }
+
+  if (store.runPhase === 'error' || store.errorMessage || failedOperations.value.length > 0) {
+    return {
+      tone: 'error',
+      icon: 'mdi-alert-circle-outline',
+      label: '現在状況',
+      title: '処理が止まっています',
+      detail: store.errorMessage || `${failedOperations.value[0]?.label ?? '処理'} で確認が必要です。`
+    };
+  }
+
+  if (store.runPhase === 'saving') {
+    return {
+      tone: 'running',
+      icon: 'mdi-content-save-outline',
+      label: '現在状況',
+      title: '依頼を保存しています',
+      detail: '入力内容を保存し、AIへ渡す準備をしています。'
+    };
+  }
+
+  if (store.runPhase === 'handing_off') {
+    return {
+      tone: 'running',
+      icon: 'mdi-send-outline',
+      label: '現在状況',
+      title: 'AIへ渡しています',
+      detail: '承認済みの依頼から作業順を作っています。'
+    };
+  }
+
+  if (pendingControlReviews.value.length > 0 || store.runPhase === 'review_required') {
+    return {
+      tone: 'review',
+      icon: 'mdi-account-check-outline',
+      label: '現在状況',
+      title: '確認が必要です',
+      detail: `${currentControlReview.value?.humanQuestion ?? 'AIの提案を確認してください'}。${artifactLabel}。`
+    };
+  }
+
+  if (store.runPhase === 'running' || runningOperations.value.length > 0 || waitingOperations.value.length > 0) {
+    const operation = runningOperations.value[0] ?? waitingOperations.value[0] ?? currentOperation.value;
+    return {
+      tone: 'running',
+      icon: 'mdi-progress-clock',
+      label: '現在状況',
+      title: operation ? `AIが「${operation.label}」を処理しています` : 'AIが処理しています',
+      detail: `${artifactLabel}。処理が止まった場合だけ、確認が必要な内容をここに表示します。`
+    };
+  }
+
   if (outputVideoArtifact.value) {
     return {
-      label: '動画と成果物',
+      tone: 'ready',
+      icon: 'mdi-play-box-outline',
+      label: '現在状況',
       title: '確認用動画があります',
-      detail: '生成後レビューで動画を見て、次に直す点を候補、編集案、動画の見やすさに分けて確認します。'
+      detail: 'AIの処理は待機中です。生成後レビューで動画と修正点を確認できます。'
     };
   }
 
-  if (renderControlReview.value?.status === 'review_required') {
+  if (selectedOperations.value.length > 0) {
     return {
-      label: '動画と成果物',
-      title: '動画作成前で止まっています',
-      detail: '編集案を承認するまで、確認用動画は作られません。'
+      tone: 'ready',
+      icon: 'mdi-check-circle-outline',
+      label: '現在状況',
+      title: '成果物を確認できます',
+      detail: `${artifactLabel}。全体の流れから確認したい工程を選べます。`
     };
   }
 
-  if (runningOperations.value.some((request) => request.type === 'render_video')) {
+  if (activeDraft.value?.status === 'draft') {
     return {
-      label: '動画と成果物',
-      title: '確認用動画を作成中です',
-      detail: '作成が終わると、生成後レビューで動画と修正点を確認できます。'
+      tone: 'review',
+      icon: 'mdi-file-check-outline',
+      label: '現在状況',
+      title: '依頼の作成待ちです',
+      detail: '内容を確認して作成を始めると、AIが候補作成へ進みます。'
     };
   }
 
   return {
-    label: '動画と成果物',
-    title: '確認用動画はまだありません',
-    detail: '候補確認と動画生成前確認を通過すると、確認用動画が作られます。'
+    tone: 'idle',
+    icon: 'mdi-plus-circle-outline',
+    label: '現在状況',
+    title: '新しい依頼を作れます',
+    detail: '作りたいショートと対象動画を入力して開始します。'
   };
 });
 const activeReview = computed(() => {
@@ -1462,6 +1380,38 @@ function reviewRejectMeaning(review: ControlReviewItem): string {
   return 'この編集案では確認用動画を作っても判断材料にならない状態です。';
 }
 
+function reviewChoiceReasonKey(review: ControlReviewItem, action: HumanReviewActionType): string {
+  return `${review.id}:${action}`;
+}
+
+function setReviewChoiceReason(review: ControlReviewItem, action: HumanReviewActionType, value: string | null) {
+  reviewReasons[reviewChoiceReasonKey(review, action)] = value ?? '';
+}
+
+function reviewChoiceReasonLabel(action: HumanReviewActionType): string {
+  if (action === 'approve') {
+    return '進めてよい理由';
+  }
+
+  if (action === 'request_changes') {
+    return '直したい点';
+  }
+
+  return '止める理由';
+}
+
+function reviewChoiceReasonHint(action: HumanReviewActionType): string {
+  if (action === 'approve') {
+    return '気になる点がなければ空欄で進められます。';
+  }
+
+  if (action === 'request_changes') {
+    return '直したい範囲や理由を書くと、この判断と一緒に保存されます。';
+  }
+
+  return 'なぜ使わないか、どこで止めるべきかを書くと、この判断と一緒に保存されます。';
+}
+
 function artifactTitle(artifact: ArtifactRow): string {
   return operationUserLabel[artifact.operation.type];
 }
@@ -1556,6 +1506,9 @@ async function submitDraft() {
 function startNewRequest() {
   currentView.value = 'main';
   showSuccessfulSteps.value = false;
+  selectedHistoryDraftId.value = '';
+  selectedProcessTab.value = '';
+  showDetailData.value = false;
   showRequestForm.value = true;
 }
 
@@ -1589,9 +1542,13 @@ function closeHistory() {
 }
 
 async function submitControlReview(review: ControlReviewItem, action: HumanReviewActionType) {
-  const reason = reviewReasons[review.id] ?? '';
+  const reasonKey = reviewChoiceReasonKey(review, action);
+  const reason = reviewReasons[reasonKey] ?? '';
   await store.submitControlReview(review.id, action, reason);
-  reviewReasons[review.id] = '';
+  const reviewActions: HumanReviewActionType[] = ['approve', 'request_changes', 'reject'];
+  for (const reviewAction of reviewActions) {
+    reviewReasons[reviewChoiceReasonKey(review, reviewAction)] = '';
+  }
 }
 
 function showNextProcessForReview(review: ControlReviewItem) {
@@ -1633,6 +1590,9 @@ watch(
 
 watch(activeProcessTab, () => {
   showDetailData.value = false;
+  window.requestAnimationFrame(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
 });
 
 onMounted(() => {
@@ -1647,24 +1607,13 @@ onMounted(() => {
         <header class="topbar">
           <div>
             <p class="eyebrow">zev2</p>
-            <h1>ショート作成の確認</h1>
           </div>
           <div class="top-actions">
             <v-btn v-if="currentView === 'main'" prepend-icon="mdi-history" variant="text" @click="openHistory">
               実行履歴を見る
             </v-btn>
-            <v-btn prepend-icon="mdi-refresh" :loading="store.loading" @click="store.refresh">
-              更新
-            </v-btn>
           </div>
         </header>
-
-        <v-alert v-if="store.message" type="success" density="compact" variant="tonal" class="message">
-          {{ store.message }}
-        </v-alert>
-        <v-alert v-if="store.errorMessage" type="error" density="compact" variant="tonal" class="message">
-          {{ store.errorMessage }}
-        </v-alert>
 
         <section v-if="currentView === 'history'" class="history-view">
           <div class="history-header">
@@ -1696,6 +1645,31 @@ onMounted(() => {
         </section>
 
         <section v-else class="process-workspace">
+          <section class="current-status-panel" :class="`is-${currentStatusSummary.tone}`">
+            <div class="current-status-main">
+              <div class="current-status-icon">
+                <v-icon size="26">{{ currentStatusSummary.icon }}</v-icon>
+              </div>
+              <div>
+                <span>{{ currentStatusSummary.label }}</span>
+                <strong>{{ currentStatusSummary.title }}</strong>
+                <p>{{ currentStatusSummary.detail }}</p>
+              </div>
+            </div>
+            <div class="current-status-meta">
+              <v-chip size="small" :color="visibleDraftStatus.color" variant="flat">
+                {{ visibleDraftStatus.label }}
+              </v-chip>
+              <span v-if="store.lastChangedAt">最終更新 {{ formatTime(store.lastChangedAt) }}</span>
+            </div>
+          </section>
+
+          <section v-if="!requestFormVisible && activeDraft" class="instruction-summary">
+            <span>あなたの指示</span>
+            <p>{{ userInstructionSummary.title }}</p>
+            <small>{{ userInstructionSummary.detail }}</small>
+          </section>
+
           <v-sheet v-if="requestFormVisible" class="panel request-start-panel" rounded border>
             <div class="request-start-heading">
               <div>
@@ -1761,11 +1735,7 @@ onMounted(() => {
               </div>
             </v-form>
           </v-sheet>
-          <v-sheet v-else class="request-utility-panel" rounded border>
-            <div>
-              <span>別の動画で始める</span>
-              <p>新しい依頼画面に切り替わります。</p>
-            </div>
+          <div v-else class="request-utility-panel">
             <v-btn
               color="primary"
               variant="tonal"
@@ -1775,7 +1745,7 @@ onMounted(() => {
             >
               新しい依頼を作る
             </v-btn>
-          </v-sheet>
+          </div>
 
           <template v-if="!requestFormVisible">
             <v-sheet class="panel overview-panel" rounded border>
@@ -1783,13 +1753,7 @@ onMounted(() => {
                 <div>
                   <p class="eyebrow">全体の流れ</p>
                   <h2>{{ workflowPositionText }}</h2>
-                  <p>全体の流れから、完了済みの段階も見返せます。</p>
-                </div>
-                <div class="overview-actions">
-                  <v-chip size="small" :color="visibleDraftStatus.color" variant="tonal">
-                    {{ visibleDraftStatus.label }}
-                  </v-chip>
-                  <span v-if="store.lastChangedAt">最終更新 {{ formatTime(store.lastChangedAt) }}</span>
+                  <p>工程の順番と現在位置だけを表示します。完了済みの段階も見返せます。</p>
                 </div>
               </div>
 
@@ -1810,40 +1774,15 @@ onMounted(() => {
                   <small>{{ tab.statusLabel }}</small>
                 </button>
               </div>
-
-              <div class="situation-layers">
-                <article class="situation-card is-user">
-                  <span>{{ userInstructionSummary.label }}</span>
-                  <strong>{{ userInstructionSummary.title }}</strong>
-                  <p>{{ userInstructionSummary.detail }}</p>
-                </article>
-                <article class="situation-card is-ai">
-                  <span>{{ aiWorkSummary.label }}</span>
-                  <strong>{{ aiWorkSummary.title }}</strong>
-                  <p>{{ aiWorkSummary.detail }}</p>
-                </article>
-                <article class="situation-card is-video">
-                  <span>{{ videoInfoSummary.label }}</span>
-                  <strong>{{ videoInfoSummary.title }}</strong>
-                  <p>{{ videoInfoSummary.detail }}</p>
-                </article>
-              </div>
             </v-sheet>
 
             <v-sheet class="panel process-panel" rounded border>
 
             <section class="process-content">
               <div class="question-card">
-                <span>主な問い</span>
+                <span>今決めること</span>
                 <strong>{{ activeProcess.question }}</strong>
                 <p>{{ activeProcess.helper }}</p>
-              </div>
-
-              <div v-if="activeImplementationNotes.length > 0" class="implementation-notice">
-                <span>仮実装の範囲</span>
-                <ul>
-                  <li v-for="note in activeImplementationNotes" :key="note">{{ note }}</li>
-                </ul>
               </div>
 
               <div v-if="activeProcessTab === 'request'" class="tab-section">
@@ -1946,22 +1885,6 @@ onMounted(() => {
                   </div>
 
                   <div v-if="activeReview.status === 'review_required'" class="review-decision-area">
-                    <div class="decision-input-panel">
-                      <div>
-                        <span>あなたが書くこと</span>
-                        <strong>判断理由や直したい点</strong>
-                        <p>空欄でも選べます。修正したい場合は、直したい範囲や理由を書いてください。</p>
-                      </div>
-                      <v-textarea
-                        v-model="reviewReasons[activeReview.id]"
-                        label="判断理由や直したい点"
-                        rows="2"
-                        auto-grow
-                        density="compact"
-                        hide-details
-                      />
-                    </div>
-
                     <div class="review-choice-grid">
                       <article
                         v-for="choice in reviewChoiceCards"
@@ -1975,6 +1898,18 @@ onMounted(() => {
                         <div class="choice-after-action">
                           <v-icon size="16">mdi-arrow-right</v-icon>
                           <p>{{ choice.afterAction }}</p>
+                        </div>
+                        <div class="choice-reason-field">
+                          <v-textarea
+                            :model-value="reviewReasons[reviewChoiceReasonKey(activeReview, choice.action)] ?? ''"
+                            :label="reviewChoiceReasonLabel(choice.action)"
+                            :hint="reviewChoiceReasonHint(choice.action)"
+                            persistent-hint
+                            rows="2"
+                            auto-grow
+                            density="compact"
+                            @update:model-value="setReviewChoiceReason(activeReview, choice.action, $event)"
+                          />
                         </div>
                         <v-btn
                           :color="choice.color"
@@ -2104,6 +2039,13 @@ onMounted(() => {
                   </article>
                 </template>
               </div>
+
+              <div v-if="activeImplementationNotes.length > 0" class="implementation-notice">
+                <span>仮実装でまだ置き換わる部分</span>
+                <ul>
+                  <li v-for="note in activeImplementationNotes" :key="note">{{ note }}</li>
+                </ul>
+              </div>
             </section>
           </v-sheet>
           </template>
@@ -2221,10 +2163,6 @@ h2 {
   font-size: 17px;
 }
 
-.message {
-  margin-bottom: 10px;
-}
-
 .workspace-grid {
   align-items: start;
   grid-template-columns: minmax(360px, 1fr) minmax(320px, 380px);
@@ -2239,6 +2177,126 @@ h2 {
 .process-workspace {
   display: grid;
   gap: 10px;
+}
+
+.current-status-panel {
+  align-items: start;
+  background: #ffffff;
+  border: 1px solid #cfd8e2;
+  border-left: 6px solid #475569;
+  border-radius: 8px;
+  display: grid;
+  gap: 12px;
+  grid-template-columns: minmax(0, 1fr) auto;
+  padding: 14px;
+}
+
+.current-status-panel.is-running {
+  border-left-color: #1d5fa8;
+}
+
+.current-status-panel.is-review {
+  border-left-color: #9a3412;
+}
+
+.current-status-panel.is-ready {
+  border-left-color: #1f7a4d;
+}
+
+.current-status-panel.is-error {
+  border-left-color: #b42318;
+}
+
+.current-status-main {
+  align-items: start;
+  display: grid;
+  gap: 10px;
+  grid-template-columns: auto minmax(0, 1fr);
+}
+
+.current-status-icon {
+  align-items: center;
+  background: #eef2f5;
+  border-radius: 50%;
+  color: #34495e;
+  display: grid;
+  height: 42px;
+  justify-items: center;
+  width: 42px;
+}
+
+.current-status-panel.is-running .current-status-icon {
+  background: #e8f2ff;
+  color: #1d5fa8;
+}
+
+.current-status-panel.is-review .current-status-icon {
+  background: #fff4ed;
+  color: #7c2d12;
+}
+
+.current-status-panel.is-ready .current-status-icon {
+  background: #e7f5ed;
+  color: #1f7a4d;
+}
+
+.current-status-panel.is-error .current-status-icon {
+  background: #fff0ef;
+  color: #b42318;
+}
+
+.current-status-main span,
+.instruction-summary span {
+  color: #607080;
+  display: block;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.current-status-main strong {
+  display: block;
+  font-size: 20px;
+  line-height: 1.35;
+}
+
+.current-status-main p {
+  color: #34495e;
+  margin-top: 5px;
+  overflow-wrap: anywhere;
+}
+
+.current-status-meta {
+  align-items: end;
+  display: grid;
+  gap: 6px;
+  justify-items: end;
+}
+
+.current-status-meta span {
+  color: #607080;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.instruction-summary {
+  border-left: 2px solid #cfd8e2;
+  display: grid;
+  gap: 3px;
+  margin-left: 8px;
+  padding-left: 14px;
+}
+
+.instruction-summary p {
+  color: #17212b;
+  font-size: 14px;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+.instruction-summary small {
+  color: #607080;
+  font-size: 12px;
+  overflow-wrap: anywhere;
 }
 
 .overview-panel,
@@ -2259,18 +2317,6 @@ h2 {
 .overview-heading p {
   color: #465666;
   margin-top: 4px;
-}
-
-.overview-actions {
-  display: grid;
-  gap: 6px;
-  justify-items: end;
-}
-
-.overview-actions span {
-  color: #607080;
-  font-size: 12px;
-  font-weight: 700;
 }
 
 .request-start-heading {
@@ -2298,25 +2344,8 @@ h2 {
 }
 
 .request-utility-panel {
-  align-items: center;
-  background: #ffffff;
-  border: 1px solid #dce4ec;
-  display: grid;
-  gap: 10px;
-  grid-template-columns: minmax(0, 1fr) auto;
-  padding: 10px 12px;
-}
-
-.request-utility-panel span {
-  color: #607080;
-  display: block;
-  font-size: 12px;
-  font-weight: 700;
-}
-
-.request-utility-panel p {
-  color: #465666;
-  margin-top: 2px;
+  display: flex;
+  justify-content: flex-start;
 }
 
 .process-flow {
@@ -2408,60 +2437,25 @@ h2 {
   border-bottom: 1px solid #e2e8ef;
 }
 
-.situation-layers {
-  display: grid;
-  gap: 10px;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  margin-top: 12px;
-}
-
-.situation-card {
-  background: #ffffff;
-  border: 1px solid #dce4ec;
-  border-left-width: 4px;
-  border-radius: 8px;
-  display: grid;
-  gap: 5px;
-  padding: 10px 12px;
-}
-
-.situation-card.is-user {
-  border-left-color: #1d5fa8;
-}
-
-.situation-card.is-ai {
-  border-left-color: #2f7ed8;
-}
-
-.situation-card.is-video {
-  border-left-color: #475569;
-}
-
-.situation-card span,
-.implementation-notice span,
-.decision-input-panel span {
+.implementation-notice span {
   color: #475569;
   display: block;
   font-size: 12px;
   font-weight: 800;
 }
 
-.situation-card strong {
-  color: #17212b;
-  display: block;
-  font-size: 15px;
-}
-
-.situation-card p {
-  color: #34495e;
-  margin: 0;
-  overflow-wrap: anywhere;
-}
-
 .process-content {
   display: grid;
   gap: 12px;
   padding-top: 2px;
+}
+
+.tab-section,
+.artifact-panel,
+.implementation-notice {
+  border-left: 2px solid #dce4ec;
+  margin-left: 12px;
+  padding-left: 14px;
 }
 
 .question-card {
@@ -2477,11 +2471,11 @@ h2 {
 .implementation-notice {
   background: #f8fafc;
   border: 1px solid #dce4ec;
-  border-left: 5px solid #475569;
   border-radius: 8px;
   display: grid;
   gap: 8px;
   padding: 12px;
+  padding-left: 14px;
 }
 
 .implementation-notice ul {
@@ -2559,7 +2553,7 @@ h2 {
 .review-choice-grid {
   display: grid;
   gap: 10px;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: 1fr;
 }
 
 .judgement-guide {
@@ -2681,49 +2675,35 @@ h2 {
   padding-top: 12px;
 }
 
-.decision-input-panel {
-  background: #f8fbff;
-  border: 2px solid #9fc5eb;
-  border-radius: 8px;
-  display: grid;
-  gap: 10px;
-  grid-template-columns: minmax(220px, 0.45fr) minmax(0, 1fr);
+.review-choice-card {
+  border: 1px solid #dce4ec;
+  border-left-width: 4px;
+  min-height: 100%;
   padding: 12px;
 }
 
-.decision-input-panel strong {
-  color: #17212b;
-  display: block;
-  font-size: 16px;
-}
-
-.decision-input-panel p {
-  color: #34495e;
-  margin: 4px 0 0;
-}
-
-.review-choice-card {
-  border: 1px solid #dce4ec;
-  border-top-width: 4px;
-  min-height: 100%;
-}
-
 .review-choice-card.is-approve {
-  border-top-color: #1d5fa8;
+  border-left-color: #1d5fa8;
 }
 
 .review-choice-card.is-request_changes {
-  border-top-color: #9a3412;
+  border-left-color: #9a3412;
 }
 
 .review-choice-card.is-reject {
-  border-top-color: #b42318;
+  border-left-color: #b42318;
 }
 
 .review-choice-card .v-btn {
   align-self: end;
   justify-self: start;
   margin-top: 4px;
+}
+
+.choice-reason-field {
+  border-left: 2px solid #dce4ec;
+  margin-left: 6px;
+  padding-left: 12px;
 }
 
 .choice-after-action {
@@ -3210,15 +3190,12 @@ h2 {
   .workspace-grid,
   .form-grid,
   .overview-heading,
-  .request-utility-panel,
-  .situation-layers,
   .summary-grid,
   .decision-grid,
   .edit-plan-review,
   .review-choice-grid,
   .fix-summary-grid,
   .judgement-guide,
-  .decision-input-panel,
   .video-focus,
   .json-reader {
     grid-template-columns: 1fr;
@@ -3226,10 +3203,6 @@ h2 {
 
   .process-flow {
     grid-template-columns: 1fr;
-  }
-
-  .overview-actions {
-    justify-items: start;
   }
 
   .top-actions {

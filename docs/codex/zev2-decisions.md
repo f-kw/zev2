@@ -420,12 +420,12 @@
 
 - Decision ID: ZC-D-038
 - Date: 2026-06-14
-- Status: accepted
-- Decision: UIでは、「あなたの指示」「AIの作業」「動画と成果物」を別レベルの情報として表示する。
+- Status: revised
+- Decision: 当初はUIで「あなたの指示」「AIの作業」「動画と成果物」を別レベルの情報として表示する方針にしたが、ZC-D-042で、AIの処理状態と成果物状態は現在状況1箇所へ統合し、「あなたの指示」は下位情報へ下げる方針に修正した。
 - Reason: 利用者の入力、AIの処理状況、動画そのものの情報が同じ重さで並ぶと、今どこで止まっていて何を操作すべきか分からない。状況把握、判断材料、詳細情報を分ける必要がある。
 - Alternatives considered: 工程カードだけで状況を示す。色付きカードを増やす。補助情報の説明文だけを増やす。
 - Related files: `client/src/App.vue`, `docs/codex/zev2-progress.md`
-- Review condition: 画面を見ても、現在の依頼、AIがしている作業、動画または成果物の状態が区別できない場合。
+- Review condition: 画面を見ても、現在状況と依頼内容の上下関係が分からない場合。
 
 ## Decision ZC-D-039
 
@@ -459,3 +459,36 @@
 - Alternatives considered: 仮実装の説明をdocsだけに置く。成果物JSONを開けば分かる状態にする。仮実装の品質を本物の候補として見せる。
 - Related files: `client/src/App.vue`, `runner/src/index.ts`, `docs/codex/zev2-progress.md`
 - Review condition: UI上で、成果物の品質問題と仮実装の制限が区別できない場合。
+
+## Decision ZC-D-042
+
+- Decision ID: ZC-D-042
+- Date: 2026-06-14
+- Status: accepted
+- Decision: システムからユーザーへの目立つ状態メッセージは、画面上部の現在状況1箇所にまとめる。AIの処理状態と成果物状態は表示上1つに統合し、「あなたの指示」はその下の低いレベルで表示する。
+- Reason: 「あなたの指示」「AIの作業」「動画と成果物」を全体の流れ直下に同じ強さで置くと、工程ナビゲーションの説明なのか、依頼全体の状態なのか、現在の判断対象なのかが混ざる。目立つメッセージが複数あると見落としの原因になるため、処理状態と成果物状態は現在状況として1箇所に集約し、依頼内容は補助的に確認できる位置へ下げる。
+- Alternatives considered: 3つの状態カードを全体の流れ直下に残す。状態ごとに別の通知カードを出す。依頼内容を最上位に固定表示する。完了通知を別アラートで出す。
+- Related files: `client/src/App.vue`, `client/src/stores/controlQueue.ts`, `docs/codex/zev2-progress.md`
+- Review condition: 画面上部に複数の目立つシステムメッセージが表示される場合、または全体の流れに工程ではない情報が混ざる場合。
+
+## Decision ZC-D-043
+
+- Decision ID: ZC-D-043
+- Date: 2026-06-14
+- Status: accepted
+- Decision: 判断理由、修正理由、停止理由などの入力欄は、対応する選択肢カードの中に置く。選択肢は横並びではなく縦に並べる。
+- Reason: 入力欄が選択肢の外にあると、どの操作に対する理由を書く欄なのか分かりにくい。説明文と実行ボタンも分離すると、どの説明を根拠にどのボタンを押すのかが追いづらい。各選択肢の中に理由入力と実行ボタンを入れることで、利用者の判断が1つのまとまりとして読める。
+- Alternatives considered: 共通の理由入力欄を選択肢の上に置く。理由入力を選択後のダイアログに出す。理由入力を任意の補助情報として下部に置く。
+- Related files: `client/src/App.vue`, `docs/codex/zev2-progress.md`
+- Review condition: 利用者が、どの判断に対して理由を書くのか迷う場合。
+
+## Decision ZC-D-044
+
+- Decision ID: ZC-D-044
+- Date: 2026-06-14
+- Status: accepted
+- Decision: 情報階層は全画面で、インデント、余白、見出しサイズ、境界線により表現する。仮実装の範囲は工程の先頭ではなく、下部の補足情報として表示する。工程切り替え時は画面上部へ戻す。
+- Reason: 色付きカードを増やすだけでは、主情報、補足情報、根拠、詳細、入力欄の強さが同じに見える。利用者はまず現在状況と今決めることを見て、その下に判断材料、補助情報、仮実装の制限を読む必要がある。タブ移動後に前のスクロール位置が残ると、現在工程の先頭を見失う。
+- Alternatives considered: 色だけで重要度を分ける。仮実装の説明を工程上部に大きく出す。スクロール位置を維持する。候補確認だけインデントを入れる。
+- Related files: `client/src/App.vue`, `docs/codex/zev2-progress.md`
+- Review condition: 画面全体で、最初に見るべき情報と補足情報が同じ強さに見える場合。

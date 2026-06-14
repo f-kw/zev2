@@ -163,7 +163,7 @@ export const useControlQueueStore = defineStore('controlQueue', {
 
         if (!hasRunnableAgentRequests(this.state)) {
           await keepPhaseVisible(startedAt, 700);
-          this.message = 'AIの仮実装実行が完了しました';
+          this.message = '確認できます';
           this.runPhase = 'completed';
           this.lastChangedAt = new Date().toISOString();
           return;
