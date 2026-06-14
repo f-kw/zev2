@@ -327,3 +327,69 @@
 - Alternatives considered: 「編集案確認」と「動画確認」のままにする。動画生成前承認を承認欄の説明だけで補う。生成済み動画の確認を修正点整理に吸収する。
 - Related files: `client/src/App.vue`, `docs/codex/ui-restructure-spec.md`, `docs/codex/zev2-progress.md`
 - Review condition: ユーザーが画面を見て、動画生成前に承認する内容と、生成後に見る内容を混同する場合。
+
+## Decision ZC-D-030
+
+- Decision ID: ZC-D-030
+- Date: 2026-06-14
+- Status: accepted
+- Decision: 新しい依頼作成は、全体の流れより上に置き、現在の実行レビューとは別の開始操作として扱う。
+- Reason: 新しい依頼作成は現在の工程の一部ではなく、別の実行を始める操作である。依頼プロセス内に置くと、現在の依頼内容確認と新規作成が混ざる。
+- Alternatives considered: 依頼タブ内に新規作成フォームを置く。全体の流れの下に新規作成フォームを置く。実行履歴画面にだけ新規作成を置く。
+- Related files: `client/src/App.vue`, `docs/codex/zev2-progress.md`
+- Review condition: 新しい依頼作成と現在の実行レビューが画面上で混ざって見える場合。
+
+## Decision ZC-D-031
+
+- Decision ID: ZC-D-031
+- Date: 2026-06-14
+- Status: accepted
+- Decision: 段階切り替えは上部の全体の流れへ一本化し、重複するタブ列は表示しない。
+- Reason: 全体の流れボタンとタブ列が同じ操作を持つと、どちらが主導線か分からない。全体の流れが現在位置と移動を担うなら、下には選択中段階の内容だけを表示する。
+- Alternatives considered: 全体の流れを表示専用にしてタブを残す。全体の流れとタブの両方を残す。段階切り替えを別ページ化する。
+- Related files: `client/src/App.vue`, `docs/codex/ui-restructure-spec.md`, `docs/codex/zev2-progress.md`
+- Review condition: ユーザーが段階切り替え操作を二重に感じる場合。
+
+## Decision ZC-D-032
+
+- Decision ID: ZC-D-032
+- Date: 2026-06-14
+- Status: accepted
+- Decision: 確認画面では、AIの提案、人間の判断、判断材料、操作ボタンを分離して表示する。
+- Reason: 「保存済みの判断」「提案」「進める」「修正する」「止める」を同じ粒度で並べると、誰の判断か、何に対する操作か、何を見て判断するかが分からない。AIの提案を人間向けに要約し、その上で人間が判断する構造にする必要がある。
+- Alternatives considered: 判断ログとJSONをそのまま表示する。項目説明だけを足す。操作ボタンの文言だけを変える。
+- Related files: `client/src/App.vue`, `docs/codex/zev2-progress.md`
+- Review condition: 候補確認、動画生成前確認、修正点整理で、人間が何を見て判断するか分からない場合。
+
+## Decision ZC-D-033
+
+- Decision ID: ZC-D-033
+- Date: 2026-06-14
+- Status: accepted
+- Decision: アクティブな依頼を確認している間、新しい依頼作成は主導線ではなく、全体の流れより上の副操作として扱う。
+- Reason: 新しい依頼作成は別実行の開始操作であり、候補確認中の主な判断ではない。大きいカードで「最初に選ぶ操作」と表示すると、現在の候補確認より新規依頼が主操作に見える。
+- Alternatives considered: 新しい依頼作成を大きいカードとして常時表示する。依頼工程内へ戻す。実行履歴画面だけに置く。
+- Related files: `client/src/App.vue`, `docs/codex/zev2-progress.md`
+- Review condition: ユーザーが画面上部を見て、新規依頼作成と現在の候補確認のどちらを行う画面か迷う場合。
+
+## Decision ZC-D-034
+
+- Decision ID: ZC-D-034
+- Date: 2026-06-14
+- Status: accepted
+- Decision: 完了済み工程を見返している画面では、ワークフロー上の現在工程と、表示中の工程を分けて表示する。
+- Reason: 「今の位置」と「確認済み」が同じ工程に出ると、処理がそこで止まっているのか、完了済み工程を見返しているのか分からない。現在工程と表示中工程を分けることで、流れ図を戻って見る意味が明確になる。
+- Alternatives considered: 選択中の工程だけを現在位置として表示する。完了済み工程へ戻れないようにする。状態ラベルだけで補足する。
+- Related files: `client/src/App.vue`, `docs/codex/zev2-progress.md`
+- Review condition: 完了済み工程を見返している時に、ユーザーが現在の処理段階を誤認する場合。
+
+## Decision ZC-D-035
+
+- Decision ID: ZC-D-035
+- Date: 2026-06-14
+- Status: accepted
+- Decision: 承認済みの確認画面では、未判断時の承認・修正・却下ボタンを出さず、次工程を見る操作を主に表示する。
+- Reason: すでに承認済みなのに「この候補で進める」が残ると、再度承認が必要に見える。保存済み判断の画面では、何を承認したかと、次に見る工程を示す方が人間の行動に合う。
+- Alternatives considered: 承認済み後も同じ3ボタンを表示する。判断変更ボタンだけを表示する。承認済み画面では操作を一切出さない。
+- Related files: `client/src/App.vue`, `docs/codex/zev2-progress.md`
+- Review condition: 承認済み状態で、ユーザーが再承認、修正依頼、却下を今すぐ選ぶべき画面だと誤解する場合。
