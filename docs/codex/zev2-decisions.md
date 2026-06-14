@@ -393,3 +393,25 @@
 - Alternatives considered: 承認済み後も同じ3ボタンを表示する。判断変更ボタンだけを表示する。承認済み画面では操作を一切出さない。
 - Related files: `client/src/App.vue`, `docs/codex/zev2-progress.md`
 - Review condition: 承認済み状態で、ユーザーが再承認、修正依頼、却下を今すぐ選ぶべき画面だと誤解する場合。
+
+## Decision ZC-D-036
+
+- Decision ID: ZC-D-036
+- Date: 2026-06-14
+- Status: accepted
+- Decision: 確認待ちまたは入力待ちがある場合、生成動画が存在していても、UIは先の工程へ自動表示しない。
+- Reason: 生成動画が存在することと、利用者が次に判断すべき工程は別である。候補確認や動画生成前確認で入力または判断が必要な場合に生成動画確認へ進むと、実際には確認待ちなのに処理が先へ進んだように見える。
+- Alternatives considered: 生成動画があれば常に生成動画確認を開く。最後に作られた成果物を優先表示する。全工程を同時に表示して利用者に探させる。
+- Related files: `client/src/App.vue`, `docs/codex/zev2-progress.md`
+- Review condition: 依頼実行後、確認入力が必要な工程より先の工程が自動表示される場合。
+
+## Decision ZC-D-037
+
+- Decision ID: ZC-D-037
+- Date: 2026-06-14
+- Status: accepted
+- Decision: UIの主表示には「人間」という文字を出さず、利用者本人の操作とAI側の処理状態として表現する。
+- Reason: 判断するのは利用者だけなので、「人間確認」「人間判断」は開発者目線の対比に見える。AIは自動処理側なので、UIでは「処理中」「提案」「確認待ち」「保存済み」のように、利用者が次に何をするか分かる言葉で表す。
+- Alternatives considered: AIと人間を対比する文言をそのまま出す。説明文で補足する。内部型名に合わせた状態名をUIへ出す。
+- Related files: `client/src/App.vue`, `docs/codex/zev2-progress.md`
+- Review condition: UIの主導線に「人間」という文字が表示される場合。
