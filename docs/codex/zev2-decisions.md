@@ -228,3 +228,102 @@
 - Alternatives considered: ZEVを参照しない。ZEVの実装構造へ寄せる。ZEV互換の分岐をzev2へ入れる。
 - Related files: `/Users/kawafmm/workspace/zev`, `/Users/kawafmm/workspace/zev_backend`, `/Users/kawafmm/workspace/zev_client`, `docs/codex/zev2-progress.md`
 - Review condition: ZEV参照によりzev2の責務分離、pnpm固定、Electron非採用、後方互換禁止に反する設計が入りそうになったとき。
+
+## Decision ZC-D-021
+
+- Decision ID: ZC-D-021
+- Date: 2026-06-14
+- Status: accepted
+- Decision: ユーザーが画面レビューしている間、Codexは実装修正を始めず、見つかった問題点を先に `docs/codex/` へ記録する。
+- Reason: レビュー中に実装を変えると、ユーザーが見ている対象とCodexが直している対象がずれる。問題点を文書化せずに修正へ進むと、何を直すための変更だったか後で追えない。
+- Alternatives considered: レビュー中にCodexが即時修正する。問題点を会話だけで扱う。修正後にまとめて理由を書く。
+- Related files: `docs/codex/zev2-progress.md`, `client/src/App.vue`
+- Review condition: ユーザーが明示的にライブ修正を求めた場合、またはレビューと実装修正を同時に行う運用へ変更する場合。
+
+## Decision ZC-D-022
+
+- Decision ID: ZC-D-022
+- Date: 2026-06-14
+- Status: accepted
+- Decision: 承認ゲートのUIは、判断ログを表示するだけでなく、人間が何を見て承認、修正依頼、却下を選ぶかを表示する。
+- Reason: 現在のUIはAIの判断、理由、根拠、次に起きる処理を表示しているが、ユーザーが「何を見てどう考えて承認したらいいか」を判断できなかった。control plane はログ保存だけでは足りず、人間が止める、通す、戻す判断をできる必要がある。
+- Alternatives considered: 判断ログと成果物リンクだけを表示する。JSONプレビューを主導線にする。承認、修正依頼、却下の使い分けを会話や外部ドキュメントだけで説明する。
+- Related files: `client/src/App.vue`, `docs/codex/zev2-progress.md`, `docs/codex/control-plane-spec.md`
+- Review condition: 承認画面を見たユーザーが、候補生成後と動画生成前のそれぞれで、確認対象、承認条件、修正依頼条件、却下条件、承認後に起きる処理を説明できるようになったとき。
+
+## Decision ZC-D-023
+
+- Decision ID: ZC-D-023
+- Date: 2026-06-14
+- Status: accepted
+- Decision: 承認ゲートの画面は、主な問いを最上位に置き、AIの判断、理由、根拠、成果物、処理状態はその問いを判断するためのサブ情報として表示する。
+- Reason: 現在の表示では、ユーザーが答えるべき問いと、その判断材料が同じレベルに並んでいる。主な問いが先に伝わらないと、承認、修正依頼、却下の判断ができない。
+- Alternatives considered: 現在の表示順のまま情報量を増やす。AIの判断ログを先頭に置く。内部状態名を次の処理としてそのまま表示する。
+- Related files: `client/src/App.vue`, `docs/codex/zev2-progress.md`
+- Review condition: 承認画面の先頭で、候補生成後は「この候補を映像確認へ進めてよいか」、動画生成前は「この編集案で動画生成へ進めてよいか」が主な問いとして読め、理由、根拠、成果物、状態が補助情報として見えるようになったとき。
+
+## Decision ZC-D-024
+
+- Decision ID: ZC-D-024
+- Date: 2026-06-14
+- Status: accepted
+- Decision: 実行結果を確認している間、依頼入力欄を常時表示しない。新規依頼作成は必要時に開く操作として扱う。
+- Reason: 現在の画面では、実行済みの結果や承認判断を見ている場面でも新しい依頼フォームが同じ強さで表示されている。これにより、画面の主導線が「現在の結果を確認する」ではなく「次の依頼を入力する」に見えやすい。
+- Alternatives considered: 依頼入力欄を常時右側に固定する。実行結果確認と新規依頼作成を同じ重みで並べ続ける。依頼入力欄を完全に別画面へ分離する。
+- Related files: `client/src/App.vue`, `docs/codex/zev2-progress.md`
+- Review condition: 実行中、確認待ち、完了後レビューで、現在の結果、主な問い、成果物が主導線になり、新規依頼作成は必要時に開ける状態になったとき。
+
+## Decision ZC-D-025
+
+- Decision ID: ZC-D-025
+- Date: 2026-06-14
+- Status: accepted
+- Decision: UIテキストは、開発者向けの役割名や内部状態ではなく、利用者の行動、判断、結果の意味で書く。
+- Reason: 現在の画面は、AIエージェント、API、工程、成果物、人間確認、内部状態など、実装側の構造をそのまま利用者に見せている。利用者が必要としているのは、今何を確認するのか、何を承認するのか、押すと何が起きるのかである。
+- Alternatives considered: 実装構造をそのままUI文言に出す。開発者向け文言に短い説明を足す。詳細なヘルプ文で補う。
+- Related files: `client/src/App.vue`, `docs/codex/zev2-progress.md`
+- Review condition: 主要UI文言が、利用者の行動、判断、確認対象、承認後に起きることとして読め、内部状態名やAPI名が主導線から外れたとき。
+
+## Decision ZC-D-026
+
+- Decision ID: ZC-D-026
+- Date: 2026-06-14
+- Status: accepted
+- Decision: JSON表示は補助情報として扱い、展開後に閉じられるようにし、主要項目の意味を同時に参照できるようにする。
+- Reason: 現在はJSONを展開すると閉じる操作がなく、項目名の意味も分からない。JSONを見せるだけでは利用者の判断材料にならないため、成果物の種類ごとに項目の意味を併記する必要がある。
+- Alternatives considered: JSON本文だけを表示する。JSON表示を廃止する。項目説明を別ドキュメントに置く。
+- Related files: `client/src/App.vue`, `docs/codex/zev2-progress.md`
+- Review condition: JSONを開いた状態で閉じられ、候補JSON、編集案JSON、微調整JSON、動画生成計画JSONの主要項目の意味がUI上で同時に読めるようになったとき。
+
+## Decision ZC-D-027
+
+- Decision ID: ZC-D-027
+- Date: 2026-06-14
+- Status: accepted
+- Decision: UIは、上部に処理の流れ図を置き、その下でプロセスごとのタブまたは同等の切り替えにより、各段階で必要な情報だけを表示する方向で見直す。
+- Reason: 現在の画面は1画面に情報を出しすぎており、ユーザーが全体の流れと現在評価すべき対象を把握しづらい。処理の流れ図は有用だが、現在は画面の主導線になっていない。流れ図を上部に置き、下部をプロセス別に切り替えることで、全体像と各段階の評価対象を分けて扱える。
+- Alternatives considered: 1画面に全情報を並べ続ける。承認欄だけを強調する。流れ図を削除する。依頼、承認、成果物を別ページへ完全分離する。
+- Related files: `client/src/App.vue`, `docs/codex/zev2-progress.md`
+- Review condition: ユーザーが画面上部で全体の現在位置を把握し、下部で依頼、候補確認、動画生成前確認、生成動画確認、修正点整理などの段階を切り替えて確認できるようになったとき。
+
+## Decision ZC-D-028
+
+- Decision ID: ZC-D-028
+- Date: 2026-06-14
+- Status: accepted
+- Decision: ChatGPTはUI設計文書作成までを推奨したが、ユーザーが実装完了を明示したため、`docs/codex/ui-restructure-spec.md` を追加した上で `client/src/App.vue` の初期UI再構成まで実装する。
+- Reason: ChatGPTの応答は正典ではなく、今回のユーザー指示は「作業を終わるまで実行」である。設計なしに実装すると表示構成が崩れやすいという指摘は有用なため、仕様書を作成してから、範囲をUI再構成に限定して実装する。
+- Alternatives considered: ChatGPTの推奨通り設計文書だけで止める。UI仕様を残さずにApp.vueだけを直接修正する。実STTや動画品質改善まで同時に進める。
+- Related files: `docs/codex/ui-restructure-spec.md`, `client/src/App.vue`, `docs/codex/zev2-progress.md`
+- Review condition: ユーザーがUI再構成を見て、タブ案ではなく別の画面構成へ戻す判断をしたとき。
+
+## Decision ZC-D-029
+
+- Decision ID: ZC-D-029
+- Date: 2026-06-14
+- Status: accepted
+- Decision: 画面上の段階名では、動画生成前の承認を「動画生成前確認」、生成された動画の確認を「生成動画確認」と分ける。
+- Reason: 「動画確認」だけでは、動画を作る前に編集案を承認する場面と、作られた確認用動画を見る場面が混ざって見える。今回のUI再構成の目的は、ユーザーが今どの段階で何を評価するか分かる状態にすることなので、段階名で判断対象を分ける必要がある。
+- Alternatives considered: 「編集案確認」と「動画確認」のままにする。動画生成前承認を承認欄の説明だけで補う。生成済み動画の確認を修正点整理に吸収する。
+- Related files: `client/src/App.vue`, `docs/codex/ui-restructure-spec.md`, `docs/codex/zev2-progress.md`
+- Review condition: ユーザーが画面を見て、動画生成前に承認する内容と、生成後に見る内容を混同する場合。
