@@ -57,6 +57,9 @@ interface CandidateReviewSummary {
   transcriptText: string;
   reason: string;
   visualCheck: string;
+  contentSummary: string;
+  reviewFocus: string;
+  limitationLabel: string;
   riskLabel: string;
   nextActionLabel: string;
   evidenceLabel: string;
@@ -65,6 +68,9 @@ interface CandidateReviewSummary {
 
 interface EditPlanSummary {
   selectedCandidateId: string;
+  selectedCandidateTitle: string;
+  selectedCandidateReason: string;
+  selectedCandidateRange: string;
   title: string;
   rangeLabel: string;
   hookText: string;
@@ -78,6 +84,7 @@ interface ReviewChoice {
   label: string;
   title: string;
   body: string;
+  afterAction: string;
   color: string;
   icon: string;
 }
@@ -127,11 +134,19 @@ const controlReviewStatusLabel = {
 } satisfies Record<ControlReviewStatus, string>;
 
 const controlReviewStatusColor = {
-  review_required: 'warning',
+  review_required: 'deep-orange-darken-4',
   approved: 'success',
   rejected: 'error',
-  changes_requested: 'warning'
+  changes_requested: 'deep-orange-darken-4'
 } satisfies Record<ControlReviewStatus, string>;
+
+const processOrder = {
+  request: 0,
+  candidates: 1,
+  edit: 2,
+  video: 3,
+  notes: 3
+} satisfies Record<ProcessTabKey, number>;
 
 const processOperationTypes: Record<ProcessTabKey, AgentRequestType[]> = {
   request: ['prepare_video'],
@@ -153,12 +168,12 @@ const operationUserLabel = {
 
 const operationUserMeaning = {
   prepare_video: 'この実行で使う動画を確認するための情報です',
-  run_stt: '動画内で話している内容を、候補探しに使える形にしたものです',
-  find_candidates: 'ショートに使えそうな区間と、選んだ理由です',
-  gemini_candidate_review: '候補区間を映像面から見るための確認メモです',
-  create_edit_plan: 'どの区間を使い、どんな流れで動画にするかの案です',
-  apply_adjustment: '動画を作る前に確定した変更点と確認結果です',
-  render_video: '確認用に生成された動画です'
+  run_stt: '現時点では実STTではなく、検証用の仮書き起こしです',
+  find_candidates: '仮書き起こしから作った候補区間と、選んだ理由です',
+  gemini_candidate_review: '現時点では実Gemini確認ではなく、検証用の映像確認メモです',
+  create_edit_plan: 'どの区間を使い、どんな流れで動画にするかの仮編集案です',
+  apply_adjustment: '動画を作る前に確定した仮の変更点と確認結果です',
+  render_video: '確認用に生成された仮動画です'
 } satisfies Record<AgentRequestType, string>;
 
 const pendingDrafts = computed(() =>
@@ -220,7 +235,7 @@ const currentOperation = computed<AgentRequest | undefined>(
 );
 const operationCardTitle = computed(() => {
   if (!currentOperation.value) {
-    return 'API対象';
+    return '次に動く処理';
   }
 
   if (currentOperation.value.status === 'failed') {
@@ -231,7 +246,7 @@ const operationCardTitle = computed(() => {
     return '実行中の工程';
   }
 
-  return '次のAPI対象';
+  return '次に動く処理';
 });
 const activeDraft = computed(() => latestDraft.value);
 const creatingNewRun = computed(() => store.runPhase === 'saving' && !store.activeDraftId);
@@ -261,7 +276,7 @@ const visibleDraftStatus = computed(() => {
   }
 
   if (store.runPhase === 'review_required' || pendingControlReviews.value.length > 0) {
-    return { label: '人間確認待ち', color: 'warning' };
+    return { label: '確認待ち', color: 'deep-orange-darken-4' };
   }
 
   if (store.runPhase === 'completed') {
@@ -281,7 +296,7 @@ const visibleDraftStatus = computed(() => {
   }
 
   if (pendingControlReviews.value.length > 0) {
-    return { label: '判断待ち', color: 'warning' };
+    return { label: '判断待ち', color: 'deep-orange-darken-4' };
   }
 
   if (runningOperations.value.length > 0 || waitingOperations.value.length > 0) {
@@ -294,7 +309,7 @@ const visibleDraftStatus = computed(() => {
 
   return {
     label: draftStatusLabel[activeDraft.value.status],
-    color: activeDraft.value.status === 'draft' ? 'warning' : 'success'
+    color: activeDraft.value.status === 'draft' ? 'deep-orange-darken-4' : 'success'
   };
 });
 const runHistory = computed(() =>
@@ -310,20 +325,20 @@ const runHistory = computed(() =>
     const operationUpdatedTimes = operations.map((request) => request.updatedAt).sort();
     const updatedAt = operationUpdatedTimes[operationUpdatedTimes.length - 1] ?? draft.updatedAt;
     let statusLabel = '承認待ち';
-    let color = 'warning';
-    let summary = 'まだAIエージェントへ渡していません';
+    let color = 'deep-orange-darken-4';
+    let summary = 'まだAIに渡していません';
 
     if (failed > 0) {
       statusLabel = '失敗';
       color = 'error';
       summary = `${failed}件の工程で確認が必要です`;
     } else if (pendingReviews > 0) {
-      statusLabel = '人間確認待ち';
-      color = 'warning';
+      statusLabel = '確認待ち';
+      color = 'deep-orange-darken-4';
       summary = `${pendingReviews}件の判断が承認待ちです`;
     } else if (stoppedReviews > 0) {
-      statusLabel = '人間判断済み';
-      color = 'warning';
+      statusLabel = '確認済み';
+      color = 'deep-orange-darken-4';
       summary = '却下または修正依頼で後続工程を止めています';
     } else if (active > 0) {
       statusLabel = '実行中';
@@ -360,7 +375,7 @@ const stage = computed(() => {
   }
 
   if (store.runPhase === 'review_required' || pendingControlReviews.value.length > 0) {
-    return { text: '人間確認待ち', color: 'warning' };
+    return { text: '確認待ち', color: 'deep-orange-darken-4' };
   }
 
   if (store.runPhase === 'completed' && selectedOperations.value.length > 0) {
@@ -376,11 +391,11 @@ const stage = computed(() => {
   }
 
   if (runningOperations.value.length > 0) {
-    return { text: 'API実行中', color: 'primary' };
+    return { text: '処理中', color: 'primary' };
   }
 
   if (waitingOperations.value.length > 0) {
-    return { text: 'API取得待ち', color: 'info' };
+    return { text: '開始待ち', color: 'info' };
   }
 
   if (selectedOperations.value.length > 0) {
@@ -388,11 +403,11 @@ const stage = computed(() => {
   }
 
   if (activeDraft.value?.status === 'approved') {
-    return { text: 'API準備中', color: 'info' };
+    return { text: '準備中', color: 'info' };
   }
 
   if (pendingDrafts.value.length > 0) {
-    return { text: '承認待ち', color: 'warning' };
+    return { text: '承認待ち', color: 'deep-orange-darken-4' };
   }
 
   return { text: '新規依頼', color: 'blue-grey' };
@@ -421,93 +436,93 @@ const operationProgressPercent = computed(() => {
 const executionSummary = computed(() => {
   if (store.runPhase === 'saving') {
     return {
-      title: 'AIエージェント: まだ開始前',
+      title: 'AIの作業: まだ開始前',
       detail: '依頼を保存しています'
     };
   }
 
   if (store.runPhase === 'handing_off') {
     return {
-      title: 'AIエージェント: 受け取り中',
-      detail: '承認済み依頼から作業キューを作っています'
+      title: 'AIの作業: 受け取り中',
+      detail: '承認済み依頼から作業順を作っています'
     };
   }
 
   if (store.runPhase === 'running') {
     return {
-      title: 'AIエージェント: 実行中',
+      title: 'AIの作業: 実行中',
       detail: currentOperation.value ? `${currentOperation.value.label} を処理しています` : '作業キューを確認しています'
     };
   }
 
   if (store.runPhase === 'review_required' || pendingControlReviews.value.length > 0) {
     return {
-      title: 'AIエージェント: 人間確認待ち',
-      detail: currentControlReview.value?.summary ?? 'AI判断の確認が必要です'
+      title: 'AIの作業: 確認待ち',
+      detail: currentControlReview.value?.summary ?? 'あなたの判断が必要です'
     };
   }
 
   if (store.runPhase === 'completed' && selectedOperations.value.length > 0) {
     return {
-      title: 'AIエージェント: 待機中',
-      detail: '仮実装は動画生成まで到達しました。成果物から生成動画を確認できます'
+      title: 'AIの作業: 待機中',
+      detail: '仮実装は動画生成まで到達しました。生成後レビューで結果を確認できます'
     };
   }
 
   if (store.runPhase === 'error') {
     return {
-      title: 'AIエージェント: 停止',
-      detail: store.errorMessage || '依頼をAIエージェントへ渡せませんでした'
+      title: 'AIの作業: 停止',
+      detail: store.errorMessage || '依頼をAIへ渡せませんでした'
     };
   }
 
   if (!activeDraft.value) {
     return {
-      title: 'AIエージェント: 未開始',
+      title: 'AIの作業: 未開始',
       detail: '依頼はまだ渡されていません'
     };
   }
 
   if (activeDraft.value.status === 'draft') {
     return {
-      title: 'AIエージェント: 未開始',
-      detail: '承認後に作業キューを作ります'
+      title: 'AIの作業: 未開始',
+      detail: '承認後に作業順を作ります'
     };
   }
 
   if (failedOperations.value.length > 0) {
     return {
-      title: 'AIエージェント: 停止',
+      title: 'AIの作業: 停止',
       detail: `${failedOperations.value[0].label} で止まっています`
     };
   }
 
   if (runningOperations.value.length > 0) {
     return {
-      title: 'AIエージェント: 実行中',
+      title: 'AIの作業: 実行中',
       detail: `${runningOperations.value[0].label} を実行中です`
     };
   }
 
   if (waitingOperations.value.length > 0) {
     return {
-      title: 'AIエージェント: 待機中',
+      title: 'AIの作業: 待機中',
       detail: pendingControlReviews.value.length > 0
-        ? '人間確認が終わるまで次の工程を開始しません'
+        ? '確認が終わるまで次の工程を開始しません'
         : `${waitingOperations.value[0].label} の開始待ちです`
     };
   }
 
   if (selectedOperations.value.length > 0) {
     return {
-      title: 'AIエージェント: 待機中',
-      detail: '仮実装は動画生成まで到達しました。成果物から生成動画を確認できます'
+      title: 'AIの作業: 待機中',
+      detail: '仮実装は動画生成まで到達しました。生成後レビューで結果を確認できます'
     };
   }
 
   return {
-    title: 'AIエージェント: 準備中',
-    detail: '作業キューの作成待ちです'
+    title: 'AIの作業: 準備中',
+    detail: '作業順の作成待ちです'
   };
 });
 
@@ -515,14 +530,14 @@ const actionSummary = computed(() => {
   if (!activeDraft.value) {
     return {
       title: '次の操作',
-      detail: '依頼内容と対象動画を入力して、AIエージェントへ渡します'
+      detail: '依頼内容と対象動画を入力して、AIへ渡します'
     };
   }
 
   if (activeDraft.value.status === 'draft') {
     return {
       title: '次の操作',
-      detail: '内容を確認して「依頼をAIに渡す」を押します'
+      detail: '内容を確認して作成を始めます'
     };
   }
 
@@ -563,7 +578,7 @@ const actionSummary = computed(() => {
 
   return {
     title: '次の操作',
-    detail: 'AIエージェント用の作業作成を待っています'
+    detail: 'AIが進める作業の作成を待っています'
   };
 });
 
@@ -576,7 +591,7 @@ const stepRows = computed(() =>
       status: operation?.status,
       statusLabel: operation ? operationStatusLabel[operation.status] : '未投入',
       color: operation ? operationStatusColor[operation.status] : 'blue-grey',
-      meaning: operation?.result?.meaning ?? '承認後にAIエージェントがAPIで処理します'
+      meaning: operation?.result?.meaning ?? '承認後にAIが処理します'
     };
   })
 );
@@ -645,7 +660,7 @@ const recommendedProcessTab = computed<ProcessTabKey>(() => {
   }
 
   if (failedOperations.value.length > 0) {
-    return 'notes';
+    return 'video';
   }
 
   const pendingCandidateReview = candidateControlReview.value?.status === 'review_required';
@@ -672,11 +687,35 @@ const recommendedProcessTab = computed<ProcessTabKey>(() => {
 
   return 'request';
 });
+const requiredReviewProcessTab = computed<ProcessTabKey | undefined>(() => {
+  if (candidateControlReview.value?.status === 'review_required') {
+    return 'candidates';
+  }
+
+  if (renderControlReview.value?.status === 'review_required') {
+    return 'edit';
+  }
+
+  return undefined;
+});
 const activeProcessTab = computed<ProcessTabKey>({
   get() {
-    return selectedProcessTab.value || recommendedProcessTab.value;
+    const requiredTab = requiredReviewProcessTab.value;
+    const selectedTab = selectedProcessTab.value;
+
+    if (requiredTab && selectedTab && processOrder[selectedTab] > processOrder[requiredTab]) {
+      return requiredTab;
+    }
+
+    return selectedTab || recommendedProcessTab.value;
   },
   set(value) {
+    const requiredTab = requiredReviewProcessTab.value;
+    if (requiredTab && processOrder[value] > processOrder[requiredTab]) {
+      selectedProcessTab.value = requiredTab;
+      return;
+    }
+
     selectedProcessTab.value = value;
   }
 });
@@ -696,7 +735,7 @@ const processTabs = computed<ProcessTab[]>(() => [
     key: 'candidates',
     label: '候補確認',
     question: 'この候補を動画生成前確認へ進めてよいですか',
-    helper: '候補区間、選んだ理由、話した内容を見て、動画にする前の確認へ進める価値があるかを見ます。',
+    helper: 'あなたは候補区間、選んだ理由、話した内容を確認し、次の確認へ進めるかを選びます。',
     status: processStatusFor('candidates', candidateControlReview.value),
     statusLabel:
       processStatusFor('candidates', candidateControlReview.value) === 'done'
@@ -708,7 +747,7 @@ const processTabs = computed<ProcessTab[]>(() => [
     key: 'edit',
     label: '動画生成前確認',
     question: 'この編集案で確認用動画を作ってよいですか',
-    helper: '使う区間、冒頭の見せ方、テロップ案を見て、動画を作る前に止めるべき点がないかを見ます。',
+    helper: 'あなたは使う区間、冒頭の見せ方、テロップ案を確認し、動画を作る前に止める点があるかを選びます。',
     status: processStatusFor('edit', renderControlReview.value),
     statusLabel:
       processStatusFor('edit', renderControlReview.value) === 'done'
@@ -718,21 +757,12 @@ const processTabs = computed<ProcessTab[]>(() => [
   },
   {
     key: 'video',
-    label: '生成動画確認',
+    label: '生成後レビュー',
     question: '生成された確認用動画を見て、次に直す点は何ですか',
-    helper: '確認用動画を見て、候補、編集案、テロップ、切り出し範囲のどこを直すかを話せる状態にします。',
+    helper: 'あなたは確認用動画と修正候補を同じ画面で見て、候補、編集案、テロップ、切り出し範囲のどこを直すかを決めます。',
     status: hasOutputVideo.value ? 'ready' : runningOperations.value.some((request) => request.type === 'render_video') ? 'running' : 'pending',
     statusLabel: hasOutputVideo.value ? '生成結果を確認できます' : '未生成',
     icon: 'mdi-play-box-outline'
-  },
-  {
-    key: 'notes',
-    label: '修正点整理',
-    question: '次に直すべき点は何ですか',
-    helper: '承認、修正依頼、却下、失敗を見返して、次の実装または再実行で直す論点を整理します。',
-    status: activeDraft.value ? 'ready' : 'pending',
-    statusLabel: activeDraft.value ? '修正点を整理できます' : '未作成',
-    icon: 'mdi-format-list-checks'
   }
 ]);
 const activeProcess = computed(() =>
@@ -747,6 +777,49 @@ const workflowPositionText = computed(() => {
   }
 
   return `現在の工程: ${currentWorkflowProcess.value.label} / 表示中: ${activeProcess.value.label}`;
+});
+const userInstructionSummary = computed(() => ({
+  label: 'あなたの指示',
+  title: visiblePurpose.value || '依頼内容はまだありません',
+  detail: activeDraft.value
+    ? `${visibleSourceStatus.value}。指定は ${activeDraft.value.settings.durationLabel} / ${activeDraft.value.settings.candidateCountLabel} です。`
+    : `${visibleSourceStatus.value}。作りたい内容と対象動画を入力してください。`
+}));
+const aiWorkSummary = computed(() => ({
+  label: 'AIの作業',
+  title: executionSummary.value.title.replace('AIの作業: ', ''),
+  detail: executionSummary.value.detail
+}));
+const videoInfoSummary = computed(() => {
+  if (outputVideoArtifact.value) {
+    return {
+      label: '動画と成果物',
+      title: '確認用動画があります',
+      detail: '生成後レビューで動画を見て、次に直す点を候補、編集案、動画の見やすさに分けて確認します。'
+    };
+  }
+
+  if (renderControlReview.value?.status === 'review_required') {
+    return {
+      label: '動画と成果物',
+      title: '動画作成前で止まっています',
+      detail: '編集案を承認するまで、確認用動画は作られません。'
+    };
+  }
+
+  if (runningOperations.value.some((request) => request.type === 'render_video')) {
+    return {
+      label: '動画と成果物',
+      title: '確認用動画を作成中です',
+      detail: '作成が終わると、生成後レビューで動画と修正点を確認できます。'
+    };
+  }
+
+  return {
+    label: '動画と成果物',
+    title: '確認用動画はまだありません',
+    detail: '候補確認と動画生成前確認を通過すると、確認用動画が作られます。'
+  };
 });
 const activeReview = computed(() => {
   if (activeProcessTab.value === 'candidates') {
@@ -773,11 +846,37 @@ const activeArtifacts = computed(() => {
   }
 
   if (activeProcessTab.value === 'video') {
-    return [];
+    return videoArtifacts.value;
   }
 
   return selectedArtifacts.value;
 });
+const activeImplementationNotes = computed(() => {
+  const notes = {
+    request: ['対象動画の登録は検証用です。動画解析そのものはまだ行っていません。'],
+    candidates: [
+      'STTは実接続ではありません。仮の書き起こしから候補を作っています。',
+      'Geminiの映像確認は実接続ではありません。仮の確認メモを表示しています。',
+      'この段階では候補の品質ではなく、確認の流れと判断材料の出し方を見てください。'
+    ],
+    edit: [
+      '編集案は仮データから作られています。候補の内容が薄い場合、編集案も判断材料としては不足します。',
+      'テロップ案と変更点は検証用です。実STTと実映像確認の接続後に品質評価します。'
+    ],
+    video: [
+      '確認用動画は仮生成です。映像品質ではなく、生成後に何を見て直すかが分かるかを確認してください。',
+      '修正点整理はこの生成後レビュー内で扱います。別工程として探す必要はありません。'
+    ],
+    notes: ['修正点整理は生成後レビューに統合しました。']
+  } satisfies Record<ProcessTabKey, string[]>;
+
+  return notes[activeProcessTab.value];
+});
+
+function isProcessLockedByReview(key: ProcessTabKey): boolean {
+  const requiredTab = requiredReviewProcessTab.value;
+  return Boolean(requiredTab && processOrder[key] > processOrder[requiredTab]);
+}
 const candidateArtifactJson = computed(() => artifactJsonFor('find_candidates'));
 const candidateReviewArtifactJson = computed(() => artifactJsonFor('gemini_candidate_review'));
 const editPlanArtifactJson = computed(() => artifactJsonFor('create_edit_plan'));
@@ -789,21 +888,28 @@ const candidateSummaries = computed<CandidateReviewSummary[]>(() => {
   return candidates.map((candidate, index) => {
     const candidateRecord = recordValue(candidate);
     const id = stringField(candidateRecord, 'id') || `candidate_${index + 1}`;
+    const rawTitle = stringField(candidateRecord, 'title') || `候補 ${index + 1}`;
+    const hookText = stringField(candidateRecord, 'hookText') || '';
+    const transcriptText = stringField(candidateRecord, 'transcriptText') || '';
     const review = reviewedCandidates
       .map((item) => recordValue(item))
       .find((item) => stringField(item, 'candidateId') === id);
     const evidenceRefs = arrayField(candidateRecord, 'evidenceRefs');
+    const placeholder = isPlaceholderCandidateText(rawTitle, hookText, transcriptText);
 
     return {
       id,
-      title: stringField(candidateRecord, 'title') || `候補 ${index + 1}`,
+      title: cleanCandidateTitle(rawTitle, index),
       rangeLabel: formatRange(numberField(candidateRecord, 'sourceStartMs'), numberField(candidateRecord, 'sourceEndMs')),
-      hookText: stringField(candidateRecord, 'hookText') || '冒頭で見せる言葉は未取得です',
-      transcriptText: stringField(candidateRecord, 'transcriptText') || '候補区間の発話は未取得です',
-      reason: candidateReasonForDisplay(candidateRecord),
+      hookText: hookText || '冒頭で見せる言葉は未取得です',
+      transcriptText: transcriptText || '候補区間の発話は未取得です',
+      reason: candidateReasonForDisplay(candidateRecord, placeholder),
       visualCheck: review
         ? visualCheckForDisplay(stringField(review, 'visualCheck'))
         : '映像確認メモはまだありません',
+      contentSummary: candidateContentSummary(placeholder, transcriptText),
+      reviewFocus: candidateReviewFocus(placeholder),
+      limitationLabel: placeholder ? '仮STTのため内容判断は保留' : '内容を確認できます',
       riskLabel: riskLabel(stringField(review, 'risk')),
       nextActionLabel: nextActionLabel(stringField(review, 'nextAction')),
       evidenceLabel: evidenceRefs.length > 0 ? `${evidenceRefs.length}件の発話根拠` : '根拠参照は未取得です',
@@ -817,6 +923,9 @@ const editPlanSummary = computed<EditPlanSummary | undefined>(() => {
   if (!editPlan) {
     return undefined;
   }
+
+  const selectedCandidateId = stringField(editPlan, 'selectedCandidateId') || '採用候補は未取得です';
+  const selectedCandidate = candidateSummaries.value.find((candidate) => candidate.id === selectedCandidateId);
 
   const telopTexts = arrayField(editPlan, 'telopPlan')
     .map((item) => stringField(recordValue(item), 'text'))
@@ -832,8 +941,11 @@ const editPlanSummary = computed<EditPlanSummary | undefined>(() => {
   const renderReady = booleanField(patchArtifactJson.value, 'renderReady');
 
   return {
-    selectedCandidateId: stringField(editPlan, 'selectedCandidateId') || '採用候補は未取得です',
-    title: stringField(editPlan, 'title') || '編集案タイトルは未取得です',
+    selectedCandidateId,
+    selectedCandidateTitle: selectedCandidate?.title ?? cleanCandidateTitle(selectedCandidateId, 0),
+    selectedCandidateReason: selectedCandidate?.reason ?? '採用理由はまだ読み込めません。',
+    selectedCandidateRange: selectedCandidate?.rangeLabel ?? '候補の時間範囲は未取得です',
+    title: cleanCandidateTitle(stringField(editPlan, 'title') || '編集案タイトルは未取得です', 0),
     rangeLabel: formatRange(numberField(editPlan, 'sourceStartMs'), numberField(editPlan, 'sourceEndMs')),
     hookText: stringField(editPlan, 'hookText') || '冒頭で見せる言葉は未取得です',
     telopTexts,
@@ -854,6 +966,7 @@ const reviewChoiceCards = computed<ReviewChoice[]>(() => {
         label: 'この候補で進める',
         title: '動画生成前確認へ進める',
         body: '候補区間、選んだ理由、映像で確認することを見て、動画にする前の確認へ進める価値があると判断する場合。',
+        afterAction: '選ぶと、AIがこの候補を使って編集案と動画生成前の確認材料を作ります。',
         color: 'primary',
         icon: 'mdi-check'
       },
@@ -862,7 +975,8 @@ const reviewChoiceCards = computed<ReviewChoice[]>(() => {
         label: '候補を直したい',
         title: '候補を作り直す',
         body: '候補区間、冒頭の見せ方、根拠になった発話に直したい点がある場合。',
-        color: 'warning',
+        afterAction: '選ぶと、AIは後続工程へ進まず、直したい点を保存します。',
+        color: 'deep-orange-darken-4',
         icon: 'mdi-pencil'
       },
       {
@@ -870,6 +984,7 @@ const reviewChoiceCards = computed<ReviewChoice[]>(() => {
         label: 'この候補は使わない',
         title: 'この実行を止める',
         body: '対象動画や候補の方向性が違い、このまま進めても確認材料にならない場合。',
+        afterAction: '選ぶと、この依頼はここで止まり、後続の編集案や動画作成へ進みません。',
         color: 'error',
         icon: 'mdi-close'
       }
@@ -882,6 +997,7 @@ const reviewChoiceCards = computed<ReviewChoice[]>(() => {
       label: 'この編集案で作る',
       title: '確認用動画を作る',
       body: '採用候補、使う区間、テロップ案を見て、動画にして確認する価値がある場合。',
+      afterAction: '選ぶと、AIがこの編集案を使って確認用動画を作ります。',
       color: 'primary',
       icon: 'mdi-check'
     },
@@ -890,7 +1006,8 @@ const reviewChoiceCards = computed<ReviewChoice[]>(() => {
       label: '編集案を直したい',
       title: '動画生成前に戻す',
       body: '使う区間、テロップ、構成、変更内容を動画生成前に直したい場合。',
-      color: 'warning',
+      afterAction: '選ぶと、AIは動画を作らず、直したい点を保存します。',
+      color: 'deep-orange-darken-4',
       icon: 'mdi-pencil'
     },
     {
@@ -898,6 +1015,7 @@ const reviewChoiceCards = computed<ReviewChoice[]>(() => {
       label: '動画作成は止める',
       title: 'この実行を止める',
       body: 'この編集案では確認用動画を作っても判断材料にならない場合。',
+      afterAction: '選ぶと、この依頼はここで止まり、確認用動画は作られません。',
       color: 'error',
       icon: 'mdi-close'
     }
@@ -924,7 +1042,7 @@ const fixSummaryCards = computed<FixSummaryCard[]>(() => [
     title: outputVideoArtifact.value ? '確認用動画があります' : '確認用動画はまだありません',
     body: outputVideoArtifact.value
       ? '動画を見て、候補選び、切り出し、テロップ、見やすさのどこを直すか決めます。'
-      : '動画生成前確認で承認すると、生成動画確認で見られるようになります。'
+      : '動画生成前確認で承認すると、生成後レビューで見られるようになります。'
   },
   {
     label: '画面',
@@ -984,6 +1102,43 @@ function booleanField(record: Record<string, unknown> | undefined, key: string):
   return typeof value === 'boolean' ? value : undefined;
 }
 
+function cleanCandidateTitle(value: string, index: number): string {
+  const trimmed = value.trim();
+  const withoutId = trimmed.replace(/^candidate[_-]?\d+$/i, '').trim();
+  const withoutPrefix = withoutId.replace(/^候補\s*\d+\s*[:：]\s*/, '').trim();
+
+  if (withoutPrefix) {
+    return withoutPrefix;
+  }
+
+  return `候補 ${index + 1}`;
+}
+
+function isPlaceholderCandidateText(title: string, hookText: string, transcriptText: string): boolean {
+  const joined = [title, hookText, transcriptText].join(' ');
+  return (
+    joined.includes('配信素材の状況を確認します') ||
+    joined.includes('仮書き起こし') ||
+    joined.trim().length < 18
+  );
+}
+
+function candidateContentSummary(isPlaceholder: boolean, transcriptText: string): string {
+  if (isPlaceholder) {
+    return '仮の書き起こしが短すぎるため、この候補だけでは動画内容の良し悪しを判断できません。';
+  }
+
+  return transcriptText;
+}
+
+function candidateReviewFocus(isPlaceholder: boolean): string {
+  if (isPlaceholder) {
+    return '今回は候補の品質ではなく、確認画面で「採用、修正、使わない」を選べるかを見てください。';
+  }
+
+  return 'この区間だけで意味が伝わるか、冒頭が分かりやすいか、前後の切れ目が不自然でないかを確認してください。';
+}
+
 function candidateRoleLabel(index: number): string {
   if (index === 0 && activeHumanAction.value?.action === 'approve') {
     return 'AI推奨 / 前回承認済み';
@@ -996,11 +1151,15 @@ function candidateRoleLabel(index: number): string {
   return '比較候補';
 }
 
-function candidateReasonForDisplay(candidate: Record<string, unknown>): string {
+function candidateReasonForDisplay(candidate: Record<string, unknown>, isPlaceholder: boolean): string {
   const rawReason = stringField(candidate, 'reason');
   const title = stringField(candidate, 'title');
   const hookText = stringField(candidate, 'hookText');
   const topic = title || hookText;
+
+  if (isPlaceholder) {
+    return '実STT未接続の仮データから作った候補です。内容評価ではなく、確認の流れを検証する候補として扱います。';
+  }
 
   const isTechnicalReason =
     rawReason.includes('STT') ||
@@ -1019,7 +1178,7 @@ function candidateReasonForDisplay(candidate: Record<string, unknown>): string {
     return `${topic} という内容がまとまっており、候補として比較しやすいため。`;
   }
 
-  return 'この区間だけで意味が伝わるかを人間が確認しやすい候補として残しています。';
+  return 'この区間だけで意味が伝わるかを確認しやすい候補として残しています。';
 }
 
 function visualCheckForDisplay(rawValue: string): string {
@@ -1048,7 +1207,7 @@ function riskLabel(value: string): string {
   }
 
   if (value === 'medium') {
-    return '映像面は人間確認が必要';
+    return '映像面は追加確認が必要';
   }
 
   if (value === 'high') {
@@ -1064,7 +1223,7 @@ function nextActionLabel(value: string): string {
   }
 
   if (value === 'needs_manual_check') {
-    return '人間が追加確認する候補';
+    return '追加確認が必要な候補';
   }
 
   return '次の扱いは未確定';
@@ -1130,7 +1289,7 @@ function processStatusColor(status: ProcessStatus): string {
   }
 
   if (status === 'review') {
-    return 'warning';
+    return 'deep-orange-darken-4';
   }
 
   if (status === 'running') {
@@ -1182,7 +1341,7 @@ function actionForReview(review: ControlReviewItem | undefined) {
 
 function humanActionMeaning(action: ReturnType<typeof actionForReview>): string {
   if (!action) {
-    return 'まだ人間の判断は保存されていません';
+    return 'まだあなたの判断は保存されていません';
   }
 
   const reason = action.reason && action.reason !== '承認として記録' ? `理由: ${action.reason}` : '';
@@ -1225,46 +1384,46 @@ function reviewAfterApprove(review: ControlReviewItem): string {
 function reviewProposalText(review: ControlReviewItem): string {
   if (review.kind === 'candidate_generation') {
     return primaryCandidateSummary.value
-      ? `${primaryCandidateSummary.value.title} を動画生成前確認へ進める提案です`
-      : '候補を動画生成前確認へ進める提案です';
+      ? `AIは「${primaryCandidateSummary.value.title}」を動画生成前確認へ進めることを提案しています`
+      : 'AIは候補を動画生成前確認へ進めることを提案しています';
   }
 
   return editPlanSummary.value
-    ? `${editPlanSummary.value.title} で確認用動画を作る提案です`
-    : 'この編集案で確認用動画を作る前に確認する提案です';
+    ? `AIは「${editPlanSummary.value.title}」で確認用動画を作ることを提案しています`
+    : 'AIはこの編集案で確認用動画を作ることを提案しています';
 }
 
 function reviewProposalReason(review: ControlReviewItem): string {
   if (review.kind === 'candidate_generation') {
     return primaryCandidateSummary.value
-      ? `${primaryCandidateSummary.value.reason} 候補区間の前後、単体で意味が伝わるか、映像で確認することを見て判断します。`
-      : '候補区間、選んだ理由、映像で確認することを見て判断します。';
+      ? `${primaryCandidateSummary.value.reason} あなたは候補区間、単体で意味が伝わるか、映像で確認することを見て選びます。`
+      : 'あなたは候補区間、選んだ理由、映像で確認することを見て選びます。';
   }
 
   return editPlanSummary.value
-    ? '採用候補、使う範囲、テロップ案を見て、確認用動画を作る前に止めるべき点がないか判断します。'
-    : '編集案と動画生成前の変更点を見て判断します。';
+    ? 'あなたは採用候補、使う範囲、テロップ案を確認し、確認用動画を作る前に止める点があるかを選びます。'
+    : 'あなたは編集案と動画生成前の変更点を確認して選びます。';
 }
 
 function humanDecisionSummary(review: ControlReviewItem): string {
   const action = actionForReview(review);
   if (!action) {
-    return 'まだ人間の判断は保存されていません。';
+    return 'まだあなたの判断は保存されていません。';
   }
 
   if (review.kind === 'candidate_generation' && action.action === 'approve') {
-    return `AIの提案「${reviewProposalText(review)}」を承認済みです。この判断により、次の工程「動画生成前確認」へ進みました。`;
+    return `あなたはAIの提案を承認しました。この判断により、次の工程「動画生成前確認」へ進みました。`;
   }
 
   if (review.kind === 'render_readiness' && action.action === 'approve') {
-    return `AIの提案「${reviewProposalText(review)}」を承認済みです。この判断により、確認用動画の生成へ進みました。`;
+    return `あなたはAIの提案を承認しました。この判断により、確認用動画の生成へ進みました。`;
   }
 
   return humanActionMeaning(action);
 }
 
 function nextProcessLabelForReview(review: ControlReviewItem): string {
-  return review.kind === 'candidate_generation' ? '動画生成前確認を見る' : '生成動画確認を見る';
+  return review.kind === 'candidate_generation' ? '動画生成前確認を見る' : '生成後レビューを見る';
 }
 
 function nextProcessKeyForReview(review: ControlReviewItem): ProcessTabKey {
@@ -1640,7 +1799,8 @@ onMounted(() => {
                   :key="tab.key"
                   type="button"
                   class="process-flow-step"
-                  :class="[`is-${tab.status}`, { 'is-active': activeProcessTab === tab.key }]"
+                  :class="[`is-${tab.status}`, { 'is-active': activeProcessTab === tab.key, 'is-locked': isProcessLockedByReview(tab.key) }]"
+                  :disabled="isProcessLockedByReview(tab.key)"
                   @click="activeProcessTab = tab.key"
                 >
                   <span class="process-flow-dot">
@@ -1649,6 +1809,24 @@ onMounted(() => {
                   <strong>{{ tab.label }}</strong>
                   <small>{{ tab.statusLabel }}</small>
                 </button>
+              </div>
+
+              <div class="situation-layers">
+                <article class="situation-card is-user">
+                  <span>{{ userInstructionSummary.label }}</span>
+                  <strong>{{ userInstructionSummary.title }}</strong>
+                  <p>{{ userInstructionSummary.detail }}</p>
+                </article>
+                <article class="situation-card is-ai">
+                  <span>{{ aiWorkSummary.label }}</span>
+                  <strong>{{ aiWorkSummary.title }}</strong>
+                  <p>{{ aiWorkSummary.detail }}</p>
+                </article>
+                <article class="situation-card is-video">
+                  <span>{{ videoInfoSummary.label }}</span>
+                  <strong>{{ videoInfoSummary.title }}</strong>
+                  <p>{{ videoInfoSummary.detail }}</p>
+                </article>
               </div>
             </v-sheet>
 
@@ -1659,6 +1837,13 @@ onMounted(() => {
                 <span>主な問い</span>
                 <strong>{{ activeProcess.question }}</strong>
                 <p>{{ activeProcess.helper }}</p>
+              </div>
+
+              <div v-if="activeImplementationNotes.length > 0" class="implementation-notice">
+                <span>仮実装の範囲</span>
+                <ul>
+                  <li v-for="note in activeImplementationNotes" :key="note">{{ note }}</li>
+                </ul>
               </div>
 
               <div v-if="activeProcessTab === 'request'" class="tab-section">
@@ -1710,14 +1895,18 @@ onMounted(() => {
                       <div class="candidate-review-heading">
                         <span>{{ candidate.rangeLabel }}</span>
                         <strong>{{ candidate.title }}</strong>
-                        <v-chip size="small" color="primary" variant="tonal">{{ candidate.roleLabel }}</v-chip>
+                        <div class="material-tags">
+                          <v-chip size="small" color="primary" variant="tonal">{{ candidate.roleLabel }}</v-chip>
+                          <v-chip size="small" color="deep-orange-darken-4" variant="tonal">{{ candidate.limitationLabel }}</v-chip>
+                        </div>
                       </div>
-                      <p><strong>見どころ:</strong> {{ candidate.hookText }}</p>
+                      <p><strong>この範囲で分かること:</strong> {{ candidate.contentSummary }}</p>
                       <p><strong>候補にした理由:</strong> {{ candidate.reason }}</p>
-                      <p><strong>映像で確認すること:</strong> {{ candidate.visualCheck }}</p>
+                      <p><strong>あなたが確認すること:</strong> {{ candidate.reviewFocus }}</p>
+                      <p><strong>映像側の確認:</strong> {{ candidate.visualCheck }}</p>
                       <div class="material-tags">
                         <v-chip size="small" color="primary" variant="tonal">{{ candidate.nextActionLabel }}</v-chip>
-                        <v-chip size="small" color="warning" variant="tonal">{{ candidate.riskLabel }}</v-chip>
+                        <v-chip size="small" color="deep-orange-darken-4" variant="tonal">{{ candidate.riskLabel }}</v-chip>
                         <v-chip size="small" color="blue-grey" variant="tonal">{{ candidate.evidenceLabel }}</v-chip>
                       </div>
                       <details class="candidate-transcript">
@@ -1732,9 +1921,9 @@ onMounted(() => {
 
                   <div v-else-if="editPlanSummary" class="edit-plan-review">
                     <article>
-                      <span>採用候補</span>
-                      <strong>{{ editPlanSummary.selectedCandidateId }}</strong>
-                      <p>{{ editPlanSummary.title }}</p>
+                      <span>採用する候補</span>
+                      <strong>{{ editPlanSummary.selectedCandidateTitle }}</strong>
+                      <p>{{ editPlanSummary.selectedCandidateRange }}。{{ editPlanSummary.selectedCandidateReason }}</p>
                     </article>
                     <article>
                       <span>使う範囲</span>
@@ -1756,12 +1945,48 @@ onMounted(() => {
                     編集案の詳細を読み込んでいます。採用候補、使う範囲、テロップ案がここに表示されます。
                   </div>
 
-                  <div v-if="activeReview.status === 'review_required'" class="review-choice-grid">
-                    <article v-for="choice in reviewChoiceCards" :key="choice.action">
-                      <span>{{ choice.title }}</span>
-                      <strong>{{ choice.label }}</strong>
-                      <p>{{ choice.body }}</p>
-                    </article>
+                  <div v-if="activeReview.status === 'review_required'" class="review-decision-area">
+                    <div class="decision-input-panel">
+                      <div>
+                        <span>あなたが書くこと</span>
+                        <strong>判断理由や直したい点</strong>
+                        <p>空欄でも選べます。修正したい場合は、直したい範囲や理由を書いてください。</p>
+                      </div>
+                      <v-textarea
+                        v-model="reviewReasons[activeReview.id]"
+                        label="判断理由や直したい点"
+                        rows="2"
+                        auto-grow
+                        density="compact"
+                        hide-details
+                      />
+                    </div>
+
+                    <div class="review-choice-grid">
+                      <article
+                        v-for="choice in reviewChoiceCards"
+                        :key="choice.action"
+                        class="review-choice-card"
+                        :class="`is-${choice.action}`"
+                      >
+                        <span>{{ choice.title }}</span>
+                        <strong>{{ choice.label }}</strong>
+                        <p>{{ choice.body }}</p>
+                        <div class="choice-after-action">
+                          <v-icon size="16">mdi-arrow-right</v-icon>
+                          <p>{{ choice.afterAction }}</p>
+                        </div>
+                        <v-btn
+                          :color="choice.color"
+                          variant="flat"
+                          :prepend-icon="choice.icon"
+                          :loading="store.loading"
+                          @click="submitControlReview(activeReview, choice.action)"
+                        >
+                          {{ choice.label }}
+                        </v-btn>
+                      </article>
+                    </div>
                   </div>
                   <div v-else class="review-complete-card">
                     <span>次に見ること</span>
@@ -1776,37 +2001,13 @@ onMounted(() => {
                       {{ nextProcessLabelForReview(activeReview) }}
                     </v-btn>
                   </div>
-
-                  <div v-if="activeReview.status === 'review_required'" class="review-actions">
-                    <v-textarea
-                      v-model="reviewReasons[activeReview.id]"
-                      label="判断理由や直したい点"
-                      rows="2"
-                      auto-grow
-                      density="compact"
-                      hide-details
-                    />
-                    <div class="review-button-row">
-                      <v-btn
-                        v-for="choice in reviewChoiceCards"
-                        :key="choice.action"
-                        :color="choice.color"
-                        variant="tonal"
-                        :prepend-icon="choice.icon"
-                        :loading="store.loading"
-                        @click="submitControlReview(activeReview, choice.action)"
-                      >
-                        {{ choice.label }}
-                      </v-btn>
-                    </div>
-                  </div>
                 </div>
                 <div v-else class="collapsed-note">
                   この段階の確認材料はまだ作成中、または未作成です。
                 </div>
               </div>
 
-              <div v-else-if="activeProcessTab === 'video'" class="tab-section">
+              <div v-else-if="activeProcessTab === 'video' || activeProcessTab === 'notes'" class="tab-section">
                 <div v-if="outputVideoArtifact" class="video-focus">
                   <video
                     class="artifact-video large"
@@ -1814,17 +2015,15 @@ onMounted(() => {
                     :src="outputVideoArtifact.fileRef.uri"
                   />
                   <div>
-                    <span>見ること</span>
+                    <span>動画を見る目的</span>
                     <strong>この動画を確認して、次に直す点を決めます</strong>
-                    <p>候補の選び方、切り出し範囲、テロップ、動画の見やすさを分けて確認します。</p>
+                    <p>候補の選び方、切り出し範囲、テロップ、動画の見やすさを分けて確認してください。</p>
                   </div>
                 </div>
                 <div v-else class="collapsed-note">
                   まだ確認用動画はありません。動画生成前確認で動画作成を承認すると、ここに表示されます。
                 </div>
-              </div>
 
-              <div v-else-if="activeProcessTab === 'notes'" class="tab-section">
                 <div class="fix-summary-grid">
                   <article v-for="card in fixSummaryCards" :key="card.label">
                     <span>{{ card.label }}</span>
@@ -1837,7 +2036,7 @@ onMounted(() => {
                 </div>
                 <div v-if="selectedControlReviews.length > 0" class="review-history">
                   <article v-for="review in selectedControlReviews" :key="review.id">
-                    <span>{{ actionForReview(review) ? 'あなたの判断' : 'AIからの確認依頼' }}</span>
+                    <span>{{ actionForReview(review) ? 'あなたの判断' : 'AIの提案' }}</span>
                     <strong>{{ controlReviewStatusLabel[review.status] }}</strong>
                     <p>{{ reviewPrimaryQuestion(review) }} / {{ humanActionMeaning(actionForReview(review)) }}</p>
                   </article>
@@ -2146,6 +2345,14 @@ h2 {
   box-shadow: inset 0 0 0 1px #2f7ed8;
 }
 
+.process-flow-step:disabled {
+  cursor: not-allowed;
+}
+
+.process-flow-step.is-locked {
+  opacity: 0.55;
+}
+
 .process-flow-step strong,
 .process-flow-step small {
   overflow-wrap: anywhere;
@@ -2180,9 +2387,9 @@ h2 {
 }
 
 .process-flow-step.is-review .process-flow-dot {
-  background: #fff7e6;
-  border-color: #d89120;
-  color: #9a5b00;
+  background: #fff4ed;
+  border-color: #c2410c;
+  color: #7c2d12;
 }
 
 .process-flow-step.is-running .process-flow-dot {
@@ -2201,6 +2408,56 @@ h2 {
   border-bottom: 1px solid #e2e8ef;
 }
 
+.situation-layers {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-top: 12px;
+}
+
+.situation-card {
+  background: #ffffff;
+  border: 1px solid #dce4ec;
+  border-left-width: 4px;
+  border-radius: 8px;
+  display: grid;
+  gap: 5px;
+  padding: 10px 12px;
+}
+
+.situation-card.is-user {
+  border-left-color: #1d5fa8;
+}
+
+.situation-card.is-ai {
+  border-left-color: #2f7ed8;
+}
+
+.situation-card.is-video {
+  border-left-color: #475569;
+}
+
+.situation-card span,
+.implementation-notice span,
+.decision-input-panel span {
+  color: #475569;
+  display: block;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.situation-card strong {
+  color: #17212b;
+  display: block;
+  font-size: 15px;
+}
+
+.situation-card p {
+  color: #34495e;
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
 .process-content {
   display: grid;
   gap: 12px;
@@ -2208,12 +2465,31 @@ h2 {
 }
 
 .question-card {
-  background: #eef6ff;
-  border: 1px solid #cfe0ef;
+  background: #ffffff;
+  border: 1px solid #b7cfe7;
+  border-left: 5px solid #1d5fa8;
   border-radius: 8px;
   display: grid;
   gap: 5px;
+  padding: 14px;
+}
+
+.implementation-notice {
+  background: #f8fafc;
+  border: 1px solid #dce4ec;
+  border-left: 5px solid #475569;
+  border-radius: 8px;
+  display: grid;
+  gap: 8px;
   padding: 12px;
+}
+
+.implementation-notice ul {
+  color: #34495e;
+  display: grid;
+  gap: 5px;
+  margin: 0;
+  padding-left: 18px;
 }
 
 .question-card span,
@@ -2273,12 +2549,17 @@ h2 {
 .summary-grid,
 .decision-grid,
 .edit-plan-review,
-.review-choice-grid,
 .fix-summary-grid,
 .judgement-guide {
   display: grid;
   gap: 10px;
   grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.review-choice-grid {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
 .judgement-guide {
@@ -2311,8 +2592,8 @@ h2 {
 }
 
 .review-main-question {
-  background: #fff7e6;
-  border: 1px solid #f0d49a;
+  background: #fff4ed;
+  border: 1px solid #fed7aa;
   border-radius: 8px;
   display: grid;
   gap: 5px;
@@ -2393,8 +2674,73 @@ h2 {
   margin-top: 6px;
 }
 
-.review-choice-grid article {
+.review-decision-area {
+  border-top: 1px solid #dce4ec;
+  display: grid;
+  gap: 10px;
+  padding-top: 12px;
+}
+
+.decision-input-panel {
+  background: #f8fbff;
+  border: 2px solid #9fc5eb;
+  border-radius: 8px;
+  display: grid;
+  gap: 10px;
+  grid-template-columns: minmax(220px, 0.45fr) minmax(0, 1fr);
+  padding: 12px;
+}
+
+.decision-input-panel strong {
+  color: #17212b;
+  display: block;
+  font-size: 16px;
+}
+
+.decision-input-panel p {
+  color: #34495e;
+  margin: 4px 0 0;
+}
+
+.review-choice-card {
   border: 1px solid #dce4ec;
+  border-top-width: 4px;
+  min-height: 100%;
+}
+
+.review-choice-card.is-approve {
+  border-top-color: #1d5fa8;
+}
+
+.review-choice-card.is-request_changes {
+  border-top-color: #9a3412;
+}
+
+.review-choice-card.is-reject {
+  border-top-color: #b42318;
+}
+
+.review-choice-card .v-btn {
+  align-self: end;
+  justify-self: start;
+  margin-top: 4px;
+}
+
+.choice-after-action {
+  align-items: start;
+  background: #f8fafc;
+  border-radius: 8px;
+  color: #475569;
+  display: grid;
+  gap: 6px;
+  grid-template-columns: auto minmax(0, 1fr);
+  padding: 8px;
+}
+
+.choice-after-action p {
+  color: #34495e;
+  font-size: 13px;
+  margin: 0;
 }
 
 .video-focus {
@@ -2548,8 +2894,8 @@ h2 {
 
 .flow-step.is-queued .flow-dot,
 .flow-step.is-waiting .flow-dot {
-  background: #fff7e6;
-  border-color: #d89120;
+  background: #fff4ed;
+  border-color: #c2410c;
 }
 
 .agent-card {
@@ -2865,12 +3211,14 @@ h2 {
   .form-grid,
   .overview-heading,
   .request-utility-panel,
+  .situation-layers,
   .summary-grid,
   .decision-grid,
   .edit-plan-review,
   .review-choice-grid,
   .fix-summary-grid,
   .judgement-guide,
+  .decision-input-panel,
   .video-focus,
   .json-reader {
     grid-template-columns: 1fr;

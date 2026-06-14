@@ -415,3 +415,47 @@
 - Alternatives considered: AIと人間を対比する文言をそのまま出す。説明文で補足する。内部型名に合わせた状態名をUIへ出す。
 - Related files: `client/src/App.vue`, `docs/codex/zev2-progress.md`
 - Review condition: UIの主導線に「人間」という文字が表示される場合。
+
+## Decision ZC-D-038
+
+- Decision ID: ZC-D-038
+- Date: 2026-06-14
+- Status: accepted
+- Decision: UIでは、「あなたの指示」「AIの作業」「動画と成果物」を別レベルの情報として表示する。
+- Reason: 利用者の入力、AIの処理状況、動画そのものの情報が同じ重さで並ぶと、今どこで止まっていて何を操作すべきか分からない。状況把握、判断材料、詳細情報を分ける必要がある。
+- Alternatives considered: 工程カードだけで状況を示す。色付きカードを増やす。補助情報の説明文だけを増やす。
+- Related files: `client/src/App.vue`, `docs/codex/zev2-progress.md`
+- Review condition: 画面を見ても、現在の依頼、AIがしている作業、動画または成果物の状態が区別できない場合。
+
+## Decision ZC-D-039
+
+- Decision ID: ZC-D-039
+- Date: 2026-06-14
+- Status: accepted
+- Decision: 候補確認と動画生成前確認の選択肢は、説明テキストと実行ボタンを同じ判断カードにまとめる。
+- Reason: 「この候補で進める」「候補を直したい」「この候補は使わない」や「この編集案で作る」「編集案を直したい」「動画作成は止める」で、説明とボタンが分離すると、どの説明を読んでどの操作を押すのか分からない。各選択肢には、選ぶ場面、選んだ後にAIが行うこと、実行ボタンを一体で表示する。
+- Alternatives considered: 説明を上にまとめ、ボタンだけ下に並べる。ボタン文言を長くする。操作説明を補助情報に置く。
+- Related files: `client/src/App.vue`, `docs/codex/zev2-progress.md`
+- Review condition: 判断の説明と操作ボタンの対応が画面から分からない場合。
+
+## Decision ZC-D-040
+
+- Decision ID: ZC-D-040
+- Date: 2026-06-14
+- Status: accepted
+- Decision: 生成動画確認と修正点整理は、初期UIでは「生成後レビュー」として同じ工程にまとめる。
+- Reason: 生成された動画を見ることと、見た結果として次に直す点を整理することは同じレビュー作業の前半と後半である。別工程に分けると、動画を見た後に何を判断するのかが分断される。
+- Alternatives considered: 生成動画確認と修正点整理を別タブのまま残す。生成動画だけを表示し、修正点は別ドキュメントに記録する。修正点整理を詳細情報に下げる。
+- Related files: `client/src/App.vue`, `docs/codex/zev2-progress.md`
+- Review condition: 生成後レビューで、動画確認と次に直す点の関係が分からない場合。
+
+## Decision ZC-D-041
+
+- Decision ID: ZC-D-041
+- Date: 2026-06-14
+- Status: accepted
+- Decision: 仮STT、仮Gemini、仮動画生成など、実装が仮である部分はUI上に明示する。
+- Reason: 仮実装の制限を隠すと、利用者は候補や動画の品質が低いのか、まだ実処理が未接続なのかを判断できない。特にSTTが仮の場合、候補内容の評価は保留であることを画面上で伝える必要がある。
+- Alternatives considered: 仮実装の説明をdocsだけに置く。成果物JSONを開けば分かる状態にする。仮実装の品質を本物の候補として見せる。
+- Related files: `client/src/App.vue`, `runner/src/index.ts`, `docs/codex/zev2-progress.md`
+- Review condition: UI上で、成果物の品質問題と仮実装の制限が区別できない場合。

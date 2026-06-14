@@ -72,7 +72,7 @@ function formatApiError(error: unknown): string {
     return error.message;
   }
 
-  return 'API呼び出しに失敗しました';
+  return '処理の呼び出しに失敗しました';
 }
 
 export const useControlQueueStore = defineStore('controlQueue', {
@@ -114,7 +114,7 @@ export const useControlQueueStore = defineStore('controlQueue', {
         this.activeDraftId = draft.id;
         this.lastChangedAt = new Date().toISOString();
         this.runPhase = 'handing_off';
-        this.message = '承認済み依頼をAIエージェントへ渡しています';
+        this.message = '承認済み依頼をAIへ渡しています';
         this.state = await approveDraft(draft.id);
         this.lastChangedAt = new Date().toISOString();
         this.runPhase = 'running';
@@ -136,7 +136,7 @@ export const useControlQueueStore = defineStore('controlQueue', {
       this.runPhase = 'handing_off';
       this.runNumber += 1;
       this.lastChangedAt = new Date().toISOString();
-      this.message = '依頼をAIエージェントへ渡しています';
+      this.message = '依頼をAIへ渡しています';
       try {
         this.state = await approveDraft(id);
         this.lastChangedAt = new Date().toISOString();
@@ -155,7 +155,7 @@ export const useControlQueueStore = defineStore('controlQueue', {
       for (let attempt = 0; attempt < 30; attempt += 1) {
         if (hasHumanReviewRequired(this.state)) {
           await keepPhaseVisible(startedAt, 700);
-          this.message = '人間の確認が必要です';
+          this.message = '確認が必要です';
           this.runPhase = 'review_required';
           this.lastChangedAt = new Date().toISOString();
           return;
@@ -163,20 +163,20 @@ export const useControlQueueStore = defineStore('controlQueue', {
 
         if (!hasRunnableAgentRequests(this.state)) {
           await keepPhaseVisible(startedAt, 700);
-          this.message = 'AIエージェントの仮実装実行が完了しました';
+          this.message = 'AIの仮実装実行が完了しました';
           this.runPhase = 'completed';
           this.lastChangedAt = new Date().toISOString();
           return;
         }
 
-        this.message = 'AIエージェントがAPI経由で処理中です';
+        this.message = 'AIが処理中です';
         this.runPhase = 'running';
         await wait(300);
         this.state = await fetchState();
         this.lastChangedAt = new Date().toISOString();
       }
 
-      this.message = 'AIエージェント実行中です';
+      this.message = 'AIが処理中です';
       this.runPhase = 'running';
     },
     async submitControlReview(id: string, action: HumanReviewActionType, reason: string) {
