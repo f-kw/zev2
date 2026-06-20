@@ -114,7 +114,7 @@ export const useControlQueueStore = defineStore('controlQueue', {
         this.activeDraftId = draft.id;
         this.lastChangedAt = new Date().toISOString();
         this.runPhase = 'handing_off';
-        this.message = '承認済み依頼をAIへ渡しています';
+        this.message = '作成を始めています';
         this.state = await approveDraft(draft.id);
         this.lastChangedAt = new Date().toISOString();
         this.runPhase = 'running';
@@ -136,7 +136,7 @@ export const useControlQueueStore = defineStore('controlQueue', {
       this.runPhase = 'handing_off';
       this.runNumber += 1;
       this.lastChangedAt = new Date().toISOString();
-      this.message = '依頼をAIへ渡しています';
+      this.message = '作成を始めています';
       try {
         this.state = await approveDraft(id);
         this.lastChangedAt = new Date().toISOString();
@@ -169,14 +169,14 @@ export const useControlQueueStore = defineStore('controlQueue', {
           return;
         }
 
-        this.message = 'AIが処理中です';
+        this.message = '作成中です';
         this.runPhase = 'running';
         await wait(300);
         this.state = await fetchState();
         this.lastChangedAt = new Date().toISOString();
       }
 
-      this.message = 'AIが処理中です';
+      this.message = '作成中です';
       this.runPhase = 'running';
     },
     async submitControlReview(id: string, action: HumanReviewActionType, reason: string, selectedOptionId?: string) {
