@@ -67,13 +67,9 @@ interface EditPlanSummary {
   selectedThemeId: string;
   selectedThemeTitle: string;
   compositionSummary: string;
-  partCountLabel: string;
   title: string;
-  rangeLabel: string;
   hookText: string;
   telopTexts: string[];
-  changes: string[];
-  renderReadyLabel: string;
 }
 
 interface ReviewChoice {
@@ -799,7 +795,6 @@ function isProcessLockedByReview(key: ProcessTabKey): boolean {
 const themeArtifactJson = computed(() => artifactJsonFor('propose_clip_themes'));
 const compositionArtifactJson = computed(() => artifactJsonFor('build_clip_composition'));
 const editPlanArtifactJson = computed(() => artifactJsonFor('create_edit_plan'));
-const patchArtifactJson = computed(() => artifactJsonFor('apply_adjustment'));
 const themeSummaries = computed<ThemeReviewSummary[]>(() => {
   const themes = arrayField(themeArtifactJson.value, 'themes');
   const selectedThemeId = activeReview.value?.kind === 'theme_selection'
@@ -838,32 +833,18 @@ const editPlanSummary = computed<EditPlanSummary | undefined>(() => {
 
   const selectedThemeId = stringField(editPlan, 'selectedThemeId') || '選択テーマは未取得です';
   const selectedTheme = themeSummaries.value.find((theme) => theme.id === selectedThemeId);
-  const compositionParts = arrayField(compositionArtifactJson.value, 'parts');
 
   const telopTexts = arrayField(editPlan, 'telopPlan')
     .map((item) => stringField(recordValue(item), 'text'))
     .filter((text) => text.length > 0);
-  const changes = arrayField(patchArtifactJson.value, 'changes')
-    .map((item) => {
-      const record = recordValue(item);
-      const action = stringField(record, 'action');
-      const reason = stringField(record, 'reason');
-      return [action, reason].filter(Boolean).join('。');
-    })
-    .filter((text) => text.length > 0);
-  const renderReady = booleanField(patchArtifactJson.value, 'renderReady');
 
   return {
     selectedThemeId,
     selectedThemeTitle: selectedTheme?.title ?? cleanCandidateTitle(selectedThemeId, 0),
     compositionSummary: stringField(compositionArtifactJson.value, 'assemblyPlan') || '複数箇所のつなぎ方は未取得です',
-    partCountLabel: compositionParts.length > 0 ? `${compositionParts.length}箇所をつなぐ案です` : '構成箇所は未取得です',
     title: cleanCandidateTitle(stringField(editPlan, 'title') || '編集案タイトルは未取得です', 0),
-    rangeLabel: formatRange(numberField(editPlan, 'sourceStartMs'), numberField(editPlan, 'sourceEndMs')),
     hookText: stringField(editPlan, 'hookText') || '冒頭で見せる言葉は未取得です',
-    telopTexts,
-    changes,
-    renderReadyLabel: renderReady === true ? '確認用動画を作れる状態です' : '動画生成前に確認が必要です'
+    telopTexts
   };
 });
 const reviewChoiceCards = computed<ReviewChoice[]>(() => {
@@ -938,7 +919,7 @@ const fixSummaryCards = computed<FixSummaryCard[]>(() => [
     label: '構成と演出',
     title: editPlanSummary.value?.title ?? '編集案の判断材料がまだありません',
     body: editPlanSummary.value
-      ? `${editPlanSummary.value.partCountLabel}。${editPlanSummary.value.renderReadyLabel}`
+      ? editPlanSummary.value.compositionSummary
       : '複数箇所の構成案とテロップ案ができると整理できます。'
   },
   {
@@ -1402,8 +1383,7 @@ function artifactGuide(artifact: ArtifactRow): ArtifactGuideItem[] {
     ],
     apply_adjustment: [
       { label: 'changes', meaning: '動画生成前に確定した変更点です。' },
-      { label: 'reason', meaning: 'なぜその変更を入れるかです。' },
-      { label: 'renderReady', meaning: '動画生成へ進める状態かどうかです。' }
+      { label: 'reason', meaning: 'なぜその変更を入れるかです。' }
     ],
     render_video: [
       { label: 'output.mp4', meaning: '確認用に生成された動画です。' }
@@ -1818,30 +1798,23 @@ onMounted(() => {
 	                  </div>
 
 	                  <div v-else-if="editPlanSummary" class="edit-plan-review">
-	                    <article>
-	                      <span>選ばれたテーマ</span>
-	                      <strong>{{ editPlanSummary.selectedThemeTitle }}</strong>
-	                      <p>{{ editPlanSummary.compositionSummary }}</p>
+		                    <article>
+		                      <span>選ばれたテーマ</span>
+		                      <strong>{{ editPlanSummary.selectedThemeTitle }}</strong>
+		                      <p>{{ editPlanSummary.compositionSummary }}</p>
+		                    </article>
+		                    <article>
+		                      <span>動画に入る話</span>
+		                      <strong>{{ editPlanSummary.hookText }}</strong>
 	                    </article>
 	                    <article>
-	                      <span>つなぐ箇所</span>
-	                      <strong>{{ editPlanSummary.partCountLabel }}</strong>
-	                      <p>{{ editPlanSummary.rangeLabel }} / {{ editPlanSummary.hookText }}</p>
-                    </article>
-                    <article>
-                      <span>テロップ案</span>
-                      <strong>{{ editPlanSummary.telopTexts.length }}件</strong>
-                      <p>{{ editPlanSummary.telopTexts.join(' / ') || 'テロップ案は未取得です' }}</p>
-                    </article>
-                    <article>
-                      <span>動画生成前の状態</span>
-                      <strong>{{ editPlanSummary.renderReadyLabel }}</strong>
-                      <p>{{ editPlanSummary.changes.join(' / ') || reviewReasonText(activeReview) }}</p>
-                    </article>
-                  </div>
-                  <div v-else class="collapsed-note">
-                    編集案の詳細を読み込んでいます。選ばれたテーマ、つなぐ箇所、テロップ案がここに表示されます。
-                  </div>
+	                      <span>テロップ</span>
+	                      <strong>{{ editPlanSummary.telopTexts.join(' / ') || 'テロップは未取得です' }}</strong>
+	                    </article>
+	                  </div>
+	                  <div v-else class="collapsed-note">
+	                    編集案の詳細を読み込んでいます。選ばれたテーマ、動画に入る話、テロップがここに表示されます。
+	                  </div>
 
                   <div v-if="activeReview.status === 'review_required'" class="review-decision-area">
                     <div class="review-choice-grid">
