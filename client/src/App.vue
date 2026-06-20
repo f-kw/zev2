@@ -60,7 +60,7 @@ interface ThemeReviewSummary {
 interface EditPlanSummary {
   selectedThemeId: string;
   selectedThemeTitle: string;
-  compositionSummary: string;
+  finalVideoDescription: string;
   telopTexts: string[];
 }
 
@@ -440,7 +440,7 @@ const processTabs = computed<ProcessTab[]>(() => [
     key: 'edit',
     label: '動画生成前確認',
     question: 'この内容で確認用動画を作ってよいですか',
-    helper: 'テーマ、つなぎ方、テロップを確認します。',
+    helper: 'テーマ、完成イメージ、テロップを確認します。',
     status: processStatusFor('edit', renderControlReview.value),
     statusLabel:
       processStatusFor('edit', renderControlReview.value) === 'done'
@@ -649,6 +649,9 @@ const editPlanSummary = computed<EditPlanSummary | undefined>(() => {
 
   const selectedThemeId = stringField(editPlan, 'selectedThemeId') || '選択テーマは未取得です';
   const selectedTheme = themeSummaries.value.find((theme) => theme.id === selectedThemeId);
+  const composition = compositionArtifactJson.value;
+  const themeSummary = stringField(composition, 'themeSummary') || selectedTheme?.summary || '';
+  const assemblyPlan = stringField(composition, 'assemblyPlan');
 
   const telopTexts = arrayField(editPlan, 'telopPlan')
     .map((item) => stringField(recordValue(item), 'text'))
@@ -657,7 +660,7 @@ const editPlanSummary = computed<EditPlanSummary | undefined>(() => {
   return {
     selectedThemeId,
     selectedThemeTitle: selectedTheme?.title ?? cleanCandidateTitle(selectedThemeId, 0),
-    compositionSummary: stringField(compositionArtifactJson.value, 'assemblyPlan') || '複数箇所のつなぎ方は未取得です',
+    finalVideoDescription: finalVideoDescriptionForDisplay(themeSummary, assemblyPlan, telopTexts),
     telopTexts
   };
 });
@@ -693,7 +696,7 @@ const reviewChoiceCards = computed<ReviewChoice[]>(() => {
       action: 'approve',
       label: 'この編集案で作る',
       title: '確認用動画を作る',
-      body: 'テーマ、つなぎ方、テロップで問題ない場合。',
+      body: 'テーマ、完成イメージ、テロップで問題ない場合。',
       color: 'primary',
       icon: 'mdi-check'
     },
@@ -701,7 +704,7 @@ const reviewChoiceCards = computed<ReviewChoice[]>(() => {
       action: 'request_changes',
       label: '編集案を直したい',
       title: '動画生成前に戻す',
-      body: 'つなぎ方やテロップを直したい場合。',
+      body: '完成イメージやテロップを直したい場合。',
       color: 'deep-orange-darken-4',
       icon: 'mdi-pencil'
     },
@@ -725,8 +728,8 @@ const fixSummaryCards = computed<FixSummaryCard[]>(() => [
       : 'テーマ候補と代表発話ができると整理できます。'
   },
   {
-    label: 'つなぎ方',
-    title: editPlanSummary.value?.compositionSummary ?? 'つなぎ方はまだありません'
+    label: '完成イメージ',
+    title: editPlanSummary.value?.finalVideoDescription ?? '完成イメージはまだありません'
   },
   {
     label: 'テロップ',
@@ -803,6 +806,47 @@ function isPlaceholderThemeText(title: string, summary: string, representativeTe
     joined.includes('配信素材の状況を確認します') ||
     joined.includes('仮書き起こし')
   );
+}
+
+function normalizeSentence(value: string): string {
+  const trimmed = value.trim().replace(/[。.!！]+$/u, '');
+  return trimmed ? `${trimmed}。` : '';
+}
+
+function outcomeFlowText(assemblyPlan: string): string {
+  const normalized = assemblyPlan
+    .trim()
+    .replace(/[。.!！]+$/u, '')
+    .replace(/の順で複数発話をつなぐ$/u, 'までを見せる')
+    .replace(/の順で複数箇所をつなぐ$/u, 'までを見せる')
+    .replace(/の順でつなぐ$/u, 'までを見せる')
+    .replace(/複数発話をつなぐ$/u, '流れを見せる')
+    .replace(/複数箇所をつなぐ$/u, '流れを見せる');
+
+  const polite = normalized.replace(/見せる$/u, '見せます');
+  return polite ? normalizeSentence(polite) : '';
+}
+
+function finalVideoDescriptionForDisplay(themeSummary: string, assemblyPlan: string, telopTexts: string[]): string {
+  const summary = normalizeSentence(themeSummary);
+  const flow = outcomeFlowText(assemblyPlan);
+
+  if (summary && flow) {
+    return `${summary.replace(/。$/u, '')}確認用動画です。${flow}`;
+  }
+
+  if (summary) {
+    return `${summary.replace(/。$/u, '')}確認用動画です。`;
+  }
+
+  if (flow) {
+    return flow;
+  }
+
+  const firstTelop = telopTexts[0]?.trim();
+  return firstTelop
+    ? `「${firstTelop}」を中心に見せる確認用動画です。`
+    : '完成イメージは未取得です。';
 }
 
 function themeReasonForDisplay(theme: Record<string, unknown>, isPlaceholder: boolean): string {
@@ -1454,8 +1498,8 @@ onMounted(() => {
                         <strong>{{ editPlanSummary.selectedThemeTitle }}</strong>
                       </article>
                       <article>
-                        <span>つなぎ方</span>
-                        <strong>{{ editPlanSummary.compositionSummary }}</strong>
+                        <span>完成イメージ</span>
+                        <strong>{{ editPlanSummary.finalVideoDescription }}</strong>
                       </article>
                       <article>
                         <span>テロップ</span>
@@ -1463,7 +1507,7 @@ onMounted(() => {
                       </article>
                     </div>
                     <div v-else class="collapsed-note">
-                      テーマ、つなぎ方、テロップを読み込んでいます。
+                      テーマ、完成イメージ、テロップを読み込んでいます。
                     </div>
 
                     <div v-if="activeReview.status === 'review_required'" class="review-decision-area">
