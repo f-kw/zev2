@@ -875,15 +875,6 @@ const reviewChoiceCards = computed<ReviewChoice[]>(() => {
   if (review.kind === 'theme_selection') {
     return [
       {
-        action: 'approve',
-        label: 'このテーマで進める',
-        title: '選んだテーマで構成案を作る',
-        body: 'テーマ候補、代表発話、切り抜きにできそうな理由を見て、この内容で作りたいと判断する場合。',
-        afterAction: '選ぶと、AIが文字起こしを読み直し、このテーマに関係する複数箇所を集めます。',
-        color: 'primary',
-        icon: 'mdi-check'
-      },
-      {
         action: 'request_changes',
         label: 'テーマを直したい',
         title: 'テーマ候補を作り直す',
@@ -1337,6 +1328,11 @@ function selectedReviewOptionId(review: ControlReviewItem): string {
 
 function setSelectedReviewOption(review: ControlReviewItem, optionId: string) {
   selectedReviewOptions[review.id] = optionId;
+}
+
+async function selectThemeAndProceed(review: ControlReviewItem, optionId: string) {
+  setSelectedReviewOption(review, optionId);
+  await submitControlReview(review, 'approve');
 }
 
 function setReviewChoiceReason(review: ControlReviewItem, action: HumanReviewActionType, value: string | null) {
@@ -1809,9 +1805,11 @@ onMounted(() => {
 	                        :color="theme.selected ? 'primary' : 'blue-grey'"
 	                        variant="tonal"
 	                        prepend-icon="mdi-check-circle-outline"
-	                        @click="setSelectedReviewOption(activeReview, theme.id)"
+	                        :loading="store.loading && theme.selected"
+	                        :disabled="store.loading"
+	                        @click="selectThemeAndProceed(activeReview, theme.id)"
 	                      >
-	                        このテーマを選ぶ
+	                        このテーマで進める
 	                      </v-btn>
 	                    </article>
 	                  </div>
