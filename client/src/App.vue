@@ -22,6 +22,7 @@ const selectedProcessTab = ref<ProcessTabKey | ''>('');
 const showRequestForm = ref(false);
 const showDetailData = ref(false);
 const reviewReasons = reactive<Record<string, string>>({});
+const selectedReviewOptions = reactive<Record<string, string>>({});
 const artifactPreviews = reactive<Record<string, string>>({});
 const expandedArtifacts = reactive<Record<string, boolean>>({});
 
@@ -49,28 +50,24 @@ interface ArtifactGuideItem {
   meaning: string;
 }
 
-interface CandidateReviewSummary {
+interface ThemeReviewSummary {
   id: string;
   title: string;
-  rangeLabel: string;
-  hookText: string;
-  transcriptText: string;
-  reason: string;
-  visualCheck: string;
-  contentSummary: string;
-  reviewFocus: string;
+  summary: string;
+  representativeText: string;
+  whyItCanBeClipped: string;
+  compositionNote: string;
   limitationLabel: string;
-  riskLabel: string;
-  nextActionLabel: string;
   evidenceLabel: string;
   roleLabel: string;
+  selected: boolean;
 }
 
 interface EditPlanSummary {
-  selectedCandidateId: string;
-  selectedCandidateTitle: string;
-  selectedCandidateReason: string;
-  selectedCandidateRange: string;
+  selectedThemeId: string;
+  selectedThemeTitle: string;
+  compositionSummary: string;
+  partCountLabel: string;
   title: string;
   rangeLabel: string;
   hookText: string;
@@ -96,12 +93,11 @@ interface FixSummaryCard {
 }
 
 const draftInput = reactive<RequestDraftInput>({
-  purpose: 'この配信からショート候補を作って、切り抜き理由とテロップ案まで出す',
+  purpose: 'この配信から切り抜きたいテーマを選び、複数箇所をつないだショート案を作る',
   sourceUri: '',
   durationLabel: '60秒以内',
-  candidateCountLabel: '3候補',
-  preset: 'shorts_default',
-  includeRender: true
+  themeCountLabel: '3テーマ',
+  preset: 'shorts_default'
 });
 
 const draftStatusLabel = {
@@ -115,7 +111,8 @@ const operationStatusLabel = {
   running: '作成中',
   waiting: '前の段階待ち',
   succeeded: '確認できます',
-  failed: '失敗'
+  failed: '失敗',
+  superseded: '作り直し済み'
 } satisfies Record<AgentRequestStatus, string>;
 
 const operationStatusColor = {
@@ -123,7 +120,8 @@ const operationStatusColor = {
   running: 'primary',
   waiting: 'info',
   succeeded: 'success',
-  failed: 'error'
+  failed: 'error',
+  superseded: 'blue-grey'
 } satisfies Record<AgentRequestStatus, string>;
 
 const controlReviewStatusLabel = {
@@ -150,7 +148,7 @@ const processOrder = {
 
 const processOperationTypes: Record<ProcessTabKey, AgentRequestType[]> = {
   request: ['prepare_video'],
-  candidates: ['run_stt', 'find_candidates', 'gemini_candidate_review'],
+  candidates: ['run_stt', 'propose_clip_themes', 'build_clip_composition'],
   edit: ['create_edit_plan', 'apply_adjustment'],
   video: ['render_video'],
   notes: []
@@ -159,9 +157,9 @@ const processOperationTypes: Record<ProcessTabKey, AgentRequestType[]> = {
 const operationUserLabel = {
   prepare_video: '対象動画',
   run_stt: '話した内容',
-  find_candidates: '候補区間',
-  gemini_candidate_review: '映像確認メモ',
-  create_edit_plan: '編集案',
+  propose_clip_themes: 'テーマ候補',
+  build_clip_composition: '複数箇所の構成案',
+  create_edit_plan: '演出案',
   apply_adjustment: '生成前の確認',
   render_video: '生成動画'
 } satisfies Record<AgentRequestType, string>;
@@ -169,10 +167,10 @@ const operationUserLabel = {
 const operationUserMeaning = {
   prepare_video: 'この実行で使う動画を確認するための情報です',
   run_stt: '現時点では実STT接続ではなく、ZEVサンプルの書き起こしを使っています',
-  find_candidates: 'ZEVサンプルの書き起こしから作った候補区間と、選んだ理由です',
-  gemini_candidate_review: '現時点では実Gemini確認ではなく、検証用の映像確認メモです',
-  create_edit_plan: 'どの区間を使い、どんな流れで動画にするかの仮編集案です',
-  apply_adjustment: '動画を作る前に確定した仮の変更点と確認結果です',
+  propose_clip_themes: 'ZEVサンプルの書き起こしから作ったテーマ候補です',
+  build_clip_composition: '選ばれたテーマに関係する複数の発話箇所をつないだ構成案です',
+  create_edit_plan: '複数箇所の構成案をもとに作った仮の演出案です',
+  apply_adjustment: '動画を作る前に確定した仮の変更点です',
   render_video: '確認用に生成された仮動画です'
 } satisfies Record<AgentRequestType, string>;
 
@@ -196,7 +194,9 @@ const selectedOperations = computed(() => {
     return [];
   }
 
-  return store.state.agentRequests.filter((request) => request.requestDraftId === draft.id);
+  return store.state.agentRequests.filter(
+    (request) => request.requestDraftId === draft.id && request.status !== 'superseded'
+  );
 });
 const runningOperations = computed(() => selectedOperations.value.filter((request) => request.status === 'running'));
 const waitingOperations = computed(() =>
@@ -220,8 +220,8 @@ const pendingControlReviews = computed(() =>
   selectedControlReviews.value.filter((item) => item.status === 'review_required')
 );
 const currentControlReview = computed(() => pendingControlReviews.value[0] ?? selectedControlReviews.value[0]);
-const candidateControlReview = computed(() =>
-  selectedControlReviews.value.find((item) => item.kind === 'candidate_generation')
+const themeControlReview = computed(() =>
+  selectedControlReviews.value.find((item) => item.kind === 'theme_selection')
 );
 const renderControlReview = computed(() =>
   selectedControlReviews.value.find((item) => item.kind === 'render_readiness')
@@ -314,10 +314,12 @@ const visibleDraftStatus = computed(() => {
 });
 const runHistory = computed(() =>
   store.state.requestDrafts.map((draft) => {
-    const operations = store.state.agentRequests.filter((request) => request.requestDraftId === draft.id);
+    const operations = store.state.agentRequests.filter(
+      (request) => request.requestDraftId === draft.id && request.status !== 'superseded'
+    );
     const reviews = store.state.controlReviewItems.filter((item) => item.requestDraftId === draft.id);
     const pendingReviews = reviews.filter((item) => item.status === 'review_required').length;
-    const stoppedReviews = reviews.filter((item) => ['rejected', 'changes_requested'].includes(item.status)).length;
+    const stoppedReviews = reviews.filter((item) => item.status === 'rejected').length;
     const completed = operations.filter((request) => request.status === 'succeeded').length;
     const failed = operations.filter((request) => request.status === 'failed').length;
     const active = operations.filter((request) => ['queued', 'waiting', 'running'].includes(request.status)).length;
@@ -336,14 +338,14 @@ const runHistory = computed(() =>
       statusLabel = '確認待ち';
       color = 'deep-orange-darken-4';
       summary = `${pendingReviews}件の判断が承認待ちです`;
-    } else if (stoppedReviews > 0) {
-      statusLabel = '確認済み';
-      color = 'deep-orange-darken-4';
-      summary = '却下または修正依頼で後続工程を止めています';
     } else if (active > 0) {
       statusLabel = '実行中';
       color = 'primary';
       summary = `${completed} / ${operations.length} 工程まで完了`;
+    } else if (stoppedReviews > 0) {
+      statusLabel = '確認済み';
+      color = 'deep-orange-darken-4';
+      summary = '却下により後続工程を止めています';
     } else if (operations.length > 0) {
       statusLabel = '完了';
       color = 'success';
@@ -435,7 +437,7 @@ const operationProgressPercent = computed(() => {
 
 const stepRows = computed(() =>
   (activeDraft.value?.steps ?? store.workflowSteps).map((step) => {
-    const operation = selectedOperations.value.find((request) => request.type === step.type);
+    const operation = [...selectedOperations.value].reverse().find((request) => request.type === step.type);
     return {
       key: step.type,
       label: step.label,
@@ -502,7 +504,7 @@ const candidateArtifacts = computed(() => artifactForTypes(processOperationTypes
 const editArtifacts = computed(() => artifactForTypes(processOperationTypes.edit));
 const videoArtifacts = computed(() => artifactForTypes(processOperationTypes.video));
 const outputVideoArtifact = computed(() =>
-  selectedArtifacts.value.find((artifact) => artifact.operation.type === 'render_video')
+  [...selectedArtifacts.value].reverse().find((artifact) => artifact.operation.type === 'render_video')
 );
 const hasOutputVideo = computed(() => Boolean(outputVideoArtifact.value));
 const recommendedProcessTab = computed<ProcessTabKey>(() => {
@@ -514,8 +516,8 @@ const recommendedProcessTab = computed<ProcessTabKey>(() => {
     return 'video';
   }
 
-  const pendingCandidateReview = candidateControlReview.value?.status === 'review_required';
-  if (pendingCandidateReview) {
+  const pendingThemeReview = themeControlReview.value?.status === 'review_required';
+  if (pendingThemeReview) {
     return 'candidates';
   }
 
@@ -539,7 +541,7 @@ const recommendedProcessTab = computed<ProcessTabKey>(() => {
   return 'request';
 });
 const requiredReviewProcessTab = computed<ProcessTabKey | undefined>(() => {
-  if (candidateControlReview.value?.status === 'review_required') {
+  if (themeControlReview.value?.status === 'review_required') {
     return 'candidates';
   }
 
@@ -584,14 +586,14 @@ const processTabs = computed<ProcessTab[]>(() => [
   },
   {
     key: 'candidates',
-    label: '候補確認',
-    question: 'この候補を動画生成前確認へ進めてよいですか',
-    helper: 'あなたは候補区間、選んだ理由、話した内容を確認し、次の確認へ進めるかを選びます。',
-    status: processStatusFor('candidates', candidateControlReview.value),
+    label: 'テーマ選択',
+    question: 'どのテーマで切り抜きを作りますか',
+    helper: '文字起こしから出したテーマ候補を見て、切り抜きたい内容を選びます。',
+    status: processStatusFor('candidates', themeControlReview.value),
     statusLabel:
-      processStatusFor('candidates', candidateControlReview.value) === 'done'
-        ? '候補を承認済み'
-        : processStatusLabel(processStatusFor('candidates', candidateControlReview.value)),
+      processStatusFor('candidates', themeControlReview.value) === 'done'
+        ? 'テーマを選択済み'
+        : processStatusLabel(processStatusFor('candidates', themeControlReview.value)),
     icon: 'mdi-clipboard-search-outline'
   },
   {
@@ -610,7 +612,7 @@ const processTabs = computed<ProcessTab[]>(() => [
     key: 'video',
     label: '生成後レビュー',
     question: '生成された確認用動画を見て、次に直す点は何ですか',
-    helper: 'あなたは確認用動画と修正候補を同じ画面で見て、候補、編集案、テロップ、切り出し範囲のどこを直すかを決めます。',
+    helper: 'あなたは確認用動画と修正点を同じ画面で見て、テーマ、つなぎ方、テロップ、切り出し範囲のどこを直すかを決めます。',
     status: hasOutputVideo.value ? 'ready' : runningOperations.value.some((request) => request.type === 'render_video') ? 'running' : 'pending',
     statusLabel: hasOutputVideo.value ? '生成結果を確認できます' : '未生成',
     icon: 'mdi-play-box-outline'
@@ -633,7 +635,7 @@ const userInstructionSummary = computed(() => ({
   label: 'あなたの指示',
   title: visiblePurpose.value || '依頼内容はまだありません',
   detail: activeDraft.value
-    ? `${visibleSourceStatus.value}。指定は ${activeDraft.value.settings.durationLabel} / ${activeDraft.value.settings.candidateCountLabel} です。`
+    ? `${visibleSourceStatus.value}。指定は ${activeDraft.value.settings.durationLabel} / ${activeDraft.value.settings.themeCountLabel} です。`
     : `${visibleSourceStatus.value}。作りたい内容と対象動画を入力してください。`
 }));
 const currentStatusSummary = computed(() => {
@@ -727,7 +729,7 @@ const currentStatusSummary = computed(() => {
       icon: 'mdi-file-check-outline',
       label: '現在状況',
       title: '依頼の作成待ちです',
-      detail: '内容を確認して作成を始めると、AIが候補作成へ進みます。'
+      detail: '内容を確認して作成を始めると、AIがテーマ候補作成へ進みます。'
     };
   }
 
@@ -741,7 +743,7 @@ const currentStatusSummary = computed(() => {
 });
 const activeReview = computed(() => {
   if (activeProcessTab.value === 'candidates') {
-    return candidateControlReview.value;
+      return themeControlReview.value;
   }
 
   if (activeProcessTab.value === 'edit') {
@@ -773,13 +775,12 @@ const activeImplementationNotes = computed(() => {
   const notes = {
     request: ['対象動画の登録は検証用です。動画解析そのものはまだ行っていません。'],
     candidates: [
-      'STTは実接続ではありません。ZEVサンプルの書き起こしから候補を作っています。',
-      'Geminiの映像確認は実接続ではありません。仮の確認メモを表示しています。',
-      'この段階では実動画の品質評価ではなく、候補確認で見る材料の出し方を確認してください。'
+      'STTは実接続ではありません。ZEVサンプルの書き起こしからテーマ候補を作っています。',
+      'この段階では映像や音声の補助計測は行わず、切り抜きたい内容の選択だけを確認します。'
     ],
     edit: [
-      '編集案はZEVサンプル由来の候補から作られています。実動画の最終品質評価はまだできません。',
-      'テロップ案と変更点は検証用です。実STTと実映像確認の接続後に品質評価します。'
+      '演出案は選ばれたテーマと複数箇所の構成案から作られています。',
+      '実装時は構成案に含まれる複数の動画箇所をGemini APIへ渡して演出を作ります。'
     ],
     video: [
       '確認用動画は仮生成です。映像品質ではなく、生成後に何を見て直すかが分かるかを確認してください。',
@@ -795,56 +796,49 @@ function isProcessLockedByReview(key: ProcessTabKey): boolean {
   const requiredTab = requiredReviewProcessTab.value;
   return Boolean(requiredTab && processOrder[key] > processOrder[requiredTab]);
 }
-const candidateArtifactJson = computed(() => artifactJsonFor('find_candidates'));
-const candidateReviewArtifactJson = computed(() => artifactJsonFor('gemini_candidate_review'));
+const themeArtifactJson = computed(() => artifactJsonFor('propose_clip_themes'));
+const compositionArtifactJson = computed(() => artifactJsonFor('build_clip_composition'));
 const editPlanArtifactJson = computed(() => artifactJsonFor('create_edit_plan'));
 const patchArtifactJson = computed(() => artifactJsonFor('apply_adjustment'));
-const candidateSummaries = computed<CandidateReviewSummary[]>(() => {
-  const candidates = arrayField(candidateArtifactJson.value, 'candidates');
-  const reviewedCandidates = arrayField(candidateReviewArtifactJson.value, 'reviewedCandidates');
+const themeSummaries = computed<ThemeReviewSummary[]>(() => {
+  const themes = arrayField(themeArtifactJson.value, 'themes');
+  const selectedThemeId = activeReview.value?.kind === 'theme_selection'
+    ? selectedReviewOptionId(activeReview.value)
+    : '';
 
-  return candidates.map((candidate, index) => {
-    const candidateRecord = recordValue(candidate);
-    const id = stringField(candidateRecord, 'id') || `candidate_${index + 1}`;
-    const rawTitle = stringField(candidateRecord, 'title') || `候補 ${index + 1}`;
-    const hookText = stringField(candidateRecord, 'hookText') || '';
-    const transcriptText = stringField(candidateRecord, 'transcriptText') || '';
-    const sourceReviewFocus = stringField(candidateRecord, 'reviewFocus');
-    const review = reviewedCandidates
-      .map((item) => recordValue(item))
-      .find((item) => stringField(item, 'candidateId') === id);
-    const evidenceRefs = arrayField(candidateRecord, 'evidenceRefs');
-    const placeholder = isPlaceholderCandidateText(rawTitle, hookText, transcriptText);
+  return themes.map((theme, index) => {
+    const themeRecord = recordValue(theme);
+    const id = stringField(themeRecord, 'id') || `theme_${index + 1}`;
+    const rawTitle = stringField(themeRecord, 'title') || `テーマ ${index + 1}`;
+    const summary = stringField(themeRecord, 'summary') || '';
+    const representativeText = stringField(themeRecord, 'representativeText') || '';
+    const evidenceRefs = arrayField(themeRecord, 'evidenceRefs');
+    const placeholder = isPlaceholderThemeText(rawTitle, summary, representativeText);
 
     return {
       id,
       title: cleanCandidateTitle(rawTitle, index),
-      rangeLabel: formatRange(numberField(candidateRecord, 'sourceStartMs'), numberField(candidateRecord, 'sourceEndMs')),
-      hookText: hookText || '冒頭で見せる言葉は未取得です',
-      transcriptText: transcriptText || '候補区間の発話は未取得です',
-      reason: candidateReasonForDisplay(candidateRecord, placeholder),
-      visualCheck: review
-        ? visualCheckForDisplay(stringField(review, 'visualCheck'))
-        : '映像確認工程は次の段階で作成されます。今は候補区間、発話内容、確認観点で判断します。',
-      contentSummary: candidateContentSummary(placeholder, transcriptText),
-      reviewFocus: sourceReviewFocus || candidateReviewFocus(placeholder),
-      limitationLabel: placeholder ? '仮STTのため内容判断は保留' : '内容を確認できます',
-      riskLabel: riskLabel(stringField(review, 'risk')),
-      nextActionLabel: nextActionLabel(stringField(review, 'nextAction')),
+      summary: summary || 'テーマの要約は未取得です',
+      representativeText: representativeText || '代表発話は未取得です',
+      whyItCanBeClipped: themeReasonForDisplay(themeRecord, placeholder),
+      compositionNote: stringField(themeRecord, 'compositionNote') || '選んだ後に関係する複数箇所を集めます。',
+      limitationLabel: placeholder ? '仮STTのため内容判断は保留' : '内容を選べます',
       evidenceLabel: evidenceRefs.length > 0 ? `${evidenceRefs.length}件の発話根拠` : '根拠参照は未取得です',
-      roleLabel: candidateRoleLabel(index)
+      roleLabel: themeRoleLabel(index, id, selectedThemeId),
+      selected: selectedThemeId === id
     };
   });
 });
-const primaryCandidateSummary = computed(() => candidateSummaries.value[0]);
+const primaryThemeSummary = computed(() => themeSummaries.value.find((theme) => theme.selected) ?? themeSummaries.value[0]);
 const editPlanSummary = computed<EditPlanSummary | undefined>(() => {
   const editPlan = editPlanArtifactJson.value;
   if (!editPlan) {
     return undefined;
   }
 
-  const selectedCandidateId = stringField(editPlan, 'selectedCandidateId') || '採用候補は未取得です';
-  const selectedCandidate = candidateSummaries.value.find((candidate) => candidate.id === selectedCandidateId);
+  const selectedThemeId = stringField(editPlan, 'selectedThemeId') || '選択テーマは未取得です';
+  const selectedTheme = themeSummaries.value.find((theme) => theme.id === selectedThemeId);
+  const compositionParts = arrayField(compositionArtifactJson.value, 'parts');
 
   const telopTexts = arrayField(editPlan, 'telopPlan')
     .map((item) => stringField(recordValue(item), 'text'))
@@ -860,10 +854,10 @@ const editPlanSummary = computed<EditPlanSummary | undefined>(() => {
   const renderReady = booleanField(patchArtifactJson.value, 'renderReady');
 
   return {
-    selectedCandidateId,
-    selectedCandidateTitle: selectedCandidate?.title ?? cleanCandidateTitle(selectedCandidateId, 0),
-    selectedCandidateReason: selectedCandidate?.reason ?? '採用理由はまだ読み込めません。',
-    selectedCandidateRange: selectedCandidate?.rangeLabel ?? '候補の時間範囲は未取得です',
+    selectedThemeId,
+    selectedThemeTitle: selectedTheme?.title ?? cleanCandidateTitle(selectedThemeId, 0),
+    compositionSummary: stringField(compositionArtifactJson.value, 'assemblyPlan') || '複数箇所のつなぎ方は未取得です',
+    partCountLabel: compositionParts.length > 0 ? `${compositionParts.length}箇所をつなぐ案です` : '構成箇所は未取得です',
     title: cleanCandidateTitle(stringField(editPlan, 'title') || '編集案タイトルは未取得です', 0),
     rangeLabel: formatRange(numberField(editPlan, 'sourceStartMs'), numberField(editPlan, 'sourceEndMs')),
     hookText: stringField(editPlan, 'hookText') || '冒頭で見せる言葉は未取得です',
@@ -878,32 +872,32 @@ const reviewChoiceCards = computed<ReviewChoice[]>(() => {
     return [];
   }
 
-  if (review.kind === 'candidate_generation') {
+  if (review.kind === 'theme_selection') {
     return [
       {
         action: 'approve',
-        label: 'この候補で進める',
-        title: '動画生成前確認へ進める',
-        body: '候補区間、選んだ理由、映像で確認することを見て、動画にする前の確認へ進める価値があると判断する場合。',
-        afterAction: '選ぶと、AIがこの候補を使って編集案と動画生成前の確認材料を作ります。',
+        label: 'このテーマで進める',
+        title: '選んだテーマで構成案を作る',
+        body: 'テーマ候補、代表発話、切り抜きにできそうな理由を見て、この内容で作りたいと判断する場合。',
+        afterAction: '選ぶと、AIが文字起こしを読み直し、このテーマに関係する複数箇所を集めます。',
         color: 'primary',
         icon: 'mdi-check'
       },
       {
         action: 'request_changes',
-        label: '候補を直したい',
-        title: '候補を作り直す',
-        body: '候補区間、冒頭の見せ方、根拠になった発話に直したい点がある場合。',
-        afterAction: '選ぶと、AIは後続工程へ進まず、直したい点を保存します。',
+        label: 'テーマを直したい',
+        title: 'テーマ候補を作り直す',
+        body: '切り抜きたい内容の候補が違う、代表発話が足りない、別のテーマを見たい場合。',
+        afterAction: '選ぶと、直したい点をもとにAIがテーマ候補を作り直します。',
         color: 'deep-orange-darken-4',
         icon: 'mdi-pencil'
       },
       {
         action: 'reject',
-        label: 'この候補は使わない',
+        label: 'この方向では作らない',
         title: 'この実行を止める',
-        body: '対象動画や候補の方向性が違い、このまま進めても確認材料にならない場合。',
-        afterAction: '選ぶと、この依頼はここで止まり、後続の編集案や動画作成へ進みません。',
+        body: '対象動画やテーマ候補の方向性が違い、このまま進めても確認材料にならない場合。',
+        afterAction: '選ぶと、この依頼はここで止まり、後続の構成案や動画作成へ進みません。',
         color: 'error',
         icon: 'mdi-close'
       }
@@ -915,7 +909,7 @@ const reviewChoiceCards = computed<ReviewChoice[]>(() => {
       action: 'approve',
       label: 'この編集案で作る',
       title: '確認用動画を作る',
-      body: '採用候補、使う区間、テロップ案を見て、動画にして確認する価値がある場合。',
+      body: '複数箇所の構成、つなぎ方、テロップ案を見て、動画にして確認する価値がある場合。',
       afterAction: '選ぶと、AIがこの編集案を使って確認用動画を作ります。',
       color: 'primary',
       icon: 'mdi-check'
@@ -925,7 +919,7 @@ const reviewChoiceCards = computed<ReviewChoice[]>(() => {
       label: '編集案を直したい',
       title: '動画生成前に戻す',
       body: '使う区間、テロップ、構成、変更内容を動画生成前に直したい場合。',
-      afterAction: '選ぶと、AIは動画を作らず、直したい点を保存します。',
+      afterAction: '選ぶと、選んだテーマは残し、AIが複数箇所の構成と演出案を作り直します。',
       color: 'deep-orange-darken-4',
       icon: 'mdi-pencil'
     },
@@ -943,30 +937,30 @@ const reviewChoiceCards = computed<ReviewChoice[]>(() => {
 const activeHumanAction = computed(() => actionForReview(activeReview.value));
 const fixSummaryCards = computed<FixSummaryCard[]>(() => [
   {
-    label: '候補',
-    title: primaryCandidateSummary.value?.title ?? '候補の判断材料がまだありません',
-    body: primaryCandidateSummary.value
-      ? `見る点: ${primaryCandidateSummary.value.hookText} / ${primaryCandidateSummary.value.riskLabel}`
-      : '候補区間、候補理由、映像確認メモができると整理できます。'
+    label: 'テーマ',
+    title: primaryThemeSummary.value?.title ?? 'テーマの判断材料がまだありません',
+    body: primaryThemeSummary.value
+      ? primaryThemeSummary.value.summary
+      : 'テーマ候補と代表発話ができると整理できます。'
   },
   {
-    label: '編集案',
+    label: '構成と演出',
     title: editPlanSummary.value?.title ?? '編集案の判断材料がまだありません',
     body: editPlanSummary.value
-      ? `${editPlanSummary.value.rangeLabel} を使う案です。${editPlanSummary.value.renderReadyLabel}`
-      : '採用候補、使う区間、テロップ案ができると整理できます。'
+      ? `${editPlanSummary.value.partCountLabel}。${editPlanSummary.value.renderReadyLabel}`
+      : '複数箇所の構成案とテロップ案ができると整理できます。'
   },
   {
     label: '生成動画',
     title: outputVideoArtifact.value ? '確認用動画があります' : '確認用動画はまだありません',
     body: outputVideoArtifact.value
-      ? '動画を見て、候補選び、切り出し、テロップ、見やすさのどこを直すか決めます。'
+      ? '動画を見て、テーマ、つなぎ方、テロップ、見やすさのどこを直すか決めます。'
       : '動画生成前確認で承認すると、生成後レビューで見られるようになります。'
   },
   {
     label: '画面',
     title: '次の修正対象をここで分けます',
-    body: '候補を作り直すのか、編集案を直すのか、動画生成を直すのか、UIを直すのかを分けて話す場所です。'
+    body: 'テーマを選び直すのか、構成や演出を直すのか、動画生成を直すのか、UIを直すのかを分けて話す場所です。'
   }
 ]);
 
@@ -975,7 +969,7 @@ function artifactForTypes(types: AgentRequestType[]): ArtifactRow[] {
 }
 
 function artifactJsonFor(type: AgentRequestType): Record<string, unknown> | undefined {
-  const artifact = selectedArtifacts.value.find((item) => item.operation.type === type);
+  const artifact = [...selectedArtifacts.value].reverse().find((item) => item.operation.type === type);
   if (!artifact) {
     return undefined;
   }
@@ -1023,18 +1017,18 @@ function booleanField(record: Record<string, unknown> | undefined, key: string):
 
 function cleanCandidateTitle(value: string, index: number): string {
   const trimmed = value.trim();
-  const withoutId = trimmed.replace(/^candidate[_-]?\d+$/i, '').trim();
-  const withoutPrefix = withoutId.replace(/^候補\s*\d+\s*[:：]\s*/, '').trim();
+  const withoutId = trimmed.replace(/^(candidate|theme)[_-]?\d+$/i, '').trim();
+  const withoutPrefix = withoutId.replace(/^(候補|テーマ)\s*\d+\s*[:：]\s*/, '').trim();
 
   if (withoutPrefix) {
     return withoutPrefix;
   }
 
-  return `候補 ${index + 1}`;
+  return `テーマ ${index + 1}`;
 }
 
-function isPlaceholderCandidateText(title: string, hookText: string, transcriptText: string): boolean {
-  const joined = [title, hookText, transcriptText].join(' ');
+function isPlaceholderThemeText(title: string, summary: string, representativeText: string): boolean {
+  const joined = [title, summary, representativeText].join(' ');
   return (
     joined.includes('配信素材の状況を確認します') ||
     joined.includes('仮書き起こし') ||
@@ -1042,42 +1036,30 @@ function isPlaceholderCandidateText(title: string, hookText: string, transcriptT
   );
 }
 
-function candidateContentSummary(isPlaceholder: boolean, transcriptText: string): string {
-  if (isPlaceholder) {
-    return '仮の書き起こしが短すぎるため、この候補だけでは動画内容の良し悪しを判断できません。';
+function themeRoleLabel(index: number, themeId: string, selectedThemeId: string): string {
+  if (selectedThemeId === themeId && activeHumanAction.value?.action === 'approve') {
+    return '選択済み';
   }
 
-  return transcriptText;
-}
-
-function candidateReviewFocus(isPlaceholder: boolean): string {
-  if (isPlaceholder) {
-    return '今回は候補の品質ではなく、確認画面で「採用、修正、使わない」を選べるかを見てください。';
-  }
-
-  return 'この区間だけで意味が伝わるか、冒頭が分かりやすいか、前後の切れ目が不自然でないかを確認してください。';
-}
-
-function candidateRoleLabel(index: number): string {
-  if (index === 0 && activeHumanAction.value?.action === 'approve') {
-    return 'AI推奨 / 前回承認済み';
+  if (selectedThemeId === themeId) {
+    return '選択中';
   }
 
   if (index === 0) {
-    return 'AI推奨';
+    return '最初のテーマ';
   }
 
-  return '比較候補';
+  return '別テーマ';
 }
 
-function candidateReasonForDisplay(candidate: Record<string, unknown>, isPlaceholder: boolean): string {
-  const rawReason = stringField(candidate, 'reason');
-  const title = stringField(candidate, 'title');
-  const hookText = stringField(candidate, 'hookText');
-  const topic = title || hookText;
+function themeReasonForDisplay(theme: Record<string, unknown>, isPlaceholder: boolean): string {
+  const rawReason = stringField(theme, 'whyItCanBeClipped');
+  const title = stringField(theme, 'title');
+  const summary = stringField(theme, 'summary');
+  const topic = title || summary;
 
   if (isPlaceholder) {
-    return '実STT未接続の仮データから作った候補です。内容評価ではなく、確認の流れを検証する候補として扱います。';
+    return '実STT未接続の仮データから作ったテーマ候補です。内容評価ではなく、選択の流れを検証する候補として扱います。';
   }
 
   const isTechnicalReason =
@@ -1085,27 +1067,19 @@ function candidateReasonForDisplay(candidate: Record<string, unknown>, isPlaceho
     rawReason.includes('JSON') ||
     rawReason.includes('ZEV') ||
     rawReason.includes('発話まとめ') ||
-    rawReason.includes('発話まとまり') ||
-    rawReason.includes('話者切替') ||
-    rawReason.includes('文末');
+	  rawReason.includes('発話まとまり') ||
+	  rawReason.includes('話者切替') ||
+	  rawReason.includes('文末');
 
   if (rawReason && !isTechnicalReason) {
     return rawReason;
   }
 
   if (topic) {
-    return `${topic} という内容がまとまっており、候補として比較しやすいため。`;
+    return `${topic} という内容がまとまっており、切り抜きテーマとして比較しやすいため。`;
   }
 
-  return 'この区間だけで意味が伝わるかを確認しやすい候補として残しています。';
-}
-
-function visualCheckForDisplay(rawValue: string): string {
-  if (rawValue && !rawValue.includes('仮Gemini') && !rawValue.includes('確認対象にした')) {
-    return rawValue;
-  }
-
-  return '前後のつながり、この区間だけで意味が伝わるか、字幕にしたとき読みづらくないか、始まりと終わりが自然かを確認します。';
+  return '文字起こし上で切り抜きたい内容として選べるまとまりがあるため。';
 }
 
 function formatRange(startMs?: number, endMs?: number): string {
@@ -1120,37 +1094,15 @@ function formatSeconds(valueMs: number): string {
   return `${(valueMs / 1000).toFixed(1)}秒`;
 }
 
-function riskLabel(value: string): string {
-  if (value === 'low') {
-    return '映像面の懸念は小さい';
-  }
-
-  if (value === 'medium') {
-    return '映像面は追加確認が必要';
-  }
-
-  if (value === 'high') {
-    return '映像面の懸念が大きい';
-  }
-
-  return '映像面の懸念は未評価';
-}
-
-function nextActionLabel(value: string): string {
-  if (value === 'use_for_edit_plan') {
-    return '編集案へ使う候補';
-  }
-
-  if (value === 'needs_manual_check') {
-    return '追加確認が必要な候補';
-  }
-
-  return '次の扱いは未確定';
-}
-
 function processStatusFor(key: ProcessTabKey, review?: ControlReviewItem): ProcessStatus {
   if (review?.status === 'review_required') {
     return 'review';
+  }
+
+  const operationTypes = processOperationTypes[key];
+  const operations = selectedOperations.value.filter((request) => operationTypes.includes(request.type));
+  if (operations.some((request) => ['queued', 'waiting', 'running'].includes(request.status))) {
+    return 'running';
   }
 
   if (review?.status === 'approved') {
@@ -1161,14 +1113,8 @@ function processStatusFor(key: ProcessTabKey, review?: ControlReviewItem): Proce
     return 'blocked';
   }
 
-  const operationTypes = processOperationTypes[key];
-  const operations = selectedOperations.value.filter((request) => operationTypes.includes(request.type));
   if (operations.some((request) => request.status === 'failed')) {
     return 'blocked';
-  }
-
-  if (operations.some((request) => ['queued', 'waiting', 'running'].includes(request.status))) {
-    return 'running';
   }
 
   if (operations.length > 0 && operations.every((request) => request.status === 'succeeded')) {
@@ -1270,41 +1216,41 @@ function humanActionMeaning(action: ReturnType<typeof actionForReview>): string 
   }
 
   if (action.action === 'request_changes') {
-    return reason || 'あなたが修正依頼を選びました。';
+    return reason || 'あなたが修正依頼を選び、AIが作り直す対象として扱われました。';
   }
 
   return reason || 'あなたが却下を選びました。';
 }
 
 function reviewPrimaryQuestion(review: ControlReviewItem): string {
-  if (review.kind === 'candidate_generation') {
-    return 'この候補を動画生成前確認へ進めてよいですか';
+  if (review.kind === 'theme_selection') {
+    return 'どのテーマで切り抜きを作りますか';
   }
 
-  return 'この編集案で確認用動画を作ってよいですか';
+  return 'この構成と演出案で確認用動画を作ってよいですか';
 }
 
 function reviewApproveLabel(review: ControlReviewItem): string {
-  if (review.kind === 'candidate_generation') {
-    return 'この候補で進める';
+  if (review.kind === 'theme_selection') {
+    return 'このテーマで進める';
   }
 
   return 'この編集案で作る';
 }
 
 function reviewAfterApprove(review: ControlReviewItem): string {
-  if (review.kind === 'candidate_generation') {
-    return '承認すると、候補をもとに映像確認と編集案作成へ進みます。';
+  if (review.kind === 'theme_selection') {
+    return '承認すると、選んだテーマに関係する複数箇所を集めて構成案を作ります。';
   }
 
-  return '承認すると、この編集案を使って確認用動画を作ります。';
+  return '承認すると、この構成と演出案を使って確認用動画を作ります。';
 }
 
 function reviewProposalText(review: ControlReviewItem): string {
-  if (review.kind === 'candidate_generation') {
-    return primaryCandidateSummary.value
-      ? `AIは「${primaryCandidateSummary.value.title}」を動画生成前確認へ進めることを提案しています`
-      : 'AIは候補を動画生成前確認へ進めることを提案しています';
+  if (review.kind === 'theme_selection') {
+    return primaryThemeSummary.value
+      ? `AIは「${primaryThemeSummary.value.title}」などのテーマ候補を出しています`
+      : 'AIはテーマ候補を出しています';
   }
 
   return editPlanSummary.value
@@ -1313,15 +1259,15 @@ function reviewProposalText(review: ControlReviewItem): string {
 }
 
 function reviewProposalReason(review: ControlReviewItem): string {
-  if (review.kind === 'candidate_generation') {
-    return primaryCandidateSummary.value
-      ? `${primaryCandidateSummary.value.reason} あなたは候補区間、単体で意味が伝わるか、映像で確認することを見て選びます。`
-      : 'あなたは候補区間、選んだ理由、映像で確認することを見て選びます。';
+  if (review.kind === 'theme_selection') {
+    return primaryThemeSummary.value
+      ? `${primaryThemeSummary.value.whyItCanBeClipped} あなたは切り抜きたいテーマを選びます。`
+      : 'あなたは文字起こしから出たテーマ候補を見て、切り抜きたい内容を選びます。';
   }
 
   return editPlanSummary.value
-    ? 'あなたは採用候補、使う範囲、テロップ案を確認し、確認用動画を作る前に止める点があるかを選びます。'
-    : 'あなたは編集案と動画生成前の変更点を確認して選びます。';
+    ? 'あなたは複数箇所の構成、つなぎ方、テロップ案を確認し、確認用動画を作る前に止める点があるかを選びます。'
+    : 'あなたは構成案と動画生成前の変更点を確認して選びます。';
 }
 
 function humanDecisionSummary(review: ControlReviewItem): string {
@@ -1330,8 +1276,8 @@ function humanDecisionSummary(review: ControlReviewItem): string {
     return 'まだあなたの判断は保存されていません。';
   }
 
-  if (review.kind === 'candidate_generation' && action.action === 'approve') {
-    return `あなたはAIの提案を承認しました。この判断により、次の工程「動画生成前確認」へ進みました。`;
+  if (review.kind === 'theme_selection' && action.action === 'approve') {
+    return `あなたは切り抜きたいテーマを選びました。この判断により、複数箇所の構成案作成へ進みました。`;
   }
 
   if (review.kind === 'render_readiness' && action.action === 'approve') {
@@ -1342,40 +1288,40 @@ function humanDecisionSummary(review: ControlReviewItem): string {
 }
 
 function nextProcessLabelForReview(review: ControlReviewItem): string {
-  return review.kind === 'candidate_generation' ? '動画生成前確認を見る' : '生成後レビューを見る';
+  return review.kind === 'theme_selection' ? '動画生成前確認を見る' : '生成後レビューを見る';
 }
 
 function nextProcessKeyForReview(review: ControlReviewItem): ProcessTabKey {
-  return review.kind === 'candidate_generation' ? 'edit' : 'video';
+  return review.kind === 'theme_selection' ? 'edit' : 'video';
 }
 
 function reviewReasonText(review: ControlReviewItem): string {
-  if (review.kind === 'candidate_generation') {
-    return '候補区間と選んだ理由が確認材料として保存されています。';
+  if (review.kind === 'theme_selection') {
+    return 'テーマ候補と代表発話が確認材料として保存されています。';
   }
 
-  return '編集案と動画生成前の変更点が確認材料として保存されています。';
+  return '複数箇所の構成案と動画生成前の変更点が確認材料として保存されています。';
 }
 
 function reviewApproveMeaning(review: ControlReviewItem): string {
-  if (review.kind === 'candidate_generation') {
-    return '候補区間と選んだ理由を見て、次の確認に進める価値がある状態です。';
+  if (review.kind === 'theme_selection') {
+    return 'テーマ候補と代表発話を見て、切り抜きたい内容として選べる状態です。';
   }
 
-  return '使う区間とテロップ案を見て、動画にして確認する価値がある状態です。';
+  return '複数箇所の構成とテロップ案を見て、動画にして確認する価値がある状態です。';
 }
 
 function reviewChangeMeaning(review: ControlReviewItem): string {
-  if (review.kind === 'candidate_generation') {
-    return '候補区間、候補理由、対象動画に直したい点がある状態です。';
+  if (review.kind === 'theme_selection') {
+    return 'テーマ候補、代表発話、対象動画に直したい点がある状態です。';
   }
 
   return '使う区間、テロップ案、構成を動画生成前に直したい状態です。';
 }
 
 function reviewRejectMeaning(review: ControlReviewItem): string {
-  if (review.kind === 'candidate_generation') {
-    return '対象動画や候補の方向性が違い、この実行を続けても確認材料にならない状態です。';
+  if (review.kind === 'theme_selection') {
+    return '対象動画やテーマ候補の方向性が違い、この実行を続けても確認材料にならない状態です。';
   }
 
   return 'この編集案では確認用動画を作っても判断材料にならない状態です。';
@@ -1383,6 +1329,14 @@ function reviewRejectMeaning(review: ControlReviewItem): string {
 
 function reviewChoiceReasonKey(review: ControlReviewItem, action: HumanReviewActionType): string {
   return `${review.id}:${action}`;
+}
+
+function selectedReviewOptionId(review: ControlReviewItem): string {
+  return selectedReviewOptions[review.id] || review.options[0]?.id || '';
+}
+
+function setSelectedReviewOption(review: ControlReviewItem, optionId: string) {
+  selectedReviewOptions[review.id] = optionId;
 }
 
 function setReviewChoiceReason(review: ControlReviewItem, action: HumanReviewActionType, value: string | null) {
@@ -1407,7 +1361,7 @@ function reviewChoiceReasonHint(action: HumanReviewActionType): string {
   }
 
   if (action === 'request_changes') {
-    return '直したい範囲や理由を書くと、この判断と一緒に保存されます。';
+    return '直したい範囲や理由を書くと、その内容をもとにAIが作り直します。';
   }
 
   return 'なぜ使わないか、どこで止めるべきかを書くと、この判断と一緒に保存されます。';
@@ -1428,26 +1382,25 @@ function artifactGuide(artifact: ArtifactRow): ArtifactGuideItem[] {
       { label: 'purpose', meaning: 'この動画で作りたいものです。' }
     ],
     run_stt: [
-      { label: 'segments', meaning: '話している内容を時間つきで分けたものです。候補探しの材料です。' },
+      { label: 'segments', meaning: '話している内容を時間つきで分けたものです。テーマ探しの材料です。' },
       { label: 'startMs / endMs', meaning: '発話が始まる位置と終わる位置です。' },
       { label: 'speechUnitGroups', meaning: '話題のまとまりとして扱う発話の組み合わせです。' }
     ],
-    find_candidates: [
-      { label: 'candidates', meaning: 'ショート候補の一覧です。' },
-      { label: 'sourceStartMs / sourceEndMs', meaning: '元動画から切り出す候補区間です。' },
-      { label: 'hookText', meaning: '冒頭で視聴者に見せたい言葉です。' },
-      { label: 'reason', meaning: 'なぜ候補にしたかの説明です。' },
-      { label: 'evidenceRefs', meaning: '候補理由の根拠になった発話や区間です。' }
+    propose_clip_themes: [
+      { label: 'themes', meaning: '文字起こしから作った切り抜きテーマ候補です。' },
+      { label: 'summary', meaning: 'そのテーマで何を見せるかの短い説明です。' },
+      { label: 'representativeText', meaning: 'テーマを選ぶ根拠になる代表発話です。' },
+      { label: 'relatedSpeechIds', meaning: '選択後に構成案へ使う関連発話です。' }
     ],
-    gemini_candidate_review: [
-      { label: 'reviewedCandidates', meaning: '候補を映像面から確認するためのメモです。' },
-      { label: 'visualCheck', meaning: '映像として確認したい観点です。' },
-      { label: 'captionHint', meaning: '字幕や冒頭文に使いやすい言葉です。' },
-      { label: 'nextAction', meaning: '編集案へ進めるか、追加確認が必要かの提案です。' }
+    build_clip_composition: [
+      { label: 'selectedThemeId', meaning: '人間が選んだテーマです。' },
+      { label: 'parts', meaning: '切り抜きに使う複数の発話箇所です。' },
+      { label: 'connectionNote', meaning: '前後の箇所をどうつなぐかの説明です。' },
+      { label: 'assemblyPlan', meaning: '複数箇所を並べる方針です。' }
     ],
     create_edit_plan: [
-      { label: 'selectedCandidateId', meaning: '編集案に採用した候補です。' },
-      { label: 'sourceStartMs / sourceEndMs', meaning: '動画に使う元動画の範囲です。' },
+      { label: 'selectedThemeId', meaning: '演出案の前提になったテーマです。' },
+      { label: 'geminiApiInput', meaning: '演出作成時にGemini APIへ渡す複数の動画箇所です。' },
       { label: 'renderSegments', meaning: '動画生成に渡す区間と役割です。' },
       { label: 'telopPlan', meaning: '表示するテロップ案です。' }
     ],
@@ -1545,7 +1498,10 @@ function closeHistory() {
 async function submitControlReview(review: ControlReviewItem, action: HumanReviewActionType) {
   const reasonKey = reviewChoiceReasonKey(review, action);
   const reason = reviewReasons[reasonKey] ?? '';
-  await store.submitControlReview(review.id, action, reason);
+  const selectedOptionId = action === 'approve' && review.kind === 'theme_selection'
+    ? selectedReviewOptionId(review)
+    : undefined;
+  await store.submitControlReview(review.id, action, reason, selectedOptionId);
   const reviewActions: HumanReviewActionType[] = ['approve', 'request_changes', 'reject'];
   for (const reviewAction of reviewActions) {
     reviewReasons[reviewChoiceReasonKey(review, reviewAction)] = '';
@@ -1704,9 +1660,9 @@ onMounted(() => {
                   density="compact"
                 />
                 <v-select
-                  v-model="draftInput.candidateCountLabel"
-                  :items="['3候補', '5候補', '1候補']"
-                  label="見たい候補数"
+                  v-model="draftInput.themeCountLabel"
+                  :items="['3テーマ', '5テーマ', '1テーマ']"
+                  label="見たいテーマ数"
                   density="compact"
                 />
               </div>
@@ -1719,12 +1675,6 @@ onMounted(() => {
                 ]"
                 label="重視する見方"
                 density="compact"
-              />
-              <v-switch
-                v-model="draftInput.includeRender"
-                color="primary"
-                label="確認用動画まで作る"
-                hide-details
               />
               <div class="review-button-row">
                 <v-btn color="primary" prepend-icon="mdi-send" type="submit" :loading="store.loading">
@@ -1795,7 +1745,7 @@ onMounted(() => {
                   </article>
                   <article>
                     <span>指定</span>
-                    <strong>{{ activeDraft.settings.durationLabel }} / {{ activeDraft.settings.candidateCountLabel }}</strong>
+                    <strong>{{ activeDraft.settings.durationLabel }} / {{ activeDraft.settings.themeCountLabel }}</strong>
                     <p>方針: {{ activeDraft.settings.preset }}</p>
                   </article>
                 </div>
@@ -1827,48 +1777,58 @@ onMounted(() => {
                     <p>{{ humanDecisionSummary(activeReview) }}</p>
                   </div>
 
-                  <div
-                    v-if="activeReview.kind === 'candidate_generation' && candidateSummaries.length > 0"
-                    class="candidate-review-list"
-                  >
-                    <article v-for="candidate in candidateSummaries" :key="candidate.id" class="candidate-review-card">
-                      <div class="candidate-review-heading">
-                        <span>{{ candidate.rangeLabel }}</span>
-                        <strong>{{ candidate.title }}</strong>
-                        <div class="material-tags">
-                          <v-chip size="small" color="primary" variant="tonal">{{ candidate.roleLabel }}</v-chip>
-                          <v-chip size="small" color="deep-orange-darken-4" variant="tonal">{{ candidate.limitationLabel }}</v-chip>
-                        </div>
-                      </div>
-                      <p><strong>この範囲で分かること:</strong> {{ candidate.contentSummary }}</p>
-                      <p><strong>候補にした理由:</strong> {{ candidate.reason }}</p>
-                      <p><strong>あなたが確認すること:</strong> {{ candidate.reviewFocus }}</p>
-                      <p><strong>映像側の確認:</strong> {{ candidate.visualCheck }}</p>
-                      <div class="material-tags">
-                        <v-chip size="small" color="primary" variant="tonal">{{ candidate.nextActionLabel }}</v-chip>
-                        <v-chip size="small" color="deep-orange-darken-4" variant="tonal">{{ candidate.riskLabel }}</v-chip>
-                        <v-chip size="small" color="blue-grey" variant="tonal">{{ candidate.evidenceLabel }}</v-chip>
-                      </div>
-                      <details class="candidate-transcript">
-                        <summary>候補区間の発話を見る</summary>
-                        <p>{{ candidate.transcriptText }}</p>
-                      </details>
-                    </article>
-                  </div>
-                  <div v-else-if="activeReview.kind === 'candidate_generation'" class="collapsed-note">
-                    候補の詳細を読み込んでいます。候補区間、理由、映像確認メモがここに表示されます。
-                  </div>
+	                  <div
+	                    v-if="activeReview.kind === 'theme_selection' && themeSummaries.length > 0"
+	                    class="candidate-review-list"
+	                  >
+	                    <article
+	                      v-for="theme in themeSummaries"
+	                      :key="theme.id"
+	                      class="candidate-review-card"
+	                      :class="{ 'is-selected': theme.selected }"
+	                    >
+	                      <div class="candidate-review-heading">
+	                        <span>テーマ候補</span>
+	                        <strong>{{ theme.title }}</strong>
+	                        <div class="material-tags">
+	                          <v-chip size="small" color="primary" variant="tonal">{{ theme.roleLabel }}</v-chip>
+	                          <v-chip size="small" color="deep-orange-darken-4" variant="tonal">{{ theme.limitationLabel }}</v-chip>
+	                          <v-chip size="small" color="blue-grey" variant="tonal">{{ theme.evidenceLabel }}</v-chip>
+	                        </div>
+	                      </div>
+	                      <p><strong>内容:</strong> {{ theme.summary }}</p>
+	                      <p><strong>選べる理由:</strong> {{ theme.whyItCanBeClipped }}</p>
+	                      <p><strong>選んだ後の処理:</strong> {{ theme.compositionNote }}</p>
+	                      <details class="candidate-transcript">
+	                        <summary>代表発話を見る</summary>
+	                        <p>{{ theme.representativeText }}</p>
+	                      </details>
+	                      <v-btn
+	                        v-if="activeReview.status === 'review_required'"
+	                        size="small"
+	                        :color="theme.selected ? 'primary' : 'blue-grey'"
+	                        variant="tonal"
+	                        prepend-icon="mdi-check-circle-outline"
+	                        @click="setSelectedReviewOption(activeReview, theme.id)"
+	                      >
+	                        このテーマを選ぶ
+	                      </v-btn>
+	                    </article>
+	                  </div>
+	                  <div v-else-if="activeReview.kind === 'theme_selection'" class="collapsed-note">
+	                    テーマ候補を読み込んでいます。テーマ、代表発話、選べる理由がここに表示されます。
+	                  </div>
 
-                  <div v-else-if="editPlanSummary" class="edit-plan-review">
-                    <article>
-                      <span>採用する候補</span>
-                      <strong>{{ editPlanSummary.selectedCandidateTitle }}</strong>
-                      <p>{{ editPlanSummary.selectedCandidateRange }}。{{ editPlanSummary.selectedCandidateReason }}</p>
-                    </article>
-                    <article>
-                      <span>使う範囲</span>
-                      <strong>{{ editPlanSummary.rangeLabel }}</strong>
-                      <p>{{ editPlanSummary.hookText }}</p>
+	                  <div v-else-if="editPlanSummary" class="edit-plan-review">
+	                    <article>
+	                      <span>選ばれたテーマ</span>
+	                      <strong>{{ editPlanSummary.selectedThemeTitle }}</strong>
+	                      <p>{{ editPlanSummary.compositionSummary }}</p>
+	                    </article>
+	                    <article>
+	                      <span>つなぐ箇所</span>
+	                      <strong>{{ editPlanSummary.partCountLabel }}</strong>
+	                      <p>{{ editPlanSummary.rangeLabel }} / {{ editPlanSummary.hookText }}</p>
                     </article>
                     <article>
                       <span>テロップ案</span>
@@ -1882,7 +1842,7 @@ onMounted(() => {
                     </article>
                   </div>
                   <div v-else class="collapsed-note">
-                    編集案の詳細を読み込んでいます。採用候補、使う範囲、テロップ案がここに表示されます。
+                    編集案の詳細を読み込んでいます。選ばれたテーマ、つなぐ箇所、テロップ案がここに表示されます。
                   </div>
 
                   <div v-if="activeReview.status === 'review_required'" class="review-decision-area">
@@ -1951,9 +1911,9 @@ onMounted(() => {
                     :src="outputVideoArtifact.fileRef.uri"
                   />
                   <div>
-                    <span>動画を見る目的</span>
-                    <strong>この動画を確認して、次に直す点を決めます</strong>
-                    <p>候補の選び方、切り出し範囲、テロップ、動画の見やすさを分けて確認してください。</p>
+	                    <span>動画を見る目的</span>
+	                    <strong>この動画を確認して、次に直す点を決めます</strong>
+	                    <p>テーマ、複数箇所のつなぎ方、テロップ、動画の見やすさを分けて確認してください。</p>
                   </div>
                 </div>
                 <div v-else class="collapsed-note">
@@ -2630,14 +2590,19 @@ h2 {
   gap: 10px;
 }
 
-.candidate-review-card {
-  background: #ffffff;
-  border: 1px solid #dce4ec;
-  border-radius: 8px;
-  display: grid;
-  gap: 8px;
-  padding: 12px;
-}
+	.candidate-review-card {
+	  background: #ffffff;
+	  border: 1px solid #dce4ec;
+	  border-radius: 8px;
+	  display: grid;
+	  gap: 8px;
+	  padding: 12px;
+	}
+
+	.candidate-review-card.is-selected {
+	  border-color: #2f7ed8;
+	  box-shadow: inset 0 0 0 1px #2f7ed8;
+	}
 
 .candidate-review-heading {
   align-items: start;

@@ -179,22 +179,26 @@ export const useControlQueueStore = defineStore('controlQueue', {
       this.message = 'AIが処理中です';
       this.runPhase = 'running';
     },
-    async submitControlReview(id: string, action: HumanReviewActionType, reason: string) {
+    async submitControlReview(id: string, action: HumanReviewActionType, reason: string, selectedOptionId?: string) {
       this.loading = true;
       this.errorMessage = '';
-      this.message = action === 'approve' ? '確認結果を保存して続きを実行しています' : '確認結果を保存しています';
+      this.message = action === 'reject'
+        ? '確認結果を保存しています'
+        : action === 'request_changes'
+          ? '修正依頼を保存して作り直しています'
+          : '確認結果を保存して続きを実行しています';
       try {
-        this.state = await submitHumanReviewAction(id, action, reason);
+        this.state = await submitHumanReviewAction(id, action, reason, selectedOptionId);
         this.lastChangedAt = new Date().toISOString();
 
-        if (action === 'approve') {
+        if (action === 'approve' || action === 'request_changes') {
           this.runPhase = 'running';
           await this.refreshUntilAgentSettled(Date.now());
           return;
         }
 
         this.runPhase = 'review_required';
-        this.message = action === 'reject' ? '却下として保存しました' : '修正依頼として保存しました';
+        this.message = '却下として保存しました';
       } catch (error) {
         this.errorMessage = formatApiError(error);
         this.message = '';

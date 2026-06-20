@@ -60,11 +60,15 @@ export async function failAgentRequest(id: string, input: AgentFailureInput): Pr
 export async function submitHumanReviewAction(
   id: string,
   action: HumanReviewActionType,
-  reason: string
+  reason: string,
+  selectedOptionId?: string
 ): Promise<Zev2State> {
   const actionPath =
     action === 'approve' ? 'approve' : action === 'reject' ? 'reject' : 'request-changes';
-  const response = await api.post(`/control-reviews/${id}/${actionPath}`, { reason });
+  const response = await api.post(`/control-reviews/${id}/${actionPath}`, {
+    reason,
+    ...(selectedOptionId ? { selectedOptionId } : {})
+  });
   return response.data.state;
 }
 

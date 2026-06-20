@@ -41,6 +41,140 @@ function selectAgentRequests(stateAgentRequests: AgentRequest[], ids: Set<string
   return stateAgentRequests.filter((request) => ids.has(request.id));
 }
 
+function workflowStepIndex(type: AgentRequest['type']): number {
+  const index = WORKFLOW_STEPS.findIndex((step) => step.type === type);
+  if (index < 0) {
+    throw new Error(`未知の工程です: ${type}`);
+  }
+
+  return index;
+}
+
+function latestSucceededAgentRequest(
+  stateAgentRequests: AgentRequest[],
+  requestDraftId: string,
+  type: AgentRequest['type']
+): AgentRequest | undefined {
+  return [...stateAgentRequests]
+    .reverse()
+    .find((request) => request.requestDraftId === requestDraftId && request.type === type && request.status === 'succeeded');
+}
+
+function createAgentRequestAfter(
+  sourceRequest: AgentRequest,
+  type: AgentRequest['type'],
+  dependsOnAgentRequestId: string,
+  createdAt: string
+): AgentRequest {
+  const step = WORKFLOW_STEPS.find((item) => item.type === type);
+  if (!step) {
+    throw new Error(`未知の工程です: ${type}`);
+  }
+
+  return {
+    id: createId('agent'),
+    requestDraftId: sourceRequest.requestDraftId,
+    type: step.type,
+    label: step.label,
+    target: { ...sourceRequest.target },
+    input: {
+      purpose: sourceRequest.input.purpose,
+      settings: { ...sourceRequest.input.settings }
+    },
+    constraints: { ...sourceRequest.constraints },
+    policy: { ...sourceRequest.policy },
+    dependsOnAgentRequestId,
+    status: 'queued',
+    fileRefIds: [],
+    createdAt,
+    updatedAt: createdAt
+  };
+}
+
+function markPendingRequestsAsReplaced(
+  stateAgentRequests: AgentRequest[],
+  requestDraftId: string,
+  startType: AgentRequest['type'],
+  updatedAt: string
+) {
+  const startIndex = workflowStepIndex(startType);
+  const renderIndex = workflowStepIndex('render_video');
+
+  for (const request of stateAgentRequests) {
+    const requestIndex = workflowStepIndex(request.type);
+    const shouldReplace =
+      request.requestDraftId === requestDraftId &&
+      requestIndex >= startIndex &&
+      requestIndex <= renderIndex &&
+      ['queued', 'waiting', 'running'].includes(request.status);
+
+    if (!shouldReplace) {
+      continue;
+    }
+
+    request.status = 'superseded';
+    request.errorMessage = '人間の修正依頼により、AIが作り直す対象になりました';
+    request.updatedAt = updatedAt;
+  }
+}
+
+function createRerunRequestsForReview(
+  stateAgentRequests: AgentRequest[],
+  reviewItem: ControlReviewItem,
+  createdAt: string
+): { requests: AgentRequest[] } | { error: string } {
+  const sourceRequest = stateAgentRequests.find((request) => request.id === reviewItem.agentRequestId);
+  if (!sourceRequest) {
+    return { error: '作り直し対象のAI工程が見つかりません' };
+  }
+
+  const startType: AgentRequest['type'] =
+    reviewItem.kind === 'theme_selection' ? 'propose_clip_themes' : 'build_clip_composition';
+  const dependencyType: AgentRequest['type'] =
+    reviewItem.kind === 'theme_selection' ? 'run_stt' : 'propose_clip_themes';
+  const dependencyRequest = latestSucceededAgentRequest(
+    stateAgentRequests,
+    reviewItem.requestDraftId,
+    dependencyType
+  );
+
+  if (!dependencyRequest) {
+    return { error: '作り直しに必要な前工程が完了していません' };
+  }
+
+  const startIndex = workflowStepIndex(startType);
+  const renderIndex = workflowStepIndex('render_video');
+  let dependsOnAgentRequestId = dependencyRequest.id;
+  const requests: AgentRequest[] = [];
+
+  for (const step of WORKFLOW_STEPS.slice(startIndex, renderIndex)) {
+    const request = createAgentRequestAfter(sourceRequest, step.type, dependsOnAgentRequestId, createdAt);
+    requests.push(request);
+    dependsOnAgentRequestId = request.id;
+  }
+
+  return { requests };
+}
+
+function createRenderRequestForReview(
+  stateAgentRequests: AgentRequest[],
+  reviewItem: ControlReviewItem,
+  createdAt: string
+): { request: AgentRequest } | { error: string } {
+  const sourceRequest = stateAgentRequests.find((request) => request.id === reviewItem.agentRequestId);
+  if (!sourceRequest) {
+    return { error: '動画生成の前提になるAI工程が見つかりません' };
+  }
+
+  if (sourceRequest.type !== 'apply_adjustment') {
+    return { error: '動画生成は生成前確認の承認後だけ作成できます' };
+  }
+
+  return {
+    request: createAgentRequestAfter(sourceRequest, 'render_video', sourceRequest.id, createdAt)
+  };
+}
+
 function hasText(value: unknown): value is string {
   return typeof value === 'string' && value.trim().length > 0;
 }
@@ -75,16 +209,16 @@ function validateAgentDecision(input: AgentDecisionInput | undefined): string[] 
 }
 
 function reviewTitle(kind: ControlReviewKind): string {
-  if (kind === 'candidate_generation') {
-    return '候補生成後の確認';
+  if (kind === 'theme_selection') {
+    return 'テーマ選択';
   }
 
   return '動画生成前の確認';
 }
 
 function reviewSummary(kind: ControlReviewKind, agentRequest: AgentRequest): string {
-  if (kind === 'candidate_generation') {
-    return `${agentRequest.label} の結果を確認して、映像確認へ進めるか判断します`;
+  if (kind === 'theme_selection') {
+    return `${agentRequest.label} の結果を確認して、切り抜きたいテーマを選びます`;
   }
 
   return `${agentRequest.label} の結果を確認して、動画生成へ進めるか判断します`;
@@ -162,6 +296,7 @@ function createControlReview(
     summary: reviewSummary(kind, agentRequest),
     reason: decisionLog.reason,
     evidenceRefs: decisionLog.evidenceRefs,
+    options: decisionInput.reviewOptions ?? [],
     proposedNextState: decisionLog.proposedNextState,
     humanQuestion: decisionLog.humanQuestion ?? '次の工程へ進めてよいか確認してください',
     decisionLogId: decisionLog.id,
@@ -230,7 +365,8 @@ function reviewActionLabel(action: HumanReviewActionType): string {
 async function applyHumanReviewAction(
   reviewItemId: string,
   action: HumanReviewActionType,
-  reasonInput: unknown
+  reasonInput: unknown,
+  selectedOptionInput?: unknown
 ): Promise<
   | { status: 'ok'; reviewItem: ControlReviewItem; humanReviewAction: HumanReviewAction; state: Awaited<ReturnType<typeof loadState>> }
   | { status: 'error'; statusCode: number; error: string; state?: Awaited<ReturnType<typeof loadState>> }
@@ -251,13 +387,52 @@ async function applyHumanReviewAction(
     return { status: 'error', statusCode: 400, error: `${reviewActionLabel(action)}には理由が必要です`, state };
   }
 
+  const selectedOptionId = hasText(selectedOptionInput) ? selectedOptionInput.trim() : '';
+  if (action === 'approve' && reviewItem.kind === 'theme_selection') {
+    if (!selectedOptionId) {
+      return { status: 'error', statusCode: 400, error: '切り抜きたいテーマを選んでください', state };
+    }
+
+    if (!reviewItem.options.some((option) => option.id === selectedOptionId)) {
+      return { status: 'error', statusCode: 400, error: '選んだテーマが確認対象にありません', state };
+    }
+  }
+
   const createdAt = nowIso();
+  let newAgentRequests: AgentRequest[] = [];
+  let replaceStartType: AgentRequest['type'] | undefined;
+
+  if (action === 'approve' && reviewItem.kind === 'render_readiness') {
+    const result = createRenderRequestForReview(state.agentRequests, reviewItem, createdAt);
+    if ('error' in result) {
+      return { status: 'error', statusCode: 409, error: result.error, state };
+    }
+
+    newAgentRequests = [result.request];
+  }
+
+  if (action === 'request_changes') {
+    const result = createRerunRequestsForReview(state.agentRequests, reviewItem, createdAt);
+    if ('error' in result) {
+      return { status: 'error', statusCode: 409, error: result.error, state };
+    }
+
+    const firstRequest = result.requests[0];
+    if (!firstRequest) {
+      return { status: 'error', statusCode: 409, error: '作り直し対象のAI工程を作成できません', state };
+    }
+
+    replaceStartType = firstRequest.type;
+    newAgentRequests = result.requests;
+  }
+
   const humanReviewAction: HumanReviewAction = {
     id: createId('human_review'),
     reviewItemId: reviewItem.id,
     requestDraftId: reviewItem.requestDraftId,
     action,
     reason: reason || `${reviewActionLabel(action)}として記録`,
+    ...(selectedOptionId ? { selectedOptionId } : {}),
     createdAt
   };
 
@@ -267,6 +442,12 @@ async function applyHumanReviewAction(
   reviewItem.resolvedByActionId = humanReviewAction.id;
   reviewItem.updatedAt = createdAt;
   state.humanReviewActions.push(humanReviewAction);
+
+  if (replaceStartType) {
+    markPendingRequestsAsReplaced(state.agentRequests, reviewItem.requestDraftId, replaceStartType, createdAt);
+  }
+
+  state.agentRequests.push(...newAgentRequests);
   await saveState(state);
 
   return { status: 'ok', reviewItem, humanReviewAction, state };
@@ -388,7 +569,7 @@ router.post('/agent-requests/:id/complete', async (request, response) => {
     return;
   }
 
-  const reviewKind = getRequiredControlReviewKind(state, agentRequest);
+  const reviewKind = getRequiredControlReviewKind(agentRequest);
   if (reviewKind) {
     const errors = validateAgentDecision(input.decision);
     if (errors.length > 0) {
@@ -423,7 +604,12 @@ router.post('/agent-requests/:id/complete', async (request, response) => {
 });
 
 router.post('/control-reviews/:id/approve', async (request, response) => {
-  const result = await applyHumanReviewAction(request.params.id, 'approve', request.body?.reason);
+  const result = await applyHumanReviewAction(
+    request.params.id,
+    'approve',
+    request.body?.reason,
+    request.body?.selectedOptionId
+  );
   if (result.status === 'error') {
     response.status(result.statusCode).json({ error: result.error, state: result.state });
     return;
@@ -450,6 +636,7 @@ router.post('/control-reviews/:id/request-changes', async (request, response) =>
     return;
   }
 
+  startDryRunRunner();
   response.json(result);
 });
 

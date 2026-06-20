@@ -31,7 +31,7 @@ pnpm run dev:client
 
 client は Vite、backend は Express API として動きます。
 UIで「承認してAIに渡す」を押すと、backendが承認済み作業キューを作り、dry-run runnerをバックグラウンド起動します。
-UIは状態APIを更新しながら、AI作業が最後まで進むことを確認します。
+UIは状態APIを更新しながら、テーマ選択や動画生成前確認で人間の判断を待ちます。
 
 手動で残キューを処理したい場合だけ、次を実行します。
 
@@ -67,7 +67,7 @@ pnpm run type-check
 - `POST /api/agent-requests/:id/fail`
 
 AIエージェントは `next` で作業を取得し、`claim` で着手状態にし、外部処理の結果だけを `complete` または `fail` で返します。
-この段階では backend 内で STT、LLM、動画生成、Gemini候補確認は実行しません。
+この段階では backend 内で STT、LLM、Gemini API、動画生成、完成品レビューは実行しません。
 backendが行うのは、承認後にdry-run runnerプロセスを起動してAPI実行を開始するところまでです。
 
 AIエージェントに渡す実行仕様は `docs/ai-agent-api.md` にまとめています。
@@ -75,6 +75,6 @@ AIエージェントに渡す実行仕様は `docs/ai-agent-api.md` にまとめ
 ## データの考え方
 
 第一ステップでは、巨大な解析結果を正本にしません。
-保存するのは、人間の確認下書き、型付き実行命令、工程ごとの成果物参照です。
+保存するのは、人間の確認下書き、型付き実行命令、テーマ候補、複数箇所の構成案、工程ごとの成果物参照です。
 
 開発用の実行状態は `runtime/state.json` へ保存します。このファイルはコミット対象にしません。

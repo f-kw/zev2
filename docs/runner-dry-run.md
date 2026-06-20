@@ -6,7 +6,7 @@
 
 dry-run runner は、AIエージェントがbackend APIだけで作業を最後まで進められることを確認するための最小runnerです。
 
-実STT、実LLM、実動画生成、実Gemini候補確認は実行しません。
+実STT、実LLM、Gemini API、実動画生成、完成品レビューは実行しません。
 各工程はdry-run成果物参照を返して完了します。
 
 ## 起動
@@ -37,14 +37,15 @@ pnpm run runner:dry-run -- --max-steps=100
 ```text
 prepare_video
 run_stt
-find_candidates
-gemini_candidate_review
+propose_clip_themes
+build_clip_composition
 create_edit_plan
 apply_adjustment
 render_video
 ```
 
-`render_video` は、UIで「動画生成まで含める」が有効な依頼だけに含まれます。
+初回承認で作られるキューは `apply_adjustment` までです。
+`render_video` は、複数箇所の構成と演出案を人間が確認し、「確認用動画を作る」と承認した後に追加されます。
 
 ## 完了時の意味
 
@@ -53,6 +54,9 @@ render_video
 - UIは状態APIを更新しながら完了状態を確認する。
 - runner は `GET /api/agent-requests/next` で次作業を取得する。
 - runner は `POST /api/agent-requests/:id/claim` で作業を取得済みにする。
+- runner は文字起こしからテーマ候補を作る。
+- 人間がテーマを選ぶまで、後続作業は止まる。
+- runner は選ばれたテーマに関係する複数の発話箇所を集めて構成案を作る。
 - runner は工程ごとのdry-run成果物参照を作る。
 - runner は `POST /api/agent-requests/:id/complete` で完了を報告する。
 - 全作業が完了すると `GET /api/agent-requests/next` は `null` を返す。
@@ -69,4 +73,4 @@ render_video
 ## 実処理との差し替え
 
 後続タスクでは、各dry-run handlerを実処理へ差し替えます。
-ただし、backendが直接STT、LLM、動画生成、Gemini候補確認を実行する方針にはしません。
+ただし、backendが直接STT、LLM、Gemini API、動画生成、完成品レビューを実行する方針にはしません。

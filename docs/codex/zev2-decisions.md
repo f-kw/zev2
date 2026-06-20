@@ -61,7 +61,7 @@
 - Decision: LLMは固定フローで毎回呼ぶのではなく、エージェントAIが必要性を判断する。
 - Reason: ZEV2はAIエージェントが型付き命令とファイル参照で処理する骨格を目指している。固定フローで毎回LLMを呼ぶと、不要な外部処理や説明不能な判断が増える。必要性を判断する場合も、その判断理由と参照データをログに残す必要がある。
 - Alternatives considered: すべての工程でLLMを必ず呼ぶ。LLM呼び出しを完全に禁止する。工程ごとに固定プロンプトだけで判断する。
-- Related files: `docs/ai-agent-api.md`, `docs/task-008-CodexからGeminiを使った候補確認機能.md`, `docs/claude/development-policy.md`
+- Related files: `docs/ai-agent-api.md`, `docs/task-008-Gemini-APIで演出作成.md`, `docs/claude/development-policy.md`
 - Review condition: エージェント出力スキーマで、外部AI確認を行った理由、入力、結果、人間確認要求の記録方法が定義されたとき。
 
 ## Decision ZC-D-006
@@ -94,7 +94,7 @@
 - Decision: D4チャットは初期検証の必須要素にしない。
 - Reason: 現行ZEV2にはD4チャット取得、保存、表示、品質確認への接続がない。control planeが未整備の状態でD4チャットを入れると、入力データだけが増えて判断制御が追いつかない。
 - Alternatives considered: D4チャットを候補生成の初期必須要素にする。D4チャットなしでは候補確認を進めない。
-- Related files: `docs/claude/development-policy.md`, `docs/task-008-CodexからGeminiを使った候補確認機能.md`
+- Related files: `docs/claude/development-policy.md`, `docs/task-008-Gemini-APIで演出作成.md`
 - Review condition: control plane と候補生成の見える化が完了し、D4チャットの取得条件がユーザー確認済みになったとき。
 
 ## Decision ZC-D-009
@@ -492,3 +492,14 @@
 - Alternatives considered: 色だけで重要度を分ける。仮実装の説明を工程上部に大きく出す。スクロール位置を維持する。候補確認だけインデントを入れる。
 - Related files: `client/src/App.vue`, `docs/codex/zev2-progress.md`
 - Review condition: 画面全体で、最初に見るべき情報と補足情報が同じ強さに見える場合。
+
+## Decision ZC-D-045
+
+- Decision ID: ZC-D-045
+- Date: 2026-06-20
+- Status: accepted
+- Decision: 設計書は人間向けの説明として保つ。内部型、API名、JSON項目、AIエージェント都合の工程名を主語にせず、人間が何を選び、何を確認し、どこで止められるかを先に書く。
+- Reason: 設計書が実装者向けの状態名や成果物名中心になると、ユーザーが「どの内容で切り抜くか」「なぜこの順番で進むか」「何を削るべきか」を判断できない。現在の目的は、細かい補助計測を増やすことではなく、文字起こしからテーマを選び、複数箇所をつなぐ最小の流れを人間が理解できる形で固定することである。
+- Alternatives considered: API仕様を設計書の主文にする。JSONスキーマを先に並べる。AIエージェントの工程名だけで流れを説明する。
+- Related files: `docs/codex/control-plane-spec.md`, `docs/current-implementation.md`, `docs/ai-agent-api.md`, `client/src/App.vue`
+- Review condition: 設計書を読んでも、人間が何を選ぶのか、何を確認するのか、どこで止めるのかが分からない場合。

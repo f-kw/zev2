@@ -12,20 +12,20 @@ export const WORKFLOW_STEPS = [
     requiresHumanApproval: false
   },
   {
-    type: 'find_candidates',
-    label: '候補探索',
-    outputKind: 'candidate_json',
+    type: 'propose_clip_themes',
+    label: 'テーマ候補作成',
+    outputKind: 'theme_json',
     requiresHumanApproval: false
   },
   {
-    type: 'gemini_candidate_review',
-    label: 'Gemini候補確認',
-    outputKind: 'candidate_review_json',
+    type: 'build_clip_composition',
+    label: '複数箇所構成',
+    outputKind: 'composition_json',
     requiresHumanApproval: false
   },
   {
     type: 'create_edit_plan',
-    label: '演出付与',
+    label: '演出作成',
     outputKind: 'edit_plan_json',
     requiresHumanApproval: false
   },
@@ -48,22 +48,15 @@ export type AgentRequestType = WorkflowStep['type'];
 export type FileRefKind = WorkflowStep['outputKind'];
 
 export type RequestDraftStatus = 'draft' | 'approved' | 'rejected';
-export type AgentRequestStatus = 'queued' | 'running' | 'waiting' | 'succeeded' | 'failed';
+export type AgentRequestStatus = 'queued' | 'running' | 'waiting' | 'succeeded' | 'failed' | 'superseded';
 export type FileRefAccess = 'internal' | 'external';
-export type ControlReviewKind = 'candidate_generation' | 'render_readiness';
+export type ControlReviewKind = 'theme_selection' | 'render_readiness';
 export type ControlReviewStatus = 'review_required' | 'approved' | 'rejected' | 'changes_requested';
 export type HumanReviewActionType = 'approve' | 'reject' | 'request_changes';
 export type DecisionLogActor = 'agent' | 'runner' | 'backend' | 'system' | 'user';
 export type DecisionLogType =
-  | 'candidate_selection'
-  | 'candidate_review'
-  | 'edit_plan'
-  | 'render_readiness'
-  | 'post_readiness'
-  | 'risk_check'
-  | 'state_transition'
-  | 'external_ai_needed'
-  | 'external_ai_skipped';
+  | 'theme_selection'
+  | 'render_readiness';
 
 export interface ControlReference {
   refId: string;
@@ -71,18 +64,23 @@ export interface ControlReference {
   meaning: string;
 }
 
+export interface ControlReviewOption {
+  id: string;
+  title: string;
+  summary: string;
+  evidenceRefs: ControlReference[];
+}
+
 export interface RequestDraftInput {
   purpose: string;
   sourceUri: string;
   durationLabel: string;
-  candidateCountLabel: string;
+  themeCountLabel: string;
   preset: string;
-  includeRender: boolean;
 }
 
 export interface HumanControlPolicy {
   humanApprovalRequiredBeforeRender: true;
-  renderIncludedInApprovedQueue: boolean;
 }
 
 export interface RequestDraft {
@@ -95,7 +93,7 @@ export interface RequestDraft {
   };
   settings: {
     durationLabel: string;
-    candidateCountLabel: string;
+    themeCountLabel: string;
     preset: string;
   };
   policy: HumanControlPolicy;
@@ -161,6 +159,7 @@ export interface AgentDecisionInput {
   decision: string;
   reason: string;
   evidenceRefs?: ControlReference[];
+  reviewOptions?: ControlReviewOption[];
   proposedNextState: string;
   requiresHumanReview: boolean;
   humanQuestion?: string | null;
@@ -174,8 +173,8 @@ export interface AgentFailureInput {
 export type OutputEntity =
   | { id: string; type: 'Video'; meaning: string; fileRefId: string }
   | { id: string; type: 'Transcript'; meaning: string; fileRefId: string }
-  | { id: string; type: 'Candidate'; meaning: string; fileRefId: string }
-  | { id: string; type: 'CandidateReview'; meaning: string; fileRefId: string }
+  | { id: string; type: 'ThemeCandidates'; meaning: string; fileRefId: string }
+  | { id: string; type: 'ClipComposition'; meaning: string; fileRefId: string }
   | { id: string; type: 'EditPlan'; meaning: string; fileRefId: string }
   | { id: string; type: 'Patch'; meaning: string; fileRefId: string }
   | { id: string; type: 'OutputVideo'; meaning: string; fileRefId: string };
@@ -221,6 +220,7 @@ export interface ControlReviewItem {
   summary: string;
   reason: string;
   evidenceRefs: ControlReference[];
+  options: ControlReviewOption[];
   proposedNextState: string;
   humanQuestion: string;
   decisionLogId: string;
@@ -236,14 +236,15 @@ export interface HumanReviewAction {
   requestDraftId: string;
   action: HumanReviewActionType;
   reason: string;
+  selectedOptionId?: string;
   createdAt: string;
 }
 
 const OUTPUT_TYPE_BY_REQUEST_TYPE = {
   prepare_video: 'Video',
   run_stt: 'Transcript',
-  find_candidates: 'Candidate',
-  gemini_candidate_review: 'CandidateReview',
+  propose_clip_themes: 'ThemeCandidates',
+  build_clip_composition: 'ClipComposition',
   create_edit_plan: 'EditPlan',
   apply_adjustment: 'Patch',
   render_video: 'OutputVideo'
@@ -251,11 +252,11 @@ const OUTPUT_TYPE_BY_REQUEST_TYPE = {
 
 const DRY_RUN_MEANING_BY_REQUEST_TYPE = {
   prepare_video: '対象動画をAI処理用の入力として登録した結果',
-  run_stt: 'ZEVサンプル書き起こしを候補探索用の材料として保存した結果',
-  find_candidates: '書き起こしからショート候補区間と判断材料を作った結果',
-  gemini_candidate_review: 'STTで絞った候補区間をGeminiで映像確認する工程の仮実装結果',
-  create_edit_plan: 'テロップ、構成、編集方針を作る工程の仮実装結果',
-  apply_adjustment: '修正内容を編集案へ反映する工程の仮実装結果',
+  run_stt: 'ZEVサンプル書き起こしをテーマ候補作成用の材料として保存した結果',
+  propose_clip_themes: '文字起こしから切り抜きたい内容を選ぶためのテーマ候補を作った結果',
+  build_clip_composition: '選ばれたテーマに関係する複数発話箇所を集めて構成案を作った結果',
+  create_edit_plan: '複数箇所の構成案と動画参照をもとに演出案を作る工程の仮実装結果',
+  apply_adjustment: '修正内容を複数箇所の演出案へ反映する工程の仮実装結果',
   render_video: '承認済み編集案から動画を生成する工程の仮実装結果'
 } satisfies Record<AgentRequestType, string>;
 
@@ -336,48 +337,35 @@ export function findBlockingControlReview(
   state: Zev2State,
   request: AgentRequest
 ): ControlReviewItem | undefined {
-  const candidateReview = state.controlReviewItems.find(
-    (item) =>
-      item.requestDraftId === request.requestDraftId &&
-      item.kind === 'candidate_generation' &&
-      item.status !== 'approved'
-  );
-  const requestStepIndex = WORKFLOW_STEPS.findIndex((step) => step.type === request.type);
-  const candidateStepIndex = WORKFLOW_STEPS.findIndex((step) => step.type === 'find_candidates');
+  const latestControlReview = (kind: ControlReviewKind) =>
+    state.controlReviewItems
+      .filter((item) => item.requestDraftId === request.requestDraftId && item.kind === kind)
+      .sort((left, right) => right.createdAt.localeCompare(left.createdAt))[0];
 
-  if (candidateReview && requestStepIndex > candidateStepIndex) {
-    return candidateReview;
+  const themeReview = latestControlReview('theme_selection');
+  const requestStepIndex = WORKFLOW_STEPS.findIndex((step) => step.type === request.type);
+  const themeStepIndex = WORKFLOW_STEPS.findIndex((step) => step.type === 'propose_clip_themes');
+
+  if (themeReview && themeReview.status !== 'approved' && requestStepIndex > themeStepIndex) {
+    return themeReview;
   }
 
   if (request.type !== 'render_video') {
     return undefined;
   }
 
-  return state.controlReviewItems.find(
-    (item) =>
-      item.requestDraftId === request.requestDraftId &&
-      item.kind === 'render_readiness' &&
-      item.status !== 'approved'
-  );
+  const renderReview = latestControlReview('render_readiness');
+  return renderReview?.status === 'approved' ? undefined : renderReview;
 }
 
 export function getRequiredControlReviewKind(
-  state: Zev2State,
   request: AgentRequest
 ): ControlReviewKind | undefined {
-  if (request.type === 'find_candidates') {
-    return 'candidate_generation';
+  if (request.type === 'propose_clip_themes') {
+    return 'theme_selection';
   }
 
-  if (request.type !== 'apply_adjustment') {
-    return undefined;
-  }
-
-  const hasRenderRequest = state.agentRequests.some(
-    (item) => item.requestDraftId === request.requestDraftId && item.type === 'render_video'
-  );
-
-  return hasRenderRequest ? 'render_readiness' : undefined;
+  return request.type === 'apply_adjustment' ? 'render_readiness' : undefined;
 }
 
 export function validateRequestDraftInput(input: Partial<RequestDraftInput>): string[] {
@@ -395,8 +383,8 @@ export function validateRequestDraftInput(input: Partial<RequestDraftInput>): st
     errors.push('尺を選んでください');
   }
 
-  if (!input.candidateCountLabel?.trim()) {
-    errors.push('候補数を選んでください');
+  if (!input.themeCountLabel?.trim()) {
+    errors.push('テーマ数を選んでください');
   }
 
   if (!input.preset?.trim()) {
@@ -421,12 +409,11 @@ export function createRequestDraft(
     },
     settings: {
       durationLabel: input.durationLabel.trim(),
-      candidateCountLabel: input.candidateCountLabel.trim(),
+      themeCountLabel: input.themeCountLabel.trim(),
       preset: input.preset.trim()
     },
     policy: {
-      humanApprovalRequiredBeforeRender: true,
-      renderIncludedInApprovedQueue: input.includeRender
+      humanApprovalRequiredBeforeRender: true
     },
     steps: WORKFLOW_STEPS.map((step) => ({
       type: step.type,
@@ -443,9 +430,7 @@ export function createAgentRequestsFromDraft(
   now: string,
   createId: (prefix: string) => string
 ): AgentRequest[] {
-  const requestedSteps = draft.policy.renderIncludedInApprovedQueue
-    ? WORKFLOW_STEPS
-    : WORKFLOW_STEPS.filter((step) => step.type !== 'render_video');
+  const requestedSteps = WORKFLOW_STEPS.filter((step) => step.type !== 'render_video');
 
   let previousAgentRequestId = '';
 

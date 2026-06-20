@@ -3,6 +3,7 @@ import { existsSync } from 'node:fs';
 import path from 'node:path';
 
 let runningDryRun: Promise<void> | null = null;
+let rerunRequested = false;
 
 function workspaceRoot(): string {
   if (process.env.ZEV2_WORKSPACE_ROOT) {
@@ -26,13 +27,8 @@ function apiBaseUrl(): string {
   return process.env.ZEV2_API_BASE_URL ?? 'http://localhost:8080/api';
 }
 
-export async function runDryRunRunner(): Promise<void> {
-  if (runningDryRun) {
-    return runningDryRun;
-  }
-
-  // 承認後にAPI経由の仮実装実行を最後まで進める。
-  const runPromise = new Promise<void>((resolve, reject) => {
+function runDryRunOnce(): Promise<void> {
+  return new Promise<void>((resolve, reject) => {
     const output: string[] = [];
     const child = spawn(
       'pnpm',
@@ -61,12 +57,27 @@ export async function runDryRunRunner(): Promise<void> {
 
       reject(new Error(`fixture runner failed with code ${code ?? 'unknown'}\n${output.join('')}`));
     });
-  }).finally(() => {
-    runningDryRun = null;
   });
+}
 
-  runningDryRun = runPromise;
-  return runPromise;
+export async function runDryRunRunner(): Promise<void> {
+  if (runningDryRun) {
+    rerunRequested = true;
+    return runningDryRun;
+  }
+
+  runningDryRun = (async () => {
+    try {
+      do {
+        rerunRequested = false;
+        await runDryRunOnce();
+      } while (rerunRequested);
+    } finally {
+      runningDryRun = null;
+    }
+  })();
+
+  return runningDryRun;
 }
 
 export function startDryRunRunner(): void {
