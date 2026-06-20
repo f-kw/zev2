@@ -43,6 +43,26 @@ export const WORKFLOW_STEPS = [
   }
 ] as const;
 
+export const DEFAULT_GEMINI_MODEL = 'gemini-3.5-flash';
+
+export const GEMINI_MODEL_OPTIONS = [
+  {
+    value: 'gemini-3.5-flash',
+    label: 'Gemini 3.5 Flash',
+    purpose: '品質確認'
+  },
+  {
+    value: 'gemini-3-flash-preview',
+    label: 'Gemini 3 Flash Preview',
+    purpose: '軽い確認'
+  },
+  {
+    value: 'gemini-2.5-flash',
+    label: 'Gemini 2.5 Flash',
+    purpose: '疎通確認'
+  }
+] as const;
+
 export type WorkflowStep = (typeof WORKFLOW_STEPS)[number];
 export type AgentRequestType = WorkflowStep['type'];
 export type FileRefKind = WorkflowStep['outputKind'];
@@ -76,6 +96,7 @@ export interface RequestDraftInput {
   sourceUri: string;
   durationLabel: string;
   themeCountLabel: string;
+  geminiModelName: string;
   preset: string;
 }
 
@@ -94,6 +115,7 @@ export interface RequestDraft {
   settings: {
     durationLabel: string;
     themeCountLabel: string;
+    geminiModelName: string;
     preset: string;
   };
   policy: HumanControlPolicy;
@@ -251,13 +273,13 @@ const OUTPUT_TYPE_BY_REQUEST_TYPE = {
 } satisfies Record<AgentRequestType, OutputEntityType>;
 
 const DRY_RUN_MEANING_BY_REQUEST_TYPE = {
-  prepare_video: '対象動画をAI処理用の入力として登録した結果',
-  run_stt: 'ZEVサンプル書き起こしをテーマ候補作成用の材料として保存した結果',
+  prepare_video: '対象動画を取得または参照し、AI処理用の入力として保存した結果',
+  run_stt: '動画から音声を抽出し、ZEVローカルSTTで文字起こしした結果',
   propose_clip_themes: '文字起こしから切り抜きたい内容を選ぶためのテーマ候補を作った結果',
   build_clip_composition: '選ばれたテーマに関係する複数発話箇所を集めて構成案を作った結果',
-  create_edit_plan: '複数箇所の構成案と動画参照をもとに演出案を作る工程の仮実装結果',
-  apply_adjustment: '修正内容を複数箇所の演出案へ反映する工程の仮実装結果',
-  render_video: '承認済み編集案から動画を生成する工程の仮実装結果'
+  create_edit_plan: '複数箇所の構成案と動画断片をもとに演出案を作った結果',
+  apply_adjustment: '修正内容を複数箇所の演出案へ反映した結果',
+  render_video: '承認済み編集案から複数箇所を連結して動画を生成した結果'
 } satisfies Record<AgentRequestType, string>;
 
 export function createInitialState(): Zev2State {
@@ -387,6 +409,10 @@ export function validateRequestDraftInput(input: Partial<RequestDraftInput>): st
     errors.push('テーマ数を選んでください');
   }
 
+  if (!input.geminiModelName?.trim()) {
+    errors.push('Geminiモデルを選んでください');
+  }
+
   if (!input.preset?.trim()) {
     errors.push('プリセットを選んでください');
   }
@@ -410,6 +436,7 @@ export function createRequestDraft(
     settings: {
       durationLabel: input.durationLabel.trim(),
       themeCountLabel: input.themeCountLabel.trim(),
+      geminiModelName: input.geminiModelName.trim(),
       preset: input.preset.trim()
     },
     policy: {

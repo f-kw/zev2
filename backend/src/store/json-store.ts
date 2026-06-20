@@ -56,6 +56,7 @@ function isCurrentRequestDraft(value: unknown): boolean {
     typeof draft.purpose === 'string' &&
     typeof settings.durationLabel === 'string' &&
     typeof settings.themeCountLabel === 'string' &&
+    typeof settings.geminiModelName === 'string' &&
     typeof settings.preset === 'string' &&
     policy.humanApprovalRequiredBeforeRender === true &&
     !('renderIncludedInApprovedQueue' in policy) &&

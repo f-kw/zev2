@@ -10,6 +10,7 @@
     "type-check": "pnpm --filter @zev2/shared build && tsc -p tsconfig.json --noEmit"
   },
   "dependencies": {
+    "@google/genai": "^1.52.0",
     "@zev2/shared": "workspace:*"
   },
   "devDependencies": {

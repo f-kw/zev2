@@ -1,13 +1,14 @@
 # dry-run runner
 
 作成日: 2026-05-31
+更新日: 2026-06-20
 
 ## 目的
 
-dry-run runner は、AIエージェントがbackend APIだけで作業を最後まで進められることを確認するための最小runnerです。
+dry-run runner は、AIエージェントがbackend APIだけで作業を最後まで進められることを確認するためのrunnerです。
 
-実STT、実LLM、Gemini API、実動画生成、完成品レビューは実行しません。
-各工程はdry-run成果物参照を返して完了します。
+現在は名前にdry-runが残っていますが、runner側では実STT、Gemini APIによるテーマ候補、Gemini APIによる演出案、ffmpegによるMP4生成まで実行できます。
+backendは外部処理を直接実行せず、runnerから成果物参照と完了報告だけを受け取ります。
 
 ## 起動
 
@@ -32,6 +33,19 @@ pnpm run runner:dry-run -- --api=http://localhost:8080/api
 pnpm run runner:dry-run -- --max-steps=100
 ```
 
+実STTを使う場合:
+
+```bash
+ZEV2_STT_SERVER_URL=http://192.168.1.7:8000 pnpm run runner:dry-run
+```
+
+STTサーバのIPは変わる前提なので、`ZEV2_STT_SERVER_URL` または `ZEV_STT_SERVER_URL` で指定します。
+動画生成やGemini演出で使う外部コマンドも、`ZEV2_FFMPEG_BIN`、`ZEV2_FFPROBE_BIN`、`ZEV2_YTDLP_BIN` で差し替えられます。
+Gemini APIの標準モデルは `gemini-3.5-flash` です。UIの使用モデルで、品質確認、軽い確認、疎通確認の用途から依頼ごとに切り替えられます。
+runnerの標準モデルだけを変える場合は `ZEV2_GEMINI_MODEL` を使います。
+接続確認やJSON応答確認だけのテストでは品質判断をしないため、UIまたは `ZEV2_GEMINI_MODEL` で `gemini-2.5-flash` または `gemini-3-flash-preview` を明示して使います。
+Vertex AI経由でGeminiを使う場合、`GOOGLE_CLOUD_PROJECT` を設定します。`GOOGLE_CLOUD_LOCATION` は未指定なら `global` を使います。
+
 ## 処理する工程
 
 ```text
@@ -54,17 +68,20 @@ render_video
 - UIは状態APIを更新しながら完了状態を確認する。
 - runner は `GET /api/agent-requests/next` で次作業を取得する。
 - runner は `POST /api/agent-requests/:id/claim` で作業を取得済みにする。
-- runner は文字起こしからテーマ候補を作る。
+- runner は動画から音声を抽出し、ZEVローカルSTTで文字起こしする。
+- runner は文字起こしをGemini APIへ送り、テーマ候補を作る。
 - 人間がテーマを選ぶまで、後続作業は止まる。
 - runner は選ばれたテーマに関係する複数の発話箇所を集めて構成案を作る。
-- runner は工程ごとのdry-run成果物参照を作る。
+- runner は構成案の複数動画箇所をGemini APIへ送り、演出案を作る。
+- runner は動画生成前確認の承認後、複数箇所を連結したMP4を作る。
+- runner は工程ごとの成果物参照を作る。
 - runner は `POST /api/agent-requests/:id/complete` で完了を報告する。
 - 全作業が完了すると `GET /api/agent-requests/next` は `null` を返す。
 
 ## 成果物参照
 
-成果物参照は `zev2://dry-run/...` の形式で作成します。
-これは実ファイルではなく、工程が完了したことを示すdry-run参照です。
+成果物参照は `/api/artifacts/...` の形式で作成します。
+大きなJSONや動画本体は状態ファイルへ埋め込まず、ファイル参照として保存します。
 
 ## 失敗時
 
@@ -72,5 +89,5 @@ render_video
 
 ## 実処理との差し替え
 
-後続タスクでは、各dry-run handlerを実処理へ差し替えます。
+後続タスクでは、API契約テスト、排他制御、復旧、完成品レビューを追加します。
 ただし、backendが直接STT、LLM、Gemini API、動画生成、完成品レビューを実行する方針にはしません。

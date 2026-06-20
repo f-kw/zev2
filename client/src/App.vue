@@ -10,6 +10,10 @@ import type {
   RequestDraftInput,
   RequestDraftStatus
 } from '@zev2/shared';
+import {
+  DEFAULT_GEMINI_MODEL,
+  GEMINI_MODEL_OPTIONS
+} from '@zev2/shared';
 import { fetchArtifactText } from './api';
 import { useControlQueueStore } from './stores/controlQueue';
 
@@ -84,8 +88,14 @@ const draftInput = reactive<RequestDraftInput>({
   sourceUri: '',
   durationLabel: '60秒以内',
   themeCountLabel: '3テーマ',
+  geminiModelName: DEFAULT_GEMINI_MODEL,
   preset: 'shorts_default'
 });
+
+const geminiModelItems = GEMINI_MODEL_OPTIONS.map((option) => ({
+  title: `${option.purpose}: ${option.label}`,
+  value: option.value
+}));
 
 const draftStatusLabel = {
   draft: '開始前',
@@ -216,6 +226,11 @@ const visibleSourceStatus = computed(() => {
   const sourceValue = creatingNewRun.value ? draftInput.sourceUri : activeDraft.value?.source.uri;
   return sourceValue?.trim() ? '対象動画は入力済み' : '対象動画未指定';
 });
+const activeGeminiModelName = computed(() =>
+  activeDraft.value?.settings.geminiModelName || draftInput.geminiModelName || DEFAULT_GEMINI_MODEL
+);
+const visibleGeminiModelLabel = computed(() => geminiModelLabel(activeGeminiModelName.value));
+const visibleGeminiModelPurpose = computed(() => geminiModelPurpose(activeGeminiModelName.value));
 const visibleDraftStatus = computed(() => {
   if (store.runPhase === 'saving') {
     return { label: '保存中', color: 'primary' };
@@ -475,7 +490,7 @@ const userInstructionSummary = computed(() => ({
   label: 'あなたの指示',
   title: visiblePurpose.value || '依頼内容はまだありません',
   detail: activeDraft.value
-    ? `${visibleSourceStatus.value}。指定は ${activeDraft.value.settings.durationLabel} / ${activeDraft.value.settings.themeCountLabel} です。`
+    ? `${visibleSourceStatus.value}。指定は ${activeDraft.value.settings.durationLabel} / ${activeDraft.value.settings.themeCountLabel} / ${visibleGeminiModelPurpose.value}: ${visibleGeminiModelLabel.value} です。`
     : `${visibleSourceStatus.value}。作りたい内容と対象動画を入力してください。`
 }));
 const currentStatusSummary = computed(() => {
@@ -786,6 +801,16 @@ function numberField(record: Record<string, unknown> | undefined, key: string): 
 function booleanField(record: Record<string, unknown> | undefined, key: string): boolean | undefined {
   const value = record?.[key];
   return typeof value === 'boolean' ? value : undefined;
+}
+
+function geminiModelLabel(modelName: string): string {
+  const option = GEMINI_MODEL_OPTIONS.find((item) => item.value === modelName);
+  return option ? option.label : modelName;
+}
+
+function geminiModelPurpose(modelName: string): string {
+  const option = GEMINI_MODEL_OPTIONS.find((item) => item.value === modelName);
+  return option ? option.purpose : '個別指定';
 }
 
 function cleanCandidateTitle(value: string, index: number): string {
@@ -1294,6 +1319,9 @@ onMounted(() => {
               <v-chip size="small" :color="visibleDraftStatus.color" variant="flat">
                 {{ visibleDraftStatus.label }}
               </v-chip>
+              <v-chip size="small" color="blue-grey" variant="tonal">
+                使用モデル: {{ visibleGeminiModelPurpose }} / {{ visibleGeminiModelLabel }}
+              </v-chip>
               <span v-if="store.lastChangedAt">最終更新 {{ formatTime(store.lastChangedAt) }}</span>
             </div>
           </section>
@@ -1340,6 +1368,14 @@ onMounted(() => {
                   v-model="draftInput.themeCountLabel"
                   :items="['3テーマ', '5テーマ', '1テーマ']"
                   label="見たいテーマ数"
+                  density="compact"
+                />
+                <v-select
+                  v-model="draftInput.geminiModelName"
+                  :items="geminiModelItems"
+                  label="使用モデル"
+                  hint="品質を見る実行は3.5、疎通確認は2.5か3"
+                  persistent-hint
                   density="compact"
                 />
               </div>
@@ -1422,6 +1458,11 @@ onMounted(() => {
                       <span>指定</span>
                       <strong>{{ activeDraft.settings.durationLabel }} / {{ activeDraft.settings.themeCountLabel }}</strong>
                       <p>方針: {{ activeDraft.settings.preset }}</p>
+                    </article>
+                    <article>
+                      <span>使用モデル</span>
+                      <strong>{{ geminiModelPurpose(activeDraft.settings.geminiModelName) }}</strong>
+                      <p>{{ activeDraft.settings.geminiModelName }}</p>
                     </article>
                   </div>
                   <div v-else class="empty">まだ依頼はありません。</div>
