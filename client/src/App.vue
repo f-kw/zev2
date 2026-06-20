@@ -983,7 +983,7 @@ function actionForReview(review: ControlReviewItem | undefined) {
 
 function humanActionMeaning(action: ReturnType<typeof actionForReview>): string {
   if (!action) {
-    return 'まだあなたの判断は保存されていません';
+    return 'まだ判断は保存されていません';
   }
 
   const reason = action.reason && action.reason !== '承認として記録' ? `理由: ${action.reason}` : '';
@@ -997,14 +997,6 @@ function humanActionMeaning(action: ReturnType<typeof actionForReview>): string 
   }
 
   return reason || '却下しました。';
-}
-
-function reviewPrimaryQuestion(review: ControlReviewItem): string {
-  if (review.kind === 'theme_selection') {
-    return 'どのテーマで切り抜きを作りますか';
-  }
-
-  return 'この内容で確認用動画を作ってよいですか';
 }
 
 function humanDecisionSummary(review: ControlReviewItem): string {
@@ -1586,13 +1578,6 @@ onMounted(() => {
                   <div v-if="failedOperations.length > 0" class="collapsed-note">
                     {{ failedOperations[0].label }} で止まっています。失敗内容を確認してください。
                   </div>
-                  <div v-if="selectedControlReviews.length > 0" class="review-history">
-                    <article v-for="review in selectedControlReviews" :key="review.id">
-                      <span>{{ actionForReview(review) ? 'あなたの判断' : '確認待ち' }}</span>
-                      <strong>{{ controlReviewStatusLabel[review.status] }}</strong>
-                      <p>{{ actionForReview(review) ? humanDecisionSummary(review) : reviewPrimaryQuestion(review) }}</p>
-                    </article>
-                  </div>
                 </div>
 
                 <div v-if="activeArtifacts.length > 0" class="artifact-panel">
@@ -2080,8 +2065,7 @@ h2 {
 .review-choice-grid span,
 .fix-summary-grid span,
 .judgement-guide span,
-.json-guide span,
-.review-history span {
+.json-guide span {
   color: #607080;
   display: block;
   font-size: 12px;
@@ -2097,8 +2081,7 @@ h2 {
 .candidate-review-card strong,
 .edit-plan-review strong,
 .review-choice-grid strong,
-.fix-summary-grid strong,
-.review-history strong {
+.fix-summary-grid strong {
   display: block;
   font-size: 17px;
 }
@@ -2113,8 +2096,7 @@ h2 {
 .edit-plan-review p,
 .review-choice-grid p,
 .fix-summary-grid p,
-.judgement-guide p,
-.review-history p {
+.judgement-guide p {
   color: #465666;
   margin: 0;
   overflow-wrap: anywhere;
@@ -2145,8 +2127,7 @@ h2 {
 .edit-plan-review article,
 .review-choice-grid article,
 .fix-summary-grid article,
-.judgement-guide article,
-.review-history article {
+.judgement-guide article {
   background: #f4f6f8;
   border-radius: 8px;
   display: grid;
@@ -2283,11 +2264,6 @@ h2 {
   align-items: start;
   display: grid;
   grid-template-columns: minmax(180px, 300px);
-}
-
-.review-history {
-  display: grid;
-  gap: 8px;
 }
 
 .panel-heading {
