@@ -2,7 +2,7 @@ import { defineStore } from 'pinia';
 import {
   createInitialState,
   findReadyAgentRequest,
-  hasHumanReviewRequired,
+  isAgentRequestReady,
   type HumanReviewActionType,
   type RequestDraftInput,
   type WorkflowStep,
@@ -39,6 +39,20 @@ function hasRunnableAgentRequests(state: Zev2State): boolean {
   return Boolean(
     findReadyAgentRequest(state) ||
       state.agentRequests.some((request) => request.status === 'running')
+  );
+}
+
+function hasRunnableAgentRequestsForDraft(state: Zev2State, requestDraftId: string): boolean {
+  return state.agentRequests.some(
+    (request) =>
+      request.requestDraftId === requestDraftId &&
+      (isAgentRequestReady(state, request) || request.status === 'running')
+  );
+}
+
+function hasHumanReviewRequiredForDraft(state: Zev2State, requestDraftId: string): boolean {
+  return state.controlReviewItems.some(
+    (item) => item.requestDraftId === requestDraftId && item.status === 'review_required'
   );
 }
 
@@ -153,7 +167,18 @@ export const useControlQueueStore = defineStore('controlQueue', {
     },
     async refreshUntilAgentSettled(startedAt = Date.now()) {
       for (let attempt = 0; attempt < 30; attempt += 1) {
-        if (hasHumanReviewRequired(this.state)) {
+        const activeDraftId = this.activeDraftId;
+
+        if (!activeDraftId && hasRunnableAgentRequests(this.state)) {
+          this.message = '作成中です';
+          this.runPhase = 'running';
+          await wait(300);
+          this.state = await fetchState();
+          this.lastChangedAt = new Date().toISOString();
+          continue;
+        }
+
+        if (activeDraftId && hasHumanReviewRequiredForDraft(this.state, activeDraftId)) {
           await keepPhaseVisible(startedAt, 700);
           this.message = '確認が必要です';
           this.runPhase = 'review_required';
@@ -161,7 +186,11 @@ export const useControlQueueStore = defineStore('controlQueue', {
           return;
         }
 
-        if (!hasRunnableAgentRequests(this.state)) {
+        const hasRunnableRequest = activeDraftId
+          ? hasRunnableAgentRequestsForDraft(this.state, activeDraftId)
+          : hasRunnableAgentRequests(this.state);
+
+        if (!hasRunnableRequest) {
           await keepPhaseVisible(startedAt, 700);
           this.message = '確認できます';
           this.runPhase = 'completed';
@@ -182,6 +211,11 @@ export const useControlQueueStore = defineStore('controlQueue', {
     async submitControlReview(id: string, action: HumanReviewActionType, reason: string, selectedOptionId?: string) {
       this.loading = true;
       this.errorMessage = '';
+      const reviewItem = this.state.controlReviewItems.find((item) => item.id === id);
+      if (reviewItem) {
+        this.activeDraftId = reviewItem.requestDraftId;
+        this.activePurpose = this.state.requestDrafts.find((draft) => draft.id === reviewItem.requestDraftId)?.purpose ?? '';
+      }
       this.message = action === 'reject'
         ? '確認結果を保存しています'
         : action === 'request_changes'
