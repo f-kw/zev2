@@ -14,6 +14,15 @@ import {
   getDryRunMeaningForRequest,
   type Zev2State
 } from '@zev2/shared';
+import {
+  SHORTS_RENDER_TARGET,
+  buildDefaultScreenLayoutPlan,
+  buildLayoutVideoFilter,
+  buildScreenLayoutCandidateSetFromGemini,
+  selectScreenLayoutCandidate,
+  type ShortsScreenLayoutCandidateSet,
+  type ShortsScreenLayoutPlan
+} from './screen-layout.js';
 
 interface NextResponse {
   request: AgentRequest | null;
@@ -150,6 +159,7 @@ type EditPlanArtifact = {
     sourceEndMs: number;
     role: string;
     caption: string;
+    screenLayout: ShortsScreenLayoutPlan;
   }>;
   telopPlan: Array<{
     atMs: number;
@@ -193,10 +203,6 @@ const OUTPUT_FILE_NAME_BY_KIND = {
 const SOURCE_VIDEO_FILE_NAME = 'source-video.mp4';
 const SOURCE_VIDEO_METADATA_FILE_NAME = 'source-video.json';
 const ZEV_SPEECH_UNIT_LONG_GAP_MS = 1200;
-const SHORTS_DEFAULT_RENDER_TARGET = {
-  width: 1080,
-  height: 1920
-} as const;
 const ZEV_STT_SAMPLE_PATH = path.join(workspaceRoot(), 'runner', 'fixtures', 'zev-stt-sample.json');
 
 function parseOptions(): RunnerOptions {
@@ -994,7 +1000,8 @@ function buildFixtureEditPlan(composition: ClipCompositionArtifact): EditPlanArt
       sourceStartMs: part.sourceStartMs,
       sourceEndMs: part.sourceEndMs,
       role: part.role,
-      caption: part.transcriptText.slice(0, 32)
+      caption: part.transcriptText.slice(0, 32),
+      screenLayout: buildDefaultScreenLayoutPlan()
     })),
     telopPlan: composition.parts.map((part, index) => ({
       atMs: index === 0
@@ -1013,6 +1020,15 @@ type GeminiEditPlanResponse = {
   hookText?: unknown;
   renderSegments?: unknown;
   telopPlan?: unknown;
+};
+
+type GeminiCandidateSelectionResponse = {
+  renderSegments?: unknown;
+};
+
+type CandidateEditPlanArtifact = {
+  editPlan: EditPlanArtifact;
+  candidateSets: ShortsScreenLayoutCandidateSet[];
 };
 
 type GeminiVideoClipInput = {
@@ -1094,17 +1110,41 @@ function buildGeminiEditPlanPrompt(composition: ClipCompositionArtifact): string
     .join('\n\n');
 
   return [
-    '複数の動画断片と文字起こしを見て、ショート動画の演出案を作ってください。',
-    '候補選定は済んでいます。ここでは映像の見え方、間、テロップの置き方だけを補助的に判断してください。',
-    '断片の順番と時間範囲は変えず、各断片の見せ方とテロップ案を整えてください。',
+    '複数の動画断片と文字起こしを見て、ショート動画の演出に必要な検出結果を作ってください。',
+    '候補選定は済んでいます。断片の順番と時間範囲は変えず、各断片の画面パターン、表示対象の検出範囲、テロップを決めてください。',
+    '最終的な切り出し位置はAIエージェント側で候補化します。ここでは候補選択やcrop座標を返さないでください。',
+    '画面パターンと検出範囲は添付動画を直接見て判断してください。文字起こしだけを根拠にした推測は禁止です。',
     'JSONだけを返してください。',
+    '',
+    '画面枠:',
+    '- speaker_only: 話者1人だけ。話者を縦長の画面全体に表示する。',
+    '- screen_speaker: 画面と話者。上に画面、下に話者を横長の2枠で表示する。',
+    '- speaker_pair: 話者2人。話者1を上、話者2を下に横長の2枠で表示する。',
+    '',
+    'detections:',
+    '- 座標は [ymin, xmin, ymax, xmax] の順で、0..1000 の整数にしてください。',
+    '- screen は、その断片で見えている画面全体です。',
+    '- speaker / speaker1 / speaker2 は face と body を返してください。',
+    '- face は顔全体、body は見えている人物全体です。face は必ず body の内側に収めてください。',
+    '- speaker_only では speaker を返してください。',
+    '- screen_speaker では screen と speaker を返してください。',
+    '- speaker_pair では speaker1 と speaker2 を返してください。',
+    '- final crop と selectedCandidateId は返さないでください。AIエージェントが検出結果から表示候補を作ります。',
     '',
     '返すJSON:',
     '{',
     '  "title": "動画の完成イメージを表す短いタイトル",',
     '  "hookText": "冒頭で見せる短い文言",',
     '  "renderSegments": [',
-    '    { "role": "断片の役割", "caption": "断片に出す短いテロップ" }',
+    '    {',
+    '      "role": "断片の役割",',
+    '      "caption": "断片に出す短いテロップ",',
+    '      "screenLayoutId": "screen_speaker",',
+    '      "detections": {',
+    '        "screen": [0, 0, 1000, 1000],',
+    '        "speaker": { "face": [0, 0, 300, 300], "body": [0, 0, 1000, 1000] }',
+    '      }',
+    '    }',
     '  ],',
     '  "telopPlan": [',
     '    { "atMs": 0, "text": "表示するテロップ", "role": "表示意図" }',
@@ -1203,7 +1243,7 @@ function parseGeminiJsonText(text: string, label: string): unknown {
   }
 }
 
-function applyGeminiEditPlanResponse(basePlan: EditPlanArtifact, response: GeminiEditPlanResponse): EditPlanArtifact {
+function applyGeminiEditPlanResponse(basePlan: EditPlanArtifact, response: GeminiEditPlanResponse): CandidateEditPlanArtifact {
   const renderSegmentRecords = Array.isArray(response.renderSegments)
     ? response.renderSegments.map(recordFrom)
     : [];
@@ -1211,12 +1251,20 @@ function applyGeminiEditPlanResponse(basePlan: EditPlanArtifact, response: Gemin
     ? response.telopPlan.map(recordFrom)
     : [];
 
+  if (renderSegmentRecords.length !== basePlan.renderSegments.length) {
+    throw new Error('Gemini APIの演出案で、動画断片ごとの画面表示計画が不足しています');
+  }
+
+  const candidateSets: ShortsScreenLayoutCandidateSet[] = [];
   const renderSegments = basePlan.renderSegments.map((segment, index) => {
     const proposed = renderSegmentRecords[index] ?? {};
+    const candidateSet = buildScreenLayoutCandidateSetFromGemini(proposed, `renderSegments[${index + 1}]`);
+    candidateSets.push(candidateSet);
     return {
       ...segment,
       role: typeof proposed.role === 'string' && proposed.role.trim() ? proposed.role.trim() : segment.role,
-      caption: typeof proposed.caption === 'string' && proposed.caption.trim() ? proposed.caption.trim().slice(0, 48) : segment.caption
+      caption: typeof proposed.caption === 'string' && proposed.caption.trim() ? proposed.caption.trim().slice(0, 48) : segment.caption,
+      screenLayout: selectScreenLayoutCandidate(candidateSet, undefined, `renderSegments[${index + 1}]`)
     };
   });
 
@@ -1229,13 +1277,201 @@ function applyGeminiEditPlanResponse(basePlan: EditPlanArtifact, response: Gemin
     : basePlan.telopPlan;
 
   return {
-    ...basePlan,
-    mode: 'gemini-api-edit-plan',
-    title: typeof response.title === 'string' && response.title.trim() ? response.title.trim() : basePlan.title,
-    hookText: typeof response.hookText === 'string' && response.hookText.trim() ? response.hookText.trim().slice(0, 48) : basePlan.hookText,
-    renderSegments,
-    telopPlan
+    editPlan: {
+      ...basePlan,
+      mode: 'gemini-api-edit-plan',
+      title: typeof response.title === 'string' && response.title.trim() ? response.title.trim() : basePlan.title,
+      hookText: typeof response.hookText === 'string' && response.hookText.trim() ? response.hookText.trim().slice(0, 48) : basePlan.hookText,
+      renderSegments,
+      telopPlan
+    },
+    candidateSets
   };
+}
+
+type CandidatePreviewInput = {
+  segmentIndex: number;
+  candidateId: string;
+  candidateLabel: string;
+  candidateReason: string;
+  path: string;
+  data: string;
+};
+
+async function buildCandidatePreviewInputs(
+  request: AgentRequest,
+  clips: GeminiVideoClipInput[],
+  candidateDraft: CandidateEditPlanArtifact
+): Promise<CandidatePreviewInput[]> {
+  const directory = requestArtifactDir(request);
+  await mkdir(directory, { recursive: true });
+
+  const previews: CandidatePreviewInput[] = [];
+  for (const [segmentIndex, candidateSet] of candidateDraft.candidateSets.entries()) {
+    const clip = clips[segmentIndex];
+    if (!clip) {
+      throw new Error(`表示候補プレビューに使う動画断片${segmentIndex + 1}がありません`);
+    }
+
+    const clipDimensions = await probeVideoDimensions(clip.path);
+    const midpointSeconds = Math.max(0, (clip.sourceEndMs - clip.sourceStartMs) / 2000);
+    for (const candidate of candidateSet.candidates) {
+      const screenLayout = selectScreenLayoutCandidate(
+        candidateSet,
+        candidate.id,
+        `renderSegments[${segmentIndex + 1}].${candidate.id}`
+      );
+      const outputLabel = `candidate_${segmentIndex + 1}_${candidate.id.replace(/[^a-zA-Z0-9_]/g, '_')}`;
+      const filter = buildLayoutVideoFilter({
+        inputLabel: '[0:v]',
+        outputLabel,
+        sourceWidth: clipDimensions.width,
+        sourceHeight: clipDimensions.height,
+        durationSeconds: 0.2,
+        screenLayout
+      });
+      const previewPath = path.join(directory, `candidate-preview-${segmentIndex + 1}-${candidate.id}.jpg`);
+      await runCommand(ffmpegCommand, [
+        '-y',
+        '-ss',
+        midpointSeconds.toFixed(3),
+        '-i',
+        clip.path,
+        '-filter_complex',
+        filter,
+        '-map',
+        `[${outputLabel}]`,
+        '-frames:v',
+        '1',
+        '-q:v',
+        '5',
+        '-update',
+        '1',
+        previewPath
+      ]);
+
+      previews.push({
+        segmentIndex,
+        candidateId: candidate.id,
+        candidateLabel: candidate.label,
+        candidateReason: candidate.reason,
+        path: previewPath,
+        data: (await readFile(previewPath)).toString('base64')
+      });
+    }
+  }
+
+  return previews;
+}
+
+function buildGeminiCandidateSelectionPrompt(
+  composition: ClipCompositionArtifact,
+  candidateDraft: CandidateEditPlanArtifact
+): string {
+  const segmentText = candidateDraft.editPlan.renderSegments
+    .map((segment, index) => {
+      const candidateSet = candidateDraft.candidateSets[index];
+      const candidates = candidateSet.candidates
+        .map((candidate) => `  - ${candidate.id}: ${candidate.label} / ${candidate.reason}`)
+        .join('\n');
+      return [
+        `断片${index + 1}`,
+        `役割: ${segment.role}`,
+        `テロップ: ${segment.caption}`,
+        `画面パターン: ${candidateSet.displaySummary}`,
+        '候補:',
+        candidates
+      ].join('\n');
+    })
+    .join('\n\n');
+
+  return [
+    'AIエージェントが、検出結果から最低条件を満たす表示候補を作りました。',
+    '各候補画像を見て、断片ごとに一番自然に見える候補IDだけを選んでください。',
+    '座標や新しい候補は作らないでください。必ず候補一覧にある selectedCandidateId を返してください。',
+    '判断基準は、顔が自然に見えること、画面情報が読めること、話の内容に対して主役が分かりやすいことです。',
+    'JSONだけを返してください。',
+    '',
+    '返すJSON:',
+    '{',
+    '  "renderSegments": [',
+    '    { "selectedCandidateId": "候補ID", "reason": "その候補を選んだ短い理由" }',
+    '  ]',
+    '}',
+    '',
+    `テーマ: ${composition.title}`,
+    `完成イメージ: ${composition.themeSummary}`,
+    '',
+    segmentText
+  ].join('\n');
+}
+
+function applyGeminiCandidateSelectionResponse(
+  candidateDraft: CandidateEditPlanArtifact,
+  response: GeminiCandidateSelectionResponse
+): EditPlanArtifact {
+  const selectionRecords = Array.isArray(response.renderSegments)
+    ? response.renderSegments.map(recordFrom)
+    : [];
+  if (selectionRecords.length !== candidateDraft.editPlan.renderSegments.length) {
+    throw new Error('Gemini APIの候補選択で、動画断片ごとの選択結果が不足しています');
+  }
+
+  return {
+    ...candidateDraft.editPlan,
+    renderSegments: candidateDraft.editPlan.renderSegments.map((segment, index) => {
+      const record = selectionRecords[index] ?? {};
+      const selectedCandidateId = typeof record.selectedCandidateId === 'string'
+        ? record.selectedCandidateId.trim()
+        : '';
+      const selectionReason = typeof record.reason === 'string' && record.reason.trim()
+        ? record.reason.trim()
+        : undefined;
+
+      return {
+        ...segment,
+        screenLayout: selectScreenLayoutCandidate(
+          candidateDraft.candidateSets[index],
+          selectedCandidateId,
+          `renderSegments[${index + 1}]`,
+          selectionReason
+        )
+      };
+    })
+  };
+}
+
+async function callGeminiCandidateSelectionApi(
+  request: AgentRequest,
+  composition: ClipCompositionArtifact,
+  clips: GeminiVideoClipInput[],
+  candidateDraft: CandidateEditPlanArtifact
+): Promise<EditPlanArtifact> {
+  const previews = await buildCandidatePreviewInputs(request, clips, candidateDraft);
+  const parts: Part[] = [{ text: buildGeminiCandidateSelectionPrompt(composition, candidateDraft) }];
+  for (const preview of previews) {
+    parts.push({
+      text: [
+        `断片${preview.segmentIndex + 1}`,
+        `候補ID: ${preview.candidateId}`,
+        `候補名: ${preview.candidateLabel}`,
+        `候補の意味: ${preview.candidateReason}`
+      ].join('\n')
+    });
+    parts.push({
+      inlineData: {
+        mimeType: 'image/jpeg',
+        data: preview.data
+      }
+    });
+  }
+
+  const responseJson = await generateGeminiJsonContent(request, parts, 'gemini-layout-candidate-response.json', '表示候補選択');
+  const selectionText = extractGeminiResponseText(responseJson);
+  return applyGeminiCandidateSelectionResponse(
+    candidateDraft,
+    parseGeminiJsonText(selectionText, 'Gemini APIの表示候補選択') as GeminiCandidateSelectionResponse
+  );
 }
 
 async function callGeminiEditPlanApi(
@@ -1273,10 +1509,11 @@ async function callGeminiEditPlanApi(
 
   const responseJson = await generateGeminiJsonContent(request, parts, 'gemini-edit-plan-response.json', '演出案作成');
   const planText = extractGeminiResponseText(responseJson);
-  return applyGeminiEditPlanResponse(
+  const candidateDraft = applyGeminiEditPlanResponse(
     basePlan,
     parseGeminiJsonText(planText, 'Gemini APIの演出案') as GeminiEditPlanResponse
   );
+  return callGeminiCandidateSelectionApi(request, composition, clips, candidateDraft);
 }
 
 async function buildEditPlanArtifact(
@@ -1286,6 +1523,12 @@ async function buildEditPlanArtifact(
 ): Promise<EditPlanArtifact> {
   const basePlan = buildFixtureEditPlan(composition);
   const geminiPlan = await callGeminiEditPlanApi(request, composition, state, basePlan);
+  const hasSourceVideo = Boolean(resolveSourceVideoPath(state, request));
+  const isSampleSource = request.target.sourceUri.startsWith('zev-sample://');
+  if (hasSourceVideo && !isSampleSource && !geminiPlan) {
+    throw new Error('演出作成にはGemini APIで動画断片を確認した画面表示計画が必要です');
+  }
+
   return geminiPlan ?? basePlan;
 }
 
@@ -1297,14 +1540,14 @@ function buildPatch(editPlanUri: string): PatchArtifact {
     editPlanUri,
     changes: [
       {
-        target: 'renderSegments',
-        action: '複数箇所を動画生成に渡せる順番へ確定',
-        reason: '選ばれたテーマに関係する複数の発話箇所をつなげて確認用動画にするため'
+        target: '動画の流れ',
+        action: '複数の発話箇所をこの順番で使う',
+        reason: 'テーマの入口から展開までを確認用動画として見られるようにするため'
       },
       {
-        target: 'telopPlan',
-        action: '各箇所の内容に合わせたテロップを仮配置',
-        reason: '構成案の流れを人間が確認できるようにするため'
+        target: '画面とテロップ',
+        action: '各断片で見せる範囲と表示文を決める',
+        reason: '動画にしたときに必要な場面が切れず、内容を追えるようにするため'
       }
     ],
     renderReady: true
@@ -1365,6 +1608,33 @@ async function sourceHasAudioTrack(sourcePath: string): Promise<boolean> {
   } catch {
     return false;
   }
+}
+
+async function probeVideoDimensions(sourcePath: string): Promise<{ width: number; height: number }> {
+  const output = await runCommandWithOutput(ffprobeCommand, [
+    '-v',
+    'error',
+    '-select_streams',
+    'v:0',
+    '-show_entries',
+    'stream=width,height',
+    '-of',
+    'json',
+    sourcePath
+  ]);
+  const parsed = recordFrom(JSON.parse(output));
+  const streams = Array.isArray(parsed.streams) ? parsed.streams : [];
+  const firstStream = recordFrom(streams[0]);
+  const width = Number(firstStream.width);
+  const height = Number(firstStream.height);
+  if (!Number.isFinite(width) || !Number.isFinite(height) || width <= 0 || height <= 0) {
+    throw new Error('動画の幅と高さを取得できません');
+  }
+
+  return {
+    width: Math.round(width),
+    height: Math.round(height)
+  };
 }
 
 function millisecondsToSeconds(valueMs: number): string {
@@ -1513,29 +1783,39 @@ function selectRenderRange(editPlan: EditPlanArtifact): { sourceStartMs: number;
   };
 }
 
-function selectRenderSegments(editPlan: EditPlanArtifact): Array<{ sourceStartMs: number; sourceEndMs: number }> {
+function selectRenderSegments(editPlan: EditPlanArtifact): Array<{
+  sourceStartMs: number;
+  sourceEndMs: number;
+  screenLayout: ShortsScreenLayoutPlan;
+}> {
   const segments = editPlan.renderSegments
     .filter((segment) => segment.sourceStartMs < segment.sourceEndMs)
     .map((segment) => ({
       sourceStartMs: segment.sourceStartMs,
-      sourceEndMs: segment.sourceEndMs
+      sourceEndMs: segment.sourceEndMs,
+      screenLayout: segment.screenLayout ?? buildDefaultScreenLayoutPlan()
     }));
 
-  return segments.length > 0 ? segments : [selectRenderRange(editPlan)];
+  return segments.length > 0
+    ? segments
+    : [{
+        ...selectRenderRange(editPlan),
+        screenLayout: buildDefaultScreenLayoutPlan()
+      }];
 }
 
 async function writeRenderPlan(
   request: AgentRequest,
-	  payload: {
-	    mode: 'source-file-trim' | 'fixture-pattern';
-	    sourceUri: string;
-	    sourcePath?: string;
-	    sourceStartMs: number;
-	    sourceEndMs: number;
-	    segments: Array<{ sourceStartMs: number; sourceEndMs: number }>;
-	    target: typeof SHORTS_DEFAULT_RENDER_TARGET;
-	    fallbackReason?: string;
-	  }
+  payload: {
+    mode: 'source-file-trim' | 'fixture-pattern';
+    sourceUri: string;
+    sourcePath?: string;
+    sourceStartMs: number;
+    sourceEndMs: number;
+    segments: Array<{ sourceStartMs: number; sourceEndMs: number; screenLayout: ShortsScreenLayoutPlan }>;
+    target: typeof SHORTS_RENDER_TARGET;
+    fallbackReason?: string;
+  }
 ): Promise<void> {
   const directory = requestArtifactDir(request);
   await mkdir(directory, { recursive: true });
@@ -1556,12 +1836,9 @@ async function renderFixtureVideo(request: AgentRequest, editPlan: EditPlanArtif
   );
   const durationSeconds = millisecondsToSeconds(durationMs);
   const sourcePath = resolveSourceVideoPath(state, request);
-  const videoFilter = [
-    `scale=${SHORTS_DEFAULT_RENDER_TARGET.width}:${SHORTS_DEFAULT_RENDER_TARGET.height}:force_original_aspect_ratio=increase`,
-    `crop=${SHORTS_DEFAULT_RENDER_TARGET.width}:${SHORTS_DEFAULT_RENDER_TARGET.height}`
-  ].join(',');
 
   if (sourcePath) {
+    const sourceDimensions = await probeVideoDimensions(sourcePath);
     await writeRenderPlan(request, {
       mode: 'source-file-trim',
       sourceUri: request.target.sourceUri,
@@ -1569,11 +1846,19 @@ async function renderFixtureVideo(request: AgentRequest, editPlan: EditPlanArtif
       sourceStartMs: renderRange.sourceStartMs,
       sourceEndMs: renderRange.sourceEndMs,
       segments: renderSegments,
-      target: SHORTS_DEFAULT_RENDER_TARGET
+      target: SHORTS_RENDER_TARGET
     });
 
     if (renderSegments.length === 1) {
       const segment = renderSegments[0];
+      const layoutFilter = buildLayoutVideoFilter({
+        inputLabel: '[0:v]',
+        outputLabel: 'outv',
+        sourceWidth: sourceDimensions.width,
+        sourceHeight: sourceDimensions.height,
+        durationSeconds: Number(millisecondsToSeconds(segment.sourceEndMs - segment.sourceStartMs)),
+        screenLayout: segment.screenLayout
+      });
       await runCommand(ffmpegCommand, [
         '-y',
         '-ss',
@@ -1582,12 +1867,12 @@ async function renderFixtureVideo(request: AgentRequest, editPlan: EditPlanArtif
         millisecondsToSeconds(segment.sourceEndMs - segment.sourceStartMs),
         '-i',
         sourcePath,
+        '-filter_complex',
+        layoutFilter,
         '-map',
-        '0:v:0',
+        '[outv]',
         '-map',
         '0:a?',
-        '-vf',
-        videoFilter,
         '-c:v',
         'libx264',
         '-pix_fmt',
@@ -1609,8 +1894,15 @@ async function renderFixtureVideo(request: AgentRequest, editPlan: EditPlanArtif
         '-i',
         sourcePath
       ]);
-      const scaledInputs = renderSegments
-        .map((_, index) => `[${index}:v]${videoFilter},setsar=1,setpts=PTS-STARTPTS[v${index}]`)
+      const layoutFilters = renderSegments
+        .map((segment, index) => buildLayoutVideoFilter({
+          inputLabel: `[${index}:v]`,
+          outputLabel: `v${index}`,
+          sourceWidth: sourceDimensions.width,
+          sourceHeight: sourceDimensions.height,
+          durationSeconds: Number(millisecondsToSeconds(segment.sourceEndMs - segment.sourceStartMs)),
+          screenLayout: segment.screenLayout
+        }))
         .join(';');
       const audioInputs = renderSegments
         .map((_, index) => `[${index}:a]asetpts=PTS-STARTPTS[a${index}]`)
@@ -1619,8 +1911,8 @@ async function renderFixtureVideo(request: AgentRequest, editPlan: EditPlanArtif
         ? renderSegments.map((_, index) => `[v${index}][a${index}]`).join('')
         : renderSegments.map((_, index) => `[v${index}]`).join('');
       const concatFilter = hasAudioTrack
-        ? `${scaledInputs};${audioInputs};${concatInputs}concat=n=${renderSegments.length}:v=1:a=1[outv][outa]`
-        : `${scaledInputs};${concatInputs}concat=n=${renderSegments.length}:v=1:a=0[outv]`;
+        ? `${layoutFilters};${audioInputs};${concatInputs}concat=n=${renderSegments.length}:v=1:a=1[outv][outa]`
+        : `${layoutFilters};${concatInputs}concat=n=${renderSegments.length}:v=1:a=0[outv]`;
       const outputMaps = hasAudioTrack ? ['-map', '[outv]', '-map', '[outa]'] : ['-map', '[outv]'];
       const audioCodecArgs = hasAudioTrack ? ['-c:a', 'aac', '-shortest'] : [];
 
@@ -1655,7 +1947,7 @@ async function renderFixtureVideo(request: AgentRequest, editPlan: EditPlanArtif
     sourceStartMs: renderRange.sourceStartMs,
     sourceEndMs: renderRange.sourceEndMs,
     segments: renderSegments,
-    target: SHORTS_DEFAULT_RENDER_TARGET,
+    target: SHORTS_RENDER_TARGET,
     fallbackReason: '入力動画をローカルファイルとして読めないため、編集案の尺に合わせた確認用映像を生成する'
   });
 
@@ -1664,7 +1956,7 @@ async function renderFixtureVideo(request: AgentRequest, editPlan: EditPlanArtif
     '-f',
     'lavfi',
     '-i',
-    `testsrc2=s=${SHORTS_DEFAULT_RENDER_TARGET.width}x${SHORTS_DEFAULT_RENDER_TARGET.height}:d=${durationSeconds}`,
+    `testsrc2=s=${SHORTS_RENDER_TARGET.width}x${SHORTS_RENDER_TARGET.height}:d=${durationSeconds}`,
     '-c:v',
     'libx264',
     '-pix_fmt',

@@ -671,11 +671,16 @@ const editPlanSummary = computed<EditPlanSummary | undefined>(() => {
   const telopTexts = arrayField(editPlan, 'telopPlan')
     .map((item) => stringField(recordValue(item), 'text'))
     .filter((text) => text.length > 0);
+  const layoutSummaries = Array.from(new Set(
+    arrayField(editPlan, 'renderSegments')
+      .map((item) => stringField(recordValue(recordValue(item).screenLayout), 'displaySummary'))
+      .filter((text) => text.length > 0)
+  ));
 
   return {
     selectedThemeId,
     selectedThemeTitle: selectedTheme?.title ?? cleanCandidateTitle(selectedThemeId, 0),
-    finalVideoDescription: finalVideoDescriptionForDisplay(themeSummary, assemblyPlan, telopTexts),
+    finalVideoDescription: finalVideoDescriptionForDisplay(themeSummary, assemblyPlan, telopTexts, layoutSummaries),
     telopTexts
   };
 });
@@ -852,26 +857,34 @@ function outcomeFlowText(assemblyPlan: string): string {
   return polite ? normalizeSentence(polite) : '';
 }
 
-function finalVideoDescriptionForDisplay(themeSummary: string, assemblyPlan: string, telopTexts: string[]): string {
+function finalVideoDescriptionForDisplay(
+  themeSummary: string,
+  assemblyPlan: string,
+  telopTexts: string[],
+  layoutSummaries: string[] = []
+): string {
   const summary = normalizeSentence(themeSummary);
   const flow = outcomeFlowText(assemblyPlan);
+  const layoutText = layoutSummaries.length > 0
+    ? `画面は${layoutSummaries.join(' / ')}で見せます。`
+    : '';
 
   if (summary && flow) {
-    return `${summary.replace(/。$/u, '')}確認用動画です。${flow}`;
+    return `${summary.replace(/。$/u, '')}確認用動画です。${flow}${layoutText}`;
   }
 
   if (summary) {
-    return `${summary.replace(/。$/u, '')}確認用動画です。`;
+    return `${summary.replace(/。$/u, '')}確認用動画です。${layoutText}`;
   }
 
   if (flow) {
-    return flow;
+    return `${flow}${layoutText}`;
   }
 
   const firstTelop = telopTexts[0]?.trim();
   return firstTelop
-    ? `「${firstTelop}」を中心に見せる確認用動画です。`
-    : '完成イメージは未取得です。';
+    ? `「${firstTelop}」を中心に見せる確認用動画です。${layoutText}`
+    : layoutText || '完成イメージは未取得です。';
 }
 
 function themeReasonForDisplay(theme: Record<string, unknown>, isPlaceholder: boolean): string {
@@ -1128,7 +1141,7 @@ function artifactGuide(artifact: ArtifactRow): ArtifactGuideItem[] {
     create_edit_plan: [
       { label: 'selectedThemeId', meaning: '演出案の前提になったテーマです。' },
       { label: 'geminiApiInput', meaning: '演出作成時にGemini APIへ渡す複数の動画箇所です。' },
-      { label: 'renderSegments', meaning: '動画生成に渡す区間と役割です。' },
+      { label: 'renderSegments', meaning: '動画生成に使う区間、画面の見せ方、表示文です。' },
       { label: 'telopPlan', meaning: '表示するテロップ案です。' }
     ],
     apply_adjustment: [
