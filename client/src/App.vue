@@ -1411,6 +1411,18 @@ async function submitControlReview(
     reviewReasons[reviewChoiceReasonKey(review, reviewAction, 'edit_plan')] = '';
     reviewReasons[reviewChoiceReasonKey(review, reviewAction, 'theme_reselect')] = '';
   }
+
+  if (action === 'approve' && review.kind === 'theme_selection') {
+    selectedProcessTab.value = 'edit';
+  }
+
+  if (action === 'approve' && review.kind === 'render_readiness') {
+    selectedProcessTab.value = 'video';
+  }
+
+  if (action === 'request_changes' && review.kind === 'render_readiness') {
+    selectedProcessTab.value = changeScope === 'theme_reselect' ? 'candidates' : 'edit';
+  }
 }
 
 async function requestGeneratedVideoEditRerun(scope: 'edit_plan' | 'theme_selection') {
@@ -1481,6 +1493,16 @@ watch(activeProcessTab, () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 });
+
+watch(
+  requiredReviewProcessTab,
+  (requiredTab) => {
+    if (requiredTab) {
+      selectedProcessTab.value = requiredTab;
+    }
+  },
+  { immediate: true }
+);
 
 onMounted(() => {
   store.refresh();
