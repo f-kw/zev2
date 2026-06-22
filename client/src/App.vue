@@ -1142,7 +1142,7 @@ function artifactGuide(artifact: ArtifactRow): ArtifactGuideItem[] {
       { label: 'selectedThemeId', meaning: '演出案の前提になったテーマです。' },
       { label: 'geminiApiInput', meaning: '演出作成時にGemini APIへ渡す複数の動画箇所です。' },
       { label: 'renderSegments', meaning: '動画生成に使う区間、画面の見せ方、表示文です。' },
-      { label: 'telopPlan', meaning: '表示するテロップ案です。' }
+      { label: 'telopPlan', meaning: '表示する文と、それを出す根拠になる発話です。動画生成時は発話から表示タイミングを決めます。' }
     ],
     apply_adjustment: [
       { label: 'changes', meaning: '動画生成前に確定した変更点です。' },

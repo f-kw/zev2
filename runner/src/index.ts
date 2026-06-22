@@ -24,7 +24,7 @@ import {
   type ShortsScreenLayoutPlan
 } from './screen-layout.js';
 import { resolveTelopPlacementArea, type TelopPlacementArea } from './telop-placement.js';
-import { loadTelopStyleProfile, resolveTelopStyle } from './telop-style.js';
+import { loadTelopStyleProfile, resolveTelopStyle, type ResolvedTelopStyle } from './telop-style.js';
 import { renderRemotionTelopPng } from './telop-remotion.js';
 
 interface NextResponse {
@@ -63,6 +63,14 @@ type SttSegment = {
   id: number;
   startMs: number;
   endMs: number;
+  text: string;
+  speaker?: string;
+};
+
+type SpeechTimingRef = {
+  id: number;
+  sourceStartMs: number;
+  sourceEndMs: number;
   text: string;
   speaker?: string;
 };
@@ -137,6 +145,7 @@ type ClipCompositionArtifact = {
     role: string;
     transcriptText: string;
     speechIds: number[];
+    speechUnits: SpeechTimingRef[];
     connectionNote: string;
   }>;
   assemblyPlan: string;
@@ -162,10 +171,12 @@ type EditPlanArtifact = {
     sourceEndMs: number;
     role: string;
     caption: string;
+    speechIds: number[];
+    speechUnits: SpeechTimingRef[];
     screenLayout: ShortsScreenLayoutPlan;
   }>;
   telopPlan: Array<{
-    atMs: number;
+    sourceSpeechIds: number[];
     text: string;
     role: string;
   }>;
@@ -695,6 +706,41 @@ function segmentTextByIds(transcript: TranscriptArtifact, ids: number[]): string
     .join('');
 }
 
+function speechUnitsByIds(transcript: TranscriptArtifact, ids: number[]): SpeechTimingRef[] {
+  const idSet = new Set(ids);
+  return transcript.segments
+    .filter((segment) => idSet.has(segment.id))
+    .map((segment) => ({
+      id: segment.id,
+      sourceStartMs: segment.startMs,
+      sourceEndMs: segment.endMs,
+      text: segment.text,
+      ...(segment.speaker ? { speaker: segment.speaker } : {})
+    }));
+}
+
+function joinTelopSpeechText(speechUnits: Array<{ text: string }>): string {
+  return speechUnits
+    .map((speech) => speech.text)
+    .join('')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function buildTelopPlanFromSpeechUnits(
+  speechUnits: SpeechTimingRef[],
+  role: string
+): EditPlanArtifact['telopPlan'] {
+  const text = joinTelopSpeechText(speechUnits);
+  return text
+    ? [{
+        sourceSpeechIds: speechUnits.map((speech) => speech.id),
+        text,
+        role
+      }]
+    : [];
+}
+
 function uniqueSpeechIds(ids: number[]): number[] {
   return [...new Set(ids)];
 }
@@ -821,6 +867,28 @@ function speechIdsFromGemini(value: unknown, knownIds: Set<number>): number[] {
         knownIds.has(item)
     )
   );
+}
+
+function speechIdsFromGeminiRequired(value: unknown, knownIds: Set<number>, label: string): number[] {
+  if (!Array.isArray(value)) {
+    throw new Error(`${label}に発話IDの配列がありません`);
+  }
+
+  const rawSpeechIds = value.map((item) => {
+    if (typeof item !== 'number' || !Number.isInteger(item)) {
+      throw new Error(`${label}に数値ではない発話IDがあります`);
+    }
+
+    return item;
+  });
+  const sourceSpeechIds = uniqueSpeechIds(rawSpeechIds);
+
+  const unknownSpeechIds = sourceSpeechIds.filter((speechId) => !knownIds.has(speechId));
+  if (unknownSpeechIds.length > 0) {
+    throw new Error(`${label}に存在しない発話IDがあります: ${unknownSpeechIds.join(', ')}`);
+  }
+
+  return sourceSpeechIds;
 }
 
 function applyGeminiThemeResponse(
@@ -955,6 +1023,7 @@ function buildClipComposition(themes: ThemeArtifact, transcript: TranscriptArtif
       role: index === 0 ? '導入' : index === groups.length - 1 ? '結論' : '展開',
       transcriptText: segmentTextByIds(transcript, partSpeechIds),
       speechIds: partSpeechIds,
+      speechUnits: speechUnitsByIds(transcript, partSpeechIds),
       connectionNote: index === 0 ? 'テーマを見せる入口として使う' : '前の発話を受けて話の流れをつなぐ'
     };
   });
@@ -977,7 +1046,10 @@ function buildClipComposition(themes: ThemeArtifact, transcript: TranscriptArtif
   };
 }
 
-function buildFixtureEditPlan(composition: ClipCompositionArtifact): EditPlanArtifact {
+function buildFixtureEditPlan(
+  composition: ClipCompositionArtifact,
+  screenLayoutForPart?: (part: ClipCompositionArtifact['parts'][number], index: number) => ShortsScreenLayoutPlan
+): EditPlanArtifact {
   if (composition.parts.length === 0) {
     throw new Error('編集案に使える構成箇所がありません');
   }
@@ -999,23 +1071,105 @@ function buildFixtureEditPlan(composition: ClipCompositionArtifact): EditPlanArt
       sourceEndMs: part.sourceEndMs,
       purpose: `${part.role}: ${part.connectionNote}`
     })),
-    renderSegments: composition.parts.map((part) => ({
+    renderSegments: composition.parts.map((part, index) => ({
       sourceStartMs: part.sourceStartMs,
       sourceEndMs: part.sourceEndMs,
       role: part.role,
       caption: part.transcriptText.slice(0, 32),
-      screenLayout: buildDefaultScreenLayoutPlan()
+      speechIds: part.speechIds,
+      speechUnits: part.speechUnits,
+      screenLayout: screenLayoutForPart?.(part, index) ?? buildDefaultScreenLayoutPlan()
     })),
-    telopPlan: composition.parts.map((part, index) => ({
-      atMs: index === 0
-        ? 0
-        : composition.parts
-            .slice(0, index)
-            .reduce((total, item) => total + Math.max(1, item.sourceEndMs - item.sourceStartMs), 0),
-      text: part.transcriptText.slice(0, 32),
-      role: part.role
-    }))
+    telopPlan: composition.parts.flatMap((part) => (
+      buildTelopPlanFromSpeechUnits(part.speechUnits, part.role)
+    ))
   };
+}
+
+function speechUnitsForTelopIds(
+  renderSegments: EditPlanArtifact['renderSegments'],
+  sourceSpeechIds: number[]
+): SpeechTimingRef[] {
+  const speechById = new Map<number, SpeechTimingRef>();
+  for (const segment of renderSegments) {
+    for (const speech of segment.speechUnits) {
+      if (!speechById.has(speech.id)) {
+        speechById.set(speech.id, speech);
+      }
+    }
+  }
+
+  return uniqueSpeechIds(sourceSpeechIds)
+    .map((speechId) => speechById.get(speechId))
+    .filter((speech): speech is SpeechTimingRef => Boolean(speech))
+    .sort((left, right) => left.sourceStartMs - right.sourceStartMs);
+}
+
+function normalizeGeminiTelopPlan(
+  telopPlan: EditPlanArtifact['telopPlan'],
+  renderSegments: EditPlanArtifact['renderSegments']
+): EditPlanArtifact['telopPlan'] {
+  const normalized = telopPlan.map((telop, index) => {
+    const speechUnits = speechUnitsForTelopIds(renderSegments, telop.sourceSpeechIds);
+    if (speechUnits.length !== uniqueSpeechIds(telop.sourceSpeechIds).length) {
+      throw new Error(`Gemini APIのテロップ案 ${index + 1} 件目に存在しない発話IDがあります`);
+    }
+    if (speechUnits.length < 2) {
+      throw new Error(`Gemini APIのテロップ案 ${index + 1} 件目は、表示文に対応する複数の発話IDが必要です`);
+    }
+
+    const text = telop.text.trim() || joinTelopSpeechText(speechUnits);
+    if (!text) {
+      throw new Error(`Gemini APIのテロップ案 ${index + 1} 件目の表示文が空です`);
+    }
+
+    return {
+      sourceSpeechIds: speechUnits.map((speech) => speech.id),
+      text,
+      role: telop.role.trim() || 'テロップ'
+    };
+  }).sort((left, right) => {
+    const leftFirst = speechUnitsForTelopIds(renderSegments, left.sourceSpeechIds)[0];
+    const rightFirst = speechUnitsForTelopIds(renderSegments, right.sourceSpeechIds)[0];
+    return (leftFirst?.sourceStartMs ?? 0) - (rightFirst?.sourceStartMs ?? 0);
+  });
+
+  if (normalized.length === 0) {
+    throw new Error('Gemini APIのテロップ案がありません');
+  }
+
+  return normalized;
+}
+
+function sampleScreenLayoutPlanForPart(index: number): ShortsScreenLayoutPlan {
+  const rawSegment = {
+    screenLayoutId: 'screen_speaker',
+    detections: {
+      screen: [140, 25, 875, 575],
+      speaker: {
+        face: [350, 710, 570, 840],
+        body: [120, 590, 1000, 980]
+      }
+    }
+  };
+  const selectedCandidateId = index === 0 ? 'screen_speaker_body' : 'screen_speaker_face';
+  const candidateSet = buildScreenLayoutCandidateSetFromGemini(rawSegment, `zev-sample.layout[${index + 1}]`);
+  return selectScreenLayoutCandidate(
+    candidateSet,
+    selectedCandidateId,
+    `zev-sample.layout[${index + 1}]`,
+    '確認用サンプル素材でGemini API確認済みの表示枠を使う'
+  );
+}
+
+function screenLayoutForFixtureSource(
+  request: AgentRequest
+): ((part: ClipCompositionArtifact['parts'][number], index: number) => ShortsScreenLayoutPlan) | undefined {
+  if (request.target.sourceUri === 'zev-sample://speech-id-timing') {
+    return (_part, index) => sampleScreenLayoutPlanForPart(index);
+  }
+
+  return undefined;
 }
 
 type GeminiEditPlanResponse = {
@@ -1039,6 +1193,7 @@ type GeminiVideoClipInput = {
   sourceEndMs: number;
   role: string;
   transcriptText: string;
+  speechUnits: SpeechTimingRef[];
   path: string;
   data: string;
 };
@@ -1092,6 +1247,7 @@ async function buildGeminiVideoClipInputs(
       sourceEndMs: part.sourceEndMs,
       role: part.role,
       transcriptText: part.transcriptText,
+      speechUnits: part.speechUnits,
       path: clipPath,
       data
     });
@@ -1103,11 +1259,19 @@ async function buildGeminiVideoClipInputs(
 function buildGeminiEditPlanPrompt(composition: ClipCompositionArtifact): string {
   const partsText = composition.parts
     .map((part, index) => {
+      const speechLines = part.speechUnits
+        .map((speech) => (
+          `  - 発話ID ${speech.id}: ${millisecondsToSeconds(speech.sourceStartMs)}秒 - ${millisecondsToSeconds(speech.sourceEndMs)}秒 / ${speech.text}`
+        ))
+        .join('\n');
       return [
         `断片${index + 1}`,
         `役割: ${part.role}`,
         `元動画時間: ${millisecondsToSeconds(part.sourceStartMs)}秒 - ${millisecondsToSeconds(part.sourceEndMs)}秒`,
-        `文字起こし: ${part.transcriptText}`
+        `使用する発話ID: ${part.speechIds.join(', ')}`,
+        `文字起こし: ${part.transcriptText}`,
+        '発話:',
+        speechLines
       ].join('\n');
     })
     .join('\n\n');
@@ -1117,6 +1281,11 @@ function buildGeminiEditPlanPrompt(composition: ClipCompositionArtifact): string
     '候補選定は済んでいます。断片の順番と時間範囲は変えず、各断片の画面パターン、表示対象の検出範囲、テロップを決めてください。',
     '最終的な切り出し位置はAIエージェント側で候補化します。ここでは候補選択やcrop座標を返さないでください。',
     '画面パターンと検出範囲は添付動画を直接見て判断してください。文字起こしだけを根拠にした推測は禁止です。',
+    'テロップの表示タイミングは時間で指定しないでください。LLMは時間指定を間違えやすいため、必ず下の発話IDで指定してください。',
+    'telopPlan.sourceSpeechIds には、そのテロップが対応する発話IDだけを入れてください。存在しない発話ID、元動画秒数、atMs は返さないでください。',
+    'テロップの区切りは文脈を読んで決めてください。プログラム側では日本語の文節推定や例外処理で直しません。',
+    '文章の途中、語の途中、不自然な接続語だけで切らないでください。',
+    '1テロップには、表示文に対応する連続した複数の発話IDを入れてください。1 IDだけ、断片全体1件、時刻指定は禁止です。',
     'JSONだけを返してください。',
     '',
     '画面枠:',
@@ -1150,7 +1319,7 @@ function buildGeminiEditPlanPrompt(composition: ClipCompositionArtifact): string
     '    }',
     '  ],',
     '  "telopPlan": [',
-    '    { "atMs": 0, "text": "表示するテロップ", "role": "表示意図" }',
+    '    { "sourceSpeechIds": [1, 2, 3], "text": "表示するテロップ", "role": "表示意図" }',
     '  ]',
     '}',
     '',
@@ -1246,16 +1415,23 @@ function parseGeminiJsonText(text: string, label: string): unknown {
   }
 }
 
-function applyGeminiEditPlanResponse(basePlan: EditPlanArtifact, response: GeminiEditPlanResponse): CandidateEditPlanArtifact {
+function applyGeminiEditPlanResponse(
+  basePlan: EditPlanArtifact,
+  response: GeminiEditPlanResponse
+): CandidateEditPlanArtifact {
   const renderSegmentRecords = Array.isArray(response.renderSegments)
     ? response.renderSegments.map(recordFrom)
     : [];
   const telopRecords = Array.isArray(response.telopPlan)
     ? response.telopPlan.map(recordFrom)
     : [];
+  const knownSpeechIds = new Set(basePlan.renderSegments.flatMap((segment) => segment.speechIds));
 
   if (renderSegmentRecords.length !== basePlan.renderSegments.length) {
     throw new Error('Gemini APIの演出案で、動画断片ごとの画面表示計画が不足しています');
+  }
+  if (telopRecords.length === 0) {
+    throw new Error('Gemini APIの演出案に、発話ID付きのテロップ案がありません');
   }
 
   const candidateSets: ShortsScreenLayoutCandidateSet[] = [];
@@ -1271,13 +1447,20 @@ function applyGeminiEditPlanResponse(basePlan: EditPlanArtifact, response: Gemin
     };
   });
 
-  const telopPlan = telopRecords.length > 0
-    ? telopRecords.map((record, index) => ({
-        atMs: typeof record.atMs === 'number' && Number.isFinite(record.atMs) ? Math.max(0, Math.round(record.atMs)) : (basePlan.telopPlan[index]?.atMs ?? 0),
-        text: typeof record.text === 'string' && record.text.trim() ? record.text.trim().slice(0, 48) : (basePlan.telopPlan[index]?.text ?? basePlan.hookText),
-        role: typeof record.role === 'string' && record.role.trim() ? record.role.trim() : (basePlan.telopPlan[index]?.role ?? 'テロップ')
-      }))
-    : basePlan.telopPlan;
+  const rawTelopPlan = telopRecords.map((record, index) => {
+    const label = `Gemini APIのテロップ案 ${index + 1} 件目`;
+    const sourceSpeechIds = speechIdsFromGeminiRequired(record.sourceSpeechIds, knownSpeechIds, label);
+    if (sourceSpeechIds.length < 2) {
+      throw new Error(`${label}は、表示文に対応する複数の発話IDが必要です`);
+    }
+
+    return {
+      sourceSpeechIds,
+      text: typeof record.text === 'string' && record.text.trim() ? record.text.trim() : '',
+      role: typeof record.role === 'string' && record.role.trim() ? record.role.trim() : 'テロップ'
+    };
+  });
+  const telopPlan = normalizeGeminiTelopPlan(rawTelopPlan, renderSegments);
 
   return {
     editPlan: {
@@ -1499,6 +1682,7 @@ async function callGeminiEditPlanApi(
         `動画断片${index + 1}`,
         `役割: ${clip.role}`,
         `元動画時間: ${millisecondsToSeconds(clip.sourceStartMs)}秒 - ${millisecondsToSeconds(clip.sourceEndMs)}秒`,
+        `使用する発話ID: ${clip.speechUnits.map((speech) => speech.id).join(', ')}`,
         `文字起こし: ${clip.transcriptText}`
       ].join('\n')
     });
@@ -1524,7 +1708,10 @@ async function buildEditPlanArtifact(
   composition: ClipCompositionArtifact,
   state: Zev2State
 ): Promise<EditPlanArtifact> {
-  const basePlan = buildFixtureEditPlan(composition);
+  const basePlan = buildFixtureEditPlan(
+    composition,
+    screenLayoutForFixtureSource(request)
+  );
   const geminiPlan = await callGeminiEditPlanApi(request, composition, state, basePlan);
   const hasSourceVideo = Boolean(resolveSourceVideoPath(state, request));
   const isSampleSource = request.target.sourceUri.startsWith('zev-sample://');
@@ -1651,6 +1838,7 @@ type RenderTelopEvent = {
   endMs: number;
   text: string;
   role: string;
+  sourceSpeechIds: number[];
 };
 
 type RenderTelopOverlay = RenderTelopEvent & {
@@ -1664,26 +1852,56 @@ type RenderTelopOverlay = RenderTelopEvent & {
   placement: TelopPlacementArea;
 };
 
+type RenderSegmentForVideo = {
+  sourceStartMs: number;
+  sourceEndMs: number;
+  caption: string;
+  speechIds: number[];
+  speechUnits: SpeechTimingRef[];
+  screenLayout: ShortsScreenLayoutPlan;
+};
+
 function sanitizeTelopText(value: string): string {
   return value.replace(/\s+/g, ' ').trim();
 }
 
 function buildRenderTelopEvents(
   editPlan: EditPlanArtifact,
-  renderSegments: Array<{
-    sourceStartMs: number;
-    sourceEndMs: number;
-    caption: string;
-    screenLayout: ShortsScreenLayoutPlan;
-  }>,
+  renderSegments: RenderSegmentForVideo[],
   durationMs: number
 ): RenderTelopEvent[] {
+  const speechTimeline = buildRenderedSpeechTimeline(renderSegments);
   const telopRecords = editPlan.telopPlan
-    .map((telop) => ({
-      startMs: Math.max(0, Math.round(telop.atMs)),
-      text: sanitizeTelopText(telop.text),
-      role: sanitizeTelopText(telop.role)
-    }))
+    .map((telop) => {
+      const sourceSpeechIds = uniqueSpeechIds(telop.sourceSpeechIds);
+      const speechRefs = sourceSpeechIds
+        .map((speechId) => {
+          const range = speechTimeline.get(speechId);
+          return range ? { id: speechId, ...range } : undefined;
+        })
+        .filter((speech): speech is { id: number; startMs: number; endMs: number; text: string } => Boolean(speech))
+        .sort((left, right) => left.startMs - right.startMs);
+
+      if (speechRefs.length === 0) {
+        return undefined;
+      }
+
+      const speechText = joinTelopSpeechText(speechRefs);
+      return {
+        startMs: Math.min(...speechRefs.map((speech) => speech.startMs)),
+        speechEndMs: Math.max(...speechRefs.map((speech) => speech.endMs)),
+        text: sanitizeTelopText(telop.text || speechText),
+        role: sanitizeTelopText(telop.role),
+        sourceSpeechIds: speechRefs.map((speech) => speech.id)
+      };
+    })
+    .filter((telop): telop is {
+      startMs: number;
+      speechEndMs: number;
+      text: string;
+      role: string;
+      sourceSpeechIds: number[];
+    } => Boolean(telop))
     .filter((telop) => telop.startMs < durationMs && telop.text.length > 0)
     .sort((left, right) => left.startMs - right.startMs);
 
@@ -1693,12 +1911,15 @@ function buildRenderTelopEvents(
   const events = uniqueTelopRecords
     .map((telop, index) => {
       const nextTelop = uniqueTelopRecords[index + 1];
-      const endMs = Math.min(durationMs, nextTelop?.startMs ?? durationMs);
+      const speechEndMs = Math.min(durationMs, telop.speechEndMs);
+      const nextBoundaryMs = nextTelop?.startMs ?? durationMs;
+      const endMs = Math.min(durationMs, speechEndMs, nextBoundaryMs);
       return {
         startMs: telop.startMs,
         endMs,
         text: telop.text,
-        role: telop.role || 'テロップ'
+        role: telop.role || 'テロップ',
+        sourceSpeechIds: telop.sourceSpeechIds
       };
     })
     .filter((telop) => telop.startMs < telop.endMs);
@@ -1718,26 +1939,44 @@ function buildRenderTelopEvents(
         startMs,
         endMs,
         text: sanitizeTelopText(segment.caption || editPlan.hookText || editPlan.title),
-        role: '本文'
+        role: '本文',
+        sourceSpeechIds: segment.speechIds
       };
     })
     .filter((telop) => telop.startMs < telop.endMs && telop.text.length > 0);
 }
 
+function buildRenderedSpeechTimeline(renderSegments: RenderSegmentForVideo[]): Map<number, { startMs: number; endMs: number; text: string }> {
+  const timeline = new Map<number, { startMs: number; endMs: number; text: string }>();
+  let cursorMs = 0;
+
+  for (const segment of renderSegments) {
+    const segmentDurationMs = Math.max(1, segment.sourceEndMs - segment.sourceStartMs);
+    for (const speech of segment.speechUnits) {
+      const sourceStartMs = Math.max(segment.sourceStartMs, speech.sourceStartMs);
+      const sourceEndMs = Math.min(segment.sourceEndMs, speech.sourceEndMs);
+      if (sourceEndMs <= sourceStartMs) {
+        continue;
+      }
+      if (timeline.has(speech.id)) {
+        continue;
+      }
+      timeline.set(speech.id, {
+        startMs: cursorMs + (sourceStartMs - segment.sourceStartMs),
+        endMs: cursorMs + (sourceEndMs - segment.sourceStartMs),
+        text: speech.text
+      });
+    }
+    cursorMs += segmentDurationMs;
+  }
+
+  return timeline;
+}
+
 function findRenderSegmentAtTimelineMs(
-  renderSegments: Array<{
-    sourceStartMs: number;
-    sourceEndMs: number;
-    caption: string;
-    screenLayout: ShortsScreenLayoutPlan;
-  }>,
+  renderSegments: RenderSegmentForVideo[],
   timelineMs: number
-): {
-  sourceStartMs: number;
-  sourceEndMs: number;
-  caption: string;
-  screenLayout: ShortsScreenLayoutPlan;
-} {
+): RenderSegmentForVideo {
   let cursorMs = 0;
   for (const segment of renderSegments) {
     const segmentDurationMs = Math.max(1, segment.sourceEndMs - segment.sourceStartMs);
@@ -1751,6 +1990,8 @@ function findRenderSegmentAtTimelineMs(
     sourceStartMs: 0,
     sourceEndMs: 1,
     caption: '',
+    speechIds: [],
+    speechUnits: [],
     screenLayout: buildDefaultScreenLayoutPlan()
   };
 }
@@ -1761,27 +2002,22 @@ function requestedTelopStyleId(request: AgentRequest): string | undefined {
     return explicitStyle;
   }
 
-  const preset = request.input.settings.preset;
-  if (preset === 'caption_first') {
-    return 'boxed_readable';
-  }
   return undefined;
+}
+
+async function resolveTelopStyleForRequest(request: AgentRequest): Promise<ResolvedTelopStyle> {
+  const profile = await loadTelopStyleProfile();
+  return resolveTelopStyle(profile, requestedTelopStyleId(request));
 }
 
 async function writeTelopOverlayImages(
   request: AgentRequest,
-  renderSegments: Array<{
-    sourceStartMs: number;
-    sourceEndMs: number;
-    caption: string;
-    screenLayout: ShortsScreenLayoutPlan;
-  }>,
-  telops: RenderTelopEvent[]
+  renderSegments: RenderSegmentForVideo[],
+  telops: RenderTelopEvent[],
+  style: ResolvedTelopStyle
 ): Promise<RenderTelopOverlay[]> {
   const directory = requestArtifactDir(request);
   const overlays: RenderTelopOverlay[] = [];
-  const profile = await loadTelopStyleProfile();
-  const style = resolveTelopStyle(profile, requestedTelopStyleId(request));
 
   await mkdir(directory, { recursive: true });
 
@@ -1802,6 +2038,7 @@ async function writeTelopOverlayImages(
       glowSeedHint: [
         style.styleId,
         telop.role,
+        telop.sourceSpeechIds.join(','),
         telop.text,
         String(telop.startMs),
         String(telop.endMs)
@@ -1994,18 +2231,15 @@ function selectRenderRange(editPlan: EditPlanArtifact): { sourceStartMs: number;
   };
 }
 
-function selectRenderSegments(editPlan: EditPlanArtifact): Array<{
-  sourceStartMs: number;
-  sourceEndMs: number;
-  caption: string;
-  screenLayout: ShortsScreenLayoutPlan;
-}> {
+function selectRenderSegments(editPlan: EditPlanArtifact): RenderSegmentForVideo[] {
   const segments = editPlan.renderSegments
     .filter((segment) => segment.sourceStartMs < segment.sourceEndMs)
     .map((segment) => ({
       sourceStartMs: segment.sourceStartMs,
       sourceEndMs: segment.sourceEndMs,
       caption: segment.caption,
+      speechIds: segment.speechIds,
+      speechUnits: segment.speechUnits,
       screenLayout: segment.screenLayout ?? buildDefaultScreenLayoutPlan()
     }));
 
@@ -2014,6 +2248,8 @@ function selectRenderSegments(editPlan: EditPlanArtifact): Array<{
     : [{
         ...selectRenderRange(editPlan),
         caption: editPlan.hookText,
+        speechIds: [],
+        speechUnits: [],
         screenLayout: buildDefaultScreenLayoutPlan()
       }];
 }
@@ -2026,13 +2262,20 @@ async function writeRenderPlan(
     sourcePath?: string;
     sourceStartMs: number;
     sourceEndMs: number;
-    segments: Array<{ sourceStartMs: number; sourceEndMs: number; screenLayout: ShortsScreenLayoutPlan }>;
+    segments: Array<{
+      sourceStartMs: number;
+      sourceEndMs: number;
+      speechIds: number[];
+      speechUnits: SpeechTimingRef[];
+      screenLayout: ShortsScreenLayoutPlan;
+    }>;
     telops: RenderTelopEvent[];
     telopOverlayImages: Array<{
       fileName: string;
       startMs: number;
       endMs: number;
       text: string;
+      sourceSpeechIds: number[];
       styleId: string;
       x: number;
       y: number;
@@ -2063,13 +2306,15 @@ async function renderFixtureVideo(request: AgentRequest, editPlan: EditPlanArtif
     0
   );
   const durationSeconds = millisecondsToSeconds(durationMs);
+  const telopStyle = await resolveTelopStyleForRequest(request);
   const telops = buildRenderTelopEvents(editPlan, renderSegments, durationMs);
-  const telopOverlays = await writeTelopOverlayImages(request, renderSegments, telops);
+  const telopOverlays = await writeTelopOverlayImages(request, renderSegments, telops, telopStyle);
   const telopOverlayImages = telopOverlays.map((telop) => ({
     fileName: telop.fileName,
     startMs: telop.startMs,
     endMs: telop.endMs,
     text: telop.text,
+    sourceSpeechIds: telop.sourceSpeechIds,
     styleId: telop.styleId,
     x: telop.x,
     y: telop.y,
