@@ -7,7 +7,7 @@ export type ShortsViewportKey = 'screen' | 'speaker' | 'speaker1' | 'speaker2';
 
 export type ViewportCoords = [number, number, number, number];
 
-type ScreenRect = {
+export type ScreenRect = {
   x: number;
   y: number;
   w: number;
@@ -128,7 +128,7 @@ function resolveShortsViewportKeysForLayout(layoutId: ShortsScreenLayoutId): Sho
   return [...resolveShortsScreenLayoutDefinition(layoutId).requiredViewportKeys];
 }
 
-function resolveShortsViewportRect(
+export function resolveShortsViewportRect(
   layoutId: ShortsScreenLayoutId,
   viewportKey: ShortsViewportKey
 ): ScreenRect {

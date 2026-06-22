@@ -7,14 +7,21 @@
     "dry-run": "pnpm --filter @zev2/shared build && tsx src/index.ts",
     "dry-run:no-build": "tsx src/index.ts",
     "build": "pnpm --filter @zev2/shared build && tsc -p tsconfig.json",
-    "type-check": "pnpm --filter @zev2/shared build && tsc -p tsconfig.json --noEmit"
+    "type-check": "pnpm --filter @zev2/shared build && tsc -p tsconfig.json --noEmit && tsc -p tsconfig.remotion.json"
   },
   "dependencies": {
     "@google/genai": "^1.52.0",
-    "@zev2/shared": "workspace:*"
+    "@remotion/cli": "^4.0.409",
+    "@zev2/shared": "workspace:*",
+    "budoux": "^0.7.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "remotion": "^4.0.262"
   },
   "devDependencies": {
     "@types/node": "^25.0.1",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
     "tsx": "^4.21.0",
     "typescript": "^5.9.3"
   }

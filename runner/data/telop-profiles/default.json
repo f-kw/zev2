@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "profileId": "default",
+  "profileName": "ZEV2 default telop profile",
+  "defaultStyleId": "zev_glow",
+  "styles": {
+    "boxed_readable": {
+      "comment": "確認用の座布団ありテロップ",
+      "fontFamily": "LINESeedJP_A_OTF_Bd.otf",
+      "fontSize": 100,
+      "fontColor": "#ffffff",
+      "borderColor": "#000000",
+      "borderWidth": 5,
+      "lineSpacing": 130,
+      "glowColor": "#ffffff",
+      "glowColorMode": "fixed",
+      "glowWidth": 0,
+      "glowOpacity": 0,
+      "maxCharsPerLine": 20,
+      "position": {
+        "preset": "center",
+        "alignment": "center"
+      },
+      "background": {
+        "color": "rgba(0,0,0,0.72)",
+        "borderRadius": 8,
+        "paddingX": 36,
+        "paddingY": 22
+      }
+    },
+    "zev_glow": {
+      "comment": "ZEV系の座布団なしグローテロップ",
+      "fontFamily": "LINESeedJP_A_OTF_Bd.otf",
+      "fontSize": 100,
+      "fontColor": "#ffffff",
+      "borderColor": "#000000",
+      "borderWidth": 5,
+      "lineSpacing": 130,
+      "glowColor": "#ffffff",
+      "glowColorMode": "randomBright",
+      "glowWidth": 10,
+      "glowOpacity": 100,
+      "maxCharsPerLine": 20,
+      "position": {
+        "preset": "center",
+        "alignment": "center"
+      }
+    }
+  }
+}

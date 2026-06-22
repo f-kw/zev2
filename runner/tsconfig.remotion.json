@@ -1,0 +1,17 @@
+{
+  "extends": "../tsconfig.base.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "types": ["node"],
+    "lib": ["ES2022", "DOM", "DOM.Iterable"]
+  },
+  "include": [
+    "src/remotion/**/*.ts",
+    "src/remotion/**/*.tsx",
+    "src/shared/telop-glow.ts",
+    "src/telop/**/*.ts"
+  ]
+}

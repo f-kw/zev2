@@ -23,6 +23,9 @@ import {
   type ShortsScreenLayoutCandidateSet,
   type ShortsScreenLayoutPlan
 } from './screen-layout.js';
+import { resolveTelopPlacementArea, type TelopPlacementArea } from './telop-placement.js';
+import { loadTelopStyleProfile, resolveTelopStyle } from './telop-style.js';
+import { renderRemotionTelopPng } from './telop-remotion.js';
 
 interface NextResponse {
   request: AgentRequest | null;
@@ -1554,10 +1557,12 @@ function buildPatch(editPlanUri: string): PatchArtifact {
   };
 }
 
-function runCommand(command: string, args: string[]): Promise<void> {
+function runCommand(command: string, args: string[], options?: { env?: NodeJS.ProcessEnv }): Promise<void> {
   return new Promise((resolve, reject) => {
     const output: string[] = [];
-    const child = spawn(command, args);
+    const child = spawn(command, args, {
+      env: options?.env ? { ...process.env, ...options.env } : process.env
+    });
     child.stdout.on('data', (chunk: Buffer) => output.push(chunk.toString()));
     child.stderr.on('data', (chunk: Buffer) => output.push(chunk.toString()));
     child.on('error', reject);
@@ -1639,6 +1644,212 @@ async function probeVideoDimensions(sourcePath: string): Promise<{ width: number
 
 function millisecondsToSeconds(valueMs: number): string {
   return (valueMs / 1000).toFixed(3);
+}
+
+type RenderTelopEvent = {
+  startMs: number;
+  endMs: number;
+  text: string;
+  role: string;
+};
+
+type RenderTelopOverlay = RenderTelopEvent & {
+  fileName: string;
+  path: string;
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+  styleId: string;
+  placement: TelopPlacementArea;
+};
+
+function sanitizeTelopText(value: string): string {
+  return value.replace(/\s+/g, ' ').trim();
+}
+
+function buildRenderTelopEvents(
+  editPlan: EditPlanArtifact,
+  renderSegments: Array<{
+    sourceStartMs: number;
+    sourceEndMs: number;
+    caption: string;
+    screenLayout: ShortsScreenLayoutPlan;
+  }>,
+  durationMs: number
+): RenderTelopEvent[] {
+  const telopRecords = editPlan.telopPlan
+    .map((telop) => ({
+      startMs: Math.max(0, Math.round(telop.atMs)),
+      text: sanitizeTelopText(telop.text),
+      role: sanitizeTelopText(telop.role)
+    }))
+    .filter((telop) => telop.startMs < durationMs && telop.text.length > 0)
+    .sort((left, right) => left.startMs - right.startMs);
+
+  const uniqueTelopRecords = telopRecords.filter((telop, index) => (
+    index === 0 || telop.startMs > telopRecords[index - 1].startMs
+  ));
+  const events = uniqueTelopRecords
+    .map((telop, index) => {
+      const nextTelop = uniqueTelopRecords[index + 1];
+      const endMs = Math.min(durationMs, nextTelop?.startMs ?? durationMs);
+      return {
+        startMs: telop.startMs,
+        endMs,
+        text: telop.text,
+        role: telop.role || 'テロップ'
+      };
+    })
+    .filter((telop) => telop.startMs < telop.endMs);
+
+  if (events.length > 0) {
+    return events;
+  }
+
+  let cursorMs = 0;
+  return renderSegments
+    .map((segment) => {
+      const segmentDurationMs = Math.max(1, segment.sourceEndMs - segment.sourceStartMs);
+      const startMs = cursorMs;
+      const endMs = Math.min(durationMs, cursorMs + segmentDurationMs);
+      cursorMs = endMs;
+      return {
+        startMs,
+        endMs,
+        text: sanitizeTelopText(segment.caption || editPlan.hookText || editPlan.title),
+        role: '本文'
+      };
+    })
+    .filter((telop) => telop.startMs < telop.endMs && telop.text.length > 0);
+}
+
+function findRenderSegmentAtTimelineMs(
+  renderSegments: Array<{
+    sourceStartMs: number;
+    sourceEndMs: number;
+    caption: string;
+    screenLayout: ShortsScreenLayoutPlan;
+  }>,
+  timelineMs: number
+): {
+  sourceStartMs: number;
+  sourceEndMs: number;
+  caption: string;
+  screenLayout: ShortsScreenLayoutPlan;
+} {
+  let cursorMs = 0;
+  for (const segment of renderSegments) {
+    const segmentDurationMs = Math.max(1, segment.sourceEndMs - segment.sourceStartMs);
+    if (timelineMs >= cursorMs && timelineMs < cursorMs + segmentDurationMs) {
+      return segment;
+    }
+    cursorMs += segmentDurationMs;
+  }
+
+  return renderSegments[renderSegments.length - 1] ?? {
+    sourceStartMs: 0,
+    sourceEndMs: 1,
+    caption: '',
+    screenLayout: buildDefaultScreenLayoutPlan()
+  };
+}
+
+function requestedTelopStyleId(request: AgentRequest): string | undefined {
+  const explicitStyle = process.env.ZEV2_TELOP_STYLE_ID?.trim();
+  if (explicitStyle) {
+    return explicitStyle;
+  }
+
+  const preset = request.input.settings.preset;
+  if (preset === 'caption_first') {
+    return 'boxed_readable';
+  }
+  return undefined;
+}
+
+async function writeTelopOverlayImages(
+  request: AgentRequest,
+  renderSegments: Array<{
+    sourceStartMs: number;
+    sourceEndMs: number;
+    caption: string;
+    screenLayout: ShortsScreenLayoutPlan;
+  }>,
+  telops: RenderTelopEvent[]
+): Promise<RenderTelopOverlay[]> {
+  const directory = requestArtifactDir(request);
+  const overlays: RenderTelopOverlay[] = [];
+  const profile = await loadTelopStyleProfile();
+  const style = resolveTelopStyle(profile, requestedTelopStyleId(request));
+
+  await mkdir(directory, { recursive: true });
+
+  for (const [index, telop] of telops.entries()) {
+    const fileName = `telop-${String(index + 1).padStart(3, '0')}.png`;
+    const overlayPath = path.join(directory, fileName);
+    const activeSegment = findRenderSegmentAtTimelineMs(renderSegments, telop.startMs);
+    const placement = resolveTelopPlacementArea(activeSegment.screenLayout);
+
+    await renderRemotionTelopPng({
+      text: telop.text,
+      style,
+      position: style.position,
+      background: style.background,
+      maxCharsPerLine: style.maxCharsPerLine,
+      width: placement.width,
+      height: placement.height,
+      glowSeedHint: [
+        style.styleId,
+        telop.role,
+        telop.text,
+        String(telop.startMs),
+        String(telop.endMs)
+      ].join('|')
+    }, overlayPath);
+
+    overlays.push({
+      ...telop,
+      fileName,
+      path: overlayPath,
+      x: placement.x,
+      y: placement.y,
+      width: placement.width,
+      height: placement.height,
+      styleId: style.styleId,
+      placement
+    });
+  }
+
+  return overlays;
+}
+
+function buildTelopOverlayInputArgs(telops: RenderTelopOverlay[]): string[] {
+  return telops.flatMap((telop) => ['-loop', '1', '-i', telop.path]);
+}
+
+function appendTelopOverlayFilters(
+  baseFilter: string,
+  inputLabel: string,
+  outputLabel: string,
+  telops: RenderTelopOverlay[],
+  firstTelopInputIndex: number
+): string {
+  if (telops.length === 0) {
+    return `${baseFilter};[${inputLabel}]null[${outputLabel}]`;
+  }
+
+  const filters = [baseFilter];
+  let currentLabel = inputLabel;
+  telops.forEach((telop, index) => {
+    const nextLabel = index === telops.length - 1 ? outputLabel : `${outputLabel}_telop_${index}`;
+    filters.push(
+      `[${currentLabel}][${firstTelopInputIndex + index}:v]overlay=${telop.x}:${telop.y}:enable='between(t,${millisecondsToSeconds(telop.startMs)},${millisecondsToSeconds(telop.endMs)})'[${nextLabel}]`
+    );
+    currentLabel = nextLabel;
+  });
+
+  return filters.join(';');
 }
 
 function resolveLocalSourcePath(sourceUri: string): string | undefined {
@@ -1786,6 +1997,7 @@ function selectRenderRange(editPlan: EditPlanArtifact): { sourceStartMs: number;
 function selectRenderSegments(editPlan: EditPlanArtifact): Array<{
   sourceStartMs: number;
   sourceEndMs: number;
+  caption: string;
   screenLayout: ShortsScreenLayoutPlan;
 }> {
   const segments = editPlan.renderSegments
@@ -1793,6 +2005,7 @@ function selectRenderSegments(editPlan: EditPlanArtifact): Array<{
     .map((segment) => ({
       sourceStartMs: segment.sourceStartMs,
       sourceEndMs: segment.sourceEndMs,
+      caption: segment.caption,
       screenLayout: segment.screenLayout ?? buildDefaultScreenLayoutPlan()
     }));
 
@@ -1800,6 +2013,7 @@ function selectRenderSegments(editPlan: EditPlanArtifact): Array<{
     ? segments
     : [{
         ...selectRenderRange(editPlan),
+        caption: editPlan.hookText,
         screenLayout: buildDefaultScreenLayoutPlan()
       }];
 }
@@ -1813,6 +2027,20 @@ async function writeRenderPlan(
     sourceStartMs: number;
     sourceEndMs: number;
     segments: Array<{ sourceStartMs: number; sourceEndMs: number; screenLayout: ShortsScreenLayoutPlan }>;
+    telops: RenderTelopEvent[];
+    telopOverlayImages: Array<{
+      fileName: string;
+      startMs: number;
+      endMs: number;
+      text: string;
+      styleId: string;
+      x: number;
+      y: number;
+      width: number;
+      height: number;
+      target: 'screen' | 'speaker_safe_area';
+      placementReason: string;
+    }>;
     target: typeof SHORTS_RENDER_TARGET;
     fallbackReason?: string;
   }
@@ -1835,6 +2063,21 @@ async function renderFixtureVideo(request: AgentRequest, editPlan: EditPlanArtif
     0
   );
   const durationSeconds = millisecondsToSeconds(durationMs);
+  const telops = buildRenderTelopEvents(editPlan, renderSegments, durationMs);
+  const telopOverlays = await writeTelopOverlayImages(request, renderSegments, telops);
+  const telopOverlayImages = telopOverlays.map((telop) => ({
+    fileName: telop.fileName,
+    startMs: telop.startMs,
+    endMs: telop.endMs,
+    text: telop.text,
+    styleId: telop.styleId,
+    x: telop.x,
+    y: telop.y,
+    width: telop.width,
+    height: telop.height,
+    target: telop.placement.target,
+    placementReason: telop.placement.reason
+  }));
   const sourcePath = resolveSourceVideoPath(state, request);
 
   if (sourcePath) {
@@ -1846,6 +2089,8 @@ async function renderFixtureVideo(request: AgentRequest, editPlan: EditPlanArtif
       sourceStartMs: renderRange.sourceStartMs,
       sourceEndMs: renderRange.sourceEndMs,
       segments: renderSegments,
+      telops,
+      telopOverlayImages,
       target: SHORTS_RENDER_TARGET
     });
 
@@ -1853,12 +2098,13 @@ async function renderFixtureVideo(request: AgentRequest, editPlan: EditPlanArtif
       const segment = renderSegments[0];
       const layoutFilter = buildLayoutVideoFilter({
         inputLabel: '[0:v]',
-        outputLabel: 'outv',
+        outputLabel: 'layoutv',
         sourceWidth: sourceDimensions.width,
         sourceHeight: sourceDimensions.height,
         durationSeconds: Number(millisecondsToSeconds(segment.sourceEndMs - segment.sourceStartMs)),
         screenLayout: segment.screenLayout
       });
+      const videoFilter = appendTelopOverlayFilters(layoutFilter, 'layoutv', 'outv', telopOverlays, 1);
       await runCommand(ffmpegCommand, [
         '-y',
         '-ss',
@@ -1867,8 +2113,9 @@ async function renderFixtureVideo(request: AgentRequest, editPlan: EditPlanArtif
         millisecondsToSeconds(segment.sourceEndMs - segment.sourceStartMs),
         '-i',
         sourcePath,
+        ...buildTelopOverlayInputArgs(telopOverlays),
         '-filter_complex',
-        layoutFilter,
+        videoFilter,
         '-map',
         '[outv]',
         '-map',
@@ -1910,15 +2157,17 @@ async function renderFixtureVideo(request: AgentRequest, editPlan: EditPlanArtif
       const concatInputs = hasAudioTrack
         ? renderSegments.map((_, index) => `[v${index}][a${index}]`).join('')
         : renderSegments.map((_, index) => `[v${index}]`).join('');
-      const concatFilter = hasAudioTrack
-        ? `${layoutFilters};${audioInputs};${concatInputs}concat=n=${renderSegments.length}:v=1:a=1[outv][outa]`
-        : `${layoutFilters};${concatInputs}concat=n=${renderSegments.length}:v=1:a=0[outv]`;
+      const rawConcatFilter = hasAudioTrack
+        ? `${layoutFilters};${audioInputs};${concatInputs}concat=n=${renderSegments.length}:v=1:a=1[rawv][outa]`
+        : `${layoutFilters};${concatInputs}concat=n=${renderSegments.length}:v=1:a=0[rawv]`;
+      const concatFilter = appendTelopOverlayFilters(rawConcatFilter, 'rawv', 'outv', telopOverlays, renderSegments.length);
       const outputMaps = hasAudioTrack ? ['-map', '[outv]', '-map', '[outa]'] : ['-map', '[outv]'];
       const audioCodecArgs = hasAudioTrack ? ['-c:a', 'aac', '-shortest'] : [];
 
       await runCommand(ffmpegCommand, [
         '-y',
         ...inputArgs,
+        ...buildTelopOverlayInputArgs(telopOverlays),
         '-filter_complex',
         concatFilter,
         ...outputMaps,
@@ -1947,9 +2196,13 @@ async function renderFixtureVideo(request: AgentRequest, editPlan: EditPlanArtif
     sourceStartMs: renderRange.sourceStartMs,
     sourceEndMs: renderRange.sourceEndMs,
     segments: renderSegments,
+    telops,
+    telopOverlayImages,
     target: SHORTS_RENDER_TARGET,
     fallbackReason: '入力動画をローカルファイルとして読めないため、編集案の尺に合わせた確認用映像を生成する'
   });
+
+  const fixtureVideoFilter = appendTelopOverlayFilters('[0:v]null[rawv]', 'rawv', 'outv', telopOverlays, 1);
 
   await runCommand(ffmpegCommand, [
     '-y',
@@ -1957,6 +2210,11 @@ async function renderFixtureVideo(request: AgentRequest, editPlan: EditPlanArtif
     'lavfi',
     '-i',
     `testsrc2=s=${SHORTS_RENDER_TARGET.width}x${SHORTS_RENDER_TARGET.height}:d=${durationSeconds}`,
+    ...buildTelopOverlayInputArgs(telopOverlays),
+    '-filter_complex',
+    fixtureVideoFilter,
+    '-map',
+    '[outv]',
     '-c:v',
     'libx264',
     '-pix_fmt',
