@@ -36,12 +36,14 @@ const showRequestForm = ref(false);
 const showDetailData = ref(false);
 const reviewReasons = reactive<Record<string, string>>({});
 const generatedVideoChangeReasons = reactive<Record<string, string>>({});
+const generatedVideoReviewTargets = reactive<Record<string, GeneratedVideoReviewTarget>>({});
 const selectedReviewOptions = reactive<Record<string, string>>({});
 const artifactPreviews = reactive<Record<string, string>>({});
 const expandedArtifacts = reactive<Record<string, boolean>>({});
 
 type ProcessTabKey = 'request' | 'candidates' | 'edit' | 'video' | 'notes';
 type ProcessStatus = 'pending' | 'running' | 'review' | 'ready' | 'done' | 'blocked';
+type GeneratedVideoReviewTarget = 'edit_plan' | 'theme_selection' | 'render_review';
 
 interface ArtifactRow {
   operation: AgentRequest;
@@ -90,11 +92,14 @@ interface ReviewChoice {
   icon: string;
 }
 
-interface FixSummaryCard {
+interface GeneratedVideoReviewOption {
+  value: GeneratedVideoReviewTarget;
   label: string;
-  title: string;
-  body?: string;
+  body: string;
+  icon: string;
 }
+
+const SUMMARY_TELOP_LIMIT = 3;
 
 const draftInput = reactive<RequestDraftInput>({
   purpose: 'この配信から切り抜きたいテーマを選び、複数箇所をつないだショート案を作る',
@@ -145,6 +150,27 @@ const processOperationTypes: Record<ProcessTabKey, AgentRequestType[]> = {
   video: ['render_video'],
   notes: []
 };
+
+const generatedVideoReviewOptions: GeneratedVideoReviewOption[] = [
+  {
+    value: 'edit_plan',
+    label: '構成と演出を作り直す',
+    body: '今のテーマのまま、使う箇所、見せ方、テロップを作り直します。',
+    icon: 'mdi-pencil'
+  },
+  {
+    value: 'theme_selection',
+    label: 'テーマから選び直す',
+    body: '既存のテーマ候補に戻り、別のテーマを選んで作り直します。',
+    icon: 'mdi-clipboard-search-outline'
+  },
+  {
+    value: 'render_review',
+    label: '生成前確認に戻る',
+    body: '動画を作る前に承認した内容を確認します。AI工程は再実行しません。',
+    icon: 'mdi-arrow-left-circle-outline'
+  }
+];
 
 function processTabForOperationType(type: AgentRequestType): ProcessTabKey {
   for (const [key, types] of Object.entries(processOperationTypes) as Array<[ProcessTabKey, AgentRequestType[]]>) {
@@ -403,9 +429,38 @@ const generatedVideoChangeReason = computed({
     generatedVideoChangeReasons[draftId] = value;
   }
 });
-const canRequestGeneratedVideoChanges = computed(() =>
-  Boolean(activeDraft.value && outputVideoArtifact.value && generatedVideoChangeReason.value.trim())
+const generatedVideoReviewTarget = computed<GeneratedVideoReviewTarget>({
+  get() {
+    const draftId = activeDraft.value?.id;
+    return draftId ? generatedVideoReviewTargets[draftId] ?? 'edit_plan' : 'edit_plan';
+  },
+  set(value) {
+    const draftId = activeDraft.value?.id;
+    if (!draftId) {
+      return;
+    }
+
+    generatedVideoReviewTargets[draftId] = value;
+  }
+});
+const selectedGeneratedVideoReviewOption = computed(() =>
+  generatedVideoReviewOptions.find((option) => option.value === generatedVideoReviewTarget.value)
+    ?? generatedVideoReviewOptions[0]
 );
+const generatedVideoReviewActionLabel = computed(() =>
+  generatedVideoReviewTarget.value === 'render_review' ? '生成前確認を見る' : 'この内容で作り直す'
+);
+const canSubmitGeneratedVideoReview = computed(() => {
+  if (!activeDraft.value || !outputVideoArtifact.value) {
+    return false;
+  }
+
+  if (generatedVideoReviewTarget.value === 'render_review') {
+    return Boolean(renderControlReview.value);
+  }
+
+  return generatedVideoChangeReason.value.trim().length > 0;
+});
 const recommendedProcessTab = computed<ProcessTabKey>(() => {
   if (!activeDraft.value) {
     return 'request';
@@ -539,13 +594,15 @@ const activeProcess = computed(() =>
 const currentWorkflowProcess = computed(() =>
   processTabs.value.find((tab) => tab.key === recommendedProcessTab.value) ?? processTabs.value[0]
 );
-const workflowPositionText = computed(() => {
-  if (currentWorkflowProcess.value.key === activeProcess.value.key) {
-    return `現在の工程: ${currentWorkflowProcess.value.label}`;
-  }
-
-  return `現在の工程: ${currentWorkflowProcess.value.label} / 表示中: ${activeProcess.value.label}`;
+const workflowProgressTabs = computed(() => processTabs.value.filter((tab) => tab.key !== 'notes'));
+const workflowProgressTitle = computed(() => {
+  const currentIndex = workflowProgressTabs.value.findIndex((tab) => tab.key === currentWorkflowProcess.value.key);
+  const visibleIndex = currentIndex >= 0 ? currentIndex + 1 : 1;
+  return `${visibleIndex} / ${workflowProgressTabs.value.length} ${currentWorkflowProcess.value.label}`;
 });
+const workflowProgressText = computed(() =>
+  workflowProgressTabs.value.map((tab) => workflowProgressLabel(tab)).join(' → ')
+);
 const userInstructionSummary = computed(() => ({
   label: 'あなたの指示',
   title: visiblePurpose.value || '依頼内容はまだありません',
@@ -775,6 +832,9 @@ const editPlanSummary = computed<EditPlanSummary | undefined>(() => {
     telopTexts
   };
 });
+const summaryTelopTexts = computed(() =>
+  editPlanSummary.value?.telopTexts.slice(0, SUMMARY_TELOP_LIMIT) ?? []
+);
 const reviewChoiceCards = computed<ReviewChoice[]>(() => {
   const review = activeReview.value;
   if (!review) {
@@ -826,23 +886,6 @@ const reviewChoiceCards = computed<ReviewChoice[]>(() => {
   ];
 });
 const activeHumanAction = computed(() => actionForReview(activeReview.value));
-const fixSummaryCards = computed<FixSummaryCard[]>(() => [
-  {
-    label: 'テーマ',
-    title: primaryThemeSummary.value?.title ?? 'テーマの判断材料がまだありません',
-    body: primaryThemeSummary.value
-      ? primaryThemeSummary.value.summary
-      : 'テーマ候補と代表発話ができると整理できます。'
-  },
-  {
-    label: '完成イメージ',
-    title: editPlanSummary.value?.finalVideoDescription ?? '完成イメージはまだありません'
-  },
-  {
-    label: 'テロップ',
-    title: editPlanSummary.value?.telopTexts.join(' / ') || 'テロップはまだありません'
-  }
-]);
 
 function artifactForTypes(types: AgentRequestType[]): ArtifactRow[] {
   return selectedArtifacts.value.filter((artifact) => types.includes(artifact.operation.type));
@@ -1033,6 +1076,70 @@ function processStatusFor(key: ProcessTabKey, review?: ControlReviewItem): Proce
   return 'pending';
 }
 
+function workflowProgressLabel(tab: ProcessTab): string {
+  if (tab.key === 'request') {
+    if (tab.status === 'pending') {
+      return '依頼前';
+    }
+
+    if (tab.status === 'running') {
+      return '依頼保存中';
+    }
+
+    return '依頼済み';
+  }
+
+  if (tab.key === 'candidates') {
+    if (tab.status === 'review') {
+      return 'テーマ選択中';
+    }
+
+    if (tab.status === 'running') {
+      return 'テーマ作成中';
+    }
+
+    if (tab.status === 'done' || tab.status === 'ready') {
+      return 'テーマ選択済み';
+    }
+
+    if (tab.status === 'blocked') {
+      return 'テーマ選択停止';
+    }
+
+    return 'テーマ選択前';
+  }
+
+  if (tab.key === 'edit') {
+    if (tab.status === 'review') {
+      return '生成前確認中';
+    }
+
+    if (tab.status === 'running') {
+      return '演出作成中';
+    }
+
+    if (tab.status === 'done' || tab.status === 'ready') {
+      return '生成前確認済み';
+    }
+
+    if (tab.status === 'blocked') {
+      return '生成前確認停止';
+    }
+
+    return '生成前確認前';
+  }
+
+  if (tab.status === 'running') {
+    return '動画生成中';
+  }
+
+  if (tab.status === 'blocked') {
+    return '動画生成停止';
+  }
+
+  return hasOutputVideo.value ? 'レビュー中' : '動画未生成';
+}
+
 function processStatusLabel(status: ProcessStatus): string {
   if (status === 'done') {
     return '確認済み';
@@ -1055,26 +1162,6 @@ function processStatusLabel(status: ProcessStatus): string {
   }
 
   return 'まだ';
-}
-
-function processStatusColor(status: ProcessStatus): string {
-  if (status === 'done' || status === 'ready') {
-    return 'success';
-  }
-
-  if (status === 'review') {
-    return 'deep-orange-darken-4';
-  }
-
-  if (status === 'running') {
-    return 'primary';
-  }
-
-  if (status === 'blocked') {
-    return 'error';
-  }
-
-  return 'blue-grey';
 }
 
 function processStatusIcon(status: ProcessStatus): string {
@@ -1338,6 +1425,15 @@ async function requestGeneratedVideoEditRerun(scope: 'edit_plan' | 'theme_select
   selectedProcessTab.value = scope === 'theme_selection' ? 'candidates' : 'edit';
 }
 
+async function submitGeneratedVideoReviewAction() {
+  if (generatedVideoReviewTarget.value === 'render_review') {
+    selectedProcessTab.value = 'edit';
+    return;
+  }
+
+  await requestGeneratedVideoEditRerun(generatedVideoReviewTarget.value);
+}
+
 function showNextProcessForReview(review: ControlReviewItem) {
   activeProcessTab.value = nextProcessKeyForReview(review);
 }
@@ -1458,11 +1554,11 @@ onMounted(() => {
             </div>
           </section>
 
-          <section v-if="!requestFormVisible && activeDraft" class="instruction-summary">
-            <span>あなたの指示</span>
+          <details v-if="!requestFormVisible && activeDraft" class="instruction-summary">
+            <summary>依頼内容を確認</summary>
             <p>{{ userInstructionSummary.title }}</p>
             <small>{{ userInstructionSummary.detail }}</small>
-          </section>
+          </details>
 
           <v-sheet v-if="requestFormVisible" class="panel request-start-panel" rounded border>
             <div class="request-start-heading">
@@ -1544,36 +1640,33 @@ onMounted(() => {
           </div>
 
           <template v-if="!requestFormVisible">
-            <v-sheet class="panel overview-panel" rounded border>
-              <div class="overview-heading">
-                <div>
-                  <p class="eyebrow">全体の流れ</p>
-                  <h2>{{ workflowPositionText }}</h2>
-                </div>
+            <section class="workflow-compact-panel">
+              <div>
+                <span>作成状況</span>
+                <strong>{{ workflowProgressTitle }}</strong>
               </div>
-
-              <div class="process-flow" :style="{ '--step-count': String(processTabs.length) }">
-                <button
+              <p>{{ workflowProgressText }}</p>
+              <div class="workflow-inline-steps" :style="{ '--step-count': String(workflowProgressTabs.length) }">
+                <span
                   v-for="tab in processTabs"
                   :key="tab.key"
-                  type="button"
-                  class="process-flow-step"
-                  :class="[`is-${tab.status}`, { 'is-active': activeProcessTab === tab.key, 'is-locked': isProcessLockedByReview(tab.key) }]"
-                  :disabled="isProcessLockedByReview(tab.key)"
-                  @click="activeProcessTab = tab.key"
+                  class="workflow-inline-step"
+                  :class="[`is-${tab.status}`, { 'is-active': currentWorkflowProcess.key === tab.key, 'is-locked': isProcessLockedByReview(tab.key) }]"
                 >
-                  <span class="process-flow-dot">
+                  <span class="workflow-inline-dot">
                     <v-icon size="16">{{ processStatusIcon(tab.status) }}</v-icon>
                   </span>
-                  <strong>{{ tab.label }}</strong>
-                  <small>{{ tab.statusLabel }}</small>
-                </button>
+                  {{ tab.label }}
+                </span>
               </div>
-            </v-sheet>
+            </section>
 
             <v-sheet class="panel process-panel" rounded border>
               <section class="process-content">
-                <div class="question-card">
+                <div v-if="activeProcessTab === 'video' && outputVideoArtifact" class="generated-review-heading">
+                  <strong>確認用動画を見て、直す場所を選んでください</strong>
+                </div>
+                <div v-else class="question-card">
                   <span>今決めること</span>
                   <strong>{{ activeProcess.question }}</strong>
                   <p>{{ activeProcess.helper }}</p>
@@ -1748,64 +1841,97 @@ onMounted(() => {
                   </div>
                 </div>
 
-                <div v-else-if="activeProcessTab === 'video' || activeProcessTab === 'notes'" class="tab-section">
-                  <div v-if="outputVideoArtifact" class="video-focus">
-                    <video
-                      class="artifact-video large"
-                      controls
-                      :src="artifactAccessUri(outputVideoArtifact.fileRef)"
-                    />
+                <div v-else-if="activeProcessTab === 'video' || activeProcessTab === 'notes'" class="tab-section generated-review-section">
+                  <div v-if="outputVideoArtifact" class="generated-review-layout">
+                    <section class="generated-video-preview">
+                      <video
+                        class="artifact-video generated-review-video"
+                        controls
+                        :src="artifactAccessUri(outputVideoArtifact.fileRef)"
+                      />
+                    </section>
+
+                    <aside class="generated-video-fix-panel">
+                      <div>
+                        <span>直したい点</span>
+                        <strong>戻る場所を選ぶ</strong>
+                      </div>
+                      <v-textarea
+                        v-model="generatedVideoChangeReason"
+                        label="修正内容"
+                        hint="構成やテーマを作り直す場合は、動画を見て直したい点を書いてください。"
+                        persistent-hint
+                        rows="4"
+                        auto-grow
+                        density="compact"
+                        :disabled="store.loading || generatedVideoReviewTarget === 'render_review'"
+                      />
+                      <v-radio-group
+                        v-model="generatedVideoReviewTarget"
+                        class="generated-video-targets"
+                        density="compact"
+                        hide-details
+                      >
+                        <label
+                          v-for="option in generatedVideoReviewOptions"
+                          :key="option.value"
+                          class="generated-video-target"
+                          :class="{ 'is-selected': generatedVideoReviewTarget === option.value }"
+                        >
+                          <v-radio :value="option.value" density="compact" />
+                          <span>
+                            <strong>
+                              <v-icon size="18">{{ option.icon }}</v-icon>
+                              {{ option.label }}
+                            </strong>
+                            <small>{{ option.body }}</small>
+                          </span>
+                        </label>
+                      </v-radio-group>
+                      <v-btn
+                        color="deep-orange-darken-4"
+                        variant="flat"
+                        :prepend-icon="selectedGeneratedVideoReviewOption.icon"
+                        :loading="store.loading"
+                        :disabled="!canSubmitGeneratedVideoReview"
+                        @click="submitGeneratedVideoReviewAction"
+                      >
+                        {{ generatedVideoReviewActionLabel }}
+                      </v-btn>
+                    </aside>
                   </div>
                   <div v-else class="collapsed-note">
                     まだ確認用動画はありません。動画生成前確認で動画作成を承認すると、ここに表示されます。
                   </div>
 
-                  <section v-if="outputVideoArtifact" class="generated-video-fix-panel">
-                    <div>
-                      <span>直したい点</span>
-                      <strong>戻る工程を選んで作り直す</strong>
+                  <section v-if="outputVideoArtifact" class="generated-summary-card">
+                    <div class="generated-summary-heading">
+                      <span>生成内容の要約</span>
+                      <strong>{{ editPlanSummary?.selectedThemeTitle ?? primaryThemeSummary?.title ?? 'テーマは未取得です' }}</strong>
                     </div>
-                    <v-textarea
-                      v-model="generatedVideoChangeReason"
-                      label="修正内容"
-                      hint="動画を見て直したいテロップ、見せ方、構成を書いてください。"
-                      persistent-hint
-                      rows="3"
-                      auto-grow
-                      density="compact"
-                      :disabled="store.loading"
-                    />
-                    <div class="generated-video-fix-actions">
-                      <v-btn
-                        color="deep-orange-darken-4"
-                        variant="flat"
-                        prepend-icon="mdi-pencil"
-                        :loading="store.loading"
-                        :disabled="!canRequestGeneratedVideoChanges"
-                        @click="requestGeneratedVideoEditRerun('edit_plan')"
-                      >
-                        構成と演出を作り直す
-                      </v-btn>
-                      <v-btn
-                        color="primary"
-                        variant="tonal"
-                        prepend-icon="mdi-clipboard-search-outline"
-                        :loading="store.loading"
-                        :disabled="!canRequestGeneratedVideoChanges"
-                        @click="requestGeneratedVideoEditRerun('theme_selection')"
-                      >
-                        テーマから選び直す
-                      </v-btn>
+                    <div class="generated-summary-grid">
+                      <article>
+                        <span>テーマ</span>
+                        <strong>{{ primaryThemeSummary?.title ?? 'テーマの判断材料がまだありません' }}</strong>
+                        <p v-if="primaryThemeSummary">{{ primaryThemeSummary.summary }}</p>
+                      </article>
+                      <article>
+                        <span>完成イメージ</span>
+                        <strong>{{ editPlanSummary?.finalVideoDescription ?? '完成イメージはまだありません' }}</strong>
+                      </article>
+                      <article>
+                        <span>主なテロップ</span>
+                        <strong v-if="summaryTelopTexts.length > 0">{{ summaryTelopTexts.join(' / ') }}</strong>
+                        <strong v-else>テロップはまだありません</strong>
+                      </article>
                     </div>
+                    <details v-if="editPlanSummary?.telopTexts.length" class="summary-detail">
+                      <summary>テロップ全文を見る</summary>
+                      <ol>
+                        <li v-for="text in editPlanSummary.telopTexts" :key="text">{{ text }}</li>
+                      </ol>
+                    </details>
                   </section>
-
-                  <div class="fix-summary-grid">
-                    <article v-for="card in fixSummaryCards" :key="card.label">
-                      <span>{{ card.label }}</span>
-                      <strong>{{ card.title }}</strong>
-                      <p v-if="card.body">{{ card.body }}</p>
-                    </article>
-                  </div>
                   <div v-if="failedOperations.length > 0" class="collapsed-note">
                     {{ failedOperationDetail }}
                   </div>
@@ -1888,7 +2014,7 @@ onMounted(() => {
 }
 
 .workspace {
-  max-width: 1180px;
+  max-width: 1380px;
   padding: 14px 16px 32px;
 }
 
@@ -2011,9 +2137,9 @@ h2 {
   border-left: 6px solid #475569;
   border-radius: 8px;
   display: grid;
-  gap: 12px;
+  gap: 10px;
   grid-template-columns: minmax(0, 1fr) auto;
-  padding: 14px;
+  padding: 10px 12px;
 }
 
 .current-status-panel.is-running {
@@ -2045,9 +2171,9 @@ h2 {
   border-radius: 50%;
   color: #34495e;
   display: grid;
-  height: 42px;
+  height: 34px;
   justify-items: center;
-  width: 42px;
+  width: 34px;
 }
 
 .current-status-panel.is-running .current-status-icon {
@@ -2080,7 +2206,7 @@ h2 {
 
 .current-status-main strong {
   display: block;
-  font-size: 20px;
+  font-size: 16px;
   line-height: 1.35;
 }
 
@@ -2111,6 +2237,13 @@ h2 {
   padding-left: 14px;
 }
 
+.instruction-summary summary {
+  color: #607080;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 800;
+}
+
 .instruction-summary p {
   color: #17212b;
   font-size: 14px;
@@ -2124,24 +2257,11 @@ h2 {
   overflow-wrap: anywhere;
 }
 
-.overview-panel,
 .request-start-panel,
 .process-panel,
 .tab-section {
   display: grid;
   gap: 12px;
-}
-
-.overview-heading {
-  align-items: start;
-  display: grid;
-  gap: 12px;
-  grid-template-columns: minmax(0, 1fr) auto;
-}
-
-.overview-heading p {
-  color: #465666;
-  margin-top: 4px;
 }
 
 .request-start-heading {
@@ -2173,86 +2293,97 @@ h2 {
   justify-content: flex-start;
 }
 
-.process-flow {
+.workflow-compact-panel {
+  align-items: center;
+  background: #ffffff;
+  border: 1px solid #dce4ec;
+  border-radius: 8px;
+  display: grid;
+  gap: 8px;
+  grid-template-columns: minmax(180px, 0.28fr) minmax(0, 1fr) minmax(300px, 0.8fr);
+  padding: 10px 12px;
+}
+
+.workflow-compact-panel span {
+  color: #607080;
+  display: block;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.workflow-compact-panel strong {
+  display: block;
+  font-size: 15px;
+}
+
+.workflow-compact-panel p {
+  color: #34495e;
+  font-size: 13px;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+.workflow-inline-steps {
   display: grid;
   gap: 6px;
   grid-template-columns: repeat(var(--step-count), minmax(0, 1fr));
 }
 
-.process-flow-step {
+.workflow-inline-step {
   align-items: center;
   background: #f6f8fa;
   border: 1px solid #dce4ec;
   border-radius: 8px;
-  color: #34495e;
-  cursor: pointer;
+  color: #465666;
   display: grid;
+  font-size: 12px;
+  font-weight: 800;
   gap: 5px;
+  grid-template-columns: auto minmax(0, 1fr);
   min-width: 0;
-  padding: 10px 8px;
-  text-align: center;
+  padding: 7px 8px;
 }
 
-.process-flow-step:hover,
-.process-flow-step.is-active {
+.workflow-inline-step.is-active {
   border-color: #2f7ed8;
-  box-shadow: inset 0 0 0 1px #2f7ed8;
+  color: #17212b;
 }
 
-.process-flow-step:disabled {
-  cursor: not-allowed;
-}
-
-.process-flow-step.is-locked {
+.workflow-inline-step.is-locked {
   opacity: 0.55;
 }
 
-.process-flow-step strong,
-.process-flow-step small {
-  overflow-wrap: anywhere;
-}
-
-.process-flow-step strong {
-  font-size: 13px;
-}
-
-.process-flow-step small {
-  color: #607080;
-  font-size: 11px;
-  font-weight: 700;
-}
-
-.process-flow-dot {
+.workflow-inline-dot {
   align-items: center;
   background: #eef2f5;
   border: 2px solid #cad6df;
   border-radius: 50%;
   display: grid;
-  height: 28px;
-  justify-self: center;
-  width: 28px;
+  height: 24px;
+  justify-items: center;
+  width: 24px;
 }
 
-.process-flow-step.is-ready .process-flow-dot,
-.process-flow-step.is-done .process-flow-dot {
+.workflow-inline-step.is-ready .workflow-inline-dot,
+.workflow-inline-step.is-done .workflow-inline-dot {
   background: #e7f5ed;
   border-color: #32a66a;
   color: #1f7a4d;
 }
 
-.process-flow-step.is-review .process-flow-dot {
+.workflow-inline-step.is-review .workflow-inline-dot {
   background: #fff4ed;
   border-color: #c2410c;
   color: #7c2d12;
 }
 
-.process-flow-step.is-running .process-flow-dot {
+.workflow-inline-step.is-running .workflow-inline-dot {
   background: #e8f2ff;
   border-color: #2f7ed8;
   color: #1d5fa8;
 }
 
-.process-flow-step.is-blocked .process-flow-dot {
+.workflow-inline-step.is-blocked .workflow-inline-dot {
   background: #fff0ef;
   border-color: #d92d20;
   color: #b42318;
@@ -2497,13 +2628,59 @@ h2 {
   grid-template-columns: minmax(180px, 300px);
 }
 
+.generated-review-section {
+  border-left: 0;
+  margin-left: 0;
+  padding-left: 0;
+}
+
+.generated-review-heading {
+  background: #ffffff;
+  border-bottom: 1px solid #dce4ec;
+  padding: 0 0 10px;
+}
+
+.generated-review-heading strong {
+  display: block;
+  font-size: 18px;
+}
+
+.generated-review-layout {
+  align-items: start;
+  display: grid;
+  gap: 14px;
+  grid-template-columns: minmax(360px, 1fr) minmax(320px, 380px);
+}
+
+.generated-video-preview,
+.generated-video-fix-panel {
+  position: sticky;
+  top: 78px;
+}
+
+.generated-video-preview {
+  background: #101820;
+  border-radius: 8px;
+  display: grid;
+  justify-items: center;
+  min-height: 420px;
+  overflow: hidden;
+}
+
+.generated-review-video {
+  border-radius: 8px;
+  height: min(70vh, 720px);
+  max-height: none;
+  object-fit: contain;
+  width: 100%;
+}
+
 .generated-video-fix-panel {
   background: #fff7ed;
   border: 1px solid #fed7aa;
   border-radius: 8px;
   display: grid;
   gap: 10px;
-  max-width: 680px;
   padding: 12px;
 }
 
@@ -2519,11 +2696,106 @@ h2 {
   margin-top: 3px;
 }
 
-.generated-video-fix-actions {
-  display: flex;
-  flex-wrap: wrap;
+.generated-video-targets {
+  display: grid;
   gap: 8px;
-  justify-content: start;
+}
+
+.generated-video-target {
+  align-items: start;
+  background: #ffffff;
+  border: 1px solid #ead0b8;
+  border-radius: 8px;
+  cursor: pointer;
+  display: grid;
+  gap: 6px;
+  grid-template-columns: auto minmax(0, 1fr);
+  padding: 8px;
+}
+
+.generated-video-target.is-selected {
+  border-color: #c2410c;
+  box-shadow: inset 0 0 0 1px #c2410c;
+}
+
+.generated-video-target strong {
+  align-items: center;
+  display: flex;
+  gap: 6px;
+  margin: 0;
+}
+
+.generated-video-target small {
+  color: #7c5c43;
+  display: block;
+  font-size: 12px;
+  margin-top: 3px;
+}
+
+.generated-summary-card {
+  background: #ffffff;
+  border: 1px solid #dce4ec;
+  border-radius: 8px;
+  display: grid;
+  gap: 10px;
+  padding: 12px;
+}
+
+.generated-summary-heading span,
+.generated-summary-grid span,
+.summary-detail summary {
+  color: #607080;
+  display: block;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.generated-summary-heading strong {
+  display: block;
+  font-size: 17px;
+  margin-top: 2px;
+}
+
+.generated-summary-grid {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.generated-summary-grid article {
+  background: #f4f6f8;
+  border-radius: 8px;
+  display: grid;
+  gap: 5px;
+  padding: 10px;
+}
+
+.generated-summary-grid strong {
+  display: block;
+  font-size: 15px;
+  overflow-wrap: anywhere;
+}
+
+.generated-summary-grid p {
+  color: #465666;
+  overflow-wrap: anywhere;
+}
+
+.summary-detail {
+  border-top: 1px solid #e2e8ef;
+  padding-top: 8px;
+}
+
+.summary-detail summary {
+  cursor: pointer;
+}
+
+.summary-detail ol {
+  color: #465666;
+  display: grid;
+  gap: 4px;
+  margin: 8px 0 0;
+  padding-left: 20px;
 }
 
 .failure-retry-panel {
@@ -2975,6 +3247,31 @@ h2 {
   padding: 12px;
 }
 
+@media (max-width: 1000px) {
+  .workflow-compact-panel,
+  .generated-review-layout,
+  .generated-summary-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .workflow-inline-steps {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .generated-video-preview,
+  .generated-video-fix-panel {
+    position: static;
+  }
+
+  .generated-video-preview {
+    min-height: 320px;
+  }
+
+  .generated-review-video {
+    height: min(62vh, 640px);
+  }
+}
+
 @media (max-width: 700px) {
   .topbar,
   .history-header,
@@ -2982,19 +3279,15 @@ h2 {
   .history-item-title,
   .workspace-grid,
   .form-grid,
-  .overview-heading,
   .summary-grid,
   .decision-grid,
   .edit-plan-review,
   .review-choice-grid,
   .fix-summary-grid,
+  .workflow-inline-steps,
   .judgement-guide,
   .video-focus,
   .json-reader {
-    grid-template-columns: 1fr;
-  }
-
-  .process-flow {
     grid-template-columns: 1fr;
   }
 
@@ -3015,6 +3308,17 @@ h2 {
   .top-actions :deep(.v-chip) {
     justify-content: center;
     width: 100%;
+  }
+
+  .current-status-panel {
+    grid-template-columns: 1fr;
+  }
+
+  .current-status-meta {
+    align-items: start;
+    display: flex;
+    flex-wrap: wrap;
+    justify-items: start;
   }
 
   h1 {
