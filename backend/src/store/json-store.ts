@@ -4,6 +4,7 @@ import path from 'node:path';
 import {
   WORKFLOW_STEPS,
   createInitialState,
+  recordValue,
   type AgentRequestStatus,
   type ControlReviewKind,
   type ControlReviewStatus,
@@ -40,10 +41,6 @@ const currentControlReviewStatuses = new Set<ControlReviewStatus>([
   'changes_requested'
 ]);
 const currentHumanReviewActions = new Set<HumanReviewActionType>(['approve', 'reject', 'request_changes']);
-
-function recordValue(value: unknown): Record<string, unknown> {
-  return value && typeof value === 'object' ? value as Record<string, unknown> : {};
-}
 
 function isCurrentRequestDraft(value: unknown): boolean {
   const draft = recordValue(value);

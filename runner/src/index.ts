@@ -5,6 +5,9 @@ import path from 'node:path';
 import { GoogleGenAI, type GenerateContentResponse, type Part } from '@google/genai';
 import {
   DEFAULT_GEMINI_MODEL,
+  findById,
+  lastMatching,
+  recordValue as recordFrom,
   type AgentCompletionInput,
   type AgentRequest,
   type AgentRequestType,
@@ -312,19 +315,18 @@ async function loadState(): Promise<Zev2State> {
 }
 
 function findRequestOutputFileRef(state: Zev2State, requestDraftId: string, type: AgentRequestType) {
-  const agentRequest = [...state.agentRequests]
-    .reverse()
-    .find(
-      (request) =>
-        request.requestDraftId === requestDraftId &&
-        request.type === type &&
-        request.status === 'succeeded'
-    );
+  const agentRequest = lastMatching(
+    state.agentRequests,
+    (request) =>
+      request.requestDraftId === requestDraftId &&
+      request.type === type &&
+      request.status === 'succeeded'
+  );
   if (!agentRequest?.result?.fileRefId) {
     return undefined;
   }
 
-  return state.fileRefs.find((fileRef) => fileRef.id === agentRequest.result?.fileRefId);
+  return findById(state.fileRefs, agentRequest.result.fileRefId);
 }
 
 async function readArtifactByUrl<T>(uri: string): Promise<T> {
@@ -417,14 +419,6 @@ function buildSpeechUnitGroupsFromSegments(segments: SttSegment[]): number[][] {
 
   flush();
   return groups;
-}
-
-function recordFrom(value: unknown): Record<string, unknown> {
-  if (value && typeof value === 'object' && !Array.isArray(value)) {
-    return value as Record<string, unknown>;
-  }
-
-  return {};
 }
 
 function stringArrayFrom(value: unknown): string[] {
@@ -1010,15 +1004,14 @@ async function buildThemeOptionsArtifact(transcript: TranscriptArtifact, request
 }
 
 function selectedThemeIdFromState(state: Zev2State, requestDraftId: string): string {
-  const review = [...state.controlReviewItems]
-    .reverse()
-    .find(
-      (item) =>
-        item.requestDraftId === requestDraftId &&
-        item.kind === 'theme_selection' &&
-        item.status === 'approved'
-    );
-  const action = state.humanReviewActions.find((item) => item.id === review?.resolvedByActionId);
+  const review = lastMatching(
+    state.controlReviewItems,
+    (item) =>
+      item.requestDraftId === requestDraftId &&
+      item.kind === 'theme_selection' &&
+      item.status === 'approved'
+  );
+  const action = findById(state.humanReviewActions, review?.resolvedByActionId);
   if (!action?.selectedOptionId) {
     throw new Error('切り抜きテーマが選ばれていないため構成案を作れません');
   }
@@ -1027,7 +1020,7 @@ function selectedThemeIdFromState(state: Zev2State, requestDraftId: string): str
 }
 
 function buildClipComposition(themes: ThemeArtifact, transcript: TranscriptArtifact, selectedThemeId: string): ClipCompositionArtifact {
-  const selectedTheme = themes.themes.find((theme) => theme.id === selectedThemeId);
+  const selectedTheme = findById(themes.themes, selectedThemeId);
   if (!selectedTheme) {
     throw new Error('選ばれたテーマがテーマ候補にありません');
   }

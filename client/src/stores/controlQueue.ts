@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia';
 import {
   createInitialState,
+  findById,
   findReadyAgentRequest,
   isAgentRequestReady,
   type HumanReviewActionType,
@@ -154,7 +155,7 @@ export const useControlQueueStore = defineStore('controlQueue', {
       this.loading = true;
       this.errorMessage = '';
       this.activeDraftId = id;
-      this.activePurpose = this.state.requestDrafts.find((draft) => draft.id === id)?.purpose ?? '';
+      this.activePurpose = findById(this.state.requestDrafts, id)?.purpose ?? '';
       this.runPhase = 'handing_off';
       this.runNumber += 1;
       this.lastChangedAt = new Date().toISOString();
@@ -236,10 +237,10 @@ export const useControlQueueStore = defineStore('controlQueue', {
     ) {
       this.loading = true;
       this.errorMessage = '';
-      const reviewItem = this.state.controlReviewItems.find((item) => item.id === id);
+      const reviewItem = findById(this.state.controlReviewItems, id);
       if (reviewItem) {
         this.activeDraftId = reviewItem.requestDraftId;
-        this.activePurpose = this.state.requestDrafts.find((draft) => draft.id === reviewItem.requestDraftId)?.purpose ?? '';
+        this.activePurpose = findById(this.state.requestDrafts, reviewItem.requestDraftId)?.purpose ?? '';
       }
       this.message = action === 'reject'
         ? '確認結果を保存しています'
@@ -274,7 +275,7 @@ export const useControlQueueStore = defineStore('controlQueue', {
     ) {
       this.loading = true;
       this.errorMessage = '';
-      const draft = this.state.requestDrafts.find((item) => item.id === id);
+      const draft = findById(this.state.requestDrafts, id);
       this.activeDraftId = id;
       this.activePurpose = draft?.purpose ?? '';
       this.runPhase = 'running';
@@ -299,9 +300,9 @@ export const useControlQueueStore = defineStore('controlQueue', {
     async retryAgentRequest(id: string) {
       this.loading = true;
       this.errorMessage = '';
-      const failedRequest = this.state.agentRequests.find((request) => request.id === id);
+      const failedRequest = findById(this.state.agentRequests, id);
       if (failedRequest) {
-        const draft = this.state.requestDrafts.find((item) => item.id === failedRequest.requestDraftId);
+        const draft = findById(this.state.requestDrafts, failedRequest.requestDraftId);
         this.activeDraftId = failedRequest.requestDraftId;
         this.activePurpose = draft?.purpose ?? '';
         this.message = `${failedRequest.label}を再実行しています`;

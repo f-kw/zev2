@@ -1,5 +1,6 @@
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
+import { recordValue as recordFrom } from '@zev2/shared';
 
 export type TelopGlowColorMode = 'fixed' | 'randomBright';
 
@@ -56,12 +57,6 @@ function defaultProfilePath(): string {
   return process.env.ZEV2_TELOP_PROFILE_PATH
     ? path.resolve(process.env.ZEV2_TELOP_PROFILE_PATH)
     : path.join(workspaceRoot(), 'runner', 'data', 'telop-profiles', 'default.json');
-}
-
-function recordFrom(value: unknown): Record<string, unknown> {
-  return value && typeof value === 'object' && !Array.isArray(value)
-    ? value as Record<string, unknown>
-    : {};
 }
 
 function normalizeStyle(value: unknown, label: string): TelopVisualStyle {

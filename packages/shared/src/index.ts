@@ -1,3 +1,7 @@
+import { findById, isStatusIn, latestByCreatedAt } from './common.js';
+
+export * from './common.js';
+
 export const WORKFLOW_STEPS = [
   {
     type: 'prepare_video',
@@ -331,15 +335,11 @@ export function findAgentRequestDependency(
   state: Zev2State,
   request: AgentRequest
 ): AgentRequest | undefined {
-  if (!request.dependsOnAgentRequestId) {
-    return undefined;
-  }
-
-  return state.agentRequests.find((item) => item.id === request.dependsOnAgentRequestId);
+  return findById(state.agentRequests, request.dependsOnAgentRequestId);
 }
 
 export function isAgentRequestReady(state: Zev2State, request: AgentRequest): boolean {
-  if (!['queued', 'waiting'].includes(request.status)) {
+  if (!isStatusIn(request.status, ['queued', 'waiting'])) {
     return false;
   }
 
@@ -359,10 +359,12 @@ export function findBlockingControlReview(
   state: Zev2State,
   request: AgentRequest
 ): ControlReviewItem | undefined {
-  const latestControlReview = (kind: ControlReviewKind) =>
-    state.controlReviewItems
-      .filter((item) => item.requestDraftId === request.requestDraftId && item.kind === kind)
-      .sort((left, right) => right.createdAt.localeCompare(left.createdAt))[0];
+  const latestControlReview = (kind: ControlReviewKind) => {
+    const reviews = state.controlReviewItems.filter(
+      (item) => item.requestDraftId === request.requestDraftId && item.kind === kind
+    );
+    return latestByCreatedAt(reviews);
+  };
 
   const themeReview = latestControlReview('theme_selection');
   const requestStepIndex = WORKFLOW_STEPS.findIndex((step) => step.type === request.type);

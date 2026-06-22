@@ -16,11 +16,16 @@ import {
   type OutputEntity,
   createAgentRequestsFromDraft,
   createRequestDraft,
+  findById,
   findAgentRequestDependency,
   findReadyAgentRequest,
   getFileRefKindForRequest,
   getOutputTypeForRequest,
   getRequiredControlReviewKind,
+  hasText,
+  isStatusIn,
+  lastMatching,
+  latestByCreatedAt,
   validateRequestDraftInput,
   type RequestDraftInput
 } from '@zev2/shared';
@@ -56,9 +61,10 @@ function latestSucceededAgentRequest(
   requestDraftId: string,
   type: AgentRequest['type']
 ): AgentRequest | undefined {
-  return [...stateAgentRequests]
-    .reverse()
-    .find((request) => request.requestDraftId === requestDraftId && request.type === type && request.status === 'succeeded');
+  return lastMatching(
+    stateAgentRequests,
+    (request) => request.requestDraftId === requestDraftId && request.type === type && request.status === 'succeeded'
+  );
 }
 
 function latestControlReview(
@@ -66,9 +72,8 @@ function latestControlReview(
   requestDraftId: string,
   kind: ControlReviewKind
 ): ControlReviewItem | undefined {
-  return stateControlReviews
-    .filter((item) => item.requestDraftId === requestDraftId && item.kind === kind)
-    .sort((left, right) => right.createdAt.localeCompare(left.createdAt))[0];
+  const reviews = stateControlReviews.filter((item) => item.requestDraftId === requestDraftId && item.kind === kind);
+  return latestByCreatedAt(reviews);
 }
 
 function fileRefForAgentRequest(state: Awaited<ReturnType<typeof loadState>>, request: AgentRequest): FileRef | undefined {
@@ -76,7 +81,7 @@ function fileRefForAgentRequest(state: Awaited<ReturnType<typeof loadState>>, re
     return undefined;
   }
 
-  return state.fileRefs.find((fileRef) => fileRef.id === request.result?.fileRefId);
+  return findById(state.fileRefs, request.result.fileRefId);
 }
 
 function outputForAgentRequest(state: Awaited<ReturnType<typeof loadState>>, request: AgentRequest): OutputEntity | undefined {
@@ -84,7 +89,7 @@ function outputForAgentRequest(state: Awaited<ReturnType<typeof loadState>>, req
     return undefined;
   }
 
-  return state.outputs.find((output) => output.id === request.result?.outputId);
+  return findById(state.outputs, request.result.outputId);
 }
 
 function createAgentRequestAfter(
@@ -123,7 +128,7 @@ function createRetryRequestsFromFailedRequest(
   failedRequestId: string,
   createdAt: string
 ): { requests: AgentRequest[]; requestDraftId: string; startType: AgentRequest['type'] } | { error: string } {
-  const failedRequest = stateAgentRequests.find((request) => request.id === failedRequestId);
+  const failedRequest = findById(stateAgentRequests, failedRequestId);
   if (!failedRequest) {
     return { error: '再実行するAI工程が見つかりません' };
   }
@@ -133,7 +138,7 @@ function createRetryRequestsFromFailedRequest(
   }
 
   const dependencyRequest = failedRequest.dependsOnAgentRequestId
-    ? stateAgentRequests.find((request) => request.id === failedRequest.dependsOnAgentRequestId)
+    ? findById(stateAgentRequests, failedRequest.dependsOnAgentRequestId)
     : undefined;
   if (failedRequest.dependsOnAgentRequestId && dependencyRequest?.status !== 'succeeded') {
     return { error: '再実行に必要な前工程が完了していません' };
@@ -173,7 +178,7 @@ function markReplaceableRequestsAsReplaced(
       request.requestDraftId === requestDraftId &&
       requestIndex >= startIndex &&
       requestIndex <= renderIndex &&
-      ['queued', 'waiting', 'running', 'failed'].includes(request.status);
+      isStatusIn(request.status, ['queued', 'waiting', 'running', 'failed']);
 
     if (!shouldReplace) {
       continue;
@@ -190,7 +195,7 @@ function createRerunRequestsForReview(
   reviewItem: ControlReviewItem,
   createdAt: string
 ): { requests: AgentRequest[] } | { error: string } {
-  const sourceRequest = stateAgentRequests.find((request) => request.id === reviewItem.agentRequestId);
+  const sourceRequest = findById(stateAgentRequests, reviewItem.agentRequestId);
   if (!sourceRequest) {
     return { error: '作り直し対象のAI工程が見つかりません' };
   }
@@ -236,7 +241,7 @@ function createThemeReselectFromReview(
     return { error: 'テーマを選び直せるのは動画生成前確認からだけです' };
   }
 
-  const sourceRequest = state.agentRequests.find((request) => request.id === reviewItem.agentRequestId);
+  const sourceRequest = findById(state.agentRequests, reviewItem.agentRequestId);
   if (!sourceRequest) {
     return { error: 'テーマを選び直す前提になるAI工程が見つかりません' };
   }
@@ -346,7 +351,7 @@ function createRenderRequestForReview(
   reviewItem: ControlReviewItem,
   createdAt: string
 ): { request: AgentRequest } | { error: string } {
-  const sourceRequest = stateAgentRequests.find((request) => request.id === reviewItem.agentRequestId);
+  const sourceRequest = findById(stateAgentRequests, reviewItem.agentRequestId);
   if (!sourceRequest) {
     return { error: '動画生成の前提になるAI工程が見つかりません' };
   }
@@ -398,10 +403,6 @@ function createEditRerunRequestsFromGeneratedVideo(
   }
 
   return { requests };
-}
-
-function hasText(value: unknown): value is string {
-  return typeof value === 'string' && value.trim().length > 0;
 }
 
 function validateAgentDecision(input: AgentDecisionInput | undefined): string[] {
@@ -598,7 +599,7 @@ async function applyHumanReviewAction(
   | { status: 'error'; statusCode: number; error: string; state?: Awaited<ReturnType<typeof loadState>> }
 > {
   const state = await loadState();
-  const reviewItem = state.controlReviewItems.find((item) => item.id === reviewItemId);
+  const reviewItem = findById(state.controlReviewItems, reviewItemId);
 
   if (!reviewItem) {
     return { status: 'error', statusCode: 404, error: '人間確認項目が見つかりません' };
@@ -732,7 +733,7 @@ router.post('/request-drafts', async (request, response) => {
 
 router.post('/request-drafts/:id/approve', async (request, response) => {
   const state = await loadState();
-  const draft = state.requestDrafts.find((item) => item.id === request.params.id);
+  const draft = findById(state.requestDrafts, request.params.id);
 
   if (!draft) {
     response.status(404).json({ error: '実行前下書きが見つかりません' });
@@ -768,14 +769,14 @@ router.get('/agent-requests/next', async (_, response) => {
 
 router.post('/agent-requests/:id/claim', async (request, response) => {
   const state = await loadState();
-  const agentRequest = state.agentRequests.find((item) => item.id === request.params.id);
+  const agentRequest = findById(state.agentRequests, request.params.id);
 
   if (!agentRequest) {
     response.status(404).json({ error: 'AI操作が見つかりません' });
     return;
   }
 
-  if (!['queued', 'waiting'].includes(agentRequest.status)) {
+  if (!isStatusIn(agentRequest.status, ['queued', 'waiting'])) {
     response.status(409).json({ error: 'このAI操作は取得できません', state });
     return;
   }
@@ -799,7 +800,7 @@ router.post('/agent-requests/:id/claim', async (request, response) => {
 
 router.post('/agent-requests/:id/complete', async (request, response) => {
   const state = await loadState();
-  const agentRequest = state.agentRequests.find((item) => item.id === request.params.id);
+  const agentRequest = findById(state.agentRequests, request.params.id);
 
   if (!agentRequest) {
     response.status(404).json({ error: 'AI操作が見つかりません' });
@@ -903,7 +904,7 @@ router.post('/request-drafts/:id/request-generated-video-changes', async (reques
   const scope = request.body?.scope === 'theme_selection' ? 'theme_selection' : 'edit_plan';
 
   const state = await loadState();
-  const draft = state.requestDrafts.find((item) => item.id === request.params.id);
+  const draft = findById(state.requestDrafts, request.params.id);
   if (!draft) {
     response.status(404).json({ error: '実行前下書きが見つかりません', state });
     return;
@@ -990,7 +991,7 @@ router.post('/agent-requests/:id/retry', async (request, response) => {
 
 router.post('/agent-requests/:id/fail', async (request, response) => {
   const state = await loadState();
-  const agentRequest = state.agentRequests.find((item) => item.id === request.params.id);
+  const agentRequest = findById(state.agentRequests, request.params.id);
 
   if (!agentRequest) {
     response.status(404).json({ error: 'AI操作が見つかりません' });

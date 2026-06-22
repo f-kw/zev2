@@ -12,7 +12,18 @@ import type {
 } from '@zev2/shared';
 import {
   DEFAULT_GEMINI_MODEL,
-  GEMINI_MODEL_OPTIONS
+  GEMINI_MODEL_OPTIONS,
+  arrayField,
+  booleanField,
+  filterByStatus,
+  findById,
+  isStatusIn,
+  lastMatching,
+  numberField,
+  recordValue,
+  sortByCreatedAtDesc,
+  stringField,
+  uriWithRef
 } from '@zev2/shared';
 import { fetchArtifactText } from './api';
 import { useControlQueueStore } from './stores/controlQueue';
@@ -178,7 +189,7 @@ const focusedDraftId = computed(() => {
 
   return selectedHistoryDraftId.value || store.activeDraftId || pendingDrafts.value[0]?.id || store.state.requestDrafts[0]?.id;
 });
-const latestDraft = computed(() => store.state.requestDrafts.find((draft) => draft.id === focusedDraftId.value));
+const latestDraft = computed(() => findById(store.state.requestDrafts, focusedDraftId.value));
 const selectedOperations = computed(() => {
   const draft = latestDraft.value;
   if (!draft) {
@@ -190,9 +201,7 @@ const selectedOperations = computed(() => {
   );
 });
 const runningOperations = computed(() => selectedOperations.value.filter((request) => request.status === 'running'));
-const waitingOperations = computed(() =>
-  selectedOperations.value.filter((request) => ['queued', 'waiting'].includes(request.status))
-);
+const waitingOperations = computed(() => filterByStatus(selectedOperations.value, ['queued', 'waiting']));
 const failedOperations = computed(() => selectedOperations.value.filter((request) => request.status === 'failed'));
 const failedOperation = computed(() => failedOperations.value[0]);
 const failedOperationProcessTab = computed(() =>
@@ -209,9 +218,9 @@ const selectedControlReviews = computed(() => {
     return [];
   }
 
-  return store.state.controlReviewItems
-    .filter((item) => item.requestDraftId === draft.id)
-    .sort((left, right) => right.createdAt.localeCompare(left.createdAt));
+  return sortByCreatedAtDesc(
+    store.state.controlReviewItems.filter((item) => item.requestDraftId === draft.id)
+  );
 });
 const pendingControlReviews = computed(() =>
   selectedControlReviews.value.filter((item) => item.status === 'review_required')
@@ -308,7 +317,7 @@ const runHistory = computed(() =>
     const pendingReviews = reviews.filter((item) => item.status === 'review_required').length;
     const stoppedReviews = reviews.filter((item) => item.status === 'rejected').length;
     const failed = operations.filter((request) => request.status === 'failed').length;
-    const active = operations.filter((request) => ['queued', 'waiting', 'running'].includes(request.status)).length;
+    const active = filterByStatus(operations, ['queued', 'waiting', 'running']).length;
     const operationUpdatedTimes = operations.map((request) => request.updatedAt).sort();
     const updatedAt = operationUpdatedTimes[operationUpdatedTimes.length - 1] ?? draft.updatedAt;
     let statusLabel = '承認待ち';
@@ -357,7 +366,7 @@ const selectedArtifacts = computed(() => {
       continue;
     }
 
-    const fileRef = store.state.fileRefs.find((item) => item.id === fileRefId);
+    const fileRef = findById(store.state.fileRefs, fileRefId);
     if (!fileRef) {
       continue;
     }
@@ -377,7 +386,7 @@ const candidateArtifacts = computed(() => artifactForTypes(processOperationTypes
 const editArtifacts = computed(() => artifactForTypes(processOperationTypes.edit));
 const videoArtifacts = computed(() => artifactForTypes(processOperationTypes.video));
 const outputVideoArtifact = computed(() =>
-  [...selectedArtifacts.value].reverse().find((artifact) => artifact.operation.type === 'render_video')
+  lastMatching(selectedArtifacts.value, (artifact) => artifact.operation.type === 'render_video')
 );
 const hasOutputVideo = computed(() => Boolean(outputVideoArtifact.value));
 const generatedVideoChangeReason = computed({
@@ -745,7 +754,7 @@ const editPlanSummary = computed<EditPlanSummary | undefined>(() => {
   }
 
   const selectedThemeId = stringField(editPlan, 'selectedThemeId') || '選択テーマは未取得です';
-  const selectedTheme = themeSummaries.value.find((theme) => theme.id === selectedThemeId);
+  const selectedTheme = findById(themeSummaries.value, selectedThemeId);
   const composition = compositionArtifactJson.value;
   const themeSummary = stringField(composition, 'themeSummary') || selectedTheme?.summary || '';
   const assemblyPlan = stringField(composition, 'assemblyPlan');
@@ -840,7 +849,7 @@ function artifactForTypes(types: AgentRequestType[]): ArtifactRow[] {
 }
 
 function artifactJsonFor(type: AgentRequestType): Record<string, unknown> | undefined {
-  const artifact = [...selectedArtifacts.value].reverse().find((item) => item.operation.type === type);
+  const artifact = lastMatching(selectedArtifacts.value, (item) => item.operation.type === type);
   if (!artifact) {
     return undefined;
   }
@@ -856,34 +865,6 @@ function artifactJsonFor(type: AgentRequestType): Record<string, unknown> | unde
   } catch {
     return undefined;
   }
-}
-
-function recordValue(value: unknown): Record<string, unknown> {
-  if (value && typeof value === 'object' && !Array.isArray(value)) {
-    return value as Record<string, unknown>;
-  }
-
-  return {};
-}
-
-function arrayField(record: Record<string, unknown> | undefined, key: string): unknown[] {
-  const value = record?.[key];
-  return Array.isArray(value) ? value : [];
-}
-
-function stringField(record: Record<string, unknown> | undefined, key: string): string {
-  const value = record?.[key];
-  return typeof value === 'string' ? value : '';
-}
-
-function numberField(record: Record<string, unknown> | undefined, key: string): number | undefined {
-  const value = record?.[key];
-  return typeof value === 'number' ? value : undefined;
-}
-
-function booleanField(record: Record<string, unknown> | undefined, key: string): boolean | undefined {
-  const value = record?.[key];
-  return typeof value === 'boolean' ? value : undefined;
 }
 
 function geminiModelLabel(modelName: string): string {
@@ -1037,11 +1018,11 @@ function processStatusFor(key: ProcessTabKey, review?: ControlReviewItem): Proce
     return 'done';
   }
 
-  if (review && ['rejected', 'changes_requested'].includes(review.status)) {
+  if (review && isStatusIn(review.status, ['rejected', 'changes_requested'])) {
     return 'blocked';
   }
 
-  if (operations.some((request) => ['queued', 'waiting', 'running'].includes(request.status))) {
+  if (filterByStatus(operations, ['queued', 'waiting', 'running']).length > 0) {
     return 'running';
   }
 
@@ -1121,7 +1102,7 @@ function actionForReview(review: ControlReviewItem | undefined) {
     return undefined;
   }
 
-  return store.state.humanReviewActions.find((item) => item.id === review.resolvedByActionId);
+  return findById(store.state.humanReviewActions, review.resolvedByActionId);
 }
 
 function humanActionMeaning(action: ReturnType<typeof actionForReview>): string {
@@ -1362,7 +1343,7 @@ function showNextProcessForReview(review: ControlReviewItem) {
 }
 
 function artifactAccessUri(fileRef: FileRef): string {
-  return `${fileRef.uri}${fileRef.uri.includes('?') ? '&' : '?'}ref=${encodeURIComponent(fileRef.id)}`;
+  return uriWithRef(fileRef.uri, fileRef.id);
 }
 
 async function toggleArtifactPreview(fileRef: FileRef) {

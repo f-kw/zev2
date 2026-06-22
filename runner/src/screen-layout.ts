@@ -1,3 +1,5 @@
+import { findById, recordValue as recordFrom } from '@zev2/shared';
+
 export type ShortsScreenLayoutId =
   | 'speaker_only'
   | 'screen_speaker'
@@ -95,14 +97,6 @@ const SCREEN_LAYOUT_DEFINITIONS: Record<ShortsScreenLayoutId, ShortsScreenLayout
     }
   }
 };
-
-function recordFrom(value: unknown): Record<string, unknown> {
-  if (value && typeof value === 'object' && !Array.isArray(value)) {
-    return value as Record<string, unknown>;
-  }
-
-  return {};
-}
 
 function clampNumber(value: number, min: number, max: number): number {
   return Math.min(max, Math.max(min, value));
@@ -598,7 +592,7 @@ export function selectScreenLayoutCandidate(
   selectionReason?: string
 ): ShortsScreenLayoutPlan {
   const candidate = selectedCandidateId
-    ? candidateSet.candidates.find((item) => item.id === selectedCandidateId)
+    ? findById(candidateSet.candidates, selectedCandidateId)
     : candidateSet.candidates[0];
   if (!candidate) {
     throw new Error(`${label}で選ばれた表示候補が候補一覧にありません`);

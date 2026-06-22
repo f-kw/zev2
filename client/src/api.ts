@@ -1,13 +1,14 @@
 import axios from 'axios';
-import type {
-  AgentCompletionInput,
-  AgentFailureInput,
-  AgentRequest,
-  HumanReviewActionType,
-  RequestDraft,
-  RequestDraftInput,
-  Zev2State,
-  WorkflowStep
+import {
+  uriWithRef,
+  type AgentCompletionInput,
+  type AgentFailureInput,
+  type AgentRequest,
+  type HumanReviewActionType,
+  type RequestDraft,
+  type RequestDraftInput,
+  type Zev2State,
+  type WorkflowStep
 } from '@zev2/shared';
 
 const api = axios.create({
@@ -92,9 +93,7 @@ export async function retryAgentRequest(id: string): Promise<Zev2State> {
 }
 
 export async function fetchArtifactText(uri: string, cacheKey?: string): Promise<string> {
-  const requestUri = cacheKey
-    ? `${uri}${uri.includes('?') ? '&' : '?'}ref=${encodeURIComponent(cacheKey)}`
-    : uri;
+  const requestUri = uriWithRef(uri, cacheKey);
   const response = await axios.get(requestUri, { responseType: 'text' });
   return typeof response.data === 'string' ? response.data : JSON.stringify(response.data, null, 2);
 }
