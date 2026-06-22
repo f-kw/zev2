@@ -24,6 +24,7 @@ const selectedProcessTab = ref<ProcessTabKey | ''>('');
 const showRequestForm = ref(false);
 const showDetailData = ref(false);
 const reviewReasons = reactive<Record<string, string>>({});
+const generatedVideoChangeReasons = reactive<Record<string, string>>({});
 const selectedReviewOptions = reactive<Record<string, string>>({});
 const artifactPreviews = reactive<Record<string, string>>({});
 const expandedArtifacts = reactive<Record<string, boolean>>({});
@@ -70,6 +71,7 @@ interface EditPlanSummary {
 
 interface ReviewChoice {
   action: HumanReviewActionType;
+  changeScope?: 'edit_plan' | 'theme_reselect';
   label: string;
   title: string;
   body: string;
@@ -133,6 +135,16 @@ const processOperationTypes: Record<ProcessTabKey, AgentRequestType[]> = {
   notes: []
 };
 
+function processTabForOperationType(type: AgentRequestType): ProcessTabKey {
+  for (const [key, types] of Object.entries(processOperationTypes) as Array<[ProcessTabKey, AgentRequestType[]]>) {
+    if (types.includes(type)) {
+      return key;
+    }
+  }
+
+  return 'request';
+}
+
 const operationUserLabel = {
   prepare_video: '対象動画',
   run_stt: '話した内容',
@@ -182,6 +194,12 @@ const waitingOperations = computed(() =>
   selectedOperations.value.filter((request) => ['queued', 'waiting'].includes(request.status))
 );
 const failedOperations = computed(() => selectedOperations.value.filter((request) => request.status === 'failed'));
+const failedOperation = computed(() => failedOperations.value[0]);
+const failedOperationProcessTab = computed(() =>
+  failedOperation.value ? processTabForOperationType(failedOperation.value.type) : undefined
+);
+const failedOperationDetail = computed(() => failureDetailForDisplay(failedOperation.value));
+const failedOperationRecoveryHint = computed(() => recoveryHintForFailure(failedOperation.value));
 const completedOperations = computed(() =>
   selectedOperations.value.filter((request) => request.status === 'succeeded')
 );
@@ -209,7 +227,7 @@ const currentOperation = computed<AgentRequest | undefined>(
   () =>
     runningOperations.value[0] ??
     waitingOperations.value[0] ??
-    failedOperations.value[0] ??
+    failedOperation.value ??
     completedOperations.value[completedOperations.value.length - 1]
 );
 const activeDraft = computed(() => latestDraft.value);
@@ -362,13 +380,30 @@ const outputVideoArtifact = computed(() =>
   [...selectedArtifacts.value].reverse().find((artifact) => artifact.operation.type === 'render_video')
 );
 const hasOutputVideo = computed(() => Boolean(outputVideoArtifact.value));
+const generatedVideoChangeReason = computed({
+  get() {
+    const draftId = activeDraft.value?.id;
+    return draftId ? generatedVideoChangeReasons[draftId] ?? '' : '';
+  },
+  set(value: string) {
+    const draftId = activeDraft.value?.id;
+    if (!draftId) {
+      return;
+    }
+
+    generatedVideoChangeReasons[draftId] = value;
+  }
+});
+const canRequestGeneratedVideoChanges = computed(() =>
+  Boolean(activeDraft.value && outputVideoArtifact.value && generatedVideoChangeReason.value.trim())
+);
 const recommendedProcessTab = computed<ProcessTabKey>(() => {
   if (!activeDraft.value) {
     return 'request';
   }
 
-  if (failedOperations.value.length > 0) {
-    return 'video';
+  if (failedOperationProcessTab.value) {
+    return failedOperationProcessTab.value;
   }
 
   const pendingThemeReview = themeControlReview.value?.status === 'review_required';
@@ -454,12 +489,18 @@ const processTabs = computed<ProcessTab[]>(() => [
   {
     key: 'edit',
     label: '動画生成前確認',
-    question: 'この内容で確認用動画を作ってよいですか',
-    helper: 'テーマ、完成イメージ、テロップを確認します。',
+    question: pendingRenderRegeneration.value
+      ? 'この内容で確認用動画を作り直してよいですか'
+      : 'この内容で確認用動画を作ってよいですか',
+    helper: pendingRenderRegeneration.value
+      ? '作り直したテーマ、完成イメージ、テロップを確認します。'
+      : 'テーマ、完成イメージ、テロップを確認します。',
     status: processStatusFor('edit', renderControlReview.value),
     statusLabel:
       processStatusFor('edit', renderControlReview.value) === 'done'
-        ? '生成前確認済み'
+        ? (pendingRenderRegeneration.value ? '再生成前の確認済み' : '生成前確認済み')
+        : pendingRenderRegeneration.value
+          ? '再生成前の確認待ち'
         : processStatusLabel(processStatusFor('edit', renderControlReview.value)),
     icon: 'mdi-content-cut'
   },
@@ -468,8 +509,18 @@ const processTabs = computed<ProcessTab[]>(() => [
     label: '生成後レビュー',
     question: '生成された確認用動画を見て、次に直す点は何ですか',
     helper: '動画を見て、直す点があれば記録します。',
-    status: hasOutputVideo.value ? 'ready' : runningOperations.value.some((request) => request.type === 'render_video') ? 'running' : 'pending',
-    statusLabel: hasOutputVideo.value ? '生成結果を確認できます' : '未生成',
+    status: failedOperationProcessTab.value === 'video'
+      ? 'blocked'
+      : hasOutputVideo.value
+        ? 'ready'
+        : runningOperations.value.some((request) => request.type === 'render_video')
+          ? 'running'
+          : 'pending',
+    statusLabel: failedOperationProcessTab.value === 'video'
+      ? '確認が必要'
+      : hasOutputVideo.value
+        ? '生成結果を確認できます'
+        : '未生成',
     icon: 'mdi-play-box-outline'
   }
 ]);
@@ -510,7 +561,7 @@ const currentStatusSummary = computed(() => {
       icon: 'mdi-alert-circle-outline',
       label: '現在状況',
       title: '処理が止まっています',
-      detail: store.errorMessage || `${failedOperations.value[0]?.label ?? '処理'} で確認が必要です。`
+      detail: store.errorMessage || failedOperationDetail.value
     };
   }
 
@@ -539,8 +590,10 @@ const currentStatusSummary = computed(() => {
       tone: 'review',
       icon: 'mdi-account-check-outline',
       label: '現在状況',
-      title: '確認が必要です',
-      detail: currentControlReview.value?.humanQuestion ?? '確認する内容があります。'
+      title: pendingRenderRegeneration.value ? '再生成前の確認が必要です' : '確認が必要です',
+      detail: pendingRenderRegeneration.value
+        ? '作り直した編集案を承認すると、確認用動画を再生成します。'
+        : currentControlReview.value?.humanQuestion ?? '確認する内容があります。'
     };
   }
 
@@ -623,6 +676,22 @@ const activeArtifacts = computed(() => {
 
   return selectedArtifacts.value;
 });
+const pendingRenderRegeneration = computed(() =>
+  Boolean(
+    renderControlReview.value?.status === 'review_required'
+    && renderReviewHasPriorGeneratedVideo(renderControlReview.value)
+  )
+);
+
+function renderReviewHasPriorGeneratedVideo(review?: ControlReviewItem): boolean {
+  if (!review || review.kind !== 'render_readiness') {
+    return false;
+  }
+
+  return selectedArtifacts.value.some(
+    (artifact) => artifact.operation.type === 'render_video' && artifact.operation.createdAt < review.createdAt
+  );
+}
 
 function isProcessLockedByReview(key: ProcessTabKey): boolean {
   const requiredTab = requiredReviewProcessTab.value;
@@ -631,11 +700,24 @@ function isProcessLockedByReview(key: ProcessTabKey): boolean {
 const themeArtifactJson = computed(() => artifactJsonFor('propose_clip_themes'));
 const compositionArtifactJson = computed(() => artifactJsonFor('build_clip_composition'));
 const editPlanArtifactJson = computed(() => artifactJsonFor('create_edit_plan'));
+const selectedThemeIdForDisplay = computed(() => {
+  const themeReview = themeControlReview.value;
+  if (themeReview?.status === 'review_required') {
+    return selectedReviewOptionId(themeReview);
+  }
+
+  const selectedFromReview = actionForReview(themeReview)?.selectedOptionId;
+  if (selectedFromReview) {
+    return selectedFromReview;
+  }
+
+  return stringField(editPlanArtifactJson.value, 'selectedThemeId')
+    || stringField(compositionArtifactJson.value, 'selectedThemeId')
+    || '';
+});
 const themeSummaries = computed<ThemeReviewSummary[]>(() => {
   const themes = arrayField(themeArtifactJson.value, 'themes');
-  const selectedThemeId = activeReview.value?.kind === 'theme_selection'
-    ? selectedReviewOptionId(activeReview.value)
-    : '';
+  const selectedThemeId = selectedThemeIdForDisplay.value;
 
   return themes.map((theme, index) => {
     const themeRecord = recordValue(theme);
@@ -699,14 +781,6 @@ const reviewChoiceCards = computed<ReviewChoice[]>(() => {
         body: '切り抜きたい内容の候補が違う、代表発話が足りない、別のテーマを見たい場合。',
         color: 'deep-orange-darken-4',
         icon: 'mdi-pencil'
-      },
-      {
-        action: 'reject',
-        label: 'この方向では作らない',
-        title: 'この実行を止める',
-        body: '対象動画やテーマ候補の方向性が違い、このまま進めても確認材料にならない場合。',
-        color: 'error',
-        icon: 'mdi-close'
       }
     ];
   }
@@ -714,14 +788,17 @@ const reviewChoiceCards = computed<ReviewChoice[]>(() => {
   return [
     {
       action: 'approve',
-      label: 'この編集案で作る',
-      title: '確認用動画を作る',
-      body: 'テーマ、完成イメージ、テロップで問題ない場合。',
+      label: pendingRenderRegeneration.value ? 'この編集案で再生成する' : 'この編集案で作る',
+      title: pendingRenderRegeneration.value ? '確認用動画を作り直す' : '確認用動画を作る',
+      body: pendingRenderRegeneration.value
+        ? '作り直したテーマ、完成イメージ、テロップで問題ない場合。'
+        : 'テーマ、完成イメージ、テロップで問題ない場合。',
       color: 'primary',
       icon: 'mdi-check'
     },
     {
       action: 'request_changes',
+      changeScope: 'edit_plan',
       label: '編集案を直したい',
       title: '動画生成前に戻す',
       body: '完成イメージやテロップを直したい場合。',
@@ -729,12 +806,13 @@ const reviewChoiceCards = computed<ReviewChoice[]>(() => {
       icon: 'mdi-pencil'
     },
     {
-      action: 'reject',
-      label: '動画作成は止める',
-      title: 'この実行を止める',
-      body: 'この編集案では確認用動画を作っても判断材料にならない場合。',
-      color: 'error',
-      icon: 'mdi-close'
+      action: 'request_changes',
+      changeScope: 'theme_reselect',
+      label: 'テーマを選び直す',
+      title: 'テーマ選択へ戻る',
+      body: '今のテーマではなく、既存のテーマ候補から別の内容を選び直したい場合。',
+      color: 'primary',
+      icon: 'mdi-clipboard-search-outline'
     }
   ];
 });
@@ -917,6 +995,32 @@ function themeReasonForDisplay(theme: Record<string, unknown>, isPlaceholder: bo
   return '文字起こし上で切り抜きたい内容として選べるまとまりがあるため。';
 }
 
+function failureDetailForDisplay(request?: AgentRequest): string {
+  const firstLine = request?.errorMessage
+    ?.split('\n')
+    .map((line) => line.trim())
+    .find((line) => line.length > 0);
+
+  return firstLine || `${request?.label ?? '処理'} で止まっています。失敗内容を確認してください。`;
+}
+
+function recoveryHintForFailure(request?: AgentRequest): string {
+  const message = request?.errorMessage ?? '';
+  if (message.includes('Gemini APIの接続情報')) {
+    return 'GEMINI_API_KEY、GOOGLE_API_KEY、または GOOGLE_CLOUD_PROJECT を設定してバックエンドを再起動した後、この工程を再実行してください。';
+  }
+
+  return '原因を直した後、この工程を再実行できます。';
+}
+
+async function retryFailedOperation() {
+  if (!failedOperation.value) {
+    return;
+  }
+
+  await store.retryAgentRequest(failedOperation.value.id);
+}
+
 function processStatusFor(key: ProcessTabKey, review?: ControlReviewItem): ProcessStatus {
   if (review?.status === 'review_required') {
     return 'review';
@@ -924,8 +1028,9 @@ function processStatusFor(key: ProcessTabKey, review?: ControlReviewItem): Proce
 
   const operationTypes = processOperationTypes[key];
   const operations = selectedOperations.value.filter((request) => operationTypes.includes(request.type));
-  if (operations.some((request) => ['queued', 'waiting', 'running'].includes(request.status))) {
-    return 'running';
+
+  if (operations.some((request) => request.status === 'failed')) {
+    return 'blocked';
   }
 
   if (review?.status === 'approved') {
@@ -936,8 +1041,8 @@ function processStatusFor(key: ProcessTabKey, review?: ControlReviewItem): Proce
     return 'blocked';
   }
 
-  if (operations.some((request) => request.status === 'failed')) {
-    return 'blocked';
+  if (operations.some((request) => ['queued', 'waiting', 'running'].includes(request.status))) {
+    return 'running';
   }
 
   if (operations.length > 0 && operations.every((request) => request.status === 'succeeded')) {
@@ -1048,7 +1153,9 @@ function humanDecisionSummary(review: ControlReviewItem): string {
   }
 
   if (review.kind === 'render_readiness' && action.action === 'approve') {
-    return '編集案を承認しました。確認用動画の生成へ進みました。';
+    return renderReviewHasPriorGeneratedVideo(review)
+      ? '編集案を承認しました。確認用動画の再生成へ進みました。'
+      : '編集案を承認しました。確認用動画の生成へ進みました。';
   }
 
   return humanActionMeaning(action);
@@ -1062,8 +1169,12 @@ function nextProcessKeyForReview(review: ControlReviewItem): ProcessTabKey {
   return review.kind === 'theme_selection' ? 'edit' : 'video';
 }
 
-function reviewChoiceReasonKey(review: ControlReviewItem, action: HumanReviewActionType): string {
-  return `${review.id}:${action}`;
+function reviewChoiceReasonKey(
+  review: ControlReviewItem,
+  action: HumanReviewActionType,
+  changeScope?: 'edit_plan' | 'theme_reselect'
+): string {
+  return `${review.id}:${action}:${changeScope ?? 'default'}`;
 }
 
 function selectedReviewOptionId(review: ControlReviewItem): string {
@@ -1079,8 +1190,13 @@ async function selectThemeAndProceed(review: ControlReviewItem, optionId: string
   await submitControlReview(review, 'approve');
 }
 
-function setReviewChoiceReason(review: ControlReviewItem, action: HumanReviewActionType, value: string | null) {
-  reviewReasons[reviewChoiceReasonKey(review, action)] = value ?? '';
+function setReviewChoiceReason(
+  review: ControlReviewItem,
+  action: HumanReviewActionType,
+  value: string | null,
+  changeScope?: 'edit_plan' | 'theme_reselect'
+) {
+  reviewReasons[reviewChoiceReasonKey(review, action, changeScope)] = value ?? '';
 }
 
 function reviewChoiceReasonLabel(action: HumanReviewActionType): string {
@@ -1210,21 +1326,43 @@ function closeHistory() {
   currentView.value = 'main';
 }
 
-async function submitControlReview(review: ControlReviewItem, action: HumanReviewActionType) {
-  const reasonKey = reviewChoiceReasonKey(review, action);
+async function submitControlReview(
+  review: ControlReviewItem,
+  action: HumanReviewActionType,
+  changeScope?: 'edit_plan' | 'theme_reselect'
+) {
+  const reasonKey = reviewChoiceReasonKey(review, action, changeScope);
   const reason = reviewReasons[reasonKey] ?? '';
   const selectedOptionId = action === 'approve' && review.kind === 'theme_selection'
     ? selectedReviewOptionId(review)
     : undefined;
-  await store.submitControlReview(review.id, action, reason, selectedOptionId);
-  const reviewActions: HumanReviewActionType[] = ['approve', 'request_changes', 'reject'];
+  await store.submitControlReview(review.id, action, reason, selectedOptionId, changeScope);
+  const reviewActions: HumanReviewActionType[] = ['approve', 'request_changes'];
   for (const reviewAction of reviewActions) {
     reviewReasons[reviewChoiceReasonKey(review, reviewAction)] = '';
+    reviewReasons[reviewChoiceReasonKey(review, reviewAction, 'edit_plan')] = '';
+    reviewReasons[reviewChoiceReasonKey(review, reviewAction, 'theme_reselect')] = '';
   }
+}
+
+async function requestGeneratedVideoEditRerun(scope: 'edit_plan' | 'theme_selection') {
+  const draftId = activeDraft.value?.id;
+  const reason = generatedVideoChangeReason.value.trim();
+  if (!draftId || !outputVideoArtifact.value || !reason) {
+    return;
+  }
+
+  await store.requestGeneratedVideoChanges(draftId, reason, scope);
+  generatedVideoChangeReasons[draftId] = '';
+  selectedProcessTab.value = scope === 'theme_selection' ? 'candidates' : 'edit';
 }
 
 function showNextProcessForReview(review: ControlReviewItem) {
   activeProcessTab.value = nextProcessKeyForReview(review);
+}
+
+function artifactAccessUri(fileRef: FileRef): string {
+  return `${fileRef.uri}${fileRef.uri.includes('?') ? '&' : '?'}ref=${encodeURIComponent(fileRef.id)}`;
 }
 
 async function toggleArtifactPreview(fileRef: FileRef) {
@@ -1247,7 +1385,7 @@ async function ensureArtifactPreview(fileRef: FileRef) {
     return;
   }
 
-  artifactPreviews[fileRef.id] = await fetchArtifactText(fileRef.uri);
+  artifactPreviews[fileRef.id] = await fetchArtifactText(fileRef.uri, fileRef.id);
 }
 
 watch(
@@ -1493,7 +1631,26 @@ onMounted(() => {
                 </div>
 
                 <div v-else-if="activeProcessTab === 'candidates' || activeProcessTab === 'edit'" class="tab-section">
-                  <div v-if="activeReview" class="review-panel">
+                  <div
+                    v-if="failedOperationProcessTab === activeProcessTab"
+                    class="review-panel"
+                  >
+                    <div class="failure-retry-panel">
+                      <strong>{{ failedOperationDetail }}</strong>
+                      <p>{{ failedOperationRecoveryHint }}</p>
+                      <v-btn
+                        color="primary"
+                        variant="flat"
+                        prepend-icon="mdi-reload"
+                        :loading="store.loading"
+                        :disabled="!failedOperation"
+                        @click="retryFailedOperation"
+                      >
+                        この工程を再実行
+                      </v-btn>
+                    </div>
+                  </div>
+                  <div v-else-if="activeReview" class="review-panel">
                     <div v-if="activeHumanAction" class="human-decision-card">
                       <span>あなたの前回判断</span>
                       <strong>{{ controlReviewStatusLabel[activeReview.status] }}</strong>
@@ -1560,7 +1717,7 @@ onMounted(() => {
                       <div class="review-choice-grid">
                         <article
                           v-for="choice in reviewChoiceCards"
-                          :key="choice.action"
+                          :key="`${choice.action}:${choice.changeScope ?? 'default'}`"
                           class="review-choice-card"
                           :class="`is-${choice.action}`"
                         >
@@ -1569,14 +1726,14 @@ onMounted(() => {
                           <p>{{ choice.body }}</p>
                           <div class="choice-reason-field">
                             <v-textarea
-                              :model-value="reviewReasons[reviewChoiceReasonKey(activeReview, choice.action)] ?? ''"
+                              :model-value="reviewReasons[reviewChoiceReasonKey(activeReview, choice.action, choice.changeScope)] ?? ''"
                               :label="reviewChoiceReasonLabel(choice.action)"
                               :hint="reviewChoiceReasonHint(choice.action)"
                               persistent-hint
                               rows="2"
                               auto-grow
                               density="compact"
-                              @update:model-value="setReviewChoiceReason(activeReview, choice.action, $event)"
+                              @update:model-value="setReviewChoiceReason(activeReview, choice.action, $event, choice.changeScope)"
                             />
                           </div>
                           <v-btn
@@ -1584,7 +1741,7 @@ onMounted(() => {
                             variant="flat"
                             :prepend-icon="choice.icon"
                             :loading="store.loading"
-                            @click="submitControlReview(activeReview, choice.action)"
+                            @click="submitControlReview(activeReview, choice.action, choice.changeScope)"
                           >
                             {{ choice.label }}
                           </v-btn>
@@ -1615,12 +1772,51 @@ onMounted(() => {
                     <video
                       class="artifact-video large"
                       controls
-                      :src="outputVideoArtifact.fileRef.uri"
+                      :src="artifactAccessUri(outputVideoArtifact.fileRef)"
                     />
                   </div>
                   <div v-else class="collapsed-note">
                     まだ確認用動画はありません。動画生成前確認で動画作成を承認すると、ここに表示されます。
                   </div>
+
+                  <section v-if="outputVideoArtifact" class="generated-video-fix-panel">
+                    <div>
+                      <span>直したい点</span>
+                      <strong>戻る工程を選んで作り直す</strong>
+                    </div>
+                    <v-textarea
+                      v-model="generatedVideoChangeReason"
+                      label="修正内容"
+                      hint="動画を見て直したいテロップ、見せ方、構成を書いてください。"
+                      persistent-hint
+                      rows="3"
+                      auto-grow
+                      density="compact"
+                      :disabled="store.loading"
+                    />
+                    <div class="generated-video-fix-actions">
+                      <v-btn
+                        color="deep-orange-darken-4"
+                        variant="flat"
+                        prepend-icon="mdi-pencil"
+                        :loading="store.loading"
+                        :disabled="!canRequestGeneratedVideoChanges"
+                        @click="requestGeneratedVideoEditRerun('edit_plan')"
+                      >
+                        構成と演出を作り直す
+                      </v-btn>
+                      <v-btn
+                        color="primary"
+                        variant="tonal"
+                        prepend-icon="mdi-clipboard-search-outline"
+                        :loading="store.loading"
+                        :disabled="!canRequestGeneratedVideoChanges"
+                        @click="requestGeneratedVideoEditRerun('theme_selection')"
+                      >
+                        テーマから選び直す
+                      </v-btn>
+                    </div>
+                  </section>
 
                   <div class="fix-summary-grid">
                     <article v-for="card in fixSummaryCards" :key="card.label">
@@ -1630,7 +1826,7 @@ onMounted(() => {
                     </article>
                   </div>
                   <div v-if="failedOperations.length > 0" class="collapsed-note">
-                    {{ failedOperations[0].label }} で止まっています。失敗内容を確認してください。
+                    {{ failedOperationDetail }}
                   </div>
                 </div>
 
@@ -1660,14 +1856,14 @@ onMounted(() => {
                           {{ artifact.outputType }}
                         </v-chip>
                       </div>
-                      <a :href="artifact.fileRef.uri" target="_blank" rel="noreferrer">
+                      <a :href="artifactAccessUri(artifact.fileRef)" target="_blank" rel="noreferrer">
                         {{ artifact.fileRef.uri }}
                       </a>
                       <video
                         v-if="artifact.fileRef.mimeType.startsWith('video/')"
                         class="artifact-video"
                         controls
-                        :src="artifact.fileRef.uri"
+                        :src="artifactAccessUri(artifact.fileRef)"
                       />
                       <div v-else-if="artifact.fileRef.mimeType.includes('json')" class="artifact-preview">
                         <v-btn
@@ -2318,6 +2514,55 @@ h2 {
   align-items: start;
   display: grid;
   grid-template-columns: minmax(180px, 300px);
+}
+
+.generated-video-fix-panel {
+  background: #fff7ed;
+  border: 1px solid #fed7aa;
+  border-radius: 8px;
+  display: grid;
+  gap: 10px;
+  max-width: 680px;
+  padding: 12px;
+}
+
+.generated-video-fix-panel span {
+  color: #9a3412;
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.generated-video-fix-panel strong {
+  display: block;
+  margin-top: 3px;
+}
+
+.generated-video-fix-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: start;
+}
+
+.failure-retry-panel {
+  align-items: start;
+  background: #fff7ed;
+  border: 1px solid #fed7aa;
+  border-radius: 8px;
+  display: grid;
+  gap: 8px;
+  max-width: 760px;
+  padding: 12px;
+}
+
+.failure-retry-panel strong {
+  color: #9a3412;
+}
+
+.failure-retry-panel p {
+  color: #7c2d12;
+  margin: 0;
 }
 
 .panel-heading {

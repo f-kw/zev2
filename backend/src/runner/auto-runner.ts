@@ -24,7 +24,7 @@ function workspaceRoot(): string {
 }
 
 function apiBaseUrl(): string {
-  return process.env.ZEV2_API_BASE_URL ?? 'http://localhost:8080/api';
+  return process.env.ZEV2_API_BASE_URL ?? `http://localhost:${process.env.PORT ?? '8080'}/api`;
 }
 
 function runDryRunOnce(): Promise<void> {
@@ -32,10 +32,13 @@ function runDryRunOnce(): Promise<void> {
     const output: string[] = [];
     const child = spawn(
       'pnpm',
-      ['--filter', '@zev2/agent-runner', 'dry-run:no-build', '--', `--api=${apiBaseUrl()}`],
+      ['--filter', '@zev2/agent-runner', 'dry-run:no-build'],
       {
         cwd: workspaceRoot(),
-        env: process.env
+        env: {
+          ...process.env,
+          ZEV2_API_BASE_URL: apiBaseUrl()
+        }
       }
     );
 
@@ -81,6 +84,10 @@ export async function runDryRunRunner(): Promise<void> {
 }
 
 export function startDryRunRunner(): void {
+  if (process.env.ZEV2_DISABLE_AUTO_RUNNER === '1') {
+    return;
+  }
+
   void runDryRunRunner().catch((error: unknown) => {
     const message = error instanceof Error ? error.message : '仮実装runnerで不明な失敗が発生しました';
     console.error(message);

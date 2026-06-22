@@ -28,6 +28,7 @@ import { loadState, saveState } from '../store/json-store.js';
 import { startDryRunRunner } from '../runner/auto-runner.js';
 
 const router: express.Router = express.Router();
+type ReviewChangeScope = 'edit_plan' | 'theme_reselect';
 
 function nowIso(): string {
   return new Date().toISOString();
@@ -60,10 +61,36 @@ function latestSucceededAgentRequest(
     .find((request) => request.requestDraftId === requestDraftId && request.type === type && request.status === 'succeeded');
 }
 
+function latestControlReview(
+  stateControlReviews: ControlReviewItem[],
+  requestDraftId: string,
+  kind: ControlReviewKind
+): ControlReviewItem | undefined {
+  return stateControlReviews
+    .filter((item) => item.requestDraftId === requestDraftId && item.kind === kind)
+    .sort((left, right) => right.createdAt.localeCompare(left.createdAt))[0];
+}
+
+function fileRefForAgentRequest(state: Awaited<ReturnType<typeof loadState>>, request: AgentRequest): FileRef | undefined {
+  if (!request.result?.fileRefId) {
+    return undefined;
+  }
+
+  return state.fileRefs.find((fileRef) => fileRef.id === request.result?.fileRefId);
+}
+
+function outputForAgentRequest(state: Awaited<ReturnType<typeof loadState>>, request: AgentRequest): OutputEntity | undefined {
+  if (!request.result?.outputId) {
+    return undefined;
+  }
+
+  return state.outputs.find((output) => output.id === request.result?.outputId);
+}
+
 function createAgentRequestAfter(
   sourceRequest: AgentRequest,
   type: AgentRequest['type'],
-  dependsOnAgentRequestId: string,
+  dependsOnAgentRequestId: string | undefined,
   createdAt: string
 ): AgentRequest {
   const step = WORKFLOW_STEPS.find((item) => item.type === type);
@@ -83,7 +110,7 @@ function createAgentRequestAfter(
     },
     constraints: { ...sourceRequest.constraints },
     policy: { ...sourceRequest.policy },
-    dependsOnAgentRequestId,
+    ...(dependsOnAgentRequestId ? { dependsOnAgentRequestId } : {}),
     status: 'queued',
     fileRefIds: [],
     createdAt,
@@ -91,7 +118,47 @@ function createAgentRequestAfter(
   };
 }
 
-function markPendingRequestsAsReplaced(
+function createRetryRequestsFromFailedRequest(
+  stateAgentRequests: AgentRequest[],
+  failedRequestId: string,
+  createdAt: string
+): { requests: AgentRequest[]; requestDraftId: string; startType: AgentRequest['type'] } | { error: string } {
+  const failedRequest = stateAgentRequests.find((request) => request.id === failedRequestId);
+  if (!failedRequest) {
+    return { error: '再実行するAI工程が見つかりません' };
+  }
+
+  if (failedRequest.status !== 'failed') {
+    return { error: '失敗したAI工程だけ再実行できます' };
+  }
+
+  const dependencyRequest = failedRequest.dependsOnAgentRequestId
+    ? stateAgentRequests.find((request) => request.id === failedRequest.dependsOnAgentRequestId)
+    : undefined;
+  if (failedRequest.dependsOnAgentRequestId && dependencyRequest?.status !== 'succeeded') {
+    return { error: '再実行に必要な前工程が完了していません' };
+  }
+
+  const startIndex = workflowStepIndex(failedRequest.type);
+  const renderIndex = workflowStepIndex('render_video');
+  const endIndex = failedRequest.type === 'render_video' ? renderIndex + 1 : renderIndex;
+  let dependsOnAgentRequestId = failedRequest.dependsOnAgentRequestId;
+  const requests: AgentRequest[] = [];
+
+  for (const step of WORKFLOW_STEPS.slice(startIndex, endIndex)) {
+    const request = createAgentRequestAfter(failedRequest, step.type, dependsOnAgentRequestId, createdAt);
+    requests.push(request);
+    dependsOnAgentRequestId = request.id;
+  }
+
+  return {
+    requests,
+    requestDraftId: failedRequest.requestDraftId,
+    startType: failedRequest.type
+  };
+}
+
+function markReplaceableRequestsAsReplaced(
   stateAgentRequests: AgentRequest[],
   requestDraftId: string,
   startType: AgentRequest['type'],
@@ -106,7 +173,7 @@ function markPendingRequestsAsReplaced(
       request.requestDraftId === requestDraftId &&
       requestIndex >= startIndex &&
       requestIndex <= renderIndex &&
-      ['queued', 'waiting', 'running'].includes(request.status);
+      ['queued', 'waiting', 'running', 'failed'].includes(request.status);
 
     if (!shouldReplace) {
       continue;
@@ -156,6 +223,124 @@ function createRerunRequestsForReview(
   return { requests };
 }
 
+function createThemeReselectFromReview(
+  state: Awaited<ReturnType<typeof loadState>>,
+  reviewItem: ControlReviewItem,
+  createdAt: string
+): {
+  decisionLog: DecisionLog;
+  reviewItem: ControlReviewItem;
+  requests: AgentRequest[];
+} | { error: string } {
+  if (reviewItem.kind !== 'render_readiness') {
+    return { error: 'テーマを選び直せるのは動画生成前確認からだけです' };
+  }
+
+  const sourceRequest = state.agentRequests.find((request) => request.id === reviewItem.agentRequestId);
+  if (!sourceRequest) {
+    return { error: 'テーマを選び直す前提になるAI工程が見つかりません' };
+  }
+
+  const themeRequest = latestSucceededAgentRequest(state.agentRequests, reviewItem.requestDraftId, 'propose_clip_themes');
+  if (!themeRequest) {
+    return { error: 'テーマを選び直すためのテーマ候補がありません' };
+  }
+
+  const previousThemeReview = latestControlReview(state.controlReviewItems, reviewItem.requestDraftId, 'theme_selection');
+  if (!previousThemeReview?.options.length) {
+    return { error: 'テーマを選び直すための選択肢がありません' };
+  }
+
+  const fileRef = fileRefForAgentRequest(state, themeRequest);
+  const output = outputForAgentRequest(state, themeRequest);
+  const createdReview = createControlReview(
+    themeRequest,
+    'theme_selection',
+    {
+      decisionType: 'theme_selection',
+      decision: '既存のテーマ候補から選び直す',
+      reason: '動画生成前確認でテーマから見直す判断になったため、既存のテーマ候補をもう一度人間が選べるようにする',
+      evidenceRefs: [],
+      reviewOptions: previousThemeReview.options,
+      proposedNextState: 'review_required',
+      requiresHumanReview: true,
+      humanQuestion: 'どのテーマで切り抜きを作り直すか選んでください',
+      ruleIds: ['control-plane:theme-selection-required', 'zev-reference:theme-reselect']
+    },
+    fileRef,
+    output
+  );
+
+  const startIndex = workflowStepIndex('build_clip_composition');
+  const renderIndex = workflowStepIndex('render_video');
+  let dependsOnAgentRequestId = themeRequest.id;
+  const requests: AgentRequest[] = [];
+  for (const step of WORKFLOW_STEPS.slice(startIndex, renderIndex)) {
+    const request = createAgentRequestAfter(sourceRequest, step.type, dependsOnAgentRequestId, createdAt);
+    requests.push(request);
+    dependsOnAgentRequestId = request.id;
+  }
+
+  return { ...createdReview, requests };
+}
+
+function createThemeReselectFromGeneratedVideo(
+  state: Awaited<ReturnType<typeof loadState>>,
+  requestDraftId: string,
+  createdAt: string
+): {
+  decisionLog: DecisionLog;
+  reviewItem: ControlReviewItem;
+  requests: AgentRequest[];
+} | { error: string } {
+  const sourceRequest = latestSucceededAgentRequest(state.agentRequests, requestDraftId, 'render_video');
+  if (!sourceRequest) {
+    return { error: '生成済み動画がないため、テーマ選択へ戻れません' };
+  }
+
+  const themeRequest = latestSucceededAgentRequest(state.agentRequests, requestDraftId, 'propose_clip_themes');
+  if (!themeRequest) {
+    return { error: 'テーマを選び直すためのテーマ候補がありません' };
+  }
+
+  const previousThemeReview = latestControlReview(state.controlReviewItems, requestDraftId, 'theme_selection');
+  if (!previousThemeReview?.options.length) {
+    return { error: 'テーマを選び直すための選択肢がありません' };
+  }
+
+  const fileRef = fileRefForAgentRequest(state, themeRequest);
+  const output = outputForAgentRequest(state, themeRequest);
+  const createdReview = createControlReview(
+    themeRequest,
+    'theme_selection',
+    {
+      decisionType: 'theme_selection',
+      decision: '生成済み動画から既存テーマ候補の選択へ戻す',
+      reason: '生成後レビューでテーマから見直す判断になったため、既存のテーマ候補をもう一度人間が選べるようにする',
+      evidenceRefs: [],
+      reviewOptions: previousThemeReview.options,
+      proposedNextState: 'review_required',
+      requiresHumanReview: true,
+      humanQuestion: 'どのテーマで切り抜きを作り直すか選んでください',
+      ruleIds: ['control-plane:theme-selection-required', 'zev-reference:generated-video-theme-reselect']
+    },
+    fileRef,
+    output
+  );
+
+  const startIndex = workflowStepIndex('build_clip_composition');
+  const renderIndex = workflowStepIndex('render_video');
+  let dependsOnAgentRequestId = themeRequest.id;
+  const requests: AgentRequest[] = [];
+  for (const step of WORKFLOW_STEPS.slice(startIndex, renderIndex)) {
+    const request = createAgentRequestAfter(sourceRequest, step.type, dependsOnAgentRequestId, createdAt);
+    requests.push(request);
+    dependsOnAgentRequestId = request.id;
+  }
+
+  return { ...createdReview, requests };
+}
+
 function createRenderRequestForReview(
   stateAgentRequests: AgentRequest[],
   reviewItem: ControlReviewItem,
@@ -173,6 +358,46 @@ function createRenderRequestForReview(
   return {
     request: createAgentRequestAfter(sourceRequest, 'render_video', sourceRequest.id, createdAt)
   };
+}
+
+function createEditRerunRequestsFromGeneratedVideo(
+  stateAgentRequests: AgentRequest[],
+  requestDraftId: string,
+  reason: string,
+  createdAt: string
+): { requests: AgentRequest[] } | { error: string } {
+  const latestRenderRequest = latestSucceededAgentRequest(stateAgentRequests, requestDraftId, 'render_video');
+  if (!latestRenderRequest) {
+    return { error: '生成済み動画がないため、生成後の修正依頼を開始できません' };
+  }
+
+  const dependencyRequest = latestSucceededAgentRequest(stateAgentRequests, requestDraftId, 'propose_clip_themes');
+  if (!dependencyRequest) {
+    return { error: '編集案を作り直すためのテーマ選択がありません' };
+  }
+
+  const sourceRequest: AgentRequest = {
+    ...latestRenderRequest,
+    input: {
+      ...latestRenderRequest.input,
+      purpose: [
+        latestRenderRequest.input.purpose,
+        `生成後の修正依頼: ${reason}`
+      ].join('\n')
+    }
+  };
+  const startIndex = workflowStepIndex('build_clip_composition');
+  const renderIndex = workflowStepIndex('render_video');
+  let dependsOnAgentRequestId = dependencyRequest.id;
+  const requests: AgentRequest[] = [];
+
+  for (const step of WORKFLOW_STEPS.slice(startIndex, renderIndex)) {
+    const request = createAgentRequestAfter(sourceRequest, step.type, dependsOnAgentRequestId, createdAt);
+    requests.push(request);
+    dependsOnAgentRequestId = request.id;
+  }
+
+  return { requests };
 }
 
 function hasText(value: unknown): value is string {
@@ -366,7 +591,8 @@ async function applyHumanReviewAction(
   reviewItemId: string,
   action: HumanReviewActionType,
   reasonInput: unknown,
-  selectedOptionInput?: unknown
+  selectedOptionInput?: unknown,
+  changeScopeInput?: unknown
 ): Promise<
   | { status: 'ok'; reviewItem: ControlReviewItem; humanReviewAction: HumanReviewAction; state: Awaited<ReturnType<typeof loadState>> }
   | { status: 'error'; statusCode: number; error: string; state?: Awaited<ReturnType<typeof loadState>> }
@@ -401,6 +627,8 @@ async function applyHumanReviewAction(
   const createdAt = nowIso();
   let newAgentRequests: AgentRequest[] = [];
   let replaceStartType: AgentRequest['type'] | undefined;
+  let extraDecisionLog: DecisionLog | undefined;
+  let extraReviewItem: ControlReviewItem | undefined;
 
   if (action === 'approve' && reviewItem.kind === 'render_readiness') {
     const result = createRenderRequestForReview(state.agentRequests, reviewItem, createdAt);
@@ -412,18 +640,33 @@ async function applyHumanReviewAction(
   }
 
   if (action === 'request_changes') {
-    const result = createRerunRequestsForReview(state.agentRequests, reviewItem, createdAt);
-    if ('error' in result) {
-      return { status: 'error', statusCode: 409, error: result.error, state };
-    }
+    const changeScope: ReviewChangeScope =
+      changeScopeInput === 'theme_reselect' ? 'theme_reselect' : 'edit_plan';
 
-    const firstRequest = result.requests[0];
-    if (!firstRequest) {
-      return { status: 'error', statusCode: 409, error: '作り直し対象のAI工程を作成できません', state };
-    }
+    if (reviewItem.kind === 'render_readiness' && changeScope === 'theme_reselect') {
+      const result = createThemeReselectFromReview(state, reviewItem, createdAt);
+      if ('error' in result) {
+        return { status: 'error', statusCode: 409, error: result.error, state };
+      }
 
-    replaceStartType = firstRequest.type;
-    newAgentRequests = result.requests;
+      replaceStartType = 'build_clip_composition';
+      newAgentRequests = result.requests;
+      extraDecisionLog = result.decisionLog;
+      extraReviewItem = result.reviewItem;
+    } else {
+      const result = createRerunRequestsForReview(state.agentRequests, reviewItem, createdAt);
+      if ('error' in result) {
+        return { status: 'error', statusCode: 409, error: result.error, state };
+      }
+
+      const firstRequest = result.requests[0];
+      if (!firstRequest) {
+        return { status: 'error', statusCode: 409, error: '作り直し対象のAI工程を作成できません', state };
+      }
+
+      replaceStartType = firstRequest.type;
+      newAgentRequests = result.requests;
+    }
   }
 
   const humanReviewAction: HumanReviewAction = {
@@ -444,7 +687,12 @@ async function applyHumanReviewAction(
   state.humanReviewActions.push(humanReviewAction);
 
   if (replaceStartType) {
-    markPendingRequestsAsReplaced(state.agentRequests, reviewItem.requestDraftId, replaceStartType, createdAt);
+    markReplaceableRequestsAsReplaced(state.agentRequests, reviewItem.requestDraftId, replaceStartType, createdAt);
+  }
+
+  if (extraDecisionLog && extraReviewItem) {
+    state.decisionLogs.push(extraDecisionLog);
+    state.controlReviewItems.push(extraReviewItem);
   }
 
   state.agentRequests.push(...newAgentRequests);
@@ -630,7 +878,13 @@ router.post('/control-reviews/:id/reject', async (request, response) => {
 });
 
 router.post('/control-reviews/:id/request-changes', async (request, response) => {
-  const result = await applyHumanReviewAction(request.params.id, 'request_changes', request.body?.reason);
+  const result = await applyHumanReviewAction(
+    request.params.id,
+    'request_changes',
+    request.body?.reason,
+    undefined,
+    request.body?.scope
+  );
   if (result.status === 'error') {
     response.status(result.statusCode).json({ error: result.error, state: result.state });
     return;
@@ -638,6 +892,100 @@ router.post('/control-reviews/:id/request-changes', async (request, response) =>
 
   startDryRunRunner();
   response.json(result);
+});
+
+router.post('/request-drafts/:id/request-generated-video-changes', async (request, response) => {
+  const reason = hasText(request.body?.reason) ? request.body.reason.trim() : '';
+  if (!reason) {
+    response.status(400).json({ error: '生成済み動画から直したい点を入力してください' });
+    return;
+  }
+  const scope = request.body?.scope === 'theme_selection' ? 'theme_selection' : 'edit_plan';
+
+  const state = await loadState();
+  const draft = state.requestDrafts.find((item) => item.id === request.params.id);
+  if (!draft) {
+    response.status(404).json({ error: '実行前下書きが見つかりません', state });
+    return;
+  }
+
+  const createdAt = nowIso();
+  if (scope === 'theme_selection') {
+    const result = createThemeReselectFromGeneratedVideo(state, draft.id, createdAt);
+    if ('error' in result) {
+      response.status(409).json({ error: result.error, state });
+      return;
+    }
+
+    markReplaceableRequestsAsReplaced(
+      state.agentRequests,
+      draft.id,
+      'build_clip_composition',
+      createdAt
+    );
+    state.decisionLogs.push(result.decisionLog);
+    state.controlReviewItems.push(result.reviewItem);
+    state.agentRequests.push(...result.requests);
+    await saveState(state);
+
+    startDryRunRunner();
+    response.json({
+      agentRequests: selectAgentRequests(state.agentRequests, new Set(result.requests.map((item) => item.id))),
+      state
+    });
+    return;
+  }
+
+  const result = createEditRerunRequestsFromGeneratedVideo(
+    state.agentRequests,
+    draft.id,
+    reason,
+    createdAt
+  );
+  if ('error' in result) {
+    response.status(409).json({ error: result.error, state });
+    return;
+  }
+
+  markReplaceableRequestsAsReplaced(
+    state.agentRequests,
+    draft.id,
+    'build_clip_composition',
+    createdAt
+  );
+  state.agentRequests.push(...result.requests);
+  await saveState(state);
+
+  startDryRunRunner();
+  response.json({
+    agentRequests: selectAgentRequests(state.agentRequests, new Set(result.requests.map((item) => item.id))),
+    state
+  });
+});
+
+router.post('/agent-requests/:id/retry', async (request, response) => {
+  const state = await loadState();
+  const createdAt = nowIso();
+  const result = createRetryRequestsFromFailedRequest(state.agentRequests, request.params.id, createdAt);
+  if ('error' in result) {
+    response.status(409).json({ error: result.error, state });
+    return;
+  }
+
+  markReplaceableRequestsAsReplaced(
+    state.agentRequests,
+    result.requestDraftId,
+    result.startType,
+    createdAt
+  );
+  state.agentRequests.push(...result.requests);
+  await saveState(state);
+
+  startDryRunRunner();
+  response.json({
+    agentRequests: selectAgentRequests(state.agentRequests, new Set(result.requests.map((item) => item.id))),
+    state
+  });
 });
 
 router.post('/agent-requests/:id/fail', async (request, response) => {

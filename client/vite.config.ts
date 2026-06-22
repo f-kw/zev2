@@ -4,6 +4,8 @@ import vue from '@vitejs/plugin-vue';
 import vueJsx from '@vitejs/plugin-vue-jsx';
 import vueDevTools from 'vite-plugin-vue-devtools';
 
+const backendProxyTarget = process.env.ZEV2_BACKEND_PROXY_TARGET ?? 'http://localhost:8080';
+
 export default defineConfig({
   plugins: [vue(), vueJsx(), vueDevTools()],
   resolve: {
@@ -14,7 +16,7 @@ export default defineConfig({
   },
   server: {
     proxy: {
-      '/api': 'http://localhost:8080'
+      '/api': backendProxyTarget
     }
   }
 });

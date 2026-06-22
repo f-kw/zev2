@@ -112,7 +112,7 @@ type TranscriptArtifact = {
 
 type ThemeArtifact = {
   kind: 'theme_json';
-  mode: 'gemini-api-theme-options' | 'transcript-theme-options-fallback';
+  mode: 'gemini-api-theme-options' | 'sample-theme-options';
   generatedAt: string;
   sourceUri: string;
   themes: Array<{
@@ -153,7 +153,7 @@ type ClipCompositionArtifact = {
 
 type EditPlanArtifact = {
   kind: 'edit_plan_json';
-  mode: 'gemini-api-edit-plan' | 'gemini-api-edit-plan-fixture';
+  mode: 'gemini-api-edit-plan' | 'sample-edit-plan';
   generatedAt: string;
   selectedThemeId: string;
   title: string;
@@ -218,6 +218,8 @@ const SOURCE_VIDEO_FILE_NAME = 'source-video.mp4';
 const SOURCE_VIDEO_METADATA_FILE_NAME = 'source-video.json';
 const ZEV_SPEECH_UNIT_LONG_GAP_MS = 1200;
 const ZEV_STT_SAMPLE_PATH = path.join(workspaceRoot(), 'runner', 'fixtures', 'zev-stt-sample.json');
+const confirmationVideoEncoder = process.env.ZEV2_FFMPEG_VIDEO_ENCODER ?? 'h264_videotoolbox';
+const CONFIRMATION_VIDEO_ENCODING_ARGS = ['-c:v', confirmationVideoEncoder, '-pix_fmt', 'yuv420p'];
 
 function parseOptions(): RunnerOptions {
   const options: RunnerOptions = {
@@ -756,14 +758,13 @@ function speechRange(transcript: TranscriptArtifact, speechIds: number[]): { sou
   };
 }
 
-function buildFallbackThemeOptions(transcript: TranscriptArtifact, request: AgentRequest): ThemeArtifact {
+function buildSampleThemeOptions(transcript: TranscriptArtifact, request: AgentRequest): ThemeArtifact {
   const requestedCount = parseCount(request.constraints.themeCountLabel);
-  const seeds: TranscriptThemeSeed[] = transcript.themeSeeds?.length
-    ? transcript.themeSeeds
-    : (transcript.speechUnitGroups.length > 0
-        ? transcript.speechUnitGroups
-        : transcript.segments.map((segment) => [segment.id])
-      ).map((speechIds) => ({ representativeSpeechIds: speechIds, relatedSpeechIds: speechIds }));
+  const seeds = transcript.themeSeeds ?? [];
+  if (seeds.length === 0) {
+    throw new Error('テーマ候補の固定データがないため、サンプル用テーマ候補を作れません');
+  }
+
   const themes = seeds.slice(0, requestedCount).map((seed, index) => {
     const themeNumber = index + 1;
     const representativeSpeechIds = uniqueSpeechIds(seed.representativeSpeechIds);
@@ -790,11 +791,15 @@ function buildFallbackThemeOptions(transcript: TranscriptArtifact, request: Agen
 
   return {
     kind: 'theme_json',
-    mode: 'transcript-theme-options-fallback',
+    mode: 'sample-theme-options',
     generatedAt: new Date().toISOString(),
     sourceUri: request.target.sourceUri,
     themes
   };
+}
+
+function isSampleRequest(request: AgentRequest): boolean {
+  return request.target.sourceUri.startsWith('zev-sample://');
 }
 
 function buildTranscriptLinesForThemePrompt(transcript: TranscriptArtifact): string {
@@ -822,6 +827,9 @@ function buildGeminiThemePrompt(transcript: TranscriptArtifact, request: AgentRe
     '文字起こしを分析し、ショート動画として切り抜けそうなテーマ候補を作ってください。',
     'テーマ候補はユーザーが選ぶ内容単位です。構成案、テロップ案、動画断片名ではありません。',
     '音声、テンション、間、笑い、画面変化、映像の見栄えはここでは使いません。発話内容だけで判断してください。',
+    '意味のない反復、歌やBGMの音だけに見える文字列、効果音だけの箇所はテーマ候補にしないでください。',
+    '候補同士で同じ内容を返さないでください。',
+    '切り抜きテーマとして成立する発話がない場合は themes を空配列にしてください。',
     'テーマが選ばれた後に同じ文字起こしを読み直して複数箇所をつなぐため、代表発話IDと関連発話IDを必ず返してください。',
     '発話IDは下の文字起こしに存在するものだけを使ってください。',
     'JSONだけを返してください。',
@@ -853,6 +861,12 @@ function buildGeminiThemePrompt(transcript: TranscriptArtifact, request: AgentRe
 type GeminiThemeResponse = {
   themes?: unknown;
 };
+
+function themeContentKey(title: string, summary: string, representativeText: string): string {
+  return [title, summary, representativeText]
+    .map((value) => value.replace(/\s+/g, '').trim())
+    .join('\n');
+}
 
 function speechIdsFromGemini(value: unknown, knownIds: Set<number>): number[] {
   if (!Array.isArray(value)) {
@@ -903,6 +917,7 @@ function applyGeminiThemeResponse(
   const requestedCount = parseCount(request.constraints.themeCountLabel);
   const knownIds = new Set(transcript.segments.map((segment) => segment.id));
   const themes: ThemeArtifact['themes'] = [];
+  const seenContentKeys = new Set<string>();
   for (const [index, rawTheme] of response.themes.entries()) {
     const theme = recordFrom(rawTheme);
     const representativeSpeechIds = speechIdsFromGemini(theme.representativeSpeechIds, knownIds);
@@ -919,6 +934,12 @@ function applyGeminiThemeResponse(
     const summary = typeof theme.summary === 'string' && theme.summary.trim()
       ? theme.summary.trim()
       : representativeText;
+    const contentKey = themeContentKey(title, summary, representativeText);
+    if (seenContentKeys.has(contentKey)) {
+      continue;
+    }
+
+    seenContentKeys.add(contentKey);
 
     themes.push({
       id: typeof theme.id === 'string' && theme.id.trim()
@@ -963,11 +984,7 @@ function applyGeminiThemeResponse(
 async function callGeminiThemeApi(
   request: AgentRequest,
   transcript: TranscriptArtifact
-): Promise<ThemeArtifact | undefined> {
-  if (!geminiApiKey && !vertexProjectId) {
-    return undefined;
-  }
-
+): Promise<ThemeArtifact> {
   const responseJson = await generateGeminiJsonContent(
     request,
     [{ text: buildGeminiThemePrompt(transcript, request) }],
@@ -976,12 +993,20 @@ async function callGeminiThemeApi(
   );
   const themeText = extractGeminiResponseText(responseJson);
   const themeResponse = parseGeminiJsonText(themeText, 'Gemini APIのテーマ候補') as GeminiThemeResponse;
-  return applyGeminiThemeResponse(transcript, request, themeResponse);
+  const themeArtifact = applyGeminiThemeResponse(transcript, request, themeResponse);
+  if (!themeArtifact) {
+    throw new Error('Gemini APIのテーマ候補に、ユーザーへ提示できる候補がありません');
+  }
+
+  return themeArtifact;
 }
 
 async function buildThemeOptionsArtifact(transcript: TranscriptArtifact, request: AgentRequest): Promise<ThemeArtifact> {
-  const geminiThemes = await callGeminiThemeApi(request, transcript);
-  return geminiThemes ?? buildFallbackThemeOptions(transcript, request);
+  if (isSampleRequest(request)) {
+    return buildSampleThemeOptions(transcript, request);
+  }
+
+  return callGeminiThemeApi(request, transcript);
 }
 
 function selectedThemeIdFromState(state: Zev2State, requestDraftId: string): string {
@@ -1058,7 +1083,7 @@ function buildFixtureEditPlan(
   const lastPart = composition.parts[composition.parts.length - 1] ?? firstPart;
   return {
     kind: 'edit_plan_json',
-    mode: 'gemini-api-edit-plan-fixture',
+    mode: 'sample-edit-plan',
     generatedAt: new Date().toISOString(),
     selectedThemeId: composition.selectedThemeId,
     title: composition.title,
@@ -1256,7 +1281,7 @@ async function buildGeminiVideoClipInputs(
   return clips;
 }
 
-function buildGeminiEditPlanPrompt(composition: ClipCompositionArtifact): string {
+function buildGeminiEditPlanPrompt(composition: ClipCompositionArtifact, request: AgentRequest): string {
   const partsText = composition.parts
     .map((part, index) => {
       const speechLines = part.speechUnits
@@ -1323,6 +1348,7 @@ function buildGeminiEditPlanPrompt(composition: ClipCompositionArtifact): string
     '  ]',
     '}',
     '',
+    `依頼目的: ${request.input.purpose}`,
     `テーマ: ${composition.title}`,
     `完成イメージ: ${composition.themeSummary}`,
     '',
@@ -1665,17 +1691,13 @@ async function callGeminiEditPlanApi(
   composition: ClipCompositionArtifact,
   state: Zev2State,
   basePlan: EditPlanArtifact
-): Promise<EditPlanArtifact | undefined> {
-  if (!geminiApiKey && !vertexProjectId) {
-    return undefined;
-  }
-
+): Promise<EditPlanArtifact> {
   const clips = await buildGeminiVideoClipInputs(request, composition, state);
   if (clips.length === 0) {
-    return undefined;
+    throw new Error('演出作成に使う動画断片を作れません');
   }
 
-  const parts: Part[] = [{ text: buildGeminiEditPlanPrompt(composition) }];
+  const parts: Part[] = [{ text: buildGeminiEditPlanPrompt(composition, request) }];
   for (const [index, clip] of clips.entries()) {
     parts.push({
       text: [
@@ -1712,14 +1734,16 @@ async function buildEditPlanArtifact(
     composition,
     screenLayoutForFixtureSource(request)
   );
-  const geminiPlan = await callGeminiEditPlanApi(request, composition, state, basePlan);
-  const hasSourceVideo = Boolean(resolveSourceVideoPath(state, request));
-  const isSampleSource = request.target.sourceUri.startsWith('zev-sample://');
-  if (hasSourceVideo && !isSampleSource && !geminiPlan) {
-    throw new Error('演出作成にはGemini APIで動画断片を確認した画面表示計画が必要です');
+
+  if (isSampleRequest(request)) {
+    return basePlan;
   }
 
-  return geminiPlan ?? basePlan;
+  if (!resolveSourceVideoPath(state, request)) {
+    throw new Error('演出作成に使う動画ファイルを取得できません');
+  }
+
+  return callGeminiEditPlanApi(request, composition, state, basePlan);
 }
 
 function buildPatch(editPlanUri: string): PatchArtifact {
@@ -2365,13 +2389,12 @@ async function renderFixtureVideo(request: AgentRequest, editPlan: EditPlanArtif
         '[outv]',
         '-map',
         '0:a?',
-        '-c:v',
-        'libx264',
-        '-pix_fmt',
-        'yuv420p',
+        ...CONFIRMATION_VIDEO_ENCODING_ARGS,
         '-c:a',
         'aac',
         '-shortest',
+        '-t',
+        millisecondsToSeconds(segment.sourceEndMs - segment.sourceStartMs),
         '-movflags',
         '+faststart',
         outputPath
@@ -2416,11 +2439,10 @@ async function renderFixtureVideo(request: AgentRequest, editPlan: EditPlanArtif
         '-filter_complex',
         concatFilter,
         ...outputMaps,
-        '-c:v',
-        'libx264',
-        '-pix_fmt',
-        'yuv420p',
+        ...CONFIRMATION_VIDEO_ENCODING_ARGS,
         ...audioCodecArgs,
+        '-t',
+        durationSeconds,
         '-movflags',
         '+faststart',
         outputPath
@@ -2454,16 +2476,15 @@ async function renderFixtureVideo(request: AgentRequest, editPlan: EditPlanArtif
     '-f',
     'lavfi',
     '-i',
-    `testsrc2=s=${SHORTS_RENDER_TARGET.width}x${SHORTS_RENDER_TARGET.height}:d=${durationSeconds}`,
+    `color=c=black:s=${SHORTS_RENDER_TARGET.width}x${SHORTS_RENDER_TARGET.height}:d=${durationSeconds}`,
     ...buildTelopOverlayInputArgs(telopOverlays),
     '-filter_complex',
     fixtureVideoFilter,
     '-map',
     '[outv]',
-    '-c:v',
-    'libx264',
-    '-pix_fmt',
-    'yuv420p',
+    ...CONFIRMATION_VIDEO_ENCODING_ARGS,
+    '-t',
+    durationSeconds,
     '-movflags',
     '+faststart',
     outputPath
@@ -2637,6 +2658,12 @@ async function runDryRunLoop(): Promise<void> {
       await failRequest(request, error);
       throw error;
     }
+  }
+
+  const { request } = await requestJson<NextResponse>('/agent-requests/next');
+  if (!request) {
+    console.log('実行できるAI作業はありません。runnerを終了します。');
+    return;
   }
 
   throw new Error(`最大処理件数 ${runnerOptions.maxSteps} 件に到達したため停止しました`);

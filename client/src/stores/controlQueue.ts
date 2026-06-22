@@ -13,6 +13,8 @@ import {
   createDraft,
   fetchState,
   fetchWorkflow,
+  requestGeneratedVideoChanges,
+  retryAgentRequest,
   submitHumanReviewAction
 } from '../api';
 
@@ -53,6 +55,12 @@ function hasRunnableAgentRequestsForDraft(state: Zev2State, requestDraftId: stri
 function hasHumanReviewRequiredForDraft(state: Zev2State, requestDraftId: string): boolean {
   return state.controlReviewItems.some(
     (item) => item.requestDraftId === requestDraftId && item.status === 'review_required'
+  );
+}
+
+function failedAgentRequestForDraft(state: Zev2State, requestDraftId: string) {
+  return state.agentRequests.find(
+    (request) => request.requestDraftId === requestDraftId && request.status === 'failed'
   );
 }
 
@@ -168,6 +176,17 @@ export const useControlQueueStore = defineStore('controlQueue', {
     async refreshUntilAgentSettled(startedAt = Date.now()) {
       for (let attempt = 0; attempt < 30; attempt += 1) {
         const activeDraftId = this.activeDraftId;
+        const failedRequest = activeDraftId
+          ? failedAgentRequestForDraft(this.state, activeDraftId)
+          : this.state.agentRequests.find((request) => request.status === 'failed');
+
+        if (failedRequest) {
+          await keepPhaseVisible(startedAt, 700);
+          this.message = `${failedRequest.label}で止まっています`;
+          this.runPhase = 'error';
+          this.lastChangedAt = new Date().toISOString();
+          return;
+        }
 
         if (!activeDraftId && hasRunnableAgentRequests(this.state)) {
           this.message = '作成中です';
@@ -208,7 +227,13 @@ export const useControlQueueStore = defineStore('controlQueue', {
       this.message = '作成中です';
       this.runPhase = 'running';
     },
-    async submitControlReview(id: string, action: HumanReviewActionType, reason: string, selectedOptionId?: string) {
+    async submitControlReview(
+      id: string,
+      action: HumanReviewActionType,
+      reason: string,
+      selectedOptionId?: string,
+      scope?: 'edit_plan' | 'theme_reselect'
+    ) {
       this.loading = true;
       this.errorMessage = '';
       const reviewItem = this.state.controlReviewItems.find((item) => item.id === id);
@@ -222,7 +247,7 @@ export const useControlQueueStore = defineStore('controlQueue', {
           ? '修正依頼を保存して作り直しています'
           : '確認結果を保存して続きを実行しています';
       try {
-        this.state = await submitHumanReviewAction(id, action, reason, selectedOptionId);
+        this.state = await submitHumanReviewAction(id, action, reason, selectedOptionId, scope);
         this.lastChangedAt = new Date().toISOString();
 
         if (action === 'approve' || action === 'request_changes') {
@@ -233,6 +258,63 @@ export const useControlQueueStore = defineStore('controlQueue', {
 
         this.runPhase = 'review_required';
         this.message = '却下として保存しました';
+      } catch (error) {
+        this.errorMessage = formatApiError(error);
+        this.message = '';
+        this.runPhase = 'error';
+        this.lastChangedAt = new Date().toISOString();
+      } finally {
+        this.loading = false;
+      }
+    },
+    async requestGeneratedVideoChanges(
+      id: string,
+      reason: string,
+      scope: 'edit_plan' | 'theme_selection'
+    ) {
+      this.loading = true;
+      this.errorMessage = '';
+      const draft = this.state.requestDrafts.find((item) => item.id === id);
+      this.activeDraftId = id;
+      this.activePurpose = draft?.purpose ?? '';
+      this.runPhase = 'running';
+      this.runNumber += 1;
+      this.lastChangedAt = new Date().toISOString();
+      this.message = scope === 'theme_selection'
+        ? 'テーマを選び直せる状態に戻しています'
+        : '構成と演出を作り直しています';
+      try {
+        this.state = await requestGeneratedVideoChanges(id, reason, scope);
+        this.lastChangedAt = new Date().toISOString();
+        await this.refreshUntilAgentSettled(Date.now());
+      } catch (error) {
+        this.errorMessage = formatApiError(error);
+        this.message = '';
+        this.runPhase = 'error';
+        this.lastChangedAt = new Date().toISOString();
+      } finally {
+        this.loading = false;
+      }
+    },
+    async retryAgentRequest(id: string) {
+      this.loading = true;
+      this.errorMessage = '';
+      const failedRequest = this.state.agentRequests.find((request) => request.id === id);
+      if (failedRequest) {
+        const draft = this.state.requestDrafts.find((item) => item.id === failedRequest.requestDraftId);
+        this.activeDraftId = failedRequest.requestDraftId;
+        this.activePurpose = draft?.purpose ?? '';
+        this.message = `${failedRequest.label}を再実行しています`;
+      } else {
+        this.message = '失敗した工程を再実行しています';
+      }
+      this.runPhase = 'running';
+      this.runNumber += 1;
+      this.lastChangedAt = new Date().toISOString();
+      try {
+        this.state = await retryAgentRequest(id);
+        this.lastChangedAt = new Date().toISOString();
+        await this.refreshUntilAgentSettled(Date.now());
       } catch (error) {
         this.errorMessage = formatApiError(error);
         this.message = '';

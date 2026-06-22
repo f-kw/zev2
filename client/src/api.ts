@@ -61,18 +61,40 @@ export async function submitHumanReviewAction(
   id: string,
   action: HumanReviewActionType,
   reason: string,
-  selectedOptionId?: string
+  selectedOptionId?: string,
+  scope?: 'edit_plan' | 'theme_reselect'
 ): Promise<Zev2State> {
   const actionPath =
     action === 'approve' ? 'approve' : action === 'reject' ? 'reject' : 'request-changes';
   const response = await api.post(`/control-reviews/${id}/${actionPath}`, {
     reason,
-    ...(selectedOptionId ? { selectedOptionId } : {})
+    ...(selectedOptionId ? { selectedOptionId } : {}),
+    ...(scope ? { scope } : {})
   });
   return response.data.state;
 }
 
-export async function fetchArtifactText(uri: string): Promise<string> {
-  const response = await axios.get(uri, { responseType: 'text' });
+export async function requestGeneratedVideoChanges(
+  id: string,
+  reason: string,
+  scope: 'edit_plan' | 'theme_selection'
+): Promise<Zev2State> {
+  const response = await api.post(`/request-drafts/${id}/request-generated-video-changes`, {
+    reason,
+    scope
+  });
+  return response.data.state;
+}
+
+export async function retryAgentRequest(id: string): Promise<Zev2State> {
+  const response = await api.post(`/agent-requests/${id}/retry`);
+  return response.data.state;
+}
+
+export async function fetchArtifactText(uri: string, cacheKey?: string): Promise<string> {
+  const requestUri = cacheKey
+    ? `${uri}${uri.includes('?') ? '&' : '?'}ref=${encodeURIComponent(cacheKey)}`
+    : uri;
+  const response = await axios.get(requestUri, { responseType: 'text' });
   return typeof response.data === 'string' ? response.data : JSON.stringify(response.data, null, 2);
 }

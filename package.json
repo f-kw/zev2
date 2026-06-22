@@ -10,6 +10,7 @@
     "build:runner": "pnpm --filter @zev2/agent-runner build",
     "build:shared": "pnpm --filter @zev2/shared build",
     "runner:dry-run": "pnpm --filter @zev2/agent-runner dry-run",
+    "scenario:agent": "node scripts/agent-scenario-test.mjs",
     "type-check": "pnpm run build:shared && pnpm --filter backend type-check && pnpm --filter client type-check && pnpm --filter @zev2/agent-runner type-check"
   },
   "pnpm": {
