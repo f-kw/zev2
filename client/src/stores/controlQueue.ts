@@ -233,7 +233,7 @@ export const useControlQueueStore = defineStore('controlQueue', {
       action: HumanReviewActionType,
       reason: string,
       selectedOptionId?: string,
-      scope?: 'edit_plan' | 'theme_reselect'
+      scope?: 'edit_plan' | 'theme_reselect' | 'adjustment'
     ) {
       this.loading = true;
       this.errorMessage = '';
@@ -271,7 +271,7 @@ export const useControlQueueStore = defineStore('controlQueue', {
     async requestGeneratedVideoChanges(
       id: string,
       reason: string,
-      scope: 'edit_plan' | 'theme_selection'
+      scope: 'edit_plan' | 'theme_selection' | 'adjustment'
     ) {
       this.loading = true;
       this.errorMessage = '';
@@ -283,9 +283,14 @@ export const useControlQueueStore = defineStore('controlQueue', {
       this.lastChangedAt = new Date().toISOString();
       this.message = scope === 'theme_selection'
         ? 'テーマを選び直せる状態に戻しています'
-        : '構成と演出を作り直しています';
+        : scope === 'adjustment'
+          ? '微調整から作り直しています'
+          : '演出を作り直しています';
       try {
-        this.state = await requestGeneratedVideoChanges(id, reason, scope);
+        const result = await requestGeneratedVideoChanges(id, reason, scope);
+        this.activeDraftId = result.draft.id;
+        this.activePurpose = result.draft.purpose;
+        this.state = result.state;
         this.lastChangedAt = new Date().toISOString();
         await this.refreshUntilAgentSettled(Date.now());
       } catch (error) {
@@ -313,7 +318,10 @@ export const useControlQueueStore = defineStore('controlQueue', {
       this.runNumber += 1;
       this.lastChangedAt = new Date().toISOString();
       try {
-        this.state = await retryAgentRequest(id);
+        const result = await retryAgentRequest(id);
+        this.activeDraftId = result.draft.id;
+        this.activePurpose = result.draft.purpose;
+        this.state = result.state;
         this.lastChangedAt = new Date().toISOString();
         await this.refreshUntilAgentSettled(Date.now());
       } catch (error) {

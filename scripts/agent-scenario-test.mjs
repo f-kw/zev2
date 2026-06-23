@@ -14,6 +14,15 @@ const fixedSourceUri = path.join(
   'draft_w4Lp9IJC6pQl3FsRfFL9t',
   'source-video.mp4'
 );
+const workflowTypes = [
+  'prepare_video',
+  'run_stt',
+  'propose_clip_themes',
+  'build_clip_composition',
+  'create_edit_plan',
+  'apply_adjustment',
+  'render_video'
+];
 
 function assertScenario(condition, message) {
   if (!condition) {
@@ -216,6 +225,67 @@ async function assertOutputHasAudibleAudio(outputPath) {
   assertScenario(maxVolume && maxVolume !== '-inf', '出力動画の音声が無音になっている');
 }
 
+function agentRequestsForDraft(state, requestDraftId) {
+  return state.agentRequests
+    .filter((request) => request.requestDraftId === requestDraftId)
+    .sort((left, right) => workflowTypes.indexOf(left.type) - workflowTypes.indexOf(right.type));
+}
+
+async function assertCopiedRestart(apiBaseUrl, sourceDraftId, scope, expectedStartType) {
+  const response = await requestJson(apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/request-generated-video-changes`), {
+    method: 'POST',
+    body: JSON.stringify({
+      reason: `${scope}のコピー再開テスト`,
+      scope
+    })
+  });
+  const copiedDraft = response.draft;
+  assertScenario(copiedDraft.id !== sourceDraftId, `${scope}: 編集コピーが新しい依頼になっていない`);
+
+  const sourceRequests = agentRequestsForDraft(response.state, sourceDraftId);
+  assertScenario(sourceRequests.length === 7, `${scope}: 元編集の工程数が変わっている`);
+  assertScenario(sourceRequests.every((request) => request.status === 'succeeded'), `${scope}: 元編集の成功状態が壊れている`);
+
+  const copiedRequests = agentRequestsForDraft(response.state, copiedDraft.id);
+  const expectedStartIndex = workflowTypes.indexOf(expectedStartType);
+  assertScenario(copiedRequests.length === 7, `${scope}: コピー後の工程数が7件ではない`);
+  assertScenario(expectedStartIndex >= 0, `${scope}: テストの再開工程が不正です`);
+
+  const copiedBeforeRestart = copiedRequests.slice(0, expectedStartIndex);
+  const queuedAfterRestart = copiedRequests.slice(expectedStartIndex);
+  assertScenario(
+    copiedBeforeRestart.every((request) => request.status === 'succeeded'),
+    `${scope}: 再開地点より前の工程が完了済みとしてコピーされていない`
+  );
+  assertScenario(
+    queuedAfterRestart.every((request) => request.status === 'queued'),
+    `${scope}: 再開地点以降が未作成状態に戻っていない`
+  );
+  assertScenario(
+    queuedAfterRestart[0]?.type === expectedStartType,
+    `${scope}: 期待した工程から再開していない`
+  );
+
+  return copiedDraft;
+}
+
+async function assertGeneratedDraftCompleted(apiBaseUrl, runtimeDir, draftId, label) {
+  const state = await requestJson(apiPath(apiBaseUrl, '/state'));
+  const finalRequests = agentRequestsForDraft(state, draftId);
+  assertScenario(finalRequests.length === 7, `${label}: 実行後の工程数が7件ではない`);
+  assertScenario(finalRequests.every((request) => request.status === 'succeeded'), `${label}: 成功していない工程がある`);
+
+  const outputRequest = finalRequests.find((request) => request.type === 'render_video');
+  const outputFileRef = state.fileRefs.find((fileRef) => fileRef.id === outputRequest?.result?.fileRefId);
+  assertScenario(outputRequest?.result?.outputType === 'OutputVideo', `${label}: 動画生成の成果物種別がOutputVideoではない`);
+  assertScenario(outputFileRef?.kind === 'output_video', `${label}: 出力動画のファイル参照が保存されていない`);
+
+  const outputPath = path.join(runtimeDir, 'artifacts', draftId, 'output.mp4');
+  const outputBuffer = await readFile(outputPath);
+  assertScenario(outputBuffer.length > 0, `${label}: 出力動画ファイルが空です`);
+  await assertOutputHasAudibleAudio(outputPath);
+}
+
 async function scenarioAutomaticVideoCreation(apiBaseUrl, runtimeDir) {
   const draftInput = {
     purpose: '固定STTデータからショート動画を作成する',
@@ -261,6 +331,13 @@ async function scenarioAutomaticVideoCreation(apiBaseUrl, runtimeDir) {
   const outputBuffer = await readFile(outputPath);
   assertScenario(outputBuffer.length > 0, '出力動画ファイルが空です');
   await assertOutputHasAudibleAudio(outputPath);
+
+  const editPlanRestartDraft = await assertCopiedRestart(apiBaseUrl, draft.id, 'edit_plan', 'create_edit_plan');
+  await runAgent(apiBaseUrl, runtimeDir);
+  await assertGeneratedDraftCompleted(apiBaseUrl, runtimeDir, editPlanRestartDraft.id, '演出作成前からのコピー再開');
+
+  await assertCopiedRestart(apiBaseUrl, draft.id, 'theme_selection', 'build_clip_composition');
+  await assertCopiedRestart(apiBaseUrl, draft.id, 'adjustment', 'apply_adjustment');
 }
 
 async function main() {

@@ -63,7 +63,7 @@ export async function submitHumanReviewAction(
   action: HumanReviewActionType,
   reason: string,
   selectedOptionId?: string,
-  scope?: 'edit_plan' | 'theme_reselect'
+  scope?: 'edit_plan' | 'theme_reselect' | 'adjustment'
 ): Promise<Zev2State> {
   const actionPath =
     action === 'approve' ? 'approve' : action === 'reject' ? 'reject' : 'request-changes';
@@ -78,18 +78,24 @@ export async function submitHumanReviewAction(
 export async function requestGeneratedVideoChanges(
   id: string,
   reason: string,
-  scope: 'edit_plan' | 'theme_selection'
-): Promise<Zev2State> {
+  scope: 'edit_plan' | 'theme_selection' | 'adjustment'
+): Promise<{ draft: RequestDraft; state: Zev2State }> {
   const response = await api.post(`/request-drafts/${id}/request-generated-video-changes`, {
     reason,
     scope
   });
-  return response.data.state;
+  return {
+    draft: response.data.draft,
+    state: response.data.state
+  };
 }
 
-export async function retryAgentRequest(id: string): Promise<Zev2State> {
+export async function retryAgentRequest(id: string): Promise<{ draft: RequestDraft; state: Zev2State }> {
   const response = await api.post(`/agent-requests/${id}/retry`);
-  return response.data.state;
+  return {
+    draft: response.data.draft,
+    state: response.data.state
+  };
 }
 
 export async function fetchArtifactText(uri: string, cacheKey?: string): Promise<string> {
