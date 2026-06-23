@@ -255,9 +255,14 @@ const currentControlReview = computed(() => pendingControlReviews.value[0] ?? se
 const themeControlReview = computed(() =>
   selectedControlReviews.value.find((item) => item.kind === 'theme_selection')
 );
-const renderControlReview = computed(() =>
-  selectedControlReviews.value.find((item) => item.kind === 'render_readiness')
-);
+const renderControlReview = computed(() => {
+  const currentThemeReview = themeControlReview.value;
+  return selectedControlReviews.value.find((item) =>
+    item.kind === 'render_readiness' &&
+    (!currentThemeReview || item.createdAt > currentThemeReview.createdAt)
+  );
+});
+const themeSelectionPending = computed(() => themeControlReview.value?.status === 'review_required');
 const currentOperation = computed<AgentRequest | undefined>(
   () =>
     runningOperations.value[0] ??
@@ -559,9 +564,11 @@ const processTabs = computed<ProcessTab[]>(() => [
     helper: pendingRenderRegeneration.value
       ? '作り直したテーマ、完成イメージ、テロップを確認します。'
       : 'テーマ、完成イメージ、テロップを確認します。',
-    status: processStatusFor('edit', renderControlReview.value),
+    status: themeSelectionPending.value ? 'pending' : processStatusFor('edit', renderControlReview.value),
     statusLabel:
-      processStatusFor('edit', renderControlReview.value) === 'done'
+      themeSelectionPending.value
+        ? '未開始'
+        : processStatusFor('edit', renderControlReview.value) === 'done'
         ? (pendingRenderRegeneration.value ? '再生成前の確認済み' : '生成前確認済み')
         : pendingRenderRegeneration.value
           ? '再生成前の確認待ち'
@@ -573,7 +580,7 @@ const processTabs = computed<ProcessTab[]>(() => [
     label: '生成後レビュー',
     question: '生成された確認用動画を見て、次に直す点は何ですか',
     helper: '動画を見て、直す点があれば記録します。',
-    status: pendingRenderRegeneration.value
+    status: themeSelectionPending.value || pendingRenderRegeneration.value
       ? 'pending'
       : failedOperationProcessTab.value === 'video'
       ? 'blocked'
@@ -582,7 +589,7 @@ const processTabs = computed<ProcessTab[]>(() => [
         : runningOperations.value.some((request) => request.type === 'render_video')
           ? 'running'
           : 'pending',
-    statusLabel: pendingRenderRegeneration.value
+    statusLabel: themeSelectionPending.value || pendingRenderRegeneration.value
       ? '未開始'
       : failedOperationProcessTab.value === 'video'
       ? '確認が必要'
