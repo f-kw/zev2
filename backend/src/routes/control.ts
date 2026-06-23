@@ -178,14 +178,14 @@ function markReplaceableRequestsAsReplaced(
       request.requestDraftId === requestDraftId &&
       requestIndex >= startIndex &&
       requestIndex <= renderIndex &&
-      isStatusIn(request.status, ['queued', 'waiting', 'running', 'failed']);
+      isStatusIn(request.status, ['queued', 'waiting', 'running', 'succeeded', 'failed']);
 
     if (!shouldReplace) {
       continue;
     }
 
     request.status = 'superseded';
-    request.errorMessage = '人間の修正依頼により、AIが作り直す対象になりました';
+    request.errorMessage = '人間のやり直し指示により、この工程は古い編集案として現在対象から外しました';
     request.updatedAt = updatedAt;
   }
 }

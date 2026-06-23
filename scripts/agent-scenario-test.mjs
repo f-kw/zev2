@@ -1026,6 +1026,10 @@ function requestCount(state, draftId, type) {
   return state.agentRequests.filter((request) => request.requestDraftId === draftId && request.type === type).length;
 }
 
+function currentRequestsForDraft(state, draftId) {
+  return state.agentRequests.filter((request) => request.requestDraftId === draftId && request.status !== 'superseded');
+}
+
 async function scenarioRenderApprovalCreatesVideo(apiBaseUrl, runtimeDir) {
   console.log('UC-P0-06/10: 動画生成前確認の承認で動画生成へ進み、生成動画成果物を保存する');
   const { draft, renderReview, state: beforeState } = await createSampleRenderReviewByRunner(
@@ -1202,7 +1206,7 @@ async function scenarioRenderReadinessThemeReselect(apiBaseUrl, runtimeDir) {
 
 async function scenarioGeneratedVideoEditRerun(apiBaseUrl, runtimeDir) {
   console.log('UC-P0-11: 生成後レビューから構成と演出を作り直せる');
-  const { draft, state: beforeState } = await createSampleGeneratedVideo(
+  const { draft, renderRequest: oldRenderRequest, state: beforeState } = await createSampleGeneratedVideo(
     apiBaseUrl,
     runtimeDir,
     '生成後レビューから構成と演出を作り直す'
@@ -1225,6 +1229,14 @@ async function scenarioGeneratedVideoEditRerun(apiBaseUrl, runtimeDir) {
     (item) => controlReviewsForDraft(item, draft.id, 'render_readiness').length > beforeRenderReviewCount,
     '生成後レビューから構成と演出を作り直した後の生成前確認'
   );
+  assertScenario(
+    state.agentRequests.find((request) => request.id === oldRenderRequest.id)?.status === 'superseded',
+    '生成後レビューから作り直した後も古い確認用動画が現在対象に残っている'
+  );
+  assertScenario(
+    !currentRequestsForDraft(state, draft.id).some((request) => request.type === 'render_video' && request.status === 'succeeded'),
+    '新しい生成前確認の時点で古い生成済み動画が現在対象に混ざっている'
+  );
   assertScenario(requestCount(state, draft.id, 'build_clip_composition') > beforeBuildCount, '生成後レビューから複数箇所構成が作り直されていない');
   assertScenario(requestCount(state, draft.id, 'create_edit_plan') > beforeEditCount, '生成後レビューから演出作成が作り直されていない');
   assertScenario(requestCount(state, draft.id, 'apply_adjustment') > beforePatchCount, '生成後レビューから微調整が作り直されていない');
@@ -1233,7 +1245,7 @@ async function scenarioGeneratedVideoEditRerun(apiBaseUrl, runtimeDir) {
 
 async function scenarioGeneratedVideoThemeReselect(apiBaseUrl, runtimeDir) {
   console.log('UC-P0-12: 生成後レビューから既存テーマ候補へ戻り、別テーマで再作成できる');
-  const { draft, state: beforeState } = await createSampleGeneratedVideo(
+  const { draft, renderRequest: oldRenderRequest, state: beforeState } = await createSampleGeneratedVideo(
     apiBaseUrl,
     runtimeDir,
     '生成後レビューからテーマを選び直す'
@@ -1256,6 +1268,14 @@ async function scenarioGeneratedVideoThemeReselect(apiBaseUrl, runtimeDir) {
   );
   const latestThemeReview = latestControlReviewInState(reselectState, draft.id, 'theme_selection');
   assertScenario(latestThemeReview?.status === 'review_required', '生成後レビューから戻ったテーマ選択が確認待ちになっていない');
+  assertScenario(
+    reselectState.agentRequests.find((request) => request.id === oldRenderRequest.id)?.status === 'superseded',
+    'テーマ選び直し時に古い確認用動画が現在対象から外れていない'
+  );
+  assertScenario(
+    !currentRequestsForDraft(reselectState, draft.id).some((request) => request.type === 'render_video'),
+    'テーマ選択待ちの時点で現在対象に動画生成工程が残っている'
+  );
   assertScenario(
     requestCount(reselectState, draft.id, 'propose_clip_themes') === beforeThemeRequestCount,
     '生成後レビューからテーマを選び直すときにテーマ候補作成を再実行している'
