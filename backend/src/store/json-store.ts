@@ -55,8 +55,7 @@ function isCurrentRequestDraft(value: unknown): boolean {
     typeof settings.themeCountLabel === 'string' &&
     typeof settings.geminiModelName === 'string' &&
     typeof settings.preset === 'string' &&
-    policy.humanApprovalRequiredBeforeRender === true &&
-    !('renderIncludedInApprovedQueue' in policy) &&
+    typeof policy.humanApprovalRequiredBeforeRender === 'boolean' &&
     steps.every((step) => currentWorkflowTypes.has(recordValue(step).type as never))
   );
 }
