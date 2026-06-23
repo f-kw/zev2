@@ -117,7 +117,7 @@ const geminiModelItems = GEMINI_MODEL_OPTIONS.map((option) => ({
 
 const draftStatusLabel = {
   draft: '開始前',
-  approved: '作成中',
+  approved: '依頼済み',
   rejected: '却下'
 } satisfies Record<RequestDraftStatus, string>;
 
@@ -552,7 +552,7 @@ const processTabs = computed<ProcessTab[]>(() => [
   },
   {
     key: 'edit',
-    label: '動画生成前確認',
+    label: pendingRenderRegeneration.value ? '再生成前の確認' : '生成前の確認',
     question: pendingRenderRegeneration.value
       ? 'この内容で確認用動画を作り直してよいですか'
       : 'この内容で確認用動画を作ってよいですか',
@@ -573,14 +573,18 @@ const processTabs = computed<ProcessTab[]>(() => [
     label: '生成後レビュー',
     question: '生成された確認用動画を見て、次に直す点は何ですか',
     helper: '動画を見て、直す点があれば記録します。',
-    status: failedOperationProcessTab.value === 'video'
+    status: pendingRenderRegeneration.value
+      ? 'pending'
+      : failedOperationProcessTab.value === 'video'
       ? 'blocked'
       : hasOutputVideo.value
         ? 'ready'
         : runningOperations.value.some((request) => request.type === 'render_video')
           ? 'running'
           : 'pending',
-    statusLabel: failedOperationProcessTab.value === 'video'
+    statusLabel: pendingRenderRegeneration.value
+      ? '未開始'
+      : failedOperationProcessTab.value === 'video'
       ? '確認が必要'
       : hasOutputVideo.value
         ? '生成結果を確認できます'
@@ -615,7 +619,7 @@ const currentStatusSummary = computed(() => {
     return {
       tone: 'idle',
       icon: 'mdi-plus-circle-outline',
-      label: '現在状況',
+      label: '現在の状態',
       title: '新しい依頼を入力中です',
       detail: '作りたいショートと対象動画を入力します。'
     };
@@ -625,7 +629,7 @@ const currentStatusSummary = computed(() => {
     return {
       tone: 'error',
       icon: 'mdi-alert-circle-outline',
-      label: '現在状況',
+      label: '現在の状態',
       title: '処理が止まっています',
       detail: store.errorMessage || failedOperationDetail.value
     };
@@ -635,7 +639,7 @@ const currentStatusSummary = computed(() => {
     return {
       tone: 'running',
       icon: 'mdi-content-save-outline',
-      label: '現在状況',
+      label: '現在の状態',
       title: '依頼を保存しています',
       detail: '入力内容を保存しています。'
     };
@@ -645,21 +649,24 @@ const currentStatusSummary = computed(() => {
     return {
       tone: 'running',
       icon: 'mdi-send-outline',
-      label: '現在状況',
+      label: '現在の状態',
       title: '作成を始めています',
       detail: '承認済みの依頼から作業順を作っています。'
     };
   }
 
   if (pendingControlReviews.value.length > 0 || store.runPhase === 'review_required') {
+    const waitingForRenderApproval = renderControlReview.value?.status === 'review_required';
     return {
       tone: 'review',
       icon: 'mdi-account-check-outline',
-      label: '現在状況',
-      title: pendingRenderRegeneration.value ? '再生成前の確認が必要です' : '確認が必要です',
-      detail: pendingRenderRegeneration.value
-        ? '作り直した編集案を承認すると、確認用動画を再生成します。'
-        : currentControlReview.value?.humanQuestion ?? '確認する内容があります。'
+      label: '現在の状態',
+      title: 'あなたの確認待ち',
+      detail: waitingForRenderApproval
+        ? pendingRenderRegeneration.value
+          ? 'AI処理は止まっています。内容を確認して再生成を開始してください。'
+          : 'AI処理は止まっています。内容を確認して動画生成を開始してください。'
+        : currentControlReview.value?.humanQuestion ?? 'AI処理は止まっています。確認すると次へ進みます。'
     };
   }
 
@@ -668,7 +675,7 @@ const currentStatusSummary = computed(() => {
     return {
       tone: 'running',
       icon: 'mdi-progress-clock',
-      label: '現在状況',
+      label: '現在の状態',
       title: operation ? `「${operation.label}」を作成しています` : '作成しています',
       detail: '必要な確認が出たらここに表示します。'
     };
@@ -678,7 +685,7 @@ const currentStatusSummary = computed(() => {
     return {
       tone: 'ready',
       icon: 'mdi-play-box-outline',
-      label: '現在状況',
+      label: '現在の状態',
       title: '確認用動画があります',
       detail: '生成後レビューで動画を確認できます。'
     };
@@ -688,7 +695,7 @@ const currentStatusSummary = computed(() => {
     return {
       tone: 'ready',
       icon: 'mdi-check-circle-outline',
-      label: '現在状況',
+      label: '現在の状態',
       title: '確認する内容があります',
       detail: `「${currentWorkflowProcess.value.label}」を確認してください。`
     };
@@ -698,7 +705,7 @@ const currentStatusSummary = computed(() => {
     return {
       tone: 'review',
       icon: 'mdi-file-check-outline',
-      label: '現在状況',
+      label: '現在の状態',
       title: '依頼の作成待ちです',
       detail: '内容を確認して作成を始めると、テーマ候補へ進みます。'
     };
@@ -707,7 +714,7 @@ const currentStatusSummary = computed(() => {
   return {
     tone: 'idle',
     icon: 'mdi-plus-circle-outline',
-    label: '現在状況',
+    label: '現在の状態',
     title: '新しい依頼を作れます',
     detail: '作りたいショートと対象動画を入力して開始します。'
   };
@@ -747,6 +754,12 @@ const pendingRenderRegeneration = computed(() =>
     renderControlReview.value?.status === 'review_required'
     && renderReviewHasPriorGeneratedVideo(renderControlReview.value)
   )
+);
+const pendingRenderReview = computed(() =>
+  renderControlReview.value?.status === 'review_required' ? renderControlReview.value : undefined
+);
+const renderReviewApprovalLabel = computed(() =>
+  pendingRenderRegeneration.value ? '承認して再生成' : '承認して動画生成'
 );
 
 function renderReviewHasPriorGeneratedVideo(review?: ControlReviewItem): boolean {
@@ -857,11 +870,11 @@ const reviewChoiceCards = computed<ReviewChoice[]>(() => {
   return [
     {
       action: 'approve',
-      label: pendingRenderRegeneration.value ? 'この編集案で再生成する' : 'この編集案で作る',
-      title: pendingRenderRegeneration.value ? '確認用動画を作り直す' : '確認用動画を作る',
+      label: renderReviewApprovalLabel.value,
+      title: pendingRenderRegeneration.value ? '確認用動画を再生成' : '確認用動画を生成',
       body: pendingRenderRegeneration.value
-        ? '作り直したテーマ、完成イメージ、テロップで問題ない場合。'
-        : 'テーマ、完成イメージ、テロップで問題ない場合。',
+        ? 'このテーマ、完成イメージ、テロップで動画を作り直します。'
+        : 'このテーマ、完成イメージ、テロップで動画を作ります。',
       color: 'primary',
       icon: 'mdi-check'
     },
@@ -1091,7 +1104,7 @@ function workflowProgressLabel(tab: ProcessTab): string {
 
   if (tab.key === 'candidates') {
     if (tab.status === 'review') {
-      return 'テーマ選択中';
+      return 'テーマ選択: あなたの確認待ち';
     }
 
     if (tab.status === 'running') {
@@ -1111,7 +1124,7 @@ function workflowProgressLabel(tab: ProcessTab): string {
 
   if (tab.key === 'edit') {
     if (tab.status === 'review') {
-      return '生成前確認中';
+      return '生成前確認: あなたの確認待ち';
     }
 
     if (tab.status === 'running') {
@@ -1137,7 +1150,11 @@ function workflowProgressLabel(tab: ProcessTab): string {
     return '動画生成停止';
   }
 
-  return hasOutputVideo.value ? 'レビュー中' : '動画未生成';
+  if (pendingRenderReview.value) {
+    return '生成後レビュー: 未開始';
+  }
+
+  return hasOutputVideo.value ? '生成後レビュー: 完了' : '動画未生成';
 }
 
 function processStatusLabel(status: ProcessStatus): string {
@@ -1230,7 +1247,7 @@ function humanDecisionSummary(review: ControlReviewItem): string {
 }
 
 function nextProcessLabelForReview(review: ControlReviewItem): string {
-  return review.kind === 'theme_selection' ? '動画生成前確認を見る' : '生成後レビューを見る';
+  return review.kind === 'theme_selection' ? '生成前の確認を見る' : '生成後レビューを見る';
 }
 
 function nextProcessKeyForReview(review: ControlReviewItem): ProcessTabKey {
@@ -1565,14 +1582,24 @@ onMounted(() => {
                 <p>{{ currentStatusSummary.detail }}</p>
               </div>
             </div>
-            <div class="current-status-meta">
-              <v-chip size="small" :color="visibleDraftStatus.color" variant="flat">
-                {{ visibleDraftStatus.label }}
-              </v-chip>
-              <v-chip size="small" color="blue-grey" variant="tonal">
-                使用モデル: {{ visibleGeminiModelPurpose }} / {{ visibleGeminiModelLabel }}
-              </v-chip>
-              <span v-if="store.lastChangedAt">最終更新 {{ formatTime(store.lastChangedAt) }}</span>
+            <div class="current-status-side">
+              <div v-if="pendingRenderReview" class="current-status-actions">
+                <v-btn
+                  color="primary"
+                  variant="flat"
+                  prepend-icon="mdi-check"
+                  :loading="store.loading"
+                  @click="submitControlReview(pendingRenderReview, 'approve')"
+                >
+                  {{ renderReviewApprovalLabel }}
+                </v-btn>
+              </div>
+              <div class="current-status-meta">
+                <v-chip v-if="!pendingRenderReview" size="small" :color="visibleDraftStatus.color" variant="flat">
+                  {{ visibleDraftStatus.label }}
+                </v-chip>
+                <span v-if="store.lastChangedAt">最終更新 {{ formatTime(store.lastChangedAt) }}</span>
+              </div>
             </div>
           </section>
 
@@ -1649,22 +1676,11 @@ onMounted(() => {
               </div>
             </v-form>
           </v-sheet>
-          <div v-else class="request-utility-panel">
-            <v-btn
-              color="primary"
-              variant="tonal"
-              size="small"
-              prepend-icon="mdi-plus"
-              @click="startNewRequest"
-            >
-              新しい依頼を作る
-            </v-btn>
-          </div>
 
           <template v-if="!requestFormVisible">
             <section class="workflow-compact-panel">
               <div>
-                <span>作成状況</span>
+                <span>工程</span>
                 <strong>{{ workflowProgressTitle }}</strong>
               </div>
               <p>{{ workflowProgressText }}</p>
@@ -1923,7 +1939,7 @@ onMounted(() => {
                     </aside>
                   </div>
                   <div v-else class="collapsed-note">
-                    まだ確認用動画はありません。動画生成前確認で動画作成を承認すると、ここに表示されます。
+                    まだ確認用動画はありません。生成前の確認で動画作成を承認すると、ここに表示されます。
                   </div>
 
                   <section v-if="outputVideoArtifact" class="generated-summary-card">
@@ -2021,6 +2037,17 @@ onMounted(() => {
                 </div>
               </section>
             </v-sheet>
+            <div class="request-utility-panel">
+              <v-btn
+                color="blue-grey"
+                variant="text"
+                size="small"
+                prepend-icon="mdi-plus"
+                @click="startNewRequest"
+              >
+                新しい依頼を作る
+              </v-btn>
+            </div>
           </template>
         </section>
       </v-container>
@@ -2236,6 +2263,18 @@ h2 {
   color: #34495e;
   margin-top: 5px;
   overflow-wrap: anywhere;
+}
+
+.current-status-side {
+  align-items: end;
+  display: grid;
+  gap: 6px;
+  justify-items: end;
+}
+
+.current-status-actions {
+  display: flex;
+  justify-content: end;
 }
 
 .current-status-meta {
@@ -3336,6 +3375,7 @@ h2 {
     grid-template-columns: 1fr;
   }
 
+  .current-status-side,
   .current-status-meta {
     align-items: start;
     display: flex;
