@@ -221,11 +221,6 @@ const SOURCE_VIDEO_FILE_NAME = 'source-video.mp4';
 const SOURCE_VIDEO_METADATA_FILE_NAME = 'source-video.json';
 const ZEV_SPEECH_UNIT_LONG_GAP_MS = 1200;
 const ZEV_STT_SAMPLE_PATH = path.join(workspaceRoot(), 'runner', 'fixtures', 'zev-stt-sample.json');
-const FIXED_ARTIFACT_DRAFT_ID = 'draft_w4Lp9IJC6pQl3FsRfFL9t';
-const FIXED_TRANSCRIPT_PATH = path.join(workspaceRoot(), 'runtime', 'artifacts', FIXED_ARTIFACT_DRAFT_ID, 'transcript.json');
-const FIXED_THEME_OPTIONS_PATH = path.join(workspaceRoot(), 'runtime', 'artifacts', FIXED_ARTIFACT_DRAFT_ID, 'themes.json');
-const FIXED_COMPOSITION_PATH = path.join(workspaceRoot(), 'runtime', 'artifacts', FIXED_ARTIFACT_DRAFT_ID, 'clip-composition.json');
-const FIXED_EDIT_PLAN_PATH = path.join(workspaceRoot(), 'runtime', 'artifacts', FIXED_ARTIFACT_DRAFT_ID, 'edit-plan.json');
 const confirmationVideoEncoder = process.env.ZEV2_FFMPEG_VIDEO_ENCODER ?? 'h264_videotoolbox';
 const CONFIRMATION_VIDEO_ENCODING_ARGS = ['-c:v', confirmationVideoEncoder, '-pix_fmt', 'yuv420p'];
 
@@ -638,30 +633,6 @@ function normalizeLocalSttResponse(payload: unknown, request: AgentRequest): Tra
   };
 }
 
-async function buildFixedTranscript(request: AgentRequest): Promise<TranscriptArtifact> {
-  const raw = await readFile(FIXED_TRANSCRIPT_PATH, 'utf8');
-  const record = recordFrom(JSON.parse(raw));
-  const segments = normalizeSegments(record.segments);
-  const speechUnitGroups = normalizeSpeechUnitGroups(record.speechUnitGroups, segments);
-  const lastEndMs = segments[segments.length - 1]?.endMs ?? 0;
-  const durationSec = typeof record.durationSec === 'number' ? record.durationSec : lastEndMs / 1000;
-  const language = typeof record.language === 'string' && record.language.trim() ? record.language.trim() : 'ja';
-
-  return {
-    kind: 'transcript_json',
-    mode: 'zev-local-stt',
-    sourceUri: request.target.sourceUri,
-    notes: ['固定済みのSTTデータを使った文字起こしです。'],
-    generatedAt: new Date().toISOString(),
-    language,
-    durationSec,
-    segmentCount: segments.length,
-    segments,
-    speechUnitGroups,
-    themeSeeds: normalizeThemeSeeds(record.themeSeeds, segments)
-  };
-}
-
 async function transcribeWithLocalStt(audioPath: string, request: AgentRequest): Promise<TranscriptArtifact> {
   if (!sttServerUrl) {
     throw new Error('ローカルSTTサーバの接続先が設定されていないため、文字起こしを開始できません。ZEV2_STT_SERVER_URL または ZEV_STT_SERVER_URL を設定してください。');
@@ -709,8 +680,18 @@ async function transcribeWithLocalStt(audioPath: string, request: AgentRequest):
   return normalizeLocalSttResponse(responseJson, request);
 }
 
-async function buildTranscript(request: AgentRequest, _state: Zev2State): Promise<TranscriptArtifact> {
-  return buildFixedTranscript(request);
+async function buildTranscript(request: AgentRequest, state: Zev2State): Promise<TranscriptArtifact> {
+  if (request.target.sourceUri.startsWith('zev-sample://')) {
+    return buildZevSampleTranscript(request);
+  }
+
+  const sourceVideoPath = resolveSourceVideoPath(state, request);
+  if (!sourceVideoPath) {
+    throw new Error('文字起こしに使う動画ファイルを取得できません。YouTube URLは動画取り込み工程で取得し、ローカル動画は実在するパスを指定してください。');
+  }
+
+  const audioPath = await extractAudioForStt(request, sourceVideoPath);
+  return transcribeWithLocalStt(audioPath, request);
 }
 
 function segmentTextByIds(transcript: TranscriptArtifact, ids: number[]): string {
@@ -1015,69 +996,14 @@ async function callGeminiThemeApi(
 }
 
 async function buildThemeOptionsArtifact(transcript: TranscriptArtifact, request: AgentRequest): Promise<ThemeArtifact> {
-  const raw = await readFile(FIXED_THEME_OPTIONS_PATH, 'utf8');
-  const record = recordFrom(JSON.parse(raw));
-  if (!Array.isArray(record.themes)) {
-    throw new Error('固定テーマ候補のデータにテーマ配列がありません');
+  if (isSampleRequest(request)) {
+    return buildSampleThemeOptions(transcript, request);
   }
 
-  const knownIds = new Set(transcript.segments.map((segment) => segment.id));
-  const themes = record.themes.map((rawTheme, index) => {
-    const theme = recordFrom(rawTheme);
-    const representativeSpeechIds = speechIdsFromGeminiRequired(
-      theme.representativeSpeechIds,
-      knownIds,
-      `固定テーマ候補 ${index + 1} 件目の代表発話`
-    );
-    const relatedSpeechIds = speechIdsFromGeminiRequired(
-      theme.relatedSpeechIds,
-      knownIds,
-      `固定テーマ候補 ${index + 1} 件目の関連発話`
-    );
-
-    return {
-      id: typeof theme.id === 'string' && theme.id.trim()
-        ? sanitizePathPart(theme.id.trim())
-        : `theme_${index + 1}`,
-      title: typeof theme.title === 'string' && theme.title.trim()
-        ? theme.title.trim()
-        : `テーマ ${index + 1}`,
-      summary: typeof theme.summary === 'string' && theme.summary.trim()
-        ? theme.summary.trim()
-        : segmentTextByIds(transcript, representativeSpeechIds),
-      representativeText: typeof theme.representativeText === 'string' && theme.representativeText.trim()
-        ? theme.representativeText.trim()
-        : segmentTextByIds(transcript, representativeSpeechIds),
-      representativeSpeechIds,
-      relatedSpeechIds,
-      whyItCanBeClipped: typeof theme.whyItCanBeClipped === 'string' && theme.whyItCanBeClipped.trim()
-        ? theme.whyItCanBeClipped.trim()
-        : '文字起こし上で内容のまとまりがあるため。',
-      compositionNote: typeof theme.compositionNote === 'string' && theme.compositionNote.trim()
-        ? theme.compositionNote.trim()
-        : '関連する発話を複数つないでショート動画にします。',
-      evidenceRefs: representativeSpeechIds.map((speechId): ControlReference => ({
-        kind: 'time_range',
-        refId: `speech_${speechId}`,
-        meaning: `代表発話 ${speechId}`
-      }))
-    };
-  });
-
-  if (themes.length === 0) {
-    throw new Error('固定テーマ候補のデータに使えるテーマがありません');
-  }
-
-  return {
-    kind: 'theme_json',
-    mode: 'gemini-api-theme-options',
-    generatedAt: new Date().toISOString(),
-    sourceUri: request.target.sourceUri,
-    themes
-  };
+  return callGeminiThemeApi(request, transcript);
 }
 
-function selectedThemeIdFromState(state: Zev2State, requestDraftId: string, themes: ThemeArtifact): string {
+function selectedThemeIdFromState(state: Zev2State, requestDraftId: string): string {
   const review = lastMatching(
     state.controlReviewItems,
     (item) =>
@@ -1087,12 +1013,7 @@ function selectedThemeIdFromState(state: Zev2State, requestDraftId: string, them
   );
   const action = findById(state.humanReviewActions, review?.resolvedByActionId);
   if (!action?.selectedOptionId) {
-    const firstThemeId = themes.themes[0]?.id;
-    if (!firstThemeId) {
-      throw new Error('テーマ候補がないため構成案を作れません');
-    }
-
-    return firstThemeId;
+    throw new Error('切り抜きテーマが選ばれていないため構成案を作れません');
   }
 
   return action.selectedOptionId;
@@ -1140,29 +1061,6 @@ function buildClipComposition(themes: ThemeArtifact, transcript: TranscriptArtif
     sourceEndMs: lastEndMs,
     parts,
     assemblyPlan: selectedTheme.compositionNote
-  };
-}
-
-async function buildFixedClipComposition(request: AgentRequest): Promise<ClipCompositionArtifact> {
-  const raw = await readFile(FIXED_COMPOSITION_PATH, 'utf8');
-  const composition = JSON.parse(raw) as ClipCompositionArtifact;
-  return {
-    ...composition,
-    generatedAt: new Date().toISOString(),
-    sourceUri: request.target.sourceUri
-  };
-}
-
-async function buildFixedEditPlan(request: AgentRequest): Promise<EditPlanArtifact> {
-  const raw = await readFile(FIXED_EDIT_PLAN_PATH, 'utf8');
-  const editPlan = JSON.parse(raw) as EditPlanArtifact;
-  return {
-    ...editPlan,
-    generatedAt: new Date().toISOString(),
-    geminiApiInput: editPlan.geminiApiInput.map((input) => ({
-      ...input,
-      sourceUri: request.target.sourceUri
-    }))
   };
 }
 
@@ -1902,25 +1800,6 @@ function runCommandWithOutput(command: string, args: string[]): Promise<string> 
   });
 }
 
-function runCommandWithCombinedOutput(command: string, args: string[]): Promise<string> {
-  return new Promise((resolve, reject) => {
-    const output: string[] = [];
-    const child = spawn(command, args);
-    child.stdout.on('data', (chunk: Buffer) => output.push(chunk.toString()));
-    child.stderr.on('data', (chunk: Buffer) => output.push(chunk.toString()));
-    child.on('error', reject);
-    child.on('close', (code) => {
-      const text = output.join('');
-      if (code === 0) {
-        resolve(text);
-        return;
-      }
-
-      reject(new Error(`${command} failed with code ${code ?? 'unknown'}\n${text}`));
-    });
-  });
-}
-
 async function sourceHasAudioTrack(sourcePath: string): Promise<boolean> {
   try {
     const output = await runCommandWithOutput(ffprobeCommand, [
@@ -1937,37 +1816,6 @@ async function sourceHasAudioTrack(sourcePath: string): Promise<boolean> {
     return output.trim().length > 0;
   } catch {
     return false;
-  }
-}
-
-async function assertOutputVideoHasAudibleAudio(outputPath: string): Promise<void> {
-  const hasAudioTrack = await sourceHasAudioTrack(outputPath);
-  if (!hasAudioTrack) {
-    throw new Error('生成動画に音声トラックがありません');
-  }
-
-  const volumeOutput = await runCommandWithCombinedOutput(ffmpegCommand, [
-    '-hide_banner',
-    '-nostats',
-    '-i',
-    outputPath,
-    '-map',
-    '0:a:0',
-    '-af',
-    'volumedetect',
-    '-f',
-    'null',
-    '-'
-  ]);
-  const sampleCounts = [...volumeOutput.matchAll(/n_samples:\s*(\d+)/g)]
-    .map((match) => Number(match[1]))
-    .filter((value) => Number.isFinite(value));
-  const sampleCount = sampleCounts.length > 0 ? Math.max(...sampleCounts) : 0;
-  const maxVolumeMatch = volumeOutput.match(/max_volume:\s*([-\d.]+|-\s*inf)\s*dB/i);
-  const maxVolume = maxVolumeMatch?.[1]?.replace(/\s+/g, '') ?? '';
-
-  if (sampleCount <= 0 || !maxVolume || maxVolume === '-inf') {
-    throw new Error('生成動画の音声が無音です');
   }
 }
 
@@ -2537,8 +2385,6 @@ async function renderFixtureVideo(request: AgentRequest, editPlan: EditPlanArtif
         ...CONFIRMATION_VIDEO_ENCODING_ARGS,
         '-c:a',
         'aac',
-        '-disposition:a:0',
-        'default',
         '-shortest',
         '-t',
         millisecondsToSeconds(segment.sourceEndMs - segment.sourceStartMs),
@@ -2577,9 +2423,7 @@ async function renderFixtureVideo(request: AgentRequest, editPlan: EditPlanArtif
         : `${layoutFilters};${concatInputs}concat=n=${renderSegments.length}:v=1:a=0[rawv]`;
       const concatFilter = appendTelopOverlayFilters(rawConcatFilter, 'rawv', 'outv', telopOverlays, renderSegments.length);
       const outputMaps = hasAudioTrack ? ['-map', '[outv]', '-map', '[outa]'] : ['-map', '[outv]'];
-      const audioCodecArgs = hasAudioTrack
-        ? ['-c:a', 'aac', '-disposition:a:0', 'default', '-shortest']
-        : [];
+      const audioCodecArgs = hasAudioTrack ? ['-c:a', 'aac', '-shortest'] : [];
 
       await runCommand(ffmpegCommand, [
         '-y',
@@ -2598,7 +2442,6 @@ async function renderFixtureVideo(request: AgentRequest, editPlan: EditPlanArtif
       ]);
     }
 
-    await assertOutputVideoHasAudibleAudio(outputPath);
     return {
       path: outputPath,
       uri: artifactUrl(request, OUTPUT_FILE_NAME_BY_KIND.output_video),
@@ -2616,10 +2459,36 @@ async function renderFixtureVideo(request: AgentRequest, editPlan: EditPlanArtif
     telops,
     telopOverlayImages,
     target: SHORTS_RENDER_TARGET,
-    fallbackReason: '入力動画をローカルファイルとして読めないため、音声付き動画を生成できない'
+    fallbackReason: '入力動画をローカルファイルとして読めないため、編集案の尺に合わせた確認用映像を生成する'
   });
 
-  throw new Error('入力動画を読めないため、音声付き動画を生成できません');
+  const fixtureVideoFilter = appendTelopOverlayFilters('[0:v]null[rawv]', 'rawv', 'outv', telopOverlays, 1);
+
+  await runCommand(ffmpegCommand, [
+    '-y',
+    '-f',
+    'lavfi',
+    '-i',
+    `color=c=black:s=${SHORTS_RENDER_TARGET.width}x${SHORTS_RENDER_TARGET.height}:d=${durationSeconds}`,
+    ...buildTelopOverlayInputArgs(telopOverlays),
+    '-filter_complex',
+    fixtureVideoFilter,
+    '-map',
+    '[outv]',
+    ...CONFIRMATION_VIDEO_ENCODING_ARGS,
+    '-t',
+    durationSeconds,
+    '-movflags',
+    '+faststart',
+    outputPath
+  ]);
+
+  return {
+    path: outputPath,
+    uri: artifactUrl(request, OUTPUT_FILE_NAME_BY_KIND.output_video),
+    mimeType: 'video/mp4',
+    access: 'internal'
+  };
 }
 
 async function buildArtifactForRequest(request: AgentRequest): Promise<ArtifactInfo> {
@@ -2643,11 +2512,27 @@ async function buildArtifactForRequest(request: AgentRequest): Promise<ArtifactI
   }
 
   if (request.type === 'build_clip_composition') {
-    return writeJsonArtifact(request, 'composition_json', await buildFixedClipComposition(request));
+    const themeRef = findRequestOutputFileRef(state, request.requestDraftId, 'propose_clip_themes');
+    const transcriptRef = findRequestOutputFileRef(state, request.requestDraftId, 'run_stt');
+    if (!themeRef || !transcriptRef) {
+      throw new Error('テーマ候補または文字起こし成果物がないため構成案を作れません');
+    }
+    const themes = await readArtifactByUrl<ThemeArtifact>(themeRef.uri);
+    const transcript = await readArtifactByUrl<TranscriptArtifact>(transcriptRef.uri);
+    return writeJsonArtifact(
+      request,
+      'composition_json',
+      buildClipComposition(themes, transcript, selectedThemeIdFromState(state, request.requestDraftId))
+    );
   }
 
   if (request.type === 'create_edit_plan') {
-    return writeJsonArtifact(request, 'edit_plan_json', await buildFixedEditPlan(request));
+    const compositionRef = findRequestOutputFileRef(state, request.requestDraftId, 'build_clip_composition');
+    if (!compositionRef) {
+      throw new Error('構成案がないため演出案を作れません');
+    }
+    const composition = await readArtifactByUrl<ClipCompositionArtifact>(compositionRef.uri);
+    return writeJsonArtifact(request, 'edit_plan_json', await buildEditPlanArtifact(request, composition, state));
   }
 
   if (request.type === 'apply_adjustment') {
@@ -2675,6 +2560,51 @@ function buildCompletion(request: AgentRequest, artifact: ArtifactInfo): AgentCo
       access: artifact.access
     }
   };
+
+  if (request.type === 'propose_clip_themes') {
+    const themeArtifact = artifact.payload as ThemeArtifact | undefined;
+    completion.decision = {
+      decisionType: 'theme_selection',
+      decision: 'テーマ候補を人間確認へ進める',
+      reason: '文字起こしから切り抜きたい内容の候補を作成したため、どのテーマで進めるかを人間が選べる',
+      evidenceRefs: [
+        {
+          refId: artifact.uri,
+          kind: 'file_ref',
+          meaning: 'テーマ候補JSONの実体'
+        }
+      ],
+      reviewOptions: themeArtifact?.themes.map((theme) => ({
+        id: theme.id,
+        title: theme.title,
+        summary: theme.summary,
+        evidenceRefs: theme.evidenceRefs
+      })) ?? [],
+      proposedNextState: 'review_required',
+      requiresHumanReview: true,
+      humanQuestion: 'どのテーマで切り抜きを作るか選んでください',
+      ruleIds: ['control-plane:theme-selection-required', 'zev-reference:local-stt-transcript']
+    };
+  }
+
+  if (request.type === 'apply_adjustment') {
+    completion.decision = {
+      decisionType: 'render_readiness',
+      decision: '動画生成前に人間確認へ進める',
+      reason: '複数箇所をつなぐ演出案と微調整結果が保存されたため、動画生成へ進める前に人間が確認できる',
+      evidenceRefs: [
+        {
+          refId: artifact.uri,
+          kind: 'file_ref',
+          meaning: '複数箇所の動画生成前確認JSON'
+        }
+      ],
+      proposedNextState: 'review_required',
+      requiresHumanReview: true,
+      humanQuestion: 'この複数箇所の構成と演出案で動画生成へ進めてよいか',
+      ruleIds: ['control-plane:render-approval-required', 'zev-reference:multi-part-render-segments']
+    };
+  }
 
   return completion;
 }

@@ -1,4 +1,4 @@
-import { findById, isStatusIn } from './common.js';
+import { findById, isStatusIn, latestByCreatedAt } from './common.js';
 
 export * from './common.js';
 
@@ -43,7 +43,7 @@ export const WORKFLOW_STEPS = [
     type: 'render_video',
     label: '動画生成',
     outputKind: 'output_video',
-    requiresHumanApproval: false
+    requiresHumanApproval: true
   }
 ] as const;
 
@@ -105,7 +105,7 @@ export interface RequestDraftInput {
 }
 
 export interface HumanControlPolicy {
-  humanApprovalRequiredBeforeRender: boolean;
+  humanApprovalRequiredBeforeRender: true;
 }
 
 export interface RequestDraft {
@@ -283,7 +283,7 @@ const DRY_RUN_MEANING_BY_REQUEST_TYPE = {
   build_clip_composition: '選ばれたテーマに関係する複数発話箇所を集めて構成案を作った結果',
   create_edit_plan: '複数箇所の構成案と動画断片をもとに演出案を作った結果',
   apply_adjustment: '修正内容を複数箇所の演出案へ反映した結果',
-  render_video: '編集案から複数箇所を連結して動画を生成した結果'
+  render_video: '承認済み編集案から複数箇所を連結して動画を生成した結果'
 } satisfies Record<AgentRequestType, string>;
 
 export function createInitialState(): Zev2State {
@@ -356,16 +356,40 @@ export function hasHumanReviewRequired(state: Zev2State): boolean {
 }
 
 export function findBlockingControlReview(
-  _state: Zev2State,
-  _request: AgentRequest
+  state: Zev2State,
+  request: AgentRequest
 ): ControlReviewItem | undefined {
-  return undefined;
+  const latestControlReview = (kind: ControlReviewKind) => {
+    const reviews = state.controlReviewItems.filter(
+      (item) => item.requestDraftId === request.requestDraftId && item.kind === kind
+    );
+    return latestByCreatedAt(reviews);
+  };
+
+  const themeReview = latestControlReview('theme_selection');
+  const requestStepIndex = WORKFLOW_STEPS.findIndex((step) => step.type === request.type);
+  const themeStepIndex = WORKFLOW_STEPS.findIndex((step) => step.type === 'propose_clip_themes');
+
+  if (themeReview && themeReview.status !== 'approved' && requestStepIndex > themeStepIndex) {
+    return themeReview;
+  }
+
+  if (request.type !== 'render_video') {
+    return undefined;
+  }
+
+  const renderReview = latestControlReview('render_readiness');
+  return renderReview?.status === 'approved' ? undefined : renderReview;
 }
 
 export function getRequiredControlReviewKind(
-  _request: AgentRequest
+  request: AgentRequest
 ): ControlReviewKind | undefined {
-  return undefined;
+  if (request.type === 'propose_clip_themes') {
+    return 'theme_selection';
+  }
+
+  return request.type === 'apply_adjustment' ? 'render_readiness' : undefined;
 }
 
 export function validateRequestDraftInput(input: Partial<RequestDraftInput>): string[] {
@@ -418,7 +442,7 @@ export function createRequestDraft(
       preset: input.preset.trim()
     },
     policy: {
-      humanApprovalRequiredBeforeRender: false
+      humanApprovalRequiredBeforeRender: true
     },
     steps: WORKFLOW_STEPS.map((step) => ({
       type: step.type,
@@ -435,7 +459,7 @@ export function createAgentRequestsFromDraft(
   now: string,
   createId: (prefix: string) => string
 ): AgentRequest[] {
-  const requestedSteps = WORKFLOW_STEPS;
+  const requestedSteps = WORKFLOW_STEPS.filter((step) => step.type !== 'render_video');
 
   let previousAgentRequestId = '';
 
