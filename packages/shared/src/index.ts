@@ -348,7 +348,9 @@ export function isAgentRequestReady(state: Zev2State, request: AgentRequest): bo
 }
 
 export function findReadyAgentRequest(state: Zev2State): AgentRequest | undefined {
-  return state.agentRequests.find((request) => isAgentRequestReady(state, request));
+  return [...state.agentRequests]
+    .filter((request) => isAgentRequestReady(state, request))
+    .sort((left, right) => right.createdAt.localeCompare(left.createdAt))[0];
 }
 
 export function hasHumanReviewRequired(state: Zev2State): boolean {

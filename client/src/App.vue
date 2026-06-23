@@ -9,9 +9,11 @@ import {
 import { useControlQueueStore } from './stores/controlQueue';
 
 const FIXED_SOURCE_URI = '/Users/kawafmm/workspace/zev2/runtime/artifacts/draft_w4Lp9IJC6pQl3FsRfFL9t/source-video.mp4';
+type RedoScope = 'theme_selection' | 'edit_plan' | 'adjustment';
 
 const store = useControlQueueStore();
 const submitting = ref(false);
+const activeRedoScope = ref<RedoScope | ''>('');
 let refreshTimer: number | undefined;
 
 const requestInput = reactive<RequestDraftInput>({
@@ -73,6 +75,10 @@ const outputVideoUri = computed(() => {
   return findById(store.state.fileRefs, fileRefId)?.uri ?? '';
 });
 
+const canRedoVideo = computed(() =>
+  Boolean(currentDraft.value && outputVideoUri.value && !store.loading && !runningRequest.value && !nextWaitingRequest.value)
+);
+
 const statusText = computed(() => {
   if (failedRequest.value) {
     return `${failedRequest.value.label}で停止`;
@@ -132,6 +138,26 @@ async function createVideo() {
   }
 }
 
+async function redoVideo(scope: RedoScope) {
+  const draft = currentDraft.value;
+  if (!draft) {
+    return;
+  }
+
+  activeRedoScope.value = scope;
+  const reasonByScope: Record<RedoScope, string> = {
+    theme_selection: 'テーマ決定前から作り直す',
+    edit_plan: '演出作成前から作り直す',
+    adjustment: '微調整前から作り直す'
+  };
+
+  try {
+    await store.requestGeneratedVideoChanges(draft.id, reasonByScope[scope], scope);
+  } finally {
+    activeRedoScope.value = '';
+  }
+}
+
 onMounted(() => {
   void store.refresh();
   refreshTimer = window.setInterval(() => {
@@ -179,6 +205,7 @@ onBeforeUnmount(() => {
         <span v-if="progressText" class="progress-pill">{{ progressText }}</span>
       </div>
 
+      <p v-if="store.message" class="status-message">{{ store.message }}</p>
       <p v-if="store.errorMessage" class="error-message">{{ store.errorMessage }}</p>
 
       <ol v-if="visibleRequests.length" class="step-list">
@@ -199,6 +226,30 @@ onBeforeUnmount(() => {
         <h2>完成動画</h2>
       </div>
       <video controls playsinline :src="outputVideoUri" />
+
+      <div class="redo-actions">
+        <button
+          type="button"
+          :disabled="!canRedoVideo"
+          @click="redoVideo('theme_selection')"
+        >
+          {{ activeRedoScope === 'theme_selection' ? '作り直し中' : 'テーマ決定前から作り直す' }}
+        </button>
+        <button
+          type="button"
+          :disabled="!canRedoVideo"
+          @click="redoVideo('edit_plan')"
+        >
+          {{ activeRedoScope === 'edit_plan' ? '作り直し中' : '演出作成前から作り直す' }}
+        </button>
+        <button
+          type="button"
+          :disabled="!canRedoVideo"
+          @click="redoVideo('adjustment')"
+        >
+          {{ activeRedoScope === 'adjustment' ? '作り直し中' : '微調整前から作り直す' }}
+        </button>
+      </div>
     </section>
   </main>
 </template>
@@ -316,6 +367,15 @@ button:disabled {
   font-weight: 700;
 }
 
+.status-message {
+  margin: 18px 0 0;
+  border-left: 4px solid #1264a3;
+  background: #edf6ff;
+  padding: 12px;
+  color: #173a5e;
+  font-weight: 800;
+}
+
 .step-list {
   list-style: none;
   display: grid;
@@ -361,6 +421,12 @@ button:disabled {
   gap: 16px;
 }
 
+.redo-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
 video {
   width: min(420px, 100%);
   max-height: 78vh;
@@ -386,6 +452,10 @@ video {
 
   button {
     width: 100%;
+  }
+
+  .redo-actions {
+    display: grid;
   }
 }
 </style>

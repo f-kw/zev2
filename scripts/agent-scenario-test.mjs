@@ -337,7 +337,13 @@ async function scenarioAutomaticVideoCreation(apiBaseUrl, runtimeDir) {
   await assertGeneratedDraftCompleted(apiBaseUrl, runtimeDir, editPlanRestartDraft.id, '演出作成前からのコピー再開');
 
   await assertCopiedRestart(apiBaseUrl, draft.id, 'theme_selection', 'build_clip_composition');
-  await assertCopiedRestart(apiBaseUrl, draft.id, 'adjustment', 'apply_adjustment');
+  const adjustmentRestartDraft = await assertCopiedRestart(apiBaseUrl, draft.id, 'adjustment', 'apply_adjustment');
+  const nextAfterMultipleRestarts = await requestJson(apiPath(apiBaseUrl, '/agent-requests/next'));
+  assertScenario(
+    nextAfterMultipleRestarts.request?.requestDraftId === adjustmentRestartDraft.id &&
+      nextAfterMultipleRestarts.request?.type === 'apply_adjustment',
+    '複数の作り直し候補があるとき、最後に作った編集コピーが次の実行対象になっていない'
+  );
 }
 
 async function main() {

@@ -65,6 +65,10 @@ function failedAgentRequestForDraft(state: Zev2State, requestDraftId: string) {
   );
 }
 
+function hasAgentRequestsForDraft(state: Zev2State, requestDraftId: string): boolean {
+  return state.agentRequests.some((request) => request.requestDraftId === requestDraftId);
+}
+
 async function keepPhaseVisible(startedAt: number, minimumMilliseconds: number): Promise<void> {
   const remainingMilliseconds = minimumMilliseconds - (Date.now() - startedAt);
 
@@ -119,8 +123,43 @@ export const useControlQueueStore = defineStore('controlQueue', {
         this.workflowSteps = steps;
         this.state = state;
         this.errorMessage = '';
+        this.syncRunPhaseFromState();
       } finally {
         this.loading = false;
+      }
+    },
+    syncRunPhaseFromState() {
+      const activeDraftId = this.activeDraftId;
+      if (!activeDraftId) {
+        if (hasRunnableAgentRequests(this.state)) {
+          this.runPhase = 'running';
+          this.message = '作成中です';
+        }
+        return;
+      }
+
+      const failedRequest = failedAgentRequestForDraft(this.state, activeDraftId);
+      if (failedRequest) {
+        this.runPhase = 'error';
+        this.message = `${failedRequest.label}で止まっています`;
+        return;
+      }
+
+      if (hasHumanReviewRequiredForDraft(this.state, activeDraftId)) {
+        this.runPhase = 'review_required';
+        this.message = '確認が必要です';
+        return;
+      }
+
+      if (hasRunnableAgentRequestsForDraft(this.state, activeDraftId)) {
+        this.runPhase = 'running';
+        this.message = '作成中です';
+        return;
+      }
+
+      if (hasAgentRequestsForDraft(this.state, activeDraftId)) {
+        this.runPhase = 'completed';
+        this.message = '';
       }
     },
     async createRequestDraft(input: RequestDraftInput) {
@@ -212,7 +251,7 @@ export const useControlQueueStore = defineStore('controlQueue', {
 
         if (!hasRunnableRequest) {
           await keepPhaseVisible(startedAt, 700);
-          this.message = '確認できます';
+          this.message = '';
           this.runPhase = 'completed';
           this.lastChangedAt = new Date().toISOString();
           return;
