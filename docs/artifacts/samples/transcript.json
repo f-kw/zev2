@@ -1,0 +1,61 @@
+{
+  "kind": "transcript_json",
+  "mode": "zev-sample-stt",
+  "sourceUri": "file:///sample/source.mp4",
+  "notes": [
+    "固定確認用の短い文字起こしです。"
+  ],
+  "generatedAt": "2026-06-24T00:00:00.000Z",
+  "language": "ja-JP",
+  "durationSec": 12,
+  "segmentCount": 3,
+  "segments": [
+    {
+      "id": 1,
+      "startMs": 1000,
+      "endMs": 3500,
+      "text": "ここが今日一番大事な話です。",
+      "speaker": "speaker_1"
+    },
+    {
+      "id": 2,
+      "startMs": 3600,
+      "endMs": 7000,
+      "text": "実は裏でこういう流れがありました。",
+      "speaker": "speaker_1"
+    },
+    {
+      "id": 3,
+      "startMs": 7200,
+      "endMs": 11000,
+      "text": "だから最後にこの判断になりました。",
+      "speaker": "speaker_1"
+    }
+  ],
+  "speechUnitGroups": [
+    [
+      1,
+      2
+    ],
+    [
+      3
+    ]
+  ],
+  "themeSeeds": [
+    {
+      "id": "theme_1",
+      "title": "裏の流れが分かる話",
+      "summary": "表に出ていない流れを説明して、最後の判断につながる話。",
+      "representativeSpeechIds": [
+        2
+      ],
+      "relatedSpeechIds": [
+        1,
+        2,
+        3
+      ],
+      "reason": "話の入口、展開、結論がそろっているため。",
+      "compositionNote": "大事な話の入口から裏の流れ、最後の判断までをつなぐ動画にする。"
+    }
+  ]
+}

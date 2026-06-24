@@ -1,0 +1,149 @@
+{
+  "kind": "edit_plan_json",
+  "mode": "sample-edit-plan",
+  "generatedAt": "2026-06-24T00:00:00.000Z",
+  "selectedThemeId": "theme_1",
+  "title": "裏の流れが分かる話",
+  "hookText": "ここが今日一番大事な話です",
+  "sourceStartMs": 1000,
+  "sourceEndMs": 11000,
+  "geminiApiInput": [
+    {
+      "sourceUri": "file:///sample/source.mp4",
+      "sourceStartMs": 1000,
+      "sourceEndMs": 7000,
+      "purpose": "導入: テーマの入口と裏の流れをまとめて見せるため。"
+    },
+    {
+      "sourceUri": "file:///sample/source.mp4",
+      "sourceStartMs": 7200,
+      "sourceEndMs": 11000,
+      "purpose": "結論: 裏の流れを受けた結論として使うため。"
+    }
+  ],
+  "renderSegments": [
+    {
+      "sourceStartMs": 1000,
+      "sourceEndMs": 7000,
+      "role": "導入",
+      "caption": "今日一番大事な話",
+      "speechIds": [
+        1,
+        2
+      ],
+      "speechUnits": [
+        {
+          "id": 1,
+          "sourceStartMs": 1000,
+          "sourceEndMs": 3500,
+          "text": "ここが今日一番大事な話です。",
+          "speaker": "speaker_1"
+        },
+        {
+          "id": 2,
+          "sourceStartMs": 3600,
+          "sourceEndMs": 7000,
+          "text": "実は裏でこういう流れがありました。",
+          "speaker": "speaker_1"
+        }
+      ],
+      "screenLayout": {
+        "screenLayoutId": "speaker_only",
+        "detections": {
+          "speaker": {
+            "face": [
+              120,
+              300,
+              420,
+              700
+            ],
+            "body": [
+              80,
+              180,
+              980,
+              850
+            ]
+          }
+        },
+        "viewports": {
+          "speaker": [
+            0.18,
+            0.08,
+            0.85,
+            0.98
+          ]
+        },
+        "displaySummary": "話者だけを縦長に見せる",
+        "selectedCandidateId": "speaker_full",
+        "candidateSummary": "話者の顔と体が入る範囲",
+        "selectionReason": "話者のみ画面なので顔を外さないため。"
+      }
+    },
+    {
+      "sourceStartMs": 7200,
+      "sourceEndMs": 11000,
+      "role": "結論",
+      "caption": "最後の判断",
+      "speechIds": [
+        3
+      ],
+      "speechUnits": [
+        {
+          "id": 3,
+          "sourceStartMs": 7200,
+          "sourceEndMs": 11000,
+          "text": "だから最後にこの判断になりました。",
+          "speaker": "speaker_1"
+        }
+      ],
+      "screenLayout": {
+        "screenLayoutId": "speaker_only",
+        "detections": {
+          "speaker": {
+            "face": [
+              120,
+              300,
+              420,
+              700
+            ],
+            "body": [
+              80,
+              180,
+              980,
+              850
+            ]
+          }
+        },
+        "viewports": {
+          "speaker": [
+            0.18,
+            0.08,
+            0.85,
+            0.98
+          ]
+        },
+        "displaySummary": "話者だけを縦長に見せる",
+        "selectedCandidateId": "speaker_full",
+        "candidateSummary": "話者の顔と体が入る範囲",
+        "selectionReason": "話者のみ画面なので顔を外さないため。"
+      }
+    }
+  ],
+  "telopPlan": [
+    {
+      "sourceSpeechIds": [
+        1,
+        2
+      ],
+      "text": "今日一番大事な話 実は裏でこういう流れがありました",
+      "role": "導入テロップ"
+    },
+    {
+      "sourceSpeechIds": [
+        3
+      ],
+      "text": "だから最後にこの判断になりました",
+      "role": "結論テロップ"
+    }
+  ]
+}

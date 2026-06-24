@@ -1,0 +1,19 @@
+{
+  "kind": "patch_json",
+  "mode": "zev-inspired-adjustment-fixture",
+  "generatedAt": "2026-06-24T00:00:00.000Z",
+  "editPlanUri": "/api/artifacts/sample/edit-plan.json",
+  "changes": [
+    {
+      "target": "動画の流れ",
+      "action": "構成案の順番どおりに複数箇所を使う",
+      "reason": "テーマの入口、展開、結論を人間が確認できるようにするため。"
+    },
+    {
+      "target": "画面とテロップ",
+      "action": "編集案の画面枠と発話ID付きテロップを使う",
+      "reason": "動画生成時に意味判断をやり直さないため。"
+    }
+  ],
+  "renderReady": true
+}

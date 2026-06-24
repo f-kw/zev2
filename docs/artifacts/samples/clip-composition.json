@@ -1,0 +1,62 @@
+{
+  "kind": "composition_json",
+  "mode": "transcript-multi-part-composition",
+  "generatedAt": "2026-06-24T00:00:00.000Z",
+  "sourceUri": "file:///sample/source.mp4",
+  "selectedThemeId": "theme_1",
+  "title": "裏の流れが分かる話",
+  "themeSummary": "表に出ていない流れを説明して、最後の判断につながる話。",
+  "sourceStartMs": 1000,
+  "sourceEndMs": 11000,
+  "parts": [
+    {
+      "id": "part_1",
+      "sourceStartMs": 1000,
+      "sourceEndMs": 7000,
+      "role": "導入",
+      "transcriptText": "ここが今日一番大事な話です。実は裏でこういう流れがありました。",
+      "speechIds": [
+        1,
+        2
+      ],
+      "speechUnits": [
+        {
+          "id": 1,
+          "sourceStartMs": 1000,
+          "sourceEndMs": 3500,
+          "text": "ここが今日一番大事な話です。",
+          "speaker": "speaker_1"
+        },
+        {
+          "id": 2,
+          "sourceStartMs": 3600,
+          "sourceEndMs": 7000,
+          "text": "実は裏でこういう流れがありました。",
+          "speaker": "speaker_1"
+        }
+      ],
+      "connectionNote": "テーマの入口と裏の流れをまとめて見せるため。"
+    },
+    {
+      "id": "part_2",
+      "sourceStartMs": 7200,
+      "sourceEndMs": 11000,
+      "role": "結論",
+      "transcriptText": "だから最後にこの判断になりました。",
+      "speechIds": [
+        3
+      ],
+      "speechUnits": [
+        {
+          "id": 3,
+          "sourceStartMs": 7200,
+          "sourceEndMs": 11000,
+          "text": "だから最後にこの判断になりました。",
+          "speaker": "speaker_1"
+        }
+      ],
+      "connectionNote": "裏の流れを受けた結論として使うため。"
+    }
+  ],
+  "assemblyPlan": "大事な話の入口から裏の流れ、最後の判断までをつなぐ動画にする。"
+}

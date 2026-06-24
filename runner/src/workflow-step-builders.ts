@@ -7,6 +7,7 @@ import type {
   ThemeArtifact,
   TranscriptArtifact
 } from './workflow-artifacts.js';
+import { assertJsonArtifactForKind } from './workflow-artifact-validation.js';
 
 export type StepArtifactBuilder = (context: {
   request: AgentRequest;
@@ -45,55 +46,113 @@ export type WorkflowStepRuntime = {
   writeJsonArtifact: (request: AgentRequest, kind: FileRefKind, payload: unknown) => Promise<ArtifactInfo>;
 };
 
+async function readValidatedRequestArtifact<T>(
+  runtime: WorkflowStepRuntime,
+  state: Zev2State,
+  request: AgentRequest,
+  dependencyType: AgentRequestType,
+  kind: FileRefKind,
+  missingMessage: string,
+  label: string
+): Promise<T> {
+  const artifact = await runtime.readRequestOutputArtifact<T>(
+    state,
+    request,
+    dependencyType,
+    missingMessage
+  );
+  assertJsonArtifactForKind(kind, artifact, label);
+  return artifact;
+}
+
+async function writeValidatedJsonArtifact(
+  runtime: WorkflowStepRuntime,
+  request: AgentRequest,
+  kind: FileRefKind,
+  payload: unknown,
+  label: string
+): Promise<ArtifactInfo> {
+  assertJsonArtifactForKind(kind, payload, label);
+  return runtime.writeJsonArtifact(request, kind, payload);
+}
+
 export function createStepArtifactBuilders(runtime: WorkflowStepRuntime): Record<AgentRequestType, StepArtifactBuilder> {
   return {
     prepare_video: async ({ request }) => runtime.prepareSourceVideo(request),
 
     run_stt: async ({ request, state }) =>
-      runtime.writeJsonArtifact(request, 'transcript_json', await runtime.buildTranscript(request, state)),
+      writeValidatedJsonArtifact(
+        runtime,
+        request,
+        'transcript_json',
+        await runtime.buildTranscript(request, state),
+        'STTが作った文字起こし成果物'
+      ),
 
     propose_clip_themes: async ({ request, state }) => {
-      const transcript = await runtime.readRequestOutputArtifact<TranscriptArtifact>(
+      const transcript = await readValidatedRequestArtifact<TranscriptArtifact>(
+        runtime,
         state,
         request,
         'run_stt',
-        '文字起こし成果物がないためテーマ候補を作れません'
+        'transcript_json',
+        '文字起こし成果物がないためテーマ候補を作れません',
+        'テーマ候補作成が読む文字起こし成果物'
       );
-      return runtime.writeJsonArtifact(request, 'theme_json', await runtime.buildThemeOptionsArtifact(transcript, request));
+      return writeValidatedJsonArtifact(
+        runtime,
+        request,
+        'theme_json',
+        await runtime.buildThemeOptionsArtifact(transcript, request),
+        'テーマ候補作成が作ったテーマ候補成果物'
+      );
     },
 
     build_clip_composition: async ({ request, state }) => {
-      const transcript = await runtime.readRequestOutputArtifact<TranscriptArtifact>(
+      const transcript = await readValidatedRequestArtifact<TranscriptArtifact>(
+        runtime,
         state,
         request,
         'run_stt',
-        '文字起こし成果物がないため構成案を作れません'
+        'transcript_json',
+        '文字起こし成果物がないため構成案を作れません',
+        '複数箇所構成が読む文字起こし成果物'
       );
-      const themes = await runtime.readRequestOutputArtifact<ThemeArtifact>(
+      const themes = await readValidatedRequestArtifact<ThemeArtifact>(
+        runtime,
         state,
         request,
         'propose_clip_themes',
-        'テーマ候補成果物がないため構成案を作れません'
+        'theme_json',
+        'テーマ候補成果物がないため構成案を作れません',
+        '複数箇所構成が読むテーマ候補成果物'
       );
       const selectedThemeId = runtime.selectedThemeIdFromState(state, request.requestDraftId, themes);
-      return runtime.writeJsonArtifact(
+      return writeValidatedJsonArtifact(
+        runtime,
         request,
         'composition_json',
-        runtime.buildClipComposition(themes, transcript, selectedThemeId)
+        runtime.buildClipComposition(themes, transcript, selectedThemeId),
+        '複数箇所構成が作った構成案成果物'
       );
     },
 
     create_edit_plan: async ({ request, state }) => {
-      const composition = await runtime.readRequestOutputArtifact<ClipCompositionArtifact>(
+      const composition = await readValidatedRequestArtifact<ClipCompositionArtifact>(
+        runtime,
         state,
         request,
         'build_clip_composition',
-        '複数箇所の構成案がないため演出案を作れません'
+        'composition_json',
+        '複数箇所の構成案がないため演出案を作れません',
+        '演出作成が読む構成案成果物'
       );
-      return runtime.writeJsonArtifact(
+      return writeValidatedJsonArtifact(
+        runtime,
         request,
         'edit_plan_json',
-        await runtime.buildEditPlanArtifact(request, composition, state)
+        await runtime.buildEditPlanArtifact(request, composition, state),
+        '演出作成が作った編集案成果物'
       );
     },
 
@@ -104,15 +163,24 @@ export function createStepArtifactBuilders(runtime: WorkflowStepRuntime): Record
         'create_edit_plan',
         '編集案がないため微調整できません'
       );
-      return runtime.writeJsonArtifact(request, 'patch_json', runtime.buildPatch(editPlanRef.uri));
+      return writeValidatedJsonArtifact(
+        runtime,
+        request,
+        'patch_json',
+        runtime.buildPatch(editPlanRef.uri),
+        '微調整が作った調整結果成果物'
+      );
     },
 
     render_video: async ({ request, state }) => {
-      const editPlan = await runtime.readRequestOutputArtifact<EditPlanArtifact>(
+      const editPlan = await readValidatedRequestArtifact<EditPlanArtifact>(
+        runtime,
         state,
         request,
         'create_edit_plan',
-        '編集案がないため動画生成できません'
+        'edit_plan_json',
+        '編集案がないため動画生成できません',
+        '動画生成が読む編集案成果物'
       );
       return runtime.renderVideo(request, editPlan, state);
     }
