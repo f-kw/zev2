@@ -19,10 +19,11 @@ export type WorkflowStepRuntime = {
   prepareSourceVideo: (request: AgentRequest) => Promise<ArtifactInfo>;
   buildTranscript: (request: AgentRequest, state: Zev2State) => Promise<TranscriptArtifact>;
   buildThemeOptionsArtifact: (transcript: TranscriptArtifact, request: AgentRequest) => Promise<ThemeArtifact>;
-  buildClipComposition: (
+  buildClipCompositionArtifact: (
     themes: ThemeArtifact,
     transcript: TranscriptArtifact,
-    selectedThemeId: string
+    state: Zev2State,
+    requestDraftId: string
   ) => ClipCompositionArtifact;
   buildEditPlanArtifact: (
     request: AgentRequest,
@@ -31,7 +32,6 @@ export type WorkflowStepRuntime = {
   ) => Promise<EditPlanArtifact>;
   buildPatch: (editPlanUri: string) => PatchArtifact;
   renderVideo: (request: AgentRequest, editPlan: EditPlanArtifact, state: Zev2State) => Promise<ArtifactInfo>;
-  selectedThemeIdFromState: (state: Zev2State, requestDraftId: string, themes: ThemeArtifact) => string;
   requireRequestOutputFileRef: (
     state: Zev2State,
     request: AgentRequest,
@@ -226,7 +226,6 @@ export function createStepArtifactBuilders(runtime: WorkflowStepRuntime): Record
         'テーマ候補成果物がないため構成案を作れません',
         '複数箇所構成が読むテーマ候補成果物'
       );
-      const selectedThemeId = runtime.selectedThemeIdFromState(state, request.requestDraftId, themesInput.artifact);
       return finishStep(
         runtime,
         request,
@@ -236,7 +235,12 @@ export function createStepArtifactBuilders(runtime: WorkflowStepRuntime): Record
           runtime,
           request,
           'composition_json',
-          runtime.buildClipComposition(themesInput.artifact, transcriptInput.artifact, selectedThemeId),
+          runtime.buildClipCompositionArtifact(
+            themesInput.artifact,
+            transcriptInput.artifact,
+            state,
+            request.requestDraftId
+          ),
           '複数箇所構成が作った構成案成果物'
         ),
         '選ばれたテーマに関係する複数箇所の構成案'

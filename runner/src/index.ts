@@ -27,6 +27,7 @@ import {
 import { resolveTelopPlacementArea, type TelopPlacementArea } from './telop-placement.js';
 import { loadTelopStyleProfile, resolveTelopStyle, type ResolvedTelopStyle } from './telop-style.js';
 import { renderRemotionTelopPng } from './telop-remotion.js';
+import { buildClipCompositionArtifact } from './steps/composition.js';
 import { buildTranscriptArtifact } from './steps/transcript.js';
 import { buildThemeOptionsArtifact as buildThemeOptionsArtifactForStep } from './steps/theme-options.js';
 import { speechIdsFromGeminiRequired } from './gemini-speech-ids.js';
@@ -34,9 +35,6 @@ import {
   buildTelopPlanFromSpeechUnits,
   joinTelopSpeechText,
   millisecondsToSeconds,
-  segmentTextByIds,
-  speechRange,
-  speechUnitsByIds,
   uniqueSpeechIds
 } from './transcript-utils.js';
 import type {
@@ -298,72 +296,6 @@ async function buildThemeOptionsArtifact(transcript: TranscriptArtifact, request
     extractGeminiResponseText,
     parseGeminiJsonText
   });
-}
-
-function selectedThemeIdFromState(state: Zev2State, requestDraftId: string, themes: ThemeArtifact): string {
-  const review = lastMatching(
-    state.controlReviewItems,
-    (item) =>
-      item.requestDraftId === requestDraftId &&
-      item.kind === 'theme_selection' &&
-      item.status === 'approved'
-  );
-  const action = findById(state.humanReviewActions, review?.resolvedByActionId);
-  if (!action?.selectedOptionId) {
-    const firstThemeId = themes.themes[0]?.id;
-    if (!firstThemeId) {
-      throw new Error('テーマ候補がないため構成案を作れません');
-    }
-
-    return firstThemeId;
-  }
-
-  return action.selectedOptionId;
-}
-
-function buildClipComposition(themes: ThemeArtifact, transcript: TranscriptArtifact, selectedThemeId: string): ClipCompositionArtifact {
-  const selectedTheme = findById(themes.themes, selectedThemeId);
-  if (!selectedTheme) {
-    throw new Error('選ばれたテーマがテーマ候補にありません');
-  }
-
-  const groupedSpeechIds = transcript.speechUnitGroups.length > 0
-    ? transcript.speechUnitGroups
-    : selectedTheme.relatedSpeechIds.map((speechId) => [speechId]);
-  const relatedIds = new Set(selectedTheme.relatedSpeechIds);
-  const relatedGroups = groupedSpeechIds.filter((group) => group.some((speechId) => relatedIds.has(speechId)));
-  const groups = relatedGroups.length > 0 ? relatedGroups : [selectedTheme.relatedSpeechIds];
-  const parts = groups.map((speechIds, index) => {
-    const partSpeechIds = uniqueSpeechIds(speechIds);
-    const range = speechRange(transcript, partSpeechIds);
-    return {
-      id: `part_${index + 1}`,
-      sourceStartMs: range.sourceStartMs,
-      sourceEndMs: range.sourceEndMs,
-      role: index === 0 ? '導入' : index === groups.length - 1 ? '結論' : '展開',
-      transcriptText: segmentTextByIds(transcript, partSpeechIds),
-      speechIds: partSpeechIds,
-      speechUnits: speechUnitsByIds(transcript, partSpeechIds),
-      connectionNote: index === 0 ? 'テーマを見せる入口として使う' : '前の発話を受けて話の流れをつなぐ'
-    };
-  });
-  const ranges = parts.map((part) => ({ sourceStartMs: part.sourceStartMs, sourceEndMs: part.sourceEndMs }));
-  const firstStartMs = Math.min(...ranges.map((range) => range.sourceStartMs));
-  const lastEndMs = Math.max(...ranges.map((range) => range.sourceEndMs));
-
-  return {
-    kind: 'composition_json',
-    mode: 'transcript-multi-part-composition',
-    generatedAt: new Date().toISOString(),
-    sourceUri: themes.sourceUri,
-    selectedThemeId: selectedTheme.id,
-    title: selectedTheme.title,
-    themeSummary: selectedTheme.summary,
-    sourceStartMs: firstStartMs,
-    sourceEndMs: lastEndMs,
-    parts,
-    assemblyPlan: selectedTheme.compositionNote
-  };
 }
 
 function buildFixtureEditPlan(
@@ -1826,11 +1758,10 @@ const STEP_ARTIFACT_BUILDERS = createStepArtifactBuilders({
   prepareSourceVideo,
   buildTranscript,
   buildThemeOptionsArtifact,
-  buildClipComposition,
+  buildClipCompositionArtifact,
   buildEditPlanArtifact,
   buildPatch,
   renderVideo: renderFixtureVideo,
-  selectedThemeIdFromState,
   requireRequestOutputFileRef,
   readArtifactByUrl,
   writeStepManifest,
