@@ -268,6 +268,46 @@ async function readRequestArtifact(state, runtimeDir, requestDraftId, requestTyp
   return readJsonFile(artifactPathByUri(runtimeDir, fileRef.uri));
 }
 
+async function assertWorkflowStepManifests(runtimeDir, draftId, label, expectedRequestTypes = workflowTypes) {
+  const artifactDir = path.join(runtimeDir, 'artifacts', draftId);
+  const expectedInputs = {
+    prepare_video: [],
+    run_stt: ['prepare_video'],
+    propose_clip_themes: ['run_stt'],
+    build_clip_composition: ['run_stt', 'propose_clip_themes'],
+    create_edit_plan: ['build_clip_composition', 'prepare_video'],
+    apply_adjustment: ['create_edit_plan'],
+    render_video: ['create_edit_plan', 'prepare_video']
+  };
+  const expectedOutputs = {
+    prepare_video: 'source_video',
+    run_stt: 'transcript_json',
+    propose_clip_themes: 'theme_json',
+    build_clip_composition: 'composition_json',
+    create_edit_plan: 'edit_plan_json',
+    apply_adjustment: 'patch_json',
+    render_video: 'output_video'
+  };
+
+  for (const requestType of expectedRequestTypes) {
+    const manifest = await readJsonFile(path.join(artifactDir, `${requestType}-manifest.json`));
+    assertScenario(manifest.kind === 'workflow_step_manifest', `${label}: ${requestType} のmanifest種別が不正です`);
+    assertScenario(manifest.requestDraftId === draftId, `${label}: ${requestType} のmanifestが別の編集コピーを指している`);
+    assertScenario(manifest.stepType === requestType, `${label}: ${requestType} のmanifest工程が不正です`);
+    assertScenario(Array.isArray(manifest.inputs), `${label}: ${requestType} のmanifest入力が配列ではない`);
+    assertScenario(Array.isArray(manifest.outputs), `${label}: ${requestType} のmanifest出力が配列ではない`);
+    const inputTypes = manifest.inputs.map((input) => input.dependencyType).sort();
+    assertScenario(
+      JSON.stringify(inputTypes) === JSON.stringify([...expectedInputs[requestType]].sort()),
+      `${label}: ${requestType} のmanifest入力工程が想定と違う`
+    );
+    assertScenario(
+      manifest.outputs.some((output) => output.kind === expectedOutputs[requestType] && output.uri),
+      `${label}: ${requestType} のmanifest出力が保存されていない`
+    );
+  }
+}
+
 function agentRequestsForDraft(state, requestDraftId) {
   return state.agentRequests
     .filter((request) => request.requestDraftId === requestDraftId)
@@ -312,7 +352,7 @@ async function assertCopiedRestart(apiBaseUrl, sourceDraftId, scope, expectedSta
   return copiedDraft;
 }
 
-async function assertGeneratedDraftCompleted(apiBaseUrl, runtimeDir, draftId, label) {
+async function assertGeneratedDraftCompleted(apiBaseUrl, runtimeDir, draftId, label, expectedManifestTypes = workflowTypes) {
   const state = await requestJson(apiPath(apiBaseUrl, '/state'));
   const finalRequests = agentRequestsForDraft(state, draftId);
   assertScenario(finalRequests.length === 7, `${label}: 実行後の工程数が7件ではない`);
@@ -327,6 +367,7 @@ async function assertGeneratedDraftCompleted(apiBaseUrl, runtimeDir, draftId, la
   const outputBuffer = await readFile(outputPath);
   assertScenario(outputBuffer.length > 0, `${label}: 出力動画ファイルが空です`);
   await assertOutputHasAudibleAudio(outputPath);
+  await assertWorkflowStepManifests(runtimeDir, draftId, label, expectedManifestTypes);
 
   const transcript = await readRequestArtifact(state, runtimeDir, draftId, 'run_stt');
   const themes = await readRequestArtifact(state, runtimeDir, draftId, 'propose_clip_themes');
@@ -405,14 +446,27 @@ async function scenarioAutomaticVideoCreation(apiBaseUrl, runtimeDir) {
   const outputBuffer = await readFile(outputPath);
   assertScenario(outputBuffer.length > 0, '出力動画ファイルが空です');
   await assertOutputHasAudibleAudio(outputPath);
+  await assertWorkflowStepManifests(runtimeDir, draft.id, '初回生成');
 
   const editPlanRestartDraft = await assertCopiedRestart(apiBaseUrl, draft.id, 'edit_plan', 'create_edit_plan');
   await runAgent(apiBaseUrl, runtimeDir);
-  await assertGeneratedDraftCompleted(apiBaseUrl, runtimeDir, editPlanRestartDraft.id, '演出作成前からのコピー再開');
+  await assertGeneratedDraftCompleted(
+    apiBaseUrl,
+    runtimeDir,
+    editPlanRestartDraft.id,
+    '演出作成前からのコピー再開',
+    workflowTypes.slice(workflowTypes.indexOf('create_edit_plan'))
+  );
 
   const themeRestartDraft = await assertCopiedRestart(apiBaseUrl, draft.id, 'theme_selection', 'build_clip_composition');
   await runAgent(apiBaseUrl, runtimeDir);
-  await assertGeneratedDraftCompleted(apiBaseUrl, runtimeDir, themeRestartDraft.id, 'テーマ選択後からのコピー再開');
+  await assertGeneratedDraftCompleted(
+    apiBaseUrl,
+    runtimeDir,
+    themeRestartDraft.id,
+    'テーマ選択後からのコピー再開',
+    workflowTypes.slice(workflowTypes.indexOf('build_clip_composition'))
+  );
 
   const adjustmentRestartDraft = await assertCopiedRestart(apiBaseUrl, draft.id, 'adjustment', 'apply_adjustment');
   const nextAfterMultipleRestarts = await requestJson(apiPath(apiBaseUrl, '/agent-requests/next'));

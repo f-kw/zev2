@@ -1,4 +1,4 @@
-import type { ControlReference, FileRefAccess } from '@zev2/shared';
+import type { AgentRequestType, ControlReference, FileRefAccess, FileRefKind } from '@zev2/shared';
 import type { ShortsScreenLayoutPlan } from './screen-layout.js';
 
 export type ArtifactInfo = {
@@ -154,4 +154,27 @@ export type PatchArtifact = {
     reason: string;
   }>;
   renderReady: boolean;
+};
+
+export type WorkflowStepManifest = {
+  kind: 'workflow_step_manifest';
+  requestDraftId: string;
+  requestId: string;
+  stepType: AgentRequestType;
+  stepLabel: string;
+  createdAt: string;
+  mode?: string;
+  inputs: Array<{
+    dependencyType: AgentRequestType;
+    kind: FileRefKind;
+    uri: string;
+    meaning: string;
+  }>;
+  outputs: Array<{
+    kind: FileRefKind;
+    uri: string;
+    mimeType: string;
+    access: FileRefAccess;
+    meaning: string;
+  }>;
 };

@@ -38,7 +38,8 @@ import type {
   SttSegment,
   ThemeArtifact,
   TranscriptArtifact,
-  TranscriptThemeSeed
+  TranscriptThemeSeed,
+  WorkflowStepManifest
 } from './workflow-artifacts.js';
 import { createStepArtifactBuilders } from './workflow-step-builders.js';
 
@@ -210,16 +211,6 @@ async function readArtifactByUrl<T>(uri: string): Promise<T> {
   return JSON.parse(raw) as T;
 }
 
-async function readRequestOutputArtifact<T>(
-  state: Zev2State,
-  request: AgentRequest,
-  dependencyType: AgentRequestType,
-  missingMessage: string
-): Promise<T> {
-  const fileRef = requireRequestOutputFileRef(state, request, dependencyType, missingMessage);
-  return readArtifactByUrl<T>(fileRef.uri);
-}
-
 function artifactPathByUrl(uri: string): string {
   const prefix = '/api/artifacts/';
   if (!uri.startsWith(prefix)) {
@@ -250,6 +241,12 @@ async function writeJsonArtifact(request: AgentRequest, kind: FileRefKind, paylo
     access: 'internal',
     payload
   };
+}
+
+async function writeStepManifest(request: AgentRequest, manifest: WorkflowStepManifest): Promise<void> {
+  const directory = requestArtifactDir(request);
+  await mkdir(directory, { recursive: true });
+  await writeFile(path.join(directory, `${request.type}-manifest.json`), `${JSON.stringify(manifest, null, 2)}\n`, 'utf8');
 }
 
 async function writeTextArtifact(
@@ -2515,7 +2512,8 @@ const STEP_ARTIFACT_BUILDERS = createStepArtifactBuilders({
   renderVideo: renderFixtureVideo,
   selectedThemeIdFromState,
   requireRequestOutputFileRef,
-  readRequestOutputArtifact,
+  readArtifactByUrl,
+  writeStepManifest,
   writeJsonArtifact
 });
 
