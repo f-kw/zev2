@@ -28,6 +28,11 @@ import { resolveTelopPlacementArea, type TelopPlacementArea } from './telop-plac
 import { loadTelopStyleProfile, resolveTelopStyle, type ResolvedTelopStyle } from './telop-style.js';
 import { renderRemotionTelopPng } from './telop-remotion.js';
 import { buildClipCompositionArtifact } from './steps/composition.js';
+import {
+  prepareSourceVideoArtifact,
+  resolveSourceVideoPathFromState,
+  type SourceVideoArtifactContext
+} from './steps/source-video.js';
 import { buildTranscriptArtifact } from './steps/transcript.js';
 import { buildThemeOptionsArtifact as buildThemeOptionsArtifactForStep } from './steps/theme-options.js';
 import { speechIdsFromGeminiRequired } from './gemini-speech-ids.js';
@@ -42,7 +47,6 @@ import type {
   ClipCompositionArtifact,
   EditPlanArtifact,
   PatchArtifact,
-  SourceVideoArtifact,
   SpeechTimingRef,
   ThemeArtifact,
   TranscriptArtifact,
@@ -266,6 +270,21 @@ async function writeTextArtifact(
     uri: artifactUrl(request, fileName),
     mimeType,
     access: 'internal'
+  };
+}
+
+function sourceVideoArtifactContext(): SourceVideoArtifactContext {
+  return {
+    youtubeDownloaderCommand,
+    sourceVideoFileName: SOURCE_VIDEO_FILE_NAME,
+    sourceVideoMetadataFileName: SOURCE_VIDEO_METADATA_FILE_NAME,
+    workspaceRoot,
+    requestArtifactDir,
+    artifactUrl,
+    artifactPathByUrl,
+    findRequestOutputFileRef,
+    writeJsonArtifact,
+    runCommand
   };
 }
 
@@ -1390,128 +1409,12 @@ function appendTelopOverlayFilters(
   return filters.join(';');
 }
 
-function resolveLocalSourcePath(sourceUri: string): string | undefined {
-  if (sourceUri.startsWith('file://')) {
-    const url = new URL(sourceUri);
-    if (url.hostname && url.hostname !== 'localhost') {
-      return undefined;
-    }
-
-    const filePath = decodeURIComponent(url.pathname);
-    return existsSync(filePath) ? filePath : undefined;
-  }
-
-  if (path.isAbsolute(sourceUri) && existsSync(sourceUri)) {
-    return sourceUri;
-  }
-
-  const workspacePath = path.resolve(workspaceRoot(), sourceUri);
-  return existsSync(workspacePath) ? workspacePath : undefined;
-}
-
-function isYoutubeSourceUri(sourceUri: string): boolean {
-  try {
-    const url = new URL(sourceUri);
-    const hostname = url.hostname.toLowerCase().replace(/^www\./, '');
-    return hostname === 'youtu.be' || hostname === 'youtube.com' || hostname === 'm.youtube.com' || hostname.endsWith('.youtube.com');
-  } catch {
-    return false;
-  }
-}
-
-function findPreparedSourceVideoPath(state: Zev2State, requestDraftId: string): string | undefined {
-  const sourceRef = findRequestOutputFileRef(state, requestDraftId, 'prepare_video');
-  if (!sourceRef?.mimeType.startsWith('video/')) {
-    return undefined;
-  }
-
-  try {
-    const sourcePath = artifactPathByUrl(sourceRef.uri);
-    return existsSync(sourcePath) ? sourcePath : undefined;
-  } catch {
-    return undefined;
-  }
-}
-
 function resolveSourceVideoPath(state: Zev2State, request: AgentRequest): string | undefined {
-  return findPreparedSourceVideoPath(state, request.requestDraftId) ?? resolveLocalSourcePath(request.target.sourceUri);
-}
-
-async function writeSourceVideoMetadata(request: AgentRequest, payload: SourceVideoArtifact): Promise<void> {
-  const directory = requestArtifactDir(request);
-  await mkdir(directory, { recursive: true });
-  await writeFile(path.join(directory, SOURCE_VIDEO_METADATA_FILE_NAME), `${JSON.stringify(payload, null, 2)}\n`, 'utf8');
-}
-
-async function prepareYoutubeSourceVideo(request: AgentRequest): Promise<ArtifactInfo> {
-  const directory = requestArtifactDir(request);
-  const outputPath = path.join(directory, SOURCE_VIDEO_FILE_NAME);
-  await mkdir(directory, { recursive: true });
-
-  try {
-    await runCommand(youtubeDownloaderCommand, [
-      '--no-playlist',
-      '--merge-output-format',
-      'mp4',
-      '-f',
-      'bv*[ext=mp4]+ba[ext=m4a]/b[ext=mp4]/bv*+ba/best',
-      '-o',
-      outputPath,
-      request.target.sourceUri
-    ]);
-  } catch (error) {
-    const errorCode = typeof error === 'object' && error && 'code' in error ? (error as { code?: unknown }).code : undefined;
-    const message = error instanceof Error ? error.message : String(error);
-    if (errorCode === 'ENOENT') {
-      throw new Error(
-        `YouTube動画を取得できません。${youtubeDownloaderCommand} が実行環境にありません。ZEV2_YTDLP_BIN で実行ファイルを指定するか、yt-dlp をPATHに入れてください。`
-      );
-    }
-
-    throw new Error(`YouTube動画を取得できません。\n${message}`);
-  }
-
-  if (!existsSync(outputPath)) {
-    throw new Error('YouTube動画の取得は完了しましたが、保存先の動画ファイルを確認できません');
-  }
-
-  const payload: SourceVideoArtifact = {
-    kind: 'source_video',
-    mode: 'youtube-download',
-    sourceUri: request.target.sourceUri,
-    purpose: request.input.purpose,
-    registeredAt: new Date().toISOString(),
-    localPath: outputPath,
-    fileName: SOURCE_VIDEO_FILE_NAME,
-    downloadTool: youtubeDownloaderCommand
-  };
-  await writeSourceVideoMetadata(request, payload);
-
-  return {
-    path: outputPath,
-    uri: artifactUrl(request, SOURCE_VIDEO_FILE_NAME),
-    mimeType: 'video/mp4',
-    access: 'internal',
-    payload
-  };
+  return resolveSourceVideoPathFromState(state, request, sourceVideoArtifactContext());
 }
 
 async function prepareSourceVideo(request: AgentRequest): Promise<ArtifactInfo> {
-  if (isYoutubeSourceUri(request.target.sourceUri)) {
-    return prepareYoutubeSourceVideo(request);
-  }
-
-  const localPath = resolveLocalSourcePath(request.target.sourceUri);
-  const payload: SourceVideoArtifact = {
-    kind: 'source_video',
-    mode: localPath ? 'local-source-reference' : 'remote-source-reference',
-    sourceUri: request.target.sourceUri,
-    purpose: request.input.purpose,
-    registeredAt: new Date().toISOString(),
-    ...(localPath ? { localPath } : {})
-  };
-
-  return writeJsonArtifact(request, 'source_video', payload);
+  return prepareSourceVideoArtifact(request, sourceVideoArtifactContext());
 }
 
 function selectRenderRange(editPlan: EditPlanArtifact): { sourceStartMs: number; sourceEndMs: number } {
