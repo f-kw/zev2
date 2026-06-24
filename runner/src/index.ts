@@ -11,7 +11,6 @@ import {
   type AgentCompletionInput,
   type AgentRequest,
   type AgentRequestType,
-  type ControlReference,
   type FileRefKind,
   getDryRunMeaningForRequest,
   type Zev2State
@@ -29,6 +28,17 @@ import { resolveTelopPlacementArea, type TelopPlacementArea } from './telop-plac
 import { loadTelopStyleProfile, resolveTelopStyle, type ResolvedTelopStyle } from './telop-style.js';
 import { renderRemotionTelopPng } from './telop-remotion.js';
 import { buildTranscriptArtifact } from './steps/transcript.js';
+import { buildThemeOptionsArtifact as buildThemeOptionsArtifactForStep } from './steps/theme-options.js';
+import { speechIdsFromGeminiRequired } from './gemini-speech-ids.js';
+import {
+  buildTelopPlanFromSpeechUnits,
+  joinTelopSpeechText,
+  millisecondsToSeconds,
+  segmentTextByIds,
+  speechRange,
+  speechUnitsByIds,
+  uniqueSpeechIds
+} from './transcript-utils.js';
 import type {
   ArtifactInfo,
   ClipCompositionArtifact,
@@ -138,11 +148,6 @@ function artifactRoot(): string {
 
 function sanitizePathPart(value: string): string {
   return value.replace(/[^a-zA-Z0-9_-]/g, '_');
-}
-
-function parseCount(label: string): number {
-  const match = label.match(/\d+/);
-  return match ? Number(match[0]) : 3;
 }
 
 function requestArtifactDir(request: AgentRequest): string {
@@ -280,376 +285,19 @@ async function buildTranscript(request: AgentRequest, state: Zev2State): Promise
   });
 }
 
-function segmentTextByIds(transcript: TranscriptArtifact, ids: number[]): string {
-  const idSet = new Set(ids);
-  return transcript.segments
-    .filter((segment) => idSet.has(segment.id))
-    .map((segment) => segment.text)
-    .join('');
-}
-
-function speechUnitsByIds(transcript: TranscriptArtifact, ids: number[]): SpeechTimingRef[] {
-  const idSet = new Set(ids);
-  return transcript.segments
-    .filter((segment) => idSet.has(segment.id))
-    .map((segment) => ({
-      id: segment.id,
-      sourceStartMs: segment.startMs,
-      sourceEndMs: segment.endMs,
-      text: segment.text,
-      ...(segment.speaker ? { speaker: segment.speaker } : {})
-    }));
-}
-
-function joinTelopSpeechText(speechUnits: Array<{ text: string }>): string {
-  return speechUnits
-    .map((speech) => speech.text)
-    .join('')
-    .replace(/\s+/g, ' ')
-    .trim();
-}
-
-function buildTelopPlanFromSpeechUnits(
-  speechUnits: SpeechTimingRef[],
-  role: string
-): EditPlanArtifact['telopPlan'] {
-  const text = joinTelopSpeechText(speechUnits);
-  return text
-    ? [{
-        sourceSpeechIds: speechUnits.map((speech) => speech.id),
-        text,
-        role
-      }]
-    : [];
-}
-
-function uniqueSpeechIds(ids: number[]): number[] {
-  return [...new Set(ids)];
-}
-
-function speechRange(transcript: TranscriptArtifact, speechIds: number[]): { sourceStartMs: number; sourceEndMs: number } {
-  const segments = transcript.segments.filter((segment) => speechIds.includes(segment.id));
-  const first = segments[0] ?? transcript.segments[0];
-  const last = segments[segments.length - 1] ?? first;
-
-  return {
-    sourceStartMs: first.startMs,
-    sourceEndMs: last.endMs
-  };
-}
-
-function buildSampleThemeOptions(transcript: TranscriptArtifact, request: AgentRequest): ThemeArtifact {
-  const requestedCount = parseCount(request.constraints.themeCountLabel);
-  const seeds = transcript.themeSeeds ?? [];
-  if (seeds.length === 0) {
-    throw new Error('テーマ候補の固定データがないため、サンプル用テーマ候補を作れません');
-  }
-
-  const themes = seeds.slice(0, requestedCount).map((seed, index) => {
-    const themeNumber = index + 1;
-    const representativeSpeechIds = uniqueSpeechIds(seed.representativeSpeechIds);
-    const relatedSpeechIds = uniqueSpeechIds(seed.relatedSpeechIds);
-    const representativeText = segmentTextByIds(transcript, representativeSpeechIds);
-    const summary = seed.summary ?? representativeText.slice(0, 48);
-
-    return {
-      id: seed.id ?? `theme_${themeNumber}`,
-      title: seed.title ?? `テーマ${themeNumber}: ${summary.slice(0, 18)}`,
-      summary,
-      representativeText,
-      representativeSpeechIds,
-      relatedSpeechIds,
-      whyItCanBeClipped: seed.reason ?? '文字起こし上で内容のまとまりがあり、切り抜きたいテーマとして選べるため。',
-      compositionNote: seed.compositionNote ?? '選ばれた後に、関係する発話を複数集めて構成案にします。',
-      evidenceRefs: representativeSpeechIds.map((speechId) => ({
-        kind: 'time_range' as const,
-        refId: `speech_${speechId}`,
-        meaning: `代表発話 ${speechId}`
-      }))
-    };
-  });
-
-  return {
-    kind: 'theme_json',
-    mode: 'sample-theme-options',
-    generatedAt: new Date().toISOString(),
-    sourceUri: request.target.sourceUri,
-    themes
-  };
-}
-
 function isSampleRequest(request: AgentRequest): boolean {
   return request.target.sourceUri.startsWith('zev-sample://');
 }
 
-function buildTranscriptLinesForThemePrompt(transcript: TranscriptArtifact): string {
-  const groups = transcript.speechUnitGroups.length > 0
-    ? transcript.speechUnitGroups
-    : transcript.segments.map((segment) => [segment.id]);
-
-  return groups
-    .map((speechIds, index) => {
-      const range = speechRange(transcript, speechIds);
-      return [
-        `発話まとまり${index + 1}`,
-        `発話ID: ${speechIds.join(', ')}`,
-        `時間: ${millisecondsToSeconds(range.sourceStartMs)}秒 - ${millisecondsToSeconds(range.sourceEndMs)}秒`,
-        `本文: ${segmentTextByIds(transcript, speechIds)}`
-      ].join('\n');
-    })
-    .join('\n\n');
-}
-
-function buildGeminiThemePrompt(transcript: TranscriptArtifact, request: AgentRequest): string {
-  const requestedCount = parseCount(request.constraints.themeCountLabel);
-
-  return [
-    '文字起こしを分析し、ショート動画として切り抜けそうなテーマ候補を作ってください。',
-    'テーマ候補はユーザーが選ぶ内容単位です。構成案、テロップ案、動画断片名ではありません。',
-    '音声、テンション、間、笑い、画面変化、映像の見栄えはここでは使いません。発話内容だけで判断してください。',
-    '意味のない反復、歌やBGMの音だけに見える文字列、効果音だけの箇所はテーマ候補にしないでください。',
-    '候補同士で同じ内容を返さないでください。',
-    '切り抜きテーマとして成立する発話がない場合は themes を空配列にしてください。',
-    'テーマが選ばれた後に同じ文字起こしを読み直して複数箇所をつなぐため、代表発話IDと関連発話IDを必ず返してください。',
-    '発話IDは下の文字起こしに存在するものだけを使ってください。',
-    'JSONだけを返してください。',
-    '',
-    '返すJSON:',
-    '{',
-    '  "themes": [',
-    '    {',
-    '      "id": "theme_1",',
-    '      "title": "ユーザーが選びやすい短いテーマ名",',
-    '      "summary": "このテーマで何を見せる動画になるか",',
-    '      "representativeSpeechIds": [1],',
-    '      "relatedSpeechIds": [1, 2, 3],',
-    '      "reason": "切り抜きテーマとして成立する理由",',
-    '      "compositionNote": "最終的にどんな動画になるか"',
-    '    }',
-    '  ]',
-    '}',
-    '',
-    `必要な候補数: ${requestedCount}`,
-    `依頼目的: ${request.input.purpose}`,
-    `希望尺: ${request.constraints.durationLabel}`,
-    '',
-    '文字起こし:',
-    buildTranscriptLinesForThemePrompt(transcript)
-  ].join('\n');
-}
-
-type GeminiThemeResponse = {
-  themes?: unknown;
-};
-
-function themeContentKey(title: string, summary: string, representativeText: string): string {
-  return [title, summary, representativeText]
-    .map((value) => value.replace(/\s+/g, '').trim())
-    .join('\n');
-}
-
-function speechIdsFromGemini(value: unknown, knownIds: Set<number>): number[] {
-  if (!Array.isArray(value)) {
-    return [];
-  }
-
-  return uniqueSpeechIds(
-    value.filter(
-      (item): item is number =>
-        typeof item === 'number' &&
-        Number.isInteger(item) &&
-        knownIds.has(item)
-    )
-  );
-}
-
-function speechIdsFromGeminiRequired(value: unknown, knownIds: Set<number>, label: string): number[] {
-  if (!Array.isArray(value)) {
-    throw new Error(`${label}に発話IDの配列がありません`);
-  }
-
-  const rawSpeechIds = value.map((item) => {
-    if (typeof item !== 'number' || !Number.isInteger(item)) {
-      throw new Error(`${label}に数値ではない発話IDがあります`);
-    }
-
-    return item;
-  });
-  const sourceSpeechIds = uniqueSpeechIds(rawSpeechIds);
-
-  const unknownSpeechIds = sourceSpeechIds.filter((speechId) => !knownIds.has(speechId));
-  if (unknownSpeechIds.length > 0) {
-    throw new Error(`${label}に存在しない発話IDがあります: ${unknownSpeechIds.join(', ')}`);
-  }
-
-  return sourceSpeechIds;
-}
-
-function applyGeminiThemeResponse(
-  transcript: TranscriptArtifact,
-  request: AgentRequest,
-  response: GeminiThemeResponse
-): ThemeArtifact | undefined {
-  if (!Array.isArray(response.themes)) {
-    return undefined;
-  }
-
-  const requestedCount = parseCount(request.constraints.themeCountLabel);
-  const knownIds = new Set(transcript.segments.map((segment) => segment.id));
-  const themes: ThemeArtifact['themes'] = [];
-  const seenContentKeys = new Set<string>();
-  for (const [index, rawTheme] of response.themes.entries()) {
-    const theme = recordFrom(rawTheme);
-    const representativeSpeechIds = speechIdsFromGemini(theme.representativeSpeechIds, knownIds);
-    const relatedSpeechIds = speechIdsFromGemini(theme.relatedSpeechIds, knownIds);
-    const normalizedRelatedSpeechIds = relatedSpeechIds.length > 0 ? relatedSpeechIds : representativeSpeechIds;
-    if (representativeSpeechIds.length === 0 || normalizedRelatedSpeechIds.length === 0) {
-      continue;
-    }
-
-    const title = typeof theme.title === 'string' && theme.title.trim()
-      ? theme.title.trim()
-      : `テーマ ${index + 1}`;
-    const representativeText = segmentTextByIds(transcript, representativeSpeechIds);
-    const summary = typeof theme.summary === 'string' && theme.summary.trim()
-      ? theme.summary.trim()
-      : representativeText;
-    const contentKey = themeContentKey(title, summary, representativeText);
-    if (seenContentKeys.has(contentKey)) {
-      continue;
-    }
-
-    seenContentKeys.add(contentKey);
-
-    themes.push({
-      id: typeof theme.id === 'string' && theme.id.trim()
-        ? sanitizePathPart(theme.id.trim())
-        : `theme_${index + 1}`,
-      title,
-      summary,
-      representativeText,
-      representativeSpeechIds,
-      relatedSpeechIds: normalizedRelatedSpeechIds,
-      whyItCanBeClipped: typeof theme.reason === 'string' && theme.reason.trim()
-        ? theme.reason.trim()
-        : '文字起こし上で内容のまとまりがあり、切り抜きテーマとして選べるため。',
-      compositionNote: typeof theme.compositionNote === 'string' && theme.compositionNote.trim()
-        ? theme.compositionNote.trim()
-        : summary,
-      evidenceRefs: representativeSpeechIds.map((speechId): ControlReference => ({
-        kind: 'time_range',
-        refId: `speech_${speechId}`,
-        meaning: `代表発話 ${speechId}`
-      }))
-    });
-
-    if (themes.length >= requestedCount) {
-      break;
-    }
-  }
-
-  if (themes.length === 0) {
-    return undefined;
-  }
-
-  return {
-    kind: 'theme_json',
-    mode: 'gemini-api-theme-options',
-    generatedAt: new Date().toISOString(),
-    sourceUri: request.target.sourceUri,
-    themes
-  };
-}
-
-async function callGeminiThemeApi(
-  request: AgentRequest,
-  transcript: TranscriptArtifact
-): Promise<ThemeArtifact> {
-  const responseJson = await generateGeminiJsonContent(
-    request,
-    [{ text: buildGeminiThemePrompt(transcript, request) }],
-    'gemini-theme-options-response.json',
-    'テーマ候補作成'
-  );
-  const themeText = extractGeminiResponseText(responseJson);
-  const themeResponse = parseGeminiJsonText(themeText, 'Gemini APIのテーマ候補') as GeminiThemeResponse;
-  const themeArtifact = applyGeminiThemeResponse(transcript, request, themeResponse);
-  if (!themeArtifact) {
-    throw new Error('Gemini APIのテーマ候補に、ユーザーへ提示できる候補がありません');
-  }
-
-  return themeArtifact;
-}
-
 async function buildThemeOptionsArtifact(transcript: TranscriptArtifact, request: AgentRequest): Promise<ThemeArtifact> {
-  if (isSampleRequest(request)) {
-    return buildSampleThemeOptions(transcript, request);
-  }
-
-  if (!useFixedAgentArtifacts) {
-    return callGeminiThemeApi(request, transcript);
-  }
-
-  const raw = await readFile(FIXED_THEME_OPTIONS_PATH, 'utf8');
-  const record = recordFrom(JSON.parse(raw));
-  if (!Array.isArray(record.themes)) {
-    throw new Error('固定テーマ候補のデータにテーマ配列がありません');
-  }
-
-  const knownIds = new Set(transcript.segments.map((segment) => segment.id));
-  const themes = record.themes.map((rawTheme, index) => {
-    const theme = recordFrom(rawTheme);
-    const representativeSpeechIds = speechIdsFromGeminiRequired(
-      theme.representativeSpeechIds,
-      knownIds,
-      `固定テーマ候補 ${index + 1} 件目の代表発話`
-    );
-    const relatedSpeechIds = speechIdsFromGeminiRequired(
-      theme.relatedSpeechIds,
-      knownIds,
-      `固定テーマ候補 ${index + 1} 件目の関連発話`
-    );
-
-    return {
-      id: typeof theme.id === 'string' && theme.id.trim()
-        ? sanitizePathPart(theme.id.trim())
-        : `theme_${index + 1}`,
-      title: typeof theme.title === 'string' && theme.title.trim()
-        ? theme.title.trim()
-        : `テーマ ${index + 1}`,
-      summary: typeof theme.summary === 'string' && theme.summary.trim()
-        ? theme.summary.trim()
-        : segmentTextByIds(transcript, representativeSpeechIds),
-      representativeText: typeof theme.representativeText === 'string' && theme.representativeText.trim()
-        ? theme.representativeText.trim()
-        : segmentTextByIds(transcript, representativeSpeechIds),
-      representativeSpeechIds,
-      relatedSpeechIds,
-      whyItCanBeClipped: typeof theme.whyItCanBeClipped === 'string' && theme.whyItCanBeClipped.trim()
-        ? theme.whyItCanBeClipped.trim()
-        : '文字起こし上で内容のまとまりがあるため。',
-      compositionNote: typeof theme.compositionNote === 'string' && theme.compositionNote.trim()
-        ? theme.compositionNote.trim()
-        : '関連する発話を複数つないでショート動画にします。',
-      evidenceRefs: representativeSpeechIds.map((speechId): ControlReference => ({
-        kind: 'time_range',
-        refId: `speech_${speechId}`,
-        meaning: `代表発話 ${speechId}`
-      }))
-    };
+  return buildThemeOptionsArtifactForStep(transcript, request, {
+    fixedThemeOptionsPath: FIXED_THEME_OPTIONS_PATH,
+    useFixedAgentArtifacts,
+    sanitizePathPart,
+    generateGeminiJsonContent,
+    extractGeminiResponseText,
+    parseGeminiJsonText
   });
-
-  if (themes.length === 0) {
-    throw new Error('固定テーマ候補のデータに使えるテーマがありません');
-  }
-
-  return {
-    kind: 'theme_json',
-    mode: 'sample-theme-options',
-    generatedAt: new Date().toISOString(),
-    sourceUri: request.target.sourceUri,
-    themes
-  };
 }
 
 function selectedThemeIdFromState(state: Zev2State, requestDraftId: string, themes: ThemeArtifact): string {
@@ -1552,10 +1200,6 @@ async function probeVideoDimensions(sourcePath: string): Promise<{ width: number
     width: Math.round(width),
     height: Math.round(height)
   };
-}
-
-function millisecondsToSeconds(valueMs: number): string {
-  return (valueMs / 1000).toFixed(3);
 }
 
 type RenderTelopEvent = {
