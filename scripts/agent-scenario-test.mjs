@@ -177,10 +177,36 @@ async function runAgent(apiBaseUrl, runtimeDir) {
       GCP_PROJECT_ID: '',
       ZEV2_RUNTIME_DIR: runtimeDir,
       ZEV2_API_BASE_URL: apiBaseUrl,
-      ZEV2_WORKSPACE_ROOT: workspaceRoot
+      ZEV2_WORKSPACE_ROOT: workspaceRoot,
+      ZEV2_USE_FIXED_AGENT_ARTIFACTS: '1'
     },
     timeoutMs: 180000
   });
+}
+
+async function runAgentWithoutFixedDataExpectFailure(apiBaseUrl, runtimeDir) {
+  let failed = false;
+  try {
+    await runProcess('node', ['runner/dist/index.js', '--max-steps=2'], {
+      env: {
+        GEMINI_API_KEY: '',
+        GOOGLE_API_KEY: '',
+        GOOGLE_CLOUD_PROJECT: '',
+        PROJECT_ID: '',
+        GCP_PROJECT_ID: '',
+        ZEV2_STT_SERVER_URL: '',
+        ZEV_STT_SERVER_URL: '',
+        ZEV2_RUNTIME_DIR: runtimeDir,
+        ZEV2_API_BASE_URL: apiBaseUrl,
+        ZEV2_WORKSPACE_ROOT: workspaceRoot
+      },
+      timeoutMs: 120000
+    });
+  } catch {
+    failed = true;
+  }
+
+  assertScenario(failed, '固定確認フラグなしでSTT接続先がないのにrunnerが成功している');
 }
 
 function apiPath(apiBaseUrl, routePath) {
@@ -223,6 +249,23 @@ async function assertOutputHasAudibleAudio(outputPath) {
 
   assertScenario(sampleCount > 0, '出力動画の音声サンプルがない');
   assertScenario(maxVolume && maxVolume !== '-inf', '出力動画の音声が無音になっている');
+}
+
+async function readJsonFile(filePath) {
+  return JSON.parse(await readFile(filePath, 'utf8'));
+}
+
+function artifactPathByUri(runtimeDir, uri) {
+  const prefix = '/api/artifacts/';
+  assertScenario(uri.startsWith(prefix), `成果物URIが不正です: ${uri}`);
+  return path.join(runtimeDir, 'artifacts', ...uri.slice(prefix.length).split('/').map(decodeURIComponent));
+}
+
+async function readRequestArtifact(state, runtimeDir, requestDraftId, requestType) {
+  const request = agentRequestsForDraft(state, requestDraftId).find((item) => item.type === requestType);
+  const fileRef = state.fileRefs.find((item) => item.id === request?.result?.fileRefId);
+  assertScenario(fileRef?.uri, `${requestType}: 成果物参照が保存されていない`);
+  return readJsonFile(artifactPathByUri(runtimeDir, fileRef.uri));
 }
 
 function agentRequestsForDraft(state, requestDraftId) {
@@ -284,6 +327,37 @@ async function assertGeneratedDraftCompleted(apiBaseUrl, runtimeDir, draftId, la
   const outputBuffer = await readFile(outputPath);
   assertScenario(outputBuffer.length > 0, `${label}: 出力動画ファイルが空です`);
   await assertOutputHasAudibleAudio(outputPath);
+
+  const transcript = await readRequestArtifact(state, runtimeDir, draftId, 'run_stt');
+  const themes = await readRequestArtifact(state, runtimeDir, draftId, 'propose_clip_themes');
+  const composition = await readRequestArtifact(state, runtimeDir, draftId, 'build_clip_composition');
+  const editPlan = await readRequestArtifact(state, runtimeDir, draftId, 'create_edit_plan');
+  const expectedThemeId = themes.themes[0]?.id;
+  assertScenario(
+    transcript.mode === 'zev-sample-stt',
+    `${label}: 固定確認の文字起こしが通常STT結果として保存されている`
+  );
+  assertScenario(
+    themes.mode === 'sample-theme-options',
+    `${label}: 固定確認のテーマ候補がGemini実行済みとして保存されている`
+  );
+  assertScenario(expectedThemeId, `${label}: テーマ候補が保存されていない`);
+  assertScenario(
+    composition.selectedThemeId === expectedThemeId,
+    `${label}: 構成案が前工程のテーマ候補を反映していない`
+  );
+  assertScenario(
+    editPlan.selectedThemeId === composition.selectedThemeId,
+    `${label}: 編集案が構成案のテーマを反映していない`
+  );
+  assertScenario(
+    editPlan.renderSegments.length === composition.parts.length,
+    `${label}: 編集案の動画断片数が構成案と一致していない`
+  );
+  assertScenario(
+    editPlan.mode === 'sample-edit-plan',
+    `${label}: Gemini APIを使わない固定確認でGemini実行済みの編集案として保存されている`
+  );
 }
 
 async function scenarioAutomaticVideoCreation(apiBaseUrl, runtimeDir) {
@@ -336,13 +410,44 @@ async function scenarioAutomaticVideoCreation(apiBaseUrl, runtimeDir) {
   await runAgent(apiBaseUrl, runtimeDir);
   await assertGeneratedDraftCompleted(apiBaseUrl, runtimeDir, editPlanRestartDraft.id, '演出作成前からのコピー再開');
 
-  await assertCopiedRestart(apiBaseUrl, draft.id, 'theme_selection', 'build_clip_composition');
+  const themeRestartDraft = await assertCopiedRestart(apiBaseUrl, draft.id, 'theme_selection', 'build_clip_composition');
+  await runAgent(apiBaseUrl, runtimeDir);
+  await assertGeneratedDraftCompleted(apiBaseUrl, runtimeDir, themeRestartDraft.id, 'テーマ選択後からのコピー再開');
+
   const adjustmentRestartDraft = await assertCopiedRestart(apiBaseUrl, draft.id, 'adjustment', 'apply_adjustment');
   const nextAfterMultipleRestarts = await requestJson(apiPath(apiBaseUrl, '/agent-requests/next'));
   assertScenario(
     nextAfterMultipleRestarts.request?.requestDraftId === adjustmentRestartDraft.id &&
       nextAfterMultipleRestarts.request?.type === 'apply_adjustment',
     '複数の作り直し候補があるとき、最後に作った編集コピーが次の実行対象になっていない'
+  );
+
+  const noFixedDraftInput = {
+    purpose: '固定データなしではSTT接続が必要になることを確認する',
+    sourceUri: fixedSourceUri,
+    durationLabel: '60秒以内',
+    themeCountLabel: '3テーマ',
+    geminiModelName: 'gemini-3.5-flash',
+    preset: 'shorts_default'
+  };
+  const noFixedCreated = await requestJson(apiPath(apiBaseUrl, '/request-drafts'), {
+    method: 'POST',
+    body: JSON.stringify(noFixedDraftInput)
+  });
+  await requestJson(apiPath(apiBaseUrl, `/request-drafts/${noFixedCreated.draft.id}/approve`), {
+    method: 'POST'
+  });
+  await runAgentWithoutFixedDataExpectFailure(apiBaseUrl, runtimeDir);
+  const noFixedState = await requestJson(apiPath(apiBaseUrl, '/state'));
+  const noFixedRequests = agentRequestsForDraft(noFixedState, noFixedCreated.draft.id);
+  const noFixedTranscriptRequest = noFixedRequests.find((request) => request.type === 'run_stt');
+  assertScenario(
+    noFixedTranscriptRequest?.status === 'failed',
+    '固定確認フラグなしでSTT接続先がないとき、文字起こし工程が失敗になっていない'
+  );
+  assertScenario(
+    noFixedTranscriptRequest.errorMessage?.includes('ローカルSTTサーバ'),
+    '固定確認フラグなしのSTT失敗理由がユーザーに分かる文になっていない'
   );
 }
 
