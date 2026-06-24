@@ -28,6 +28,7 @@ import { resolveTelopPlacementArea, type TelopPlacementArea } from './telop-plac
 import { loadTelopStyleProfile, resolveTelopStyle, type ResolvedTelopStyle } from './telop-style.js';
 import { renderRemotionTelopPng } from './telop-remotion.js';
 import { buildClipCompositionArtifact } from './steps/composition.js';
+import { buildPatchArtifact } from './steps/patch.js';
 import {
   prepareSourceVideoArtifact,
   resolveSourceVideoPathFromState,
@@ -997,25 +998,7 @@ async function buildEditPlanArtifact(
 }
 
 function buildPatch(editPlanUri: string): PatchArtifact {
-  return {
-    kind: 'patch_json',
-    mode: 'zev-inspired-adjustment-fixture',
-    generatedAt: new Date().toISOString(),
-    editPlanUri,
-    changes: [
-      {
-        target: '動画の流れ',
-        action: '複数の発話箇所をこの順番で使う',
-        reason: 'テーマの入口から展開までを確認用動画として見られるようにするため'
-      },
-      {
-        target: '画面とテロップ',
-        action: '各断片で見せる範囲と表示文を決める',
-        reason: '動画にしたときに必要な場面が切れず、内容を追えるようにするため'
-      }
-    ],
-    renderReady: true
-  };
+  return buildPatchArtifact(editPlanUri);
 }
 
 function runCommand(command: string, args: string[], options?: { env?: NodeJS.ProcessEnv }): Promise<void> {
