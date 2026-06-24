@@ -13,6 +13,8 @@
 backendはSTT、LLM、Gemini API、動画生成、完成品レビューを直接実行しない。
 実処理はAIエージェントrunnerやCodex側の処理が行い、backendには結果と成果物参照だけを返す。
 
+7工程、作り直し、UI導線、runner実行条件の正本は [zev2-flow-contract.md](./zev2-flow-contract.md)。
+
 ## 現時点の形
 
 - UI操作は「承認してAIに渡す」の1操作。

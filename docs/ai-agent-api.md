@@ -4,6 +4,8 @@
 UIは人間が依頼を作成し、実行前に承認するための画面です。
 AIエージェントは承認後の作業だけをAPIで取得し、外部処理の結果をAPIへ返します。
 
+7工程、作り直し、ゲート、UI導線、runner実行条件の正本は [zev2-flow-contract.md](./zev2-flow-contract.md) です。
+
 ## 前提
 
 - Base URL は開発環境では `http://localhost:8080/api`。

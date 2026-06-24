@@ -178,6 +178,7 @@ pnpm run type-check
 
 ## 次に見る文書
 
+- 7工程と作り直しの固定仕様: `docs/zev2-flow-contract.md`
 - AIエージェントに渡す仕様: `docs/ai-agent-api.md`
 - 残タスク一覧: `docs/order.md`
 - dry-run runner: `docs/runner-dry-run.md`

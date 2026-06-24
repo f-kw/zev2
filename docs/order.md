@@ -1,6 +1,7 @@
 # 残タスク一覧
 
 レビュー時は、まず [review-brief.md](./review-brief.md) だけを確認する。
+7工程、作り直し、UI導線、runner実行条件を判断する場合は [zev2-flow-contract.md](./zev2-flow-contract.md) を正本として確認する。
 詳細が必要になった場合だけ、現在の実装範囲は [current-implementation.md](./current-implementation.md)、AIエージェント向けAPIは [ai-agent-api.md](./ai-agent-api.md) を確認する。
 
 ## task-001 最小E2E dry-run実行 実装済み
