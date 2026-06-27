@@ -324,6 +324,28 @@ async function readRequestArtifact(state, runtimeDir, requestDraftId, requestTyp
   return readJsonFile(artifactPathByUri(runtimeDir, fileRef.uri));
 }
 
+function uniqueSpeechIds(speechIds) {
+  return [...new Set(speechIds)];
+}
+
+function sameSpeechIds(leftSpeechIds, rightSpeechIds) {
+  const left = uniqueSpeechIds(leftSpeechIds);
+  const right = uniqueSpeechIds(rightSpeechIds);
+  return left.length === right.length && left.every((speechId, index) => speechId === right[index]);
+}
+
+function assertTelopsDoNotCoverWholeSegments(editPlan, label) {
+  for (const [telopIndex, telop] of editPlan.telopPlan.entries()) {
+    const coversWholeSegment = editPlan.renderSegments.some((segment) => (
+      sameSpeechIds(telop.sourceSpeechIds, segment.speechIds)
+    ));
+    assertScenario(
+      !coversWholeSegment,
+      `${label}: テロップ${telopIndex + 1}が動画断片全体を1枚で表示している`
+    );
+  }
+}
+
 async function assertWorkflowStepManifests(runtimeDir, draftId, label, expectedRequestTypes = workflowTypes) {
   const artifactDir = path.join(runtimeDir, 'artifacts', draftId);
   const expectedInputs = {
@@ -462,6 +484,7 @@ async function assertGeneratedDraftCompleted(apiBaseUrl, runtimeDir, draftId, la
     editPlan.renderSegments.length === composition.parts.length,
     `${label}: 編集案の動画断片数が使用素材構成案と一致していない`
   );
+  assertTelopsDoNotCoverWholeSegments(editPlan, label);
   assertScenario(
     editPlan.mode === 'sample-edit-plan',
     `${label}: Gemini APIを使わない固定確認でGemini実行済みの編集案として保存されている`
@@ -517,6 +540,8 @@ async function scenarioAutomaticVideoCreation(apiBaseUrl, runtimeDir) {
   assertScenario(outputBuffer.length > 0, '出力動画ファイルが空です');
   await assertOutputHasAudibleAudio(outputPath);
   await assertWorkflowStepManifests(runtimeDir, draft.id, '初回生成');
+  const editPlan = await readRequestArtifact(state, runtimeDir, draft.id, 'create_edit_plan');
+  assertTelopsDoNotCoverWholeSegments(editPlan, '初回生成');
 
   const editPlanRestartDraft = await assertCopiedRestart(apiBaseUrl, draft.id, 'edit_plan', 'create_edit_plan');
   await runAgentApprovingReviews(apiBaseUrl, runtimeDir, editPlanRestartDraft.id);

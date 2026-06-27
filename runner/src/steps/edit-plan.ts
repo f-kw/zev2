@@ -16,7 +16,6 @@ import {
 } from '../screen-layout.js';
 import { speechIdsFromGeminiRequired } from '../gemini-speech-ids.js';
 import {
-  buildTelopPlanFromSpeechUnits,
   joinTelopSpeechText,
   millisecondsToSeconds,
   uniqueSpeechIds
@@ -76,6 +75,35 @@ type CandidatePreviewInput = {
   data: string;
 };
 
+const TELOP_BOUNDARY_PATTERN = /[、。！？!?]$/;
+const FIXTURE_TELOP_CLAUSE_ENDINGS = [
+  'なのですが',
+  'ですが',
+  'でしょうかって',
+  'でしょうか',
+  'なんですよ',
+  'じゃないですよ',
+  'ありがとうございますね',
+  'みたいな',
+  'なんだろう',
+  'できない',
+  'どうしよう',
+  'いいんだろ',
+  '分かんねえ',
+  'リオナから',
+  '心をね',
+  '男気',
+  'いるので',
+  'したいですと',
+  '思いながら',
+  '来てくれて',
+  '感じで',
+  '言って',
+  'じゃなくて',
+  'だろう',
+  'やん'
+];
+
 function isSampleRequest(request: AgentRequest): boolean {
   return request.target.sourceUri.startsWith('zev-sample://');
 }
@@ -115,9 +143,52 @@ function buildFixtureEditPlan(
       screenLayout: screenLayoutForPart?.(part, index) ?? buildDefaultScreenLayoutPlan()
     })),
     telopPlan: composition.parts.flatMap((part) => (
-      buildTelopPlanFromSpeechUnits(part.speechUnits, part.role)
+      buildReadableFixtureTelopPlan(part.speechUnits, part.role)
     ))
   };
+}
+
+function buildReadableFixtureTelopPlan(
+  speechUnits: SpeechTimingRef[],
+  role: string
+): EditPlanArtifact['telopPlan'] {
+  const groups: SpeechTimingRef[][] = [];
+  let currentGroup: SpeechTimingRef[] = [];
+
+  for (const speech of speechUnits) {
+    currentGroup.push(speech);
+    if (isFixtureTelopBoundary(currentGroup)) {
+      groups.push(currentGroup);
+      currentGroup = [];
+    }
+  }
+
+  if (currentGroup.length > 0) {
+    const lastGroup = groups[groups.length - 1];
+    if (currentGroup.length === 1 && lastGroup) {
+      lastGroup.push(...currentGroup);
+    } else {
+      groups.push(currentGroup);
+    }
+  }
+
+  const fallbackGroups = groups.length > 0 ? groups : [speechUnits];
+  return fallbackGroups
+    .map((group) => ({
+      sourceSpeechIds: group.map((speech) => speech.id),
+      text: joinTelopSpeechText(group),
+      role
+    }))
+    .filter((telop) => telop.sourceSpeechIds.length > 1 && telop.text.length > 0);
+}
+
+function isFixtureTelopBoundary(speechUnits: SpeechTimingRef[]): boolean {
+  if (speechUnits.length <= 1) {
+    return false;
+  }
+
+  const text = joinTelopSpeechText(speechUnits);
+  return TELOP_BOUNDARY_PATTERN.test(text) || FIXTURE_TELOP_CLAUSE_ENDINGS.some((ending) => text.endsWith(ending));
 }
 
 function speechUnitsForTelopIds(
@@ -151,6 +222,9 @@ function normalizeGeminiTelopPlan(
     if (speechUnits.length < 2) {
       throw new Error(`Gemini APIのテロップ案 ${index + 1} 件目は、表示文に対応する複数の発話IDが必要です`);
     }
+    if (matchesEntireRenderSegment(renderSegments, speechUnits.map((speech) => speech.id))) {
+      throw new Error(`Gemini APIのテロップ案 ${index + 1} 件目が断片全体を1件のテロップにしています`);
+    }
 
     const text = telop.text.trim() || joinTelopSpeechText(speechUnits);
     if (!text) {
@@ -173,6 +247,18 @@ function normalizeGeminiTelopPlan(
   }
 
   return normalized;
+}
+
+function matchesEntireRenderSegment(
+  renderSegments: EditPlanArtifact['renderSegments'],
+  sourceSpeechIds: number[]
+): boolean {
+  const normalizedIds = uniqueSpeechIds(sourceSpeechIds);
+  return renderSegments.some((segment) => {
+    const segmentIds = uniqueSpeechIds(segment.speechIds);
+    return segmentIds.length === normalizedIds.length
+      && segmentIds.every((speechId, index) => speechId === normalizedIds[index]);
+  });
 }
 
 function sampleScreenLayoutPlanForPart(index: number): ShortsScreenLayoutPlan {
@@ -295,6 +381,7 @@ function buildGeminiEditPlanPrompt(composition: ClipCompositionArtifact, request
     'テロップの区切りは文脈を読んで決めてください。プログラム側では日本語の文節推定や例外処理で直しません。',
     '文章の途中、語の途中、不自然な接続語だけで切らないでください。',
     '1テロップには、表示文に対応する連続した複数の発話IDを入れてください。1 IDだけ、断片全体1件、時刻指定は禁止です。',
+    '断片全体の文字起こしを1つのテロップにまとめないでください。読点、句点、問いかけ、返答など、人間が自然に読める意味の区切りごとに複数のtelopPlanへ分けてください。',
     'JSONだけを返してください。',
     '',
     '画面枠:',

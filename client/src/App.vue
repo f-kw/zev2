@@ -3,6 +3,7 @@ import { computed, onBeforeUnmount, onMounted, reactive, ref, watch } from 'vue'
 import {
   DEFAULT_GEMINI_MODEL,
   findById,
+  uriWithRef,
   type AgentRequest,
   type ControlReviewItem,
   type RequestDraftInput
@@ -130,7 +131,8 @@ const outputVideoUri = computed(() => {
     return '';
   }
 
-  return findById(store.state.fileRefs, fileRefId)?.uri ?? '';
+  const fileRef = findById(store.state.fileRefs, fileRefId);
+  return fileRef?.uri ? uriWithRef(fileRef.uri, fileRefId) : '';
 });
 
 const canRedoVideo = computed(() =>
