@@ -149,7 +149,7 @@ backend は `http://localhost:8080/api`。
 UIで承認するとrunnerは自動起動する。
 UIは状態APIを更新しながら完了状態を確認する。
 `pnpm run runner:dry-run` は、開発中に残キューだけ処理したい場合の手動実行用。
-通常起動のSTT、テーマ探索、演出作成の切替は `config/runtime.json` で行う。
+通常起動のSTT、テーマ探索、演出作成の切替は `config/runtime.jsonc` で行う。
 今は `stt.mode`、`themeExploration.mode`、`editPlan.mode` が `fixed` なので、固定済みの文字起こし、テーマ候補、演出案を使う。
 実STTを使う場合は `stt.mode` を `local` にし、`stt.localServerUrl` にローカルSTTサーバを指定する。
 Gemini APIでテーマ探索と演出作成を行う場合は、`themeExploration.mode` と `editPlan.mode` を `gemini` にする。

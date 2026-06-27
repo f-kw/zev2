@@ -1,0 +1,36 @@
+{
+  // stt.mode:
+  // - "fixed": 固定済みの文字起こしを使う。今のダミー確認用。
+  // - "local": 動画から音声を抜き出し、localServerUrl のローカルSTTへ送る。
+  "stt": {
+    "mode": "fixed",
+
+    // stt.mode が "local" のときだけ使う。
+    // STTサーバのIPは変わる前提なので、変わったらここを書き換える。
+    "localServerUrl": "http://192.168.1.7:8000",
+
+    // STTへ渡す言語。通常は "ja-JP" のままでよい。
+    "language": "ja-JP"
+  },
+
+  // themeExploration.mode:
+  // - "fixed": 固定済みのテーマ候補を使う。今のダミー確認用。
+  // - "gemini": 文字起こしをGemini APIへ送り、切り抜きテーマ候補を作る。
+  "themeExploration": {
+    "mode": "fixed"
+  },
+
+  // editPlan.mode:
+  // - "fixed": 固定の演出案と表示枠を使う。今のダミー確認用。
+  // - "gemini": 動画断片をGemini APIへ送り、演出案と表示枠を作る。
+  "editPlan": {
+    "mode": "fixed"
+  },
+
+  // 新規依頼で最初に使う入力。
+  // defaultUri は、ローカルファイルパス、workspaceからの相対パス、YouTube URLを指定できる。
+  "source": {
+    "defaultUri": "runtime/artifacts/draft_w4Lp9IJC6pQl3FsRfFL9t/source-video.mp4",
+    "defaultPurpose": "固定データでショート動画を作成する"
+  }
+}

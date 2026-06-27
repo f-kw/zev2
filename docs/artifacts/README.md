@@ -165,7 +165,7 @@
 
 固定確認を使う場合:
 
-- `config/runtime.json` で対象工程の `mode` を `fixed` にする。
+- `config/runtime.jsonc` で対象工程の `mode` を `fixed` にする。
 - 文字起こし、テーマ候補、編集案は `sample` 系の `mode` として保存する。
 
 通常実行の場合:
