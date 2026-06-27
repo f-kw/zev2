@@ -467,6 +467,27 @@ function assertApprovedReviewKinds(state, requestDraftId, kinds, label) {
   }
 }
 
+function assertMaterialReviewText(review, label) {
+  assertScenario(
+    review.title === '使う場面の確認',
+    `${label}: 使用素材確認の見出しが人間向けではない`
+  );
+  assertScenario(
+    review.humanQuestion === 'この場面の組み合わせで進めますか',
+    `${label}: 使用素材確認の質問文が人間向けではない`
+  );
+  for (const option of review.options) {
+    assertScenario(
+      /^使う場面 \d+$/.test(option.title),
+      `${label}: 使用素材確認の候補名が構成ラベルのまま表示されている`
+    );
+    assertScenario(
+      !['導入', '展開', '結論'].includes(option.title),
+      `${label}: AI内部向けの構成ラベルが候補名に出ている`
+    );
+  }
+}
+
 async function assertCopiedRestart(apiBaseUrl, sourceDraftId, scope, expectedStartType) {
   const response = await requestJson(apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/request-generated-video-changes`), {
     method: 'POST',
@@ -565,6 +586,7 @@ async function assertGeneratedDraftCompleted(apiBaseUrl, runtimeDir, draftId, la
 async function assertMaterialReselectFromMaterialConfirmation(apiBaseUrl, runtimeDir) {
   const draft = await createApprovedScenarioDraft(apiBaseUrl, '使用素材確認から素材を選び直す');
   const { review } = await runDraftUntilReview(apiBaseUrl, runtimeDir, draft.id, 'material_confirmation');
+  assertMaterialReviewText(review, '素材選び直し前');
   const instruction = 'ゲーム画面が分かる場面を優先する';
 
   const response = await requestJson(apiPath(apiBaseUrl, `/control-reviews/${review.id}/request-changes`), {
@@ -605,6 +627,7 @@ async function assertMaterialReselectFromMaterialConfirmation(apiBaseUrl, runtim
 async function assertContentReselectFromMaterialConfirmation(apiBaseUrl, runtimeDir) {
   const draft = await createApprovedScenarioDraft(apiBaseUrl, '使用素材確認から内容を選び直す');
   const { review } = await runDraftUntilReview(apiBaseUrl, runtimeDir, draft.id, 'material_confirmation');
+  assertMaterialReviewText(review, '内容選び直し前');
 
   const response = await requestJson(apiPath(apiBaseUrl, `/control-reviews/${review.id}/request-changes`), {
     method: 'POST',

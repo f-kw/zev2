@@ -619,7 +619,7 @@ function reviewTitle(kind: ControlReviewKind): string {
   }
 
   if (kind === 'material_confirmation') {
-    return '使用素材確認';
+    return '使う場面の確認';
   }
 
   return '動画生成前の確認';
@@ -631,7 +631,7 @@ function reviewSummary(kind: ControlReviewKind, agentRequest: AgentRequest): str
   }
 
   if (kind === 'material_confirmation') {
-    return `${agentRequest.label} の結果を確認して、この素材で演出作成へ進めるか判断します`;
+    return '切り抜きに使う場面の組み合わせを確認します';
   }
 
   return `${agentRequest.label} の結果を確認して、動画生成へ進めるか判断します`;

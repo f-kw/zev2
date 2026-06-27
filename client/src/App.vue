@@ -216,7 +216,7 @@ function approveReviewLabel(review: ControlReviewItem): string {
   }
 
   if (isMaterialConfirmationReview(review)) {
-    return 'この素材で演出へ進む';
+    return 'この場面で演出へ進む';
   }
 
   return '確認用動画を作る';
@@ -243,7 +243,7 @@ function defaultReviewReason(
     }
 
     if (review.kind === 'material_confirmation') {
-      return '同じ内容で素材を選び直す';
+      return '同じ内容で使う場面を選び直す';
     }
 
     if (scope === 'theme_reselect') {
@@ -266,7 +266,7 @@ function reviewChangePromptMessage(review: ControlReviewItem, scope?: ReviewChan
   }
 
   if (review.kind === 'material_confirmation') {
-    return 'どんな素材に選び直したいか入力してください';
+    return 'どんな場面に選び直したいか入力してください';
   }
 
   if (review.kind === 'render_readiness' && scope === 'theme_reselect') {
@@ -287,7 +287,7 @@ function reasonFromDialog(review: ControlReviewItem, scope?: ReviewChangeScope):
   }
 
   if (review.kind === 'material_confirmation' && scope !== 'theme_reselect' && !input.trim()) {
-    window.alert('素材を選び直す指示を入力してください');
+    window.alert('使う場面を選び直す指示を入力してください');
     return undefined;
   }
 
@@ -488,7 +488,7 @@ watch(
           :disabled="store.loading"
           @click="submitActiveReview('request_changes', 'material_reselect')"
         >
-          {{ activeReviewAction === 'request_changes:material_reselect' ? '処理中' : '素材を選び直す' }}
+          {{ activeReviewAction === 'request_changes:material_reselect' ? '処理中' : '使う場面を選び直す' }}
         </button>
         <button
           v-if="isMaterialConfirmationReview(activeReviewItem)"

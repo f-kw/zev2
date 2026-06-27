@@ -617,10 +617,10 @@ function buildContentSelectionDecision(payload: ThemeArtifact): AgentDecisionInp
 }
 
 function buildMaterialConfirmationDecision(payload: ClipCompositionArtifact): AgentDecisionInput {
-  const options: ControlReviewOption[] = payload.parts.map((part) => ({
+  const options: ControlReviewOption[] = payload.parts.map((part, index) => ({
     id: part.id,
-    title: part.role,
-    summary: `${formatSeconds(part.sourceStartMs)} - ${formatSeconds(part.sourceEndMs)} / ${part.transcriptText}`,
+    title: `使う場面 ${index + 1}`,
+    summary: `${formatSeconds(part.sourceStartMs)} - ${formatSeconds(part.sourceEndMs)}\n${part.transcriptText}`,
     evidenceRefs: [{
       refId: part.id,
       kind: 'time_range',
@@ -630,12 +630,12 @@ function buildMaterialConfirmationDecision(payload: ClipCompositionArtifact): Ag
 
   return {
     decisionType: 'material_confirmation',
-    decision: '使用素材構成案を提示する',
-    reason: '選ばれた内容に関係する複数の場面を集め、演出作成へ進める素材があるか人間が判断できる状態にする',
+    decision: '使う場面の組み合わせを提示する',
+    reason: '切り抜きに使う場面を並べ、人間が流れを確認できる状態にする',
     reviewOptions: options,
     proposedNextState: 'review_required',
     requiresHumanReview: true,
-    humanQuestion: 'この素材で演出作成へ進めますか',
+    humanQuestion: 'この場面の組み合わせで進めますか',
     ruleIds: ['control-plane:material-confirmation-required']
   };
 }
