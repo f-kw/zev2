@@ -587,21 +587,19 @@ async function assertMaterialReselectFromMaterialConfirmation(apiBaseUrl, runtim
   const draft = await createApprovedScenarioDraft(apiBaseUrl, '使用素材確認から素材を選び直す');
   const { review } = await runDraftUntilReview(apiBaseUrl, runtimeDir, draft.id, 'material_confirmation');
   assertMaterialReviewText(review, '素材選び直し前');
-  const instruction = 'ゲーム画面が分かる場面を優先する';
 
   const response = await requestJson(apiPath(apiBaseUrl, `/control-reviews/${review.id}/request-changes`), {
     method: 'POST',
     body: JSON.stringify({
-      reason: instruction,
       scope: 'material_reselect'
     })
   });
 
   const copiedDraft = response.state.requestDrafts.find((item) =>
     item.id !== draft.id &&
-    item.purpose.includes(`素材選び直し指示: ${instruction}`)
+    item.purpose.includes('同じ内容で使う場面を選び直す')
   );
-  assertScenario(copiedDraft, '素材選び直しで指示付きの編集コピーが作られていない');
+  assertScenario(copiedDraft, 'コメントなしの素材選び直しで編集コピーが作られていない');
 
   const copiedRequests = agentRequestsForDraft(response.state, copiedDraft.id);
   const expectedStartIndex = workflowTypes.indexOf('build_clip_composition');
@@ -619,8 +617,8 @@ async function assertMaterialReselectFromMaterialConfirmation(apiBaseUrl, runtim
   const completedState = await requestJson(apiPath(apiBaseUrl, '/state'));
   const composition = await readRequestArtifact(completedState, runtimeDir, copiedDraft.id, 'build_clip_composition');
   assertScenario(
-    composition.assemblyPlan.includes(`素材選び直し指示: ${instruction}`),
-    '素材選び直しの指示が使用素材構成案に保存されていない'
+    !composition.assemblyPlan.includes('素材選び直し指示:'),
+    'コメントなしの素材選び直しで、標準理由が素材指示として混ざっている'
   );
 }
 
@@ -632,7 +630,6 @@ async function assertContentReselectFromMaterialConfirmation(apiBaseUrl, runtime
   const response = await requestJson(apiPath(apiBaseUrl, `/control-reviews/${review.id}/request-changes`), {
     method: 'POST',
     body: JSON.stringify({
-      reason: '別の内容を選ぶ',
       scope: 'theme_reselect'
     })
   });
@@ -655,6 +652,45 @@ async function assertContentReselectFromMaterialConfirmation(apiBaseUrl, runtime
   assertScenario(
     composition.selectedThemeId === selectedOptionId,
     '内容選び直し後に選んだ内容が使用素材構成案へ反映されていない'
+  );
+}
+
+async function assertThemeOptionRegenerateFromThemeSelection(apiBaseUrl, runtimeDir) {
+  const draft = await createApprovedScenarioDraft(apiBaseUrl, '内容選択画面から選択肢を作り直す');
+  const { review } = await runDraftUntilReview(apiBaseUrl, runtimeDir, draft.id, 'theme_selection');
+
+  const response = await requestJson(apiPath(apiBaseUrl, `/control-reviews/${review.id}/request-changes`), {
+    method: 'POST',
+    body: JSON.stringify({
+      scope: 'theme_options_regenerate'
+    })
+  });
+
+  const copiedDraft = response.state.requestDrafts.find((item) =>
+    item.id !== draft.id &&
+    item.purpose.includes('内容候補を作り直す')
+  );
+  assertScenario(copiedDraft, '内容選択画面から選択肢作り直しの編集コピーが作られていない');
+
+  const copiedRequests = agentRequestsForDraft(response.state, copiedDraft.id);
+  const expectedStartIndex = workflowTypes.indexOf('propose_clip_themes');
+  assertScenario(copiedRequests.length === 7, '選択肢作り直し後の編集コピーに7工程がない');
+  assertScenario(
+    copiedRequests.slice(0, expectedStartIndex).every((request) => request.status === 'succeeded'),
+    '選択肢作り直しで内容候補整理より前の工程が完了済みとしてコピーされていない'
+  );
+  assertScenario(
+    copiedRequests.slice(expectedStartIndex).every((request) => request.status === 'queued'),
+    '選択肢作り直しで内容候補整理以降が未作成状態に戻っていない'
+  );
+
+  await runAgentApprovingReviews(apiBaseUrl, runtimeDir, copiedDraft.id);
+  await assertGeneratedDraftCompleted(
+    apiBaseUrl,
+    runtimeDir,
+    copiedDraft.id,
+    '内容選択画面からの選択肢作り直し',
+    workflowTypes.slice(workflowTypes.indexOf('propose_clip_themes'))
   );
 }
 
@@ -737,6 +773,7 @@ async function scenarioAutomaticVideoCreation(apiBaseUrl, runtimeDir) {
 
   await assertMaterialReselectFromMaterialConfirmation(apiBaseUrl, runtimeDir);
   await assertContentReselectFromMaterialConfirmation(apiBaseUrl, runtimeDir);
+  await assertThemeOptionRegenerateFromThemeSelection(apiBaseUrl, runtimeDir);
 
   const noFixedDraftInput = {
     purpose: '固定データなしではSTT接続が必要になることを確認する',

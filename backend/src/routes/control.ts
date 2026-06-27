@@ -35,7 +35,12 @@ import { startDryRunRunner } from '../runner/auto-runner.js';
 import { loadRuntimeConfig } from '../config/runtime-config.js';
 
 const router: express.Router = express.Router();
-type ReviewChangeScope = 'edit_plan' | 'theme_reselect' | 'material_reselect' | 'adjustment';
+type ReviewChangeScope =
+  | 'edit_plan'
+  | 'theme_reselect'
+  | 'theme_options_regenerate'
+  | 'material_reselect'
+  | 'adjustment';
 type GeneratedVideoChangeScope = 'theme_selection' | 'edit_plan' | 'adjustment';
 type LoadedState = Awaited<ReturnType<typeof loadState>>;
 
@@ -775,6 +780,58 @@ function reviewActionLabel(action: HumanReviewActionType): string {
   return '修正依頼';
 }
 
+function reviewChangeScopeFromInput(input: unknown): ReviewChangeScope {
+  if (input === 'theme_reselect') {
+    return 'theme_reselect';
+  }
+
+  if (input === 'theme_options_regenerate') {
+    return 'theme_options_regenerate';
+  }
+
+  if (input === 'material_reselect') {
+    return 'material_reselect';
+  }
+
+  if (input === 'adjustment') {
+    return 'adjustment';
+  }
+
+  return 'edit_plan';
+}
+
+function defaultHumanReviewReason(
+  action: HumanReviewActionType,
+  reviewItem: ControlReviewItem,
+  changeScope: ReviewChangeScope
+): string {
+  if (action === 'approve') {
+    return '確認済みとして進める';
+  }
+
+  if (action === 'reject') {
+    return '';
+  }
+
+  if (reviewItem.kind === 'theme_selection' || changeScope === 'theme_options_regenerate') {
+    return '内容候補を作り直す';
+  }
+
+  if (changeScope === 'theme_reselect') {
+    return '内容を選び直す';
+  }
+
+  if (reviewItem.kind === 'material_confirmation') {
+    return '同じ内容で使う場面を選び直す';
+  }
+
+  if (changeScope === 'adjustment') {
+    return '微調整から作り直す';
+  }
+
+  return '演出作成前から作り直す';
+}
+
 async function applyHumanReviewAction(
   reviewItemId: string,
   action: HumanReviewActionType,
@@ -796,8 +853,12 @@ async function applyHumanReviewAction(
     return { status: 'error', statusCode: 409, error: 'この確認項目はすでに処理済みです', state };
   }
 
-  const reason = hasText(reasonInput) ? reasonInput.trim() : '';
-  if (action !== 'approve' && !reason) {
+  const hasExplicitReason = hasText(reasonInput);
+  const changeScope = action === 'request_changes' ? reviewChangeScopeFromInput(changeScopeInput) : 'edit_plan';
+  const reason = hasExplicitReason
+    ? reasonInput.trim()
+    : defaultHumanReviewReason(action, reviewItem, changeScope);
+  if (action === 'reject' && !reason) {
     return { status: 'error', statusCode: 400, error: `${reviewActionLabel(action)}には理由が必要です`, state };
   }
 
@@ -820,14 +881,14 @@ async function applyHumanReviewAction(
   let copiedRestart: Exclude<ReturnType<typeof createCopiedEditRestart>, { error: string }> | undefined;
 
   if (action === 'request_changes') {
-    const changeScope: ReviewChangeScope =
-      changeScopeInput === 'theme_reselect'
-        ? 'theme_reselect'
-        : changeScopeInput === 'material_reselect'
-          ? 'material_reselect'
-        : changeScopeInput === 'adjustment'
-          ? 'adjustment'
-          : 'edit_plan';
+    if (changeScope === 'theme_options_regenerate' && reviewItem.kind !== 'theme_selection') {
+      return {
+        status: 'error',
+        statusCode: 409,
+        error: '選択肢を作り直せるのは内容選択画面からだけです',
+        state
+      };
+    }
 
     if (reviewItem.kind === 'theme_selection') {
       const restart = createCopiedEditRestart(
@@ -859,7 +920,7 @@ async function applyHumanReviewAction(
         'build_clip_composition',
         reason,
         createdAt,
-        changeScope === 'material_reselect' ? reason : undefined
+        changeScope === 'material_reselect' && hasExplicitReason ? reason : undefined
       );
       if ('error' in restart) {
         return { status: 'error', statusCode: 409, error: restart.error, state };

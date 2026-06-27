@@ -11,7 +11,12 @@ import {
 import { useControlQueueStore } from './stores/controlQueue';
 
 type RedoScope = 'theme_selection' | 'edit_plan' | 'adjustment';
-type ReviewChangeScope = 'edit_plan' | 'theme_reselect' | 'material_reselect' | 'adjustment';
+type ReviewChangeScope =
+  | 'edit_plan'
+  | 'theme_reselect'
+  | 'theme_options_regenerate'
+  | 'material_reselect'
+  | 'adjustment';
 
 const store = useControlQueueStore();
 const submitting = ref(false);
@@ -21,7 +26,6 @@ const selectedReviewOptionId = ref('');
 const requestDefaultsApplied = ref(false);
 const pendingReviewChange = ref<{ reviewId: string; scope?: ReviewChangeScope } | null>(null);
 const changeReasonInput = ref('');
-const changeReasonError = ref('');
 const initialPurpose = 'ショート動画を作成する';
 let refreshTimer: number | undefined;
 
@@ -246,7 +250,7 @@ function defaultReviewReason(
   }
 
   if (action === 'request_changes') {
-    if (review.kind === 'theme_selection') {
+    if (review.kind === 'theme_selection' || scope === 'theme_options_regenerate') {
       return '内容候補を作り直す';
     }
 
@@ -273,16 +277,20 @@ function defaultReviewReason(
 }
 
 function reviewChangePromptMessage(review: ControlReviewItem, scope?: ReviewChangeScope): string {
+  if (review.kind === 'theme_selection' || scope === 'theme_options_regenerate') {
+    return '必要なら作り直したい選択肢の希望を入力してください';
+  }
+
   if (review.kind === 'material_confirmation' && scope === 'theme_reselect') {
-    return '内容を選び直す指示があれば入力してください';
+    return '必要なら選び直す理由を入力してください';
   }
 
   if (review.kind === 'material_confirmation') {
-    return 'どんな場面に選び直したいか入力してください';
+    return '必要なら使う場面の希望を入力してください';
   }
 
   if (review.kind === 'render_readiness' && scope === 'theme_reselect') {
-    return '内容を選び直す指示があれば入力してください';
+    return '必要なら選び直す理由を入力してください';
   }
 
   if (review.kind === 'render_readiness' && scope === 'adjustment') {
@@ -293,6 +301,10 @@ function reviewChangePromptMessage(review: ControlReviewItem, scope?: ReviewChan
 }
 
 function reviewChangeDialogTitle(review: ControlReviewItem, scope?: ReviewChangeScope): string {
+  if (review.kind === 'theme_selection' || scope === 'theme_options_regenerate') {
+    return '選択肢を作り直す';
+  }
+
   if (review.kind === 'material_confirmation' && scope === 'theme_reselect') {
     return '内容を選び直す';
   }
@@ -312,20 +324,18 @@ function reviewChangeDialogTitle(review: ControlReviewItem, scope?: ReviewChange
   return '演出を作り直す';
 }
 
-function requiresChangeReason(review: ControlReviewItem, scope?: ReviewChangeScope): boolean {
-  return review.kind === 'material_confirmation' && scope !== 'theme_reselect';
+function skipsChangeDialog(scope?: ReviewChangeScope): boolean {
+  return scope === 'theme_reselect';
 }
 
 function openReviewChangeDialog(review: ControlReviewItem, scope?: ReviewChangeScope) {
   pendingReviewChange.value = { reviewId: review.id, scope };
   changeReasonInput.value = '';
-  changeReasonError.value = '';
 }
 
 function closeReviewChangeDialog() {
   pendingReviewChange.value = null;
   changeReasonInput.value = '';
-  changeReasonError.value = '';
 }
 
 async function sendReviewAction(
@@ -355,11 +365,6 @@ async function confirmReviewChange() {
     return;
   }
 
-  if (requiresChangeReason(review, pending.scope) && !changeReasonInput.value.trim()) {
-    changeReasonError.value = '使う場面を選び直す指示を入力してください';
-    return;
-  }
-
   const reason = defaultReviewReason(review, 'request_changes', pending.scope, changeReasonInput.value);
   closeReviewChangeDialog();
   await sendReviewAction(review, 'request_changes', reason, pending.scope);
@@ -372,6 +377,11 @@ async function submitActiveReview(action: 'approve' | 'request_changes', scope?:
   }
 
   if (action === 'request_changes') {
+    if (skipsChangeDialog(scope)) {
+      await sendReviewAction(review, action, defaultReviewReason(review, action, scope), scope);
+      return;
+    }
+
     openReviewChangeDialog(review, scope);
     return;
   }
@@ -540,6 +550,15 @@ watch(
           {{ activeReviewAction === 'approve' ? '処理中' : approveReviewLabel(activeReviewItem) }}
         </button>
         <button
+          v-if="isContentSelectionReview(activeReviewItem)"
+          type="button"
+          class="secondary-button"
+          :disabled="store.loading"
+          @click="submitActiveReview('request_changes', 'theme_options_regenerate')"
+        >
+          {{ activeReviewAction === 'request_changes:theme_options_regenerate' ? '処理中' : '選択肢を作り直す' }}
+        </button>
+        <button
           v-if="isMaterialConfirmationReview(activeReviewItem)"
           type="button"
           class="secondary-button"
@@ -603,10 +622,9 @@ watch(
           <textarea
             v-model="changeReasonInput"
             rows="4"
-            :placeholder="requiresChangeReason(pendingReviewItem, pendingReviewChange.scope) ? '例: ゲーム画面が分かる場面を優先する' : '必要な場合だけ入力'"
+            placeholder="必要な場合だけ入力"
           />
         </label>
-        <p v-if="changeReasonError" class="error-message">{{ changeReasonError }}</p>
         <div class="dialog-actions">
           <button type="button" class="secondary-button" @click="closeReviewChangeDialog">
             キャンセル
