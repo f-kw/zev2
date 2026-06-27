@@ -33,7 +33,11 @@ const currentAgentRequestStatuses = new Set<AgentRequestStatus>([
   'failed',
   'superseded'
 ]);
-const currentControlReviewKinds = new Set<ControlReviewKind>(['theme_selection', 'render_readiness']);
+const currentControlReviewKinds = new Set<ControlReviewKind>([
+  'theme_selection',
+  'material_confirmation',
+  'render_readiness'
+]);
 const currentControlReviewStatuses = new Set<ControlReviewStatus>([
   'review_required',
   'approved',

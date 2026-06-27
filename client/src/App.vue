@@ -4,15 +4,20 @@ import {
   DEFAULT_GEMINI_MODEL,
   findById,
   type AgentRequest,
+  type ControlReviewItem,
   type RequestDraftInput
 } from '@zev2/shared';
 import { useControlQueueStore } from './stores/controlQueue';
 
 type RedoScope = 'theme_selection' | 'edit_plan' | 'adjustment';
+type ReviewChangeScope = 'edit_plan' | 'theme_reselect' | 'adjustment';
 
 const store = useControlQueueStore();
 const submitting = ref(false);
 const activeRedoScope = ref<RedoScope | ''>('');
+const activeReviewAction = ref('');
+const selectedReviewOptionId = ref('');
+const reviewReason = ref('');
 const requestDefaultsApplied = ref(false);
 const initialPurpose = 'ショート動画を作成する';
 let refreshTimer: number | undefined;
@@ -21,7 +26,7 @@ const requestInput = reactive<RequestDraftInput>({
   purpose: initialPurpose,
   sourceUri: '',
   durationLabel: '60秒以内',
-  themeCountLabel: '3テーマ',
+  themeCountLabel: '3候補',
   geminiModelName: DEFAULT_GEMINI_MODEL,
   preset: 'shorts_default'
 });
@@ -46,11 +51,11 @@ const runtimeSummaries = computed(() => {
         : `動画音声をローカルSTTへ送ります: ${store.runtimeConfig.stt.localServerUrl}`
     },
     {
-      label: 'テーマ探索',
-      title: store.runtimeConfig.themeExploration.mode === 'fixed' ? '固定候補' : 'Gemini API',
-      description: store.runtimeConfig.themeExploration.mode === 'fixed'
-        ? '固定済みのテーマ候補を使います'
-        : '文字起こしをGemini APIへ送り、切り抜きテーマ候補を作ります'
+      label: '内容候補整理',
+      title: store.runtimeConfig.contentDiscovery.mode === 'fixed' ? '固定候補' : '文字起こし整理',
+      description: store.runtimeConfig.contentDiscovery.mode === 'fixed'
+        ? '固定済みの内容候補を使います'
+        : '文字起こしから内容候補を整理します'
     },
     {
       label: '演出作成',
@@ -73,6 +78,17 @@ const currentDraft = computed(() => {
   }
 
   return store.state.requestDrafts[0];
+});
+
+const activeReviewItem = computed<ControlReviewItem | undefined>(() => {
+  const draft = currentDraft.value;
+  if (!draft) {
+    return undefined;
+  }
+
+  return [...store.state.controlReviewItems]
+    .filter((item) => item.requestDraftId === draft.id && item.status === 'review_required')
+    .sort((a, b) => b.createdAt.localeCompare(a.createdAt))[0];
 });
 
 const currentRequests = computed(() => {
@@ -185,6 +201,76 @@ async function createVideo() {
   }
 }
 
+function isContentSelectionReview(review: ControlReviewItem): boolean {
+  return review.kind === 'theme_selection';
+}
+
+function isMaterialConfirmationReview(review: ControlReviewItem): boolean {
+  return review.kind === 'material_confirmation';
+}
+
+function approveReviewLabel(review: ControlReviewItem): string {
+  if (isContentSelectionReview(review)) {
+    return 'この内容で素材を探す';
+  }
+
+  if (isMaterialConfirmationReview(review)) {
+    return 'この素材で演出へ進む';
+  }
+
+  return '確認用動画を作る';
+}
+
+function defaultReviewReason(review: ControlReviewItem, action: string, scope?: ReviewChangeScope): string {
+  const inputReason = reviewReason.value.trim();
+  if (inputReason) {
+    return inputReason;
+  }
+
+  if (action === 'request_changes') {
+    if (review.kind === 'theme_selection') {
+      return '内容候補を作り直す';
+    }
+
+    if (review.kind === 'material_confirmation') {
+      return '同じ内容で素材を探し直す';
+    }
+
+    if (scope === 'theme_reselect') {
+      return '内容を選び直す';
+    }
+
+    if (scope === 'adjustment') {
+      return '微調整から作り直す';
+    }
+
+    return '演出作成前から作り直す';
+  }
+
+  return '確認済みとして進める';
+}
+
+async function submitActiveReview(action: 'approve' | 'request_changes', scope?: ReviewChangeScope) {
+  const review = activeReviewItem.value;
+  if (!review) {
+    return;
+  }
+
+  activeReviewAction.value = scope ? `${action}:${scope}` : action;
+  try {
+    await store.submitControlReview(
+      review.id,
+      action,
+      defaultReviewReason(review, action, scope),
+      isContentSelectionReview(review) ? selectedReviewOptionId.value : undefined,
+      scope
+    );
+    reviewReason.value = '';
+  } finally {
+    activeReviewAction.value = '';
+  }
+}
+
 async function redoVideo(scope: RedoScope) {
   const draft = currentDraft.value;
   if (!draft) {
@@ -193,7 +279,7 @@ async function redoVideo(scope: RedoScope) {
 
   activeRedoScope.value = scope;
   const reasonByScope: Record<RedoScope, string> = {
-    theme_selection: 'テーマ決定前から作り直す',
+    theme_selection: '内容選択前から作り直す',
     edit_plan: '演出作成前から作り直す',
     adjustment: '微調整前から作り直す'
   };
@@ -234,6 +320,17 @@ watch(
     requestInput.sourceUri = runtimeConfig.source.defaultUri;
     requestInput.geminiModelName = DEFAULT_GEMINI_MODEL;
     requestDefaultsApplied.value = true;
+  }
+);
+
+watch(
+  () => activeReviewItem.value?.id,
+  () => {
+    const review = activeReviewItem.value;
+    selectedReviewOptionId.value = review?.kind === 'theme_selection'
+      ? review.options[0]?.id ?? ''
+      : '';
+    reviewReason.value = '';
   }
 );
 </script>
@@ -300,6 +397,89 @@ watch(
       </ol>
     </section>
 
+    <section v-if="activeReviewItem" class="review-panel">
+      <div>
+        <p class="eyebrow">{{ activeReviewItem.title }}</p>
+        <h2>{{ activeReviewItem.humanQuestion }}</h2>
+      </div>
+      <p class="review-summary">{{ activeReviewItem.summary }}</p>
+
+      <div v-if="activeReviewItem.options.length" class="review-options">
+        <label
+          v-for="option in activeReviewItem.options"
+          :key="option.id"
+          :class="['review-option', { selectable: isContentSelectionReview(activeReviewItem) }]"
+        >
+          <input
+            v-if="isContentSelectionReview(activeReviewItem)"
+            v-model="selectedReviewOptionId"
+            type="radio"
+            name="content-option"
+            :value="option.id"
+          />
+          <span>
+            <strong>{{ option.title }}</strong>
+            <small>{{ option.summary }}</small>
+          </span>
+        </label>
+      </div>
+
+      <label class="review-reason">
+        修正したい点
+        <textarea
+          v-model="reviewReason"
+          rows="3"
+          placeholder="必要な場合だけ入力"
+        />
+      </label>
+
+      <div class="review-actions">
+        <button
+          type="button"
+          :disabled="store.loading || (isContentSelectionReview(activeReviewItem) && !selectedReviewOptionId)"
+          @click="submitActiveReview('approve')"
+        >
+          {{ activeReviewAction === 'approve' ? '処理中' : approveReviewLabel(activeReviewItem) }}
+        </button>
+        <button
+          v-if="isMaterialConfirmationReview(activeReviewItem)"
+          type="button"
+          class="secondary-button"
+          :disabled="store.loading"
+          @click="submitActiveReview('request_changes')"
+        >
+          {{ activeReviewAction === 'request_changes' ? '処理中' : '素材を探し直す' }}
+        </button>
+        <button
+          v-if="activeReviewItem.kind === 'render_readiness'"
+          type="button"
+          class="secondary-button"
+          :disabled="store.loading"
+          @click="submitActiveReview('request_changes', 'edit_plan')"
+        >
+          {{ activeReviewAction === 'request_changes:edit_plan' ? '処理中' : '演出作成前から作り直す' }}
+        </button>
+        <button
+          v-if="activeReviewItem.kind === 'render_readiness'"
+          type="button"
+          class="secondary-button"
+          :disabled="store.loading"
+          @click="submitActiveReview('request_changes', 'theme_reselect')"
+        >
+          {{ activeReviewAction === 'request_changes:theme_reselect' ? '処理中' : '内容を選び直す' }}
+        </button>
+        <button
+          v-if="activeReviewItem.kind === 'render_readiness'"
+          type="button"
+          class="secondary-button"
+          :disabled="store.loading"
+          @click="submitActiveReview('request_changes', 'adjustment')"
+        >
+          {{ activeReviewAction === 'request_changes:adjustment' ? '処理中' : '微調整前から作り直す' }}
+        </button>
+      </div>
+    </section>
+
     <section v-if="outputVideoUri" class="video-panel">
       <div>
         <p class="eyebrow">生成結果</p>
@@ -313,7 +493,7 @@ watch(
           :disabled="!canRedoVideo"
           @click="redoVideo('theme_selection')"
         >
-          {{ activeRedoScope === 'theme_selection' ? '作り直し中' : 'テーマ決定前から作り直す' }}
+          {{ activeRedoScope === 'theme_selection' ? '作り直し中' : '内容選択前から作り直す' }}
         </button>
         <button
           type="button"
@@ -346,13 +526,15 @@ watch(
 
 .request-panel,
 .status-panel,
+.review-panel,
 .video-panel {
   width: min(960px, 100%);
   margin: 0 auto;
 }
 
 .request-panel,
-.status-panel {
+.status-panel,
+.review-panel {
   background: #ffffff;
   border: 1px solid #d8e0e7;
   border-radius: 8px;
@@ -482,6 +664,72 @@ button:disabled {
   font-weight: 800;
 }
 
+.review-panel {
+  display: grid;
+  gap: 16px;
+}
+
+.review-summary {
+  margin: 0;
+  color: #34495e;
+  line-height: 1.6;
+}
+
+.review-options {
+  display: grid;
+  gap: 10px;
+}
+
+.review-option {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  border: 1px solid #d8e0e7;
+  border-radius: 8px;
+  background: #f8fafc;
+  padding: 14px;
+  font-weight: 400;
+}
+
+.review-option.selectable {
+  cursor: pointer;
+}
+
+.review-option input {
+  margin-top: 4px;
+}
+
+.review-option span {
+  display: grid;
+  gap: 6px;
+}
+
+.review-option strong {
+  color: #17202a;
+}
+
+.review-option small {
+  color: #526171;
+  font-size: 14px;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+.review-reason {
+  font-weight: 700;
+}
+
+.review-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.secondary-button {
+  background: #e8eef4;
+  color: #17202a;
+}
+
 .step-list {
   list-style: none;
   display: grid;
@@ -546,7 +794,8 @@ video {
   }
 
   .request-panel,
-  .status-panel {
+  .status-panel,
+  .review-panel {
     padding: 18px;
   }
 
@@ -561,6 +810,10 @@ video {
   }
 
   .redo-actions {
+    display: grid;
+  }
+
+  .review-actions {
     display: grid;
   }
 }

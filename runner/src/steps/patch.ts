@@ -10,7 +10,7 @@ export function buildPatchArtifact(editPlanUri: string): PatchArtifact {
       {
         target: '動画の流れ',
         action: '複数の発話箇所をこの順番で使う',
-        reason: 'テーマの入口から展開までを確認用動画として見られるようにするため'
+        reason: '選ばれた内容の入口から展開までを確認用動画として見られるようにするため'
       },
       {
         target: '画面とテロップ',

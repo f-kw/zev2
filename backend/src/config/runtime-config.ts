@@ -4,6 +4,7 @@ import path from 'node:path';
 import {
   recordValue,
   type AdjustmentRuntimeMode,
+  type ContentDiscoveryRuntimeMode,
   type GeminiRuntimeMode,
   type RuntimeConfig,
   type SttRuntimeMode
@@ -15,7 +16,7 @@ const DEFAULT_RUNTIME_CONFIG: RuntimeConfig = {
     localServerUrl: 'http://192.168.1.7:8000',
     language: 'ja-JP'
   },
-  themeExploration: {
+  contentDiscovery: {
     mode: 'fixed'
   },
   editPlan: {
@@ -68,6 +69,14 @@ function parseGeminiRuntimeMode(value: unknown, pathLabel: string): GeminiRuntim
   }
 
   throw new Error(`設定ファイルの ${pathLabel} は fixed または gemini を指定してください`);
+}
+
+function parseContentDiscoveryRuntimeMode(value: unknown): ContentDiscoveryRuntimeMode {
+  if (value === 'fixed' || value === 'transcript') {
+    return value;
+  }
+
+  throw new Error('設定ファイルの contentDiscovery.mode は fixed または transcript を指定してください');
 }
 
 function parseAdjustmentRuntimeMode(value: unknown): AdjustmentRuntimeMode {
@@ -159,7 +168,7 @@ function removeJsonComments(input: string): string {
 function normalizeRuntimeConfig(value: unknown): RuntimeConfig {
   const root = recordValue(value);
   const stt = recordValue(root.stt);
-  const themeExploration = recordValue(root.themeExploration);
+  const contentDiscovery = recordValue(root.contentDiscovery);
   const editPlan = recordValue(root.editPlan);
   const adjustment = recordValue(root.adjustment);
   const source = recordValue(root.source);
@@ -170,10 +179,9 @@ function normalizeRuntimeConfig(value: unknown): RuntimeConfig {
       localServerUrl: stringFromConfig(stt.localServerUrl, DEFAULT_RUNTIME_CONFIG.stt.localServerUrl),
       language: stringFromConfig(stt.language, DEFAULT_RUNTIME_CONFIG.stt.language)
     },
-    themeExploration: {
-      mode: parseGeminiRuntimeMode(
-        themeExploration.mode ?? DEFAULT_RUNTIME_CONFIG.themeExploration.mode,
-        'themeExploration.mode'
+    contentDiscovery: {
+      mode: parseContentDiscoveryRuntimeMode(
+        contentDiscovery.mode ?? DEFAULT_RUNTIME_CONFIG.contentDiscovery.mode
       )
     },
     editPlan: {
@@ -209,7 +217,7 @@ export async function loadRuntimeConfig(): Promise<RuntimeConfig> {
 
 export function createRunnerEnvironmentFromConfig(config: RuntimeConfig): Record<string, string> {
   const stageModes = {
-    ZEV2_THEME_EXPLORATION_MODE: config.themeExploration.mode,
+    ZEV2_CONTENT_DISCOVERY_MODE: config.contentDiscovery.mode,
     ZEV2_EDIT_PLAN_MODE: config.editPlan.mode,
     ZEV2_ADJUSTMENT_MODE: config.adjustment.mode
   };

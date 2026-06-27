@@ -179,11 +179,53 @@ async function runAgent(apiBaseUrl, runtimeDir) {
       ZEV2_API_BASE_URL: apiBaseUrl,
       ZEV2_WORKSPACE_ROOT: workspaceRoot,
       ZEV2_STT_RUNTIME_MODE: 'fixed',
-      ZEV2_THEME_EXPLORATION_MODE: 'fixed',
+      ZEV2_CONTENT_DISCOVERY_MODE: 'fixed',
       ZEV2_EDIT_PLAN_MODE: 'fixed'
     },
     timeoutMs: 180000
   });
+}
+
+async function approveRequiredReview(apiBaseUrl, draftId) {
+  const state = await requestJson(apiPath(apiBaseUrl, '/state'));
+  const review = state.controlReviewItems
+    .filter((item) => item.requestDraftId === draftId && item.status === 'review_required')
+    .sort((left, right) => right.createdAt.localeCompare(left.createdAt))[0];
+  assertScenario(review, `${draftId}: 承認すべき確認工程が見つからない`);
+
+  const selectedOptionId = review.kind === 'theme_selection'
+    ? review.options[0]?.id
+    : undefined;
+  assertScenario(
+    review.kind !== 'theme_selection' || selectedOptionId,
+    `${draftId}: 内容選択の選択肢がない`
+  );
+
+  const approved = await requestJson(apiPath(apiBaseUrl, `/control-reviews/${review.id}/approve`), {
+    method: 'POST',
+    body: JSON.stringify({
+      reason: `${review.title}をシナリオテストで承認する`,
+      ...(selectedOptionId ? { selectedOptionId } : {})
+    })
+  });
+
+  return approved.state;
+}
+
+async function runAgentApprovingReviews(apiBaseUrl, runtimeDir, draftId) {
+  for (let attempt = 0; attempt < 8; attempt += 1) {
+    await runAgent(apiBaseUrl, runtimeDir);
+    const state = await requestJson(apiPath(apiBaseUrl, '/state'));
+    const requests = agentRequestsForDraft(state, draftId);
+    const renderRequest = requests.find((request) => request.type === 'render_video');
+    if (renderRequest?.status === 'succeeded') {
+      return state;
+    }
+
+    await approveRequiredReview(apiBaseUrl, draftId);
+  }
+
+  throw new Error(`${draftId}: 確認工程を承認しても動画生成まで到達しない`);
 }
 
 async function runAgentWithoutFixedDataExpectFailure(apiBaseUrl, runtimeDir) {
@@ -218,7 +260,7 @@ function apiPath(apiBaseUrl, routePath) {
 async function assertRuntimeConfig(apiBaseUrl) {
   const runtimeConfig = await requestJson(apiPath(apiBaseUrl, '/runtime-config'));
   assertScenario(runtimeConfig.stt?.mode === 'fixed', '現在の設定が固定データ確認になっていない');
-  assertScenario(runtimeConfig.themeExploration?.mode === 'fixed', 'テーマ探索が固定データ確認になっていない');
+  assertScenario(runtimeConfig.contentDiscovery?.mode === 'fixed', '内容候補整理が固定データ確認になっていない');
   assertScenario(runtimeConfig.editPlan?.mode === 'fixed', '演出作成が固定データ確認になっていない');
   assertScenario(runtimeConfig.adjustment?.mode === 'fixed', '微調整が固定処理として明示されていない');
   assertScenario(
@@ -328,6 +370,15 @@ function agentRequestsForDraft(state, requestDraftId) {
     .sort((left, right) => workflowTypes.indexOf(left.type) - workflowTypes.indexOf(right.type));
 }
 
+function assertApprovedReviewKinds(state, requestDraftId, kinds, label) {
+  for (const kind of kinds) {
+    const review = state.controlReviewItems
+      .filter((item) => item.requestDraftId === requestDraftId && item.kind === kind)
+      .sort((left, right) => right.createdAt.localeCompare(left.createdAt))[0];
+    assertScenario(review?.status === 'approved', `${label}: ${kind} の人間確認が承認済みになっていない`);
+  }
+}
+
 async function assertCopiedRestart(apiBaseUrl, sourceDraftId, scope, expectedStartType) {
   const response = await requestJson(apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/request-generated-video-changes`), {
     method: 'POST',
@@ -371,6 +422,7 @@ async function assertGeneratedDraftCompleted(apiBaseUrl, runtimeDir, draftId, la
   const finalRequests = agentRequestsForDraft(state, draftId);
   assertScenario(finalRequests.length === 7, `${label}: 実行後の工程数が7件ではない`);
   assertScenario(finalRequests.every((request) => request.status === 'succeeded'), `${label}: 成功していない工程がある`);
+  assertApprovedReviewKinds(state, draftId, ['theme_selection', 'material_confirmation', 'render_readiness'], label);
 
   const outputRequest = finalRequests.find((request) => request.type === 'render_video');
   const outputFileRef = state.fileRefs.find((fileRef) => fileRef.id === outputRequest?.result?.fileRefId);
@@ -395,20 +447,20 @@ async function assertGeneratedDraftCompleted(apiBaseUrl, runtimeDir, draftId, la
   );
   assertScenario(
     themes.mode === 'sample-theme-options',
-    `${label}: 固定確認のテーマ候補がGemini実行済みとして保存されている`
+    `${label}: 固定確認の内容候補が外部AI実行済みとして保存されている`
   );
-  assertScenario(expectedThemeId, `${label}: テーマ候補が保存されていない`);
+  assertScenario(expectedThemeId, `${label}: 内容候補が保存されていない`);
   assertScenario(
     composition.selectedThemeId === expectedThemeId,
-    `${label}: 構成案が前工程のテーマ候補を反映していない`
+    `${label}: 使用素材構成案が前工程の内容候補を反映していない`
   );
   assertScenario(
     editPlan.selectedThemeId === composition.selectedThemeId,
-    `${label}: 編集案が構成案のテーマを反映していない`
+    `${label}: 編集案が使用素材構成案の選択内容を反映していない`
   );
   assertScenario(
     editPlan.renderSegments.length === composition.parts.length,
-    `${label}: 編集案の動画断片数が構成案と一致していない`
+    `${label}: 編集案の動画断片数が使用素材構成案と一致していない`
   );
   assertScenario(
     editPlan.mode === 'sample-edit-plan',
@@ -425,7 +477,7 @@ async function scenarioAutomaticVideoCreation(apiBaseUrl, runtimeDir) {
     purpose: '固定STTデータからショート動画を作成する',
     sourceUri: fixedSourceUri,
     durationLabel: '60秒以内',
-    themeCountLabel: '3テーマ',
+    themeCountLabel: '3候補',
     geminiModelName: 'gemini-3.5-flash',
     preset: 'shorts_default'
   };
@@ -447,14 +499,13 @@ async function scenarioAutomaticVideoCreation(apiBaseUrl, runtimeDir) {
   assertScenario(queuedRequests.length === 7, '作成開始後に7工程がキューへ入っていない');
   assertScenario(queuedRequests.some((request) => request.type === 'render_video'), '動画生成工程がキューへ入っていない');
 
-  await runAgent(apiBaseUrl, runtimeDir);
+  await runAgentApprovingReviews(apiBaseUrl, runtimeDir, draft.id);
 
   const state = await requestJson(apiPath(apiBaseUrl, '/state'));
   const finalRequests = state.agentRequests.filter((request) => request.requestDraftId === draft.id);
   assertScenario(finalRequests.length === 7, '実行後の工程数が7件ではない');
   assertScenario(finalRequests.every((request) => request.status === 'succeeded'), '成功していない工程がある');
-  assertScenario(state.controlReviewItems.length === 0, '確認待ちが作られている');
-  assertScenario(state.decisionLogs.length === 0, '承認判断ログが作られている');
+  assertApprovedReviewKinds(state, draft.id, ['theme_selection', 'material_confirmation', 'render_readiness'], '初回生成');
 
   const outputRequest = finalRequests.find((request) => request.type === 'render_video');
   const outputFileRef = state.fileRefs.find((fileRef) => fileRef.id === outputRequest?.result?.fileRefId);
@@ -468,7 +519,7 @@ async function scenarioAutomaticVideoCreation(apiBaseUrl, runtimeDir) {
   await assertWorkflowStepManifests(runtimeDir, draft.id, '初回生成');
 
   const editPlanRestartDraft = await assertCopiedRestart(apiBaseUrl, draft.id, 'edit_plan', 'create_edit_plan');
-  await runAgent(apiBaseUrl, runtimeDir);
+  await runAgentApprovingReviews(apiBaseUrl, runtimeDir, editPlanRestartDraft.id);
   await assertGeneratedDraftCompleted(
     apiBaseUrl,
     runtimeDir,
@@ -478,12 +529,12 @@ async function scenarioAutomaticVideoCreation(apiBaseUrl, runtimeDir) {
   );
 
   const themeRestartDraft = await assertCopiedRestart(apiBaseUrl, draft.id, 'theme_selection', 'build_clip_composition');
-  await runAgent(apiBaseUrl, runtimeDir);
+  await runAgentApprovingReviews(apiBaseUrl, runtimeDir, themeRestartDraft.id);
   await assertGeneratedDraftCompleted(
     apiBaseUrl,
     runtimeDir,
     themeRestartDraft.id,
-    'テーマ選択後からのコピー再開',
+    '内容選択後からのコピー再開',
     workflowTypes.slice(workflowTypes.indexOf('build_clip_composition'))
   );
 
@@ -499,7 +550,7 @@ async function scenarioAutomaticVideoCreation(apiBaseUrl, runtimeDir) {
     purpose: '固定データなしではSTT接続が必要になることを確認する',
     sourceUri: fixedSourceUri,
     durationLabel: '60秒以内',
-    themeCountLabel: '3テーマ',
+    themeCountLabel: '3候補',
     geminiModelName: 'gemini-3.5-flash',
     preset: 'shorts_default'
   };

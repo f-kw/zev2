@@ -9,8 +9,10 @@ import {
   lastMatching,
   recordValue as recordFrom,
   type AgentCompletionInput,
+  type AgentDecisionInput,
   type AgentRequest,
   type AgentRequestType,
+  type ControlReviewOption,
   type FileRefKind,
   getDryRunMeaningForRequest,
   type Zev2State
@@ -67,7 +69,7 @@ const defaultGeminiModelName = process.env.ZEV2_GEMINI_MODEL ?? DEFAULT_GEMINI_M
 const vertexProjectId = process.env.GOOGLE_CLOUD_PROJECT || process.env.PROJECT_ID || process.env.GCP_PROJECT_ID || '';
 const vertexLocation = process.env.GOOGLE_CLOUD_LOCATION || 'global';
 const useFixedTranscript = process.env.ZEV2_STT_RUNTIME_MODE === 'fixed';
-const useFixedThemeOptions = process.env.ZEV2_THEME_EXPLORATION_MODE === 'fixed';
+const contentDiscoveryMode = process.env.ZEV2_CONTENT_DISCOVERY_MODE ?? 'fixed';
 const useFixedEditPlan = process.env.ZEV2_EDIT_PLAN_MODE === 'fixed';
 const adjustmentMode = process.env.ZEV2_ADJUSTMENT_MODE ?? 'fixed';
 const OUTPUT_FILE_NAME_BY_KIND = {
@@ -297,11 +299,8 @@ async function buildTranscript(request: AgentRequest, state: Zev2State): Promise
 async function buildThemeOptionsArtifact(transcript: TranscriptArtifact, request: AgentRequest): Promise<ThemeArtifact> {
   return buildThemeOptionsArtifactForStep(transcript, request, {
     fixedThemeOptionsPath: FIXED_THEME_OPTIONS_PATH,
-    useFixedThemeOptions,
-    sanitizePathPart,
-    generateGeminiJsonContent,
-    extractGeminiResponseText,
-    parseGeminiJsonText
+    contentDiscoveryMode,
+    sanitizePathPart
   });
 }
 
@@ -562,8 +561,87 @@ function buildCompletion(request: AgentRequest, artifact: ArtifactInfo): AgentCo
       access: artifact.access
     }
   };
+  const decision = buildHumanReviewDecision(request, artifact.payload);
+  if (decision) {
+    completion.decision = decision;
+  }
 
   return completion;
+}
+
+function buildHumanReviewDecision(
+  request: AgentRequest,
+  payload: unknown
+): AgentDecisionInput | undefined {
+  if (request.type === 'propose_clip_themes') {
+    return buildContentSelectionDecision(payload as ThemeArtifact);
+  }
+
+  if (request.type === 'build_clip_composition') {
+    return buildMaterialConfirmationDecision(payload as ClipCompositionArtifact);
+  }
+
+  if (request.type === 'apply_adjustment') {
+    return {
+      decisionType: 'render_readiness',
+      decision: '動画生成前確認を提示する',
+      reason: '演出案と調整結果がそろったため、確認用動画を作ってよいか人間が判断できる状態にする',
+      proposedNextState: 'review_required',
+      requiresHumanReview: true,
+      humanQuestion: 'この内容で確認用動画を作りますか',
+      ruleIds: ['control-plane:render-readiness-required']
+    };
+  }
+
+  return undefined;
+}
+
+function buildContentSelectionDecision(payload: ThemeArtifact): AgentDecisionInput {
+  const options: ControlReviewOption[] = payload.themes.map((theme) => ({
+    id: theme.id,
+    title: theme.title,
+    summary: `${theme.summary}\n代表発話: ${theme.representativeText}`,
+    evidenceRefs: theme.evidenceRefs
+  }));
+
+  return {
+    decisionType: 'theme_selection',
+    decision: '内容候補を提示する',
+    reason: '文字起こしに何があるかを整理し、人間が面白そうな内容を選べる状態にする',
+    reviewOptions: options,
+    proposedNextState: 'review_required',
+    requiresHumanReview: true,
+    humanQuestion: 'どの内容で切り抜きを作りますか',
+    ruleIds: ['control-plane:content-selection-required']
+  };
+}
+
+function buildMaterialConfirmationDecision(payload: ClipCompositionArtifact): AgentDecisionInput {
+  const options: ControlReviewOption[] = payload.parts.map((part) => ({
+    id: part.id,
+    title: part.role,
+    summary: `${formatSeconds(part.sourceStartMs)} - ${formatSeconds(part.sourceEndMs)} / ${part.transcriptText}`,
+    evidenceRefs: [{
+      refId: part.id,
+      kind: 'time_range',
+      meaning: `${formatSeconds(part.sourceStartMs)} - ${formatSeconds(part.sourceEndMs)} の使う場面`
+    }]
+  }));
+
+  return {
+    decisionType: 'material_confirmation',
+    decision: '使用素材構成案を提示する',
+    reason: '選ばれた内容に関係する複数の場面を集め、演出作成へ進める素材があるか人間が判断できる状態にする',
+    reviewOptions: options,
+    proposedNextState: 'review_required',
+    requiresHumanReview: true,
+    humanQuestion: 'この素材で演出作成へ進めますか',
+    ruleIds: ['control-plane:material-confirmation-required']
+  };
+}
+
+function formatSeconds(milliseconds: number): string {
+  return `${(milliseconds / 1000).toFixed(1)}秒`;
 }
 
 async function claimRequest(request: AgentRequest): Promise<void> {

@@ -209,6 +209,95 @@ function copySucceededAgentRequestForDraft(
   return { request: copiedRequest, fileRef, output };
 }
 
+function copyApprovedReviewsForCopiedRequests(
+  state: LoadedState,
+  requestDraftId: string,
+  copiedRequestIdsBySourceId: Map<string, string>,
+  createdAt: string
+): {
+  decisionLogs: DecisionLog[];
+  controlReviewItems: ControlReviewItem[];
+  humanReviewActions: HumanReviewAction[];
+} {
+  const decisionLogs: DecisionLog[] = [];
+  const controlReviewItems: ControlReviewItem[] = [];
+  const humanReviewActions: HumanReviewAction[] = [];
+
+  for (const sourceReview of state.controlReviewItems) {
+    if (sourceReview.status !== 'approved') {
+      continue;
+    }
+
+    const copiedAgentRequestId = copiedRequestIdsBySourceId.get(sourceReview.agentRequestId);
+    if (!copiedAgentRequestId) {
+      continue;
+    }
+
+    const sourceAgentRequest = findById(state.agentRequests, sourceReview.agentRequestId);
+    const sourceDecisionLog = findById(state.decisionLogs, sourceReview.decisionLogId);
+    const sourceAction = findById(state.humanReviewActions, sourceReview.resolvedByActionId);
+    const decisionLogId = createId('decision');
+    const humanReviewActionId = createId('human_review');
+    const controlReviewItemId = createId('review');
+
+    const copiedDecisionLog: DecisionLog = sourceDecisionLog
+      ? {
+          ...sourceDecisionLog,
+          id: decisionLogId,
+          requestDraftId,
+          agentRequestId: copiedAgentRequestId,
+          createdAt
+        }
+      : {
+          id: decisionLogId,
+          requestDraftId,
+          agentRequestId: copiedAgentRequestId,
+          stepType: sourceAgentRequest?.type ?? 'propose_clip_themes',
+          actor: 'backend',
+          decisionType: sourceReview.kind,
+          decision: `${sourceReview.title}を引き継ぐ`,
+          reason: sourceReview.reason,
+          evidenceRefs: [...sourceReview.evidenceRefs],
+          inputRefs: [],
+          artifactRefs: [...sourceReview.evidenceRefs],
+          proposedNextState: sourceReview.proposedNextState,
+          requiresHumanReview: true,
+          humanQuestion: sourceReview.humanQuestion,
+          ruleIds: ['control-plane:copied-human-review'],
+          createdAt
+        };
+
+    const copiedAction: HumanReviewAction = {
+      id: humanReviewActionId,
+      reviewItemId: controlReviewItemId,
+      requestDraftId,
+      action: sourceAction?.action ?? 'approve',
+      reason: sourceAction?.reason ?? `${sourceReview.title}を引き継ぐ`,
+      ...(sourceAction?.selectedOptionId ? { selectedOptionId: sourceAction.selectedOptionId } : {}),
+      createdAt
+    };
+
+    const copiedReview: ControlReviewItem = {
+      ...sourceReview,
+      id: controlReviewItemId,
+      requestDraftId,
+      agentRequestId: copiedAgentRequestId,
+      status: 'approved',
+      decisionLogId,
+      resolvedAt: createdAt,
+      resolvedByActionId: humanReviewActionId,
+      createdAt,
+      updatedAt: createdAt
+    };
+
+    decisionLogs.push(copiedDecisionLog);
+    humanReviewActions.push(copiedAction);
+    controlReviewItems.push(copiedReview);
+  }
+
+  return { decisionLogs, controlReviewItems, humanReviewActions };
+}
+
 function createCopiedEditRestart(
   state: LoadedState,
   requestDraftId: string,
@@ -221,6 +310,9 @@ function createCopiedEditRestart(
   queuedRequests: AgentRequest[];
   fileRefs: FileRef[];
   outputs: OutputEntity[];
+  decisionLogs: DecisionLog[];
+  controlReviewItems: ControlReviewItem[];
+  humanReviewActions: HumanReviewAction[];
 } | { error: string } {
   const sourceDraft = findById(state.requestDrafts, requestDraftId);
   if (!sourceDraft) {
@@ -233,6 +325,7 @@ function createCopiedEditRestart(
   const queuedRequests: AgentRequest[] = [];
   const fileRefs: FileRef[] = [];
   const outputs: OutputEntity[] = [];
+  const copiedRequestIdsBySourceId = new Map<string, string>();
   let dependsOnAgentRequestId: string | undefined;
 
   for (const step of WORKFLOW_STEPS.slice(0, startIndex)) {
@@ -253,6 +346,7 @@ function createCopiedEditRestart(
     }
 
     requests.push(copied.request);
+    copiedRequestIdsBySourceId.set(sourceRequest.id, copied.request.id);
     if (copied.fileRef) {
       fileRefs.push(copied.fileRef);
     }
@@ -268,13 +362,20 @@ function createCopiedEditRestart(
     queuedRequests.push(request);
     dependsOnAgentRequestId = request.id;
   }
+  const copiedReviews = copyApprovedReviewsForCopiedRequests(
+    state,
+    copiedDraft.id,
+    copiedRequestIdsBySourceId,
+    createdAt
+  );
 
   return {
     draft: copiedDraft,
     requests,
     queuedRequests,
     fileRefs,
-    outputs
+    outputs,
+    ...copiedReviews
   };
 }
 
@@ -285,11 +386,17 @@ function appendCopiedRestartToState(
     requests: AgentRequest[];
     fileRefs: FileRef[];
     outputs: OutputEntity[];
+    decisionLogs: DecisionLog[];
+    controlReviewItems: ControlReviewItem[];
+    humanReviewActions: HumanReviewAction[];
   }
 ) {
   state.requestDrafts.unshift(restart.draft);
   state.fileRefs.push(...restart.fileRefs);
   state.outputs.push(...restart.outputs);
+  state.decisionLogs.push(...restart.decisionLogs);
+  state.controlReviewItems.push(...restart.controlReviewItems);
+  state.humanReviewActions.push(...restart.humanReviewActions);
   state.agentRequests.push(...restart.requests);
 }
 
@@ -327,6 +434,9 @@ function createCopiedRestartFromFailedRequest(
   queuedRequests: AgentRequest[];
   fileRefs: FileRef[];
   outputs: OutputEntity[];
+  decisionLogs: DecisionLog[];
+  controlReviewItems: ControlReviewItem[];
+  humanReviewActions: HumanReviewAction[];
 } | { error: string } {
   const failedRequest = findById(state.agentRequests, failedRequestId);
   if (!failedRequest) {
@@ -414,22 +524,22 @@ function createThemeReselectFromReview(
   requests: AgentRequest[];
 } | { error: string } {
   if (reviewItem.kind !== 'render_readiness') {
-    return { error: 'テーマを選び直せるのは動画生成前確認からだけです' };
+    return { error: '内容を選び直せるのは動画生成前確認からだけです' };
   }
 
   const sourceRequest = findById(state.agentRequests, reviewItem.agentRequestId);
   if (!sourceRequest) {
-    return { error: 'テーマを選び直す前提になるAI工程が見つかりません' };
+    return { error: '内容を選び直す前提になるAI工程が見つかりません' };
   }
 
   const themeRequest = latestSucceededAgentRequest(state.agentRequests, reviewItem.requestDraftId, 'propose_clip_themes');
   if (!themeRequest) {
-    return { error: 'テーマを選び直すためのテーマ候補がありません' };
+    return { error: '内容を選び直すための内容候補がありません' };
   }
 
   const previousThemeReview = latestControlReview(state.controlReviewItems, reviewItem.requestDraftId, 'theme_selection');
   if (!previousThemeReview?.options.length) {
-    return { error: 'テーマを選び直すための選択肢がありません' };
+    return { error: '内容を選び直すための選択肢がありません' };
   }
 
   const fileRef = fileRefForAgentRequest(state, themeRequest);
@@ -439,13 +549,13 @@ function createThemeReselectFromReview(
     'theme_selection',
     {
       decisionType: 'theme_selection',
-      decision: '既存のテーマ候補から選び直す',
-      reason: '動画生成前確認でテーマから見直す判断になったため、既存のテーマ候補をもう一度人間が選べるようにする',
+      decision: '既存の内容候補から選び直す',
+      reason: '動画生成前確認で内容から見直す判断になったため、既存の内容候補をもう一度人間が選べるようにする',
       evidenceRefs: [],
       reviewOptions: previousThemeReview.options,
       proposedNextState: 'review_required',
       requiresHumanReview: true,
-      humanQuestion: 'どのテーマで切り抜きを作り直すか選んでください',
+      humanQuestion: 'どの内容で切り抜きを作り直すか選んでください',
       ruleIds: ['control-plane:theme-selection-required', 'zev-reference:theme-reselect']
     },
     fileRef,
@@ -463,25 +573,6 @@ function createThemeReselectFromReview(
   }
 
   return { ...createdReview, requests };
-}
-
-function createRenderRequestForReview(
-  stateAgentRequests: AgentRequest[],
-  reviewItem: ControlReviewItem,
-  createdAt: string
-): { request: AgentRequest } | { error: string } {
-  const sourceRequest = findById(stateAgentRequests, reviewItem.agentRequestId);
-  if (!sourceRequest) {
-    return { error: '動画生成の前提になるAI工程が見つかりません' };
-  }
-
-  if (sourceRequest.type !== 'apply_adjustment') {
-    return { error: '動画生成は生成前確認の承認後だけ作成できます' };
-  }
-
-  return {
-    request: createAgentRequestAfter(sourceRequest, 'render_video', sourceRequest.id, createdAt)
-  };
 }
 
 function validateAgentDecision(input: AgentDecisionInput | undefined): string[] {
@@ -515,7 +606,11 @@ function validateAgentDecision(input: AgentDecisionInput | undefined): string[] 
 
 function reviewTitle(kind: ControlReviewKind): string {
   if (kind === 'theme_selection') {
-    return 'テーマ選択';
+    return '内容選択';
+  }
+
+  if (kind === 'material_confirmation') {
+    return '使用素材確認';
   }
 
   return '動画生成前の確認';
@@ -523,7 +618,11 @@ function reviewTitle(kind: ControlReviewKind): string {
 
 function reviewSummary(kind: ControlReviewKind, agentRequest: AgentRequest): string {
   if (kind === 'theme_selection') {
-    return `${agentRequest.label} の結果を確認して、切り抜きたいテーマを選びます`;
+    return `${agentRequest.label} の結果を確認して、面白そうな内容を選びます`;
+  }
+
+  if (kind === 'material_confirmation') {
+    return `${agentRequest.label} の結果を確認して、この素材で演出作成へ進めるか判断します`;
   }
 
   return `${agentRequest.label} の結果を確認して、動画生成へ進めるか判断します`;
@@ -696,11 +795,11 @@ async function applyHumanReviewAction(
   const selectedOptionId = hasText(selectedOptionInput) ? selectedOptionInput.trim() : '';
   if (action === 'approve' && reviewItem.kind === 'theme_selection') {
     if (!selectedOptionId) {
-      return { status: 'error', statusCode: 400, error: '切り抜きたいテーマを選んでください', state };
+      return { status: 'error', statusCode: 400, error: '切り抜きたい内容を選んでください', state };
     }
 
     if (!reviewItem.options.some((option) => option.id === selectedOptionId)) {
-      return { status: 'error', statusCode: 400, error: '選んだテーマが確認対象にありません', state };
+      return { status: 'error', statusCode: 400, error: '選んだ内容が確認対象にありません', state };
     }
   }
 
@@ -711,15 +810,6 @@ async function applyHumanReviewAction(
   let extraReviewItem: ControlReviewItem | undefined;
   let copiedRestart: Exclude<ReturnType<typeof createCopiedEditRestart>, { error: string }> | undefined;
 
-  if (action === 'approve' && reviewItem.kind === 'render_readiness') {
-    const result = createRenderRequestForReview(state.agentRequests, reviewItem, createdAt);
-    if ('error' in result) {
-      return { status: 'error', statusCode: 409, error: result.error, state };
-    }
-
-    newAgentRequests = [result.request];
-  }
-
   if (action === 'request_changes') {
     const changeScope: ReviewChangeScope =
       changeScopeInput === 'theme_reselect'
@@ -728,7 +818,33 @@ async function applyHumanReviewAction(
           ? 'adjustment'
           : 'edit_plan';
 
-    if (reviewItem.kind === 'render_readiness' && changeScope === 'theme_reselect') {
+    if (reviewItem.kind === 'theme_selection') {
+      const restart = createCopiedEditRestart(
+        state,
+        reviewItem.requestDraftId,
+        'propose_clip_themes',
+        reason,
+        createdAt
+      );
+      if ('error' in restart) {
+        return { status: 'error', statusCode: 409, error: restart.error, state };
+      }
+
+      copiedRestart = restart;
+    } else if (reviewItem.kind === 'material_confirmation') {
+      const restart = createCopiedEditRestart(
+        state,
+        reviewItem.requestDraftId,
+        'build_clip_composition',
+        reason,
+        createdAt
+      );
+      if ('error' in restart) {
+        return { status: 'error', statusCode: 409, error: restart.error, state };
+      }
+
+      copiedRestart = restart;
+    } else if (reviewItem.kind === 'render_readiness' && changeScope === 'theme_reselect') {
       const result = createThemeReselectFromReview(state, reviewItem, createdAt);
       if ('error' in result) {
         return { status: 'error', statusCode: 409, error: result.error, state };

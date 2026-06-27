@@ -5,20 +5,22 @@
 
 ## 記録方針
 
-この文書は、Fable案をZEV2へ適用する前に、Codexがリポジトリ内で管理する意思決定ログである。
+この文書は、ZEV2の承認ゲートと型付き実行命令の骨格について、Codexがリポジトリ内で管理する意思決定ログである。
 
 決定は、ユーザーが確認できる形で残す。ChatGPTとの会話や外部メモは、それだけでは正典にしない。関連ファイルに基づき、採用、修正採用、却下、保留を明示する。
+
+2026-06-27に、旧草案、初期ブリーフ、テキスト品質評価に寄った適用計画は削除した。現行の正本は、工程仕様、API仕様、runner仕様、成果物参照、レビュー用要点に絞る。
 
 ## Decision ZC-D-001
 
 - Decision ID: ZC-D-001
 - Date: 2026-06-13
-- Status: accepted
-- Decision: Fable案は有用な草案だが、そのまま正典にはしない。
-- Reason: `docs/claude/development-policy.md` は多くの有用な方針を含むが、ZEV2の現行実装ではcontrol plane、判断ログ、人間承認ゲートがまだ未設計であり、そのまま実装順序にすると動画品質や演出へ先行しやすい。
-- Alternatives considered: Fable案を正典として採用する。Fable案を破棄する。
-- Related files: `docs/claude/development-policy.md`, `docs/current-implementation.md`, `docs/order.md`
-- Review condition: Codex管理文書の内容をユーザーが確認し、Fable案から採用、修正採用、保留する範囲が更新されるとき。
+- Status: superseded
+- Decision: 旧草案は正典にしない。テキスト品質評価に寄った内容は現行docsから削除する。
+- Reason: 現在の目的は完成UIや文章品質評価ではなく、人間が実行前下書きを確認して承認し、AIエージェントが型付き命令とファイル参照で処理する骨格を作ることである。旧草案を正本に残すと、切り捨てたテキスト評価や品質比較が作業対象に戻る。
+- Alternatives considered: 旧草案を正典として採用する。旧草案を参考資料として保持する。
+- Related files: `docs/current-implementation.md`, `docs/order.md`, `docs/zev2-flow-contract.md`
+- Review condition: 現行工程に必要な設計が不足し、削除した草案から再採用する項目をユーザーが明示したとき。
 
 ## Decision ZC-D-002
 
@@ -37,7 +39,7 @@
 - Date: 2026-06-13
 - Status: accepted
 - Decision: AIエージェントは結果だけを返してはいけない。判断、根拠、参照データ、次状態、人間に求める判断を構造化して記録する。
-- Reason: 現行の完了報告は処理完了の意味と成果物参照を保存できるが、候補を選んだ判断、判断理由、参照データ、人間確認要求を正本として保存しない。Fable案のブラックボックス回避には別の判断ログが必要である。
+- Reason: 現行の完了報告は処理完了の意味と成果物参照を保存できるが、候補を選んだ判断、判断理由、参照データ、人間確認要求を正本として保存しない。AI判断を後から確認するには別の判断ログが必要である。
 - Alternatives considered: 完了理由の自由文だけを残す。成果物JSONの中だけに判断を入れる。UIだけで判断を見せ、保存しない。
 - Related files: `backend/src/routes/control.ts`, `packages/shared/src/index.ts`, `docs/task-006-AI操作ログと監査履歴.md`
 - Review condition: 判断ログのスキーマが設計され、ユーザーが必須項目を確認したとき。
@@ -61,7 +63,7 @@
 - Decision: LLMは固定フローで毎回呼ぶのではなく、エージェントAIが必要性を判断する。
 - Reason: ZEV2はAIエージェントが型付き命令とファイル参照で処理する骨格を目指している。固定フローで毎回LLMを呼ぶと、不要な外部処理や説明不能な判断が増える。必要性を判断する場合も、その判断理由と参照データをログに残す必要がある。
 - Alternatives considered: すべての工程でLLMを必ず呼ぶ。LLM呼び出しを完全に禁止する。工程ごとに固定プロンプトだけで判断する。
-- Related files: `docs/ai-agent-api.md`, `docs/task-008-Gemini-APIで演出作成.md`, `docs/claude/development-policy.md`
+- Related files: `docs/ai-agent-api.md`, `docs/task-008-Gemini-APIで演出作成.md`
 - Review condition: エージェント出力スキーマで、外部AI確認を行った理由、入力、結果、人間確認要求の記録方法が定義されたとき。
 
 ## Decision ZC-D-006
@@ -70,20 +72,20 @@
 - Date: 2026-06-13
 - Status: accepted
 - Decision: エージェントAIは秒数、座標、演出頻度、投稿可否を自由決定しない。
-- Reason: Fable案の中核である「意味判断と数値・配置・頻度の分離」はZEV2でも採用する。独自判断の係数や重み付けは禁止されており、ユーザーが確認した明示ルールなしに数値や投稿可否を決めてはいけない。
+- Reason: 独自判断の係数や重み付けは禁止されており、ユーザーが確認した明示ルールなしに数値、配置、演出頻度、投稿可否を決めてはいけない。
 - Alternatives considered: LLMに秒単位の境界や座標を直接決めさせる。AIが総合判断で投稿可否を決める。演出頻度をAIの自由記述に任せる。
-- Related files: `docs/claude/development-policy.md`, `AGENTS.md`
+- Related files: `AGENTS.md`, `docs/zev2-flow-contract.md`
 - Review condition: 境界ルール設計で、AIが自由決定してはいけない項目と、それを決める処理が定義されたとき。
 
 ## Decision ZC-D-007
 
 - Decision ID: ZC-D-007
 - Date: 2026-06-13
-- Status: accepted
-- Decision: 人間中央値品質は最終目標ではなく最低合格ラインとして扱う。
-- Reason: Fable案では人間の切り抜き師の中央値に並ぶ品質がフェーズ移行の目安として書かれている。ZEV2ではこれを最終目標にせず、最低限満たすべき品質ラインとして扱う。ただし、初期control planeでは品質評価を実装しない。
+- Status: superseded
+- Decision: 人間中央値品質や文章品質評価は、現行の骨格作成では扱わない。
+- Reason: 現在の目的は、承認ゲート、成果物参照、型付き実行命令を固定することである。品質比較を先に入れると、ユーザー確認済みの評価観点や検証方法がないまま作業対象が広がる。
 - Alternatives considered: 人間中央値品質を最終目標にする。人間中央値品質を初期control planeの合格条件にする。品質比較を完全に扱わない。
-- Related files: `docs/claude/development-policy.md`
+- Related files: `docs/zev2-flow-contract.md`, `docs/current-implementation.md`
 - Review condition: 品質ゲート設計で、最低合格ライン、ユーザー確認済み評価観点、人間確認方法が定義されたとき。
 
 ## Decision ZC-D-008
@@ -94,7 +96,7 @@
 - Decision: D4チャットは初期検証の必須要素にしない。
 - Reason: 現行ZEV2にはD4チャット取得、保存、表示、品質確認への接続がない。control planeが未整備の状態でD4チャットを入れると、入力データだけが増えて判断制御が追いつかない。
 - Alternatives considered: D4チャットを候補生成の初期必須要素にする。D4チャットなしでは候補確認を進めない。
-- Related files: `docs/claude/development-policy.md`, `docs/task-008-Gemini-APIで演出作成.md`
+- Related files: `docs/task-008-Gemini-APIで演出作成.md`
 - Review condition: control plane と候補生成の見える化が完了し、D4チャットの取得条件がユーザー確認済みになったとき。
 
 ## Decision ZC-D-009
@@ -105,7 +107,7 @@
 - Decision: 正式なD4チャットは、配信中に公式APIで取得できる場合のみ使う。
 - Reason: チャット流速は有用な可能性があるが、非公式取得や不安定な取得を正本にすると、再現性、権限、保存範囲、秘密情報管理の問題が発生する。
 - Alternatives considered: 非公式な手段でチャットを取得する。配信後の表示から正本として復元する。チャット情報を品質ゲートに直接使う。
-- Related files: `docs/claude/development-policy.md`, `docs/task-009-セキュリティ境界と実処理接続方針.md`
+- Related files: `docs/task-009-セキュリティ境界と実処理接続方針.md`
 - Review condition: 公式APIで取得できる範囲、権限、保存形式、使用目的が文書化されたとき。
 
 ## Decision ZC-D-010
@@ -116,18 +118,18 @@
 - Decision: 過去配信に対しては、D4-liteとして画面OCRによる部分観測を補助ログ扱いで検討する。ただし品質ゲートや足切りには使わない。
 - Reason: 過去配信では正式チャット取得ができない場合がある。画面OCRは補助情報になり得るが、観測漏れや誤認識があるため、品質判断の正本や自動足切りに使うべきではない。
 - Alternatives considered: D4-liteを正式D4の代替にする。画面OCRを品質ゲートに使う。過去配信ではチャット相当情報を一切検討しない。
-- Related files: `docs/claude/development-policy.md`
+- Related files: `docs/task-009-セキュリティ境界と実処理接続方針.md`
 - Review condition: D4-liteを検討する場合、補助ログの不確実性、保存範囲、UI表示、使用禁止範囲が文書化されたとき。
 
 ## Decision ZC-D-011
 
 - Decision ID: ZC-D-011
 - Date: 2026-06-13
-- Status: accepted
-- Decision: `docs/claude/development-policy.md` はFable草案として保持し、Codex管理文書は `docs/codex/` に置く。
-- Reason: Claude作成文書とCodex管理文書を混ぜると、どの内容をユーザー確認済みの作業基準とするかが曖昧になる。現行リポジトリにも `docs/claude/README.md` でClaude作成文書の区分が示されている。
-- Alternatives considered: `docs/claude/development-policy.md` を直接編集する。`docs/` 直下の既存タスク文書に追記する。Codex管理文書を作らずに会話で管理する。
-- Related files: `docs/claude/README.md`, `docs/claude/development-policy.md`, `docs/codex/zev2-adoption-plan.md`, `docs/codex/zev2-progress.md`
+- Status: superseded
+- Decision: 旧草案と初期ブリーフは保持せず削除し、Codex管理文書は現行処理に関係するものへ絞る。
+- Reason: 旧草案を参考資料として残すと、切り捨てたテキスト品質評価、長文プロンプト、品質比較が作業対象として復活しやすい。現在必要なのは、工程、承認、人間判断、成果物参照、実処理接続条件を説明する文書である。
+- Alternatives considered: 旧草案を参考資料として残す。旧草案を直接編集して現行仕様に合わせる。Codex管理文書を作らずに会話で管理する。
+- Related files: `docs/codex/zev2-progress.md`, `docs/current-implementation.md`, `docs/zev2-flow-contract.md`
 - Review condition: Codex管理文書の置き場所や管理主体を変更する必要が出たとき。
 
 ## Decision ZC-D-012
@@ -138,7 +140,7 @@
 - Decision: ChatGPTとの会話内容は正典にしない。
 - Reason: 会話内容は設計検討の参考にはなるが、ユーザーが確認できるリポジトリ内の記録と同じ扱いにはできない。今後の作業基準は、Codexが文書化し、ユーザーが確認した内容に限定する。
 - Alternatives considered: ChatGPTとの会話をそのまま実装指示として扱う。会話要約を正典にする。外部会話を参照しない。
-- Related files: `docs/codex/zev2-adoption-plan.md`, `docs/codex/zev2-progress.md`
+- Related files: `docs/codex/zev2-progress.md`
 - Review condition: 外部会話から採用する内容がある場合、Codex管理文書に調査結果として書き直し、ユーザー確認を受けたとき。
 
 ## Decision ZC-D-013
@@ -499,7 +501,7 @@
 - Date: 2026-06-20
 - Status: accepted
 - Decision: 設計書は人間向けの説明として保つ。内部型、API名、JSON項目、AIエージェント都合の工程名を主語にせず、人間が何を選び、何を確認し、どこで止められるかを先に書く。
-- Reason: 設計書が実装者向けの状態名や成果物名中心になると、ユーザーが「どの内容で切り抜くか」「なぜこの順番で進むか」「何を削るべきか」を判断できない。現在の目的は、細かい補助計測を増やすことではなく、文字起こしからテーマを選び、複数箇所をつなぐ最小の流れを人間が理解できる形で固定することである。
+- Reason: 設計書が実装者向けの状態名や成果物名中心になると、ユーザーが「どの内容で切り抜くか」「見つかった素材で動画にできそうか」「何を削るべきか」を判断できない。現在の目的は、細かい補助計測を増やすことではなく、文字起こしから内容候補を整理し、人間が面白そうな内容を選び、AIが使用素材を探し、人間が素材で進めるか確認する流れを固定することである。
 - Alternatives considered: API仕様を設計書の主文にする。JSONスキーマを先に並べる。AIエージェントの工程名だけで流れを説明する。
 - Related files: `docs/codex/control-plane-spec.md`, `docs/current-implementation.md`, `docs/ai-agent-api.md`, `client/src/App.vue`
 - Review condition: 設計書を読んでも、人間が何を選ぶのか、何を確認するのか、どこで止めるのかが分からない場合。

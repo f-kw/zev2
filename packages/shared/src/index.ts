@@ -1,4 +1,4 @@
-import { findById, isStatusIn } from './common.js';
+import { findById, isStatusIn, lastMatching } from './common.js';
 
 export * from './common.js';
 
@@ -17,13 +17,13 @@ export const WORKFLOW_STEPS = [
   },
   {
     type: 'propose_clip_themes',
-    label: 'テーマ候補作成',
+    label: '内容候補整理',
     outputKind: 'theme_json',
     requiresHumanApproval: false
   },
   {
     type: 'build_clip_composition',
-    label: '複数箇所構成',
+    label: '使用素材構成',
     outputKind: 'composition_json',
     requiresHumanApproval: false
   },
@@ -71,18 +71,20 @@ export type WorkflowStep = (typeof WORKFLOW_STEPS)[number];
 export type AgentRequestType = WorkflowStep['type'];
 export type FileRefKind = WorkflowStep['outputKind'];
 export type SttRuntimeMode = 'fixed' | 'local';
+export type ContentDiscoveryRuntimeMode = 'fixed' | 'transcript';
 export type GeminiRuntimeMode = 'fixed' | 'gemini';
 export type AdjustmentRuntimeMode = 'fixed';
 
 export type RequestDraftStatus = 'draft' | 'approved' | 'rejected';
 export type AgentRequestStatus = 'queued' | 'running' | 'waiting' | 'succeeded' | 'failed' | 'superseded';
 export type FileRefAccess = 'internal' | 'external';
-export type ControlReviewKind = 'theme_selection' | 'render_readiness';
+export type ControlReviewKind = 'theme_selection' | 'material_confirmation' | 'render_readiness';
 export type ControlReviewStatus = 'review_required' | 'approved' | 'rejected' | 'changes_requested';
 export type HumanReviewActionType = 'approve' | 'reject' | 'request_changes';
 export type DecisionLogActor = 'agent' | 'runner' | 'backend' | 'system' | 'user';
 export type DecisionLogType =
   | 'theme_selection'
+  | 'material_confirmation'
   | 'render_readiness';
 
 export interface ControlReference {
@@ -113,8 +115,8 @@ export interface RuntimeConfig {
     localServerUrl: string;
     language: string;
   };
-  themeExploration: {
-    mode: GeminiRuntimeMode;
+  contentDiscovery: {
+    mode: ContentDiscoveryRuntimeMode;
   };
   editPlan: {
     mode: GeminiRuntimeMode;
@@ -303,9 +305,9 @@ const OUTPUT_TYPE_BY_REQUEST_TYPE = {
 const DRY_RUN_MEANING_BY_REQUEST_TYPE = {
   prepare_video: '対象動画を取得または参照し、AI処理用の入力として保存した結果',
   run_stt: '動画から音声を抽出し、ZEVローカルSTTで文字起こしした結果',
-  propose_clip_themes: '文字起こしから切り抜きたい内容を選ぶためのテーマ候補を作った結果',
-  build_clip_composition: '選ばれたテーマに関係する複数発話箇所を集めて構成案を作った結果',
-  create_edit_plan: '複数箇所の構成案と動画断片をもとに演出案を作った結果',
+  propose_clip_themes: '文字起こしに何があるかを内容候補として整理した結果',
+  build_clip_composition: '選ばれた内容に関係する複数発話箇所を集めて使用素材構成案を作った結果',
+  create_edit_plan: '使用素材構成案と動画断片をもとに演出案を作った結果',
   apply_adjustment: '修正内容を複数箇所の演出案へ反映した結果',
   render_video: '編集案から複数箇所を連結して動画を生成した結果'
 } satisfies Record<AgentRequestType, string>;
@@ -368,7 +370,7 @@ export function isAgentRequestReady(state: Zev2State, request: AgentRequest): bo
   }
 
   const dependency = findAgentRequestDependency(state, request);
-  return (!dependency || dependency.status === 'succeeded') && !findBlockingControlReview(state, request);
+  return (!dependency || dependency.status === 'succeeded') && !isBlockedByHumanReview(state, request);
 }
 
 export function findReadyAgentRequest(state: Zev2State): AgentRequest | undefined {
@@ -382,15 +384,67 @@ export function hasHumanReviewRequired(state: Zev2State): boolean {
 }
 
 export function findBlockingControlReview(
-  _state: Zev2State,
-  _request: AgentRequest
+  state: Zev2State,
+  request: AgentRequest
 ): ControlReviewItem | undefined {
-  return undefined;
+  const requiredKind = requiredApprovedReviewKindBeforeRequest(request.type);
+  if (!requiredKind) {
+    return undefined;
+  }
+
+  const latestReview = lastMatching(
+    state.controlReviewItems,
+    (item) => item.requestDraftId === request.requestDraftId && item.kind === requiredKind
+  );
+
+  return latestReview?.status === 'approved' ? undefined : latestReview;
 }
 
 export function getRequiredControlReviewKind(
-  _request: AgentRequest
+  request: AgentRequest
 ): ControlReviewKind | undefined {
+  if (request.type === 'propose_clip_themes') {
+    return 'theme_selection';
+  }
+
+  if (request.type === 'build_clip_composition') {
+    return 'material_confirmation';
+  }
+
+  if (request.type === 'apply_adjustment') {
+    return 'render_readiness';
+  }
+
+  return undefined;
+}
+
+function isBlockedByHumanReview(state: Zev2State, request: AgentRequest): boolean {
+  const requiredKind = requiredApprovedReviewKindBeforeRequest(request.type);
+  if (!requiredKind) {
+    return false;
+  }
+
+  const latestReview = lastMatching(
+    state.controlReviewItems,
+    (item) => item.requestDraftId === request.requestDraftId && item.kind === requiredKind
+  );
+
+  return latestReview?.status !== 'approved';
+}
+
+function requiredApprovedReviewKindBeforeRequest(requestType: AgentRequestType): ControlReviewKind | undefined {
+  if (requestType === 'build_clip_composition') {
+    return 'theme_selection';
+  }
+
+  if (requestType === 'create_edit_plan') {
+    return 'material_confirmation';
+  }
+
+  if (requestType === 'render_video') {
+    return 'render_readiness';
+  }
+
   return undefined;
 }
 
@@ -410,7 +464,7 @@ export function validateRequestDraftInput(input: Partial<RequestDraftInput>): st
   }
 
   if (!input.themeCountLabel?.trim()) {
-    errors.push('テーマ数を選んでください');
+    errors.push('候補数を選んでください');
   }
 
   if (!input.geminiModelName?.trim()) {

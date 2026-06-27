@@ -297,6 +297,10 @@ export const useControlQueueStore = defineStore('controlQueue', {
           : '確認結果を保存して続きを実行しています';
       try {
         this.state = await submitHumanReviewAction(id, action, reason, selectedOptionId, scope);
+        if (action === 'request_changes' && this.state.requestDrafts[0]) {
+          this.activeDraftId = this.state.requestDrafts[0].id;
+          this.activePurpose = this.state.requestDrafts[0].purpose;
+        }
         this.lastChangedAt = new Date().toISOString();
 
         if (action === 'approve' || action === 'request_changes') {
@@ -330,7 +334,7 @@ export const useControlQueueStore = defineStore('controlQueue', {
       this.runNumber += 1;
       this.lastChangedAt = new Date().toISOString();
       this.message = scope === 'theme_selection'
-        ? 'テーマを選び直せる状態に戻しています'
+        ? '内容を選び直せる状態に戻しています'
         : scope === 'adjustment'
           ? '微調整から作り直しています'
           : '演出を作り直しています';

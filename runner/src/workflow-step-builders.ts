@@ -188,8 +188,8 @@ export function createStepArtifactBuilders(runtime: WorkflowStepRuntime): Record
         request,
         'run_stt',
         'transcript_json',
-        '文字起こし成果物がないためテーマ候補を作れません',
-        'テーマ候補作成が読む文字起こし成果物'
+        '文字起こし成果物がないため内容候補を整理できません',
+        '内容候補整理が読む文字起こし成果物'
       );
       return finishStep(
         runtime,
@@ -201,9 +201,9 @@ export function createStepArtifactBuilders(runtime: WorkflowStepRuntime): Record
           request,
           'theme_json',
           await runtime.buildThemeOptionsArtifact(transcriptInput.artifact, request),
-          'テーマ候補作成が作ったテーマ候補成果物'
+          '内容候補整理が作った内容候補成果物'
         ),
-        'ユーザーが切り抜き内容を選ぶためのテーマ候補'
+        'ユーザーが面白そうな内容を選ぶための内容候補'
       );
     },
 
@@ -214,8 +214,8 @@ export function createStepArtifactBuilders(runtime: WorkflowStepRuntime): Record
         request,
         'run_stt',
         'transcript_json',
-        '文字起こし成果物がないため構成案を作れません',
-        '複数箇所構成が読む文字起こし成果物'
+        '文字起こし成果物がないため使用素材構成案を作れません',
+        '使用素材構成が読む文字起こし成果物'
       );
       const themesInput = await readValidatedRequestArtifact<ThemeArtifact>(
         runtime,
@@ -223,8 +223,8 @@ export function createStepArtifactBuilders(runtime: WorkflowStepRuntime): Record
         request,
         'propose_clip_themes',
         'theme_json',
-        'テーマ候補成果物がないため構成案を作れません',
-        '複数箇所構成が読むテーマ候補成果物'
+        '内容候補成果物がないため使用素材構成案を作れません',
+        '使用素材構成が読む内容候補成果物'
       );
       return finishStep(
         runtime,
@@ -241,9 +241,9 @@ export function createStepArtifactBuilders(runtime: WorkflowStepRuntime): Record
             state,
             request.requestDraftId
           ),
-          '複数箇所構成が作った構成案成果物'
+          '使用素材構成が作った構成案成果物'
         ),
-        '選ばれたテーマに関係する複数箇所の構成案'
+        '選ばれた内容に関係する使用素材構成案'
       );
     },
 
@@ -254,7 +254,7 @@ export function createStepArtifactBuilders(runtime: WorkflowStepRuntime): Record
         request,
         'build_clip_composition',
         'composition_json',
-        '複数箇所の構成案がないため演出案を作れません',
+        '使用素材構成案がないため演出案を作れません',
         '演出作成が読む構成案成果物'
       );
       const sourceInput = requestOutputInputRef(
@@ -278,7 +278,7 @@ export function createStepArtifactBuilders(runtime: WorkflowStepRuntime): Record
           await runtime.buildEditPlanArtifact(request, compositionInput.artifact, state),
           '演出作成が作った編集案成果物'
         ),
-        '構成案に画面枠とテロップを付けた編集案'
+        '使用素材構成案に画面枠とテロップを付けた編集案'
       );
     },
 

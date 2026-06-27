@@ -333,7 +333,7 @@ function buildGeminiEditPlanPrompt(composition: ClipCompositionArtifact, request
     '}',
     '',
     `依頼目的: ${request.input.purpose}`,
-    `テーマ: ${composition.title}`,
+    `選ばれた内容: ${composition.title}`,
     `完成イメージ: ${composition.themeSummary}`,
     '',
     partsText
@@ -502,7 +502,7 @@ function buildGeminiCandidateSelectionPrompt(
     '  ]',
     '}',
     '',
-    `テーマ: ${composition.title}`,
+    `選ばれた内容: ${composition.title}`,
     `完成イメージ: ${composition.themeSummary}`,
     '',
     segmentText

@@ -23,7 +23,7 @@ function selectedThemeIdFromState(state: Zev2State, requestDraftId: string, them
   if (!action?.selectedOptionId) {
     const firstThemeId = themes.themes[0]?.id;
     if (!firstThemeId) {
-      throw new Error('テーマ候補がないため構成案を作れません');
+      throw new Error('内容候補がないため使用素材構成案を作れません');
     }
 
     return firstThemeId;
@@ -39,7 +39,7 @@ function buildClipComposition(
 ): ClipCompositionArtifact {
   const selectedTheme = findById(themes.themes, selectedThemeId);
   if (!selectedTheme) {
-    throw new Error('選ばれたテーマがテーマ候補にありません');
+    throw new Error('選ばれた内容が内容候補にありません');
   }
 
   const groupedSpeechIds = transcript.speechUnitGroups.length > 0
@@ -59,7 +59,7 @@ function buildClipComposition(
       transcriptText: segmentTextByIds(transcript, partSpeechIds),
       speechIds: partSpeechIds,
       speechUnits: speechUnitsByIds(transcript, partSpeechIds),
-      connectionNote: index === 0 ? 'テーマを見せる入口として使う' : '前の発話を受けて話の流れをつなぐ'
+      connectionNote: index === 0 ? '選ばれた内容を見せる入口として使う' : '前の発話を受けて話の流れをつなぐ'
     };
   });
   const ranges = parts.map((part) => ({ sourceStartMs: part.sourceStartMs, sourceEndMs: part.sourceEndMs }));

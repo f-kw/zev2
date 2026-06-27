@@ -73,7 +73,7 @@ export type TranscriptArtifact = {
 
 export type ThemeArtifact = {
   kind: 'theme_json';
-  mode: 'gemini-api-theme-options' | 'sample-theme-options';
+  mode: 'sample-theme-options' | 'transcript-content-options';
   generatedAt: string;
   sourceUri: string;
   themes: Array<{
