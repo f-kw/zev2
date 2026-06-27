@@ -69,6 +69,7 @@ const vertexLocation = process.env.GOOGLE_CLOUD_LOCATION || 'global';
 const useFixedTranscript = process.env.ZEV2_STT_RUNTIME_MODE === 'fixed';
 const useFixedThemeOptions = process.env.ZEV2_THEME_EXPLORATION_MODE === 'fixed';
 const useFixedEditPlan = process.env.ZEV2_EDIT_PLAN_MODE === 'fixed';
+const adjustmentMode = process.env.ZEV2_ADJUSTMENT_MODE ?? 'fixed';
 const OUTPUT_FILE_NAME_BY_KIND = {
   source_video: 'source-video.json',
   transcript_json: 'transcript.json',
@@ -429,6 +430,10 @@ async function buildEditPlanArtifact(
 }
 
 function buildPatch(editPlanUri: string): PatchArtifact {
+  if (adjustmentMode !== 'fixed') {
+    throw new Error(`微調整工程は fixed だけ対応しています: ${adjustmentMode}`);
+  }
+
   return buildPatchArtifact(editPlanUri);
 }
 

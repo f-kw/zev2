@@ -3,6 +3,7 @@ import { existsSync } from 'node:fs';
 import path from 'node:path';
 import {
   recordValue,
+  type AdjustmentRuntimeMode,
   type GeminiRuntimeMode,
   type RuntimeConfig,
   type SttRuntimeMode
@@ -18,6 +19,9 @@ const DEFAULT_RUNTIME_CONFIG: RuntimeConfig = {
     mode: 'fixed'
   },
   editPlan: {
+    mode: 'fixed'
+  },
+  adjustment: {
     mode: 'fixed'
   },
   source: {
@@ -64,6 +68,14 @@ function parseGeminiRuntimeMode(value: unknown, pathLabel: string): GeminiRuntim
   }
 
   throw new Error(`設定ファイルの ${pathLabel} は fixed または gemini を指定してください`);
+}
+
+function parseAdjustmentRuntimeMode(value: unknown): AdjustmentRuntimeMode {
+  if (value === 'fixed') {
+    return value;
+  }
+
+  throw new Error('設定ファイルの adjustment.mode は fixed を指定してください');
 }
 
 function stringFromConfig(value: unknown, fallback: string): string {
@@ -149,6 +161,7 @@ function normalizeRuntimeConfig(value: unknown): RuntimeConfig {
   const stt = recordValue(root.stt);
   const themeExploration = recordValue(root.themeExploration);
   const editPlan = recordValue(root.editPlan);
+  const adjustment = recordValue(root.adjustment);
   const source = recordValue(root.source);
 
   return {
@@ -168,6 +181,9 @@ function normalizeRuntimeConfig(value: unknown): RuntimeConfig {
         editPlan.mode ?? DEFAULT_RUNTIME_CONFIG.editPlan.mode,
         'editPlan.mode'
       )
+    },
+    adjustment: {
+      mode: parseAdjustmentRuntimeMode(adjustment.mode ?? DEFAULT_RUNTIME_CONFIG.adjustment.mode)
     },
     source: {
       defaultUri: stringFromConfig(source.defaultUri, DEFAULT_RUNTIME_CONFIG.source.defaultUri),
@@ -194,7 +210,8 @@ export async function loadRuntimeConfig(): Promise<RuntimeConfig> {
 export function createRunnerEnvironmentFromConfig(config: RuntimeConfig): Record<string, string> {
   const stageModes = {
     ZEV2_THEME_EXPLORATION_MODE: config.themeExploration.mode,
-    ZEV2_EDIT_PLAN_MODE: config.editPlan.mode
+    ZEV2_EDIT_PLAN_MODE: config.editPlan.mode,
+    ZEV2_ADJUSTMENT_MODE: config.adjustment.mode
   };
 
   if (config.stt.mode === 'fixed') {

@@ -145,7 +145,7 @@ export type EditPlanArtifact = {
 
 export type PatchArtifact = {
   kind: 'patch_json';
-  mode: 'zev-inspired-adjustment-fixture';
+  mode: 'fixed-adjustment';
   generatedAt: string;
   editPlanUri: string;
   changes: Array<{

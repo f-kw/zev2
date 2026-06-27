@@ -149,10 +149,11 @@ backend は `http://localhost:8080/api`。
 UIで承認するとrunnerは自動起動する。
 UIは状態APIを更新しながら完了状態を確認する。
 `pnpm run runner:dry-run` は、開発中に残キューだけ処理したい場合の手動実行用。
-通常起動のSTT、テーマ探索、演出作成の切替は `config/runtime.jsonc` で行う。
-今は `stt.mode`、`themeExploration.mode`、`editPlan.mode` が `fixed` なので、固定済みの文字起こし、テーマ候補、演出案を使う。
+通常起動のSTT、テーマ探索、演出作成、微調整の切替や明示は `config/runtime.jsonc` で行う。
+今は `stt.mode`、`themeExploration.mode`、`editPlan.mode`、`adjustment.mode` が `fixed` なので、固定済みの文字起こし、テーマ候補、演出案を使い、微調整は固定処理として演出案を動画生成へ渡す。
 実STTを使う場合は `stt.mode` を `local` にし、`stt.localServerUrl` にローカルSTTサーバを指定する。
 Gemini APIでテーマ探索と演出作成を行う場合は、`themeExploration.mode` と `editPlan.mode` を `gemini` にする。
+微調整工程は現時点では実質的な編集判断をしていない。不要と判断できたら工程から外す候補にする。
 STTサーバのIPは変わる前提なので、コードには固定しない。
 Gemini APIの標準モデルは `gemini-3.5-flash`。UIの使用モデルで、品質確認、軽い確認、疎通確認の用途から依頼ごとに切り替えられる。
 runnerの標準モデルだけを変える場合は `ZEV2_GEMINI_MODEL` を使う。

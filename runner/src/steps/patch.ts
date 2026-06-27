@@ -3,7 +3,7 @@ import type { PatchArtifact } from '../workflow-artifacts.js';
 export function buildPatchArtifact(editPlanUri: string): PatchArtifact {
   return {
     kind: 'patch_json',
-    mode: 'zev-inspired-adjustment-fixture',
+    mode: 'fixed-adjustment',
     generatedAt: new Date().toISOString(),
     editPlanUri,
     changes: [

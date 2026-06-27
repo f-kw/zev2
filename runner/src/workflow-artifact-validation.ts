@@ -346,7 +346,7 @@ export function assertEditPlanArtifact(value: unknown, label = '編集案成果�
 export function assertPatchArtifact(value: unknown, label = '調整結果成果物'): asserts value is PatchArtifact {
   const record = assertRecord(value, label);
   assertLiteral(record.kind, `${label}の種類`, ['patch_json'] as const);
-  assertLiteral(record.mode, `${label}の作成方法`, ['zev-inspired-adjustment-fixture'] as const);
+  assertLiteral(record.mode, `${label}の作成方法`, ['fixed-adjustment'] as const);
   assertNonEmptyString(record.generatedAt, `${label}の作成日時`);
   assertNonEmptyString(record.editPlanUri, `${label}の編集案参照`);
   if (typeof record.renderReady !== 'boolean') {

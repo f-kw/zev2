@@ -72,6 +72,7 @@ export type AgentRequestType = WorkflowStep['type'];
 export type FileRefKind = WorkflowStep['outputKind'];
 export type SttRuntimeMode = 'fixed' | 'local';
 export type GeminiRuntimeMode = 'fixed' | 'gemini';
+export type AdjustmentRuntimeMode = 'fixed';
 
 export type RequestDraftStatus = 'draft' | 'approved' | 'rejected';
 export type AgentRequestStatus = 'queued' | 'running' | 'waiting' | 'succeeded' | 'failed' | 'superseded';
@@ -117,6 +118,9 @@ export interface RuntimeConfig {
   };
   editPlan: {
     mode: GeminiRuntimeMode;
+  };
+  adjustment: {
+    mode: AdjustmentRuntimeMode;
   };
   source: {
     defaultUri: string;

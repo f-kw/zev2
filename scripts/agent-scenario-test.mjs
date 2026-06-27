@@ -220,6 +220,7 @@ async function assertRuntimeConfig(apiBaseUrl) {
   assertScenario(runtimeConfig.stt?.mode === 'fixed', '現在の設定が固定データ確認になっていない');
   assertScenario(runtimeConfig.themeExploration?.mode === 'fixed', 'テーマ探索が固定データ確認になっていない');
   assertScenario(runtimeConfig.editPlan?.mode === 'fixed', '演出作成が固定データ確認になっていない');
+  assertScenario(runtimeConfig.adjustment?.mode === 'fixed', '微調整が固定処理として明示されていない');
   assertScenario(
     runtimeConfig.source?.defaultUri === 'runtime/artifacts/draft_w4Lp9IJC6pQl3FsRfFL9t/source-video.mp4',
     '設定ファイルの入力動画参照がUIへ渡せる形になっていない'
@@ -386,6 +387,7 @@ async function assertGeneratedDraftCompleted(apiBaseUrl, runtimeDir, draftId, la
   const themes = await readRequestArtifact(state, runtimeDir, draftId, 'propose_clip_themes');
   const composition = await readRequestArtifact(state, runtimeDir, draftId, 'build_clip_composition');
   const editPlan = await readRequestArtifact(state, runtimeDir, draftId, 'create_edit_plan');
+  const adjustment = await readRequestArtifact(state, runtimeDir, draftId, 'apply_adjustment');
   const expectedThemeId = themes.themes[0]?.id;
   assertScenario(
     transcript.mode === 'zev-sample-stt',
@@ -411,6 +413,10 @@ async function assertGeneratedDraftCompleted(apiBaseUrl, runtimeDir, draftId, la
   assertScenario(
     editPlan.mode === 'sample-edit-plan',
     `${label}: Gemini APIを使わない固定確認でGemini実行済みの編集案として保存されている`
+  );
+  assertScenario(
+    adjustment.mode === 'fixed-adjustment',
+    `${label}: 微調整が固定処理として保存されていない`
   );
 }
 

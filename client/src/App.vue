@@ -58,6 +58,11 @@ const runtimeSummaries = computed(() => {
       description: store.runtimeConfig.editPlan.mode === 'fixed'
         ? '固定の演出案と表示枠を使います'
         : '動画断片をGemini APIへ送り、演出案と表示枠を作ります'
+    },
+    {
+      label: '微調整',
+      title: '固定処理',
+      description: '演出案をそのまま動画生成へ渡します'
     }
   ];
 });
