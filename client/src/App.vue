@@ -11,14 +11,13 @@ import {
 import { useControlQueueStore } from './stores/controlQueue';
 
 type RedoScope = 'theme_selection' | 'edit_plan' | 'adjustment';
-type ReviewChangeScope = 'edit_plan' | 'theme_reselect' | 'adjustment';
+type ReviewChangeScope = 'edit_plan' | 'theme_reselect' | 'material_reselect' | 'adjustment';
 
 const store = useControlQueueStore();
 const submitting = ref(false);
 const activeRedoScope = ref<RedoScope | ''>('');
 const activeReviewAction = ref('');
 const selectedReviewOptionId = ref('');
-const reviewReason = ref('');
 const requestDefaultsApplied = ref(false);
 const initialPurpose = 'ショート動画を作成する';
 let refreshTimer: number | undefined;
@@ -223,8 +222,13 @@ function approveReviewLabel(review: ControlReviewItem): string {
   return '確認用動画を作る';
 }
 
-function defaultReviewReason(review: ControlReviewItem, action: string, scope?: ReviewChangeScope): string {
-  const inputReason = reviewReason.value.trim();
+function defaultReviewReason(
+  review: ControlReviewItem,
+  action: string,
+  scope?: ReviewChangeScope,
+  reasonText = ''
+): string {
+  const inputReason = reasonText.trim();
   if (inputReason) {
     return inputReason;
   }
@@ -234,8 +238,12 @@ function defaultReviewReason(review: ControlReviewItem, action: string, scope?: 
       return '内容候補を作り直す';
     }
 
+    if (review.kind === 'material_confirmation' && scope === 'theme_reselect') {
+      return '内容を選び直す';
+    }
+
     if (review.kind === 'material_confirmation') {
-      return '同じ内容で素材を探し直す';
+      return '同じ内容で素材を選び直す';
     }
 
     if (scope === 'theme_reselect') {
@@ -252,9 +260,50 @@ function defaultReviewReason(review: ControlReviewItem, action: string, scope?: 
   return '確認済みとして進める';
 }
 
+function reviewChangePromptMessage(review: ControlReviewItem, scope?: ReviewChangeScope): string {
+  if (review.kind === 'material_confirmation' && scope === 'theme_reselect') {
+    return '内容を選び直す指示があれば入力してください';
+  }
+
+  if (review.kind === 'material_confirmation') {
+    return 'どんな素材に選び直したいか入力してください';
+  }
+
+  if (review.kind === 'render_readiness' && scope === 'theme_reselect') {
+    return '内容を選び直す指示があれば入力してください';
+  }
+
+  if (review.kind === 'render_readiness' && scope === 'adjustment') {
+    return '微調整で直したい点があれば入力してください';
+  }
+
+  return '作り直したい内容があれば入力してください';
+}
+
+function reasonFromDialog(review: ControlReviewItem, scope?: ReviewChangeScope): string | undefined {
+  const input = window.prompt(reviewChangePromptMessage(review, scope), '');
+  if (input === null) {
+    return undefined;
+  }
+
+  if (review.kind === 'material_confirmation' && scope !== 'theme_reselect' && !input.trim()) {
+    window.alert('素材を選び直す指示を入力してください');
+    return undefined;
+  }
+
+  return defaultReviewReason(review, 'request_changes', scope, input);
+}
+
 async function submitActiveReview(action: 'approve' | 'request_changes', scope?: ReviewChangeScope) {
   const review = activeReviewItem.value;
   if (!review) {
+    return;
+  }
+
+  const reason = action === 'request_changes'
+    ? reasonFromDialog(review, scope)
+    : defaultReviewReason(review, action, scope);
+  if (!reason) {
     return;
   }
 
@@ -263,11 +312,10 @@ async function submitActiveReview(action: 'approve' | 'request_changes', scope?:
     await store.submitControlReview(
       review.id,
       action,
-      defaultReviewReason(review, action, scope),
+      reason,
       isContentSelectionReview(review) ? selectedReviewOptionId.value : undefined,
       scope
     );
-    reviewReason.value = '';
   } finally {
     activeReviewAction.value = '';
   }
@@ -332,7 +380,6 @@ watch(
     selectedReviewOptionId.value = review?.kind === 'theme_selection'
       ? review.options[0]?.id ?? ''
       : '';
-    reviewReason.value = '';
   }
 );
 </script>
@@ -426,15 +473,6 @@ watch(
         </label>
       </div>
 
-      <label class="review-reason">
-        修正したい点
-        <textarea
-          v-model="reviewReason"
-          rows="3"
-          placeholder="必要な場合だけ入力"
-        />
-      </label>
-
       <div class="review-actions">
         <button
           type="button"
@@ -448,9 +486,18 @@ watch(
           type="button"
           class="secondary-button"
           :disabled="store.loading"
-          @click="submitActiveReview('request_changes')"
+          @click="submitActiveReview('request_changes', 'material_reselect')"
         >
-          {{ activeReviewAction === 'request_changes' ? '処理中' : '素材を探し直す' }}
+          {{ activeReviewAction === 'request_changes:material_reselect' ? '処理中' : '素材を選び直す' }}
+        </button>
+        <button
+          v-if="isMaterialConfirmationReview(activeReviewItem)"
+          type="button"
+          class="secondary-button"
+          :disabled="store.loading"
+          @click="submitActiveReview('request_changes', 'theme_reselect')"
+        >
+          {{ activeReviewAction === 'request_changes:theme_reselect' ? '処理中' : '内容を選び直す' }}
         </button>
         <button
           v-if="activeReviewItem.kind === 'render_readiness'"
@@ -780,10 +827,6 @@ button:disabled {
   white-space: pre-line;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 4;
-}
-
-.review-reason {
-  font-weight: 700;
 }
 
 .review-actions {

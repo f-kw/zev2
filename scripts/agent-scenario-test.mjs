@@ -188,9 +188,7 @@ async function runAgent(apiBaseUrl, runtimeDir) {
 
 async function approveRequiredReview(apiBaseUrl, draftId) {
   const state = await requestJson(apiPath(apiBaseUrl, '/state'));
-  const review = state.controlReviewItems
-    .filter((item) => item.requestDraftId === draftId && item.status === 'review_required')
-    .sort((left, right) => right.createdAt.localeCompare(left.createdAt))[0];
+  const review = latestReview(state, draftId, undefined, 'review_required');
   assertScenario(review, `${draftId}: 承認すべき確認工程が見つからない`);
 
   const selectedOptionId = review.kind === 'theme_selection'
@@ -212,13 +210,62 @@ async function approveRequiredReview(apiBaseUrl, draftId) {
   return approved.state;
 }
 
+function latestReview(state, draftId, kind, status) {
+  return state.controlReviewItems
+    .filter((item) =>
+      item.requestDraftId === draftId &&
+      (!kind || item.kind === kind) &&
+      (!status || item.status === status)
+    )
+    .sort((left, right) => right.createdAt.localeCompare(left.createdAt))[0];
+}
+
+async function createApprovedScenarioDraft(apiBaseUrl, purpose) {
+  const created = await requestJson(apiPath(apiBaseUrl, '/request-drafts'), {
+    method: 'POST',
+    body: JSON.stringify({
+      purpose,
+      sourceUri: fixedSourceUri,
+      durationLabel: '60秒以内',
+      themeCountLabel: '3候補',
+      geminiModelName: 'gemini-3.5-flash',
+      preset: 'shorts_default'
+    })
+  });
+
+  await requestJson(apiPath(apiBaseUrl, `/request-drafts/${created.draft.id}/approve`), {
+    method: 'POST'
+  });
+
+  return created.draft;
+}
+
+async function runDraftUntilReview(apiBaseUrl, runtimeDir, draftId, expectedKind) {
+  for (let attempt = 0; attempt < 8; attempt += 1) {
+    await runAgent(apiBaseUrl, runtimeDir);
+    const state = await requestJson(apiPath(apiBaseUrl, '/state'));
+    const expectedReview = latestReview(state, draftId, expectedKind, 'review_required');
+    if (expectedReview) {
+      return { state, review: expectedReview };
+    }
+
+    const nextReview = latestReview(state, draftId, undefined, 'review_required');
+    if (nextReview) {
+      await approveRequiredReview(apiBaseUrl, draftId);
+      continue;
+    }
+  }
+
+  throw new Error(`${draftId}: ${expectedKind} の確認工程まで到達しない`);
+}
+
 async function runAgentApprovingReviews(apiBaseUrl, runtimeDir, draftId) {
   for (let attempt = 0; attempt < 8; attempt += 1) {
     await runAgent(apiBaseUrl, runtimeDir);
     const state = await requestJson(apiPath(apiBaseUrl, '/state'));
     const requests = agentRequestsForDraft(state, draftId);
-    const renderRequest = requests.find((request) => request.type === 'render_video');
-    if (renderRequest?.status === 'succeeded') {
+    const renderSucceeded = requests.some((request) => request.type === 'render_video' && request.status === 'succeeded');
+    if (renderSucceeded) {
       return state;
     }
 
@@ -318,7 +365,9 @@ function artifactPathByUri(runtimeDir, uri) {
 }
 
 async function readRequestArtifact(state, runtimeDir, requestDraftId, requestType) {
-  const request = agentRequestsForDraft(state, requestDraftId).find((item) => item.type === requestType);
+  const request = agentRequestsForDraft(state, requestDraftId)
+    .filter((item) => item.type === requestType && item.status === 'succeeded')
+    .sort((left, right) => right.createdAt.localeCompare(left.createdAt))[0];
   const fileRef = state.fileRefs.find((item) => item.id === request?.result?.fileRefId);
   assertScenario(fileRef?.uri, `${requestType}: 成果物参照が保存されていない`);
   return readJsonFile(artifactPathByUri(runtimeDir, fileRef.uri));
@@ -513,6 +562,79 @@ async function assertGeneratedDraftCompleted(apiBaseUrl, runtimeDir, draftId, la
   );
 }
 
+async function assertMaterialReselectFromMaterialConfirmation(apiBaseUrl, runtimeDir) {
+  const draft = await createApprovedScenarioDraft(apiBaseUrl, '使用素材確認から素材を選び直す');
+  const { review } = await runDraftUntilReview(apiBaseUrl, runtimeDir, draft.id, 'material_confirmation');
+  const instruction = 'ゲーム画面が分かる場面を優先する';
+
+  const response = await requestJson(apiPath(apiBaseUrl, `/control-reviews/${review.id}/request-changes`), {
+    method: 'POST',
+    body: JSON.stringify({
+      reason: instruction,
+      scope: 'material_reselect'
+    })
+  });
+
+  const copiedDraft = response.state.requestDrafts.find((item) =>
+    item.id !== draft.id &&
+    item.purpose.includes(`素材選び直し指示: ${instruction}`)
+  );
+  assertScenario(copiedDraft, '素材選び直しで指示付きの編集コピーが作られていない');
+
+  const copiedRequests = agentRequestsForDraft(response.state, copiedDraft.id);
+  const expectedStartIndex = workflowTypes.indexOf('build_clip_composition');
+  assertScenario(copiedRequests.length === 7, '素材選び直し後の編集コピーに7工程がない');
+  assertScenario(
+    copiedRequests.slice(0, expectedStartIndex).every((request) => request.status === 'succeeded'),
+    '素材選び直しで使用素材構成より前の工程が完了済みとしてコピーされていない'
+  );
+  assertScenario(
+    copiedRequests.slice(expectedStartIndex).every((request) => request.status === 'queued'),
+    '素材選び直しで使用素材構成以降が未作成状態に戻っていない'
+  );
+
+  await runAgentApprovingReviews(apiBaseUrl, runtimeDir, copiedDraft.id);
+  const completedState = await requestJson(apiPath(apiBaseUrl, '/state'));
+  const composition = await readRequestArtifact(completedState, runtimeDir, copiedDraft.id, 'build_clip_composition');
+  assertScenario(
+    composition.assemblyPlan.includes(`素材選び直し指示: ${instruction}`),
+    '素材選び直しの指示が使用素材構成案に保存されていない'
+  );
+}
+
+async function assertContentReselectFromMaterialConfirmation(apiBaseUrl, runtimeDir) {
+  const draft = await createApprovedScenarioDraft(apiBaseUrl, '使用素材確認から内容を選び直す');
+  const { review } = await runDraftUntilReview(apiBaseUrl, runtimeDir, draft.id, 'material_confirmation');
+
+  const response = await requestJson(apiPath(apiBaseUrl, `/control-reviews/${review.id}/request-changes`), {
+    method: 'POST',
+    body: JSON.stringify({
+      reason: '別の内容を選ぶ',
+      scope: 'theme_reselect'
+    })
+  });
+  const themeReview = latestReview(response.state, draft.id, 'theme_selection', 'review_required');
+  assertScenario(themeReview, '使用素材確認から内容選択へ戻れていない');
+  assertScenario(themeReview.options.length >= 2, '内容選び直しで複数候補を選べない');
+
+  const selectedOptionId = themeReview.options[1].id;
+  await requestJson(apiPath(apiBaseUrl, `/control-reviews/${themeReview.id}/approve`), {
+    method: 'POST',
+    body: JSON.stringify({
+      reason: '内容選び直し後の候補を選択する',
+      selectedOptionId
+    })
+  });
+
+  await runAgentApprovingReviews(apiBaseUrl, runtimeDir, draft.id);
+  const completedState = await requestJson(apiPath(apiBaseUrl, '/state'));
+  const composition = await readRequestArtifact(completedState, runtimeDir, draft.id, 'build_clip_composition');
+  assertScenario(
+    composition.selectedThemeId === selectedOptionId,
+    '内容選び直し後に選んだ内容が使用素材構成案へ反映されていない'
+  );
+}
+
 async function scenarioAutomaticVideoCreation(apiBaseUrl, runtimeDir) {
   const draftInput = {
     purpose: '固定STTデータからショート動画を作成する',
@@ -589,6 +711,9 @@ async function scenarioAutomaticVideoCreation(apiBaseUrl, runtimeDir) {
       nextAfterMultipleRestarts.request?.type === 'apply_adjustment',
     '複数の作り直し候補があるとき、最後に作った編集コピーが次の実行対象になっていない'
   );
+
+  await assertMaterialReselectFromMaterialConfirmation(apiBaseUrl, runtimeDir);
+  await assertContentReselectFromMaterialConfirmation(apiBaseUrl, runtimeDir);
 
   const noFixedDraftInput = {
     purpose: '固定データなしではSTT接続が必要になることを確認する',

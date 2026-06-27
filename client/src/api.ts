@@ -69,7 +69,7 @@ export async function submitHumanReviewAction(
   action: HumanReviewActionType,
   reason: string,
   selectedOptionId?: string,
-  scope?: 'edit_plan' | 'theme_reselect' | 'adjustment'
+  scope?: 'edit_plan' | 'theme_reselect' | 'material_reselect' | 'adjustment'
 ): Promise<Zev2State> {
   const actionPath =
     action === 'approve' ? 'approve' : action === 'reject' ? 'reject' : 'request-changes';

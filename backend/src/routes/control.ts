@@ -35,7 +35,7 @@ import { startDryRunRunner } from '../runner/auto-runner.js';
 import { loadRuntimeConfig } from '../config/runtime-config.js';
 
 const router: express.Router = express.Router();
-type ReviewChangeScope = 'edit_plan' | 'theme_reselect' | 'adjustment';
+type ReviewChangeScope = 'edit_plan' | 'theme_reselect' | 'material_reselect' | 'adjustment';
 type GeneratedVideoChangeScope = 'theme_selection' | 'edit_plan' | 'adjustment';
 type LoadedState = Awaited<ReturnType<typeof loadState>>;
 
@@ -129,16 +129,25 @@ function outputForAgentRequest(state: Awaited<ReturnType<typeof loadState>>, req
   return findById(state.outputs, request.result.outputId);
 }
 
-function copyDraftForRestart(sourceDraft: RequestDraft, reason: string, createdAt: string): RequestDraft {
-  const purpose = reason
-    ? [sourceDraft.purpose, `やり直し内容: ${reason}`].join('\n')
-    : sourceDraft.purpose;
+function copyDraftForRestart(
+  sourceDraft: RequestDraft,
+  reason: string,
+  createdAt: string,
+  materialReselectInstruction?: string
+): RequestDraft {
+  const purposeLines = [sourceDraft.purpose];
+  if (reason) {
+    purposeLines.push(`やり直し内容: ${reason}`);
+  }
+  if (materialReselectInstruction) {
+    purposeLines.push(`素材選び直し指示: ${materialReselectInstruction}`);
+  }
 
   return {
     ...sourceDraft,
     id: createId('draft'),
     status: 'approved',
-    purpose,
+    purpose: purposeLines.join('\n'),
     source: { ...sourceDraft.source },
     settings: { ...sourceDraft.settings },
     policy: { ...sourceDraft.policy },
@@ -303,7 +312,8 @@ function createCopiedEditRestart(
   requestDraftId: string,
   startType: AgentRequest['type'],
   reason: string,
-  createdAt: string
+  createdAt: string,
+  materialReselectInstruction?: string
 ): {
   draft: RequestDraft;
   requests: AgentRequest[];
@@ -320,7 +330,7 @@ function createCopiedEditRestart(
   }
 
   const startIndex = workflowStepIndex(startType);
-  const copiedDraft = copyDraftForRestart(sourceDraft, reason, createdAt);
+  const copiedDraft = copyDraftForRestart(sourceDraft, reason, createdAt, materialReselectInstruction);
   const requests: AgentRequest[] = [];
   const queuedRequests: AgentRequest[] = [];
   const fileRefs: FileRef[] = [];
@@ -523,8 +533,8 @@ function createThemeReselectFromReview(
   reviewItem: ControlReviewItem;
   requests: AgentRequest[];
 } | { error: string } {
-  if (reviewItem.kind !== 'render_readiness') {
-    return { error: '内容を選び直せるのは動画生成前確認からだけです' };
+  if (reviewItem.kind !== 'render_readiness' && reviewItem.kind !== 'material_confirmation') {
+    return { error: '内容を選び直せるのは使用素材確認または動画生成前確認からだけです' };
   }
 
   const sourceRequest = findById(state.agentRequests, reviewItem.agentRequestId);
@@ -563,10 +573,9 @@ function createThemeReselectFromReview(
   );
 
   const startIndex = workflowStepIndex('build_clip_composition');
-  const renderIndex = workflowStepIndex('render_video');
   let dependsOnAgentRequestId = themeRequest.id;
   const requests: AgentRequest[] = [];
-  for (const step of WORKFLOW_STEPS.slice(startIndex, renderIndex)) {
+  for (const step of WORKFLOW_STEPS.slice(startIndex)) {
     const request = createAgentRequestAfter(sourceRequest, step.type, dependsOnAgentRequestId, createdAt);
     requests.push(request);
     dependsOnAgentRequestId = request.id;
@@ -814,6 +823,8 @@ async function applyHumanReviewAction(
     const changeScope: ReviewChangeScope =
       changeScopeInput === 'theme_reselect'
         ? 'theme_reselect'
+        : changeScopeInput === 'material_reselect'
+          ? 'material_reselect'
         : changeScopeInput === 'adjustment'
           ? 'adjustment'
           : 'edit_plan';
@@ -831,13 +842,24 @@ async function applyHumanReviewAction(
       }
 
       copiedRestart = restart;
+    } else if (reviewItem.kind === 'material_confirmation' && changeScope === 'theme_reselect') {
+      const result = createThemeReselectFromReview(state, reviewItem, createdAt);
+      if ('error' in result) {
+        return { status: 'error', statusCode: 409, error: result.error, state };
+      }
+
+      replaceStartType = 'build_clip_composition';
+      newAgentRequests = result.requests;
+      extraDecisionLog = result.decisionLog;
+      extraReviewItem = result.reviewItem;
     } else if (reviewItem.kind === 'material_confirmation') {
       const restart = createCopiedEditRestart(
         state,
         reviewItem.requestDraftId,
         'build_clip_composition',
         reason,
-        createdAt
+        createdAt,
+        changeScope === 'material_reselect' ? reason : undefined
       );
       if ('error' in restart) {
         return { status: 'error', statusCode: 409, error: restart.error, state };

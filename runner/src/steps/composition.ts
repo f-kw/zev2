@@ -35,7 +35,8 @@ function selectedThemeIdFromState(state: Zev2State, requestDraftId: string, them
 function buildClipComposition(
   themes: ThemeArtifact,
   transcript: TranscriptArtifact,
-  selectedThemeId: string
+  selectedThemeId: string,
+  materialReselectInstruction?: string
 ): ClipCompositionArtifact {
   const selectedTheme = findById(themes.themes, selectedThemeId);
   if (!selectedTheme) {
@@ -66,6 +67,10 @@ function buildClipComposition(
   const firstStartMs = Math.min(...ranges.map((range) => range.sourceStartMs));
   const lastEndMs = Math.max(...ranges.map((range) => range.sourceEndMs));
 
+  const assemblyPlan = materialReselectInstruction
+    ? `${selectedTheme.compositionNote}\n素材選び直し指示: ${materialReselectInstruction}`
+    : selectedTheme.compositionNote;
+
   return {
     kind: 'composition_json',
     mode: 'transcript-multi-part-composition',
@@ -77,16 +82,33 @@ function buildClipComposition(
     sourceStartMs: firstStartMs,
     sourceEndMs: lastEndMs,
     parts,
-    assemblyPlan: selectedTheme.compositionNote
+    assemblyPlan
   };
+}
+
+function materialReselectInstructionFromPurpose(purpose: string): string | undefined {
+  const marker = '素材選び直し指示:';
+  const markerIndex = purpose.lastIndexOf(marker);
+  if (markerIndex < 0) {
+    return undefined;
+  }
+
+  const instruction = purpose.slice(markerIndex + marker.length).trim();
+  return instruction || undefined;
 }
 
 export function buildClipCompositionArtifact(
   themes: ThemeArtifact,
   transcript: TranscriptArtifact,
   state: Zev2State,
-  requestDraftId: string
+  requestDraftId: string,
+  requestPurpose = ''
 ): ClipCompositionArtifact {
   const selectedThemeId = selectedThemeIdFromState(state, requestDraftId, themes);
-  return buildClipComposition(themes, transcript, selectedThemeId);
+  return buildClipComposition(
+    themes,
+    transcript,
+    selectedThemeId,
+    materialReselectInstructionFromPurpose(requestPurpose)
+  );
 }

@@ -281,7 +281,7 @@ export const useControlQueueStore = defineStore('controlQueue', {
       action: HumanReviewActionType,
       reason: string,
       selectedOptionId?: string,
-      scope?: 'edit_plan' | 'theme_reselect' | 'adjustment'
+      scope?: 'edit_plan' | 'theme_reselect' | 'material_reselect' | 'adjustment'
     ) {
       this.loading = true;
       this.errorMessage = '';

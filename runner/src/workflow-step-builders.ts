@@ -23,7 +23,8 @@ export type WorkflowStepRuntime = {
     themes: ThemeArtifact,
     transcript: TranscriptArtifact,
     state: Zev2State,
-    requestDraftId: string
+    requestDraftId: string,
+    requestPurpose?: string
   ) => ClipCompositionArtifact;
   buildEditPlanArtifact: (
     request: AgentRequest,
@@ -239,7 +240,8 @@ export function createStepArtifactBuilders(runtime: WorkflowStepRuntime): Record
             themesInput.artifact,
             transcriptInput.artifact,
             state,
-            request.requestDraftId
+            request.requestDraftId,
+            request.input.purpose
           ),
           '使用素材構成が作った構成案成果物'
         ),
