@@ -346,6 +346,23 @@ function assertTelopsDoNotCoverWholeSegments(editPlan, label) {
   }
 }
 
+function assertFixedEditPlanUsesPreparedScreenLayout(editPlan, label) {
+  for (const [segmentIndex, segment] of editPlan.renderSegments.entries()) {
+    assertScenario(
+      segment.screenLayout?.screenLayoutId === 'screen_speaker',
+      `${label}: 動画断片${segmentIndex + 1}が固定確認用の画面と話者の表示枠を使っていない`
+    );
+    assertScenario(
+      segment.screenLayout?.selectedCandidateId !== 'speaker_only_full',
+      `${label}: 動画断片${segmentIndex + 1}が元動画全体を縦長へ中央cropする表示枠に戻っている`
+    );
+    assertScenario(
+      Array.isArray(segment.screenLayout?.viewports?.screen) && Array.isArray(segment.screenLayout?.viewports?.speaker),
+      `${label}: 動画断片${segmentIndex + 1}に画面枠と話者枠の切り出し範囲が保存されていない`
+    );
+  }
+}
+
 async function assertWorkflowStepManifests(runtimeDir, draftId, label, expectedRequestTypes = workflowTypes) {
   const artifactDir = path.join(runtimeDir, 'artifacts', draftId);
   const expectedInputs = {
@@ -485,6 +502,7 @@ async function assertGeneratedDraftCompleted(apiBaseUrl, runtimeDir, draftId, la
     `${label}: 編集案の動画断片数が使用素材構成案と一致していない`
   );
   assertTelopsDoNotCoverWholeSegments(editPlan, label);
+  assertFixedEditPlanUsesPreparedScreenLayout(editPlan, label);
   assertScenario(
     editPlan.mode === 'sample-edit-plan',
     `${label}: Gemini APIを使わない固定確認でGemini実行済みの編集案として保存されている`
@@ -542,6 +560,7 @@ async function scenarioAutomaticVideoCreation(apiBaseUrl, runtimeDir) {
   await assertWorkflowStepManifests(runtimeDir, draft.id, '初回生成');
   const editPlan = await readRequestArtifact(state, runtimeDir, draft.id, 'create_edit_plan');
   assertTelopsDoNotCoverWholeSegments(editPlan, '初回生成');
+  assertFixedEditPlanUsesPreparedScreenLayout(editPlan, '初回生成');
 
   const editPlanRestartDraft = await assertCopiedRestart(apiBaseUrl, draft.id, 'edit_plan', 'create_edit_plan');
   await runAgentApprovingReviews(apiBaseUrl, runtimeDir, editPlanRestartDraft.id);

@@ -282,10 +282,11 @@ function sampleScreenLayoutPlanForPart(index: number): ShortsScreenLayoutPlan {
   );
 }
 
-function screenLayoutForFixtureSource(
-  request: AgentRequest
+function screenLayoutForFixtureMode(
+  request: AgentRequest,
+  useFixedEditPlan: boolean
 ): ((part: ClipCompositionArtifact['parts'][number], index: number) => ShortsScreenLayoutPlan) | undefined {
-  if (request.target.sourceUri === 'zev-sample://speech-id-timing') {
+  if (request.target.sourceUri === 'zev-sample://speech-id-timing' || useFixedEditPlan) {
     return (_part, index) => sampleScreenLayoutPlanForPart(index);
   }
 
@@ -713,7 +714,7 @@ export async function buildEditPlanArtifact(
 ): Promise<EditPlanArtifact> {
   const basePlan = buildFixtureEditPlan(
     composition,
-    screenLayoutForFixtureSource(request)
+    screenLayoutForFixtureMode(request, context.useFixedEditPlan)
   );
 
   if (isSampleRequest(request) || context.useFixedEditPlan) {
