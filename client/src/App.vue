@@ -482,7 +482,7 @@ watch(
       </div>
     </section>
 
-    <section v-if="outputVideoUri" class="video-panel">
+    <section v-else-if="outputVideoUri" class="video-panel">
       <div>
         <p class="eyebrow">生成結果</p>
         <h2>完成動画</h2>
@@ -518,35 +518,67 @@ watch(
 
 <style scoped>
 .app-shell {
-  min-height: 100vh;
+  height: 100dvh;
+  min-height: 0;
   background: #f5f7f9;
   color: #17202a;
   display: grid;
-  gap: 24px;
-  padding: 32px;
+  grid-template-columns: minmax(300px, 380px) minmax(0, 1fr);
+  grid-template-rows: auto minmax(0, 1fr);
+  gap: 14px;
+  padding: 16px;
+  overflow: hidden;
+  box-sizing: border-box;
 }
 
 .request-panel,
 .status-panel,
 .review-panel,
 .video-panel {
-  width: min(960px, 100%);
-  margin: 0 auto;
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
 }
 
 .request-panel,
-.status-panel,
-.review-panel {
+.status-panel {
+  grid-column: 1;
+}
+
+.request-panel {
+  grid-row: 1;
+}
+
+.status-panel {
+  grid-row: 2;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.review-panel,
+.video-panel {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  min-height: 0;
+  height: 100%;
   background: #ffffff;
   border: 1px solid #d8e0e7;
   border-radius: 8px;
-  padding: 24px;
+  padding: 16px;
+}
+
+.request-panel,
+.status-panel {
+  background: #ffffff;
+  border: 1px solid #d8e0e7;
+  border-radius: 8px;
+  padding: 16px;
 }
 
 .eyebrow {
-  margin: 0 0 8px;
+  margin: 0 0 6px;
   color: #607080;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 700;
 }
 
@@ -557,39 +589,48 @@ h2 {
 }
 
 h1 {
-  font-size: 30px;
+  font-size: 24px;
 }
 
 h2 {
-  font-size: 22px;
+  font-size: 19px;
 }
 
 .request-form {
   display: grid;
-  gap: 18px;
-  margin-top: 24px;
+  gap: 12px;
+  margin-top: 14px;
 }
 
 .runtime-summary {
   display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 8px;
-  border: 1px solid #cbd8e2;
-  border-radius: 8px;
-  background: #f7fafc;
-  padding: 14px;
 }
 
 .runtime-summary-item {
   display: grid;
-  gap: 8px;
+  gap: 4px;
+  border: 1px solid #cbd8e2;
+  border-radius: 8px;
+  background: #f7fafc;
+  padding: 9px;
+  min-width: 0;
 }
 
 .runtime-summary-item + .runtime-summary-item {
-  border-top: 1px solid #d8e0e7;
-  padding-top: 12px;
+  border-top: 1px solid #cbd8e2;
+}
+
+.runtime-summary-item h2 {
+  overflow: hidden;
+  font-size: 15px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .runtime-summary p {
+  display: none;
   margin: 0;
   color: #34495e;
   font-size: 14px;
@@ -606,11 +647,11 @@ label {
 textarea {
   width: 100%;
   box-sizing: border-box;
-  resize: vertical;
-  min-height: 112px;
+  resize: none;
+  min-height: 78px;
   border: 1px solid #c7d2dc;
   border-radius: 8px;
-  padding: 14px;
+  padding: 12px;
   color: #17202a;
   font: inherit;
 }
@@ -621,7 +662,7 @@ button {
   border-radius: 8px;
   background: #1264a3;
   color: #ffffff;
-  padding: 12px 18px;
+  padding: 10px 14px;
   font-weight: 800;
   cursor: pointer;
 }
@@ -635,62 +676,78 @@ button:disabled {
   display: flex;
   align-items: start;
   justify-content: space-between;
-  gap: 16px;
+  gap: 10px;
+}
+
+.status-header h2 {
+  font-size: 17px;
 }
 
 .progress-pill {
   border-radius: 999px;
   background: #e8eef4;
   color: #34495e;
-  padding: 8px 12px;
-  font-size: 13px;
+  padding: 7px 10px;
+  font-size: 12px;
   font-weight: 800;
   white-space: nowrap;
 }
 
 .error-message {
-  margin: 18px 0 0;
+  margin: 10px 0 0;
   border-left: 4px solid #b42318;
   background: #fff2f1;
-  padding: 12px;
+  padding: 10px;
   color: #8a1f17;
+  font-size: 13px;
   font-weight: 700;
 }
 
 .status-message {
-  margin: 18px 0 0;
+  margin: 10px 0 0;
   border-left: 4px solid #1264a3;
   background: #edf6ff;
-  padding: 12px;
+  padding: 10px;
   color: #173a5e;
+  font-size: 13px;
   font-weight: 800;
 }
 
 .review-panel {
   display: grid;
-  gap: 16px;
+  grid-template-rows: auto auto minmax(0, 1fr) auto auto;
+  gap: 12px;
+  overflow: hidden;
 }
 
 .review-summary {
   margin: 0;
   color: #34495e;
-  line-height: 1.6;
+  display: -webkit-box;
+  overflow: hidden;
+  line-height: 1.45;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
 }
 
 .review-options {
   display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 10px;
+  min-height: 0;
+  overflow: hidden;
 }
 
 .review-option {
   display: flex;
-  gap: 12px;
+  gap: 10px;
   align-items: flex-start;
   border: 1px solid #d8e0e7;
   border-radius: 8px;
   background: #f8fafc;
-  padding: 14px;
+  padding: 12px;
   font-weight: 400;
+  min-width: 0;
 }
 
 .review-option.selectable {
@@ -704,17 +761,25 @@ button:disabled {
 .review-option span {
   display: grid;
   gap: 6px;
+  min-width: 0;
 }
 
 .review-option strong {
+  overflow: hidden;
   color: #17202a;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .review-option small {
   color: #526171;
-  font-size: 14px;
-  line-height: 1.5;
+  display: -webkit-box;
+  overflow: hidden;
+  font-size: 13px;
+  line-height: 1.45;
   white-space: pre-line;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
 }
 
 .review-reason {
@@ -735,8 +800,9 @@ button:disabled {
 .step-list {
   list-style: none;
   display: grid;
-  gap: 8px;
-  margin: 22px 0 0;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px;
+  margin: 12px 0 0;
   padding: 0;
 }
 
@@ -744,15 +810,23 @@ button:disabled {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
+  gap: 8px;
+  min-width: 0;
   border: 1px solid #d8e0e7;
-  border-radius: 8px;
-  padding: 12px 14px;
+  border-radius: 6px;
+  padding: 7px 8px;
   background: #ffffff;
 }
 
+.step-item span {
+  overflow: hidden;
+  font-size: 12px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .step-item strong {
-  font-size: 13px;
+  font-size: 11px;
   color: #526171;
   white-space: nowrap;
 }
@@ -774,7 +848,9 @@ button:disabled {
 
 .video-panel {
   display: grid;
-  gap: 16px;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  gap: 12px;
+  overflow: hidden;
 }
 
 .redo-actions {
@@ -784,21 +860,32 @@ button:disabled {
 }
 
 video {
-  width: min(420px, 100%);
-  max-height: 78vh;
+  width: auto;
+  max-width: 100%;
+  height: 100%;
+  min-height: 0;
+  justify-self: center;
+  object-fit: contain;
   background: #000000;
   border-radius: 8px;
 }
 
-@media (max-width: 640px) {
+@media (max-width: 900px) {
   .app-shell {
+    height: auto;
+    min-height: 100dvh;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto minmax(0, 1fr);
+    overflow: auto;
     padding: 18px;
   }
 
   .request-panel,
   .status-panel,
-  .review-panel {
-    padding: 18px;
+  .review-panel,
+  .video-panel {
+    grid-column: 1;
+    grid-row: auto;
   }
 
   .status-header,
@@ -817,6 +904,12 @@ video {
 
   .review-actions {
     display: grid;
+  }
+
+  video {
+    width: min(420px, 100%);
+    height: auto;
+    max-height: 70dvh;
   }
 }
 </style>
