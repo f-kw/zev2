@@ -7,6 +7,7 @@ import {
   type HumanReviewActionType,
   type RequestDraft,
   type RequestDraftInput,
+  type RuntimeConfig,
   type Zev2State,
   type WorkflowStep
 } from '@zev2/shared';
@@ -17,6 +18,11 @@ const api = axios.create({
 
 export async function fetchWorkflow(): Promise<{ steps: WorkflowStep[] }> {
   const response = await api.get('/workflow');
+  return response.data;
+}
+
+export async function fetchRuntimeConfig(): Promise<RuntimeConfig> {
+  const response = await api.get('/runtime-config');
   return response.data;
 }
 

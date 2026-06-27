@@ -1,6 +1,7 @@
 import { spawn } from 'node:child_process';
 import { existsSync } from 'node:fs';
 import path from 'node:path';
+import { createRunnerEnvironmentFromConfig, loadRuntimeConfig } from '../config/runtime-config.js';
 
 let runningDryRun: Promise<void> | null = null;
 let rerunRequested = false;
@@ -27,7 +28,9 @@ function apiBaseUrl(): string {
   return process.env.ZEV2_API_BASE_URL ?? `http://localhost:${process.env.PORT ?? '8080'}/api`;
 }
 
-function runDryRunOnce(): Promise<void> {
+async function runDryRunOnce(): Promise<void> {
+  const runtimeConfig = await loadRuntimeConfig();
+
   return new Promise<void>((resolve, reject) => {
     const output: string[] = [];
     const child = spawn(
@@ -37,6 +40,7 @@ function runDryRunOnce(): Promise<void> {
         cwd: workspaceRoot(),
         env: {
           ...process.env,
+          ...createRunnerEnvironmentFromConfig(runtimeConfig),
           ZEV2_API_BASE_URL: apiBaseUrl()
         }
       }

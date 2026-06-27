@@ -149,7 +149,9 @@ backend は `http://localhost:8080/api`。
 UIで承認するとrunnerは自動起動する。
 UIは状態APIを更新しながら完了状態を確認する。
 `pnpm run runner:dry-run` は、開発中に残キューだけ処理したい場合の手動実行用。
-実STTを使う場合は `ZEV2_STT_SERVER_URL` または `ZEV_STT_SERVER_URL` を設定する。
+通常起動のSTT切替は `config/runtime.json` で行う。
+今は `stt.mode` が `fixed` なので、固定済みの文字起こしを使う。
+実STTを使う場合は `stt.mode` を `local` にし、`stt.localServerUrl` にローカルSTTサーバを指定する。
 STTサーバのIPは変わる前提なので、コードには固定しない。
 Gemini APIの標準モデルは `gemini-3.5-flash`。UIの使用モデルで、品質確認、軽い確認、疎通確認の用途から依頼ごとに切り替えられる。
 runnerの標準モデルだけを変える場合は `ZEV2_GEMINI_MODEL` を使う。

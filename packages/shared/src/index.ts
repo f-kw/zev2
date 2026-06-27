@@ -70,6 +70,7 @@ export const GEMINI_MODEL_OPTIONS = [
 export type WorkflowStep = (typeof WORKFLOW_STEPS)[number];
 export type AgentRequestType = WorkflowStep['type'];
 export type FileRefKind = WorkflowStep['outputKind'];
+export type SttRuntimeMode = 'fixed' | 'local';
 
 export type RequestDraftStatus = 'draft' | 'approved' | 'rejected';
 export type AgentRequestStatus = 'queued' | 'running' | 'waiting' | 'succeeded' | 'failed' | 'superseded';
@@ -102,6 +103,18 @@ export interface RequestDraftInput {
   themeCountLabel: string;
   geminiModelName: string;
   preset: string;
+}
+
+export interface RuntimeConfig {
+  stt: {
+    mode: SttRuntimeMode;
+    localServerUrl: string;
+    language: string;
+  };
+  source: {
+    defaultUri: string;
+    defaultPurpose: string;
+  };
 }
 
 export interface HumanControlPolicy {

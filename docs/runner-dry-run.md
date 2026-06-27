@@ -34,13 +34,37 @@ pnpm run runner:dry-run -- --api=http://localhost:8080/api
 pnpm run runner:dry-run -- --max-steps=100
 ```
 
-実STTを使う場合:
+backendから自動起動するrunnerは、`config/runtime.json` のSTT設定で動きます。
+
+今は固定データ確認です。
+
+```json
+{
+  "stt": {
+    "mode": "fixed"
+  }
+}
+```
+
+実STTを使う場合は、`mode` を `local` に変えます。
+
+```json
+{
+  "stt": {
+    "mode": "local",
+    "localServerUrl": "http://192.168.1.7:8000",
+    "language": "ja-JP"
+  }
+}
+```
+
+runnerを手動で単体実行する場合は、環境変数でも接続先を渡せます。
 
 ```bash
 ZEV2_STT_SERVER_URL=http://192.168.1.7:8000 pnpm run runner:dry-run
 ```
 
-STTサーバのIPは変わる前提なので、`ZEV2_STT_SERVER_URL` または `ZEV_STT_SERVER_URL` で指定します。
+STTサーバのIPは変わる前提なので、通常起動では `config/runtime.json` の `localServerUrl` を変更します。
 動画生成やGemini演出で使う外部コマンドも、`ZEV2_FFMPEG_BIN`、`ZEV2_FFPROBE_BIN`、`ZEV2_YTDLP_BIN` で差し替えられます。
 Gemini APIの標準モデルは `gemini-3.5-flash` です。UIの使用モデルで、品質確認、軽い確認、疎通確認の用途から依頼ごとに切り替えられます。
 runnerの標準モデルだけを変える場合は `ZEV2_GEMINI_MODEL` を使います。

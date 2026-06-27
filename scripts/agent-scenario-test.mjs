@@ -213,6 +213,15 @@ function apiPath(apiBaseUrl, routePath) {
   return `${apiBaseUrl}${routePath}`;
 }
 
+async function assertRuntimeConfig(apiBaseUrl) {
+  const runtimeConfig = await requestJson(apiPath(apiBaseUrl, '/runtime-config'));
+  assertScenario(runtimeConfig.stt?.mode === 'fixed', '現在の設定が固定データ確認になっていない');
+  assertScenario(
+    runtimeConfig.source?.defaultUri === 'runtime/artifacts/draft_w4Lp9IJC6pQl3FsRfFL9t/source-video.mp4',
+    '設定ファイルの入力動画参照がUIへ渡せる形になっていない'
+  );
+}
+
 async function assertOutputHasAudibleAudio(outputPath) {
   const audioProbe = await runProcess('ffprobe', [
     '-v',
@@ -515,6 +524,7 @@ async function main() {
   const backend = await startBackend(runtimeDir, port);
 
   try {
+    await assertRuntimeConfig(apiBaseUrl);
     await scenarioAutomaticVideoCreation(apiBaseUrl, runtimeDir);
     console.log(`シナリオテスト成功: ${runtimeDir}`);
   } finally {

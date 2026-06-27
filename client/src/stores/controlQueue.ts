@@ -6,12 +6,14 @@ import {
   isAgentRequestReady,
   type HumanReviewActionType,
   type RequestDraftInput,
+  type RuntimeConfig,
   type WorkflowStep,
   type Zev2State
 } from '@zev2/shared';
 import {
   approveDraft,
   createDraft,
+  fetchRuntimeConfig,
   fetchState,
   fetchWorkflow,
   requestGeneratedVideoChanges,
@@ -21,6 +23,7 @@ import {
 
 interface ControlQueueStoreState {
   workflowSteps: WorkflowStep[];
+  runtimeConfig: RuntimeConfig | null;
   state: Zev2State;
   loading: boolean;
   message: string;
@@ -105,6 +108,7 @@ function formatApiError(error: unknown): string {
 export const useControlQueueStore = defineStore('controlQueue', {
   state: (): ControlQueueStoreState => ({
     workflowSteps: [],
+    runtimeConfig: null,
     state: createInitialState(),
     loading: false,
     message: '',
@@ -119,8 +123,13 @@ export const useControlQueueStore = defineStore('controlQueue', {
     async refresh() {
       this.loading = true;
       try {
-        const [{ steps }, state] = await Promise.all([fetchWorkflow(), fetchState()]);
+        const [{ steps }, runtimeConfig, state] = await Promise.all([
+          fetchWorkflow(),
+          fetchRuntimeConfig(),
+          fetchState()
+        ]);
         this.workflowSteps = steps;
+        this.runtimeConfig = runtimeConfig;
         this.state = state;
         this.errorMessage = '';
         this.syncRunPhaseFromState();

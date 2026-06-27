@@ -32,6 +32,7 @@ import {
 } from '@zev2/shared';
 import { loadState, saveState } from '../store/json-store.js';
 import { startDryRunRunner } from '../runner/auto-runner.js';
+import { loadRuntimeConfig } from '../config/runtime-config.js';
 
 const router: express.Router = express.Router();
 type ReviewChangeScope = 'edit_plan' | 'theme_reselect' | 'adjustment';
@@ -797,6 +798,15 @@ router.get('/health', (_, response) => {
 
 router.get('/workflow', (_, response) => {
   response.json({ steps: WORKFLOW_STEPS });
+});
+
+router.get('/runtime-config', async (_, response) => {
+  try {
+    response.json(await loadRuntimeConfig());
+  } catch (error) {
+    const message = error instanceof Error ? error.message : '設定ファイルを読めません';
+    response.status(500).json({ error: message });
+  }
 });
 
 router.get('/state', async (_, response) => {

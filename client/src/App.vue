@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onBeforeUnmount, onMounted, reactive, ref } from 'vue';
+import { computed, onBeforeUnmount, onMounted, reactive, ref, watch } from 'vue';
 import {
   DEFAULT_GEMINI_MODEL,
   findById,
@@ -8,21 +8,42 @@ import {
 } from '@zev2/shared';
 import { useControlQueueStore } from './stores/controlQueue';
 
-const FIXED_SOURCE_URI = '/Users/kawafmm/workspace/zev2/runtime/artifacts/draft_w4Lp9IJC6pQl3FsRfFL9t/source-video.mp4';
 type RedoScope = 'theme_selection' | 'edit_plan' | 'adjustment';
 
 const store = useControlQueueStore();
 const submitting = ref(false);
 const activeRedoScope = ref<RedoScope | ''>('');
+const requestDefaultsApplied = ref(false);
+const initialPurpose = 'ショート動画を作成する';
 let refreshTimer: number | undefined;
 
 const requestInput = reactive<RequestDraftInput>({
-  purpose: '固定STTデータからショート動画を作成する',
-  sourceUri: FIXED_SOURCE_URI,
+  purpose: initialPurpose,
+  sourceUri: '',
   durationLabel: '60秒以内',
   themeCountLabel: '3テーマ',
   geminiModelName: DEFAULT_GEMINI_MODEL,
   preset: 'shorts_default'
+});
+
+const sttModeTitle = computed(() => {
+  if (!store.runtimeConfig) {
+    return '設定確認中';
+  }
+
+  return store.runtimeConfig.stt.mode === 'fixed' ? '固定データ確認' : '実STT';
+});
+
+const sttModeDescription = computed(() => {
+  if (!store.runtimeConfig) {
+    return '設定ファイルを読んでいます';
+  }
+
+  if (store.runtimeConfig.stt.mode === 'fixed') {
+    return 'STTサーバーには送らず、固定済みの文字起こしを使います';
+  }
+
+  return `動画音声をローカルSTTへ送ります: ${store.runtimeConfig.stt.localServerUrl}`;
 });
 
 const currentDraft = computed(() => {
@@ -129,8 +150,13 @@ function statusLabel(request: AgentRequest): string {
 }
 
 async function createVideo() {
+  const runtimeConfig = store.runtimeConfig;
+  if (!runtimeConfig) {
+    return;
+  }
+
   submitting.value = true;
-  requestInput.sourceUri = FIXED_SOURCE_URI;
+  requestInput.sourceUri = runtimeConfig.source.defaultUri;
   try {
     await store.createRequestDraft({ ...requestInput });
   } finally {
@@ -170,6 +196,25 @@ onBeforeUnmount(() => {
     window.clearInterval(refreshTimer);
   }
 });
+
+watch(
+  () => store.runtimeConfig,
+  (runtimeConfig) => {
+    if (
+      !runtimeConfig ||
+      requestDefaultsApplied.value ||
+      requestInput.sourceUri ||
+      requestInput.purpose !== initialPurpose
+    ) {
+      return;
+    }
+
+    requestInput.purpose = runtimeConfig.source.defaultPurpose;
+    requestInput.sourceUri = runtimeConfig.source.defaultUri;
+    requestInput.geminiModelName = DEFAULT_GEMINI_MODEL;
+    requestDefaultsApplied.value = true;
+  }
+);
 </script>
 
 <template>
@@ -181,6 +226,14 @@ onBeforeUnmount(() => {
       </div>
 
       <form class="request-form" @submit.prevent="createVideo">
+        <div class="runtime-summary">
+          <div>
+            <p class="eyebrow">文字起こし</p>
+            <h2>{{ sttModeTitle }}</h2>
+          </div>
+          <p>{{ sttModeDescription }}</p>
+        </div>
+
         <label>
           作りたい内容
           <textarea
@@ -190,7 +243,7 @@ onBeforeUnmount(() => {
           />
         </label>
 
-        <button type="submit" :disabled="submitting">
+        <button type="submit" :disabled="submitting || !store.runtimeConfig">
           {{ submitting ? '作成中' : '動画を作成' }}
         </button>
       </form>
@@ -304,6 +357,22 @@ h2 {
   display: grid;
   gap: 18px;
   margin-top: 24px;
+}
+
+.runtime-summary {
+  display: grid;
+  gap: 8px;
+  border: 1px solid #cbd8e2;
+  border-radius: 8px;
+  background: #f7fafc;
+  padding: 14px;
+}
+
+.runtime-summary p {
+  margin: 0;
+  color: #34495e;
+  font-size: 14px;
+  line-height: 1.5;
 }
 
 label {
