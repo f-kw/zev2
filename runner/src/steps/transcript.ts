@@ -8,7 +8,7 @@ export type BuildTranscriptArtifactContext = {
   sttServerTimeoutMs: number;
   sttSamplePath: string;
   fixedTranscriptPath: string;
-  useFixedAgentArtifacts: boolean;
+  useFixedTranscript: boolean;
   ffmpegCommand: string;
   requestArtifactDir: (request: AgentRequest) => string;
   resolveSourceVideoPath: (state: Zev2State, request: AgentRequest) => string | undefined;
@@ -363,7 +363,7 @@ export async function buildTranscriptArtifact(
     return buildZevSampleTranscript(request, context);
   }
 
-  if (context.useFixedAgentArtifacts) {
+  if (context.useFixedTranscript) {
     return buildFixedTranscript(request, context);
   }
 

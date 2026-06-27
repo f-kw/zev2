@@ -34,7 +34,7 @@ pnpm run runner:dry-run -- --api=http://localhost:8080/api
 pnpm run runner:dry-run -- --max-steps=100
 ```
 
-backendから自動起動するrunnerは、`config/runtime.json` のSTT設定で動きます。
+backendから自動起動するrunnerは、`config/runtime.json` の設定で動きます。
 
 今は固定データ確認です。
 
@@ -42,11 +42,17 @@ backendから自動起動するrunnerは、`config/runtime.json` のSTT設定で
 {
   "stt": {
     "mode": "fixed"
+  },
+  "themeExploration": {
+    "mode": "fixed"
+  },
+  "editPlan": {
+    "mode": "fixed"
   }
 }
 ```
 
-実STTを使う場合は、`mode` を `local` に変えます。
+実STT、Gemini APIによるテーマ探索、Gemini APIによる演出作成を使う場合は、それぞれの `mode` を変えます。
 
 ```json
 {
@@ -54,6 +60,12 @@ backendから自動起動するrunnerは、`config/runtime.json` のSTT設定で
     "mode": "local",
     "localServerUrl": "http://192.168.1.7:8000",
     "language": "ja-JP"
+  },
+  "themeExploration": {
+    "mode": "gemini"
+  },
+  "editPlan": {
+    "mode": "gemini"
   }
 }
 ```
@@ -61,7 +73,7 @@ backendから自動起動するrunnerは、`config/runtime.json` のSTT設定で
 runnerを手動で単体実行する場合は、環境変数でも接続先を渡せます。
 
 ```bash
-ZEV2_STT_SERVER_URL=http://192.168.1.7:8000 pnpm run runner:dry-run
+ZEV2_STT_RUNTIME_MODE=local ZEV2_THEME_EXPLORATION_MODE=gemini ZEV2_EDIT_PLAN_MODE=gemini ZEV2_STT_SERVER_URL=http://192.168.1.7:8000 pnpm run runner:dry-run
 ```
 
 STTサーバのIPは変わる前提なので、通常起動では `config/runtime.json` の `localServerUrl` を変更します。

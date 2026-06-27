@@ -178,7 +178,9 @@ async function runAgent(apiBaseUrl, runtimeDir) {
       ZEV2_RUNTIME_DIR: runtimeDir,
       ZEV2_API_BASE_URL: apiBaseUrl,
       ZEV2_WORKSPACE_ROOT: workspaceRoot,
-      ZEV2_USE_FIXED_AGENT_ARTIFACTS: '1'
+      ZEV2_STT_RUNTIME_MODE: 'fixed',
+      ZEV2_THEME_EXPLORATION_MODE: 'fixed',
+      ZEV2_EDIT_PLAN_MODE: 'fixed'
     },
     timeoutMs: 180000
   });
@@ -216,6 +218,8 @@ function apiPath(apiBaseUrl, routePath) {
 async function assertRuntimeConfig(apiBaseUrl) {
   const runtimeConfig = await requestJson(apiPath(apiBaseUrl, '/runtime-config'));
   assertScenario(runtimeConfig.stt?.mode === 'fixed', '現在の設定が固定データ確認になっていない');
+  assertScenario(runtimeConfig.themeExploration?.mode === 'fixed', 'テーマ探索が固定データ確認になっていない');
+  assertScenario(runtimeConfig.editPlan?.mode === 'fixed', '演出作成が固定データ確認になっていない');
   assertScenario(
     runtimeConfig.source?.defaultUri === 'runtime/artifacts/draft_w4Lp9IJC6pQl3FsRfFL9t/source-video.mp4',
     '設定ファイルの入力動画参照がUIへ渡せる形になっていない'

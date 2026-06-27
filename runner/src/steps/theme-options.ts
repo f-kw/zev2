@@ -16,7 +16,7 @@ import type { ThemeArtifact, TranscriptArtifact } from '../workflow-artifacts.js
 
 export type BuildThemeOptionsArtifactContext = {
   fixedThemeOptionsPath: string;
-  useFixedAgentArtifacts: boolean;
+  useFixedThemeOptions: boolean;
   sanitizePathPart: (value: string) => string;
   generateGeminiJsonContent: (
     request: AgentRequest,
@@ -317,9 +317,9 @@ export async function buildThemeOptionsArtifact(
     return buildSampleThemeOptions(transcript, request);
   }
 
-  if (!context.useFixedAgentArtifacts) {
-    return callGeminiThemeApi(request, transcript, context);
+  if (context.useFixedThemeOptions) {
+    return buildFixedThemeOptionsArtifact(transcript, request, context);
   }
 
-  return buildFixedThemeOptionsArtifact(transcript, request, context);
+  return callGeminiThemeApi(request, transcript, context);
 }

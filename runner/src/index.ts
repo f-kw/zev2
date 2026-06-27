@@ -66,7 +66,9 @@ const geminiApiKey = (process.env.GEMINI_API_KEY ?? process.env.GOOGLE_API_KEY ?
 const defaultGeminiModelName = process.env.ZEV2_GEMINI_MODEL ?? DEFAULT_GEMINI_MODEL;
 const vertexProjectId = process.env.GOOGLE_CLOUD_PROJECT || process.env.PROJECT_ID || process.env.GCP_PROJECT_ID || '';
 const vertexLocation = process.env.GOOGLE_CLOUD_LOCATION || 'global';
-const useFixedAgentArtifacts = process.env.ZEV2_USE_FIXED_AGENT_ARTIFACTS === '1';
+const useFixedTranscript = process.env.ZEV2_STT_RUNTIME_MODE === 'fixed';
+const useFixedThemeOptions = process.env.ZEV2_THEME_EXPLORATION_MODE === 'fixed';
+const useFixedEditPlan = process.env.ZEV2_EDIT_PLAN_MODE === 'fixed';
 const OUTPUT_FILE_NAME_BY_KIND = {
   source_video: 'source-video.json',
   transcript_json: 'transcript.json',
@@ -283,7 +285,7 @@ async function buildTranscript(request: AgentRequest, state: Zev2State): Promise
     sttServerTimeoutMs,
     sttSamplePath: ZEV_STT_SAMPLE_PATH,
     fixedTranscriptPath: FIXED_TRANSCRIPT_PATH,
-    useFixedAgentArtifacts,
+    useFixedTranscript,
     ffmpegCommand,
     requestArtifactDir,
     resolveSourceVideoPath,
@@ -294,7 +296,7 @@ async function buildTranscript(request: AgentRequest, state: Zev2State): Promise
 async function buildThemeOptionsArtifact(transcript: TranscriptArtifact, request: AgentRequest): Promise<ThemeArtifact> {
   return buildThemeOptionsArtifactForStep(transcript, request, {
     fixedThemeOptionsPath: FIXED_THEME_OPTIONS_PATH,
-    useFixedAgentArtifacts,
+    useFixedThemeOptions,
     sanitizePathPart,
     generateGeminiJsonContent,
     extractGeminiResponseText,
@@ -304,7 +306,7 @@ async function buildThemeOptionsArtifact(transcript: TranscriptArtifact, request
 
 function editPlanArtifactContext(): BuildEditPlanArtifactContext {
   return {
-    useFixedAgentArtifacts,
+    useFixedEditPlan,
     hasGeminiApiConnection: Boolean(geminiApiKey || vertexProjectId),
     ffmpegCommand,
     requestArtifactDir,

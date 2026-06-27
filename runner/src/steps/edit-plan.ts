@@ -24,7 +24,7 @@ import {
 import type { ClipCompositionArtifact, EditPlanArtifact, SpeechTimingRef } from '../workflow-artifacts.js';
 
 export type BuildEditPlanArtifactContext = {
-  useFixedAgentArtifacts: boolean;
+  useFixedEditPlan: boolean;
   hasGeminiApiConnection: boolean;
   ffmpegCommand: string;
   requestArtifactDir: (request: AgentRequest) => string;
@@ -629,7 +629,7 @@ export async function buildEditPlanArtifact(
     screenLayoutForFixtureSource(request)
   );
 
-  if (isSampleRequest(request) || context.useFixedAgentArtifacts) {
+  if (isSampleRequest(request) || context.useFixedEditPlan) {
     return basePlan;
   }
 

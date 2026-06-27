@@ -26,24 +26,40 @@ const requestInput = reactive<RequestDraftInput>({
   preset: 'shorts_default'
 });
 
-const sttModeTitle = computed(() => {
+const runtimeSummaries = computed(() => {
   if (!store.runtimeConfig) {
-    return '設定確認中';
+    return [
+      {
+        label: '実行設定',
+        title: '設定確認中',
+        description: '設定ファイルを読んでいます'
+      }
+    ];
   }
 
-  return store.runtimeConfig.stt.mode === 'fixed' ? '固定データ確認' : '実STT';
-});
-
-const sttModeDescription = computed(() => {
-  if (!store.runtimeConfig) {
-    return '設定ファイルを読んでいます';
-  }
-
-  if (store.runtimeConfig.stt.mode === 'fixed') {
-    return 'STTサーバーには送らず、固定済みの文字起こしを使います';
-  }
-
-  return `動画音声をローカルSTTへ送ります: ${store.runtimeConfig.stt.localServerUrl}`;
+  return [
+    {
+      label: '文字起こし',
+      title: store.runtimeConfig.stt.mode === 'fixed' ? '固定データ確認' : '実STT',
+      description: store.runtimeConfig.stt.mode === 'fixed'
+        ? 'STTサーバーには送らず、固定済みの文字起こしを使います'
+        : `動画音声をローカルSTTへ送ります: ${store.runtimeConfig.stt.localServerUrl}`
+    },
+    {
+      label: 'テーマ探索',
+      title: store.runtimeConfig.themeExploration.mode === 'fixed' ? '固定候補' : 'Gemini API',
+      description: store.runtimeConfig.themeExploration.mode === 'fixed'
+        ? '固定済みのテーマ候補を使います'
+        : '文字起こしをGemini APIへ送り、切り抜きテーマ候補を作ります'
+    },
+    {
+      label: '演出作成',
+      title: store.runtimeConfig.editPlan.mode === 'fixed' ? '固定演出' : 'Gemini API',
+      description: store.runtimeConfig.editPlan.mode === 'fixed'
+        ? '固定の演出案と表示枠を使います'
+        : '動画断片をGemini APIへ送り、演出案と表示枠を作ります'
+    }
+  ];
 });
 
 const currentDraft = computed(() => {
@@ -227,11 +243,17 @@ watch(
 
       <form class="request-form" @submit.prevent="createVideo">
         <div class="runtime-summary">
-          <div>
-            <p class="eyebrow">文字起こし</p>
-            <h2>{{ sttModeTitle }}</h2>
+          <div
+            v-for="summary in runtimeSummaries"
+            :key="summary.label"
+            class="runtime-summary-item"
+          >
+            <div>
+              <p class="eyebrow">{{ summary.label }}</p>
+              <h2>{{ summary.title }}</h2>
+            </div>
+            <p>{{ summary.description }}</p>
           </div>
-          <p>{{ sttModeDescription }}</p>
         </div>
 
         <label>
@@ -366,6 +388,16 @@ h2 {
   border-radius: 8px;
   background: #f7fafc;
   padding: 14px;
+}
+
+.runtime-summary-item {
+  display: grid;
+  gap: 8px;
+}
+
+.runtime-summary-item + .runtime-summary-item {
+  border-top: 1px solid #d8e0e7;
+  padding-top: 12px;
 }
 
 .runtime-summary p {
