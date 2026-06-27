@@ -121,20 +121,25 @@ export const useControlQueueStore = defineStore('controlQueue', {
   }),
   actions: {
     async refresh() {
-      this.loading = true;
       try {
         const [{ steps }, runtimeConfig, state] = await Promise.all([
           fetchWorkflow(),
           fetchRuntimeConfig(),
           fetchState()
         ]);
+        if (this.loading) {
+          return;
+        }
+
         this.workflowSteps = steps;
         this.runtimeConfig = runtimeConfig;
         this.state = state;
         this.errorMessage = '';
         this.syncRunPhaseFromState();
-      } finally {
-        this.loading = false;
+      } catch (error) {
+        if (!this.loading) {
+          this.errorMessage = formatApiError(error);
+        }
       }
     },
     syncRunPhaseFromState() {

@@ -19,6 +19,9 @@ const activeRedoScope = ref<RedoScope | ''>('');
 const activeReviewAction = ref('');
 const selectedReviewOptionId = ref('');
 const requestDefaultsApplied = ref(false);
+const pendingReviewChange = ref<{ reviewId: string; scope?: ReviewChangeScope } | null>(null);
+const changeReasonInput = ref('');
+const changeReasonError = ref('');
 const initialPurpose = 'ショート動画を作成する';
 let refreshTimer: number | undefined;
 
@@ -89,6 +92,15 @@ const activeReviewItem = computed<ControlReviewItem | undefined>(() => {
   return [...store.state.controlReviewItems]
     .filter((item) => item.requestDraftId === draft.id && item.status === 'review_required')
     .sort((a, b) => b.createdAt.localeCompare(a.createdAt))[0];
+});
+
+const pendingReviewItem = computed(() => {
+  const pending = pendingReviewChange.value;
+  if (!pending) {
+    return undefined;
+  }
+
+  return findById(store.state.controlReviewItems, pending.reviewId);
 });
 
 const currentRequests = computed(() => {
@@ -280,33 +292,48 @@ function reviewChangePromptMessage(review: ControlReviewItem, scope?: ReviewChan
   return '作り直したい内容があれば入力してください';
 }
 
-function reasonFromDialog(review: ControlReviewItem, scope?: ReviewChangeScope): string | undefined {
-  const input = window.prompt(reviewChangePromptMessage(review, scope), '');
-  if (input === null) {
-    return undefined;
+function reviewChangeDialogTitle(review: ControlReviewItem, scope?: ReviewChangeScope): string {
+  if (review.kind === 'material_confirmation' && scope === 'theme_reselect') {
+    return '内容を選び直す';
   }
 
-  if (review.kind === 'material_confirmation' && scope !== 'theme_reselect' && !input.trim()) {
-    window.alert('使う場面を選び直す指示を入力してください');
-    return undefined;
+  if (review.kind === 'material_confirmation') {
+    return '使う場面を選び直す';
   }
 
-  return defaultReviewReason(review, 'request_changes', scope, input);
+  if (review.kind === 'render_readiness' && scope === 'theme_reselect') {
+    return '内容を選び直す';
+  }
+
+  if (review.kind === 'render_readiness' && scope === 'adjustment') {
+    return '微調整から作り直す';
+  }
+
+  return '演出を作り直す';
 }
 
-async function submitActiveReview(action: 'approve' | 'request_changes', scope?: ReviewChangeScope) {
-  const review = activeReviewItem.value;
-  if (!review) {
-    return;
-  }
+function requiresChangeReason(review: ControlReviewItem, scope?: ReviewChangeScope): boolean {
+  return review.kind === 'material_confirmation' && scope !== 'theme_reselect';
+}
 
-  const reason = action === 'request_changes'
-    ? reasonFromDialog(review, scope)
-    : defaultReviewReason(review, action, scope);
-  if (!reason) {
-    return;
-  }
+function openReviewChangeDialog(review: ControlReviewItem, scope?: ReviewChangeScope) {
+  pendingReviewChange.value = { reviewId: review.id, scope };
+  changeReasonInput.value = '';
+  changeReasonError.value = '';
+}
 
+function closeReviewChangeDialog() {
+  pendingReviewChange.value = null;
+  changeReasonInput.value = '';
+  changeReasonError.value = '';
+}
+
+async function sendReviewAction(
+  review: ControlReviewItem,
+  action: 'approve' | 'request_changes',
+  reason: string,
+  scope?: ReviewChangeScope
+) {
   activeReviewAction.value = scope ? `${action}:${scope}` : action;
   try {
     await store.submitControlReview(
@@ -319,6 +346,37 @@ async function submitActiveReview(action: 'approve' | 'request_changes', scope?:
   } finally {
     activeReviewAction.value = '';
   }
+}
+
+async function confirmReviewChange() {
+  const pending = pendingReviewChange.value;
+  const review = pendingReviewItem.value;
+  if (!pending || !review) {
+    return;
+  }
+
+  if (requiresChangeReason(review, pending.scope) && !changeReasonInput.value.trim()) {
+    changeReasonError.value = '使う場面を選び直す指示を入力してください';
+    return;
+  }
+
+  const reason = defaultReviewReason(review, 'request_changes', pending.scope, changeReasonInput.value);
+  closeReviewChangeDialog();
+  await sendReviewAction(review, 'request_changes', reason, pending.scope);
+}
+
+async function submitActiveReview(action: 'approve' | 'request_changes', scope?: ReviewChangeScope) {
+  const review = activeReviewItem.value;
+  if (!review) {
+    return;
+  }
+
+  if (action === 'request_changes') {
+    openReviewChangeDialog(review, scope);
+    return;
+  }
+
+  await sendReviewAction(review, action, defaultReviewReason(review, action, scope), scope);
 }
 
 async function redoVideo(scope: RedoScope) {
@@ -529,7 +587,38 @@ watch(
       </div>
     </section>
 
-    <section v-else-if="outputVideoUri" class="video-panel">
+    <div
+      v-if="pendingReviewChange && pendingReviewItem"
+      class="dialog-overlay"
+      role="dialog"
+      aria-modal="true"
+    >
+      <form class="change-dialog" @submit.prevent="confirmReviewChange">
+        <div>
+          <p class="eyebrow">作り直し</p>
+          <h2>{{ reviewChangeDialogTitle(pendingReviewItem, pendingReviewChange.scope) }}</h2>
+        </div>
+        <label>
+          {{ reviewChangePromptMessage(pendingReviewItem, pendingReviewChange.scope) }}
+          <textarea
+            v-model="changeReasonInput"
+            rows="4"
+            :placeholder="requiresChangeReason(pendingReviewItem, pendingReviewChange.scope) ? '例: ゲーム画面が分かる場面を優先する' : '必要な場合だけ入力'"
+          />
+        </label>
+        <p v-if="changeReasonError" class="error-message">{{ changeReasonError }}</p>
+        <div class="dialog-actions">
+          <button type="button" class="secondary-button" @click="closeReviewChangeDialog">
+            キャンセル
+          </button>
+          <button type="submit" :disabled="store.loading">
+            {{ activeReviewAction.startsWith('request_changes') ? '処理中' : '作り直す' }}
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <section v-if="!activeReviewItem && outputVideoUri" class="video-panel">
       <div>
         <p class="eyebrow">生成結果</p>
         <h2>完成動画</h2>
@@ -835,6 +924,33 @@ button:disabled {
   gap: 10px;
 }
 
+.dialog-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  display: grid;
+  place-items: center;
+  background: rgba(23, 32, 42, 0.42);
+  padding: 18px;
+}
+
+.change-dialog {
+  width: min(520px, 100%);
+  display: grid;
+  gap: 14px;
+  border: 1px solid #cbd8e2;
+  border-radius: 8px;
+  background: #ffffff;
+  padding: 18px;
+  box-shadow: 0 18px 44px rgba(23, 32, 42, 0.22);
+}
+
+.dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
 .secondary-button {
   background: #e8eef4;
   color: #17202a;
@@ -946,6 +1062,10 @@ video {
   }
 
   .review-actions {
+    display: grid;
+  }
+
+  .dialog-actions {
     display: grid;
   }
 
