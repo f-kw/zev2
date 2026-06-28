@@ -246,6 +246,17 @@ function assertCreatedDraftStoredOnce(created, label) {
   assertScenario(storedDrafts.length === 1, `${label}: 新規下書きが状態に重複保存されている`);
 }
 
+async function assertDraftCannotBeApprovedTwice(apiBaseUrl, draftId, label) {
+  const error = await expectRequestJsonFailure(apiPath(apiBaseUrl, `/request-drafts/${draftId}/approve`), {
+    method: 'POST'
+  });
+  assertScenario(error.includes('この下書きはすでに処理済みです'), `${label}: 承認済み下書きの再承認が正しい理由で拒否されていない`);
+
+  const state = await requestJson(apiPath(apiBaseUrl, '/state'));
+  const requests = agentRequestsForDraft(state, draftId);
+  assertScenario(requests.length === 7, `${label}: 再承認拒否後にAI作業工程数が変わっている`);
+}
+
 async function createApprovedScenarioDraft(apiBaseUrl, purpose) {
   const created = await requestJson(apiPath(apiBaseUrl, '/request-drafts'), {
     method: 'POST',
@@ -263,6 +274,7 @@ async function createApprovedScenarioDraft(apiBaseUrl, purpose) {
   await requestJson(apiPath(apiBaseUrl, `/request-drafts/${created.draft.id}/approve`), {
     method: 'POST'
   });
+  await assertDraftCannotBeApprovedTwice(apiBaseUrl, created.draft.id, purpose);
 
   return created.draft;
 }
@@ -1289,6 +1301,7 @@ async function scenarioAutomaticVideoCreation(apiBaseUrl, runtimeDir) {
   const queuedRequests = approved.state.agentRequests.filter((request) => request.requestDraftId === draft.id);
   assertScenario(queuedRequests.length === 7, '作成開始後に7工程がキューへ入っていない');
   assertScenario(queuedRequests.some((request) => request.type === 'render_video'), '動画生成工程がキューへ入っていない');
+  await assertDraftCannotBeApprovedTwice(apiBaseUrl, draft.id, '初回生成');
 
   await runAgentApprovingReviews(apiBaseUrl, runtimeDir, draft.id);
 
@@ -1366,6 +1379,7 @@ async function scenarioAutomaticVideoCreation(apiBaseUrl, runtimeDir) {
   await requestJson(apiPath(apiBaseUrl, `/request-drafts/${noFixedCreated.draft.id}/approve`), {
     method: 'POST'
   });
+  await assertDraftCannotBeApprovedTwice(apiBaseUrl, noFixedCreated.draft.id, '固定データなしのSTT失敗確認');
   await runAgentWithoutFixedDataExpectFailure(apiBaseUrl, runtimeDir);
   const noFixedState = await requestJson(apiPath(apiBaseUrl, '/state'));
   const noFixedRequests = agentRequestsForDraft(noFixedState, noFixedCreated.draft.id);
