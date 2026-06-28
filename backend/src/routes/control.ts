@@ -191,7 +191,40 @@ function artifactUrl(requestDraftId: string, fileName: string): string {
   return `${artifactUrlPrefix}${encodeURIComponent(requestDraftId)}/${encodeURIComponent(fileName)}`;
 }
 
-async function validateCompletionFileRefUri(agentRequest: AgentRequest, uri: string): Promise<string | undefined> {
+function normalizedMimeType(mimeType: string): string {
+  return mimeType.split(';')[0]?.trim().toLowerCase() ?? '';
+}
+
+function isJsonMimeType(mimeType: string): boolean {
+  const normalized = normalizedMimeType(mimeType);
+  return normalized === 'application/json' || normalized.endsWith('+json');
+}
+
+function isVideoMimeType(mimeType: string): boolean {
+  return normalizedMimeType(mimeType).startsWith('video/');
+}
+
+async function readJsonArtifactKind(artifactPath: string): Promise<string | undefined> {
+  const raw = await readFile(artifactPath, 'utf8');
+  const parsed = JSON.parse(raw) as unknown;
+  if (!parsed || typeof parsed !== 'object' || !('kind' in parsed)) {
+    return undefined;
+  }
+
+  const kind = (parsed as { kind?: unknown }).kind;
+  return typeof kind === 'string' ? kind : undefined;
+}
+
+async function validateCompletionFileRef(
+  agentRequest: AgentRequest,
+  fileRef: AgentCompletionInput['fileRef']
+): Promise<string | undefined> {
+  if (!fileRef) {
+    return 'AI操作の完了には成果物参照が必要です';
+  }
+
+  const uri = fileRef.uri.trim();
+  const mimeType = fileRef.mimeType.trim();
   const expectedPrefix = `${artifactUrlPrefix}${encodeURIComponent(agentRequest.requestDraftId)}/`;
   if (!uri.startsWith(expectedPrefix)) {
     return '成果物参照は対象の編集コピー配下に保存してください';
@@ -208,6 +241,28 @@ async function validateCompletionFileRefUri(agentRequest: AgentRequest, uri: str
     await access(artifactPath);
   } catch {
     return '成果物参照のファイルが見つかりません';
+  }
+
+  const expectedKind = getFileRefKindForRequest(agentRequest.type);
+  if (expectedKind === 'output_video') {
+    return isVideoMimeType(mimeType) ? undefined : '動画生成工程の成果物参照は動画ファイルを指定してください';
+  }
+
+  if (expectedKind === 'source_video' && isVideoMimeType(mimeType)) {
+    return undefined;
+  }
+
+  if (!isJsonMimeType(mimeType)) {
+    return 'このAI工程の成果物参照はJSONファイルを指定してください';
+  }
+
+  try {
+    const actualKind = await readJsonArtifactKind(artifactPath);
+    if (actualKind !== expectedKind) {
+      return '成果物参照の種別がAI工程と一致していません';
+    }
+  } catch {
+    return '成果物参照のJSONを読めません';
   }
 
   return undefined;
@@ -2093,9 +2148,9 @@ router.post('/agent-requests/:id/complete', async (request, response) => {
     response.status(400).json({ error: 'AI操作の完了には成果物参照が必要です', state });
     return;
   }
-  const fileRefUriError = await validateCompletionFileRefUri(agentRequest, input.fileRef.uri.trim());
-  if (fileRefUriError) {
-    response.status(400).json({ error: fileRefUriError, state });
+  const fileRefError = await validateCompletionFileRef(agentRequest, input.fileRef);
+  if (fileRefError) {
+    response.status(400).json({ error: fileRefError, state });
     return;
   }
 

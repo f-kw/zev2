@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import { spawn } from 'node:child_process';
 import { createServer } from 'node:net';
-import { mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
+import { mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -588,6 +588,37 @@ async function assertRetryControls(apiBaseUrl, runtimeDir) {
   assertScenario(
     missingArtifactFileError.includes('成果物参照のファイルが見つかりません'),
     '存在しない成果物参照がAI工程完了で拒否されていない'
+  );
+  const wrongKindArtifactFileName = 'wrong-kind-transcript.json';
+  const wrongKindArtifactPath = path.join(
+    runtimeDir,
+    'artifacts',
+    missingArtifactDraft.id,
+    wrongKindArtifactFileName
+  );
+  await mkdir(path.dirname(wrongKindArtifactPath), { recursive: true });
+  await writeFile(
+    wrongKindArtifactPath,
+    `${JSON.stringify({ kind: 'transcript_json', mode: 'wrong-step-artifact' }, null, 2)}\n`,
+    'utf8'
+  );
+  const wrongKindArtifactError = await expectRequestJsonFailure(
+    apiPath(apiBaseUrl, `/agent-requests/${missingArtifactPrepareRequest.id}/complete`),
+    {
+      method: 'POST',
+      body: JSON.stringify({
+        meaning: '工程と違う成果物を成功扱いにしようとする',
+        fileRef: {
+          uri: `/api/artifacts/${missingArtifactDraft.id}/${wrongKindArtifactFileName}`,
+          mimeType: 'application/json',
+          access: 'internal'
+        }
+      })
+    }
+  );
+  assertScenario(
+    wrongKindArtifactError.includes('成果物参照の種別がAI工程と一致していません'),
+    '工程と違う成果物参照がAI工程完了で拒否されていない'
   );
   const missingArtifactCompleteError = await expectRequestJsonFailure(
     apiPath(apiBaseUrl, `/agent-requests/${missingArtifactPrepareRequest.id}/complete`),
