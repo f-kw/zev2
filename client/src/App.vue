@@ -8,6 +8,7 @@ import {
   type ControlReviewItem,
   type RequestDraftInput
 } from '@zev2/shared';
+import { fetchWebGeminiReview, type WebGeminiReviewArtifact } from './api';
 import { useControlQueueStore } from './stores/controlQueue';
 
 type AppPage = 'workspace' | 'request';
@@ -29,10 +30,12 @@ const activePage = ref<AppPage>('workspace');
 const requestDefaultsApplied = ref(false);
 const pendingReviewChange = ref<{ reviewId: string; scope?: ReviewChangeScope } | null>(null);
 const changeReasonInput = ref('');
-const webGeminiReviewText = ref('');
-const webGeminiEditInstruction = ref('');
-const webGeminiCopyMessage = ref('');
-const activeWebGeminiAction = ref<'copy_prompt' | 'apply_review' | ''>('');
+const webGeminiReview = ref<WebGeminiReviewArtifact | null>(null);
+const webGeminiInstructionInput = ref('');
+const webGeminiReviewMessage = ref('');
+const webGeminiReviewLoading = ref(false);
+const loadedWebGeminiReviewCreatedAt = ref('');
+const activeWebGeminiAction = ref<'refresh_review' | 'apply_review' | ''>('');
 const initialPurpose = 'ショート動画を作成する';
 let refreshTimer: number | undefined;
 
@@ -194,42 +197,12 @@ const outputVideoReferenceText = computed(() => {
   return new URL(outputVideoUri.value, window.location.origin).toString();
 });
 
-function readableDraftPurpose(purpose: string | undefined): string {
-  const purposeLine = (purpose ?? '')
-    .split('\n')
-    .map((line) => line.trim())
-    .find((line) => line && !line.startsWith('やり直し理由:') && !line.startsWith('素材選び直し指示:'));
-
-  return purposeLine || 'ショート動画を作成する';
-}
-
-const webGeminiReviewPrompt = computed(() => {
-  const purposeText = readableDraftPurpose(currentDraft.value?.purpose);
-
-  return [
-    'この動画をレビューしてください。対象は演出だけです。',
-    '',
-    `動画の目的: ${purposeText}`,
-    'レビュー対象:',
-    '- テロップの読みやすさ、表示タイミング、消えるタイミング',
-    '- 顔、ゲーム画面、テロップが重ならない画面構成',
-    '- 複数シーンのつなぎ、テンポ、初見で意味が伝わるか',
-    '- ショート動画として見せ場が伝わるか',
-    '',
-    'レビュー対象外:',
-    '- テーマ選択、編集元場面の選択',
-    '- 元動画、文字起こし、音声品質、エンコード、投稿可否、バグ調査',
-    '',
-    '出力は、演出作成へ渡せる改善指示として箇条書きにしてください。',
-    '各項目は「変えること」「理由」「対象箇所の説明」が分かるようにしてください。'
-  ].join('\n');
-});
-
 const canApplyWebGeminiReview = computed(() =>
   Boolean(
     currentDraft.value &&
       outputVideoUri.value &&
-      webGeminiEditInstruction.value.trim() &&
+      webGeminiReview.value &&
+      webGeminiInstructionInput.value.trim() &&
       !agentOperationLocked.value &&
       activeWebGeminiAction.value !== 'apply_review'
   )
@@ -670,56 +643,63 @@ function normalizeWebGeminiReviewText(text: string): string {
   return text.trim().replace(/\n{3,}/g, '\n\n');
 }
 
-async function copyWebGeminiPrompt() {
-  webGeminiCopyMessage.value = '';
-  activeWebGeminiAction.value = 'copy_prompt';
+async function refreshWebGeminiReview() {
+  const draft = currentDraft.value;
+  if (!draft || !outputVideoUri.value) {
+    webGeminiReview.value = null;
+    webGeminiInstructionInput.value = '';
+    webGeminiReviewMessage.value = '';
+    loadedWebGeminiReviewCreatedAt.value = '';
+    return;
+  }
 
+  webGeminiReviewLoading.value = true;
+  webGeminiReviewMessage.value = '';
   try {
-    if (!navigator.clipboard) {
-      webGeminiCopyMessage.value = 'コピーできませんでした。依頼文を選択してコピーしてください';
+    const result = await fetchWebGeminiReview(draft.id);
+    webGeminiReview.value = result.review;
+    if (!result.review) {
+      webGeminiInstructionInput.value = '';
+      loadedWebGeminiReviewCreatedAt.value = '';
+      webGeminiReviewMessage.value = 'レビュー未取得';
       return;
     }
 
-    await navigator.clipboard.writeText(webGeminiReviewPrompt.value);
-    webGeminiCopyMessage.value = '依頼文をコピーしました';
+    if (loadedWebGeminiReviewCreatedAt.value !== result.review.createdAt) {
+      webGeminiInstructionInput.value = result.review.instructionText;
+      loadedWebGeminiReviewCreatedAt.value = result.review.createdAt;
+    }
   } catch {
-    webGeminiCopyMessage.value = 'コピーできませんでした。依頼文を選択してコピーしてください';
+    webGeminiReview.value = null;
+    webGeminiReviewMessage.value = 'レビュー状態を読めませんでした';
+  } finally {
+    webGeminiReviewLoading.value = false;
+  }
+}
+
+async function reloadWebGeminiReview() {
+  activeWebGeminiAction.value = 'refresh_review';
+  try {
+    await refreshWebGeminiReview();
   } finally {
     activeWebGeminiAction.value = '';
   }
 }
 
-function openWebGemini() {
-  window.open('https://gemini.google.com/app', '_blank', 'noopener,noreferrer');
-}
-
-function copyReviewToEditInstruction() {
-  const reviewText = normalizeWebGeminiReviewText(webGeminiReviewText.value);
-  if (!reviewText) {
-    return;
-  }
-
-  webGeminiEditInstruction.value = reviewText;
-}
-
 async function applyWebGeminiReviewChanges() {
   const draft = currentDraft.value;
-  const instruction = normalizeWebGeminiReviewText(webGeminiEditInstruction.value);
-  if (!draft || !instruction || agentOperationLocked.value) {
+  const instruction = normalizeWebGeminiReviewText(webGeminiInstructionInput.value);
+  if (!draft || !webGeminiReview.value || !instruction || agentOperationLocked.value) {
     return;
   }
 
   activeWebGeminiAction.value = 'apply_review';
-  const reason = [
-    'Web Geminiの演出レビューを反映して、演出作成前から作り直す',
-    instruction
-  ].join('\n\n');
-
   try {
-    await store.requestGeneratedVideoChanges(draft.id, reason, 'edit_plan');
-    webGeminiReviewText.value = '';
-    webGeminiEditInstruction.value = '';
-    webGeminiCopyMessage.value = '';
+    await store.applyWebGeminiReview(draft.id, instruction);
+    webGeminiReview.value = null;
+    webGeminiInstructionInput.value = '';
+    loadedWebGeminiReviewCreatedAt.value = '';
+    webGeminiReviewMessage.value = '';
   } finally {
     activeWebGeminiAction.value = '';
   }
@@ -795,12 +775,11 @@ watch(
 );
 
 watch(
-  () => outputVideoUri.value,
+  () => [currentDraft.value?.id ?? '', outputVideoUri.value],
   () => {
-    webGeminiReviewText.value = '';
-    webGeminiEditInstruction.value = '';
-    webGeminiCopyMessage.value = '';
-  }
+    void refreshWebGeminiReview();
+  },
+  { immediate: true }
 );
 </script>
 
@@ -1060,72 +1039,55 @@ watch(
                   <p class="eyebrow">Web Gemini Review</p>
                   <h3>演出レビュー</h3>
                 </div>
-                <button type="button" class="secondary-button" @click="openWebGemini">
-                  Web Geminiを開く
-                </button>
-              </div>
-
-              <label>
-                Web Geminiへ渡す依頼文
-                <textarea
-                  class="prompt-textarea"
-                  readonly
-                  rows="5"
-                  :value="webGeminiReviewPrompt"
-                />
-              </label>
-
-              <div class="web-gemini-actions">
                 <button
                   type="button"
                   class="secondary-button"
-                  :disabled="activeWebGeminiAction === 'copy_prompt'"
-                  @click="copyWebGeminiPrompt"
+                  :disabled="webGeminiReviewLoading || activeWebGeminiAction === 'refresh_review'"
+                  @click="reloadWebGeminiReview"
                 >
-                  {{ activeWebGeminiAction === 'copy_prompt' ? 'コピー中' : '依頼文をコピー' }}
-                </button>
-                <span v-if="webGeminiCopyMessage" class="copy-message">{{ webGeminiCopyMessage }}</span>
-              </div>
-
-              <label>
-                Geminiの演出レビュー
-                <textarea
-                  v-model="webGeminiReviewText"
-                  rows="4"
-                  placeholder="Web Geminiから返ってきた演出改善案を貼り付け"
-                  :disabled="agentOperationLocked"
-                />
-              </label>
-
-              <div class="web-gemini-actions">
-                <button
-                  type="button"
-                  class="secondary-button"
-                  :disabled="agentOperationLocked || !webGeminiReviewText.trim()"
-                  @click="copyReviewToEditInstruction"
-                >
-                  レビューを入力へ移す
+                  {{ activeWebGeminiAction === 'refresh_review' ? '確認中' : '再読み込み' }}
                 </button>
               </div>
 
-              <label>
-                再作成に使う改善指示
-                <textarea
-                  v-model="webGeminiEditInstruction"
-                  rows="4"
-                  placeholder="必要なら削除・書き換え"
-                  :disabled="agentOperationLocked"
-                />
-              </label>
+              <div v-if="webGeminiReviewLoading" class="empty-review-state">
+                <strong>レビュー確認中</strong>
+                <span>保存済みレビューを読んでいます</span>
+              </div>
 
-              <div class="web-gemini-actions final-action">
-                <button
-                  type="button"
-                  :disabled="!canApplyWebGeminiReview"
-                  @click="applyWebGeminiReviewChanges"
-                >
-                  {{ activeWebGeminiAction === 'apply_review' ? '再作成中' : 'この改善内容で演出から再作成' }}
-                </button>
+              <div v-else-if="webGeminiReview" class="web-gemini-result">
+                <label>
+                  レビュー結果
+                  <textarea
+                    readonly
+                    rows="5"
+                    :value="webGeminiReview.reviewText"
+                  />
+                </label>
+
+                <label>
+                  演出作成へ渡す改善指示
+                  <textarea
+                    v-model="webGeminiInstructionInput"
+                    rows="5"
+                    placeholder="必要なら削除・書き換え"
+                    :disabled="agentOperationLocked"
+                  />
+                </label>
+
+                <div class="web-gemini-actions final-action">
+                  <button
+                    type="button"
+                    :disabled="!canApplyWebGeminiReview"
+                    @click="applyWebGeminiReviewChanges"
+                  >
+                    {{ activeWebGeminiAction === 'apply_review' ? '再作成中' : 'このレビューで演出から再作成' }}
+                  </button>
+                </div>
+              </div>
+
+              <div v-else class="empty-review-state">
+                <strong>{{ webGeminiReviewMessage || 'レビュー未取得' }}</strong>
+                <span>AIエージェント実行後に表示します</span>
               </div>
             </section>
           </div>
@@ -2061,19 +2023,34 @@ video {
   line-height: 1.45;
 }
 
-.web-gemini-review .prompt-textarea {
-  min-height: 116px;
-  color: #f0e7a8;
+.web-gemini-result {
+  display: grid;
+  gap: 9px;
+}
+
+.empty-review-state {
+  display: grid;
+  align-content: center;
+  gap: 6px;
+  min-height: 132px;
+  border: 1px dashed rgba(255, 242, 0, 0.32);
+  padding: 14px;
+  background: rgba(255, 242, 0, 0.05);
+}
+
+.empty-review-state strong {
+  color: var(--yellow);
+  font-family: var(--font-mono);
+  font-size: 13px;
+}
+
+.empty-review-state span {
+  color: var(--text-dim);
+  font-size: 12px;
 }
 
 .web-gemini-actions {
   align-items: center;
-}
-
-.copy-message {
-  color: var(--cyan);
-  font-family: var(--font-mono);
-  font-size: 11px;
 }
 
 .final-action {

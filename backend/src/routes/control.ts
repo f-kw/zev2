@@ -1,6 +1,6 @@
 import express from 'express';
 import { nanoid } from 'nanoid';
-import { copyFile, mkdir } from 'node:fs/promises';
+import { copyFile, mkdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import {
   ARTIFACT_FILE_NAME_BY_KIND,
@@ -46,6 +46,16 @@ type ReviewChangeScope =
   | 'adjustment';
 type GeneratedVideoChangeScope = 'theme_selection' | 'edit_plan' | 'adjustment';
 type LoadedState = Awaited<ReturnType<typeof loadState>>;
+type WebGeminiReviewArtifact = {
+  draftId: string;
+  source: 'edge-web-gemini';
+  status: 'ready';
+  createdAt: string;
+  outputVideoUri: string;
+  promptText: string;
+  reviewText: string;
+  instructionText: string;
+};
 type CopiedEditRestart = {
   draft: RequestDraft;
   requests: AgentRequest[];
@@ -61,6 +71,7 @@ const runtimeDir = process.env.ZEV2_RUNTIME_DIR
   ? path.resolve(process.env.ZEV2_RUNTIME_DIR)
   : path.resolve(process.cwd(), '../runtime');
 const artifactUrlPrefix = '/api/artifacts/';
+const webGeminiReviewFileName = 'web-gemini-review.json';
 
 function nowIso(): string {
   return new Date().toISOString();
@@ -108,6 +119,69 @@ function artifactUrl(requestDraftId: string, fileName: string): string {
 
 function unknownErrorMessage(error: unknown): string {
   return error instanceof Error ? error.message : String(error);
+}
+
+function webGeminiReviewPath(requestDraftId: string): string {
+  return path.join(artifactRoot(), requestDraftId, webGeminiReviewFileName);
+}
+
+function isNotFoundError(error: unknown): boolean {
+  return Boolean(error && typeof error === 'object' && 'code' in error && error.code === 'ENOENT');
+}
+
+function parseWebGeminiReviewArtifact(value: unknown): WebGeminiReviewArtifact | undefined {
+  if (!value || typeof value !== 'object') {
+    return undefined;
+  }
+
+  const artifact = value as Partial<WebGeminiReviewArtifact>;
+  if (
+    artifact.source !== 'edge-web-gemini' ||
+    artifact.status !== 'ready' ||
+    !hasText(artifact.draftId) ||
+    !hasText(artifact.createdAt) ||
+    !hasText(artifact.outputVideoUri) ||
+    !hasText(artifact.reviewText) ||
+    !hasText(artifact.instructionText)
+  ) {
+    return undefined;
+  }
+
+  return {
+    draftId: artifact.draftId.trim(),
+    source: 'edge-web-gemini',
+    status: 'ready',
+    createdAt: artifact.createdAt.trim(),
+    outputVideoUri: artifact.outputVideoUri.trim(),
+    promptText: hasText(artifact.promptText) ? artifact.promptText.trim() : '',
+    reviewText: artifact.reviewText.trim(),
+    instructionText: artifact.instructionText.trim()
+  };
+}
+
+async function readWebGeminiReviewArtifact(
+  requestDraftId: string
+): Promise<{ review: WebGeminiReviewArtifact | null } | { error: string }> {
+  try {
+    const raw = await readFile(webGeminiReviewPath(requestDraftId), 'utf8');
+    const parsed = parseWebGeminiReviewArtifact(JSON.parse(raw));
+    if (!parsed || parsed.draftId !== requestDraftId) {
+      return { error: 'Web Geminiレビューの保存内容が壊れています' };
+    }
+
+    return { review: parsed };
+  } catch (error) {
+    if (isNotFoundError(error)) {
+      return { review: null };
+    }
+
+    return { error: `Web Geminiレビューを読めません: ${unknownErrorMessage(error)}` };
+  }
+}
+
+async function writeWebGeminiReviewArtifact(artifact: WebGeminiReviewArtifact): Promise<void> {
+  await mkdir(path.dirname(webGeminiReviewPath(artifact.draftId)), { recursive: true });
+  await writeFile(webGeminiReviewPath(artifact.draftId), `${JSON.stringify(artifact, null, 2)}\n`, 'utf8');
 }
 
 async function copyArtifactFileForRestart(
@@ -197,6 +271,11 @@ function outputForAgentRequest(state: Awaited<ReturnType<typeof loadState>>, req
   }
 
   return findById(state.outputs, request.result.outputId);
+}
+
+function latestOutputVideoFileRef(state: LoadedState, requestDraftId: string): FileRef | undefined {
+  const renderRequest = latestSucceededAgentRequest(state.agentRequests, requestDraftId, 'render_video');
+  return renderRequest ? fileRefForAgentRequest(state, renderRequest) : undefined;
 }
 
 function copyDraftForRestart(
@@ -1303,6 +1382,126 @@ router.post('/request-drafts/:id/cancel-agent-work', async (request, response) =
   response.json({
     draft,
     cancelledAgentRequests: cancelledRequests,
+    state
+  });
+});
+
+router.get('/request-drafts/:id/web-gemini-review', async (request, response) => {
+  const state = await loadState();
+  const draft = findById(state.requestDrafts, request.params.id);
+  if (!draft) {
+    response.status(404).json({ error: '実行前下書きが見つかりません', state });
+    return;
+  }
+
+  const reviewResult = await readWebGeminiReviewArtifact(draft.id);
+  if ('error' in reviewResult) {
+    response.status(409).json({ error: reviewResult.error, state });
+    return;
+  }
+
+  response.json({
+    review: reviewResult.review,
+    outputVideoUri: latestOutputVideoFileRef(state, draft.id)?.uri ?? ''
+  });
+});
+
+router.post('/request-drafts/:id/web-gemini-review', async (request, response) => {
+  const reviewText = hasText(request.body?.reviewText) ? request.body.reviewText.trim() : '';
+  if (!reviewText) {
+    response.status(400).json({ error: 'Web Geminiの演出レビューが空です' });
+    return;
+  }
+
+  const state = await loadState();
+  const draft = findById(state.requestDrafts, request.params.id);
+  if (!draft) {
+    response.status(404).json({ error: '実行前下書きが見つかりません', state });
+    return;
+  }
+
+  const outputVideo = latestOutputVideoFileRef(state, draft.id);
+  if (!outputVideo) {
+    response.status(409).json({ error: '生成済み動画がないため、Web Geminiレビューを保存できません', state });
+    return;
+  }
+
+  const instructionText = hasText(request.body?.instructionText)
+    ? request.body.instructionText.trim()
+    : reviewText;
+  const promptText = hasText(request.body?.promptText) ? request.body.promptText.trim() : '';
+  const review: WebGeminiReviewArtifact = {
+    draftId: draft.id,
+    source: 'edge-web-gemini',
+    status: 'ready',
+    createdAt: nowIso(),
+    outputVideoUri: outputVideo.uri,
+    promptText,
+    reviewText,
+    instructionText
+  };
+
+  await writeWebGeminiReviewArtifact(review);
+
+  response.json({
+    review
+  });
+});
+
+router.post('/request-drafts/:id/apply-web-gemini-review', async (request, response) => {
+  const state = await loadState();
+  const draft = findById(state.requestDrafts, request.params.id);
+  if (!draft) {
+    response.status(404).json({ error: '実行前下書きが見つかりません', state });
+    return;
+  }
+  if (!latestSucceededAgentRequest(state.agentRequests, draft.id, 'render_video')) {
+    response.status(409).json({ error: '生成済み動画がないため、Web Geminiレビューから作り直せません', state });
+    return;
+  }
+
+  const reviewResult = await readWebGeminiReviewArtifact(draft.id);
+  if ('error' in reviewResult) {
+    response.status(409).json({ error: reviewResult.error, state });
+    return;
+  }
+  if (!reviewResult.review) {
+    response.status(409).json({ error: 'Web Geminiの演出レビューがまだ保存されていません', state });
+    return;
+  }
+
+  const instructionText = hasText(request.body?.instructionText)
+    ? request.body.instructionText.trim()
+    : reviewResult.review.instructionText;
+  if (!instructionText) {
+    response.status(400).json({ error: '演出作成へ渡す改善指示が空です', state });
+    return;
+  }
+
+  const createdAt = nowIso();
+  const reason = [
+    'Web Geminiの演出レビューを反映して、演出作成前から作り直す',
+    instructionText
+  ].join('\n\n');
+  const restart = await createCopiedEditRestart(
+    state,
+    draft.id,
+    restartStartTypeForGeneratedVideoChange('edit_plan'),
+    reason,
+    createdAt
+  );
+  if ('error' in restart) {
+    response.status(409).json({ error: restart.error, state });
+    return;
+  }
+
+  appendCopiedRestartToState(state, restart);
+  await saveState(state);
+
+  startDryRunRunner();
+
+  response.json({
+    draft: restart.draft,
     state
   });
 });

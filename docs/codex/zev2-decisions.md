@@ -517,3 +517,15 @@
 - Alternatives considered: Chromeを使い続ける。Web GeminiだけEdgeにする。認証済みのブラウザをその場で選ぶ。
 - Related files: `AGENTS.md`, `/Users/kawafmm/.codex/skills/chatgpt-workflow/SKILL.md`
 - Review condition: Web版Gemini、Web版ChatGPT、ChatGPT Workflow、その他のAIエージェントによるWebサービス操作でChromeを使おうとしている場合。
+
+## Decision ZC-D-047
+
+- Decision ID: ZC-D-047
+- Date: 2026-06-29
+- Status: accepted
+- Priority: high
+- Decision: 完成動画のWeb Geminiレビューは、ユーザーが手で貼り付ける作業にしない。AIエージェントがEdgeでWeb Geminiへ完成動画を渡し、返ってきた演出レビューを成果物として保存する。アプリは保存済みレビューを読み、必要なら人間が改善指示を直して演出作成前から再作成する。
+- Reason: ユーザーをGemini操作の作業者にすると、完成動画レビューがアプリ外の手作業になり、何が正本か分からなくなる。レビュー結果を成果物として保存すれば、どの動画を見て、どの改善指示を使い、どこから作り直したかを後から追える。
+- Alternatives considered: アプリにWeb Geminiへの依頼文と貼り付け欄を置く。Gemini APIだけで完成動画レビューをする。Web Geminiレビューをログだけに残し、再作成とは切り離す。
+- Related files: `client/src/App.vue`, `backend/src/routes/control.ts`, `scripts/web-gemini-review-edge.mjs`, `package.json`
+- Review condition: 完成動画レビューで、ユーザーがWeb Gemini結果を手で貼り付ける前提になっている場合、または保存済みレビューなしに再作成へ進める場合。

@@ -11,6 +11,7 @@ import {
   type Zev2State
 } from '@zev2/shared';
 import {
+  applyWebGeminiReview as applyWebGeminiReviewRequest,
   approveDraft,
   cancelDraftAgentWork,
   createDraft,
@@ -360,6 +361,32 @@ export const useControlQueueStore = defineStore('controlQueue', {
           : '演出を作り直しています';
       try {
         const result = await requestGeneratedVideoChanges(id, reason, scope);
+        this.activeDraftId = result.draft.id;
+        this.activePurpose = result.draft.purpose;
+        this.state = result.state;
+        this.lastChangedAt = new Date().toISOString();
+        await this.refreshUntilAgentSettled(Date.now());
+      } catch (error) {
+        this.errorMessage = formatApiError(error);
+        this.message = '';
+        this.runPhase = 'error';
+        this.lastChangedAt = new Date().toISOString();
+      } finally {
+        this.loading = false;
+      }
+    },
+    async applyWebGeminiReview(id: string, instructionText: string) {
+      this.loading = true;
+      this.errorMessage = '';
+      const draft = findById(this.state.requestDrafts, id);
+      this.activeDraftId = id;
+      this.activePurpose = draft?.purpose ?? '';
+      this.runPhase = 'running';
+      this.runNumber += 1;
+      this.lastChangedAt = new Date().toISOString();
+      this.message = 'Web Geminiレビューを反映して演出を作り直しています';
+      try {
+        const result = await applyWebGeminiReviewRequest(id, instructionText);
         this.activeDraftId = result.draft.id;
         this.activePurpose = result.draft.purpose;
         this.state = result.state;

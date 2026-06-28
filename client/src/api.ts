@@ -16,6 +16,17 @@ const api = axios.create({
   baseURL: '/api'
 });
 
+export interface WebGeminiReviewArtifact {
+  draftId: string;
+  source: 'edge-web-gemini';
+  status: 'ready';
+  createdAt: string;
+  outputVideoUri: string;
+  promptText: string;
+  reviewText: string;
+  instructionText: string;
+}
+
 export async function fetchWorkflow(): Promise<{ steps: WorkflowStep[] }> {
   const response = await api.get('/workflow');
   return response.data;
@@ -102,6 +113,27 @@ export async function requestGeneratedVideoChanges(
   const response = await api.post(`/request-drafts/${id}/request-generated-video-changes`, {
     reason,
     scope
+  });
+  return {
+    draft: response.data.draft,
+    state: response.data.state
+  };
+}
+
+export async function fetchWebGeminiReview(id: string): Promise<{
+  review: WebGeminiReviewArtifact | null;
+  outputVideoUri: string;
+}> {
+  const response = await api.get(`/request-drafts/${id}/web-gemini-review`);
+  return response.data;
+}
+
+export async function applyWebGeminiReview(
+  id: string,
+  instructionText: string
+): Promise<{ draft: RequestDraft; state: Zev2State }> {
+  const response = await api.post(`/request-drafts/${id}/apply-web-gemini-review`, {
+    instructionText
   });
   return {
     draft: response.data.draft,
