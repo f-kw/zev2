@@ -1387,6 +1387,38 @@ function cancelActiveAgentRequests(
   return cancelledRequests;
 }
 
+function rejectOpenControlReviewsForCancel(
+  state: LoadedState,
+  requestDraftId: string,
+  updatedAt: string
+): ControlReviewItem[] {
+  const rejectedReviews: ControlReviewItem[] = [];
+
+  for (const reviewItem of state.controlReviewItems) {
+    if (reviewItem.requestDraftId !== requestDraftId || reviewItem.status !== 'review_required') {
+      continue;
+    }
+
+    const humanReviewAction: HumanReviewAction = {
+      id: createId('human_review'),
+      reviewItemId: reviewItem.id,
+      requestDraftId,
+      action: 'reject',
+      reason: '人間がAI作業を中止したため、この確認待ちを閉じました',
+      createdAt: updatedAt
+    };
+
+    reviewItem.status = 'rejected';
+    reviewItem.resolvedAt = updatedAt;
+    reviewItem.resolvedByActionId = humanReviewAction.id;
+    reviewItem.updatedAt = updatedAt;
+    state.humanReviewActions.push(humanReviewAction);
+    rejectedReviews.push(reviewItem);
+  }
+
+  return rejectedReviews;
+}
+
 function createThemeReselectFromReview(
   state: Awaited<ReturnType<typeof loadState>>,
   reviewItem: ControlReviewItem,
@@ -2120,11 +2152,13 @@ router.post('/request-drafts/:id/cancel-agent-work', async (request, response) =
 
   const updatedAt = nowIso();
   const cancelledRequests = cancelActiveAgentRequests(state.agentRequests, draft.id, updatedAt);
+  const rejectedControlReviews = rejectOpenControlReviewsForCancel(state, draft.id, updatedAt);
   await saveState(state);
 
   response.json({
     draft,
     cancelledAgentRequests: cancelledRequests,
+    rejectedControlReviews,
     state
   });
 });

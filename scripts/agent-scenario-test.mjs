@@ -417,6 +417,58 @@ async function assertHumanReviewBlocksDirectClaim(apiBaseUrl, runtimeDir) {
   );
 }
 
+async function assertCancelClosesOpenHumanReview(apiBaseUrl, runtimeDir) {
+  const draft = await createApprovedScenarioDraft(apiBaseUrl, '人間確認中に中止すると確認待ちを閉じる');
+  const { review } = await runDraftUntilReview(apiBaseUrl, runtimeDir, draft.id, 'theme_selection');
+
+  const cancelled = await requestJson(apiPath(apiBaseUrl, `/request-drafts/${draft.id}/cancel-agent-work`), {
+    method: 'POST'
+  });
+  assertScenario(
+    cancelled.rejectedControlReviews.length === 1 &&
+      cancelled.rejectedControlReviews[0].id === review.id,
+    '人間確認中の中止で確認待ちが閉じられていない'
+  );
+
+  const rejectedReview = cancelled.state.controlReviewItems.find((item) => item.id === review.id);
+  assertScenario(rejectedReview?.status === 'rejected', '中止した確認待ちが却下済みになっていない');
+  assertScenario(
+    !cancelled.state.controlReviewItems.some(
+      (item) => item.requestDraftId === draft.id && item.status === 'review_required'
+    ),
+    '中止後も確認待ちが残っている'
+  );
+  const cancelReviewAction = cancelled.state.humanReviewActions.find(
+    (action) => action.reviewItemId === review.id
+  );
+  assertScenario(
+    cancelReviewAction?.action === 'reject' &&
+      cancelReviewAction.reason.includes('AI作業を中止'),
+    '中止で閉じた確認待ちが人間判断ログとして読めない'
+  );
+
+  const requests = agentRequestsForDraft(cancelled.state, draft.id);
+  const restartIndex = workflowTypes.indexOf('build_clip_composition');
+  assertScenario(
+    requests.slice(0, restartIndex).every((request) => request.status === 'succeeded'),
+    '人間確認中の中止で完了済み工程が壊れている'
+  );
+  assertScenario(
+    requests.slice(restartIndex).every((request) => request.status === 'cancelled'),
+    '人間確認中の中止で後続AI工程が中止されていない'
+  );
+
+  const activity = await requestJson(apiPath(apiBaseUrl, `/request-drafts/${draft.id}/activity`));
+  assertScenario(
+    activity.summary?.status === 'cancelled',
+    '人間確認中の中止後、現在状態要約が中止になっていない'
+  );
+  assertScenario(
+    activity.summary.title.includes('中止'),
+    '人間確認中の中止後、現在状態要約の見出しから中止が読めない'
+  );
+}
+
 async function runAgentApprovingReviews(apiBaseUrl, runtimeDir, draftId) {
   for (let attempt = 0; attempt < 8; attempt += 1) {
     await runAgent(apiBaseUrl, runtimeDir);
@@ -1481,6 +1533,7 @@ async function scenarioAutomaticVideoCreation(apiBaseUrl, runtimeDir) {
   await assertContentReselectFromMaterialConfirmation(apiBaseUrl, runtimeDir);
   await assertThemeOptionRegenerateFromThemeSelection(apiBaseUrl, runtimeDir);
   await assertHumanReviewBlocksDirectClaim(apiBaseUrl, runtimeDir);
+  await assertCancelClosesOpenHumanReview(apiBaseUrl, runtimeDir);
   await assertResumeAndCancelControls(apiBaseUrl);
 
   const noFixedDraftInput = {
