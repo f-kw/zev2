@@ -321,6 +321,8 @@ async function assertRuntimeConfig(apiBaseUrl) {
   assertScenario(runtimeConfig.contentDiscovery?.mode === 'fixed', 'テーマ作成が固定データ確認になっていない');
   assertScenario(runtimeConfig.editPlan?.mode === 'fixed', '演出作成が固定データ確認になっていない');
   assertScenario(runtimeConfig.adjustment?.mode === 'fixed', '微調整が固定処理として明示されていない');
+  assertScenario(runtimeConfig.videoOutput?.encoder === 'libx264', '確認用動画の標準エンコーダーがlibx264になっていない');
+  assertScenario(Array.isArray(runtimeConfig.videoOutput?.extraArgs), '確認用動画の追加ffmpeg引数が配列として渡っていない');
   assertScenario(
     runtimeConfig.source?.defaultUri === 'runtime/artifacts/draft_w4Lp9IJC6pQl3FsRfFL9t/source-video.mp4',
     '設定ファイルの入力動画参照がUIへ渡せる形になっていない'
@@ -363,6 +365,25 @@ async function assertOutputHasAudibleAudio(outputPath) {
 
   assertScenario(sampleCount > 0, '出力動画の音声サンプルがない');
   assertScenario(maxVolume && maxVolume !== '-inf', '出力動画の音声が無音になっている');
+}
+
+async function assertOutputVideoUsesEncoder(outputPath, encoderName) {
+  const probe = await runProcess('ffprobe', [
+    '-v',
+    'error',
+    '-select_streams',
+    'v:0',
+    '-show_entries',
+    'stream_tags=encoder',
+    '-of',
+    'default=noprint_wrappers=1:nokey=1',
+    outputPath
+  ]);
+
+  assertScenario(
+    probe.output.includes(encoderName),
+    `確認用動画が設定したエンコーダーで作られていない: ${probe.output.trim()}`
+  );
 }
 
 async function readJsonFile(filePath) {
@@ -634,6 +655,7 @@ async function assertGeneratedDraftCompleted(apiBaseUrl, runtimeDir, draftId, la
   const outputBuffer = await readFile(outputPath);
   assertScenario(outputBuffer.length > 0, `${label}: 出力動画ファイルが空です`);
   await assertOutputHasAudibleAudio(outputPath);
+  await assertOutputVideoUsesEncoder(outputPath, 'libx264');
   await assertWorkflowStepManifests(runtimeDir, draftId, label, expectedManifestTypes);
   await assertRenderedTelopsStayWithinLineCheckpoint(runtimeDir, draftId, label);
 
@@ -887,6 +909,7 @@ async function scenarioAutomaticVideoCreation(apiBaseUrl, runtimeDir) {
   const outputBuffer = await readFile(outputPath);
   assertScenario(outputBuffer.length > 0, '出力動画ファイルが空です');
   await assertOutputHasAudibleAudio(outputPath);
+  await assertOutputVideoUsesEncoder(outputPath, 'libx264');
   await assertWorkflowStepManifests(runtimeDir, draft.id, '初回生成');
   await assertRenderedTelopsStayWithinLineCheckpoint(runtimeDir, draft.id, '初回生成');
   const editPlan = await readRequestArtifact(state, runtimeDir, draft.id, 'create_edit_plan');

@@ -85,6 +85,9 @@ ZEV2_STT_RUNTIME_MODE=local ZEV2_CONTENT_DISCOVERY_MODE=transcript ZEV2_EDIT_PLA
 
 STTサーバのIPは変わる前提なので、通常起動では `config/runtime.jsonc` の `localServerUrl` を変更します。
 動画生成やGemini演出で使う外部コマンドも、`ZEV2_FFMPEG_BIN`、`ZEV2_FFPROBE_BIN`、`ZEV2_YTDLP_BIN` で差し替えられます。
+確認用動画の映像エンコーダーは `config/runtime.jsonc` の `videoOutput.encoder` で指定します。
+標準は `libx264` です。Macのハードウェアエンコードを使いたい場合は `h264_videotoolbox` に変更できますが、指定なしでは確認用動画のファイルサイズが大きくなることがあります。
+ffmpegへ映像用の追加引数を渡す場合は `videoOutput.extraArgs` に文字列配列で指定します。
 Gemini APIの標準モデルは `gemini-3.5-flash` です。UIの使用モデルで、品質確認、軽い確認、疎通確認の用途から依頼ごとに切り替えられます。
 runnerの標準モデルだけを変える場合は `ZEV2_GEMINI_MODEL` を使います。
 接続確認やJSON応答確認だけのテストでは品質判断をしないため、UIまたは `ZEV2_GEMINI_MODEL` で `gemini-2.5-flash` または `gemini-3-flash-preview` を明示して使います。

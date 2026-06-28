@@ -29,7 +29,6 @@ const activePage = ref<AppPage>('workspace');
 const requestDefaultsApplied = ref(false);
 const pendingReviewChange = ref<{ reviewId: string; scope?: ReviewChangeScope } | null>(null);
 const changeReasonInput = ref('');
-const systemClock = ref('');
 const initialPurpose = 'ショート動画を作成する';
 let refreshTimer: number | undefined;
 
@@ -79,6 +78,13 @@ const runtimeSummaries = computed(() => {
       label: '微調整',
       title: '固定処理',
       description: '演出案をそのまま動画生成へ渡します'
+    },
+    {
+      label: '動画生成',
+      title: store.runtimeConfig.videoOutput.encoder,
+      description: store.runtimeConfig.videoOutput.extraArgs.length > 0
+        ? `追加設定: ${store.runtimeConfig.videoOutput.extraArgs.join(' ')}`
+        : '確認しやすい重さで完成動画を作ります'
     }
   ];
 });
@@ -184,6 +190,10 @@ const canCancelAgentWork = computed(() =>
   Boolean(currentDraft.value && (runningRequest.value || waitingAgentRequest.value) && !store.loading)
 );
 
+const agentLedActive = computed(() =>
+  Boolean(submitting.value || store.loading || runningRequest.value)
+);
+
 const statusText = computed(() => {
   if (failedRequest.value) {
     return `${failedRequest.value.label}で停止`;
@@ -257,7 +267,7 @@ const statusDetailText = computed(() => {
 });
 
 const operationLockNotice = computed(() =>
-  agentOperationLocked.value ? 'この工程はキャンセルできません' : ''
+  agentOperationLocked.value && !canCancelAgentWork.value ? 'この工程はキャンセルできません' : ''
 );
 
 const progressText = computed(() => {
@@ -343,15 +353,6 @@ const systemLogItems = computed(() => {
 
   return requests.map((request) => `${request.label}: ${statusLabel(request)}`);
 });
-
-function updateSystemClock() {
-  systemClock.value = new Intl.DateTimeFormat('ja-JP', {
-    hour: '2-digit',
-    minute: '2-digit',
-    second: '2-digit',
-    hour12: false
-  }).format(new Date());
-}
 
 function formatStepCode(index: number): string {
   const labels = ['INGEST', 'STT', 'THEME', 'CUT', 'FX', 'TUNE', 'RENDER'];
@@ -640,10 +641,8 @@ async function cancelAgentWork() {
 }
 
 onMounted(() => {
-  updateSystemClock();
   void store.refresh();
   refreshTimer = window.setInterval(() => {
-    updateSystemClock();
     void store.refresh();
   }, 2000);
 });
@@ -693,7 +692,7 @@ watch(
 
     <section class="sys-bar" aria-label="システム状態">
       <div class="sys-brand">
-        <span class="led" aria-hidden="true"></span>
+        <span :class="['led', { active: agentLedActive }]" aria-hidden="true"></span>
         <span>zev2 // AI AGENT - ONLINE</span>
         <span class="session-code">CTRL HUD</span>
       </div>
@@ -742,8 +741,6 @@ watch(
           作業へ戻る
         </button>
       </div>
-
-      <time class="system-clock">{{ systemClock }}</time>
     </section>
 
     <section class="agent-status-bar" aria-live="polite">
@@ -1167,7 +1164,7 @@ watch(
 
 .sys-bar {
   display: grid;
-  grid-template-columns: minmax(210px, 1fr) auto auto auto;
+  grid-template-columns: minmax(210px, 1fr) auto auto;
   align-items: center;
   gap: 12px;
   padding: 8px 14px;
@@ -1200,6 +1197,11 @@ watch(
   width: 8px;
   height: 8px;
   flex: 0 0 auto;
+  background: var(--text-faint);
+  box-shadow: none;
+}
+
+.led.active {
   background: var(--yellow);
   box-shadow: 0 0 12px var(--yellow);
   animation: blink 1.3s steps(1) infinite;
@@ -1229,12 +1231,6 @@ watch(
 .sys-actions {
   justify-content: flex-end;
   gap: 7px;
-}
-
-.system-clock {
-  color: var(--cyan);
-  font-variant-numeric: tabular-nums;
-  white-space: nowrap;
 }
 
 .agent-status-bar {
@@ -1970,8 +1966,7 @@ video {
     grid-template-columns: minmax(0, 1fr) auto;
   }
 
-  .mode-tabs,
-  .system-clock {
+  .mode-tabs {
     display: none;
   }
 

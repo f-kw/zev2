@@ -25,6 +25,10 @@ const DEFAULT_RUNTIME_CONFIG: RuntimeConfig = {
   adjustment: {
     mode: 'fixed'
   },
+  videoOutput: {
+    encoder: 'libx264',
+    extraArgs: []
+  },
   source: {
     defaultUri: 'runtime/artifacts/draft_w4Lp9IJC6pQl3FsRfFL9t/source-video.mp4',
     defaultPurpose: '固定データでショート動画を作成する'
@@ -89,6 +93,17 @@ function parseAdjustmentRuntimeMode(value: unknown): AdjustmentRuntimeMode {
 
 function stringFromConfig(value: unknown, fallback: string): string {
   return typeof value === 'string' && value.trim() ? value.trim() : fallback;
+}
+
+function stringArrayFromConfig(value: unknown): string[] {
+  if (!Array.isArray(value)) {
+    return [];
+  }
+
+  return value
+    .filter((item): item is string => typeof item === 'string')
+    .map((item) => item.trim())
+    .filter((item) => item.length > 0);
 }
 
 function removeJsonComments(input: string): string {
@@ -171,6 +186,7 @@ function normalizeRuntimeConfig(value: unknown): RuntimeConfig {
   const contentDiscovery = recordValue(root.contentDiscovery);
   const editPlan = recordValue(root.editPlan);
   const adjustment = recordValue(root.adjustment);
+  const videoOutput = recordValue(root.videoOutput);
   const source = recordValue(root.source);
 
   return {
@@ -192,6 +208,10 @@ function normalizeRuntimeConfig(value: unknown): RuntimeConfig {
     },
     adjustment: {
       mode: parseAdjustmentRuntimeMode(adjustment.mode ?? DEFAULT_RUNTIME_CONFIG.adjustment.mode)
+    },
+    videoOutput: {
+      encoder: stringFromConfig(videoOutput.encoder, DEFAULT_RUNTIME_CONFIG.videoOutput.encoder),
+      extraArgs: stringArrayFromConfig(videoOutput.extraArgs)
     },
     source: {
       defaultUri: stringFromConfig(source.defaultUri, DEFAULT_RUNTIME_CONFIG.source.defaultUri),
@@ -219,7 +239,9 @@ export function createRunnerEnvironmentFromConfig(config: RuntimeConfig): Record
   const stageModes = {
     ZEV2_CONTENT_DISCOVERY_MODE: config.contentDiscovery.mode,
     ZEV2_EDIT_PLAN_MODE: config.editPlan.mode,
-    ZEV2_ADJUSTMENT_MODE: config.adjustment.mode
+    ZEV2_ADJUSTMENT_MODE: config.adjustment.mode,
+    ZEV2_FFMPEG_VIDEO_ENCODER: config.videoOutput.encoder,
+    ZEV2_FFMPEG_VIDEO_EXTRA_ARGS: JSON.stringify(config.videoOutput.extraArgs)
   };
 
   if (config.stt.mode === 'fixed') {

@@ -88,8 +88,14 @@ const FIXED_ARTIFACT_DRAFT_ID = 'draft_w4Lp9IJC6pQl3FsRfFL9t';
 const FIXED_TRANSCRIPT_PATH = path.join(workspaceRoot(), 'runtime', 'artifacts', FIXED_ARTIFACT_DRAFT_ID, 'transcript.json');
 const FIXED_THEME_OPTIONS_PATH = path.join(workspaceRoot(), 'runtime', 'artifacts', FIXED_ARTIFACT_DRAFT_ID, 'themes.json');
 const FIXED_EDIT_PLAN_PATH = path.join(workspaceRoot(), 'runner', 'fixtures', 'fixed-edit-plans.json');
-const confirmationVideoEncoder = process.env.ZEV2_FFMPEG_VIDEO_ENCODER ?? 'h264_videotoolbox';
-const CONFIRMATION_VIDEO_ENCODING_ARGS = ['-c:v', confirmationVideoEncoder, '-pix_fmt', 'yuv420p'];
+const confirmationVideoEncoder = (process.env.ZEV2_FFMPEG_VIDEO_ENCODER ?? 'libx264').trim() || 'libx264';
+const CONFIRMATION_VIDEO_ENCODING_ARGS = [
+  '-c:v',
+  confirmationVideoEncoder,
+  ...parseFfmpegExtraArgs(process.env.ZEV2_FFMPEG_VIDEO_EXTRA_ARGS),
+  '-pix_fmt',
+  'yuv420p'
+];
 
 function parseOptions(): RunnerOptions {
   const options: RunnerOptions = {
@@ -125,6 +131,25 @@ function workspaceRoot(): string {
   }
 
   return current;
+}
+
+function parseFfmpegExtraArgs(value: string | undefined): string[] {
+  if (!value?.trim()) {
+    return [];
+  }
+
+  let parsed: unknown;
+  try {
+    parsed = JSON.parse(value);
+  } catch {
+    throw new Error('確認用動画のffmpeg追加引数はJSON配列で指定してください');
+  }
+
+  if (!Array.isArray(parsed) || parsed.some((item) => typeof item !== 'string')) {
+    throw new Error('確認用動画のffmpeg追加引数は文字列だけの配列で指定してください');
+  }
+
+  return parsed.map((item) => item.trim()).filter((item) => item.length > 0);
 }
 
 function defaultFfprobeCommand(): string {

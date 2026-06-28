@@ -131,6 +131,10 @@ export interface RuntimeConfig {
   adjustment: {
     mode: AdjustmentRuntimeMode;
   };
+  videoOutput: {
+    encoder: string;
+    extraArgs: string[];
+  };
   source: {
     defaultUri: string;
     defaultPurpose: string;
