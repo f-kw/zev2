@@ -944,6 +944,11 @@ async function assertWebGeminiReviewFeedbackLoop(apiBaseUrl, runtimeDir, sourceD
     saved.review?.instructionText === instructionText,
     'Web Geminiレビューの改善指示が保存時に変わっている'
   );
+  assertScenario(saved.runLog?.status === 'saved', 'Web Geminiレビュー保存後の実行ログがsavedではない');
+  assertScenario(
+    saved.runLog.reviewCreatedAt === saved.review.createdAt,
+    'Web Geminiレビュー保存ログにレビュー保存時刻が残っていない'
+  );
 
   const fetched = await requestJson(apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/web-gemini-review`));
   assertScenario(fetched.review?.status === 'ready', '保存したWeb Geminiレビューが取得できない');
@@ -951,6 +956,7 @@ async function assertWebGeminiReviewFeedbackLoop(apiBaseUrl, runtimeDir, sourceD
     fetched.review.instructionText === instructionText,
     '取得したWeb Geminiレビューの改善指示が保存内容と一致しない'
   );
+  assertScenario(fetched.runLog?.status === 'saved', '取得したWeb Geminiレビュー実行ログがsavedではない');
 
   const reviewPath = path.join(runtimeDir, 'artifacts', sourceDraftId, 'web-gemini-review.json');
   await writeFile(reviewPath, `${JSON.stringify({

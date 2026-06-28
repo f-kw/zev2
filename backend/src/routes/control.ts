@@ -1675,9 +1675,24 @@ router.post('/request-drafts/:id/web-gemini-review', async (request, response) =
   };
 
   await writeWebGeminiReviewArtifact(review);
+  const runLog: WebGeminiReviewRunLog = {
+    draftId: draft.id,
+    status: 'saved',
+    createdAt: review.createdAt,
+    outputVideoUri: outputVideo.uri,
+    outputVideoPath: artifactPathByUrl(outputVideo.uri),
+    promptPath: webGeminiReviewPromptPath(draft.id),
+    blockedReasons: [],
+    externalUploadRequired: false,
+    nextAction: 'Web Geminiレビューを保存しました。必要なら改善指示を確認して演出作成前から作り直せます。',
+    reviewPath: webGeminiReviewPath(draft.id),
+    reviewCreatedAt: review.createdAt
+  };
+  await writeWebGeminiReviewRunLog(runLog);
 
   response.json({
-    review
+    review,
+    runLog
   });
 });
 
