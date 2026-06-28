@@ -70,6 +70,17 @@ export const GEMINI_MODEL_OPTIONS = [
 export type WorkflowStep = (typeof WORKFLOW_STEPS)[number];
 export type AgentRequestType = WorkflowStep['type'];
 export type FileRefKind = WorkflowStep['outputKind'];
+
+export const ARTIFACT_FILE_NAME_BY_KIND = {
+  source_video: 'source-video.json',
+  transcript_json: 'transcript.json',
+  theme_json: 'themes.json',
+  composition_json: 'clip-composition.json',
+  edit_plan_json: 'edit-plan.json',
+  patch_json: 'adjustment-patch.json',
+  output_video: 'output.mp4'
+} as const satisfies Record<FileRefKind, string>;
+
 export type SttRuntimeMode = 'fixed' | 'local';
 export type ContentDiscoveryRuntimeMode = 'fixed' | 'transcript';
 export type GeminiRuntimeMode = 'fixed' | 'gemini';

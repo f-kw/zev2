@@ -601,7 +601,7 @@ function assertMaterialReviewText(review, label) {
   }
 }
 
-async function assertCopiedRestart(apiBaseUrl, sourceDraftId, scope, expectedStartType) {
+async function assertCopiedRestart(apiBaseUrl, runtimeDir, sourceDraftId, scope, expectedStartType) {
   const response = await requestJson(apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/request-generated-video-changes`), {
     method: 'POST',
     body: JSON.stringify({
@@ -627,6 +627,18 @@ async function assertCopiedRestart(apiBaseUrl, sourceDraftId, scope, expectedSta
     copiedBeforeRestart.every((request) => request.status === 'succeeded'),
     `${scope}: 再開地点より前の工程が完了済みとしてコピーされていない`
   );
+  for (const request of copiedBeforeRestart) {
+    const fileRef = response.state.fileRefs.find((item) => item.id === request.result?.fileRefId);
+    if (!fileRef) {
+      continue;
+    }
+
+    assertScenario(
+      fileRef.uri.startsWith(`/api/artifacts/${copiedDraft.id}/`),
+      `${scope}: コピー済み工程の成果物参照が新しい編集コピーの配下にない`
+    );
+    await readFile(artifactPathByUri(runtimeDir, fileRef.uri));
+  }
   assertScenario(
     queuedAfterRestart.every((request) => request.status === 'queued'),
     `${scope}: 再開地点以降が未作成状態に戻っていない`
@@ -917,7 +929,7 @@ async function scenarioAutomaticVideoCreation(apiBaseUrl, runtimeDir) {
   assertTelopsDoNotCoverWholeSegments(editPlan, '初回生成');
   assertFixedEditPlanUsesPreparedScreenLayout(editPlan, '初回生成');
 
-  const editPlanRestartDraft = await assertCopiedRestart(apiBaseUrl, draft.id, 'edit_plan', 'create_edit_plan');
+  const editPlanRestartDraft = await assertCopiedRestart(apiBaseUrl, runtimeDir, draft.id, 'edit_plan', 'create_edit_plan');
   await runAgentApprovingReviews(apiBaseUrl, runtimeDir, editPlanRestartDraft.id);
   await assertGeneratedDraftCompleted(
     apiBaseUrl,
@@ -927,7 +939,7 @@ async function scenarioAutomaticVideoCreation(apiBaseUrl, runtimeDir) {
     workflowTypes.slice(workflowTypes.indexOf('create_edit_plan'))
   );
 
-  const themeRestartDraft = await assertCopiedRestart(apiBaseUrl, draft.id, 'theme_selection', 'build_clip_composition');
+  const themeRestartDraft = await assertCopiedRestart(apiBaseUrl, runtimeDir, draft.id, 'theme_selection', 'build_clip_composition');
   await runAgentApprovingReviews(apiBaseUrl, runtimeDir, themeRestartDraft.id);
   await assertGeneratedDraftCompleted(
     apiBaseUrl,
@@ -937,7 +949,7 @@ async function scenarioAutomaticVideoCreation(apiBaseUrl, runtimeDir) {
     workflowTypes.slice(workflowTypes.indexOf('build_clip_composition'))
   );
 
-  const adjustmentRestartDraft = await assertCopiedRestart(apiBaseUrl, draft.id, 'adjustment', 'apply_adjustment');
+  const adjustmentRestartDraft = await assertCopiedRestart(apiBaseUrl, runtimeDir, draft.id, 'adjustment', 'apply_adjustment');
   const nextAfterMultipleRestarts = await requestJson(apiPath(apiBaseUrl, '/agent-requests/next'));
   assertScenario(
     nextAfterMultipleRestarts.request?.requestDraftId === adjustmentRestartDraft.id &&

@@ -1,6 +1,9 @@
 import express from 'express';
 import { nanoid } from 'nanoid';
+import { copyFile, mkdir } from 'node:fs/promises';
+import path from 'node:path';
 import {
+  ARTIFACT_FILE_NAME_BY_KIND,
   WORKFLOW_STEPS,
   type AgentCompletionInput,
   type AgentDecisionInput,
@@ -43,6 +46,21 @@ type ReviewChangeScope =
   | 'adjustment';
 type GeneratedVideoChangeScope = 'theme_selection' | 'edit_plan' | 'adjustment';
 type LoadedState = Awaited<ReturnType<typeof loadState>>;
+type CopiedEditRestart = {
+  draft: RequestDraft;
+  requests: AgentRequest[];
+  queuedRequests: AgentRequest[];
+  fileRefs: FileRef[];
+  outputs: OutputEntity[];
+  decisionLogs: DecisionLog[];
+  controlReviewItems: ControlReviewItem[];
+  humanReviewActions: HumanReviewAction[];
+};
+
+const runtimeDir = process.env.ZEV2_RUNTIME_DIR
+  ? path.resolve(process.env.ZEV2_RUNTIME_DIR)
+  : path.resolve(process.cwd(), '../runtime');
+const artifactUrlPrefix = '/api/artifacts/';
 
 function nowIso(): string {
   return new Date().toISOString();
@@ -63,6 +81,53 @@ function workflowStepIndex(type: AgentRequest['type']): number {
   }
 
   return index;
+}
+
+function artifactRoot(): string {
+  return path.join(runtimeDir, 'artifacts');
+}
+
+function artifactPathByUrl(uri: string): string {
+  if (!uri.startsWith(artifactUrlPrefix)) {
+    throw new Error(`成果物URIを読めません: ${uri}`);
+  }
+
+  const relativePath = uri.slice(artifactUrlPrefix.length).split('/').map(decodeURIComponent).join(path.sep);
+  const root = path.resolve(artifactRoot());
+  const artifactPath = path.resolve(root, relativePath);
+  if (!artifactPath.startsWith(`${root}${path.sep}`)) {
+    throw new Error(`成果物URIの保存先が不正です: ${uri}`);
+  }
+
+  return artifactPath;
+}
+
+function artifactUrl(requestDraftId: string, fileName: string): string {
+  return `${artifactUrlPrefix}${encodeURIComponent(requestDraftId)}/${encodeURIComponent(fileName)}`;
+}
+
+function unknownErrorMessage(error: unknown): string {
+  return error instanceof Error ? error.message : String(error);
+}
+
+async function copyArtifactFileForRestart(
+  sourceFileRef: FileRef,
+  requestDraftId: string
+): Promise<{ uri: string } | { error: string }> {
+  const fileName = ARTIFACT_FILE_NAME_BY_KIND[sourceFileRef.kind];
+  const destinationDirectory = path.join(artifactRoot(), requestDraftId);
+  const destinationPath = path.join(destinationDirectory, fileName);
+
+  try {
+    await mkdir(destinationDirectory, { recursive: true });
+    await copyFile(artifactPathByUrl(sourceFileRef.uri), destinationPath);
+  } catch (error) {
+    return {
+      error: `${sourceFileRef.kind}の成果物ファイルをコピーできません: ${unknownErrorMessage(error)}`
+    };
+  }
+
+  return { uri: artifactUrl(requestDraftId, fileName) };
 }
 
 function createAgentRequestForDraftStep(
@@ -162,13 +227,13 @@ function copyDraftForRestart(
   };
 }
 
-function copySucceededAgentRequestForDraft(
+async function copySucceededAgentRequestForDraft(
   state: LoadedState,
   sourceRequest: AgentRequest,
   requestDraftId: string,
   dependsOnAgentRequestId: string | undefined,
   createdAt: string
-): { request: AgentRequest; fileRef?: FileRef; output?: OutputEntity } | { error: string } {
+): Promise<{ request: AgentRequest; fileRef?: FileRef; output?: OutputEntity } | { error: string }> {
   if (sourceRequest.status !== 'succeeded') {
     return { error: `${sourceRequest.label}が完了していないため、編集コピーに引き継げません` };
   }
@@ -201,9 +266,14 @@ function copySucceededAgentRequestForDraft(
 
   const outputId = createId(sourceRequest.type);
   const fileRefId = createId('fileref');
+  const copiedArtifact = await copyArtifactFileForRestart(sourceFileRef, requestDraftId);
+  if ('error' in copiedArtifact) {
+    return copiedArtifact;
+  }
   const fileRef: FileRef = {
     ...sourceFileRef,
     id: fileRefId,
+    uri: copiedArtifact.uri,
     ownerId: outputId,
     createdAt
   };
@@ -312,23 +382,14 @@ function copyApprovedReviewsForCopiedRequests(
   return { decisionLogs, controlReviewItems, humanReviewActions };
 }
 
-function createCopiedEditRestart(
+async function createCopiedEditRestart(
   state: LoadedState,
   requestDraftId: string,
   startType: AgentRequest['type'],
   reason: string,
   createdAt: string,
   materialReselectInstruction?: string
-): {
-  draft: RequestDraft;
-  requests: AgentRequest[];
-  queuedRequests: AgentRequest[];
-  fileRefs: FileRef[];
-  outputs: OutputEntity[];
-  decisionLogs: DecisionLog[];
-  controlReviewItems: ControlReviewItem[];
-  humanReviewActions: HumanReviewAction[];
-} | { error: string } {
+): Promise<CopiedEditRestart | { error: string }> {
   const sourceDraft = findById(state.requestDrafts, requestDraftId);
   if (!sourceDraft) {
     return { error: 'コピーする編集が見つかりません' };
@@ -349,7 +410,7 @@ function createCopiedEditRestart(
       return { error: `${step.label}が完了していないため、そこから後ろを作り直せません` };
     }
 
-    const copied = copySucceededAgentRequestForDraft(
+    const copied = await copySucceededAgentRequestForDraft(
       state,
       sourceRequest,
       copiedDraft.id,
@@ -439,20 +500,11 @@ function generatedVideoChangeScopeFromInput(value: unknown): GeneratedVideoChang
   return 'edit_plan';
 }
 
-function createCopiedRestartFromFailedRequest(
+async function createCopiedRestartFromFailedRequest(
   state: LoadedState,
   failedRequestId: string,
   createdAt: string
-): {
-  draft: RequestDraft;
-  requests: AgentRequest[];
-  queuedRequests: AgentRequest[];
-  fileRefs: FileRef[];
-  outputs: OutputEntity[];
-  decisionLogs: DecisionLog[];
-  controlReviewItems: ControlReviewItem[];
-  humanReviewActions: HumanReviewAction[];
-} | { error: string } {
+): Promise<CopiedEditRestart | { error: string }> {
   const failedRequest = findById(state.agentRequests, failedRequestId);
   if (!failedRequest) {
     return { error: '再実行するAI工程が見つかりません' };
@@ -902,7 +954,7 @@ async function applyHumanReviewAction(
   let replaceStartType: AgentRequest['type'] | undefined;
   let extraDecisionLog: DecisionLog | undefined;
   let extraReviewItem: ControlReviewItem | undefined;
-  let copiedRestart: Exclude<ReturnType<typeof createCopiedEditRestart>, { error: string }> | undefined;
+  let copiedRestart: CopiedEditRestart | undefined;
 
   if (action === 'request_changes') {
     if (changeScope === 'theme_options_regenerate' && reviewItem.kind !== 'theme_selection') {
@@ -915,7 +967,7 @@ async function applyHumanReviewAction(
     }
 
     if (reviewItem.kind === 'theme_selection') {
-      const restart = createCopiedEditRestart(
+      const restart = await createCopiedEditRestart(
         state,
         reviewItem.requestDraftId,
         'propose_clip_themes',
@@ -938,7 +990,7 @@ async function applyHumanReviewAction(
       extraDecisionLog = result.decisionLog;
       extraReviewItem = result.reviewItem;
     } else if (reviewItem.kind === 'material_confirmation') {
-      const restart = createCopiedEditRestart(
+      const restart = await createCopiedEditRestart(
         state,
         reviewItem.requestDraftId,
         'build_clip_composition',
@@ -964,7 +1016,7 @@ async function applyHumanReviewAction(
     } else {
       const startType: AgentRequest['type'] =
         changeScope === 'adjustment' ? 'apply_adjustment' : 'create_edit_plan';
-      const restart = createCopiedEditRestart(
+      const restart = await createCopiedEditRestart(
         state,
         reviewItem.requestDraftId,
         startType,
@@ -1275,7 +1327,7 @@ router.post('/request-drafts/:id/request-generated-video-changes', async (reques
   }
 
   const createdAt = nowIso();
-  const restart = createCopiedEditRestart(
+  const restart = await createCopiedEditRestart(
     state,
     draft.id,
     restartStartTypeForGeneratedVideoChange(scope),
@@ -1301,7 +1353,7 @@ router.post('/request-drafts/:id/request-generated-video-changes', async (reques
 router.post('/agent-requests/:id/retry', async (request, response) => {
   const state = await loadState();
   const createdAt = nowIso();
-  const restart = createCopiedRestartFromFailedRequest(state, request.params.id, createdAt);
+  const restart = await createCopiedRestartFromFailedRequest(state, request.params.id, createdAt);
   if ('error' in restart) {
     response.status(409).json({ error: restart.error, state });
     return;

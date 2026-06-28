@@ -4,6 +4,7 @@ import { existsSync } from 'node:fs';
 import path from 'node:path';
 import { GoogleGenAI, type GenerateContentResponse, type Part } from '@google/genai';
 import {
+  ARTIFACT_FILE_NAME_BY_KIND,
   DEFAULT_GEMINI_MODEL,
   findById,
   lastMatching,
@@ -72,15 +73,6 @@ const useFixedTranscript = process.env.ZEV2_STT_RUNTIME_MODE === 'fixed';
 const contentDiscoveryMode = process.env.ZEV2_CONTENT_DISCOVERY_MODE ?? 'fixed';
 const useFixedEditPlan = process.env.ZEV2_EDIT_PLAN_MODE === 'fixed';
 const adjustmentMode = process.env.ZEV2_ADJUSTMENT_MODE ?? 'fixed';
-const OUTPUT_FILE_NAME_BY_KIND = {
-  source_video: 'source-video.json',
-  transcript_json: 'transcript.json',
-  theme_json: 'themes.json',
-  composition_json: 'clip-composition.json',
-  edit_plan_json: 'edit-plan.json',
-  patch_json: 'adjustment-patch.json',
-  output_video: 'output.mp4'
-} satisfies Record<FileRefKind, string>;
 const SOURCE_VIDEO_FILE_NAME = 'source-video.mp4';
 const SOURCE_VIDEO_METADATA_FILE_NAME = 'source-video.json';
 const ZEV_STT_SAMPLE_PATH = path.join(workspaceRoot(), 'runner', 'fixtures', 'zev-stt-sample.json');
@@ -253,7 +245,7 @@ function artifactPathByUrl(uri: string): string {
 }
 
 async function writeJsonArtifact(request: AgentRequest, kind: FileRefKind, payload: unknown): Promise<ArtifactInfo> {
-  const fileName = OUTPUT_FILE_NAME_BY_KIND[kind];
+  const fileName = ARTIFACT_FILE_NAME_BY_KIND[kind];
   const directory = requestArtifactDir(request);
   const artifactPath = path.join(directory, fileName);
   await mkdir(directory, { recursive: true });
@@ -351,7 +343,7 @@ function renderVideoArtifactContext(): RenderVideoArtifactContext {
     ffmpegCommand,
     ffprobeCommand,
     confirmationVideoEncodingArgs: CONFIRMATION_VIDEO_ENCODING_ARGS,
-    outputVideoFileName: OUTPUT_FILE_NAME_BY_KIND.output_video,
+    outputVideoFileName: ARTIFACT_FILE_NAME_BY_KIND.output_video,
     requestArtifactDir,
     artifactUrl,
     resolveSourceVideoPath,
