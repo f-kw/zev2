@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import { spawn } from 'node:child_process';
 import { createServer } from 'node:net';
-import { mkdtemp, readFile, writeFile } from 'node:fs/promises';
+import { mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -886,6 +886,18 @@ async function assertWebGeminiReviewFeedbackLoop(apiBaseUrl, runtimeDir, sourceD
   assertScenario(
     staleRunLogError.includes('Web Geminiレビュー実行ログが現在の完成動画と一致しません'),
     '現在の完成動画と違うWeb Geminiレビュー実行ログが取得できている'
+  );
+
+  await writeFile(
+    path.join(runtimeDir, 'artifacts', sourceDraftId, 'web-gemini-review-prompt.md'),
+    '古いWeb Geminiレビュー依頼文\n',
+    'utf8'
+  );
+  await rm(runLogPath);
+  const promptWithoutRunLog = await requestJson(apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/web-gemini-review`));
+  assertScenario(
+    promptWithoutRunLog.preparedPromptText === '',
+    'Web Geminiレビュー実行ログがないのに依頼文だけが取得できている'
   );
 
   const prepared = await requestJson(apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/web-gemini-review/prepare`), {

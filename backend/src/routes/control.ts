@@ -1621,16 +1621,20 @@ router.get('/request-drafts/:id/web-gemini-review', async (request, response) =>
     response.status(409).json({ error: runLogMismatch.error, state });
     return;
   }
-  const promptResult = await readWebGeminiReviewPromptText(draft.id);
-  if ('error' in promptResult) {
-    response.status(409).json({ error: promptResult.error, state });
-    return;
+  let preparedPromptText = '';
+  if (runLogResult.runLog) {
+    const promptResult = await readWebGeminiReviewPromptText(draft.id);
+    if ('error' in promptResult) {
+      response.status(409).json({ error: promptResult.error, state });
+      return;
+    }
+    preparedPromptText = promptResult.promptText;
   }
 
   response.json({
     review: reviewResult.review,
     runLog: runLogResult.runLog,
-    preparedPromptText: promptResult.promptText,
+    preparedPromptText,
     outputVideoUri: outputVideo?.uri ?? ''
   });
 });
