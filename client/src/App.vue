@@ -10,6 +10,14 @@ import {
   type RequestDraftInput
 } from '@zev2/shared';
 import {
+  activityFilterOptions,
+  activityLogItemFromEvent,
+  fallbackActivityLogItem,
+  filterActivityLogItems,
+  type ActivityFilter,
+  type ActivityLogItem
+} from './activity-log';
+import {
   fetchRequestDraftActivity,
   fetchWebGeminiReview,
   formatApiError,
@@ -27,17 +35,6 @@ type ReviewChangeScope =
   | 'theme_reselect'
   | 'theme_options_regenerate'
   | 'material_reselect';
-type ActivityLogCategory = 'agent' | 'user' | 'external' | 'system';
-type ActivityFilter = 'all' | ActivityLogCategory;
-type ActivityLogItem = {
-  id: string;
-  timeText: string;
-  title: string;
-  detail: string;
-  className: string;
-  actorText: string;
-  category: ActivityLogCategory;
-};
 
 const store = useControlQueueStore();
 const submitting = ref(false);
@@ -559,97 +556,6 @@ const activityDialogTitle = computed(() =>
   currentDraft.value ? readablePurposeForWebGeminiReview(currentDraft.value.purpose) : '現在の下書き'
 );
 
-const activityFilterOptions: Array<{ value: ActivityFilter; label: string }> = [
-  { value: 'all', label: '全部' },
-  { value: 'agent', label: 'AI作業' },
-  { value: 'user', label: '人間判断' },
-  { value: 'external', label: '外部レビュー' }
-];
-
-function activityKindClass(kind: RequestDraftActivityEvent['kind']): string {
-  if (kind === 'human_review_required') {
-    return 'needs-review';
-  }
-
-  if (kind === 'human_review_action') {
-    return 'user-action';
-  }
-
-  if (
-    kind === 'agent_request_status' ||
-    kind === 'agent_decision' ||
-    kind === 'web_gemini_review_status'
-  ) {
-    return 'agent-action';
-  }
-
-  return 'system-action';
-}
-
-function activityCategory(event: RequestDraftActivityEvent): ActivityLogCategory {
-  if (event.kind === 'web_gemini_review_status') {
-    return 'external';
-  }
-
-  if (event.kind === 'human_review_action' || event.kind === 'human_review_required') {
-    return 'user';
-  }
-
-  if (
-    event.kind === 'agent_request_created' ||
-    event.kind === 'agent_request_status' ||
-    event.kind === 'agent_decision'
-  ) {
-    return 'agent';
-  }
-
-  return 'system';
-}
-
-function activityActorText(actor: RequestDraftActivityEvent['actor']): string {
-  if (actor === 'user') {
-    return 'ユーザー';
-  }
-
-  if (actor === 'agent') {
-    return 'AI';
-  }
-
-  if (actor === 'runner') {
-    return '実行処理';
-  }
-
-  if (actor === 'backend') {
-    return 'アプリ';
-  }
-
-  return 'システム';
-}
-
-function activityLogItemFromEvent(event: RequestDraftActivityEvent, timeText: string): ActivityLogItem {
-  return {
-    id: event.id,
-    timeText,
-    title: event.title,
-    detail: event.detail,
-    className: activityKindClass(event.kind),
-    actorText: activityActorText(event.actor),
-    category: activityCategory(event)
-  };
-}
-
-function fallbackActivityLogItem(message: string): ActivityLogItem {
-  return {
-    id: message,
-    timeText: '--',
-    title: message,
-    detail: '',
-    className: 'system-action',
-    actorText: '',
-    category: 'system'
-  };
-}
-
 const requestActivityRefreshKey = computed(() => {
   const draft = currentDraft.value;
   if (!draft) {
@@ -716,12 +622,7 @@ const fullActivityLogItems = computed<ActivityLogItem[]>(() => {
 });
 
 const visibleFullActivityLogItems = computed(() => {
-  if (activityFilter.value === 'all') {
-    return fullActivityLogItems.value;
-  }
-
-  const filteredItems = fullActivityLogItems.value.filter((item) => item.category === activityFilter.value);
-  return filteredItems.length > 0 ? filteredItems : [fallbackActivityLogItem('この種類の履歴はまだありません')];
+  return filterActivityLogItems(fullActivityLogItems.value, activityFilter.value);
 });
 
 function formatActivityTime(value: string): string {
