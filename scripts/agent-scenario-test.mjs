@@ -853,6 +853,24 @@ async function assertWebGeminiReviewFeedbackLoop(apiBaseUrl, runtimeDir, sourceD
 
   await writeFile(runLogPath, `${JSON.stringify({
     draftId: sourceDraftId,
+    status: 'failed',
+    createdAt: new Date().toISOString(),
+    outputVideoUri: outputFileRef.uri,
+    outputVideoPath: artifactPathByUri(runtimeDir, outputFileRef.uri),
+    promptPath: path.join(runtimeDir, 'artifacts', sourceDraftId, 'web-gemini-review-prompt.md'),
+    blockedReasons: ['Gemini回答を取得できません'],
+    externalUploadRequired: true,
+    nextAction: 'Web Geminiレビュー実行に失敗しました。停止理由を確認してから再実行してください。'
+  }, null, 2)}\n`, 'utf8');
+  const failedRunLog = await requestJson(apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/web-gemini-review`));
+  assertScenario(failedRunLog.runLog?.status === 'failed', 'Web Geminiレビュー実行失敗ログが失敗として読めない');
+  assertScenario(
+    failedRunLog.runLog.blockedReasons.includes('Gemini回答を取得できません'),
+    'Web Geminiレビュー実行失敗理由がログから読めない'
+  );
+
+  await writeFile(runLogPath, `${JSON.stringify({
+    draftId: sourceDraftId,
     status: 'prepared',
     createdAt: new Date().toISOString(),
     outputVideoUri: outputFileRef.uri,

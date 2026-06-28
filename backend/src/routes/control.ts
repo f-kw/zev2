@@ -58,7 +58,7 @@ type WebGeminiReviewArtifact = {
 };
 type WebGeminiReviewRunLog = {
   draftId: string;
-  status: 'prepared' | 'blocked' | 'running' | 'saved';
+  status: 'prepared' | 'blocked' | 'running' | 'saved' | 'failed';
   createdAt: string;
   outputVideoUri: string;
   outputVideoPath: string;
@@ -185,7 +185,7 @@ function parseWebGeminiReviewRunLog(value: unknown): WebGeminiReviewRunLog | und
   }
 
   const log = value as Partial<WebGeminiReviewRunLog>;
-  const allowedStatuses: WebGeminiReviewRunLog['status'][] = ['prepared', 'blocked', 'running', 'saved'];
+  const allowedStatuses: WebGeminiReviewRunLog['status'][] = ['prepared', 'blocked', 'running', 'saved', 'failed'];
   if (
     !hasText(log.draftId) ||
     !hasText(log.createdAt) ||

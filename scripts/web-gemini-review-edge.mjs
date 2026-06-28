@@ -765,8 +765,22 @@ async function main() {
     edgeControl,
     nextAction: 'EdgeのWeb Geminiへ動画と依頼文を送り、回答を取得しています。'
   });
-  const reviewText = await runWebGeminiReview(target, promptText);
-  const review = await saveReviewFromText(target, promptText, reviewText);
+  let reviewText;
+  let review;
+  try {
+    reviewText = await runWebGeminiReview(target, promptText);
+    review = await saveReviewFromText(target, promptText, reviewText);
+  } catch (error) {
+    const errorMessage = error instanceof Error ? error.message : String(error);
+    await writeRunLog(target, 'failed', {
+      promptPath,
+      edgeControl,
+      blockedReasons: [errorMessage],
+      externalUploadRequired: true,
+      nextAction: 'Web Geminiレビュー実行に失敗しました。停止理由を確認してから再実行してください。'
+    });
+    throw error;
+  }
   await writeRunLog(target, 'saved', {
     promptPath,
     edgeControl,

@@ -233,6 +233,10 @@ const webGeminiRunStatusTitle = computed(() => {
     return 'レビュー実行中';
   }
 
+  if (runLog.status === 'failed') {
+    return 'レビュー実行失敗';
+  }
+
   return webGeminiReview.value ? 'レビュー保存済み' : 'レビュー保存確認が必要';
 });
 
