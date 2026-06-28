@@ -47,18 +47,33 @@ async function exists(filePath) {
   }
 }
 
+async function writeMinimalMp4(filePath) {
+  await writeFile(
+    filePath,
+    Buffer.from([0x00, 0x00, 0x00, 0x18, 0x66, 0x74, 0x79, 0x70, 0x69, 0x73, 0x6f, 0x6d])
+  );
+}
+
 async function writeRuntimeFixture(runtimeDir) {
   const artifactsDir = path.join(runtimeDir, 'artifacts');
   await mkdir(path.join(artifactsDir, 'draft_success'), { recursive: true });
   await mkdir(path.join(artifactsDir, 'draft_empty'), { recursive: true });
+  await mkdir(path.join(artifactsDir, 'draft_invalid_video'), { recursive: true });
   await writeFile(path.join(runtimeDir, 'state.json'), JSON.stringify({
     fileRefs: [
-      { id: 'file_success', uri: '/api/artifacts/draft_success/output.mp4' },
-      { id: 'file_empty', uri: '/api/artifacts/draft_empty/output.mp4' }
+      { id: 'file_success', kind: 'output_video', uri: '/api/artifacts/draft_success/output.mp4', mimeType: 'video/mp4' },
+      { id: 'file_empty', kind: 'output_video', uri: '/api/artifacts/draft_empty/output.mp4', mimeType: 'video/mp4' },
+      {
+        id: 'file_invalid_video',
+        kind: 'output_video',
+        uri: '/api/artifacts/draft_invalid_video/output.mp4',
+        mimeType: 'video/mp4'
+      }
     ],
     requestDrafts: [
       { id: 'draft_success', purpose: '成功ログ確認用ショート\nやり直し理由: 前回レビューの改善指示' },
-      { id: 'draft_empty', purpose: '失敗ログ確認用ショート' }
+      { id: 'draft_empty', purpose: '失敗ログ確認用ショート' },
+      { id: 'draft_invalid_video', purpose: '壊れた動画確認用ショート' }
     ],
     agentRequests: [
       {
@@ -74,12 +89,20 @@ async function writeRuntimeFixture(runtimeDir) {
         requestDraftId: 'draft_empty',
         result: { fileRefId: 'file_empty' },
         updatedAt: '2026-06-29T00:00:01.000Z'
+      },
+      {
+        type: 'render_video',
+        status: 'succeeded',
+        requestDraftId: 'draft_invalid_video',
+        result: { fileRefId: 'file_invalid_video' },
+        updatedAt: '2026-06-29T00:00:03.000Z'
       }
     ]
   }, null, 2));
 
-  await writeFile(path.join(artifactsDir, 'draft_success', 'output.mp4'), 'dummy success video');
-  await writeFile(path.join(artifactsDir, 'draft_empty', 'output.mp4'), 'dummy empty video');
+  await writeMinimalMp4(path.join(artifactsDir, 'draft_success', 'output.mp4'));
+  await writeMinimalMp4(path.join(artifactsDir, 'draft_empty', 'output.mp4'));
+  await writeFile(path.join(artifactsDir, 'draft_invalid_video', 'output.mp4'), 'dummy broken video');
   await writeFile(
     path.join(runtimeDir, 'review-success.txt'),
     [
@@ -143,11 +166,35 @@ async function assertSaveFailure(runtimeDir) {
   );
 }
 
+async function assertInvalidVideoBlocked(runtimeDir) {
+  const result = await runScript(runtimeDir, [
+    '--draft-id=draft_invalid_video',
+    `--review-text-file=${path.join(runtimeDir, 'review-success.txt')}`
+  ]);
+  assertTest(result.code !== 0, '壊れた完成動画がWeb Geminiレビュー対象として成功扱いになっている');
+  assertTest(
+    result.output.includes('Web Geminiレビュー対象の完成動画はMP4として読めません'),
+    '壊れた完成動画の失敗理由が出力されていない'
+  );
+  assertTest(
+    !(await exists(path.join(runtimeDir, 'artifacts', 'draft_invalid_video', 'web-gemini-review.json'))),
+    '壊れた完成動画でレビュー本体が保存されている'
+  );
+
+  const runLog = await readJson(path.join(runtimeDir, 'artifacts', 'draft_invalid_video', 'web-gemini-review-run.json'));
+  assertTest(runLog.status === 'blocked', '壊れた完成動画の実行ログがblockedではない');
+  assertTest(
+    runLog.blockedReasons.includes('Web Geminiレビュー対象の完成動画はMP4として読めません'),
+    '壊れた完成動画の停止理由がログに残っていない'
+  );
+}
+
 async function main() {
   const runtimeDir = await mkdtemp(path.join(tmpdir(), 'zev2-web-gemini-script-'));
   await writeRuntimeFixture(runtimeDir);
   await assertSaveSuccess(runtimeDir);
   await assertSaveFailure(runtimeDir);
+  await assertInvalidVideoBlocked(runtimeDir);
   console.log(`Web Geminiレビュースクリプトテスト成功: ${runtimeDir}`);
 }
 

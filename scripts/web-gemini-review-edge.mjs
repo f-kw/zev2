@@ -2,7 +2,7 @@
 import { execFile } from 'node:child_process';
 import crypto from 'node:crypto';
 import { existsSync } from 'node:fs';
-import { mkdir, readFile, writeFile } from 'node:fs/promises';
+import { mkdir, open, readFile, writeFile } from 'node:fs/promises';
 import net from 'node:net';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -272,7 +272,13 @@ function artifactPathFromUri(uri) {
     .slice(artifactUrlPrefix.length)
     .split('/')
     .map(decodeURIComponent);
-  return path.join(runtimeDir, 'artifacts', ...relative);
+  const artifactRoot = path.resolve(runtimeDir, 'artifacts');
+  const artifactPath = path.resolve(artifactRoot, ...relative);
+  if (!artifactPath.startsWith(`${artifactRoot}${path.sep}`)) {
+    throw new Error(`成果物URIの保存先が不正です: ${uri}`);
+  }
+
+  return artifactPath;
 }
 
 function buildPrompt(draft) {
@@ -305,10 +311,47 @@ function findLatestRenderedVideo(state) {
       };
     })
     .filter(Boolean)
-    .filter((candidate) => (!draftIdArg || candidate.draft.id === draftIdArg) && existsSync(candidate.videoPath))
+    .filter((candidate) => !draftIdArg || candidate.draft.id === draftIdArg)
     .sort((a, b) => b.updatedAt.localeCompare(a.updatedAt));
 
   return candidates[0];
+}
+
+function isVideoMimeType(mimeType) {
+  return String(mimeType ?? '').split(';')[0].trim().toLowerCase().startsWith('video/');
+}
+
+async function isMp4File(filePath) {
+  const handle = await open(filePath, 'r');
+  try {
+    const header = Buffer.alloc(12);
+    const { bytesRead } = await handle.read(header, 0, header.length, 0);
+    return bytesRead >= 8 && header.subarray(4, 8).toString('ascii') === 'ftyp';
+  } finally {
+    await handle.close();
+  }
+}
+
+async function validateTargetVideo(target) {
+  if (target.fileRef.kind !== 'output_video') {
+    return 'Web Geminiレビュー対象が完成動画ではありません';
+  }
+
+  if (!isVideoMimeType(target.fileRef.mimeType)) {
+    return 'Web Geminiレビュー対象の成果物参照は動画ファイルではありません';
+  }
+
+  if (!existsSync(target.videoPath)) {
+    return 'Web Geminiレビュー対象の完成動画ファイルが見つかりません';
+  }
+
+  try {
+    return await isMp4File(target.videoPath)
+      ? ''
+      : 'Web Geminiレビュー対象の完成動画はMP4として読めません';
+  } catch {
+    return 'Web Geminiレビュー対象の完成動画を読めません';
+  }
 }
 
 async function writeJson(filePath, value) {
@@ -657,6 +700,18 @@ async function main() {
   const promptText = buildPrompt(target.draft);
   const externalReviewCommand = buildWebGeminiExternalReviewCommand(target.draft.id);
   const promptPath = path.join(runtimeDir, 'artifacts', target.draft.id, promptFileName);
+  const targetVideoError = await validateTargetVideo(target);
+  if (targetVideoError) {
+    await writeRunLog(target, 'blocked', {
+      promptPath,
+      blockedReasons: [targetVideoError],
+      externalUploadRequired: true,
+      externalReviewCommand,
+      nextAction: 'Web Geminiレビュー対象の完成動画を確認できません。動画生成をやり直してから再実行してください。'
+    });
+    throw new Error(targetVideoError);
+  }
+
   await mkdir(path.dirname(promptPath), { recursive: true });
   await writeFile(promptPath, `${promptText}\n`, 'utf8');
 
