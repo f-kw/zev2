@@ -268,6 +268,27 @@ const canInspectWebGeminiPrompt = computed(() =>
   Boolean(!webGeminiReview.value && webGeminiPreparedPromptText.value.trim())
 );
 
+const webGeminiSavedReviewTitle = computed(() =>
+  webGeminiReview.value ? 'レビュー保存済み' : ''
+);
+
+const webGeminiSavedReviewDetail = computed(() => {
+  if (!webGeminiReview.value) {
+    return '';
+  }
+
+  return '改善指示を確認して、必要なら演出作成前から作り直せます。';
+});
+
+const webGeminiSavedReviewMeta = computed(() => {
+  const review = webGeminiReview.value;
+  if (!review) {
+    return '';
+  }
+
+  return `現在の完成動画 / 保存日時: ${formatDisplayDateTime(review.createdAt)}`;
+});
+
 const canResumeAgentWork = computed(() =>
   Boolean(waitingAgentRequest.value && !runningRequest.value && !store.loading)
 );
@@ -701,6 +722,21 @@ async function redoVideo(scope: RedoScope) {
 
 function normalizeWebGeminiReviewText(text: string): string {
   return text.trim().replace(/\n{3,}/g, '\n\n');
+}
+
+function formatDisplayDateTime(value: string): string {
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) {
+    return value;
+  }
+
+  return new Intl.DateTimeFormat('ja-JP', {
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit'
+  }).format(date);
 }
 
 async function refreshWebGeminiReview() {
@@ -1175,6 +1211,14 @@ watch(
                   >
                     {{ activeWebGeminiAction === 'refresh_review' ? '確認中' : '再読み込み' }}
                   </button>
+                  <button
+                    v-if="webGeminiReview"
+                    type="button"
+                    :disabled="!canApplyWebGeminiReview"
+                    @click="applyWebGeminiReviewChanges"
+                  >
+                    {{ activeWebGeminiAction === 'apply_review' ? '再作成中' : '演出から再作成' }}
+                  </button>
                 </div>
               </div>
 
@@ -1184,11 +1228,17 @@ watch(
               </div>
 
               <div v-else-if="webGeminiReview" class="web-gemini-result">
+                <div class="web-gemini-status-card">
+                  <strong>{{ webGeminiSavedReviewTitle }}</strong>
+                  <span>{{ webGeminiSavedReviewDetail }}</span>
+                  <small>{{ webGeminiSavedReviewMeta }}</small>
+                </div>
+
                 <label>
                   レビュー結果
                   <textarea
                     readonly
-                    rows="5"
+                    rows="4"
                     :value="webGeminiReview.reviewText"
                   />
                 </label>
@@ -1197,21 +1247,12 @@ watch(
                   演出作成へ渡す改善指示
                   <textarea
                     v-model="webGeminiInstructionInput"
-                    rows="5"
+                    rows="4"
                     placeholder="必要なら削除・書き換え"
                     :disabled="agentOperationLocked"
                   />
                 </label>
 
-                <div class="web-gemini-actions final-action">
-                  <button
-                    type="button"
-                    :disabled="!canApplyWebGeminiReview"
-                    @click="applyWebGeminiReviewChanges"
-                  >
-                    {{ activeWebGeminiAction === 'apply_review' ? '再作成中' : 'このレビューで演出から再作成' }}
-                  </button>
-                </div>
               </div>
 
               <div v-else class="empty-review-state">
@@ -2192,7 +2233,8 @@ video {
 }
 
 .web-gemini-review textarea {
-  min-height: 72px;
+  height: 82px;
+  min-height: 0;
   padding: 10px;
   font-size: 12px;
   line-height: 1.45;
@@ -2201,6 +2243,31 @@ video {
 .web-gemini-result {
   display: grid;
   gap: 9px;
+}
+
+.web-gemini-status-card {
+  display: grid;
+  gap: 4px;
+  border: 1px solid rgba(0, 240, 255, 0.24);
+  padding: 8px 10px;
+  background: rgba(0, 240, 255, 0.06);
+}
+
+.web-gemini-status-card strong {
+  color: var(--cyan);
+  font-family: var(--font-mono);
+  font-size: 12px;
+}
+
+.web-gemini-status-card span,
+.web-gemini-status-card small {
+  color: var(--text-dim);
+  font-size: 11px;
+  line-height: 1.35;
+}
+
+.web-gemini-status-card small {
+  font-size: 11px;
 }
 
 .empty-review-state {
