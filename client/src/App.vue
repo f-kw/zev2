@@ -557,7 +557,11 @@ function activityKindClass(kind: RequestDraftActivityEvent['kind']): string {
     return 'user-action';
   }
 
-  if (kind === 'agent_request_status' || kind === 'agent_decision') {
+  if (
+    kind === 'agent_request_status' ||
+    kind === 'agent_decision' ||
+    kind === 'web_gemini_review_status'
+  ) {
     return 'agent-action';
   }
 

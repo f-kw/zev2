@@ -869,6 +869,15 @@ async function assertWebGeminiReviewFeedbackLoop(apiBaseUrl, runtimeDir, sourceD
     brokenRunLogError.includes('Web Geminiレビュー実行ログの保存内容が壊れています'),
     '壊れたWeb Geminiレビュー実行ログが成功扱いになっている'
   );
+  const brokenRunLogActivity = await requestJson(apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/activity`));
+  assertScenario(
+    brokenRunLogActivity.events.some(
+      (event) =>
+        event.kind === 'web_gemini_review_status' &&
+        event.title === 'Web Geminiレビュー実行ログを確認できません'
+    ),
+    '壊れたWeb Geminiレビュー実行ログが監査タイムラインで追えない'
+  );
 
   await writeFile(runLogPath, `${JSON.stringify({
     draftId: sourceDraftId,
@@ -939,6 +948,15 @@ async function assertWebGeminiReviewFeedbackLoop(apiBaseUrl, runtimeDir, sourceD
     prepared.promptText.includes('この動画をレビューしてください。対象は演出だけです。'),
     'Web Geminiレビュー準備APIの依頼文が演出レビュー用になっていない'
   );
+  const preparedActivity = await requestJson(apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/activity`));
+  assertScenario(
+    preparedActivity.events.some(
+      (event) =>
+        event.kind === 'web_gemini_review_status' &&
+        event.title === 'Web Geminiレビュー準備が完了'
+    ),
+    'Web Geminiレビュー準備が監査タイムラインで追えない'
+  );
 
   const beforeReview = await requestJson(apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/web-gemini-review`));
   assertScenario(beforeReview.review === null, 'Web Geminiレビュー保存前にレビューがある扱いになっている');
@@ -997,6 +1015,15 @@ async function assertWebGeminiReviewFeedbackLoop(apiBaseUrl, runtimeDir, sourceD
   assertScenario(
     saved.runLog.reviewCreatedAt === saved.review.createdAt,
     'Web Geminiレビュー保存ログにレビュー保存時刻が残っていない'
+  );
+  const savedActivity = await requestJson(apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/activity`));
+  assertScenario(
+    savedActivity.events.some(
+      (event) =>
+        event.kind === 'web_gemini_review_status' &&
+        event.title === 'Web Geminiレビューを保存'
+    ),
+    'Web Geminiレビュー保存が監査タイムラインで追えない'
   );
 
   const fetched = await requestJson(apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/web-gemini-review`));
@@ -1075,6 +1102,15 @@ async function assertWebGeminiReviewFeedbackLoop(apiBaseUrl, runtimeDir, sourceD
   assertScenario(
     applied.runLog.appliedDraftId === copiedDraft.id,
     'Web Geminiレビュー反映ログに反映先の編集コピーが残っていない'
+  );
+  const appliedActivity = await requestJson(apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/activity`));
+  assertScenario(
+    appliedActivity.events.some(
+      (event) =>
+        event.kind === 'web_gemini_review_status' &&
+        event.title === 'Web Geminiレビューを再作成へ反映'
+    ),
+    'Web Geminiレビュー反映が監査タイムラインで追えない'
   );
   assertScenario(
     copiedDraft.purpose.includes('Web Geminiの演出レビューを反映して、演出作成前から作り直す'),

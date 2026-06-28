@@ -80,7 +80,8 @@ export interface RequestDraftActivityEvent {
     | 'agent_request_status'
     | 'agent_decision'
     | 'human_review_required'
-    | 'human_review_action';
+    | 'human_review_action'
+    | 'web_gemini_review_status';
   occurredAt: string;
   actor: 'user' | 'agent' | 'runner' | 'backend' | 'system';
   title: string;

@@ -95,7 +95,8 @@ type RequestDraftActivityEvent = {
     | 'agent_request_status'
     | 'agent_decision'
     | 'human_review_required'
-    | 'human_review_action';
+    | 'human_review_action'
+    | 'web_gemini_review_status';
   occurredAt: string;
   actor: 'user' | 'agent' | 'runner' | 'backend' | 'system';
   title: string;
@@ -589,6 +590,92 @@ function draftStatusTitle(status: RequestDraft['status']): string {
 
 function humanReviewActionTitle(action: HumanReviewActionType): string {
   return `人間が${reviewActionLabel(action)}`;
+}
+
+function webGeminiReviewRunTitle(status: WebGeminiReviewRunLog['status']): string {
+  if (status === 'prepared') {
+    return 'Web Geminiレビュー準備が完了';
+  }
+
+  if (status === 'running') {
+    return 'Web Geminiレビューを実行中';
+  }
+
+  if (status === 'saved') {
+    return 'Web Geminiレビューを保存';
+  }
+
+  if (status === 'failed') {
+    return 'Web Geminiレビュー実行に失敗';
+  }
+
+  if (status === 'blocked') {
+    return 'Web Geminiレビュー実行を停止';
+  }
+
+  return 'Web Geminiレビューを再作成へ反映';
+}
+
+function webGeminiReviewRunDetail(runLog: WebGeminiReviewRunLog): string {
+  if (runLog.status === 'failed' || runLog.status === 'blocked') {
+    return compactActivityText(runLog.blockedReasons.join(' / ') || runLog.nextAction, '停止理由を確認してください');
+  }
+
+  if (runLog.status === 'saved') {
+    return compactActivityText(runLog.nextAction, '外部レビュー結果を保存しました');
+  }
+
+  if (runLog.status === 'applied') {
+    return compactActivityText(runLog.nextAction, 'レビューを反映して新しい編集コピーを作りました');
+  }
+
+  if (runLog.status === 'running') {
+    return compactActivityText(runLog.nextAction, 'AIエージェントがEdgeで外部レビューを実行しています');
+  }
+
+  return compactActivityText(runLog.nextAction, 'レビュー対象動画と依頼文を確認済みです');
+}
+
+function webGeminiReviewOccurredAt(runLog: WebGeminiReviewRunLog): string {
+  if (runLog.status === 'applied' && runLog.appliedAt) {
+    return runLog.appliedAt;
+  }
+
+  if (runLog.status === 'saved' && runLog.reviewCreatedAt) {
+    return runLog.reviewCreatedAt;
+  }
+
+  return runLog.createdAt;
+}
+
+function buildWebGeminiReviewActivity(
+  draft: RequestDraft,
+  runLog: WebGeminiReviewRunLog
+): RequestDraftActivityEvent {
+  return {
+    id: `web-gemini-review:${draft.id}:${runLog.status}`,
+    kind: 'web_gemini_review_status',
+    occurredAt: webGeminiReviewOccurredAt(runLog),
+    actor: runLog.status === 'prepared' ? 'backend' : 'agent',
+    title: webGeminiReviewRunTitle(runLog.status),
+    detail: webGeminiReviewRunDetail(runLog),
+    requestDraftId: draft.id
+  };
+}
+
+function buildWebGeminiReviewActivityError(
+  draft: RequestDraft,
+  error: string
+): RequestDraftActivityEvent {
+  return {
+    id: `web-gemini-review:${draft.id}:error`,
+    kind: 'web_gemini_review_status',
+    occurredAt: draft.updatedAt,
+    actor: 'system',
+    title: 'Web Geminiレビュー実行ログを確認できません',
+    detail: compactActivityText(error, '実行ログの保存内容を確認してください'),
+    requestDraftId: draft.id
+  };
 }
 
 function buildRequestDraftActivity(state: LoadedState, draft: RequestDraft): RequestDraftActivityEvent[] {
@@ -1611,9 +1698,25 @@ router.get('/request-drafts/:id/activity', async (request, response) => {
     return;
   }
 
+  const events = buildRequestDraftActivity(state, draft);
+  const webGeminiRunLogResult = await readWebGeminiReviewRunLog(draft.id);
+  if ('error' in webGeminiRunLogResult) {
+    events.push(buildWebGeminiReviewActivityError(draft, webGeminiRunLogResult.error));
+  } else if (webGeminiRunLogResult.runLog) {
+    const outputVideo = latestOutputVideoFileRef(state, draft.id);
+    const mismatch = ensureWebGeminiRunLogMatchesOutputVideo(webGeminiRunLogResult.runLog, outputVideo);
+    events.push(
+      mismatch
+        ? buildWebGeminiReviewActivityError(draft, mismatch.error)
+        : buildWebGeminiReviewActivity(draft, webGeminiRunLogResult.runLog)
+    );
+  }
+
   response.json({
     requestDraftId: draft.id,
-    events: buildRequestDraftActivity(state, draft)
+    events: events.sort((left, right) => (
+      left.occurredAt.localeCompare(right.occurredAt) || left.id.localeCompare(right.id)
+    ))
   });
 });
 
