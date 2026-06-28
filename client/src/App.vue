@@ -1687,6 +1687,12 @@ watch(
           <p class="eyebrow">作業履歴</p>
           <h2>{{ activityDialogTitle }}</h2>
         </div>
+        <div v-if="requestActivitySummary" class="activity-current-state">
+          <span>現在</span>
+          <strong>{{ activitySummaryTitle }}</strong>
+          <small>{{ activitySummaryDetail }}</small>
+          <em>{{ activitySummaryNextAction }}</em>
+        </div>
         <div class="activity-filter" aria-label="作業履歴の絞り込み">
           <button
             v-for="option in activityFilterOptions"
@@ -2861,7 +2867,7 @@ video {
 .activity-dialog {
   width: min(760px, 100%);
   max-height: min(720px, calc(100dvh - 36px));
-  grid-template-rows: auto auto minmax(0, 1fr) auto;
+  grid-template-rows: auto auto auto minmax(0, 1fr) auto;
 }
 
 .activity-dialog h2 {
@@ -2876,6 +2882,39 @@ video {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
+}
+
+.activity-current-state {
+  display: grid;
+  gap: 4px;
+  border-left: 3px solid var(--yellow);
+  padding: 2px 0 2px 10px;
+}
+
+.activity-current-state span {
+  color: var(--cyan);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  text-transform: uppercase;
+}
+
+.activity-current-state strong {
+  color: var(--text);
+  font-size: 14px;
+}
+
+.activity-current-state small,
+.activity-current-state em {
+  overflow-wrap: anywhere;
+  color: var(--text-dim);
+  font-family: var(--font-jp);
+  font-size: 12px;
+  font-style: normal;
+  line-height: 1.45;
+}
+
+.activity-current-state em {
+  color: var(--yellow);
 }
 
 .filter-button {
