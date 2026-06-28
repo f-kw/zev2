@@ -505,3 +505,15 @@
 - Alternatives considered: API仕様を設計書の主文にする。JSONスキーマを先に並べる。AIエージェントの工程名だけで流れを説明する。
 - Related files: `docs/codex/control-plane-spec.md`, `docs/current-implementation.md`, `docs/ai-agent-api.md`, `client/src/App.vue`
 - Review condition: 設計書を読んでも、人間が何を選ぶのか、何を確認するのか、どこで止めるのかが分からない場合。
+
+## Decision ZC-D-046
+
+- Decision ID: ZC-D-046
+- Date: 2026-06-28
+- Status: accepted
+- Priority: high
+- Decision: AIエージェントがWeb版Gemini、Web版ChatGPT、ChatGPT Workflowを使う場合は Microsoft Edge を使う。Chromeはユーザーの普段使い用なので使わない。
+- Reason: ChromeをAIエージェント作業に使うと、ユーザーの日常ブラウザ状態、開いているタブ、認証状態、作業中ページを巻き込みやすい。Web Geminiによる完成品レビューやWeb ChatGPTとの作業ループは、ユーザーが認証を準備するEdgeへ分離することで、AI作業と普段使いを混ぜない。
+- Alternatives considered: Chromeを使い続ける。Web GeminiだけEdgeにする。認証済みのブラウザをその場で選ぶ。
+- Related files: `AGENTS.md`, `/Users/kawafmm/.codex/skills/chatgpt-workflow/SKILL.md`
+- Review condition: Web版Gemini、Web版ChatGPT、ChatGPT Workflow、その他のAIエージェントによるWebサービス操作でChromeを使おうとしている場合。
