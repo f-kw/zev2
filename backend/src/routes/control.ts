@@ -245,51 +245,80 @@ async function validateCompletionFileRef(
 
   const uri = fileRef.uri.trim();
   const mimeType = fileRef.mimeType.trim();
-  const expectedPrefix = `${artifactUrlPrefix}${encodeURIComponent(agentRequest.requestDraftId)}/`;
-  if (!uri.startsWith(expectedPrefix)) {
-    return '成果物参照は対象の編集コピー配下に保存してください';
+  const expectedKind = getFileRefKindForRequest(agentRequest.type);
+  const validation = await validateArtifactFileRefForKind(agentRequest.requestDraftId, expectedKind, uri, mimeType);
+  return 'error' in validation ? validation.error : undefined;
+}
+
+async function validateArtifactFileRefForKind(
+  requestDraftId: string,
+  expectedKind: FileRef['kind'],
+  uri: string,
+  mimeType: string
+): Promise<{ artifactPath: string } | { error: string }> {
+  const normalizedUri = uri.trim();
+  const normalizedMimeTypeValue = mimeType.trim();
+  const expectedPrefix = `${artifactUrlPrefix}${encodeURIComponent(requestDraftId)}/`;
+  if (!normalizedUri.startsWith(expectedPrefix)) {
+    return { error: '成果物参照は対象の編集コピー配下に保存してください' };
   }
 
   let artifactPath = '';
   try {
-    artifactPath = artifactPathByUrl(uri);
+    artifactPath = artifactPathByUrl(normalizedUri);
   } catch {
-    return '成果物参照のURIが不正です';
+    return { error: '成果物参照のURIが不正です' };
   }
 
   try {
     await access(artifactPath);
   } catch {
-    return '成果物参照のファイルが見つかりません';
+    return { error: '成果物参照のファイルが見つかりません' };
   }
 
-  const expectedKind = getFileRefKindForRequest(agentRequest.type);
   if (expectedKind === 'output_video') {
-    if (!isVideoMimeType(mimeType)) {
-      return '動画生成工程の成果物参照は動画ファイルを指定してください';
+    if (!isVideoMimeType(normalizedMimeTypeValue)) {
+      return { error: '動画生成工程の成果物参照は動画ファイルを指定してください' };
     }
 
-    return validateMp4Artifact(artifactPath);
+    const videoError = await validateMp4Artifact(artifactPath);
+    return videoError ? { error: videoError } : { artifactPath };
   }
 
-  if (expectedKind === 'source_video' && isVideoMimeType(mimeType)) {
-    return validateMp4Artifact(artifactPath);
+  if (expectedKind === 'source_video' && isVideoMimeType(normalizedMimeTypeValue)) {
+    const videoError = await validateMp4Artifact(artifactPath);
+    return videoError ? { error: videoError } : { artifactPath };
   }
 
-  if (!isJsonMimeType(mimeType)) {
-    return 'このAI工程の成果物参照はJSONファイルを指定してください';
+  if (!isJsonMimeType(normalizedMimeTypeValue)) {
+    return { error: 'このAI工程の成果物参照はJSONファイルを指定してください' };
   }
 
   try {
     const actualKind = await readJsonArtifactKind(artifactPath);
     if (actualKind !== expectedKind) {
-      return '成果物参照の種別がAI工程と一致していません';
+      return { error: '成果物参照の種別がAI工程と一致していません' };
     }
   } catch {
-    return '成果物参照のJSONを読めません';
+    return { error: '成果物参照のJSONを読めません' };
   }
 
-  return undefined;
+  return { artifactPath };
+}
+
+function restartArtifactFileName(sourceFileRef: FileRef, sourceArtifactPath: string): string {
+  if (!isVideoMimeType(sourceFileRef.mimeType)) {
+    return ARTIFACT_FILE_NAME_BY_KIND[sourceFileRef.kind];
+  }
+
+  const sourceFileName = path.basename(sourceArtifactPath);
+  if (sourceFileName.toLowerCase().endsWith('.mp4')) {
+    return sourceFileName;
+  }
+
+  return sourceFileRef.kind === 'source_video'
+    ? 'source-video.mp4'
+    : ARTIFACT_FILE_NAME_BY_KIND.output_video;
 }
 
 function unknownErrorMessage(error: unknown): string {
@@ -558,15 +587,31 @@ async function writeWebGeminiReviewAppliedRunLog(
 
 async function copyArtifactFileForRestart(
   sourceFileRef: FileRef,
+  sourceRequest: AgentRequest,
   requestDraftId: string
 ): Promise<{ uri: string } | { error: string }> {
-  const fileName = ARTIFACT_FILE_NAME_BY_KIND[sourceFileRef.kind];
+  const expectedKind = getFileRefKindForRequest(sourceRequest.type);
+  if (sourceFileRef.kind !== expectedKind) {
+    return { error: `${sourceRequest.label}の成果物種別が工程と一致しないため、編集コピーに引き継げません` };
+  }
+
+  const validation = await validateArtifactFileRefForKind(
+    sourceRequest.requestDraftId,
+    expectedKind,
+    sourceFileRef.uri,
+    sourceFileRef.mimeType
+  );
+  if ('error' in validation) {
+    return { error: `${sourceRequest.label}の成果物参照をコピー前に確認できません: ${validation.error}` };
+  }
+
+  const fileName = restartArtifactFileName(sourceFileRef, validation.artifactPath);
   const destinationDirectory = path.join(artifactRoot(), requestDraftId);
   const destinationPath = path.join(destinationDirectory, fileName);
 
   try {
     await mkdir(destinationDirectory, { recursive: true });
-    await copyFile(artifactPathByUrl(sourceFileRef.uri), destinationPath);
+    await copyFile(validation.artifactPath, destinationPath);
   } catch (error) {
     return {
       error: `${sourceFileRef.kind}の成果物ファイルをコピーできません: ${unknownErrorMessage(error)}`
@@ -1157,7 +1202,7 @@ async function copySucceededAgentRequestForDraft(
 
   const outputId = createId(sourceRequest.type);
   const fileRefId = createId('fileref');
-  const copiedArtifact = await copyArtifactFileForRestart(sourceFileRef, requestDraftId);
+  const copiedArtifact = await copyArtifactFileForRestart(sourceFileRef, sourceRequest, requestDraftId);
   if ('error' in copiedArtifact) {
     return copiedArtifact;
   }

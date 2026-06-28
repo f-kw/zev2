@@ -766,6 +766,102 @@ async function assertMidWorkflowRetryCopiesArtifacts(apiBaseUrl, runtimeDir) {
   assertScenario(review.kind === 'theme_selection', '途中工程の再実行コピーがテーマ確認まで進まない');
 }
 
+async function assertVideoSourceRetryCopiesMp4Name(apiBaseUrl, runtimeDir) {
+  const draft = await createApprovedScenarioDraft(apiBaseUrl, '動画入力MP4の再実行コピーはMP4名で引き継ぐ');
+  const initialState = await requestJson(apiPath(apiBaseUrl, '/state'));
+  const initialRequests = agentRequestsForDraft(initialState, draft.id);
+  const prepareRequest = initialRequests.find((request) => request.type === 'prepare_video');
+  assertScenario(prepareRequest, '動画入力MP4コピー確認用の動画取り込み工程が見つからない');
+
+  await requestJson(apiPath(apiBaseUrl, `/agent-requests/${prepareRequest.id}/claim`), {
+    method: 'POST'
+  });
+
+  const sourceVideoFileName = 'source-video.mp4';
+  const sourceVideoPath = path.join(runtimeDir, 'artifacts', draft.id, sourceVideoFileName);
+  await writeMinimalMp4Header(sourceVideoPath);
+  await requestJson(apiPath(apiBaseUrl, `/agent-requests/${prepareRequest.id}/complete`), {
+    method: 'POST',
+    body: JSON.stringify({
+      meaning: '再実行コピー確認用の入力動画MP4',
+      fileRef: {
+        uri: `/api/artifacts/${draft.id}/${sourceVideoFileName}`,
+        mimeType: 'video/mp4',
+        access: 'internal'
+      }
+    })
+  });
+
+  const afterPrepareState = await requestJson(apiPath(apiBaseUrl, '/state'));
+  const runSttRequest = agentRequestsForDraft(afterPrepareState, draft.id).find((request) => request.type === 'run_stt');
+  assertScenario(runSttRequest, '動画入力MP4コピー確認用のSTT工程が見つからない');
+  await requestJson(apiPath(apiBaseUrl, `/agent-requests/${runSttRequest.id}/claim`), {
+    method: 'POST'
+  });
+  await requestJson(apiPath(apiBaseUrl, `/agent-requests/${runSttRequest.id}/fail`), {
+    method: 'POST',
+    body: JSON.stringify({ message: '動画入力MP4コピー確認のためにSTTを失敗させる' })
+  });
+
+  const retried = await requestJson(apiPath(apiBaseUrl, `/agent-requests/${runSttRequest.id}/retry`), {
+    method: 'POST'
+  });
+  const copiedPrepareRequest = agentRequestsForDraft(retried.state, retried.draft.id).find(
+    (request) => request.type === 'prepare_video'
+  );
+  const copiedSourceFileRef = retried.state.fileRefs.find((fileRef) => fileRef.id === copiedPrepareRequest?.result?.fileRefId);
+  assertScenario(copiedSourceFileRef, '動画入力MP4コピー後の入力動画参照が見つからない');
+  assertScenario(
+    copiedSourceFileRef.uri === `/api/artifacts/${retried.draft.id}/${sourceVideoFileName}`,
+    '動画入力MP4の再実行コピーがMP4名で保存されていない'
+  );
+  await readFile(artifactPathByUri(runtimeDir, copiedSourceFileRef.uri));
+}
+
+async function assertBrokenCopiedArtifactBlocksRetry(apiBaseUrl, runtimeDir) {
+  const draft = await createApprovedScenarioDraft(apiBaseUrl, '壊れた成果物は再実行コピーに引き継がない');
+  await runAgent(apiBaseUrl, runtimeDir, 2, true);
+
+  const state = await requestJson(apiPath(apiBaseUrl, '/state'));
+  const requests = agentRequestsForDraft(state, draft.id);
+  const transcriptRequest = requests.find((request) => request.type === 'run_stt');
+  const themeRequest = requests.find((request) => request.type === 'propose_clip_themes');
+  assertScenario(transcriptRequest?.status === 'succeeded', '壊れた成果物確認前にSTTが完了していない');
+  assertScenario(themeRequest?.status === 'queued', '壊れた成果物確認前にテーマ作成が未作成状態ではない');
+
+  const transcriptFileRef = state.fileRefs.find((fileRef) => fileRef.id === transcriptRequest.result?.fileRefId);
+  assertScenario(transcriptFileRef?.uri, '壊す対象のSTT成果物参照が見つからない');
+  await writeFile(
+    artifactPathByUri(runtimeDir, transcriptFileRef.uri),
+    `${JSON.stringify({ kind: 'theme_json', mode: 'wrong-kind-for-retry-copy' }, null, 2)}\n`,
+    'utf8'
+  );
+
+  await requestJson(apiPath(apiBaseUrl, `/agent-requests/${themeRequest.id}/claim`), {
+    method: 'POST'
+  });
+  await requestJson(apiPath(apiBaseUrl, `/agent-requests/${themeRequest.id}/fail`), {
+    method: 'POST',
+    body: JSON.stringify({ message: '壊れた成果物を再実行コピーへ引き継がないことを確認する' })
+  });
+
+  const beforeRetryFailure = await requestJson(apiPath(apiBaseUrl, '/state'));
+  const retryError = await expectRequestJsonFailure(apiPath(apiBaseUrl, `/agent-requests/${themeRequest.id}/retry`), {
+    method: 'POST'
+  });
+  assertScenario(
+    retryError.includes('成果物参照をコピー前に確認できません') &&
+      retryError.includes('成果物参照の種別がAI工程と一致していません'),
+    '壊れた成果物を再実行コピーへ引き継ぐ処理が正しい理由で拒否されていない'
+  );
+
+  const afterRetryFailure = await requestJson(apiPath(apiBaseUrl, '/state'));
+  assertScenario(
+    afterRetryFailure.requestDrafts.length === beforeRetryFailure.requestDrafts.length,
+    '壊れた成果物の再実行拒否後に編集コピーが作られている'
+  );
+}
+
 async function runAgentApprovingReviews(apiBaseUrl, runtimeDir, draftId) {
   for (let attempt = 0; attempt < 8; attempt += 1) {
     await runAgent(apiBaseUrl, runtimeDir);
@@ -890,6 +986,14 @@ function artifactPathByUri(runtimeDir, uri) {
   const prefix = '/api/artifacts/';
   assertScenario(uri.startsWith(prefix), `成果物URIが不正です: ${uri}`);
   return path.join(runtimeDir, 'artifacts', ...uri.slice(prefix.length).split('/').map(decodeURIComponent));
+}
+
+async function writeMinimalMp4Header(filePath) {
+  await mkdir(path.dirname(filePath), { recursive: true });
+  await writeFile(
+    filePath,
+    Buffer.from([0x00, 0x00, 0x00, 0x18, 0x66, 0x74, 0x79, 0x70, 0x69, 0x73, 0x6f, 0x6d])
+  );
 }
 
 async function readRequestArtifact(state, runtimeDir, requestDraftId, requestType) {
@@ -1890,6 +1994,8 @@ async function scenarioAutomaticVideoCreation(apiBaseUrl, runtimeDir) {
   await assertCancelClosesOpenHumanReview(apiBaseUrl, runtimeDir);
   await assertRetryControls(apiBaseUrl, runtimeDir);
   await assertMidWorkflowRetryCopiesArtifacts(apiBaseUrl, runtimeDir);
+  await assertVideoSourceRetryCopiesMp4Name(apiBaseUrl, runtimeDir);
+  await assertBrokenCopiedArtifactBlocksRetry(apiBaseUrl, runtimeDir);
   await assertResumeAndCancelControls(apiBaseUrl);
 
   const noFixedDraftInput = {
