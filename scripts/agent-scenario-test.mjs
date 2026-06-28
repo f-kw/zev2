@@ -469,6 +469,87 @@ async function assertCancelClosesOpenHumanReview(apiBaseUrl, runtimeDir) {
   );
 }
 
+async function assertRetryControls(apiBaseUrl) {
+  const draft = await createApprovedScenarioDraft(apiBaseUrl, '失敗したAI工程だけ再実行コピーを作る');
+  const state = await requestJson(apiPath(apiBaseUrl, '/state'));
+  const prepareRequest = agentRequestsForDraft(state, draft.id)[0];
+  assertScenario(prepareRequest?.type === 'prepare_video', '再実行確認用の最初のAI工程が見つからない');
+
+  const queuedRetryError = await expectRequestJsonFailure(apiPath(apiBaseUrl, `/agent-requests/${prepareRequest.id}/retry`), {
+    method: 'POST'
+  });
+  assertScenario(
+    queuedRetryError.includes('失敗したAI工程だけ再実行できます'),
+    '待機中のAI工程から再実行コピーを作れている'
+  );
+
+  const claimed = await requestJson(apiPath(apiBaseUrl, `/agent-requests/${prepareRequest.id}/claim`), {
+    method: 'POST'
+  });
+  assertScenario(claimed.request?.status === 'running', '再実行確認用のAI工程を取得中にできていない');
+
+  const failed = await requestJson(apiPath(apiBaseUrl, `/agent-requests/${prepareRequest.id}/fail`), {
+    method: 'POST',
+    body: JSON.stringify({ message: '再実行確認のためにAI工程を失敗させる' })
+  });
+  assertScenario(failed.request?.status === 'failed', '再実行確認用のAI工程を失敗状態にできていない');
+
+  const retried = await requestJson(apiPath(apiBaseUrl, `/agent-requests/${prepareRequest.id}/retry`), {
+    method: 'POST'
+  });
+  assertScenario(retried.draft.id !== draft.id, '失敗工程の再実行で編集コピーが作られていない');
+  assertScenario(
+    retried.draft.purpose.includes(`${prepareRequest.label}の失敗後に再実行する`),
+    '失敗工程の再実行理由が編集コピーに残っていない'
+  );
+  const sourceRequests = agentRequestsForDraft(retried.state, draft.id);
+  assertScenario(sourceRequests[0]?.status === 'failed', '失敗工程の再実行で元の失敗状態が壊れている');
+  const copiedRequests = agentRequestsForDraft(retried.state, retried.draft.id);
+  assertScenario(copiedRequests.length === 7, '失敗工程の再実行コピーに7工程がない');
+  assertScenario(
+    copiedRequests.every((request) => request.status === 'queued'),
+    '失敗工程の再実行コピーが先頭工程から未作成状態になっていない'
+  );
+  assertScenario(
+    retried.agentRequests.length === 7 &&
+      retried.agentRequests.every((request) => request.requestDraftId === retried.draft.id),
+    '再実行APIの返却対象が新しい編集コピーの工程に絞られていない'
+  );
+
+  const succeededDraft = await createApprovedScenarioDraft(apiBaseUrl, '成功済みAI工程は再実行コピーを作らない');
+  const succeededState = await requestJson(apiPath(apiBaseUrl, '/state'));
+  const succeededPrepareRequest = agentRequestsForDraft(succeededState, succeededDraft.id)[0];
+  await requestJson(apiPath(apiBaseUrl, `/agent-requests/${succeededPrepareRequest.id}/claim`), {
+    method: 'POST'
+  });
+  await requestJson(apiPath(apiBaseUrl, `/agent-requests/${succeededPrepareRequest.id}/complete`), {
+    method: 'POST',
+    body: JSON.stringify({ meaning: '再実行拒否確認のために成功済みにする' })
+  });
+  const succeededRetryError = await expectRequestJsonFailure(
+    apiPath(apiBaseUrl, `/agent-requests/${succeededPrepareRequest.id}/retry`),
+    { method: 'POST' }
+  );
+  assertScenario(
+    succeededRetryError.includes('失敗したAI工程だけ再実行できます'),
+    '成功済みのAI工程から再実行コピーを作れている'
+  );
+
+  const cancelledDraft = await createApprovedScenarioDraft(apiBaseUrl, '中止済みAI工程は再実行コピーを作らない');
+  const cancelled = await requestJson(apiPath(apiBaseUrl, `/request-drafts/${cancelledDraft.id}/cancel-agent-work`), {
+    method: 'POST'
+  });
+  const cancelledPrepareRequest = agentRequestsForDraft(cancelled.state, cancelledDraft.id)[0];
+  const cancelledRetryError = await expectRequestJsonFailure(
+    apiPath(apiBaseUrl, `/agent-requests/${cancelledPrepareRequest.id}/retry`),
+    { method: 'POST' }
+  );
+  assertScenario(
+    cancelledRetryError.includes('失敗したAI工程だけ再実行できます'),
+    '中止済みのAI工程から再実行コピーを作れている'
+  );
+}
+
 async function runAgentApprovingReviews(apiBaseUrl, runtimeDir, draftId) {
   for (let attempt = 0; attempt < 8; attempt += 1) {
     await runAgent(apiBaseUrl, runtimeDir);
@@ -1534,6 +1615,7 @@ async function scenarioAutomaticVideoCreation(apiBaseUrl, runtimeDir) {
   await assertThemeOptionRegenerateFromThemeSelection(apiBaseUrl, runtimeDir);
   await assertHumanReviewBlocksDirectClaim(apiBaseUrl, runtimeDir);
   await assertCancelClosesOpenHumanReview(apiBaseUrl, runtimeDir);
+  await assertRetryControls(apiBaseUrl);
   await assertResumeAndCancelControls(apiBaseUrl);
 
   const noFixedDraftInput = {
