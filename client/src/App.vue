@@ -3,6 +3,7 @@ import { computed, onBeforeUnmount, onMounted, reactive, ref, watch } from 'vue'
 import {
   DEFAULT_GEMINI_MODEL,
   findById,
+  readablePurposeForWebGeminiReview,
   uriWithRef,
   type AgentRequest,
   type ControlReviewItem,
@@ -57,6 +58,7 @@ const activeWebGeminiAction = ref<'refresh_review' | 'prepare_review' | 'apply_r
 const requestActivityEvents = ref<RequestDraftActivityEvent[]>([]);
 const requestActivityLoading = ref(false);
 const requestActivityError = ref('');
+const activityDialogOpen = ref(false);
 const initialPurpose = 'ショート動画を作成する';
 let refreshTimer: number | undefined;
 let webGeminiRefreshTimer: number | undefined;
@@ -548,6 +550,10 @@ const sessionStageText = computed(() =>
   showRequestPage.value ? 'NEW REQUEST' : progressText.value || (currentDraft.value ? '0/7 工程完了' : '未開始')
 );
 
+const activityDialogTitle = computed(() =>
+  currentDraft.value ? readablePurposeForWebGeminiReview(currentDraft.value.purpose) : '現在の下書き'
+);
+
 function activityKindClass(kind: RequestDraftActivityEvent['kind']): string {
   if (kind === 'human_review_required') {
     return 'needs-review';
@@ -625,6 +631,28 @@ const systemLogItems = computed<ActivityLogItem[]>(() => {
   return events.map((event) => ({
     id: event.id,
     timeText: formatActivityTime(event.occurredAt),
+    title: event.title,
+    detail: event.detail,
+    className: activityKindClass(event.kind)
+  }));
+});
+
+const fullActivityLogItems = computed<ActivityLogItem[]>(() => {
+  if (requestActivityError.value) {
+    return [fallbackActivityLogItem(requestActivityError.value)];
+  }
+
+  if (requestActivityLoading.value && requestActivityEvents.value.length === 0) {
+    return [fallbackActivityLogItem('作業履歴を確認中')];
+  }
+
+  if (requestActivityEvents.value.length === 0) {
+    return [fallbackActivityLogItem('作業履歴はまだありません')];
+  }
+
+  return requestActivityEvents.value.map((event) => ({
+    id: event.id,
+    timeText: formatDisplayDateTime(event.occurredAt),
     title: event.title,
     detail: event.detail,
     className: activityKindClass(event.kind)
@@ -936,6 +964,19 @@ async function refreshRequestActivity() {
   }
 }
 
+function openActivityDialog() {
+  if (!currentDraft.value || showRequestPage.value) {
+    return;
+  }
+
+  activityDialogOpen.value = true;
+  void refreshRequestActivity();
+}
+
+function closeActivityDialog() {
+  activityDialogOpen.value = false;
+}
+
 async function refreshWebGeminiReview() {
   const draft = currentDraft.value;
   if (webGeminiReviewLoading.value) {
@@ -1131,6 +1172,13 @@ watch(
     void refreshRequestActivity();
   },
   { immediate: true }
+);
+
+watch(
+  () => [showRequestPage.value, currentDraft.value?.id ?? ''],
+  () => {
+    activityDialogOpen.value = false;
+  }
 );
 
 watch(
@@ -1546,7 +1594,17 @@ watch(
         </section>
 
         <section class="hud-card">
-          <p class="eyebrow">作業ログ</p>
+          <div class="hud-card-title-row">
+            <p class="eyebrow">作業ログ</p>
+            <button
+              type="button"
+              class="inline-text-button"
+              :disabled="showRequestPage || !currentDraft"
+              @click="openActivityDialog"
+            >
+              全履歴
+            </button>
+          </div>
           <ol class="system-log">
             <li
               v-for="item in systemLogItems"
@@ -1600,6 +1658,39 @@ watch(
         </div>
       </form>
     </div>
+
+    <div
+      v-if="!showRequestPage && activityDialogOpen"
+      class="dialog-overlay"
+      role="dialog"
+      aria-modal="true"
+    >
+      <section class="change-dialog activity-dialog" aria-label="作業履歴">
+        <div class="panel-corner" aria-hidden="true"></div>
+        <div>
+          <p class="eyebrow">作業履歴</p>
+          <h2>{{ activityDialogTitle }}</h2>
+        </div>
+        <ol class="system-log activity-dialog-log">
+          <li
+            v-for="item in fullActivityLogItems"
+            :key="item.id"
+            :class="item.className"
+          >
+            <time>{{ item.timeText }}</time>
+            <span>
+              <strong>{{ item.title }}</strong>
+              <small v-if="item.detail">{{ item.detail }}</small>
+            </span>
+          </li>
+        </ol>
+        <div class="dialog-actions">
+          <button type="button" class="secondary-button" @click="closeActivityDialog">
+            閉じる
+          </button>
+        </div>
+      </section>
+    </div>
   </main>
 </template>
 
@@ -1634,6 +1725,7 @@ watch(
   --yellow: #fcee0a;
   --cyan: #00f0ff;
   --red: #ff003c;
+  --pink: #ff4fd8;
   --text: #f2f3e8;
   --text-dim: #9a9d88;
   --text-faint: #5c604d;
@@ -2608,6 +2700,18 @@ video {
   overflow: hidden;
 }
 
+.hud-card-title-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 7px;
+}
+
+.hud-card-title-row .eyebrow {
+  margin-bottom: 0;
+}
+
 .hud-card dl {
   display: grid;
   gap: 8px;
@@ -2722,6 +2826,38 @@ video {
   padding: 18px;
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5), 0 0 34px rgba(252, 238, 10, 0.14);
   animation: dialogIn 0.16s ease-out;
+}
+
+.activity-dialog {
+  width: min(760px, 100%);
+  max-height: min(720px, calc(100dvh - 36px));
+  grid-template-rows: auto minmax(0, 1fr) auto;
+}
+
+.activity-dialog h2 {
+  display: -webkit-box;
+  overflow: hidden;
+  font-size: 18px;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.activity-dialog-log {
+  padding-right: 4px;
+}
+
+.activity-dialog-log li {
+  grid-template-columns: 132px minmax(0, 1fr);
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.activity-dialog-log strong {
+  white-space: normal;
+}
+
+.activity-dialog-log small {
+  -webkit-line-clamp: 3;
 }
 
 .dialog-actions {
