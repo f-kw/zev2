@@ -17,7 +17,6 @@ const artifactUrlPrefix = '/api/artifacts/';
 const reviewFileName = 'web-gemini-review.json';
 const promptFileName = 'web-gemini-review-prompt.md';
 const runLogFileName = 'web-gemini-review-run.json';
-const externalReviewCommand = 'corepack pnpm run web-gemini:review:execute';
 
 const args = new Set(process.argv.slice(2));
 const reviewTextFileArg = readOption('--review-text-file');
@@ -48,6 +47,10 @@ function wait(milliseconds) {
   return new Promise((resolve) => {
     setTimeout(resolve, milliseconds);
   });
+}
+
+function externalReviewCommandForDraft(draftId) {
+  return `corepack pnpm run web-gemini:review:execute -- --draft-id=${draftId}`;
 }
 
 class CdpClient {
@@ -651,6 +654,7 @@ async function main() {
   }
 
   const promptText = buildPrompt(target.draft);
+  const externalReviewCommand = externalReviewCommandForDraft(target.draft.id);
   const promptPath = path.join(runtimeDir, 'artifacts', target.draft.id, promptFileName);
   await mkdir(path.dirname(promptPath), { recursive: true });
   await writeFile(promptPath, `${promptText}\n`, 'utf8');

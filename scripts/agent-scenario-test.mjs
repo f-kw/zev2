@@ -913,7 +913,7 @@ async function assertWebGeminiReviewFeedbackLoop(apiBaseUrl, runtimeDir, sourceD
     'Web Geminiレビュー準備APIのログから外部送信が必要なことが分からない'
   );
   assertScenario(
-    prepared.runLog.externalReviewCommand === 'corepack pnpm run web-gemini:review:execute',
+    prepared.runLog.externalReviewCommand === `corepack pnpm run web-gemini:review:execute -- --draft-id=${sourceDraftId}`,
     'Web Geminiレビュー準備APIのログに外部レビュー実行手順が残っていない'
   );
   assertScenario(
@@ -927,7 +927,7 @@ async function assertWebGeminiReviewFeedbackLoop(apiBaseUrl, runtimeDir, sourceD
   assertScenario(beforeReview.runLog?.status === 'prepared', 'Web Geminiレビュー準備ログが取得できない');
   assertScenario(beforeReview.runLog.externalUploadRequired === true, '外部送信が必要なレビューであることがログから分からない');
   assertScenario(
-    beforeReview.runLog.externalReviewCommand === 'corepack pnpm run web-gemini:review:execute',
+    beforeReview.runLog.externalReviewCommand === `corepack pnpm run web-gemini:review:execute -- --draft-id=${sourceDraftId}`,
     'Web Geminiレビュー取得APIで外部レビュー実行手順が読めない'
   );
   assertScenario(
