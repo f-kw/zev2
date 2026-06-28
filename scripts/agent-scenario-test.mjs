@@ -338,6 +338,28 @@ async function assertHumanReviewBlocksDirectClaim(apiBaseUrl, runtimeDir) {
   );
   assertScenario(compositionRequest, 'テーマ確認待ちで編集元場面作成のAI作業が見つからない');
 
+  const invalidScopeError = await expectRequestJsonFailure(
+    apiPath(apiBaseUrl, `/control-reviews/${review.id}/request-changes`),
+    {
+      method: 'POST',
+      body: JSON.stringify({ scope: 'unknown_scope' })
+    }
+  );
+  assertScenario(
+    invalidScopeError.includes('確認後に作り直す範囲が不正です'),
+    '不明な作り直し範囲が人間確認の修正依頼で拒否されていない'
+  );
+  const afterInvalidScope = await requestJson(apiPath(apiBaseUrl, '/state'));
+  const reviewAfterInvalidScope = afterInvalidScope.controlReviewItems.find((item) => item.id === review.id);
+  assertScenario(
+    reviewAfterInvalidScope?.status === 'review_required',
+    '不明な作り直し範囲で確認項目の状態が変わっている'
+  );
+  assertScenario(
+    afterInvalidScope.requestDrafts.length === state.requestDrafts.length,
+    '不明な作り直し範囲で編集コピーが作られている'
+  );
+
   const beforeApprovalError = await expectRequestJsonFailure(
     apiPath(apiBaseUrl, `/agent-requests/${compositionRequest.id}/claim`),
     { method: 'POST' }
@@ -929,6 +951,38 @@ async function assertCopiedRestart(apiBaseUrl, runtimeDir, sourceDraftId, scope,
   );
 
   return copiedDraft;
+}
+
+async function assertGeneratedVideoChangeRejectsUnknownScope(apiBaseUrl, sourceDraftId) {
+  const before = await requestJson(apiPath(apiBaseUrl, '/state'));
+  const beforeSourceRequests = agentRequestsForDraft(before, sourceDraftId);
+  const error = await expectRequestJsonFailure(
+    apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/request-generated-video-changes`),
+    {
+      method: 'POST',
+      body: JSON.stringify({
+        reason: '不明な作り直し範囲を送る',
+        scope: 'unknown_scope'
+      })
+    }
+  );
+  assertScenario(
+    error.includes('生成済み動画から作り直す範囲が不正です'),
+    '生成済み動画からの不明な作り直し範囲が拒否されていない'
+  );
+
+  const after = await requestJson(apiPath(apiBaseUrl, '/state'));
+  const afterSourceRequests = agentRequestsForDraft(after, sourceDraftId);
+  assertScenario(
+    after.requestDrafts.length === before.requestDrafts.length,
+    '生成済み動画からの不明な作り直し範囲で編集コピーが作られている'
+  );
+  assertScenario(
+    afterSourceRequests.every((request, index) => (
+      request.status === beforeSourceRequests[index]?.status
+    )),
+    '生成済み動画からの不明な作り直し範囲で元編集の工程状態が変わっている'
+  );
 }
 
 async function assertGeneratedDraftCompleted(apiBaseUrl, runtimeDir, draftId, label, expectedManifestTypes = workflowTypes) {
@@ -1579,6 +1633,7 @@ async function scenarioAutomaticVideoCreation(apiBaseUrl, runtimeDir) {
   await assertFixedEditPlanUsesFixtureValues(editPlan, '初回生成');
   assertTelopsDoNotCoverWholeSegments(editPlan, '初回生成');
   assertFixedEditPlanUsesPreparedScreenLayout(editPlan, '初回生成');
+  await assertGeneratedVideoChangeRejectsUnknownScope(apiBaseUrl, draft.id);
 
   await assertWebGeminiReviewFeedbackLoop(apiBaseUrl, runtimeDir, draft.id);
 

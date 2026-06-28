@@ -49,6 +49,14 @@ type ReviewChangeScope =
   | 'material_reselect'
   | 'adjustment';
 type GeneratedVideoChangeScope = 'theme_selection' | 'edit_plan' | 'adjustment';
+const reviewChangeScopes: ReviewChangeScope[] = [
+  'edit_plan',
+  'theme_reselect',
+  'theme_options_regenerate',
+  'material_reselect',
+  'adjustment'
+];
+const generatedVideoChangeScopes: GeneratedVideoChangeScope[] = ['theme_selection', 'edit_plan', 'adjustment'];
 type LoadedState = Awaited<ReturnType<typeof loadState>>;
 type WebGeminiReviewArtifact = {
   draftId: string;
@@ -1270,16 +1278,16 @@ function restartStartTypeForGeneratedVideoChange(scope: GeneratedVideoChangeScop
   return 'create_edit_plan';
 }
 
-function generatedVideoChangeScopeFromInput(value: unknown): GeneratedVideoChangeScope {
-  if (value === 'theme_selection') {
-    return 'theme_selection';
+function generatedVideoChangeScopeFromInput(value: unknown): GeneratedVideoChangeScope | { error: string } {
+  if (value === undefined) {
+    return 'edit_plan';
   }
 
-  if (value === 'adjustment') {
-    return 'adjustment';
+  if (generatedVideoChangeScopes.includes(value as GeneratedVideoChangeScope)) {
+    return value as GeneratedVideoChangeScope;
   }
 
-  return 'edit_plan';
+  return { error: '生成済み動画から作り直す範囲が不正です' };
 }
 
 async function createCopiedRestartFromFailedRequest(
@@ -1670,24 +1678,16 @@ function reviewActionLabel(action: HumanReviewActionType): string {
   return '修正依頼';
 }
 
-function reviewChangeScopeFromInput(input: unknown): ReviewChangeScope {
-  if (input === 'theme_reselect') {
-    return 'theme_reselect';
+function reviewChangeScopeFromInput(input: unknown): ReviewChangeScope | { error: string } {
+  if (input === undefined) {
+    return 'edit_plan';
   }
 
-  if (input === 'theme_options_regenerate') {
-    return 'theme_options_regenerate';
+  if (reviewChangeScopes.includes(input as ReviewChangeScope)) {
+    return input as ReviewChangeScope;
   }
 
-  if (input === 'material_reselect') {
-    return 'material_reselect';
-  }
-
-  if (input === 'adjustment') {
-    return 'adjustment';
-  }
-
-  return 'edit_plan';
+  return { error: '確認後に作り直す範囲が不正です' };
 }
 
 function defaultHumanReviewReason(
@@ -1744,7 +1744,11 @@ async function applyHumanReviewAction(
   }
 
   const hasExplicitReason = hasText(reasonInput);
-  const changeScope = action === 'request_changes' ? reviewChangeScopeFromInput(changeScopeInput) : 'edit_plan';
+  const changeScopeResult = action === 'request_changes' ? reviewChangeScopeFromInput(changeScopeInput) : 'edit_plan';
+  if (typeof changeScopeResult !== 'string') {
+    return { status: 'error', statusCode: 400, error: changeScopeResult.error, state };
+  }
+  const changeScope = changeScopeResult;
   const reason = hasExplicitReason
     ? reasonInput.trim()
     : defaultHumanReviewReason(action, reviewItem, changeScope);
@@ -2388,6 +2392,10 @@ router.post('/request-drafts/:id/request-generated-video-changes', async (reques
     return;
   }
   const scope = generatedVideoChangeScopeFromInput(request.body?.scope);
+  if (typeof scope !== 'string') {
+    response.status(400).json({ error: scope.error });
+    return;
+  }
 
   const state = await loadState();
   const draft = findById(state.requestDrafts, request.params.id);
