@@ -241,6 +241,11 @@ function latestReview(state, draftId, kind, status) {
     .sort((left, right) => right.createdAt.localeCompare(left.createdAt))[0];
 }
 
+function assertCreatedDraftStoredOnce(created, label) {
+  const storedDrafts = created.state.requestDrafts.filter((draft) => draft.id === created.draft.id);
+  assertScenario(storedDrafts.length === 1, `${label}: 新規下書きが状態に重複保存されている`);
+}
+
 async function createApprovedScenarioDraft(apiBaseUrl, purpose) {
   const created = await requestJson(apiPath(apiBaseUrl, '/request-drafts'), {
     method: 'POST',
@@ -253,6 +258,7 @@ async function createApprovedScenarioDraft(apiBaseUrl, purpose) {
       preset: 'shorts_default'
     })
   });
+  assertCreatedDraftStoredOnce(created, purpose);
 
   await requestJson(apiPath(apiBaseUrl, `/request-drafts/${created.draft.id}/approve`), {
     method: 'POST'
@@ -1269,6 +1275,7 @@ async function scenarioAutomaticVideoCreation(apiBaseUrl, runtimeDir) {
     method: 'POST',
     body: JSON.stringify(draftInput)
   });
+  assertCreatedDraftStoredOnce(created, '初回生成');
   const draft = created.draft;
 
   assertScenario(draft.policy.humanApprovalRequiredBeforeRender === false, '新規依頼が承認なし生成の方針になっていない');
@@ -1355,6 +1362,7 @@ async function scenarioAutomaticVideoCreation(apiBaseUrl, runtimeDir) {
     method: 'POST',
     body: JSON.stringify(noFixedDraftInput)
   });
+  assertCreatedDraftStoredOnce(noFixedCreated, '固定データなしのSTT失敗確認');
   await requestJson(apiPath(apiBaseUrl, `/request-drafts/${noFixedCreated.draft.id}/approve`), {
     method: 'POST'
   });
