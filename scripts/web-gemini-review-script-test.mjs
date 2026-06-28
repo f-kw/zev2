@@ -107,6 +107,12 @@ async function assertSaveSuccess(runtimeDir) {
   const runLog = await readJson(path.join(runtimeDir, 'artifacts', 'draft_success', 'web-gemini-review-run.json'));
   assertTest(runLog.status === 'saved', 'レビュー保存ログがsavedではない');
   assertTest(runLog.reviewPath.endsWith('web-gemini-review.json'), 'レビュー保存先がログに残っていない');
+  assertTest(runLog.externalUploadRequired === false, '保存済み本文の取り込みが外部送信扱いになっている');
+  assertTest(Array.isArray(runLog.blockedReasons) && runLog.blockedReasons.length === 0, '成功ログに停止理由が残っている');
+  assertTest(
+    runLog.nextAction.includes('保存済みのWeb Geminiレビュー本文を取り込みました'),
+    '保存済み本文を取り込んだことが成功ログから読めない'
+  );
 
   const promptText = await readFile(path.join(runtimeDir, 'artifacts', 'draft_success', 'web-gemini-review-prompt.md'), 'utf8');
   assertTest(

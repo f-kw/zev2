@@ -323,6 +323,8 @@ async function writeRunLog(target, status, details) {
     createdAt: new Date().toISOString(),
     outputVideoUri: target.fileRef.uri,
     outputVideoPath: target.videoPath,
+    blockedReasons: [],
+    externalUploadRequired: false,
     ...details
   });
 }
@@ -680,7 +682,8 @@ async function main() {
     await writeRunLog(target, 'saved', {
       promptPath,
       reviewPath: path.join(runtimeDir, 'artifacts', target.draft.id, reviewFileName),
-      reviewCreatedAt: review.createdAt
+      reviewCreatedAt: review.createdAt,
+      nextAction: '保存済みのWeb Geminiレビュー本文を取り込みました。必要なら改善指示を確認して演出作成前から作り直せます。'
     });
     console.log(JSON.stringify({ status: 'saved', draftId: target.draft.id, promptPath }, null, 2));
     return;
@@ -784,7 +787,10 @@ async function main() {
     promptPath,
     edgeControl,
     reviewPath: path.join(runtimeDir, 'artifacts', target.draft.id, reviewFileName),
-    reviewCreatedAt: review.createdAt
+    reviewCreatedAt: review.createdAt,
+    externalUploadRequired: true,
+    externalReviewCommand,
+    nextAction: 'EdgeのWeb Geminiで取得したレビューを保存しました。必要なら改善指示を確認して演出作成前から作り直せます。'
   });
   console.log(JSON.stringify({
     status: 'saved',

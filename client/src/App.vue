@@ -390,7 +390,10 @@ const webGeminiSavedReviewMeta = computed(() => {
     return '';
   }
 
-  return `現在の完成動画 / 保存日時: ${formatDisplayDateTime(review.createdAt)}`;
+  const sourceText = webGeminiRunLog.value?.externalUploadRequired
+    ? 'EdgeのWeb Geminiで取得'
+    : '保存済みレビューを取り込み';
+  return `現在の完成動画 / ${sourceText} / 保存日時: ${formatDisplayDateTime(review.createdAt)}`;
 });
 
 const canResumeAgentWork = computed(() =>
