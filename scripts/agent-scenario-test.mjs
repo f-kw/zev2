@@ -873,6 +873,25 @@ async function assertWebGeminiReviewFeedbackLoop(apiBaseUrl, runtimeDir, sourceD
     draftId: sourceDraftId,
     status: 'prepared',
     createdAt: new Date().toISOString(),
+    outputVideoUri: '/api/artifacts/old_draft/output.mp4',
+    outputVideoPath: path.join(runtimeDir, 'artifacts', 'old_draft', 'output.mp4'),
+    promptPath: path.join(runtimeDir, 'artifacts', sourceDraftId, 'web-gemini-review-prompt.md'),
+    blockedReasons: [],
+    externalUploadRequired: true,
+    nextAction: '古い完成動画に対するレビュー準備ログ'
+  }, null, 2)}\n`, 'utf8');
+  const staleRunLogError = await expectRequestJsonFailure(
+    apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/web-gemini-review`)
+  );
+  assertScenario(
+    staleRunLogError.includes('Web Geminiレビュー実行ログが現在の完成動画と一致しません'),
+    '現在の完成動画と違うWeb Geminiレビュー実行ログが取得できている'
+  );
+
+  await writeFile(runLogPath, `${JSON.stringify({
+    draftId: sourceDraftId,
+    status: 'prepared',
+    createdAt: new Date().toISOString(),
     outputVideoUri: outputFileRef.uri,
     outputVideoPath: artifactPathByUri(runtimeDir, outputFileRef.uri),
     promptPath: path.join(runtimeDir, 'artifacts', sourceDraftId, 'web-gemini-review-prompt.md'),
@@ -911,6 +930,45 @@ async function assertWebGeminiReviewFeedbackLoop(apiBaseUrl, runtimeDir, sourceD
     fetched.review.instructionText === instructionText,
     '取得したWeb Geminiレビューの改善指示が保存内容と一致しない'
   );
+
+  const reviewPath = path.join(runtimeDir, 'artifacts', sourceDraftId, 'web-gemini-review.json');
+  await writeFile(reviewPath, `${JSON.stringify({
+    draftId: sourceDraftId,
+    source: 'edge-web-gemini',
+    status: 'ready',
+    createdAt: new Date().toISOString(),
+    outputVideoUri: '/api/artifacts/old_draft/output.mp4',
+    promptText: '古い完成動画へのレビュー',
+    reviewText: instructionText,
+    instructionText
+  }, null, 2)}\n`, 'utf8');
+  const staleReviewFetchError = await expectRequestJsonFailure(
+    apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/web-gemini-review`)
+  );
+  assertScenario(
+    staleReviewFetchError.includes('Web Geminiレビューが現在の完成動画と一致しません'),
+    '現在の完成動画と違うWeb Geminiレビューが取得できている'
+  );
+  const staleReviewApplyError = await expectRequestJsonFailure(
+    apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/apply-web-gemini-review`),
+    {
+      method: 'POST',
+      body: JSON.stringify({ instructionText })
+    }
+  );
+  assertScenario(
+    staleReviewApplyError.includes('Web Geminiレビューが現在の完成動画と一致しません'),
+    '現在の完成動画と違うWeb Geminiレビューを反映できている'
+  );
+
+  await requestJson(apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/web-gemini-review`), {
+    method: 'POST',
+    body: JSON.stringify({
+      promptText: '演出だけをレビューする',
+      reviewText: `${instructionText}\n\n補足: 顔には重ねず、ゲーム画面側へ寄せる。`,
+      instructionText
+    })
+  });
 
   const applied = await requestJson(apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/apply-web-gemini-review`), {
     method: 'POST',

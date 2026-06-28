@@ -355,6 +355,28 @@ function latestOutputVideoFileRef(state: LoadedState, requestDraftId: string): F
   return renderRequest ? fileRefForAgentRequest(state, renderRequest) : undefined;
 }
 
+function ensureWebGeminiReviewMatchesOutputVideo(
+  review: WebGeminiReviewArtifact | null,
+  outputVideo: FileRef | undefined
+): { error: string } | undefined {
+  if (!review || !outputVideo || review.outputVideoUri === outputVideo.uri) {
+    return undefined;
+  }
+
+  return { error: 'Web Geminiレビューが現在の完成動画と一致しません。現在の動画でレビューを取り直してください' };
+}
+
+function ensureWebGeminiRunLogMatchesOutputVideo(
+  runLog: WebGeminiReviewRunLog | null,
+  outputVideo: FileRef | undefined
+): { error: string } | undefined {
+  if (!runLog || !outputVideo || runLog.outputVideoUri === outputVideo.uri) {
+    return undefined;
+  }
+
+  return { error: 'Web Geminiレビュー実行ログが現在の完成動画と一致しません。現在の動画でレビューを取り直してください' };
+}
+
 function copyDraftForRestart(
   sourceDraft: RequestDraft,
   reason: string,
@@ -1470,10 +1492,16 @@ router.get('/request-drafts/:id/web-gemini-review', async (request, response) =>
     response.status(404).json({ error: '実行前下書きが見つかりません', state });
     return;
   }
+  const outputVideo = latestOutputVideoFileRef(state, draft.id);
 
   const reviewResult = await readWebGeminiReviewArtifact(draft.id);
   if ('error' in reviewResult) {
     response.status(409).json({ error: reviewResult.error, state });
+    return;
+  }
+  const reviewMismatch = ensureWebGeminiReviewMatchesOutputVideo(reviewResult.review, outputVideo);
+  if (reviewMismatch) {
+    response.status(409).json({ error: reviewMismatch.error, state });
     return;
   }
   const runLogResult = await readWebGeminiReviewRunLog(draft.id);
@@ -1481,11 +1509,16 @@ router.get('/request-drafts/:id/web-gemini-review', async (request, response) =>
     response.status(409).json({ error: runLogResult.error, state });
     return;
   }
+  const runLogMismatch = ensureWebGeminiRunLogMatchesOutputVideo(runLogResult.runLog, outputVideo);
+  if (runLogMismatch) {
+    response.status(409).json({ error: runLogMismatch.error, state });
+    return;
+  }
 
   response.json({
     review: reviewResult.review,
     runLog: runLogResult.runLog,
-    outputVideoUri: latestOutputVideoFileRef(state, draft.id)?.uri ?? ''
+    outputVideoUri: outputVideo?.uri ?? ''
   });
 });
 
@@ -1550,6 +1583,12 @@ router.post('/request-drafts/:id/apply-web-gemini-review', async (request, respo
   }
   if (!reviewResult.review) {
     response.status(409).json({ error: 'Web Geminiの演出レビューがまだ保存されていません', state });
+    return;
+  }
+  const outputVideo = latestOutputVideoFileRef(state, draft.id);
+  const reviewMismatch = ensureWebGeminiReviewMatchesOutputVideo(reviewResult.review, outputVideo);
+  if (reviewMismatch) {
+    response.status(409).json({ error: reviewMismatch.error, state });
     return;
   }
 
