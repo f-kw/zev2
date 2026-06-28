@@ -71,6 +71,29 @@ export interface WebGeminiReviewRunLog {
   cdpControl?: unknown;
 }
 
+export interface RequestDraftActivityEvent {
+  id: string;
+  kind:
+    | 'draft_created'
+    | 'draft_status'
+    | 'agent_request_created'
+    | 'agent_request_status'
+    | 'agent_decision'
+    | 'human_review_required'
+    | 'human_review_action';
+  occurredAt: string;
+  actor: 'user' | 'agent' | 'runner' | 'backend' | 'system';
+  title: string;
+  detail: string;
+  requestDraftId: string;
+  agentRequestId?: string;
+  reviewItemId?: string;
+  decisionLogId?: string;
+  humanReviewActionId?: string;
+  fileRefId?: string;
+  outputId?: string;
+}
+
 export async function fetchWorkflow(): Promise<{ steps: WorkflowStep[] }> {
   const response = await api.get('/workflow');
   return response.data;
@@ -83,6 +106,14 @@ export async function fetchRuntimeConfig(): Promise<RuntimeConfig> {
 
 export async function fetchState(): Promise<Zev2State> {
   const response = await api.get('/state');
+  return response.data;
+}
+
+export async function fetchRequestDraftActivity(id: string): Promise<{
+  requestDraftId: string;
+  events: RequestDraftActivityEvent[];
+}> {
+  const response = await api.get(`/request-drafts/${id}/activity`);
   return response.data;
 }
 

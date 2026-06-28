@@ -9,9 +9,11 @@ import {
   type RequestDraftInput
 } from '@zev2/shared';
 import {
+  fetchRequestDraftActivity,
   fetchWebGeminiReview,
   formatApiError,
   prepareWebGeminiReview,
+  type RequestDraftActivityEvent,
   type WebGeminiReviewArtifact,
   type WebGeminiReviewRunLog
 } from './api';
@@ -24,6 +26,13 @@ type ReviewChangeScope =
   | 'theme_reselect'
   | 'theme_options_regenerate'
   | 'material_reselect';
+type ActivityLogItem = {
+  id: string;
+  timeText: string;
+  title: string;
+  detail: string;
+  className: string;
+};
 
 const store = useControlQueueStore();
 const submitting = ref(false);
@@ -45,9 +54,13 @@ const webGeminiReviewMessage = ref('');
 const webGeminiReviewLoading = ref(false);
 const loadedWebGeminiReviewCreatedAt = ref('');
 const activeWebGeminiAction = ref<'refresh_review' | 'prepare_review' | 'apply_review' | ''>('');
+const requestActivityEvents = ref<RequestDraftActivityEvent[]>([]);
+const requestActivityLoading = ref(false);
+const requestActivityError = ref('');
 const initialPurpose = 'ショート動画を作成する';
 let refreshTimer: number | undefined;
 let webGeminiRefreshTimer: number | undefined;
+let requestActivityLoadNumber = 0;
 
 const requestInput = reactive<RequestDraftInput>({
   purpose: initialPurpose,
@@ -535,18 +548,96 @@ const sessionStageText = computed(() =>
   showRequestPage.value ? 'NEW REQUEST' : progressText.value || (currentDraft.value ? '0/7 工程完了' : '未開始')
 );
 
-const systemLogItems = computed(() => {
-  if (showRequestPage.value) {
-    return ['新規依頼の入力待ち'];
+function activityKindClass(kind: RequestDraftActivityEvent['kind']): string {
+  if (kind === 'human_review_required') {
+    return 'needs-review';
   }
 
-  const requests = visibleRequests.value.slice(-4);
-  if (requests.length === 0) {
-    return ['新規依頼の入力待ち'];
+  if (kind === 'human_review_action') {
+    return 'user-action';
   }
 
-  return requests.map((request) => `${request.label}: ${statusLabel(request)}`);
+  if (kind === 'agent_request_status' || kind === 'agent_decision') {
+    return 'agent-action';
+  }
+
+  return 'system-action';
+}
+
+function fallbackActivityLogItem(message: string): ActivityLogItem {
+  return {
+    id: message,
+    timeText: '--',
+    title: message,
+    detail: '',
+    className: 'system-action'
+  };
+}
+
+const requestActivityRefreshKey = computed(() => {
+  const draft = currentDraft.value;
+  if (!draft) {
+    return '';
+  }
+
+  const requestPart = store.state.agentRequests
+    .filter((request) => request.requestDraftId === draft.id)
+    .map((request) => `${request.id}:${request.status}:${request.updatedAt}`)
+    .join('|');
+  const reviewPart = store.state.controlReviewItems
+    .filter((review) => review.requestDraftId === draft.id)
+    .map((review) => `${review.id}:${review.status}:${review.updatedAt}`)
+    .join('|');
+  const actionPart = store.state.humanReviewActions
+    .filter((action) => action.requestDraftId === draft.id)
+    .map((action) => `${action.id}:${action.action}:${action.createdAt}`)
+    .join('|');
+  const decisionPart = store.state.decisionLogs
+    .filter((decision) => decision.requestDraftId === draft.id)
+    .map((decision) => `${decision.id}:${decision.createdAt}`)
+    .join('|');
+
+  return [draft.id, draft.status, draft.updatedAt, requestPart, reviewPart, actionPart, decisionPart].join('::');
 });
+
+const systemLogItems = computed<ActivityLogItem[]>(() => {
+  if (showRequestPage.value) {
+    return [fallbackActivityLogItem('新規依頼の入力待ち')];
+  }
+
+  if (requestActivityError.value) {
+    return [fallbackActivityLogItem(requestActivityError.value)];
+  }
+
+  if (requestActivityLoading.value && requestActivityEvents.value.length === 0) {
+    return [fallbackActivityLogItem('作業履歴を確認中')];
+  }
+
+  const events = [...requestActivityEvents.value].slice(-5).reverse();
+  if (events.length === 0) {
+    return [fallbackActivityLogItem('作業履歴はまだありません')];
+  }
+
+  return events.map((event) => ({
+    id: event.id,
+    timeText: formatActivityTime(event.occurredAt),
+    title: event.title,
+    detail: event.detail,
+    className: activityKindClass(event.kind)
+  }));
+});
+
+function formatActivityTime(value: string): string {
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) {
+    return '--';
+  }
+
+  return new Intl.DateTimeFormat('ja-JP', {
+    hour: '2-digit',
+    minute: '2-digit'
+  }).format(date);
+}
 
 function formatStepCode(index: number): string {
   const labels = ['INGEST', 'STT', 'THEME', 'CUT', 'FX', 'TUNE', 'RENDER'];
@@ -575,26 +666,6 @@ function stepMark(request: AgentRequest, index: number): string {
 
 function formatOptionIndex(index: number): string {
   return String(index + 1).padStart(2, '0');
-}
-
-function statusLabel(request: AgentRequest): string {
-  if (request.status === 'succeeded') {
-    return '完了';
-  }
-
-  if (request.status === 'running') {
-    return '実行中';
-  }
-
-  if (request.status === 'failed') {
-    return '停止';
-  }
-
-  if (request.status === 'cancelled') {
-    return '中止';
-  }
-
-  return '待機中';
 }
 
 async function createVideo() {
@@ -826,6 +897,41 @@ function formatDisplayDateTime(value: string): string {
   }).format(date);
 }
 
+async function refreshRequestActivity() {
+  const draft = currentDraft.value;
+  requestActivityLoadNumber += 1;
+  const loadNumber = requestActivityLoadNumber;
+
+  if (!draft || showRequestPage.value) {
+    requestActivityEvents.value = [];
+    requestActivityError.value = '';
+    requestActivityLoading.value = false;
+    return;
+  }
+
+  requestActivityLoading.value = true;
+  requestActivityError.value = '';
+  try {
+    const result = await fetchRequestDraftActivity(draft.id);
+    if (loadNumber !== requestActivityLoadNumber) {
+      return;
+    }
+
+    requestActivityEvents.value = result.events;
+  } catch (error) {
+    if (loadNumber !== requestActivityLoadNumber) {
+      return;
+    }
+
+    requestActivityEvents.value = [];
+    requestActivityError.value = formatApiError(error);
+  } finally {
+    if (loadNumber === requestActivityLoadNumber) {
+      requestActivityLoading.value = false;
+    }
+  }
+}
+
 async function refreshWebGeminiReview() {
   const draft = currentDraft.value;
   if (webGeminiReviewLoading.value) {
@@ -1013,6 +1119,14 @@ watch(
       ? review.options[0]?.id ?? ''
       : '';
   }
+);
+
+watch(
+  () => [showRequestPage.value, requestActivityRefreshKey.value],
+  () => {
+    void refreshRequestActivity();
+  },
+  { immediate: true }
 );
 
 watch(
@@ -1428,9 +1542,19 @@ watch(
         </section>
 
         <section class="hud-card">
-          <p class="eyebrow">System Log</p>
+          <p class="eyebrow">作業ログ</p>
           <ol class="system-log">
-            <li v-for="item in systemLogItems" :key="item">{{ item }}</li>
+            <li
+              v-for="item in systemLogItems"
+              :key="item.id"
+              :class="item.className"
+            >
+              <time>{{ item.timeText }}</time>
+              <span>
+                <strong>{{ item.title }}</strong>
+                <small v-if="item.detail">{{ item.detail }}</small>
+              </span>
+            </li>
           </ol>
         </section>
 
@@ -2516,12 +2640,58 @@ video {
 }
 
 .system-log li {
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr);
+  gap: 8px;
   border-left: 2px solid var(--cyan);
   padding-left: 8px;
-  color: var(--text-dim);
+  color: var(--text);
   font-family: var(--font-mono);
   font-size: 11px;
   line-height: 1.45;
+}
+
+.system-log li.needs-review {
+  border-left-color: var(--yellow);
+}
+
+.system-log li.user-action {
+  border-left-color: var(--pink);
+}
+
+.system-log li.agent-action {
+  border-left-color: var(--cyan);
+}
+
+.system-log time {
+  color: var(--text-faint);
+  font-size: 10px;
+  white-space: nowrap;
+}
+
+.system-log span {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+
+.system-log strong {
+  overflow: hidden;
+  color: var(--text);
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.system-log small {
+  display: -webkit-box;
+  overflow: hidden;
+  color: var(--text-dim);
+  font-family: var(--font-sans);
+  font-size: 11px;
+  line-height: 1.45;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
 }
 
 .hint-card p:last-child {
