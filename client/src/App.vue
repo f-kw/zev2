@@ -285,6 +285,46 @@ const webGeminiBlockedReasons = computed(() =>
   webGeminiRunLog.value?.blockedReasons ?? []
 );
 
+function asReadableRecord(value: unknown): Record<string, unknown> | undefined {
+  if (value && typeof value === 'object' && !Array.isArray(value)) {
+    return value as Record<string, unknown>;
+  }
+
+  return undefined;
+}
+
+const webGeminiExecutionNotes = computed(() => {
+  const runLog = webGeminiRunLog.value;
+  if (!runLog || webGeminiReview.value) {
+    return [];
+  }
+
+  const notes: string[] = [];
+  if (runLog.externalUploadRequired) {
+    notes.push('外部送信はまだ実行していません');
+  }
+
+  const edgeControl = asReadableRecord(runLog.edgeControl);
+  if (edgeControl?.canRunAppleEventsJavascript === true) {
+    notes.push('Edgeのページ操作は確認済みです');
+  } else if (edgeControl?.canRunAppleEventsJavascript === false) {
+    notes.push('Edgeのページ操作が許可されていません');
+  }
+
+  const cdpControl = asReadableRecord(runLog.cdpControl);
+  if (cdpControl?.ok === true) {
+    notes.push('Gemini画面の自動操作前提は確認済みです');
+  } else if (typeof cdpControl?.error === 'string' && cdpControl.error.trim()) {
+    notes.push(`Gemini画面の自動操作前提を確認できません: ${cdpControl.error.trim()}`);
+  }
+
+  if (runLog.externalReviewCommand) {
+    notes.push(`外部レビュー実行手順: ${runLog.externalReviewCommand}`);
+  }
+
+  return notes;
+});
+
 const canInspectWebGeminiPrompt = computed(() =>
   Boolean(!webGeminiReview.value && webGeminiPreparedPromptText.value.trim())
 );
@@ -1288,6 +1328,14 @@ watch(
                     :key="reason"
                   >
                     {{ reason }}
+                  </li>
+                </ul>
+                <ul v-if="webGeminiExecutionNotes.length" class="web-gemini-execution-notes">
+                  <li
+                    v-for="note in webGeminiExecutionNotes"
+                    :key="note"
+                  >
+                    {{ note }}
                   </li>
                 </ul>
                 <div v-if="canInspectWebGeminiPrompt" class="web-gemini-prompt">
@@ -2313,6 +2361,16 @@ video {
 .empty-review-state span {
   color: var(--text-dim);
   font-size: 12px;
+}
+
+.web-gemini-execution-notes {
+  display: grid;
+  gap: 4px;
+  margin: 2px 0 0;
+  padding-left: 18px;
+  color: #dfe2cc;
+  font-size: 11px;
+  line-height: 1.45;
 }
 
 .web-gemini-prompt {

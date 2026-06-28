@@ -17,6 +17,7 @@ const artifactUrlPrefix = '/api/artifacts/';
 const reviewFileName = 'web-gemini-review.json';
 const promptFileName = 'web-gemini-review-prompt.md';
 const runLogFileName = 'web-gemini-review-run.json';
+const externalReviewCommand = 'corepack pnpm run web-gemini:review:execute';
 
 const args = new Set(process.argv.slice(2));
 const reviewTextFileArg = readOption('--review-text-file');
@@ -702,6 +703,7 @@ async function main() {
       cdpControl,
       blockedReasons: [...blockedReasons, ...cdpBlockedReasons],
       externalUploadRequired: true,
+      externalReviewCommand,
       nextAction: status === 'prepared'
         ? 'EdgeのCDP操作でWeb Gemini画面まで確認しました。外部送信はまだ実行していません。'
         : 'EdgeのWeb Gemini操作に必要な前提が不足しています。'
@@ -715,6 +717,7 @@ async function main() {
       cdpControl,
       blockedReasons: [...blockedReasons, ...cdpBlockedReasons],
       externalUploadRequired: true,
+      externalReviewCommand,
       executeFlag: '--execute'
     }, null, 2));
     if (status === 'blocked') {
@@ -730,6 +733,7 @@ async function main() {
       edgeControl,
       blockedReasons,
       externalUploadRequired: true,
+      externalReviewCommand,
       nextAction: blockedReasons.length
         ? 'EdgeでWeb Geminiへ動画を送る前提が不足しています。Edgeの開発者メニューでApple Events JavaScriptを許可してから再実行してください。'
         : shouldExecuteWebGemini
@@ -744,6 +748,7 @@ async function main() {
       edgeControl,
       blockedReasons,
       externalUploadRequired: true,
+      externalReviewCommand,
       executeFlag: '--execute'
     }, null, 2));
     return;
@@ -752,6 +757,7 @@ async function main() {
   await writeRunLog(target, 'running', {
     promptPath,
     edgeControl,
+    externalReviewCommand,
     nextAction: 'EdgeのWeb Geminiへ動画と依頼文を送り、回答を取得しています。'
   });
   let reviewText;
@@ -766,6 +772,7 @@ async function main() {
       edgeControl,
       blockedReasons: [errorMessage],
       externalUploadRequired: true,
+      externalReviewCommand,
       nextAction: 'Web Geminiレビュー実行に失敗しました。停止理由を確認してから再実行してください。'
     });
     throw error;

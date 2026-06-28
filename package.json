@@ -12,6 +12,7 @@
     "runner:dry-run": "pnpm --filter @zev2/agent-runner dry-run",
     "scenario:agent": "node scripts/agent-scenario-test.mjs",
     "web-gemini:review": "pnpm run build:shared && node scripts/web-gemini-review-edge.mjs",
+    "web-gemini:review:diagnose": "pnpm run build:shared && node scripts/web-gemini-review-edge.mjs --cdp-diagnose-only",
     "web-gemini:review:execute": "pnpm run build:shared && node scripts/web-gemini-review-edge.mjs --execute",
     "web-gemini:review:test": "pnpm run build:shared && node scripts/web-gemini-review-script-test.mjs",
     "test": "pnpm run web-gemini:review:test && pnpm run scenario:agent",

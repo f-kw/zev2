@@ -71,6 +71,7 @@ type WebGeminiReviewRunLog = {
   reviewCreatedAt?: string;
   appliedDraftId?: string;
   appliedAt?: string;
+  externalReviewCommand?: string;
   edgeControl?: unknown;
   cdpControl?: unknown;
 };
@@ -92,6 +93,7 @@ const artifactUrlPrefix = '/api/artifacts/';
 const webGeminiReviewFileName = 'web-gemini-review.json';
 const webGeminiReviewRunLogFileName = 'web-gemini-review-run.json';
 const webGeminiReviewPromptFileName = 'web-gemini-review-prompt.md';
+const webGeminiExternalReviewCommand = 'corepack pnpm run web-gemini:review:execute';
 
 function nowIso(): string {
   return new Date().toISOString();
@@ -228,6 +230,7 @@ function parseWebGeminiReviewRunLog(value: unknown): WebGeminiReviewRunLog | und
     ...(hasText(log.reviewCreatedAt) ? { reviewCreatedAt: log.reviewCreatedAt.trim() } : {}),
     ...(hasText(log.appliedDraftId) ? { appliedDraftId: log.appliedDraftId.trim() } : {}),
     ...(hasText(log.appliedAt) ? { appliedAt: log.appliedAt.trim() } : {}),
+    ...(hasText(log.externalReviewCommand) ? { externalReviewCommand: log.externalReviewCommand.trim() } : {}),
     ...(log.edgeControl ? { edgeControl: log.edgeControl } : {}),
     ...(log.cdpControl ? { cdpControl: log.cdpControl } : {})
   };
@@ -338,6 +341,7 @@ async function prepareWebGeminiReviewRun(
     promptPath,
     blockedReasons: [],
     externalUploadRequired: true,
+    externalReviewCommand: webGeminiExternalReviewCommand,
     nextAction: 'レビュー対象動画と依頼文を確認しました。外部送信はまだ実行していません。'
   };
   await writeWebGeminiReviewRunLog(runLog);

@@ -66,6 +66,7 @@ export interface WebGeminiReviewRunLog {
   reviewCreatedAt?: string;
   appliedDraftId?: string;
   appliedAt?: string;
+  externalReviewCommand?: string;
   edgeControl?: unknown;
   cdpControl?: unknown;
 }
