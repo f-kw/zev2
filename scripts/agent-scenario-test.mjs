@@ -721,6 +721,12 @@ async function assertGeneratedDraftCompleted(apiBaseUrl, runtimeDir, draftId, la
   );
 
   const activity = await requestJson(apiPath(apiBaseUrl, `/request-drafts/${draftId}/activity`));
+  assertScenario(activity.summary?.status === 'completed', `${label}: 現在状態の要約が動画生成完了になっていない`);
+  assertScenario(activity.summary.title === '動画生成完了', `${label}: 現在状態の要約タイトルが人間向けではない`);
+  assertScenario(
+    activity.summary.nextAction.includes('動画を確認'),
+    `${label}: 現在状態の要約から次に何をするか分からない`
+  );
   assertScenario(Array.isArray(activity.events), `${label}: 監査タイムラインが配列ではない`);
   assertScenario(
     activity.events.some((event) => event.kind === 'draft_created'),
@@ -1201,6 +1207,15 @@ async function assertResumeAndCancelControls(apiBaseUrl) {
     cancelledRequests.every((request) => request.errorMessage === '人間がAI作業を中止しました'),
     '中止理由が人間に分かる文として保存されていない'
   );
+  const cancelledActivity = await requestJson(apiPath(apiBaseUrl, `/request-drafts/${draft.id}/activity`));
+  assertScenario(
+    cancelledActivity.summary?.status === 'cancelled',
+    '中止後の現在状態要約が中止状態になっていない'
+  );
+  assertScenario(
+    cancelledActivity.summary.nextAction.includes('作り直し'),
+    '中止後の現在状態要約から次の操作が分からない'
+  );
 
   const ignoredFailure = await requestJson(apiPath(apiBaseUrl, `/agent-requests/${cancelledRequests[0].id}/fail`), {
     method: 'POST',
@@ -1342,6 +1357,18 @@ async function scenarioAutomaticVideoCreation(apiBaseUrl, runtimeDir) {
     '固定確認フラグなしのSTT失敗理由がユーザーに分かる文になっていない'
   );
   const noFixedActivity = await requestJson(apiPath(apiBaseUrl, `/request-drafts/${noFixedCreated.draft.id}/activity`));
+  assertScenario(
+    noFixedActivity.summary?.status === 'failed',
+    'STT失敗時の現在状態要約が停止状態になっていない'
+  );
+  assertScenario(
+    noFixedActivity.summary.title === 'STTで停止',
+    'STT失敗時の現在状態要約タイトルが工程停止として読めない'
+  );
+  assertScenario(
+    noFixedActivity.summary.detail.includes('ローカルSTTサーバ'),
+    'STT失敗理由が現在状態要約から読めない'
+  );
   assertScenario(
     noFixedActivity.events.some((event) => (
       event.kind === 'agent_request_status' &&

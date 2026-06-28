@@ -95,6 +95,26 @@ export interface RequestDraftActivityEvent {
   outputId?: string;
 }
 
+export interface RequestDraftActivitySummary {
+  status:
+    | 'draft'
+    | 'rejected'
+    | 'failed'
+    | 'review_required'
+    | 'running'
+    | 'waiting'
+    | 'cancelled'
+    | 'completed'
+    | 'approved';
+  title: string;
+  detail: string;
+  nextAction: string;
+  requestDraftId: string;
+  agentRequestId?: string;
+  reviewItemId?: string;
+  outputVideoUri?: string;
+}
+
 export async function fetchWorkflow(): Promise<{ steps: WorkflowStep[] }> {
   const response = await api.get('/workflow');
   return response.data;
@@ -112,6 +132,7 @@ export async function fetchState(): Promise<Zev2State> {
 
 export async function fetchRequestDraftActivity(id: string): Promise<{
   requestDraftId: string;
+  summary: RequestDraftActivitySummary;
   events: RequestDraftActivityEvent[];
 }> {
   const response = await api.get(`/request-drafts/${id}/activity`);

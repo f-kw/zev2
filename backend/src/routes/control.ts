@@ -109,6 +109,25 @@ type RequestDraftActivityEvent = {
   fileRefId?: string;
   outputId?: string;
 };
+type RequestDraftActivitySummary = {
+  status:
+    | 'draft'
+    | 'rejected'
+    | 'failed'
+    | 'review_required'
+    | 'running'
+    | 'waiting'
+    | 'cancelled'
+    | 'completed'
+    | 'approved';
+  title: string;
+  detail: string;
+  nextAction: string;
+  requestDraftId: string;
+  agentRequestId?: string;
+  reviewItemId?: string;
+  outputVideoUri?: string;
+};
 
 const runtimeDir = process.env.ZEV2_RUNTIME_DIR
   ? path.resolve(process.env.ZEV2_RUNTIME_DIR)
@@ -518,6 +537,127 @@ function outputForAgentRequest(state: Awaited<ReturnType<typeof loadState>>, req
 function latestOutputVideoFileRef(state: LoadedState, requestDraftId: string): FileRef | undefined {
   const renderRequest = latestSucceededAgentRequest(state.agentRequests, requestDraftId, 'render_video');
   return renderRequest ? fileRefForAgentRequest(state, renderRequest) : undefined;
+}
+
+function currentAgentRequestsForDraft(state: LoadedState, requestDraftId: string): AgentRequest[] {
+  return state.agentRequests
+    .filter((request) => request.requestDraftId === requestDraftId && request.status !== 'superseded')
+    .sort((left, right) => left.createdAt.localeCompare(right.createdAt));
+}
+
+function latestOpenControlReview(state: LoadedState, requestDraftId: string): ControlReviewItem | undefined {
+  return state.controlReviewItems
+    .filter((item) => item.requestDraftId === requestDraftId && item.status === 'review_required')
+    .sort((left, right) => right.createdAt.localeCompare(left.createdAt))[0];
+}
+
+function buildRequestDraftActivitySummary(
+  state: LoadedState,
+  draft: RequestDraft
+): RequestDraftActivitySummary {
+  if (draft.status === 'draft') {
+    return {
+      status: 'draft',
+      title: '作成開始前',
+      detail: '実行前下書きはまだ開始されていません',
+      nextAction: '依頼内容を確認して動画作成を開始します',
+      requestDraftId: draft.id
+    };
+  }
+
+  if (draft.status === 'rejected') {
+    return {
+      status: 'rejected',
+      title: '下書きを却下済み',
+      detail: 'この下書きではAI作業を進めません',
+      nextAction: '別の依頼を作成します',
+      requestDraftId: draft.id
+    };
+  }
+
+  const requests = currentAgentRequestsForDraft(state, draft.id);
+  const failedRequest = requests.find((request) => request.status === 'failed');
+  if (failedRequest) {
+    return {
+      status: 'failed',
+      title: `${failedRequest.label}で停止`,
+      detail: compactActivityText(failedRequest.errorMessage, '停止した工程を確認してください'),
+      nextAction: '停止理由を確認して、再実行するか作り直します',
+      requestDraftId: draft.id,
+      agentRequestId: failedRequest.id
+    };
+  }
+
+  const reviewItem = latestOpenControlReview(state, draft.id);
+  if (reviewItem) {
+    return {
+      status: 'review_required',
+      title: `${reviewItem.title}で確認が必要`,
+      detail: compactActivityText(reviewItem.humanQuestion || reviewItem.summary, '人間の確認が必要です'),
+      nextAction: '内容を確認して、承認または作り直しを選びます',
+      requestDraftId: draft.id,
+      agentRequestId: reviewItem.agentRequestId,
+      reviewItemId: reviewItem.id
+    };
+  }
+
+  const runningRequest = requests.find((request) => request.status === 'running');
+  if (runningRequest) {
+    return {
+      status: 'running',
+      title: `${runningRequest.label}を実行中`,
+      detail: 'AIエージェントが工程を処理しています',
+      nextAction: '完了まで待つか、必要なら作業を中止します',
+      requestDraftId: draft.id,
+      agentRequestId: runningRequest.id
+    };
+  }
+
+  const waitingRequest = requests.find((request) => request.status === 'queued' || request.status === 'waiting');
+  if (waitingRequest) {
+    return {
+      status: 'waiting',
+      title: `${waitingRequest.label}を待機中`,
+      detail: waitingRequest.status === 'waiting'
+        ? compactActivityText(waitingRequest.errorMessage, '前工程の完了を待っています')
+        : 'AIエージェントの実行待ちです',
+      nextAction: '止まっている場合はAI作業を再開します',
+      requestDraftId: draft.id,
+      agentRequestId: waitingRequest.id
+    };
+  }
+
+  const cancelledRequest = [...requests].reverse().find((request) => request.status === 'cancelled');
+  if (cancelledRequest) {
+    return {
+      status: 'cancelled',
+      title: `${cancelledRequest.label}で中止`,
+      detail: compactActivityText(cancelledRequest.errorMessage, 'AI作業を中止しました'),
+      nextAction: '再開する場合は、作り直しで新しい編集コピーを作ります',
+      requestDraftId: draft.id,
+      agentRequestId: cancelledRequest.id
+    };
+  }
+
+  const outputVideo = latestOutputVideoFileRef(state, draft.id);
+  if (outputVideo) {
+    return {
+      status: 'completed',
+      title: '動画生成完了',
+      detail: '確認用動画を再生できます',
+      nextAction: '動画を確認して、必要ならWeb Geminiレビューまたは作り直しを選びます',
+      requestDraftId: draft.id,
+      outputVideoUri: outputVideo.uri
+    };
+  }
+
+  return {
+    status: 'approved',
+    title: 'AI作業を開始できます',
+    detail: requests.length > 0 ? '工程キューは作成済みです' : '工程キューはまだ作成されていません',
+    nextAction: 'AI作業を開始します',
+    requestDraftId: draft.id
+  };
 }
 
 function agentRequestStatusTitle(request: AgentRequest): string {
@@ -1714,6 +1854,7 @@ router.get('/request-drafts/:id/activity', async (request, response) => {
 
   response.json({
     requestDraftId: draft.id,
+    summary: buildRequestDraftActivitySummary(state, draft),
     events: events.sort((left, right) => (
       left.occurredAt.localeCompare(right.occurredAt) || left.id.localeCompare(right.id)
     ))

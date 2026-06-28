@@ -23,6 +23,7 @@ import {
   formatApiError,
   prepareWebGeminiReview,
   type RequestDraftActivityEvent,
+  type RequestDraftActivitySummary,
   type WebGeminiReviewArtifact,
   type WebGeminiReviewRunLog
 } from './api';
@@ -57,6 +58,7 @@ const webGeminiReviewLoading = ref(false);
 const loadedWebGeminiReviewCreatedAt = ref('');
 const activeWebGeminiAction = ref<'refresh_review' | 'prepare_review' | 'apply_review' | ''>('');
 const requestActivityEvents = ref<RequestDraftActivityEvent[]>([]);
+const requestActivitySummary = ref<RequestDraftActivitySummary | null>(null);
 const requestActivityLoading = ref(false);
 const requestActivityError = ref('');
 const activityDialogOpen = ref(false);
@@ -503,16 +505,32 @@ const progressPercent = computed(() => {
   return Math.round((completedCount / totalCount) * 100);
 });
 
+const activitySummaryTitle = computed(() =>
+  requestActivitySummary.value?.title || statusText.value
+);
+
+const activitySummaryDetail = computed(() =>
+  requestActivitySummary.value?.detail || statusDetailText.value
+);
+
+const activitySummaryNextAction = computed(() =>
+  requestActivitySummary.value?.nextAction || activitySummaryDetail.value
+);
+
 const hudStatusText = computed(() =>
-  showRequestPage.value ? '新規依頼を入力' : statusText.value
+  showRequestPage.value ? '新規依頼を入力' : activitySummaryTitle.value
 );
 
 const hudStatusDetailText = computed(() =>
-  showRequestPage.value ? '作りたいショートを入力して、動画作成を開始できます' : statusDetailText.value
+  showRequestPage.value ? '作りたいショートを入力して、動画作成を開始できます' : activitySummaryDetail.value
 );
 
 const hudVisibleStatusMessage = computed(() =>
   store.errorMessage ? '' : hudStatusDetailText.value
+);
+
+const hudHintText = computed(() =>
+  showRequestPage.value ? '作りたい動画を入力して開始します' : activitySummaryNextAction.value
 );
 
 const hudProgressText = computed(() =>
@@ -905,6 +923,7 @@ async function refreshRequestActivity() {
 
   if (!draft || showRequestPage.value) {
     requestActivityEvents.value = [];
+    requestActivitySummary.value = null;
     requestActivityError.value = '';
     requestActivityLoading.value = false;
     return;
@@ -919,12 +938,14 @@ async function refreshRequestActivity() {
     }
 
     requestActivityEvents.value = result.events;
+    requestActivitySummary.value = result.summary;
   } catch (error) {
     if (loadNumber !== requestActivityLoadNumber) {
       return;
     }
 
     requestActivityEvents.value = [];
+    requestActivitySummary.value = null;
     requestActivityError.value = formatApiError(error);
   } finally {
     if (loadNumber === requestActivityLoadNumber) {
@@ -1596,7 +1617,7 @@ watch(
 
         <section class="hud-card hint-card">
           <p class="eyebrow">Hint</p>
-          <p>{{ hudStatusDetailText }}</p>
+          <p>{{ hudHintText }}</p>
         </section>
       </aside>
     </div>
