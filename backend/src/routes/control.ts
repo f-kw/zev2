@@ -1,6 +1,6 @@
 import express from 'express';
 import { nanoid } from 'nanoid';
-import { access, copyFile, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
+import { access, copyFile, mkdir, open, readFile, rm, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import {
   ARTIFACT_FILE_NAME_BY_KIND,
@@ -215,6 +215,26 @@ async function readJsonArtifactKind(artifactPath: string): Promise<string | unde
   return typeof kind === 'string' ? kind : undefined;
 }
 
+async function isMp4File(artifactPath: string): Promise<boolean> {
+  const handle = await open(artifactPath, 'r');
+  try {
+    const header = Buffer.alloc(12);
+    const { bytesRead } = await handle.read(header, 0, header.length, 0);
+    return bytesRead >= 8 && header.subarray(4, 8).toString('ascii') === 'ftyp';
+  } finally {
+    await handle.close();
+  }
+}
+
+async function validateMp4Artifact(artifactPath: string): Promise<string | undefined> {
+  try {
+    const isMp4 = await isMp4File(artifactPath);
+    return isMp4 ? undefined : '動画成果物はMP4ファイルを指定してください';
+  } catch {
+    return '動画成果物を読めません';
+  }
+}
+
 async function validateCompletionFileRef(
   agentRequest: AgentRequest,
   fileRef: AgentCompletionInput['fileRef']
@@ -245,11 +265,15 @@ async function validateCompletionFileRef(
 
   const expectedKind = getFileRefKindForRequest(agentRequest.type);
   if (expectedKind === 'output_video') {
-    return isVideoMimeType(mimeType) ? undefined : '動画生成工程の成果物参照は動画ファイルを指定してください';
+    if (!isVideoMimeType(mimeType)) {
+      return '動画生成工程の成果物参照は動画ファイルを指定してください';
+    }
+
+    return validateMp4Artifact(artifactPath);
   }
 
   if (expectedKind === 'source_video' && isVideoMimeType(mimeType)) {
-    return undefined;
+    return validateMp4Artifact(artifactPath);
   }
 
   if (!isJsonMimeType(mimeType)) {

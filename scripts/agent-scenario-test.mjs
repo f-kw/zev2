@@ -620,6 +620,32 @@ async function assertRetryControls(apiBaseUrl, runtimeDir) {
     wrongKindArtifactError.includes('成果物参照の種別がAI工程と一致していません'),
     '工程と違う成果物参照がAI工程完了で拒否されていない'
   );
+  const fakeVideoArtifactFileName = 'fake-source-video.mp4';
+  const fakeVideoArtifactPath = path.join(
+    runtimeDir,
+    'artifacts',
+    missingArtifactDraft.id,
+    fakeVideoArtifactFileName
+  );
+  await writeFile(fakeVideoArtifactPath, 'これはMP4ではない確認用ファイルです\n', 'utf8');
+  const fakeVideoArtifactError = await expectRequestJsonFailure(
+    apiPath(apiBaseUrl, `/agent-requests/${missingArtifactPrepareRequest.id}/complete`),
+    {
+      method: 'POST',
+      body: JSON.stringify({
+        meaning: '動画ではないファイルを動画成果物として成功扱いにしようとする',
+        fileRef: {
+          uri: `/api/artifacts/${missingArtifactDraft.id}/${fakeVideoArtifactFileName}`,
+          mimeType: 'video/mp4',
+          access: 'internal'
+        }
+      })
+    }
+  );
+  assertScenario(
+    fakeVideoArtifactError.includes('MP4ファイル'),
+    '動画ではないファイルが動画成果物としてAI工程完了で拒否されていない'
+  );
   const missingArtifactCompleteError = await expectRequestJsonFailure(
     apiPath(apiBaseUrl, `/agent-requests/${missingArtifactPrepareRequest.id}/complete`),
     {
