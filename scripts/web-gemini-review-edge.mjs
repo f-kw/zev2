@@ -275,7 +275,7 @@ function readablePurpose(purpose) {
   const purposeLine = String(purpose ?? '')
     .split('\n')
     .map((line) => line.trim())
-    .find((line) => line && !line.startsWith('やり直し理由:') && !line.startsWith('素材選び直し指示:'));
+    .find((line) => line && !line.startsWith('やり直し理由:') && !line.startsWith('編集元場面の探し直し指示:'));
   return purposeLine || 'ショート動画を作成する';
 }
 

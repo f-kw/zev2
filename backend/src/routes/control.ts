@@ -88,6 +88,7 @@ const runtimeDir = process.env.ZEV2_RUNTIME_DIR
 const artifactUrlPrefix = '/api/artifacts/';
 const webGeminiReviewFileName = 'web-gemini-review.json';
 const webGeminiReviewRunLogFileName = 'web-gemini-review-run.json';
+const webGeminiReviewPromptFileName = 'web-gemini-review-prompt.md';
 
 function nowIso(): string {
   return new Date().toISOString();
@@ -143,6 +144,10 @@ function webGeminiReviewPath(requestDraftId: string): string {
 
 function webGeminiReviewRunLogPath(requestDraftId: string): string {
   return path.join(artifactRoot(), requestDraftId, webGeminiReviewRunLogFileName);
+}
+
+function webGeminiReviewPromptPath(requestDraftId: string): string {
+  return path.join(artifactRoot(), requestDraftId, webGeminiReviewPromptFileName);
 }
 
 function isNotFoundError(error: unknown): boolean {
@@ -259,6 +264,65 @@ async function readWebGeminiReviewRunLog(
 async function writeWebGeminiReviewArtifact(artifact: WebGeminiReviewArtifact): Promise<void> {
   await mkdir(path.dirname(webGeminiReviewPath(artifact.draftId)), { recursive: true });
   await writeFile(webGeminiReviewPath(artifact.draftId), `${JSON.stringify(artifact, null, 2)}\n`, 'utf8');
+}
+
+async function writeWebGeminiReviewRunLog(runLog: WebGeminiReviewRunLog): Promise<void> {
+  await mkdir(path.dirname(webGeminiReviewRunLogPath(runLog.draftId)), { recursive: true });
+  await writeFile(webGeminiReviewRunLogPath(runLog.draftId), `${JSON.stringify(runLog, null, 2)}\n`, 'utf8');
+}
+
+function readablePurpose(purpose: string): string {
+  const purposeLine = purpose
+    .split('\n')
+    .map((line) => line.trim())
+    .find((line) => line && !line.startsWith('やり直し理由:') && !line.startsWith('編集元場面の探し直し指示:'));
+  return purposeLine || 'ショート動画を作成する';
+}
+
+function buildWebGeminiReviewPrompt(draft: RequestDraft): string {
+  return [
+    'この動画をレビューしてください。対象は演出だけです。',
+    '',
+    `動画の目的: ${readablePurpose(draft.purpose)}`,
+    '',
+    'レビュー対象:',
+    '- テロップの読みやすさ、表示タイミング、消えるタイミング',
+    '- 顔、ゲーム画面、テロップが重ならない画面構成',
+    '- 複数シーンのつなぎ、テンポ、初見で意味が伝わるか',
+    '- ショート動画として見せ場が伝わるか',
+    '',
+    'レビュー対象外:',
+    '- テーマ選択、編集元場面の選択',
+    '- 元動画、文字起こし、音声品質、エンコード、投稿可否、バグ調査',
+    '',
+    '出力は、演出作成へ渡せる改善指示として箇条書きにしてください。',
+    '各項目は「変えること」「理由」「対象箇所の説明」が分かるようにしてください。'
+  ].join('\n');
+}
+
+async function prepareWebGeminiReviewRun(
+  draft: RequestDraft,
+  outputVideo: FileRef,
+  createdAt: string
+): Promise<WebGeminiReviewRunLog> {
+  const promptPath = webGeminiReviewPromptPath(draft.id);
+  const promptText = buildWebGeminiReviewPrompt(draft);
+  await mkdir(path.dirname(promptPath), { recursive: true });
+  await writeFile(promptPath, `${promptText}\n`, 'utf8');
+
+  const runLog: WebGeminiReviewRunLog = {
+    draftId: draft.id,
+    status: 'prepared',
+    createdAt,
+    outputVideoUri: outputVideo.uri,
+    outputVideoPath: artifactPathByUrl(outputVideo.uri),
+    promptPath,
+    blockedReasons: [],
+    externalUploadRequired: true,
+    nextAction: 'レビュー対象動画と依頼文を確認しました。外部送信はまだ実行していません。'
+  };
+  await writeWebGeminiReviewRunLog(runLog);
+  return runLog;
 }
 
 async function copyArtifactFileForRestart(
@@ -1483,6 +1547,35 @@ router.post('/request-drafts/:id/cancel-agent-work', async (request, response) =
     cancelledAgentRequests: cancelledRequests,
     state
   });
+});
+
+router.post('/request-drafts/:id/web-gemini-review/prepare', async (request, response) => {
+  const state = await loadState();
+  const draft = findById(state.requestDrafts, request.params.id);
+  if (!draft) {
+    response.status(404).json({ error: '実行前下書きが見つかりません', state });
+    return;
+  }
+
+  const outputVideo = latestOutputVideoFileRef(state, draft.id);
+  if (!outputVideo) {
+    response.status(409).json({ error: '生成済み動画がないため、Web Geminiレビュー準備を作れません', state });
+    return;
+  }
+
+  try {
+    const runLog = await prepareWebGeminiReviewRun(draft, outputVideo, nowIso());
+    response.json({
+      runLog,
+      promptText: buildWebGeminiReviewPrompt(draft),
+      outputVideoUri: outputVideo.uri
+    });
+  } catch (error) {
+    response.status(500).json({
+      error: `Web Geminiレビュー準備を保存できません: ${unknownErrorMessage(error)}`,
+      state
+    });
+  }
 });
 
 router.get('/request-drafts/:id/web-gemini-review', async (request, response) => {

@@ -888,17 +888,22 @@ async function assertWebGeminiReviewFeedbackLoop(apiBaseUrl, runtimeDir, sourceD
     '現在の完成動画と違うWeb Geminiレビュー実行ログが取得できている'
   );
 
-  await writeFile(runLogPath, `${JSON.stringify({
-    draftId: sourceDraftId,
-    status: 'prepared',
-    createdAt: new Date().toISOString(),
-    outputVideoUri: outputFileRef.uri,
-    outputVideoPath: artifactPathByUri(runtimeDir, outputFileRef.uri),
-    promptPath: path.join(runtimeDir, 'artifacts', sourceDraftId, 'web-gemini-review-prompt.md'),
-    blockedReasons: [],
-    externalUploadRequired: true,
-    nextAction: 'レビュー対象動画と依頼文を確認しました。外部送信はまだ実行していません。'
-  }, null, 2)}\n`, 'utf8');
+  const prepared = await requestJson(apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/web-gemini-review/prepare`), {
+    method: 'POST'
+  });
+  assertScenario(prepared.runLog?.status === 'prepared', 'Web Geminiレビュー準備APIで準備ログが作られていない');
+  assertScenario(
+    prepared.runLog.outputVideoUri === outputFileRef.uri,
+    'Web Geminiレビュー準備APIが現在の完成動画を指していない'
+  );
+  assertScenario(
+    prepared.runLog.externalUploadRequired === true,
+    'Web Geminiレビュー準備APIのログから外部送信が必要なことが分からない'
+  );
+  assertScenario(
+    prepared.promptText.includes('この動画をレビューしてください。対象は演出だけです。'),
+    'Web Geminiレビュー準備APIの依頼文が演出レビュー用になっていない'
+  );
 
   const beforeReview = await requestJson(apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/web-gemini-review`));
   assertScenario(beforeReview.review === null, 'Web Geminiレビュー保存前にレビューがある扱いになっている');

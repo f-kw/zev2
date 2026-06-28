@@ -170,6 +170,15 @@ export async function fetchWebGeminiReview(id: string): Promise<{
   return response.data;
 }
 
+export async function prepareWebGeminiReview(id: string): Promise<{
+  runLog: WebGeminiReviewRunLog;
+  promptText: string;
+  outputVideoUri: string;
+}> {
+  const response = await api.post(`/request-drafts/${id}/web-gemini-review/prepare`);
+  return response.data;
+}
+
 export async function applyWebGeminiReview(
   id: string,
   instructionText: string

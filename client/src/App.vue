@@ -11,6 +11,7 @@ import {
 import {
   fetchWebGeminiReview,
   formatApiError,
+  prepareWebGeminiReview,
   type WebGeminiReviewArtifact,
   type WebGeminiReviewRunLog
 } from './api';
@@ -41,7 +42,7 @@ const webGeminiInstructionInput = ref('');
 const webGeminiReviewMessage = ref('');
 const webGeminiReviewLoading = ref(false);
 const loadedWebGeminiReviewCreatedAt = ref('');
-const activeWebGeminiAction = ref<'refresh_review' | 'apply_review' | ''>('');
+const activeWebGeminiAction = ref<'refresh_review' | 'prepare_review' | 'apply_review' | ''>('');
 const initialPurpose = 'ショート動画を作成する';
 let refreshTimer: number | undefined;
 let webGeminiRefreshTimer: number | undefined;
@@ -746,6 +747,32 @@ async function reloadWebGeminiReview() {
   }
 }
 
+async function prepareCurrentWebGeminiReview() {
+  const draft = currentDraft.value;
+  if (!draft || !outputVideoUri.value || agentOperationLocked.value || webGeminiReviewLoading.value) {
+    return;
+  }
+
+  activeWebGeminiAction.value = 'prepare_review';
+  webGeminiReviewLoading.value = true;
+  webGeminiReviewMessage.value = '';
+  try {
+    const result = await prepareWebGeminiReview(draft.id);
+    webGeminiReview.value = null;
+    webGeminiRunLog.value = result.runLog;
+    webGeminiInstructionInput.value = '';
+    loadedWebGeminiReviewCreatedAt.value = '';
+    webGeminiReviewMessage.value = 'レビュー未取得';
+  } catch (error) {
+    webGeminiReview.value = null;
+    webGeminiRunLog.value = null;
+    webGeminiReviewMessage.value = formatApiError(error);
+  } finally {
+    webGeminiReviewLoading.value = false;
+    activeWebGeminiAction.value = '';
+  }
+}
+
 async function applyWebGeminiReviewChanges() {
   const draft = currentDraft.value;
   const instruction = normalizeWebGeminiReviewText(webGeminiInstructionInput.value);
@@ -1110,14 +1137,25 @@ watch(
                   <p class="eyebrow">Web Gemini Review</p>
                   <h3>演出レビュー</h3>
                 </div>
-                <button
-                  type="button"
-                  class="secondary-button"
-                  :disabled="webGeminiReviewLoading || activeWebGeminiAction === 'refresh_review'"
-                  @click="reloadWebGeminiReview"
-                >
-                  {{ activeWebGeminiAction === 'refresh_review' ? '確認中' : '再読み込み' }}
-                </button>
+                <div class="web-gemini-header-actions">
+                  <button
+                    v-if="!webGeminiReview"
+                    type="button"
+                    class="secondary-button"
+                    :disabled="agentOperationLocked || webGeminiReviewLoading || activeWebGeminiAction === 'prepare_review'"
+                    @click="prepareCurrentWebGeminiReview"
+                  >
+                    {{ activeWebGeminiAction === 'prepare_review' ? '準備中' : 'レビュー準備を更新' }}
+                  </button>
+                  <button
+                    type="button"
+                    class="secondary-button"
+                    :disabled="webGeminiReviewLoading || activeWebGeminiAction === 'refresh_review'"
+                    @click="reloadWebGeminiReview"
+                  >
+                    {{ activeWebGeminiAction === 'refresh_review' ? '確認中' : '再読み込み' }}
+                  </button>
+                </div>
               </div>
 
               <div v-if="webGeminiReviewLoading" class="empty-review-state">
@@ -2088,6 +2126,13 @@ video {
   font-family: var(--font-en);
   font-size: 18px;
   line-height: 1.2;
+}
+
+.web-gemini-header-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: end;
+  gap: 8px;
 }
 
 .web-gemini-review label {
