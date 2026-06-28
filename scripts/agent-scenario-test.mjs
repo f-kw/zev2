@@ -553,6 +553,24 @@ async function assertRetryControls(apiBaseUrl, runtimeDir) {
   await requestJson(apiPath(apiBaseUrl, `/agent-requests/${missingArtifactPrepareRequest.id}/claim`), {
     method: 'POST'
   });
+  const wrongDraftArtifactError = await expectRequestJsonFailure(
+    apiPath(apiBaseUrl, `/agent-requests/${missingArtifactPrepareRequest.id}/complete`),
+    {
+      method: 'POST',
+      body: JSON.stringify({
+        meaning: '別の編集コピー配下の成果物を成功扱いにしようとする',
+        fileRef: {
+          uri: '/api/artifacts/other_draft/source-video.mp4',
+          mimeType: 'video/mp4',
+          access: 'internal'
+        }
+      })
+    }
+  );
+  assertScenario(
+    wrongDraftArtifactError.includes('対象の編集コピー配下'),
+    '別の編集コピー配下の成果物参照がAI工程完了で拒否されていない'
+  );
   const missingArtifactCompleteError = await expectRequestJsonFailure(
     apiPath(apiBaseUrl, `/agent-requests/${missingArtifactPrepareRequest.id}/complete`),
     {
@@ -568,7 +586,7 @@ async function assertRetryControls(apiBaseUrl, runtimeDir) {
   const stillRunningMissingArtifactRequest = agentRequestsForDraft(afterMissingArtifactComplete, missingArtifactDraft.id)[0];
   assertScenario(
     stillRunningMissingArtifactRequest.status === 'running',
-    '成果物なし完了の拒否後にAI工程の状態が変わっている'
+    '不正な成果物参照または成果物なし完了の拒否後にAI工程の状態が変わっている'
   );
   await requestJson(apiPath(apiBaseUrl, `/agent-requests/${missingArtifactPrepareRequest.id}/fail`), {
     method: 'POST',

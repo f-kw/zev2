@@ -191,6 +191,21 @@ function artifactUrl(requestDraftId: string, fileName: string): string {
   return `${artifactUrlPrefix}${encodeURIComponent(requestDraftId)}/${encodeURIComponent(fileName)}`;
 }
 
+function validateCompletionFileRefUri(agentRequest: AgentRequest, uri: string): string | undefined {
+  const expectedPrefix = `${artifactUrlPrefix}${encodeURIComponent(agentRequest.requestDraftId)}/`;
+  if (!uri.startsWith(expectedPrefix)) {
+    return '成果物参照は対象の編集コピー配下に保存してください';
+  }
+
+  try {
+    artifactPathByUrl(uri);
+  } catch {
+    return '成果物参照のURIが不正です';
+  }
+
+  return undefined;
+}
+
 function unknownErrorMessage(error: unknown): string {
   return error instanceof Error ? error.message : String(error);
 }
@@ -2069,6 +2084,11 @@ router.post('/agent-requests/:id/complete', async (request, response) => {
   }
   if (!input.fileRef) {
     response.status(400).json({ error: 'AI操作の完了には成果物参照が必要です', state });
+    return;
+  }
+  const fileRefUriError = validateCompletionFileRefUri(agentRequest, input.fileRef.uri.trim());
+  if (fileRefUriError) {
+    response.status(400).json({ error: fileRefUriError, state });
     return;
   }
 
