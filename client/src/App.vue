@@ -573,8 +573,8 @@ watch(
 </script>
 
 <template>
-  <main class="app-shell">
-    <section class="agent-status-bar" aria-live="polite">
+  <main :class="['app-shell', { 'request-mode': showRequestPage }]">
+    <section v-if="!showRequestPage" class="agent-status-bar" aria-live="polite">
       <div class="status-main">
         <div>
           <p class="eyebrow">AIエージェント</p>
@@ -767,7 +767,7 @@ watch(
     </section>
 
     <div
-      v-if="pendingReviewChange && pendingReviewItem"
+      v-if="!showRequestPage && pendingReviewChange && pendingReviewItem"
       class="dialog-overlay"
       role="dialog"
       aria-modal="true"
@@ -797,7 +797,7 @@ watch(
       </form>
     </div>
 
-    <section v-else-if="outputVideoUri" class="video-panel">
+    <section v-else-if="!showRequestPage && !activeReviewItem && outputVideoUri" class="video-panel">
       <div>
         <p class="eyebrow">生成結果</p>
         <h2>完成動画</h2>
@@ -822,7 +822,7 @@ watch(
       </div>
     </section>
 
-    <section v-else class="work-wait-panel">
+    <section v-else-if="!showRequestPage && !activeReviewItem" class="work-wait-panel">
       <div>
         <p class="eyebrow">作業中</p>
         <h2>{{ statusText }}</h2>
@@ -847,6 +847,10 @@ watch(
   padding: 16px;
   overflow: hidden;
   box-sizing: border-box;
+}
+
+.app-shell.request-mode {
+  grid-template-rows: minmax(0, 1fr);
 }
 
 .agent-status-bar,
@@ -1283,6 +1287,10 @@ video {
     grid-template-rows: auto minmax(0, 1fr);
     overflow: auto;
     padding: 18px;
+  }
+
+  .app-shell.request-mode {
+    grid-template-rows: minmax(0, 1fr);
   }
 
   .agent-status-bar,
