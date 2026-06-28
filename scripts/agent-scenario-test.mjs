@@ -1102,6 +1102,10 @@ async function assertWebGeminiReviewFeedbackLoop(apiBaseUrl, runtimeDir, sourceD
     copiedRequests[expectedStartIndex]?.type === 'create_edit_plan',
     'Web Geminiレビュー反映が演出作成前から再開していない'
   );
+  assertScenario(
+    copiedRequests[expectedStartIndex]?.input?.purpose.includes(instructionText),
+    'Web Geminiレビューの改善指示が演出作成工程の入力に入っていない'
+  );
 
   await runAgentApprovingReviews(apiBaseUrl, runtimeDir, copiedDraft.id);
   await assertGeneratedDraftCompleted(
