@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>zev2 UI // CYBERPUNK 2077</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0a0a0c;
+  --yellow:#fcee0a;       /* 2077シグネチャー */
+  --cyan:#00f0ff;
+  --red:#ff003c;
+  --text:#f2f3e8;
+  --text-dim:#8a8d7a;
+  --text-faint:#55584a;
+  --panel:#101013;
+  --panel-2:#15151a;
+  --line:rgba(252,238,10,.22);
+  --font-en:'Rajdhani','Noto Sans JP',sans-serif;
+  --font-jp:'Noto Sans JP',sans-serif;
+  --font-mono:'JetBrains Mono',monospace;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{
+  font-family:var(--font-jp);color:var(--text);background:var(--bg);
+  min-height:100dvh;padding:clamp(14px,2.5vw,32px);position:relative;overflow-x:hidden;
+}
+/* スキャンライン + ノイズビネット */
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:30;
+  background:repeating-linear-gradient(0deg,transparent 0 2px,rgba(0,0,0,.28) 2px 3px);
+  mix-blend-mode:multiply;opacity:.45}
+.page{position:relative;z-index:2;max-width:1000px;margin:0 auto;display:grid;gap:16px}
+
+.mono{font-family:var(--font-mono);font-variant-numeric:tabular-nums}
+.tag{font-family:var(--font-mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--text-faint);margin:8px 2px 0}
+h1,h2,h3{margin:0;line-height:1.15;font-family:var(--font-en);font-weight:700}
+h1{font-size:30px;letter-spacing:.01em} h2{font-size:21px} h3{font-size:15px}
+.eyebrow{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--yellow);margin:0 0 8px}
+.sub{color:var(--text-dim);font-size:12.5px;line-height:1.6;margin:7px 0 0}
+
+/* 警告ストライプ（黄黒テープ） */
+.stripe{height:8px;background:repeating-linear-gradient(45deg,var(--yellow) 0 12px,#0a0a0c 12px 24px)}
+
+/* パネル：斜めカット＋ブラケット */
+.panel{position:relative;background:var(--panel);border:1px solid var(--line);padding:18px 20px;
+  clip-path:polygon(0 0,calc(100% - 18px) 0,100% 18px,100% 100%,18px 100%,0 calc(100% - 18px))}
+.panel.alert{border-color:var(--yellow);box-shadow:0 0 0 1px rgba(252,238,10,.15),inset 0 0 40px rgba(252,238,10,.03)}
+.panel .corner{position:absolute;top:0;right:0;width:18px;height:18px;background:var(--yellow);
+  clip-path:polygon(100% 0,0 0,100% 100%)}
+
+.bar{display:flex;align-items:center;justify-content:space-between;gap:12px;font-family:var(--font-mono);font-size:11px;color:var(--text-dim);margin-bottom:14px;letter-spacing:.05em}
+.bar .l{display:flex;align-items:center;gap:9px}
+.led{width:8px;height:8px;background:var(--yellow);box-shadow:0 0 10px var(--yellow);animation:blink 1.3s steps(1) infinite}
+@keyframes blink{50%{opacity:.25}}
+.bar .r{color:var(--text-faint)}
+
+.head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px}
+/* グリッチ見出し */
+.glitch{position:relative;color:var(--text)}
+.glitch::before,.glitch::after{content:attr(data-t);position:absolute;left:0;top:0;width:100%;overflow:hidden}
+.glitch::before{color:var(--cyan);transform:translate(-2px,0);clip-path:inset(0 0 55% 0);animation:gl 3s infinite steps(2)}
+.glitch::after{color:var(--red);transform:translate(2px,0);clip-path:inset(55% 0 0 0);animation:gl 2.4s infinite steps(2) reverse}
+@keyframes gl{0%,92%,100%{opacity:0;transform:translate(0,0)}93%{opacity:.9;transform:translate(-2px,-1px)}96%{opacity:.9;transform:translate(2px,1px)}}
+.pct{font-family:var(--font-mono);font-size:26px;font-weight:700;color:var(--yellow);text-shadow:0 0 12px rgba(252,238,10,.5)}
+.pbar{height:6px;background:#000;border:1px solid var(--line);margin-top:12px;position:relative}
+.pbar i{position:absolute;inset:1px 38% 1px 1px;background:var(--yellow);box-shadow:0 0 10px rgba(252,238,10,.6)}
+
+/* 工程ステッパー（角形ノード＋テクニカル罫） */
+.steps{display:flex;align-items:flex-start;margin-top:20px}
+.node{display:flex;flex-direction:column;align-items:center;gap:7px;width:60px;flex:0 0 auto}
+.cell{width:30px;height:24px;display:grid;place-items:center;font-family:var(--font-mono);font-size:11px;
+  border:1px solid var(--text-faint);color:var(--text-faint);
+  clip-path:polygon(5px 0,100% 0,100% calc(100% - 5px),calc(100% - 5px) 100%,0 100%,0 5px)}
+.node.done .cell{border-color:var(--yellow);color:var(--yellow);background:rgba(252,238,10,.08)}
+.node.run .cell{border-color:var(--yellow);background:var(--yellow);color:#0a0a0c;box-shadow:0 0 14px rgba(252,238,10,.7)}
+.node small{font-family:var(--font-mono);font-size:9px;color:var(--text-dim);letter-spacing:.06em}
+.node.run small{color:var(--yellow)}
+.bus{height:2px;flex:1;margin-top:11px;background:repeating-linear-gradient(90deg,var(--text-faint) 0 3px,transparent 3px 7px)}
+.bus.on{background:var(--yellow);box-shadow:0 0 6px rgba(252,238,10,.5)}
+
+.note{margin-top:16px;border-left:3px solid var(--yellow);background:rgba(252,238,10,.06);padding:9px 13px;font-size:12px;color:#e9e4b0;font-family:var(--font-mono)}
+
+/* レビュー選択 */
+.opts{display:flex;flex-direction:column;gap:10px;margin-top:6px}
+.opt{position:relative;display:flex;align-items:center;gap:14px;padding:14px 16px;cursor:pointer;
+  border:1px solid rgba(252,238,10,.14);background:var(--panel-2);transition:.14s;
+  clip-path:polygon(0 0,100% 0,100% calc(100% - 10px),calc(100% - 10px) 100%,0 100%)}
+.opt:hover{border-color:rgba(252,238,10,.5);background:#1b1b14}
+.opt.sel{border-color:var(--yellow);background:rgba(252,238,10,.1);box-shadow:inset 0 0 28px rgba(252,238,10,.06)}
+.opt .mk{width:14px;height:24px;flex:0 0 auto;border:1px solid var(--text-faint);
+  clip-path:polygon(0 0,100% 0,100% 70%,50% 100%,0 70%)}
+.opt.sel .mk{border-color:var(--yellow);background:var(--yellow);box-shadow:0 0 12px var(--yellow)}
+.opt .t{flex:1;min-width:0}
+.opt .t b{display:block;font-size:14.5px;color:#fdfdf2;font-family:var(--font-en);font-weight:600}
+.opt .t span{display:block;font-size:12px;color:var(--text-dim);margin-top:3px;line-height:1.5;font-family:var(--font-jp)}
+.opt .id{font-family:var(--font-mono);font-size:11px;color:var(--text-faint)}
+.opt.sel .id{color:var(--yellow)}
+
+.acts{display:flex;gap:11px;margin-top:16px;flex-wrap:wrap}
+.btn{font-family:var(--font-en);font-weight:700;font-size:13.5px;letter-spacing:.06em;text-transform:uppercase;
+  padding:11px 22px;cursor:pointer;transition:.14s;background:transparent;
+  clip-path:polygon(10px 0,100% 0,100% calc(100% - 10px),calc(100% - 10px) 100%,0 100%,0 10px)}
+.btn.p{border:0;color:#0a0a0c;background:var(--yellow);box-shadow:0 0 18px rgba(252,238,10,.4)}
+.btn.p:hover{background:#fff84a;box-shadow:0 0 28px rgba(252,238,10,.7)}
+.btn.g{border:1px solid rgba(252,238,10,.4);color:var(--yellow)}
+.btn.g:hover{border-color:var(--yellow);background:rgba(252,238,10,.1)}
+.btn.d{border:1px solid rgba(255,0,60,.5);color:var(--red)}
+.btn.d:hover{background:rgba(255,0,60,.12)}
+
+.two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:860px){.two{grid-template-columns:1fr}}
+.field label{font-family:var(--font-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-dim);display:block;margin:6px 0 8px}
+textarea{width:100%;min-height:84px;resize:none;background:#000;border:1px solid var(--line);color:var(--text);
+  font-family:var(--font-jp);font-size:14px;padding:12px}
+textarea:focus{outline:0;border-color:var(--yellow);box-shadow:inset 0 0 18px rgba(252,238,10,.06)}
+textarea::placeholder{color:var(--text-faint)}
+.summary{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0}
+.scard{border:1px solid var(--line);background:#000;padding:10px 12px}
+.scard .k{font-family:var(--font-mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--text-faint)}
+.scard .v{font-family:var(--font-mono);font-size:14px;color:var(--yellow);margin-top:5px}
+.vplace{aspect-ratio:16/9;border:1px solid var(--line);position:relative;background:
+  repeating-linear-gradient(45deg,rgba(252,238,10,.03) 0 10px,transparent 10px 20px),#000;display:grid;place-items:center}
+.vplace .pl{width:0;height:0;border-left:26px solid var(--yellow);border-top:16px solid transparent;border-bottom:16px solid transparent;filter:drop-shadow(0 0 12px rgba(252,238,10,.6))}
+.wait{display:grid;justify-items:center;gap:15px;text-align:center;padding:28px 18px}
+.scan{width:74px;height:74px;border:1px solid var(--line);position:relative;clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%)}
+.scan::before{content:"";position:absolute;inset:8px;border-top:2px solid var(--yellow);animation:spin 1s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important}}
+.docnote{font-family:var(--font-mono);font-size:11px;color:var(--text-faint);text-align:center;letter-spacing:.05em}
+</style>
+</head>
+<body>
+<div class="page">
+  <p class="docnote">zev2 UI // CYBERPUNK 2077 EDITION — 設計書: ui-redesign-cyberpunk.md（確定後に作成）</p>
+
+  <!-- ① ステータス + 工程ステッパー -->
+  <p class="tag">① STATUS · PIPELINE</p>
+  <div class="stripe"></div>
+  <section class="panel alert"><span class="corner"></span>
+    <div class="bar"><div class="l"><span class="led"></span><span>AI AGENT // ONLINE</span></div><div class="r mono">SES 0x7F·A4 / 12:62:08</div></div>
+    <div class="head">
+      <div><p class="eyebrow">▌Process Active</p><h2 class="glitch" data-t="演出付与中">演出付与中</h2></div>
+      <div class="pct">62%</div>
+    </div>
+    <div class="pbar"><i></i></div>
+    <div class="steps">
+      <div class="node done"><div class="cell">✓</div><small>INGEST</small></div><div class="bus on"></div>
+      <div class="node done"><div class="cell">✓</div><small>STT</small></div><div class="bus on"></div>
+      <div class="node done"><div class="cell">✓</div><small>SCAN</small></div><div class="bus on"></div>
+      <div class="node done"><div class="cell">✓</div><small>GEMINI</small></div><div class="bus on"></div>
+      <div class="node run"><div class="cell">▶</div><small>FX</small></div><div class="bus"></div>
+      <div class="node"><div class="cell">6</div><small>TUNE</small></div><div class="bus"></div>
+      <div class="node"><div class="cell">7</div><small>RENDER</small></div>
+    </div>
+    <div class="note">&gt; 演出を付与しています。完了したら微調整の確認をお願いします。</div>
+  </section>
+
+  <!-- ② レビュー / 選択（主役） -->
+  <p class="tag">② REVIEW · THEME SELECT</p>
+  <section class="panel"><span class="corner"></span>
+    <div class="bar"><div class="l"><span class="led"></span><span>INPUT REQUIRED</span></div><div class="r mono">3 OPTIONS</div></div>
+    <p class="eyebrow">▌Theme Candidates</p>
+    <h2>どの切り口でショートを作りますか？</h2>
+    <p class="sub">会話から3つの方向性を抽出しました。1つ選ぶか、テーマ自体を作り直せます。</p>
+    <div class="opts">
+      <label class="opt"><span class="mk"></span><div class="t"><b>テンポ重視の掛け合い</b><span>ボケとツッコミの往復だけを連続で繋ぎ、笑いの密度で押す構成。</span></div><span class="id">01</span></label>
+      <label class="opt sel"><span class="mk"></span><div class="t"><b>緊張感ある会話劇</b><span>短い会話を緊張感で引き込む構成。間とテロップで惹きつける。</span></div><span class="id">02</span></label>
+      <label class="opt"><span class="mk"></span><div class="t"><b>オチ先出しの伏線型</b><span>結末を冒頭に置き、なぜそうなったかを遡って見せる構成。</span></div><span class="id">03</span></label>
+    </div>
+    <div class="acts"><button class="btn p">▶ 承認</button><button class="btn g">⟲ テーマを作り直す</button></div>
+  </section>
+
+  <div class="two">
+    <!-- ③ 新規作成 -->
+    <div>
+      <p class="tag">③ NEW</p>
+      <section class="panel"><span class="corner"></span>
+        <p class="eyebrow">▌zev2 // create</p>
+        <h1>ショート動画を作成</h1>
+        <div class="summary">
+          <div class="scard"><div class="k">Source</div><div class="v">会話_0628.mp4</div></div>
+          <div class="scard"><div class="k">Transcript</div><div class="v">READY</div></div>
+        </div>
+        <div class="field"><label>作りたいショート</label><textarea placeholder="例: 面白い会話を短いショート動画にする"></textarea></div>
+        <div class="acts"><button class="btn p">▶ 動画を作成</button></div>
+      </section>
+    </div>
+    <!-- ④ 完成 / ⑤ 待機 -->
+    <div style="display:grid;gap:16px">
+      <div>
+        <p class="tag">④ OUTPUT</p>
+        <section class="panel"><span class="corner"></span>
+          <div class="bar"><div class="l"><span class="led"></span><span>RENDER COMPLETE</span></div><div class="r mono">00:14 · 1080p</div></div>
+          <div class="vplace"><div class="pl"></div></div>
+          <div class="acts"><button class="btn g">⟲ テーマ選択前</button><button class="btn g">⟲ 演出作成前</button></div>
+        </section>
+      </div>
+      <div>
+        <p class="tag">⑤ WAIT</p>
+        <section class="panel wait"><span class="corner"></span>
+          <div class="scan"></div>
+          <div><p class="eyebrow">▌Processing</p><h2>候補を探索しています</h2></div>
+          <p class="sub mono">SCANNING SOURCE · 完了したら候補の確認をお願いします</p>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

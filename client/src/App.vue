@@ -29,6 +29,7 @@ const activePage = ref<AppPage>('workspace');
 const requestDefaultsApplied = ref(false);
 const pendingReviewChange = ref<{ reviewId: string; scope?: ReviewChangeScope } | null>(null);
 const changeReasonInput = ref('');
+const systemClock = ref('');
 const initialPurpose = 'ショート動画を作成する';
 let refreshTimer: number | undefined;
 
@@ -255,10 +256,6 @@ const statusDetailText = computed(() => {
   return '作成する動画を入力してください';
 });
 
-const visibleStatusMessage = computed(() =>
-  store.errorMessage ? '' : statusDetailText.value
-);
-
 const operationLockNotice = computed(() =>
   agentOperationLocked.value ? 'この工程はキャンセルできません' : ''
 );
@@ -271,6 +268,119 @@ const progressText = computed(() => {
   const completedCount = visibleRequests.value.filter((request) => request.status === 'succeeded').length;
   return `${completedCount}/${visibleRequests.value.length} 工程完了`;
 });
+
+const progressPercent = computed(() => {
+  const totalCount = visibleRequests.value.length;
+  if (totalCount === 0) {
+    return 0;
+  }
+
+  const completedCount = visibleRequests.value.filter((request) => request.status === 'succeeded').length;
+  return Math.round((completedCount / totalCount) * 100);
+});
+
+const hudStatusText = computed(() =>
+  showRequestPage.value ? '新規依頼を入力' : statusText.value
+);
+
+const hudStatusDetailText = computed(() =>
+  showRequestPage.value ? '作りたいショートを入力して、動画作成を開始できます' : statusDetailText.value
+);
+
+const hudVisibleStatusMessage = computed(() =>
+  store.errorMessage ? '' : hudStatusDetailText.value
+);
+
+const hudProgressText = computed(() =>
+  showRequestPage.value ? 'NEW REQUEST' : progressText.value
+);
+
+const hudProgressPercent = computed(() =>
+  showRequestPage.value ? 0 : progressPercent.value
+);
+
+const hudProgressBarStyle = computed(() => ({
+  width: `${hudProgressPercent.value}%`
+}));
+
+const activeMode = computed(() => {
+  if (showRequestPage.value) {
+    return 'new';
+  }
+
+  if (activeReviewItem.value) {
+    return 'review';
+  }
+
+  if (outputVideoUri.value) {
+    return 'output';
+  }
+
+  return 'wait';
+});
+
+const sessionSourceText = computed(() =>
+  store.runtimeConfig?.source.defaultUri ?? currentDraft.value?.source.uri ?? '未設定'
+);
+
+const sessionModelText = computed(() =>
+  currentDraft.value?.settings.geminiModelName ?? requestInput.geminiModelName
+);
+
+const sessionStageText = computed(() =>
+  showRequestPage.value ? 'NEW REQUEST' : progressText.value || (currentDraft.value ? '0/7 工程完了' : '未開始')
+);
+
+const systemLogItems = computed(() => {
+  if (showRequestPage.value) {
+    return ['新規依頼の入力待ち'];
+  }
+
+  const requests = visibleRequests.value.slice(-4);
+  if (requests.length === 0) {
+    return ['新規依頼の入力待ち'];
+  }
+
+  return requests.map((request) => `${request.label}: ${statusLabel(request)}`);
+});
+
+function updateSystemClock() {
+  systemClock.value = new Intl.DateTimeFormat('ja-JP', {
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
+    hour12: false
+  }).format(new Date());
+}
+
+function formatStepCode(index: number): string {
+  const labels = ['INGEST', 'STT', 'THEME', 'CUT', 'FX', 'TUNE', 'RENDER'];
+  return labels[index] ?? String(index + 1);
+}
+
+function stepMark(request: AgentRequest, index: number): string {
+  if (request.status === 'succeeded') {
+    return '✓';
+  }
+
+  if (request.status === 'running') {
+    return '▶';
+  }
+
+  if (request.status === 'failed') {
+    return '!';
+  }
+
+  if (request.status === 'cancelled') {
+    return '×';
+  }
+
+  return String(index + 1);
+}
+
+function formatOptionIndex(index: number): string {
+  return String(index + 1).padStart(2, '0');
+}
 
 function statusLabel(request: AgentRequest): string {
   if (request.status === 'succeeded') {
@@ -530,8 +640,10 @@ async function cancelAgentWork() {
 }
 
 onMounted(() => {
+  updateSystemClock();
   void store.refresh();
   refreshTimer = window.setInterval(() => {
+    updateSystemClock();
     void store.refresh();
   }, 2000);
 });
@@ -574,19 +686,26 @@ watch(
 
 <template>
   <main :class="['app-shell', { 'request-mode': showRequestPage }]">
-    <section v-if="!showRequestPage" class="agent-status-bar" aria-live="polite">
-      <div class="status-main">
-        <div>
-          <p class="eyebrow">AIエージェント</p>
-          <h2>{{ statusText }}</h2>
-        </div>
-        <p v-if="visibleStatusMessage" class="status-message">{{ visibleStatusMessage }}</p>
-        <p v-if="store.errorMessage" class="error-message">{{ store.errorMessage }}</p>
-        <p v-if="operationLockNotice" class="lock-message">{{ operationLockNotice }}</p>
+    <span class="shell-corner corner-tl" aria-hidden="true"></span>
+    <span class="shell-corner corner-tr" aria-hidden="true"></span>
+    <span class="shell-corner corner-bl" aria-hidden="true"></span>
+    <span class="shell-corner corner-br" aria-hidden="true"></span>
+
+    <section class="sys-bar" aria-label="システム状態">
+      <div class="sys-brand">
+        <span class="led" aria-hidden="true"></span>
+        <span>zev2 // AI AGENT - ONLINE</span>
+        <span class="session-code">CTRL HUD</span>
       </div>
 
-      <div class="status-controls">
-        <span v-if="progressText" class="progress-pill">{{ progressText }}</span>
+      <div class="mode-tabs" aria-label="現在の画面">
+        <span :class="['mode-tab', { active: activeMode === 'review' }]">REVIEW</span>
+        <span :class="['mode-tab', { active: activeMode === 'new' }]">NEW</span>
+        <span :class="['mode-tab', { active: activeMode === 'output' }]">OUTPUT</span>
+        <span :class="['mode-tab', { active: activeMode === 'wait' }]">WAIT</span>
+      </div>
+
+      <div class="sys-actions">
         <button
           v-if="canResumeAgentWork"
           type="button"
@@ -624,147 +743,260 @@ watch(
         </button>
       </div>
 
-      <ol v-if="visibleRequests.length" class="step-list">
+      <time class="system-clock">{{ systemClock }}</time>
+    </section>
+
+    <section class="agent-status-bar" aria-live="polite">
+      <div class="status-main">
+        <div>
+          <p class="eyebrow">Process Active</p>
+          <h2 class="glitch-title" :data-t="hudStatusText">{{ hudStatusText }}</h2>
+        </div>
+        <p v-if="hudVisibleStatusMessage" class="status-message">{{ hudVisibleStatusMessage }}</p>
+        <p v-if="store.errorMessage" class="error-message">{{ store.errorMessage }}</p>
+        <p v-if="!showRequestPage && operationLockNotice" class="lock-message">{{ operationLockNotice }}</p>
+      </div>
+
+      <div class="progress-readout">
+        <span v-if="hudProgressText" class="progress-pill">{{ hudProgressText }}</span>
+        <strong>{{ hudProgressPercent }}%</strong>
+      </div>
+
+      <div class="progress-track" aria-hidden="true">
+        <span :style="hudProgressBarStyle"></span>
+      </div>
+
+      <ol v-if="!showRequestPage && visibleRequests.length" class="step-list">
         <li
-          v-for="request in visibleRequests"
+          v-for="(request, requestIndex) in visibleRequests"
           :key="request.id"
           :class="['step-item', `step-${request.status}`]"
         >
-          <span>{{ request.label }}</span>
-          <strong>{{ statusLabel(request) }}</strong>
+          <span class="step-cell">{{ stepMark(request, requestIndex) }}</span>
+          <span class="step-name">{{ request.label }}</span>
+          <strong>{{ formatStepCode(requestIndex) }}</strong>
         </li>
       </ol>
     </section>
 
-    <section v-if="showRequestPage" class="request-page">
-      <div class="request-header">
-        <div>
-          <p class="eyebrow">zev2</p>
-          <h1>ショート動画を作成</h1>
-        </div>
-        <button
-          v-if="currentDraft"
-          type="button"
-          class="secondary-button"
-          @click="closeRequestPage"
-        >
-          作業へ戻る
-        </button>
-      </div>
-
-      <form class="request-form" @submit.prevent="createVideo">
-        <div class="runtime-summary">
-          <div
-            v-for="summary in runtimeSummaries"
-            :key="summary.label"
-            class="runtime-summary-item"
-          >
+    <div class="workspace-grid">
+      <section class="stage">
+        <section v-if="showRequestPage" class="request-page">
+          <div class="panel-corner" aria-hidden="true"></div>
+          <div class="request-header">
             <div>
-              <p class="eyebrow">{{ summary.label }}</p>
-              <h2>{{ summary.title }}</h2>
+              <p class="eyebrow">zev2 // create</p>
+              <h1>ショート動画を作成</h1>
             </div>
-            <p>{{ summary.description }}</p>
           </div>
-        </div>
 
-        <label>
-          作りたいショート
-          <textarea
-            v-model="requestInput.purpose"
-            rows="4"
-            placeholder="例: 面白い会話を短いショート動画にする"
-            :disabled="requestCreationLocked"
-          />
-        </label>
+          <form class="request-form" @submit.prevent="createVideo">
+            <div class="runtime-summary">
+              <div
+                v-for="summary in runtimeSummaries"
+                :key="summary.label"
+                class="runtime-summary-item"
+              >
+                <div>
+                  <p class="eyebrow">{{ summary.label }}</p>
+                  <h2>{{ summary.title }}</h2>
+                </div>
+                <p>{{ summary.description }}</p>
+              </div>
+            </div>
 
-        <button type="submit" :disabled="requestCreationLocked">
-          {{ submitting ? '作成中' : '動画を作成' }}
-        </button>
-      </form>
-    </section>
+            <label>
+              作りたいショート
+              <textarea
+                v-model="requestInput.purpose"
+                rows="4"
+                placeholder="例: 面白い会話を短いショート動画にする"
+                :disabled="requestCreationLocked"
+              />
+            </label>
 
-    <section v-else-if="activeReviewItem" class="review-panel">
-      <div>
-        <p class="eyebrow">{{ activeReviewItem.title }}</p>
-        <h2>{{ activeReviewItem.humanQuestion }}</h2>
-      </div>
-      <p class="review-summary">{{ activeReviewItem.summary }}</p>
+            <button type="submit" :disabled="requestCreationLocked">
+              {{ submitting ? '作成中' : '動画を作成' }}
+            </button>
+          </form>
+        </section>
 
-      <div v-if="activeReviewItem.options.length" class="review-options">
-        <label
-          v-for="option in activeReviewItem.options"
-          :key="option.id"
-          :class="['review-option', { selectable: isContentSelectionReview(activeReviewItem) }]"
-        >
-          <input
-            v-if="isContentSelectionReview(activeReviewItem)"
-            v-model="selectedReviewOptionId"
-            type="radio"
-            name="content-option"
-            :value="option.id"
-          />
-          <span>
-            <strong>{{ option.title }}</strong>
-            <small>{{ option.summary }}</small>
-          </span>
-        </label>
-      </div>
+        <section v-else-if="activeReviewItem" class="review-panel">
+          <div class="panel-corner" aria-hidden="true"></div>
+          <div>
+            <p class="eyebrow">{{ activeReviewItem.title }}</p>
+            <h2>{{ activeReviewItem.humanQuestion }}</h2>
+          </div>
+          <p class="review-summary">{{ activeReviewItem.summary }}</p>
 
-      <div class="review-actions">
-        <button
-          type="button"
-          :disabled="agentOperationLocked || (isContentSelectionReview(activeReviewItem) && !selectedReviewOptionId)"
-          @click="submitActiveReview('approve')"
-        >
-          {{ activeReviewAction === 'approve' ? '処理中' : approveReviewLabel(activeReviewItem) }}
-        </button>
-        <button
-          v-if="isContentSelectionReview(activeReviewItem)"
-          type="button"
-          class="secondary-button"
-          :disabled="agentOperationLocked"
-          @click="submitActiveReview('request_changes', 'theme_options_regenerate')"
-        >
-          {{ activeReviewAction === 'request_changes:theme_options_regenerate' ? '処理中' : 'テーマを作り直す' }}
-        </button>
-        <button
-          v-if="isMaterialConfirmationReview(activeReviewItem)"
-          type="button"
-          class="secondary-button"
-          :disabled="agentOperationLocked"
-          @click="submitActiveReview('request_changes', 'material_reselect')"
-        >
-          {{ activeReviewAction === 'request_changes:material_reselect' ? '処理中' : '切り口と編集元場面を探し直す' }}
-        </button>
-        <button
-          v-if="isMaterialConfirmationReview(activeReviewItem)"
-          type="button"
-          class="secondary-button"
-          :disabled="agentOperationLocked"
-          @click="submitActiveReview('request_changes', 'theme_reselect')"
-        >
-          {{ activeReviewAction === 'request_changes:theme_reselect' ? '処理中' : 'テーマを選び直す' }}
-        </button>
-        <button
-          v-if="activeReviewItem.kind === 'render_readiness'"
-          type="button"
-          class="secondary-button"
-          :disabled="agentOperationLocked"
-          @click="submitActiveReview('request_changes', 'edit_plan')"
-        >
-          {{ activeReviewAction === 'request_changes:edit_plan' ? '処理中' : '演出作成前から作り直す' }}
-        </button>
-        <button
-          v-if="activeReviewItem.kind === 'render_readiness'"
-          type="button"
-          class="secondary-button"
-          :disabled="agentOperationLocked"
-          @click="submitActiveReview('request_changes', 'theme_reselect')"
-        >
-          {{ activeReviewAction === 'request_changes:theme_reselect' ? '処理中' : 'テーマを選び直す' }}
-        </button>
-      </div>
-    </section>
+          <div v-if="activeReviewItem.options.length" class="review-options">
+            <label
+              v-for="(option, optionIndex) in activeReviewItem.options"
+              :key="option.id"
+              :class="[
+                'review-option',
+                {
+                  selectable: isContentSelectionReview(activeReviewItem),
+                  selected: isContentSelectionReview(activeReviewItem) && selectedReviewOptionId === option.id
+                }
+              ]"
+            >
+              <input
+                v-if="isContentSelectionReview(activeReviewItem)"
+                v-model="selectedReviewOptionId"
+                type="radio"
+                name="content-option"
+                :value="option.id"
+              />
+              <span class="review-marker" aria-hidden="true"></span>
+              <span class="review-option-text">
+                <strong>{{ option.title }}</strong>
+                <small>{{ option.summary }}</small>
+              </span>
+              <span class="option-id">{{ formatOptionIndex(optionIndex) }}</span>
+            </label>
+          </div>
+          <div v-else class="incomplete-panel">
+            <p class="eyebrow">作りかけ</p>
+            <h3>この確認画面の詳細表示はまだ未接続です</h3>
+            <p v-if="activeReviewItem.kind === 'render_readiness'">
+              演出案ファイルは作成済みですが、この画面には動画断片、表示枠、テロップ、発話IDの一覧をまだ表示できていません。
+            </p>
+            <p v-else>
+              この確認に必要な選択肢がありません。空白で埋めず、未完成の状態として表示しています。
+            </p>
+          </div>
+
+          <div class="review-actions">
+            <button
+              type="button"
+              :disabled="agentOperationLocked || (isContentSelectionReview(activeReviewItem) && !selectedReviewOptionId)"
+              @click="submitActiveReview('approve')"
+            >
+              {{ activeReviewAction === 'approve' ? '処理中' : approveReviewLabel(activeReviewItem) }}
+            </button>
+            <button
+              v-if="isContentSelectionReview(activeReviewItem)"
+              type="button"
+              class="secondary-button"
+              :disabled="agentOperationLocked"
+              @click="submitActiveReview('request_changes', 'theme_options_regenerate')"
+            >
+              {{ activeReviewAction === 'request_changes:theme_options_regenerate' ? '処理中' : 'テーマを作り直す' }}
+            </button>
+            <button
+              v-if="isMaterialConfirmationReview(activeReviewItem)"
+              type="button"
+              class="secondary-button"
+              :disabled="agentOperationLocked"
+              @click="submitActiveReview('request_changes', 'material_reselect')"
+            >
+              {{ activeReviewAction === 'request_changes:material_reselect' ? '処理中' : '切り口と編集元場面を探し直す' }}
+            </button>
+            <button
+              v-if="isMaterialConfirmationReview(activeReviewItem)"
+              type="button"
+              class="secondary-button"
+              :disabled="agentOperationLocked"
+              @click="submitActiveReview('request_changes', 'theme_reselect')"
+            >
+              {{ activeReviewAction === 'request_changes:theme_reselect' ? '処理中' : 'テーマを選び直す' }}
+            </button>
+            <button
+              v-if="activeReviewItem.kind === 'render_readiness'"
+              type="button"
+              class="secondary-button"
+              :disabled="agentOperationLocked"
+              @click="submitActiveReview('request_changes', 'edit_plan')"
+            >
+              {{ activeReviewAction === 'request_changes:edit_plan' ? '処理中' : '演出作成前から作り直す' }}
+            </button>
+            <button
+              v-if="activeReviewItem.kind === 'render_readiness'"
+              type="button"
+              class="secondary-button"
+              :disabled="agentOperationLocked"
+              @click="submitActiveReview('request_changes', 'theme_reselect')"
+            >
+              {{ activeReviewAction === 'request_changes:theme_reselect' ? '処理中' : 'テーマを選び直す' }}
+            </button>
+          </div>
+        </section>
+
+        <section v-else-if="outputVideoUri" class="video-panel">
+          <div class="panel-corner" aria-hidden="true"></div>
+          <div>
+            <p class="eyebrow">Render Complete</p>
+            <h2>完成動画</h2>
+          </div>
+          <video controls playsinline :src="outputVideoUri" />
+
+          <div class="redo-actions">
+            <button
+              type="button"
+              class="secondary-button"
+              :disabled="!canRedoVideo"
+              @click="redoVideo('theme_selection')"
+            >
+              {{ activeRedoScope === 'theme_selection' ? '作り直し中' : 'テーマ選択前から作り直す' }}
+            </button>
+            <button
+              type="button"
+              class="secondary-button"
+              :disabled="!canRedoVideo"
+              @click="redoVideo('edit_plan')"
+            >
+              {{ activeRedoScope === 'edit_plan' ? '作り直し中' : '演出作成前から作り直す' }}
+            </button>
+          </div>
+        </section>
+
+        <section v-else class="work-wait-panel">
+          <div class="panel-corner" aria-hidden="true"></div>
+          <div class="scanner" aria-hidden="true"></div>
+          <div>
+            <p class="eyebrow">Processing</p>
+            <h2>{{ statusText }}</h2>
+          </div>
+          <p>
+            {{ statusDetailText }}
+          </p>
+          <p v-if="operationLockNotice" class="lock-message">{{ operationLockNotice }}</p>
+        </section>
+      </section>
+
+      <aside class="side-hud" aria-label="実行情報">
+        <section class="hud-card">
+          <p class="eyebrow">Session</p>
+          <dl>
+            <div>
+              <dt>Source</dt>
+              <dd>{{ sessionSourceText }}</dd>
+            </div>
+            <div>
+              <dt>Model</dt>
+              <dd>{{ sessionModelText }}</dd>
+            </div>
+            <div>
+              <dt>Stage</dt>
+              <dd>{{ sessionStageText }}</dd>
+            </div>
+          </dl>
+        </section>
+
+        <section class="hud-card">
+          <p class="eyebrow">System Log</p>
+          <ol class="system-log">
+            <li v-for="item in systemLogItems" :key="item">{{ item }}</li>
+          </ol>
+        </section>
+
+        <section class="hud-card hint-card">
+          <p class="eyebrow">Hint</p>
+          <p>{{ hudStatusDetailText }}</p>
+        </section>
+      </aside>
+    </div>
 
     <div
       v-if="!showRequestPage && pendingReviewChange && pendingReviewItem"
@@ -773,6 +1005,7 @@ watch(
       aria-modal="true"
     >
       <form class="change-dialog" @submit.prevent="confirmReviewChange">
+        <div class="panel-corner" aria-hidden="true"></div>
         <div>
           <p class="eyebrow">作り直し</p>
           <h2>{{ reviewChangeDialogTitle(pendingReviewItem, pendingReviewChange.scope) }}</h2>
@@ -796,125 +1029,469 @@ watch(
         </div>
       </form>
     </div>
-
-    <section v-else-if="!showRequestPage && !activeReviewItem && outputVideoUri" class="video-panel">
-      <div>
-        <p class="eyebrow">生成結果</p>
-        <h2>完成動画</h2>
-      </div>
-      <video controls playsinline :src="outputVideoUri" />
-
-      <div class="redo-actions">
-        <button
-          type="button"
-          :disabled="!canRedoVideo"
-          @click="redoVideo('theme_selection')"
-        >
-          {{ activeRedoScope === 'theme_selection' ? '作り直し中' : 'テーマ選択前から作り直す' }}
-        </button>
-        <button
-          type="button"
-          :disabled="!canRedoVideo"
-          @click="redoVideo('edit_plan')"
-        >
-          {{ activeRedoScope === 'edit_plan' ? '作り直し中' : '演出作成前から作り直す' }}
-        </button>
-      </div>
-    </section>
-
-    <section v-else-if="!showRequestPage && !activeReviewItem" class="work-wait-panel">
-      <div>
-        <p class="eyebrow">作業中</p>
-        <h2>{{ statusText }}</h2>
-      </div>
-      <p>
-        {{ statusDetailText }}
-      </p>
-      <p v-if="operationLockNotice" class="lock-message">{{ operationLockNotice }}</p>
-    </section>
   </main>
 </template>
 
 <style scoped>
+:global(html),
+:global(body),
+:global(#app) {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  background: #0a0a0c;
+}
+
+:global(body) {
+  color-scheme: dark;
+}
+
+:global(body::after) {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  pointer-events: none;
+  background: repeating-linear-gradient(0deg, transparent 0 2px, rgba(0, 0, 0, 0.28) 2px 3px);
+  mix-blend-mode: multiply;
+  opacity: 0.4;
+}
+
 .app-shell {
+  --bg: #0a0a0c;
+  --yellow: #fcee0a;
+  --cyan: #00f0ff;
+  --red: #ff003c;
+  --text: #f2f3e8;
+  --text-dim: #9a9d88;
+  --text-faint: #5c604d;
+  --panel: #101013;
+  --panel-2: #15151a;
+  --line: rgba(252, 238, 10, 0.24);
+  --font-en: Rajdhani, Roboto, 'Noto Sans JP', system-ui, sans-serif;
+  --font-jp: 'Noto Sans JP', Roboto, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  position: relative;
+  z-index: 1;
   height: 100dvh;
   min-height: 0;
-  background: #f5f7f9;
-  color: #17202a;
   display: grid;
-  grid-template-rows: auto minmax(0, 1fr);
-  gap: 14px;
-  padding: 16px;
+  grid-template-rows: auto auto minmax(0, 1fr);
+  gap: 10px;
+  padding: 12px;
   overflow: hidden;
+  color: var(--text);
+  background:
+    linear-gradient(135deg, rgba(252, 238, 10, 0.07), transparent 28%),
+    repeating-linear-gradient(90deg, rgba(252, 238, 10, 0.035) 0 1px, transparent 1px 72px),
+    repeating-linear-gradient(0deg, rgba(0, 240, 255, 0.025) 0 1px, transparent 1px 54px),
+    var(--bg);
+  font-family: var(--font-jp);
   box-sizing: border-box;
 }
 
-.app-shell.request-mode {
-  grid-template-rows: minmax(0, 1fr);
+.app-shell::before {
+  content: '';
+  position: absolute;
+  inset: 12px;
+  z-index: -1;
+  border: 1px solid var(--line);
+  clip-path: polygon(0 0, calc(100% - 22px) 0, 100% 22px, 100% 100%, 22px 100%, 0 calc(100% - 22px));
+  box-shadow: inset 0 0 52px rgba(252, 238, 10, 0.045);
 }
 
+.shell-corner {
+  position: absolute;
+  z-index: 2;
+  width: 30px;
+  height: 30px;
+  pointer-events: none;
+}
+
+.corner-tl {
+  top: 12px;
+  left: 12px;
+  border-top: 2px solid var(--yellow);
+  border-left: 2px solid var(--yellow);
+}
+
+.corner-tr {
+  top: 12px;
+  right: 12px;
+  border-top: 2px solid var(--yellow);
+  border-right: 2px solid var(--yellow);
+}
+
+.corner-bl {
+  bottom: 12px;
+  left: 12px;
+  border-bottom: 2px solid var(--yellow);
+  border-left: 2px solid var(--yellow);
+}
+
+.corner-br {
+  right: 12px;
+  bottom: 12px;
+  border-right: 2px solid var(--yellow);
+  border-bottom: 2px solid var(--yellow);
+}
+
+.sys-bar,
 .agent-status-bar,
 .request-page,
 .review-panel,
 .video-panel,
-.work-wait-panel {
-  width: 100%;
+.work-wait-panel,
+.hud-card,
+.change-dialog {
+  position: relative;
   min-width: 0;
+  border: 1px solid var(--line);
+  background: linear-gradient(180deg, rgba(21, 21, 26, 0.98), rgba(13, 13, 16, 0.98));
+  clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 16px 100%, 0 calc(100% - 16px));
+  box-shadow: inset 0 0 34px rgba(252, 238, 10, 0.035);
   box-sizing: border-box;
+}
+
+.panel-corner {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 16px;
+  height: 16px;
+  background: var(--yellow);
+  clip-path: polygon(100% 0, 0 0, 100% 100%);
+}
+
+.sys-bar {
+  display: grid;
+  grid-template-columns: minmax(210px, 1fr) auto auto auto;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 14px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--text-dim);
+}
+
+.sys-brand,
+.sys-actions,
+.mode-tabs {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+}
+
+.sys-brand {
+  gap: 9px;
+  overflow: hidden;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.session-code {
+  color: var(--text-faint);
+}
+
+.led {
+  width: 8px;
+  height: 8px;
+  flex: 0 0 auto;
+  background: var(--yellow);
+  box-shadow: 0 0 12px var(--yellow);
+  animation: blink 1.3s steps(1) infinite;
+}
+
+.mode-tabs {
+  gap: 4px;
+}
+
+.mode-tab {
+  border: 1px solid rgba(252, 238, 10, 0.2);
+  padding: 4px 8px;
+  color: var(--text-faint);
+  background: rgba(0, 0, 0, 0.35);
+  font-family: var(--font-en);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+.mode-tab.active {
+  border-color: var(--yellow);
+  background: var(--yellow);
+  color: var(--bg);
+  box-shadow: 0 0 14px rgba(252, 238, 10, 0.45);
+}
+
+.sys-actions {
+  justify-content: flex-end;
+  gap: 7px;
+}
+
+.system-clock {
+  color: var(--cyan);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
 }
 
 .agent-status-bar {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
-  gap: 10px 14px;
-  align-items: start;
-  background: #ffffff;
-  border: 1px solid #cbd8e2;
-  border-radius: 8px;
+  gap: 9px 14px;
   padding: 12px 14px;
-  box-shadow: 0 2px 8px rgba(23, 32, 42, 0.05);
 }
 
 .status-main {
   display: flex;
   align-items: center;
-  flex-wrap: wrap;
   gap: 14px;
   min-width: 0;
 }
 
 .status-main > div {
-  min-width: 180px;
+  min-width: 190px;
 }
 
-.status-main h2 {
-  font-size: 18px;
+.eyebrow {
+  margin: 0 0 7px;
+  color: var(--yellow);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
 }
 
-.status-controls {
+h1,
+h2 {
+  margin: 0;
+  color: var(--text);
+  font-family: var(--font-en);
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 1.12;
+}
+
+h1 {
+  font-size: 28px;
+}
+
+h2 {
+  font-size: 21px;
+}
+
+.glitch-title {
+  position: relative;
+  width: fit-content;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+
+.glitch-title::before,
+.glitch-title::after {
+  content: attr(data-t);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.glitch-title::before {
+  color: var(--cyan);
+  clip-path: inset(0 0 55% 0);
+  animation: glitch 3s infinite steps(2);
+}
+
+.glitch-title::after {
+  color: var(--red);
+  clip-path: inset(55% 0 0 0);
+  animation: glitch 2.4s infinite steps(2) reverse;
+}
+
+.status-message,
+.error-message,
+.lock-message {
+  margin: 0;
+  padding: 8px 11px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.status-message {
+  flex: 1 1 260px;
+  border-left: 3px solid var(--yellow);
+  color: #e8e0a4;
+  background: rgba(252, 238, 10, 0.06);
+}
+
+.error-message {
+  border-left: 3px solid var(--red);
+  color: #ffb4c4;
+  background: rgba(255, 0, 60, 0.11);
+}
+
+.lock-message {
+  border-left: 3px solid #ffb454;
+  color: #ffdaa2;
+  background: rgba(255, 180, 84, 0.09);
+}
+
+.progress-readout {
   display: flex;
   align-items: center;
   justify-content: flex-end;
   gap: 10px;
+  min-width: 142px;
+  color: var(--yellow);
+  font-family: var(--font-mono);
+}
+
+.progress-readout strong {
+  font-size: 25px;
+  line-height: 1;
+  text-shadow: 0 0 14px rgba(252, 238, 10, 0.5);
+}
+
+.progress-pill {
+  border: 1px solid rgba(252, 238, 10, 0.28);
+  padding: 5px 8px;
+  color: var(--text-dim);
+  background: #050506;
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+.progress-track {
+  grid-column: 1 / -1;
+  height: 7px;
+  border: 1px solid var(--line);
+  background: #000;
+}
+
+.progress-track span {
+  display: block;
+  height: 100%;
+  background: var(--yellow);
+  box-shadow: 0 0 12px rgba(252, 238, 10, 0.65);
+}
+
+.step-list {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 7px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.step-item {
+  display: grid;
+  grid-template-columns: 30px minmax(0, 1fr);
+  grid-template-areas:
+    'cell name'
+    'cell code';
+  align-items: center;
+  gap: 2px 8px;
+  min-width: 0;
+  border: 1px solid rgba(252, 238, 10, 0.16);
+  padding: 6px;
+  background: rgba(0, 0, 0, 0.35);
+  clip-path: polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px);
+}
+
+.step-cell {
+  grid-area: cell;
+  display: grid;
+  width: 28px;
+  height: 24px;
+  place-items: center;
+  border: 1px solid var(--text-faint);
+  color: var(--text-faint);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  clip-path: polygon(5px 0, 100% 0, 100% calc(100% - 5px), calc(100% - 5px) 100%, 0 100%, 0 5px);
+}
+
+.step-name {
+  grid-area: name;
+  overflow: hidden;
+  color: var(--text-dim);
+  font-size: 11px;
+  line-height: 1.2;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.step-item strong {
+  grid-area: code;
+  color: var(--text-faint);
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.08em;
+}
+
+.step-succeeded .step-cell {
+  border-color: var(--yellow);
+  color: var(--yellow);
+  background: rgba(252, 238, 10, 0.08);
+}
+
+.step-running .step-cell {
+  border-color: var(--yellow);
+  background: var(--yellow);
+  color: var(--bg);
+  box-shadow: 0 0 14px rgba(252, 238, 10, 0.7);
+}
+
+.step-running strong,
+.step-running .step-name {
+  color: var(--yellow);
+}
+
+.step-failed .step-cell {
+  border-color: var(--red);
+  color: var(--red);
+}
+
+.step-cancelled .step-cell {
+  border-color: #ffb454;
+  color: #ffb454;
+}
+
+.workspace-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 244px;
+  gap: 10px;
+  min-height: 0;
+}
+
+.stage {
+  min-height: 0;
+  overflow: hidden;
 }
 
 .request-page,
 .review-panel,
 .video-panel,
 .work-wait-panel {
-  min-height: 0;
+  width: 100%;
   height: 100%;
-  background: #ffffff;
-  border: 1px solid #d8e0e7;
-  border-radius: 8px;
-  padding: 16px;
+  min-height: 0;
+  padding: 18px 20px;
+  overflow: hidden;
 }
 
 .request-page {
   display: grid;
   align-content: start;
   gap: 14px;
-  overflow: auto;
 }
 
 .request-header {
@@ -924,165 +1501,151 @@ watch(
   gap: 12px;
 }
 
-.eyebrow {
-  margin: 0 0 6px;
-  color: #607080;
-  font-size: 12px;
-  font-weight: 700;
-}
-
-h1,
-h2 {
-  margin: 0;
-  line-height: 1.2;
-}
-
-h1 {
-  font-size: 24px;
-}
-
-h2 {
-  font-size: 19px;
-}
-
 .request-form {
   display: grid;
-  gap: 12px;
-  margin-top: 14px;
-  max-width: 760px;
+  gap: 13px;
+  max-width: 790px;
 }
 
 .runtime-summary {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 8px;
+  gap: 10px;
+}
+
+.runtime-summary-item,
+.hud-card dl > div {
+  border: 1px solid rgba(252, 238, 10, 0.18);
+  background: #000;
+  padding: 10px 12px;
 }
 
 .runtime-summary-item {
   display: grid;
   gap: 4px;
-  border: 1px solid #cbd8e2;
-  border-radius: 8px;
-  background: #f7fafc;
-  padding: 9px;
   min-width: 0;
-}
-
-.runtime-summary-item + .runtime-summary-item {
-  border-top: 1px solid #cbd8e2;
 }
 
 .runtime-summary-item h2 {
   overflow: hidden;
-  font-size: 15px;
+  color: var(--yellow);
+  font-family: var(--font-mono);
+  font-size: 14px;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
 .runtime-summary p {
-  display: none;
   margin: 0;
-  color: #34495e;
-  font-size: 14px;
+  color: var(--text-dim);
+  font-size: 12px;
   line-height: 1.5;
 }
 
 label {
   display: grid;
   gap: 8px;
-  font-size: 14px;
+  color: var(--text-dim);
+  font-family: var(--font-mono);
+  font-size: 11px;
   font-weight: 700;
+  letter-spacing: 0.1em;
 }
 
 textarea {
   width: 100%;
+  min-height: 92px;
   box-sizing: border-box;
   resize: none;
-  min-height: 78px;
-  border: 1px solid #c7d2dc;
-  border-radius: 8px;
+  border: 1px solid var(--line);
+  border-radius: 0;
   padding: 12px;
-  color: #17202a;
-  font: inherit;
+  color: var(--text);
+  background: #000;
+  font-family: var(--font-jp);
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+textarea:focus {
+  outline: 0;
+  border-color: var(--yellow);
+  box-shadow: inset 0 0 18px rgba(252, 238, 10, 0.06);
+}
+
+textarea:disabled {
+  color: var(--text-faint);
+  cursor: not-allowed;
+}
+
+textarea::placeholder {
+  color: var(--text-faint);
 }
 
 button {
   width: fit-content;
+  min-height: 38px;
   border: 0;
-  border-radius: 8px;
-  background: #1264a3;
-  color: #ffffff;
-  padding: 10px 14px;
-  font-weight: 800;
+  padding: 10px 18px;
+  color: var(--bg);
+  background: var(--yellow);
+  box-shadow: 0 0 18px rgba(252, 238, 10, 0.35);
+  clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
   cursor: pointer;
+  font-family: var(--font-en);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  transition: background 0.14s ease, border-color 0.14s ease, color 0.14s ease, box-shadow 0.14s ease;
+}
+
+button:hover:not(:disabled) {
+  background: #fff84a;
+  box-shadow: 0 0 28px rgba(252, 238, 10, 0.65);
 }
 
 button:disabled {
   cursor: not-allowed;
-  opacity: 0.65;
+  opacity: 0.5;
 }
 
-textarea:disabled {
-  background: #eef2f6;
-  color: #607080;
-  cursor: not-allowed;
+.secondary-button {
+  border: 1px solid rgba(252, 238, 10, 0.42);
+  color: var(--yellow);
+  background: transparent;
+  box-shadow: none;
 }
 
-.progress-pill {
-  border-radius: 999px;
-  background: #e8eef4;
-  color: #34495e;
-  padding: 7px 10px;
-  font-size: 12px;
-  font-weight: 800;
-  white-space: nowrap;
+.secondary-button:hover:not(:disabled) {
+  border-color: var(--yellow);
+  color: var(--yellow);
+  background: rgba(252, 238, 10, 0.1);
 }
 
-.error-message {
-  margin: 0;
-  border-left: 4px solid #b42318;
-  background: #fff2f1;
-  padding: 10px;
-  color: #8a1f17;
-  font-size: 13px;
-  font-weight: 700;
+.danger-button {
+  border: 1px solid rgba(255, 0, 60, 0.55);
+  color: var(--red);
+  background: transparent;
+  box-shadow: none;
 }
 
-.status-message {
-  flex: 1 1 260px;
-  margin: 0;
-  border-left: 4px solid #1264a3;
-  background: #edf6ff;
-  padding: 10px;
-  color: #173a5e;
-  font-size: 13px;
-  font-weight: 800;
-}
-
-.lock-message {
-  flex: 0 1 auto;
-  margin: 0;
-  border-left: 4px solid #8a6d1d;
-  background: #fff8dd;
-  padding: 10px;
-  color: #634f13;
-  font-size: 13px;
-  font-weight: 800;
+.danger-button:hover:not(:disabled) {
+  background: rgba(255, 0, 60, 0.12);
 }
 
 .review-panel {
   display: grid;
-  grid-template-rows: auto auto minmax(0, 1fr) auto auto;
+  grid-template-rows: auto auto minmax(0, 1fr) auto;
   gap: 12px;
-  overflow: hidden;
 }
 
 .review-summary {
-  margin: 0;
-  color: #34495e;
   display: -webkit-box;
+  margin: 0;
   overflow: hidden;
-  line-height: 1.45;
+  color: var(--text-dim);
+  font-size: 13px;
+  line-height: 1.55;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
 }
@@ -1093,180 +1656,132 @@ textarea:disabled {
   gap: 10px;
   min-height: 0;
   overflow: auto;
-  padding-right: 2px;
+  padding-right: 3px;
+}
+
+.incomplete-panel {
+  display: grid;
+  align-content: center;
+  min-height: 0;
+  border: 1px dashed rgba(252, 238, 10, 0.38);
+  padding: 22px;
+  background:
+    repeating-linear-gradient(45deg, rgba(252, 238, 10, 0.035) 0 10px, transparent 10px 20px),
+    rgba(0, 0, 0, 0.42);
+}
+
+.incomplete-panel h3 {
+  margin: 0;
+  color: var(--yellow);
+  font-family: var(--font-en);
+  font-size: 20px;
+  line-height: 1.25;
+}
+
+.incomplete-panel p:last-child {
+  max-width: 680px;
+  margin: 10px 0 0;
+  color: var(--text-dim);
+  font-size: 13px;
+  line-height: 1.7;
 }
 
 .review-option {
-  display: flex;
-  gap: 10px;
-  align-items: flex-start;
-  border: 1px solid #d8e0e7;
-  border-radius: 8px;
-  background: #f8fafc;
-  padding: 12px;
-  font-weight: 400;
+  position: relative;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 13px;
   min-width: 0;
+  border: 1px solid rgba(252, 238, 10, 0.16);
+  padding: 13px 15px;
+  background: var(--panel-2);
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%);
+  color: var(--text);
+  font-weight: 400;
+  transition: border-color 0.14s ease, background 0.14s ease, box-shadow 0.14s ease;
 }
 
 .review-option.selectable {
   cursor: pointer;
 }
 
-.review-option input {
-  margin-top: 4px;
+.review-option:hover {
+  border-color: rgba(252, 238, 10, 0.5);
+  background: #1b1b14;
 }
 
-.review-option span {
+.review-option.selected {
+  border-color: var(--yellow);
+  background: rgba(252, 238, 10, 0.1);
+  box-shadow: inset 0 0 28px rgba(252, 238, 10, 0.06);
+}
+
+.review-option input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.review-marker {
+  width: 14px;
+  height: 24px;
+  border: 1px solid var(--text-faint);
+  clip-path: polygon(0 0, 100% 0, 100% 70%, 50% 100%, 0 70%);
+}
+
+.review-option.selected .review-marker {
+  border-color: var(--yellow);
+  background: var(--yellow);
+  box-shadow: 0 0 12px var(--yellow);
+}
+
+.review-option-text {
   display: grid;
-  gap: 6px;
+  gap: 5px;
   min-width: 0;
 }
 
 .review-option strong {
-  color: #17202a;
-  font-size: 16px;
-  line-height: 1.4;
+  color: var(--text);
+  font-family: var(--font-en);
+  font-size: 17px;
+  line-height: 1.25;
   white-space: normal;
 }
 
 .review-option small {
-  color: #243241;
   display: block;
-  font-size: 14px;
-  line-height: 1.65;
+  color: var(--text-dim);
+  font-size: 13px;
+  line-height: 1.55;
   white-space: pre-line;
 }
 
-.review-actions {
+.option-id {
+  color: var(--text-faint);
+  font-family: var(--font-mono);
+  font-size: 12px;
+}
+
+.review-option.selected .option-id {
+  color: var(--yellow);
+}
+
+.review-actions,
+.redo-actions,
+.dialog-actions {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-}
-
-.dialog-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 20;
-  display: grid;
-  place-items: center;
-  background: rgba(23, 32, 42, 0.42);
-  padding: 18px;
-}
-
-.change-dialog {
-  width: min(520px, 100%);
-  display: grid;
-  gap: 14px;
-  border: 1px solid #cbd8e2;
-  border-radius: 8px;
-  background: #ffffff;
-  padding: 18px;
-  box-shadow: 0 18px 44px rgba(23, 32, 42, 0.22);
-}
-
-.dialog-actions {
-  display: flex;
-  justify-content: flex-end;
-  gap: 10px;
-}
-
-.secondary-button {
-  background: #e8eef4;
-  color: #17202a;
-}
-
-.danger-button {
-  background: #b42318;
-  color: #ffffff;
-}
-
-.step-list {
-  list-style: none;
-  display: grid;
-  grid-column: 1 / -1;
-  grid-template-columns: repeat(7, minmax(0, 1fr));
-  gap: 6px;
-  margin: 0;
-  padding: 0;
-}
-
-.step-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-  min-width: 0;
-  border: 1px solid #d8e0e7;
-  border-radius: 6px;
-  padding: 6px 8px;
-  background: #ffffff;
-}
-
-.step-item span {
-  overflow: hidden;
-  font-size: 12px;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.step-item strong {
-  font-size: 11px;
-  color: #526171;
-  white-space: nowrap;
-}
-
-.step-succeeded {
-  border-color: #b9dbc8;
-  background: #f3fbf6;
-}
-
-.step-running {
-  border-color: #9fc5e8;
-  background: #eef7ff;
-}
-
-.step-queued,
-.step-waiting {
-  border-color: #d8e0e7;
-  background: #f8fafc;
-}
-
-.step-failed {
-  border-color: #f1b4ad;
-  background: #fff4f3;
-}
-
-.step-cancelled {
-  border-color: #e0c27a;
-  background: #fff9e8;
 }
 
 .video-panel {
   display: grid;
   grid-template-rows: auto minmax(0, 1fr) auto;
   gap: 12px;
-  overflow: hidden;
-}
-
-.work-wait-panel {
-  display: grid;
-  align-content: center;
-  justify-items: center;
-  gap: 10px;
-  text-align: center;
-}
-
-.work-wait-panel p {
-  max-width: 520px;
-  margin: 0;
-  color: #34495e;
-  line-height: 1.6;
-}
-
-.redo-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
 }
 
 video {
@@ -1276,73 +1791,277 @@ video {
   min-height: 0;
   justify-self: center;
   object-fit: contain;
-  background: #000000;
-  border-radius: 8px;
+  border: 1px solid var(--line);
+  background:
+    repeating-linear-gradient(45deg, rgba(252, 238, 10, 0.04) 0 10px, transparent 10px 20px),
+    #000;
 }
 
-@media (max-width: 900px) {
+.work-wait-panel {
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  gap: 14px;
+  text-align: center;
+}
+
+.work-wait-panel p {
+  max-width: 560px;
+  margin: 0;
+  color: var(--text-dim);
+  line-height: 1.6;
+}
+
+.scanner {
+  width: 74px;
+  height: 74px;
+  border: 1px solid var(--line);
+  clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
+}
+
+.scanner::before {
+  content: '';
+  display: block;
+  width: calc(100% - 16px);
+  height: calc(100% - 16px);
+  margin: 8px;
+  border-top: 2px solid var(--yellow);
+  animation: spin 1s linear infinite;
+}
+
+.side-hud {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  gap: 10px;
+  min-height: 0;
+}
+
+.hud-card {
+  min-height: 0;
+  padding: 13px;
+  overflow: hidden;
+}
+
+.hud-card dl {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+}
+
+.hud-card dt {
+  color: var(--text-faint);
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.hud-card dd {
+  overflow: hidden;
+  margin: 4px 0 0;
+  color: var(--yellow);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 1.35;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.system-log {
+  display: grid;
+  gap: 7px;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  overflow: auto;
+  list-style: none;
+}
+
+.system-log li {
+  border-left: 2px solid var(--cyan);
+  padding-left: 8px;
+  color: var(--text-dim);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  line-height: 1.45;
+}
+
+.hint-card p:last-child {
+  margin: 0;
+  color: var(--text-dim);
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+.dialog-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  display: grid;
+  place-items: center;
+  padding: 18px;
+  background: rgba(0, 0, 0, 0.72);
+}
+
+.change-dialog {
+  width: min(540px, 100%);
+  display: grid;
+  gap: 14px;
+  padding: 18px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5), 0 0 34px rgba(252, 238, 10, 0.14);
+  animation: dialogIn 0.16s ease-out;
+}
+
+.dialog-actions {
+  justify-content: flex-end;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0.28;
+  }
+}
+
+@keyframes glitch {
+  0%,
+  92%,
+  100% {
+    opacity: 0;
+    transform: translate(0, 0);
+  }
+
+  93% {
+    opacity: 0.85;
+    transform: translate(-2px, -1px);
+  }
+
+  96% {
+    opacity: 0.85;
+    transform: translate(2px, 1px);
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes dialogIn {
+  from {
+    opacity: 0;
+    transform: scale(0.97);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@media (max-width: 1000px) {
+  .app-shell {
+    height: 100dvh;
+    grid-template-rows: auto auto minmax(0, 1fr);
+    padding: 10px;
+  }
+
+  .sys-bar {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  .mode-tabs,
+  .system-clock {
+    display: none;
+  }
+
+  .workspace-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .side-hud {
+    display: none;
+  }
+
+  .step-list {
+    grid-template-columns: repeat(4, minmax(120px, 1fr));
+    overflow: auto;
+  }
+}
+
+@media (max-width: 720px) {
   .app-shell {
     height: auto;
     min-height: 100dvh;
-    grid-template-rows: auto minmax(0, 1fr);
     overflow: auto;
-    padding: 18px;
   }
 
-  .app-shell.request-mode {
-    grid-template-rows: minmax(0, 1fr);
+  :global(html),
+  :global(body),
+  :global(#app) {
+    overflow: auto;
   }
 
-  .agent-status-bar,
+  .sys-bar,
+  .agent-status-bar {
+    clip-path: none;
+  }
+
+  .sys-bar,
+  .status-main,
+  .sys-actions,
+  .progress-readout {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .sys-bar {
+    display: flex;
+  }
+
+  .agent-status-bar {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
   .request-page,
   .review-panel,
   .video-panel,
   .work-wait-panel {
     height: auto;
-    min-height: 0;
+    min-height: 420px;
+    clip-path: none;
   }
 
-  .agent-status-bar,
-  .status-main,
-  .status-controls,
-  .step-item {
-    align-items: stretch;
-    flex-direction: column;
-  }
-
-  .agent-status-bar {
-    display: flex;
-  }
-
-  .status-controls {
-    display: grid;
-  }
-
+  .runtime-summary,
   .step-list {
     grid-template-columns: 1fr;
+  }
+
+  .review-actions,
+  .redo-actions,
+  .dialog-actions {
+    display: grid;
   }
 
   button {
     width: 100%;
   }
 
-  .redo-actions {
-    display: grid;
-  }
-
-  .review-actions {
-    display: grid;
-  }
-
-  .dialog-actions {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-  }
-
   video {
     width: min(420px, 100%);
     height: auto;
     max-height: 70dvh;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation: none !important;
+    transition: none !important;
   }
 }
 </style>
