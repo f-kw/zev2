@@ -178,23 +178,32 @@ async function startBackend(runtimeDir, port) {
   throw new Error(`backendが起動しませんでした\n${output.join('')}`);
 }
 
-async function runAgent(apiBaseUrl, runtimeDir) {
-  await runProcess('node', ['runner/dist/index.js', '--max-steps=7'], {
-    env: {
-      GEMINI_API_KEY: '',
-      GOOGLE_API_KEY: '',
-      GOOGLE_CLOUD_PROJECT: '',
-      PROJECT_ID: '',
-      GCP_PROJECT_ID: '',
-      ZEV2_RUNTIME_DIR: runtimeDir,
-      ZEV2_API_BASE_URL: apiBaseUrl,
-      ZEV2_WORKSPACE_ROOT: workspaceRoot,
-      ZEV2_STT_RUNTIME_MODE: 'fixed',
-      ZEV2_CONTENT_DISCOVERY_MODE: 'fixed',
-      ZEV2_EDIT_PLAN_MODE: 'fixed'
-    },
-    timeoutMs: 180000
-  });
+async function runAgent(apiBaseUrl, runtimeDir, maxSteps = 7, allowMaxStepStop = false) {
+  try {
+    await runProcess('node', ['runner/dist/index.js', `--max-steps=${maxSteps}`], {
+      env: {
+        GEMINI_API_KEY: '',
+        GOOGLE_API_KEY: '',
+        GOOGLE_CLOUD_PROJECT: '',
+        PROJECT_ID: '',
+        GCP_PROJECT_ID: '',
+        ZEV2_RUNTIME_DIR: runtimeDir,
+        ZEV2_API_BASE_URL: apiBaseUrl,
+        ZEV2_WORKSPACE_ROOT: workspaceRoot,
+        ZEV2_STT_RUNTIME_MODE: 'fixed',
+        ZEV2_CONTENT_DISCOVERY_MODE: 'fixed',
+        ZEV2_EDIT_PLAN_MODE: 'fixed'
+      },
+      timeoutMs: 180000
+    });
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    if (allowMaxStepStop && message.includes(`最大処理件数 ${maxSteps} 件に到達したため停止しました`)) {
+      return;
+    }
+
+    throw error;
+  }
 }
 
 async function approveRequiredReview(apiBaseUrl, draftId) {
@@ -491,7 +500,7 @@ async function assertCancelClosesOpenHumanReview(apiBaseUrl, runtimeDir) {
   );
 }
 
-async function assertRetryControls(apiBaseUrl) {
+async function assertRetryControls(apiBaseUrl, runtimeDir) {
   const draft = await createApprovedScenarioDraft(apiBaseUrl, '失敗したAI工程だけ再実行コピーを作る');
   const state = await requestJson(apiPath(apiBaseUrl, '/state'));
   const prepareRequest = agentRequestsForDraft(state, draft.id)[0];
@@ -538,16 +547,42 @@ async function assertRetryControls(apiBaseUrl) {
     '再実行APIの返却対象が新しい編集コピーの工程に絞られていない'
   );
 
-  const succeededDraft = await createApprovedScenarioDraft(apiBaseUrl, '成功済みAI工程は再実行コピーを作らない');
-  const succeededState = await requestJson(apiPath(apiBaseUrl, '/state'));
-  const succeededPrepareRequest = agentRequestsForDraft(succeededState, succeededDraft.id)[0];
-  await requestJson(apiPath(apiBaseUrl, `/agent-requests/${succeededPrepareRequest.id}/claim`), {
+  const missingArtifactDraft = await createApprovedScenarioDraft(apiBaseUrl, '成果物なし完了は成功扱いにしない');
+  const missingArtifactState = await requestJson(apiPath(apiBaseUrl, '/state'));
+  const missingArtifactPrepareRequest = agentRequestsForDraft(missingArtifactState, missingArtifactDraft.id)[0];
+  await requestJson(apiPath(apiBaseUrl, `/agent-requests/${missingArtifactPrepareRequest.id}/claim`), {
     method: 'POST'
   });
-  await requestJson(apiPath(apiBaseUrl, `/agent-requests/${succeededPrepareRequest.id}/complete`), {
+  const missingArtifactCompleteError = await expectRequestJsonFailure(
+    apiPath(apiBaseUrl, `/agent-requests/${missingArtifactPrepareRequest.id}/complete`),
+    {
+      method: 'POST',
+      body: JSON.stringify({ meaning: '成果物なしで成功扱いにしようとする' })
+    }
+  );
+  assertScenario(
+    missingArtifactCompleteError.includes('成果物参照が必要です'),
+    '成果物なしのAI工程完了が拒否されていない'
+  );
+  const afterMissingArtifactComplete = await requestJson(apiPath(apiBaseUrl, '/state'));
+  const stillRunningMissingArtifactRequest = agentRequestsForDraft(afterMissingArtifactComplete, missingArtifactDraft.id)[0];
+  assertScenario(
+    stillRunningMissingArtifactRequest.status === 'running',
+    '成果物なし完了の拒否後にAI工程の状態が変わっている'
+  );
+  await requestJson(apiPath(apiBaseUrl, `/agent-requests/${missingArtifactPrepareRequest.id}/fail`), {
     method: 'POST',
-    body: JSON.stringify({ meaning: '再実行拒否確認のために成功済みにする' })
+    body: JSON.stringify({ message: '成果物なし完了拒否後の確認用工程を停止する' })
   });
+
+  const succeededDraft = await createApprovedScenarioDraft(apiBaseUrl, '成功済みAI工程は再実行コピーを作らない');
+  await runAgent(apiBaseUrl, runtimeDir, 1, true);
+  const succeededState = await requestJson(apiPath(apiBaseUrl, '/state'));
+  const succeededPrepareRequest = agentRequestsForDraft(succeededState, succeededDraft.id)[0];
+  assertScenario(
+    succeededPrepareRequest?.status === 'succeeded' && succeededPrepareRequest.result?.fileRefId,
+    '成功済みAI工程の再実行拒否確認で成果物つき成功状態を作れていない'
+  );
   const succeededRetryError = await expectRequestJsonFailure(
     apiPath(apiBaseUrl, `/agent-requests/${succeededPrepareRequest.id}/retry`),
     { method: 'POST' }
@@ -556,6 +591,9 @@ async function assertRetryControls(apiBaseUrl) {
     succeededRetryError.includes('失敗したAI工程だけ再実行できます'),
     '成功済みのAI工程から再実行コピーを作れている'
   );
+  await requestJson(apiPath(apiBaseUrl, `/request-drafts/${succeededDraft.id}/cancel-agent-work`), {
+    method: 'POST'
+  });
 
   const cancelledDraft = await createApprovedScenarioDraft(apiBaseUrl, '中止済みAI工程は再実行コピーを作らない');
   const cancelled = await requestJson(apiPath(apiBaseUrl, `/request-drafts/${cancelledDraft.id}/cancel-agent-work`), {
@@ -570,6 +608,69 @@ async function assertRetryControls(apiBaseUrl) {
     cancelledRetryError.includes('失敗したAI工程だけ再実行できます'),
     '中止済みのAI工程から再実行コピーを作れている'
   );
+}
+
+async function assertMidWorkflowRetryCopiesArtifacts(apiBaseUrl, runtimeDir) {
+  const draft = await createApprovedScenarioDraft(apiBaseUrl, '途中工程の再実行コピーで成果物を引き継ぐ');
+  await runAgent(apiBaseUrl, runtimeDir, 2, true);
+
+  const state = await requestJson(apiPath(apiBaseUrl, '/state'));
+  const requests = agentRequestsForDraft(state, draft.id);
+  const sourceVideoRequest = requests.find((request) => request.type === 'prepare_video');
+  const transcriptRequest = requests.find((request) => request.type === 'run_stt');
+  const themeRequest = requests.find((request) => request.type === 'propose_clip_themes');
+  assertScenario(sourceVideoRequest?.status === 'succeeded', '途中工程再実行前に動画取り込みが完了していない');
+  assertScenario(transcriptRequest?.status === 'succeeded', '途中工程再実行前にSTTが完了していない');
+  assertScenario(themeRequest?.status === 'queued', '途中工程再実行前にテーマ作成が未作成状態ではない');
+
+  await requestJson(apiPath(apiBaseUrl, `/agent-requests/${themeRequest.id}/claim`), {
+    method: 'POST'
+  });
+  await requestJson(apiPath(apiBaseUrl, `/agent-requests/${themeRequest.id}/fail`), {
+    method: 'POST',
+    body: JSON.stringify({ message: '途中工程の再実行確認のためにテーマ作成を失敗させる' })
+  });
+
+  const retried = await requestJson(apiPath(apiBaseUrl, `/agent-requests/${themeRequest.id}/retry`), {
+    method: 'POST'
+  });
+  assertScenario(retried.draft.id !== draft.id, '途中工程の再実行で編集コピーが作られていない');
+
+  const sourceRequests = agentRequestsForDraft(retried.state, draft.id);
+  assertScenario(
+    sourceRequests.find((request) => request.type === 'propose_clip_themes')?.status === 'failed',
+    '途中工程の再実行で元の失敗状態が壊れている'
+  );
+
+  const copiedRequests = agentRequestsForDraft(retried.state, retried.draft.id);
+  const restartIndex = workflowTypes.indexOf('propose_clip_themes');
+  assertScenario(copiedRequests.length === 7, '途中工程の再実行コピーに7工程がない');
+  assertScenario(
+    copiedRequests.slice(0, restartIndex).every((request) => request.status === 'succeeded'),
+    '途中工程の再実行コピーで失敗前の工程が完了済みとしてコピーされていない'
+  );
+  assertScenario(
+    copiedRequests.slice(restartIndex).every((request) => request.status === 'queued'),
+    '途中工程の再実行コピーで失敗工程以降が未作成状態になっていない'
+  );
+  assertScenario(
+    retried.agentRequests.length === workflowTypes.length - restartIndex &&
+      retried.agentRequests[0]?.type === 'propose_clip_themes',
+    '途中工程の再実行APIの返却対象が失敗工程以降に絞られていない'
+  );
+
+  for (const copiedRequest of copiedRequests.slice(0, restartIndex)) {
+    const copiedFileRef = retried.state.fileRefs.find((fileRef) => fileRef.id === copiedRequest.result?.fileRefId);
+    assertScenario(copiedFileRef, `${copiedRequest.label}: 再実行コピーに成果物参照がない`);
+    assertScenario(
+      copiedFileRef.uri.startsWith(`/api/artifacts/${retried.draft.id}/`),
+      `${copiedRequest.label}: 再実行コピーの成果物参照が新しい編集コピーの配下にない`
+    );
+    await readFile(artifactPathByUri(runtimeDir, copiedFileRef.uri));
+  }
+
+  const { review } = await runDraftUntilReview(apiBaseUrl, runtimeDir, retried.draft.id, 'theme_selection');
+  assertScenario(review.kind === 'theme_selection', '途中工程の再実行コピーがテーマ確認まで進まない');
 }
 
 async function runAgentApprovingReviews(apiBaseUrl, runtimeDir, draftId) {
@@ -1694,7 +1795,8 @@ async function scenarioAutomaticVideoCreation(apiBaseUrl, runtimeDir) {
   await assertThemeOptionRegenerateFromThemeSelection(apiBaseUrl, runtimeDir);
   await assertHumanReviewBlocksDirectClaim(apiBaseUrl, runtimeDir);
   await assertCancelClosesOpenHumanReview(apiBaseUrl, runtimeDir);
-  await assertRetryControls(apiBaseUrl);
+  await assertRetryControls(apiBaseUrl, runtimeDir);
+  await assertMidWorkflowRetryCopiesArtifacts(apiBaseUrl, runtimeDir);
   await assertResumeAndCancelControls(apiBaseUrl);
 
   const noFixedDraftInput = {

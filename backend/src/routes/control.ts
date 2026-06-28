@@ -2067,6 +2067,10 @@ router.post('/agent-requests/:id/complete', async (request, response) => {
     response.status(400).json({ error: '成果物参照にはURIとMIME typeが必要です' });
     return;
   }
+  if (!input.fileRef) {
+    response.status(400).json({ error: 'AI操作の完了には成果物参照が必要です', state });
+    return;
+  }
 
   const reviewKind = getRequiredControlReviewKind(agentRequest);
   if (reviewKind) {
