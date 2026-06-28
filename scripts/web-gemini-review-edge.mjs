@@ -679,11 +679,24 @@ async function main() {
   await writeFile(promptPath, `${promptText}\n`, 'utf8');
 
   if (reviewTextFileArg) {
-    const review = await saveReviewFromText(
-      target,
-      promptText,
-      await readFile(path.resolve(reviewTextFileArg), 'utf8')
-    );
+    let review;
+    try {
+      review = await saveReviewFromText(
+        target,
+        promptText,
+        await readFile(path.resolve(reviewTextFileArg), 'utf8')
+      );
+    } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      await writeRunLog(target, 'failed', {
+        promptPath,
+        reviewTextFilePath: path.resolve(reviewTextFileArg),
+        blockedReasons: [errorMessage],
+        externalUploadRequired: false,
+        nextAction: 'Web Geminiレビューの保存に失敗しました。レビュー本文を確認してから再実行してください。'
+      });
+      throw error;
+    }
     await writeRunLog(target, 'saved', {
       promptPath,
       reviewPath: path.join(runtimeDir, 'artifacts', target.draft.id, reviewFileName),
