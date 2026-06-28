@@ -1039,6 +1039,129 @@ function buildWebGeminiReviewActivityError(
   };
 }
 
+function buildWebGeminiReviewActivitySummary(
+  baseSummary: RequestDraftActivitySummary,
+  draft: RequestDraft,
+  outputVideo: FileRef | undefined,
+  reviewResult: { review: WebGeminiReviewArtifact | null } | { error: string },
+  runLogResult: { runLog: WebGeminiReviewRunLog | null } | { error: string }
+): RequestDraftActivitySummary {
+  if (baseSummary.status !== 'completed') {
+    return baseSummary;
+  }
+
+  const base = {
+    requestDraftId: draft.id,
+    ...(outputVideo ? { outputVideoUri: outputVideo.uri } : {})
+  };
+
+  if ('error' in reviewResult) {
+    return {
+      ...base,
+      status: 'failed',
+      title: 'Web Geminiレビュー本文を確認できません',
+      detail: compactActivityText(reviewResult.error, 'レビュー本文の保存内容を確認してください'),
+      nextAction: 'レビューを取り直すか、動画生成から作り直します'
+    };
+  }
+
+  if ('error' in runLogResult) {
+    return {
+      ...base,
+      status: 'failed',
+      title: 'Web Geminiレビュー実行ログを確認できません',
+      detail: compactActivityText(runLogResult.error, '実行ログの保存内容を確認してください'),
+      nextAction: 'レビューを取り直すか、動画生成から作り直します'
+    };
+  }
+
+  if (reviewResult.review) {
+    const mismatch = ensureWebGeminiReviewMatchesOutputVideo(reviewResult.review, outputVideo);
+    if (mismatch) {
+      return {
+        ...base,
+        status: 'failed',
+        title: 'Web Geminiレビュー本文を確認できません',
+        detail: compactActivityText(mismatch.error, '現在の完成動画とレビュー本文の対応を確認してください'),
+        nextAction: '現在の完成動画でレビューを取り直します'
+      };
+    }
+  }
+
+  if (runLogResult.runLog) {
+    const mismatch = ensureWebGeminiRunLogMatchesOutputVideo(runLogResult.runLog, outputVideo);
+    if (mismatch) {
+      return {
+        ...base,
+        status: 'failed',
+        title: 'Web Geminiレビュー実行ログを確認できません',
+        detail: compactActivityText(mismatch.error, '現在の完成動画とレビュー実行ログの対応を確認してください'),
+        nextAction: '現在の完成動画でレビューを取り直します'
+      };
+    }
+
+    if (runLogResult.runLog.status === 'running') {
+      return {
+        ...base,
+        status: 'running',
+        title: 'Web Geminiレビューを実行中',
+        detail: webGeminiReviewRunDetail(runLogResult.runLog),
+        nextAction: 'レビュー取得が完了するまで待ちます'
+      };
+    }
+
+    if (runLogResult.runLog.status === 'failed' || runLogResult.runLog.status === 'blocked') {
+      return {
+        ...base,
+        status: 'failed',
+        title: webGeminiReviewRunTitle(runLogResult.runLog.status),
+        detail: webGeminiReviewRunDetail(runLogResult.runLog),
+        nextAction: '停止理由を確認して、Web Geminiレビューを再実行します'
+      };
+    }
+
+    if (runLogResult.runLog.status === 'prepared') {
+      return {
+        ...base,
+        status: 'completed',
+        title: 'Web Geminiレビュー準備済み',
+        detail: webGeminiReviewRunDetail(runLogResult.runLog),
+        nextAction: 'EdgeでWeb Geminiレビューを実行します'
+      };
+    }
+
+    if (runLogResult.runLog.status === 'saved') {
+      return {
+        ...base,
+        status: 'completed',
+        title: 'Web Geminiレビュー保存済み',
+        detail: webGeminiReviewRunDetail(runLogResult.runLog),
+        nextAction: '改善指示を確認し、必要なら演出作成前から作り直します'
+      };
+    }
+
+    return {
+      ...base,
+      status: 'completed',
+      title: 'Web Geminiレビュー反映済み',
+      detail: webGeminiReviewRunDetail(runLogResult.runLog),
+      nextAction: '作成された編集コピーの演出作成を確認します'
+    };
+  }
+
+  if (reviewResult.review) {
+    return {
+      ...base,
+      status: 'failed',
+      title: 'Web Geminiレビュー実行ログを確認できません',
+      detail: 'Web Geminiレビュー本文はありますが、実行ログがありません',
+      nextAction: 'レビューを取り直して、対象動画と実行結果をそろえます'
+    };
+  }
+
+  return baseSummary;
+}
+
 function buildRequestDraftActivity(state: LoadedState, draft: RequestDraft): RequestDraftActivityEvent[] {
   const events: RequestDraftActivityEvent[] = [
     {
@@ -2183,9 +2306,18 @@ router.get('/request-drafts/:id/activity', async (request, response) => {
     ));
   }
 
+  const baseSummary = buildRequestDraftActivitySummary(state, draft);
+  const summary = buildWebGeminiReviewActivitySummary(
+    baseSummary,
+    draft,
+    outputVideo,
+    webGeminiReviewResult,
+    webGeminiRunLogResult
+  );
+
   response.json({
     requestDraftId: draft.id,
-    summary: buildRequestDraftActivitySummary(state, draft),
+    summary,
     events: events.sort((left, right) => (
       left.occurredAt.localeCompare(right.occurredAt) || left.id.localeCompare(right.id)
     ))
