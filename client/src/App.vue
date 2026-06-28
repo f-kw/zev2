@@ -213,6 +213,7 @@ const canApplyWebGeminiReview = computed(() =>
       outputVideoUri.value &&
       webGeminiReview.value &&
       webGeminiInstructionInput.value.trim() &&
+      webGeminiRunLog.value?.status !== 'applied' &&
       !agentOperationLocked.value &&
       activeWebGeminiAction.value !== 'apply_review'
   )
@@ -224,6 +225,14 @@ const webGeminiPrepareButtonLabel = computed(() => {
   }
 
   return webGeminiReview.value ? 'レビューを取り直す' : 'レビュー準備を更新';
+});
+
+const webGeminiApplyButtonLabel = computed(() => {
+  if (webGeminiRunLog.value?.status === 'applied') {
+    return '反映済み';
+  }
+
+  return activeWebGeminiAction.value === 'apply_review' ? '再作成中' : '演出から再作成';
 });
 
 const webGeminiRunStatusTitle = computed(() => {
@@ -246,6 +255,10 @@ const webGeminiRunStatusTitle = computed(() => {
 
   if (runLog.status === 'failed') {
     return 'レビュー実行失敗';
+  }
+
+  if (runLog.status === 'applied') {
+    return 'レビュー反映済み';
   }
 
   return webGeminiReview.value ? 'レビュー保存済み' : 'レビュー保存確認が必要';
@@ -277,12 +290,16 @@ const canInspectWebGeminiPrompt = computed(() =>
 );
 
 const webGeminiSavedReviewTitle = computed(() =>
-  webGeminiReview.value ? 'レビュー保存済み' : ''
+  webGeminiReview.value && webGeminiRunLog.value?.status === 'applied' ? 'レビュー反映済み' : webGeminiReview.value ? 'レビュー保存済み' : ''
 );
 
 const webGeminiSavedReviewDetail = computed(() => {
   if (!webGeminiReview.value) {
     return '';
+  }
+
+  if (webGeminiRunLog.value?.status === 'applied') {
+    return 'このレビューは新しい編集コピーへ反映済みです。取り直す場合はレビューを取り直してください。';
   }
 
   return '改善指示を確認して、必要なら演出作成前から作り直せます。';
@@ -1224,7 +1241,7 @@ watch(
                     :disabled="!canApplyWebGeminiReview"
                     @click="applyWebGeminiReviewChanges"
                   >
-                    {{ activeWebGeminiAction === 'apply_review' ? '再作成中' : '演出から再作成' }}
+                    {{ webGeminiApplyButtonLabel }}
                   </button>
                 </div>
               </div>

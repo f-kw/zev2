@@ -1044,6 +1044,11 @@ async function assertWebGeminiReviewFeedbackLoop(apiBaseUrl, runtimeDir, sourceD
   });
   const copiedDraft = applied.draft;
   assertScenario(copiedDraft.id !== sourceDraftId, 'Web Geminiレビュー反映で編集コピーが作られていない');
+  assertScenario(applied.runLog?.status === 'applied', 'Web Geminiレビュー反映後の実行ログがappliedではない');
+  assertScenario(
+    applied.runLog.appliedDraftId === copiedDraft.id,
+    'Web Geminiレビュー反映ログに反映先の編集コピーが残っていない'
+  );
   assertScenario(
     copiedDraft.purpose.includes('Web Geminiの演出レビューを反映して、演出作成前から作り直す'),
     'Web Geminiレビュー反映の目的が編集コピーに残っていない'
@@ -1059,6 +1064,19 @@ async function assertWebGeminiReviewFeedbackLoop(apiBaseUrl, runtimeDir, sourceD
   assertScenario(
     copiedDraft.purpose.includes('演出作成へ渡す改善指示:'),
     'Web Geminiレビューの改善指示見出しが編集コピーに残っていない'
+  );
+  const appliedLogFetch = await requestJson(apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/web-gemini-review`));
+  assertScenario(appliedLogFetch.runLog?.status === 'applied', 'Web Geminiレビュー反映済みログを取得できない');
+  const duplicateApplyError = await expectRequestJsonFailure(
+    apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/apply-web-gemini-review`),
+    {
+      method: 'POST',
+      body: JSON.stringify({ instructionText })
+    }
+  );
+  assertScenario(
+    duplicateApplyError.includes('すでに反映済み'),
+    '反映済みWeb Geminiレビューを二重反映できている'
   );
 
   const copiedRequests = agentRequestsForDraft(applied.state, copiedDraft.id);

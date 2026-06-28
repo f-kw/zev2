@@ -58,7 +58,7 @@ type WebGeminiReviewArtifact = {
 };
 type WebGeminiReviewRunLog = {
   draftId: string;
-  status: 'prepared' | 'blocked' | 'running' | 'saved' | 'failed';
+  status: 'prepared' | 'blocked' | 'running' | 'saved' | 'failed' | 'applied';
   createdAt: string;
   outputVideoUri: string;
   outputVideoPath: string;
@@ -68,6 +68,8 @@ type WebGeminiReviewRunLog = {
   nextAction?: string;
   reviewPath?: string;
   reviewCreatedAt?: string;
+  appliedDraftId?: string;
+  appliedAt?: string;
   edgeControl?: unknown;
   cdpControl?: unknown;
 };
@@ -190,7 +192,14 @@ function parseWebGeminiReviewRunLog(value: unknown): WebGeminiReviewRunLog | und
   }
 
   const log = value as Partial<WebGeminiReviewRunLog>;
-  const allowedStatuses: WebGeminiReviewRunLog['status'][] = ['prepared', 'blocked', 'running', 'saved', 'failed'];
+  const allowedStatuses: WebGeminiReviewRunLog['status'][] = [
+    'prepared',
+    'blocked',
+    'running',
+    'saved',
+    'failed',
+    'applied'
+  ];
   if (
     !hasText(log.draftId) ||
     !hasText(log.createdAt) ||
@@ -216,6 +225,8 @@ function parseWebGeminiReviewRunLog(value: unknown): WebGeminiReviewRunLog | und
     ...(hasText(log.nextAction) ? { nextAction: log.nextAction.trim() } : {}),
     ...(hasText(log.reviewPath) ? { reviewPath: log.reviewPath.trim() } : {}),
     ...(hasText(log.reviewCreatedAt) ? { reviewCreatedAt: log.reviewCreatedAt.trim() } : {}),
+    ...(hasText(log.appliedDraftId) ? { appliedDraftId: log.appliedDraftId.trim() } : {}),
+    ...(hasText(log.appliedAt) ? { appliedAt: log.appliedAt.trim() } : {}),
     ...(log.edgeControl ? { edgeControl: log.edgeControl } : {}),
     ...(log.cdpControl ? { cdpControl: log.cdpControl } : {})
   };
@@ -373,6 +384,32 @@ async function writeWebGeminiReviewSaveFailureRunLog(
     blockedReasons: [errorMessage],
     externalUploadRequired: false,
     nextAction: 'Web Geminiレビューの保存に失敗しました。レビュー本文を確認してから再実行してください。'
+  };
+  await writeWebGeminiReviewRunLog(runLog);
+  return runLog;
+}
+
+async function writeWebGeminiReviewAppliedRunLog(
+  draft: RequestDraft,
+  outputVideo: FileRef,
+  review: WebGeminiReviewArtifact,
+  appliedDraftId: string,
+  createdAt: string
+): Promise<WebGeminiReviewRunLog> {
+  const runLog: WebGeminiReviewRunLog = {
+    draftId: draft.id,
+    status: 'applied',
+    createdAt,
+    outputVideoUri: outputVideo.uri,
+    outputVideoPath: artifactPathByUrl(outputVideo.uri),
+    promptPath: webGeminiReviewPromptPath(draft.id),
+    blockedReasons: [],
+    externalUploadRequired: false,
+    nextAction: 'Web Geminiレビューを反映して、新しい編集コピーを作成しました。',
+    reviewPath: webGeminiReviewPath(draft.id),
+    reviewCreatedAt: review.createdAt,
+    appliedDraftId,
+    appliedAt: createdAt
   };
   await writeWebGeminiReviewRunLog(runLog);
   return runLog;
@@ -1765,6 +1802,23 @@ router.post('/request-drafts/:id/apply-web-gemini-review', async (request, respo
     response.status(409).json({ error: reviewMismatch.error, state });
     return;
   }
+  const runLogResult = await readWebGeminiReviewRunLog(draft.id);
+  if ('error' in runLogResult) {
+    response.status(409).json({ error: runLogResult.error, state });
+    return;
+  }
+  const runLogMismatch = ensureWebGeminiRunLogMatchesOutputVideo(runLogResult.runLog, outputVideo);
+  if (runLogMismatch) {
+    response.status(409).json({ error: runLogMismatch.error, state });
+    return;
+  }
+  if (runLogResult.runLog?.status === 'applied') {
+    response.status(409).json({
+      error: 'このWeb Geminiレビューはすでに反映済みです。もう一度反映する場合はレビューを取り直してください',
+      state
+    });
+    return;
+  }
 
   const instructionText = hasText(request.body?.instructionText)
     ? request.body.instructionText.trim()
@@ -1789,12 +1843,16 @@ router.post('/request-drafts/:id/apply-web-gemini-review', async (request, respo
   }
 
   appendCopiedRestartToState(state, restart);
+  const runLog = outputVideo
+    ? await writeWebGeminiReviewAppliedRunLog(draft, outputVideo, reviewResult.review, restart.draft.id, createdAt)
+    : undefined;
   await saveState(state);
 
   startDryRunRunner();
 
   response.json({
     draft: restart.draft,
+    runLog,
     state
   });
 });

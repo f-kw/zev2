@@ -54,7 +54,7 @@ export interface WebGeminiReviewArtifact {
 
 export interface WebGeminiReviewRunLog {
   draftId: string;
-  status: 'prepared' | 'blocked' | 'running' | 'saved' | 'failed';
+  status: 'prepared' | 'blocked' | 'running' | 'saved' | 'failed' | 'applied';
   createdAt: string;
   outputVideoUri: string;
   outputVideoPath: string;
@@ -64,6 +64,8 @@ export interface WebGeminiReviewRunLog {
   nextAction?: string;
   reviewPath?: string;
   reviewCreatedAt?: string;
+  appliedDraftId?: string;
+  appliedAt?: string;
   edgeControl?: unknown;
   cdpControl?: unknown;
 }
