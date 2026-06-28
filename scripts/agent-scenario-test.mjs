@@ -330,6 +330,73 @@ async function runDraftUntilReview(apiBaseUrl, runtimeDir, draftId, expectedKind
   throw new Error(`${draftId}: ${expectedKind} の確認工程まで到達しない`);
 }
 
+async function assertHumanReviewBlocksDirectClaim(apiBaseUrl, runtimeDir) {
+  const draft = await createApprovedScenarioDraft(apiBaseUrl, 'テーマ確認が未承認なら後続AI作業を開始しない');
+  const { state, review } = await runDraftUntilReview(apiBaseUrl, runtimeDir, draft.id, 'theme_selection');
+  const compositionRequest = agentRequestsForDraft(state, draft.id).find(
+    (request) => request.type === 'build_clip_composition'
+  );
+  assertScenario(compositionRequest, 'テーマ確認待ちで編集元場面作成のAI作業が見つからない');
+
+  const beforeApprovalError = await expectRequestJsonFailure(
+    apiPath(apiBaseUrl, `/agent-requests/${compositionRequest.id}/claim`),
+    { method: 'POST' }
+  );
+  assertScenario(
+    beforeApprovalError.includes('人間確認が承認されていない'),
+    'テーマ確認未承認でも編集元場面作成のAI作業を直接開始できている'
+  );
+
+  const afterBlockedClaim = await requestJson(apiPath(apiBaseUrl, '/state'));
+  const blockedCompositionRequest = agentRequestsForDraft(afterBlockedClaim, draft.id).find(
+    (request) => request.type === 'build_clip_composition'
+  );
+  assertScenario(
+    blockedCompositionRequest?.status === 'waiting',
+    '確認未承認で直接開始を拒否した後、編集元場面作成が待機状態になっていない'
+  );
+  assertScenario(
+    blockedCompositionRequest.errorMessage?.includes('人間確認が承認されていない'),
+    '確認未承認で直接開始を拒否した理由が人間に読める文で残っていない'
+  );
+
+  const rejected = await requestJson(apiPath(apiBaseUrl, `/control-reviews/${review.id}/reject`), {
+    method: 'POST',
+    body: JSON.stringify({ reason: 'このテーマ候補では切り抜きを作らない' })
+  });
+  const rejectedReview = rejected.state.controlReviewItems.find((item) => item.id === review.id);
+  assertScenario(rejectedReview?.status === 'rejected', 'テーマ確認を却下しても確認状態が却下になっていない');
+  await assertResolvedReviewCannotBeProcessedAgain(
+    apiBaseUrl,
+    review.id,
+    'テーマ確認却下後の再処理防止',
+    'rejected'
+  );
+
+  const afterRejectError = await expectRequestJsonFailure(
+    apiPath(apiBaseUrl, `/agent-requests/${compositionRequest.id}/claim`),
+    { method: 'POST' }
+  );
+  assertScenario(
+    afterRejectError.includes('人間確認が承認されていない'),
+    'テーマ確認を却下した後でも編集元場面作成のAI作業を直接開始できている'
+  );
+
+  await runAgent(apiBaseUrl, runtimeDir);
+  const afterRun = await requestJson(apiPath(apiBaseUrl, '/state'));
+  const afterRunRequests = agentRequestsForDraft(afterRun, draft.id);
+  const afterRunComposition = afterRunRequests.find((request) => request.type === 'build_clip_composition');
+  const afterRunEditPlan = afterRunRequests.find((request) => request.type === 'create_edit_plan');
+  assertScenario(
+    afterRunComposition?.status !== 'succeeded' && afterRunComposition?.status !== 'running',
+    'テーマ確認を却下したのに編集元場面作成が進んでいる'
+  );
+  assertScenario(
+    afterRunEditPlan?.status !== 'succeeded' && afterRunEditPlan?.status !== 'running',
+    'テーマ確認を却下したのに演出作成が進んでいる'
+  );
+}
+
 async function runAgentApprovingReviews(apiBaseUrl, runtimeDir, draftId) {
   for (let attempt = 0; attempt < 8; attempt += 1) {
     await runAgent(apiBaseUrl, runtimeDir);
@@ -1393,6 +1460,7 @@ async function scenarioAutomaticVideoCreation(apiBaseUrl, runtimeDir) {
   await assertMaterialReselectFromMaterialConfirmation(apiBaseUrl, runtimeDir);
   await assertContentReselectFromMaterialConfirmation(apiBaseUrl, runtimeDir);
   await assertThemeOptionRegenerateFromThemeSelection(apiBaseUrl, runtimeDir);
+  await assertHumanReviewBlocksDirectClaim(apiBaseUrl, runtimeDir);
   await assertResumeAndCancelControls(apiBaseUrl);
 
   const noFixedDraftInput = {

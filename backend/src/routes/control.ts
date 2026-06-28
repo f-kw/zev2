@@ -30,6 +30,7 @@ import {
   getOutputTypeForRequest,
   getRequiredControlReviewKind,
   hasText,
+  isAgentRequestReady,
   isStatusIn,
   lastMatching,
   latestByCreatedAt,
@@ -1984,6 +1985,15 @@ router.post('/agent-requests/:id/claim', async (request, response) => {
   if (dependency && dependency.status !== 'succeeded') {
     agentRequest.status = 'waiting';
     agentRequest.errorMessage = '前工程の完了待ちです';
+    agentRequest.updatedAt = nowIso();
+    await saveState(state);
+    response.status(409).json({ error: agentRequest.errorMessage, state });
+    return;
+  }
+
+  if (!isAgentRequestReady(state, agentRequest)) {
+    agentRequest.status = 'waiting';
+    agentRequest.errorMessage = '人間確認が承認されていないため、このAI作業は開始できません';
     agentRequest.updatedAt = nowIso();
     await saveState(state);
     response.status(409).json({ error: agentRequest.errorMessage, state });
