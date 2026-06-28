@@ -1270,7 +1270,7 @@ watch(
       <div class="status-main">
         <div>
           <p class="eyebrow">Process Active</p>
-          <h2 class="glitch-title" :data-t="hudStatusText">{{ hudStatusText }}</h2>
+          <h2 class="glitch-title">{{ hudStatusText }}</h2>
         </div>
         <p v-if="hudVisibleStatusMessage" class="status-message">{{ hudVisibleStatusMessage }}</p>
         <p v-if="store.errorMessage" class="error-message">{{ store.errorMessage }}</p>
@@ -1982,33 +1982,10 @@ h2 {
 }
 
 .glitch-title {
-  position: relative;
   width: fit-content;
   max-width: 100%;
   overflow-wrap: anywhere;
-}
-
-.glitch-title::before,
-.glitch-title::after {
-  content: attr(data-t);
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  overflow: hidden;
-  pointer-events: none;
-}
-
-.glitch-title::before {
-  color: var(--cyan);
-  clip-path: inset(0 0 55% 0);
-  animation: glitch 3s infinite steps(2);
-}
-
-.glitch-title::after {
-  color: var(--red);
-  clip-path: inset(55% 0 0 0);
-  animation: glitch 2.4s infinite steps(2) reverse;
+  text-shadow: 0 0 16px color-mix(in srgb, var(--cyan) 50%, transparent);
 }
 
 .status-message,
