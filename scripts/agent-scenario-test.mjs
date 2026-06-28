@@ -1180,6 +1180,50 @@ function assertApprovedReviewKinds(state, requestDraftId, kinds, label) {
   }
 }
 
+function assertCopiedReviewReferencesPointToCopiedDraft(
+  state,
+  sourceDraftId,
+  copiedDraftId,
+  expectedStartIndex,
+  label
+) {
+  const sourceRequests = agentRequestsForDraft(state, sourceDraftId).slice(0, expectedStartIndex);
+  const sourceAgentRequestIds = new Set(sourceRequests.map((request) => request.id));
+  const sourceFileRefIds = new Set(sourceRequests.map((request) => request.result?.fileRefId).filter(Boolean));
+  const sourceOutputIds = new Set(sourceRequests.map((request) => request.result?.outputId).filter(Boolean));
+
+  const copiedReviews = state.controlReviewItems.filter(
+    (review) => review.requestDraftId === copiedDraftId && review.status === 'approved'
+  );
+  assertScenario(copiedReviews.length > 0, `${label}: コピーされた承認済み確認項目がない`);
+  for (const review of copiedReviews) {
+    const decisionLog = state.decisionLogs.find((item) => item.id === review.decisionLogId);
+    assertScenario(decisionLog, `${label}: コピーされた確認項目の判断ログが見つからない`);
+
+    const references = [
+      ...review.evidenceRefs,
+      ...review.options.flatMap((option) => option.evidenceRefs),
+      ...decisionLog.evidenceRefs,
+      ...decisionLog.inputRefs,
+      ...decisionLog.artifactRefs
+    ];
+    for (const reference of references) {
+      if (reference.kind === 'request_draft') {
+        assertScenario(reference.refId === copiedDraftId, `${label}: 確認ログが元の編集コピーを参照している`);
+      }
+      if (reference.kind === 'agent_request') {
+        assertScenario(!sourceAgentRequestIds.has(reference.refId), `${label}: 確認ログが元のAI工程を参照している`);
+      }
+      if (reference.kind === 'file_ref') {
+        assertScenario(!sourceFileRefIds.has(reference.refId), `${label}: 確認ログが元の成果物参照を参照している`);
+      }
+      if (reference.kind === 'output') {
+        assertScenario(!sourceOutputIds.has(reference.refId), `${label}: 確認ログが元の成果物出力を参照している`);
+      }
+    }
+  }
+}
+
 function assertMaterialReviewText(review, label) {
   assertScenario(
     review.title === '切り口と編集元場面の確認',
@@ -1246,6 +1290,13 @@ async function assertCopiedRestart(apiBaseUrl, runtimeDir, sourceDraftId, scope,
   assertScenario(
     queuedAfterRestart[0]?.type === expectedStartType,
     `${scope}: 期待した工程から再開していない`
+  );
+  assertCopiedReviewReferencesPointToCopiedDraft(
+    response.state,
+    sourceDraftId,
+    copiedDraft.id,
+    expectedStartIndex,
+    scope
   );
 
   return copiedDraft;

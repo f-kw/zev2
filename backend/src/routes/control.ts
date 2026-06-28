@@ -1233,6 +1233,8 @@ function copyApprovedReviewsForCopiedRequests(
   state: LoadedState,
   requestDraftId: string,
   copiedRequestIdsBySourceId: Map<string, string>,
+  copiedFileRefIdsBySourceId: Map<string, string>,
+  copiedOutputIdsBySourceId: Map<string, string>,
   createdAt: string
 ): {
   decisionLogs: DecisionLog[];
@@ -1259,6 +1261,29 @@ function copyApprovedReviewsForCopiedRequests(
     const decisionLogId = createId('decision');
     const humanReviewActionId = createId('human_review');
     const controlReviewItemId = createId('review');
+    const remapReferences = (references: ControlReference[] = []) => references.map((reference) => {
+      if (reference.kind === 'request_draft') {
+        return { ...reference, refId: requestDraftId };
+      }
+
+      if (reference.kind === 'agent_request') {
+        return { ...reference, refId: copiedRequestIdsBySourceId.get(reference.refId) ?? reference.refId };
+      }
+
+      if (reference.kind === 'file_ref') {
+        return { ...reference, refId: copiedFileRefIdsBySourceId.get(reference.refId) ?? reference.refId };
+      }
+
+      if (reference.kind === 'output') {
+        return { ...reference, refId: copiedOutputIdsBySourceId.get(reference.refId) ?? reference.refId };
+      }
+
+      return { ...reference };
+    });
+    const copiedReviewOptions = sourceReview.options.map((option) => ({
+      ...option,
+      evidenceRefs: remapReferences(option.evidenceRefs)
+    }));
 
     const copiedDecisionLog: DecisionLog = sourceDecisionLog
       ? {
@@ -1266,6 +1291,9 @@ function copyApprovedReviewsForCopiedRequests(
           id: decisionLogId,
           requestDraftId,
           agentRequestId: copiedAgentRequestId,
+          evidenceRefs: remapReferences(sourceDecisionLog.evidenceRefs),
+          inputRefs: remapReferences(sourceDecisionLog.inputRefs),
+          artifactRefs: remapReferences(sourceDecisionLog.artifactRefs),
           createdAt
         }
       : {
@@ -1277,9 +1305,9 @@ function copyApprovedReviewsForCopiedRequests(
           decisionType: sourceReview.kind,
           decision: `${sourceReview.title}を引き継ぐ`,
           reason: sourceReview.reason,
-          evidenceRefs: [...sourceReview.evidenceRefs],
+          evidenceRefs: remapReferences(sourceReview.evidenceRefs),
           inputRefs: [],
-          artifactRefs: [...sourceReview.evidenceRefs],
+          artifactRefs: remapReferences(sourceReview.evidenceRefs),
           proposedNextState: sourceReview.proposedNextState,
           requiresHumanReview: true,
           humanQuestion: sourceReview.humanQuestion,
@@ -1304,6 +1332,8 @@ function copyApprovedReviewsForCopiedRequests(
       agentRequestId: copiedAgentRequestId,
       status: 'approved',
       decisionLogId,
+      evidenceRefs: remapReferences(sourceReview.evidenceRefs),
+      options: copiedReviewOptions,
       resolvedAt: createdAt,
       resolvedByActionId: humanReviewActionId,
       createdAt,
@@ -1338,6 +1368,8 @@ async function createCopiedEditRestart(
   const fileRefs: FileRef[] = [];
   const outputs: OutputEntity[] = [];
   const copiedRequestIdsBySourceId = new Map<string, string>();
+  const copiedFileRefIdsBySourceId = new Map<string, string>();
+  const copiedOutputIdsBySourceId = new Map<string, string>();
   let dependsOnAgentRequestId: string | undefined;
 
   for (const step of WORKFLOW_STEPS.slice(0, startIndex)) {
@@ -1361,9 +1393,17 @@ async function createCopiedEditRestart(
     copiedRequestIdsBySourceId.set(sourceRequest.id, copied.request.id);
     if (copied.fileRef) {
       fileRefs.push(copied.fileRef);
+      const sourceFileRefId = sourceRequest.result?.fileRefId;
+      if (sourceFileRefId) {
+        copiedFileRefIdsBySourceId.set(sourceFileRefId, copied.fileRef.id);
+      }
     }
     if (copied.output) {
       outputs.push(copied.output);
+      const sourceOutputId = sourceRequest.result?.outputId;
+      if (sourceOutputId) {
+        copiedOutputIdsBySourceId.set(sourceOutputId, copied.output.id);
+      }
     }
     dependsOnAgentRequestId = copied.request.id;
   }
@@ -1378,6 +1418,8 @@ async function createCopiedEditRestart(
     state,
     copiedDraft.id,
     copiedRequestIdsBySourceId,
+    copiedFileRefIdsBySourceId,
+    copiedOutputIdsBySourceId,
     createdAt
   );
 
