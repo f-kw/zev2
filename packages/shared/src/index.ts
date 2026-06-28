@@ -530,6 +530,10 @@ export function buildWebGeminiReviewPromptText(purpose: string | undefined): str
   ].join('\n');
 }
 
+export function buildWebGeminiExternalReviewCommand(requestDraftId: string): string {
+  return `corepack pnpm run web-gemini:review:execute -- --draft-id=${requestDraftId}`;
+}
+
 export function createRequestDraft(
   input: RequestDraftInput,
   now: string,

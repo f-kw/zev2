@@ -6,7 +6,10 @@ import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import net from 'node:net';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { buildWebGeminiReviewPromptText } from '../packages/shared/dist/index.js';
+import {
+  buildWebGeminiExternalReviewCommand,
+  buildWebGeminiReviewPromptText
+} from '../packages/shared/dist/index.js';
 
 const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const runtimeDir = process.env.ZEV2_RUNTIME_DIR
@@ -47,10 +50,6 @@ function wait(milliseconds) {
   return new Promise((resolve) => {
     setTimeout(resolve, milliseconds);
   });
-}
-
-function externalReviewCommandForDraft(draftId) {
-  return `corepack pnpm run web-gemini:review:execute -- --draft-id=${draftId}`;
 }
 
 class CdpClient {
@@ -654,7 +653,7 @@ async function main() {
   }
 
   const promptText = buildPrompt(target.draft);
-  const externalReviewCommand = externalReviewCommandForDraft(target.draft.id);
+  const externalReviewCommand = buildWebGeminiExternalReviewCommand(target.draft.id);
   const promptPath = path.join(runtimeDir, 'artifacts', target.draft.id, promptFileName);
   await mkdir(path.dirname(promptPath), { recursive: true });
   await writeFile(promptPath, `${promptText}\n`, 'utf8');

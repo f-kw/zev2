@@ -18,6 +18,7 @@ import {
   type HumanReviewActionType,
   type OutputEntity,
   type RequestDraft,
+  buildWebGeminiExternalReviewCommand,
   buildWebGeminiReviewPromptText,
   createAgentRequestsFromDraft,
   createRequestDraft,
@@ -93,10 +94,6 @@ const artifactUrlPrefix = '/api/artifacts/';
 const webGeminiReviewFileName = 'web-gemini-review.json';
 const webGeminiReviewRunLogFileName = 'web-gemini-review-run.json';
 const webGeminiReviewPromptFileName = 'web-gemini-review-prompt.md';
-
-function webGeminiExternalReviewCommand(requestDraftId: string): string {
-  return `corepack pnpm run web-gemini:review:execute -- --draft-id=${requestDraftId}`;
-}
 
 function nowIso(): string {
   return new Date().toISOString();
@@ -344,7 +341,7 @@ async function prepareWebGeminiReviewRun(
     promptPath,
     blockedReasons: [],
     externalUploadRequired: true,
-    externalReviewCommand: webGeminiExternalReviewCommand(draft.id),
+    externalReviewCommand: buildWebGeminiExternalReviewCommand(draft.id),
     nextAction: 'レビュー対象動画と依頼文を確認しました。外部送信はまだ実行していません。'
   };
   await writeWebGeminiReviewRunLog(runLog);
