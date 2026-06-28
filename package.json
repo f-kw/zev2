@@ -11,11 +11,12 @@
     "build:shared": "corepack pnpm --filter @zev2/shared build",
     "runner:dry-run": "corepack pnpm --filter @zev2/agent-runner dry-run",
     "scenario:agent": "node scripts/agent-scenario-test.mjs",
+    "ui:contract:test": "node scripts/ui-contract-test.mjs",
     "web-gemini:review": "corepack pnpm run build:shared && node scripts/web-gemini-review-edge.mjs",
     "web-gemini:review:diagnose": "corepack pnpm run build:shared && node scripts/web-gemini-review-edge.mjs --cdp-diagnose-only",
     "web-gemini:review:execute": "corepack pnpm run build:shared && node scripts/web-gemini-review-edge.mjs --execute",
     "web-gemini:review:test": "corepack pnpm run build:shared && node scripts/web-gemini-review-script-test.mjs",
-    "test": "corepack pnpm run web-gemini:review:test && corepack pnpm run scenario:agent",
+    "test": "corepack pnpm run ui:contract:test && corepack pnpm run web-gemini:review:test && corepack pnpm run scenario:agent",
     "type-check": "corepack pnpm run build:shared && corepack pnpm --filter backend type-check && corepack pnpm --filter client type-check && corepack pnpm --filter @zev2/agent-runner type-check"
   },
   "pnpm": {

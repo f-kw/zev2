@@ -1,7 +1,7 @@
 # zev2 現在の実装
 
 作成日: 2026-05-31
-更新日: 2026-06-27
+更新日: 2026-06-29
 
 ## 目的
 
@@ -37,6 +37,10 @@ UIは依頼と状態を確認する
 - 微調整の後、UIで確認用動画を作ってよいか判断するまで動画生成へ進まない。
 - runnerが承認済み編集案から、断片ごとの画面枠を反映して複数箇所を連結したMP4を生成できる。
 - 修正依頼では、人間が最後に承認したところ以降のAI作成部分を作り直せる。
+- 完成動画に対して、Web Gemini演出レビューの準備、実行ログ保存、レビュー保存、レビュー反映による演出作成前からの作り直しができる。
+- Web Geminiレビューの準備、実行中、保存済み、反映済み、失敗は作業履歴と現在状態サマリで確認できる。
+- AI作業中の中止APIがあり、確認待ちも中止操作による却下として閉じられる。
+- 下書きごとの作業履歴APIで、AI判断、人間判断、外部レビュー、現在状態サマリを確認できる。
 - 承認後にdry-run runnerを自動起動できる。
 - AIエージェントはAPIで次の作業を取得できる。
 - AIエージェントはAPIで作業を取得済みにできる。
@@ -53,14 +57,13 @@ UIは依頼と状態を確認する
 - backend内でLLMを実行しない。
 - backend内で動画生成を実行しない。
 - backend内でGemini APIによる演出作成や完成品レビューを実行しない。
-- 完成品レビュー用のWeb版Gemini接続はまだない。
 - API契約テストはまだない。
 - claimの強い排他制御はまだない。
 - claimのタイムアウト復旧はまだない。
-- キャンセルAPIはまだない。
 - 認証と権限管理はまだない。
 - 成果物本体の保存APIはまだない。
-- 詳細な操作ログや監査履歴はまだない。
+- 投稿可能化、公開、最終完了の承認ゲートはまだない。
+- Web Geminiへの実アップロードは外部送信を伴うため、準備確認とは分けて明示実行として扱う。
 - Gemini API接続は `@google/genai` を使う。APIキー指定とVertex AI指定の両方を同じSDK経路で扱う。
 
 ## UI
@@ -105,6 +108,12 @@ POST /api/request-drafts/:id/approve
 GET /api/health
 GET /api/workflow
 GET /api/state
+GET /api/request-drafts/:id/activity
+GET /api/request-drafts/:id/web-gemini-review
+POST /api/request-drafts/:id/web-gemini-review/prepare
+POST /api/request-drafts/:id/web-gemini-review
+POST /api/request-drafts/:id/apply-web-gemini-review
+POST /api/request-drafts/:id/cancel-agent-work
 ```
 
 詳細は `docs/ai-agent-api.md` にまとめている。
