@@ -695,6 +695,31 @@ function latestOutputVideoFileRef(state: LoadedState, requestDraftId: string): F
   return renderRequest ? fileRefForAgentRequest(state, renderRequest) : undefined;
 }
 
+async function validateWebGeminiOutputVideo(
+  draft: RequestDraft,
+  outputVideo: FileRef | undefined
+): Promise<string | undefined> {
+  if (!outputVideo) {
+    return '生成済み動画がありません';
+  }
+
+  if (outputVideo.kind !== 'output_video') {
+    return 'Web Geminiレビュー対象が完成動画ではありません';
+  }
+
+  const validation = await validateArtifactFileRefForKind(
+    draft.id,
+    'output_video',
+    outputVideo.uri,
+    outputVideo.mimeType
+  );
+  if ('error' in validation) {
+    return `Web Geminiレビュー対象の完成動画を確認できません: ${validation.error}`;
+  }
+
+  return undefined;
+}
+
 function currentAgentRequestsForDraft(state: LoadedState, requestDraftId: string): AgentRequest[] {
   return state.agentRequests
     .filter((request) => request.requestDraftId === requestDraftId && request.status !== 'superseded')
@@ -2377,6 +2402,11 @@ router.post('/request-drafts/:id/web-gemini-review/prepare', async (request, res
     response.status(409).json({ error: '生成済み動画がないため、Web Geminiレビュー準備を作れません', state });
     return;
   }
+  const outputVideoError = await validateWebGeminiOutputVideo(draft, outputVideo);
+  if (outputVideoError) {
+    response.status(409).json({ error: outputVideoError, state });
+    return;
+  }
 
   try {
     const runLog = await prepareWebGeminiReviewRun(draft, outputVideo, nowIso());
@@ -2402,6 +2432,13 @@ router.get('/request-drafts/:id/web-gemini-review', async (request, response) =>
     return;
   }
   const outputVideo = latestOutputVideoFileRef(state, draft.id);
+  if (outputVideo) {
+    const outputVideoError = await validateWebGeminiOutputVideo(draft, outputVideo);
+    if (outputVideoError) {
+      response.status(409).json({ error: outputVideoError, state });
+      return;
+    }
+  }
 
   const reviewResult = await readWebGeminiReviewArtifact(draft.id);
   if ('error' in reviewResult) {
@@ -2453,6 +2490,11 @@ router.post('/request-drafts/:id/web-gemini-review', async (request, response) =
   const outputVideo = latestOutputVideoFileRef(state, draft.id);
   if (!outputVideo) {
     response.status(409).json({ error: '生成済み動画がないため、Web Geminiレビューを保存できません', state });
+    return;
+  }
+  const outputVideoError = await validateWebGeminiOutputVideo(draft, outputVideo);
+  if (outputVideoError) {
+    response.status(409).json({ error: outputVideoError, state });
     return;
   }
 
@@ -2535,6 +2577,11 @@ router.post('/request-drafts/:id/apply-web-gemini-review', async (request, respo
     return;
   }
   const outputVideo = latestOutputVideoFileRef(state, draft.id);
+  const outputVideoError = await validateWebGeminiOutputVideo(draft, outputVideo);
+  if (outputVideoError) {
+    response.status(409).json({ error: outputVideoError, state });
+    return;
+  }
   const reviewMismatch = ensureWebGeminiReviewMatchesOutputVideo(reviewResult.review, outputVideo);
   if (reviewMismatch) {
     response.status(409).json({ error: reviewMismatch.error, state });

@@ -1549,6 +1549,34 @@ async function assertWebGeminiReviewFeedbackLoop(apiBaseUrl, runtimeDir, sourceD
   const outputRequest = agentRequestsForDraft(state, sourceDraftId).find((request) => request.type === 'render_video');
   const outputFileRef = state.fileRefs.find((fileRef) => fileRef.id === outputRequest?.result?.fileRefId);
   assertScenario(outputFileRef?.uri, 'Web Geminiレビュー実行ログ用の完成動画参照が見つからない');
+  const outputVideoPath = artifactPathByUri(runtimeDir, outputFileRef.uri);
+  const originalOutputVideo = await readFile(outputVideoPath);
+
+  await writeFile(outputVideoPath, 'これはMP4ではないWeb Geminiレビュー対象動画です\n', 'utf8');
+  const invalidOutputPrepareError = await expectRequestJsonFailure(
+    apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/web-gemini-review/prepare`),
+    { method: 'POST' }
+  );
+  assertScenario(
+    invalidOutputPrepareError.includes('Web Geminiレビュー対象の完成動画を確認できません'),
+    '壊れた完成動画でWeb Geminiレビュー準備が成功扱いになっている'
+  );
+  const invalidOutputSaveError = await expectRequestJsonFailure(
+    apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/web-gemini-review`),
+    {
+      method: 'POST',
+      body: JSON.stringify({
+        promptText: '壊れた完成動画へのレビュー依頼',
+        reviewText: '壊れた動画を見たことにして保存しようとする'
+      })
+    }
+  );
+  assertScenario(
+    invalidOutputSaveError.includes('Web Geminiレビュー対象の完成動画を確認できません'),
+    '壊れた完成動画でWeb Geminiレビュー保存が成功扱いになっている'
+  );
+  await writeFile(outputVideoPath, originalOutputVideo);
+
   const runLogPath = path.join(runtimeDir, 'artifacts', sourceDraftId, 'web-gemini-review-run.json');
   await writeFile(runLogPath, `${JSON.stringify({
     draftId: sourceDraftId,
@@ -1782,6 +1810,20 @@ async function assertWebGeminiReviewFeedbackLoop(apiBaseUrl, runtimeDir, sourceD
       instructionText
     })
   });
+
+  await writeFile(outputVideoPath, 'これはMP4ではないWeb Gemini反映対象動画です\n', 'utf8');
+  const invalidOutputApplyError = await expectRequestJsonFailure(
+    apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/apply-web-gemini-review`),
+    {
+      method: 'POST',
+      body: JSON.stringify({ instructionText })
+    }
+  );
+  assertScenario(
+    invalidOutputApplyError.includes('Web Geminiレビュー対象の完成動画を確認できません'),
+    '壊れた完成動画でWeb Geminiレビュー反映が成功扱いになっている'
+  );
+  await writeFile(outputVideoPath, originalOutputVideo);
 
   const applied = await requestJson(apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/apply-web-gemini-review`), {
     method: 'POST',
