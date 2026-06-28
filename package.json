@@ -14,6 +14,7 @@
     "web-gemini:review": "node scripts/web-gemini-review-edge.mjs",
     "web-gemini:review:execute": "node scripts/web-gemini-review-edge.mjs --execute",
     "web-gemini:review:test": "node scripts/web-gemini-review-script-test.mjs",
+    "test": "pnpm run web-gemini:review:test && pnpm run scenario:agent",
     "type-check": "pnpm run build:shared && pnpm --filter backend type-check && pnpm --filter client type-check && pnpm --filter @zev2/agent-runner type-check"
   },
   "pnpm": {
