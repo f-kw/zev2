@@ -571,6 +571,24 @@ async function assertRetryControls(apiBaseUrl, runtimeDir) {
     wrongDraftArtifactError.includes('対象の編集コピー配下'),
     '別の編集コピー配下の成果物参照がAI工程完了で拒否されていない'
   );
+  const missingArtifactFileError = await expectRequestJsonFailure(
+    apiPath(apiBaseUrl, `/agent-requests/${missingArtifactPrepareRequest.id}/complete`),
+    {
+      method: 'POST',
+      body: JSON.stringify({
+        meaning: '存在しない成果物を成功扱いにしようとする',
+        fileRef: {
+          uri: `/api/artifacts/${missingArtifactDraft.id}/missing-source-video.mp4`,
+          mimeType: 'video/mp4',
+          access: 'internal'
+        }
+      })
+    }
+  );
+  assertScenario(
+    missingArtifactFileError.includes('成果物参照のファイルが見つかりません'),
+    '存在しない成果物参照がAI工程完了で拒否されていない'
+  );
   const missingArtifactCompleteError = await expectRequestJsonFailure(
     apiPath(apiBaseUrl, `/agent-requests/${missingArtifactPrepareRequest.id}/complete`),
     {

@@ -1,6 +1,6 @@
 import express from 'express';
 import { nanoid } from 'nanoid';
-import { copyFile, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
+import { access, copyFile, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import {
   ARTIFACT_FILE_NAME_BY_KIND,
@@ -191,16 +191,23 @@ function artifactUrl(requestDraftId: string, fileName: string): string {
   return `${artifactUrlPrefix}${encodeURIComponent(requestDraftId)}/${encodeURIComponent(fileName)}`;
 }
 
-function validateCompletionFileRefUri(agentRequest: AgentRequest, uri: string): string | undefined {
+async function validateCompletionFileRefUri(agentRequest: AgentRequest, uri: string): Promise<string | undefined> {
   const expectedPrefix = `${artifactUrlPrefix}${encodeURIComponent(agentRequest.requestDraftId)}/`;
   if (!uri.startsWith(expectedPrefix)) {
     return '成果物参照は対象の編集コピー配下に保存してください';
   }
 
+  let artifactPath = '';
   try {
-    artifactPathByUrl(uri);
+    artifactPath = artifactPathByUrl(uri);
   } catch {
     return '成果物参照のURIが不正です';
+  }
+
+  try {
+    await access(artifactPath);
+  } catch {
+    return '成果物参照のファイルが見つかりません';
   }
 
   return undefined;
@@ -2086,7 +2093,7 @@ router.post('/agent-requests/:id/complete', async (request, response) => {
     response.status(400).json({ error: 'AI操作の完了には成果物参照が必要です', state });
     return;
   }
-  const fileRefUriError = validateCompletionFileRefUri(agentRequest, input.fileRef.uri.trim());
+  const fileRefUriError = await validateCompletionFileRefUri(agentRequest, input.fileRef.uri.trim());
   if (fileRefUriError) {
     response.status(400).json({ error: fileRefUriError, state });
     return;
