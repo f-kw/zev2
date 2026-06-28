@@ -577,6 +577,23 @@ const activityDialogTitle = computed(() =>
   currentDraft.value ? readablePurposeForWebGeminiReview(currentDraft.value.purpose) : '現在の下書き'
 );
 
+const webGeminiActivityRefreshKey = computed(() => {
+  const runLog = webGeminiRunLog.value;
+  if (!runLog) {
+    return webGeminiReviewMessage.value;
+  }
+
+  return [
+    runLog.status,
+    runLog.createdAt,
+    runLog.outputVideoUri,
+    runLog.reviewCreatedAt ?? '',
+    runLog.appliedAt ?? '',
+    runLog.nextAction ?? '',
+    runLog.blockedReasons.join('/')
+  ].join('|');
+});
+
 const requestActivityRefreshKey = computed(() => {
   const draft = currentDraft.value;
   if (!draft) {
@@ -1162,7 +1179,11 @@ watch(
 );
 
 watch(
-  () => `${showRequestPage.value ? 'request' : 'workspace'}:${requestActivityRefreshKey.value}`,
+  () => [
+    showRequestPage.value ? 'request' : 'workspace',
+    requestActivityRefreshKey.value,
+    webGeminiActivityRefreshKey.value
+  ].join(':'),
   () => {
     void refreshRequestActivity();
   },
