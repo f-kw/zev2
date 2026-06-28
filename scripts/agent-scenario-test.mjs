@@ -1759,6 +1759,34 @@ async function assertWebGeminiReviewFeedbackLoop(apiBaseUrl, runtimeDir, sourceD
   );
   assertScenario(fetched.runLog?.status === 'saved', '取得したWeb Geminiレビュー実行ログがsavedではない');
 
+  const reviewPathForActivity = path.join(runtimeDir, 'artifacts', sourceDraftId, 'web-gemini-review.json');
+  const savedReviewFile = await readFile(reviewPathForActivity, 'utf8');
+  const savedRunLogFile = await readFile(runLogPath, 'utf8');
+  await writeFile(reviewPathForActivity, '{"draftId": "broken_review"', 'utf8');
+  const brokenReviewActivity = await requestJson(apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/activity`));
+  assertScenario(
+    brokenReviewActivity.events.some(
+      (event) =>
+        event.kind === 'web_gemini_review_status' &&
+        event.title === 'Web Geminiレビュー本文を確認できません'
+    ),
+    '壊れたWeb Geminiレビュー本文が監査タイムラインで追えない'
+  );
+  await writeFile(reviewPathForActivity, savedReviewFile, 'utf8');
+
+  await rm(runLogPath);
+  const reviewWithoutRunLogActivity = await requestJson(apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/activity`));
+  assertScenario(
+    reviewWithoutRunLogActivity.events.some(
+      (event) =>
+        event.kind === 'web_gemini_review_status' &&
+        event.title === 'Web Geminiレビュー実行ログを確認できません' &&
+        event.detail.includes('レビュー本文はあります')
+    ),
+    'Web Geminiレビュー本文だけが残った状態が監査タイムラインで追えない'
+  );
+  await writeFile(runLogPath, savedRunLogFile, 'utf8');
+
   const statePath = path.join(runtimeDir, 'state.json');
   const stateBeforeMissingOutputVideo = await readJsonFile(statePath);
   await writeJsonFile(statePath, {

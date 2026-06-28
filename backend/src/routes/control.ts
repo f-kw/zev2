@@ -1025,14 +1025,15 @@ function buildWebGeminiReviewActivity(
 
 function buildWebGeminiReviewActivityError(
   draft: RequestDraft,
-  error: string
+  error: string,
+  title = 'Web Geminiレビュー実行ログを確認できません'
 ): RequestDraftActivityEvent {
   return {
     id: `web-gemini-review:${draft.id}:error`,
     kind: 'web_gemini_review_status',
     occurredAt: draft.updatedAt,
     actor: 'system',
-    title: 'Web Geminiレビュー実行ログを確認できません',
+    title,
     detail: compactActivityText(error, '実行ログの保存内容を確認してください'),
     requestDraftId: draft.id
   };
@@ -2145,17 +2146,41 @@ router.get('/request-drafts/:id/activity', async (request, response) => {
   }
 
   const events = buildRequestDraftActivity(state, draft);
+  const webGeminiReviewResult = await readWebGeminiReviewArtifact(draft.id);
+  const outputVideo = latestOutputVideoFileRef(state, draft.id);
+  if ('error' in webGeminiReviewResult) {
+    events.push(buildWebGeminiReviewActivityError(
+      draft,
+      webGeminiReviewResult.error,
+      'Web Geminiレビュー本文を確認できません'
+    ));
+  } else if (webGeminiReviewResult.review) {
+    const mismatch = ensureWebGeminiReviewMatchesOutputVideo(webGeminiReviewResult.review, outputVideo);
+    if (mismatch) {
+      events.push(buildWebGeminiReviewActivityError(
+        draft,
+        mismatch.error,
+        'Web Geminiレビュー本文を確認できません'
+      ));
+    }
+  }
+
   const webGeminiRunLogResult = await readWebGeminiReviewRunLog(draft.id);
   if ('error' in webGeminiRunLogResult) {
     events.push(buildWebGeminiReviewActivityError(draft, webGeminiRunLogResult.error));
   } else if (webGeminiRunLogResult.runLog) {
-    const outputVideo = latestOutputVideoFileRef(state, draft.id);
     const mismatch = ensureWebGeminiRunLogMatchesOutputVideo(webGeminiRunLogResult.runLog, outputVideo);
     events.push(
       mismatch
         ? buildWebGeminiReviewActivityError(draft, mismatch.error)
         : buildWebGeminiReviewActivity(draft, webGeminiRunLogResult.runLog)
     );
+  } else if (!('error' in webGeminiReviewResult) && webGeminiReviewResult.review) {
+    events.push(buildWebGeminiReviewActivityError(
+      draft,
+      'Web Geminiレビュー本文はありますが、実行ログがありません。レビューを取り直してください',
+      'Web Geminiレビュー実行ログを確認できません'
+    ));
   }
 
   response.json({
