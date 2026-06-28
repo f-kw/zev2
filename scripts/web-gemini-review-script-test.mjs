@@ -57,7 +57,7 @@ async function writeRuntimeFixture(runtimeDir) {
       { id: 'file_empty', uri: '/api/artifacts/draft_empty/output.mp4' }
     ],
     requestDrafts: [
-      { id: 'draft_success', purpose: '成功ログ確認用ショート' },
+      { id: 'draft_success', purpose: '成功ログ確認用ショート\nやり直し理由: 前回レビューの改善指示' },
       { id: 'draft_empty', purpose: '失敗ログ確認用ショート' }
     ],
     agentRequests: [
@@ -107,6 +107,13 @@ async function assertSaveSuccess(runtimeDir) {
   const runLog = await readJson(path.join(runtimeDir, 'artifacts', 'draft_success', 'web-gemini-review-run.json'));
   assertTest(runLog.status === 'saved', 'レビュー保存ログがsavedではない');
   assertTest(runLog.reviewPath.endsWith('web-gemini-review.json'), 'レビュー保存先がログに残っていない');
+
+  const promptText = await readFile(path.join(runtimeDir, 'artifacts', 'draft_success', 'web-gemini-review-prompt.md'), 'utf8');
+  assertTest(
+    promptText.includes('動画の目的: 成功ログ確認用ショート'),
+    'Web Geminiレビュー依頼文が人間向けの目的を使っていない'
+  );
+  assertTest(!promptText.includes('やり直し理由:'), 'Web Geminiレビュー依頼文にやり直し理由が混ざっている');
 }
 
 async function assertSaveFailure(runtimeDir) {

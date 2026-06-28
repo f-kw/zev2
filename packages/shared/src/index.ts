@@ -500,6 +500,36 @@ export function validateRequestDraftInput(input: Partial<RequestDraftInput>): st
   return errors;
 }
 
+export function readablePurposeForWebGeminiReview(purpose: string | undefined): string {
+  const purposeLine = String(purpose ?? '')
+    .split('\n')
+    .map((line) => line.trim())
+    .find((line) => line && !line.startsWith('やり直し理由:') && !line.startsWith('編集元場面の探し直し指示:'));
+
+  return purposeLine || 'ショート動画を作成する';
+}
+
+export function buildWebGeminiReviewPromptText(purpose: string | undefined): string {
+  return [
+    'この動画をレビューしてください。対象は演出だけです。',
+    '',
+    `動画の目的: ${readablePurposeForWebGeminiReview(purpose)}`,
+    '',
+    'レビュー対象:',
+    '- テロップの読みやすさ、表示タイミング、消えるタイミング',
+    '- 顔、ゲーム画面、テロップが重ならない画面構成',
+    '- 複数シーンのつなぎ、テンポ、初見で意味が伝わるか',
+    '- ショート動画として見せ場が伝わるか',
+    '',
+    'レビュー対象外:',
+    '- テーマ選択、編集元場面の選択',
+    '- 元動画、文字起こし、音声品質、エンコード、投稿可否、バグ調査',
+    '',
+    '出力は、演出作成へ渡せる改善指示として箇条書きにしてください。',
+    '各項目は「変えること」「理由」「対象箇所の説明」が分かるようにしてください。'
+  ].join('\n');
+}
+
 export function createRequestDraft(
   input: RequestDraftInput,
   now: string,
