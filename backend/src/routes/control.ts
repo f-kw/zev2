@@ -318,6 +318,20 @@ function buildWebGeminiReviewPrompt(draft: RequestDraft): string {
   ].join('\n');
 }
 
+function webGeminiReviewRestartReason(
+  review: WebGeminiReviewArtifact,
+  instructionText: string
+): string {
+  return [
+    'Web Geminiの演出レビューを反映して、演出作成前から作り直す',
+    `レビュー対象動画: ${review.outputVideoUri}`,
+    `レビュー保存日時: ${review.createdAt}`,
+    '',
+    '演出作成へ渡す改善指示:',
+    instructionText
+  ].join('\n');
+}
+
 async function prepareWebGeminiReviewRun(
   draft: RequestDraft,
   outputVideo: FileRef,
@@ -1761,10 +1775,7 @@ router.post('/request-drafts/:id/apply-web-gemini-review', async (request, respo
   }
 
   const createdAt = nowIso();
-  const reason = [
-    'Web Geminiの演出レビューを反映して、演出作成前から作り直す',
-    instructionText
-  ].join('\n\n');
+  const reason = webGeminiReviewRestartReason(reviewResult.review, instructionText);
   const restart = await createCopiedEditRestart(
     state,
     draft.id,

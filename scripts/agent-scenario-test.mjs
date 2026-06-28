@@ -1052,6 +1052,14 @@ async function assertWebGeminiReviewFeedbackLoop(apiBaseUrl, runtimeDir, sourceD
     copiedDraft.purpose.includes(instructionText),
     'Web Geminiレビューの改善指示が編集コピーに残っていない'
   );
+  assertScenario(
+    copiedDraft.purpose.includes('レビュー対象動画: /api/artifacts/'),
+    'Web Geminiレビューの対象動画が編集コピーに残っていない'
+  );
+  assertScenario(
+    copiedDraft.purpose.includes('演出作成へ渡す改善指示:'),
+    'Web Geminiレビューの改善指示見出しが編集コピーに残っていない'
+  );
 
   const copiedRequests = agentRequestsForDraft(applied.state, copiedDraft.id);
   const expectedStartIndex = workflowTypes.indexOf('create_edit_plan');
