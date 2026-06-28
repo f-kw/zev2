@@ -320,6 +320,157 @@ async function createApprovedScenarioDraft(apiBaseUrl, purpose) {
   return created.draft;
 }
 
+async function writeApiContractArtifact(runtimeDir, draftId, fileName, content) {
+  const artifactPath = path.join(runtimeDir, 'artifacts', draftId, fileName);
+  await mkdir(path.dirname(artifactPath), { recursive: true });
+  await writeFile(artifactPath, content);
+  return `/api/artifacts/${draftId}/${fileName}`;
+}
+
+function minimalMp4Header() {
+  return Buffer.from([0x00, 0x00, 0x00, 0x18, 0x66, 0x74, 0x79, 0x70, 0x69, 0x73, 0x6f, 0x6d]);
+}
+
+async function assertAgentRequestApiContract(apiBaseUrl, runtimeDir) {
+  const draft = await createApprovedScenarioDraft(apiBaseUrl, 'AIエージェントAPI契約を固定する');
+  const initialState = await requestJson(apiPath(apiBaseUrl, '/state'));
+  const requests = agentRequestsForDraft(initialState, draft.id);
+  assertScenario(requests.length === workflowTypes.length, 'API契約: 承認後に7工程のAI作業が作られていない');
+  assertScenario(
+    requests.map((request) => request.type).join(',') === workflowTypes.join(','),
+    'API契約: AI作業の工程順が7工程定義と一致していない'
+  );
+
+  const firstRequest = requests[0];
+  const secondRequest = requests[1];
+  const nextBeforeClaim = await requestJson(apiPath(apiBaseUrl, '/agent-requests/next'));
+  assertScenario(
+    nextBeforeClaim.request?.id === firstRequest.id,
+    'API契約: nextが前工程完了済みの最初の作業を返していない'
+  );
+
+  const completeBeforeClaimError = await expectRequestJsonFailure(
+    apiPath(apiBaseUrl, `/agent-requests/${firstRequest.id}/complete`),
+    {
+      method: 'POST',
+      body: JSON.stringify({
+        meaning: '取得前に完了しようとする',
+        fileRef: {
+          uri: `/api/artifacts/${draft.id}/source-video.mp4`,
+          mimeType: 'video/mp4',
+          access: 'internal'
+        }
+      })
+    }
+  );
+  assertScenario(
+    completeBeforeClaimError.includes('取得中のAI操作だけ完了できます'),
+    'API契約: claim前のcompleteが正しい理由で拒否されていない'
+  );
+
+  const dependencyClaimError = await expectRequestJsonFailure(
+    apiPath(apiBaseUrl, `/agent-requests/${secondRequest.id}/claim`),
+    { method: 'POST' }
+  );
+  assertScenario(
+    dependencyClaimError.includes('前工程の完了待ちです'),
+    'API契約: 前工程未完了のclaimが正しい理由で拒否されていない'
+  );
+
+  const claimed = await requestJson(apiPath(apiBaseUrl, `/agent-requests/${firstRequest.id}/claim`), {
+    method: 'POST'
+  });
+  assertScenario(claimed.request?.status === 'running', 'API契約: claimで作業が取得中になっていない');
+
+  const duplicateClaimError = await expectRequestJsonFailure(
+    apiPath(apiBaseUrl, `/agent-requests/${firstRequest.id}/claim`),
+    { method: 'POST' }
+  );
+  assertScenario(
+    duplicateClaimError.includes('このAI操作は取得できません'),
+    'API契約: running作業の二重claimが拒否されていない'
+  );
+
+  const missingFileRefError = await expectRequestJsonFailure(
+    apiPath(apiBaseUrl, `/agent-requests/${firstRequest.id}/complete`),
+    {
+      method: 'POST',
+      body: JSON.stringify({ meaning: '成果物参照なしで完了しようとする' })
+    }
+  );
+  assertScenario(
+    missingFileRefError.includes('AI操作の完了には成果物参照が必要です'),
+    'API契約: 成果物参照なしのcompleteが拒否されていない'
+  );
+
+  const sourceVideoUri = await writeApiContractArtifact(
+    runtimeDir,
+    draft.id,
+    'source-video.mp4',
+    minimalMp4Header()
+  );
+  const completed = await requestJson(apiPath(apiBaseUrl, `/agent-requests/${firstRequest.id}/complete`), {
+    method: 'POST',
+    body: JSON.stringify({
+      meaning: '対象動画をAI処理用入力として登録する',
+      fileRef: {
+        uri: sourceVideoUri,
+        mimeType: 'video/mp4',
+        access: 'internal'
+      }
+    })
+  });
+  assertScenario(completed.request?.status === 'succeeded', 'API契約: completeで作業が成功状態になっていない');
+  assertScenario(completed.fileRef?.kind === 'source_video', 'API契約: completeで工程種別に合う成果物参照が作られていない');
+  assertScenario(completed.output?.fileRefId === completed.fileRef.id, 'API契約: 出力記録が成果物参照へ結び付いていない');
+  assertScenario(
+    completed.state.fileRefs.some((fileRef) => fileRef.id === completed.fileRef.id),
+    'API契約: 成果物参照が状態へ保存されていない'
+  );
+
+  const nextAfterComplete = await requestJson(apiPath(apiBaseUrl, '/agent-requests/next'));
+  assertScenario(
+    nextAfterComplete.request?.id === secondRequest.id,
+    'API契約: 前工程完了後に次工程がnextから取得できない'
+  );
+
+  const claimedSecond = await requestJson(apiPath(apiBaseUrl, `/agent-requests/${secondRequest.id}/claim`), {
+    method: 'POST'
+  });
+  assertScenario(claimedSecond.request?.status === 'running', 'API契約: 次工程をclaimできない');
+
+  const failedWithoutReasonError = await expectRequestJsonFailure(
+    apiPath(apiBaseUrl, `/agent-requests/${secondRequest.id}/fail`),
+    {
+      method: 'POST',
+      body: JSON.stringify({ message: '   ' })
+    }
+  );
+  assertScenario(
+    failedWithoutReasonError.includes('失敗理由が必要です'),
+    'API契約: 理由なしfailが拒否されていない'
+  );
+
+  const failed = await requestJson(apiPath(apiBaseUrl, `/agent-requests/${secondRequest.id}/fail`), {
+    method: 'POST',
+    body: JSON.stringify({ message: 'API契約テストとして失敗理由を保存する' })
+  });
+  assertScenario(failed.request?.status === 'failed', 'API契約: failで作業が失敗状態になっていない');
+  assertScenario(
+    failed.request.errorMessage === 'API契約テストとして失敗理由を保存する',
+    'API契約: failの失敗理由が保存されていない'
+  );
+
+  const missingRequestError = await expectRequestJsonFailure(
+    apiPath(apiBaseUrl, '/agent-requests/missing_agent_request/claim'),
+    { method: 'POST' }
+  );
+  assertScenario(
+    missingRequestError.includes('AI操作が見つかりません'),
+    'API契約: 存在しない作業IDのclaimが404系の理由で拒否されていない'
+  );
+}
+
 async function runDraftUntilReview(apiBaseUrl, runtimeDir, draftId, expectedKind) {
   for (let attempt = 0; attempt < 8; attempt += 1) {
     await runAgent(apiBaseUrl, runtimeDir);
@@ -2236,6 +2387,7 @@ async function main() {
 
   try {
     await assertRuntimeConfig(apiBaseUrl);
+    await assertAgentRequestApiContract(apiBaseUrl, runtimeDir);
     await scenarioAutomaticVideoCreation(apiBaseUrl, runtimeDir);
     console.log(`シナリオテスト成功: ${runtimeDir}`);
   } finally {

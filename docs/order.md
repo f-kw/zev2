@@ -11,11 +11,12 @@
 - 初期実装では各工程がdry-run成果物参照を返して完了する。
 - 確認済み: 承認APIが正常応答し、runnerがバックグラウンドで全作業を完了し、`GET /api/agent-requests/next` が `null` を返した。
 
-## task-002 AIエージェントAPI契約テストと仕様固定
+## task-002 AIエージェントAPI契約テストと仕様固定 実装済み
 
 - 対象: [task-002-AIエージェントAPI契約テストと仕様固定.md](./task-002-AIエージェントAPI契約テストと仕様固定.md)
 - task-001で作ったE2E dry-run経路をテストで固定する。
 - `next -> claim -> complete/fail`、全工程完了、成果物参照、失敗報告を対象にする。
+- 確認済み: シナリオテスト内で、依頼作成、承認、`next -> claim -> complete/fail`、前工程未完了の取得拒否、取得前完了の拒否、成果物参照保存、失敗理由保存、存在しない作業IDの拒否を確認する。
 
 ## task-003 成果物確認UIとFileRef最小表示
 
