@@ -218,6 +218,14 @@ const canApplyWebGeminiReview = computed(() =>
   )
 );
 
+const webGeminiPrepareButtonLabel = computed(() => {
+  if (activeWebGeminiAction.value === 'prepare_review') {
+    return '準備中';
+  }
+
+  return webGeminiReview.value ? 'レビューを取り直す' : 'レビュー準備を更新';
+});
+
 const webGeminiRunStatusTitle = computed(() => {
   const runLog = webGeminiRunLog.value;
   if (!runLog) {
@@ -1195,13 +1203,12 @@ watch(
                 </div>
                 <div class="web-gemini-header-actions">
                   <button
-                    v-if="!webGeminiReview"
                     type="button"
                     class="secondary-button"
                     :disabled="agentOperationLocked || webGeminiReviewLoading || activeWebGeminiAction === 'prepare_review'"
                     @click="prepareCurrentWebGeminiReview"
                   >
-                    {{ activeWebGeminiAction === 'prepare_review' ? '準備中' : 'レビュー準備を更新' }}
+                    {{ webGeminiPrepareButtonLabel }}
                   </button>
                   <button
                     type="button"

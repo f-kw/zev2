@@ -1,6 +1,6 @@
 import express from 'express';
 import { nanoid } from 'nanoid';
-import { copyFile, mkdir, readFile, writeFile } from 'node:fs/promises';
+import { copyFile, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import {
   ARTIFACT_FILE_NAME_BY_KIND,
@@ -278,6 +278,10 @@ async function readWebGeminiReviewPromptText(
 async function writeWebGeminiReviewArtifact(artifact: WebGeminiReviewArtifact): Promise<void> {
   await mkdir(path.dirname(webGeminiReviewPath(artifact.draftId)), { recursive: true });
   await writeFile(webGeminiReviewPath(artifact.draftId), `${JSON.stringify(artifact, null, 2)}\n`, 'utf8');
+}
+
+async function removeWebGeminiReviewArtifact(requestDraftId: string): Promise<void> {
+  await rm(webGeminiReviewPath(requestDraftId), { force: true });
 }
 
 async function writeWebGeminiReviewRunLog(runLog: WebGeminiReviewRunLog): Promise<void> {
@@ -1600,6 +1604,7 @@ router.post('/request-drafts/:id/web-gemini-review/prepare', async (request, res
 
   try {
     const runLog = await prepareWebGeminiReviewRun(draft, outputVideo, nowIso());
+    await removeWebGeminiReviewArtifact(draft.id);
     response.json({
       runLog,
       promptText: buildWebGeminiReviewPrompt(draft),
