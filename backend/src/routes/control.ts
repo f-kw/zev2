@@ -13,6 +13,7 @@ import {
   type ControlReviewItem,
   type ControlReviewKind,
   type DecisionLog,
+  type DecisionLogType,
   type FileRef,
   type HumanReviewAction,
   type HumanReviewActionType,
@@ -732,6 +733,45 @@ function humanReviewActionTitle(action: HumanReviewActionType): string {
   return `人間が${reviewActionLabel(action)}`;
 }
 
+function decisionTypeLabel(type: DecisionLogType): string {
+  if (type === 'theme_selection') {
+    return 'テーマ選択';
+  }
+
+  if (type === 'material_confirmation') {
+    return '切り口と編集元場面';
+  }
+
+  return '動画生成前確認';
+}
+
+function proposedNextStateLabel(state: string): string {
+  if (state === 'review_required') {
+    return '人間確認待ち';
+  }
+
+  return state.trim() || '次の状態を確認してください';
+}
+
+function decisionActivityTitle(decision: DecisionLog): string {
+  return `${decisionTypeLabel(decision.decisionType)}: ${decision.decision}`;
+}
+
+function decisionActivityDetail(decision: DecisionLog): string {
+  const parts = [
+    `理由: ${decision.reason}`,
+    `次: ${proposedNextStateLabel(decision.proposedNextState)}`
+  ];
+  if (decision.humanQuestion) {
+    parts.push(`確認: ${decision.humanQuestion}`);
+  }
+  if (decision.evidenceRefs.length > 0 || decision.artifactRefs.length > 0) {
+    parts.push('根拠: 参照あり');
+  }
+
+  return compactActivityText(parts.join(' / '), 'AIエージェントが判断を記録しました');
+}
+
 function webGeminiReviewRunTitle(status: WebGeminiReviewRunLog['status']): string {
   if (status === 'prepared') {
     return 'Web Geminiレビュー準備が完了';
@@ -877,8 +917,8 @@ function buildRequestDraftActivity(state: LoadedState, draft: RequestDraft): Req
       kind: 'agent_decision',
       occurredAt: decision.createdAt,
       actor: decision.actor,
-      title: 'AI判断を記録',
-      detail: compactActivityText(`${decision.decision}: ${decision.reason}`, 'AIエージェントが判断を記録しました'),
+      title: decisionActivityTitle(decision),
+      detail: decisionActivityDetail(decision),
       requestDraftId: draft.id,
       agentRequestId: decision.agentRequestId,
       decisionLogId: decision.id

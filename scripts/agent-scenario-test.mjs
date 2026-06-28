@@ -740,6 +740,20 @@ async function assertGeneratedDraftCompleted(apiBaseUrl, runtimeDir, draftId, la
     activity.events.some((event) => event.kind === 'human_review_action'),
     `${label}: 監査タイムラインで人間判断が追えない`
   );
+  const decisionEvents = activity.events.filter((event) => event.kind === 'agent_decision');
+  assertScenario(decisionEvents.length > 0, `${label}: 監査タイムラインでAI判断が追えない`);
+  assertScenario(
+    decisionEvents.every((event) => event.title !== 'AI判断を記録'),
+    `${label}: AI判断の見出しが固定文のままで判断内容を読めない`
+  );
+  assertScenario(
+    decisionEvents.some((event) => event.title.includes('テーマ選択') || event.title.includes('切り口')),
+    `${label}: AI判断の見出しから判断対象が読めない`
+  );
+  assertScenario(
+    decisionEvents.every((event) => event.detail.includes('次: 人間確認待ち') && event.detail.includes('確認:')),
+    `${label}: AI判断の詳細から次状態と人間への確認が読めない`
+  );
   assertScenario(
     activity.events.every((event) => typeof event.detail === 'string' && event.detail.length <= 180),
     `${label}: 監査タイムラインに長すぎる詳細が混ざっている`
