@@ -339,6 +339,27 @@ async function prepareWebGeminiReviewRun(
   return runLog;
 }
 
+async function writeWebGeminiReviewSaveFailureRunLog(
+  draft: RequestDraft,
+  outputVideo: FileRef,
+  errorMessage: string,
+  createdAt: string
+): Promise<WebGeminiReviewRunLog> {
+  const runLog: WebGeminiReviewRunLog = {
+    draftId: draft.id,
+    status: 'failed',
+    createdAt,
+    outputVideoUri: outputVideo.uri,
+    outputVideoPath: artifactPathByUrl(outputVideo.uri),
+    promptPath: webGeminiReviewPromptPath(draft.id),
+    blockedReasons: [errorMessage],
+    externalUploadRequired: false,
+    nextAction: 'Web Geminiレビューの保存に失敗しました。レビュー本文を確認してから再実行してください。'
+  };
+  await writeWebGeminiReviewRunLog(runLog);
+  return runLog;
+}
+
 async function copyArtifactFileForRestart(
   sourceFileRef: FileRef,
   requestDraftId: string
@@ -1641,11 +1662,6 @@ router.get('/request-drafts/:id/web-gemini-review', async (request, response) =>
 
 router.post('/request-drafts/:id/web-gemini-review', async (request, response) => {
   const reviewText = hasText(request.body?.reviewText) ? request.body.reviewText.trim() : '';
-  if (!reviewText) {
-    response.status(400).json({ error: 'Web Geminiの演出レビューが空です' });
-    return;
-  }
-
   const state = await loadState();
   const draft = findById(state.requestDrafts, request.params.id);
   if (!draft) {
@@ -1656,6 +1672,13 @@ router.post('/request-drafts/:id/web-gemini-review', async (request, response) =
   const outputVideo = latestOutputVideoFileRef(state, draft.id);
   if (!outputVideo) {
     response.status(409).json({ error: '生成済み動画がないため、Web Geminiレビューを保存できません', state });
+    return;
+  }
+
+  if (!reviewText) {
+    const errorMessage = 'Web Geminiの演出レビューが空です';
+    const runLog = await writeWebGeminiReviewSaveFailureRunLog(draft, outputVideo, errorMessage, nowIso());
+    response.status(400).json({ error: errorMessage, runLog, state });
     return;
   }
 

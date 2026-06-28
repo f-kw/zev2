@@ -927,6 +927,28 @@ async function assertWebGeminiReviewFeedbackLoop(apiBaseUrl, runtimeDir, sourceD
     'Web Geminiレビュー準備後に依頼文を取得APIから確認できない'
   );
 
+  const emptyReviewSaveError = await expectRequestJsonFailure(
+    apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/web-gemini-review`),
+    {
+      method: 'POST',
+      body: JSON.stringify({ promptText: '演出だけをレビューする', reviewText: '   ' })
+    }
+  );
+  assertScenario(
+    emptyReviewSaveError.includes('Web Geminiの演出レビューが空です'),
+    '空のWeb Geminiレビュー保存が失敗理由を返していない'
+  );
+  const emptyReviewRunLog = await requestJson(apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/web-gemini-review`));
+  assertScenario(emptyReviewRunLog.review === null, '空レビュー保存後にレビュー本体が保存されている');
+  assertScenario(
+    emptyReviewRunLog.runLog?.status === 'failed',
+    '空レビュー保存後の実行ログがfailedではない'
+  );
+  assertScenario(
+    emptyReviewRunLog.runLog.blockedReasons.includes('Web Geminiの演出レビューが空です'),
+    '空レビュー保存失敗理由が実行ログに残っていない'
+  );
+
   const instructionText = [
     '変えること: 冒頭のテロップを話し出しと同時に出す',
     '理由: 最初の一言より遅れて表示されると、見せ場の意味が伝わりにくい',
