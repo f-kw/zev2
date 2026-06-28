@@ -125,6 +125,16 @@ async function requestJson(url, init = {}) {
   return body;
 }
 
+async function expectRequestJsonFailure(url, init = {}) {
+  try {
+    await requestJson(url, init);
+  } catch (error) {
+    return error instanceof Error ? error.message : String(error);
+  }
+
+  throw new Error(`${init.method ?? 'GET'} ${url} が失敗すべき場面で成功している`);
+}
+
 async function startBackend(runtimeDir, port) {
   const output = [];
   const child = spawn('node', ['backend/dist/index.js'], {
@@ -828,6 +838,19 @@ async function assertWebGeminiReviewFeedbackLoop(apiBaseUrl, runtimeDir, sourceD
   const outputFileRef = state.fileRefs.find((fileRef) => fileRef.id === outputRequest?.result?.fileRefId);
   assertScenario(outputFileRef?.uri, 'Web Geminiレビュー実行ログ用の完成動画参照が見つからない');
   const runLogPath = path.join(runtimeDir, 'artifacts', sourceDraftId, 'web-gemini-review-run.json');
+  await writeFile(runLogPath, `${JSON.stringify({
+    draftId: sourceDraftId,
+    status: 'unknown',
+    createdAt: new Date().toISOString()
+  }, null, 2)}\n`, 'utf8');
+  const brokenRunLogError = await expectRequestJsonFailure(
+    apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/web-gemini-review`)
+  );
+  assertScenario(
+    brokenRunLogError.includes('Web Geminiレビュー実行ログの保存内容が壊れています'),
+    '壊れたWeb Geminiレビュー実行ログが成功扱いになっている'
+  );
+
   await writeFile(runLogPath, `${JSON.stringify({
     draftId: sourceDraftId,
     status: 'prepared',

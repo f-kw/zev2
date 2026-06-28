@@ -8,7 +8,12 @@ import {
   type ControlReviewItem,
   type RequestDraftInput
 } from '@zev2/shared';
-import { fetchWebGeminiReview, type WebGeminiReviewArtifact, type WebGeminiReviewRunLog } from './api';
+import {
+  fetchWebGeminiReview,
+  formatApiError,
+  type WebGeminiReviewArtifact,
+  type WebGeminiReviewRunLog
+} from './api';
 import { useControlQueueStore } from './stores/controlQueue';
 
 type AppPage = 'workspace' | 'request';
@@ -714,10 +719,10 @@ async function refreshWebGeminiReview() {
       webGeminiInstructionInput.value = result.review.instructionText;
       loadedWebGeminiReviewCreatedAt.value = result.review.createdAt;
     }
-  } catch {
+  } catch (error) {
     webGeminiReview.value = null;
     webGeminiRunLog.value = null;
-    webGeminiReviewMessage.value = 'レビュー状態を読めませんでした';
+    webGeminiReviewMessage.value = formatApiError(error);
   } finally {
     webGeminiReviewLoading.value = false;
   }

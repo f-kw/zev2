@@ -16,6 +16,31 @@ const api = axios.create({
   baseURL: '/api'
 });
 
+export function formatApiError(error: unknown): string {
+  const response = (error as {
+    response?: {
+      data?: {
+        error?: string;
+        errors?: string[];
+      };
+    };
+  }).response;
+
+  if (response?.data?.errors?.length) {
+    return response.data.errors.join(' / ');
+  }
+
+  if (response?.data?.error) {
+    return response.data.error;
+  }
+
+  if (error instanceof Error) {
+    return error.message;
+  }
+
+  return '処理の呼び出しに失敗しました';
+}
+
 export interface WebGeminiReviewArtifact {
   draftId: string;
   source: 'edge-web-gemini';
