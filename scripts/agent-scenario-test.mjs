@@ -201,6 +201,7 @@ async function approveRequiredReview(apiBaseUrl, draftId) {
   const state = await requestJson(apiPath(apiBaseUrl, '/state'));
   const review = latestReview(state, draftId, undefined, 'review_required');
   assertScenario(review, `${draftId}: 承認すべき確認工程が見つからない`);
+  await assertReviewRejectRequiresReason(apiBaseUrl, review.id, `${draftId}: ${review.title}`);
 
   const selectedOptionId = review.kind === 'theme_selection'
     ? review.options[0]?.id
@@ -227,6 +228,7 @@ async function approveRequiredReview(apiBaseUrl, draftId) {
       ...(selectedOptionId ? { selectedOptionId } : {})
     })
   });
+  await assertResolvedReviewCannotBeProcessedAgain(apiBaseUrl, review.id, `${draftId}: ${review.title}`, 'approved');
 
   return approved.state;
 }
@@ -244,6 +246,36 @@ function latestReview(state, draftId, kind, status) {
 function assertCreatedDraftStoredOnce(created, label) {
   const storedDrafts = created.state.requestDrafts.filter((draft) => draft.id === created.draft.id);
   assertScenario(storedDrafts.length === 1, `${label}: 新規下書きが状態に重複保存されている`);
+}
+
+async function assertReviewRejectRequiresReason(apiBaseUrl, reviewId, label) {
+  const error = await expectRequestJsonFailure(apiPath(apiBaseUrl, `/control-reviews/${reviewId}/reject`), {
+    method: 'POST',
+    body: JSON.stringify({ reason: '   ' })
+  });
+  assertScenario(error.includes('却下には理由が必要です'), `${label}: 理由なし却下が正しい理由で拒否されていない`);
+
+  const state = await requestJson(apiPath(apiBaseUrl, '/state'));
+  const review = state.controlReviewItems.find((item) => item.id === reviewId);
+  assertScenario(review?.status === 'review_required', `${label}: 理由なし却下で確認項目の状態が変わっている`);
+  const actions = state.humanReviewActions.filter((action) => action.reviewItemId === reviewId);
+  assertScenario(actions.length === 0, `${label}: 理由なし却下で人間判断が保存されている`);
+}
+
+async function assertResolvedReviewCannotBeProcessedAgain(apiBaseUrl, reviewId, label, expectedStatus) {
+  for (const action of ['approve', 'reject', 'request-changes']) {
+    const error = await expectRequestJsonFailure(apiPath(apiBaseUrl, `/control-reviews/${reviewId}/${action}`), {
+      method: 'POST',
+      body: JSON.stringify({ reason: `${label}を再処理しようとする` })
+    });
+    assertScenario(error.includes('この確認項目はすでに処理済みです'), `${label}: 処理済み確認項目の${action}が正しい理由で拒否されていない`);
+  }
+
+  const state = await requestJson(apiPath(apiBaseUrl, '/state'));
+  const review = state.controlReviewItems.find((item) => item.id === reviewId);
+  assertScenario(review?.status === expectedStatus, `${label}: 再処理拒否後に確認項目の状態が変わっている`);
+  const actions = state.humanReviewActions.filter((action) => action.reviewItemId === reviewId);
+  assertScenario(actions.length === 1, `${label}: 再処理拒否後に人間判断の件数が変わっている`);
 }
 
 async function assertDraftCannotBeApprovedTwice(apiBaseUrl, draftId, label) {
