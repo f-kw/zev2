@@ -27,12 +27,16 @@ type ReviewChangeScope =
   | 'theme_reselect'
   | 'theme_options_regenerate'
   | 'material_reselect';
+type ActivityLogCategory = 'agent' | 'user' | 'external' | 'system';
+type ActivityFilter = 'all' | ActivityLogCategory;
 type ActivityLogItem = {
   id: string;
   timeText: string;
   title: string;
   detail: string;
   className: string;
+  actorText: string;
+  category: ActivityLogCategory;
 };
 
 const store = useControlQueueStore();
@@ -59,6 +63,7 @@ const requestActivityEvents = ref<RequestDraftActivityEvent[]>([]);
 const requestActivityLoading = ref(false);
 const requestActivityError = ref('');
 const activityDialogOpen = ref(false);
+const activityFilter = ref<ActivityFilter>('all');
 const initialPurpose = 'ショート動画を作成する';
 let refreshTimer: number | undefined;
 let webGeminiRefreshTimer: number | undefined;
@@ -554,6 +559,13 @@ const activityDialogTitle = computed(() =>
   currentDraft.value ? readablePurposeForWebGeminiReview(currentDraft.value.purpose) : '現在の下書き'
 );
 
+const activityFilterOptions: Array<{ value: ActivityFilter; label: string }> = [
+  { value: 'all', label: '全部' },
+  { value: 'agent', label: 'AI作業' },
+  { value: 'user', label: '人間判断' },
+  { value: 'external', label: '外部レビュー' }
+];
+
 function activityKindClass(kind: RequestDraftActivityEvent['kind']): string {
   if (kind === 'human_review_required') {
     return 'needs-review';
@@ -574,13 +586,67 @@ function activityKindClass(kind: RequestDraftActivityEvent['kind']): string {
   return 'system-action';
 }
 
+function activityCategory(event: RequestDraftActivityEvent): ActivityLogCategory {
+  if (event.kind === 'web_gemini_review_status') {
+    return 'external';
+  }
+
+  if (event.kind === 'human_review_action' || event.kind === 'human_review_required') {
+    return 'user';
+  }
+
+  if (
+    event.kind === 'agent_request_created' ||
+    event.kind === 'agent_request_status' ||
+    event.kind === 'agent_decision'
+  ) {
+    return 'agent';
+  }
+
+  return 'system';
+}
+
+function activityActorText(actor: RequestDraftActivityEvent['actor']): string {
+  if (actor === 'user') {
+    return 'ユーザー';
+  }
+
+  if (actor === 'agent') {
+    return 'AI';
+  }
+
+  if (actor === 'runner') {
+    return '実行処理';
+  }
+
+  if (actor === 'backend') {
+    return 'アプリ';
+  }
+
+  return 'システム';
+}
+
+function activityLogItemFromEvent(event: RequestDraftActivityEvent, timeText: string): ActivityLogItem {
+  return {
+    id: event.id,
+    timeText,
+    title: event.title,
+    detail: event.detail,
+    className: activityKindClass(event.kind),
+    actorText: activityActorText(event.actor),
+    category: activityCategory(event)
+  };
+}
+
 function fallbackActivityLogItem(message: string): ActivityLogItem {
   return {
     id: message,
     timeText: '--',
     title: message,
     detail: '',
-    className: 'system-action'
+    className: 'system-action',
+    actorText: '',
+    category: 'system'
   };
 }
 
@@ -628,13 +694,7 @@ const systemLogItems = computed<ActivityLogItem[]>(() => {
     return [fallbackActivityLogItem('作業履歴はまだありません')];
   }
 
-  return events.map((event) => ({
-    id: event.id,
-    timeText: formatActivityTime(event.occurredAt),
-    title: event.title,
-    detail: event.detail,
-    className: activityKindClass(event.kind)
-  }));
+  return events.map((event) => activityLogItemFromEvent(event, formatActivityTime(event.occurredAt)));
 });
 
 const fullActivityLogItems = computed<ActivityLogItem[]>(() => {
@@ -650,13 +710,18 @@ const fullActivityLogItems = computed<ActivityLogItem[]>(() => {
     return [fallbackActivityLogItem('作業履歴はまだありません')];
   }
 
-  return requestActivityEvents.value.map((event) => ({
-    id: event.id,
-    timeText: formatDisplayDateTime(event.occurredAt),
-    title: event.title,
-    detail: event.detail,
-    className: activityKindClass(event.kind)
-  }));
+  return requestActivityEvents.value.map((event) =>
+    activityLogItemFromEvent(event, formatDisplayDateTime(event.occurredAt))
+  );
+});
+
+const visibleFullActivityLogItems = computed(() => {
+  if (activityFilter.value === 'all') {
+    return fullActivityLogItems.value;
+  }
+
+  const filteredItems = fullActivityLogItems.value.filter((item) => item.category === activityFilter.value);
+  return filteredItems.length > 0 ? filteredItems : [fallbackActivityLogItem('この種類の履歴はまだありません')];
 });
 
 function formatActivityTime(value: string): string {
@@ -970,11 +1035,16 @@ function openActivityDialog() {
   }
 
   activityDialogOpen.value = true;
+  activityFilter.value = 'all';
   void refreshRequestActivity();
 }
 
 function closeActivityDialog() {
   activityDialogOpen.value = false;
+}
+
+function setActivityFilter(filter: ActivityFilter) {
+  activityFilter.value = filter;
 }
 
 async function refreshWebGeminiReview() {
@@ -1167,7 +1237,7 @@ watch(
 );
 
 watch(
-  () => [showRequestPage.value, requestActivityRefreshKey.value],
+  () => `${showRequestPage.value ? 'request' : 'workspace'}:${requestActivityRefreshKey.value}`,
   () => {
     void refreshRequestActivity();
   },
@@ -1175,7 +1245,7 @@ watch(
 );
 
 watch(
-  () => [showRequestPage.value, currentDraft.value?.id ?? ''],
+  () => `${showRequestPage.value ? 'request' : 'workspace'}:${currentDraft.value?.id ?? ''}`,
   () => {
     activityDialogOpen.value = false;
   }
@@ -1671,15 +1741,29 @@ watch(
           <p class="eyebrow">作業履歴</p>
           <h2>{{ activityDialogTitle }}</h2>
         </div>
+        <div class="activity-filter" aria-label="作業履歴の絞り込み">
+          <button
+            v-for="option in activityFilterOptions"
+            :key="option.value"
+            type="button"
+            :class="['filter-button', { active: activityFilter === option.value }]"
+            @click="setActivityFilter(option.value)"
+          >
+            {{ option.label }}
+          </button>
+        </div>
         <ol class="system-log activity-dialog-log">
           <li
-            v-for="item in fullActivityLogItems"
+            v-for="item in visibleFullActivityLogItems"
             :key="item.id"
             :class="item.className"
           >
             <time>{{ item.timeText }}</time>
             <span>
-              <strong>{{ item.title }}</strong>
+              <span class="activity-entry-head">
+                <strong>{{ item.title }}</strong>
+                <em v-if="item.actorText">{{ item.actorText }}</em>
+              </span>
               <small v-if="item.detail">{{ item.detail }}</small>
             </span>
           </li>
@@ -2831,7 +2915,7 @@ video {
 .activity-dialog {
   width: min(760px, 100%);
   max-height: min(720px, calc(100dvh - 36px));
-  grid-template-rows: auto minmax(0, 1fr) auto;
+  grid-template-rows: auto auto minmax(0, 1fr) auto;
 }
 
 .activity-dialog h2 {
@@ -2840,6 +2924,33 @@ video {
   font-size: 18px;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
+}
+
+.activity-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.filter-button {
+  min-height: 28px;
+  border: 1px solid rgba(0, 240, 255, 0.28);
+  padding: 5px 10px;
+  clip-path: none;
+  color: var(--text-dim);
+  background: rgba(0, 0, 0, 0.22);
+  box-shadow: none;
+  font-family: var(--font-jp);
+  font-size: 11px;
+  letter-spacing: 0;
+}
+
+.filter-button.active,
+.filter-button:hover:not(:disabled) {
+  border-color: var(--yellow);
+  color: var(--bg);
+  background: var(--yellow);
+  box-shadow: 0 0 16px rgba(252, 238, 10, 0.28);
 }
 
 .activity-dialog-log {
@@ -2853,7 +2964,26 @@ video {
 }
 
 .activity-dialog-log strong {
+  overflow: visible;
+  text-overflow: clip;
   white-space: normal;
+}
+
+.activity-entry-head {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.activity-entry-head em {
+  flex: 0 0 auto;
+  border: 1px solid rgba(0, 240, 255, 0.26);
+  padding: 1px 5px;
+  color: var(--cyan);
+  font-family: var(--font-jp);
+  font-size: 10px;
+  font-style: normal;
+  line-height: 1.3;
 }
 
 .activity-dialog-log small {
