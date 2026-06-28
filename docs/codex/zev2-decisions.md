@@ -529,3 +529,15 @@
 - Alternatives considered: アプリにWeb Geminiへの依頼文と貼り付け欄を置く。Gemini APIだけで完成動画レビューをする。Web Geminiレビューをログだけに残し、再作成とは切り離す。
 - Related files: `client/src/App.vue`, `backend/src/routes/control.ts`, `scripts/web-gemini-review-edge.mjs`, `package.json`
 - Review condition: 完成動画レビューで、ユーザーがWeb Gemini結果を手で貼り付ける前提になっている場合、または保存済みレビューなしに再作成へ進める場合。
+
+## Decision ZC-D-048
+
+- Decision ID: ZC-D-048
+- Date: 2026-06-29
+- Status: accepted
+- Priority: high
+- Decision: Web Geminiレビュー実行は、準備確認と外部送信を分ける。通常の確認では、対象動画、依頼文、Edge操作の前提、保存先を確認するだけにし、Google Geminiへ動画を送る処理は明示的な実行として扱う。
+- Reason: Web Geminiレビューは完成動画を外部サービスへ渡す処理である。準備確認と外部送信が同じ操作に見えると、AIエージェントが何をしたのか、人間がどこまで許可したのかを後で追えない。レビュー対象、依頼文、回答保存、再作成への反映をログで分けることで、ブラックボックス化を避ける。
+- Alternatives considered: 通常コマンドで常にアップロードまで実行する。ユーザーが手でアップロードする。アプリに貼り付け欄を戻す。
+- Related files: `scripts/web-gemini-review-edge.mjs`, `package.json`
+- Review condition: Web Geminiレビューで、準備確認だけなのか、外部送信まで実行したのかがログやコマンドから分からない場合。
