@@ -3,20 +3,20 @@
   "private": true,
   "packageManager": "pnpm@10.28.0",
   "scripts": {
-    "dev:client": "pnpm --filter client dev",
-    "dev:backend": "pnpm --filter backend dev",
-    "build:client": "pnpm --filter client build",
-    "build:backend": "pnpm --filter backend build",
-    "build:runner": "pnpm --filter @zev2/agent-runner build",
-    "build:shared": "pnpm --filter @zev2/shared build",
-    "runner:dry-run": "pnpm --filter @zev2/agent-runner dry-run",
+    "dev:client": "corepack pnpm --filter client dev",
+    "dev:backend": "corepack pnpm --filter backend dev",
+    "build:client": "corepack pnpm --filter client build",
+    "build:backend": "corepack pnpm --filter backend build",
+    "build:runner": "corepack pnpm --filter @zev2/agent-runner build",
+    "build:shared": "corepack pnpm --filter @zev2/shared build",
+    "runner:dry-run": "corepack pnpm --filter @zev2/agent-runner dry-run",
     "scenario:agent": "node scripts/agent-scenario-test.mjs",
-    "web-gemini:review": "pnpm run build:shared && node scripts/web-gemini-review-edge.mjs",
-    "web-gemini:review:diagnose": "pnpm run build:shared && node scripts/web-gemini-review-edge.mjs --cdp-diagnose-only",
-    "web-gemini:review:execute": "pnpm run build:shared && node scripts/web-gemini-review-edge.mjs --execute",
-    "web-gemini:review:test": "pnpm run build:shared && node scripts/web-gemini-review-script-test.mjs",
-    "test": "pnpm run web-gemini:review:test && pnpm run scenario:agent",
-    "type-check": "pnpm run build:shared && pnpm --filter backend type-check && pnpm --filter client type-check && pnpm --filter @zev2/agent-runner type-check"
+    "web-gemini:review": "corepack pnpm run build:shared && node scripts/web-gemini-review-edge.mjs",
+    "web-gemini:review:diagnose": "corepack pnpm run build:shared && node scripts/web-gemini-review-edge.mjs --cdp-diagnose-only",
+    "web-gemini:review:execute": "corepack pnpm run build:shared && node scripts/web-gemini-review-edge.mjs --execute",
+    "web-gemini:review:test": "corepack pnpm run build:shared && node scripts/web-gemini-review-script-test.mjs",
+    "test": "corepack pnpm run web-gemini:review:test && corepack pnpm run scenario:agent",
+    "type-check": "corepack pnpm run build:shared && corepack pnpm --filter backend type-check && corepack pnpm --filter client type-check && corepack pnpm --filter @zev2/agent-runner type-check"
   },
   "pnpm": {
     "supportedArchitectures": {

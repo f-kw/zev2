@@ -4,10 +4,10 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dry-run": "pnpm --filter @zev2/shared build && tsx src/index.ts",
+    "dry-run": "corepack pnpm --filter @zev2/shared build && tsx src/index.ts",
     "dry-run:no-build": "tsx src/index.ts",
-    "build": "pnpm --filter @zev2/shared build && tsc -p tsconfig.json",
-    "type-check": "pnpm --filter @zev2/shared build && tsc -p tsconfig.json --noEmit && tsc -p tsconfig.remotion.json"
+    "build": "corepack pnpm --filter @zev2/shared build && tsc -p tsconfig.json",
+    "type-check": "corepack pnpm --filter @zev2/shared build && tsc -p tsconfig.json --noEmit && tsc -p tsconfig.remotion.json"
   },
   "dependencies": {
     "@google/genai": "^1.52.0",

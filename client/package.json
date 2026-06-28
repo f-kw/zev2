@@ -8,7 +8,7 @@
     "build": "run-p type-check \"build-only {@}\" --",
     "preview": "vite preview",
     "build-only": "vite build",
-    "type-check": "pnpm --filter @zev2/shared build && vue-tsc --build"
+    "type-check": "corepack pnpm --filter @zev2/shared build && vue-tsc --build"
   },
   "dependencies": {
     "@mdi/font": "^7.4.47",
