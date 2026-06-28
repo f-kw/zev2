@@ -333,13 +333,35 @@ const webGeminiSavedReviewTitle = computed(() =>
   webGeminiReview.value && webGeminiRunLog.value?.status === 'applied' ? 'レビュー反映済み' : webGeminiReview.value ? 'レビュー保存済み' : ''
 );
 
+const webGeminiAppliedDraft = computed(() => {
+  const appliedDraftId = webGeminiRunLog.value?.appliedDraftId;
+  return appliedDraftId ? findById(store.state.requestDrafts, appliedDraftId) : undefined;
+});
+
+const webGeminiAppliedDraftText = computed(() => {
+  const runLog = webGeminiRunLog.value;
+  if (runLog?.status !== 'applied') {
+    return '';
+  }
+
+  if (webGeminiAppliedDraft.value) {
+    return `${formatDisplayDateTime(webGeminiAppliedDraft.value.createdAt)}作成の編集コピーへ反映済みです`;
+  }
+
+  if (runLog.appliedAt) {
+    return `${formatDisplayDateTime(runLog.appliedAt)}に新しい編集コピーへ反映済みです`;
+  }
+
+  return '新しい編集コピーへ反映済みです';
+});
+
 const webGeminiSavedReviewDetail = computed(() => {
   if (!webGeminiReview.value) {
     return '';
   }
 
   if (webGeminiRunLog.value?.status === 'applied') {
-    return 'このレビューは新しい編集コピーへ反映済みです。取り直す場合はレビューを取り直してください。';
+    return `このレビューは${webGeminiAppliedDraftText.value}。取り直す場合はレビューを取り直してください。`;
   }
 
   return '改善指示を確認して、必要なら演出作成前から作り直せます。';
