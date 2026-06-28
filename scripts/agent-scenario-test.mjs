@@ -719,6 +719,25 @@ async function assertGeneratedDraftCompleted(apiBaseUrl, runtimeDir, draftId, la
     adjustment.mode === 'fixed-adjustment',
     `${label}: 微調整が固定処理として保存されていない`
   );
+
+  const activity = await requestJson(apiPath(apiBaseUrl, `/request-drafts/${draftId}/activity`));
+  assertScenario(Array.isArray(activity.events), `${label}: 監査タイムラインが配列ではない`);
+  assertScenario(
+    activity.events.some((event) => event.kind === 'draft_created'),
+    `${label}: 監査タイムラインで下書き作成が追えない`
+  );
+  assertScenario(
+    activity.events.some((event) => event.kind === 'agent_request_status' && event.title === '動画生成が完了'),
+    `${label}: 監査タイムラインで動画生成完了が追えない`
+  );
+  assertScenario(
+    activity.events.some((event) => event.kind === 'human_review_action'),
+    `${label}: 監査タイムラインで人間判断が追えない`
+  );
+  assertScenario(
+    activity.events.every((event) => typeof event.detail === 'string' && event.detail.length <= 180),
+    `${label}: 監査タイムラインに長すぎる詳細が混ざっている`
+  );
 }
 
 async function assertMaterialReselectFromMaterialConfirmation(apiBaseUrl, runtimeDir) {
@@ -1285,6 +1304,15 @@ async function scenarioAutomaticVideoCreation(apiBaseUrl, runtimeDir) {
   assertScenario(
     noFixedTranscriptRequest.errorMessage?.includes('ローカルSTTサーバ'),
     '固定確認フラグなしのSTT失敗理由がユーザーに分かる文になっていない'
+  );
+  const noFixedActivity = await requestJson(apiPath(apiBaseUrl, `/request-drafts/${noFixedCreated.draft.id}/activity`));
+  assertScenario(
+    noFixedActivity.events.some((event) => (
+      event.kind === 'agent_request_status' &&
+        event.title === 'STTで停止' &&
+        event.detail.includes('ローカルSTTサーバ')
+    )),
+    '監査タイムラインからSTT失敗理由を確認できない'
   );
 }
 

@@ -86,6 +86,28 @@ type CopiedEditRestart = {
   controlReviewItems: ControlReviewItem[];
   humanReviewActions: HumanReviewAction[];
 };
+type RequestDraftActivityEvent = {
+  id: string;
+  kind:
+    | 'draft_created'
+    | 'draft_status'
+    | 'agent_request_created'
+    | 'agent_request_status'
+    | 'agent_decision'
+    | 'human_review_required'
+    | 'human_review_action';
+  occurredAt: string;
+  actor: 'user' | 'agent' | 'runner' | 'backend' | 'system';
+  title: string;
+  detail: string;
+  requestDraftId: string;
+  agentRequestId?: string;
+  reviewItemId?: string;
+  decisionLogId?: string;
+  humanReviewActionId?: string;
+  fileRefId?: string;
+  outputId?: string;
+};
 
 const runtimeDir = process.env.ZEV2_RUNTIME_DIR
   ? path.resolve(process.env.ZEV2_RUNTIME_DIR)
@@ -141,6 +163,14 @@ function artifactUrl(requestDraftId: string, fileName: string): string {
 
 function unknownErrorMessage(error: unknown): string {
   return error instanceof Error ? error.message : String(error);
+}
+
+function compactActivityText(value: unknown, fallback: string): string {
+  const text = typeof value === 'string'
+    ? value.trim().replace(/\s+/g, ' ')
+    : '';
+  const normalized = text || fallback;
+  return normalized.length > 180 ? `${normalized.slice(0, 177)}...` : normalized;
 }
 
 function webGeminiReviewPath(requestDraftId: string): string {
@@ -487,6 +517,178 @@ function outputForAgentRequest(state: Awaited<ReturnType<typeof loadState>>, req
 function latestOutputVideoFileRef(state: LoadedState, requestDraftId: string): FileRef | undefined {
   const renderRequest = latestSucceededAgentRequest(state.agentRequests, requestDraftId, 'render_video');
   return renderRequest ? fileRefForAgentRequest(state, renderRequest) : undefined;
+}
+
+function agentRequestStatusTitle(request: AgentRequest): string {
+  if (request.status === 'queued') {
+    return `${request.label}をキューに追加`;
+  }
+
+  if (request.status === 'waiting') {
+    return `${request.label}は前工程待ち`;
+  }
+
+  if (request.status === 'running') {
+    return `${request.label}を実行中`;
+  }
+
+  if (request.status === 'succeeded') {
+    return `${request.label}が完了`;
+  }
+
+  if (request.status === 'failed') {
+    return `${request.label}で停止`;
+  }
+
+  if (request.status === 'cancelled') {
+    return `${request.label}を中止`;
+  }
+
+  return `${request.label}を作り直しで置換`;
+}
+
+function agentRequestStatusDetail(request: AgentRequest): string {
+  if (request.status === 'failed') {
+    return compactActivityText(request.errorMessage, '失敗理由を確認してください');
+  }
+
+  if (request.status === 'waiting') {
+    return compactActivityText(request.errorMessage, '前工程の完了を待っています');
+  }
+
+  if (request.status === 'succeeded') {
+    return compactActivityText(request.result?.meaning, 'AIエージェントが工程完了を報告しました');
+  }
+
+  if (request.status === 'cancelled') {
+    return '人間の操作または作り直しにより中止しました';
+  }
+
+  if (request.status === 'superseded') {
+    return '新しい編集コピーで作り直すため、この工程は使いません';
+  }
+
+  if (request.status === 'running') {
+    return 'AIエージェントがこの工程を取得しました';
+  }
+
+  return 'AIエージェントが実行する工程として登録しました';
+}
+
+function draftStatusTitle(status: RequestDraft['status']): string {
+  if (status === 'approved') {
+    return 'AIエージェントへ承認';
+  }
+
+  if (status === 'rejected') {
+    return '実行前下書きを却下';
+  }
+
+  return '実行前下書きは未承認';
+}
+
+function humanReviewActionTitle(action: HumanReviewActionType): string {
+  return `人間が${reviewActionLabel(action)}`;
+}
+
+function buildRequestDraftActivity(state: LoadedState, draft: RequestDraft): RequestDraftActivityEvent[] {
+  const events: RequestDraftActivityEvent[] = [
+    {
+      id: `draft:${draft.id}:created`,
+      kind: 'draft_created',
+      occurredAt: draft.createdAt,
+      actor: 'user',
+      title: '実行前下書きを作成',
+      detail: compactActivityText(draft.purpose, '依頼内容を保存しました'),
+      requestDraftId: draft.id
+    }
+  ];
+
+  if (draft.status !== 'draft') {
+    events.push({
+      id: `draft:${draft.id}:status:${draft.status}`,
+      kind: 'draft_status',
+      occurredAt: draft.updatedAt,
+      actor: 'user',
+      title: draftStatusTitle(draft.status),
+      detail: '下書きの状態を更新しました',
+      requestDraftId: draft.id
+    });
+  }
+
+  for (const request of state.agentRequests.filter((item) => item.requestDraftId === draft.id)) {
+    events.push({
+      id: `agent:${request.id}:created`,
+      kind: 'agent_request_created',
+      occurredAt: request.createdAt,
+      actor: 'backend',
+      title: `${request.label}をキューに追加`,
+      detail: 'AIエージェントが実行する工程として登録しました',
+      requestDraftId: draft.id,
+      agentRequestId: request.id
+    });
+
+    if (request.updatedAt !== request.createdAt || request.status !== 'queued') {
+      events.push({
+        id: `agent:${request.id}:status:${request.status}`,
+        kind: 'agent_request_status',
+        occurredAt: request.updatedAt,
+        actor: request.status === 'succeeded' || request.status === 'failed' ? 'agent' : 'backend',
+        title: agentRequestStatusTitle(request),
+        detail: agentRequestStatusDetail(request),
+        requestDraftId: draft.id,
+        agentRequestId: request.id,
+        ...(request.result?.fileRefId ? { fileRefId: request.result.fileRefId } : {}),
+        ...(request.result?.outputId ? { outputId: request.result.outputId } : {})
+      });
+    }
+  }
+
+  for (const decision of state.decisionLogs.filter((item) => item.requestDraftId === draft.id)) {
+    events.push({
+      id: `decision:${decision.id}`,
+      kind: 'agent_decision',
+      occurredAt: decision.createdAt,
+      actor: decision.actor,
+      title: 'AI判断を記録',
+      detail: compactActivityText(`${decision.decision}: ${decision.reason}`, 'AIエージェントが判断を記録しました'),
+      requestDraftId: draft.id,
+      agentRequestId: decision.agentRequestId,
+      decisionLogId: decision.id
+    });
+  }
+
+  for (const review of state.controlReviewItems.filter((item) => item.requestDraftId === draft.id)) {
+    events.push({
+      id: `review:${review.id}:required`,
+      kind: 'human_review_required',
+      occurredAt: review.createdAt,
+      actor: 'agent',
+      title: `${review.title}の確認待ち`,
+      detail: compactActivityText(review.reason || review.summary, '人間の確認が必要です'),
+      requestDraftId: draft.id,
+      agentRequestId: review.agentRequestId,
+      reviewItemId: review.id
+    });
+  }
+
+  for (const action of state.humanReviewActions.filter((item) => item.requestDraftId === draft.id)) {
+    events.push({
+      id: `human-review:${action.id}`,
+      kind: 'human_review_action',
+      occurredAt: action.createdAt,
+      actor: 'user',
+      title: humanReviewActionTitle(action.action),
+      detail: compactActivityText(action.reason, '人間の判断を保存しました'),
+      requestDraftId: draft.id,
+      reviewItemId: action.reviewItemId,
+      humanReviewActionId: action.id
+    });
+  }
+
+  return events.sort((left, right) => (
+    left.occurredAt.localeCompare(right.occurredAt) || left.id.localeCompare(right.id)
+  ));
 }
 
 function ensureWebGeminiReviewMatchesOutputVideo(
@@ -1399,6 +1601,20 @@ router.get('/runtime-config', async (_, response) => {
 router.get('/state', async (_, response) => {
   const state = await loadState();
   response.json(state);
+});
+
+router.get('/request-drafts/:id/activity', async (request, response) => {
+  const state = await loadState();
+  const draft = findById(state.requestDrafts, request.params.id);
+  if (!draft) {
+    response.status(404).json({ error: '実行前下書きが見つかりません' });
+    return;
+  }
+
+  response.json({
+    requestDraftId: draft.id,
+    events: buildRequestDraftActivity(state, draft)
+  });
 });
 
 router.post('/request-drafts', async (request, response) => {
