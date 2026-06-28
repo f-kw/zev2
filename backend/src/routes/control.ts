@@ -261,6 +261,20 @@ async function readWebGeminiReviewRunLog(
   }
 }
 
+async function readWebGeminiReviewPromptText(
+  requestDraftId: string
+): Promise<{ promptText: string } | { error: string }> {
+  try {
+    return { promptText: (await readFile(webGeminiReviewPromptPath(requestDraftId), 'utf8')).trim() };
+  } catch (error) {
+    if (isNotFoundError(error)) {
+      return { promptText: '' };
+    }
+
+    return { error: `Web Geminiレビュー依頼文を読めません: ${unknownErrorMessage(error)}` };
+  }
+}
+
 async function writeWebGeminiReviewArtifact(artifact: WebGeminiReviewArtifact): Promise<void> {
   await mkdir(path.dirname(webGeminiReviewPath(artifact.draftId)), { recursive: true });
   await writeFile(webGeminiReviewPath(artifact.draftId), `${JSON.stringify(artifact, null, 2)}\n`, 'utf8');
@@ -1607,10 +1621,16 @@ router.get('/request-drafts/:id/web-gemini-review', async (request, response) =>
     response.status(409).json({ error: runLogMismatch.error, state });
     return;
   }
+  const promptResult = await readWebGeminiReviewPromptText(draft.id);
+  if ('error' in promptResult) {
+    response.status(409).json({ error: promptResult.error, state });
+    return;
+  }
 
   response.json({
     review: reviewResult.review,
     runLog: runLogResult.runLog,
+    preparedPromptText: promptResult.promptText,
     outputVideoUri: outputVideo?.uri ?? ''
   });
 });

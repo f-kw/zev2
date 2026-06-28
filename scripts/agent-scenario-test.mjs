@@ -910,6 +910,10 @@ async function assertWebGeminiReviewFeedbackLoop(apiBaseUrl, runtimeDir, sourceD
   assertScenario(beforeReview.outputVideoUri, 'Web Geminiレビュー対象の完成動画参照が返っていない');
   assertScenario(beforeReview.runLog?.status === 'prepared', 'Web Geminiレビュー準備ログが取得できない');
   assertScenario(beforeReview.runLog.externalUploadRequired === true, '外部送信が必要なレビューであることがログから分からない');
+  assertScenario(
+    beforeReview.preparedPromptText === prepared.promptText,
+    'Web Geminiレビュー準備後に依頼文を取得APIから確認できない'
+  );
 
   const instructionText = [
     '変えること: 冒頭のテロップを話し出しと同時に出す',

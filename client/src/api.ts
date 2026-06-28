@@ -164,6 +164,7 @@ export async function requestGeneratedVideoChanges(
 export async function fetchWebGeminiReview(id: string): Promise<{
   review: WebGeminiReviewArtifact | null;
   runLog: WebGeminiReviewRunLog | null;
+  preparedPromptText: string;
   outputVideoUri: string;
 }> {
   const response = await api.get(`/request-drafts/${id}/web-gemini-review`);

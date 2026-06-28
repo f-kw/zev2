@@ -38,6 +38,8 @@ const pendingReviewChange = ref<{ reviewId: string; scope?: ReviewChangeScope } 
 const changeReasonInput = ref('');
 const webGeminiReview = ref<WebGeminiReviewArtifact | null>(null);
 const webGeminiRunLog = ref<WebGeminiReviewRunLog | null>(null);
+const webGeminiPreparedPromptText = ref('');
+const webGeminiPromptOpen = ref(false);
 const webGeminiInstructionInput = ref('');
 const webGeminiReviewMessage = ref('');
 const webGeminiReviewLoading = ref(false);
@@ -260,6 +262,10 @@ const webGeminiRunStatusDetail = computed(() => {
 
 const webGeminiBlockedReasons = computed(() =>
   webGeminiRunLog.value?.blockedReasons ?? []
+);
+
+const canInspectWebGeminiPrompt = computed(() =>
+  Boolean(!webGeminiReview.value && webGeminiPreparedPromptText.value.trim())
 );
 
 const canResumeAgentWork = computed(() =>
@@ -706,6 +712,8 @@ async function refreshWebGeminiReview() {
   if (!draft || !outputVideoUri.value) {
     webGeminiReview.value = null;
     webGeminiRunLog.value = null;
+    webGeminiPreparedPromptText.value = '';
+    webGeminiPromptOpen.value = false;
     webGeminiInstructionInput.value = '';
     webGeminiReviewMessage.value = '';
     loadedWebGeminiReviewCreatedAt.value = '';
@@ -716,8 +724,12 @@ async function refreshWebGeminiReview() {
   webGeminiReviewMessage.value = '';
   try {
     const result = await fetchWebGeminiReview(draft.id);
+    if (webGeminiPreparedPromptText.value !== result.preparedPromptText) {
+      webGeminiPromptOpen.value = false;
+    }
     webGeminiReview.value = result.review;
     webGeminiRunLog.value = result.runLog;
+    webGeminiPreparedPromptText.value = result.preparedPromptText;
     if (!result.review) {
       webGeminiInstructionInput.value = '';
       loadedWebGeminiReviewCreatedAt.value = '';
@@ -732,6 +744,8 @@ async function refreshWebGeminiReview() {
   } catch (error) {
     webGeminiReview.value = null;
     webGeminiRunLog.value = null;
+    webGeminiPreparedPromptText.value = '';
+    webGeminiPromptOpen.value = false;
     webGeminiReviewMessage.value = formatApiError(error);
   } finally {
     webGeminiReviewLoading.value = false;
@@ -760,12 +774,16 @@ async function prepareCurrentWebGeminiReview() {
     const result = await prepareWebGeminiReview(draft.id);
     webGeminiReview.value = null;
     webGeminiRunLog.value = result.runLog;
+    webGeminiPreparedPromptText.value = result.promptText;
+    webGeminiPromptOpen.value = false;
     webGeminiInstructionInput.value = '';
     loadedWebGeminiReviewCreatedAt.value = '';
     webGeminiReviewMessage.value = 'レビュー未取得';
   } catch (error) {
     webGeminiReview.value = null;
     webGeminiRunLog.value = null;
+    webGeminiPreparedPromptText.value = '';
+    webGeminiPromptOpen.value = false;
     webGeminiReviewMessage.value = formatApiError(error);
   } finally {
     webGeminiReviewLoading.value = false;
@@ -785,6 +803,8 @@ async function applyWebGeminiReviewChanges() {
     await store.applyWebGeminiReview(draft.id, instruction);
     webGeminiReview.value = null;
     webGeminiRunLog.value = null;
+    webGeminiPreparedPromptText.value = '';
+    webGeminiPromptOpen.value = false;
     webGeminiInstructionInput.value = '';
     loadedWebGeminiReviewCreatedAt.value = '';
     webGeminiReviewMessage.value = '';
@@ -1205,6 +1225,16 @@ watch(
                     {{ reason }}
                   </li>
                 </ul>
+                <div v-if="canInspectWebGeminiPrompt" class="web-gemini-prompt">
+                  <button
+                    type="button"
+                    class="inline-text-button"
+                    @click="webGeminiPromptOpen = !webGeminiPromptOpen"
+                  >
+                    {{ webGeminiPromptOpen ? '依頼文を閉じる' : 'Geminiへ渡す依頼文を確認' }}
+                  </button>
+                  <pre v-if="webGeminiPromptOpen">{{ webGeminiPreparedPromptText }}</pre>
+                </div>
               </div>
             </section>
           </div>
@@ -1899,6 +1929,27 @@ button:disabled {
   background: rgba(252, 238, 10, 0.1);
 }
 
+.inline-text-button {
+  display: inline-flex;
+  width: fit-content;
+  min-height: auto;
+  border: 0;
+  padding: 0;
+  clip-path: none;
+  background: transparent;
+  box-shadow: none;
+  color: var(--cyan);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+}
+
+.inline-text-button:hover:not(:disabled) {
+  background: transparent;
+  box-shadow: none;
+  color: var(--yellow);
+}
+
 .danger-button {
   border: 1px solid rgba(255, 0, 60, 0.55);
   color: var(--red);
@@ -2154,7 +2205,7 @@ video {
 
 .empty-review-state {
   display: grid;
-  align-content: center;
+  align-content: start;
   gap: 6px;
   min-height: 132px;
   border: 1px dashed rgba(255, 242, 0, 0.32);
@@ -2171,6 +2222,27 @@ video {
 .empty-review-state span {
   color: var(--text-dim);
   font-size: 12px;
+}
+
+.web-gemini-prompt {
+  display: grid;
+  gap: 8px;
+  margin-top: 8px;
+  color: var(--text-muted);
+}
+
+.web-gemini-prompt pre {
+  max-height: 138px;
+  margin: 0;
+  overflow: auto;
+  border: 1px solid rgba(0, 240, 255, 0.2);
+  padding: 10px;
+  background: rgba(0, 0, 0, 0.32);
+  color: #dfe2cc;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  line-height: 1.5;
+  white-space: pre-wrap;
 }
 
 .review-reason-list {
