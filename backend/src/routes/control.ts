@@ -56,6 +56,21 @@ type WebGeminiReviewArtifact = {
   reviewText: string;
   instructionText: string;
 };
+type WebGeminiReviewRunLog = {
+  draftId: string;
+  status: 'prepared' | 'blocked' | 'running' | 'saved';
+  createdAt: string;
+  outputVideoUri: string;
+  outputVideoPath: string;
+  promptPath: string;
+  blockedReasons: string[];
+  externalUploadRequired: boolean;
+  nextAction?: string;
+  reviewPath?: string;
+  reviewCreatedAt?: string;
+  edgeControl?: unknown;
+  cdpControl?: unknown;
+};
 type CopiedEditRestart = {
   draft: RequestDraft;
   requests: AgentRequest[];
@@ -72,6 +87,7 @@ const runtimeDir = process.env.ZEV2_RUNTIME_DIR
   : path.resolve(process.cwd(), '../runtime');
 const artifactUrlPrefix = '/api/artifacts/';
 const webGeminiReviewFileName = 'web-gemini-review.json';
+const webGeminiReviewRunLogFileName = 'web-gemini-review-run.json';
 
 function nowIso(): string {
   return new Date().toISOString();
@@ -125,6 +141,10 @@ function webGeminiReviewPath(requestDraftId: string): string {
   return path.join(artifactRoot(), requestDraftId, webGeminiReviewFileName);
 }
 
+function webGeminiReviewRunLogPath(requestDraftId: string): string {
+  return path.join(artifactRoot(), requestDraftId, webGeminiReviewRunLogFileName);
+}
+
 function isNotFoundError(error: unknown): boolean {
   return Boolean(error && typeof error === 'object' && 'code' in error && error.code === 'ENOENT');
 }
@@ -159,6 +179,43 @@ function parseWebGeminiReviewArtifact(value: unknown): WebGeminiReviewArtifact |
   };
 }
 
+function parseWebGeminiReviewRunLog(value: unknown): WebGeminiReviewRunLog | undefined {
+  if (!value || typeof value !== 'object') {
+    return undefined;
+  }
+
+  const log = value as Partial<WebGeminiReviewRunLog>;
+  const allowedStatuses: WebGeminiReviewRunLog['status'][] = ['prepared', 'blocked', 'running', 'saved'];
+  if (
+    !hasText(log.draftId) ||
+    !hasText(log.createdAt) ||
+    !hasText(log.outputVideoUri) ||
+    !hasText(log.outputVideoPath) ||
+    !hasText(log.promptPath) ||
+    !allowedStatuses.includes(log.status as WebGeminiReviewRunLog['status'])
+  ) {
+    return undefined;
+  }
+
+  return {
+    draftId: log.draftId.trim(),
+    status: log.status as WebGeminiReviewRunLog['status'],
+    createdAt: log.createdAt.trim(),
+    outputVideoUri: log.outputVideoUri.trim(),
+    outputVideoPath: log.outputVideoPath.trim(),
+    promptPath: log.promptPath.trim(),
+    blockedReasons: Array.isArray(log.blockedReasons)
+      ? log.blockedReasons.filter(hasText).map((reason) => reason.trim())
+      : [],
+    externalUploadRequired: Boolean(log.externalUploadRequired),
+    ...(hasText(log.nextAction) ? { nextAction: log.nextAction.trim() } : {}),
+    ...(hasText(log.reviewPath) ? { reviewPath: log.reviewPath.trim() } : {}),
+    ...(hasText(log.reviewCreatedAt) ? { reviewCreatedAt: log.reviewCreatedAt.trim() } : {}),
+    ...(log.edgeControl ? { edgeControl: log.edgeControl } : {}),
+    ...(log.cdpControl ? { cdpControl: log.cdpControl } : {})
+  };
+}
+
 async function readWebGeminiReviewArtifact(
   requestDraftId: string
 ): Promise<{ review: WebGeminiReviewArtifact | null } | { error: string }> {
@@ -176,6 +233,26 @@ async function readWebGeminiReviewArtifact(
     }
 
     return { error: `Web Geminiレビューを読めません: ${unknownErrorMessage(error)}` };
+  }
+}
+
+async function readWebGeminiReviewRunLog(
+  requestDraftId: string
+): Promise<{ runLog: WebGeminiReviewRunLog | null } | { error: string }> {
+  try {
+    const raw = await readFile(webGeminiReviewRunLogPath(requestDraftId), 'utf8');
+    const parsed = parseWebGeminiReviewRunLog(JSON.parse(raw));
+    if (!parsed || parsed.draftId !== requestDraftId) {
+      return { error: 'Web Geminiレビュー実行ログの保存内容が壊れています' };
+    }
+
+    return { runLog: parsed };
+  } catch (error) {
+    if (isNotFoundError(error)) {
+      return { runLog: null };
+    }
+
+    return { error: `Web Geminiレビュー実行ログを読めません: ${unknownErrorMessage(error)}` };
   }
 }
 
@@ -1399,9 +1476,15 @@ router.get('/request-drafts/:id/web-gemini-review', async (request, response) =>
     response.status(409).json({ error: reviewResult.error, state });
     return;
   }
+  const runLogResult = await readWebGeminiReviewRunLog(draft.id);
+  if ('error' in runLogResult) {
+    response.status(409).json({ error: runLogResult.error, state });
+    return;
+  }
 
   response.json({
     review: reviewResult.review,
+    runLog: runLogResult.runLog,
     outputVideoUri: latestOutputVideoFileRef(state, draft.id)?.uri ?? ''
   });
 });

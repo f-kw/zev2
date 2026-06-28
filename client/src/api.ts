@@ -27,6 +27,22 @@ export interface WebGeminiReviewArtifact {
   instructionText: string;
 }
 
+export interface WebGeminiReviewRunLog {
+  draftId: string;
+  status: 'prepared' | 'blocked' | 'running' | 'saved';
+  createdAt: string;
+  outputVideoUri: string;
+  outputVideoPath: string;
+  promptPath: string;
+  blockedReasons: string[];
+  externalUploadRequired: boolean;
+  nextAction?: string;
+  reviewPath?: string;
+  reviewCreatedAt?: string;
+  edgeControl?: unknown;
+  cdpControl?: unknown;
+}
+
 export async function fetchWorkflow(): Promise<{ steps: WorkflowStep[] }> {
   const response = await api.get('/workflow');
   return response.data;
@@ -122,6 +138,7 @@ export async function requestGeneratedVideoChanges(
 
 export async function fetchWebGeminiReview(id: string): Promise<{
   review: WebGeminiReviewArtifact | null;
+  runLog: WebGeminiReviewRunLog | null;
   outputVideoUri: string;
 }> {
   const response = await api.get(`/request-drafts/${id}/web-gemini-review`);

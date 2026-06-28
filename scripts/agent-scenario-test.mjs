@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import { spawn } from 'node:child_process';
 import { createServer } from 'node:net';
-import { mkdtemp, readFile } from 'node:fs/promises';
+import { mkdtemp, readFile, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -823,9 +823,28 @@ async function assertThemeOptionRegenerateFromThemeSelection(apiBaseUrl, runtime
 }
 
 async function assertWebGeminiReviewFeedbackLoop(apiBaseUrl, runtimeDir, sourceDraftId) {
+  const state = await requestJson(apiPath(apiBaseUrl, '/state'));
+  const outputRequest = agentRequestsForDraft(state, sourceDraftId).find((request) => request.type === 'render_video');
+  const outputFileRef = state.fileRefs.find((fileRef) => fileRef.id === outputRequest?.result?.fileRefId);
+  assertScenario(outputFileRef?.uri, 'Web Geminiレビュー実行ログ用の完成動画参照が見つからない');
+  const runLogPath = path.join(runtimeDir, 'artifacts', sourceDraftId, 'web-gemini-review-run.json');
+  await writeFile(runLogPath, `${JSON.stringify({
+    draftId: sourceDraftId,
+    status: 'prepared',
+    createdAt: new Date().toISOString(),
+    outputVideoUri: outputFileRef.uri,
+    outputVideoPath: artifactPathByUri(runtimeDir, outputFileRef.uri),
+    promptPath: path.join(runtimeDir, 'artifacts', sourceDraftId, 'web-gemini-review-prompt.md'),
+    blockedReasons: [],
+    externalUploadRequired: true,
+    nextAction: 'レビュー対象動画と依頼文を確認しました。外部送信はまだ実行していません。'
+  }, null, 2)}\n`, 'utf8');
+
   const beforeReview = await requestJson(apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/web-gemini-review`));
   assertScenario(beforeReview.review === null, 'Web Geminiレビュー保存前にレビューがある扱いになっている');
   assertScenario(beforeReview.outputVideoUri, 'Web Geminiレビュー対象の完成動画参照が返っていない');
+  assertScenario(beforeReview.runLog?.status === 'prepared', 'Web Geminiレビュー準備ログが取得できない');
+  assertScenario(beforeReview.runLog.externalUploadRequired === true, '外部送信が必要なレビューであることがログから分からない');
 
   const instructionText = [
     '変えること: 冒頭のテロップを話し出しと同時に出す',

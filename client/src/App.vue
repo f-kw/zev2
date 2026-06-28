@@ -8,7 +8,7 @@ import {
   type ControlReviewItem,
   type RequestDraftInput
 } from '@zev2/shared';
-import { fetchWebGeminiReview, type WebGeminiReviewArtifact } from './api';
+import { fetchWebGeminiReview, type WebGeminiReviewArtifact, type WebGeminiReviewRunLog } from './api';
 import { useControlQueueStore } from './stores/controlQueue';
 
 type AppPage = 'workspace' | 'request';
@@ -31,6 +31,7 @@ const requestDefaultsApplied = ref(false);
 const pendingReviewChange = ref<{ reviewId: string; scope?: ReviewChangeScope } | null>(null);
 const changeReasonInput = ref('');
 const webGeminiReview = ref<WebGeminiReviewArtifact | null>(null);
+const webGeminiRunLog = ref<WebGeminiReviewRunLog | null>(null);
 const webGeminiInstructionInput = ref('');
 const webGeminiReviewMessage = ref('');
 const webGeminiReviewLoading = ref(false);
@@ -206,6 +207,48 @@ const canApplyWebGeminiReview = computed(() =>
       !agentOperationLocked.value &&
       activeWebGeminiAction.value !== 'apply_review'
   )
+);
+
+const webGeminiRunStatusTitle = computed(() => {
+  const runLog = webGeminiRunLog.value;
+  if (!runLog) {
+    return webGeminiReviewMessage.value || 'レビュー未取得';
+  }
+
+  if (runLog.status === 'blocked') {
+    return 'レビュー実行前に停止';
+  }
+
+  if (runLog.status === 'prepared') {
+    return 'レビュー準備済み';
+  }
+
+  if (runLog.status === 'running') {
+    return 'レビュー実行中';
+  }
+
+  return webGeminiReview.value ? 'レビュー保存済み' : 'レビュー保存確認が必要';
+});
+
+const webGeminiRunStatusDetail = computed(() => {
+  const runLog = webGeminiRunLog.value;
+  if (runLog?.nextAction) {
+    return runLog.nextAction;
+  }
+
+  if (webGeminiReviewMessage.value) {
+    return '保存済みレビューをまだ読めていません';
+  }
+
+  if (runLog?.status === 'saved') {
+    return '保存ログはありますが、レビュー本文を読めていません';
+  }
+
+  return 'AIエージェント実行後に表示します';
+});
+
+const webGeminiBlockedReasons = computed(() =>
+  webGeminiRunLog.value?.blockedReasons ?? []
 );
 
 const canResumeAgentWork = computed(() =>
@@ -647,6 +690,7 @@ async function refreshWebGeminiReview() {
   const draft = currentDraft.value;
   if (!draft || !outputVideoUri.value) {
     webGeminiReview.value = null;
+    webGeminiRunLog.value = null;
     webGeminiInstructionInput.value = '';
     webGeminiReviewMessage.value = '';
     loadedWebGeminiReviewCreatedAt.value = '';
@@ -658,6 +702,7 @@ async function refreshWebGeminiReview() {
   try {
     const result = await fetchWebGeminiReview(draft.id);
     webGeminiReview.value = result.review;
+    webGeminiRunLog.value = result.runLog;
     if (!result.review) {
       webGeminiInstructionInput.value = '';
       loadedWebGeminiReviewCreatedAt.value = '';
@@ -671,6 +716,7 @@ async function refreshWebGeminiReview() {
     }
   } catch {
     webGeminiReview.value = null;
+    webGeminiRunLog.value = null;
     webGeminiReviewMessage.value = 'レビュー状態を読めませんでした';
   } finally {
     webGeminiReviewLoading.value = false;
@@ -697,6 +743,7 @@ async function applyWebGeminiReviewChanges() {
   try {
     await store.applyWebGeminiReview(draft.id, instruction);
     webGeminiReview.value = null;
+    webGeminiRunLog.value = null;
     webGeminiInstructionInput.value = '';
     loadedWebGeminiReviewCreatedAt.value = '';
     webGeminiReviewMessage.value = '';
@@ -1086,8 +1133,16 @@ watch(
               </div>
 
               <div v-else class="empty-review-state">
-                <strong>{{ webGeminiReviewMessage || 'レビュー未取得' }}</strong>
-                <span>AIエージェント実行後に表示します</span>
+                <strong>{{ webGeminiRunStatusTitle }}</strong>
+                <span>{{ webGeminiRunStatusDetail }}</span>
+                <ul v-if="webGeminiBlockedReasons.length" class="review-reason-list">
+                  <li
+                    v-for="reason in webGeminiBlockedReasons"
+                    :key="reason"
+                  >
+                    {{ reason }}
+                  </li>
+                </ul>
               </div>
             </section>
           </div>
@@ -2047,6 +2102,16 @@ video {
 .empty-review-state span {
   color: var(--text-dim);
   font-size: 12px;
+}
+
+.review-reason-list {
+  display: grid;
+  gap: 4px;
+  margin: 4px 0 0;
+  padding-left: 18px;
+  color: #ff9c9c;
+  font-size: 12px;
+  line-height: 1.45;
 }
 
 .web-gemini-actions {
