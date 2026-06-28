@@ -822,6 +822,79 @@ async function assertThemeOptionRegenerateFromThemeSelection(apiBaseUrl, runtime
   );
 }
 
+async function assertWebGeminiReviewFeedbackLoop(apiBaseUrl, runtimeDir, sourceDraftId) {
+  const beforeReview = await requestJson(apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/web-gemini-review`));
+  assertScenario(beforeReview.review === null, 'Web Geminiレビュー保存前にレビューがある扱いになっている');
+  assertScenario(beforeReview.outputVideoUri, 'Web Geminiレビュー対象の完成動画参照が返っていない');
+
+  const instructionText = [
+    '変えること: 冒頭のテロップを話し出しと同時に出す',
+    '理由: 最初の一言より遅れて表示されると、見せ場の意味が伝わりにくい',
+    '対象箇所の説明: 1つ目の動画断片で話者が声を出し始める場面'
+  ].join('\n');
+  const saved = await requestJson(apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/web-gemini-review`), {
+    method: 'POST',
+    body: JSON.stringify({
+      promptText: '演出だけをレビューする',
+      reviewText: `${instructionText}\n\n補足: 顔には重ねず、ゲーム画面側へ寄せる。`,
+      instructionText
+    })
+  });
+  assertScenario(
+    saved.review?.instructionText === instructionText,
+    'Web Geminiレビューの改善指示が保存時に変わっている'
+  );
+
+  const fetched = await requestJson(apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/web-gemini-review`));
+  assertScenario(fetched.review?.status === 'ready', '保存したWeb Geminiレビューが取得できない');
+  assertScenario(
+    fetched.review.instructionText === instructionText,
+    '取得したWeb Geminiレビューの改善指示が保存内容と一致しない'
+  );
+
+  const applied = await requestJson(apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/apply-web-gemini-review`), {
+    method: 'POST',
+    body: JSON.stringify({
+      instructionText
+    })
+  });
+  const copiedDraft = applied.draft;
+  assertScenario(copiedDraft.id !== sourceDraftId, 'Web Geminiレビュー反映で編集コピーが作られていない');
+  assertScenario(
+    copiedDraft.purpose.includes('Web Geminiの演出レビューを反映して、演出作成前から作り直す'),
+    'Web Geminiレビュー反映の目的が編集コピーに残っていない'
+  );
+  assertScenario(
+    copiedDraft.purpose.includes(instructionText),
+    'Web Geminiレビューの改善指示が編集コピーに残っていない'
+  );
+
+  const copiedRequests = agentRequestsForDraft(applied.state, copiedDraft.id);
+  const expectedStartIndex = workflowTypes.indexOf('create_edit_plan');
+  assertScenario(copiedRequests.length === 7, 'Web Geminiレビュー反映後の編集コピーに7工程がない');
+  assertScenario(
+    copiedRequests.slice(0, expectedStartIndex).every((request) => request.status === 'succeeded'),
+    'Web Geminiレビュー反映で演出作成より前の工程が完了済みとしてコピーされていない'
+  );
+  assertScenario(
+    copiedRequests.slice(expectedStartIndex).every((request) => request.status === 'queued'),
+    'Web Geminiレビュー反映で演出作成以降が未作成状態に戻っていない'
+  );
+  assertScenario(
+    copiedRequests[expectedStartIndex]?.type === 'create_edit_plan',
+    'Web Geminiレビュー反映が演出作成前から再開していない'
+  );
+
+  await runAgentApprovingReviews(apiBaseUrl, runtimeDir, copiedDraft.id);
+  await assertGeneratedDraftCompleted(
+    apiBaseUrl,
+    runtimeDir,
+    copiedDraft.id,
+    'Web Geminiレビュー反映からのコピー再開',
+    workflowTypes.slice(workflowTypes.indexOf('create_edit_plan'))
+  );
+}
+
 async function assertResumeAndCancelControls(apiBaseUrl) {
   const draft = await createApprovedScenarioDraft(apiBaseUrl, '待機中AI作業の再開と中止を確認する');
   const next = await requestJson(apiPath(apiBaseUrl, '/agent-requests/next'));
@@ -928,6 +1001,8 @@ async function scenarioAutomaticVideoCreation(apiBaseUrl, runtimeDir) {
   await assertFixedEditPlanUsesFixtureValues(editPlan, '初回生成');
   assertTelopsDoNotCoverWholeSegments(editPlan, '初回生成');
   assertFixedEditPlanUsesPreparedScreenLayout(editPlan, '初回生成');
+
+  await assertWebGeminiReviewFeedbackLoop(apiBaseUrl, runtimeDir, draft.id);
 
   const editPlanRestartDraft = await assertCopiedRestart(apiBaseUrl, runtimeDir, draft.id, 'edit_plan', 'create_edit_plan');
   await runAgentApprovingReviews(apiBaseUrl, runtimeDir, editPlanRestartDraft.id);
