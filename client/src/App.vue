@@ -44,6 +44,7 @@ const loadedWebGeminiReviewCreatedAt = ref('');
 const activeWebGeminiAction = ref<'refresh_review' | 'apply_review' | ''>('');
 const initialPurpose = 'ショート動画を作成する';
 let refreshTimer: number | undefined;
+let webGeminiRefreshTimer: number | undefined;
 
 const requestInput = reactive<RequestDraftInput>({
   purpose: initialPurpose,
@@ -693,6 +694,10 @@ function normalizeWebGeminiReviewText(text: string): string {
 
 async function refreshWebGeminiReview() {
   const draft = currentDraft.value;
+  if (webGeminiReviewLoading.value) {
+    return;
+  }
+
   if (!draft || !outputVideoUri.value) {
     webGeminiReview.value = null;
     webGeminiRunLog.value = null;
@@ -789,11 +794,21 @@ onMounted(() => {
   refreshTimer = window.setInterval(() => {
     void store.refresh();
   }, 2000);
+  webGeminiRefreshTimer = window.setInterval(() => {
+    if (!outputVideoUri.value || activeWebGeminiAction.value || agentOperationLocked.value) {
+      return;
+    }
+
+    void refreshWebGeminiReview();
+  }, 5000);
 });
 
 onBeforeUnmount(() => {
   if (refreshTimer !== undefined) {
     window.clearInterval(refreshTimer);
+  }
+  if (webGeminiRefreshTimer !== undefined) {
+    window.clearInterval(webGeminiRefreshTimer);
   }
 });
 
