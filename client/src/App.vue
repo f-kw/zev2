@@ -2393,6 +2393,7 @@ video {
   color: #dfe2cc;
   font-size: 11px;
   line-height: 1.45;
+  overflow-wrap: anywhere;
 }
 
 .web-gemini-prompt {
