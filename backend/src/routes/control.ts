@@ -2266,6 +2266,19 @@ router.post('/request-drafts/:id/web-gemini-review', async (request, response) =
     return;
   }
 
+  const currentRunLogResult = await readWebGeminiReviewRunLog(draft.id);
+  if ('error' in currentRunLogResult) {
+    response.status(409).json({ error: currentRunLogResult.error, state });
+    return;
+  }
+  if (currentRunLogResult.runLog?.status === 'applied') {
+    response.status(409).json({
+      error: 'このWeb Geminiレビューはすでに反映済みです。レビューを取り直す準備をしてから保存してください',
+      state
+    });
+    return;
+  }
+
   const instructionText = hasText(request.body?.instructionText)
     ? request.body.instructionText.trim()
     : reviewText;

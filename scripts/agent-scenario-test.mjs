@@ -1485,6 +1485,30 @@ async function assertWebGeminiReviewFeedbackLoop(apiBaseUrl, runtimeDir, sourceD
     duplicateApplyError.includes('すでに反映済み'),
     '反映済みWeb Geminiレビューを二重反映できている'
   );
+  const overwriteAppliedReviewError = await expectRequestJsonFailure(
+    apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/web-gemini-review`),
+    {
+      method: 'POST',
+      body: JSON.stringify({
+        promptText: '反映済みレビューを上書きしようとする',
+        reviewText: '反映済みレビューを保存済みに戻してしまう本文',
+        instructionText: '反映済みレビューを保存済みに戻してしまう改善指示'
+      })
+    }
+  );
+  assertScenario(
+    overwriteAppliedReviewError.includes('すでに反映済み'),
+    '反映済みWeb Geminiレビューを保存APIで上書きできている'
+  );
+  const afterOverwriteRejected = await requestJson(apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/web-gemini-review`));
+  assertScenario(
+    afterOverwriteRejected.runLog?.status === 'applied',
+    '反映済みWeb Geminiレビューの上書き拒否後に実行ログが保存済みに戻っている'
+  );
+  assertScenario(
+    !afterOverwriteRejected.review.reviewText.includes('保存済みに戻してしまう本文'),
+    '反映済みWeb Geminiレビューの上書き拒否後にレビュー本文が変わっている'
+  );
 
   const copiedRequests = agentRequestsForDraft(applied.state, copiedDraft.id);
   const expectedStartIndex = workflowTypes.indexOf('create_edit_plan');
