@@ -29,6 +29,7 @@ export type TelopVisualStyle = {
   glowWidth?: number;
   glowOpacity?: number;
   maxCharsPerLine?: number;
+  maxLines?: number;
   position: TelopPositionStyle;
   background?: TelopBackgroundStyle;
 };
@@ -85,6 +86,7 @@ function normalizeStyle(value: unknown, label: string): TelopVisualStyle {
     ...(Number.isFinite(Number(record.glowWidth)) ? { glowWidth: Math.max(0, Number(record.glowWidth)) } : {}),
     ...(Number.isFinite(Number(record.glowOpacity)) ? { glowOpacity: Math.max(0, Math.min(100, Number(record.glowOpacity))) } : {}),
     ...(Number.isFinite(Number(record.maxCharsPerLine)) ? { maxCharsPerLine: Math.max(1, Math.floor(Number(record.maxCharsPerLine))) } : {}),
+    ...(Number.isFinite(Number(record.maxLines)) ? { maxLines: Math.max(1, Math.floor(Number(record.maxLines))) } : {}),
     position: {
       preset: typeof position.preset === 'string' && position.preset.trim() ? position.preset.trim() : 'bottom-center',
       ...(position.alignment === 'left' || position.alignment === 'center' || position.alignment === 'right'

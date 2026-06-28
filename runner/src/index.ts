@@ -87,6 +87,7 @@ const ZEV_STT_SAMPLE_PATH = path.join(workspaceRoot(), 'runner', 'fixtures', 'ze
 const FIXED_ARTIFACT_DRAFT_ID = 'draft_w4Lp9IJC6pQl3FsRfFL9t';
 const FIXED_TRANSCRIPT_PATH = path.join(workspaceRoot(), 'runtime', 'artifacts', FIXED_ARTIFACT_DRAFT_ID, 'transcript.json');
 const FIXED_THEME_OPTIONS_PATH = path.join(workspaceRoot(), 'runtime', 'artifacts', FIXED_ARTIFACT_DRAFT_ID, 'themes.json');
+const FIXED_EDIT_PLAN_PATH = path.join(workspaceRoot(), 'runner', 'fixtures', 'fixed-edit-plans.json');
 const confirmationVideoEncoder = process.env.ZEV2_FFMPEG_VIDEO_ENCODER ?? 'h264_videotoolbox';
 const CONFIRMATION_VIDEO_ENCODING_ARGS = ['-c:v', confirmationVideoEncoder, '-pix_fmt', 'yuv420p'];
 
@@ -307,6 +308,7 @@ async function buildThemeOptionsArtifact(transcript: TranscriptArtifact, request
 function editPlanArtifactContext(): BuildEditPlanArtifactContext {
   return {
     useFixedEditPlan,
+    fixedEditPlanPath: FIXED_EDIT_PLAN_PATH,
     hasGeminiApiConnection: Boolean(geminiApiKey || vertexProjectId),
     ffmpegCommand,
     requestArtifactDir,
@@ -588,7 +590,7 @@ function buildHumanReviewDecision(
       reason: '演出案と調整結果がそろったため、確認用動画を作ってよいか人間が判断できる状態にする',
       proposedNextState: 'review_required',
       requiresHumanReview: true,
-      humanQuestion: 'この内容で確認用動画を作りますか',
+      humanQuestion: 'この演出で確認用動画を作りますか',
       ruleIds: ['control-plane:render-readiness-required']
     };
   }
@@ -600,18 +602,18 @@ function buildContentSelectionDecision(payload: ThemeArtifact): AgentDecisionInp
   const options: ControlReviewOption[] = payload.themes.map((theme) => ({
     id: theme.id,
     title: theme.title,
-    summary: `${theme.summary}\n代表発話: ${theme.representativeText}`,
+    summary: `${theme.summary}\n判断材料: ${theme.whyItCanBeClipped}`,
     evidenceRefs: theme.evidenceRefs
   }));
 
   return {
     decisionType: 'theme_selection',
-    decision: '内容候補を提示する',
-    reason: '文字起こしに何があるかを整理し、人間が面白そうな内容を選べる状態にする',
+    decision: 'テーマを提示する',
+    reason: '文字起こしから切り抜きにできそうなテーマを整理し、人間が選べる状態にする',
     reviewOptions: options,
     proposedNextState: 'review_required',
     requiresHumanReview: true,
-    humanQuestion: 'どの内容で切り抜きを作りますか',
+    humanQuestion: 'どのテーマで切り抜きを作りますか',
     ruleIds: ['control-plane:content-selection-required']
   };
 }
@@ -619,23 +621,23 @@ function buildContentSelectionDecision(payload: ThemeArtifact): AgentDecisionInp
 function buildMaterialConfirmationDecision(payload: ClipCompositionArtifact): AgentDecisionInput {
   const options: ControlReviewOption[] = payload.parts.map((part, index) => ({
     id: part.id,
-    title: `使う場面 ${index + 1}`,
+    title: `編集元場面 ${index + 1}`,
     summary: `${formatSeconds(part.sourceStartMs)} - ${formatSeconds(part.sourceEndMs)}\n${part.transcriptText}`,
     evidenceRefs: [{
       refId: part.id,
       kind: 'time_range',
-      meaning: `${formatSeconds(part.sourceStartMs)} - ${formatSeconds(part.sourceEndMs)} の使う場面`
+      meaning: `${formatSeconds(part.sourceStartMs)} - ${formatSeconds(part.sourceEndMs)} の編集元場面`
     }]
   }));
 
   return {
     decisionType: 'material_confirmation',
-    decision: '使う場面の組み合わせを提示する',
-    reason: '切り抜きに使う場面を並べ、人間が流れを確認できる状態にする',
+    decision: '切り口と編集元場面を提示する',
+    reason: '選ばれたテーマの切り口と編集元場面を並べ、人間が流れを確認できる状態にする',
     reviewOptions: options,
     proposedNextState: 'review_required',
     requiresHumanReview: true,
-    humanQuestion: 'この場面の組み合わせで進めますか',
+    humanQuestion: 'この切り口と編集元場面で進めますか',
     ruleIds: ['control-plane:material-confirmation-required']
   };
 }
@@ -676,12 +678,12 @@ async function runDryRunLoop(): Promise<void> {
       return;
     }
 
-    console.log(`仮実装開始: ${request.label} (${request.type})`);
+    console.log(`AIエージェント実行開始: ${request.label} (${request.type})`);
 
     try {
       await claimRequest(request);
       await completeRequest(request);
-      console.log(`仮実装完了: ${request.label}`);
+      console.log(`AIエージェント実行完了: ${request.label}`);
     } catch (error) {
       await failRequest(request, error);
       throw error;

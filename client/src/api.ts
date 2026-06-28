@@ -64,6 +64,19 @@ export async function failAgentRequest(id: string, input: AgentFailureInput): Pr
   return response.data.state;
 }
 
+export async function resumeAgentWork(): Promise<Zev2State> {
+  const response = await api.post('/agent-requests/resume');
+  return response.data.state;
+}
+
+export async function cancelDraftAgentWork(id: string): Promise<{ draft: RequestDraft; state: Zev2State }> {
+  const response = await api.post(`/request-drafts/${id}/cancel-agent-work`);
+  return {
+    draft: response.data.draft,
+    state: response.data.state
+  };
+}
+
 export async function submitHumanReviewAction(
   id: string,
   action: HumanReviewActionType,

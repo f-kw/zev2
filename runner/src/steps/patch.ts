@@ -9,13 +9,13 @@ export function buildPatchArtifact(editPlanUri: string): PatchArtifact {
     changes: [
       {
         target: '動画の流れ',
-        action: '複数の発話箇所をこの順番で使う',
-        reason: '選ばれた内容の入口から展開までを確認用動画として見られるようにするため'
+        action: '複数の編集元場面をこの順番でつなぐ',
+        reason: '選ばれたテーマの入口から展開までを確認用動画として見られるようにするため'
       },
       {
         target: '画面とテロップ',
         action: '各断片で見せる範囲と表示文を決める',
-        reason: '動画にしたときに必要な場面が切れず、内容を追えるようにするため'
+        reason: '動画にしたときに必要な編集元場面が切れず、流れを追えるようにするため'
       }
     ],
     renderReady: true

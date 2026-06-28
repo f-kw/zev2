@@ -41,7 +41,6 @@ pnpm run runner:dry-run
 
 ## ドキュメント
 
-- 開発方針(必要なこと・必要ないこと、Claude作成): `docs/claude/development-policy.md`
 - レビュー用の要点: `docs/review-brief.md`
 - 現在の実装: `docs/current-implementation.md`
 - AIエージェント向けAPI仕様: `docs/ai-agent-api.md`

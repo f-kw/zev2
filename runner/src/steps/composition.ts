@@ -23,7 +23,7 @@ function selectedThemeIdFromState(state: Zev2State, requestDraftId: string, them
   if (!action?.selectedOptionId) {
     const firstThemeId = themes.themes[0]?.id;
     if (!firstThemeId) {
-      throw new Error('内容候補がないため使用素材構成案を作れません');
+      throw new Error('テーマがないため切り口と編集元場面を作れません');
     }
 
     return firstThemeId;
@@ -40,7 +40,7 @@ function buildClipComposition(
 ): ClipCompositionArtifact {
   const selectedTheme = findById(themes.themes, selectedThemeId);
   if (!selectedTheme) {
-    throw new Error('選ばれた内容が内容候補にありません');
+    throw new Error('選ばれたテーマが確認対象にありません');
   }
 
   const groupedSpeechIds = transcript.speechUnitGroups.length > 0
@@ -60,7 +60,7 @@ function buildClipComposition(
       transcriptText: segmentTextByIds(transcript, partSpeechIds),
       speechIds: partSpeechIds,
       speechUnits: speechUnitsByIds(transcript, partSpeechIds),
-      connectionNote: index === 0 ? '選ばれた内容を見せる入口として使う' : '前の発話を受けて話の流れをつなぐ'
+      connectionNote: index === 0 ? '選ばれたテーマを見せる入口にする' : '前の発話を受けて話の流れをつなぐ'
     };
   });
   const ranges = parts.map((part) => ({ sourceStartMs: part.sourceStartMs, sourceEndMs: part.sourceEndMs }));
@@ -68,7 +68,7 @@ function buildClipComposition(
   const lastEndMs = Math.max(...ranges.map((range) => range.sourceEndMs));
 
   const assemblyPlan = materialReselectInstruction
-    ? `${selectedTheme.compositionNote}\n素材選び直し指示: ${materialReselectInstruction}`
+    ? `${selectedTheme.compositionNote}\n編集元場面の探し直し指示: ${materialReselectInstruction}`
     : selectedTheme.compositionNote;
 
   return {
@@ -87,7 +87,7 @@ function buildClipComposition(
 }
 
 function materialReselectInstructionFromPurpose(purpose: string): string | undefined {
-  const marker = '素材選び直し指示:';
+  const marker = '編集元場面の探し直し指示:';
   const markerIndex = purpose.lastIndexOf(marker);
   if (markerIndex < 0) {
     return undefined;

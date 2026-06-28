@@ -12,11 +12,13 @@ import {
 } from '@zev2/shared';
 import {
   approveDraft,
+  cancelDraftAgentWork,
   createDraft,
   fetchRuntimeConfig,
   fetchState,
   fetchWorkflow,
   requestGeneratedVideoChanges,
+  resumeAgentWork,
   retryAgentRequest,
   submitHumanReviewAction
 } from '../api';
@@ -65,6 +67,12 @@ function hasHumanReviewRequiredForDraft(state: Zev2State, requestDraftId: string
 function failedAgentRequestForDraft(state: Zev2State, requestDraftId: string) {
   return state.agentRequests.find(
     (request) => request.requestDraftId === requestDraftId && request.status === 'failed'
+  );
+}
+
+function cancelledAgentRequestForDraft(state: Zev2State, requestDraftId: string) {
+  return [...state.agentRequests].reverse().find(
+    (request) => request.requestDraftId === requestDraftId && request.status === 'cancelled'
   );
 }
 
@@ -168,6 +176,13 @@ export const useControlQueueStore = defineStore('controlQueue', {
       if (hasRunnableAgentRequestsForDraft(this.state, activeDraftId)) {
         this.runPhase = 'running';
         this.message = '作成中です';
+        return;
+      }
+
+      const cancelledRequest = cancelledAgentRequestForDraft(this.state, activeDraftId);
+      if (cancelledRequest) {
+        this.runPhase = 'idle';
+        this.message = `${cancelledRequest.label}で中止しました`;
         return;
       }
 
@@ -339,7 +354,7 @@ export const useControlQueueStore = defineStore('controlQueue', {
       this.runNumber += 1;
       this.lastChangedAt = new Date().toISOString();
       this.message = scope === 'theme_selection'
-        ? '内容を選び直せる状態に戻しています'
+        ? 'テーマを選び直せる状態に戻しています'
         : scope === 'adjustment'
           ? '微調整から作り直しています'
           : '演出を作り直しています';
@@ -381,6 +396,53 @@ export const useControlQueueStore = defineStore('controlQueue', {
         this.state = result.state;
         this.lastChangedAt = new Date().toISOString();
         await this.refreshUntilAgentSettled(Date.now());
+      } catch (error) {
+        this.errorMessage = formatApiError(error);
+        this.message = '';
+        this.runPhase = 'error';
+        this.lastChangedAt = new Date().toISOString();
+      } finally {
+        this.loading = false;
+      }
+    },
+    async resumeAgentWork() {
+      this.loading = true;
+      this.errorMessage = '';
+      this.message = '待機中のAI作業を再開しています';
+      this.runPhase = 'running';
+      this.runNumber += 1;
+      this.lastChangedAt = new Date().toISOString();
+      try {
+        this.state = await resumeAgentWork();
+        this.lastChangedAt = new Date().toISOString();
+        await this.refreshUntilAgentSettled(Date.now());
+      } catch (error) {
+        this.errorMessage = formatApiError(error);
+        this.message = '';
+        this.runPhase = 'error';
+        this.lastChangedAt = new Date().toISOString();
+      } finally {
+        this.loading = false;
+      }
+    },
+    async cancelDraftAgentWork(id: string) {
+      this.loading = true;
+      this.errorMessage = '';
+      const draft = findById(this.state.requestDrafts, id);
+      this.activeDraftId = id;
+      this.activePurpose = draft?.purpose ?? '';
+      this.message = 'AI作業を中止しています';
+      this.runPhase = 'running';
+      this.runNumber += 1;
+      this.lastChangedAt = new Date().toISOString();
+      try {
+        const result = await cancelDraftAgentWork(id);
+        this.activeDraftId = result.draft.id;
+        this.activePurpose = result.draft.purpose;
+        this.state = result.state;
+        this.message = 'AI作業を中止しました';
+        this.runPhase = 'idle';
+        this.lastChangedAt = new Date().toISOString();
       } catch (error) {
         this.errorMessage = formatApiError(error);
         this.message = '';

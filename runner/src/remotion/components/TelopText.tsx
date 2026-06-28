@@ -17,10 +17,6 @@ export type TelopTextProps = {
   glowColor?: string;
   glowWidth?: number;
   glowOpacity?: number;
-  // 旧プロパティ（互換性）
-  shadowColor?: string;
-  shadowBlur?: number;
-  shadowOpacity?: number;
   maxCharsPerLine?: number;
   singleLine?: boolean;
   lineAlign?: 'left' | 'center' | 'right';
@@ -37,23 +33,14 @@ export const TelopText: React.FC<TelopTextProps> = (props) => {
     borderWidth = 0,
     lineSpacing = 100,
     // グロー
-    glowColor: glowColorProp,
-    glowWidth: glowWidthProp,
-    glowOpacity: glowOpacityProp,
-    // 旧プロパティ
-    shadowColor,
-    shadowBlur,
-    shadowOpacity,
+    glowColor,
+    glowWidth = 0,
+    glowOpacity = 100,
     maxCharsPerLine,
     singleLine = false,
     lineAlign = 'left',
     renderModel
   } = props;
-
-  // 旧プロパティから新プロパティへのマッピング
-  const glowColor = glowColorProp ?? shadowColor;
-  const glowWidth = glowWidthProp ?? (shadowBlur ? shadowBlur * 3 : 0);
-  const glowOpacity = glowOpacityProp ?? shadowOpacity ?? 100;
 
   const model = useMemo(() => {
     if (renderModel) {

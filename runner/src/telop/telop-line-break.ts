@@ -1,11 +1,3 @@
-import { loadDefaultJapaneseParser } from 'budoux';
-
-type JapaneseParser = {
-  parse: (text: string) => string[];
-};
-
-let japaneseParser: JapaneseParser | null = null;
-
 type WrapToken = {
   text: string;
   prefix: string;
@@ -248,45 +240,8 @@ const tokenizeNonJapaneseText = (rawLine: string, maxCharsPerLine: number): Wrap
   return tokens;
 };
 
-// 日本語はBudouXトークンを優先し、制約超過時だけ既存互換の分割へ落とす
-export function breakLineWithBudouX(rawLine: string, maxCharsPerLine?: number): string[] {
-  if (!maxCharsPerLine || maxCharsPerLine <= 0) {
-    return [rawLine];
-  }
-  if (rawLine.length === 0) {
-    return [''];
-  }
-
-  try {
-    if (!japaneseParser) {
-      japaneseParser = loadDefaultJapaneseParser();
-    }
-
-    const parsed = japaneseParser.parse(rawLine).filter((token) => token.length > 0);
-    const rawTokens = parsed.length > 0 ? parsed : [rawLine];
-    const normalizedTokens: WrapToken[] = [];
-
-    for (const token of rawTokens) {
-      const tokenWeight = getTextWeight(token);
-      if (tokenWeight <= maxCharsPerLine) {
-        normalizedTokens.push({ text: token, prefix: '' });
-        continue;
-      }
-      normalizedTokens.push(
-        ...splitTokenByWeight(token, maxCharsPerLine).map((part) => ({ text: part, prefix: '' }))
-      );
-    }
-
-    const packed = packTokensWithinLimit(normalizedTokens, maxCharsPerLine);
-    if (packed.lines.length !== 2) {
-      return packed.lines;
-    }
-
-    const initialSplitIndex = packed.splitIndexes[0] ?? 1;
-    return rebalanceTwoLines(normalizedTokens, maxCharsPerLine, initialSplitIndex, packed.lines);
-  } catch {
-    return breakLineFallback(rawLine, maxCharsPerLine);
-  }
+export function breakLineJapanese(rawLine: string, maxCharsPerLine?: number): string[] {
+  return breakLineFallback(rawLine, maxCharsPerLine);
 }
 
 export function breakLineByWords(rawLine: string, maxCharsPerLine?: number): string[] {
@@ -313,7 +268,7 @@ export function breakLineByWords(rawLine: string, maxCharsPerLine?: number): str
 
 function breakSingleLine(rawLine: string, maxCharsPerLine?: number): string[] {
   if (isJapaneseText(rawLine)) {
-    return breakLineWithBudouX(rawLine, maxCharsPerLine);
+    return breakLineJapanese(rawLine, maxCharsPerLine);
   }
   return breakLineByWords(rawLine, maxCharsPerLine);
 }
@@ -360,4 +315,3 @@ export function breakTelopText(text: string, maxCharsPerLine?: number): string[]
   }
   return lines;
 }
-

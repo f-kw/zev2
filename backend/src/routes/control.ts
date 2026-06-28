@@ -142,10 +142,10 @@ function copyDraftForRestart(
 ): RequestDraft {
   const purposeLines = [sourceDraft.purpose];
   if (reason) {
-    purposeLines.push(`やり直し内容: ${reason}`);
+    purposeLines.push(`やり直し理由: ${reason}`);
   }
   if (materialReselectInstruction) {
-    purposeLines.push(`素材選び直し指示: ${materialReselectInstruction}`);
+    purposeLines.push(`編集元場面の探し直し指示: ${materialReselectInstruction}`);
   }
 
   return {
@@ -529,6 +529,30 @@ function markReplaceableRequestsAsReplaced(
   }
 }
 
+function cancelActiveAgentRequests(
+  stateAgentRequests: AgentRequest[],
+  requestDraftId: string,
+  updatedAt: string
+): AgentRequest[] {
+  const cancelledRequests: AgentRequest[] = [];
+
+  for (const request of stateAgentRequests) {
+    if (
+      request.requestDraftId !== requestDraftId ||
+      !isStatusIn(request.status, ['queued', 'waiting', 'running'])
+    ) {
+      continue;
+    }
+
+    request.status = 'cancelled';
+    request.errorMessage = '人間がAI作業を中止しました';
+    request.updatedAt = updatedAt;
+    cancelledRequests.push(request);
+  }
+
+  return cancelledRequests;
+}
+
 function createThemeReselectFromReview(
   state: Awaited<ReturnType<typeof loadState>>,
   reviewItem: ControlReviewItem,
@@ -539,22 +563,22 @@ function createThemeReselectFromReview(
   requests: AgentRequest[];
 } | { error: string } {
   if (reviewItem.kind !== 'render_readiness' && reviewItem.kind !== 'material_confirmation') {
-    return { error: '内容を選び直せるのは使用素材確認または動画生成前確認からだけです' };
+    return { error: 'テーマを選び直せるのは編集元場面の確認または動画生成前確認からだけです' };
   }
 
   const sourceRequest = findById(state.agentRequests, reviewItem.agentRequestId);
   if (!sourceRequest) {
-    return { error: '内容を選び直す前提になるAI工程が見つかりません' };
+    return { error: 'テーマを選び直す前提になるAI工程が見つかりません' };
   }
 
   const themeRequest = latestSucceededAgentRequest(state.agentRequests, reviewItem.requestDraftId, 'propose_clip_themes');
   if (!themeRequest) {
-    return { error: '内容を選び直すための内容候補がありません' };
+    return { error: 'テーマを選び直すためのテーマがありません' };
   }
 
   const previousThemeReview = latestControlReview(state.controlReviewItems, reviewItem.requestDraftId, 'theme_selection');
   if (!previousThemeReview?.options.length) {
-    return { error: '内容を選び直すための選択肢がありません' };
+    return { error: '選び直せるテーマがありません' };
   }
 
   const fileRef = fileRefForAgentRequest(state, themeRequest);
@@ -564,13 +588,13 @@ function createThemeReselectFromReview(
     'theme_selection',
     {
       decisionType: 'theme_selection',
-      decision: '既存の内容候補から選び直す',
-      reason: '動画生成前確認で内容から見直す判断になったため、既存の内容候補をもう一度人間が選べるようにする',
+      decision: '既存のテーマから選び直す',
+      reason: '動画生成前確認でテーマから見直す判断になったため、既存のテーマをもう一度人間が選べるようにする',
       evidenceRefs: [],
       reviewOptions: previousThemeReview.options,
       proposedNextState: 'review_required',
       requiresHumanReview: true,
-      humanQuestion: 'どの内容で切り抜きを作り直すか選んでください',
+      humanQuestion: 'どのテーマで作り直すか選んでください',
       ruleIds: ['control-plane:theme-selection-required', 'zev-reference:theme-reselect']
     },
     fileRef,
@@ -596,7 +620,7 @@ function validateAgentDecision(input: AgentDecisionInput | undefined): string[] 
 
   const errors: string[] = [];
   if (!hasText(input.decision)) {
-    errors.push('判断内容が必要です');
+    errors.push('判断したことが必要です');
   }
 
   if (!hasText(input.reason)) {
@@ -612,7 +636,7 @@ function validateAgentDecision(input: AgentDecisionInput | undefined): string[] 
   }
 
   if (!hasText(input.humanQuestion)) {
-    errors.push('人間に求める判断内容が必要です');
+    errors.push('人間に求める判断が必要です');
   }
 
   return errors;
@@ -620,11 +644,11 @@ function validateAgentDecision(input: AgentDecisionInput | undefined): string[] 
 
 function reviewTitle(kind: ControlReviewKind): string {
   if (kind === 'theme_selection') {
-    return '内容選択';
+    return 'テーマ選択';
   }
 
   if (kind === 'material_confirmation') {
-    return '使う場面の確認';
+    return '切り口と編集元場面の確認';
   }
 
   return '動画生成前の確認';
@@ -632,11 +656,11 @@ function reviewTitle(kind: ControlReviewKind): string {
 
 function reviewSummary(kind: ControlReviewKind, agentRequest: AgentRequest): string {
   if (kind === 'theme_selection') {
-    return `${agentRequest.label} の結果を確認して、面白そうな内容を選びます`;
+    return `${agentRequest.label} の結果を確認して、切り抜くテーマを選びます`;
   }
 
   if (kind === 'material_confirmation') {
-    return '切り抜きに使う場面の組み合わせを確認します';
+    return 'テーマに対する切り口と編集元場面の組み合わせを確認します';
   }
 
   return `${agentRequest.label} の結果を確認して、動画生成へ進めるか判断します`;
@@ -814,15 +838,15 @@ function defaultHumanReviewReason(
   }
 
   if (reviewItem.kind === 'theme_selection' || changeScope === 'theme_options_regenerate') {
-    return '内容候補を作り直す';
+    return 'テーマを作り直す';
   }
 
   if (changeScope === 'theme_reselect') {
-    return '内容を選び直す';
+    return 'テーマを選び直す';
   }
 
   if (reviewItem.kind === 'material_confirmation') {
-    return '同じ内容で使う場面を選び直す';
+    return '同じテーマで切り口と編集元場面を探し直す';
   }
 
   if (changeScope === 'adjustment') {
@@ -865,11 +889,11 @@ async function applyHumanReviewAction(
   const selectedOptionId = hasText(selectedOptionInput) ? selectedOptionInput.trim() : '';
   if (action === 'approve' && reviewItem.kind === 'theme_selection') {
     if (!selectedOptionId) {
-      return { status: 'error', statusCode: 400, error: '切り抜きたい内容を選んでください', state };
+      return { status: 'error', statusCode: 400, error: '切り抜きたいテーマを選んでください', state };
     }
 
     if (!reviewItem.options.some((option) => option.id === selectedOptionId)) {
-      return { status: 'error', statusCode: 400, error: '選んだ内容が確認対象にありません', state };
+      return { status: 'error', statusCode: 400, error: '選んだテーマが確認対象にありません', state };
     }
   }
 
@@ -885,7 +909,7 @@ async function applyHumanReviewAction(
       return {
         status: 'error',
         statusCode: 409,
-        error: '選択肢を作り直せるのは内容選択画面からだけです',
+        error: 'テーマを作り直せるのはテーマ選択画面からだけです',
         state
       };
     }
@@ -1065,6 +1089,19 @@ router.get('/agent-requests/next', async (_, response) => {
   response.json({ request: agentRequest ?? null });
 });
 
+router.post('/agent-requests/resume', async (_, response) => {
+  const state = await loadState();
+  const agentRequest = findReadyAgentRequest(state);
+
+  if (!agentRequest) {
+    response.status(409).json({ error: '再開できる待機中のAI作業がありません', state });
+    return;
+  }
+
+  startDryRunRunner();
+  response.json({ request: agentRequest, state });
+});
+
 router.post('/agent-requests/:id/claim', async (request, response) => {
   const state = await loadState();
   const agentRequest = findById(state.agentRequests, request.params.id);
@@ -1102,6 +1139,11 @@ router.post('/agent-requests/:id/complete', async (request, response) => {
 
   if (!agentRequest) {
     response.status(404).json({ error: 'AI操作が見つかりません' });
+    return;
+  }
+
+  if (isStatusIn(agentRequest.status, ['cancelled', 'superseded'])) {
+    response.json({ request: agentRequest, state });
     return;
   }
 
@@ -1193,6 +1235,26 @@ router.post('/control-reviews/:id/request-changes', async (request, response) =>
   response.json(result);
 });
 
+router.post('/request-drafts/:id/cancel-agent-work', async (request, response) => {
+  const state = await loadState();
+  const draft = findById(state.requestDrafts, request.params.id);
+
+  if (!draft) {
+    response.status(404).json({ error: '実行前下書きが見つかりません', state });
+    return;
+  }
+
+  const updatedAt = nowIso();
+  const cancelledRequests = cancelActiveAgentRequests(state.agentRequests, draft.id, updatedAt);
+  await saveState(state);
+
+  response.json({
+    draft,
+    cancelledAgentRequests: cancelledRequests,
+    state
+  });
+});
+
 router.post('/request-drafts/:id/request-generated-video-changes', async (request, response) => {
   const reason = hasText(request.body?.reason) ? request.body.reason.trim() : '';
   if (!reason) {
@@ -1262,6 +1324,11 @@ router.post('/agent-requests/:id/fail', async (request, response) => {
 
   if (!agentRequest) {
     response.status(404).json({ error: 'AI操作が見つかりません' });
+    return;
+  }
+
+  if (isStatusIn(agentRequest.status, ['cancelled', 'superseded'])) {
+    response.json({ request: agentRequest, state });
     return;
   }
 

@@ -40,7 +40,7 @@ function buildSampleThemeOptions(transcript: TranscriptArtifact, request: AgentR
   const requestedCount = parseCount(request.constraints.themeCountLabel);
   const seeds = transcript.themeSeeds ?? [];
   if (seeds.length === 0) {
-    throw new Error('内容候補の固定データがないため、サンプル用内容候補を作れません');
+    throw new Error('固定テーマのデータがないため、サンプル用テーマを作れません');
   }
 
   const themes = seeds.slice(0, requestedCount).map((seed, index) => {
@@ -52,13 +52,13 @@ function buildSampleThemeOptions(transcript: TranscriptArtifact, request: AgentR
 
     return {
       id: seed.id ?? `content_${candidateNumber}`,
-      title: seed.title ?? `内容候補${candidateNumber}`,
+      title: seed.title ?? `テーマ${candidateNumber}`,
       summary,
       representativeText,
       representativeSpeechIds,
       relatedSpeechIds,
-      whyItCanBeClipped: seed.reason ?? '文字起こし上で内容のまとまりとして確認できます。面白さは人間が判断します。',
-      compositionNote: seed.compositionNote ?? '選ばれた後に、関係する発話を複数集めて使用素材構成案にします。',
+      whyItCanBeClipped: seed.reason ?? '文字起こし上でテーマのまとまりとして確認できます。面白さは人間が判断します。',
+      compositionNote: seed.compositionNote ?? '選ばれた後に、関係する発話を複数集めて切り口と編集元場面にします。',
       evidenceRefs: evidenceRefsForSpeechIds(representativeSpeechIds)
     };
   });
@@ -94,13 +94,13 @@ function buildTranscriptContentOptions(transcript: TranscriptArtifact, request: 
     const range = speechRange(transcript, representativeSpeechIds);
     themes.push({
       id: `content_${candidateNumber}`,
-      title: `内容候補${candidateNumber}`,
+      title: `テーマ${candidateNumber}`,
       summary: `この範囲には次の発話があります: ${representativeText}`,
       representativeText,
       representativeSpeechIds,
       relatedSpeechIds: representativeSpeechIds,
       whyItCanBeClipped: '文字起こし上でまとまった出来事、話題、反応として確認できます。面白いかは人間が判断します。',
-      compositionNote: `${Math.round(range.sourceStartMs / 1000)}秒付近から、選ばれた内容に関係する発話を探し直して使用素材構成案にします。`,
+      compositionNote: `${Math.round(range.sourceStartMs / 1000)}秒付近から、選ばれたテーマに関係する発話を探し直して切り口と編集元場面にします。`,
       evidenceRefs: evidenceRefsForSpeechIds(representativeSpeechIds)
     });
 
@@ -110,7 +110,7 @@ function buildTranscriptContentOptions(transcript: TranscriptArtifact, request: 
   }
 
   if (themes.length === 0) {
-    throw new Error('文字起こしから内容候補を作れません');
+    throw new Error('文字起こしからテーマを作れません');
   }
 
   return {
@@ -130,7 +130,7 @@ async function buildFixedThemeOptionsArtifact(
   const raw = await readFile(context.fixedThemeOptionsPath, 'utf8');
   const record = recordFrom(JSON.parse(raw));
   if (!Array.isArray(record.themes)) {
-    throw new Error('固定内容候補のデータに候補配列がありません');
+    throw new Error('固定テーマのデータにテーマ配列がありません');
   }
 
   const knownIds = new Set(transcript.segments.map((segment) => segment.id));
@@ -139,12 +139,12 @@ async function buildFixedThemeOptionsArtifact(
     const representativeSpeechIds = speechIdsFromGeminiRequired(
       theme.representativeSpeechIds,
       knownIds,
-      `固定内容候補 ${index + 1} 件目の代表発話`
+      `固定テーマ ${index + 1} 件目の代表発話`
     );
     const relatedSpeechIds = speechIdsFromGeminiRequired(
       theme.relatedSpeechIds,
       knownIds,
-      `固定内容候補 ${index + 1} 件目の関連発話`
+      `固定テーマ ${index + 1} 件目の関連発話`
     );
 
     return {
@@ -153,7 +153,7 @@ async function buildFixedThemeOptionsArtifact(
         : `content_${index + 1}`,
       title: typeof theme.title === 'string' && theme.title.trim()
         ? theme.title.trim()
-        : `内容候補 ${index + 1}`,
+        : `テーマ ${index + 1}`,
       summary: typeof theme.summary === 'string' && theme.summary.trim()
         ? theme.summary.trim()
         : segmentTextByIds(transcript, representativeSpeechIds),
@@ -164,16 +164,16 @@ async function buildFixedThemeOptionsArtifact(
       relatedSpeechIds,
       whyItCanBeClipped: typeof theme.whyItCanBeClipped === 'string' && theme.whyItCanBeClipped.trim()
         ? theme.whyItCanBeClipped.trim()
-        : '文字起こし上で内容のまとまりとして確認できます。面白さは人間が判断します。',
+        : '文字起こし上でテーマのまとまりとして確認できます。面白さは人間が判断します。',
       compositionNote: typeof theme.compositionNote === 'string' && theme.compositionNote.trim()
         ? theme.compositionNote.trim()
-        : '選ばれた後に、関係する発話を複数集めて使用素材構成案にします。',
+        : '選ばれた後に、関係する発話を複数集めて切り口と編集元場面にします。',
       evidenceRefs: evidenceRefsForSpeechIds(representativeSpeechIds)
     };
   });
 
   if (themes.length === 0) {
-    throw new Error('固定内容候補のデータに使える候補がありません');
+    throw new Error('固定テーマのデータに使えるテーマがありません');
   }
 
   return {
@@ -203,5 +203,5 @@ export async function buildThemeOptionsArtifact(
     return buildTranscriptContentOptions(transcript, request);
   }
 
-  throw new Error(`内容候補整理は fixed または transcript だけ対応しています: ${context.contentDiscoveryMode}`);
+  throw new Error(`テーマ作成は fixed または transcript だけ対応しています: ${context.contentDiscoveryMode}`);
 }

@@ -1,0 +1,146 @@
+{
+  "schemaVersion": 1,
+  "comment": "固定確認用の演出案です。LLMを使わない確認でも壊れたテロップを出さないため、テーマごとに人間が読める表示文と対応する発話ID範囲を明示します。",
+  "themes": {
+    "theme_1": {
+      "title": "歌うま企画に男気立候補したリオナ",
+      "hookText": "リオナの男気立候補",
+      "renderSegments": [
+        {
+          "role": "導入",
+          "caption": "リオナから突然のDiscord",
+          "screenLayoutId": "screen_speaker",
+          "detections": {
+            "screen": [140, 25, 875, 575],
+            "speaker": {
+              "face": [350, 710, 570, 840],
+              "body": [120, 590, 1000, 980]
+            }
+          },
+          "selectedCandidateId": "screen_speaker_body",
+          "selectionReason": "話の状況を見せるため、画面と話者全体を両方入れる"
+        },
+        {
+          "role": "結論",
+          "caption": "リオナの男気が刺さる",
+          "screenLayoutId": "screen_speaker",
+          "detections": {
+            "screen": [140, 25, 875, 575],
+            "speaker": {
+              "face": [350, 710, 570, 840],
+              "body": [120, 590, 1000, 980]
+            }
+          },
+          "selectedCandidateId": "screen_speaker_face",
+          "selectionReason": "結論の反応を見せるため、話者の顔を優先する"
+        }
+      ],
+      "telopPlan": [
+        { "sourceSpeechIdRange": [2934, 2958], "text": "ペコラも悩んでた", "role": "状況説明" },
+        { "sourceSpeechIdRange": [2959, 3008], "text": "誰にお願いすればいいんだろ", "role": "悩み" },
+        { "sourceSpeechIdRange": [3009, 3033], "text": "うだうだしてたら", "role": "展開" },
+        { "sourceSpeechIdRange": [3034, 3058], "text": "Discordがピンって来た", "role": "転機" },
+        { "sourceSpeechIdRange": [3059, 3098], "text": "リオナちゃんからだと思って", "role": "驚き" },
+        { "sourceSpeechIdRange": [3099, 3123], "text": "無理は承知なのですが", "role": "申し出" },
+        { "sourceSpeechIdRange": [3124, 3148], "text": "私も参加できないでしょうか", "role": "申し出" },
+        { "sourceSpeechIdRange": [3149, 3175], "text": "リオナお前男気", "role": "結論" }
+      ]
+    },
+    "theme_2": {
+      "title": "3D生配信中の極秘サイン「指ハート」",
+      "hookText": "配信中のこっそり合図",
+      "renderSegments": [
+        {
+          "role": "導入",
+          "caption": "配信中のトイレ合図",
+          "screenLayoutId": "screen_speaker",
+          "detections": {
+            "screen": [140, 25, 875, 575],
+            "speaker": {
+              "face": [350, 710, 570, 840],
+              "body": [120, 590, 1000, 980]
+            }
+          },
+          "selectedCandidateId": "screen_speaker_body",
+          "selectionReason": "説明の入口なので、画面と話者全体を両方入れる"
+        },
+        {
+          "role": "結論",
+          "caption": "指ハートでスタッフに合図",
+          "screenLayoutId": "screen_speaker",
+          "detections": {
+            "screen": [140, 25, 875, 575],
+            "speaker": {
+              "face": [350, 710, 570, 840],
+              "body": [120, 590, 1000, 980]
+            }
+          },
+          "selectedCandidateId": "screen_speaker_face",
+          "selectionReason": "オチの表情を見せるため、話者の顔を優先する"
+        }
+      ],
+      "telopPlan": [
+        { "sourceSpeechIdRange": [8083, 8089], "text": "生配信の途中で", "role": "導入" },
+        { "sourceSpeechIdRange": [8090, 8123], "text": "トイレ行きたくなる人っているじゃん", "role": "状況説明" },
+        { "sourceSpeechIdRange": [8124, 8142], "text": "今回2時間弱だったけど", "role": "補足" },
+        { "sourceSpeechIdRange": [8143, 8161], "text": "トイレのマークが指ハート", "role": "発見" },
+        { "sourceSpeechIdRange": [8162, 8172], "text": "指ハートわかるっしょ?", "role": "問いかけ" },
+        { "sourceSpeechIdRange": [8173, 8186], "text": "書いてあげるよ", "role": "説明" },
+        { "sourceSpeechIdRange": [8187, 8203], "text": "こういう感じね", "role": "説明" },
+        { "sourceSpeechIdRange": [8222, 8234], "text": "指ハートしてくださいって", "role": "合図" },
+        { "sourceSpeechIdRange": [8235, 8258], "text": "誘導できるので", "role": "仕組み" },
+        { "sourceSpeechIdRange": [8259, 8281], "text": "何かあったら指ハート", "role": "仕組み" },
+        { "sourceSpeechIdRange": [8282, 8310], "text": "いつもこれでやってるのかな", "role": "気づき" },
+        { "sourceSpeechIdRange": [8311, 8335], "text": "配信中に行きたくなる時あるし", "role": "結論" }
+      ]
+    },
+    "theme_3": {
+      "title": "まつり「ぺこちゃん、私のこと嫌いなの？」",
+      "hookText": "まつり先輩に捕まるぺこら",
+      "renderSegments": [
+        {
+          "role": "導入",
+          "caption": "まつり先輩に呼び止められる",
+          "screenLayoutId": "screen_speaker",
+          "detections": {
+            "screen": [140, 25, 875, 575],
+            "speaker": {
+              "face": [350, 710, 570, 840],
+              "body": [120, 590, 1000, 980]
+            }
+          },
+          "selectedCandidateId": "screen_speaker_body",
+          "selectionReason": "場面説明のため、画面と話者全体を両方入れる"
+        },
+        {
+          "role": "結論",
+          "caption": "嫌いじゃなくて世間話が苦手",
+          "screenLayoutId": "screen_speaker",
+          "detections": {
+            "screen": [140, 25, 875, 575],
+            "speaker": {
+              "face": [350, 710, 570, 840],
+              "body": [120, 590, 1000, 980]
+            }
+          },
+          "selectedCandidateId": "screen_speaker_face",
+          "selectionReason": "弁解の表情を見せるため、話者の顔を優先する"
+        }
+      ],
+      "telopPlan": [
+        { "sourceSpeechIdRange": [22286, 22310], "text": "ドーナツを食べてもらって", "role": "導入" },
+        { "sourceSpeechIdRange": [22311, 22335], "text": "ぺこら的には対人恐怖症だから", "role": "状況説明" },
+        { "sourceSpeechIdRange": [22336, 22360], "text": "ありがとうございましたって", "role": "逃げたい気持ち" },
+        { "sourceSpeechIdRange": [22361, 22385], "text": "そそくさ出ようとしたら", "role": "展開" },
+        { "sourceSpeechIdRange": [22386, 22410], "text": "私のこと嫌いなの?", "role": "問いかけ" },
+        { "sourceSpeechIdRange": [22411, 22425], "text": "嫌いじゃない!", "role": "反応" },
+        { "sourceSpeechIdRange": [22426, 22450], "text": "人と話すのが苦手で", "role": "説明" },
+        { "sourceSpeechIdRange": [22451, 22475], "text": "申し訳ないから大丈夫って", "role": "説明" },
+        { "sourceSpeechIdRange": [22476, 22500], "text": "嫌いじゃないですよ", "role": "弁解" },
+        { "sourceSpeechIdRange": [22501, 22525], "text": "いつもありがとうございます", "role": "弁解" },
+        { "sourceSpeechIdRange": [22526, 22550], "text": "本当に嫌いとかじゃなくて", "role": "補足" },
+        { "sourceSpeechIdRange": [22551, 22593], "text": "世間話ができないんだよね", "role": "結論" }
+      ]
+    }
+  }
+}

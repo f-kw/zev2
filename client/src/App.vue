@@ -10,19 +10,22 @@ import {
 } from '@zev2/shared';
 import { useControlQueueStore } from './stores/controlQueue';
 
-type RedoScope = 'theme_selection' | 'edit_plan' | 'adjustment';
+type AppPage = 'workspace' | 'request';
+type RedoScope = 'theme_selection' | 'edit_plan';
 type ReviewChangeScope =
   | 'edit_plan'
   | 'theme_reselect'
   | 'theme_options_regenerate'
-  | 'material_reselect'
-  | 'adjustment';
+  | 'material_reselect';
 
 const store = useControlQueueStore();
 const submitting = ref(false);
 const activeRedoScope = ref<RedoScope | ''>('');
 const activeReviewAction = ref('');
+const resumingAgentWork = ref(false);
+const cancellingAgentWork = ref(false);
 const selectedReviewOptionId = ref('');
+const activePage = ref<AppPage>('workspace');
 const requestDefaultsApplied = ref(false);
 const pendingReviewChange = ref<{ reviewId: string; scope?: ReviewChangeScope } | null>(null);
 const changeReasonInput = ref('');
@@ -58,11 +61,11 @@ const runtimeSummaries = computed(() => {
         : `動画音声をローカルSTTへ送ります: ${store.runtimeConfig.stt.localServerUrl}`
     },
     {
-      label: '内容候補整理',
-      title: store.runtimeConfig.contentDiscovery.mode === 'fixed' ? '固定候補' : '文字起こし整理',
+      label: 'テーマ作成',
+      title: store.runtimeConfig.contentDiscovery.mode === 'fixed' ? '固定テーマ' : '文字起こし整理',
       description: store.runtimeConfig.contentDiscovery.mode === 'fixed'
-        ? '固定済みの内容候補を使います'
-        : '文字起こしから内容候補を整理します'
+        ? '固定済みのテーマを表示します'
+        : '文字起こしからテーマを整理します'
     },
     {
       label: '演出作成',
@@ -86,6 +89,8 @@ const currentDraft = computed(() => {
 
   return store.state.requestDrafts[0];
 });
+
+const showRequestPage = computed(() => activePage.value === 'request' || !currentDraft.value);
 
 const activeReviewItem = computed<ControlReviewItem | undefined>(() => {
   const draft = currentDraft.value;
@@ -126,12 +131,28 @@ const failedRequest = computed(() =>
   visibleRequests.value.find((request) => request.status === 'failed')
 );
 
+const cancelledRequest = computed(() =>
+  [...visibleRequests.value].reverse().find((request) => request.status === 'cancelled')
+);
+
 const runningRequest = computed(() =>
   visibleRequests.value.find((request) => request.status === 'running')
 );
 
 const nextWaitingRequest = computed(() =>
   visibleRequests.value.find((request) => request.status === 'queued' || request.status === 'waiting')
+);
+
+const waitingAgentRequest = computed(() =>
+  activeReviewItem.value ? undefined : nextWaitingRequest.value
+);
+
+const agentOperationLocked = computed(() =>
+  Boolean(store.loading || runningRequest.value || waitingAgentRequest.value)
+);
+
+const requestCreationLocked = computed(() =>
+  Boolean(store.loading || submitting.value || !store.runtimeConfig)
 );
 
 const renderRequest = computed(() =>
@@ -151,7 +172,15 @@ const outputVideoUri = computed(() => {
 });
 
 const canRedoVideo = computed(() =>
-  Boolean(currentDraft.value && outputVideoUri.value && !store.loading && !runningRequest.value && !nextWaitingRequest.value)
+  Boolean(currentDraft.value && outputVideoUri.value && !agentOperationLocked.value)
+);
+
+const canResumeAgentWork = computed(() =>
+  Boolean(waitingAgentRequest.value && !runningRequest.value && !store.loading)
+);
+
+const canCancelAgentWork = computed(() =>
+  Boolean(currentDraft.value && (runningRequest.value || waitingAgentRequest.value) && !store.loading)
 );
 
 const statusText = computed(() => {
@@ -159,12 +188,24 @@ const statusText = computed(() => {
     return `${failedRequest.value.label}で停止`;
   }
 
+  if (store.loading && store.message) {
+    return store.message;
+  }
+
+  if (activeReviewItem.value) {
+    return `${activeReviewItem.value.title}で確認が必要`;
+  }
+
   if (runningRequest.value) {
     return `${runningRequest.value.label}を実行中`;
   }
 
-  if (nextWaitingRequest.value) {
-    return `${nextWaitingRequest.value.label}を待機中`;
+  if (waitingAgentRequest.value) {
+    return `${waitingAgentRequest.value.label}を待機中`;
+  }
+
+  if (cancelledRequest.value) {
+    return `${cancelledRequest.value.label}で中止`;
   }
 
   if (outputVideoUri.value) {
@@ -177,6 +218,50 @@ const statusText = computed(() => {
 
   return '新規依頼を入力してください';
 });
+
+const statusDetailText = computed(() => {
+  if (store.loading && store.message) {
+    return '処理が終わるまで操作できません';
+  }
+
+  if (activeReviewItem.value) {
+    return '下の確認画面で判断してください';
+  }
+
+  if (failedRequest.value) {
+    return failedRequest.value.errorMessage ?? '停止した工程を確認してください';
+  }
+
+  if (runningRequest.value) {
+    return `${runningRequest.value.label}を実行しています。完了まで操作できません`;
+  }
+
+  if (waitingAgentRequest.value) {
+    return `${waitingAgentRequest.value.label}の開始を待っています。完了まで操作できません`;
+  }
+
+  if (cancelledRequest.value) {
+    return cancelledRequest.value.errorMessage ?? '人間がAI作業を中止しました';
+  }
+
+  if (outputVideoUri.value) {
+    return '確認用動画を再生できます';
+  }
+
+  if (currentDraft.value) {
+    return '次の操作を選べます';
+  }
+
+  return '作成する動画を入力してください';
+});
+
+const visibleStatusMessage = computed(() =>
+  store.errorMessage ? '' : statusDetailText.value
+);
+
+const operationLockNotice = computed(() =>
+  agentOperationLocked.value ? 'この工程はキャンセルできません' : ''
+);
 
 const progressText = computed(() => {
   if (visibleRequests.value.length === 0) {
@@ -200,12 +285,16 @@ function statusLabel(request: AgentRequest): string {
     return '停止';
   }
 
+  if (request.status === 'cancelled') {
+    return '中止';
+  }
+
   return '待機中';
 }
 
 async function createVideo() {
   const runtimeConfig = store.runtimeConfig;
-  if (!runtimeConfig) {
+  if (!runtimeConfig || store.loading || submitting.value) {
     return;
   }
 
@@ -213,9 +302,18 @@ async function createVideo() {
   requestInput.sourceUri = runtimeConfig.source.defaultUri;
   try {
     await store.createRequestDraft({ ...requestInput });
+    activePage.value = 'workspace';
   } finally {
     submitting.value = false;
   }
+}
+
+function openRequestPage() {
+  activePage.value = 'request';
+}
+
+function closeRequestPage() {
+  activePage.value = 'workspace';
 }
 
 function isContentSelectionReview(review: ControlReviewItem): boolean {
@@ -228,11 +326,11 @@ function isMaterialConfirmationReview(review: ControlReviewItem): boolean {
 
 function approveReviewLabel(review: ControlReviewItem): string {
   if (isContentSelectionReview(review)) {
-    return 'この内容で素材を探す';
+    return 'このテーマで切り口を作る';
   }
 
   if (isMaterialConfirmationReview(review)) {
-    return 'この場面で演出へ進む';
+    return 'この切り口で演出へ進む';
   }
 
   return '確認用動画を作る';
@@ -251,23 +349,19 @@ function defaultReviewReason(
 
   if (action === 'request_changes') {
     if (review.kind === 'theme_selection' || scope === 'theme_options_regenerate') {
-      return '内容候補を作り直す';
+      return 'テーマを作り直す';
     }
 
     if (review.kind === 'material_confirmation' && scope === 'theme_reselect') {
-      return '内容を選び直す';
+      return 'テーマを選び直す';
     }
 
     if (review.kind === 'material_confirmation') {
-      return '同じ内容で使う場面を選び直す';
+      return '同じテーマで切り口と編集元場面を探し直す';
     }
 
     if (scope === 'theme_reselect') {
-      return '内容を選び直す';
-    }
-
-    if (scope === 'adjustment') {
-      return '微調整から作り直す';
+      return 'テーマを選び直す';
     }
 
     return '演出作成前から作り直す';
@@ -278,47 +372,39 @@ function defaultReviewReason(
 
 function reviewChangePromptMessage(review: ControlReviewItem, scope?: ReviewChangeScope): string {
   if (review.kind === 'theme_selection' || scope === 'theme_options_regenerate') {
-    return '必要なら作り直したい選択肢の希望を入力してください';
+    return '必要なら作り直したいテーマの希望を入力してください';
   }
 
   if (review.kind === 'material_confirmation' && scope === 'theme_reselect') {
-    return '必要なら選び直す理由を入力してください';
+    return '必要ならテーマを選び直す理由を入力してください';
   }
 
   if (review.kind === 'material_confirmation') {
-    return '必要なら使う場面の希望を入力してください';
+    return '必要なら切り口や編集元場面の希望を入力してください';
   }
 
   if (review.kind === 'render_readiness' && scope === 'theme_reselect') {
-    return '必要なら選び直す理由を入力してください';
+    return '必要ならテーマを選び直す理由を入力してください';
   }
 
-  if (review.kind === 'render_readiness' && scope === 'adjustment') {
-    return '微調整で直したい点があれば入力してください';
-  }
-
-  return '作り直したい内容があれば入力してください';
+  return '作り直したい点があれば入力してください';
 }
 
 function reviewChangeDialogTitle(review: ControlReviewItem, scope?: ReviewChangeScope): string {
   if (review.kind === 'theme_selection' || scope === 'theme_options_regenerate') {
-    return '選択肢を作り直す';
+    return 'テーマを作り直す';
   }
 
   if (review.kind === 'material_confirmation' && scope === 'theme_reselect') {
-    return '内容を選び直す';
+    return 'テーマを選び直す';
   }
 
   if (review.kind === 'material_confirmation') {
-    return '使う場面を選び直す';
+    return '切り口と編集元場面を探し直す';
   }
 
   if (review.kind === 'render_readiness' && scope === 'theme_reselect') {
-    return '内容を選び直す';
-  }
-
-  if (review.kind === 'render_readiness' && scope === 'adjustment') {
-    return '微調整から作り直す';
+    return 'テーマを選び直す';
   }
 
   return '演出を作り直す';
@@ -329,6 +415,10 @@ function skipsChangeDialog(scope?: ReviewChangeScope): boolean {
 }
 
 function openReviewChangeDialog(review: ControlReviewItem, scope?: ReviewChangeScope) {
+  if (agentOperationLocked.value) {
+    return;
+  }
+
   pendingReviewChange.value = { reviewId: review.id, scope };
   changeReasonInput.value = '';
 }
@@ -344,6 +434,10 @@ async function sendReviewAction(
   reason: string,
   scope?: ReviewChangeScope
 ) {
+  if (agentOperationLocked.value) {
+    return;
+  }
+
   activeReviewAction.value = scope ? `${action}:${scope}` : action;
   try {
     await store.submitControlReview(
@@ -361,7 +455,7 @@ async function sendReviewAction(
 async function confirmReviewChange() {
   const pending = pendingReviewChange.value;
   const review = pendingReviewItem.value;
-  if (!pending || !review) {
+  if (!pending || !review || agentOperationLocked.value) {
     return;
   }
 
@@ -372,7 +466,7 @@ async function confirmReviewChange() {
 
 async function submitActiveReview(action: 'approve' | 'request_changes', scope?: ReviewChangeScope) {
   const review = activeReviewItem.value;
-  if (!review) {
+  if (!review || agentOperationLocked.value) {
     return;
   }
 
@@ -391,21 +485,47 @@ async function submitActiveReview(action: 'approve' | 'request_changes', scope?:
 
 async function redoVideo(scope: RedoScope) {
   const draft = currentDraft.value;
-  if (!draft) {
+  if (!draft || agentOperationLocked.value) {
     return;
   }
 
   activeRedoScope.value = scope;
   const reasonByScope: Record<RedoScope, string> = {
-    theme_selection: '内容選択前から作り直す',
-    edit_plan: '演出作成前から作り直す',
-    adjustment: '微調整前から作り直す'
+    theme_selection: 'テーマ選択前から作り直す',
+    edit_plan: '演出作成前から作り直す'
   };
 
   try {
     await store.requestGeneratedVideoChanges(draft.id, reasonByScope[scope], scope);
   } finally {
     activeRedoScope.value = '';
+  }
+}
+
+async function resumeAgentWork() {
+  if (!canResumeAgentWork.value) {
+    return;
+  }
+
+  resumingAgentWork.value = true;
+  try {
+    await store.resumeAgentWork();
+  } finally {
+    resumingAgentWork.value = false;
+  }
+}
+
+async function cancelAgentWork() {
+  const draft = currentDraft.value;
+  if (!draft || !canCancelAgentWork.value) {
+    return;
+  }
+
+  cancellingAgentWork.value = true;
+  try {
+    await store.cancelDraftAgentWork(draft.id);
+  } finally {
+    cancellingAgentWork.value = false;
   }
 }
 
@@ -454,10 +574,82 @@ watch(
 
 <template>
   <main class="app-shell">
-    <section class="request-panel">
-      <div>
-        <p class="eyebrow">zev2</p>
-        <h1>ショート動画を自動作成</h1>
+    <section class="agent-status-bar" aria-live="polite">
+      <div class="status-main">
+        <div>
+          <p class="eyebrow">AIエージェント</p>
+          <h2>{{ statusText }}</h2>
+        </div>
+        <p v-if="visibleStatusMessage" class="status-message">{{ visibleStatusMessage }}</p>
+        <p v-if="store.errorMessage" class="error-message">{{ store.errorMessage }}</p>
+        <p v-if="operationLockNotice" class="lock-message">{{ operationLockNotice }}</p>
+      </div>
+
+      <div class="status-controls">
+        <span v-if="progressText" class="progress-pill">{{ progressText }}</span>
+        <button
+          v-if="canResumeAgentWork"
+          type="button"
+          class="secondary-button"
+          :disabled="resumingAgentWork"
+          @click="resumeAgentWork"
+        >
+          {{ resumingAgentWork ? '再開中' : '待機中の作業を再開' }}
+        </button>
+        <button
+          v-if="canCancelAgentWork"
+          type="button"
+          class="danger-button"
+          :disabled="cancellingAgentWork"
+          @click="cancelAgentWork"
+        >
+          {{ cancellingAgentWork ? '中止中' : '作業を中止' }}
+        </button>
+        <button
+          v-if="!showRequestPage"
+          type="button"
+          class="secondary-button"
+          :disabled="submitting"
+          @click="openRequestPage"
+        >
+          新規作成
+        </button>
+        <button
+          v-if="showRequestPage && currentDraft"
+          type="button"
+          class="secondary-button"
+          @click="closeRequestPage"
+        >
+          作業へ戻る
+        </button>
+      </div>
+
+      <ol v-if="visibleRequests.length" class="step-list">
+        <li
+          v-for="request in visibleRequests"
+          :key="request.id"
+          :class="['step-item', `step-${request.status}`]"
+        >
+          <span>{{ request.label }}</span>
+          <strong>{{ statusLabel(request) }}</strong>
+        </li>
+      </ol>
+    </section>
+
+    <section v-if="showRequestPage" class="request-page">
+      <div class="request-header">
+        <div>
+          <p class="eyebrow">zev2</p>
+          <h1>ショート動画を作成</h1>
+        </div>
+        <button
+          v-if="currentDraft"
+          type="button"
+          class="secondary-button"
+          @click="closeRequestPage"
+        >
+          作業へ戻る
+        </button>
       </div>
 
       <form class="request-form" @submit.prevent="createVideo">
@@ -476,45 +668,22 @@ watch(
         </div>
 
         <label>
-          作りたい内容
+          作りたいショート
           <textarea
             v-model="requestInput.purpose"
             rows="4"
             placeholder="例: 面白い会話を短いショート動画にする"
+            :disabled="requestCreationLocked"
           />
         </label>
 
-        <button type="submit" :disabled="submitting || !store.runtimeConfig">
+        <button type="submit" :disabled="requestCreationLocked">
           {{ submitting ? '作成中' : '動画を作成' }}
         </button>
       </form>
     </section>
 
-    <section class="status-panel" aria-live="polite">
-      <div class="status-header">
-        <div>
-          <p class="eyebrow">現在の状態</p>
-          <h2>{{ statusText }}</h2>
-        </div>
-        <span v-if="progressText" class="progress-pill">{{ progressText }}</span>
-      </div>
-
-      <p v-if="store.message" class="status-message">{{ store.message }}</p>
-      <p v-if="store.errorMessage" class="error-message">{{ store.errorMessage }}</p>
-
-      <ol v-if="visibleRequests.length" class="step-list">
-        <li
-          v-for="request in visibleRequests"
-          :key="request.id"
-          :class="['step-item', `step-${request.status}`]"
-        >
-          <span>{{ request.label }}</span>
-          <strong>{{ statusLabel(request) }}</strong>
-        </li>
-      </ol>
-    </section>
-
-    <section v-if="activeReviewItem" class="review-panel">
+    <section v-else-if="activeReviewItem" class="review-panel">
       <div>
         <p class="eyebrow">{{ activeReviewItem.title }}</p>
         <h2>{{ activeReviewItem.humanQuestion }}</h2>
@@ -544,7 +713,7 @@ watch(
       <div class="review-actions">
         <button
           type="button"
-          :disabled="store.loading || (isContentSelectionReview(activeReviewItem) && !selectedReviewOptionId)"
+          :disabled="agentOperationLocked || (isContentSelectionReview(activeReviewItem) && !selectedReviewOptionId)"
           @click="submitActiveReview('approve')"
         >
           {{ activeReviewAction === 'approve' ? '処理中' : approveReviewLabel(activeReviewItem) }}
@@ -553,34 +722,34 @@ watch(
           v-if="isContentSelectionReview(activeReviewItem)"
           type="button"
           class="secondary-button"
-          :disabled="store.loading"
+          :disabled="agentOperationLocked"
           @click="submitActiveReview('request_changes', 'theme_options_regenerate')"
         >
-          {{ activeReviewAction === 'request_changes:theme_options_regenerate' ? '処理中' : '選択肢を作り直す' }}
+          {{ activeReviewAction === 'request_changes:theme_options_regenerate' ? '処理中' : 'テーマを作り直す' }}
         </button>
         <button
           v-if="isMaterialConfirmationReview(activeReviewItem)"
           type="button"
           class="secondary-button"
-          :disabled="store.loading"
+          :disabled="agentOperationLocked"
           @click="submitActiveReview('request_changes', 'material_reselect')"
         >
-          {{ activeReviewAction === 'request_changes:material_reselect' ? '処理中' : '使う場面を選び直す' }}
+          {{ activeReviewAction === 'request_changes:material_reselect' ? '処理中' : '切り口と編集元場面を探し直す' }}
         </button>
         <button
           v-if="isMaterialConfirmationReview(activeReviewItem)"
           type="button"
           class="secondary-button"
-          :disabled="store.loading"
+          :disabled="agentOperationLocked"
           @click="submitActiveReview('request_changes', 'theme_reselect')"
         >
-          {{ activeReviewAction === 'request_changes:theme_reselect' ? '処理中' : '内容を選び直す' }}
+          {{ activeReviewAction === 'request_changes:theme_reselect' ? '処理中' : 'テーマを選び直す' }}
         </button>
         <button
           v-if="activeReviewItem.kind === 'render_readiness'"
           type="button"
           class="secondary-button"
-          :disabled="store.loading"
+          :disabled="agentOperationLocked"
           @click="submitActiveReview('request_changes', 'edit_plan')"
         >
           {{ activeReviewAction === 'request_changes:edit_plan' ? '処理中' : '演出作成前から作り直す' }}
@@ -589,19 +758,10 @@ watch(
           v-if="activeReviewItem.kind === 'render_readiness'"
           type="button"
           class="secondary-button"
-          :disabled="store.loading"
+          :disabled="agentOperationLocked"
           @click="submitActiveReview('request_changes', 'theme_reselect')"
         >
-          {{ activeReviewAction === 'request_changes:theme_reselect' ? '処理中' : '内容を選び直す' }}
-        </button>
-        <button
-          v-if="activeReviewItem.kind === 'render_readiness'"
-          type="button"
-          class="secondary-button"
-          :disabled="store.loading"
-          @click="submitActiveReview('request_changes', 'adjustment')"
-        >
-          {{ activeReviewAction === 'request_changes:adjustment' ? '処理中' : '微調整前から作り直す' }}
+          {{ activeReviewAction === 'request_changes:theme_reselect' ? '処理中' : 'テーマを選び直す' }}
         </button>
       </div>
     </section>
@@ -623,20 +783,21 @@ watch(
             v-model="changeReasonInput"
             rows="4"
             placeholder="必要な場合だけ入力"
+            :disabled="agentOperationLocked"
           />
         </label>
         <div class="dialog-actions">
-          <button type="button" class="secondary-button" @click="closeReviewChangeDialog">
+          <button type="button" class="secondary-button" :disabled="agentOperationLocked" @click="closeReviewChangeDialog">
             キャンセル
           </button>
-          <button type="submit" :disabled="store.loading">
+          <button type="submit" :disabled="agentOperationLocked">
             {{ activeReviewAction.startsWith('request_changes') ? '処理中' : '作り直す' }}
           </button>
         </div>
       </form>
     </div>
 
-    <section v-if="!activeReviewItem && outputVideoUri" class="video-panel">
+    <section v-else-if="outputVideoUri" class="video-panel">
       <div>
         <p class="eyebrow">生成結果</p>
         <h2>完成動画</h2>
@@ -649,7 +810,7 @@ watch(
           :disabled="!canRedoVideo"
           @click="redoVideo('theme_selection')"
         >
-          {{ activeRedoScope === 'theme_selection' ? '作り直し中' : '内容選択前から作り直す' }}
+          {{ activeRedoScope === 'theme_selection' ? '作り直し中' : 'テーマ選択前から作り直す' }}
         </button>
         <button
           type="button"
@@ -658,14 +819,18 @@ watch(
         >
           {{ activeRedoScope === 'edit_plan' ? '作り直し中' : '演出作成前から作り直す' }}
         </button>
-        <button
-          type="button"
-          :disabled="!canRedoVideo"
-          @click="redoVideo('adjustment')"
-        >
-          {{ activeRedoScope === 'adjustment' ? '作り直し中' : '微調整前から作り直す' }}
-        </button>
       </div>
+    </section>
+
+    <section v-else class="work-wait-panel">
+      <div>
+        <p class="eyebrow">作業中</p>
+        <h2>{{ statusText }}</h2>
+      </div>
+      <p>
+        {{ statusDetailText }}
+      </p>
+      <p v-if="operationLockNotice" class="lock-message">{{ operationLockNotice }}</p>
     </section>
   </main>
 </template>
@@ -677,7 +842,6 @@ watch(
   background: #f5f7f9;
   color: #17202a;
   display: grid;
-  grid-template-columns: minmax(300px, 380px) minmax(0, 1fr);
   grid-template-rows: auto minmax(0, 1fr);
   gap: 14px;
   padding: 16px;
@@ -685,34 +849,55 @@ watch(
   box-sizing: border-box;
 }
 
-.request-panel,
-.status-panel,
+.agent-status-bar,
+.request-page,
 .review-panel,
-.video-panel {
+.video-panel,
+.work-wait-panel {
   width: 100%;
   min-width: 0;
   box-sizing: border-box;
 }
 
-.request-panel,
-.status-panel {
-  grid-column: 1;
+.agent-status-bar {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 10px 14px;
+  align-items: start;
+  background: #ffffff;
+  border: 1px solid #cbd8e2;
+  border-radius: 8px;
+  padding: 12px 14px;
+  box-shadow: 0 2px 8px rgba(23, 32, 42, 0.05);
 }
 
-.request-panel {
-  grid-row: 1;
+.status-main {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 14px;
+  min-width: 0;
 }
 
-.status-panel {
-  grid-row: 2;
-  min-height: 0;
-  overflow: hidden;
+.status-main > div {
+  min-width: 180px;
 }
 
+.status-main h2 {
+  font-size: 18px;
+}
+
+.status-controls {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.request-page,
 .review-panel,
-.video-panel {
-  grid-column: 2;
-  grid-row: 1 / span 2;
+.video-panel,
+.work-wait-panel {
   min-height: 0;
   height: 100%;
   background: #ffffff;
@@ -721,12 +906,18 @@ watch(
   padding: 16px;
 }
 
-.request-panel,
-.status-panel {
-  background: #ffffff;
-  border: 1px solid #d8e0e7;
-  border-radius: 8px;
-  padding: 16px;
+.request-page {
+  display: grid;
+  align-content: start;
+  gap: 14px;
+  overflow: auto;
+}
+
+.request-header {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 12px;
 }
 
 .eyebrow {
@@ -754,6 +945,7 @@ h2 {
   display: grid;
   gap: 12px;
   margin-top: 14px;
+  max-width: 760px;
 }
 
 .runtime-summary {
@@ -822,19 +1014,14 @@ button {
 }
 
 button:disabled {
-  cursor: wait;
+  cursor: not-allowed;
   opacity: 0.65;
 }
 
-.status-header {
-  display: flex;
-  align-items: start;
-  justify-content: space-between;
-  gap: 10px;
-}
-
-.status-header h2 {
-  font-size: 17px;
+textarea:disabled {
+  background: #eef2f6;
+  color: #607080;
+  cursor: not-allowed;
 }
 
 .progress-pill {
@@ -848,7 +1035,7 @@ button:disabled {
 }
 
 .error-message {
-  margin: 10px 0 0;
+  margin: 0;
   border-left: 4px solid #b42318;
   background: #fff2f1;
   padding: 10px;
@@ -858,11 +1045,23 @@ button:disabled {
 }
 
 .status-message {
-  margin: 10px 0 0;
+  flex: 1 1 260px;
+  margin: 0;
   border-left: 4px solid #1264a3;
   background: #edf6ff;
   padding: 10px;
   color: #173a5e;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.lock-message {
+  flex: 0 1 auto;
+  margin: 0;
+  border-left: 4px solid #8a6d1d;
+  background: #fff8dd;
+  padding: 10px;
+  color: #634f13;
   font-size: 13px;
   font-weight: 800;
 }
@@ -886,10 +1085,11 @@ button:disabled {
 
 .review-options {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: minmax(0, 1fr);
   gap: 10px;
   min-height: 0;
-  overflow: hidden;
+  overflow: auto;
+  padding-right: 2px;
 }
 
 .review-option {
@@ -919,21 +1119,18 @@ button:disabled {
 }
 
 .review-option strong {
-  overflow: hidden;
   color: #17202a;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  font-size: 16px;
+  line-height: 1.4;
+  white-space: normal;
 }
 
 .review-option small {
-  color: #526171;
-  display: -webkit-box;
-  overflow: hidden;
-  font-size: 13px;
-  line-height: 1.45;
+  color: #243241;
+  display: block;
+  font-size: 14px;
+  line-height: 1.65;
   white-space: pre-line;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 4;
 }
 
 .review-actions {
@@ -974,12 +1171,18 @@ button:disabled {
   color: #17202a;
 }
 
+.danger-button {
+  background: #b42318;
+  color: #ffffff;
+}
+
 .step-list {
   list-style: none;
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-column: 1 / -1;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
   gap: 6px;
-  margin: 12px 0 0;
+  margin: 0;
   padding: 0;
 }
 
@@ -991,7 +1194,7 @@ button:disabled {
   min-width: 0;
   border: 1px solid #d8e0e7;
   border-radius: 6px;
-  padding: 7px 8px;
+  padding: 6px 8px;
   background: #ffffff;
 }
 
@@ -1018,9 +1221,20 @@ button:disabled {
   background: #eef7ff;
 }
 
+.step-queued,
+.step-waiting {
+  border-color: #d8e0e7;
+  background: #f8fafc;
+}
+
 .step-failed {
   border-color: #f1b4ad;
   background: #fff4f3;
+}
+
+.step-cancelled {
+  border-color: #e0c27a;
+  background: #fff9e8;
 }
 
 .video-panel {
@@ -1028,6 +1242,21 @@ button:disabled {
   grid-template-rows: auto minmax(0, 1fr) auto;
   gap: 12px;
   overflow: hidden;
+}
+
+.work-wait-panel {
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  gap: 10px;
+  text-align: center;
+}
+
+.work-wait-panel p {
+  max-width: 520px;
+  margin: 0;
+  color: #34495e;
+  line-height: 1.6;
 }
 
 .redo-actions {
@@ -1051,24 +1280,38 @@ video {
   .app-shell {
     height: auto;
     min-height: 100dvh;
-    grid-template-columns: 1fr;
-    grid-template-rows: auto auto minmax(0, 1fr);
+    grid-template-rows: auto minmax(0, 1fr);
     overflow: auto;
     padding: 18px;
   }
 
-  .request-panel,
-  .status-panel,
+  .agent-status-bar,
+  .request-page,
   .review-panel,
-  .video-panel {
-    grid-column: 1;
-    grid-row: auto;
+  .video-panel,
+  .work-wait-panel {
+    height: auto;
+    min-height: 0;
   }
 
-  .status-header,
+  .agent-status-bar,
+  .status-main,
+  .status-controls,
   .step-item {
     align-items: stretch;
     flex-direction: column;
+  }
+
+  .agent-status-bar {
+    display: flex;
+  }
+
+  .status-controls {
+    display: grid;
+  }
+
+  .step-list {
+    grid-template-columns: 1fr;
   }
 
   button {
@@ -1085,6 +1328,7 @@ video {
 
   .dialog-actions {
     display: grid;
+    grid-template-columns: 1fr 1fr;
   }
 
   video {

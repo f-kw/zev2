@@ -10,6 +10,7 @@ import {
 import { resolveTelopPlacementArea, type TelopPlacementArea } from '../telop-placement.js';
 import { loadTelopStyleProfile, resolveTelopStyle, type ResolvedTelopStyle } from '../telop-style.js';
 import { renderRemotionTelopPng } from '../telop-remotion.js';
+import { breakTelopText } from '../telop/telop-line-break.js';
 import { joinTelopSpeechText, millisecondsToSeconds, uniqueSpeechIds } from '../transcript-utils.js';
 import type { ArtifactInfo, EditPlanArtifact, SpeechTimingRef } from '../workflow-artifacts.js';
 
@@ -43,6 +44,8 @@ type RenderTelopOverlay = RenderTelopEvent & {
   width: number;
   height: number;
   styleId: string;
+  lineCount: number;
+  maxLines?: number;
   placement: TelopPlacementArea;
 };
 
@@ -277,6 +280,12 @@ async function writeTelopOverlayImages(
     const overlayPath = path.join(directory, fileName);
     const activeSegment = findRenderSegmentAtTimelineMs(renderSegments, telop.startMs);
     const placement = resolveTelopPlacementArea(activeSegment.screenLayout);
+    const lineCount = breakTelopText(telop.text, style.maxCharsPerLine).length;
+    if (style.maxLines && lineCount > style.maxLines) {
+      throw new Error(
+        `テロップが画面を埋めるため動画生成を止めました。${index + 1}件目が${lineCount}行で、設定上限${style.maxLines}行を超えています。演出案のテロップを短く分けてください。`
+      );
+    }
 
     await renderRemotionTelopPng({
       text: telop.text,
@@ -305,6 +314,8 @@ async function writeTelopOverlayImages(
       width: placement.width,
       height: placement.height,
       styleId: style.styleId,
+      lineCount,
+      ...(style.maxLines ? { maxLines: style.maxLines } : {}),
       placement
     });
   }
@@ -410,6 +421,8 @@ async function writeRenderPlan(
       height: number;
       target: 'screen' | 'speaker_safe_area';
       placementReason: string;
+      lineCount: number;
+      maxLines?: number;
     }>;
     target: typeof SHORTS_RENDER_TARGET;
     fallbackReason?: string;
@@ -453,6 +466,8 @@ export async function renderVideoArtifact(
     y: telop.y,
     width: telop.width,
     height: telop.height,
+    lineCount: telop.lineCount,
+    ...(telop.maxLines ? { maxLines: telop.maxLines } : {}),
     target: telop.placement.target,
     placementReason: telop.placement.reason
   }));

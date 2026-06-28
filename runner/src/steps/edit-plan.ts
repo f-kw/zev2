@@ -10,6 +10,7 @@ import {
   buildDefaultScreenLayoutPlan,
   buildLayoutVideoFilter,
   buildScreenLayoutCandidateSetFromGemini,
+  buildScreenLayoutPlanFromGemini,
   selectScreenLayoutCandidate,
   type ShortsScreenLayoutCandidateSet,
   type ShortsScreenLayoutPlan
@@ -24,6 +25,7 @@ import type { ClipCompositionArtifact, EditPlanArtifact, SpeechTimingRef } from 
 
 export type BuildEditPlanArtifactContext = {
   useFixedEditPlan: boolean;
+  fixedEditPlanPath: string;
   hasGeminiApiConnection: boolean;
   ffmpegCommand: string;
   requestArtifactDir: (request: AgentRequest) => string;
@@ -212,23 +214,24 @@ function speechUnitsForTelopIds(
 
 function normalizeGeminiTelopPlan(
   telopPlan: EditPlanArtifact['telopPlan'],
-  renderSegments: EditPlanArtifact['renderSegments']
+  renderSegments: EditPlanArtifact['renderSegments'],
+  sourceLabel = 'Gemini API'
 ): EditPlanArtifact['telopPlan'] {
   const normalized = telopPlan.map((telop, index) => {
     const speechUnits = speechUnitsForTelopIds(renderSegments, telop.sourceSpeechIds);
     if (speechUnits.length !== uniqueSpeechIds(telop.sourceSpeechIds).length) {
-      throw new Error(`Gemini APIのテロップ案 ${index + 1} 件目に存在しない発話IDがあります`);
+      throw new Error(`${sourceLabel}のテロップ案 ${index + 1} 件目に存在しない発話IDがあります`);
     }
     if (speechUnits.length < 2) {
-      throw new Error(`Gemini APIのテロップ案 ${index + 1} 件目は、表示文に対応する複数の発話IDが必要です`);
+      throw new Error(`${sourceLabel}のテロップ案 ${index + 1} 件目は、表示文に対応する複数の発話IDが必要です`);
     }
     if (matchesEntireRenderSegment(renderSegments, speechUnits.map((speech) => speech.id))) {
-      throw new Error(`Gemini APIのテロップ案 ${index + 1} 件目が断片全体を1件のテロップにしています`);
+      throw new Error(`${sourceLabel}のテロップ案 ${index + 1} 件目が断片全体を1件のテロップにしています`);
     }
 
     const text = telop.text.trim() || joinTelopSpeechText(speechUnits);
     if (!text) {
-      throw new Error(`Gemini APIのテロップ案 ${index + 1} 件目の表示文が空です`);
+      throw new Error(`${sourceLabel}のテロップ案 ${index + 1} 件目の表示文が空です`);
     }
 
     return {
@@ -243,10 +246,97 @@ function normalizeGeminiTelopPlan(
   });
 
   if (normalized.length === 0) {
-    throw new Error('Gemini APIのテロップ案がありません');
+    throw new Error(`${sourceLabel}のテロップ案がありません`);
   }
 
   return normalized;
+}
+
+async function applyFixedEditPlan(
+  basePlan: EditPlanArtifact,
+  fixedEditPlanPath: string
+): Promise<EditPlanArtifact> {
+  const raw = await readFile(fixedEditPlanPath, 'utf8');
+  const record = recordFrom(JSON.parse(raw));
+  const fixedThemes = recordFrom(record.themes);
+  const fixedTheme = recordFrom(fixedThemes[basePlan.selectedThemeId]);
+  if (Object.keys(fixedTheme).length === 0) {
+    throw new Error(`固定演出案に、選ばれたテーマ ${basePlan.selectedThemeId} のデータがありません`);
+  }
+
+  const rawRenderSegments = Array.isArray(fixedTheme.renderSegments) ? fixedTheme.renderSegments : [];
+  if (rawRenderSegments.length !== basePlan.renderSegments.length) {
+    throw new Error(`固定演出案 ${basePlan.selectedThemeId} の動画断片ごとの表示枠が不足しています`);
+  }
+
+  const renderSegments = basePlan.renderSegments.map((segment, index) => {
+    const fixedSegment = recordFrom(rawRenderSegments[index]);
+    return {
+      ...segment,
+      role: typeof fixedSegment.role === 'string' && fixedSegment.role.trim() ? fixedSegment.role.trim() : segment.role,
+      caption: typeof fixedSegment.caption === 'string' && fixedSegment.caption.trim() ? fixedSegment.caption.trim() : segment.caption,
+      screenLayout: buildScreenLayoutPlanFromGemini(
+        fixedSegment,
+        `固定演出案 ${basePlan.selectedThemeId} の動画断片 ${index + 1}`
+      )
+    };
+  });
+
+  const knownSpeechIds = new Set(basePlan.renderSegments.flatMap((segment) => segment.speechIds));
+  const rawTelops = Array.isArray(fixedTheme.telopPlan) ? fixedTheme.telopPlan : [];
+  if (rawTelops.length === 0) {
+    throw new Error(`固定演出案 ${basePlan.selectedThemeId} にテロップ案がありません`);
+  }
+
+  const telopPlan = rawTelops.map((item, index) => {
+    const telop = recordFrom(item);
+    const label = `固定演出案 ${basePlan.selectedThemeId} のテロップ ${index + 1} 件目`;
+    const sourceSpeechIds = speechIdsFromFixedTelop(telop, knownSpeechIds, label);
+    return {
+      sourceSpeechIds,
+      text: typeof telop.text === 'string' && telop.text.trim() ? telop.text.trim() : '',
+      role: typeof telop.role === 'string' && telop.role.trim() ? telop.role.trim() : '固定テロップ'
+    };
+  });
+
+  return {
+    ...basePlan,
+    title: typeof fixedTheme.title === 'string' && fixedTheme.title.trim() ? fixedTheme.title.trim() : basePlan.title,
+    hookText: typeof fixedTheme.hookText === 'string' && fixedTheme.hookText.trim() ? fixedTheme.hookText.trim() : basePlan.hookText,
+    renderSegments,
+    telopPlan: normalizeGeminiTelopPlan(telopPlan, renderSegments, '固定演出案')
+  };
+}
+
+function speechIdsFromFixedTelop(
+  telop: Record<string, unknown>,
+  knownSpeechIds: Set<number>,
+  label: string
+): number[] {
+  if (Array.isArray(telop.sourceSpeechIds)) {
+    return speechIdsFromGeminiRequired(telop.sourceSpeechIds, knownSpeechIds, `${label}の発話ID`);
+  }
+
+  if (Array.isArray(telop.sourceSpeechIdRange) && telop.sourceSpeechIdRange.length === 2) {
+    const [rawStart, rawEnd] = telop.sourceSpeechIdRange;
+    if (
+      typeof rawStart !== 'number' ||
+      typeof rawEnd !== 'number' ||
+      !Number.isInteger(rawStart) ||
+      !Number.isInteger(rawEnd) ||
+      rawEnd < rawStart
+    ) {
+      throw new Error(`${label}の発話ID範囲が不正です`);
+    }
+
+    const speechIds = Array.from(
+      { length: rawEnd - rawStart + 1 },
+      (_, index) => rawStart + index
+    );
+    return speechIdsFromGeminiRequired(speechIds, knownSpeechIds, `${label}の発話ID範囲`);
+  }
+
+  throw new Error(`${label}に発話IDまたは発話ID範囲がありません`);
 }
 
 function matchesEntireRenderSegment(
@@ -278,15 +368,14 @@ function sampleScreenLayoutPlanForPart(index: number): ShortsScreenLayoutPlan {
     candidateSet,
     selectedCandidateId,
     `zev-sample.layout[${index + 1}]`,
-    '確認用サンプル素材でGemini API確認済みの表示枠を使う'
+    '確認用サンプル映像でGemini API確認済みの表示枠を適用する'
   );
 }
 
-function screenLayoutForFixtureMode(
-  request: AgentRequest,
-  useFixedEditPlan: boolean
+function screenLayoutForSampleRequest(
+  request: AgentRequest
 ): ((part: ClipCompositionArtifact['parts'][number], index: number) => ShortsScreenLayoutPlan) | undefined {
-  if (request.target.sourceUri === 'zev-sample://speech-id-timing' || useFixedEditPlan) {
+  if (request.target.sourceUri === 'zev-sample://speech-id-timing') {
     return (_part, index) => sampleScreenLayoutPlanForPart(index);
   }
 
@@ -364,7 +453,7 @@ function buildGeminiEditPlanPrompt(composition: ClipCompositionArtifact, request
         `断片${index + 1}`,
         `役割: ${part.role}`,
         `元動画時間: ${millisecondsToSeconds(part.sourceStartMs)}秒 - ${millisecondsToSeconds(part.sourceEndMs)}秒`,
-        `使用する発話ID: ${part.speechIds.join(', ')}`,
+        `参照する発話ID: ${part.speechIds.join(', ')}`,
         `文字起こし: ${part.transcriptText}`,
         '発話:',
         speechLines
@@ -402,7 +491,7 @@ function buildGeminiEditPlanPrompt(composition: ClipCompositionArtifact, request
     '',
     '返すJSON:',
     '{',
-    '  "title": "動画の完成イメージを表す短いタイトル",',
+    '  "title": "動画のタイトルになる短い文言",',
     '  "hookText": "冒頭で見せる短い文言",',
     '  "renderSegments": [',
     '    {',
@@ -421,8 +510,8 @@ function buildGeminiEditPlanPrompt(composition: ClipCompositionArtifact, request
     '}',
     '',
     `依頼目的: ${request.input.purpose}`,
-    `選ばれた内容: ${composition.title}`,
-    `完成イメージ: ${composition.themeSummary}`,
+    `選ばれたテーマ: ${composition.title}`,
+    `テーマ概要: ${composition.themeSummary}`,
     '',
     partsText
   ].join('\n');
@@ -580,7 +669,7 @@ function buildGeminiCandidateSelectionPrompt(
     'AIエージェントが、検出結果から最低条件を満たす表示候補を作りました。',
     '各候補画像を見て、断片ごとに一番自然に見える候補IDだけを選んでください。',
     '座標や新しい候補は作らないでください。必ず候補一覧にある selectedCandidateId を返してください。',
-    '判断基準は、顔が自然に見えること、画面情報が読めること、話の内容に対して主役が分かりやすいことです。',
+    '判断基準は、顔が自然に見えること、画面情報が読めること、話の流れに対して主役が分かりやすいことです。',
     'JSONだけを返してください。',
     '',
     '返すJSON:',
@@ -590,8 +679,8 @@ function buildGeminiCandidateSelectionPrompt(
     '  ]',
     '}',
     '',
-    `選ばれた内容: ${composition.title}`,
-    `完成イメージ: ${composition.themeSummary}`,
+    `選ばれたテーマ: ${composition.title}`,
+    `テーマ概要: ${composition.themeSummary}`,
     '',
     segmentText
   ].join('\n');
@@ -714,10 +803,14 @@ export async function buildEditPlanArtifact(
 ): Promise<EditPlanArtifact> {
   const basePlan = buildFixtureEditPlan(
     composition,
-    screenLayoutForFixtureMode(request, context.useFixedEditPlan)
+    screenLayoutForSampleRequest(request)
   );
 
-  if (isSampleRequest(request) || context.useFixedEditPlan) {
+  if (context.useFixedEditPlan) {
+    return applyFixedEditPlan(basePlan, context.fixedEditPlanPath);
+  }
+
+  if (isSampleRequest(request)) {
     return basePlan;
   }
 

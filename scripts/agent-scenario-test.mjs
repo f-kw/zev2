@@ -14,6 +14,7 @@ const fixedSourceUri = path.join(
   'draft_w4Lp9IJC6pQl3FsRfFL9t',
   'source-video.mp4'
 );
+const fixedEditPlanFixturePath = path.join(workspaceRoot, 'runner', 'fixtures', 'fixed-edit-plans.json');
 const workflowTypes = [
   'prepare_video',
   'run_stt',
@@ -196,8 +197,18 @@ async function approveRequiredReview(apiBaseUrl, draftId) {
     : undefined;
   assertScenario(
     review.kind !== 'theme_selection' || selectedOptionId,
-    `${draftId}: 内容選択の選択肢がない`
+    `${draftId}: テーマ選択で選べるテーマがない`
   );
+  if (review.kind === 'theme_selection') {
+    assertScenario(
+      review.options.every((option) => !option.summary.includes('代表発話:')),
+      `${draftId}: テーマ選択に代表発話が表示されている`
+    );
+    assertScenario(
+      review.options.every((option) => option.summary.includes('判断材料:')),
+      `${draftId}: テーマ選択に判断材料が表示されていない`
+    );
+  }
 
   const approved = await requestJson(apiPath(apiBaseUrl, `/control-reviews/${review.id}/approve`), {
     method: 'POST',
@@ -307,7 +318,7 @@ function apiPath(apiBaseUrl, routePath) {
 async function assertRuntimeConfig(apiBaseUrl) {
   const runtimeConfig = await requestJson(apiPath(apiBaseUrl, '/runtime-config'));
   assertScenario(runtimeConfig.stt?.mode === 'fixed', '現在の設定が固定データ確認になっていない');
-  assertScenario(runtimeConfig.contentDiscovery?.mode === 'fixed', '内容候補整理が固定データ確認になっていない');
+  assertScenario(runtimeConfig.contentDiscovery?.mode === 'fixed', 'テーマ作成が固定データ確認になっていない');
   assertScenario(runtimeConfig.editPlan?.mode === 'fixed', '演出作成が固定データ確認になっていない');
   assertScenario(runtimeConfig.adjustment?.mode === 'fixed', '微調整が固定処理として明示されていない');
   assertScenario(
@@ -383,6 +394,19 @@ function sameSpeechIds(leftSpeechIds, rightSpeechIds) {
   return left.length === right.length && left.every((speechId, index) => speechId === right[index]);
 }
 
+function expandFixedTelopSpeechIds(telop) {
+  if (Array.isArray(telop.sourceSpeechIds)) {
+    return uniqueSpeechIds(telop.sourceSpeechIds);
+  }
+
+  if (Array.isArray(telop.sourceSpeechIdRange) && telop.sourceSpeechIdRange.length === 2) {
+    const [start, end] = telop.sourceSpeechIdRange;
+    return Array.from({ length: end - start + 1 }, (_, index) => start + index);
+  }
+
+  return [];
+}
+
 function assertTelopsDoNotCoverWholeSegments(editPlan, label) {
   for (const [telopIndex, telop] of editPlan.telopPlan.entries()) {
     const coversWholeSegment = editPlan.renderSegments.some((segment) => (
@@ -391,6 +415,74 @@ function assertTelopsDoNotCoverWholeSegments(editPlan, label) {
     assertScenario(
       !coversWholeSegment,
       `${label}: テロップ${telopIndex + 1}が動画断片全体を1枚で表示している`
+    );
+  }
+}
+
+async function assertRenderedTelopsStayWithinLineCheckpoint(runtimeDir, draftId, label) {
+  const renderPlan = await readJsonFile(path.join(runtimeDir, 'artifacts', draftId, 'render-plan.json'));
+  assertScenario(
+    Array.isArray(renderPlan.telopOverlayImages) && renderPlan.telopOverlayImages.length > 0,
+    `${label}: テロップ画像の生成計画が保存されていない`
+  );
+
+  for (const [index, telop] of renderPlan.telopOverlayImages.entries()) {
+    assertScenario(
+      Number.isInteger(telop.lineCount) && telop.lineCount > 0,
+      `${label}: テロップ${index + 1}の表示行数が保存されていない`
+    );
+    assertScenario(
+      Number.isInteger(telop.maxLines) && telop.maxLines > 0,
+      `${label}: テロップ${index + 1}の行数チェック上限が保存されていない`
+    );
+    assertScenario(
+      telop.lineCount <= telop.maxLines,
+      `${label}: テロップ${index + 1}が${telop.lineCount}行で、上限${telop.maxLines}行を超えている`
+    );
+  }
+}
+
+async function assertFixedEditPlanUsesFixtureValues(editPlan, label) {
+  const fixture = await readJsonFile(fixedEditPlanFixturePath);
+  const fixedTheme = fixture.themes?.[editPlan.selectedThemeId];
+  assertScenario(fixedTheme, `${label}: 固定演出案に選択テーマの固定値がない`);
+  assertScenario(
+    editPlan.title === fixedTheme.title,
+    `${label}: 編集案タイトルが固定演出案の値ではない`
+  );
+  assertScenario(
+    editPlan.hookText === fixedTheme.hookText,
+    `${label}: 冒頭文が固定演出案の値ではない`
+  );
+  assertScenario(
+    editPlan.renderSegments.length === fixedTheme.renderSegments.length,
+    `${label}: 動画断片の表示枠が固定演出案の件数と一致していない`
+  );
+  for (const [index, fixedSegment] of fixedTheme.renderSegments.entries()) {
+    const segment = editPlan.renderSegments[index];
+    assertScenario(
+      segment.caption === fixedSegment.caption,
+      `${label}: 動画断片${index + 1}の短文が固定演出案の値ではない`
+    );
+    assertScenario(
+      segment.screenLayout?.selectedCandidateId === fixedSegment.selectedCandidateId,
+      `${label}: 動画断片${index + 1}の表示候補が固定演出案の値ではない`
+    );
+  }
+
+  assertScenario(
+    editPlan.telopPlan.length === fixedTheme.telopPlan.length,
+    `${label}: テロップ案が固定演出案の件数と一致していない`
+  );
+  for (const [index, fixedTelop] of fixedTheme.telopPlan.entries()) {
+    const telop = editPlan.telopPlan[index];
+    assertScenario(
+      telop.text === fixedTelop.text,
+      `${label}: テロップ${index + 1}の表示文が固定演出案の値ではない`
+    );
+    assertScenario(
+      sameSpeechIds(telop.sourceSpeechIds, expandFixedTelopSpeechIds(fixedTelop)),
+      `${label}: テロップ${index + 1}の発話IDが固定演出案の値ではない`
     );
   }
 }
@@ -469,17 +561,17 @@ function assertApprovedReviewKinds(state, requestDraftId, kinds, label) {
 
 function assertMaterialReviewText(review, label) {
   assertScenario(
-    review.title === '使う場面の確認',
-    `${label}: 使用素材確認の見出しが人間向けではない`
+    review.title === '切り口と編集元場面の確認',
+    `${label}: 編集元場面確認の見出しが人間向けではない`
   );
   assertScenario(
-    review.humanQuestion === 'この場面の組み合わせで進めますか',
-    `${label}: 使用素材確認の質問文が人間向けではない`
+    review.humanQuestion === 'この切り口と編集元場面で進めますか',
+    `${label}: 編集元場面確認の質問文が人間向けではない`
   );
   for (const option of review.options) {
     assertScenario(
-      /^使う場面 \d+$/.test(option.title),
-      `${label}: 使用素材確認の候補名が構成ラベルのまま表示されている`
+      /^編集元場面 \d+$/.test(option.title),
+      `${label}: 編集元場面確認の候補名が構成ラベルのまま表示されている`
     );
     assertScenario(
       !['導入', '展開', '結論'].includes(option.title),
@@ -543,6 +635,7 @@ async function assertGeneratedDraftCompleted(apiBaseUrl, runtimeDir, draftId, la
   assertScenario(outputBuffer.length > 0, `${label}: 出力動画ファイルが空です`);
   await assertOutputHasAudibleAudio(outputPath);
   await assertWorkflowStepManifests(runtimeDir, draftId, label, expectedManifestTypes);
+  await assertRenderedTelopsStayWithinLineCheckpoint(runtimeDir, draftId, label);
 
   const transcript = await readRequestArtifact(state, runtimeDir, draftId, 'run_stt');
   const themes = await readRequestArtifact(state, runtimeDir, draftId, 'propose_clip_themes');
@@ -556,21 +649,22 @@ async function assertGeneratedDraftCompleted(apiBaseUrl, runtimeDir, draftId, la
   );
   assertScenario(
     themes.mode === 'sample-theme-options',
-    `${label}: 固定確認の内容候補が外部AI実行済みとして保存されている`
+    `${label}: 固定確認のテーマが外部AI実行済みとして保存されている`
   );
-  assertScenario(expectedThemeId, `${label}: 内容候補が保存されていない`);
+  assertScenario(expectedThemeId, `${label}: テーマが保存されていない`);
   assertScenario(
     composition.selectedThemeId === expectedThemeId,
-    `${label}: 使用素材構成案が前工程の内容候補を反映していない`
+    `${label}: 切り口と編集元場面が前工程のテーマを反映していない`
   );
   assertScenario(
     editPlan.selectedThemeId === composition.selectedThemeId,
-    `${label}: 編集案が使用素材構成案の選択内容を反映していない`
+    `${label}: 編集案が切り口と編集元場面の選択テーマを反映していない`
   );
   assertScenario(
     editPlan.renderSegments.length === composition.parts.length,
-    `${label}: 編集案の動画断片数が使用素材構成案と一致していない`
+    `${label}: 編集案の動画断片数が編集元場面と一致していない`
   );
+  await assertFixedEditPlanUsesFixtureValues(editPlan, label);
   assertTelopsDoNotCoverWholeSegments(editPlan, label);
   assertFixedEditPlanUsesPreparedScreenLayout(editPlan, label);
   assertScenario(
@@ -584,9 +678,9 @@ async function assertGeneratedDraftCompleted(apiBaseUrl, runtimeDir, draftId, la
 }
 
 async function assertMaterialReselectFromMaterialConfirmation(apiBaseUrl, runtimeDir) {
-  const draft = await createApprovedScenarioDraft(apiBaseUrl, '使用素材確認から素材を選び直す');
+  const draft = await createApprovedScenarioDraft(apiBaseUrl, '編集元場面確認から探し直す');
   const { review } = await runDraftUntilReview(apiBaseUrl, runtimeDir, draft.id, 'material_confirmation');
-  assertMaterialReviewText(review, '素材選び直し前');
+  assertMaterialReviewText(review, '編集元場面探し直し前');
 
   const response = await requestJson(apiPath(apiBaseUrl, `/control-reviews/${review.id}/request-changes`), {
     method: 'POST',
@@ -597,35 +691,35 @@ async function assertMaterialReselectFromMaterialConfirmation(apiBaseUrl, runtim
 
   const copiedDraft = response.state.requestDrafts.find((item) =>
     item.id !== draft.id &&
-    item.purpose.includes('同じ内容で使う場面を選び直す')
+    item.purpose.includes('同じテーマで切り口と編集元場面を探し直す')
   );
-  assertScenario(copiedDraft, 'コメントなしの素材選び直しで編集コピーが作られていない');
+  assertScenario(copiedDraft, 'コメントなしの編集元場面探し直しで編集コピーが作られていない');
 
   const copiedRequests = agentRequestsForDraft(response.state, copiedDraft.id);
   const expectedStartIndex = workflowTypes.indexOf('build_clip_composition');
-  assertScenario(copiedRequests.length === 7, '素材選び直し後の編集コピーに7工程がない');
+  assertScenario(copiedRequests.length === 7, '編集元場面探し直し後の編集コピーに7工程がない');
   assertScenario(
     copiedRequests.slice(0, expectedStartIndex).every((request) => request.status === 'succeeded'),
-    '素材選び直しで使用素材構成より前の工程が完了済みとしてコピーされていない'
+    '編集元場面探し直しで切り口作成より前の工程が完了済みとしてコピーされていない'
   );
   assertScenario(
     copiedRequests.slice(expectedStartIndex).every((request) => request.status === 'queued'),
-    '素材選び直しで使用素材構成以降が未作成状態に戻っていない'
+    '編集元場面探し直しで切り口作成以降が未作成状態に戻っていない'
   );
 
   await runAgentApprovingReviews(apiBaseUrl, runtimeDir, copiedDraft.id);
   const completedState = await requestJson(apiPath(apiBaseUrl, '/state'));
   const composition = await readRequestArtifact(completedState, runtimeDir, copiedDraft.id, 'build_clip_composition');
   assertScenario(
-    !composition.assemblyPlan.includes('素材選び直し指示:'),
-    'コメントなしの素材選び直しで、標準理由が素材指示として混ざっている'
+    !composition.assemblyPlan.includes('編集元場面の探し直し指示:'),
+    'コメントなしの編集元場面探し直しで、標準理由が編集元場面指示として混ざっている'
   );
 }
 
 async function assertContentReselectFromMaterialConfirmation(apiBaseUrl, runtimeDir) {
-  const draft = await createApprovedScenarioDraft(apiBaseUrl, '使用素材確認から内容を選び直す');
+  const draft = await createApprovedScenarioDraft(apiBaseUrl, '編集元場面確認からテーマを選び直す');
   const { review } = await runDraftUntilReview(apiBaseUrl, runtimeDir, draft.id, 'material_confirmation');
-  assertMaterialReviewText(review, '内容選び直し前');
+  assertMaterialReviewText(review, 'テーマ選び直し前');
 
   const response = await requestJson(apiPath(apiBaseUrl, `/control-reviews/${review.id}/request-changes`), {
     method: 'POST',
@@ -634,14 +728,14 @@ async function assertContentReselectFromMaterialConfirmation(apiBaseUrl, runtime
     })
   });
   const themeReview = latestReview(response.state, draft.id, 'theme_selection', 'review_required');
-  assertScenario(themeReview, '使用素材確認から内容選択へ戻れていない');
-  assertScenario(themeReview.options.length >= 2, '内容選び直しで複数候補を選べない');
+  assertScenario(themeReview, '編集元場面確認からテーマ選択へ戻れていない');
+  assertScenario(themeReview.options.length >= 2, 'テーマ選び直しで複数候補を選べない');
 
   const selectedOptionId = themeReview.options[1].id;
   await requestJson(apiPath(apiBaseUrl, `/control-reviews/${themeReview.id}/approve`), {
     method: 'POST',
     body: JSON.stringify({
-      reason: '内容選び直し後の候補を選択する',
+      reason: 'テーマ選び直し後の候補を選択する',
       selectedOptionId
     })
   });
@@ -651,12 +745,12 @@ async function assertContentReselectFromMaterialConfirmation(apiBaseUrl, runtime
   const composition = await readRequestArtifact(completedState, runtimeDir, draft.id, 'build_clip_composition');
   assertScenario(
     composition.selectedThemeId === selectedOptionId,
-    '内容選び直し後に選んだ内容が使用素材構成案へ反映されていない'
+    'テーマ選び直し後に選んだテーマが切り口と編集元場面へ反映されていない'
   );
 }
 
 async function assertThemeOptionRegenerateFromThemeSelection(apiBaseUrl, runtimeDir) {
-  const draft = await createApprovedScenarioDraft(apiBaseUrl, '内容選択画面から選択肢を作り直す');
+  const draft = await createApprovedScenarioDraft(apiBaseUrl, 'テーマ選択画面からテーマを作り直す');
   const { review } = await runDraftUntilReview(apiBaseUrl, runtimeDir, draft.id, 'theme_selection');
 
   const response = await requestJson(apiPath(apiBaseUrl, `/control-reviews/${review.id}/request-changes`), {
@@ -668,20 +762,20 @@ async function assertThemeOptionRegenerateFromThemeSelection(apiBaseUrl, runtime
 
   const copiedDraft = response.state.requestDrafts.find((item) =>
     item.id !== draft.id &&
-    item.purpose.includes('内容候補を作り直す')
+    item.purpose.includes('テーマを作り直す')
   );
-  assertScenario(copiedDraft, '内容選択画面から選択肢作り直しの編集コピーが作られていない');
+  assertScenario(copiedDraft, 'テーマ選択画面からテーマ作り直しの編集コピーが作られていない');
 
   const copiedRequests = agentRequestsForDraft(response.state, copiedDraft.id);
   const expectedStartIndex = workflowTypes.indexOf('propose_clip_themes');
-  assertScenario(copiedRequests.length === 7, '選択肢作り直し後の編集コピーに7工程がない');
+  assertScenario(copiedRequests.length === 7, 'テーマ作り直し後の編集コピーに7工程がない');
   assertScenario(
     copiedRequests.slice(0, expectedStartIndex).every((request) => request.status === 'succeeded'),
-    '選択肢作り直しで内容候補整理より前の工程が完了済みとしてコピーされていない'
+    'テーマ作り直しでテーマ作成より前の工程が完了済みとしてコピーされていない'
   );
   assertScenario(
     copiedRequests.slice(expectedStartIndex).every((request) => request.status === 'queued'),
-    '選択肢作り直しで内容候補整理以降が未作成状態に戻っていない'
+    'テーマ作り直しでテーマ作成以降が未作成状態に戻っていない'
   );
 
   await runAgentApprovingReviews(apiBaseUrl, runtimeDir, copiedDraft.id);
@@ -689,8 +783,63 @@ async function assertThemeOptionRegenerateFromThemeSelection(apiBaseUrl, runtime
     apiBaseUrl,
     runtimeDir,
     copiedDraft.id,
-    '内容選択画面からの選択肢作り直し',
+    'テーマ選択画面からのテーマ作り直し',
     workflowTypes.slice(workflowTypes.indexOf('propose_clip_themes'))
+  );
+}
+
+async function assertResumeAndCancelControls(apiBaseUrl) {
+  const draft = await createApprovedScenarioDraft(apiBaseUrl, '待機中AI作業の再開と中止を確認する');
+  const next = await requestJson(apiPath(apiBaseUrl, '/agent-requests/next'));
+  assertScenario(
+    next.request?.requestDraftId === draft.id && next.request?.type === 'prepare_video',
+    '待機中AI作業の再開前に、次に実行できる工程が取れない'
+  );
+
+  const resumed = await requestJson(apiPath(apiBaseUrl, '/agent-requests/resume'), {
+    method: 'POST'
+  });
+  assertScenario(
+    resumed.request?.requestDraftId === draft.id && resumed.request?.type === 'prepare_video',
+    '待機中AI作業の再開APIが、再開対象の工程を返していない'
+  );
+
+  const cancelled = await requestJson(apiPath(apiBaseUrl, `/request-drafts/${draft.id}/cancel-agent-work`), {
+    method: 'POST'
+  });
+  const cancelledRequests = agentRequestsForDraft(cancelled.state, draft.id);
+  assertScenario(cancelledRequests.length === 7, '中止後に工程数が変わっている');
+  assertScenario(
+    cancelledRequests.every((request) => request.status === 'cancelled'),
+    '中止後に待機中AI作業が中止状態になっていない'
+  );
+  assertScenario(
+    cancelledRequests.every((request) => request.errorMessage === '人間がAI作業を中止しました'),
+    '中止理由が人間に分かる文として保存されていない'
+  );
+
+  const ignoredFailure = await requestJson(apiPath(apiBaseUrl, `/agent-requests/${cancelledRequests[0].id}/fail`), {
+    method: 'POST',
+    body: JSON.stringify({
+      message: '中止後に古いrunnerから失敗が返った'
+    })
+  });
+  const stillCancelledAfterFailure = agentRequestsForDraft(ignoredFailure.state, draft.id)[0];
+  assertScenario(
+    stillCancelledAfterFailure.status === 'cancelled',
+    '中止済み工程が古い失敗報告で失敗状態に戻っている'
+  );
+
+  const ignoredCompletion = await requestJson(apiPath(apiBaseUrl, `/agent-requests/${cancelledRequests[1].id}/complete`), {
+    method: 'POST',
+    body: JSON.stringify({
+      meaning: '中止後に古いrunnerから完了が返った'
+    })
+  });
+  const stillCancelledAfterCompletion = agentRequestsForDraft(ignoredCompletion.state, draft.id)[1];
+  assertScenario(
+    stillCancelledAfterCompletion.status === 'cancelled',
+    '中止済み工程が古い完了報告で成功状態に戻っている'
   );
 }
 
@@ -739,7 +888,9 @@ async function scenarioAutomaticVideoCreation(apiBaseUrl, runtimeDir) {
   assertScenario(outputBuffer.length > 0, '出力動画ファイルが空です');
   await assertOutputHasAudibleAudio(outputPath);
   await assertWorkflowStepManifests(runtimeDir, draft.id, '初回生成');
+  await assertRenderedTelopsStayWithinLineCheckpoint(runtimeDir, draft.id, '初回生成');
   const editPlan = await readRequestArtifact(state, runtimeDir, draft.id, 'create_edit_plan');
+  await assertFixedEditPlanUsesFixtureValues(editPlan, '初回生成');
   assertTelopsDoNotCoverWholeSegments(editPlan, '初回生成');
   assertFixedEditPlanUsesPreparedScreenLayout(editPlan, '初回生成');
 
@@ -759,7 +910,7 @@ async function scenarioAutomaticVideoCreation(apiBaseUrl, runtimeDir) {
     apiBaseUrl,
     runtimeDir,
     themeRestartDraft.id,
-    '内容選択後からのコピー再開',
+    'テーマ選択後からのコピー再開',
     workflowTypes.slice(workflowTypes.indexOf('build_clip_composition'))
   );
 
@@ -774,6 +925,7 @@ async function scenarioAutomaticVideoCreation(apiBaseUrl, runtimeDir) {
   await assertMaterialReselectFromMaterialConfirmation(apiBaseUrl, runtimeDir);
   await assertContentReselectFromMaterialConfirmation(apiBaseUrl, runtimeDir);
   await assertThemeOptionRegenerateFromThemeSelection(apiBaseUrl, runtimeDir);
+  await assertResumeAndCancelControls(apiBaseUrl);
 
   const noFixedDraftInput = {
     purpose: '固定データなしではSTT接続が必要になることを確認する',

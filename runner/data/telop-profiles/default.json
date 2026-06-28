@@ -5,7 +5,7 @@
   "defaultStyleId": "zev_glow",
   "styles": {
     "boxed_readable": {
-      "comment": "確認用の座布団ありテロップ",
+      "comment": "確認用の座布団ありテロップ。maxCharsPerLineは日本語およそ10文字幅、maxLinesは画面を埋める壊れた演出案を止める上限です。",
       "fontFamily": "LINESeedJP_A_OTF_Bd.otf",
       "fontSize": 100,
       "fontColor": "#ffffff",
@@ -17,6 +17,7 @@
       "glowWidth": 0,
       "glowOpacity": 0,
       "maxCharsPerLine": 20,
+      "maxLines": 4,
       "position": {
         "preset": "center",
         "alignment": "center"
@@ -29,7 +30,7 @@
       }
     },
     "zev_glow": {
-      "comment": "ZEV系の座布団なしグローテロップ",
+      "comment": "ZEV系の座布団なしグローテロップ。maxCharsPerLineは日本語およそ10文字幅、maxLinesは画面を埋める壊れた演出案を止める上限です。",
       "fontFamily": "LINESeedJP_A_OTF_Bd.otf",
       "fontSize": 100,
       "fontColor": "#ffffff",
@@ -41,6 +42,7 @@
       "glowWidth": 10,
       "glowOpacity": 100,
       "maxCharsPerLine": 20,
+      "maxLines": 4,
       "position": {
         "preset": "center",
         "alignment": "center"

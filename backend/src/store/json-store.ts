@@ -31,6 +31,7 @@ const currentAgentRequestStatuses = new Set<AgentRequestStatus>([
   'waiting',
   'succeeded',
   'failed',
+  'cancelled',
   'superseded'
 ]);
 const currentControlReviewKinds = new Set<ControlReviewKind>([

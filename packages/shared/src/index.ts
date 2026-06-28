@@ -17,13 +17,13 @@ export const WORKFLOW_STEPS = [
   },
   {
     type: 'propose_clip_themes',
-    label: '内容候補整理',
+    label: 'テーマ作成',
     outputKind: 'theme_json',
     requiresHumanApproval: false
   },
   {
     type: 'build_clip_composition',
-    label: '使用素材構成',
+    label: '切り口作成',
     outputKind: 'composition_json',
     requiresHumanApproval: false
   },
@@ -76,7 +76,14 @@ export type GeminiRuntimeMode = 'fixed' | 'gemini';
 export type AdjustmentRuntimeMode = 'fixed';
 
 export type RequestDraftStatus = 'draft' | 'approved' | 'rejected';
-export type AgentRequestStatus = 'queued' | 'running' | 'waiting' | 'succeeded' | 'failed' | 'superseded';
+export type AgentRequestStatus =
+  | 'queued'
+  | 'running'
+  | 'waiting'
+  | 'succeeded'
+  | 'failed'
+  | 'cancelled'
+  | 'superseded';
 export type FileRefAccess = 'internal' | 'external';
 export type ControlReviewKind = 'theme_selection' | 'material_confirmation' | 'render_readiness';
 export type ControlReviewStatus = 'review_required' | 'approved' | 'rejected' | 'changes_requested';
@@ -305,10 +312,10 @@ const OUTPUT_TYPE_BY_REQUEST_TYPE = {
 const DRY_RUN_MEANING_BY_REQUEST_TYPE = {
   prepare_video: '対象動画を取得または参照し、AI処理用の入力として保存した結果',
   run_stt: '動画から音声を抽出し、ZEVローカルSTTで文字起こしした結果',
-  propose_clip_themes: '文字起こしに何があるかを内容候補として整理した結果',
-  build_clip_composition: '選ばれた内容に関係する複数発話箇所を集めて使用素材構成案を作った結果',
-  create_edit_plan: '使用素材構成案と動画断片をもとに演出案を作った結果',
-  apply_adjustment: '修正内容を複数箇所の演出案へ反映した結果',
+  propose_clip_themes: '文字起こしから切り抜きのテーマを整理した結果',
+  build_clip_composition: '選ばれたテーマの切り口と編集元場面を整理した結果',
+  create_edit_plan: '切り口と編集元場面をもとに演出案を作った結果',
+  apply_adjustment: '修正指示を複数箇所の演出案へ反映した結果',
   render_video: '編集案から複数箇所を連結して動画を生成した結果'
 } satisfies Record<AgentRequestType, string>;
 

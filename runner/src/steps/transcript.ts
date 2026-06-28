@@ -153,12 +153,12 @@ function normalizeThemeSeeds(value: unknown, segments: SttSegment[]): Transcript
     const rawRepresentativeSpeechIds = record.representativeSpeechIds;
     const rawRelatedSpeechIds = record.relatedSpeechIds;
     if (!Array.isArray(rawRepresentativeSpeechIds) || rawRepresentativeSpeechIds.length === 0) {
-      throw new Error(`固定内容候補 ${index + 1} 件目に代表発話参照がありません`);
+      throw new Error(`固定テーマ ${index + 1} 件目に代表発話参照がありません`);
     }
 
     const representativeSpeechIds = rawRepresentativeSpeechIds.map((rawId, idIndex) => {
       if (typeof rawId !== 'number' || !Number.isInteger(rawId) || !knownIds.has(rawId)) {
-        throw new Error(`固定内容候補の代表発話 ${index + 1}-${idIndex + 1} が不正です`);
+        throw new Error(`固定テーマの代表発話 ${index + 1}-${idIndex + 1} が不正です`);
       }
 
       return rawId;
@@ -168,7 +168,7 @@ function normalizeThemeSeeds(value: unknown, segments: SttSegment[]): Transcript
       : rawRepresentativeSpeechIds
     ).map((rawId, idIndex) => {
       if (typeof rawId !== 'number' || !Number.isInteger(rawId) || !knownIds.has(rawId)) {
-        throw new Error(`固定内容候補の関連発話 ${index + 1}-${idIndex + 1} が不正です`);
+        throw new Error(`固定テーマの関連発話 ${index + 1}-${idIndex + 1} が不正です`);
       }
 
       return rawId;
