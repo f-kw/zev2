@@ -982,6 +982,10 @@ async function readJsonFile(filePath) {
   return JSON.parse(await readFile(filePath, 'utf8'));
 }
 
+async function writeJsonFile(filePath, value) {
+  await writeFile(filePath, `${JSON.stringify(value, null, 2)}\n`, 'utf8');
+}
+
 function artifactPathByUri(runtimeDir, uri) {
   const prefix = '/api/artifacts/';
   assertScenario(uri.startsWith(prefix), `成果物URIが不正です: ${uri}`);
@@ -1754,6 +1758,21 @@ async function assertWebGeminiReviewFeedbackLoop(apiBaseUrl, runtimeDir, sourceD
     '取得したWeb Geminiレビューの改善指示が保存内容と一致しない'
   );
   assertScenario(fetched.runLog?.status === 'saved', '取得したWeb Geminiレビュー実行ログがsavedではない');
+
+  const statePath = path.join(runtimeDir, 'state.json');
+  const stateBeforeMissingOutputVideo = await readJsonFile(statePath);
+  await writeJsonFile(statePath, {
+    ...stateBeforeMissingOutputVideo,
+    fileRefs: stateBeforeMissingOutputVideo.fileRefs.filter((fileRef) => fileRef.id !== outputFileRef.id)
+  });
+  const missingOutputReviewError = await expectRequestJsonFailure(
+    apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/web-gemini-review`)
+  );
+  assertScenario(
+    missingOutputReviewError.includes('現在の完成動画がありません'),
+    '現在の完成動画がないのに保存済みWeb Geminiレビューが取得できている'
+  );
+  await writeJsonFile(statePath, stateBeforeMissingOutputVideo);
 
   const preparedAfterSaved = await requestJson(apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/web-gemini-review/prepare`), {
     method: 'POST'

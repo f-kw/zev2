@@ -1142,7 +1142,15 @@ function ensureWebGeminiReviewMatchesOutputVideo(
   review: WebGeminiReviewArtifact | null,
   outputVideo: FileRef | undefined
 ): { error: string } | undefined {
-  if (!review || !outputVideo || review.outputVideoUri === outputVideo.uri) {
+  if (!review) {
+    return undefined;
+  }
+
+  if (!outputVideo) {
+    return { error: 'Web Geminiレビューがありますが、現在の完成動画がありません。動画生成後にレビューを取り直してください' };
+  }
+
+  if (review.outputVideoUri === outputVideo.uri) {
     return undefined;
   }
 
@@ -1153,7 +1161,15 @@ function ensureWebGeminiRunLogMatchesOutputVideo(
   runLog: WebGeminiReviewRunLog | null,
   outputVideo: FileRef | undefined
 ): { error: string } | undefined {
-  if (!runLog || !outputVideo || runLog.outputVideoUri === outputVideo.uri) {
+  if (!runLog) {
+    return undefined;
+  }
+
+  if (!outputVideo) {
+    return { error: 'Web Geminiレビュー実行ログがありますが、現在の完成動画がありません。動画生成後にレビューを取り直してください' };
+  }
+
+  if (runLog.outputVideoUri === outputVideo.uri) {
     return undefined;
   }
 
