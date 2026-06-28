@@ -2430,6 +2430,11 @@ router.post('/agent-requests/:id/fail', async (request, response) => {
     return;
   }
 
+  if (agentRequest.status !== 'running') {
+    response.status(409).json({ error: '取得中のAI操作だけ失敗として記録できます', state });
+    return;
+  }
+
   agentRequest.status = 'failed';
   agentRequest.errorMessage = input.message.trim();
   agentRequest.updatedAt = nowIso();

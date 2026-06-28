@@ -360,6 +360,26 @@ async function assertHumanReviewBlocksDirectClaim(apiBaseUrl, runtimeDir) {
     '確認未承認で直接開始を拒否した理由が人間に読める文で残っていない'
   );
 
+  const waitingFailError = await expectRequestJsonFailure(
+    apiPath(apiBaseUrl, `/agent-requests/${compositionRequest.id}/fail`),
+    {
+      method: 'POST',
+      body: JSON.stringify({ message: '確認待ちの工程を失敗扱いにしようとする' })
+    }
+  );
+  assertScenario(
+    waitingFailError.includes('取得中のAI操作だけ失敗として記録できます'),
+    '確認待ちのAI作業を失敗扱いにできている'
+  );
+  const afterWaitingFail = await requestJson(apiPath(apiBaseUrl, '/state'));
+  const stillWaitingCompositionRequest = agentRequestsForDraft(afterWaitingFail, draft.id).find(
+    (request) => request.type === 'build_clip_composition'
+  );
+  assertScenario(
+    stillWaitingCompositionRequest?.status === 'waiting',
+    '確認待ち工程への失敗報告を拒否した後、編集元場面作成の状態が変わっている'
+  );
+
   const rejected = await requestJson(apiPath(apiBaseUrl, `/control-reviews/${review.id}/reject`), {
     method: 'POST',
     body: JSON.stringify({ reason: 'このテーマ候補では切り抜きを作らない' })
