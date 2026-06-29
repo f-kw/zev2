@@ -85,8 +85,8 @@ export interface PublishPackageArtifact {
   videoFileUri: string;
   manifestUri: string;
   noteUri: string;
-  titleSuggestion: string;
-  descriptionSuggestion: string;
+  title: string;
+  description: string;
   checklist: string[];
 }
 
@@ -314,11 +314,14 @@ export async function fetchPublishPackage(id: string): Promise<{
   return response.data;
 }
 
-export async function createPublishPackage(id: string): Promise<{
+export async function createPublishPackage(
+  id: string,
+  input: { title: string; description: string }
+): Promise<{
   publishPackage: PublishPackageArtifact;
   state: Zev2State;
 }> {
-  const response = await api.post(`/request-drafts/${id}/publish-package`);
+  const response = await api.post(`/request-drafts/${id}/publish-package`, input);
   return response.data;
 }
 

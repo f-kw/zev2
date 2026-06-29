@@ -86,6 +86,8 @@ const publishPackage = ref<PublishPackageArtifact | null>(null);
 const publishPackageLoading = ref(false);
 const publishPackageMessage = ref('');
 const activePublishPackageAction = ref<'create_package' | ''>('');
+const publishTitleInput = ref('');
+const publishDescriptionInput = ref('');
 const requestActivityEvents = ref<RequestDraftActivityEvent[]>([]);
 const requestActivitySummary = ref<RequestDraftActivitySummary | null>(null);
 const requestActivityLoading = ref(false);
@@ -352,6 +354,19 @@ const publishPackageStatusDetail = computed(() => {
   }
 
   return '先に投稿可能または最終完了として記録してください';
+});
+
+const defaultPublishTitle = computed(() =>
+  currentDraft.value?.purpose.trim() || 'ショート動画'
+);
+
+const defaultPublishDescription = computed(() => {
+  const outputUri = outputVideoFileRef.value?.uri || outputVideoUri.value;
+  return [
+    `作成目的: ${defaultPublishTitle.value}`,
+    `確認済み動画: ${outputUri}`,
+    '必要なら公開前に説明文を人間が調整してください。'
+  ].join('\n');
 });
 
 const canApplyWebGeminiReview = computed(() =>
@@ -1349,6 +1364,13 @@ async function refreshPublishPackage() {
   try {
     const result = await fetchPublishPackage(draft.id);
     publishPackage.value = result.publishPackage;
+    if (result.publishPackage) {
+      publishTitleInput.value = result.publishPackage.title;
+      publishDescriptionInput.value = result.publishPackage.description;
+    } else {
+      publishTitleInput.value = publishTitleInput.value.trim() || defaultPublishTitle.value;
+      publishDescriptionInput.value = publishDescriptionInput.value.trim() || defaultPublishDescription.value;
+    }
   } catch (error) {
     publishPackage.value = null;
     publishPackageMessage.value = formatApiError(error);
@@ -1367,9 +1389,14 @@ async function createCurrentPublishPackage() {
   publishPackageLoading.value = true;
   publishPackageMessage.value = '';
   try {
-    const result = await createPublishPackage(draft.id);
+    const result = await createPublishPackage(draft.id, {
+      title: publishTitleInput.value.trim() || defaultPublishTitle.value,
+      description: publishDescriptionInput.value.trim() || defaultPublishDescription.value
+    });
     store.state = result.state;
     publishPackage.value = result.publishPackage;
+    publishTitleInput.value = result.publishPackage.title;
+    publishDescriptionInput.value = result.publishPackage.description;
     publishPackageMessage.value = '公開用ファイルを作成しました';
     await refreshRequestActivity();
   } catch (error) {
@@ -1563,6 +1590,10 @@ watch(
 watch(
   () => [currentDraft.value?.id ?? '', outputVideoUri.value],
   () => {
+    publishPackage.value = null;
+    publishPackageMessage.value = '';
+    publishTitleInput.value = defaultPublishTitle.value;
+    publishDescriptionInput.value = defaultPublishDescription.value;
     void refreshWebGeminiReview();
     void refreshPublishPackage();
   },
@@ -1982,6 +2013,22 @@ watch(
             <div class="publish-package-status" aria-label="公開用ファイル">
               <strong>{{ publishPackageStatusTitle }}</strong>
               <span>{{ publishPackageStatusDetail }}</span>
+              <label class="publish-package-input">
+                公開タイトル
+                <input
+                  v-model="publishTitleInput"
+                  type="text"
+                  :disabled="agentOperationLocked || publishPackageLoading"
+                />
+              </label>
+              <label class="publish-package-input">
+                公開説明
+                <textarea
+                  v-model="publishDescriptionInput"
+                  rows="3"
+                  :disabled="agentOperationLocked || publishPackageLoading"
+                />
+              </label>
               <div v-if="publishPackage" class="publish-package-links">
                 <a :href="uriWithRef(publishPackage.videoFileUri, publishPackage.createdAt)" target="_blank" rel="noreferrer">動画</a>
                 <a :href="uriWithRef(publishPackage.noteUri, publishPackage.createdAt)" target="_blank" rel="noreferrer">説明メモ</a>
@@ -3225,6 +3272,41 @@ video {
   color: var(--text-dim);
   font-size: 12px;
   line-height: 1.45;
+}
+
+.publish-package-input {
+  display: grid;
+  width: min(340px, 100%);
+  gap: 4px;
+  color: var(--text-dim);
+  font-size: 11px;
+  text-align: left;
+}
+
+.publish-package-input input,
+.publish-package-input textarea {
+  width: 100%;
+  border: 1px solid rgba(0, 240, 255, 0.22);
+  padding: 7px 8px;
+  color: var(--text);
+  background: rgba(0, 0, 0, 0.28);
+  font: inherit;
+  line-height: 1.45;
+}
+
+.publish-package-input textarea {
+  resize: vertical;
+}
+
+.publish-package-input input:focus,
+.publish-package-input textarea:focus {
+  outline: 1px solid rgba(0, 240, 255, 0.58);
+  outline-offset: 1px;
+}
+
+.publish-package-input input:disabled,
+.publish-package-input textarea:disabled {
+  opacity: 0.62;
 }
 
 .publish-package-links {

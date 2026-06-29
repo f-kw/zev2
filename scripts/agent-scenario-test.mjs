@@ -2182,8 +2182,14 @@ async function assertFinalReviewControls(apiBaseUrl, runtimeDir, sourceDraftId) 
     '投稿可能の人間判断が監査タイムラインで追えない'
   );
 
+  const publishTitle = 'シナリオテスト用の公開タイトル';
+  const publishDescription = 'シナリオテストで人間が確認した公開説明';
   const publishPackage = await requestJson(apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/publish-package`), {
-    method: 'POST'
+    method: 'POST',
+    body: JSON.stringify({
+      title: publishTitle,
+      description: publishDescription
+    })
   });
   assertScenario(
     publishPackage.publishPackage?.source === 'zev2-publish-package',
@@ -2200,6 +2206,11 @@ async function assertFinalReviewControls(apiBaseUrl, runtimeDir, sourceDraftId) 
     publishPackageManifest.videoFileUri === publishPackage.publishPackage.videoFileUri,
     '公開パッケージmanifestが公開用動画を指していない'
   );
+  assertScenario(
+    publishPackageManifest.title === publishTitle &&
+      publishPackageManifest.description === publishDescription,
+    '公開パッケージmanifestに人間が指定した公開タイトルと説明が保存されていない'
+  );
   const sourceVideoBuffer = await readFile(
     artifactPathByUri(runtimeDir, publishPackage.publishPackage.outputVideoUri)
   );
@@ -2215,7 +2226,10 @@ async function assertFinalReviewControls(apiBaseUrl, runtimeDir, sourceDraftId) 
     'utf8'
   );
   assertScenario(
-    publishNote.includes('公開用パッケージ') && publishNote.includes('タイトル案'),
+    publishNote.includes('公開用パッケージ') &&
+      publishNote.includes('## タイトル') &&
+      publishNote.includes(publishTitle) &&
+      publishNote.includes(publishDescription),
     '公開パッケージの説明メモが人間向けになっていない'
   );
   const fetchedPublishPackage = await requestJson(apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/publish-package`));
@@ -2280,11 +2294,19 @@ async function assertFinalReviewControls(apiBaseUrl, runtimeDir, sourceDraftId) 
   );
 
   const packageAfterFinal = await requestJson(apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/publish-package`), {
-    method: 'POST'
+    method: 'POST',
+    body: JSON.stringify({
+      title: '最終完了後に調整した公開タイトル',
+      description: '最終完了後に調整した公開説明'
+    })
   });
   assertScenario(
     packageAfterFinal.publishPackage?.outputVideoUri === finalComplete.finalReviewAction.outputVideoUri,
     '最終完了後に現在の完成動画の公開パッケージを作り直せない'
+  );
+  assertScenario(
+    packageAfterFinal.publishPackage?.title === '最終完了後に調整した公開タイトル',
+    '最終完了後に公開タイトルを調整して作り直せない'
   );
   const finalPackageActivity = await requestJson(apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/activity`));
   assertScenario(

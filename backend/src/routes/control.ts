@@ -115,8 +115,8 @@ type PublishPackageArtifact = {
   videoFileUri: string;
   manifestUri: string;
   noteUri: string;
-  titleSuggestion: string;
-  descriptionSuggestion: string;
+  title: string;
+  description: string;
   checklist: string[];
 };
 type CopiedEditRestart = {
@@ -662,8 +662,8 @@ function parsePublishPackageArtifact(value: unknown): PublishPackageArtifact | u
     !hasText(artifact.videoFileUri) ||
     !hasText(artifact.manifestUri) ||
     !hasText(artifact.noteUri) ||
-    !hasText(artifact.titleSuggestion) ||
-    !hasText(artifact.descriptionSuggestion)
+    !hasText(artifact.title) ||
+    !hasText(artifact.description)
   ) {
     return undefined;
   }
@@ -678,8 +678,8 @@ function parsePublishPackageArtifact(value: unknown): PublishPackageArtifact | u
     videoFileUri: artifact.videoFileUri.trim(),
     manifestUri: artifact.manifestUri.trim(),
     noteUri: artifact.noteUri.trim(),
-    titleSuggestion: artifact.titleSuggestion.trim(),
-    descriptionSuggestion: artifact.descriptionSuggestion.trim(),
+    title: artifact.title.trim(),
+    description: artifact.description.trim(),
     checklist: parseStringArray(artifact.checklist)
   };
 }
@@ -858,16 +858,20 @@ function buildPublishChecklist(): string[] {
   ];
 }
 
-function publishTitleSuggestion(draft: RequestDraft): string {
+function defaultPublishTitle(draft: RequestDraft): string {
   return draft.purpose.trim() || 'ショート動画';
 }
 
-function publishDescriptionSuggestion(draft: RequestDraft, outputVideo: FileRef): string {
+function defaultPublishDescription(draft: RequestDraft, outputVideo: FileRef): string {
   return [
-    `作成目的: ${publishTitleSuggestion(draft)}`,
+    `作成目的: ${defaultPublishTitle(draft)}`,
     `確認済み動画: ${outputVideo.uri}`,
     '必要なら公開前に説明文を人間が調整してください。'
   ].join('\n');
+}
+
+function publishPackageTextInput(value: unknown): string {
+  return typeof value === 'string' ? value.trim() : '';
 }
 
 function buildPublishNote(artifact: PublishPackageArtifact): string {
@@ -879,13 +883,13 @@ function buildPublishNote(artifact: PublishPackageArtifact): string {
     `公開用動画: ${artifact.videoFileUri}`,
     `動画SHA-256: ${artifact.outputVideoSha256}`,
     '',
-    '## タイトル案',
+    '## タイトル',
     '',
-    artifact.titleSuggestion,
+    artifact.title,
     '',
-    '## 説明案',
+    '## 説明',
     '',
-    artifact.descriptionSuggestion,
+    artifact.description,
     '',
     '## 確認事項',
     '',
@@ -897,7 +901,8 @@ function buildPublishNote(artifact: PublishPackageArtifact): string {
 async function writePublishPackageArtifact(
   draft: RequestDraft,
   outputVideo: FileRef,
-  createdAt: string
+  createdAt: string,
+  input: { title?: unknown; description?: unknown } = {}
 ): Promise<PublishPackageArtifact> {
   const sourceVideoPath = artifactPathByUrl(outputVideo.uri);
   const packageDirectory = path.dirname(publishPackagePath(draft.id));
@@ -920,8 +925,8 @@ async function writePublishPackageArtifact(
     videoFileUri: artifactUrl(draft.id, publishPackageVideoFileName),
     manifestUri: artifactUrl(draft.id, publishPackageFileName),
     noteUri: artifactUrl(draft.id, publishPackageNoteFileName),
-    titleSuggestion: publishTitleSuggestion(draft),
-    descriptionSuggestion: publishDescriptionSuggestion(draft, outputVideo),
+    title: publishPackageTextInput(input.title) || defaultPublishTitle(draft),
+    description: publishPackageTextInput(input.description) || defaultPublishDescription(draft, outputVideo),
     checklist: buildPublishChecklist()
   };
 
@@ -3356,7 +3361,7 @@ router.post('/request-drafts/:id/publish-package', async (request, response) => 
 
   const createdAt = nowIso();
   try {
-    const publishPackage = await writePublishPackageArtifact(draft, outputVideo, createdAt);
+    const publishPackage = await writePublishPackageArtifact(draft, outputVideo, createdAt, recordValue(request.body));
     draft.updatedAt = createdAt;
     await saveState(state);
     response.json({ publishPackage, state });
