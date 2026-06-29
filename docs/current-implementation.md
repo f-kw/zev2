@@ -46,6 +46,7 @@ UIは依頼と状態を確認する
 - AIエージェントはAPIで次の作業を取得できる。
 - AIエージェントはAPIで作業を取得済みにできる。
 - `ZEV2_AGENT_API_TOKEN` を設定すると、AIエージェント実行APIだけをBearerトークンで保護できる。
+- AIエージェントは成果物本体を `PUT /api/artifacts/:draftId/:fileName` で保存できる。保存後に返されたURIを完了APIへ渡す。
 - 作業取得時にAIエージェント取得者、取得時刻、最終更新時刻、任意の期限時刻を保存できる。
 - 同じ作業の二重取得、取得者が違う完了報告、取得者が違う失敗報告を拒否できる。
 - 期限切れした取得中作業は、状態確認または次作業取得時に復旧され、再取得可能になる。
@@ -69,7 +70,6 @@ UIは依頼と状態を確認する
 - backend内で動画生成を実行しない。
 - backend内でGemini APIによる演出作成や完成品レビューを実行しない。
 - 人間UIのログイン認証はまだない。
-- 成果物本体の保存APIはまだない。
 - 投稿可能化、公開、最終完了の承認ゲートはまだない。
 - Web Geminiへの実アップロードは外部送信を伴うため、準備確認とは分けて明示実行として扱う。
 - Gemini API接続は `@google/genai` を使う。APIキー指定とVertex AI指定の両方を同じSDK経路で扱う。
@@ -97,6 +97,7 @@ AIエージェント向けの主なAPIは次の通り。
 ```text
 GET  /api/agent-requests/next
 POST /api/agent-requests/:id/claim
+PUT  /api/artifacts/:draftId/:fileName
 POST /api/agent-requests/:id/complete
 POST /api/agent-requests/:id/fail
 ```

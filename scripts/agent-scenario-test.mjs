@@ -477,6 +477,58 @@ async function assertAgentApiAuthBoundary() {
       method: 'POST'
     });
 
+    const uploadMarker = 'uploaded-artifact-body-should-not-enter-state';
+    const uploadBody = JSON.stringify({ kind: 'theme_json', marker: uploadMarker });
+    const uploadUri = `/artifacts/${created.draft.id}/uploaded-theme.json`;
+    const uploadWithoutAuthError = await expectRequestJsonFailure(apiPath(authApiBaseUrl, uploadUri), {
+      method: 'PUT',
+      body: uploadBody
+    });
+    assertScenario(
+      uploadWithoutAuthError.includes('AIエージェントAPIの認証が必要です'),
+      '認証境界: 成果物本体アップロードが認証なしで通っている'
+    );
+    const uploadWithWrongAuthError = await expectRequestJsonFailure(apiPath(authApiBaseUrl, uploadUri), {
+      method: 'PUT',
+      headers: { authorization: 'Bearer wrong-token' },
+      body: uploadBody
+    });
+    assertScenario(
+      uploadWithWrongAuthError.includes('AIエージェントAPIの認証が必要です'),
+      '認証境界: 成果物本体アップロードが誤ったトークンで通っている'
+    );
+    const uploaded = await requestJson(apiPath(authApiBaseUrl, uploadUri), {
+      method: 'PUT',
+      headers: { authorization: `Bearer ${authToken}` },
+      body: uploadBody
+    });
+    assertScenario(
+      uploaded.uri === `/api/artifacts/${created.draft.id}/uploaded-theme.json`,
+      '認証境界: 成果物本体アップロードの参照URIが対象下書き配下になっていない'
+    );
+    assertScenario(
+      uploaded.byteSize === Buffer.byteLength(uploadBody),
+      '認証境界: 成果物本体アップロードのバイト数が実体と一致していない'
+    );
+    assertScenario(
+      uploaded.sha256 === sha256Buffer(Buffer.from(uploadBody)),
+      '認証境界: 成果物本体アップロードのハッシュが実体と一致していない'
+    );
+    const uploadedBody = await readFile(artifactPathByUri(authRuntimeDir, uploaded.uri), 'utf8');
+    assertScenario(uploadedBody === uploadBody, '認証境界: アップロードした成果物本体が保存されていない');
+    const duplicateUploadError = await expectRequestJsonFailure(apiPath(authApiBaseUrl, uploadUri), {
+      method: 'PUT',
+      headers: { authorization: `Bearer ${authToken}` },
+      body: uploadBody
+    });
+    assertScenario(
+      duplicateUploadError.includes('同じ名前の成果物がすでに保存されています'),
+      '認証境界: 同じ成果物名の再アップロードが拒否されていない'
+    );
+    const stateAfterUpload = JSON.stringify(await requestJson(apiPath(authApiBaseUrl, '/state')));
+    assertScenario(!stateAfterUpload.includes(uploadMarker), '認証境界: 成果物本体が状態APIに混ざっている');
+    assertScenario(!stateAfterUpload.includes(authToken), '認証境界: 成果物アップロード後の状態APIにトークンが混ざっている');
+
     const nextWithoutAuthError = await expectRequestJsonFailure(apiPath(authApiBaseUrl, '/agent-requests/next'));
     assertScenario(
       nextWithoutAuthError.includes('AIエージェントAPIの認証が必要です'),

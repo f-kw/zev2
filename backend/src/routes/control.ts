@@ -1,6 +1,6 @@
 import express from 'express';
 import { nanoid } from 'nanoid';
-import { createHash, timingSafeEqual } from 'node:crypto';
+import { createHash } from 'node:crypto';
 import { createReadStream } from 'node:fs';
 import { access, copyFile, mkdir, open, readFile, rm, stat, writeFile } from 'node:fs/promises';
 import path from 'node:path';
@@ -46,6 +46,7 @@ import {
 import { loadState, saveState } from '../store/json-store.js';
 import { startDryRunRunner } from '../runner/auto-runner.js';
 import { loadRuntimeConfig } from '../config/runtime-config.js';
+import { requireAgentApiToken } from '../security/agent-auth.js';
 
 const router: express.Router = express.Router();
 type ReviewChangeScope =
@@ -177,50 +178,6 @@ function trimText(value: unknown): string {
 
 function routeParamText(value: string | string[] | undefined): string {
   return Array.isArray(value) ? value[0] ?? '' : value ?? '';
-}
-
-function configuredAgentApiToken(): string {
-  return trimText(process.env.ZEV2_AGENT_API_TOKEN);
-}
-
-function bearerTokenFromHeader(value: unknown): string {
-  const text = Array.isArray(value) ? value[0] : value;
-  if (typeof text !== 'string') {
-    return '';
-  }
-
-  const prefix = 'Bearer ';
-  return text.startsWith(prefix) ? text.slice(prefix.length).trim() : '';
-}
-
-function secretTextMatches(actual: string, expected: string): boolean {
-  if (!actual || !expected) {
-    return false;
-  }
-
-  const actualBuffer = Buffer.from(actual);
-  const expectedBuffer = Buffer.from(expected);
-  return actualBuffer.length === expectedBuffer.length && timingSafeEqual(actualBuffer, expectedBuffer);
-}
-
-function requireAgentApiToken(
-  request: express.Request,
-  response: express.Response,
-  next: express.NextFunction
-): void {
-  const expectedToken = configuredAgentApiToken();
-  if (!expectedToken) {
-    next();
-    return;
-  }
-
-  const actualToken = bearerTokenFromHeader(request.headers.authorization);
-  if (!secretTextMatches(actualToken, expectedToken)) {
-    response.status(401).json({ error: 'AIエージェントAPIの認証が必要です' });
-    return;
-  }
-
-  next();
 }
 
 function appendAgentOperationLog(

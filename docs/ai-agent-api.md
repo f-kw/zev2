@@ -17,6 +17,7 @@ AIエージェントは承認後の作業だけをAPIで取得し、外部処理
 - 承認APIはrunner完了まで待たず、承認済み作業キュー作成後に応答する。
 - `claim` していない作業を `complete` してはいけない。
 - `complete` と `fail` は、`claim` したAIエージェントと同じ取得者だけが実行できる。
+- 成果物本体をbackendへ渡す場合は、先に `PUT /api/artifacts/:draftId/:fileName` で保存し、返されたURIを `complete` に渡す。
 - 前工程が完了していない作業は取得できない。
 - 内容選択、使用素材確認、動画生成前確認が必要な作業は、人間確認が承認されるまで取得できない。
 
@@ -31,6 +32,7 @@ backendがdry-run runnerをバックグラウンド起動する
 AIエージェントが GET /agent-requests/next で次の作業を取得する
 AIエージェントが POST /agent-requests/:id/claim で着手する
 AIエージェントが外部で必要な処理を実行する
+必要なら AIエージェントが PUT /artifacts/:draftId/:fileName で成果物本体を保存する
 AIエージェントが POST /agent-requests/:id/complete で完了を報告する
 失敗した場合は POST /agent-requests/:id/fail で失敗理由を報告する
 次の作業がなくなるまで繰り返す
@@ -66,6 +68,7 @@ AIエージェントが実行を進めるAPIだけ、任意のBearerトークン
 ```text
 GET  /api/agent-requests/next
 POST /api/agent-requests/:id/claim
+PUT  /api/artifacts/:draftId/:fileName
 POST /api/agent-requests/:id/complete
 POST /api/agent-requests/:id/fail
 ```
@@ -73,7 +76,7 @@ POST /api/agent-requests/:id/fail
 設定:
 
 - backendとrunnerの両方に `ZEV2_AGENT_API_TOKEN` を環境変数で設定する。
-- runnerは設定されたトークンを `Authorization: Bearer ...` として送る。
+- runnerまたはAIエージェントは設定されたトークンを `Authorization: Bearer ...` として送る。
 - `ZEV2_AGENT_API_TOKEN` が未設定の場合、ローカル開発用に認証なしで動く。
 - トークンは `config/runtime.jsonc`、状態ファイル、成果物参照、ログ、APIレスポンスへ保存しない。
 
@@ -190,6 +193,35 @@ Content-Type: application/json
 }
 ```
 
+## 成果物本体を保存する
+
+```http
+PUT /api/artifacts/:draftId/:fileName
+Content-Type: application/json
+```
+
+意味:
+
+- AIエージェントが外部処理で作った成果物本体を、対象下書き配下へ保存する。
+- URL上の下書きIDは、存在する実行前下書きIDでなければならない。
+- ファイル名は単一ファイル名だけを受け付ける。ディレクトリ移動や別下書き配下への保存はできない。
+- このAPIは状態を更新しない。保存しただけでは工程完了にならない。
+- レスポンスの `uri` を `complete` の `fileRef.uri` に渡すと、完了APIが工程種別、実体ファイル、バイト数、SHA-256を確認して状態へ成果物参照を残す。
+- `ZEV2_AGENT_API_TOKEN` が設定されている場合、このAPIもAIエージェント認証の対象になる。
+- 同じ名前の成果物がすでにある場合は拒否する。完了後の成果物実体が後から上書きされ、状態に残した検証情報と食い違うことを避けるため。
+
+レスポンス:
+
+```json
+{
+  "uri": "/api/artifacts/draft_xxx/transcript.json",
+  "artifactFileName": "transcript.json",
+  "byteSize": 12345,
+  "sha256": "...",
+  "mimeType": "application/json"
+}
+```
+
 ## 作業を完了する
 
 ```http
@@ -217,8 +249,8 @@ Content-Type: application/json
 - `claim` 時の取得者と `ownerId` が一致する場合だけ完了できる。
 - `fileRef` を渡した場合、backend は成果物参照を保存する。
 - 成果物参照がない完了報告は拒否する。
-- backend はファイル本体を保存しない。
-- `uri` はAIエージェントが後で参照できる場所を表す。
+- `complete` はファイル本体を受け取らない。AIエージェントが先に保存した成果物、またはrunnerがローカルに作った成果物の参照を受け取る。
+- `uri` はbackendが実体ファイルを確認できる `/api/artifacts/<下書きID>/...` 形式にする。
 - backend は完了時に成果物実体を確認し、保存ファイル名、バイト数、SHA-256を `FileRef` に残す。
 - 状態には成果物本文を入れず、参照と検証用メタデータだけを残す。
 
@@ -320,10 +352,9 @@ loop:
 - `next` で取得しただけの作業を `complete` しない。
 - 前工程の成果物を確認せずに後工程を実行しない。
 - 成果物本体を `state` に巨大JSONとして埋め込まない。
+- 完了済み成果物と同じ名前で再アップロードしない。
 - APIキー、トークン、認証情報、個人情報を `meaning` や `fileRef.uri` に入れない。
 
 ## 現時点で未実装
 
-- 認証
 - 詳細ログ検索API
-- 成果物本体の保存API
