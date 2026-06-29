@@ -3,6 +3,7 @@ import { computed, onBeforeUnmount, onMounted, reactive, ref, watch } from 'vue'
 import {
   DEFAULT_GEMINI_MODEL,
   findById,
+  latestByCreatedAt,
   readablePurposeForWebGeminiReview,
   uriWithRef,
   type AgentRequest,
@@ -30,6 +31,7 @@ import {
   loginHumanUi,
   logoutHumanUi,
   prepareWebGeminiReview,
+  submitPublishHandoff,
   type PublishPackageArtifact,
   type RequestDraftActivityEvent,
   type RequestDraftActivitySummary,
@@ -88,6 +90,9 @@ const publishPackageMessage = ref('');
 const activePublishPackageAction = ref<'create_package' | ''>('');
 const publishTitleInput = ref('');
 const publishDescriptionInput = ref('');
+const publishHandoffTargetInput = ref('外部投稿作業');
+const publishHandoffNoteInput = ref('');
+const activePublishHandoff = ref(false);
 const requestActivityEvents = ref<RequestDraftActivityEvent[]>([]);
 const requestActivitySummary = ref<RequestDraftActivitySummary | null>(null);
 const requestActivityLoading = ref(false);
@@ -368,6 +373,41 @@ const defaultPublishDescription = computed(() => {
     '必要なら公開前に説明文を人間が調整してください。'
   ].join('\n');
 });
+
+const currentPublishHandoffAction = computed(() => {
+  const draft = currentDraft.value;
+  const packageArtifact = publishPackage.value;
+  if (!draft || !packageArtifact) {
+    return undefined;
+  }
+
+  return latestByCreatedAt(store.state.publishHandoffActions.filter(
+    (action) =>
+      action.requestDraftId === draft.id &&
+      action.outputVideoUri === packageArtifact.outputVideoUri &&
+      action.manifestUri === packageArtifact.manifestUri &&
+      action.publishPackageCreatedAt === packageArtifact.createdAt
+  ));
+});
+
+const publishHandoffStatusText = computed(() => {
+  const handoff = currentPublishHandoffAction.value;
+  if (!handoff) {
+    return '公開作業への引き渡しは未記録';
+  }
+
+  return `引き渡し済み: ${handoff.targetName}`;
+});
+
+const canSubmitPublishHandoff = computed(() =>
+  Boolean(
+    currentDraft.value &&
+      publishPackage.value &&
+      !agentOperationLocked.value &&
+      !publishPackageLoading.value &&
+      !activePublishHandoff.value
+  )
+);
 
 const canApplyWebGeminiReview = computed(() =>
   Boolean(
@@ -1397,6 +1437,8 @@ async function createCurrentPublishPackage() {
     publishPackage.value = result.publishPackage;
     publishTitleInput.value = result.publishPackage.title;
     publishDescriptionInput.value = result.publishPackage.description;
+    publishHandoffNoteInput.value = publishHandoffNoteInput.value.trim() ||
+      `公開用ファイルを確認しました: ${result.publishPackage.manifestUri}`;
     publishPackageMessage.value = '公開用ファイルを作成しました';
     await refreshRequestActivity();
   } catch (error) {
@@ -1405,6 +1447,31 @@ async function createCurrentPublishPackage() {
   } finally {
     publishPackageLoading.value = false;
     activePublishPackageAction.value = '';
+  }
+}
+
+async function submitCurrentPublishHandoff() {
+  const draft = currentDraft.value;
+  if (!draft || !canSubmitPublishHandoff.value) {
+    return;
+  }
+
+  activePublishHandoff.value = true;
+  publishPackageMessage.value = '';
+  try {
+    const result = await submitPublishHandoff(draft.id, {
+      targetName: publishHandoffTargetInput.value.trim() || '外部投稿作業',
+      note: publishHandoffNoteInput.value.trim() || '公開パッケージを外部投稿作業へ渡しました'
+    });
+    store.state = result.state;
+    publishHandoffTargetInput.value = result.publishHandoffAction.targetName;
+    publishHandoffNoteInput.value = result.publishHandoffAction.note;
+    publishPackageMessage.value = '公開作業への引き渡しを記録しました';
+    await refreshRequestActivity();
+  } catch (error) {
+    publishPackageMessage.value = formatApiError(error);
+  } finally {
+    activePublishHandoff.value = false;
   }
 }
 
@@ -1594,6 +1661,8 @@ watch(
     publishPackageMessage.value = '';
     publishTitleInput.value = defaultPublishTitle.value;
     publishDescriptionInput.value = defaultPublishDescription.value;
+    publishHandoffTargetInput.value = '外部投稿作業';
+    publishHandoffNoteInput.value = '';
     void refreshWebGeminiReview();
     void refreshPublishPackage();
   },
@@ -2034,6 +2103,23 @@ watch(
                 <a :href="uriWithRef(publishPackage.noteUri, publishPackage.createdAt)" target="_blank" rel="noreferrer">説明メモ</a>
                 <a :href="uriWithRef(publishPackage.manifestUri, publishPackage.createdAt)" target="_blank" rel="noreferrer">manifest</a>
               </div>
+              <span v-if="publishPackage" class="publish-handoff-status">{{ publishHandoffStatusText }}</span>
+              <label v-if="publishPackage" class="publish-package-input">
+                引き渡し先
+                <input
+                  v-model="publishHandoffTargetInput"
+                  type="text"
+                  :disabled="agentOperationLocked || activePublishHandoff"
+                />
+              </label>
+              <label v-if="publishPackage" class="publish-package-input">
+                引き渡しメモ
+                <textarea
+                  v-model="publishHandoffNoteInput"
+                  rows="2"
+                  :disabled="agentOperationLocked || activePublishHandoff"
+                />
+              </label>
               <button
                 type="button"
                 class="secondary-button"
@@ -2041,6 +2127,15 @@ watch(
                 @click="createCurrentPublishPackage"
               >
                 {{ activePublishPackageAction === 'create_package' ? '作成中' : publishPackage ? '公開用ファイルを作り直す' : '公開用ファイルを作る' }}
+              </button>
+              <button
+                v-if="publishPackage"
+                type="button"
+                class="secondary-button"
+                :disabled="!canSubmitPublishHandoff"
+                @click="submitCurrentPublishHandoff"
+              >
+                {{ activePublishHandoff ? '記録中' : '公開作業へ渡したことを記録' }}
               </button>
             </div>
           </section>
@@ -3307,6 +3402,12 @@ video {
 .publish-package-input input:disabled,
 .publish-package-input textarea:disabled {
   opacity: 0.62;
+}
+
+.publish-handoff-status {
+  color: var(--yellow);
+  font-size: 12px;
+  line-height: 1.45;
 }
 
 .publish-package-links {

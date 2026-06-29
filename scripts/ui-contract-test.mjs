@@ -76,7 +76,10 @@ assertContract(
   appVue.includes('aria-label="公開用ファイル"') &&
     appVue.includes('v-model="publishTitleInput"') &&
     appVue.includes('v-model="publishDescriptionInput"') &&
+    appVue.includes('v-model="publishHandoffTargetInput"') &&
+    appVue.includes('v-model="publishHandoffNoteInput"') &&
     appVue.includes('@click="createCurrentPublishPackage"') &&
+    appVue.includes('@click="submitCurrentPublishHandoff"') &&
     appVue.includes('publishPackage.videoFileUri') &&
     appVue.includes('publishPackage.noteUri') &&
     appVue.includes('publishPackage.manifestUri'),

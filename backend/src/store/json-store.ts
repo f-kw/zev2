@@ -123,6 +123,20 @@ function isCurrentFinalReviewAction(value: unknown): boolean {
   );
 }
 
+function isCurrentPublishHandoffAction(value: unknown): boolean {
+  const action = recordValue(value);
+  return (
+    typeof action.id === 'string' &&
+    typeof action.requestDraftId === 'string' &&
+    typeof action.outputVideoUri === 'string' &&
+    typeof action.manifestUri === 'string' &&
+    typeof action.publishPackageCreatedAt === 'string' &&
+    typeof action.targetName === 'string' &&
+    typeof action.note === 'string' &&
+    typeof action.createdAt === 'string'
+  );
+}
+
 function isCurrentAgentOperationLog(value: unknown): boolean {
   const log = recordValue(value);
   return (
@@ -143,7 +157,8 @@ function withCurrentStateShape(value: unknown): unknown {
   return {
     ...state,
     agentOperationLogs: Array.isArray(state.agentOperationLogs) ? state.agentOperationLogs : [],
-    finalReviewActions: Array.isArray(state.finalReviewActions) ? state.finalReviewActions : []
+    finalReviewActions: Array.isArray(state.finalReviewActions) ? state.finalReviewActions : [],
+    publishHandoffActions: Array.isArray(state.publishHandoffActions) ? state.publishHandoffActions : []
   };
 }
 
@@ -163,13 +178,15 @@ function isZev2State(value: unknown): value is Zev2State {
     Array.isArray(state.controlReviewItems) &&
     Array.isArray(state.humanReviewActions) &&
     Array.isArray(state.finalReviewActions) &&
+    Array.isArray(state.publishHandoffActions) &&
     state.requestDrafts.every(isCurrentRequestDraft) &&
     state.agentRequests.every(isCurrentAgentRequest) &&
     state.fileRefs.every(isCurrentFileRef) &&
     state.agentOperationLogs.every(isCurrentAgentOperationLog) &&
     state.controlReviewItems.every(isCurrentControlReview) &&
     state.humanReviewActions.every(isCurrentHumanReviewAction) &&
-    state.finalReviewActions.every(isCurrentFinalReviewAction)
+    state.finalReviewActions.every(isCurrentFinalReviewAction) &&
+    state.publishHandoffActions.every(isCurrentPublishHandoffAction)
   );
 }
 

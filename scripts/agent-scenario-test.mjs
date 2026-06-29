@@ -2153,6 +2153,20 @@ async function assertFinalReviewControls(apiBaseUrl, runtimeDir, sourceDraftId) 
     packageBeforeReviewError.includes('投稿可能または最終完了として記録してから'),
     '人間が確認していない完成動画から公開パッケージが作られている'
   );
+  const handoffBeforePackageError = await expectRequestJsonFailure(
+    apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/publish-handoff`),
+    {
+      method: 'POST',
+      body: JSON.stringify({
+        targetName: '未作成パッケージの投稿先',
+        note: '公開パッケージなしで引き渡そうとする'
+      })
+    }
+  );
+  assertScenario(
+    handoffBeforePackageError.includes('公開パッケージを作成してから'),
+    '公開パッケージを作らずに公開作業へ引き渡せている'
+  );
 
   const publishReady = await requestJson(apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/final-review`), {
     method: 'POST',
@@ -2249,6 +2263,40 @@ async function assertFinalReviewControls(apiBaseUrl, runtimeDir, sourceDraftId) 
     )),
     '公開パッケージ作成が監査タイムラインで追えない'
   );
+  const publishHandoff = await requestJson(apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/publish-handoff`), {
+    method: 'POST',
+    body: JSON.stringify({
+      targetName: 'YouTube下書き作成担当',
+      note: '公開用ファイルを確認して投稿作業へ渡した'
+    })
+  });
+  assertScenario(
+    publishHandoff.publishHandoffAction?.manifestUri === publishPackage.publishPackage.manifestUri,
+    '公開引き渡し記録が対象公開パッケージに紐付いていない'
+  );
+  assertScenario(
+    publishHandoff.publishHandoffAction?.publishPackageCreatedAt === publishPackage.publishPackage.createdAt,
+    '公開引き渡し記録が公開パッケージの作成日時に紐付いていない'
+  );
+  assertScenario(
+    publishHandoff.state.publishHandoffActions.some((action) => (
+      action.id === publishHandoff.publishHandoffAction.id &&
+        action.targetName === 'YouTube下書き作成担当'
+    )),
+    '公開引き渡し記録が状態に保存されていない'
+  );
+  const publishHandoffActivity = await requestJson(apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/activity`));
+  assertScenario(
+    publishHandoffActivity.summary?.title === '公開作業へ引き渡し済み',
+    '公開引き渡し記録が現在状態要約に反映されていない'
+  );
+  assertScenario(
+    publishHandoffActivity.events.some((event) => (
+      event.kind === 'publish_handoff_action' &&
+        event.title === '公開作業へ引き渡し済み'
+    )),
+    '公開引き渡し記録が監査タイムラインで追えない'
+  );
 
   const duplicatePublishError = await expectRequestJsonFailure(
     apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/final-review`),
@@ -2282,7 +2330,8 @@ async function assertFinalReviewControls(apiBaseUrl, runtimeDir, sourceDraftId) 
   );
   assertScenario(
     finalActivity.summary.nextAction.includes('最終成果') ||
-      finalActivity.summary.nextAction.includes('公開用ファイル'),
+      finalActivity.summary.nextAction.includes('公開用ファイル') ||
+      finalActivity.summary.nextAction.includes('投稿結果'),
     '最終完了後の次状態が人間に分かる文になっていない'
   );
   assertScenario(
@@ -2312,6 +2361,26 @@ async function assertFinalReviewControls(apiBaseUrl, runtimeDir, sourceDraftId) 
   assertScenario(
     finalPackageActivity.summary?.title === '最終完了・公開パッケージ作成済み',
     '最終完了後の公開パッケージ作成が現在状態要約に反映されていない'
+  );
+  const finalHandoff = await requestJson(apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/publish-handoff`), {
+    method: 'POST',
+    body: JSON.stringify({
+      targetName: '最終公開担当',
+      note: '最終完了後の公開パッケージを引き渡した'
+    })
+  });
+  assertScenario(
+    finalHandoff.publishHandoffAction?.manifestUri === packageAfterFinal.publishPackage.manifestUri,
+    '最終完了後の公開引き渡し記録が最新公開パッケージに紐付いていない'
+  );
+  assertScenario(
+    finalHandoff.publishHandoffAction?.publishPackageCreatedAt === packageAfterFinal.publishPackage.createdAt,
+    '最終完了後の公開引き渡し記録が最新公開パッケージの作成日時に紐付いていない'
+  );
+  const finalHandoffActivity = await requestJson(apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/activity`));
+  assertScenario(
+    finalHandoffActivity.summary?.title === '最終完了・公開作業へ引き渡し済み',
+    '最終完了後の公開引き渡し記録が現在状態要約に反映されていない'
   );
 
   const duplicateFinalError = await expectRequestJsonFailure(

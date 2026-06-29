@@ -25,6 +25,7 @@ import {
   type HumanReviewAction,
   type HumanReviewActionType,
   type OutputEntity,
+  type PublishHandoffAction,
   type RequestDraft,
   buildWebGeminiExternalReviewCommand,
   buildWebGeminiReviewPromptText,
@@ -147,7 +148,8 @@ type RequestDraftActivityEvent = {
     | 'human_review_action'
     | 'final_review_action'
     | 'web_gemini_review_status'
-    | 'publish_package_status';
+    | 'publish_package_status'
+    | 'publish_handoff_action';
   occurredAt: string;
   actor: 'user' | 'agent' | 'runner' | 'backend' | 'system';
   title: string;
@@ -158,6 +160,7 @@ type RequestDraftActivityEvent = {
   decisionLogId?: string;
   humanReviewActionId?: string;
   finalReviewActionId?: string;
+  publishHandoffActionId?: string;
   fileRefId?: string;
   outputId?: string;
 };
@@ -1679,6 +1682,40 @@ function buildPublishPackageActivityError(
   };
 }
 
+function latestPublishHandoffActionForPackage(
+  state: LoadedState,
+  requestDraftId: string,
+  publishPackage: PublishPackageArtifact | null
+): PublishHandoffAction | undefined {
+  if (!publishPackage) {
+    return undefined;
+  }
+
+  return latestByCreatedAt(state.publishHandoffActions.filter(
+    (action) =>
+      action.requestDraftId === requestDraftId &&
+      action.outputVideoUri === publishPackage.outputVideoUri &&
+      action.manifestUri === publishPackage.manifestUri &&
+      action.publishPackageCreatedAt === publishPackage.createdAt
+  ));
+}
+
+function buildPublishHandoffActivity(action: PublishHandoffAction): RequestDraftActivityEvent {
+  return {
+    id: `publish-handoff:${action.id}`,
+    kind: 'publish_handoff_action',
+    occurredAt: action.createdAt,
+    actor: 'user',
+    title: '公開作業へ引き渡し済み',
+    detail: compactActivityText(
+      `投稿先: ${action.targetName} / ${action.note}`,
+      '公開パッケージを外部投稿作業へ渡した記録を保存しました'
+    ),
+    requestDraftId: action.requestDraftId,
+    publishHandoffActionId: action.id
+  };
+}
+
 function buildWebGeminiReviewActivitySummary(
   baseSummary: RequestDraftActivitySummary,
   draft: RequestDraft,
@@ -1887,6 +1924,34 @@ function buildPublishPackageActivitySummary(
   };
 }
 
+function buildPublishHandoffActivitySummary(
+  baseSummary: RequestDraftActivitySummary,
+  state: LoadedState,
+  draft: RequestDraft,
+  packageResult: { publishPackage: PublishPackageArtifact | null } | { error: string }
+): RequestDraftActivitySummary {
+  if (baseSummary.status !== 'completed' || 'error' in packageResult || !packageResult.publishPackage) {
+    return baseSummary;
+  }
+
+  const handoff = latestPublishHandoffActionForPackage(state, draft.id, packageResult.publishPackage);
+  if (!handoff) {
+    return baseSummary;
+  }
+
+  return {
+    ...baseSummary,
+    title: baseSummary.title.includes('最終完了')
+      ? '最終完了・公開作業へ引き渡し済み'
+      : '公開作業へ引き渡し済み',
+    detail: compactActivityText(
+      `投稿先: ${handoff.targetName} / ${handoff.note}`,
+      '公開パッケージを外部投稿作業へ渡した記録があります'
+    ),
+    nextAction: '外部サービス側で投稿結果を確認し、必要なら公開済みURLの記録を追加します'
+  };
+}
+
 function buildRequestDraftActivity(state: LoadedState, draft: RequestDraft): RequestDraftActivityEvent[] {
   const events: RequestDraftActivityEvent[] = [
     {
@@ -2008,6 +2073,10 @@ function buildRequestDraftActivity(state: LoadedState, draft: RequestDraft): Req
       requestDraftId: draft.id,
       finalReviewActionId: action.id
     });
+  }
+
+  for (const action of state.publishHandoffActions.filter((item) => item.requestDraftId === draft.id)) {
+    events.push(buildPublishHandoffActivity(action));
   }
 
   return events.sort((left, right) => (
@@ -3202,7 +3271,8 @@ router.get('/request-drafts/:id/activity', async (request, response) => {
     webGeminiRunLogResult
   );
   const finalReviewSummary = buildFinalReviewActivitySummary(webGeminiSummary, state, draft, outputVideo);
-  const summary = buildPublishPackageActivitySummary(finalReviewSummary, draft, outputVideo, publishPackageResult);
+  const publishPackageSummary = buildPublishPackageActivitySummary(finalReviewSummary, draft, outputVideo, publishPackageResult);
+  const summary = buildPublishHandoffActivitySummary(publishPackageSummary, state, draft, publishPackageResult);
 
   response.json({
     requestDraftId: draft.id,
@@ -3371,6 +3441,56 @@ router.post('/request-drafts/:id/publish-package', async (request, response) => 
       state
     });
   }
+});
+
+router.post('/request-drafts/:id/publish-handoff', async (request, response) => {
+  const state = await loadStateWithClaimRecovery();
+  const draft = findById(state.requestDrafts, request.params.id);
+  if (!draft) {
+    response.status(404).json({ error: '実行前下書きが見つかりません', state });
+    return;
+  }
+
+  const outputVideo = latestOutputVideoFileRef(state, draft.id);
+  const outputVideoError = await validatePublishPackageOutputVideo(draft, outputVideo);
+  if (outputVideoError) {
+    response.status(409).json({ error: outputVideoError, state });
+    return;
+  }
+
+  const packageResult = await readPublishPackageArtifact(draft.id);
+  if ('error' in packageResult) {
+    response.status(409).json({ error: packageResult.error, state });
+    return;
+  }
+  if (!packageResult.publishPackage) {
+    response.status(409).json({ error: '公開パッケージを作成してから公開作業へ渡してください', state });
+    return;
+  }
+
+  const mismatch = ensurePublishPackageMatchesOutputVideo(packageResult.publishPackage, outputVideo);
+  if (mismatch) {
+    response.status(409).json({ error: mismatch.error, state });
+    return;
+  }
+
+  const input = recordValue(request.body);
+  const createdAt = nowIso();
+  const handoff: PublishHandoffAction = {
+    id: createId('publish_handoff'),
+    requestDraftId: draft.id,
+    outputVideoUri: packageResult.publishPackage.outputVideoUri,
+    manifestUri: packageResult.publishPackage.manifestUri,
+    publishPackageCreatedAt: packageResult.publishPackage.createdAt,
+    targetName: trimText(input.targetName) || '外部投稿作業',
+    note: trimText(input.note) || '公開パッケージを外部投稿作業へ渡しました',
+    createdAt
+  };
+
+  draft.updatedAt = createdAt;
+  state.publishHandoffActions.push(handoff);
+  await saveState(state);
+  response.json({ publishHandoffAction: handoff, state });
 });
 
 router.post('/request-drafts', async (request, response) => {
