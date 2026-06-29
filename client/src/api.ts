@@ -16,7 +16,8 @@ import {
 } from '@zev2/shared';
 
 const api = axios.create({
-  baseURL: '/api'
+  baseURL: '/api',
+  withCredentials: true
 });
 
 export function formatApiError(error: unknown): string {
@@ -124,6 +125,26 @@ export interface RequestDraftActivitySummary {
 export interface RequestDraftActivitySearchResult extends RequestDraftActivityEvent {
   draftPurpose: string;
   draftStatus: RequestDraft['status'];
+}
+
+export interface HumanAuthStatus {
+  required: boolean;
+  authenticated: boolean;
+}
+
+export async function fetchHumanAuthStatus(): Promise<HumanAuthStatus> {
+  const response = await api.get('/human-auth/status');
+  return response.data;
+}
+
+export async function loginHumanUi(token: string): Promise<HumanAuthStatus> {
+  const response = await api.post('/human-auth/login', { token });
+  return response.data;
+}
+
+export async function logoutHumanUi(): Promise<HumanAuthStatus> {
+  const response = await api.post('/human-auth/logout');
+  return response.data;
 }
 
 export async function fetchWorkflow(): Promise<{ steps: WorkflowStep[] }> {

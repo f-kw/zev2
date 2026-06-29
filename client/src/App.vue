@@ -22,8 +22,11 @@ import {
 } from './activity-log';
 import {
   fetchRequestDraftActivity,
+  fetchHumanAuthStatus,
   fetchWebGeminiReview,
   formatApiError,
+  loginHumanUi,
+  logoutHumanUi,
   prepareWebGeminiReview,
   type RequestDraftActivityEvent,
   type RequestDraftActivitySummary,
@@ -51,6 +54,11 @@ type ArtifactReferenceItem = {
 };
 
 const store = useControlQueueStore();
+const humanAuthLoading = ref(true);
+const humanAuthRequired = ref(false);
+const humanAuthAuthenticated = ref(false);
+const humanAuthTokenInput = ref('');
+const humanAuthError = ref('');
 const submitting = ref(false);
 const activeRedoScope = ref<RedoScope | ''>('');
 const activeReviewAction = ref('');
@@ -91,6 +99,10 @@ const requestInput = reactive<RequestDraftInput>({
   geminiModelName: DEFAULT_GEMINI_MODEL,
   preset: 'shorts_default'
 });
+
+const humanAuthReady = computed(() =>
+  !humanAuthLoading.value && (!humanAuthRequired.value || humanAuthAuthenticated.value)
+);
 
 const runtimeSummaries = computed(() => {
   if (!store.runtimeConfig) {
@@ -1075,7 +1087,7 @@ async function refreshRequestActivity() {
   requestActivityLoadNumber += 1;
   const loadNumber = requestActivityLoadNumber;
 
-  if (!draft || showRequestPage.value) {
+  if (!humanAuthReady.value || !draft || showRequestPage.value) {
     requestActivityEvents.value = [];
     requestActivitySummary.value = null;
     requestActivityError.value = '';
@@ -1134,7 +1146,7 @@ async function refreshWebGeminiReview() {
     return;
   }
 
-  if (!draft || !outputVideoUri.value) {
+  if (!humanAuthReady.value || !draft || !outputVideoUri.value) {
     webGeminiReview.value = null;
     webGeminiRunLog.value = null;
     webGeminiPreparedPromptText.value = '';
@@ -1273,6 +1285,102 @@ async function submitOutputFinalReview(action: FinalReviewActionType) {
   }
 }
 
+function startRefreshTimers() {
+  if (refreshTimer === undefined) {
+    refreshTimer = window.setInterval(() => {
+      if (humanAuthReady.value) {
+        void store.refresh();
+      }
+    }, 2000);
+  }
+
+  if (webGeminiRefreshTimer === undefined) {
+    webGeminiRefreshTimer = window.setInterval(() => {
+      if (
+        !humanAuthReady.value ||
+        !outputVideoUri.value ||
+        activeWebGeminiAction.value ||
+        agentOperationLocked.value
+      ) {
+        return;
+      }
+
+      void refreshWebGeminiReview();
+    }, 5000);
+  }
+}
+
+function stopRefreshTimers() {
+  if (refreshTimer !== undefined) {
+    window.clearInterval(refreshTimer);
+    refreshTimer = undefined;
+  }
+  if (webGeminiRefreshTimer !== undefined) {
+    window.clearInterval(webGeminiRefreshTimer);
+    webGeminiRefreshTimer = undefined;
+  }
+}
+
+async function initializeAfterHumanAuth() {
+  await store.refresh();
+  startRefreshTimers();
+}
+
+async function refreshHumanAuthStatus() {
+  humanAuthLoading.value = true;
+  humanAuthError.value = '';
+  try {
+    const status = await fetchHumanAuthStatus();
+    humanAuthRequired.value = status.required;
+    humanAuthAuthenticated.value = status.authenticated;
+    if (!status.required || status.authenticated) {
+      await initializeAfterHumanAuth();
+    } else {
+      stopRefreshTimers();
+    }
+  } catch (error) {
+    humanAuthRequired.value = true;
+    humanAuthAuthenticated.value = false;
+    humanAuthError.value = formatApiError(error);
+    stopRefreshTimers();
+  } finally {
+    humanAuthLoading.value = false;
+  }
+}
+
+async function submitHumanLogin() {
+  humanAuthLoading.value = true;
+  humanAuthError.value = '';
+  try {
+    const status = await loginHumanUi(humanAuthTokenInput.value);
+    humanAuthRequired.value = status.required;
+    humanAuthAuthenticated.value = status.authenticated;
+    humanAuthTokenInput.value = '';
+    await initializeAfterHumanAuth();
+  } catch (error) {
+    humanAuthAuthenticated.value = false;
+    humanAuthError.value = formatApiError(error);
+  } finally {
+    humanAuthLoading.value = false;
+  }
+}
+
+async function logoutHuman() {
+  humanAuthLoading.value = true;
+  humanAuthError.value = '';
+  try {
+    const status = await logoutHumanUi();
+    humanAuthRequired.value = status.required;
+    humanAuthAuthenticated.value = status.authenticated;
+    stopRefreshTimers();
+    store.$reset();
+  } catch (error) {
+    humanAuthError.value = formatApiError(error);
+  } finally {
+    humanAuthLoading.value = false;
+  }
+}
+
 async function resumeAgentWork() {
   if (!canResumeAgentWork.value) {
     return;
@@ -1301,26 +1409,11 @@ async function cancelAgentWork() {
 }
 
 onMounted(() => {
-  void store.refresh();
-  refreshTimer = window.setInterval(() => {
-    void store.refresh();
-  }, 2000);
-  webGeminiRefreshTimer = window.setInterval(() => {
-    if (!outputVideoUri.value || activeWebGeminiAction.value || agentOperationLocked.value) {
-      return;
-    }
-
-    void refreshWebGeminiReview();
-  }, 5000);
+  void refreshHumanAuthStatus();
 });
 
 onBeforeUnmount(() => {
-  if (refreshTimer !== undefined) {
-    window.clearInterval(refreshTimer);
-  }
-  if (webGeminiRefreshTimer !== undefined) {
-    window.clearInterval(webGeminiRefreshTimer);
-  }
+  stopRefreshTimers();
 });
 
 watch(
@@ -1437,10 +1530,19 @@ watch(
         >
           作業へ戻る
         </button>
+        <button
+          v-if="humanAuthRequired && humanAuthAuthenticated"
+          type="button"
+          class="secondary-button"
+          :disabled="humanAuthLoading"
+          @click="logoutHuman"
+        >
+          ログアウト
+        </button>
       </div>
     </section>
 
-    <section class="agent-status-bar" aria-live="polite">
+    <section v-if="humanAuthReady" class="agent-status-bar" aria-live="polite">
       <div class="status-main">
         <div>
           <p class="eyebrow">Process Active</p>
@@ -1473,7 +1575,34 @@ watch(
       </ol>
     </section>
 
-    <div class="workspace-grid">
+    <section v-else class="auth-panel" aria-label="人間UI認証">
+      <div class="panel-corner" aria-hidden="true"></div>
+      <div>
+        <p class="eyebrow">Human Auth</p>
+        <h1>{{ humanAuthLoading ? '認証確認中' : '人間UIログイン' }}</h1>
+      </div>
+      <form v-if="humanAuthRequired" class="auth-form" @submit.prevent="submitHumanLogin">
+        <label>
+          認証トークン
+          <input
+            v-model="humanAuthTokenInput"
+            type="password"
+            autocomplete="current-password"
+            :disabled="humanAuthLoading"
+          />
+        </label>
+        <p v-if="humanAuthError" class="error-message">{{ humanAuthError }}</p>
+        <button type="submit" :disabled="humanAuthLoading || !humanAuthTokenInput.trim()">
+          {{ humanAuthLoading ? '確認中' : 'ログイン' }}
+        </button>
+      </form>
+      <div v-else class="empty-review-state">
+        <strong>認証設定なし</strong>
+        <span>作業画面を読み込んでいます</span>
+      </div>
+    </section>
+
+    <div v-if="humanAuthReady" class="workspace-grid">
       <section class="stage">
         <section v-if="showRequestPage" class="request-page">
           <div class="panel-corner" aria-hidden="true"></div>
@@ -1867,7 +1996,7 @@ watch(
     </div>
 
     <div
-      v-if="!showRequestPage && pendingReviewChange && pendingReviewItem"
+      v-if="humanAuthReady && !showRequestPage && pendingReviewChange && pendingReviewItem"
       class="dialog-overlay"
       role="dialog"
       aria-modal="true"
@@ -1899,7 +2028,7 @@ watch(
     </div>
 
     <div
-      v-if="!showRequestPage && activityDialogOpen"
+      v-if="humanAuthReady && !showRequestPage && activityDialogOpen"
       class="dialog-overlay"
       role="dialog"
       aria-modal="true"
@@ -2070,6 +2199,7 @@ watch(
 
 .sys-bar,
 .agent-status-bar,
+.auth-panel,
 .request-page,
 .review-panel,
 .video-panel,
@@ -2383,6 +2513,29 @@ h2 {
   overflow: hidden;
 }
 
+.auth-panel {
+  display: grid;
+  align-content: center;
+  justify-items: start;
+  gap: 16px;
+  min-height: 0;
+  padding: 28px;
+}
+
+.auth-panel h1 {
+  margin: 0;
+  color: var(--text);
+  font-family: var(--font-en);
+  font-size: 34px;
+  line-height: 1;
+}
+
+.auth-form {
+  display: grid;
+  gap: 14px;
+  width: min(100%, 420px);
+}
+
 .request-page,
 .review-panel,
 .video-panel,
@@ -2458,11 +2611,10 @@ label {
   letter-spacing: 0.1em;
 }
 
-textarea {
+textarea,
+input {
   width: 100%;
-  min-height: 92px;
   box-sizing: border-box;
-  resize: none;
   border: 1px solid var(--line);
   border-radius: 0;
   padding: 12px;
@@ -2473,18 +2625,30 @@ textarea {
   line-height: 1.55;
 }
 
-textarea:focus {
+textarea {
+  min-height: 92px;
+  resize: none;
+}
+
+input {
+  min-height: 44px;
+}
+
+textarea:focus,
+input:focus {
   outline: 0;
   border-color: var(--yellow);
   box-shadow: inset 0 0 18px rgba(252, 238, 10, 0.06);
 }
 
-textarea:disabled {
+textarea:disabled,
+input:disabled {
   color: var(--text-faint);
   cursor: not-allowed;
 }
 
-textarea::placeholder {
+textarea::placeholder,
+input::placeholder {
   color: var(--text-faint);
 }
 

@@ -91,6 +91,35 @@ POST /api/agent-requests/:id/fail
 - UIが使う状態確認、依頼作成、依頼却下、人間確認、完成動画の最終判断、中止、再実行、Web Geminiレビュー準備。
 - これらは人間制御APIであり、AIエージェントが自動で進めるAPIとは分ける。
 
+## 人間UI認証
+
+人間UIの状態確認、人間制御API、成果物配信は、任意の人間UIトークンで保護できます。
+
+対象:
+
+- 状態確認API。
+- 依頼作成、依頼承認、却下、人間確認、完成動画の最終判断、中止、再実行。
+- Web Geminiレビュー準備、保存、反映。
+- `/api/artifacts/...` の成果物配信。
+
+設定:
+
+- backendに `ZEV2_HUMAN_API_TOKEN` を環境変数で設定する。
+- 未設定の場合、ローカル開発用に人間UI認証なしで動く。
+- 設定した場合、UIは `POST /api/human-auth/login` でログインし、同一オリジンCookieでAPIと動画配信を読む。
+- APIクライアントは `Authorization: Bearer ...` でも同じ人間UIトークンを送れる。
+- `ZEV2_HUMAN_API_TOKEN` は状態、ログ、成果物参照、APIレスポンスへ保存しない。
+
+認証状態:
+
+```text
+GET  /api/human-auth/status
+POST /api/human-auth/login
+POST /api/human-auth/logout
+```
+
+AIエージェント実行APIの `next`、`claim`、`complete`、`fail` は、人間UI認証ではなくAIエージェントAPI認証で扱います。
+
 ## 作業種別
 
 | 作業種別 | 意味 | 成果物種別 |

@@ -137,6 +137,23 @@ async function requestJson(url, init = {}) {
   return body;
 }
 
+async function requestJsonWithResponse(url, init = {}) {
+  const response = await fetch(url, {
+    ...init,
+    headers: {
+      'content-type': 'application/json',
+      ...(init.headers ?? {})
+    }
+  });
+  const text = await response.text();
+  const body = text ? JSON.parse(text) : {};
+  if (!response.ok) {
+    throw new Error(`${init.method ?? 'GET'} ${url} failed: ${response.status} ${text}`);
+  }
+
+  return { body, response };
+}
+
 async function expectRequestJsonFailure(url, init = {}) {
   try {
     await requestJson(url, init);
@@ -185,6 +202,15 @@ function completionRequestBody(input, ownerId = scenarioAgentOwnerId) {
 
 function failureRequestBody(message, ownerId = scenarioAgentOwnerId) {
   return JSON.stringify({ ownerId, message });
+}
+
+function setCookieHeaders(response) {
+  if (typeof response.headers.getSetCookie === 'function') {
+    return response.headers.getSetCookie();
+  }
+
+  const header = response.headers.get('set-cookie');
+  return header ? [header] : [];
 }
 
 async function startBackend(runtimeDir, port, extraEnv = {}) {
@@ -395,9 +421,10 @@ async function assertDraftCannotBeApprovedTwice(apiBaseUrl, draftId, label) {
   assertScenario(requests.length === 7, `${label}: 再承認拒否後にAI作業工程数が変わっている`);
 }
 
-async function createScenarioDraft(apiBaseUrl, purpose) {
+async function createScenarioDraft(apiBaseUrl, purpose, headers = {}) {
   const created = await requestJson(apiPath(apiBaseUrl, '/request-drafts'), {
     method: 'POST',
+    headers,
     body: JSON.stringify({
       purpose,
       sourceUri: fixedSourceUri,
@@ -610,6 +637,104 @@ async function assertAgentApiAuthBoundary() {
 
     const serializedState = JSON.stringify(await requestJson(apiPath(authApiBaseUrl, '/state')));
     assertScenario(!serializedState.includes(authToken), '認証境界: 状態APIにAIエージェントAPIトークンが混ざっている');
+  } finally {
+    await backend.stop();
+    await rm(authRuntimeDir, { recursive: true, force: true });
+  }
+}
+
+async function assertHumanUiAuthBoundary() {
+  const authRuntimeDir = await mkdtemp(path.join(tmpdir(), 'zev2-human-auth-scenario-'));
+  const authPort = await freePort();
+  const authApiBaseUrl = `http://127.0.0.1:${authPort}/api`;
+  const humanToken = 'scenario-human-ui-token';
+  const backend = await startBackend(authRuntimeDir, authPort, {
+    ZEV2_HUMAN_API_TOKEN: humanToken
+  });
+
+  try {
+    const authStatus = await requestJson(apiPath(authApiBaseUrl, '/human-auth/status'));
+    assertScenario(authStatus.required === true, '人間UI認証: 認証必須状態が返っていない');
+    assertScenario(authStatus.authenticated === false, '人間UI認証: 未ログインが認証済み扱いになっている');
+
+    const stateWithoutAuthError = await expectRequestJsonFailure(apiPath(authApiBaseUrl, '/state'));
+    assertScenario(
+      stateWithoutAuthError.includes('人間UIの認証が必要です'),
+      '人間UI認証: 状態APIが未認証で通っている'
+    );
+
+    const createWithoutAuthError = await expectRequestJsonFailure(apiPath(authApiBaseUrl, '/request-drafts'), {
+      method: 'POST',
+      body: JSON.stringify({
+        purpose: '未認証で作成できてはいけない',
+        sourceUri: fixedSourceUri,
+        durationLabel: '60秒以内',
+        themeCountLabel: '3候補',
+        geminiModelName: 'gemini-3.5-flash',
+        preset: 'shorts_default'
+      })
+    });
+    assertScenario(
+      createWithoutAuthError.includes('人間UIの認証が必要です'),
+      '人間UI認証: 人間制御APIが未認証で通っている'
+    );
+
+    const agentNextWithoutHumanAuth = await requestJson(apiPath(authApiBaseUrl, '/agent-requests/next'));
+    assertScenario(
+      agentNextWithoutHumanAuth.request === null,
+      '人間UI認証: AIエージェントAPIが人間UI認証で塞がれている'
+    );
+
+    const wrongLoginError = await expectRequestJsonFailure(apiPath(authApiBaseUrl, '/human-auth/login'), {
+      method: 'POST',
+      body: JSON.stringify({ token: 'wrong-human-token' })
+    });
+    assertScenario(
+      wrongLoginError.includes('人間UIの認証が必要です'),
+      '人間UI認証: 誤ったトークンのログイン失敗理由が読めない'
+    );
+
+    const login = await requestJsonWithResponse(apiPath(authApiBaseUrl, '/human-auth/login'), {
+      method: 'POST',
+      body: JSON.stringify({ token: humanToken })
+    });
+    const sessionCookie = setCookieHeaders(login.response)[0]?.split(';')[0] ?? '';
+    assertScenario(login.body.authenticated === true, '人間UI認証: 正しいトークンでログインできない');
+    assertScenario(sessionCookie.startsWith('zev2_human_session='), '人間UI認証: ログインCookieが発行されていない');
+
+    const stateWithCookie = await requestJson(apiPath(authApiBaseUrl, '/state'), {
+      headers: { cookie: sessionCookie }
+    });
+    assertScenario(Array.isArray(stateWithCookie.requestDrafts), '人間UI認証: ログインCookieで状態APIを読めない');
+
+    const stateWithBearer = await requestJson(apiPath(authApiBaseUrl, '/state'), {
+      headers: { authorization: `Bearer ${humanToken}` }
+    });
+    assertScenario(Array.isArray(stateWithBearer.requestDrafts), '人間UI認証: Bearerトークンで状態APIを読めない');
+
+    const created = await createScenarioDraft(authApiBaseUrl, '人間UI認証済みで依頼を作る', {
+      cookie: sessionCookie
+    });
+    assertScenario(created.draft?.purpose === '人間UI認証済みで依頼を作る', '人間UI認証: 認証済みで依頼を作れない');
+
+    const artifactDir = path.join(authRuntimeDir, 'artifacts', created.draft.id);
+    await mkdir(artifactDir, { recursive: true });
+    await writeFile(path.join(artifactDir, 'human-auth-check.txt'), 'human artifact body', 'utf8');
+    const artifactUri = `/artifacts/${created.draft.id}/human-auth-check.txt`;
+    const artifactWithoutAuthError = await expectRequestTextFailure(apiPath(authApiBaseUrl, artifactUri));
+    assertScenario(
+      artifactWithoutAuthError.includes('人間UIの認証が必要です'),
+      '人間UI認証: 成果物配信が未認証で通っている'
+    );
+    const artifactWithCookie = await requestText(apiPath(authApiBaseUrl, artifactUri), {
+      headers: { cookie: sessionCookie }
+    });
+    assertScenario(artifactWithCookie === 'human artifact body', '人間UI認証: ログインCookieで成果物を読めない');
+
+    const serializedState = JSON.stringify(await requestJson(apiPath(authApiBaseUrl, '/state'), {
+      headers: { cookie: sessionCookie }
+    }));
+    assertScenario(!serializedState.includes(humanToken), '人間UI認証: 状態APIに人間UIトークンが混ざっている');
   } finally {
     await backend.stop();
     await rm(authRuntimeDir, { recursive: true, force: true });
@@ -3070,6 +3195,7 @@ async function main() {
   await runProcess('pnpm', ['--filter', '@zev2/agent-runner', 'build'], { timeoutMs: 120000 });
 
   await assertAgentApiAuthBoundary();
+  await assertHumanUiAuthBoundary();
 
   const runtimeDir = await mkdtemp(path.join(tmpdir(), 'zev2-agent-scenario-'));
   const port = await freePort();

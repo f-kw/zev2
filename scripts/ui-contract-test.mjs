@@ -58,6 +58,14 @@ assertContract(
 );
 
 assertContract(
+  appVue.includes('aria-label="人間UI認証"') &&
+    appVue.includes('v-model="humanAuthTokenInput"') &&
+    appVue.includes('@submit.prevent="submitHumanLogin"') &&
+    appVue.includes('@click="logoutHuman"'),
+  '人間UIのログイン、認証トークン入力、ログアウト導線が見つかりません'
+);
+
+assertContract(
   appVue.includes('aria-label="完成動画の人間判断"') &&
     appVue.includes("submitOutputFinalReview('publish_ready')") &&
     appVue.includes("submitOutputFinalReview('final_complete')"),

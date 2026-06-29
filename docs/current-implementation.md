@@ -50,6 +50,7 @@ UIは依頼と状態を確認する
 - AIエージェントはAPIで次の作業を取得できる。
 - AIエージェントはAPIで作業を取得済みにできる。
 - `ZEV2_AGENT_API_TOKEN` を設定すると、AIエージェント実行APIだけをBearerトークンで保護できる。
+- `ZEV2_HUMAN_API_TOKEN` を設定すると、人間UIの状態確認、人間制御API、成果物配信をログインCookieまたはBearerトークンで保護できる。
 - AIエージェントは成果物本体を `PUT /api/artifacts/:draftId/:fileName` で保存できる。保存後に返されたURIを完了APIへ渡す。
 - runnerの成果物保存方式は `config/runtime.jsonc` で `local` または `upload` を選べる。画面の実行設定にも現在の保存方式を表示する。
 - `upload` 保存では、後続工程のrunnerが必要な前工程成果物をAIエージェント用取得APIから読み戻して処理できる。
@@ -75,7 +76,6 @@ UIは依頼と状態を確認する
 - backend内でLLMを実行しない。
 - backend内で動画生成を実行しない。
 - backend内でGemini APIによる演出作成や完成品レビューを実行しない。
-- 人間UIのログイン認証はまだない。
 - 公開処理はまだない。
 - Web Geminiへの実アップロードは外部送信を伴うため、準備確認とは分けて明示実行として扱う。
 - Gemini API接続は `@google/genai` を使う。APIキー指定とVertex AI指定の両方を同じSDK経路で扱う。
@@ -123,6 +123,9 @@ POST /api/request-drafts/:id/reject
 
 ```text
 GET /api/health
+GET /api/human-auth/status
+POST /api/human-auth/login
+POST /api/human-auth/logout
 GET /api/workflow
 GET /api/state
 GET /api/request-drafts/:id/activity
@@ -193,8 +196,9 @@ STTサーバのIPは変わる前提なので、コードには固定しない。
 Gemini APIの標準モデルは `gemini-3.5-flash`。UIの使用モデルで、品質確認、軽い確認、疎通確認の用途から依頼ごとに切り替えられる。
 runnerの標準モデルだけを変える場合は `ZEV2_GEMINI_MODEL` を使う。
 接続確認やJSON応答確認だけのテストでは品質判断をしないため、UIまたは `ZEV2_GEMINI_MODEL` で `gemini-2.5-flash` または `gemini-3-flash-preview` を明示して使う。
-Vertex AI経由でGeminiを使う場合、`GOOGLE_CLOUD_PROJECT` を設定する。`GOOGLE_CLOUD_LOCATION` は未指定なら `global` を使う。
+Vertex AI経由でGeminiを使う場合、`GOOGLE_CLOUD_PROJECT`、`PROJECT_ID`、`GCP_PROJECT_ID` のいずれかでプロジェクトIDを設定する。`GOOGLE_CLOUD_LOCATION` は未指定なら `global` を使う。
 AIエージェント実行APIを保護する場合は、backendとrunnerの両方に `ZEV2_AGENT_API_TOKEN` を設定する。トークンは設定ファイルや状態ファイルには保存しない。
+人間UIを保護する場合は、backendに `ZEV2_HUMAN_API_TOKEN` を設定する。UIはログイン成功時に同一オリジンCookieを受け取り、状態確認、人間制御API、成果物配信に使う。未設定の場合はローカル開発用に認証なしで動く。
 
 ## 確認
 

@@ -50,6 +50,14 @@ import { loadState, saveState } from '../store/json-store.js';
 import { startDryRunRunner } from '../runner/auto-runner.js';
 import { loadRuntimeConfig } from '../config/runtime-config.js';
 import { requireAgentApiToken } from '../security/agent-auth.js';
+import {
+  clearHumanSessionCookie,
+  configuredHumanApiToken,
+  createHumanSessionCookie,
+  isHumanApiRequestAuthenticated,
+  requireHumanApiToken,
+  verifyHumanLoginToken
+} from '../security/human-auth.js';
 
 const router: express.Router = express.Router();
 type ReviewChangeScope =
@@ -173,6 +181,69 @@ const webGeminiReviewPromptFileName = 'web-gemini-review-prompt.md';
 function nowIso(): string {
   return new Date().toISOString();
 }
+
+function isAgentExecutionApiRequest(request: express.Request): boolean {
+  const path = request.path;
+  if (request.method === 'GET' && path === '/agent-requests/next') {
+    return true;
+  }
+
+  return request.method === 'POST' && /^\/agent-requests\/[^/]+\/(claim|complete|fail)$/.test(path);
+}
+
+function isPublicControlApiRequest(request: express.Request): boolean {
+  if (request.method === 'GET' && request.path === '/health') {
+    return true;
+  }
+
+  if (request.method === 'GET' && request.path === '/human-auth/status') {
+    return true;
+  }
+
+  return request.method === 'POST' && (
+    request.path === '/human-auth/login' ||
+    request.path === '/human-auth/logout'
+  );
+}
+
+router.get('/human-auth/status', (request, response) => {
+  const required = Boolean(configuredHumanApiToken());
+  response.json({
+    required,
+    authenticated: !required || isHumanApiRequestAuthenticated(request)
+  });
+});
+
+router.post('/human-auth/login', (request, response) => {
+  const required = Boolean(configuredHumanApiToken());
+  if (!required) {
+    response.json({ required, authenticated: true });
+    return;
+  }
+
+  if (!verifyHumanLoginToken(request.body?.token)) {
+    response.status(401).json({ error: '人間UIの認証が必要です' });
+    return;
+  }
+
+  response.setHeader('Set-Cookie', createHumanSessionCookie());
+  response.json({ required, authenticated: true });
+});
+
+router.post('/human-auth/logout', (_, response) => {
+  const required = Boolean(configuredHumanApiToken());
+  response.setHeader('Set-Cookie', clearHumanSessionCookie());
+  response.json({ required, authenticated: !required });
+});
+
+router.use((request, response, next) => {
+  if (isPublicControlApiRequest(request) || isAgentExecutionApiRequest(request)) {
+    next();
+    return;
+  }
+
+  requireHumanApiToken(request, response, next);
+});
 
 function createId(prefix: string): string {
   return `${prefix}_${nanoid()}`;
