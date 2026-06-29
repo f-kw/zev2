@@ -162,7 +162,7 @@ function failureRequestBody(message, ownerId = scenarioAgentOwnerId) {
   return JSON.stringify({ ownerId, message });
 }
 
-async function startBackend(runtimeDir, port) {
+async function startBackend(runtimeDir, port, extraEnv = {}) {
   const output = [];
   const child = spawn('node', ['backend/dist/index.js'], {
     cwd: workspaceRoot,
@@ -172,7 +172,8 @@ async function startBackend(runtimeDir, port) {
       ZEV2_RUNTIME_DIR: runtimeDir,
       ZEV2_API_BASE_URL: `http://127.0.0.1:${port}/api`,
       ZEV2_WORKSPACE_ROOT: workspaceRoot,
-      ZEV2_DISABLE_AUTO_RUNNER: '1'
+      ZEV2_DISABLE_AUTO_RUNNER: '1',
+      ...extraEnv
     },
     stdio: ['ignore', 'pipe', 'pipe']
   });
@@ -456,6 +457,68 @@ async function assertRequestDraftRejectApiContract(apiBaseUrl) {
     )),
     '下書き却下: 作業履歴から却下理由を確認できない'
   );
+}
+
+async function assertAgentApiAuthBoundary() {
+  const authRuntimeDir = await mkdtemp(path.join(tmpdir(), 'zev2-agent-auth-scenario-'));
+  const authPort = await freePort();
+  const authApiBaseUrl = `http://127.0.0.1:${authPort}/api`;
+  const authToken = 'scenario-agent-api-token';
+  const backend = await startBackend(authRuntimeDir, authPort, {
+    ZEV2_AGENT_API_TOKEN: authToken
+  });
+
+  try {
+    const stateWithoutAuth = await requestJson(apiPath(authApiBaseUrl, '/state'));
+    assertScenario(Array.isArray(stateWithoutAuth.requestDrafts), '認証境界: 人間UI用の状態確認が認証なしで読めない');
+
+    const created = await createScenarioDraft(authApiBaseUrl, 'AIエージェントAPIだけ認証する');
+    await requestJson(apiPath(authApiBaseUrl, `/request-drafts/${created.draft.id}/approve`), {
+      method: 'POST'
+    });
+
+    const nextWithoutAuthError = await expectRequestJsonFailure(apiPath(authApiBaseUrl, '/agent-requests/next'));
+    assertScenario(
+      nextWithoutAuthError.includes('AIエージェントAPIの認証が必要です'),
+      '認証境界: AIエージェントAPIが認証なしで通っている'
+    );
+    const nextWithWrongAuthError = await expectRequestJsonFailure(apiPath(authApiBaseUrl, '/agent-requests/next'), {
+      headers: { authorization: 'Bearer wrong-token' }
+    });
+    assertScenario(
+      nextWithWrongAuthError.includes('AIエージェントAPIの認証が必要です'),
+      '認証境界: AIエージェントAPIが誤ったトークンで通っている'
+    );
+
+    const nextWithAuth = await requestJson(apiPath(authApiBaseUrl, '/agent-requests/next'), {
+      headers: { authorization: `Bearer ${authToken}` }
+    });
+    assertScenario(
+      nextWithAuth.request?.requestDraftId === created.draft.id,
+      '認証境界: 正しいトークンでもAIエージェントAPIから次作業を取得できない'
+    );
+
+    const claimWithoutAuthError = await expectRequestJsonFailure(
+      apiPath(authApiBaseUrl, `/agent-requests/${nextWithAuth.request.id}/claim`),
+      { method: 'POST', body: claimRequestBody() }
+    );
+    assertScenario(
+      claimWithoutAuthError.includes('AIエージェントAPIの認証が必要です'),
+      '認証境界: claimが認証なしで通っている'
+    );
+    const claimed = await requestJson(apiPath(authApiBaseUrl, `/agent-requests/${nextWithAuth.request.id}/claim`), {
+      method: 'POST',
+      headers: { authorization: `Bearer ${authToken}` },
+      body: claimRequestBody()
+    });
+    assertScenario(claimed.request?.status === 'running', '認証境界: 正しいトークンでclaimできない');
+
+    const serializedState = JSON.stringify(await requestJson(apiPath(authApiBaseUrl, '/state')));
+    assertScenario(!serializedState.includes(authToken), '認証境界: 状態APIにAIエージェントAPIトークンが混ざっている');
+  } finally {
+    await backend.stop();
+    await rm(authRuntimeDir, { recursive: true, force: true });
+  }
 }
 
 async function writeApiContractArtifact(runtimeDir, draftId, fileName, content) {
@@ -2715,6 +2778,8 @@ async function scenarioAutomaticVideoCreation(apiBaseUrl, runtimeDir) {
 async function main() {
   await runProcess('pnpm', ['--filter', 'backend', 'build'], { timeoutMs: 120000 });
   await runProcess('pnpm', ['--filter', '@zev2/agent-runner', 'build'], { timeoutMs: 120000 });
+
+  await assertAgentApiAuthBoundary();
 
   const runtimeDir = await mkdtemp(path.join(tmpdir(), 'zev2-agent-scenario-'));
   const port = await freePort();

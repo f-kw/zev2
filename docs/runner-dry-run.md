@@ -92,6 +92,9 @@ Gemini APIの標準モデルは `gemini-3.5-flash` です。UIの使用モデル
 runnerの標準モデルだけを変える場合は `ZEV2_GEMINI_MODEL` を使います。
 接続確認やJSON応答確認だけのテストでは品質判断をしないため、UIまたは `ZEV2_GEMINI_MODEL` で `gemini-2.5-flash` または `gemini-3-flash-preview` を明示して使います。
 Vertex AI経由でGeminiを使う場合、`GOOGLE_CLOUD_PROJECT` を設定します。`GOOGLE_CLOUD_LOCATION` は未指定なら `global` を使います。
+AIエージェントAPIを保護する場合は、backendとrunnerの両方に同じ `ZEV2_AGENT_API_TOKEN` を環境変数で設定します。
+runnerは `GET /api/agent-requests/next`、`claim`、`complete`、`fail` へBearerトークンを送ります。
+このトークンは設定ファイル、状態ファイル、成果物、ログへ保存しません。
 
 ## 処理する工程
 

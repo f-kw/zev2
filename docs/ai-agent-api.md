@@ -57,6 +57,31 @@ POST /api/agent-requests/:id/retry
 - 失敗したAI工程から新しい編集コピーを作り、失敗工程以降を再実行できる状態にする。
 - UIはこれらの人間制御と状態確認に使い、AI工程を1件ずつ進める主導線にはしない。
 
+## AIエージェントAPI認証
+
+AIエージェントが実行を進めるAPIだけ、任意のBearerトークンで保護できます。
+
+対象API:
+
+```text
+GET  /api/agent-requests/next
+POST /api/agent-requests/:id/claim
+POST /api/agent-requests/:id/complete
+POST /api/agent-requests/:id/fail
+```
+
+設定:
+
+- backendとrunnerの両方に `ZEV2_AGENT_API_TOKEN` を環境変数で設定する。
+- runnerは設定されたトークンを `Authorization: Bearer ...` として送る。
+- `ZEV2_AGENT_API_TOKEN` が未設定の場合、ローカル開発用に認証なしで動く。
+- トークンは `config/runtime.jsonc`、状態ファイル、成果物参照、ログ、APIレスポンスへ保存しない。
+
+認証対象外:
+
+- UIが使う状態確認、依頼作成、依頼却下、人間確認、中止、再実行、Web Geminiレビュー準備。
+- これらは人間制御APIであり、AIエージェントが自動で進めるAPIとは分ける。
+
 ## 作業種別
 
 | 作業種別 | 意味 | 成果物種別 |

@@ -1,6 +1,6 @@
 import express from 'express';
 import { nanoid } from 'nanoid';
-import { createHash } from 'node:crypto';
+import { createHash, timingSafeEqual } from 'node:crypto';
 import { createReadStream } from 'node:fs';
 import { access, copyFile, mkdir, open, readFile, rm, stat, writeFile } from 'node:fs/promises';
 import path from 'node:path';
@@ -173,6 +173,54 @@ function selectAgentRequests(stateAgentRequests: AgentRequest[], ids: Set<string
 
 function trimText(value: unknown): string {
   return typeof value === 'string' ? value.trim() : '';
+}
+
+function routeParamText(value: string | string[] | undefined): string {
+  return Array.isArray(value) ? value[0] ?? '' : value ?? '';
+}
+
+function configuredAgentApiToken(): string {
+  return trimText(process.env.ZEV2_AGENT_API_TOKEN);
+}
+
+function bearerTokenFromHeader(value: unknown): string {
+  const text = Array.isArray(value) ? value[0] : value;
+  if (typeof text !== 'string') {
+    return '';
+  }
+
+  const prefix = 'Bearer ';
+  return text.startsWith(prefix) ? text.slice(prefix.length).trim() : '';
+}
+
+function secretTextMatches(actual: string, expected: string): boolean {
+  if (!actual || !expected) {
+    return false;
+  }
+
+  const actualBuffer = Buffer.from(actual);
+  const expectedBuffer = Buffer.from(expected);
+  return actualBuffer.length === expectedBuffer.length && timingSafeEqual(actualBuffer, expectedBuffer);
+}
+
+function requireAgentApiToken(
+  request: express.Request,
+  response: express.Response,
+  next: express.NextFunction
+): void {
+  const expectedToken = configuredAgentApiToken();
+  if (!expectedToken) {
+    next();
+    return;
+  }
+
+  const actualToken = bearerTokenFromHeader(request.headers.authorization);
+  if (!secretTextMatches(actualToken, expectedToken)) {
+    response.status(401).json({ error: 'AIエージェントAPIの認証が必要です' });
+    return;
+  }
+
+  next();
 }
 
 function appendAgentOperationLog(
@@ -2744,7 +2792,7 @@ router.post('/request-drafts/:id/reject', async (request, response) => {
   response.json({ draft, state });
 });
 
-router.get('/agent-requests/next', async (_, response) => {
+router.get('/agent-requests/next', requireAgentApiToken, async (_, response) => {
   const state = await loadStateWithClaimRecovery();
   const agentRequest = findReadyAgentRequest(state);
   if (agentRequest) {
@@ -2776,9 +2824,9 @@ router.post('/agent-requests/resume', async (_, response) => {
   response.json({ request: agentRequest, state });
 });
 
-router.post('/agent-requests/:id/claim', async (request, response) => {
+router.post('/agent-requests/:id/claim', requireAgentApiToken, async (request, response) => {
   const state = await loadStateWithClaimRecovery();
-  const agentRequest = findById(state.agentRequests, request.params.id);
+  const agentRequest = findById(state.agentRequests, routeParamText(request.params.id));
 
   if (!agentRequest) {
     response.status(404).json({ error: 'AI操作が見つかりません' });
@@ -2850,9 +2898,9 @@ router.post('/agent-requests/:id/claim', async (request, response) => {
   response.json({ request: agentRequest, state });
 });
 
-router.post('/agent-requests/:id/complete', async (request, response) => {
+router.post('/agent-requests/:id/complete', requireAgentApiToken, async (request, response) => {
   const state = await loadStateWithClaimRecovery();
-  const agentRequest = findById(state.agentRequests, request.params.id);
+  const agentRequest = findById(state.agentRequests, routeParamText(request.params.id));
 
   if (!agentRequest) {
     response.status(404).json({ error: 'AI操作が見つかりません' });
@@ -3328,9 +3376,9 @@ router.post('/agent-requests/:id/retry', async (request, response) => {
   });
 });
 
-router.post('/agent-requests/:id/fail', async (request, response) => {
+router.post('/agent-requests/:id/fail', requireAgentApiToken, async (request, response) => {
   const state = await loadStateWithClaimRecovery();
-  const agentRequest = findById(state.agentRequests, request.params.id);
+  const agentRequest = findById(state.agentRequests, routeParamText(request.params.id));
 
   if (!agentRequest) {
     response.status(404).json({ error: 'AI操作が見つかりません' });

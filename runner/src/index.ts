@@ -175,11 +175,17 @@ function artifactUrl(request: AgentRequest, fileName: string): string {
   return `/api/artifacts/${encodeURIComponent(sanitizePathPart(request.requestDraftId))}/${encodeURIComponent(fileName)}`;
 }
 
+function agentApiAuthorizationHeader(): Record<string, string> {
+  const token = process.env.ZEV2_AGENT_API_TOKEN?.trim();
+  return token ? { authorization: `Bearer ${token}` } : {};
+}
+
 async function requestJson<T>(routePath: string, init?: RequestInit): Promise<T> {
   const response = await fetch(`${runnerOptions.apiBaseUrl}${routePath}`, {
     ...init,
     headers: {
       'content-type': 'application/json',
+      ...agentApiAuthorizationHeader(),
       ...(init?.headers ?? {})
     }
   });
