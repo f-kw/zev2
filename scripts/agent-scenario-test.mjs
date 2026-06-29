@@ -818,6 +818,17 @@ async function assertAgentRequestApiContract(apiBaseUrl, runtimeDir) {
     contractActivity.events.some((event) => event.kind === 'agent_operation_log' && event.title === 'AI作業失敗を記録'),
     'API契約: 作業履歴APIでAI操作ログの失敗を確認できない'
   );
+  const activitySearch = await requestJson(
+    apiPath(apiBaseUrl, `/activity-search?q=${encodeURIComponent('API契約テストとして失敗理由')}&kind=agent_operation_log&requestDraftId=${draft.id}`)
+  );
+  assertScenario(activitySearch.totalCount === 1, 'API契約: 作業履歴検索で対象下書きの失敗ログを1件に絞れていない');
+  assertScenario(
+    activitySearch.results[0]?.title === 'AI作業失敗を記録' &&
+      activitySearch.results[0]?.detail.includes('API契約テストとして失敗理由'),
+    'API契約: 作業履歴検索で失敗理由を確認できない'
+  );
+  const limitedActivitySearch = await requestJson(apiPath(apiBaseUrl, '/activity-search?kind=agent_operation_log&limit=1'));
+  assertScenario(limitedActivitySearch.totalCount === 1, 'API契約: 作業履歴検索の件数指定が効いていない');
   await assertAgentOperationLogsDoNotEmbedArtifacts(runtimeDir, contractLogState, draft.id, 'API契約');
 
   const expiringDraft = await createApprovedScenarioDraft(apiBaseUrl, '期限切れclaimを復旧する');

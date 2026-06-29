@@ -74,6 +74,7 @@ const requestActivityLoading = ref(false);
 const requestActivityError = ref('');
 const activityDialogOpen = ref(false);
 const activityFilter = ref<ActivityFilter>('all');
+const activitySearchInput = ref('');
 const initialPurpose = 'ショート動画を作成する';
 let refreshTimer: number | undefined;
 let webGeminiRefreshTimer: number | undefined;
@@ -704,7 +705,16 @@ const fullActivityLogItems = computed<ActivityLogItem[]>(() => {
 });
 
 const visibleFullActivityLogItems = computed(() => {
-  return filterActivityLogItems(fullActivityLogItems.value, activityFilter.value);
+  const filteredItems = filterActivityLogItems(fullActivityLogItems.value, activityFilter.value);
+  const query = activitySearchInput.value.trim().toLowerCase();
+  if (!query) {
+    return filteredItems;
+  }
+
+  const searchedItems = filteredItems.filter((item) => (
+    [item.timeText, item.actorText, item.title, item.detail].join('\n').toLowerCase().includes(query)
+  ));
+  return searchedItems.length > 0 ? searchedItems : [fallbackActivityLogItem('一致する作業履歴はありません')];
 });
 
 function formatActivityTime(value: string): string {
@@ -1048,11 +1058,13 @@ function openActivityDialog() {
 
   activityDialogOpen.value = true;
   activityFilter.value = 'all';
+  activitySearchInput.value = '';
   void refreshRequestActivity();
 }
 
 function closeActivityDialog() {
   activityDialogOpen.value = false;
+  activitySearchInput.value = '';
 }
 
 function setActivityFilter(filter: ActivityFilter) {
@@ -1798,6 +1810,14 @@ watch(
             {{ option.label }}
           </button>
         </div>
+        <label class="activity-search">
+          履歴検索
+          <input
+            v-model="activitySearchInput"
+            type="search"
+            placeholder="工程名、理由、成果物参照など"
+          />
+        </label>
         <ol class="system-log activity-dialog-log">
           <li
             v-for="item in visibleFullActivityLogItems"
@@ -3070,6 +3090,33 @@ video {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
+}
+
+.activity-search {
+  display: grid;
+  gap: 5px;
+  color: var(--text-dim);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  text-transform: uppercase;
+}
+
+.activity-search input {
+  width: 100%;
+  min-height: 34px;
+  border: 1px solid rgba(0, 240, 255, 0.24);
+  border-radius: 0;
+  padding: 7px 10px;
+  color: var(--text);
+  background: rgba(0, 0, 0, 0.26);
+  font-family: var(--font-jp);
+  font-size: 13px;
+}
+
+.activity-search input:focus {
+  border-color: var(--cyan);
+  outline: none;
+  box-shadow: 0 0 16px rgba(0, 240, 255, 0.2);
 }
 
 .activity-current-state {

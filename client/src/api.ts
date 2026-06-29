@@ -117,6 +117,11 @@ export interface RequestDraftActivitySummary {
   outputVideoUri?: string;
 }
 
+export interface RequestDraftActivitySearchResult extends RequestDraftActivityEvent {
+  draftPurpose: string;
+  draftStatus: RequestDraft['status'];
+}
+
 export async function fetchWorkflow(): Promise<{ steps: WorkflowStep[] }> {
   const response = await api.get('/workflow');
   return response.data;
@@ -138,6 +143,27 @@ export async function fetchRequestDraftActivity(id: string): Promise<{
   events: RequestDraftActivityEvent[];
 }> {
   const response = await api.get(`/request-drafts/${id}/activity`);
+  return response.data;
+}
+
+export async function searchRequestDraftActivity(params: {
+  q?: string;
+  actor?: RequestDraftActivityEvent['actor'];
+  kind?: RequestDraftActivityEvent['kind'];
+  requestDraftId?: string;
+  limit?: number;
+}): Promise<{
+  query: {
+    q: string;
+    actor: string;
+    kind: string;
+    requestDraftId: string;
+    limit: string;
+  };
+  totalCount: number;
+  results: RequestDraftActivitySearchResult[];
+}> {
+  const response = await api.get('/activity-search', { params });
   return response.data;
 }
 

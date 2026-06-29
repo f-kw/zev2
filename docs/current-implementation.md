@@ -42,6 +42,8 @@ UIは依頼と状態を確認する
 - 実行前下書きを、理由つきで却下できる。却下した下書きはAI作業キューを作らない。
 - AI作業中の中止APIがあり、確認待ちも中止操作による却下として閉じられる。
 - 下書きごとの作業履歴APIで、AI判断、人間判断、外部レビュー、現在状態サマリを確認できる。
+- 下書きごとの全履歴ダイアログで、工程名、理由、成果物参照などを文字検索できる。
+- 横断作業履歴検索APIで、全下書きの履歴を文字、実行者、種別、下書きIDで検索できる。
 - 承認後にdry-run runnerを自動起動できる。
 - AIエージェントはAPIで次の作業を取得できる。
 - AIエージェントはAPIで作業を取得済みにできる。
@@ -122,6 +124,7 @@ GET /api/health
 GET /api/workflow
 GET /api/state
 GET /api/request-drafts/:id/activity
+GET /api/activity-search
 GET /api/request-drafts/:id/web-gemini-review
 POST /api/request-drafts/:id/web-gemini-review/prepare
 POST /api/request-drafts/:id/web-gemini-review

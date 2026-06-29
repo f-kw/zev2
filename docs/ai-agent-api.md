@@ -343,6 +343,26 @@ GET /api/request-drafts/:id/activity
 AI操作ログは `agent_operation_log` として返る。
 ログの詳細は人間が読める短い説明に整形され、成果物本文ではなく成果物参照IDで追う。
 
+## 作業履歴検索
+
+```http
+GET /api/activity-search?q=失敗理由&kind=agent_operation_log&requestDraftId=draft_xxx
+```
+
+用途:
+
+- 全下書き横断で作業履歴を探す。
+- 文字、実行者、履歴種別、下書きIDで絞り込む。
+- 成果物本文ではなく、履歴のタイトル、説明、参照ID、下書き目的を検索対象にする。
+
+クエリ:
+
+- `q`: タイトル、説明、参照ID、下書き目的に含まれる文字。
+- `actor`: `user`、`agent`、`runner`、`backend`、`system`。
+- `kind`: `agent_operation_log`、`agent_decision`、`human_review_action` などの履歴種別。
+- `requestDraftId`: 対象下書きID。
+- `limit`: 返す件数。指定しない場合は条件に一致した履歴を返す。
+
 ## AIエージェントの実行ループ例
 
 ```text

@@ -50,4 +50,11 @@ assertContract(
   '右HUDで成果物参照の種別、意味、URIを確認できる表示が見つかりません'
 );
 
+assertContract(
+  appVue.includes('class="activity-search"') &&
+    appVue.includes('v-model="activitySearchInput"') &&
+    appVue.includes('placeholder="工程名、理由、成果物参照など"'),
+  '作業履歴ダイアログで履歴本文を検索できる入力が見つかりません'
+);
+
 console.log('UI契約テスト成功');

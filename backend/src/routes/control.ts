@@ -132,6 +132,10 @@ type RequestDraftActivityEvent = {
   fileRefId?: string;
   outputId?: string;
 };
+type RequestDraftActivitySearchResult = RequestDraftActivityEvent & {
+  draftPurpose: string;
+  draftStatus: RequestDraft['status'];
+};
 type RequestDraftActivitySummary = {
   status:
     | 'draft'
@@ -1518,6 +1522,103 @@ function buildRequestDraftActivity(state: LoadedState, draft: RequestDraft): Req
   ));
 }
 
+async function buildRequestDraftActivityWithExternalEvents(
+  state: LoadedState,
+  draft: RequestDraft
+): Promise<RequestDraftActivityEvent[]> {
+  const events = buildRequestDraftActivity(state, draft);
+  const webGeminiReviewResult = await readWebGeminiReviewArtifact(draft.id);
+  const outputVideo = latestOutputVideoFileRef(state, draft.id);
+  if ('error' in webGeminiReviewResult) {
+    events.push(buildWebGeminiReviewActivityError(
+      draft,
+      webGeminiReviewResult.error,
+      'Web Geminiレビュー本文を確認できません'
+    ));
+  } else if (webGeminiReviewResult.review) {
+    const mismatch = ensureWebGeminiReviewMatchesOutputVideo(webGeminiReviewResult.review, outputVideo);
+    if (mismatch) {
+      events.push(buildWebGeminiReviewActivityError(
+        draft,
+        mismatch.error,
+        'Web Geminiレビュー本文を確認できません'
+      ));
+    }
+  }
+
+  const webGeminiRunLogResult = await readWebGeminiReviewRunLog(draft.id);
+  if ('error' in webGeminiRunLogResult) {
+    events.push(buildWebGeminiReviewActivityError(draft, webGeminiRunLogResult.error));
+  } else if (webGeminiRunLogResult.runLog) {
+    const mismatch = ensureWebGeminiRunLogMatchesOutputVideo(webGeminiRunLogResult.runLog, outputVideo);
+    events.push(
+      mismatch
+        ? buildWebGeminiReviewActivityError(draft, mismatch.error)
+        : buildWebGeminiReviewActivity(draft, webGeminiRunLogResult.runLog)
+    );
+  } else if (!('error' in webGeminiReviewResult) && webGeminiReviewResult.review) {
+    events.push(buildWebGeminiReviewActivityError(
+      draft,
+      'Web Geminiレビュー本文はありますが、実行ログがありません。レビューを取り直してください',
+      'Web Geminiレビュー実行ログを確認できません'
+    ));
+  }
+
+  return events.sort((left, right) => (
+    left.occurredAt.localeCompare(right.occurredAt) || left.id.localeCompare(right.id)
+  ));
+}
+
+function activitySearchParam(value: unknown): string {
+  return typeof value === 'string' ? value.trim() : '';
+}
+
+function activitySearchText(event: RequestDraftActivitySearchResult): string {
+  return [
+    event.id,
+    event.kind,
+    event.actor,
+    event.title,
+    event.detail,
+    event.requestDraftId,
+    event.agentRequestId ?? '',
+    event.reviewItemId ?? '',
+    event.decisionLogId ?? '',
+    event.humanReviewActionId ?? '',
+    event.fileRefId ?? '',
+    event.outputId ?? '',
+    event.draftPurpose,
+    event.draftStatus
+  ].join('\n').toLowerCase();
+}
+
+function filterActivitySearchResults(
+  results: RequestDraftActivitySearchResult[],
+  input: { query: string; actor: string; kind: string; requestDraftId: string; limitText: string }
+): RequestDraftActivitySearchResult[] {
+  const query = input.query.toLowerCase();
+  const filtered = results.filter((event) => {
+    if (input.requestDraftId && event.requestDraftId !== input.requestDraftId) {
+      return false;
+    }
+
+    if (input.actor && event.actor !== input.actor) {
+      return false;
+    }
+
+    if (input.kind && event.kind !== input.kind) {
+      return false;
+    }
+
+    return !query || activitySearchText(event).includes(query);
+  });
+  const sorted = filtered.sort((left, right) => (
+    right.occurredAt.localeCompare(left.occurredAt) || right.id.localeCompare(left.id)
+  ));
+  const limit = Number(input.limitText);
+  return Number.isInteger(limit) && limit > 0 ? sorted.slice(0, limit) : sorted;
+}
+
 function ensureWebGeminiReviewMatchesOutputVideo(
   review: WebGeminiReviewArtifact | null,
   outputVideo: FileRef | undefined
@@ -2580,43 +2681,10 @@ router.get('/request-drafts/:id/activity', async (request, response) => {
     return;
   }
 
-  const events = buildRequestDraftActivity(state, draft);
+  const events = await buildRequestDraftActivityWithExternalEvents(state, draft);
   const webGeminiReviewResult = await readWebGeminiReviewArtifact(draft.id);
   const outputVideo = latestOutputVideoFileRef(state, draft.id);
-  if ('error' in webGeminiReviewResult) {
-    events.push(buildWebGeminiReviewActivityError(
-      draft,
-      webGeminiReviewResult.error,
-      'Web Geminiレビュー本文を確認できません'
-    ));
-  } else if (webGeminiReviewResult.review) {
-    const mismatch = ensureWebGeminiReviewMatchesOutputVideo(webGeminiReviewResult.review, outputVideo);
-    if (mismatch) {
-      events.push(buildWebGeminiReviewActivityError(
-        draft,
-        mismatch.error,
-        'Web Geminiレビュー本文を確認できません'
-      ));
-    }
-  }
-
   const webGeminiRunLogResult = await readWebGeminiReviewRunLog(draft.id);
-  if ('error' in webGeminiRunLogResult) {
-    events.push(buildWebGeminiReviewActivityError(draft, webGeminiRunLogResult.error));
-  } else if (webGeminiRunLogResult.runLog) {
-    const mismatch = ensureWebGeminiRunLogMatchesOutputVideo(webGeminiRunLogResult.runLog, outputVideo);
-    events.push(
-      mismatch
-        ? buildWebGeminiReviewActivityError(draft, mismatch.error)
-        : buildWebGeminiReviewActivity(draft, webGeminiRunLogResult.runLog)
-    );
-  } else if (!('error' in webGeminiReviewResult) && webGeminiReviewResult.review) {
-    events.push(buildWebGeminiReviewActivityError(
-      draft,
-      'Web Geminiレビュー本文はありますが、実行ログがありません。レビューを取り直してください',
-      'Web Geminiレビュー実行ログを確認できません'
-    ));
-  }
 
   const baseSummary = buildRequestDraftActivitySummary(state, draft);
   const summary = buildWebGeminiReviewActivitySummary(
@@ -2630,9 +2698,38 @@ router.get('/request-drafts/:id/activity', async (request, response) => {
   response.json({
     requestDraftId: draft.id,
     summary,
-    events: events.sort((left, right) => (
-      left.occurredAt.localeCompare(right.occurredAt) || left.id.localeCompare(right.id)
-    ))
+    events
+  });
+});
+
+router.get('/activity-search', async (request, response) => {
+  const state = await loadStateWithClaimRecovery();
+  const query = activitySearchParam(request.query.q);
+  const actor = activitySearchParam(request.query.actor);
+  const kind = activitySearchParam(request.query.kind);
+  const requestDraftId = activitySearchParam(request.query.requestDraftId);
+  const limitText = activitySearchParam(request.query.limit);
+  const allResults: RequestDraftActivitySearchResult[] = [];
+  for (const draft of state.requestDrafts) {
+    const events = await buildRequestDraftActivityWithExternalEvents(state, draft);
+    allResults.push(...events.map((event) => ({
+      ...event,
+      draftPurpose: draft.purpose,
+      draftStatus: draft.status
+    })));
+  }
+
+  const results = filterActivitySearchResults(allResults, { query, actor, kind, requestDraftId, limitText });
+  response.json({
+    query: {
+      q: query,
+      actor,
+      kind,
+      requestDraftId,
+      limit: limitText
+    },
+    totalCount: results.length,
+    results
   });
 });
 
