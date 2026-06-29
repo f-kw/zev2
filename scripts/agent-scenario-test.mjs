@@ -2101,6 +2101,52 @@ async function assertFinalReviewControls(apiBaseUrl, sourceDraftId) {
     duplicateFinalError.includes('すでに最終完了'),
     '最終完了済みの完成動画への重複判断が拒否されていない'
   );
+
+  const prepareAfterFinalError = await expectRequestJsonFailure(
+    apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/web-gemini-review/prepare`),
+    {
+      method: 'POST'
+    }
+  );
+  assertScenario(
+    prepareAfterFinalError.includes('最終完了として記録済み'),
+    '最終完了済みの完成動画に対するWeb Geminiレビュー準備が拒否されていない'
+  );
+
+  const saveReviewAfterFinalError = await expectRequestJsonFailure(
+    apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/web-gemini-review`),
+    {
+      method: 'POST',
+      body: JSON.stringify({
+        reviewText: '最終完了後に保存しようとしたレビュー'
+      })
+    }
+  );
+  assertScenario(
+    saveReviewAfterFinalError.includes('最終完了として記録済み'),
+    '最終完了済みの完成動画に対するWeb Geminiレビュー保存が拒否されていない'
+  );
+
+  const beforeRedoAfterFinal = await requestJson(apiPath(apiBaseUrl, '/state'));
+  const redoAfterFinalError = await expectRequestJsonFailure(
+    apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/request-generated-video-changes`),
+    {
+      method: 'POST',
+      body: JSON.stringify({
+        reason: '最終完了後に作り直そうとする',
+        scope: 'edit_plan'
+      })
+    }
+  );
+  assertScenario(
+    redoAfterFinalError.includes('最終完了として記録済み'),
+    '最終完了済みの完成動画に対する作り直しが拒否されていない'
+  );
+  const afterRedoAfterFinal = await requestJson(apiPath(apiBaseUrl, '/state'));
+  assertScenario(
+    afterRedoAfterFinal.requestDrafts.length === beforeRedoAfterFinal.requestDrafts.length,
+    '最終完了済みの完成動画から作り直し編集コピーが作られている'
+  );
 }
 
 async function assertGeneratedDraftCompleted(apiBaseUrl, runtimeDir, draftId, label, expectedManifestTypes = workflowTypes) {

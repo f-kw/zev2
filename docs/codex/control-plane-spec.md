@@ -222,6 +222,7 @@ control plane は次の条件を守る。
 - agent は user approval を偽装できない。
 - 重要な状態遷移には `decision_log` または `state_transition_log` が必ず残る。
 - agent run の完了は、人間承認を意味しない。
+- `final_completed` として記録した完成動画は、同じ下書き上で作り直しや外部レビュー変更の対象にしない。
 - `reject` と `request_changes` の理由は保存する。
 - 成果物の実体をタスク正本に埋め込まず、`FileRef` または `ArtifactRef` で参照する。
 - backend は実STT、実LLM、Gemini API、実動画生成、完成品レビューを直接実行しない。

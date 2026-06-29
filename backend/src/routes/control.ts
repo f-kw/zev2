@@ -1208,6 +1208,20 @@ function hasFinalReviewActionForOutput(
   );
 }
 
+function finalCompletedOutputChangeError(
+  state: LoadedState,
+  requestDraftId: string,
+  outputVideo: FileRef | undefined
+): string | undefined {
+  if (!outputVideo) {
+    return undefined;
+  }
+
+  return hasFinalReviewActionForOutput(state, requestDraftId, outputVideo, 'final_complete')
+    ? 'この完成動画は最終完了として記録済みです。変更する場合は新しい依頼として作成してください'
+    : undefined;
+}
+
 function decisionTypeLabel(type: DecisionLogType): string {
   if (type === 'theme_selection') {
     return 'テーマ選択';
@@ -3282,6 +3296,11 @@ router.post('/request-drafts/:id/web-gemini-review/prepare', async (request, res
     response.status(409).json({ error: outputVideoError, state });
     return;
   }
+  const finalCompleteError = finalCompletedOutputChangeError(state, draft.id, outputVideo);
+  if (finalCompleteError) {
+    response.status(409).json({ error: finalCompleteError, state });
+    return;
+  }
 
   try {
     const runLog = await prepareWebGeminiReviewRun(draft, outputVideo, nowIso());
@@ -3372,6 +3391,11 @@ router.post('/request-drafts/:id/web-gemini-review', async (request, response) =
     response.status(409).json({ error: outputVideoError, state });
     return;
   }
+  const finalCompleteError = finalCompletedOutputChangeError(state, draft.id, outputVideo);
+  if (finalCompleteError) {
+    response.status(409).json({ error: finalCompleteError, state });
+    return;
+  }
 
   if (!reviewText) {
     const errorMessage = 'Web Geminiの演出レビューが空です';
@@ -3457,6 +3481,11 @@ router.post('/request-drafts/:id/apply-web-gemini-review', async (request, respo
     response.status(409).json({ error: outputVideoError, state });
     return;
   }
+  const finalCompleteError = finalCompletedOutputChangeError(state, draft.id, outputVideo);
+  if (finalCompleteError) {
+    response.status(409).json({ error: finalCompleteError, state });
+    return;
+  }
   const reviewMismatch = ensureWebGeminiReviewMatchesOutputVideo(reviewResult.review, outputVideo);
   if (reviewMismatch) {
     response.status(409).json({ error: reviewMismatch.error, state });
@@ -3537,6 +3566,12 @@ router.post('/request-drafts/:id/request-generated-video-changes', async (reques
   }
   if (!latestSucceededAgentRequest(state.agentRequests, draft.id, 'render_video')) {
     response.status(409).json({ error: '生成済み動画がないため、生成後の修正依頼を開始できません', state });
+    return;
+  }
+  const outputVideo = latestOutputVideoFileRef(state, draft.id);
+  const finalCompleteError = finalCompletedOutputChangeError(state, draft.id, outputVideo);
+  if (finalCompleteError) {
+    response.status(409).json({ error: finalCompleteError, state });
     return;
   }
 

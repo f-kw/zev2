@@ -64,4 +64,11 @@ assertContract(
   '完成動画を投稿可能または最終完了として記録する人間判断欄が見つかりません'
 );
 
+assertContract(
+  appVue.includes('!hasFinalCompleteForCurrentOutput.value && !agentOperationLocked.value') &&
+    appVue.includes('hasFinalCompleteForCurrentOutput.value ||') &&
+    appVue.includes(':disabled="agentOperationLocked || hasFinalCompleteForCurrentOutput'),
+  '最終完了済みの完成動画で、作り直しやWeb Geminiレビュー変更を止めるUI条件が見つかりません'
+);
+
 console.log('UI契約テスト成功');

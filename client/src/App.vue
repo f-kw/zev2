@@ -241,7 +241,7 @@ const outputVideoUri = computed(() => {
 });
 
 const canRedoVideo = computed(() =>
-  Boolean(currentDraft.value && outputVideoUri.value && !agentOperationLocked.value)
+  Boolean(currentDraft.value && outputVideoUri.value && !hasFinalCompleteForCurrentOutput.value && !agentOperationLocked.value)
 );
 
 const outputVideoReferenceText = computed(() => {
@@ -303,6 +303,7 @@ const canApplyWebGeminiReview = computed(() =>
       webGeminiReview.value &&
       webGeminiInstructionInput.value.trim() &&
       webGeminiRunLog.value?.status !== 'applied' &&
+      !hasFinalCompleteForCurrentOutput.value &&
       !agentOperationLocked.value &&
       activeWebGeminiAction.value !== 'apply_review'
   )
@@ -1033,7 +1034,7 @@ async function submitActiveReview(action: 'approve' | 'request_changes', scope?:
 
 async function redoVideo(scope: RedoScope) {
   const draft = currentDraft.value;
-  if (!draft || agentOperationLocked.value) {
+  if (!draft || agentOperationLocked.value || hasFinalCompleteForCurrentOutput.value) {
     return;
   }
 
@@ -1187,7 +1188,13 @@ async function reloadWebGeminiReview() {
 
 async function prepareCurrentWebGeminiReview() {
   const draft = currentDraft.value;
-  if (!draft || !outputVideoUri.value || agentOperationLocked.value || webGeminiReviewLoading.value) {
+  if (
+    !draft ||
+    !outputVideoUri.value ||
+    hasFinalCompleteForCurrentOutput.value ||
+    agentOperationLocked.value ||
+    webGeminiReviewLoading.value
+  ) {
     return;
   }
 
@@ -1218,7 +1225,13 @@ async function prepareCurrentWebGeminiReview() {
 async function applyWebGeminiReviewChanges() {
   const draft = currentDraft.value;
   const instruction = normalizeWebGeminiReviewText(webGeminiInstructionInput.value);
-  if (!draft || !webGeminiReview.value || !instruction || agentOperationLocked.value) {
+  if (
+    !draft ||
+    !webGeminiReview.value ||
+    !instruction ||
+    hasFinalCompleteForCurrentOutput.value ||
+    agentOperationLocked.value
+  ) {
     return;
   }
 
@@ -1627,7 +1640,7 @@ watch(
                   <button
                     type="button"
                     class="secondary-button"
-                    :disabled="agentOperationLocked || webGeminiReviewLoading || activeWebGeminiAction === 'prepare_review'"
+                    :disabled="agentOperationLocked || hasFinalCompleteForCurrentOutput || webGeminiReviewLoading || activeWebGeminiAction === 'prepare_review'"
                     @click="prepareCurrentWebGeminiReview"
                   >
                     {{ webGeminiPrepareButtonLabel }}
