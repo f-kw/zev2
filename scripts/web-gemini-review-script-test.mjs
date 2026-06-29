@@ -142,6 +142,15 @@ async function assertSaveSuccess(runtimeDir) {
     promptText.includes('動画の目的: 成功ログ確認用ショート'),
     'Web Geminiレビュー依頼文が人間向けの目的を使っていない'
   );
+  assertTest(
+    promptText.includes('編集で変更できること:') &&
+      promptText.includes('テロップの文言、区切り、読みやすさ') &&
+      promptText.includes('編集で変更しないこと:') &&
+      promptText.includes('BGM追加、別素材追加、複雑なエフェクト') &&
+      promptText.includes('文字を小さくして重なりを避ける提案は禁止') &&
+      promptText.includes('根拠のない倍率、固定文字数、数値係数の提案は避けてください'),
+    'Web Geminiレビュー依頼文に演出作成で変更できる範囲が入っていない'
+  );
   assertTest(!promptText.includes('やり直し理由:'), 'Web Geminiレビュー依頼文にやり直し理由が混ざっている');
 }
 

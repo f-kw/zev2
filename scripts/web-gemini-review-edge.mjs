@@ -20,6 +20,7 @@ const artifactUrlPrefix = '/api/artifacts/';
 const reviewFileName = 'web-gemini-review.json';
 const promptFileName = 'web-gemini-review-prompt.md';
 const runLogFileName = 'web-gemini-review-run.json';
+const reviewStabilityMilliseconds = 8000;
 
 const args = new Set(process.argv.slice(2));
 const reviewTextFileArg = readOption('--review-text-file');
@@ -520,6 +521,7 @@ function jsFindButtonRect(predicateSource) {
 }
 
 async function uploadVideoToGemini(cdp, videoPath) {
+  await clearExistingGeminiAttachments(cdp);
   await cdp.send('Page.setInterceptFileChooserDialog', { enabled: true });
   const uploadButtonRect = await waitForExpression(
     cdp,
@@ -547,10 +549,49 @@ async function uploadVideoToGemini(cdp, videoPath) {
 
   await waitForExpression(
     cdp,
-    `document.body.innerText.includes(${JSON.stringify(path.basename(videoPath))})`,
+    `(() => {
+      const attachment = document.querySelector('gem-media-attachment');
+      const attachmentText = attachment ? attachment.innerText || '' : '';
+      const hasFileName = attachmentText.includes(${JSON.stringify(path.basename(videoPath))});
+      const hasVideoDuration = /\\b\\d+:\\d{2}\\b/.test(attachmentText);
+      const hasAttachmentControl = attachment && Array.from(attachment.querySelectorAll('button')).some((button) =>
+        (button.getAttribute('aria-label') || '').includes('添付ファイルを閉じる')
+      );
+      const bodyText = document.body.innerText;
+      const stillUploading = /アップロード中|処理中/.test(bodyText);
+      return (hasFileName || hasVideoDuration || hasAttachmentControl) && !stillUploading;
+    })()`,
     '動画アップロード表示',
     120000
   );
+  await wait(reviewStabilityMilliseconds);
+}
+
+async function clearExistingGeminiAttachments(cdp) {
+  for (let attempt = 0; attempt < 5; attempt += 1) {
+    const attachmentButtonRect = await evaluateValue(
+      cdp,
+      jsFindButtonRect(`(text, aria) => aria.includes('添付ファイルを閉じる')`)
+    ).catch(() => null);
+    if (!attachmentButtonRect) {
+      return;
+    }
+    await clickCenter(cdp, attachmentButtonRect);
+    await wait(500);
+  }
+  await waitForExpression(cdp, '!document.querySelector("gem-media-attachment")', '既存添付削除', 5000)
+    .catch(() => undefined);
+}
+
+async function clearPromptInput(cdp) {
+  await evaluateValue(cdp, `(() => {
+    const box = document.querySelector('[role="textbox"][aria-label*="Gemini"]') || document.querySelector('[role="textbox"]');
+    if (!box) return true;
+    box.focus();
+    box.textContent = '';
+    box.dispatchEvent(new InputEvent('input', { bubbles: true, inputType: 'deleteContentBackward' }));
+    return true;
+  })()`).catch(() => undefined);
 }
 
 async function enterPrompt(cdp, promptText) {
@@ -568,23 +609,62 @@ async function enterPrompt(cdp, promptText) {
   await cdp.send('Input.insertText', { text: promptText });
 }
 
-async function submitPrompt(cdp) {
-  const sendRect = await waitForExpression(
+async function clickSendPromptButton(cdp) {
+  return waitForExpression(
     cdp,
-    jsFindButtonRect(`(text, aria) => /送信|submit/i.test(text + ' ' + aria)`),
+    `(() => {
+      const button = Array.from(document.querySelectorAll('button')).find((candidate) => {
+        const text = (candidate.innerText || '').trim();
+        const aria = candidate.getAttribute('aria-label') || '';
+        return /プロンプトを送信|送信|submit/i.test(text + ' ' + aria) && !candidate.disabled;
+      });
+      if (!button) return false;
+      button.click();
+      return true;
+    })()`,
     '送信ボタン',
     30000
   );
-  await clickCenter(cdp, sendRect);
+}
+
+async function acceptGeminiVideoNotice(cdp) {
+  for (let attempt = 0; attempt < 10; attempt += 1) {
+    const clicked = await evaluateValue(cdp, `(() => {
+      const button = Array.from(document.querySelectorAll('button')).find((candidate) =>
+        (candidate.innerText || '').trim() === '同意する' && !candidate.disabled
+      );
+      if (!button) return false;
+      button.click();
+      return true;
+    })()`).catch(() => false);
+    if (clicked) {
+      await wait(1000);
+      return true;
+    }
+    await wait(500);
+  }
+  return false;
+}
+
+async function submitPrompt(cdp) {
+  await clickSendPromptButton(cdp);
+  const acceptedNotice = await acceptGeminiVideoNotice(cdp);
+  if (acceptedNotice) {
+    await clickSendPromptButton(cdp).catch(() => undefined);
+  }
 }
 
 function extractReviewFromBodyText(text, promptText) {
   const normalizedText = text.replace(/\r/g, '').trim();
+  const answerMarker = 'Gemini の回答';
+  const answerStart = normalizedText.lastIndexOf(answerMarker);
   const promptStart = normalizedText.lastIndexOf(promptText.split('\n')[0]);
-  const afterPrompt = promptStart >= 0
-    ? normalizedText.slice(promptStart + promptText.length).trim()
-    : normalizedText;
-  const cleaned = afterPrompt
+  const reviewSource = answerStart >= 0
+    ? normalizedText.slice(answerStart + answerMarker.length).trim()
+    : promptStart >= 0
+      ? normalizedText.slice(promptStart + promptText.length).trim()
+      : normalizedText;
+  const cleaned = reviewSource
     .replace(/^Gemini\s*/i, '')
     .replace(/Google アカウント[\s\S]*$/i, '')
     .trim();
@@ -593,37 +673,58 @@ function extractReviewFromBodyText(text, promptText) {
     .map((line) => line.trimEnd())
     .filter((line) =>
       line.trim() &&
+      !/^\d+:\d{2}$/.test(line.trim()) &&
       !['Gemini との会話', 'Flash', 'Gemini に相談'].includes(line.trim()) &&
       !line.includes('回答を停止') &&
-      !line.includes('この回答を評価')
+      !line.includes('この回答を評価') &&
+      !line.includes('Gemini は AI であり、間違えることがあります')
     );
   return lines.join('\n').trim();
 }
 
-async function waitForGeminiReview(cdp, promptText) {
-  await waitForExpression(
-    cdp,
-    `document.body.innerText.length > ${promptText.length + 200}`,
-    'Gemini回答開始',
-    90000
-  );
-  await wait(3000);
-  for (let attempt = 0; attempt < 120; attempt += 1) {
+function isVideoMissingReviewResponse(reviewText) {
+  return [
+    '動画が添付されていない',
+    '動画のご提示がない',
+    '動画ファイルを直接再生できない',
+    '動画のディテールを教えて',
+    '動画の「構成」'
+  ].some((message) => reviewText.includes(message));
+}
+
+async function waitForGeminiReview(cdp, promptText, previousReviewText = '') {
+  const previousReview = previousReviewText.trim();
+  let stableReviewText = '';
+  let stableSince = 0;
+  for (let attempt = 0; attempt < 180; attempt += 1) {
     const state = await evaluateValue(cdp, `(() => {
       const bodyText = document.body.innerText;
       const stillRunning = /回答を停止|生成中|考えています|停止/.test(bodyText);
       return { bodyText, stillRunning };
     })()`);
     const reviewText = extractReviewFromBodyText(state.bodyText ?? '', promptText);
-    if (reviewText.length > 80 && !state.stillRunning) {
-      return reviewText;
+    if (
+      reviewText.length > 80 &&
+      reviewText !== previousReview &&
+      !state.stillRunning &&
+      !isVideoMissingReviewResponse(reviewText)
+    ) {
+      if (reviewText !== stableReviewText) {
+        stableReviewText = reviewText;
+        stableSince = Date.now();
+      } else if (Date.now() - stableSince >= reviewStabilityMilliseconds) {
+        return reviewText;
+      }
+    } else {
+      stableReviewText = '';
+      stableSince = 0;
     }
     await wait(1000);
   }
 
   const bodyText = await evaluateValue(cdp, 'document.body.innerText');
   const reviewText = extractReviewFromBodyText(bodyText ?? '', promptText);
-  if (reviewText.length > 80) {
+  if (reviewText.length > 80 && reviewText !== previousReview && !isVideoMissingReviewResponse(reviewText)) {
     return reviewText;
   }
 
@@ -647,10 +748,13 @@ async function runWebGeminiReview(target, promptText) {
     }
     await waitForExpression(cdp, 'location.href.startsWith("https://gemini.google.com/app")', 'Web Gemini URL');
     await waitForExpression(cdp, 'document.body.innerText.includes("Gemini")', 'Web Gemini画面');
+    await acceptGeminiVideoNotice(cdp);
+    await clearPromptInput(cdp);
     await uploadVideoToGemini(cdp, target.videoPath);
     await enterPrompt(cdp, promptText);
+    const previousReviewText = extractReviewFromBodyText(await evaluateValue(cdp, 'document.body.innerText'), promptText);
     await submitPrompt(cdp);
-    return await waitForGeminiReview(cdp, promptText);
+    return await waitForGeminiReview(cdp, promptText, previousReviewText);
   } finally {
     cdp.close();
   }
