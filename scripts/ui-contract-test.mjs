@@ -38,4 +38,16 @@ assertContract(
   '現在状態見出しの参照箇所が増えています。重複表示になっていないか確認してください'
 );
 
+assertContract(
+  appVue.includes('const artifactReferenceItems = computed<ArtifactReferenceItem[]>'),
+  '成果物参照一覧を作る処理が見つかりません'
+);
+
+assertContract(
+  appVue.includes('aria-label="成果物参照"') &&
+    appVue.includes('class="artifact-reference-list"') &&
+    appVue.includes('{{ item.uri }}'),
+  '右HUDで成果物参照の種別、意味、URIを確認できる表示が見つかりません'
+);
+
 console.log('UI契約テスト成功');

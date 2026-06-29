@@ -7,6 +7,7 @@ import {
   uriWithRef,
   type AgentRequest,
   type ControlReviewItem,
+  type FileRef,
   type RequestDraftInput
 } from '@zev2/shared';
 import {
@@ -36,6 +37,16 @@ type ReviewChangeScope =
   | 'theme_reselect'
   | 'theme_options_regenerate'
   | 'material_reselect';
+type ArtifactReferenceItem = {
+  id: string;
+  stepCode: string;
+  stepName: string;
+  statusText: string;
+  kindText: string;
+  uri: string;
+  meaning: string;
+  createdAtText: string;
+};
 
 const store = useControlQueueStore();
 const submitting = ref(false);
@@ -573,6 +584,32 @@ const sessionStageText = computed(() =>
   showRequestPage.value ? 'NEW REQUEST' : progressText.value || (currentDraft.value ? '0/7 工程完了' : '未開始')
 );
 
+const artifactReferenceItems = computed<ArtifactReferenceItem[]>(() =>
+  visibleRequests.value.flatMap((request, requestIndex) => {
+    const result = request.result;
+    if (!result?.fileRefId) {
+      return [];
+    }
+
+    const fileRef = findById(store.state.fileRefs, result.fileRefId);
+    if (!fileRef) {
+      return [];
+    }
+
+    const output = store.state.outputs.find((item) => item.fileRefId === fileRef.id);
+    return [{
+      id: `${request.id}:${fileRef.id}`,
+      stepCode: formatStepCode(requestIndex),
+      stepName: request.label,
+      statusText: agentRequestStatusText(request.status),
+      kindText: fileRefKindText(fileRef.kind),
+      uri: fileRef.uri,
+      meaning: output?.meaning ?? result.meaning,
+      createdAtText: formatActivityTime(fileRef.createdAt)
+    }];
+  })
+);
+
 const activityDialogTitle = computed(() =>
   currentDraft.value ? readablePurposeForWebGeminiReview(currentDraft.value.purpose) : '現在の下書き'
 );
@@ -698,6 +735,32 @@ function stepMark(request: AgentRequest, index: number): string {
   }
 
   return String(index + 1);
+}
+
+function agentRequestStatusText(status: AgentRequest['status']): string {
+  const textByStatus: Record<AgentRequest['status'], string> = {
+    queued: '未作成',
+    running: '作成中',
+    waiting: '待機中',
+    succeeded: '作成済み',
+    failed: '失敗',
+    cancelled: '中止',
+    superseded: '作り直し済み'
+  };
+  return textByStatus[status];
+}
+
+function fileRefKindText(kind: FileRef['kind']): string {
+  const textByKind: Record<FileRef['kind'], string> = {
+    source_video: '入力動画',
+    transcript_json: '文字起こし',
+    theme_json: 'テーマ候補',
+    composition_json: '編集元場面',
+    edit_plan_json: '演出案',
+    patch_json: '微調整結果',
+    output_video: '完成動画'
+  };
+  return textByKind[kind];
 }
 
 function formatOptionIndex(index: number): string {
@@ -1607,6 +1670,30 @@ watch(
               <dd>{{ sessionStageText }}</dd>
             </div>
           </dl>
+        </section>
+
+        <section class="hud-card artifact-hud-card" aria-label="成果物参照">
+          <details class="artifact-details">
+            <summary>
+              <span class="eyebrow">成果物参照</span>
+              <span>{{ artifactReferenceItems.length }}件</span>
+            </summary>
+            <ol v-if="artifactReferenceItems.length" class="artifact-reference-list">
+              <li
+                v-for="item in artifactReferenceItems"
+                :key="item.id"
+              >
+                <span class="artifact-step">{{ item.stepCode }}</span>
+                <span>
+                  <strong>{{ item.stepName }}</strong>
+                  <small>{{ item.kindText }} / {{ item.statusText }} / {{ item.createdAtText }}</small>
+                  <em>{{ item.meaning }}</em>
+                  <code>{{ item.uri }}</code>
+                </span>
+              </li>
+            </ol>
+            <p v-else class="artifact-empty">AI工程が成果物参照を保存するとここに表示します</p>
+          </details>
         </section>
 
         <section class="hud-card">
@@ -2702,7 +2789,7 @@ video {
 
 .side-hud {
   display: grid;
-  grid-template-rows: auto minmax(0, 1fr) auto;
+  grid-template-rows: auto auto minmax(0, 1fr) auto;
   gap: 10px;
   min-height: 0;
 }
@@ -2723,6 +2810,123 @@ video {
 
 .hud-card-title-row .eyebrow {
   margin-bottom: 0;
+}
+
+.hud-card-title-row span {
+  color: var(--text-faint);
+  font-family: var(--font-mono);
+  font-size: 10px;
+}
+
+.artifact-hud-card {
+  padding: 0;
+  overflow: hidden;
+}
+
+.artifact-details {
+  padding: 13px;
+}
+
+.artifact-details[open] {
+  max-height: 214px;
+  overflow: auto;
+}
+
+.artifact-details summary {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  cursor: pointer;
+  list-style: none;
+}
+
+.artifact-details summary::-webkit-details-marker {
+  display: none;
+}
+
+.artifact-details summary::after {
+  content: '+';
+  color: var(--yellow);
+  font-family: var(--font-mono);
+  font-size: 12px;
+}
+
+.artifact-details[open] summary {
+  margin-bottom: 8px;
+}
+
+.artifact-details[open] summary::after {
+  content: '-';
+}
+
+.artifact-details .eyebrow {
+  margin-bottom: 0;
+}
+
+.artifact-reference-list {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.artifact-reference-list li {
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr);
+  gap: 8px;
+  border-top: 1px solid rgba(255, 242, 0, 0.14);
+  padding-top: 8px;
+}
+
+.artifact-reference-list li:first-child {
+  border-top: 0;
+  padding-top: 0;
+}
+
+.artifact-step {
+  display: inline-grid;
+  place-items: center;
+  min-height: 24px;
+  border: 1px solid rgba(255, 242, 0, 0.34);
+  color: var(--yellow);
+  font-family: var(--font-mono);
+  font-size: 10px;
+}
+
+.artifact-reference-list span:last-child {
+  display: grid;
+  gap: 3px;
+  min-width: 0;
+}
+
+.artifact-reference-list strong {
+  color: var(--text);
+  font-size: 12px;
+}
+
+.artifact-reference-list small,
+.artifact-reference-list em {
+  color: var(--text-dim);
+  font-size: 10px;
+  font-style: normal;
+  line-height: 1.35;
+}
+
+.artifact-reference-list code {
+  overflow-wrap: anywhere;
+  color: var(--cyan);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  line-height: 1.35;
+}
+
+.artifact-empty {
+  margin: 0;
+  color: var(--text-faint);
+  font-size: 11px;
+  line-height: 1.5;
 }
 
 .hud-card dl {

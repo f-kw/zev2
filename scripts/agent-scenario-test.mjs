@@ -1495,6 +1495,20 @@ async function assertGeneratedDraftCompleted(apiBaseUrl, runtimeDir, draftId, la
   assertScenario(finalRequests.length === 7, `${label}: 実行後の工程数が7件ではない`);
   assertScenario(finalRequests.every((request) => request.status === 'succeeded'), `${label}: 成功していない工程がある`);
   assertApprovedReviewKinds(state, draftId, ['theme_selection', 'material_confirmation', 'render_readiness'], label);
+  for (const request of finalRequests) {
+    const fileRef = state.fileRefs.find((item) => item.id === request.result?.fileRefId);
+    const output = state.outputs.find((item) => item.id === request.result?.outputId);
+    assertScenario(fileRef, `${label}: ${request.label}の成果物参照が保存されていない`);
+    assertScenario(output, `${label}: ${request.label}の出力記録が保存されていない`);
+    assertScenario(
+      output.fileRefId === fileRef.id,
+      `${label}: ${request.label}の出力記録が成果物参照へ結び付いていない`
+    );
+    assertScenario(
+      fileRef.uri.startsWith(`/api/artifacts/${draftId}/`),
+      `${label}: ${request.label}の成果物参照が対象編集コピー配下にない`
+    );
+  }
 
   const outputRequest = finalRequests.find((request) => request.type === 'render_video');
   const outputFileRef = state.fileRefs.find((fileRef) => fileRef.id === outputRequest?.result?.fileRefId);
