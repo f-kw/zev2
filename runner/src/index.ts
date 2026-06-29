@@ -9,6 +9,7 @@ import {
   findById,
   lastMatching,
   recordValue as recordFrom,
+  type AgentClaimInput,
   type AgentCompletionInput,
   type AgentDecisionInput,
   type AgentRequest,
@@ -73,6 +74,8 @@ const useFixedTranscript = process.env.ZEV2_STT_RUNTIME_MODE === 'fixed';
 const contentDiscoveryMode = process.env.ZEV2_CONTENT_DISCOVERY_MODE ?? 'fixed';
 const useFixedEditPlan = process.env.ZEV2_EDIT_PLAN_MODE === 'fixed';
 const adjustmentMode = process.env.ZEV2_ADJUSTMENT_MODE ?? 'fixed';
+const agentOwnerId = (process.env.ZEV2_AGENT_OWNER_ID ?? `zev2-runner:${process.pid}`).trim();
+const agentClaimTtlMs = Number.parseInt(process.env.ZEV2_AGENT_CLAIM_TTL_MS ?? '0', 10);
 const SOURCE_VIDEO_FILE_NAME = 'source-video.mp4';
 const SOURCE_VIDEO_METADATA_FILE_NAME = 'source-video.json';
 const ZEV_STT_SAMPLE_PATH = path.join(workspaceRoot(), 'runner', 'fixtures', 'zev-stt-sample.json');
@@ -573,6 +576,7 @@ async function buildArtifactForRequest(request: AgentRequest): Promise<ArtifactI
 
 function buildCompletion(request: AgentRequest, artifact: ArtifactInfo): AgentCompletionInput {
   const completion: AgentCompletionInput = {
+    ownerId: agentOwnerId,
     meaning: getDryRunMeaningForRequest(request.type),
     fileRef: {
       uri: artifact.uri,
@@ -586,6 +590,18 @@ function buildCompletion(request: AgentRequest, artifact: ArtifactInfo): AgentCo
   }
 
   return completion;
+}
+
+function buildClaimInput(): AgentClaimInput {
+  const input: AgentClaimInput = {
+    ownerId: agentOwnerId
+  };
+
+  if (Number.isInteger(agentClaimTtlMs) && agentClaimTtlMs > 0) {
+    input.expiresAt = new Date(Date.now() + agentClaimTtlMs).toISOString();
+  }
+
+  return input;
 }
 
 function buildHumanReviewDecision(
@@ -665,7 +681,8 @@ function formatSeconds(milliseconds: number): string {
 
 async function claimRequest(request: AgentRequest): Promise<void> {
   await requestJson<StateResponse>(`/agent-requests/${request.id}/claim`, {
-    method: 'POST'
+    method: 'POST',
+    body: JSON.stringify(buildClaimInput())
   });
 }
 
@@ -682,7 +699,7 @@ async function failRequest(request: AgentRequest, error: unknown): Promise<void>
 
   await requestJson<StateResponse>(`/agent-requests/${request.id}/fail`, {
     method: 'POST',
-    body: JSON.stringify({ message })
+    body: JSON.stringify({ ownerId: agentOwnerId, message })
   });
 }
 

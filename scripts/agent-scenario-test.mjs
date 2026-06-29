@@ -135,6 +135,21 @@ async function expectRequestJsonFailure(url, init = {}) {
   throw new Error(`${init.method ?? 'GET'} ${url} が失敗すべき場面で成功している`);
 }
 
+const scenarioAgentOwnerId = 'scenario-agent';
+const otherScenarioAgentOwnerId = 'other-scenario-agent';
+
+function claimRequestBody(ownerId = scenarioAgentOwnerId, extra = {}) {
+  return JSON.stringify({ ownerId, ...extra });
+}
+
+function completionRequestBody(input, ownerId = scenarioAgentOwnerId) {
+  return JSON.stringify({ ownerId, ...input });
+}
+
+function failureRequestBody(message, ownerId = scenarioAgentOwnerId) {
+  return JSON.stringify({ ownerId, message });
+}
+
 async function startBackend(runtimeDir, port) {
   const output = [];
   const child = spawn('node', ['backend/dist/index.js'], {
@@ -353,7 +368,7 @@ async function assertAgentRequestApiContract(apiBaseUrl, runtimeDir) {
     apiPath(apiBaseUrl, `/agent-requests/${firstRequest.id}/complete`),
     {
       method: 'POST',
-      body: JSON.stringify({
+      body: completionRequestBody({
         meaning: '取得前に完了しようとする',
         fileRef: {
           uri: `/api/artifacts/${draft.id}/source-video.mp4`,
@@ -370,7 +385,7 @@ async function assertAgentRequestApiContract(apiBaseUrl, runtimeDir) {
 
   const dependencyClaimError = await expectRequestJsonFailure(
     apiPath(apiBaseUrl, `/agent-requests/${secondRequest.id}/claim`),
-    { method: 'POST' }
+    { method: 'POST', body: claimRequestBody() }
   );
   assertScenario(
     dependencyClaimError.includes('前工程の完了待ちです'),
@@ -378,24 +393,44 @@ async function assertAgentRequestApiContract(apiBaseUrl, runtimeDir) {
   );
 
   const claimed = await requestJson(apiPath(apiBaseUrl, `/agent-requests/${firstRequest.id}/claim`), {
-    method: 'POST'
+    method: 'POST',
+    body: claimRequestBody()
   });
   assertScenario(claimed.request?.status === 'running', 'API契約: claimで作業が取得中になっていない');
+  assertScenario(
+    claimed.request?.claimOwnerId === scenarioAgentOwnerId && claimed.request?.claimedAt,
+    'API契約: claimで取得者と取得時刻が保存されていない'
+  );
 
   const duplicateClaimError = await expectRequestJsonFailure(
     apiPath(apiBaseUrl, `/agent-requests/${firstRequest.id}/claim`),
-    { method: 'POST' }
+    { method: 'POST', body: claimRequestBody(otherScenarioAgentOwnerId) }
   );
   assertScenario(
     duplicateClaimError.includes('このAI操作は取得できません'),
     'API契約: running作業の二重claimが拒否されていない'
   );
 
+  const wrongOwnerCompleteError = await expectRequestJsonFailure(
+    apiPath(apiBaseUrl, `/agent-requests/${firstRequest.id}/complete`),
+    {
+      method: 'POST',
+      body: completionRequestBody(
+        { meaning: '別のAIエージェントが完了しようとする' },
+        otherScenarioAgentOwnerId
+      )
+    }
+  );
+  assertScenario(
+    wrongOwnerCompleteError.includes('取得者が一致しない'),
+    'API契約: 所有者が違うcompleteが拒否されていない'
+  );
+
   const missingFileRefError = await expectRequestJsonFailure(
     apiPath(apiBaseUrl, `/agent-requests/${firstRequest.id}/complete`),
     {
       method: 'POST',
-      body: JSON.stringify({ meaning: '成果物参照なしで完了しようとする' })
+      body: completionRequestBody({ meaning: '成果物参照なしで完了しようとする' })
     }
   );
   assertScenario(
@@ -411,7 +446,7 @@ async function assertAgentRequestApiContract(apiBaseUrl, runtimeDir) {
   );
   const completed = await requestJson(apiPath(apiBaseUrl, `/agent-requests/${firstRequest.id}/complete`), {
     method: 'POST',
-    body: JSON.stringify({
+    body: completionRequestBody({
       meaning: '対象動画をAI処理用入力として登録する',
       fileRef: {
         uri: sourceVideoUri,
@@ -435,7 +470,8 @@ async function assertAgentRequestApiContract(apiBaseUrl, runtimeDir) {
   );
 
   const claimedSecond = await requestJson(apiPath(apiBaseUrl, `/agent-requests/${secondRequest.id}/claim`), {
-    method: 'POST'
+    method: 'POST',
+    body: claimRequestBody()
   });
   assertScenario(claimedSecond.request?.status === 'running', 'API契約: 次工程をclaimできない');
 
@@ -443,7 +479,7 @@ async function assertAgentRequestApiContract(apiBaseUrl, runtimeDir) {
     apiPath(apiBaseUrl, `/agent-requests/${secondRequest.id}/fail`),
     {
       method: 'POST',
-      body: JSON.stringify({ message: '   ' })
+      body: failureRequestBody('   ')
     }
   );
   assertScenario(
@@ -451,15 +487,77 @@ async function assertAgentRequestApiContract(apiBaseUrl, runtimeDir) {
     'API契約: 理由なしfailが拒否されていない'
   );
 
+  const wrongOwnerFailError = await expectRequestJsonFailure(
+    apiPath(apiBaseUrl, `/agent-requests/${secondRequest.id}/fail`),
+    {
+      method: 'POST',
+      body: failureRequestBody('別のAIエージェントが失敗として記録しようとする', otherScenarioAgentOwnerId)
+    }
+  );
+  assertScenario(
+    wrongOwnerFailError.includes('取得者が一致しない'),
+    'API契約: 所有者が違うfailが拒否されていない'
+  );
+
   const failed = await requestJson(apiPath(apiBaseUrl, `/agent-requests/${secondRequest.id}/fail`), {
     method: 'POST',
-    body: JSON.stringify({ message: 'API契約テストとして失敗理由を保存する' })
+    body: failureRequestBody('API契約テストとして失敗理由を保存する')
   });
   assertScenario(failed.request?.status === 'failed', 'API契約: failで作業が失敗状態になっていない');
   assertScenario(
     failed.request.errorMessage === 'API契約テストとして失敗理由を保存する',
     'API契約: failの失敗理由が保存されていない'
   );
+
+  const expiringDraft = await createApprovedScenarioDraft(apiBaseUrl, '期限切れclaimを復旧する');
+  const expiringInitialState = await requestJson(apiPath(apiBaseUrl, '/state'));
+  const expiringFirstRequest = agentRequestsForDraft(expiringInitialState, expiringDraft.id)[0];
+  const expiredClaim = await requestJson(apiPath(apiBaseUrl, `/agent-requests/${expiringFirstRequest.id}/claim`), {
+    method: 'POST',
+    body: claimRequestBody('expired-scenario-agent', { expiresAt: '2000-01-01T00:00:00.000Z' })
+  });
+  assertScenario(
+    expiredClaim.request?.claimOwnerId === 'expired-scenario-agent' &&
+      expiredClaim.request?.claimExpiresAt === '2000-01-01T00:00:00.000Z',
+    'API契約: 期限つきclaimの取得者と期限が保存されていない'
+  );
+  const recoveredNext = await requestJson(apiPath(apiBaseUrl, '/agent-requests/next'));
+  assertScenario(
+    recoveredNext.request?.id === expiringFirstRequest.id,
+    'API契約: 期限切れしたrunning作業が次回取得可能になっていない'
+  );
+  assertScenario(
+    recoveredNext.request.status === 'queued' &&
+      recoveredNext.request.errorMessage.includes('取得期限が切れたため復旧しました'),
+    'API契約: 期限切れ復旧の状態説明が保存されていない'
+  );
+  const reclaimed = await requestJson(apiPath(apiBaseUrl, `/agent-requests/${expiringFirstRequest.id}/claim`), {
+    method: 'POST',
+    body: claimRequestBody()
+  });
+  assertScenario(
+    reclaimed.request?.status === 'running' &&
+      reclaimed.request.claimOwnerId === scenarioAgentOwnerId &&
+      !reclaimed.request.claimExpiredAt,
+    'API契約: 復旧後の作業を新しい取得者で再claimできていない'
+  );
+  const expiringSourceVideoUri = await writeApiContractArtifact(
+    runtimeDir,
+    expiringDraft.id,
+    'source-video.mp4',
+    minimalMp4Header()
+  );
+  await requestJson(apiPath(apiBaseUrl, `/agent-requests/${expiringFirstRequest.id}/complete`), {
+    method: 'POST',
+    body: completionRequestBody({
+      meaning: '期限切れ復旧後に対象動画を登録する',
+      fileRef: {
+        uri: expiringSourceVideoUri,
+        mimeType: 'video/mp4',
+        access: 'internal'
+      }
+    })
+  });
 
   const missingRequestError = await expectRequestJsonFailure(
     apiPath(apiBaseUrl, '/agent-requests/missing_agent_request/claim'),
@@ -522,7 +620,7 @@ async function assertHumanReviewBlocksDirectClaim(apiBaseUrl, runtimeDir) {
 
   const beforeApprovalError = await expectRequestJsonFailure(
     apiPath(apiBaseUrl, `/agent-requests/${compositionRequest.id}/claim`),
-    { method: 'POST' }
+    { method: 'POST', body: claimRequestBody() }
   );
   assertScenario(
     beforeApprovalError.includes('人間確認が承認されていない'),
@@ -546,7 +644,7 @@ async function assertHumanReviewBlocksDirectClaim(apiBaseUrl, runtimeDir) {
     apiPath(apiBaseUrl, `/agent-requests/${compositionRequest.id}/fail`),
     {
       method: 'POST',
-      body: JSON.stringify({ message: '確認待ちの工程を失敗扱いにしようとする' })
+      body: failureRequestBody('確認待ちの工程を失敗扱いにしようとする')
     }
   );
   assertScenario(
@@ -577,7 +675,7 @@ async function assertHumanReviewBlocksDirectClaim(apiBaseUrl, runtimeDir) {
 
   const afterRejectError = await expectRequestJsonFailure(
     apiPath(apiBaseUrl, `/agent-requests/${compositionRequest.id}/claim`),
-    { method: 'POST' }
+    { method: 'POST', body: claimRequestBody() }
   );
   assertScenario(
     afterRejectError.includes('人間確認が承認されていない'),
@@ -666,13 +764,14 @@ async function assertRetryControls(apiBaseUrl, runtimeDir) {
   );
 
   const claimed = await requestJson(apiPath(apiBaseUrl, `/agent-requests/${prepareRequest.id}/claim`), {
-    method: 'POST'
+    method: 'POST',
+    body: claimRequestBody()
   });
   assertScenario(claimed.request?.status === 'running', '再実行確認用のAI工程を取得中にできていない');
 
   const failed = await requestJson(apiPath(apiBaseUrl, `/agent-requests/${prepareRequest.id}/fail`), {
     method: 'POST',
-    body: JSON.stringify({ message: '再実行確認のためにAI工程を失敗させる' })
+    body: failureRequestBody('再実行確認のためにAI工程を失敗させる')
   });
   assertScenario(failed.request?.status === 'failed', '再実行確認用のAI工程を失敗状態にできていない');
 
@@ -702,13 +801,14 @@ async function assertRetryControls(apiBaseUrl, runtimeDir) {
   const missingArtifactState = await requestJson(apiPath(apiBaseUrl, '/state'));
   const missingArtifactPrepareRequest = agentRequestsForDraft(missingArtifactState, missingArtifactDraft.id)[0];
   await requestJson(apiPath(apiBaseUrl, `/agent-requests/${missingArtifactPrepareRequest.id}/claim`), {
-    method: 'POST'
+    method: 'POST',
+    body: claimRequestBody()
   });
   const wrongDraftArtifactError = await expectRequestJsonFailure(
     apiPath(apiBaseUrl, `/agent-requests/${missingArtifactPrepareRequest.id}/complete`),
     {
       method: 'POST',
-      body: JSON.stringify({
+      body: completionRequestBody({
         meaning: '別の編集コピー配下の成果物を成功扱いにしようとする',
         fileRef: {
           uri: '/api/artifacts/other_draft/source-video.mp4',
@@ -726,7 +826,7 @@ async function assertRetryControls(apiBaseUrl, runtimeDir) {
     apiPath(apiBaseUrl, `/agent-requests/${missingArtifactPrepareRequest.id}/complete`),
     {
       method: 'POST',
-      body: JSON.stringify({
+      body: completionRequestBody({
         meaning: '存在しない成果物を成功扱いにしようとする',
         fileRef: {
           uri: `/api/artifacts/${missingArtifactDraft.id}/missing-source-video.mp4`,
@@ -757,7 +857,7 @@ async function assertRetryControls(apiBaseUrl, runtimeDir) {
     apiPath(apiBaseUrl, `/agent-requests/${missingArtifactPrepareRequest.id}/complete`),
     {
       method: 'POST',
-      body: JSON.stringify({
+      body: completionRequestBody({
         meaning: '工程と違う成果物を成功扱いにしようとする',
         fileRef: {
           uri: `/api/artifacts/${missingArtifactDraft.id}/${wrongKindArtifactFileName}`,
@@ -783,7 +883,7 @@ async function assertRetryControls(apiBaseUrl, runtimeDir) {
     apiPath(apiBaseUrl, `/agent-requests/${missingArtifactPrepareRequest.id}/complete`),
     {
       method: 'POST',
-      body: JSON.stringify({
+      body: completionRequestBody({
         meaning: '動画ではないファイルを動画成果物として成功扱いにしようとする',
         fileRef: {
           uri: `/api/artifacts/${missingArtifactDraft.id}/${fakeVideoArtifactFileName}`,
@@ -801,7 +901,7 @@ async function assertRetryControls(apiBaseUrl, runtimeDir) {
     apiPath(apiBaseUrl, `/agent-requests/${missingArtifactPrepareRequest.id}/complete`),
     {
       method: 'POST',
-      body: JSON.stringify({ meaning: '成果物なしで成功扱いにしようとする' })
+      body: completionRequestBody({ meaning: '成果物なしで成功扱いにしようとする' })
     }
   );
   assertScenario(
@@ -816,7 +916,7 @@ async function assertRetryControls(apiBaseUrl, runtimeDir) {
   );
   await requestJson(apiPath(apiBaseUrl, `/agent-requests/${missingArtifactPrepareRequest.id}/fail`), {
     method: 'POST',
-    body: JSON.stringify({ message: '成果物なし完了拒否後の確認用工程を停止する' })
+    body: failureRequestBody('成果物なし完了拒否後の確認用工程を停止する')
   });
 
   const succeededDraft = await createApprovedScenarioDraft(apiBaseUrl, '成功済みAI工程は再実行コピーを作らない');
@@ -868,11 +968,12 @@ async function assertMidWorkflowRetryCopiesArtifacts(apiBaseUrl, runtimeDir) {
   assertScenario(themeRequest?.status === 'queued', '途中工程再実行前にテーマ作成が未作成状態ではない');
 
   await requestJson(apiPath(apiBaseUrl, `/agent-requests/${themeRequest.id}/claim`), {
-    method: 'POST'
+    method: 'POST',
+    body: claimRequestBody()
   });
   await requestJson(apiPath(apiBaseUrl, `/agent-requests/${themeRequest.id}/fail`), {
     method: 'POST',
-    body: JSON.stringify({ message: '途中工程の再実行確認のためにテーマ作成を失敗させる' })
+    body: failureRequestBody('途中工程の再実行確認のためにテーマ作成を失敗させる')
   });
 
   const retried = await requestJson(apiPath(apiBaseUrl, `/agent-requests/${themeRequest.id}/retry`), {
@@ -925,7 +1026,8 @@ async function assertVideoSourceRetryCopiesMp4Name(apiBaseUrl, runtimeDir) {
   assertScenario(prepareRequest, '動画入力MP4コピー確認用の動画取り込み工程が見つからない');
 
   await requestJson(apiPath(apiBaseUrl, `/agent-requests/${prepareRequest.id}/claim`), {
-    method: 'POST'
+    method: 'POST',
+    body: claimRequestBody()
   });
 
   const sourceVideoFileName = 'source-video.mp4';
@@ -933,7 +1035,7 @@ async function assertVideoSourceRetryCopiesMp4Name(apiBaseUrl, runtimeDir) {
   await writeMinimalMp4Header(sourceVideoPath);
   await requestJson(apiPath(apiBaseUrl, `/agent-requests/${prepareRequest.id}/complete`), {
     method: 'POST',
-    body: JSON.stringify({
+    body: completionRequestBody({
       meaning: '再実行コピー確認用の入力動画MP4',
       fileRef: {
         uri: `/api/artifacts/${draft.id}/${sourceVideoFileName}`,
@@ -947,11 +1049,12 @@ async function assertVideoSourceRetryCopiesMp4Name(apiBaseUrl, runtimeDir) {
   const runSttRequest = agentRequestsForDraft(afterPrepareState, draft.id).find((request) => request.type === 'run_stt');
   assertScenario(runSttRequest, '動画入力MP4コピー確認用のSTT工程が見つからない');
   await requestJson(apiPath(apiBaseUrl, `/agent-requests/${runSttRequest.id}/claim`), {
-    method: 'POST'
+    method: 'POST',
+    body: claimRequestBody()
   });
   await requestJson(apiPath(apiBaseUrl, `/agent-requests/${runSttRequest.id}/fail`), {
     method: 'POST',
-    body: JSON.stringify({ message: '動画入力MP4コピー確認のためにSTTを失敗させる' })
+    body: failureRequestBody('動画入力MP4コピー確認のためにSTTを失敗させる')
   });
 
   const retried = await requestJson(apiPath(apiBaseUrl, `/agent-requests/${runSttRequest.id}/retry`), {
@@ -989,11 +1092,12 @@ async function assertBrokenCopiedArtifactBlocksRetry(apiBaseUrl, runtimeDir) {
   );
 
   await requestJson(apiPath(apiBaseUrl, `/agent-requests/${themeRequest.id}/claim`), {
-    method: 'POST'
+    method: 'POST',
+    body: claimRequestBody()
   });
   await requestJson(apiPath(apiBaseUrl, `/agent-requests/${themeRequest.id}/fail`), {
     method: 'POST',
-    body: JSON.stringify({ message: '壊れた成果物を再実行コピーへ引き継がないことを確認する' })
+    body: failureRequestBody('壊れた成果物を再実行コピーへ引き継がないことを確認する')
   });
 
   const beforeRetryFailure = await requestJson(apiPath(apiBaseUrl, '/state'));
@@ -1066,6 +1170,7 @@ async function assertRuntimeConfig(apiBaseUrl) {
   assertScenario(runtimeConfig.adjustment?.mode === 'fixed', '微調整が固定処理として明示されていない');
   assertScenario(runtimeConfig.videoOutput?.encoder === 'libx264', '確認用動画の標準エンコーダーがlibx264になっていない');
   assertScenario(Array.isArray(runtimeConfig.videoOutput?.extraArgs), '確認用動画の追加ffmpeg引数が配列として渡っていない');
+  assertScenario(runtimeConfig.agentClaim?.ttlMilliseconds === 0, 'AI作業取得期限の標準設定が自動期限なしとして読めない');
   assertScenario(
     runtimeConfig.source?.defaultUri === 'runtime/artifacts/draft_w4Lp9IJC6pQl3FsRfFL9t/source-video.mp4',
     '設定ファイルの入力動画参照がUIへ渡せる形になっていない'

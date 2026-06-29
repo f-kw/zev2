@@ -146,6 +146,9 @@ export interface RuntimeConfig {
     encoder: string;
     extraArgs: string[];
   };
+  agentClaim: {
+    ttlMilliseconds: number;
+  };
   source: {
     defaultUri: string;
     defaultPurpose: string;
@@ -197,6 +200,11 @@ export interface AgentRequest {
   dependsOnAgentRequestId?: string;
   status: AgentRequestStatus;
   fileRefIds: string[];
+  claimOwnerId?: string;
+  claimedAt?: string;
+  claimUpdatedAt?: string;
+  claimExpiresAt?: string;
+  claimExpiredAt?: string;
   result?: {
     outputId?: string;
     outputType?: OutputEntity['type'];
@@ -219,6 +227,7 @@ export interface FileRef {
 }
 
 export interface AgentCompletionInput {
+  ownerId: string;
   meaning?: string;
   decision?: AgentDecisionInput;
   fileRef?: {
@@ -226,6 +235,11 @@ export interface AgentCompletionInput {
     mimeType: string;
     access?: FileRefAccess;
   };
+}
+
+export interface AgentClaimInput {
+  ownerId: string;
+  expiresAt?: string;
 }
 
 export interface AgentDecisionInput {
@@ -241,6 +255,7 @@ export interface AgentDecisionInput {
 }
 
 export interface AgentFailureInput {
+  ownerId: string;
   message: string;
 }
 

@@ -15,6 +15,7 @@ AIエージェントは承認後の作業だけをAPIで取得し、外部処理
 - 現在のdry-runでは、承認APIがrunnerをバックグラウンド起動し、runnerが全工程をAPI経由で完了させる。
 - 承認APIはrunner完了まで待たず、承認済み作業キュー作成後に応答する。
 - `claim` していない作業を `complete` してはいけない。
+- `complete` と `fail` は、`claim` したAIエージェントと同じ取得者だけが実行できる。
 - 前工程が完了していない作業は取得できない。
 - 内容選択、使用素材確認、動画生成前確認が必要な作業は、人間確認が承認されるまで取得できない。
 
@@ -108,12 +109,22 @@ GET /api/agent-requests/next
 
 ```http
 POST /api/agent-requests/:id/claim
+Content-Type: application/json
+```
+
+```json
+{
+  "ownerId": "zev2-runner:12345",
+  "expiresAt": "2026-06-29T12:00:00.000Z"
+}
 ```
 
 意味:
 
 - AIエージェントが対象作業を引き受ける。
 - 状態は `running` になる。
+- `ownerId` は取得したAIエージェントを表す。以後の `complete` と `fail` でも同じ値を渡す。
+- `expiresAt` は任意。指定した時刻を過ぎた `running` 作業は、状態確認または次作業取得時に復旧される。
 - 前工程が終わっていない場合は `409` になる。
 
 レスポンス:
@@ -122,7 +133,11 @@ POST /api/agent-requests/:id/claim
 {
   "request": {
     "id": "agent_xxx",
-    "status": "running"
+    "status": "running",
+    "claimOwnerId": "zev2-runner:12345",
+    "claimedAt": "2026-06-29T11:50:00.000Z",
+    "claimUpdatedAt": "2026-06-29T11:50:00.000Z",
+    "claimExpiresAt": "2026-06-29T12:00:00.000Z"
   },
   "state": {}
 }
@@ -139,6 +154,7 @@ Content-Type: application/json
 
 ```json
 {
+  "ownerId": "zev2-runner:12345",
   "meaning": "書き起こしJSONを作成した",
   "fileRef": {
     "uri": "zev2://transcripts/transcript_001.json",
@@ -148,18 +164,12 @@ Content-Type: application/json
 }
 ```
 
-成果物参照がまだない場合:
-
-```json
-{
-  "meaning": "外部処理の準備が完了した"
-}
-```
-
 意味:
 
 - `running` の作業だけ完了できる。
+- `claim` 時の取得者と `ownerId` が一致する場合だけ完了できる。
 - `fileRef` を渡した場合、backend は成果物参照を保存する。
+- 成果物参照がない完了報告は拒否する。
 - backend はファイル本体を保存しない。
 - `uri` はAIエージェントが後で参照できる場所を表す。
 
@@ -172,6 +182,7 @@ Content-Type: application/json
 
 ```json
 {
+  "ownerId": "zev2-runner:12345",
   "message": "対象動画を取得できなかった"
 }
 ```
@@ -179,6 +190,7 @@ Content-Type: application/json
 意味:
 
 - 状態は `failed` になる。
+- `claim` 時の取得者と `ownerId` が一致する場合だけ失敗として記録できる。
 - 失敗理由はUIと状態APIで確認できる。
 
 ## 状態確認
@@ -193,6 +205,9 @@ GET /api/state
 - AIエージェントの復旧
 - 失敗後の状態確認
 
+取得期限を過ぎた `running` 作業がある場合、状態確認または次作業取得のタイミングでその作業は `queued` または `waiting` に戻る。
+復旧後の作業には、前回取得者を含む説明が `errorMessage` として残る。
+
 ## AIエージェントの実行ループ例
 
 ```text
@@ -201,15 +216,16 @@ loop:
   if next.request is null:
     stop
 
-  claim = POST /api/agent-requests/{next.request.id}/claim
+  ownerId = stable identifier for this agent process
+  claim = POST /api/agent-requests/{next.request.id}/claim with ownerId
   if claim failed:
     inspect status and continue or stop
 
   try:
     result = execute outside backend according to next.request.type
-    POST /api/agent-requests/{next.request.id}/complete with result reference
+    POST /api/agent-requests/{next.request.id}/complete with ownerId and result reference
   catch error:
-    POST /api/agent-requests/{next.request.id}/fail with reason
+    POST /api/agent-requests/{next.request.id}/fail with ownerId and reason
 ```
 
 ## 禁止事項
@@ -224,10 +240,5 @@ loop:
 ## 現時点で未実装
 
 - 認証
-- 同時実行時の強い排他制御
-- claim のタイムアウト復旧
-- 再実行API
-- キャンセルAPI
 - 詳細ログAPI
 - 成果物本体の保存API
-- STT、LLM、動画生成との接続

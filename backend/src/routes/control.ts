@@ -5,6 +5,7 @@ import path from 'node:path';
 import {
   ARTIFACT_FILE_NAME_BY_KIND,
   WORKFLOW_STEPS,
+  type AgentClaimInput,
   type AgentCompletionInput,
   type AgentDecisionInput,
   type AgentFailureInput,
@@ -25,6 +26,7 @@ import {
   createRequestDraft,
   findById,
   findAgentRequestDependency,
+  findBlockingControlReview,
   findReadyAgentRequest,
   getFileRefKindForRequest,
   getOutputTypeForRequest,
@@ -157,6 +159,84 @@ function createId(prefix: string): string {
 
 function selectAgentRequests(stateAgentRequests: AgentRequest[], ids: Set<string>): AgentRequest[] {
   return stateAgentRequests.filter((request) => ids.has(request.id));
+}
+
+function trimText(value: unknown): string {
+  return typeof value === 'string' ? value.trim() : '';
+}
+
+function isValidIsoDateText(value: string): boolean {
+  return Boolean(value) && Number.isFinite(Date.parse(value));
+}
+
+function isClaimExpired(request: AgentRequest, observedAt: string): boolean {
+  if (request.status !== 'running' || !request.claimExpiresAt) {
+    return false;
+  }
+
+  return Date.parse(request.claimExpiresAt) <= Date.parse(observedAt);
+}
+
+function isRunnableAfterClaimRecovery(state: LoadedState, request: AgentRequest): boolean {
+  const dependency = findAgentRequestDependency(state, request);
+  return (!dependency || dependency.status === 'succeeded') && !findBlockingControlReview(state, request);
+}
+
+function clearClaimFields(request: AgentRequest): void {
+  delete request.claimOwnerId;
+  delete request.claimedAt;
+  delete request.claimUpdatedAt;
+  delete request.claimExpiresAt;
+}
+
+function recoverExpiredClaims(state: LoadedState, observedAt: string): boolean {
+  let changed = false;
+
+  for (const request of state.agentRequests) {
+    if (!isClaimExpired(request, observedAt)) {
+      continue;
+    }
+
+    const previousOwner = request.claimOwnerId || '不明';
+    clearClaimFields(request);
+    request.claimExpiredAt = observedAt;
+    request.status = isRunnableAfterClaimRecovery(state, request) ? 'queued' : 'waiting';
+    request.errorMessage = `取得期限が切れたため復旧しました。前回取得者: ${previousOwner}`;
+    request.updatedAt = observedAt;
+    changed = true;
+  }
+
+  return changed;
+}
+
+async function loadStateWithClaimRecovery(): Promise<LoadedState> {
+  const state = await loadState();
+  const observedAt = nowIso();
+  if (recoverExpiredClaims(state, observedAt)) {
+    await saveState(state);
+  }
+
+  return state;
+}
+
+function readAgentClaimInput(value: unknown): AgentClaimInput {
+  const body = value && typeof value === 'object' ? (value as Partial<AgentClaimInput>) : {};
+  return {
+    ownerId: trimText(body.ownerId),
+    ...(trimText(body.expiresAt) ? { expiresAt: trimText(body.expiresAt) } : {})
+  };
+}
+
+function ensureClaimOwnerMatches(request: AgentRequest, ownerId: string): string | undefined {
+  if (!ownerId) {
+    return 'AIエージェント取得者が必要です';
+  }
+
+  if (request.claimOwnerId !== ownerId) {
+    return '取得者が一致しないため、このAI操作は完了または失敗として記録できません';
+  }
+
+  return undefined;
 }
 
 function workflowStepIndex(type: AgentRequest['type']): number {
@@ -787,7 +867,9 @@ function buildRequestDraftActivitySummary(
     return {
       status: 'running',
       title: `${runningRequest.label}を実行中`,
-      detail: 'AIエージェントが工程を処理しています',
+      detail: runningRequest.claimOwnerId
+        ? `AIエージェントが工程を処理しています。取得者: ${runningRequest.claimOwnerId}`
+        : 'AIエージェントが工程を処理しています',
       nextAction: '完了まで待つか、必要なら作業を中止します',
       requestDraftId: draft.id,
       agentRequestId: runningRequest.id
@@ -801,7 +883,7 @@ function buildRequestDraftActivitySummary(
       title: `${waitingRequest.label}を待機中`,
       detail: waitingRequest.status === 'waiting'
         ? compactActivityText(waitingRequest.errorMessage, '前工程の完了を待っています')
-        : 'AIエージェントの実行待ちです',
+        : compactActivityText(waitingRequest.errorMessage, 'AIエージェントの実行待ちです'),
       nextAction: '止まっている場合はAI作業を再開します',
       requestDraftId: draft.id,
       agentRequestId: waitingRequest.id
@@ -891,10 +973,12 @@ function agentRequestStatusDetail(request: AgentRequest): string {
   }
 
   if (request.status === 'running') {
-    return 'AIエージェントがこの工程を取得しました';
+    return request.claimOwnerId
+      ? `AIエージェントがこの工程を取得しました。取得者: ${request.claimOwnerId}`
+      : 'AIエージェントがこの工程を取得しました';
   }
 
-  return 'AIエージェントが実行する工程として登録しました';
+  return compactActivityText(request.errorMessage, 'AIエージェントが実行する工程として登録しました');
 }
 
 function draftStatusTitle(status: RequestDraft['status']): string {
@@ -2256,12 +2340,12 @@ router.get('/runtime-config', async (_, response) => {
 });
 
 router.get('/state', async (_, response) => {
-  const state = await loadState();
+  const state = await loadStateWithClaimRecovery();
   response.json(state);
 });
 
 router.get('/request-drafts/:id/activity', async (request, response) => {
-  const state = await loadState();
+  const state = await loadStateWithClaimRecovery();
   const draft = findById(state.requestDrafts, request.params.id);
   if (!draft) {
     response.status(404).json({ error: '実行前下書きが見つかりません' });
@@ -2371,13 +2455,13 @@ router.post('/request-drafts/:id/approve', async (request, response) => {
 });
 
 router.get('/agent-requests/next', async (_, response) => {
-  const state = await loadState();
+  const state = await loadStateWithClaimRecovery();
   const agentRequest = findReadyAgentRequest(state);
   response.json({ request: agentRequest ?? null });
 });
 
 router.post('/agent-requests/resume', async (_, response) => {
-  const state = await loadState();
+  const state = await loadStateWithClaimRecovery();
   const agentRequest = findReadyAgentRequest(state);
 
   if (!agentRequest) {
@@ -2390,11 +2474,22 @@ router.post('/agent-requests/resume', async (_, response) => {
 });
 
 router.post('/agent-requests/:id/claim', async (request, response) => {
-  const state = await loadState();
+  const state = await loadStateWithClaimRecovery();
   const agentRequest = findById(state.agentRequests, request.params.id);
 
   if (!agentRequest) {
     response.status(404).json({ error: 'AI操作が見つかりません' });
+    return;
+  }
+
+  const input = readAgentClaimInput(request.body);
+  if (!input.ownerId) {
+    response.status(400).json({ error: 'AIエージェント取得者が必要です', state });
+    return;
+  }
+
+  if (input.expiresAt && !isValidIsoDateText(input.expiresAt)) {
+    response.status(400).json({ error: '取得期限はISO日時で指定してください', state });
     return;
   }
 
@@ -2424,13 +2519,22 @@ router.post('/agent-requests/:id/claim', async (request, response) => {
 
   agentRequest.status = 'running';
   delete agentRequest.errorMessage;
-  agentRequest.updatedAt = nowIso();
+  delete agentRequest.claimExpiredAt;
+  agentRequest.claimOwnerId = input.ownerId;
+  agentRequest.claimedAt = nowIso();
+  agentRequest.claimUpdatedAt = agentRequest.claimedAt;
+  if (input.expiresAt) {
+    agentRequest.claimExpiresAt = input.expiresAt;
+  } else {
+    delete agentRequest.claimExpiresAt;
+  }
+  agentRequest.updatedAt = agentRequest.claimedAt;
   await saveState(state);
   response.json({ request: agentRequest, state });
 });
 
 router.post('/agent-requests/:id/complete', async (request, response) => {
-  const state = await loadState();
+  const state = await loadStateWithClaimRecovery();
   const agentRequest = findById(state.agentRequests, request.params.id);
 
   if (!agentRequest) {
@@ -2448,7 +2552,15 @@ router.post('/agent-requests/:id/complete', async (request, response) => {
     return;
   }
 
-  const input = request.body as AgentCompletionInput;
+  const input = request.body && typeof request.body === 'object'
+    ? (request.body as Partial<AgentCompletionInput>)
+    : {};
+  const ownerError = ensureClaimOwnerMatches(agentRequest, trimText(input.ownerId));
+  if (ownerError) {
+    response.status(409).json({ error: ownerError, state });
+    return;
+  }
+
   if (input.fileRef && (!input.fileRef.uri?.trim() || !input.fileRef.mimeType?.trim())) {
     response.status(400).json({ error: '成果物参照にはURIとMIME typeが必要です' });
     return;
@@ -2457,7 +2569,8 @@ router.post('/agent-requests/:id/complete', async (request, response) => {
     response.status(400).json({ error: 'AI操作の完了には成果物参照が必要です', state });
     return;
   }
-  const fileRefError = await validateCompletionFileRef(agentRequest, input.fileRef);
+  const completionInput = input as AgentCompletionInput;
+  const fileRefError = await validateCompletionFileRef(agentRequest, completionInput.fileRef);
   if (fileRefError) {
     response.status(400).json({ error: fileRefError, state });
     return;
@@ -2465,14 +2578,15 @@ router.post('/agent-requests/:id/complete', async (request, response) => {
 
   const reviewKind = getRequiredControlReviewKind(agentRequest);
   if (reviewKind) {
-    const errors = validateAgentDecision(input.decision);
+    const errors = validateAgentDecision(completionInput.decision);
     if (errors.length > 0) {
       response.status(400).json({ errors });
       return;
     }
   }
 
-  const { fileRef, output } = completeAgentRequest(agentRequest, input);
+  agentRequest.claimUpdatedAt = nowIso();
+  const { fileRef, output } = completeAgentRequest(agentRequest, completionInput);
   if (fileRef) {
     state.fileRefs.push(fileRef);
   }
@@ -2481,11 +2595,11 @@ router.post('/agent-requests/:id/complete', async (request, response) => {
     state.outputs.push(output);
   }
 
-  if (reviewKind && input.decision) {
+  if (reviewKind && completionInput.decision) {
     const { decisionLog, reviewItem } = createControlReview(
       agentRequest,
       reviewKind,
-      input.decision,
+      completionInput.decision,
       fileRef,
       output
     );
@@ -2883,7 +2997,7 @@ router.post('/agent-requests/:id/retry', async (request, response) => {
 });
 
 router.post('/agent-requests/:id/fail', async (request, response) => {
-  const state = await loadState();
+  const state = await loadStateWithClaimRecovery();
   const agentRequest = findById(state.agentRequests, request.params.id);
 
   if (!agentRequest) {
@@ -2896,7 +3010,9 @@ router.post('/agent-requests/:id/fail', async (request, response) => {
     return;
   }
 
-  const input = request.body as Partial<AgentFailureInput>;
+  const input = request.body && typeof request.body === 'object'
+    ? (request.body as Partial<AgentFailureInput>)
+    : {};
   if (!input.message?.trim()) {
     response.status(400).json({ error: '失敗理由が必要です' });
     return;
@@ -2907,9 +3023,16 @@ router.post('/agent-requests/:id/fail', async (request, response) => {
     return;
   }
 
+  const ownerError = ensureClaimOwnerMatches(agentRequest, trimText(input.ownerId));
+  if (ownerError) {
+    response.status(409).json({ error: ownerError, state });
+    return;
+  }
+
   agentRequest.status = 'failed';
   agentRequest.errorMessage = input.message.trim();
-  agentRequest.updatedAt = nowIso();
+  agentRequest.claimUpdatedAt = nowIso();
+  agentRequest.updatedAt = agentRequest.claimUpdatedAt;
   await saveState(state);
   response.json({ request: agentRequest, state });
 });

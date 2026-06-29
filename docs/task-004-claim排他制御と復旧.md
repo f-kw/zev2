@@ -34,3 +34,10 @@
 - 復旧対象の作業が次回取得可能になる。
 - 状態確認APIで、取得者と復旧が必要な状態を説明できる。
 - `pnpm run type-check` と対象テストが成功する。
+
+## 実装済み確認
+
+- `claim` は取得者IDを必須にし、取得時刻、最終更新時刻、任意の期限時刻を作業状態へ保存する。
+- `complete` と `fail` は、`claim` した取得者IDと一致しない場合に拒否する。
+- 期限切れした `running` 作業は、状態確認または次作業取得時に `queued` または `waiting` へ戻し、復旧理由と前回取得者を状態へ残す。
+- 期限切れ時間は `config/runtime.jsonc` の `agentClaim.ttlMilliseconds` またはAPIの `expiresAt` で明示する。コード内に固定の期限時間は置かない。

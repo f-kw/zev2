@@ -2,6 +2,7 @@ import axios from 'axios';
 import {
   uriWithRef,
   type AgentCompletionInput,
+  type AgentClaimInput,
   type AgentFailureInput,
   type AgentRequest,
   type HumanReviewActionType,
@@ -157,8 +158,8 @@ export async function fetchNextAgentRequest(): Promise<AgentRequest | null> {
   return response.data.request;
 }
 
-export async function claimAgentRequest(id: string): Promise<Zev2State> {
-  const response = await api.post(`/agent-requests/${id}/claim`);
+export async function claimAgentRequest(id: string, input: AgentClaimInput): Promise<Zev2State> {
+  const response = await api.post(`/agent-requests/${id}/claim`, input);
   return response.data.state;
 }
 

@@ -114,7 +114,7 @@ render_video
 - backendはdry-run runnerをバックグラウンド起動する。
 - UIは状態APIを更新しながら完了状態を確認する。
 - runner は `GET /api/agent-requests/next` で次作業を取得する。
-- runner は `POST /api/agent-requests/:id/claim` で作業を取得済みにする。
+- runner は `POST /api/agent-requests/:id/claim` で作業を取得済みにする。このとき取得者IDを渡し、設定で期限が明示されている場合は期限時刻も渡す。
 - runner は動画から音声を抽出し、ZEVローカルSTTで文字起こしする。
 - runner は文字起こしから内容候補を整理する。
 - 人間が面白そうな内容を選ぶまで、後続作業は止まる。

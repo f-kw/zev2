@@ -29,6 +29,9 @@ const DEFAULT_RUNTIME_CONFIG: RuntimeConfig = {
     encoder: 'libx264',
     extraArgs: []
   },
+  agentClaim: {
+    ttlMilliseconds: 0
+  },
   source: {
     defaultUri: 'runtime/artifacts/draft_w4Lp9IJC6pQl3FsRfFL9t/source-video.mp4',
     defaultPurpose: '固定データでショート動画を作成する'
@@ -104,6 +107,14 @@ function stringArrayFromConfig(value: unknown): string[] {
     .filter((item): item is string => typeof item === 'string')
     .map((item) => item.trim())
     .filter((item) => item.length > 0);
+}
+
+function nonNegativeIntegerFromConfig(value: unknown, fallback: number): number {
+  if (typeof value !== 'number' || !Number.isInteger(value) || value < 0) {
+    return fallback;
+  }
+
+  return value;
 }
 
 function removeJsonComments(input: string): string {
@@ -187,6 +198,7 @@ function normalizeRuntimeConfig(value: unknown): RuntimeConfig {
   const editPlan = recordValue(root.editPlan);
   const adjustment = recordValue(root.adjustment);
   const videoOutput = recordValue(root.videoOutput);
+  const agentClaim = recordValue(root.agentClaim);
   const source = recordValue(root.source);
 
   return {
@@ -212,6 +224,12 @@ function normalizeRuntimeConfig(value: unknown): RuntimeConfig {
     videoOutput: {
       encoder: stringFromConfig(videoOutput.encoder, DEFAULT_RUNTIME_CONFIG.videoOutput.encoder),
       extraArgs: stringArrayFromConfig(videoOutput.extraArgs)
+    },
+    agentClaim: {
+      ttlMilliseconds: nonNegativeIntegerFromConfig(
+        agentClaim.ttlMilliseconds,
+        DEFAULT_RUNTIME_CONFIG.agentClaim.ttlMilliseconds
+      )
     },
     source: {
       defaultUri: stringFromConfig(source.defaultUri, DEFAULT_RUNTIME_CONFIG.source.defaultUri),
@@ -241,7 +259,8 @@ export function createRunnerEnvironmentFromConfig(config: RuntimeConfig): Record
     ZEV2_EDIT_PLAN_MODE: config.editPlan.mode,
     ZEV2_ADJUSTMENT_MODE: config.adjustment.mode,
     ZEV2_FFMPEG_VIDEO_ENCODER: config.videoOutput.encoder,
-    ZEV2_FFMPEG_VIDEO_EXTRA_ARGS: JSON.stringify(config.videoOutput.extraArgs)
+    ZEV2_FFMPEG_VIDEO_EXTRA_ARGS: JSON.stringify(config.videoOutput.extraArgs),
+    ZEV2_AGENT_CLAIM_TTL_MS: String(config.agentClaim.ttlMilliseconds)
   };
 
   if (config.stt.mode === 'fixed') {
