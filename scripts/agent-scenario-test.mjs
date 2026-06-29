@@ -2128,7 +2128,7 @@ async function assertGeneratedVideoChangeRejectsUnknownScope(apiBaseUrl, sourceD
   );
 }
 
-async function assertFinalReviewControls(apiBaseUrl, sourceDraftId) {
+async function assertFinalReviewControls(apiBaseUrl, runtimeDir, sourceDraftId) {
   const unknownActionError = await expectRequestJsonFailure(
     apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/final-review`),
     {
@@ -2141,6 +2141,17 @@ async function assertFinalReviewControls(apiBaseUrl, sourceDraftId) {
   assertScenario(
     unknownActionError.includes('完成動画への判断が不明です'),
     '完成動画への不明な人間判断が拒否されていない'
+  );
+
+  const packageBeforeReviewError = await expectRequestJsonFailure(
+    apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/publish-package`),
+    {
+      method: 'POST'
+    }
+  );
+  assertScenario(
+    packageBeforeReviewError.includes('投稿可能または最終完了として記録してから'),
+    '人間が確認していない完成動画から公開パッケージが作られている'
   );
 
   const publishReady = await requestJson(apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/final-review`), {
@@ -2171,6 +2182,60 @@ async function assertFinalReviewControls(apiBaseUrl, sourceDraftId) {
     '投稿可能の人間判断が監査タイムラインで追えない'
   );
 
+  const publishPackage = await requestJson(apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/publish-package`), {
+    method: 'POST'
+  });
+  assertScenario(
+    publishPackage.publishPackage?.source === 'zev2-publish-package',
+    '公開パッケージの作成結果が保存されていない'
+  );
+  assertScenario(
+    publishPackage.publishPackage.outputVideoUri === publishReady.finalReviewAction.outputVideoUri,
+    '公開パッケージが人間確認済み動画を参照していない'
+  );
+  const publishPackageManifest = await readJsonFile(
+    artifactPathByUri(runtimeDir, publishPackage.publishPackage.manifestUri)
+  );
+  assertScenario(
+    publishPackageManifest.videoFileUri === publishPackage.publishPackage.videoFileUri,
+    '公開パッケージmanifestが公開用動画を指していない'
+  );
+  const sourceVideoBuffer = await readFile(
+    artifactPathByUri(runtimeDir, publishPackage.publishPackage.outputVideoUri)
+  );
+  const packageVideoBuffer = await readFile(
+    artifactPathByUri(runtimeDir, publishPackage.publishPackage.videoFileUri)
+  );
+  assertScenario(
+    sha256Buffer(sourceVideoBuffer) === sha256Buffer(packageVideoBuffer),
+    '公開パッケージの動画コピーが元の完成動画と一致していない'
+  );
+  const publishNote = await readFile(
+    artifactPathByUri(runtimeDir, publishPackage.publishPackage.noteUri),
+    'utf8'
+  );
+  assertScenario(
+    publishNote.includes('公開用パッケージ') && publishNote.includes('タイトル案'),
+    '公開パッケージの説明メモが人間向けになっていない'
+  );
+  const fetchedPublishPackage = await requestJson(apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/publish-package`));
+  assertScenario(
+    fetchedPublishPackage.publishPackage?.manifestUri === publishPackage.publishPackage.manifestUri,
+    '作成済み公開パッケージをAPIで読み戻せない'
+  );
+  const publishPackageActivity = await requestJson(apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/activity`));
+  assertScenario(
+    publishPackageActivity.summary?.title === '公開パッケージ作成済み',
+    '公開パッケージ作成が現在状態要約に反映されていない'
+  );
+  assertScenario(
+    publishPackageActivity.events.some((event) => (
+      event.kind === 'publish_package_status' &&
+        event.title === '公開パッケージ作成済み'
+    )),
+    '公開パッケージ作成が監査タイムラインで追えない'
+  );
+
   const duplicatePublishError = await expectRequestJsonFailure(
     apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/final-review`),
     {
@@ -2198,11 +2263,12 @@ async function assertFinalReviewControls(apiBaseUrl, sourceDraftId) {
 
   const finalActivity = await requestJson(apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/activity`));
   assertScenario(
-    finalActivity.summary?.title === '最終完了',
+    finalActivity.summary?.title.includes('最終完了'),
     '最終完了の人間判断が現在状態要約に反映されていない'
   );
   assertScenario(
-    finalActivity.summary.nextAction.includes('最終成果'),
+    finalActivity.summary.nextAction.includes('最終成果') ||
+      finalActivity.summary.nextAction.includes('公開用ファイル'),
     '最終完了後の次状態が人間に分かる文になっていない'
   );
   assertScenario(
@@ -2211,6 +2277,19 @@ async function assertFinalReviewControls(apiBaseUrl, sourceDraftId) {
         event.title === '人間が最終完了として確認'
     )),
     '最終完了の人間判断が監査タイムラインで追えない'
+  );
+
+  const packageAfterFinal = await requestJson(apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/publish-package`), {
+    method: 'POST'
+  });
+  assertScenario(
+    packageAfterFinal.publishPackage?.outputVideoUri === finalComplete.finalReviewAction.outputVideoUri,
+    '最終完了後に現在の完成動画の公開パッケージを作り直せない'
+  );
+  const finalPackageActivity = await requestJson(apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/activity`));
+  assertScenario(
+    finalPackageActivity.summary?.title === '最終完了・公開パッケージ作成済み',
+    '最終完了後の公開パッケージ作成が現在状態要約に反映されていない'
   );
 
   const duplicateFinalError = await expectRequestJsonFailure(
@@ -3125,7 +3204,7 @@ async function scenarioAutomaticVideoCreation(apiBaseUrl, runtimeDir) {
       nextAfterMultipleRestarts.request?.type === 'apply_adjustment',
     '複数の作り直し候補があるとき、最後に作った編集コピーが次の実行対象になっていない'
   );
-  await assertFinalReviewControls(apiBaseUrl, draft.id);
+  await assertFinalReviewControls(apiBaseUrl, runtimeDir, draft.id);
 
   await assertMaterialReselectFromMaterialConfirmation(apiBaseUrl, runtimeDir);
   await assertContentReselectFromMaterialConfirmation(apiBaseUrl, runtimeDir);

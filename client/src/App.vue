@@ -21,6 +21,8 @@ import {
   type ActivityLogItem
 } from './activity-log';
 import {
+  createPublishPackage,
+  fetchPublishPackage,
   fetchRequestDraftActivity,
   fetchHumanAuthStatus,
   fetchWebGeminiReview,
@@ -28,6 +30,7 @@ import {
   loginHumanUi,
   logoutHumanUi,
   prepareWebGeminiReview,
+  type PublishPackageArtifact,
   type RequestDraftActivityEvent,
   type RequestDraftActivitySummary,
   type WebGeminiReviewArtifact,
@@ -79,6 +82,10 @@ const webGeminiReviewLoading = ref(false);
 const loadedWebGeminiReviewCreatedAt = ref('');
 const activeWebGeminiAction = ref<'refresh_review' | 'prepare_review' | 'apply_review' | ''>('');
 const activeFinalReviewAction = ref<FinalReviewActionType | ''>('');
+const publishPackage = ref<PublishPackageArtifact | null>(null);
+const publishPackageLoading = ref(false);
+const publishPackageMessage = ref('');
+const activePublishPackageAction = ref<'create_package' | ''>('');
 const requestActivityEvents = ref<RequestDraftActivityEvent[]>([]);
 const requestActivitySummary = ref<RequestDraftActivitySummary | null>(null);
 const requestActivityLoading = ref(false);
@@ -306,6 +313,45 @@ const finalReviewStatusDetail = computed(() => {
   }
 
   return '動画を確認した後、投稿可能または最終完了として記録できます';
+});
+
+const canCreatePublishPackage = computed(() =>
+  Boolean(
+    currentDraft.value &&
+      outputVideoUri.value &&
+      (hasPublishReadyForCurrentOutput.value || hasFinalCompleteForCurrentOutput.value) &&
+      !agentOperationLocked.value &&
+      !publishPackageLoading.value &&
+      !activePublishPackageAction.value
+  )
+);
+
+const publishPackageStatusTitle = computed(() => {
+  if (publishPackage.value) {
+    return '公開用ファイル作成済み';
+  }
+
+  if (hasPublishReadyForCurrentOutput.value || hasFinalCompleteForCurrentOutput.value) {
+    return '公開用ファイルは未作成';
+  }
+
+  return '公開用ファイルは最終判断後に作成';
+});
+
+const publishPackageStatusDetail = computed(() => {
+  if (publishPackageMessage.value) {
+    return publishPackageMessage.value;
+  }
+
+  if (publishPackage.value) {
+    return '公開用動画、説明メモ、manifestを確認できます';
+  }
+
+  if (hasPublishReadyForCurrentOutput.value || hasFinalCompleteForCurrentOutput.value) {
+    return '投稿作業へ渡すファイル一式を作成できます';
+  }
+
+  return '先に投稿可能または最終完了として記録してください';
 });
 
 const canApplyWebGeminiReview = computed(() =>
@@ -1280,8 +1326,58 @@ async function submitOutputFinalReview(action: FinalReviewActionType) {
   try {
     await store.submitFinalReview(draft.id, action);
     await refreshRequestActivity();
+    await refreshPublishPackage();
   } finally {
     activeFinalReviewAction.value = '';
+  }
+}
+
+async function refreshPublishPackage() {
+  const draft = currentDraft.value;
+  if (publishPackageLoading.value) {
+    return;
+  }
+
+  if (!humanAuthReady.value || !draft || !outputVideoUri.value) {
+    publishPackage.value = null;
+    publishPackageMessage.value = '';
+    return;
+  }
+
+  publishPackageLoading.value = true;
+  publishPackageMessage.value = '';
+  try {
+    const result = await fetchPublishPackage(draft.id);
+    publishPackage.value = result.publishPackage;
+  } catch (error) {
+    publishPackage.value = null;
+    publishPackageMessage.value = formatApiError(error);
+  } finally {
+    publishPackageLoading.value = false;
+  }
+}
+
+async function createCurrentPublishPackage() {
+  const draft = currentDraft.value;
+  if (!draft || !canCreatePublishPackage.value) {
+    return;
+  }
+
+  activePublishPackageAction.value = 'create_package';
+  publishPackageLoading.value = true;
+  publishPackageMessage.value = '';
+  try {
+    const result = await createPublishPackage(draft.id);
+    store.state = result.state;
+    publishPackage.value = result.publishPackage;
+    publishPackageMessage.value = '公開用ファイルを作成しました';
+    await refreshRequestActivity();
+  } catch (error) {
+    publishPackage.value = null;
+    publishPackageMessage.value = formatApiError(error);
+  } finally {
+    publishPackageLoading.value = false;
+    activePublishPackageAction.value = '';
   }
 }
 
@@ -1468,6 +1564,7 @@ watch(
   () => [currentDraft.value?.id ?? '', outputVideoUri.value],
   () => {
     void refreshWebGeminiReview();
+    void refreshPublishPackage();
   },
   { immediate: true }
 );
@@ -1880,6 +1977,23 @@ watch(
                 @click="submitOutputFinalReview('final_complete')"
               >
                 {{ activeFinalReviewAction === 'final_complete' ? '記録中' : '最終完了として記録' }}
+              </button>
+            </div>
+            <div class="publish-package-status" aria-label="公開用ファイル">
+              <strong>{{ publishPackageStatusTitle }}</strong>
+              <span>{{ publishPackageStatusDetail }}</span>
+              <div v-if="publishPackage" class="publish-package-links">
+                <a :href="uriWithRef(publishPackage.videoFileUri, publishPackage.createdAt)" target="_blank" rel="noreferrer">動画</a>
+                <a :href="uriWithRef(publishPackage.noteUri, publishPackage.createdAt)" target="_blank" rel="noreferrer">説明メモ</a>
+                <a :href="uriWithRef(publishPackage.manifestUri, publishPackage.createdAt)" target="_blank" rel="noreferrer">manifest</a>
+              </div>
+              <button
+                type="button"
+                class="secondary-button"
+                :disabled="!canCreatePublishPackage"
+                @click="createCurrentPublishPackage"
+              >
+                {{ activePublishPackageAction === 'create_package' ? '作成中' : publishPackage ? '公開用ファイルを作り直す' : '公開用ファイルを作る' }}
               </button>
             </div>
           </section>
@@ -3093,6 +3207,43 @@ video {
   gap: 8px;
 }
 
+.publish-package-status {
+  display: grid;
+  min-width: 220px;
+  max-width: 340px;
+  gap: 6px;
+  justify-items: end;
+  text-align: right;
+}
+
+.publish-package-status strong {
+  color: var(--text);
+  font-size: 13px;
+}
+
+.publish-package-status span {
+  color: var(--text-dim);
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.publish-package-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+  font-size: 12px;
+}
+
+.publish-package-links a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.publish-package-links a:hover {
+  text-decoration: underline;
+}
+
 .work-wait-panel {
   display: grid;
   align-content: center;
@@ -3606,6 +3757,16 @@ video {
   }
 
   .final-review-actions {
+    justify-content: flex-start;
+  }
+
+  .publish-package-status {
+    max-width: none;
+    justify-items: start;
+    text-align: left;
+  }
+
+  .publish-package-links {
     justify-content: flex-start;
   }
 }

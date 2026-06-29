@@ -46,6 +46,10 @@ export function activityCategory(event: RequestDraftActivityEvent): ActivityLogC
     return 'external';
   }
 
+  if (event.kind === 'publish_package_status') {
+    return 'system';
+  }
+
   if (
     event.kind === 'human_review_action' ||
     event.kind === 'final_review_action' ||

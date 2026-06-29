@@ -73,6 +73,15 @@ assertContract(
 );
 
 assertContract(
+  appVue.includes('aria-label="公開用ファイル"') &&
+    appVue.includes('@click="createCurrentPublishPackage"') &&
+    appVue.includes('publishPackage.videoFileUri') &&
+    appVue.includes('publishPackage.noteUri') &&
+    appVue.includes('publishPackage.manifestUri'),
+  '完成動画から公開用ファイルを作成し、動画、説明メモ、manifestを確認する導線が見つかりません'
+);
+
+assertContract(
   appVue.includes('!hasFinalCompleteForCurrentOutput.value && !agentOperationLocked.value') &&
     appVue.includes('hasFinalCompleteForCurrentOutput.value ||') &&
     appVue.includes(':disabled="agentOperationLocked || hasFinalCompleteForCurrentOutput'),

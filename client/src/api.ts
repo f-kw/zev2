@@ -75,6 +75,21 @@ export interface WebGeminiReviewRunLog {
   cdpControl?: unknown;
 }
 
+export interface PublishPackageArtifact {
+  draftId: string;
+  source: 'zev2-publish-package';
+  status: 'ready';
+  createdAt: string;
+  outputVideoUri: string;
+  outputVideoSha256: string;
+  videoFileUri: string;
+  manifestUri: string;
+  noteUri: string;
+  titleSuggestion: string;
+  descriptionSuggestion: string;
+  checklist: string[];
+}
+
 export interface RequestDraftActivityEvent {
   id: string;
   kind:
@@ -87,7 +102,8 @@ export interface RequestDraftActivityEvent {
     | 'human_review_required'
     | 'human_review_action'
     | 'final_review_action'
-    | 'web_gemini_review_status';
+    | 'web_gemini_review_status'
+    | 'publish_package_status';
   occurredAt: string;
   actor: 'user' | 'agent' | 'runner' | 'backend' | 'system';
   title: string;
@@ -287,6 +303,22 @@ export async function submitFinalReview(
     action,
     ...(reason ? { reason } : {})
   });
+  return response.data;
+}
+
+export async function fetchPublishPackage(id: string): Promise<{
+  publishPackage: PublishPackageArtifact | null;
+  outputVideoUri: string;
+}> {
+  const response = await api.get(`/request-drafts/${id}/publish-package`);
+  return response.data;
+}
+
+export async function createPublishPackage(id: string): Promise<{
+  publishPackage: PublishPackageArtifact;
+  state: Zev2State;
+}> {
+  const response = await api.post(`/request-drafts/${id}/publish-package`);
   return response.data;
 }
 

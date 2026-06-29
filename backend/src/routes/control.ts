@@ -105,6 +105,20 @@ type WebGeminiReviewRunLog = {
   edgeControl?: unknown;
   cdpControl?: unknown;
 };
+type PublishPackageArtifact = {
+  draftId: string;
+  source: 'zev2-publish-package';
+  status: 'ready';
+  createdAt: string;
+  outputVideoUri: string;
+  outputVideoSha256: string;
+  videoFileUri: string;
+  manifestUri: string;
+  noteUri: string;
+  titleSuggestion: string;
+  descriptionSuggestion: string;
+  checklist: string[];
+};
 type CopiedEditRestart = {
   draft: RequestDraft;
   requests: AgentRequest[];
@@ -132,7 +146,8 @@ type RequestDraftActivityEvent = {
     | 'human_review_required'
     | 'human_review_action'
     | 'final_review_action'
-    | 'web_gemini_review_status';
+    | 'web_gemini_review_status'
+    | 'publish_package_status';
   occurredAt: string;
   actor: 'user' | 'agent' | 'runner' | 'backend' | 'system';
   title: string;
@@ -177,6 +192,9 @@ const artifactUrlPrefix = '/api/artifacts/';
 const webGeminiReviewFileName = 'web-gemini-review.json';
 const webGeminiReviewRunLogFileName = 'web-gemini-review-run.json';
 const webGeminiReviewPromptFileName = 'web-gemini-review-prompt.md';
+const publishPackageFileName = 'publish-package.json';
+const publishPackageVideoFileName = 'publish-output.mp4';
+const publishPackageNoteFileName = 'publish-note.md';
 
 function nowIso(): string {
   return new Date().toISOString();
@@ -603,8 +621,87 @@ function webGeminiReviewPromptPath(requestDraftId: string): string {
   return path.join(artifactRoot(), requestDraftId, webGeminiReviewPromptFileName);
 }
 
+function publishPackagePath(requestDraftId: string): string {
+  return path.join(artifactRoot(), requestDraftId, publishPackageFileName);
+}
+
+function publishPackageVideoPath(requestDraftId: string): string {
+  return path.join(artifactRoot(), requestDraftId, publishPackageVideoFileName);
+}
+
+function publishPackageNotePath(requestDraftId: string): string {
+  return path.join(artifactRoot(), requestDraftId, publishPackageNoteFileName);
+}
+
 function isNotFoundError(error: unknown): boolean {
   return Boolean(error && typeof error === 'object' && 'code' in error && error.code === 'ENOENT');
+}
+
+function parseStringArray(value: unknown): string[] {
+  if (!Array.isArray(value)) {
+    return [];
+  }
+
+  return value.filter((item): item is string => typeof item === 'string' && item.trim().length > 0)
+    .map((item) => item.trim());
+}
+
+function parsePublishPackageArtifact(value: unknown): PublishPackageArtifact | undefined {
+  if (!value || typeof value !== 'object') {
+    return undefined;
+  }
+
+  const artifact = value as Partial<PublishPackageArtifact>;
+  if (
+    artifact.source !== 'zev2-publish-package' ||
+    artifact.status !== 'ready' ||
+    !hasText(artifact.draftId) ||
+    !hasText(artifact.createdAt) ||
+    !hasText(artifact.outputVideoUri) ||
+    !hasText(artifact.outputVideoSha256) ||
+    !hasText(artifact.videoFileUri) ||
+    !hasText(artifact.manifestUri) ||
+    !hasText(artifact.noteUri) ||
+    !hasText(artifact.titleSuggestion) ||
+    !hasText(artifact.descriptionSuggestion)
+  ) {
+    return undefined;
+  }
+
+  return {
+    draftId: artifact.draftId.trim(),
+    source: 'zev2-publish-package',
+    status: 'ready',
+    createdAt: artifact.createdAt.trim(),
+    outputVideoUri: artifact.outputVideoUri.trim(),
+    outputVideoSha256: artifact.outputVideoSha256.trim(),
+    videoFileUri: artifact.videoFileUri.trim(),
+    manifestUri: artifact.manifestUri.trim(),
+    noteUri: artifact.noteUri.trim(),
+    titleSuggestion: artifact.titleSuggestion.trim(),
+    descriptionSuggestion: artifact.descriptionSuggestion.trim(),
+    checklist: parseStringArray(artifact.checklist)
+  };
+}
+
+async function readPublishPackageArtifact(
+  requestDraftId: string
+): Promise<{ publishPackage: PublishPackageArtifact | null } | { error: string }> {
+  try {
+    const raw = await readFile(publishPackagePath(requestDraftId), 'utf8');
+    const parsed = parsePublishPackageArtifact(JSON.parse(raw));
+    if (!parsed) {
+      return { error: '公開パッケージの保存内容を読めません' };
+    }
+
+    return { publishPackage: parsed };
+  } catch (error) {
+    if (isNotFoundError(error)) {
+      return { publishPackage: null };
+    }
+
+    return { error: '公開パッケージの保存内容を読めません' };
+  }
 }
 
 function parseWebGeminiReviewArtifact(value: unknown): WebGeminiReviewArtifact | undefined {
@@ -750,6 +847,87 @@ async function removeWebGeminiReviewArtifact(requestDraftId: string): Promise<vo
 async function writeWebGeminiReviewRunLog(runLog: WebGeminiReviewRunLog): Promise<void> {
   await mkdir(path.dirname(webGeminiReviewRunLogPath(runLog.draftId)), { recursive: true });
   await writeFile(webGeminiReviewRunLogPath(runLog.draftId), `${JSON.stringify(runLog, null, 2)}\n`, 'utf8');
+}
+
+function buildPublishChecklist(): string[] {
+  return [
+    '完成動画を人間が再生して確認済み',
+    '公開先へ渡す動画ファイルがこのパッケージ内にある',
+    '公開文は必要に応じて人間が調整する',
+    '外部サービスへの投稿はこのアプリでは自動実行しない'
+  ];
+}
+
+function publishTitleSuggestion(draft: RequestDraft): string {
+  return draft.purpose.trim() || 'ショート動画';
+}
+
+function publishDescriptionSuggestion(draft: RequestDraft, outputVideo: FileRef): string {
+  return [
+    `作成目的: ${publishTitleSuggestion(draft)}`,
+    `確認済み動画: ${outputVideo.uri}`,
+    '必要なら公開前に説明文を人間が調整してください。'
+  ].join('\n');
+}
+
+function buildPublishNote(artifact: PublishPackageArtifact): string {
+  return [
+    '# 公開用パッケージ',
+    '',
+    `作成日時: ${artifact.createdAt}`,
+    `元動画: ${artifact.outputVideoUri}`,
+    `公開用動画: ${artifact.videoFileUri}`,
+    `動画SHA-256: ${artifact.outputVideoSha256}`,
+    '',
+    '## タイトル案',
+    '',
+    artifact.titleSuggestion,
+    '',
+    '## 説明案',
+    '',
+    artifact.descriptionSuggestion,
+    '',
+    '## 確認事項',
+    '',
+    ...artifact.checklist.map((item) => `- ${item}`),
+    ''
+  ].join('\n');
+}
+
+async function writePublishPackageArtifact(
+  draft: RequestDraft,
+  outputVideo: FileRef,
+  createdAt: string
+): Promise<PublishPackageArtifact> {
+  const sourceVideoPath = artifactPathByUrl(outputVideo.uri);
+  const packageDirectory = path.dirname(publishPackagePath(draft.id));
+  await mkdir(packageDirectory, { recursive: true });
+  await copyFile(sourceVideoPath, publishPackageVideoPath(draft.id));
+
+  const sourceVideoMetadata = await readArtifactFileMetadata(sourceVideoPath);
+  const copiedVideoMetadata = await readArtifactFileMetadata(publishPackageVideoPath(draft.id));
+  if (sourceVideoMetadata.sha256 !== copiedVideoMetadata.sha256) {
+    throw new Error('公開用にコピーした動画が元動画と一致しません');
+  }
+
+  const artifact: PublishPackageArtifact = {
+    draftId: draft.id,
+    source: 'zev2-publish-package',
+    status: 'ready',
+    createdAt,
+    outputVideoUri: outputVideo.uri,
+    outputVideoSha256: outputVideo.sha256 || sourceVideoMetadata.sha256,
+    videoFileUri: artifactUrl(draft.id, publishPackageVideoFileName),
+    manifestUri: artifactUrl(draft.id, publishPackageFileName),
+    noteUri: artifactUrl(draft.id, publishPackageNoteFileName),
+    titleSuggestion: publishTitleSuggestion(draft),
+    descriptionSuggestion: publishDescriptionSuggestion(draft, outputVideo),
+    checklist: buildPublishChecklist()
+  };
+
+  await writeFile(publishPackageNotePath(draft.id), buildPublishNote(artifact), 'utf8');
+  await writeFile(publishPackagePath(draft.id), `${JSON.stringify(artifact, null, 2)}\n`, 'utf8');
+  return artifact;
 }
 
 function buildWebGeminiReviewPrompt(draft: RequestDraft): string {
@@ -982,6 +1160,31 @@ async function validateWebGeminiOutputVideo(
   );
   if ('error' in validation) {
     return `Web Geminiレビュー対象の完成動画を確認できません: ${validation.error}`;
+  }
+
+  return undefined;
+}
+
+async function validatePublishPackageOutputVideo(
+  draft: RequestDraft,
+  outputVideo: FileRef | undefined
+): Promise<string | undefined> {
+  if (!outputVideo) {
+    return '生成済み動画がありません';
+  }
+
+  if (outputVideo.kind !== 'output_video') {
+    return '公開パッケージの対象が完成動画ではありません';
+  }
+
+  const validation = await validateArtifactFileRefForKind(
+    draft.id,
+    'output_video',
+    outputVideo.uri,
+    outputVideo.mimeType
+  );
+  if ('error' in validation) {
+    return `公開パッケージ対象の完成動画を確認できません: ${validation.error}`;
   }
 
   return undefined;
@@ -1419,6 +1622,58 @@ function buildWebGeminiReviewActivityError(
   };
 }
 
+function ensurePublishPackageMatchesOutputVideo(
+  artifact: PublishPackageArtifact | null,
+  outputVideo: FileRef | undefined
+): { error: string } | undefined {
+  if (!artifact) {
+    return undefined;
+  }
+
+  if (!outputVideo) {
+    return { error: '公開パッケージに対応する完成動画がありません' };
+  }
+
+  if (artifact.outputVideoUri !== outputVideo.uri || artifact.outputVideoSha256 !== outputVideo.sha256) {
+    return { error: '公開パッケージが現在の完成動画と一致しません。現在の完成動画で作り直してください' };
+  }
+
+  return undefined;
+}
+
+function buildPublishPackageActivity(
+  draft: RequestDraft,
+  artifact: PublishPackageArtifact
+): RequestDraftActivityEvent {
+  return {
+    id: `publish-package:${draft.id}:${artifact.createdAt}`,
+    kind: 'publish_package_status',
+    occurredAt: artifact.createdAt,
+    actor: 'backend',
+    title: '公開パッケージ作成済み',
+    detail: compactActivityText(
+      `公開用動画、説明メモ、manifestを保存しました。公開用動画: ${artifact.videoFileUri}`,
+      '公開作業へ渡すファイルを作成しました'
+    ),
+    requestDraftId: draft.id
+  };
+}
+
+function buildPublishPackageActivityError(
+  draft: RequestDraft,
+  error: string
+): RequestDraftActivityEvent {
+  return {
+    id: `publish-package:${draft.id}:error`,
+    kind: 'publish_package_status',
+    occurredAt: draft.updatedAt,
+    actor: 'system',
+    title: '公開パッケージを確認できません',
+    detail: compactActivityText(error, '公開パッケージの保存内容を確認してください'),
+    requestDraftId: draft.id
+  };
+}
+
 function buildWebGeminiReviewActivitySummary(
   baseSummary: RequestDraftActivitySummary,
   draft: RequestDraft,
@@ -1573,6 +1828,55 @@ function buildFinalReviewActivitySummary(
     title: '最終完了',
     detail: compactActivityText(finalReviewAction.reason, '人間が完成動画を最終完了として確認しました'),
     nextAction: 'この完成動画を最終成果として扱います',
+    requestDraftId: draft.id,
+    outputVideoUri: outputVideo.uri
+  };
+}
+
+function buildPublishPackageActivitySummary(
+  baseSummary: RequestDraftActivitySummary,
+  draft: RequestDraft,
+  outputVideo: FileRef | undefined,
+  packageResult: { publishPackage: PublishPackageArtifact | null } | { error: string }
+): RequestDraftActivitySummary {
+  if (!outputVideo || baseSummary.status !== 'completed') {
+    return baseSummary;
+  }
+
+  if ('error' in packageResult) {
+    return {
+      status: 'failed',
+      title: '公開パッケージを確認できません',
+      detail: compactActivityText(packageResult.error, '公開パッケージの保存内容を確認してください'),
+      nextAction: '現在の完成動画で公開パッケージを作り直します',
+      requestDraftId: draft.id,
+      outputVideoUri: outputVideo.uri
+    };
+  }
+
+  if (!packageResult.publishPackage) {
+    return baseSummary;
+  }
+
+  const mismatch = ensurePublishPackageMatchesOutputVideo(packageResult.publishPackage, outputVideo);
+  if (mismatch) {
+    return {
+      status: 'failed',
+      title: '公開パッケージを確認できません',
+      detail: compactActivityText(mismatch.error, '現在の完成動画と公開パッケージの対応を確認してください'),
+      nextAction: '現在の完成動画で公開パッケージを作り直します',
+      requestDraftId: draft.id,
+      outputVideoUri: outputVideo.uri
+    };
+  }
+
+  return {
+    status: 'completed',
+    title: baseSummary.title === '最終完了'
+      ? '最終完了・公開パッケージ作成済み'
+      : '公開パッケージ作成済み',
+    detail: '公開用動画、説明メモ、manifestを作成しました',
+    nextAction: '公開用ファイルを確認して、外部サービスへの投稿作業に渡します',
     requestDraftId: draft.id,
     outputVideoUri: outputVideo.uri
   };
@@ -1746,6 +2050,18 @@ async function buildRequestDraftActivityWithExternalEvents(
       'Web Geminiレビュー本文はありますが、実行ログがありません。レビューを取り直してください',
       'Web Geminiレビュー実行ログを確認できません'
     ));
+  }
+
+  const publishPackageResult = await readPublishPackageArtifact(draft.id);
+  if ('error' in publishPackageResult) {
+    events.push(buildPublishPackageActivityError(draft, publishPackageResult.error));
+  } else if (publishPackageResult.publishPackage) {
+    const mismatch = ensurePublishPackageMatchesOutputVideo(publishPackageResult.publishPackage, outputVideo);
+    events.push(
+      mismatch
+        ? buildPublishPackageActivityError(draft, mismatch.error)
+        : buildPublishPackageActivity(draft, publishPackageResult.publishPackage)
+    );
   }
 
   return events.sort((left, right) => (
@@ -2870,6 +3186,7 @@ router.get('/request-drafts/:id/activity', async (request, response) => {
   const webGeminiReviewResult = await readWebGeminiReviewArtifact(draft.id);
   const outputVideo = latestOutputVideoFileRef(state, draft.id);
   const webGeminiRunLogResult = await readWebGeminiReviewRunLog(draft.id);
+  const publishPackageResult = await readPublishPackageArtifact(draft.id);
 
   const baseSummary = buildRequestDraftActivitySummary(state, draft);
   const webGeminiSummary = buildWebGeminiReviewActivitySummary(
@@ -2879,7 +3196,8 @@ router.get('/request-drafts/:id/activity', async (request, response) => {
     webGeminiReviewResult,
     webGeminiRunLogResult
   );
-  const summary = buildFinalReviewActivitySummary(webGeminiSummary, state, draft, outputVideo);
+  const finalReviewSummary = buildFinalReviewActivitySummary(webGeminiSummary, state, draft, outputVideo);
+  const summary = buildPublishPackageActivitySummary(finalReviewSummary, draft, outputVideo, publishPackageResult);
 
   response.json({
     requestDraftId: draft.id,
@@ -2970,6 +3288,84 @@ router.post('/request-drafts/:id/final-review', async (request, response) => {
   state.finalReviewActions.push(finalReviewAction);
   await saveState(state);
   response.json({ finalReviewAction, state });
+});
+
+router.get('/request-drafts/:id/publish-package', async (request, response) => {
+  const state = await loadStateWithClaimRecovery();
+  const draft = findById(state.requestDrafts, request.params.id);
+  if (!draft) {
+    response.status(404).json({ error: '実行前下書きが見つかりません', state });
+    return;
+  }
+
+  const outputVideo = latestOutputVideoFileRef(state, draft.id);
+  if (outputVideo) {
+    const outputVideoError = await validatePublishPackageOutputVideo(draft, outputVideo);
+    if (outputVideoError) {
+      response.status(409).json({ error: outputVideoError, state });
+      return;
+    }
+  }
+
+  const packageResult = await readPublishPackageArtifact(draft.id);
+  if ('error' in packageResult) {
+    response.status(409).json({ error: packageResult.error, state });
+    return;
+  }
+
+  const mismatch = ensurePublishPackageMatchesOutputVideo(packageResult.publishPackage, outputVideo);
+  if (mismatch) {
+    response.status(409).json({ error: mismatch.error, state });
+    return;
+  }
+
+  response.json({
+    publishPackage: packageResult.publishPackage,
+    outputVideoUri: outputVideo?.uri ?? ''
+  });
+});
+
+router.post('/request-drafts/:id/publish-package', async (request, response) => {
+  const state = await loadStateWithClaimRecovery();
+  const draft = findById(state.requestDrafts, request.params.id);
+  if (!draft) {
+    response.status(404).json({ error: '実行前下書きが見つかりません', state });
+    return;
+  }
+
+  const outputVideo = latestOutputVideoFileRef(state, draft.id);
+  const outputVideoError = await validatePublishPackageOutputVideo(draft, outputVideo);
+  if (outputVideoError) {
+    response.status(409).json({ error: outputVideoError, state });
+    return;
+  }
+
+  if (
+    !outputVideo ||
+    (
+      !hasFinalReviewActionForOutput(state, draft.id, outputVideo, 'publish_ready') &&
+      !hasFinalReviewActionForOutput(state, draft.id, outputVideo, 'final_complete')
+    )
+  ) {
+    response.status(409).json({
+      error: '完成動画を投稿可能または最終完了として記録してから公開パッケージを作成してください',
+      state
+    });
+    return;
+  }
+
+  const createdAt = nowIso();
+  try {
+    const publishPackage = await writePublishPackageArtifact(draft, outputVideo, createdAt);
+    draft.updatedAt = createdAt;
+    await saveState(state);
+    response.json({ publishPackage, state });
+  } catch (error) {
+    response.status(500).json({
+      error: `公開パッケージを作成できません: ${unknownErrorMessage(error)}`,
+      state
+    });
+  }
 });
 
 router.post('/request-drafts', async (request, response) => {
