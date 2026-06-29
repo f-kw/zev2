@@ -25,6 +25,16 @@ const workflowTypes = [
   'apply_adjustment',
   'render_video'
 ];
+const expectedAgentOperationLogEvents = [
+  'draft_created',
+  'draft_approved',
+  'agent_request_created',
+  'agent_request_next_returned',
+  'agent_request_claimed',
+  'agent_request_completed',
+  'agent_request_failed',
+  'agent_request_claim_recovered'
+];
 
 function assertScenario(condition, message) {
   if (!condition) {
@@ -273,6 +283,49 @@ function assertCreatedDraftStoredOnce(created, label) {
   assertScenario(storedDrafts.length === 1, `${label}: 新規下書きが状態に重複保存されている`);
 }
 
+function agentOperationLogsForDraft(state, requestDraftId) {
+  assertScenario(Array.isArray(state.agentOperationLogs), `${requestDraftId}: AI操作ログが状態に存在しない`);
+  return state.agentOperationLogs
+    .filter((log) => log.requestDraftId === requestDraftId)
+    .sort((left, right) => left.createdAt.localeCompare(right.createdAt));
+}
+
+function assertAgentOperationLogsCover(state, requestDraftId, eventTypes, label) {
+  const logs = agentOperationLogsForDraft(state, requestDraftId);
+  assertScenario(logs.length > 0, `${label}: AI操作ログが保存されていない`);
+  for (const eventType of eventTypes) {
+    assertScenario(
+      logs.some((log) => log.eventType === eventType),
+      `${label}: ${eventType} のAI操作ログが保存されていない`
+    );
+  }
+  for (const log of logs) {
+    assertScenario(expectedAgentOperationLogEvents.includes(log.eventType), `${label}: 未定義のAI操作ログ種別が保存されている`);
+    assertScenario(['user', 'agent', 'runner', 'backend', 'system'].includes(log.actor), `${label}: AI操作ログの実行者が読めない`);
+    assertScenario(typeof log.detail === 'string' && log.detail.length > 0, `${label}: AI操作ログに処理の意味がない`);
+    assertScenario(log.detail.length <= 180, `${label}: AI操作ログの説明が長すぎる`);
+    assertScenario(!log.detail.includes('{') && !log.detail.includes('}'), `${label}: AI操作ログに成果物本文らしいJSONが混ざっている`);
+  }
+}
+
+async function assertAgentOperationLogsDoNotEmbedArtifacts(runtimeDir, state, requestDraftId, label) {
+  const logText = JSON.stringify(agentOperationLogsForDraft(state, requestDraftId));
+  assertScenario(!logText.includes('GEMINI_API_KEY'), `${label}: AI操作ログにGemini APIキー名が混ざっている`);
+  assertScenario(!logText.includes('GOOGLE_API_KEY'), `${label}: AI操作ログにGoogle APIキー名が混ざっている`);
+
+  for (const fileRef of state.fileRefs.filter((item) => item.uri?.includes(`/api/artifacts/${requestDraftId}/`))) {
+    if (!isJsonMimeType(fileRef.mimeType)) {
+      continue;
+    }
+
+    const artifactText = (await readFile(artifactPathByUri(runtimeDir, fileRef.uri), 'utf8')).trim();
+    assertScenario(
+      !artifactText || !logText.includes(artifactText),
+      `${label}: AI操作ログに成果物JSON本文が埋め込まれている`
+    );
+  }
+}
+
 async function assertReviewRejectRequiresReason(apiBaseUrl, reviewId, label) {
   const error = await expectRequestJsonFailure(apiPath(apiBaseUrl, `/control-reviews/${reviewId}/reject`), {
     method: 'POST',
@@ -510,6 +563,35 @@ async function assertAgentRequestApiContract(apiBaseUrl, runtimeDir) {
     failed.request.errorMessage === 'API契約テストとして失敗理由を保存する',
     'API契約: failの失敗理由が保存されていない'
   );
+  const contractLogState = await requestJson(apiPath(apiBaseUrl, '/state'));
+  assertAgentOperationLogsCover(contractLogState, draft.id, [
+    'draft_created',
+    'draft_approved',
+    'agent_request_created',
+    'agent_request_next_returned',
+    'agent_request_claimed',
+    'agent_request_completed',
+    'agent_request_failed'
+  ], 'API契約');
+  const contractLogs = agentOperationLogsForDraft(contractLogState, draft.id);
+  const completionLog = contractLogs.find((log) => log.eventType === 'agent_request_completed' && log.agentRequestId === firstRequest.id);
+  assertScenario(completionLog?.fileRefId === completed.fileRef.id, 'API契約: 完了ログから成果物参照を追えない');
+  assertScenario(completionLog?.outputId === completed.output.id, 'API契約: 完了ログから出力記録を追えない');
+  const failureLog = contractLogs.find((log) => log.eventType === 'agent_request_failed' && log.agentRequestId === secondRequest.id);
+  assertScenario(
+    failureLog?.errorMessage === 'API契約テストとして失敗理由を保存する',
+    'API契約: 失敗ログから失敗理由を追えない'
+  );
+  const contractActivity = await requestJson(apiPath(apiBaseUrl, `/request-drafts/${draft.id}/activity`));
+  assertScenario(
+    contractActivity.events.some((event) => event.kind === 'agent_operation_log' && event.title === 'AI作業完了を記録'),
+    'API契約: 作業履歴APIでAI操作ログの完了を確認できない'
+  );
+  assertScenario(
+    contractActivity.events.some((event) => event.kind === 'agent_operation_log' && event.title === 'AI作業失敗を記録'),
+    'API契約: 作業履歴APIでAI操作ログの失敗を確認できない'
+  );
+  await assertAgentOperationLogsDoNotEmbedArtifacts(runtimeDir, contractLogState, draft.id, 'API契約');
 
   const expiringDraft = await createApprovedScenarioDraft(apiBaseUrl, '期限切れclaimを復旧する');
   const expiringInitialState = await requestJson(apiPath(apiBaseUrl, '/state'));
@@ -532,6 +614,22 @@ async function assertAgentRequestApiContract(apiBaseUrl, runtimeDir) {
     recoveredNext.request.status === 'queued' &&
       recoveredNext.request.errorMessage.includes('取得期限が切れたため復旧しました'),
     'API契約: 期限切れ復旧の状態説明が保存されていない'
+  );
+  const recoveredLogState = await requestJson(apiPath(apiBaseUrl, '/state'));
+  assertAgentOperationLogsCover(recoveredLogState, expiringDraft.id, [
+    'draft_created',
+    'draft_approved',
+    'agent_request_created',
+    'agent_request_next_returned',
+    'agent_request_claimed',
+    'agent_request_claim_recovered'
+  ], '期限切れclaim復旧');
+  const recoveredLog = agentOperationLogsForDraft(recoveredLogState, expiringDraft.id)
+    .find((log) => log.eventType === 'agent_request_claim_recovered' && log.agentRequestId === expiringFirstRequest.id);
+  assertScenario(
+    recoveredLog?.ownerId === 'expired-scenario-agent' &&
+      recoveredLog.errorMessage?.includes('取得期限が切れたため復旧しました'),
+    'API契約: claim期限切れ復旧ログから前回取得者と復旧理由を追えない'
   );
   const reclaimed = await requestJson(apiPath(apiBaseUrl, `/agent-requests/${expiringFirstRequest.id}/claim`), {
     method: 'POST',
@@ -1695,6 +1793,15 @@ async function assertGeneratedDraftCompleted(apiBaseUrl, runtimeDir, draftId, la
   await assertFixedEditPlanUsesFixtureValues(editPlan, label);
   assertTelopsDoNotCoverWholeSegments(editPlan, label);
   assertFixedEditPlanUsesPreparedScreenLayout(editPlan, label);
+  assertAgentOperationLogsCover(state, draftId, [
+    'draft_created',
+    'draft_approved',
+    'agent_request_created',
+    'agent_request_next_returned',
+    'agent_request_claimed',
+    'agent_request_completed'
+  ], label);
+  await assertAgentOperationLogsDoNotEmbedArtifacts(runtimeDir, state, draftId, label);
   assertScenario(
     editPlan.mode === 'sample-edit-plan',
     `${label}: Gemini APIを使わない固定確認でGemini実行済みの編集案として保存されている`
@@ -1723,6 +1830,10 @@ async function assertGeneratedDraftCompleted(apiBaseUrl, runtimeDir, draftId, la
   assertScenario(
     activity.events.some((event) => event.kind === 'human_review_action'),
     `${label}: 監査タイムラインで人間判断が追えない`
+  );
+  assertScenario(
+    activity.events.some((event) => event.kind === 'agent_operation_log'),
+    `${label}: 監査タイムラインでAI操作ログが追えない`
   );
   const decisionEvents = activity.events.filter((event) => event.kind === 'agent_decision');
   assertScenario(decisionEvents.length > 0, `${label}: 監査タイムラインでAI判断が追えない`);

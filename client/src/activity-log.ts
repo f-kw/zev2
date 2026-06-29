@@ -31,6 +31,7 @@ export function activityKindClass(kind: RequestDraftActivityEvent['kind']): stri
 
   if (
     kind === 'agent_request_status' ||
+    kind === 'agent_operation_log' ||
     kind === 'agent_decision' ||
     kind === 'web_gemini_review_status'
   ) {
@@ -52,6 +53,7 @@ export function activityCategory(event: RequestDraftActivityEvent): ActivityLogC
   if (
     event.kind === 'agent_request_created' ||
     event.kind === 'agent_request_status' ||
+    event.kind === 'agent_operation_log' ||
     event.kind === 'agent_decision'
   ) {
     return 'agent';

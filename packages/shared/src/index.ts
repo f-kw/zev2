@@ -100,6 +100,15 @@ export type ControlReviewKind = 'theme_selection' | 'material_confirmation' | 'r
 export type ControlReviewStatus = 'review_required' | 'approved' | 'rejected' | 'changes_requested';
 export type HumanReviewActionType = 'approve' | 'reject' | 'request_changes';
 export type DecisionLogActor = 'agent' | 'runner' | 'backend' | 'system' | 'user';
+export type AgentOperationLogEventType =
+  | 'draft_created'
+  | 'draft_approved'
+  | 'agent_request_created'
+  | 'agent_request_next_returned'
+  | 'agent_request_claimed'
+  | 'agent_request_completed'
+  | 'agent_request_failed'
+  | 'agent_request_claim_recovered';
 export type DecisionLogType =
   | 'theme_selection'
   | 'material_confirmation'
@@ -278,9 +287,27 @@ export interface Zev2State {
   agentRequests: AgentRequest[];
   fileRefs: FileRef[];
   outputs: OutputEntity[];
+  agentOperationLogs: AgentOperationLog[];
   decisionLogs: DecisionLog[];
   controlReviewItems: ControlReviewItem[];
   humanReviewActions: HumanReviewAction[];
+}
+
+export interface AgentOperationLog {
+  id: string;
+  eventType: AgentOperationLogEventType;
+  requestDraftId: string;
+  agentRequestId?: string;
+  stepType?: AgentRequestType;
+  actor: DecisionLogActor;
+  fromStatus?: AgentRequestStatus | RequestDraftStatus;
+  toStatus?: AgentRequestStatus | RequestDraftStatus;
+  ownerId?: string;
+  detail: string;
+  fileRefId?: string;
+  outputId?: string;
+  errorMessage?: string;
+  createdAt: string;
 }
 
 export interface DecisionLog {
@@ -358,6 +385,7 @@ export function createInitialState(): Zev2State {
     agentRequests: [],
     fileRefs: [],
     outputs: [],
+    agentOperationLogs: [],
     decisionLogs: [],
     controlReviewItems: [],
     humanReviewActions: []

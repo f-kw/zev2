@@ -5,6 +5,7 @@ import {
   WORKFLOW_STEPS,
   createInitialState,
   recordValue,
+  type AgentOperationLogEventType,
   type AgentRequestStatus,
   type ControlReviewKind,
   type ControlReviewStatus,
@@ -46,6 +47,16 @@ const currentControlReviewStatuses = new Set<ControlReviewStatus>([
   'changes_requested'
 ]);
 const currentHumanReviewActions = new Set<HumanReviewActionType>(['approve', 'reject', 'request_changes']);
+const currentAgentOperationLogEvents = new Set<AgentOperationLogEventType>([
+  'draft_created',
+  'draft_approved',
+  'agent_request_created',
+  'agent_request_next_returned',
+  'agent_request_claimed',
+  'agent_request_completed',
+  'agent_request_failed',
+  'agent_request_claim_recovered'
+]);
 
 function isCurrentRequestDraft(value: unknown): boolean {
   const draft = recordValue(value);
@@ -98,23 +109,48 @@ function isCurrentHumanReviewAction(value: unknown): boolean {
   );
 }
 
+function isCurrentAgentOperationLog(value: unknown): boolean {
+  const log = recordValue(value);
+  return (
+    typeof log.id === 'string' &&
+    typeof log.requestDraftId === 'string' &&
+    typeof log.detail === 'string' &&
+    typeof log.createdAt === 'string' &&
+    currentAgentOperationLogEvents.has(log.eventType as AgentOperationLogEventType)
+  );
+}
+
+function withCurrentStateShape(value: unknown): unknown {
+  if (!value || typeof value !== 'object') {
+    return value;
+  }
+
+  const state = value as Partial<Zev2State>;
+  return {
+    ...state,
+    agentOperationLogs: Array.isArray(state.agentOperationLogs) ? state.agentOperationLogs : []
+  };
+}
+
 function isZev2State(value: unknown): value is Zev2State {
   if (!value || typeof value !== 'object') {
     return false;
   }
 
-  const state = value as Partial<Record<keyof Zev2State, unknown>>;
+  const state = withCurrentStateShape(value) as Partial<Record<keyof Zev2State, unknown>>;
   return (
     Array.isArray(state.requestDrafts) &&
     Array.isArray(state.agentRequests) &&
     Array.isArray(state.fileRefs) &&
     Array.isArray(state.outputs) &&
+    Array.isArray(state.agentOperationLogs) &&
     Array.isArray(state.decisionLogs) &&
     Array.isArray(state.controlReviewItems) &&
     Array.isArray(state.humanReviewActions) &&
     state.requestDrafts.every(isCurrentRequestDraft) &&
     state.agentRequests.every(isCurrentAgentRequest) &&
     state.fileRefs.every(isCurrentFileRef) &&
+    state.agentOperationLogs.every(isCurrentAgentOperationLog) &&
     state.controlReviewItems.every(isCurrentControlReview) &&
     state.humanReviewActions.every(isCurrentHumanReviewAction)
   );
@@ -137,7 +173,7 @@ export async function loadState(): Promise<Zev2State> {
   }
 
   try {
-    const state = JSON.parse(raw) as unknown;
+    const state = withCurrentStateShape(JSON.parse(raw) as unknown);
     if (isZev2State(state)) {
       return state;
     }

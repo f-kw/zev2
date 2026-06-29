@@ -79,6 +79,7 @@ export interface RequestDraftActivityEvent {
     | 'draft_status'
     | 'agent_request_created'
     | 'agent_request_status'
+    | 'agent_operation_log'
     | 'agent_decision'
     | 'human_review_required'
     | 'human_review_action'

@@ -7,6 +7,8 @@ import path from 'node:path';
 import {
   ARTIFACT_FILE_NAME_BY_KIND,
   WORKFLOW_STEPS,
+  type AgentOperationLog,
+  type AgentOperationLogEventType,
   type AgentClaimInput,
   type AgentCompletionInput,
   type AgentDecisionInput,
@@ -112,6 +114,7 @@ type RequestDraftActivityEvent = {
     | 'draft_status'
     | 'agent_request_created'
     | 'agent_request_status'
+    | 'agent_operation_log'
     | 'agent_decision'
     | 'human_review_required'
     | 'human_review_action'
@@ -172,6 +175,42 @@ function trimText(value: unknown): string {
   return typeof value === 'string' ? value.trim() : '';
 }
 
+function appendAgentOperationLog(
+  state: LoadedState,
+  input: Omit<AgentOperationLog, 'id' | 'detail' | 'createdAt'> & {
+    detail: unknown;
+    createdAt?: string;
+  }
+): AgentOperationLog {
+  const log: AgentOperationLog = {
+    ...input,
+    id: createId('agent_log'),
+    detail: compactActivityText(input.detail, 'AI操作の状態を記録しました'),
+    createdAt: input.createdAt ?? nowIso()
+  };
+  state.agentOperationLogs.push(log);
+  return log;
+}
+
+function appendAgentRequestOperationLog(
+  state: LoadedState,
+  request: AgentRequest,
+  eventType: AgentOperationLogEventType,
+  detail: unknown,
+  input: Omit<AgentOperationLog, 'id' | 'eventType' | 'requestDraftId' | 'agentRequestId' | 'stepType' | 'detail' | 'createdAt'> & {
+    createdAt?: string;
+  }
+): AgentOperationLog {
+  return appendAgentOperationLog(state, {
+    ...input,
+    eventType,
+    requestDraftId: request.requestDraftId,
+    agentRequestId: request.id,
+    stepType: request.type,
+    detail
+  });
+}
+
 function isValidIsoDateText(value: string): boolean {
   return Boolean(value) && Number.isFinite(Date.parse(value));
 }
@@ -205,11 +244,26 @@ function recoverExpiredClaims(state: LoadedState, observedAt: string): boolean {
     }
 
     const previousOwner = request.claimOwnerId || '不明';
+    const previousStatus = request.status;
     clearClaimFields(request);
     request.claimExpiredAt = observedAt;
     request.status = isRunnableAfterClaimRecovery(state, request) ? 'queued' : 'waiting';
     request.errorMessage = `取得期限が切れたため復旧しました。前回取得者: ${previousOwner}`;
     request.updatedAt = observedAt;
+    appendAgentRequestOperationLog(
+      state,
+      request,
+      'agent_request_claim_recovered',
+      request.errorMessage,
+      {
+        actor: 'backend',
+        fromStatus: previousStatus,
+        toStatus: request.status,
+        ownerId: previousOwner,
+        errorMessage: request.errorMessage,
+        createdAt: observedAt
+      }
+    );
     changed = true;
   }
 
@@ -1028,6 +1082,53 @@ function agentRequestStatusDetail(request: AgentRequest): string {
   return compactActivityText(request.errorMessage, 'AIエージェントが実行する工程として登録しました');
 }
 
+function agentOperationLogTitle(log: AgentOperationLog): string {
+  if (log.eventType === 'draft_created') {
+    return '実行前下書き保存を記録';
+  }
+
+  if (log.eventType === 'draft_approved') {
+    return '依頼承認を記録';
+  }
+
+  if (log.eventType === 'agent_request_created') {
+    return 'AI作業作成を記録';
+  }
+
+  if (log.eventType === 'agent_request_next_returned') {
+    return '次のAI作業返却を記録';
+  }
+
+  if (log.eventType === 'agent_request_claimed') {
+    return 'AI作業取得を記録';
+  }
+
+  if (log.eventType === 'agent_request_completed') {
+    return 'AI作業完了を記録';
+  }
+
+  if (log.eventType === 'agent_request_failed') {
+    return 'AI作業失敗を記録';
+  }
+
+  return 'AI作業復旧を記録';
+}
+
+function agentOperationLogDetail(log: AgentOperationLog): string {
+  const parts = [log.detail];
+  if (log.ownerId) {
+    parts.push(`取得者: ${log.ownerId}`);
+  }
+  if (log.errorMessage) {
+    parts.push(`理由: ${log.errorMessage}`);
+  }
+  if (log.fileRefId) {
+    parts.push(`成果物参照: ${log.fileRefId}`);
+  }
+
+  return compactActivityText(parts.join(' / '), 'AI操作の監査イベントを記録しました');
+}
+
 function draftStatusTitle(status: RequestDraft['status']): string {
   if (status === 'approved') {
     return 'AIエージェントへ承認';
@@ -1344,6 +1445,21 @@ function buildRequestDraftActivity(state: LoadedState, draft: RequestDraft): Req
         ...(request.result?.outputId ? { outputId: request.result.outputId } : {})
       });
     }
+  }
+
+  for (const log of state.agentOperationLogs.filter((item) => item.requestDraftId === draft.id)) {
+    events.push({
+      id: `agent-operation:${log.id}`,
+      kind: 'agent_operation_log',
+      occurredAt: log.createdAt,
+      actor: log.actor,
+      title: agentOperationLogTitle(log),
+      detail: agentOperationLogDetail(log),
+      requestDraftId: draft.id,
+      ...(log.agentRequestId ? { agentRequestId: log.agentRequestId } : {}),
+      ...(log.fileRefId ? { fileRefId: log.fileRefId } : {}),
+      ...(log.outputId ? { outputId: log.outputId } : {})
+    });
   }
 
   for (const decision of state.decisionLogs.filter((item) => item.requestDraftId === draft.id)) {
@@ -1751,6 +1867,39 @@ function appendCopiedRestartToState(
   state.controlReviewItems.push(...restart.controlReviewItems);
   state.humanReviewActions.push(...restart.humanReviewActions);
   state.agentRequests.push(...restart.requests);
+  appendAgentOperationLog(state, {
+    eventType: 'draft_created',
+    requestDraftId: restart.draft.id,
+    actor: 'backend',
+    toStatus: restart.draft.status,
+    detail: '作り直し用の編集コピーを作成した',
+    createdAt: restart.draft.createdAt
+  });
+  appendAgentOperationLog(state, {
+    eventType: 'draft_approved',
+    requestDraftId: restart.draft.id,
+    actor: 'backend',
+    toStatus: restart.draft.status,
+    detail: '編集コピーをAIエージェント用作業へ進める状態にした',
+    createdAt: restart.draft.updatedAt
+  });
+  for (const agentRequest of restart.requests) {
+    appendAgentRequestOperationLog(
+      state,
+      agentRequest,
+      'agent_request_created',
+      agentRequest.status === 'succeeded'
+        ? `${agentRequest.label}を完了済み工程として編集コピーへ引き継いだ`
+        : `${agentRequest.label}を作り直し用のAIエージェント作業としてキューに追加した`,
+      {
+        actor: 'backend',
+        toStatus: agentRequest.status,
+        ...(agentRequest.result?.fileRefId ? { fileRefId: agentRequest.result.fileRefId } : {}),
+        ...(agentRequest.result?.outputId ? { outputId: agentRequest.result.outputId } : {}),
+        createdAt: agentRequest.createdAt
+      }
+    );
+  }
 }
 
 function restartStartTypeForGeneratedVideoChange(scope: GeneratedVideoChangeScope): AgentRequest['type'] {
@@ -2374,6 +2523,19 @@ async function applyHumanReviewAction(
   }
 
   state.agentRequests.push(...newAgentRequests);
+  for (const agentRequest of newAgentRequests) {
+    appendAgentRequestOperationLog(
+      state,
+      agentRequest,
+      'agent_request_created',
+      `${agentRequest.label}を作り直し用のAIエージェント作業としてキューに追加した`,
+      {
+        actor: 'backend',
+        toStatus: agentRequest.status,
+        createdAt: agentRequest.createdAt
+      }
+    );
+  }
   await saveState(state);
 
   return { status: 'ok', reviewItem, humanReviewAction, state };
@@ -2477,6 +2639,14 @@ router.post('/request-drafts', async (request, response) => {
   const state = await loadState();
   const draft = createRequestDraft(input as RequestDraftInput, nowIso(), createId);
   state.requestDrafts.unshift(draft);
+  appendAgentOperationLog(state, {
+    eventType: 'draft_created',
+    requestDraftId: draft.id,
+    actor: 'user',
+    toStatus: draft.status,
+    detail: '実行前下書きを保存した',
+    createdAt: draft.createdAt
+  });
   await saveState(state);
   response.status(201).json({ draft, state });
 });
@@ -2497,10 +2667,32 @@ router.post('/request-drafts/:id/approve', async (request, response) => {
 
   draft.status = 'approved';
   draft.updatedAt = nowIso();
+  appendAgentOperationLog(state, {
+    eventType: 'draft_approved',
+    requestDraftId: draft.id,
+    actor: 'user',
+    fromStatus: 'draft',
+    toStatus: draft.status,
+    detail: '人間が依頼を承認し、AIエージェント用作業を作れる状態にした',
+    createdAt: draft.updatedAt
+  });
 
   const agentRequests = createAgentRequestsFromDraft(draft, nowIso(), createId);
   const agentRequestIds = new Set(agentRequests.map((agentRequest) => agentRequest.id));
   state.agentRequests.push(...agentRequests);
+  for (const agentRequest of agentRequests) {
+    appendAgentRequestOperationLog(
+      state,
+      agentRequest,
+      'agent_request_created',
+      `${agentRequest.label}をAIエージェント用作業としてキューに追加した`,
+      {
+        actor: 'backend',
+        toStatus: agentRequest.status,
+        createdAt: agentRequest.createdAt
+      }
+    );
+  }
   await saveState(state);
 
   startDryRunRunner();
@@ -2514,6 +2706,19 @@ router.post('/request-drafts/:id/approve', async (request, response) => {
 router.get('/agent-requests/next', async (_, response) => {
   const state = await loadStateWithClaimRecovery();
   const agentRequest = findReadyAgentRequest(state);
+  if (agentRequest) {
+    appendAgentRequestOperationLog(
+      state,
+      agentRequest,
+      'agent_request_next_returned',
+      `${agentRequest.label}を次に実行できる作業として返した`,
+      {
+        actor: 'backend',
+        toStatus: agentRequest.status
+      }
+    );
+    await saveState(state);
+  }
   response.json({ request: agentRequest ?? null });
 });
 
@@ -2555,6 +2760,7 @@ router.post('/agent-requests/:id/claim', async (request, response) => {
     return;
   }
 
+  const previousStatus = agentRequest.status;
   const dependency = findAgentRequestDependency(state, agentRequest);
   if (dependency && dependency.status !== 'succeeded') {
     agentRequest.status = 'waiting';
@@ -2586,6 +2792,19 @@ router.post('/agent-requests/:id/claim', async (request, response) => {
     delete agentRequest.claimExpiresAt;
   }
   agentRequest.updatedAt = agentRequest.claimedAt;
+  appendAgentRequestOperationLog(
+    state,
+    agentRequest,
+    'agent_request_claimed',
+    `${agentRequest.label}をAIエージェントが取得した`,
+    {
+      actor: 'agent',
+      fromStatus: previousStatus,
+      toStatus: agentRequest.status,
+      ownerId: agentRequest.claimOwnerId,
+      createdAt: agentRequest.claimedAt
+    }
+  );
   await saveState(state);
   response.json({ request: agentRequest, state });
 });
@@ -2664,6 +2883,21 @@ router.post('/agent-requests/:id/complete', async (request, response) => {
     state.controlReviewItems.push(reviewItem);
   }
 
+  appendAgentRequestOperationLog(
+    state,
+    agentRequest,
+    'agent_request_completed',
+    `${agentRequest.label}の成果物参照を保存し、工程を完了した`,
+    {
+      actor: 'agent',
+      fromStatus: 'running',
+      toStatus: agentRequest.status,
+      ownerId: completionInput.ownerId,
+      ...(fileRef ? { fileRefId: fileRef.id } : {}),
+      ...(output ? { outputId: output.id } : {}),
+      createdAt: agentRequest.updatedAt
+    }
+  );
   await saveState(state);
   response.json({ request: agentRequest, fileRef, output, state });
 });
@@ -3090,6 +3324,20 @@ router.post('/agent-requests/:id/fail', async (request, response) => {
   agentRequest.errorMessage = input.message.trim();
   agentRequest.claimUpdatedAt = nowIso();
   agentRequest.updatedAt = agentRequest.claimUpdatedAt;
+  appendAgentRequestOperationLog(
+    state,
+    agentRequest,
+    'agent_request_failed',
+    `${agentRequest.label}が失敗として記録された`,
+    {
+      actor: 'agent',
+      fromStatus: 'running',
+      toStatus: agentRequest.status,
+      ownerId: input.ownerId,
+      errorMessage: agentRequest.errorMessage,
+      createdAt: agentRequest.updatedAt
+    }
+  );
   await saveState(state);
   response.json({ request: agentRequest, state });
 });
