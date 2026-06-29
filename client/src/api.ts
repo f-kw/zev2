@@ -7,6 +7,10 @@ import {
   type FinalReviewAction,
   type FinalReviewActionType,
   type PublishHandoffAction,
+  type PublishPlanAction,
+  type PublishApprovalTiming,
+  type PublishAuthMethod,
+  type PublishSubmissionMode,
   type AgentRequest,
   type HumanReviewActionType,
   type RequestDraft,
@@ -106,6 +110,7 @@ export interface RequestDraftActivityEvent {
     | 'final_review_action'
     | 'web_gemini_review_status'
     | 'publish_package_status'
+    | 'publish_plan_action'
     | 'publish_handoff_action'
     | 'published_result_action';
   occurredAt: string;
@@ -118,6 +123,7 @@ export interface RequestDraftActivityEvent {
   decisionLogId?: string;
   humanReviewActionId?: string;
   finalReviewActionId?: string;
+  publishPlanActionId?: string;
   publishHandoffActionId?: string;
   publishedResultActionId?: string;
   fileRefId?: string;
@@ -328,6 +334,20 @@ export async function createPublishPackage(
   state: Zev2State;
 }> {
   const response = await api.post(`/request-drafts/${id}/publish-package`, input);
+  return response.data;
+}
+
+export async function submitPublishPlan(
+  id: string,
+  input: {
+    destinationName: string;
+    authMethod: PublishAuthMethod;
+    submissionMode: PublishSubmissionMode;
+    approvalTiming: PublishApprovalTiming;
+    note: string;
+  }
+): Promise<{ publishPlanAction: PublishPlanAction; state: Zev2State }> {
+  const response = await api.post(`/request-drafts/${id}/publish-plan`, input);
   return response.data;
 }
 

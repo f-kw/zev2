@@ -2167,6 +2167,23 @@ async function assertFinalReviewControls(apiBaseUrl, runtimeDir, sourceDraftId) 
     handoffBeforePackageError.includes('公開パッケージを作成してから'),
     '公開パッケージを作らずに公開作業へ引き渡せている'
   );
+  const publishPlanBeforePackageError = await expectRequestJsonFailure(
+    apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/publish-plan`),
+    {
+      method: 'POST',
+      body: JSON.stringify({
+        destinationName: 'YouTube',
+        authMethod: 'manual_browser_session',
+        submissionMode: 'draft_only',
+        approvalTiming: 'before_external_submission',
+        note: '公開パッケージなしで投稿方針を記録しようとする'
+      })
+    }
+  );
+  assertScenario(
+    publishPlanBeforePackageError.includes('公開パッケージを作成してから'),
+    '公開パッケージを作らずに投稿方針を記録できている'
+  );
   const publishedResultBeforePackageError = await expectRequestJsonFailure(
     apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/published-result`),
     {
@@ -2276,6 +2293,93 @@ async function assertFinalReviewControls(apiBaseUrl, runtimeDir, sourceDraftId) 
         event.title === '公開パッケージ作成済み'
     )),
     '公開パッケージ作成が監査タイムラインで追えない'
+  );
+  const handoffBeforePlanError = await expectRequestJsonFailure(
+    apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/publish-handoff`),
+    {
+      method: 'POST',
+      body: JSON.stringify({
+        targetName: 'YouTube下書き作成担当',
+        note: '投稿方針なしで引き渡そうとする'
+      })
+    }
+  );
+  assertScenario(
+    handoffBeforePlanError.includes('投稿方針を記録してから'),
+    '投稿方針を記録せずに公開作業へ引き渡せている'
+  );
+  const publishedResultBeforePlanError = await expectRequestJsonFailure(
+    apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/published-result`),
+    {
+      method: 'POST',
+      body: JSON.stringify({
+        publishedUrl: 'https://example.com/before-plan',
+        note: '投稿方針なしで公開結果を記録しようとする'
+      })
+    }
+  );
+  assertScenario(
+    publishedResultBeforePlanError.includes('投稿方針を記録してから'),
+    '投稿方針を記録せずに公開済みURLを記録できている'
+  );
+  const invalidPublishPlanError = await expectRequestJsonFailure(
+    apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/publish-plan`),
+    {
+      method: 'POST',
+      body: JSON.stringify({
+        destinationName: 'YouTube',
+        authMethod: 'unknown-auth',
+        submissionMode: 'draft_only',
+        approvalTiming: 'before_external_submission',
+        note: '壊れた投稿方針'
+      })
+    }
+  );
+  assertScenario(
+    invalidPublishPlanError.includes('投稿方針の認証方法を選択してください'),
+    '未定義の認証方法で投稿方針を保存できている'
+  );
+  const publishPlan = await requestJson(apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/publish-plan`), {
+    method: 'POST',
+    body: JSON.stringify({
+      destinationName: 'YouTube',
+      authMethod: 'manual_browser_session',
+      submissionMode: 'draft_only',
+      approvalTiming: 'before_external_submission',
+      note: 'YouTubeへ下書き保存し、外部送信前に人間が承認する'
+    })
+  });
+  assertScenario(
+    publishPlan.publishPlanAction?.manifestUri === publishPackage.publishPackage.manifestUri,
+    '投稿方針が対象公開パッケージに紐付いていない'
+  );
+  assertScenario(
+    publishPlan.publishPlanAction?.publishPackageCreatedAt === publishPackage.publishPackage.createdAt,
+    '投稿方針が公開パッケージの作成日時に紐付いていない'
+  );
+  assertScenario(
+    publishPlan.publishPlanAction?.submissionMode === 'draft_only' &&
+      publishPlan.publishPlanAction?.approvalTiming === 'before_external_submission',
+    '投稿方式と承認位置が投稿方針に保存されていない'
+  );
+  assertScenario(
+    publishPlan.state.publishPlanActions.some((action) => (
+      action.id === publishPlan.publishPlanAction.id &&
+        action.destinationName === 'YouTube'
+    )),
+    '投稿方針が状態に保存されていない'
+  );
+  const publishPlanActivity = await requestJson(apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/activity`));
+  assertScenario(
+    publishPlanActivity.summary?.title === '投稿方針記録済み',
+    '投稿方針が現在状態要約に反映されていない'
+  );
+  assertScenario(
+    publishPlanActivity.events.some((event) => (
+      event.kind === 'publish_plan_action' &&
+        event.title === '投稿方針を記録'
+    )),
+    '投稿方針が監査タイムラインで追えない'
   );
   const publishedResultBeforeHandoffError = await expectRequestJsonFailure(
     apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/published-result`),
@@ -2442,6 +2546,33 @@ async function assertFinalReviewControls(apiBaseUrl, runtimeDir, sourceDraftId) 
   assertScenario(
     finalPackageActivity.summary?.title === '最終完了・公開パッケージ作成済み',
     '最終完了後の公開パッケージ作成が現在状態要約に反映されていない'
+  );
+  const finalPublishPlan = await requestJson(apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/publish-plan`), {
+    method: 'POST',
+    body: JSON.stringify({
+      destinationName: 'YouTube最終公開',
+      authMethod: 'manual_browser_session',
+      submissionMode: 'immediate_public',
+      approvalTiming: 'before_external_submission',
+      note: '最終完了後の公開パッケージは外部送信前に人間が承認してから公開する'
+    })
+  });
+  assertScenario(
+    finalPublishPlan.publishPlanAction?.manifestUri === packageAfterFinal.publishPackage.manifestUri,
+    '最終完了後の投稿方針が最新公開パッケージに紐付いていない'
+  );
+  assertScenario(
+    finalPublishPlan.publishPlanAction?.publishPackageCreatedAt === packageAfterFinal.publishPackage.createdAt,
+    '最終完了後の投稿方針が最新公開パッケージの作成日時に紐付いていない'
+  );
+  assertScenario(
+    finalPublishPlan.publishPlanAction?.submissionMode === 'immediate_public',
+    '最終完了後の投稿方式が投稿方針に保存されていない'
+  );
+  const finalPublishPlanActivity = await requestJson(apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/activity`));
+  assertScenario(
+    finalPublishPlanActivity.summary?.title === '最終完了・投稿方針記録済み',
+    '最終完了後の投稿方針が現在状態要約に反映されていない'
   );
   const finalHandoff = await requestJson(apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/publish-handoff`), {
     method: 'POST',

@@ -6,6 +6,9 @@ import { access, copyFile, mkdir, open, readFile, rm, stat, writeFile } from 'no
 import path from 'node:path';
 import {
   ARTIFACT_FILE_NAME_BY_KIND,
+  PUBLISH_APPROVAL_TIMING_OPTIONS,
+  PUBLISH_AUTH_METHOD_OPTIONS,
+  PUBLISH_SUBMISSION_MODE_OPTIONS,
   WORKFLOW_STEPS,
   type AgentOperationLog,
   type AgentOperationLogEventType,
@@ -26,6 +29,10 @@ import {
   type HumanReviewActionType,
   type OutputEntity,
   type PublishHandoffAction,
+  type PublishPlanAction,
+  type PublishApprovalTiming,
+  type PublishAuthMethod,
+  type PublishSubmissionMode,
   type PublishedResultAction,
   type RequestDraft,
   buildWebGeminiExternalReviewCommand,
@@ -150,6 +157,7 @@ type RequestDraftActivityEvent = {
     | 'final_review_action'
     | 'web_gemini_review_status'
     | 'publish_package_status'
+    | 'publish_plan_action'
     | 'publish_handoff_action'
     | 'published_result_action';
   occurredAt: string;
@@ -162,6 +170,7 @@ type RequestDraftActivityEvent = {
   decisionLogId?: string;
   humanReviewActionId?: string;
   finalReviewActionId?: string;
+  publishPlanActionId?: string;
   publishHandoffActionId?: string;
   publishedResultActionId?: string;
   fileRefId?: string;
@@ -878,6 +887,46 @@ function defaultPublishDescription(draft: RequestDraft, outputVideo: FileRef): s
 
 function publishPackageTextInput(value: unknown): string {
   return typeof value === 'string' ? value.trim() : '';
+}
+
+const publishAuthMethodLabels = new Map(PUBLISH_AUTH_METHOD_OPTIONS.map((option) => [option.value, option.label]));
+const publishSubmissionModeLabels = new Map(PUBLISH_SUBMISSION_MODE_OPTIONS.map((option) => [option.value, option.label]));
+const publishApprovalTimingLabels = new Map(PUBLISH_APPROVAL_TIMING_OPTIONS.map((option) => [option.value, option.label]));
+
+function publishAuthMethodLabel(value: PublishAuthMethod): string {
+  return publishAuthMethodLabels.get(value) ?? value;
+}
+
+function publishSubmissionModeLabel(value: PublishSubmissionMode): string {
+  return publishSubmissionModeLabels.get(value) ?? value;
+}
+
+function publishApprovalTimingLabel(value: PublishApprovalTiming): string {
+  return publishApprovalTimingLabels.get(value) ?? value;
+}
+
+function normalizePublishAuthMethod(value: unknown): { authMethod: PublishAuthMethod } | { error: string } {
+  if (typeof value !== 'string' || !publishAuthMethodLabels.has(value as PublishAuthMethod)) {
+    return { error: '投稿方針の認証方法を選択してください' };
+  }
+
+  return { authMethod: value as PublishAuthMethod };
+}
+
+function normalizePublishSubmissionMode(value: unknown): { submissionMode: PublishSubmissionMode } | { error: string } {
+  if (typeof value !== 'string' || !publishSubmissionModeLabels.has(value as PublishSubmissionMode)) {
+    return { error: '投稿方針の投稿方式を選択してください' };
+  }
+
+  return { submissionMode: value as PublishSubmissionMode };
+}
+
+function normalizePublishApprovalTiming(value: unknown): { approvalTiming: PublishApprovalTiming } | { error: string } {
+  if (typeof value !== 'string' || !publishApprovalTimingLabels.has(value as PublishApprovalTiming)) {
+    return { error: '投稿方針の承認位置を選択してください' };
+  }
+
+  return { approvalTiming: value as PublishApprovalTiming };
 }
 
 function normalizePublishedUrl(value: unknown): { publishedUrl: string } | { error: string } {
@@ -1701,6 +1750,24 @@ function buildPublishPackageActivityError(
   };
 }
 
+function latestPublishPlanActionForPackage(
+  state: LoadedState,
+  requestDraftId: string,
+  publishPackage: PublishPackageArtifact | null
+): PublishPlanAction | undefined {
+  if (!publishPackage) {
+    return undefined;
+  }
+
+  return latestByCreatedAt(state.publishPlanActions.filter(
+    (action) =>
+      action.requestDraftId === requestDraftId &&
+      action.outputVideoUri === publishPackage.outputVideoUri &&
+      action.manifestUri === publishPackage.manifestUri &&
+      action.publishPackageCreatedAt === publishPackage.createdAt
+  ));
+}
+
 function latestPublishHandoffActionForPackage(
   state: LoadedState,
   requestDraftId: string,
@@ -1735,6 +1802,28 @@ function latestPublishedResultActionForPackage(
       action.manifestUri === publishPackage.manifestUri &&
       action.publishPackageCreatedAt === publishPackage.createdAt
   ));
+}
+
+function buildPublishPlanActivity(action: PublishPlanAction): RequestDraftActivityEvent {
+  return {
+    id: `publish-plan:${action.id}`,
+    kind: 'publish_plan_action',
+    occurredAt: action.createdAt,
+    actor: 'user',
+    title: '投稿方針を記録',
+    detail: compactActivityText(
+      [
+        `投稿先: ${action.destinationName}`,
+        `認証: ${publishAuthMethodLabel(action.authMethod)}`,
+        `投稿方式: ${publishSubmissionModeLabel(action.submissionMode)}`,
+        `承認位置: ${publishApprovalTimingLabel(action.approvalTiming)}`,
+        action.note
+      ].filter(Boolean).join(' / '),
+      '外部投稿作業へ渡す前の投稿方針を保存しました'
+    ),
+    requestDraftId: action.requestDraftId,
+    publishPlanActionId: action.id
+  };
 }
 
 function buildPublishHandoffActivity(action: PublishHandoffAction): RequestDraftActivityEvent {
@@ -1977,6 +2066,39 @@ function buildPublishPackageActivitySummary(
   };
 }
 
+function buildPublishPlanActivitySummary(
+  baseSummary: RequestDraftActivitySummary,
+  state: LoadedState,
+  draft: RequestDraft,
+  packageResult: { publishPackage: PublishPackageArtifact | null } | { error: string }
+): RequestDraftActivitySummary {
+  if (baseSummary.status !== 'completed' || 'error' in packageResult || !packageResult.publishPackage) {
+    return baseSummary;
+  }
+
+  const plan = latestPublishPlanActionForPackage(state, draft.id, packageResult.publishPackage);
+  if (!plan) {
+    return baseSummary;
+  }
+
+  return {
+    ...baseSummary,
+    title: baseSummary.title.includes('最終完了')
+      ? '最終完了・投稿方針記録済み'
+      : '投稿方針記録済み',
+    detail: compactActivityText(
+      [
+        `投稿先: ${plan.destinationName}`,
+        `認証: ${publishAuthMethodLabel(plan.authMethod)}`,
+        `投稿方式: ${publishSubmissionModeLabel(plan.submissionMode)}`,
+        `承認位置: ${publishApprovalTimingLabel(plan.approvalTiming)}`
+      ].join(' / '),
+      '外部投稿作業へ渡す前の投稿方針を保存済みです'
+    ),
+    nextAction: '投稿方針を確認し、公開作業への引き渡しを記録します'
+  };
+}
+
 function buildPublishHandoffActivitySummary(
   baseSummary: RequestDraftActivitySummary,
   state: LoadedState,
@@ -2154,6 +2276,10 @@ function buildRequestDraftActivity(state: LoadedState, draft: RequestDraft): Req
       requestDraftId: draft.id,
       finalReviewActionId: action.id
     });
+  }
+
+  for (const action of state.publishPlanActions.filter((item) => item.requestDraftId === draft.id)) {
+    events.push(buildPublishPlanActivity(action));
   }
 
   for (const action of state.publishHandoffActions.filter((item) => item.requestDraftId === draft.id)) {
@@ -3357,7 +3483,8 @@ router.get('/request-drafts/:id/activity', async (request, response) => {
   );
   const finalReviewSummary = buildFinalReviewActivitySummary(webGeminiSummary, state, draft, outputVideo);
   const publishPackageSummary = buildPublishPackageActivitySummary(finalReviewSummary, draft, outputVideo, publishPackageResult);
-  const publishHandoffSummary = buildPublishHandoffActivitySummary(publishPackageSummary, state, draft, publishPackageResult);
+  const publishPlanSummary = buildPublishPlanActivitySummary(publishPackageSummary, state, draft, publishPackageResult);
+  const publishHandoffSummary = buildPublishHandoffActivitySummary(publishPlanSummary, state, draft, publishPackageResult);
   const summary = buildPublishedResultActivitySummary(publishHandoffSummary, state, draft, publishPackageResult);
 
   response.json({
@@ -3529,6 +3656,83 @@ router.post('/request-drafts/:id/publish-package', async (request, response) => 
   }
 });
 
+router.post('/request-drafts/:id/publish-plan', async (request, response) => {
+  const state = await loadStateWithClaimRecovery();
+  const draft = findById(state.requestDrafts, request.params.id);
+  if (!draft) {
+    response.status(404).json({ error: '実行前下書きが見つかりません', state });
+    return;
+  }
+
+  const outputVideo = latestOutputVideoFileRef(state, draft.id);
+  const outputVideoError = await validatePublishPackageOutputVideo(draft, outputVideo);
+  if (outputVideoError) {
+    response.status(409).json({ error: outputVideoError, state });
+    return;
+  }
+
+  const packageResult = await readPublishPackageArtifact(draft.id);
+  if ('error' in packageResult) {
+    response.status(409).json({ error: packageResult.error, state });
+    return;
+  }
+  if (!packageResult.publishPackage) {
+    response.status(409).json({ error: '公開パッケージを作成してから投稿方針を記録してください', state });
+    return;
+  }
+
+  const mismatch = ensurePublishPackageMatchesOutputVideo(packageResult.publishPackage, outputVideo);
+  if (mismatch) {
+    response.status(409).json({ error: mismatch.error, state });
+    return;
+  }
+
+  const input = recordValue(request.body);
+  const destinationName = trimText(input.destinationName);
+  if (!destinationName) {
+    response.status(400).json({ error: '投稿先を入力してください', state });
+    return;
+  }
+
+  const authMethod = normalizePublishAuthMethod(input.authMethod);
+  if ('error' in authMethod) {
+    response.status(400).json({ error: authMethod.error, state });
+    return;
+  }
+
+  const submissionMode = normalizePublishSubmissionMode(input.submissionMode);
+  if ('error' in submissionMode) {
+    response.status(400).json({ error: submissionMode.error, state });
+    return;
+  }
+
+  const approvalTiming = normalizePublishApprovalTiming(input.approvalTiming);
+  if ('error' in approvalTiming) {
+    response.status(400).json({ error: approvalTiming.error, state });
+    return;
+  }
+
+  const createdAt = nowIso();
+  const plan: PublishPlanAction = {
+    id: createId('publish_plan'),
+    requestDraftId: draft.id,
+    outputVideoUri: packageResult.publishPackage.outputVideoUri,
+    manifestUri: packageResult.publishPackage.manifestUri,
+    publishPackageCreatedAt: packageResult.publishPackage.createdAt,
+    destinationName,
+    authMethod: authMethod.authMethod,
+    submissionMode: submissionMode.submissionMode,
+    approvalTiming: approvalTiming.approvalTiming,
+    note: trimText(input.note) || '外部投稿作業へ渡す前の投稿方針を確認しました',
+    createdAt
+  };
+
+  draft.updatedAt = createdAt;
+  state.publishPlanActions.push(plan);
+  await saveState(state);
+  response.json({ publishPlanAction: plan, state });
+});
+
 router.post('/request-drafts/:id/publish-handoff', async (request, response) => {
   const state = await loadStateWithClaimRecovery();
   const draft = findById(state.requestDrafts, request.params.id);
@@ -3557,6 +3761,12 @@ router.post('/request-drafts/:id/publish-handoff', async (request, response) => 
   const mismatch = ensurePublishPackageMatchesOutputVideo(packageResult.publishPackage, outputVideo);
   if (mismatch) {
     response.status(409).json({ error: mismatch.error, state });
+    return;
+  }
+
+  const publishPlan = latestPublishPlanActionForPackage(state, draft.id, packageResult.publishPackage);
+  if (!publishPlan) {
+    response.status(409).json({ error: '投稿方針を記録してから公開作業へ渡してください', state });
     return;
   }
 
@@ -3607,6 +3817,12 @@ router.post('/request-drafts/:id/published-result', async (request, response) =>
   const mismatch = ensurePublishPackageMatchesOutputVideo(packageResult.publishPackage, outputVideo);
   if (mismatch) {
     response.status(409).json({ error: mismatch.error, state });
+    return;
+  }
+
+  const publishPlan = latestPublishPlanActionForPackage(state, draft.id, packageResult.publishPackage);
+  if (!publishPlan) {
+    response.status(409).json({ error: '投稿方針を記録してから公開済みURLを記録してください', state });
     return;
   }
 

@@ -52,6 +52,7 @@ POST /api/control-reviews/:id/request-changes
 POST /api/request-drafts/:id/final-review
 GET  /api/request-drafts/:id/publish-package
 POST /api/request-drafts/:id/publish-package
+POST /api/request-drafts/:id/publish-plan
 POST /api/request-drafts/:id/publish-handoff
 POST /api/request-drafts/:id/published-result
 POST /api/request-drafts/:id/cancel-agent-work
@@ -64,6 +65,7 @@ POST /api/agent-requests/:id/retry
 - 内容選択、使用素材確認、動画生成前確認で、承認、却下、作り直し理由を保存する。
 - 完成動画を人間が確認し、投稿可能または最終完了として記録する。動画生成完了とは別の人間判断として扱う。
 - 人間が確認済みの完成動画から、公開タイトル、公開説明、公開用動画、説明メモ、manifestを作成する。公開タイトルと説明は人間が確認・編集した入力として扱い、外部サービスへの投稿は自動実行しない。
+- 作成済み公開パッケージについて、投稿先、認証方法、投稿方式、承認位置を投稿方針として記録する。外部投稿作業へ渡す前に必要な記録であり、APIキーや認証情報そのものは保存しない。
 - 作成済み公開パッケージを外部投稿作業へ渡したことを、投稿先名とメモとして記録する。
 - 外部サービスで公開結果を確認した後、公開済みURLとメモを現在の公開パッケージに紐づけて記録する。外部サービスへの投稿は自動実行しない。
 - 最終完了として記録した完成動画は、同じ下書き上でWeb Geminiレビュー準備、レビュー保存、レビュー反映、生成済み動画からの作り直しを拒否する。
@@ -95,7 +97,7 @@ POST /api/agent-requests/:id/fail
 
 認証対象外:
 
-- UIが使う状態確認、依頼作成、依頼却下、人間確認、完成動画の最終判断、公開パッケージ作成、公開作業への引き渡し記録、公開済みURL記録、中止、再実行、Web Geminiレビュー準備。
+- UIが使う状態確認、依頼作成、依頼却下、人間確認、完成動画の最終判断、公開パッケージ作成、投稿方針記録、公開作業への引き渡し記録、公開済みURL記録、中止、再実行、Web Geminiレビュー準備。
 - これらは人間制御APIであり、AIエージェントが自動で進めるAPIとは分ける。
 
 ## 人間UI認証
@@ -105,7 +107,7 @@ POST /api/agent-requests/:id/fail
 対象:
 
 - 状態確認API。
-- 依頼作成、依頼承認、却下、人間確認、完成動画の最終判断、公開パッケージ作成、公開作業への引き渡し記録、公開済みURL記録、中止、再実行。
+- 依頼作成、依頼承認、却下、人間確認、完成動画の最終判断、公開パッケージ作成、投稿方針記録、公開作業への引き渡し記録、公開済みURL記録、中止、再実行。
 - Web Geminiレビュー準備、保存、反映。
 - `/api/artifacts/...` の成果物配信。
 
@@ -376,7 +378,7 @@ GET /api/request-drafts/:id/activity
 用途:
 
 - 人間が下書き単位で現在状態を確認する。
-- AI判断、人間判断、AI操作ログ、Web Geminiレビュー状態、公開パッケージ作成状態、公開作業への引き渡し記録、公開済みURL記録を同じ時系列で確認する。
+- AI判断、人間判断、AI操作ログ、Web Geminiレビュー状態、公開パッケージ作成状態、投稿方針記録、公開作業への引き渡し記録、公開済みURL記録を同じ時系列で確認する。
 - 失敗時に、どの工程が誰の取得後に止まったか確認する。
 
 AI操作ログは `agent_operation_log` として返る。

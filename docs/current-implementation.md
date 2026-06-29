@@ -43,6 +43,7 @@ UIは依頼と状態を確認する
 - 最終完了として記録した完成動画は、同じ下書き上でWeb Geminiレビュー準備、レビュー保存、レビュー反映、生成済み動画からの作り直しを受け付けない。変更する場合は新しい依頼として作る。
 - 投稿可能または最終完了として確認した完成動画から、公開作業へ渡す公開パッケージを作成できる。公開パッケージには、人間が確認・編集した公開タイトルと説明、公開用動画、説明メモ、manifestが含まれる。
 - 公開パッケージは、現在の完成動画URIとSHA-256が一致する場合だけ現在状態と履歴に表示する。別の動画を生成した後に古い公開パッケージを現在の成果物として扱わない。
+- 公開パッケージ作成後、投稿先、認証方法、投稿方式、承認位置を投稿方針として記録できる。投稿方針がない公開パッケージは、公開作業への引き渡しや公開済みURL記録へ進めない。
 - 公開パッケージを外部投稿作業へ渡したことを、投稿先名とメモつきで記録できる。
 - 外部サービスで公開結果を確認した後、公開済みURLとメモを現在の公開パッケージに紐づけて記録できる。
 - 実行前下書きを、理由つきで却下できる。却下した下書きはAI作業キューを作らない。
@@ -80,7 +81,7 @@ UIは依頼と状態を確認する
 - backend内でLLMを実行しない。
 - backend内で動画生成を実行しない。
 - backend内でGemini APIによる演出作成や完成品レビューを実行しない。
-- 外部サービスへの投稿は自動実行しない。現時点の公開処理は、確認済み動画を公開作業へ渡せるファイル一式、引き渡し記録、公開済みURLの記録まで。
+- 外部サービスへの投稿は自動実行しない。現時点の公開処理は、確認済み動画を公開作業へ渡せるファイル一式、投稿方針、引き渡し記録、公開済みURLの記録まで。
 - Web Geminiへの実アップロードは外部送信を伴うため、準備確認とは分けて明示実行として扱う。
 - Gemini API接続は `@google/genai` を使う。APIキー指定とVertex AI指定の両方を同じSDK経路で扱う。
 
@@ -141,6 +142,7 @@ POST /api/request-drafts/:id/apply-web-gemini-review
 POST /api/request-drafts/:id/final-review
 GET /api/request-drafts/:id/publish-package
 POST /api/request-drafts/:id/publish-package
+POST /api/request-drafts/:id/publish-plan
 POST /api/request-drafts/:id/publish-handoff
 POST /api/request-drafts/:id/published-result
 POST /api/request-drafts/:id/cancel-agent-work
@@ -163,6 +165,7 @@ POST /api/agent-requests/:id/retry
 - AI操作ログ
 - 完成動画に対する人間の投稿可能判断、最終完了判断
 - 公開作業への引き渡し記録
+- 投稿方針の記録
 - 公開済みURLの記録
 - 公開パッケージそのものは状態へ埋め込まず、成果物ファイルとして保存する。状態や履歴では短い説明と参照URIだけを扱う。
 

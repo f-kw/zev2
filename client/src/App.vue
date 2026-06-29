@@ -2,6 +2,9 @@
 import { computed, onBeforeUnmount, onMounted, reactive, ref, watch } from 'vue';
 import {
   DEFAULT_GEMINI_MODEL,
+  PUBLISH_APPROVAL_TIMING_OPTIONS,
+  PUBLISH_AUTH_METHOD_OPTIONS,
+  PUBLISH_SUBMISSION_MODE_OPTIONS,
   findById,
   latestByCreatedAt,
   readablePurposeForWebGeminiReview,
@@ -11,6 +14,9 @@ import {
   type FinalReviewAction,
   type FinalReviewActionType,
   type FileRef,
+  type PublishApprovalTiming,
+  type PublishAuthMethod,
+  type PublishSubmissionMode,
   type RequestDraftInput
 } from '@zev2/shared';
 import {
@@ -31,6 +37,7 @@ import {
   loginHumanUi,
   logoutHumanUi,
   prepareWebGeminiReview,
+  submitPublishPlan,
   submitPublishHandoff,
   submitPublishedResult,
   type PublishPackageArtifact,
@@ -91,6 +98,12 @@ const publishPackageMessage = ref('');
 const activePublishPackageAction = ref<'create_package' | ''>('');
 const publishTitleInput = ref('');
 const publishDescriptionInput = ref('');
+const publishPlanDestinationInput = ref('YouTube');
+const publishPlanAuthMethodInput = ref<PublishAuthMethod>('manual_browser_session');
+const publishPlanSubmissionModeInput = ref<PublishSubmissionMode>('draft_only');
+const publishPlanApprovalTimingInput = ref<PublishApprovalTiming>('before_external_submission');
+const publishPlanNoteInput = ref('');
+const activePublishPlan = ref(false);
 const publishHandoffTargetInput = ref('外部投稿作業');
 const publishHandoffNoteInput = ref('');
 const activePublishHandoff = ref(false);
@@ -378,6 +391,31 @@ const defaultPublishDescription = computed(() => {
   ].join('\n');
 });
 
+const currentPublishPlanAction = computed(() => {
+  const draft = currentDraft.value;
+  const packageArtifact = publishPackage.value;
+  if (!draft || !packageArtifact) {
+    return undefined;
+  }
+
+  return latestByCreatedAt(store.state.publishPlanActions.filter(
+    (action) =>
+      action.requestDraftId === draft.id &&
+      action.outputVideoUri === packageArtifact.outputVideoUri &&
+      action.manifestUri === packageArtifact.manifestUri &&
+      action.publishPackageCreatedAt === packageArtifact.createdAt
+  ));
+});
+
+const publishPlanStatusText = computed(() => {
+  const plan = currentPublishPlanAction.value;
+  if (!plan) {
+    return '投稿方針は未記録';
+  }
+
+  return `投稿方針: ${plan.destinationName}`;
+});
+
 const currentPublishHandoffAction = computed(() => {
   const draft = currentDraft.value;
   const packageArtifact = publishPackage.value;
@@ -397,6 +435,9 @@ const currentPublishHandoffAction = computed(() => {
 const publishHandoffStatusText = computed(() => {
   const handoff = currentPublishHandoffAction.value;
   if (!handoff) {
+    if (!currentPublishPlanAction.value) {
+      return '投稿方針の記録後に引き渡せます';
+    }
     return '公開作業への引き渡しは未記録';
   }
 
@@ -432,9 +473,21 @@ const canSubmitPublishHandoff = computed(() =>
   Boolean(
     currentDraft.value &&
       publishPackage.value &&
+      currentPublishPlanAction.value &&
       !agentOperationLocked.value &&
       !publishPackageLoading.value &&
       !activePublishHandoff.value
+  )
+);
+
+const canSubmitPublishPlan = computed(() =>
+  Boolean(
+    currentDraft.value &&
+      publishPackage.value &&
+      publishPlanDestinationInput.value.trim() &&
+      !agentOperationLocked.value &&
+      !publishPackageLoading.value &&
+      !activePublishPlan.value
   )
 );
 
@@ -1478,6 +1531,11 @@ async function createCurrentPublishPackage() {
     publishPackage.value = result.publishPackage;
     publishTitleInput.value = result.publishPackage.title;
     publishDescriptionInput.value = result.publishPackage.description;
+    publishPlanDestinationInput.value = 'YouTube';
+    publishPlanAuthMethodInput.value = 'manual_browser_session';
+    publishPlanSubmissionModeInput.value = 'draft_only';
+    publishPlanApprovalTimingInput.value = 'before_external_submission';
+    publishPlanNoteInput.value = '';
     publishHandoffNoteInput.value = publishHandoffNoteInput.value.trim() ||
       `公開用ファイルを確認しました: ${result.publishPackage.manifestUri}`;
     publishedResultUrlInput.value = '';
@@ -1490,6 +1548,38 @@ async function createCurrentPublishPackage() {
   } finally {
     publishPackageLoading.value = false;
     activePublishPackageAction.value = '';
+  }
+}
+
+async function submitCurrentPublishPlan() {
+  const draft = currentDraft.value;
+  if (!draft || !canSubmitPublishPlan.value) {
+    return;
+  }
+
+  activePublishPlan.value = true;
+  publishPackageMessage.value = '';
+  try {
+    const result = await submitPublishPlan(draft.id, {
+      destinationName: publishPlanDestinationInput.value.trim(),
+      authMethod: publishPlanAuthMethodInput.value,
+      submissionMode: publishPlanSubmissionModeInput.value,
+      approvalTiming: publishPlanApprovalTimingInput.value,
+      note: publishPlanNoteInput.value.trim() || '外部投稿作業へ渡す前の投稿方針を確認しました'
+    });
+    store.state = result.state;
+    publishPlanDestinationInput.value = result.publishPlanAction.destinationName;
+    publishPlanAuthMethodInput.value = result.publishPlanAction.authMethod;
+    publishPlanSubmissionModeInput.value = result.publishPlanAction.submissionMode;
+    publishPlanApprovalTimingInput.value = result.publishPlanAction.approvalTiming;
+    publishPlanNoteInput.value = result.publishPlanAction.note;
+    publishHandoffTargetInput.value = result.publishPlanAction.destinationName;
+    publishPackageMessage.value = '投稿方針を記録しました';
+    await refreshRequestActivity();
+  } catch (error) {
+    publishPackageMessage.value = formatApiError(error);
+  } finally {
+    activePublishPlan.value = false;
   }
 }
 
@@ -1729,6 +1819,11 @@ watch(
     publishPackageMessage.value = '';
     publishTitleInput.value = defaultPublishTitle.value;
     publishDescriptionInput.value = defaultPublishDescription.value;
+    publishPlanDestinationInput.value = 'YouTube';
+    publishPlanAuthMethodInput.value = 'manual_browser_session';
+    publishPlanSubmissionModeInput.value = 'draft_only';
+    publishPlanApprovalTimingInput.value = 'before_external_submission';
+    publishPlanNoteInput.value = '';
     publishHandoffTargetInput.value = '外部投稿作業';
     publishHandoffNoteInput.value = '';
     publishedResultUrlInput.value = '';
@@ -2173,6 +2268,68 @@ watch(
                 <a :href="uriWithRef(publishPackage.noteUri, publishPackage.createdAt)" target="_blank" rel="noreferrer">説明メモ</a>
                 <a :href="uriWithRef(publishPackage.manifestUri, publishPackage.createdAt)" target="_blank" rel="noreferrer">manifest</a>
               </div>
+              <span v-if="publishPackage" class="publish-handoff-status">{{ publishPlanStatusText }}</span>
+              <label v-if="publishPackage" class="publish-package-input">
+                投稿先
+                <input
+                  v-model="publishPlanDestinationInput"
+                  type="text"
+                  :disabled="agentOperationLocked || activePublishPlan"
+                />
+              </label>
+              <label v-if="publishPackage" class="publish-package-input">
+                認証方法
+                <select
+                  v-model="publishPlanAuthMethodInput"
+                  :disabled="agentOperationLocked || activePublishPlan"
+                >
+                  <option
+                    v-for="option in PUBLISH_AUTH_METHOD_OPTIONS"
+                    :key="option.value"
+                    :value="option.value"
+                  >
+                    {{ option.label }}
+                  </option>
+                </select>
+              </label>
+              <label v-if="publishPackage" class="publish-package-input">
+                投稿方式
+                <select
+                  v-model="publishPlanSubmissionModeInput"
+                  :disabled="agentOperationLocked || activePublishPlan"
+                >
+                  <option
+                    v-for="option in PUBLISH_SUBMISSION_MODE_OPTIONS"
+                    :key="option.value"
+                    :value="option.value"
+                  >
+                    {{ option.label }}
+                  </option>
+                </select>
+              </label>
+              <label v-if="publishPackage" class="publish-package-input">
+                承認位置
+                <select
+                  v-model="publishPlanApprovalTimingInput"
+                  :disabled="agentOperationLocked || activePublishPlan"
+                >
+                  <option
+                    v-for="option in PUBLISH_APPROVAL_TIMING_OPTIONS"
+                    :key="option.value"
+                    :value="option.value"
+                  >
+                    {{ option.label }}
+                  </option>
+                </select>
+              </label>
+              <label v-if="publishPackage" class="publish-package-input">
+                投稿方針メモ
+                <textarea
+                  v-model="publishPlanNoteInput"
+                  rows="2"
+                  :disabled="agentOperationLocked || activePublishPlan"
+                />
+              </label>
               <span v-if="publishPackage" class="publish-handoff-status">{{ publishHandoffStatusText }}</span>
               <label v-if="publishPackage" class="publish-package-input">
                 引き渡し先
@@ -2224,6 +2381,15 @@ watch(
                 @click="createCurrentPublishPackage"
               >
                 {{ activePublishPackageAction === 'create_package' ? '作成中' : publishPackage ? '公開用ファイルを作り直す' : '公開用ファイルを作る' }}
+              </button>
+              <button
+                v-if="publishPackage"
+                type="button"
+                class="secondary-button"
+                :disabled="!canSubmitPublishPlan"
+                @click="submitCurrentPublishPlan"
+              >
+                {{ activePublishPlan ? '記録中' : currentPublishPlanAction ? '投稿方針を記録し直す' : '投稿方針を記録' }}
               </button>
               <button
                 v-if="publishPackage"
@@ -3485,7 +3651,8 @@ video {
 }
 
 .publish-package-input input,
-.publish-package-input textarea {
+.publish-package-input textarea,
+.publish-package-input select {
   width: 100%;
   border: 1px solid rgba(0, 240, 255, 0.22);
   padding: 7px 8px;
@@ -3500,13 +3667,15 @@ video {
 }
 
 .publish-package-input input:focus,
-.publish-package-input textarea:focus {
+.publish-package-input textarea:focus,
+.publish-package-input select:focus {
   outline: 1px solid rgba(0, 240, 255, 0.58);
   outline-offset: 1px;
 }
 
 .publish-package-input input:disabled,
-.publish-package-input textarea:disabled {
+.publish-package-input textarea:disabled,
+.publish-package-input select:disabled {
   opacity: 0.62;
 }
 

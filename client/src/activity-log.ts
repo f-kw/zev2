@@ -28,6 +28,7 @@ export function activityKindClass(kind: RequestDraftActivityEvent['kind']): stri
   if (
     kind === 'human_review_action' ||
     kind === 'final_review_action' ||
+    kind === 'publish_plan_action' ||
     kind === 'publish_handoff_action' ||
     kind === 'published_result_action'
   ) {
@@ -58,6 +59,7 @@ export function activityCategory(event: RequestDraftActivityEvent): ActivityLogC
   if (
     event.kind === 'human_review_action' ||
     event.kind === 'final_review_action' ||
+    event.kind === 'publish_plan_action' ||
     event.kind === 'publish_handoff_action' ||
     event.kind === 'published_result_action' ||
     event.kind === 'human_review_required'

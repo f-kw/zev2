@@ -2,6 +2,9 @@ import { mkdir, readFile, rename, writeFile } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import path from 'node:path';
 import {
+  PUBLISH_APPROVAL_TIMING_OPTIONS,
+  PUBLISH_AUTH_METHOD_OPTIONS,
+  PUBLISH_SUBMISSION_MODE_OPTIONS,
   WORKFLOW_STEPS,
   createInitialState,
   recordValue,
@@ -12,6 +15,9 @@ import {
   type FinalReviewActionType,
   type FileRefKind,
   type HumanReviewActionType,
+  type PublishApprovalTiming,
+  type PublishAuthMethod,
+  type PublishSubmissionMode,
   type Zev2State
 } from '@zev2/shared';
 
@@ -49,6 +55,13 @@ const currentControlReviewStatuses = new Set<ControlReviewStatus>([
 ]);
 const currentHumanReviewActions = new Set<HumanReviewActionType>(['approve', 'reject', 'request_changes']);
 const currentFinalReviewActions = new Set<FinalReviewActionType>(['publish_ready', 'final_complete']);
+const currentPublishAuthMethods = new Set<PublishAuthMethod>(PUBLISH_AUTH_METHOD_OPTIONS.map((option) => option.value));
+const currentPublishSubmissionModes = new Set<PublishSubmissionMode>(
+  PUBLISH_SUBMISSION_MODE_OPTIONS.map((option) => option.value)
+);
+const currentPublishApprovalTimings = new Set<PublishApprovalTiming>(
+  PUBLISH_APPROVAL_TIMING_OPTIONS.map((option) => option.value)
+);
 const currentAgentOperationLogEvents = new Set<AgentOperationLogEventType>([
   'draft_created',
   'draft_approved',
@@ -123,6 +136,23 @@ function isCurrentFinalReviewAction(value: unknown): boolean {
   );
 }
 
+function isCurrentPublishPlanAction(value: unknown): boolean {
+  const action = recordValue(value);
+  return (
+    typeof action.id === 'string' &&
+    typeof action.requestDraftId === 'string' &&
+    typeof action.outputVideoUri === 'string' &&
+    typeof action.manifestUri === 'string' &&
+    typeof action.publishPackageCreatedAt === 'string' &&
+    typeof action.destinationName === 'string' &&
+    currentPublishAuthMethods.has(action.authMethod as PublishAuthMethod) &&
+    currentPublishSubmissionModes.has(action.submissionMode as PublishSubmissionMode) &&
+    currentPublishApprovalTimings.has(action.approvalTiming as PublishApprovalTiming) &&
+    typeof action.note === 'string' &&
+    typeof action.createdAt === 'string'
+  );
+}
+
 function isCurrentPublishHandoffAction(value: unknown): boolean {
   const action = recordValue(value);
   return (
@@ -173,6 +203,7 @@ function withCurrentStateShape(value: unknown): unknown {
     ...state,
     agentOperationLogs: Array.isArray(state.agentOperationLogs) ? state.agentOperationLogs : [],
     finalReviewActions: Array.isArray(state.finalReviewActions) ? state.finalReviewActions : [],
+    publishPlanActions: Array.isArray(state.publishPlanActions) ? state.publishPlanActions : [],
     publishHandoffActions: Array.isArray(state.publishHandoffActions) ? state.publishHandoffActions : [],
     publishedResultActions: Array.isArray(state.publishedResultActions) ? state.publishedResultActions : []
   };
@@ -194,6 +225,7 @@ function isZev2State(value: unknown): value is Zev2State {
     Array.isArray(state.controlReviewItems) &&
     Array.isArray(state.humanReviewActions) &&
     Array.isArray(state.finalReviewActions) &&
+    Array.isArray(state.publishPlanActions) &&
     Array.isArray(state.publishHandoffActions) &&
     Array.isArray(state.publishedResultActions) &&
     state.requestDrafts.every(isCurrentRequestDraft) &&
@@ -203,6 +235,7 @@ function isZev2State(value: unknown): value is Zev2State {
     state.controlReviewItems.every(isCurrentControlReview) &&
     state.humanReviewActions.every(isCurrentHumanReviewAction) &&
     state.finalReviewActions.every(isCurrentFinalReviewAction) &&
+    state.publishPlanActions.every(isCurrentPublishPlanAction) &&
     state.publishHandoffActions.every(isCurrentPublishHandoffAction) &&
     state.publishedResultActions.every(isCurrentPublishedResultAction)
   );
