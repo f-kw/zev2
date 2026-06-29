@@ -1091,6 +1091,10 @@ function agentOperationLogTitle(log: AgentOperationLog): string {
     return '依頼承認を記録';
   }
 
+  if (log.eventType === 'draft_rejected') {
+    return '依頼却下を記録';
+  }
+
   if (log.eventType === 'agent_request_created') {
     return 'AI作業作成を記録';
   }
@@ -2701,6 +2705,43 @@ router.post('/request-drafts/:id/approve', async (request, response) => {
     agentRequests: selectAgentRequests(state.agentRequests, agentRequestIds),
     state
   });
+});
+
+router.post('/request-drafts/:id/reject', async (request, response) => {
+  const state = await loadState();
+  const draft = findById(state.requestDrafts, request.params.id);
+
+  if (!draft) {
+    response.status(404).json({ error: '実行前下書きが見つかりません' });
+    return;
+  }
+
+  const reason = trimText(request.body?.reason);
+  if (!reason) {
+    response.status(400).json({ error: '下書きの却下には理由が必要です', state });
+    return;
+  }
+
+  if (draft.status !== 'draft') {
+    response.status(409).json({ error: 'この下書きはすでに処理済みです', state });
+    return;
+  }
+
+  draft.status = 'rejected';
+  draft.updatedAt = nowIso();
+  appendAgentOperationLog(state, {
+    eventType: 'draft_rejected',
+    requestDraftId: draft.id,
+    actor: 'user',
+    fromStatus: 'draft',
+    toStatus: draft.status,
+    detail: '人間が実行前下書きを却下した',
+    errorMessage: reason,
+    createdAt: draft.updatedAt
+  });
+  await saveState(state);
+
+  response.json({ draft, state });
 });
 
 router.get('/agent-requests/next', async (_, response) => {

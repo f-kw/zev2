@@ -154,6 +154,14 @@ export async function approveDraft(id: string): Promise<Zev2State> {
   return response.data.state;
 }
 
+export async function rejectDraft(id: string, reason: string): Promise<{
+  draft: RequestDraft;
+  state: Zev2State;
+}> {
+  const response = await api.post(`/request-drafts/${id}/reject`, { reason });
+  return response.data;
+}
+
 export async function fetchNextAgentRequest(): Promise<AgentRequest | null> {
   const response = await api.get('/agent-requests/next');
   return response.data.request;

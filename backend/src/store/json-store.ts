@@ -50,6 +50,7 @@ const currentHumanReviewActions = new Set<HumanReviewActionType>(['approve', 're
 const currentAgentOperationLogEvents = new Set<AgentOperationLogEventType>([
   'draft_created',
   'draft_approved',
+  'draft_rejected',
   'agent_request_created',
   'agent_request_next_returned',
   'agent_request_claimed',

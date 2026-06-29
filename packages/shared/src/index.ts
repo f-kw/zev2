@@ -103,6 +103,7 @@ export type DecisionLogActor = 'agent' | 'runner' | 'backend' | 'system' | 'user
 export type AgentOperationLogEventType =
   | 'draft_created'
   | 'draft_approved'
+  | 'draft_rejected'
   | 'agent_request_created'
   | 'agent_request_next_returned'
   | 'agent_request_claimed'

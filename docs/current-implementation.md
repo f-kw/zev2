@@ -39,6 +39,7 @@ UIは依頼と状態を確認する
 - 修正依頼では、人間が最後に承認したところ以降のAI作成部分を作り直せる。
 - 完成動画に対して、Web Gemini演出レビューの準備、実行ログ保存、レビュー保存、レビュー反映による演出作成前からの作り直しができる。
 - Web Geminiレビューの準備、実行中、保存済み、反映済み、失敗は作業履歴と現在状態サマリで確認できる。
+- 実行前下書きを、理由つきで却下できる。却下した下書きはAI作業キューを作らない。
 - AI作業中の中止APIがあり、確認待ちも中止操作による却下として閉じられる。
 - 下書きごとの作業履歴APIで、AI判断、人間判断、外部レビュー、現在状態サマリを確認できる。
 - 承認後にdry-run runnerを自動起動できる。
@@ -48,7 +49,7 @@ UIは依頼と状態を確認する
 - 同じ作業の二重取得、取得者が違う完了報告、取得者が違う失敗報告を拒否できる。
 - 期限切れした取得中作業は、状態確認または次作業取得時に復旧され、再取得可能になる。
 - AIエージェントはAPIで作業の完了または失敗を報告できる。
-- 依頼作成、承認、作業作成、次作業返却、作業取得、完了、失敗、期限切れ復旧をAI操作ログとして保存できる。
+- 依頼作成、承認、却下、作業作成、次作業返却、作業取得、完了、失敗、期限切れ復旧をAI操作ログとして保存できる。
 - 下書きごとの作業履歴APIで、AI操作ログを短い説明と成果物参照IDとして確認できる。
 - `next -> claim -> complete/fail` のAIエージェントAPI契約をシナリオテストで固定している。
 - dry-run runnerで、承認済み作業をAPI経由で進め、人間確認が必要なところで止められる。
@@ -104,6 +105,7 @@ POST /api/agent-requests/:id/fail
 ```text
 POST /api/request-drafts
 POST /api/request-drafts/:id/approve
+POST /api/request-drafts/:id/reject
 ```
 
 承認APIは、承認済み作業キューを作った後にdry-run runnerをバックグラウンド起動し、runner完了までは待たずに応答する。
@@ -120,6 +122,7 @@ POST /api/request-drafts/:id/web-gemini-review/prepare
 POST /api/request-drafts/:id/web-gemini-review
 POST /api/request-drafts/:id/apply-web-gemini-review
 POST /api/request-drafts/:id/cancel-agent-work
+POST /api/agent-requests/:id/retry
 ```
 
 詳細は `docs/ai-agent-api.md` にまとめている。
@@ -188,7 +191,7 @@ pnpm run type-check
 
 直近では、型検査と隔離runtimeでの実行確認が成功している。
 確認した流れは、動画参照、ZEVローカルSTT、固定データによる内容候補、使用素材構成、固定データまたはGemini APIによる演出案、MP4生成である。
-AI操作ログについては、依頼作成、承認、作業作成、次作業返却、claim、完了、失敗、期限切れ復旧が状態と作業履歴APIで追えることをシナリオテストで確認する。
+AI操作ログについては、依頼作成、承認、却下、作業作成、次作業返却、claim、完了、失敗、期限切れ復旧が状態と作業履歴APIで追えることをシナリオテストで確認する。
 生成されたMP4は映像と音声を含むことを確認した。
 画面枠合成については、1断片と複数断片のローカルスモーク動画を生成し、1080x1920の映像と音声を含むことを確認した。
 

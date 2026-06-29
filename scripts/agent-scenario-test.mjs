@@ -28,6 +28,7 @@ const workflowTypes = [
 const expectedAgentOperationLogEvents = [
   'draft_created',
   'draft_approved',
+  'draft_rejected',
   'agent_request_created',
   'agent_request_next_returned',
   'agent_request_claimed',
@@ -367,7 +368,7 @@ async function assertDraftCannotBeApprovedTwice(apiBaseUrl, draftId, label) {
   assertScenario(requests.length === 7, `${label}: 再承認拒否後にAI作業工程数が変わっている`);
 }
 
-async function createApprovedScenarioDraft(apiBaseUrl, purpose) {
+async function createScenarioDraft(apiBaseUrl, purpose) {
   const created = await requestJson(apiPath(apiBaseUrl, '/request-drafts'), {
     method: 'POST',
     body: JSON.stringify({
@@ -380,13 +381,81 @@ async function createApprovedScenarioDraft(apiBaseUrl, purpose) {
     })
   });
   assertCreatedDraftStoredOnce(created, purpose);
+  return created;
+}
 
+async function createApprovedScenarioDraft(apiBaseUrl, purpose) {
+  const created = await createScenarioDraft(apiBaseUrl, purpose);
   await requestJson(apiPath(apiBaseUrl, `/request-drafts/${created.draft.id}/approve`), {
     method: 'POST'
   });
   await assertDraftCannotBeApprovedTwice(apiBaseUrl, created.draft.id, purpose);
 
   return created.draft;
+}
+
+async function assertRequestDraftRejectApiContract(apiBaseUrl) {
+  const created = await createScenarioDraft(apiBaseUrl, '実行前下書きを却下できる');
+  const draftId = created.draft.id;
+  const rejectWithoutReasonError = await expectRequestJsonFailure(apiPath(apiBaseUrl, `/request-drafts/${draftId}/reject`), {
+    method: 'POST',
+    body: JSON.stringify({ reason: '   ' })
+  });
+  assertScenario(
+    rejectWithoutReasonError.includes('下書きの却下には理由が必要です'),
+    '下書き却下: 理由なし却下が正しい理由で拒否されていない'
+  );
+  const stateAfterEmptyReason = await requestJson(apiPath(apiBaseUrl, '/state'));
+  const draftAfterEmptyReason = stateAfterEmptyReason.requestDrafts.find((draft) => draft.id === draftId);
+  assertScenario(draftAfterEmptyReason?.status === 'draft', '下書き却下: 理由なし拒否後に下書き状態が変わっている');
+  assertScenario(
+    agentRequestsForDraft(stateAfterEmptyReason, draftId).length === 0,
+    '下書き却下: 理由なし拒否後にAI作業が作られている'
+  );
+
+  const rejected = await requestJson(apiPath(apiBaseUrl, `/request-drafts/${draftId}/reject`), {
+    method: 'POST',
+    body: JSON.stringify({ reason: '依頼内容を実行しない判断をシナリオで保存する' })
+  });
+  assertScenario(rejected.draft?.status === 'rejected', '下書き却下: 下書きが却下状態になっていない');
+  assertScenario(
+    agentRequestsForDraft(rejected.state, draftId).length === 0,
+    '下書き却下: 却下した下書きにAI作業が作られている'
+  );
+  assertAgentOperationLogsCover(rejected.state, draftId, ['draft_created', 'draft_rejected'], '下書き却下');
+  const rejectedLog = agentOperationLogsForDraft(rejected.state, draftId)
+    .find((log) => log.eventType === 'draft_rejected');
+  assertScenario(
+    rejectedLog?.errorMessage === '依頼内容を実行しない判断をシナリオで保存する',
+    '下書き却下: 却下理由がAI操作ログから読めない'
+  );
+
+  const approveRejectedError = await expectRequestJsonFailure(apiPath(apiBaseUrl, `/request-drafts/${draftId}/approve`), {
+    method: 'POST'
+  });
+  assertScenario(
+    approveRejectedError.includes('この下書きはすでに処理済みです'),
+    '下書き却下: 却下済み下書きを承認できている'
+  );
+  const rejectAgainError = await expectRequestJsonFailure(apiPath(apiBaseUrl, `/request-drafts/${draftId}/reject`), {
+    method: 'POST',
+    body: JSON.stringify({ reason: '二重却下しようとする' })
+  });
+  assertScenario(
+    rejectAgainError.includes('この下書きはすでに処理済みです'),
+    '下書き却下: 却下済み下書きを再却下できている'
+  );
+
+  const activity = await requestJson(apiPath(apiBaseUrl, `/request-drafts/${draftId}/activity`));
+  assertScenario(activity.summary?.status === 'rejected', '下書き却下: 作業履歴の現在状態が却下になっていない');
+  assertScenario(
+    activity.events.some((event) => (
+      event.kind === 'agent_operation_log' &&
+        event.title === '依頼却下を記録' &&
+        event.detail.includes('依頼内容を実行しない判断')
+    )),
+    '下書き却下: 作業履歴から却下理由を確認できない'
+  );
 }
 
 async function writeApiContractArtifact(runtimeDir, draftId, fileName, content) {
@@ -2654,6 +2723,7 @@ async function main() {
 
   try {
     await assertRuntimeConfig(apiBaseUrl);
+    await assertRequestDraftRejectApiContract(apiBaseUrl);
     await assertAgentRequestApiContract(apiBaseUrl, runtimeDir);
     await scenarioAutomaticVideoCreation(apiBaseUrl, runtimeDir);
     console.log(`シナリオテスト成功: ${runtimeDir}`);
