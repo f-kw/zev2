@@ -6,16 +6,10 @@ import {
   type AgentFailureInput,
   type FinalReviewAction,
   type FinalReviewActionType,
-  type PublishHandoffAction,
-  type PublishPlanAction,
-  type PublishApprovalTiming,
-  type PublishAuthMethod,
-  type PublishSubmissionMode,
   type AgentRequest,
   type HumanReviewActionType,
   type RequestDraft,
   type RequestDraftInput,
-  type PublishedResultAction,
   type RuntimeConfig,
   type Zev2State,
   type WorkflowStep
@@ -81,21 +75,6 @@ export interface WebGeminiReviewRunLog {
   cdpControl?: unknown;
 }
 
-export interface PublishPackageArtifact {
-  draftId: string;
-  source: 'zev2-publish-package';
-  status: 'ready';
-  createdAt: string;
-  outputVideoUri: string;
-  outputVideoSha256: string;
-  videoFileUri: string;
-  manifestUri: string;
-  noteUri: string;
-  title: string;
-  description: string;
-  checklist: string[];
-}
-
 export interface RequestDraftActivityEvent {
   id: string;
   kind:
@@ -108,11 +87,7 @@ export interface RequestDraftActivityEvent {
     | 'human_review_required'
     | 'human_review_action'
     | 'final_review_action'
-    | 'web_gemini_review_status'
-    | 'publish_package_status'
-    | 'publish_plan_action'
-    | 'publish_handoff_action'
-    | 'published_result_action';
+    | 'web_gemini_review_status';
   occurredAt: string;
   actor: 'user' | 'agent' | 'runner' | 'backend' | 'system';
   title: string;
@@ -123,9 +98,6 @@ export interface RequestDraftActivityEvent {
   decisionLogId?: string;
   humanReviewActionId?: string;
   finalReviewActionId?: string;
-  publishPlanActionId?: string;
-  publishHandoffActionId?: string;
-  publishedResultActionId?: string;
   fileRefId?: string;
   outputId?: string;
 }
@@ -315,55 +287,6 @@ export async function submitFinalReview(
     action,
     ...(reason ? { reason } : {})
   });
-  return response.data;
-}
-
-export async function fetchPublishPackage(id: string): Promise<{
-  publishPackage: PublishPackageArtifact | null;
-  outputVideoUri: string;
-}> {
-  const response = await api.get(`/request-drafts/${id}/publish-package`);
-  return response.data;
-}
-
-export async function createPublishPackage(
-  id: string,
-  input: { title: string; description: string }
-): Promise<{
-  publishPackage: PublishPackageArtifact;
-  state: Zev2State;
-}> {
-  const response = await api.post(`/request-drafts/${id}/publish-package`, input);
-  return response.data;
-}
-
-export async function submitPublishPlan(
-  id: string,
-  input: {
-    destinationName: string;
-    authMethod: PublishAuthMethod;
-    submissionMode: PublishSubmissionMode;
-    approvalTiming: PublishApprovalTiming;
-    note: string;
-  }
-): Promise<{ publishPlanAction: PublishPlanAction; state: Zev2State }> {
-  const response = await api.post(`/request-drafts/${id}/publish-plan`, input);
-  return response.data;
-}
-
-export async function submitPublishHandoff(
-  id: string,
-  input: { targetName: string; note: string }
-): Promise<{ publishHandoffAction: PublishHandoffAction; state: Zev2State }> {
-  const response = await api.post(`/request-drafts/${id}/publish-handoff`, input);
-  return response.data;
-}
-
-export async function submitPublishedResult(
-  id: string,
-  input: { publishedUrl: string; note: string }
-): Promise<{ publishedResultAction: PublishedResultAction; state: Zev2State }> {
-  const response = await api.post(`/request-drafts/${id}/published-result`, input);
   return response.data;
 }
 

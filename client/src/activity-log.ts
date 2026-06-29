@@ -25,13 +25,7 @@ export function activityKindClass(kind: RequestDraftActivityEvent['kind']): stri
     return 'needs-review';
   }
 
-  if (
-    kind === 'human_review_action' ||
-    kind === 'final_review_action' ||
-    kind === 'publish_plan_action' ||
-    kind === 'publish_handoff_action' ||
-    kind === 'published_result_action'
-  ) {
+  if (kind === 'human_review_action' || kind === 'final_review_action') {
     return 'user-action';
   }
 
@@ -52,16 +46,9 @@ export function activityCategory(event: RequestDraftActivityEvent): ActivityLogC
     return 'external';
   }
 
-  if (event.kind === 'publish_package_status') {
-    return 'system';
-  }
-
   if (
     event.kind === 'human_review_action' ||
     event.kind === 'final_review_action' ||
-    event.kind === 'publish_plan_action' ||
-    event.kind === 'publish_handoff_action' ||
-    event.kind === 'published_result_action' ||
     event.kind === 'human_review_required'
   ) {
     return 'user';

@@ -67,45 +67,9 @@ export const GEMINI_MODEL_OPTIONS = [
   }
 ] as const;
 
-export const PUBLISH_AUTH_METHOD_OPTIONS = [
-  {
-    value: 'manual_browser_session',
-    label: 'ブラウザログイン'
-  },
-  {
-    value: 'api_credentials',
-    label: 'API認証'
-  }
-] as const;
-
-export const PUBLISH_SUBMISSION_MODE_OPTIONS = [
-  {
-    value: 'draft_only',
-    label: '下書き保存'
-  },
-  {
-    value: 'immediate_public',
-    label: '即時公開'
-  }
-] as const;
-
-export const PUBLISH_APPROVAL_TIMING_OPTIONS = [
-  {
-    value: 'before_external_submission',
-    label: '外部送信前に承認'
-  },
-  {
-    value: 'after_external_draft',
-    label: '外部下書き後に承認'
-  }
-] as const;
-
 export type WorkflowStep = (typeof WORKFLOW_STEPS)[number];
 export type AgentRequestType = WorkflowStep['type'];
 export type FileRefKind = WorkflowStep['outputKind'];
-export type PublishAuthMethod = (typeof PUBLISH_AUTH_METHOD_OPTIONS)[number]['value'];
-export type PublishSubmissionMode = (typeof PUBLISH_SUBMISSION_MODE_OPTIONS)[number]['value'];
-export type PublishApprovalTiming = (typeof PUBLISH_APPROVAL_TIMING_OPTIONS)[number]['value'];
 
 export const ARTIFACT_FILE_NAME_BY_KIND = {
   source_video: 'source-video.json',
@@ -334,9 +298,6 @@ export interface Zev2State {
   controlReviewItems: ControlReviewItem[];
   humanReviewActions: HumanReviewAction[];
   finalReviewActions: FinalReviewAction[];
-  publishPlanActions: PublishPlanAction[];
-  publishHandoffActions: PublishHandoffAction[];
-  publishedResultActions: PublishedResultAction[];
 }
 
 export interface AgentOperationLog {
@@ -414,43 +375,6 @@ export interface FinalReviewAction {
   createdAt: string;
 }
 
-export interface PublishPlanAction {
-  id: string;
-  requestDraftId: string;
-  outputVideoUri: string;
-  manifestUri: string;
-  publishPackageCreatedAt: string;
-  destinationName: string;
-  authMethod: PublishAuthMethod;
-  submissionMode: PublishSubmissionMode;
-  approvalTiming: PublishApprovalTiming;
-  note: string;
-  createdAt: string;
-}
-
-export interface PublishHandoffAction {
-  id: string;
-  requestDraftId: string;
-  outputVideoUri: string;
-  manifestUri: string;
-  publishPackageCreatedAt: string;
-  targetName: string;
-  note: string;
-  createdAt: string;
-}
-
-export interface PublishedResultAction {
-  id: string;
-  requestDraftId: string;
-  outputVideoUri: string;
-  manifestUri: string;
-  publishPackageCreatedAt: string;
-  publishHandoffActionId: string;
-  publishedUrl: string;
-  note: string;
-  createdAt: string;
-}
-
 const OUTPUT_TYPE_BY_REQUEST_TYPE = {
   prepare_video: 'Video',
   run_stt: 'Transcript',
@@ -481,10 +405,7 @@ export function createInitialState(): Zev2State {
     decisionLogs: [],
     controlReviewItems: [],
     humanReviewActions: [],
-    finalReviewActions: [],
-    publishPlanActions: [],
-    publishHandoffActions: [],
-    publishedResultActions: []
+    finalReviewActions: []
   };
 }
 

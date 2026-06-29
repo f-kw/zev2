@@ -2,11 +2,7 @@
 import { computed, onBeforeUnmount, onMounted, reactive, ref, watch } from 'vue';
 import {
   DEFAULT_GEMINI_MODEL,
-  PUBLISH_APPROVAL_TIMING_OPTIONS,
-  PUBLISH_AUTH_METHOD_OPTIONS,
-  PUBLISH_SUBMISSION_MODE_OPTIONS,
   findById,
-  latestByCreatedAt,
   readablePurposeForWebGeminiReview,
   uriWithRef,
   type AgentRequest,
@@ -14,9 +10,6 @@ import {
   type FinalReviewAction,
   type FinalReviewActionType,
   type FileRef,
-  type PublishApprovalTiming,
-  type PublishAuthMethod,
-  type PublishSubmissionMode,
   type RequestDraftInput
 } from '@zev2/shared';
 import {
@@ -28,8 +21,6 @@ import {
   type ActivityLogItem
 } from './activity-log';
 import {
-  createPublishPackage,
-  fetchPublishPackage,
   fetchRequestDraftActivity,
   fetchHumanAuthStatus,
   fetchWebGeminiReview,
@@ -37,10 +28,6 @@ import {
   loginHumanUi,
   logoutHumanUi,
   prepareWebGeminiReview,
-  submitPublishPlan,
-  submitPublishHandoff,
-  submitPublishedResult,
-  type PublishPackageArtifact,
   type RequestDraftActivityEvent,
   type RequestDraftActivitySummary,
   type WebGeminiReviewArtifact,
@@ -92,24 +79,6 @@ const webGeminiReviewLoading = ref(false);
 const loadedWebGeminiReviewCreatedAt = ref('');
 const activeWebGeminiAction = ref<'refresh_review' | 'prepare_review' | 'apply_review' | ''>('');
 const activeFinalReviewAction = ref<FinalReviewActionType | ''>('');
-const publishPackage = ref<PublishPackageArtifact | null>(null);
-const publishPackageLoading = ref(false);
-const publishPackageMessage = ref('');
-const activePublishPackageAction = ref<'create_package' | ''>('');
-const publishTitleInput = ref('');
-const publishDescriptionInput = ref('');
-const publishPlanDestinationInput = ref('YouTube');
-const publishPlanAuthMethodInput = ref<PublishAuthMethod>('manual_browser_session');
-const publishPlanSubmissionModeInput = ref<PublishSubmissionMode>('draft_only');
-const publishPlanApprovalTimingInput = ref<PublishApprovalTiming>('before_external_submission');
-const publishPlanNoteInput = ref('');
-const activePublishPlan = ref(false);
-const publishHandoffTargetInput = ref('外部投稿作業');
-const publishHandoffNoteInput = ref('');
-const activePublishHandoff = ref(false);
-const publishedResultUrlInput = ref('');
-const publishedResultNoteInput = ref('');
-const activePublishedResult = ref(false);
 const requestActivityEvents = ref<RequestDraftActivityEvent[]>([]);
 const requestActivitySummary = ref<RequestDraftActivitySummary | null>(null);
 const requestActivityLoading = ref(false);
@@ -338,170 +307,6 @@ const finalReviewStatusDetail = computed(() => {
 
   return '動画を確認した後、投稿可能または最終完了として記録できます';
 });
-
-const canCreatePublishPackage = computed(() =>
-  Boolean(
-    currentDraft.value &&
-      outputVideoUri.value &&
-      (hasPublishReadyForCurrentOutput.value || hasFinalCompleteForCurrentOutput.value) &&
-      !agentOperationLocked.value &&
-      !publishPackageLoading.value &&
-      !activePublishPackageAction.value
-  )
-);
-
-const publishPackageStatusTitle = computed(() => {
-  if (publishPackage.value) {
-    return '公開用ファイル作成済み';
-  }
-
-  if (hasPublishReadyForCurrentOutput.value || hasFinalCompleteForCurrentOutput.value) {
-    return '公開用ファイルは未作成';
-  }
-
-  return '公開用ファイルは最終判断後に作成';
-});
-
-const publishPackageStatusDetail = computed(() => {
-  if (publishPackageMessage.value) {
-    return publishPackageMessage.value;
-  }
-
-  if (publishPackage.value) {
-    return '公開用動画、説明メモ、manifestを確認できます';
-  }
-
-  if (hasPublishReadyForCurrentOutput.value || hasFinalCompleteForCurrentOutput.value) {
-    return '投稿作業へ渡すファイル一式を作成できます';
-  }
-
-  return '先に投稿可能または最終完了として記録してください';
-});
-
-const defaultPublishTitle = computed(() =>
-  currentDraft.value?.purpose.trim() || 'ショート動画'
-);
-
-const defaultPublishDescription = computed(() => {
-  const outputUri = outputVideoFileRef.value?.uri || outputVideoUri.value;
-  return [
-    `作成目的: ${defaultPublishTitle.value}`,
-    `確認済み動画: ${outputUri}`,
-    '必要なら公開前に説明文を人間が調整してください。'
-  ].join('\n');
-});
-
-const currentPublishPlanAction = computed(() => {
-  const draft = currentDraft.value;
-  const packageArtifact = publishPackage.value;
-  if (!draft || !packageArtifact) {
-    return undefined;
-  }
-
-  return latestByCreatedAt(store.state.publishPlanActions.filter(
-    (action) =>
-      action.requestDraftId === draft.id &&
-      action.outputVideoUri === packageArtifact.outputVideoUri &&
-      action.manifestUri === packageArtifact.manifestUri &&
-      action.publishPackageCreatedAt === packageArtifact.createdAt
-  ));
-});
-
-const publishPlanStatusText = computed(() => {
-  const plan = currentPublishPlanAction.value;
-  if (!plan) {
-    return '投稿方針は未記録';
-  }
-
-  return `投稿方針: ${plan.destinationName}`;
-});
-
-const currentPublishHandoffAction = computed(() => {
-  const draft = currentDraft.value;
-  const packageArtifact = publishPackage.value;
-  if (!draft || !packageArtifact) {
-    return undefined;
-  }
-
-  return latestByCreatedAt(store.state.publishHandoffActions.filter(
-    (action) =>
-      action.requestDraftId === draft.id &&
-      action.outputVideoUri === packageArtifact.outputVideoUri &&
-      action.manifestUri === packageArtifact.manifestUri &&
-      action.publishPackageCreatedAt === packageArtifact.createdAt
-  ));
-});
-
-const publishHandoffStatusText = computed(() => {
-  const handoff = currentPublishHandoffAction.value;
-  if (!handoff) {
-    if (!currentPublishPlanAction.value) {
-      return '投稿方針の記録後に引き渡せます';
-    }
-    return '公開作業への引き渡しは未記録';
-  }
-
-  return `引き渡し済み: ${handoff.targetName}`;
-});
-
-const currentPublishedResultAction = computed(() => {
-  const draft = currentDraft.value;
-  const packageArtifact = publishPackage.value;
-  if (!draft || !packageArtifact) {
-    return undefined;
-  }
-
-  return latestByCreatedAt(store.state.publishedResultActions.filter(
-    (action) =>
-      action.requestDraftId === draft.id &&
-      action.outputVideoUri === packageArtifact.outputVideoUri &&
-      action.manifestUri === packageArtifact.manifestUri &&
-      action.publishPackageCreatedAt === packageArtifact.createdAt
-  ));
-});
-
-const publishedResultStatusText = computed(() => {
-  const result = currentPublishedResultAction.value;
-  if (!result) {
-    return '公開済みURLは未記録';
-  }
-
-  return `公開済みURLを記録済み: ${result.publishedUrl}`;
-});
-
-const canSubmitPublishHandoff = computed(() =>
-  Boolean(
-    currentDraft.value &&
-      publishPackage.value &&
-      currentPublishPlanAction.value &&
-      !agentOperationLocked.value &&
-      !publishPackageLoading.value &&
-      !activePublishHandoff.value
-  )
-);
-
-const canSubmitPublishPlan = computed(() =>
-  Boolean(
-    currentDraft.value &&
-      publishPackage.value &&
-      publishPlanDestinationInput.value.trim() &&
-      !agentOperationLocked.value &&
-      !publishPackageLoading.value &&
-      !activePublishPlan.value
-  )
-);
-
-const canSubmitPublishedResult = computed(() =>
-  Boolean(
-    currentDraft.value &&
-      publishPackage.value &&
-      currentPublishHandoffAction.value &&
-      publishedResultUrlInput.value.trim() &&
-      !agentOperationLocked.value &&
-      !publishPackageLoading.value &&
-      !activePublishedResult.value
-  )
-);
 
 const canApplyWebGeminiReview = computed(() =>
   Boolean(
@@ -1475,161 +1280,8 @@ async function submitOutputFinalReview(action: FinalReviewActionType) {
   try {
     await store.submitFinalReview(draft.id, action);
     await refreshRequestActivity();
-    await refreshPublishPackage();
   } finally {
     activeFinalReviewAction.value = '';
-  }
-}
-
-async function refreshPublishPackage() {
-  const draft = currentDraft.value;
-  if (publishPackageLoading.value) {
-    return;
-  }
-
-  if (!humanAuthReady.value || !draft || !outputVideoUri.value) {
-    publishPackage.value = null;
-    publishPackageMessage.value = '';
-    return;
-  }
-
-  publishPackageLoading.value = true;
-  publishPackageMessage.value = '';
-  try {
-    const result = await fetchPublishPackage(draft.id);
-    publishPackage.value = result.publishPackage;
-    if (result.publishPackage) {
-      publishTitleInput.value = result.publishPackage.title;
-      publishDescriptionInput.value = result.publishPackage.description;
-    } else {
-      publishTitleInput.value = publishTitleInput.value.trim() || defaultPublishTitle.value;
-      publishDescriptionInput.value = publishDescriptionInput.value.trim() || defaultPublishDescription.value;
-    }
-  } catch (error) {
-    publishPackage.value = null;
-    publishPackageMessage.value = formatApiError(error);
-  } finally {
-    publishPackageLoading.value = false;
-  }
-}
-
-async function createCurrentPublishPackage() {
-  const draft = currentDraft.value;
-  if (!draft || !canCreatePublishPackage.value) {
-    return;
-  }
-
-  activePublishPackageAction.value = 'create_package';
-  publishPackageLoading.value = true;
-  publishPackageMessage.value = '';
-  try {
-    const result = await createPublishPackage(draft.id, {
-      title: publishTitleInput.value.trim() || defaultPublishTitle.value,
-      description: publishDescriptionInput.value.trim() || defaultPublishDescription.value
-    });
-    store.state = result.state;
-    publishPackage.value = result.publishPackage;
-    publishTitleInput.value = result.publishPackage.title;
-    publishDescriptionInput.value = result.publishPackage.description;
-    publishPlanDestinationInput.value = 'YouTube';
-    publishPlanAuthMethodInput.value = 'manual_browser_session';
-    publishPlanSubmissionModeInput.value = 'draft_only';
-    publishPlanApprovalTimingInput.value = 'before_external_submission';
-    publishPlanNoteInput.value = '';
-    publishHandoffNoteInput.value = publishHandoffNoteInput.value.trim() ||
-      `公開用ファイルを確認しました: ${result.publishPackage.manifestUri}`;
-    publishedResultUrlInput.value = '';
-    publishedResultNoteInput.value = '';
-    publishPackageMessage.value = '公開用ファイルを作成しました';
-    await refreshRequestActivity();
-  } catch (error) {
-    publishPackage.value = null;
-    publishPackageMessage.value = formatApiError(error);
-  } finally {
-    publishPackageLoading.value = false;
-    activePublishPackageAction.value = '';
-  }
-}
-
-async function submitCurrentPublishPlan() {
-  const draft = currentDraft.value;
-  if (!draft || !canSubmitPublishPlan.value) {
-    return;
-  }
-
-  activePublishPlan.value = true;
-  publishPackageMessage.value = '';
-  try {
-    const result = await submitPublishPlan(draft.id, {
-      destinationName: publishPlanDestinationInput.value.trim(),
-      authMethod: publishPlanAuthMethodInput.value,
-      submissionMode: publishPlanSubmissionModeInput.value,
-      approvalTiming: publishPlanApprovalTimingInput.value,
-      note: publishPlanNoteInput.value.trim() || '外部投稿作業へ渡す前の投稿方針を確認しました'
-    });
-    store.state = result.state;
-    publishPlanDestinationInput.value = result.publishPlanAction.destinationName;
-    publishPlanAuthMethodInput.value = result.publishPlanAction.authMethod;
-    publishPlanSubmissionModeInput.value = result.publishPlanAction.submissionMode;
-    publishPlanApprovalTimingInput.value = result.publishPlanAction.approvalTiming;
-    publishPlanNoteInput.value = result.publishPlanAction.note;
-    publishHandoffTargetInput.value = result.publishPlanAction.destinationName;
-    publishPackageMessage.value = '投稿方針を記録しました';
-    await refreshRequestActivity();
-  } catch (error) {
-    publishPackageMessage.value = formatApiError(error);
-  } finally {
-    activePublishPlan.value = false;
-  }
-}
-
-async function submitCurrentPublishHandoff() {
-  const draft = currentDraft.value;
-  if (!draft || !canSubmitPublishHandoff.value) {
-    return;
-  }
-
-  activePublishHandoff.value = true;
-  publishPackageMessage.value = '';
-  try {
-    const result = await submitPublishHandoff(draft.id, {
-      targetName: publishHandoffTargetInput.value.trim() || '外部投稿作業',
-      note: publishHandoffNoteInput.value.trim() || '公開パッケージを外部投稿作業へ渡しました'
-    });
-    store.state = result.state;
-    publishHandoffTargetInput.value = result.publishHandoffAction.targetName;
-    publishHandoffNoteInput.value = result.publishHandoffAction.note;
-    publishPackageMessage.value = '公開作業への引き渡しを記録しました';
-    await refreshRequestActivity();
-  } catch (error) {
-    publishPackageMessage.value = formatApiError(error);
-  } finally {
-    activePublishHandoff.value = false;
-  }
-}
-
-async function submitCurrentPublishedResult() {
-  const draft = currentDraft.value;
-  if (!draft || !canSubmitPublishedResult.value) {
-    return;
-  }
-
-  activePublishedResult.value = true;
-  publishPackageMessage.value = '';
-  try {
-    const result = await submitPublishedResult(draft.id, {
-      publishedUrl: publishedResultUrlInput.value.trim(),
-      note: publishedResultNoteInput.value.trim() || '外部サービスで公開済みURLを確認しました'
-    });
-    store.state = result.state;
-    publishedResultUrlInput.value = result.publishedResultAction.publishedUrl;
-    publishedResultNoteInput.value = result.publishedResultAction.note;
-    publishPackageMessage.value = '公開済みURLを記録しました';
-    await refreshRequestActivity();
-  } catch (error) {
-    publishPackageMessage.value = formatApiError(error);
-  } finally {
-    activePublishedResult.value = false;
   }
 }
 
@@ -1815,21 +1467,7 @@ watch(
 watch(
   () => [currentDraft.value?.id ?? '', outputVideoUri.value],
   () => {
-    publishPackage.value = null;
-    publishPackageMessage.value = '';
-    publishTitleInput.value = defaultPublishTitle.value;
-    publishDescriptionInput.value = defaultPublishDescription.value;
-    publishPlanDestinationInput.value = 'YouTube';
-    publishPlanAuthMethodInput.value = 'manual_browser_session';
-    publishPlanSubmissionModeInput.value = 'draft_only';
-    publishPlanApprovalTimingInput.value = 'before_external_submission';
-    publishPlanNoteInput.value = '';
-    publishHandoffTargetInput.value = '外部投稿作業';
-    publishHandoffNoteInput.value = '';
-    publishedResultUrlInput.value = '';
-    publishedResultNoteInput.value = '';
     void refreshWebGeminiReview();
-    void refreshPublishPackage();
   },
   { immediate: true }
 );
@@ -2242,172 +1880,6 @@ watch(
                 @click="submitOutputFinalReview('final_complete')"
               >
                 {{ activeFinalReviewAction === 'final_complete' ? '記録中' : '最終完了として記録' }}
-              </button>
-            </div>
-            <div class="publish-package-status" aria-label="公開用ファイル">
-              <strong>{{ publishPackageStatusTitle }}</strong>
-              <span>{{ publishPackageStatusDetail }}</span>
-              <label class="publish-package-input">
-                公開タイトル
-                <input
-                  v-model="publishTitleInput"
-                  type="text"
-                  :disabled="agentOperationLocked || publishPackageLoading"
-                />
-              </label>
-              <label class="publish-package-input">
-                公開説明
-                <textarea
-                  v-model="publishDescriptionInput"
-                  rows="3"
-                  :disabled="agentOperationLocked || publishPackageLoading"
-                />
-              </label>
-              <div v-if="publishPackage" class="publish-package-links">
-                <a :href="uriWithRef(publishPackage.videoFileUri, publishPackage.createdAt)" target="_blank" rel="noreferrer">動画</a>
-                <a :href="uriWithRef(publishPackage.noteUri, publishPackage.createdAt)" target="_blank" rel="noreferrer">説明メモ</a>
-                <a :href="uriWithRef(publishPackage.manifestUri, publishPackage.createdAt)" target="_blank" rel="noreferrer">manifest</a>
-              </div>
-              <span v-if="publishPackage" class="publish-handoff-status">{{ publishPlanStatusText }}</span>
-              <label v-if="publishPackage" class="publish-package-input">
-                投稿先
-                <input
-                  v-model="publishPlanDestinationInput"
-                  type="text"
-                  :disabled="agentOperationLocked || activePublishPlan"
-                />
-              </label>
-              <label v-if="publishPackage" class="publish-package-input">
-                認証方法
-                <select
-                  v-model="publishPlanAuthMethodInput"
-                  :disabled="agentOperationLocked || activePublishPlan"
-                >
-                  <option
-                    v-for="option in PUBLISH_AUTH_METHOD_OPTIONS"
-                    :key="option.value"
-                    :value="option.value"
-                  >
-                    {{ option.label }}
-                  </option>
-                </select>
-              </label>
-              <label v-if="publishPackage" class="publish-package-input">
-                投稿方式
-                <select
-                  v-model="publishPlanSubmissionModeInput"
-                  :disabled="agentOperationLocked || activePublishPlan"
-                >
-                  <option
-                    v-for="option in PUBLISH_SUBMISSION_MODE_OPTIONS"
-                    :key="option.value"
-                    :value="option.value"
-                  >
-                    {{ option.label }}
-                  </option>
-                </select>
-              </label>
-              <label v-if="publishPackage" class="publish-package-input">
-                承認位置
-                <select
-                  v-model="publishPlanApprovalTimingInput"
-                  :disabled="agentOperationLocked || activePublishPlan"
-                >
-                  <option
-                    v-for="option in PUBLISH_APPROVAL_TIMING_OPTIONS"
-                    :key="option.value"
-                    :value="option.value"
-                  >
-                    {{ option.label }}
-                  </option>
-                </select>
-              </label>
-              <label v-if="publishPackage" class="publish-package-input">
-                投稿方針メモ
-                <textarea
-                  v-model="publishPlanNoteInput"
-                  rows="2"
-                  :disabled="agentOperationLocked || activePublishPlan"
-                />
-              </label>
-              <span v-if="publishPackage" class="publish-handoff-status">{{ publishHandoffStatusText }}</span>
-              <label v-if="publishPackage" class="publish-package-input">
-                引き渡し先
-                <input
-                  v-model="publishHandoffTargetInput"
-                  type="text"
-                  :disabled="agentOperationLocked || activePublishHandoff"
-                />
-              </label>
-              <label v-if="publishPackage" class="publish-package-input">
-                引き渡しメモ
-                <textarea
-                  v-model="publishHandoffNoteInput"
-                  rows="2"
-                  :disabled="agentOperationLocked || activePublishHandoff"
-                />
-              </label>
-              <span v-if="publishPackage" class="publish-handoff-status">{{ publishedResultStatusText }}</span>
-              <a
-                v-if="currentPublishedResultAction"
-                class="published-result-link"
-                :href="currentPublishedResultAction.publishedUrl"
-                target="_blank"
-                rel="noreferrer"
-              >
-                公開ページを開く
-              </a>
-              <label v-if="publishPackage" class="publish-package-input">
-                公開済みURL
-                <input
-                  v-model="publishedResultUrlInput"
-                  type="url"
-                  placeholder="https://..."
-                  :disabled="agentOperationLocked || activePublishedResult || !currentPublishHandoffAction"
-                />
-              </label>
-              <label v-if="publishPackage" class="publish-package-input">
-                公開結果メモ
-                <textarea
-                  v-model="publishedResultNoteInput"
-                  rows="2"
-                  :disabled="agentOperationLocked || activePublishedResult || !currentPublishHandoffAction"
-                />
-              </label>
-              <button
-                type="button"
-                class="secondary-button"
-                :disabled="!canCreatePublishPackage"
-                @click="createCurrentPublishPackage"
-              >
-                {{ activePublishPackageAction === 'create_package' ? '作成中' : publishPackage ? '公開用ファイルを作り直す' : '公開用ファイルを作る' }}
-              </button>
-              <button
-                v-if="publishPackage"
-                type="button"
-                class="secondary-button"
-                :disabled="!canSubmitPublishPlan"
-                @click="submitCurrentPublishPlan"
-              >
-                {{ activePublishPlan ? '記録中' : currentPublishPlanAction ? '投稿方針を記録し直す' : '投稿方針を記録' }}
-              </button>
-              <button
-                v-if="publishPackage"
-                type="button"
-                class="secondary-button"
-                :disabled="!canSubmitPublishHandoff"
-                @click="submitCurrentPublishHandoff"
-              >
-                {{ activePublishHandoff ? '記録中' : '公開作業へ渡したことを記録' }}
-              </button>
-              <button
-                v-if="publishPackage"
-                type="button"
-                class="secondary-button"
-                :disabled="!canSubmitPublishedResult"
-                @click="submitCurrentPublishedResult"
-              >
-                {{ activePublishedResult ? '記録中' : currentPublishedResultAction ? '公開済みURLを記録し直す' : '公開済みURLを記録' }}
               </button>
             </div>
           </section>
@@ -3621,98 +3093,6 @@ video {
   gap: 8px;
 }
 
-.publish-package-status {
-  display: grid;
-  min-width: 220px;
-  max-width: 340px;
-  gap: 6px;
-  justify-items: end;
-  text-align: right;
-}
-
-.publish-package-status strong {
-  color: var(--text);
-  font-size: 13px;
-}
-
-.publish-package-status span {
-  color: var(--text-dim);
-  font-size: 12px;
-  line-height: 1.45;
-}
-
-.publish-package-input {
-  display: grid;
-  width: min(340px, 100%);
-  gap: 4px;
-  color: var(--text-dim);
-  font-size: 11px;
-  text-align: left;
-}
-
-.publish-package-input input,
-.publish-package-input textarea,
-.publish-package-input select {
-  width: 100%;
-  border: 1px solid rgba(0, 240, 255, 0.22);
-  padding: 7px 8px;
-  color: var(--text);
-  background: rgba(0, 0, 0, 0.28);
-  font: inherit;
-  line-height: 1.45;
-}
-
-.publish-package-input textarea {
-  resize: vertical;
-}
-
-.publish-package-input input:focus,
-.publish-package-input textarea:focus,
-.publish-package-input select:focus {
-  outline: 1px solid rgba(0, 240, 255, 0.58);
-  outline-offset: 1px;
-}
-
-.publish-package-input input:disabled,
-.publish-package-input textarea:disabled,
-.publish-package-input select:disabled {
-  opacity: 0.62;
-}
-
-.publish-handoff-status {
-  color: var(--yellow);
-  font-size: 12px;
-  line-height: 1.45;
-}
-
-.publish-package-links {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-  gap: 8px;
-  font-size: 12px;
-}
-
-.publish-package-links a {
-  color: var(--accent);
-  text-decoration: none;
-}
-
-.publish-package-links a:hover {
-  text-decoration: underline;
-}
-
-.published-result-link {
-  color: var(--accent);
-  font-size: 12px;
-  font-weight: 800;
-  text-decoration: none;
-}
-
-.published-result-link:hover {
-  text-decoration: underline;
-}
-
 .work-wait-panel {
   display: grid;
   align-content: center;
@@ -4226,16 +3606,6 @@ video {
   }
 
   .final-review-actions {
-    justify-content: flex-start;
-  }
-
-  .publish-package-status {
-    max-width: none;
-    justify-items: start;
-    text-align: left;
-  }
-
-  .publish-package-links {
     justify-content: flex-start;
   }
 }
