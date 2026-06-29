@@ -39,6 +39,7 @@ UIは依頼と状態を確認する
 - 修正依頼では、人間が最後に承認したところ以降のAI作成部分を作り直せる。
 - 完成動画に対して、Web Gemini演出レビューの準備、実行ログ保存、レビュー保存、レビュー反映による演出作成前からの作り直しができる。
 - Web Geminiレビューの準備、実行中、保存済み、反映済み、失敗は作業履歴と現在状態サマリで確認できる。
+- 完成動画を人間が確認し、投稿可能または最終完了として記録できる。これは動画生成完了とは別の人間判断として保存する。
 - 実行前下書きを、理由つきで却下できる。却下した下書きはAI作業キューを作らない。
 - AI作業中の中止APIがあり、確認待ちも中止操作による却下として閉じられる。
 - 下書きごとの作業履歴APIで、AI判断、人間判断、外部レビュー、現在状態サマリを確認できる。
@@ -74,7 +75,7 @@ UIは依頼と状態を確認する
 - backend内で動画生成を実行しない。
 - backend内でGemini APIによる演出作成や完成品レビューを実行しない。
 - 人間UIのログイン認証はまだない。
-- 投稿可能化、公開、最終完了の承認ゲートはまだない。
+- 公開処理はまだない。
 - Web Geminiへの実アップロードは外部送信を伴うため、準備確認とは分けて明示実行として扱う。
 - Gemini API接続は `@google/genai` を使う。APIキー指定とVertex AI指定の両方を同じSDK経路で扱う。
 
@@ -129,6 +130,7 @@ GET /api/request-drafts/:id/web-gemini-review
 POST /api/request-drafts/:id/web-gemini-review/prepare
 POST /api/request-drafts/:id/web-gemini-review
 POST /api/request-drafts/:id/apply-web-gemini-review
+POST /api/request-drafts/:id/final-review
 POST /api/request-drafts/:id/cancel-agent-work
 POST /api/agent-requests/:id/retry
 ```
@@ -147,6 +149,7 @@ POST /api/agent-requests/:id/retry
 - 作業状態
 - 成果物参照
 - AI操作ログ
+- 完成動画に対する人間の投稿可能判断、最終完了判断
 
 大きな解析結果、STT全文、LLM全文、動画本体は状態へ埋め込まない。
 AI操作ログにも成果物本文は入れず、何をしたかの短い説明、作業ID、取得者、成果物参照ID、失敗理由だけを残す。

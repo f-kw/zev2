@@ -4,6 +4,7 @@ import {
   findById,
   findReadyAgentRequest,
   isAgentRequestReady,
+  type FinalReviewActionType,
   type HumanReviewActionType,
   type RequestDraftInput,
   type RuntimeConfig,
@@ -22,6 +23,7 @@ import {
   requestGeneratedVideoChanges,
   resumeAgentWork,
   retryAgentRequest,
+  submitFinalReview as submitFinalReviewRequest,
   submitHumanReviewAction
 } from '../api';
 
@@ -368,6 +370,34 @@ export const useControlQueueStore = defineStore('controlQueue', {
         this.state = result.state;
         this.lastChangedAt = new Date().toISOString();
         await this.refreshUntilAgentSettled(Date.now());
+      } catch (error) {
+        this.errorMessage = formatApiError(error);
+        this.message = '';
+        this.runPhase = 'error';
+        this.lastChangedAt = new Date().toISOString();
+      } finally {
+        this.loading = false;
+      }
+    },
+    async submitFinalReview(id: string, action: FinalReviewActionType) {
+      this.loading = true;
+      this.errorMessage = '';
+      const draft = findById(this.state.requestDrafts, id);
+      this.activeDraftId = id;
+      this.activePurpose = draft?.purpose ?? '';
+      this.message = action === 'publish_ready'
+        ? '投稿可能として記録しています'
+        : '最終完了として記録しています';
+      this.runNumber += 1;
+      this.lastChangedAt = new Date().toISOString();
+      try {
+        const result = await submitFinalReviewRequest(id, action);
+        this.state = result.state;
+        this.message = action === 'publish_ready'
+          ? '投稿可能として記録しました'
+          : '最終完了として記録しました';
+        this.runPhase = 'completed';
+        this.lastChangedAt = new Date().toISOString();
       } catch (error) {
         this.errorMessage = formatApiError(error);
         this.message = '';

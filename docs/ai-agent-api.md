@@ -49,6 +49,7 @@ POST /api/request-drafts/:id/reject
 POST /api/control-reviews/:id/approve
 POST /api/control-reviews/:id/reject
 POST /api/control-reviews/:id/request-changes
+POST /api/request-drafts/:id/final-review
 POST /api/request-drafts/:id/cancel-agent-work
 POST /api/agent-requests/:id/retry
 ```
@@ -57,6 +58,7 @@ POST /api/agent-requests/:id/retry
 
 - 実行前下書きを理由つきで却下する。却下した下書きからAI作業キューは作らない。
 - 内容選択、使用素材確認、動画生成前確認で、承認、却下、作り直し理由を保存する。
+- 完成動画を人間が確認し、投稿可能または最終完了として記録する。動画生成完了とは別の人間判断として扱う。
 - 実行中または待機中のAI作業を中止する。
 - 失敗したAI工程から新しい編集コピーを作り、失敗工程以降を再実行できる状態にする。
 - UIはこれらの人間制御と状態確認に使い、AI工程を1件ずつ進める主導線にはしない。
@@ -85,7 +87,7 @@ POST /api/agent-requests/:id/fail
 
 認証対象外:
 
-- UIが使う状態確認、依頼作成、依頼却下、人間確認、中止、再実行、Web Geminiレビュー準備。
+- UIが使う状態確認、依頼作成、依頼却下、人間確認、完成動画の最終判断、中止、再実行、Web Geminiレビュー準備。
 - これらは人間制御APIであり、AIエージェントが自動で進めるAPIとは分ける。
 
 ## 作業種別

@@ -7,6 +7,8 @@ import {
   uriWithRef,
   type AgentRequest,
   type ControlReviewItem,
+  type FinalReviewAction,
+  type FinalReviewActionType,
   type FileRef,
   type RequestDraftInput
 } from '@zev2/shared';
@@ -68,6 +70,7 @@ const webGeminiReviewMessage = ref('');
 const webGeminiReviewLoading = ref(false);
 const loadedWebGeminiReviewCreatedAt = ref('');
 const activeWebGeminiAction = ref<'refresh_review' | 'prepare_review' | 'apply_review' | ''>('');
+const activeFinalReviewAction = ref<FinalReviewActionType | ''>('');
 const requestActivityEvents = ref<RequestDraftActivityEvent[]>([]);
 const requestActivitySummary = ref<RequestDraftActivitySummary | null>(null);
 const requestActivityLoading = ref(false);
@@ -223,14 +226,18 @@ const renderRequest = computed(() =>
   )
 );
 
-const outputVideoUri = computed(() => {
+const outputVideoFileRef = computed(() => {
   const fileRefId = renderRequest.value?.result?.fileRefId;
   if (!fileRefId) {
-    return '';
+    return undefined;
   }
 
-  const fileRef = findById(store.state.fileRefs, fileRefId);
-  return fileRef?.uri ? uriWithRef(fileRef.uri, fileRefId) : '';
+  return findById(store.state.fileRefs, fileRefId);
+});
+
+const outputVideoUri = computed(() => {
+  const fileRef = outputVideoFileRef.value;
+  return fileRef?.uri ? uriWithRef(fileRef.uri, fileRef.id) : '';
 });
 
 const canRedoVideo = computed(() =>
@@ -243,6 +250,50 @@ const outputVideoReferenceText = computed(() => {
   }
 
   return new URL(outputVideoUri.value, window.location.origin).toString();
+});
+
+const finalReviewActionsForCurrentOutput = computed<FinalReviewAction[]>(() => {
+  const draft = currentDraft.value;
+  const fileRef = outputVideoFileRef.value;
+  if (!draft || !fileRef) {
+    return [];
+  }
+
+  return store.state.finalReviewActions
+    .filter((action) => action.requestDraftId === draft.id && action.outputVideoUri === fileRef.uri)
+    .sort((left, right) => right.createdAt.localeCompare(left.createdAt));
+});
+
+const currentFinalReviewAction = computed(() =>
+  finalReviewActionsForCurrentOutput.value[0]
+);
+
+const hasPublishReadyForCurrentOutput = computed(() =>
+  finalReviewActionsForCurrentOutput.value.some((action) => action.action === 'publish_ready')
+);
+
+const hasFinalCompleteForCurrentOutput = computed(() =>
+  finalReviewActionsForCurrentOutput.value.some((action) => action.action === 'final_complete')
+);
+
+const finalReviewStatusTitle = computed(() => {
+  if (hasFinalCompleteForCurrentOutput.value) {
+    return '最終完了として記録済み';
+  }
+
+  if (hasPublishReadyForCurrentOutput.value) {
+    return '投稿可能として記録済み';
+  }
+
+  return '人間の最終判断は未記録';
+});
+
+const finalReviewStatusDetail = computed(() => {
+  if (currentFinalReviewAction.value) {
+    return currentFinalReviewAction.value.reason;
+  }
+
+  return '動画を確認した後、投稿可能または最終完了として記録できます';
 });
 
 const canApplyWebGeminiReview = computed(() =>
@@ -657,12 +708,17 @@ const requestActivityRefreshKey = computed(() => {
     .filter((action) => action.requestDraftId === draft.id)
     .map((action) => `${action.id}:${action.action}:${action.createdAt}`)
     .join('|');
+  const finalReviewPart = store.state.finalReviewActions
+    .filter((action) => action.requestDraftId === draft.id)
+    .map((action) => `${action.id}:${action.action}:${action.outputVideoUri}:${action.createdAt}`)
+    .join('|');
   const decisionPart = store.state.decisionLogs
     .filter((decision) => decision.requestDraftId === draft.id)
     .map((decision) => `${decision.id}:${decision.createdAt}`)
     .join('|');
 
-  return [draft.id, draft.status, draft.updatedAt, requestPart, reviewPart, actionPart, decisionPart].join('::');
+  return [draft.id, draft.status, draft.updatedAt, requestPart, reviewPart, actionPart, finalReviewPart, decisionPart]
+    .join('::');
 });
 
 const systemLogItems = computed<ActivityLogItem[]>(() => {
@@ -1181,6 +1237,29 @@ async function applyWebGeminiReviewChanges() {
   }
 }
 
+async function submitOutputFinalReview(action: FinalReviewActionType) {
+  const draft = currentDraft.value;
+  if (!draft || !outputVideoUri.value || agentOperationLocked.value || activeFinalReviewAction.value) {
+    return;
+  }
+
+  if (action === 'publish_ready' && hasPublishReadyForCurrentOutput.value) {
+    return;
+  }
+
+  if (hasFinalCompleteForCurrentOutput.value) {
+    return;
+  }
+
+  activeFinalReviewAction.value = action;
+  try {
+    await store.submitFinalReview(draft.id, action);
+    await refreshRequestActivity();
+  } finally {
+    activeFinalReviewAction.value = '';
+  }
+}
+
 async function resumeAgentWork() {
   if (!canResumeAgentWork.value) {
     return;
@@ -1637,6 +1716,31 @@ watch(
               </div>
             </section>
           </div>
+
+          <section class="final-review-panel" aria-label="完成動画の人間判断">
+            <div>
+              <p class="eyebrow">Human Gate</p>
+              <h3>{{ finalReviewStatusTitle }}</h3>
+              <p>{{ finalReviewStatusDetail }}</p>
+            </div>
+            <div class="final-review-actions">
+              <button
+                type="button"
+                class="secondary-button"
+                :disabled="agentOperationLocked || hasPublishReadyForCurrentOutput || hasFinalCompleteForCurrentOutput || activeFinalReviewAction !== ''"
+                @click="submitOutputFinalReview('publish_ready')"
+              >
+                {{ activeFinalReviewAction === 'publish_ready' ? '記録中' : '投稿可能として記録' }}
+              </button>
+              <button
+                type="button"
+                :disabled="agentOperationLocked || hasFinalCompleteForCurrentOutput || activeFinalReviewAction !== ''"
+                @click="submitOutputFinalReview('final_complete')"
+              >
+                {{ activeFinalReviewAction === 'final_complete' ? '記録中' : '最終完了として記録' }}
+              </button>
+            </div>
+          </section>
 
           <div class="redo-actions">
             <button
@@ -2591,7 +2695,7 @@ button:disabled {
 
 .video-panel {
   display: grid;
-  grid-template-rows: auto minmax(0, 1fr) auto;
+  grid-template-rows: auto minmax(0, 1fr) auto auto;
   gap: 12px;
 }
 
@@ -2778,8 +2882,38 @@ video {
   align-items: center;
 }
 
-.final-action {
+.final-review-panel {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  border: 1px solid rgba(255, 242, 0, 0.26);
+  padding: 10px 12px;
+  background:
+    linear-gradient(90deg, rgba(255, 242, 0, 0.09), transparent 46%),
+    rgba(5, 5, 6, 0.88);
+}
+
+.final-review-panel h3 {
+  margin: 0;
+  color: var(--text);
+  font-family: var(--font-en);
+  font-size: 16px;
+  line-height: 1.25;
+}
+
+.final-review-panel p {
+  margin: 4px 0 0;
+  color: var(--text-dim);
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.final-review-actions {
+  display: flex;
+  flex-wrap: wrap;
   justify-content: flex-end;
+  gap: 8px;
 }
 
 .work-wait-panel {
@@ -3287,6 +3421,15 @@ video {
 
   .video-review-layout {
     grid-template-columns: minmax(0, 1fr);
+  }
+
+  .final-review-panel {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .final-review-actions {
+    justify-content: flex-start;
   }
 }
 

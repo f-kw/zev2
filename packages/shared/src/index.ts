@@ -100,6 +100,7 @@ export type FileRefAccess = 'internal' | 'external';
 export type ControlReviewKind = 'theme_selection' | 'material_confirmation' | 'render_readiness';
 export type ControlReviewStatus = 'review_required' | 'approved' | 'rejected' | 'changes_requested';
 export type HumanReviewActionType = 'approve' | 'reject' | 'request_changes';
+export type FinalReviewActionType = 'publish_ready' | 'final_complete';
 export type DecisionLogActor = 'agent' | 'runner' | 'backend' | 'system' | 'user';
 export type AgentOperationLogEventType =
   | 'draft_created'
@@ -296,6 +297,7 @@ export interface Zev2State {
   decisionLogs: DecisionLog[];
   controlReviewItems: ControlReviewItem[];
   humanReviewActions: HumanReviewAction[];
+  finalReviewActions: FinalReviewAction[];
 }
 
 export interface AgentOperationLog {
@@ -364,6 +366,15 @@ export interface HumanReviewAction {
   createdAt: string;
 }
 
+export interface FinalReviewAction {
+  id: string;
+  requestDraftId: string;
+  action: FinalReviewActionType;
+  reason: string;
+  outputVideoUri: string;
+  createdAt: string;
+}
+
 const OUTPUT_TYPE_BY_REQUEST_TYPE = {
   prepare_video: 'Video',
   run_stt: 'Transcript',
@@ -393,7 +404,8 @@ export function createInitialState(): Zev2State {
     agentOperationLogs: [],
     decisionLogs: [],
     controlReviewItems: [],
-    humanReviewActions: []
+    humanReviewActions: [],
+    finalReviewActions: []
   };
 }
 

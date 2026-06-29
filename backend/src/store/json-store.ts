@@ -9,6 +9,7 @@ import {
   type AgentRequestStatus,
   type ControlReviewKind,
   type ControlReviewStatus,
+  type FinalReviewActionType,
   type FileRefKind,
   type HumanReviewActionType,
   type Zev2State
@@ -47,6 +48,7 @@ const currentControlReviewStatuses = new Set<ControlReviewStatus>([
   'changes_requested'
 ]);
 const currentHumanReviewActions = new Set<HumanReviewActionType>(['approve', 'reject', 'request_changes']);
+const currentFinalReviewActions = new Set<FinalReviewActionType>(['publish_ready', 'final_complete']);
 const currentAgentOperationLogEvents = new Set<AgentOperationLogEventType>([
   'draft_created',
   'draft_approved',
@@ -110,6 +112,17 @@ function isCurrentHumanReviewAction(value: unknown): boolean {
   );
 }
 
+function isCurrentFinalReviewAction(value: unknown): boolean {
+  const action = recordValue(value);
+  return (
+    typeof action.id === 'string' &&
+    typeof action.requestDraftId === 'string' &&
+    typeof action.outputVideoUri === 'string' &&
+    typeof action.createdAt === 'string' &&
+    currentFinalReviewActions.has(action.action as FinalReviewActionType)
+  );
+}
+
 function isCurrentAgentOperationLog(value: unknown): boolean {
   const log = recordValue(value);
   return (
@@ -129,7 +142,8 @@ function withCurrentStateShape(value: unknown): unknown {
   const state = value as Partial<Zev2State>;
   return {
     ...state,
-    agentOperationLogs: Array.isArray(state.agentOperationLogs) ? state.agentOperationLogs : []
+    agentOperationLogs: Array.isArray(state.agentOperationLogs) ? state.agentOperationLogs : [],
+    finalReviewActions: Array.isArray(state.finalReviewActions) ? state.finalReviewActions : []
   };
 }
 
@@ -148,12 +162,14 @@ function isZev2State(value: unknown): value is Zev2State {
     Array.isArray(state.decisionLogs) &&
     Array.isArray(state.controlReviewItems) &&
     Array.isArray(state.humanReviewActions) &&
+    Array.isArray(state.finalReviewActions) &&
     state.requestDrafts.every(isCurrentRequestDraft) &&
     state.agentRequests.every(isCurrentAgentRequest) &&
     state.fileRefs.every(isCurrentFileRef) &&
     state.agentOperationLogs.every(isCurrentAgentOperationLog) &&
     state.controlReviewItems.every(isCurrentControlReview) &&
-    state.humanReviewActions.every(isCurrentHumanReviewAction)
+    state.humanReviewActions.every(isCurrentHumanReviewAction) &&
+    state.finalReviewActions.every(isCurrentFinalReviewAction)
   );
 }
 

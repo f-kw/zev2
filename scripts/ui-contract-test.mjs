@@ -57,4 +57,11 @@ assertContract(
   '作業履歴ダイアログで履歴本文を検索できる入力が見つかりません'
 );
 
+assertContract(
+  appVue.includes('aria-label="完成動画の人間判断"') &&
+    appVue.includes("submitOutputFinalReview('publish_ready')") &&
+    appVue.includes("submitOutputFinalReview('final_complete')"),
+  '完成動画を投稿可能または最終完了として記録する人間判断欄が見つかりません'
+);
+
 console.log('UI契約テスト成功');

@@ -4,6 +4,8 @@ import {
   type AgentCompletionInput,
   type AgentClaimInput,
   type AgentFailureInput,
+  type FinalReviewAction,
+  type FinalReviewActionType,
   type AgentRequest,
   type HumanReviewActionType,
   type RequestDraft,
@@ -83,6 +85,7 @@ export interface RequestDraftActivityEvent {
     | 'agent_decision'
     | 'human_review_required'
     | 'human_review_action'
+    | 'final_review_action'
     | 'web_gemini_review_status';
   occurredAt: string;
   actor: 'user' | 'agent' | 'runner' | 'backend' | 'system';
@@ -93,6 +96,7 @@ export interface RequestDraftActivityEvent {
   reviewItemId?: string;
   decisionLogId?: string;
   humanReviewActionId?: string;
+  finalReviewActionId?: string;
   fileRefId?: string;
   outputId?: string;
 }
@@ -251,6 +255,18 @@ export async function requestGeneratedVideoChanges(
     draft: response.data.draft,
     state: response.data.state
   };
+}
+
+export async function submitFinalReview(
+  id: string,
+  action: FinalReviewActionType,
+  reason?: string
+): Promise<{ finalReviewAction: FinalReviewAction; state: Zev2State }> {
+  const response = await api.post(`/request-drafts/${id}/final-review`, {
+    action,
+    ...(reason ? { reason } : {})
+  });
+  return response.data;
 }
 
 export async function fetchWebGeminiReview(id: string): Promise<{

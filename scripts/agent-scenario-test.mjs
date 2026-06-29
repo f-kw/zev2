@@ -2003,6 +2003,106 @@ async function assertGeneratedVideoChangeRejectsUnknownScope(apiBaseUrl, sourceD
   );
 }
 
+async function assertFinalReviewControls(apiBaseUrl, sourceDraftId) {
+  const unknownActionError = await expectRequestJsonFailure(
+    apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/final-review`),
+    {
+      method: 'POST',
+      body: JSON.stringify({
+        action: 'unknown_final_action'
+      })
+    }
+  );
+  assertScenario(
+    unknownActionError.includes('完成動画への判断が不明です'),
+    '完成動画への不明な人間判断が拒否されていない'
+  );
+
+  const publishReady = await requestJson(apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/final-review`), {
+    method: 'POST',
+    body: JSON.stringify({
+      action: 'publish_ready'
+    })
+  });
+  assertScenario(
+    publishReady.finalReviewAction?.action === 'publish_ready',
+    '投稿可能の人間判断が保存されていない'
+  );
+  assertScenario(
+    publishReady.finalReviewAction.outputVideoUri?.startsWith('/api/artifacts/'),
+    '投稿可能の人間判断が対象動画を記録していない'
+  );
+
+  const publishActivity = await requestJson(apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/activity`));
+  assertScenario(
+    publishActivity.summary?.title === '投稿可能として確認済み',
+    '投稿可能の人間判断が現在状態要約に反映されていない'
+  );
+  assertScenario(
+    publishActivity.events.some((event) => (
+      event.kind === 'final_review_action' &&
+        event.title === '人間が投稿可能として確認'
+    )),
+    '投稿可能の人間判断が監査タイムラインで追えない'
+  );
+
+  const duplicatePublishError = await expectRequestJsonFailure(
+    apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/final-review`),
+    {
+      method: 'POST',
+      body: JSON.stringify({
+        action: 'publish_ready'
+      })
+    }
+  );
+  assertScenario(
+    duplicatePublishError.includes('すでに投稿可能'),
+    '同じ完成動画への投稿可能判断の重複が拒否されていない'
+  );
+
+  const finalComplete = await requestJson(apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/final-review`), {
+    method: 'POST',
+    body: JSON.stringify({
+      action: 'final_complete'
+    })
+  });
+  assertScenario(
+    finalComplete.finalReviewAction?.action === 'final_complete',
+    '最終完了の人間判断が保存されていない'
+  );
+
+  const finalActivity = await requestJson(apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/activity`));
+  assertScenario(
+    finalActivity.summary?.title === '最終完了',
+    '最終完了の人間判断が現在状態要約に反映されていない'
+  );
+  assertScenario(
+    finalActivity.summary.nextAction.includes('最終成果'),
+    '最終完了後の次状態が人間に分かる文になっていない'
+  );
+  assertScenario(
+    finalActivity.events.some((event) => (
+      event.kind === 'final_review_action' &&
+        event.title === '人間が最終完了として確認'
+    )),
+    '最終完了の人間判断が監査タイムラインで追えない'
+  );
+
+  const duplicateFinalError = await expectRequestJsonFailure(
+    apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/final-review`),
+    {
+      method: 'POST',
+      body: JSON.stringify({
+        action: 'final_complete'
+      })
+    }
+  );
+  assertScenario(
+    duplicateFinalError.includes('すでに最終完了'),
+    '最終完了済みの完成動画への重複判断が拒否されていない'
+  );
+}
+
 async function assertGeneratedDraftCompleted(apiBaseUrl, runtimeDir, draftId, label, expectedManifestTypes = workflowTypes) {
   const state = await requestJson(apiPath(apiBaseUrl, '/state'));
   const finalRequests = agentRequestsForDraft(state, draftId);
@@ -2854,6 +2954,7 @@ async function scenarioAutomaticVideoCreation(apiBaseUrl, runtimeDir) {
       nextAfterMultipleRestarts.request?.type === 'apply_adjustment',
     '複数の作り直し候補があるとき、最後に作った編集コピーが次の実行対象になっていない'
   );
+  await assertFinalReviewControls(apiBaseUrl, draft.id);
 
   await assertMaterialReselectFromMaterialConfirmation(apiBaseUrl, runtimeDir);
   await assertContentReselectFromMaterialConfirmation(apiBaseUrl, runtimeDir);

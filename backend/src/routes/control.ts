@@ -19,6 +19,8 @@ import {
   type ControlReviewKind,
   type DecisionLog,
   type DecisionLogType,
+  type FinalReviewAction,
+  type FinalReviewActionType,
   type FileRef,
   type HumanReviewAction,
   type HumanReviewActionType,
@@ -40,6 +42,7 @@ import {
   isStatusIn,
   lastMatching,
   latestByCreatedAt,
+  recordValue,
   validateRequestDraftInput,
   type RequestDraftInput
 } from '@zev2/shared';
@@ -64,6 +67,7 @@ const reviewChangeScopes: ReviewChangeScope[] = [
   'adjustment'
 ];
 const generatedVideoChangeScopes: GeneratedVideoChangeScope[] = ['theme_selection', 'edit_plan', 'adjustment'];
+const finalReviewActionTypes: FinalReviewActionType[] = ['publish_ready', 'final_complete'];
 type LoadedState = Awaited<ReturnType<typeof loadState>>;
 type WebGeminiReviewArtifact = {
   draftId: string;
@@ -119,6 +123,7 @@ type RequestDraftActivityEvent = {
     | 'agent_decision'
     | 'human_review_required'
     | 'human_review_action'
+    | 'final_review_action'
     | 'web_gemini_review_status';
   occurredAt: string;
   actor: 'user' | 'agent' | 'runner' | 'backend' | 'system';
@@ -129,6 +134,7 @@ type RequestDraftActivityEvent = {
   reviewItemId?: string;
   decisionLogId?: string;
   humanReviewActionId?: string;
+  finalReviewActionId?: string;
   fileRefId?: string;
   outputId?: string;
 };
@@ -1158,6 +1164,50 @@ function humanReviewActionTitle(action: HumanReviewActionType): string {
   return `人間が${reviewActionLabel(action)}`;
 }
 
+function finalReviewActionTitle(action: FinalReviewActionType): string {
+  if (action === 'publish_ready') {
+    return '人間が投稿可能として確認';
+  }
+
+  return '人間が最終完了として確認';
+}
+
+function defaultFinalReviewReason(action: FinalReviewActionType): string {
+  if (action === 'publish_ready') {
+    return '完成動画を確認し、投稿可能な成果物として記録しました';
+  }
+
+  return '完成動画を確認し、この編集を最終完了として記録しました';
+}
+
+function latestFinalReviewActionForOutput(
+  state: LoadedState,
+  requestDraftId: string,
+  outputVideo: FileRef | undefined
+): FinalReviewAction | undefined {
+  if (!outputVideo) {
+    return undefined;
+  }
+
+  return latestByCreatedAt(state.finalReviewActions.filter(
+    (action) => action.requestDraftId === requestDraftId && action.outputVideoUri === outputVideo.uri
+  ));
+}
+
+function hasFinalReviewActionForOutput(
+  state: LoadedState,
+  requestDraftId: string,
+  outputVideo: FileRef,
+  actionType: FinalReviewActionType
+): boolean {
+  return state.finalReviewActions.some(
+    (action) =>
+      action.requestDraftId === requestDraftId &&
+      action.outputVideoUri === outputVideo.uri &&
+      action.action === actionType
+  );
+}
+
 function decisionTypeLabel(type: DecisionLogType): string {
   if (type === 'theme_selection') {
     return 'テーマ選択';
@@ -1407,6 +1457,42 @@ function buildWebGeminiReviewActivitySummary(
   return baseSummary;
 }
 
+function buildFinalReviewActivitySummary(
+  baseSummary: RequestDraftActivitySummary,
+  state: LoadedState,
+  draft: RequestDraft,
+  outputVideo: FileRef | undefined
+): RequestDraftActivitySummary {
+  if (!outputVideo) {
+    return baseSummary;
+  }
+
+  const finalReviewAction = latestFinalReviewActionForOutput(state, draft.id, outputVideo);
+  if (!finalReviewAction) {
+    return baseSummary;
+  }
+
+  if (finalReviewAction.action === 'publish_ready') {
+    return {
+      status: 'completed',
+      title: '投稿可能として確認済み',
+      detail: compactActivityText(finalReviewAction.reason, '人間が完成動画を投稿可能として確認しました'),
+      nextAction: '投稿処理または最終完了の判断を行います',
+      requestDraftId: draft.id,
+      outputVideoUri: outputVideo.uri
+    };
+  }
+
+  return {
+    status: 'completed',
+    title: '最終完了',
+    detail: compactActivityText(finalReviewAction.reason, '人間が完成動画を最終完了として確認しました'),
+    nextAction: 'この完成動画を最終成果として扱います',
+    requestDraftId: draft.id,
+    outputVideoUri: outputVideo.uri
+  };
+}
+
 function buildRequestDraftActivity(state: LoadedState, draft: RequestDraft): RequestDraftActivityEvent[] {
   const events: RequestDraftActivityEvent[] = [
     {
@@ -1517,6 +1603,19 @@ function buildRequestDraftActivity(state: LoadedState, draft: RequestDraft): Req
     });
   }
 
+  for (const action of state.finalReviewActions.filter((item) => item.requestDraftId === draft.id)) {
+    events.push({
+      id: `final-review:${action.id}`,
+      kind: 'final_review_action',
+      occurredAt: action.createdAt,
+      actor: 'user',
+      title: finalReviewActionTitle(action.action),
+      detail: compactActivityText(action.reason, '完成動画に対する人間の最終判断を保存しました'),
+      requestDraftId: draft.id,
+      finalReviewActionId: action.id
+    });
+  }
+
   return events.sort((left, right) => (
     left.occurredAt.localeCompare(right.occurredAt) || left.id.localeCompare(right.id)
   ));
@@ -1585,6 +1684,7 @@ function activitySearchText(event: RequestDraftActivitySearchResult): string {
     event.reviewItemId ?? '',
     event.decisionLogId ?? '',
     event.humanReviewActionId ?? '',
+    event.finalReviewActionId ?? '',
     event.fileRefId ?? '',
     event.outputId ?? '',
     event.draftPurpose,
@@ -2687,13 +2787,14 @@ router.get('/request-drafts/:id/activity', async (request, response) => {
   const webGeminiRunLogResult = await readWebGeminiReviewRunLog(draft.id);
 
   const baseSummary = buildRequestDraftActivitySummary(state, draft);
-  const summary = buildWebGeminiReviewActivitySummary(
+  const webGeminiSummary = buildWebGeminiReviewActivitySummary(
     baseSummary,
     draft,
     outputVideo,
     webGeminiReviewResult,
     webGeminiRunLogResult
   );
+  const summary = buildFinalReviewActivitySummary(webGeminiSummary, state, draft, outputVideo);
 
   response.json({
     requestDraftId: draft.id,
@@ -2731,6 +2832,59 @@ router.get('/activity-search', async (request, response) => {
     totalCount: results.length,
     results
   });
+});
+
+router.post('/request-drafts/:id/final-review', async (request, response) => {
+  const state = await loadStateWithClaimRecovery();
+  const draft = findById(state.requestDrafts, request.params.id);
+  if (!draft) {
+    response.status(404).json({ error: '実行前下書きが見つかりません' });
+    return;
+  }
+
+  const input = recordValue(request.body);
+  const action = input.action as FinalReviewActionType;
+  if (!finalReviewActionTypes.includes(action)) {
+    response.status(400).json({ error: '完成動画への判断が不明です' });
+    return;
+  }
+
+  const outputVideo = latestOutputVideoFileRef(state, draft.id);
+  if (!outputVideo) {
+    response.status(409).json({ error: '完成動画がまだありません' });
+    return;
+  }
+
+  const outputVideoError = await validateWebGeminiOutputVideo(draft, outputVideo);
+  if (outputVideoError) {
+    response.status(409).json({ error: outputVideoError, state });
+    return;
+  }
+
+  if (hasFinalReviewActionForOutput(state, draft.id, outputVideo, 'final_complete')) {
+    response.status(409).json({ error: 'この完成動画はすでに最終完了として記録済みです', state });
+    return;
+  }
+
+  if (action === 'publish_ready' && hasFinalReviewActionForOutput(state, draft.id, outputVideo, 'publish_ready')) {
+    response.status(409).json({ error: 'この完成動画はすでに投稿可能として記録済みです', state });
+    return;
+  }
+
+  const createdAt = nowIso();
+  const finalReviewAction: FinalReviewAction = {
+    id: createId('final_review'),
+    requestDraftId: draft.id,
+    action,
+    reason: trimText(input.reason) || defaultFinalReviewReason(action),
+    outputVideoUri: outputVideo.uri,
+    createdAt
+  };
+
+  draft.updatedAt = createdAt;
+  state.finalReviewActions.push(finalReviewAction);
+  await saveState(state);
+  response.json({ finalReviewAction, state });
 });
 
 router.post('/request-drafts', async (request, response) => {

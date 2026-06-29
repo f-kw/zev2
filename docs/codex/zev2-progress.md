@@ -753,3 +753,4 @@ ZEVの実装を参照し、zev2ではbackendが実STT、実LLM、実Gemini、実
 - `artifactDelivery.mode=upload` で、runner一時置き場を消した後でも、次のrunnerがbackendから前工程成果物を取得して後続工程へ進めるようにした。シナリオテストではSTT成果物を読み戻してテーマ作成へ進めることを確認する。
 - AIエージェント用の成果物取得API `GET /api/agent-artifacts/:draftId/:fileName` を追加した。UI向け静的配信とは別にし、`ZEV2_AGENT_API_TOKEN` 設定時は読み戻しも認証対象にする。runnerのupload読み戻しはこのAPIを使う。
 - 作業履歴検索API `GET /api/activity-search` を追加した。全下書きの作業履歴を、文字、履歴種別、実行者、下書きIDで検索できる。画面の全履歴ダイアログにも検索入力を追加し、工程名、理由、成果物参照などを下書き内で探せるようにした。
+- 完成動画に対する人間の最終判断API `POST /api/request-drafts/:id/final-review` を追加した。動画生成完了はAI処理完了にすぎないため、投稿可能または最終完了は人間判断として別に保存する。画面には完成動画の下に小さな判断欄を置き、作業履歴と現在状態サマリにも反映する。
