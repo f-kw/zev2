@@ -4,6 +4,7 @@ import path from 'node:path';
 import {
   recordValue,
   type AdjustmentRuntimeMode,
+  type ArtifactDeliveryMode,
   type ContentDiscoveryRuntimeMode,
   type GeminiRuntimeMode,
   type RuntimeConfig,
@@ -31,6 +32,9 @@ const DEFAULT_RUNTIME_CONFIG: RuntimeConfig = {
   },
   agentClaim: {
     ttlMilliseconds: 0
+  },
+  artifactDelivery: {
+    mode: 'local'
   },
   source: {
     defaultUri: 'runtime/artifacts/draft_w4Lp9IJC6pQl3FsRfFL9t/source-video.mp4',
@@ -92,6 +96,14 @@ function parseAdjustmentRuntimeMode(value: unknown): AdjustmentRuntimeMode {
   }
 
   throw new Error('設定ファイルの adjustment.mode は fixed を指定してください');
+}
+
+function parseArtifactDeliveryMode(value: unknown): ArtifactDeliveryMode {
+  if (value === 'local' || value === 'upload') {
+    return value;
+  }
+
+  throw new Error('設定ファイルの artifactDelivery.mode は local または upload を指定してください');
 }
 
 function stringFromConfig(value: unknown, fallback: string): string {
@@ -199,6 +211,7 @@ function normalizeRuntimeConfig(value: unknown): RuntimeConfig {
   const adjustment = recordValue(root.adjustment);
   const videoOutput = recordValue(root.videoOutput);
   const agentClaim = recordValue(root.agentClaim);
+  const artifactDelivery = recordValue(root.artifactDelivery);
   const source = recordValue(root.source);
 
   return {
@@ -231,6 +244,9 @@ function normalizeRuntimeConfig(value: unknown): RuntimeConfig {
         DEFAULT_RUNTIME_CONFIG.agentClaim.ttlMilliseconds
       )
     },
+    artifactDelivery: {
+      mode: parseArtifactDeliveryMode(artifactDelivery.mode ?? DEFAULT_RUNTIME_CONFIG.artifactDelivery.mode)
+    },
     source: {
       defaultUri: stringFromConfig(source.defaultUri, DEFAULT_RUNTIME_CONFIG.source.defaultUri),
       defaultPurpose: stringFromConfig(source.defaultPurpose, DEFAULT_RUNTIME_CONFIG.source.defaultPurpose)
@@ -260,7 +276,8 @@ export function createRunnerEnvironmentFromConfig(config: RuntimeConfig): Record
     ZEV2_ADJUSTMENT_MODE: config.adjustment.mode,
     ZEV2_FFMPEG_VIDEO_ENCODER: config.videoOutput.encoder,
     ZEV2_FFMPEG_VIDEO_EXTRA_ARGS: JSON.stringify(config.videoOutput.extraArgs),
-    ZEV2_AGENT_CLAIM_TTL_MS: String(config.agentClaim.ttlMilliseconds)
+    ZEV2_AGENT_CLAIM_TTL_MS: String(config.agentClaim.ttlMilliseconds),
+    ZEV2_ARTIFACT_DELIVERY_MODE: config.artifactDelivery.mode
   };
 
   if (config.stt.mode === 'fixed') {

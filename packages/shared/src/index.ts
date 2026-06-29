@@ -85,6 +85,7 @@ export type SttRuntimeMode = 'fixed' | 'local';
 export type ContentDiscoveryRuntimeMode = 'fixed' | 'transcript';
 export type GeminiRuntimeMode = 'fixed' | 'gemini';
 export type AdjustmentRuntimeMode = 'fixed';
+export type ArtifactDeliveryMode = 'local' | 'upload';
 
 export type RequestDraftStatus = 'draft' | 'approved' | 'rejected';
 export type AgentRequestStatus =
@@ -158,6 +159,9 @@ export interface RuntimeConfig {
   };
   agentClaim: {
     ttlMilliseconds: number;
+  };
+  artifactDelivery: {
+    mode: ArtifactDeliveryMode;
   };
   source: {
     defaultUri: string;

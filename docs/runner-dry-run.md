@@ -137,6 +137,13 @@ render_video
 runnerが同じランタイム上で成果物ファイルを作れる場合は、従来通りファイルを直接作ってから完了APIへ参照を渡します。
 外部のAIエージェントが成果物本体をbackendへ渡す場合は、先に `PUT /api/artifacts/:draftId/:fileName` で保存し、返されたURIを完了APIへ渡します。
 
+`config/runtime.jsonc` の `artifactDelivery.mode` で保存方式を選びます。
+
+- `local`: runnerが `runtime/artifacts` へ直接保存し、完了APIへ参照を渡す。
+- `upload`: runnerが `runtime/runner-artifacts` で成果物を作り、backendへアップロードしてから、返された参照を完了APIへ渡す。
+
+どちらの方式でも、状態に入るのは成果物本文ではなく、保存済みURI、保存ファイル名、バイト数、SHA-256です。
+
 ## 失敗時
 
 処理中に失敗した場合、runner は `POST /api/agent-requests/:id/fail` で失敗理由を返します。

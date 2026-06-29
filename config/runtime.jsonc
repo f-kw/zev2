@@ -78,6 +78,19 @@
     "ttlMilliseconds": 0
   },
 
+  // runner が作った成果物本体を backend へ渡す方法です。
+  //
+  // "local" は、runner と backend が同じ runtime/artifacts を見ている前提で、
+  // runner が成果物ファイルを直接作り、完了APIにはその参照だけを渡します。
+  // ローカル開発や現在の固定データ確認では、この方式が一番単純です。
+  //
+  // "upload" は、runner が一時置き場で成果物を作った後、
+  // PUT /api/artifacts/:draftId/:fileName で backend へアップロードします。
+  // runner と backend の保存場所を分けたい場合や、別マシンのAIエージェントから成果物を返す形を確認したい場合に使います。
+  "artifactDelivery": {
+    "mode": "local"
+  },
+
   // 新規依頼を作るとき、画面に最初から入れておく入力です。
   //
   // defaultUri には、ローカルファイルパス、zev2の作業フォルダからの相対パス、YouTube URLを指定できます。

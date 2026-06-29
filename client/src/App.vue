@@ -132,6 +132,13 @@ const runtimeSummaries = computed(() => {
       description: store.runtimeConfig.videoOutput.extraArgs.length > 0
         ? `追加設定: ${store.runtimeConfig.videoOutput.extraArgs.join(' ')}`
         : '確認しやすい重さで完成動画を作ります'
+    },
+    {
+      label: '成果物保存',
+      title: store.runtimeConfig.artifactDelivery.mode === 'upload' ? 'API保存' : 'ローカル保存',
+      description: store.runtimeConfig.artifactDelivery.mode === 'upload'
+        ? 'runnerが作った成果物をbackendへアップロードします'
+        : 'runnerが同じ作業フォルダへ成果物を直接保存します'
     }
   ];
 });

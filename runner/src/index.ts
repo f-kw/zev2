@@ -1,6 +1,6 @@
 import { spawn } from 'node:child_process';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
-import { existsSync } from 'node:fs';
+import { createReadStream, existsSync } from 'node:fs';
 import path from 'node:path';
 import { GoogleGenAI, type GenerateContentResponse, type Part } from '@google/genai';
 import {
@@ -14,6 +14,7 @@ import {
   type AgentDecisionInput,
   type AgentRequest,
   type AgentRequestType,
+  type ArtifactDeliveryMode,
   type ControlReviewOption,
   type FileRefKind,
   getDryRunMeaningForRequest,
@@ -74,6 +75,7 @@ const useFixedTranscript = process.env.ZEV2_STT_RUNTIME_MODE === 'fixed';
 const contentDiscoveryMode = process.env.ZEV2_CONTENT_DISCOVERY_MODE ?? 'fixed';
 const useFixedEditPlan = process.env.ZEV2_EDIT_PLAN_MODE === 'fixed';
 const adjustmentMode = process.env.ZEV2_ADJUSTMENT_MODE ?? 'fixed';
+const artifactDeliveryMode = parseArtifactDeliveryMode(process.env.ZEV2_ARTIFACT_DELIVERY_MODE);
 const agentOwnerId = (process.env.ZEV2_AGENT_OWNER_ID ?? `zev2-runner:${process.pid}`).trim();
 const agentClaimTtlMs = Number.parseInt(process.env.ZEV2_AGENT_CLAIM_TTL_MS ?? '0', 10);
 const SOURCE_VIDEO_FILE_NAME = 'source-video.mp4';
@@ -153,6 +155,18 @@ function defaultFfprobeCommand(): string {
     : 'ffprobe';
 }
 
+function parseArtifactDeliveryMode(value: string | undefined): ArtifactDeliveryMode {
+  if (!value?.trim()) {
+    return 'local';
+  }
+
+  if (value === 'local' || value === 'upload') {
+    return value;
+  }
+
+  throw new Error('成果物保存方式は ZEV2_ARTIFACT_DELIVERY_MODE=local または upload で指定してください');
+}
+
 function runtimeDir(): string {
   return process.env.ZEV2_RUNTIME_DIR
     ? path.resolve(process.env.ZEV2_RUNTIME_DIR)
@@ -163,12 +177,18 @@ function artifactRoot(): string {
   return path.join(runtimeDir(), 'artifacts');
 }
 
+function runnerArtifactRoot(): string {
+  return artifactDeliveryMode === 'upload'
+    ? path.join(runtimeDir(), 'runner-artifacts')
+    : artifactRoot();
+}
+
 function sanitizePathPart(value: string): string {
   return value.replace(/[^a-zA-Z0-9_-]/g, '_');
 }
 
 function requestArtifactDir(request: AgentRequest): string {
-  return path.join(artifactRoot(), sanitizePathPart(request.requestDraftId));
+  return path.join(runnerArtifactRoot(), sanitizePathPart(request.requestDraftId));
 }
 
 function artifactUrl(request: AgentRequest, fileName: string): string {
@@ -244,13 +264,52 @@ function artifactPathByUrl(uri: string): string {
   }
 
   const relativePath = uri.slice(prefix.length).split('/').map(decodeURIComponent).join(path.sep);
-  const root = path.resolve(artifactRoot());
+  const root = path.resolve(runnerArtifactRoot());
   const artifactPath = path.resolve(root, relativePath);
   if (!artifactPath.startsWith(`${root}${path.sep}`)) {
     throw new Error(`成果物URIの保存先が不正です: ${uri}`);
   }
 
   return artifactPath;
+}
+
+function artifactUploadRouteFromUri(uri: string): string {
+  const prefix = '/api/artifacts/';
+  if (!uri.startsWith(prefix)) {
+    throw new Error(`アップロードできない成果物URIです: ${uri}`);
+  }
+
+  return uri.slice('/api'.length);
+}
+
+async function uploadArtifactToBackend(artifact: ArtifactInfo): Promise<ArtifactInfo> {
+  if (artifactDeliveryMode !== 'upload') {
+    return artifact;
+  }
+
+  const response = await fetch(`${runnerOptions.apiBaseUrl}${artifactUploadRouteFromUri(artifact.uri)}`, {
+    method: 'PUT',
+    headers: {
+      'content-type': artifact.mimeType,
+      ...agentApiAuthorizationHeader()
+    },
+    body: createReadStream(artifact.path) as unknown as RequestInit['body'],
+    duplex: 'half'
+  } as RequestInit & { duplex: 'half' });
+  const text = await response.text();
+  const body = text ? JSON.parse(text) as { uri?: string; error?: string; errors?: string[] } : {};
+  if (!response.ok) {
+    throw new Error(body.errors?.join(' / ') ?? body.error ?? `成果物アップロードに失敗しました: ${response.status}`);
+  }
+
+  if (!body.uri) {
+    throw new Error('成果物アップロード後の参照URIを確認できません');
+  }
+
+  return {
+    ...artifact,
+    uri: body.uri
+  };
 }
 
 async function writeJsonArtifact(request: AgentRequest, kind: FileRefKind, payload: unknown): Promise<ArtifactInfo> {
@@ -694,9 +753,10 @@ async function claimRequest(request: AgentRequest): Promise<void> {
 
 async function completeRequest(request: AgentRequest): Promise<void> {
   const artifact = await buildArtifactForRequest(request);
+  const completedArtifact = await uploadArtifactToBackend(artifact);
   await requestJson<StateResponse>(`/agent-requests/${request.id}/complete`, {
     method: 'POST',
-    body: JSON.stringify(buildCompletion(request, artifact))
+    body: JSON.stringify(buildCompletion(request, completedArtifact))
   });
 }
 

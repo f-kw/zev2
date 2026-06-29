@@ -206,7 +206,7 @@ async function startBackend(runtimeDir, port, extraEnv = {}) {
   throw new Error(`backendが起動しませんでした\n${output.join('')}`);
 }
 
-async function runAgent(apiBaseUrl, runtimeDir, maxSteps = 7, allowMaxStepStop = false) {
+async function runAgent(apiBaseUrl, runtimeDir, maxSteps = 7, allowMaxStepStop = false, extraEnv = {}) {
   try {
     await runProcess('node', ['runner/dist/index.js', `--max-steps=${maxSteps}`], {
       env: {
@@ -220,7 +220,8 @@ async function runAgent(apiBaseUrl, runtimeDir, maxSteps = 7, allowMaxStepStop =
         ZEV2_WORKSPACE_ROOT: workspaceRoot,
         ZEV2_STT_RUNTIME_MODE: 'fixed',
         ZEV2_CONTENT_DISCOVERY_MODE: 'fixed',
-        ZEV2_EDIT_PLAN_MODE: 'fixed'
+        ZEV2_EDIT_PLAN_MODE: 'fixed',
+        ...extraEnv
       },
       timeoutMs: 180000
     });
@@ -853,6 +854,27 @@ async function assertAgentRequestApiContract(apiBaseUrl, runtimeDir) {
   );
 }
 
+async function assertRunnerArtifactUploadDelivery(apiBaseUrl, runtimeDir) {
+  const draft = await createApprovedScenarioDraft(apiBaseUrl, 'runnerが成果物をアップロードして完了報告できる');
+  await runAgent(apiBaseUrl, runtimeDir, 1, true, {
+    ZEV2_ARTIFACT_DELIVERY_MODE: 'upload'
+  });
+
+  const state = await requestJson(apiPath(apiBaseUrl, '/state'));
+  const prepareRequest = agentRequestsForDraft(state, draft.id).find((request) => request.type === 'prepare_video');
+  assertScenario(prepareRequest?.status === 'succeeded', '成果物アップロード配送: 動画取り込みが成功していない');
+  const fileRef = state.fileRefs.find((item) => item.id === prepareRequest.result?.fileRefId);
+  assertScenario(fileRef?.uri === `/api/artifacts/${draft.id}/source-video.json`, '成果物アップロード配送: 完了報告のURIがbackend成果物配下ではない');
+
+  const backendArtifactPath = path.join(runtimeDir, 'artifacts', draft.id, 'source-video.json');
+  const runnerArtifactPath = path.join(runtimeDir, 'runner-artifacts', draft.id, 'source-video.json');
+  const backendArtifactText = await readFile(backendArtifactPath, 'utf8');
+  const runnerArtifactText = await readFile(runnerArtifactPath, 'utf8');
+  assertScenario(backendArtifactText === runnerArtifactText, '成果物アップロード配送: runnerで作った成果物とbackendへ保存された成果物が一致しない');
+  assertScenario(backendArtifactText.includes('"kind": "source_video"'), '成果物アップロード配送: backendへ保存された成果物の種別が読めない');
+  await assertFileRefMatchesArtifact(runtimeDir, state, fileRef, '成果物アップロード配送');
+}
+
 async function runDraftUntilReview(apiBaseUrl, runtimeDir, draftId, expectedKind) {
   for (let attempt = 0; attempt < 8; attempt += 1) {
     await runAgent(apiBaseUrl, runtimeDir);
@@ -1455,6 +1477,7 @@ async function assertRuntimeConfig(apiBaseUrl) {
   assertScenario(runtimeConfig.videoOutput?.encoder === 'libx264', '確認用動画の標準エンコーダーがlibx264になっていない');
   assertScenario(Array.isArray(runtimeConfig.videoOutput?.extraArgs), '確認用動画の追加ffmpeg引数が配列として渡っていない');
   assertScenario(runtimeConfig.agentClaim?.ttlMilliseconds === 0, 'AI作業取得期限の標準設定が自動期限なしとして読めない');
+  assertScenario(runtimeConfig.artifactDelivery?.mode === 'local', '成果物保存方式の標準設定がローカル保存として読めない');
   assertScenario(
     runtimeConfig.source?.defaultUri === 'runtime/artifacts/draft_w4Lp9IJC6pQl3FsRfFL9t/source-video.mp4',
     '設定ファイルの入力動画参照がUIへ渡せる形になっていない'
@@ -2842,6 +2865,7 @@ async function main() {
     await assertRuntimeConfig(apiBaseUrl);
     await assertRequestDraftRejectApiContract(apiBaseUrl);
     await assertAgentRequestApiContract(apiBaseUrl, runtimeDir);
+    await assertRunnerArtifactUploadDelivery(apiBaseUrl, runtimeDir);
     await scenarioAutomaticVideoCreation(apiBaseUrl, runtimeDir);
     console.log(`シナリオテスト成功: ${runtimeDir}`);
   } finally {

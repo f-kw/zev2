@@ -749,3 +749,4 @@ ZEVの実装を参照し、zev2ではbackendが実STT、実LLM、実Gemini、実
 - 実行前下書きの理由つき却下APIを追加した。未承認の下書きだけ却下でき、却下後はAI作業キューを作らず、承認も再却下も拒否する。却下理由はAI操作ログと作業履歴APIから読めることをシナリオテストで確認する。
 - AIエージェント実行APIだけをBearerトークンで保護できるようにした。`ZEV2_AGENT_API_TOKEN` をbackendとrunnerに設定すると、next、claim、complete、failで認証が必要になる。人間UI用の状態確認や人間制御APIは別経路として通し、状態APIへトークンが混ざらないことをシナリオテストで確認する。
 - 成果物本体を保存する専用APIを追加した。AIエージェントは `PUT /api/artifacts/:draftId/:fileName` で成果物を保存し、返されたURIを完了APIへ渡す。アップロードもAIエージェント認証対象にし、保存しても状態へ成果物本文やトークンが混ざらないことをシナリオテストで確認する。
+- runnerの成果物保存方式を設定で切り替えられるようにした。標準は従来通り `runtime/artifacts` へ直接保存し、`artifactDelivery.mode=upload` では `runtime/runner-artifacts` で作った成果物をbackendへアップロードしてから完了APIへ進む。アップロード配送でも動画取り込み工程を完了できることをシナリオテストで確認する。
