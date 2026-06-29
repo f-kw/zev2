@@ -19,6 +19,7 @@ AIエージェントは承認後の作業だけをAPIで取得し、外部処理
 - `complete` と `fail` は、`claim` したAIエージェントと同じ取得者だけが実行できる。
 - 成果物本体をbackendへ渡す場合は、先に `PUT /api/artifacts/:draftId/:fileName` で保存し、返されたURIを `complete` に渡す。
 - runnerは、backendと同じ作業フォルダへ直接保存する方式と、成果物アップロードAPIを使う方式を設定で切り替えられる。
+- アップロード方式では、後続工程のrunnerが必要な前工程成果物をbackendから取得してから処理する。
 - 前工程が完了していない作業は取得できない。
 - 内容選択、使用素材確認、動画生成前確認が必要な作業は、人間確認が承認されるまで取得できない。
 
@@ -211,6 +212,7 @@ Content-Type: application/json
 - `ZEV2_AGENT_API_TOKEN` が設定されている場合、このAPIもAIエージェント認証の対象になる。
 - 同じ名前の成果物がすでにある場合は拒否する。完了後の成果物実体が後から上書きされ、状態に残した検証情報と食い違うことを避けるため。
 - runnerの `artifactDelivery.mode` を `upload` にすると、runnerは一時置き場で作った成果物をこのAPIへ送り、返されたURIで完了報告する。
+- 後続工程を別runnerが実行する場合、そのrunnerは保存済みURIをbackendから一時置き場へ取得してから処理する。
 
 レスポンス:
 

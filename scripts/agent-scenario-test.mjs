@@ -856,7 +856,7 @@ async function assertAgentRequestApiContract(apiBaseUrl, runtimeDir) {
 
 async function assertRunnerArtifactUploadDelivery(apiBaseUrl, runtimeDir) {
   const draft = await createApprovedScenarioDraft(apiBaseUrl, 'runnerが成果物をアップロードして完了報告できる');
-  await runAgent(apiBaseUrl, runtimeDir, 1, true, {
+  await runAgent(apiBaseUrl, runtimeDir, 2, true, {
     ZEV2_ARTIFACT_DELIVERY_MODE: 'upload'
   });
 
@@ -865,6 +865,8 @@ async function assertRunnerArtifactUploadDelivery(apiBaseUrl, runtimeDir) {
   assertScenario(prepareRequest?.status === 'succeeded', '成果物アップロード配送: 動画取り込みが成功していない');
   const fileRef = state.fileRefs.find((item) => item.id === prepareRequest.result?.fileRefId);
   assertScenario(fileRef?.uri === `/api/artifacts/${draft.id}/source-video.json`, '成果物アップロード配送: 完了報告のURIがbackend成果物配下ではない');
+  const transcriptRequest = agentRequestsForDraft(state, draft.id).find((request) => request.type === 'run_stt');
+  assertScenario(transcriptRequest?.status === 'succeeded', '成果物アップロード配送: STT工程が成功していない');
 
   const backendArtifactPath = path.join(runtimeDir, 'artifacts', draft.id, 'source-video.json');
   const runnerArtifactPath = path.join(runtimeDir, 'runner-artifacts', draft.id, 'source-video.json');
@@ -873,6 +875,19 @@ async function assertRunnerArtifactUploadDelivery(apiBaseUrl, runtimeDir) {
   assertScenario(backendArtifactText === runnerArtifactText, '成果物アップロード配送: runnerで作った成果物とbackendへ保存された成果物が一致しない');
   assertScenario(backendArtifactText.includes('"kind": "source_video"'), '成果物アップロード配送: backendへ保存された成果物の種別が読めない');
   await assertFileRefMatchesArtifact(runtimeDir, state, fileRef, '成果物アップロード配送');
+
+  await rm(path.join(runtimeDir, 'runner-artifacts', draft.id), { recursive: true, force: true });
+  await runAgent(apiBaseUrl, runtimeDir, 1, true, {
+    ZEV2_ARTIFACT_DELIVERY_MODE: 'upload'
+  });
+
+  const afterResumeState = await requestJson(apiPath(apiBaseUrl, '/state'));
+  const themeRequest = agentRequestsForDraft(afterResumeState, draft.id).find((request) => request.type === 'propose_clip_themes');
+  assertScenario(themeRequest?.status === 'succeeded', '成果物アップロード配送: 一時置き場削除後にテーマ作成が成功していない');
+  const downloadedTranscriptPath = path.join(runtimeDir, 'runner-artifacts', draft.id, 'transcript.json');
+  const uploadedThemePath = path.join(runtimeDir, 'artifacts', draft.id, 'themes.json');
+  assertScenario((await readFile(downloadedTranscriptPath, 'utf8')).includes('"kind": "transcript_json"'), '成果物アップロード配送: 前工程成果物をbackendから読み戻せていない');
+  assertScenario((await readFile(uploadedThemePath, 'utf8')).includes('"kind": "theme_json"'), '成果物アップロード配送: 読み戻し後の成果物がbackendへ保存されていない');
 }
 
 async function runDraftUntilReview(apiBaseUrl, runtimeDir, draftId, expectedKind) {

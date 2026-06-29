@@ -1,7 +1,9 @@
 import { spawn } from 'node:child_process';
-import { mkdir, readFile, writeFile } from 'node:fs/promises';
-import { createReadStream, existsSync } from 'node:fs';
+import { mkdir, readFile, rename, rm, writeFile } from 'node:fs/promises';
+import { createReadStream, createWriteStream, existsSync } from 'node:fs';
 import path from 'node:path';
+import { Readable } from 'node:stream';
+import { pipeline } from 'node:stream/promises';
 import { GoogleGenAI, type GenerateContentResponse, type Part } from '@google/genai';
 import {
   ARTIFACT_FILE_NAME_BY_KIND,
@@ -273,13 +275,57 @@ function artifactPathByUrl(uri: string): string {
   return artifactPath;
 }
 
-function artifactUploadRouteFromUri(uri: string): string {
+function artifactApiRouteFromUri(uri: string): string {
   const prefix = '/api/artifacts/';
   if (!uri.startsWith(prefix)) {
-    throw new Error(`アップロードできない成果物URIです: ${uri}`);
+    throw new Error(`扱えない成果物URIです: ${uri}`);
   }
 
   return uri.slice('/api'.length);
+}
+
+async function downloadArtifactFromBackend(uri: string): Promise<void> {
+  if (artifactDeliveryMode !== 'upload') {
+    return;
+  }
+
+  const artifactPath = artifactPathByUrl(uri);
+  if (existsSync(artifactPath)) {
+    return;
+  }
+
+  await mkdir(path.dirname(artifactPath), { recursive: true });
+  const response = await fetch(`${runnerOptions.apiBaseUrl}${artifactApiRouteFromUri(uri)}`, {
+    headers: agentApiAuthorizationHeader()
+  });
+  if (!response.ok || !response.body) {
+    const text = await response.text().catch(() => '');
+    throw new Error(text || `成果物をbackendから取得できません: ${response.status}`);
+  }
+
+  const tempPath = `${artifactPath}.download-${process.pid}.tmp`;
+  try {
+    const responseBody = response.body as unknown as Parameters<typeof Readable.fromWeb>[0];
+    await pipeline(
+      Readable.fromWeb(responseBody),
+      createWriteStream(tempPath, { flags: 'wx' })
+    );
+    await rename(tempPath, artifactPath);
+  } catch (error) {
+    await rm(tempPath, { force: true }).catch(() => undefined);
+    throw error;
+  }
+}
+
+async function downloadRequestArtifactsFromBackend(state: Zev2State, requestDraftId: string): Promise<void> {
+  if (artifactDeliveryMode !== 'upload') {
+    return;
+  }
+
+  const draftArtifactPrefix = `/api/artifacts/${encodeURIComponent(sanitizePathPart(requestDraftId))}/`;
+  for (const fileRef of state.fileRefs.filter((item) => item.uri.startsWith(draftArtifactPrefix))) {
+    await downloadArtifactFromBackend(fileRef.uri);
+  }
 }
 
 async function uploadArtifactToBackend(artifact: ArtifactInfo): Promise<ArtifactInfo> {
@@ -287,7 +333,7 @@ async function uploadArtifactToBackend(artifact: ArtifactInfo): Promise<Artifact
     return artifact;
   }
 
-  const response = await fetch(`${runnerOptions.apiBaseUrl}${artifactUploadRouteFromUri(artifact.uri)}`, {
+  const response = await fetch(`${runnerOptions.apiBaseUrl}${artifactApiRouteFromUri(artifact.uri)}`, {
     method: 'PUT',
     headers: {
       'content-type': artifact.mimeType,
@@ -636,6 +682,7 @@ const STEP_ARTIFACT_BUILDERS = createStepArtifactBuilders({
 
 async function buildArtifactForRequest(request: AgentRequest): Promise<ArtifactInfo> {
   const state = await loadState();
+  await downloadRequestArtifactsFromBackend(state, request.requestDraftId);
   return STEP_ARTIFACT_BUILDERS[request.type]({ request, state });
 }
 
