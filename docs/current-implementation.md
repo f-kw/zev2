@@ -48,7 +48,7 @@ UIは依頼と状態を確認する
 - `ZEV2_AGENT_API_TOKEN` を設定すると、AIエージェント実行APIだけをBearerトークンで保護できる。
 - AIエージェントは成果物本体を `PUT /api/artifacts/:draftId/:fileName` で保存できる。保存後に返されたURIを完了APIへ渡す。
 - runnerの成果物保存方式は `config/runtime.jsonc` で `local` または `upload` を選べる。画面の実行設定にも現在の保存方式を表示する。
-- `upload` 保存では、後続工程のrunnerが必要な前工程成果物をbackendから取得してから処理できる。
+- `upload` 保存では、後続工程のrunnerが必要な前工程成果物をAIエージェント用取得APIから読み戻して処理できる。
 - 作業取得時にAIエージェント取得者、取得時刻、最終更新時刻、任意の期限時刻を保存できる。
 - 同じ作業の二重取得、取得者が違う完了報告、取得者が違う失敗報告を拒否できる。
 - 期限切れした取得中作業は、状態確認または次作業取得時に復旧され、再取得可能になる。
@@ -100,6 +100,7 @@ AIエージェント向けの主なAPIは次の通り。
 GET  /api/agent-requests/next
 POST /api/agent-requests/:id/claim
 PUT  /api/artifacts/:draftId/:fileName
+GET  /api/agent-artifacts/:draftId/:fileName
 POST /api/agent-requests/:id/complete
 POST /api/agent-requests/:id/fail
 ```

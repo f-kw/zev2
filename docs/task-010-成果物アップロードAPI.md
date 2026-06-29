@@ -36,7 +36,8 @@
 - アップロードAPI自体は状態を更新しない。状態更新は完了APIだけが行う。
 - `artifactDelivery.mode` が `local` の場合、runnerは従来通り `runtime/artifacts` へ直接保存する。
 - `artifactDelivery.mode` が `upload` の場合、runnerは `runtime/runner-artifacts` で成果物を作り、backendへアップロードしてから完了APIへ進む。
-- `artifactDelivery.mode` が `upload` の場合、runnerは後続工程の開始前に、対象下書きの保存済み成果物をbackendから `runtime/runner-artifacts` へ取得する。これにより、別runnerや再起動後のrunnerでも前工程成果物を読める。
+- `artifactDelivery.mode` が `upload` の場合、runnerは後続工程の開始前に、対象下書きの保存済み成果物を `GET /api/agent-artifacts/:draftId/:fileName` から `runtime/runner-artifacts` へ取得する。これにより、別runnerや再起動後のrunnerでも前工程成果物を読める。
+- `GET /api/agent-artifacts/:draftId/:fileName` はAIエージェント用の読み戻しAPIで、`ZEV2_AGENT_API_TOKEN` 設定時は認証対象にする。
 
 ## 確認方法
 
@@ -44,4 +45,4 @@
 - `pnpm run scenario:agent`
 - `pnpm test`
 
-シナリオテストでは、認証なしアップロード、誤ったトークンのアップロード、同名再アップロードが拒否されること、正しいトークンで保存した成果物本体がファイルとして残ること、runnerのアップロード配送で工程完了できること、一時置き場を消した後でもbackendから前工程成果物を読み戻して次工程へ進めること、状態APIへ成果物本文とトークンが混ざらないことを確認する。
+シナリオテストでは、認証なしアップロード、誤ったトークンのアップロード、認証なし読み戻し、誤ったトークンの読み戻し、同名再アップロードが拒否されること、正しいトークンで保存した成果物本体がファイルとして残ること、runnerのアップロード配送で工程完了できること、一時置き場を消した後でもbackendから前工程成果物を読み戻して次工程へ進めること、状態APIへ成果物本文とトークンが混ざらないことを確認する。

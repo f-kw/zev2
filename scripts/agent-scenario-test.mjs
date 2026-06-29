@@ -147,6 +147,31 @@ async function expectRequestJsonFailure(url, init = {}) {
   throw new Error(`${init.method ?? 'GET'} ${url} が失敗すべき場面で成功している`);
 }
 
+async function requestText(url, init = {}) {
+  const response = await fetch(url, {
+    ...init,
+    headers: {
+      ...(init.headers ?? {})
+    }
+  });
+  const text = await response.text();
+  if (!response.ok) {
+    throw new Error(`${init.method ?? 'GET'} ${url} failed: ${response.status} ${text}`);
+  }
+
+  return text;
+}
+
+async function expectRequestTextFailure(url, init = {}) {
+  try {
+    await requestText(url, init);
+  } catch (error) {
+    return error instanceof Error ? error.message : String(error);
+  }
+
+  throw new Error(`${init.method ?? 'GET'} ${url} が失敗すべき場面で成功している`);
+}
+
 const scenarioAgentOwnerId = 'scenario-agent';
 const otherScenarioAgentOwnerId = 'other-scenario-agent';
 
@@ -517,6 +542,23 @@ async function assertAgentApiAuthBoundary() {
     );
     const uploadedBody = await readFile(artifactPathByUri(authRuntimeDir, uploaded.uri), 'utf8');
     assertScenario(uploadedBody === uploadBody, '認証境界: アップロードした成果物本体が保存されていない');
+    const readUri = `/agent-artifacts/${created.draft.id}/uploaded-theme.json`;
+    const readWithoutAuthError = await expectRequestTextFailure(apiPath(authApiBaseUrl, readUri));
+    assertScenario(
+      readWithoutAuthError.includes('AIエージェントAPIの認証が必要です'),
+      '認証境界: AIエージェント成果物取得が認証なしで通っている'
+    );
+    const readWithWrongAuthError = await expectRequestTextFailure(apiPath(authApiBaseUrl, readUri), {
+      headers: { authorization: 'Bearer wrong-token' }
+    });
+    assertScenario(
+      readWithWrongAuthError.includes('AIエージェントAPIの認証が必要です'),
+      '認証境界: AIエージェント成果物取得が誤ったトークンで通っている'
+    );
+    const downloadedBody = await requestText(apiPath(authApiBaseUrl, readUri), {
+      headers: { authorization: `Bearer ${authToken}` }
+    });
+    assertScenario(downloadedBody === uploadBody, '認証境界: AIエージェント成果物取得で保存済み本文を読めない');
     const duplicateUploadError = await expectRequestJsonFailure(apiPath(authApiBaseUrl, uploadUri), {
       method: 'PUT',
       headers: { authorization: `Bearer ${authToken}` },

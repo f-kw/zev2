@@ -71,6 +71,7 @@ AIエージェントが実行を進めるAPIだけ、任意のBearerトークン
 GET  /api/agent-requests/next
 POST /api/agent-requests/:id/claim
 PUT  /api/artifacts/:draftId/:fileName
+GET  /api/agent-artifacts/:draftId/:fileName
 POST /api/agent-requests/:id/complete
 POST /api/agent-requests/:id/fail
 ```
@@ -225,6 +226,19 @@ Content-Type: application/json
   "mimeType": "application/json"
 }
 ```
+
+## 成果物本体をAIエージェントが取得する
+
+```http
+GET /api/agent-artifacts/:draftId/:fileName
+```
+
+意味:
+
+- AIエージェントが後続工程で必要な保存済み成果物を取得する。
+- `ZEV2_AGENT_API_TOKEN` が設定されている場合、このAPIもAIエージェント認証の対象になる。
+- UIの動画表示や人間確認に使う `/api/artifacts/...` の静的配信とは分ける。
+- runnerの `artifactDelivery.mode` が `upload` の場合、後続工程の開始前にこのAPIから前工程成果物を取得し、一時置き場へ保存してから処理する。
 
 ## 作業を完了する
 

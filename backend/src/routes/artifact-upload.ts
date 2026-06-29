@@ -108,6 +108,33 @@ function validateRouteParts(requestDraftId: string, fileName: string): string | 
 export function createArtifactUploadRouter(runtimeDir: string): express.Router {
   const router = express.Router();
 
+  router.get('/agent-artifacts/:draftId/:fileName', requireAgentApiToken, async (request, response) => {
+    const requestDraftId = routeParamText(request.params.draftId);
+    const fileName = routeParamText(request.params.fileName);
+    const routeError = validateRouteParts(requestDraftId, fileName);
+    if (routeError) {
+      response.status(400).json({ error: routeError });
+      return;
+    }
+
+    const state = await loadState();
+    if (!findById(state.requestDrafts, requestDraftId)) {
+      response.status(404).json({ error: '実行前下書きが見つかりません' });
+      return;
+    }
+
+    let destinationPath = '';
+    try {
+      destinationPath = artifactDestination(runtimeDir, requestDraftId, fileName);
+      await access(destinationPath);
+    } catch {
+      response.status(404).json({ error: '成果物ファイルが見つかりません' });
+      return;
+    }
+
+    response.sendFile(destinationPath);
+  });
+
   router.put('/artifacts/:draftId/:fileName', requireAgentApiToken, async (request, response) => {
     const requestDraftId = routeParamText(request.params.draftId);
     const fileName = routeParamText(request.params.fileName);

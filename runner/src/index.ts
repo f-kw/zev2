@@ -284,6 +284,15 @@ function artifactApiRouteFromUri(uri: string): string {
   return uri.slice('/api'.length);
 }
 
+function agentArtifactReadRouteFromUri(uri: string): string {
+  const prefix = '/api/artifacts/';
+  if (!uri.startsWith(prefix)) {
+    throw new Error(`取得できない成果物URIです: ${uri}`);
+  }
+
+  return `/agent-artifacts/${uri.slice(prefix.length)}`;
+}
+
 async function downloadArtifactFromBackend(uri: string): Promise<void> {
   if (artifactDeliveryMode !== 'upload') {
     return;
@@ -295,7 +304,7 @@ async function downloadArtifactFromBackend(uri: string): Promise<void> {
   }
 
   await mkdir(path.dirname(artifactPath), { recursive: true });
-  const response = await fetch(`${runnerOptions.apiBaseUrl}${artifactApiRouteFromUri(uri)}`, {
+  const response = await fetch(`${runnerOptions.apiBaseUrl}${agentArtifactReadRouteFromUri(uri)}`, {
     headers: agentApiAuthorizationHeader()
   });
   if (!response.ok || !response.body) {
