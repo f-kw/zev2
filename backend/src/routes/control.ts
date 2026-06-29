@@ -26,6 +26,7 @@ import {
   type HumanReviewActionType,
   type OutputEntity,
   type PublishHandoffAction,
+  type PublishedResultAction,
   type RequestDraft,
   buildWebGeminiExternalReviewCommand,
   buildWebGeminiReviewPromptText,
@@ -149,7 +150,8 @@ type RequestDraftActivityEvent = {
     | 'final_review_action'
     | 'web_gemini_review_status'
     | 'publish_package_status'
-    | 'publish_handoff_action';
+    | 'publish_handoff_action'
+    | 'published_result_action';
   occurredAt: string;
   actor: 'user' | 'agent' | 'runner' | 'backend' | 'system';
   title: string;
@@ -161,6 +163,7 @@ type RequestDraftActivityEvent = {
   humanReviewActionId?: string;
   finalReviewActionId?: string;
   publishHandoffActionId?: string;
+  publishedResultActionId?: string;
   fileRefId?: string;
   outputId?: string;
 };
@@ -875,6 +878,22 @@ function defaultPublishDescription(draft: RequestDraft, outputVideo: FileRef): s
 
 function publishPackageTextInput(value: unknown): string {
   return typeof value === 'string' ? value.trim() : '';
+}
+
+function normalizePublishedUrl(value: unknown): { publishedUrl: string } | { error: string } {
+  if (typeof value !== 'string' || !value.trim()) {
+    return { error: '公開済みURLを入力してください' };
+  }
+
+  try {
+    const url = new URL(value.trim());
+    if (url.protocol !== 'http:' && url.protocol !== 'https:') {
+      return { error: '公開済みURLはhttpまたはhttpsで始まるURLを入力してください' };
+    }
+    return { publishedUrl: url.toString() };
+  } catch {
+    return { error: '公開済みURLとして読めない文字列です' };
+  }
 }
 
 function buildPublishNote(artifact: PublishPackageArtifact): string {
@@ -1700,6 +1719,24 @@ function latestPublishHandoffActionForPackage(
   ));
 }
 
+function latestPublishedResultActionForPackage(
+  state: LoadedState,
+  requestDraftId: string,
+  publishPackage: PublishPackageArtifact | null
+): PublishedResultAction | undefined {
+  if (!publishPackage) {
+    return undefined;
+  }
+
+  return latestByCreatedAt(state.publishedResultActions.filter(
+    (action) =>
+      action.requestDraftId === requestDraftId &&
+      action.outputVideoUri === publishPackage.outputVideoUri &&
+      action.manifestUri === publishPackage.manifestUri &&
+      action.publishPackageCreatedAt === publishPackage.createdAt
+  ));
+}
+
 function buildPublishHandoffActivity(action: PublishHandoffAction): RequestDraftActivityEvent {
   return {
     id: `publish-handoff:${action.id}`,
@@ -1713,6 +1750,22 @@ function buildPublishHandoffActivity(action: PublishHandoffAction): RequestDraft
     ),
     requestDraftId: action.requestDraftId,
     publishHandoffActionId: action.id
+  };
+}
+
+function buildPublishedResultActivity(action: PublishedResultAction): RequestDraftActivityEvent {
+  return {
+    id: `published-result:${action.id}`,
+    kind: 'published_result_action',
+    occurredAt: action.createdAt,
+    actor: 'user',
+    title: '公開済みURLを記録',
+    detail: compactActivityText(
+      `${action.publishedUrl} / ${action.note}`,
+      '外部サービスで確認した公開済みURLを保存しました'
+    ),
+    requestDraftId: action.requestDraftId,
+    publishedResultActionId: action.id
   };
 }
 
@@ -1952,6 +2005,34 @@ function buildPublishHandoffActivitySummary(
   };
 }
 
+function buildPublishedResultActivitySummary(
+  baseSummary: RequestDraftActivitySummary,
+  state: LoadedState,
+  draft: RequestDraft,
+  packageResult: { publishPackage: PublishPackageArtifact | null } | { error: string }
+): RequestDraftActivitySummary {
+  if (baseSummary.status !== 'completed' || 'error' in packageResult || !packageResult.publishPackage) {
+    return baseSummary;
+  }
+
+  const result = latestPublishedResultActionForPackage(state, draft.id, packageResult.publishPackage);
+  if (!result) {
+    return baseSummary;
+  }
+
+  return {
+    ...baseSummary,
+    title: baseSummary.title.includes('最終完了')
+      ? '最終完了・公開済みURL記録済み'
+      : '公開済みURL記録済み',
+    detail: compactActivityText(
+      `${result.publishedUrl} / ${result.note}`,
+      '外部サービスで確認した公開済みURLを保存済みです'
+    ),
+    nextAction: '公開ページを確認し、必要なら公開結果メモを更新します'
+  };
+}
+
 function buildRequestDraftActivity(state: LoadedState, draft: RequestDraft): RequestDraftActivityEvent[] {
   const events: RequestDraftActivityEvent[] = [
     {
@@ -2077,6 +2158,10 @@ function buildRequestDraftActivity(state: LoadedState, draft: RequestDraft): Req
 
   for (const action of state.publishHandoffActions.filter((item) => item.requestDraftId === draft.id)) {
     events.push(buildPublishHandoffActivity(action));
+  }
+
+  for (const action of state.publishedResultActions.filter((item) => item.requestDraftId === draft.id)) {
+    events.push(buildPublishedResultActivity(action));
   }
 
   return events.sort((left, right) => (
@@ -3272,7 +3357,8 @@ router.get('/request-drafts/:id/activity', async (request, response) => {
   );
   const finalReviewSummary = buildFinalReviewActivitySummary(webGeminiSummary, state, draft, outputVideo);
   const publishPackageSummary = buildPublishPackageActivitySummary(finalReviewSummary, draft, outputVideo, publishPackageResult);
-  const summary = buildPublishHandoffActivitySummary(publishPackageSummary, state, draft, publishPackageResult);
+  const publishHandoffSummary = buildPublishHandoffActivitySummary(publishPackageSummary, state, draft, publishPackageResult);
+  const summary = buildPublishedResultActivitySummary(publishHandoffSummary, state, draft, publishPackageResult);
 
   response.json({
     requestDraftId: draft.id,
@@ -3491,6 +3577,69 @@ router.post('/request-drafts/:id/publish-handoff', async (request, response) => 
   state.publishHandoffActions.push(handoff);
   await saveState(state);
   response.json({ publishHandoffAction: handoff, state });
+});
+
+router.post('/request-drafts/:id/published-result', async (request, response) => {
+  const state = await loadStateWithClaimRecovery();
+  const draft = findById(state.requestDrafts, request.params.id);
+  if (!draft) {
+    response.status(404).json({ error: '実行前下書きが見つかりません', state });
+    return;
+  }
+
+  const outputVideo = latestOutputVideoFileRef(state, draft.id);
+  const outputVideoError = await validatePublishPackageOutputVideo(draft, outputVideo);
+  if (outputVideoError) {
+    response.status(409).json({ error: outputVideoError, state });
+    return;
+  }
+
+  const packageResult = await readPublishPackageArtifact(draft.id);
+  if ('error' in packageResult) {
+    response.status(409).json({ error: packageResult.error, state });
+    return;
+  }
+  if (!packageResult.publishPackage) {
+    response.status(409).json({ error: '公開パッケージを作成してから公開済みURLを記録してください', state });
+    return;
+  }
+
+  const mismatch = ensurePublishPackageMatchesOutputVideo(packageResult.publishPackage, outputVideo);
+  if (mismatch) {
+    response.status(409).json({ error: mismatch.error, state });
+    return;
+  }
+
+  const handoff = latestPublishHandoffActionForPackage(state, draft.id, packageResult.publishPackage);
+  if (!handoff) {
+    response.status(409).json({ error: '公開作業への引き渡しを記録してから公開済みURLを記録してください', state });
+    return;
+  }
+
+  const input = recordValue(request.body);
+  const normalizedUrl = normalizePublishedUrl(input.publishedUrl);
+  if ('error' in normalizedUrl) {
+    response.status(400).json({ error: normalizedUrl.error, state });
+    return;
+  }
+
+  const createdAt = nowIso();
+  const result: PublishedResultAction = {
+    id: createId('published_result'),
+    requestDraftId: draft.id,
+    outputVideoUri: packageResult.publishPackage.outputVideoUri,
+    manifestUri: packageResult.publishPackage.manifestUri,
+    publishPackageCreatedAt: packageResult.publishPackage.createdAt,
+    publishHandoffActionId: handoff.id,
+    publishedUrl: normalizedUrl.publishedUrl,
+    note: trimText(input.note) || '外部サービスで公開済みURLを確認しました',
+    createdAt
+  };
+
+  draft.updatedAt = createdAt;
+  state.publishedResultActions.push(result);
+  await saveState(state);
+  response.json({ publishedResultAction: result, state });
 });
 
 router.post('/request-drafts', async (request, response) => {

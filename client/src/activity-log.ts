@@ -25,7 +25,12 @@ export function activityKindClass(kind: RequestDraftActivityEvent['kind']): stri
     return 'needs-review';
   }
 
-  if (kind === 'human_review_action' || kind === 'final_review_action' || kind === 'publish_handoff_action') {
+  if (
+    kind === 'human_review_action' ||
+    kind === 'final_review_action' ||
+    kind === 'publish_handoff_action' ||
+    kind === 'published_result_action'
+  ) {
     return 'user-action';
   }
 
@@ -54,6 +59,7 @@ export function activityCategory(event: RequestDraftActivityEvent): ActivityLogC
     event.kind === 'human_review_action' ||
     event.kind === 'final_review_action' ||
     event.kind === 'publish_handoff_action' ||
+    event.kind === 'published_result_action' ||
     event.kind === 'human_review_required'
   ) {
     return 'user';

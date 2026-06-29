@@ -78,12 +78,15 @@ assertContract(
     appVue.includes('v-model="publishDescriptionInput"') &&
     appVue.includes('v-model="publishHandoffTargetInput"') &&
     appVue.includes('v-model="publishHandoffNoteInput"') &&
+    appVue.includes('v-model="publishedResultUrlInput"') &&
+    appVue.includes('v-model="publishedResultNoteInput"') &&
     appVue.includes('@click="createCurrentPublishPackage"') &&
     appVue.includes('@click="submitCurrentPublishHandoff"') &&
+    appVue.includes('@click="submitCurrentPublishedResult"') &&
     appVue.includes('publishPackage.videoFileUri') &&
     appVue.includes('publishPackage.noteUri') &&
     appVue.includes('publishPackage.manifestUri'),
-  '完成動画から公開用ファイルを作成し、動画、説明メモ、manifestを確認する導線が見つかりません'
+  '完成動画から公開用ファイルを作成し、引き渡しと公開済みURLを記録する導線が見つかりません'
 );
 
 assertContract(

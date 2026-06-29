@@ -299,6 +299,7 @@ export interface Zev2State {
   humanReviewActions: HumanReviewAction[];
   finalReviewActions: FinalReviewAction[];
   publishHandoffActions: PublishHandoffAction[];
+  publishedResultActions: PublishedResultAction[];
 }
 
 export interface AgentOperationLog {
@@ -387,6 +388,18 @@ export interface PublishHandoffAction {
   createdAt: string;
 }
 
+export interface PublishedResultAction {
+  id: string;
+  requestDraftId: string;
+  outputVideoUri: string;
+  manifestUri: string;
+  publishPackageCreatedAt: string;
+  publishHandoffActionId: string;
+  publishedUrl: string;
+  note: string;
+  createdAt: string;
+}
+
 const OUTPUT_TYPE_BY_REQUEST_TYPE = {
   prepare_video: 'Video',
   run_stt: 'Transcript',
@@ -418,7 +431,8 @@ export function createInitialState(): Zev2State {
     controlReviewItems: [],
     humanReviewActions: [],
     finalReviewActions: [],
-    publishHandoffActions: []
+    publishHandoffActions: [],
+    publishedResultActions: []
   };
 }
 

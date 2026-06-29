@@ -11,6 +11,7 @@ import {
   type HumanReviewActionType,
   type RequestDraft,
   type RequestDraftInput,
+  type PublishedResultAction,
   type RuntimeConfig,
   type Zev2State,
   type WorkflowStep
@@ -105,7 +106,8 @@ export interface RequestDraftActivityEvent {
     | 'final_review_action'
     | 'web_gemini_review_status'
     | 'publish_package_status'
-    | 'publish_handoff_action';
+    | 'publish_handoff_action'
+    | 'published_result_action';
   occurredAt: string;
   actor: 'user' | 'agent' | 'runner' | 'backend' | 'system';
   title: string;
@@ -117,6 +119,7 @@ export interface RequestDraftActivityEvent {
   humanReviewActionId?: string;
   finalReviewActionId?: string;
   publishHandoffActionId?: string;
+  publishedResultActionId?: string;
   fileRefId?: string;
   outputId?: string;
 }
@@ -333,6 +336,14 @@ export async function submitPublishHandoff(
   input: { targetName: string; note: string }
 ): Promise<{ publishHandoffAction: PublishHandoffAction; state: Zev2State }> {
   const response = await api.post(`/request-drafts/${id}/publish-handoff`, input);
+  return response.data;
+}
+
+export async function submitPublishedResult(
+  id: string,
+  input: { publishedUrl: string; note: string }
+): Promise<{ publishedResultAction: PublishedResultAction; state: Zev2State }> {
+  const response = await api.post(`/request-drafts/${id}/published-result`, input);
   return response.data;
 }
 

@@ -2167,6 +2167,20 @@ async function assertFinalReviewControls(apiBaseUrl, runtimeDir, sourceDraftId) 
     handoffBeforePackageError.includes('公開パッケージを作成してから'),
     '公開パッケージを作らずに公開作業へ引き渡せている'
   );
+  const publishedResultBeforePackageError = await expectRequestJsonFailure(
+    apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/published-result`),
+    {
+      method: 'POST',
+      body: JSON.stringify({
+        publishedUrl: 'https://example.com/before-package',
+        note: '公開パッケージなしで公開結果を記録しようとする'
+      })
+    }
+  );
+  assertScenario(
+    publishedResultBeforePackageError.includes('公開パッケージを作成してから'),
+    '公開パッケージを作らずに公開済みURLを記録できている'
+  );
 
   const publishReady = await requestJson(apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/final-review`), {
     method: 'POST',
@@ -2263,6 +2277,20 @@ async function assertFinalReviewControls(apiBaseUrl, runtimeDir, sourceDraftId) 
     )),
     '公開パッケージ作成が監査タイムラインで追えない'
   );
+  const publishedResultBeforeHandoffError = await expectRequestJsonFailure(
+    apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/published-result`),
+    {
+      method: 'POST',
+      body: JSON.stringify({
+        publishedUrl: 'https://example.com/before-handoff',
+        note: '引き渡し前に公開結果を記録しようとする'
+      })
+    }
+  );
+  assertScenario(
+    publishedResultBeforeHandoffError.includes('公開作業への引き渡しを記録してから'),
+    '公開作業への引き渡し前に公開済みURLを記録できている'
+  );
   const publishHandoff = await requestJson(apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/publish-handoff`), {
     method: 'POST',
     body: JSON.stringify({
@@ -2296,6 +2324,58 @@ async function assertFinalReviewControls(apiBaseUrl, runtimeDir, sourceDraftId) 
         event.title === '公開作業へ引き渡し済み'
     )),
     '公開引き渡し記録が監査タイムラインで追えない'
+  );
+  const invalidPublishedUrlError = await expectRequestJsonFailure(
+    apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/published-result`),
+    {
+      method: 'POST',
+      body: JSON.stringify({
+        publishedUrl: 'not-a-url',
+        note: '壊れたURL'
+      })
+    }
+  );
+  assertScenario(
+    invalidPublishedUrlError.includes('公開済みURLとして読めない'),
+    '公開済みURLとして読めない文字列を保存できている'
+  );
+  const publishedResult = await requestJson(apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/published-result`), {
+    method: 'POST',
+    body: JSON.stringify({
+      publishedUrl: 'https://youtube.example/watch?v=zev2-scenario',
+      note: '外部サービスで公開ページを確認した'
+    })
+  });
+  assertScenario(
+    publishedResult.publishedResultAction?.manifestUri === publishPackage.publishPackage.manifestUri,
+    '公開済みURL記録が対象公開パッケージに紐付いていない'
+  );
+  assertScenario(
+    publishedResult.publishedResultAction?.publishPackageCreatedAt === publishPackage.publishPackage.createdAt,
+    '公開済みURL記録が公開パッケージの作成日時に紐付いていない'
+  );
+  assertScenario(
+    publishedResult.publishedResultAction?.publishHandoffActionId === publishHandoff.publishHandoffAction.id,
+    '公開済みURL記録が公開作業への引き渡し記録に紐付いていない'
+  );
+  assertScenario(
+    publishedResult.state.publishedResultActions.some((action) => (
+      action.id === publishedResult.publishedResultAction.id &&
+        action.publishedUrl === 'https://youtube.example/watch?v=zev2-scenario'
+    )),
+    '公開済みURL記録が状態に保存されていない'
+  );
+  const publishedResultActivity = await requestJson(apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/activity`));
+  assertScenario(
+    publishedResultActivity.summary?.title === '公開済みURL記録済み',
+    '公開済みURL記録が現在状態要約に反映されていない'
+  );
+  assertScenario(
+    publishedResultActivity.events.some((event) => (
+      event.kind === 'published_result_action' &&
+        event.title === '公開済みURLを記録'
+    )),
+    '公開済みURL記録が監査タイムラインで追えない'
   );
 
   const duplicatePublishError = await expectRequestJsonFailure(
@@ -2331,7 +2411,8 @@ async function assertFinalReviewControls(apiBaseUrl, runtimeDir, sourceDraftId) 
   assertScenario(
     finalActivity.summary.nextAction.includes('最終成果') ||
       finalActivity.summary.nextAction.includes('公開用ファイル') ||
-      finalActivity.summary.nextAction.includes('投稿結果'),
+      finalActivity.summary.nextAction.includes('投稿結果') ||
+      finalActivity.summary.nextAction.includes('公開ページ'),
     '最終完了後の次状態が人間に分かる文になっていない'
   );
   assertScenario(
@@ -2381,6 +2462,30 @@ async function assertFinalReviewControls(apiBaseUrl, runtimeDir, sourceDraftId) 
   assertScenario(
     finalHandoffActivity.summary?.title === '最終完了・公開作業へ引き渡し済み',
     '最終完了後の公開引き渡し記録が現在状態要約に反映されていない'
+  );
+  const finalPublishedResult = await requestJson(apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/published-result`), {
+    method: 'POST',
+    body: JSON.stringify({
+      publishedUrl: 'https://youtube.example/watch?v=zev2-final',
+      note: '最終完了後の公開ページを確認した'
+    })
+  });
+  assertScenario(
+    finalPublishedResult.publishedResultAction?.manifestUri === packageAfterFinal.publishPackage.manifestUri,
+    '最終完了後の公開済みURL記録が最新公開パッケージに紐付いていない'
+  );
+  assertScenario(
+    finalPublishedResult.publishedResultAction?.publishPackageCreatedAt === packageAfterFinal.publishPackage.createdAt,
+    '最終完了後の公開済みURL記録が最新公開パッケージの作成日時に紐付いていない'
+  );
+  assertScenario(
+    finalPublishedResult.publishedResultAction?.publishHandoffActionId === finalHandoff.publishHandoffAction.id,
+    '最終完了後の公開済みURL記録が最新の公開引き渡し記録に紐付いていない'
+  );
+  const finalPublishedResultActivity = await requestJson(apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/activity`));
+  assertScenario(
+    finalPublishedResultActivity.summary?.title === '最終完了・公開済みURL記録済み',
+    '最終完了後の公開済みURL記録が現在状態要約に反映されていない'
   );
 
   const duplicateFinalError = await expectRequestJsonFailure(

@@ -137,6 +137,21 @@ function isCurrentPublishHandoffAction(value: unknown): boolean {
   );
 }
 
+function isCurrentPublishedResultAction(value: unknown): boolean {
+  const action = recordValue(value);
+  return (
+    typeof action.id === 'string' &&
+    typeof action.requestDraftId === 'string' &&
+    typeof action.outputVideoUri === 'string' &&
+    typeof action.manifestUri === 'string' &&
+    typeof action.publishPackageCreatedAt === 'string' &&
+    typeof action.publishHandoffActionId === 'string' &&
+    typeof action.publishedUrl === 'string' &&
+    typeof action.note === 'string' &&
+    typeof action.createdAt === 'string'
+  );
+}
+
 function isCurrentAgentOperationLog(value: unknown): boolean {
   const log = recordValue(value);
   return (
@@ -158,7 +173,8 @@ function withCurrentStateShape(value: unknown): unknown {
     ...state,
     agentOperationLogs: Array.isArray(state.agentOperationLogs) ? state.agentOperationLogs : [],
     finalReviewActions: Array.isArray(state.finalReviewActions) ? state.finalReviewActions : [],
-    publishHandoffActions: Array.isArray(state.publishHandoffActions) ? state.publishHandoffActions : []
+    publishHandoffActions: Array.isArray(state.publishHandoffActions) ? state.publishHandoffActions : [],
+    publishedResultActions: Array.isArray(state.publishedResultActions) ? state.publishedResultActions : []
   };
 }
 
@@ -179,6 +195,7 @@ function isZev2State(value: unknown): value is Zev2State {
     Array.isArray(state.humanReviewActions) &&
     Array.isArray(state.finalReviewActions) &&
     Array.isArray(state.publishHandoffActions) &&
+    Array.isArray(state.publishedResultActions) &&
     state.requestDrafts.every(isCurrentRequestDraft) &&
     state.agentRequests.every(isCurrentAgentRequest) &&
     state.fileRefs.every(isCurrentFileRef) &&
@@ -186,7 +203,8 @@ function isZev2State(value: unknown): value is Zev2State {
     state.controlReviewItems.every(isCurrentControlReview) &&
     state.humanReviewActions.every(isCurrentHumanReviewAction) &&
     state.finalReviewActions.every(isCurrentFinalReviewAction) &&
-    state.publishHandoffActions.every(isCurrentPublishHandoffAction)
+    state.publishHandoffActions.every(isCurrentPublishHandoffAction) &&
+    state.publishedResultActions.every(isCurrentPublishedResultAction)
   );
 }
 

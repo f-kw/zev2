@@ -32,6 +32,7 @@ import {
   logoutHumanUi,
   prepareWebGeminiReview,
   submitPublishHandoff,
+  submitPublishedResult,
   type PublishPackageArtifact,
   type RequestDraftActivityEvent,
   type RequestDraftActivitySummary,
@@ -93,6 +94,9 @@ const publishDescriptionInput = ref('');
 const publishHandoffTargetInput = ref('外部投稿作業');
 const publishHandoffNoteInput = ref('');
 const activePublishHandoff = ref(false);
+const publishedResultUrlInput = ref('');
+const publishedResultNoteInput = ref('');
+const activePublishedResult = ref(false);
 const requestActivityEvents = ref<RequestDraftActivityEvent[]>([]);
 const requestActivitySummary = ref<RequestDraftActivitySummary | null>(null);
 const requestActivityLoading = ref(false);
@@ -399,6 +403,31 @@ const publishHandoffStatusText = computed(() => {
   return `引き渡し済み: ${handoff.targetName}`;
 });
 
+const currentPublishedResultAction = computed(() => {
+  const draft = currentDraft.value;
+  const packageArtifact = publishPackage.value;
+  if (!draft || !packageArtifact) {
+    return undefined;
+  }
+
+  return latestByCreatedAt(store.state.publishedResultActions.filter(
+    (action) =>
+      action.requestDraftId === draft.id &&
+      action.outputVideoUri === packageArtifact.outputVideoUri &&
+      action.manifestUri === packageArtifact.manifestUri &&
+      action.publishPackageCreatedAt === packageArtifact.createdAt
+  ));
+});
+
+const publishedResultStatusText = computed(() => {
+  const result = currentPublishedResultAction.value;
+  if (!result) {
+    return '公開済みURLは未記録';
+  }
+
+  return `公開済みURLを記録済み: ${result.publishedUrl}`;
+});
+
 const canSubmitPublishHandoff = computed(() =>
   Boolean(
     currentDraft.value &&
@@ -406,6 +435,18 @@ const canSubmitPublishHandoff = computed(() =>
       !agentOperationLocked.value &&
       !publishPackageLoading.value &&
       !activePublishHandoff.value
+  )
+);
+
+const canSubmitPublishedResult = computed(() =>
+  Boolean(
+    currentDraft.value &&
+      publishPackage.value &&
+      currentPublishHandoffAction.value &&
+      publishedResultUrlInput.value.trim() &&
+      !agentOperationLocked.value &&
+      !publishPackageLoading.value &&
+      !activePublishedResult.value
   )
 );
 
@@ -1439,6 +1480,8 @@ async function createCurrentPublishPackage() {
     publishDescriptionInput.value = result.publishPackage.description;
     publishHandoffNoteInput.value = publishHandoffNoteInput.value.trim() ||
       `公開用ファイルを確認しました: ${result.publishPackage.manifestUri}`;
+    publishedResultUrlInput.value = '';
+    publishedResultNoteInput.value = '';
     publishPackageMessage.value = '公開用ファイルを作成しました';
     await refreshRequestActivity();
   } catch (error) {
@@ -1472,6 +1515,31 @@ async function submitCurrentPublishHandoff() {
     publishPackageMessage.value = formatApiError(error);
   } finally {
     activePublishHandoff.value = false;
+  }
+}
+
+async function submitCurrentPublishedResult() {
+  const draft = currentDraft.value;
+  if (!draft || !canSubmitPublishedResult.value) {
+    return;
+  }
+
+  activePublishedResult.value = true;
+  publishPackageMessage.value = '';
+  try {
+    const result = await submitPublishedResult(draft.id, {
+      publishedUrl: publishedResultUrlInput.value.trim(),
+      note: publishedResultNoteInput.value.trim() || '外部サービスで公開済みURLを確認しました'
+    });
+    store.state = result.state;
+    publishedResultUrlInput.value = result.publishedResultAction.publishedUrl;
+    publishedResultNoteInput.value = result.publishedResultAction.note;
+    publishPackageMessage.value = '公開済みURLを記録しました';
+    await refreshRequestActivity();
+  } catch (error) {
+    publishPackageMessage.value = formatApiError(error);
+  } finally {
+    activePublishedResult.value = false;
   }
 }
 
@@ -1663,6 +1731,8 @@ watch(
     publishDescriptionInput.value = defaultPublishDescription.value;
     publishHandoffTargetInput.value = '外部投稿作業';
     publishHandoffNoteInput.value = '';
+    publishedResultUrlInput.value = '';
+    publishedResultNoteInput.value = '';
     void refreshWebGeminiReview();
     void refreshPublishPackage();
   },
@@ -2120,6 +2190,33 @@ watch(
                   :disabled="agentOperationLocked || activePublishHandoff"
                 />
               </label>
+              <span v-if="publishPackage" class="publish-handoff-status">{{ publishedResultStatusText }}</span>
+              <a
+                v-if="currentPublishedResultAction"
+                class="published-result-link"
+                :href="currentPublishedResultAction.publishedUrl"
+                target="_blank"
+                rel="noreferrer"
+              >
+                公開ページを開く
+              </a>
+              <label v-if="publishPackage" class="publish-package-input">
+                公開済みURL
+                <input
+                  v-model="publishedResultUrlInput"
+                  type="url"
+                  placeholder="https://..."
+                  :disabled="agentOperationLocked || activePublishedResult || !currentPublishHandoffAction"
+                />
+              </label>
+              <label v-if="publishPackage" class="publish-package-input">
+                公開結果メモ
+                <textarea
+                  v-model="publishedResultNoteInput"
+                  rows="2"
+                  :disabled="agentOperationLocked || activePublishedResult || !currentPublishHandoffAction"
+                />
+              </label>
               <button
                 type="button"
                 class="secondary-button"
@@ -2136,6 +2233,15 @@ watch(
                 @click="submitCurrentPublishHandoff"
               >
                 {{ activePublishHandoff ? '記録中' : '公開作業へ渡したことを記録' }}
+              </button>
+              <button
+                v-if="publishPackage"
+                type="button"
+                class="secondary-button"
+                :disabled="!canSubmitPublishedResult"
+                @click="submitCurrentPublishedResult"
+              >
+                {{ activePublishedResult ? '記録中' : currentPublishedResultAction ? '公開済みURLを記録し直す' : '公開済みURLを記録' }}
               </button>
             </div>
           </section>
@@ -3424,6 +3530,17 @@ video {
 }
 
 .publish-package-links a:hover {
+  text-decoration: underline;
+}
+
+.published-result-link {
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.published-result-link:hover {
   text-decoration: underline;
 }
 
