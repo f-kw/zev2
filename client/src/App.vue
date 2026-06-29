@@ -31,7 +31,8 @@ import {
   type RequestDraftActivityEvent,
   type RequestDraftActivitySummary,
   type WebGeminiReviewArtifact,
-  type WebGeminiReviewRunLog
+  type WebGeminiReviewRunLog,
+  type WebGeminiRevisionBriefArtifact
 } from './api';
 import { useControlQueueStore } from './stores/controlQueue';
 
@@ -70,10 +71,11 @@ const requestDefaultsApplied = ref(false);
 const pendingReviewChange = ref<{ reviewId: string; scope?: ReviewChangeScope } | null>(null);
 const changeReasonInput = ref('');
 const webGeminiReview = ref<WebGeminiReviewArtifact | null>(null);
+const webGeminiRevisionBrief = ref<WebGeminiRevisionBriefArtifact | null>(null);
 const webGeminiRunLog = ref<WebGeminiReviewRunLog | null>(null);
 const webGeminiPreparedPromptText = ref('');
 const webGeminiPromptOpen = ref(false);
-const webGeminiInstructionInput = ref('');
+const webGeminiRevisionBriefInput = ref('');
 const webGeminiReviewMessage = ref('');
 const webGeminiReviewLoading = ref(false);
 const loadedWebGeminiReviewCreatedAt = ref('');
@@ -313,7 +315,7 @@ const canApplyWebGeminiReview = computed(() =>
     currentDraft.value &&
       outputVideoUri.value &&
       webGeminiReview.value &&
-      webGeminiInstructionInput.value.trim() &&
+      webGeminiRevisionBriefInput.value.trim() &&
       webGeminiRunLog.value?.status !== 'applied' &&
       !hasFinalCompleteForCurrentOutput.value &&
       !agentOperationLocked.value &&
@@ -334,7 +336,7 @@ const webGeminiApplyButtonLabel = computed(() => {
     return '反映済み';
   }
 
-  return activeWebGeminiAction.value === 'apply_review' ? '再作成中' : '演出から再作成';
+  return activeWebGeminiAction.value === 'apply_review' ? '再生成中' : 'この方針で再生成';
 });
 
 const webGeminiRunStatusTitle = computed(() => {
@@ -360,7 +362,7 @@ const webGeminiRunStatusTitle = computed(() => {
   }
 
   if (runLog.status === 'applied') {
-    return 'レビュー反映済み';
+    return '再生成方針反映済み';
   }
 
   return webGeminiReview.value ? 'レビュー保存済み' : 'レビュー保存確認が必要';
@@ -432,7 +434,7 @@ const canInspectWebGeminiPrompt = computed(() =>
 );
 
 const webGeminiSavedReviewTitle = computed(() =>
-  webGeminiReview.value && webGeminiRunLog.value?.status === 'applied' ? 'レビュー反映済み' : webGeminiReview.value ? 'レビュー保存済み' : ''
+  webGeminiReview.value && webGeminiRunLog.value?.status === 'applied' ? '再生成方針反映済み' : webGeminiReview.value ? 'レビュー保存済み' : ''
 );
 
 const webGeminiAppliedDraft = computed(() => {
@@ -466,7 +468,7 @@ const webGeminiSavedReviewDetail = computed(() => {
     return `このレビューは${webGeminiAppliedDraftText.value}。取り直す場合はレビューを取り直してください。`;
   }
 
-  return '改善指示を確認して、必要なら演出作成前から作り直せます。';
+  return 'Geminiレビューを材料として、今回採用する再生成方針を人間が決めます。';
 });
 
 const webGeminiSavedReviewMeta = computed(() => {
@@ -697,6 +699,7 @@ const webGeminiActivityRefreshKey = computed(() => {
     runLog.createdAt,
     runLog.outputVideoUri,
     runLog.reviewCreatedAt ?? '',
+    runLog.revisionBriefCreatedAt ?? '',
     runLog.appliedAt ?? '',
     runLog.nextAction ?? '',
     runLog.blockedReasons.join('/')
@@ -1148,10 +1151,11 @@ async function refreshWebGeminiReview() {
 
   if (!humanAuthReady.value || !draft || !outputVideoUri.value) {
     webGeminiReview.value = null;
+    webGeminiRevisionBrief.value = null;
     webGeminiRunLog.value = null;
     webGeminiPreparedPromptText.value = '';
     webGeminiPromptOpen.value = false;
-    webGeminiInstructionInput.value = '';
+    webGeminiRevisionBriefInput.value = '';
     webGeminiReviewMessage.value = '';
     loadedWebGeminiReviewCreatedAt.value = '';
     return;
@@ -1165,21 +1169,26 @@ async function refreshWebGeminiReview() {
       webGeminiPromptOpen.value = false;
     }
     webGeminiReview.value = result.review;
+    webGeminiRevisionBrief.value = result.revisionBrief;
     webGeminiRunLog.value = result.runLog;
     webGeminiPreparedPromptText.value = result.preparedPromptText;
     if (!result.review) {
-      webGeminiInstructionInput.value = '';
+      webGeminiRevisionBriefInput.value = '';
       loadedWebGeminiReviewCreatedAt.value = '';
       webGeminiReviewMessage.value = 'レビュー未取得';
       return;
     }
 
-    if (loadedWebGeminiReviewCreatedAt.value !== result.review.createdAt) {
-      webGeminiInstructionInput.value = result.review.instructionText;
+    if (result.revisionBrief) {
+      webGeminiRevisionBriefInput.value = result.revisionBrief.briefText;
+      loadedWebGeminiReviewCreatedAt.value = result.review.createdAt;
+    } else if (loadedWebGeminiReviewCreatedAt.value !== result.review.createdAt) {
+      webGeminiRevisionBriefInput.value = result.review.instructionText;
       loadedWebGeminiReviewCreatedAt.value = result.review.createdAt;
     }
   } catch (error) {
     webGeminiReview.value = null;
+    webGeminiRevisionBrief.value = null;
     webGeminiRunLog.value = null;
     webGeminiPreparedPromptText.value = '';
     webGeminiPromptOpen.value = false;
@@ -1216,14 +1225,16 @@ async function prepareCurrentWebGeminiReview() {
   try {
     const result = await prepareWebGeminiReview(draft.id);
     webGeminiReview.value = null;
+    webGeminiRevisionBrief.value = null;
     webGeminiRunLog.value = result.runLog;
     webGeminiPreparedPromptText.value = result.promptText;
     webGeminiPromptOpen.value = false;
-    webGeminiInstructionInput.value = '';
+    webGeminiRevisionBriefInput.value = '';
     loadedWebGeminiReviewCreatedAt.value = '';
     webGeminiReviewMessage.value = 'レビュー未取得';
   } catch (error) {
     webGeminiReview.value = null;
+    webGeminiRevisionBrief.value = null;
     webGeminiRunLog.value = null;
     webGeminiPreparedPromptText.value = '';
     webGeminiPromptOpen.value = false;
@@ -1236,11 +1247,11 @@ async function prepareCurrentWebGeminiReview() {
 
 async function applyWebGeminiReviewChanges() {
   const draft = currentDraft.value;
-  const instruction = normalizeWebGeminiReviewText(webGeminiInstructionInput.value);
+  const revisionBriefText = normalizeWebGeminiReviewText(webGeminiRevisionBriefInput.value);
   if (
     !draft ||
     !webGeminiReview.value ||
-    !instruction ||
+    !revisionBriefText ||
     hasFinalCompleteForCurrentOutput.value ||
     agentOperationLocked.value
   ) {
@@ -1249,12 +1260,13 @@ async function applyWebGeminiReviewChanges() {
 
   activeWebGeminiAction.value = 'apply_review';
   try {
-    await store.applyWebGeminiReview(draft.id, instruction);
+    await store.applyWebGeminiReview(draft.id, revisionBriefText);
     webGeminiReview.value = null;
+    webGeminiRevisionBrief.value = null;
     webGeminiRunLog.value = null;
     webGeminiPreparedPromptText.value = '';
     webGeminiPromptOpen.value = false;
-    webGeminiInstructionInput.value = '';
+    webGeminiRevisionBriefInput.value = '';
     loadedWebGeminiReviewCreatedAt.value = '';
     webGeminiReviewMessage.value = '';
   } finally {
@@ -1806,7 +1818,7 @@ watch(
                 </div>
 
                 <label>
-                  レビュー結果
+                  Geminiレビュー
                   <textarea
                     readonly
                     rows="4"
@@ -1815,11 +1827,11 @@ watch(
                 </label>
 
                 <label>
-                  演出作成へ渡す改善指示
+                  今回の再生成方針
                   <textarea
-                    v-model="webGeminiInstructionInput"
+                    v-model="webGeminiRevisionBriefInput"
                     rows="4"
-                    placeholder="必要なら削除・書き換え"
+                    placeholder="Geminiレビューを読んで、今回採用する変更だけ残す"
                     :disabled="agentOperationLocked"
                   />
                 </label>

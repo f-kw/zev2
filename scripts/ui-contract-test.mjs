@@ -79,4 +79,11 @@ assertContract(
   '最終完了済みの完成動画で、作り直しやWeb Geminiレビュー変更を止めるUI条件が見つかりません'
 );
 
+assertContract(
+  appVue.includes('今回の再生成方針') &&
+    appVue.includes('この方針で再生成') &&
+    appVue.includes('Geminiレビューを読んで、今回採用する変更だけ残す'),
+  'Web Geminiレビュー後に人間が再生成方針を確定するUIが見つかりません'
+);
+
 console.log('UI契約テスト成功');

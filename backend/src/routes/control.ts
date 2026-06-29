@@ -87,6 +87,15 @@ type WebGeminiReviewArtifact = {
   reviewText: string;
   instructionText: string;
 };
+type WebGeminiRevisionBriefArtifact = {
+  draftId: string;
+  source: 'human-approved-web-gemini-review';
+  status: 'ready';
+  createdAt: string;
+  outputVideoUri: string;
+  reviewCreatedAt: string;
+  briefText: string;
+};
 type WebGeminiReviewRunLog = {
   draftId: string;
   status: 'prepared' | 'blocked' | 'running' | 'saved' | 'failed' | 'applied';
@@ -99,6 +108,8 @@ type WebGeminiReviewRunLog = {
   nextAction?: string;
   reviewPath?: string;
   reviewCreatedAt?: string;
+  revisionBriefPath?: string;
+  revisionBriefCreatedAt?: string;
   appliedDraftId?: string;
   appliedAt?: string;
   externalReviewCommand?: string;
@@ -177,6 +188,7 @@ const artifactUrlPrefix = '/api/artifacts/';
 const webGeminiReviewFileName = 'web-gemini-review.json';
 const webGeminiReviewRunLogFileName = 'web-gemini-review-run.json';
 const webGeminiReviewPromptFileName = 'web-gemini-review-prompt.md';
+const webGeminiRevisionBriefFileName = 'web-gemini-revision-brief.json';
 
 function nowIso(): string {
   return new Date().toISOString();
@@ -603,6 +615,10 @@ function webGeminiReviewPromptPath(requestDraftId: string): string {
   return path.join(artifactRoot(), requestDraftId, webGeminiReviewPromptFileName);
 }
 
+function webGeminiRevisionBriefPath(requestDraftId: string): string {
+  return path.join(artifactRoot(), requestDraftId, webGeminiRevisionBriefFileName);
+}
+
 function isNotFoundError(error: unknown): boolean {
   return Boolean(error && typeof error === 'object' && 'code' in error && error.code === 'ENOENT');
 }
@@ -676,11 +692,42 @@ function parseWebGeminiReviewRunLog(value: unknown): WebGeminiReviewRunLog | und
     ...(hasText(log.nextAction) ? { nextAction: log.nextAction.trim() } : {}),
     ...(hasText(log.reviewPath) ? { reviewPath: log.reviewPath.trim() } : {}),
     ...(hasText(log.reviewCreatedAt) ? { reviewCreatedAt: log.reviewCreatedAt.trim() } : {}),
+    ...(hasText(log.revisionBriefPath) ? { revisionBriefPath: log.revisionBriefPath.trim() } : {}),
+    ...(hasText(log.revisionBriefCreatedAt) ? { revisionBriefCreatedAt: log.revisionBriefCreatedAt.trim() } : {}),
     ...(hasText(log.appliedDraftId) ? { appliedDraftId: log.appliedDraftId.trim() } : {}),
     ...(hasText(log.appliedAt) ? { appliedAt: log.appliedAt.trim() } : {}),
     ...(hasText(log.externalReviewCommand) ? { externalReviewCommand: log.externalReviewCommand.trim() } : {}),
     ...(log.edgeControl ? { edgeControl: log.edgeControl } : {}),
     ...(log.cdpControl ? { cdpControl: log.cdpControl } : {})
+  };
+}
+
+function parseWebGeminiRevisionBriefArtifact(value: unknown): WebGeminiRevisionBriefArtifact | undefined {
+  if (!value || typeof value !== 'object') {
+    return undefined;
+  }
+
+  const brief = value as Partial<WebGeminiRevisionBriefArtifact>;
+  if (
+    brief.source !== 'human-approved-web-gemini-review' ||
+    brief.status !== 'ready' ||
+    !hasText(brief.draftId) ||
+    !hasText(brief.createdAt) ||
+    !hasText(brief.outputVideoUri) ||
+    !hasText(brief.reviewCreatedAt) ||
+    !hasText(brief.briefText)
+  ) {
+    return undefined;
+  }
+
+  return {
+    draftId: brief.draftId.trim(),
+    source: 'human-approved-web-gemini-review',
+    status: 'ready',
+    createdAt: brief.createdAt.trim(),
+    outputVideoUri: brief.outputVideoUri.trim(),
+    reviewCreatedAt: brief.reviewCreatedAt.trim(),
+    briefText: brief.briefText.trim()
   };
 }
 
@@ -701,6 +748,26 @@ async function readWebGeminiReviewArtifact(
     }
 
     return { error: `Web Geminiレビューを読めません: ${unknownErrorMessage(error)}` };
+  }
+}
+
+async function readWebGeminiRevisionBriefArtifact(
+  requestDraftId: string
+): Promise<{ revisionBrief: WebGeminiRevisionBriefArtifact | null } | { error: string }> {
+  try {
+    const raw = await readFile(webGeminiRevisionBriefPath(requestDraftId), 'utf8');
+    const parsed = parseWebGeminiRevisionBriefArtifact(JSON.parse(raw));
+    if (!parsed || parsed.draftId !== requestDraftId) {
+      return { error: 'Web Gemini再生成方針の保存内容が壊れています' };
+    }
+
+    return { revisionBrief: parsed };
+  } catch (error) {
+    if (isNotFoundError(error)) {
+      return { revisionBrief: null };
+    }
+
+    return { error: `Web Gemini再生成方針を読めません: ${unknownErrorMessage(error)}` };
   }
 }
 
@@ -743,8 +810,17 @@ async function writeWebGeminiReviewArtifact(artifact: WebGeminiReviewArtifact): 
   await writeFile(webGeminiReviewPath(artifact.draftId), `${JSON.stringify(artifact, null, 2)}\n`, 'utf8');
 }
 
+async function writeWebGeminiRevisionBriefArtifact(artifact: WebGeminiRevisionBriefArtifact): Promise<void> {
+  await mkdir(path.dirname(webGeminiRevisionBriefPath(artifact.draftId)), { recursive: true });
+  await writeFile(webGeminiRevisionBriefPath(artifact.draftId), `${JSON.stringify(artifact, null, 2)}\n`, 'utf8');
+}
+
 async function removeWebGeminiReviewArtifact(requestDraftId: string): Promise<void> {
   await rm(webGeminiReviewPath(requestDraftId), { force: true });
+}
+
+async function removeWebGeminiRevisionBriefArtifact(requestDraftId: string): Promise<void> {
+  await rm(webGeminiRevisionBriefPath(requestDraftId), { force: true });
 }
 
 async function writeWebGeminiReviewRunLog(runLog: WebGeminiReviewRunLog): Promise<void> {
@@ -758,15 +834,16 @@ function buildWebGeminiReviewPrompt(draft: RequestDraft): string {
 
 function webGeminiReviewRestartReason(
   review: WebGeminiReviewArtifact,
-  instructionText: string
+  revisionBrief: WebGeminiRevisionBriefArtifact
 ): string {
   return [
-    'Web Geminiの演出レビューを反映して、演出作成前から作り直す',
+    'Web Geminiの演出レビューを確認し、人間が確定した方針で演出作成前から作り直す',
     `レビュー対象動画: ${review.outputVideoUri}`,
     `レビュー保存日時: ${review.createdAt}`,
+    `再生成方針の確定日時: ${revisionBrief.createdAt}`,
     '',
-    '演出作成へ渡す改善指示:',
-    instructionText
+    '人間が確定した再生成方針:',
+    revisionBrief.briefText
   ].join('\n');
 }
 
@@ -821,6 +898,7 @@ async function writeWebGeminiReviewAppliedRunLog(
   draft: RequestDraft,
   outputVideo: FileRef,
   review: WebGeminiReviewArtifact,
+  revisionBrief: WebGeminiRevisionBriefArtifact,
   appliedDraftId: string,
   createdAt: string
 ): Promise<WebGeminiReviewRunLog> {
@@ -833,9 +911,11 @@ async function writeWebGeminiReviewAppliedRunLog(
     promptPath: webGeminiReviewPromptPath(draft.id),
     blockedReasons: [],
     externalUploadRequired: false,
-    nextAction: 'Web Geminiレビューを反映して、新しい編集コピーを作成しました。',
+    nextAction: 'Web Gemini再生成方針を反映して、新しい編集コピーを作成しました。',
     reviewPath: webGeminiReviewPath(draft.id),
     reviewCreatedAt: review.createdAt,
+    revisionBriefPath: webGeminiRevisionBriefPath(draft.id),
+    revisionBriefCreatedAt: revisionBrief.createdAt,
     appliedDraftId,
     appliedAt: createdAt
   };
@@ -1353,7 +1433,7 @@ function webGeminiReviewRunTitle(status: WebGeminiReviewRunLog['status']): strin
     return 'Web Geminiレビュー実行を停止';
   }
 
-  return 'Web Geminiレビューを再作成へ反映';
+  return 'Web Gemini再生成方針を再作成へ反映';
 }
 
 function webGeminiReviewRunDetail(runLog: WebGeminiReviewRunLog): string {
@@ -1366,7 +1446,7 @@ function webGeminiReviewRunDetail(runLog: WebGeminiReviewRunLog): string {
   }
 
   if (runLog.status === 'applied') {
-    return compactActivityText(runLog.nextAction, 'レビューを反映して新しい編集コピーを作りました');
+    return compactActivityText(runLog.nextAction, '再生成方針を反映して新しい編集コピーを作りました');
   }
 
   if (runLog.status === 'running') {
@@ -1424,6 +1504,7 @@ function buildWebGeminiReviewActivitySummary(
   draft: RequestDraft,
   outputVideo: FileRef | undefined,
   reviewResult: { review: WebGeminiReviewArtifact | null } | { error: string },
+  revisionBriefResult: { revisionBrief: WebGeminiRevisionBriefArtifact | null } | { error: string },
   runLogResult: { runLog: WebGeminiReviewRunLog | null } | { error: string }
 ): RequestDraftActivitySummary {
   if (baseSummary.status !== 'completed') {
@@ -1455,6 +1536,16 @@ function buildWebGeminiReviewActivitySummary(
     };
   }
 
+  if ('error' in revisionBriefResult) {
+    return {
+      ...base,
+      status: 'failed',
+      title: 'Web Gemini再生成方針を確認できません',
+      detail: compactActivityText(revisionBriefResult.error, '再生成方針の保存内容を確認してください'),
+      nextAction: 'レビューを取り直すか、再生成方針を作り直します'
+    };
+  }
+
   if (reviewResult.review) {
     const mismatch = ensureWebGeminiReviewMatchesOutputVideo(reviewResult.review, outputVideo);
     if (mismatch) {
@@ -1463,6 +1554,23 @@ function buildWebGeminiReviewActivitySummary(
         status: 'failed',
         title: 'Web Geminiレビュー本文を確認できません',
         detail: compactActivityText(mismatch.error, '現在の完成動画とレビュー本文の対応を確認してください'),
+        nextAction: '現在の完成動画でレビューを取り直します'
+      };
+    }
+  }
+
+  if (revisionBriefResult.revisionBrief) {
+    const mismatch = ensureWebGeminiRevisionBriefMatchesReview(
+      revisionBriefResult.revisionBrief,
+      reviewResult.review,
+      outputVideo
+    );
+    if (mismatch) {
+      return {
+        ...base,
+        status: 'failed',
+        title: 'Web Gemini再生成方針を確認できません',
+        detail: compactActivityText(mismatch.error, '現在の完成動画、レビュー本文、再生成方針の対応を確認してください'),
         nextAction: '現在の完成動画でレビューを取り直します'
       };
     }
@@ -1516,14 +1624,14 @@ function buildWebGeminiReviewActivitySummary(
         status: 'completed',
         title: 'Web Geminiレビュー保存済み',
         detail: webGeminiReviewRunDetail(runLogResult.runLog),
-        nextAction: '改善指示を確認し、必要なら演出作成前から作り直します'
+        nextAction: '再生成方針を確認し、必要なら演出作成前から作り直します'
       };
     }
 
     return {
       ...base,
       status: 'completed',
-      title: 'Web Geminiレビュー反映済み',
+      title: 'Web Gemini再生成方針反映済み',
       detail: webGeminiReviewRunDetail(runLogResult.runLog),
       nextAction: '作成された編集コピーの演出作成を確認します'
     };
@@ -1730,6 +1838,28 @@ async function buildRequestDraftActivityWithExternalEvents(
     }
   }
 
+  const webGeminiRevisionBriefResult = await readWebGeminiRevisionBriefArtifact(draft.id);
+  if ('error' in webGeminiRevisionBriefResult) {
+    events.push(buildWebGeminiReviewActivityError(
+      draft,
+      webGeminiRevisionBriefResult.error,
+      'Web Gemini再生成方針を確認できません'
+    ));
+  } else if (!('error' in webGeminiReviewResult) && webGeminiRevisionBriefResult.revisionBrief) {
+    const mismatch = ensureWebGeminiRevisionBriefMatchesReview(
+      webGeminiRevisionBriefResult.revisionBrief,
+      webGeminiReviewResult.review,
+      outputVideo
+    );
+    if (mismatch) {
+      events.push(buildWebGeminiReviewActivityError(
+        draft,
+        mismatch.error,
+        'Web Gemini再生成方針を確認できません'
+      ));
+    }
+  }
+
   const webGeminiRunLogResult = await readWebGeminiReviewRunLog(draft.id);
   if ('error' in webGeminiRunLogResult) {
     events.push(buildWebGeminiReviewActivityError(draft, webGeminiRunLogResult.error));
@@ -1821,6 +1951,34 @@ function ensureWebGeminiReviewMatchesOutputVideo(
   }
 
   return { error: 'Web Geminiレビューが現在の完成動画と一致しません。現在の動画でレビューを取り直してください' };
+}
+
+function ensureWebGeminiRevisionBriefMatchesReview(
+  revisionBrief: WebGeminiRevisionBriefArtifact | null,
+  review: WebGeminiReviewArtifact | null,
+  outputVideo: FileRef | undefined
+): { error: string } | undefined {
+  if (!revisionBrief) {
+    return undefined;
+  }
+
+  if (!outputVideo) {
+    return { error: 'Web Gemini再生成方針がありますが、現在の完成動画がありません。動画生成後にレビューを取り直してください' };
+  }
+
+  if (revisionBrief.outputVideoUri !== outputVideo.uri) {
+    return { error: 'Web Gemini再生成方針が現在の完成動画と一致しません。現在の動画でレビューを取り直してください' };
+  }
+
+  if (!review) {
+    return { error: 'Web Gemini再生成方針がありますが、対応するレビュー本文がありません。レビューを取り直してください' };
+  }
+
+  if (revisionBrief.reviewCreatedAt !== review.createdAt) {
+    return { error: 'Web Gemini再生成方針が現在のレビュー本文と一致しません。再生成方針を作り直してください' };
+  }
+
+  return undefined;
 }
 
 function ensureWebGeminiRunLogMatchesOutputVideo(
@@ -2869,6 +3027,7 @@ router.get('/request-drafts/:id/activity', async (request, response) => {
   const events = await buildRequestDraftActivityWithExternalEvents(state, draft);
   const webGeminiReviewResult = await readWebGeminiReviewArtifact(draft.id);
   const outputVideo = latestOutputVideoFileRef(state, draft.id);
+  const webGeminiRevisionBriefResult = await readWebGeminiRevisionBriefArtifact(draft.id);
   const webGeminiRunLogResult = await readWebGeminiReviewRunLog(draft.id);
 
   const baseSummary = buildRequestDraftActivitySummary(state, draft);
@@ -2877,6 +3036,7 @@ router.get('/request-drafts/:id/activity', async (request, response) => {
     draft,
     outputVideo,
     webGeminiReviewResult,
+    webGeminiRevisionBriefResult,
     webGeminiRunLogResult
   );
   const summary = buildFinalReviewActivitySummary(webGeminiSummary, state, draft, outputVideo);
@@ -3376,6 +3536,7 @@ router.post('/request-drafts/:id/web-gemini-review/prepare', async (request, res
   try {
     const runLog = await prepareWebGeminiReviewRun(draft, outputVideo, nowIso());
     await removeWebGeminiReviewArtifact(draft.id);
+    await removeWebGeminiRevisionBriefArtifact(draft.id);
     response.json({
       runLog,
       promptText: buildWebGeminiReviewPrompt(draft),
@@ -3415,6 +3576,20 @@ router.get('/request-drafts/:id/web-gemini-review', async (request, response) =>
     response.status(409).json({ error: reviewMismatch.error, state });
     return;
   }
+  const revisionBriefResult = await readWebGeminiRevisionBriefArtifact(draft.id);
+  if ('error' in revisionBriefResult) {
+    response.status(409).json({ error: revisionBriefResult.error, state });
+    return;
+  }
+  const revisionBriefMismatch = ensureWebGeminiRevisionBriefMatchesReview(
+    revisionBriefResult.revisionBrief,
+    reviewResult.review,
+    outputVideo
+  );
+  if (revisionBriefMismatch) {
+    response.status(409).json({ error: revisionBriefMismatch.error, state });
+    return;
+  }
   const runLogResult = await readWebGeminiReviewRunLog(draft.id);
   if ('error' in runLogResult) {
     response.status(409).json({ error: runLogResult.error, state });
@@ -3437,6 +3612,7 @@ router.get('/request-drafts/:id/web-gemini-review', async (request, response) =>
 
   response.json({
     review: reviewResult.review,
+    revisionBrief: revisionBriefResult.revisionBrief,
     runLog: runLogResult.runLog,
     preparedPromptText,
     outputVideoUri: outputVideo?.uri ?? ''
@@ -3504,6 +3680,7 @@ router.post('/request-drafts/:id/web-gemini-review', async (request, response) =
   };
 
   await writeWebGeminiReviewArtifact(review);
+  await removeWebGeminiRevisionBriefArtifact(draft.id);
   const runLog: WebGeminiReviewRunLog = {
     draftId: draft.id,
     status: 'saved',
@@ -3513,7 +3690,7 @@ router.post('/request-drafts/:id/web-gemini-review', async (request, response) =
     promptPath: webGeminiReviewPromptPath(draft.id),
     blockedReasons: [],
     externalUploadRequired: false,
-    nextAction: 'Web Geminiレビューを保存しました。必要なら改善指示を確認して演出作成前から作り直せます。',
+    nextAction: 'Web Geminiレビューを保存しました。必要なら再生成方針を確認して演出作成前から作り直せます。',
     reviewPath: webGeminiReviewPath(draft.id),
     reviewCreatedAt: review.createdAt
   };
@@ -3521,11 +3698,13 @@ router.post('/request-drafts/:id/web-gemini-review', async (request, response) =
 
   response.json({
     review,
+    revisionBrief: null,
     runLog
   });
 });
 
 router.post('/request-drafts/:id/apply-web-gemini-review', async (request, response) => {
+  const revisionBriefText = hasText(request.body?.revisionBriefText) ? request.body.revisionBriefText.trim() : '';
   const state = await loadState();
   const draft = findById(state.requestDrafts, request.params.id);
   if (!draft) {
@@ -3547,6 +3726,10 @@ router.post('/request-drafts/:id/apply-web-gemini-review', async (request, respo
     return;
   }
   const outputVideo = latestOutputVideoFileRef(state, draft.id);
+  if (!outputVideo) {
+    response.status(409).json({ error: '生成済み動画がないため、Web Geminiレビューから作り直せません', state });
+    return;
+  }
   const outputVideoError = await validateWebGeminiOutputVideo(draft, outputVideo);
   if (outputVideoError) {
     response.status(409).json({ error: outputVideoError, state });
@@ -3580,16 +3763,22 @@ router.post('/request-drafts/:id/apply-web-gemini-review', async (request, respo
     return;
   }
 
-  const instructionText = hasText(request.body?.instructionText)
-    ? request.body.instructionText.trim()
-    : reviewResult.review.instructionText;
-  if (!instructionText) {
-    response.status(400).json({ error: '演出作成へ渡す改善指示が空です', state });
+  if (!revisionBriefText) {
+    response.status(400).json({ error: '今回の再生成方針が空です', state });
     return;
   }
 
   const createdAt = nowIso();
-  const reason = webGeminiReviewRestartReason(reviewResult.review, instructionText);
+  const revisionBrief: WebGeminiRevisionBriefArtifact = {
+    draftId: draft.id,
+    source: 'human-approved-web-gemini-review',
+    status: 'ready',
+    createdAt,
+    outputVideoUri: outputVideo.uri,
+    reviewCreatedAt: reviewResult.review.createdAt,
+    briefText: revisionBriefText
+  };
+  const reason = webGeminiReviewRestartReason(reviewResult.review, revisionBrief);
   const restart = await createCopiedEditRestart(
     state,
     draft.id,
@@ -3603,15 +3792,22 @@ router.post('/request-drafts/:id/apply-web-gemini-review', async (request, respo
   }
 
   appendCopiedRestartToState(state, restart);
-  const runLog = outputVideo
-    ? await writeWebGeminiReviewAppliedRunLog(draft, outputVideo, reviewResult.review, restart.draft.id, createdAt)
-    : undefined;
+  await writeWebGeminiRevisionBriefArtifact(revisionBrief);
+  const runLog = await writeWebGeminiReviewAppliedRunLog(
+    draft,
+    outputVideo,
+    reviewResult.review,
+    revisionBrief,
+    restart.draft.id,
+    createdAt
+  );
   await saveState(state);
 
   startDryRunRunner();
 
   response.json({
     draft: restart.draft,
+    revisionBrief,
     runLog,
     state
   });

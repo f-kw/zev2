@@ -56,6 +56,16 @@ export interface WebGeminiReviewArtifact {
   instructionText: string;
 }
 
+export interface WebGeminiRevisionBriefArtifact {
+  draftId: string;
+  source: 'human-approved-web-gemini-review';
+  status: 'ready';
+  createdAt: string;
+  outputVideoUri: string;
+  reviewCreatedAt: string;
+  briefText: string;
+}
+
 export interface WebGeminiReviewRunLog {
   draftId: string;
   status: 'prepared' | 'blocked' | 'running' | 'saved' | 'failed' | 'applied';
@@ -68,6 +78,8 @@ export interface WebGeminiReviewRunLog {
   nextAction?: string;
   reviewPath?: string;
   reviewCreatedAt?: string;
+  revisionBriefPath?: string;
+  revisionBriefCreatedAt?: string;
   appliedDraftId?: string;
   appliedAt?: string;
   externalReviewCommand?: string;
@@ -292,6 +304,7 @@ export async function submitFinalReview(
 
 export async function fetchWebGeminiReview(id: string): Promise<{
   review: WebGeminiReviewArtifact | null;
+  revisionBrief: WebGeminiRevisionBriefArtifact | null;
   runLog: WebGeminiReviewRunLog | null;
   preparedPromptText: string;
   outputVideoUri: string;
@@ -311,13 +324,14 @@ export async function prepareWebGeminiReview(id: string): Promise<{
 
 export async function applyWebGeminiReview(
   id: string,
-  instructionText: string
-): Promise<{ draft: RequestDraft; state: Zev2State }> {
+  revisionBriefText: string
+): Promise<{ draft: RequestDraft; revisionBrief: WebGeminiRevisionBriefArtifact; state: Zev2State }> {
   const response = await api.post(`/request-drafts/${id}/apply-web-gemini-review`, {
-    instructionText
+    revisionBriefText
   });
   return {
     draft: response.data.draft,
+    revisionBrief: response.data.revisionBrief,
     state: response.data.state
   };
 }

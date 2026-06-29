@@ -353,7 +353,7 @@ export const useControlQueueStore = defineStore('controlQueue', {
         this.loading = false;
       }
     },
-    async applyWebGeminiReview(id: string, instructionText: string) {
+    async applyWebGeminiReview(id: string, revisionBriefText: string) {
       this.loading = true;
       this.errorMessage = '';
       const draft = findById(this.state.requestDrafts, id);
@@ -362,9 +362,9 @@ export const useControlQueueStore = defineStore('controlQueue', {
       this.runPhase = 'running';
       this.runNumber += 1;
       this.lastChangedAt = new Date().toISOString();
-      this.message = 'Web Geminiレビューを反映して演出を作り直しています';
+      this.message = '再生成方針を反映して演出を作り直しています';
       try {
-        const result = await applyWebGeminiReviewRequest(id, instructionText);
+        const result = await applyWebGeminiReviewRequest(id, revisionBriefText);
         this.activeDraftId = result.draft.id;
         this.activePurpose = result.draft.purpose;
         this.state = result.state;

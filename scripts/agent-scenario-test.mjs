@@ -2665,6 +2665,7 @@ async function assertWebGeminiReviewFeedbackLoop(apiBaseUrl, runtimeDir, sourceD
 
   const beforeReview = await requestJson(apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/web-gemini-review`));
   assertScenario(beforeReview.review === null, 'Web Geminiレビュー保存前にレビューがある扱いになっている');
+  assertScenario(beforeReview.revisionBrief === null, 'Web Geminiレビュー保存前に再生成方針がある扱いになっている');
   assertScenario(beforeReview.outputVideoUri, 'Web Geminiレビュー対象の完成動画参照が返っていない');
   assertScenario(beforeReview.runLog?.status === 'prepared', 'Web Geminiレビュー準備ログが取得できない');
   assertScenario(beforeReview.runLog.externalUploadRequired === true, '外部送信が必要なレビューであることがログから分からない');
@@ -2690,6 +2691,7 @@ async function assertWebGeminiReviewFeedbackLoop(apiBaseUrl, runtimeDir, sourceD
   );
   const emptyReviewRunLog = await requestJson(apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/web-gemini-review`));
   assertScenario(emptyReviewRunLog.review === null, '空レビュー保存後にレビュー本体が保存されている');
+  assertScenario(emptyReviewRunLog.revisionBrief === null, '空レビュー保存後に再生成方針が保存されている');
   assertScenario(
     emptyReviewRunLog.runLog?.status === 'failed',
     '空レビュー保存後の実行ログがfailedではない'
@@ -2714,8 +2716,9 @@ async function assertWebGeminiReviewFeedbackLoop(apiBaseUrl, runtimeDir, sourceD
   });
   assertScenario(
     saved.review?.instructionText === instructionText,
-    'Web Geminiレビューの改善指示が保存時に変わっている'
+    'Web Geminiレビューから作る初期方針が保存時に変わっている'
   );
+  assertScenario(saved.revisionBrief === null, 'Web Geminiレビュー保存時点で再生成方針が確定済みになっている');
   assertScenario(saved.runLog?.status === 'saved', 'Web Geminiレビュー保存後の実行ログがsavedではない');
   assertScenario(
     saved.runLog.reviewCreatedAt === saved.review.createdAt,
@@ -2740,8 +2743,9 @@ async function assertWebGeminiReviewFeedbackLoop(apiBaseUrl, runtimeDir, sourceD
   assertScenario(fetched.review?.status === 'ready', '保存したWeb Geminiレビューが取得できない');
   assertScenario(
     fetched.review.instructionText === instructionText,
-    '取得したWeb Geminiレビューの改善指示が保存内容と一致しない'
+    '取得したWeb Geminiレビューから作る初期方針が保存内容と一致しない'
   );
+  assertScenario(fetched.revisionBrief === null, '反映前に再生成方針が確定済みとして取得されている');
   assertScenario(fetched.runLog?.status === 'saved', '取得したWeb Geminiレビュー実行ログがsavedではない');
 
   const reviewPathForActivity = path.join(runtimeDir, 'artifacts', sourceDraftId, 'web-gemini-review.json');
@@ -2810,6 +2814,10 @@ async function assertWebGeminiReviewFeedbackLoop(apiBaseUrl, runtimeDir, sourceD
     'レビューを取り直す準備後に古いWeb Geminiレビュー本体が残っている'
   );
   assertScenario(
+    reviewAfterPrepareAgain.revisionBrief === null,
+    'レビューを取り直す準備後に古い再生成方針が残っている'
+  );
+  assertScenario(
     reviewAfterPrepareAgain.runLog?.status === 'prepared',
     'レビューを取り直す準備後の実行ログがpreparedではない'
   );
@@ -2836,7 +2844,7 @@ async function assertWebGeminiReviewFeedbackLoop(apiBaseUrl, runtimeDir, sourceD
     apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/apply-web-gemini-review`),
     {
       method: 'POST',
-      body: JSON.stringify({ instructionText })
+      body: JSON.stringify({ revisionBriefText: instructionText })
     }
   );
   assertScenario(
@@ -2844,7 +2852,7 @@ async function assertWebGeminiReviewFeedbackLoop(apiBaseUrl, runtimeDir, sourceD
     '現在の完成動画と違うWeb Geminiレビューを反映できている'
   );
 
-  await requestJson(apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/web-gemini-review`), {
+  const savedForApply = await requestJson(apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/web-gemini-review`), {
     method: 'POST',
     body: JSON.stringify({
       promptText: '演出だけをレビューする',
@@ -2858,7 +2866,7 @@ async function assertWebGeminiReviewFeedbackLoop(apiBaseUrl, runtimeDir, sourceD
     apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/apply-web-gemini-review`),
     {
       method: 'POST',
-      body: JSON.stringify({ instructionText })
+      body: JSON.stringify({ revisionBriefText: instructionText })
     }
   );
   assertScenario(
@@ -2867,55 +2875,92 @@ async function assertWebGeminiReviewFeedbackLoop(apiBaseUrl, runtimeDir, sourceD
   );
   await writeFile(outputVideoPath, originalOutputVideo);
 
+  const emptyRevisionBriefApplyError = await expectRequestJsonFailure(
+    apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/apply-web-gemini-review`),
+    {
+      method: 'POST',
+      body: JSON.stringify({ revisionBriefText: '   ' })
+    }
+  );
+  assertScenario(
+    emptyRevisionBriefApplyError.includes('今回の再生成方針が空です'),
+    '空の再生成方針でWeb Geminiレビューから再生成できている'
+  );
+
   const applied = await requestJson(apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/apply-web-gemini-review`), {
     method: 'POST',
     body: JSON.stringify({
-      instructionText
+      revisionBriefText: instructionText
     })
   });
   const copiedDraft = applied.draft;
   assertScenario(copiedDraft.id !== sourceDraftId, 'Web Geminiレビュー反映で編集コピーが作られていない');
+  assertScenario(
+    applied.revisionBrief?.source === 'human-approved-web-gemini-review',
+    '人間が確定した再生成方針として保存されていない'
+  );
+  assertScenario(
+    applied.revisionBrief?.briefText === instructionText,
+    '反映APIが人間の再生成方針を保存していない'
+  );
+  assertScenario(
+    applied.revisionBrief?.reviewCreatedAt === savedForApply.review.createdAt,
+    '再生成方針が対応するWeb Geminiレビュー時刻を保持していない'
+  );
+  assertScenario(
+    applied.revisionBrief?.outputVideoUri === outputFileRef.uri,
+    '再生成方針が対象の完成動画参照を保持していない'
+  );
   assertScenario(applied.runLog?.status === 'applied', 'Web Geminiレビュー反映後の実行ログがappliedではない');
   assertScenario(
     applied.runLog.appliedDraftId === copiedDraft.id,
     'Web Geminiレビュー反映ログに反映先の編集コピーが残っていない'
+  );
+  assertScenario(
+    Boolean(applied.runLog.revisionBriefPath) &&
+      applied.runLog.revisionBriefCreatedAt === applied.revisionBrief.createdAt,
+    'Web Geminiレビュー反映ログに再生成方針の保存情報が残っていない'
   );
   const appliedActivity = await requestJson(apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/activity`));
   assertScenario(
     appliedActivity.events.some(
       (event) =>
         event.kind === 'web_gemini_review_status' &&
-        event.title === 'Web Geminiレビューを再作成へ反映'
+        event.title === 'Web Gemini再生成方針を再作成へ反映'
     ),
-    'Web Geminiレビュー反映が監査タイムラインで追えない'
+    'Web Gemini再生成方針の反映が監査タイムラインで追えない'
   );
   assertScenario(
-    appliedActivity.summary?.title === 'Web Geminiレビュー反映済み',
-    'Web Geminiレビュー反映済みが現在状態要約に出ていない'
+    appliedActivity.summary?.title === 'Web Gemini再生成方針反映済み',
+    'Web Gemini再生成方針反映済みが現在状態要約に出ていない'
   );
   assertScenario(
-    copiedDraft.purpose.includes('Web Geminiの演出レビューを反映して、演出作成前から作り直す'),
-    'Web Geminiレビュー反映の目的が編集コピーに残っていない'
+    copiedDraft.purpose.includes('Web Geminiの演出レビューを確認し、人間が確定した方針で演出作成前から作り直す'),
+    'Web Gemini再生成方針反映の目的が編集コピーに残っていない'
   );
   assertScenario(
     copiedDraft.purpose.includes(instructionText),
-    'Web Geminiレビューの改善指示が編集コピーに残っていない'
+    'Web Gemini再生成方針が編集コピーに残っていない'
   );
   assertScenario(
     copiedDraft.purpose.includes('レビュー対象動画: /api/artifacts/'),
     'Web Geminiレビューの対象動画が編集コピーに残っていない'
   );
   assertScenario(
-    copiedDraft.purpose.includes('演出作成へ渡す改善指示:'),
-    'Web Geminiレビューの改善指示見出しが編集コピーに残っていない'
+    copiedDraft.purpose.includes('人間が確定した再生成方針:'),
+    'Web Gemini再生成方針の見出しが編集コピーに残っていない'
   );
   const appliedLogFetch = await requestJson(apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/web-gemini-review`));
-  assertScenario(appliedLogFetch.runLog?.status === 'applied', 'Web Geminiレビュー反映済みログを取得できない');
+  assertScenario(appliedLogFetch.runLog?.status === 'applied', 'Web Gemini再生成方針反映済みログを取得できない');
+  assertScenario(
+    appliedLogFetch.revisionBrief?.briefText === instructionText,
+    'Web Gemini再生成方針が反映後に取得できない'
+  );
   const duplicateApplyError = await expectRequestJsonFailure(
     apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/apply-web-gemini-review`),
     {
       method: 'POST',
-      body: JSON.stringify({ instructionText })
+      body: JSON.stringify({ revisionBriefText: instructionText })
     }
   );
   assertScenario(
@@ -2964,7 +3009,7 @@ async function assertWebGeminiReviewFeedbackLoop(apiBaseUrl, runtimeDir, sourceD
   );
   assertScenario(
     copiedRequests[expectedStartIndex]?.input?.purpose.includes(instructionText),
-    'Web Geminiレビューの改善指示が演出作成工程の入力に入っていない'
+    'Web Gemini再生成方針が演出作成工程の入力に入っていない'
   );
 
   await runAgentApprovingReviews(apiBaseUrl, runtimeDir, copiedDraft.id);
