@@ -1,6 +1,8 @@
 import express from 'express';
 import { nanoid } from 'nanoid';
-import { access, copyFile, mkdir, open, readFile, rm, writeFile } from 'node:fs/promises';
+import { createHash } from 'node:crypto';
+import { createReadStream } from 'node:fs';
+import { access, copyFile, mkdir, open, readFile, rm, stat, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import {
   ARTIFACT_FILE_NAME_BY_KIND,
@@ -97,6 +99,11 @@ type CopiedEditRestart = {
   decisionLogs: DecisionLog[];
   controlReviewItems: ControlReviewItem[];
   humanReviewActions: HumanReviewAction[];
+};
+type ArtifactFileMetadata = {
+  artifactFileName: string;
+  byteSize: number;
+  sha256: string;
 };
 type RequestDraftActivityEvent = {
   id: string;
@@ -271,6 +278,26 @@ function artifactUrl(requestDraftId: string, fileName: string): string {
   return `${artifactUrlPrefix}${encodeURIComponent(requestDraftId)}/${encodeURIComponent(fileName)}`;
 }
 
+async function hashFileSha256(artifactPath: string): Promise<string> {
+  const hash = createHash('sha256');
+  await new Promise<void>((resolve, reject) => {
+    const stream = createReadStream(artifactPath);
+    stream.on('data', (chunk) => hash.update(chunk));
+    stream.on('error', reject);
+    stream.on('end', resolve);
+  });
+  return hash.digest('hex');
+}
+
+async function readArtifactFileMetadata(artifactPath: string): Promise<ArtifactFileMetadata> {
+  const fileStatus = await stat(artifactPath);
+  return {
+    artifactFileName: path.basename(artifactPath),
+    byteSize: fileStatus.size,
+    sha256: await hashFileSha256(artifactPath)
+  };
+}
+
 function normalizedMimeType(mimeType: string): string {
   return mimeType.split(';')[0]?.trim().toLowerCase() ?? '';
 }
@@ -318,16 +345,27 @@ async function validateMp4Artifact(artifactPath: string): Promise<string | undef
 async function validateCompletionFileRef(
   agentRequest: AgentRequest,
   fileRef: AgentCompletionInput['fileRef']
-): Promise<string | undefined> {
+): Promise<{ artifactPath: string; metadata: ArtifactFileMetadata } | { error: string }> {
   if (!fileRef) {
-    return 'AI操作の完了には成果物参照が必要です';
+    return { error: 'AI操作の完了には成果物参照が必要です' };
   }
 
   const uri = fileRef.uri.trim();
   const mimeType = fileRef.mimeType.trim();
   const expectedKind = getFileRefKindForRequest(agentRequest.type);
   const validation = await validateArtifactFileRefForKind(agentRequest.requestDraftId, expectedKind, uri, mimeType);
-  return 'error' in validation ? validation.error : undefined;
+  if ('error' in validation) {
+    return validation;
+  }
+
+  try {
+    return {
+      artifactPath: validation.artifactPath,
+      metadata: await readArtifactFileMetadata(validation.artifactPath)
+    };
+  } catch {
+    return { error: '成果物参照のファイル情報を読めません' };
+  }
 }
 
 async function validateArtifactFileRefForKind(
@@ -669,7 +707,7 @@ async function copyArtifactFileForRestart(
   sourceFileRef: FileRef,
   sourceRequest: AgentRequest,
   requestDraftId: string
-): Promise<{ uri: string } | { error: string }> {
+): Promise<({ uri: string } & ArtifactFileMetadata) | { error: string }> {
   const expectedKind = getFileRefKindForRequest(sourceRequest.type);
   if (sourceFileRef.kind !== expectedKind) {
     return { error: `${sourceRequest.label}の成果物種別が工程と一致しないため、編集コピーに引き継げません` };
@@ -698,7 +736,16 @@ async function copyArtifactFileForRestart(
     };
   }
 
-  return { uri: artifactUrl(requestDraftId, fileName) };
+  try {
+    return {
+      uri: artifactUrl(requestDraftId, fileName),
+      ...await readArtifactFileMetadata(destinationPath)
+    };
+  } catch (error) {
+    return {
+      error: `${sourceFileRef.kind}のコピー後ファイル情報を確認できません: ${unknownErrorMessage(error)}`
+    };
+  }
 }
 
 function createAgentRequestForDraftStep(
@@ -1459,6 +1506,9 @@ async function copySucceededAgentRequestForDraft(
     ...sourceFileRef,
     id: fileRefId,
     uri: copiedArtifact.uri,
+    artifactFileName: copiedArtifact.artifactFileName,
+    byteSize: copiedArtifact.byteSize,
+    sha256: copiedArtifact.sha256,
     ownerId: outputId,
     createdAt
   };
@@ -2060,7 +2110,11 @@ function createControlReview(
   return { decisionLog, reviewItem };
 }
 
-function completeAgentRequest(request: AgentRequest, input: AgentCompletionInput): {
+function completeAgentRequest(
+  request: AgentRequest,
+  input: AgentCompletionInput,
+  metadata: ArtifactFileMetadata
+): {
   fileRef?: FileRef;
   output?: OutputEntity;
 } {
@@ -2083,6 +2137,9 @@ function completeAgentRequest(request: AgentRequest, input: AgentCompletionInput
     mimeType: input.fileRef.mimeType,
     access: input.fileRef.access ?? 'internal',
     ownerId: outputId,
+    artifactFileName: metadata.artifactFileName,
+    byteSize: metadata.byteSize,
+    sha256: metadata.sha256,
     createdAt: nowIso()
   };
   const output = {
@@ -2570,9 +2627,9 @@ router.post('/agent-requests/:id/complete', async (request, response) => {
     return;
   }
   const completionInput = input as AgentCompletionInput;
-  const fileRefError = await validateCompletionFileRef(agentRequest, completionInput.fileRef);
-  if (fileRefError) {
-    response.status(400).json({ error: fileRefError, state });
+  const fileRefValidation = await validateCompletionFileRef(agentRequest, completionInput.fileRef);
+  if ('error' in fileRefValidation) {
+    response.status(400).json({ error: fileRefValidation.error, state });
     return;
   }
 
@@ -2586,7 +2643,7 @@ router.post('/agent-requests/:id/complete', async (request, response) => {
   }
 
   agentRequest.claimUpdatedAt = nowIso();
-  const { fileRef, output } = completeAgentRequest(agentRequest, completionInput);
+  const { fileRef, output } = completeAgentRequest(agentRequest, completionInput, fileRefValidation.metadata);
   if (fileRef) {
     state.fileRefs.push(fileRef);
   }

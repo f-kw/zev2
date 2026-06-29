@@ -223,6 +223,9 @@ export interface FileRef {
   mimeType: string;
   access: FileRefAccess;
   ownerId: string;
+  artifactFileName: string;
+  byteSize: number;
+  sha256: string;
   createdAt: string;
 }
 

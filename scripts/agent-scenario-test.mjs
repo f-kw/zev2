@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { createHash } from 'node:crypto';
 import { spawn } from 'node:child_process';
 import { createServer } from 'node:net';
 import { mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
@@ -462,6 +463,7 @@ async function assertAgentRequestApiContract(apiBaseUrl, runtimeDir) {
     completed.state.fileRefs.some((fileRef) => fileRef.id === completed.fileRef.id),
     'API契約: 成果物参照が状態へ保存されていない'
   );
+  await assertFileRefMatchesArtifact(runtimeDir, completed.state, completed.fileRef, 'API契約: 動画取り込み成果物');
 
   const nextAfterComplete = await requestJson(apiPath(apiBaseUrl, '/agent-requests/next'));
   assertScenario(
@@ -1011,7 +1013,7 @@ async function assertMidWorkflowRetryCopiesArtifacts(apiBaseUrl, runtimeDir) {
       copiedFileRef.uri.startsWith(`/api/artifacts/${retried.draft.id}/`),
       `${copiedRequest.label}: 再実行コピーの成果物参照が新しい編集コピーの配下にない`
     );
-    await readFile(artifactPathByUri(runtimeDir, copiedFileRef.uri));
+    await assertFileRefMatchesArtifact(runtimeDir, retried.state, copiedFileRef, `${copiedRequest.label}: 再実行コピー`);
   }
 
   const { review } = await runDraftUntilReview(apiBaseUrl, runtimeDir, retried.draft.id, 'theme_selection');
@@ -1069,7 +1071,7 @@ async function assertVideoSourceRetryCopiesMp4Name(apiBaseUrl, runtimeDir) {
     copiedSourceFileRef.uri === `/api/artifacts/${retried.draft.id}/${sourceVideoFileName}`,
     '動画入力MP4の再実行コピーがMP4名で保存されていない'
   );
-  await readFile(artifactPathByUri(runtimeDir, copiedSourceFileRef.uri));
+  await assertFileRefMatchesArtifact(runtimeDir, retried.state, copiedSourceFileRef, '動画入力MP4の再実行コピー');
 }
 
 async function assertBrokenCopiedArtifactBlocksRetry(apiBaseUrl, runtimeDir) {
@@ -1246,6 +1248,40 @@ function artifactPathByUri(runtimeDir, uri) {
   const prefix = '/api/artifacts/';
   assertScenario(uri.startsWith(prefix), `成果物URIが不正です: ${uri}`);
   return path.join(runtimeDir, 'artifacts', ...uri.slice(prefix.length).split('/').map(decodeURIComponent));
+}
+
+function sha256Buffer(buffer) {
+  return createHash('sha256').update(buffer).digest('hex');
+}
+
+function isJsonMimeType(mimeType) {
+  const normalized = String(mimeType ?? '').split(';')[0].trim().toLowerCase();
+  return normalized === 'application/json' || normalized.endsWith('+json');
+}
+
+async function assertFileRefMatchesArtifact(runtimeDir, state, fileRef, label) {
+  const artifactPath = artifactPathByUri(runtimeDir, fileRef.uri);
+  const artifactBuffer = await readFile(artifactPath);
+  assertScenario(
+    fileRef.artifactFileName === path.basename(artifactPath),
+    `${label}: 成果物参照に保存ファイル名が残っていない`
+  );
+  assertScenario(
+    fileRef.byteSize === artifactBuffer.length,
+    `${label}: 成果物参照のバイト数が実体ファイルと一致していない`
+  );
+  assertScenario(
+    fileRef.sha256 === sha256Buffer(artifactBuffer),
+    `${label}: 成果物参照のハッシュが実体ファイルと一致していない`
+  );
+
+  if (isJsonMimeType(fileRef.mimeType)) {
+    const artifactText = artifactBuffer.toString('utf8').trim();
+    assertScenario(
+      artifactText.length === 0 || !JSON.stringify(state).includes(artifactText),
+      `${label}: 成果物JSON本文が状態ファイルへ埋め込まれている`
+    );
+  }
 }
 
 async function writeMinimalMp4Header(filePath) {
@@ -1541,7 +1577,7 @@ async function assertCopiedRestart(apiBaseUrl, runtimeDir, sourceDraftId, scope,
       fileRef.uri.startsWith(`/api/artifacts/${copiedDraft.id}/`),
       `${scope}: コピー済み工程の成果物参照が新しい編集コピーの配下にない`
     );
-    await readFile(artifactPathByUri(runtimeDir, fileRef.uri));
+    await assertFileRefMatchesArtifact(runtimeDir, response.state, fileRef, `${scope}: コピー済み工程`);
   }
   assertScenario(
     queuedAfterRestart.every((request) => request.status === 'queued'),
@@ -1613,6 +1649,7 @@ async function assertGeneratedDraftCompleted(apiBaseUrl, runtimeDir, draftId, la
       fileRef.uri.startsWith(`/api/artifacts/${draftId}/`),
       `${label}: ${request.label}の成果物参照が対象編集コピー配下にない`
     );
+    await assertFileRefMatchesArtifact(runtimeDir, state, fileRef, `${label}: ${request.label}`);
   }
 
   const outputRequest = finalRequests.find((request) => request.type === 'render_video');

@@ -112,6 +112,7 @@ UI表示の `completed` は、処理中のAI作業がなくなったことを示
 ### 成果物参照が保存されている場所
 
 成果物参照は `Zev2State.fileRefs` に保存される。工程結果は `Zev2State.outputs` に保存され、AI作業には `fileRefIds` と `result` が保存される。開発用の実行状態は `runtime/state.json` に保存される。
+成果物本体は `runtime/artifacts/{編集コピーID}/` 配下に置く。`FileRef` には参照URIだけでなく、保存ファイル名、バイト数、SHA-256を残す。状態ファイルへJSON本文や動画本体は入れない。
 
 成果物本体の保存先、参照検証、欠落時の扱いは既存タスクに残っており、現行実装では未確認である。
 

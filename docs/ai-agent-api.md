@@ -172,6 +172,24 @@ Content-Type: application/json
 - 成果物参照がない完了報告は拒否する。
 - backend はファイル本体を保存しない。
 - `uri` はAIエージェントが後で参照できる場所を表す。
+- backend は完了時に成果物実体を確認し、保存ファイル名、バイト数、SHA-256を `FileRef` に残す。
+- 状態には成果物本文を入れず、参照と検証用メタデータだけを残す。
+
+レスポンス内の `fileRef` 例:
+
+```json
+{
+  "id": "fileref_xxx",
+  "kind": "transcript_json",
+  "uri": "/api/artifacts/draft_xxx/transcript.json",
+  "mimeType": "application/json",
+  "access": "internal",
+  "ownerId": "run_stt_xxx",
+  "artifactFileName": "transcript.json",
+  "byteSize": 12345,
+  "sha256": "..."
+}
+```
 
 ## 作業を失敗にする
 
