@@ -2735,6 +2735,12 @@ async function assertWebGeminiReviewFeedbackLoop(apiBaseUrl, runtimeDir, sourceD
     afterRunStatusRejected.runLog?.status === 'saved' && afterRunStatusRejected.review?.status === 'ready',
     '実行状態更新の拒否後に保存済みレビューの状態が変わっている'
   );
+  assertScenario(
+    afterRunStatusRejected.review.reviewText === fetched.review.reviewText &&
+      afterRunStatusRejected.review.createdAt === fetched.review.createdAt &&
+      afterRunStatusRejected.runLog.reviewCreatedAt === fetched.runLog.reviewCreatedAt,
+    '実行状態更新の拒否後に保存済みレビューの内容が変わっている'
+  );
 
   const stateBeforeMissingOutputVideo = await readJsonFile(statePath);
   await writeJsonFile(statePath, {
