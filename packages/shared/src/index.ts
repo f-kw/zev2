@@ -1,4 +1,5 @@
 import { findById, isStatusIn, lastMatching } from './common.js';
+import type { WebGeminiReviewState } from './web-gemini-review.js';
 
 export * from './common.js';
 export * from './activity.js';
@@ -300,6 +301,7 @@ export interface Zev2State {
   controlReviewItems: ControlReviewItem[];
   humanReviewActions: HumanReviewAction[];
   finalReviewActions: FinalReviewAction[];
+  webGeminiReviews: WebGeminiReviewState[];
 }
 
 export interface AgentOperationLog {
@@ -407,7 +409,8 @@ export function createInitialState(): Zev2State {
     decisionLogs: [],
     controlReviewItems: [],
     humanReviewActions: [],
-    finalReviewActions: []
+    finalReviewActions: [],
+    webGeminiReviews: []
   };
 }
 

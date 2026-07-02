@@ -28,6 +28,16 @@ export const WEB_GEMINI_REVIEW_SAVED_FROM_VALUES = ['ui', 'edge', 'imported-text
 
 export type WebGeminiReviewSavedFrom = (typeof WEB_GEMINI_REVIEW_SAVED_FROM_VALUES)[number];
 
+// 下書きごとのWeb Geminiレビュー一式。state.jsonが正本で、artifacts配下のファイルは人間確認用の書き出し
+export interface WebGeminiReviewState {
+  draftId: string;
+  review: WebGeminiReviewArtifact | null;
+  revisionBrief: WebGeminiRevisionBriefArtifact | null;
+  runLog: WebGeminiReviewRunLog | null;
+  promptText: string;
+  updatedAt: string;
+}
+
 export interface WebGeminiReviewArtifact {
   draftId: string;
   source: 'edge-web-gemini';

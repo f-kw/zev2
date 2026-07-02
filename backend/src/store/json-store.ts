@@ -154,8 +154,14 @@ function withCurrentStateShape(value: unknown): unknown {
   return {
     ...state,
     agentOperationLogs: Array.isArray(state.agentOperationLogs) ? state.agentOperationLogs : [],
-    finalReviewActions: Array.isArray(state.finalReviewActions) ? state.finalReviewActions : []
+    finalReviewActions: Array.isArray(state.finalReviewActions) ? state.finalReviewActions : [],
+    webGeminiReviews: Array.isArray(state.webGeminiReviews) ? state.webGeminiReviews : []
   };
+}
+
+function isCurrentWebGeminiReviewState(value: unknown): boolean {
+  const entry = recordValue(value);
+  return typeof entry.draftId === 'string' && typeof entry.updatedAt === 'string';
 }
 
 function isZev2State(value: unknown): value is Zev2State {
@@ -174,13 +180,15 @@ function isZev2State(value: unknown): value is Zev2State {
     Array.isArray(state.controlReviewItems) &&
     Array.isArray(state.humanReviewActions) &&
     Array.isArray(state.finalReviewActions) &&
+    Array.isArray(state.webGeminiReviews) &&
     state.requestDrafts.every(isCurrentRequestDraft) &&
     state.agentRequests.every(isCurrentAgentRequest) &&
     state.fileRefs.every(isCurrentFileRef) &&
     state.agentOperationLogs.every(isCurrentAgentOperationLog) &&
     state.controlReviewItems.every(isCurrentControlReview) &&
     state.humanReviewActions.every(isCurrentHumanReviewAction) &&
-    state.finalReviewActions.every(isCurrentFinalReviewAction)
+    state.finalReviewActions.every(isCurrentFinalReviewAction) &&
+    state.webGeminiReviews.every(isCurrentWebGeminiReviewState)
   );
 }
 

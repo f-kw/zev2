@@ -92,6 +92,7 @@ import {
   parseWebGeminiRunStatusUpdateInput,
   webGeminiReviewSavedNextActionBySavedFrom
 } from '../web-gemini/run-status.js';
+import { upsertWebGeminiReviewState } from '../web-gemini/state.js';
 import { requireAgentApiToken } from '../security/agent-auth.js';
 import {
   clearHumanSessionCookie,
@@ -3126,12 +3127,21 @@ router.post('/request-drafts/:id/web-gemini-review/prepare', async (request, res
   }
 
   try {
-    const runLog = await prepareWebGeminiReviewRun(draft, outputVideo, nowIso());
+    const createdAt = nowIso();
+    const promptText = buildWebGeminiReviewPrompt(draft);
+    const runLog = await prepareWebGeminiReviewRun(draft, outputVideo, createdAt);
     await removeWebGeminiReviewArtifact(draft.id);
     await removeWebGeminiRevisionBriefArtifact(draft.id);
+    upsertWebGeminiReviewState(state, draft.id, {
+      review: null,
+      revisionBrief: null,
+      runLog,
+      promptText
+    }, createdAt);
+    await saveState(state);
     response.json({
       runLog,
-      promptText: buildWebGeminiReviewPrompt(draft),
+      promptText,
       outputVideoUri: outputVideo.uri
     });
   } catch (error) {
@@ -3188,6 +3198,8 @@ router.post('/request-drafts/:id/web-gemini-review/run-status', async (request, 
     createdAt: nowIso()
   });
   await writeWebGeminiReviewRunLog(runLog);
+  upsertWebGeminiReviewState(state, draft.id, { runLog }, runLog.createdAt);
+  await saveState(state);
   response.json({ runLog });
 });
 
@@ -3293,6 +3305,8 @@ router.post('/request-drafts/:id/web-gemini-review', async (request, response) =
   if (!reviewText) {
     const errorMessage = 'Web Geminiの演出レビューが空です';
     const runLog = await writeWebGeminiReviewSaveFailureRunLog(draft, outputVideo, errorMessage, nowIso());
+    upsertWebGeminiReviewState(state, draft.id, { runLog }, runLog.createdAt);
+    await saveState(state);
     response.status(400).json({ error: errorMessage, runLog, state });
     return;
   }
@@ -3341,6 +3355,12 @@ router.post('/request-drafts/:id/web-gemini-review', async (request, response) =
     reviewCreatedAt: review.createdAt
   };
   await writeWebGeminiReviewRunLog(runLog);
+  upsertWebGeminiReviewState(state, draft.id, {
+    review,
+    revisionBrief: null,
+    runLog
+  }, review.createdAt);
+  await saveState(state);
 
   response.json({
     review,
@@ -3447,6 +3467,7 @@ router.post('/request-drafts/:id/apply-web-gemini-review', async (request, respo
     restart.draft.id,
     createdAt
   );
+  upsertWebGeminiReviewState(state, draft.id, { revisionBrief, runLog }, createdAt);
   await saveState(state);
 
   startDryRunRunner();

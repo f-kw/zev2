@@ -219,6 +219,26 @@ async function assertSaveSuccess(runtimeDir, apiBaseUrl) {
     '保存済み本文を取り込んだことが成功ログから読めない'
   );
 
+  const stateResponse = await fetch(`${apiBaseUrl}/state`);
+  assertTest(stateResponse.ok, 'stateを取得できない');
+  const state = await stateResponse.json();
+  const stateEntry = (state.webGeminiReviews ?? []).find((entry) => entry.draftId === 'draft_success');
+  assertTest(Boolean(stateEntry), 'state.webGeminiReviewsに保存済みレビューが入っていない');
+  assertTest(
+    stateEntry.review?.reviewText === review.reviewText &&
+      stateEntry.review?.createdAt === review.createdAt,
+    'stateのレビュー内容がファイルと一致していない'
+  );
+  assertTest(
+    stateEntry.runLog?.status === runLog.status && stateEntry.runLog?.createdAt === runLog.createdAt,
+    'stateの実行ログがファイルと一致していない'
+  );
+  assertTest(stateEntry.revisionBrief === null, 'レビュー保存直後に再生成方針が残っている');
+  assertTest(
+    typeof stateEntry.promptText === 'string' && stateEntry.promptText.includes('動画の目的:'),
+    'stateに依頼文が保存されていない'
+  );
+
   const promptText = await readFile(path.join(runtimeDir, 'artifacts', 'draft_success', 'web-gemini-review-prompt.md'), 'utf8');
   assertTest(
     promptText.includes('動画の目的: 成功ログ確認用ショート'),
