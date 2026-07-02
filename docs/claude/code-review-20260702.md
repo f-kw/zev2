@@ -44,9 +44,22 @@
   このため「現在の完成動画とずれていないか」の検出コード(parse 3関数 + ensure 3関数 + サマリのエラー分岐)が
   約400行残っている。state に `webGeminiReviews` として持てば、保存と編集コピー作成が1回の saveState で
   原子的になり、ずれ自体が設計から消える。
-- **当初「低リスク」と評価したが中リスクに格下げ**: `scripts/web-gemini-review-edge.mjs` が実行ログファイルを
-  backend を経由せず直接書いている(status=running/blocked の更新、365行目付近)。
-  段階実施が必要: ①実行ログ更新APIを新設 → ②edgeスクリプトをAPI経由へ切替 → ③ファイル正本を廃止。
+- **中リスクの根拠(2026-07-02 追加調査で確定)**: `scripts/web-gemini-review-edge.mjs` は backend API を
+  一切呼ばず、実行ログ(status=running/blocked/failed/saved、`writeRunLog` 6箇所)に加えて
+  **レビュー本文(web-gemini-review.json)も直接書いている**(`saveReviewFromText`、392行付近)。
+  直書きは backend の検証(完成動画との一致、final_complete済みガード)をすべてバイパスしている。
+
+**実施順(Codexレビューとも合意済みの4段階。各段階でテストを通す):**
+
+1. **実行ログ更新APIの新設のみ** — `running` / `blocked` / `failed` を backend 経由で更新できるようにする。
+   `saved` は既存のレビュー保存API(`POST /request-drafts/:id/web-gemini-review`)が実行ログも書くため
+   新APIには含めない。認証は他の web-gemini 系と同じ人間トークン。この段階ではファイル保存を残す。
+2. **edge スクリプトを API 経由に切り替える** — 実行ログ→新API、レビュー本文→既存保存API。
+   「外部スクリプトが成果物ファイルを直接書く」状態をここで終わらせる。backend が409を返すケースの
+   ハンドリングをスクリプトへ追加する。
+3. **backend内のWeb Gemini状態を state へ移す** — この時点で初めて `webGeminiReviews` の state 構造を作る。
+   ファイルとの二重書き期間として動作比較で検証する。
+4. **既存の3ファイル読み込み・整合チェックを削る** — 最後に削除する。先に削らない。
 
 ### R-2. control.ts(約3,700行)の分割
 
