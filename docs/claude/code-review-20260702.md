@@ -51,15 +51,22 @@
 
 **実施順(Codexレビューとも合意済みの4段階。各段階でテストを通す):**
 
-1. **実行ログ更新APIの新設のみ** — `running` / `blocked` / `failed` を backend 経由で更新できるようにする。
-   `saved` は既存のレビュー保存API(`POST /request-drafts/:id/web-gemini-review`)が実行ログも書くため
-   新APIには含めない。認証は他の web-gemini 系と同じ人間トークン。この段階ではファイル保存を残す。
-2. **edge スクリプトを API 経由に切り替える** — 実行ログ→新API、レビュー本文→既存保存API。
-   「外部スクリプトが成果物ファイルを直接書く」状態をここで終わらせる。backend が409を返すケースの
-   ハンドリングをスクリプトへ追加する。
-3. **backend内のWeb Gemini状態を state へ移す** — この時点で初めて `webGeminiReviews` の state 構造を作る。
-   ファイルとの二重書き期間として動作比較で検証する。
-4. **既存の3ファイル読み込み・整合チェックを削る** — 最後に削除する。先に削らない。
+1. ✅ **実行ログ更新APIの新設**(ff93dce) — `POST /request-drafts/:id/web-gemini-review/run-status`
+   (prepared/running/blocked/failed)。あわせて Web Gemini のファイルI/O・整合チェックを
+   `backend/src/web-gemini/` モジュールへ分離した。`saved` はレビュー保存API、`applied` は反映APIだけが作る。
+2. ✅ **edge スクリプトの API 経由化**(aae9da1) — 実行ログ・レビュー本文・依頼文・state取得のすべてを
+   backend API 経由に切り替え、ファイル直書きを廃止。保存APIに `savedFrom`(ui/edge/imported-text)を追加し、
+   保存元ごとの文言と externalUploadRequired を backend で一元管理。スクリプトの shared dist 直接importも解消。
+   スクリプトテストは backend 起動型に書き換え(検証内容は維持)。
+3. ✅ **state構造の新設と二重書き**(1894b8b) — `Zev2State.webGeminiReviews` を新設し、
+   prepare/保存/実行状態更新/反映の全書き込みでファイルと state の両方を更新。
+   スクリプトテストに state とファイルの一致検証を追加。読み出しはまだファイル側。
+4. ⬜ **読み出しの state 切替とファイル読み・整合チェックの削除** — 未実施。
+   **着手前に要判断**: `agent-scenario-test.mjs` が「実行ログ/レビュー本文ファイルを直接壊して
+   backend の破損検出(409「保存内容が壊れています」等)を確認する」ブロックを約10箇所持っている。
+   state 移行後はこの故障クラス自体が消えるため、該当テストは削除または API 操作ベースへの
+   書き換えになり、UI に出るエラー文言の契約も変わる。テスト側の模擬(レビューのファイル直書き)は
+   保存API(savedFrom)への置き換えが必要。ファイル書き込み自体は人間確認用の書き出しとして残す想定。
 
 ### R-2. control.ts(約3,700行)の分割
 

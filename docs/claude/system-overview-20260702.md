@@ -72,16 +72,21 @@ prepare_video → run_stt → propose_clip_themes → build_clip_composition
 
 完成動画を外部のWeb Gemini(Edgeブラウザ自動操作)にレビューさせ、人間が採否を決めて再生成する仕組み。
 
-1. `POST /request-drafts/:id/web-gemini-review/prepare` — 依頼文(prompt)と実行ログ(`web-gemini-review-run.json`, status=prepared)を作る
-2. `scripts/web-gemini-review-edge.mjs --execute` — EdgeをCDP/AppleScriptで操作して動画を送信、レビュー本文を取得し `POST :id/web-gemini-review` で保存(status=saved)
+1. `POST /request-drafts/:id/web-gemini-review/prepare` — 依頼文(prompt)と実行ログ(status=prepared)を作る
+2. `scripts/web-gemini-review-edge.mjs --execute` — EdgeをCDP/AppleScriptで操作して動画を送信。
+   実行状態は `POST :id/web-gemini-review/run-status`(prepared/running/blocked/failed)、
+   レビュー本文は `POST :id/web-gemini-review`(savedFrom=edge/imported-text)で backend へ渡す。
+   **スクリプトはファイルを直接書かず、state取得も含めて全て backend API 経由**(2026-07-02切替)
 3. 人間がUIでレビューを確認し、再生成方針(revision brief)を編集して `POST :id/apply-web-gemini-review` — 方針を保存し、create_edit_plan からの編集コピーを自動作成(status=applied)
 
-レビュー本文・方針・実行ログは state.json ではなく `artifacts/<draftId>/` 配下のJSONファイルに保存され、
+レビュー本文・方針・実行ログ・依頼文は `state.json` の `webGeminiReviews` と
+`artifacts/<draftId>/` 配下のJSONファイルの両方に書かれる(移行中の二重書き。読み出しはまだファイル側)。
 読み出しのたびに「現在の完成動画URIと一致するか」の整合チェックが行われる(不一致は取り直しを要求)。
+backend 側の実装は `backend/src/web-gemini/`(artifacts=ファイルI/Oと整合チェック、run-status=実行状態、state=state更新)。
 
 ## 状態管理
 
-- 正本は `runtime/state.json` 1ファイル。9コレクション(requestDrafts / agentRequests / fileRefs / outputs / agentOperationLogs / decisionLogs / controlReviewItems / humanReviewActions / finalReviewActions)
+- 正本は `runtime/state.json` 1ファイル。10コレクション(requestDrafts / agentRequests / fileRefs / outputs / agentOperationLogs / decisionLogs / controlReviewItems / humanReviewActions / finalReviewActions / webGeminiReviews)
 - 保存は tmp書き込み→rename のアトミック置換(`json-store.ts`)
 - 全ルートの read-modify-write はリクエスト単位で直列化される(`runExclusiveStateOperation` + control router のミドルウェア)。runner と人間操作が並走しても更新は消えない
 - 読み込み時にスキーマ検証し、不正なら `state.json.broken-<ts>` に退避(console.errorで通知)して空状態から再開
