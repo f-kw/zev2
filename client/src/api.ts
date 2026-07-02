@@ -9,11 +9,26 @@ import {
   type AgentRequest,
   type HumanReviewActionType,
   type RequestDraft,
+  type RequestDraftActivityEvent,
+  type RequestDraftActivitySearchResult,
+  type RequestDraftActivitySummary,
   type RequestDraftInput,
   type RuntimeConfig,
+  type WebGeminiReviewArtifact,
+  type WebGeminiReviewRunLog,
+  type WebGeminiRevisionBriefArtifact,
   type Zev2State,
   type WorkflowStep
 } from '@zev2/shared';
+
+export type {
+  RequestDraftActivityEvent,
+  RequestDraftActivitySearchResult,
+  RequestDraftActivitySummary,
+  WebGeminiReviewArtifact,
+  WebGeminiReviewRunLog,
+  WebGeminiRevisionBriefArtifact
+};
 
 const api = axios.create({
   baseURL: '/api',
@@ -43,100 +58,6 @@ export function formatApiError(error: unknown): string {
   }
 
   return '処理の呼び出しに失敗しました';
-}
-
-export interface WebGeminiReviewArtifact {
-  draftId: string;
-  source: 'edge-web-gemini';
-  status: 'ready';
-  createdAt: string;
-  outputVideoUri: string;
-  promptText: string;
-  reviewText: string;
-  instructionText: string;
-}
-
-export interface WebGeminiRevisionBriefArtifact {
-  draftId: string;
-  source: 'human-approved-web-gemini-review';
-  status: 'ready';
-  createdAt: string;
-  outputVideoUri: string;
-  reviewCreatedAt: string;
-  briefText: string;
-}
-
-export interface WebGeminiReviewRunLog {
-  draftId: string;
-  status: 'prepared' | 'blocked' | 'running' | 'saved' | 'failed' | 'applied';
-  createdAt: string;
-  outputVideoUri: string;
-  outputVideoPath: string;
-  promptPath: string;
-  blockedReasons: string[];
-  externalUploadRequired: boolean;
-  nextAction?: string;
-  reviewPath?: string;
-  reviewCreatedAt?: string;
-  revisionBriefPath?: string;
-  revisionBriefCreatedAt?: string;
-  appliedDraftId?: string;
-  appliedAt?: string;
-  externalReviewCommand?: string;
-  edgeControl?: unknown;
-  cdpControl?: unknown;
-}
-
-export interface RequestDraftActivityEvent {
-  id: string;
-  kind:
-    | 'draft_created'
-    | 'draft_status'
-    | 'agent_request_created'
-    | 'agent_request_status'
-    | 'agent_operation_log'
-    | 'agent_decision'
-    | 'human_review_required'
-    | 'human_review_action'
-    | 'final_review_action'
-    | 'web_gemini_review_status';
-  occurredAt: string;
-  actor: 'user' | 'agent' | 'runner' | 'backend' | 'system';
-  title: string;
-  detail: string;
-  requestDraftId: string;
-  agentRequestId?: string;
-  reviewItemId?: string;
-  decisionLogId?: string;
-  humanReviewActionId?: string;
-  finalReviewActionId?: string;
-  fileRefId?: string;
-  outputId?: string;
-}
-
-export interface RequestDraftActivitySummary {
-  status:
-    | 'draft'
-    | 'rejected'
-    | 'failed'
-    | 'review_required'
-    | 'running'
-    | 'waiting'
-    | 'cancelled'
-    | 'completed'
-    | 'approved';
-  title: string;
-  detail: string;
-  nextAction: string;
-  requestDraftId: string;
-  agentRequestId?: string;
-  reviewItemId?: string;
-  outputVideoUri?: string;
-}
-
-export interface RequestDraftActivitySearchResult extends RequestDraftActivityEvent {
-  draftPurpose: string;
-  draftStatus: RequestDraft['status'];
 }
 
 export interface HumanAuthStatus {

@@ -1,6 +1,8 @@
 import { findById, isStatusIn, lastMatching } from './common.js';
 
 export * from './common.js';
+export * from './activity.js';
+export * from './web-gemini-review.js';
 
 export const WORKFLOW_STEPS = [
   {
