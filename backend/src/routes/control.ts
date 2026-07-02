@@ -3101,9 +3101,17 @@ router.post('/request-drafts/:id/web-gemini-review/run-status', async (request, 
     return;
   }
 
-  if (webGeminiReviewStateForDraft(state, draft.id)?.runLog?.status === 'applied') {
+  const entry = webGeminiReviewStateForDraft(state, draft.id);
+  if (entry?.runLog?.status === 'applied') {
     response.status(409).json({
       error: 'このWeb Geminiレビューはすでに反映済みです。レビューを取り直す準備をしてから実行状態を更新してください',
+      state
+    });
+    return;
+  }
+  if (entry?.review) {
+    response.status(409).json({
+      error: 'このWeb Geminiレビューは保存済みです。取り直す場合はレビュー準備を実行してから実行状態を更新してください',
       state
     });
     return;

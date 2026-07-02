@@ -2719,6 +2719,23 @@ async function assertWebGeminiReviewFeedbackLoop(apiBaseUrl, runtimeDir, sourceD
   assertScenario(fetched.revisionBrief === null, '反映前に再生成方針が確定済みとして取得されている');
   assertScenario(fetched.runLog?.status === 'saved', '取得したWeb Geminiレビュー実行ログがsavedではない');
 
+  const runStatusAfterSavedError = await expectRequestJsonFailure(
+    apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/web-gemini-review/run-status`),
+    {
+      method: 'POST',
+      body: JSON.stringify({ status: 'running' })
+    }
+  );
+  assertScenario(
+    runStatusAfterSavedError.includes('保存済みです'),
+    '保存済みWeb Geminiレビューを実行状態更新で上書きできている'
+  );
+  const afterRunStatusRejected = await requestJson(apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/web-gemini-review`));
+  assertScenario(
+    afterRunStatusRejected.runLog?.status === 'saved' && afterRunStatusRejected.review?.status === 'ready',
+    '実行状態更新の拒否後に保存済みレビューの状態が変わっている'
+  );
+
   const stateBeforeMissingOutputVideo = await readJsonFile(statePath);
   await writeJsonFile(statePath, {
     ...stateBeforeMissingOutputVideo,
