@@ -88,7 +88,9 @@ import {
 } from '../web-gemini/artifacts.js';
 import {
   buildWebGeminiRunStatusRunLog,
-  parseWebGeminiRunStatusUpdateInput
+  parseWebGeminiReviewSavedFrom,
+  parseWebGeminiRunStatusUpdateInput,
+  webGeminiReviewSavedNextActionBySavedFrom
 } from '../web-gemini/run-status.js';
 import { requireAgentApiToken } from '../security/agent-auth.js';
 import {
@@ -3260,6 +3262,11 @@ router.get('/request-drafts/:id/web-gemini-review', async (request, response) =>
 
 router.post('/request-drafts/:id/web-gemini-review', async (request, response) => {
   const reviewText = hasText(request.body?.reviewText) ? request.body.reviewText.trim() : '';
+  const savedFrom = parseWebGeminiReviewSavedFrom(request.body?.savedFrom);
+  if (typeof savedFrom !== 'string') {
+    response.status(400).json({ error: savedFrom.error });
+    return;
+  }
   const state = await loadState();
   const draft = findById(state.requestDrafts, request.params.id);
   if (!draft) {
@@ -3328,8 +3335,8 @@ router.post('/request-drafts/:id/web-gemini-review', async (request, response) =
     outputVideoPath: artifactPathByUrl(outputVideo.uri),
     promptPath: webGeminiReviewPromptPath(draft.id),
     blockedReasons: [],
-    externalUploadRequired: false,
-    nextAction: 'Web Geminiレビューを保存しました。必要なら再生成方針を確認して演出作成前から作り直せます。',
+    externalUploadRequired: savedFrom === 'edge',
+    nextAction: webGeminiReviewSavedNextActionBySavedFrom[savedFrom],
     reviewPath: webGeminiReviewPath(draft.id),
     reviewCreatedAt: review.createdAt
   };

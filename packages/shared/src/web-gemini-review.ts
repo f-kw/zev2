@@ -23,6 +23,11 @@ export interface WebGeminiRunStatusUpdateInput {
   cdpControl?: unknown;
 }
 
+// レビュー保存APIの保存元。ui=人間UI、edge=Edge自動操作で取得、imported-text=保存済み本文の取り込み
+export const WEB_GEMINI_REVIEW_SAVED_FROM_VALUES = ['ui', 'edge', 'imported-text'] as const;
+
+export type WebGeminiReviewSavedFrom = (typeof WEB_GEMINI_REVIEW_SAVED_FROM_VALUES)[number];
+
 export interface WebGeminiReviewArtifact {
   draftId: string;
   source: 'edge-web-gemini';

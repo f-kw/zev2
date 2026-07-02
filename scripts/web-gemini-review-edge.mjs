@@ -2,24 +2,17 @@
 import { execFile } from 'node:child_process';
 import crypto from 'node:crypto';
 import { existsSync } from 'node:fs';
-import { mkdir, open, readFile, writeFile } from 'node:fs/promises';
+import { open, readFile } from 'node:fs/promises';
 import net from 'node:net';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import {
-  buildWebGeminiExternalReviewCommand,
-  buildWebGeminiReviewPromptText
-} from '../packages/shared/dist/index.js';
 
 const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const runtimeDir = process.env.ZEV2_RUNTIME_DIR
   ? path.resolve(process.env.ZEV2_RUNTIME_DIR)
   : path.join(projectRoot, 'runtime');
-const statePath = path.join(runtimeDir, 'state.json');
+const apiBaseUrl = (process.env.ZEV2_API_BASE_URL ?? 'http://localhost:8080/api').replace(/\/$/, '');
 const artifactUrlPrefix = '/api/artifacts/';
-const reviewFileName = 'web-gemini-review.json';
-const promptFileName = 'web-gemini-review-prompt.md';
-const runLogFileName = 'web-gemini-review-run.json';
 const reviewStabilityMilliseconds = 8000;
 
 const args = new Set(process.argv.slice(2));
@@ -282,12 +275,55 @@ function artifactPathFromUri(uri) {
   return artifactPath;
 }
 
-function buildPrompt(draft) {
-  return buildWebGeminiReviewPromptText(draft.purpose);
+function humanAuthHeader() {
+  const token = (process.env.ZEV2_HUMAN_API_TOKEN ?? '').trim();
+  return token ? { authorization: `Bearer ${token}` } : {};
+}
+
+async function requestApiJson(routePath, init) {
+  const response = await fetch(`${apiBaseUrl}${routePath}`, {
+    ...init,
+    headers: {
+      'content-type': 'application/json',
+      ...humanAuthHeader(),
+      ...(init?.headers ?? {})
+    }
+  });
+  const body = await response.json().catch(() => ({}));
+  if (!response.ok) {
+    throw new Error(body.errors?.join(' / ') ?? body.error ?? `backend APIの呼び出しに失敗しました: ${response.status} ${routePath}`);
+  }
+
+  return body;
 }
 
 async function loadState() {
-  return JSON.parse(await readFile(statePath, 'utf8'));
+  return requestApiJson('/state');
+}
+
+async function prepareReviewViaApi(draftId) {
+  return requestApiJson(`/request-drafts/${encodeURIComponent(draftId)}/web-gemini-review/prepare`, {
+    method: 'POST'
+  });
+}
+
+async function postRunStatus(draftId, update) {
+  const { runLog } = await requestApiJson(`/request-drafts/${encodeURIComponent(draftId)}/web-gemini-review/run-status`, {
+    method: 'POST',
+    body: JSON.stringify(update)
+  });
+  return runLog;
+}
+
+async function saveReviewViaApi(draftId, { reviewText, promptText, savedFrom }) {
+  return requestApiJson(`/request-drafts/${encodeURIComponent(draftId)}/web-gemini-review`, {
+    method: 'POST',
+    body: JSON.stringify({ reviewText, promptText, savedFrom })
+  });
+}
+
+function normalizeReviewText(reviewText) {
+  return String(reviewText ?? '').trim().replace(/\n{3,}/g, '\n\n');
 }
 
 function findLatestRenderedVideo(state) {
@@ -353,44 +389,6 @@ async function validateTargetVideo(target) {
   } catch {
     return 'Web Geminiレビュー対象の完成動画を読めません';
   }
-}
-
-async function writeJson(filePath, value) {
-  await mkdir(path.dirname(filePath), { recursive: true });
-  await writeFile(filePath, `${JSON.stringify(value, null, 2)}\n`, 'utf8');
-}
-
-async function writeRunLog(target, status, details) {
-  await writeJson(path.join(runtimeDir, 'artifacts', target.draft.id, runLogFileName), {
-    draftId: target.draft.id,
-    status,
-    createdAt: new Date().toISOString(),
-    outputVideoUri: target.fileRef.uri,
-    outputVideoPath: target.videoPath,
-    blockedReasons: [],
-    externalUploadRequired: false,
-    ...details
-  });
-}
-
-async function saveReviewFromText(target, promptText, reviewText) {
-  const normalizedReviewText = reviewText.trim().replace(/\n{3,}/g, '\n\n');
-  if (!normalizedReviewText) {
-    throw new Error('保存するWeb Geminiレビューが空です');
-  }
-
-  const review = {
-    draftId: target.draft.id,
-    source: 'edge-web-gemini',
-    status: 'ready',
-    createdAt: new Date().toISOString(),
-    outputVideoUri: target.fileRef.uri,
-    promptText,
-    reviewText: normalizedReviewText,
-    instructionText: normalizedReviewText
-  };
-  await writeJson(path.join(runtimeDir, 'artifacts', target.draft.id, reviewFileName), review);
-  return review;
 }
 
 async function diagnoseEdgeControl() {
@@ -801,50 +799,38 @@ async function main() {
       : '完成動画が見つかりません');
   }
 
-  const promptText = buildPrompt(target.draft);
-  const externalReviewCommand = buildWebGeminiExternalReviewCommand(target.draft.id);
-  const promptPath = path.join(runtimeDir, 'artifacts', target.draft.id, promptFileName);
+  const draftId = target.draft.id;
   const targetVideoError = await validateTargetVideo(target);
   if (targetVideoError) {
-    await writeRunLog(target, 'blocked', {
-      promptPath,
+    await postRunStatus(draftId, {
+      status: 'blocked',
       blockedReasons: [targetVideoError],
       externalUploadRequired: true,
-      externalReviewCommand,
       nextAction: 'Web Geminiレビュー対象の完成動画を確認できません。動画生成をやり直してから再実行してください。'
     });
     throw new Error(targetVideoError);
   }
 
-  await mkdir(path.dirname(promptPath), { recursive: true });
-  await writeFile(promptPath, `${promptText}\n`, 'utf8');
-
   if (reviewTextFileArg) {
-    let review;
-    try {
-      review = await saveReviewFromText(
-        target,
-        promptText,
-        await readFile(path.resolve(reviewTextFileArg), 'utf8')
-      );
-    } catch (error) {
-      const errorMessage = error instanceof Error ? error.message : String(error);
-      await writeRunLog(target, 'failed', {
-        promptPath,
-        reviewTextFilePath: path.resolve(reviewTextFileArg),
+    const prepared = await prepareReviewViaApi(draftId);
+    const reviewText = normalizeReviewText(await readFile(path.resolve(reviewTextFileArg), 'utf8'));
+    if (!reviewText) {
+      const errorMessage = '保存するWeb Geminiレビューが空です';
+      await postRunStatus(draftId, {
+        status: 'failed',
         blockedReasons: [errorMessage],
         externalUploadRequired: false,
         nextAction: 'Web Geminiレビューの保存に失敗しました。レビュー本文を確認してから再実行してください。'
       });
-      throw error;
+      throw new Error(errorMessage);
     }
-    await writeRunLog(target, 'saved', {
-      promptPath,
-      reviewPath: path.join(runtimeDir, 'artifacts', target.draft.id, reviewFileName),
-      reviewCreatedAt: review.createdAt,
-      nextAction: '保存済みのWeb Geminiレビュー本文を取り込みました。必要なら改善指示を確認して演出作成前から作り直せます。'
+
+    const saved = await saveReviewViaApi(draftId, {
+      reviewText,
+      promptText: prepared.promptText,
+      savedFrom: 'imported-text'
     });
-    console.log(JSON.stringify({ status: 'saved', draftId: target.draft.id, promptPath }, null, 2));
+    console.log(JSON.stringify({ status: 'saved', draftId, promptPath: saved.runLog.promptPath }, null, 2));
     return;
   }
 
@@ -862,27 +848,26 @@ async function main() {
     const cdpControl = blockedReasons.length ? undefined : await diagnoseCdpControl();
     const cdpBlockedReasons = cdpControl?.ok ? [] : [cdpControl?.error ?? 'CDP診断の前提が不足しています'];
     const status = blockedReasons.length || cdpBlockedReasons.length ? 'blocked' : 'prepared';
-    await writeRunLog(target, status, {
-      promptPath,
+    const runLog = await postRunStatus(draftId, {
+      status,
       edgeControl,
       cdpControl,
       blockedReasons: [...blockedReasons, ...cdpBlockedReasons],
       externalUploadRequired: true,
-      externalReviewCommand,
       nextAction: status === 'prepared'
         ? 'EdgeのCDP操作でWeb Gemini画面まで確認しました。外部送信はまだ実行していません。'
         : 'EdgeのWeb Gemini操作に必要な前提が不足しています。'
     });
     console.log(JSON.stringify({
       status,
-      draftId: target.draft.id,
+      draftId,
       outputVideoPath: target.videoPath,
-      promptPath,
+      promptPath: runLog.promptPath,
       edgeControl,
       cdpControl,
       blockedReasons: [...blockedReasons, ...cdpBlockedReasons],
       externalUploadRequired: true,
-      externalReviewCommand,
+      externalReviewCommand: runLog.externalReviewCommand,
       executeFlag: '--execute'
     }, null, 2));
     if (status === 'blocked') {
@@ -893,12 +878,11 @@ async function main() {
 
   if (blockedReasons.length || args.has('--diagnose-only') || !shouldExecuteWebGemini) {
     const status = blockedReasons.length ? 'blocked' : 'prepared';
-    await writeRunLog(target, status, {
-      promptPath,
+    const runLog = await postRunStatus(draftId, {
+      status,
       edgeControl,
       blockedReasons,
       externalUploadRequired: true,
-      externalReviewCommand,
       nextAction: blockedReasons.length
         ? 'EdgeでWeb Geminiへ動画を送る前提が不足しています。Edgeの開発者メニューでApple Events JavaScriptを許可してから再実行してください。'
         : shouldExecuteWebGemini
@@ -907,57 +891,53 @@ async function main() {
     });
     console.log(JSON.stringify({
       status,
-      draftId: target.draft.id,
+      draftId,
       outputVideoPath: target.videoPath,
-      promptPath,
+      promptPath: runLog.promptPath,
       edgeControl,
       blockedReasons,
       externalUploadRequired: true,
-      externalReviewCommand,
+      externalReviewCommand: runLog.externalReviewCommand,
       executeFlag: '--execute'
     }, null, 2));
     return;
   }
 
-  await writeRunLog(target, 'running', {
-    promptPath,
+  const prepared = await prepareReviewViaApi(draftId);
+  await postRunStatus(draftId, {
+    status: 'running',
     edgeControl,
-    externalReviewCommand,
     nextAction: 'EdgeのWeb Geminiへ動画と依頼文を送り、回答を取得しています。'
   });
   let reviewText;
-  let review;
   try {
-    reviewText = await runWebGeminiReview(target, promptText);
-    review = await saveReviewFromText(target, promptText, reviewText);
+    reviewText = normalizeReviewText(await runWebGeminiReview(target, prepared.promptText));
+    if (!reviewText) {
+      throw new Error('保存するWeb Geminiレビューが空です');
+    }
   } catch (error) {
     const errorMessage = error instanceof Error ? error.message : String(error);
-    await writeRunLog(target, 'failed', {
-      promptPath,
+    await postRunStatus(draftId, {
+      status: 'failed',
       edgeControl,
       blockedReasons: [errorMessage],
       externalUploadRequired: true,
-      externalReviewCommand,
       nextAction: 'Web Geminiレビュー実行に失敗しました。停止理由を確認してから再実行してください。'
     });
     throw error;
   }
-  await writeRunLog(target, 'saved', {
-    promptPath,
-    edgeControl,
-    reviewPath: path.join(runtimeDir, 'artifacts', target.draft.id, reviewFileName),
-    reviewCreatedAt: review.createdAt,
-    externalUploadRequired: true,
-    externalReviewCommand,
-    nextAction: 'EdgeのWeb Geminiで取得したレビューを保存しました。必要なら改善指示を確認して演出作成前から作り直せます。'
+  const saved = await saveReviewViaApi(draftId, {
+    reviewText,
+    promptText: prepared.promptText,
+    savedFrom: 'edge'
   });
   console.log(JSON.stringify({
     status: 'saved',
-    draftId: target.draft.id,
+    draftId,
     outputVideoPath: target.videoPath,
-    promptPath,
-    reviewPath: path.join(runtimeDir, 'artifacts', target.draft.id, reviewFileName),
-    reviewPreview: review.reviewText.slice(0, 240)
+    promptPath: saved.runLog.promptPath,
+    reviewPath: saved.runLog.reviewPath,
+    reviewPreview: saved.review.reviewText.slice(0, 240)
   }, null, 2));
 }
 

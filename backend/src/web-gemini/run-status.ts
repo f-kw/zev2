@@ -4,10 +4,30 @@ import {
   recordValue,
   trimText,
   type WebGeminiReviewRunLog,
+  type WebGeminiReviewSavedFrom,
   type WebGeminiRunStatusUpdateStatus,
+  WEB_GEMINI_REVIEW_SAVED_FROM_VALUES,
   WEB_GEMINI_RUN_STATUS_UPDATE_STATUSES
 } from '@zev2/shared';
 import { webGeminiReviewPromptPath } from './artifacts.js';
+
+export const webGeminiReviewSavedNextActionBySavedFrom: Record<WebGeminiReviewSavedFrom, string> = {
+  ui: 'Web Geminiレビューを保存しました。必要なら再生成方針を確認して演出作成前から作り直せます。',
+  edge: 'EdgeのWeb Geminiで取得したレビューを保存しました。必要なら改善指示を確認して演出作成前から作り直せます。',
+  'imported-text': '保存済みのWeb Geminiレビュー本文を取り込みました。必要なら改善指示を確認して演出作成前から作り直せます。'
+};
+
+export function parseWebGeminiReviewSavedFrom(value: unknown): WebGeminiReviewSavedFrom | { error: string } {
+  if (value === undefined) {
+    return 'ui';
+  }
+
+  if (WEB_GEMINI_REVIEW_SAVED_FROM_VALUES.includes(value as WebGeminiReviewSavedFrom)) {
+    return value as WebGeminiReviewSavedFrom;
+  }
+
+  return { error: 'Web Geminiレビューの保存元が不正です' };
+}
 
 export type ParsedWebGeminiRunStatusUpdate = {
   status: WebGeminiRunStatusUpdateStatus;

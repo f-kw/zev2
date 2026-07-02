@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 import { spawn } from 'node:child_process';
 import { mkdir, mkdtemp, readFile, stat, writeFile } from 'node:fs/promises';
+import net from 'node:net';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -14,13 +15,59 @@ function assertTest(condition, message) {
   }
 }
 
-function runScript(runtimeDir, args) {
+function getFreePort() {
+  return new Promise((resolve, reject) => {
+    const server = net.createServer();
+    server.once('error', reject);
+    server.listen(0, '127.0.0.1', () => {
+      const { port } = server.address();
+      server.close(() => resolve(port));
+    });
+  });
+}
+
+async function startBackend(runtimeDir, port) {
+  const output = [];
+  const child = spawn('node', ['backend/dist/index.js'], {
+    cwd: workspaceRoot,
+    env: {
+      ...process.env,
+      PORT: String(port),
+      ZEV2_RUNTIME_DIR: runtimeDir,
+      ZEV2_WORKSPACE_ROOT: workspaceRoot,
+      ZEV2_DISABLE_AUTO_RUNNER: '1'
+    },
+    stdio: ['ignore', 'pipe', 'pipe']
+  });
+  child.stdout.on('data', (chunk) => output.push(chunk.toString()));
+  child.stderr.on('data', (chunk) => output.push(chunk.toString()));
+
+  const healthUrl = `http://127.0.0.1:${port}/api/health`;
+  const deadline = Date.now() + 30000;
+  while (Date.now() < deadline) {
+    try {
+      const response = await fetch(healthUrl);
+      if (response.ok) {
+        return { child, output };
+      }
+    } catch {
+      // backend起動待ち
+    }
+    await new Promise((resolve) => setTimeout(resolve, 200));
+  }
+
+  child.kill();
+  throw new Error(`backendを起動できません:\n${output.join('')}`);
+}
+
+function runScript(runtimeDir, apiBaseUrl, args) {
   const output = [];
   const child = spawn(process.execPath, [scriptPath, ...args], {
     cwd: workspaceRoot,
     env: {
       ...process.env,
-      ZEV2_RUNTIME_DIR: runtimeDir
+      ZEV2_RUNTIME_DIR: runtimeDir,
+      ZEV2_API_BASE_URL: apiBaseUrl
     },
     stdio: ['ignore', 'pipe', 'pipe']
   });
@@ -54,50 +101,85 @@ async function writeMinimalMp4(filePath) {
   );
 }
 
+function fixtureDraft(id, purpose) {
+  return {
+    id,
+    status: 'approved',
+    purpose,
+    source: { kind: 'video_source', uri: `runtime/artifacts/${id}/source-video.mp4` },
+    settings: {
+      durationLabel: '60秒以内',
+      themeCountLabel: '3候補',
+      geminiModelName: 'gemini-3.5-flash',
+      preset: 'shorts_default'
+    },
+    policy: { humanApprovalRequiredBeforeRender: false },
+    steps: [],
+    createdAt: '2026-06-29T00:00:00.000Z',
+    updatedAt: '2026-06-29T00:00:00.000Z'
+  };
+}
+
+function fixtureRenderRequest(id, draftId, fileRefId, updatedAt) {
+  return {
+    id,
+    requestDraftId: draftId,
+    type: 'render_video',
+    label: '動画生成',
+    target: { sourceUri: `runtime/artifacts/${draftId}/source-video.mp4` },
+    input: { purpose: '確認用', settings: {} },
+    constraints: {},
+    policy: { humanApprovalRequiredBeforeRender: false },
+    status: 'succeeded',
+    fileRefIds: [fileRefId],
+    result: { fileRefId, meaning: '確認用動画' },
+    createdAt: '2026-06-29T00:00:00.000Z',
+    updatedAt
+  };
+}
+
+function fixtureOutputVideoFileRef(id, draftId) {
+  return {
+    id,
+    kind: 'output_video',
+    uri: `/api/artifacts/${draftId}/output.mp4`,
+    mimeType: 'video/mp4',
+    access: 'internal',
+    ownerId: `output_${id}`,
+    artifactFileName: 'output.mp4',
+    byteSize: 12,
+    sha256: '0'.repeat(64),
+    createdAt: '2026-06-29T00:00:00.000Z'
+  };
+}
+
 async function writeRuntimeFixture(runtimeDir) {
   const artifactsDir = path.join(runtimeDir, 'artifacts');
   await mkdir(path.join(artifactsDir, 'draft_success'), { recursive: true });
   await mkdir(path.join(artifactsDir, 'draft_empty'), { recursive: true });
   await mkdir(path.join(artifactsDir, 'draft_invalid_video'), { recursive: true });
   await writeFile(path.join(runtimeDir, 'state.json'), JSON.stringify({
-    fileRefs: [
-      { id: 'file_success', kind: 'output_video', uri: '/api/artifacts/draft_success/output.mp4', mimeType: 'video/mp4' },
-      { id: 'file_empty', kind: 'output_video', uri: '/api/artifacts/draft_empty/output.mp4', mimeType: 'video/mp4' },
-      {
-        id: 'file_invalid_video',
-        kind: 'output_video',
-        uri: '/api/artifacts/draft_invalid_video/output.mp4',
-        mimeType: 'video/mp4'
-      }
-    ],
     requestDrafts: [
-      { id: 'draft_success', purpose: '成功ログ確認用ショート\nやり直し理由: 前回レビューの改善指示' },
-      { id: 'draft_empty', purpose: '失敗ログ確認用ショート' },
-      { id: 'draft_invalid_video', purpose: '壊れた動画確認用ショート' }
+      fixtureDraft('draft_success', '成功ログ確認用ショート\nやり直し理由: 前回レビューの改善指示'),
+      fixtureDraft('draft_empty', '失敗ログ確認用ショート'),
+      fixtureDraft('draft_invalid_video', '壊れた動画確認用ショート')
     ],
     agentRequests: [
-      {
-        type: 'render_video',
-        status: 'succeeded',
-        requestDraftId: 'draft_success',
-        result: { fileRefId: 'file_success' },
-        updatedAt: '2026-06-29T00:00:02.000Z'
-      },
-      {
-        type: 'render_video',
-        status: 'succeeded',
-        requestDraftId: 'draft_empty',
-        result: { fileRefId: 'file_empty' },
-        updatedAt: '2026-06-29T00:00:01.000Z'
-      },
-      {
-        type: 'render_video',
-        status: 'succeeded',
-        requestDraftId: 'draft_invalid_video',
-        result: { fileRefId: 'file_invalid_video' },
-        updatedAt: '2026-06-29T00:00:03.000Z'
-      }
-    ]
+      fixtureRenderRequest('agent_success', 'draft_success', 'file_success', '2026-06-29T00:00:02.000Z'),
+      fixtureRenderRequest('agent_empty', 'draft_empty', 'file_empty', '2026-06-29T00:00:01.000Z'),
+      fixtureRenderRequest('agent_invalid', 'draft_invalid_video', 'file_invalid_video', '2026-06-29T00:00:03.000Z')
+    ],
+    fileRefs: [
+      fixtureOutputVideoFileRef('file_success', 'draft_success'),
+      fixtureOutputVideoFileRef('file_empty', 'draft_empty'),
+      fixtureOutputVideoFileRef('file_invalid_video', 'draft_invalid_video')
+    ],
+    outputs: [],
+    agentOperationLogs: [],
+    decisionLogs: [],
+    controlReviewItems: [],
+    humanReviewActions: [],
+    finalReviewActions: []
   }, null, 2));
 
   await writeMinimalMp4(path.join(artifactsDir, 'draft_success', 'output.mp4'));
@@ -114,8 +196,8 @@ async function writeRuntimeFixture(runtimeDir) {
   await writeFile(path.join(runtimeDir, 'review-empty.txt'), '   \n');
 }
 
-async function assertSaveSuccess(runtimeDir) {
-  const result = await runScript(runtimeDir, [
+async function assertSaveSuccess(runtimeDir, apiBaseUrl) {
+  const result = await runScript(runtimeDir, apiBaseUrl, [
     '--draft-id=draft_success',
     `--review-text-file=${path.join(runtimeDir, 'review-success.txt')}`
   ]);
@@ -154,8 +236,8 @@ async function assertSaveSuccess(runtimeDir) {
   assertTest(!promptText.includes('やり直し理由:'), 'Web Geminiレビュー依頼文にやり直し理由が混ざっている');
 }
 
-async function assertSaveFailure(runtimeDir) {
-  const result = await runScript(runtimeDir, [
+async function assertSaveFailure(runtimeDir, apiBaseUrl) {
+  const result = await runScript(runtimeDir, apiBaseUrl, [
     '--draft-id=draft_empty',
     `--review-text-file=${path.join(runtimeDir, 'review-empty.txt')}`
   ]);
@@ -175,8 +257,8 @@ async function assertSaveFailure(runtimeDir) {
   );
 }
 
-async function assertInvalidVideoBlocked(runtimeDir) {
-  const result = await runScript(runtimeDir, [
+async function assertInvalidVideoBlocked(runtimeDir, apiBaseUrl) {
+  const result = await runScript(runtimeDir, apiBaseUrl, [
     '--draft-id=draft_invalid_video',
     `--review-text-file=${path.join(runtimeDir, 'review-success.txt')}`
   ]);
@@ -201,9 +283,16 @@ async function assertInvalidVideoBlocked(runtimeDir) {
 async function main() {
   const runtimeDir = await mkdtemp(path.join(tmpdir(), 'zev2-web-gemini-script-'));
   await writeRuntimeFixture(runtimeDir);
-  await assertSaveSuccess(runtimeDir);
-  await assertSaveFailure(runtimeDir);
-  await assertInvalidVideoBlocked(runtimeDir);
+  const port = await getFreePort();
+  const backend = await startBackend(runtimeDir, port);
+  const apiBaseUrl = `http://127.0.0.1:${port}/api`;
+  try {
+    await assertSaveSuccess(runtimeDir, apiBaseUrl);
+    await assertSaveFailure(runtimeDir, apiBaseUrl);
+    await assertInvalidVideoBlocked(runtimeDir, apiBaseUrl);
+  } finally {
+    backend.child.kill();
+  }
   console.log(`Web Geminiレビュースクリプトテスト成功: ${runtimeDir}`);
 }
 
