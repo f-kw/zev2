@@ -26,6 +26,14 @@ import {
   type HumanReviewActionType,
   type OutputEntity,
   type RequestDraft,
+  type RequestDraftActivityEvent,
+  type RequestDraftActivitySearchResult,
+  type RequestDraftActivitySummary,
+  type WebGeminiReviewArtifact,
+  type WebGeminiReviewRunLog,
+  type WebGeminiReviewRunStatus,
+  type WebGeminiRevisionBriefArtifact,
+  WEB_GEMINI_REVIEW_RUN_STATUSES,
   buildWebGeminiExternalReviewCommand,
   buildWebGeminiReviewPromptText,
   createAgentRequestsFromDraft,
@@ -46,9 +54,16 @@ import {
   validateRequestDraftInput,
   type RequestDraftInput
 } from '@zev2/shared';
-import { loadState, saveState } from '../store/json-store.js';
+import { loadState, runExclusiveStateOperation, saveState } from '../store/json-store.js';
 import { startDryRunRunner } from '../runner/auto-runner.js';
 import { loadRuntimeConfig } from '../config/runtime-config.js';
+import { resolveRuntimeDir } from '../config/runtime-dir.js';
+import {
+  artifactPathByUrl as resolveArtifactPathByUrl,
+  artifactRoot as resolveArtifactRoot,
+  artifactUrl,
+  artifactUrlPrefix
+} from '../artifacts/artifact-path.js';
 import { requireAgentApiToken } from '../security/agent-auth.js';
 import {
   clearHumanSessionCookie,
@@ -77,45 +92,6 @@ const reviewChangeScopes: ReviewChangeScope[] = [
 const generatedVideoChangeScopes: GeneratedVideoChangeScope[] = ['theme_selection', 'edit_plan', 'adjustment'];
 const finalReviewActionTypes: FinalReviewActionType[] = ['publish_ready', 'final_complete'];
 type LoadedState = Awaited<ReturnType<typeof loadState>>;
-type WebGeminiReviewArtifact = {
-  draftId: string;
-  source: 'edge-web-gemini';
-  status: 'ready';
-  createdAt: string;
-  outputVideoUri: string;
-  promptText: string;
-  reviewText: string;
-  instructionText: string;
-};
-type WebGeminiRevisionBriefArtifact = {
-  draftId: string;
-  source: 'human-approved-web-gemini-review';
-  status: 'ready';
-  createdAt: string;
-  outputVideoUri: string;
-  reviewCreatedAt: string;
-  briefText: string;
-};
-type WebGeminiReviewRunLog = {
-  draftId: string;
-  status: 'prepared' | 'blocked' | 'running' | 'saved' | 'failed' | 'applied';
-  createdAt: string;
-  outputVideoUri: string;
-  outputVideoPath: string;
-  promptPath: string;
-  blockedReasons: string[];
-  externalUploadRequired: boolean;
-  nextAction?: string;
-  reviewPath?: string;
-  reviewCreatedAt?: string;
-  revisionBriefPath?: string;
-  revisionBriefCreatedAt?: string;
-  appliedDraftId?: string;
-  appliedAt?: string;
-  externalReviewCommand?: string;
-  edgeControl?: unknown;
-  cdpControl?: unknown;
-};
 type CopiedEditRestart = {
   draft: RequestDraft;
   requests: AgentRequest[];
@@ -131,60 +107,7 @@ type ArtifactFileMetadata = {
   byteSize: number;
   sha256: string;
 };
-type RequestDraftActivityEvent = {
-  id: string;
-  kind:
-    | 'draft_created'
-    | 'draft_status'
-    | 'agent_request_created'
-    | 'agent_request_status'
-    | 'agent_operation_log'
-    | 'agent_decision'
-    | 'human_review_required'
-    | 'human_review_action'
-    | 'final_review_action'
-    | 'web_gemini_review_status';
-  occurredAt: string;
-  actor: 'user' | 'agent' | 'runner' | 'backend' | 'system';
-  title: string;
-  detail: string;
-  requestDraftId: string;
-  agentRequestId?: string;
-  reviewItemId?: string;
-  decisionLogId?: string;
-  humanReviewActionId?: string;
-  finalReviewActionId?: string;
-  fileRefId?: string;
-  outputId?: string;
-};
-type RequestDraftActivitySearchResult = RequestDraftActivityEvent & {
-  draftPurpose: string;
-  draftStatus: RequestDraft['status'];
-};
-type RequestDraftActivitySummary = {
-  status:
-    | 'draft'
-    | 'rejected'
-    | 'failed'
-    | 'review_required'
-    | 'running'
-    | 'waiting'
-    | 'cancelled'
-    | 'completed'
-    | 'approved';
-  title: string;
-  detail: string;
-  nextAction: string;
-  requestDraftId: string;
-  agentRequestId?: string;
-  reviewItemId?: string;
-  outputVideoUri?: string;
-};
-
-const runtimeDir = process.env.ZEV2_RUNTIME_DIR
-  ? path.resolve(process.env.ZEV2_RUNTIME_DIR)
-  : path.resolve(process.cwd(), '../runtime');
-const artifactUrlPrefix = '/api/artifacts/';
+const runtimeDir = resolveRuntimeDir();
 const webGeminiReviewFileName = 'web-gemini-review.json';
 const webGeminiReviewRunLogFileName = 'web-gemini-review-run.json';
 const webGeminiReviewPromptFileName = 'web-gemini-review-prompt.md';
@@ -255,6 +178,18 @@ router.use((request, response, next) => {
   }
 
   requireHumanApiToken(request, response, next);
+});
+
+// 全ルートがstate.jsonを全量read-modify-writeするため、リクエスト単位で直列化して更新消失を防ぐ
+router.use((_, response, next) => {
+  void runExclusiveStateOperation(
+    () =>
+      new Promise<void>((resolve) => {
+        response.once('finish', resolve);
+        response.once('close', resolve);
+        next();
+      })
+  );
 });
 
 function createId(prefix: string): string {
@@ -408,26 +343,11 @@ function workflowStepIndex(type: AgentRequest['type']): number {
 }
 
 function artifactRoot(): string {
-  return path.join(runtimeDir, 'artifacts');
+  return resolveArtifactRoot(runtimeDir);
 }
 
 function artifactPathByUrl(uri: string): string {
-  if (!uri.startsWith(artifactUrlPrefix)) {
-    throw new Error(`成果物URIを読めません: ${uri}`);
-  }
-
-  const relativePath = uri.slice(artifactUrlPrefix.length).split('/').map(decodeURIComponent).join(path.sep);
-  const root = path.resolve(artifactRoot());
-  const artifactPath = path.resolve(root, relativePath);
-  if (!artifactPath.startsWith(`${root}${path.sep}`)) {
-    throw new Error(`成果物URIの保存先が不正です: ${uri}`);
-  }
-
-  return artifactPath;
-}
-
-function artifactUrl(requestDraftId: string, fileName: string): string {
-  return `${artifactUrlPrefix}${encodeURIComponent(requestDraftId)}/${encodeURIComponent(fileName)}`;
+  return resolveArtifactPathByUrl(runtimeDir, uri);
 }
 
 async function hashFileSha256(artifactPath: string): Promise<string> {
@@ -659,28 +579,20 @@ function parseWebGeminiReviewRunLog(value: unknown): WebGeminiReviewRunLog | und
   }
 
   const log = value as Partial<WebGeminiReviewRunLog>;
-  const allowedStatuses: WebGeminiReviewRunLog['status'][] = [
-    'prepared',
-    'blocked',
-    'running',
-    'saved',
-    'failed',
-    'applied'
-  ];
   if (
     !hasText(log.draftId) ||
     !hasText(log.createdAt) ||
     !hasText(log.outputVideoUri) ||
     !hasText(log.outputVideoPath) ||
     !hasText(log.promptPath) ||
-    !allowedStatuses.includes(log.status as WebGeminiReviewRunLog['status'])
+    !WEB_GEMINI_REVIEW_RUN_STATUSES.includes(log.status as WebGeminiReviewRunStatus)
   ) {
     return undefined;
   }
 
   return {
     draftId: log.draftId.trim(),
-    status: log.status as WebGeminiReviewRunLog['status'],
+    status: log.status as WebGeminiReviewRunStatus,
     createdAt: log.createdAt.trim(),
     outputVideoUri: log.outputVideoUri.trim(),
     outputVideoPath: log.outputVideoPath.trim(),
@@ -769,6 +681,20 @@ async function readWebGeminiRevisionBriefArtifact(
 
     return { error: `Web Gemini再生成方針を読めません: ${unknownErrorMessage(error)}` };
   }
+}
+
+type WebGeminiReviewFileResults = {
+  reviewResult: { review: WebGeminiReviewArtifact | null } | { error: string };
+  revisionBriefResult: { revisionBrief: WebGeminiRevisionBriefArtifact | null } | { error: string };
+  runLogResult: { runLog: WebGeminiReviewRunLog | null } | { error: string };
+};
+
+async function readWebGeminiReviewFiles(requestDraftId: string): Promise<WebGeminiReviewFileResults> {
+  return {
+    reviewResult: await readWebGeminiReviewArtifact(requestDraftId),
+    revisionBriefResult: await readWebGeminiRevisionBriefArtifact(requestDraftId),
+    runLogResult: await readWebGeminiReviewRunLog(requestDraftId)
+  };
 }
 
 async function readWebGeminiReviewRunLog(
@@ -1190,32 +1116,18 @@ function buildRequestDraftActivitySummary(
   };
 }
 
+const agentRequestStatusTitleSuffixByStatus: Record<AgentRequest['status'], string> = {
+  queued: 'をキューに追加',
+  waiting: 'は前工程待ち',
+  running: 'を実行中',
+  succeeded: 'が完了',
+  failed: 'で停止',
+  cancelled: 'を中止',
+  superseded: 'を作り直しで置換'
+};
+
 function agentRequestStatusTitle(request: AgentRequest): string {
-  if (request.status === 'queued') {
-    return `${request.label}をキューに追加`;
-  }
-
-  if (request.status === 'waiting') {
-    return `${request.label}は前工程待ち`;
-  }
-
-  if (request.status === 'running') {
-    return `${request.label}を実行中`;
-  }
-
-  if (request.status === 'succeeded') {
-    return `${request.label}が完了`;
-  }
-
-  if (request.status === 'failed') {
-    return `${request.label}で停止`;
-  }
-
-  if (request.status === 'cancelled') {
-    return `${request.label}を中止`;
-  }
-
-  return `${request.label}を作り直しで置換`;
+  return `${request.label}${agentRequestStatusTitleSuffixByStatus[request.status]}`;
 }
 
 function agentRequestStatusDetail(request: AgentRequest): string {
@@ -1248,40 +1160,20 @@ function agentRequestStatusDetail(request: AgentRequest): string {
   return compactActivityText(request.errorMessage, 'AIエージェントが実行する工程として登録しました');
 }
 
+const agentOperationLogTitleByEventType: Record<AgentOperationLogEventType, string> = {
+  draft_created: '実行前下書き保存を記録',
+  draft_approved: '依頼承認を記録',
+  draft_rejected: '依頼却下を記録',
+  agent_request_created: 'AI作業作成を記録',
+  agent_request_next_returned: '次のAI作業返却を記録',
+  agent_request_claimed: 'AI作業取得を記録',
+  agent_request_completed: 'AI作業完了を記録',
+  agent_request_failed: 'AI作業失敗を記録',
+  agent_request_claim_recovered: 'AI作業復旧を記録'
+};
+
 function agentOperationLogTitle(log: AgentOperationLog): string {
-  if (log.eventType === 'draft_created') {
-    return '実行前下書き保存を記録';
-  }
-
-  if (log.eventType === 'draft_approved') {
-    return '依頼承認を記録';
-  }
-
-  if (log.eventType === 'draft_rejected') {
-    return '依頼却下を記録';
-  }
-
-  if (log.eventType === 'agent_request_created') {
-    return 'AI作業作成を記録';
-  }
-
-  if (log.eventType === 'agent_request_next_returned') {
-    return '次のAI作業返却を記録';
-  }
-
-  if (log.eventType === 'agent_request_claimed') {
-    return 'AI作業取得を記録';
-  }
-
-  if (log.eventType === 'agent_request_completed') {
-    return 'AI作業完了を記録';
-  }
-
-  if (log.eventType === 'agent_request_failed') {
-    return 'AI作業失敗を記録';
-  }
-
-  return 'AI作業復旧を記録';
+  return agentOperationLogTitleByEventType[log.eventType];
 }
 
 function agentOperationLogDetail(log: AgentOperationLog): string {
@@ -1299,36 +1191,36 @@ function agentOperationLogDetail(log: AgentOperationLog): string {
   return compactActivityText(parts.join(' / '), 'AI操作の監査イベントを記録しました');
 }
 
+const draftStatusTitleByStatus: Record<RequestDraft['status'], string> = {
+  draft: '実行前下書きは未承認',
+  approved: 'AIエージェントへ承認',
+  rejected: '実行前下書きを却下'
+};
+
 function draftStatusTitle(status: RequestDraft['status']): string {
-  if (status === 'approved') {
-    return 'AIエージェントへ承認';
-  }
-
-  if (status === 'rejected') {
-    return '実行前下書きを却下';
-  }
-
-  return '実行前下書きは未承認';
+  return draftStatusTitleByStatus[status];
 }
 
 function humanReviewActionTitle(action: HumanReviewActionType): string {
   return `人間が${reviewActionLabel(action)}`;
 }
 
-function finalReviewActionTitle(action: FinalReviewActionType): string {
-  if (action === 'publish_ready') {
-    return '人間が投稿可能として確認';
-  }
+const finalReviewActionTitleByType: Record<FinalReviewActionType, string> = {
+  publish_ready: '人間が投稿可能として確認',
+  final_complete: '人間が最終完了として確認'
+};
 
-  return '人間が最終完了として確認';
+function finalReviewActionTitle(action: FinalReviewActionType): string {
+  return finalReviewActionTitleByType[action];
 }
 
-function defaultFinalReviewReason(action: FinalReviewActionType): string {
-  if (action === 'publish_ready') {
-    return '完成動画を確認し、投稿可能な成果物として記録しました';
-  }
+const defaultFinalReviewReasonByType: Record<FinalReviewActionType, string> = {
+  publish_ready: '完成動画を確認し、投稿可能な成果物として記録しました',
+  final_complete: '完成動画を確認し、この編集を最終完了として記録しました'
+};
 
-  return '完成動画を確認し、この編集を最終完了として記録しました';
+function defaultFinalReviewReason(action: FinalReviewActionType): string {
+  return defaultFinalReviewReasonByType[action];
 }
 
 function latestFinalReviewActionForOutput(
@@ -1373,16 +1265,14 @@ function finalCompletedOutputChangeError(
     : undefined;
 }
 
+const decisionTypeLabelByType: Record<DecisionLogType, string> = {
+  theme_selection: 'テーマ選択',
+  material_confirmation: '切り口と編集元場面',
+  render_readiness: '動画生成前確認'
+};
+
 function decisionTypeLabel(type: DecisionLogType): string {
-  if (type === 'theme_selection') {
-    return 'テーマ選択';
-  }
-
-  if (type === 'material_confirmation') {
-    return '切り口と編集元場面';
-  }
-
-  return '動画生成前確認';
+  return decisionTypeLabelByType[type];
 }
 
 function proposedNextStateLabel(state: string): string {
@@ -1412,28 +1302,17 @@ function decisionActivityDetail(decision: DecisionLog): string {
   return compactActivityText(parts.join(' / '), 'AIエージェントが判断を記録しました');
 }
 
-function webGeminiReviewRunTitle(status: WebGeminiReviewRunLog['status']): string {
-  if (status === 'prepared') {
-    return 'Web Geminiレビュー準備が完了';
-  }
+const webGeminiReviewRunTitleByStatus: Record<WebGeminiReviewRunStatus, string> = {
+  prepared: 'Web Geminiレビュー準備が完了',
+  running: 'Web Geminiレビューを実行中',
+  saved: 'Web Geminiレビューを保存',
+  failed: 'Web Geminiレビュー実行に失敗',
+  blocked: 'Web Geminiレビュー実行を停止',
+  applied: 'Web Gemini再生成方針を再作成へ反映'
+};
 
-  if (status === 'running') {
-    return 'Web Geminiレビューを実行中';
-  }
-
-  if (status === 'saved') {
-    return 'Web Geminiレビューを保存';
-  }
-
-  if (status === 'failed') {
-    return 'Web Geminiレビュー実行に失敗';
-  }
-
-  if (status === 'blocked') {
-    return 'Web Geminiレビュー実行を停止';
-  }
-
-  return 'Web Gemini再生成方針を再作成へ反映';
+function webGeminiReviewRunTitle(status: WebGeminiReviewRunStatus): string {
+  return webGeminiReviewRunTitleByStatus[status];
 }
 
 function webGeminiReviewRunDetail(runLog: WebGeminiReviewRunLog): string {
@@ -1814,12 +1693,13 @@ function buildRequestDraftActivity(state: LoadedState, draft: RequestDraft): Req
   ));
 }
 
-async function buildRequestDraftActivityWithExternalEvents(
+function buildRequestDraftActivityWithExternalEvents(
   state: LoadedState,
-  draft: RequestDraft
-): Promise<RequestDraftActivityEvent[]> {
+  draft: RequestDraft,
+  webGeminiFiles: WebGeminiReviewFileResults
+): RequestDraftActivityEvent[] {
   const events = buildRequestDraftActivity(state, draft);
-  const webGeminiReviewResult = await readWebGeminiReviewArtifact(draft.id);
+  const webGeminiReviewResult = webGeminiFiles.reviewResult;
   const outputVideo = latestOutputVideoFileRef(state, draft.id);
   if ('error' in webGeminiReviewResult) {
     events.push(buildWebGeminiReviewActivityError(
@@ -1838,7 +1718,7 @@ async function buildRequestDraftActivityWithExternalEvents(
     }
   }
 
-  const webGeminiRevisionBriefResult = await readWebGeminiRevisionBriefArtifact(draft.id);
+  const webGeminiRevisionBriefResult = webGeminiFiles.revisionBriefResult;
   if ('error' in webGeminiRevisionBriefResult) {
     events.push(buildWebGeminiReviewActivityError(
       draft,
@@ -1860,7 +1740,7 @@ async function buildRequestDraftActivityWithExternalEvents(
     }
   }
 
-  const webGeminiRunLogResult = await readWebGeminiReviewRunLog(draft.id);
+  const webGeminiRunLogResult = webGeminiFiles.runLogResult;
   if ('error' in webGeminiRunLogResult) {
     events.push(buildWebGeminiReviewActivityError(draft, webGeminiRunLogResult.error));
   } else if (webGeminiRunLogResult.runLog) {
@@ -2605,16 +2485,14 @@ function validateAgentDecision(input: AgentDecisionInput | undefined): string[] 
   return errors;
 }
 
+const reviewTitleByKind: Record<ControlReviewKind, string> = {
+  theme_selection: 'テーマ選択',
+  material_confirmation: '切り口と編集元場面の確認',
+  render_readiness: '動画生成前の確認'
+};
+
 function reviewTitle(kind: ControlReviewKind): string {
-  if (kind === 'theme_selection') {
-    return 'テーマ選択';
-  }
-
-  if (kind === 'material_confirmation') {
-    return '切り口と編集元場面の確認';
-  }
-
-  return '動画生成前の確認';
+  return reviewTitleByKind[kind];
 }
 
 function reviewSummary(kind: ControlReviewKind, agentRequest: AgentRequest): string {
@@ -2762,16 +2640,14 @@ function completeAgentRequest(
   return { fileRef, output };
 }
 
+const reviewActionLabelByType: Record<HumanReviewActionType, string> = {
+  approve: '承認',
+  reject: '却下',
+  request_changes: '修正依頼'
+};
+
 function reviewActionLabel(action: HumanReviewActionType): string {
-  if (action === 'approve') {
-    return '承認';
-  }
-
-  if (action === 'reject') {
-    return '却下';
-  }
-
-  return '修正依頼';
+  return reviewActionLabelByType[action];
 }
 
 function reviewChangeScopeFromInput(input: unknown): ReviewChangeScope | { error: string } {
@@ -3024,20 +2900,18 @@ router.get('/request-drafts/:id/activity', async (request, response) => {
     return;
   }
 
-  const events = await buildRequestDraftActivityWithExternalEvents(state, draft);
-  const webGeminiReviewResult = await readWebGeminiReviewArtifact(draft.id);
+  const webGeminiFiles = await readWebGeminiReviewFiles(draft.id);
+  const events = buildRequestDraftActivityWithExternalEvents(state, draft, webGeminiFiles);
   const outputVideo = latestOutputVideoFileRef(state, draft.id);
-  const webGeminiRevisionBriefResult = await readWebGeminiRevisionBriefArtifact(draft.id);
-  const webGeminiRunLogResult = await readWebGeminiReviewRunLog(draft.id);
 
   const baseSummary = buildRequestDraftActivitySummary(state, draft);
   const webGeminiSummary = buildWebGeminiReviewActivitySummary(
     baseSummary,
     draft,
     outputVideo,
-    webGeminiReviewResult,
-    webGeminiRevisionBriefResult,
-    webGeminiRunLogResult
+    webGeminiFiles.reviewResult,
+    webGeminiFiles.revisionBriefResult,
+    webGeminiFiles.runLogResult
   );
   const summary = buildFinalReviewActivitySummary(webGeminiSummary, state, draft, outputVideo);
 
@@ -3057,7 +2931,7 @@ router.get('/activity-search', async (request, response) => {
   const limitText = activitySearchParam(request.query.limit);
   const allResults: RequestDraftActivitySearchResult[] = [];
   for (const draft of state.requestDrafts) {
-    const events = await buildRequestDraftActivityWithExternalEvents(state, draft);
+    const events = buildRequestDraftActivityWithExternalEvents(state, draft, await readWebGeminiReviewFiles(draft.id));
     allResults.push(...events.map((event) => ({
       ...event,
       draftPurpose: draft.purpose,

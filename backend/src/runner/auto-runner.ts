@@ -1,28 +1,10 @@
 import { spawn } from 'node:child_process';
 import { existsSync } from 'node:fs';
 import path from 'node:path';
-import { createRunnerEnvironmentFromConfig, loadRuntimeConfig } from '../config/runtime-config.js';
+import { createRunnerEnvironmentFromConfig, loadRuntimeConfig, workspaceRoot } from '../config/runtime-config.js';
 
 let runningDryRun: Promise<void> | null = null;
 let rerunRequested = false;
-
-function workspaceRoot(): string {
-  if (process.env.ZEV2_WORKSPACE_ROOT) {
-    return path.resolve(process.env.ZEV2_WORKSPACE_ROOT);
-  }
-
-  const current = process.cwd();
-  if (existsSync(path.join(current, 'pnpm-workspace.yaml'))) {
-    return current;
-  }
-
-  const parent = path.resolve(current, '..');
-  if (existsSync(path.join(parent, 'pnpm-workspace.yaml'))) {
-    return parent;
-  }
-
-  return current;
-}
 
 function apiBaseUrl(): string {
   return process.env.ZEV2_API_BASE_URL ?? `http://localhost:${process.env.PORT ?? '8080'}/api`;

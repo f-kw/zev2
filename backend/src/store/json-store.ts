@@ -1,6 +1,7 @@
 import { mkdir, readFile, rename, writeFile } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import path from 'node:path';
+import { resolveRuntimeDir } from '../config/runtime-dir.js';
 import {
   WORKFLOW_STEPS,
   createInitialState,
@@ -15,11 +16,21 @@ import {
   type Zev2State
 } from '@zev2/shared';
 
-const runtimeDir = process.env.ZEV2_RUNTIME_DIR
-  ? path.resolve(process.env.ZEV2_RUNTIME_DIR)
-  : path.resolve(process.cwd(), '../runtime');
+const runtimeDir = resolveRuntimeDir();
 
 const statePath = path.join(runtimeDir, 'state.json');
+
+let stateOperationQueue: Promise<unknown> = Promise.resolve();
+
+// state.jsonは全量read-modify-writeのため、並行リクエスト間で更新が消えないよう直列化する
+export function runExclusiveStateOperation<T>(operation: () => Promise<T>): Promise<T> {
+  const result = stateOperationQueue.then(operation, operation);
+  stateOperationQueue = result.then(
+    () => undefined,
+    () => undefined
+  );
+  return result;
+}
 
 function createEmptyState(): Zev2State {
   return createInitialState();
@@ -195,18 +206,19 @@ export async function loadState(): Promise<Zev2State> {
       return state;
     }
 
-    const brokenStatePath = `${statePath}.broken-${Date.now()}`;
-    await rename(statePath, brokenStatePath);
-    const initialState = createEmptyState();
-    await saveState(initialState);
-    return initialState;
+    return quarantineBrokenState('state.jsonが現在のスキーマと一致しません');
   } catch {
-    const brokenStatePath = `${statePath}.broken-${Date.now()}`;
-    await rename(statePath, brokenStatePath);
-    const initialState = createEmptyState();
-    await saveState(initialState);
-    return initialState;
+    return quarantineBrokenState('state.jsonをJSONとして読めません');
   }
+}
+
+async function quarantineBrokenState(reason: string): Promise<Zev2State> {
+  const brokenStatePath = `${statePath}.broken-${Date.now()}`;
+  await rename(statePath, brokenStatePath);
+  console.error(`${reason}。既存の状態を退避して空の状態から再開します: ${brokenStatePath}`);
+  const initialState = createEmptyState();
+  await saveState(initialState);
+  return initialState;
 }
 
 export async function saveState(state: Zev2State): Promise<void> {

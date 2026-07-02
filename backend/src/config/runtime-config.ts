@@ -14,7 +14,7 @@ import {
 const DEFAULT_RUNTIME_CONFIG: RuntimeConfig = {
   stt: {
     mode: 'fixed',
-    localServerUrl: 'http://192.168.1.7:8000',
+    localServerUrl: '',
     language: 'ja-JP'
   },
   contentDiscovery: {
@@ -37,12 +37,12 @@ const DEFAULT_RUNTIME_CONFIG: RuntimeConfig = {
     mode: 'local'
   },
   source: {
-    defaultUri: 'runtime/artifacts/draft_w4Lp9IJC6pQl3FsRfFL9t/source-video.mp4',
-    defaultPurpose: '固定データでショート動画を作成する'
+    defaultUri: '',
+    defaultPurpose: ''
   }
 };
 
-function workspaceRoot(): string {
+export function workspaceRoot(): string {
   if (process.env.ZEV2_WORKSPACE_ROOT) {
     return path.resolve(process.env.ZEV2_WORKSPACE_ROOT);
   }
@@ -214,10 +214,16 @@ function normalizeRuntimeConfig(value: unknown): RuntimeConfig {
   const artifactDelivery = recordValue(root.artifactDelivery);
   const source = recordValue(root.source);
 
+  const sttMode = parseSttMode(stt.mode ?? DEFAULT_RUNTIME_CONFIG.stt.mode);
+  const sttLocalServerUrl = stringFromConfig(stt.localServerUrl, DEFAULT_RUNTIME_CONFIG.stt.localServerUrl);
+  if (sttMode === 'local' && !sttLocalServerUrl) {
+    throw new Error('設定ファイルの stt.mode が local の場合は stt.localServerUrl を指定してください');
+  }
+
   return {
     stt: {
-      mode: parseSttMode(stt.mode ?? DEFAULT_RUNTIME_CONFIG.stt.mode),
-      localServerUrl: stringFromConfig(stt.localServerUrl, DEFAULT_RUNTIME_CONFIG.stt.localServerUrl),
+      mode: sttMode,
+      localServerUrl: sttLocalServerUrl,
       language: stringFromConfig(stt.language, DEFAULT_RUNTIME_CONFIG.stt.language)
     },
     contentDiscovery: {

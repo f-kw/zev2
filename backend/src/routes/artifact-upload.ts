@@ -6,10 +6,10 @@ import path from 'node:path';
 import { Transform } from 'node:stream';
 import { pipeline } from 'node:stream/promises';
 import { findById } from '@zev2/shared';
+import { artifactDestination, artifactUrl } from '../artifacts/artifact-path.js';
 import { loadState } from '../store/json-store.js';
 import { requireAgentApiToken } from '../security/agent-auth.js';
 
-const artifactUrlPrefix = '/api/artifacts/';
 const safeDraftIdPattern = /^[A-Za-z0-9_-]+$/;
 const safeFileNamePattern = /^[A-Za-z0-9_.-]+$/;
 
@@ -32,25 +32,6 @@ function normalizedMimeType(value: unknown): string {
   }
 
   return text.trim();
-}
-
-function artifactRoot(runtimeDir: string): string {
-  return path.join(runtimeDir, 'artifacts');
-}
-
-function artifactUrl(requestDraftId: string, fileName: string): string {
-  return `${artifactUrlPrefix}${encodeURIComponent(requestDraftId)}/${encodeURIComponent(fileName)}`;
-}
-
-function artifactDestination(runtimeDir: string, requestDraftId: string, fileName: string): string {
-  const root = path.resolve(artifactRoot(runtimeDir));
-  const draftDirectory = path.resolve(root, requestDraftId);
-  const destinationPath = path.resolve(draftDirectory, fileName);
-  if (!destinationPath.startsWith(`${draftDirectory}${path.sep}`)) {
-    throw new Error('成果物保存先が不正です');
-  }
-
-  return destinationPath;
 }
 
 async function ensureDestinationIsNew(destinationPath: string): Promise<void> {
