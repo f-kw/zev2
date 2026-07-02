@@ -578,62 +578,53 @@ function buildPatch(editPlanUri: string): PatchArtifact {
   return buildPatchArtifact(editPlanUri);
 }
 
-function runCommand(command: string, args: string[], options?: { env?: NodeJS.ProcessEnv }): Promise<void> {
-  return new Promise((resolve, reject) => {
-    const output: string[] = [];
-    const child = spawn(command, args, {
-      env: options?.env ? { ...process.env, ...options.env } : process.env
-    });
-    child.stdout.on('data', (chunk: Buffer) => output.push(chunk.toString()));
-    child.stderr.on('data', (chunk: Buffer) => output.push(chunk.toString()));
-    child.on('error', reject);
-    child.on('close', (code) => {
-      if (code === 0) {
-        resolve();
-        return;
-      }
+type RunProcessResult = { stdout: string; stderr: string; combined: string };
 
-      reject(new Error(`${command} failed with code ${code ?? 'unknown'}\n${output.join('')}`));
-    });
-  });
-}
-
-function runCommandWithOutput(command: string, args: string[]): Promise<string> {
+function runProcess(
+  command: string,
+  args: string[],
+  options?: { env?: NodeJS.ProcessEnv; errorDetail?: 'combined' | 'stderr' }
+): Promise<RunProcessResult> {
   return new Promise((resolve, reject) => {
     const stdout: string[] = [];
     const stderr: string[] = [];
-    const child = spawn(command, args);
-    child.stdout.on('data', (chunk: Buffer) => stdout.push(chunk.toString()));
-    child.stderr.on('data', (chunk: Buffer) => stderr.push(chunk.toString()));
+    const combined: string[] = [];
+    const child = spawn(command, args, {
+      env: options?.env ? { ...process.env, ...options.env } : process.env
+    });
+    child.stdout.on('data', (chunk: Buffer) => {
+      const text = chunk.toString();
+      stdout.push(text);
+      combined.push(text);
+    });
+    child.stderr.on('data', (chunk: Buffer) => {
+      const text = chunk.toString();
+      stderr.push(text);
+      combined.push(text);
+    });
     child.on('error', reject);
     child.on('close', (code) => {
       if (code === 0) {
-        resolve(stdout.join(''));
+        resolve({ stdout: stdout.join(''), stderr: stderr.join(''), combined: combined.join('') });
         return;
       }
 
-      reject(new Error(`${command} failed with code ${code ?? 'unknown'}\n${stderr.join('')}`));
+      const detail = options?.errorDetail === 'stderr' ? stderr.join('') : combined.join('');
+      reject(new Error(`${command} failed with code ${code ?? 'unknown'}\n${detail}`));
     });
   });
 }
 
-function runCommandWithCombinedOutput(command: string, args: string[]): Promise<string> {
-  return new Promise((resolve, reject) => {
-    const output: string[] = [];
-    const child = spawn(command, args);
-    child.stdout.on('data', (chunk: Buffer) => output.push(chunk.toString()));
-    child.stderr.on('data', (chunk: Buffer) => output.push(chunk.toString()));
-    child.on('error', reject);
-    child.on('close', (code) => {
-      const text = output.join('');
-      if (code === 0) {
-        resolve(text);
-        return;
-      }
+async function runCommand(command: string, args: string[], options?: { env?: NodeJS.ProcessEnv }): Promise<void> {
+  await runProcess(command, args, options);
+}
 
-      reject(new Error(`${command} failed with code ${code ?? 'unknown'}\n${text}`));
-    });
-  });
+async function runCommandWithOutput(command: string, args: string[]): Promise<string> {
+  return (await runProcess(command, args, { errorDetail: 'stderr' })).stdout;
+}
+
+async function runCommandWithCombinedOutput(command: string, args: string[]): Promise<string> {
+  return (await runProcess(command, args)).combined;
 }
 
 async function probeVideoDimensions(sourcePath: string): Promise<{ width: number; height: number }> {
