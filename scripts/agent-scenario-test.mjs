@@ -2545,45 +2545,15 @@ async function assertWebGeminiReviewFeedbackLoop(apiBaseUrl, runtimeDir, sourceD
   );
   await writeFile(outputVideoPath, originalOutputVideo);
 
-  const runLogPath = path.join(runtimeDir, 'artifacts', sourceDraftId, 'web-gemini-review-run.json');
-  await writeFile(runLogPath, `${JSON.stringify({
-    draftId: sourceDraftId,
-    status: 'unknown',
-    createdAt: new Date().toISOString()
-  }, null, 2)}\n`, 'utf8');
-  const brokenRunLogError = await expectRequestJsonFailure(
-    apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/web-gemini-review`)
-  );
-  assertScenario(
-    brokenRunLogError.includes('Web Geminiレビュー実行ログの保存内容が壊れています'),
-    '壊れたWeb Geminiレビュー実行ログが成功扱いになっている'
-  );
-  const brokenRunLogActivity = await requestJson(apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/activity`));
-  assertScenario(
-    brokenRunLogActivity.events.some(
-      (event) =>
-        event.kind === 'web_gemini_review_status' &&
-        event.title === 'Web Geminiレビュー実行ログを確認できません'
-    ),
-    '壊れたWeb Geminiレビュー実行ログが監査タイムラインで追えない'
-  );
-  assertScenario(
-    brokenRunLogActivity.summary?.status === 'failed' &&
-      brokenRunLogActivity.summary.title === 'Web Geminiレビュー実行ログを確認できません',
-    '壊れたWeb Geminiレビュー実行ログが現在状態要約に反映されていない'
-  );
-
-  await writeFile(runLogPath, `${JSON.stringify({
-    draftId: sourceDraftId,
-    status: 'failed',
-    createdAt: new Date().toISOString(),
-    outputVideoUri: outputFileRef.uri,
-    outputVideoPath: artifactPathByUri(runtimeDir, outputFileRef.uri),
-    promptPath: path.join(runtimeDir, 'artifacts', sourceDraftId, 'web-gemini-review-prompt.md'),
-    blockedReasons: ['Gemini回答を取得できません'],
-    externalUploadRequired: true,
-    nextAction: 'Web Geminiレビュー実行に失敗しました。停止理由を確認してから再実行してください。'
-  }, null, 2)}\n`, 'utf8');
+  await requestJson(apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/web-gemini-review/run-status`), {
+    method: 'POST',
+    body: JSON.stringify({
+      status: 'failed',
+      blockedReasons: ['Gemini回答を取得できません'],
+      externalUploadRequired: true,
+      nextAction: 'Web Geminiレビュー実行に失敗しました。停止理由を確認してから再実行してください。'
+    })
+  });
   const failedRunLog = await requestJson(apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/web-gemini-review`));
   assertScenario(failedRunLog.runLog?.status === 'failed', 'Web Geminiレビュー実行失敗ログが失敗として読めない');
   assertScenario(
@@ -2597,17 +2567,16 @@ async function assertWebGeminiReviewFeedbackLoop(apiBaseUrl, runtimeDir, sourceD
     'Web Geminiレビュー実行失敗が現在状態要約に反映されていない'
   );
 
-  await writeFile(runLogPath, `${JSON.stringify({
-    draftId: sourceDraftId,
-    status: 'prepared',
-    createdAt: new Date().toISOString(),
-    outputVideoUri: '/api/artifacts/old_draft/output.mp4',
-    outputVideoPath: path.join(runtimeDir, 'artifacts', 'old_draft', 'output.mp4'),
-    promptPath: path.join(runtimeDir, 'artifacts', sourceDraftId, 'web-gemini-review-prompt.md'),
-    blockedReasons: [],
-    externalUploadRequired: true,
-    nextAction: '古い完成動画に対するレビュー準備ログ'
-  }, null, 2)}\n`, 'utf8');
+  const statePath = path.join(runtimeDir, 'state.json');
+  const stateWithFailedRunLog = await readJsonFile(statePath);
+  await writeJsonFile(statePath, {
+    ...stateWithFailedRunLog,
+    webGeminiReviews: stateWithFailedRunLog.webGeminiReviews.map((entry) => (
+      entry.draftId === sourceDraftId
+        ? { ...entry, runLog: { ...entry.runLog, outputVideoUri: '/api/artifacts/old_draft/output.mp4' } }
+        : entry
+    ))
+  });
   const staleRunLogError = await expectRequestJsonFailure(
     apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/web-gemini-review`)
   );
@@ -2616,12 +2585,14 @@ async function assertWebGeminiReviewFeedbackLoop(apiBaseUrl, runtimeDir, sourceD
     '現在の完成動画と違うWeb Geminiレビュー実行ログが取得できている'
   );
 
-  await writeFile(
-    path.join(runtimeDir, 'artifacts', sourceDraftId, 'web-gemini-review-prompt.md'),
-    '古いWeb Geminiレビュー依頼文\n',
-    'utf8'
-  );
-  await rm(runLogPath);
+  await writeJsonFile(statePath, {
+    ...stateWithFailedRunLog,
+    webGeminiReviews: stateWithFailedRunLog.webGeminiReviews.map((entry) => (
+      entry.draftId === sourceDraftId
+        ? { ...entry, runLog: null, promptText: '古いWeb Geminiレビュー依頼文' }
+        : entry
+    ))
+  });
   const promptWithoutRunLog = await requestJson(apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/web-gemini-review`));
   assertScenario(
     promptWithoutRunLog.preparedPromptText === '',
@@ -2748,45 +2719,6 @@ async function assertWebGeminiReviewFeedbackLoop(apiBaseUrl, runtimeDir, sourceD
   assertScenario(fetched.revisionBrief === null, '反映前に再生成方針が確定済みとして取得されている');
   assertScenario(fetched.runLog?.status === 'saved', '取得したWeb Geminiレビュー実行ログがsavedではない');
 
-  const reviewPathForActivity = path.join(runtimeDir, 'artifacts', sourceDraftId, 'web-gemini-review.json');
-  const savedReviewFile = await readFile(reviewPathForActivity, 'utf8');
-  const savedRunLogFile = await readFile(runLogPath, 'utf8');
-  await writeFile(reviewPathForActivity, '{"draftId": "broken_review"', 'utf8');
-  const brokenReviewActivity = await requestJson(apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/activity`));
-  assertScenario(
-    brokenReviewActivity.events.some(
-      (event) =>
-        event.kind === 'web_gemini_review_status' &&
-        event.title === 'Web Geminiレビュー本文を確認できません'
-    ),
-    '壊れたWeb Geminiレビュー本文が監査タイムラインで追えない'
-  );
-  assertScenario(
-    brokenReviewActivity.summary?.status === 'failed' &&
-      brokenReviewActivity.summary.title === 'Web Geminiレビュー本文を確認できません',
-    '壊れたWeb Geminiレビュー本文が現在状態要約に反映されていない'
-  );
-  await writeFile(reviewPathForActivity, savedReviewFile, 'utf8');
-
-  await rm(runLogPath);
-  const reviewWithoutRunLogActivity = await requestJson(apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/activity`));
-  assertScenario(
-    reviewWithoutRunLogActivity.events.some(
-      (event) =>
-        event.kind === 'web_gemini_review_status' &&
-        event.title === 'Web Geminiレビュー実行ログを確認できません' &&
-        event.detail.includes('レビュー本文はあります')
-    ),
-    'Web Geminiレビュー本文だけが残った状態が監査タイムラインで追えない'
-  );
-  assertScenario(
-    reviewWithoutRunLogActivity.summary?.status === 'failed' &&
-      reviewWithoutRunLogActivity.summary.title === 'Web Geminiレビュー実行ログを確認できません',
-    'Web Geminiレビュー本文だけが残った状態が現在状態要約に反映されていない'
-  );
-  await writeFile(runLogPath, savedRunLogFile, 'utf8');
-
-  const statePath = path.join(runtimeDir, 'state.json');
   const stateBeforeMissingOutputVideo = await readJsonFile(statePath);
   await writeJsonFile(statePath, {
     ...stateBeforeMissingOutputVideo,
@@ -2822,17 +2754,27 @@ async function assertWebGeminiReviewFeedbackLoop(apiBaseUrl, runtimeDir, sourceD
     'レビューを取り直す準備後の実行ログがpreparedではない'
   );
 
-  const reviewPath = path.join(runtimeDir, 'artifacts', sourceDraftId, 'web-gemini-review.json');
-  await writeFile(reviewPath, `${JSON.stringify({
-    draftId: sourceDraftId,
-    source: 'edge-web-gemini',
-    status: 'ready',
-    createdAt: new Date().toISOString(),
-    outputVideoUri: '/api/artifacts/old_draft/output.mp4',
-    promptText: '古い完成動画へのレビュー',
-    reviewText: instructionText,
-    instructionText
-  }, null, 2)}\n`, 'utf8');
+  const stateBeforeStaleReview = await readJsonFile(statePath);
+  await writeJsonFile(statePath, {
+    ...stateBeforeStaleReview,
+    webGeminiReviews: stateBeforeStaleReview.webGeminiReviews.map((entry) => (
+      entry.draftId === sourceDraftId
+        ? {
+            ...entry,
+            review: {
+              draftId: sourceDraftId,
+              source: 'edge-web-gemini',
+              status: 'ready',
+              createdAt: new Date().toISOString(),
+              outputVideoUri: '/api/artifacts/old_draft/output.mp4',
+              promptText: '古い完成動画へのレビュー',
+              reviewText: instructionText,
+              instructionText
+            }
+          }
+        : entry
+    ))
+  });
   const staleReviewFetchError = await expectRequestJsonFailure(
     apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/web-gemini-review`)
   );
