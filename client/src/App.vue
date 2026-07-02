@@ -292,14 +292,14 @@ const hasFinalCompleteForCurrentOutput = computed(() =>
 
 const finalReviewStatusTitle = computed(() => {
   if (hasFinalCompleteForCurrentOutput.value) {
-    return '最終完了として記録済み';
+    return 'この動画で作業完了';
   }
 
   if (hasPublishReadyForCurrentOutput.value) {
-    return '投稿可能として記録済み';
+    return '投稿候補として保存済み';
   }
 
-  return '人間の最終判断は未記録';
+  return 'ユーザーの最終判断待ち';
 });
 
 const finalReviewStatusDetail = computed(() => {
@@ -307,7 +307,7 @@ const finalReviewStatusDetail = computed(() => {
     return currentFinalReviewAction.value.reason;
   }
 
-  return '動画を確認した後、投稿可能または最終完了として記録できます';
+  return '動画を確認して、投稿候補として保存するか、この動画で作業完了にするか、作り直すかを選びます';
 });
 
 const canApplyWebGeminiReview = computed(() =>
@@ -468,7 +468,7 @@ const webGeminiSavedReviewDetail = computed(() => {
     return `このレビューは${webGeminiAppliedDraftText.value}。取り直す場合はレビューを取り直してください。`;
   }
 
-  return 'Geminiレビューを材料として、今回採用する再生成方針を人間が決めます。';
+  return 'Geminiレビューを材料として、今回採用する再生成方針をユーザーが決めます。';
 });
 
 const webGeminiSavedReviewMeta = computed(() => {
@@ -553,7 +553,7 @@ const statusDetailText = computed(() => {
   }
 
   if (cancelledRequest.value) {
-    return cancelledRequest.value.errorMessage ?? '人間がAI作業を中止しました';
+    return cancelledRequest.value.errorMessage ?? 'ユーザーがAI作業を中止しました';
   }
 
   if (outputVideoUri.value) {
@@ -605,6 +605,18 @@ const activitySummaryNextAction = computed(() =>
 const hudStatusText = computed(() =>
   showRequestPage.value ? '新規依頼を入力' : activitySummaryTitle.value
 );
+
+const hudStatusEyebrowText = computed(() => {
+  if (showRequestPage.value) {
+    return 'New Request';
+  }
+
+  if (outputVideoUri.value) {
+    return 'AI処理完了';
+  }
+
+  return 'Process Active';
+});
 
 const hudStatusDetailText = computed(() =>
   showRequestPage.value ? '作りたいショートを入力して、動画作成を開始できます' : activitySummaryDetail.value
@@ -1557,7 +1569,7 @@ watch(
     <section v-if="humanAuthReady" class="agent-status-bar" aria-live="polite">
       <div class="status-main">
         <div>
-          <p class="eyebrow">Process Active</p>
+          <p class="eyebrow">{{ hudStatusEyebrowText }}</p>
           <h2 class="glitch-title">{{ hudStatusText }}</h2>
         </div>
         <p v-if="hudVisibleStatusMessage" class="status-message">{{ hudVisibleStatusMessage }}</p>
@@ -1587,11 +1599,11 @@ watch(
       </ol>
     </section>
 
-    <section v-else class="auth-panel" aria-label="人間UI認証">
+    <section v-else class="auth-panel" aria-label="ユーザーUI認証">
       <div class="panel-corner" aria-hidden="true"></div>
       <div>
         <p class="eyebrow">Human Auth</p>
-        <h1>{{ humanAuthLoading ? '認証確認中' : '人間UIログイン' }}</h1>
+        <h1>{{ humanAuthLoading ? '認証確認中' : 'ユーザーUIログイン' }}</h1>
       </div>
       <form v-if="humanAuthRequired" class="auth-form" @submit.prevent="submitHumanLogin">
         <label>
@@ -1797,6 +1809,7 @@ watch(
                   <button
                     v-if="webGeminiReview"
                     type="button"
+                    class="secondary-button"
                     :disabled="!canApplyWebGeminiReview"
                     @click="applyWebGeminiReviewChanges"
                   >
@@ -1817,14 +1830,15 @@ watch(
                   <small>{{ webGeminiSavedReviewMeta }}</small>
                 </div>
 
-                <label>
-                  Geminiレビュー
+                <details class="web-gemini-review-detail">
+                  <summary>Geminiレビューを表示</summary>
                   <textarea
                     readonly
                     rows="4"
                     :value="webGeminiReview.reviewText"
+                    aria-label="Geminiレビュー"
                   />
-                </label>
+                </details>
 
                 <label>
                   今回の再生成方針
@@ -1871,27 +1885,26 @@ watch(
             </section>
           </div>
 
-          <section class="final-review-panel" aria-label="完成動画の人間判断">
+          <section class="final-review-panel" aria-label="完成動画のユーザー判断">
             <div>
-              <p class="eyebrow">Human Gate</p>
+              <p class="eyebrow">User Gate</p>
               <h3>{{ finalReviewStatusTitle }}</h3>
               <p>{{ finalReviewStatusDetail }}</p>
             </div>
             <div class="final-review-actions">
               <button
                 type="button"
-                class="secondary-button"
                 :disabled="agentOperationLocked || hasPublishReadyForCurrentOutput || hasFinalCompleteForCurrentOutput || activeFinalReviewAction !== ''"
                 @click="submitOutputFinalReview('publish_ready')"
               >
-                {{ activeFinalReviewAction === 'publish_ready' ? '記録中' : '投稿可能として記録' }}
+                {{ activeFinalReviewAction === 'publish_ready' ? '保存中' : '投稿候補として保存' }}
               </button>
               <button
                 type="button"
                 :disabled="agentOperationLocked || hasFinalCompleteForCurrentOutput || activeFinalReviewAction !== ''"
                 @click="submitOutputFinalReview('final_complete')"
               >
-                {{ activeFinalReviewAction === 'final_complete' ? '記録中' : '最終完了として記録' }}
+                {{ activeFinalReviewAction === 'final_complete' ? '記録中' : 'この動画で作業完了' }}
               </button>
             </div>
           </section>
@@ -2972,6 +2985,22 @@ video {
   padding: 10px;
   font-size: 12px;
   line-height: 1.45;
+}
+
+.web-gemini-review-detail {
+  display: grid;
+  gap: 7px;
+}
+
+.web-gemini-review-detail summary {
+  cursor: pointer;
+  color: var(--text-dim);
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.web-gemini-review-detail[open] summary {
+  color: var(--cyan);
 }
 
 .web-gemini-result {

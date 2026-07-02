@@ -58,18 +58,20 @@ assertContract(
 );
 
 assertContract(
-  appVue.includes('aria-label="人間UI認証"') &&
+  appVue.includes('aria-label="ユーザーUI認証"') &&
     appVue.includes('v-model="humanAuthTokenInput"') &&
     appVue.includes('@submit.prevent="submitHumanLogin"') &&
     appVue.includes('@click="logoutHuman"'),
-  '人間UIのログイン、認証トークン入力、ログアウト導線が見つかりません'
+  'ユーザーUIのログイン、認証トークン入力、ログアウト導線が見つかりません'
 );
 
 assertContract(
-  appVue.includes('aria-label="完成動画の人間判断"') &&
+  appVue.includes('aria-label="完成動画のユーザー判断"') &&
     appVue.includes("submitOutputFinalReview('publish_ready')") &&
-    appVue.includes("submitOutputFinalReview('final_complete')"),
-  '完成動画を投稿可能または最終完了として記録する人間判断欄が見つかりません'
+    appVue.includes("submitOutputFinalReview('final_complete')") &&
+    appVue.includes('投稿候補として保存') &&
+    appVue.includes('この動画で作業完了'),
+  '完成動画を投稿候補として保存または作業完了として記録するユーザー判断欄が見つかりません'
 );
 
 assertContract(
@@ -82,8 +84,15 @@ assertContract(
 assertContract(
   appVue.includes('今回の再生成方針') &&
     appVue.includes('この方針で再生成') &&
-    appVue.includes('Geminiレビューを読んで、今回採用する変更だけ残す'),
-  'Web Geminiレビュー後に人間が再生成方針を確定するUIが見つかりません'
+    appVue.includes('Geminiレビューを読んで、今回採用する変更だけ残す') &&
+    appVue.includes('Geminiレビューを表示'),
+  'Web Geminiレビュー後にユーザーが再生成方針を確定するUIが見つかりません'
+);
+
+assertContract(
+  appVue.includes('AI処理完了') &&
+    appVue.includes('ユーザーの最終判断待ち'),
+  '完成動画画面でAI処理完了とユーザーの最終判断待ちを区別する表示が見つかりません'
 );
 
 console.log('UI契約テスト成功');
