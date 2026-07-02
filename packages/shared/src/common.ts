@@ -30,6 +30,14 @@ export function hasText(value: unknown): value is string {
   return typeof value === 'string' && value.trim().length > 0;
 }
 
+export function trimText(value: unknown): string {
+  return typeof value === 'string' ? value.trim() : '';
+}
+
+export function unknownErrorMessage(error: unknown): string {
+  return error instanceof Error ? error.message : String(error);
+}
+
 export function findById<T extends { id: string }>(
   items: readonly T[],
   id: string | undefined

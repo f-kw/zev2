@@ -2,7 +2,7 @@ import express from 'express';
 import { nanoid } from 'nanoid';
 import { createHash } from 'node:crypto';
 import { createReadStream } from 'node:fs';
-import { access, copyFile, mkdir, open, readFile, rm, stat, writeFile } from 'node:fs/promises';
+import { access, copyFile, mkdir, open, readFile, stat } from 'node:fs/promises';
 import path from 'node:path';
 import {
   ARTIFACT_FILE_NAME_BY_KIND,
@@ -51,6 +51,8 @@ import {
   lastMatching,
   latestByCreatedAt,
   recordValue,
+  trimText,
+  unknownErrorMessage,
   validateRequestDraftInput,
   type RequestDraftInput
 } from '@zev2/shared';
@@ -64,6 +66,30 @@ import {
   artifactUrl,
   artifactUrlPrefix
 } from '../artifacts/artifact-path.js';
+import {
+  ensureWebGeminiReviewMatchesOutputVideo,
+  ensureWebGeminiRevisionBriefMatchesReview,
+  ensureWebGeminiRunLogMatchesOutputVideo,
+  readWebGeminiReviewFiles,
+  readWebGeminiReviewArtifact,
+  readWebGeminiReviewPromptText,
+  readWebGeminiReviewRunLog,
+  readWebGeminiRevisionBriefArtifact,
+  removeWebGeminiReviewArtifact,
+  removeWebGeminiRevisionBriefArtifact,
+  webGeminiReviewPath,
+  webGeminiReviewPromptPath,
+  webGeminiRevisionBriefPath,
+  writeWebGeminiReviewArtifact,
+  writeWebGeminiReviewPromptText,
+  writeWebGeminiReviewRunLog,
+  writeWebGeminiRevisionBriefArtifact,
+  type WebGeminiReviewFileResults
+} from '../web-gemini/artifacts.js';
+import {
+  buildWebGeminiRunStatusRunLog,
+  parseWebGeminiRunStatusUpdateInput
+} from '../web-gemini/run-status.js';
 import { requireAgentApiToken } from '../security/agent-auth.js';
 import {
   clearHumanSessionCookie,
@@ -108,10 +134,6 @@ type ArtifactFileMetadata = {
   sha256: string;
 };
 const runtimeDir = resolveRuntimeDir();
-const webGeminiReviewFileName = 'web-gemini-review.json';
-const webGeminiReviewRunLogFileName = 'web-gemini-review-run.json';
-const webGeminiReviewPromptFileName = 'web-gemini-review-prompt.md';
-const webGeminiRevisionBriefFileName = 'web-gemini-revision-brief.json';
 
 function nowIso(): string {
   return new Date().toISOString();
@@ -198,10 +220,6 @@ function createId(prefix: string): string {
 
 function selectAgentRequests(stateAgentRequests: AgentRequest[], ids: Set<string>): AgentRequest[] {
   return stateAgentRequests.filter((request) => ids.has(request.id));
-}
-
-function trimText(value: unknown): string {
-  return typeof value === 'string' ? value.trim() : '';
 }
 
 function routeParamText(value: string | string[] | undefined): string {
@@ -511,10 +529,6 @@ function restartArtifactFileName(sourceFileRef: FileRef, sourceArtifactPath: str
     : ARTIFACT_FILE_NAME_BY_KIND.output_video;
 }
 
-function unknownErrorMessage(error: unknown): string {
-  return error instanceof Error ? error.message : String(error);
-}
-
 function compactActivityText(value: unknown, fallback: string): string {
   const text = typeof value === 'string'
     ? value.trim().replace(/\s+/g, ' ')
@@ -523,236 +537,6 @@ function compactActivityText(value: unknown, fallback: string): string {
   return normalized.length > 180 ? `${normalized.slice(0, 177)}...` : normalized;
 }
 
-function webGeminiReviewPath(requestDraftId: string): string {
-  return path.join(artifactRoot(), requestDraftId, webGeminiReviewFileName);
-}
-
-function webGeminiReviewRunLogPath(requestDraftId: string): string {
-  return path.join(artifactRoot(), requestDraftId, webGeminiReviewRunLogFileName);
-}
-
-function webGeminiReviewPromptPath(requestDraftId: string): string {
-  return path.join(artifactRoot(), requestDraftId, webGeminiReviewPromptFileName);
-}
-
-function webGeminiRevisionBriefPath(requestDraftId: string): string {
-  return path.join(artifactRoot(), requestDraftId, webGeminiRevisionBriefFileName);
-}
-
-function isNotFoundError(error: unknown): boolean {
-  return Boolean(error && typeof error === 'object' && 'code' in error && error.code === 'ENOENT');
-}
-
-function parseWebGeminiReviewArtifact(value: unknown): WebGeminiReviewArtifact | undefined {
-  if (!value || typeof value !== 'object') {
-    return undefined;
-  }
-
-  const artifact = value as Partial<WebGeminiReviewArtifact>;
-  if (
-    artifact.source !== 'edge-web-gemini' ||
-    artifact.status !== 'ready' ||
-    !hasText(artifact.draftId) ||
-    !hasText(artifact.createdAt) ||
-    !hasText(artifact.outputVideoUri) ||
-    !hasText(artifact.reviewText) ||
-    !hasText(artifact.instructionText)
-  ) {
-    return undefined;
-  }
-
-  return {
-    draftId: artifact.draftId.trim(),
-    source: 'edge-web-gemini',
-    status: 'ready',
-    createdAt: artifact.createdAt.trim(),
-    outputVideoUri: artifact.outputVideoUri.trim(),
-    promptText: hasText(artifact.promptText) ? artifact.promptText.trim() : '',
-    reviewText: artifact.reviewText.trim(),
-    instructionText: artifact.instructionText.trim()
-  };
-}
-
-function parseWebGeminiReviewRunLog(value: unknown): WebGeminiReviewRunLog | undefined {
-  if (!value || typeof value !== 'object') {
-    return undefined;
-  }
-
-  const log = value as Partial<WebGeminiReviewRunLog>;
-  if (
-    !hasText(log.draftId) ||
-    !hasText(log.createdAt) ||
-    !hasText(log.outputVideoUri) ||
-    !hasText(log.outputVideoPath) ||
-    !hasText(log.promptPath) ||
-    !WEB_GEMINI_REVIEW_RUN_STATUSES.includes(log.status as WebGeminiReviewRunStatus)
-  ) {
-    return undefined;
-  }
-
-  return {
-    draftId: log.draftId.trim(),
-    status: log.status as WebGeminiReviewRunStatus,
-    createdAt: log.createdAt.trim(),
-    outputVideoUri: log.outputVideoUri.trim(),
-    outputVideoPath: log.outputVideoPath.trim(),
-    promptPath: log.promptPath.trim(),
-    blockedReasons: Array.isArray(log.blockedReasons)
-      ? log.blockedReasons.filter(hasText).map((reason) => reason.trim())
-      : [],
-    externalUploadRequired: Boolean(log.externalUploadRequired),
-    ...(hasText(log.nextAction) ? { nextAction: log.nextAction.trim() } : {}),
-    ...(hasText(log.reviewPath) ? { reviewPath: log.reviewPath.trim() } : {}),
-    ...(hasText(log.reviewCreatedAt) ? { reviewCreatedAt: log.reviewCreatedAt.trim() } : {}),
-    ...(hasText(log.revisionBriefPath) ? { revisionBriefPath: log.revisionBriefPath.trim() } : {}),
-    ...(hasText(log.revisionBriefCreatedAt) ? { revisionBriefCreatedAt: log.revisionBriefCreatedAt.trim() } : {}),
-    ...(hasText(log.appliedDraftId) ? { appliedDraftId: log.appliedDraftId.trim() } : {}),
-    ...(hasText(log.appliedAt) ? { appliedAt: log.appliedAt.trim() } : {}),
-    ...(hasText(log.externalReviewCommand) ? { externalReviewCommand: log.externalReviewCommand.trim() } : {}),
-    ...(log.edgeControl ? { edgeControl: log.edgeControl } : {}),
-    ...(log.cdpControl ? { cdpControl: log.cdpControl } : {})
-  };
-}
-
-function parseWebGeminiRevisionBriefArtifact(value: unknown): WebGeminiRevisionBriefArtifact | undefined {
-  if (!value || typeof value !== 'object') {
-    return undefined;
-  }
-
-  const brief = value as Partial<WebGeminiRevisionBriefArtifact>;
-  if (
-    brief.source !== 'human-approved-web-gemini-review' ||
-    brief.status !== 'ready' ||
-    !hasText(brief.draftId) ||
-    !hasText(brief.createdAt) ||
-    !hasText(brief.outputVideoUri) ||
-    !hasText(brief.reviewCreatedAt) ||
-    !hasText(brief.briefText)
-  ) {
-    return undefined;
-  }
-
-  return {
-    draftId: brief.draftId.trim(),
-    source: 'human-approved-web-gemini-review',
-    status: 'ready',
-    createdAt: brief.createdAt.trim(),
-    outputVideoUri: brief.outputVideoUri.trim(),
-    reviewCreatedAt: brief.reviewCreatedAt.trim(),
-    briefText: brief.briefText.trim()
-  };
-}
-
-async function readWebGeminiReviewArtifact(
-  requestDraftId: string
-): Promise<{ review: WebGeminiReviewArtifact | null } | { error: string }> {
-  try {
-    const raw = await readFile(webGeminiReviewPath(requestDraftId), 'utf8');
-    const parsed = parseWebGeminiReviewArtifact(JSON.parse(raw));
-    if (!parsed || parsed.draftId !== requestDraftId) {
-      return { error: 'Web Geminiレビューの保存内容が壊れています' };
-    }
-
-    return { review: parsed };
-  } catch (error) {
-    if (isNotFoundError(error)) {
-      return { review: null };
-    }
-
-    return { error: `Web Geminiレビューを読めません: ${unknownErrorMessage(error)}` };
-  }
-}
-
-async function readWebGeminiRevisionBriefArtifact(
-  requestDraftId: string
-): Promise<{ revisionBrief: WebGeminiRevisionBriefArtifact | null } | { error: string }> {
-  try {
-    const raw = await readFile(webGeminiRevisionBriefPath(requestDraftId), 'utf8');
-    const parsed = parseWebGeminiRevisionBriefArtifact(JSON.parse(raw));
-    if (!parsed || parsed.draftId !== requestDraftId) {
-      return { error: 'Web Gemini再生成方針の保存内容が壊れています' };
-    }
-
-    return { revisionBrief: parsed };
-  } catch (error) {
-    if (isNotFoundError(error)) {
-      return { revisionBrief: null };
-    }
-
-    return { error: `Web Gemini再生成方針を読めません: ${unknownErrorMessage(error)}` };
-  }
-}
-
-type WebGeminiReviewFileResults = {
-  reviewResult: { review: WebGeminiReviewArtifact | null } | { error: string };
-  revisionBriefResult: { revisionBrief: WebGeminiRevisionBriefArtifact | null } | { error: string };
-  runLogResult: { runLog: WebGeminiReviewRunLog | null } | { error: string };
-};
-
-async function readWebGeminiReviewFiles(requestDraftId: string): Promise<WebGeminiReviewFileResults> {
-  return {
-    reviewResult: await readWebGeminiReviewArtifact(requestDraftId),
-    revisionBriefResult: await readWebGeminiRevisionBriefArtifact(requestDraftId),
-    runLogResult: await readWebGeminiReviewRunLog(requestDraftId)
-  };
-}
-
-async function readWebGeminiReviewRunLog(
-  requestDraftId: string
-): Promise<{ runLog: WebGeminiReviewRunLog | null } | { error: string }> {
-  try {
-    const raw = await readFile(webGeminiReviewRunLogPath(requestDraftId), 'utf8');
-    const parsed = parseWebGeminiReviewRunLog(JSON.parse(raw));
-    if (!parsed || parsed.draftId !== requestDraftId) {
-      return { error: 'Web Geminiレビュー実行ログの保存内容が壊れています' };
-    }
-
-    return { runLog: parsed };
-  } catch (error) {
-    if (isNotFoundError(error)) {
-      return { runLog: null };
-    }
-
-    return { error: `Web Geminiレビュー実行ログを読めません: ${unknownErrorMessage(error)}` };
-  }
-}
-
-async function readWebGeminiReviewPromptText(
-  requestDraftId: string
-): Promise<{ promptText: string } | { error: string }> {
-  try {
-    return { promptText: (await readFile(webGeminiReviewPromptPath(requestDraftId), 'utf8')).trim() };
-  } catch (error) {
-    if (isNotFoundError(error)) {
-      return { promptText: '' };
-    }
-
-    return { error: `Web Geminiレビュー依頼文を読めません: ${unknownErrorMessage(error)}` };
-  }
-}
-
-async function writeWebGeminiReviewArtifact(artifact: WebGeminiReviewArtifact): Promise<void> {
-  await mkdir(path.dirname(webGeminiReviewPath(artifact.draftId)), { recursive: true });
-  await writeFile(webGeminiReviewPath(artifact.draftId), `${JSON.stringify(artifact, null, 2)}\n`, 'utf8');
-}
-
-async function writeWebGeminiRevisionBriefArtifact(artifact: WebGeminiRevisionBriefArtifact): Promise<void> {
-  await mkdir(path.dirname(webGeminiRevisionBriefPath(artifact.draftId)), { recursive: true });
-  await writeFile(webGeminiRevisionBriefPath(artifact.draftId), `${JSON.stringify(artifact, null, 2)}\n`, 'utf8');
-}
-
-async function removeWebGeminiReviewArtifact(requestDraftId: string): Promise<void> {
-  await rm(webGeminiReviewPath(requestDraftId), { force: true });
-}
-
-async function removeWebGeminiRevisionBriefArtifact(requestDraftId: string): Promise<void> {
-  await rm(webGeminiRevisionBriefPath(requestDraftId), { force: true });
-}
-
-async function writeWebGeminiReviewRunLog(runLog: WebGeminiReviewRunLog): Promise<void> {
-  await mkdir(path.dirname(webGeminiReviewRunLogPath(runLog.draftId)), { recursive: true });
-  await writeFile(webGeminiReviewRunLogPath(runLog.draftId), `${JSON.stringify(runLog, null, 2)}\n`, 'utf8');
-}
 
 function buildWebGeminiReviewPrompt(draft: RequestDraft): string {
   return buildWebGeminiReviewPromptText(draft.purpose);
@@ -779,9 +563,7 @@ async function prepareWebGeminiReviewRun(
   createdAt: string
 ): Promise<WebGeminiReviewRunLog> {
   const promptPath = webGeminiReviewPromptPath(draft.id);
-  const promptText = buildWebGeminiReviewPrompt(draft);
-  await mkdir(path.dirname(promptPath), { recursive: true });
-  await writeFile(promptPath, `${promptText}\n`, 'utf8');
+  await writeWebGeminiReviewPromptText(draft.id, buildWebGeminiReviewPrompt(draft));
 
   const runLog: WebGeminiReviewRunLog = {
     draftId: draft.id,
@@ -1812,72 +1594,6 @@ function filterActivitySearchResults(
   ));
   const limit = Number(input.limitText);
   return Number.isInteger(limit) && limit > 0 ? sorted.slice(0, limit) : sorted;
-}
-
-function ensureWebGeminiReviewMatchesOutputVideo(
-  review: WebGeminiReviewArtifact | null,
-  outputVideo: FileRef | undefined
-): { error: string } | undefined {
-  if (!review) {
-    return undefined;
-  }
-
-  if (!outputVideo) {
-    return { error: 'Web Geminiレビューがありますが、現在の完成動画がありません。動画生成後にレビューを取り直してください' };
-  }
-
-  if (review.outputVideoUri === outputVideo.uri) {
-    return undefined;
-  }
-
-  return { error: 'Web Geminiレビューが現在の完成動画と一致しません。現在の動画でレビューを取り直してください' };
-}
-
-function ensureWebGeminiRevisionBriefMatchesReview(
-  revisionBrief: WebGeminiRevisionBriefArtifact | null,
-  review: WebGeminiReviewArtifact | null,
-  outputVideo: FileRef | undefined
-): { error: string } | undefined {
-  if (!revisionBrief) {
-    return undefined;
-  }
-
-  if (!outputVideo) {
-    return { error: 'Web Gemini再生成方針がありますが、現在の完成動画がありません。動画生成後にレビューを取り直してください' };
-  }
-
-  if (revisionBrief.outputVideoUri !== outputVideo.uri) {
-    return { error: 'Web Gemini再生成方針が現在の完成動画と一致しません。現在の動画でレビューを取り直してください' };
-  }
-
-  if (!review) {
-    return { error: 'Web Gemini再生成方針がありますが、対応するレビュー本文がありません。レビューを取り直してください' };
-  }
-
-  if (revisionBrief.reviewCreatedAt !== review.createdAt) {
-    return { error: 'Web Gemini再生成方針が現在のレビュー本文と一致しません。再生成方針を作り直してください' };
-  }
-
-  return undefined;
-}
-
-function ensureWebGeminiRunLogMatchesOutputVideo(
-  runLog: WebGeminiReviewRunLog | null,
-  outputVideo: FileRef | undefined
-): { error: string } | undefined {
-  if (!runLog) {
-    return undefined;
-  }
-
-  if (!outputVideo) {
-    return { error: 'Web Geminiレビュー実行ログがありますが、現在の完成動画がありません。動画生成後にレビューを取り直してください' };
-  }
-
-  if (runLog.outputVideoUri === outputVideo.uri) {
-    return undefined;
-  }
-
-  return { error: 'Web Geminiレビュー実行ログが現在の完成動画と一致しません。現在の動画でレビューを取り直してください' };
 }
 
 function copyDraftForRestart(
@@ -3422,6 +3138,55 @@ router.post('/request-drafts/:id/web-gemini-review/prepare', async (request, res
       state
     });
   }
+});
+
+router.post('/request-drafts/:id/web-gemini-review/run-status', async (request, response) => {
+  const update = parseWebGeminiRunStatusUpdateInput(request.body);
+  if ('error' in update) {
+    response.status(400).json({ error: update.error });
+    return;
+  }
+
+  const state = await loadState();
+  const draft = findById(state.requestDrafts, request.params.id);
+  if (!draft) {
+    response.status(404).json({ error: '実行前下書きが見つかりません', state });
+    return;
+  }
+
+  const outputVideo = latestOutputVideoFileRef(state, draft.id);
+  if (!outputVideo) {
+    response.status(409).json({ error: '生成済み動画がないため、Web Geminiレビュー実行状態を更新できません', state });
+    return;
+  }
+  const finalCompleteError = finalCompletedOutputChangeError(state, draft.id, outputVideo);
+  if (finalCompleteError) {
+    response.status(409).json({ error: finalCompleteError, state });
+    return;
+  }
+
+  const currentRunLogResult = await readWebGeminiReviewRunLog(draft.id);
+  if ('error' in currentRunLogResult) {
+    response.status(409).json({ error: currentRunLogResult.error, state });
+    return;
+  }
+  if (currentRunLogResult.runLog?.status === 'applied') {
+    response.status(409).json({
+      error: 'このWeb Geminiレビューはすでに反映済みです。レビューを取り直す準備をしてから実行状態を更新してください',
+      state
+    });
+    return;
+  }
+
+  const runLog = buildWebGeminiRunStatusRunLog({
+    draftId: draft.id,
+    outputVideoUri: outputVideo.uri,
+    outputVideoPath: artifactPathByUrl(outputVideo.uri),
+    update,
+    createdAt: nowIso()
+  });
+  await writeWebGeminiReviewRunLog(runLog);
+  response.json({ runLog });
 });
 
 router.get('/request-drafts/:id/web-gemini-review', async (request, response) => {

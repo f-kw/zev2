@@ -9,6 +9,20 @@ export const WEB_GEMINI_REVIEW_RUN_STATUSES = [
 
 export type WebGeminiReviewRunStatus = (typeof WEB_GEMINI_REVIEW_RUN_STATUSES)[number];
 
+// 外部スクリプトがAPI経由で更新できる実行状態。saved はレビュー保存API、applied は反映APIだけが作る
+export const WEB_GEMINI_RUN_STATUS_UPDATE_STATUSES = ['prepared', 'running', 'blocked', 'failed'] as const;
+
+export type WebGeminiRunStatusUpdateStatus = (typeof WEB_GEMINI_RUN_STATUS_UPDATE_STATUSES)[number];
+
+export interface WebGeminiRunStatusUpdateInput {
+  status: WebGeminiRunStatusUpdateStatus;
+  blockedReasons?: string[];
+  nextAction?: string;
+  externalUploadRequired?: boolean;
+  edgeControl?: unknown;
+  cdpControl?: unknown;
+}
+
 export interface WebGeminiReviewArtifact {
   draftId: string;
   source: 'edge-web-gemini';
