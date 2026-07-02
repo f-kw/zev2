@@ -38,18 +38,10 @@
 
 ## 残タスク(品質効果順)
 
-### R-1. Web Geminiレビュー成果物の state.json 統合 【価値最大・中リスク】
+### R-1. Web Geminiレビュー成果物の state.json 統合 【✅ 完了(2026-07-02)】
 
-- 現状、レビュー本文・再生成方針・実行ログは `artifacts/<draftId>/` の3ファイルに置かれ、state と別系統。
-  このため「現在の完成動画とずれていないか」の検出コード(parse 3関数 + ensure 3関数 + サマリのエラー分岐)が
-  約400行残っている。state に `webGeminiReviews` として持てば、保存と編集コピー作成が1回の saveState で
-  原子的になり、ずれ自体が設計から消える。
-- **中リスクの根拠(2026-07-02 追加調査で確定)**: `scripts/web-gemini-review-edge.mjs` は backend API を
-  一切呼ばず、実行ログ(status=running/blocked/failed/saved、`writeRunLog` 6箇所)に加えて
-  **レビュー本文(web-gemini-review.json)も直接書いている**(`saveReviewFromText`、392行付近)。
-  直書きは backend の検証(完成動画との一致、final_complete済みガード)をすべてバイパスしている。
-
-**実施順(Codexレビューとも合意済みの4段階。各段階でテストを通す):**
+4段階すべて実施済み。正本は `state.json` の `webGeminiReviews`、`artifacts/<draftId>/` 配下の
+JSONファイルは人間確認用の書き出し(読み出しには使わない)。
 
 1. ✅ **実行ログ更新APIの新設**(ff93dce) — `POST /request-drafts/:id/web-gemini-review/run-status`
    (prepared/running/blocked/failed)。あわせて Web Gemini のファイルI/O・整合チェックを
@@ -60,15 +52,18 @@
    スクリプトテストは backend 起動型に書き換え(検証内容は維持)。
 3. ✅ **state構造の新設と二重書き**(1894b8b) — `Zev2State.webGeminiReviews` を新設し、
    prepare/保存/実行状態更新/反映の全書き込みでファイルと state の両方を更新。
-   スクリプトテストに state とファイルの一致検証を追加。読み出しはまだファイル側。
-4. ⬜ **読み出しの state 切替とファイル読み・整合チェックの削除** — 未実施。
-   **着手前に要判断**: `agent-scenario-test.mjs` が「実行ログ/レビュー本文ファイルを直接壊して
-   backend の破損検出(409「保存内容が壊れています」等)を確認する」ブロックを約10箇所持っている。
-   state 移行後はこの故障クラス自体が消えるため、該当テストは削除または API 操作ベースへの
-   書き換えになり、UI に出るエラー文言の契約も変わる。テスト側の模擬(レビューのファイル直書き)は
-   保存API(savedFrom)への置き換えが必要。ファイル書き込み自体は人間確認用の書き出しとして残す想定。
+   スクリプトテストに state とファイルの一致検証を追加。
+4. ✅ **読み出しの state 切替と削除**(2b34fa9) — 取得・反映・activity の読み出しを state に一本化し、
+   ファイル読み込み・parse・破損検出コードを削除(正味 -372行)。
 
-### R-2. control.ts(約3,700行)の分割
+**設計上の帰結:**
+- ファイル破損(「保存内容が壊れています」409)という故障クラスは消滅。対応するテスト3ブロックも削除した
+- 完成動画とのずれ検出(ensure* 3関数)は、同一draft内の再生成(theme_reselect経由)で今も起こり得るため
+  維持。ただし読み出しI/Oなしで実行される
+- activity-search の全draft×ファイルI/O問題(旧R-6)はゼロI/Oになり解消
+- シナリオテストの外部スクリプト模擬は run-status API / state編集ベースになり、テストもファイルに触らない
+
+### R-2. control.ts(約3,500行)の分割 【次の最優先】
 
 責務ごとのファイル分割。ルートは「入力検証 → domain関数 → レスポンス」だけにする。
 
@@ -77,10 +72,8 @@
 | `domain/agent-lifecycle.ts` | claim / complete / fail / claim復旧 |
 | `domain/restart.ts` | 編集コピー一式(copyDraft / copyRequests / copyReviews) |
 | `domain/control-review.ts` | 確認発行と人間操作(applyHumanReviewAction) |
-| `web-gemini/artifacts.ts` + `web-gemini/routes.ts` | R-1実施後はさらに小さくなる |
+| `web-gemini/routes.ts` | Web Gemini系5ルート(artifacts/run-status/state モジュールは分離済み) |
 | `activity/build.ts` | イベント・サマリ組み立て |
-
-R-1 を先にやると移動量が減るので、順序は R-1 → R-2 を推奨。
 
 ### R-3. App.vue(3,734行)の分割
 
@@ -105,10 +98,7 @@ R-1 を先にやると移動量が減るので、順序は R-1 → R-2 を推奨
     `store.state.decisionLogs` 等を直接参照している(要クライアント修正)
 - 実施するなら R-3(App.vue分割)と同時が安全。
 
-### R-6. /activity-search の全draft×ファイルI/O
-
-- 検索のたびに全draftのイベント構築+Web Gemini 3ファイル読み込みを行う。draft数に比例して遅くなる。
-  R-1 を実施すればファイルI/O分は自然に消えるため、単独対応は不要の見込み。
+### R-6. /activity-search の全draft×ファイルI/O 【✅ R-1完了で解消(2b34fa9)】
 
 ### R-7. 人間セッションCookieの強化(外部公開前に必須)
 
@@ -129,9 +119,8 @@ R-1 を先にやると移動量が減るので、順序は R-1 → R-2 を推奨
 
 ---
 
-## 推奨着手順(更新版)
+## 推奨着手順(2026-07-02 R-1完了後の更新版)
 
-1. **R-1** Web Gemini成果物のstate化(API新設 → スクリプト切替 → ファイル廃止の3段階)
-2. **R-2** control.ts 分割(R-1後は移動量が減る)
-3. **R-3 + R-4 + R-5** App.vue分割と文言一本化・ポーリングスリム化(連動するのでまとめて)
-4. R-6/R-9 は上記のついでに解消、R-7 は外部公開の前提条件
+1. **R-2** control.ts 分割(機械的な移動。web-gemini モジュール分離で型が既に整っている)
+2. **R-3 + R-4 + R-5** App.vue分割と文言一本化・ポーリングスリム化(連動するのでまとめて)
+3. R-9 は R-2 のついでに解消、R-7 は外部公開の前提条件

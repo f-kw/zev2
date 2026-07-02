@@ -1,7 +1,7 @@
 # zev2 システム仕様と動作まとめ
 
-作成者: Claude (Fable 5) / 作成日: 2026-07-02(同日のリファクタ反映済み)
-対象コミット時点: main (ff13854)
+作成者: Claude (Fable 5) / 作成日: 2026-07-02(同日のリファクタとR-1完了を反映済み)
+対象コミット時点: main (2b34fa9)
 
 ## 目的
 
@@ -79,10 +79,11 @@ prepare_video → run_stt → propose_clip_themes → build_clip_composition
    **スクリプトはファイルを直接書かず、state取得も含めて全て backend API 経由**(2026-07-02切替)
 3. 人間がUIでレビューを確認し、再生成方針(revision brief)を編集して `POST :id/apply-web-gemini-review` — 方針を保存し、create_edit_plan からの編集コピーを自動作成(status=applied)
 
-レビュー本文・方針・実行ログ・依頼文は `state.json` の `webGeminiReviews` と
-`artifacts/<draftId>/` 配下のJSONファイルの両方に書かれる(移行中の二重書き。読み出しはまだファイル側)。
-読み出しのたびに「現在の完成動画URIと一致するか」の整合チェックが行われる(不一致は取り直しを要求)。
-backend 側の実装は `backend/src/web-gemini/`(artifacts=ファイルI/Oと整合チェック、run-status=実行状態、state=state更新)。
+レビュー本文・方針・実行ログ・依頼文の**正本は `state.json` の `webGeminiReviews`**。
+`artifacts/<draftId>/` 配下のJSONファイルにも書き出されるが、これは人間確認用で読み出しには使わない。
+読み出し時は「現在の完成動画URIと一致するか」の整合チェックが行われる(不一致は取り直しを要求。
+同一draft内でテーマ選び直し→再生成すると起こり得る)。
+backend 側の実装は `backend/src/web-gemini/`(artifacts=ファイル書き出しと整合チェック、run-status=実行状態、state=state更新)。
 
 ## 状態管理
 
