@@ -1,7 +1,7 @@
 # zev2 システム仕様と動作まとめ
 
-作成者: Claude (Fable 5) / 作成日: 2026-07-02(同日のリファクタとR-1完了を反映済み)
-対象コミット時点: main (2b34fa9)
+作成者: Claude (Fable 5) / 作成日: 2026-07-02(R-1完了とR-2分割(2026-07-03)を反映済み)
+対象コミット時点: main (913e191)
 
 ## 目的
 
@@ -13,8 +13,8 @@
 
 | パッケージ | 役割 | 主なファイル |
 |---|---|---|
-| `packages/shared` | 型・工程定義・状態判定の共通ロジック | `src/index.ts`(688行) |
-| `backend` | Express API。状態管理と人間制御の中心 | `src/routes/control.ts`(3,944行) |
+| `packages/shared` | 型・工程定義・状態判定の共通ロジック | `src/index.ts` + activity/web-gemini型 |
+| `backend` | Express API。状態管理と人間制御の中心 | `src/routes/control.ts`(984行、ルート中心)+ `domain/`(restart・control-review・agent-lifecycle・セレクタ)+ `activity/build.ts` + `web-gemini/` + `artifacts/` |
 | `client` | Vue3 + Pinia の人間制御UI | `src/App.vue`(3,734行), `stores/controlQueue.ts` |
 | `runner` | APIを叩いて工程を実行するAIエージェント | `src/index.ts` + `src/steps/*`(STT/Gemini/ffmpeg) |
 | `scripts` | 契約テスト・シナリオテスト・Web Geminiレビュー自動化 | `agent-scenario-test.mjs`(3,265行)ほか |

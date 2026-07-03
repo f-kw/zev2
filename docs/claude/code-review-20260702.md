@@ -63,22 +63,24 @@ JSONファイルは人間確認用の書き出し(読み出しには使わない
 - activity-search の全draft×ファイルI/O問題(旧R-6)はゼロI/Oになり解消
 - シナリオテストの外部スクリプト模擬は run-status API / state編集ベースになり、テストもファイルに触らない
 
-### R-2. control.ts(約3,500行)の分割 【次の最優先・実施順はCodexレビューと合意済み(2026-07-03)】
+### R-2. control.ts の分割 【✅ 完了(2026-07-03、ステップ0〜5)】
 
-責務ごとのファイル分割。ルートは「入力検証 → domain関数 → レスポンス」だけにする。
-**1分割=純粋な移動のみ=1コミットとし、毎回 type-check と全テストを通す。**
+control.ts は **3,501行 → 984行**(残りはルート定義+cancel系+complete)。
+各ステップとも純粋移動のみ・1コミット・毎回全テスト通過で実施した。
 
-実施順(依存の根元から。逆順にすると循環する):
-
-| 順 | 切り出し先 | 中身 | 根拠 |
+| 順 | 切り出し先 | 行数 | コミット |
 |---|---|---|---|
-| 0 | `domain/state-selectors.ts` | latestOutputVideoFileRef / latestSucceededAgentRequest / fileRefForAgentRequest 等 | control.ts内で24箇所使用。全分割先が参照する共通依存 |
-| 1 | `activity/build.ts` | イベント・サマリ組み立て+ラベルRecord群 | 読み取り専用で副作用なし。最大の塊(約800行) |
-| 2 | `domain/restart.ts` | 編集コピー一式(copyDraft / copyRequests / copyReviews) | control-review・retry・web-gemini反映の3系統が使う共通依存。先に独立させる |
-| 3 | `domain/control-review.ts` | 確認発行と人間操作(applyHumanReviewAction) | restart を使う側として一方向依存に固定(P1) |
-| 4 | `web-gemini/routes.ts` | Web Gemini系ルート | **条件**: control router の人間認証→state直列化の2ミドルウェアより後ろに `router.use()` でマウントする。appレベル別マウントは両方バイパスするので禁止(P2) |
-| 5 | `domain/agent-lifecycle.ts` | claim / fail / claim復旧のみ | completeは含めない |
-| 6 | complete周辺は再評価 | 成果物検証・FileRef保存・確認発行の3責務が絡むため、分離方針を改めて決めてから(P2) |
+| 0 | `domain/support.ts` + `domain/operation-log.ts` + `domain/state-selectors.ts` | 190 | 01075f4 |
+| 1 | `activity/build.ts`(イベント・サマリ組み立て+ラベルRecord群) | 730 | ed279cb |
+| 2 | `artifacts/validation.ts` + `domain/restart.ts`(編集コピー一式) | 781 | 8807ff4 |
+| 3 | `domain/control-review.ts`(確認発行と人間操作)— restart への一方向依存(P1) | 462 | d56fa0d |
+| 4 | `web-gemini/routes.ts` — 認証→直列化ミドルウェアの後ろにマウント(P2の条件遵守) | 515 | f8f6cb2 |
+| 5 | `domain/agent-lifecycle.ts`(claim / fail / claim復旧。completeは含めない) | 100 | 913e191 |
+
+**残り(意図的に未実施)**: complete ルートの分離。成果物検証・FileRef保存・確認発行の
+3責務が絡むため、Codexレビュー P2 の指摘どおり分離方針を再評価してから扱う。
+completeAgentRequest / cancelActiveAgentRequests / rejectOpenControlReviewsForCancel は
+現状 control.ts に残置している。
 
 ### R-3. App.vue(3,734行)の分割
 
@@ -124,8 +126,8 @@ JSONファイルは人間確認用の書き出し(読み出しには使わない
 
 ---
 
-## 推奨着手順(2026-07-02 R-1完了後の更新版)
+## 推奨着手順(2026-07-03 R-2完了後の更新版)
 
-1. **R-2** control.ts 分割(機械的な移動。web-gemini モジュール分離で型が既に整っている)
-2. **R-3 + R-4 + R-5** App.vue分割と文言一本化・ポーリングスリム化(連動するのでまとめて)
-3. R-9 は R-2 のついでに解消、R-7 は外部公開の前提条件
+1. **R-3 + R-4 + R-5** App.vue分割と文言一本化・ポーリングスリム化(連動するのでまとめて)
+2. complete ルートの分離方針を再評価(R-2 の残り)
+3. R-9(runner側共通化・シナリオテスト分割)、R-7 は外部公開の前提条件
