@@ -111,6 +111,12 @@ import {
 } from '../domain/control-review.js';
 import webGeminiReviewRouter, { validateWebGeminiOutputVideo } from '../web-gemini/routes.js';
 import {
+  ensureClaimOwnerMatches,
+  isValidIsoDateText,
+  loadStateWithClaimRecovery,
+  readAgentClaimInput
+} from '../domain/agent-lifecycle.js';
+import {
   ensureWebGeminiReviewMatchesOutputVideo,
   ensureWebGeminiRevisionBriefMatchesReview,
   ensureWebGeminiRunLogMatchesOutputVideo,
@@ -229,95 +235,6 @@ function selectAgentRequests(stateAgentRequests: AgentRequest[], ids: Set<string
 
 function routeParamText(value: string | string[] | undefined): string {
   return Array.isArray(value) ? value[0] ?? '' : value ?? '';
-}
-
-function isValidIsoDateText(value: string): boolean {
-  return Boolean(value) && Number.isFinite(Date.parse(value));
-}
-
-function isClaimExpired(request: AgentRequest, observedAt: string): boolean {
-  if (request.status !== 'running' || !request.claimExpiresAt) {
-    return false;
-  }
-
-  return Date.parse(request.claimExpiresAt) <= Date.parse(observedAt);
-}
-
-function isRunnableAfterClaimRecovery(state: LoadedState, request: AgentRequest): boolean {
-  const dependency = findAgentRequestDependency(state, request);
-  return (!dependency || dependency.status === 'succeeded') && !findBlockingControlReview(state, request);
-}
-
-function clearClaimFields(request: AgentRequest): void {
-  delete request.claimOwnerId;
-  delete request.claimedAt;
-  delete request.claimUpdatedAt;
-  delete request.claimExpiresAt;
-}
-
-function recoverExpiredClaims(state: LoadedState, observedAt: string): boolean {
-  let changed = false;
-
-  for (const request of state.agentRequests) {
-    if (!isClaimExpired(request, observedAt)) {
-      continue;
-    }
-
-    const previousOwner = request.claimOwnerId || '不明';
-    const previousStatus = request.status;
-    clearClaimFields(request);
-    request.claimExpiredAt = observedAt;
-    request.status = isRunnableAfterClaimRecovery(state, request) ? 'queued' : 'waiting';
-    request.errorMessage = `取得期限が切れたため復旧しました。前回取得者: ${previousOwner}`;
-    request.updatedAt = observedAt;
-    appendAgentRequestOperationLog(
-      state,
-      request,
-      'agent_request_claim_recovered',
-      request.errorMessage,
-      {
-        actor: 'backend',
-        fromStatus: previousStatus,
-        toStatus: request.status,
-        ownerId: previousOwner,
-        errorMessage: request.errorMessage,
-        createdAt: observedAt
-      }
-    );
-    changed = true;
-  }
-
-  return changed;
-}
-
-async function loadStateWithClaimRecovery(): Promise<LoadedState> {
-  const state = await loadState();
-  const observedAt = nowIso();
-  if (recoverExpiredClaims(state, observedAt)) {
-    await saveState(state);
-  }
-
-  return state;
-}
-
-function readAgentClaimInput(value: unknown): AgentClaimInput {
-  const body = value && typeof value === 'object' ? (value as Partial<AgentClaimInput>) : {};
-  return {
-    ownerId: trimText(body.ownerId),
-    ...(trimText(body.expiresAt) ? { expiresAt: trimText(body.expiresAt) } : {})
-  };
-}
-
-function ensureClaimOwnerMatches(request: AgentRequest, ownerId: string): string | undefined {
-  if (!ownerId) {
-    return 'AIエージェント取得者が必要です';
-  }
-
-  if (request.claimOwnerId !== ownerId) {
-    return '取得者が一致しないため、このAI操作は完了または失敗として記録できません';
-  }
-
-  return undefined;
 }
 
 function cancelActiveAgentRequests(
