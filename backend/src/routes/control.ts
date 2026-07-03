@@ -1,5 +1,4 @@
 import express from 'express';
-import { nanoid } from 'nanoid';
 import { createHash } from 'node:crypto';
 import { createReadStream } from 'node:fs';
 import { access, copyFile, mkdir, open, readFile, stat } from 'node:fs/promises';
@@ -49,8 +48,6 @@ import {
   hasText,
   isAgentRequestReady,
   isStatusIn,
-  lastMatching,
-  latestByCreatedAt,
   recordValue,
   trimText,
   unknownErrorMessage,
@@ -67,6 +64,21 @@ import {
   artifactUrl,
   artifactUrlPrefix
 } from '../artifacts/artifact-path.js';
+import { compactActivityText, createId, nowIso, reviewActionLabel } from '../domain/support.js';
+import { appendAgentOperationLog, appendAgentRequestOperationLog } from '../domain/operation-log.js';
+import {
+  currentAgentRequestsForDraft,
+  fileRefForAgentRequest,
+  finalCompletedOutputChangeError,
+  hasFinalReviewActionForOutput,
+  latestControlReview,
+  latestFinalReviewActionForOutput,
+  latestOpenControlReview,
+  latestOutputVideoFileRef,
+  latestSucceededAgentRequest,
+  outputForAgentRequest,
+  workflowStepIndex
+} from '../domain/state-selectors.js';
 import {
   ensureWebGeminiReviewMatchesOutputVideo,
   ensureWebGeminiRevisionBriefMatchesReview,
@@ -132,10 +144,6 @@ type ArtifactFileMetadata = {
   sha256: string;
 };
 const runtimeDir = resolveRuntimeDir();
-
-function nowIso(): string {
-  return new Date().toISOString();
-}
 
 function isAgentExecutionApiRequest(request: express.Request): boolean {
   const path = request.path;
@@ -212,52 +220,12 @@ router.use((_, response, next) => {
   );
 });
 
-function createId(prefix: string): string {
-  return `${prefix}_${nanoid()}`;
-}
-
 function selectAgentRequests(stateAgentRequests: AgentRequest[], ids: Set<string>): AgentRequest[] {
   return stateAgentRequests.filter((request) => ids.has(request.id));
 }
 
 function routeParamText(value: string | string[] | undefined): string {
   return Array.isArray(value) ? value[0] ?? '' : value ?? '';
-}
-
-function appendAgentOperationLog(
-  state: LoadedState,
-  input: Omit<AgentOperationLog, 'id' | 'detail' | 'createdAt'> & {
-    detail: unknown;
-    createdAt?: string;
-  }
-): AgentOperationLog {
-  const log: AgentOperationLog = {
-    ...input,
-    id: createId('agent_log'),
-    detail: compactActivityText(input.detail, 'AI操作の状態を記録しました'),
-    createdAt: input.createdAt ?? nowIso()
-  };
-  state.agentOperationLogs.push(log);
-  return log;
-}
-
-function appendAgentRequestOperationLog(
-  state: LoadedState,
-  request: AgentRequest,
-  eventType: AgentOperationLogEventType,
-  detail: unknown,
-  input: Omit<AgentOperationLog, 'id' | 'eventType' | 'requestDraftId' | 'agentRequestId' | 'stepType' | 'detail' | 'createdAt'> & {
-    createdAt?: string;
-  }
-): AgentOperationLog {
-  return appendAgentOperationLog(state, {
-    ...input,
-    eventType,
-    requestDraftId: request.requestDraftId,
-    agentRequestId: request.id,
-    stepType: request.type,
-    detail
-  });
 }
 
 function isValidIsoDateText(value: string): boolean {
@@ -347,15 +315,6 @@ function ensureClaimOwnerMatches(request: AgentRequest, ownerId: string): string
   }
 
   return undefined;
-}
-
-function workflowStepIndex(type: AgentRequest['type']): number {
-  const index = WORKFLOW_STEPS.findIndex((step) => step.type === type);
-  if (index < 0) {
-    throw new Error(`未知の工程です: ${type}`);
-  }
-
-  return index;
 }
 
 function artifactRoot(): string {
@@ -526,15 +485,6 @@ function restartArtifactFileName(sourceFileRef: FileRef, sourceArtifactPath: str
     ? 'source-video.mp4'
     : ARTIFACT_FILE_NAME_BY_KIND.output_video;
 }
-
-function compactActivityText(value: unknown, fallback: string): string {
-  const text = typeof value === 'string'
-    ? value.trim().replace(/\s+/g, ' ')
-    : '';
-  const normalized = text || fallback;
-  return normalized.length > 180 ? `${normalized.slice(0, 177)}...` : normalized;
-}
-
 
 function buildWebGeminiReviewPrompt(draft: RequestDraft): string {
   return buildWebGeminiReviewPromptText(draft.purpose);
@@ -707,47 +657,6 @@ function createAgentRequestForDraftStep(
   };
 }
 
-function latestSucceededAgentRequest(
-  stateAgentRequests: AgentRequest[],
-  requestDraftId: string,
-  type: AgentRequest['type']
-): AgentRequest | undefined {
-  return lastMatching(
-    stateAgentRequests,
-    (request) => request.requestDraftId === requestDraftId && request.type === type && request.status === 'succeeded'
-  );
-}
-
-function latestControlReview(
-  stateControlReviews: ControlReviewItem[],
-  requestDraftId: string,
-  kind: ControlReviewKind
-): ControlReviewItem | undefined {
-  const reviews = stateControlReviews.filter((item) => item.requestDraftId === requestDraftId && item.kind === kind);
-  return latestByCreatedAt(reviews);
-}
-
-function fileRefForAgentRequest(state: Awaited<ReturnType<typeof loadState>>, request: AgentRequest): FileRef | undefined {
-  if (!request.result?.fileRefId) {
-    return undefined;
-  }
-
-  return findById(state.fileRefs, request.result.fileRefId);
-}
-
-function outputForAgentRequest(state: Awaited<ReturnType<typeof loadState>>, request: AgentRequest): OutputEntity | undefined {
-  if (!request.result?.outputId) {
-    return undefined;
-  }
-
-  return findById(state.outputs, request.result.outputId);
-}
-
-function latestOutputVideoFileRef(state: LoadedState, requestDraftId: string): FileRef | undefined {
-  const renderRequest = latestSucceededAgentRequest(state.agentRequests, requestDraftId, 'render_video');
-  return renderRequest ? fileRefForAgentRequest(state, renderRequest) : undefined;
-}
-
 async function validateWebGeminiOutputVideo(
   draft: RequestDraft,
   outputVideo: FileRef | undefined
@@ -771,18 +680,6 @@ async function validateWebGeminiOutputVideo(
   }
 
   return undefined;
-}
-
-function currentAgentRequestsForDraft(state: LoadedState, requestDraftId: string): AgentRequest[] {
-  return state.agentRequests
-    .filter((request) => request.requestDraftId === requestDraftId && request.status !== 'superseded')
-    .sort((left, right) => left.createdAt.localeCompare(right.createdAt));
-}
-
-function latestOpenControlReview(state: LoadedState, requestDraftId: string): ControlReviewItem | undefined {
-  return state.controlReviewItems
-    .filter((item) => item.requestDraftId === requestDraftId && item.status === 'review_required')
-    .sort((left, right) => right.createdAt.localeCompare(left.createdAt))[0];
 }
 
 function buildRequestDraftActivitySummary(
@@ -1001,48 +898,6 @@ const defaultFinalReviewReasonByType: Record<FinalReviewActionType, string> = {
 
 function defaultFinalReviewReason(action: FinalReviewActionType): string {
   return defaultFinalReviewReasonByType[action];
-}
-
-function latestFinalReviewActionForOutput(
-  state: LoadedState,
-  requestDraftId: string,
-  outputVideo: FileRef | undefined
-): FinalReviewAction | undefined {
-  if (!outputVideo) {
-    return undefined;
-  }
-
-  return latestByCreatedAt(state.finalReviewActions.filter(
-    (action) => action.requestDraftId === requestDraftId && action.outputVideoUri === outputVideo.uri
-  ));
-}
-
-function hasFinalReviewActionForOutput(
-  state: LoadedState,
-  requestDraftId: string,
-  outputVideo: FileRef,
-  actionType: FinalReviewActionType
-): boolean {
-  return state.finalReviewActions.some(
-    (action) =>
-      action.requestDraftId === requestDraftId &&
-      action.outputVideoUri === outputVideo.uri &&
-      action.action === actionType
-  );
-}
-
-function finalCompletedOutputChangeError(
-  state: LoadedState,
-  requestDraftId: string,
-  outputVideo: FileRef | undefined
-): string | undefined {
-  if (!outputVideo) {
-    return undefined;
-  }
-
-  return hasFinalReviewActionForOutput(state, requestDraftId, outputVideo, 'final_complete')
-    ? 'この完成動画は最終完了として記録済みです。変更する場合は新しい依頼として作成してください'
-    : undefined;
 }
 
 const decisionTypeLabelByType: Record<DecisionLogType, string> = {
@@ -2284,16 +2139,6 @@ function completeAgentRequest(
   };
 
   return { fileRef, output };
-}
-
-const reviewActionLabelByType: Record<HumanReviewActionType, string> = {
-  approve: '承認',
-  reject: '却下',
-  request_changes: '修正依頼'
-};
-
-function reviewActionLabel(action: HumanReviewActionType): string {
-  return reviewActionLabelByType[action];
 }
 
 function reviewChangeScopeFromInput(input: unknown): ReviewChangeScope | { error: string } {
