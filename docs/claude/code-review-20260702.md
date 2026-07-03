@@ -63,17 +63,22 @@ JSONファイルは人間確認用の書き出し(読み出しには使わない
 - activity-search の全draft×ファイルI/O問題(旧R-6)はゼロI/Oになり解消
 - シナリオテストの外部スクリプト模擬は run-status API / state編集ベースになり、テストもファイルに触らない
 
-### R-2. control.ts(約3,500行)の分割 【次の最優先】
+### R-2. control.ts(約3,500行)の分割 【次の最優先・実施順はCodexレビューと合意済み(2026-07-03)】
 
 責務ごとのファイル分割。ルートは「入力検証 → domain関数 → レスポンス」だけにする。
+**1分割=純粋な移動のみ=1コミットとし、毎回 type-check と全テストを通す。**
 
-| 切り出し先 | 中身 |
-|---|---|
-| `domain/agent-lifecycle.ts` | claim / complete / fail / claim復旧 |
-| `domain/restart.ts` | 編集コピー一式(copyDraft / copyRequests / copyReviews) |
-| `domain/control-review.ts` | 確認発行と人間操作(applyHumanReviewAction) |
-| `web-gemini/routes.ts` | Web Gemini系5ルート(artifacts/run-status/state モジュールは分離済み) |
-| `activity/build.ts` | イベント・サマリ組み立て |
+実施順(依存の根元から。逆順にすると循環する):
+
+| 順 | 切り出し先 | 中身 | 根拠 |
+|---|---|---|---|
+| 0 | `domain/state-selectors.ts` | latestOutputVideoFileRef / latestSucceededAgentRequest / fileRefForAgentRequest 等 | control.ts内で24箇所使用。全分割先が参照する共通依存 |
+| 1 | `activity/build.ts` | イベント・サマリ組み立て+ラベルRecord群 | 読み取り専用で副作用なし。最大の塊(約800行) |
+| 2 | `domain/restart.ts` | 編集コピー一式(copyDraft / copyRequests / copyReviews) | control-review・retry・web-gemini反映の3系統が使う共通依存。先に独立させる |
+| 3 | `domain/control-review.ts` | 確認発行と人間操作(applyHumanReviewAction) | restart を使う側として一方向依存に固定(P1) |
+| 4 | `web-gemini/routes.ts` | Web Gemini系ルート | **条件**: control router の人間認証→state直列化の2ミドルウェアより後ろに `router.use()` でマウントする。appレベル別マウントは両方バイパスするので禁止(P2) |
+| 5 | `domain/agent-lifecycle.ts` | claim / fail / claim復旧のみ | completeは含めない |
+| 6 | complete周辺は再評価 | 成果物検証・FileRef保存・確認発行の3責務が絡むため、分離方針を改めて決めてから(P2) |
 
 ### R-3. App.vue(3,734行)の分割
 
