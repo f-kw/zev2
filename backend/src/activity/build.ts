@@ -312,10 +312,10 @@ export function webGeminiReviewRunDetail(runLog: WebGeminiReviewRunLog): string 
   }
 
   if (runLog.status === 'running') {
-    return compactActivityText(runLog.nextAction, 'AIエージェントがEdgeで外部レビューを実行しています');
+    return 'AIがGeminiに動画を送り、演出レビューを取得しています';
   }
 
-  return compactActivityText(runLog.nextAction, 'レビュー対象動画と依頼文を確認済みです');
+  return 'AIがGeminiに動画を送り、演出の改善点を取得します';
 }
 
 export function webGeminiReviewOccurredAt(runLog: WebGeminiReviewRunLog): string {
@@ -441,9 +441,9 @@ export function buildWebGeminiReviewActivitySummary(
       return {
         ...base,
         status: 'completed',
-        title: 'Web Geminiレビュー準備済み',
+        title: 'Geminiレビュー依頼済み',
         detail: webGeminiReviewRunDetail(runLog),
-        nextAction: 'EdgeでWeb Geminiレビューを実行します'
+        nextAction: 'AIがGeminiレビューを取得します'
       };
     }
 

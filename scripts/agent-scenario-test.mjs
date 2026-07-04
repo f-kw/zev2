@@ -2629,9 +2629,9 @@ async function assertWebGeminiReviewFeedbackLoop(apiBaseUrl, runtimeDir, sourceD
     'Web Geminiレビュー準備が監査タイムラインで追えない'
   );
   assertScenario(
-    preparedActivity.summary?.title === 'Web Geminiレビュー準備済み' &&
-      preparedActivity.summary.nextAction.includes('Edge'),
-    'Web Geminiレビュー準備済みが現在状態要約に出ていない'
+    preparedActivity.summary?.title === 'Geminiレビュー依頼済み' &&
+      preparedActivity.summary.nextAction.includes('AIがGeminiレビューを取得'),
+    'Geminiレビュー依頼済みが現在状態要約に出ていない'
   );
 
   const beforeReview = await requestJson(apiPath(apiBaseUrl, `/request-drafts/${sourceDraftId}/web-gemini-review`));

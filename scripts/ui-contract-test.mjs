@@ -90,6 +90,14 @@ assertContract(
 );
 
 assertContract(
+  appVue.includes('Geminiで演出レビューを依頼') &&
+    appVue.includes('AIがGeminiに動画を送り、演出の改善点を取得します') &&
+    !appVue.includes('レビュー準備を更新') &&
+    !appVue.includes('外部レビュー実行手順'),
+  'Web Geminiレビュー依頼のUI文言が、人間向けの次に起こることになっていません'
+);
+
+assertContract(
   appVue.includes('AI処理完了') &&
     appVue.includes('ユーザーの最終判断待ち'),
   '完成動画画面でAI処理完了とユーザーの最終判断待ちを区別する表示が見つかりません'

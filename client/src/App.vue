@@ -325,10 +325,10 @@ const canApplyWebGeminiReview = computed(() =>
 
 const webGeminiPrepareButtonLabel = computed(() => {
   if (activeWebGeminiAction.value === 'prepare_review') {
-    return '準備中';
+    return '依頼中';
   }
 
-  return webGeminiReview.value ? 'レビューを取り直す' : 'レビュー準備を更新';
+  return webGeminiReview.value ? 'Geminiレビューを取り直す' : 'Geminiで演出レビューを依頼';
 });
 
 const webGeminiApplyButtonLabel = computed(() => {
@@ -342,23 +342,23 @@ const webGeminiApplyButtonLabel = computed(() => {
 const webGeminiRunStatusTitle = computed(() => {
   const runLog = webGeminiRunLog.value;
   if (!runLog) {
-    return webGeminiReviewMessage.value || 'レビュー未取得';
+    return webGeminiReviewMessage.value || 'Geminiレビュー未依頼';
   }
 
   if (runLog.status === 'blocked') {
-    return 'レビュー実行前に停止';
+    return 'Geminiレビューを開始できません';
   }
 
   if (runLog.status === 'prepared') {
-    return 'レビュー準備済み';
+    return 'Geminiレビューを依頼済み';
   }
 
   if (runLog.status === 'running') {
-    return 'レビュー実行中';
+    return 'Geminiレビュー取得中';
   }
 
   if (runLog.status === 'failed') {
-    return 'レビュー実行失敗';
+    return 'Geminiレビューに失敗';
   }
 
   if (runLog.status === 'applied') {
@@ -370,7 +370,19 @@ const webGeminiRunStatusTitle = computed(() => {
 
 const webGeminiRunStatusDetail = computed(() => {
   const runLog = webGeminiRunLog.value;
-  if (runLog?.nextAction) {
+  if (runLog?.status === 'prepared') {
+    return 'AIがGeminiに動画を送り、演出の改善点を取得します';
+  }
+
+  if (runLog?.status === 'running') {
+    return 'AIがEdgeでGeminiを開き、動画レビューを取得しています';
+  }
+
+  if (runLog?.status === 'saved' && webGeminiReview.value) {
+    return 'Geminiレビューが届きました。採用する変更だけ残して再生成できます';
+  }
+
+  if ((runLog?.status === 'blocked' || runLog?.status === 'failed') && runLog.nextAction) {
     return runLog.nextAction;
   }
 
@@ -405,7 +417,7 @@ const webGeminiExecutionNotes = computed(() => {
 
   const notes: string[] = [];
   if (runLog.externalUploadRequired) {
-    notes.push('外部送信はまだ実行していません');
+    notes.push('AIがGeminiへ送る作業を担当します');
   }
 
   const edgeControl = asReadableRecord(runLog.edgeControl);
@@ -420,10 +432,6 @@ const webGeminiExecutionNotes = computed(() => {
     notes.push('Gemini画面の自動操作前提は確認済みです');
   } else if (typeof cdpControl?.error === 'string' && cdpControl.error.trim()) {
     notes.push(`Gemini画面の自動操作前提を確認できません: ${cdpControl.error.trim()}`);
-  }
-
-  if (runLog.externalReviewCommand) {
-    notes.push(`外部レビュー実行手順: ${runLog.externalReviewCommand}`);
   }
 
   return notes;
@@ -1187,7 +1195,7 @@ async function refreshWebGeminiReview() {
     if (!result.review) {
       webGeminiRevisionBriefInput.value = '';
       loadedWebGeminiReviewCreatedAt.value = '';
-      webGeminiReviewMessage.value = 'レビュー未取得';
+      webGeminiReviewMessage.value = result.runLog ? 'AIにGeminiレビューを依頼済みです' : 'Geminiレビュー未依頼';
       return;
     }
 
@@ -1243,7 +1251,7 @@ async function prepareCurrentWebGeminiReview() {
     webGeminiPromptOpen.value = false;
     webGeminiRevisionBriefInput.value = '';
     loadedWebGeminiReviewCreatedAt.value = '';
-    webGeminiReviewMessage.value = 'レビュー未取得';
+    webGeminiReviewMessage.value = 'AIにGeminiレビューを依頼しました';
   } catch (error) {
     webGeminiReview.value = null;
     webGeminiRevisionBrief.value = null;
