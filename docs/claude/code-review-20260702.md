@@ -86,24 +86,38 @@ completeAgentRequest / cancelActiveAgentRequests / rejectOpenControlReviewsForCa
 
 - composable 3つ(`useHumanAuth` / `useWebGeminiReview` / `useRequestActivity`)+
   コンポーネント4つ(`ReviewPanel` / `WebGeminiPanel` / `ActivityDialog` / `RequestForm`)へ。
-  refreshタイマー2本も composable に閉じ込める。
-- watcher のタイミングなど反応性の挙動が変わりうるため R-2 より一段リスクが高い。R-2 の後に。
+- watcher のタイミングなど反応性の挙動が変わりうるため R-2 より一段リスクが高い。
+  R-2 と同じステップ式(1 composable ずつ純粋移動→コミット→全テスト)で行う。
+  この段階では ref の構造や watcher の発火条件を一切変えない。
+- 順序は依存が浅い順: `useHumanAuth` → `useRequestActivity` → `useWebGeminiReview` →
+  コンポーネント4つ。refreshタイマー2本の閉じ込めは挙動が変わりやすいため独立ステップにする。
+- **注意**: `ui-contract-test.mjs` は App.vue ソースの文字列マッチで検証しているため、
+  切り出しのたびに対象ファイルの追随修正が必要(= 各ステップのコミットに含める)。
+  フロントに挙動テストがないので、着手前に主要フローの手動スモークチェックリストを書き出す。
 
 ### R-4. UI状態文言の backend 一本化
 
 - App.vue の `statusText` / `statusDetailText` / `defaultReviewReason` は backend の
   `buildRequestDraftActivitySummary` / `defaultHumanReviewReason` とほぼ同じ判定・文言の再実装。
-  文言の正本を backend に寄せ、UIはフォールバックのみ持つ。R-3 と同時に実施すると効率的。
+- **現状の事実(2026-07-04確認)**: UIは既に backend サマリを優先しており
+  (`requestActivitySummary?.title || statusText`)、ローカル実装が使われるのは
+  サマリ未取得時のフォールバックのみ。つまり R-4 の実体は「フォールバックの最小化」。
+- **先にゴールデンテストを作る**: `statusText` 等は computed としてリアクティブ状態に
+  結線されているため、まず判定ロジックを純粋関数に切り出し(App.vueへの最小の変更)、
+  代表的な state パターンで backend 実装と出力を突き合わせて「ほぼ同じ」の差分を全部洗い出す。
+  このテストは R-3 期間中の安全網としても機能する。差分確認後にフォールバックを削る。
 
 ### R-5. /state 応答のスリム化と監査ログ成長の抑制
 
 - UIは `/state` 全量を2秒毎にポーリングし、`/agent-requests/next` はポーリングのたびに監査ログを追記する。
   state.json は単調に肥大化し、全API(全量read/write)を遅くする。
-- **注意(当初評価から更新)**: 対応には連動修正が必要で、単独では低リスクでない。
-  - next返却ログの廃止 → `agent-scenario-test.mjs` が3箇所でこのイベントを検証している(要テスト修正)
-  - `/state` から操作ログ・決定ログを外す → App.vue の `requestActivityRefreshKey` が
-    `store.state.decisionLogs` 等を直接参照している(要クライアント修正)
-- 実施するなら R-3(App.vue分割)と同時が安全。
+- **独立した2段に分けて実施する**:
+  1. next返却ログの廃止 → `agent-scenario-test.mjs` の検証3箇所を同時修正
+  2. `/state` から操作ログ・決定ログを外す → App.vue の `requestActivityRefreshKey` が
+     `store.state.decisionLogs` 等を直接参照しているため要クライアント修正
+- **順序は R-3 の後**: R-3 で activity 参照が `useRequestActivity` に隔離されれば、
+  2. のクライアント修正は「巨大App.vueの中を探して直す」から「composable 1個を直す」に変わる。
+  「連動する」の正体はこの依存関係であり、同時実施ではなく直列実施が正しい。
 
 ### R-6. /activity-search の全draft×ファイルI/O 【✅ R-1完了で解消(2b34fa9)】
 
@@ -124,10 +138,31 @@ completeAgentRequest / cancelActiveAgentRequests / rejectOpenControlReviewsForCa
   (`@zev2/shared/node` などの exports 追加)が必要。client バンドルに `node:path` を混ぜないための制約。
 - `agent-scenario-test.mjs`(3,265行)の分割は R-2 のドメイン分割に合わせて実施。
 
+### R-10. ログ系の別ファイル化とポーリング抑制(R-5の発展形、新規)
+
+- 監査ログ・決定ログを state.json に持ち続ける限り「単調肥大→全量read/writeが遅くなる」構造は
+  R-5 後も残る。ログ系だけ追記専用の JSONL 別ファイルへ逃がせば state は常に小さく保てて根本解決。
+  R-8(破損時は退避して空から再開)とも相性がよい — ログが別ファイルなら退避で失うものが減る。
+- 2秒ポーリングには、state にバージョン番号か updatedAt を持たせて変化がなければ
+  304/no-op で返す仕組みを足すと、スリム化と独立にコストが落ちる。
+- いずれも R-5 とは独立の変更として扱う(束ねない)。
+
 ---
 
-## 推奨着手順(2026-07-03 R-2完了後の更新版)
+## 推奨着手順(2026-07-04 Codexレビューを受けて更新)
 
-1. **R-3 + R-4 + R-5** App.vue分割と文言一本化・ポーリングスリム化(連動するのでまとめて)
-2. complete ルートの分離方針を再評価(R-2 の残り)
-3. R-9(runner側共通化・シナリオテスト分割)、R-7 は外部公開の前提条件
+前版の「R-3 + R-4 + R-5 をまとめて」は撤回。1つの変更に束ねると壊れたときに
+原因を切り分けられず、R-2 で守った規律(1分割=純粋移動=1コミット)と矛盾する。
+「連動する」の正しい解釈は「同じ期間に、依存順で直列に」。
+
+1. **R-4準備**: 文言ロジックの純粋関数化+backend実装とのゴールデンテスト(差分の全量洗い出し)
+2. **R-3**: composable を1つずつステップ式で切り出し(useHumanAuth → useRequestActivity →
+   useWebGeminiReview)。タイマー閉じ込めは独立ステップ。着手前に手動スモークチェックリスト作成
+3. **R-4本体**: フォールバック文言の最小化(1のテストが安全網)
+4. **R-5**: ①next返却ログ廃止 ②/state からログ除外、の2段直列(R-3後なら②は composable 1個の修正)
+5. complete ルートの分離方針を再評価(R-2 の残り)
+6. R-9 / R-10 / R-7(R-7 は外部公開の前提条件)
+
+**工数の区切り(方針メモ)**: リファクタは切り抜き品質それ自体には効かない「配管」の改善。
+R-3 の composable 切り出しまでで一旦止めてプロンプト品質・評価基盤へ戻る区切りを推奨。
+コンポーネント4つの切り出しと R-5 以降はプロンプト側が回り始めてからで遅くない。
