@@ -1,0 +1,170 @@
+{
+  "researchedAt": "2026-07-04T15:46:05+09:00",
+  "purpose": "STT前に、切り抜き区間選択評価のfixture候補にできるバズったYouTube切り抜きを集める。",
+  "method": {
+    "searchedWith": [
+      "web search",
+      "yt-dlp ytsearch metadata",
+      "yt-dlp info-json description URL extraction"
+    ],
+    "queries": [
+      "ホロライブ 切り抜き 100万再生",
+      "にじさんじ 切り抜き 100万再生",
+      "VTuber 切り抜き 100万再生"
+    ],
+    "notes": [
+      "動画ファイルはダウンロードしていない。",
+      "STTは未実行。",
+      "再生数は調査時点でyt-dlpが取得した値。",
+      "yt-dlpはYouTube challenge警告を出したが、候補メタデータと説明欄URLは取得できた。"
+    ]
+  },
+  "recommendedFirstFixtureCandidate": "IMQYaT_RWRA",
+  "candidates": [
+    {
+      "id": "IMQYaT_RWRA",
+      "priority": 1,
+      "clipUrl": "https://www.youtube.com/watch?v=IMQYaT_RWRA",
+      "title": "『笑い声がトルコ行進曲』の女",
+      "channel": "月ノ美兎切り抜きch",
+      "publishedAt": "2022-10-08",
+      "durationSec": 19,
+      "viewCount": 5305609,
+      "sourceUrlsFromDescription": [
+        "https://www.youtube.com/watch?v=8uuQldLptRE",
+        "https://www.youtube.com/watch?v=LBBRk8blLV0",
+        "https://youtu.be/Rfsj5uHy_Bs"
+      ],
+      "downloadedFiles": {
+        "video": "evals/clip_composition/research/downloads/IMQYaT_RWRA/IMQYaT_RWRA.mp4",
+        "audioFallback": "evals/clip_composition/research/downloads/IMQYaT_RWRA/IMQYaT_RWRA.m4a",
+        "metadata": "evals/clip_composition/research/downloads/IMQYaT_RWRA/IMQYaT_RWRA.info.json",
+        "thumbnail": "evals/clip_composition/research/downloads/IMQYaT_RWRA/IMQYaT_RWRA.webp"
+      },
+      "downloadedVideoProbe": {
+        "container": "mp4",
+        "durationSec": 18.622404,
+        "sizeBytes": 1171003,
+        "videoCodec": "h264",
+        "audioCodec": "aac",
+        "width": 640,
+        "height": 360
+      },
+      "whyCandidate": "短尺で再生数が非常に高く、STT後に期待区間を作りやすい。説明欄に元動画候補URLが複数ある。",
+      "sttNextStep": "切り抜き動画と説明欄の元動画候補をSTTし、19秒の発話がどの元動画区間に対応するか照合する。"
+    },
+    {
+      "id": "UpRyakf5j80",
+      "priority": 2,
+      "clipUrl": "https://www.youtube.com/watch?v=UpRyakf5j80",
+      "title": "現役Vtuberで登録者数が世界2位になったことについて正直な感想を述べるマリン船長【ホロライブ切り抜き】",
+      "channel": "ホロライブ切り抜き【Marine Times】",
+      "publishedAt": "2022-10-01",
+      "durationSec": 43,
+      "viewCount": 1328330,
+      "sourceUrlsFromDescription": [
+        "https://youtu.be/kNX-wQTvsws"
+      ],
+      "whyCandidate": "短尺で100万再生超え。説明欄に元動画URLが1件あり、STT照合の入口が明確。",
+      "sttNextStep": "切り抜き動画と元動画をSTTし、43秒の発話列が元動画内のどこに出るか確認する。"
+    },
+    {
+      "id": "r_ztjHaHmcg",
+      "priority": 3,
+      "clipUrl": "https://www.youtube.com/watch?v=r_ztjHaHmcg",
+      "title": "【雑談】”同接100人いたら食べていけるの？” リスナーの質問に答える渋ハル【渋谷ハル/切り抜き】",
+      "channel": "ヨシダmp4",
+      "publishedAt": "2022-05-30",
+      "durationSec": 125,
+      "viewCount": 1382624,
+      "sourceUrlsFromDescription": [
+        "https://youtu.be/-DwSCDMCWDQ"
+      ],
+      "whyCandidate": "2分程度で扱いやすく、100万再生超え。質問への回答型で、切り抜きとして単独意味が通る可能性が高い。",
+      "sttNextStep": "元動画STT後、質問開始から回答の結論までを期待区間として切り出せるか確認する。"
+    },
+    {
+      "id": "G50fk92iQts",
+      "priority": 4,
+      "clipUrl": "https://www.youtube.com/watch?v=G50fk92iQts",
+      "title": "イブラヒムVSリスナーの爆笑スパチャ芸 Part3",
+      "channel": "用語集",
+      "publishedAt": "2020-05-17",
+      "durationSec": 616,
+      "viewCount": 3045572,
+      "sourceUrlsFromDescription": [
+        "https://youtu.be/XAdy-s23t_E",
+        "https://youtu.be/XcYrfT3kiJ4",
+        "https://youtu.be/aPcVnZ0WKHQ",
+        "https://youtu.be/54D_4SZazMg",
+        "https://youtu.be/YQZKfFDvb-o",
+        "https://youtu.be/5JtOby5RxqI"
+      ],
+      "whyCandidate": "300万再生超えで強いが、複数元動画のまとめであり、区間照合は短尺候補より難しい。",
+      "sttNextStep": "まず切り抜き側をSTTして話題単位へ分割し、どの元動画URLに対応するかを後から確認する。"
+    },
+    {
+      "id": "NXiltvIO99w",
+      "priority": 5,
+      "clipUrl": "https://www.youtube.com/watch?v=NXiltvIO99w",
+      "title": "葛葉だけ配信中だと思ってる中ヤバい言動を連発するドッキリ【本間ノ葛也】",
+      "channel": "月ノ美兎",
+      "publishedAt": "2023-01-21",
+      "durationSec": 250,
+      "viewCount": 3505896,
+      "sourceUrlsFromDescription": [
+        "https://www.youtube.com/watch?v=NMgYGxF5fC0"
+      ],
+      "whyCandidate": "350万再生超えで強い。公式側動画の可能性があり、切り抜き評価というより人気短編の構成参考に向く。",
+      "sttNextStep": "切り抜き評価fixtureに使う前に、元動画との関係と編集済み度合いを確認する。"
+    },
+    {
+      "id": "moXVHhE7lI0",
+      "priority": 6,
+      "clipUrl": "https://www.youtube.com/watch?v=moXVHhE7lI0",
+      "title": "【まとめ】笑ってはいけないお嬢のダジャレ集【百鬼あやめ/ホロライブ/切り抜き】",
+      "channel": "あやめお嬢切り抜き組",
+      "publishedAt": "2022-01-26",
+      "durationSec": 567,
+      "viewCount": 1099619,
+      "sourceUrlsFromDescription": [
+        "https://youtu.be/FQabDyuC_wQ",
+        "https://youtu.be/VfoVMLUYiIo",
+        "https://youtu.be/7K1WZ5Sfgw0",
+        "https://youtu.be/ETrZjykDILU",
+        "https://youtu.be/pYl9ftYGYR8",
+        "https://youtu.be/WCTnR6oS6oI",
+        "https://youtu.be/DYijjS3Twag",
+        "https://youtu.be/vmEb0UtwU5s",
+        "https://youtu.be/QAKS6rSbZT0",
+        "https://youtu.be/dyngXZ_EkEM"
+      ],
+      "whyCandidate": "100万再生超え。ただし複数元動画まとめなので、最初のfixtureとしては照合コストが高い。",
+      "sttNextStep": "まとめ全体ではなく、1つのダジャレ場面だけを抽出して元動画対応を確認する。"
+    },
+    {
+      "id": "4Rcotk_nn04",
+      "priority": 7,
+      "clipUrl": "https://www.youtube.com/watch?v=4Rcotk_nn04",
+      "title": "【特別編】歴代にじさんじ爆笑シーンまとめ【2018年〜2020年】",
+      "channel": "ゆずポン酢",
+      "publishedAt": "2020-12-25",
+      "durationSec": 1587,
+      "viewCount": 5353717,
+      "sourceUrlsFromDescription": [
+        "https://youtu.be/s2h8hByAsLo",
+        "https://youtu.be/QMWeekxn9Hc",
+        "https://youtu.be/a8F-dsJNUCw",
+        "https://youtu.be/PVR_J5i5GeY",
+        "https://youtu.be/D7BX7MCBVm0",
+        "https://youtu.be/fxRFqBBh89E",
+        "https://youtu.be/ByWE3epOKY8",
+        "https://youtu.be/wp57NbnIU_g",
+        "https://youtu.be/lGavtnb-dU4",
+        "https://youtu.be/66Sj7l3sLcM"
+      ],
+      "whyCandidate": "500万再生超えで非常に強いが、長尺総集編のため初期fixtureには重い。",
+      "sttNextStep": "人気構成の参考として残し、評価fixture化は短尺候補で流れを作った後に検討する。"
+    }
+  ]
+}

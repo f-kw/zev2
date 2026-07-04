@@ -1,0 +1,99 @@
+{
+  "runAt": "2026-07-04T14:48:25+09:00",
+  "draftId": "draft_w4Lp9IJC6pQl3FsRfFL9t",
+  "fixtureId": "draft_w4Lp9IJC6pQl3FsRfFL9t",
+  "promptVersion": "clip_composition_prompt_v001",
+  "model": "rule-based-build_clip_composition",
+  "params": {
+    "temperature": 0,
+    "llmCall": false,
+    "selection": "固定済みテーマIDに対応する発話まとまりから最終区間を作る"
+  },
+  "selectedCuts": [
+    {
+      "sourceStartMs": 1714337,
+      "sourceEndMs": 1756437,
+      "reason": "選ばれたテーマ「3D生配信中の極秘サイン「指ハート」」について、関連する発話まとまりを2個の編集元場面としてつないだ。 「トイレに行きたい時はカメラに指ハートをする」というルール説明から、ペコラが下手なペイントで指ハートを描くおちゃめなシーンを挟み、「実は大半の人が本番中トイレに行っていた」というオチに繋げます。"
+    }
+  ],
+  "expectedCuts": [
+    {
+      "sourceStartMs": 1714337,
+      "sourceEndMs": 1756437,
+      "reason": "初期評価用の期待区間。過去実行で選ばれていた編集元場面全体を基準として固定している。人間による精査で更新する前提。"
+    }
+  ],
+  "diff": {
+    "startDeltaMs": 0,
+    "endDeltaMs": 0,
+    "overlapSummary": "期待区間と完全に一致しています"
+  },
+  "runs": [
+    {
+      "runIndex": 1,
+      "selectedCuts": [
+        {
+          "sourceStartMs": 1714337,
+          "sourceEndMs": 1756437,
+          "reason": "選ばれたテーマ「3D生配信中の極秘サイン「指ハート」」について、関連する発話まとまりを2個の編集元場面としてつないだ。 「トイレに行きたい時はカメラに指ハートをする」というルール説明から、ペコラが下手なペイントで指ハートを描くおちゃめなシーンを挟み、「実は大半の人が本番中トイレに行っていた」というオチに繋げます。"
+        }
+      ],
+      "diff": {
+        "startDeltaMs": 0,
+        "endDeltaMs": 0,
+        "overlapSummary": "期待区間と完全に一致しています"
+      }
+    },
+    {
+      "runIndex": 2,
+      "selectedCuts": [
+        {
+          "sourceStartMs": 1714337,
+          "sourceEndMs": 1756437,
+          "reason": "選ばれたテーマ「3D生配信中の極秘サイン「指ハート」」について、関連する発話まとまりを2個の編集元場面としてつないだ。 「トイレに行きたい時はカメラに指ハートをする」というルール説明から、ペコラが下手なペイントで指ハートを描くおちゃめなシーンを挟み、「実は大半の人が本番中トイレに行っていた」というオチに繋げます。"
+        }
+      ],
+      "diff": {
+        "startDeltaMs": 0,
+        "endDeltaMs": 0,
+        "overlapSummary": "期待区間と完全に一致しています"
+      }
+    },
+    {
+      "runIndex": 3,
+      "selectedCuts": [
+        {
+          "sourceStartMs": 1714337,
+          "sourceEndMs": 1756437,
+          "reason": "選ばれたテーマ「3D生配信中の極秘サイン「指ハート」」について、関連する発話まとまりを2個の編集元場面としてつないだ。 「トイレに行きたい時はカメラに指ハートをする」というルール説明から、ペコラが下手なペイントで指ハートを描くおちゃめなシーンを挟み、「実は大半の人が本番中トイレに行っていた」というオチに繋げます。"
+        }
+      ],
+      "diff": {
+        "startDeltaMs": 0,
+        "endDeltaMs": 0,
+        "overlapSummary": "期待区間と完全に一致しています"
+      }
+    }
+  ],
+  "stability": {
+    "allRunsSelectedSameCuts": true,
+    "startJitterMs": 0,
+    "endJitterMs": 0,
+    "reasonVariantCount": 1,
+    "reasonVariationSummary": "判断理由は全実行で同じです"
+  },
+  "themeCoverage": {
+    "selectedThemeId": "theme_2",
+    "candidateStartMs": 1714337,
+    "candidateEndMs": 1756437,
+    "coverageSummary": "期待区間は選択済みテーマの候補範囲に入り、AIが選んだ区間も一致しています",
+    "themeSidePossibility": "theme側で正解区間が候補に入っていない可能性は低い",
+    "compositionSidePossibility": "composition側の候補選択差分はありません"
+  },
+  "sourceFiles": {
+    "fixture": "fixtures/draft_w4Lp9IJC6pQl3FsRfFL9t",
+    "transcript": "fixtures/draft_w4Lp9IJC6pQl3FsRfFL9t/transcript.json",
+    "themes": "fixtures/draft_w4Lp9IJC6pQl3FsRfFL9t/themes.json",
+    "expected": "expected/draft_w4Lp9IJC6pQl3FsRfFL9t.json"
+  }
+}

@@ -32,7 +32,7 @@ function selectedThemeIdFromState(state: Zev2State, requestDraftId: string, them
   return action.selectedOptionId;
 }
 
-function buildClipComposition(
+export function buildClipComposition(
   themes: ThemeArtifact,
   transcript: TranscriptArtifact,
   selectedThemeId: string,

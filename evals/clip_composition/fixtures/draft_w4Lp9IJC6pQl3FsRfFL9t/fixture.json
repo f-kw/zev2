@@ -1,0 +1,18 @@
+{
+  "fixtureId": "draft_w4Lp9IJC6pQl3FsRfFL9t",
+  "draftId": "draft_w4Lp9IJC6pQl3FsRfFL9t",
+  "description": "過去の実行で生成された文字起こし、テーマ候補、編集元場面を評価用に固定したfixture。",
+  "copiedFrom": "runtime/artifacts/draft_w4Lp9IJC6pQl3FsRfFL9t",
+  "copiedAt": "2026-07-04T00:00:00+09:00",
+  "sourceUri": "https://www.youtube.com/live/_tOGno89h7s?si=AEjaQJmk1tr-B8WH",
+  "transcriptPath": "transcript.json",
+  "themesPath": "themes.json",
+  "baselineCompositionPath": "clip-composition.baseline.json",
+  "themeOptionsResponsePath": "gemini-theme-options-response.json",
+  "selectedThemeId": "theme_2",
+  "notes": [
+    "評価実行時はruntime/artifactsを読まず、このfixture配下のファイルだけを読む。",
+    "themes.jsonは過去実行のGemini応答から作られた固定入力として扱う。",
+    "現在のrunner/src/steps/composition.tsはLLMを呼ばず、選ばれたテーマの関連発話と文字起こし上の発話まとまりから編集元場面を作る。"
+  ]
+}
