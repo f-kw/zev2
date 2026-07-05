@@ -243,6 +243,15 @@ Web版Geminiで同じプロンプトを実行し、返ってきた `selectedCuts
 - 結果: Geminiは候補窓全体を選び、音声確認済み期待区間に対して開始位置が `-1313ms`、終了位置が `+9142ms` ずれました。
 - 暫定判定: `IMQYaT_RWRA_context_v001` では、期待区間は固定テーマの候補範囲に入っているため、theme側よりcomposition側の最終区間絞り込みの問題として扱います。
 
+compositionプロンプトv002で、候補窓から発話の芯を選ぶ指示を強めてWeb版Geminiで採点した結果:
+
+- プロンプト本文: `reports/IMQYaT_RWRA_context_v001/clip_composition_prompt_v002/20260705-131730/prompt.md`
+- Gemini出力JSON: `outputs/IMQYaT_RWRA_context_v001/clip_composition_prompt_v002/20260705-131730/gemini-web-flash-output.json`
+- 採点結果JSON: `outputs/IMQYaT_RWRA_context_v001/clip_composition_prompt_v002/20260705-132423/result.json`
+- 採点サマリー: `reports/IMQYaT_RWRA_context_v001/clip_composition_prompt_v002/20260705-132423/summary.md`
+- 結果: Geminiは冒頭の短い断片を外して `1997803ms - 2015672ms` を選びました。開始位置は期待区間に対して `-560ms` まで改善しましたが、終了位置は笑い声まで含めたため `+9142ms` のままです。
+- 暫定判定: 開始位置の絞り込みは改善。終了位置は、音声比較で確認した発話の芯だけを期待する評価に対して、Geminiが「笑い声まで含めると切り抜きとして成立する」と判断している差分です。次のプロンプトでは、実切り抜き全体の対応区間と、発話の芯だけを測るcomposition評価を明示的に分ける必要があります。
+
 同じGemini出力を、実際の切り抜き動画全体の対応区間fixtureで採点した結果:
 
 - プロンプト入力: `outputs/IMQYaT_RWRA_clip_audio_v001/clip_composition_prompt_v001/20260705-130216/prompt-input.json`
