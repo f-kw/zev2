@@ -93,3 +93,11 @@ v008は `IMQYaT_RWRA_context_v001` では期待区間と完全一致した。`Up
 - STTサーバー疎通: `http://192.168.1.8:8000/openapi.json` は接続拒否。文字起こし実行はしていない。
 
 `IMQYaT_RWRA_context_v001` は期待開始が発話1の開始、期待終了が発話32の終了と一致する。`UpRyakf5j80_clip_audio_v001` は期待開始と期待終了がどちらも発話途中にある。特に期待終了は発話20開始から `1718ms` 後、発話20終了の `1992ms` 前にある。したがって、v009でさらにプロンプトだけを調整する前に、ローカルSTTまたは音声境界で発話途中の境界を入力に持たせる必要がある。
+
+## result.json 横断比較
+
+- 比較スクリプト: `evals/clip_composition/compare_prompt_results.ts`
+- 比較結果JSON: `evals/clip_composition/outputs/prompt-result-comparison-20260705-v006-v008.json`
+- 比較レポート: `evals/clip_composition/reports/prompt-result-comparison-20260705-v006-v008.md`
+
+指定した `result.json` だけを読む形にした。これにより、同じprompt版数の複数runが残っていても、どのrunを比較したかが固定される。自動の合成スコアは作らず、開始差分、終了差分、重なりの説明をそのまま並べる。
