@@ -298,6 +298,16 @@ node evals/clip_composition/inspect_boundary_stt_readiness.ts \
 
 このコマンドもSTTを実行しません。予定された単語時刻ファイルと発話ファイルがあるかを確認し、単語時刻が境界点を覆っている場合は該当単語と最寄り単語境界をレポートします。
 
+compositionプロンプトへ渡した入力に、採点用の正解理由や検証メタ情報が混ざっていないか確認する場合:
+
+```bash
+node evals/clip_composition/inspect_prompt_payload_leakage.ts \
+  --payloads evals/clip_composition/outputs/IMQYaT_RWRA_context_v001/clip_composition_prompt_v008/20260705-203250/prompt-input.json,evals/clip_composition/outputs/UpRyakf5j80_clip_audio_v001/clip_composition_prompt_v008/20260705-203250/prompt-input.json \
+  --outputId 20260705-v008
+```
+
+このコマンドはSTTもLLMも実行しません。モデルへ渡す入力だけを読み、正解理由、照合確認メモ、正解側の検証メタ情報のキーが混ざっていないか確認します。期待時刻と同じ数値が文字起こし区間の境界として出る場合は、入力文字起こし由来の自然な一致として分けて報告します。
+
 生成済み採点結果:
 
 - `outputs/IMQYaT_RWRA_context_v001/clip_composition_prompt_v001/20260705-125215/result.json`

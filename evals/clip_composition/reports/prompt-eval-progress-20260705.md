@@ -113,3 +113,24 @@ v008は `IMQYaT_RWRA_context_v001` では期待区間と完全一致した。`Up
 `UpRyakf5j80_clip_audio_v001` は、短い相づちの終端だけでなく開始側も発話途中にある。STT復旧後は、切り抜き音声 `UpRyakf5j80.m4a` と元動画55秒スライス `kNX-wQTvsws_3h09m17s_55s_audio.m4a` だけを最小STT対象として、単語境界または音声境界を得る。期待境界そのものはモデル入力へ直接渡さない。
 
 現時点のreadinessは、切り抜き側と元動画側のどちらも `missing_output`。STTは実行していない。
+
+## 2026-07-05 21時台の追加実行
+
+- 実行したSTT対象: `UpRyakf5j80` の切り抜き音声
+- 接続先: `http://192.168.1.8:8000/transcribe`
+- 結果: ローカルSTTサーバへ接続できず、STT結果は保存されなかった。
+- HTTP接続確認: `/transcribe` と `/` のどちらも5秒でタイムアウト。
+- 再確認readiness JSON: `evals/clip_composition/outputs/boundary-stt-readiness-20260705-v003.json`
+- 再確認readinessレポート: `evals/clip_composition/reports/boundary-stt-readiness-20260705-v003.md`
+
+本体側のSTT実装も `/transcribe` へ音声ファイルと日本語指定を送る形だったため、評価スクリプト側のエンドポイント違いではない。次に進めるには、同じMacから `http://192.168.1.8:8000/` へ到達できる状態にする必要がある。
+
+## prompt入力の漏えい検査
+
+- 検査スクリプト: `evals/clip_composition/inspect_prompt_payload_leakage.ts`
+- 結果JSON: `evals/clip_composition/outputs/prompt-payload-leakage-20260705-v008.json`
+- レポート: `evals/clip_composition/reports/prompt-payload-leakage-20260705-v008.md`
+- 対象: v008の `IMQYaT_RWRA_context_v001` と `UpRyakf5j80_clip_audio_v001`
+- 結果: 2件ともpass。
+
+正解理由、照合確認メモ、正解側の検証メタ情報のキーは、compositionプロンプトへ渡す入力に混ざっていなかった。`IMQYaT_RWRA_context_v001` では期待時刻と同じ数値が文字起こし区間の開始・終了として出ているが、これは入力文字起こし由来の区間境界であり、採点用expectedの混入ではない。

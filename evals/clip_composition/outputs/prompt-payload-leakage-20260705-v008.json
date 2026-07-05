@@ -1,0 +1,54 @@
+{
+  "runAt": "2026-07-05T12:03:13.664Z",
+  "kind": "clip_composition_prompt_payload_leakage",
+  "payloadCount": 2,
+  "results": [
+    {
+      "payloadPath": "evals/clip_composition/outputs/IMQYaT_RWRA_context_v001/clip_composition_prompt_v008/20260705-203250/prompt-input.json",
+      "fixtureId": "IMQYaT_RWRA_context_v001",
+      "draftId": "IMQYaT_RWRA_context_v001",
+      "promptVersion": "clip_composition_prompt_v008",
+      "expectedPath": "evals/clip_composition/expected/IMQYaT_RWRA_context_v001.json",
+      "status": "pass",
+      "forbiddenKeyHits": [],
+      "expectedTextHits": [],
+      "numericBoundaryHits": [
+        {
+          "cutIndex": 0,
+          "side": "start",
+          "valueMs": 1997050,
+          "hitPath": "modelInput.transcript.segments[0].sourceStartMs",
+          "hitKind": "number_value",
+          "classification": "transcript_boundary"
+        },
+        {
+          "cutIndex": 0,
+          "side": "end",
+          "valueMs": 2015672,
+          "hitPath": "modelInput.transcript.segments[31].sourceEndMs",
+          "hitKind": "number_value",
+          "classification": "transcript_boundary"
+        }
+      ],
+      "notes": [
+        "正解データの本文は評価だけに使い、modelInputだけを検査対象にした。",
+        "期待時刻と同じ数値が文字起こし区間の境界として出る場合は、入力文字起こし由来の自然な一致として分けて扱う。"
+      ]
+    },
+    {
+      "payloadPath": "evals/clip_composition/outputs/UpRyakf5j80_clip_audio_v001/clip_composition_prompt_v008/20260705-203250/prompt-input.json",
+      "fixtureId": "UpRyakf5j80_clip_audio_v001",
+      "draftId": "UpRyakf5j80_clip_audio_v001",
+      "promptVersion": "clip_composition_prompt_v008",
+      "expectedPath": "evals/clip_composition/expected/UpRyakf5j80_clip_audio_v001.json",
+      "status": "pass",
+      "forbiddenKeyHits": [],
+      "expectedTextHits": [],
+      "numericBoundaryHits": [],
+      "notes": [
+        "正解データの本文は評価だけに使い、modelInputだけを検査対象にした。",
+        "期待時刻と同じ数値が文字起こし区間の境界として出る場合は、入力文字起こし由来の自然な一致として分けて扱う。"
+      ]
+    }
+  ]
+}
