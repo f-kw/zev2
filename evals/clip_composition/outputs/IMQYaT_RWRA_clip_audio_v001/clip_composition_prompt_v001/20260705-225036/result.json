@@ -1,0 +1,138 @@
+{
+  "runAt": "2026-07-05T22:50:36+09:00",
+  "draftId": "IMQYaT_RWRA_clip_audio_v001",
+  "fixtureId": "IMQYaT_RWRA_clip_audio_v001",
+  "promptVersion": "clip_composition_prompt_v001",
+  "model": "rule-based-result-as-external",
+  "params": {
+    "temperature": 0,
+    "source": "run_eval_verification"
+  },
+  "evaluationMode": "external_prompt_output",
+  "inputFile": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/IMQYaT_RWRA_clip_audio_v001/clip_composition_prompt_v001/20260705-225028/result.json",
+  "selectedCuts": [
+    {
+      "sourceStartMs": 1997050,
+      "sourceEndMs": 2015672,
+      "reason": "選ばれたテーマ「笑い声がトルコ行進曲に聞こえる女騎士いじり」について、関連する発話まとまりを1個の編集元場面としてつないだ。 候補窓の中から、女騎士のように見えた相手への反応と投げている描写が単独で伝わる範囲だけを使う。"
+    }
+  ],
+  "expectedCuts": [
+    {
+      "sourceStartMs": 1997050,
+      "sourceEndMs": 2015672,
+      "reason": "切り抜き動画全体18.622秒を、切り抜き内の発話開始位置と元配信候補のSTT一致範囲を音声アンカーとして元配信側へ対応させた区間のため。",
+      "sourceVideoId": "8uuQldLptRE",
+      "sourceUrl": "https://www.youtube.com/watch?v=8uuQldLptRE",
+      "sourceSttId": "IMQYaT_RWRA_8uuQldLptRE",
+      "clipId": "IMQYaT_RWRA",
+      "clipUrl": "https://www.youtube.com/watch?v=IMQYaT_RWRA",
+      "verificationStatus": "audio_anchor_confirmed_visual_confirmed",
+      "usableForClipLocationEval": true,
+      "usableForCompositionPromptEval": false,
+      "audioVerification": {
+        "status": "speech_anchor_confirmed",
+        "method": "切り抜き発話部分と元配信候補区間の音量包絡比較で元配信候補を確認し、切り抜き全体の長さを発話開始位置へ合わせて元配信側の切り抜き全体対応区間を置いた。",
+        "reportPath": "evals/clip_composition/reports/audio-compare-IMQYaT_RWRA_v001.md",
+        "resultPath": "evals/clip_composition/outputs/audio-compare-IMQYaT_RWRA_v001.json",
+        "clipDurationMs": 18622,
+        "clipSpeechStartMs": 1313,
+        "clipSpeechEndMs": 5338,
+        "sourceSpeechAnchorStartMs": 1998363,
+        "sourceSpeechAnchorEndMs": 2006530,
+        "speechEnvelopeCorrelation": 0.883568,
+        "fullTimelineCandidateStartMs": 1997050,
+        "fullTimelineCandidateEndMs": 2015672,
+        "fullTimelineEnvelopeCorrelation": -0.183216,
+        "note": "切り抜き全体にはBGMやSEが重なるため、全体波形の相関は低い。元配信候補の確認は発話部分の相関を優先する。"
+      },
+      "visualVerification": {
+        "status": "confirmed",
+        "checkedBy": "gemini-web-flash",
+        "checkedAt": "2026-07-05T13:13:57+09:00",
+        "note": "Web版Gemini Flashで前半Aの切り抜き動画全体と後半Bの元配信候補33:17.050-33:35.672を比較し、発話、笑い声、場面、編集差分を確認したうえで元ネタ区間として妥当と判定。",
+        "reportPath": "evals/clip_composition/outputs/IMQYaT_RWRA_clip_audio_v001/visual_verification/20260705-131357-gemini-web-flash.json"
+      }
+    }
+  ],
+  "diff": {
+    "startDeltaMs": 0,
+    "endDeltaMs": 0,
+    "overlapSummary": "期待区間と完全に一致しています"
+  },
+  "cutDiffs": [
+    {
+      "cutIndex": 0,
+      "status": "compared",
+      "selectedCut": {
+        "sourceStartMs": 1997050,
+        "sourceEndMs": 2015672,
+        "reason": "選ばれたテーマ「笑い声がトルコ行進曲に聞こえる女騎士いじり」について、関連する発話まとまりを1個の編集元場面としてつないだ。 候補窓の中から、女騎士のように見えた相手への反応と投げている描写が単独で伝わる範囲だけを使う。"
+      },
+      "expectedCut": {
+        "sourceStartMs": 1997050,
+        "sourceEndMs": 2015672,
+        "reason": "切り抜き動画全体18.622秒を、切り抜き内の発話開始位置と元配信候補のSTT一致範囲を音声アンカーとして元配信側へ対応させた区間のため。",
+        "sourceVideoId": "8uuQldLptRE",
+        "sourceUrl": "https://www.youtube.com/watch?v=8uuQldLptRE",
+        "sourceSttId": "IMQYaT_RWRA_8uuQldLptRE",
+        "clipId": "IMQYaT_RWRA",
+        "clipUrl": "https://www.youtube.com/watch?v=IMQYaT_RWRA",
+        "verificationStatus": "audio_anchor_confirmed_visual_confirmed",
+        "usableForClipLocationEval": true,
+        "usableForCompositionPromptEval": false,
+        "audioVerification": {
+          "status": "speech_anchor_confirmed",
+          "method": "切り抜き発話部分と元配信候補区間の音量包絡比較で元配信候補を確認し、切り抜き全体の長さを発話開始位置へ合わせて元配信側の切り抜き全体対応区間を置いた。",
+          "reportPath": "evals/clip_composition/reports/audio-compare-IMQYaT_RWRA_v001.md",
+          "resultPath": "evals/clip_composition/outputs/audio-compare-IMQYaT_RWRA_v001.json",
+          "clipDurationMs": 18622,
+          "clipSpeechStartMs": 1313,
+          "clipSpeechEndMs": 5338,
+          "sourceSpeechAnchorStartMs": 1998363,
+          "sourceSpeechAnchorEndMs": 2006530,
+          "speechEnvelopeCorrelation": 0.883568,
+          "fullTimelineCandidateStartMs": 1997050,
+          "fullTimelineCandidateEndMs": 2015672,
+          "fullTimelineEnvelopeCorrelation": -0.183216,
+          "note": "切り抜き全体にはBGMやSEが重なるため、全体波形の相関は低い。元配信候補の確認は発話部分の相関を優先する。"
+        },
+        "visualVerification": {
+          "status": "confirmed",
+          "checkedBy": "gemini-web-flash",
+          "checkedAt": "2026-07-05T13:13:57+09:00",
+          "note": "Web版Gemini Flashで前半Aの切り抜き動画全体と後半Bの元配信候補33:17.050-33:35.672を比較し、発話、笑い声、場面、編集差分を確認したうえで元ネタ区間として妥当と判定。",
+          "reportPath": "evals/clip_composition/outputs/IMQYaT_RWRA_clip_audio_v001/visual_verification/20260705-131357-gemini-web-flash.json"
+        }
+      },
+      "startDeltaMs": 0,
+      "endDeltaMs": 0,
+      "overlapMs": 18622,
+      "overlapSummary": "期待区間と完全に一致しています"
+    }
+  ],
+  "diffSummary": {
+    "expectedCutCount": 1,
+    "selectedCutCount": 1,
+    "comparedCutCount": 1,
+    "exactMatchCount": 1,
+    "overlappingCutCount": 1,
+    "missingExpectedCutCount": 0,
+    "extraSelectedCutCount": 0,
+    "allExpectedCutsMatchedExactlyByIndex": true,
+    "allExpectedCutsHaveOverlapByIndex": true,
+    "summary": "期待区間1件に対して選択区間1件。 完全一致1件、重なりあり1件。 未選択の期待区間0件、余分な選択区間0件。"
+  },
+  "themeCoverage": {
+    "selectedThemeId": "theme_audio_context_1",
+    "candidateStartMs": 1997050,
+    "candidateEndMs": 2015672,
+    "coverageSummary": "期待区間はすべて選択済みテーマの候補範囲に入り、LLMが選んだ区間も同じ順番で一致しています",
+    "themeSidePossibility": "theme側で正解区間が候補に入っていない可能性は低い",
+    "compositionSidePossibility": "composition側の候補選択差分はありません"
+  },
+  "sourceFiles": {
+    "fixture": "fixtures/IMQYaT_RWRA_clip_audio_v001",
+    "expected": "expected/IMQYaT_RWRA_clip_audio_v001.json"
+  }
+}

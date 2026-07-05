@@ -51,10 +51,36 @@ type CutDiff = {
   overlapSummary: string;
 };
 
+type CutPairDiff = {
+  cutIndex: number;
+  status: 'compared' | 'missing_selected_cut' | 'extra_selected_cut';
+  selectedCut?: SelectedCut;
+  expectedCut?: ExpectedCut;
+  startDeltaMs?: number;
+  endDeltaMs?: number;
+  overlapMs: number;
+  overlapSummary: string;
+};
+
+type DiffSummary = {
+  expectedCutCount: number;
+  selectedCutCount: number;
+  comparedCutCount: number;
+  exactMatchCount: number;
+  overlappingCutCount: number;
+  missingExpectedCutCount: number;
+  extraSelectedCutCount: number;
+  allExpectedCutsMatchedExactlyByIndex: boolean;
+  allExpectedCutsHaveOverlapByIndex: boolean;
+  summary: string;
+};
+
 type RunResult = {
   runIndex: number;
   selectedCuts: SelectedCut[];
   diff: CutDiff;
+  cutDiffs: CutPairDiff[];
+  diffSummary: DiffSummary;
 };
 
 type ThemeCoverage = {
@@ -300,6 +326,81 @@ function buildDiff(selectedCut: SelectedCut | undefined, expectedCut: ExpectedCu
   };
 }
 
+function buildCutDiffs(selectedCuts: SelectedCut[], expectedCuts: ExpectedCut[]): CutPairDiff[] {
+  const count = Math.max(selectedCuts.length, expectedCuts.length);
+  const diffs: CutPairDiff[] = [];
+  for (let index = 0; index < count; index += 1) {
+    const selectedCut = selectedCuts[index];
+    const expectedCut = expectedCuts[index];
+    if (selectedCut && expectedCut) {
+      const diff = buildDiff(selectedCut, expectedCut);
+      diffs.push({
+        cutIndex: index,
+        status: 'compared',
+        selectedCut,
+        expectedCut,
+        startDeltaMs: diff.startDeltaMs,
+        endDeltaMs: diff.endDeltaMs,
+        overlapMs: overlapMs(selectedCut, expectedCut),
+        overlapSummary: diff.overlapSummary
+      });
+      continue;
+    }
+
+    if (expectedCut) {
+      diffs.push({
+        cutIndex: index,
+        status: 'missing_selected_cut',
+        expectedCut,
+        overlapMs: 0,
+        overlapSummary: `期待区間${index + 1}に対応する選択区間がありません`
+      });
+      continue;
+    }
+
+    if (selectedCut) {
+      diffs.push({
+        cutIndex: index,
+        status: 'extra_selected_cut',
+        selectedCut,
+        overlapMs: 0,
+        overlapSummary: `選択区間${index + 1}に対応する期待区間がありません`
+      });
+    }
+  }
+  return diffs;
+}
+
+function buildDiffSummary(cutDiffs: CutPairDiff[], selectedCuts: SelectedCut[], expectedCuts: ExpectedCut[]): DiffSummary {
+  const compared = cutDiffs.filter((diff) => diff.status === 'compared');
+  const exactMatchCount = compared.filter((diff) => diff.startDeltaMs === 0 && diff.endDeltaMs === 0).length;
+  const overlappingCutCount = compared.filter((diff) => diff.overlapMs > 0).length;
+  const missingExpectedCutCount = cutDiffs.filter((diff) => diff.status === 'missing_selected_cut').length;
+  const extraSelectedCutCount = cutDiffs.filter((diff) => diff.status === 'extra_selected_cut').length;
+  const allExpectedCutsMatchedExactlyByIndex = expectedCuts.length > 0
+    && selectedCuts.length === expectedCuts.length
+    && exactMatchCount === expectedCuts.length;
+  const allExpectedCutsHaveOverlapByIndex = expectedCuts.length > 0
+    && missingExpectedCutCount === 0
+    && compared.slice(0, expectedCuts.length).every((diff) => diff.overlapMs > 0);
+  return {
+    expectedCutCount: expectedCuts.length,
+    selectedCutCount: selectedCuts.length,
+    comparedCutCount: compared.length,
+    exactMatchCount,
+    overlappingCutCount,
+    missingExpectedCutCount,
+    extraSelectedCutCount,
+    allExpectedCutsMatchedExactlyByIndex,
+    allExpectedCutsHaveOverlapByIndex,
+    summary: [
+      `期待区間${expectedCuts.length}件に対して選択区間${selectedCuts.length}件。`,
+      `完全一致${exactMatchCount}件、重なりあり${overlappingCutCount}件。`,
+      `未選択の期待区間${missingExpectedCutCount}件、余分な選択区間${extraSelectedCutCount}件。`
+    ].join(' ')
+  };
+}
+
 function candidateCoverage(
   transcript: TranscriptArtifact,
   themes: ThemeArtifact,
@@ -326,20 +427,25 @@ function candidateCoverage(
 
   const candidateStartMs = Math.min(...candidateSegments.map((segment) => segment.startMs));
   const candidateEndMs = Math.max(...candidateSegments.map((segment) => segment.endMs));
-  const expected = expectedCuts[0];
-  const selected = selectedCuts[0];
-  const expectedInsideTheme = expected.sourceStartMs >= candidateStartMs && expected.sourceEndMs <= candidateEndMs;
-  const expectedOverlap = overlapMs(expected, { sourceStartMs: candidateStartMs, sourceEndMs: candidateEndMs, reason: '' });
-  const selectedMatchesExpected = selected
-    ? selected.sourceStartMs === expected.sourceStartMs && selected.sourceEndMs === expected.sourceEndMs
-    : false;
+  const themeRange = { sourceStartMs: candidateStartMs, sourceEndMs: candidateEndMs, reason: '' };
+  const expectedInsideTheme = expectedCuts.every(
+    (expected) => expected.sourceStartMs >= candidateStartMs && expected.sourceEndMs <= candidateEndMs
+  );
+  const expectedOverlap = expectedCuts.some((expected) => overlapMs(expected, themeRange) > 0);
+  const selectedMatchesExpected = selectedCuts.length === expectedCuts.length
+    && expectedCuts.every((expected, index) => {
+      const selected = selectedCuts[index];
+      return selected
+        ? selected.sourceStartMs === expected.sourceStartMs && selected.sourceEndMs === expected.sourceEndMs
+        : false;
+    });
 
   if (expectedInsideTheme && selectedMatchesExpected) {
     return {
       selectedThemeId,
       candidateStartMs,
       candidateEndMs,
-      coverageSummary: '期待区間は選択済みテーマの候補範囲に入り、AIが選んだ区間も一致しています',
+      coverageSummary: '期待区間はすべて選択済みテーマの候補範囲に入り、AIが選んだ区間も同じ順番で一致しています',
       themeSidePossibility: 'theme側で正解区間が候補に入っていない可能性は低い',
       compositionSidePossibility: 'composition側の候補選択差分はありません'
     };
@@ -350,18 +456,18 @@ function candidateCoverage(
       selectedThemeId,
       candidateStartMs,
       candidateEndMs,
-      coverageSummary: '期待区間は選択済みテーマの候補範囲に入っています',
+      coverageSummary: '期待区間はすべて選択済みテーマの候補範囲に入っています',
       themeSidePossibility: 'theme側で正解区間が候補に入っていない可能性は低い',
       compositionSidePossibility: 'composition側で候補範囲から最終区間を選ぶ処理に差分がある可能性があります'
     };
   }
 
-  if (expectedOverlap > 0) {
+  if (expectedOverlap) {
     return {
       selectedThemeId,
       candidateStartMs,
       candidateEndMs,
-      coverageSummary: '期待区間は選択済みテーマの候補範囲と一部だけ重なっています',
+      coverageSummary: '期待区間の少なくとも1件は選択済みテーマの候補範囲と一部だけ重なっています',
       themeSidePossibility: 'theme側の候補範囲が不足している可能性があります',
       compositionSidePossibility: '候補範囲が不足しているため、composition側だけの失敗とは切り分けきれません'
     };
@@ -429,14 +535,36 @@ function buildSummaryMarkdown(input: {
   selectedCuts: SelectedCut[];
   expectedCuts: ExpectedCut[];
   diff: CutDiff;
+  cutDiffs: CutPairDiff[];
+  diffSummary: DiffSummary;
   stability: ReturnType<typeof buildStability>;
   themeCoverage: ThemeCoverage;
   resultPath: string;
 }): string {
-  const selected = input.selectedCuts[0];
-  const expected = input.expectedCuts[0];
-  const expectedStatus = expected ? buildExpectedStatusMarkdown(expected) : ['- なし'];
-  const expectedEvidence = expected ? buildExpectedEvidenceMarkdown(expected) : ['- なし'];
+  const selectedLines = input.selectedCuts.length > 0
+    ? input.selectedCuts.map((cut, index) => `- ${index + 1}: ${cut.sourceStartMs}ms - ${cut.sourceEndMs}ms: ${cut.reason}`)
+    : ['- なし'];
+  const expectedLines = input.expectedCuts.length > 0
+    ? input.expectedCuts.map((cut, index) => `- ${index + 1}: ${cut.sourceStartMs}ms - ${cut.sourceEndMs}ms: ${cut.reason}`)
+    : ['- なし'];
+  const expectedStatus = input.expectedCuts.flatMap((expected, index) => [
+    `### 期待区間 ${index + 1}`,
+    '',
+    ...buildExpectedStatusMarkdown(expected)
+  ]);
+  const expectedEvidence = input.expectedCuts.flatMap((expected, index) => [
+    `### 期待区間 ${index + 1}`,
+    '',
+    ...buildExpectedEvidenceMarkdown(expected)
+  ]);
+  const diffLines = input.cutDiffs.length > 0
+    ? input.cutDiffs.map((diff) => [
+      `- ${diff.cutIndex + 1}: ${diff.overlapSummary}`,
+      diff.startDeltaMs !== undefined ? `開始 ${formatMs(diff.startDeltaMs)}` : '開始 比較不可',
+      diff.endDeltaMs !== undefined ? `終了 ${formatMs(diff.endDeltaMs)}` : '終了 比較不可',
+      `重なり ${diff.overlapMs}ms`
+    ].join(' / '))
+    : ['- なし'];
   return [
     '# clip_composition 評価サマリー',
     '',
@@ -448,15 +576,11 @@ function buildSummaryMarkdown(input: {
     '',
     '## AIが選んだ区間',
     '',
-    selected
-      ? `- ${selected.sourceStartMs}ms - ${selected.sourceEndMs}ms: ${selected.reason}`
-      : '- なし',
+    ...selectedLines,
     '',
     '## 期待区間',
     '',
-    expected
-      ? `- ${expected.sourceStartMs}ms - ${expected.sourceEndMs}ms: ${expected.reason}`
-      : '- なし',
+    ...expectedLines,
     '',
     '## 期待区間の確認状態',
     '',
@@ -467,6 +591,11 @@ function buildSummaryMarkdown(input: {
     `- 開始位置のずれ: ${formatMs(input.diff.startDeltaMs)}`,
     `- 終了位置のずれ: ${formatMs(input.diff.endDeltaMs)}`,
     `- 重なり: ${input.diff.overlapSummary}`,
+    `- 全体: ${input.diffSummary.summary}`,
+    '',
+    '## 区間別差分',
+    '',
+    ...diffLines,
     '',
     '## 揺れ幅',
     '',
@@ -486,6 +615,7 @@ function buildSummaryMarkdown(input: {
     '## 人間が見るべき差分',
     '',
     `- ${input.diff.overlapSummary}`,
+    `- ${input.diffSummary.summary}`,
     '- 音声比較で期待区間として扱える状態です。最終データセットQAでは、開始位置と終了位置の微調整だけ確認します。',
     '',
     '## 期待区間の根拠',
@@ -604,10 +734,13 @@ async function main() {
   for (let runIndex = 1; runIndex <= options.runs; runIndex += 1) {
     const composition = buildClipComposition(themes, transcript, fixture.selectedThemeId);
     const selectedCuts = selectedCutsFromComposition(composition);
+    const cutDiffs = buildCutDiffs(selectedCuts, expectedFile.expectedCuts);
     runResults.push({
       runIndex,
       selectedCuts,
-      diff: buildDiff(selectedCuts[0], expectedFile.expectedCuts[0])
+      diff: buildDiff(selectedCuts[0], expectedFile.expectedCuts[0]),
+      cutDiffs,
+      diffSummary: buildDiffSummary(cutDiffs, selectedCuts, expectedFile.expectedCuts)
     });
   }
 
@@ -641,6 +774,8 @@ async function main() {
     selectedCuts: firstRun.selectedCuts,
     expectedCuts: expectedFile.expectedCuts,
     diff: firstRun.diff,
+    cutDiffs: firstRun.cutDiffs,
+    diffSummary: firstRun.diffSummary,
     runs: runResults,
     stability,
     themeCoverage,
@@ -661,6 +796,8 @@ async function main() {
     selectedCuts: firstRun.selectedCuts,
     expectedCuts: expectedFile.expectedCuts,
     diff: firstRun.diff,
+    cutDiffs: firstRun.cutDiffs,
+    diffSummary: firstRun.diffSummary,
     stability,
     themeCoverage,
     resultPath
@@ -670,6 +807,7 @@ async function main() {
   console.log(`summary: ${summaryPath}`);
   console.log(`runs: ${options.runs}`);
   console.log(`same cuts: ${stability.allRunsSelectedSameCuts ? 'yes' : 'no'}`);
+  console.log(firstRun.diffSummary.summary);
 }
 
 main().catch((error) => {

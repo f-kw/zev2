@@ -274,6 +274,8 @@ pnpm --filter @zev2/agent-runner exec tsx ../evals/clip_composition/score_prompt
 }
 ```
 
+採点結果は、先頭区間の `diff` に加えて、全区間の `cutDiffs` と `diffSummary` も記録します。複数区間expectedの場合は、期待区間と選択区間を同じ順番で比較し、完全一致件数、重なりあり件数、未選択の期待区間数、余分な選択区間数を表示します。ここでも自動の重み付けや合成スコアは作らず、人間が見る差分をそのまま出します。
+
 採点済み `result.json` を横断比較する場合:
 
 ```bash
@@ -283,6 +285,8 @@ node evals/clip_composition/compare_prompt_results.ts \
 ```
 
 この比較は、指定した `result.json` だけを読みます。同じプロンプト版数のrunが複数残っていても、どのrunを比較したかを固定できます。自動の合成スコアは作らず、開始差分、終了差分、重なり説明、theme側とcomposition側の暫定判定を並べます。
+
+比較レポートでは、`cuts` が「選択区間数/期待区間数」、`missing` が期待区間に対応する選択区間がない件数、`extra` が期待区間に対応しない選択区間の件数を表します。
 
 期待区間の境界が発話単位と一致しているか確認する場合:
 

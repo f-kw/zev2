@@ -28,6 +28,25 @@ type ScoreResult = {
     endDeltaMs: number;
     overlapSummary: string;
   };
+  cutDiffs?: Array<{
+    cutIndex: number;
+    status: string;
+    startDeltaMs?: number;
+    endDeltaMs?: number;
+    overlapMs?: number;
+    overlapSummary?: string;
+  }>;
+  diffSummary?: {
+    expectedCutCount?: number;
+    selectedCutCount?: number;
+    exactMatchCount?: number;
+    overlappingCutCount?: number;
+    missingExpectedCutCount?: number;
+    extraSelectedCutCount?: number;
+    allExpectedCutsMatchedExactlyByIndex?: boolean;
+    allExpectedCutsHaveOverlapByIndex?: boolean;
+    summary?: string;
+  };
   themeCoverage?: {
     themeSidePossibility?: string;
     compositionSidePossibility?: string;
@@ -49,6 +68,15 @@ type ComparisonRow = {
   startDeltaMs: number;
   endDeltaMs: number;
   overlapSummary: string;
+  selectedCutCount: number;
+  expectedCutCount: number;
+  exactMatchCount: number;
+  overlappingCutCount: number;
+  missingExpectedCutCount: number;
+  extraSelectedCutCount: number;
+  allExpectedCutsMatchedExactlyByIndex: boolean;
+  allExpectedCutsHaveOverlapByIndex: boolean;
+  diffSummary?: string;
   selectedReason?: string;
   usedSpeechIds?: number[];
   themeSidePossibility?: string;
@@ -153,6 +181,10 @@ function validateScoreResult(value: unknown, resultPath: string): ScoreResult {
       endDeltaMs: numberFrom(diff.endDeltaMs, `${resultPath}.diff.endDeltaMs`),
       overlapSummary: stringFrom(diff.overlapSummary, `${resultPath}.diff.overlapSummary`)
     },
+    ...(Array.isArray(record.cutDiffs) ? { cutDiffs: record.cutDiffs.map((item, index) => validateCutDiff(item, `${resultPath}.cutDiffs[${index}]`)) } : {}),
+    ...(record.diffSummary && typeof record.diffSummary === 'object' && !Array.isArray(record.diffSummary)
+      ? { diffSummary: record.diffSummary as ScoreResult['diffSummary'] }
+      : {}),
     themeCoverage: recordFrom(record.themeCoverage)
   };
 }
@@ -182,6 +214,47 @@ function numberFrom(value: unknown, label: string): number {
   return value;
 }
 
+function optionalNumberFrom(value: unknown): number | undefined {
+  return typeof value === 'number' && Number.isFinite(value) ? value : undefined;
+}
+
+function optionalBooleanFrom(value: unknown): boolean | undefined {
+  return typeof value === 'boolean' ? value : undefined;
+}
+
+function validateCutDiff(value: unknown, label: string): NonNullable<ScoreResult['cutDiffs']>[number] {
+  const record = recordFrom(value);
+  return {
+    cutIndex: numberFrom(record.cutIndex, `${label}.cutIndex`),
+    status: stringFrom(record.status, `${label}.status`),
+    ...(optionalNumberFrom(record.startDeltaMs) !== undefined ? { startDeltaMs: optionalNumberFrom(record.startDeltaMs) } : {}),
+    ...(optionalNumberFrom(record.endDeltaMs) !== undefined ? { endDeltaMs: optionalNumberFrom(record.endDeltaMs) } : {}),
+    ...(optionalNumberFrom(record.overlapMs) !== undefined ? { overlapMs: optionalNumberFrom(record.overlapMs) } : {}),
+    ...(typeof record.overlapSummary === 'string' ? { overlapSummary: record.overlapSummary } : {})
+  };
+}
+
+function computedDiffSummary(result: ScoreResult) {
+  const compared = result.cutDiffs?.filter((diff) => diff.status === 'compared') ?? [];
+  const exactMatchCount = compared.filter((diff) => diff.startDeltaMs === 0 && diff.endDeltaMs === 0).length;
+  const overlappingCutCount = compared.filter((diff) => (diff.overlapMs ?? 0) > 0).length;
+  const missingExpectedCutCount = result.cutDiffs?.filter((diff) => diff.status === 'missing_selected_cut').length ?? 0;
+  const extraSelectedCutCount = result.cutDiffs?.filter((diff) => diff.status === 'extra_selected_cut').length ?? 0;
+  const expectedCutCount = result.expectedCuts.length;
+  const selectedCutCount = result.selectedCuts.length;
+  return {
+    expectedCutCount,
+    selectedCutCount,
+    exactMatchCount,
+    overlappingCutCount,
+    missingExpectedCutCount,
+    extraSelectedCutCount,
+    allExpectedCutsMatchedExactlyByIndex: expectedCutCount > 0 && selectedCutCount === expectedCutCount && exactMatchCount === expectedCutCount,
+    allExpectedCutsHaveOverlapByIndex: expectedCutCount > 0 && missingExpectedCutCount === 0 && overlappingCutCount >= expectedCutCount,
+    summary: `期待区間${expectedCutCount}件に対して選択区間${selectedCutCount}件。完全一致${exactMatchCount}件、重なりあり${overlappingCutCount}件。`
+  };
+}
+
 function buildRow(resultPath: string, result: ScoreResult): ComparisonRow {
   const selected = result.selectedCuts[0];
   const expected = result.expectedCuts[0];
@@ -191,6 +264,8 @@ function buildRow(resultPath: string, result: ScoreResult): ComparisonRow {
   if (!expected) {
     throw new Error(`${resultPath} に期待区間がありません`);
   }
+  const fallback = computedDiffSummary(result);
+  const summary = result.diffSummary ?? fallback;
   return {
     resultPath: path.relative(workspaceRoot(), resultPath),
     runAt: result.runAt,
@@ -205,6 +280,15 @@ function buildRow(resultPath: string, result: ScoreResult): ComparisonRow {
     startDeltaMs: result.diff.startDeltaMs,
     endDeltaMs: result.diff.endDeltaMs,
     overlapSummary: result.diff.overlapSummary,
+    selectedCutCount: typeof summary.selectedCutCount === 'number' ? summary.selectedCutCount : fallback.selectedCutCount,
+    expectedCutCount: typeof summary.expectedCutCount === 'number' ? summary.expectedCutCount : fallback.expectedCutCount,
+    exactMatchCount: typeof summary.exactMatchCount === 'number' ? summary.exactMatchCount : fallback.exactMatchCount,
+    overlappingCutCount: typeof summary.overlappingCutCount === 'number' ? summary.overlappingCutCount : fallback.overlappingCutCount,
+    missingExpectedCutCount: typeof summary.missingExpectedCutCount === 'number' ? summary.missingExpectedCutCount : fallback.missingExpectedCutCount,
+    extraSelectedCutCount: typeof summary.extraSelectedCutCount === 'number' ? summary.extraSelectedCutCount : fallback.extraSelectedCutCount,
+    allExpectedCutsMatchedExactlyByIndex: optionalBooleanFrom(summary.allExpectedCutsMatchedExactlyByIndex) ?? fallback.allExpectedCutsMatchedExactlyByIndex,
+    allExpectedCutsHaveOverlapByIndex: optionalBooleanFrom(summary.allExpectedCutsHaveOverlapByIndex) ?? fallback.allExpectedCutsHaveOverlapByIndex,
+    ...(typeof summary.summary === 'string' ? { diffSummary: summary.summary } : {}),
     ...(selected.reason ? { selectedReason: selected.reason } : {}),
     ...(selected.usedSpeechIds ? { usedSpeechIds: selected.usedSpeechIds } : {}),
     ...(result.themeCoverage?.themeSidePossibility ? { themeSidePossibility: result.themeCoverage.themeSidePossibility } : {}),
@@ -252,16 +336,19 @@ function buildReport(rows: ComparisonRow[], resultPath: string): string {
   for (const [fixtureId, fixtureRows] of [...byFixture.entries()].sort(([left], [right]) => left.localeCompare(right))) {
     lines.push(`## ${fixtureId}`);
     lines.push('');
-    lines.push('| prompt | model | selected | expected | start delta | end delta | overlap |');
-    lines.push('| --- | --- | --- | --- | ---: | ---: | --- |');
+    lines.push('| prompt | model | cuts | exact | overlap | missing | extra | selected | expected | start delta | end delta | first overlap |');
+    lines.push('| --- | --- | ---: | ---: | ---: | ---: | ---: | --- | --- | ---: | ---: | --- |');
     for (const row of fixtureRows.sort(compareRows)) {
-      lines.push(`| ${row.promptVersion} | ${row.model} | ${row.selectedStartMs}-${row.selectedEndMs} | ${row.expectedStartMs}-${row.expectedEndMs} | ${formatMs(row.startDeltaMs)} | ${formatMs(row.endDeltaMs)} | ${row.overlapSummary} |`);
+      lines.push(`| ${row.promptVersion} | ${row.model} | ${row.selectedCutCount}/${row.expectedCutCount} | ${row.exactMatchCount} | ${row.overlappingCutCount} | ${row.missingExpectedCutCount} | ${row.extraSelectedCutCount} | ${row.selectedStartMs}-${row.selectedEndMs} | ${row.expectedStartMs}-${row.expectedEndMs} | ${formatMs(row.startDeltaMs)} | ${formatMs(row.endDeltaMs)} | ${row.overlapSummary} |`);
     }
     lines.push('');
     lines.push('### 判定メモ');
     lines.push('');
     for (const row of fixtureRows.sort(compareRows)) {
       lines.push(`- ${row.promptVersion}: theme側=${row.themeSidePossibility ?? '未記録'} / composition側=${row.compositionSidePossibility ?? '未記録'}`);
+      if (row.diffSummary) {
+        lines.push(`- ${row.promptVersion}: ${row.diffSummary}`);
+      }
     }
     lines.push('');
   }
@@ -269,6 +356,8 @@ function buildReport(rows: ComparisonRow[], resultPath: string): string {
   lines.push('## 読み取り');
   lines.push('');
   lines.push('- 差分が0msのrunは、指定された期待区間と一致している。');
+  lines.push('- cuts列は、選択区間数/期待区間数を表す。');
+  lines.push('- missingは期待区間に対応する選択区間がない件数、extraは期待区間に対応しない選択区間の件数を表す。');
   lines.push('- 終了差分がマイナスのrunは期待区間より短く、プラスのrunは期待区間より長い。');
   lines.push('- どちらが良いかは、この表だけで自動決定せず、対応するsummaryと境界粒度レポートを見て判断する。');
   lines.push('');

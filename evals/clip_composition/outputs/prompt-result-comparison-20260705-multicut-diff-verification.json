@@ -1,0 +1,67 @@
+{
+  "kind": "clip_composition_prompt_result_comparison",
+  "runAt": "2026-07-05T13:50:46.908Z",
+  "rows": [
+    {
+      "resultPath": "evals/clip_composition/outputs/IMQYaT_RWRA_clip_audio_v001/clip_composition_prompt_v001/20260705-225028/result.json",
+      "runAt": "2026-07-05T22:50:28+09:00",
+      "fixtureId": "IMQYaT_RWRA_clip_audio_v001",
+      "promptVersion": "clip_composition_prompt_v001",
+      "model": "rule-based-build_clip_composition",
+      "params": {
+        "temperature": 0,
+        "llmCall": false,
+        "selection": "固定済みテーマIDに対応する発話まとまりから最終区間を作る"
+      },
+      "selectedStartMs": 1997050,
+      "selectedEndMs": 2015672,
+      "expectedStartMs": 1997050,
+      "expectedEndMs": 2015672,
+      "startDeltaMs": 0,
+      "endDeltaMs": 0,
+      "overlapSummary": "期待区間と完全に一致しています",
+      "selectedCutCount": 1,
+      "expectedCutCount": 1,
+      "exactMatchCount": 1,
+      "overlappingCutCount": 1,
+      "missingExpectedCutCount": 0,
+      "extraSelectedCutCount": 0,
+      "allExpectedCutsMatchedExactlyByIndex": true,
+      "allExpectedCutsHaveOverlapByIndex": true,
+      "diffSummary": "期待区間1件に対して選択区間1件。 完全一致1件、重なりあり1件。 未選択の期待区間0件、余分な選択区間0件。",
+      "selectedReason": "選ばれたテーマ「笑い声がトルコ行進曲に聞こえる女騎士いじり」について、関連する発話まとまりを1個の編集元場面としてつないだ。 候補窓の中から、女騎士のように見えた相手への反応と投げている描写が単独で伝わる範囲だけを使う。",
+      "themeSidePossibility": "theme側で正解区間が候補に入っていない可能性は低い",
+      "compositionSidePossibility": "composition側の候補選択差分はありません"
+    },
+    {
+      "resultPath": "evals/clip_composition/outputs/IMQYaT_RWRA_clip_audio_v001/clip_composition_prompt_v001/20260705-225036/result.json",
+      "runAt": "2026-07-05T22:50:36+09:00",
+      "fixtureId": "IMQYaT_RWRA_clip_audio_v001",
+      "promptVersion": "clip_composition_prompt_v001",
+      "model": "rule-based-result-as-external",
+      "params": {
+        "temperature": 0,
+        "source": "run_eval_verification"
+      },
+      "selectedStartMs": 1997050,
+      "selectedEndMs": 2015672,
+      "expectedStartMs": 1997050,
+      "expectedEndMs": 2015672,
+      "startDeltaMs": 0,
+      "endDeltaMs": 0,
+      "overlapSummary": "期待区間と完全に一致しています",
+      "selectedCutCount": 1,
+      "expectedCutCount": 1,
+      "exactMatchCount": 1,
+      "overlappingCutCount": 1,
+      "missingExpectedCutCount": 0,
+      "extraSelectedCutCount": 0,
+      "allExpectedCutsMatchedExactlyByIndex": true,
+      "allExpectedCutsHaveOverlapByIndex": true,
+      "diffSummary": "期待区間1件に対して選択区間1件。 完全一致1件、重なりあり1件。 未選択の期待区間0件、余分な選択区間0件。",
+      "selectedReason": "選ばれたテーマ「笑い声がトルコ行進曲に聞こえる女騎士いじり」について、関連する発話まとまりを1個の編集元場面としてつないだ。 候補窓の中から、女騎士のように見えた相手への反応と投げている描写が単独で伝わる範囲だけを使う。",
+      "themeSidePossibility": "theme側で正解区間が候補に入っていない可能性は低い",
+      "compositionSidePossibility": "composition側の候補選択差分はありません"
+    }
+  ]
+}
