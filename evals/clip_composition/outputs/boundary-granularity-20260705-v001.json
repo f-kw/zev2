@@ -1,0 +1,78 @@
+{
+  "kind": "clip_composition_expected_boundary_granularity",
+  "runAt": "2026-07-05T11:45:17.986Z",
+  "fixtures": [
+    {
+      "fixtureId": "IMQYaT_RWRA_context_v001",
+      "transcriptPath": "fixtures/IMQYaT_RWRA_context_v001/transcript.json",
+      "expectedPath": "expected/IMQYaT_RWRA_context_v001.json",
+      "cuts": [
+        {
+          "sourceStartMs": 1997050,
+          "sourceEndMs": 2015672,
+          "reason": "実在の切り抜き動画全体18.622秒を、切り抜き内の発話開始位置と元配信候補のSTT一致範囲を音声アンカーとして元配信側へ対応させ、Web版Geminiで元ネタ区間として確認したため。",
+          "startBoundary": {
+            "boundaryMs": 1997050,
+            "relation": "segment_start",
+            "segment": {
+              "id": 1,
+              "startMs": 1997050,
+              "endMs": 1997322,
+              "text": "い",
+              "speaker": "unknown"
+            }
+          },
+          "endBoundary": {
+            "boundaryMs": 2015672,
+            "relation": "segment_end",
+            "segment": {
+              "id": 32,
+              "startMs": 2012431,
+              "endMs": 2015672,
+              "text": "笑",
+              "speaker": "unknown"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "fixtureId": "UpRyakf5j80_clip_audio_v001",
+      "transcriptPath": "fixtures/UpRyakf5j80_clip_audio_v001/transcript.json",
+      "expectedPath": "expected/UpRyakf5j80_clip_audio_v001.json",
+      "cuts": [
+        {
+          "sourceStartMs": 11364500,
+          "sourceEndMs": 11407178,
+          "reason": "YouTube自動字幕のチャンク照合で同じ連続範囲に集まり、切り抜き全体の音声比較とWeb版Geminiの左右映像確認で同一元ネタと判定された区間のため。",
+          "startBoundary": {
+            "boundaryMs": 11364500,
+            "relation": "inside_segment",
+            "segment": {
+              "id": 1,
+              "startMs": 11362439,
+              "endMs": 11366760,
+              "text": "香りどうもありがとうございます",
+              "speaker": "youtube-auto-caption"
+            },
+            "offsetFromSegmentStartMs": 2061,
+            "offsetToSegmentEndMs": 2260
+          },
+          "endBoundary": {
+            "boundaryMs": 11407178,
+            "relation": "inside_segment",
+            "segment": {
+              "id": 20,
+              "startMs": 11405460,
+              "endMs": 11409170,
+              "text": "うん",
+              "speaker": "youtube-auto-caption"
+            },
+            "offsetFromSegmentStartMs": 1718,
+            "offsetToSegmentEndMs": 1992
+          }
+        }
+      ]
+    }
+  ]
+}

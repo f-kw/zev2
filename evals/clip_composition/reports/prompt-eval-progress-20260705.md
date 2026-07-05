@@ -84,3 +84,12 @@ v007は `UpRyakf5j80_clip_audio_v001` で発話19まで含めた。選択区間�
 v008は `IMQYaT_RWRA_context_v001` では期待区間と完全一致した。`UpRyakf5j80_clip_audio_v001` では発話20の短い相づちまで含め、期待区間を包含したが、終了位置が `+1992ms` 長くなった。これにより、次の問題は「短い相づちを含めるかどうか」ではなく、「発話20の途中にある音声上の終端を、文字起こし入力だけでどう扱うか」へ移った。
 
 次はプロンプトへ秒数補正を入れず、ローカルSTTまたは音声比較で終端側の短い相づちをより細かい境界として入力に持たせる方がよい。
+
+## 境界粒度の確認
+
+- 境界粒度スクリプト: `evals/clip_composition/analyze_boundary_granularity.ts`
+- 結果JSON: `evals/clip_composition/outputs/boundary-granularity-20260705-v001.json`
+- レポート: `evals/clip_composition/reports/boundary-granularity-20260705-v001.md`
+- STTサーバー疎通: `http://192.168.1.8:8000/openapi.json` は接続拒否。文字起こし実行はしていない。
+
+`IMQYaT_RWRA_context_v001` は期待開始が発話1の開始、期待終了が発話32の終了と一致する。`UpRyakf5j80_clip_audio_v001` は期待開始と期待終了がどちらも発話途中にある。特に期待終了は発話20開始から `1718ms` 後、発話20終了の `1992ms` 前にある。したがって、v009でさらにプロンプトだけを調整する前に、ローカルSTTまたは音声境界で発話途中の境界を入力に持たせる必要がある。
