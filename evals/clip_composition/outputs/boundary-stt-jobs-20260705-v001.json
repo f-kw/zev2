@@ -1,0 +1,56 @@
+{
+  "kind": "clip_composition_boundary_stt_jobs",
+  "runAt": "2026-07-05T11:50:36.065Z",
+  "boundaryPath": "evals/clip_composition/outputs/boundary-granularity-20260705-v001.json",
+  "targetPaths": [
+    "evals/clip_composition/stt-targets/UpRyakf5j80.json"
+  ],
+  "serverUrl": "http://192.168.1.8:8000",
+  "sttExecuted": false,
+  "jobs": [
+    {
+      "fixtureId": "UpRyakf5j80_clip_audio_v001",
+      "targetId": "UpRyakf5j80",
+      "reason": "期待境界が文字起こし発話の途中にあるため、発話単位より細かい境界情報が必要。",
+      "boundaryNeeds": [
+        {
+          "side": "start",
+          "boundaryMs": 11364500,
+          "segment": {
+            "id": 1,
+            "startMs": 11362439,
+            "endMs": 11366760,
+            "text": "香りどうもありがとうございます",
+            "speaker": "youtube-auto-caption"
+          },
+          "offsetFromSegmentStartMs": 2061,
+          "offsetToSegmentEndMs": 2260,
+          "sourceSliceBoundaryMs": 7500
+        },
+        {
+          "side": "end",
+          "boundaryMs": 11407178,
+          "segment": {
+            "id": 20,
+            "startMs": 11405460,
+            "endMs": 11409170,
+            "text": "うん",
+            "speaker": "youtube-auto-caption"
+          },
+          "offsetFromSegmentStartMs": 1718,
+          "offsetToSegmentEndMs": 1992,
+          "sourceSliceBoundaryMs": 50178
+        }
+      ],
+      "clipSttCommand": "node evals/clip_composition/run_local_stt.ts --input evals/clip_composition/research/downloads/UpRyakf5j80/UpRyakf5j80.m4a --id UpRyakf5j80_local_boundary_v001 --role clip --server http://192.168.1.8:8000",
+      "sourceSttCommand": "node evals/clip_composition/run_local_stt.ts --input evals/clip_composition/research/downloads/UpRyakf5j80/sources/kNX-wQTvsws/kNX-wQTvsws_3h09m17s_55s_audio.m4a --id UpRyakf5j80_kNX-wQTvsws_local_boundary_v001 --role source --server http://192.168.1.8:8000",
+      "sourceSliceStartMs": 11357000,
+      "sourceSliceEndMs": 11412004,
+      "notes": [
+        "STTはここでは実行しない。サーバー復旧後にコマンドを実行する。",
+        "期待境界をモデル入力へ直接渡すのではなく、単語境界または音声境界を得るための最小STT対象として扱う。",
+        "sourceSliceBoundaryMs は、元動画切り出し音声内で期待境界がどこにあるかを示す確認用の値。"
+      ]
+    }
+  ]
+}

@@ -256,6 +256,38 @@ pnpm --filter @zev2/agent-runner exec tsx ../evals/clip_composition/score_prompt
 }
 ```
 
+採点済み `result.json` を横断比較する場合:
+
+```bash
+node evals/clip_composition/compare_prompt_results.ts \
+  --results evals/clip_composition/outputs/IMQYaT_RWRA_context_v001/clip_composition_prompt_v008/20260705-204229/result.json,evals/clip_composition/outputs/UpRyakf5j80_clip_audio_v001/clip_composition_prompt_v008/20260705-203605/result.json \
+  --outputId my-comparison
+```
+
+この比較は、指定した `result.json` だけを読みます。同じプロンプト版数のrunが複数残っていても、どのrunを比較したかを固定できます。自動の合成スコアは作らず、開始差分、終了差分、重なり説明、theme側とcomposition側の暫定判定を並べます。
+
+期待区間の境界が発話単位と一致しているか確認する場合:
+
+```bash
+node evals/clip_composition/analyze_boundary_granularity.ts \
+  --fixtures IMQYaT_RWRA_context_v001,UpRyakf5j80_clip_audio_v001 \
+  --outputId 20260705-v001
+```
+
+期待境界が発話途中にあるfixtureでは、プロンプトだけで正確な境界を選びにくい可能性があります。秒数補正をプロンプトへ入れず、先に単語境界または音声境界を入力として増やせるか確認します。
+
+STT復旧後に、境界精度のために最小限どの音声をSTTすべきか確認する場合:
+
+```bash
+node evals/clip_composition/plan_boundary_stt_jobs.ts \
+  --boundary evals/clip_composition/outputs/boundary-granularity-20260705-v001.json \
+  --targets evals/clip_composition/stt-targets/UpRyakf5j80.json \
+  --outputId 20260705-v001 \
+  --server http://192.168.1.8:8000
+```
+
+このコマンドはSTTを実行しません。`reports/boundary-stt-jobs-<outputId>.md` に、STT復旧後に実行する候補コマンドを出します。
+
 生成済み採点結果:
 
 - `outputs/IMQYaT_RWRA_context_v001/clip_composition_prompt_v001/20260705-125215/result.json`

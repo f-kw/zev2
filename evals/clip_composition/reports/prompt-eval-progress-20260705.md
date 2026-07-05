@@ -101,3 +101,11 @@ v008は `IMQYaT_RWRA_context_v001` では期待区間と完全一致した。`Up
 - 比較レポート: `evals/clip_composition/reports/prompt-result-comparison-20260705-v006-v008.md`
 
 指定した `result.json` だけを読む形にした。これにより、同じprompt版数の複数runが残っていても、どのrunを比較したかが固定される。自動の合成スコアは作らず、開始差分、終了差分、重なりの説明をそのまま並べる。
+
+## 境界精度用STT作業リスト
+
+- 作業リスト生成スクリプト: `evals/clip_composition/plan_boundary_stt_jobs.ts`
+- 結果JSON: `evals/clip_composition/outputs/boundary-stt-jobs-20260705-v001.json`
+- レポート: `evals/clip_composition/reports/boundary-stt-jobs-20260705-v001.md`
+
+`UpRyakf5j80_clip_audio_v001` は、短い相づちの終端だけでなく開始側も発話途中にある。STT復旧後は、切り抜き音声 `UpRyakf5j80.m4a` と元動画55秒スライス `kNX-wQTvsws_3h09m17s_55s_audio.m4a` だけを最小STT対象として、単語境界または音声境界を得る。期待境界そのものはモデル入力へ直接渡さない。
