@@ -1,0 +1,20 @@
+{
+  "fixtureId": "IMQYaT_RWRA_audio_v001",
+  "draftId": "IMQYaT_RWRA_audio_v001",
+  "description": "音声比較で元配信候補と一致した切り抜き区間を、composition評価用に固定したfixture。",
+  "copiedFrom": [
+    "stt/IMQYaT_RWRA_8uuQldLptRE/source/word-timestamps.json",
+    "evals/clip_composition/outputs/alignment-IMQYaT_RWRA_v001.json",
+    "evals/clip_composition/outputs/audio-compare-IMQYaT_RWRA_v001.json"
+  ],
+  "copiedAt": "2026-07-05T03:22:15.533Z",
+  "sourceUri": "https://www.youtube.com/watch?v=8uuQldLptRE",
+  "transcriptPath": "transcript.json",
+  "themesPath": "themes.json",
+  "selectedThemeId": "theme_audio_verified_1",
+  "notes": [
+    "評価実行時はruntime/artifactsを読まず、このfixture配下のファイルだけを読む。",
+    "固定テーマは音声比較で確認した正解候補区間から逆算したもの。",
+    "目視確認は別工程。ここでは音声比較結果を根拠としてfixture候補を凍結している。"
+  ]
+}

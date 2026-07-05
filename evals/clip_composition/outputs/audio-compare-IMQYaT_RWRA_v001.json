@@ -1,0 +1,257 @@
+{
+  "kind": "clip_composition_audio_candidate_comparison",
+  "runAt": "2026-07-05T03:18:00.332Z",
+  "targetId": "IMQYaT_RWRA",
+  "clip": {
+    "id": "IMQYaT_RWRA",
+    "sttId": "IMQYaT_RWRA",
+    "localVideoPath": "evals/clip_composition/research/downloads/IMQYaT_RWRA/IMQYaT_RWRA.mp4",
+    "durationMs": 18622,
+    "speechRange": {
+      "startMs": 1313,
+      "endMs": 5338,
+      "text": "女騎士だー!ゴブリンかな?めはるのめっちゃ投げてる"
+    }
+  },
+  "settings": {
+    "sampleRate": 16000,
+    "channels": 1,
+    "pcmFormat": "f32le",
+    "envelopeFrameMs": 20,
+    "envelopeHopMs": 10,
+    "confirmationPolicy": "しきい値で自動確定せず、相関値と目視確認で判断する"
+  },
+  "comparisons": [
+    {
+      "sourceId": "8uuQldLptRE",
+      "sttId": "IMQYaT_RWRA_8uuQldLptRE",
+      "alignment": {
+        "sourceId": "IMQYaT_RWRA_8uuQldLptRE",
+        "sourceStartMs": 1998363,
+        "sourceEndMs": 2006530,
+        "matchedChars": 12,
+        "queryChars": 22,
+        "sourceChars": 22,
+        "clipCoverage": 0.5454545454545454,
+        "sourceCoverage": 0.5454545454545454,
+        "exact": false,
+        "sourceText": "やってきたって感じで女騎士だめっちゃ投げてる",
+        "normalizedSourceText": "やってきたって感じで女騎士だめっちゃ投げてる"
+      },
+      "fullTimeline": {
+        "query": {
+          "label": "clip-full",
+          "inputPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/research/downloads/IMQYaT_RWRA/IMQYaT_RWRA.mp4",
+          "startMs": 0,
+          "endMs": 18622
+        },
+        "reference": {
+          "label": "IMQYaT_RWRA_8uuQldLptRE-timeline-aligned",
+          "inputPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/research/downloads/IMQYaT_RWRA/sources/8uuQldLptRE/8uuQldLptRE.mp4",
+          "startMs": 1997050,
+          "endMs": 2015672
+        },
+        "sampleRate": 16000,
+        "querySamples": 297952,
+        "referenceSamples": 297952,
+        "direct": {
+          "correlationAtEnvelopeOffset": -0.001439,
+          "absoluteCorrelationAtEnvelopeOffset": 0.001439,
+          "evaluatedOffsetMs": 0
+        },
+        "envelope": {
+          "frameMs": 20,
+          "hopMs": 10,
+          "maxCorrelation": -0.183216,
+          "minCorrelation": -0.183216,
+          "maxAbsoluteCorrelation": 0.183216,
+          "bestOffsetMs": 0
+        }
+      },
+      "speechOnly": {
+        "query": {
+          "label": "clip-speech",
+          "inputPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/research/downloads/IMQYaT_RWRA/IMQYaT_RWRA.mp4",
+          "startMs": 1313,
+          "endMs": 5338
+        },
+        "reference": {
+          "label": "IMQYaT_RWRA_8uuQldLptRE-stt-match",
+          "inputPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/research/downloads/IMQYaT_RWRA/sources/8uuQldLptRE/8uuQldLptRE.mp4",
+          "startMs": 1998363,
+          "endMs": 2006530
+        },
+        "sampleRate": 16000,
+        "querySamples": 64400,
+        "referenceSamples": 130672,
+        "direct": {
+          "correlationAtEnvelopeOffset": 0.051795,
+          "absoluteCorrelationAtEnvelopeOffset": 0.051795,
+          "evaluatedOffsetMs": 3750
+        },
+        "envelope": {
+          "frameMs": 20,
+          "hopMs": 10,
+          "maxCorrelation": 0.883568,
+          "minCorrelation": -0.305443,
+          "maxAbsoluteCorrelation": 0.883568,
+          "bestOffsetMs": 3750
+        }
+      }
+    },
+    {
+      "sourceId": "LBBRk8blLV0",
+      "sttId": "IMQYaT_RWRA_LBBRk8blLV0",
+      "alignment": {
+        "sourceId": "IMQYaT_RWRA_LBBRk8blLV0",
+        "sourceStartMs": 18886,
+        "sourceEndMs": 89152,
+        "matchedChars": 2,
+        "queryChars": 22,
+        "sourceChars": 22,
+        "clipCoverage": 0.09090909090909091,
+        "sourceCoverage": 0.09090909090909091,
+        "exact": false,
+        "sourceText": "音楽音楽ご視聴ありがとうございましたmeme",
+        "normalizedSourceText": "音楽音楽ご視聴ありがとうございましたmeme"
+      },
+      "fullTimeline": {
+        "query": {
+          "label": "clip-full",
+          "inputPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/research/downloads/IMQYaT_RWRA/IMQYaT_RWRA.mp4",
+          "startMs": 0,
+          "endMs": 18622
+        },
+        "reference": {
+          "label": "IMQYaT_RWRA_LBBRk8blLV0-timeline-aligned",
+          "inputPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/research/downloads/IMQYaT_RWRA/sources/LBBRk8blLV0/LBBRk8blLV0.mp4",
+          "startMs": 17573,
+          "endMs": 36195
+        },
+        "sampleRate": 16000,
+        "querySamples": 297952,
+        "referenceSamples": 297952,
+        "direct": {
+          "correlationAtEnvelopeOffset": -0.003256,
+          "absoluteCorrelationAtEnvelopeOffset": 0.003256,
+          "evaluatedOffsetMs": 0
+        },
+        "envelope": {
+          "frameMs": 20,
+          "hopMs": 10,
+          "maxCorrelation": 0.070797,
+          "minCorrelation": 0.070797,
+          "maxAbsoluteCorrelation": 0.070797,
+          "bestOffsetMs": 0
+        }
+      },
+      "speechOnly": {
+        "query": {
+          "label": "clip-speech",
+          "inputPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/research/downloads/IMQYaT_RWRA/IMQYaT_RWRA.mp4",
+          "startMs": 1313,
+          "endMs": 5338
+        },
+        "reference": {
+          "label": "IMQYaT_RWRA_LBBRk8blLV0-stt-match",
+          "inputPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/research/downloads/IMQYaT_RWRA/sources/LBBRk8blLV0/LBBRk8blLV0.mp4",
+          "startMs": 18886,
+          "endMs": 89152
+        },
+        "sampleRate": 16000,
+        "querySamples": 64400,
+        "referenceSamples": 1124256,
+        "direct": {
+          "correlationAtEnvelopeOffset": -0.007827,
+          "absoluteCorrelationAtEnvelopeOffset": 0.007827,
+          "evaluatedOffsetMs": 25790
+        },
+        "envelope": {
+          "frameMs": 20,
+          "hopMs": 10,
+          "maxCorrelation": 0.330411,
+          "minCorrelation": -0.345319,
+          "maxAbsoluteCorrelation": 0.345319,
+          "bestOffsetMs": 25790
+        }
+      }
+    },
+    {
+      "sourceId": "Rfsj5uHy_Bs",
+      "sttId": "IMQYaT_RWRA_Rfsj5uHy_Bs",
+      "alignment": {
+        "sourceId": "IMQYaT_RWRA_Rfsj5uHy_Bs",
+        "sourceStartMs": 153309,
+        "sourceEndMs": 164196,
+        "matchedChars": 18,
+        "queryChars": 22,
+        "sourceChars": 22,
+        "clipCoverage": 0.8181818181818182,
+        "sourceCoverage": 0.8181818181818182,
+        "exact": false,
+        "sourceText": "はははは女騎士だゴブリンかなめっちゃ投げてる",
+        "normalizedSourceText": "はははは女騎士だごぶりんかなめっちゃ投げてる"
+      },
+      "fullTimeline": {
+        "query": {
+          "label": "clip-full",
+          "inputPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/research/downloads/IMQYaT_RWRA/IMQYaT_RWRA.mp4",
+          "startMs": 0,
+          "endMs": 18622
+        },
+        "reference": {
+          "label": "IMQYaT_RWRA_Rfsj5uHy_Bs-timeline-aligned",
+          "inputPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/research/downloads/IMQYaT_RWRA/sources/Rfsj5uHy_Bs/Rfsj5uHy_Bs.mp4",
+          "startMs": 151996,
+          "endMs": 170618
+        },
+        "sampleRate": 16000,
+        "querySamples": 297952,
+        "referenceSamples": 297952,
+        "direct": {
+          "correlationAtEnvelopeOffset": 0.004363,
+          "absoluteCorrelationAtEnvelopeOffset": 0.004363,
+          "evaluatedOffsetMs": 0
+        },
+        "envelope": {
+          "frameMs": 20,
+          "hopMs": 10,
+          "maxCorrelation": -0.177439,
+          "minCorrelation": -0.177439,
+          "maxAbsoluteCorrelation": 0.177439,
+          "bestOffsetMs": 0
+        }
+      },
+      "speechOnly": {
+        "query": {
+          "label": "clip-speech",
+          "inputPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/research/downloads/IMQYaT_RWRA/IMQYaT_RWRA.mp4",
+          "startMs": 1313,
+          "endMs": 5338
+        },
+        "reference": {
+          "label": "IMQYaT_RWRA_Rfsj5uHy_Bs-stt-match",
+          "inputPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/research/downloads/IMQYaT_RWRA/sources/Rfsj5uHy_Bs/Rfsj5uHy_Bs.mp4",
+          "startMs": 153309,
+          "endMs": 164196
+        },
+        "sampleRate": 16000,
+        "querySamples": 64400,
+        "referenceSamples": 174192,
+        "direct": {
+          "correlationAtEnvelopeOffset": -0.005628,
+          "absoluteCorrelationAtEnvelopeOffset": 0.005628,
+          "evaluatedOffsetMs": 1810
+        },
+        "envelope": {
+          "frameMs": 20,
+          "hopMs": 10,
+          "maxCorrelation": 0.32835,
+          "minCorrelation": -0.281748,
+          "maxAbsoluteCorrelation": 0.32835,
+          "bestOffsetMs": 1810
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,129 @@
+{
+  "runAt": "2026-07-05T12:23:00+09:00",
+  "draftId": "IMQYaT_RWRA_audio_v001",
+  "fixtureId": "IMQYaT_RWRA_audio_v001",
+  "promptVersion": "clip_composition_prompt_v001",
+  "model": "rule-based-build_clip_composition",
+  "params": {
+    "temperature": 0,
+    "llmCall": false,
+    "selection": "固定済みテーマIDに対応する発話まとまりから最終区間を作る"
+  },
+  "selectedCuts": [
+    {
+      "sourceStartMs": 1998363,
+      "sourceEndMs": 2006530,
+      "reason": "選ばれたテーマ「笑い声がトルコ行進曲に聞こえる女騎士いじり」について、関連する発話まとまりを1個の編集元場面としてつないだ。 女騎士のように見えた相手への反応から、印象的な笑いと投げている描写までを一続きで使う。"
+    }
+  ],
+  "expectedCuts": [
+    {
+      "sourceStartMs": 1998363,
+      "sourceEndMs": 2006530,
+      "reason": "音声比較で切り抜き発話と元配信候補の発話部分が強く一致し、女騎士だという反応から投げている描写まで単独で意味が通るため。",
+      "sourceVideoId": "8uuQldLptRE",
+      "sourceUrl": "https://www.youtube.com/watch?v=8uuQldLptRE",
+      "sourceSttId": "IMQYaT_RWRA_8uuQldLptRE",
+      "clipId": "IMQYaT_RWRA",
+      "clipUrl": "https://www.youtube.com/watch?v=IMQYaT_RWRA",
+      "transcriptText": "やってきたって感じで女騎士だーめっちゃ投げてる",
+      "audioVerification": {
+        "reportPath": "evals/clip_composition/reports/audio-compare-IMQYaT_RWRA_v001.md",
+        "resultPath": "evals/clip_composition/outputs/audio-compare-IMQYaT_RWRA_v001.json",
+        "speechEnvelopeCorrelation": 0.883568,
+        "bestOffsetMs": 3750,
+        "comparedClipSpeechStartMs": 1313,
+        "comparedClipSpeechEndMs": 5338,
+        "comparedSourceCandidateStartMs": 1998363,
+        "comparedSourceCandidateEndMs": 2006530,
+        "bestAlignedSourceSpeechStartMs": 2002113,
+        "bestAlignedSourceSpeechEndMs": 2006138,
+        "note": "音声比較レポートで元配信候補の発話部分が参照候補中で最も強く一致した。"
+      },
+      "sttAlignment": {
+        "reportPath": "evals/clip_composition/reports/alignment-IMQYaT_RWRA_v001.md",
+        "resultPath": "evals/clip_composition/outputs/alignment-IMQYaT_RWRA_v001.json",
+        "clipCoverage": 0.5454545454545454,
+        "sourceCoverage": 0.5454545454545454,
+        "note": "STT文字列では再編集候補が最上位だが、元配信候補にも対応語が出ており、音声比較で元配信候補を優先した。"
+      },
+      "visualVerification": {
+        "status": "pending",
+        "note": "expectedCuts固定前の目視確認は未実施。音声比較で進められる範囲まで固定候補化している。"
+      }
+    }
+  ],
+  "diff": {
+    "startDeltaMs": 0,
+    "endDeltaMs": 0,
+    "overlapSummary": "期待区間と完全に一致しています"
+  },
+  "runs": [
+    {
+      "runIndex": 1,
+      "selectedCuts": [
+        {
+          "sourceStartMs": 1998363,
+          "sourceEndMs": 2006530,
+          "reason": "選ばれたテーマ「笑い声がトルコ行進曲に聞こえる女騎士いじり」について、関連する発話まとまりを1個の編集元場面としてつないだ。 女騎士のように見えた相手への反応から、印象的な笑いと投げている描写までを一続きで使う。"
+        }
+      ],
+      "diff": {
+        "startDeltaMs": 0,
+        "endDeltaMs": 0,
+        "overlapSummary": "期待区間と完全に一致しています"
+      }
+    },
+    {
+      "runIndex": 2,
+      "selectedCuts": [
+        {
+          "sourceStartMs": 1998363,
+          "sourceEndMs": 2006530,
+          "reason": "選ばれたテーマ「笑い声がトルコ行進曲に聞こえる女騎士いじり」について、関連する発話まとまりを1個の編集元場面としてつないだ。 女騎士のように見えた相手への反応から、印象的な笑いと投げている描写までを一続きで使う。"
+        }
+      ],
+      "diff": {
+        "startDeltaMs": 0,
+        "endDeltaMs": 0,
+        "overlapSummary": "期待区間と完全に一致しています"
+      }
+    },
+    {
+      "runIndex": 3,
+      "selectedCuts": [
+        {
+          "sourceStartMs": 1998363,
+          "sourceEndMs": 2006530,
+          "reason": "選ばれたテーマ「笑い声がトルコ行進曲に聞こえる女騎士いじり」について、関連する発話まとまりを1個の編集元場面としてつないだ。 女騎士のように見えた相手への反応から、印象的な笑いと投げている描写までを一続きで使う。"
+        }
+      ],
+      "diff": {
+        "startDeltaMs": 0,
+        "endDeltaMs": 0,
+        "overlapSummary": "期待区間と完全に一致しています"
+      }
+    }
+  ],
+  "stability": {
+    "allRunsSelectedSameCuts": true,
+    "startJitterMs": 0,
+    "endJitterMs": 0,
+    "reasonVariantCount": 1,
+    "reasonVariationSummary": "判断理由は全実行で同じです"
+  },
+  "themeCoverage": {
+    "selectedThemeId": "theme_audio_verified_1",
+    "candidateStartMs": 1998363,
+    "candidateEndMs": 2006530,
+    "coverageSummary": "期待区間は選択済みテーマの候補範囲に入り、AIが選んだ区間も一致しています",
+    "themeSidePossibility": "theme側で正解区間が候補に入っていない可能性は低い",
+    "compositionSidePossibility": "composition側の候補選択差分はありません"
+  },
+  "sourceFiles": {
+    "fixture": "fixtures/IMQYaT_RWRA_audio_v001",
+    "transcript": "fixtures/IMQYaT_RWRA_audio_v001/transcript.json",
+    "themes": "fixtures/IMQYaT_RWRA_audio_v001/themes.json",
+    "expected": "expected/IMQYaT_RWRA_audio_v001.json"
+  }
+}

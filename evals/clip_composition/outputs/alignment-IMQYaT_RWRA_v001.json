@@ -1,0 +1,604 @@
+{
+  "kind": "clip_composition_stt_chunk_alignment",
+  "runAt": "2026-07-05T03:03:00.646Z",
+  "clip": {
+    "id": "IMQYaT_RWRA",
+    "sourceUri": "/Users/kawafmm/workspace/zev2/evals/clip_composition/research/downloads/IMQYaT_RWRA/IMQYaT_RWRA.mp4",
+    "wordCount": 25
+  },
+  "sources": [
+    {
+      "id": "IMQYaT_RWRA_8uuQldLptRE",
+      "sourceUri": "/Users/kawafmm/workspace/zev2/evals/clip_composition/research/downloads/IMQYaT_RWRA/sources/8uuQldLptRE/8uuQldLptRE.mp4",
+      "wordCount": 20606
+    },
+    {
+      "id": "IMQYaT_RWRA_LBBRk8blLV0",
+      "sourceUri": "/Users/kawafmm/workspace/zev2/evals/clip_composition/research/downloads/IMQYaT_RWRA/sources/LBBRk8blLV0/LBBRk8blLV0.mp4",
+      "wordCount": 38
+    },
+    {
+      "id": "IMQYaT_RWRA_Rfsj5uHy_Bs",
+      "sourceUri": "/Users/kawafmm/workspace/zev2/evals/clip_composition/research/downloads/IMQYaT_RWRA/sources/Rfsj5uHy_Bs/Rfsj5uHy_Bs.mp4",
+      "wordCount": 1162
+    }
+  ],
+  "settings": {
+    "chunkMs": 30000,
+    "top": 10,
+    "ranking": "完全一致、切り抜き側の一致率、参照元側の一致率、一致文字数、開始時刻の順に並べる",
+    "normalization": [
+      "全角半角統一",
+      "カタカナのひらがな化",
+      "Unicode正規化による数字表記統一",
+      "記号・空白・長音記号の除外",
+      "漢字の読み変換は未実装"
+    ]
+  },
+  "chunks": [
+    {
+      "index": 0,
+      "startMs": 1313,
+      "endMs": 5338,
+      "text": "女騎士だー!ゴブリンかな?めはるのめっちゃ投げてる",
+      "normalizedText": "女騎士だごぶりんかなめはるのめっちゃ投げてる",
+      "wordCount": 25
+    }
+  ],
+  "chunkResults": [
+    {
+      "chunk": {
+        "index": 0,
+        "startMs": 1313,
+        "endMs": 5338,
+        "text": "女騎士だー!ゴブリンかな?めはるのめっちゃ投げてる",
+        "normalizedText": "女騎士だごぶりんかなめはるのめっちゃ投げてる",
+        "wordCount": 25
+      },
+      "bestMatches": [
+        {
+          "sourceId": "IMQYaT_RWRA_Rfsj5uHy_Bs",
+          "sourceStartMs": 153309,
+          "sourceEndMs": 164196,
+          "matchedChars": 18,
+          "queryChars": 22,
+          "sourceChars": 22,
+          "clipCoverage": 0.8181818181818182,
+          "sourceCoverage": 0.8181818181818182,
+          "exact": false,
+          "sourceText": "はははは女騎士だゴブリンかなめっちゃ投げてる",
+          "normalizedSourceText": "はははは女騎士だごぶりんかなめっちゃ投げてる"
+        },
+        {
+          "sourceId": "IMQYaT_RWRA_Rfsj5uHy_Bs",
+          "sourceStartMs": 153409,
+          "sourceEndMs": 164496,
+          "matchedChars": 18,
+          "queryChars": 22,
+          "sourceChars": 22,
+          "clipCoverage": 0.8181818181818182,
+          "sourceCoverage": 0.8181818181818182,
+          "exact": false,
+          "sourceText": "ははは女騎士だゴブリンかなめっちゃ投げてるめ",
+          "normalizedSourceText": "ははは女騎士だごぶりんかなめっちゃ投げてるめ"
+        },
+        {
+          "sourceId": "IMQYaT_RWRA_Rfsj5uHy_Bs",
+          "sourceStartMs": 153569,
+          "sourceEndMs": 164536,
+          "matchedChars": 18,
+          "queryChars": 22,
+          "sourceChars": 22,
+          "clipCoverage": 0.8181818181818182,
+          "sourceCoverage": 0.8181818181818182,
+          "exact": false,
+          "sourceText": "はは女騎士だゴブリンかなめっちゃ投げてるめっ",
+          "normalizedSourceText": "はは女騎士だごぶりんかなめっちゃ投げてるめっ"
+        },
+        {
+          "sourceId": "IMQYaT_RWRA_Rfsj5uHy_Bs",
+          "sourceStartMs": 153589,
+          "sourceEndMs": 164576,
+          "matchedChars": 18,
+          "queryChars": 22,
+          "sourceChars": 22,
+          "clipCoverage": 0.8181818181818182,
+          "sourceCoverage": 0.8181818181818182,
+          "exact": false,
+          "sourceText": "は女騎士だゴブリンかなめっちゃ投げてるめっち",
+          "normalizedSourceText": "は女騎士だごぶりんかなめっちゃ投げてるめっち"
+        },
+        {
+          "sourceId": "IMQYaT_RWRA_Rfsj5uHy_Bs",
+          "sourceStartMs": 159715,
+          "sourceEndMs": 164596,
+          "matchedChars": 18,
+          "queryChars": 22,
+          "sourceChars": 22,
+          "clipCoverage": 0.8181818181818182,
+          "sourceCoverage": 0.8181818181818182,
+          "exact": false,
+          "sourceText": "女騎士だゴブリンかなめっちゃ投げてるめっちゃ",
+          "normalizedSourceText": "女騎士だごぶりんかなめっちゃ投げてるめっちゃ"
+        },
+        {
+          "sourceId": "IMQYaT_RWRA_Rfsj5uHy_Bs",
+          "sourceStartMs": 153089,
+          "sourceEndMs": 164116,
+          "matchedChars": 17,
+          "queryChars": 22,
+          "sourceChars": 22,
+          "clipCoverage": 0.7727272727272727,
+          "sourceCoverage": 0.7727272727272727,
+          "exact": false,
+          "sourceText": "ははははは女騎士だゴブリンかなめっちゃ投げて",
+          "normalizedSourceText": "ははははは女騎士だごぶりんかなめっちゃ投げて"
+        },
+        {
+          "sourceId": "IMQYaT_RWRA_Rfsj5uHy_Bs",
+          "sourceStartMs": 160935,
+          "sourceEndMs": 164796,
+          "matchedChars": 17,
+          "queryChars": 22,
+          "sourceChars": 22,
+          "clipCoverage": 0.7727272727272727,
+          "sourceCoverage": 0.7727272727272727,
+          "exact": false,
+          "sourceText": "騎士だゴブリンかなめっちゃ投げてるめっちゃコ",
+          "normalizedSourceText": "騎士だごぶりんかなめっちゃ投げてるめっちゃこ"
+        },
+        {
+          "sourceId": "IMQYaT_RWRA_Rfsj5uHy_Bs",
+          "sourceStartMs": 152828,
+          "sourceEndMs": 164096,
+          "matchedChars": 16,
+          "queryChars": 22,
+          "sourceChars": 22,
+          "clipCoverage": 0.7272727272727273,
+          "sourceCoverage": 0.7272727272727273,
+          "exact": false,
+          "sourceText": "はははははは女騎士だゴブリンかなめっちゃ投げ",
+          "normalizedSourceText": "はははははは女騎士だごぶりんかなめっちゃ投げ"
+        },
+        {
+          "sourceId": "IMQYaT_RWRA_Rfsj5uHy_Bs",
+          "sourceStartMs": 161055,
+          "sourceEndMs": 165756,
+          "matchedChars": 16,
+          "queryChars": 22,
+          "sourceChars": 22,
+          "clipCoverage": 0.7272727272727273,
+          "sourceCoverage": 0.7272727272727273,
+          "exact": false,
+          "sourceText": "士だゴブリンかなめっちゃ投げてるめっちゃコン",
+          "normalizedSourceText": "士だごぶりんかなめっちゃ投げてるめっちゃこん"
+        },
+        {
+          "sourceId": "IMQYaT_RWRA_Rfsj5uHy_Bs",
+          "sourceStartMs": 152708,
+          "sourceEndMs": 164076,
+          "matchedChars": 15,
+          "queryChars": 22,
+          "sourceChars": 22,
+          "clipCoverage": 0.6818181818181818,
+          "sourceCoverage": 0.6818181818181818,
+          "exact": false,
+          "sourceText": "ははははははは女騎士だゴブリンかなめっちゃ投",
+          "normalizedSourceText": "ははははははは女騎士だごぶりんかなめっちゃ投"
+        }
+      ],
+      "sourceMatches": [
+        {
+          "sourceId": "IMQYaT_RWRA_8uuQldLptRE",
+          "matches": [
+            {
+              "sourceId": "IMQYaT_RWRA_8uuQldLptRE",
+              "sourceStartMs": 1998363,
+              "sourceEndMs": 2006530,
+              "matchedChars": 12,
+              "queryChars": 22,
+              "sourceChars": 22,
+              "clipCoverage": 0.5454545454545454,
+              "sourceCoverage": 0.5454545454545454,
+              "exact": false,
+              "sourceText": "やってきたって感じで女騎士だめっちゃ投げてる",
+              "normalizedSourceText": "やってきたって感じで女騎士だめっちゃ投げてる"
+            },
+            {
+              "sourceId": "IMQYaT_RWRA_8uuQldLptRE",
+              "sourceStartMs": 1998503,
+              "sourceEndMs": 2012431,
+              "matchedChars": 12,
+              "queryChars": 22,
+              "sourceChars": 22,
+              "clipCoverage": 0.5454545454545454,
+              "sourceCoverage": 0.5454545454545454,
+              "exact": false,
+              "sourceText": "ってきたって感じで女騎士だめっちゃ投げてる笑",
+              "normalizedSourceText": "ってきたって感じで女騎士だめっちゃ投げてる笑"
+            },
+            {
+              "sourceId": "IMQYaT_RWRA_8uuQldLptRE",
+              "sourceStartMs": 1998523,
+              "sourceEndMs": 2017612,
+              "matchedChars": 12,
+              "queryChars": 22,
+              "sourceChars": 22,
+              "clipCoverage": 0.5454545454545454,
+              "sourceCoverage": 0.5454545454545454,
+              "exact": false,
+              "sourceText": "てきたって感じで女騎士だめっちゃ投げてる笑笑",
+              "normalizedSourceText": "てきたって感じで女騎士だめっちゃ投げてる笑笑"
+            },
+            {
+              "sourceId": "IMQYaT_RWRA_8uuQldLptRE",
+              "sourceStartMs": 1998544,
+              "sourceEndMs": 2017932,
+              "matchedChars": 12,
+              "queryChars": 22,
+              "sourceChars": 22,
+              "clipCoverage": 0.5454545454545454,
+              "sourceCoverage": 0.5454545454545454,
+              "exact": false,
+              "sourceText": "きたって感じで女騎士だめっちゃ投げてる笑笑笑",
+              "normalizedSourceText": "きたって感じで女騎士だめっちゃ投げてる笑笑笑"
+            },
+            {
+              "sourceId": "IMQYaT_RWRA_8uuQldLptRE",
+              "sourceStartMs": 1998564,
+              "sourceEndMs": 2018593,
+              "matchedChars": 12,
+              "queryChars": 22,
+              "sourceChars": 22,
+              "clipCoverage": 0.5454545454545454,
+              "sourceCoverage": 0.5454545454545454,
+              "exact": false,
+              "sourceText": "たって感じで女騎士だめっちゃ投げてる笑笑笑笑",
+              "normalizedSourceText": "たって感じで女騎士だめっちゃ投げてる笑笑笑笑"
+            },
+            {
+              "sourceId": "IMQYaT_RWRA_8uuQldLptRE",
+              "sourceStartMs": 1998664,
+              "sourceEndMs": 2018853,
+              "matchedChars": 12,
+              "queryChars": 22,
+              "sourceChars": 22,
+              "clipCoverage": 0.5454545454545454,
+              "sourceCoverage": 0.5454545454545454,
+              "exact": false,
+              "sourceText": "って感じで女騎士だめっちゃ投げてる笑笑笑笑笑",
+              "normalizedSourceText": "って感じで女騎士だめっちゃ投げてる笑笑笑笑笑"
+            },
+            {
+              "sourceId": "IMQYaT_RWRA_8uuQldLptRE",
+              "sourceStartMs": 1998684,
+              "sourceEndMs": 2019073,
+              "matchedChars": 12,
+              "queryChars": 22,
+              "sourceChars": 22,
+              "clipCoverage": 0.5454545454545454,
+              "sourceCoverage": 0.5454545454545454,
+              "exact": false,
+              "sourceText": "て感じで女騎士だめっちゃ投げてる笑笑笑笑笑笑",
+              "normalizedSourceText": "て感じで女騎士だめっちゃ投げてる笑笑笑笑笑笑"
+            },
+            {
+              "sourceId": "IMQYaT_RWRA_8uuQldLptRE",
+              "sourceStartMs": 1998864,
+              "sourceEndMs": 2019193,
+              "matchedChars": 12,
+              "queryChars": 22,
+              "sourceChars": 22,
+              "clipCoverage": 0.5454545454545454,
+              "sourceCoverage": 0.5454545454545454,
+              "exact": false,
+              "sourceText": "感じで女騎士だめっちゃ投げてる笑笑笑笑笑笑笑",
+              "normalizedSourceText": "感じで女騎士だめっちゃ投げてる笑笑笑笑笑笑笑"
+            },
+            {
+              "sourceId": "IMQYaT_RWRA_8uuQldLptRE",
+              "sourceStartMs": 1999104,
+              "sourceEndMs": 2019333,
+              "matchedChars": 12,
+              "queryChars": 22,
+              "sourceChars": 22,
+              "clipCoverage": 0.5454545454545454,
+              "sourceCoverage": 0.5454545454545454,
+              "exact": false,
+              "sourceText": "じで女騎士だめっちゃ投げてる笑笑笑笑笑笑笑笑",
+              "normalizedSourceText": "じで女騎士だめっちゃ投げてる笑笑笑笑笑笑笑笑"
+            },
+            {
+              "sourceId": "IMQYaT_RWRA_8uuQldLptRE",
+              "sourceStartMs": 1999384,
+              "sourceEndMs": 2019513,
+              "matchedChars": 12,
+              "queryChars": 22,
+              "sourceChars": 22,
+              "clipCoverage": 0.5454545454545454,
+              "sourceCoverage": 0.5454545454545454,
+              "exact": false,
+              "sourceText": "で女騎士だめっちゃ投げてる笑笑笑笑笑笑笑笑笑",
+              "normalizedSourceText": "で女騎士だめっちゃ投げてる笑笑笑笑笑笑笑笑笑"
+            }
+          ]
+        },
+        {
+          "sourceId": "IMQYaT_RWRA_LBBRk8blLV0",
+          "matches": [
+            {
+              "sourceId": "IMQYaT_RWRA_LBBRk8blLV0",
+              "sourceStartMs": 18886,
+              "sourceEndMs": 89152,
+              "matchedChars": 2,
+              "queryChars": 22,
+              "sourceChars": 22,
+              "clipCoverage": 0.09090909090909091,
+              "sourceCoverage": 0.09090909090909091,
+              "exact": false,
+              "sourceText": "音楽音楽ご視聴ありがとうございましたmeme",
+              "normalizedSourceText": "音楽音楽ご視聴ありがとうございましたmeme"
+            },
+            {
+              "sourceId": "IMQYaT_RWRA_LBBRk8blLV0",
+              "sourceStartMs": 18906,
+              "sourceEndMs": 89172,
+              "matchedChars": 2,
+              "queryChars": 22,
+              "sourceChars": 22,
+              "clipCoverage": 0.09090909090909091,
+              "sourceCoverage": 0.09090909090909091,
+              "exact": false,
+              "sourceText": "楽音楽ご視聴ありがとうございましたmemem",
+              "normalizedSourceText": "楽音楽ご視聴ありがとうございましたmemem"
+            },
+            {
+              "sourceId": "IMQYaT_RWRA_LBBRk8blLV0",
+              "sourceStartMs": 22449,
+              "sourceEndMs": 89192,
+              "matchedChars": 2,
+              "queryChars": 22,
+              "sourceChars": 22,
+              "clipCoverage": 0.09090909090909091,
+              "sourceCoverage": 0.09090909090909091,
+              "exact": false,
+              "sourceText": "音楽ご視聴ありがとうございましたmememe",
+              "normalizedSourceText": "音楽ご視聴ありがとうございましたmememe"
+            },
+            {
+              "sourceId": "IMQYaT_RWRA_LBBRk8blLV0",
+              "sourceStartMs": 22469,
+              "sourceEndMs": 89212,
+              "matchedChars": 2,
+              "queryChars": 22,
+              "sourceChars": 22,
+              "clipCoverage": 0.09090909090909091,
+              "sourceCoverage": 0.09090909090909091,
+              "exact": false,
+              "sourceText": "楽ご視聴ありがとうございましたmememem",
+              "normalizedSourceText": "楽ご視聴ありがとうございましたmememem"
+            },
+            {
+              "sourceId": "IMQYaT_RWRA_LBBRk8blLV0",
+              "sourceStartMs": 41994,
+              "sourceEndMs": 89232,
+              "matchedChars": 2,
+              "queryChars": 22,
+              "sourceChars": 22,
+              "clipCoverage": 0.09090909090909091,
+              "sourceCoverage": 0.09090909090909091,
+              "exact": false,
+              "sourceText": "ご視聴ありがとうございましたmemememe",
+              "normalizedSourceText": "ご視聴ありがとうございましたmemememe"
+            },
+            {
+              "sourceId": "IMQYaT_RWRA_LBBRk8blLV0",
+              "sourceStartMs": 47076,
+              "sourceEndMs": 146963,
+              "matchedChars": 1,
+              "queryChars": 22,
+              "sourceChars": 22,
+              "clipCoverage": 0.045454545454545456,
+              "sourceCoverage": 0.045454545454545456,
+              "exact": false,
+              "sourceText": "視聴ありがとうございましたmemememe音",
+              "normalizedSourceText": "視聴ありがとうございましたmemememe音"
+            },
+            {
+              "sourceId": "IMQYaT_RWRA_LBBRk8blLV0",
+              "sourceStartMs": 47536,
+              "sourceEndMs": 147444,
+              "matchedChars": 1,
+              "queryChars": 22,
+              "sourceChars": 22,
+              "clipCoverage": 0.045454545454545456,
+              "sourceCoverage": 0.045454545454545456,
+              "exact": false,
+              "sourceText": "聴ありがとうございましたmemememe音楽",
+              "normalizedSourceText": "聴ありがとうございましたmemememe音楽"
+            },
+            {
+              "sourceId": "IMQYaT_RWRA_LBBRk8blLV0",
+              "sourceStartMs": 49697,
+              "sourceEndMs": 147464,
+              "matchedChars": 1,
+              "queryChars": 22,
+              "sourceChars": 22,
+              "clipCoverage": 0.045454545454545456,
+              "sourceCoverage": 0.045454545454545456,
+              "exact": false,
+              "sourceText": "ありがとうございましたmemememe音楽音",
+              "normalizedSourceText": "ありがとうございましたmemememe音楽音"
+            },
+            {
+              "sourceId": "IMQYaT_RWRA_LBBRk8blLV0",
+              "sourceStartMs": 50157,
+              "sourceEndMs": 147484,
+              "matchedChars": 1,
+              "queryChars": 22,
+              "sourceChars": 22,
+              "clipCoverage": 0.045454545454545456,
+              "sourceCoverage": 0.045454545454545456,
+              "exact": false,
+              "sourceText": "りがとうございましたmemememe音楽音楽",
+              "normalizedSourceText": "りがとうございましたmemememe音楽音楽"
+            },
+            {
+              "sourceId": "IMQYaT_RWRA_LBBRk8blLV0",
+              "sourceStartMs": 50437,
+              "sourceEndMs": 171612,
+              "matchedChars": 1,
+              "queryChars": 22,
+              "sourceChars": 22,
+              "clipCoverage": 0.045454545454545456,
+              "sourceCoverage": 0.045454545454545456,
+              "exact": false,
+              "sourceText": "がとうございましたmemememe音楽音楽m",
+              "normalizedSourceText": "がとうございましたmemememe音楽音楽m"
+            }
+          ]
+        },
+        {
+          "sourceId": "IMQYaT_RWRA_Rfsj5uHy_Bs",
+          "matches": [
+            {
+              "sourceId": "IMQYaT_RWRA_Rfsj5uHy_Bs",
+              "sourceStartMs": 153309,
+              "sourceEndMs": 164196,
+              "matchedChars": 18,
+              "queryChars": 22,
+              "sourceChars": 22,
+              "clipCoverage": 0.8181818181818182,
+              "sourceCoverage": 0.8181818181818182,
+              "exact": false,
+              "sourceText": "はははは女騎士だゴブリンかなめっちゃ投げてる",
+              "normalizedSourceText": "はははは女騎士だごぶりんかなめっちゃ投げてる"
+            },
+            {
+              "sourceId": "IMQYaT_RWRA_Rfsj5uHy_Bs",
+              "sourceStartMs": 153409,
+              "sourceEndMs": 164496,
+              "matchedChars": 18,
+              "queryChars": 22,
+              "sourceChars": 22,
+              "clipCoverage": 0.8181818181818182,
+              "sourceCoverage": 0.8181818181818182,
+              "exact": false,
+              "sourceText": "ははは女騎士だゴブリンかなめっちゃ投げてるめ",
+              "normalizedSourceText": "ははは女騎士だごぶりんかなめっちゃ投げてるめ"
+            },
+            {
+              "sourceId": "IMQYaT_RWRA_Rfsj5uHy_Bs",
+              "sourceStartMs": 153569,
+              "sourceEndMs": 164536,
+              "matchedChars": 18,
+              "queryChars": 22,
+              "sourceChars": 22,
+              "clipCoverage": 0.8181818181818182,
+              "sourceCoverage": 0.8181818181818182,
+              "exact": false,
+              "sourceText": "はは女騎士だゴブリンかなめっちゃ投げてるめっ",
+              "normalizedSourceText": "はは女騎士だごぶりんかなめっちゃ投げてるめっ"
+            },
+            {
+              "sourceId": "IMQYaT_RWRA_Rfsj5uHy_Bs",
+              "sourceStartMs": 153589,
+              "sourceEndMs": 164576,
+              "matchedChars": 18,
+              "queryChars": 22,
+              "sourceChars": 22,
+              "clipCoverage": 0.8181818181818182,
+              "sourceCoverage": 0.8181818181818182,
+              "exact": false,
+              "sourceText": "は女騎士だゴブリンかなめっちゃ投げてるめっち",
+              "normalizedSourceText": "は女騎士だごぶりんかなめっちゃ投げてるめっち"
+            },
+            {
+              "sourceId": "IMQYaT_RWRA_Rfsj5uHy_Bs",
+              "sourceStartMs": 159715,
+              "sourceEndMs": 164596,
+              "matchedChars": 18,
+              "queryChars": 22,
+              "sourceChars": 22,
+              "clipCoverage": 0.8181818181818182,
+              "sourceCoverage": 0.8181818181818182,
+              "exact": false,
+              "sourceText": "女騎士だゴブリンかなめっちゃ投げてるめっちゃ",
+              "normalizedSourceText": "女騎士だごぶりんかなめっちゃ投げてるめっちゃ"
+            },
+            {
+              "sourceId": "IMQYaT_RWRA_Rfsj5uHy_Bs",
+              "sourceStartMs": 153089,
+              "sourceEndMs": 164116,
+              "matchedChars": 17,
+              "queryChars": 22,
+              "sourceChars": 22,
+              "clipCoverage": 0.7727272727272727,
+              "sourceCoverage": 0.7727272727272727,
+              "exact": false,
+              "sourceText": "ははははは女騎士だゴブリンかなめっちゃ投げて",
+              "normalizedSourceText": "ははははは女騎士だごぶりんかなめっちゃ投げて"
+            },
+            {
+              "sourceId": "IMQYaT_RWRA_Rfsj5uHy_Bs",
+              "sourceStartMs": 160935,
+              "sourceEndMs": 164796,
+              "matchedChars": 17,
+              "queryChars": 22,
+              "sourceChars": 22,
+              "clipCoverage": 0.7727272727272727,
+              "sourceCoverage": 0.7727272727272727,
+              "exact": false,
+              "sourceText": "騎士だゴブリンかなめっちゃ投げてるめっちゃコ",
+              "normalizedSourceText": "騎士だごぶりんかなめっちゃ投げてるめっちゃこ"
+            },
+            {
+              "sourceId": "IMQYaT_RWRA_Rfsj5uHy_Bs",
+              "sourceStartMs": 152828,
+              "sourceEndMs": 164096,
+              "matchedChars": 16,
+              "queryChars": 22,
+              "sourceChars": 22,
+              "clipCoverage": 0.7272727272727273,
+              "sourceCoverage": 0.7272727272727273,
+              "exact": false,
+              "sourceText": "はははははは女騎士だゴブリンかなめっちゃ投げ",
+              "normalizedSourceText": "はははははは女騎士だごぶりんかなめっちゃ投げ"
+            },
+            {
+              "sourceId": "IMQYaT_RWRA_Rfsj5uHy_Bs",
+              "sourceStartMs": 161055,
+              "sourceEndMs": 165756,
+              "matchedChars": 16,
+              "queryChars": 22,
+              "sourceChars": 22,
+              "clipCoverage": 0.7272727272727273,
+              "sourceCoverage": 0.7272727272727273,
+              "exact": false,
+              "sourceText": "士だゴブリンかなめっちゃ投げてるめっちゃコン",
+              "normalizedSourceText": "士だごぶりんかなめっちゃ投げてるめっちゃこん"
+            },
+            {
+              "sourceId": "IMQYaT_RWRA_Rfsj5uHy_Bs",
+              "sourceStartMs": 152708,
+              "sourceEndMs": 164076,
+              "matchedChars": 15,
+              "queryChars": 22,
+              "sourceChars": 22,
+              "clipCoverage": 0.6818181818181818,
+              "sourceCoverage": 0.6818181818181818,
+              "exact": false,
+              "sourceText": "ははははははは女騎士だゴブリンかなめっちゃ投",
+              "normalizedSourceText": "ははははははは女騎士だごぶりんかなめっちゃ投"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "warnings": [
+    "この照合結果をexpectedCutsとしてそのまま固定しないでください。",
+    "元動画の候補秒数を目視確認してから正解データにしてください。",
+    "切り抜き側STTにはBGM、SE、追加音声由来の不一致が混ざる前提です。"
+  ]
+}

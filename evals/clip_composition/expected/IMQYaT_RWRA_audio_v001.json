@@ -1,0 +1,41 @@
+{
+  "draftId": "IMQYaT_RWRA_audio_v001",
+  "fixtureId": "IMQYaT_RWRA_audio_v001",
+  "expectedCuts": [
+    {
+      "sourceStartMs": 1998363,
+      "sourceEndMs": 2006530,
+      "reason": "音声比較で切り抜き発話と元配信候補の発話部分が強く一致し、女騎士だという反応から投げている描写まで単独で意味が通るため。",
+      "sourceVideoId": "8uuQldLptRE",
+      "sourceUrl": "https://www.youtube.com/watch?v=8uuQldLptRE",
+      "sourceSttId": "IMQYaT_RWRA_8uuQldLptRE",
+      "clipId": "IMQYaT_RWRA",
+      "clipUrl": "https://www.youtube.com/watch?v=IMQYaT_RWRA",
+      "transcriptText": "やってきたって感じで女騎士だーめっちゃ投げてる",
+      "audioVerification": {
+        "reportPath": "evals/clip_composition/reports/audio-compare-IMQYaT_RWRA_v001.md",
+        "resultPath": "evals/clip_composition/outputs/audio-compare-IMQYaT_RWRA_v001.json",
+        "speechEnvelopeCorrelation": 0.883568,
+        "bestOffsetMs": 3750,
+        "comparedClipSpeechStartMs": 1313,
+        "comparedClipSpeechEndMs": 5338,
+        "comparedSourceCandidateStartMs": 1998363,
+        "comparedSourceCandidateEndMs": 2006530,
+        "bestAlignedSourceSpeechStartMs": 2002113,
+        "bestAlignedSourceSpeechEndMs": 2006138,
+        "note": "音声比較レポートで元配信候補の発話部分が参照候補中で最も強く一致した。"
+      },
+      "sttAlignment": {
+        "reportPath": "evals/clip_composition/reports/alignment-IMQYaT_RWRA_v001.md",
+        "resultPath": "evals/clip_composition/outputs/alignment-IMQYaT_RWRA_v001.json",
+        "clipCoverage": 0.5454545454545454,
+        "sourceCoverage": 0.5454545454545454,
+        "note": "STT文字列では再編集候補が最上位だが、元配信候補にも対応語が出ており、音声比較で元配信候補を優先した。"
+      },
+      "visualVerification": {
+        "status": "pending",
+        "note": "expectedCuts固定前の目視確認は未実施。音声比較で進められる範囲まで固定候補化している。"
+      }
+    }
+  ]
+}

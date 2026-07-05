@@ -1,0 +1,74 @@
+{
+  "targetId": "IMQYaT_RWRA",
+  "title": "『笑い声がトルコ行進曲』の女",
+  "createdAt": "2026-07-05T00:00:00+09:00",
+  "clip": {
+    "id": "IMQYaT_RWRA",
+    "sttId": "IMQYaT_RWRA",
+    "url": "https://www.youtube.com/watch?v=IMQYaT_RWRA",
+    "localVideoPath": "evals/clip_composition/research/downloads/IMQYaT_RWRA/IMQYaT_RWRA.mp4",
+    "durationSec": 18.622404,
+    "sttRole": "clip",
+    "notes": [
+      "BGM、SE、追加ナレーション、元配信に存在しない音声テキスト化を正常なノイズとして扱う。"
+    ]
+  },
+  "sourceCandidates": [
+    {
+      "id": "8uuQldLptRE",
+      "sttId": "IMQYaT_RWRA_8uuQldLptRE",
+      "url": "https://www.youtube.com/watch?v=8uuQldLptRE",
+      "localVideoPath": "evals/clip_composition/research/downloads/IMQYaT_RWRA/sources/8uuQldLptRE/8uuQldLptRE.mp4",
+      "durationSec": 5493,
+      "sttRole": "source",
+      "notes": [
+        "説明欄から抽出した元動画候補。対応確定はSTT照合と目視確認後。"
+      ]
+    },
+    {
+      "id": "LBBRk8blLV0",
+      "sttId": "IMQYaT_RWRA_LBBRk8blLV0",
+      "url": "https://www.youtube.com/watch?v=LBBRk8blLV0",
+      "localVideoPath": "evals/clip_composition/research/downloads/IMQYaT_RWRA/sources/LBBRk8blLV0/LBBRk8blLV0.mp4",
+      "durationSec": 205,
+      "sttRole": "source",
+      "notes": [
+        "説明欄から抽出した音楽候補。発話照合では一致しない可能性が高い。"
+      ]
+    },
+    {
+      "id": "Rfsj5uHy_Bs",
+      "sttId": "IMQYaT_RWRA_Rfsj5uHy_Bs",
+      "url": "https://youtu.be/Rfsj5uHy_Bs",
+      "localVideoPath": "evals/clip_composition/research/downloads/IMQYaT_RWRA/sources/Rfsj5uHy_Bs/Rfsj5uHy_Bs.mp4",
+      "durationSec": 249,
+      "sttRole": "source",
+      "notes": [
+        "説明欄から抽出した再編集候補。元配信確定用ではなく、切り抜き同士の近似確認に使う。"
+      ]
+    }
+  ],
+  "alignment": {
+    "resultPath": "evals/clip_composition/outputs/alignment-IMQYaT_RWRA_v001.json",
+    "reportPath": "evals/clip_composition/reports/alignment-IMQYaT_RWRA_v001.md",
+    "audioCompareResultPath": "evals/clip_composition/outputs/audio-compare-IMQYaT_RWRA_v001.json",
+    "audioCompareReportPath": "evals/clip_composition/reports/audio-compare-IMQYaT_RWRA_v001.md",
+    "visualCheckClips": [
+      "evals/clip_composition/outputs/visual-check/IMQYaT_RWRA/source_8uuQldLptRE_33m12s_22s.mp4",
+      "evals/clip_composition/outputs/visual-check/IMQYaT_RWRA/source_Rfsj5uHy_Bs_2m28s_22s.mp4"
+    ],
+    "notes": [
+      "照合結果はexpectedCutsとして未固定。",
+      "元配信候補の33:18.363-33:26.530は目視確認待ち。",
+      "再編集候補の2:33.309-2:44.196がSTT上の最上位。",
+      "音声比較では元配信候補8uuQldLptREの発話部分が最も強い。切り抜き発話0:01.313-0:05.338は、元配信候補33:22.113-33:26.138付近に対応する可能性が高い。"
+    ]
+  },
+  "requiredOutputs": [
+    "clip側STT結果",
+    "元動画候補3本の単語タイムスタンプ付きSTT結果",
+    "約30秒チャンク単位の照合結果",
+    "目視確認済みexpectedCuts",
+    "正解区間から人間が逆算した固定テーマ"
+  ]
+}

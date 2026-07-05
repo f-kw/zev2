@@ -30,6 +30,7 @@ type ExpectedCut = {
   sourceStartMs: number;
   sourceEndMs: number;
   reason: string;
+  [key: string]: unknown;
 };
 
 type ExpectedFile = {
@@ -198,10 +199,15 @@ function validateExpectedFile(value: unknown): ExpectedFile {
         throw new Error(`期待区間 ${index + 1} は終了位置が開始位置より後である必要があります`);
       }
 
+      const extraFields = Object.fromEntries(
+        Object.entries(cut).filter(([key]) => !['sourceStartMs', 'sourceEndMs', 'reason'].includes(key))
+      );
+
       return {
         sourceStartMs,
         sourceEndMs,
-        reason: requireString(cut.reason, `期待区間 ${index + 1} の理由`)
+        reason: requireString(cut.reason, `期待区間 ${index + 1} の理由`),
+        ...extraFields
       };
     })
   };
@@ -429,6 +435,7 @@ function buildSummaryMarkdown(input: {
 }): string {
   const selected = input.selectedCuts[0];
   const expected = input.expectedCuts[0];
+  const expectedEvidence = expected ? buildExpectedEvidenceMarkdown(expected) : ['- なし'];
   return [
     '# clip_composition 評価サマリー',
     '',
@@ -476,6 +483,10 @@ function buildSummaryMarkdown(input: {
     `- ${input.diff.overlapSummary}`,
     '- 期待区間の理由が暫定なので、人間が妥当な開始位置と終了位置を精査する必要があります。',
     '',
+    '## 期待区間の根拠',
+    '',
+    ...expectedEvidence,
+    '',
     '## 暫定判定',
     '',
     `- theme側: ${input.themeCoverage.themeSidePossibility}`,
@@ -484,6 +495,46 @@ function buildSummaryMarkdown(input: {
     `- 判定理由: ${input.themeCoverage.coverageSummary}`,
     ''
   ].join('\n');
+}
+
+function buildExpectedEvidenceMarkdown(expected: ExpectedCut): string[] {
+  const lines: string[] = [];
+  const audioVerification = recordFromOptional(expected.audioVerification);
+  const sttAlignment = recordFromOptional(expected.sttAlignment);
+  const visualVerification = recordFromOptional(expected.visualVerification);
+
+  if (audioVerification) {
+    const correlation = audioVerification.speechEnvelopeCorrelation;
+    const bestOffsetMs = audioVerification.bestOffsetMs;
+    const sourceStartMs = audioVerification.bestAlignedSourceSpeechStartMs;
+    const sourceEndMs = audioVerification.bestAlignedSourceSpeechEndMs;
+    lines.push(`- 音声比較: 発話部分の音量包絡相関 ${typeof correlation === 'number' ? correlation : '未記録'}`);
+    lines.push(`- 音声比較の最良位置: ${typeof sourceStartMs === 'number' && typeof sourceEndMs === 'number' ? `${sourceStartMs}ms - ${sourceEndMs}ms` : '未記録'}`);
+    lines.push(`- 音声比較のずれ: ${typeof bestOffsetMs === 'number' ? `${bestOffsetMs}ms` : '未記録'}`);
+  }
+
+  if (sttAlignment) {
+    const clipCoverage = sttAlignment.clipCoverage;
+    const sourceCoverage = sttAlignment.sourceCoverage;
+    lines.push(`- STT照合: 切り抜き側 ${typeof clipCoverage === 'number' ? `${Math.round(clipCoverage * 1000) / 10}%` : '未記録'} / 元動画側 ${typeof sourceCoverage === 'number' ? `${Math.round(sourceCoverage * 1000) / 10}%` : '未記録'}`);
+  }
+
+  if (visualVerification) {
+    const status = visualVerification.status;
+    const note = visualVerification.note;
+    lines.push(`- 目視確認: ${typeof status === 'string' ? status : '未記録'}${typeof note === 'string' ? `。${note}` : ''}`);
+  }
+
+  if (lines.length === 0) {
+    return ['- 追加根拠は未記録です'];
+  }
+  return lines;
+}
+
+function recordFromOptional(value: unknown): Record<string, unknown> | undefined {
+  return value && typeof value === 'object' && !Array.isArray(value)
+    ? value as Record<string, unknown>
+    : undefined;
 }
 
 async function main() {

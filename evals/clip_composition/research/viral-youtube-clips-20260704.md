@@ -56,14 +56,81 @@ STT前に、切り抜き区間選択評価のfixture候補にできるYouTube動
 
 ## STT後にやること
 
-1. 第一候補の切り抜き動画をSTTする。
-2. 説明欄にある元動画候補をSTTする。
-3. 切り抜き動画の発話列が元動画内のどこに出るか照合する。
-4. 対応できた元動画区間を `expectedCuts` にする。
-5. その元動画の文字起こしと固定テーマをfixture化する。
+詳細手順は `evals/clip_composition/STT_ALIGNMENT_PLAN.md` に固定する。
+
+1. 第一候補の切り抜き動画をSTTする。BGM、SE、切り抜き師が追加した音声やナレーションで認識率が落ちる前提で扱う。
+2. 説明欄にある元動画候補をSTTする。元動画側は単語レベルのタイムスタンプ付きで出す。
+3. 切り抜きを約30秒単位のチャンクに分割し、チャンク単位で元動画候補3本の全域を探索する。
+4. 照合前に、ひらがな化、数字表記統一、全角半角統一などの正規化を行う。
+5. 切り抜きが複数の元動画をまたぐ可能性を正常系として扱う。
+6. STT照合候補に対して、切り抜き全体と発話部分を分けた音声比較を行う。
+7. 逆引きされた区間をそのまま固定せず、元動画の該当秒数を目視と聴取で確認する。
+8. 目視確認済みの区間だけを `expectedCuts` にする。チャンクごとの一致度も一緒に記録する。
+9. 固定テーマは現行システムに生成させず、目視確認済みの正解区間から人間が逆算して書く。
+
+## 2026-07-05 STT・照合結果
+
+ローカルSTTサーバー `http://192.168.1.8:8000` で、切り抜き1本と説明欄の参照候補3本をSTTした。
+
+保存した参照候補:
+
+- `8uuQldLptRE`: 91分33秒の元配信候補。`evals/clip_composition/research/downloads/IMQYaT_RWRA/sources/8uuQldLptRE/8uuQldLptRE.mp4`
+- `LBBRk8blLV0`: 3分25秒の音楽候補。`evals/clip_composition/research/downloads/IMQYaT_RWRA/sources/LBBRk8blLV0/LBBRk8blLV0.mp4`
+- `Rfsj5uHy_Bs`: 4分9秒の再編集候補。`evals/clip_composition/research/downloads/IMQYaT_RWRA/sources/Rfsj5uHy_Bs/Rfsj5uHy_Bs.mp4`
+
+STT保存先:
+
+- 切り抜き: `evals/clip_composition/stt/IMQYaT_RWRA/clip/`
+- 元配信候補: `evals/clip_composition/stt/IMQYaT_RWRA_8uuQldLptRE/source/`
+- 音楽候補: `evals/clip_composition/stt/IMQYaT_RWRA_LBBRk8blLV0/source/`
+- 再編集候補: `evals/clip_composition/stt/IMQYaT_RWRA_Rfsj5uHy_Bs/source/`
+
+チャンク照合結果:
+
+- 切り抜き側は18.622秒なので、30秒チャンクは1件。
+- 全体最上位は再編集候補 `Rfsj5uHy_Bs` の 2:33.309 - 2:44.196。
+- 元配信候補 `8uuQldLptRE` の参照元別最上位は 33:18.363 - 33:26.530。
+- 音楽候補 `LBBRk8blLV0` は発話照合の候補として弱い。
+
+照合出力:
+
+- `evals/clip_composition/outputs/alignment-IMQYaT_RWRA_v001.json`
+- `evals/clip_composition/reports/alignment-IMQYaT_RWRA_v001.md`
+- `evals/clip_composition/outputs/audio-compare-IMQYaT_RWRA_v001.json`
+- `evals/clip_composition/reports/audio-compare-IMQYaT_RWRA_v001.md`
+
+音声比較結果:
+
+- 切り抜き全体の直接波形は、BGMとSEの重なりで参照元候補と強く一致しなかった。
+- 発話部分だけを見ると、元配信候補 `8uuQldLptRE` の音量包絡相関が最も高い。
+- 切り抜き発話 `0:01.313 - 0:05.338` は、元配信候補 `33:22.113 - 33:26.138` 付近に対応する可能性が高い。
+- STT上の全体最上位は再編集候補だったが、音声比較では元配信候補が強いため、expectedCuts候補は `8uuQldLptRE` 側を優先する。
+
+fixture候補:
+
+- `evals/clip_composition/fixtures/IMQYaT_RWRA_audio_v001/`
+- `evals/clip_composition/expected/IMQYaT_RWRA_audio_v001.json`
+- 期待区間: `8uuQldLptRE` の `33:18.363 - 33:26.530`
+- 音声比較の芯: `8uuQldLptRE` の `33:22.113 - 33:26.138`
+- 固定テーマ: 「笑い声がトルコ行進曲に聞こえる女騎士いじり」
+- 現在の評価結果: `evals/clip_composition/reports/IMQYaT_RWRA_audio_v001/clip_composition_prompt_v001/20260705-123051/summary.md`
+- 3回実行では、現在のrule-based compositionが期待区間と同じ `1998363ms - 2006530ms` を選び、揺れは0ms。
+
+目視確認用クリップ:
+
+- `evals/clip_composition/outputs/visual-check/IMQYaT_RWRA/source_8uuQldLptRE_33m12s_22s.mp4`
+- `evals/clip_composition/outputs/visual-check/IMQYaT_RWRA/source_Rfsj5uHy_Bs_2m28s_22s.mp4`
+
+未確定:
+
+- `expectedCuts` はまだ固定しない。
+- 元配信候補の 33:18.363 - 33:26.530 が本当に切り抜き元か、目視と聴取で確認する必要がある。
+- 確認後、固定テーマはこの正解区間から人間が逆算して書く。
 
 ## 未確定
 
 - 説明欄のURLが本当に対応元動画かは未確認。
 - 切り抜き動画が字幕・音声加工・BGM入りの場合、STT照合に補正が必要になる可能性がある。
 - 元動画内の対応時刻はまだ確定していない。
+- 切り抜き側に元動画へ存在しないSE由来テキストや追加音声が混ざる可能性がある。
+- 最初のfixtureでは、照合結果を人間が目視確認するまで正解区間として固定しない。
