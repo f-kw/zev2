@@ -77,6 +77,16 @@ type ComparisonRow = {
   allExpectedCutsMatchedExactlyByIndex: boolean;
   allExpectedCutsHaveOverlapByIndex: boolean;
   diffSummary?: string;
+  selectedIntervals: string[];
+  expectedIntervals: string[];
+  cutDiffs: Array<{
+    cutIndex: number;
+    status: string;
+    startDeltaMs?: number;
+    endDeltaMs?: number;
+    overlapMs?: number;
+    overlapSummary?: string;
+  }>;
   selectedReason?: string;
   usedSpeechIds?: number[];
   themeSidePossibility?: string;
@@ -255,6 +265,56 @@ function computedDiffSummary(result: ScoreResult) {
   };
 }
 
+function computedCutDiffs(result: ScoreResult): NonNullable<ScoreResult['cutDiffs']> {
+  if (result.cutDiffs && result.cutDiffs.length > 0) {
+    return result.cutDiffs;
+  }
+
+  const count = Math.max(result.selectedCuts.length, result.expectedCuts.length);
+  const cutDiffs: NonNullable<ScoreResult['cutDiffs']> = [];
+  for (let index = 0; index < count; index += 1) {
+    const selected = result.selectedCuts[index];
+    const expected = result.expectedCuts[index];
+    if (selected && expected) {
+      const overlapMs = Math.max(
+        0,
+        Math.min(selected.sourceEndMs, expected.sourceEndMs) - Math.max(selected.sourceStartMs, expected.sourceStartMs)
+      );
+      cutDiffs.push({
+        cutIndex: index,
+        status: 'compared',
+        startDeltaMs: selected.sourceStartMs - expected.sourceStartMs,
+        endDeltaMs: selected.sourceEndMs - expected.sourceEndMs,
+        overlapMs,
+        overlapSummary: index === 0 ? result.diff.overlapSummary : `区間${index + 1}の重なりは${overlapMs}msです`
+      });
+      continue;
+    }
+
+    if (expected) {
+      cutDiffs.push({
+        cutIndex: index,
+        status: 'missing_selected_cut',
+        overlapMs: 0,
+        overlapSummary: `期待区間${index + 1}に対応する選択区間がありません`
+      });
+      continue;
+    }
+
+    cutDiffs.push({
+      cutIndex: index,
+      status: 'extra_selected_cut',
+      overlapMs: 0,
+      overlapSummary: `選択区間${index + 1}に対応する期待区間がありません`
+    });
+  }
+  return cutDiffs;
+}
+
+function intervalText(cut: Cut): string {
+  return `${cut.sourceStartMs}-${cut.sourceEndMs}`;
+}
+
 function buildRow(resultPath: string, result: ScoreResult): ComparisonRow {
   const selected = result.selectedCuts[0];
   const expected = result.expectedCuts[0];
@@ -266,6 +326,7 @@ function buildRow(resultPath: string, result: ScoreResult): ComparisonRow {
   }
   const fallback = computedDiffSummary(result);
   const summary = result.diffSummary ?? fallback;
+  const cutDiffs = computedCutDiffs(result);
   return {
     resultPath: path.relative(workspaceRoot(), resultPath),
     runAt: result.runAt,
@@ -289,6 +350,9 @@ function buildRow(resultPath: string, result: ScoreResult): ComparisonRow {
     allExpectedCutsMatchedExactlyByIndex: optionalBooleanFrom(summary.allExpectedCutsMatchedExactlyByIndex) ?? fallback.allExpectedCutsMatchedExactlyByIndex,
     allExpectedCutsHaveOverlapByIndex: optionalBooleanFrom(summary.allExpectedCutsHaveOverlapByIndex) ?? fallback.allExpectedCutsHaveOverlapByIndex,
     ...(typeof summary.summary === 'string' ? { diffSummary: summary.summary } : {}),
+    selectedIntervals: result.selectedCuts.map(intervalText),
+    expectedIntervals: result.expectedCuts.map(intervalText),
+    cutDiffs,
     ...(selected.reason ? { selectedReason: selected.reason } : {}),
     ...(selected.usedSpeechIds ? { usedSpeechIds: selected.usedSpeechIds } : {}),
     ...(result.themeCoverage?.themeSidePossibility ? { themeSidePossibility: result.themeCoverage.themeSidePossibility } : {}),
@@ -310,6 +374,24 @@ function compareRows(left: ComparisonRow, right: ComparisonRow): number {
 
 function formatMs(value: number): string {
   return value > 0 ? `+${value}ms` : `${value}ms`;
+}
+
+function formatIntervals(intervals: string[]): string {
+  return intervals.length > 0 ? intervals.join('<br>') : 'なし';
+}
+
+function formatCutDiffs(cutDiffs: ComparisonRow['cutDiffs']): string {
+  if (cutDiffs.length === 0) {
+    return 'なし';
+  }
+
+  return cutDiffs.map((diff) => {
+    const label = `${diff.cutIndex + 1}:${diff.status}`;
+    const start = diff.startDeltaMs === undefined ? '開始 比較不可' : `開始 ${formatMs(diff.startDeltaMs)}`;
+    const end = diff.endDeltaMs === undefined ? '終了 比較不可' : `終了 ${formatMs(diff.endDeltaMs)}`;
+    const overlap = diff.overlapMs === undefined ? '重なり 比較不可' : `重なり ${diff.overlapMs}ms`;
+    return [label, start, end, overlap].join(' / ');
+  }).join('<br>');
 }
 
 function buildReport(rows: ComparisonRow[], resultPath: string): string {
@@ -336,10 +418,10 @@ function buildReport(rows: ComparisonRow[], resultPath: string): string {
   for (const [fixtureId, fixtureRows] of [...byFixture.entries()].sort(([left], [right]) => left.localeCompare(right))) {
     lines.push(`## ${fixtureId}`);
     lines.push('');
-    lines.push('| prompt | model | cuts | exact | overlap | missing | extra | selected | expected | start delta | end delta | first overlap |');
+    lines.push('| prompt | model | cuts | exact | overlap | missing | extra | selected intervals | expected intervals | first start delta | first end delta | cut diffs |');
     lines.push('| --- | --- | ---: | ---: | ---: | ---: | ---: | --- | --- | ---: | ---: | --- |');
     for (const row of fixtureRows.sort(compareRows)) {
-      lines.push(`| ${row.promptVersion} | ${row.model} | ${row.selectedCutCount}/${row.expectedCutCount} | ${row.exactMatchCount} | ${row.overlappingCutCount} | ${row.missingExpectedCutCount} | ${row.extraSelectedCutCount} | ${row.selectedStartMs}-${row.selectedEndMs} | ${row.expectedStartMs}-${row.expectedEndMs} | ${formatMs(row.startDeltaMs)} | ${formatMs(row.endDeltaMs)} | ${row.overlapSummary} |`);
+      lines.push(`| ${row.promptVersion} | ${row.model} | ${row.selectedCutCount}/${row.expectedCutCount} | ${row.exactMatchCount} | ${row.overlappingCutCount} | ${row.missingExpectedCutCount} | ${row.extraSelectedCutCount} | ${formatIntervals(row.selectedIntervals)} | ${formatIntervals(row.expectedIntervals)} | ${formatMs(row.startDeltaMs)} | ${formatMs(row.endDeltaMs)} | ${formatCutDiffs(row.cutDiffs)} |`);
     }
     lines.push('');
     lines.push('### 判定メモ');
@@ -357,6 +439,8 @@ function buildReport(rows: ComparisonRow[], resultPath: string): string {
   lines.push('');
   lines.push('- 差分が0msのrunは、指定された期待区間と一致している。');
   lines.push('- cuts列は、選択区間数/期待区間数を表す。');
+  lines.push('- selected intervalsとexpected intervalsは、複数区間expectedの場合に全区間を順番に表示する。');
+  lines.push('- cut diffsは、各区間の開始差分、終了差分、重なりを順番に表示する。');
   lines.push('- missingは期待区間に対応する選択区間がない件数、extraは期待区間に対応しない選択区間の件数を表す。');
   lines.push('- 終了差分がマイナスのrunは期待区間より短く、プラスのrunは期待区間より長い。');
   lines.push('- どちらが良いかは、この表だけで自動決定せず、対応するsummaryと境界粒度レポートを見て判断する。');
