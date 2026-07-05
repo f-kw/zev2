@@ -1,7 +1,7 @@
 {
   "fixtureId": "IMQYaT_RWRA_context_v001",
   "draftId": "IMQYaT_RWRA_context_v001",
-  "description": "音声比較の切り抜き全体対応区間を候補窓として持つ、composition評価用fixture。",
+  "description": "音声比較とWeb版Gemini確認で対応を確認した切り抜き全体区間を評価するcomposition fixture。",
   "copiedFrom": [
     "stt/IMQYaT_RWRA_8uuQldLptRE/source/word-timestamps.json",
     "evals/clip_composition/outputs/audio-compare-IMQYaT_RWRA_v001.json"
@@ -13,8 +13,8 @@
   "selectedThemeId": "theme_audio_context_1",
   "notes": [
     "評価実行時はruntime/artifactsを読まず、このfixture配下のファイルだけを読む。",
-    "候補窓は音声比較結果の切り抜き全体対応区間から作る。",
-    "期待区間は同じ音声比較結果の発話部分対応区間から作る。",
-    "固定テーマは音声確認済みの期待区間から人間が逆算したもの。"
+    "期待区間は実在の切り抜き動画全体に対応する元配信側区間から作る。",
+    "発話一致区間は期待区間ではなく、元ネタ照合の証拠メタデータとして扱う。",
+    "固定テーマは境界指定を含めず、切り抜き対象の内容だけを人間が逆算したもの。"
   ]
 }

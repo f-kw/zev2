@@ -132,8 +132,8 @@ function parseOptions(argv: string[]): CliOptions {
     fixtureId: sanitizePathPart(fixtureId),
     targetFile: path.resolve(targetFile),
     sourceSttId: sanitizePathPart(sourceSttId),
-    themeTitle: values.get('themeTitle')?.trim() || '笑い声がトルコ行進曲に聞こえる女騎士いじり',
-    themeSummary: values.get('themeSummary')?.trim() || '女騎士のように現れた相手への反応と、印象的な笑い声で短尺として成立する場面。'
+    themeTitle: values.get('themeTitle')?.trim() || '女騎士に投げまくる場面',
+    themeSummary: values.get('themeSummary')?.trim() || '相手を女騎士のように見立て、投げている様子に反応する場面。'
   };
 }
 
@@ -193,8 +193,8 @@ async function main() {
     throw new Error(`音声比較結果にsourceSttIdがありません: ${options.sourceSttId}`);
   }
 
-  const candidateRange = requiredRange(audioMatch.fullTimeline?.reference, '切り抜き全体に対応する候補窓');
-  const expectedRange = requiredRange(audioMatch.speechOnly?.reference, '発話部分に対応する期待区間');
+  const candidateRange = requiredRange(audioMatch.fullTimeline?.reference, '切り抜き全体に対応する期待区間');
+  const speechAnchorRange = requiredRange(audioMatch.speechOnly?.reference, '発話部分に対応する音声アンカー区間');
   const audioAlignedStartMs = audioMatch.speechOnly?.reference && audioMatch.speechOnly.envelope?.bestOffsetMs !== undefined
     ? audioMatch.speechOnly.reference.startMs + audioMatch.speechOnly.envelope.bestOffsetMs
     : undefined;
@@ -219,10 +219,10 @@ async function main() {
   })).filter((segment) => segment.endMs >= segment.startMs);
   const candidateSpeechIds = segments.map((segment) => segment.id);
   const representativeSpeechIds = segments
-    .filter((segment) => segment.endMs > expectedRange.sourceStartMs && segment.startMs < expectedRange.sourceEndMs)
+    .filter((segment) => segment.endMs > speechAnchorRange.sourceStartMs && segment.startMs < speechAnchorRange.sourceEndMs)
     .map((segment) => segment.id);
   if (representativeSpeechIds.length === 0) {
-    throw new Error('期待区間に対応する発話IDがありません');
+    throw new Error('音声アンカー区間に対応する発話IDがありません');
   }
 
   const representativeText = rangeText(segments.filter((segment) => representativeSpeechIds.includes(segment.id)));
@@ -233,7 +233,7 @@ async function main() {
   const fixture = {
     fixtureId: options.fixtureId,
     draftId: options.fixtureId,
-    description: '音声比較の切り抜き全体対応区間を候補窓として持つ、composition評価用fixture。',
+    description: '音声比較と目視確認で対応を確認する切り抜き全体区間を評価するcomposition fixture。',
     copiedFrom: [
       `stt/${options.sourceSttId}/source/word-timestamps.json`,
       target.alignment?.audioCompareResultPath
@@ -245,9 +245,9 @@ async function main() {
     selectedThemeId: 'theme_audio_context_1',
     notes: [
       '評価実行時はruntime/artifactsを読まず、このfixture配下のファイルだけを読む。',
-      '候補窓は音声比較結果の切り抜き全体対応区間から作る。',
-      '期待区間は同じ音声比較結果の発話部分対応区間から作る。',
-      '固定テーマは音声確認済みの期待区間から人間が逆算したもの。'
+      '期待区間は実在の切り抜き動画全体に対応する元配信側区間から作る。',
+      '発話一致区間は期待区間ではなく、元ネタ照合の証拠メタデータとして扱う。',
+      '固定テーマは境界指定を含めず、切り抜き対象の内容だけを人間が逆算したもの。'
     ]
   };
 
@@ -261,8 +261,8 @@ async function main() {
       sourceRange: candidateRange
     },
     notes: [
-      'clip_composition評価環境で、音声比較の切り抜き全体対応区間を候補窓として固定した文字起こし。',
-      '代表発話IDは音声比較で確認した期待区間に対応する。'
+      'clip_composition評価環境で、音声比較の切り抜き全体対応区間を期待区間として固定した文字起こし。',
+      '代表発話IDは音声比較で確認した発話アンカー区間に対応する。'
     ],
     generatedAt: now,
     language: 'ja-JP',
@@ -285,18 +285,18 @@ async function main() {
         representativeText,
         representativeSpeechIds,
         relatedSpeechIds: candidateSpeechIds,
-        whyItCanBeClipped: '短い発話だけで場面の面白さが伝わり、音声比較で切り抜き元候補と対応しているため。',
-        compositionNote: '候補窓の中から、女騎士のように見えた相手への反応と投げている描写が単独で伝わる範囲だけを使う。',
+        whyItCanBeClipped: '相手を女騎士に見立てる反応と投げている描写が短い場面内で伝わり、音声比較で切り抜き元候補と対応しているため。',
+        compositionNote: '相手を女騎士のように見立てた反応と、投げている描写が伝わる場面を使う。',
         evidenceRefs: [
           {
             kind: 'time_range',
-            refId: 'audio_context_candidate_range',
+            refId: 'audio_verified_expected_range',
             meaning: `${source.url} ${candidateRange.sourceStartMs}ms-${candidateRange.sourceEndMs}ms`
           },
           {
             kind: 'time_range',
-            refId: 'audio_verified_expected_range',
-            meaning: `${source.url} ${expectedRange.sourceStartMs}ms-${expectedRange.sourceEndMs}ms`
+            refId: 'audio_verified_speech_anchor_range',
+            meaning: `${source.url} ${speechAnchorRange.sourceStartMs}ms-${speechAnchorRange.sourceEndMs}ms`
           }
         ]
       }
@@ -308,32 +308,37 @@ async function main() {
     fixtureId: options.fixtureId,
     expectedCuts: [
       {
-        ...expectedRange,
-        reason: '音声比較で切り抜き発話と元配信候補の発話部分が強く一致し、候補窓の中で単独で意味が通る中心区間のため。',
+        ...candidateRange,
+        reason: '実在の切り抜き動画全体を、切り抜き内の発話開始位置と元配信候補のSTT一致範囲を音声アンカーとして元配信側へ対応させたため。',
         sourceVideoId: source.id,
         sourceUrl: source.url,
         sourceSttId: options.sourceSttId,
         clipId: target.clip.id,
         clipUrl: target.clip.url,
-        transcriptText: representativeText,
-        verificationStatus: 'audio_confirmed_visual_pending',
+        transcriptText: rangeText(segments),
+        verificationStatus: 'audio_anchor_confirmed_visual_pending',
+        usableForClipLocationEval: true,
         usableForCompositionPromptEval: true,
         audioVerification: {
-          status: 'confirmed',
-          method: '切り抜き全体の対応区間を候補窓にし、切り抜き発話部分と元配信候補区間の音量包絡を比較',
+          status: 'speech_anchor_confirmed',
+          method: '切り抜き発話部分と元配信候補区間の音量包絡を比較し、発話一致を証拠として切り抜き動画全体の対応区間を元配信側へ置いた。',
           reportPath: target.alignment?.audioCompareReportPath,
           resultPath: target.alignment?.audioCompareResultPath,
+          clipSpeechStartMs: audioMatch.speechOnly?.query?.startMs,
+          clipSpeechEndMs: audioMatch.speechOnly?.query?.endMs,
+          sourceSpeechAnchorStartMs: speechAnchorRange.sourceStartMs,
+          sourceSpeechAnchorEndMs: speechAnchorRange.sourceEndMs,
           speechEnvelopeCorrelation: audioMatch.speechOnly?.envelope?.maxCorrelation,
           bestOffsetMs: audioMatch.speechOnly?.envelope?.bestOffsetMs,
           comparedClipSpeechStartMs: audioMatch.speechOnly?.query?.startMs,
           comparedClipSpeechEndMs: audioMatch.speechOnly?.query?.endMs,
-          comparedSourceCandidateStartMs: expectedRange.sourceStartMs,
-          comparedSourceCandidateEndMs: expectedRange.sourceEndMs,
+          comparedSourceCandidateStartMs: speechAnchorRange.sourceStartMs,
+          comparedSourceCandidateEndMs: speechAnchorRange.sourceEndMs,
           fullTimelineCandidateStartMs: candidateRange.sourceStartMs,
           fullTimelineCandidateEndMs: candidateRange.sourceEndMs,
           bestAlignedSourceSpeechStartMs: audioAlignedStartMs,
           bestAlignedSourceSpeechEndMs: audioAlignedEndMs,
-          note: '候補窓は切り抜き全体比較、期待区間は発話部分比較から作った。'
+          note: '発話一致区間は元ネタ照合の証拠として保持し、期待区間そのものは実在の切り抜き動画全体に対応する範囲とする。'
         },
         sttAlignment: {
           reportPath: target.alignment?.reportPath,
@@ -344,7 +349,7 @@ async function main() {
         },
         visualVerification: {
           status: 'pending',
-          note: '音声比較でcompositionプロンプト評価には使える状態。最終データセットQAとしての目視確認は未実施。'
+          note: '音声比較で元ネタ候補は確認済み。最終データセットQAとしての目視確認は未実施。'
         }
       }
     ]
@@ -357,8 +362,8 @@ async function main() {
 
   console.log(`fixture: ${fixtureDir}`);
   console.log(`expected: ${path.join(evalRoot, 'expected', `${options.fixtureId}.json`)}`);
-  console.log(`candidate: ${candidateRange.sourceStartMs}ms - ${candidateRange.sourceEndMs}ms`);
-  console.log(`expected: ${expectedRange.sourceStartMs}ms - ${expectedRange.sourceEndMs}ms`);
+  console.log(`expected: ${candidateRange.sourceStartMs}ms - ${candidateRange.sourceEndMs}ms`);
+  console.log(`speech anchor: ${speechAnchorRange.sourceStartMs}ms - ${speechAnchorRange.sourceEndMs}ms`);
   console.log(`segments: ${segments.length}`);
   console.log(`representative speech ids: ${representativeSpeechIds.join(',')}`);
 }
