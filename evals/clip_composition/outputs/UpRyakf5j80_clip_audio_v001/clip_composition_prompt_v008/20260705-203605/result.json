@@ -1,0 +1,128 @@
+{
+  "runAt": "2026-07-05T20:36:05+09:00",
+  "draftId": "UpRyakf5j80_clip_audio_v001",
+  "fixtureId": "UpRyakf5j80_clip_audio_v001",
+  "promptVersion": "clip_composition_prompt_v008",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "manualRun": true,
+    "runner": "node-type-strip"
+  },
+  "evaluationMode": "external_prompt_output",
+  "inputFile": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/UpRyakf5j80_clip_audio_v001/clip_composition_prompt_v008/20260705-203250/gemini-web-flash-output.json",
+  "selectedCuts": [
+    {
+      "sourceStartMs": 11364140,
+      "sourceEndMs": 11409170,
+      "reason": "世界2位の話題が提示されるお便りの読み上げ（発話ID 2）を開始位置とし、変動する順位への冷静な本音を語るオチの反復（発話ID 19）の直後にある短い相づち（発話ID 20）までを含めました。発話ID 20の相づちは新しい話題や相談内容に移っておらず、切り抜き音声の自然な締め・余韻として機能するため、判断方針に基づき終了位置に採用しています。なお、冒頭のお礼（発話ID 1）は話題の前段階の断片であるため除外しています。",
+      "usedSpeechIds": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20
+      ]
+    }
+  ],
+  "expectedCuts": [
+    {
+      "sourceStartMs": 11364500,
+      "sourceEndMs": 11407178,
+      "reason": "YouTube自動字幕のチャンク照合で同じ連続範囲に集まり、切り抜き全体の音声比較とWeb版Geminiの左右映像確認で同一元ネタと判定された区間のため。",
+      "sourceVideoId": "kNX-wQTvsws",
+      "sourceUrl": "https://www.youtube.com/watch?v=kNX-wQTvsws",
+      "sourceSttId": "UpRyakf5j80_kNX-wQTvsws_youtube_auto",
+      "clipId": "UpRyakf5j80",
+      "clipUrl": "https://www.youtube.com/watch?v=UpRyakf5j80",
+      "transcriptText": "香りどうもありがとうございますとある記事で船長は現在現役で活躍されているvtuberで世界2位なんだと取り上げられているのを見ましたその人と結婚してるなんてどうか私も誇らしいやら恥ずかしいやろで緊張していますどうしたマジで大丈夫かさあそんな世界に行くとか言うけどさそんなもんさーやめようよそんなのなんかあんまりなんかそういうさあ変動するじゃんそういうのって変動するものであんま喜べないんだよね船長うんどうせまた変わるしみたいな感じあんま喜べないんだよね先日のうん",
+      "verificationStatus": "audio_confirmed_visual_confirmed",
+      "usableForCompositionPromptEval": true,
+      "audioVerification": {
+        "status": "confirmed",
+        "method": "切り抜き動画全体を、字幕照合で絞った元動画候補55秒区間の中で音量包絡比較した。",
+        "reportPath": "evals/clip_composition/reports/audio-compare-chunks-UpRyakf5j80_youtube_auto_source_slice_full_window_v001.md",
+        "resultPath": "evals/clip_composition/outputs/audio-compare-chunks-UpRyakf5j80_youtube_auto_source_slice_full_window_v001.json",
+        "clipDurationMs": 42678,
+        "sourceSliceStartMs": 11357000,
+        "sourceSliceEndMs": 11412004,
+        "sourceSliceBestOffsetMs": 7500,
+        "sourceSliceBestEndMs": 50178,
+        "bestAlignedSourceStartMs": 11364500,
+        "bestAlignedSourceEndMs": 11407178,
+        "envelopeCorrelation": 0.974592,
+        "speechEnvelopeCorrelation": 0.974592,
+        "bestOffsetMs": 7500,
+        "bestAlignedSourceSpeechStartMs": 11364500,
+        "bestAlignedSourceSpeechEndMs": 11407178,
+        "directCorrelationAtEnvelopeOffset": -0.259884,
+        "note": "切り抜き全体の音量包絡は、元動画候補55秒区間内の7.500秒位置に強く一致した。負の直接波形相関は、音量包絡で見つけた位置での生波形比較であり、BGM、圧縮、編集差分の影響を受けるため、区間確認では音量包絡と映像確認を優先する。"
+      },
+      "sttAlignment": {
+        "reportPath": "evals/clip_composition/reports/alignment-UpRyakf5j80_youtube_auto_v001.md",
+        "resultPath": "evals/clip_composition/outputs/alignment-UpRyakf5j80_youtube_auto_v001.json",
+        "clipCoverage": 0.9878048780487805,
+        "sourceCoverage": 0.9878048780487805,
+        "chunkMatches": [
+          {
+            "clipStartMs": 0,
+            "clipEndMs": 30000,
+            "sourceStartMs": 11362439,
+            "sourceEndMs": 11397300,
+            "clipCoverage": 0.9878048780487805,
+            "sourceCoverage": 0.9878048780487805
+          },
+          {
+            "clipStartMs": 30000,
+            "clipEndMs": 44390,
+            "sourceStartMs": 11391899,
+            "sourceEndMs": 11405460,
+            "clipCoverage": 0.95,
+            "sourceCoverage": 0.95
+          }
+        ],
+        "note": "30秒チャンク2件が同じ元動画の連続範囲に集まったため、単一区間候補として扱える。"
+      },
+      "visualVerification": {
+        "status": "confirmed",
+        "checkedBy": "gemini-web-flash",
+        "checkedAt": "2026-07-05T18:37:00+09:00",
+        "resultPath": "evals/clip_composition/outputs/UpRyakf5j80/visual_verification/20260705-gemini-web-flash-audio-confirmed-v001.json",
+        "uploadedVideoPath": "evals/clip_composition/outputs/visual-check/UpRyakf5j80/gemini_pair_audio_confirmed_v001_UpRyakf5j80_vs_kNX-wQTvsws_3h09m24s.mp4",
+        "note": "Web版Gemini Flashで左右比較動画を確認し、キャラクターの表情と口の動き、切り抜き音声との同期から同一元ネタと判定。切り抜き側には字幕追加と画面拡大がある。"
+      }
+    }
+  ],
+  "diff": {
+    "startDeltaMs": -360,
+    "endDeltaMs": 1992,
+    "overlapSummary": "LLMが選んだ区間が期待区間を含んでいます"
+  },
+  "themeCoverage": {
+    "selectedThemeId": "theme_audio_verified_1",
+    "candidateStartMs": 11362439,
+    "candidateEndMs": 11409170,
+    "coverageSummary": "期待区間は選択済みテーマの候補範囲に入っています",
+    "themeSidePossibility": "theme側で正解区間が候補に入っていない可能性は低い",
+    "compositionSidePossibility": "composition側で候補範囲から最終区間を選ぶ処理に差分がある可能性があります"
+  },
+  "sourceFiles": {
+    "fixture": "fixtures/UpRyakf5j80_clip_audio_v001",
+    "expected": "expected/UpRyakf5j80_clip_audio_v001.json"
+  }
+}
