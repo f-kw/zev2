@@ -136,11 +136,22 @@ pnpm --filter @zev2/agent-runner exec tsx ../evals/clip_composition/freeze_conte
 
 このfixtureは、音声比較結果の「切り抜き全体に対応する元配信側区間」を候補窓にし、「切り抜き発話部分に対応する元配信側区間」を期待区間にします。第一候補では、候補窓が `1997050ms - 2015672ms`、期待区間が `1998363ms - 2006530ms` です。
 
+このfixtureは、compositionが候補窓から発話の芯だけを選べるかを見るためのものです。実際の切り抜き動画全体の対応区間を採点するfixtureではありません。
+
 候補窓付きfixtureの評価結果:
 
 - `outputs/IMQYaT_RWRA_context_v001/clip_composition_prompt_v001/20260705-124545/result.json`
 - `reports/IMQYaT_RWRA_context_v001/clip_composition_prompt_v001/20260705-124545/summary.md`
 - 現在のrule-based compositionでは候補窓全体を選び、開始位置は `-1313ms`、終了位置は `+9142ms` ずれます。
+
+実際の切り抜き動画全体の対応区間を期待値にしたfixture:
+
+- `fixtures/IMQYaT_RWRA_clip_audio_v001/fixture.json`
+- `expected/IMQYaT_RWRA_clip_audio_v001.json`
+- 期待区間: `1997050ms - 2015672ms`
+- 確認状態: `audio_anchor_confirmed_visual_pending`
+
+このfixtureでは、切り抜き発話部分と元配信候補区間の音量包絡比較で元配信候補を確認し、切り抜き全体18.622秒を発話開始位置へ合わせて元配信側の対応区間を置きます。BGMやSEが重なるため、切り抜き全体の波形相関だけで境界を確定しません。
 
 LLM呼び出しを入れずにプロンプト入力だけを生成する場合:
 
@@ -196,7 +207,16 @@ Web版Geminiで同じプロンプトを実行し、返ってきた `selectedCuts
 - 採点結果JSON: `outputs/IMQYaT_RWRA_context_v001/clip_composition_prompt_v001/20260705-125836/result.json`
 - 採点サマリー: `reports/IMQYaT_RWRA_context_v001/clip_composition_prompt_v001/20260705-125836/summary.md`
 - 結果: Geminiは候補窓全体を選び、音声確認済み期待区間に対して開始位置が `-1313ms`、終了位置が `+9142ms` ずれました。
-- 暫定判定: 期待区間は固定テーマの候補範囲に入っているため、theme側よりcomposition側の最終区間絞り込みの問題として扱います。
+- 暫定判定: `IMQYaT_RWRA_context_v001` では、期待区間は固定テーマの候補範囲に入っているため、theme側よりcomposition側の最終区間絞り込みの問題として扱います。
+
+同じGemini出力を、実際の切り抜き動画全体の対応区間fixtureで採点した結果:
+
+- プロンプト入力: `outputs/IMQYaT_RWRA_clip_audio_v001/clip_composition_prompt_v001/20260705-130216/prompt-input.json`
+- プロンプト本文: `reports/IMQYaT_RWRA_clip_audio_v001/clip_composition_prompt_v001/20260705-130216/prompt.md`
+- 採点結果JSON: `outputs/IMQYaT_RWRA_clip_audio_v001/clip_composition_prompt_v001/20260705-130227/result.json`
+- 採点サマリー: `reports/IMQYaT_RWRA_clip_audio_v001/clip_composition_prompt_v001/20260705-130227/summary.md`
+- 結果: Geminiの選択区間は、音声アンカーで置いた切り抜き動画全体の期待区間と開始・終了ともに0ms差で一致しました。
+- 暫定判定: 本当に切り抜き箇所かを見る評価では一致。発話の芯だけへ絞る評価とは別に扱います。
 
 ## 実行方法
 

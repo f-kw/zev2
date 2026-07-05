@@ -1,0 +1,22 @@
+{
+  "fixtureId": "IMQYaT_RWRA_clip_audio_v001",
+  "draftId": "IMQYaT_RWRA_clip_audio_v001",
+  "description": "音声比較で切り抜き動画全体の対応区間を期待値にした、実切り抜き区間確認用fixture。",
+  "copiedFrom": [
+    "fixtures/IMQYaT_RWRA_context_v001/transcript.json",
+    "fixtures/IMQYaT_RWRA_context_v001/themes.json",
+    "evals/clip_composition/outputs/audio-compare-IMQYaT_RWRA_v001.json"
+  ],
+  "copiedAt": "2026-07-05T04:01:18Z",
+  "sourceUri": "https://www.youtube.com/watch?v=8uuQldLptRE",
+  "transcriptPath": "transcript.json",
+  "themesPath": "themes.json",
+  "selectedThemeId": "theme_audio_context_1",
+  "notes": [
+    "評価実行時はruntime/artifactsを読まず、このfixture配下のファイルだけを読む。",
+    "期待区間は切り抜き動画全体に対応する元配信側区間。",
+    "境界は切り抜き内の発話開始位置と元配信側STT一致範囲から音声アンカーとして逆算したもの。",
+    "切り抜き全体にはBGMやSEが重なるため、全体波形の相関だけで境界を確定しない。",
+    "発話の芯だけを評価するcomposition絞り込み用fixtureとは分けて扱う。"
+  ]
+}
