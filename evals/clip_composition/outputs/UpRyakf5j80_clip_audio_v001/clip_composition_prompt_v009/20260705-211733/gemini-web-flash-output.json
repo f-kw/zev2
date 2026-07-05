@@ -1,0 +1,41 @@
+{
+  "selectedCuts": [
+    {
+      "sourceStartMs": 11364140,
+      "sourceEndMs": 11409170,
+      "reason": "テーマである『世界2位』の話題提示が明確に始まる発話ID 2の開始時刻 (11364140ms) を開始位置とし、変動するものなので素直に喜べないという一連の結論・余韻が収束する発話ID 20の終了時刻 (11409170ms) までを最小の連続区間として選択しました。冒頭の発話ID 1は前文への挨拶でありテーマの本質ではないため除外しています。",
+      "usedSpeechIds": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20
+      ]
+    }
+  ],
+  "runAt": "2026-07-05T21:29:42+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "manualRun": false,
+    "runner": "edge-cdp-text-prompt",
+    "extraction": "existing-web-answer"
+  },
+  "pageUrl": "https://gemini.google.com/app/5649016f6a366aa8?hl=ja",
+  "rawResponseText": "{\n\"selectedCuts\": [\n{\n\"sourceStartMs\": 11364140,\n\"sourceEndMs\": 11409170,\n\"reason\": \"テーマである『世界2位』の話題提示が明確に始まる発話ID 2の開始時刻 (11364140ms) を開始位置とし、変動するものなので素直に喜べないという一連の結論・余韻が収束する発話ID 20の終了時刻 (11409170ms) までを最小の連続区間として選択しました。冒頭の発話ID 1は前文への挨拶でありテーマの本質ではないため除外しています。\",\n\"usedSpeechIds\": [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]\n}\n]\n}\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

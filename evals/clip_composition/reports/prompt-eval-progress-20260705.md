@@ -180,3 +180,20 @@ v009でpromptだけを調整しても、音声上の切り抜き終端を正し�
 - 漏えい検査結果: pass
 
 v009入力では、通常の固定テーマと文字起こしに `boundarySignals` を追加した。モデルへ渡すのは境界候補payloadの `boundarySignalInput` だけで、境界候補payload側の `evaluationOnly` は渡していない。prompt本文にもexpectedの開始・終了時刻は出ていない。
+
+## v009 Web Gemini実行結果
+
+- Web Gemini実行器: `evals/clip_composition/run_web_gemini_prompt.ts`
+- Gemini出力JSON: `evals/clip_composition/outputs/UpRyakf5j80_clip_audio_v001/clip_composition_prompt_v009/20260705-211733/gemini-web-flash-output.json`
+- 採点結果JSON: `evals/clip_composition/outputs/UpRyakf5j80_clip_audio_v001/clip_composition_prompt_v009/20260705-212949/result.json`
+- 採点summary: `evals/clip_composition/reports/UpRyakf5j80_clip_audio_v001/clip_composition_prompt_v009/20260705-212949/summary.md`
+- v008/v009比較JSON: `evals/clip_composition/outputs/prompt-result-comparison-2026-07-05T12-29-59-119Z.json`
+- v008/v009比較レポート: `evals/clip_composition/reports/prompt-result-comparison-2026-07-05T12-29-59-119Z.md`
+- 音声境界確認JSON: `evals/clip_composition/outputs/prompt-audio-boundary-2026-07-05T12-30-27-419Z.json`
+- 音声境界確認レポート: `evals/clip_composition/reports/prompt-audio-boundary-2026-07-05T12-30-27-419Z.md`
+
+v009は `11364140ms - 11409170ms` を選んだ。期待区間は音声比較とWeb版Geminiの左右映像確認で固定した `11364500ms - 11407178ms`。開始は `360ms` 前、終了は `1992ms` 後ろで、v008と同じ区間だった。
+
+つまり、YouTube自動字幕由来の境界候補を追加しても、Geminiは発話20「うん」の途中終端ではなく発話20の終了まで含める判断を変えなかった。theme側は期待区間を候補範囲に含めているため、今回の差分はcomposition側の境界選択問題として読む。
+
+次は、compositionプロンプトだけで粘るより、切り抜き側と元動画側をローカルSTTで単語時刻付きに置き換えるか、音声比較からexpectedに依存しない境界候補を作る方がよい。v009の結果だけでは、発話途中の終端を選ぶ根拠がまだ弱い。

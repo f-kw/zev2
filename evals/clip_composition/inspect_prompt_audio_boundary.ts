@@ -488,7 +488,7 @@ function buildReport(inspection: AudioBoundaryInspection, outputPath: string): s
       : []),
     ...(inspection.audioEvidence.reportPath ? [`- 音声比較レポート: ${inspection.audioEvidence.reportPath}`] : []),
     '',
-    '## v008が選んだ区間',
+    `## ${inspection.promptVersion} が選んだ区間`,
     '',
     `- 選択区間: ${inspection.selectedCut.sourceStartMs}ms - ${inspection.selectedCut.sourceEndMs}ms (${msText(inspection.selectedCut.durationMs)})`,
     `- 期待区間: ${inspection.expectedCut.sourceStartMs}ms - ${inspection.expectedCut.sourceEndMs}ms (${msText(inspection.expectedCut.durationMs)})`,
@@ -510,7 +510,7 @@ function buildReport(inspection: AudioBoundaryInspection, outputPath: string): s
     '## 読み取り',
     '',
     '- 音声比較で確認した切り抜き全体は、expectedの区間としてすでに固定されている。',
-    '- v008の選択はexpectedを包含しているが、音声一致区間より前後へ広い。',
+    '- このpromptの選択はexpectedを包含しているが、音声一致区間より前後へ広い。',
     '- 次の改善対象はthemeではなくcomposition側の境界選択で、特に発話途中の終端を扱う入力粒度が足りていない。'
   ];
 

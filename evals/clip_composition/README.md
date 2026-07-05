@@ -434,6 +434,31 @@ Web版Geminiで確認動画を見せて、切り抜き動画全体の元配信�
 - 再採点サマリー: `reports/IMQYaT_RWRA_clip_audio_v001/clip_composition_prompt_v001/20260705-131440/summary.md`
 - 結果: Web版Geminiは `33:17.050 - 33:35.672` をA全体の元ネタ区間として `confirmed` と判定し、保存済みGemini選択区間も開始・終了ともに0ms差で一致しました。
 
+## v009 Web Gemini実行結果
+
+v009では、固定テーマと文字起こしに、expectedから独立した境界候補を足した。目的は、`UpRyakf5j80_clip_audio_v001` の終端が発話20「うん」の途中にある場合に、発話終端まで伸ばさずに切れるかを見ること。
+
+- Web Gemini実行器: `run_web_gemini_prompt.ts`
+- prompt本文: `reports/UpRyakf5j80_clip_audio_v001/clip_composition_prompt_v009/20260705-211733/prompt.md`
+- Gemini出力JSON: `outputs/UpRyakf5j80_clip_audio_v001/clip_composition_prompt_v009/20260705-211733/gemini-web-flash-output.json`
+- 採点結果JSON: `outputs/UpRyakf5j80_clip_audio_v001/clip_composition_prompt_v009/20260705-212949/result.json`
+- 採点summary: `reports/UpRyakf5j80_clip_audio_v001/clip_composition_prompt_v009/20260705-212949/summary.md`
+- v008/v009比較レポート: `reports/prompt-result-comparison-2026-07-05T12-29-59-119Z.md`
+- 音声境界確認レポート: `reports/prompt-audio-boundary-2026-07-05T12-30-27-419Z.md`
+
+結果は、v008と同じ `11364140ms - 11409170ms`。音声比較とWeb版Gemini確認で固定した期待区間 `11364500ms - 11407178ms` に対して、開始は `360ms` 前、終了は `1992ms` 後ろ。theme側は正解区間を候補範囲に含んでいるため、composition側が発話途中の終端を選べていない問題として扱う。
+
+Web Geminiへテキストpromptを投げる場合:
+
+```bash
+node evals/clip_composition/run_web_gemini_prompt.ts \
+  --prompt evals/clip_composition/reports/UpRyakf5j80_clip_audio_v001/clip_composition_prompt_v009/20260705-211733/prompt.md \
+  --output evals/clip_composition/outputs/UpRyakf5j80_clip_audio_v001/clip_composition_prompt_v009/20260705-211733/gemini-web-flash-output.json \
+  --model gemini-web-flash \
+  --params '{"temperature":"web-default","source":"gemini-web","manualRun":false,"runner":"edge-cdp-text-prompt"}' \
+  --cdpPort 9222
+```
+
 ## 実行方法
 
 指定されていた実行形:

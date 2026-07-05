@@ -1,0 +1,211 @@
+{
+  "kind": "clip_composition_prompt_audio_boundary_inspection",
+  "runAt": "2026-07-05T12:30:27.425Z",
+  "fixtureId": "UpRyakf5j80_clip_audio_v001",
+  "promptVersion": "clip_composition_prompt_v009",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "manualRun": false,
+    "runner": "edge-cdp-text-prompt",
+    "extraction": "existing-web-answer"
+  },
+  "resultPath": "evals/clip_composition/outputs/UpRyakf5j80_clip_audio_v001/clip_composition_prompt_v009/20260705-212949/result.json",
+  "transcriptPath": "evals/clip_composition/fixtures/UpRyakf5j80_clip_audio_v001/transcript.json",
+  "audioEvidence": {
+    "audioConfirmedSourceStartMs": 11364500,
+    "audioConfirmedSourceEndMs": 11407178,
+    "audioConfirmedDurationMs": 42678,
+    "sourceSliceStartMs": 11357000,
+    "sourceSliceEndMs": 11412004,
+    "sourceSliceBestOffsetMs": 7500,
+    "sourceSliceBestEndMs": 50178,
+    "envelopeCorrelation": 0.974592,
+    "directCorrelationAtEnvelopeOffset": -0.259884,
+    "reportPath": "evals/clip_composition/reports/audio-compare-chunks-UpRyakf5j80_youtube_auto_source_slice_full_window_v001.md",
+    "resultPath": "evals/clip_composition/outputs/audio-compare-chunks-UpRyakf5j80_youtube_auto_source_slice_full_window_v001.json"
+  },
+  "selectedCut": {
+    "sourceStartMs": 11364140,
+    "sourceEndMs": 11409170,
+    "durationMs": 45030,
+    "reason": "テーマである『世界2位』の話題提示が明確に始まる発話ID 2の開始時刻 (11364140ms) を開始位置とし、変動するものなので素直に喜べないという一連の結論・余韻が収束する発話ID 20の終了時刻 (11409170ms) までを最小の連続区間として選択しました。冒頭の発話ID 1は前文への挨拶でありテーマの本質ではないため除外しています。",
+    "usedSpeechIds": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20
+    ]
+  },
+  "expectedCut": {
+    "sourceStartMs": 11364500,
+    "sourceEndMs": 11407178,
+    "durationMs": 42678,
+    "reason": "YouTube自動字幕のチャンク照合で同じ連続範囲に集まり、切り抜き全体の音声比較とWeb版Geminiの左右映像確認で同一元ネタと判定された区間のため。"
+  },
+  "promptVsAudio": {
+    "selectedStartRelativeToAudioStartMs": -360,
+    "selectedEndRelativeToAudioStartMs": 44670,
+    "selectedStartsBeforeAudioMs": 360,
+    "selectedStartsAfterAudioMs": 0,
+    "selectedEndsBeforeAudioMs": 0,
+    "selectedEndsAfterAudioMs": 1992,
+    "selectedDurationMinusAudioDurationMs": 2352,
+    "interpretation": "選択開始は音声一致で確認した切り抜き開始より360ms前です。 選択終了は音声一致で確認した切り抜き終了より1992ms後です。"
+  },
+  "transcriptBoundaries": {
+    "selectedStart": {
+      "boundaryMs": 11364140,
+      "relation": "segment_start",
+      "segment": {
+        "id": 2,
+        "startMs": 11364140,
+        "endMs": 11368859,
+        "text": "とある記事で船長は",
+        "speaker": "youtube-auto-caption"
+      },
+      "overlappingSegments": [
+        {
+          "id": 1,
+          "startMs": 11362439,
+          "endMs": 11366760,
+          "text": "香りどうもありがとうございます",
+          "speaker": "youtube-auto-caption"
+        },
+        {
+          "id": 2,
+          "startMs": 11364140,
+          "endMs": 11368859,
+          "text": "とある記事で船長は",
+          "speaker": "youtube-auto-caption"
+        }
+      ],
+      "offsetFromSegmentStartMs": 0,
+      "offsetToSegmentEndMs": 4719
+    },
+    "selectedEnd": {
+      "boundaryMs": 11409170,
+      "relation": "segment_end",
+      "segment": {
+        "id": 20,
+        "startMs": 11405460,
+        "endMs": 11409170,
+        "text": "うん",
+        "speaker": "youtube-auto-caption"
+      },
+      "overlappingSegments": [
+        {
+          "id": 20,
+          "startMs": 11405460,
+          "endMs": 11409170,
+          "text": "うん",
+          "speaker": "youtube-auto-caption"
+        }
+      ],
+      "offsetFromSegmentStartMs": 3710,
+      "offsetToSegmentEndMs": 0
+    },
+    "expectedStart": {
+      "boundaryMs": 11364500,
+      "relation": "inside_segment",
+      "segment": {
+        "id": 1,
+        "startMs": 11362439,
+        "endMs": 11366760,
+        "text": "香りどうもありがとうございます",
+        "speaker": "youtube-auto-caption"
+      },
+      "overlappingSegments": [
+        {
+          "id": 1,
+          "startMs": 11362439,
+          "endMs": 11366760,
+          "text": "香りどうもありがとうございます",
+          "speaker": "youtube-auto-caption"
+        },
+        {
+          "id": 2,
+          "startMs": 11364140,
+          "endMs": 11368859,
+          "text": "とある記事で船長は",
+          "speaker": "youtube-auto-caption"
+        }
+      ],
+      "offsetFromSegmentStartMs": 2061,
+      "offsetToSegmentEndMs": 2260
+    },
+    "expectedEnd": {
+      "boundaryMs": 11407178,
+      "relation": "inside_segment",
+      "segment": {
+        "id": 20,
+        "startMs": 11405460,
+        "endMs": 11409170,
+        "text": "うん",
+        "speaker": "youtube-auto-caption"
+      },
+      "overlappingSegments": [
+        {
+          "id": 20,
+          "startMs": 11405460,
+          "endMs": 11409170,
+          "text": "うん",
+          "speaker": "youtube-auto-caption"
+        }
+      ],
+      "offsetFromSegmentStartMs": 1718,
+      "offsetToSegmentEndMs": 1992
+    }
+  },
+  "usedSpeechCheck": {
+    "selectedStartContainingSpeechId": 2,
+    "selectedEndContainingSpeechId": 20,
+    "usedSpeechIds": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20
+    ],
+    "selectedStartSpeechListed": true,
+    "selectedEndSpeechListed": true
+  },
+  "themeCoverage": {
+    "selectedThemeId": "theme_audio_verified_1",
+    "candidateStartMs": 11362439,
+    "candidateEndMs": 11409170,
+    "coverageSummary": "期待区間は選択済みテーマの候補範囲に入っています",
+    "themeSidePossibility": "theme側で正解区間が候補に入っていない可能性は低い",
+    "compositionSidePossibility": "composition側で候補範囲から最終区間を選ぶ処理に差分がある可能性があります"
+  }
+}
