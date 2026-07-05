@@ -5,7 +5,7 @@
 - 使用モデル名: `gemini-web-flash`
 - 使用パラメータ: `{"temperature":"web-default","source":"gemini-web","manualRun":true}`
 - LLM出力JSON: `evals/clip_composition/outputs/UpRyakf5j80_clip_audio_v001/clip_composition_prompt_v007/20260705-185128/gemini-web-flash-output.json`
-- scoreスクリプト採点: 未実行
+- scoreスクリプト採点: `evals/clip_composition/outputs/UpRyakf5j80_clip_audio_v001/clip_composition_prompt_v007/20260705-203219/result.json`
 
 ## LLMが選んだ区間
 
@@ -30,6 +30,6 @@
 - composition側: v007は「同じ結論の短い言い直し」を含める改善は効いた。ただし、音声比較で確認した切り抜き末尾まではまだ届いていない。
 - 人間が見るべき差分: 発話20の短い `うん` を、次トピック移行として落とすべきか、切り抜き音声に残る締めとして含めるべきか。
 
-## 未実行理由
+## 採点補足
 
-`score_prompt_output.ts` の実行は、サンドボックス内では `tsx` の一時IPC作成が許可されず、外側実行は承認レビュー側の使用制限で拒否された。そのため、このファイルでは単純な時刻差分だけを手動で記録している。
+`tsx` 実行はサンドボックス内の一時IPC作成で止まったが、Node標準のTypeScriptストリップ実行で `score_prompt_output.ts` を動かし、正式な `result.json` と `summary.md` を生成できた。

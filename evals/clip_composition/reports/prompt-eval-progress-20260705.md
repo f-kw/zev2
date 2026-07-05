@@ -65,8 +65,17 @@ chunk 1: 0:07.500-0:50.178 text=0% envelope=0.974592 direct=-0.259884
 - `UpRyakf5j80_clip_audio_v001` 用のv007入力生成: 完了
 - Web版Gemini Flash実行: `UpRyakf5j80_clip_audio_v001` のみ完了
 - Web版Gemini Flash出力: `evals/clip_composition/outputs/UpRyakf5j80_clip_audio_v001/clip_composition_prompt_v007/20260705-185128/gemini-web-flash-output.json`
-- 手動比較レポート: `evals/clip_composition/reports/UpRyakf5j80_clip_audio_v001/clip_composition_prompt_v007/20260705-185128/gemini-web-flash-manual-comparison.md`
+- 採点結果JSON: `evals/clip_composition/outputs/UpRyakf5j80_clip_audio_v001/clip_composition_prompt_v007/20260705-203219/result.json`
+- 採点summary: `evals/clip_composition/reports/UpRyakf5j80_clip_audio_v001/clip_composition_prompt_v007/20260705-203219/summary.md`
 
 v007は `UpRyakf5j80_clip_audio_v001` で発話19まで含めた。選択区間は `11364140 - 11405460`、期待区間は `11364500 - 11407178`。開始は `-360ms`、終了は `-1718ms` ずれている。v006と比べると終端は `610ms` 後ろへ伸びたが、音声比較で確認した切り抜き末尾まではまだ届いていない。
 
-`score_prompt_output.ts` による正式な `result.json` 生成は未実行。サンドボックス内では `tsx` の一時IPC作成が許可されず、外側実行は承認レビュー側の使用制限で拒否されたため。
+`tsx` 実行はサンドボックス内の一時IPC作成で止まったが、Node標準のTypeScriptストリップ実行で `score_prompt_output.ts` を動かし、正式な `result.json` と `summary.md` を生成できた。
+
+## v008の準備
+
+- 追加プロンプト: `evals/clip_composition/prompts/clip_composition_prompt_v008.md`
+- `IMQYaT_RWRA_context_v001` 用のv008入力生成: 完了
+- `UpRyakf5j80_clip_audio_v001` 用のv008入力生成: 完了
+- v008の狙い: 結論の言い直し直後に短い相づちだけが続き、新しい人物、質問、出来事、相談内容が出てこない場合は、切り抜き音声の自然な締めとして含める。
+- 未実行: Web版Gemini Flashへのv008投入。外側のブラウザ自動操作は承認レビュー側の使用制限に当たりやすいため、この時点では投入可能なpromptを生成したところまでで止めている。
