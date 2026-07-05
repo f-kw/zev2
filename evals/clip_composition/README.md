@@ -479,6 +479,16 @@ node evals/clip_composition/inspect_fixture_expansion_readiness.ts --outputId 20
 
 このreadinessでは、境界遷移を検証できるfixtureは `UpRyakf5j80_clip_audio_v001` の1件、境界一致の回帰確認用fixtureは `IMQYaT_RWRA_context_v001` と `IMQYaT_RWRA_audio_v001` の2件。`r_ztjHaHmcg` は切り抜き連続チャンクが元動画側の離れた範囲に対応しているため、単一区間expectedとしては凍結せず、複数区間expected対応か別の短尺連続候補を使う。
 
+採点済み結果について、保存済みの音声比較根拠とLLMが選んだ区間を突き合わせる場合:
+
+```bash
+pnpm --filter @zev2/agent-runner exec tsx ../evals/clip_composition/summarize_audio_evidence.ts \
+  --scoreResult ../evals/clip_composition/outputs/UpRyakf5j80_clip_audio_v001/clip_composition_prompt_v009/20260705-212949/result.json \
+  --outputId 20260705-v001
+```
+
+このコマンドはSTTも音声比較も実行しません。既に保存された音声比較結果、期待区間、LLM選択区間を読み、同じ切り抜き箇所か、開始と終端がどれだけずれているかを `outputs/` と `reports/` に出します。
+
 ## 実行方法
 
 指定されていた実行形:
