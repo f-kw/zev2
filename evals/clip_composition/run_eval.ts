@@ -435,6 +435,7 @@ function buildSummaryMarkdown(input: {
 }): string {
   const selected = input.selectedCuts[0];
   const expected = input.expectedCuts[0];
+  const expectedStatus = expected ? buildExpectedStatusMarkdown(expected) : ['- なし'];
   const expectedEvidence = expected ? buildExpectedEvidenceMarkdown(expected) : ['- なし'];
   return [
     '# clip_composition 評価サマリー',
@@ -456,6 +457,10 @@ function buildSummaryMarkdown(input: {
     expected
       ? `- ${expected.sourceStartMs}ms - ${expected.sourceEndMs}ms: ${expected.reason}`
       : '- なし',
+    '',
+    '## 期待区間の確認状態',
+    '',
+    ...expectedStatus,
     '',
     '## 差分',
     '',
@@ -481,7 +486,7 @@ function buildSummaryMarkdown(input: {
     '## 人間が見るべき差分',
     '',
     `- ${input.diff.overlapSummary}`,
-    '- 期待区間の理由が暫定なので、人間が妥当な開始位置と終了位置を精査する必要があります。',
+    '- 音声比較で期待区間として扱える状態です。最終データセットQAでは、開始位置と終了位置の微調整だけ確認します。',
     '',
     '## 期待区間の根拠',
     '',
@@ -497,6 +502,28 @@ function buildSummaryMarkdown(input: {
   ].join('\n');
 }
 
+function buildExpectedStatusMarkdown(expected: ExpectedCut): string[] {
+  const verificationStatus = typeof expected.verificationStatus === 'string'
+    ? expected.verificationStatus
+    : '未記録';
+  const usableForEval = expected.usableForCompositionPromptEval === true;
+  const audioVerification = recordFromOptional(expected.audioVerification);
+  const visualVerification = recordFromOptional(expected.visualVerification);
+  const audioStatus = typeof audioVerification?.status === 'string'
+    ? audioVerification.status
+    : (audioVerification ? '記録あり' : '未記録');
+  const visualStatus = typeof visualVerification?.status === 'string'
+    ? visualVerification.status
+    : (visualVerification ? '記録あり' : '未記録');
+
+  return [
+    `- 総合状態: ${verificationStatus}`,
+    `- compositionプロンプト評価に使えるか: ${usableForEval ? 'はい' : 'いいえ'}`,
+    `- 音声確認: ${audioStatus}`,
+    `- 目視確認: ${visualStatus}`
+  ];
+}
+
 function buildExpectedEvidenceMarkdown(expected: ExpectedCut): string[] {
   const lines: string[] = [];
   const audioVerification = recordFromOptional(expected.audioVerification);
@@ -504,10 +531,14 @@ function buildExpectedEvidenceMarkdown(expected: ExpectedCut): string[] {
   const visualVerification = recordFromOptional(expected.visualVerification);
 
   if (audioVerification) {
+    const status = audioVerification.status;
+    const method = audioVerification.method;
     const correlation = audioVerification.speechEnvelopeCorrelation;
     const bestOffsetMs = audioVerification.bestOffsetMs;
     const sourceStartMs = audioVerification.bestAlignedSourceSpeechStartMs;
     const sourceEndMs = audioVerification.bestAlignedSourceSpeechEndMs;
+    lines.push(`- 音声確認状態: ${typeof status === 'string' ? status : '未記録'}`);
+    lines.push(`- 音声比較方法: ${typeof method === 'string' ? method : '未記録'}`);
     lines.push(`- 音声比較: 発話部分の音量包絡相関 ${typeof correlation === 'number' ? correlation : '未記録'}`);
     lines.push(`- 音声比較の最良位置: ${typeof sourceStartMs === 'number' && typeof sourceEndMs === 'number' ? `${sourceStartMs}ms - ${sourceEndMs}ms` : '未記録'}`);
     lines.push(`- 音声比較のずれ: ${typeof bestOffsetMs === 'number' ? `${bestOffsetMs}ms` : '未記録'}`);

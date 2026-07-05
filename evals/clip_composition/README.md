@@ -35,8 +35,8 @@
 - 照合前に、ひらがな化、数字表記統一、全角半角統一などの正規化を行います。
 - 切り抜きが複数元動画をまたぐ可能性を正常系として扱います。
 - STT照合候補に対して、切り抜き全体と発話部分を分けた音声比較を行います。
-- `expectedCuts` は照合結果をそのまま固定せず、元動画の該当区間を目視確認してから作ります。
-- 固定テーマは現行システムに生成させず、目視確認済みの正解区間から人間が逆算して書きます。
+- `expectedCuts` は照合結果だけで作らず、音声比較で対応を確認した区間を記録します。
+- 固定テーマは現行システムに生成させず、音声確認済みの正解候補区間から人間が逆算して書きます。
 
 ローカルSTTの評価用保存スクリプト:
 
@@ -79,7 +79,7 @@ pnpm --filter @zev2/agent-runner exec tsx ../evals/clip_composition/align_stt_ch
   - `outputs/visual-check/IMQYaT_RWRA/source_8uuQldLptRE_33m12s_22s.mp4`
   - `outputs/visual-check/IMQYaT_RWRA/source_Rfsj5uHy_Bs_2m28s_22s.mp4`
 
-照合結果は `expectedCuts` として固定しません。元動画の該当秒数を目視と聴取で確認してから、正解区間、チャンク一致度、確認理由を記録します。
+照合結果だけでは `expectedCuts` として固定しません。音声比較で元動画候補との対応が強く出た区間は、compositionプロンプト評価に使える音声確認済みfixtureとして扱います。最終データセットQAでは、元動画の該当秒数を目視と聴取で確認し、開始位置と終了位置の微調整を記録します。
 
 STT照合候補の音声比較:
 
@@ -117,12 +117,12 @@ pnpm --filter @zev2/agent-runner exec tsx ../evals/clip_composition/freeze_verif
 - `fixtures/IMQYaT_RWRA_audio_v001/themes.json`
 - `expected/IMQYaT_RWRA_audio_v001.json`
 
-このfixtureは、音声比較で確認した元配信候補 `8uuQldLptRE` の `33:18.363 - 33:26.530` を期待区間にしています。切り抜き発話と最も強く合った音声の芯は `33:22.113 - 33:26.138` です。目視確認はまだ未実施なので、`expectedCuts` には音声確認済み・目視確認待ちとして記録しています。
+このfixtureは、音声比較で確認した元配信候補 `8uuQldLptRE` の `33:18.363 - 33:26.530` を期待区間にしています。切り抜き発話と最も強く合った音声の芯は `33:22.113 - 33:26.138` です。`expectedCuts` には `audio_confirmed_visual_pending` として記録し、compositionプロンプト評価には使える状態にしています。
 
 このfixtureで3回実行した評価結果:
 
-- `outputs/IMQYaT_RWRA_audio_v001/clip_composition_prompt_v001/20260705-123051/result.json`
-- `reports/IMQYaT_RWRA_audio_v001/clip_composition_prompt_v001/20260705-123051/summary.md`
+- `outputs/IMQYaT_RWRA_audio_v001/clip_composition_prompt_v001/20260705-123725/result.json`
+- `reports/IMQYaT_RWRA_audio_v001/clip_composition_prompt_v001/20260705-123725/summary.md`
 - 現在のrule-based compositionでは、3回とも `1998363ms - 2006530ms` を選び、開始・終了の揺れは0msです。
 
 ## 実行方法

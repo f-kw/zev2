@@ -252,7 +252,8 @@ async function main() {
     notes: [
       '評価実行時はruntime/artifactsを読まず、このfixture配下のファイルだけを読む。',
       '固定テーマは音声比較で確認した正解候補区間から逆算したもの。',
-      '目視確認は別工程。ここでは音声比較結果を根拠としてfixture候補を凍結している。'
+      '音声比較でcompositionプロンプト評価には使える状態として凍結している。',
+      '目視確認は最終データセットQAとして別工程で行う。'
     ]
   };
 
@@ -320,7 +321,11 @@ async function main() {
         clipId: target.clip.id,
         clipUrl: target.clip.url,
         transcriptText,
+        verificationStatus: 'audio_confirmed_visual_pending',
+        usableForCompositionPromptEval: true,
         audioVerification: {
+          status: 'confirmed',
+          method: '切り抜き発話部分と元配信候補区間の音量包絡を比較',
           reportPath: target.alignment?.audioCompareReportPath,
           resultPath: target.alignment?.audioCompareResultPath,
           speechEnvelopeCorrelation: audioMatch?.envelope?.maxCorrelation,
@@ -342,7 +347,7 @@ async function main() {
         },
         visualVerification: {
           status: 'pending',
-          note: 'expectedCuts固定前の目視確認は未実施。音声比較で進められる範囲まで固定候補化している。'
+          note: '音声比較でcompositionプロンプト評価には使える状態。最終データセットQAとしての目視確認は未実施。'
         }
       }
     ]

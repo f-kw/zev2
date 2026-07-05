@@ -12,7 +12,11 @@
       "clipId": "IMQYaT_RWRA",
       "clipUrl": "https://www.youtube.com/watch?v=IMQYaT_RWRA",
       "transcriptText": "やってきたって感じで女騎士だーめっちゃ投げてる",
+      "verificationStatus": "audio_confirmed_visual_pending",
+      "usableForCompositionPromptEval": true,
       "audioVerification": {
+        "status": "confirmed",
+        "method": "切り抜き発話部分と元配信候補区間の音量包絡を比較",
         "reportPath": "evals/clip_composition/reports/audio-compare-IMQYaT_RWRA_v001.md",
         "resultPath": "evals/clip_composition/outputs/audio-compare-IMQYaT_RWRA_v001.json",
         "speechEnvelopeCorrelation": 0.883568,
@@ -34,7 +38,7 @@
       },
       "visualVerification": {
         "status": "pending",
-        "note": "expectedCuts固定前の目視確認は未実施。音声比較で進められる範囲まで固定候補化している。"
+        "note": "音声比較でcompositionプロンプト評価には使える状態。最終データセットQAとしての目視確認は未実施。"
       }
     }
   ]
