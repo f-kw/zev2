@@ -8,7 +8,7 @@
     "sttId": "UpRyakf5j80_youtube_auto",
     "url": "https://www.youtube.com/watch?v=UpRyakf5j80",
     "localAudioPath": "evals/clip_composition/research/downloads/UpRyakf5j80/UpRyakf5j80.m4a",
-    "localVideoPath": null,
+    "localVideoPath": "evals/clip_composition/research/downloads/UpRyakf5j80/UpRyakf5j80.mp4",
     "subtitlePath": "evals/clip_composition/research/downloads/UpRyakf5j80/subtitles/UpRyakf5j80.ja-orig.json3",
     "convertedSttPath": "evals/clip_composition/stt/UpRyakf5j80_youtube_auto/clip/word-timestamps.json",
     "transcriptPath": "evals/clip_composition/stt/UpRyakf5j80_youtube_auto/clip/transcript.json",
@@ -17,7 +17,7 @@
     "notes": [
       "切り抜き側のBGM、SE、字幕由来の誤認識、追加音声の混入を正常なノイズとして扱う。",
       "現時点のSTTはローカルSTTではなくYouTube自動字幕から変換したもの。",
-      "yt-dlpで保存できた媒体は音声のみ。動画ファイルは未取得。"
+      "yt-dlp更新後に目視確認用の動画ファイルも取得済み。"
     ]
   },
   "sourceCandidates": [
@@ -25,8 +25,8 @@
       "id": "kNX-wQTvsws",
       "sttId": "UpRyakf5j80_kNX-wQTvsws_youtube_auto",
       "url": "https://www.youtube.com/watch?v=kNX-wQTvsws",
-      "localVideoPath": null,
-      "localAudioPath": null,
+      "localVideoPath": "evals/clip_composition/research/downloads/UpRyakf5j80/sources/kNX-wQTvsws/kNX-wQTvsws_3h09m17s_55s_video.mp4",
+      "localAudioPath": "evals/clip_composition/research/downloads/UpRyakf5j80/sources/kNX-wQTvsws/kNX-wQTvsws_3h09m17s_55s_audio.m4a",
       "subtitlePath": "evals/clip_composition/research/downloads/UpRyakf5j80/sources/kNX-wQTvsws/subtitles/kNX-wQTvsws.ja-orig.json3",
       "convertedSttPath": "evals/clip_composition/stt/UpRyakf5j80_kNX-wQTvsws_youtube_auto/source/word-timestamps.json",
       "transcriptPath": "evals/clip_composition/stt/UpRyakf5j80_kNX-wQTvsws_youtube_auto/source/transcript.json",
@@ -35,21 +35,28 @@
       "notes": [
         "説明欄から抽出した元動画候補。",
         "現時点のSTTはローカルSTTではなくYouTube自動字幕から変換したもの。",
-        "元動画の音声ダウンロードはHTTP 403とYouTube PO token制約で未完了。"
+        "yt-dlp更新後に、字幕照合候補の周辺55秒だけを音声と映像で取得済み。"
       ]
     }
   ],
   "alignment": {
     "resultPath": "evals/clip_composition/outputs/alignment-UpRyakf5j80_youtube_auto_v001.json",
     "reportPath": "evals/clip_composition/reports/alignment-UpRyakf5j80_youtube_auto_v001.md",
+    "sourceSliceAlignmentPath": "evals/clip_composition/outputs/alignment-UpRyakf5j80_youtube_auto_source_slice_v001.json",
+    "fullWindowAlignmentPath": "evals/clip_composition/outputs/alignment-UpRyakf5j80_youtube_auto_source_slice_full_window_v001.json",
+    "audioCompareResultPath": "evals/clip_composition/outputs/audio-compare-chunks-UpRyakf5j80_youtube_auto_source_slice_full_window_v001.json",
+    "audioCompareReportPath": "evals/clip_composition/reports/audio-compare-chunks-UpRyakf5j80_youtube_auto_source_slice_full_window_v001.md",
+    "chunkAudioCompareResultPath": "evals/clip_composition/outputs/audio-compare-chunks-UpRyakf5j80_youtube_auto_source_slice_v001.json",
+    "chunkAudioCompareReportPath": "evals/clip_composition/reports/audio-compare-chunks-UpRyakf5j80_youtube_auto_source_slice_v001.md",
+    "visualVerificationPath": "evals/clip_composition/outputs/UpRyakf5j80/visual_verification/20260705-gemini-web-flash-audio-confirmed-v001.json",
     "summaryReportPath": "evals/clip_composition/reports/UpRyakf5j80-youtube-auto-alignment-v001.md",
     "probableSourceInterval": {
       "sourceId": "kNX-wQTvsws",
-      "sourceStartMs": 11362439,
-      "sourceEndMs": 11405460,
-      "sourceStartLabel": "3:09:22.439",
-      "sourceEndLabel": "3:10:05.460",
-      "basis": "切り抜き30秒チャンク2件が同じ元動画の連続範囲に集まり、字幕照合の被覆が高い。"
+      "sourceStartMs": 11364500,
+      "sourceEndMs": 11407178,
+      "sourceStartLabel": "3:09:24.500",
+      "sourceEndLabel": "3:10:07.178",
+      "basis": "切り抜き30秒チャンク2件が同じ元動画の連続範囲に集まり、切り抜き全体の音声比較とWeb版Geminiの左右映像確認でも同一元ネタと判定された。"
     },
     "chunkMatches": [
       {
@@ -73,8 +80,8 @@
     ],
     "notes": [
       "字幕照合では単一連続区間として扱える可能性が高い。",
-      "音声比較と目視確認が未完了なのでexpectedCutsには固定しない。",
-      "固定テーマもexpectedCuts確定後に、人間が正解区間から逆算して書く。"
+      "切り抜き全体の音声比較とWeb版Geminiの左右映像確認で同一元ネタと判定された。",
+      "fixed themeは、確認済みexpectedCuts区間から逆算して書いた。"
     ]
   },
   "requiredOutputs": [

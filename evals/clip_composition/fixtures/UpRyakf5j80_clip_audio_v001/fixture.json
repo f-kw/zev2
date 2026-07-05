@@ -1,0 +1,21 @@
+{
+  "fixtureId": "UpRyakf5j80_clip_audio_v001",
+  "draftId": "UpRyakf5j80_clip_audio_v001",
+  "description": "音声比較で元配信候補と一致した切り抜き区間を、composition評価用に固定したfixture。",
+  "copiedFrom": [
+    "stt/UpRyakf5j80_kNX-wQTvsws_youtube_auto/source/word-timestamps.json",
+    "evals/clip_composition/outputs/alignment-UpRyakf5j80_youtube_auto_v001.json",
+    "evals/clip_composition/outputs/audio-compare-chunks-UpRyakf5j80_youtube_auto_source_slice_full_window_v001.json"
+  ],
+  "copiedAt": "2026-07-05T09:38:23.053Z",
+  "sourceUri": "https://www.youtube.com/watch?v=kNX-wQTvsws",
+  "transcriptPath": "transcript.json",
+  "themesPath": "themes.json",
+  "selectedThemeId": "theme_audio_verified_1",
+  "notes": [
+    "評価実行時はruntime/artifactsを読まず、このfixture配下のファイルだけを読む。",
+    "固定テーマは音声比較とWeb版Gemini確認で確定した正解候補区間から逆算したもの。",
+    "切り抜き全体の音声比較とWeb版Geminiの左右映像確認で同一元ネタと判定された区間を凍結している。",
+    "ローカルSTTではなくYouTube自動字幕を評価用STT形式に変換した入力を使っている。"
+  ]
+}

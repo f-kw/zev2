@@ -41,24 +41,44 @@
 
 2つのチャンクが元動画の同じ連続範囲に重なっているため、字幕上の本命候補は `kNX-wQTvsws` の `3:09:22.439 - 3:10:05.460`。
 
+## 音声・映像確認
+
+`yt-dlp` を `2026.06.09` へ更新した後、元動画候補の周辺55秒を取得できた。切り抜き全体をその55秒区間の中で音声比較したところ、元動画全体では `3:09:24.500 - 3:10:07.178` に強く対応した。
+
+- 元動画候補音声: `evals/clip_composition/research/downloads/UpRyakf5j80/sources/kNX-wQTvsws/kNX-wQTvsws_3h09m17s_55s_audio.m4a`
+- 元動画候補映像: `evals/clip_composition/research/downloads/UpRyakf5j80/sources/kNX-wQTvsws/kNX-wQTvsws_3h09m17s_55s_video.mp4`
+- 切り抜き動画: `evals/clip_composition/research/downloads/UpRyakf5j80/UpRyakf5j80.mp4`
+- チャンク音声比較: `evals/clip_composition/reports/audio-compare-chunks-UpRyakf5j80_youtube_auto_source_slice_v001.md`
+- 全体音声比較: `evals/clip_composition/reports/audio-compare-chunks-UpRyakf5j80_youtube_auto_source_slice_full_window_v001.md`
+- 目視確認用横並び動画: `evals/clip_composition/outputs/visual-check/UpRyakf5j80/gemini_pair_audio_confirmed_v001_UpRyakf5j80_vs_kNX-wQTvsws_3h09m24s.mp4`
+- Web版Gemini確認結果: `evals/clip_composition/outputs/UpRyakf5j80/visual_verification/20260705-gemini-web-flash-audio-confirmed-v001.json`
+
+Web版Gemini Flashでは、左右映像の表情と口の動き、切り抜き音声との同期から同一元ネタと判定された。差分として、切り抜き側には大きな字幕追加と画面拡大があるとされた。
+
 ## 現時点の判定
 
 - 単一区間fixture候補としては `r_ztjHaHmcg` より扱いやすい。
-- ただし、現時点ではYouTube自動字幕照合だけであり、ローカルSTT、音声比較、目視確認は未完了。
-- `expectedCuts` にはまだ固定しない。
-- 固定テーマはまだ作らない。正解区間が音声・目視で確認できた後、人間が「この切り抜き師はこういうテーマで切った」と逆算して書く。
+- YouTube自動字幕照合、切り抜き全体の音声比較、Web版Geminiの左右映像確認が一致した。
+- `expectedCuts` 候補として固定してよい段階。
+- 固定テーマは、確認済み区間から「登録者数世界2位扱いへの照れと、順位変動への冷静な反応」と逆算する。
 
 ## 未完了
 
 - ローカルSTTサーバー `http://192.168.1.8:8000` は疎通確認時に接続拒否だった。
-- 元動画の音声ダウンロードはHTTP 403とYouTube PO token制約で未完了。
-- 切り抜き側は音声のみ保存済みで、動画ファイルは未取得。
-- 音声比較はまだできていない。
-- Web版Geminiまたは人間による目視確認はまだできていない。
+- ローカルSTTではなくYouTube自動字幕を変換したSTTを使っている。
+- 最終データセットQAでは、人間が元動画 `3:09:24.500 - 3:10:07.178` を一度再生して境界だけ確認するとよい。
 
 ## 次の作業
 
-1. ローカルSTTサーバーが使える状態なら、切り抜きと元動画候補区間を単語タイムスタンプ付きでSTTする。
-2. 元動画 `3:09:22.439 - 3:10:05.460` 付近の音声を切り出せる状態にして、切り抜き音声と比較する。
-3. 音声比較で対応が確認できたら、Web版Geminiまたは人間確認で該当秒数を観る。
-4. 確認済み区間をexpected候補にし、その区間から固定テーマを人間が逆算して書く。
+1. `3:09:24.500 - 3:10:07.178` をexpected候補にする。完了。
+2. 固定テーマを正解区間から逆算して書く。完了。
+3. fixtureとして凍結し、`runner/node_modules/.bin/tsx evals/clip_composition/run_eval.ts --fixture UpRyakf5j80_clip_audio_v001 --promptVersion v001 --runs 3` で揺れ幅確認を行う。完了。
+
+## 評価実行
+
+- fixture: `UpRyakf5j80_clip_audio_v001`
+- expected: `evals/clip_composition/expected/UpRyakf5j80_clip_audio_v001.json`
+- summary: `evals/clip_composition/reports/UpRyakf5j80_clip_audio_v001/clip_composition_prompt_v001/20260705-184034/summary.md`
+- result: `evals/clip_composition/outputs/UpRyakf5j80_clip_audio_v001/clip_composition_prompt_v001/20260705-184034/result.json`
+
+3回実行では、現在のrule-based compositionが毎回同じ `11362439ms - 11409170ms` を選んだ。期待区間 `11364500ms - 11407178ms` を約2秒ずつ広く含むため、theme側で正解区間が候補に入っていない問題ではない。composition側では、字幕単語の端を含めることで期待区間より少し広く取る差分が出ている。

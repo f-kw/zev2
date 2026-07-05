@@ -1,0 +1,33 @@
+{
+  "kind": "clip_composition_visual_verification",
+  "checkedAt": "2026-07-05T18:37:00+09:00",
+  "checkedBy": "gemini-web-flash",
+  "geminiUrl": "https://gemini.google.com/app/b884f73ffca03f4c",
+  "uploadedVideoPath": "evals/clip_composition/outputs/visual-check/UpRyakf5j80/gemini_pair_audio_confirmed_v001_UpRyakf5j80_vs_kNX-wQTvsws_3h09m24s.mp4",
+  "clipVideoPath": "evals/clip_composition/research/downloads/UpRyakf5j80/UpRyakf5j80.mp4",
+  "sourceVideoPath": "evals/clip_composition/outputs/visual-check/UpRyakf5j80/source_kNX-wQTvsws_3h09m24s_audio_confirmed_42s.mp4",
+  "promptSummary": "左に切り抜き、右に元動画候補を並べ、同じ発話・同じ元ネタか、候補区間が切り抜きを含むか、編集差分があるか、expectedCuts候補として固定してよいかを確認した。",
+  "candidateInterval": {
+    "sourceVideoId": "kNX-wQTvsws",
+    "sourceStartMs": 11364500,
+    "sourceEndMs": 11407178,
+    "sourceStartLabel": "3:09:24.500",
+    "sourceEndLabel": "3:10:07.178"
+  },
+  "response": {
+    "sameSource": true,
+    "candidateInterval": "3:09:24.500-3:10:07.178",
+    "coversClip": true,
+    "differences": [
+      "左の切り抜き動画には、大きな字幕が追加されています。",
+      "左の切り抜き動画は画面が拡大されており、レイアウトが元動画と異なっています。"
+    ],
+    "decision": "fix_candidate",
+    "reason": "左右の映像でキャラクターの表情や口の動きが完全に一致しており、音声とも同期しているため、同一の発話・元ネタであると判断できます。指定された区間も切り抜き内容を網羅しています。"
+  },
+  "notes": [
+    "音声は左の切り抜き音声だけを使った横並び確認動画で確認した。",
+    "元動画側の候補区間は、字幕照合後に切り抜き全体の音声比較で見つけた範囲を使った。",
+    "Geminiは切り抜き側の字幕追加と画面拡大を差分として挙げたが、元ネタ対応自体はfix_candidateと判定した。"
+  ]
+}

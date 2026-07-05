@@ -1,0 +1,110 @@
+{
+  "kind": "clip_composition_aligned_audio_chunk_comparison",
+  "runAt": "2026-07-05T09:32:41.342Z",
+  "sourceId": "UpRyakf5j80_kNX-wQTvsws_youtube_auto",
+  "clipVideoPath": "evals/clip_composition/research/downloads/UpRyakf5j80/UpRyakf5j80.m4a",
+  "sourceVideoPath": "evals/clip_composition/research/downloads/UpRyakf5j80/sources/kNX-wQTvsws/kNX-wQTvsws_3h09m17s_55s_audio.m4a",
+  "alignmentFile": "evals/clip_composition/outputs/alignment-UpRyakf5j80_youtube_auto_source_slice_v001.json",
+  "settings": {
+    "sampleRate": 16000,
+    "channels": 1,
+    "pcmFormat": "f32le",
+    "envelopeFrameMs": 20,
+    "envelopeHopMs": 10,
+    "confirmationPolicy": "しきい値で自動確定せず、テキスト照合、音声比較、目視確認を分けて判断する"
+  },
+  "comparisons": [
+    {
+      "chunkIndex": 0,
+      "clipText": "とある記事で船長は現在現役で活躍されているvtuberで世界2位なんだと取り上げられているのを見ましたその人と結婚してるなんてどうなんか私も誇らしいやら恥ずかしいやろで緊張していますどうしたマジで大丈夫かさあそんな世界に行くとか言うけどさそんなもんさーやめようよそんなのなんかあんまりなんかそういうさあ変動するじゃんそういうのって",
+      "sourceText": "香りどうもありがとうございますとある記事で船長は現在現役で活躍されているvtuberで世界2位なんだと取り上げられているのを見ましたその人と結婚してるなんてどうか私も誇らしいやら恥ずかしいやろで緊張していますどうしたマジで大丈夫かさあそんな世界に行くとか言うけどさそんなもんさーやめようよそんなのなんかあんまりなんかそういうさあ変動するじゃんそういうのって",
+      "textMatch": {
+        "clipCoverage": 0.9878048780487805,
+        "sourceCoverage": 0.9878048780487805,
+        "matchedChars": 162,
+        "queryChars": 164,
+        "sourceChars": 164,
+        "exact": false
+      },
+      "audio": {
+        "query": {
+          "label": "clip-chunk-1",
+          "inputPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/research/downloads/UpRyakf5j80/UpRyakf5j80.m4a",
+          "startMs": 0,
+          "endMs": 30000
+        },
+        "reference": {
+          "label": "UpRyakf5j80_kNX-wQTvsws_youtube_auto-chunk-1",
+          "inputPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/research/downloads/UpRyakf5j80/sources/kNX-wQTvsws/kNX-wQTvsws_3h09m17s_55s_audio.m4a",
+          "startMs": 5439,
+          "endMs": 40300
+        },
+        "sampleRate": 16000,
+        "querySamples": 480000,
+        "referenceSamples": 557776,
+        "direct": {
+          "correlationAtEnvelopeOffset": -0.035646,
+          "absoluteCorrelationAtEnvelopeOffset": 0.035646
+        },
+        "envelope": {
+          "frameMs": 20,
+          "hopMs": 10,
+          "maxCorrelation": 0.966747,
+          "minCorrelation": -0.084805,
+          "maxAbsoluteCorrelation": 0.966747,
+          "bestOffsetMs": 2070
+        },
+        "bestSourceWindow": {
+          "sourceStartMs": 7509,
+          "sourceEndMs": 37509
+        }
+      }
+    },
+    {
+      "chunkIndex": 1,
+      "clipText": "変動するじゃんそういうのって変動するものであんま喜べないんだよね船長どうせまた変わるしみたいな感じあんな喜べないんだよね",
+      "sourceText": "変動するじゃんそういうのって変動するものであんま喜べないんだよね船長うんどうせまた変わるしみたいな感じあんま喜べないんだよね先日の",
+      "textMatch": {
+        "clipCoverage": 0.95,
+        "sourceCoverage": 0.95,
+        "matchedChars": 57,
+        "queryChars": 60,
+        "sourceChars": 60,
+        "exact": false
+      },
+      "audio": {
+        "query": {
+          "label": "clip-chunk-2",
+          "inputPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/research/downloads/UpRyakf5j80/UpRyakf5j80.m4a",
+          "startMs": 30000,
+          "endMs": 44390
+        },
+        "reference": {
+          "label": "UpRyakf5j80_kNX-wQTvsws_youtube_auto-chunk-2",
+          "inputPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/research/downloads/UpRyakf5j80/sources/kNX-wQTvsws/kNX-wQTvsws_3h09m17s_55s_audio.m4a",
+          "startMs": 34899,
+          "endMs": 48460
+        },
+        "sampleRate": 16000,
+        "querySamples": 202853,
+        "referenceSamples": 216976,
+        "direct": {
+          "correlationAtEnvelopeOffset": 0.006636,
+          "absoluteCorrelationAtEnvelopeOffset": 0.006636
+        },
+        "envelope": {
+          "frameMs": 20,
+          "hopMs": 10,
+          "maxCorrelation": 0.131332,
+          "minCorrelation": -0.169145,
+          "maxAbsoluteCorrelation": 0.169145,
+          "bestOffsetMs": 770
+        },
+        "bestSourceWindow": {
+          "sourceStartMs": 35669,
+          "sourceEndMs": 50059
+        }
+      }
+    }
+  ]
+}

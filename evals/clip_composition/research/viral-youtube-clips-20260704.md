@@ -213,6 +213,15 @@ STT停止中の補助:
 判断:
 
 - 2チャンクが同じ連続範囲に集まっており、単一区間fixture候補として有望。
-- 現時点ではYouTube自動字幕照合だけなので、expectedCutsには固定しない。
-- 元動画音声の取得またはローカルSTT再実行ができたら、音声比較と目視確認を行う。
-- 固定テーマは、確認済みの正解区間から人間が逆算して書く。
+- `yt-dlp` 更新後に元動画の候補周辺55秒を取得でき、切り抜き全体の音声比較で `3:09:24.500 - 3:10:07.178` が強く一致した。
+- Web版Gemini Flashで左右比較動画を確認し、同一元ネタかつ切り抜き内容を含むと判定された。
+- `UpRyakf5j80_clip_audio_v001` としてfixture化し、expectedCutsに固定した。
+- 固定テーマは、確認済みの正解区間から「登録者数世界2位扱いへの照れと順位変動への冷静な反応」と逆算して書いた。
+
+評価結果:
+
+- 期待区間: 元動画 `kNX-wQTvsws` の `3:09:24.500 - 3:10:07.178`
+- fixture: `evals/clip_composition/fixtures/UpRyakf5j80_clip_audio_v001/`
+- expected: `evals/clip_composition/expected/UpRyakf5j80_clip_audio_v001.json`
+- 3回実行summary: `evals/clip_composition/reports/UpRyakf5j80_clip_audio_v001/clip_composition_prompt_v001/20260705-184034/summary.md`
+- 現在のrule-based compositionは3回とも同じ `3:09:22.439 - 3:10:09.170` を選び、期待区間を約2秒ずつ広く含んだ。
