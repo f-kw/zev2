@@ -1,0 +1,625 @@
+{
+  "kind": "clip_composition_multicut_fixture_freeze_preview",
+  "runAt": "2026-07-05T13:55:00.157Z",
+  "writeFixture": false,
+  "humanConfirmed": false,
+  "fixtureWriteReady": false,
+  "missingHumanInputs": [
+    "--humanConfirmed true",
+    "--themeTitle",
+    "--themeSummary"
+  ],
+  "reviewPath": "evals/clip_composition/outputs/multicut-expected-review-r_ztjHaHmcg-20260705-v001.json",
+  "targetPath": "evals/clip_composition/stt-targets/r_ztjHaHmcg.json",
+  "sourceSttId": "r_ztjHaHmcg_-DwSCDMCWDQ_youtube_auto",
+  "fixtureId": "r_ztjHaHmcg_multicut_review_v001",
+  "plannedWrites": {
+    "fixtureDir": "evals/clip_composition/fixtures/r_ztjHaHmcg_multicut_review_v001",
+    "fixturePath": "evals/clip_composition/fixtures/r_ztjHaHmcg_multicut_review_v001/fixture.json",
+    "transcriptPath": "evals/clip_composition/fixtures/r_ztjHaHmcg_multicut_review_v001/transcript.json",
+    "themesPath": "evals/clip_composition/fixtures/r_ztjHaHmcg_multicut_review_v001/themes.json",
+    "expectedPath": "evals/clip_composition/expected/r_ztjHaHmcg_multicut_review_v001.json"
+  },
+  "fixtureDraft": {
+    "fixtureId": "r_ztjHaHmcg_multicut_review_v001",
+    "draftId": "r_ztjHaHmcg_multicut_review_v001",
+    "description": "人間確認済みの複数区間expectedでcompositionプロンプト評価を行うfixture。",
+    "copiedFrom": [
+      "evals/clip_composition/outputs/multicut-expected-review-r_ztjHaHmcg-20260705-v001.json",
+      "evals/clip_composition/stt-targets/r_ztjHaHmcg.json",
+      "stt/r_ztjHaHmcg_-DwSCDMCWDQ_youtube_auto/source/word-timestamps.json"
+    ],
+    "copiedAt": "2026-07-05T13:55:00.157Z",
+    "sourceUri": "https://www.youtube.com/watch?v=-DwSCDMCWDQ",
+    "transcriptPath": "transcript.json",
+    "themesPath": "themes.json",
+    "selectedThemeId": "theme_multicut_review_1",
+    "notes": [
+      "評価実行時はruntime/artifactsを読まず、このfixture配下のファイルだけを読む。",
+      "expectedCutsは複数の元動画側区間で構成される。",
+      "固定テーマは人間が正解区間から逆算して書く。",
+      "単一区間expectedとしては扱わない。"
+    ]
+  },
+  "transcriptDraft": {
+    "kind": "transcript_json",
+    "mode": "zev-local-stt-multicut-review",
+    "sourceUri": "https://www.youtube.com/watch?v=-DwSCDMCWDQ",
+    "sampleSource": {
+      "title": "同接100人いたら食べていけるの？",
+      "path": "evals/clip_composition/research/downloads/r_ztjHaHmcg/sources/-DwSCDMCWDQ/-DwSCDMCWDQ.mp4",
+      "sourceRanges": [
+        {
+          "partIndex": 0,
+          "sourceStartMs": 2179930,
+          "sourceEndMs": 2209930
+        },
+        {
+          "partIndex": 1,
+          "sourceStartMs": 2309360,
+          "sourceEndMs": 2339360
+        },
+        {
+          "partIndex": 2,
+          "sourceStartMs": 2361159,
+          "sourceEndMs": 2391159
+        },
+        {
+          "partIndex": 3,
+          "sourceStartMs": 2404730,
+          "sourceEndMs": 2433322
+        }
+      ]
+    },
+    "notes": [
+      "clip_composition評価環境で、複数区間expected候補を人間確認後に固定するための文字起こし草案。",
+      "speechUnitGroupsは複数区間expectedの各区間に対応する。",
+      "評価実行時はruntime/artifactsを読まず、このfixture配下のファイルだけを読む。"
+    ],
+    "generatedAt": "2026-07-05T13:55:00.157Z",
+    "language": "ja-JP",
+    "durationSec": 118.592,
+    "segmentCount": 35,
+    "segments": [
+      {
+        "id": 1,
+        "startMs": 2179930,
+        "endMs": 2183390,
+        "text": "道雪百人いれば食べていけるって本当なん",
+        "speaker": "youtube-auto-caption",
+        "multicutPartIndex": 0
+      },
+      {
+        "id": 2,
+        "startMs": 2181910,
+        "endMs": 2186200,
+        "text": "だろうかああ",
+        "speaker": "youtube-auto-caption",
+        "multicutPartIndex": 0
+      },
+      {
+        "id": 3,
+        "startMs": 2183390,
+        "endMs": 2186200,
+        "text": "100人か",
+        "speaker": "youtube-auto-caption",
+        "multicutPartIndex": 0
+      },
+      {
+        "id": 4,
+        "startMs": 2186450,
+        "endMs": 2193000,
+        "text": "100人たらもいけるんじゃないか",
+        "speaker": "youtube-auto-caption",
+        "multicutPartIndex": 0
+      },
+      {
+        "id": 5,
+        "startMs": 2190090,
+        "endMs": 2196590,
+        "text": "道雪道雪100人でしょ",
+        "speaker": "youtube-auto-caption",
+        "multicutPartIndex": 0
+      },
+      {
+        "id": 6,
+        "startMs": 2193000,
+        "endMs": 2196590,
+        "text": "どう節約に脚光でもしかもん",
+        "speaker": "youtube-auto-caption",
+        "multicutPartIndex": 0
+      },
+      {
+        "id": 7,
+        "startMs": 2205339,
+        "endMs": 2209930,
+        "text": "道雪100人",
+        "speaker": "youtube-auto-caption",
+        "multicutPartIndex": 0
+      },
+      {
+        "id": 8,
+        "startMs": 2207910,
+        "endMs": 2209930,
+        "text": "結構だねなって僕がパブgで",
+        "speaker": "youtube-auto-caption",
+        "multicutPartIndex": 0
+      },
+      {
+        "id": 9,
+        "startMs": 2310090,
+        "endMs": 2313290,
+        "text": "うん2",
+        "speaker": "youtube-auto-caption",
+        "multicutPartIndex": 1
+      },
+      {
+        "id": 10,
+        "startMs": 2313490,
+        "endMs": 2318790,
+        "text": "道雪100人だとまでも多分生活できると",
+        "speaker": "youtube-auto-caption",
+        "multicutPartIndex": 1
+      },
+      {
+        "id": 11,
+        "startMs": 2316580,
+        "endMs": 2318790,
+        "text": "思う",
+        "speaker": "youtube-auto-caption",
+        "multicutPartIndex": 1
+      },
+      {
+        "id": 12,
+        "startMs": 2332539,
+        "endMs": 2337339,
+        "text": "ってことはどうする3200には",
+        "speaker": "youtube-auto-caption",
+        "multicutPartIndex": 1
+      },
+      {
+        "id": 13,
+        "startMs": 2334160,
+        "endMs": 2339360,
+        "text": "サーフィンは32人6そんな単純計算か",
+        "speaker": "youtube-auto-caption",
+        "multicutPartIndex": 1
+      },
+      {
+        "id": 14,
+        "startMs": 2337339,
+        "endMs": 2339360,
+        "text": "なーって思うけど",
+        "speaker": "youtube-auto-caption",
+        "multicutPartIndex": 1
+      },
+      {
+        "id": 15,
+        "startMs": 2369560,
+        "endMs": 2373760,
+        "text": "道雪数とチャンネル登録者数どっちがお金",
+        "speaker": "youtube-auto-caption",
+        "multicutPartIndex": 2
+      },
+      {
+        "id": 16,
+        "startMs": 2371990,
+        "endMs": 2375900,
+        "text": "になるのだろうかチャンネル登録者サーブ",
+        "speaker": "youtube-auto-caption",
+        "multicutPartIndex": 2
+      },
+      {
+        "id": 17,
+        "startMs": 2373760,
+        "endMs": 2377150,
+        "text": "に何人のほかにもなんないよ",
+        "speaker": "youtube-auto-caption",
+        "multicutPartIndex": 2
+      },
+      {
+        "id": 18,
+        "startMs": 2375900,
+        "endMs": 2379980,
+        "text": "チャンネル",
+        "speaker": "youtube-auto-caption",
+        "multicutPartIndex": 2
+      },
+      {
+        "id": 19,
+        "startMs": 2377150,
+        "endMs": 2383430,
+        "text": "売るぐらいしかできなくないわからんけど",
+        "speaker": "youtube-auto-caption",
+        "multicutPartIndex": 2
+      },
+      {
+        "id": 20,
+        "startMs": 2379980,
+        "endMs": 2386780,
+        "text": "道雪がまあ何だろうtvrリアル",
+        "speaker": "youtube-auto-caption",
+        "multicutPartIndex": 2
+      },
+      {
+        "id": 21,
+        "startMs": 2383430,
+        "endMs": 2386780,
+        "text": "タイムの数字だから",
+        "speaker": "youtube-auto-caption",
+        "multicutPartIndex": 2
+      },
+      {
+        "id": 22,
+        "startMs": 2404730,
+        "endMs": 2405519,
+        "text": "単純計算だからさマジでだってそうじゃん",
+        "speaker": "youtube-auto-caption",
+        "multicutPartIndex": 3
+      },
+      {
+        "id": 23,
+        "startMs": 2404730,
+        "endMs": 2407649,
+        "text": "あの広告収入が例えば",
+        "speaker": "youtube-auto-caption",
+        "multicutPartIndex": 3
+      },
+      {
+        "id": 24,
+        "startMs": 2405519,
+        "endMs": 2410169,
+        "text": "100人に見られてる人は広告収入が",
+        "speaker": "youtube-auto-caption",
+        "multicutPartIndex": 3
+      },
+      {
+        "id": 25,
+        "startMs": 2407649,
+        "endMs": 2411939,
+        "text": "じゃあ1年ですと仙人に見られる1000",
+        "speaker": "youtube-auto-caption",
+        "multicutPartIndex": 3
+      },
+      {
+        "id": 26,
+        "startMs": 2410169,
+        "endMs": 2414099,
+        "text": "人に見られてるなら黒収入が0.5位に",
+        "speaker": "youtube-auto-caption",
+        "multicutPartIndex": 3
+      },
+      {
+        "id": 27,
+        "startMs": 2411939,
+        "endMs": 2416270,
+        "text": "なりますとかだったらさじゃないじゃん",
+        "speaker": "youtube-auto-caption",
+        "multicutPartIndex": 3
+      },
+      {
+        "id": 28,
+        "startMs": 2414099,
+        "endMs": 2418010,
+        "text": "じゃないのよ",
+        "speaker": "youtube-auto-caption",
+        "multicutPartIndex": 3
+      },
+      {
+        "id": 29,
+        "startMs": 2416270,
+        "endMs": 2420730,
+        "text": "まあなんか日本のサイトだからそういう",
+        "speaker": "youtube-auto-caption",
+        "multicutPartIndex": 3
+      },
+      {
+        "id": 30,
+        "startMs": 2418010,
+        "endMs": 2422800,
+        "text": "ことするところありそうですけど",
+        "speaker": "youtube-auto-caption",
+        "multicutPartIndex": 3
+      },
+      {
+        "id": 31,
+        "startMs": 2420730,
+        "endMs": 2425340,
+        "text": "ゆ中バーソイしようじゃないからf",
+        "speaker": "youtube-auto-caption",
+        "multicutPartIndex": 3
+      },
+      {
+        "id": 32,
+        "startMs": 2422800,
+        "endMs": 2425340,
+        "text": "200人",
+        "speaker": "youtube-auto-caption",
+        "multicutPartIndex": 3
+      },
+      {
+        "id": 33,
+        "startMs": 2425359,
+        "endMs": 2431569,
+        "text": "再生数が100人ほど100の動画も再生",
+        "speaker": "youtube-auto-caption",
+        "multicutPartIndex": 3
+      },
+      {
+        "id": 34,
+        "startMs": 2427789,
+        "endMs": 2433322,
+        "text": "数が1,000万の動画もそれでその再生",
+        "speaker": "youtube-auto-caption",
+        "multicutPartIndex": 3
+      },
+      {
+        "id": 35,
+        "startMs": 2431569,
+        "endMs": 2433322,
+        "text": "数で北収益の単価は変わらないから",
+        "speaker": "youtube-auto-caption",
+        "multicutPartIndex": 3
+      }
+    ],
+    "speechUnitGroups": [
+      [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      [
+        9,
+        10,
+        11,
+        12,
+        13,
+        14
+      ],
+      [
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21
+      ],
+      [
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35
+      ]
+    ]
+  },
+  "themesDraft": null,
+  "expectedDraft": {
+    "draftId": "r_ztjHaHmcg_multicut_review_v001",
+    "fixtureId": "r_ztjHaHmcg_multicut_review_v001",
+    "expectedCuts": [
+      {
+        "sourceStartMs": 2179930,
+        "sourceEndMs": 2209930,
+        "reason": "切り抜き側チャンク1が、音声/STT照合とGemini左右比較で元動画側候補区間に対応したため。",
+        "sourceVideoId": "-DwSCDMCWDQ",
+        "sourceUrl": "https://www.youtube.com/watch?v=-DwSCDMCWDQ",
+        "clipId": "r_ztjHaHmcg",
+        "clipUrl": "https://www.youtube.com/watch?v=r_ztjHaHmcg",
+        "verificationStatus": "audio_stt_gemini_confirmed_human_visual_pending",
+        "usableForClipLocationEval": true,
+        "usableForCompositionPromptEval": false,
+        "multicutPartIndex": 0,
+        "clipStartMs": 2555,
+        "clipEndMs": 32555,
+        "evidence": {
+          "textCoverage": {
+            "clip": 0.764367816091954,
+            "source": 0.764367816091954,
+            "matchedChars": 133,
+            "queryChars": 174,
+            "sourceChars": 174
+          },
+          "audioEvidence": {
+            "envelopeCorrelation": 0.298622,
+            "directCorrelationAtEnvelopeOffset": 0.057318,
+            "bestOffsetMs": 5780
+          },
+          "visualVerification": {
+            "status": "confirmed_by_gemini",
+            "model": "Gemini Web Flash",
+            "verificationPath": "evals/clip_composition/outputs/r_ztjHaHmcg/visual_verification/20260705-gemini-web-flash-multicut-chunk01-v001.json",
+            "reportPath": "evals/clip_composition/reports/gemini-visual-check-r_ztjHaHmcg-multicut-chunk01-v001.md",
+            "uploadedVideoPath": "evals/clip_composition/outputs/visual-check/r_ztjHaHmcg/multicut_r_ztjHaHmcg_20260705-v001_chunk01.mp4",
+            "notes": []
+          }
+        },
+        "sourceSttId": "r_ztjHaHmcg_-DwSCDMCWDQ_youtube_auto",
+        "humanVisualVerification": {
+          "status": "pending",
+          "note": "人間確認前のpreview。expected/にはまだ固定しない。"
+        }
+      },
+      {
+        "sourceStartMs": 2309360,
+        "sourceEndMs": 2339360,
+        "reason": "切り抜き側チャンク2が、音声/STT照合とGemini左右比較で元動画側候補区間に対応したため。",
+        "sourceVideoId": "-DwSCDMCWDQ",
+        "sourceUrl": "https://www.youtube.com/watch?v=-DwSCDMCWDQ",
+        "clipId": "r_ztjHaHmcg",
+        "clipUrl": "https://www.youtube.com/watch?v=r_ztjHaHmcg",
+        "verificationStatus": "audio_stt_gemini_confirmed_human_visual_pending",
+        "usableForClipLocationEval": true,
+        "usableForCompositionPromptEval": false,
+        "multicutPartIndex": 1,
+        "clipStartMs": 32555,
+        "clipEndMs": 62555,
+        "evidence": {
+          "textCoverage": {
+            "clip": 0.5642857142857143,
+            "source": 0.5642857142857143,
+            "matchedChars": 79,
+            "queryChars": 140,
+            "sourceChars": 140
+          },
+          "audioEvidence": {
+            "envelopeCorrelation": 0.612458,
+            "directCorrelationAtEnvelopeOffset": -0.019381,
+            "bestOffsetMs": 44380
+          },
+          "visualVerification": {
+            "status": "confirmed_by_gemini_with_response_index_mismatch",
+            "model": "Gemini Web Flash",
+            "verificationPath": "evals/clip_composition/outputs/r_ztjHaHmcg/visual_verification/20260705-gemini-web-flash-multicut-chunk02-v001.json",
+            "reportPath": "evals/clip_composition/reports/gemini-visual-check-r_ztjHaHmcg-multicut-chunk02-v001.md",
+            "uploadedVideoPath": "evals/clip_composition/outputs/visual-check/r_ztjHaHmcg/multicut_r_ztjHaHmcg_20260705-v001_chunk02.mp4",
+            "notes": [
+              "Gemini response returned chunkIndex 2 while the prompt requested chunkIndex 1. The returned clip/source time range matches chunk02, so this is treated as a response-index issue, not a range mismatch."
+            ]
+          }
+        },
+        "sourceSttId": "r_ztjHaHmcg_-DwSCDMCWDQ_youtube_auto",
+        "humanVisualVerification": {
+          "status": "pending",
+          "note": "人間確認前のpreview。expected/にはまだ固定しない。"
+        }
+      },
+      {
+        "sourceStartMs": 2361159,
+        "sourceEndMs": 2391159,
+        "reason": "切り抜き側チャンク3が、音声/STT照合とGemini左右比較で元動画側候補区間に対応したため。",
+        "sourceVideoId": "-DwSCDMCWDQ",
+        "sourceUrl": "https://www.youtube.com/watch?v=-DwSCDMCWDQ",
+        "clipId": "r_ztjHaHmcg",
+        "clipUrl": "https://www.youtube.com/watch?v=r_ztjHaHmcg",
+        "verificationStatus": "audio_stt_gemini_confirmed_human_visual_pending",
+        "usableForClipLocationEval": true,
+        "usableForCompositionPromptEval": false,
+        "multicutPartIndex": 2,
+        "clipStartMs": 62555,
+        "clipEndMs": 92555,
+        "evidence": {
+          "textCoverage": {
+            "clip": 0.7526315789473684,
+            "source": 0.7526315789473684,
+            "matchedChars": 143,
+            "queryChars": 190,
+            "sourceChars": 190
+          },
+          "audioEvidence": {
+            "envelopeCorrelation": 0.526415,
+            "directCorrelationAtEnvelopeOffset": -0.019121,
+            "bestOffsetMs": 20110
+          },
+          "visualVerification": {
+            "status": "confirmed_by_gemini",
+            "model": "Gemini Web Flash",
+            "verificationPath": "evals/clip_composition/outputs/r_ztjHaHmcg/visual_verification/20260705-gemini-web-flash-multicut-chunk03-v001.json",
+            "reportPath": "evals/clip_composition/reports/gemini-visual-check-r_ztjHaHmcg-multicut-chunk03-v001.md",
+            "uploadedVideoPath": "evals/clip_composition/outputs/visual-check/r_ztjHaHmcg/multicut_r_ztjHaHmcg_20260705-v001_chunk03.mp4",
+            "notes": []
+          }
+        },
+        "sourceSttId": "r_ztjHaHmcg_-DwSCDMCWDQ_youtube_auto",
+        "humanVisualVerification": {
+          "status": "pending",
+          "note": "人間確認前のpreview。expected/にはまだ固定しない。"
+        }
+      },
+      {
+        "sourceStartMs": 2404730,
+        "sourceEndMs": 2433322,
+        "reason": "切り抜き側チャンク4が、音声/STT照合とGemini左右比較で元動画側候補区間に対応したため。",
+        "sourceVideoId": "-DwSCDMCWDQ",
+        "sourceUrl": "https://www.youtube.com/watch?v=-DwSCDMCWDQ",
+        "clipId": "r_ztjHaHmcg",
+        "clipUrl": "https://www.youtube.com/watch?v=r_ztjHaHmcg",
+        "verificationStatus": "audio_stt_gemini_confirmed_human_visual_pending",
+        "usableForClipLocationEval": true,
+        "usableForCompositionPromptEval": false,
+        "multicutPartIndex": 3,
+        "clipStartMs": 92555,
+        "clipEndMs": 121147,
+        "evidence": {
+          "textCoverage": {
+            "clip": 0.8156424581005587,
+            "source": 0.8156424581005587,
+            "matchedChars": 146,
+            "queryChars": 179,
+            "sourceChars": 179
+          },
+          "audioEvidence": {
+            "envelopeCorrelation": 0.593818,
+            "directCorrelationAtEnvelopeOffset": 0.20869,
+            "bestOffsetMs": 1880
+          },
+          "visualVerification": {
+            "status": "confirmed_by_gemini",
+            "model": "Gemini Web Flash",
+            "verificationPath": "evals/clip_composition/outputs/r_ztjHaHmcg/visual_verification/20260705-gemini-web-flash-multicut-chunk04-v001.json",
+            "reportPath": "evals/clip_composition/reports/gemini-visual-check-r_ztjHaHmcg-multicut-chunk04-v001.md",
+            "uploadedVideoPath": "evals/clip_composition/outputs/visual-check/r_ztjHaHmcg/multicut_r_ztjHaHmcg_20260705-v001_chunk04.mp4",
+            "notes": []
+          }
+        },
+        "sourceSttId": "r_ztjHaHmcg_-DwSCDMCWDQ_youtube_auto",
+        "humanVisualVerification": {
+          "status": "pending",
+          "note": "人間確認前のpreview。expected/にはまだ固定しない。"
+        }
+      }
+    ]
+  },
+  "cutTranscriptSummary": [
+    {
+      "partIndex": 0,
+      "sourceStartMs": 2179930,
+      "sourceEndMs": 2209930,
+      "segmentCount": 8,
+      "textPreview": "道雪百人いれば食べていけるって本当なんだろうかああ100人か100人たらもいけるんじゃないか道雪道雪100人でしょどう節約に脚光でもしかもん道雪100人結構だねなって僕がパブgで"
+    },
+    {
+      "partIndex": 1,
+      "sourceStartMs": 2309360,
+      "sourceEndMs": 2339360,
+      "segmentCount": 6,
+      "textPreview": "うん2道雪100人だとまでも多分生活できると思うってことはどうする3200にはサーフィンは32人6そんな単純計算かなーって思うけど"
+    },
+    {
+      "partIndex": 2,
+      "sourceStartMs": 2361159,
+      "sourceEndMs": 2391159,
+      "segmentCount": 7,
+      "textPreview": "道雪数とチャンネル登録者数どっちがお金になるのだろうかチャンネル登録者サーブに何人のほかにもなんないよチャンネル売るぐらいしかできなくないわからんけど道雪がまあ何だろうtvrリアルタイムの数字だから"
+    },
+    {
+      "partIndex": 3,
+      "sourceStartMs": 2404730,
+      "sourceEndMs": 2433322,
+      "segmentCount": 14,
+      "textPreview": "単純計算だからさマジでだってそうじゃんあの広告収入が例えば100人に見られてる人は広告収入がじゃあ1年ですと仙人に見られる1000人に見られてるなら黒収入が0.5位になりますとかだったらさじゃないじゃんじゃないのよまあなんか日本のサイトだからそういうことするところありそうですけどゆ中バーソイしようじゃないからf200人"
+    }
+  ],
+  "productionImpact": {
+    "writesRuntime": false,
+    "touchesProductionUi": false,
+    "touchesProductionApi": false,
+    "touchesProductionQueue": false,
+    "touchesDatabase": false
+  }
+}

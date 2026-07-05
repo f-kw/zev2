@@ -277,13 +277,23 @@ function validateThemeArtifact(value: unknown, selectedThemeId: string): ThemeAr
 }
 
 function selectedCutsFromComposition(composition: ClipCompositionArtifact): SelectedCut[] {
+  if (composition.parts.length > 0) {
+    return composition.parts.map((part, index) => ({
+      sourceStartMs: part.sourceStartMs,
+      sourceEndMs: part.sourceEndMs,
+      reason: [
+        `選ばれたテーマ「${composition.title}」の編集元場面${index + 1}。`,
+        `役割: ${part.role}。`,
+        part.connectionNote,
+        composition.assemblyPlan
+      ].join(' ')
+    }));
+  }
+
   return [{
     sourceStartMs: composition.sourceStartMs,
     sourceEndMs: composition.sourceEndMs,
-    reason: [
-      `選ばれたテーマ「${composition.title}」について、関連する発話まとまりを${composition.parts.length}個の編集元場面としてつないだ。`,
-      composition.assemblyPlan
-    ].join(' ')
+    reason: `選ばれたテーマ「${composition.title}」について、編集元場面全体を選んだ。 ${composition.assemblyPlan}`
   }];
 }
 

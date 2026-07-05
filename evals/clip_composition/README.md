@@ -144,6 +144,34 @@ runner/node_modules/.bin/tsx evals/clip_composition/prepare_multicut_expected_re
 
 この処理は `outputs/` と `reports/` にだけ書き込み、`expected/` には書き込みません。人間確認が終わるまで、生成物は正解データではなく確認待ち草案として扱います。
 
+人間確認後にfixtureへ固定する前のpreviewを作る場合:
+
+```bash
+runner/node_modules/.bin/tsx evals/clip_composition/freeze_multicut_review_fixture.ts \
+  --review evals/clip_composition/outputs/multicut-expected-review-r_ztjHaHmcg-20260705-v001.json \
+  --target evals/clip_composition/stt-targets/r_ztjHaHmcg.json \
+  --sourceSttId r_ztjHaHmcg_-DwSCDMCWDQ_youtube_auto \
+  --outputId 20260705-v001
+```
+
+このpreviewは `fixtures/` と `expected/` に書き込みません。人間確認と固定テーマが不足している場合は、何が足りないかを `reports/multicut-fixture-freeze-preview-*.md` に出します。
+
+人間が4本の左右比較動画を確認し、固定テーマを1行で逆算してからfixtureへ固定する場合:
+
+```bash
+runner/node_modules/.bin/tsx evals/clip_composition/freeze_multicut_review_fixture.ts \
+  --review evals/clip_composition/outputs/multicut-expected-review-r_ztjHaHmcg-20260705-v001.json \
+  --target evals/clip_composition/stt-targets/r_ztjHaHmcg.json \
+  --sourceSttId r_ztjHaHmcg_-DwSCDMCWDQ_youtube_auto \
+  --humanConfirmed true \
+  --themeTitle "人間が正解区間から逆算した固定テーマ" \
+  --themeSummary "人間が正解区間から逆算したテーマ説明" \
+  --writeFixture true \
+  --outputId 20260705-v001
+```
+
+`--writeFixture true` は `--humanConfirmed true`、`--themeTitle`、`--themeSummary` が揃っていないと失敗します。これはGemini確認だけで初回正解データを固定しないためのガードです。
+
 音声比較済み区間からfixture候補を凍結する:
 
 ```bash
