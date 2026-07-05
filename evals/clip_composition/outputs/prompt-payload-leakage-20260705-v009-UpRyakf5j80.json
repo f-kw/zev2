@@ -1,0 +1,22 @@
+{
+  "runAt": "2026-07-05T12:17:38.270Z",
+  "kind": "clip_composition_prompt_payload_leakage",
+  "payloadCount": 1,
+  "results": [
+    {
+      "payloadPath": "evals/clip_composition/outputs/UpRyakf5j80_clip_audio_v001/clip_composition_prompt_v009/20260705-211733/prompt-input.json",
+      "fixtureId": "UpRyakf5j80_clip_audio_v001",
+      "draftId": "UpRyakf5j80_clip_audio_v001",
+      "promptVersion": "clip_composition_prompt_v009",
+      "expectedPath": "evals/clip_composition/expected/UpRyakf5j80_clip_audio_v001.json",
+      "status": "pass",
+      "forbiddenKeyHits": [],
+      "expectedTextHits": [],
+      "numericBoundaryHits": [],
+      "notes": [
+        "正解データの本文は評価だけに使い、modelInputだけを検査対象にした。",
+        "期待時刻と同じ数値が文字起こし区間の境界として出る場合は、入力文字起こし由来の自然な一致として分けて扱う。"
+      ]
+    }
+  ]
+}

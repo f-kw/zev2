@@ -338,6 +338,17 @@ node evals/clip_composition/build_boundary_signal_payload.ts \
 
 このコマンドもSTTもLLMも実行しません。fixtureのコピー元になっている字幕時刻から、固定テーマの候補発話範囲と重なる単位と、その隣接遷移を抽出します。payload本体には `expectedCuts` の開始・終了時刻、音声比較で確定した正解時刻、Web版Gemini確認結果を入れず、`evaluationOnly` で漏えい確認だけを行います。
 
+境界候補payloadをv009プロンプト入力へ合成する場合:
+
+```bash
+node evals/clip_composition/build_prompt_payload_with_boundary_signals.ts \
+  --fixture UpRyakf5j80_clip_audio_v001 \
+  --promptVersion v009 \
+  --boundarySignals evals/clip_composition/outputs/boundary-signal-payload-UpRyakf5j80-v009-candidate-v001.json
+```
+
+このコマンドもSTTもLLMも実行しません。通常の固定テーマ、文字起こし入力に `boundarySignalInput` だけを追加し、境界候補payload側の `evaluationOnly` はモデル入力へ入れません。生成後は `inspect_prompt_payload_leakage.ts` でexpectedの混入を確認します。
+
 生成済み採点結果:
 
 - `outputs/IMQYaT_RWRA_context_v001/clip_composition_prompt_v001/20260705-125215/result.json`

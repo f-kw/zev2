@@ -167,3 +167,16 @@ v009でpromptだけを調整しても、音声上の切り抜き終端を正し�
 - expected時刻の漏えい: 0件
 
 このpayloadは、fixtureのコピー元であるYouTube自動字幕時刻から、固定テーマの候補発話範囲と重なる単位だけを抜き出したもの。終端側では発話20「うん」が `11405460ms - 11409170ms`、次の字幕「えーっと」が `11407260ms` から始まる重なり遷移として出ている。これはexpected終端 `11407178ms` そのものではないが、発話20の終端まで伸ばしすぎる問題をv009で判断するための独立した境界候補になる。
+
+## v009プロンプト入力
+
+- プロンプト: `evals/clip_composition/prompts/clip_composition_prompt_v009.md`
+- 入力生成スクリプト: `evals/clip_composition/build_prompt_payload_with_boundary_signals.ts`
+- prompt入力JSON: `evals/clip_composition/outputs/UpRyakf5j80_clip_audio_v001/clip_composition_prompt_v009/20260705-211733/prompt-input.json`
+- prompt本文: `evals/clip_composition/reports/UpRyakf5j80_clip_audio_v001/clip_composition_prompt_v009/20260705-211733/prompt.md`
+- 入力サマリー: `evals/clip_composition/reports/UpRyakf5j80_clip_audio_v001/clip_composition_prompt_v009/20260705-211733/prompt-input-summary.md`
+- 漏えい検査JSON: `evals/clip_composition/outputs/prompt-payload-leakage-20260705-v009-UpRyakf5j80.json`
+- 漏えい検査レポート: `evals/clip_composition/reports/prompt-payload-leakage-20260705-v009-UpRyakf5j80.md`
+- 漏えい検査結果: pass
+
+v009入力では、通常の固定テーマと文字起こしに `boundarySignals` を追加した。モデルへ渡すのは境界候補payloadの `boundarySignalInput` だけで、境界候補payload側の `evaluationOnly` は渡していない。prompt本文にもexpectedの開始・終了時刻は出ていない。
