@@ -86,6 +86,8 @@ pnpm --filter @zev2/agent-runner exec tsx ../evals/clip_composition/align_stt_ch
 
 現時点の照合スクリプトは、全角半角統一、カタカナのひらがな化、Unicode正規化による数字表記統一、記号・空白・長音記号の除外を行います。漢字の読み変換は未実装です。
 
+STT照合候補には、共通の時間軸整合検査として「単語タイムスタンプ対応が線形に続いた最長区間の長さ/対象区間の長さ」を記録します。テキスト一致度が高くても、この整合率が低い候補はexpectedCutsとして固定しません。
+
 第一候補 `IMQYaT_RWRA` の実行済み出力:
 
 - 照合JSON: `outputs/alignment-IMQYaT_RWRA_v001.json`
@@ -133,7 +135,7 @@ pnpm --filter @zev2/agent-runner exec tsx ../evals/clip_composition/compare_audi
 - 人間確認結果: `outputs/multicut-human-decision-r_ztjHaHmcg_multicut_review_v001-20260705-needs-cutpoint-v001.json`
 - 静止画確認パッケージ: `reports/multicut-still-check-r_ztjHaHmcg-20260705-needs-cutpoint-v001.md`
 
-この候補は、元動画側に `99.430秒`、`21.799秒`、`13.571秒` の空白があるため、単一の連続区間としては固定しません。Web版Geminiは4つのチャンクを同じ元場面として確認しましたが、人間の目視ではchunk2とchunk3が途中から一致し、chunk1も最初だけ一致する状態でした。固定幅30秒チャンクの途中に未検出の繋ぎ目がある可能性が高いため、この候補は `expected/` に固定せず、切り抜き側のカット点または音声不連続点を検出したうえで再照合します。
+この候補は、元動画側に `99.430秒`、`21.799秒`、`13.571秒` の空白があるため、単一の連続区間としては固定しません。Web版Geminiは4つのチャンクを同じ元場面として確認しましたが、人間の目視ではchunk2とchunk3が途中から一致し、chunk1も最初だけ一致する状態でした。固定幅30秒チャンクの時間軸整合率もchunk1からchunk3は約52-58%、chunk4は約98%で、固定幅30秒チャンクの途中に未検出の繋ぎ目がある可能性が高いため、この候補は `expected/` に固定せず、切り抜き側のカット点または音声不連続点を検出したうえで再照合します。
 
 固定30秒チャンクを使わず、音声不連続候補と映像シーンチェンジ候補から切り抜き側を可変長セグメントに分けて再照合する場合:
 

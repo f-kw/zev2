@@ -1,6 +1,7 @@
 import { existsSync } from 'node:fs';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
+import { inspectTimeAxisIntegrity, type TimeAxisInspection } from './time_axis_integrity.js';
 
 type WordTimestamp = {
   text: string;
@@ -58,6 +59,7 @@ type MatchCandidate = {
   exact: boolean;
   sourceText: string;
   normalizedSourceText: string;
+  timeAxis: TimeAxisInspection;
 };
 
 const evalRoot = path.join(workspaceRoot(), 'evals', 'clip_composition');
@@ -247,6 +249,10 @@ function buildTextChars(words: NormalizedWord[]): TextChar[] {
   return chars;
 }
 
+function wordsInRange(words: NormalizedWord[], startMs: number, endMs: number): NormalizedWord[] {
+  return words.filter((word) => word.endMs > startMs && word.startMs < endMs);
+}
+
 function sourceTextForRange(words: NormalizedWord[], chars: TextChar[], startChar: number, endExclusive: number): string {
   const range = chars.slice(startChar, endExclusive);
   const wordIndexes = Array.from(new Set(range.map((item) => item.wordIndex))).sort((left, right) => left - right);
@@ -255,13 +261,16 @@ function sourceTextForRange(words: NormalizedWord[], chars: TextChar[], startCha
 
 function findMatches(input: {
   chunk: ClipChunk;
+  clipWords: NormalizedWord[];
   sourceId: string;
   sourceWords: NormalizedWord[];
   top: number;
 }): MatchCandidate[] {
+  const queryWords = wordsInRange(input.clipWords, input.chunk.startMs, input.chunk.endMs);
+  const queryChars = buildTextChars(queryWords);
   const sourceChars = buildTextChars(input.sourceWords);
   const sourceText = sourceChars.map((item) => item.char).join('');
-  const query = input.chunk.normalizedText;
+  const query = queryChars.map((item) => item.char).join('');
   if (!query || sourceChars.length === 0) {
     return [];
   }
@@ -273,11 +282,12 @@ function findMatches(input: {
       continue;
     }
 
+    const sourceRangeChars = sourceChars.slice(startChar, endExclusive);
     const normalizedSourceText = sourceText.slice(startChar, endExclusive);
     const matchedChars = lcsLength(query, normalizedSourceText);
     const sourceCharCount = normalizedSourceText.length;
-    const firstChar = sourceChars[startChar];
-    const lastChar = sourceChars[endExclusive - 1];
+    const firstChar = sourceRangeChars[0];
+    const lastChar = sourceRangeChars.at(-1);
     if (!firstChar || !lastChar || sourceCharCount === 0) {
       continue;
     }
@@ -293,7 +303,17 @@ function findMatches(input: {
       sourceCoverage: matchedChars / sourceCharCount,
       exact: query === normalizedSourceText,
       sourceText: sourceTextForRange(input.sourceWords, sourceChars, startChar, endExclusive),
-      normalizedSourceText
+      normalizedSourceText,
+      timeAxis: inspectTimeAxisIntegrity({
+        segmentStartMs: input.chunk.startMs,
+        segmentEndMs: input.chunk.endMs,
+        query,
+        sourceText: normalizedSourceText,
+        queryChars,
+        sourceChars: sourceRangeChars,
+        clipWords: queryWords,
+        sourceWords: input.sourceWords
+      })
     });
   }
 
@@ -375,6 +395,7 @@ function buildReport(input: {
     '- この結果はexpectedCutsとして固定しない',
     '- 元動画の該当秒数を目視確認してから正解データにする',
     '- 切り抜き側のBGM、SE、追加ナレーション由来の不一致は正常に起こる',
+    '- 整合率は、単語タイムスタンプ対応が線形に続いた最長区間の長さをチャンク長で割った値',
     '',
     '## 候補',
     ''
@@ -418,12 +439,15 @@ function buildReport(input: {
     lines.push('');
   }
 
+  while (lines.at(-1) === '') {
+    lines.pop();
+  }
   return `${lines.join('\n')}\n`;
 }
 
 function appendMatch(lines: string[], prefix: string, match: MatchCandidate): void {
   lines.push(`${prefix} ${match.sourceId} ${formatMs(match.sourceStartMs)} - ${formatMs(match.sourceEndMs)}`);
-  lines.push(`   - 一致度: 切り抜き側 ${percent(match.clipCoverage)} / 参照元側 ${percent(match.sourceCoverage)} / 完全一致 ${match.exact ? 'yes' : 'no'}`);
+  lines.push(`   - 一致度: 切り抜き側 ${percent(match.clipCoverage)} / 参照元側 ${percent(match.sourceCoverage)} / 整合率 ${percent(match.timeAxis.linearContinuityRatio)} / 完全一致 ${match.exact ? 'yes' : 'no'}`);
   lines.push(`   - 参照元文字起こし: ${match.sourceText}`);
   lines.push(`   - 正規化後: ${match.normalizedSourceText}`);
 }
@@ -442,6 +466,7 @@ async function main() {
       sourceId: source.id,
       matches: findMatches({
         chunk,
+        clipWords: clip.words,
         sourceId: source.id,
         sourceWords: source.words,
         top: options.top
@@ -473,6 +498,7 @@ async function main() {
       chunkMs: options.chunkMs,
       top: options.top,
       ranking: '完全一致、切り抜き側の一致率、参照元側の一致率、一致文字数、開始時刻の順に並べる',
+      timeAxisIntegrity: '単語タイムスタンプ対応が線形に続いた最長区間の長さ/チャンク長',
       normalization: [
         '全角半角統一',
         'カタカナのひらがな化',
@@ -510,7 +536,8 @@ async function main() {
     }
     console.log(
       `chunk ${item.chunk.index + 1}: ${best.sourceId} ${formatMs(best.sourceStartMs)}-${formatMs(best.sourceEndMs)} ` +
-      `clipCoverage=${percent(best.clipCoverage)} sourceCoverage=${percent(best.sourceCoverage)} exact=${best.exact ? 'yes' : 'no'}`
+      `clipCoverage=${percent(best.clipCoverage)} sourceCoverage=${percent(best.sourceCoverage)} ` +
+      `linear=${percent(best.timeAxis.linearContinuityRatio)} exact=${best.exact ? 'yes' : 'no'}`
     );
   }
 }

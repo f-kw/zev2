@@ -2,6 +2,7 @@ import { existsSync } from 'node:fs';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { spawn } from 'node:child_process';
+import { inspectTimeAxisIntegrity, type TimeAxisInspection } from './time_axis_integrity.js';
 
 type CliOptions = {
   targetPath: string;
@@ -78,6 +79,7 @@ type OldAlignmentFile = {
         sourceEndMs: number;
         clipCoverage?: number;
         sourceCoverage?: number;
+        timeAxis?: TimeAxisInspection;
       }>;
     }>;
   }>;
@@ -127,18 +129,6 @@ type MatchCandidate = {
   clipCoverage: number;
   sourceCoverage: number;
   timeAxis: TimeAxisInspection;
-};
-
-type TimeAxisInspection = {
-  matchedWordPairCount: number;
-  toleranceMs: number;
-  longestLinearRunClipStartMs?: number;
-  longestLinearRunClipEndMs?: number;
-  longestLinearRunDurationMs: number;
-  segmentDurationMs: number;
-  linearContinuityRatio: number;
-  maxDeltaDifferenceMs?: number;
-  discontinuityCount: number;
 };
 
 type RankedCutpoint = {
@@ -546,34 +536,6 @@ function lcsLength(left: string, right: string): number {
   return previous[right.length] ?? 0;
 }
 
-function lcsPairs(left: string, right: string): Array<{ leftIndex: number; rightIndex: number }> {
-  const table = Array.from({ length: left.length + 1 }, () => new Array(right.length + 1).fill(0));
-  for (let leftIndex = 1; leftIndex <= left.length; leftIndex += 1) {
-    for (let rightIndex = 1; rightIndex <= right.length; rightIndex += 1) {
-      table[leftIndex]![rightIndex] = left[leftIndex - 1] === right[rightIndex - 1]
-        ? (table[leftIndex - 1]?.[rightIndex - 1] ?? 0) + 1
-        : Math.max(table[leftIndex - 1]?.[rightIndex] ?? 0, table[leftIndex]?.[rightIndex - 1] ?? 0);
-    }
-  }
-  const pairs: Array<{ leftIndex: number; rightIndex: number }> = [];
-  let leftIndex = left.length;
-  let rightIndex = right.length;
-  while (leftIndex > 0 && rightIndex > 0) {
-    if (left[leftIndex - 1] === right[rightIndex - 1]) {
-      pairs.push({ leftIndex: leftIndex - 1, rightIndex: rightIndex - 1 });
-      leftIndex -= 1;
-      rightIndex -= 1;
-      continue;
-    }
-    if ((table[leftIndex - 1]?.[rightIndex] ?? 0) >= (table[leftIndex]?.[rightIndex - 1] ?? 0)) {
-      leftIndex -= 1;
-    } else {
-      rightIndex -= 1;
-    }
-  }
-  return pairs.reverse();
-}
-
 function findMatches(input: {
   segment: ClipSegment;
   clipWords: NormalizedWord[];
@@ -637,8 +599,9 @@ function findMatches(input: {
         sourceChars: normalizedSourceText.length,
         clipCoverage: candidate.clipCoverage,
         sourceCoverage: candidate.sourceCoverage,
-        timeAxis: inspectTimeAxis({
-          segment: input.segment,
+        timeAxis: inspectTimeAxisIntegrity({
+          segmentStartMs: input.segment.startMs,
+          segmentEndMs: input.segment.endMs,
           query,
           sourceText: normalizedSourceText,
           queryChars,
@@ -653,112 +616,6 @@ function findMatches(input: {
 function sourceTextForRange(words: NormalizedWord[], chars: TextChar[]): string {
   const indexes = [...new Set(chars.map((item) => item.wordIndex))].sort((left, right) => left - right);
   return indexes.map((wordIndex) => words[wordIndex]?.text ?? '').join('');
-}
-
-function inspectTimeAxis(input: {
-  segment: ClipSegment;
-  query: string;
-  sourceText: string;
-  queryChars: TextChar[];
-  sourceChars: TextChar[];
-  clipWords: NormalizedWord[];
-  sourceWords: NormalizedWord[];
-}): TimeAxisInspection {
-  const pairs = lcsPairs(input.query, input.sourceText);
-  const uniqueWordPairs = new Map<string, { clipWord: NormalizedWord; sourceWord: NormalizedWord }>();
-  for (const pair of pairs) {
-    const queryChar = input.queryChars[pair.leftIndex];
-    const sourceChar = input.sourceChars[pair.rightIndex];
-    if (!queryChar || !sourceChar) {
-      continue;
-    }
-    const clipWord = input.clipWords.find((word) => word.wordIndex === queryChar.wordIndex);
-    const sourceWord = input.sourceWords.find((word) => word.wordIndex === sourceChar.wordIndex);
-    if (!clipWord || !sourceWord) {
-      continue;
-    }
-    uniqueWordPairs.set(`${clipWord.wordIndex}:${sourceWord.wordIndex}`, { clipWord, sourceWord });
-  }
-
-  const wordPairs = [...uniqueWordPairs.values()].sort((left, right) => (
-    left.clipWord.startMs - right.clipWord.startMs ||
-    left.sourceWord.startMs - right.sourceWord.startMs
-  ));
-  const toleranceMs = Math.max(medianWordDuration(input.clipWords), medianWordDuration(input.sourceWords));
-  if (wordPairs.length === 0) {
-    return {
-      matchedWordPairCount: 0,
-      toleranceMs,
-      longestLinearRunDurationMs: 0,
-      segmentDurationMs: input.segment.durationMs,
-      linearContinuityRatio: 0,
-      discontinuityCount: 0
-    };
-  }
-
-  let currentStart = wordPairs[0]!;
-  let currentEnd = wordPairs[0]!;
-  let bestStart = currentStart;
-  let bestEnd = currentEnd;
-  let maxDeltaDifferenceMs = 0;
-  let discontinuityCount = 0;
-  for (let index = 1; index < wordPairs.length; index += 1) {
-    const previous = wordPairs[index - 1]!;
-    const current = wordPairs[index]!;
-    const clipDelta = current.clipWord.startMs - previous.clipWord.startMs;
-    const sourceDelta = current.sourceWord.startMs - previous.sourceWord.startMs;
-    const deltaDifference = Math.abs(sourceDelta - clipDelta);
-    maxDeltaDifferenceMs = Math.max(maxDeltaDifferenceMs, deltaDifference);
-    const monotonic = clipDelta >= 0 && sourceDelta >= 0;
-    if (monotonic && deltaDifference <= toleranceMs) {
-      currentEnd = current;
-    } else {
-      discontinuityCount += 1;
-      if (runDuration(currentStart, currentEnd, input.segment) > runDuration(bestStart, bestEnd, input.segment)) {
-        bestStart = currentStart;
-        bestEnd = currentEnd;
-      }
-      currentStart = current;
-      currentEnd = current;
-    }
-  }
-  if (runDuration(currentStart, currentEnd, input.segment) > runDuration(bestStart, bestEnd, input.segment)) {
-    bestStart = currentStart;
-    bestEnd = currentEnd;
-  }
-
-  const longestLinearRunDurationMs = runDuration(bestStart, bestEnd, input.segment);
-  const linearContinuityRatio = input.segment.durationMs > 0
-    ? Math.min(1, longestLinearRunDurationMs / input.segment.durationMs)
-    : 0;
-  return {
-    matchedWordPairCount: wordPairs.length,
-    toleranceMs,
-    longestLinearRunClipStartMs: Math.max(input.segment.startMs, bestStart.clipWord.startMs),
-    longestLinearRunClipEndMs: Math.min(input.segment.endMs, bestEnd.clipWord.endMs),
-    longestLinearRunDurationMs,
-    segmentDurationMs: input.segment.durationMs,
-    linearContinuityRatio: roundMetric(linearContinuityRatio),
-    maxDeltaDifferenceMs,
-    discontinuityCount
-  };
-}
-
-function runDuration(start: { clipWord: NormalizedWord }, end: { clipWord: NormalizedWord }, segment: ClipSegment): number {
-  const runStartMs = Math.max(segment.startMs, start.clipWord.startMs);
-  const runEndMs = Math.min(segment.endMs, end.clipWord.endMs);
-  return Math.max(0, runEndMs - runStartMs);
-}
-
-function medianWordDuration(words: NormalizedWord[]): number {
-  const durations = words
-    .map((word) => word.endMs - word.startMs)
-    .filter((value) => Number.isFinite(value) && value >= 0)
-    .sort((left, right) => left - right);
-  if (durations.length === 0) {
-    return 0;
-  }
-  return durations[Math.floor(durations.length / 2)] ?? 0;
 }
 
 function confirmedInheritance(segment: ClipSegment, match: MatchCandidate | undefined): {
@@ -799,6 +656,12 @@ function oldFixedRows(oldAlignment: OldAlignmentFile, oldDecision: HumanDecision
       sourceEndMs: match?.sourceEndMs,
       clipCoverage: match?.clipCoverage,
       sourceCoverage: match?.sourceCoverage,
+      linearContinuityRatio: match?.timeAxis?.linearContinuityRatio,
+      longestLinearRunDurationMs: match?.timeAxis?.longestLinearRunDurationMs,
+      segmentDurationMs: match?.timeAxis?.segmentDurationMs,
+      nonLinearDurationMs: match?.timeAxis
+        ? Math.max(0, match.timeAxis.segmentDurationMs - match.timeAxis.longestLinearRunDurationMs)
+        : undefined,
       humanStatus: decision?.status,
       humanNote: decision?.humanNote
     });
@@ -819,6 +682,8 @@ function compareOldNew(oldRows: ReturnType<typeof oldFixedRows>, segmentResults:
       oldChunkIndex: oldRow.chunkIndex,
       oldClipRange: { startMs: oldRow.clipStartMs, endMs: oldRow.clipEndMs },
       oldSourceRange: { startMs: oldRow.sourceStartMs, endMs: oldRow.sourceEndMs },
+      linearContinuityRatio: oldRow.linearContinuityRatio,
+      nonLinearDurationMs: oldRow.nonLinearDurationMs,
       oldHumanObservation: oldRow.humanNote,
       overlappingNewSegments: overlapping.map((item) => ({
         segmentIndex: item.segment.index,
@@ -995,6 +860,9 @@ function buildReport(input: {
   for (const row of input.oldComparison) {
     lines.push(`- old chunk ${row.oldChunkIndex + 1}: ${row.meaning}`);
     lines.push(`  - 旧clip: ${msText(row.oldClipRange.startMs)}-${msText(row.oldClipRange.endMs)} / 旧source: ${msText(row.oldSourceRange.startMs)}-${msText(row.oldSourceRange.endMs)}`);
+    if (row.linearContinuityRatio !== undefined) {
+      lines.push(`  - 旧整合率: ${percent(row.linearContinuityRatio)} / 線形に続かなかった長さ: ${msText(row.nonLinearDurationMs)}`);
+    }
     if (row.oldHumanObservation) {
       lines.push(`  - 人間観測: ${row.oldHumanObservation}`);
     }
