@@ -1,0 +1,34 @@
+{
+  "kind": "gemini_web_visual_verification",
+  "runAt": "2026-07-05T18:36:00+09:00",
+  "targetId": "r_ztjHaHmcg",
+  "model": "Gemini Web Flash",
+  "inputVideo": "evals/clip_composition/outputs/visual-check/r_ztjHaHmcg/gemini_ab_audio_scan_v001_r_ztjHaHmcg_then_-DwSCDMCWDQ_11m34s.mp4",
+  "candidateSourceVideoId": "-DwSCDMCWDQ",
+  "candidateSourceStartMs": 694445,
+  "candidateSourceEndMs": 819717,
+  "response": {
+    "status": "rejected",
+    "sourceStartMs": 694445,
+    "sourceEndMs": 819717,
+    "confidenceReason": "前半Aと後半Bは、配信画面の構成やアバターは同一ですが、全く異なる会話内容およびゲーム内の場面（マッチや位置）をプレイしているため、同じ元ネタ区間ではありません。",
+    "alignmentNotes": [
+      "前半Aでは、配信者が『同接100人いれば食べていける』という話題や『昔のアナリティクス（2018年7月）』についてコメント欄を交えて話しています。",
+      "後半Bでは、11:34.445からの映像において、コメント欄の内容が『PCの移動気遣うしめんどくさそう』『契約だとしても3年縛りで違約金は正確にはよるよね』といった全く異なる話題（おそらく引越しや回線、PCの契約に関する内容）が流れており、話している内容や流れに一致が一切見られません。"
+    ],
+    "suggestedAdjustment": {
+      "startMs": 694445,
+      "endMs": 819717,
+      "reason": "B側の該当区間は完全に別のシーンであるため、前後に数分動かすレベルではなく、全く異なる時間帯であるか、あるいは別の動画ソースである可能性が高いです。"
+    },
+    "visibleDifferences": [
+      "前半Aには、切り抜き作成者によるものと思われる、発話内容に合わせた大きな独自テロップ（『同接100人いれば食べていけるって本当なんだろうか？』『2018年の7月』など）が画面下部に追加されています。",
+      "後半Bは元動画そのままの状態ですが、プレイしているApex Legendsの状況（マップ内の位置や戦闘状況、所持アイテムなど）や、右下のチャット欄のログが完全に異なります。"
+    ],
+    "usableForExpectedCuts": false
+  },
+  "notes": [
+    "この確認は音声粗スキャン最上位候補の否定結果であり、expectedCutsには使わない。",
+    "同じ元動画内の別時刻をYouTube自動字幕とチャンク音声比較で再探索した。"
+  ]
+}

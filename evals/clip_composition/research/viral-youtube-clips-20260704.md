@@ -163,3 +163,30 @@ STT停止中の補助:
 - 切り抜き全体に合わせた確認開始候補は `11:34.445`。
 - Web版Geminiまたは人間確認用の横並び動画を `evals/clip_composition/outputs/visual-check/r_ztjHaHmcg/gemini_pair_audio_scan_v001_r_ztjHaHmcg_vs_-DwSCDMCWDQ_11m34s.mp4` に作った。
 - この音声粗スキャンは `expectedCuts` として固定しない。元動画側STTと目視確認の前段の候補位置として扱う。
+
+### 2026-07-05 第二候補の追加確認
+
+音声粗スキャン最上位の `11:34.445 - 13:39.717` は、Web版Gemini Flashで同一元ネタではないと判定された。切り抜きの話題は「同接100人」と「2018年のアナリティクス」だが、11分台候補は引っ越し・回線・PC契約寄りの別話題だった。
+
+その後、元動画 `-DwSCDMCWDQ` のYouTube自動字幕を保存し、評価環境用STT形式に変換して30秒チャンク照合を行った。結果として、元動画の `36:19` 付近から `40:33` 付近が本命候補になった。
+
+チャンク別の対応:
+
+- 切り抜き `0:02.555 - 0:32.555` → 元動画音声候補 `36:19.930 - 36:49.930`
+- 切り抜き `0:32.555 - 1:02.555` → 元動画音声候補 `38:29.360 - 38:59.360`
+- 切り抜き `1:02.555 - 1:32.555` → 元動画音声候補 `39:21.159 - 39:51.159`
+- 切り抜き `1:32.555 - 2:01.147` → 元動画音声候補 `40:04.730 - 40:33.322`
+
+判断:
+
+- 元動画 `-DwSCDMCWDQ` 自体は正しい可能性が高い。
+- ただし、切り抜きは元動画の待ち時間や別コメントへの反応を詰めた編集であり、単一の連続区間ではなさそう。
+- 単一区間の `expectedCuts` に固定すると、切り抜きに含まれない元動画の間が混ざる。
+- 2件目fixtureとして使う場合は、複数区間対応をexpected側に持つか、この候補を保留して連続区間の短尺切り抜きを選び直す。
+
+保存先:
+
+- `evals/clip_composition/reports/r_ztjHaHmcg-youtube-auto-alignment-v001.md`
+- `evals/clip_composition/outputs/alignment-r_ztjHaHmcg_youtube_auto_v001.json`
+- `evals/clip_composition/outputs/audio-compare-chunks-r_ztjHaHmcg_youtube_auto_v001.json`
+- `evals/clip_composition/outputs/r_ztjHaHmcg/visual_verification/20260705-gemini-web-flash-audio-scan-v001.json`
