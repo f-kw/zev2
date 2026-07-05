@@ -318,6 +318,16 @@ node evals/clip_composition/inspect_prompt_audio_boundary.ts \
 
 このコマンドはSTTもLLMも実行しません。採点済み `result.json` とfixture文字起こしを読み、expectedに保存した音声比較済み区間を基準に、promptの選択開始・終了が何ms前後へずれているか、文字起こし発話のどこに境界があるかを出します。
 
+v009へ進む前に、入力へ足してよい境界情報と正解漏えいになる情報を確認する場合:
+
+```bash
+node evals/clip_composition/inspect_boundary_signal_policy.ts \
+  --fixtures IMQYaT_RWRA_context_v001,UpRyakf5j80_clip_audio_v001 \
+  --outputId 20260705-v001
+```
+
+このコマンドもSTTもLLMも実行しません。現在の文字起こし発話境界だけでexpectedを表現できるfixtureと、単語時刻または独立した音声境界候補が必要なfixtureを分けます。`expectedCuts` の時刻、音声比較で確定した区間、Web版Gemini確認結果は、評価用の正解または品質保証情報なのでcomposition入力へ入れてはいけないものとして報告します。
+
 生成済み採点結果:
 
 - `outputs/IMQYaT_RWRA_context_v001/clip_composition_prompt_v001/20260705-125215/result.json`

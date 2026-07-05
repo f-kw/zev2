@@ -1,0 +1,125 @@
+{
+  "kind": "clip_composition_boundary_signal_policy",
+  "runAt": "2026-07-05T12:11:01.053Z",
+  "fixtureCount": 2,
+  "fixtures": [
+    {
+      "fixtureId": "IMQYaT_RWRA_context_v001",
+      "transcriptPath": "fixtures/IMQYaT_RWRA_context_v001/transcript.json",
+      "expectedPath": "expected/IMQYaT_RWRA_context_v001.json",
+      "currentInputCanExpressExpectedCut": true,
+      "boundarySupport": [
+        {
+          "boundaryMs": 1997050,
+          "side": "start",
+          "relation": "segment_start",
+          "segment": {
+            "id": 1,
+            "startMs": 1997050,
+            "endMs": 1997322,
+            "text": "い",
+            "speaker": "unknown"
+          },
+          "supportedByCurrentPromptInput": true,
+          "reason": "現在のprompt入力に発話開始時刻として入っている"
+        },
+        {
+          "boundaryMs": 2015672,
+          "side": "end",
+          "relation": "segment_end",
+          "segment": {
+            "id": 32,
+            "startMs": 2012431,
+            "endMs": 2015672,
+            "text": "笑",
+            "speaker": "unknown"
+          },
+          "supportedByCurrentPromptInput": true,
+          "reason": "現在のprompt入力に発話終了時刻として入っている"
+        }
+      ],
+      "signalPolicies": [
+        {
+          "signal": "固定テーマと文字起こしの発話開始・終了時刻",
+          "inputUse": "allowed",
+          "reason": "theme失敗とcomposition失敗を分けるための固定入力で、現在の評価promptが読む主入力"
+        },
+        {
+          "signal": "expectedCutsの開始・終了時刻",
+          "inputUse": "eval_only_forbidden",
+          "reason": "採点基準そのものであり、composition入力へ入れると正解漏えいになる"
+        },
+        {
+          "signal": "Web版Geminiの左右映像確認結果",
+          "inputUse": "eval_only_forbidden",
+          "reason": "正解fixtureの品質保証で使う情報であり、promptの候補選択入力ではない"
+        }
+      ],
+      "nextAction": "現在の発話境界入力だけでexpected境界を表現できるため、compositionプロンプト比較を続けられる。"
+    },
+    {
+      "fixtureId": "UpRyakf5j80_clip_audio_v001",
+      "transcriptPath": "fixtures/UpRyakf5j80_clip_audio_v001/transcript.json",
+      "expectedPath": "expected/UpRyakf5j80_clip_audio_v001.json",
+      "currentInputCanExpressExpectedCut": false,
+      "boundarySupport": [
+        {
+          "boundaryMs": 11364500,
+          "side": "start",
+          "relation": "inside_segment",
+          "segment": {
+            "id": 1,
+            "startMs": 11362439,
+            "endMs": 11366760,
+            "text": "香りどうもありがとうございます",
+            "speaker": "youtube-auto-caption"
+          },
+          "supportedByCurrentPromptInput": false,
+          "reason": "期待境界は発話途中にあり、現在のprompt入力にはその途中時刻を支える単語境界や音声境界がない"
+        },
+        {
+          "boundaryMs": 11407178,
+          "side": "end",
+          "relation": "inside_segment",
+          "segment": {
+            "id": 20,
+            "startMs": 11405460,
+            "endMs": 11409170,
+            "text": "うん",
+            "speaker": "youtube-auto-caption"
+          },
+          "supportedByCurrentPromptInput": false,
+          "reason": "期待境界は発話途中にあり、現在のprompt入力にはその途中時刻を支える単語境界や音声境界がない"
+        }
+      ],
+      "signalPolicies": [
+        {
+          "signal": "固定テーマと文字起こしの発話開始・終了時刻",
+          "inputUse": "allowed",
+          "reason": "theme失敗とcomposition失敗を分けるための固定入力で、現在の評価promptが読む主入力"
+        },
+        {
+          "signal": "ローカルSTTの単語時刻または独立に生成した音声境界候補",
+          "inputUse": "required_next",
+          "reason": "期待境界が発話途中にあり、発話単位だけでは境界を支える情報が足りない"
+        },
+        {
+          "signal": "expectedCutsの開始・終了時刻",
+          "inputUse": "eval_only_forbidden",
+          "reason": "採点基準そのものであり、composition入力へ入れると正解漏えいになる"
+        },
+        {
+          "signal": "音声比較で確定したbestAlignedSourceStartMs / bestAlignedSourceEndMs",
+          "inputUse": "eval_only_forbidden",
+          "reason": "既存切り抜きとの照合で得た正解区間なので、通常のcomposition評価入力には入れない"
+        },
+        {
+          "signal": "Web版Geminiの左右映像確認結果",
+          "inputUse": "eval_only_forbidden",
+          "reason": "正解fixtureの品質保証で使う情報であり、promptの候補選択入力ではない"
+        }
+      ],
+      "nextAction": "v009でpromptだけを調整する前に、ローカルSTTの単語時刻または独立した音声境界候補をfixture入力として追加できる形にする。expectedの時刻や音声比較で確定した正解区間は入力へ入れない。"
+    }
+  ]
+}

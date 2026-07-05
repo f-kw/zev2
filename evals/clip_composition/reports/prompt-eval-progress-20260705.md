@@ -145,3 +145,13 @@ v008は `IMQYaT_RWRA_context_v001` では期待区間と完全一致した。`Up
 音声比較で確認した切り抜き全体の対応区間は `11364500ms - 11407178ms`。v008の選択区間は `11364140ms - 11409170ms` なので、音声一致で確認した切り抜き開始より `360ms` 前から始まり、切り抜き終了より `1992ms` 後ろまで伸びている。選択区間は合計で `2352ms` 広い。
 
 文字起こし上は、選択開始が発話2の開始にあり、同時に発話1とも重なっている。期待開始は発話1と発話2が重なる途中にある。期待終了は発話20「うん」の途中で、v008は発話20の終端まで選んでいる。したがって、v008の失敗は「正解候補を見つけられない」ことではなく、音声上の切り抜き終端が発話途中にあるとき、文字起こしの発話終端まで広げてしまうこと。
+
+## v009前の境界入力方針
+
+- 検査スクリプト: `evals/clip_composition/inspect_boundary_signal_policy.ts`
+- 結果JSON: `evals/clip_composition/outputs/boundary-signal-policy-20260705-v001.json`
+- レポート: `evals/clip_composition/reports/boundary-signal-policy-20260705-v001.md`
+
+`IMQYaT_RWRA_context_v001` は期待開始・終了が現在の文字起こし発話境界と一致しているため、現入力だけでcomposition比較を続けられる。`UpRyakf5j80_clip_audio_v001` は開始・終了の両方が発話途中にあるため、現入力だけではexpected境界を表現できない。
+
+v009でpromptだけを調整しても、音声上の切り抜き終端を正しく選ぶ根拠が入力にない。次に足すべきなのはローカルSTTの単語時刻、またはexpectedから独立に生成した音声境界候補。`expectedCuts` の開始・終了時刻、音声比較で確定した `bestAlignedSourceStartMs` / `bestAlignedSourceEndMs`、Web版Geminiの確認結果は採点用の正解または品質保証情報なので、composition入力へ入れない。
