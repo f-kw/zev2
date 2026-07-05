@@ -1,0 +1,36 @@
+{
+  "targetId": "r_ztjHaHmcg",
+  "title": "同接100人いたら食べていけるの？",
+  "createdAt": "2026-07-05T17:50:00+09:00",
+  "clip": {
+    "id": "r_ztjHaHmcg",
+    "sttId": "r_ztjHaHmcg",
+    "url": "https://www.youtube.com/watch?v=r_ztjHaHmcg",
+    "localVideoPath": "evals/clip_composition/research/downloads/r_ztjHaHmcg/r_ztjHaHmcg.mp4",
+    "durationSec": 125.271655,
+    "sttRole": "clip",
+    "notes": [
+      "BGM、SE、字幕由来の誤認識、切り抜き師が追加した要素を正常なノイズとして扱う。"
+    ]
+  },
+  "sourceCandidates": [
+    {
+      "id": "-DwSCDMCWDQ",
+      "sttId": "r_ztjHaHmcg_-DwSCDMCWDQ",
+      "url": "https://www.youtube.com/watch?v=-DwSCDMCWDQ",
+      "localVideoPath": "evals/clip_composition/research/downloads/r_ztjHaHmcg/sources/-DwSCDMCWDQ/-DwSCDMCWDQ.mp4",
+      "durationSec": 4817.049252,
+      "sttRole": "source",
+      "notes": [
+        "説明欄から抽出した元動画候補。対応確定はSTT照合、音声比較、目視確認後。"
+      ]
+    }
+  ],
+  "requiredOutputs": [
+    "clip側STT結果",
+    "元動画候補の単語タイムスタンプ付きSTT結果",
+    "約30秒チャンク単位の照合結果",
+    "音声確認済みexpectedCuts候補",
+    "正解区間から人間が逆算した固定テーマ"
+  ]
+}

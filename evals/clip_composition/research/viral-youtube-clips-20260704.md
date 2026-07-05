@@ -135,3 +135,23 @@ fixture候補:
 - 元動画内の対応時刻は音声比較で候補化済み。最終QAでは開始位置と終了位置だけ確認する。
 - 切り抜き側に元動画へ存在しないSE由来テキストや追加音声が混ざる可能性がある。
 - 最初のfixtureでは、音声確認済みの期待区間としてプロンプト評価に使い、最終QAで目視確認結果を追記する。
+
+## 2026-07-05 第二候補の保存状況
+
+第二候補として、元動画候補が1本の `r_ztjHaHmcg` を進めた。
+
+保存した動画:
+
+- 切り抜き: `evals/clip_composition/research/downloads/r_ztjHaHmcg/r_ztjHaHmcg.mp4`
+- 元動画候補: `evals/clip_composition/research/downloads/r_ztjHaHmcg/sources/-DwSCDMCWDQ/-DwSCDMCWDQ.mp4`
+
+保存したSTT対象定義:
+
+- `evals/clip_composition/stt-targets/r_ztjHaHmcg.json`
+
+STT進捗:
+
+- 切り抜き側STTは完了し、単語タイムスタンプ付きで保存済み。
+- 元動画側STTは、80分音声を1本で送ったところ接続が切れた。
+- 分割STT用の `run_local_stt_chunked.ts` を追加したが、実行時点ではローカルSTTサーバー `http://192.168.1.8:8000` がタイムアウトしている。
+- 再開手順は `evals/clip_composition/reports/stt-progress-r_ztjHaHmcg_v001.md` に記録した。

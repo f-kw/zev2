@@ -55,6 +55,20 @@ pnpm --filter @zev2/agent-runner exec tsx ../evals/clip_composition/run_local_st
 
 STTサーバー接続先は、優先順に `--server`、`ZEV2_STT_SERVER_URL`、`ZEV_STT_SERVER_URL`、`config/runtime.jsonc` の `stt.localServerUrl` を使います。
 
+長尺元動画を1本でSTTサーバーへ送れない場合は、評価用の分割STTスクリプトを使います。
+
+```bash
+runner/node_modules/.bin/tsx evals/clip_composition/run_local_stt_chunked.ts \
+  --input evals/clip_composition/research/downloads/r_ztjHaHmcg/sources/-DwSCDMCWDQ/-DwSCDMCWDQ.mp4 \
+  --id r_ztjHaHmcg_-DwSCDMCWDQ \
+  --role source \
+  --server http://192.168.1.8:8000 \
+  --chunkSec 600 \
+  --timeoutMs 1800000
+```
+
+このスクリプトは、分割済みチャンクのSTT応答がある場合は再利用し、未完了チャンクから続けられるようにしています。
+
 STT後のチャンク照合:
 
 ```bash
@@ -99,6 +113,15 @@ pnpm --filter @zev2/agent-runner exec tsx ../evals/clip_composition/compare_audi
 - 音声比較レポート: `reports/audio-compare-IMQYaT_RWRA_v001.md`
 - 音声比較では、元配信候補 `8uuQldLptRE` の発話部分が最も強く一致しました。
 - 切り抜き発話 `0:01.313 - 0:05.338` は、元配信候補 `33:22.113 - 33:26.138` 付近に対応する可能性が高いです。
+
+第二候補 `r_ztjHaHmcg` の進捗:
+
+- 切り抜き動画: `research/downloads/r_ztjHaHmcg/r_ztjHaHmcg.mp4`
+- 元動画候補: `research/downloads/r_ztjHaHmcg/sources/-DwSCDMCWDQ/-DwSCDMCWDQ.mp4`
+- STT対象定義: `stt-targets/r_ztjHaHmcg.json`
+- 切り抜き側STT: `stt/r_ztjHaHmcg/clip/transcript.json`
+- 進捗レポート: `reports/stt-progress-r_ztjHaHmcg_v001.md`
+- 現在の停止理由: ローカルSTTサーバー `http://192.168.1.8:8000` がタイムアウトしているため、元動画側STTは未完了です。
 
 音声比較済み区間からfixture候補を凍結する:
 
