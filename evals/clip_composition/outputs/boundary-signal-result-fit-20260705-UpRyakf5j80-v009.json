@@ -1,0 +1,3535 @@
+{
+  "kind": "clip_composition_boundary_signal_result_fit",
+  "runAt": "2026-07-05T12:35:36.316Z",
+  "resultPath": "evals/clip_composition/outputs/UpRyakf5j80_clip_audio_v001/clip_composition_prompt_v009/20260705-212949/result.json",
+  "boundaryPayloadPath": "evals/clip_composition/outputs/boundary-signal-payload-UpRyakf5j80-v009-candidate-v001.json",
+  "fixtureId": "UpRyakf5j80_clip_audio_v001",
+  "promptVersion": "clip_composition_prompt_v009",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "manualRun": false,
+    "runner": "edge-cdp-text-prompt",
+    "extraction": "existing-web-answer"
+  },
+  "selectedCut": {
+    "sourceStartMs": 11364140,
+    "sourceEndMs": 11409170,
+    "reason": "テーマである『世界2位』の話題提示が明確に始まる発話ID 2の開始時刻 (11364140ms) を開始位置とし、変動するものなので素直に喜べないという一連の結論・余韻が収束する発話ID 20の終了時刻 (11409170ms) までを最小の連続区間として選択しました。冒頭の発話ID 1は前文への挨拶でありテーマの本質ではないため除外しています。",
+    "usedSpeechIds": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20
+    ]
+  },
+  "expectedCut": {
+    "sourceStartMs": 11364500,
+    "sourceEndMs": 11407178,
+    "reason": "YouTube自動字幕のチャンク照合で同じ連続範囲に集まり、切り抜き全体の音声比較とWeb版Geminiの左右映像確認で同一元ネタと判定された区間のため。",
+    "sourceVideoId": "kNX-wQTvsws",
+    "sourceUrl": "https://www.youtube.com/watch?v=kNX-wQTvsws",
+    "sourceSttId": "UpRyakf5j80_kNX-wQTvsws_youtube_auto",
+    "clipId": "UpRyakf5j80",
+    "clipUrl": "https://www.youtube.com/watch?v=UpRyakf5j80",
+    "transcriptText": "香りどうもありがとうございますとある記事で船長は現在現役で活躍されているvtuberで世界2位なんだと取り上げられているのを見ましたその人と結婚してるなんてどうか私も誇らしいやら恥ずかしいやろで緊張していますどうしたマジで大丈夫かさあそんな世界に行くとか言うけどさそんなもんさーやめようよそんなのなんかあんまりなんかそういうさあ変動するじゃんそういうのって変動するものであんま喜べないんだよね船長うんどうせまた変わるしみたいな感じあんま喜べないんだよね先日のうん",
+    "verificationStatus": "audio_confirmed_visual_confirmed",
+    "usableForCompositionPromptEval": true,
+    "audioVerification": {
+      "status": "confirmed",
+      "method": "切り抜き動画全体を、字幕照合で絞った元動画候補55秒区間の中で音量包絡比較した。",
+      "reportPath": "evals/clip_composition/reports/audio-compare-chunks-UpRyakf5j80_youtube_auto_source_slice_full_window_v001.md",
+      "resultPath": "evals/clip_composition/outputs/audio-compare-chunks-UpRyakf5j80_youtube_auto_source_slice_full_window_v001.json",
+      "clipDurationMs": 42678,
+      "sourceSliceStartMs": 11357000,
+      "sourceSliceEndMs": 11412004,
+      "sourceSliceBestOffsetMs": 7500,
+      "sourceSliceBestEndMs": 50178,
+      "bestAlignedSourceStartMs": 11364500,
+      "bestAlignedSourceEndMs": 11407178,
+      "envelopeCorrelation": 0.974592,
+      "speechEnvelopeCorrelation": 0.974592,
+      "bestOffsetMs": 7500,
+      "bestAlignedSourceSpeechStartMs": 11364500,
+      "bestAlignedSourceSpeechEndMs": 11407178,
+      "directCorrelationAtEnvelopeOffset": -0.259884,
+      "note": "切り抜き全体の音量包絡は、元動画候補55秒区間内の7.500秒位置に強く一致した。負の直接波形相関は、音量包絡で見つけた位置での生波形比較であり、BGM、圧縮、編集差分の影響を受けるため、区間確認では音量包絡と映像確認を優先する。"
+    },
+    "sttAlignment": {
+      "reportPath": "evals/clip_composition/reports/alignment-UpRyakf5j80_youtube_auto_v001.md",
+      "resultPath": "evals/clip_composition/outputs/alignment-UpRyakf5j80_youtube_auto_v001.json",
+      "clipCoverage": 0.9878048780487805,
+      "sourceCoverage": 0.9878048780487805,
+      "chunkMatches": [
+        {
+          "clipStartMs": 0,
+          "clipEndMs": 30000,
+          "sourceStartMs": 11362439,
+          "sourceEndMs": 11397300,
+          "clipCoverage": 0.9878048780487805,
+          "sourceCoverage": 0.9878048780487805
+        },
+        {
+          "clipStartMs": 30000,
+          "clipEndMs": 44390,
+          "sourceStartMs": 11391899,
+          "sourceEndMs": 11405460,
+          "clipCoverage": 0.95,
+          "sourceCoverage": 0.95
+        }
+      ],
+      "note": "30秒チャンク2件が同じ元動画の連続範囲に集まったため、単一区間候補として扱える。"
+    },
+    "visualVerification": {
+      "status": "confirmed",
+      "checkedBy": "gemini-web-flash",
+      "checkedAt": "2026-07-05T18:37:00+09:00",
+      "resultPath": "evals/clip_composition/outputs/UpRyakf5j80/visual_verification/20260705-gemini-web-flash-audio-confirmed-v001.json",
+      "uploadedVideoPath": "evals/clip_composition/outputs/visual-check/UpRyakf5j80/gemini_pair_audio_confirmed_v001_UpRyakf5j80_vs_kNX-wQTvsws_3h09m24s.mp4",
+      "note": "Web版Gemini Flashで左右比較動画を確認し、キャラクターの表情と口の動き、切り抜き音声との同期から同一元ネタと判定。切り抜き側には字幕追加と画面拡大がある。"
+    }
+  },
+  "diff": {
+    "startDeltaMs": -360,
+    "endDeltaMs": 1992,
+    "overlapSummary": "LLMが選んだ区間が期待区間を含んでいます"
+  },
+  "boundarySignalInput": {
+    "wordTimestampsPath": "evals/clip_composition/stt/UpRyakf5j80_kNX-wQTvsws_youtube_auto/source/word-timestamps.json",
+    "unitCount": 23,
+    "transitionCount": 22,
+    "expectedBoundaryValuesFoundInBoundarySignalInput": []
+  },
+  "nearest": {
+    "selectedStart": [
+      {
+        "boundaryMs": 11364140,
+        "source": "transition_next_start",
+        "transitionId": "transition_003",
+        "signalId": "signal_004",
+        "relation": "overlap",
+        "deltaMs": 0,
+        "absoluteDeltaMs": 0
+      },
+      {
+        "boundaryMs": 11364140,
+        "source": "transition_previous_end",
+        "transitionId": "transition_002",
+        "signalId": "signal_002",
+        "relation": "overlap",
+        "deltaMs": 0,
+        "absoluteDeltaMs": 0
+      },
+      {
+        "boundaryMs": 11364140,
+        "source": "unit_end",
+        "signalId": "signal_002",
+        "text": "うん",
+        "sourceSegmentId": 3550,
+        "deltaMs": 0,
+        "absoluteDeltaMs": 0
+      },
+      {
+        "boundaryMs": 11364140,
+        "source": "unit_start",
+        "signalId": "signal_004",
+        "text": "とある記事で船長は",
+        "sourceSegmentId": 3552,
+        "matchesFixtureSpeechId": 2,
+        "deltaMs": 0,
+        "absoluteDeltaMs": 0
+      },
+      {
+        "boundaryMs": 11362439,
+        "source": "transition_next_start",
+        "transitionId": "transition_002",
+        "signalId": "signal_003",
+        "relation": "overlap",
+        "deltaMs": -1701,
+        "absoluteDeltaMs": 1701
+      },
+      {
+        "boundaryMs": 11362439,
+        "source": "transition_previous_end",
+        "transitionId": "transition_001",
+        "signalId": "signal_001",
+        "relation": "overlap",
+        "deltaMs": -1701,
+        "absoluteDeltaMs": 1701
+      },
+      {
+        "boundaryMs": 11362439,
+        "source": "unit_end",
+        "signalId": "signal_001",
+        "text": "怖いから一緒に入ろう",
+        "sourceSegmentId": 3549,
+        "deltaMs": -1701,
+        "absoluteDeltaMs": 1701
+      },
+      {
+        "boundaryMs": 11362439,
+        "source": "unit_start",
+        "signalId": "signal_003",
+        "text": "香りどうもありがとうございます",
+        "sourceSegmentId": 3551,
+        "matchesFixtureSpeechId": 1,
+        "deltaMs": -1701,
+        "absoluteDeltaMs": 1701
+      },
+      {
+        "boundaryMs": 11366760,
+        "source": "transition_next_start",
+        "transitionId": "transition_004",
+        "signalId": "signal_005",
+        "relation": "overlap",
+        "deltaMs": 2620,
+        "absoluteDeltaMs": 2620
+      },
+      {
+        "boundaryMs": 11366760,
+        "source": "transition_previous_end",
+        "transitionId": "transition_003",
+        "signalId": "signal_003",
+        "relation": "overlap",
+        "deltaMs": 2620,
+        "absoluteDeltaMs": 2620
+      },
+      {
+        "boundaryMs": 11366760,
+        "source": "unit_end",
+        "signalId": "signal_003",
+        "text": "香りどうもありがとうございます",
+        "sourceSegmentId": 3551,
+        "matchesFixtureSpeechId": 1,
+        "deltaMs": 2620,
+        "absoluteDeltaMs": 2620
+      },
+      {
+        "boundaryMs": 11366760,
+        "source": "unit_start",
+        "signalId": "signal_005",
+        "text": "現在現役で活躍されているvtuberで",
+        "sourceSegmentId": 3553,
+        "matchesFixtureSpeechId": 3,
+        "deltaMs": 2620,
+        "absoluteDeltaMs": 2620
+      },
+      {
+        "boundaryMs": 11360880,
+        "source": "transition_next_start",
+        "transitionId": "transition_001",
+        "signalId": "signal_002",
+        "relation": "overlap",
+        "deltaMs": -3260,
+        "absoluteDeltaMs": 3260
+      },
+      {
+        "boundaryMs": 11360880,
+        "source": "unit_start",
+        "signalId": "signal_002",
+        "text": "うん",
+        "sourceSegmentId": 3550,
+        "deltaMs": -3260,
+        "absoluteDeltaMs": 3260
+      },
+      {
+        "boundaryMs": 11368859,
+        "source": "transition_next_start",
+        "transitionId": "transition_005",
+        "signalId": "signal_006",
+        "relation": "overlap",
+        "deltaMs": 4719,
+        "absoluteDeltaMs": 4719
+      },
+      {
+        "boundaryMs": 11368859,
+        "source": "transition_previous_end",
+        "transitionId": "transition_004",
+        "signalId": "signal_004",
+        "relation": "overlap",
+        "deltaMs": 4719,
+        "absoluteDeltaMs": 4719
+      },
+      {
+        "boundaryMs": 11368859,
+        "source": "unit_end",
+        "signalId": "signal_004",
+        "text": "とある記事で船長は",
+        "sourceSegmentId": 3552,
+        "matchesFixtureSpeechId": 2,
+        "deltaMs": 4719,
+        "absoluteDeltaMs": 4719
+      },
+      {
+        "boundaryMs": 11368859,
+        "source": "unit_start",
+        "signalId": "signal_006",
+        "text": "世界2位なんだと取り上げられているのを",
+        "sourceSegmentId": 3554,
+        "matchesFixtureSpeechId": 4,
+        "deltaMs": 4719,
+        "absoluteDeltaMs": 4719
+      },
+      {
+        "boundaryMs": 11358600,
+        "source": "unit_start",
+        "signalId": "signal_001",
+        "text": "怖いから一緒に入ろう",
+        "sourceSegmentId": 3549,
+        "deltaMs": -5540,
+        "absoluteDeltaMs": 5540
+      },
+      {
+        "boundaryMs": 11370479,
+        "source": "transition_next_start",
+        "transitionId": "transition_006",
+        "signalId": "signal_007",
+        "relation": "overlap",
+        "deltaMs": 6339,
+        "absoluteDeltaMs": 6339
+      },
+      {
+        "boundaryMs": 11370479,
+        "source": "transition_previous_end",
+        "transitionId": "transition_005",
+        "signalId": "signal_005",
+        "relation": "overlap",
+        "deltaMs": 6339,
+        "absoluteDeltaMs": 6339
+      },
+      {
+        "boundaryMs": 11370479,
+        "source": "unit_end",
+        "signalId": "signal_005",
+        "text": "現在現役で活躍されているvtuberで",
+        "sourceSegmentId": 3553,
+        "matchesFixtureSpeechId": 3,
+        "deltaMs": 6339,
+        "absoluteDeltaMs": 6339
+      },
+      {
+        "boundaryMs": 11370479,
+        "source": "unit_start",
+        "signalId": "signal_007",
+        "text": "見ましたその人と結婚してるなんてどうか",
+        "sourceSegmentId": 3555,
+        "matchesFixtureSpeechId": 5,
+        "deltaMs": 6339,
+        "absoluteDeltaMs": 6339
+      },
+      {
+        "boundaryMs": 11372939,
+        "source": "transition_next_start",
+        "transitionId": "transition_007",
+        "signalId": "signal_008",
+        "relation": "overlap",
+        "deltaMs": 8799,
+        "absoluteDeltaMs": 8799
+      },
+      {
+        "boundaryMs": 11372939,
+        "source": "transition_previous_end",
+        "transitionId": "transition_006",
+        "signalId": "signal_006",
+        "relation": "overlap",
+        "deltaMs": 8799,
+        "absoluteDeltaMs": 8799
+      },
+      {
+        "boundaryMs": 11372939,
+        "source": "unit_end",
+        "signalId": "signal_006",
+        "text": "世界2位なんだと取り上げられているのを",
+        "sourceSegmentId": 3554,
+        "matchesFixtureSpeechId": 4,
+        "deltaMs": 8799,
+        "absoluteDeltaMs": 8799
+      },
+      {
+        "boundaryMs": 11372939,
+        "source": "unit_start",
+        "signalId": "signal_008",
+        "text": "私も",
+        "sourceSegmentId": 3556,
+        "matchesFixtureSpeechId": 6,
+        "deltaMs": 8799,
+        "absoluteDeltaMs": 8799
+      },
+      {
+        "boundaryMs": 11373899,
+        "source": "transition_next_start",
+        "transitionId": "transition_008",
+        "signalId": "signal_009",
+        "relation": "overlap",
+        "deltaMs": 9759,
+        "absoluteDeltaMs": 9759
+      },
+      {
+        "boundaryMs": 11373899,
+        "source": "transition_previous_end",
+        "transitionId": "transition_007",
+        "signalId": "signal_007",
+        "relation": "overlap",
+        "deltaMs": 9759,
+        "absoluteDeltaMs": 9759
+      },
+      {
+        "boundaryMs": 11373899,
+        "source": "unit_end",
+        "signalId": "signal_007",
+        "text": "見ましたその人と結婚してるなんてどうか",
+        "sourceSegmentId": 3555,
+        "matchesFixtureSpeechId": 5,
+        "deltaMs": 9759,
+        "absoluteDeltaMs": 9759
+      },
+      {
+        "boundaryMs": 11373899,
+        "source": "unit_start",
+        "signalId": "signal_009",
+        "text": "誇らしいやら",
+        "sourceSegmentId": 3557,
+        "matchesFixtureSpeechId": 7,
+        "deltaMs": 9759,
+        "absoluteDeltaMs": 9759
+      },
+      {
+        "boundaryMs": 11375640,
+        "source": "transition_next_start",
+        "transitionId": "transition_009",
+        "signalId": "signal_010",
+        "relation": "overlap",
+        "deltaMs": 11500,
+        "absoluteDeltaMs": 11500
+      },
+      {
+        "boundaryMs": 11375640,
+        "source": "transition_previous_end",
+        "transitionId": "transition_008",
+        "signalId": "signal_008",
+        "relation": "overlap",
+        "deltaMs": 11500,
+        "absoluteDeltaMs": 11500
+      },
+      {
+        "boundaryMs": 11375640,
+        "source": "unit_end",
+        "signalId": "signal_008",
+        "text": "私も",
+        "sourceSegmentId": 3556,
+        "matchesFixtureSpeechId": 6,
+        "deltaMs": 11500,
+        "absoluteDeltaMs": 11500
+      },
+      {
+        "boundaryMs": 11375640,
+        "source": "unit_start",
+        "signalId": "signal_010",
+        "text": "恥ずかしいやろで緊張していますどうした",
+        "sourceSegmentId": 3558,
+        "matchesFixtureSpeechId": 8,
+        "deltaMs": 11500,
+        "absoluteDeltaMs": 11500
+      },
+      {
+        "boundaryMs": 11377620,
+        "source": "transition_next_start",
+        "transitionId": "transition_010",
+        "signalId": "signal_011",
+        "relation": "overlap",
+        "deltaMs": 13480,
+        "absoluteDeltaMs": 13480
+      },
+      {
+        "boundaryMs": 11377620,
+        "source": "transition_previous_end",
+        "transitionId": "transition_009",
+        "signalId": "signal_009",
+        "relation": "overlap",
+        "deltaMs": 13480,
+        "absoluteDeltaMs": 13480
+      },
+      {
+        "boundaryMs": 11377620,
+        "source": "unit_end",
+        "signalId": "signal_009",
+        "text": "誇らしいやら",
+        "sourceSegmentId": 3557,
+        "matchesFixtureSpeechId": 7,
+        "deltaMs": 13480,
+        "absoluteDeltaMs": 13480
+      },
+      {
+        "boundaryMs": 11377620,
+        "source": "unit_start",
+        "signalId": "signal_011",
+        "text": "マジで大丈夫か",
+        "sourceSegmentId": 3559,
+        "matchesFixtureSpeechId": 9,
+        "deltaMs": 13480,
+        "absoluteDeltaMs": 13480
+      },
+      {
+        "boundaryMs": 11381180,
+        "source": "transition_previous_end",
+        "transitionId": "transition_010",
+        "signalId": "signal_010",
+        "relation": "overlap",
+        "deltaMs": 17040,
+        "absoluteDeltaMs": 17040
+      },
+      {
+        "boundaryMs": 11381180,
+        "source": "transition_previous_end",
+        "transitionId": "transition_011",
+        "signalId": "signal_011",
+        "relation": "gap",
+        "deltaMs": 17040,
+        "absoluteDeltaMs": 17040
+      },
+      {
+        "boundaryMs": 11381180,
+        "source": "unit_end",
+        "signalId": "signal_010",
+        "text": "恥ずかしいやろで緊張していますどうした",
+        "sourceSegmentId": 3558,
+        "matchesFixtureSpeechId": 8,
+        "deltaMs": 17040,
+        "absoluteDeltaMs": 17040
+      },
+      {
+        "boundaryMs": 11381180,
+        "source": "unit_end",
+        "signalId": "signal_011",
+        "text": "マジで大丈夫か",
+        "sourceSegmentId": 3559,
+        "matchesFixtureSpeechId": 9,
+        "deltaMs": 17040,
+        "absoluteDeltaMs": 17040
+      },
+      {
+        "boundaryMs": 11381340,
+        "source": "transition_next_start",
+        "transitionId": "transition_011",
+        "signalId": "signal_012",
+        "relation": "gap",
+        "deltaMs": 17200,
+        "absoluteDeltaMs": 17200
+      },
+      {
+        "boundaryMs": 11381340,
+        "source": "unit_start",
+        "signalId": "signal_012",
+        "text": "さあそんな世界に行くとか",
+        "sourceSegmentId": 3560,
+        "matchesFixtureSpeechId": 10,
+        "deltaMs": 17200,
+        "absoluteDeltaMs": 17200
+      },
+      {
+        "boundaryMs": 11383740,
+        "source": "transition_next_start",
+        "transitionId": "transition_012",
+        "signalId": "signal_013",
+        "relation": "overlap",
+        "deltaMs": 19600,
+        "absoluteDeltaMs": 19600
+      },
+      {
+        "boundaryMs": 11383740,
+        "source": "unit_start",
+        "signalId": "signal_013",
+        "text": "言うけどさそんなもんさーやめようよ",
+        "sourceSegmentId": 3561,
+        "matchesFixtureSpeechId": 11,
+        "deltaMs": 19600,
+        "absoluteDeltaMs": 19600
+      },
+      {
+        "boundaryMs": 11385540,
+        "source": "transition_next_start",
+        "transitionId": "transition_013",
+        "signalId": "signal_014",
+        "relation": "overlap",
+        "deltaMs": 21400,
+        "absoluteDeltaMs": 21400
+      },
+      {
+        "boundaryMs": 11385540,
+        "source": "transition_previous_end",
+        "transitionId": "transition_012",
+        "signalId": "signal_012",
+        "relation": "overlap",
+        "deltaMs": 21400,
+        "absoluteDeltaMs": 21400
+      },
+      {
+        "boundaryMs": 11385540,
+        "source": "unit_end",
+        "signalId": "signal_012",
+        "text": "さあそんな世界に行くとか",
+        "sourceSegmentId": 3560,
+        "matchesFixtureSpeechId": 10,
+        "deltaMs": 21400,
+        "absoluteDeltaMs": 21400
+      },
+      {
+        "boundaryMs": 11385540,
+        "source": "unit_start",
+        "signalId": "signal_014",
+        "text": "そんなのなんか",
+        "sourceSegmentId": 3562,
+        "matchesFixtureSpeechId": 12,
+        "deltaMs": 21400,
+        "absoluteDeltaMs": 21400
+      },
+      {
+        "boundaryMs": 11388479,
+        "source": "transition_next_start",
+        "transitionId": "transition_014",
+        "signalId": "signal_015",
+        "relation": "overlap",
+        "deltaMs": 24339,
+        "absoluteDeltaMs": 24339
+      },
+      {
+        "boundaryMs": 11388479,
+        "source": "transition_previous_end",
+        "transitionId": "transition_013",
+        "signalId": "signal_013",
+        "relation": "overlap",
+        "deltaMs": 24339,
+        "absoluteDeltaMs": 24339
+      },
+      {
+        "boundaryMs": 11388479,
+        "source": "unit_end",
+        "signalId": "signal_013",
+        "text": "言うけどさそんなもんさーやめようよ",
+        "sourceSegmentId": 3561,
+        "matchesFixtureSpeechId": 11,
+        "deltaMs": 24339,
+        "absoluteDeltaMs": 24339
+      },
+      {
+        "boundaryMs": 11388479,
+        "source": "unit_start",
+        "signalId": "signal_015",
+        "text": "あんまりなんかそういうさあ",
+        "sourceSegmentId": 3563,
+        "matchesFixtureSpeechId": 13,
+        "deltaMs": 24339,
+        "absoluteDeltaMs": 24339
+      },
+      {
+        "boundaryMs": 11391899,
+        "source": "transition_next_start",
+        "transitionId": "transition_015",
+        "signalId": "signal_016",
+        "relation": "overlap",
+        "deltaMs": 27759,
+        "absoluteDeltaMs": 27759
+      },
+      {
+        "boundaryMs": 11391899,
+        "source": "transition_previous_end",
+        "transitionId": "transition_014",
+        "signalId": "signal_014",
+        "relation": "overlap",
+        "deltaMs": 27759,
+        "absoluteDeltaMs": 27759
+      },
+      {
+        "boundaryMs": 11391899,
+        "source": "unit_end",
+        "signalId": "signal_014",
+        "text": "そんなのなんか",
+        "sourceSegmentId": 3562,
+        "matchesFixtureSpeechId": 12,
+        "deltaMs": 27759,
+        "absoluteDeltaMs": 27759
+      },
+      {
+        "boundaryMs": 11391899,
+        "source": "unit_start",
+        "signalId": "signal_016",
+        "text": "変動するじゃんそういうのって",
+        "sourceSegmentId": 3564,
+        "matchesFixtureSpeechId": 14,
+        "deltaMs": 27759,
+        "absoluteDeltaMs": 27759
+      },
+      {
+        "boundaryMs": 11394479,
+        "source": "transition_next_start",
+        "transitionId": "transition_016",
+        "signalId": "signal_017",
+        "relation": "overlap",
+        "deltaMs": 30339,
+        "absoluteDeltaMs": 30339
+      },
+      {
+        "boundaryMs": 11394479,
+        "source": "transition_previous_end",
+        "transitionId": "transition_015",
+        "signalId": "signal_015",
+        "relation": "overlap",
+        "deltaMs": 30339,
+        "absoluteDeltaMs": 30339
+      },
+      {
+        "boundaryMs": 11394479,
+        "source": "unit_end",
+        "signalId": "signal_015",
+        "text": "あんまりなんかそういうさあ",
+        "sourceSegmentId": 3563,
+        "matchesFixtureSpeechId": 13,
+        "deltaMs": 30339,
+        "absoluteDeltaMs": 30339
+      },
+      {
+        "boundaryMs": 11394479,
+        "source": "unit_start",
+        "signalId": "signal_017",
+        "text": "変動するものであんま喜べないんだよね",
+        "sourceSegmentId": 3565,
+        "matchesFixtureSpeechId": 15,
+        "deltaMs": 30339,
+        "absoluteDeltaMs": 30339
+      },
+      {
+        "boundaryMs": 11397300,
+        "source": "transition_next_start",
+        "transitionId": "transition_017",
+        "signalId": "signal_018",
+        "relation": "overlap",
+        "deltaMs": 33160,
+        "absoluteDeltaMs": 33160
+      },
+      {
+        "boundaryMs": 11397300,
+        "source": "transition_previous_end",
+        "transitionId": "transition_016",
+        "signalId": "signal_016",
+        "relation": "overlap",
+        "deltaMs": 33160,
+        "absoluteDeltaMs": 33160
+      },
+      {
+        "boundaryMs": 11397300,
+        "source": "unit_end",
+        "signalId": "signal_016",
+        "text": "変動するじゃんそういうのって",
+        "sourceSegmentId": 3564,
+        "matchesFixtureSpeechId": 14,
+        "deltaMs": 33160,
+        "absoluteDeltaMs": 33160
+      },
+      {
+        "boundaryMs": 11397300,
+        "source": "unit_start",
+        "signalId": "signal_018",
+        "text": "船長",
+        "sourceSegmentId": 3566,
+        "matchesFixtureSpeechId": 16,
+        "deltaMs": 33160,
+        "absoluteDeltaMs": 33160
+      },
+      {
+        "boundaryMs": 11398200,
+        "source": "transition_next_start",
+        "transitionId": "transition_018",
+        "signalId": "signal_019",
+        "relation": "overlap",
+        "deltaMs": 34060,
+        "absoluteDeltaMs": 34060
+      },
+      {
+        "boundaryMs": 11398200,
+        "source": "transition_previous_end",
+        "transitionId": "transition_017",
+        "signalId": "signal_017",
+        "relation": "overlap",
+        "deltaMs": 34060,
+        "absoluteDeltaMs": 34060
+      },
+      {
+        "boundaryMs": 11398200,
+        "source": "unit_end",
+        "signalId": "signal_017",
+        "text": "変動するものであんま喜べないんだよね",
+        "sourceSegmentId": 3565,
+        "matchesFixtureSpeechId": 15,
+        "deltaMs": 34060,
+        "absoluteDeltaMs": 34060
+      },
+      {
+        "boundaryMs": 11398200,
+        "source": "unit_start",
+        "signalId": "signal_019",
+        "text": "うん",
+        "sourceSegmentId": 3567,
+        "matchesFixtureSpeechId": 17,
+        "deltaMs": 34060,
+        "absoluteDeltaMs": 34060
+      },
+      {
+        "boundaryMs": 11399359,
+        "source": "transition_next_start",
+        "transitionId": "transition_019",
+        "signalId": "signal_020",
+        "relation": "overlap",
+        "deltaMs": 35219,
+        "absoluteDeltaMs": 35219
+      },
+      {
+        "boundaryMs": 11399359,
+        "source": "transition_previous_end",
+        "transitionId": "transition_018",
+        "signalId": "signal_018",
+        "relation": "overlap",
+        "deltaMs": 35219,
+        "absoluteDeltaMs": 35219
+      },
+      {
+        "boundaryMs": 11399359,
+        "source": "unit_end",
+        "signalId": "signal_018",
+        "text": "船長",
+        "sourceSegmentId": 3566,
+        "matchesFixtureSpeechId": 16,
+        "deltaMs": 35219,
+        "absoluteDeltaMs": 35219
+      },
+      {
+        "boundaryMs": 11399359,
+        "source": "unit_start",
+        "signalId": "signal_020",
+        "text": "どうせまた変わるしみたいな感じ",
+        "sourceSegmentId": 3568,
+        "matchesFixtureSpeechId": 18,
+        "deltaMs": 35219,
+        "absoluteDeltaMs": 35219
+      },
+      {
+        "boundaryMs": 11402359,
+        "source": "transition_next_start",
+        "transitionId": "transition_020",
+        "signalId": "signal_021",
+        "relation": "overlap",
+        "deltaMs": 38219,
+        "absoluteDeltaMs": 38219
+      },
+      {
+        "boundaryMs": 11402359,
+        "source": "transition_previous_end",
+        "transitionId": "transition_019",
+        "signalId": "signal_019",
+        "relation": "overlap",
+        "deltaMs": 38219,
+        "absoluteDeltaMs": 38219
+      },
+      {
+        "boundaryMs": 11402359,
+        "source": "unit_end",
+        "signalId": "signal_019",
+        "text": "うん",
+        "sourceSegmentId": 3567,
+        "matchesFixtureSpeechId": 17,
+        "deltaMs": 38219,
+        "absoluteDeltaMs": 38219
+      },
+      {
+        "boundaryMs": 11402359,
+        "source": "unit_start",
+        "signalId": "signal_021",
+        "text": "あんま喜べないんだよね先日の",
+        "sourceSegmentId": 3569,
+        "matchesFixtureSpeechId": 19,
+        "deltaMs": 38219,
+        "absoluteDeltaMs": 38219
+      },
+      {
+        "boundaryMs": 11404850,
+        "source": "transition_previous_end",
+        "transitionId": "transition_020",
+        "signalId": "signal_020",
+        "relation": "overlap",
+        "deltaMs": 40710,
+        "absoluteDeltaMs": 40710
+      },
+      {
+        "boundaryMs": 11404850,
+        "source": "unit_end",
+        "signalId": "signal_020",
+        "text": "どうせまた変わるしみたいな感じ",
+        "sourceSegmentId": 3568,
+        "matchesFixtureSpeechId": 18,
+        "deltaMs": 40710,
+        "absoluteDeltaMs": 40710
+      },
+      {
+        "boundaryMs": 11405460,
+        "source": "transition_next_start",
+        "transitionId": "transition_021",
+        "signalId": "signal_022",
+        "relation": "touching",
+        "deltaMs": 41320,
+        "absoluteDeltaMs": 41320
+      },
+      {
+        "boundaryMs": 11405460,
+        "source": "transition_previous_end",
+        "transitionId": "transition_021",
+        "signalId": "signal_021",
+        "relation": "touching",
+        "deltaMs": 41320,
+        "absoluteDeltaMs": 41320
+      },
+      {
+        "boundaryMs": 11405460,
+        "source": "unit_end",
+        "signalId": "signal_021",
+        "text": "あんま喜べないんだよね先日の",
+        "sourceSegmentId": 3569,
+        "matchesFixtureSpeechId": 19,
+        "deltaMs": 41320,
+        "absoluteDeltaMs": 41320
+      },
+      {
+        "boundaryMs": 11405460,
+        "source": "unit_start",
+        "signalId": "signal_022",
+        "text": "うん",
+        "sourceSegmentId": 3570,
+        "matchesFixtureSpeechId": 20,
+        "deltaMs": 41320,
+        "absoluteDeltaMs": 41320
+      },
+      {
+        "boundaryMs": 11407260,
+        "source": "transition_next_start",
+        "transitionId": "transition_022",
+        "signalId": "signal_023",
+        "relation": "overlap",
+        "deltaMs": 43120,
+        "absoluteDeltaMs": 43120
+      },
+      {
+        "boundaryMs": 11407260,
+        "source": "unit_start",
+        "signalId": "signal_023",
+        "text": "えーっと",
+        "sourceSegmentId": 3571,
+        "deltaMs": 43120,
+        "absoluteDeltaMs": 43120
+      },
+      {
+        "boundaryMs": 11409170,
+        "source": "transition_previous_end",
+        "transitionId": "transition_022",
+        "signalId": "signal_022",
+        "relation": "overlap",
+        "deltaMs": 45030,
+        "absoluteDeltaMs": 45030
+      },
+      {
+        "boundaryMs": 11409170,
+        "source": "unit_end",
+        "signalId": "signal_022",
+        "text": "うん",
+        "sourceSegmentId": 3570,
+        "matchesFixtureSpeechId": 20,
+        "deltaMs": 45030,
+        "absoluteDeltaMs": 45030
+      },
+      {
+        "boundaryMs": 11411700,
+        "source": "unit_end",
+        "signalId": "signal_023",
+        "text": "えーっと",
+        "sourceSegmentId": 3571,
+        "deltaMs": 47560,
+        "absoluteDeltaMs": 47560
+      }
+    ],
+    "selectedEnd": [
+      {
+        "boundaryMs": 11409170,
+        "source": "transition_previous_end",
+        "transitionId": "transition_022",
+        "signalId": "signal_022",
+        "relation": "overlap",
+        "deltaMs": 0,
+        "absoluteDeltaMs": 0
+      },
+      {
+        "boundaryMs": 11409170,
+        "source": "unit_end",
+        "signalId": "signal_022",
+        "text": "うん",
+        "sourceSegmentId": 3570,
+        "matchesFixtureSpeechId": 20,
+        "deltaMs": 0,
+        "absoluteDeltaMs": 0
+      },
+      {
+        "boundaryMs": 11407260,
+        "source": "transition_next_start",
+        "transitionId": "transition_022",
+        "signalId": "signal_023",
+        "relation": "overlap",
+        "deltaMs": -1910,
+        "absoluteDeltaMs": 1910
+      },
+      {
+        "boundaryMs": 11407260,
+        "source": "unit_start",
+        "signalId": "signal_023",
+        "text": "えーっと",
+        "sourceSegmentId": 3571,
+        "deltaMs": -1910,
+        "absoluteDeltaMs": 1910
+      },
+      {
+        "boundaryMs": 11411700,
+        "source": "unit_end",
+        "signalId": "signal_023",
+        "text": "えーっと",
+        "sourceSegmentId": 3571,
+        "deltaMs": 2530,
+        "absoluteDeltaMs": 2530
+      },
+      {
+        "boundaryMs": 11405460,
+        "source": "transition_next_start",
+        "transitionId": "transition_021",
+        "signalId": "signal_022",
+        "relation": "touching",
+        "deltaMs": -3710,
+        "absoluteDeltaMs": 3710
+      },
+      {
+        "boundaryMs": 11405460,
+        "source": "transition_previous_end",
+        "transitionId": "transition_021",
+        "signalId": "signal_021",
+        "relation": "touching",
+        "deltaMs": -3710,
+        "absoluteDeltaMs": 3710
+      },
+      {
+        "boundaryMs": 11405460,
+        "source": "unit_end",
+        "signalId": "signal_021",
+        "text": "あんま喜べないんだよね先日の",
+        "sourceSegmentId": 3569,
+        "matchesFixtureSpeechId": 19,
+        "deltaMs": -3710,
+        "absoluteDeltaMs": 3710
+      },
+      {
+        "boundaryMs": 11405460,
+        "source": "unit_start",
+        "signalId": "signal_022",
+        "text": "うん",
+        "sourceSegmentId": 3570,
+        "matchesFixtureSpeechId": 20,
+        "deltaMs": -3710,
+        "absoluteDeltaMs": 3710
+      },
+      {
+        "boundaryMs": 11404850,
+        "source": "transition_previous_end",
+        "transitionId": "transition_020",
+        "signalId": "signal_020",
+        "relation": "overlap",
+        "deltaMs": -4320,
+        "absoluteDeltaMs": 4320
+      },
+      {
+        "boundaryMs": 11404850,
+        "source": "unit_end",
+        "signalId": "signal_020",
+        "text": "どうせまた変わるしみたいな感じ",
+        "sourceSegmentId": 3568,
+        "matchesFixtureSpeechId": 18,
+        "deltaMs": -4320,
+        "absoluteDeltaMs": 4320
+      },
+      {
+        "boundaryMs": 11402359,
+        "source": "transition_next_start",
+        "transitionId": "transition_020",
+        "signalId": "signal_021",
+        "relation": "overlap",
+        "deltaMs": -6811,
+        "absoluteDeltaMs": 6811
+      },
+      {
+        "boundaryMs": 11402359,
+        "source": "transition_previous_end",
+        "transitionId": "transition_019",
+        "signalId": "signal_019",
+        "relation": "overlap",
+        "deltaMs": -6811,
+        "absoluteDeltaMs": 6811
+      },
+      {
+        "boundaryMs": 11402359,
+        "source": "unit_end",
+        "signalId": "signal_019",
+        "text": "うん",
+        "sourceSegmentId": 3567,
+        "matchesFixtureSpeechId": 17,
+        "deltaMs": -6811,
+        "absoluteDeltaMs": 6811
+      },
+      {
+        "boundaryMs": 11402359,
+        "source": "unit_start",
+        "signalId": "signal_021",
+        "text": "あんま喜べないんだよね先日の",
+        "sourceSegmentId": 3569,
+        "matchesFixtureSpeechId": 19,
+        "deltaMs": -6811,
+        "absoluteDeltaMs": 6811
+      },
+      {
+        "boundaryMs": 11399359,
+        "source": "transition_next_start",
+        "transitionId": "transition_019",
+        "signalId": "signal_020",
+        "relation": "overlap",
+        "deltaMs": -9811,
+        "absoluteDeltaMs": 9811
+      },
+      {
+        "boundaryMs": 11399359,
+        "source": "transition_previous_end",
+        "transitionId": "transition_018",
+        "signalId": "signal_018",
+        "relation": "overlap",
+        "deltaMs": -9811,
+        "absoluteDeltaMs": 9811
+      },
+      {
+        "boundaryMs": 11399359,
+        "source": "unit_end",
+        "signalId": "signal_018",
+        "text": "船長",
+        "sourceSegmentId": 3566,
+        "matchesFixtureSpeechId": 16,
+        "deltaMs": -9811,
+        "absoluteDeltaMs": 9811
+      },
+      {
+        "boundaryMs": 11399359,
+        "source": "unit_start",
+        "signalId": "signal_020",
+        "text": "どうせまた変わるしみたいな感じ",
+        "sourceSegmentId": 3568,
+        "matchesFixtureSpeechId": 18,
+        "deltaMs": -9811,
+        "absoluteDeltaMs": 9811
+      },
+      {
+        "boundaryMs": 11398200,
+        "source": "transition_next_start",
+        "transitionId": "transition_018",
+        "signalId": "signal_019",
+        "relation": "overlap",
+        "deltaMs": -10970,
+        "absoluteDeltaMs": 10970
+      },
+      {
+        "boundaryMs": 11398200,
+        "source": "transition_previous_end",
+        "transitionId": "transition_017",
+        "signalId": "signal_017",
+        "relation": "overlap",
+        "deltaMs": -10970,
+        "absoluteDeltaMs": 10970
+      },
+      {
+        "boundaryMs": 11398200,
+        "source": "unit_end",
+        "signalId": "signal_017",
+        "text": "変動するものであんま喜べないんだよね",
+        "sourceSegmentId": 3565,
+        "matchesFixtureSpeechId": 15,
+        "deltaMs": -10970,
+        "absoluteDeltaMs": 10970
+      },
+      {
+        "boundaryMs": 11398200,
+        "source": "unit_start",
+        "signalId": "signal_019",
+        "text": "うん",
+        "sourceSegmentId": 3567,
+        "matchesFixtureSpeechId": 17,
+        "deltaMs": -10970,
+        "absoluteDeltaMs": 10970
+      },
+      {
+        "boundaryMs": 11397300,
+        "source": "transition_next_start",
+        "transitionId": "transition_017",
+        "signalId": "signal_018",
+        "relation": "overlap",
+        "deltaMs": -11870,
+        "absoluteDeltaMs": 11870
+      },
+      {
+        "boundaryMs": 11397300,
+        "source": "transition_previous_end",
+        "transitionId": "transition_016",
+        "signalId": "signal_016",
+        "relation": "overlap",
+        "deltaMs": -11870,
+        "absoluteDeltaMs": 11870
+      },
+      {
+        "boundaryMs": 11397300,
+        "source": "unit_end",
+        "signalId": "signal_016",
+        "text": "変動するじゃんそういうのって",
+        "sourceSegmentId": 3564,
+        "matchesFixtureSpeechId": 14,
+        "deltaMs": -11870,
+        "absoluteDeltaMs": 11870
+      },
+      {
+        "boundaryMs": 11397300,
+        "source": "unit_start",
+        "signalId": "signal_018",
+        "text": "船長",
+        "sourceSegmentId": 3566,
+        "matchesFixtureSpeechId": 16,
+        "deltaMs": -11870,
+        "absoluteDeltaMs": 11870
+      },
+      {
+        "boundaryMs": 11394479,
+        "source": "transition_next_start",
+        "transitionId": "transition_016",
+        "signalId": "signal_017",
+        "relation": "overlap",
+        "deltaMs": -14691,
+        "absoluteDeltaMs": 14691
+      },
+      {
+        "boundaryMs": 11394479,
+        "source": "transition_previous_end",
+        "transitionId": "transition_015",
+        "signalId": "signal_015",
+        "relation": "overlap",
+        "deltaMs": -14691,
+        "absoluteDeltaMs": 14691
+      },
+      {
+        "boundaryMs": 11394479,
+        "source": "unit_end",
+        "signalId": "signal_015",
+        "text": "あんまりなんかそういうさあ",
+        "sourceSegmentId": 3563,
+        "matchesFixtureSpeechId": 13,
+        "deltaMs": -14691,
+        "absoluteDeltaMs": 14691
+      },
+      {
+        "boundaryMs": 11394479,
+        "source": "unit_start",
+        "signalId": "signal_017",
+        "text": "変動するものであんま喜べないんだよね",
+        "sourceSegmentId": 3565,
+        "matchesFixtureSpeechId": 15,
+        "deltaMs": -14691,
+        "absoluteDeltaMs": 14691
+      },
+      {
+        "boundaryMs": 11391899,
+        "source": "transition_next_start",
+        "transitionId": "transition_015",
+        "signalId": "signal_016",
+        "relation": "overlap",
+        "deltaMs": -17271,
+        "absoluteDeltaMs": 17271
+      },
+      {
+        "boundaryMs": 11391899,
+        "source": "transition_previous_end",
+        "transitionId": "transition_014",
+        "signalId": "signal_014",
+        "relation": "overlap",
+        "deltaMs": -17271,
+        "absoluteDeltaMs": 17271
+      },
+      {
+        "boundaryMs": 11391899,
+        "source": "unit_end",
+        "signalId": "signal_014",
+        "text": "そんなのなんか",
+        "sourceSegmentId": 3562,
+        "matchesFixtureSpeechId": 12,
+        "deltaMs": -17271,
+        "absoluteDeltaMs": 17271
+      },
+      {
+        "boundaryMs": 11391899,
+        "source": "unit_start",
+        "signalId": "signal_016",
+        "text": "変動するじゃんそういうのって",
+        "sourceSegmentId": 3564,
+        "matchesFixtureSpeechId": 14,
+        "deltaMs": -17271,
+        "absoluteDeltaMs": 17271
+      },
+      {
+        "boundaryMs": 11388479,
+        "source": "transition_next_start",
+        "transitionId": "transition_014",
+        "signalId": "signal_015",
+        "relation": "overlap",
+        "deltaMs": -20691,
+        "absoluteDeltaMs": 20691
+      },
+      {
+        "boundaryMs": 11388479,
+        "source": "transition_previous_end",
+        "transitionId": "transition_013",
+        "signalId": "signal_013",
+        "relation": "overlap",
+        "deltaMs": -20691,
+        "absoluteDeltaMs": 20691
+      },
+      {
+        "boundaryMs": 11388479,
+        "source": "unit_end",
+        "signalId": "signal_013",
+        "text": "言うけどさそんなもんさーやめようよ",
+        "sourceSegmentId": 3561,
+        "matchesFixtureSpeechId": 11,
+        "deltaMs": -20691,
+        "absoluteDeltaMs": 20691
+      },
+      {
+        "boundaryMs": 11388479,
+        "source": "unit_start",
+        "signalId": "signal_015",
+        "text": "あんまりなんかそういうさあ",
+        "sourceSegmentId": 3563,
+        "matchesFixtureSpeechId": 13,
+        "deltaMs": -20691,
+        "absoluteDeltaMs": 20691
+      },
+      {
+        "boundaryMs": 11385540,
+        "source": "transition_next_start",
+        "transitionId": "transition_013",
+        "signalId": "signal_014",
+        "relation": "overlap",
+        "deltaMs": -23630,
+        "absoluteDeltaMs": 23630
+      },
+      {
+        "boundaryMs": 11385540,
+        "source": "transition_previous_end",
+        "transitionId": "transition_012",
+        "signalId": "signal_012",
+        "relation": "overlap",
+        "deltaMs": -23630,
+        "absoluteDeltaMs": 23630
+      },
+      {
+        "boundaryMs": 11385540,
+        "source": "unit_end",
+        "signalId": "signal_012",
+        "text": "さあそんな世界に行くとか",
+        "sourceSegmentId": 3560,
+        "matchesFixtureSpeechId": 10,
+        "deltaMs": -23630,
+        "absoluteDeltaMs": 23630
+      },
+      {
+        "boundaryMs": 11385540,
+        "source": "unit_start",
+        "signalId": "signal_014",
+        "text": "そんなのなんか",
+        "sourceSegmentId": 3562,
+        "matchesFixtureSpeechId": 12,
+        "deltaMs": -23630,
+        "absoluteDeltaMs": 23630
+      },
+      {
+        "boundaryMs": 11383740,
+        "source": "transition_next_start",
+        "transitionId": "transition_012",
+        "signalId": "signal_013",
+        "relation": "overlap",
+        "deltaMs": -25430,
+        "absoluteDeltaMs": 25430
+      },
+      {
+        "boundaryMs": 11383740,
+        "source": "unit_start",
+        "signalId": "signal_013",
+        "text": "言うけどさそんなもんさーやめようよ",
+        "sourceSegmentId": 3561,
+        "matchesFixtureSpeechId": 11,
+        "deltaMs": -25430,
+        "absoluteDeltaMs": 25430
+      },
+      {
+        "boundaryMs": 11381340,
+        "source": "transition_next_start",
+        "transitionId": "transition_011",
+        "signalId": "signal_012",
+        "relation": "gap",
+        "deltaMs": -27830,
+        "absoluteDeltaMs": 27830
+      },
+      {
+        "boundaryMs": 11381340,
+        "source": "unit_start",
+        "signalId": "signal_012",
+        "text": "さあそんな世界に行くとか",
+        "sourceSegmentId": 3560,
+        "matchesFixtureSpeechId": 10,
+        "deltaMs": -27830,
+        "absoluteDeltaMs": 27830
+      },
+      {
+        "boundaryMs": 11381180,
+        "source": "transition_previous_end",
+        "transitionId": "transition_010",
+        "signalId": "signal_010",
+        "relation": "overlap",
+        "deltaMs": -27990,
+        "absoluteDeltaMs": 27990
+      },
+      {
+        "boundaryMs": 11381180,
+        "source": "transition_previous_end",
+        "transitionId": "transition_011",
+        "signalId": "signal_011",
+        "relation": "gap",
+        "deltaMs": -27990,
+        "absoluteDeltaMs": 27990
+      },
+      {
+        "boundaryMs": 11381180,
+        "source": "unit_end",
+        "signalId": "signal_010",
+        "text": "恥ずかしいやろで緊張していますどうした",
+        "sourceSegmentId": 3558,
+        "matchesFixtureSpeechId": 8,
+        "deltaMs": -27990,
+        "absoluteDeltaMs": 27990
+      },
+      {
+        "boundaryMs": 11381180,
+        "source": "unit_end",
+        "signalId": "signal_011",
+        "text": "マジで大丈夫か",
+        "sourceSegmentId": 3559,
+        "matchesFixtureSpeechId": 9,
+        "deltaMs": -27990,
+        "absoluteDeltaMs": 27990
+      },
+      {
+        "boundaryMs": 11377620,
+        "source": "transition_next_start",
+        "transitionId": "transition_010",
+        "signalId": "signal_011",
+        "relation": "overlap",
+        "deltaMs": -31550,
+        "absoluteDeltaMs": 31550
+      },
+      {
+        "boundaryMs": 11377620,
+        "source": "transition_previous_end",
+        "transitionId": "transition_009",
+        "signalId": "signal_009",
+        "relation": "overlap",
+        "deltaMs": -31550,
+        "absoluteDeltaMs": 31550
+      },
+      {
+        "boundaryMs": 11377620,
+        "source": "unit_end",
+        "signalId": "signal_009",
+        "text": "誇らしいやら",
+        "sourceSegmentId": 3557,
+        "matchesFixtureSpeechId": 7,
+        "deltaMs": -31550,
+        "absoluteDeltaMs": 31550
+      },
+      {
+        "boundaryMs": 11377620,
+        "source": "unit_start",
+        "signalId": "signal_011",
+        "text": "マジで大丈夫か",
+        "sourceSegmentId": 3559,
+        "matchesFixtureSpeechId": 9,
+        "deltaMs": -31550,
+        "absoluteDeltaMs": 31550
+      },
+      {
+        "boundaryMs": 11375640,
+        "source": "transition_next_start",
+        "transitionId": "transition_009",
+        "signalId": "signal_010",
+        "relation": "overlap",
+        "deltaMs": -33530,
+        "absoluteDeltaMs": 33530
+      },
+      {
+        "boundaryMs": 11375640,
+        "source": "transition_previous_end",
+        "transitionId": "transition_008",
+        "signalId": "signal_008",
+        "relation": "overlap",
+        "deltaMs": -33530,
+        "absoluteDeltaMs": 33530
+      },
+      {
+        "boundaryMs": 11375640,
+        "source": "unit_end",
+        "signalId": "signal_008",
+        "text": "私も",
+        "sourceSegmentId": 3556,
+        "matchesFixtureSpeechId": 6,
+        "deltaMs": -33530,
+        "absoluteDeltaMs": 33530
+      },
+      {
+        "boundaryMs": 11375640,
+        "source": "unit_start",
+        "signalId": "signal_010",
+        "text": "恥ずかしいやろで緊張していますどうした",
+        "sourceSegmentId": 3558,
+        "matchesFixtureSpeechId": 8,
+        "deltaMs": -33530,
+        "absoluteDeltaMs": 33530
+      },
+      {
+        "boundaryMs": 11373899,
+        "source": "transition_next_start",
+        "transitionId": "transition_008",
+        "signalId": "signal_009",
+        "relation": "overlap",
+        "deltaMs": -35271,
+        "absoluteDeltaMs": 35271
+      },
+      {
+        "boundaryMs": 11373899,
+        "source": "transition_previous_end",
+        "transitionId": "transition_007",
+        "signalId": "signal_007",
+        "relation": "overlap",
+        "deltaMs": -35271,
+        "absoluteDeltaMs": 35271
+      },
+      {
+        "boundaryMs": 11373899,
+        "source": "unit_end",
+        "signalId": "signal_007",
+        "text": "見ましたその人と結婚してるなんてどうか",
+        "sourceSegmentId": 3555,
+        "matchesFixtureSpeechId": 5,
+        "deltaMs": -35271,
+        "absoluteDeltaMs": 35271
+      },
+      {
+        "boundaryMs": 11373899,
+        "source": "unit_start",
+        "signalId": "signal_009",
+        "text": "誇らしいやら",
+        "sourceSegmentId": 3557,
+        "matchesFixtureSpeechId": 7,
+        "deltaMs": -35271,
+        "absoluteDeltaMs": 35271
+      },
+      {
+        "boundaryMs": 11372939,
+        "source": "transition_next_start",
+        "transitionId": "transition_007",
+        "signalId": "signal_008",
+        "relation": "overlap",
+        "deltaMs": -36231,
+        "absoluteDeltaMs": 36231
+      },
+      {
+        "boundaryMs": 11372939,
+        "source": "transition_previous_end",
+        "transitionId": "transition_006",
+        "signalId": "signal_006",
+        "relation": "overlap",
+        "deltaMs": -36231,
+        "absoluteDeltaMs": 36231
+      },
+      {
+        "boundaryMs": 11372939,
+        "source": "unit_end",
+        "signalId": "signal_006",
+        "text": "世界2位なんだと取り上げられているのを",
+        "sourceSegmentId": 3554,
+        "matchesFixtureSpeechId": 4,
+        "deltaMs": -36231,
+        "absoluteDeltaMs": 36231
+      },
+      {
+        "boundaryMs": 11372939,
+        "source": "unit_start",
+        "signalId": "signal_008",
+        "text": "私も",
+        "sourceSegmentId": 3556,
+        "matchesFixtureSpeechId": 6,
+        "deltaMs": -36231,
+        "absoluteDeltaMs": 36231
+      },
+      {
+        "boundaryMs": 11370479,
+        "source": "transition_next_start",
+        "transitionId": "transition_006",
+        "signalId": "signal_007",
+        "relation": "overlap",
+        "deltaMs": -38691,
+        "absoluteDeltaMs": 38691
+      },
+      {
+        "boundaryMs": 11370479,
+        "source": "transition_previous_end",
+        "transitionId": "transition_005",
+        "signalId": "signal_005",
+        "relation": "overlap",
+        "deltaMs": -38691,
+        "absoluteDeltaMs": 38691
+      },
+      {
+        "boundaryMs": 11370479,
+        "source": "unit_end",
+        "signalId": "signal_005",
+        "text": "現在現役で活躍されているvtuberで",
+        "sourceSegmentId": 3553,
+        "matchesFixtureSpeechId": 3,
+        "deltaMs": -38691,
+        "absoluteDeltaMs": 38691
+      },
+      {
+        "boundaryMs": 11370479,
+        "source": "unit_start",
+        "signalId": "signal_007",
+        "text": "見ましたその人と結婚してるなんてどうか",
+        "sourceSegmentId": 3555,
+        "matchesFixtureSpeechId": 5,
+        "deltaMs": -38691,
+        "absoluteDeltaMs": 38691
+      },
+      {
+        "boundaryMs": 11368859,
+        "source": "transition_next_start",
+        "transitionId": "transition_005",
+        "signalId": "signal_006",
+        "relation": "overlap",
+        "deltaMs": -40311,
+        "absoluteDeltaMs": 40311
+      },
+      {
+        "boundaryMs": 11368859,
+        "source": "transition_previous_end",
+        "transitionId": "transition_004",
+        "signalId": "signal_004",
+        "relation": "overlap",
+        "deltaMs": -40311,
+        "absoluteDeltaMs": 40311
+      },
+      {
+        "boundaryMs": 11368859,
+        "source": "unit_end",
+        "signalId": "signal_004",
+        "text": "とある記事で船長は",
+        "sourceSegmentId": 3552,
+        "matchesFixtureSpeechId": 2,
+        "deltaMs": -40311,
+        "absoluteDeltaMs": 40311
+      },
+      {
+        "boundaryMs": 11368859,
+        "source": "unit_start",
+        "signalId": "signal_006",
+        "text": "世界2位なんだと取り上げられているのを",
+        "sourceSegmentId": 3554,
+        "matchesFixtureSpeechId": 4,
+        "deltaMs": -40311,
+        "absoluteDeltaMs": 40311
+      },
+      {
+        "boundaryMs": 11366760,
+        "source": "transition_next_start",
+        "transitionId": "transition_004",
+        "signalId": "signal_005",
+        "relation": "overlap",
+        "deltaMs": -42410,
+        "absoluteDeltaMs": 42410
+      },
+      {
+        "boundaryMs": 11366760,
+        "source": "transition_previous_end",
+        "transitionId": "transition_003",
+        "signalId": "signal_003",
+        "relation": "overlap",
+        "deltaMs": -42410,
+        "absoluteDeltaMs": 42410
+      },
+      {
+        "boundaryMs": 11366760,
+        "source": "unit_end",
+        "signalId": "signal_003",
+        "text": "香りどうもありがとうございます",
+        "sourceSegmentId": 3551,
+        "matchesFixtureSpeechId": 1,
+        "deltaMs": -42410,
+        "absoluteDeltaMs": 42410
+      },
+      {
+        "boundaryMs": 11366760,
+        "source": "unit_start",
+        "signalId": "signal_005",
+        "text": "現在現役で活躍されているvtuberで",
+        "sourceSegmentId": 3553,
+        "matchesFixtureSpeechId": 3,
+        "deltaMs": -42410,
+        "absoluteDeltaMs": 42410
+      },
+      {
+        "boundaryMs": 11364140,
+        "source": "transition_next_start",
+        "transitionId": "transition_003",
+        "signalId": "signal_004",
+        "relation": "overlap",
+        "deltaMs": -45030,
+        "absoluteDeltaMs": 45030
+      },
+      {
+        "boundaryMs": 11364140,
+        "source": "transition_previous_end",
+        "transitionId": "transition_002",
+        "signalId": "signal_002",
+        "relation": "overlap",
+        "deltaMs": -45030,
+        "absoluteDeltaMs": 45030
+      },
+      {
+        "boundaryMs": 11364140,
+        "source": "unit_end",
+        "signalId": "signal_002",
+        "text": "うん",
+        "sourceSegmentId": 3550,
+        "deltaMs": -45030,
+        "absoluteDeltaMs": 45030
+      },
+      {
+        "boundaryMs": 11364140,
+        "source": "unit_start",
+        "signalId": "signal_004",
+        "text": "とある記事で船長は",
+        "sourceSegmentId": 3552,
+        "matchesFixtureSpeechId": 2,
+        "deltaMs": -45030,
+        "absoluteDeltaMs": 45030
+      },
+      {
+        "boundaryMs": 11362439,
+        "source": "transition_next_start",
+        "transitionId": "transition_002",
+        "signalId": "signal_003",
+        "relation": "overlap",
+        "deltaMs": -46731,
+        "absoluteDeltaMs": 46731
+      },
+      {
+        "boundaryMs": 11362439,
+        "source": "transition_previous_end",
+        "transitionId": "transition_001",
+        "signalId": "signal_001",
+        "relation": "overlap",
+        "deltaMs": -46731,
+        "absoluteDeltaMs": 46731
+      },
+      {
+        "boundaryMs": 11362439,
+        "source": "unit_end",
+        "signalId": "signal_001",
+        "text": "怖いから一緒に入ろう",
+        "sourceSegmentId": 3549,
+        "deltaMs": -46731,
+        "absoluteDeltaMs": 46731
+      },
+      {
+        "boundaryMs": 11362439,
+        "source": "unit_start",
+        "signalId": "signal_003",
+        "text": "香りどうもありがとうございます",
+        "sourceSegmentId": 3551,
+        "matchesFixtureSpeechId": 1,
+        "deltaMs": -46731,
+        "absoluteDeltaMs": 46731
+      },
+      {
+        "boundaryMs": 11360880,
+        "source": "transition_next_start",
+        "transitionId": "transition_001",
+        "signalId": "signal_002",
+        "relation": "overlap",
+        "deltaMs": -48290,
+        "absoluteDeltaMs": 48290
+      },
+      {
+        "boundaryMs": 11360880,
+        "source": "unit_start",
+        "signalId": "signal_002",
+        "text": "うん",
+        "sourceSegmentId": 3550,
+        "deltaMs": -48290,
+        "absoluteDeltaMs": 48290
+      },
+      {
+        "boundaryMs": 11358600,
+        "source": "unit_start",
+        "signalId": "signal_001",
+        "text": "怖いから一緒に入ろう",
+        "sourceSegmentId": 3549,
+        "deltaMs": -50570,
+        "absoluteDeltaMs": 50570
+      }
+    ],
+    "expectedStart": [
+      {
+        "boundaryMs": 11364140,
+        "source": "transition_next_start",
+        "transitionId": "transition_003",
+        "signalId": "signal_004",
+        "relation": "overlap",
+        "deltaMs": -360,
+        "absoluteDeltaMs": 360
+      },
+      {
+        "boundaryMs": 11364140,
+        "source": "transition_previous_end",
+        "transitionId": "transition_002",
+        "signalId": "signal_002",
+        "relation": "overlap",
+        "deltaMs": -360,
+        "absoluteDeltaMs": 360
+      },
+      {
+        "boundaryMs": 11364140,
+        "source": "unit_end",
+        "signalId": "signal_002",
+        "text": "うん",
+        "sourceSegmentId": 3550,
+        "deltaMs": -360,
+        "absoluteDeltaMs": 360
+      },
+      {
+        "boundaryMs": 11364140,
+        "source": "unit_start",
+        "signalId": "signal_004",
+        "text": "とある記事で船長は",
+        "sourceSegmentId": 3552,
+        "matchesFixtureSpeechId": 2,
+        "deltaMs": -360,
+        "absoluteDeltaMs": 360
+      },
+      {
+        "boundaryMs": 11362439,
+        "source": "transition_next_start",
+        "transitionId": "transition_002",
+        "signalId": "signal_003",
+        "relation": "overlap",
+        "deltaMs": -2061,
+        "absoluteDeltaMs": 2061
+      },
+      {
+        "boundaryMs": 11362439,
+        "source": "transition_previous_end",
+        "transitionId": "transition_001",
+        "signalId": "signal_001",
+        "relation": "overlap",
+        "deltaMs": -2061,
+        "absoluteDeltaMs": 2061
+      },
+      {
+        "boundaryMs": 11362439,
+        "source": "unit_end",
+        "signalId": "signal_001",
+        "text": "怖いから一緒に入ろう",
+        "sourceSegmentId": 3549,
+        "deltaMs": -2061,
+        "absoluteDeltaMs": 2061
+      },
+      {
+        "boundaryMs": 11362439,
+        "source": "unit_start",
+        "signalId": "signal_003",
+        "text": "香りどうもありがとうございます",
+        "sourceSegmentId": 3551,
+        "matchesFixtureSpeechId": 1,
+        "deltaMs": -2061,
+        "absoluteDeltaMs": 2061
+      },
+      {
+        "boundaryMs": 11366760,
+        "source": "transition_next_start",
+        "transitionId": "transition_004",
+        "signalId": "signal_005",
+        "relation": "overlap",
+        "deltaMs": 2260,
+        "absoluteDeltaMs": 2260
+      },
+      {
+        "boundaryMs": 11366760,
+        "source": "transition_previous_end",
+        "transitionId": "transition_003",
+        "signalId": "signal_003",
+        "relation": "overlap",
+        "deltaMs": 2260,
+        "absoluteDeltaMs": 2260
+      },
+      {
+        "boundaryMs": 11366760,
+        "source": "unit_end",
+        "signalId": "signal_003",
+        "text": "香りどうもありがとうございます",
+        "sourceSegmentId": 3551,
+        "matchesFixtureSpeechId": 1,
+        "deltaMs": 2260,
+        "absoluteDeltaMs": 2260
+      },
+      {
+        "boundaryMs": 11366760,
+        "source": "unit_start",
+        "signalId": "signal_005",
+        "text": "現在現役で活躍されているvtuberで",
+        "sourceSegmentId": 3553,
+        "matchesFixtureSpeechId": 3,
+        "deltaMs": 2260,
+        "absoluteDeltaMs": 2260
+      },
+      {
+        "boundaryMs": 11360880,
+        "source": "transition_next_start",
+        "transitionId": "transition_001",
+        "signalId": "signal_002",
+        "relation": "overlap",
+        "deltaMs": -3620,
+        "absoluteDeltaMs": 3620
+      },
+      {
+        "boundaryMs": 11360880,
+        "source": "unit_start",
+        "signalId": "signal_002",
+        "text": "うん",
+        "sourceSegmentId": 3550,
+        "deltaMs": -3620,
+        "absoluteDeltaMs": 3620
+      },
+      {
+        "boundaryMs": 11368859,
+        "source": "transition_next_start",
+        "transitionId": "transition_005",
+        "signalId": "signal_006",
+        "relation": "overlap",
+        "deltaMs": 4359,
+        "absoluteDeltaMs": 4359
+      },
+      {
+        "boundaryMs": 11368859,
+        "source": "transition_previous_end",
+        "transitionId": "transition_004",
+        "signalId": "signal_004",
+        "relation": "overlap",
+        "deltaMs": 4359,
+        "absoluteDeltaMs": 4359
+      },
+      {
+        "boundaryMs": 11368859,
+        "source": "unit_end",
+        "signalId": "signal_004",
+        "text": "とある記事で船長は",
+        "sourceSegmentId": 3552,
+        "matchesFixtureSpeechId": 2,
+        "deltaMs": 4359,
+        "absoluteDeltaMs": 4359
+      },
+      {
+        "boundaryMs": 11368859,
+        "source": "unit_start",
+        "signalId": "signal_006",
+        "text": "世界2位なんだと取り上げられているのを",
+        "sourceSegmentId": 3554,
+        "matchesFixtureSpeechId": 4,
+        "deltaMs": 4359,
+        "absoluteDeltaMs": 4359
+      },
+      {
+        "boundaryMs": 11358600,
+        "source": "unit_start",
+        "signalId": "signal_001",
+        "text": "怖いから一緒に入ろう",
+        "sourceSegmentId": 3549,
+        "deltaMs": -5900,
+        "absoluteDeltaMs": 5900
+      },
+      {
+        "boundaryMs": 11370479,
+        "source": "transition_next_start",
+        "transitionId": "transition_006",
+        "signalId": "signal_007",
+        "relation": "overlap",
+        "deltaMs": 5979,
+        "absoluteDeltaMs": 5979
+      },
+      {
+        "boundaryMs": 11370479,
+        "source": "transition_previous_end",
+        "transitionId": "transition_005",
+        "signalId": "signal_005",
+        "relation": "overlap",
+        "deltaMs": 5979,
+        "absoluteDeltaMs": 5979
+      },
+      {
+        "boundaryMs": 11370479,
+        "source": "unit_end",
+        "signalId": "signal_005",
+        "text": "現在現役で活躍されているvtuberで",
+        "sourceSegmentId": 3553,
+        "matchesFixtureSpeechId": 3,
+        "deltaMs": 5979,
+        "absoluteDeltaMs": 5979
+      },
+      {
+        "boundaryMs": 11370479,
+        "source": "unit_start",
+        "signalId": "signal_007",
+        "text": "見ましたその人と結婚してるなんてどうか",
+        "sourceSegmentId": 3555,
+        "matchesFixtureSpeechId": 5,
+        "deltaMs": 5979,
+        "absoluteDeltaMs": 5979
+      },
+      {
+        "boundaryMs": 11372939,
+        "source": "transition_next_start",
+        "transitionId": "transition_007",
+        "signalId": "signal_008",
+        "relation": "overlap",
+        "deltaMs": 8439,
+        "absoluteDeltaMs": 8439
+      },
+      {
+        "boundaryMs": 11372939,
+        "source": "transition_previous_end",
+        "transitionId": "transition_006",
+        "signalId": "signal_006",
+        "relation": "overlap",
+        "deltaMs": 8439,
+        "absoluteDeltaMs": 8439
+      },
+      {
+        "boundaryMs": 11372939,
+        "source": "unit_end",
+        "signalId": "signal_006",
+        "text": "世界2位なんだと取り上げられているのを",
+        "sourceSegmentId": 3554,
+        "matchesFixtureSpeechId": 4,
+        "deltaMs": 8439,
+        "absoluteDeltaMs": 8439
+      },
+      {
+        "boundaryMs": 11372939,
+        "source": "unit_start",
+        "signalId": "signal_008",
+        "text": "私も",
+        "sourceSegmentId": 3556,
+        "matchesFixtureSpeechId": 6,
+        "deltaMs": 8439,
+        "absoluteDeltaMs": 8439
+      },
+      {
+        "boundaryMs": 11373899,
+        "source": "transition_next_start",
+        "transitionId": "transition_008",
+        "signalId": "signal_009",
+        "relation": "overlap",
+        "deltaMs": 9399,
+        "absoluteDeltaMs": 9399
+      },
+      {
+        "boundaryMs": 11373899,
+        "source": "transition_previous_end",
+        "transitionId": "transition_007",
+        "signalId": "signal_007",
+        "relation": "overlap",
+        "deltaMs": 9399,
+        "absoluteDeltaMs": 9399
+      },
+      {
+        "boundaryMs": 11373899,
+        "source": "unit_end",
+        "signalId": "signal_007",
+        "text": "見ましたその人と結婚してるなんてどうか",
+        "sourceSegmentId": 3555,
+        "matchesFixtureSpeechId": 5,
+        "deltaMs": 9399,
+        "absoluteDeltaMs": 9399
+      },
+      {
+        "boundaryMs": 11373899,
+        "source": "unit_start",
+        "signalId": "signal_009",
+        "text": "誇らしいやら",
+        "sourceSegmentId": 3557,
+        "matchesFixtureSpeechId": 7,
+        "deltaMs": 9399,
+        "absoluteDeltaMs": 9399
+      },
+      {
+        "boundaryMs": 11375640,
+        "source": "transition_next_start",
+        "transitionId": "transition_009",
+        "signalId": "signal_010",
+        "relation": "overlap",
+        "deltaMs": 11140,
+        "absoluteDeltaMs": 11140
+      },
+      {
+        "boundaryMs": 11375640,
+        "source": "transition_previous_end",
+        "transitionId": "transition_008",
+        "signalId": "signal_008",
+        "relation": "overlap",
+        "deltaMs": 11140,
+        "absoluteDeltaMs": 11140
+      },
+      {
+        "boundaryMs": 11375640,
+        "source": "unit_end",
+        "signalId": "signal_008",
+        "text": "私も",
+        "sourceSegmentId": 3556,
+        "matchesFixtureSpeechId": 6,
+        "deltaMs": 11140,
+        "absoluteDeltaMs": 11140
+      },
+      {
+        "boundaryMs": 11375640,
+        "source": "unit_start",
+        "signalId": "signal_010",
+        "text": "恥ずかしいやろで緊張していますどうした",
+        "sourceSegmentId": 3558,
+        "matchesFixtureSpeechId": 8,
+        "deltaMs": 11140,
+        "absoluteDeltaMs": 11140
+      },
+      {
+        "boundaryMs": 11377620,
+        "source": "transition_next_start",
+        "transitionId": "transition_010",
+        "signalId": "signal_011",
+        "relation": "overlap",
+        "deltaMs": 13120,
+        "absoluteDeltaMs": 13120
+      },
+      {
+        "boundaryMs": 11377620,
+        "source": "transition_previous_end",
+        "transitionId": "transition_009",
+        "signalId": "signal_009",
+        "relation": "overlap",
+        "deltaMs": 13120,
+        "absoluteDeltaMs": 13120
+      },
+      {
+        "boundaryMs": 11377620,
+        "source": "unit_end",
+        "signalId": "signal_009",
+        "text": "誇らしいやら",
+        "sourceSegmentId": 3557,
+        "matchesFixtureSpeechId": 7,
+        "deltaMs": 13120,
+        "absoluteDeltaMs": 13120
+      },
+      {
+        "boundaryMs": 11377620,
+        "source": "unit_start",
+        "signalId": "signal_011",
+        "text": "マジで大丈夫か",
+        "sourceSegmentId": 3559,
+        "matchesFixtureSpeechId": 9,
+        "deltaMs": 13120,
+        "absoluteDeltaMs": 13120
+      },
+      {
+        "boundaryMs": 11381180,
+        "source": "transition_previous_end",
+        "transitionId": "transition_010",
+        "signalId": "signal_010",
+        "relation": "overlap",
+        "deltaMs": 16680,
+        "absoluteDeltaMs": 16680
+      },
+      {
+        "boundaryMs": 11381180,
+        "source": "transition_previous_end",
+        "transitionId": "transition_011",
+        "signalId": "signal_011",
+        "relation": "gap",
+        "deltaMs": 16680,
+        "absoluteDeltaMs": 16680
+      },
+      {
+        "boundaryMs": 11381180,
+        "source": "unit_end",
+        "signalId": "signal_010",
+        "text": "恥ずかしいやろで緊張していますどうした",
+        "sourceSegmentId": 3558,
+        "matchesFixtureSpeechId": 8,
+        "deltaMs": 16680,
+        "absoluteDeltaMs": 16680
+      },
+      {
+        "boundaryMs": 11381180,
+        "source": "unit_end",
+        "signalId": "signal_011",
+        "text": "マジで大丈夫か",
+        "sourceSegmentId": 3559,
+        "matchesFixtureSpeechId": 9,
+        "deltaMs": 16680,
+        "absoluteDeltaMs": 16680
+      },
+      {
+        "boundaryMs": 11381340,
+        "source": "transition_next_start",
+        "transitionId": "transition_011",
+        "signalId": "signal_012",
+        "relation": "gap",
+        "deltaMs": 16840,
+        "absoluteDeltaMs": 16840
+      },
+      {
+        "boundaryMs": 11381340,
+        "source": "unit_start",
+        "signalId": "signal_012",
+        "text": "さあそんな世界に行くとか",
+        "sourceSegmentId": 3560,
+        "matchesFixtureSpeechId": 10,
+        "deltaMs": 16840,
+        "absoluteDeltaMs": 16840
+      },
+      {
+        "boundaryMs": 11383740,
+        "source": "transition_next_start",
+        "transitionId": "transition_012",
+        "signalId": "signal_013",
+        "relation": "overlap",
+        "deltaMs": 19240,
+        "absoluteDeltaMs": 19240
+      },
+      {
+        "boundaryMs": 11383740,
+        "source": "unit_start",
+        "signalId": "signal_013",
+        "text": "言うけどさそんなもんさーやめようよ",
+        "sourceSegmentId": 3561,
+        "matchesFixtureSpeechId": 11,
+        "deltaMs": 19240,
+        "absoluteDeltaMs": 19240
+      },
+      {
+        "boundaryMs": 11385540,
+        "source": "transition_next_start",
+        "transitionId": "transition_013",
+        "signalId": "signal_014",
+        "relation": "overlap",
+        "deltaMs": 21040,
+        "absoluteDeltaMs": 21040
+      },
+      {
+        "boundaryMs": 11385540,
+        "source": "transition_previous_end",
+        "transitionId": "transition_012",
+        "signalId": "signal_012",
+        "relation": "overlap",
+        "deltaMs": 21040,
+        "absoluteDeltaMs": 21040
+      },
+      {
+        "boundaryMs": 11385540,
+        "source": "unit_end",
+        "signalId": "signal_012",
+        "text": "さあそんな世界に行くとか",
+        "sourceSegmentId": 3560,
+        "matchesFixtureSpeechId": 10,
+        "deltaMs": 21040,
+        "absoluteDeltaMs": 21040
+      },
+      {
+        "boundaryMs": 11385540,
+        "source": "unit_start",
+        "signalId": "signal_014",
+        "text": "そんなのなんか",
+        "sourceSegmentId": 3562,
+        "matchesFixtureSpeechId": 12,
+        "deltaMs": 21040,
+        "absoluteDeltaMs": 21040
+      },
+      {
+        "boundaryMs": 11388479,
+        "source": "transition_next_start",
+        "transitionId": "transition_014",
+        "signalId": "signal_015",
+        "relation": "overlap",
+        "deltaMs": 23979,
+        "absoluteDeltaMs": 23979
+      },
+      {
+        "boundaryMs": 11388479,
+        "source": "transition_previous_end",
+        "transitionId": "transition_013",
+        "signalId": "signal_013",
+        "relation": "overlap",
+        "deltaMs": 23979,
+        "absoluteDeltaMs": 23979
+      },
+      {
+        "boundaryMs": 11388479,
+        "source": "unit_end",
+        "signalId": "signal_013",
+        "text": "言うけどさそんなもんさーやめようよ",
+        "sourceSegmentId": 3561,
+        "matchesFixtureSpeechId": 11,
+        "deltaMs": 23979,
+        "absoluteDeltaMs": 23979
+      },
+      {
+        "boundaryMs": 11388479,
+        "source": "unit_start",
+        "signalId": "signal_015",
+        "text": "あんまりなんかそういうさあ",
+        "sourceSegmentId": 3563,
+        "matchesFixtureSpeechId": 13,
+        "deltaMs": 23979,
+        "absoluteDeltaMs": 23979
+      },
+      {
+        "boundaryMs": 11391899,
+        "source": "transition_next_start",
+        "transitionId": "transition_015",
+        "signalId": "signal_016",
+        "relation": "overlap",
+        "deltaMs": 27399,
+        "absoluteDeltaMs": 27399
+      },
+      {
+        "boundaryMs": 11391899,
+        "source": "transition_previous_end",
+        "transitionId": "transition_014",
+        "signalId": "signal_014",
+        "relation": "overlap",
+        "deltaMs": 27399,
+        "absoluteDeltaMs": 27399
+      },
+      {
+        "boundaryMs": 11391899,
+        "source": "unit_end",
+        "signalId": "signal_014",
+        "text": "そんなのなんか",
+        "sourceSegmentId": 3562,
+        "matchesFixtureSpeechId": 12,
+        "deltaMs": 27399,
+        "absoluteDeltaMs": 27399
+      },
+      {
+        "boundaryMs": 11391899,
+        "source": "unit_start",
+        "signalId": "signal_016",
+        "text": "変動するじゃんそういうのって",
+        "sourceSegmentId": 3564,
+        "matchesFixtureSpeechId": 14,
+        "deltaMs": 27399,
+        "absoluteDeltaMs": 27399
+      },
+      {
+        "boundaryMs": 11394479,
+        "source": "transition_next_start",
+        "transitionId": "transition_016",
+        "signalId": "signal_017",
+        "relation": "overlap",
+        "deltaMs": 29979,
+        "absoluteDeltaMs": 29979
+      },
+      {
+        "boundaryMs": 11394479,
+        "source": "transition_previous_end",
+        "transitionId": "transition_015",
+        "signalId": "signal_015",
+        "relation": "overlap",
+        "deltaMs": 29979,
+        "absoluteDeltaMs": 29979
+      },
+      {
+        "boundaryMs": 11394479,
+        "source": "unit_end",
+        "signalId": "signal_015",
+        "text": "あんまりなんかそういうさあ",
+        "sourceSegmentId": 3563,
+        "matchesFixtureSpeechId": 13,
+        "deltaMs": 29979,
+        "absoluteDeltaMs": 29979
+      },
+      {
+        "boundaryMs": 11394479,
+        "source": "unit_start",
+        "signalId": "signal_017",
+        "text": "変動するものであんま喜べないんだよね",
+        "sourceSegmentId": 3565,
+        "matchesFixtureSpeechId": 15,
+        "deltaMs": 29979,
+        "absoluteDeltaMs": 29979
+      },
+      {
+        "boundaryMs": 11397300,
+        "source": "transition_next_start",
+        "transitionId": "transition_017",
+        "signalId": "signal_018",
+        "relation": "overlap",
+        "deltaMs": 32800,
+        "absoluteDeltaMs": 32800
+      },
+      {
+        "boundaryMs": 11397300,
+        "source": "transition_previous_end",
+        "transitionId": "transition_016",
+        "signalId": "signal_016",
+        "relation": "overlap",
+        "deltaMs": 32800,
+        "absoluteDeltaMs": 32800
+      },
+      {
+        "boundaryMs": 11397300,
+        "source": "unit_end",
+        "signalId": "signal_016",
+        "text": "変動するじゃんそういうのって",
+        "sourceSegmentId": 3564,
+        "matchesFixtureSpeechId": 14,
+        "deltaMs": 32800,
+        "absoluteDeltaMs": 32800
+      },
+      {
+        "boundaryMs": 11397300,
+        "source": "unit_start",
+        "signalId": "signal_018",
+        "text": "船長",
+        "sourceSegmentId": 3566,
+        "matchesFixtureSpeechId": 16,
+        "deltaMs": 32800,
+        "absoluteDeltaMs": 32800
+      },
+      {
+        "boundaryMs": 11398200,
+        "source": "transition_next_start",
+        "transitionId": "transition_018",
+        "signalId": "signal_019",
+        "relation": "overlap",
+        "deltaMs": 33700,
+        "absoluteDeltaMs": 33700
+      },
+      {
+        "boundaryMs": 11398200,
+        "source": "transition_previous_end",
+        "transitionId": "transition_017",
+        "signalId": "signal_017",
+        "relation": "overlap",
+        "deltaMs": 33700,
+        "absoluteDeltaMs": 33700
+      },
+      {
+        "boundaryMs": 11398200,
+        "source": "unit_end",
+        "signalId": "signal_017",
+        "text": "変動するものであんま喜べないんだよね",
+        "sourceSegmentId": 3565,
+        "matchesFixtureSpeechId": 15,
+        "deltaMs": 33700,
+        "absoluteDeltaMs": 33700
+      },
+      {
+        "boundaryMs": 11398200,
+        "source": "unit_start",
+        "signalId": "signal_019",
+        "text": "うん",
+        "sourceSegmentId": 3567,
+        "matchesFixtureSpeechId": 17,
+        "deltaMs": 33700,
+        "absoluteDeltaMs": 33700
+      },
+      {
+        "boundaryMs": 11399359,
+        "source": "transition_next_start",
+        "transitionId": "transition_019",
+        "signalId": "signal_020",
+        "relation": "overlap",
+        "deltaMs": 34859,
+        "absoluteDeltaMs": 34859
+      },
+      {
+        "boundaryMs": 11399359,
+        "source": "transition_previous_end",
+        "transitionId": "transition_018",
+        "signalId": "signal_018",
+        "relation": "overlap",
+        "deltaMs": 34859,
+        "absoluteDeltaMs": 34859
+      },
+      {
+        "boundaryMs": 11399359,
+        "source": "unit_end",
+        "signalId": "signal_018",
+        "text": "船長",
+        "sourceSegmentId": 3566,
+        "matchesFixtureSpeechId": 16,
+        "deltaMs": 34859,
+        "absoluteDeltaMs": 34859
+      },
+      {
+        "boundaryMs": 11399359,
+        "source": "unit_start",
+        "signalId": "signal_020",
+        "text": "どうせまた変わるしみたいな感じ",
+        "sourceSegmentId": 3568,
+        "matchesFixtureSpeechId": 18,
+        "deltaMs": 34859,
+        "absoluteDeltaMs": 34859
+      },
+      {
+        "boundaryMs": 11402359,
+        "source": "transition_next_start",
+        "transitionId": "transition_020",
+        "signalId": "signal_021",
+        "relation": "overlap",
+        "deltaMs": 37859,
+        "absoluteDeltaMs": 37859
+      },
+      {
+        "boundaryMs": 11402359,
+        "source": "transition_previous_end",
+        "transitionId": "transition_019",
+        "signalId": "signal_019",
+        "relation": "overlap",
+        "deltaMs": 37859,
+        "absoluteDeltaMs": 37859
+      },
+      {
+        "boundaryMs": 11402359,
+        "source": "unit_end",
+        "signalId": "signal_019",
+        "text": "うん",
+        "sourceSegmentId": 3567,
+        "matchesFixtureSpeechId": 17,
+        "deltaMs": 37859,
+        "absoluteDeltaMs": 37859
+      },
+      {
+        "boundaryMs": 11402359,
+        "source": "unit_start",
+        "signalId": "signal_021",
+        "text": "あんま喜べないんだよね先日の",
+        "sourceSegmentId": 3569,
+        "matchesFixtureSpeechId": 19,
+        "deltaMs": 37859,
+        "absoluteDeltaMs": 37859
+      },
+      {
+        "boundaryMs": 11404850,
+        "source": "transition_previous_end",
+        "transitionId": "transition_020",
+        "signalId": "signal_020",
+        "relation": "overlap",
+        "deltaMs": 40350,
+        "absoluteDeltaMs": 40350
+      },
+      {
+        "boundaryMs": 11404850,
+        "source": "unit_end",
+        "signalId": "signal_020",
+        "text": "どうせまた変わるしみたいな感じ",
+        "sourceSegmentId": 3568,
+        "matchesFixtureSpeechId": 18,
+        "deltaMs": 40350,
+        "absoluteDeltaMs": 40350
+      },
+      {
+        "boundaryMs": 11405460,
+        "source": "transition_next_start",
+        "transitionId": "transition_021",
+        "signalId": "signal_022",
+        "relation": "touching",
+        "deltaMs": 40960,
+        "absoluteDeltaMs": 40960
+      },
+      {
+        "boundaryMs": 11405460,
+        "source": "transition_previous_end",
+        "transitionId": "transition_021",
+        "signalId": "signal_021",
+        "relation": "touching",
+        "deltaMs": 40960,
+        "absoluteDeltaMs": 40960
+      },
+      {
+        "boundaryMs": 11405460,
+        "source": "unit_end",
+        "signalId": "signal_021",
+        "text": "あんま喜べないんだよね先日の",
+        "sourceSegmentId": 3569,
+        "matchesFixtureSpeechId": 19,
+        "deltaMs": 40960,
+        "absoluteDeltaMs": 40960
+      },
+      {
+        "boundaryMs": 11405460,
+        "source": "unit_start",
+        "signalId": "signal_022",
+        "text": "うん",
+        "sourceSegmentId": 3570,
+        "matchesFixtureSpeechId": 20,
+        "deltaMs": 40960,
+        "absoluteDeltaMs": 40960
+      },
+      {
+        "boundaryMs": 11407260,
+        "source": "transition_next_start",
+        "transitionId": "transition_022",
+        "signalId": "signal_023",
+        "relation": "overlap",
+        "deltaMs": 42760,
+        "absoluteDeltaMs": 42760
+      },
+      {
+        "boundaryMs": 11407260,
+        "source": "unit_start",
+        "signalId": "signal_023",
+        "text": "えーっと",
+        "sourceSegmentId": 3571,
+        "deltaMs": 42760,
+        "absoluteDeltaMs": 42760
+      },
+      {
+        "boundaryMs": 11409170,
+        "source": "transition_previous_end",
+        "transitionId": "transition_022",
+        "signalId": "signal_022",
+        "relation": "overlap",
+        "deltaMs": 44670,
+        "absoluteDeltaMs": 44670
+      },
+      {
+        "boundaryMs": 11409170,
+        "source": "unit_end",
+        "signalId": "signal_022",
+        "text": "うん",
+        "sourceSegmentId": 3570,
+        "matchesFixtureSpeechId": 20,
+        "deltaMs": 44670,
+        "absoluteDeltaMs": 44670
+      },
+      {
+        "boundaryMs": 11411700,
+        "source": "unit_end",
+        "signalId": "signal_023",
+        "text": "えーっと",
+        "sourceSegmentId": 3571,
+        "deltaMs": 47200,
+        "absoluteDeltaMs": 47200
+      }
+    ],
+    "expectedEnd": [
+      {
+        "boundaryMs": 11407260,
+        "source": "transition_next_start",
+        "transitionId": "transition_022",
+        "signalId": "signal_023",
+        "relation": "overlap",
+        "deltaMs": 82,
+        "absoluteDeltaMs": 82
+      },
+      {
+        "boundaryMs": 11407260,
+        "source": "unit_start",
+        "signalId": "signal_023",
+        "text": "えーっと",
+        "sourceSegmentId": 3571,
+        "deltaMs": 82,
+        "absoluteDeltaMs": 82
+      },
+      {
+        "boundaryMs": 11405460,
+        "source": "transition_next_start",
+        "transitionId": "transition_021",
+        "signalId": "signal_022",
+        "relation": "touching",
+        "deltaMs": -1718,
+        "absoluteDeltaMs": 1718
+      },
+      {
+        "boundaryMs": 11405460,
+        "source": "transition_previous_end",
+        "transitionId": "transition_021",
+        "signalId": "signal_021",
+        "relation": "touching",
+        "deltaMs": -1718,
+        "absoluteDeltaMs": 1718
+      },
+      {
+        "boundaryMs": 11405460,
+        "source": "unit_end",
+        "signalId": "signal_021",
+        "text": "あんま喜べないんだよね先日の",
+        "sourceSegmentId": 3569,
+        "matchesFixtureSpeechId": 19,
+        "deltaMs": -1718,
+        "absoluteDeltaMs": 1718
+      },
+      {
+        "boundaryMs": 11405460,
+        "source": "unit_start",
+        "signalId": "signal_022",
+        "text": "うん",
+        "sourceSegmentId": 3570,
+        "matchesFixtureSpeechId": 20,
+        "deltaMs": -1718,
+        "absoluteDeltaMs": 1718
+      },
+      {
+        "boundaryMs": 11409170,
+        "source": "transition_previous_end",
+        "transitionId": "transition_022",
+        "signalId": "signal_022",
+        "relation": "overlap",
+        "deltaMs": 1992,
+        "absoluteDeltaMs": 1992
+      },
+      {
+        "boundaryMs": 11409170,
+        "source": "unit_end",
+        "signalId": "signal_022",
+        "text": "うん",
+        "sourceSegmentId": 3570,
+        "matchesFixtureSpeechId": 20,
+        "deltaMs": 1992,
+        "absoluteDeltaMs": 1992
+      },
+      {
+        "boundaryMs": 11404850,
+        "source": "transition_previous_end",
+        "transitionId": "transition_020",
+        "signalId": "signal_020",
+        "relation": "overlap",
+        "deltaMs": -2328,
+        "absoluteDeltaMs": 2328
+      },
+      {
+        "boundaryMs": 11404850,
+        "source": "unit_end",
+        "signalId": "signal_020",
+        "text": "どうせまた変わるしみたいな感じ",
+        "sourceSegmentId": 3568,
+        "matchesFixtureSpeechId": 18,
+        "deltaMs": -2328,
+        "absoluteDeltaMs": 2328
+      },
+      {
+        "boundaryMs": 11411700,
+        "source": "unit_end",
+        "signalId": "signal_023",
+        "text": "えーっと",
+        "sourceSegmentId": 3571,
+        "deltaMs": 4522,
+        "absoluteDeltaMs": 4522
+      },
+      {
+        "boundaryMs": 11402359,
+        "source": "transition_next_start",
+        "transitionId": "transition_020",
+        "signalId": "signal_021",
+        "relation": "overlap",
+        "deltaMs": -4819,
+        "absoluteDeltaMs": 4819
+      },
+      {
+        "boundaryMs": 11402359,
+        "source": "transition_previous_end",
+        "transitionId": "transition_019",
+        "signalId": "signal_019",
+        "relation": "overlap",
+        "deltaMs": -4819,
+        "absoluteDeltaMs": 4819
+      },
+      {
+        "boundaryMs": 11402359,
+        "source": "unit_end",
+        "signalId": "signal_019",
+        "text": "うん",
+        "sourceSegmentId": 3567,
+        "matchesFixtureSpeechId": 17,
+        "deltaMs": -4819,
+        "absoluteDeltaMs": 4819
+      },
+      {
+        "boundaryMs": 11402359,
+        "source": "unit_start",
+        "signalId": "signal_021",
+        "text": "あんま喜べないんだよね先日の",
+        "sourceSegmentId": 3569,
+        "matchesFixtureSpeechId": 19,
+        "deltaMs": -4819,
+        "absoluteDeltaMs": 4819
+      },
+      {
+        "boundaryMs": 11399359,
+        "source": "transition_next_start",
+        "transitionId": "transition_019",
+        "signalId": "signal_020",
+        "relation": "overlap",
+        "deltaMs": -7819,
+        "absoluteDeltaMs": 7819
+      },
+      {
+        "boundaryMs": 11399359,
+        "source": "transition_previous_end",
+        "transitionId": "transition_018",
+        "signalId": "signal_018",
+        "relation": "overlap",
+        "deltaMs": -7819,
+        "absoluteDeltaMs": 7819
+      },
+      {
+        "boundaryMs": 11399359,
+        "source": "unit_end",
+        "signalId": "signal_018",
+        "text": "船長",
+        "sourceSegmentId": 3566,
+        "matchesFixtureSpeechId": 16,
+        "deltaMs": -7819,
+        "absoluteDeltaMs": 7819
+      },
+      {
+        "boundaryMs": 11399359,
+        "source": "unit_start",
+        "signalId": "signal_020",
+        "text": "どうせまた変わるしみたいな感じ",
+        "sourceSegmentId": 3568,
+        "matchesFixtureSpeechId": 18,
+        "deltaMs": -7819,
+        "absoluteDeltaMs": 7819
+      },
+      {
+        "boundaryMs": 11398200,
+        "source": "transition_next_start",
+        "transitionId": "transition_018",
+        "signalId": "signal_019",
+        "relation": "overlap",
+        "deltaMs": -8978,
+        "absoluteDeltaMs": 8978
+      },
+      {
+        "boundaryMs": 11398200,
+        "source": "transition_previous_end",
+        "transitionId": "transition_017",
+        "signalId": "signal_017",
+        "relation": "overlap",
+        "deltaMs": -8978,
+        "absoluteDeltaMs": 8978
+      },
+      {
+        "boundaryMs": 11398200,
+        "source": "unit_end",
+        "signalId": "signal_017",
+        "text": "変動するものであんま喜べないんだよね",
+        "sourceSegmentId": 3565,
+        "matchesFixtureSpeechId": 15,
+        "deltaMs": -8978,
+        "absoluteDeltaMs": 8978
+      },
+      {
+        "boundaryMs": 11398200,
+        "source": "unit_start",
+        "signalId": "signal_019",
+        "text": "うん",
+        "sourceSegmentId": 3567,
+        "matchesFixtureSpeechId": 17,
+        "deltaMs": -8978,
+        "absoluteDeltaMs": 8978
+      },
+      {
+        "boundaryMs": 11397300,
+        "source": "transition_next_start",
+        "transitionId": "transition_017",
+        "signalId": "signal_018",
+        "relation": "overlap",
+        "deltaMs": -9878,
+        "absoluteDeltaMs": 9878
+      },
+      {
+        "boundaryMs": 11397300,
+        "source": "transition_previous_end",
+        "transitionId": "transition_016",
+        "signalId": "signal_016",
+        "relation": "overlap",
+        "deltaMs": -9878,
+        "absoluteDeltaMs": 9878
+      },
+      {
+        "boundaryMs": 11397300,
+        "source": "unit_end",
+        "signalId": "signal_016",
+        "text": "変動するじゃんそういうのって",
+        "sourceSegmentId": 3564,
+        "matchesFixtureSpeechId": 14,
+        "deltaMs": -9878,
+        "absoluteDeltaMs": 9878
+      },
+      {
+        "boundaryMs": 11397300,
+        "source": "unit_start",
+        "signalId": "signal_018",
+        "text": "船長",
+        "sourceSegmentId": 3566,
+        "matchesFixtureSpeechId": 16,
+        "deltaMs": -9878,
+        "absoluteDeltaMs": 9878
+      },
+      {
+        "boundaryMs": 11394479,
+        "source": "transition_next_start",
+        "transitionId": "transition_016",
+        "signalId": "signal_017",
+        "relation": "overlap",
+        "deltaMs": -12699,
+        "absoluteDeltaMs": 12699
+      },
+      {
+        "boundaryMs": 11394479,
+        "source": "transition_previous_end",
+        "transitionId": "transition_015",
+        "signalId": "signal_015",
+        "relation": "overlap",
+        "deltaMs": -12699,
+        "absoluteDeltaMs": 12699
+      },
+      {
+        "boundaryMs": 11394479,
+        "source": "unit_end",
+        "signalId": "signal_015",
+        "text": "あんまりなんかそういうさあ",
+        "sourceSegmentId": 3563,
+        "matchesFixtureSpeechId": 13,
+        "deltaMs": -12699,
+        "absoluteDeltaMs": 12699
+      },
+      {
+        "boundaryMs": 11394479,
+        "source": "unit_start",
+        "signalId": "signal_017",
+        "text": "変動するものであんま喜べないんだよね",
+        "sourceSegmentId": 3565,
+        "matchesFixtureSpeechId": 15,
+        "deltaMs": -12699,
+        "absoluteDeltaMs": 12699
+      },
+      {
+        "boundaryMs": 11391899,
+        "source": "transition_next_start",
+        "transitionId": "transition_015",
+        "signalId": "signal_016",
+        "relation": "overlap",
+        "deltaMs": -15279,
+        "absoluteDeltaMs": 15279
+      },
+      {
+        "boundaryMs": 11391899,
+        "source": "transition_previous_end",
+        "transitionId": "transition_014",
+        "signalId": "signal_014",
+        "relation": "overlap",
+        "deltaMs": -15279,
+        "absoluteDeltaMs": 15279
+      },
+      {
+        "boundaryMs": 11391899,
+        "source": "unit_end",
+        "signalId": "signal_014",
+        "text": "そんなのなんか",
+        "sourceSegmentId": 3562,
+        "matchesFixtureSpeechId": 12,
+        "deltaMs": -15279,
+        "absoluteDeltaMs": 15279
+      },
+      {
+        "boundaryMs": 11391899,
+        "source": "unit_start",
+        "signalId": "signal_016",
+        "text": "変動するじゃんそういうのって",
+        "sourceSegmentId": 3564,
+        "matchesFixtureSpeechId": 14,
+        "deltaMs": -15279,
+        "absoluteDeltaMs": 15279
+      },
+      {
+        "boundaryMs": 11388479,
+        "source": "transition_next_start",
+        "transitionId": "transition_014",
+        "signalId": "signal_015",
+        "relation": "overlap",
+        "deltaMs": -18699,
+        "absoluteDeltaMs": 18699
+      },
+      {
+        "boundaryMs": 11388479,
+        "source": "transition_previous_end",
+        "transitionId": "transition_013",
+        "signalId": "signal_013",
+        "relation": "overlap",
+        "deltaMs": -18699,
+        "absoluteDeltaMs": 18699
+      },
+      {
+        "boundaryMs": 11388479,
+        "source": "unit_end",
+        "signalId": "signal_013",
+        "text": "言うけどさそんなもんさーやめようよ",
+        "sourceSegmentId": 3561,
+        "matchesFixtureSpeechId": 11,
+        "deltaMs": -18699,
+        "absoluteDeltaMs": 18699
+      },
+      {
+        "boundaryMs": 11388479,
+        "source": "unit_start",
+        "signalId": "signal_015",
+        "text": "あんまりなんかそういうさあ",
+        "sourceSegmentId": 3563,
+        "matchesFixtureSpeechId": 13,
+        "deltaMs": -18699,
+        "absoluteDeltaMs": 18699
+      },
+      {
+        "boundaryMs": 11385540,
+        "source": "transition_next_start",
+        "transitionId": "transition_013",
+        "signalId": "signal_014",
+        "relation": "overlap",
+        "deltaMs": -21638,
+        "absoluteDeltaMs": 21638
+      },
+      {
+        "boundaryMs": 11385540,
+        "source": "transition_previous_end",
+        "transitionId": "transition_012",
+        "signalId": "signal_012",
+        "relation": "overlap",
+        "deltaMs": -21638,
+        "absoluteDeltaMs": 21638
+      },
+      {
+        "boundaryMs": 11385540,
+        "source": "unit_end",
+        "signalId": "signal_012",
+        "text": "さあそんな世界に行くとか",
+        "sourceSegmentId": 3560,
+        "matchesFixtureSpeechId": 10,
+        "deltaMs": -21638,
+        "absoluteDeltaMs": 21638
+      },
+      {
+        "boundaryMs": 11385540,
+        "source": "unit_start",
+        "signalId": "signal_014",
+        "text": "そんなのなんか",
+        "sourceSegmentId": 3562,
+        "matchesFixtureSpeechId": 12,
+        "deltaMs": -21638,
+        "absoluteDeltaMs": 21638
+      },
+      {
+        "boundaryMs": 11383740,
+        "source": "transition_next_start",
+        "transitionId": "transition_012",
+        "signalId": "signal_013",
+        "relation": "overlap",
+        "deltaMs": -23438,
+        "absoluteDeltaMs": 23438
+      },
+      {
+        "boundaryMs": 11383740,
+        "source": "unit_start",
+        "signalId": "signal_013",
+        "text": "言うけどさそんなもんさーやめようよ",
+        "sourceSegmentId": 3561,
+        "matchesFixtureSpeechId": 11,
+        "deltaMs": -23438,
+        "absoluteDeltaMs": 23438
+      },
+      {
+        "boundaryMs": 11381340,
+        "source": "transition_next_start",
+        "transitionId": "transition_011",
+        "signalId": "signal_012",
+        "relation": "gap",
+        "deltaMs": -25838,
+        "absoluteDeltaMs": 25838
+      },
+      {
+        "boundaryMs": 11381340,
+        "source": "unit_start",
+        "signalId": "signal_012",
+        "text": "さあそんな世界に行くとか",
+        "sourceSegmentId": 3560,
+        "matchesFixtureSpeechId": 10,
+        "deltaMs": -25838,
+        "absoluteDeltaMs": 25838
+      },
+      {
+        "boundaryMs": 11381180,
+        "source": "transition_previous_end",
+        "transitionId": "transition_010",
+        "signalId": "signal_010",
+        "relation": "overlap",
+        "deltaMs": -25998,
+        "absoluteDeltaMs": 25998
+      },
+      {
+        "boundaryMs": 11381180,
+        "source": "transition_previous_end",
+        "transitionId": "transition_011",
+        "signalId": "signal_011",
+        "relation": "gap",
+        "deltaMs": -25998,
+        "absoluteDeltaMs": 25998
+      },
+      {
+        "boundaryMs": 11381180,
+        "source": "unit_end",
+        "signalId": "signal_010",
+        "text": "恥ずかしいやろで緊張していますどうした",
+        "sourceSegmentId": 3558,
+        "matchesFixtureSpeechId": 8,
+        "deltaMs": -25998,
+        "absoluteDeltaMs": 25998
+      },
+      {
+        "boundaryMs": 11381180,
+        "source": "unit_end",
+        "signalId": "signal_011",
+        "text": "マジで大丈夫か",
+        "sourceSegmentId": 3559,
+        "matchesFixtureSpeechId": 9,
+        "deltaMs": -25998,
+        "absoluteDeltaMs": 25998
+      },
+      {
+        "boundaryMs": 11377620,
+        "source": "transition_next_start",
+        "transitionId": "transition_010",
+        "signalId": "signal_011",
+        "relation": "overlap",
+        "deltaMs": -29558,
+        "absoluteDeltaMs": 29558
+      },
+      {
+        "boundaryMs": 11377620,
+        "source": "transition_previous_end",
+        "transitionId": "transition_009",
+        "signalId": "signal_009",
+        "relation": "overlap",
+        "deltaMs": -29558,
+        "absoluteDeltaMs": 29558
+      },
+      {
+        "boundaryMs": 11377620,
+        "source": "unit_end",
+        "signalId": "signal_009",
+        "text": "誇らしいやら",
+        "sourceSegmentId": 3557,
+        "matchesFixtureSpeechId": 7,
+        "deltaMs": -29558,
+        "absoluteDeltaMs": 29558
+      },
+      {
+        "boundaryMs": 11377620,
+        "source": "unit_start",
+        "signalId": "signal_011",
+        "text": "マジで大丈夫か",
+        "sourceSegmentId": 3559,
+        "matchesFixtureSpeechId": 9,
+        "deltaMs": -29558,
+        "absoluteDeltaMs": 29558
+      },
+      {
+        "boundaryMs": 11375640,
+        "source": "transition_next_start",
+        "transitionId": "transition_009",
+        "signalId": "signal_010",
+        "relation": "overlap",
+        "deltaMs": -31538,
+        "absoluteDeltaMs": 31538
+      },
+      {
+        "boundaryMs": 11375640,
+        "source": "transition_previous_end",
+        "transitionId": "transition_008",
+        "signalId": "signal_008",
+        "relation": "overlap",
+        "deltaMs": -31538,
+        "absoluteDeltaMs": 31538
+      },
+      {
+        "boundaryMs": 11375640,
+        "source": "unit_end",
+        "signalId": "signal_008",
+        "text": "私も",
+        "sourceSegmentId": 3556,
+        "matchesFixtureSpeechId": 6,
+        "deltaMs": -31538,
+        "absoluteDeltaMs": 31538
+      },
+      {
+        "boundaryMs": 11375640,
+        "source": "unit_start",
+        "signalId": "signal_010",
+        "text": "恥ずかしいやろで緊張していますどうした",
+        "sourceSegmentId": 3558,
+        "matchesFixtureSpeechId": 8,
+        "deltaMs": -31538,
+        "absoluteDeltaMs": 31538
+      },
+      {
+        "boundaryMs": 11373899,
+        "source": "transition_next_start",
+        "transitionId": "transition_008",
+        "signalId": "signal_009",
+        "relation": "overlap",
+        "deltaMs": -33279,
+        "absoluteDeltaMs": 33279
+      },
+      {
+        "boundaryMs": 11373899,
+        "source": "transition_previous_end",
+        "transitionId": "transition_007",
+        "signalId": "signal_007",
+        "relation": "overlap",
+        "deltaMs": -33279,
+        "absoluteDeltaMs": 33279
+      },
+      {
+        "boundaryMs": 11373899,
+        "source": "unit_end",
+        "signalId": "signal_007",
+        "text": "見ましたその人と結婚してるなんてどうか",
+        "sourceSegmentId": 3555,
+        "matchesFixtureSpeechId": 5,
+        "deltaMs": -33279,
+        "absoluteDeltaMs": 33279
+      },
+      {
+        "boundaryMs": 11373899,
+        "source": "unit_start",
+        "signalId": "signal_009",
+        "text": "誇らしいやら",
+        "sourceSegmentId": 3557,
+        "matchesFixtureSpeechId": 7,
+        "deltaMs": -33279,
+        "absoluteDeltaMs": 33279
+      },
+      {
+        "boundaryMs": 11372939,
+        "source": "transition_next_start",
+        "transitionId": "transition_007",
+        "signalId": "signal_008",
+        "relation": "overlap",
+        "deltaMs": -34239,
+        "absoluteDeltaMs": 34239
+      },
+      {
+        "boundaryMs": 11372939,
+        "source": "transition_previous_end",
+        "transitionId": "transition_006",
+        "signalId": "signal_006",
+        "relation": "overlap",
+        "deltaMs": -34239,
+        "absoluteDeltaMs": 34239
+      },
+      {
+        "boundaryMs": 11372939,
+        "source": "unit_end",
+        "signalId": "signal_006",
+        "text": "世界2位なんだと取り上げられているのを",
+        "sourceSegmentId": 3554,
+        "matchesFixtureSpeechId": 4,
+        "deltaMs": -34239,
+        "absoluteDeltaMs": 34239
+      },
+      {
+        "boundaryMs": 11372939,
+        "source": "unit_start",
+        "signalId": "signal_008",
+        "text": "私も",
+        "sourceSegmentId": 3556,
+        "matchesFixtureSpeechId": 6,
+        "deltaMs": -34239,
+        "absoluteDeltaMs": 34239
+      },
+      {
+        "boundaryMs": 11370479,
+        "source": "transition_next_start",
+        "transitionId": "transition_006",
+        "signalId": "signal_007",
+        "relation": "overlap",
+        "deltaMs": -36699,
+        "absoluteDeltaMs": 36699
+      },
+      {
+        "boundaryMs": 11370479,
+        "source": "transition_previous_end",
+        "transitionId": "transition_005",
+        "signalId": "signal_005",
+        "relation": "overlap",
+        "deltaMs": -36699,
+        "absoluteDeltaMs": 36699
+      },
+      {
+        "boundaryMs": 11370479,
+        "source": "unit_end",
+        "signalId": "signal_005",
+        "text": "現在現役で活躍されているvtuberで",
+        "sourceSegmentId": 3553,
+        "matchesFixtureSpeechId": 3,
+        "deltaMs": -36699,
+        "absoluteDeltaMs": 36699
+      },
+      {
+        "boundaryMs": 11370479,
+        "source": "unit_start",
+        "signalId": "signal_007",
+        "text": "見ましたその人と結婚してるなんてどうか",
+        "sourceSegmentId": 3555,
+        "matchesFixtureSpeechId": 5,
+        "deltaMs": -36699,
+        "absoluteDeltaMs": 36699
+      },
+      {
+        "boundaryMs": 11368859,
+        "source": "transition_next_start",
+        "transitionId": "transition_005",
+        "signalId": "signal_006",
+        "relation": "overlap",
+        "deltaMs": -38319,
+        "absoluteDeltaMs": 38319
+      },
+      {
+        "boundaryMs": 11368859,
+        "source": "transition_previous_end",
+        "transitionId": "transition_004",
+        "signalId": "signal_004",
+        "relation": "overlap",
+        "deltaMs": -38319,
+        "absoluteDeltaMs": 38319
+      },
+      {
+        "boundaryMs": 11368859,
+        "source": "unit_end",
+        "signalId": "signal_004",
+        "text": "とある記事で船長は",
+        "sourceSegmentId": 3552,
+        "matchesFixtureSpeechId": 2,
+        "deltaMs": -38319,
+        "absoluteDeltaMs": 38319
+      },
+      {
+        "boundaryMs": 11368859,
+        "source": "unit_start",
+        "signalId": "signal_006",
+        "text": "世界2位なんだと取り上げられているのを",
+        "sourceSegmentId": 3554,
+        "matchesFixtureSpeechId": 4,
+        "deltaMs": -38319,
+        "absoluteDeltaMs": 38319
+      },
+      {
+        "boundaryMs": 11366760,
+        "source": "transition_next_start",
+        "transitionId": "transition_004",
+        "signalId": "signal_005",
+        "relation": "overlap",
+        "deltaMs": -40418,
+        "absoluteDeltaMs": 40418
+      },
+      {
+        "boundaryMs": 11366760,
+        "source": "transition_previous_end",
+        "transitionId": "transition_003",
+        "signalId": "signal_003",
+        "relation": "overlap",
+        "deltaMs": -40418,
+        "absoluteDeltaMs": 40418
+      },
+      {
+        "boundaryMs": 11366760,
+        "source": "unit_end",
+        "signalId": "signal_003",
+        "text": "香りどうもありがとうございます",
+        "sourceSegmentId": 3551,
+        "matchesFixtureSpeechId": 1,
+        "deltaMs": -40418,
+        "absoluteDeltaMs": 40418
+      },
+      {
+        "boundaryMs": 11366760,
+        "source": "unit_start",
+        "signalId": "signal_005",
+        "text": "現在現役で活躍されているvtuberで",
+        "sourceSegmentId": 3553,
+        "matchesFixtureSpeechId": 3,
+        "deltaMs": -40418,
+        "absoluteDeltaMs": 40418
+      },
+      {
+        "boundaryMs": 11364140,
+        "source": "transition_next_start",
+        "transitionId": "transition_003",
+        "signalId": "signal_004",
+        "relation": "overlap",
+        "deltaMs": -43038,
+        "absoluteDeltaMs": 43038
+      },
+      {
+        "boundaryMs": 11364140,
+        "source": "transition_previous_end",
+        "transitionId": "transition_002",
+        "signalId": "signal_002",
+        "relation": "overlap",
+        "deltaMs": -43038,
+        "absoluteDeltaMs": 43038
+      },
+      {
+        "boundaryMs": 11364140,
+        "source": "unit_end",
+        "signalId": "signal_002",
+        "text": "うん",
+        "sourceSegmentId": 3550,
+        "deltaMs": -43038,
+        "absoluteDeltaMs": 43038
+      },
+      {
+        "boundaryMs": 11364140,
+        "source": "unit_start",
+        "signalId": "signal_004",
+        "text": "とある記事で船長は",
+        "sourceSegmentId": 3552,
+        "matchesFixtureSpeechId": 2,
+        "deltaMs": -43038,
+        "absoluteDeltaMs": 43038
+      },
+      {
+        "boundaryMs": 11362439,
+        "source": "transition_next_start",
+        "transitionId": "transition_002",
+        "signalId": "signal_003",
+        "relation": "overlap",
+        "deltaMs": -44739,
+        "absoluteDeltaMs": 44739
+      },
+      {
+        "boundaryMs": 11362439,
+        "source": "transition_previous_end",
+        "transitionId": "transition_001",
+        "signalId": "signal_001",
+        "relation": "overlap",
+        "deltaMs": -44739,
+        "absoluteDeltaMs": 44739
+      },
+      {
+        "boundaryMs": 11362439,
+        "source": "unit_end",
+        "signalId": "signal_001",
+        "text": "怖いから一緒に入ろう",
+        "sourceSegmentId": 3549,
+        "deltaMs": -44739,
+        "absoluteDeltaMs": 44739
+      },
+      {
+        "boundaryMs": 11362439,
+        "source": "unit_start",
+        "signalId": "signal_003",
+        "text": "香りどうもありがとうございます",
+        "sourceSegmentId": 3551,
+        "matchesFixtureSpeechId": 1,
+        "deltaMs": -44739,
+        "absoluteDeltaMs": 44739
+      },
+      {
+        "boundaryMs": 11360880,
+        "source": "transition_next_start",
+        "transitionId": "transition_001",
+        "signalId": "signal_002",
+        "relation": "overlap",
+        "deltaMs": -46298,
+        "absoluteDeltaMs": 46298
+      },
+      {
+        "boundaryMs": 11360880,
+        "source": "unit_start",
+        "signalId": "signal_002",
+        "text": "うん",
+        "sourceSegmentId": 3550,
+        "deltaMs": -46298,
+        "absoluteDeltaMs": 46298
+      },
+      {
+        "boundaryMs": 11358600,
+        "source": "unit_start",
+        "signalId": "signal_001",
+        "text": "怖いから一緒に入ろう",
+        "sourceSegmentId": 3549,
+        "deltaMs": -48578,
+        "absoluteDeltaMs": 48578
+      }
+    ]
+  },
+  "interpretation": [
+    "モデルの終了位置は 11409170ms transition_previous_end transition_022/signal_022 (0ms) に対応している。",
+    "音声比較で固定した終了位置に最も近い境界候補は 11407260ms transition_next_start transition_022/signal_023 (+82ms)。",
+    "モデルは期待終了に最も近い候補ではなく、+1910ms 後ろの境界を選んでいる。",
+    "境界候補payloadにはexpectedの開始・終了値そのものは含まれていない。"
+  ]
+}

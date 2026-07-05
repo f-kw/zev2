@@ -445,8 +445,11 @@ v009では、固定テーマと文字起こしに、expectedから独立した�
 - 採点summary: `reports/UpRyakf5j80_clip_audio_v001/clip_composition_prompt_v009/20260705-212949/summary.md`
 - v008/v009比較レポート: `reports/prompt-result-comparison-2026-07-05T12-29-59-119Z.md`
 - 音声境界確認レポート: `reports/prompt-audio-boundary-2026-07-05T12-30-27-419Z.md`
+- 境界候補照合レポート: `reports/boundary-signal-result-fit-20260705-UpRyakf5j80-v009.md`
 
 結果は、v008と同じ `11364140ms - 11409170ms`。音声比較とWeb版Gemini確認で固定した期待区間 `11364500ms - 11407178ms` に対して、開始は `360ms` 前、終了は `1992ms` 後ろ。theme側は正解区間を候補範囲に含んでいるため、composition側が発話途中の終端を選べていない問題として扱う。
+
+採点後の境界候補照合では、モデル終了位置は発話20「うん」の終了境界 `11409170ms` と一致した。期待終了に最も近い入力候補は、次字幕「えーっと」の開始 `11407260ms` で、期待終了との差は `+82ms`。この候補自体はexpected値ではなく、payloadの漏えい検査でもexpected時刻の混入は0件だった。
 
 Web Geminiへテキストpromptを投げる場合:
 
@@ -457,6 +460,15 @@ node evals/clip_composition/run_web_gemini_prompt.ts \
   --model gemini-web-flash \
   --params '{"temperature":"web-default","source":"gemini-web","manualRun":false,"runner":"edge-cdp-text-prompt"}' \
   --cdpPort 9222
+```
+
+採点済み結果と境界候補payloadの関係を見る場合:
+
+```bash
+node evals/clip_composition/inspect_boundary_signal_result_fit.ts \
+  --result evals/clip_composition/outputs/UpRyakf5j80_clip_audio_v001/clip_composition_prompt_v009/20260705-212949/result.json \
+  --boundaryPayload evals/clip_composition/outputs/boundary-signal-payload-UpRyakf5j80-v009-candidate-v001.json \
+  --outputId 20260705-UpRyakf5j80-v009
 ```
 
 ## 実行方法
