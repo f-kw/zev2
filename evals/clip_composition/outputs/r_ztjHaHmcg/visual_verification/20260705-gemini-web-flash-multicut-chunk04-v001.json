@@ -1,0 +1,41 @@
+{
+  "kind": "clip_composition_visual_verification",
+  "runAt": "2026-07-05T22:37:30+09:00",
+  "targetId": "r_ztjHaHmcg",
+  "sourceId": "-DwSCDMCWDQ",
+  "verificationId": "20260705-gemini-web-flash-multicut-chunk04-v001",
+  "model": "Gemini Web Flash",
+  "chatUrl": "https://gemini.google.com/app/c094b2d00d8a0aaf?hl=ja",
+  "uploadedVideoPath": "evals/clip_composition/outputs/visual-check/r_ztjHaHmcg/multicut_r_ztjHaHmcg_20260705-v001_chunk04.mp4",
+  "expectedChunkIndex": 3,
+  "prompt": "Task: verify the uploaded side-by-side video only. Do not select a clip. Do not use any previous chat context.\n\nThe video has two panels:\n- Left panel A: edited clip r_ztjHaHmcg, clip time 1:32.555 to 2:01.147.\n- Right panel B: source candidate -DwSCDMCWDQ, source time 40:04.730 to 40:33.322.\n\nDecide whether A and B show the same original moment: same topic, same spoken content, same conversation flow. A may have added captions, zoom/crop, BGM, sound effects, or editor-added audio. Treat those as differences, not automatic rejection.\n\nReturn JSON only. No markdown. Use this exact shape:\n{\"chunkIndex\":3,\"status\":\"confirmed|uncertain|rejected\",\"clipStartMs\":92555,\"clipEndMs\":121147,\"sourceStartMs\":2404730,\"sourceEndMs\":2433322,\"confidenceReason\":\"short reason\",\"alignmentNotes\":[\"what matches or does not match\"],\"visibleDifferences\":[\"captions/crop/BGM/SE/editor additions if visible or audible\"],\"usableForExpectedCuts\":false}",
+  "geminiResponse": {
+    "chunkIndex": 3,
+    "status": "confirmed",
+    "clipStartMs": 92555,
+    "clipEndMs": 121147,
+    "sourceStartMs": 2404730,
+    "sourceEndMs": 2433322,
+    "confidenceReason": "The spoken content, topic, and visual performance are an exact match between the left edited clip and the right source candidate video. The timeline aligns accurately across the clip duration.",
+    "alignmentNotes": [
+      "Both panels show the streamer discussing YouTube's revenue per view mechanics using hypothetical examples (100 views vs 1000 views). The cadence, jokes, and expressions are fully identical."
+    ],
+    "visibleDifferences": [
+      "The left panel has large stylized text subtitles added at the bottom, an overlay of game footage on the virtual living room screen, and background music/cropping edits typical of a vertical short or compiled highlight clip."
+    ],
+    "usableForExpectedCuts": true
+  },
+  "operatorAssessment": {
+    "status": "confirmed_by_gemini",
+    "meaning": "28.6秒の末尾チャンク単位では、切り抜き側と元動画候補側が同じ元場面として扱える。",
+    "freezingExpectedCuts": false,
+    "reasonExpectedNotFrozen": "expectedCuts化には4チャンクを統合した区間候補の確認と、人間の目視確認が必要。"
+  },
+  "productionImpact": {
+    "writesRuntime": false,
+    "touchesProductionUi": false,
+    "touchesProductionApi": false,
+    "touchesProductionQueue": false,
+    "touchesDatabase": false
+  }
+}

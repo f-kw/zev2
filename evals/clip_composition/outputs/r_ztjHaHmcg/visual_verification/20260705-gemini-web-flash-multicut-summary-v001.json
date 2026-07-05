@@ -1,0 +1,110 @@
+{
+  "kind": "clip_composition_visual_verification_summary",
+  "runAt": "2026-07-05T22:45:00+09:00",
+  "targetId": "r_ztjHaHmcg",
+  "targetTitle": "同接100人いたら食べていけるの？",
+  "sourceId": "-DwSCDMCWDQ",
+  "model": "Gemini Web Flash",
+  "params": {
+    "executionSurface": "Gemini Web UI",
+    "temperature": "not exposed by Gemini Web UI",
+    "promptPolicy": "side-by-side video verification only; no clip selection; no previous chat context"
+  },
+  "evidenceInputs": {
+    "audioCompareResultPath": "evals/clip_composition/outputs/audio-compare-chunks-r_ztjHaHmcg_youtube_auto_v001.json",
+    "multicutCandidatePath": "evals/clip_composition/outputs/multicut-expected-candidate-r_ztjHaHmcg-20260705-v001.json",
+    "visualCheckManifestPath": "evals/clip_composition/outputs/multicut-visual-checks-r_ztjHaHmcg-20260705-v001.json"
+  },
+  "sourceContinuity": {
+    "isSingleContinuousSourceCut": false,
+    "positiveSourceGapsMs": [99430, 21799, 13571],
+    "meaning": "元動画側に正の空白が3件あるため、切り抜きは単一連続区間ではなく複数区間の接合として扱う。"
+  },
+  "chunkResults": [
+    {
+      "cutIndex": 0,
+      "visualVerificationPath": "evals/clip_composition/outputs/r_ztjHaHmcg/visual_verification/20260705-gemini-web-flash-multicut-chunk01-v001.json",
+      "reportPath": "evals/clip_composition/reports/gemini-visual-check-r_ztjHaHmcg-multicut-chunk01-v001.md",
+      "uploadedVideoPath": "evals/clip_composition/outputs/visual-check/r_ztjHaHmcg/multicut_r_ztjHaHmcg_20260705-v001_chunk01.mp4",
+      "clipStartMs": 2555,
+      "clipEndMs": 32555,
+      "sourceStartMs": 2179930,
+      "sourceEndMs": 2209930,
+      "textCoverage": 0.764367816091954,
+      "audioEnvelopeCorrelation": 0.298622,
+      "geminiStatus": "confirmed",
+      "operatorAssessment": "confirmed_by_gemini",
+      "usableForExpectedCutsByGemini": true,
+      "notes": []
+    },
+    {
+      "cutIndex": 1,
+      "visualVerificationPath": "evals/clip_composition/outputs/r_ztjHaHmcg/visual_verification/20260705-gemini-web-flash-multicut-chunk02-v001.json",
+      "reportPath": "evals/clip_composition/reports/gemini-visual-check-r_ztjHaHmcg-multicut-chunk02-v001.md",
+      "uploadedVideoPath": "evals/clip_composition/outputs/visual-check/r_ztjHaHmcg/multicut_r_ztjHaHmcg_20260705-v001_chunk02.mp4",
+      "clipStartMs": 32555,
+      "clipEndMs": 62555,
+      "sourceStartMs": 2309360,
+      "sourceEndMs": 2339360,
+      "sourceGapFromPreviousMs": 99430,
+      "textCoverage": 0.5642857142857143,
+      "audioEnvelopeCorrelation": 0.612458,
+      "geminiStatus": "confirmed",
+      "operatorAssessment": "confirmed_by_gemini_with_response_index_mismatch",
+      "usableForExpectedCutsByGemini": true,
+      "notes": [
+        "Gemini response returned chunkIndex 2 while the prompt requested chunkIndex 1. The returned clip/source time range matches chunk02, so this is treated as a response-index issue, not a range mismatch."
+      ]
+    },
+    {
+      "cutIndex": 2,
+      "visualVerificationPath": "evals/clip_composition/outputs/r_ztjHaHmcg/visual_verification/20260705-gemini-web-flash-multicut-chunk03-v001.json",
+      "reportPath": "evals/clip_composition/reports/gemini-visual-check-r_ztjHaHmcg-multicut-chunk03-v001.md",
+      "uploadedVideoPath": "evals/clip_composition/outputs/visual-check/r_ztjHaHmcg/multicut_r_ztjHaHmcg_20260705-v001_chunk03.mp4",
+      "clipStartMs": 62555,
+      "clipEndMs": 92555,
+      "sourceStartMs": 2361159,
+      "sourceEndMs": 2391159,
+      "sourceGapFromPreviousMs": 21799,
+      "textCoverage": 0.7526315789473684,
+      "audioEnvelopeCorrelation": 0.526415,
+      "geminiStatus": "confirmed",
+      "operatorAssessment": "confirmed_by_gemini",
+      "usableForExpectedCutsByGemini": true,
+      "notes": []
+    },
+    {
+      "cutIndex": 3,
+      "visualVerificationPath": "evals/clip_composition/outputs/r_ztjHaHmcg/visual_verification/20260705-gemini-web-flash-multicut-chunk04-v001.json",
+      "reportPath": "evals/clip_composition/reports/gemini-visual-check-r_ztjHaHmcg-multicut-chunk04-v001.md",
+      "uploadedVideoPath": "evals/clip_composition/outputs/visual-check/r_ztjHaHmcg/multicut_r_ztjHaHmcg_20260705-v001_chunk04.mp4",
+      "clipStartMs": 92555,
+      "clipEndMs": 121147,
+      "sourceStartMs": 2404730,
+      "sourceEndMs": 2433322,
+      "sourceGapFromPreviousMs": 13571,
+      "textCoverage": 0.8156424581005587,
+      "audioEnvelopeCorrelation": 0.593818,
+      "geminiStatus": "confirmed",
+      "operatorAssessment": "confirmed_by_gemini",
+      "usableForExpectedCutsByGemini": true,
+      "notes": []
+    }
+  ],
+  "aggregateDecision": {
+    "allChunksConfirmedByGemini": true,
+    "allChunksUsableForExpectedCutsByGemini": true,
+    "canFreezeAsSingleCut": false,
+    "canFreezeAsMulticutAfterHumanReview": true,
+    "expectedCutsFrozenNow": false,
+    "reasonExpectedNotFrozen": "初回正解データは人間の目視確認を1回挟む方針のため、Gemini確認済みでもまだexpectedCutsへ固定しない。",
+    "meaning": "音声/STT照合で見つけた4つの飛び飛び区間は、Web Geminiの左右比較でも同じ元場面として確認された。次は人間が比較動画を目視して、複数区間expectedとして凍結するか判断する。"
+  },
+  "productionImpact": {
+    "writesRuntime": false,
+    "touchesProductionUi": false,
+    "touchesProductionApi": false,
+    "touchesProductionQueue": false,
+    "touchesDatabase": false
+  }
+}
