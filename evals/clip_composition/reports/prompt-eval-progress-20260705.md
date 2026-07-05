@@ -134,3 +134,14 @@ v008は `IMQYaT_RWRA_context_v001` では期待区間と完全一致した。`Up
 - 結果: 2件ともpass。
 
 正解理由、照合確認メモ、正解側の検証メタ情報のキーは、compositionプロンプトへ渡す入力に混ざっていなかった。`IMQYaT_RWRA_context_v001` では期待時刻と同じ数値が文字起こし区間の開始・終了として出ているが、これは入力文字起こし由来の区間境界であり、採点用expectedの混入ではない。
+
+## prompt選択区間と音声一致区間の境界確認
+
+- 検査スクリプト: `evals/clip_composition/inspect_prompt_audio_boundary.ts`
+- 対象結果: `evals/clip_composition/outputs/UpRyakf5j80_clip_audio_v001/clip_composition_prompt_v008/20260705-203605/result.json`
+- 結果JSON: `evals/clip_composition/outputs/prompt-audio-boundary-UpRyakf5j80-v008-20260705.json`
+- レポート: `evals/clip_composition/reports/prompt-audio-boundary-UpRyakf5j80-v008-20260705.md`
+
+音声比較で確認した切り抜き全体の対応区間は `11364500ms - 11407178ms`。v008の選択区間は `11364140ms - 11409170ms` なので、音声一致で確認した切り抜き開始より `360ms` 前から始まり、切り抜き終了より `1992ms` 後ろまで伸びている。選択区間は合計で `2352ms` 広い。
+
+文字起こし上は、選択開始が発話2の開始にあり、同時に発話1とも重なっている。期待開始は発話1と発話2が重なる途中にある。期待終了は発話20「うん」の途中で、v008は発話20の終端まで選んでいる。したがって、v008の失敗は「正解候補を見つけられない」ことではなく、音声上の切り抜き終端が発話途中にあるとき、文字起こしの発話終端まで広げてしまうこと。

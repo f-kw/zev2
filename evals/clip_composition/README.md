@@ -308,6 +308,16 @@ node evals/clip_composition/inspect_prompt_payload_leakage.ts \
 
 このコマンドはSTTもLLMも実行しません。モデルへ渡す入力だけを読み、正解理由、照合確認メモ、正解側の検証メタ情報のキーが混ざっていないか確認します。期待時刻と同じ数値が文字起こし区間の境界として出る場合は、入力文字起こし由来の自然な一致として分けて報告します。
 
+音声比較で確認した切り抜き全体の区間と、promptが選んだ区間の過不足を確認する場合:
+
+```bash
+node evals/clip_composition/inspect_prompt_audio_boundary.ts \
+  --result evals/clip_composition/outputs/UpRyakf5j80_clip_audio_v001/clip_composition_prompt_v008/20260705-203605/result.json \
+  --outputId UpRyakf5j80-v008-20260705
+```
+
+このコマンドはSTTもLLMも実行しません。採点済み `result.json` とfixture文字起こしを読み、expectedに保存した音声比較済み区間を基準に、promptの選択開始・終了が何ms前後へずれているか、文字起こし発話のどこに境界があるかを出します。
+
 生成済み採点結果:
 
 - `outputs/IMQYaT_RWRA_context_v001/clip_composition_prompt_v001/20260705-125215/result.json`
