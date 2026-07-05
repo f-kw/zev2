@@ -44,6 +44,7 @@ type ExpectedCut = {
   sourceVideoId?: string;
   clipId?: string;
   audioVerification?: {
+    clipDurationMs?: number;
     sourceSliceStartMs?: number;
     sourceSliceEndMs?: number;
     bestAlignedSourceStartMs?: number;
@@ -82,13 +83,25 @@ type SttJob = {
     segment: BoundarySegment;
     offsetFromSegmentStartMs: number;
     offsetToSegmentEndMs: number;
+    clipBoundaryMs?: number;
     sourceSliceBoundaryMs?: number;
   }>;
+  clipStt?: SttRunPlan;
+  sourceStt?: SttRunPlan;
   clipSttCommand?: string;
   sourceSttCommand?: string;
   sourceSliceStartMs?: number;
   sourceSliceEndMs?: number;
   notes: string[];
+};
+
+type SttRunPlan = {
+  id: string;
+  role: 'clip' | 'source';
+  inputPath: string;
+  command: string;
+  wordTimestampsPath: string;
+  transcriptPath: string;
 };
 
 const evalRoot = path.join(workspaceRoot(), 'evals', 'clip_composition');
@@ -177,6 +190,22 @@ function command(input: {
   ].join(' ');
 }
 
+function sttRunPlan(input: {
+  inputPath: string;
+  id: string;
+  role: 'clip' | 'source';
+  serverUrl: string;
+}): SttRunPlan {
+  return {
+    id: input.id,
+    role: input.role,
+    inputPath: input.inputPath,
+    command: command(input),
+    wordTimestampsPath: path.join('evals', 'clip_composition', 'stt', input.id, input.role, 'word-timestamps.json'),
+    transcriptPath: path.join('evals', 'clip_composition', 'stt', input.id, input.role, 'transcript.json')
+  };
+}
+
 function localSttId(value: string): string {
   return sanitizePathPart(`${value.replace(/_youtube_auto$/, '')}_local_boundary_v001`);
 }
@@ -252,15 +281,34 @@ async function buildJobs(options: CliOptions): Promise<SttJob[]> {
     const source = sourceForExpected(target, expectedCut);
     const sourceSliceStartMs = expectedCut.audioVerification?.sourceSliceStartMs;
     const sourceSliceEndMs = expectedCut.audioVerification?.sourceSliceEndMs;
+    const clipDurationMs = expectedCut.audioVerification?.clipDurationMs;
     const needsWithSlice = needs.map((need) => ({
       ...need,
+      ...(typeof clipDurationMs === 'number' ? { clipBoundaryMs: need.side === 'start' ? 0 : clipDurationMs } : {}),
       ...(typeof sourceSliceStartMs === 'number' ? { sourceSliceBoundaryMs: need.boundaryMs - sourceSliceStartMs } : {})
     }));
     const clipInputPath = target.clip.localAudioPath ?? target.clip.localVideoPath;
     const sourceInputPath = source?.localAudioPath ?? source?.localVideoPath;
+    const clipStt = clipInputPath
+      ? sttRunPlan({
+        inputPath: clipInputPath,
+        id: localSttId(target.clip.sttId ?? target.clip.id),
+        role: 'clip',
+        serverUrl: options.serverUrl
+      })
+      : undefined;
+    const sourceStt = source && sourceInputPath
+      ? sttRunPlan({
+        inputPath: sourceInputPath,
+        id: localSttId(source.sttId ?? source.id),
+        role: 'source',
+        serverUrl: options.serverUrl
+      })
+      : undefined;
     const notes = [
       'STTはここでは実行しない。サーバー復旧後にコマンドを実行する。',
       '期待境界をモデル入力へ直接渡すのではなく、単語境界または音声境界を得るための最小STT対象として扱う。',
+      'clipBoundaryMs は、切り抜き音声内で期待境界に対応する位置を示す確認用の値。',
       'sourceSliceBoundaryMs は、元動画切り出し音声内で期待境界がどこにあるかを示す確認用の値。'
     ];
     jobs.push({
@@ -268,22 +316,8 @@ async function buildJobs(options: CliOptions): Promise<SttJob[]> {
       targetId: target.targetId,
       reason: '期待境界が文字起こし発話の途中にあるため、発話単位より細かい境界情報が必要。',
       boundaryNeeds: needsWithSlice,
-      ...(clipInputPath ? {
-        clipSttCommand: command({
-          inputPath: clipInputPath,
-          id: localSttId(target.clip.sttId ?? target.clip.id),
-          role: 'clip',
-          serverUrl: options.serverUrl
-        })
-      } : {}),
-      ...(source && sourceInputPath ? {
-        sourceSttCommand: command({
-          inputPath: sourceInputPath,
-          id: localSttId(source.sttId ?? source.id),
-          role: 'source',
-          serverUrl: options.serverUrl
-        })
-      } : {}),
+      ...(clipStt ? { clipStt, clipSttCommand: clipStt.command } : {}),
+      ...(sourceStt ? { sourceStt, sourceSttCommand: sourceStt.command } : {}),
       ...(typeof sourceSliceStartMs === 'number' ? { sourceSliceStartMs } : {}),
       ...(typeof sourceSliceEndMs === 'number' ? { sourceSliceEndMs } : {}),
       notes
@@ -336,7 +370,7 @@ function buildReport(input: {
     lines.push('### 必要な境界');
     lines.push('');
     for (const need of job.boundaryNeeds) {
-      lines.push(`- ${need.side === 'start' ? '開始' : '終了'}境界 ${need.boundaryMs}ms: ${segmentText(need.segment)} の途中。発話開始から ${need.offsetFromSegmentStartMs}ms、発話終了まで ${need.offsetToSegmentEndMs}ms${typeof need.sourceSliceBoundaryMs === 'number' ? `。切り出し音声内では ${need.sourceSliceBoundaryMs}ms` : ''}`);
+      lines.push(`- ${need.side === 'start' ? '開始' : '終了'}境界 ${need.boundaryMs}ms: ${segmentText(need.segment)} の途中。発話開始から ${need.offsetFromSegmentStartMs}ms、発話終了まで ${need.offsetToSegmentEndMs}ms${typeof need.clipBoundaryMs === 'number' ? `。切り抜き音声内では ${need.clipBoundaryMs}ms` : ''}${typeof need.sourceSliceBoundaryMs === 'number' ? `。切り出し音声内では ${need.sourceSliceBoundaryMs}ms` : ''}`);
     }
     lines.push('');
     lines.push('### STT実行候補');
@@ -347,6 +381,11 @@ function buildReport(input: {
       lines.push('```sh');
       lines.push(job.clipSttCommand);
       lines.push('```');
+      if (job.clipStt) {
+        lines.push('');
+        lines.push(`- 単語時刻出力: ${job.clipStt.wordTimestampsPath}`);
+        lines.push(`- 発話出力: ${job.clipStt.transcriptPath}`);
+      }
       lines.push('');
     }
     if (job.sourceSttCommand) {
@@ -355,6 +394,11 @@ function buildReport(input: {
       lines.push('```sh');
       lines.push(job.sourceSttCommand);
       lines.push('```');
+      if (job.sourceStt) {
+        lines.push('');
+        lines.push(`- 単語時刻出力: ${job.sourceStt.wordTimestampsPath}`);
+        lines.push(`- 発話出力: ${job.sourceStt.transcriptPath}`);
+      }
       lines.push('');
     }
     lines.push('### 注意');

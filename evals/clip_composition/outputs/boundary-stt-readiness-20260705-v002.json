@@ -1,0 +1,34 @@
+{
+  "kind": "clip_composition_boundary_stt_readiness",
+  "runAt": "2026-07-05T11:55:11.493Z",
+  "jobsPath": "evals/clip_composition/outputs/boundary-stt-jobs-20260705-v002.json",
+  "sttExecuted": false,
+  "readiness": [
+    {
+      "fixtureId": "UpRyakf5j80_clip_audio_v001",
+      "targetId": "UpRyakf5j80",
+      "stt": [
+        {
+          "role": "clip",
+          "id": "UpRyakf5j80_local_boundary_v001",
+          "inputPath": "evals/clip_composition/research/downloads/UpRyakf5j80/UpRyakf5j80.m4a",
+          "command": "node evals/clip_composition/run_local_stt.ts --input evals/clip_composition/research/downloads/UpRyakf5j80/UpRyakf5j80.m4a --id UpRyakf5j80_local_boundary_v001 --role clip --server http://192.168.1.8:8000",
+          "wordTimestampsPath": "evals/clip_composition/stt/UpRyakf5j80_local_boundary_v001/clip/word-timestamps.json",
+          "transcriptPath": "evals/clip_composition/stt/UpRyakf5j80_local_boundary_v001/clip/transcript.json",
+          "status": "missing_output",
+          "boundaries": []
+        },
+        {
+          "role": "source",
+          "id": "UpRyakf5j80_kNX-wQTvsws_local_boundary_v001",
+          "inputPath": "evals/clip_composition/research/downloads/UpRyakf5j80/sources/kNX-wQTvsws/kNX-wQTvsws_3h09m17s_55s_audio.m4a",
+          "command": "node evals/clip_composition/run_local_stt.ts --input evals/clip_composition/research/downloads/UpRyakf5j80/sources/kNX-wQTvsws/kNX-wQTvsws_3h09m17s_55s_audio.m4a --id UpRyakf5j80_kNX-wQTvsws_local_boundary_v001 --role source --server http://192.168.1.8:8000",
+          "wordTimestampsPath": "evals/clip_composition/stt/UpRyakf5j80_kNX-wQTvsws_local_boundary_v001/source/word-timestamps.json",
+          "transcriptPath": "evals/clip_composition/stt/UpRyakf5j80_kNX-wQTvsws_local_boundary_v001/source/transcript.json",
+          "status": "missing_output",
+          "boundaries": []
+        }
+      ]
+    }
+  ]
+}

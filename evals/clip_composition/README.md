@@ -288,6 +288,16 @@ node evals/clip_composition/plan_boundary_stt_jobs.ts \
 
 このコマンドはSTTを実行しません。`reports/boundary-stt-jobs-<outputId>.md` に、STT復旧後に実行する候補コマンドを出します。
 
+境界精度用STTの出力がそろったか確認する場合:
+
+```bash
+node evals/clip_composition/inspect_boundary_stt_readiness.ts \
+  --jobs evals/clip_composition/outputs/boundary-stt-jobs-20260705-v002.json \
+  --outputId 20260705-v002
+```
+
+このコマンドもSTTを実行しません。予定された単語時刻ファイルと発話ファイルがあるかを確認し、単語時刻が境界点を覆っている場合は該当単語と最寄り単語境界をレポートします。
+
 生成済み採点結果:
 
 - `outputs/IMQYaT_RWRA_context_v001/clip_composition_prompt_v001/20260705-125215/result.json`
