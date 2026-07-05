@@ -155,3 +155,11 @@ STT進捗:
 - 元動画側STTは、80分音声を1本で送ったところ接続が切れた。
 - 分割STT用の `run_local_stt_chunked.ts` を追加したが、実行時点ではローカルSTTサーバー `http://192.168.1.8:8000` がタイムアウトしている。
 - 再開手順は `evals/clip_composition/reports/stt-progress-r_ztjHaHmcg_v001.md` に記録した。
+
+STT停止中の補助:
+
+- 音声粗スキャンを `evals/clip_composition/reports/audio-scan-r_ztjHaHmcg_v001.md` に保存した。
+- 最上位候補は元動画 `-DwSCDMCWDQ` の `11:37.000 - 13:35.500`。
+- 切り抜き全体に合わせた確認開始候補は `11:34.445`。
+- Web版Geminiまたは人間確認用の横並び動画を `evals/clip_composition/outputs/visual-check/r_ztjHaHmcg/gemini_pair_audio_scan_v001_r_ztjHaHmcg_vs_-DwSCDMCWDQ_11m34s.mp4` に作った。
+- この音声粗スキャンは `expectedCuts` として固定しない。元動画側STTと目視確認の前段の候補位置として扱う。

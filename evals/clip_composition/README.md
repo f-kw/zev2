@@ -121,6 +121,9 @@ pnpm --filter @zev2/agent-runner exec tsx ../evals/clip_composition/compare_audi
 - STT対象定義: `stt-targets/r_ztjHaHmcg.json`
 - 切り抜き側STT: `stt/r_ztjHaHmcg/clip/transcript.json`
 - 進捗レポート: `reports/stt-progress-r_ztjHaHmcg_v001.md`
+- 音声粗スキャン: `reports/audio-scan-r_ztjHaHmcg_v001.md`
+- 粗スキャン最上位: 元動画 `-DwSCDMCWDQ` の `11:37.000 - 13:35.500`
+- 確認動画: `outputs/visual-check/r_ztjHaHmcg/gemini_pair_audio_scan_v001_r_ztjHaHmcg_vs_-DwSCDMCWDQ_11m34s.mp4`
 - 現在の停止理由: ローカルSTTサーバー `http://192.168.1.8:8000` がタイムアウトしているため、元動画側STTは未完了です。
 
 音声比較済み区間からfixture候補を凍結する:

@@ -23,6 +23,18 @@
 
 最初に元動画全体を1本で送ったところ、接続が切れた。その後、分割STTへ切り替えたが、サーバー自体が `/` と `/docs` にも応答しない状態になっていた。
 
+## STT停止中に進めた粗い候補探索
+
+STTサーバー停止中に、切り抜き音声と元動画音声の音量包絡を比較する粗スキャンを行った。この結果は `expectedCuts` として固定しない。
+
+- 音声粗スキャンJSON: `outputs/audio-scan-r_ztjHaHmcg_v001.json`
+- 音声粗スキャンレポート: `reports/audio-scan-r_ztjHaHmcg_v001.md`
+- 最上位候補: 元動画 `-DwSCDMCWDQ` の `11:37.000 - 13:35.500`
+- 切り抜き全体に合わせた確認開始候補: `11:34.445`
+- 確認動画: `outputs/visual-check/r_ztjHaHmcg/gemini_pair_audio_scan_v001_r_ztjHaHmcg_vs_-DwSCDMCWDQ_11m34s.mp4`
+
+この確認動画は、Web版Geminiまたは人間が「切り抜きAと元動画候補Bが同じ場面か」を見るための素材として扱う。元動画側STTが完了するまでは、候補区間の確定には使わない。
+
 ## 再開コマンド
 
 STTサーバーが復帰したら、次のコマンドから再開する。
