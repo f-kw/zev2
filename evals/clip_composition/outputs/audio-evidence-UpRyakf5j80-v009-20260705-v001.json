@@ -1,0 +1,75 @@
+{
+  "kind": "clip_composition_audio_evidence_for_prompt_result",
+  "runAt": "2026-07-05T21:44:20+09:00",
+  "fixtureId": "UpRyakf5j80_clip_audio_v001",
+  "promptVersion": "clip_composition_prompt_v009",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "manualRun": false,
+    "runner": "edge-cdp-text-prompt",
+    "extraction": "existing-web-answer"
+  },
+  "sourceVideoId": "kNX-wQTvsws",
+  "clipVideoId": "UpRyakf5j80",
+  "audioEvidence": {
+    "status": "confirmed_from_existing_audio_comparison",
+    "method": "切り抜き動画全体を、字幕照合で絞った元動画55秒候補の中で音量包絡走査した。",
+    "clipAudioPath": "evals/clip_composition/research/downloads/UpRyakf5j80/UpRyakf5j80.m4a",
+    "sourceAudioPath": "evals/clip_composition/research/downloads/UpRyakf5j80/sources/kNX-wQTvsws/kNX-wQTvsws_3h09m17s_55s_audio.m4a",
+    "comparisonResultPath": "evals/clip_composition/outputs/audio-compare-chunks-UpRyakf5j80_youtube_auto_source_slice_full_window_v001.json",
+    "comparisonReportPath": "evals/clip_composition/reports/audio-compare-chunks-UpRyakf5j80_youtube_auto_source_slice_full_window_v001.md",
+    "sourceSliceStartMs": 11357000,
+    "sourceSliceEndMs": 11412004,
+    "bestOffsetMsWithinSourceSlice": 7500,
+    "audioConfirmedSourceStartMs": 11364500,
+    "audioConfirmedSourceEndMs": 11407178,
+    "clipDurationMs": 42678,
+    "envelopeCorrelation": 0.974592,
+    "directCorrelationAtEnvelopeOffset": -0.259884,
+    "interpretation": "音量包絡は元動画55秒候補内の7.500秒位置に強く寄っており、切り抜き音声の元ネタ区間は11364500msから11407178msとして扱える。生波形の直接相関はBGM、圧縮、編集差分の影響を受けるため、区間確認では音量包絡と映像確認を優先する。"
+  },
+  "visualEvidence": {
+    "status": "confirmed",
+    "checkedBy": "gemini-web-flash",
+    "checkedAt": "2026-07-05T18:37:00+09:00",
+    "resultPath": "evals/clip_composition/outputs/UpRyakf5j80/visual_verification/20260705-gemini-web-flash-audio-confirmed-v001.json",
+    "uploadedVideoPath": "evals/clip_composition/outputs/visual-check/UpRyakf5j80/gemini_pair_audio_confirmed_v001_UpRyakf5j80_vs_kNX-wQTvsws_3h09m24s.mp4"
+  },
+  "promptSelectedCut": {
+    "sourceStartMs": 11364140,
+    "sourceEndMs": 11409170,
+    "durationMs": 45030,
+    "reason": "テーマである『世界2位』の話題提示が明確に始まる発話ID 2の開始時刻を開始位置とし、結論・余韻が収束する発話ID 20の終了時刻までを選択した。"
+  },
+  "audioConfirmedCut": {
+    "sourceStartMs": 11364500,
+    "sourceEndMs": 11407178,
+    "durationMs": 42678,
+    "reason": "切り抜き動画全体の音声が元動画候補55秒区間内のこの範囲へ一致したため。"
+  },
+  "difference": {
+    "startDeltaMs": -360,
+    "endDeltaMs": 1992,
+    "durationDeltaMs": 2352,
+    "promptIncludesAudioConfirmedCut": true,
+    "interpretation": "v009が選んだ区間は音声確認済みの元ネタ区間を含んでいる。ただし終了が音声確認済み区間より1992ms長く、composition側が候補内の終端を後ろへ取りすぎている。"
+  },
+  "sttServerAttempt": {
+    "serverUrl": "http://192.168.1.8:8000",
+    "status": "unreachable_from_codex_environment",
+    "audioSent": false,
+    "observations": [
+      "GET /openapi.json は10秒でタイムアウトした。",
+      "GET / と GET /docs は接続直後に Host is down を返した。"
+    ]
+  },
+  "productionImpact": {
+    "runtimeWritten": false,
+    "productionUiChanged": false,
+    "productionApiChanged": false,
+    "productionQueueChanged": false,
+    "databaseChanged": false
+  }
+}
