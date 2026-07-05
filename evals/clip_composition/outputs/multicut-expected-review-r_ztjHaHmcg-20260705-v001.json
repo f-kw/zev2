@@ -1,0 +1,336 @@
+{
+  "kind": "clip_composition_multicut_expected_review_packet",
+  "runAt": "2026-07-05T13:44:15.863Z",
+  "targetId": "r_ztjHaHmcg",
+  "title": "同接100人いたら食べていけるの？",
+  "sourceId": "-DwSCDMCWDQ",
+  "draftExpectedFixtureId": "r_ztjHaHmcg_multicut_review_v001",
+  "evidenceInputs": {
+    "candidatePath": "evals/clip_composition/outputs/multicut-expected-candidate-r_ztjHaHmcg-20260705-v001.json",
+    "visualSummaryPath": "evals/clip_composition/outputs/r_ztjHaHmcg/visual_verification/20260705-gemini-web-flash-multicut-summary-v001.json",
+    "audioCompareResultPath": "evals/clip_composition/outputs/audio-compare-chunks-r_ztjHaHmcg_youtube_auto_v001.json"
+  },
+  "freezeReadiness": {
+    "canFreezeAsSingleCut": false,
+    "canFreezeAsMulticutAfterHumanReview": true,
+    "expectedCutsFrozenNow": false,
+    "reason": "元動画側に空白があるため単一区間では固定しない。Gemini確認は揃ったので、人間の目視確認後に複数区間expectedとして固定できる。"
+  },
+  "expectedCutsDraft": [
+    {
+      "cutIndex": 0,
+      "clipStartMs": 2555,
+      "clipEndMs": 32555,
+      "sourceStartMs": 2179930,
+      "sourceEndMs": 2209930,
+      "relationToPrevious": "first",
+      "reason": "切り抜き側チャンク1が、音声/STT照合とGemini左右比較で元動画側候補区間に対応したため。",
+      "evidence": {
+        "textCoverage": {
+          "clip": 0.764367816091954,
+          "source": 0.764367816091954,
+          "matchedChars": 133,
+          "queryChars": 174,
+          "sourceChars": 174
+        },
+        "audioEvidence": {
+          "envelopeCorrelation": 0.298622,
+          "directCorrelationAtEnvelopeOffset": 0.057318,
+          "bestOffsetMs": 5780
+        },
+        "visualVerification": {
+          "status": "confirmed_by_gemini",
+          "model": "Gemini Web Flash",
+          "verificationPath": "evals/clip_composition/outputs/r_ztjHaHmcg/visual_verification/20260705-gemini-web-flash-multicut-chunk01-v001.json",
+          "reportPath": "evals/clip_composition/reports/gemini-visual-check-r_ztjHaHmcg-multicut-chunk01-v001.md",
+          "uploadedVideoPath": "evals/clip_composition/outputs/visual-check/r_ztjHaHmcg/multicut_r_ztjHaHmcg_20260705-v001_chunk01.mp4",
+          "notes": []
+        }
+      },
+      "reviewState": "needs_human_visual_confirmation"
+    },
+    {
+      "cutIndex": 1,
+      "clipStartMs": 32555,
+      "clipEndMs": 62555,
+      "sourceStartMs": 2309360,
+      "sourceEndMs": 2339360,
+      "sourceGapFromPreviousMs": 99430,
+      "relationToPrevious": "gap",
+      "reason": "切り抜き側チャンク2が、音声/STT照合とGemini左右比較で元動画側候補区間に対応したため。",
+      "evidence": {
+        "textCoverage": {
+          "clip": 0.5642857142857143,
+          "source": 0.5642857142857143,
+          "matchedChars": 79,
+          "queryChars": 140,
+          "sourceChars": 140
+        },
+        "audioEvidence": {
+          "envelopeCorrelation": 0.612458,
+          "directCorrelationAtEnvelopeOffset": -0.019381,
+          "bestOffsetMs": 44380
+        },
+        "visualVerification": {
+          "status": "confirmed_by_gemini_with_response_index_mismatch",
+          "model": "Gemini Web Flash",
+          "verificationPath": "evals/clip_composition/outputs/r_ztjHaHmcg/visual_verification/20260705-gemini-web-flash-multicut-chunk02-v001.json",
+          "reportPath": "evals/clip_composition/reports/gemini-visual-check-r_ztjHaHmcg-multicut-chunk02-v001.md",
+          "uploadedVideoPath": "evals/clip_composition/outputs/visual-check/r_ztjHaHmcg/multicut_r_ztjHaHmcg_20260705-v001_chunk02.mp4",
+          "notes": [
+            "Gemini response returned chunkIndex 2 while the prompt requested chunkIndex 1. The returned clip/source time range matches chunk02, so this is treated as a response-index issue, not a range mismatch."
+          ]
+        }
+      },
+      "reviewState": "needs_human_visual_confirmation"
+    },
+    {
+      "cutIndex": 2,
+      "clipStartMs": 62555,
+      "clipEndMs": 92555,
+      "sourceStartMs": 2361159,
+      "sourceEndMs": 2391159,
+      "sourceGapFromPreviousMs": 21799,
+      "relationToPrevious": "gap",
+      "reason": "切り抜き側チャンク3が、音声/STT照合とGemini左右比較で元動画側候補区間に対応したため。",
+      "evidence": {
+        "textCoverage": {
+          "clip": 0.7526315789473684,
+          "source": 0.7526315789473684,
+          "matchedChars": 143,
+          "queryChars": 190,
+          "sourceChars": 190
+        },
+        "audioEvidence": {
+          "envelopeCorrelation": 0.526415,
+          "directCorrelationAtEnvelopeOffset": -0.019121,
+          "bestOffsetMs": 20110
+        },
+        "visualVerification": {
+          "status": "confirmed_by_gemini",
+          "model": "Gemini Web Flash",
+          "verificationPath": "evals/clip_composition/outputs/r_ztjHaHmcg/visual_verification/20260705-gemini-web-flash-multicut-chunk03-v001.json",
+          "reportPath": "evals/clip_composition/reports/gemini-visual-check-r_ztjHaHmcg-multicut-chunk03-v001.md",
+          "uploadedVideoPath": "evals/clip_composition/outputs/visual-check/r_ztjHaHmcg/multicut_r_ztjHaHmcg_20260705-v001_chunk03.mp4",
+          "notes": []
+        }
+      },
+      "reviewState": "needs_human_visual_confirmation"
+    },
+    {
+      "cutIndex": 3,
+      "clipStartMs": 92555,
+      "clipEndMs": 121147,
+      "sourceStartMs": 2404730,
+      "sourceEndMs": 2433322,
+      "sourceGapFromPreviousMs": 13571,
+      "relationToPrevious": "gap",
+      "reason": "切り抜き側チャンク4が、音声/STT照合とGemini左右比較で元動画側候補区間に対応したため。",
+      "evidence": {
+        "textCoverage": {
+          "clip": 0.8156424581005587,
+          "source": 0.8156424581005587,
+          "matchedChars": 146,
+          "queryChars": 179,
+          "sourceChars": 179
+        },
+        "audioEvidence": {
+          "envelopeCorrelation": 0.593818,
+          "directCorrelationAtEnvelopeOffset": 0.20869,
+          "bestOffsetMs": 1880
+        },
+        "visualVerification": {
+          "status": "confirmed_by_gemini",
+          "model": "Gemini Web Flash",
+          "verificationPath": "evals/clip_composition/outputs/r_ztjHaHmcg/visual_verification/20260705-gemini-web-flash-multicut-chunk04-v001.json",
+          "reportPath": "evals/clip_composition/reports/gemini-visual-check-r_ztjHaHmcg-multicut-chunk04-v001.md",
+          "uploadedVideoPath": "evals/clip_composition/outputs/visual-check/r_ztjHaHmcg/multicut_r_ztjHaHmcg_20260705-v001_chunk04.mp4",
+          "notes": []
+        }
+      },
+      "reviewState": "needs_human_visual_confirmation"
+    }
+  ],
+  "expectedFileDraft": {
+    "draftId": "r_ztjHaHmcg_multicut_review_v001",
+    "fixtureId": "r_ztjHaHmcg_multicut_review_v001",
+    "expectedCuts": [
+      {
+        "sourceStartMs": 2179930,
+        "sourceEndMs": 2209930,
+        "reason": "切り抜き側チャンク1が、音声/STT照合とGemini左右比較で元動画側候補区間に対応したため。",
+        "sourceVideoId": "-DwSCDMCWDQ",
+        "sourceUrl": "https://www.youtube.com/watch?v=-DwSCDMCWDQ",
+        "clipId": "r_ztjHaHmcg",
+        "clipUrl": "https://www.youtube.com/watch?v=r_ztjHaHmcg",
+        "verificationStatus": "audio_stt_gemini_confirmed_human_visual_pending",
+        "usableForClipLocationEval": true,
+        "usableForCompositionPromptEval": false,
+        "multicutPartIndex": 0,
+        "clipStartMs": 2555,
+        "clipEndMs": 32555,
+        "evidence": {
+          "textCoverage": {
+            "clip": 0.764367816091954,
+            "source": 0.764367816091954,
+            "matchedChars": 133,
+            "queryChars": 174,
+            "sourceChars": 174
+          },
+          "audioEvidence": {
+            "envelopeCorrelation": 0.298622,
+            "directCorrelationAtEnvelopeOffset": 0.057318,
+            "bestOffsetMs": 5780
+          },
+          "visualVerification": {
+            "status": "confirmed_by_gemini",
+            "model": "Gemini Web Flash",
+            "verificationPath": "evals/clip_composition/outputs/r_ztjHaHmcg/visual_verification/20260705-gemini-web-flash-multicut-chunk01-v001.json",
+            "reportPath": "evals/clip_composition/reports/gemini-visual-check-r_ztjHaHmcg-multicut-chunk01-v001.md",
+            "uploadedVideoPath": "evals/clip_composition/outputs/visual-check/r_ztjHaHmcg/multicut_r_ztjHaHmcg_20260705-v001_chunk01.mp4",
+            "notes": []
+          }
+        }
+      },
+      {
+        "sourceStartMs": 2309360,
+        "sourceEndMs": 2339360,
+        "reason": "切り抜き側チャンク2が、音声/STT照合とGemini左右比較で元動画側候補区間に対応したため。",
+        "sourceVideoId": "-DwSCDMCWDQ",
+        "sourceUrl": "https://www.youtube.com/watch?v=-DwSCDMCWDQ",
+        "clipId": "r_ztjHaHmcg",
+        "clipUrl": "https://www.youtube.com/watch?v=r_ztjHaHmcg",
+        "verificationStatus": "audio_stt_gemini_confirmed_human_visual_pending",
+        "usableForClipLocationEval": true,
+        "usableForCompositionPromptEval": false,
+        "multicutPartIndex": 1,
+        "clipStartMs": 32555,
+        "clipEndMs": 62555,
+        "evidence": {
+          "textCoverage": {
+            "clip": 0.5642857142857143,
+            "source": 0.5642857142857143,
+            "matchedChars": 79,
+            "queryChars": 140,
+            "sourceChars": 140
+          },
+          "audioEvidence": {
+            "envelopeCorrelation": 0.612458,
+            "directCorrelationAtEnvelopeOffset": -0.019381,
+            "bestOffsetMs": 44380
+          },
+          "visualVerification": {
+            "status": "confirmed_by_gemini_with_response_index_mismatch",
+            "model": "Gemini Web Flash",
+            "verificationPath": "evals/clip_composition/outputs/r_ztjHaHmcg/visual_verification/20260705-gemini-web-flash-multicut-chunk02-v001.json",
+            "reportPath": "evals/clip_composition/reports/gemini-visual-check-r_ztjHaHmcg-multicut-chunk02-v001.md",
+            "uploadedVideoPath": "evals/clip_composition/outputs/visual-check/r_ztjHaHmcg/multicut_r_ztjHaHmcg_20260705-v001_chunk02.mp4",
+            "notes": [
+              "Gemini response returned chunkIndex 2 while the prompt requested chunkIndex 1. The returned clip/source time range matches chunk02, so this is treated as a response-index issue, not a range mismatch."
+            ]
+          }
+        }
+      },
+      {
+        "sourceStartMs": 2361159,
+        "sourceEndMs": 2391159,
+        "reason": "切り抜き側チャンク3が、音声/STT照合とGemini左右比較で元動画側候補区間に対応したため。",
+        "sourceVideoId": "-DwSCDMCWDQ",
+        "sourceUrl": "https://www.youtube.com/watch?v=-DwSCDMCWDQ",
+        "clipId": "r_ztjHaHmcg",
+        "clipUrl": "https://www.youtube.com/watch?v=r_ztjHaHmcg",
+        "verificationStatus": "audio_stt_gemini_confirmed_human_visual_pending",
+        "usableForClipLocationEval": true,
+        "usableForCompositionPromptEval": false,
+        "multicutPartIndex": 2,
+        "clipStartMs": 62555,
+        "clipEndMs": 92555,
+        "evidence": {
+          "textCoverage": {
+            "clip": 0.7526315789473684,
+            "source": 0.7526315789473684,
+            "matchedChars": 143,
+            "queryChars": 190,
+            "sourceChars": 190
+          },
+          "audioEvidence": {
+            "envelopeCorrelation": 0.526415,
+            "directCorrelationAtEnvelopeOffset": -0.019121,
+            "bestOffsetMs": 20110
+          },
+          "visualVerification": {
+            "status": "confirmed_by_gemini",
+            "model": "Gemini Web Flash",
+            "verificationPath": "evals/clip_composition/outputs/r_ztjHaHmcg/visual_verification/20260705-gemini-web-flash-multicut-chunk03-v001.json",
+            "reportPath": "evals/clip_composition/reports/gemini-visual-check-r_ztjHaHmcg-multicut-chunk03-v001.md",
+            "uploadedVideoPath": "evals/clip_composition/outputs/visual-check/r_ztjHaHmcg/multicut_r_ztjHaHmcg_20260705-v001_chunk03.mp4",
+            "notes": []
+          }
+        }
+      },
+      {
+        "sourceStartMs": 2404730,
+        "sourceEndMs": 2433322,
+        "reason": "切り抜き側チャンク4が、音声/STT照合とGemini左右比較で元動画側候補区間に対応したため。",
+        "sourceVideoId": "-DwSCDMCWDQ",
+        "sourceUrl": "https://www.youtube.com/watch?v=-DwSCDMCWDQ",
+        "clipId": "r_ztjHaHmcg",
+        "clipUrl": "https://www.youtube.com/watch?v=r_ztjHaHmcg",
+        "verificationStatus": "audio_stt_gemini_confirmed_human_visual_pending",
+        "usableForClipLocationEval": true,
+        "usableForCompositionPromptEval": false,
+        "multicutPartIndex": 3,
+        "clipStartMs": 92555,
+        "clipEndMs": 121147,
+        "evidence": {
+          "textCoverage": {
+            "clip": 0.8156424581005587,
+            "source": 0.8156424581005587,
+            "matchedChars": 146,
+            "queryChars": 179,
+            "sourceChars": 179
+          },
+          "audioEvidence": {
+            "envelopeCorrelation": 0.593818,
+            "directCorrelationAtEnvelopeOffset": 0.20869,
+            "bestOffsetMs": 1880
+          },
+          "visualVerification": {
+            "status": "confirmed_by_gemini",
+            "model": "Gemini Web Flash",
+            "verificationPath": "evals/clip_composition/outputs/r_ztjHaHmcg/visual_verification/20260705-gemini-web-flash-multicut-chunk04-v001.json",
+            "reportPath": "evals/clip_composition/reports/gemini-visual-check-r_ztjHaHmcg-multicut-chunk04-v001.md",
+            "uploadedVideoPath": "evals/clip_composition/outputs/visual-check/r_ztjHaHmcg/multicut_r_ztjHaHmcg_20260705-v001_chunk04.mp4",
+            "notes": []
+          }
+        }
+      }
+    ]
+  },
+  "humanReviewChecklist": [
+    "4本の左右比較動画を開き、左の切り抜き側と右の元動画側が同じ元場面か確認する。",
+    "チャンク2はGemini応答の番号だけずれているため、時刻範囲と映像内容を重点確認する。",
+    "4区間の元動画側に空白があるため、単一区間expectedとして固定しない。",
+    "確認できた場合だけ、expected/ へ複数区間expectedとしてコピーする。",
+    "固定テーマは、この4区間の内容から人間が1行で逆算して書く。"
+  ],
+  "fixedThemeReview": {
+    "status": "needs_human_reverse_written_theme",
+    "instruction": "確認済みの複数区間を見て、「この切り抜き師は何をテーマとして切ったか」を人間が1行で逆算して書く。",
+    "evidenceTextForHuman": [
+      "チャンク1: 動説100人いれば食べていけるって本当なんだろうかあー100人か100人いたらもういけるんじゃないか動説動説100人でしょ動説100人って結構だもんしかも動説100人結構だねだって僕がPUBGでちょうど伸び始めた時期が100人ぐらいだったはずだけど常に100人来るなら全然多分普通のサラリーマンぐらいの月収あるんじゃないかちょい下回るかなぐらいか多分今",
+      "チャンク2: 今だし昔のアナリティクス見てみるか20202018年5月組でしょ僕2018年じゃあそれこそ7月とかでいいか7月2日2018年の7月あー残ってるわはいはいはいはいはい同説100人だとまあでも多分生活できると思うってことはどうせ3200にはさらにも32人分そんな単純計算かなーって思うけど",
+      "チャンク3: どまあながち間違ってないこともないかもしれん多分でもそうか単純計算ではあるかそうなんだ単純計算なんだよなそれがすごいよなぁ同節数とチャンネル登録者数どっちがお金なんだろうかチャンネル登録者数は別に何のお金にもなんないよチャンネル売るぐらいしかできなくないわからんけど同説がまあなんだろう結局リアルタイムの数字だからそうあの単純計算だからさマジでだってそうじゃんあのー広告収入が例えば",
+      "チャンク4: ば100人に見られてる人は広告収入がじゃあ1円ですと1000人に見られてるなら広告収入が0.5円になりますとかだったらさじゃないじゃんじゃないのよまあなんか日本のサイトとかはそういうことするところありそうだけどYouTubeはそういう仕様じゃないから再生数が100の動画も再生数が多分1000万の動画もそれで再生数で国収益の単価は変わんないからそれがすごいよね"
+    ],
+    "suggestedThemeDraftForReview": null
+  },
+  "productionImpact": {
+    "writesRuntime": false,
+    "touchesProductionUi": false,
+    "touchesProductionApi": false,
+    "touchesProductionQueue": false,
+    "touchesDatabase": false,
+    "writesExpectedDirectory": false
+  }
+}

@@ -124,7 +124,25 @@ pnpm --filter @zev2/agent-runner exec tsx ../evals/clip_composition/compare_audi
 - 音声粗スキャン: `reports/audio-scan-r_ztjHaHmcg_v001.md`
 - 粗スキャン最上位: 元動画 `-DwSCDMCWDQ` の `11:37.000 - 13:35.500`
 - 確認動画: `outputs/visual-check/r_ztjHaHmcg/gemini_pair_audio_scan_v001_r_ztjHaHmcg_vs_-DwSCDMCWDQ_11m34s.mp4`
-- 現在の停止理由: ローカルSTTサーバー `http://192.168.1.8:8000` がタイムアウトしているため、元動画側STTは未完了です。
+- チャンク照合: `outputs/alignment-r_ztjHaHmcg_youtube_auto_v001.json`
+- チャンク音声比較: `outputs/audio-compare-chunks-r_ztjHaHmcg_youtube_auto_v001.json`
+- 複数区間候補: `outputs/multicut-expected-candidate-r_ztjHaHmcg-20260705-v001.json`
+- 左右比較動画一覧: `outputs/multicut-visual-checks-r_ztjHaHmcg-20260705-v001.json`
+- Web版Gemini確認サマリー: `reports/gemini-visual-check-r_ztjHaHmcg-multicut-summary-v001.md`
+- 人間確認パケット: `reports/multicut-expected-review-r_ztjHaHmcg-20260705-v001.md`
+
+この候補は、元動画側に `99.430秒`、`21.799秒`、`13.571秒` の空白があるため、単一の連続区間としては固定しません。4つのチャンクはWeb版Geminiの左右比較で同じ元場面として確認済みですが、初回正解データのため、`expected/` に固定する前に人間の目視確認を1回挟みます。
+
+複数区間候補とGemini確認結果から、人間確認用のexpected草案を作る場合:
+
+```bash
+runner/node_modules/.bin/tsx evals/clip_composition/prepare_multicut_expected_review.ts \
+  --candidate evals/clip_composition/outputs/multicut-expected-candidate-r_ztjHaHmcg-20260705-v001.json \
+  --visualSummary evals/clip_composition/outputs/r_ztjHaHmcg/visual_verification/20260705-gemini-web-flash-multicut-summary-v001.json \
+  --outputId 20260705-v001
+```
+
+この処理は `outputs/` と `reports/` にだけ書き込み、`expected/` には書き込みません。人間確認が終わるまで、生成物は正解データではなく確認待ち草案として扱います。
 
 音声比較済み区間からfixture候補を凍結する:
 
