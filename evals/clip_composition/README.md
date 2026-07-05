@@ -282,6 +282,8 @@ compositionプロンプトv003からv006で、笑い声と余韻の扱いを分�
   - Gemini出力JSON: `outputs/IMQYaT_RWRA_context_v001/clip_composition_prompt_v006/20260705-153350/gemini-web-flash-output.json`
   - 採点結果JSON: `outputs/IMQYaT_RWRA_context_v001/clip_composition_prompt_v006/20260705-153541/result.json`
   - 採点サマリー: `reports/IMQYaT_RWRA_context_v001/clip_composition_prompt_v006/20260705-153541/summary.md`
+  - 再確認採点結果JSON: `outputs/IMQYaT_RWRA_context_v001/clip_composition_prompt_v006/20260705-174546/result.json`
+  - 再確認採点サマリー: `reports/IMQYaT_RWRA_context_v001/clip_composition_prompt_v006/20260705-174546/summary.md`
   - 結果: Geminiは `1997050ms - 2015672ms` を選びました。開始・終了ともに0ms差で一致しました。
   - 読み取り: テーマを内容記述に戻し、プロンプト側で終端を反応の収束まで含める規則を明示したことで、実在切り抜き全体に一致しました。
 

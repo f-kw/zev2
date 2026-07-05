@@ -1,0 +1,126 @@
+{
+  "runAt": "2026-07-05T17:45:46+09:00",
+  "draftId": "IMQYaT_RWRA_context_v001",
+  "fixtureId": "IMQYaT_RWRA_context_v001",
+  "promptVersion": "clip_composition_prompt_v006",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "unknown",
+    "source": "web-gemini",
+    "manualPrompt": "reports/IMQYaT_RWRA_context_v001/clip_composition_prompt_v006/20260705-153350/prompt.md",
+    "geminiChatUrl": "https://gemini.google.com/app/43801fd59c27dfba",
+    "rerunReason": "verify current fixture after permission"
+  },
+  "evaluationMode": "external_prompt_output",
+  "inputFile": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/IMQYaT_RWRA_context_v001/clip_composition_prompt_v006/20260705-153350/gemini-web-flash-output.json",
+  "selectedCuts": [
+    {
+      "sourceStartMs": 1997050,
+      "sourceEndMs": 2015672,
+      "reason": "「いるいる、最悪がやってきたって感じで女騎士だー」というフリと状況説明の発話（speechId 1-22）から開始し、少しの間を空けて「めっちゃ投げてる」（speechId 23-30）というテーマの中心となる描写につなげ、その後に続く笑い声の余韻（speechId 31-32）が収束するまでを一つの連続した切り抜き区間として選択しました。",
+      "usedSpeechIds": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32
+      ]
+    }
+  ],
+  "expectedCuts": [
+    {
+      "sourceStartMs": 1997050,
+      "sourceEndMs": 2015672,
+      "reason": "実在の切り抜き動画全体18.622秒を、切り抜き内の発話開始位置と元配信候補のSTT一致範囲を音声アンカーとして元配信側へ対応させ、Web版Geminiで元ネタ区間として確認したため。",
+      "sourceVideoId": "8uuQldLptRE",
+      "sourceUrl": "https://www.youtube.com/watch?v=8uuQldLptRE",
+      "sourceSttId": "IMQYaT_RWRA_8uuQldLptRE",
+      "clipId": "IMQYaT_RWRA",
+      "clipUrl": "https://www.youtube.com/watch?v=IMQYaT_RWRA",
+      "transcriptText": "いるいる最悪がやってきたって感じで女騎士だーめっちゃ投げてる笑笑",
+      "verificationStatus": "audio_anchor_confirmed_visual_confirmed",
+      "usableForClipLocationEval": true,
+      "usableForCompositionPromptEval": true,
+      "audioVerification": {
+        "status": "speech_anchor_confirmed",
+        "method": "切り抜き発話部分と元配信候補区間の音量包絡を比較し、発話一致を証拠として切り抜き動画全体の対応区間を元配信側へ置いた。",
+        "reportPath": "evals/clip_composition/reports/audio-compare-IMQYaT_RWRA_v001.md",
+        "resultPath": "evals/clip_composition/outputs/audio-compare-IMQYaT_RWRA_v001.json",
+        "clipDurationMs": 18622,
+        "clipSpeechStartMs": 1313,
+        "clipSpeechEndMs": 5338,
+        "sourceSpeechAnchorStartMs": 1998363,
+        "sourceSpeechAnchorEndMs": 2006530,
+        "speechEnvelopeCorrelation": 0.883568,
+        "bestOffsetMs": 3750,
+        "comparedClipSpeechStartMs": 1313,
+        "comparedClipSpeechEndMs": 5338,
+        "comparedSourceCandidateStartMs": 1998363,
+        "comparedSourceCandidateEndMs": 2006530,
+        "fullTimelineCandidateStartMs": 1997050,
+        "fullTimelineCandidateEndMs": 2015672,
+        "bestAlignedSourceSpeechStartMs": 2002113,
+        "bestAlignedSourceSpeechEndMs": 2006138,
+        "note": "発話一致区間は元ネタ照合の証拠として保持し、期待区間そのものは実在の切り抜き動画全体に対応する範囲とする。"
+      },
+      "sttAlignment": {
+        "reportPath": "evals/clip_composition/reports/alignment-IMQYaT_RWRA_v001.md",
+        "resultPath": "evals/clip_composition/outputs/alignment-IMQYaT_RWRA_v001.json",
+        "clipCoverage": 0.5454545454545454,
+        "sourceCoverage": 0.5454545454545454,
+        "note": "STT文字列では再編集候補が最上位だが、元配信候補にも対応語が出ており、音声比較で元配信候補を優先した。"
+      },
+      "visualVerification": {
+        "status": "confirmed",
+        "checkedBy": "gemini-web-flash",
+        "checkedAt": "2026-07-05T13:13:57+09:00",
+        "note": "Web版Gemini Flashで前半Aの切り抜き動画全体と後半Bの元配信候補33:17.050-33:35.672を比較し、発話、笑い声、場面、編集差分を確認したうえで元ネタ区間として妥当と判定。",
+        "reportPath": "evals/clip_composition/outputs/IMQYaT_RWRA_clip_audio_v001/visual_verification/20260705-131357-gemini-web-flash.json"
+      }
+    }
+  ],
+  "diff": {
+    "startDeltaMs": 0,
+    "endDeltaMs": 0,
+    "overlapSummary": "期待区間と完全に一致しています"
+  },
+  "themeCoverage": {
+    "selectedThemeId": "theme_audio_context_1",
+    "candidateStartMs": 1997050,
+    "candidateEndMs": 2015672,
+    "coverageSummary": "期待区間は選択済みテーマの候補範囲に入り、LLMが選んだ区間も一致しています",
+    "themeSidePossibility": "theme側で正解区間が候補に入っていない可能性は低い",
+    "compositionSidePossibility": "composition側の候補選択差分はありません"
+  },
+  "sourceFiles": {
+    "fixture": "fixtures/IMQYaT_RWRA_context_v001",
+    "expected": "expected/IMQYaT_RWRA_context_v001.json"
+  }
+}
