@@ -155,3 +155,15 @@ v008は `IMQYaT_RWRA_context_v001` では期待区間と完全一致した。`Up
 `IMQYaT_RWRA_context_v001` は期待開始・終了が現在の文字起こし発話境界と一致しているため、現入力だけでcomposition比較を続けられる。`UpRyakf5j80_clip_audio_v001` は開始・終了の両方が発話途中にあるため、現入力だけではexpected境界を表現できない。
 
 v009でpromptだけを調整しても、音声上の切り抜き終端を正しく選ぶ根拠が入力にない。次に足すべきなのはローカルSTTの単語時刻、またはexpectedから独立に生成した音声境界候補。`expectedCuts` の開始・終了時刻、音声比較で確定した `bestAlignedSourceStartMs` / `bestAlignedSourceEndMs`、Web版Geminiの確認結果は採点用の正解または品質保証情報なので、composition入力へ入れない。
+
+## v009入力候補payload
+
+- 生成スクリプト: `evals/clip_composition/build_boundary_signal_payload.ts`
+- 結果JSON: `evals/clip_composition/outputs/boundary-signal-payload-UpRyakf5j80-v009-candidate-v001.json`
+- レポート: `evals/clip_composition/reports/boundary-signal-payload-UpRyakf5j80-v009-candidate-v001.md`
+- 対象fixture: `UpRyakf5j80_clip_audio_v001`
+- 境界候補単位: 23件
+- 遷移: 22件
+- expected時刻の漏えい: 0件
+
+このpayloadは、fixtureのコピー元であるYouTube自動字幕時刻から、固定テーマの候補発話範囲と重なる単位だけを抜き出したもの。終端側では発話20「うん」が `11405460ms - 11409170ms`、次の字幕「えーっと」が `11407260ms` から始まる重なり遷移として出ている。これはexpected終端 `11407178ms` そのものではないが、発話20の終端まで伸ばしすぎる問題をv009で判断するための独立した境界候補になる。

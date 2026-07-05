@@ -328,6 +328,16 @@ node evals/clip_composition/inspect_boundary_signal_policy.ts \
 
 このコマンドもSTTもLLMも実行しません。現在の文字起こし発話境界だけでexpectedを表現できるfixtureと、単語時刻または独立した音声境界候補が必要なfixtureを分けます。`expectedCuts` の時刻、音声比較で確定した区間、Web版Gemini確認結果は、評価用の正解または品質保証情報なのでcomposition入力へ入れてはいけないものとして報告します。
 
+既存字幕から、v009入力候補として使う境界候補payloadを作る場合:
+
+```bash
+node evals/clip_composition/build_boundary_signal_payload.ts \
+  --fixture UpRyakf5j80_clip_audio_v001 \
+  --outputId UpRyakf5j80-v009-candidate-v001
+```
+
+このコマンドもSTTもLLMも実行しません。fixtureのコピー元になっている字幕時刻から、固定テーマの候補発話範囲と重なる単位と、その隣接遷移を抽出します。payload本体には `expectedCuts` の開始・終了時刻、音声比較で確定した正解時刻、Web版Gemini確認結果を入れず、`evaluationOnly` で漏えい確認だけを行います。
+
 生成済み採点結果:
 
 - `outputs/IMQYaT_RWRA_context_v001/clip_composition_prompt_v001/20260705-125215/result.json`
