@@ -1,0 +1,115 @@
+{
+  "runAt": "2026-07-05T12:58:36+09:00",
+  "draftId": "IMQYaT_RWRA_context_v001",
+  "fixtureId": "IMQYaT_RWRA_context_v001",
+  "promptVersion": "clip_composition_prompt_v001",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "unknown",
+    "source": "web-gemini",
+    "manualPrompt": "reports/IMQYaT_RWRA_context_v001/clip_composition_prompt_v001/20260705-124629/prompt.md"
+  },
+  "evaluationMode": "external_prompt_output",
+  "inputFile": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/IMQYaT_RWRA_context_v001/clip_composition_prompt_v001/20260705-125714/gemini-web-flash-output.json",
+  "selectedCuts": [
+    {
+      "sourceStartMs": 1997050,
+      "sourceEndMs": 2015672,
+      "reason": "固定テーマ「笑い声がトルコ行進曲に聞こえる女騎士いじり」に合致するよう、女騎士という反応の始まりから、物を投げているという言及、そしてその後の特徴的な笑い声の終わりまでの一連の流れを含めるため、全ての発話ID（1〜32）を網羅した最小の連続区間を選択しました。",
+      "usedSpeechIds": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32
+      ]
+    }
+  ],
+  "expectedCuts": [
+    {
+      "sourceStartMs": 1998363,
+      "sourceEndMs": 2006530,
+      "reason": "音声比較で切り抜き発話と元配信候補の発話部分が強く一致し、候補窓の中で単独で意味が通る中心区間のため。",
+      "sourceVideoId": "8uuQldLptRE",
+      "sourceUrl": "https://www.youtube.com/watch?v=8uuQldLptRE",
+      "sourceSttId": "IMQYaT_RWRA_8uuQldLptRE",
+      "clipId": "IMQYaT_RWRA",
+      "clipUrl": "https://www.youtube.com/watch?v=IMQYaT_RWRA",
+      "transcriptText": "やってきたって感じで女騎士だーめっちゃ投げてる",
+      "verificationStatus": "audio_confirmed_visual_pending",
+      "usableForCompositionPromptEval": true,
+      "audioVerification": {
+        "status": "confirmed",
+        "method": "切り抜き全体の対応区間を候補窓にし、切り抜き発話部分と元配信候補区間の音量包絡を比較",
+        "reportPath": "evals/clip_composition/reports/audio-compare-IMQYaT_RWRA_v001.md",
+        "resultPath": "evals/clip_composition/outputs/audio-compare-IMQYaT_RWRA_v001.json",
+        "speechEnvelopeCorrelation": 0.883568,
+        "bestOffsetMs": 3750,
+        "comparedClipSpeechStartMs": 1313,
+        "comparedClipSpeechEndMs": 5338,
+        "comparedSourceCandidateStartMs": 1998363,
+        "comparedSourceCandidateEndMs": 2006530,
+        "fullTimelineCandidateStartMs": 1997050,
+        "fullTimelineCandidateEndMs": 2015672,
+        "bestAlignedSourceSpeechStartMs": 2002113,
+        "bestAlignedSourceSpeechEndMs": 2006138,
+        "note": "候補窓は切り抜き全体比較、期待区間は発話部分比較から作った。"
+      },
+      "sttAlignment": {
+        "reportPath": "evals/clip_composition/reports/alignment-IMQYaT_RWRA_v001.md",
+        "resultPath": "evals/clip_composition/outputs/alignment-IMQYaT_RWRA_v001.json",
+        "clipCoverage": 0.5454545454545454,
+        "sourceCoverage": 0.5454545454545454,
+        "note": "STT文字列では再編集候補が最上位だが、元配信候補にも対応語が出ており、音声比較で元配信候補を優先した。"
+      },
+      "visualVerification": {
+        "status": "pending",
+        "note": "音声比較でcompositionプロンプト評価には使える状態。最終データセットQAとしての目視確認は未実施。"
+      }
+    }
+  ],
+  "diff": {
+    "startDeltaMs": -1313,
+    "endDeltaMs": 9142,
+    "overlapSummary": "LLMが選んだ区間が期待区間を含んでいます"
+  },
+  "themeCoverage": {
+    "selectedThemeId": "theme_audio_context_1",
+    "candidateStartMs": 1997050,
+    "candidateEndMs": 2015672,
+    "coverageSummary": "期待区間は選択済みテーマの候補範囲に入っています",
+    "themeSidePossibility": "theme側で正解区間が候補に入っていない可能性は低い",
+    "compositionSidePossibility": "composition側で候補範囲から最終区間を選ぶ処理に差分がある可能性があります"
+  },
+  "sourceFiles": {
+    "fixture": "fixtures/IMQYaT_RWRA_context_v001",
+    "expected": "expected/IMQYaT_RWRA_context_v001.json"
+  }
+}

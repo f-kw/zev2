@@ -190,6 +190,14 @@ pnpm --filter @zev2/agent-runner exec tsx ../evals/clip_composition/score_prompt
 
 この採点はLLM APIを呼ばず、保存済みJSONだけを読みます。モデル名とパラメータは結果に記録します。
 
+Web版Geminiで同じプロンプトを実行し、返ってきた `selectedCuts` JSONを採点した結果:
+
+- Gemini出力JSON: `outputs/IMQYaT_RWRA_context_v001/clip_composition_prompt_v001/20260705-125714/gemini-web-flash-output.json`
+- 採点結果JSON: `outputs/IMQYaT_RWRA_context_v001/clip_composition_prompt_v001/20260705-125836/result.json`
+- 採点サマリー: `reports/IMQYaT_RWRA_context_v001/clip_composition_prompt_v001/20260705-125836/summary.md`
+- 結果: Geminiは候補窓全体を選び、音声確認済み期待区間に対して開始位置が `-1313ms`、終了位置が `+9142ms` ずれました。
+- 暫定判定: 期待区間は固定テーマの候補範囲に入っているため、theme側よりcomposition側の最終区間絞り込みの問題として扱います。
+
 ## 実行方法
 
 指定されていた実行形:
