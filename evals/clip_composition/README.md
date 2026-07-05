@@ -156,6 +156,16 @@ runner/node_modules/.bin/tsx evals/clip_composition/freeze_multicut_review_fixtu
 
 このpreviewは `fixtures/` と `expected/` に書き込みません。人間確認と固定テーマが不足している場合は、何が足りないかを `reports/multicut-fixture-freeze-preview-*.md` に出します。
 
+凍結previewが実際にfixtureとして成立する構造か検査する場合:
+
+```bash
+runner/node_modules/.bin/tsx evals/clip_composition/inspect_multicut_freeze_preview.ts \
+  --preview evals/clip_composition/outputs/multicut-fixture-freeze-preview-r_ztjHaHmcg_multicut_review_v001-20260705-v001.json \
+  --outputId 20260705-v001
+```
+
+この検査では、書き込み予定先が評価環境内に閉じているか、文字起こしの発話IDが実在するか、各発話が対応するexpected区間内に収まっているか、expected草案と発話まとまりの件数が合うかを確認します。固定テーマが未入力の場合は警告として扱い、expectedは未固定のままにします。
+
 人間が4本の左右比較動画を確認し、固定テーマを1行で逆算してからfixtureへ固定する場合:
 
 ```bash

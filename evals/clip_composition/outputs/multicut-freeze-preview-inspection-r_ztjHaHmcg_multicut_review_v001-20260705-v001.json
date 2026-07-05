@@ -1,0 +1,125 @@
+{
+  "kind": "clip_composition_multicut_freeze_preview_inspection",
+  "runAt": "2026-07-05T13:58:35.048Z",
+  "previewPath": "evals/clip_composition/outputs/multicut-fixture-freeze-preview-r_ztjHaHmcg_multicut_review_v001-20260705-v001.json",
+  "fixtureId": "r_ztjHaHmcg_multicut_review_v001",
+  "structureValid": true,
+  "fixtureWriteReady": false,
+  "expectedNotFrozenYet": true,
+  "checks": [
+    {
+      "name": "preview種別",
+      "status": "pass",
+      "meaning": "凍結previewとして読めるJSONであることを確認する。",
+      "details": {
+        "kind": "clip_composition_multicut_fixture_freeze_preview"
+      }
+    },
+    {
+      "name": "書き込み先の範囲",
+      "status": "pass",
+      "meaning": "fixture固定時の書き込み先が評価環境内に閉じていることを確認する。",
+      "details": {
+        "fixtureDir": "evals/clip_composition/fixtures/r_ztjHaHmcg_multicut_review_v001",
+        "fixturePath": "evals/clip_composition/fixtures/r_ztjHaHmcg_multicut_review_v001/fixture.json",
+        "transcriptPath": "evals/clip_composition/fixtures/r_ztjHaHmcg_multicut_review_v001/transcript.json",
+        "themesPath": "evals/clip_composition/fixtures/r_ztjHaHmcg_multicut_review_v001/themes.json",
+        "expectedPath": "evals/clip_composition/expected/r_ztjHaHmcg_multicut_review_v001.json"
+      }
+    },
+    {
+      "name": "本体未接続",
+      "status": "pass",
+      "meaning": "preview生成が本番UI、API、キュー、DB、runtimeに触れない前提であることを確認する。"
+    },
+    {
+      "name": "expected未固定",
+      "status": "pass",
+      "meaning": "人間確認前のpreviewではexpectedやfixtureを書き込まないことを確認する。",
+      "details": {
+        "writeFixture": false,
+        "fixtureWriteReady": false,
+        "humanConfirmed": false,
+        "missingHumanInputs": [
+          "--humanConfirmed true",
+          "--themeTitle",
+          "--themeSummary"
+        ]
+      }
+    },
+    {
+      "name": "fixtureメタデータ",
+      "status": "pass",
+      "meaning": "凍結後にrun_evalがfixture、文字起こし、テーマ候補を読めるメタデータであることを確認する。",
+      "details": {
+        "fixtureId": "r_ztjHaHmcg_multicut_review_v001",
+        "transcriptPath": "transcript.json",
+        "themesPath": "themes.json",
+        "selectedThemeId": "theme_multicut_review_1"
+      }
+    },
+    {
+      "name": "文字起こし構造",
+      "status": "pass",
+      "meaning": "複数区間の各期待区間に対応する発話まとまりがあり、発話IDが実在することを確認する。",
+      "details": {
+        "kind": "transcript_json",
+        "segmentCount": 35,
+        "speechUnitGroupCount": 4,
+        "expectedCutCount": 4
+      }
+    },
+    {
+      "name": "発話時刻の範囲",
+      "status": "pass",
+      "meaning": "各発話が対応するexpected区間の中に収まっていることを確認する。",
+      "details": {
+        "issueCount": 0,
+        "issues": []
+      }
+    },
+    {
+      "name": "期待区間構造",
+      "status": "pass",
+      "meaning": "expected草案の区間数、開始終了、composition評価利用状態を確認する。",
+      "details": {
+        "expectedCutCount": 4,
+        "speechUnitGroupCount": 4,
+        "invalidExpectedCutCount": 0,
+        "compositionReadyCutCount": 0
+      }
+    },
+    {
+      "name": "固定テーマ",
+      "status": "warn",
+      "meaning": "人間が正解区間から逆算した固定テーマがまだないため、fixture固定前に入力が必要。",
+      "details": {
+        "themesDraft": null
+      }
+    },
+    {
+      "name": "preview要約",
+      "status": "pass",
+      "meaning": "人間向けpreviewの発話数と表示テキストが、内部の文字起こし草案と一致していることを確認する。",
+      "details": {
+        "summaryRowCount": 4,
+        "mismatchCount": 0
+      }
+    }
+  ],
+  "summary": {
+    "passCount": 9,
+    "warnCount": 1,
+    "failCount": 0,
+    "meaning": "凍結previewの構造は有効。固定テーマと人間確認が揃うまでexpectedへは固定しない。"
+  },
+  "productionImpact": {
+    "writesRuntime": false,
+    "touchesProductionUi": false,
+    "touchesProductionApi": false,
+    "touchesProductionQueue": false,
+    "touchesDatabase": false,
+    "writesExpectedDirectory": false,
+    "writesFixturesDirectory": false
+  }
+}
