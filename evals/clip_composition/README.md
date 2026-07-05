@@ -178,6 +178,17 @@ runner/node_modules/.bin/tsx evals/clip_composition/prepare_multicut_human_decis
 
 テンプレートには、確認すべき4本の左右比較動画、`chunk.status`、`humanConfirmation.allChunksConfirmed`、人間が逆算して書く固定テーマ欄が入ります。未記入のテンプレートを `--decision` に渡しても、fixture固定は失敗します。
 
+人間確認JSONがfixture固定に進める状態かだけを検査する場合:
+
+```bash
+runner/node_modules/.bin/tsx evals/clip_composition/inspect_multicut_human_decision.ts \
+  --review evals/clip_composition/outputs/multicut-expected-review-r_ztjHaHmcg-20260705-v001.json \
+  --decision evals/clip_composition/outputs/multicut-human-decision-template-r_ztjHaHmcg_multicut_review_v001-20260705-v001.json \
+  --outputId 20260705-v001
+```
+
+この検査は、全チャンクが人間確認済みか、確認者と確認日時が入力済みか、正解区間から逆算した固定テーマが入力済みか、確認JSONのチャンク番号と時刻がexpected草案に対応しているかを確認します。`outputs/` と `reports/` にだけ書き込み、`fixtures/`、`expected/`、`runtime/` には書き込みません。
+
 人間が4本の左右比較動画を確認し、固定テーマを1行で逆算してからfixtureへ固定する場合:
 
 ```bash
