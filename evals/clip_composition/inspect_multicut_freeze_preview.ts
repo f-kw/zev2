@@ -146,6 +146,19 @@ function pathStartsWith(child: string | undefined, parent: string): boolean {
   return resolvedChild === resolvedParent || resolvedChild.startsWith(`${resolvedParent}${path.sep}`);
 }
 
+function workspacePathFromPreviewPath(filePath: unknown): string | undefined {
+  const text = stringFrom(filePath);
+  if (!text) {
+    return undefined;
+  }
+  return path.isAbsolute(text) ? text : path.join(workspaceRoot(), text);
+}
+
+function previewPathExists(filePath: unknown): boolean {
+  const resolvedPath = workspacePathFromPreviewPath(filePath);
+  return resolvedPath ? existsSync(resolvedPath) : false;
+}
+
 function segmentIds(segments: unknown[]): Set<number> {
   return new Set(segments.map((segment) => numberFrom(recordFrom(segment).id)).filter((id): id is number => id !== undefined));
 }
@@ -218,6 +231,24 @@ function inspectPreview(previewPath: string, preview: unknown): PreviewInspectio
     status: !writeFixture && !fixtureWriteReady && !humanConfirmed ? 'pass' : (writeFixture ? 'fail' : 'warn'),
     meaning: '人間確認前のpreviewではexpectedやfixtureを書き込まないことを確認する。',
     details: { writeFixture, fixtureWriteReady, humanConfirmed, missingHumanInputs: root.missingHumanInputs }
+  });
+
+  const plannedFileStates = [
+    { label: 'fixture', path: stringFrom(plannedWrites.fixturePath), exists: previewPathExists(plannedWrites.fixturePath) },
+    { label: 'transcript', path: stringFrom(plannedWrites.transcriptPath), exists: previewPathExists(plannedWrites.transcriptPath) },
+    { label: 'themes', path: stringFrom(plannedWrites.themesPath), exists: previewPathExists(plannedWrites.themesPath) },
+    { label: 'expected', path: stringFrom(plannedWrites.expectedPath), exists: previewPathExists(plannedWrites.expectedPath) }
+  ];
+  const createdPlannedFiles = plannedFileStates.filter((item) => item.exists);
+  addCheck(checks, {
+    name: '固定ファイル未作成',
+    status: !fixtureWriteReady && createdPlannedFiles.length > 0 ? 'fail' : (!fixtureWriteReady ? 'pass' : 'warn'),
+    meaning: '凍結不可のpreviewで、予定されたfixture/expectedファイルが実際には作られていないことを確認する。',
+    details: {
+      fixtureWriteReady,
+      plannedFileStates,
+      createdPlannedFileCount: createdPlannedFiles.length
+    }
   });
 
   addCheck(checks, {
@@ -420,7 +451,6 @@ function buildReport(inspection: PreviewInspection, resultPath: string): string 
   lines.push('- 本番UI/API/キュー/DBへの変更なし');
   lines.push('- fixtures/ への書き込みなし');
   lines.push('- expected/ への書き込みなし');
-  lines.push('');
   return `${lines.join('\n')}\n`;
 }
 

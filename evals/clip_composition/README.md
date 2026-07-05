@@ -164,7 +164,7 @@ runner/node_modules/.bin/tsx evals/clip_composition/inspect_multicut_freeze_prev
   --outputId 20260705-v001
 ```
 
-この検査では、書き込み予定先が評価環境内に閉じているか、文字起こしの発話IDが実在するか、各発話が対応するexpected区間内に収まっているか、expected草案と発話まとまりの件数が合うかを確認します。固定テーマが未入力の場合は警告として扱い、expectedは未固定のままにします。
+この検査では、書き込み予定先が評価環境内に閉じているか、凍結不可のpreviewで予定されたfixture/expectedファイルが実際に未作成か、文字起こしの発話IDが実在するか、各発話が対応するexpected区間内に収まっているか、expected草案と発話まとまりの件数が合うかを確認します。固定テーマが未入力の場合は警告として扱い、expectedは未固定のままにします。
 
 人間確認結果をJSONとして残すためのテンプレートを作る場合:
 
