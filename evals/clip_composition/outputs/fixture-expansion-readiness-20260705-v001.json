@@ -1,0 +1,313 @@
+{
+  "kind": "clip_composition_fixture_expansion_readiness",
+  "runAt": "2026-07-05T12:40:33.641Z",
+  "fixtures": [
+    {
+      "fixtureId": "IMQYaT_RWRA_audio_v001",
+      "expectedPath": "evals/clip_composition/expected/IMQYaT_RWRA_audio_v001.json",
+      "transcriptPath": "evals/clip_composition/fixtures/IMQYaT_RWRA_audio_v001/transcript.json",
+      "clipId": "IMQYaT_RWRA",
+      "verificationStatus": "audio_confirmed_visual_pending",
+      "usableForCompositionPromptEval": true,
+      "boundarySupport": [
+        {
+          "boundaryMs": 1998363,
+          "side": "start",
+          "relation": "segment_start",
+          "segment": {
+            "id": 1,
+            "startMs": 1998363,
+            "endMs": 1998503,
+            "text": "や",
+            "speaker": "unknown"
+          }
+        },
+        {
+          "boundaryMs": 2006530,
+          "side": "end",
+          "relation": "segment_end",
+          "segment": {
+            "id": 23,
+            "startMs": 2005850,
+            "endMs": 2006530,
+            "text": "る",
+            "speaker": "unknown"
+          }
+        }
+      ],
+      "boundarySignalPayloads": [],
+      "role": "control_fixture",
+      "nextAction": "期待境界が発話境界と一致しているため、境界遷移promptの回帰確認用として使います。"
+    },
+    {
+      "fixtureId": "IMQYaT_RWRA_clip_audio_v001",
+      "expectedPath": "evals/clip_composition/expected/IMQYaT_RWRA_clip_audio_v001.json",
+      "transcriptPath": "evals/clip_composition/fixtures/IMQYaT_RWRA_clip_audio_v001/transcript.json",
+      "clipId": "IMQYaT_RWRA",
+      "verificationStatus": "audio_anchor_confirmed_visual_confirmed",
+      "usableForCompositionPromptEval": false,
+      "boundarySupport": [
+        {
+          "boundaryMs": 1997050,
+          "side": "start",
+          "relation": "segment_start",
+          "segment": {
+            "id": 1,
+            "startMs": 1997050,
+            "endMs": 1997322,
+            "text": "い",
+            "speaker": "unknown"
+          }
+        },
+        {
+          "boundaryMs": 2015672,
+          "side": "end",
+          "relation": "segment_end",
+          "segment": {
+            "id": 32,
+            "startMs": 2012431,
+            "endMs": 2015672,
+            "text": "笑",
+            "speaker": "unknown"
+          }
+        }
+      ],
+      "boundarySignalPayloads": [],
+      "role": "not_eval_usable",
+      "nextAction": "expected側でcomposition評価に使わない指定があるため、別fixtureを使います。"
+    },
+    {
+      "fixtureId": "IMQYaT_RWRA_context_v001",
+      "expectedPath": "evals/clip_composition/expected/IMQYaT_RWRA_context_v001.json",
+      "transcriptPath": "evals/clip_composition/fixtures/IMQYaT_RWRA_context_v001/transcript.json",
+      "clipId": "IMQYaT_RWRA",
+      "verificationStatus": "audio_anchor_confirmed_visual_confirmed",
+      "usableForCompositionPromptEval": true,
+      "boundarySupport": [
+        {
+          "boundaryMs": 1997050,
+          "side": "start",
+          "relation": "segment_start",
+          "segment": {
+            "id": 1,
+            "startMs": 1997050,
+            "endMs": 1997322,
+            "text": "い",
+            "speaker": "unknown"
+          }
+        },
+        {
+          "boundaryMs": 2015672,
+          "side": "end",
+          "relation": "segment_end",
+          "segment": {
+            "id": 32,
+            "startMs": 2012431,
+            "endMs": 2015672,
+            "text": "笑",
+            "speaker": "unknown"
+          }
+        }
+      ],
+      "boundarySignalPayloads": [],
+      "role": "control_fixture",
+      "nextAction": "期待境界が発話境界と一致しているため、境界遷移promptの回帰確認用として使います。"
+    },
+    {
+      "fixtureId": "UpRyakf5j80_clip_audio_v001",
+      "expectedPath": "evals/clip_composition/expected/UpRyakf5j80_clip_audio_v001.json",
+      "transcriptPath": "evals/clip_composition/fixtures/UpRyakf5j80_clip_audio_v001/transcript.json",
+      "clipId": "UpRyakf5j80",
+      "verificationStatus": "audio_confirmed_visual_confirmed",
+      "usableForCompositionPromptEval": true,
+      "boundarySupport": [
+        {
+          "boundaryMs": 11364500,
+          "side": "start",
+          "relation": "inside_segment",
+          "segment": {
+            "id": 1,
+            "startMs": 11362439,
+            "endMs": 11366760,
+            "text": "香りどうもありがとうございます",
+            "speaker": "youtube-auto-caption"
+          },
+          "offsetFromSegmentStartMs": 2061,
+          "offsetToSegmentEndMs": 2260
+        },
+        {
+          "boundaryMs": 11407178,
+          "side": "end",
+          "relation": "inside_segment",
+          "segment": {
+            "id": 20,
+            "startMs": 11405460,
+            "endMs": 11409170,
+            "text": "うん",
+            "speaker": "youtube-auto-caption"
+          },
+          "offsetFromSegmentStartMs": 1718,
+          "offsetToSegmentEndMs": 1992
+        }
+      ],
+      "boundarySignalPayloads": [
+        {
+          "path": "evals/clip_composition/outputs/boundary-signal-payload-UpRyakf5j80-v009-candidate-v001.json",
+          "unitCount": 23,
+          "transitionCount": 22,
+          "expectedLeakCount": 0
+        }
+      ],
+      "role": "boundary_transition_candidate",
+      "nextAction": "発話途中の期待境界と、expectedを含まない境界候補payloadがあるため、境界遷移promptの検証対象にできます。"
+    },
+    {
+      "fixtureId": "draft_w4Lp9IJC6pQl3FsRfFL9t",
+      "expectedPath": "evals/clip_composition/expected/draft_w4Lp9IJC6pQl3FsRfFL9t.json",
+      "transcriptPath": "evals/clip_composition/fixtures/draft_w4Lp9IJC6pQl3FsRfFL9t/transcript.json",
+      "boundarySupport": [
+        {
+          "boundaryMs": 1714337,
+          "side": "start",
+          "relation": "segment_start",
+          "segment": {
+            "id": 8083,
+            "startMs": 1714337,
+            "endMs": 1714357,
+            "text": "生",
+            "speaker": "SPEAKER_02"
+          }
+        },
+        {
+          "boundaryMs": 1756437,
+          "side": "end",
+          "relation": "segment_end",
+          "segment": {
+            "id": 8335,
+            "startMs": 1756417,
+            "endMs": 1756437,
+            "text": "て",
+            "speaker": "SPEAKER_02"
+          }
+        }
+      ],
+      "boundarySignalPayloads": [],
+      "role": "legacy_or_unverified_fixture",
+      "nextAction": "composition評価に使える指定がないため、回帰確認には使わず、必要ならexpectedの検証状態を更新します。"
+    }
+  ],
+  "targets": [
+    {
+      "targetId": "IMQYaT_RWRA",
+      "title": "『笑い声がトルコ行進曲』の女",
+      "targetPath": "evals/clip_composition/stt-targets/IMQYaT_RWRA.json",
+      "expectedFixtureIds": [
+        "IMQYaT_RWRA_audio_v001",
+        "IMQYaT_RWRA_clip_audio_v001",
+        "IMQYaT_RWRA_context_v001"
+      ],
+      "alignmentResultPath": "evals/clip_composition/outputs/alignment-IMQYaT_RWRA_v001.json",
+      "alignmentReportPath": "evals/clip_composition/reports/alignment-IMQYaT_RWRA_v001.md",
+      "audioCompareResultPath": "evals/clip_composition/outputs/audio-compare-IMQYaT_RWRA_v001.json",
+      "audioCompareReportPath": "evals/clip_composition/reports/audio-compare-IMQYaT_RWRA_v001.md",
+      "audioChunkWindows": [],
+      "hasPositiveSourceGaps": false,
+      "role": "already_has_expected",
+      "nextAction": "すでにexpected付きfixtureがあるため、そのfixture側のreadinessを優先します。"
+    },
+    {
+      "targetId": "UpRyakf5j80",
+      "title": "現役Vtuberで登録者数が世界2位になったことについて正直な感想を述べるマリン船長",
+      "targetPath": "evals/clip_composition/stt-targets/UpRyakf5j80.json",
+      "expectedFixtureIds": [
+        "UpRyakf5j80_clip_audio_v001"
+      ],
+      "alignmentResultPath": "evals/clip_composition/outputs/alignment-UpRyakf5j80_youtube_auto_v001.json",
+      "alignmentReportPath": "evals/clip_composition/reports/alignment-UpRyakf5j80_youtube_auto_v001.md",
+      "audioCompareResultPath": "evals/clip_composition/outputs/audio-compare-chunks-UpRyakf5j80_audio_confirmed_20260705_v002.json",
+      "audioCompareReportPath": "evals/clip_composition/reports/audio-compare-chunks-UpRyakf5j80_audio_confirmed_20260705_v002.md",
+      "visualVerificationPath": "evals/clip_composition/outputs/UpRyakf5j80/visual_verification/20260705-gemini-web-flash-audio-confirmed-v001.json",
+      "audioChunkWindows": [
+        {
+          "chunkIndex": 0,
+          "clipStartMs": 0,
+          "clipEndMs": 42678,
+          "sourceStartMs": 7500,
+          "sourceEndMs": 50178,
+          "textCoverage": 0,
+          "envelopeCorrelation": 0.974592,
+          "relationToPrevious": "first"
+        }
+      ],
+      "hasPositiveSourceGaps": false,
+      "role": "already_has_expected",
+      "nextAction": "すでにexpected付きfixtureがあるため、そのfixture側のreadinessを優先します。"
+    },
+    {
+      "targetId": "r_ztjHaHmcg",
+      "title": "同接100人いたら食べていけるの？",
+      "targetPath": "evals/clip_composition/stt-targets/r_ztjHaHmcg.json",
+      "expectedFixtureIds": [],
+      "alignmentResultPath": "evals/clip_composition/outputs/alignment-r_ztjHaHmcg_youtube_auto_v001.json",
+      "alignmentReportPath": "evals/clip_composition/reports/alignment-r_ztjHaHmcg_youtube_auto_v001.md",
+      "audioCompareResultPath": "evals/clip_composition/outputs/audio-compare-chunks-r_ztjHaHmcg_youtube_auto_v001.json",
+      "audioCompareReportPath": "evals/clip_composition/reports/audio-compare-chunks-r_ztjHaHmcg_youtube_auto_v001.md",
+      "visualVerificationPath": "evals/clip_composition/outputs/r_ztjHaHmcg/visual_verification/20260705-gemini-web-flash-audio-scan-v001.json",
+      "visualVerificationStatus": "rejected",
+      "audioChunkWindows": [
+        {
+          "chunkIndex": 0,
+          "clipStartMs": 2555,
+          "clipEndMs": 32555,
+          "sourceStartMs": 2179930,
+          "sourceEndMs": 2209930,
+          "textCoverage": 0.764367816091954,
+          "envelopeCorrelation": 0.298622,
+          "relationToPrevious": "first"
+        },
+        {
+          "chunkIndex": 1,
+          "clipStartMs": 32555,
+          "clipEndMs": 62555,
+          "sourceStartMs": 2309360,
+          "sourceEndMs": 2339360,
+          "textCoverage": 0.5642857142857143,
+          "envelopeCorrelation": 0.612458,
+          "sourceGapFromPreviousMs": 99430,
+          "relationToPrevious": "gap"
+        },
+        {
+          "chunkIndex": 2,
+          "clipStartMs": 62555,
+          "clipEndMs": 92555,
+          "sourceStartMs": 2361159,
+          "sourceEndMs": 2391159,
+          "textCoverage": 0.7526315789473684,
+          "envelopeCorrelation": 0.526415,
+          "sourceGapFromPreviousMs": 21799,
+          "relationToPrevious": "gap"
+        },
+        {
+          "chunkIndex": 3,
+          "clipStartMs": 92555,
+          "clipEndMs": 121147,
+          "sourceStartMs": 2404730,
+          "sourceEndMs": 2433322,
+          "textCoverage": 0.8156424581005587,
+          "envelopeCorrelation": 0.593818,
+          "sourceGapFromPreviousMs": 13571,
+          "relationToPrevious": "gap"
+        }
+      ],
+      "hasPositiveSourceGaps": true,
+      "role": "candidate_requires_multicut_or_different_clip",
+      "nextAction": "切り抜き連続チャンクが元動画側の離れた範囲に対応しているため、単一区間fixtureとして凍結せず、複数区間expected対応か別の短尺連続候補を選びます。"
+    }
+  ],
+  "summary": [
+    "境界遷移を検証できるfixtureは 1 件。",
+    "回帰確認用の境界一致fixtureは 2 件。",
+    "composition評価用として未検証のfixtureは 1 件。",
+    "単一区間fixtureとして保留すべき候補は 1 件。"
+  ]
+}

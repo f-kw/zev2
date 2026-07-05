@@ -471,6 +471,14 @@ node evals/clip_composition/inspect_boundary_signal_result_fit.ts \
   --outputId 20260705-UpRyakf5j80-v009
 ```
 
+現存fixtureとSTT targetが、次の境界遷移検証に使えるかを見る場合:
+
+```bash
+node evals/clip_composition/inspect_fixture_expansion_readiness.ts --outputId 20260705-v001
+```
+
+このreadinessでは、境界遷移を検証できるfixtureは `UpRyakf5j80_clip_audio_v001` の1件、境界一致の回帰確認用fixtureは `IMQYaT_RWRA_context_v001` と `IMQYaT_RWRA_audio_v001` の2件。`r_ztjHaHmcg` は切り抜き連続チャンクが元動画側の離れた範囲に対応しているため、単一区間expectedとしては凍結せず、複数区間expected対応か別の短尺連続候補を使う。
+
 ## 実行方法
 
 指定されていた実行形:

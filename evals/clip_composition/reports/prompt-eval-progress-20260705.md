@@ -209,3 +209,13 @@ v009は `11364140ms - 11409170ms` を選んだ。期待区間は音声比較とW
 照合結果では、v009のモデル終了位置 `11409170ms` は発話20「うん」の終了境界そのものだった。一方、音声比較で固定した期待終了 `11407178ms` に最も近い境界候補は、次字幕「えーっと」の開始 `11407260ms` で、期待終了との差は `+82ms`。境界候補payloadにはexpectedの開始・終了値そのものは含まれていない。
 
 このため、次にpromptを触るなら「短い相づちの終端」ではなく「短い相づちに次字幕が重なり始める遷移」を切り抜き終端候補として扱えるかを検証するのが筋。ただし、`UpRyakf5j80_clip_audio_v001` だけでv010へ進めると1件への寄せすぎになるため、先に2件目のfixtureでも同じ種類の境界候補が有効かを確認する。
+
+## fixture拡張readiness
+
+- readinessスクリプト: `evals/clip_composition/inspect_fixture_expansion_readiness.ts`
+- readiness JSON: `evals/clip_composition/outputs/fixture-expansion-readiness-20260705-v001.json`
+- readinessレポート: `evals/clip_composition/reports/fixture-expansion-readiness-20260705-v001.md`
+
+現存データでは、境界遷移を検証できるfixtureは `UpRyakf5j80_clip_audio_v001` の1件だけ。`IMQYaT_RWRA_context_v001` と `IMQYaT_RWRA_audio_v001` は期待境界が発話境界と一致しているため、境界遷移promptの回帰確認用に使う。
+
+`r_ztjHaHmcg` は切り抜き連続チャンクが元動画側の離れた範囲に対応している。音声比較上の元動画側対応は、chunk1 `2179930-2209930ms`、chunk2 `2309360-2339360ms`、chunk3 `2361159-2391159ms`、chunk4 `2404730-2433322ms` で、chunk間に正の空きがある。したがって、単一区間expectedへ押し込むと、切り抜きに含まれない元動画部分が混ざる。現行の単一区間評価では保留し、複数区間expected対応を入れるか、別の短尺連続候補を探す。
