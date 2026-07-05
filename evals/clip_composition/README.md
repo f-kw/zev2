@@ -153,6 +153,25 @@ pnpm --filter @zev2/agent-runner exec tsx ../evals/clip_composition/freeze_conte
 
 このfixtureでは、切り抜き発話部分と元配信候補区間の音量包絡比較で元配信候補を確認し、切り抜き全体18.622秒を発話開始位置へ合わせて元配信側の対応区間を置きます。BGMやSEが重なるため、切り抜き全体の波形相関だけで境界を確定しません。
 
+同じ種類のfixtureを音声比較結果から生成する場合:
+
+```bash
+pnpm --filter @zev2/agent-runner exec tsx ../evals/clip_composition/freeze_clip_audio_fixture.ts \
+  --fixture IMQYaT_RWRA_clip_audio_v001 \
+  --target ../evals/clip_composition/stt-targets/IMQYaT_RWRA.json \
+  --sourceSttId IMQYaT_RWRA_8uuQldLptRE
+```
+
+書き込みなしで区間だけ確認する場合:
+
+```bash
+pnpm --filter @zev2/agent-runner exec tsx ../evals/clip_composition/freeze_clip_audio_fixture.ts \
+  --fixture IMQYaT_RWRA_clip_audio_v001_dry_run \
+  --target ../evals/clip_composition/stt-targets/IMQYaT_RWRA.json \
+  --sourceSttId IMQYaT_RWRA_8uuQldLptRE \
+  --dry-run
+```
+
 LLM呼び出しを入れずにプロンプト入力だけを生成する場合:
 
 ```bash
