@@ -1,0 +1,53 @@
+{
+  "kind": "clip_composition_fixed30_alignment_archive",
+  "runAt": "2026-07-05T15:41:59.628Z",
+  "reason": "固定30秒幅方式の結果を削除せず、新しいカット点ベース再照合との比較用に保存する。",
+  "oldAlignmentPath": "evals/clip_composition/outputs/alignment-r_ztjHaHmcg_youtube_auto_v001.json",
+  "oldDecisionPath": "evals/clip_composition/outputs/multicut-human-decision-r_ztjHaHmcg_multicut_review_v001-20260705-needs-cutpoint-v001.json",
+  "rows": [
+    {
+      "chunkIndex": 0,
+      "clipStartMs": 2555,
+      "clipEndMs": 32555,
+      "sourceStartMs": 2174150,
+      "sourceEndMs": 2241110,
+      "clipCoverage": 0.764367816091954,
+      "sourceCoverage": 0.764367816091954,
+      "humanStatus": "uncertain",
+      "humanNote": "最初は一致したが、チャンク全体を連続した同一元区間としては固定しない。"
+    },
+    {
+      "chunkIndex": 1,
+      "clipStartMs": 32555,
+      "clipEndMs": 62555,
+      "sourceStartMs": 2264980,
+      "sourceEndMs": 2341049,
+      "clipCoverage": 0.5642857142857143,
+      "sourceCoverage": 0.5642857142857143,
+      "humanStatus": "uncertain",
+      "humanNote": "途中から一致した。固定幅チャンクの途中に未検出の繋ぎ目がある可能性がある。"
+    },
+    {
+      "chunkIndex": 2,
+      "clipStartMs": 62555,
+      "clipEndMs": 92555,
+      "sourceStartMs": 2341049,
+      "sourceEndMs": 2407649,
+      "clipCoverage": 0.7526315789473684,
+      "sourceCoverage": 0.7526315789473684,
+      "humanStatus": "uncertain",
+      "humanNote": "途中から一致した。固定幅チャンクの途中に未検出の繋ぎ目がある可能性がある。"
+    },
+    {
+      "chunkIndex": 3,
+      "clipStartMs": 92555,
+      "clipEndMs": 121147,
+      "sourceStartMs": 2402850,
+      "sourceEndMs": 2438059,
+      "clipCoverage": 0.8156424581005587,
+      "sourceCoverage": 0.8156424581005587,
+      "humanStatus": "confirmed",
+      "humanNote": "完全一致。ただし切り抜き全体のexpectedを作るには、前段チャンクの未検出カット点を再照合する必要がある。"
+    }
+  ]
+}

@@ -135,6 +135,34 @@ pnpm --filter @zev2/agent-runner exec tsx ../evals/clip_composition/compare_audi
 
 この候補は、元動画側に `99.430秒`、`21.799秒`、`13.571秒` の空白があるため、単一の連続区間としては固定しません。Web版Geminiは4つのチャンクを同じ元場面として確認しましたが、人間の目視ではchunk2とchunk3が途中から一致し、chunk1も最初だけ一致する状態でした。固定幅30秒チャンクの途中に未検出の繋ぎ目がある可能性が高いため、この候補は `expected/` に固定せず、切り抜き側のカット点または音声不連続点を検出したうえで再照合します。
 
+固定30秒チャンクを使わず、音声不連続候補と映像シーンチェンジ候補から切り抜き側を可変長セグメントに分けて再照合する場合:
+
+```bash
+runner/node_modules/.bin/tsx evals/clip_composition/realign_multicut_cutpoints.ts \
+  --target evals/clip_composition/stt-targets/r_ztjHaHmcg.json \
+  --clipId r_ztjHaHmcg \
+  --sourceId r_ztjHaHmcg_-DwSCDMCWDQ_youtube_auto \
+  --oldAlignment evals/clip_composition/outputs/alignment-r_ztjHaHmcg_youtube_auto_v001.json \
+  --oldDecision evals/clip_composition/outputs/multicut-human-decision-r_ztjHaHmcg_multicut_review_v001-20260705-needs-cutpoint-v001.json \
+  --outputId 20260706-cutpoint-v001 \
+  --maxAudioCutpoints 12 \
+  --maxVideoCutpoints 8 \
+  --minSegmentMs 1500 \
+  --top 3
+```
+
+この処理は、音声候補を先に採用し、映像候補を補助として追加します。指定する候補数や最短区間は人間確認用パッケージの大きさを抑えるための範囲指定であり、自動凍結の係数ではありません。各セグメントには、単語タイムスタンプの対応が線形に続いた長さをセグメント長で割った整合率を記録します。テキスト類似が高くても整合率が低い区間は、正解データとして固定しません。
+
+第二候補 `r_ztjHaHmcg` のカット点ベース再照合済み出力:
+
+- 再照合JSON: `outputs/cutpoint-realignment-r_ztjHaHmcg-20260706-cutpoint-v001.json`
+- 再照合レポート: `reports/cutpoint-realignment-r_ztjHaHmcg-20260706-cutpoint-v001.md`
+- 旧固定30秒方式アーカイブ: `outputs/archive/fixed30-alignment-r_ztjHaHmcg-20260706-cutpoint-v001.json`
+- 静止画比較パッケージ: `outputs/visual-check/r_ztjHaHmcg/cutpoint-20260706-cutpoint-v001/`
+- 生成された可変長セグメントは16件、静止画は頭・中間・末尾の3点確認で48枚です。
+- 確認済み区間ペア `clip 1:32.555-2:01.147 / source 40:04.730-40:33.322` は、±500ms以内で一致する新セグメントがないため継承されていません。
+- この出力は `readyForFreeze: false` のままです。人間が新しい静止画比較を確認するまで、fixtureとexpectedには固定しません。
+
 複数区間候補とGemini確認結果から、人間確認用のexpected草案を作る場合:
 
 ```bash
