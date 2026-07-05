@@ -6,6 +6,7 @@ type CliOptions = {
   reviewPath: string;
   targetPath: string;
   sourceSttId: string;
+  decisionPath?: string;
   fixtureId?: string;
   themeTitle?: string;
   themeSummary?: string;
@@ -90,6 +91,27 @@ type WordTimestampFile = {
   }>;
 };
 
+type HumanDecisionFile = {
+  kind?: string;
+  fixtureId?: string;
+  humanConfirmation?: {
+    allChunksConfirmed?: boolean;
+    checkedBy?: string;
+    checkedAt?: string;
+    note?: string;
+  };
+  fixedTheme?: {
+    title?: string;
+    summary?: string;
+    compositionNote?: string;
+  };
+  chunks?: Array<{
+    cutIndex: number;
+    status?: 'confirmed' | 'uncertain' | 'rejected' | 'pending';
+    note?: string;
+  }>;
+};
+
 type TranscriptSegment = {
   id: number;
   startMs: number;
@@ -109,6 +131,7 @@ type FrozenPreview = {
   reviewPath: string;
   targetPath: string;
   sourceSttId: string;
+  humanDecisionPath?: string;
   fixtureId: string;
   plannedWrites: {
     fixtureDir: string;
@@ -192,6 +215,7 @@ function parseOptions(argv: string[]): CliOptions {
     reviewPath: resolveWorkspacePath(reviewPath),
     targetPath: resolveWorkspacePath(targetPath),
     sourceSttId: sanitizePathPart(sourceSttId),
+    ...(values.get('decision')?.trim() ? { decisionPath: resolveWorkspacePath(values.get('decision')!.trim()) } : {}),
     ...(values.get('fixture')?.trim() ? { fixtureId: sanitizePathPart(values.get('fixture')!.trim()) } : {}),
     ...(values.get('themeTitle')?.trim() ? { themeTitle: values.get('themeTitle')!.trim() } : {}),
     ...(values.get('themeSummary')?.trim() ? { themeSummary: values.get('themeSummary')!.trim() } : {}),
@@ -220,6 +244,25 @@ function relativeWorkspacePath(filePath: string): string {
 
 async function readJson<T>(filePath: string): Promise<T> {
   return JSON.parse(await readFile(filePath, 'utf8')) as T;
+}
+
+function applyHumanDecision(options: CliOptions, decision: HumanDecisionFile | undefined): CliOptions {
+  if (!decision) {
+    return options;
+  }
+
+  const chunks = decision.chunks ?? [];
+  const allChunksConfirmed = decision.humanConfirmation?.allChunksConfirmed === true &&
+    chunks.length > 0 &&
+    chunks.every((chunk) => chunk.status === 'confirmed');
+  return {
+    ...options,
+    ...(decision.fixtureId && !options.fixtureId ? { fixtureId: sanitizePathPart(decision.fixtureId) } : {}),
+    themeTitle: options.themeTitle ?? decision.fixedTheme?.title,
+    themeSummary: options.themeSummary ?? decision.fixedTheme?.summary,
+    themeCompositionNote: options.themeCompositionNote ?? decision.fixedTheme?.compositionNote,
+    humanConfirmed: options.humanConfirmed || allChunksConfirmed
+  };
 }
 
 function requireExpectedCuts(review: ReviewPacket): ReviewExpectedCut[] {
@@ -405,7 +448,11 @@ function buildExpected(input: {
   expectedCuts: ReviewExpectedCut[];
   fixtureId: string;
   options: CliOptions;
+  decision?: HumanDecisionFile;
 }) {
+  const decisionNote = input.decision?.humanConfirmation?.note;
+  const checkedBy = input.decision?.humanConfirmation?.checkedBy ?? 'human';
+  const checkedAt = input.decision?.humanConfirmation?.checkedAt ?? new Date().toISOString();
   return {
     draftId: input.fixtureId,
     fixtureId: input.fixtureId,
@@ -426,9 +473,9 @@ function buildExpected(input: {
       humanVisualVerification: input.options.humanConfirmed
         ? {
           status: 'confirmed',
-          checkedBy: 'human',
-          checkedAt: new Date().toISOString(),
-          note: '人間が左右比較動画を確認し、複数区間expectedとして固定した。'
+          checkedBy,
+          checkedAt,
+          note: decisionNote ?? '人間が左右比較動画を確認し、複数区間expectedとして固定した。'
         }
         : {
           status: 'pending',
@@ -485,7 +532,9 @@ function buildReport(preview: FrozenPreview, resultPath: string): string {
 }
 
 async function main(): Promise<void> {
-  const options = parseOptions(process.argv.slice(2));
+  const rawOptions = parseOptions(process.argv.slice(2));
+  const decision = rawOptions.decisionPath ? await readJson<HumanDecisionFile>(rawOptions.decisionPath) : undefined;
+  const options = applyHumanDecision(rawOptions, decision);
   const review = await readJson<ReviewPacket>(options.reviewPath);
   const target = await readJson<TargetFile>(options.targetPath);
   const expectedCuts = requireExpectedCuts(review);
@@ -514,7 +563,7 @@ async function main(): Promise<void> {
     speechUnitGroups: transcript.speechUnitGroups as number[][],
     copiedAt
   });
-  const expectedDraft = buildExpected({ review, target, source, expectedCuts, fixtureId, options });
+  const expectedDraft = buildExpected({ review, target, source, expectedCuts, fixtureId, options, decision });
   const missing = missingHumanInputs(options);
   const fixtureWriteReady = missing.length === 0;
   if (options.writeFixture && !fixtureWriteReady) {
@@ -567,6 +616,7 @@ async function main(): Promise<void> {
     transcriptDraft: transcript,
     themesDraft,
     expectedDraft,
+    ...(options.decisionPath ? { humanDecisionPath: relativeWorkspacePath(options.decisionPath) } : {}),
     cutTranscriptSummary,
     productionImpact: {
       writesRuntime: false,

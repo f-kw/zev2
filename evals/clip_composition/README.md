@@ -166,6 +166,18 @@ runner/node_modules/.bin/tsx evals/clip_composition/inspect_multicut_freeze_prev
 
 この検査では、書き込み予定先が評価環境内に閉じているか、文字起こしの発話IDが実在するか、各発話が対応するexpected区間内に収まっているか、expected草案と発話まとまりの件数が合うかを確認します。固定テーマが未入力の場合は警告として扱い、expectedは未固定のままにします。
 
+人間確認結果をJSONとして残すためのテンプレートを作る場合:
+
+```bash
+runner/node_modules/.bin/tsx evals/clip_composition/prepare_multicut_human_decision_template.ts \
+  --review evals/clip_composition/outputs/multicut-expected-review-r_ztjHaHmcg-20260705-v001.json \
+  --preview evals/clip_composition/outputs/multicut-fixture-freeze-preview-r_ztjHaHmcg_multicut_review_v001-20260705-v001.json \
+  --inspection evals/clip_composition/outputs/multicut-freeze-preview-inspection-r_ztjHaHmcg_multicut_review_v001-20260705-v001.json \
+  --outputId 20260705-v001
+```
+
+テンプレートには、確認すべき4本の左右比較動画、`chunk.status`、`humanConfirmation.allChunksConfirmed`、人間が逆算して書く固定テーマ欄が入ります。未記入のテンプレートを `--decision` に渡しても、fixture固定は失敗します。
+
 人間が4本の左右比較動画を確認し、固定テーマを1行で逆算してからfixtureへ固定する場合:
 
 ```bash
@@ -173,14 +185,12 @@ runner/node_modules/.bin/tsx evals/clip_composition/freeze_multicut_review_fixtu
   --review evals/clip_composition/outputs/multicut-expected-review-r_ztjHaHmcg-20260705-v001.json \
   --target evals/clip_composition/stt-targets/r_ztjHaHmcg.json \
   --sourceSttId r_ztjHaHmcg_-DwSCDMCWDQ_youtube_auto \
-  --humanConfirmed true \
-  --themeTitle "人間が正解区間から逆算した固定テーマ" \
-  --themeSummary "人間が正解区間から逆算したテーマ説明" \
+  --decision evals/clip_composition/outputs/multicut-human-decision-template-r_ztjHaHmcg_multicut_review_v001-20260705-v001.json \
   --writeFixture true \
   --outputId 20260705-v001
 ```
 
-`--writeFixture true` は `--humanConfirmed true`、`--themeTitle`、`--themeSummary` が揃っていないと失敗します。これはGemini確認だけで初回正解データを固定しないためのガードです。
+`--writeFixture true` は、確認JSON内で全チャンクが `confirmed`、`humanConfirmation.allChunksConfirmed` が `true`、`fixedTheme.title` と `fixedTheme.summary` が入力済みでないと失敗します。これはGemini確認だけで初回正解データを固定しないためのガードです。
 
 音声比較済み区間からfixture候補を凍結する:
 

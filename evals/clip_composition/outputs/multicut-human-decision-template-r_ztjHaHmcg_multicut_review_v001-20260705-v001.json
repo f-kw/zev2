@@ -1,0 +1,146 @@
+{
+  "kind": "clip_composition_multicut_human_decision_template",
+  "runAt": "2026-07-05T14:02:15.006Z",
+  "targetId": "r_ztjHaHmcg",
+  "title": "同接100人いたら食べていけるの？",
+  "sourceId": "-DwSCDMCWDQ",
+  "fixtureId": "r_ztjHaHmcg_multicut_review_v001",
+  "evidenceInputs": {
+    "reviewPath": "evals/clip_composition/outputs/multicut-expected-review-r_ztjHaHmcg-20260705-v001.json",
+    "previewPath": "evals/clip_composition/outputs/multicut-fixture-freeze-preview-r_ztjHaHmcg_multicut_review_v001-20260705-v001.json",
+    "inspectionPath": "evals/clip_composition/outputs/multicut-freeze-preview-inspection-r_ztjHaHmcg_multicut_review_v001-20260705-v001.json"
+  },
+  "inspectionSummary": {
+    "passCount": 9,
+    "warnCount": 1,
+    "failCount": 0,
+    "meaning": "凍結previewの構造は有効。固定テーマと人間確認が揃うまでexpectedへは固定しない。"
+  },
+  "humanConfirmation": {
+    "allChunksConfirmed": false,
+    "checkedBy": "",
+    "checkedAt": "",
+    "note": ""
+  },
+  "fixedTheme": {
+    "title": "",
+    "summary": "",
+    "compositionNote": ""
+  },
+  "chunks": [
+    {
+      "cutIndex": 0,
+      "status": "pending",
+      "clipRange": {
+        "startMs": 2555,
+        "endMs": 32555,
+        "label": "0:02.555-0:32.555"
+      },
+      "sourceRange": {
+        "startMs": 2179930,
+        "endMs": 2209930,
+        "label": "36:19.930-36:49.930"
+      },
+      "visualCheckVideoPath": "evals/clip_composition/outputs/visual-check/r_ztjHaHmcg/multicut_r_ztjHaHmcg_20260705-v001_chunk01.mp4",
+      "visualCheckReportPath": "evals/clip_composition/reports/gemini-visual-check-r_ztjHaHmcg-multicut-chunk01-v001.md",
+      "geminiStatus": "confirmed_by_gemini",
+      "notesForHuman": [],
+      "transcriptPreview": "道雪百人いれば食べていけるって本当なんだろうかああ100人か100人たらもいけるんじゃないか道雪道雪100人でしょどう節約に脚光でもしかもん道雪100人結構だねなって僕がパブgで",
+      "humanNote": ""
+    },
+    {
+      "cutIndex": 1,
+      "status": "pending",
+      "clipRange": {
+        "startMs": 32555,
+        "endMs": 62555,
+        "label": "0:32.555-1:02.555"
+      },
+      "sourceRange": {
+        "startMs": 2309360,
+        "endMs": 2339360,
+        "label": "38:29.360-38:59.360"
+      },
+      "visualCheckVideoPath": "evals/clip_composition/outputs/visual-check/r_ztjHaHmcg/multicut_r_ztjHaHmcg_20260705-v001_chunk02.mp4",
+      "visualCheckReportPath": "evals/clip_composition/reports/gemini-visual-check-r_ztjHaHmcg-multicut-chunk02-v001.md",
+      "geminiStatus": "confirmed_by_gemini_with_response_index_mismatch",
+      "notesForHuman": [
+        "Gemini response returned chunkIndex 2 while the prompt requested chunkIndex 1. The returned clip/source time range matches chunk02, so this is treated as a response-index issue, not a range mismatch."
+      ],
+      "transcriptPreview": "うん2道雪100人だとまでも多分生活できると思うってことはどうする3200にはサーフィンは32人6そんな単純計算かなーって思うけど",
+      "humanNote": ""
+    },
+    {
+      "cutIndex": 2,
+      "status": "pending",
+      "clipRange": {
+        "startMs": 62555,
+        "endMs": 92555,
+        "label": "1:02.555-1:32.555"
+      },
+      "sourceRange": {
+        "startMs": 2361159,
+        "endMs": 2391159,
+        "label": "39:21.159-39:51.159"
+      },
+      "visualCheckVideoPath": "evals/clip_composition/outputs/visual-check/r_ztjHaHmcg/multicut_r_ztjHaHmcg_20260705-v001_chunk03.mp4",
+      "visualCheckReportPath": "evals/clip_composition/reports/gemini-visual-check-r_ztjHaHmcg-multicut-chunk03-v001.md",
+      "geminiStatus": "confirmed_by_gemini",
+      "notesForHuman": [],
+      "transcriptPreview": "道雪数とチャンネル登録者数どっちがお金になるのだろうかチャンネル登録者サーブに何人のほかにもなんないよチャンネル売るぐらいしかできなくないわからんけど道雪がまあ何だろうtvrリアルタイムの数字だから",
+      "humanNote": ""
+    },
+    {
+      "cutIndex": 3,
+      "status": "pending",
+      "clipRange": {
+        "startMs": 92555,
+        "endMs": 121147,
+        "label": "1:32.555-2:01.147"
+      },
+      "sourceRange": {
+        "startMs": 2404730,
+        "endMs": 2433322,
+        "label": "40:04.730-40:33.322"
+      },
+      "visualCheckVideoPath": "evals/clip_composition/outputs/visual-check/r_ztjHaHmcg/multicut_r_ztjHaHmcg_20260705-v001_chunk04.mp4",
+      "visualCheckReportPath": "evals/clip_composition/reports/gemini-visual-check-r_ztjHaHmcg-multicut-chunk04-v001.md",
+      "geminiStatus": "confirmed_by_gemini",
+      "notesForHuman": [],
+      "transcriptPreview": "単純計算だからさマジでだってそうじゃんあの広告収入が例えば100人に見られてる人は広告収入がじゃあ1年ですと仙人に見られる1000人に見られてるなら黒収入が0.5位になりますとかだったらさじゃないじゃんじゃないのよまあなんか日本のサイトだからそういうことするところありそうですけどゆ中バーソイしようじゃないからf200人",
+      "humanNote": ""
+    }
+  ],
+  "acceptanceRules": [
+    "4つのchunk.statusをすべてconfirmedにする。",
+    "humanConfirmation.allChunksConfirmedをtrueにする。",
+    "fixedTheme.titleとfixedTheme.summaryを人間が正解区間から逆算して書く。",
+    "chunk2はGemini応答の番号ずれがあるため、映像と時刻範囲を重点確認する。",
+    "単一区間expectedとして扱わない。"
+  ],
+  "freezeCommandAfterFill": [
+    "runner/node_modules/.bin/tsx evals/clip_composition/freeze_multicut_review_fixture.ts",
+    "--review evals/clip_composition/outputs/multicut-expected-review-r_ztjHaHmcg-20260705-v001.json",
+    "--target evals/clip_composition/stt-targets/r_ztjHaHmcg.json",
+    "--sourceSttId r_ztjHaHmcg_-DwSCDMCWDQ_youtube_auto",
+    "--decision <this JSON path>",
+    "--writeFixture true",
+    "--outputId 20260705-v001"
+  ],
+  "plannedWrites": {
+    "fixtureDir": "evals/clip_composition/fixtures/r_ztjHaHmcg_multicut_review_v001",
+    "fixturePath": "evals/clip_composition/fixtures/r_ztjHaHmcg_multicut_review_v001/fixture.json",
+    "transcriptPath": "evals/clip_composition/fixtures/r_ztjHaHmcg_multicut_review_v001/transcript.json",
+    "themesPath": "evals/clip_composition/fixtures/r_ztjHaHmcg_multicut_review_v001/themes.json",
+    "expectedPath": "evals/clip_composition/expected/r_ztjHaHmcg_multicut_review_v001.json"
+  },
+  "productionImpact": {
+    "writesRuntime": false,
+    "touchesProductionUi": false,
+    "touchesProductionApi": false,
+    "touchesProductionQueue": false,
+    "touchesDatabase": false,
+    "writesExpectedDirectory": false,
+    "writesFixturesDirectory": false
+  }
+}
