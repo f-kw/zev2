@@ -1,0 +1,64 @@
+{
+  "kind": "clip_composition_aligned_audio_chunk_comparison",
+  "runAt": "2026-07-05T09:48:26.971Z",
+  "sourceId": "UpRyakf5j80_kNX-wQTvsws_youtube_auto",
+  "clipVideoPath": "evals/clip_composition/research/downloads/UpRyakf5j80/UpRyakf5j80.m4a",
+  "sourceVideoPath": "evals/clip_composition/research/downloads/UpRyakf5j80/sources/kNX-wQTvsws/kNX-wQTvsws_3h09m17s_55s_audio.m4a",
+  "alignmentFile": "evals/clip_composition/outputs/alignment-UpRyakf5j80_youtube_auto_source_slice_full_window_v001.json",
+  "settings": {
+    "sampleRate": 16000,
+    "channels": 1,
+    "pcmFormat": "f32le",
+    "envelopeFrameMs": 20,
+    "envelopeHopMs": 10,
+    "confirmationPolicy": "しきい値で自動確定せず、テキスト照合、音声比較、目視確認を分けて判断する"
+  },
+  "comparisons": [
+    {
+      "chunkIndex": 0,
+      "clipText": "とある記事で船長は現在現役で活躍されているvtuberで世界2位なんだと取り上げられているのを見ましたその人と結婚してるなんてどうなんか私も誇らしいやら恥ずかしいやろで緊張していますどうしたマジで大丈夫かさあそんな世界に行くとか言うけどさそんなもんさーやめようよそんなのなんかあんまりなんかそういうさあ変動するじゃんそういうのって変動するじゃんそういうのって変動するものであんま喜べないんだよね船長どうせまた変わるしみたいな感じあんな喜べないんだよね",
+      "sourceText": "香りどうもありがとうございますとある記事で船長は現在現役で活躍されているvtuberで世界2位なんだと取り上げられているのを見ましたその人と結婚してるなんてどうか私も誇らしいやら恥ずかしいやろで緊張していますどうしたマジで大丈夫かさあそんな世界に行くとか言うけどさそんなもんさーやめようよそんなのなんかあんまりなんかそういうさあ変動するじゃんそういうのって変動するじゃんそういうのって変動するものであんま喜べないんだよね船長うんどうせまた変わるしみたいな感じあんま喜べないんだよね先日の",
+      "textMatch": {
+        "clipCoverage": 0,
+        "sourceCoverage": 0,
+        "matchedChars": 0,
+        "queryChars": 225,
+        "sourceChars": 243,
+        "exact": false
+      },
+      "audio": {
+        "query": {
+          "label": "clip-chunk-1",
+          "inputPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/research/downloads/UpRyakf5j80/UpRyakf5j80.m4a",
+          "startMs": 0,
+          "endMs": 42678
+        },
+        "reference": {
+          "label": "UpRyakf5j80_kNX-wQTvsws_youtube_auto-chunk-1",
+          "inputPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/research/downloads/UpRyakf5j80/sources/kNX-wQTvsws/kNX-wQTvsws_3h09m17s_55s_audio.m4a",
+          "startMs": 0,
+          "endMs": 55004
+        },
+        "sampleRate": 16000,
+        "querySamples": 682848,
+        "referenceSamples": 880064,
+        "direct": {
+          "correlationAtEnvelopeOffset": -0.259884,
+          "absoluteCorrelationAtEnvelopeOffset": 0.259884
+        },
+        "envelope": {
+          "frameMs": 20,
+          "hopMs": 10,
+          "maxCorrelation": 0.974592,
+          "minCorrelation": -0.11129,
+          "maxAbsoluteCorrelation": 0.974592,
+          "bestOffsetMs": 7500
+        },
+        "bestSourceWindow": {
+          "sourceStartMs": 7500,
+          "sourceEndMs": 50178
+        }
+      }
+    }
+  ]
+}
