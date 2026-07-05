@@ -108,8 +108,24 @@ type HumanDecisionFile = {
   chunks?: Array<{
     cutIndex: number;
     status?: 'confirmed' | 'uncertain' | 'rejected' | 'pending';
+    clipRange?: {
+      startMs?: number;
+      endMs?: number;
+    };
+    sourceRange?: {
+      startMs?: number;
+      endMs?: number;
+    };
     note?: string;
   }>;
+};
+
+type DecisionValidation = {
+  hasDecision: boolean;
+  allExpectedChunksConfirmed: boolean;
+  issueCount: number;
+  issues: string[];
+  confirmedCutIndexes: number[];
 };
 
 type TranscriptSegment = {
@@ -132,6 +148,7 @@ type FrozenPreview = {
   targetPath: string;
   sourceSttId: string;
   humanDecisionPath?: string;
+  humanDecisionValidation?: DecisionValidation;
   fixtureId: string;
   plannedWrites: {
     fixtureDir: string;
@@ -246,22 +263,22 @@ async function readJson<T>(filePath: string): Promise<T> {
   return JSON.parse(await readFile(filePath, 'utf8')) as T;
 }
 
-function applyHumanDecision(options: CliOptions, decision: HumanDecisionFile | undefined): CliOptions {
+function applyHumanDecision(
+  options: CliOptions,
+  decision: HumanDecisionFile | undefined,
+  validation: DecisionValidation
+): CliOptions {
   if (!decision) {
     return options;
   }
 
-  const chunks = decision.chunks ?? [];
-  const allChunksConfirmed = decision.humanConfirmation?.allChunksConfirmed === true &&
-    chunks.length > 0 &&
-    chunks.every((chunk) => chunk.status === 'confirmed');
   return {
     ...options,
     ...(decision.fixtureId && !options.fixtureId ? { fixtureId: sanitizePathPart(decision.fixtureId) } : {}),
     themeTitle: options.themeTitle ?? decision.fixedTheme?.title,
     themeSummary: options.themeSummary ?? decision.fixedTheme?.summary,
     themeCompositionNote: options.themeCompositionNote ?? decision.fixedTheme?.compositionNote,
-    humanConfirmed: options.humanConfirmed || allChunksConfirmed
+    humanConfirmed: options.humanConfirmed || validation.allExpectedChunksConfirmed
   };
 }
 
@@ -276,6 +293,100 @@ function requireExpectedCuts(review: ReviewPacket): ReviewExpectedCut[] {
     }
   }
   return cuts;
+}
+
+function validateHumanDecision(
+  decision: HumanDecisionFile | undefined,
+  expectedCuts: ReviewExpectedCut[]
+): DecisionValidation {
+  if (!decision) {
+    return {
+      hasDecision: false,
+      allExpectedChunksConfirmed: false,
+      issueCount: expectedCuts.length > 1 ? 1 : 0,
+      issues: expectedCuts.length > 1 ? ['複数区間fixtureを固定するには --decision が必要です'] : [],
+      confirmedCutIndexes: []
+    };
+  }
+
+  const issues: string[] = [];
+  const chunks = decision.chunks ?? [];
+  const chunkByIndex = new Map<number, NonNullable<HumanDecisionFile['chunks']>[number]>();
+  for (const chunk of chunks) {
+    if (chunkByIndex.has(chunk.cutIndex)) {
+      issues.push(`chunk ${chunk.cutIndex + 1} が重複しています`);
+    }
+    chunkByIndex.set(chunk.cutIndex, chunk);
+  }
+
+  if (decision.humanConfirmation?.allChunksConfirmed !== true) {
+    issues.push('humanConfirmation.allChunksConfirmed が true ではありません');
+  }
+  if (!decision.humanConfirmation?.checkedBy?.trim()) {
+    issues.push('humanConfirmation.checkedBy が未入力です');
+  }
+  if (!decision.humanConfirmation?.checkedAt?.trim()) {
+    issues.push('humanConfirmation.checkedAt が未入力です');
+  }
+
+  const confirmedCutIndexes: number[] = [];
+  for (const [index, expected] of expectedCuts.entries()) {
+    const expectedIndex = typeof expected.multicutPartIndex === 'number' ? expected.multicutPartIndex : index;
+    const chunk = chunkByIndex.get(expectedIndex);
+    if (!chunk) {
+      issues.push(`expected区間 ${index + 1} に対応するchunk ${expectedIndex + 1} がありません`);
+      continue;
+    }
+    if (chunk.status !== 'confirmed') {
+      issues.push(`chunk ${expectedIndex + 1} が confirmed ではありません: ${chunk.status ?? '未入力'}`);
+      continue;
+    }
+
+    const sourceStartMs = chunk.sourceRange?.startMs;
+    const sourceEndMs = chunk.sourceRange?.endMs;
+    if (
+      typeof sourceStartMs === 'number' &&
+      sourceStartMs !== expected.sourceStartMs
+    ) {
+      issues.push(`chunk ${expectedIndex + 1} の元動画側開始がexpected草案と一致しません`);
+    }
+    if (
+      typeof sourceEndMs === 'number' &&
+      sourceEndMs !== expected.sourceEndMs
+    ) {
+      issues.push(`chunk ${expectedIndex + 1} の元動画側終了がexpected草案と一致しません`);
+    }
+    if (
+      typeof expected.clipStartMs === 'number' &&
+      typeof chunk.clipRange?.startMs === 'number' &&
+      chunk.clipRange.startMs !== expected.clipStartMs
+    ) {
+      issues.push(`chunk ${expectedIndex + 1} の切り抜き側開始がexpected草案と一致しません`);
+    }
+    if (
+      typeof expected.clipEndMs === 'number' &&
+      typeof chunk.clipRange?.endMs === 'number' &&
+      chunk.clipRange.endMs !== expected.clipEndMs
+    ) {
+      issues.push(`chunk ${expectedIndex + 1} の切り抜き側終了がexpected草案と一致しません`);
+    }
+    confirmedCutIndexes.push(expectedIndex);
+  }
+
+  const expectedIndexes = new Set(expectedCuts.map((cut, index) => typeof cut.multicutPartIndex === 'number' ? cut.multicutPartIndex : index));
+  for (const chunk of chunks) {
+    if (!expectedIndexes.has(chunk.cutIndex)) {
+      issues.push(`expected草案にないchunk ${chunk.cutIndex + 1} がdecisionに含まれています`);
+    }
+  }
+
+  return {
+    hasDecision: true,
+    allExpectedChunksConfirmed: issues.length === 0 && confirmedCutIndexes.length === expectedCuts.length,
+    issueCount: issues.length,
+    issues,
+    confirmedCutIndexes
+  };
 }
 
 function findSource(target: TargetFile, review: ReviewPacket, sourceSttId: string) {
@@ -427,10 +538,17 @@ function buildThemes(input: {
   };
 }
 
-function missingHumanInputs(options: CliOptions): string[] {
+function missingHumanInputs(
+  options: CliOptions,
+  decisionValidation: DecisionValidation,
+  expectedCuts: ReviewExpectedCut[]
+): string[] {
   const missing: string[] = [];
   if (!options.humanConfirmed) {
     missing.push('--humanConfirmed true');
+  }
+  if (expectedCuts.length > 1 && !decisionValidation.allExpectedChunksConfirmed) {
+    missing.push('--decision with all expected chunks confirmed');
   }
   if (!options.themeTitle) {
     missing.push('--themeTitle');
@@ -534,10 +652,11 @@ function buildReport(preview: FrozenPreview, resultPath: string): string {
 async function main(): Promise<void> {
   const rawOptions = parseOptions(process.argv.slice(2));
   const decision = rawOptions.decisionPath ? await readJson<HumanDecisionFile>(rawOptions.decisionPath) : undefined;
-  const options = applyHumanDecision(rawOptions, decision);
-  const review = await readJson<ReviewPacket>(options.reviewPath);
-  const target = await readJson<TargetFile>(options.targetPath);
+  const review = await readJson<ReviewPacket>(rawOptions.reviewPath);
+  const target = await readJson<TargetFile>(rawOptions.targetPath);
   const expectedCuts = requireExpectedCuts(review);
+  const decisionValidation = validateHumanDecision(decision, expectedCuts);
+  const options = applyHumanDecision(rawOptions, decision, decisionValidation);
   const source = findSource(target, review, options.sourceSttId);
   const wordPayload = await readJson<WordTimestampFile>(sttWordPath(options.sourceSttId));
   const words = wordPayload.words ?? [];
@@ -564,7 +683,7 @@ async function main(): Promise<void> {
     copiedAt
   });
   const expectedDraft = buildExpected({ review, target, source, expectedCuts, fixtureId, options, decision });
-  const missing = missingHumanInputs(options);
+  const missing = missingHumanInputs(options, decisionValidation, expectedCuts);
   const fixtureWriteReady = missing.length === 0;
   if (options.writeFixture && !fixtureWriteReady) {
     throw new Error(`fixtureへ書き込むには人間確認と固定テーマが必要です: ${missing.join(', ')}`);
@@ -617,6 +736,7 @@ async function main(): Promise<void> {
     themesDraft,
     expectedDraft,
     ...(options.decisionPath ? { humanDecisionPath: relativeWorkspacePath(options.decisionPath) } : {}),
+    humanDecisionValidation: decisionValidation,
     cutTranscriptSummary,
     productionImpact: {
       writesRuntime: false,

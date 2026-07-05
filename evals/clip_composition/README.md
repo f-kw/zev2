@@ -190,7 +190,7 @@ runner/node_modules/.bin/tsx evals/clip_composition/freeze_multicut_review_fixtu
   --outputId 20260705-v001
 ```
 
-`--writeFixture true` は、確認JSON内で全チャンクが `confirmed`、`humanConfirmation.allChunksConfirmed` が `true`、`fixedTheme.title` と `fixedTheme.summary` が入力済みでないと失敗します。これはGemini確認だけで初回正解データを固定しないためのガードです。
+`--writeFixture true` は、確認JSON内で全チャンクが `confirmed`、`humanConfirmation.allChunksConfirmed` が `true`、`fixedTheme.title` と `fixedTheme.summary` が入力済みで、さらに確認JSONのチャンク番号と件数がexpected草案と一致していないと失敗します。これはGemini確認だけで初回正解データを固定しないためのガードです。
 
 音声比較済み区間からfixture候補を凍結する:
 
