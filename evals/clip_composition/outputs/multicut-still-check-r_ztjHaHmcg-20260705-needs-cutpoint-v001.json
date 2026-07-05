@@ -1,0 +1,118 @@
+{
+  "kind": "clip_composition_multicut_still_check_manifest",
+  "runAt": "2026-07-05T23:55:00+09:00",
+  "targetId": "r_ztjHaHmcg",
+  "purpose": "固定幅30秒チャンクの途中ずれを人間が短時間で確認するため、左右比較動画から先頭・中間・末尾の静止画を切り出す。",
+  "decisionPath": "evals/clip_composition/outputs/multicut-human-decision-r_ztjHaHmcg_multicut_review_v001-20260705-needs-cutpoint-v001.json",
+  "freezeStatus": "hold",
+  "automaticJudgement": false,
+  "samplingPolicy": "各左右比較動画の先頭付近、中間、末尾直前を静止画化する。これは自動判定ではなく、人間確認の補助だけに使う。",
+  "outputDir": "evals/clip_composition/outputs/visual-check/r_ztjHaHmcg/stills-20260705-needs-cutpoint-v001",
+  "chunks": [
+    {
+      "chunkIndex": 0,
+      "videoPath": "evals/clip_composition/outputs/visual-check/r_ztjHaHmcg/multicut_r_ztjHaHmcg_20260705-v001_chunk01.mp4",
+      "humanObservation": "最初は一致したが、チャンク全体を連続した同一元区間としては固定しない。",
+      "stills": [
+        {
+          "label": "head",
+          "second": 0.5,
+          "path": "evals/clip_composition/outputs/visual-check/r_ztjHaHmcg/stills-20260705-needs-cutpoint-v001/chunk01_head.jpg"
+        },
+        {
+          "label": "mid",
+          "second": 15.0,
+          "path": "evals/clip_composition/outputs/visual-check/r_ztjHaHmcg/stills-20260705-needs-cutpoint-v001/chunk01_mid.jpg"
+        },
+        {
+          "label": "tail",
+          "second": 29.5,
+          "path": "evals/clip_composition/outputs/visual-check/r_ztjHaHmcg/stills-20260705-needs-cutpoint-v001/chunk01_tail.jpg"
+        }
+      ]
+    },
+    {
+      "chunkIndex": 1,
+      "videoPath": "evals/clip_composition/outputs/visual-check/r_ztjHaHmcg/multicut_r_ztjHaHmcg_20260705-v001_chunk02.mp4",
+      "humanObservation": "途中から一致した。固定幅チャンクの途中に未検出の繋ぎ目がある可能性がある。",
+      "stills": [
+        {
+          "label": "head",
+          "second": 0.5,
+          "path": "evals/clip_composition/outputs/visual-check/r_ztjHaHmcg/stills-20260705-needs-cutpoint-v001/chunk02_head.jpg"
+        },
+        {
+          "label": "mid",
+          "second": 15.0,
+          "path": "evals/clip_composition/outputs/visual-check/r_ztjHaHmcg/stills-20260705-needs-cutpoint-v001/chunk02_mid.jpg"
+        },
+        {
+          "label": "tail",
+          "second": 29.5,
+          "path": "evals/clip_composition/outputs/visual-check/r_ztjHaHmcg/stills-20260705-needs-cutpoint-v001/chunk02_tail.jpg"
+        }
+      ]
+    },
+    {
+      "chunkIndex": 2,
+      "videoPath": "evals/clip_composition/outputs/visual-check/r_ztjHaHmcg/multicut_r_ztjHaHmcg_20260705-v001_chunk03.mp4",
+      "humanObservation": "途中から一致した。固定幅チャンクの途中に未検出の繋ぎ目がある可能性がある。",
+      "stills": [
+        {
+          "label": "head",
+          "second": 0.5,
+          "path": "evals/clip_composition/outputs/visual-check/r_ztjHaHmcg/stills-20260705-needs-cutpoint-v001/chunk03_head.jpg"
+        },
+        {
+          "label": "mid",
+          "second": 15.0,
+          "path": "evals/clip_composition/outputs/visual-check/r_ztjHaHmcg/stills-20260705-needs-cutpoint-v001/chunk03_mid.jpg"
+        },
+        {
+          "label": "tail",
+          "second": 29.5,
+          "path": "evals/clip_composition/outputs/visual-check/r_ztjHaHmcg/stills-20260705-needs-cutpoint-v001/chunk03_tail.jpg"
+        }
+      ]
+    },
+    {
+      "chunkIndex": 3,
+      "videoPath": "evals/clip_composition/outputs/visual-check/r_ztjHaHmcg/multicut_r_ztjHaHmcg_20260705-v001_chunk04.mp4",
+      "humanObservation": "完全一致。",
+      "stills": [
+        {
+          "label": "head",
+          "second": 0.5,
+          "path": "evals/clip_composition/outputs/visual-check/r_ztjHaHmcg/stills-20260705-needs-cutpoint-v001/chunk04_head.jpg"
+        },
+        {
+          "label": "mid",
+          "second": 14.3,
+          "path": "evals/clip_composition/outputs/visual-check/r_ztjHaHmcg/stills-20260705-needs-cutpoint-v001/chunk04_mid.jpg"
+        },
+        {
+          "label": "tail",
+          "second": 28.1,
+          "path": "evals/clip_composition/outputs/visual-check/r_ztjHaHmcg/stills-20260705-needs-cutpoint-v001/chunk04_tail.jpg"
+        }
+      ]
+    }
+  ],
+  "nextAction": {
+    "freeze": "hold",
+    "requiredWork": [
+      "切り抜き側のカット点または音声不連続点を検出する。",
+      "固定幅30秒ではなく、可変長セグメントで元動画照合をやり直す。",
+      "再生成した候補に対して、同じ静止画比較パッケージを作る。"
+    ]
+  },
+  "productionImpact": {
+    "writesRuntime": false,
+    "touchesProductionUi": false,
+    "touchesProductionApi": false,
+    "touchesProductionQueue": false,
+    "touchesDatabase": false,
+    "writesExpectedDirectory": false,
+    "writesFixturesDirectory": false
+  }
+}

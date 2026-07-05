@@ -1,0 +1,78 @@
+{
+  "kind": "clip_composition_multicut_human_decision_inspection",
+  "runAt": "2026-07-05T14:53:56.995Z",
+  "reviewPath": "evals/clip_composition/outputs/multicut-expected-review-r_ztjHaHmcg-20260705-v001.json",
+  "decisionPath": "evals/clip_composition/outputs/multicut-human-decision-r_ztjHaHmcg_multicut_review_v001-20260705-needs-cutpoint-v001.json",
+  "targetId": "r_ztjHaHmcg",
+  "sourceId": "-DwSCDMCWDQ",
+  "fixtureId": "r_ztjHaHmcg_multicut_review_v001",
+  "readyForFreeze": false,
+  "issueCount": 4,
+  "issues": [
+    "humanConfirmation.allChunksConfirmed が true ではありません",
+    "chunk 1 が confirmed ではありません: uncertain",
+    "chunk 2 が confirmed ではありません: uncertain",
+    "chunk 3 が confirmed ではありません: uncertain"
+  ],
+  "confirmedCutIndexes": [
+    3
+  ],
+  "checks": [
+    {
+      "name": "確認状態",
+      "status": "fail",
+      "meaning": "全チャンクを人間が確認したと明示しているかを確認する。",
+      "details": {
+        "allChunksConfirmed": false,
+        "checkedBy": "kawafmm",
+        "checkedAt": "2026-07-05T23:47:11+09:00",
+        "note": "4本の左右比較動画を確認。chunk4は完全一致。chunk3とchunk2は途中から一致。chunk1は最初が一致。切り抜き側でシームレスに場面が結合されているように見えるため、固定幅30秒チャンクをそのままexpectedとして凍結しない。カット点検出ベースの再照合が必要。"
+      }
+    },
+    {
+      "name": "固定テーマ",
+      "status": "pass",
+      "meaning": "正解区間から人間が逆算した固定テーマが入力されているかを確認する。",
+      "details": {
+        "title": "同接100人で配信者は食べていけるのか",
+        "summary": "同時接続100人の配信で生活できるのかを起点に、同接数と登録者数の違い、広告収入を単純計算できない理由まで話す切り抜き。",
+        "compositionNote": "テーマ候補としては妥当だが、現在の4つの固定幅チャンクは実際のカット点と一致していない可能性があるため、このdecisionではfixture固定に使わない。"
+      }
+    },
+    {
+      "name": "チャンク対応",
+      "status": "fail",
+      "meaning": "確認JSONのchunk件数と番号がexpected草案に対応しているかを確認する。",
+      "details": {
+        "expectedCutCount": 4,
+        "decisionChunkCount": 4,
+        "confirmedCutIndexes": [
+          3
+        ]
+      }
+    },
+    {
+      "name": "時刻対応",
+      "status": "pass",
+      "meaning": "確認JSONに時刻範囲がある場合、expected草案の時刻と一致しているかを確認する。"
+    }
+  ],
+  "freezeCommandWhenReady": [
+    "runner/node_modules/.bin/tsx evals/clip_composition/freeze_multicut_review_fixture.ts",
+    "--review evals/clip_composition/outputs/multicut-expected-review-r_ztjHaHmcg-20260705-v001.json",
+    "--target evals/clip_composition/stt-targets/r_ztjHaHmcg.json",
+    "--sourceSttId r_ztjHaHmcg_-DwSCDMCWDQ_youtube_auto",
+    "--decision evals/clip_composition/outputs/multicut-human-decision-r_ztjHaHmcg_multicut_review_v001-20260705-needs-cutpoint-v001.json",
+    "--writeFixture true",
+    "--outputId 20260705-v001"
+  ],
+  "productionImpact": {
+    "writesRuntime": false,
+    "touchesProductionUi": false,
+    "touchesProductionApi": false,
+    "touchesProductionQueue": false,
+    "touchesDatabase": false,
+    "writesExpectedDirectory": false,
+    "writesFixturesDirectory": false
+  }
+}

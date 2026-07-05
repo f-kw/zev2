@@ -130,8 +130,10 @@ pnpm --filter @zev2/agent-runner exec tsx ../evals/clip_composition/compare_audi
 - 左右比較動画一覧: `outputs/multicut-visual-checks-r_ztjHaHmcg-20260705-v001.json`
 - Web版Gemini確認サマリー: `reports/gemini-visual-check-r_ztjHaHmcg-multicut-summary-v001.md`
 - 人間確認パケット: `reports/multicut-expected-review-r_ztjHaHmcg-20260705-v001.md`
+- 人間確認結果: `outputs/multicut-human-decision-r_ztjHaHmcg_multicut_review_v001-20260705-needs-cutpoint-v001.json`
+- 静止画確認パッケージ: `reports/multicut-still-check-r_ztjHaHmcg-20260705-needs-cutpoint-v001.md`
 
-この候補は、元動画側に `99.430秒`、`21.799秒`、`13.571秒` の空白があるため、単一の連続区間としては固定しません。4つのチャンクはWeb版Geminiの左右比較で同じ元場面として確認済みですが、初回正解データのため、`expected/` に固定する前に人間の目視確認を1回挟みます。
+この候補は、元動画側に `99.430秒`、`21.799秒`、`13.571秒` の空白があるため、単一の連続区間としては固定しません。Web版Geminiは4つのチャンクを同じ元場面として確認しましたが、人間の目視ではchunk2とchunk3が途中から一致し、chunk1も最初だけ一致する状態でした。固定幅30秒チャンクの途中に未検出の繋ぎ目がある可能性が高いため、この候補は `expected/` に固定せず、切り抜き側のカット点または音声不連続点を検出したうえで再照合します。
 
 複数区間候補とGemini確認結果から、人間確認用のexpected草案を作る場合:
 

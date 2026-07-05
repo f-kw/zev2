@@ -1,0 +1,86 @@
+{
+  "kind": "clip_composition_multicut_human_decision",
+  "targetId": "r_ztjHaHmcg",
+  "title": "同接100人いたら食べていけるの？",
+  "sourceId": "-DwSCDMCWDQ",
+  "fixtureId": "r_ztjHaHmcg_multicut_review_v001",
+  "basedOnTemplatePath": "evals/clip_composition/outputs/multicut-human-decision-template-r_ztjHaHmcg_multicut_review_v001-20260705-v001.json",
+  "humanConfirmation": {
+    "allChunksConfirmed": false,
+    "checkedBy": "kawafmm",
+    "checkedAt": "2026-07-05T23:47:11+09:00",
+    "note": "4本の左右比較動画を確認。chunk4は完全一致。chunk3とchunk2は途中から一致。chunk1は最初が一致。切り抜き側でシームレスに場面が結合されているように見えるため、固定幅30秒チャンクをそのままexpectedとして凍結しない。カット点検出ベースの再照合が必要。"
+  },
+  "fixedTheme": {
+    "title": "同接100人で配信者は食べていけるのか",
+    "summary": "同時接続100人の配信で生活できるのかを起点に、同接数と登録者数の違い、広告収入を単純計算できない理由まで話す切り抜き。",
+    "compositionNote": "テーマ候補としては妥当だが、現在の4つの固定幅チャンクは実際のカット点と一致していない可能性があるため、このdecisionではfixture固定に使わない。"
+  },
+  "chunks": [
+    {
+      "cutIndex": 0,
+      "status": "uncertain",
+      "clipRange": {
+        "startMs": 2555,
+        "endMs": 32555
+      },
+      "sourceRange": {
+        "startMs": 2179930,
+        "endMs": 2209930
+      },
+      "visualCheckVideoPath": "evals/clip_composition/outputs/visual-check/r_ztjHaHmcg/multicut_r_ztjHaHmcg_20260705-v001_chunk01.mp4",
+      "humanNote": "最初は一致したが、チャンク全体を連続した同一元区間としては固定しない。"
+    },
+    {
+      "cutIndex": 1,
+      "status": "uncertain",
+      "clipRange": {
+        "startMs": 32555,
+        "endMs": 62555
+      },
+      "sourceRange": {
+        "startMs": 2309360,
+        "endMs": 2339360
+      },
+      "visualCheckVideoPath": "evals/clip_composition/outputs/visual-check/r_ztjHaHmcg/multicut_r_ztjHaHmcg_20260705-v001_chunk02.mp4",
+      "humanNote": "途中から一致した。固定幅チャンクの途中に未検出の繋ぎ目がある可能性がある。"
+    },
+    {
+      "cutIndex": 2,
+      "status": "uncertain",
+      "clipRange": {
+        "startMs": 62555,
+        "endMs": 92555
+      },
+      "sourceRange": {
+        "startMs": 2361159,
+        "endMs": 2391159
+      },
+      "visualCheckVideoPath": "evals/clip_composition/outputs/visual-check/r_ztjHaHmcg/multicut_r_ztjHaHmcg_20260705-v001_chunk03.mp4",
+      "humanNote": "途中から一致した。固定幅チャンクの途中に未検出の繋ぎ目がある可能性がある。"
+    },
+    {
+      "cutIndex": 3,
+      "status": "confirmed",
+      "clipRange": {
+        "startMs": 92555,
+        "endMs": 121147
+      },
+      "sourceRange": {
+        "startMs": 2404730,
+        "endMs": 2433322
+      },
+      "visualCheckVideoPath": "evals/clip_composition/outputs/visual-check/r_ztjHaHmcg/multicut_r_ztjHaHmcg_20260705-v001_chunk04.mp4",
+      "humanNote": "完全一致。ただし切り抜き全体のexpectedを作るには、前段チャンクの未検出カット点を再照合する必要がある。"
+    }
+  ],
+  "nextAction": {
+    "freeze": "hold",
+    "reason": "固定幅30秒チャンクと実際の切り抜きカット点が一致していない可能性が高い。",
+    "requiredWork": [
+      "切り抜き側のカット点または音声不連続点を検出する。",
+      "可変長セグメント単位で元動画との照合をやり直す。",
+      "左右比較動画に加えて、頭・中間・末尾の静止画比較または10秒ごとのサムネイル並置を作る。"
+    ]
+  }
+}
