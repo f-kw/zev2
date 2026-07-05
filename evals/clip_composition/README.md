@@ -158,6 +158,38 @@ pnpm --filter @zev2/agent-runner exec tsx ../evals/clip_composition/build_prompt
 
 このプロンプト入力は、期待区間、評価結果、代表発話本文、代表発話IDをモデル入力へ入れません。期待区間は採点用データとしてだけ分離して記録します。
 
+外部LLMやWebで得た `selectedCuts` JSONを採点する場合:
+
+```bash
+pnpm --filter @zev2/agent-runner exec tsx ../evals/clip_composition/score_prompt_output.ts \
+  --fixture IMQYaT_RWRA_context_v001 \
+  --promptVersion v001 \
+  --input ../evals/clip_composition/outputs/IMQYaT_RWRA_context_v001/clip_composition_prompt_v001/20260705-124545/result.json \
+  --model rule-output-smoke \
+  --params '{"temperature":0,"source":"run_eval_result"}'
+```
+
+`--input` には、最低限次の形のJSONを渡します。
+
+```json
+{
+  "selectedCuts": [
+    {
+      "sourceStartMs": 1998363,
+      "sourceEndMs": 2006530,
+      "reason": "選んだ理由"
+    }
+  ]
+}
+```
+
+生成済み採点結果:
+
+- `outputs/IMQYaT_RWRA_context_v001/clip_composition_prompt_v001/20260705-125215/result.json`
+- `reports/IMQYaT_RWRA_context_v001/clip_composition_prompt_v001/20260705-125215/summary.md`
+
+この採点はLLM APIを呼ばず、保存済みJSONだけを読みます。モデル名とパラメータは結果に記録します。
+
 ## 実行方法
 
 指定されていた実行形:
