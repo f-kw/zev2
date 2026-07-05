@@ -172,6 +172,21 @@ pnpm --filter @zev2/agent-runner exec tsx ../evals/clip_composition/freeze_clip_
   --dry-run
 ```
 
+目視・聴取またはWeb版Geminiで元配信箇所を確認した後、期待値へ確認結果を反映する場合:
+
+```bash
+pnpm --filter @zev2/agent-runner exec tsx ../evals/clip_composition/apply_visual_verification.ts \
+  --fixture IMQYaT_RWRA_clip_audio_v001 \
+  --status confirmed \
+  --checkedBy gemini-web \
+  --reportPath evals/clip_composition/reports/gemini-visual-check-IMQYaT_RWRA_v001.md \
+  --sourceStartMs 1997050 \
+  --sourceEndMs 2015672 \
+  --note "確認結果の要約をここに書く"
+```
+
+書き込みなしで反映内容だけ確認する場合は、同じコマンドに `--dry-run` を付けます。`confirmed` の場合、確認状態は `audio_anchor_confirmed_visual_pending` から `audio_anchor_confirmed_visual_confirmed` のように機械的に更新されます。
+
 LLM呼び出しを入れずにプロンプト入力だけを生成する場合:
 
 ```bash

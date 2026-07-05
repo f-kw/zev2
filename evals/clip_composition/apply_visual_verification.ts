@@ -7,8 +7,11 @@ type CliOptions = {
   status: 'confirmed' | 'uncertain' | 'rejected';
   checkedBy: string;
   note: string;
+  checkedAt?: string;
+  reportPath?: string;
   sourceStartMs?: number;
   sourceEndMs?: number;
+  dryRun: boolean;
 };
 
 type ExpectedFile = {
@@ -84,9 +87,29 @@ function parseOptions(argv: string[]): CliOptions {
     status,
     checkedBy,
     note,
+    ...(values.has('checkedAt') ? { checkedAt: requireIsoTimestamp(values.get('checkedAt'), '--checkedAt') } : {}),
+    ...(values.has('reportPath') ? { reportPath: requireString(values.get('reportPath'), '--reportPath') } : {}),
     ...(values.has('sourceStartMs') ? { sourceStartMs: parseInteger(values.get('sourceStartMs'), '--sourceStartMs') } : {}),
-    ...(values.has('sourceEndMs') ? { sourceEndMs: parseInteger(values.get('sourceEndMs'), '--sourceEndMs') } : {})
+    ...(values.has('sourceEndMs') ? { sourceEndMs: parseInteger(values.get('sourceEndMs'), '--sourceEndMs') } : {}),
+    dryRun: values.get('dry-run') === 'true'
   };
+}
+
+function requireString(value: string | undefined, label: string): string {
+  const trimmed = value?.trim();
+  if (!trimmed) {
+    throw new Error(`${label} は空でない文字列で指定してください`);
+  }
+  return trimmed;
+}
+
+function requireIsoTimestamp(value: string | undefined, label: string): string {
+  const timestamp = requireString(value, label);
+  const parsed = Date.parse(timestamp);
+  if (Number.isNaN(parsed)) {
+    throw new Error(`${label} はISO日時で指定してください`);
+  }
+  return timestamp;
 }
 
 function parseInteger(value: string | undefined, label: string): number {
@@ -105,6 +128,39 @@ async function readJson<T>(filePath: string): Promise<T> {
   return JSON.parse(await readFile(filePath, 'utf8')) as T;
 }
 
+function nextVerificationStatus(current: unknown, visualStatus: CliOptions['status']): string {
+  const suffix = visualStatus === 'confirmed'
+    ? 'visual_confirmed'
+    : visualStatus === 'uncertain'
+      ? 'visual_uncertain'
+      : 'visual_rejected';
+  if (typeof current !== 'string' || current.length === 0) {
+    return suffix;
+  }
+  if (current.includes('visual_pending')) {
+    return current.replace('visual_pending', suffix);
+  }
+  if (current.includes('visual_confirmed')) {
+    return current.replace('visual_confirmed', suffix);
+  }
+  if (current.includes('visual_uncertain')) {
+    return current.replace('visual_uncertain', suffix);
+  }
+  if (current.includes('visual_rejected')) {
+    return current.replace('visual_rejected', suffix);
+  }
+  return `${current}_${suffix}`;
+}
+
+function publicCutState(cut: Record<string, unknown> & { sourceStartMs: number; sourceEndMs: number }) {
+  return {
+    sourceStartMs: cut.sourceStartMs,
+    sourceEndMs: cut.sourceEndMs,
+    verificationStatus: cut.verificationStatus,
+    visualVerification: cut.visualVerification
+  };
+}
+
 async function main() {
   const options = parseOptions(process.argv.slice(2));
   const expectedPath = path.join(evalRoot, 'expected', `${options.fixtureId}.json`);
@@ -118,6 +174,7 @@ async function main() {
     throw new Error('期待値ファイルにexpectedCutsがありません');
   }
 
+  const before = publicCutState(firstCut);
   if (options.sourceStartMs !== undefined && options.sourceEndMs !== undefined) {
     if (options.sourceEndMs <= options.sourceStartMs) {
       throw new Error('--sourceEndMs は --sourceStartMs より後にしてください');
@@ -128,17 +185,28 @@ async function main() {
     throw new Error('開始または終了を更新する場合は --sourceStartMs と --sourceEndMs を両方指定してください');
   }
 
+  firstCut.verificationStatus = nextVerificationStatus(firstCut.verificationStatus, options.status);
   firstCut.visualVerification = {
     status: options.status,
     checkedBy: options.checkedBy,
-    checkedAt: new Date().toISOString(),
-    note: options.note
+    checkedAt: options.checkedAt ?? new Date().toISOString(),
+    note: options.note,
+    ...(options.reportPath ? { reportPath: options.reportPath } : {})
   };
 
-  await writeFile(expectedPath, `${JSON.stringify(expected, null, 2)}\n`, 'utf8');
+  if (!options.dryRun) {
+    await writeFile(expectedPath, `${JSON.stringify(expected, null, 2)}\n`, 'utf8');
+  }
   console.log(`expected: ${expectedPath}`);
   console.log(`visual verification: ${options.status}`);
   console.log(`range: ${firstCut.sourceStartMs}ms - ${firstCut.sourceEndMs}ms`);
+  console.log(`verification status: ${String(before.verificationStatus ?? '')} -> ${String(firstCut.verificationStatus)}`);
+  if (options.dryRun) {
+    console.log('write: no');
+    console.log(JSON.stringify({ before, after: publicCutState(firstCut) }, null, 2));
+  } else {
+    console.log('write: yes');
+  }
 }
 
 main().catch((error) => {
