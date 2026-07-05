@@ -1,0 +1,135 @@
+{
+  "runAt": "2026-07-05T12:45:45+09:00",
+  "draftId": "IMQYaT_RWRA_context_v001",
+  "fixtureId": "IMQYaT_RWRA_context_v001",
+  "promptVersion": "clip_composition_prompt_v001",
+  "model": "rule-based-build_clip_composition",
+  "params": {
+    "temperature": 0,
+    "llmCall": false,
+    "selection": "固定済みテーマIDに対応する発話まとまりから最終区間を作る"
+  },
+  "selectedCuts": [
+    {
+      "sourceStartMs": 1997050,
+      "sourceEndMs": 2015672,
+      "reason": "選ばれたテーマ「笑い声がトルコ行進曲に聞こえる女騎士いじり」について、関連する発話まとまりを1個の編集元場面としてつないだ。 候補窓の中から、女騎士のように見えた相手への反応と投げている描写が単独で伝わる範囲だけを使う。"
+    }
+  ],
+  "expectedCuts": [
+    {
+      "sourceStartMs": 1998363,
+      "sourceEndMs": 2006530,
+      "reason": "音声比較で切り抜き発話と元配信候補の発話部分が強く一致し、候補窓の中で単独で意味が通る中心区間のため。",
+      "sourceVideoId": "8uuQldLptRE",
+      "sourceUrl": "https://www.youtube.com/watch?v=8uuQldLptRE",
+      "sourceSttId": "IMQYaT_RWRA_8uuQldLptRE",
+      "clipId": "IMQYaT_RWRA",
+      "clipUrl": "https://www.youtube.com/watch?v=IMQYaT_RWRA",
+      "transcriptText": "やってきたって感じで女騎士だーめっちゃ投げてる",
+      "verificationStatus": "audio_confirmed_visual_pending",
+      "usableForCompositionPromptEval": true,
+      "audioVerification": {
+        "status": "confirmed",
+        "method": "切り抜き全体の対応区間を候補窓にし、切り抜き発話部分と元配信候補区間の音量包絡を比較",
+        "reportPath": "evals/clip_composition/reports/audio-compare-IMQYaT_RWRA_v001.md",
+        "resultPath": "evals/clip_composition/outputs/audio-compare-IMQYaT_RWRA_v001.json",
+        "speechEnvelopeCorrelation": 0.883568,
+        "bestOffsetMs": 3750,
+        "comparedClipSpeechStartMs": 1313,
+        "comparedClipSpeechEndMs": 5338,
+        "comparedSourceCandidateStartMs": 1998363,
+        "comparedSourceCandidateEndMs": 2006530,
+        "fullTimelineCandidateStartMs": 1997050,
+        "fullTimelineCandidateEndMs": 2015672,
+        "bestAlignedSourceSpeechStartMs": 2002113,
+        "bestAlignedSourceSpeechEndMs": 2006138,
+        "note": "候補窓は切り抜き全体比較、期待区間は発話部分比較から作った。"
+      },
+      "sttAlignment": {
+        "reportPath": "evals/clip_composition/reports/alignment-IMQYaT_RWRA_v001.md",
+        "resultPath": "evals/clip_composition/outputs/alignment-IMQYaT_RWRA_v001.json",
+        "clipCoverage": 0.5454545454545454,
+        "sourceCoverage": 0.5454545454545454,
+        "note": "STT文字列では再編集候補が最上位だが、元配信候補にも対応語が出ており、音声比較で元配信候補を優先した。"
+      },
+      "visualVerification": {
+        "status": "pending",
+        "note": "音声比較でcompositionプロンプト評価には使える状態。最終データセットQAとしての目視確認は未実施。"
+      }
+    }
+  ],
+  "diff": {
+    "startDeltaMs": -1313,
+    "endDeltaMs": 9142,
+    "overlapSummary": "AIが選んだ区間が期待区間を含んでいます"
+  },
+  "runs": [
+    {
+      "runIndex": 1,
+      "selectedCuts": [
+        {
+          "sourceStartMs": 1997050,
+          "sourceEndMs": 2015672,
+          "reason": "選ばれたテーマ「笑い声がトルコ行進曲に聞こえる女騎士いじり」について、関連する発話まとまりを1個の編集元場面としてつないだ。 候補窓の中から、女騎士のように見えた相手への反応と投げている描写が単独で伝わる範囲だけを使う。"
+        }
+      ],
+      "diff": {
+        "startDeltaMs": -1313,
+        "endDeltaMs": 9142,
+        "overlapSummary": "AIが選んだ区間が期待区間を含んでいます"
+      }
+    },
+    {
+      "runIndex": 2,
+      "selectedCuts": [
+        {
+          "sourceStartMs": 1997050,
+          "sourceEndMs": 2015672,
+          "reason": "選ばれたテーマ「笑い声がトルコ行進曲に聞こえる女騎士いじり」について、関連する発話まとまりを1個の編集元場面としてつないだ。 候補窓の中から、女騎士のように見えた相手への反応と投げている描写が単独で伝わる範囲だけを使う。"
+        }
+      ],
+      "diff": {
+        "startDeltaMs": -1313,
+        "endDeltaMs": 9142,
+        "overlapSummary": "AIが選んだ区間が期待区間を含んでいます"
+      }
+    },
+    {
+      "runIndex": 3,
+      "selectedCuts": [
+        {
+          "sourceStartMs": 1997050,
+          "sourceEndMs": 2015672,
+          "reason": "選ばれたテーマ「笑い声がトルコ行進曲に聞こえる女騎士いじり」について、関連する発話まとまりを1個の編集元場面としてつないだ。 候補窓の中から、女騎士のように見えた相手への反応と投げている描写が単独で伝わる範囲だけを使う。"
+        }
+      ],
+      "diff": {
+        "startDeltaMs": -1313,
+        "endDeltaMs": 9142,
+        "overlapSummary": "AIが選んだ区間が期待区間を含んでいます"
+      }
+    }
+  ],
+  "stability": {
+    "allRunsSelectedSameCuts": true,
+    "startJitterMs": 0,
+    "endJitterMs": 0,
+    "reasonVariantCount": 1,
+    "reasonVariationSummary": "判断理由は全実行で同じです"
+  },
+  "themeCoverage": {
+    "selectedThemeId": "theme_audio_context_1",
+    "candidateStartMs": 1997050,
+    "candidateEndMs": 2015672,
+    "coverageSummary": "期待区間は選択済みテーマの候補範囲に入っています",
+    "themeSidePossibility": "theme側で正解区間が候補に入っていない可能性は低い",
+    "compositionSidePossibility": "composition側で候補範囲から最終区間を選ぶ処理に差分がある可能性があります"
+  },
+  "sourceFiles": {
+    "fixture": "fixtures/IMQYaT_RWRA_context_v001",
+    "transcript": "fixtures/IMQYaT_RWRA_context_v001/transcript.json",
+    "themes": "fixtures/IMQYaT_RWRA_context_v001/themes.json",
+    "expected": "expected/IMQYaT_RWRA_context_v001.json"
+  }
+}

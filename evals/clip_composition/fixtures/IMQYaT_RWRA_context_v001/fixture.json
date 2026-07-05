@@ -1,0 +1,20 @@
+{
+  "fixtureId": "IMQYaT_RWRA_context_v001",
+  "draftId": "IMQYaT_RWRA_context_v001",
+  "description": "音声比較の切り抜き全体対応区間を候補窓として持つ、composition評価用fixture。",
+  "copiedFrom": [
+    "stt/IMQYaT_RWRA_8uuQldLptRE/source/word-timestamps.json",
+    "evals/clip_composition/outputs/audio-compare-IMQYaT_RWRA_v001.json"
+  ],
+  "copiedAt": "2026-07-05T03:45:38.101Z",
+  "sourceUri": "https://www.youtube.com/watch?v=8uuQldLptRE",
+  "transcriptPath": "transcript.json",
+  "themesPath": "themes.json",
+  "selectedThemeId": "theme_audio_context_1",
+  "notes": [
+    "評価実行時はruntime/artifactsを読まず、このfixture配下のファイルだけを読む。",
+    "候補窓は音声比較結果の切り抜き全体対応区間から作る。",
+    "期待区間は同じ音声比較結果の発話部分対応区間から作る。",
+    "固定テーマは音声確認済みの期待区間から人間が逆算したもの。"
+  ]
+}

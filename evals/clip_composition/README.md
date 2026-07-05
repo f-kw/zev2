@@ -125,6 +125,39 @@ pnpm --filter @zev2/agent-runner exec tsx ../evals/clip_composition/freeze_verif
 - `reports/IMQYaT_RWRA_audio_v001/clip_composition_prompt_v001/20260705-123725/summary.md`
 - 現在のrule-based compositionでは、3回とも `1998363ms - 2006530ms` を選び、開始・終了の揺れは0msです。
 
+候補窓付きfixtureを作る場合:
+
+```bash
+pnpm --filter @zev2/agent-runner exec tsx ../evals/clip_composition/freeze_context_fixture.ts \
+  --fixture IMQYaT_RWRA_context_v001 \
+  --target ../evals/clip_composition/stt-targets/IMQYaT_RWRA.json \
+  --sourceSttId IMQYaT_RWRA_8uuQldLptRE
+```
+
+このfixtureは、音声比較結果の「切り抜き全体に対応する元配信側区間」を候補窓にし、「切り抜き発話部分に対応する元配信側区間」を期待区間にします。第一候補では、候補窓が `1997050ms - 2015672ms`、期待区間が `1998363ms - 2006530ms` です。
+
+候補窓付きfixtureの評価結果:
+
+- `outputs/IMQYaT_RWRA_context_v001/clip_composition_prompt_v001/20260705-124545/result.json`
+- `reports/IMQYaT_RWRA_context_v001/clip_composition_prompt_v001/20260705-124545/summary.md`
+- 現在のrule-based compositionでは候補窓全体を選び、開始位置は `-1313ms`、終了位置は `+9142ms` ずれます。
+
+LLM呼び出しを入れずにプロンプト入力だけを生成する場合:
+
+```bash
+pnpm --filter @zev2/agent-runner exec tsx ../evals/clip_composition/build_prompt_payload.ts \
+  --fixture IMQYaT_RWRA_context_v001 \
+  --promptVersion v001
+```
+
+生成済みプロンプト入力:
+
+- `outputs/IMQYaT_RWRA_context_v001/clip_composition_prompt_v001/20260705-124629/prompt-input.json`
+- `reports/IMQYaT_RWRA_context_v001/clip_composition_prompt_v001/20260705-124629/prompt.md`
+- `reports/IMQYaT_RWRA_context_v001/clip_composition_prompt_v001/20260705-124629/prompt-input-summary.md`
+
+このプロンプト入力は、期待区間、評価結果、代表発話本文、代表発話IDをモデル入力へ入れません。期待区間は採点用データとしてだけ分離して記録します。
+
 ## 実行方法
 
 指定されていた実行形:
