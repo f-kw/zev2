@@ -1,0 +1,69 @@
+{
+  "kind": "clip_composition_multicut_visual_check_manifest",
+  "runAt": "2026-07-05T13:21:31.843Z",
+  "planPath": "evals/clip_composition/outputs/multicut-expected-candidate-r_ztjHaHmcg-20260705-v001.json",
+  "targetId": "r_ztjHaHmcg",
+  "sourceId": "-DwSCDMCWDQ",
+  "clipVideoPath": "evals/clip_composition/research/downloads/r_ztjHaHmcg/r_ztjHaHmcg.mp4",
+  "sourceVideoPath": "evals/clip_composition/research/downloads/r_ztjHaHmcg/sources/-DwSCDMCWDQ/-DwSCDMCWDQ.mp4",
+  "outputId": "20260705-v001",
+  "checks": [
+    {
+      "cutIndex": 0,
+      "clipStartMs": 2555,
+      "clipEndMs": 32555,
+      "sourceStartMs": 2179930,
+      "sourceEndMs": 2209930,
+      "durationMs": 30000,
+      "relationToPrevious": "first",
+      "outputVideoPath": "evals/clip_composition/outputs/visual-check/r_ztjHaHmcg/multicut_r_ztjHaHmcg_20260705-v001_chunk01.mp4",
+      "status": "rendered"
+    },
+    {
+      "cutIndex": 1,
+      "clipStartMs": 32555,
+      "clipEndMs": 62555,
+      "sourceStartMs": 2309360,
+      "sourceEndMs": 2339360,
+      "durationMs": 30000,
+      "relationToPrevious": "gap",
+      "outputVideoPath": "evals/clip_composition/outputs/visual-check/r_ztjHaHmcg/multicut_r_ztjHaHmcg_20260705-v001_chunk02.mp4",
+      "status": "rendered"
+    },
+    {
+      "cutIndex": 2,
+      "clipStartMs": 62555,
+      "clipEndMs": 92555,
+      "sourceStartMs": 2361159,
+      "sourceEndMs": 2391159,
+      "durationMs": 30000,
+      "relationToPrevious": "gap",
+      "outputVideoPath": "evals/clip_composition/outputs/visual-check/r_ztjHaHmcg/multicut_r_ztjHaHmcg_20260705-v001_chunk03.mp4",
+      "status": "rendered"
+    },
+    {
+      "cutIndex": 3,
+      "clipStartMs": 92555,
+      "clipEndMs": 121147,
+      "sourceStartMs": 2404730,
+      "sourceEndMs": 2433322,
+      "durationMs": 28592,
+      "relationToPrevious": "gap",
+      "outputVideoPath": "evals/clip_composition/outputs/visual-check/r_ztjHaHmcg/multicut_r_ztjHaHmcg_20260705-v001_chunk04.mp4",
+      "status": "rendered"
+    }
+  ],
+  "nextActions": [
+    "生成した各チャンク動画をWeb版Geminiへ渡し、切り抜き側と元動画側が同じ元ネタか確認する。",
+    "Geminiまたは人間確認で一致したチャンクだけをexpectedCuts候補に残す。",
+    "固定テーマは確認済み区間から人間が逆算して書く。",
+    "複数区間expectedを採点できるようにscore側を拡張してからcomposition評価へ入れる。"
+  ],
+  "productionImpact": {
+    "writesRuntime": false,
+    "touchesProductionUi": false,
+    "touchesProductionApi": false,
+    "touchesProductionQueue": false,
+    "touchesDatabase": false
+  }
+}

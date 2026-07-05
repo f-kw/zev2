@@ -1,0 +1,158 @@
+{
+  "kind": "clip_composition_multicut_expected_candidate_plan",
+  "runAt": "2026-07-05T13:20:01.411Z",
+  "targetId": "r_ztjHaHmcg",
+  "title": "同接100人いたら食べていけるの？",
+  "targetPath": "evals/clip_composition/stt-targets/r_ztjHaHmcg.json",
+  "clip": {
+    "id": "r_ztjHaHmcg",
+    "url": "https://www.youtube.com/watch?v=r_ztjHaHmcg",
+    "localVideoPath": "evals/clip_composition/research/downloads/r_ztjHaHmcg/r_ztjHaHmcg.mp4"
+  },
+  "source": {
+    "id": "-DwSCDMCWDQ",
+    "url": "https://www.youtube.com/watch?v=-DwSCDMCWDQ",
+    "localVideoPath": "evals/clip_composition/research/downloads/r_ztjHaHmcg/sources/-DwSCDMCWDQ/-DwSCDMCWDQ.mp4"
+  },
+  "audioCompareResultPath": "evals/clip_composition/outputs/audio-compare-chunks-r_ztjHaHmcg_youtube_auto_v001.json",
+  "freezeDecision": {
+    "canFreezeAsSingleCut": false,
+    "canFreezeAsMulticutNow": false,
+    "reason": "複数の元動画側ギャップがあるため単一区間では凍結しない。各チャンクをWeb Geminiまたは人間の目で確認するまで、複数区間expectedとしても凍結しない。"
+  },
+  "proposedExpectedCuts": [
+    {
+      "cutIndex": 0,
+      "clipStartMs": 2555,
+      "clipEndMs": 32555,
+      "sourceStartMs": 2179930,
+      "sourceEndMs": 2209930,
+      "clipDurationMs": 30000,
+      "sourceDurationMs": 30000,
+      "relationToPrevious": "first",
+      "textCoverage": {
+        "clip": 0.764367816091954,
+        "source": 0.764367816091954,
+        "matchedChars": 133,
+        "queryChars": 174,
+        "sourceChars": 174
+      },
+      "audioEvidence": {
+        "envelopeCorrelation": 0.298622,
+        "directCorrelationAtEnvelopeOffset": 0.057318,
+        "bestOffsetMs": 5780
+      },
+      "clipText": "動説100人いれば食べていけるって本当なんだろうかあー100人か100人いたらもういけるんじゃないか動説動説100人でしょ動説100人って結構だもんしかも動説100人結構だねだって僕がPUBGでちょうど伸び始めた時期が100人ぐらいだったはずだけど常に100人来るなら全然多分普通のサラリーマンぐらいの月収あるんじゃないかちょい下回るかなぐらいか多分今",
+      "sourceText": "なんだそれ道雪百人いれば食べていけるって本当なんだろうかああ100人か100人たらもいけるんじゃないか道雪道雪100人でしょどう節約に脚光でもしかもん道雪100人結構だねなって僕がパブgでショートムービー始めた時期は100人ぐらいだったはずだけどすでに100人来るなら全然タウン普通のサラリーマンぐらいの結晶あるんじゃないかちょい下もあるかなグライガー多分今だけも暇だし昔のアナリティクス見て",
+      "verificationStatus": "needs_chunk_visual_confirmation"
+    },
+    {
+      "cutIndex": 1,
+      "clipStartMs": 32555,
+      "clipEndMs": 62555,
+      "sourceStartMs": 2309360,
+      "sourceEndMs": 2339360,
+      "clipDurationMs": 30000,
+      "sourceDurationMs": 30000,
+      "sourceGapFromPreviousMs": 99430,
+      "relationToPrevious": "gap",
+      "textCoverage": {
+        "clip": 0.5642857142857143,
+        "source": 0.5642857142857143,
+        "matchedChars": 79,
+        "queryChars": 140,
+        "sourceChars": 140
+      },
+      "audioEvidence": {
+        "envelopeCorrelation": 0.612458,
+        "directCorrelationAtEnvelopeOffset": -0.019381,
+        "bestOffsetMs": 44380
+      },
+      "clipText": "今だし昔のアナリティクス見てみるか20202018年5月組でしょ僕2018年じゃあそれこそ7月とかでいいか7月2日2018年の7月あー残ってるわはいはいはいはいはい同説100人だとまあでも多分生活できると思うってことはどうせ3200にはさらにも32人分そんな単純計算かなーって思うけど",
+      "sourceText": "鄭州なれねぇ昔のやつしあれが見れないの仕方ないから12月まで砂20102018-4でねーあれ北数字サポさん入ったっけなぁ9月と敵は分残ってるわはいはいはいされませんうん2道雪100人だとまでも多分生活できると思うってことはどうする3200にはサーフィンは32人6そんな単純計算かなーって思うけど",
+      "verificationStatus": "needs_chunk_visual_confirmation"
+    },
+    {
+      "cutIndex": 2,
+      "clipStartMs": 62555,
+      "clipEndMs": 92555,
+      "sourceStartMs": 2361159,
+      "sourceEndMs": 2391159,
+      "clipDurationMs": 30000,
+      "sourceDurationMs": 30000,
+      "sourceGapFromPreviousMs": 21799,
+      "relationToPrevious": "gap",
+      "textCoverage": {
+        "clip": 0.7526315789473684,
+        "source": 0.7526315789473684,
+        "matchedChars": 143,
+        "queryChars": 190,
+        "sourceChars": 190
+      },
+      "audioEvidence": {
+        "envelopeCorrelation": 0.526415,
+        "directCorrelationAtEnvelopeOffset": -0.019121,
+        "bestOffsetMs": 20110
+      },
+      "clipText": "どまあながち間違ってないこともないかもしれん多分でもそうか単純計算ではあるかそうなんだ単純計算なんだよなそれがすごいよなぁ同節数とチャンネル登録者数どっちがお金なんだろうかチャンネル登録者数は別に何のお金にもなんないよチャンネル売るぐらいしかできなくないわからんけど同説がまあなんだろう結局リアルタイムの数字だからそうあの単純計算だからさマジでだってそうじゃんあのー広告収入が例えば",
+      "sourceText": "も知れた分でもそうか単純計算ではあるかそうなないファンjunkさんなんだがそれがすごいやなぁゆうさんのサブスクありございます道雪数とチャンネル登録者数どっちがお金になるのだろうかチャンネル登録者サーブに何人のほかにもなんないよチャンネル売るぐらいしかできなくないわからんけど道雪がまあ何だろうtvrリアルタイムの数字だからフォアの単純計算だからさマジでだってそうじゃんあの広告収入が例えば",
+      "verificationStatus": "needs_chunk_visual_confirmation"
+    },
+    {
+      "cutIndex": 3,
+      "clipStartMs": 92555,
+      "clipEndMs": 121147,
+      "sourceStartMs": 2404730,
+      "sourceEndMs": 2433322,
+      "clipDurationMs": 28592,
+      "sourceDurationMs": 28592,
+      "sourceGapFromPreviousMs": 13571,
+      "relationToPrevious": "gap",
+      "textCoverage": {
+        "clip": 0.8156424581005587,
+        "source": 0.8156424581005587,
+        "matchedChars": 146,
+        "queryChars": 179,
+        "sourceChars": 179
+      },
+      "audioEvidence": {
+        "envelopeCorrelation": 0.593818,
+        "directCorrelationAtEnvelopeOffset": 0.20869,
+        "bestOffsetMs": 1880
+      },
+      "clipText": "ば100人に見られてる人は広告収入がじゃあ1円ですと1000人に見られてるなら広告収入が0.5円になりますとかだったらさじゃないじゃんじゃないのよまあなんか日本のサイトとかはそういうことするところありそうだけどYouTubeはそういう仕様じゃないから再生数が100の動画も再生数が多分1000万の動画もそれで再生数で国収益の単価は変わんないからそれがすごいよね",
+      "sourceText": "あの広告収入が例えば100人に見られてる人は広告収入がじゃあ1年ですと仙人に見られる1000人に見られてるなら黒収入が0.5位になりますとかだったらさじゃないじゃんじゃないのよまあなんか日本のサイトだからそういうことするところありそうですけどゆ中バーソイしようじゃないからf200人再生数が100人ほど100の動画も再生数が1,000万の動画もそれでその再生数で北収益の単価は変わらないから",
+      "verificationStatus": "needs_chunk_visual_confirmation"
+    }
+  ],
+  "sourceContinuity": {
+    "hasPositiveSourceGaps": true,
+    "positiveGapCount": 3,
+    "largestPositiveGapMs": 99430,
+    "summary": "元動画側で正のギャップが3件あるため、単一区間expectedとして凍結すると切り抜きにない元配信部分を含みます。"
+  },
+  "fixedThemePreparation": {
+    "status": "needs_human_reverse_written_theme",
+    "suggestedHumanTask": "確認済みの複数区間を見て、「この切り抜き師は何をテーマとして切ったか」を人間が1行で逆算して書く。",
+    "evidenceTextForHuman": [
+      "チャンク1: 動説100人いれば食べていけるって本当なんだろうかあー100人か100人いたらもういけるんじゃないか動説動説100人でしょ動説100人って結構だもんしかも動説100人結構だねだって僕がPUBGでちょうど伸び始めた時期が100人ぐらいだったはずだけど常に100人来るなら全然多分普通のサラリーマンぐらいの月収あるんじゃないかちょい下回るかなぐらいか多分今",
+      "チャンク2: 今だし昔のアナリティクス見てみるか20202018年5月組でしょ僕2018年じゃあそれこそ7月とかでいいか7月2日2018年の7月あー残ってるわはいはいはいはいはい同説100人だとまあでも多分生活できると思うってことはどうせ3200にはさらにも32人分そんな単純計算かなーって思うけど",
+      "チャンク3: どまあながち間違ってないこともないかもしれん多分でもそうか単純計算ではあるかそうなんだ単純計算なんだよなそれがすごいよなぁ同節数とチャンネル登録者数どっちがお金なんだろうかチャンネル登録者数は別に何のお金にもなんないよチャンネル売るぐらいしかできなくないわからんけど同説がまあなんだろう結局リアルタイムの数字だからそうあの単純計算だからさマジでだってそうじゃんあのー広告収入が例えば",
+      "チャンク4: ば100人に見られてる人は広告収入がじゃあ1円ですと1000人に見られてるなら広告収入が0.5円になりますとかだったらさじゃないじゃんじゃないのよまあなんか日本のサイトとかはそういうことするところありそうだけどYouTubeはそういう仕様じゃないから再生数が100の動画も再生数が多分1000万の動画もそれで再生数で国収益の単価は変わんないからそれがすごいよね"
+    ]
+  },
+  "nextActions": [
+    "各チャンクについて、切り抜き側範囲と元動画側候補範囲の左右比較動画を作る。",
+    "Web版Geminiまたは人間の目で、各チャンクが同じ元ネタか確認する。",
+    "確認済みチャンクだけをexpectedCuts候補に残し、確認不能なチャンクは除外または再探索する。",
+    "固定テーマは確認済み区間から人間が逆算して書く。",
+    "現在の単一区間採点スクリプトが複数expectedCutsを全件評価できるようにしてから、composition評価へ入れる。"
+  ],
+  "productionImpact": {
+    "writesRuntime": false,
+    "touchesProductionUi": false,
+    "touchesProductionApi": false,
+    "touchesProductionQueue": false,
+    "touchesDatabase": false
+  }
+}

@@ -489,6 +489,27 @@ pnpm --filter @zev2/agent-runner exec tsx ../evals/clip_composition/summarize_au
 
 このコマンドはSTTも音声比較も実行しません。既に保存された音声比較結果、期待区間、LLM選択区間を読み、同じ切り抜き箇所か、開始と終端がどれだけずれているかを `outputs/` と `reports/` に出します。
 
+単一区間では凍結できない切り貼り型候補について、複数区間expected候補と確認待ち作業を出す場合:
+
+```bash
+node --experimental-strip-types evals/clip_composition/plan_multicut_expected_candidate.ts \
+  --target evals/clip_composition/stt-targets/r_ztjHaHmcg.json \
+  --audioCompare evals/clip_composition/outputs/audio-compare-chunks-r_ztjHaHmcg_youtube_auto_v001.json \
+  --outputId 20260705-v001
+```
+
+このコマンドもSTT、音声比較、LLM確認は実行しません。保存済みのチャンク音声比較を読み、元動画側の正のギャップがある場合は単一区間expectedとして凍結不可にし、各チャンクの目視確認待ち候補として出します。
+
+複数区間候補からWeb Geminiまたは人間確認用の左右比較動画を作る場合:
+
+```bash
+node --experimental-strip-types evals/clip_composition/render_multicut_visual_checks.ts \
+  --plan evals/clip_composition/outputs/multicut-expected-candidate-r_ztjHaHmcg-20260705-v001.json \
+  --outputId 20260705-v001
+```
+
+このコマンドはローカルに保存済みの切り抜き動画と元動画だけを読み、`outputs/visual-check/<target>/` に確認動画を出します。Web Geminiへのアップロードや判定は実行しません。
+
 ## 実行方法
 
 指定されていた実行形:
