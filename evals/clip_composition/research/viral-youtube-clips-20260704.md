@@ -190,3 +190,29 @@ STT停止中の補助:
 - `evals/clip_composition/outputs/alignment-r_ztjHaHmcg_youtube_auto_v001.json`
 - `evals/clip_composition/outputs/audio-compare-chunks-r_ztjHaHmcg_youtube_auto_v001.json`
 - `evals/clip_composition/outputs/r_ztjHaHmcg/visual_verification/20260705-gemini-web-flash-audio-scan-v001.json`
+
+## 2026-07-05 単一区間向きの次点候補
+
+`r_ztjHaHmcg` は元動画自体は正しそうだが、切り抜き側が複数箇所を詰めているため、現行の単一区間評価fixtureとしては保留した。代わりに、元動画候補が1本で短尺の `UpRyakf5j80` を調べた。
+
+保存したもの:
+
+- 切り抜き音声: `evals/clip_composition/research/downloads/UpRyakf5j80/UpRyakf5j80.m4a`
+- 切り抜き自動字幕: `evals/clip_composition/research/downloads/UpRyakf5j80/subtitles/UpRyakf5j80.ja-orig.json3`
+- 元動画自動字幕: `evals/clip_composition/research/downloads/UpRyakf5j80/sources/kNX-wQTvsws/subtitles/kNX-wQTvsws.ja-orig.json3`
+- 字幕STT変換結果: `evals/clip_composition/stt/UpRyakf5j80_youtube_auto/` と `evals/clip_composition/stt/UpRyakf5j80_kNX-wQTvsws_youtube_auto/`
+- チャンク照合結果: `evals/clip_composition/outputs/alignment-UpRyakf5j80_youtube_auto_v001.json`
+- 照合メモ: `evals/clip_composition/reports/UpRyakf5j80-youtube-auto-alignment-v001.md`
+- STT対象定義: `evals/clip_composition/stt-targets/UpRyakf5j80.json`
+
+字幕照合の結果:
+
+- 切り抜き `0:00.000 - 0:30.000` → 元動画 `kNX-wQTvsws` の `3:09:22.439 - 3:09:57.300`
+- 切り抜き `0:30.000 - 0:44.390` → 元動画 `kNX-wQTvsws` の `3:09:51.899 - 3:10:05.460`
+
+判断:
+
+- 2チャンクが同じ連続範囲に集まっており、単一区間fixture候補として有望。
+- 現時点ではYouTube自動字幕照合だけなので、expectedCutsには固定しない。
+- 元動画音声の取得またはローカルSTT再実行ができたら、音声比較と目視確認を行う。
+- 固定テーマは、確認済みの正解区間から人間が逆算して書く。

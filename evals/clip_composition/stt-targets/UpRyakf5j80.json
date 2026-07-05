@@ -1,0 +1,88 @@
+{
+  "targetId": "UpRyakf5j80",
+  "title": "現役Vtuberで登録者数が世界2位になったことについて正直な感想を述べるマリン船長",
+  "createdAt": "2026-07-05T18:22:16+09:00",
+  "status": "youtube_auto_subtitle_aligned_audio_pending",
+  "clip": {
+    "id": "UpRyakf5j80",
+    "sttId": "UpRyakf5j80_youtube_auto",
+    "url": "https://www.youtube.com/watch?v=UpRyakf5j80",
+    "localAudioPath": "evals/clip_composition/research/downloads/UpRyakf5j80/UpRyakf5j80.m4a",
+    "localVideoPath": null,
+    "subtitlePath": "evals/clip_composition/research/downloads/UpRyakf5j80/subtitles/UpRyakf5j80.ja-orig.json3",
+    "convertedSttPath": "evals/clip_composition/stt/UpRyakf5j80_youtube_auto/clip/word-timestamps.json",
+    "transcriptPath": "evals/clip_composition/stt/UpRyakf5j80_youtube_auto/clip/transcript.json",
+    "durationSec": 43,
+    "sttRole": "clip",
+    "notes": [
+      "切り抜き側のBGM、SE、字幕由来の誤認識、追加音声の混入を正常なノイズとして扱う。",
+      "現時点のSTTはローカルSTTではなくYouTube自動字幕から変換したもの。",
+      "yt-dlpで保存できた媒体は音声のみ。動画ファイルは未取得。"
+    ]
+  },
+  "sourceCandidates": [
+    {
+      "id": "kNX-wQTvsws",
+      "sttId": "UpRyakf5j80_kNX-wQTvsws_youtube_auto",
+      "url": "https://www.youtube.com/watch?v=kNX-wQTvsws",
+      "localVideoPath": null,
+      "localAudioPath": null,
+      "subtitlePath": "evals/clip_composition/research/downloads/UpRyakf5j80/sources/kNX-wQTvsws/subtitles/kNX-wQTvsws.ja-orig.json3",
+      "convertedSttPath": "evals/clip_composition/stt/UpRyakf5j80_kNX-wQTvsws_youtube_auto/source/word-timestamps.json",
+      "transcriptPath": "evals/clip_composition/stt/UpRyakf5j80_kNX-wQTvsws_youtube_auto/source/transcript.json",
+      "durationSec": 13788,
+      "sttRole": "source",
+      "notes": [
+        "説明欄から抽出した元動画候補。",
+        "現時点のSTTはローカルSTTではなくYouTube自動字幕から変換したもの。",
+        "元動画の音声ダウンロードはHTTP 403とYouTube PO token制約で未完了。"
+      ]
+    }
+  ],
+  "alignment": {
+    "resultPath": "evals/clip_composition/outputs/alignment-UpRyakf5j80_youtube_auto_v001.json",
+    "reportPath": "evals/clip_composition/reports/alignment-UpRyakf5j80_youtube_auto_v001.md",
+    "summaryReportPath": "evals/clip_composition/reports/UpRyakf5j80-youtube-auto-alignment-v001.md",
+    "probableSourceInterval": {
+      "sourceId": "kNX-wQTvsws",
+      "sourceStartMs": 11362439,
+      "sourceEndMs": 11405460,
+      "sourceStartLabel": "3:09:22.439",
+      "sourceEndLabel": "3:10:05.460",
+      "basis": "切り抜き30秒チャンク2件が同じ元動画の連続範囲に集まり、字幕照合の被覆が高い。"
+    },
+    "chunkMatches": [
+      {
+        "clipStartMs": 0,
+        "clipEndMs": 30000,
+        "sourceId": "kNX-wQTvsws",
+        "sourceStartMs": 11362439,
+        "sourceEndMs": 11397300,
+        "clipTextCoverage": 0.9878048780487805,
+        "sourceTextCoverage": 0.9878048780487805
+      },
+      {
+        "clipStartMs": 30000,
+        "clipEndMs": 44390,
+        "sourceId": "kNX-wQTvsws",
+        "sourceStartMs": 11391899,
+        "sourceEndMs": 11405460,
+        "clipTextCoverage": 0.95,
+        "sourceTextCoverage": 0.95
+      }
+    ],
+    "notes": [
+      "字幕照合では単一連続区間として扱える可能性が高い。",
+      "音声比較と目視確認が未完了なのでexpectedCutsには固定しない。",
+      "固定テーマもexpectedCuts確定後に、人間が正解区間から逆算して書く。"
+    ]
+  },
+  "requiredOutputs": [
+    "clip側のローカルSTT結果または字幕STT結果の採用判断",
+    "元動画側の単語タイムスタンプ付きSTT結果",
+    "約30秒チャンク単位の照合結果",
+    "音声比較による元動画区間確認",
+    "目視確認済みexpectedCuts候補",
+    "正解区間から人間が逆算した固定テーマ"
+  ]
+}
