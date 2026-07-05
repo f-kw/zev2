@@ -252,6 +252,17 @@ Web版Geminiで同じプロンプトを実行し、返ってきた `selectedCuts
 - 結果: Geminiの選択区間は、音声アンカーで置いた切り抜き動画全体の期待区間と開始・終了ともに0ms差で一致しました。
 - 暫定判定: 本当に切り抜き箇所かを見る評価では一致。発話の芯だけへ絞る評価とは別に扱います。
 
+Web版Geminiで確認動画を見せて、切り抜き動画全体の元配信対応区間を目視確認した結果:
+
+- 確認依頼: `reports/gemini-visual-check-IMQYaT_RWRA_clip_audio_v001.md`
+- 確認動画: `outputs/visual-check/IMQYaT_RWRA/gemini_pair_clip_audio_v001_IMQYaT_RWRA_vs_8uuQldLptRE_33m17s_full.mp4`
+- Gemini確認結果: `outputs/IMQYaT_RWRA_clip_audio_v001/visual_verification/20260705-131357-gemini-web-flash.json`
+- expected反映先: `expected/IMQYaT_RWRA_clip_audio_v001.json`
+- 確認状態: `audio_anchor_confirmed_visual_confirmed`
+- 再採点結果JSON: `outputs/IMQYaT_RWRA_clip_audio_v001/clip_composition_prompt_v001/20260705-131440/result.json`
+- 再採点サマリー: `reports/IMQYaT_RWRA_clip_audio_v001/clip_composition_prompt_v001/20260705-131440/summary.md`
+- 結果: Web版Geminiは `33:17.050 - 33:35.672` をA全体の元ネタ区間として `confirmed` と判定し、保存済みGemini選択区間も開始・終了ともに0ms差で一致しました。
+
 ## 実行方法
 
 指定されていた実行形:

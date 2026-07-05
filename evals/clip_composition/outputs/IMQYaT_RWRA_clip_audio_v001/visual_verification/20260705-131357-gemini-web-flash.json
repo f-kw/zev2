@@ -1,0 +1,44 @@
+{
+  "status": "confirmed",
+  "recommendedSourceStartMs": 1997050,
+  "recommendedSourceEndMs": 2015672,
+  "reason": "切り抜き動画（前半A）の全編にわたり、元配信（後半B）の指定区間と発話、笑い声、キャラクターの動き、チャット欄のログが完全に一致しています。前半Aは後半Bをテンポよく再構成したものであり、元ネタ区間として100%妥当です。",
+  "matchedMoments": [
+    {
+      "clipMoment": "00:00 - 00:08 「女騎士だぁー！」「ゴブリンかな？」のエピソードと笑い声",
+      "sourceMoment": "33:17.050 - 33:25.000",
+      "confidence": "high"
+    },
+    {
+      "clipMoment": "00:08 - 00:09 暗転挟み（!?）",
+      "sourceMoment": "33:25.000 - 33:26.000",
+      "confidence": "high"
+    },
+    {
+      "clipMoment": "00:09 - 00:13 00:05~00:08付近の笑い声のクリップ反復",
+      "sourceMoment": "33:22.000 - 33:25.000",
+      "confidence": "high"
+    },
+    {
+      "clipMoment": "00:13 - 00:18 オーケストラ指揮（樋口楓）のインサートネタ挿入",
+      "sourceMoment": "33:22.000 - 33:25.000（音声は笑い声を加工・ループ流用）",
+      "confidence": "high"
+    },
+    {
+      "clipMoment": "00:18 - 00:36 「最悪がやってきた」から「ゴブリンじゃなかった」までの元配信通りの流れ",
+      "sourceMoment": "33:17.050 - 33:35.672",
+      "confidence": "high"
+    }
+  ],
+  "notes": [
+    "切り抜き師による加工として、オーケストラ風のクラシックBGM、暗転（!?）、樋口楓が指揮者を務める実写合成風のミーム映像（00:13-00:18）がインサートされています。",
+    "テロップ（「女騎士だぁー！」等）や画面下部の枠、および1回目のループ（00:09-00:18）は切り抜き独自の編集ですが、ベースとなっている音声およびゲーム映像はすべて提示されたBの区間から抽出されています。"
+  ],
+  "meta": {
+    "checkedBy": "gemini-web-flash",
+    "checkedAt": "2026-07-05T13:13:57+09:00",
+    "geminiConversationUrl": "https://gemini.google.com/app/abd632fa7d800930",
+    "videoPath": "evals/clip_composition/outputs/visual-check/IMQYaT_RWRA/gemini_pair_clip_audio_v001_IMQYaT_RWRA_vs_8uuQldLptRE_33m17s_full.mp4",
+    "requestPath": "evals/clip_composition/reports/gemini-visual-check-IMQYaT_RWRA_clip_audio_v001.md"
+  }
+}
