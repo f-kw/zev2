@@ -1,0 +1,310 @@
+{
+  "draftId": "r_ztjHaHmcg_partial_material_v001",
+  "fixtureId": "r_ztjHaHmcg_partial_material_v001",
+  "expectedCuts": [
+    {
+      "sourceStartMs": 2208172,
+      "sourceEndMs": 2224490,
+      "reason": "素材対応の切り替わり点を境界とする定義に基づく、部分fixture用の素材ブロック草案。",
+      "sourceVideoId": "-DwSCDMCWDQ",
+      "sourceUrl": "https://www.youtube.com/watch?v=-DwSCDMCWDQ",
+      "clipId": "r_ztjHaHmcg",
+      "clipUrl": "https://www.youtube.com/watch?v=r_ztjHaHmcg",
+      "verificationStatus": "partial_material_boundaries_human_confirmed_with_unresolved_exclusion",
+      "usableForClipLocationEval": true,
+      "usableForCompositionPromptEval": true,
+      "multicutPartIndex": 0,
+      "clipStartMs": 15903,
+      "clipEndMs": 32383,
+      "qualityGrade": "material_block_granularity",
+      "boundaryStatus": {
+        "leading": {
+          "status": "clip_review_start",
+          "meaning": "部分fixtureの先頭。前境界は今回の判定対象外。"
+        },
+        "trailing": {
+          "status": "human_recognized_material_switch",
+          "boundaryIndex": 1,
+          "meaning": "境界1で素材対応の切り替わりを人間認定済み。"
+        }
+      },
+      "internalGapMs": {
+        "sourceExtraInsideMs": 1263,
+        "clipExtraInsideMs": 0,
+        "note": "同一素材ブロック内でsource側の進みがclip側より大きい分は、切り抜き内部の詰め候補として扱う。境界にはしない。"
+      },
+      "sourceSttId": "r_ztjHaHmcg_-DwSCDMCWDQ_local300_v001",
+      "humanVisualVerification": {
+        "status": "confirmed",
+        "checkedBy": "kawafmm",
+        "checkedAt": "2026-07-06",
+        "note": "境界1・3・4・5は人間認定済み。境界2を含むclip 0:33.504-0:51.810はunresolvedとして除外する判断を人間が承認した。"
+      },
+      "partialFixturePolicy": {
+        "unresolvedExcluded": true,
+        "unresolvedRangeIds": [
+          "boundary2_unresolved_clip_33504_51810"
+        ],
+        "qualityGrade": "material_block_granularity",
+        "note": "素材対応ブロック粒度のexpected。高精度サンプルとは別の品質等級として扱う。"
+      }
+    },
+    {
+      "sourceStartMs": 2237847,
+      "sourceEndMs": 2241469,
+      "reason": "素材対応の切り替わり点を境界とする定義に基づく、部分fixture用の素材ブロック草案。",
+      "sourceVideoId": "-DwSCDMCWDQ",
+      "sourceUrl": "https://www.youtube.com/watch?v=-DwSCDMCWDQ",
+      "clipId": "r_ztjHaHmcg",
+      "clipUrl": "https://www.youtube.com/watch?v=r_ztjHaHmcg",
+      "verificationStatus": "partial_material_boundaries_human_confirmed_with_unresolved_exclusion",
+      "usableForClipLocationEval": true,
+      "usableForCompositionPromptEval": true,
+      "multicutPartIndex": 1,
+      "clipStartMs": 32564,
+      "clipEndMs": 33504,
+      "qualityGrade": "material_block_granularity",
+      "boundaryStatus": {
+        "leading": {
+          "status": "human_recognized_material_switch",
+          "boundaryIndex": 1,
+          "meaning": "境界1で素材対応の切り替わりを人間認定済み。"
+        },
+        "trailing": {
+          "status": "adjacent_to_unresolved_exclusion",
+          "boundaryIndex": 2,
+          "meaning": "直後に境界2の未解決除外区間がある。"
+        }
+      },
+      "internalGapMs": {
+        "sourceExtraInsideMs": 0,
+        "clipExtraInsideMs": 0,
+        "note": "同一素材ブロック内でsource側の進みがclip側より大きい分は、切り抜き内部の詰め候補として扱う。境界にはしない。"
+      },
+      "notes": [
+        "直後の境界2を含む区間は未解決として除外。block2自体は除外区間の手前までの素材ブロック草案。"
+      ],
+      "sourceSttId": "r_ztjHaHmcg_-DwSCDMCWDQ_local300_v001",
+      "humanVisualVerification": {
+        "status": "confirmed",
+        "checkedBy": "kawafmm",
+        "checkedAt": "2026-07-06",
+        "note": "境界1・3・4・5は人間認定済み。境界2を含むclip 0:33.504-0:51.810はunresolvedとして除外する判断を人間が承認した。"
+      },
+      "partialFixturePolicy": {
+        "unresolvedExcluded": true,
+        "unresolvedRangeIds": [
+          "boundary2_unresolved_clip_33504_51810"
+        ],
+        "qualityGrade": "material_block_granularity",
+        "note": "素材対応ブロック粒度のexpected。高精度サンプルとは別の品質等級として扱う。"
+      }
+    },
+    {
+      "sourceStartMs": 2314526,
+      "sourceEndMs": 2316828,
+      "reason": "素材対応の切り替わり点を境界とする定義に基づく、部分fixture用の素材ブロック草案。",
+      "sourceVideoId": "-DwSCDMCWDQ",
+      "sourceUrl": "https://www.youtube.com/watch?v=-DwSCDMCWDQ",
+      "clipId": "r_ztjHaHmcg",
+      "clipUrl": "https://www.youtube.com/watch?v=r_ztjHaHmcg",
+      "verificationStatus": "partial_material_boundaries_human_confirmed_with_unresolved_exclusion",
+      "usableForClipLocationEval": true,
+      "usableForCompositionPromptEval": true,
+      "multicutPartIndex": 2,
+      "clipStartMs": 51810,
+      "clipEndMs": 54271,
+      "qualityGrade": "material_block_granularity",
+      "boundaryStatus": {
+        "leading": {
+          "status": "adjacent_to_unresolved_exclusion",
+          "meaning": "直前に境界2の未解決除外区間がある。"
+        },
+        "trailing": {
+          "status": "human_recognized_material_switch",
+          "boundaryIndex": 3,
+          "meaning": "境界3で素材対応の切り替わりを人間認定済み。"
+        }
+      },
+      "internalGapMs": {
+        "sourceExtraInsideMs": 0,
+        "clipExtraInsideMs": 0,
+        "note": "同一素材ブロック内でsource側の進みがclip側より大きい分は、切り抜き内部の詰め候補として扱う。境界にはしない。"
+      },
+      "notes": [
+        "直前の境界2を含む区間は未解決として除外。block3自体は除外区間の後からの素材ブロック草案。"
+      ],
+      "sourceSttId": "r_ztjHaHmcg_-DwSCDMCWDQ_local300_v001",
+      "humanVisualVerification": {
+        "status": "confirmed",
+        "checkedBy": "kawafmm",
+        "checkedAt": "2026-07-06",
+        "note": "境界1・3・4・5は人間認定済み。境界2を含むclip 0:33.504-0:51.810はunresolvedとして除外する判断を人間が承認した。"
+      },
+      "partialFixturePolicy": {
+        "unresolvedExcluded": true,
+        "unresolvedRangeIds": [
+          "boundary2_unresolved_clip_33504_51810"
+        ],
+        "qualityGrade": "material_block_granularity",
+        "note": "素材対応ブロック粒度のexpected。高精度サンプルとは別の品質等級として扱う。"
+      }
+    },
+    {
+      "sourceStartMs": 2333847,
+      "sourceEndMs": 2350553,
+      "reason": "素材対応の切り替わり点を境界とする定義に基づく、部分fixture用の素材ブロック草案。",
+      "sourceVideoId": "-DwSCDMCWDQ",
+      "sourceUrl": "https://www.youtube.com/watch?v=-DwSCDMCWDQ",
+      "clipId": "r_ztjHaHmcg",
+      "clipUrl": "https://www.youtube.com/watch?v=r_ztjHaHmcg",
+      "verificationStatus": "partial_material_boundaries_human_confirmed_with_unresolved_exclusion",
+      "usableForClipLocationEval": true,
+      "usableForCompositionPromptEval": true,
+      "multicutPartIndex": 3,
+      "clipStartMs": 57045,
+      "clipEndMs": 70497,
+      "qualityGrade": "material_block_granularity",
+      "boundaryStatus": {
+        "leading": {
+          "status": "human_recognized_material_switch",
+          "boundaryIndex": 3,
+          "meaning": "境界3で素材対応の切り替わりを人間認定済み。"
+        },
+        "trailing": {
+          "status": "human_recognized_material_switch",
+          "boundaryIndex": 4,
+          "meaning": "境界4で素材対応の切り替わりを人間認定済み。"
+        }
+      },
+      "internalGapMs": {
+        "sourceExtraInsideMs": 0,
+        "clipExtraInsideMs": 0,
+        "note": "同一素材ブロック内でsource側の進みがclip側より大きい分は、切り抜き内部の詰め候補として扱う。境界にはしない。"
+      },
+      "sourceSttId": "r_ztjHaHmcg_-DwSCDMCWDQ_local300_v001",
+      "humanVisualVerification": {
+        "status": "confirmed",
+        "checkedBy": "kawafmm",
+        "checkedAt": "2026-07-06",
+        "note": "境界1・3・4・5は人間認定済み。境界2を含むclip 0:33.504-0:51.810はunresolvedとして除外する判断を人間が承認した。"
+      },
+      "partialFixturePolicy": {
+        "unresolvedExcluded": true,
+        "unresolvedRangeIds": [
+          "boundary2_unresolved_clip_33504_51810"
+        ],
+        "qualityGrade": "material_block_granularity",
+        "note": "素材対応ブロック粒度のexpected。高精度サンプルとは別の品質等級として扱う。"
+      }
+    },
+    {
+      "sourceStartMs": 2369790,
+      "sourceEndMs": 2382581,
+      "reason": "素材対応の切り替わり点を境界とする定義に基づく、部分fixture用の素材ブロック草案。",
+      "sourceVideoId": "-DwSCDMCWDQ",
+      "sourceUrl": "https://www.youtube.com/watch?v=-DwSCDMCWDQ",
+      "clipId": "r_ztjHaHmcg",
+      "clipUrl": "https://www.youtube.com/watch?v=r_ztjHaHmcg",
+      "verificationStatus": "partial_material_boundaries_human_confirmed_with_unresolved_exclusion",
+      "usableForClipLocationEval": true,
+      "usableForCompositionPromptEval": true,
+      "multicutPartIndex": 4,
+      "clipStartMs": 71198,
+      "clipEndMs": 84653,
+      "qualityGrade": "material_block_granularity",
+      "boundaryStatus": {
+        "leading": {
+          "status": "human_recognized_material_switch",
+          "boundaryIndex": 4,
+          "meaning": "境界4で素材対応の切り替わりを人間認定済み。"
+        },
+        "trailing": {
+          "status": "human_recognized_material_switch",
+          "boundaryIndex": 5,
+          "meaning": "境界5で素材対応の切り替わりを人間認定済み。"
+        }
+      },
+      "internalGapMs": {
+        "sourceExtraInsideMs": 0,
+        "clipExtraInsideMs": 0,
+        "note": "同一素材ブロック内でsource側の進みがclip側より大きい分は、切り抜き内部の詰め候補として扱う。境界にはしない。"
+      },
+      "sourceSttId": "r_ztjHaHmcg_-DwSCDMCWDQ_local300_v001",
+      "humanVisualVerification": {
+        "status": "confirmed",
+        "checkedBy": "kawafmm",
+        "checkedAt": "2026-07-06",
+        "note": "境界1・3・4・5は人間認定済み。境界2を含むclip 0:33.504-0:51.810はunresolvedとして除外する判断を人間が承認した。"
+      },
+      "partialFixturePolicy": {
+        "unresolvedExcluded": true,
+        "unresolvedRangeIds": [
+          "boundary2_unresolved_clip_33504_51810"
+        ],
+        "qualityGrade": "material_block_granularity",
+        "note": "素材対応ブロック粒度のexpected。高精度サンプルとは別の品質等級として扱う。"
+      }
+    },
+    {
+      "sourceStartMs": 2399621,
+      "sourceEndMs": 2440868,
+      "reason": "素材対応の切り替わり点を境界とする定義に基づく、部分fixture用の素材ブロック草案。",
+      "sourceVideoId": "-DwSCDMCWDQ",
+      "sourceUrl": "https://www.youtube.com/watch?v=-DwSCDMCWDQ",
+      "clipId": "r_ztjHaHmcg",
+      "clipUrl": "https://www.youtube.com/watch?v=r_ztjHaHmcg",
+      "verificationStatus": "partial_material_boundaries_human_confirmed_with_unresolved_exclusion",
+      "usableForClipLocationEval": true,
+      "usableForCompositionPromptEval": true,
+      "multicutPartIndex": 5,
+      "clipStartMs": 87475,
+      "clipEndMs": 121147,
+      "qualityGrade": "material_block_granularity",
+      "boundaryStatus": {
+        "leading": {
+          "status": "human_recognized_material_switch",
+          "boundaryIndex": 5,
+          "meaning": "境界5で素材対応の切り替わりを人間認定済み。"
+        },
+        "trailing": {
+          "status": "clip_review_end",
+          "meaning": "部分fixtureの終端。後境界は今回の判定対象外。"
+        }
+      },
+      "internalGapMs": {
+        "sourceExtraInsideMs": 4628,
+        "clipExtraInsideMs": 161,
+        "note": "同一素材ブロック内でsource側の進みがclip側より大きい分は、切り抜き内部の詰め候補として扱う。境界にはしない。"
+      },
+      "highPrecisionSamples": [
+        {
+          "qualityGrade": "high_precision_sample",
+          "clipStartMs": 92555,
+          "clipEndMs": 121147,
+          "sourceStartMs": 2404730,
+          "sourceEndMs": 2436085,
+          "verifiedAt": "2026-07-06",
+          "checkedBy": "kawafmm",
+          "verificationMethod": "境界別静止画・音声比較(motion-v001)",
+          "note": "内部未特定カットあり(概算)"
+        }
+      ],
+      "sourceSttId": "r_ztjHaHmcg_-DwSCDMCWDQ_local300_v001",
+      "humanVisualVerification": {
+        "status": "confirmed",
+        "checkedBy": "kawafmm",
+        "checkedAt": "2026-07-06",
+        "note": "境界1・3・4・5は人間認定済み。境界2を含むclip 0:33.504-0:51.810はunresolvedとして除外する判断を人間が承認した。"
+      },
+      "partialFixturePolicy": {
+        "unresolvedExcluded": true,
+        "unresolvedRangeIds": [
+          "boundary2_unresolved_clip_33504_51810"
+        ],
+        "qualityGrade": "material_block_granularity",
+        "note": "素材対応ブロック粒度のexpected。高精度サンプルとは別の品質等級として扱う。"
+      }
+    }
+  ]
+}

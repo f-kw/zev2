@@ -25,6 +25,46 @@
 - `outputs/<fixtureId>/<promptVersion>/<runId>/result.json`
 - `reports/<fixtureId>/<promptVersion>/<runId>/summary.md`
 
+## 測定対象の生成系統
+
+区間を実際に生成した処理を、採点結果の `generationSystem` に必ず記録します。
+
+- `baseline-rule`: 現行のルール処理が、固定済みテーマに対応する発話まとまりから区間を作った結果。プロンプト版数の概念はありません。
+- `llm-vNNN`: Web Geminiに `clip_composition_prompt_vNNN` と固定入力を渡し、返ってきた区間を採点した結果。
+- `other-*`: 過去の確認用外部JSON採点など、上記2系統ではない結果。正式なプロンプト比較基準にはしません。
+
+過去の `result.json` には `generationSystem` が無いものがあります。その場合は、比較レポート側でモデル名、外部入力ファイル、LLM呼び出し有無の記録から推定し、`legacy inferred` と表示します。
+
+今後の `result.json` は最低限、次の形で生成系統を持ちます。
+
+```json
+{
+  "promptVersion": "baseline-rule",
+  "generationSystem": {
+    "id": "baseline-rule",
+    "kind": "baseline-rule",
+    "intervalGenerator": "runner.buildClipComposition",
+    "promptVersion": null,
+    "usesPromptVersionForGeneration": false
+  }
+}
+```
+
+LLM系では次の形です。
+
+```json
+{
+  "promptVersion": "clip_composition_prompt_v006",
+  "generationSystem": {
+    "id": "llm-v006",
+    "kind": "llm",
+    "intervalGenerator": "web-gemini+prompt",
+    "promptVersion": "clip_composition_prompt_v006",
+    "usesPromptVersionForGeneration": true
+  }
+}
+```
+
 ## STT後のfixture化
 
 バズった切り抜きから新しいfixtureを作る場合は、`STT_ALIGNMENT_PLAN.md` の手順に従います。

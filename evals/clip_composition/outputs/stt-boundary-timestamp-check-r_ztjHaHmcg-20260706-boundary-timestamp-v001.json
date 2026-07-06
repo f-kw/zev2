@@ -1,0 +1,163 @@
+{
+  "kind": "stt_timestamp_boundary_check",
+  "runAt": "2026-07-06T01:29:57.241Z",
+  "settings": {
+    "sampleRate": 16000,
+    "audioFrameMs": 20,
+    "audioHopMs": 10,
+    "checkToleranceMs": 200,
+    "boundaryHalfWindowMs": 15000,
+    "issueShiftMs": 5080,
+    "waveformMeasurement": "確認したSTT語の開始時刻±200ms内でRMS上昇が最大になる点を、波形上の発話開始候補として見る"
+  },
+  "results": [
+    {
+      "id": "source_300s",
+      "label": "source 300s boundary",
+      "startMs": 285000,
+      "endMs": 315000,
+      "boundaryMs": 300000,
+      "audioPath": "outputs/audio-check/r_ztjHaHmcg/stt-boundaries/source_300s.wav",
+      "svgPath": "outputs/plots/stt-boundaries/source_300s.svg",
+      "check": {
+        "word": {
+          "text": "指",
+          "startMs": 302553,
+          "endMs": 302693,
+          "speaker": "SPEAKER_00",
+          "segmentId": 418
+        },
+        "previousWord": {
+          "text": "か",
+          "startMs": 299927,
+          "endMs": 299947,
+          "speaker": "SPEAKER_00",
+          "segmentId": 417
+        },
+        "previousGapMs": 2606,
+        "declaredRise": {
+          "localMs": 17610,
+          "absoluteMs": 17610,
+          "residualMs": 57,
+          "rise": 0.031275982395866576
+        },
+        "shiftedRise": {
+          "localMs": 12660,
+          "absoluteMs": 12660,
+          "residualMs": 187,
+          "rise": 0.06727341956385706
+        },
+        "declaredPass": true
+      }
+    },
+    {
+      "id": "source_600s",
+      "label": "source 600s boundary",
+      "startMs": 585000,
+      "endMs": 615000,
+      "boundaryMs": 600000,
+      "audioPath": "outputs/audio-check/r_ztjHaHmcg/stt-boundaries/source_600s.wav",
+      "svgPath": "outputs/plots/stt-boundaries/source_600s.svg",
+      "check": {
+        "word": {
+          "text": "肩",
+          "startMs": 600111,
+          "endMs": 600311,
+          "speaker": "SPEAKER_00",
+          "segmentId": 1641
+        },
+        "previousWord": {
+          "text": "が",
+          "startMs": 599807,
+          "endMs": 599827,
+          "speaker": "SPEAKER_00",
+          "segmentId": 1640
+        },
+        "previousGapMs": 284,
+        "declaredRise": {
+          "localMs": 15220,
+          "absoluteMs": 15220,
+          "residualMs": 109,
+          "rise": 0.12945059689843344
+        },
+        "shiftedRise": {
+          "localMs": 10090,
+          "absoluteMs": 10090,
+          "residualMs": 59,
+          "rise": 0.002581991964094211
+        },
+        "declaredPass": true
+      }
+    },
+    {
+      "id": "source_900s",
+      "label": "source 900s boundary",
+      "startMs": 885000,
+      "endMs": 915000,
+      "boundaryMs": 900000,
+      "audioPath": "outputs/audio-check/r_ztjHaHmcg/stt-boundaries/source_900s.wav",
+      "svgPath": "outputs/plots/stt-boundaries/source_900s.svg",
+      "check": {
+        "word": {
+          "text": "と",
+          "startMs": 900111,
+          "endMs": 900211,
+          "speaker": "SPEAKER_00",
+          "segmentId": 2899
+        },
+        "previousWord": {
+          "text": "の",
+          "startMs": 899927,
+          "endMs": 899947,
+          "speaker": "SPEAKER_00",
+          "segmentId": 2898
+        },
+        "previousGapMs": 164,
+        "declaredRise": {
+          "localMs": 15120,
+          "absoluteMs": 15120,
+          "residualMs": 9,
+          "rise": 0.11747054293777592
+        },
+        "shiftedRise": {
+          "localMs": 10150,
+          "absoluteMs": 10150,
+          "residualMs": 119,
+          "rise": 0.037121958730634216
+        },
+        "declaredPass": true
+      }
+    },
+    {
+      "id": "clip_head_0_15s",
+      "label": "clip head 0-15s",
+      "startMs": 0,
+      "endMs": 15000,
+      "boundaryMs": 0,
+      "audioPath": "outputs/audio-check/r_ztjHaHmcg/stt-boundaries/clip_head_0_15s.wav",
+      "svgPath": "outputs/plots/stt-boundaries/clip_head_0_15s.svg",
+      "check": {
+        "word": {
+          "text": "動",
+          "startMs": 2555,
+          "endMs": 2775,
+          "speaker": "SPEAKER_00",
+          "segmentId": 1
+        },
+        "declaredRise": {
+          "localMs": 2570,
+          "absoluteMs": 2570,
+          "residualMs": 15,
+          "rise": 0.03502773685575464
+        },
+        "declaredPass": true
+      }
+    }
+  ],
+  "productionImpact": {
+    "runtimeWrites": false,
+    "fixtureWrites": false,
+    "expectedWrites": false,
+    "confirmedPairChanged": false
+  }
+}

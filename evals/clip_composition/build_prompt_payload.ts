@@ -5,6 +5,7 @@ import path from 'node:path';
 type CliOptions = {
   fixtureId: string;
   promptVersion: string;
+  runs: number;
 };
 
 type FixtureMetadata = {
@@ -111,8 +112,17 @@ function parseOptions(argv: string[]): CliOptions {
 
   return {
     fixtureId: sanitizePathPart(fixtureId),
-    promptVersion: normalizePromptVersion(rawPromptVersion)
+    promptVersion: normalizePromptVersion(rawPromptVersion),
+    runs: parseRuns(values.get('runs'))
   };
+}
+
+function parseRuns(value: string | undefined): number {
+  const runs = Number.parseInt(value ?? '1', 10);
+  if (!Number.isInteger(runs) || runs < 1) {
+    throw new Error('--runs は1以上の整数で指定してください');
+  }
+  return runs;
 }
 
 function normalizePromptVersion(value: string): string {
@@ -275,6 +285,7 @@ function buildPromptMarkdown(promptTemplate: string, modelInput: unknown): strin
 function buildReport(input: {
   fixture: FixtureMetadata;
   promptVersion: string;
+  runs: number;
   promptPath: string;
   payloadPath: string;
   expectedPath: string;
@@ -285,7 +296,9 @@ function buildReport(input: {
     '# clip_composition プロンプト入力レポート',
     '',
     `- fixture: ${input.fixture.fixtureId}`,
+    `- 生成系統: llm-${input.promptVersion.replace(/^clip_composition_prompt_/, '')}`,
     `- プロンプト版数: ${input.promptVersion}`,
+    `- 予定実行回数: ${input.runs}`,
     `- プロンプト本文: ${input.promptPath}`,
     `- モデル入力JSON: ${input.payloadPath}`,
     `- 採点用期待値: ${input.expectedPath}`,
@@ -340,6 +353,14 @@ async function main() {
     fixtureId: fixture.fixtureId,
     draftId: fixture.draftId,
     promptVersion: options.promptVersion,
+    generationSystem: {
+      id: `llm-${options.promptVersion.replace(/^clip_composition_prompt_/, '')}`,
+      kind: 'llm',
+      intervalGenerator: 'web-gemini+prompt',
+      promptVersion: options.promptVersion,
+      usesPromptVersionForGeneration: true,
+      plannedRuns: options.runs
+    },
     llmCall: false,
     promptTemplatePath: path.relative(evalRoot, templatePath),
     modelInput,
@@ -347,6 +368,12 @@ async function main() {
       expectedPath: path.relative(evalRoot, expectedPath),
       expectedCutCount: expected.expectedCuts.length,
       note: 'このデータはモデルへ渡さず、評価時の採点だけで使う。'
+    },
+    executionPlan: {
+      requestedRuns: options.runs,
+      runPurpose: options.runs > 1
+        ? '同一fixture、同一プロンプト、同一モデル設定で出力の揺れ幅を測る。'
+        : '単回のLLM出力を採点する。'
     }
   };
   const payloadPath = path.join(outputDir, 'prompt-input.json');
@@ -357,6 +384,7 @@ async function main() {
   await writeFile(reportPath, buildReport({
     fixture,
     promptVersion: options.promptVersion,
+    runs: options.runs,
     promptPath,
     payloadPath,
     expectedPath,

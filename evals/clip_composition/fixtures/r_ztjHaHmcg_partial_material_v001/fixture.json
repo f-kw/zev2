@@ -1,0 +1,21 @@
+{
+  "fixtureId": "r_ztjHaHmcg_partial_material_v001",
+  "draftId": "r_ztjHaHmcg_partial_material_v001",
+  "description": "境界2の未解決区間を除外した、素材ブロック粒度の部分fixture。",
+  "copiedFrom": [
+    "evals/clip_composition/outputs/partial-fixture-review-r_ztjHaHmcg-20260706-v001.json",
+    "evals/clip_composition/stt-targets/r_ztjHaHmcg.json",
+    "stt/r_ztjHaHmcg_-DwSCDMCWDQ_local300_v001/source/word-timestamps.json"
+  ],
+  "copiedAt": "2026-07-06T05:22:26.126Z",
+  "sourceUri": "https://www.youtube.com/watch?v=-DwSCDMCWDQ",
+  "transcriptPath": "transcript.json",
+  "themesPath": "themes.json",
+  "selectedThemeId": "theme_partial_material_1",
+  "notes": [
+    "評価実行時はruntime/artifactsを読まず、このfixture配下のファイルだけを読む。",
+    "境界2を含むclip 0:33.504-0:51.810はunresolvedとして除外している。",
+    "expectedCutsは素材ブロック粒度。高精度サンプルとは別品質として扱う。",
+    "固定テーマは人間が正解区間から逆算して書いた。"
+  ]
+}

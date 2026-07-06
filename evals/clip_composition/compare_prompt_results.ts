@@ -19,6 +19,14 @@ type ScoreResult = {
   fixtureId: string;
   draftId?: string;
   promptVersion: string;
+  generationSystem: {
+    id: string;
+    kind: string;
+    intervalGenerator: string;
+    promptVersion?: string | null;
+    usesPromptVersionForGeneration?: boolean;
+    legacyInferred?: boolean;
+  };
   model: string;
   params: Record<string, unknown>;
   selectedCuts: Cut[];
@@ -59,6 +67,10 @@ type ComparisonRow = {
   runAt: string;
   fixtureId: string;
   promptVersion: string;
+  generationSystemId: string;
+  intervalGenerator: string;
+  generationSystemKind: string;
+  generationSystemLegacyInferred: boolean;
   model: string;
   params: Record<string, unknown>;
   selectedStartMs: number;
@@ -182,6 +194,7 @@ function validateScoreResult(value: unknown, resultPath: string): ScoreResult {
     fixtureId: stringFrom(record.fixtureId, `${resultPath}.fixtureId`),
     ...(typeof record.draftId === 'string' ? { draftId: record.draftId } : {}),
     promptVersion: stringFrom(record.promptVersion, `${resultPath}.promptVersion`),
+    generationSystem: generationSystemFrom(record, resultPath),
     model: stringFrom(record.model, `${resultPath}.model`),
     params: recordFrom(record.params),
     selectedCuts: selectedCuts.map((item, index) => validateCut(item, `${resultPath}.selectedCuts[${index}]`)),
@@ -196,6 +209,63 @@ function validateScoreResult(value: unknown, resultPath: string): ScoreResult {
       ? { diffSummary: record.diffSummary as ScoreResult['diffSummary'] }
       : {}),
     themeCoverage: recordFrom(record.themeCoverage)
+  };
+}
+
+function generationSystemFrom(record: Record<string, unknown>, resultPath: string): ScoreResult['generationSystem'] {
+  const raw = recordFrom(record.generationSystem);
+  if (typeof raw.id === 'string' && typeof raw.kind === 'string' && typeof raw.intervalGenerator === 'string') {
+    return {
+      id: raw.id,
+      kind: raw.kind,
+      intervalGenerator: raw.intervalGenerator,
+      ...(typeof raw.promptVersion === 'string' || raw.promptVersion === null ? { promptVersion: raw.promptVersion } : {}),
+      ...(typeof raw.usesPromptVersionForGeneration === 'boolean' ? { usesPromptVersionForGeneration: raw.usesPromptVersionForGeneration } : {}),
+      ...(typeof raw.legacyInferred === 'boolean' ? { legacyInferred: raw.legacyInferred } : {})
+    };
+  }
+
+  const promptVersion = typeof record.promptVersion === 'string' ? record.promptVersion : 'unknown';
+  const model = typeof record.model === 'string' ? record.model : '';
+  const params = recordFrom(record.params);
+  const hasExternalInput = typeof record.inputFile === 'string';
+  if (model === 'rule-output-smoke' || model === 'rule-based-result-as-external') {
+    return {
+      id: 'other-rule-output-score',
+      kind: 'other',
+      intervalGenerator: 'rule-output-json-rescored-as-external-input',
+      promptVersion,
+      usesPromptVersionForGeneration: false,
+      legacyInferred: true
+    };
+  }
+  if (params.llmCall === false || model === 'rule-based-build_clip_composition' || model === 'baseline-rule') {
+    return {
+      id: 'baseline-rule',
+      kind: 'baseline-rule',
+      intervalGenerator: 'runner.buildClipComposition',
+      promptVersion: null,
+      usesPromptVersionForGeneration: false,
+      legacyInferred: true
+    };
+  }
+  if (model.includes('gemini') || model === 'external-prompt-output') {
+    return {
+      id: `llm-${promptVersion.replace(/^clip_composition_prompt_/, '')}`,
+      kind: 'llm',
+      intervalGenerator: 'web-gemini+prompt',
+      promptVersion,
+      usesPromptVersionForGeneration: true,
+      legacyInferred: true
+    };
+  }
+  return {
+    id: 'other-unknown',
+    kind: 'other',
+    intervalGenerator: hasExternalInput ? `external-json:${resultPath}` : `unknown:${resultPath}`,
+    promptVersion,
+    usesPromptVersionForGeneration: false,
+    legacyInferred: true
   };
 }
 
@@ -332,6 +402,10 @@ function buildRow(resultPath: string, result: ScoreResult): ComparisonRow {
     runAt: result.runAt,
     fixtureId: result.fixtureId,
     promptVersion: result.promptVersion,
+    generationSystemId: result.generationSystem.id,
+    intervalGenerator: result.generationSystem.intervalGenerator,
+    generationSystemKind: result.generationSystem.kind,
+    generationSystemLegacyInferred: result.generationSystem.legacyInferred === true,
     model: result.model,
     params: result.params,
     selectedStartMs: selected.sourceStartMs,
@@ -368,6 +442,7 @@ function promptNumber(promptVersion: string): number {
 function compareRows(left: ComparisonRow, right: ComparisonRow): number {
   return left.fixtureId.localeCompare(right.fixtureId)
     || promptNumber(left.promptVersion) - promptNumber(right.promptVersion)
+    || left.generationSystemId.localeCompare(right.generationSystemId)
     || left.runAt.localeCompare(right.runAt)
     || left.resultPath.localeCompare(right.resultPath);
 }
@@ -418,18 +493,19 @@ function buildReport(rows: ComparisonRow[], resultPath: string): string {
   for (const [fixtureId, fixtureRows] of [...byFixture.entries()].sort(([left], [right]) => left.localeCompare(right))) {
     lines.push(`## ${fixtureId}`);
     lines.push('');
-    lines.push('| prompt | model | cuts | exact | overlap | missing | extra | selected intervals | expected intervals | first start delta | first end delta | cut diffs |');
-    lines.push('| --- | --- | ---: | ---: | ---: | ---: | ---: | --- | --- | ---: | ---: | --- |');
+    lines.push('| system | generator | prompt label | model | cuts | exact | overlap | missing | extra | selected intervals | expected intervals | first start delta | first end delta | cut diffs |');
+    lines.push('| --- | --- | --- | --- | ---: | ---: | ---: | ---: | ---: | --- | --- | ---: | ---: | --- |');
     for (const row of fixtureRows.sort(compareRows)) {
-      lines.push(`| ${row.promptVersion} | ${row.model} | ${row.selectedCutCount}/${row.expectedCutCount} | ${row.exactMatchCount} | ${row.overlappingCutCount} | ${row.missingExpectedCutCount} | ${row.extraSelectedCutCount} | ${formatIntervals(row.selectedIntervals)} | ${formatIntervals(row.expectedIntervals)} | ${formatMs(row.startDeltaMs)} | ${formatMs(row.endDeltaMs)} | ${formatCutDiffs(row.cutDiffs)} |`);
+      const legacy = row.generationSystemLegacyInferred ? ' (legacy inferred)' : '';
+      lines.push(`| ${row.generationSystemId}${legacy} | ${row.intervalGenerator} | ${row.promptVersion} | ${row.model} | ${row.selectedCutCount}/${row.expectedCutCount} | ${row.exactMatchCount} | ${row.overlappingCutCount} | ${row.missingExpectedCutCount} | ${row.extraSelectedCutCount} | ${formatIntervals(row.selectedIntervals)} | ${formatIntervals(row.expectedIntervals)} | ${formatMs(row.startDeltaMs)} | ${formatMs(row.endDeltaMs)} | ${formatCutDiffs(row.cutDiffs)} |`);
     }
     lines.push('');
     lines.push('### 判定メモ');
     lines.push('');
     for (const row of fixtureRows.sort(compareRows)) {
-      lines.push(`- ${row.promptVersion}: theme側=${row.themeSidePossibility ?? '未記録'} / composition側=${row.compositionSidePossibility ?? '未記録'}`);
+      lines.push(`- ${row.generationSystemId} / ${row.promptVersion}: theme側=${row.themeSidePossibility ?? '未記録'} / composition側=${row.compositionSidePossibility ?? '未記録'}`);
       if (row.diffSummary) {
-        lines.push(`- ${row.promptVersion}: ${row.diffSummary}`);
+        lines.push(`- ${row.generationSystemId} / ${row.promptVersion}: ${row.diffSummary}`);
       }
     }
     lines.push('');
@@ -444,6 +520,8 @@ function buildReport(rows: ComparisonRow[], resultPath: string): string {
   lines.push('- missingは期待区間に対応する選択区間がない件数、extraは期待区間に対応しない選択区間の件数を表す。');
   lines.push('- 終了差分がマイナスのrunは期待区間より短く、プラスのrunは期待区間より長い。');
   lines.push('- どちらが良いかは、この表だけで自動決定せず、対応するsummaryと境界粒度レポートを見て判断する。');
+  lines.push('- system列がbaseline-ruleの場合、区間を生成したのはルール処理であり、prompt labelは比較用ラベルにすぎない。');
+  lines.push('- system列がllm-vNNNの場合、区間を生成したのはWeb Geminiと該当プロンプト版である。');
   lines.push('');
 
   return lines.join('\n');

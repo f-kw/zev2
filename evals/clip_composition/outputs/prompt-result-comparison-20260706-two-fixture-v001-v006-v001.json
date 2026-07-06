@@ -1,0 +1,870 @@
+{
+  "kind": "clip_composition_prompt_result_comparison",
+  "runAt": "2026-07-06T05:25:29.441Z",
+  "rows": [
+    {
+      "resultPath": "evals/clip_composition/outputs/r_ztjHaHmcg_partial_material_v001/clip_composition_prompt_v001/20260706-142503/result.json",
+      "runAt": "2026-07-06T14:25:03+09:00",
+      "fixtureId": "r_ztjHaHmcg_partial_material_v001",
+      "promptVersion": "clip_composition_prompt_v001",
+      "model": "rule-based-build_clip_composition",
+      "params": {
+        "temperature": 0,
+        "llmCall": false,
+        "selection": "固定済みテーマIDに対応する発話まとまりから最終区間を作る"
+      },
+      "selectedStartMs": 2208172,
+      "selectedEndMs": 2224490,
+      "expectedStartMs": 2208172,
+      "expectedEndMs": 2224490,
+      "startDeltaMs": 0,
+      "endDeltaMs": 0,
+      "overlapSummary": "期待区間と完全に一致しています",
+      "selectedCutCount": 6,
+      "expectedCutCount": 6,
+      "exactMatchCount": 6,
+      "overlappingCutCount": 6,
+      "missingExpectedCutCount": 0,
+      "extraSelectedCutCount": 0,
+      "allExpectedCutsMatchedExactlyByIndex": true,
+      "allExpectedCutsHaveOverlapByIndex": true,
+      "diffSummary": "期待区間6件に対して選択区間6件。 完全一致6件、重なりあり6件。 未選択の期待区間0件、余分な選択区間0件。",
+      "selectedIntervals": [
+        "2208172-2224490",
+        "2237847-2241469",
+        "2314526-2316828",
+        "2333847-2350553",
+        "2369790-2382581",
+        "2399621-2440868"
+      ],
+      "expectedIntervals": [
+        "2208172-2224490",
+        "2237847-2241469",
+        "2314526-2316828",
+        "2333847-2350553",
+        "2369790-2382581",
+        "2399621-2440868"
+      ],
+      "cutDiffs": [
+        {
+          "cutIndex": 0,
+          "status": "compared",
+          "startDeltaMs": 0,
+          "endDeltaMs": 0,
+          "overlapMs": 16318,
+          "overlapSummary": "期待区間と完全に一致しています"
+        },
+        {
+          "cutIndex": 1,
+          "status": "compared",
+          "startDeltaMs": 0,
+          "endDeltaMs": 0,
+          "overlapMs": 3622,
+          "overlapSummary": "期待区間と完全に一致しています"
+        },
+        {
+          "cutIndex": 2,
+          "status": "compared",
+          "startDeltaMs": 0,
+          "endDeltaMs": 0,
+          "overlapMs": 2302,
+          "overlapSummary": "期待区間と完全に一致しています"
+        },
+        {
+          "cutIndex": 3,
+          "status": "compared",
+          "startDeltaMs": 0,
+          "endDeltaMs": 0,
+          "overlapMs": 16706,
+          "overlapSummary": "期待区間と完全に一致しています"
+        },
+        {
+          "cutIndex": 4,
+          "status": "compared",
+          "startDeltaMs": 0,
+          "endDeltaMs": 0,
+          "overlapMs": 12791,
+          "overlapSummary": "期待区間と完全に一致しています"
+        },
+        {
+          "cutIndex": 5,
+          "status": "compared",
+          "startDeltaMs": 0,
+          "endDeltaMs": 0,
+          "overlapMs": 41247,
+          "overlapSummary": "期待区間と完全に一致しています"
+        }
+      ],
+      "selectedReason": "選ばれたテーマ「配信者が食べていける同接規模について現実的に答える場面」の編集元場面1。 役割: 導入。 選ばれたテーマを見せる入口にする 素材ブロック粒度で、配信者が食べていける同接規模について現実的に答える流れを複数区間として扱う。境界2の未解決区間は除外する。",
+      "themeSidePossibility": "theme側で正解区間が候補に入っていない可能性は低い",
+      "compositionSidePossibility": "composition側の候補選択差分はありません"
+    },
+    {
+      "resultPath": "evals/clip_composition/outputs/r_ztjHaHmcg_partial_material_v001/clip_composition_prompt_v002/20260706-142503/result.json",
+      "runAt": "2026-07-06T14:25:03+09:00",
+      "fixtureId": "r_ztjHaHmcg_partial_material_v001",
+      "promptVersion": "clip_composition_prompt_v002",
+      "model": "rule-based-build_clip_composition",
+      "params": {
+        "temperature": 0,
+        "llmCall": false,
+        "selection": "固定済みテーマIDに対応する発話まとまりから最終区間を作る"
+      },
+      "selectedStartMs": 2208172,
+      "selectedEndMs": 2224490,
+      "expectedStartMs": 2208172,
+      "expectedEndMs": 2224490,
+      "startDeltaMs": 0,
+      "endDeltaMs": 0,
+      "overlapSummary": "期待区間と完全に一致しています",
+      "selectedCutCount": 6,
+      "expectedCutCount": 6,
+      "exactMatchCount": 6,
+      "overlappingCutCount": 6,
+      "missingExpectedCutCount": 0,
+      "extraSelectedCutCount": 0,
+      "allExpectedCutsMatchedExactlyByIndex": true,
+      "allExpectedCutsHaveOverlapByIndex": true,
+      "diffSummary": "期待区間6件に対して選択区間6件。 完全一致6件、重なりあり6件。 未選択の期待区間0件、余分な選択区間0件。",
+      "selectedIntervals": [
+        "2208172-2224490",
+        "2237847-2241469",
+        "2314526-2316828",
+        "2333847-2350553",
+        "2369790-2382581",
+        "2399621-2440868"
+      ],
+      "expectedIntervals": [
+        "2208172-2224490",
+        "2237847-2241469",
+        "2314526-2316828",
+        "2333847-2350553",
+        "2369790-2382581",
+        "2399621-2440868"
+      ],
+      "cutDiffs": [
+        {
+          "cutIndex": 0,
+          "status": "compared",
+          "startDeltaMs": 0,
+          "endDeltaMs": 0,
+          "overlapMs": 16318,
+          "overlapSummary": "期待区間と完全に一致しています"
+        },
+        {
+          "cutIndex": 1,
+          "status": "compared",
+          "startDeltaMs": 0,
+          "endDeltaMs": 0,
+          "overlapMs": 3622,
+          "overlapSummary": "期待区間と完全に一致しています"
+        },
+        {
+          "cutIndex": 2,
+          "status": "compared",
+          "startDeltaMs": 0,
+          "endDeltaMs": 0,
+          "overlapMs": 2302,
+          "overlapSummary": "期待区間と完全に一致しています"
+        },
+        {
+          "cutIndex": 3,
+          "status": "compared",
+          "startDeltaMs": 0,
+          "endDeltaMs": 0,
+          "overlapMs": 16706,
+          "overlapSummary": "期待区間と完全に一致しています"
+        },
+        {
+          "cutIndex": 4,
+          "status": "compared",
+          "startDeltaMs": 0,
+          "endDeltaMs": 0,
+          "overlapMs": 12791,
+          "overlapSummary": "期待区間と完全に一致しています"
+        },
+        {
+          "cutIndex": 5,
+          "status": "compared",
+          "startDeltaMs": 0,
+          "endDeltaMs": 0,
+          "overlapMs": 41247,
+          "overlapSummary": "期待区間と完全に一致しています"
+        }
+      ],
+      "selectedReason": "選ばれたテーマ「配信者が食べていける同接規模について現実的に答える場面」の編集元場面1。 役割: 導入。 選ばれたテーマを見せる入口にする 素材ブロック粒度で、配信者が食べていける同接規模について現実的に答える流れを複数区間として扱う。境界2の未解決区間は除外する。",
+      "themeSidePossibility": "theme側で正解区間が候補に入っていない可能性は低い",
+      "compositionSidePossibility": "composition側の候補選択差分はありません"
+    },
+    {
+      "resultPath": "evals/clip_composition/outputs/r_ztjHaHmcg_partial_material_v001/clip_composition_prompt_v003/20260706-142503/result.json",
+      "runAt": "2026-07-06T14:25:03+09:00",
+      "fixtureId": "r_ztjHaHmcg_partial_material_v001",
+      "promptVersion": "clip_composition_prompt_v003",
+      "model": "rule-based-build_clip_composition",
+      "params": {
+        "temperature": 0,
+        "llmCall": false,
+        "selection": "固定済みテーマIDに対応する発話まとまりから最終区間を作る"
+      },
+      "selectedStartMs": 2208172,
+      "selectedEndMs": 2224490,
+      "expectedStartMs": 2208172,
+      "expectedEndMs": 2224490,
+      "startDeltaMs": 0,
+      "endDeltaMs": 0,
+      "overlapSummary": "期待区間と完全に一致しています",
+      "selectedCutCount": 6,
+      "expectedCutCount": 6,
+      "exactMatchCount": 6,
+      "overlappingCutCount": 6,
+      "missingExpectedCutCount": 0,
+      "extraSelectedCutCount": 0,
+      "allExpectedCutsMatchedExactlyByIndex": true,
+      "allExpectedCutsHaveOverlapByIndex": true,
+      "diffSummary": "期待区間6件に対して選択区間6件。 完全一致6件、重なりあり6件。 未選択の期待区間0件、余分な選択区間0件。",
+      "selectedIntervals": [
+        "2208172-2224490",
+        "2237847-2241469",
+        "2314526-2316828",
+        "2333847-2350553",
+        "2369790-2382581",
+        "2399621-2440868"
+      ],
+      "expectedIntervals": [
+        "2208172-2224490",
+        "2237847-2241469",
+        "2314526-2316828",
+        "2333847-2350553",
+        "2369790-2382581",
+        "2399621-2440868"
+      ],
+      "cutDiffs": [
+        {
+          "cutIndex": 0,
+          "status": "compared",
+          "startDeltaMs": 0,
+          "endDeltaMs": 0,
+          "overlapMs": 16318,
+          "overlapSummary": "期待区間と完全に一致しています"
+        },
+        {
+          "cutIndex": 1,
+          "status": "compared",
+          "startDeltaMs": 0,
+          "endDeltaMs": 0,
+          "overlapMs": 3622,
+          "overlapSummary": "期待区間と完全に一致しています"
+        },
+        {
+          "cutIndex": 2,
+          "status": "compared",
+          "startDeltaMs": 0,
+          "endDeltaMs": 0,
+          "overlapMs": 2302,
+          "overlapSummary": "期待区間と完全に一致しています"
+        },
+        {
+          "cutIndex": 3,
+          "status": "compared",
+          "startDeltaMs": 0,
+          "endDeltaMs": 0,
+          "overlapMs": 16706,
+          "overlapSummary": "期待区間と完全に一致しています"
+        },
+        {
+          "cutIndex": 4,
+          "status": "compared",
+          "startDeltaMs": 0,
+          "endDeltaMs": 0,
+          "overlapMs": 12791,
+          "overlapSummary": "期待区間と完全に一致しています"
+        },
+        {
+          "cutIndex": 5,
+          "status": "compared",
+          "startDeltaMs": 0,
+          "endDeltaMs": 0,
+          "overlapMs": 41247,
+          "overlapSummary": "期待区間と完全に一致しています"
+        }
+      ],
+      "selectedReason": "選ばれたテーマ「配信者が食べていける同接規模について現実的に答える場面」の編集元場面1。 役割: 導入。 選ばれたテーマを見せる入口にする 素材ブロック粒度で、配信者が食べていける同接規模について現実的に答える流れを複数区間として扱う。境界2の未解決区間は除外する。",
+      "themeSidePossibility": "theme側で正解区間が候補に入っていない可能性は低い",
+      "compositionSidePossibility": "composition側の候補選択差分はありません"
+    },
+    {
+      "resultPath": "evals/clip_composition/outputs/r_ztjHaHmcg_partial_material_v001/clip_composition_prompt_v004/20260706-142504/result.json",
+      "runAt": "2026-07-06T14:25:04+09:00",
+      "fixtureId": "r_ztjHaHmcg_partial_material_v001",
+      "promptVersion": "clip_composition_prompt_v004",
+      "model": "rule-based-build_clip_composition",
+      "params": {
+        "temperature": 0,
+        "llmCall": false,
+        "selection": "固定済みテーマIDに対応する発話まとまりから最終区間を作る"
+      },
+      "selectedStartMs": 2208172,
+      "selectedEndMs": 2224490,
+      "expectedStartMs": 2208172,
+      "expectedEndMs": 2224490,
+      "startDeltaMs": 0,
+      "endDeltaMs": 0,
+      "overlapSummary": "期待区間と完全に一致しています",
+      "selectedCutCount": 6,
+      "expectedCutCount": 6,
+      "exactMatchCount": 6,
+      "overlappingCutCount": 6,
+      "missingExpectedCutCount": 0,
+      "extraSelectedCutCount": 0,
+      "allExpectedCutsMatchedExactlyByIndex": true,
+      "allExpectedCutsHaveOverlapByIndex": true,
+      "diffSummary": "期待区間6件に対して選択区間6件。 完全一致6件、重なりあり6件。 未選択の期待区間0件、余分な選択区間0件。",
+      "selectedIntervals": [
+        "2208172-2224490",
+        "2237847-2241469",
+        "2314526-2316828",
+        "2333847-2350553",
+        "2369790-2382581",
+        "2399621-2440868"
+      ],
+      "expectedIntervals": [
+        "2208172-2224490",
+        "2237847-2241469",
+        "2314526-2316828",
+        "2333847-2350553",
+        "2369790-2382581",
+        "2399621-2440868"
+      ],
+      "cutDiffs": [
+        {
+          "cutIndex": 0,
+          "status": "compared",
+          "startDeltaMs": 0,
+          "endDeltaMs": 0,
+          "overlapMs": 16318,
+          "overlapSummary": "期待区間と完全に一致しています"
+        },
+        {
+          "cutIndex": 1,
+          "status": "compared",
+          "startDeltaMs": 0,
+          "endDeltaMs": 0,
+          "overlapMs": 3622,
+          "overlapSummary": "期待区間と完全に一致しています"
+        },
+        {
+          "cutIndex": 2,
+          "status": "compared",
+          "startDeltaMs": 0,
+          "endDeltaMs": 0,
+          "overlapMs": 2302,
+          "overlapSummary": "期待区間と完全に一致しています"
+        },
+        {
+          "cutIndex": 3,
+          "status": "compared",
+          "startDeltaMs": 0,
+          "endDeltaMs": 0,
+          "overlapMs": 16706,
+          "overlapSummary": "期待区間と完全に一致しています"
+        },
+        {
+          "cutIndex": 4,
+          "status": "compared",
+          "startDeltaMs": 0,
+          "endDeltaMs": 0,
+          "overlapMs": 12791,
+          "overlapSummary": "期待区間と完全に一致しています"
+        },
+        {
+          "cutIndex": 5,
+          "status": "compared",
+          "startDeltaMs": 0,
+          "endDeltaMs": 0,
+          "overlapMs": 41247,
+          "overlapSummary": "期待区間と完全に一致しています"
+        }
+      ],
+      "selectedReason": "選ばれたテーマ「配信者が食べていける同接規模について現実的に答える場面」の編集元場面1。 役割: 導入。 選ばれたテーマを見せる入口にする 素材ブロック粒度で、配信者が食べていける同接規模について現実的に答える流れを複数区間として扱う。境界2の未解決区間は除外する。",
+      "themeSidePossibility": "theme側で正解区間が候補に入っていない可能性は低い",
+      "compositionSidePossibility": "composition側の候補選択差分はありません"
+    },
+    {
+      "resultPath": "evals/clip_composition/outputs/r_ztjHaHmcg_partial_material_v001/clip_composition_prompt_v005/20260706-142503/result.json",
+      "runAt": "2026-07-06T14:25:03+09:00",
+      "fixtureId": "r_ztjHaHmcg_partial_material_v001",
+      "promptVersion": "clip_composition_prompt_v005",
+      "model": "rule-based-build_clip_composition",
+      "params": {
+        "temperature": 0,
+        "llmCall": false,
+        "selection": "固定済みテーマIDに対応する発話まとまりから最終区間を作る"
+      },
+      "selectedStartMs": 2208172,
+      "selectedEndMs": 2224490,
+      "expectedStartMs": 2208172,
+      "expectedEndMs": 2224490,
+      "startDeltaMs": 0,
+      "endDeltaMs": 0,
+      "overlapSummary": "期待区間と完全に一致しています",
+      "selectedCutCount": 6,
+      "expectedCutCount": 6,
+      "exactMatchCount": 6,
+      "overlappingCutCount": 6,
+      "missingExpectedCutCount": 0,
+      "extraSelectedCutCount": 0,
+      "allExpectedCutsMatchedExactlyByIndex": true,
+      "allExpectedCutsHaveOverlapByIndex": true,
+      "diffSummary": "期待区間6件に対して選択区間6件。 完全一致6件、重なりあり6件。 未選択の期待区間0件、余分な選択区間0件。",
+      "selectedIntervals": [
+        "2208172-2224490",
+        "2237847-2241469",
+        "2314526-2316828",
+        "2333847-2350553",
+        "2369790-2382581",
+        "2399621-2440868"
+      ],
+      "expectedIntervals": [
+        "2208172-2224490",
+        "2237847-2241469",
+        "2314526-2316828",
+        "2333847-2350553",
+        "2369790-2382581",
+        "2399621-2440868"
+      ],
+      "cutDiffs": [
+        {
+          "cutIndex": 0,
+          "status": "compared",
+          "startDeltaMs": 0,
+          "endDeltaMs": 0,
+          "overlapMs": 16318,
+          "overlapSummary": "期待区間と完全に一致しています"
+        },
+        {
+          "cutIndex": 1,
+          "status": "compared",
+          "startDeltaMs": 0,
+          "endDeltaMs": 0,
+          "overlapMs": 3622,
+          "overlapSummary": "期待区間と完全に一致しています"
+        },
+        {
+          "cutIndex": 2,
+          "status": "compared",
+          "startDeltaMs": 0,
+          "endDeltaMs": 0,
+          "overlapMs": 2302,
+          "overlapSummary": "期待区間と完全に一致しています"
+        },
+        {
+          "cutIndex": 3,
+          "status": "compared",
+          "startDeltaMs": 0,
+          "endDeltaMs": 0,
+          "overlapMs": 16706,
+          "overlapSummary": "期待区間と完全に一致しています"
+        },
+        {
+          "cutIndex": 4,
+          "status": "compared",
+          "startDeltaMs": 0,
+          "endDeltaMs": 0,
+          "overlapMs": 12791,
+          "overlapSummary": "期待区間と完全に一致しています"
+        },
+        {
+          "cutIndex": 5,
+          "status": "compared",
+          "startDeltaMs": 0,
+          "endDeltaMs": 0,
+          "overlapMs": 41247,
+          "overlapSummary": "期待区間と完全に一致しています"
+        }
+      ],
+      "selectedReason": "選ばれたテーマ「配信者が食べていける同接規模について現実的に答える場面」の編集元場面1。 役割: 導入。 選ばれたテーマを見せる入口にする 素材ブロック粒度で、配信者が食べていける同接規模について現実的に答える流れを複数区間として扱う。境界2の未解決区間は除外する。",
+      "themeSidePossibility": "theme側で正解区間が候補に入っていない可能性は低い",
+      "compositionSidePossibility": "composition側の候補選択差分はありません"
+    },
+    {
+      "resultPath": "evals/clip_composition/outputs/r_ztjHaHmcg_partial_material_v001/clip_composition_prompt_v006/20260706-142503/result.json",
+      "runAt": "2026-07-06T14:25:03+09:00",
+      "fixtureId": "r_ztjHaHmcg_partial_material_v001",
+      "promptVersion": "clip_composition_prompt_v006",
+      "model": "rule-based-build_clip_composition",
+      "params": {
+        "temperature": 0,
+        "llmCall": false,
+        "selection": "固定済みテーマIDに対応する発話まとまりから最終区間を作る"
+      },
+      "selectedStartMs": 2208172,
+      "selectedEndMs": 2224490,
+      "expectedStartMs": 2208172,
+      "expectedEndMs": 2224490,
+      "startDeltaMs": 0,
+      "endDeltaMs": 0,
+      "overlapSummary": "期待区間と完全に一致しています",
+      "selectedCutCount": 6,
+      "expectedCutCount": 6,
+      "exactMatchCount": 6,
+      "overlappingCutCount": 6,
+      "missingExpectedCutCount": 0,
+      "extraSelectedCutCount": 0,
+      "allExpectedCutsMatchedExactlyByIndex": true,
+      "allExpectedCutsHaveOverlapByIndex": true,
+      "diffSummary": "期待区間6件に対して選択区間6件。 完全一致6件、重なりあり6件。 未選択の期待区間0件、余分な選択区間0件。",
+      "selectedIntervals": [
+        "2208172-2224490",
+        "2237847-2241469",
+        "2314526-2316828",
+        "2333847-2350553",
+        "2369790-2382581",
+        "2399621-2440868"
+      ],
+      "expectedIntervals": [
+        "2208172-2224490",
+        "2237847-2241469",
+        "2314526-2316828",
+        "2333847-2350553",
+        "2369790-2382581",
+        "2399621-2440868"
+      ],
+      "cutDiffs": [
+        {
+          "cutIndex": 0,
+          "status": "compared",
+          "startDeltaMs": 0,
+          "endDeltaMs": 0,
+          "overlapMs": 16318,
+          "overlapSummary": "期待区間と完全に一致しています"
+        },
+        {
+          "cutIndex": 1,
+          "status": "compared",
+          "startDeltaMs": 0,
+          "endDeltaMs": 0,
+          "overlapMs": 3622,
+          "overlapSummary": "期待区間と完全に一致しています"
+        },
+        {
+          "cutIndex": 2,
+          "status": "compared",
+          "startDeltaMs": 0,
+          "endDeltaMs": 0,
+          "overlapMs": 2302,
+          "overlapSummary": "期待区間と完全に一致しています"
+        },
+        {
+          "cutIndex": 3,
+          "status": "compared",
+          "startDeltaMs": 0,
+          "endDeltaMs": 0,
+          "overlapMs": 16706,
+          "overlapSummary": "期待区間と完全に一致しています"
+        },
+        {
+          "cutIndex": 4,
+          "status": "compared",
+          "startDeltaMs": 0,
+          "endDeltaMs": 0,
+          "overlapMs": 12791,
+          "overlapSummary": "期待区間と完全に一致しています"
+        },
+        {
+          "cutIndex": 5,
+          "status": "compared",
+          "startDeltaMs": 0,
+          "endDeltaMs": 0,
+          "overlapMs": 41247,
+          "overlapSummary": "期待区間と完全に一致しています"
+        }
+      ],
+      "selectedReason": "選ばれたテーマ「配信者が食べていける同接規模について現実的に答える場面」の編集元場面1。 役割: 導入。 選ばれたテーマを見せる入口にする 素材ブロック粒度で、配信者が食べていける同接規模について現実的に答える流れを複数区間として扱う。境界2の未解決区間は除外する。",
+      "themeSidePossibility": "theme側で正解区間が候補に入っていない可能性は低い",
+      "compositionSidePossibility": "composition側の候補選択差分はありません"
+    },
+    {
+      "resultPath": "evals/clip_composition/outputs/UpRyakf5j80_clip_audio_v001/clip_composition_prompt_v001/20260706-142404/result.json",
+      "runAt": "2026-07-06T14:24:04+09:00",
+      "fixtureId": "UpRyakf5j80_clip_audio_v001",
+      "promptVersion": "clip_composition_prompt_v001",
+      "model": "rule-based-build_clip_composition",
+      "params": {
+        "temperature": 0,
+        "llmCall": false,
+        "selection": "固定済みテーマIDに対応する発話まとまりから最終区間を作る"
+      },
+      "selectedStartMs": 11362439,
+      "selectedEndMs": 11409170,
+      "expectedStartMs": 11364500,
+      "expectedEndMs": 11407178,
+      "startDeltaMs": -2061,
+      "endDeltaMs": 1992,
+      "overlapSummary": "AIが選んだ区間が期待区間を含んでいます",
+      "selectedCutCount": 1,
+      "expectedCutCount": 1,
+      "exactMatchCount": 0,
+      "overlappingCutCount": 1,
+      "missingExpectedCutCount": 0,
+      "extraSelectedCutCount": 0,
+      "allExpectedCutsMatchedExactlyByIndex": false,
+      "allExpectedCutsHaveOverlapByIndex": true,
+      "diffSummary": "期待区間1件に対して選択区間1件。 完全一致0件、重なりあり1件。 未選択の期待区間0件、余分な選択区間0件。",
+      "selectedIntervals": [
+        "11362439-11409170"
+      ],
+      "expectedIntervals": [
+        "11364500-11407178"
+      ],
+      "cutDiffs": [
+        {
+          "cutIndex": 0,
+          "status": "compared",
+          "startDeltaMs": -2061,
+          "endDeltaMs": 1992,
+          "overlapMs": 42678,
+          "overlapSummary": "AIが選んだ区間が期待区間を含んでいます"
+        }
+      ],
+      "selectedReason": "選ばれたテーマ「登録者数世界2位扱いへの照れと順位変動への冷静な反応」の編集元場面1。 役割: 導入。 選ばれたテーマを見せる入口にする 世界2位という話題提示から、変動するものなので素直に喜べないという結論までを一続きで使う。",
+      "themeSidePossibility": "theme側で正解区間が候補に入っていない可能性は低い",
+      "compositionSidePossibility": "composition側で候補範囲から最終区間を選ぶ処理に差分がある可能性があります"
+    },
+    {
+      "resultPath": "evals/clip_composition/outputs/UpRyakf5j80_clip_audio_v001/clip_composition_prompt_v002/20260706-142432/result.json",
+      "runAt": "2026-07-06T14:24:32+09:00",
+      "fixtureId": "UpRyakf5j80_clip_audio_v001",
+      "promptVersion": "clip_composition_prompt_v002",
+      "model": "rule-based-build_clip_composition",
+      "params": {
+        "temperature": 0,
+        "llmCall": false,
+        "selection": "固定済みテーマIDに対応する発話まとまりから最終区間を作る"
+      },
+      "selectedStartMs": 11362439,
+      "selectedEndMs": 11409170,
+      "expectedStartMs": 11364500,
+      "expectedEndMs": 11407178,
+      "startDeltaMs": -2061,
+      "endDeltaMs": 1992,
+      "overlapSummary": "AIが選んだ区間が期待区間を含んでいます",
+      "selectedCutCount": 1,
+      "expectedCutCount": 1,
+      "exactMatchCount": 0,
+      "overlappingCutCount": 1,
+      "missingExpectedCutCount": 0,
+      "extraSelectedCutCount": 0,
+      "allExpectedCutsMatchedExactlyByIndex": false,
+      "allExpectedCutsHaveOverlapByIndex": true,
+      "diffSummary": "期待区間1件に対して選択区間1件。 完全一致0件、重なりあり1件。 未選択の期待区間0件、余分な選択区間0件。",
+      "selectedIntervals": [
+        "11362439-11409170"
+      ],
+      "expectedIntervals": [
+        "11364500-11407178"
+      ],
+      "cutDiffs": [
+        {
+          "cutIndex": 0,
+          "status": "compared",
+          "startDeltaMs": -2061,
+          "endDeltaMs": 1992,
+          "overlapMs": 42678,
+          "overlapSummary": "AIが選んだ区間が期待区間を含んでいます"
+        }
+      ],
+      "selectedReason": "選ばれたテーマ「登録者数世界2位扱いへの照れと順位変動への冷静な反応」の編集元場面1。 役割: 導入。 選ばれたテーマを見せる入口にする 世界2位という話題提示から、変動するものなので素直に喜べないという結論までを一続きで使う。",
+      "themeSidePossibility": "theme側で正解区間が候補に入っていない可能性は低い",
+      "compositionSidePossibility": "composition側で候補範囲から最終区間を選ぶ処理に差分がある可能性があります"
+    },
+    {
+      "resultPath": "evals/clip_composition/outputs/UpRyakf5j80_clip_audio_v001/clip_composition_prompt_v003/20260706-142433/result.json",
+      "runAt": "2026-07-06T14:24:33+09:00",
+      "fixtureId": "UpRyakf5j80_clip_audio_v001",
+      "promptVersion": "clip_composition_prompt_v003",
+      "model": "rule-based-build_clip_composition",
+      "params": {
+        "temperature": 0,
+        "llmCall": false,
+        "selection": "固定済みテーマIDに対応する発話まとまりから最終区間を作る"
+      },
+      "selectedStartMs": 11362439,
+      "selectedEndMs": 11409170,
+      "expectedStartMs": 11364500,
+      "expectedEndMs": 11407178,
+      "startDeltaMs": -2061,
+      "endDeltaMs": 1992,
+      "overlapSummary": "AIが選んだ区間が期待区間を含んでいます",
+      "selectedCutCount": 1,
+      "expectedCutCount": 1,
+      "exactMatchCount": 0,
+      "overlappingCutCount": 1,
+      "missingExpectedCutCount": 0,
+      "extraSelectedCutCount": 0,
+      "allExpectedCutsMatchedExactlyByIndex": false,
+      "allExpectedCutsHaveOverlapByIndex": true,
+      "diffSummary": "期待区間1件に対して選択区間1件。 完全一致0件、重なりあり1件。 未選択の期待区間0件、余分な選択区間0件。",
+      "selectedIntervals": [
+        "11362439-11409170"
+      ],
+      "expectedIntervals": [
+        "11364500-11407178"
+      ],
+      "cutDiffs": [
+        {
+          "cutIndex": 0,
+          "status": "compared",
+          "startDeltaMs": -2061,
+          "endDeltaMs": 1992,
+          "overlapMs": 42678,
+          "overlapSummary": "AIが選んだ区間が期待区間を含んでいます"
+        }
+      ],
+      "selectedReason": "選ばれたテーマ「登録者数世界2位扱いへの照れと順位変動への冷静な反応」の編集元場面1。 役割: 導入。 選ばれたテーマを見せる入口にする 世界2位という話題提示から、変動するものなので素直に喜べないという結論までを一続きで使う。",
+      "themeSidePossibility": "theme側で正解区間が候補に入っていない可能性は低い",
+      "compositionSidePossibility": "composition側で候補範囲から最終区間を選ぶ処理に差分がある可能性があります"
+    },
+    {
+      "resultPath": "evals/clip_composition/outputs/UpRyakf5j80_clip_audio_v001/clip_composition_prompt_v004/20260706-142433/result.json",
+      "runAt": "2026-07-06T14:24:33+09:00",
+      "fixtureId": "UpRyakf5j80_clip_audio_v001",
+      "promptVersion": "clip_composition_prompt_v004",
+      "model": "rule-based-build_clip_composition",
+      "params": {
+        "temperature": 0,
+        "llmCall": false,
+        "selection": "固定済みテーマIDに対応する発話まとまりから最終区間を作る"
+      },
+      "selectedStartMs": 11362439,
+      "selectedEndMs": 11409170,
+      "expectedStartMs": 11364500,
+      "expectedEndMs": 11407178,
+      "startDeltaMs": -2061,
+      "endDeltaMs": 1992,
+      "overlapSummary": "AIが選んだ区間が期待区間を含んでいます",
+      "selectedCutCount": 1,
+      "expectedCutCount": 1,
+      "exactMatchCount": 0,
+      "overlappingCutCount": 1,
+      "missingExpectedCutCount": 0,
+      "extraSelectedCutCount": 0,
+      "allExpectedCutsMatchedExactlyByIndex": false,
+      "allExpectedCutsHaveOverlapByIndex": true,
+      "diffSummary": "期待区間1件に対して選択区間1件。 完全一致0件、重なりあり1件。 未選択の期待区間0件、余分な選択区間0件。",
+      "selectedIntervals": [
+        "11362439-11409170"
+      ],
+      "expectedIntervals": [
+        "11364500-11407178"
+      ],
+      "cutDiffs": [
+        {
+          "cutIndex": 0,
+          "status": "compared",
+          "startDeltaMs": -2061,
+          "endDeltaMs": 1992,
+          "overlapMs": 42678,
+          "overlapSummary": "AIが選んだ区間が期待区間を含んでいます"
+        }
+      ],
+      "selectedReason": "選ばれたテーマ「登録者数世界2位扱いへの照れと順位変動への冷静な反応」の編集元場面1。 役割: 導入。 選ばれたテーマを見せる入口にする 世界2位という話題提示から、変動するものなので素直に喜べないという結論までを一続きで使う。",
+      "themeSidePossibility": "theme側で正解区間が候補に入っていない可能性は低い",
+      "compositionSidePossibility": "composition側で候補範囲から最終区間を選ぶ処理に差分がある可能性があります"
+    },
+    {
+      "resultPath": "evals/clip_composition/outputs/UpRyakf5j80_clip_audio_v001/clip_composition_prompt_v005/20260706-142434/result.json",
+      "runAt": "2026-07-06T14:24:34+09:00",
+      "fixtureId": "UpRyakf5j80_clip_audio_v001",
+      "promptVersion": "clip_composition_prompt_v005",
+      "model": "rule-based-build_clip_composition",
+      "params": {
+        "temperature": 0,
+        "llmCall": false,
+        "selection": "固定済みテーマIDに対応する発話まとまりから最終区間を作る"
+      },
+      "selectedStartMs": 11362439,
+      "selectedEndMs": 11409170,
+      "expectedStartMs": 11364500,
+      "expectedEndMs": 11407178,
+      "startDeltaMs": -2061,
+      "endDeltaMs": 1992,
+      "overlapSummary": "AIが選んだ区間が期待区間を含んでいます",
+      "selectedCutCount": 1,
+      "expectedCutCount": 1,
+      "exactMatchCount": 0,
+      "overlappingCutCount": 1,
+      "missingExpectedCutCount": 0,
+      "extraSelectedCutCount": 0,
+      "allExpectedCutsMatchedExactlyByIndex": false,
+      "allExpectedCutsHaveOverlapByIndex": true,
+      "diffSummary": "期待区間1件に対して選択区間1件。 完全一致0件、重なりあり1件。 未選択の期待区間0件、余分な選択区間0件。",
+      "selectedIntervals": [
+        "11362439-11409170"
+      ],
+      "expectedIntervals": [
+        "11364500-11407178"
+      ],
+      "cutDiffs": [
+        {
+          "cutIndex": 0,
+          "status": "compared",
+          "startDeltaMs": -2061,
+          "endDeltaMs": 1992,
+          "overlapMs": 42678,
+          "overlapSummary": "AIが選んだ区間が期待区間を含んでいます"
+        }
+      ],
+      "selectedReason": "選ばれたテーマ「登録者数世界2位扱いへの照れと順位変動への冷静な反応」の編集元場面1。 役割: 導入。 選ばれたテーマを見せる入口にする 世界2位という話題提示から、変動するものなので素直に喜べないという結論までを一続きで使う。",
+      "themeSidePossibility": "theme側で正解区間が候補に入っていない可能性は低い",
+      "compositionSidePossibility": "composition側で候補範囲から最終区間を選ぶ処理に差分がある可能性があります"
+    },
+    {
+      "resultPath": "evals/clip_composition/outputs/UpRyakf5j80_clip_audio_v001/clip_composition_prompt_v006/20260706-142434/result.json",
+      "runAt": "2026-07-06T14:24:34+09:00",
+      "fixtureId": "UpRyakf5j80_clip_audio_v001",
+      "promptVersion": "clip_composition_prompt_v006",
+      "model": "rule-based-build_clip_composition",
+      "params": {
+        "temperature": 0,
+        "llmCall": false,
+        "selection": "固定済みテーマIDに対応する発話まとまりから最終区間を作る"
+      },
+      "selectedStartMs": 11362439,
+      "selectedEndMs": 11409170,
+      "expectedStartMs": 11364500,
+      "expectedEndMs": 11407178,
+      "startDeltaMs": -2061,
+      "endDeltaMs": 1992,
+      "overlapSummary": "AIが選んだ区間が期待区間を含んでいます",
+      "selectedCutCount": 1,
+      "expectedCutCount": 1,
+      "exactMatchCount": 0,
+      "overlappingCutCount": 1,
+      "missingExpectedCutCount": 0,
+      "extraSelectedCutCount": 0,
+      "allExpectedCutsMatchedExactlyByIndex": false,
+      "allExpectedCutsHaveOverlapByIndex": true,
+      "diffSummary": "期待区間1件に対して選択区間1件。 完全一致0件、重なりあり1件。 未選択の期待区間0件、余分な選択区間0件。",
+      "selectedIntervals": [
+        "11362439-11409170"
+      ],
+      "expectedIntervals": [
+        "11364500-11407178"
+      ],
+      "cutDiffs": [
+        {
+          "cutIndex": 0,
+          "status": "compared",
+          "startDeltaMs": -2061,
+          "endDeltaMs": 1992,
+          "overlapMs": 42678,
+          "overlapSummary": "AIが選んだ区間が期待区間を含んでいます"
+        }
+      ],
+      "selectedReason": "選ばれたテーマ「登録者数世界2位扱いへの照れと順位変動への冷静な反応」の編集元場面1。 役割: 導入。 選ばれたテーマを見せる入口にする 世界2位という話題提示から、変動するものなので素直に喜べないという結論までを一続きで使う。",
+      "themeSidePossibility": "theme側で正解区間が候補に入っていない可能性は低い",
+      "compositionSidePossibility": "composition側で候補範囲から最終区間を選ぶ処理に差分がある可能性があります"
+    }
+  ]
+}

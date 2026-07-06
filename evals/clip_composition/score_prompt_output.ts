@@ -192,6 +192,19 @@ function parseParams(value: string | undefined): Record<string, unknown> {
   return parsed as Record<string, unknown>;
 }
 
+function llmGenerationSystem(promptVersion: string, model: string, inputFile: string): Record<string, unknown> {
+  const suffix = promptVersion.replace(/^clip_composition_prompt_/, '');
+  return {
+    id: `llm-${suffix}`,
+    kind: 'llm',
+    intervalGenerator: 'web-gemini+prompt',
+    promptVersion,
+    usesPromptVersionForGeneration: true,
+    model,
+    sourceOutput: inputFile
+  };
+}
+
 async function readJson<T>(filePath: string): Promise<T> {
   return JSON.parse(await readFile(filePath, 'utf8')) as T;
 }
@@ -527,6 +540,7 @@ function formatMs(value: number): string {
 function buildSummaryMarkdown(input: {
   fixture: FixtureMetadata;
   promptVersion: string;
+  generationSystem: Record<string, unknown>;
   model: string;
   params: Record<string, unknown>;
   inputFile: string;
@@ -556,6 +570,7 @@ function buildSummaryMarkdown(input: {
     '# clip_composition LLM出力採点サマリー',
     '',
     `- 入力fixture: ${input.fixture.fixtureId}`,
+    `- 生成系統: ${String(input.generationSystem.id ?? 'unknown')}`,
     `- 使用プロンプト版数: ${input.promptVersion}`,
     `- 使用モデル名: ${input.model}`,
     `- 使用パラメータ: ${JSON.stringify(input.params)}`,
@@ -633,6 +648,7 @@ async function main() {
     draftId: fixture.draftId,
     fixtureId: fixture.fixtureId,
     promptVersion: options.promptVersion,
+    generationSystem: llmGenerationSystem(options.promptVersion, options.model, options.inputFile),
     model: options.model,
     params: options.params,
     evaluationMode: 'external_prompt_output',
@@ -652,6 +668,7 @@ async function main() {
   await writeFile(summaryPath, buildSummaryMarkdown({
     fixture,
     promptVersion: options.promptVersion,
+    generationSystem: llmGenerationSystem(options.promptVersion, options.model, options.inputFile),
     model: options.model,
     params: options.params,
     inputFile: options.inputFile,

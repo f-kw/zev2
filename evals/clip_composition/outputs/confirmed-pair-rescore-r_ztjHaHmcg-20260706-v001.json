@@ -1,0 +1,440 @@
+{
+  "kind": "clip_composition_confirmed_pair_rescore",
+  "runAt": "2026-07-06T12:00:47.213+09:00",
+  "clipId": "r_ztjHaHmcg",
+  "confirmedPair": {
+    "clipId": "r_ztjHaHmcg",
+    "sourceId": "-DwSCDMCWDQ",
+    "activePair": {
+      "clipStartMs": 92555,
+      "clipEndMs": 121147,
+      "sourceStartMs": 2404730,
+      "sourceEndMs": 2436085,
+      "toleranceMs": 500,
+      "status": "confirmed",
+      "verifiedAt": "2026-07-06",
+      "checkedBy": "kawafmm",
+      "verificationMethod": "境界別静止画・音声比較(motion-v001)",
+      "evidence": {
+        "motionPackage": "evals/clip_composition/outputs/boundary-check/r_ztjHaHmcg/20260706-final-block-boundary-motion-v001/index.html",
+        "humanReviewReport": "evals/clip_composition/reports/boundary-human-review-r_ztjHaHmcg-20260706-final-block-boundary-motion-v001.md"
+      },
+      "metadata": {
+        "clipDurationMs": 28592,
+        "sourceDurationMs": 31355,
+        "durationDeltaMs": 2763,
+        "durationDeltaNote": "内部未特定カットあり(概算)",
+        "readyForFreeze": false,
+        "freezeBlockedReason": "残る3ブロック(旧chunk1-3相当)の境界確定が残っているため"
+      }
+    },
+    "history": [
+      {
+        "clipStartMs": 92555,
+        "clipEndMs": 121147,
+        "sourceStartMs": 2404730,
+        "sourceEndMs": 2433322,
+        "toleranceMs": 500,
+        "status": "superseded",
+        "verifiedAt": "2026-07-05",
+        "checkedBy": "kawafmm",
+        "verificationMethod": "旧確認(通し視聴解像度)",
+        "supersededAt": "2026-07-06",
+        "supersededReason": "境界別静止画・音声比較(motion-v001)で終端約2.8秒過小と判明。旧確認は当時の確認手段の解像度における事実として履歴保持。"
+      }
+    ]
+  },
+  "scoring": {
+    "toleranceMs": 500,
+    "bestCandidateRule": "確定clip窓に重なる候補のうち、4境界の最大絶対ずれが最小のもの。同値の場合のみ合計絶対ずれで並べる。",
+    "connectedRule": "確定clip窓に重なる候補をclip時刻順に並べ、先頭の開始と末尾の終了を区間全体として採点する。"
+  },
+  "methods": [
+    {
+      "method": "DP案 global-dp-v001",
+      "family": "DP案",
+      "inputPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/global-dp-word-alignment-r_ztjHaHmcg-20260706-global-dp-v001.json",
+      "candidateCount": 13,
+      "readyForFreeze": false,
+      "runAt": "2026-07-06T01:19:08.362Z",
+      "settings": {
+        "normalization": [
+          "全角半角統一",
+          "カタカナのひらがな化",
+          "Unicode正規化による数字表記統一",
+          "記号・空白・長音記号の除外",
+          "漢字の読み変換は未実装"
+        ],
+        "monotonicAlignment": "単語列の最長共通部分列",
+        "lineExtraction": "隣接対応点の切り抜き側時刻差と元動画側時刻差の差が、単語時刻中央値以内なら同一直線分として扱う",
+        "derivedLineToleranceMs": 100,
+        "minAnchorWords": 10
+      },
+      "bestSingleCandidate": {
+        "selectionScope": "confirmed_clip_overlap",
+        "candidate": {
+          "label": "run 108",
+          "clipStartMs": 109050,
+          "clipEndMs": 110572,
+          "sourceStartMs": 2421228,
+          "sourceEndMs": 2422849,
+          "anchorWordCount": 14,
+          "maxDeltaDifferenceMs": 2789,
+          "sourceMinusClipDurationMs": 99,
+          "deltas": {
+            "clipStartDeltaMs": 16495,
+            "clipEndDeltaMs": -10575,
+            "sourceStartDeltaMs": 16498,
+            "sourceEndDeltaMs": -13236
+          },
+          "passesTolerance": false,
+          "maxBoundaryErrorMs": 16498,
+          "totalBoundaryErrorMs": 56804
+        }
+      },
+      "connectedConfirmedWindow": {
+        "overlappingCandidateCount": 5,
+        "candidate": {
+          "label": "run 101..run 112",
+          "clipStartMs": 87475,
+          "clipEndMs": 118083,
+          "sourceStartMs": 2399621,
+          "sourceEndMs": 2433063,
+          "anchorWordCount": 176,
+          "memberLabels": [
+            "run 101",
+            "run 103",
+            "run 105",
+            "run 108",
+            "run 112"
+          ]
+        },
+        "deltas": {
+          "clipStartDeltaMs": -5080,
+          "clipEndDeltaMs": -3064,
+          "sourceStartDeltaMs": -5109,
+          "sourceEndDeltaMs": -3022
+        },
+        "passesTolerance": false,
+        "maxBoundaryErrorMs": 5109,
+        "totalBoundaryErrorMs": 16275
+      }
+    },
+    {
+      "method": "DP案 min1-v001",
+      "family": "DP案",
+      "inputPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/global-dp-word-alignment-r_ztjHaHmcg-20260706-global-dp-min1-v001.json",
+      "candidateCount": 128,
+      "readyForFreeze": false,
+      "runAt": "2026-07-06T01:54:39.240Z",
+      "settings": {
+        "normalization": [
+          "全角半角統一",
+          "カタカナのひらがな化",
+          "Unicode正規化による数字表記統一",
+          "記号・空白・長音記号の除外",
+          "漢字の読み変換は未実装"
+        ],
+        "monotonicAlignment": "単語列の最長共通部分列",
+        "lineExtraction": "隣接対応点の切り抜き側時刻差と元動画側時刻差の差が、単語時刻中央値以内なら同一直線分として扱う",
+        "derivedLineToleranceMs": 100,
+        "minAnchorWords": 1
+      },
+      "bestSingleCandidate": {
+        "selectionScope": "confirmed_clip_overlap",
+        "candidate": {
+          "label": "run 106",
+          "clipStartMs": 108850,
+          "clipEndMs": 109010,
+          "sourceStartMs": 2419006,
+          "sourceEndMs": 2421048,
+          "anchorWordCount": 5,
+          "maxDeltaDifferenceMs": 1782,
+          "sourceMinusClipDurationMs": 1882,
+          "deltas": {
+            "clipStartDeltaMs": 16295,
+            "clipEndDeltaMs": -12137,
+            "sourceStartDeltaMs": 14276,
+            "sourceEndDeltaMs": -15037
+          },
+          "passesTolerance": false,
+          "maxBoundaryErrorMs": 16295,
+          "totalBoundaryErrorMs": 57745
+        }
+      },
+      "connectedConfirmedWindow": {
+        "overlappingCandidateCount": 28,
+        "candidate": {
+          "label": "run 101..run 128",
+          "clipStartMs": 87475,
+          "clipEndMs": 121147,
+          "sourceStartMs": 2399621,
+          "sourceEndMs": 4717640,
+          "anchorWordCount": 209,
+          "memberLabels": [
+            "run 101",
+            "run 102",
+            "run 103",
+            "run 104",
+            "run 105",
+            "run 106",
+            "run 107",
+            "run 108",
+            "run 109",
+            "run 110",
+            "run 111",
+            "run 112",
+            "run 113",
+            "run 114",
+            "run 115",
+            "run 116",
+            "run 117",
+            "run 118",
+            "run 119",
+            "run 120",
+            "run 121",
+            "run 122",
+            "run 123",
+            "run 124",
+            "run 125",
+            "run 126",
+            "run 127",
+            "run 128"
+          ]
+        },
+        "deltas": {
+          "clipStartDeltaMs": -5080,
+          "clipEndDeltaMs": 0,
+          "sourceStartDeltaMs": -5109,
+          "sourceEndDeltaMs": 2281555
+        },
+        "passesTolerance": false,
+        "maxBoundaryErrorMs": 2281555,
+        "totalBoundaryErrorMs": 2291744
+      }
+    },
+    {
+      "method": "DP案 window-trace-repair-v001",
+      "family": "DP案",
+      "inputPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/global-dp-word-alignment-r_ztjHaHmcg-20260706-window-trace-repair-v001.json",
+      "candidateCount": 13,
+      "readyForFreeze": false,
+      "runAt": "2026-07-06T02:00:33.453Z",
+      "settings": {
+        "normalization": [
+          "全角半角統一",
+          "カタカナのひらがな化",
+          "Unicode正規化による数字表記統一",
+          "記号・空白・長音記号の除外",
+          "漢字の読み変換は未実装"
+        ],
+        "monotonicAlignment": "単語列の最長共通部分列",
+        "lineExtraction": "隣接対応点の切り抜き側時刻差と元動画側時刻差の差が、単語時刻中央値以内なら同一直線分として扱う",
+        "derivedLineToleranceMs": 100,
+        "minAnchorWords": 10,
+        "repairLocalContinuity": true
+      },
+      "bestSingleCandidate": {
+        "selectionScope": "confirmed_clip_overlap",
+        "candidate": {
+          "label": "run 104",
+          "clipStartMs": 109050,
+          "clipEndMs": 110572,
+          "sourceStartMs": 2421228,
+          "sourceEndMs": 2422849,
+          "anchorWordCount": 14,
+          "maxDeltaDifferenceMs": 2789,
+          "sourceMinusClipDurationMs": 99,
+          "deltas": {
+            "clipStartDeltaMs": 16495,
+            "clipEndDeltaMs": -10575,
+            "sourceStartDeltaMs": 16498,
+            "sourceEndDeltaMs": -13236
+          },
+          "passesTolerance": false,
+          "maxBoundaryErrorMs": 16498,
+          "totalBoundaryErrorMs": 56804
+        }
+      },
+      "connectedConfirmedWindow": {
+        "overlappingCandidateCount": 5,
+        "candidate": {
+          "label": "run 97..run 108",
+          "clipStartMs": 87475,
+          "clipEndMs": 121147,
+          "sourceStartMs": 2399621,
+          "sourceEndMs": 2440868,
+          "anchorWordCount": 193,
+          "memberLabels": [
+            "run 97",
+            "run 99",
+            "run 101",
+            "run 104",
+            "run 108"
+          ]
+        },
+        "deltas": {
+          "clipStartDeltaMs": -5080,
+          "clipEndDeltaMs": 0,
+          "sourceStartDeltaMs": -5109,
+          "sourceEndDeltaMs": 4783
+        },
+        "passesTolerance": false,
+        "maxBoundaryErrorMs": 5109,
+        "totalBoundaryErrorMs": 14972
+      }
+    },
+    {
+      "method": "現行方式 16セグメント",
+      "family": "現行方式",
+      "inputPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/cutpoint-realignment-r_ztjHaHmcg-20260706-local-stt-300s-anchor-v001.json",
+      "candidateCount": 16,
+      "readyForFreeze": false,
+      "runAt": "2026-07-06T00:51:30.314Z",
+      "settings": {
+        "fixedThirtySecondChunking": "disabled",
+        "maxAudioCutpoints": 12,
+        "maxVideoCutpoints": 8,
+        "minSegmentMs": 1500,
+        "minAnchorWords": 10,
+        "topMatches": 3,
+        "audioFrameMs": 20,
+        "audioHopMs": 10,
+        "audioPriority": "音声不連続候補を先に採用し、映像シーンチェンジ候補は補助として追加する",
+        "timeAxisIntegrity": "単語タイムスタンプ対応が線形に続いた最長区間の長さ/セグメント長",
+        "reliabilityDisplay": "対応に使えた単語数がminAnchorWords未満の場合、整合率は判定不能として表示する"
+      },
+      "bestSingleCandidate": {
+        "selectionScope": "confirmed_clip_overlap",
+        "candidate": {
+          "label": "seg 14",
+          "clipStartMs": 105390,
+          "clipEndMs": 109120,
+          "sourceStartMs": 2417545,
+          "sourceEndMs": 2421348,
+          "anchorWordCount": 31,
+          "inheritance": "requires_review",
+          "deltas": {
+            "clipStartDeltaMs": 12835,
+            "clipEndDeltaMs": -12027,
+            "sourceStartDeltaMs": 12815,
+            "sourceEndDeltaMs": -14737
+          },
+          "passesTolerance": false,
+          "maxBoundaryErrorMs": 14737,
+          "totalBoundaryErrorMs": 52414
+        }
+      },
+      "connectedConfirmedWindow": {
+        "overlappingCandidateCount": 6,
+        "candidate": {
+          "label": "seg 11..seg 16",
+          "clipStartMs": 87233,
+          "clipEndMs": 121147,
+          "sourceStartMs": 2384963,
+          "sourceEndMs": 2440868,
+          "anchorWordCount": 211,
+          "memberLabels": [
+            "seg 11",
+            "seg 12",
+            "seg 13",
+            "seg 14",
+            "seg 15",
+            "seg 16"
+          ]
+        },
+        "deltas": {
+          "clipStartDeltaMs": -5322,
+          "clipEndDeltaMs": 0,
+          "sourceStartDeltaMs": -19767,
+          "sourceEndDeltaMs": 4783
+        },
+        "passesTolerance": false,
+        "maxBoundaryErrorMs": 19767,
+        "totalBoundaryErrorMs": 29872
+      }
+    },
+    {
+      "method": "現行方式 41セグメント",
+      "family": "現行方式",
+      "inputPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/cutpoint-realignment-r_ztjHaHmcg-20260706-local-stt-300s-video56-audit-v001.json",
+      "candidateCount": 41,
+      "readyForFreeze": false,
+      "runAt": "2026-07-06T01:00:18.957Z",
+      "settings": {
+        "fixedThirtySecondChunking": "disabled",
+        "maxAudioCutpoints": 12,
+        "maxVideoCutpoints": 56,
+        "minSegmentMs": 1500,
+        "minAnchorWords": 10,
+        "topMatches": 3,
+        "audioFrameMs": 20,
+        "audioHopMs": 10,
+        "audioPriority": "音声不連続候補を先に採用し、映像シーンチェンジ候補は補助として追加する",
+        "timeAxisIntegrity": "単語タイムスタンプ対応が線形に続いた最長区間の長さ/セグメント長",
+        "reliabilityDisplay": "対応に使えた単語数がminAnchorWords未満の場合、整合率は判定不能として表示する"
+      },
+      "bestSingleCandidate": {
+        "selectionScope": "confirmed_clip_overlap",
+        "candidate": {
+          "label": "seg 38",
+          "clipStartMs": 105390,
+          "clipEndMs": 109120,
+          "sourceStartMs": 2417545,
+          "sourceEndMs": 2421348,
+          "anchorWordCount": 31,
+          "inheritance": "requires_review",
+          "deltas": {
+            "clipStartDeltaMs": 12835,
+            "clipEndDeltaMs": -12027,
+            "sourceStartDeltaMs": 12815,
+            "sourceEndDeltaMs": -14737
+          },
+          "passesTolerance": false,
+          "maxBoundaryErrorMs": 14737,
+          "totalBoundaryErrorMs": 52414
+        }
+      },
+      "connectedConfirmedWindow": {
+        "overlappingCandidateCount": 11,
+        "candidate": {
+          "label": "seg 31..seg 41",
+          "clipStartMs": 87233,
+          "clipEndMs": 121147,
+          "sourceStartMs": 2384963,
+          "sourceEndMs": 2440868,
+          "anchorWordCount": 215,
+          "memberLabels": [
+            "seg 31",
+            "seg 32",
+            "seg 33",
+            "seg 34",
+            "seg 35",
+            "seg 36",
+            "seg 37",
+            "seg 38",
+            "seg 39",
+            "seg 40",
+            "seg 41"
+          ]
+        },
+        "deltas": {
+          "clipStartDeltaMs": -5322,
+          "clipEndDeltaMs": 0,
+          "sourceStartDeltaMs": -19767,
+          "sourceEndDeltaMs": 4783
+        },
+        "passesTolerance": false,
+        "maxBoundaryErrorMs": 19767,
+        "totalBoundaryErrorMs": 29872
+      }
+    }
+  ],
+  "productionImpact": {
+    "fixtureCreated": false,
+    "expectedCreated": false,
+    "readyForFreezeChanged": false,
+    "runtimeWrites": false,
+    "productionCodeChanged": false
+  }
+}

@@ -1,0 +1,128 @@
+{
+  "kind": "clip_composition_partial_fixture_human_decision",
+  "fixtureId": "r_ztjHaHmcg_partial_material_v001",
+  "targetId": "r_ztjHaHmcg",
+  "sourceId": "-DwSCDMCWDQ",
+  "reviewPath": "evals/clip_composition/outputs/partial-fixture-review-r_ztjHaHmcg-20260706-v001.json",
+  "humanConfirmation": {
+    "partialFixtureConfirmed": true,
+    "checkedBy": "kawafmm",
+    "checkedAt": "2026-07-06",
+    "note": "境界2を未解決除外し、境界1・3・4・5に基づく部分fixtureとして固定する。"
+  },
+  "fixedTheme": {
+    "title": "配信者が食べていける同接規模について現実的に答える場面",
+    "summary": "配信者が食べていける同接規模について現実的に答える場面",
+    "compositionNote": "素材ブロック粒度で、配信者が食べていける同接規模について現実的に答える流れを複数区間として扱う。境界2の未解決区間は除外する。"
+  },
+  "unresolvedRanges": [
+    {
+      "id": "boundary2_unresolved_clip_33504_51810",
+      "status": "excluded_confirmed",
+      "clipRange": {
+        "startMs": 33504,
+        "endMs": 51810
+      },
+      "sourceRange": {
+        "startMs": 2241469,
+        "endMs": 2314526
+      },
+      "acceptedAsExcluded": true,
+      "reSplitRequired": true,
+      "note": "人間確認で、境界2-Aは2回切り替わり、境界2-Bも無音だが切り替わっていると判定された。単一の素材境界ではなく再分割が必要なため、部分fixtureから除外する。"
+    }
+  ],
+  "chunks": [
+    {
+      "cutIndex": 0,
+      "blockIndex": 1,
+      "status": "confirmed",
+      "qualityGrade": "material_block_granularity",
+      "clipRange": {
+        "startMs": 15903,
+        "endMs": 32383
+      },
+      "sourceRange": {
+        "startMs": 2208172,
+        "endMs": 2224490
+      },
+      "note": "素材ブロック粒度として確認済み。"
+    },
+    {
+      "cutIndex": 1,
+      "blockIndex": 2,
+      "status": "confirmed",
+      "qualityGrade": "material_block_granularity",
+      "clipRange": {
+        "startMs": 32564,
+        "endMs": 33504
+      },
+      "sourceRange": {
+        "startMs": 2237847,
+        "endMs": 2241469
+      },
+      "note": "素材ブロック粒度として確認済み。"
+    },
+    {
+      "cutIndex": 2,
+      "blockIndex": 3,
+      "status": "confirmed",
+      "qualityGrade": "material_block_granularity",
+      "clipRange": {
+        "startMs": 51810,
+        "endMs": 54271
+      },
+      "sourceRange": {
+        "startMs": 2314526,
+        "endMs": 2316828
+      },
+      "note": "素材ブロック粒度として確認済み。"
+    },
+    {
+      "cutIndex": 3,
+      "blockIndex": 4,
+      "status": "confirmed",
+      "qualityGrade": "material_block_granularity",
+      "clipRange": {
+        "startMs": 57045,
+        "endMs": 70497
+      },
+      "sourceRange": {
+        "startMs": 2333847,
+        "endMs": 2350553
+      },
+      "note": "素材ブロック粒度として確認済み。"
+    },
+    {
+      "cutIndex": 4,
+      "blockIndex": 5,
+      "status": "confirmed",
+      "qualityGrade": "material_block_granularity",
+      "clipRange": {
+        "startMs": 71198,
+        "endMs": 84653
+      },
+      "sourceRange": {
+        "startMs": 2369790,
+        "endMs": 2382581
+      },
+      "note": "素材ブロック粒度として確認済み。"
+    },
+    {
+      "cutIndex": 5,
+      "blockIndex": 6,
+      "status": "confirmed",
+      "qualityGrade": "material_block_granularity",
+      "clipRange": {
+        "startMs": 87475,
+        "endMs": 121147
+      },
+      "sourceRange": {
+        "startMs": 2399621,
+        "endMs": 2440868
+      },
+      "note": "素材ブロック粒度として確認済み。"
+    }
+  ],
+  "readyForFreeze": true
+}

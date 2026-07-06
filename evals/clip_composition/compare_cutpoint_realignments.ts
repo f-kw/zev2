@@ -89,8 +89,24 @@ const confirmedPair = {
   clipStartMs: 92555,
   clipEndMs: 121147,
   sourceStartMs: 2404730,
-  sourceEndMs: 2433322,
-  toleranceMs: 500
+  sourceEndMs: 2436085,
+  toleranceMs: 500,
+  checkedBy: 'kawafmm',
+  verifiedAt: '2026-07-06',
+  verificationMethod: '境界別静止画・音声比較(motion-v001)',
+  durationDeltaMs: 2763,
+  durationDeltaNote: '内部未特定カットあり(概算)',
+  history: [
+    {
+      clipStartMs: 92555,
+      clipEndMs: 121147,
+      sourceStartMs: 2404730,
+      sourceEndMs: 2433322,
+      status: 'superseded',
+      verificationMethod: '旧確認(通し視聴解像度)',
+      note: '境界別静止画・音声比較(motion-v001)で終端約2.8秒過小と判明。'
+    }
+  ]
 };
 
 const evalRoot = path.join(workspaceRoot(), 'evals', 'clip_composition');

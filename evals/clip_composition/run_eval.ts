@@ -11,6 +11,7 @@ import type { buildClipComposition as buildClipCompositionType } from '../../run
 type EvalOptions = {
   fixtureId: string;
   promptVersion: string;
+  promptVersionProvided: boolean;
   runs: number;
   model: string;
 };
@@ -141,9 +142,6 @@ function parseOptions(argv: string[]): EvalOptions {
   }
 
   const rawPromptVersion = values.get('promptVersion')?.trim();
-  if (!rawPromptVersion) {
-    throw new Error('プロンプト版数を指定してください: --promptVersion v001');
-  }
 
   const parsedRuns = Number.parseInt(values.get('runs') ?? '1', 10);
   if (!Number.isInteger(parsedRuns) || parsedRuns < 1) {
@@ -152,9 +150,10 @@ function parseOptions(argv: string[]): EvalOptions {
 
   return {
     fixtureId,
-    promptVersion: normalizePromptVersion(rawPromptVersion),
+    promptVersion: rawPromptVersion ? normalizePromptVersion(rawPromptVersion) : 'baseline-rule',
+    promptVersionProvided: Boolean(rawPromptVersion),
     runs: parsedRuns,
-    model: values.get('model')?.trim() || 'rule-based-build_clip_composition'
+    model: values.get('model')?.trim() || 'baseline-rule'
   };
 }
 
@@ -540,6 +539,7 @@ function formatMs(value: number): string {
 function buildSummaryMarkdown(input: {
   fixture: FixtureMetadata;
   promptVersion: string;
+  generationSystem: Record<string, unknown>;
   model: string;
   params: Record<string, unknown>;
   selectedCuts: SelectedCut[];
@@ -579,6 +579,7 @@ function buildSummaryMarkdown(input: {
     '# clip_composition 評価サマリー',
     '',
     `- 入力fixture: ${input.fixture.fixtureId}`,
+    `- 生成系統: ${String(input.generationSystem.id ?? 'unknown')}`,
     `- 使用プロンプト版数: ${input.promptVersion}`,
     `- 使用モデル名: ${input.model}`,
     `- 使用パラメータ: ${JSON.stringify(input.params)}`,
@@ -735,7 +736,19 @@ async function main() {
   const params = {
     temperature: 0,
     llmCall: false,
-    selection: '固定済みテーマIDに対応する発話まとまりから最終区間を作る'
+    selection: '固定済みテーマIDに対応する発話まとまりから最終区間を作る',
+    promptVersionUsedForGeneration: false
+  };
+  const generationSystem = {
+    id: 'baseline-rule',
+    kind: 'baseline-rule',
+    intervalGenerator: 'runner.buildClipComposition',
+    promptVersion: null,
+    usesPromptVersionForGeneration: false,
+    model: options.model,
+    note: options.promptVersionProvided
+      ? '互換用のpromptVersionラベルは記録しているが、区間生成には使っていない。'
+      : 'baseline-ruleはプロンプト版数を持たない。'
   };
   const runAt = tokyoTimestamp(new Date());
   const runId = runIdFromTimestamp(runAt);
@@ -779,6 +792,7 @@ async function main() {
     draftId: fixture.draftId,
     fixtureId: fixture.fixtureId,
     promptVersion: options.promptVersion,
+    generationSystem,
     model: options.model,
     params,
     selectedCuts: firstRun.selectedCuts,
@@ -801,6 +815,7 @@ async function main() {
   await writeFile(summaryPath, buildSummaryMarkdown({
     fixture,
     promptVersion: options.promptVersion,
+    generationSystem,
     model: options.model,
     params,
     selectedCuts: firstRun.selectedCuts,

@@ -639,7 +639,7 @@ function confirmedInheritance(segment: ClipSegment, match: MatchCandidate | unde
     clipStartMs: 92555,
     clipEndMs: 121147,
     sourceStartMs: 2404730,
-    sourceEndMs: 2433322
+    sourceEndMs: 2436085
   };
   const toleranceMs = 500;
   const matches =
@@ -1023,10 +1023,34 @@ async function main(): Promise<void> {
         clipStartMs: 92555,
         clipEndMs: 121147,
         sourceStartMs: 2404730,
-        sourceEndMs: 2433322,
+        sourceEndMs: 2436085,
         checkedBy: 'kawafmm',
+        verifiedAt: '2026-07-06',
+        verificationMethod: '境界別静止画・音声比較(motion-v001)',
         status: 'confirmed'
       },
+      metadata: {
+        clipDurationMs: 28592,
+        sourceDurationMs: 31355,
+        durationDeltaMs: 2763,
+        durationDeltaNote: '内部未特定カットあり(概算)',
+        readyForFreeze: false,
+        freezeBlockedReason: '残る3ブロック(旧chunk1-3相当)の境界確定が残っているため'
+      },
+      history: [
+        {
+          clipStartMs: 92555,
+          clipEndMs: 121147,
+          sourceStartMs: 2404730,
+          sourceEndMs: 2433322,
+          checkedBy: 'kawafmm',
+          verifiedAt: '2026-07-05',
+          verificationMethod: '旧確認(通し視聴解像度)',
+          status: 'superseded',
+          supersededAt: '2026-07-06',
+          supersededReason: '境界別静止画・音声比較(motion-v001)で終端約2.8秒過小と判明。旧確認は当時の確認手段の解像度における事実として履歴保持。'
+        }
+      ],
       toleranceMs: 500,
       applied: segmentResults
         .filter((item) => item.inheritance.status === 'inherited_confirmed')
