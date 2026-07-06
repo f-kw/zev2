@@ -1,0 +1,486 @@
+{
+  "kind": "clip_composition_cutpoint_rank_limit_diagnosis",
+  "runAt": "2026-07-06T00:59:43.469Z",
+  "targetPath": "evals/clip_composition/stt-targets/r_ztjHaHmcg.json",
+  "clipId": "r_ztjHaHmcg",
+  "sourceId": "r_ztjHaHmcg_-DwSCDMCWDQ_local300_v001",
+  "confirmedCutMs": 92555,
+  "currentSettings": {
+    "maxAudioCutpoints": 12,
+    "maxVideoCutpoints": 8,
+    "minSegmentMs": 1500,
+    "candidateWindowMs": 3000,
+    "targetAudioRank": 416,
+    "targetVideoRank": 56
+  },
+  "rawCandidates": {
+    "nearestAudioCandidate": {
+      "timeMs": 92550,
+      "value": 0.001629,
+      "rank": 2035,
+      "kind": "audio_discontinuity"
+    },
+    "nearestVideoCandidate": {
+      "timeMs": 92567,
+      "value": 0.311,
+      "rank": 199,
+      "kind": "video_scene_change"
+    },
+    "rankedAudioCandidate": {
+      "timeMs": 93700,
+      "value": 0.067546,
+      "rank": 18,
+      "kind": "audio_discontinuity"
+    },
+    "rankedVideoCandidate": {
+      "timeMs": 94867,
+      "value": 1.469,
+      "rank": 30,
+      "kind": "video_scene_change"
+    },
+    "targetAudioCandidate": {
+      "timeMs": 92410,
+      "value": 0.02363,
+      "rank": 416,
+      "kind": "audio_discontinuity"
+    },
+    "targetVideoCandidate": {
+      "timeMs": 92833,
+      "value": 1.222,
+      "rank": 56,
+      "kind": "video_scene_change"
+    }
+  },
+  "evaluations": [
+    {
+      "label": "current",
+      "maxAudioCutpoints": 12,
+      "maxVideoCutpoints": 8,
+      "selectedCutpointCount": 15,
+      "segmentCount": 16,
+      "extraSelectedCutpointCount": 0,
+      "targetCandidateSelected": false,
+      "blockingCutpointsForTarget": [],
+      "extraSelectedCutpoints": []
+    },
+    {
+      "label": "audio-only-minimum",
+      "maxAudioCutpoints": 416,
+      "maxVideoCutpoints": 8,
+      "selectedCutpointCount": 45,
+      "segmentCount": 46,
+      "extraSelectedCutpointCount": 36,
+      "targetCandidateSelected": false,
+      "blockingCutpointsForTarget": [
+        {
+          "timeMs": 91690,
+          "value": 0.057169,
+          "rank": 41,
+          "kind": "audio_discontinuity"
+        },
+        {
+          "timeMs": 93700,
+          "value": 0.067546,
+          "rank": 18,
+          "kind": "audio_discontinuity"
+        }
+      ],
+      "extraSelectedCutpoints": [
+        {
+          "timeMs": 4120,
+          "value": 0.025517,
+          "rank": 373,
+          "kind": "audio_discontinuity"
+        },
+        {
+          "timeMs": 6460,
+          "value": 0.04589,
+          "rank": 92,
+          "kind": "audio_discontinuity"
+        },
+        {
+          "timeMs": 8440,
+          "value": 0.052253,
+          "rank": 65,
+          "kind": "audio_discontinuity"
+        },
+        {
+          "timeMs": 11510,
+          "value": 0.056879,
+          "rank": 43,
+          "kind": "audio_discontinuity"
+        },
+        {
+          "timeMs": 15920,
+          "value": 0.051362,
+          "rank": 66,
+          "kind": "audio_discontinuity"
+        },
+        {
+          "timeMs": 17470,
+          "value": 0.043952,
+          "rank": 107,
+          "kind": "audio_discontinuity"
+        },
+        {
+          "timeMs": 19800,
+          "value": 0.024151,
+          "rank": 403,
+          "kind": "audio_discontinuity"
+        },
+        {
+          "timeMs": 23450,
+          "value": 0.035352,
+          "rank": 177,
+          "kind": "audio_discontinuity"
+        },
+        {
+          "timeMs": 24960,
+          "value": 0.04536,
+          "rank": 97,
+          "kind": "audio_discontinuity"
+        },
+        {
+          "timeMs": 28750,
+          "value": 0.061916,
+          "rank": 29,
+          "kind": "audio_discontinuity"
+        },
+        {
+          "timeMs": 32570,
+          "value": 0.028685,
+          "rank": 303,
+          "kind": "audio_discontinuity"
+        },
+        {
+          "timeMs": 36930,
+          "value": 0.034031,
+          "rank": 198,
+          "kind": "audio_discontinuity"
+        },
+        {
+          "timeMs": 41080,
+          "value": 0.02409,
+          "rank": 404,
+          "kind": "audio_discontinuity"
+        },
+        {
+          "timeMs": 48700,
+          "value": 0.048732,
+          "rank": 74,
+          "kind": "audio_discontinuity"
+        },
+        {
+          "timeMs": 51630,
+          "value": 0.063099,
+          "rank": 26,
+          "kind": "audio_discontinuity"
+        },
+        {
+          "timeMs": 56100,
+          "value": 0.044577,
+          "rank": 102,
+          "kind": "audio_discontinuity"
+        },
+        {
+          "timeMs": 57710,
+          "value": 0.058088,
+          "rank": 39,
+          "kind": "audio_discontinuity"
+        },
+        {
+          "timeMs": 61280,
+          "value": 0.043381,
+          "rank": 109,
+          "kind": "audio_discontinuity"
+        },
+        {
+          "timeMs": 63710,
+          "value": 0.071934,
+          "rank": 13,
+          "kind": "audio_discontinuity"
+        },
+        {
+          "timeMs": 71490,
+          "value": 0.061654,
+          "rank": 31,
+          "kind": "audio_discontinuity"
+        },
+        {
+          "timeMs": 74320,
+          "value": 0.063651,
+          "rank": 24,
+          "kind": "audio_discontinuity"
+        },
+        {
+          "timeMs": 75820,
+          "value": 0.035714,
+          "rank": 171,
+          "kind": "audio_discontinuity"
+        },
+        {
+          "timeMs": 79070,
+          "value": 0.041814,
+          "rank": 114,
+          "kind": "audio_discontinuity"
+        },
+        {
+          "timeMs": 81920,
+          "value": 0.06112,
+          "rank": 32,
+          "kind": "audio_discontinuity"
+        },
+        {
+          "timeMs": 87450,
+          "value": 0.035894,
+          "rank": 169,
+          "kind": "audio_discontinuity"
+        },
+        {
+          "timeMs": 88980,
+          "value": 0.071872,
+          "rank": 14,
+          "kind": "audio_discontinuity"
+        },
+        {
+          "timeMs": 91690,
+          "value": 0.057169,
+          "rank": 41,
+          "kind": "audio_discontinuity"
+        },
+        {
+          "timeMs": 93700,
+          "value": 0.067546,
+          "rank": 18,
+          "kind": "audio_discontinuity"
+        },
+        {
+          "timeMs": 97250,
+          "value": 0.070087,
+          "rank": 17,
+          "kind": "audio_discontinuity"
+        },
+        {
+          "timeMs": 99450,
+          "value": 0.041779,
+          "rank": 116,
+          "kind": "audio_discontinuity"
+        },
+        {
+          "timeMs": 101320,
+          "value": 0.052636,
+          "rank": 60,
+          "kind": "audio_discontinuity"
+        },
+        {
+          "timeMs": 107070,
+          "value": 0.055066,
+          "rank": 52,
+          "kind": "audio_discontinuity"
+        },
+        {
+          "timeMs": 110780,
+          "value": 0.062403,
+          "rank": 28,
+          "kind": "audio_discontinuity"
+        },
+        {
+          "timeMs": 112310,
+          "value": 0.033153,
+          "rank": 215,
+          "kind": "audio_discontinuity"
+        },
+        {
+          "timeMs": 114470,
+          "value": 0.030527,
+          "rank": 262,
+          "kind": "audio_discontinuity"
+        },
+        {
+          "timeMs": 118110,
+          "value": 0.036462,
+          "rank": 162,
+          "kind": "audio_discontinuity"
+        }
+      ]
+    },
+    {
+      "label": "video-only-minimum",
+      "maxAudioCutpoints": 12,
+      "maxVideoCutpoints": 56,
+      "selectedCutpointCount": 40,
+      "segmentCount": 41,
+      "extraSelectedCutpointCount": 25,
+      "targetCandidateSelected": true,
+      "selectedTargetCandidate": {
+        "timeMs": 92833,
+        "value": 1.222,
+        "rank": 56,
+        "kind": "video_scene_change"
+      },
+      "blockingCutpointsForTarget": [],
+      "extraSelectedCutpoints": [
+        {
+          "timeMs": 5000,
+          "value": 1.424,
+          "rank": 31,
+          "kind": "video_scene_change"
+        },
+        {
+          "timeMs": 7833,
+          "value": 1.982,
+          "rank": 12,
+          "kind": "video_scene_change"
+        },
+        {
+          "timeMs": 10400,
+          "value": 1.961,
+          "rank": 14,
+          "kind": "video_scene_change"
+        },
+        {
+          "timeMs": 21333,
+          "value": 1.508,
+          "rank": 25,
+          "kind": "video_scene_change"
+        },
+        {
+          "timeMs": 23000,
+          "value": 1.223,
+          "rank": 55,
+          "kind": "video_scene_change"
+        },
+        {
+          "timeMs": 25267,
+          "value": 1.403,
+          "rank": 33,
+          "kind": "video_scene_change"
+        },
+        {
+          "timeMs": 27100,
+          "value": 1.547,
+          "rank": 23,
+          "kind": "video_scene_change"
+        },
+        {
+          "timeMs": 30933,
+          "value": 1.346,
+          "rank": 42,
+          "kind": "video_scene_change"
+        },
+        {
+          "timeMs": 34733,
+          "value": 2.014,
+          "rank": 11,
+          "kind": "video_scene_change"
+        },
+        {
+          "timeMs": 36567,
+          "value": 1.245,
+          "rank": 54,
+          "kind": "video_scene_change"
+        },
+        {
+          "timeMs": 38467,
+          "value": 1.261,
+          "rank": 51,
+          "kind": "video_scene_change"
+        },
+        {
+          "timeMs": 40067,
+          "value": 1.377,
+          "rank": 36,
+          "kind": "video_scene_change"
+        },
+        {
+          "timeMs": 42267,
+          "value": 1.563,
+          "rank": 22,
+          "kind": "video_scene_change"
+        },
+        {
+          "timeMs": 44533,
+          "value": 2.018,
+          "rank": 10,
+          "kind": "video_scene_change"
+        },
+        {
+          "timeMs": 55867,
+          "value": 1.394,
+          "rank": 34,
+          "kind": "video_scene_change"
+        },
+        {
+          "timeMs": 70933,
+          "value": 1.47,
+          "rank": 29,
+          "kind": "video_scene_change"
+        },
+        {
+          "timeMs": 72867,
+          "value": 1.511,
+          "rank": 24,
+          "kind": "video_scene_change"
+        },
+        {
+          "timeMs": 77400,
+          "value": 1.974,
+          "rank": 13,
+          "kind": "video_scene_change"
+        },
+        {
+          "timeMs": 79800,
+          "value": 1.879,
+          "rank": 19,
+          "kind": "video_scene_change"
+        },
+        {
+          "timeMs": 82000,
+          "value": 1.333,
+          "rank": 44,
+          "kind": "video_scene_change"
+        },
+        {
+          "timeMs": 92833,
+          "value": 1.222,
+          "rank": 56,
+          "kind": "video_scene_change"
+        },
+        {
+          "timeMs": 94867,
+          "value": 1.469,
+          "rank": 30,
+          "kind": "video_scene_change"
+        },
+        {
+          "timeMs": 98800,
+          "value": 2.052,
+          "rank": 9,
+          "kind": "video_scene_change"
+        },
+        {
+          "timeMs": 103833,
+          "value": 1.258,
+          "rank": 52,
+          "kind": "video_scene_change"
+        },
+        {
+          "timeMs": 113933,
+          "value": 1.942,
+          "rank": 15,
+          "kind": "video_scene_change"
+        }
+      ]
+    }
+  ],
+  "decision": {
+    "adoptionChanged": false,
+    "reason": "rank上限の採否は人間判断に残すため、この診断では照合設定を変更しない。"
+  },
+  "productionImpact": {
+    "runtimeWrites": false,
+    "fixtureWrites": false,
+    "expectedWrites": false,
+    "productionApiUiQueueDbChanged": false
+  }
+}

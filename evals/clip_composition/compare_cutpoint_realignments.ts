@@ -391,16 +391,21 @@ function reportMarkdown(input: {
     ].join(' | '));
   }
 
+  const oldSegmentCount = input.oldRun.segments?.length ?? 0;
+  const newSegmentCount = input.newRun.segments?.length ?? 0;
   const sourceMeaning = input.oldRun.sourceId === input.newRun.sourceId
-    ? '- タイムスタンプ源は同じ。比較対象は表示・付帯情報の変更で、照合位置は変えていない。'
+    ? '- タイムスタンプ源は同じ。差分はカット点設定または表示・付帯情報の変更として読む。'
     : '- タイムスタンプ源が置き換わった。新旧の参照元時刻差を見て、入力時刻源の影響を判断する。';
+  const segmentMeaning = oldSegmentCount === newSegmentCount
+    ? '- 切り抜き側の分割数は同じ。'
+    : `- 切り抜き側の分割数は ${oldSegmentCount} から ${newSegmentCount} に変わった。`;
 
   lines.push(
     '',
     '## 判断',
     '',
     sourceMeaning,
-    '- 切り抜き側の分割点は変更していないため、セグメント数は同じ。',
+    segmentMeaning,
     '- 確認済みペアは新結果でも直接継承0件。現行の1対1・±500ms継承条件には入っていない。',
     '- fixture/expectedは作成していない。readyForFreezeもfalseのまま。'
   );
