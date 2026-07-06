@@ -1,0 +1,2891 @@
+{
+  "kind": "clip_composition_cutpoint_realignment",
+  "runAt": "2026-07-06T00:51:30.314Z",
+  "targetId": "r_ztjHaHmcg",
+  "title": "同接100人いたら食べていけるの？",
+  "clipId": "r_ztjHaHmcg",
+  "sourceId": "r_ztjHaHmcg_-DwSCDMCWDQ_local300_v001",
+  "readyForFreeze": false,
+  "freezeStatus": "hold_until_human_review",
+  "settings": {
+    "fixedThirtySecondChunking": "disabled",
+    "maxAudioCutpoints": 12,
+    "maxVideoCutpoints": 8,
+    "minSegmentMs": 1500,
+    "minAnchorWords": 10,
+    "topMatches": 3,
+    "audioFrameMs": 20,
+    "audioHopMs": 10,
+    "audioPriority": "音声不連続候補を先に採用し、映像シーンチェンジ候補は補助として追加する",
+    "timeAxisIntegrity": "単語タイムスタンプ対応が線形に続いた最長区間の長さ/セグメント長",
+    "reliabilityDisplay": "対応に使えた単語数がminAnchorWords未満の場合、整合率は判定不能として表示する"
+  },
+  "cutpointDetection": {
+    "audioCutpoints": [
+      {
+        "timeMs": 68910,
+        "value": 0.099837,
+        "rank": 1,
+        "kind": "audio_discontinuity"
+      },
+      {
+        "timeMs": 109120,
+        "value": 0.094748,
+        "rank": 2,
+        "kind": "audio_discontinuity"
+      },
+      {
+        "timeMs": 105390,
+        "value": 0.093994,
+        "rank": 3,
+        "kind": "audio_discontinuity"
+      },
+      {
+        "timeMs": 66540,
+        "value": 0.086657,
+        "rank": 4,
+        "kind": "audio_discontinuity"
+      },
+      {
+        "timeMs": 53370,
+        "value": 0.086369,
+        "rank": 5,
+        "kind": "audio_discontinuity"
+      },
+      {
+        "timeMs": 68950,
+        "value": 0.081688,
+        "rank": 6,
+        "kind": "audio_discontinuity"
+      },
+      {
+        "timeMs": 84960,
+        "value": 0.08019,
+        "rank": 7,
+        "kind": "audio_discontinuity"
+      },
+      {
+        "timeMs": 59680,
+        "value": 0.077826,
+        "rank": 8,
+        "kind": "audio_discontinuity"
+      },
+      {
+        "timeMs": 68500,
+        "value": 0.077599,
+        "rank": 9,
+        "kind": "audio_discontinuity"
+      },
+      {
+        "timeMs": 13040,
+        "value": 0.075223,
+        "rank": 10,
+        "kind": "audio_discontinuity"
+      },
+      {
+        "timeMs": 116470,
+        "value": 0.074543,
+        "rank": 11,
+        "kind": "audio_discontinuity"
+      },
+      {
+        "timeMs": 13260,
+        "value": 0.074414,
+        "rank": 12,
+        "kind": "audio_discontinuity"
+      }
+    ],
+    "videoCutpoints": [
+      {
+        "timeMs": 87233,
+        "value": 2.948,
+        "rank": 1,
+        "kind": "video_scene_change"
+      },
+      {
+        "timeMs": 119933,
+        "value": 2.889,
+        "rank": 2,
+        "kind": "video_scene_change"
+      },
+      {
+        "timeMs": 110467,
+        "value": 2.579,
+        "rank": 3,
+        "kind": "video_scene_change"
+      },
+      {
+        "timeMs": 19367,
+        "value": 2.557,
+        "rank": 4,
+        "kind": "video_scene_change"
+      },
+      {
+        "timeMs": 64100,
+        "value": 2.343,
+        "rank": 5,
+        "kind": "video_scene_change"
+      },
+      {
+        "timeMs": 97000,
+        "value": 2.219,
+        "rank": 6,
+        "kind": "video_scene_change"
+      },
+      {
+        "timeMs": 101100,
+        "value": 2.197,
+        "rank": 7,
+        "kind": "video_scene_change"
+      },
+      {
+        "timeMs": 75233,
+        "value": 2.191,
+        "rank": 8,
+        "kind": "video_scene_change"
+      }
+    ],
+    "selectedCutpoints": [
+      {
+        "timeMs": 13040,
+        "value": 0.075223,
+        "rank": 10,
+        "kind": "audio_discontinuity"
+      },
+      {
+        "timeMs": 19367,
+        "value": 2.557,
+        "rank": 4,
+        "kind": "video_scene_change"
+      },
+      {
+        "timeMs": 53370,
+        "value": 0.086369,
+        "rank": 5,
+        "kind": "audio_discontinuity"
+      },
+      {
+        "timeMs": 59680,
+        "value": 0.077826,
+        "rank": 8,
+        "kind": "audio_discontinuity"
+      },
+      {
+        "timeMs": 64100,
+        "value": 2.343,
+        "rank": 5,
+        "kind": "video_scene_change"
+      },
+      {
+        "timeMs": 66540,
+        "value": 0.086657,
+        "rank": 4,
+        "kind": "audio_discontinuity"
+      },
+      {
+        "timeMs": 68910,
+        "value": 0.099837,
+        "rank": 1,
+        "kind": "audio_discontinuity"
+      },
+      {
+        "timeMs": 75233,
+        "value": 2.191,
+        "rank": 8,
+        "kind": "video_scene_change"
+      },
+      {
+        "timeMs": 84960,
+        "value": 0.08019,
+        "rank": 7,
+        "kind": "audio_discontinuity"
+      },
+      {
+        "timeMs": 87233,
+        "value": 2.948,
+        "rank": 1,
+        "kind": "video_scene_change"
+      },
+      {
+        "timeMs": 97000,
+        "value": 2.219,
+        "rank": 6,
+        "kind": "video_scene_change"
+      },
+      {
+        "timeMs": 101100,
+        "value": 2.197,
+        "rank": 7,
+        "kind": "video_scene_change"
+      },
+      {
+        "timeMs": 105390,
+        "value": 0.093994,
+        "rank": 3,
+        "kind": "audio_discontinuity"
+      },
+      {
+        "timeMs": 109120,
+        "value": 0.094748,
+        "rank": 2,
+        "kind": "audio_discontinuity"
+      },
+      {
+        "timeMs": 116470,
+        "value": 0.074543,
+        "rank": 11,
+        "kind": "audio_discontinuity"
+      }
+    ]
+  },
+  "segments": [
+    {
+      "segment": {
+        "index": 0,
+        "startMs": 2555,
+        "endMs": 13040,
+        "durationMs": 10485,
+        "boundaryEvidence": [
+          {
+            "timeMs": 13040,
+            "value": 0.075223,
+            "rank": 10,
+            "kind": "audio_discontinuity"
+          }
+        ],
+        "text": "動説100人いれば食べていけるって本当なんだろうかあー100人か100人いたらもういけるんじゃないか動説動説100人でしょ動説100人って結",
+        "normalizedText": "動説100人いれば食べていけるって本当なんだろうかあ100人か100人いたらもういけるんじゃないか動説動説100人でしょ動説100人って結",
+        "wordCount": 70
+      },
+      "matches": [
+        {
+          "sourceId": "r_ztjHaHmcg_-DwSCDMCWDQ_local300_v001",
+          "sourceStartMs": 2174596,
+          "sourceEndMs": 2194118,
+          "sourceText": "それ銅節100人いれば食べていけるって本当なんだろうかあ100人か100人いたらもういけるんじゃないか銅節銅節100人でしょ銅節100人結",
+          "normalizedSourceText": "それ銅節100人いれば食べていけるって本当なんだろうかあ100人か100人いたらもういけるんじゃないか銅節銅節100人でしょ銅節100人結",
+          "matchedChars": 59,
+          "queryChars": 69,
+          "sourceChars": 69,
+          "clipCoverage": 0.855072463768116,
+          "sourceCoverage": 0.855072463768116,
+          "timeAxis": {
+            "matchedWordPairCount": 59,
+            "toleranceMs": 100,
+            "longestLinearRunClipStartMs": 7938,
+            "longestLinearRunClipEndMs": 10480,
+            "longestLinearRunDurationMs": 2542,
+            "segmentDurationMs": 10485,
+            "linearContinuityRatio": 0.242442,
+            "maxDeltaDifferenceMs": 1342,
+            "discontinuityCount": 9
+          }
+        },
+        {
+          "sourceId": "r_ztjHaHmcg_-DwSCDMCWDQ_local300_v001",
+          "sourceStartMs": 2174656,
+          "sourceEndMs": 2194198,
+          "sourceText": "れ銅節100人いれば食べていけるって本当なんだろうかあ100人か100人いたらもういけるんじゃないか銅節銅節100人でしょ銅節100人結構",
+          "normalizedSourceText": "れ銅節100人いれば食べていけるって本当なんだろうかあ100人か100人いたらもういけるんじゃないか銅節銅節100人でしょ銅節100人結構",
+          "matchedChars": 59,
+          "queryChars": 69,
+          "sourceChars": 69,
+          "clipCoverage": 0.855072463768116,
+          "sourceCoverage": 0.855072463768116,
+          "timeAxis": {
+            "matchedWordPairCount": 59,
+            "toleranceMs": 100,
+            "longestLinearRunClipStartMs": 7938,
+            "longestLinearRunClipEndMs": 10480,
+            "longestLinearRunDurationMs": 2542,
+            "segmentDurationMs": 10485,
+            "linearContinuityRatio": 0.242442,
+            "maxDeltaDifferenceMs": 1342,
+            "discontinuityCount": 9
+          }
+        },
+        {
+          "sourceId": "r_ztjHaHmcg_-DwSCDMCWDQ_local300_v001",
+          "sourceStartMs": 2179927,
+          "sourceEndMs": 2194298,
+          "sourceText": "銅節100人いれば食べていけるって本当なんだろうかあ100人か100人いたらもういけるんじゃないか銅節銅節100人でしょ銅節100人結構だ",
+          "normalizedSourceText": "銅節100人いれば食べていけるって本当なんだろうかあ100人か100人いたらもういけるんじゃないか銅節銅節100人でしょ銅節100人結構だ",
+          "matchedChars": 59,
+          "queryChars": 69,
+          "sourceChars": 69,
+          "clipCoverage": 0.855072463768116,
+          "sourceCoverage": 0.855072463768116,
+          "timeAxis": {
+            "matchedWordPairCount": 59,
+            "toleranceMs": 100,
+            "longestLinearRunClipStartMs": 7938,
+            "longestLinearRunClipEndMs": 10480,
+            "longestLinearRunDurationMs": 2542,
+            "segmentDurationMs": 10485,
+            "linearContinuityRatio": 0.242442,
+            "maxDeltaDifferenceMs": 1342,
+            "discontinuityCount": 9
+          }
+        }
+      ],
+      "bestMatch": {
+        "sourceId": "r_ztjHaHmcg_-DwSCDMCWDQ_local300_v001",
+        "sourceStartMs": 2174596,
+        "sourceEndMs": 2194118,
+        "sourceText": "それ銅節100人いれば食べていけるって本当なんだろうかあ100人か100人いたらもういけるんじゃないか銅節銅節100人でしょ銅節100人結",
+        "normalizedSourceText": "それ銅節100人いれば食べていけるって本当なんだろうかあ100人か100人いたらもういけるんじゃないか銅節銅節100人でしょ銅節100人結",
+        "matchedChars": 59,
+        "queryChars": 69,
+        "sourceChars": 69,
+        "clipCoverage": 0.855072463768116,
+        "sourceCoverage": 0.855072463768116,
+        "timeAxis": {
+          "matchedWordPairCount": 59,
+          "toleranceMs": 100,
+          "longestLinearRunClipStartMs": 7938,
+          "longestLinearRunClipEndMs": 10480,
+          "longestLinearRunDurationMs": 2542,
+          "segmentDurationMs": 10485,
+          "linearContinuityRatio": 0.242442,
+          "maxDeltaDifferenceMs": 1342,
+          "discontinuityCount": 9
+        }
+      },
+      "reliability": {
+        "anchorWordCount": 59,
+        "minimumAnchorWordCount": 10,
+        "status": "judgeable",
+        "displayText": "24.2%",
+        "linearContinuityRatioForDisplay": 0.242442
+      },
+      "inheritance": {
+        "status": "requires_review",
+        "reason": "人間確認済みペアと±500ms以内で一致しないため再確認が必要。"
+      }
+    },
+    {
+      "segment": {
+        "index": 1,
+        "startMs": 13040,
+        "endMs": 19367,
+        "durationMs": 6327,
+        "boundaryEvidence": [
+          {
+            "timeMs": 19367,
+            "value": 2.557,
+            "rank": 4,
+            "kind": "video_scene_change"
+          }
+        ],
+        "text": "結構だもんしかも動説100人結構だねだって僕がPUBGで",
+        "normalizedText": "結構だもんしかも動説100人結構だねだって僕がpubgで",
+        "wordCount": 28
+      },
+      "matches": [
+        {
+          "sourceId": "r_ztjHaHmcg_-DwSCDMCWDQ_local300_v001",
+          "sourceStartMs": 2193738,
+          "sourceEndMs": 2211736,
+          "sourceText": "人結構だぞしかも銅節100人結構だねだって僕がPUBGで",
+          "normalizedSourceText": "人結構だぞしかも銅節100人結構だねだって僕がpubgで",
+          "matchedChars": 24,
+          "queryChars": 28,
+          "sourceChars": 28,
+          "clipCoverage": 0.8571428571428571,
+          "sourceCoverage": 0.8571428571428571,
+          "timeAxis": {
+            "matchedWordPairCount": 24,
+            "toleranceMs": 161,
+            "longestLinearRunClipStartMs": 15903,
+            "longestLinearRunClipEndMs": 17925,
+            "longestLinearRunDurationMs": 2022,
+            "segmentDurationMs": 6327,
+            "linearContinuityRatio": 0.319583,
+            "maxDeltaDifferenceMs": 10289,
+            "discontinuityCount": 5
+          }
+        },
+        {
+          "sourceId": "r_ztjHaHmcg_-DwSCDMCWDQ_local300_v001",
+          "sourceStartMs": 2193898,
+          "sourceEndMs": 2211776,
+          "sourceText": "結構だぞしかも銅節100人結構だねだって僕がPUBGでち",
+          "normalizedSourceText": "結構だぞしかも銅節100人結構だねだって僕がpubgでち",
+          "matchedChars": 24,
+          "queryChars": 28,
+          "sourceChars": 28,
+          "clipCoverage": 0.8571428571428571,
+          "sourceCoverage": 0.8571428571428571,
+          "timeAxis": {
+            "matchedWordPairCount": 24,
+            "toleranceMs": 161,
+            "longestLinearRunClipStartMs": 15903,
+            "longestLinearRunClipEndMs": 17925,
+            "longestLinearRunDurationMs": 2022,
+            "segmentDurationMs": 6327,
+            "linearContinuityRatio": 0.319583,
+            "maxDeltaDifferenceMs": 10289,
+            "discontinuityCount": 5
+          }
+        },
+        {
+          "sourceId": "r_ztjHaHmcg_-DwSCDMCWDQ_local300_v001",
+          "sourceStartMs": 2193638,
+          "sourceEndMs": 2210915,
+          "sourceText": "0人結構だぞしかも銅節100人結構だねだって僕がPUBG",
+          "normalizedSourceText": "0人結構だぞしかも銅節100人結構だねだって僕がpubg",
+          "matchedChars": 23,
+          "queryChars": 28,
+          "sourceChars": 28,
+          "clipCoverage": 0.8214285714285714,
+          "sourceCoverage": 0.8214285714285714,
+          "timeAxis": {
+            "matchedWordPairCount": 23,
+            "toleranceMs": 161,
+            "longestLinearRunClipStartMs": 15903,
+            "longestLinearRunClipEndMs": 17925,
+            "longestLinearRunDurationMs": 2022,
+            "segmentDurationMs": 6327,
+            "linearContinuityRatio": 0.319583,
+            "maxDeltaDifferenceMs": 10289,
+            "discontinuityCount": 5
+          }
+        }
+      ],
+      "bestMatch": {
+        "sourceId": "r_ztjHaHmcg_-DwSCDMCWDQ_local300_v001",
+        "sourceStartMs": 2193738,
+        "sourceEndMs": 2211736,
+        "sourceText": "人結構だぞしかも銅節100人結構だねだって僕がPUBGで",
+        "normalizedSourceText": "人結構だぞしかも銅節100人結構だねだって僕がpubgで",
+        "matchedChars": 24,
+        "queryChars": 28,
+        "sourceChars": 28,
+        "clipCoverage": 0.8571428571428571,
+        "sourceCoverage": 0.8571428571428571,
+        "timeAxis": {
+          "matchedWordPairCount": 24,
+          "toleranceMs": 161,
+          "longestLinearRunClipStartMs": 15903,
+          "longestLinearRunClipEndMs": 17925,
+          "longestLinearRunDurationMs": 2022,
+          "segmentDurationMs": 6327,
+          "linearContinuityRatio": 0.319583,
+          "maxDeltaDifferenceMs": 10289,
+          "discontinuityCount": 5
+        }
+      },
+      "reliability": {
+        "anchorWordCount": 24,
+        "minimumAnchorWordCount": 10,
+        "status": "judgeable",
+        "displayText": "32%",
+        "linearContinuityRatioForDisplay": 0.319583
+      },
+      "inheritance": {
+        "status": "requires_review",
+        "reason": "人間確認済みペアと±500ms以内で一致しないため再確認が必要。"
+      }
+    },
+    {
+      "segment": {
+        "index": 2,
+        "startMs": 19367,
+        "endMs": 53370,
+        "durationMs": 34003,
+        "boundaryEvidence": [
+          {
+            "timeMs": 53370,
+            "value": 0.086369,
+            "rank": 5,
+            "kind": "audio_discontinuity"
+          }
+        ],
+        "text": "でちょうど伸び始めた時期が100人ぐらいだったはずだけど常に100人来るなら全然多分普通のサラリーマンぐらいの月収あるんじゃないかちょい下回るかなぐらいか多分今だし昔のアナリティクス見てみるか20202018年5月組でしょ僕2018年じゃあそれこそ7月とかでいいか7月2日2018年の7月あー残ってるわはいはいはいはいはい同説100人だとまあでも多",
+        "normalizedText": "でちょうど伸び始めた時期が100人ぐらいだったはずだけど常に100人来るなら全然多分普通のさらりまんぐらいの月収あるんじゃないかちょい下回るかなぐらいか多分今だし昔のあなりてぃくす見てみるか20202018年5月組でしょ僕2018年じゃあそれこそ7月とかでいいか7月2日2018年の7月あ残ってるわはいはいはいはいはい同説100人だとまあでも多",
+        "wordCount": 174
+      },
+      "matches": [
+        {
+          "sourceId": "r_ztjHaHmcg_-DwSCDMCWDQ_local300_v001",
+          "sourceStartMs": 2208532,
+          "sourceEndMs": 2258575,
+          "sourceText": "だねだって僕がPUBGでちょうど伸び始めた時期が100人ぐらいだったはずだけどうん常に100人来るなら全然多分普通のサラリマンぐらいの月収あるんじゃないかちょい下回るかなぐらいか多分暇だし昔のアナリティクス見てみるか2018年5月組でしょ僕2018年じゃあそれこそ7月とかでいいか7月2日7月1日でいいよ2018年の7月3030までかあ31まで",
+          "normalizedSourceText": "だねだって僕がpubgでちょうど伸び始めた時期が100人ぐらいだったはずだけどうん常に100人来るなら全然多分普通のさらりまんぐらいの月収あるんじゃないかちょい下回るかなぐらいか多分暇だし昔のあなりてぃくす見てみるか2018年5月組でしょ僕2018年じゃあそれこそ7月とかでいいか7月2日7月1日でいいよ2018年の7月3030までかあ31まで",
+          "matchedChars": 143,
+          "queryChars": 172,
+          "sourceChars": 172,
+          "clipCoverage": 0.8313953488372093,
+          "sourceCoverage": 0.8313953488372093,
+          "timeAxis": {
+            "matchedWordPairCount": 143,
+            "toleranceMs": 100,
+            "longestLinearRunClipStartMs": 23428,
+            "longestLinearRunClipEndMs": 32383,
+            "longestLinearRunDurationMs": 8955,
+            "segmentDurationMs": 34003,
+            "linearContinuityRatio": 0.263359,
+            "maxDeltaDifferenceMs": 13176,
+            "discontinuityCount": 29
+          }
+        },
+        {
+          "sourceId": "r_ztjHaHmcg_-DwSCDMCWDQ_local300_v001",
+          "sourceStartMs": 2208653,
+          "sourceEndMs": 2258595,
+          "sourceText": "ねだって僕がPUBGでちょうど伸び始めた時期が100人ぐらいだったはずだけどうん常に100人来るなら全然多分普通のサラリマンぐらいの月収あるんじゃないかちょい下回るかなぐらいか多分暇だし昔のアナリティクス見てみるか2018年5月組でしょ僕2018年じゃあそれこそ7月とかでいいか7月2日7月1日でいいよ2018年の7月3030までかあ31まであ",
+          "normalizedSourceText": "ねだって僕がpubgでちょうど伸び始めた時期が100人ぐらいだったはずだけどうん常に100人来るなら全然多分普通のさらりまんぐらいの月収あるんじゃないかちょい下回るかなぐらいか多分暇だし昔のあなりてぃくす見てみるか2018年5月組でしょ僕2018年じゃあそれこそ7月とかでいいか7月2日7月1日でいいよ2018年の7月3030までかあ31まであ",
+          "matchedChars": 143,
+          "queryChars": 172,
+          "sourceChars": 172,
+          "clipCoverage": 0.8313953488372093,
+          "sourceCoverage": 0.8313953488372093,
+          "timeAxis": {
+            "matchedWordPairCount": 143,
+            "toleranceMs": 100,
+            "longestLinearRunClipStartMs": 23428,
+            "longestLinearRunClipEndMs": 32383,
+            "longestLinearRunDurationMs": 8955,
+            "segmentDurationMs": 34003,
+            "linearContinuityRatio": 0.263359,
+            "maxDeltaDifferenceMs": 13176,
+            "discontinuityCount": 29
+          }
+        },
+        {
+          "sourceId": "r_ztjHaHmcg_-DwSCDMCWDQ_local300_v001",
+          "sourceStartMs": 2208773,
+          "sourceEndMs": 2258795,
+          "sourceText": "だって僕がPUBGでちょうど伸び始めた時期が100人ぐらいだったはずだけどうん常に100人来るなら全然多分普通のサラリマンぐらいの月収あるんじゃないかちょい下回るかなぐらいか多分暇だし昔のアナリティクス見てみるか2018年5月組でしょ僕2018年じゃあそれこそ7月とかでいいか7月2日7月1日でいいよ2018年の7月3030までかあ31まであま",
+          "normalizedSourceText": "だって僕がpubgでちょうど伸び始めた時期が100人ぐらいだったはずだけどうん常に100人来るなら全然多分普通のさらりまんぐらいの月収あるんじゃないかちょい下回るかなぐらいか多分暇だし昔のあなりてぃくす見てみるか2018年5月組でしょ僕2018年じゃあそれこそ7月とかでいいか7月2日7月1日でいいよ2018年の7月3030までかあ31まであま",
+          "matchedChars": 143,
+          "queryChars": 172,
+          "sourceChars": 172,
+          "clipCoverage": 0.8313953488372093,
+          "sourceCoverage": 0.8313953488372093,
+          "timeAxis": {
+            "matchedWordPairCount": 143,
+            "toleranceMs": 100,
+            "longestLinearRunClipStartMs": 23428,
+            "longestLinearRunClipEndMs": 32383,
+            "longestLinearRunDurationMs": 8955,
+            "segmentDurationMs": 34003,
+            "linearContinuityRatio": 0.263359,
+            "maxDeltaDifferenceMs": 13176,
+            "discontinuityCount": 29
+          }
+        }
+      ],
+      "bestMatch": {
+        "sourceId": "r_ztjHaHmcg_-DwSCDMCWDQ_local300_v001",
+        "sourceStartMs": 2208532,
+        "sourceEndMs": 2258575,
+        "sourceText": "だねだって僕がPUBGでちょうど伸び始めた時期が100人ぐらいだったはずだけどうん常に100人来るなら全然多分普通のサラリマンぐらいの月収あるんじゃないかちょい下回るかなぐらいか多分暇だし昔のアナリティクス見てみるか2018年5月組でしょ僕2018年じゃあそれこそ7月とかでいいか7月2日7月1日でいいよ2018年の7月3030までかあ31まで",
+        "normalizedSourceText": "だねだって僕がpubgでちょうど伸び始めた時期が100人ぐらいだったはずだけどうん常に100人来るなら全然多分普通のさらりまんぐらいの月収あるんじゃないかちょい下回るかなぐらいか多分暇だし昔のあなりてぃくす見てみるか2018年5月組でしょ僕2018年じゃあそれこそ7月とかでいいか7月2日7月1日でいいよ2018年の7月3030までかあ31まで",
+        "matchedChars": 143,
+        "queryChars": 172,
+        "sourceChars": 172,
+        "clipCoverage": 0.8313953488372093,
+        "sourceCoverage": 0.8313953488372093,
+        "timeAxis": {
+          "matchedWordPairCount": 143,
+          "toleranceMs": 100,
+          "longestLinearRunClipStartMs": 23428,
+          "longestLinearRunClipEndMs": 32383,
+          "longestLinearRunDurationMs": 8955,
+          "segmentDurationMs": 34003,
+          "linearContinuityRatio": 0.263359,
+          "maxDeltaDifferenceMs": 13176,
+          "discontinuityCount": 29
+        }
+      },
+      "reliability": {
+        "anchorWordCount": 143,
+        "minimumAnchorWordCount": 10,
+        "status": "judgeable",
+        "displayText": "26.3%",
+        "linearContinuityRatioForDisplay": 0.263359
+      },
+      "inheritance": {
+        "status": "requires_review",
+        "reason": "人間確認済みペアと±500ms以内で一致しないため再確認が必要。"
+      }
+    },
+    {
+      "segment": {
+        "index": 3,
+        "startMs": 53370,
+        "endMs": 59680,
+        "durationMs": 6310,
+        "boundaryEvidence": [
+          {
+            "timeMs": 59680,
+            "value": 0.077826,
+            "rank": 8,
+            "kind": "audio_discontinuity"
+          }
+        ],
+        "text": "多分生活できると思うってことはどうせ3200にはさらにも32人分そんな単",
+        "normalizedText": "多分生活できると思うってことはどうせ3200にはさらにも32人分そんな単",
+        "wordCount": 36
+      },
+      "matches": [
+        {
+          "sourceId": "r_ztjHaHmcg_-DwSCDMCWDQ_local300_v001",
+          "sourceStartMs": 2315887,
+          "sourceEndMs": 2336728,
+          "sourceText": "多分生活できると思うってことは銅石3200人はサラリマン32人分そんな単",
+          "normalizedSourceText": "多分生活できると思うってことは銅石3200人はさらりまん32人分そんな単",
+          "matchedChars": 30,
+          "queryChars": 36,
+          "sourceChars": 36,
+          "clipCoverage": 0.8333333333333334,
+          "sourceCoverage": 0.8333333333333334,
+          "timeAxis": {
+            "matchedWordPairCount": 30,
+            "toleranceMs": 120,
+            "longestLinearRunClipStartMs": 55924,
+            "longestLinearRunClipEndMs": 59680,
+            "longestLinearRunDurationMs": 3756,
+            "segmentDurationMs": 6310,
+            "linearContinuityRatio": 0.595246,
+            "maxDeltaDifferenceMs": 14206,
+            "discontinuityCount": 1
+          }
+        },
+        {
+          "sourceId": "r_ztjHaHmcg_-DwSCDMCWDQ_local300_v001",
+          "sourceStartMs": 2315807,
+          "sourceEndMs": 2336468,
+          "sourceText": "も多分生活できると思うってことは銅石3200人はサラリマン32人分そんな",
+          "normalizedSourceText": "も多分生活できると思うってことは銅石3200人はさらりまん32人分そんな",
+          "matchedChars": 29,
+          "queryChars": 36,
+          "sourceChars": 36,
+          "clipCoverage": 0.8055555555555556,
+          "sourceCoverage": 0.8055555555555556,
+          "timeAxis": {
+            "matchedWordPairCount": 29,
+            "toleranceMs": 120,
+            "longestLinearRunClipStartMs": 55924,
+            "longestLinearRunClipEndMs": 59647,
+            "longestLinearRunDurationMs": 3723,
+            "segmentDurationMs": 6310,
+            "linearContinuityRatio": 0.590016,
+            "maxDeltaDifferenceMs": 14206,
+            "discontinuityCount": 1
+          }
+        },
+        {
+          "sourceId": "r_ztjHaHmcg_-DwSCDMCWDQ_local300_v001",
+          "sourceStartMs": 2315987,
+          "sourceEndMs": 2336928,
+          "sourceText": "分生活できると思うってことは銅石3200人はサラリマン32人分そんな単純",
+          "normalizedSourceText": "分生活できると思うってことは銅石3200人はさらりまん32人分そんな単純",
+          "matchedChars": 29,
+          "queryChars": 36,
+          "sourceChars": 36,
+          "clipCoverage": 0.8055555555555556,
+          "sourceCoverage": 0.8055555555555556,
+          "timeAxis": {
+            "matchedWordPairCount": 29,
+            "toleranceMs": 120,
+            "longestLinearRunClipStartMs": 55924,
+            "longestLinearRunClipEndMs": 59680,
+            "longestLinearRunDurationMs": 3756,
+            "segmentDurationMs": 6310,
+            "linearContinuityRatio": 0.595246,
+            "maxDeltaDifferenceMs": 14206,
+            "discontinuityCount": 1
+          }
+        }
+      ],
+      "bestMatch": {
+        "sourceId": "r_ztjHaHmcg_-DwSCDMCWDQ_local300_v001",
+        "sourceStartMs": 2315887,
+        "sourceEndMs": 2336728,
+        "sourceText": "多分生活できると思うってことは銅石3200人はサラリマン32人分そんな単",
+        "normalizedSourceText": "多分生活できると思うってことは銅石3200人はさらりまん32人分そんな単",
+        "matchedChars": 30,
+        "queryChars": 36,
+        "sourceChars": 36,
+        "clipCoverage": 0.8333333333333334,
+        "sourceCoverage": 0.8333333333333334,
+        "timeAxis": {
+          "matchedWordPairCount": 30,
+          "toleranceMs": 120,
+          "longestLinearRunClipStartMs": 55924,
+          "longestLinearRunClipEndMs": 59680,
+          "longestLinearRunDurationMs": 3756,
+          "segmentDurationMs": 6310,
+          "linearContinuityRatio": 0.595246,
+          "maxDeltaDifferenceMs": 14206,
+          "discontinuityCount": 1
+        }
+      },
+      "reliability": {
+        "anchorWordCount": 30,
+        "minimumAnchorWordCount": 10,
+        "status": "judgeable",
+        "displayText": "59.5%",
+        "linearContinuityRatioForDisplay": 0.595246
+      },
+      "inheritance": {
+        "status": "requires_review",
+        "reason": "人間確認済みペアと±500ms以内で一致しないため再確認が必要。"
+      }
+    },
+    {
+      "segment": {
+        "index": 4,
+        "startMs": 59680,
+        "endMs": 64100,
+        "durationMs": 4420,
+        "boundaryEvidence": [
+          {
+            "timeMs": 64100,
+            "value": 2.343,
+            "rank": 5,
+            "kind": "video_scene_change"
+          }
+        ],
+        "text": "単純計算かなーって思うけどまあながち間違ってないこと",
+        "normalizedText": "単純計算かなって思うけどまあながち間違ってないこと",
+        "wordCount": 26
+      },
+      "matches": [
+        {
+          "sourceId": "r_ztjHaHmcg_-DwSCDMCWDQ_local300_v001",
+          "sourceStartMs": 2336468,
+          "sourceEndMs": 2340910,
+          "sourceText": "単純計算かなって思うけどまあ穴勝ち間違ってないこと",
+          "normalizedSourceText": "単純計算かなって思うけどまあ穴勝ち間違ってないこと",
+          "matchedChars": 23,
+          "queryChars": 25,
+          "sourceChars": 25,
+          "clipCoverage": 0.92,
+          "sourceCoverage": 0.92,
+          "timeAxis": {
+            "matchedWordPairCount": 23,
+            "toleranceMs": 120,
+            "longestLinearRunClipStartMs": 59680,
+            "longestLinearRunClipEndMs": 64100,
+            "longestLinearRunDurationMs": 4420,
+            "segmentDurationMs": 4420,
+            "linearContinuityRatio": 1,
+            "maxDeltaDifferenceMs": 21,
+            "discontinuityCount": 0
+          }
+        },
+        {
+          "sourceId": "r_ztjHaHmcg_-DwSCDMCWDQ_local300_v001",
+          "sourceStartMs": 2336328,
+          "sourceEndMs": 2340850,
+          "sourceText": "な単純計算かなって思うけどまあ穴勝ち間違ってないこ",
+          "normalizedSourceText": "な単純計算かなって思うけどまあ穴勝ち間違ってないこ",
+          "matchedChars": 22,
+          "queryChars": 25,
+          "sourceChars": 25,
+          "clipCoverage": 0.88,
+          "sourceCoverage": 0.88,
+          "timeAxis": {
+            "matchedWordPairCount": 22,
+            "toleranceMs": 120,
+            "longestLinearRunClipStartMs": 59680,
+            "longestLinearRunClipEndMs": 64051,
+            "longestLinearRunDurationMs": 4371,
+            "segmentDurationMs": 4420,
+            "linearContinuityRatio": 0.988914,
+            "maxDeltaDifferenceMs": 21,
+            "discontinuityCount": 0
+          }
+        },
+        {
+          "sourceId": "r_ztjHaHmcg_-DwSCDMCWDQ_local300_v001",
+          "sourceStartMs": 2336728,
+          "sourceEndMs": 2340990,
+          "sourceText": "純計算かなって思うけどまあ穴勝ち間違ってないことも",
+          "normalizedSourceText": "純計算かなって思うけどまあ穴勝ち間違ってないことも",
+          "matchedChars": 22,
+          "queryChars": 25,
+          "sourceChars": 25,
+          "clipCoverage": 0.88,
+          "sourceCoverage": 0.88,
+          "timeAxis": {
+            "matchedWordPairCount": 22,
+            "toleranceMs": 120,
+            "longestLinearRunClipStartMs": 59908,
+            "longestLinearRunClipEndMs": 64100,
+            "longestLinearRunDurationMs": 4192,
+            "segmentDurationMs": 4420,
+            "linearContinuityRatio": 0.948416,
+            "maxDeltaDifferenceMs": 21,
+            "discontinuityCount": 0
+          }
+        }
+      ],
+      "bestMatch": {
+        "sourceId": "r_ztjHaHmcg_-DwSCDMCWDQ_local300_v001",
+        "sourceStartMs": 2336468,
+        "sourceEndMs": 2340910,
+        "sourceText": "単純計算かなって思うけどまあ穴勝ち間違ってないこと",
+        "normalizedSourceText": "単純計算かなって思うけどまあ穴勝ち間違ってないこと",
+        "matchedChars": 23,
+        "queryChars": 25,
+        "sourceChars": 25,
+        "clipCoverage": 0.92,
+        "sourceCoverage": 0.92,
+        "timeAxis": {
+          "matchedWordPairCount": 23,
+          "toleranceMs": 120,
+          "longestLinearRunClipStartMs": 59680,
+          "longestLinearRunClipEndMs": 64100,
+          "longestLinearRunDurationMs": 4420,
+          "segmentDurationMs": 4420,
+          "linearContinuityRatio": 1,
+          "maxDeltaDifferenceMs": 21,
+          "discontinuityCount": 0
+        }
+      },
+      "reliability": {
+        "anchorWordCount": 23,
+        "minimumAnchorWordCount": 10,
+        "status": "judgeable",
+        "displayText": "100%",
+        "linearContinuityRatioForDisplay": 1
+      },
+      "inheritance": {
+        "status": "requires_review",
+        "reason": "人間確認済みペアと±500ms以内で一致しないため再確認が必要。"
+      }
+    },
+    {
+      "segment": {
+        "index": 5,
+        "startMs": 64100,
+        "endMs": 66540,
+        "durationMs": 2440,
+        "boundaryEvidence": [
+          {
+            "timeMs": 66540,
+            "value": 0.086657,
+            "rank": 4,
+            "kind": "audio_discontinuity"
+          }
+        ],
+        "text": "ともないかもしれん多分でもそうか単純計",
+        "normalizedText": "ともないかもしれん多分でもそうか単純計",
+        "wordCount": 19
+      },
+      "matches": [
+        {
+          "sourceId": "r_ztjHaHmcg_-DwSCDMCWDQ_local300_v001",
+          "sourceStartMs": 2340850,
+          "sourceEndMs": 2343230,
+          "sourceText": "ともないかもしれない多分でもそうか単純",
+          "normalizedSourceText": "ともないかもしれない多分でもそうか単純",
+          "matchedChars": 17,
+          "queryChars": 19,
+          "sourceChars": 19,
+          "clipCoverage": 0.8947368421052632,
+          "sourceCoverage": 0.8947368421052632,
+          "timeAxis": {
+            "matchedWordPairCount": 17,
+            "toleranceMs": 100,
+            "longestLinearRunClipStartMs": 64100,
+            "longestLinearRunClipEndMs": 66433,
+            "longestLinearRunDurationMs": 2333,
+            "segmentDurationMs": 2440,
+            "linearContinuityRatio": 0.956148,
+            "maxDeltaDifferenceMs": 20,
+            "discontinuityCount": 0
+          }
+        },
+        {
+          "sourceId": "r_ztjHaHmcg_-DwSCDMCWDQ_local300_v001",
+          "sourceStartMs": 2340910,
+          "sourceEndMs": 2343410,
+          "sourceText": "もないかもしれない多分でもそうか単純計",
+          "normalizedSourceText": "もないかもしれない多分でもそうか単純計",
+          "matchedChars": 17,
+          "queryChars": 19,
+          "sourceChars": 19,
+          "clipCoverage": 0.8947368421052632,
+          "sourceCoverage": 0.8947368421052632,
+          "timeAxis": {
+            "matchedWordPairCount": 17,
+            "toleranceMs": 100,
+            "longestLinearRunClipStartMs": 64111,
+            "longestLinearRunClipEndMs": 66540,
+            "longestLinearRunDurationMs": 2429,
+            "segmentDurationMs": 2440,
+            "linearContinuityRatio": 0.995492,
+            "maxDeltaDifferenceMs": 20,
+            "discontinuityCount": 0
+          }
+        },
+        {
+          "sourceId": "r_ztjHaHmcg_-DwSCDMCWDQ_local300_v001",
+          "sourceStartMs": 2340769,
+          "sourceEndMs": 2343050,
+          "sourceText": "こともないかもしれない多分でもそうか単",
+          "normalizedSourceText": "こともないかもしれない多分でもそうか単",
+          "matchedChars": 16,
+          "queryChars": 19,
+          "sourceChars": 19,
+          "clipCoverage": 0.8421052631578947,
+          "sourceCoverage": 0.8421052631578947,
+          "timeAxis": {
+            "matchedWordPairCount": 16,
+            "toleranceMs": 100,
+            "longestLinearRunClipStartMs": 64100,
+            "longestLinearRunClipEndMs": 66233,
+            "longestLinearRunDurationMs": 2133,
+            "segmentDurationMs": 2440,
+            "linearContinuityRatio": 0.87418,
+            "maxDeltaDifferenceMs": 20,
+            "discontinuityCount": 0
+          }
+        }
+      ],
+      "bestMatch": {
+        "sourceId": "r_ztjHaHmcg_-DwSCDMCWDQ_local300_v001",
+        "sourceStartMs": 2340850,
+        "sourceEndMs": 2343230,
+        "sourceText": "ともないかもしれない多分でもそうか単純",
+        "normalizedSourceText": "ともないかもしれない多分でもそうか単純",
+        "matchedChars": 17,
+        "queryChars": 19,
+        "sourceChars": 19,
+        "clipCoverage": 0.8947368421052632,
+        "sourceCoverage": 0.8947368421052632,
+        "timeAxis": {
+          "matchedWordPairCount": 17,
+          "toleranceMs": 100,
+          "longestLinearRunClipStartMs": 64100,
+          "longestLinearRunClipEndMs": 66433,
+          "longestLinearRunDurationMs": 2333,
+          "segmentDurationMs": 2440,
+          "linearContinuityRatio": 0.956148,
+          "maxDeltaDifferenceMs": 20,
+          "discontinuityCount": 0
+        }
+      },
+      "reliability": {
+        "anchorWordCount": 17,
+        "minimumAnchorWordCount": 10,
+        "status": "judgeable",
+        "displayText": "95.6%",
+        "linearContinuityRatioForDisplay": 0.956148
+      },
+      "inheritance": {
+        "status": "requires_review",
+        "reason": "人間確認済みペアと±500ms以内で一致しないため再確認が必要。"
+      }
+    },
+    {
+      "segment": {
+        "index": 6,
+        "startMs": 66540,
+        "endMs": 68910,
+        "durationMs": 2370,
+        "boundaryEvidence": [
+          {
+            "timeMs": 68910,
+            "value": 0.099837,
+            "rank": 1,
+            "kind": "audio_discontinuity"
+          }
+        ],
+        "text": "計算ではあるかそうなんだ単純計",
+        "normalizedText": "計算ではあるかそうなんだ単純計",
+        "wordCount": 15
+      },
+      "matches": [
+        {
+          "sourceId": "r_ztjHaHmcg_-DwSCDMCWDQ_local300_v001",
+          "sourceStartMs": 2343230,
+          "sourceEndMs": 2347532,
+          "sourceText": "計算ではあるかそうなんだ単純計",
+          "normalizedSourceText": "計算ではあるかそうなんだ単純計",
+          "matchedChars": 15,
+          "queryChars": 15,
+          "sourceChars": 15,
+          "clipCoverage": 1,
+          "sourceCoverage": 1,
+          "timeAxis": {
+            "matchedWordPairCount": 15,
+            "toleranceMs": 120,
+            "longestLinearRunClipStartMs": 66540,
+            "longestLinearRunClipEndMs": 67995,
+            "longestLinearRunDurationMs": 1455,
+            "segmentDurationMs": 2370,
+            "linearContinuityRatio": 0.613924,
+            "maxDeltaDifferenceMs": 1660,
+            "discontinuityCount": 1
+          }
+        },
+        {
+          "sourceId": "r_ztjHaHmcg_-DwSCDMCWDQ_local300_v001",
+          "sourceStartMs": 2343050,
+          "sourceEndMs": 2347372,
+          "sourceText": "純計算ではあるかそうなんだ単純",
+          "normalizedSourceText": "純計算ではあるかそうなんだ単純",
+          "matchedChars": 14,
+          "queryChars": 15,
+          "sourceChars": 15,
+          "clipCoverage": 0.9333333333333333,
+          "sourceCoverage": 0.9333333333333333,
+          "timeAxis": {
+            "matchedWordPairCount": 14,
+            "toleranceMs": 120,
+            "longestLinearRunClipStartMs": 66540,
+            "longestLinearRunClipEndMs": 67995,
+            "longestLinearRunDurationMs": 1455,
+            "segmentDurationMs": 2370,
+            "linearContinuityRatio": 0.613924,
+            "maxDeltaDifferenceMs": 1660,
+            "discontinuityCount": 1
+          }
+        },
+        {
+          "sourceId": "r_ztjHaHmcg_-DwSCDMCWDQ_local300_v001",
+          "sourceStartMs": 2343410,
+          "sourceEndMs": 2347692,
+          "sourceText": "算ではあるかそうなんだ単純計算",
+          "normalizedSourceText": "算ではあるかそうなんだ単純計算",
+          "matchedChars": 14,
+          "queryChars": 15,
+          "sourceChars": 15,
+          "clipCoverage": 0.9333333333333333,
+          "sourceCoverage": 0.9333333333333333,
+          "timeAxis": {
+            "matchedWordPairCount": 14,
+            "toleranceMs": 120,
+            "longestLinearRunClipStartMs": 66594,
+            "longestLinearRunClipEndMs": 67995,
+            "longestLinearRunDurationMs": 1401,
+            "segmentDurationMs": 2370,
+            "linearContinuityRatio": 0.591139,
+            "maxDeltaDifferenceMs": 1660,
+            "discontinuityCount": 1
+          }
+        }
+      ],
+      "bestMatch": {
+        "sourceId": "r_ztjHaHmcg_-DwSCDMCWDQ_local300_v001",
+        "sourceStartMs": 2343230,
+        "sourceEndMs": 2347532,
+        "sourceText": "計算ではあるかそうなんだ単純計",
+        "normalizedSourceText": "計算ではあるかそうなんだ単純計",
+        "matchedChars": 15,
+        "queryChars": 15,
+        "sourceChars": 15,
+        "clipCoverage": 1,
+        "sourceCoverage": 1,
+        "timeAxis": {
+          "matchedWordPairCount": 15,
+          "toleranceMs": 120,
+          "longestLinearRunClipStartMs": 66540,
+          "longestLinearRunClipEndMs": 67995,
+          "longestLinearRunDurationMs": 1455,
+          "segmentDurationMs": 2370,
+          "linearContinuityRatio": 0.613924,
+          "maxDeltaDifferenceMs": 1660,
+          "discontinuityCount": 1
+        }
+      },
+      "reliability": {
+        "anchorWordCount": 15,
+        "minimumAnchorWordCount": 10,
+        "status": "judgeable",
+        "displayText": "61.4%",
+        "linearContinuityRatioForDisplay": 0.613924
+      },
+      "inheritance": {
+        "status": "requires_review",
+        "reason": "人間確認済みペアと±500ms以内で一致しないため再確認が必要。"
+      }
+    },
+    {
+      "segment": {
+        "index": 7,
+        "startMs": 68910,
+        "endMs": 75233,
+        "durationMs": 6323,
+        "boundaryEvidence": [
+          {
+            "timeMs": 75233,
+            "value": 2.191,
+            "rank": 8,
+            "kind": "video_scene_change"
+          }
+        ],
+        "text": "計算なんだよなそれがすごいよなぁ同節数とチャンネル登録者数どっちがお金なんだろうかチャンネル登録者数は別",
+        "normalizedText": "計算なんだよなそれがすごいよなぁ同節数とちゃんねる登録者数どっちがお金なんだろうかちゃんねる登録者数は別",
+        "wordCount": 52
+      },
+      "matches": [
+        {
+          "sourceId": "r_ztjHaHmcg_-DwSCDMCWDQ_local300_v001",
+          "sourceStartMs": 2351013,
+          "sourceEndMs": 2373874,
+          "sourceText": "サブスクありがとうございます同説数とチャンネル登録者数どっちがお金になるのだろうかチャンネル登録者数は別",
+          "normalizedSourceText": "さぶすくありがとうございます同説数とちゃんねる登録者数どっちがお金になるのだろうかちゃんねる登録者数は別",
+          "matchedChars": 37,
+          "queryChars": 52,
+          "sourceChars": 52,
+          "clipCoverage": 0.7115384615384616,
+          "sourceCoverage": 0.7115384615384616,
+          "timeAxis": {
+            "matchedWordPairCount": 37,
+            "toleranceMs": 100,
+            "longestLinearRunClipStartMs": 71198,
+            "longestLinearRunClipEndMs": 75233,
+            "longestLinearRunDurationMs": 4035,
+            "segmentDurationMs": 6323,
+            "linearContinuityRatio": 0.638146,
+            "maxDeltaDifferenceMs": 17016,
+            "discontinuityCount": 2
+          }
+        },
+        {
+          "sourceId": "r_ztjHaHmcg_-DwSCDMCWDQ_local300_v001",
+          "sourceStartMs": 2351133,
+          "sourceEndMs": 2373954,
+          "sourceText": "ブスクありがとうございます同説数とチャンネル登録者数どっちがお金になるのだろうかチャンネル登録者数は別に",
+          "normalizedSourceText": "ぶすくありがとうございます同説数とちゃんねる登録者数どっちがお金になるのだろうかちゃんねる登録者数は別に",
+          "matchedChars": 37,
+          "queryChars": 52,
+          "sourceChars": 52,
+          "clipCoverage": 0.7115384615384616,
+          "sourceCoverage": 0.7115384615384616,
+          "timeAxis": {
+            "matchedWordPairCount": 37,
+            "toleranceMs": 100,
+            "longestLinearRunClipStartMs": 71198,
+            "longestLinearRunClipEndMs": 75233,
+            "longestLinearRunDurationMs": 4035,
+            "segmentDurationMs": 6323,
+            "linearContinuityRatio": 0.638146,
+            "maxDeltaDifferenceMs": 17016,
+            "discontinuityCount": 2
+          }
+        },
+        {
+          "sourceId": "r_ztjHaHmcg_-DwSCDMCWDQ_local300_v001",
+          "sourceStartMs": 2351193,
+          "sourceEndMs": 2374194,
+          "sourceText": "スクありがとうございます同説数とチャンネル登録者数どっちがお金になるのだろうかチャンネル登録者数は別に何",
+          "normalizedSourceText": "すくありがとうございます同説数とちゃんねる登録者数どっちがお金になるのだろうかちゃんねる登録者数は別に何",
+          "matchedChars": 37,
+          "queryChars": 52,
+          "sourceChars": 52,
+          "clipCoverage": 0.7115384615384616,
+          "sourceCoverage": 0.7115384615384616,
+          "timeAxis": {
+            "matchedWordPairCount": 37,
+            "toleranceMs": 100,
+            "longestLinearRunClipStartMs": 71198,
+            "longestLinearRunClipEndMs": 75233,
+            "longestLinearRunDurationMs": 4035,
+            "segmentDurationMs": 6323,
+            "linearContinuityRatio": 0.638146,
+            "maxDeltaDifferenceMs": 17016,
+            "discontinuityCount": 2
+          }
+        }
+      ],
+      "bestMatch": {
+        "sourceId": "r_ztjHaHmcg_-DwSCDMCWDQ_local300_v001",
+        "sourceStartMs": 2351013,
+        "sourceEndMs": 2373874,
+        "sourceText": "サブスクありがとうございます同説数とチャンネル登録者数どっちがお金になるのだろうかチャンネル登録者数は別",
+        "normalizedSourceText": "さぶすくありがとうございます同説数とちゃんねる登録者数どっちがお金になるのだろうかちゃんねる登録者数は別",
+        "matchedChars": 37,
+        "queryChars": 52,
+        "sourceChars": 52,
+        "clipCoverage": 0.7115384615384616,
+        "sourceCoverage": 0.7115384615384616,
+        "timeAxis": {
+          "matchedWordPairCount": 37,
+          "toleranceMs": 100,
+          "longestLinearRunClipStartMs": 71198,
+          "longestLinearRunClipEndMs": 75233,
+          "longestLinearRunDurationMs": 4035,
+          "segmentDurationMs": 6323,
+          "linearContinuityRatio": 0.638146,
+          "maxDeltaDifferenceMs": 17016,
+          "discontinuityCount": 2
+        }
+      },
+      "reliability": {
+        "anchorWordCount": 37,
+        "minimumAnchorWordCount": 10,
+        "status": "judgeable",
+        "displayText": "63.8%",
+        "linearContinuityRatioForDisplay": 0.638146
+      },
+      "inheritance": {
+        "status": "requires_review",
+        "reason": "人間確認済みペアと±500ms以内で一致しないため再確認が必要。"
+      }
+    },
+    {
+      "segment": {
+        "index": 8,
+        "startMs": 75233,
+        "endMs": 84960,
+        "durationMs": 9727,
+        "boundaryEvidence": [
+          {
+            "timeMs": 84960,
+            "value": 0.08019,
+            "rank": 7,
+            "kind": "audio_discontinuity"
+          }
+        ],
+        "text": "別に何のお金にもなんないよチャンネル売るぐらいしかできなくないわからんけど同説がまあなんだろう結局リアルタ",
+        "normalizedText": "別に何のお金にもなんないよちゃんねる売るぐらいしかできなくないわからんけど同説がまあなんだろう結局りあるた",
+        "wordCount": 53
+      },
+      "matches": [
+        {
+          "sourceId": "r_ztjHaHmcg_-DwSCDMCWDQ_local300_v001",
+          "sourceStartMs": 2373814,
+          "sourceEndMs": 2383662,
+          "sourceText": "別に何のお金にもなんないよチャンネル売るぐらいしかできなくない分からんけど同説がまあなんだろう結局リアルタ",
+          "normalizedSourceText": "別に何のお金にもなんないよちゃんねる売るぐらいしかできなくない分からんけど同説がまあなんだろう結局りあるた",
+          "matchedChars": 52,
+          "queryChars": 53,
+          "sourceChars": 53,
+          "clipCoverage": 0.9811320754716981,
+          "sourceCoverage": 0.9811320754716981,
+          "timeAxis": {
+            "matchedWordPairCount": 52,
+            "toleranceMs": 100,
+            "longestLinearRunClipStartMs": 75233,
+            "longestLinearRunClipEndMs": 84653,
+            "longestLinearRunDurationMs": 9420,
+            "segmentDurationMs": 9727,
+            "linearContinuityRatio": 0.968438,
+            "maxDeltaDifferenceMs": 761,
+            "discontinuityCount": 2
+          }
+        },
+        {
+          "sourceId": "r_ztjHaHmcg_-DwSCDMCWDQ_local300_v001",
+          "sourceStartMs": 2373734,
+          "sourceEndMs": 2383562,
+          "sourceText": "は別に何のお金にもなんないよチャンネル売るぐらいしかできなくない分からんけど同説がまあなんだろう結局リアル",
+          "normalizedSourceText": "は別に何のお金にもなんないよちゃんねる売るぐらいしかできなくない分からんけど同説がまあなんだろう結局りある",
+          "matchedChars": 51,
+          "queryChars": 53,
+          "sourceChars": 53,
+          "clipCoverage": 0.9622641509433962,
+          "sourceCoverage": 0.9622641509433962,
+          "timeAxis": {
+            "matchedWordPairCount": 51,
+            "toleranceMs": 100,
+            "longestLinearRunClipStartMs": 75233,
+            "longestLinearRunClipEndMs": 84653,
+            "longestLinearRunDurationMs": 9420,
+            "segmentDurationMs": 9727,
+            "linearContinuityRatio": 0.968438,
+            "maxDeltaDifferenceMs": 761,
+            "discontinuityCount": 1
+          }
+        },
+        {
+          "sourceId": "r_ztjHaHmcg_-DwSCDMCWDQ_local300_v001",
+          "sourceStartMs": 2373874,
+          "sourceEndMs": 2383742,
+          "sourceText": "に何のお金にもなんないよチャンネル売るぐらいしかできなくない分からんけど同説がまあなんだろう結局リアルタイ",
+          "normalizedSourceText": "に何のお金にもなんないよちゃんねる売るぐらいしかできなくない分からんけど同説がまあなんだろう結局りあるたい",
+          "matchedChars": 51,
+          "queryChars": 53,
+          "sourceChars": 53,
+          "clipCoverage": 0.9622641509433962,
+          "sourceCoverage": 0.9622641509433962,
+          "timeAxis": {
+            "matchedWordPairCount": 51,
+            "toleranceMs": 100,
+            "longestLinearRunClipStartMs": 75301,
+            "longestLinearRunClipEndMs": 84653,
+            "longestLinearRunDurationMs": 9352,
+            "segmentDurationMs": 9727,
+            "linearContinuityRatio": 0.961448,
+            "maxDeltaDifferenceMs": 761,
+            "discontinuityCount": 2
+          }
+        }
+      ],
+      "bestMatch": {
+        "sourceId": "r_ztjHaHmcg_-DwSCDMCWDQ_local300_v001",
+        "sourceStartMs": 2373814,
+        "sourceEndMs": 2383662,
+        "sourceText": "別に何のお金にもなんないよチャンネル売るぐらいしかできなくない分からんけど同説がまあなんだろう結局リアルタ",
+        "normalizedSourceText": "別に何のお金にもなんないよちゃんねる売るぐらいしかできなくない分からんけど同説がまあなんだろう結局りあるた",
+        "matchedChars": 52,
+        "queryChars": 53,
+        "sourceChars": 53,
+        "clipCoverage": 0.9811320754716981,
+        "sourceCoverage": 0.9811320754716981,
+        "timeAxis": {
+          "matchedWordPairCount": 52,
+          "toleranceMs": 100,
+          "longestLinearRunClipStartMs": 75233,
+          "longestLinearRunClipEndMs": 84653,
+          "longestLinearRunDurationMs": 9420,
+          "segmentDurationMs": 9727,
+          "linearContinuityRatio": 0.968438,
+          "maxDeltaDifferenceMs": 761,
+          "discontinuityCount": 2
+        }
+      },
+      "reliability": {
+        "anchorWordCount": 52,
+        "minimumAnchorWordCount": 10,
+        "status": "judgeable",
+        "displayText": "96.8%",
+        "linearContinuityRatioForDisplay": 0.968438
+      },
+      "inheritance": {
+        "status": "requires_review",
+        "reason": "人間確認済みペアと±500ms以内で一致しないため再確認が必要。"
+      }
+    },
+    {
+      "segment": {
+        "index": 9,
+        "startMs": 84960,
+        "endMs": 87233,
+        "durationMs": 2273,
+        "boundaryEvidence": [
+          {
+            "timeMs": 87233,
+            "value": 2.948,
+            "rank": 1,
+            "kind": "video_scene_change"
+          }
+        ],
+        "text": "タイムの数字だから",
+        "normalizedText": "たいむの数字だから",
+        "wordCount": 9
+      },
+      "matches": [
+        {
+          "sourceId": "r_ztjHaHmcg_-DwSCDMCWDQ_local300_v001",
+          "sourceStartMs": 2383562,
+          "sourceEndMs": 2384983,
+          "sourceText": "タイムの数字だから",
+          "normalizedSourceText": "たいむの数字だから",
+          "matchedChars": 9,
+          "queryChars": 9,
+          "sourceChars": 9,
+          "clipCoverage": 1,
+          "sourceCoverage": 1,
+          "timeAxis": {
+            "matchedWordPairCount": 9,
+            "toleranceMs": 100,
+            "longestLinearRunClipStartMs": 85854,
+            "longestLinearRunClipEndMs": 87233,
+            "longestLinearRunDurationMs": 1379,
+            "segmentDurationMs": 2273,
+            "linearContinuityRatio": 0.606687,
+            "maxDeltaDifferenceMs": 101,
+            "discontinuityCount": 2
+          }
+        },
+        {
+          "sourceId": "r_ztjHaHmcg_-DwSCDMCWDQ_local300_v001",
+          "sourceStartMs": 2382822,
+          "sourceEndMs": 2384963,
+          "sourceText": "ルタイムの数字だか",
+          "normalizedSourceText": "るたいむの数字だか",
+          "matchedChars": 8,
+          "queryChars": 9,
+          "sourceChars": 9,
+          "clipCoverage": 0.8888888888888888,
+          "sourceCoverage": 0.8888888888888888,
+          "timeAxis": {
+            "matchedWordPairCount": 8,
+            "toleranceMs": 100,
+            "longestLinearRunClipStartMs": 85193,
+            "longestLinearRunClipEndMs": 85854,
+            "longestLinearRunDurationMs": 661,
+            "segmentDurationMs": 2273,
+            "linearContinuityRatio": 0.290805,
+            "maxDeltaDifferenceMs": 101,
+            "discontinuityCount": 2
+          }
+        },
+        {
+          "sourceId": "r_ztjHaHmcg_-DwSCDMCWDQ_local300_v001",
+          "sourceStartMs": 2383662,
+          "sourceEndMs": 2399397,
+          "sourceText": "イムの数字だからそ",
+          "normalizedSourceText": "いむの数字だからそ",
+          "matchedChars": 8,
+          "queryChars": 9,
+          "sourceChars": 9,
+          "clipCoverage": 0.8888888888888888,
+          "sourceCoverage": 0.8888888888888888,
+          "timeAxis": {
+            "matchedWordPairCount": 8,
+            "toleranceMs": 100,
+            "longestLinearRunClipStartMs": 85854,
+            "longestLinearRunClipEndMs": 87233,
+            "longestLinearRunDurationMs": 1379,
+            "segmentDurationMs": 2273,
+            "linearContinuityRatio": 0.606687,
+            "maxDeltaDifferenceMs": 101,
+            "discontinuityCount": 2
+          }
+        }
+      ],
+      "bestMatch": {
+        "sourceId": "r_ztjHaHmcg_-DwSCDMCWDQ_local300_v001",
+        "sourceStartMs": 2383562,
+        "sourceEndMs": 2384983,
+        "sourceText": "タイムの数字だから",
+        "normalizedSourceText": "たいむの数字だから",
+        "matchedChars": 9,
+        "queryChars": 9,
+        "sourceChars": 9,
+        "clipCoverage": 1,
+        "sourceCoverage": 1,
+        "timeAxis": {
+          "matchedWordPairCount": 9,
+          "toleranceMs": 100,
+          "longestLinearRunClipStartMs": 85854,
+          "longestLinearRunClipEndMs": 87233,
+          "longestLinearRunDurationMs": 1379,
+          "segmentDurationMs": 2273,
+          "linearContinuityRatio": 0.606687,
+          "maxDeltaDifferenceMs": 101,
+          "discontinuityCount": 2
+        }
+      },
+      "reliability": {
+        "anchorWordCount": 9,
+        "minimumAnchorWordCount": 10,
+        "status": "not_judgeable",
+        "displayText": "判定不能 (9/10語)",
+        "linearContinuityRatioForDisplay": null
+      },
+      "inheritance": {
+        "status": "requires_review",
+        "reason": "人間確認済みペアと±500ms以内で一致しないため再確認が必要。"
+      }
+    },
+    {
+      "segment": {
+        "index": 10,
+        "startMs": 87233,
+        "endMs": 97000,
+        "durationMs": 9767,
+        "boundaryEvidence": [
+          {
+            "timeMs": 97000,
+            "value": 2.219,
+            "rank": 6,
+            "kind": "video_scene_change"
+          }
+        ],
+        "text": "らそうあの単純計算だからさマジでだってそうじゃんあのー広告収入が例えば100人に見られてる人は広告収入がじゃあ1円ですと",
+        "normalizedText": "らそうあの単純計算だからさまじでだってそうじゃんあの広告収入が例えば100人に見られてる人は広告収入がじゃあ1円ですと",
+        "wordCount": 60
+      },
+      "matches": [
+        {
+          "sourceId": "r_ztjHaHmcg_-DwSCDMCWDQ_local300_v001",
+          "sourceStartMs": 2384963,
+          "sourceEndMs": 2409298,
+          "sourceText": "らそうあの単純計算だからさマジでだってそうじゃんあの広告収入が例えば100人に見られてる人は広告収入がじゃあ1円ですと",
+          "normalizedSourceText": "らそうあの単純計算だからさまじでだってそうじゃんあの広告収入が例えば100人に見られてる人は広告収入がじゃあ1円ですと",
+          "matchedChars": 59,
+          "queryChars": 59,
+          "sourceChars": 59,
+          "clipCoverage": 1,
+          "sourceCoverage": 1,
+          "timeAxis": {
+            "matchedWordPairCount": 59,
+            "toleranceMs": 120,
+            "longestLinearRunClipStartMs": 87475,
+            "longestLinearRunClipEndMs": 97000,
+            "longestLinearRunDurationMs": 9525,
+            "segmentDurationMs": 9767,
+            "linearContinuityRatio": 0.975223,
+            "maxDeltaDifferenceMs": 13453,
+            "discontinuityCount": 2
+          }
+        },
+        {
+          "sourceId": "r_ztjHaHmcg_-DwSCDMCWDQ_local300_v001",
+          "sourceStartMs": 2384863,
+          "sourceEndMs": 2408618,
+          "sourceText": "からそうあの単純計算だからさマジでだってそうじゃんあの広告収入が例えば100人に見られてる人は広告収入がじゃあ1円です",
+          "normalizedSourceText": "からそうあの単純計算だからさまじでだってそうじゃんあの広告収入が例えば100人に見られてる人は広告収入がじゃあ1円です",
+          "matchedChars": 58,
+          "queryChars": 59,
+          "sourceChars": 59,
+          "clipCoverage": 0.9830508474576272,
+          "sourceCoverage": 0.9830508474576272,
+          "timeAxis": {
+            "matchedWordPairCount": 58,
+            "toleranceMs": 120,
+            "longestLinearRunClipStartMs": 87475,
+            "longestLinearRunClipEndMs": 96461,
+            "longestLinearRunDurationMs": 8986,
+            "segmentDurationMs": 9767,
+            "linearContinuityRatio": 0.920037,
+            "maxDeltaDifferenceMs": 13453,
+            "discontinuityCount": 2
+          }
+        },
+        {
+          "sourceId": "r_ztjHaHmcg_-DwSCDMCWDQ_local300_v001",
+          "sourceStartMs": 2399377,
+          "sourceEndMs": 2409559,
+          "sourceText": "そうあの単純計算だからさマジでだってそうじゃんあの広告収入が例えば100人に見られてる人は広告収入がじゃあ1円ですと1",
+          "normalizedSourceText": "そうあの単純計算だからさまじでだってそうじゃんあの広告収入が例えば100人に見られてる人は広告収入がじゃあ1円ですと1",
+          "matchedChars": 58,
+          "queryChars": 59,
+          "sourceChars": 59,
+          "clipCoverage": 0.9830508474576272,
+          "sourceCoverage": 0.9830508474576272,
+          "timeAxis": {
+            "matchedWordPairCount": 58,
+            "toleranceMs": 120,
+            "longestLinearRunClipStartMs": 87475,
+            "longestLinearRunClipEndMs": 97000,
+            "longestLinearRunDurationMs": 9525,
+            "segmentDurationMs": 9767,
+            "linearContinuityRatio": 0.975223,
+            "maxDeltaDifferenceMs": 204,
+            "discontinuityCount": 1
+          }
+        }
+      ],
+      "bestMatch": {
+        "sourceId": "r_ztjHaHmcg_-DwSCDMCWDQ_local300_v001",
+        "sourceStartMs": 2384963,
+        "sourceEndMs": 2409298,
+        "sourceText": "らそうあの単純計算だからさマジでだってそうじゃんあの広告収入が例えば100人に見られてる人は広告収入がじゃあ1円ですと",
+        "normalizedSourceText": "らそうあの単純計算だからさまじでだってそうじゃんあの広告収入が例えば100人に見られてる人は広告収入がじゃあ1円ですと",
+        "matchedChars": 59,
+        "queryChars": 59,
+        "sourceChars": 59,
+        "clipCoverage": 1,
+        "sourceCoverage": 1,
+        "timeAxis": {
+          "matchedWordPairCount": 59,
+          "toleranceMs": 120,
+          "longestLinearRunClipStartMs": 87475,
+          "longestLinearRunClipEndMs": 97000,
+          "longestLinearRunDurationMs": 9525,
+          "segmentDurationMs": 9767,
+          "linearContinuityRatio": 0.975223,
+          "maxDeltaDifferenceMs": 13453,
+          "discontinuityCount": 2
+        }
+      },
+      "reliability": {
+        "anchorWordCount": 59,
+        "minimumAnchorWordCount": 10,
+        "status": "judgeable",
+        "displayText": "97.5%",
+        "linearContinuityRatioForDisplay": 0.975223
+      },
+      "inheritance": {
+        "status": "requires_review",
+        "reason": "人間確認済みペアと±500ms以内で一致しないため再確認が必要。"
+      }
+    },
+    {
+      "segment": {
+        "index": 11,
+        "startMs": 97000,
+        "endMs": 101100,
+        "durationMs": 4100,
+        "boundaryEvidence": [
+          {
+            "timeMs": 101100,
+            "value": 2.197,
+            "rank": 7,
+            "kind": "video_scene_change"
+          }
+        ],
+        "text": "と1000人に見られてるなら広告収入が0.5円になりますとかだったらさ",
+        "normalizedText": "と1000人に見られてるなら広告収入が05円になりますとかだったらさ",
+        "wordCount": 35
+      },
+      "matches": [
+        {
+          "sourceId": "r_ztjHaHmcg_-DwSCDMCWDQ_local300_v001",
+          "sourceStartMs": 2408618,
+          "sourceEndMs": 2413402,
+          "sourceText": "と1000人に見られてるなら広告収入が05円になりますとかだったらさ",
+          "normalizedSourceText": "と1000人に見られてるなら広告収入が05円になりますとかだったらさ",
+          "matchedChars": 34,
+          "queryChars": 34,
+          "sourceChars": 34,
+          "clipCoverage": 1,
+          "sourceCoverage": 1,
+          "timeAxis": {
+            "matchedWordPairCount": 34,
+            "toleranceMs": 100,
+            "longestLinearRunClipStartMs": 97962,
+            "longestLinearRunClipEndMs": 101100,
+            "longestLinearRunDurationMs": 3138,
+            "segmentDurationMs": 4100,
+            "linearContinuityRatio": 0.765366,
+            "maxDeltaDifferenceMs": 201,
+            "discontinuityCount": 2
+          }
+        },
+        {
+          "sourceId": "r_ztjHaHmcg_-DwSCDMCWDQ_local300_v001",
+          "sourceStartMs": 2408558,
+          "sourceEndMs": 2412721,
+          "sourceText": "すと1000人に見られてるなら広告収入が05円になりますとかだったら",
+          "normalizedSourceText": "すと1000人に見られてるなら広告収入が05円になりますとかだったら",
+          "matchedChars": 33,
+          "queryChars": 34,
+          "sourceChars": 34,
+          "clipCoverage": 0.9705882352941176,
+          "sourceCoverage": 0.9705882352941176,
+          "timeAxis": {
+            "matchedWordPairCount": 33,
+            "toleranceMs": 100,
+            "longestLinearRunClipStartMs": 97962,
+            "longestLinearRunClipEndMs": 100543,
+            "longestLinearRunDurationMs": 2581,
+            "segmentDurationMs": 4100,
+            "linearContinuityRatio": 0.629512,
+            "maxDeltaDifferenceMs": 201,
+            "discontinuityCount": 2
+          }
+        },
+        {
+          "sourceId": "r_ztjHaHmcg_-DwSCDMCWDQ_local300_v001",
+          "sourceStartMs": 2409298,
+          "sourceEndMs": 2413442,
+          "sourceText": "1000人に見られてるなら広告収入が05円になりますとかだったらさじ",
+          "normalizedSourceText": "1000人に見られてるなら広告収入が05円になりますとかだったらさじ",
+          "matchedChars": 33,
+          "queryChars": 34,
+          "sourceChars": 34,
+          "clipCoverage": 0.9705882352941176,
+          "sourceCoverage": 0.9705882352941176,
+          "timeAxis": {
+            "matchedWordPairCount": 33,
+            "toleranceMs": 100,
+            "longestLinearRunClipStartMs": 97962,
+            "longestLinearRunClipEndMs": 101100,
+            "longestLinearRunDurationMs": 3138,
+            "segmentDurationMs": 4100,
+            "linearContinuityRatio": 0.765366,
+            "maxDeltaDifferenceMs": 201,
+            "discontinuityCount": 2
+          }
+        }
+      ],
+      "bestMatch": {
+        "sourceId": "r_ztjHaHmcg_-DwSCDMCWDQ_local300_v001",
+        "sourceStartMs": 2408618,
+        "sourceEndMs": 2413402,
+        "sourceText": "と1000人に見られてるなら広告収入が05円になりますとかだったらさ",
+        "normalizedSourceText": "と1000人に見られてるなら広告収入が05円になりますとかだったらさ",
+        "matchedChars": 34,
+        "queryChars": 34,
+        "sourceChars": 34,
+        "clipCoverage": 1,
+        "sourceCoverage": 1,
+        "timeAxis": {
+          "matchedWordPairCount": 34,
+          "toleranceMs": 100,
+          "longestLinearRunClipStartMs": 97962,
+          "longestLinearRunClipEndMs": 101100,
+          "longestLinearRunDurationMs": 3138,
+          "segmentDurationMs": 4100,
+          "linearContinuityRatio": 0.765366,
+          "maxDeltaDifferenceMs": 201,
+          "discontinuityCount": 2
+        }
+      },
+      "reliability": {
+        "anchorWordCount": 34,
+        "minimumAnchorWordCount": 10,
+        "status": "judgeable",
+        "displayText": "76.5%",
+        "linearContinuityRatioForDisplay": 0.765366
+      },
+      "inheritance": {
+        "status": "requires_review",
+        "reason": "人間確認済みペアと±500ms以内で一致しないため再確認が必要。"
+      }
+    },
+    {
+      "segment": {
+        "index": 12,
+        "startMs": 101100,
+        "endMs": 105390,
+        "durationMs": 4290,
+        "boundaryEvidence": [
+          {
+            "timeMs": 105390,
+            "value": 0.093994,
+            "rank": 3,
+            "kind": "audio_discontinuity"
+          }
+        ],
+        "text": "さじゃないじゃんじゃないのよまあなんか日本のサ",
+        "normalizedText": "さじゃないじゃんじゃないのよまあなんか日本のさ",
+        "wordCount": 23
+      },
+      "matches": [
+        {
+          "sourceId": "r_ztjHaHmcg_-DwSCDMCWDQ_local300_v001",
+          "sourceStartMs": 2412721,
+          "sourceEndMs": 2417625,
+          "sourceText": "さじゃないじゃんじゃないのよまあなんか日本のサ",
+          "normalizedSourceText": "さじゃないじゃんじゃないのよまあなんか日本のさ",
+          "matchedChars": 23,
+          "queryChars": 23,
+          "sourceChars": 23,
+          "clipCoverage": 1,
+          "sourceCoverage": 1,
+          "timeAxis": {
+            "matchedWordPairCount": 23,
+            "toleranceMs": 100,
+            "longestLinearRunClipStartMs": 101100,
+            "longestLinearRunClipEndMs": 104266,
+            "longestLinearRunDurationMs": 3166,
+            "segmentDurationMs": 4290,
+            "linearContinuityRatio": 0.737995,
+            "maxDeltaDifferenceMs": 1701,
+            "discontinuityCount": 2
+          }
+        },
+        {
+          "sourceId": "r_ztjHaHmcg_-DwSCDMCWDQ_local300_v001",
+          "sourceStartMs": 2412641,
+          "sourceEndMs": 2417545,
+          "sourceText": "らさじゃないじゃんじゃないのよまあなんか日本の",
+          "normalizedSourceText": "らさじゃないじゃんじゃないのよまあなんか日本の",
+          "matchedChars": 22,
+          "queryChars": 23,
+          "sourceChars": 23,
+          "clipCoverage": 0.9565217391304348,
+          "sourceCoverage": 0.9565217391304348,
+          "timeAxis": {
+            "matchedWordPairCount": 22,
+            "toleranceMs": 100,
+            "longestLinearRunClipStartMs": 101100,
+            "longestLinearRunClipEndMs": 104266,
+            "longestLinearRunDurationMs": 3166,
+            "segmentDurationMs": 4290,
+            "linearContinuityRatio": 0.737995,
+            "maxDeltaDifferenceMs": 1701,
+            "discontinuityCount": 2
+          }
+        },
+        {
+          "sourceId": "r_ztjHaHmcg_-DwSCDMCWDQ_local300_v001",
+          "sourceStartMs": 2413402,
+          "sourceEndMs": 2417685,
+          "sourceText": "じゃないじゃんじゃないのよまあなんか日本のサイ",
+          "normalizedSourceText": "じゃないじゃんじゃないのよまあなんか日本のさい",
+          "matchedChars": 22,
+          "queryChars": 23,
+          "sourceChars": 23,
+          "clipCoverage": 0.9565217391304348,
+          "sourceCoverage": 0.9565217391304348,
+          "timeAxis": {
+            "matchedWordPairCount": 22,
+            "toleranceMs": 100,
+            "longestLinearRunClipStartMs": 101244,
+            "longestLinearRunClipEndMs": 104266,
+            "longestLinearRunDurationMs": 3022,
+            "segmentDurationMs": 4290,
+            "linearContinuityRatio": 0.704429,
+            "maxDeltaDifferenceMs": 1701,
+            "discontinuityCount": 2
+          }
+        }
+      ],
+      "bestMatch": {
+        "sourceId": "r_ztjHaHmcg_-DwSCDMCWDQ_local300_v001",
+        "sourceStartMs": 2412721,
+        "sourceEndMs": 2417625,
+        "sourceText": "さじゃないじゃんじゃないのよまあなんか日本のサ",
+        "normalizedSourceText": "さじゃないじゃんじゃないのよまあなんか日本のさ",
+        "matchedChars": 23,
+        "queryChars": 23,
+        "sourceChars": 23,
+        "clipCoverage": 1,
+        "sourceCoverage": 1,
+        "timeAxis": {
+          "matchedWordPairCount": 23,
+          "toleranceMs": 100,
+          "longestLinearRunClipStartMs": 101100,
+          "longestLinearRunClipEndMs": 104266,
+          "longestLinearRunDurationMs": 3166,
+          "segmentDurationMs": 4290,
+          "linearContinuityRatio": 0.737995,
+          "maxDeltaDifferenceMs": 1701,
+          "discontinuityCount": 2
+        }
+      },
+      "reliability": {
+        "anchorWordCount": 23,
+        "minimumAnchorWordCount": 10,
+        "status": "judgeable",
+        "displayText": "73.8%",
+        "linearContinuityRatioForDisplay": 0.737995
+      },
+      "inheritance": {
+        "status": "requires_review",
+        "reason": "人間確認済みペアと±500ms以内で一致しないため再確認が必要。"
+      }
+    },
+    {
+      "segment": {
+        "index": 13,
+        "startMs": 105390,
+        "endMs": 109120,
+        "durationMs": 3730,
+        "boundaryEvidence": [
+          {
+            "timeMs": 109120,
+            "value": 0.094748,
+            "rank": 2,
+            "kind": "audio_discontinuity"
+          }
+        ],
+        "text": "サイトとかはそういうことするところありそうだけどYouTube",
+        "normalizedText": "さいととかはそういうことするところありそうだけどyoutube",
+        "wordCount": 31
+      },
+      "matches": [
+        {
+          "sourceId": "r_ztjHaHmcg_-DwSCDMCWDQ_local300_v001",
+          "sourceStartMs": 2417545,
+          "sourceEndMs": 2421348,
+          "sourceText": "サイトとかはそういうことするところありそうだけどYouTube",
+          "normalizedSourceText": "さいととかはそういうことするところありそうだけどyoutube",
+          "matchedChars": 31,
+          "queryChars": 31,
+          "sourceChars": 31,
+          "clipCoverage": 1,
+          "sourceCoverage": 1,
+          "timeAxis": {
+            "matchedWordPairCount": 31,
+            "toleranceMs": 100,
+            "longestLinearRunClipStartMs": 105390,
+            "longestLinearRunClipEndMs": 107068,
+            "longestLinearRunDurationMs": 1678,
+            "segmentDurationMs": 3730,
+            "linearContinuityRatio": 0.449866,
+            "maxDeltaDifferenceMs": 1782,
+            "discontinuityCount": 3
+          }
+        },
+        {
+          "sourceId": "r_ztjHaHmcg_-DwSCDMCWDQ_local300_v001",
+          "sourceStartMs": 2417445,
+          "sourceEndMs": 2421228,
+          "sourceText": "のサイトとかはそういうことするところありそうだけどYouTub",
+          "normalizedSourceText": "のさいととかはそういうことするところありそうだけどyoutub",
+          "matchedChars": 30,
+          "queryChars": 31,
+          "sourceChars": 31,
+          "clipCoverage": 0.967741935483871,
+          "sourceCoverage": 0.967741935483871,
+          "timeAxis": {
+            "matchedWordPairCount": 30,
+            "toleranceMs": 100,
+            "longestLinearRunClipStartMs": 105390,
+            "longestLinearRunClipEndMs": 107068,
+            "longestLinearRunDurationMs": 1678,
+            "segmentDurationMs": 3730,
+            "linearContinuityRatio": 0.449866,
+            "maxDeltaDifferenceMs": 1782,
+            "discontinuityCount": 2
+          }
+        },
+        {
+          "sourceId": "r_ztjHaHmcg_-DwSCDMCWDQ_local300_v001",
+          "sourceStartMs": 2417625,
+          "sourceEndMs": 2421488,
+          "sourceText": "イトとかはそういうことするところありそうだけどYouTubeは",
+          "normalizedSourceText": "いととかはそういうことするところありそうだけどyoutubeは",
+          "matchedChars": 30,
+          "queryChars": 31,
+          "sourceChars": 31,
+          "clipCoverage": 0.967741935483871,
+          "sourceCoverage": 0.967741935483871,
+          "timeAxis": {
+            "matchedWordPairCount": 30,
+            "toleranceMs": 100,
+            "longestLinearRunClipStartMs": 105467,
+            "longestLinearRunClipEndMs": 107068,
+            "longestLinearRunDurationMs": 1601,
+            "segmentDurationMs": 3730,
+            "linearContinuityRatio": 0.429223,
+            "maxDeltaDifferenceMs": 1782,
+            "discontinuityCount": 3
+          }
+        }
+      ],
+      "bestMatch": {
+        "sourceId": "r_ztjHaHmcg_-DwSCDMCWDQ_local300_v001",
+        "sourceStartMs": 2417545,
+        "sourceEndMs": 2421348,
+        "sourceText": "サイトとかはそういうことするところありそうだけどYouTube",
+        "normalizedSourceText": "さいととかはそういうことするところありそうだけどyoutube",
+        "matchedChars": 31,
+        "queryChars": 31,
+        "sourceChars": 31,
+        "clipCoverage": 1,
+        "sourceCoverage": 1,
+        "timeAxis": {
+          "matchedWordPairCount": 31,
+          "toleranceMs": 100,
+          "longestLinearRunClipStartMs": 105390,
+          "longestLinearRunClipEndMs": 107068,
+          "longestLinearRunDurationMs": 1678,
+          "segmentDurationMs": 3730,
+          "linearContinuityRatio": 0.449866,
+          "maxDeltaDifferenceMs": 1782,
+          "discontinuityCount": 3
+        }
+      },
+      "reliability": {
+        "anchorWordCount": 31,
+        "minimumAnchorWordCount": 10,
+        "status": "judgeable",
+        "displayText": "45%",
+        "linearContinuityRatioForDisplay": 0.449866
+      },
+      "inheritance": {
+        "status": "requires_review",
+        "reason": "人間確認済みペアと±500ms以内で一致しないため再確認が必要。"
+      }
+    },
+    {
+      "segment": {
+        "index": 14,
+        "startMs": 109120,
+        "endMs": 116470,
+        "durationMs": 7350,
+        "boundaryEvidence": [
+          {
+            "timeMs": 116470,
+            "value": 0.074543,
+            "rank": 11,
+            "kind": "audio_discontinuity"
+          }
+        ],
+        "text": "eはそういう仕様じゃないから再生数が100の動画も再生数が多分1000万の動画もそれで再",
+        "normalizedText": "eはそういう仕様じゃないから再生数が100の動画も再生数が多分1000万の動画もそれで再",
+        "wordCount": 44
+      },
+      "matches": [
+        {
+          "sourceId": "r_ztjHaHmcg_-DwSCDMCWDQ_local300_v001",
+          "sourceStartMs": 2421228,
+          "sourceEndMs": 2429701,
+          "sourceText": "eはそういう仕様じゃないから別に100人再生数が100の動画も再生数が多分1000万の動",
+          "normalizedSourceText": "eはそういう仕様じゃないから別に100人再生数が100の動画も再生数が多分1000万の動",
+          "matchedChars": 38,
+          "queryChars": 44,
+          "sourceChars": 44,
+          "clipCoverage": 0.8636363636363636,
+          "sourceCoverage": 0.8636363636363636,
+          "timeAxis": {
+            "matchedWordPairCount": 38,
+            "toleranceMs": 120,
+            "longestLinearRunClipStartMs": 111934,
+            "longestLinearRunClipEndMs": 114738,
+            "longestLinearRunDurationMs": 2804,
+            "segmentDurationMs": 7350,
+            "linearContinuityRatio": 0.381497,
+            "maxDeltaDifferenceMs": 2789,
+            "discontinuityCount": 3
+          }
+        },
+        {
+          "sourceId": "r_ztjHaHmcg_-DwSCDMCWDQ_local300_v001",
+          "sourceStartMs": 2421348,
+          "sourceEndMs": 2429821,
+          "sourceText": "はそういう仕様じゃないから別に100人再生数が100の動画も再生数が多分1000万の動画",
+          "normalizedSourceText": "はそういう仕様じゃないから別に100人再生数が100の動画も再生数が多分1000万の動画",
+          "matchedChars": 38,
+          "queryChars": 44,
+          "sourceChars": 44,
+          "clipCoverage": 0.8636363636363636,
+          "sourceCoverage": 0.8636363636363636,
+          "timeAxis": {
+            "matchedWordPairCount": 38,
+            "toleranceMs": 120,
+            "longestLinearRunClipStartMs": 111934,
+            "longestLinearRunClipEndMs": 114858,
+            "longestLinearRunDurationMs": 2924,
+            "segmentDurationMs": 7350,
+            "linearContinuityRatio": 0.397823,
+            "maxDeltaDifferenceMs": 2789,
+            "discontinuityCount": 3
+          }
+        },
+        {
+          "sourceId": "r_ztjHaHmcg_-DwSCDMCWDQ_local300_v001",
+          "sourceStartMs": 2421488,
+          "sourceEndMs": 2430581,
+          "sourceText": "そういう仕様じゃないから別に100人再生数が100の動画も再生数が多分1000万の動画も",
+          "normalizedSourceText": "そういう仕様じゃないから別に100人再生数が100の動画も再生数が多分1000万の動画も",
+          "matchedChars": 38,
+          "queryChars": 44,
+          "sourceChars": 44,
+          "clipCoverage": 0.8636363636363636,
+          "sourceCoverage": 0.8636363636363636,
+          "timeAxis": {
+            "matchedWordPairCount": 38,
+            "toleranceMs": 120,
+            "longestLinearRunClipStartMs": 111934,
+            "longestLinearRunClipEndMs": 115599,
+            "longestLinearRunDurationMs": 3665,
+            "segmentDurationMs": 7350,
+            "linearContinuityRatio": 0.498639,
+            "maxDeltaDifferenceMs": 2789,
+            "discontinuityCount": 3
+          }
+        }
+      ],
+      "bestMatch": {
+        "sourceId": "r_ztjHaHmcg_-DwSCDMCWDQ_local300_v001",
+        "sourceStartMs": 2421228,
+        "sourceEndMs": 2429701,
+        "sourceText": "eはそういう仕様じゃないから別に100人再生数が100の動画も再生数が多分1000万の動",
+        "normalizedSourceText": "eはそういう仕様じゃないから別に100人再生数が100の動画も再生数が多分1000万の動",
+        "matchedChars": 38,
+        "queryChars": 44,
+        "sourceChars": 44,
+        "clipCoverage": 0.8636363636363636,
+        "sourceCoverage": 0.8636363636363636,
+        "timeAxis": {
+          "matchedWordPairCount": 38,
+          "toleranceMs": 120,
+          "longestLinearRunClipStartMs": 111934,
+          "longestLinearRunClipEndMs": 114738,
+          "longestLinearRunDurationMs": 2804,
+          "segmentDurationMs": 7350,
+          "linearContinuityRatio": 0.381497,
+          "maxDeltaDifferenceMs": 2789,
+          "discontinuityCount": 3
+        }
+      },
+      "reliability": {
+        "anchorWordCount": 38,
+        "minimumAnchorWordCount": 10,
+        "status": "judgeable",
+        "displayText": "38.1%",
+        "linearContinuityRatioForDisplay": 0.381497
+      },
+      "inheritance": {
+        "status": "requires_review",
+        "reason": "人間確認済みペアと±500ms以内で一致しないため再確認が必要。"
+      }
+    },
+    {
+      "segment": {
+        "index": 15,
+        "startMs": 116470,
+        "endMs": 121147,
+        "durationMs": 4677,
+        "boundaryEvidence": [],
+        "text": "再生数で国収益の単価は変わんないからそれがすごいよね",
+        "normalizedText": "再生数で国収益の単価は変わんないからそれがすごいよね",
+        "wordCount": 26
+      },
+      "matches": [
+        {
+          "sourceId": "r_ztjHaHmcg_-DwSCDMCWDQ_local300_v001",
+          "sourceStartMs": 2431422,
+          "sourceEndMs": 2440868,
+          "sourceText": "再生数で国収益の単価は変わんないからそれがすごいよね",
+          "normalizedSourceText": "再生数で国収益の単価は変わんないからそれがすごいよね",
+          "matchedChars": 26,
+          "queryChars": 26,
+          "sourceChars": 26,
+          "clipCoverage": 1,
+          "sourceCoverage": 1,
+          "timeAxis": {
+            "matchedWordPairCount": 26,
+            "toleranceMs": 101,
+            "longestLinearRunClipStartMs": 116470,
+            "longestLinearRunClipEndMs": 121147,
+            "longestLinearRunDurationMs": 4677,
+            "segmentDurationMs": 4677,
+            "linearContinuityRatio": 1,
+            "maxDeltaDifferenceMs": 60,
+            "discontinuityCount": 0
+          }
+        },
+        {
+          "sourceId": "r_ztjHaHmcg_-DwSCDMCWDQ_local300_v001",
+          "sourceStartMs": 2431342,
+          "sourceEndMs": 2436085,
+          "sourceText": "の再生数で国収益の単価は変わんないからそれがすごいよ",
+          "normalizedSourceText": "の再生数で国収益の単価は変わんないからそれがすごいよ",
+          "matchedChars": 25,
+          "queryChars": 26,
+          "sourceChars": 26,
+          "clipCoverage": 0.9615384615384616,
+          "sourceCoverage": 0.9615384615384616,
+          "timeAxis": {
+            "matchedWordPairCount": 25,
+            "toleranceMs": 101,
+            "longestLinearRunClipStartMs": 116470,
+            "longestLinearRunClipEndMs": 121127,
+            "longestLinearRunDurationMs": 4657,
+            "segmentDurationMs": 4677,
+            "linearContinuityRatio": 0.995724,
+            "maxDeltaDifferenceMs": 60,
+            "discontinuityCount": 0
+          }
+        },
+        {
+          "sourceId": "r_ztjHaHmcg_-DwSCDMCWDQ_local300_v001",
+          "sourceStartMs": 2431682,
+          "sourceEndMs": 2440949,
+          "sourceText": "生数で国収益の単価は変わんないからそれがすごいよねそ",
+          "normalizedSourceText": "生数で国収益の単価は変わんないからそれがすごいよねそ",
+          "matchedChars": 25,
+          "queryChars": 26,
+          "sourceChars": 26,
+          "clipCoverage": 0.9615384615384616,
+          "sourceCoverage": 0.9615384615384616,
+          "timeAxis": {
+            "matchedWordPairCount": 25,
+            "toleranceMs": 101,
+            "longestLinearRunClipStartMs": 116721,
+            "longestLinearRunClipEndMs": 121147,
+            "longestLinearRunDurationMs": 4426,
+            "segmentDurationMs": 4677,
+            "linearContinuityRatio": 0.946333,
+            "maxDeltaDifferenceMs": 60,
+            "discontinuityCount": 0
+          }
+        }
+      ],
+      "bestMatch": {
+        "sourceId": "r_ztjHaHmcg_-DwSCDMCWDQ_local300_v001",
+        "sourceStartMs": 2431422,
+        "sourceEndMs": 2440868,
+        "sourceText": "再生数で国収益の単価は変わんないからそれがすごいよね",
+        "normalizedSourceText": "再生数で国収益の単価は変わんないからそれがすごいよね",
+        "matchedChars": 26,
+        "queryChars": 26,
+        "sourceChars": 26,
+        "clipCoverage": 1,
+        "sourceCoverage": 1,
+        "timeAxis": {
+          "matchedWordPairCount": 26,
+          "toleranceMs": 101,
+          "longestLinearRunClipStartMs": 116470,
+          "longestLinearRunClipEndMs": 121147,
+          "longestLinearRunDurationMs": 4677,
+          "segmentDurationMs": 4677,
+          "linearContinuityRatio": 1,
+          "maxDeltaDifferenceMs": 60,
+          "discontinuityCount": 0
+        }
+      },
+      "reliability": {
+        "anchorWordCount": 26,
+        "minimumAnchorWordCount": 10,
+        "status": "judgeable",
+        "displayText": "100%",
+        "linearContinuityRatioForDisplay": 1
+      },
+      "inheritance": {
+        "status": "requires_review",
+        "reason": "人間確認済みペアと±500ms以内で一致しないため再確認が必要。"
+      }
+    }
+  ],
+  "stills": [
+    {
+      "segmentIndex": 0,
+      "stills": [
+        {
+          "label": "head",
+          "clipMs": 2555,
+          "sourceMs": 2174596,
+          "path": "evals/clip_composition/outputs/visual-check/r_ztjHaHmcg/cutpoint-20260706-local-stt-300s-anchor-v001/segment01_head.jpg"
+        },
+        {
+          "label": "mid",
+          "clipMs": 7798,
+          "sourceMs": 2179839,
+          "path": "evals/clip_composition/outputs/visual-check/r_ztjHaHmcg/cutpoint-20260706-local-stt-300s-anchor-v001/segment01_mid.jpg"
+        },
+        {
+          "label": "tail",
+          "clipMs": 12540,
+          "sourceMs": 2184581,
+          "path": "evals/clip_composition/outputs/visual-check/r_ztjHaHmcg/cutpoint-20260706-local-stt-300s-anchor-v001/segment01_tail.jpg"
+        }
+      ]
+    },
+    {
+      "segmentIndex": 1,
+      "stills": [
+        {
+          "label": "head",
+          "clipMs": 13040,
+          "sourceMs": 2193738,
+          "path": "evals/clip_composition/outputs/visual-check/r_ztjHaHmcg/cutpoint-20260706-local-stt-300s-anchor-v001/segment02_head.jpg"
+        },
+        {
+          "label": "mid",
+          "clipMs": 16204,
+          "sourceMs": 2196902,
+          "path": "evals/clip_composition/outputs/visual-check/r_ztjHaHmcg/cutpoint-20260706-local-stt-300s-anchor-v001/segment02_mid.jpg"
+        },
+        {
+          "label": "tail",
+          "clipMs": 18867,
+          "sourceMs": 2199565,
+          "path": "evals/clip_composition/outputs/visual-check/r_ztjHaHmcg/cutpoint-20260706-local-stt-300s-anchor-v001/segment02_tail.jpg"
+        }
+      ]
+    },
+    {
+      "segmentIndex": 2,
+      "stills": [
+        {
+          "label": "head",
+          "clipMs": 19367,
+          "sourceMs": 2208532,
+          "path": "evals/clip_composition/outputs/visual-check/r_ztjHaHmcg/cutpoint-20260706-local-stt-300s-anchor-v001/segment03_head.jpg"
+        },
+        {
+          "label": "mid",
+          "clipMs": 36369,
+          "sourceMs": 2225534,
+          "path": "evals/clip_composition/outputs/visual-check/r_ztjHaHmcg/cutpoint-20260706-local-stt-300s-anchor-v001/segment03_mid.jpg"
+        },
+        {
+          "label": "tail",
+          "clipMs": 52870,
+          "sourceMs": 2242035,
+          "path": "evals/clip_composition/outputs/visual-check/r_ztjHaHmcg/cutpoint-20260706-local-stt-300s-anchor-v001/segment03_tail.jpg"
+        }
+      ]
+    },
+    {
+      "segmentIndex": 3,
+      "stills": [
+        {
+          "label": "head",
+          "clipMs": 53370,
+          "sourceMs": 2315887,
+          "path": "evals/clip_composition/outputs/visual-check/r_ztjHaHmcg/cutpoint-20260706-local-stt-300s-anchor-v001/segment04_head.jpg"
+        },
+        {
+          "label": "mid",
+          "clipMs": 56525,
+          "sourceMs": 2319042,
+          "path": "evals/clip_composition/outputs/visual-check/r_ztjHaHmcg/cutpoint-20260706-local-stt-300s-anchor-v001/segment04_mid.jpg"
+        },
+        {
+          "label": "tail",
+          "clipMs": 59180,
+          "sourceMs": 2321697,
+          "path": "evals/clip_composition/outputs/visual-check/r_ztjHaHmcg/cutpoint-20260706-local-stt-300s-anchor-v001/segment04_tail.jpg"
+        }
+      ]
+    },
+    {
+      "segmentIndex": 4,
+      "stills": [
+        {
+          "label": "head",
+          "clipMs": 59680,
+          "sourceMs": 2336468,
+          "path": "evals/clip_composition/outputs/visual-check/r_ztjHaHmcg/cutpoint-20260706-local-stt-300s-anchor-v001/segment05_head.jpg"
+        },
+        {
+          "label": "mid",
+          "clipMs": 61890,
+          "sourceMs": 2338678,
+          "path": "evals/clip_composition/outputs/visual-check/r_ztjHaHmcg/cutpoint-20260706-local-stt-300s-anchor-v001/segment05_mid.jpg"
+        },
+        {
+          "label": "tail",
+          "clipMs": 63600,
+          "sourceMs": 2340388,
+          "path": "evals/clip_composition/outputs/visual-check/r_ztjHaHmcg/cutpoint-20260706-local-stt-300s-anchor-v001/segment05_tail.jpg"
+        }
+      ]
+    },
+    {
+      "segmentIndex": 5,
+      "stills": [
+        {
+          "label": "head",
+          "clipMs": 64100,
+          "sourceMs": 2340850,
+          "path": "evals/clip_composition/outputs/visual-check/r_ztjHaHmcg/cutpoint-20260706-local-stt-300s-anchor-v001/segment06_head.jpg"
+        },
+        {
+          "label": "mid",
+          "clipMs": 65320,
+          "sourceMs": 2342070,
+          "path": "evals/clip_composition/outputs/visual-check/r_ztjHaHmcg/cutpoint-20260706-local-stt-300s-anchor-v001/segment06_mid.jpg"
+        },
+        {
+          "label": "tail",
+          "clipMs": 66040,
+          "sourceMs": 2342790,
+          "path": "evals/clip_composition/outputs/visual-check/r_ztjHaHmcg/cutpoint-20260706-local-stt-300s-anchor-v001/segment06_tail.jpg"
+        }
+      ]
+    },
+    {
+      "segmentIndex": 6,
+      "stills": [
+        {
+          "label": "head",
+          "clipMs": 66540,
+          "sourceMs": 2343230,
+          "path": "evals/clip_composition/outputs/visual-check/r_ztjHaHmcg/cutpoint-20260706-local-stt-300s-anchor-v001/segment07_head.jpg"
+        },
+        {
+          "label": "mid",
+          "clipMs": 67725,
+          "sourceMs": 2344415,
+          "path": "evals/clip_composition/outputs/visual-check/r_ztjHaHmcg/cutpoint-20260706-local-stt-300s-anchor-v001/segment07_mid.jpg"
+        },
+        {
+          "label": "tail",
+          "clipMs": 68410,
+          "sourceMs": 2345100,
+          "path": "evals/clip_composition/outputs/visual-check/r_ztjHaHmcg/cutpoint-20260706-local-stt-300s-anchor-v001/segment07_tail.jpg"
+        }
+      ]
+    },
+    {
+      "segmentIndex": 7,
+      "stills": [
+        {
+          "label": "head",
+          "clipMs": 68910,
+          "sourceMs": 2351013,
+          "path": "evals/clip_composition/outputs/visual-check/r_ztjHaHmcg/cutpoint-20260706-local-stt-300s-anchor-v001/segment08_head.jpg"
+        },
+        {
+          "label": "mid",
+          "clipMs": 72072,
+          "sourceMs": 2354175,
+          "path": "evals/clip_composition/outputs/visual-check/r_ztjHaHmcg/cutpoint-20260706-local-stt-300s-anchor-v001/segment08_mid.jpg"
+        },
+        {
+          "label": "tail",
+          "clipMs": 74733,
+          "sourceMs": 2356836,
+          "path": "evals/clip_composition/outputs/visual-check/r_ztjHaHmcg/cutpoint-20260706-local-stt-300s-anchor-v001/segment08_tail.jpg"
+        }
+      ]
+    },
+    {
+      "segmentIndex": 8,
+      "stills": [
+        {
+          "label": "head",
+          "clipMs": 75233,
+          "sourceMs": 2373814,
+          "path": "evals/clip_composition/outputs/visual-check/r_ztjHaHmcg/cutpoint-20260706-local-stt-300s-anchor-v001/segment09_head.jpg"
+        },
+        {
+          "label": "mid",
+          "clipMs": 80097,
+          "sourceMs": 2378678,
+          "path": "evals/clip_composition/outputs/visual-check/r_ztjHaHmcg/cutpoint-20260706-local-stt-300s-anchor-v001/segment09_mid.jpg"
+        },
+        {
+          "label": "tail",
+          "clipMs": 84460,
+          "sourceMs": 2383041,
+          "path": "evals/clip_composition/outputs/visual-check/r_ztjHaHmcg/cutpoint-20260706-local-stt-300s-anchor-v001/segment09_tail.jpg"
+        }
+      ]
+    },
+    {
+      "segmentIndex": 9,
+      "stills": [
+        {
+          "label": "head",
+          "clipMs": 84960,
+          "sourceMs": 2383562,
+          "path": "evals/clip_composition/outputs/visual-check/r_ztjHaHmcg/cutpoint-20260706-local-stt-300s-anchor-v001/segment10_head.jpg"
+        },
+        {
+          "label": "mid",
+          "clipMs": 86097,
+          "sourceMs": 2384699,
+          "path": "evals/clip_composition/outputs/visual-check/r_ztjHaHmcg/cutpoint-20260706-local-stt-300s-anchor-v001/segment10_mid.jpg"
+        },
+        {
+          "label": "tail",
+          "clipMs": 86733,
+          "sourceMs": 2385335,
+          "path": "evals/clip_composition/outputs/visual-check/r_ztjHaHmcg/cutpoint-20260706-local-stt-300s-anchor-v001/segment10_tail.jpg"
+        }
+      ]
+    },
+    {
+      "segmentIndex": 10,
+      "stills": [
+        {
+          "label": "head",
+          "clipMs": 87233,
+          "sourceMs": 2384963,
+          "path": "evals/clip_composition/outputs/visual-check/r_ztjHaHmcg/cutpoint-20260706-local-stt-300s-anchor-v001/segment11_head.jpg"
+        },
+        {
+          "label": "mid",
+          "clipMs": 92117,
+          "sourceMs": 2389847,
+          "path": "evals/clip_composition/outputs/visual-check/r_ztjHaHmcg/cutpoint-20260706-local-stt-300s-anchor-v001/segment11_mid.jpg"
+        },
+        {
+          "label": "tail",
+          "clipMs": 96500,
+          "sourceMs": 2394230,
+          "path": "evals/clip_composition/outputs/visual-check/r_ztjHaHmcg/cutpoint-20260706-local-stt-300s-anchor-v001/segment11_tail.jpg"
+        }
+      ]
+    },
+    {
+      "segmentIndex": 11,
+      "stills": [
+        {
+          "label": "head",
+          "clipMs": 97000,
+          "sourceMs": 2408618,
+          "path": "evals/clip_composition/outputs/visual-check/r_ztjHaHmcg/cutpoint-20260706-local-stt-300s-anchor-v001/segment12_head.jpg"
+        },
+        {
+          "label": "mid",
+          "clipMs": 99050,
+          "sourceMs": 2410668,
+          "path": "evals/clip_composition/outputs/visual-check/r_ztjHaHmcg/cutpoint-20260706-local-stt-300s-anchor-v001/segment12_mid.jpg"
+        },
+        {
+          "label": "tail",
+          "clipMs": 100600,
+          "sourceMs": 2412218,
+          "path": "evals/clip_composition/outputs/visual-check/r_ztjHaHmcg/cutpoint-20260706-local-stt-300s-anchor-v001/segment12_tail.jpg"
+        }
+      ]
+    },
+    {
+      "segmentIndex": 12,
+      "stills": [
+        {
+          "label": "head",
+          "clipMs": 101100,
+          "sourceMs": 2412721,
+          "path": "evals/clip_composition/outputs/visual-check/r_ztjHaHmcg/cutpoint-20260706-local-stt-300s-anchor-v001/segment13_head.jpg"
+        },
+        {
+          "label": "mid",
+          "clipMs": 103245,
+          "sourceMs": 2414866,
+          "path": "evals/clip_composition/outputs/visual-check/r_ztjHaHmcg/cutpoint-20260706-local-stt-300s-anchor-v001/segment13_mid.jpg"
+        },
+        {
+          "label": "tail",
+          "clipMs": 104890,
+          "sourceMs": 2416511,
+          "path": "evals/clip_composition/outputs/visual-check/r_ztjHaHmcg/cutpoint-20260706-local-stt-300s-anchor-v001/segment13_tail.jpg"
+        }
+      ]
+    },
+    {
+      "segmentIndex": 13,
+      "stills": [
+        {
+          "label": "head",
+          "clipMs": 105390,
+          "sourceMs": 2417545,
+          "path": "evals/clip_composition/outputs/visual-check/r_ztjHaHmcg/cutpoint-20260706-local-stt-300s-anchor-v001/segment14_head.jpg"
+        },
+        {
+          "label": "mid",
+          "clipMs": 107255,
+          "sourceMs": 2419410,
+          "path": "evals/clip_composition/outputs/visual-check/r_ztjHaHmcg/cutpoint-20260706-local-stt-300s-anchor-v001/segment14_mid.jpg"
+        },
+        {
+          "label": "tail",
+          "clipMs": 108620,
+          "sourceMs": 2420775,
+          "path": "evals/clip_composition/outputs/visual-check/r_ztjHaHmcg/cutpoint-20260706-local-stt-300s-anchor-v001/segment14_tail.jpg"
+        }
+      ]
+    },
+    {
+      "segmentIndex": 14,
+      "stills": [
+        {
+          "label": "head",
+          "clipMs": 109120,
+          "sourceMs": 2421228,
+          "path": "evals/clip_composition/outputs/visual-check/r_ztjHaHmcg/cutpoint-20260706-local-stt-300s-anchor-v001/segment15_head.jpg"
+        },
+        {
+          "label": "mid",
+          "clipMs": 112795,
+          "sourceMs": 2424903,
+          "path": "evals/clip_composition/outputs/visual-check/r_ztjHaHmcg/cutpoint-20260706-local-stt-300s-anchor-v001/segment15_mid.jpg"
+        },
+        {
+          "label": "tail",
+          "clipMs": 115970,
+          "sourceMs": 2428078,
+          "path": "evals/clip_composition/outputs/visual-check/r_ztjHaHmcg/cutpoint-20260706-local-stt-300s-anchor-v001/segment15_tail.jpg"
+        }
+      ]
+    },
+    {
+      "segmentIndex": 15,
+      "stills": [
+        {
+          "label": "head",
+          "clipMs": 116470,
+          "sourceMs": 2431422,
+          "path": "evals/clip_composition/outputs/visual-check/r_ztjHaHmcg/cutpoint-20260706-local-stt-300s-anchor-v001/segment16_head.jpg"
+        },
+        {
+          "label": "mid",
+          "clipMs": 118809,
+          "sourceMs": 2433761,
+          "path": "evals/clip_composition/outputs/visual-check/r_ztjHaHmcg/cutpoint-20260706-local-stt-300s-anchor-v001/segment16_mid.jpg"
+        },
+        {
+          "label": "tail",
+          "clipMs": 120647,
+          "sourceMs": 2435599,
+          "path": "evals/clip_composition/outputs/visual-check/r_ztjHaHmcg/cutpoint-20260706-local-stt-300s-anchor-v001/segment16_tail.jpg"
+        }
+      ]
+    }
+  ],
+  "fixed30ArchivePath": "evals/clip_composition/outputs/archive/fixed30-alignment-r_ztjHaHmcg-20260706-local-stt-300s-anchor-v001.json",
+  "fixed30Comparison": [
+    {
+      "oldChunkIndex": 0,
+      "oldClipRange": {
+        "startMs": 2555,
+        "endMs": 32555
+      },
+      "oldSourceRange": {
+        "startMs": 2174596,
+        "endMs": 2224510
+      },
+      "linearContinuityRatio": 0.2985,
+      "nonLinearDurationMs": 21045,
+      "oldHumanObservation": "最初は一致したが、チャンク全体を連続した同一元区間としては固定しない。",
+      "overlappingNewSegments": [
+        {
+          "segmentIndex": 0,
+          "clipStartMs": 2555,
+          "clipEndMs": 13040,
+          "sourceStartMs": 2174596,
+          "sourceEndMs": 2194118,
+          "linearContinuityRatio": 0.242442,
+          "anchorWordCount": 59,
+          "linearDisplay": "24.2%",
+          "confirmedInheritance": "requires_review"
+        },
+        {
+          "segmentIndex": 1,
+          "clipStartMs": 13040,
+          "clipEndMs": 19367,
+          "sourceStartMs": 2193738,
+          "sourceEndMs": 2211736,
+          "linearContinuityRatio": 0.319583,
+          "anchorWordCount": 24,
+          "linearDisplay": "32%",
+          "confirmedInheritance": "requires_review"
+        },
+        {
+          "segmentIndex": 2,
+          "clipStartMs": 19367,
+          "clipEndMs": 53370,
+          "sourceStartMs": 2208532,
+          "sourceEndMs": 2258575,
+          "linearContinuityRatio": 0.263359,
+          "anchorWordCount": 143,
+          "linearDisplay": "26.3%",
+          "confirmedInheritance": "requires_review"
+        }
+      ],
+      "meaning": "旧固定幅チャンクは新セグメント3件に分かれたため、固定幅境界が実カット点をまたいでいた可能性がある。"
+    },
+    {
+      "oldChunkIndex": 1,
+      "oldClipRange": {
+        "startMs": 32555,
+        "endMs": 62555
+      },
+      "oldSourceRange": {
+        "startMs": 2281066,
+        "endMs": 2339669
+      },
+      "linearContinuityRatio": 0.183667,
+      "nonLinearDurationMs": 24490,
+      "oldHumanObservation": "途中から一致した。固定幅チャンクの途中に未検出の繋ぎ目がある可能性がある。",
+      "overlappingNewSegments": [
+        {
+          "segmentIndex": 2,
+          "clipStartMs": 19367,
+          "clipEndMs": 53370,
+          "sourceStartMs": 2208532,
+          "sourceEndMs": 2258575,
+          "linearContinuityRatio": 0.263359,
+          "anchorWordCount": 143,
+          "linearDisplay": "26.3%",
+          "confirmedInheritance": "requires_review"
+        },
+        {
+          "segmentIndex": 3,
+          "clipStartMs": 53370,
+          "clipEndMs": 59680,
+          "sourceStartMs": 2315887,
+          "sourceEndMs": 2336728,
+          "linearContinuityRatio": 0.595246,
+          "anchorWordCount": 30,
+          "linearDisplay": "59.5%",
+          "confirmedInheritance": "requires_review"
+        },
+        {
+          "segmentIndex": 4,
+          "clipStartMs": 59680,
+          "clipEndMs": 64100,
+          "sourceStartMs": 2336468,
+          "sourceEndMs": 2340910,
+          "linearContinuityRatio": 1,
+          "anchorWordCount": 23,
+          "linearDisplay": "100%",
+          "confirmedInheritance": "requires_review"
+        }
+      ],
+      "meaning": "旧固定幅チャンクは新セグメント3件に分かれたため、固定幅境界が実カット点をまたいでいた可能性がある。"
+    },
+    {
+      "oldChunkIndex": 2,
+      "oldClipRange": {
+        "startMs": 62555,
+        "endMs": 92555
+      },
+      "oldSourceRange": {
+        "startMs": 2341290,
+        "endMs": 2405816
+      },
+      "linearContinuityRatio": 0.4485,
+      "nonLinearDurationMs": 16545,
+      "oldHumanObservation": "途中から一致した。固定幅チャンクの途中に未検出の繋ぎ目がある可能性がある。",
+      "overlappingNewSegments": [
+        {
+          "segmentIndex": 4,
+          "clipStartMs": 59680,
+          "clipEndMs": 64100,
+          "sourceStartMs": 2336468,
+          "sourceEndMs": 2340910,
+          "linearContinuityRatio": 1,
+          "anchorWordCount": 23,
+          "linearDisplay": "100%",
+          "confirmedInheritance": "requires_review"
+        },
+        {
+          "segmentIndex": 5,
+          "clipStartMs": 64100,
+          "clipEndMs": 66540,
+          "sourceStartMs": 2340850,
+          "sourceEndMs": 2343230,
+          "linearContinuityRatio": 0.956148,
+          "anchorWordCount": 17,
+          "linearDisplay": "95.6%",
+          "confirmedInheritance": "requires_review"
+        },
+        {
+          "segmentIndex": 6,
+          "clipStartMs": 66540,
+          "clipEndMs": 68910,
+          "sourceStartMs": 2343230,
+          "sourceEndMs": 2347532,
+          "linearContinuityRatio": 0.613924,
+          "anchorWordCount": 15,
+          "linearDisplay": "61.4%",
+          "confirmedInheritance": "requires_review"
+        },
+        {
+          "segmentIndex": 7,
+          "clipStartMs": 68910,
+          "clipEndMs": 75233,
+          "sourceStartMs": 2351013,
+          "sourceEndMs": 2373874,
+          "linearContinuityRatio": 0.638146,
+          "anchorWordCount": 37,
+          "linearDisplay": "63.8%",
+          "confirmedInheritance": "requires_review"
+        },
+        {
+          "segmentIndex": 8,
+          "clipStartMs": 75233,
+          "clipEndMs": 84960,
+          "sourceStartMs": 2373814,
+          "sourceEndMs": 2383662,
+          "linearContinuityRatio": 0.968438,
+          "anchorWordCount": 52,
+          "linearDisplay": "96.8%",
+          "confirmedInheritance": "requires_review"
+        },
+        {
+          "segmentIndex": 9,
+          "clipStartMs": 84960,
+          "clipEndMs": 87233,
+          "sourceStartMs": 2383562,
+          "sourceEndMs": 2384983,
+          "linearContinuityRatio": 0.606687,
+          "anchorWordCount": 9,
+          "linearDisplay": "判定不能 (9/10語)",
+          "confirmedInheritance": "requires_review"
+        },
+        {
+          "segmentIndex": 10,
+          "clipStartMs": 87233,
+          "clipEndMs": 97000,
+          "sourceStartMs": 2384963,
+          "sourceEndMs": 2409298,
+          "linearContinuityRatio": 0.975223,
+          "anchorWordCount": 59,
+          "linearDisplay": "97.5%",
+          "confirmedInheritance": "requires_review"
+        }
+      ],
+      "meaning": "旧固定幅チャンクは新セグメント7件に分かれたため、固定幅境界が実カット点をまたいでいた可能性がある。"
+    },
+    {
+      "oldChunkIndex": 3,
+      "oldClipRange": {
+        "startMs": 92555,
+        "endMs": 121147
+      },
+      "oldSourceRange": {
+        "startMs": 2404635,
+        "endMs": 2435445
+      },
+      "linearContinuityRatio": 0.290676,
+      "nonLinearDurationMs": 20281,
+      "oldHumanObservation": "完全一致。ただし切り抜き全体のexpectedを作るには、前段チャンクの未検出カット点を再照合する必要がある。",
+      "overlappingNewSegments": [
+        {
+          "segmentIndex": 10,
+          "clipStartMs": 87233,
+          "clipEndMs": 97000,
+          "sourceStartMs": 2384963,
+          "sourceEndMs": 2409298,
+          "linearContinuityRatio": 0.975223,
+          "anchorWordCount": 59,
+          "linearDisplay": "97.5%",
+          "confirmedInheritance": "requires_review"
+        },
+        {
+          "segmentIndex": 11,
+          "clipStartMs": 97000,
+          "clipEndMs": 101100,
+          "sourceStartMs": 2408618,
+          "sourceEndMs": 2413402,
+          "linearContinuityRatio": 0.765366,
+          "anchorWordCount": 34,
+          "linearDisplay": "76.5%",
+          "confirmedInheritance": "requires_review"
+        },
+        {
+          "segmentIndex": 12,
+          "clipStartMs": 101100,
+          "clipEndMs": 105390,
+          "sourceStartMs": 2412721,
+          "sourceEndMs": 2417625,
+          "linearContinuityRatio": 0.737995,
+          "anchorWordCount": 23,
+          "linearDisplay": "73.8%",
+          "confirmedInheritance": "requires_review"
+        },
+        {
+          "segmentIndex": 13,
+          "clipStartMs": 105390,
+          "clipEndMs": 109120,
+          "sourceStartMs": 2417545,
+          "sourceEndMs": 2421348,
+          "linearContinuityRatio": 0.449866,
+          "anchorWordCount": 31,
+          "linearDisplay": "45%",
+          "confirmedInheritance": "requires_review"
+        },
+        {
+          "segmentIndex": 14,
+          "clipStartMs": 109120,
+          "clipEndMs": 116470,
+          "sourceStartMs": 2421228,
+          "sourceEndMs": 2429701,
+          "linearContinuityRatio": 0.381497,
+          "anchorWordCount": 38,
+          "linearDisplay": "38.1%",
+          "confirmedInheritance": "requires_review"
+        },
+        {
+          "segmentIndex": 15,
+          "clipStartMs": 116470,
+          "clipEndMs": 121147,
+          "sourceStartMs": 2431422,
+          "sourceEndMs": 2440868,
+          "linearContinuityRatio": 1,
+          "anchorWordCount": 26,
+          "linearDisplay": "100%",
+          "confirmedInheritance": "requires_review"
+        }
+      ],
+      "meaning": "旧固定幅チャンクは新セグメント6件に分かれたため、固定幅境界が実カット点をまたいでいた可能性がある。"
+    }
+  ],
+  "humanConfirmedPairPolicy": {
+    "inheritedPair": {
+      "clipStartMs": 92555,
+      "clipEndMs": 121147,
+      "sourceStartMs": 2404730,
+      "sourceEndMs": 2433322,
+      "checkedBy": "kawafmm",
+      "status": "confirmed"
+    },
+    "toleranceMs": 500,
+    "applied": []
+  },
+  "productionImpact": {
+    "writesRuntime": false,
+    "touchesProductionUi": false,
+    "touchesProductionApi": false,
+    "touchesProductionQueue": false,
+    "touchesDatabase": false,
+    "writesExpectedDirectory": false,
+    "writesFixturesDirectory": false
+  }
+}

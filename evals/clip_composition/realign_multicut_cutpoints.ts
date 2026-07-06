@@ -14,6 +14,7 @@ type CliOptions = {
   maxAudioCutpoints: number;
   maxVideoCutpoints: number;
   minSegmentMs: number;
+  minAnchorWords: number;
   topMatches: number;
   ffmpegCommand: string;
 };
@@ -131,6 +132,14 @@ type MatchCandidate = {
   timeAxis: TimeAxisInspection;
 };
 
+type AlignmentReliability = {
+  anchorWordCount: number;
+  minimumAnchorWordCount: number;
+  status: 'judgeable' | 'not_judgeable' | 'no_match';
+  displayText: string;
+  linearContinuityRatioForDisplay: number | null;
+};
+
 type RankedCutpoint = {
   timeMs: number;
   kind: 'audio_discontinuity' | 'video_scene_change';
@@ -210,6 +219,7 @@ function parseOptions(argv: string[]): CliOptions {
     maxAudioCutpoints: positiveInteger(values.get('maxAudioCutpoints'), 12, '--maxAudioCutpoints'),
     maxVideoCutpoints: positiveInteger(values.get('maxVideoCutpoints'), 8, '--maxVideoCutpoints'),
     minSegmentMs: positiveInteger(values.get('minSegmentMs'), 1500, '--minSegmentMs'),
+    minAnchorWords: positiveInteger(values.get('minAnchorWords'), 10, '--minAnchorWords'),
     topMatches: positiveInteger(values.get('top'), 3, '--top'),
     ffmpegCommand: values.get('ffmpeg')?.trim() || process.env.ZEV2_FFMPEG_BIN?.trim() || process.env.FFMPEG_BIN?.trim() || 'ffmpeg'
   };
@@ -672,6 +682,7 @@ function oldFixedRows(oldAlignment: OldAlignmentFile, oldDecision: HumanDecision
 function compareOldNew(oldRows: ReturnType<typeof oldFixedRows>, segmentResults: Array<{
   segment: ClipSegment;
   bestMatch?: MatchCandidate;
+  reliability: AlignmentReliability;
   inheritance: ReturnType<typeof confirmedInheritance>;
 }>) {
   return oldRows.map((oldRow) => {
@@ -692,6 +703,8 @@ function compareOldNew(oldRows: ReturnType<typeof oldFixedRows>, segmentResults:
         sourceStartMs: item.bestMatch?.sourceStartMs,
         sourceEndMs: item.bestMatch?.sourceEndMs,
         linearContinuityRatio: item.bestMatch?.timeAxis.linearContinuityRatio,
+        anchorWordCount: item.reliability.anchorWordCount,
+        linearDisplay: item.reliability.displayText,
         confirmedInheritance: item.inheritance.status
       })),
       meaning: overlapping.length === 1
@@ -807,9 +820,39 @@ function percent(value: number | undefined): string {
   return value === undefined ? 'unknown' : `${Math.round(value * 1000) / 10}%`;
 }
 
+function alignmentReliability(match: MatchCandidate | undefined, minimumAnchorWordCount: number): AlignmentReliability {
+  if (!match) {
+    return {
+      anchorWordCount: 0,
+      minimumAnchorWordCount,
+      status: 'no_match',
+      displayText: '候補なし',
+      linearContinuityRatioForDisplay: null
+    };
+  }
+  const anchorWordCount = match.timeAxis.matchedWordPairCount ?? 0;
+  if (anchorWordCount < minimumAnchorWordCount) {
+    return {
+      anchorWordCount,
+      minimumAnchorWordCount,
+      status: 'not_judgeable',
+      displayText: `判定不能 (${anchorWordCount}/${minimumAnchorWordCount}語)`,
+      linearContinuityRatioForDisplay: null
+    };
+  }
+  return {
+    anchorWordCount,
+    minimumAnchorWordCount,
+    status: 'judgeable',
+    displayText: percent(match.timeAxis.linearContinuityRatio),
+    linearContinuityRatioForDisplay: match.timeAxis.linearContinuityRatio
+  };
+}
+
 function buildReport(input: {
   resultPath: string;
   archivePath: string;
+  minAnchorWords: number;
   stills: Array<{
     segmentIndex: number;
     stills: Array<{ label: string; clipMs: number; sourceMs?: number; path?: string }>;
@@ -818,6 +861,7 @@ function buildReport(input: {
     segment: ClipSegment;
     matches: MatchCandidate[];
     bestMatch?: MatchCandidate;
+    reliability: AlignmentReliability;
     inheritance: ReturnType<typeof confirmedInheritance>;
   }>;
   oldComparison: ReturnType<typeof compareOldNew>;
@@ -840,18 +884,19 @@ function buildReport(input: {
     '- 固定30秒幅ではなく、切り抜き側の音声不連続候補と映像シーンチェンジ候補から可変長セグメントを作る。',
     '- 音声不連続候補を先に採用し、映像シーンチェンジ候補は補助として追加する。',
     '- 整合率は、単語タイムスタンプ対応が線形に続いた最長区間の長さをセグメント長で割った値。',
+    `- 対応に使えた単語数が${input.minAnchorWords}語未満の場合、整合率は判定不能として表示する。`,
     '- 整合率は自動凍結条件ではなく、人間確認のための数値として読む。',
     '',
     '## 新セグメント',
     '',
-    '| seg | clip | source | text | linear | inherited | stills |',
-    '| ---: | --- | --- | ---: | ---: | --- | --- |'
+    '| seg | clip | source | text | 対応単語 | 整合率表示 | inherited | stills |',
+    '| ---: | --- | --- | ---: | ---: | ---: | --- | --- |'
   ];
 
   for (const item of input.segmentResults) {
     const match = item.bestMatch;
     const stillText = `segment${String(item.segment.index + 1).padStart(2, '0')}_head/mid/tail.jpg`;
-    lines.push(`| ${item.segment.index + 1} | ${msText(item.segment.startMs)}-${msText(item.segment.endMs)} | ${msText(match?.sourceStartMs)}-${msText(match?.sourceEndMs)} | ${percent(match?.clipCoverage)} | ${percent(match?.timeAxis.linearContinuityRatio)} | ${item.inheritance.status} | ${stillText} |`);
+    lines.push(`| ${item.segment.index + 1} | ${msText(item.segment.startMs)}-${msText(item.segment.endMs)} | ${msText(match?.sourceStartMs)}-${msText(match?.sourceEndMs)} | ${percent(match?.clipCoverage)} | ${item.reliability.anchorWordCount} | ${item.reliability.displayText} | ${item.inheritance.status} | ${stillText} |`);
   }
 
   lines.push('');
@@ -867,7 +912,7 @@ function buildReport(input: {
       lines.push(`  - 人間観測: ${row.oldHumanObservation}`);
     }
     for (const segment of row.overlappingNewSegments) {
-      lines.push(`  - new seg ${segment.segmentIndex + 1}: clip ${msText(segment.clipStartMs)}-${msText(segment.clipEndMs)} / source ${msText(segment.sourceStartMs)}-${msText(segment.sourceEndMs)} / 整合率 ${percent(segment.linearContinuityRatio)} / 継承 ${segment.confirmedInheritance}`);
+      lines.push(`  - new seg ${segment.segmentIndex + 1}: clip ${msText(segment.clipStartMs)}-${msText(segment.clipEndMs)} / source ${msText(segment.sourceStartMs)}-${msText(segment.sourceEndMs)} / 対応単語 ${segment.anchorWordCount} / 整合率表示 ${segment.linearDisplay} / 継承 ${segment.confirmedInheritance}`);
     }
   }
 
@@ -916,6 +961,7 @@ async function main(): Promise<void> {
       segment,
       matches,
       ...(bestMatch ? { bestMatch } : {}),
+      reliability: alignmentReliability(bestMatch, options.minAnchorWords),
       inheritance: confirmedInheritance(segment, bestMatch)
     };
   });
@@ -955,11 +1001,13 @@ async function main(): Promise<void> {
       maxAudioCutpoints: options.maxAudioCutpoints,
       maxVideoCutpoints: options.maxVideoCutpoints,
       minSegmentMs: options.minSegmentMs,
+      minAnchorWords: options.minAnchorWords,
       topMatches: options.topMatches,
       audioFrameMs,
       audioHopMs,
       audioPriority: '音声不連続候補を先に採用し、映像シーンチェンジ候補は補助として追加する',
-      timeAxisIntegrity: '単語タイムスタンプ対応が線形に続いた最長区間の長さ/セグメント長'
+      timeAxisIntegrity: '単語タイムスタンプ対応が線形に続いた最長区間の長さ/セグメント長',
+      reliabilityDisplay: '対応に使えた単語数がminAnchorWords未満の場合、整合率は判定不能として表示する'
     },
     cutpointDetection: {
       audioCutpoints,
@@ -998,7 +1046,7 @@ async function main(): Promise<void> {
   const resultPath = path.join(outputDir, `cutpoint-realignment-${options.clipId}-${options.outputId}.json`);
   const reportPath = path.join(reportDir, `cutpoint-realignment-${options.clipId}-${options.outputId}.md`);
   await writeFile(resultPath, `${JSON.stringify(result, null, 2)}\n`, 'utf8');
-  await writeFile(reportPath, buildReport({ resultPath, archivePath, stills, segmentResults, oldComparison }), 'utf8');
+  await writeFile(reportPath, buildReport({ resultPath, archivePath, minAnchorWords: options.minAnchorWords, stills, segmentResults, oldComparison }), 'utf8');
 
   console.log(`result: ${resultPath}`);
   console.log(`report: ${reportPath}`);

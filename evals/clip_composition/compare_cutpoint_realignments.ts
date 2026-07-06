@@ -42,6 +42,13 @@ type SegmentRow = {
     status?: string;
     reason?: string;
   };
+  reliability?: {
+    anchorWordCount?: number;
+    minimumAnchorWordCount?: number;
+    status?: string;
+    displayText?: string;
+    linearContinuityRatioForDisplay?: number | null;
+  };
 };
 
 type RealignmentFile = {
@@ -70,6 +77,8 @@ type ComparisonRow = {
   newTextCoverage?: number;
   oldLinearContinuity?: number;
   newLinearContinuity?: number;
+  oldLinearDisplay: string;
+  newLinearDisplay: string;
   oldMatchedWordPairCount?: number;
   newMatchedWordPairCount?: number;
   oldInheritance?: string;
@@ -189,8 +198,10 @@ function comparisonRows(oldRun: RealignmentFile, newRun: RealignmentFile): Compa
       newTextCoverage: newMatch?.clipCoverage,
       oldLinearContinuity: oldMatch?.timeAxis?.linearContinuityRatio,
       newLinearContinuity: newMatch?.timeAxis?.linearContinuityRatio,
-      oldMatchedWordPairCount: oldMatch?.timeAxis?.matchedWordPairCount,
-      newMatchedWordPairCount: newMatch?.timeAxis?.matchedWordPairCount,
+      oldLinearDisplay: reliabilityDisplay(oldRow, oldMatch),
+      newLinearDisplay: reliabilityDisplay(newRow, newMatch),
+      oldMatchedWordPairCount: anchorWordCount(oldRow, oldMatch),
+      newMatchedWordPairCount: anchorWordCount(newRow, newMatch),
       oldInheritance: oldRow?.inheritance?.status,
       newInheritance: newRow?.inheritance?.status
     });
@@ -212,6 +223,7 @@ function confirmedStatus(run: RealignmentFile): {
     sourceEndMs?: number;
     linearContinuity?: number;
     matchedWordPairCount?: number;
+    linearDisplay: string;
   }>;
   connectedComparison?: {
     clipStartDeltaMs?: number;
@@ -236,7 +248,8 @@ function confirmedStatus(run: RealignmentFile): {
     sourceStartMs: row.bestMatch?.sourceStartMs,
     sourceEndMs: row.bestMatch?.sourceEndMs,
     linearContinuity: row.bestMatch?.timeAxis?.linearContinuityRatio,
-    matchedWordPairCount: row.bestMatch?.timeAxis?.matchedWordPairCount
+    matchedWordPairCount: anchorWordCount(row, row.bestMatch),
+    linearDisplay: reliabilityDisplay(row, row.bestMatch)
   }));
   const first = overlappingSegments[0];
   const last = overlappingSegments.at(-1);
@@ -297,6 +310,14 @@ function percent(value?: number): string {
   return `${Math.round(value * 1000) / 10}%`;
 }
 
+function anchorWordCount(row?: SegmentRow, match?: Match): number | undefined {
+  return row?.reliability?.anchorWordCount ?? match?.timeAxis?.matchedWordPairCount;
+}
+
+function reliabilityDisplay(row?: SegmentRow, match?: Match): string {
+  return row?.reliability?.displayText ?? percent(match?.timeAxis?.linearContinuityRatio);
+}
+
 function reportMarkdown(input: {
   oldPath: string;
   newPath: string;
@@ -345,14 +366,14 @@ function reportMarkdown(input: {
     '| ---: | --- | --- | ---: | ---: |'
   );
   for (const row of input.newConfirmed.overlappingSegments) {
-    lines.push(`| ${row.segmentIndex} | ${ms(row.clipStartMs)}-${ms(row.clipEndMs)} | ${ms(row.sourceStartMs)}-${ms(row.sourceEndMs)} | ${percent(row.linearContinuity)} | ${row.matchedWordPairCount ?? 'n/a'} |`);
+    lines.push(`| ${row.segmentIndex} | ${ms(row.clipStartMs)}-${ms(row.clipEndMs)} | ${ms(row.sourceStartMs)}-${ms(row.sourceEndMs)} | ${row.linearDisplay} | ${row.matchedWordPairCount ?? 'n/a'} |`);
   }
 
   lines.push(
     '',
     '## 全セグメント差分',
     '',
-    '| seg | clip | 旧source | 新source | 開始差 | 終了差 | 旧整合率 | 新整合率 | 旧対応単語 | 新対応単語 |',
+    '| seg | clip | 旧source | 新source | 開始差 | 終了差 | 旧整合率表示 | 新整合率表示 | 旧対応単語 | 新対応単語 |',
     '| ---: | --- | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |'
   );
   for (const row of input.rows) {
@@ -363,18 +384,22 @@ function reportMarkdown(input: {
       `${ms(row.newSourceRange.startMs)}-${ms(row.newSourceRange.endMs)}`,
       signed(row.sourceShiftMs.start),
       signed(row.sourceShiftMs.end),
-      percent(row.oldLinearContinuity),
-      percent(row.newLinearContinuity),
+      row.oldLinearDisplay,
+      row.newLinearDisplay,
       row.oldMatchedWordPairCount ?? 'n/a',
       `${row.newMatchedWordPairCount ?? 'n/a'} |`
     ].join(' | '));
   }
 
+  const sourceMeaning = input.oldRun.sourceId === input.newRun.sourceId
+    ? '- タイムスタンプ源は同じ。比較対象は表示・付帯情報の変更で、照合位置は変えていない。'
+    : '- タイムスタンプ源が置き換わった。新旧の参照元時刻差を見て、入力時刻源の影響を判断する。';
+
   lines.push(
     '',
     '## 判断',
     '',
-    '- タイムスタンプ源はYouTube自動字幕から自前STTへ置き換わった。',
+    sourceMeaning,
     '- 切り抜き側の分割点は変更していないため、セグメント数は同じ。',
     '- 確認済みペアは新結果でも直接継承0件。現行の1対1・±500ms継承条件には入っていない。',
     '- fixture/expectedは作成していない。readyForFreezeもfalseのまま。'
