@@ -11,9 +11,11 @@
 
 ## 版番号の結論
 
-今回の改訂版は `clip_composition_prompt_v010` として作成した。
+最新の改訂版は `clip_composition_prompt_v011`。
 
-理由は、`v007` から `v009` までが既に実体を持つためです。`v007` は終端の結論反復、`v008` は短い相づち、`v009` は境界候補入力の実験であり、今回の「複数区間の扱い、reason指定、few-shot」を同じ版番号で上書きしない。
+`v010` は、`v007` から `v009` までが既に実体を持つため作成した。`v007` は終端の結論反復、`v008` は短い相づち、`v009` は境界候補入力の実験であり、「複数区間の扱い、reason指定、few-shot」を同じ版番号で上書きしないため。
+
+`v011` は `v010` から差分1点だけで、区間採否の基準を「長さではなく前後との意味の連続性」とする指示を追加した。
 
 `v007` から `v009` は `prompts/archive/` へ移動済み。過去の `outputs/` と `reports/` は移動せず、参照できる状態を維持する。
 
@@ -31,6 +33,7 @@
 | v008 | 初出 `b61cd8b`、実体化 `225225f` / 2026-07-05 20:33 / Add clip composition prompt v008 prep | v007後、短い相づちを自然な締めとしてより明確に含めるために作成。 | v006に、結論の言い直し直後の短い相づちを含める条件と、除外条件を追加。 | result 2件。LLM 2件。IMQYaTは一致、UpRyakf5j80は期待区間を包含するが終端 +1992ms。 | reason/few-shotとは重ならない。複数区間とは矛盾しうる。単一区間終端実験としては有効。 | 実験版として `prompts/archive/clip_composition_prompt_v008.md` へ移動済み。 |
 | v009 | 初出 `b61cd8b`、実体化 `227778f` / 2026-07-05 21:18 / Add v009 boundary signal prompt input | v008の終端過多に対し、字幕/STT由来の境界候補を入力へ追加して発話途中境界を扱えるか試した版。 | v006に、`boundarySignals` の読み方と、境界候補を理由で説明する指示を追加。 | result 1件。LLM 1件。UpRyakf5j80で終了差分 +1992ms。境界候補入力漏えい検査はpass。 | 境界候補とreason指定の一部は今回改訂と重なる。ただし複数区間とfew-shotは未対応。標準入力に境界候補が無い場合は扱いが特殊。 | 実験版として `prompts/archive/clip_composition_prompt_v009.md` へ移動済み。 |
 | v010 | 2026-07-06 / この作業で作成 | 2fixture再採点の測定対象をbaseline-ruleとllm系へ分離した後、複数素材ブロックfixtureをLLM実測へ進めるために作成。 | v006に、離れた素材場面を複数 `selectedCuts` として返す指示、開始根拠・終了根拠・除外判断をreasonに書く指示、架空素材の単一区間few-shotと複数区間few-shotを追加。`boundarySignals` は入れない。 | result 6件。2fixture×3回をWeb Geminiで実走し、`reports/prompt-result-comparison-20260706-v010-three-way-v003.md` と `reports/llm-v010-runs3-three-way-summary-20260706-v001.md` に記録。 | 今回の正式実験版。 | 正式版として台帳登録。 |
+| v011 | 2026-07-06 / この作業で作成 | v010の複数区間実走で、r_ztjHaHmcgの短い期待区間2が3回とも選ばれなかったため作成。 | v010との差分は1点のみ。判断方針に「区間を採用するか除外するかは、長さではなく、前後の区間と意味が連続しているかで判断する」を追加。 | result 6件。2fixture×3回をWeb Geminiで実走し、`reports/prompt-result-comparison-20260706-v011-v010-baseline-v001.md` と `reports/llm-v011-runs3-v010-baseline-summary-20260706-v001.md` に記録。 | v010の構造揺れ確認用。期待区間2は3回とも未選択。 | 正式実験版として台帳登録。 |
 
 ## v007-v009と次回改訂の関係
 
@@ -48,3 +51,9 @@
 - 各 `reason` には、開始根拠、終了根拠、除外判断があればその理由を書く。
 - few-shotは、期待区間そのものを漏らさない架空例として、単一区間1例と複数区間1例を入れる。
 - `boundarySignals` は入れない。境界候補入力を使う版は、標準入力版とは別番号で扱う。
+
+## v011への反映
+
+`v011` では、`v010` の判断方針に次の1行だけを追加した。
+
+- 区間を採用するか除外するかは、長さではなく、前後の区間と意味が連続しているかで判断する。

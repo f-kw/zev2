@@ -1,0 +1,5398 @@
+# clip_composition_prompt_v011
+
+あなたは切り抜き区間選択だけを担当する。
+
+## 目的
+
+固定済みテーマと文字起こしを見て、元動画内で切り抜きとして使う最終区間を選ぶ。
+
+この評価では、実在した切り抜き動画の選択に近い区間を選ぶ。発話の芯だけで切らず、オチの後に続く笑い、反応、余韻が切り抜きの視聴感を作っている場合は、反応が収束するところまで含める。
+
+## 入力の読み方
+
+- テーマは固定入力であり、新しいテーマを作らない。
+- 正解区間、評価結果、代表発話IDは入力に含まれない。
+- `title` と `summary` は場面の内容を識別するための説明として読む。
+- `compositionNote` は、どの場面を切り抜き対象にするかの補助説明として読む。
+- `compositionNote` に未解決区間や除外区間の扱いが書かれている場合は、その指示に従う。
+- `candidateSpeechIds` は探索してよい範囲であり、すべてを使う義務ではない。
+- `isThemeCandidate` は候補範囲の印であり、最終区間に含めるべき印ではない。
+- 1文字ずつ分かれた発話は、連続する文字をつないで文として読む。
+- `笑` だけの発話は、発話本文ではなく反応や余韻を表す非発話シグナルとして読む。
+- 選べる範囲は、入力された文字起こしの発話時刻に基づく。
+
+## 判断方針
+
+- 切り抜きとして単独で意味が通る、最小の素材区間を選ぶ。
+- テーマの中心場面が元動画内の離れた位置に複数ある場合は、1本の連続区間へ無理につながず、離れた場面ごとに別々の `selectedCuts` として返す。
+- 1つの `selectedCuts` は、元動画内で連続した素材対応を表す。同じ場面内の間、言い淀み、短い詰め、同じ反応の余韻は、それだけを理由に別区間へ分けない。
+- 区間を採用するか除外するかは、長さではなく、前後の区間と意味が連続しているかで判断する。
+- 開始位置は、切り抜き対象のフリ、状況説明、反応が始まる最初の発話にする。
+- 候補範囲の先頭にある、前文の残り、無関係な相づち、言い淀みだけの断片は含めない。
+- ただし、後のオチや反応を理解するために必要なフリや評価語は含める。
+- 終了位置は、中心発話が終わった瞬間ではなく、その直後の笑い、反応、余韻が収束する最後の時刻にする。
+- 終端側に笑い声や反応が続く場合は、切り抜きのオチとして必要な範囲を含める。
+- 笑い声や余韻が長く続く場合は、同じ反応が明確に引き伸ばされている範囲までを含め、別の話題へ移った部分は含めない。
+- 導入だけ、オチだけ、または文脈が切れた区間を避ける。
+- 開始位置と終了位置はミリ秒で返す。
+
+## reasonの書き方
+
+各 `selectedCuts` の `reason` には、最低限次を入れる。
+
+- 開始根拠を1文で書く。
+- 終了根拠を1文で書く。
+- 除外した区間や、選ばなかった近接候補がある場合は、その判断を1文で書く。
+
+`reason` は1つの文字列として返す。追加フィールドは作らない。
+
+## 架空例1: 単一区間
+
+入力の要点:
+
+```json
+{
+  "selectedTheme": {
+    "title": "活動を続けるための現実的な条件",
+    "compositionNote": "質問への現実的な回答が単独で伝わる範囲を選ぶ。"
+  },
+  "transcript": {
+    "segments": [
+      { "speechId": 10, "sourceStartMs": 10000, "sourceEndMs": 11200, "text": "えっと質問来てるね", "isThemeCandidate": true },
+      { "speechId": 11, "sourceStartMs": 11200, "sourceEndMs": 14800, "text": "毎月続けるなら数字より生活できるかが先だと思う", "isThemeCandidate": true },
+      { "speechId": 12, "sourceStartMs": 14800, "sourceEndMs": 16600, "text": "そこが無理なら無理しない方がいい", "isThemeCandidate": true },
+      { "speechId": 13, "sourceStartMs": 19000, "sourceEndMs": 20500, "text": "次の話いこう", "isThemeCandidate": false }
+    ]
+  }
+}
+```
+
+望ましい出力:
+
+```json
+{
+  "selectedCuts": [
+    {
+      "sourceStartMs": 10000,
+      "sourceEndMs": 16600,
+      "reason": "開始根拠: 質問を受けて回答に入る発話から始まるためです。終了根拠: 現実的な条件への結論が収束する発話まで含めるためです。除外判断: 次の話題へ移る発話は別話題なので含めません。",
+      "usedSpeechIds": [10, 11, 12]
+    }
+  ]
+}
+```
+
+## 架空例2: 複数区間
+
+入力の要点:
+
+```json
+{
+  "selectedTheme": {
+    "title": "同じテーマを離れた場面で補足する流れ",
+    "compositionNote": "離れた2場面を、無関係な中間部分を除外して扱う。"
+  },
+  "transcript": {
+    "segments": [
+      { "speechId": 20, "sourceStartMs": 40000, "sourceEndMs": 42700, "text": "まず最低限これがないと続かない", "isThemeCandidate": true },
+      { "speechId": 21, "sourceStartMs": 42700, "sourceEndMs": 45100, "text": "理想論じゃなくて生活の話ね", "isThemeCandidate": true },
+      { "speechId": 22, "sourceStartMs": 70000, "sourceEndMs": 73000, "text": "全然別の雑談をしている", "isThemeCandidate": false },
+      { "speechId": 50, "sourceStartMs": 125000, "sourceEndMs": 128400, "text": "さっきの話に戻ると見栄より続けられる形が大事", "isThemeCandidate": true },
+      { "speechId": 51, "sourceStartMs": 128400, "sourceEndMs": 131200, "text": "そこを間違えると長く持たない", "isThemeCandidate": true }
+    ]
+  }
+}
+```
+
+望ましい出力:
+
+```json
+{
+  "selectedCuts": [
+    {
+      "sourceStartMs": 40000,
+      "sourceEndMs": 45100,
+      "reason": "開始根拠: テーマの前提を置く発話から始まるためです。終了根拠: 生活の話として意味が閉じる発話まで含めるためです。除外判断: 中間の別雑談はテーマの素材ではないので連続区間としてつなぎません。",
+      "usedSpeechIds": [20, 21]
+    },
+    {
+      "sourceStartMs": 125000,
+      "sourceEndMs": 131200,
+      "reason": "開始根拠: 先ほどのテーマに戻る発話から始まるためです。終了根拠: 続けられる形が大事という補足の結論まで含めるためです。除外判断: 前の素材区間とは元動画内で離れているため別のselectedCutsとして返します。",
+      "usedSpeechIds": [50, 51]
+    }
+  ]
+}
+```
+
+## 出力
+
+JSONだけを返す。説明文、Markdown、コードフェンスは付けない。
+
+```json
+{
+  "selectedCuts": [
+    {
+      "sourceStartMs": 123000,
+      "sourceEndMs": 153000,
+      "reason": "開始根拠: この区間を始める理由。終了根拠: この区間を終える理由。除外判断: 除外した近接候補がある場合の理由。",
+      "usedSpeechIds": [1, 2, 3]
+    }
+  ]
+}
+```
+
+## 入力JSON
+
+```json
+{
+  "task": "fixed_theme_clip_interval_selection",
+  "fixtureId": "r_ztjHaHmcg_partial_material_v001",
+  "draftId": "r_ztjHaHmcg_partial_material_v001",
+  "sourceUri": "https://www.youtube.com/watch?v=-DwSCDMCWDQ",
+  "selectedTheme": {
+    "id": "theme_partial_material_1",
+    "title": "配信者が食べていける同接規模について現実的に答える場面",
+    "summary": "配信者が食べていける同接規模について現実的に答える場面",
+    "candidateSpeechIds": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59,
+      60,
+      61,
+      62,
+      63,
+      64,
+      65,
+      66,
+      67,
+      68,
+      69,
+      70,
+      71,
+      72,
+      73,
+      74,
+      75,
+      76,
+      77,
+      78,
+      79,
+      80,
+      81,
+      82,
+      83,
+      84,
+      85,
+      86,
+      87,
+      88,
+      89,
+      90,
+      91,
+      92,
+      93,
+      94,
+      95,
+      96,
+      97,
+      98,
+      99,
+      100,
+      101,
+      102,
+      103,
+      104,
+      105,
+      106,
+      107,
+      108,
+      109,
+      110,
+      111,
+      112,
+      113,
+      114,
+      115,
+      116,
+      117,
+      118,
+      119,
+      120,
+      121,
+      122,
+      123,
+      124,
+      125,
+      126,
+      127,
+      128,
+      129,
+      130,
+      131,
+      132,
+      133,
+      134,
+      135,
+      136,
+      137,
+      138,
+      139,
+      140,
+      141,
+      142,
+      143,
+      144,
+      145,
+      146,
+      147,
+      148,
+      149,
+      150,
+      151,
+      152,
+      153,
+      154,
+      155,
+      156,
+      157,
+      158,
+      159,
+      160,
+      161,
+      162,
+      163,
+      164,
+      165,
+      166,
+      167,
+      168,
+      169,
+      170,
+      171,
+      172,
+      173,
+      174,
+      175,
+      176,
+      177,
+      178,
+      179,
+      180,
+      181,
+      182,
+      183,
+      184,
+      185,
+      186,
+      187,
+      188,
+      189,
+      190,
+      191,
+      192,
+      193,
+      194,
+      195,
+      196,
+      197,
+      198,
+      199,
+      200,
+      201,
+      202,
+      203,
+      204,
+      205,
+      206,
+      207,
+      208,
+      209,
+      210,
+      211,
+      212,
+      213,
+      214,
+      215,
+      216,
+      217,
+      218,
+      219,
+      220,
+      221,
+      222,
+      223,
+      224,
+      225,
+      226,
+      227,
+      228,
+      229,
+      230,
+      231,
+      232,
+      233,
+      234,
+      235,
+      236,
+      237,
+      238,
+      239,
+      240,
+      241,
+      242,
+      243,
+      244,
+      245,
+      246,
+      247,
+      248,
+      249,
+      250,
+      251,
+      252,
+      253,
+      254,
+      255,
+      256,
+      257,
+      258,
+      259,
+      260,
+      261,
+      262,
+      263,
+      264,
+      265,
+      266,
+      267,
+      268,
+      269,
+      270,
+      271,
+      272,
+      273,
+      274,
+      275,
+      276,
+      277,
+      278,
+      279,
+      280,
+      281,
+      282,
+      283,
+      284,
+      285,
+      286,
+      287,
+      288,
+      289,
+      290,
+      291,
+      292,
+      293,
+      294,
+      295,
+      296,
+      297,
+      298,
+      299,
+      300,
+      301,
+      302,
+      303,
+      304,
+      305,
+      306,
+      307,
+      308,
+      309,
+      310,
+      311,
+      312,
+      313,
+      314,
+      315,
+      316,
+      317,
+      318,
+      319,
+      320,
+      321,
+      322,
+      323,
+      324,
+      325,
+      326,
+      327,
+      328,
+      329,
+      330,
+      331,
+      332,
+      333,
+      334,
+      335,
+      336,
+      337,
+      338,
+      339,
+      340,
+      341,
+      342,
+      343,
+      344,
+      345,
+      346,
+      347,
+      348,
+      349,
+      350,
+      351,
+      352,
+      353,
+      354,
+      355,
+      356,
+      357,
+      358,
+      359,
+      360,
+      361,
+      362,
+      363,
+      364,
+      365,
+      366,
+      367,
+      368,
+      369,
+      370,
+      371,
+      372,
+      373,
+      374,
+      375,
+      376,
+      377,
+      378,
+      379,
+      380,
+      381,
+      382,
+      383,
+      384,
+      385,
+      386,
+      387,
+      388,
+      389,
+      390,
+      391,
+      392,
+      393,
+      394,
+      395,
+      396,
+      397,
+      398,
+      399,
+      400,
+      401,
+      402,
+      403,
+      404,
+      405,
+      406,
+      407,
+      408,
+      409,
+      410,
+      411,
+      412,
+      413,
+      414,
+      415,
+      416,
+      417,
+      418,
+      419,
+      420,
+      421,
+      422,
+      423,
+      424,
+      425,
+      426,
+      427,
+      428,
+      429,
+      430,
+      431,
+      432,
+      433,
+      434,
+      435,
+      436,
+      437,
+      438,
+      439,
+      440,
+      441,
+      442,
+      443,
+      444,
+      445,
+      446,
+      447,
+      448,
+      449,
+      450,
+      451,
+      452,
+      453,
+      454,
+      455,
+      456,
+      457,
+      458,
+      459,
+      460,
+      461,
+      462,
+      463,
+      464,
+      465,
+      466,
+      467,
+      468,
+      469,
+      470,
+      471,
+      472,
+      473,
+      474,
+      475,
+      476,
+      477,
+      478,
+      479,
+      480,
+      481,
+      482,
+      483,
+      484,
+      485,
+      486,
+      487,
+      488,
+      489,
+      490,
+      491,
+      492,
+      493,
+      494,
+      495,
+      496,
+      497,
+      498,
+      499,
+      500,
+      501,
+      502,
+      503,
+      504,
+      505,
+      506,
+      507,
+      508,
+      509,
+      510,
+      511,
+      512,
+      513,
+      514,
+      515,
+      516,
+      517,
+      518,
+      519,
+      520
+    ],
+    "whyItCanBeClipped": "人間が認定した素材ブロック境界に基づき、配信者が食べていける同接規模について現実的に答える流れが複数区間で構成されているため。",
+    "compositionNote": "素材ブロック粒度で、配信者が食べていける同接規模について現実的に答える流れを複数区間として扱う。境界2の未解決区間は除外する。"
+  },
+  "transcript": {
+    "language": "ja-JP",
+    "durationSec": 92.986,
+    "speechUnitGroups": [
+      [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62,
+        63,
+        64,
+        65,
+        66,
+        67,
+        68,
+        69,
+        70,
+        71,
+        72,
+        73,
+        74,
+        75,
+        76,
+        77,
+        78,
+        79,
+        80,
+        81,
+        82,
+        83,
+        84,
+        85,
+        86,
+        87,
+        88,
+        89,
+        90,
+        91,
+        92,
+        93
+      ],
+      [
+        94,
+        95,
+        96,
+        97,
+        98,
+        99,
+        100,
+        101,
+        102,
+        103,
+        104,
+        105
+      ],
+      [
+        106,
+        107,
+        108,
+        109,
+        110,
+        111,
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119,
+        120,
+        121,
+        122,
+        123,
+        124,
+        125
+      ],
+      [
+        126,
+        127,
+        128,
+        129,
+        130,
+        131,
+        132,
+        133,
+        134,
+        135,
+        136,
+        137,
+        138,
+        139,
+        140,
+        141,
+        142,
+        143,
+        144,
+        145,
+        146,
+        147,
+        148,
+        149,
+        150,
+        151,
+        152,
+        153,
+        154,
+        155,
+        156,
+        157,
+        158,
+        159,
+        160,
+        161,
+        162,
+        163,
+        164,
+        165,
+        166,
+        167,
+        168,
+        169,
+        170,
+        171,
+        172,
+        173,
+        174,
+        175,
+        176,
+        177,
+        178,
+        179,
+        180,
+        181,
+        182,
+        183,
+        184,
+        185,
+        186,
+        187,
+        188,
+        189,
+        190,
+        191,
+        192,
+        193,
+        194,
+        195,
+        196,
+        197,
+        198,
+        199,
+        200,
+        201,
+        202,
+        203,
+        204,
+        205,
+        206,
+        207,
+        208,
+        209,
+        210,
+        211,
+        212,
+        213,
+        214
+      ],
+      [
+        215,
+        216,
+        217,
+        218,
+        219,
+        220,
+        221,
+        222,
+        223,
+        224,
+        225,
+        226,
+        227,
+        228,
+        229,
+        230,
+        231,
+        232,
+        233,
+        234,
+        235,
+        236,
+        237,
+        238,
+        239,
+        240,
+        241,
+        242,
+        243,
+        244,
+        245,
+        246,
+        247,
+        248,
+        249,
+        250,
+        251,
+        252,
+        253,
+        254,
+        255,
+        256,
+        257,
+        258,
+        259,
+        260,
+        261,
+        262,
+        263,
+        264,
+        265,
+        266,
+        267,
+        268,
+        269,
+        270,
+        271,
+        272,
+        273,
+        274,
+        275,
+        276,
+        277,
+        278,
+        279,
+        280,
+        281,
+        282,
+        283,
+        284,
+        285,
+        286,
+        287,
+        288,
+        289,
+        290,
+        291,
+        292,
+        293,
+        294,
+        295,
+        296,
+        297,
+        298,
+        299,
+        300,
+        301
+      ],
+      [
+        302,
+        303,
+        304,
+        305,
+        306,
+        307,
+        308,
+        309,
+        310,
+        311,
+        312,
+        313,
+        314,
+        315,
+        316,
+        317,
+        318,
+        319,
+        320,
+        321,
+        322,
+        323,
+        324,
+        325,
+        326,
+        327,
+        328,
+        329,
+        330,
+        331,
+        332,
+        333,
+        334,
+        335,
+        336,
+        337,
+        338,
+        339,
+        340,
+        341,
+        342,
+        343,
+        344,
+        345,
+        346,
+        347,
+        348,
+        349,
+        350,
+        351,
+        352,
+        353,
+        354,
+        355,
+        356,
+        357,
+        358,
+        359,
+        360,
+        361,
+        362,
+        363,
+        364,
+        365,
+        366,
+        367,
+        368,
+        369,
+        370,
+        371,
+        372,
+        373,
+        374,
+        375,
+        376,
+        377,
+        378,
+        379,
+        380,
+        381,
+        382,
+        383,
+        384,
+        385,
+        386,
+        387,
+        388,
+        389,
+        390,
+        391,
+        392,
+        393,
+        394,
+        395,
+        396,
+        397,
+        398,
+        399,
+        400,
+        401,
+        402,
+        403,
+        404,
+        405,
+        406,
+        407,
+        408,
+        409,
+        410,
+        411,
+        412,
+        413,
+        414,
+        415,
+        416,
+        417,
+        418,
+        419,
+        420,
+        421,
+        422,
+        423,
+        424,
+        425,
+        426,
+        427,
+        428,
+        429,
+        430,
+        431,
+        432,
+        433,
+        434,
+        435,
+        436,
+        437,
+        438,
+        439,
+        440,
+        441,
+        442,
+        443,
+        444,
+        445,
+        446,
+        447,
+        448,
+        449,
+        450,
+        451,
+        452,
+        453,
+        454,
+        455,
+        456,
+        457,
+        458,
+        459,
+        460,
+        461,
+        462,
+        463,
+        464,
+        465,
+        466,
+        467,
+        468,
+        469,
+        470,
+        471,
+        472,
+        473,
+        474,
+        475,
+        476,
+        477,
+        478,
+        479,
+        480,
+        481,
+        482,
+        483,
+        484,
+        485,
+        486,
+        487,
+        488,
+        489,
+        490,
+        491,
+        492,
+        493,
+        494,
+        495,
+        496,
+        497,
+        498,
+        499,
+        500,
+        501,
+        502,
+        503,
+        504,
+        505,
+        506,
+        507,
+        508,
+        509,
+        510,
+        511,
+        512,
+        513,
+        514,
+        515,
+        516,
+        517,
+        518,
+        519,
+        520
+      ]
+    ],
+    "segments": [
+      {
+        "speechId": 1,
+        "sourceStartMs": 2208172,
+        "sourceEndMs": 2208392,
+        "text": "結",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 2,
+        "sourceStartMs": 2208392,
+        "sourceEndMs": 2208532,
+        "text": "構",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 3,
+        "sourceStartMs": 2208532,
+        "sourceEndMs": 2208653,
+        "text": "だ",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 4,
+        "sourceStartMs": 2208653,
+        "sourceEndMs": 2208773,
+        "text": "ね",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 5,
+        "sourceStartMs": 2208773,
+        "sourceEndMs": 2208913,
+        "text": "だ",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 6,
+        "sourceStartMs": 2208913,
+        "sourceEndMs": 2208953,
+        "text": "っ",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 7,
+        "sourceStartMs": 2208953,
+        "sourceEndMs": 2209213,
+        "text": "て",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 8,
+        "sourceStartMs": 2209213,
+        "sourceEndMs": 2209634,
+        "text": "僕",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 9,
+        "sourceStartMs": 2209634,
+        "sourceEndMs": 2209814,
+        "text": "が",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 10,
+        "sourceStartMs": 2209814,
+        "sourceEndMs": 2209974,
+        "text": "P",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 11,
+        "sourceStartMs": 2209974,
+        "sourceEndMs": 2210174,
+        "text": "U",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 12,
+        "sourceStartMs": 2210174,
+        "sourceEndMs": 2210755,
+        "text": "B",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 13,
+        "sourceStartMs": 2210755,
+        "sourceEndMs": 2210915,
+        "text": "G",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 14,
+        "sourceStartMs": 2210915,
+        "sourceEndMs": 2211736,
+        "text": "で",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 15,
+        "sourceStartMs": 2211736,
+        "sourceEndMs": 2211776,
+        "text": "ち",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 16,
+        "sourceStartMs": 2211776,
+        "sourceEndMs": 2211816,
+        "text": "ょ",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 17,
+        "sourceStartMs": 2211816,
+        "sourceEndMs": 2211876,
+        "text": "う",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 18,
+        "sourceStartMs": 2211876,
+        "sourceEndMs": 2211956,
+        "text": "ど",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 19,
+        "sourceStartMs": 2211956,
+        "sourceEndMs": 2212076,
+        "text": "伸",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 20,
+        "sourceStartMs": 2212076,
+        "sourceEndMs": 2212277,
+        "text": "び",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 21,
+        "sourceStartMs": 2212277,
+        "sourceEndMs": 2212337,
+        "text": "始",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 22,
+        "sourceStartMs": 2212337,
+        "sourceEndMs": 2212397,
+        "text": "め",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 23,
+        "sourceStartMs": 2212397,
+        "sourceEndMs": 2212517,
+        "text": "た",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 24,
+        "sourceStartMs": 2212517,
+        "sourceEndMs": 2212577,
+        "text": "時",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 25,
+        "sourceStartMs": 2212577,
+        "sourceEndMs": 2212637,
+        "text": "期",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 26,
+        "sourceStartMs": 2212637,
+        "sourceEndMs": 2212697,
+        "text": "が",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 27,
+        "sourceStartMs": 2212697,
+        "sourceEndMs": 2212717,
+        "text": "1",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 28,
+        "sourceStartMs": 2212717,
+        "sourceEndMs": 2212737,
+        "text": "0",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 29,
+        "sourceStartMs": 2212737,
+        "sourceEndMs": 2212957,
+        "text": "0",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 30,
+        "sourceStartMs": 2212957,
+        "sourceEndMs": 2213678,
+        "text": "人",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 31,
+        "sourceStartMs": 2213678,
+        "sourceEndMs": 2213718,
+        "text": "ぐ",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 32,
+        "sourceStartMs": 2213718,
+        "sourceEndMs": 2213858,
+        "text": "ら",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 33,
+        "sourceStartMs": 2213858,
+        "sourceEndMs": 2213918,
+        "text": "い",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 34,
+        "sourceStartMs": 2213918,
+        "sourceEndMs": 2213998,
+        "text": "だ",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 35,
+        "sourceStartMs": 2213998,
+        "sourceEndMs": 2214058,
+        "text": "っ",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 36,
+        "sourceStartMs": 2214058,
+        "sourceEndMs": 2214139,
+        "text": "た",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 37,
+        "sourceStartMs": 2214139,
+        "sourceEndMs": 2214279,
+        "text": "は",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 38,
+        "sourceStartMs": 2214279,
+        "sourceEndMs": 2214399,
+        "text": "ず",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 39,
+        "sourceStartMs": 2214399,
+        "sourceEndMs": 2214539,
+        "text": "だ",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 40,
+        "sourceStartMs": 2214539,
+        "sourceEndMs": 2214659,
+        "text": "け",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 41,
+        "sourceStartMs": 2214659,
+        "sourceEndMs": 2214759,
+        "text": "ど",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 42,
+        "sourceStartMs": 2214759,
+        "sourceEndMs": 2216561,
+        "text": "う",
+        "speaker": "unknown",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 43,
+        "sourceStartMs": 2216561,
+        "sourceEndMs": 2216761,
+        "text": "ん",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 44,
+        "sourceStartMs": 2216761,
+        "sourceEndMs": 2216962,
+        "text": "常",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 45,
+        "sourceStartMs": 2216962,
+        "sourceEndMs": 2217042,
+        "text": "に",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 46,
+        "sourceStartMs": 2217042,
+        "sourceEndMs": 2217102,
+        "text": "1",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 47,
+        "sourceStartMs": 2217102,
+        "sourceEndMs": 2217122,
+        "text": "0",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 48,
+        "sourceStartMs": 2217122,
+        "sourceEndMs": 2217262,
+        "text": "0",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 49,
+        "sourceStartMs": 2217262,
+        "sourceEndMs": 2217462,
+        "text": "人",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 50,
+        "sourceStartMs": 2217462,
+        "sourceEndMs": 2217542,
+        "text": "来",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 51,
+        "sourceStartMs": 2217542,
+        "sourceEndMs": 2217642,
+        "text": "る",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 52,
+        "sourceStartMs": 2217642,
+        "sourceEndMs": 2217742,
+        "text": "な",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 53,
+        "sourceStartMs": 2217742,
+        "sourceEndMs": 2217883,
+        "text": "ら",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 54,
+        "sourceStartMs": 2217883,
+        "sourceEndMs": 2218123,
+        "text": "全",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 55,
+        "sourceStartMs": 2218123,
+        "sourceEndMs": 2218303,
+        "text": "然",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 56,
+        "sourceStartMs": 2218303,
+        "sourceEndMs": 2218423,
+        "text": "多",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 57,
+        "sourceStartMs": 2218423,
+        "sourceEndMs": 2218704,
+        "text": "分",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 58,
+        "sourceStartMs": 2218704,
+        "sourceEndMs": 2218844,
+        "text": "普",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 59,
+        "sourceStartMs": 2218844,
+        "sourceEndMs": 2219064,
+        "text": "通",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 60,
+        "sourceStartMs": 2219064,
+        "sourceEndMs": 2219584,
+        "text": "の",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 61,
+        "sourceStartMs": 2219584,
+        "sourceEndMs": 2219685,
+        "text": "サ",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 62,
+        "sourceStartMs": 2219685,
+        "sourceEndMs": 2219745,
+        "text": "ラ",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 63,
+        "sourceStartMs": 2219745,
+        "sourceEndMs": 2219825,
+        "text": "リ",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 64,
+        "sourceStartMs": 2219825,
+        "sourceEndMs": 2219905,
+        "text": "ー",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 65,
+        "sourceStartMs": 2219905,
+        "sourceEndMs": 2220005,
+        "text": "マ",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 66,
+        "sourceStartMs": 2220005,
+        "sourceEndMs": 2220045,
+        "text": "ン",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 67,
+        "sourceStartMs": 2220045,
+        "sourceEndMs": 2220105,
+        "text": "ぐ",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 68,
+        "sourceStartMs": 2220105,
+        "sourceEndMs": 2220185,
+        "text": "ら",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 69,
+        "sourceStartMs": 2220185,
+        "sourceEndMs": 2220205,
+        "text": "い",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 70,
+        "sourceStartMs": 2220205,
+        "sourceEndMs": 2220285,
+        "text": "の",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 71,
+        "sourceStartMs": 2220285,
+        "sourceEndMs": 2220405,
+        "text": "月",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 72,
+        "sourceStartMs": 2220405,
+        "sourceEndMs": 2220485,
+        "text": "収",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 73,
+        "sourceStartMs": 2220485,
+        "sourceEndMs": 2220586,
+        "text": "あ",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 74,
+        "sourceStartMs": 2220586,
+        "sourceEndMs": 2220686,
+        "text": "る",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 75,
+        "sourceStartMs": 2220686,
+        "sourceEndMs": 2220746,
+        "text": "ん",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 76,
+        "sourceStartMs": 2220746,
+        "sourceEndMs": 2220786,
+        "text": "じ",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 77,
+        "sourceStartMs": 2220786,
+        "sourceEndMs": 2220866,
+        "text": "ゃ",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 78,
+        "sourceStartMs": 2220866,
+        "sourceEndMs": 2220946,
+        "text": "な",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 79,
+        "sourceStartMs": 2220946,
+        "sourceEndMs": 2221026,
+        "text": "い",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 80,
+        "sourceStartMs": 2221026,
+        "sourceEndMs": 2222067,
+        "text": "か",
+        "speaker": "unknown",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 81,
+        "sourceStartMs": 2222067,
+        "sourceEndMs": 2222127,
+        "text": "ち",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 82,
+        "sourceStartMs": 2222127,
+        "sourceEndMs": 2222187,
+        "text": "ょ",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 83,
+        "sourceStartMs": 2222187,
+        "sourceEndMs": 2222347,
+        "text": "い",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 84,
+        "sourceStartMs": 2222347,
+        "sourceEndMs": 2222468,
+        "text": "下",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 85,
+        "sourceStartMs": 2222468,
+        "sourceEndMs": 2222588,
+        "text": "回",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 86,
+        "sourceStartMs": 2222588,
+        "sourceEndMs": 2222668,
+        "text": "る",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 87,
+        "sourceStartMs": 2222668,
+        "sourceEndMs": 2222748,
+        "text": "か",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 88,
+        "sourceStartMs": 2222748,
+        "sourceEndMs": 2222848,
+        "text": "な",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 89,
+        "sourceStartMs": 2222848,
+        "sourceEndMs": 2222908,
+        "text": "ぐ",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 90,
+        "sourceStartMs": 2222908,
+        "sourceEndMs": 2222948,
+        "text": "ら",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 91,
+        "sourceStartMs": 2222948,
+        "sourceEndMs": 2223048,
+        "text": "い",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 92,
+        "sourceStartMs": 2223048,
+        "sourceEndMs": 2224350,
+        "text": "か",
+        "speaker": "unknown",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 93,
+        "sourceStartMs": 2224350,
+        "sourceEndMs": 2224490,
+        "text": "多",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 94,
+        "sourceStartMs": 2237847,
+        "sourceEndMs": 2237947,
+        "text": "だ",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 95,
+        "sourceStartMs": 2237947,
+        "sourceEndMs": 2238007,
+        "text": "し",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 96,
+        "sourceStartMs": 2238007,
+        "sourceEndMs": 2238327,
+        "text": "昔",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 97,
+        "sourceStartMs": 2238327,
+        "sourceEndMs": 2238407,
+        "text": "の",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 98,
+        "sourceStartMs": 2238407,
+        "sourceEndMs": 2238468,
+        "text": "ア",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 99,
+        "sourceStartMs": 2238468,
+        "sourceEndMs": 2238528,
+        "text": "ナ",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 100,
+        "sourceStartMs": 2238528,
+        "sourceEndMs": 2238608,
+        "text": "リ",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 101,
+        "sourceStartMs": 2238608,
+        "sourceEndMs": 2238628,
+        "text": "テ",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 102,
+        "sourceStartMs": 2238628,
+        "sourceEndMs": 2238688,
+        "text": "ィ",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 103,
+        "sourceStartMs": 2238688,
+        "sourceEndMs": 2238708,
+        "text": "ク",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 104,
+        "sourceStartMs": 2238708,
+        "sourceEndMs": 2238808,
+        "text": "ス",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 105,
+        "sourceStartMs": 2238808,
+        "sourceEndMs": 2241469,
+        "text": "見",
+        "speaker": "unknown",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 106,
+        "sourceStartMs": 2314526,
+        "sourceEndMs": 2314626,
+        "text": "1",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 107,
+        "sourceStartMs": 2314626,
+        "sourceEndMs": 2314646,
+        "text": "0",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 108,
+        "sourceStartMs": 2314646,
+        "sourceEndMs": 2314886,
+        "text": "0",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 109,
+        "sourceStartMs": 2314886,
+        "sourceEndMs": 2315207,
+        "text": "人",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 110,
+        "sourceStartMs": 2315207,
+        "sourceEndMs": 2315387,
+        "text": "だ",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 111,
+        "sourceStartMs": 2315387,
+        "sourceEndMs": 2315567,
+        "text": "と",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 112,
+        "sourceStartMs": 2315567,
+        "sourceEndMs": 2315667,
+        "text": "ま",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 113,
+        "sourceStartMs": 2315667,
+        "sourceEndMs": 2315707,
+        "text": "あ",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 114,
+        "sourceStartMs": 2315707,
+        "sourceEndMs": 2315807,
+        "text": "で",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 115,
+        "sourceStartMs": 2315807,
+        "sourceEndMs": 2315887,
+        "text": "も",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 116,
+        "sourceStartMs": 2315887,
+        "sourceEndMs": 2315987,
+        "text": "多",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 117,
+        "sourceStartMs": 2315987,
+        "sourceEndMs": 2316127,
+        "text": "分",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 118,
+        "sourceStartMs": 2316127,
+        "sourceEndMs": 2316267,
+        "text": "生",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 119,
+        "sourceStartMs": 2316267,
+        "sourceEndMs": 2316387,
+        "text": "活",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 120,
+        "sourceStartMs": 2316387,
+        "sourceEndMs": 2316488,
+        "text": "で",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 121,
+        "sourceStartMs": 2316488,
+        "sourceEndMs": 2316548,
+        "text": "き",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 122,
+        "sourceStartMs": 2316548,
+        "sourceEndMs": 2316628,
+        "text": "る",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 123,
+        "sourceStartMs": 2316628,
+        "sourceEndMs": 2316748,
+        "text": "と",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 124,
+        "sourceStartMs": 2316748,
+        "sourceEndMs": 2316808,
+        "text": "思",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 125,
+        "sourceStartMs": 2316808,
+        "sourceEndMs": 2316828,
+        "text": "う",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 126,
+        "sourceStartMs": 2333847,
+        "sourceEndMs": 2333927,
+        "text": "0",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 127,
+        "sourceStartMs": 2333927,
+        "sourceEndMs": 2334087,
+        "text": "0",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 128,
+        "sourceStartMs": 2334087,
+        "sourceEndMs": 2334167,
+        "text": "人",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 129,
+        "sourceStartMs": 2334167,
+        "sourceEndMs": 2334287,
+        "text": "は",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 130,
+        "sourceStartMs": 2334287,
+        "sourceEndMs": 2334388,
+        "text": "サ",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 131,
+        "sourceStartMs": 2334388,
+        "sourceEndMs": 2334468,
+        "text": "ラ",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 132,
+        "sourceStartMs": 2334468,
+        "sourceEndMs": 2334548,
+        "text": "リ",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 133,
+        "sourceStartMs": 2334548,
+        "sourceEndMs": 2334608,
+        "text": "ー",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 134,
+        "sourceStartMs": 2334608,
+        "sourceEndMs": 2334688,
+        "text": "マ",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 135,
+        "sourceStartMs": 2334688,
+        "sourceEndMs": 2334728,
+        "text": "ン",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 136,
+        "sourceStartMs": 2334728,
+        "sourceEndMs": 2335088,
+        "text": "3",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 137,
+        "sourceStartMs": 2335088,
+        "sourceEndMs": 2335188,
+        "text": "2",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 138,
+        "sourceStartMs": 2335188,
+        "sourceEndMs": 2335348,
+        "text": "人",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 139,
+        "sourceStartMs": 2335348,
+        "sourceEndMs": 2336008,
+        "text": "分",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 140,
+        "sourceStartMs": 2336008,
+        "sourceEndMs": 2336268,
+        "text": "そ",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 141,
+        "sourceStartMs": 2336268,
+        "sourceEndMs": 2336328,
+        "text": "ん",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 142,
+        "sourceStartMs": 2336328,
+        "sourceEndMs": 2336468,
+        "text": "な",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 143,
+        "sourceStartMs": 2336468,
+        "sourceEndMs": 2336728,
+        "text": "単",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 144,
+        "sourceStartMs": 2336728,
+        "sourceEndMs": 2336928,
+        "text": "純",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 145,
+        "sourceStartMs": 2336928,
+        "sourceEndMs": 2337148,
+        "text": "計",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 146,
+        "sourceStartMs": 2337148,
+        "sourceEndMs": 2337348,
+        "text": "算",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 147,
+        "sourceStartMs": 2337348,
+        "sourceEndMs": 2337448,
+        "text": "か",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 148,
+        "sourceStartMs": 2337448,
+        "sourceEndMs": 2337689,
+        "text": "な",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 149,
+        "sourceStartMs": 2337689,
+        "sourceEndMs": 2337709,
+        "text": "っ",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 150,
+        "sourceStartMs": 2337709,
+        "sourceEndMs": 2337829,
+        "text": "て",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 151,
+        "sourceStartMs": 2337829,
+        "sourceEndMs": 2337909,
+        "text": "思",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 152,
+        "sourceStartMs": 2337909,
+        "sourceEndMs": 2338009,
+        "text": "う",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 153,
+        "sourceStartMs": 2338009,
+        "sourceEndMs": 2338109,
+        "text": "け",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 154,
+        "sourceStartMs": 2338109,
+        "sourceEndMs": 2339669,
+        "text": "ど",
+        "speaker": "unknown",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 155,
+        "sourceStartMs": 2339669,
+        "sourceEndMs": 2339789,
+        "text": "ま",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 156,
+        "sourceStartMs": 2339789,
+        "sourceEndMs": 2339889,
+        "text": "あ",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 157,
+        "sourceStartMs": 2339889,
+        "sourceEndMs": 2340009,
+        "text": "穴",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 158,
+        "sourceStartMs": 2340009,
+        "sourceEndMs": 2340149,
+        "text": "勝",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 159,
+        "sourceStartMs": 2340149,
+        "sourceEndMs": 2340229,
+        "text": "ち",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 160,
+        "sourceStartMs": 2340229,
+        "sourceEndMs": 2340449,
+        "text": "間",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 161,
+        "sourceStartMs": 2340449,
+        "sourceEndMs": 2340589,
+        "text": "違",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 162,
+        "sourceStartMs": 2340589,
+        "sourceEndMs": 2340609,
+        "text": "っ",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 163,
+        "sourceStartMs": 2340609,
+        "sourceEndMs": 2340669,
+        "text": "て",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 164,
+        "sourceStartMs": 2340669,
+        "sourceEndMs": 2340729,
+        "text": "な",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 165,
+        "sourceStartMs": 2340729,
+        "sourceEndMs": 2340769,
+        "text": "い",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 166,
+        "sourceStartMs": 2340769,
+        "sourceEndMs": 2340850,
+        "text": "こ",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 167,
+        "sourceStartMs": 2340850,
+        "sourceEndMs": 2340910,
+        "text": "と",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 168,
+        "sourceStartMs": 2340910,
+        "sourceEndMs": 2340990,
+        "text": "も",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 169,
+        "sourceStartMs": 2340990,
+        "sourceEndMs": 2341030,
+        "text": "な",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 170,
+        "sourceStartMs": 2341030,
+        "sourceEndMs": 2341050,
+        "text": "い",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 171,
+        "sourceStartMs": 2341050,
+        "sourceEndMs": 2341090,
+        "text": "か",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 172,
+        "sourceStartMs": 2341090,
+        "sourceEndMs": 2341190,
+        "text": "も",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 173,
+        "sourceStartMs": 2341190,
+        "sourceEndMs": 2341210,
+        "text": "し",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 174,
+        "sourceStartMs": 2341210,
+        "sourceEndMs": 2341290,
+        "text": "れ",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 175,
+        "sourceStartMs": 2341290,
+        "sourceEndMs": 2341310,
+        "text": "な",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 176,
+        "sourceStartMs": 2341310,
+        "sourceEndMs": 2341410,
+        "text": "い",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 177,
+        "sourceStartMs": 2341410,
+        "sourceEndMs": 2341570,
+        "text": "多",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 178,
+        "sourceStartMs": 2341570,
+        "sourceEndMs": 2341690,
+        "text": "分",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 179,
+        "sourceStartMs": 2341690,
+        "sourceEndMs": 2341770,
+        "text": "で",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 180,
+        "sourceStartMs": 2341770,
+        "sourceEndMs": 2341950,
+        "text": "も",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 181,
+        "sourceStartMs": 2341950,
+        "sourceEndMs": 2342030,
+        "text": "そ",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 182,
+        "sourceStartMs": 2342030,
+        "sourceEndMs": 2342090,
+        "text": "う",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 183,
+        "sourceStartMs": 2342090,
+        "sourceEndMs": 2342790,
+        "text": "か",
+        "speaker": "unknown",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 184,
+        "sourceStartMs": 2342790,
+        "sourceEndMs": 2343050,
+        "text": "単",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 185,
+        "sourceStartMs": 2343050,
+        "sourceEndMs": 2343230,
+        "text": "純",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 186,
+        "sourceStartMs": 2343230,
+        "sourceEndMs": 2343410,
+        "text": "計",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 187,
+        "sourceStartMs": 2343410,
+        "sourceEndMs": 2343530,
+        "text": "算",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 188,
+        "sourceStartMs": 2343530,
+        "sourceEndMs": 2343610,
+        "text": "で",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 189,
+        "sourceStartMs": 2343610,
+        "sourceEndMs": 2343630,
+        "text": "は",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 190,
+        "sourceStartMs": 2343630,
+        "sourceEndMs": 2343710,
+        "text": "あ",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 191,
+        "sourceStartMs": 2343710,
+        "sourceEndMs": 2343830,
+        "text": "る",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 192,
+        "sourceStartMs": 2343830,
+        "sourceEndMs": 2346471,
+        "text": "か",
+        "speaker": "unknown",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 193,
+        "sourceStartMs": 2346471,
+        "sourceEndMs": 2346571,
+        "text": "そ",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 194,
+        "sourceStartMs": 2346571,
+        "sourceEndMs": 2346671,
+        "text": "う",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 195,
+        "sourceStartMs": 2346671,
+        "sourceEndMs": 2346771,
+        "text": "な",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 196,
+        "sourceStartMs": 2346771,
+        "sourceEndMs": 2346851,
+        "text": "ん",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 197,
+        "sourceStartMs": 2346851,
+        "sourceEndMs": 2346931,
+        "text": "だ",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 198,
+        "sourceStartMs": 2346931,
+        "sourceEndMs": 2347171,
+        "text": "単",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 199,
+        "sourceStartMs": 2347171,
+        "sourceEndMs": 2347372,
+        "text": "純",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 200,
+        "sourceStartMs": 2347372,
+        "sourceEndMs": 2347532,
+        "text": "計",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 201,
+        "sourceStartMs": 2347532,
+        "sourceEndMs": 2347692,
+        "text": "算",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 202,
+        "sourceStartMs": 2347692,
+        "sourceEndMs": 2347772,
+        "text": "な",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 203,
+        "sourceStartMs": 2347772,
+        "sourceEndMs": 2347812,
+        "text": "ん",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 204,
+        "sourceStartMs": 2347812,
+        "sourceEndMs": 2347892,
+        "text": "だ",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 205,
+        "sourceStartMs": 2347892,
+        "sourceEndMs": 2347912,
+        "text": "よ",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 206,
+        "sourceStartMs": 2347912,
+        "sourceEndMs": 2348032,
+        "text": "な",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 207,
+        "sourceStartMs": 2348032,
+        "sourceEndMs": 2348152,
+        "text": "そ",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 208,
+        "sourceStartMs": 2348152,
+        "sourceEndMs": 2348232,
+        "text": "れ",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 209,
+        "sourceStartMs": 2348232,
+        "sourceEndMs": 2348312,
+        "text": "が",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 210,
+        "sourceStartMs": 2348312,
+        "sourceEndMs": 2348432,
+        "text": "す",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 211,
+        "sourceStartMs": 2348432,
+        "sourceEndMs": 2348552,
+        "text": "ご",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 212,
+        "sourceStartMs": 2348552,
+        "sourceEndMs": 2348592,
+        "text": "い",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 213,
+        "sourceStartMs": 2348592,
+        "sourceEndMs": 2348712,
+        "text": "よ",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 214,
+        "sourceStartMs": 2348712,
+        "sourceEndMs": 2350553,
+        "text": "な",
+        "speaker": "unknown",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 215,
+        "sourceStartMs": 2369790,
+        "sourceEndMs": 2370070,
+        "text": "同",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 216,
+        "sourceStartMs": 2370070,
+        "sourceEndMs": 2370331,
+        "text": "説",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 217,
+        "sourceStartMs": 2370331,
+        "sourceEndMs": 2370551,
+        "text": "数",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 218,
+        "sourceStartMs": 2370551,
+        "sourceEndMs": 2370671,
+        "text": "と",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 219,
+        "sourceStartMs": 2370671,
+        "sourceEndMs": 2370711,
+        "text": "チ",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 220,
+        "sourceStartMs": 2370711,
+        "sourceEndMs": 2370811,
+        "text": "ャ",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 221,
+        "sourceStartMs": 2370811,
+        "sourceEndMs": 2370871,
+        "text": "ン",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 222,
+        "sourceStartMs": 2370871,
+        "sourceEndMs": 2370951,
+        "text": "ネ",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 223,
+        "sourceStartMs": 2370951,
+        "sourceEndMs": 2371071,
+        "text": "ル",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 224,
+        "sourceStartMs": 2371071,
+        "sourceEndMs": 2371151,
+        "text": "登",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 225,
+        "sourceStartMs": 2371151,
+        "sourceEndMs": 2371291,
+        "text": "録",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 226,
+        "sourceStartMs": 2371291,
+        "sourceEndMs": 2371432,
+        "text": "者",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 227,
+        "sourceStartMs": 2371432,
+        "sourceEndMs": 2371532,
+        "text": "数",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 228,
+        "sourceStartMs": 2371532,
+        "sourceEndMs": 2371692,
+        "text": "ど",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 229,
+        "sourceStartMs": 2371692,
+        "sourceEndMs": 2371732,
+        "text": "っ",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 230,
+        "sourceStartMs": 2371732,
+        "sourceEndMs": 2371812,
+        "text": "ち",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 231,
+        "sourceStartMs": 2371812,
+        "sourceEndMs": 2371852,
+        "text": "が",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 232,
+        "sourceStartMs": 2371852,
+        "sourceEndMs": 2371932,
+        "text": "お",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 233,
+        "sourceStartMs": 2371932,
+        "sourceEndMs": 2372032,
+        "text": "金",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 234,
+        "sourceStartMs": 2372032,
+        "sourceEndMs": 2372112,
+        "text": "に",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 235,
+        "sourceStartMs": 2372112,
+        "sourceEndMs": 2372192,
+        "text": "な",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 236,
+        "sourceStartMs": 2372192,
+        "sourceEndMs": 2372212,
+        "text": "る",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 237,
+        "sourceStartMs": 2372212,
+        "sourceEndMs": 2372252,
+        "text": "の",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 238,
+        "sourceStartMs": 2372252,
+        "sourceEndMs": 2372352,
+        "text": "だ",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 239,
+        "sourceStartMs": 2372352,
+        "sourceEndMs": 2372432,
+        "text": "ろ",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 240,
+        "sourceStartMs": 2372432,
+        "sourceEndMs": 2372512,
+        "text": "う",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 241,
+        "sourceStartMs": 2372512,
+        "sourceEndMs": 2372873,
+        "text": "か",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 242,
+        "sourceStartMs": 2372873,
+        "sourceEndMs": 2372933,
+        "text": "チ",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 243,
+        "sourceStartMs": 2372933,
+        "sourceEndMs": 2373053,
+        "text": "ャ",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 244,
+        "sourceStartMs": 2373053,
+        "sourceEndMs": 2373113,
+        "text": "ン",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 245,
+        "sourceStartMs": 2373113,
+        "sourceEndMs": 2373213,
+        "text": "ネ",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 246,
+        "sourceStartMs": 2373213,
+        "sourceEndMs": 2373313,
+        "text": "ル",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 247,
+        "sourceStartMs": 2373313,
+        "sourceEndMs": 2373413,
+        "text": "登",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 248,
+        "sourceStartMs": 2373413,
+        "sourceEndMs": 2373533,
+        "text": "録",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 249,
+        "sourceStartMs": 2373533,
+        "sourceEndMs": 2373653,
+        "text": "者",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 250,
+        "sourceStartMs": 2373653,
+        "sourceEndMs": 2373734,
+        "text": "数",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 251,
+        "sourceStartMs": 2373734,
+        "sourceEndMs": 2373814,
+        "text": "は",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 252,
+        "sourceStartMs": 2373814,
+        "sourceEndMs": 2373874,
+        "text": "別",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 253,
+        "sourceStartMs": 2373874,
+        "sourceEndMs": 2373954,
+        "text": "に",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 254,
+        "sourceStartMs": 2373954,
+        "sourceEndMs": 2374194,
+        "text": "何",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 255,
+        "sourceStartMs": 2374194,
+        "sourceEndMs": 2374274,
+        "text": "の",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 256,
+        "sourceStartMs": 2374274,
+        "sourceEndMs": 2374354,
+        "text": "お",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 257,
+        "sourceStartMs": 2374354,
+        "sourceEndMs": 2374574,
+        "text": "金",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 258,
+        "sourceStartMs": 2374574,
+        "sourceEndMs": 2374654,
+        "text": "に",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 259,
+        "sourceStartMs": 2374654,
+        "sourceEndMs": 2374734,
+        "text": "も",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 260,
+        "sourceStartMs": 2374734,
+        "sourceEndMs": 2374835,
+        "text": "な",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 261,
+        "sourceStartMs": 2374835,
+        "sourceEndMs": 2374895,
+        "text": "ん",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 262,
+        "sourceStartMs": 2374895,
+        "sourceEndMs": 2374975,
+        "text": "な",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 263,
+        "sourceStartMs": 2374975,
+        "sourceEndMs": 2374995,
+        "text": "い",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 264,
+        "sourceStartMs": 2374995,
+        "sourceEndMs": 2376156,
+        "text": "よ",
+        "speaker": "unknown",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 265,
+        "sourceStartMs": 2376156,
+        "sourceEndMs": 2376196,
+        "text": "チ",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 266,
+        "sourceStartMs": 2376196,
+        "sourceEndMs": 2376296,
+        "text": "ャ",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 267,
+        "sourceStartMs": 2376296,
+        "sourceEndMs": 2376356,
+        "text": "ン",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 268,
+        "sourceStartMs": 2376356,
+        "sourceEndMs": 2376456,
+        "text": "ネ",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 269,
+        "sourceStartMs": 2376456,
+        "sourceEndMs": 2377417,
+        "text": "ル",
+        "speaker": "unknown",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 270,
+        "sourceStartMs": 2377417,
+        "sourceEndMs": 2377517,
+        "text": "売",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 271,
+        "sourceStartMs": 2377517,
+        "sourceEndMs": 2377617,
+        "text": "る",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 272,
+        "sourceStartMs": 2377617,
+        "sourceEndMs": 2377677,
+        "text": "ぐ",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 273,
+        "sourceStartMs": 2377677,
+        "sourceEndMs": 2377777,
+        "text": "ら",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 274,
+        "sourceStartMs": 2377777,
+        "sourceEndMs": 2377817,
+        "text": "い",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 275,
+        "sourceStartMs": 2377817,
+        "sourceEndMs": 2377877,
+        "text": "し",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 276,
+        "sourceStartMs": 2377877,
+        "sourceEndMs": 2377937,
+        "text": "か",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 277,
+        "sourceStartMs": 2377937,
+        "sourceEndMs": 2378017,
+        "text": "で",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 278,
+        "sourceStartMs": 2378017,
+        "sourceEndMs": 2378077,
+        "text": "き",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 279,
+        "sourceStartMs": 2378077,
+        "sourceEndMs": 2378177,
+        "text": "な",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 280,
+        "sourceStartMs": 2378177,
+        "sourceEndMs": 2378238,
+        "text": "く",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 281,
+        "sourceStartMs": 2378238,
+        "sourceEndMs": 2378318,
+        "text": "な",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 282,
+        "sourceStartMs": 2378318,
+        "sourceEndMs": 2378338,
+        "text": "い",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 283,
+        "sourceStartMs": 2378338,
+        "sourceEndMs": 2378418,
+        "text": "?",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 284,
+        "sourceStartMs": 2378418,
+        "sourceEndMs": 2378478,
+        "text": "分",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 285,
+        "sourceStartMs": 2378478,
+        "sourceEndMs": 2378598,
+        "text": "か",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 286,
+        "sourceStartMs": 2378598,
+        "sourceEndMs": 2378718,
+        "text": "ら",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 287,
+        "sourceStartMs": 2378718,
+        "sourceEndMs": 2378778,
+        "text": "ん",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 288,
+        "sourceStartMs": 2378778,
+        "sourceEndMs": 2378878,
+        "text": "け",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 289,
+        "sourceStartMs": 2378878,
+        "sourceEndMs": 2380259,
+        "text": "ど",
+        "speaker": "unknown",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 290,
+        "sourceStartMs": 2380259,
+        "sourceEndMs": 2380479,
+        "text": "同",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 291,
+        "sourceStartMs": 2380479,
+        "sourceEndMs": 2380720,
+        "text": "説",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 292,
+        "sourceStartMs": 2380720,
+        "sourceEndMs": 2380840,
+        "text": "が",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 293,
+        "sourceStartMs": 2380840,
+        "sourceEndMs": 2380960,
+        "text": "ま",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 294,
+        "sourceStartMs": 2380960,
+        "sourceEndMs": 2381460,
+        "text": "あ",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 295,
+        "sourceStartMs": 2381460,
+        "sourceEndMs": 2381540,
+        "text": "な",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 296,
+        "sourceStartMs": 2381540,
+        "sourceEndMs": 2381600,
+        "text": "ん",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 297,
+        "sourceStartMs": 2381600,
+        "sourceEndMs": 2381661,
+        "text": "だ",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 298,
+        "sourceStartMs": 2381661,
+        "sourceEndMs": 2381681,
+        "text": "ろ",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 299,
+        "sourceStartMs": 2381681,
+        "sourceEndMs": 2382321,
+        "text": "う",
+        "speaker": "unknown",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 300,
+        "sourceStartMs": 2382321,
+        "sourceEndMs": 2382501,
+        "text": "結",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 301,
+        "sourceStartMs": 2382501,
+        "sourceEndMs": 2382581,
+        "text": "局",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 302,
+        "sourceStartMs": 2399621,
+        "sourceEndMs": 2399764,
+        "text": "あ",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 303,
+        "sourceStartMs": 2399764,
+        "sourceEndMs": 2399784,
+        "text": "の",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 304,
+        "sourceStartMs": 2400812,
+        "sourceEndMs": 2401012,
+        "text": "単",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 305,
+        "sourceStartMs": 2401012,
+        "sourceEndMs": 2401152,
+        "text": "純",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 306,
+        "sourceStartMs": 2401152,
+        "sourceEndMs": 2401272,
+        "text": "計",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 307,
+        "sourceStartMs": 2401272,
+        "sourceEndMs": 2401432,
+        "text": "算",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 308,
+        "sourceStartMs": 2401432,
+        "sourceEndMs": 2401512,
+        "text": "だ",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 309,
+        "sourceStartMs": 2401512,
+        "sourceEndMs": 2401572,
+        "text": "か",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 310,
+        "sourceStartMs": 2401572,
+        "sourceEndMs": 2401652,
+        "text": "ら",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 311,
+        "sourceStartMs": 2401652,
+        "sourceEndMs": 2401732,
+        "text": "さ",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 312,
+        "sourceStartMs": 2401732,
+        "sourceEndMs": 2401872,
+        "text": "マ",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 313,
+        "sourceStartMs": 2401872,
+        "sourceEndMs": 2401953,
+        "text": "ジ",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 314,
+        "sourceStartMs": 2401953,
+        "sourceEndMs": 2402313,
+        "text": "で",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 315,
+        "sourceStartMs": 2402313,
+        "sourceEndMs": 2402413,
+        "text": "だ",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 316,
+        "sourceStartMs": 2402413,
+        "sourceEndMs": 2402433,
+        "text": "っ",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 317,
+        "sourceStartMs": 2402433,
+        "sourceEndMs": 2402493,
+        "text": "て",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 318,
+        "sourceStartMs": 2402493,
+        "sourceEndMs": 2402533,
+        "text": "そ",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 319,
+        "sourceStartMs": 2402533,
+        "sourceEndMs": 2402673,
+        "text": "う",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 320,
+        "sourceStartMs": 2402673,
+        "sourceEndMs": 2402693,
+        "text": "じ",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 321,
+        "sourceStartMs": 2402693,
+        "sourceEndMs": 2402713,
+        "text": "ゃ",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 322,
+        "sourceStartMs": 2402713,
+        "sourceEndMs": 2402973,
+        "text": "ん",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 323,
+        "sourceStartMs": 2402973,
+        "sourceEndMs": 2403113,
+        "text": "あ",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 324,
+        "sourceStartMs": 2403113,
+        "sourceEndMs": 2403234,
+        "text": "の",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 325,
+        "sourceStartMs": 2403234,
+        "sourceEndMs": 2403754,
+        "text": "ー",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 326,
+        "sourceStartMs": 2403754,
+        "sourceEndMs": 2403914,
+        "text": "広",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 327,
+        "sourceStartMs": 2403914,
+        "sourceEndMs": 2404074,
+        "text": "告",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 328,
+        "sourceStartMs": 2404074,
+        "sourceEndMs": 2404234,
+        "text": "収",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 329,
+        "sourceStartMs": 2404234,
+        "sourceEndMs": 2404354,
+        "text": "入",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 330,
+        "sourceStartMs": 2404354,
+        "sourceEndMs": 2404435,
+        "text": "が",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 331,
+        "sourceStartMs": 2404435,
+        "sourceEndMs": 2404535,
+        "text": "例",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 332,
+        "sourceStartMs": 2404535,
+        "sourceEndMs": 2404635,
+        "text": "え",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 333,
+        "sourceStartMs": 2404635,
+        "sourceEndMs": 2405816,
+        "text": "ば",
+        "speaker": "unknown",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 334,
+        "sourceStartMs": 2405816,
+        "sourceEndMs": 2405876,
+        "text": "1",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 335,
+        "sourceStartMs": 2405876,
+        "sourceEndMs": 2405896,
+        "text": "0",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 336,
+        "sourceStartMs": 2405896,
+        "sourceEndMs": 2405996,
+        "text": "0",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 337,
+        "sourceStartMs": 2405996,
+        "sourceEndMs": 2406116,
+        "text": "人",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 338,
+        "sourceStartMs": 2406116,
+        "sourceEndMs": 2406216,
+        "text": "に",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 339,
+        "sourceStartMs": 2406216,
+        "sourceEndMs": 2406276,
+        "text": "見",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 340,
+        "sourceStartMs": 2406276,
+        "sourceEndMs": 2406356,
+        "text": "ら",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 341,
+        "sourceStartMs": 2406356,
+        "sourceEndMs": 2406456,
+        "text": "れ",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 342,
+        "sourceStartMs": 2406456,
+        "sourceEndMs": 2406516,
+        "text": "て",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 343,
+        "sourceStartMs": 2406516,
+        "sourceEndMs": 2406576,
+        "text": "る",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 344,
+        "sourceStartMs": 2406576,
+        "sourceEndMs": 2406776,
+        "text": "人",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 345,
+        "sourceStartMs": 2406776,
+        "sourceEndMs": 2407137,
+        "text": "は",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 346,
+        "sourceStartMs": 2407137,
+        "sourceEndMs": 2407337,
+        "text": "広",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 347,
+        "sourceStartMs": 2407337,
+        "sourceEndMs": 2407417,
+        "text": "告",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 348,
+        "sourceStartMs": 2407417,
+        "sourceEndMs": 2407557,
+        "text": "収",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 349,
+        "sourceStartMs": 2407557,
+        "sourceEndMs": 2407657,
+        "text": "入",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 350,
+        "sourceStartMs": 2407657,
+        "sourceEndMs": 2407777,
+        "text": "が",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 351,
+        "sourceStartMs": 2407777,
+        "sourceEndMs": 2407817,
+        "text": "じ",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 352,
+        "sourceStartMs": 2407817,
+        "sourceEndMs": 2407837,
+        "text": "ゃ",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 353,
+        "sourceStartMs": 2407837,
+        "sourceEndMs": 2408158,
+        "text": "あ",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 354,
+        "sourceStartMs": 2408158,
+        "sourceEndMs": 2408338,
+        "text": "1",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 355,
+        "sourceStartMs": 2408338,
+        "sourceEndMs": 2408458,
+        "text": "円",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 356,
+        "sourceStartMs": 2408458,
+        "sourceEndMs": 2408558,
+        "text": "で",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 357,
+        "sourceStartMs": 2408558,
+        "sourceEndMs": 2408618,
+        "text": "す",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 358,
+        "sourceStartMs": 2408618,
+        "sourceEndMs": 2409298,
+        "text": "と",
+        "speaker": "unknown",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 359,
+        "sourceStartMs": 2409298,
+        "sourceEndMs": 2409559,
+        "text": "1",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 360,
+        "sourceStartMs": 2409559,
+        "sourceEndMs": 2409759,
+        "text": "0",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 361,
+        "sourceStartMs": 2409759,
+        "sourceEndMs": 2410139,
+        "text": "0",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 362,
+        "sourceStartMs": 2410139,
+        "sourceEndMs": 2410259,
+        "text": "0",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 363,
+        "sourceStartMs": 2410259,
+        "sourceEndMs": 2410359,
+        "text": "人",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 364,
+        "sourceStartMs": 2410359,
+        "sourceEndMs": 2410439,
+        "text": "に",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 365,
+        "sourceStartMs": 2410439,
+        "sourceEndMs": 2410519,
+        "text": "見",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 366,
+        "sourceStartMs": 2410519,
+        "sourceEndMs": 2410579,
+        "text": "ら",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 367,
+        "sourceStartMs": 2410579,
+        "sourceEndMs": 2410680,
+        "text": "れ",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 368,
+        "sourceStartMs": 2410680,
+        "sourceEndMs": 2410760,
+        "text": "て",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 369,
+        "sourceStartMs": 2410760,
+        "sourceEndMs": 2410840,
+        "text": "る",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 370,
+        "sourceStartMs": 2410840,
+        "sourceEndMs": 2410920,
+        "text": "な",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 371,
+        "sourceStartMs": 2410920,
+        "sourceEndMs": 2411000,
+        "text": "ら",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 372,
+        "sourceStartMs": 2411000,
+        "sourceEndMs": 2411040,
+        "text": "広",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 373,
+        "sourceStartMs": 2411040,
+        "sourceEndMs": 2411260,
+        "text": "告",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 374,
+        "sourceStartMs": 2411260,
+        "sourceEndMs": 2411360,
+        "text": "収",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 375,
+        "sourceStartMs": 2411360,
+        "sourceEndMs": 2411460,
+        "text": "入",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 376,
+        "sourceStartMs": 2411460,
+        "sourceEndMs": 2411540,
+        "text": "が",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 377,
+        "sourceStartMs": 2411540,
+        "sourceEndMs": 2411680,
+        "text": "0",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 378,
+        "sourceStartMs": 2411680,
+        "sourceEndMs": 2411820,
+        "text": ".",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 379,
+        "sourceStartMs": 2411820,
+        "sourceEndMs": 2411921,
+        "text": "5",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 380,
+        "sourceStartMs": 2411921,
+        "sourceEndMs": 2411961,
+        "text": "円",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 381,
+        "sourceStartMs": 2411961,
+        "sourceEndMs": 2412021,
+        "text": "に",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 382,
+        "sourceStartMs": 2412021,
+        "sourceEndMs": 2412081,
+        "text": "な",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 383,
+        "sourceStartMs": 2412081,
+        "sourceEndMs": 2412141,
+        "text": "り",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 384,
+        "sourceStartMs": 2412141,
+        "sourceEndMs": 2412241,
+        "text": "ま",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 385,
+        "sourceStartMs": 2412241,
+        "sourceEndMs": 2412281,
+        "text": "す",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 386,
+        "sourceStartMs": 2412281,
+        "sourceEndMs": 2412381,
+        "text": "と",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 387,
+        "sourceStartMs": 2412381,
+        "sourceEndMs": 2412441,
+        "text": "か",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 388,
+        "sourceStartMs": 2412441,
+        "sourceEndMs": 2412541,
+        "text": "だ",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 389,
+        "sourceStartMs": 2412541,
+        "sourceEndMs": 2412581,
+        "text": "っ",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 390,
+        "sourceStartMs": 2412581,
+        "sourceEndMs": 2412641,
+        "text": "た",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 391,
+        "sourceStartMs": 2412641,
+        "sourceEndMs": 2412721,
+        "text": "ら",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 392,
+        "sourceStartMs": 2412721,
+        "sourceEndMs": 2413402,
+        "text": "さ",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 393,
+        "sourceStartMs": 2413402,
+        "sourceEndMs": 2413442,
+        "text": "じ",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 394,
+        "sourceStartMs": 2413442,
+        "sourceEndMs": 2413502,
+        "text": "ゃ",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 395,
+        "sourceStartMs": 2413502,
+        "sourceEndMs": 2413582,
+        "text": "な",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 396,
+        "sourceStartMs": 2413582,
+        "sourceEndMs": 2413682,
+        "text": "い",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 397,
+        "sourceStartMs": 2413682,
+        "sourceEndMs": 2413702,
+        "text": "じ",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 398,
+        "sourceStartMs": 2413702,
+        "sourceEndMs": 2413722,
+        "text": "ゃ",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 399,
+        "sourceStartMs": 2413722,
+        "sourceEndMs": 2414363,
+        "text": "ん",
+        "speaker": "unknown",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 400,
+        "sourceStartMs": 2414363,
+        "sourceEndMs": 2414403,
+        "text": "じ",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 401,
+        "sourceStartMs": 2414403,
+        "sourceEndMs": 2414463,
+        "text": "ゃ",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 402,
+        "sourceStartMs": 2414463,
+        "sourceEndMs": 2414543,
+        "text": "な",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 403,
+        "sourceStartMs": 2414543,
+        "sourceEndMs": 2414623,
+        "text": "い",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 404,
+        "sourceStartMs": 2414623,
+        "sourceEndMs": 2414703,
+        "text": "の",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 405,
+        "sourceStartMs": 2414703,
+        "sourceEndMs": 2414723,
+        "text": "よ",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 406,
+        "sourceStartMs": 2414723,
+        "sourceEndMs": 2416504,
+        "text": "ま",
+        "speaker": "unknown",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 407,
+        "sourceStartMs": 2416504,
+        "sourceEndMs": 2416604,
+        "text": "あ",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 408,
+        "sourceStartMs": 2416604,
+        "sourceEndMs": 2416684,
+        "text": "な",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 409,
+        "sourceStartMs": 2416684,
+        "sourceEndMs": 2416744,
+        "text": "ん",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 410,
+        "sourceStartMs": 2416744,
+        "sourceEndMs": 2417165,
+        "text": "か",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 411,
+        "sourceStartMs": 2417165,
+        "sourceEndMs": 2417285,
+        "text": "日",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 412,
+        "sourceStartMs": 2417285,
+        "sourceEndMs": 2417445,
+        "text": "本",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 413,
+        "sourceStartMs": 2417445,
+        "sourceEndMs": 2417545,
+        "text": "の",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 414,
+        "sourceStartMs": 2417545,
+        "sourceEndMs": 2417625,
+        "text": "サ",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 415,
+        "sourceStartMs": 2417625,
+        "sourceEndMs": 2417685,
+        "text": "イ",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 416,
+        "sourceStartMs": 2417685,
+        "sourceEndMs": 2417765,
+        "text": "ト",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 417,
+        "sourceStartMs": 2417765,
+        "sourceEndMs": 2417825,
+        "text": "と",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 418,
+        "sourceStartMs": 2417825,
+        "sourceEndMs": 2417905,
+        "text": "か",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 419,
+        "sourceStartMs": 2417905,
+        "sourceEndMs": 2417965,
+        "text": "は",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 420,
+        "sourceStartMs": 2417965,
+        "sourceEndMs": 2418045,
+        "text": "そ",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 421,
+        "sourceStartMs": 2418045,
+        "sourceEndMs": 2418065,
+        "text": "う",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 422,
+        "sourceStartMs": 2418065,
+        "sourceEndMs": 2418085,
+        "text": "い",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 423,
+        "sourceStartMs": 2418085,
+        "sourceEndMs": 2418106,
+        "text": "う",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 424,
+        "sourceStartMs": 2418106,
+        "sourceEndMs": 2418186,
+        "text": "こ",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 425,
+        "sourceStartMs": 2418186,
+        "sourceEndMs": 2418266,
+        "text": "と",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 426,
+        "sourceStartMs": 2418266,
+        "sourceEndMs": 2418366,
+        "text": "す",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 427,
+        "sourceStartMs": 2418366,
+        "sourceEndMs": 2418506,
+        "text": "る",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 428,
+        "sourceStartMs": 2418506,
+        "sourceEndMs": 2418586,
+        "text": "と",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 429,
+        "sourceStartMs": 2418586,
+        "sourceEndMs": 2418666,
+        "text": "こ",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 430,
+        "sourceStartMs": 2418666,
+        "sourceEndMs": 2418726,
+        "text": "ろ",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 431,
+        "sourceStartMs": 2418726,
+        "sourceEndMs": 2418786,
+        "text": "あ",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 432,
+        "sourceStartMs": 2418786,
+        "sourceEndMs": 2418866,
+        "text": "り",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 433,
+        "sourceStartMs": 2418866,
+        "sourceEndMs": 2418926,
+        "text": "そ",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 434,
+        "sourceStartMs": 2418926,
+        "sourceEndMs": 2418946,
+        "text": "う",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 435,
+        "sourceStartMs": 2418946,
+        "sourceEndMs": 2418966,
+        "text": "だ",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 436,
+        "sourceStartMs": 2418966,
+        "sourceEndMs": 2418986,
+        "text": "け",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 437,
+        "sourceStartMs": 2418986,
+        "sourceEndMs": 2419006,
+        "text": "ど",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 438,
+        "sourceStartMs": 2419006,
+        "sourceEndMs": 2419026,
+        "text": "Y",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 439,
+        "sourceStartMs": 2419026,
+        "sourceEndMs": 2419126,
+        "text": "o",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 440,
+        "sourceStartMs": 2419126,
+        "sourceEndMs": 2419186,
+        "text": "u",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 441,
+        "sourceStartMs": 2419186,
+        "sourceEndMs": 2419246,
+        "text": "T",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 442,
+        "sourceStartMs": 2419246,
+        "sourceEndMs": 2421048,
+        "text": "u",
+        "speaker": "unknown",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 443,
+        "sourceStartMs": 2421048,
+        "sourceEndMs": 2421228,
+        "text": "b",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 444,
+        "sourceStartMs": 2421228,
+        "sourceEndMs": 2421348,
+        "text": "e",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 445,
+        "sourceStartMs": 2421348,
+        "sourceEndMs": 2421488,
+        "text": "は",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 446,
+        "sourceStartMs": 2421488,
+        "sourceEndMs": 2421548,
+        "text": "そ",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 447,
+        "sourceStartMs": 2421548,
+        "sourceEndMs": 2421588,
+        "text": "う",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 448,
+        "sourceStartMs": 2421588,
+        "sourceEndMs": 2421648,
+        "text": "い",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 449,
+        "sourceStartMs": 2421648,
+        "sourceEndMs": 2421668,
+        "text": "う",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 450,
+        "sourceStartMs": 2421668,
+        "sourceEndMs": 2421748,
+        "text": "仕",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 451,
+        "sourceStartMs": 2421748,
+        "sourceEndMs": 2421829,
+        "text": "様",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 452,
+        "sourceStartMs": 2421829,
+        "sourceEndMs": 2421869,
+        "text": "じ",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 453,
+        "sourceStartMs": 2421869,
+        "sourceEndMs": 2421909,
+        "text": "ゃ",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 454,
+        "sourceStartMs": 2421909,
+        "sourceEndMs": 2421989,
+        "text": "な",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 455,
+        "sourceStartMs": 2421989,
+        "sourceEndMs": 2422069,
+        "text": "い",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 456,
+        "sourceStartMs": 2422069,
+        "sourceEndMs": 2422149,
+        "text": "か",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 457,
+        "sourceStartMs": 2422149,
+        "sourceEndMs": 2422849,
+        "text": "ら",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 458,
+        "sourceStartMs": 2422849,
+        "sourceEndMs": 2422929,
+        "text": "別",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 459,
+        "sourceStartMs": 2422929,
+        "sourceEndMs": 2423049,
+        "text": "に",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 460,
+        "sourceStartMs": 2423049,
+        "sourceEndMs": 2423110,
+        "text": "1",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 461,
+        "sourceStartMs": 2423110,
+        "sourceEndMs": 2423130,
+        "text": "0",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 462,
+        "sourceStartMs": 2423130,
+        "sourceEndMs": 2423270,
+        "text": "0",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 463,
+        "sourceStartMs": 2423270,
+        "sourceEndMs": 2423290,
+        "text": "人",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 464,
+        "sourceStartMs": 2425558,
+        "sourceEndMs": 2425718,
+        "text": "再",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 465,
+        "sourceStartMs": 2425718,
+        "sourceEndMs": 2425878,
+        "text": "生",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 466,
+        "sourceStartMs": 2425878,
+        "sourceEndMs": 2426018,
+        "text": "数",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 467,
+        "sourceStartMs": 2426018,
+        "sourceEndMs": 2426158,
+        "text": "が",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 468,
+        "sourceStartMs": 2426158,
+        "sourceEndMs": 2426919,
+        "text": "1",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 469,
+        "sourceStartMs": 2426919,
+        "sourceEndMs": 2426999,
+        "text": "0",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 470,
+        "sourceStartMs": 2426999,
+        "sourceEndMs": 2427119,
+        "text": "0",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 471,
+        "sourceStartMs": 2427119,
+        "sourceEndMs": 2427259,
+        "text": "の",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 472,
+        "sourceStartMs": 2427259,
+        "sourceEndMs": 2427439,
+        "text": "動",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 473,
+        "sourceStartMs": 2427439,
+        "sourceEndMs": 2427559,
+        "text": "画",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 474,
+        "sourceStartMs": 2427559,
+        "sourceEndMs": 2427780,
+        "text": "も",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 475,
+        "sourceStartMs": 2427780,
+        "sourceEndMs": 2427900,
+        "text": "再",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 476,
+        "sourceStartMs": 2427900,
+        "sourceEndMs": 2428020,
+        "text": "生",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 477,
+        "sourceStartMs": 2428020,
+        "sourceEndMs": 2428160,
+        "text": "数",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 478,
+        "sourceStartMs": 2428160,
+        "sourceEndMs": 2428960,
+        "text": "が",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 479,
+        "sourceStartMs": 2428960,
+        "sourceEndMs": 2429060,
+        "text": "多",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 480,
+        "sourceStartMs": 2429060,
+        "sourceEndMs": 2429120,
+        "text": "分",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 481,
+        "sourceStartMs": 2429120,
+        "sourceEndMs": 2429241,
+        "text": "1",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 482,
+        "sourceStartMs": 2429241,
+        "sourceEndMs": 2429301,
+        "text": "0",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 483,
+        "sourceStartMs": 2429301,
+        "sourceEndMs": 2429321,
+        "text": "0",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 484,
+        "sourceStartMs": 2429321,
+        "sourceEndMs": 2429381,
+        "text": "0",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 485,
+        "sourceStartMs": 2429381,
+        "sourceEndMs": 2429501,
+        "text": "万",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 486,
+        "sourceStartMs": 2429501,
+        "sourceEndMs": 2429561,
+        "text": "の",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 487,
+        "sourceStartMs": 2429561,
+        "sourceEndMs": 2429701,
+        "text": "動",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 488,
+        "sourceStartMs": 2429701,
+        "sourceEndMs": 2429821,
+        "text": "画",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 489,
+        "sourceStartMs": 2429821,
+        "sourceEndMs": 2430581,
+        "text": "も",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 490,
+        "sourceStartMs": 2430581,
+        "sourceEndMs": 2430682,
+        "text": "そ",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 491,
+        "sourceStartMs": 2430682,
+        "sourceEndMs": 2430782,
+        "text": "れ",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 492,
+        "sourceStartMs": 2430782,
+        "sourceEndMs": 2431262,
+        "text": "で",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 493,
+        "sourceStartMs": 2431262,
+        "sourceEndMs": 2431342,
+        "text": "そ",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 494,
+        "sourceStartMs": 2431342,
+        "sourceEndMs": 2431422,
+        "text": "の",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 495,
+        "sourceStartMs": 2431422,
+        "sourceEndMs": 2431682,
+        "text": "再",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 496,
+        "sourceStartMs": 2431682,
+        "sourceEndMs": 2431862,
+        "text": "生",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 497,
+        "sourceStartMs": 2431862,
+        "sourceEndMs": 2431982,
+        "text": "数",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 498,
+        "sourceStartMs": 2431982,
+        "sourceEndMs": 2432163,
+        "text": "で",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 499,
+        "sourceStartMs": 2432163,
+        "sourceEndMs": 2432383,
+        "text": "国",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 500,
+        "sourceStartMs": 2432383,
+        "sourceEndMs": 2432623,
+        "text": "収",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 501,
+        "sourceStartMs": 2432623,
+        "sourceEndMs": 2432803,
+        "text": "益",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 502,
+        "sourceStartMs": 2432803,
+        "sourceEndMs": 2432923,
+        "text": "の",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 503,
+        "sourceStartMs": 2432923,
+        "sourceEndMs": 2433063,
+        "text": "単",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 504,
+        "sourceStartMs": 2433063,
+        "sourceEndMs": 2433143,
+        "text": "価",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 505,
+        "sourceStartMs": 2433143,
+        "sourceEndMs": 2433223,
+        "text": "は",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 506,
+        "sourceStartMs": 2433223,
+        "sourceEndMs": 2433343,
+        "text": "変",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 507,
+        "sourceStartMs": 2433343,
+        "sourceEndMs": 2433403,
+        "text": "わ",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 508,
+        "sourceStartMs": 2433403,
+        "sourceEndMs": 2433443,
+        "text": "ん",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 509,
+        "sourceStartMs": 2433443,
+        "sourceEndMs": 2433523,
+        "text": "な",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 510,
+        "sourceStartMs": 2433523,
+        "sourceEndMs": 2433604,
+        "text": "い",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 511,
+        "sourceStartMs": 2433604,
+        "sourceEndMs": 2433704,
+        "text": "か",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 512,
+        "sourceStartMs": 2433704,
+        "sourceEndMs": 2435445,
+        "text": "ら",
+        "speaker": "unknown",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 513,
+        "sourceStartMs": 2435445,
+        "sourceEndMs": 2435525,
+        "text": "そ",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 514,
+        "sourceStartMs": 2435525,
+        "sourceEndMs": 2435625,
+        "text": "れ",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 515,
+        "sourceStartMs": 2435625,
+        "sourceEndMs": 2435725,
+        "text": "が",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 516,
+        "sourceStartMs": 2435725,
+        "sourceEndMs": 2435865,
+        "text": "す",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 517,
+        "sourceStartMs": 2435865,
+        "sourceEndMs": 2435945,
+        "text": "ご",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 518,
+        "sourceStartMs": 2435945,
+        "sourceEndMs": 2435985,
+        "text": "い",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 519,
+        "sourceStartMs": 2435985,
+        "sourceEndMs": 2436085,
+        "text": "よ",
+        "speaker": "SPEAKER_00",
+        "isThemeCandidate": true
+      },
+      {
+        "speechId": 520,
+        "sourceStartMs": 2436085,
+        "sourceEndMs": 2440868,
+        "text": "ね",
+        "speaker": "unknown",
+        "isThemeCandidate": true
+      }
+    ]
+  },
+  "outputContract": {
+    "format": "json_only",
+    "schema": {
+      "selectedCuts": [
+        {
+          "sourceStartMs": "number",
+          "sourceEndMs": "number",
+          "reason": "string",
+          "usedSpeechIds": [
+            "number"
+          ]
+        }
+      ]
+    }
+  }
+}
+```
