@@ -1,0 +1,69 @@
+{
+  "kind": "clip_composition_fixed30_alignment_archive",
+  "runAt": "2026-07-06T00:45:18.316Z",
+  "reason": "固定30秒幅方式の結果を削除せず、新しいカット点ベース再照合との比較用に保存する。",
+  "oldAlignmentPath": "evals/clip_composition/outputs/alignment-r_ztjHaHmcg_local_stt_300s_v001.json",
+  "oldDecisionPath": "evals/clip_composition/outputs/multicut-human-decision-r_ztjHaHmcg_multicut_review_v001-20260705-needs-cutpoint-v001.json",
+  "rows": [
+    {
+      "chunkIndex": 0,
+      "clipStartMs": 2555,
+      "clipEndMs": 32555,
+      "sourceStartMs": 2174596,
+      "sourceEndMs": 2224510,
+      "clipCoverage": 0.9137931034482759,
+      "sourceCoverage": 0.9137931034482759,
+      "linearContinuityRatio": 0.2985,
+      "longestLinearRunDurationMs": 8955,
+      "segmentDurationMs": 30000,
+      "nonLinearDurationMs": 21045,
+      "humanStatus": "uncertain",
+      "humanNote": "最初は一致したが、チャンク全体を連続した同一元区間としては固定しない。"
+    },
+    {
+      "chunkIndex": 1,
+      "clipStartMs": 32555,
+      "clipEndMs": 62555,
+      "sourceStartMs": 2281066,
+      "sourceEndMs": 2339669,
+      "clipCoverage": 0.6071428571428571,
+      "sourceCoverage": 0.6071428571428571,
+      "linearContinuityRatio": 0.183667,
+      "longestLinearRunDurationMs": 5510,
+      "segmentDurationMs": 30000,
+      "nonLinearDurationMs": 24490,
+      "humanStatus": "uncertain",
+      "humanNote": "途中から一致した。固定幅チャンクの途中に未検出の繋ぎ目がある可能性がある。"
+    },
+    {
+      "chunkIndex": 2,
+      "clipStartMs": 62555,
+      "clipEndMs": 92555,
+      "sourceStartMs": 2341290,
+      "sourceEndMs": 2405816,
+      "clipCoverage": 0.8736842105263158,
+      "sourceCoverage": 0.8736842105263158,
+      "linearContinuityRatio": 0.4485,
+      "longestLinearRunDurationMs": 13455,
+      "segmentDurationMs": 30000,
+      "nonLinearDurationMs": 16545,
+      "humanStatus": "uncertain",
+      "humanNote": "途中から一致した。固定幅チャンクの途中に未検出の繋ぎ目がある可能性がある。"
+    },
+    {
+      "chunkIndex": 3,
+      "clipStartMs": 92555,
+      "clipEndMs": 121147,
+      "sourceStartMs": 2404635,
+      "sourceEndMs": 2435445,
+      "clipCoverage": 0.9553072625698324,
+      "sourceCoverage": 0.9553072625698324,
+      "linearContinuityRatio": 0.290676,
+      "longestLinearRunDurationMs": 8311,
+      "segmentDurationMs": 28592,
+      "nonLinearDurationMs": 20281,
+      "humanStatus": "confirmed",
+      "humanNote": "完全一致。ただし切り抜き全体のexpectedを作るには、前段チャンクの未検出カット点を再照合する必要がある。"
+    }
+  ]
+}

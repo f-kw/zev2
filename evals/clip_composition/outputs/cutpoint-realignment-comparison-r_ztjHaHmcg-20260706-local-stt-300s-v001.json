@@ -1,0 +1,587 @@
+{
+  "kind": "clip_composition_cutpoint_realignment_comparison",
+  "runAt": "2026-07-06T00:47:29.660Z",
+  "oldResultPath": "evals/clip_composition/outputs/cutpoint-realignment-r_ztjHaHmcg-20260706-cutpoint-v001.json",
+  "newResultPath": "evals/clip_composition/outputs/cutpoint-realignment-r_ztjHaHmcg-20260706-local-stt-300s-v001.json",
+  "oldSourceId": "r_ztjHaHmcg_-DwSCDMCWDQ_youtube_auto",
+  "newSourceId": "r_ztjHaHmcg_-DwSCDMCWDQ_local300_v001",
+  "readyForFreeze": false,
+  "freezeStatus": "hold_until_human_review",
+  "confirmedPair": {
+    "clipStartMs": 92555,
+    "clipEndMs": 121147,
+    "sourceStartMs": 2404730,
+    "sourceEndMs": 2433322,
+    "toleranceMs": 500
+  },
+  "oldConfirmed": {
+    "directInheritedCount": 0,
+    "overlappingSegments": [
+      {
+        "segmentIndex": 11,
+        "clipStartMs": 87233,
+        "clipEndMs": 97000,
+        "sourceStartMs": 2383430,
+        "sourceEndMs": 2411939,
+        "linearContinuity": 0.975223,
+        "matchedWordPairCount": 56
+      },
+      {
+        "segmentIndex": 12,
+        "clipStartMs": 97000,
+        "clipEndMs": 101100,
+        "sourceStartMs": 2407649,
+        "sourceEndMs": 2416270,
+        "linearContinuity": 0.970488,
+        "matchedWordPairCount": 30
+      },
+      {
+        "segmentIndex": 13,
+        "clipStartMs": 101100,
+        "clipEndMs": 105390,
+        "sourceStartMs": 2411939,
+        "sourceEndMs": 2420730,
+        "linearContinuity": 1,
+        "matchedWordPairCount": 23
+      },
+      {
+        "segmentIndex": 14,
+        "clipStartMs": 105390,
+        "clipEndMs": 109120,
+        "sourceStartMs": 2416270,
+        "sourceEndMs": 2422800,
+        "linearContinuity": 0.449866,
+        "matchedWordPairCount": 21
+      },
+      {
+        "segmentIndex": 15,
+        "clipStartMs": 109120,
+        "clipEndMs": 116470,
+        "sourceStartMs": 2420730,
+        "sourceEndMs": 2435279,
+        "linearContinuity": 0.86381,
+        "matchedWordPairCount": 33
+      },
+      {
+        "segmentIndex": 16,
+        "clipStartMs": 116470,
+        "clipEndMs": 121147,
+        "sourceStartMs": 2427789,
+        "sourceEndMs": 2438059,
+        "linearContinuity": 1,
+        "matchedWordPairCount": 24
+      }
+    ],
+    "connectedComparison": {
+      "clipStartDeltaMs": -5322,
+      "clipEndDeltaMs": 0,
+      "sourceStartDeltaMs": -21300,
+      "sourceEndDeltaMs": 4737
+    }
+  },
+  "newConfirmed": {
+    "directInheritedCount": 0,
+    "overlappingSegments": [
+      {
+        "segmentIndex": 11,
+        "clipStartMs": 87233,
+        "clipEndMs": 97000,
+        "sourceStartMs": 2384963,
+        "sourceEndMs": 2409298,
+        "linearContinuity": 0.975223,
+        "matchedWordPairCount": 59
+      },
+      {
+        "segmentIndex": 12,
+        "clipStartMs": 97000,
+        "clipEndMs": 101100,
+        "sourceStartMs": 2408618,
+        "sourceEndMs": 2413402,
+        "linearContinuity": 0.765366,
+        "matchedWordPairCount": 34
+      },
+      {
+        "segmentIndex": 13,
+        "clipStartMs": 101100,
+        "clipEndMs": 105390,
+        "sourceStartMs": 2412721,
+        "sourceEndMs": 2417625,
+        "linearContinuity": 0.737995,
+        "matchedWordPairCount": 23
+      },
+      {
+        "segmentIndex": 14,
+        "clipStartMs": 105390,
+        "clipEndMs": 109120,
+        "sourceStartMs": 2417545,
+        "sourceEndMs": 2421348,
+        "linearContinuity": 0.449866,
+        "matchedWordPairCount": 31
+      },
+      {
+        "segmentIndex": 15,
+        "clipStartMs": 109120,
+        "clipEndMs": 116470,
+        "sourceStartMs": 2421228,
+        "sourceEndMs": 2429701,
+        "linearContinuity": 0.381497,
+        "matchedWordPairCount": 38
+      },
+      {
+        "segmentIndex": 16,
+        "clipStartMs": 116470,
+        "clipEndMs": 121147,
+        "sourceStartMs": 2431422,
+        "sourceEndMs": 2440868,
+        "linearContinuity": 1,
+        "matchedWordPairCount": 26
+      }
+    ],
+    "connectedComparison": {
+      "clipStartDeltaMs": -5322,
+      "clipEndDeltaMs": 0,
+      "sourceStartDeltaMs": -19767,
+      "sourceEndDeltaMs": 7546
+    }
+  },
+  "rows": [
+    {
+      "segmentIndex": 1,
+      "clipRange": {
+        "startMs": 2555,
+        "endMs": 13040
+      },
+      "oldSourceRange": {
+        "startMs": 2170770,
+        "endMs": 2196590
+      },
+      "newSourceRange": {
+        "startMs": 2174596,
+        "endMs": 2194118
+      },
+      "sourceShiftMs": {
+        "start": 3826,
+        "end": -2472
+      },
+      "oldTextCoverage": 0.7101449275362319,
+      "newTextCoverage": 0.855072463768116,
+      "oldLinearContinuity": 0.866571,
+      "newLinearContinuity": 0.242442,
+      "oldMatchedWordPairCount": 49,
+      "newMatchedWordPairCount": 59,
+      "oldInheritance": "requires_review",
+      "newInheritance": "requires_review"
+    },
+    {
+      "segmentIndex": 2,
+      "clipRange": {
+        "startMs": 13040,
+        "endMs": 19367
+      },
+      "oldSourceRange": {
+        "startMs": 2193000,
+        "endMs": 2213050
+      },
+      "newSourceRange": {
+        "startMs": 2193738,
+        "endMs": 2211736
+      },
+      "sourceShiftMs": {
+        "start": 738,
+        "end": -1314
+      },
+      "oldTextCoverage": 0.6428571428571429,
+      "newTextCoverage": 0.8571428571428571,
+      "oldLinearContinuity": 0.686581,
+      "newLinearContinuity": 0.319583,
+      "oldMatchedWordPairCount": 18,
+      "newMatchedWordPairCount": 24,
+      "oldInheritance": "requires_review",
+      "newInheritance": "requires_review"
+    },
+    {
+      "segmentIndex": 3,
+      "clipRange": {
+        "startMs": 19367,
+        "endMs": 53370
+      },
+      "oldSourceRange": {
+        "startMs": 2207910,
+        "endMs": 2264220
+      },
+      "newSourceRange": {
+        "startMs": 2208532,
+        "endMs": 2258575
+      },
+      "sourceShiftMs": {
+        "start": 622,
+        "end": -5645
+      },
+      "oldTextCoverage": 0.6802325581395349,
+      "newTextCoverage": 0.8313953488372093,
+      "oldLinearContinuity": 0.479517,
+      "newLinearContinuity": 0.263359,
+      "oldMatchedWordPairCount": 117,
+      "newMatchedWordPairCount": 143,
+      "oldInheritance": "requires_review",
+      "newInheritance": "requires_review"
+    },
+    {
+      "segmentIndex": 4,
+      "clipRange": {
+        "startMs": 53370,
+        "endMs": 59680
+      },
+      "oldSourceRange": {
+        "startMs": 2313490,
+        "endMs": 2339369
+      },
+      "newSourceRange": {
+        "startMs": 2315887,
+        "endMs": 2336728
+      },
+      "sourceShiftMs": {
+        "start": 2397,
+        "end": -2641
+      },
+      "oldTextCoverage": 0.8055555555555556,
+      "newTextCoverage": 0.8333333333333334,
+      "oldLinearContinuity": 0.570998,
+      "newLinearContinuity": 0.595246,
+      "oldMatchedWordPairCount": 29,
+      "newMatchedWordPairCount": 30,
+      "oldInheritance": "requires_review",
+      "newInheritance": "requires_review"
+    },
+    {
+      "segmentIndex": 5,
+      "clipRange": {
+        "startMs": 59680,
+        "endMs": 64100
+      },
+      "oldSourceRange": {
+        "startMs": 2334160,
+        "endMs": 2342670
+      },
+      "newSourceRange": {
+        "startMs": 2336468,
+        "endMs": 2340910
+      },
+      "sourceShiftMs": {
+        "start": 2308,
+        "end": -1760
+      },
+      "oldTextCoverage": 0.88,
+      "newTextCoverage": 0.92,
+      "oldLinearContinuity": 0.970814,
+      "newLinearContinuity": 1,
+      "oldMatchedWordPairCount": 22,
+      "newMatchedWordPairCount": 23,
+      "oldInheritance": "requires_review",
+      "newInheritance": "requires_review"
+    },
+    {
+      "segmentIndex": 6,
+      "clipRange": {
+        "startMs": 64100,
+        "endMs": 66540
+      },
+      "oldSourceRange": {
+        "startMs": 2339369,
+        "endMs": 2345809
+      },
+      "newSourceRange": {
+        "startMs": 2340850,
+        "endMs": 2343230
+      },
+      "sourceShiftMs": {
+        "start": 1481,
+        "end": -2579
+      },
+      "oldTextCoverage": 0.8421052631578947,
+      "newTextCoverage": 0.8947368421052632,
+      "oldLinearContinuity": 1,
+      "newLinearContinuity": 0.956148,
+      "oldMatchedWordPairCount": 16,
+      "newMatchedWordPairCount": 17,
+      "oldInheritance": "requires_review",
+      "newInheritance": "requires_review"
+    },
+    {
+      "segmentIndex": 7,
+      "clipRange": {
+        "startMs": 66540,
+        "endMs": 68910
+      },
+      "oldSourceRange": {
+        "startMs": 2342670,
+        "endMs": 2350289
+      },
+      "newSourceRange": {
+        "startMs": 2343230,
+        "endMs": 2347532
+      },
+      "sourceShiftMs": {
+        "start": 560,
+        "end": -2757
+      },
+      "oldTextCoverage": 0.7333333333333333,
+      "newTextCoverage": 1,
+      "oldLinearContinuity": 0.7827,
+      "newLinearContinuity": 0.613924,
+      "oldMatchedWordPairCount": 11,
+      "newMatchedWordPairCount": 15,
+      "oldInheritance": "requires_review",
+      "newInheritance": "requires_review"
+    },
+    {
+      "segmentIndex": 8,
+      "clipRange": {
+        "startMs": 68910,
+        "endMs": 75233
+      },
+      "oldSourceRange": {
+        "startMs": 2347710,
+        "endMs": 2375900
+      },
+      "newSourceRange": {
+        "startMs": 2351013,
+        "endMs": 2373874
+      },
+      "sourceShiftMs": {
+        "start": 3303,
+        "end": -2026
+      },
+      "oldTextCoverage": 0.6538461538461539,
+      "newTextCoverage": 0.7115384615384616,
+      "oldLinearContinuity": 0.5034,
+      "newLinearContinuity": 0.638146,
+      "oldMatchedWordPairCount": 34,
+      "newMatchedWordPairCount": 37,
+      "oldInheritance": "requires_review",
+      "newInheritance": "requires_review"
+    },
+    {
+      "segmentIndex": 9,
+      "clipRange": {
+        "startMs": 75233,
+        "endMs": 84960
+      },
+      "oldSourceRange": {
+        "startMs": 2373760,
+        "endMs": 2386780
+      },
+      "newSourceRange": {
+        "startMs": 2373814,
+        "endMs": 2383662
+      },
+      "sourceShiftMs": {
+        "start": 54,
+        "end": -3118
+      },
+      "oldTextCoverage": 0.8301886792452831,
+      "newTextCoverage": 0.9811320754716981,
+      "oldLinearContinuity": 0.993009,
+      "newLinearContinuity": 0.968438,
+      "oldMatchedWordPairCount": 44,
+      "newMatchedWordPairCount": 52,
+      "oldInheritance": "requires_review",
+      "newInheritance": "requires_review"
+    },
+    {
+      "segmentIndex": 10,
+      "clipRange": {
+        "startMs": 84960,
+        "endMs": 87233
+      },
+      "oldSourceRange": {
+        "startMs": 2383430,
+        "endMs": 2386780
+      },
+      "newSourceRange": {
+        "startMs": 2383562,
+        "endMs": 2384983
+      },
+      "sourceShiftMs": {
+        "start": 132,
+        "end": -1797
+      },
+      "oldTextCoverage": 1,
+      "newTextCoverage": 1,
+      "oldLinearContinuity": 1,
+      "newLinearContinuity": 0.606687,
+      "oldMatchedWordPairCount": 9,
+      "newMatchedWordPairCount": 9,
+      "oldInheritance": "requires_review",
+      "newInheritance": "requires_review"
+    },
+    {
+      "segmentIndex": 11,
+      "clipRange": {
+        "startMs": 87233,
+        "endMs": 97000
+      },
+      "oldSourceRange": {
+        "startMs": 2383430,
+        "endMs": 2411939
+      },
+      "newSourceRange": {
+        "startMs": 2384963,
+        "endMs": 2409298
+      },
+      "sourceShiftMs": {
+        "start": 1533,
+        "end": -2641
+      },
+      "oldTextCoverage": 0.9491525423728814,
+      "newTextCoverage": 1,
+      "oldLinearContinuity": 0.975223,
+      "newLinearContinuity": 0.975223,
+      "oldMatchedWordPairCount": 56,
+      "newMatchedWordPairCount": 59,
+      "oldInheritance": "requires_review",
+      "newInheritance": "requires_review"
+    },
+    {
+      "segmentIndex": 12,
+      "clipRange": {
+        "startMs": 97000,
+        "endMs": 101100
+      },
+      "oldSourceRange": {
+        "startMs": 2407649,
+        "endMs": 2416270
+      },
+      "newSourceRange": {
+        "startMs": 2408618,
+        "endMs": 2413402
+      },
+      "sourceShiftMs": {
+        "start": 969,
+        "end": -2868
+      },
+      "oldTextCoverage": 0.8823529411764706,
+      "newTextCoverage": 1,
+      "oldLinearContinuity": 0.970488,
+      "newLinearContinuity": 0.765366,
+      "oldMatchedWordPairCount": 30,
+      "newMatchedWordPairCount": 34,
+      "oldInheritance": "requires_review",
+      "newInheritance": "requires_review"
+    },
+    {
+      "segmentIndex": 13,
+      "clipRange": {
+        "startMs": 101100,
+        "endMs": 105390
+      },
+      "oldSourceRange": {
+        "startMs": 2411939,
+        "endMs": 2420730
+      },
+      "newSourceRange": {
+        "startMs": 2412721,
+        "endMs": 2417625
+      },
+      "sourceShiftMs": {
+        "start": 782,
+        "end": -3105
+      },
+      "oldTextCoverage": 1,
+      "newTextCoverage": 1,
+      "oldLinearContinuity": 1,
+      "newLinearContinuity": 0.737995,
+      "oldMatchedWordPairCount": 23,
+      "newMatchedWordPairCount": 23,
+      "oldInheritance": "requires_review",
+      "newInheritance": "requires_review"
+    },
+    {
+      "segmentIndex": 14,
+      "clipRange": {
+        "startMs": 105390,
+        "endMs": 109120
+      },
+      "oldSourceRange": {
+        "startMs": 2416270,
+        "endMs": 2422800
+      },
+      "newSourceRange": {
+        "startMs": 2417545,
+        "endMs": 2421348
+      },
+      "sourceShiftMs": {
+        "start": 1275,
+        "end": -1452
+      },
+      "oldTextCoverage": 0.6774193548387096,
+      "newTextCoverage": 1,
+      "oldLinearContinuity": 0.449866,
+      "newLinearContinuity": 0.449866,
+      "oldMatchedWordPairCount": 21,
+      "newMatchedWordPairCount": 31,
+      "oldInheritance": "requires_review",
+      "newInheritance": "requires_review"
+    },
+    {
+      "segmentIndex": 15,
+      "clipRange": {
+        "startMs": 109120,
+        "endMs": 116470
+      },
+      "oldSourceRange": {
+        "startMs": 2420730,
+        "endMs": 2435279
+      },
+      "newSourceRange": {
+        "startMs": 2421228,
+        "endMs": 2429701
+      },
+      "sourceShiftMs": {
+        "start": 498,
+        "end": -5578
+      },
+      "oldTextCoverage": 0.75,
+      "newTextCoverage": 0.8636363636363636,
+      "oldLinearContinuity": 0.86381,
+      "newLinearContinuity": 0.381497,
+      "oldMatchedWordPairCount": 33,
+      "newMatchedWordPairCount": 38,
+      "oldInheritance": "requires_review",
+      "newInheritance": "requires_review"
+    },
+    {
+      "segmentIndex": 16,
+      "clipRange": {
+        "startMs": 116470,
+        "endMs": 121147
+      },
+      "oldSourceRange": {
+        "startMs": 2427789,
+        "endMs": 2438059
+      },
+      "newSourceRange": {
+        "startMs": 2431422,
+        "endMs": 2440868
+      },
+      "sourceShiftMs": {
+        "start": 3633,
+        "end": 2809
+      },
+      "oldTextCoverage": 0.9230769230769231,
+      "newTextCoverage": 1,
+      "oldLinearContinuity": 1,
+      "newLinearContinuity": 1,
+      "oldMatchedWordPairCount": 24,
+      "newMatchedWordPairCount": 26,
+      "oldInheritance": "requires_review",
+      "newInheritance": "requires_review"
+    }
+  ],
+  "productionImpact": {
+    "runtimeWrites": false,
+    "fixtureWrites": false,
+    "expectedWrites": false,
+    "productionApiUiQueueDbChanged": false
+  }
+}
