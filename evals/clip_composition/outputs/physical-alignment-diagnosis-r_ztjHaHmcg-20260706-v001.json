@@ -1,0 +1,725 @@
+{
+  "kind": "clip_composition_physical_alignment_diagnosis",
+  "runAt": "2026-07-06T00:13:06.897Z",
+  "realignmentPath": "evals/clip_composition/outputs/cutpoint-realignment-r_ztjHaHmcg-20260706-cutpoint-v001.json",
+  "targetPath": "evals/clip_composition/stt-targets/r_ztjHaHmcg.json",
+  "readyForFreeze": false,
+  "confirmedPair": {
+    "clipStartMs": 92555,
+    "clipEndMs": 121147,
+    "sourceStartMs": 2404730,
+    "sourceEndMs": 2433322,
+    "checkedBy": "kawafmm",
+    "status": "confirmed"
+  },
+  "conclusion": {
+    "label": "どちらも部分的に正: 旧chunk4の物理範囲は大筋同じだが、新seg14は末尾のYouTube相当を次セグメント側へ割っている",
+    "reasons": [
+      "seg14の一致語はclip 1:45.427-1:47.058 までで、Y(1:48.850) 以降が新seg14対応表から落ちる。",
+      "新seg14のsource 40:16.270-40:22.800 と旧基準対応 40:17.565-40:21.295 は同じ発話近辺だが、新seg14はsource側を約1.75倍に伸ばして見ている。",
+      "seg14の整合率45%は、最後に対応した語の終端からseg14終端までの2052ms相当が局所対応から落ちることと、YouTube自動字幕のphrase単位時刻が粗いことが主因。",
+      "静止画では、崩れ前・崩れ直後・末尾の3点とも、切り抜き、旧基準対応、新seg14対応が同じ配信場面近辺を指している。物理的な別場面誤対応ではなく、局所セグメント分割と字幕時刻粒度の問題として扱う。"
+    ]
+  },
+  "seg14": {
+    "segment": {
+      "index": 13,
+      "startMs": 105390,
+      "endMs": 109120,
+      "durationMs": 3730,
+      "boundaryEvidence": [
+        {
+          "timeMs": 109120,
+          "value": 0.094748,
+          "rank": 2,
+          "kind": "audio_discontinuity"
+        }
+      ],
+      "text": "サイトとかはそういうことするところありそうだけどYouTube",
+      "normalizedText": "さいととかはそういうことするところありそうだけどyoutube",
+      "wordCount": 31
+    },
+    "bestMatch": {
+      "sourceId": "r_ztjHaHmcg_-DwSCDMCWDQ_youtube_auto",
+      "sourceStartMs": 2416270,
+      "sourceEndMs": 2422800,
+      "sourceText": "まあなんか日本のサイトだからそういうことするところありそうですけど",
+      "normalizedSourceText": "なんか日本のさいとだからそういうことするところありそうですけど",
+      "matchedChars": 21,
+      "queryChars": 31,
+      "sourceChars": 31,
+      "clipCoverage": 0.6774193548387096,
+      "sourceCoverage": 0.6774193548387096,
+      "timeAxis": {
+        "matchedWordPairCount": 21,
+        "toleranceMs": 4200,
+        "longestLinearRunClipStartMs": 105390,
+        "longestLinearRunClipEndMs": 107068,
+        "longestLinearRunDurationMs": 1678,
+        "segmentDurationMs": 3730,
+        "linearContinuityRatio": 0.449866,
+        "maxDeltaDifferenceMs": 1700,
+        "discontinuityCount": 0
+      }
+    },
+    "oldCorrespondingRange": {
+      "sourceStartMs": 2417565,
+      "sourceEndMs": 2421295
+    },
+    "alignmentRows": [
+      {
+        "index": 1,
+        "clipStartMs": 105387,
+        "clipEndMs": 105467,
+        "clipTimeMs": 105427,
+        "sourceTimeMs": 2418500,
+        "clipToken": "サ",
+        "sourceToken": "さ",
+        "sourcePhrase": "まあなんか日本のサイトだからそういう",
+        "predictedNewSourceMs": 2416335,
+        "residualNewMs": 2165,
+        "predictedOldSourceMs": 2417602,
+        "newMinusOldAtClipMs": -1267
+      },
+      {
+        "index": 2,
+        "clipStartMs": 105467,
+        "clipEndMs": 105507,
+        "clipTimeMs": 105487,
+        "sourceTimeMs": 2418500,
+        "clipToken": "イ",
+        "sourceToken": "い",
+        "sourcePhrase": "まあなんか日本のサイトだからそういう",
+        "predictedNewSourceMs": 2416440,
+        "residualNewMs": 2060,
+        "predictedOldSourceMs": 2417662,
+        "newMinusOldAtClipMs": -1222
+      },
+      {
+        "index": 3,
+        "clipStartMs": 105507,
+        "clipEndMs": 105587,
+        "clipTimeMs": 105547,
+        "sourceTimeMs": 2418500,
+        "clipToken": "ト",
+        "sourceToken": "と",
+        "sourcePhrase": "まあなんか日本のサイトだからそういう",
+        "predictedNewSourceMs": 2416545,
+        "residualNewMs": 1955,
+        "predictedOldSourceMs": 2417722,
+        "newMinusOldAtClipMs": -1177
+      },
+      {
+        "index": 4,
+        "clipStartMs": 105667,
+        "clipEndMs": 105747,
+        "clipTimeMs": 105707,
+        "sourceTimeMs": 2418500,
+        "clipToken": "か",
+        "sourceToken": "か",
+        "sourcePhrase": "まあなんか日本のサイトだからそういう",
+        "predictedNewSourceMs": 2416825,
+        "residualNewMs": 1675,
+        "predictedOldSourceMs": 2417882,
+        "newMinusOldAtClipMs": -1057
+      },
+      {
+        "index": 5,
+        "clipStartMs": 105787,
+        "clipEndMs": 105867,
+        "clipTimeMs": 105827,
+        "sourceTimeMs": 2418500,
+        "clipToken": "そ",
+        "sourceToken": "そ",
+        "sourcePhrase": "まあなんか日本のサイトだからそういう",
+        "predictedNewSourceMs": 2417035,
+        "residualNewMs": 1465,
+        "predictedOldSourceMs": 2418002,
+        "newMinusOldAtClipMs": -967
+      },
+      {
+        "index": 6,
+        "clipStartMs": 105867,
+        "clipEndMs": 105887,
+        "clipTimeMs": 105877,
+        "sourceTimeMs": 2418500,
+        "clipToken": "う",
+        "sourceToken": "う",
+        "sourcePhrase": "まあなんか日本のサイトだからそういう",
+        "predictedNewSourceMs": 2417123,
+        "residualNewMs": 1377,
+        "predictedOldSourceMs": 2418052,
+        "newMinusOldAtClipMs": -929
+      },
+      {
+        "index": 7,
+        "clipStartMs": 105887,
+        "clipEndMs": 105907,
+        "clipTimeMs": 105897,
+        "sourceTimeMs": 2418500,
+        "clipToken": "い",
+        "sourceToken": "い",
+        "sourcePhrase": "まあなんか日本のサイトだからそういう",
+        "predictedNewSourceMs": 2417158,
+        "residualNewMs": 1342,
+        "predictedOldSourceMs": 2418072,
+        "newMinusOldAtClipMs": -914
+      },
+      {
+        "index": 8,
+        "clipStartMs": 105907,
+        "clipEndMs": 105947,
+        "clipTimeMs": 105927,
+        "sourceTimeMs": 2418500,
+        "clipToken": "う",
+        "sourceToken": "う",
+        "sourcePhrase": "まあなんか日本のサイトだからそういう",
+        "predictedNewSourceMs": 2417210,
+        "residualNewMs": 1290,
+        "predictedOldSourceMs": 2418102,
+        "newMinusOldAtClipMs": -892
+      },
+      {
+        "index": 9,
+        "clipStartMs": 105947,
+        "clipEndMs": 106007,
+        "clipTimeMs": 105977,
+        "sourceTimeMs": 2420405,
+        "clipToken": "こ",
+        "sourceToken": "こ",
+        "sourcePhrase": "ことするところありそうですけど",
+        "predictedNewSourceMs": 2417298,
+        "residualNewMs": 3107,
+        "predictedOldSourceMs": 2418152,
+        "newMinusOldAtClipMs": -854
+      },
+      {
+        "index": 10,
+        "clipStartMs": 106007,
+        "clipEndMs": 106107,
+        "clipTimeMs": 106057,
+        "sourceTimeMs": 2420405,
+        "clipToken": "と",
+        "sourceToken": "と",
+        "sourcePhrase": "ことするところありそうですけど",
+        "predictedNewSourceMs": 2417438,
+        "residualNewMs": 2967,
+        "predictedOldSourceMs": 2418232,
+        "newMinusOldAtClipMs": -794
+      },
+      {
+        "index": 11,
+        "clipStartMs": 106107,
+        "clipEndMs": 106187,
+        "clipTimeMs": 106147,
+        "sourceTimeMs": 2420405,
+        "clipToken": "す",
+        "sourceToken": "す",
+        "sourcePhrase": "ことするところありそうですけど",
+        "predictedNewSourceMs": 2417595,
+        "residualNewMs": 2810,
+        "predictedOldSourceMs": 2418322,
+        "newMinusOldAtClipMs": -727
+      },
+      {
+        "index": 12,
+        "clipStartMs": 106187,
+        "clipEndMs": 106327,
+        "clipTimeMs": 106257,
+        "sourceTimeMs": 2420405,
+        "clipToken": "る",
+        "sourceToken": "る",
+        "sourcePhrase": "ことするところありそうですけど",
+        "predictedNewSourceMs": 2417788,
+        "residualNewMs": 2617,
+        "predictedOldSourceMs": 2418432,
+        "newMinusOldAtClipMs": -644
+      },
+      {
+        "index": 13,
+        "clipStartMs": 106327,
+        "clipEndMs": 106427,
+        "clipTimeMs": 106377,
+        "sourceTimeMs": 2420405,
+        "clipToken": "と",
+        "sourceToken": "と",
+        "sourcePhrase": "ことするところありそうですけど",
+        "predictedNewSourceMs": 2417998,
+        "residualNewMs": 2407,
+        "predictedOldSourceMs": 2418552,
+        "newMinusOldAtClipMs": -554
+      },
+      {
+        "index": 14,
+        "clipStartMs": 106427,
+        "clipEndMs": 106487,
+        "clipTimeMs": 106457,
+        "sourceTimeMs": 2420405,
+        "clipToken": "こ",
+        "sourceToken": "こ",
+        "sourcePhrase": "ことするところありそうですけど",
+        "predictedNewSourceMs": 2418138,
+        "residualNewMs": 2267,
+        "predictedOldSourceMs": 2418632,
+        "newMinusOldAtClipMs": -494
+      },
+      {
+        "index": 15,
+        "clipStartMs": 106487,
+        "clipEndMs": 106567,
+        "clipTimeMs": 106527,
+        "sourceTimeMs": 2420405,
+        "clipToken": "ろ",
+        "sourceToken": "ろ",
+        "sourcePhrase": "ことするところありそうですけど",
+        "predictedNewSourceMs": 2418261,
+        "residualNewMs": 2144,
+        "predictedOldSourceMs": 2418702,
+        "newMinusOldAtClipMs": -441
+      },
+      {
+        "index": 16,
+        "clipStartMs": 106567,
+        "clipEndMs": 106607,
+        "clipTimeMs": 106587,
+        "sourceTimeMs": 2420405,
+        "clipToken": "あ",
+        "sourceToken": "あ",
+        "sourcePhrase": "ことするところありそうですけど",
+        "predictedNewSourceMs": 2418366,
+        "residualNewMs": 2039,
+        "predictedOldSourceMs": 2418762,
+        "newMinusOldAtClipMs": -396
+      },
+      {
+        "index": 17,
+        "clipStartMs": 106607,
+        "clipEndMs": 106707,
+        "clipTimeMs": 106657,
+        "sourceTimeMs": 2420405,
+        "clipToken": "り",
+        "sourceToken": "り",
+        "sourcePhrase": "ことするところありそうですけど",
+        "predictedNewSourceMs": 2418488,
+        "residualNewMs": 1917,
+        "predictedOldSourceMs": 2418832,
+        "newMinusOldAtClipMs": -344
+      },
+      {
+        "index": 18,
+        "clipStartMs": 106707,
+        "clipEndMs": 106808,
+        "clipTimeMs": 106758,
+        "sourceTimeMs": 2420405,
+        "clipToken": "そ",
+        "sourceToken": "そ",
+        "sourcePhrase": "ことするところありそうですけど",
+        "predictedNewSourceMs": 2418665,
+        "residualNewMs": 1740,
+        "predictedOldSourceMs": 2418933,
+        "newMinusOldAtClipMs": -268
+      },
+      {
+        "index": 19,
+        "clipStartMs": 106808,
+        "clipEndMs": 106828,
+        "clipTimeMs": 106818,
+        "sourceTimeMs": 2420405,
+        "clipToken": "う",
+        "sourceToken": "う",
+        "sourcePhrase": "ことするところありそうですけど",
+        "predictedNewSourceMs": 2418770,
+        "residualNewMs": 1635,
+        "predictedOldSourceMs": 2418993,
+        "newMinusOldAtClipMs": -223
+      },
+      {
+        "index": 20,
+        "clipStartMs": 106948,
+        "clipEndMs": 107048,
+        "clipTimeMs": 106998,
+        "sourceTimeMs": 2420405,
+        "clipToken": "け",
+        "sourceToken": "け",
+        "sourcePhrase": "ことするところありそうですけど",
+        "predictedNewSourceMs": 2419085,
+        "residualNewMs": 1320,
+        "predictedOldSourceMs": 2419173,
+        "newMinusOldAtClipMs": -88
+      },
+      {
+        "index": 21,
+        "clipStartMs": 107048,
+        "clipEndMs": 107068,
+        "clipTimeMs": 107058,
+        "sourceTimeMs": 2420405,
+        "clipToken": "ど",
+        "sourceToken": "ど",
+        "sourcePhrase": "ことするところありそうですけど",
+        "predictedNewSourceMs": 2419190,
+        "residualNewMs": 1215,
+        "predictedOldSourceMs": 2419233,
+        "newMinusOldAtClipMs": -43
+      }
+    ],
+    "breakdown": {
+      "largestResidualJump": {
+        "from": {
+          "index": 8,
+          "clipStartMs": 105907,
+          "clipEndMs": 105947,
+          "clipTimeMs": 105927,
+          "sourceTimeMs": 2418500,
+          "clipToken": "う",
+          "sourceToken": "う",
+          "sourcePhrase": "まあなんか日本のサイトだからそういう",
+          "predictedNewSourceMs": 2417210,
+          "residualNewMs": 1290,
+          "predictedOldSourceMs": 2418102,
+          "newMinusOldAtClipMs": -892
+        },
+        "to": {
+          "index": 9,
+          "clipStartMs": 105947,
+          "clipEndMs": 106007,
+          "clipTimeMs": 105977,
+          "sourceTimeMs": 2420405,
+          "clipToken": "こ",
+          "sourceToken": "こ",
+          "sourcePhrase": "ことするところありそうですけど",
+          "predictedNewSourceMs": 2417298,
+          "residualNewMs": 3107,
+          "predictedOldSourceMs": 2418152,
+          "newMinusOldAtClipMs": -854
+        },
+        "jumpMs": 1817
+      },
+      "lastMatchedClipTimeMs": 107058,
+      "lastMatchedClipEndMs": 107068,
+      "lastMatchedToken": "ど",
+      "firstUnmatchedAfter": {
+        "text": "Y",
+        "startMs": 108850,
+        "endMs": 108930
+      },
+      "breakClipMs": 108850,
+      "samples": [
+        {
+          "label": "residual_jump_before",
+          "clipMs": 105927
+        },
+        {
+          "label": "residual_jump_after",
+          "clipMs": 105977
+        },
+        {
+          "label": "unmatched_tail_start",
+          "clipMs": 108850
+        },
+        {
+          "label": "near_segment_end",
+          "clipMs": 109020
+        }
+      ]
+    },
+    "stillSamples": [
+      {
+        "label": "residual_jump_before",
+        "clipMs": 105927,
+        "oldSourceMs": 2418102,
+        "newSourceMs": 2417210,
+        "path": "evals/clip_composition/outputs/visual-check/r_ztjHaHmcg/physical-r_ztjHaHmcg-20260706-v001/seg14_residual_jump_before.jpg"
+      },
+      {
+        "label": "residual_jump_after",
+        "clipMs": 105977,
+        "oldSourceMs": 2418152,
+        "newSourceMs": 2417298,
+        "path": "evals/clip_composition/outputs/visual-check/r_ztjHaHmcg/physical-r_ztjHaHmcg-20260706-v001/seg14_residual_jump_after.jpg"
+      },
+      {
+        "label": "unmatched_tail_start",
+        "clipMs": 108850,
+        "oldSourceMs": 2421025,
+        "newSourceMs": 2422327,
+        "path": "evals/clip_composition/outputs/visual-check/r_ztjHaHmcg/physical-r_ztjHaHmcg-20260706-v001/seg14_unmatched_tail_start.jpg"
+      },
+      {
+        "label": "near_segment_end",
+        "clipMs": 109020,
+        "oldSourceMs": 2421195,
+        "newSourceMs": 2422625,
+        "path": "evals/clip_composition/outputs/visual-check/r_ztjHaHmcg/physical-r_ztjHaHmcg-20260706-v001/seg14_near_segment_end.jpg"
+      }
+    ],
+    "visualObservations": [
+      "residual_jump_before と residual_jump_after は3列とも同じ配信画面・同じゲーム場面に見える。",
+      "unmatched_tail_start と near_segment_end では切り抜き字幕が「YouTube...」に入っているが、新seg14の単語対応表ではこの部分が拾えていない。",
+      "新seg14対応の静止画も別場面ではなく同じ場面近辺で、物理的な対応先違いよりも、seg14/seg15境界とYouTube自動字幕phrase時刻の粗さが問題。"
+    ]
+  },
+  "seg11": {
+    "confirmedClipStartMs": 92555,
+    "segment": {
+      "index": 10,
+      "startMs": 87233,
+      "endMs": 97000,
+      "durationMs": 9767,
+      "boundaryEvidence": [
+        {
+          "timeMs": 97000,
+          "value": 2.219,
+          "rank": 6,
+          "kind": "video_scene_change"
+        }
+      ],
+      "text": "らそうあの単純計算だからさマジでだってそうじゃんあのー広告収入が例えば100人に見られてる人は広告収入がじゃあ1円ですと",
+      "normalizedText": "らそうあの単純計算だからさまじでだってそうじゃんあの広告収入が例えば100人に見られてる人は広告収入がじゃあ1円ですと",
+      "wordCount": 60
+    },
+    "bestMatch": {
+      "sourceId": "r_ztjHaHmcg_-DwSCDMCWDQ_youtube_auto",
+      "sourceStartMs": 2383430,
+      "sourceEndMs": 2411939,
+      "sourceText": "タイムの数字だからフォアの単純計算だからさマジでだってそうじゃんあの広告収入が例えば100人に見られてる人は広告収入がじゃあ1年ですと仙人に見られる1000",
+      "normalizedSourceText": "らふぉあの単純計算だからさまじでだってそうじゃんあの広告収入が例えば100人に見られてる人は広告収入がじゃあ1年ですと",
+      "matchedChars": 56,
+      "queryChars": 59,
+      "sourceChars": 59,
+      "clipCoverage": 0.9491525423728814,
+      "sourceCoverage": 0.9491525423728814,
+      "timeAxis": {
+        "matchedWordPairCount": 56,
+        "toleranceMs": 4200,
+        "longestLinearRunClipStartMs": 87475,
+        "longestLinearRunClipEndMs": 97000,
+        "longestLinearRunDurationMs": 9525,
+        "segmentDurationMs": 9767,
+        "linearContinuityRatio": 0.975223,
+        "maxDeltaDifferenceMs": 14759,
+        "discontinuityCount": 1
+      }
+    },
+    "selectedCutpointsNearConfirmedStart": [
+      {
+        "timeMs": 97000,
+        "value": 2.219,
+        "rank": 6,
+        "kind": "video_scene_change"
+      },
+      {
+        "timeMs": 87233,
+        "value": 2.948,
+        "rank": 1,
+        "kind": "video_scene_change"
+      },
+      {
+        "timeMs": 84960,
+        "value": 0.08019,
+        "rank": 7,
+        "kind": "audio_discontinuity"
+      },
+      {
+        "timeMs": 101100,
+        "value": 2.197,
+        "rank": 7,
+        "kind": "video_scene_change"
+      }
+    ],
+    "neighborSelectedCutpoints": [
+      {
+        "timeMs": 97000,
+        "value": 2.219,
+        "rank": 6,
+        "kind": "video_scene_change"
+      },
+      {
+        "timeMs": 87233,
+        "value": 2.948,
+        "rank": 1,
+        "kind": "video_scene_change"
+      },
+      {
+        "timeMs": 84960,
+        "value": 0.08019,
+        "rank": 7,
+        "kind": "audio_discontinuity"
+      },
+      {
+        "timeMs": 101100,
+        "value": 2.197,
+        "rank": 7,
+        "kind": "video_scene_change"
+      }
+    ],
+    "audioCandidatesAround": [
+      {
+        "timeMs": 92550,
+        "value": 0.001629,
+        "rank": 2035,
+        "kind": "audio_discontinuity"
+      },
+      {
+        "timeMs": 92590,
+        "value": 0.003318,
+        "rank": 1707,
+        "kind": "audio_discontinuity"
+      },
+      {
+        "timeMs": 92520,
+        "value": 0.002702,
+        "rank": 1808,
+        "kind": "audio_discontinuity"
+      },
+      {
+        "timeMs": 92620,
+        "value": 0.005477,
+        "rank": 1412,
+        "kind": "audio_discontinuity"
+      },
+      {
+        "timeMs": 92490,
+        "value": 0.004362,
+        "rank": 1553,
+        "kind": "audio_discontinuity"
+      },
+      {
+        "timeMs": 92460,
+        "value": 0.021773,
+        "rank": 455,
+        "kind": "audio_discontinuity"
+      },
+      {
+        "timeMs": 92650,
+        "value": 0.010484,
+        "rank": 959,
+        "kind": "audio_discontinuity"
+      },
+      {
+        "timeMs": 92410,
+        "value": 0.02363,
+        "rank": 416,
+        "kind": "audio_discontinuity"
+      },
+      {
+        "timeMs": 92700,
+        "value": 0.009721,
+        "rank": 1015,
+        "kind": "audio_discontinuity"
+      },
+      {
+        "timeMs": 92390,
+        "value": 0.014148,
+        "rank": 734,
+        "kind": "audio_discontinuity"
+      }
+    ],
+    "videoCandidatesAround": [
+      {
+        "timeMs": 92567,
+        "value": 0.311,
+        "rank": 199,
+        "kind": "video_scene_change"
+      },
+      {
+        "timeMs": 92500,
+        "value": 0.155,
+        "rank": 441,
+        "kind": "video_scene_change"
+      },
+      {
+        "timeMs": 92433,
+        "value": 0.215,
+        "rank": 299,
+        "kind": "video_scene_change"
+      },
+      {
+        "timeMs": 92700,
+        "value": 0.353,
+        "rank": 172,
+        "kind": "video_scene_change"
+      },
+      {
+        "timeMs": 92367,
+        "value": 0.148,
+        "rank": 458,
+        "kind": "video_scene_change"
+      },
+      {
+        "timeMs": 92833,
+        "value": 1.222,
+        "rank": 56,
+        "kind": "video_scene_change"
+      },
+      {
+        "timeMs": 92267,
+        "value": 0.072,
+        "rank": 794,
+        "kind": "video_scene_change"
+      },
+      {
+        "timeMs": 92200,
+        "value": 0.136,
+        "rank": 497,
+        "kind": "video_scene_change"
+      },
+      {
+        "timeMs": 92133,
+        "value": 0.157,
+        "rank": 433,
+        "kind": "video_scene_change"
+      },
+      {
+        "timeMs": 93000,
+        "value": 0.531,
+        "rank": 114,
+        "kind": "video_scene_change"
+      }
+    ],
+    "nearestAudioCandidate": {
+      "timeMs": 92550,
+      "value": 0.001629,
+      "rank": 2035,
+      "kind": "audio_discontinuity"
+    },
+    "nearestVideoCandidate": {
+      "timeMs": 92567,
+      "value": 0.311,
+      "rank": 199,
+      "kind": "video_scene_change"
+    },
+    "bestAudioCandidateAroundConfirmedStart": {
+      "timeMs": 92410,
+      "value": 0.02363,
+      "rank": 416,
+      "kind": "audio_discontinuity"
+    },
+    "bestVideoCandidateAroundConfirmedStart": {
+      "timeMs": 92833,
+      "value": 1.222,
+      "rank": 56,
+      "kind": "video_scene_change"
+    },
+    "maxAudioCutpoints": 12,
+    "maxVideoCutpoints": 8,
+    "minSegmentMs": 1500,
+    "nearestSelectedDistanceMs": 4445,
+    "assessment": "1:32.555±3秒にraw候補はあるが、最良でも音声rank 416 / 映像rank 56 で、採用上限 音声12・映像8 の外。最近傍の選択済みカット点との距離は4445msで最短距離1500msより大きいため、主因は最短距離制約ではなくrank上限。",
+    "stillPath": "evals/clip_composition/outputs/visual-check/r_ztjHaHmcg/physical-r_ztjHaHmcg-20260706-v001/seg11_confirmed_start_pre_at_post.jpg"
+  },
+  "oldChunk4Reevaluation": [
+    "旧chunk4の「完全一致」は、通し左右比較の解像度では妥当な観測として保持する。",
+    "ただし今回の単語対応では、clip 1:47.068以降のYouTube相当がseg14内では新対応から落ち、seg15側のsource phraseへ寄っている。",
+    "内部カットまたは字幕時刻の粗さによる局所分割の問題があるため、confirmedの取り消しや書き換えは行わず、注記付きで人間判断に回す。"
+  ],
+  "decisionsMdProposal": [
+    "- 確認済みペアと新セグメントが食い違う場合、確認済みペアを新方式へ合わせて動かさない。まず重なるセグメントの単語対応、残差、物理静止画を出して、旧対応・新対応・部分一致のどれかを判定する。",
+    "- YouTube自動字幕のphrase単位時刻は、短いセグメントの時間軸整合率を低く見せることがある。整合率低下だけで即座に物理不一致とせず、末尾未対応語と隣接セグメントへの対応移動を確認する。",
+    "- カット点検出の見逃し判定は、選択済みカット点だけでなく、選択前のraw音声候補とraw映像候補のrankを併記して判断する。"
+  ],
+  "productionImpact": {
+    "writesRuntime": false,
+    "writesFixturesDirectory": false,
+    "writesExpectedDirectory": false
+  }
+}
