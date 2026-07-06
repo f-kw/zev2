@@ -1,0 +1,41 @@
+{
+  "selectedCuts": [
+    {
+      "sourceStartMs": 11364140,
+      "sourceEndMs": 11404850,
+      "reason": "開始根拠: リスナーが記事を取り上げて世界2位の話題を提示する発話（speechId: 2）から切り抜きを開始するためです。終了根拠: 変動する順位に対して素直に喜べないという本人の結論が収束する発話（speechId: 18）までを含めるためです。除外判断: 冒頭のスパチャへのお礼（speechId: 1）および末尾の次の話題に移る相槌（speechId: 19, 20）はテーマに直接関係がないため除外しました。",
+      "usedSpeechIds": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18
+      ]
+    }
+  ],
+  "runAt": "2026-07-06T17:07:21+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "manualRun": false,
+    "runner": "edge-cdp-text-prompt",
+    "runs": 3,
+    "runIndex": 2
+  },
+  "promptFile": "reports/UpRyakf5j80_clip_audio_v001/clip_composition_prompt_v010/20260706-152330/prompt.md",
+  "pageUrl": "https://gemini.google.com/app/9bb0a51a38634bff?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"selectedCuts\": [\n    {\n      \"sourceStartMs\": 11364140,\n      \"sourceEndMs\": 11404850,\n      \"reason\": \"開始根拠: リスナーが記事を取り上げて世界2位の話題を提示する発話（speechId: 2）から切り抜きを開始するためです。終了根拠: 変動する順位に対して素直に喜べないという本人の結論が収束する発話（speechId: 18）までを含めるためです。除外判断: 冒頭のスパチャへのお礼（speechId: 1）および末尾の次の話題に移る相槌（speechId: 19, 20）はテーマに直接関係がないため除外しました。\",\n      \"usedSpeechIds\": [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

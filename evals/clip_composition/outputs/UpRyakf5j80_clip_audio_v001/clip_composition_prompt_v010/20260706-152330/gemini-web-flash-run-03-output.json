@@ -1,0 +1,42 @@
+{
+  "selectedCuts": [
+    {
+      "sourceStartMs": 11364140,
+      "sourceEndMs": 11405460,
+      "reason": "開始根拠: リスナーが「とある記事で船長は」と世界2位の話題を切り出す発話から始まるためです。終了根拠: 順位は変動するものだからあんまり喜べないという結論の補足が収束する発話まで含めるためです。除外判断: 冒頭の「香りどうもありがとうございます」は話題に入る前のスパチャ読みの残りのため除外し、最後の相づちは次の話題への繋ぎのため含めません。",
+      "usedSpeechIds": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ]
+    }
+  ],
+  "runAt": "2026-07-06T17:07:52+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "manualRun": false,
+    "runner": "edge-cdp-text-prompt",
+    "runs": 3,
+    "runIndex": 3
+  },
+  "promptFile": "reports/UpRyakf5j80_clip_audio_v001/clip_composition_prompt_v010/20260706-152330/prompt.md",
+  "pageUrl": "https://gemini.google.com/app/c818c543289f6ef1?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"selectedCuts\": [\n    {\n      \"sourceStartMs\": 11364140,\n      \"sourceEndMs\": 11405460,\n      \"reason\": \"開始根拠: リスナーが「とある記事で船長は」と世界2位の話題を切り出す発話から始まるためです。終了根拠: 順位は変動するものだからあんまり喜べないという結論の補足が収束する発話まで含めるためです。除外判断: 冒頭の「香りどうもありがとうございます」は話題に入る前のスパチャ読みの残りのため除外し、最後の相づちは次の話題への繋ぎのため含めません。\",\n      \"usedSpeechIds\": [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

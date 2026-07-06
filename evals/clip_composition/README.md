@@ -33,6 +33,8 @@
 - `llm-vNNN`: Web Geminiに `clip_composition_prompt_vNNN` と固定入力を渡し、返ってきた区間を採点した結果。
 - `other-*`: 過去の確認用外部JSON採点など、上記2系統ではない結果。正式なプロンプト比較基準にはしません。
 
+プロンプト版ごとの目的、作成経緯、採点結果、状態は `prompts/README.md` に記録します。
+
 過去の `result.json` には `generationSystem` が無いものがあります。その場合は、比較レポート側でモデル名、外部入力ファイル、LLM呼び出し有無の記録から推定し、`legacy inferred` と表示します。
 
 今後の `result.json` は最低限、次の形で生成系統を持ちます。

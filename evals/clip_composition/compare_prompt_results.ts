@@ -215,14 +215,24 @@ function validateScoreResult(value: unknown, resultPath: string): ScoreResult {
 function generationSystemFrom(record: Record<string, unknown>, resultPath: string): ScoreResult['generationSystem'] {
   const raw = recordFrom(record.generationSystem);
   if (typeof raw.id === 'string' && typeof raw.kind === 'string' && typeof raw.intervalGenerator === 'string') {
-    return {
+    const generationSystem: ScoreResult['generationSystem'] = {
       id: raw.id,
       kind: raw.kind,
-      intervalGenerator: raw.intervalGenerator,
-      ...(typeof raw.promptVersion === 'string' || raw.promptVersion === null ? { promptVersion: raw.promptVersion } : {}),
-      ...(typeof raw.usesPromptVersionForGeneration === 'boolean' ? { usesPromptVersionForGeneration: raw.usesPromptVersionForGeneration } : {}),
-      ...(typeof raw.legacyInferred === 'boolean' ? { legacyInferred: raw.legacyInferred } : {})
+      intervalGenerator: raw.intervalGenerator
     };
+    const rawPromptVersion = raw.promptVersion;
+    if (typeof rawPromptVersion === 'string') {
+      generationSystem.promptVersion = rawPromptVersion;
+    } else if (rawPromptVersion === null) {
+      generationSystem.promptVersion = null;
+    }
+    if (typeof raw.usesPromptVersionForGeneration === 'boolean') {
+      generationSystem.usesPromptVersionForGeneration = raw.usesPromptVersionForGeneration;
+    }
+    if (typeof raw.legacyInferred === 'boolean') {
+      generationSystem.legacyInferred = raw.legacyInferred;
+    }
+    return generationSystem;
   }
 
   const promptVersion = typeof record.promptVersion === 'string' ? record.promptVersion : 'unknown';
@@ -315,11 +325,12 @@ function validateCutDiff(value: unknown, label: string): NonNullable<ScoreResult
 }
 
 function computedDiffSummary(result: ScoreResult) {
-  const compared = result.cutDiffs?.filter((diff) => diff.status === 'compared') ?? [];
+  const cutDiffs = computedCutDiffs(result);
+  const compared = cutDiffs.filter((diff) => diff.status === 'compared');
   const exactMatchCount = compared.filter((diff) => diff.startDeltaMs === 0 && diff.endDeltaMs === 0).length;
   const overlappingCutCount = compared.filter((diff) => (diff.overlapMs ?? 0) > 0).length;
-  const missingExpectedCutCount = result.cutDiffs?.filter((diff) => diff.status === 'missing_selected_cut').length ?? 0;
-  const extraSelectedCutCount = result.cutDiffs?.filter((diff) => diff.status === 'extra_selected_cut').length ?? 0;
+  const missingExpectedCutCount = cutDiffs.filter((diff) => diff.status === 'missing_selected_cut').length;
+  const extraSelectedCutCount = cutDiffs.filter((diff) => diff.status === 'extra_selected_cut').length;
   const expectedCutCount = result.expectedCuts.length;
   const selectedCutCount = result.selectedCuts.length;
   return {
@@ -394,9 +405,8 @@ function buildRow(resultPath: string, result: ScoreResult): ComparisonRow {
   if (!expected) {
     throw new Error(`${resultPath} に期待区間がありません`);
   }
-  const fallback = computedDiffSummary(result);
-  const summary = result.diffSummary ?? fallback;
   const cutDiffs = computedCutDiffs(result);
+  const summary = computedDiffSummary(result);
   return {
     resultPath: path.relative(workspaceRoot(), resultPath),
     runAt: result.runAt,
@@ -415,15 +425,15 @@ function buildRow(resultPath: string, result: ScoreResult): ComparisonRow {
     startDeltaMs: result.diff.startDeltaMs,
     endDeltaMs: result.diff.endDeltaMs,
     overlapSummary: result.diff.overlapSummary,
-    selectedCutCount: typeof summary.selectedCutCount === 'number' ? summary.selectedCutCount : fallback.selectedCutCount,
-    expectedCutCount: typeof summary.expectedCutCount === 'number' ? summary.expectedCutCount : fallback.expectedCutCount,
-    exactMatchCount: typeof summary.exactMatchCount === 'number' ? summary.exactMatchCount : fallback.exactMatchCount,
-    overlappingCutCount: typeof summary.overlappingCutCount === 'number' ? summary.overlappingCutCount : fallback.overlappingCutCount,
-    missingExpectedCutCount: typeof summary.missingExpectedCutCount === 'number' ? summary.missingExpectedCutCount : fallback.missingExpectedCutCount,
-    extraSelectedCutCount: typeof summary.extraSelectedCutCount === 'number' ? summary.extraSelectedCutCount : fallback.extraSelectedCutCount,
-    allExpectedCutsMatchedExactlyByIndex: optionalBooleanFrom(summary.allExpectedCutsMatchedExactlyByIndex) ?? fallback.allExpectedCutsMatchedExactlyByIndex,
-    allExpectedCutsHaveOverlapByIndex: optionalBooleanFrom(summary.allExpectedCutsHaveOverlapByIndex) ?? fallback.allExpectedCutsHaveOverlapByIndex,
-    ...(typeof summary.summary === 'string' ? { diffSummary: summary.summary } : {}),
+    selectedCutCount: summary.selectedCutCount,
+    expectedCutCount: summary.expectedCutCount,
+    exactMatchCount: summary.exactMatchCount,
+    overlappingCutCount: summary.overlappingCutCount,
+    missingExpectedCutCount: summary.missingExpectedCutCount,
+    extraSelectedCutCount: summary.extraSelectedCutCount,
+    allExpectedCutsMatchedExactlyByIndex: summary.allExpectedCutsMatchedExactlyByIndex,
+    allExpectedCutsHaveOverlapByIndex: summary.allExpectedCutsHaveOverlapByIndex,
+    diffSummary: summary.summary,
     selectedIntervals: result.selectedCuts.map(intervalText),
     expectedIntervals: result.expectedCuts.map(intervalText),
     cutDiffs,

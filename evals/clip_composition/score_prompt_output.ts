@@ -45,10 +45,19 @@ type ExpectedCut = {
   [key: string]: unknown;
 };
 
+type ExcludedRange = {
+  id: string;
+  sourceStartMs: number;
+  sourceEndMs: number;
+  reason: string;
+  [key: string]: unknown;
+};
+
 type ExpectedFile = {
   draftId: string;
   fixtureId?: string;
   expectedCuts: ExpectedCut[];
+  excludedRanges: ExcludedRange[];
 };
 
 type SelectedCut = {
@@ -79,6 +88,33 @@ type CutPairDiff = {
   endDeltaMs?: number;
   overlapMs: number;
   overlapSummary: string;
+};
+
+type ExcludedSelectedCut = {
+  selectedCutIndex: number;
+  selectedCut: SelectedCut;
+  excludedRange: ExcludedRange;
+  overlapMs: number;
+  scoringTreatment: 'excluded_from_scoring';
+  reason: string;
+};
+
+type TimestampPlausibilityIssue = {
+  selectedCutIndex: number;
+  boundary: 'sourceStartMs' | 'sourceEndMs';
+  valueMs: number;
+  nearestTranscriptBoundaryMs: number;
+  distanceFromNearestBoundaryMs: number;
+  allowedDistanceMs: number;
+  status: 'suspectedFabricatedTimestamp';
+  reason: string;
+};
+
+type TimestampPlausibility = {
+  boundaryMarginMs: number;
+  transcriptBoundaryCount: number;
+  suspectedFabricatedTimestamp: boolean;
+  issues: TimestampPlausibilityIssue[];
 };
 
 type DiffSummary = {
@@ -289,8 +325,38 @@ function validateExpectedFile(value: unknown): ExpectedFile {
         reason: requireString(cut.reason, `期待区間 ${index + 1} の理由`),
         ...extraFields
       };
-    })
+    }),
+    excludedRanges: validateExplicitExcludedRanges(record.excludedRanges)
   };
+}
+
+function validateExplicitExcludedRanges(value: unknown): ExcludedRange[] {
+  if (value === undefined) {
+    return [];
+  }
+  if (!Array.isArray(value)) {
+    throw new Error('期待値ファイルの除外区間は配列である必要があります');
+  }
+  return value.map((item, index) => {
+    const range = requireRecord(item, `除外区間 ${index + 1}`);
+    const sourceStartMs = requireNumber(range.sourceStartMs, `除外区間 ${index + 1} の開始位置`);
+    const sourceEndMs = requireNumber(range.sourceEndMs, `除外区間 ${index + 1} の終了位置`);
+    if (sourceEndMs <= sourceStartMs) {
+      throw new Error(`除外区間 ${index + 1} は終了位置が開始位置より後である必要があります`);
+    }
+    const extraFields = Object.fromEntries(
+      Object.entries(range).filter(([key]) => !['id', 'sourceStartMs', 'sourceEndMs', 'reason'].includes(key))
+    );
+    return {
+      id: typeof range.id === 'string' && range.id.trim() ? range.id : `excluded_range_${index + 1}`,
+      sourceStartMs,
+      sourceEndMs,
+      reason: typeof range.reason === 'string' && range.reason.trim()
+        ? range.reason
+        : '期待値ファイルで採点対象外として指定された区間',
+      ...extraFields
+    };
+  });
 }
 
 function validateCandidateOutput(value: unknown): CandidateOutput {
@@ -324,6 +390,165 @@ function validateCandidateOutput(value: unknown): CandidateOutput {
 
 function overlapMs(left: ExpectedCut | SelectedCut, right: ExpectedCut | SelectedCut): number {
   return Math.max(0, Math.min(left.sourceEndMs, right.sourceEndMs) - Math.max(left.sourceStartMs, right.sourceStartMs));
+}
+
+function optionalRecord(value: unknown): Record<string, unknown> | undefined {
+  return value && typeof value === 'object' && !Array.isArray(value)
+    ? value as Record<string, unknown>
+    : undefined;
+}
+
+function sourceRangeKey(range: Pick<ExcludedRange, 'sourceStartMs' | 'sourceEndMs'>): string {
+  return `${range.sourceStartMs}-${range.sourceEndMs}`;
+}
+
+function hasUnresolvedExclusionAtBoundary(cut: ExpectedCut, side: 'leading' | 'trailing'): boolean {
+  const boundaryStatus = optionalRecord(cut.boundaryStatus);
+  const statusRecord = optionalRecord(boundaryStatus?.[side]);
+  return statusRecord?.status === 'adjacent_to_unresolved_exclusion';
+}
+
+function unresolvedRangeIds(cut: ExpectedCut): string[] {
+  const policy = optionalRecord(cut.partialFixturePolicy);
+  const ids = policy?.unresolvedRangeIds;
+  return Array.isArray(ids) ? ids.filter((item): item is string => typeof item === 'string' && item.trim().length > 0) : [];
+}
+
+function inferExcludedRangesFromExpectedCuts(expectedCuts: ExpectedCut[]): ExcludedRange[] {
+  const inferred: ExcludedRange[] = [];
+  for (let index = 0; index < expectedCuts.length - 1; index += 1) {
+    const current = expectedCuts[index];
+    const next = expectedCuts[index + 1];
+    if (!current || !next || current.sourceEndMs >= next.sourceStartMs) {
+      continue;
+    }
+
+    const touchesUnresolvedBoundary = hasUnresolvedExclusionAtBoundary(current, 'trailing')
+      || hasUnresolvedExclusionAtBoundary(next, 'leading');
+    if (!touchesUnresolvedBoundary) {
+      continue;
+    }
+
+    const ids = [...unresolvedRangeIds(current), ...unresolvedRangeIds(next)];
+    const id = ids[0] ?? `unresolved_gap_after_expected_cut_${index + 1}`;
+    inferred.push({
+      id,
+      sourceStartMs: current.sourceEndMs,
+      sourceEndMs: next.sourceStartMs,
+      reason: `期待区間${index + 1}と${index + 2}の間で未解決除外として記録されたsource側の区間`,
+      inferredFromExpectedBoundary: true,
+      beforeExpectedCutIndex: index,
+      afterExpectedCutIndex: index + 1
+    });
+  }
+  return inferred;
+}
+
+function expectedExcludedRanges(expectedFile: ExpectedFile): ExcludedRange[] {
+  const byRange = new Map<string, ExcludedRange>();
+  for (const range of expectedFile.excludedRanges) {
+    byRange.set(sourceRangeKey(range), range);
+  }
+  for (const range of inferExcludedRangesFromExpectedCuts(expectedFile.expectedCuts)) {
+    if (!byRange.has(sourceRangeKey(range))) {
+      byRange.set(sourceRangeKey(range), range);
+    }
+  }
+  return [...byRange.values()].sort((left, right) => left.sourceStartMs - right.sourceStartMs);
+}
+
+function splitSelectedCutsForScoring(
+  selectedCuts: SelectedCut[],
+  expectedCuts: ExpectedCut[],
+  excludedRanges: ExcludedRange[]
+): { scoredSelectedCuts: SelectedCut[]; excludedSelectedCuts: ExcludedSelectedCut[] } {
+  if (excludedRanges.length === 0) {
+    return {
+      scoredSelectedCuts: selectedCuts,
+      excludedSelectedCuts: []
+    };
+  }
+
+  const scoredSelectedCuts: SelectedCut[] = [];
+  const excludedSelectedCuts: ExcludedSelectedCut[] = [];
+  for (const [index, selectedCut] of selectedCuts.entries()) {
+    const expectedOverlap = expectedCuts.some((expectedCut) => overlapMs(selectedCut, expectedCut) > 0);
+    const excludedOverlaps = excludedRanges
+      .map((excludedRange) => ({
+        excludedRange,
+        overlapMs: overlapMs(selectedCut, excludedRange)
+      }))
+      .filter((item) => item.overlapMs > 0);
+
+    if (!expectedOverlap && excludedOverlaps.length > 0) {
+      const largestOverlap = excludedOverlaps.sort((left, right) => right.overlapMs - left.overlapMs)[0];
+      if (!largestOverlap) {
+        scoredSelectedCuts.push(selectedCut);
+        continue;
+      }
+      excludedSelectedCuts.push({
+        selectedCutIndex: index,
+        selectedCut,
+        excludedRange: largestOverlap.excludedRange,
+        overlapMs: largestOverlap.overlapMs,
+        scoringTreatment: 'excluded_from_scoring',
+        reason: '期待区間とは重ならず、未解決除外区間と重なるため採点対象外にする'
+      });
+      continue;
+    }
+
+    scoredSelectedCuts.push(selectedCut);
+  }
+
+  return {
+    scoredSelectedCuts,
+    excludedSelectedCuts
+  };
+}
+
+function buildTimestampPlausibility(transcript: TranscriptArtifact, selectedCuts: SelectedCut[]): TimestampPlausibility {
+  const boundaryMarginMs = 5000;
+  const transcriptBoundaries = transcript.segments
+    .flatMap((segment) => [segment.startMs, segment.endMs])
+    .filter((value) => Number.isFinite(value));
+  if (transcriptBoundaries.length === 0) {
+    return {
+      boundaryMarginMs,
+      transcriptBoundaryCount: 0,
+      suspectedFabricatedTimestamp: false,
+      issues: []
+    };
+  }
+  const firstTranscriptBoundary = transcriptBoundaries[0];
+  const issues: TimestampPlausibilityIssue[] = [];
+  for (const [selectedCutIndex, selectedCut] of selectedCuts.entries()) {
+    for (const boundary of ['sourceStartMs', 'sourceEndMs'] as const) {
+      const valueMs = selectedCut[boundary];
+      const nearestTranscriptBoundaryMs = transcriptBoundaries.reduce((nearest, candidate) => {
+        return Math.abs(candidate - valueMs) < Math.abs(nearest - valueMs) ? candidate : nearest;
+      }, firstTranscriptBoundary);
+      const distanceFromNearestBoundaryMs = Math.abs(nearestTranscriptBoundaryMs - valueMs);
+      if (distanceFromNearestBoundaryMs <= boundaryMarginMs) {
+        continue;
+      }
+      issues.push({
+        selectedCutIndex,
+        boundary,
+        valueMs,
+        nearestTranscriptBoundaryMs,
+        distanceFromNearestBoundaryMs,
+        allowedDistanceMs: boundaryMarginMs,
+        status: 'suspectedFabricatedTimestamp',
+        reason: '選択区間の境界が、入力文字起こしに含まれる発話境界から5000msを超えて離れている'
+      });
+    }
+  }
+  return {
+    boundaryMarginMs,
+    transcriptBoundaryCount: transcriptBoundaries.length,
+    suspectedFabricatedTimestamp: issues.length > 0,
+    issues
+  };
 }
 
 function buildDiff(selectedCut: SelectedCut | undefined, expectedCut: ExpectedCut | undefined): CutDiff {
@@ -361,48 +586,78 @@ function buildDiff(selectedCut: SelectedCut | undefined, expectedCut: ExpectedCu
 }
 
 function buildCutDiffs(selectedCuts: SelectedCut[], expectedCuts: ExpectedCut[]): CutPairDiff[] {
-  const count = Math.max(selectedCuts.length, expectedCuts.length);
   const diffs: CutPairDiff[] = [];
-  for (let index = 0; index < count; index += 1) {
-    const selectedCut = selectedCuts[index];
+  const selectedCutsWithAnyExpectedOverlap = new Set<number>();
+
+  for (let index = 0; index < expectedCuts.length; index += 1) {
     const expectedCut = expectedCuts[index];
-    if (selectedCut && expectedCut) {
-      const diff = buildDiff(selectedCut, expectedCut);
+    const selectedCut = findBestOverlappingSelectedCut(selectedCuts, expectedCut);
+    if (selectedCut) {
+      selectedCutsWithAnyExpectedOverlap.add(selectedCut.index);
+      const diff = buildDiff(selectedCut.cut, expectedCut);
       diffs.push({
         cutIndex: index,
         status: 'compared',
-        selectedCut,
+        selectedCut: selectedCut.cut,
         expectedCut,
         startDeltaMs: diff.startDeltaMs,
         endDeltaMs: diff.endDeltaMs,
-        overlapMs: overlapMs(selectedCut, expectedCut),
+        overlapMs: overlapMs(selectedCut.cut, expectedCut),
         overlapSummary: diff.overlapSummary
       });
       continue;
     }
 
-    if (expectedCut) {
-      diffs.push({
-        cutIndex: index,
-        status: 'missing_selected_cut',
-        expectedCut,
-        overlapMs: 0,
-        overlapSummary: `期待区間${index + 1}に対応する選択区間がありません`
-      });
-      continue;
-    }
+    diffs.push({
+      cutIndex: index,
+      status: 'missing_selected_cut',
+      expectedCut,
+      overlapMs: 0,
+      overlapSummary: `期待区間${index + 1}に重なる選択区間がありません`
+    });
+  }
 
-    if (selectedCut) {
+  for (let index = 0; index < selectedCuts.length; index += 1) {
+    const selectedCut = selectedCuts[index];
+    if (!selectedCutsWithAnyExpectedOverlap.has(index) && selectedCut) {
       diffs.push({
-        cutIndex: index,
+        cutIndex: expectedCuts.length + index,
         status: 'extra_selected_cut',
         selectedCut,
         overlapMs: 0,
-        overlapSummary: `選択区間${index + 1}に対応する期待区間がありません`
+        overlapSummary: `選択区間${index + 1}に重なる期待区間がありません`
       });
     }
   }
   return diffs;
+}
+
+function findBestOverlappingSelectedCut(
+  selectedCuts: SelectedCut[],
+  expectedCut: ExpectedCut
+): { index: number; cut: SelectedCut } | undefined {
+  const candidates = selectedCuts
+    .map((cut, index) => ({
+      index,
+      cut,
+      overlap: overlapMs(cut, expectedCut),
+      startDistance: Math.abs(cut.sourceStartMs - expectedCut.sourceStartMs),
+      endDistance: Math.abs(cut.sourceEndMs - expectedCut.sourceEndMs)
+    }))
+    .filter((candidate) => candidate.overlap > 0);
+
+  if (candidates.length === 0) {
+    return undefined;
+  }
+
+  candidates.sort((left, right) =>
+    right.overlap - left.overlap
+    || left.startDistance - right.startDistance
+    || left.endDistance - right.endDistance
+    || left.index - right.index
+  );
+  const best = candidates[0];
+  return best ? { index: best.index, cut: best.cut } : undefined;
 }
 
 function buildDiffSummary(cutDiffs: CutPairDiff[], selectedCuts: SelectedCut[], expectedCuts: ExpectedCut[]): DiffSummary {
@@ -545,11 +800,15 @@ function buildSummaryMarkdown(input: {
   params: Record<string, unknown>;
   inputFile: string;
   selectedCuts: SelectedCut[];
+  scoredSelectedCuts: SelectedCut[];
+  excludedSelectedCuts: ExcludedSelectedCut[];
   expectedCuts: ExpectedCut[];
+  excludedRanges: ExcludedRange[];
   diff: CutDiff;
   cutDiffs: CutPairDiff[];
   diffSummary: DiffSummary;
   themeCoverage: ThemeCoverage;
+  timestampPlausibility: TimestampPlausibility;
   resultPath: string;
 }): string {
   const selectedLines = input.selectedCuts.length > 0
@@ -557,6 +816,18 @@ function buildSummaryMarkdown(input: {
     : ['- なし'];
   const expectedLines = input.expectedCuts.length > 0
     ? input.expectedCuts.map((cut, index) => `- ${index + 1}: ${cut.sourceStartMs}ms - ${cut.sourceEndMs}ms: ${cut.reason}`)
+    : ['- なし'];
+  const scoredSelectedLines = input.scoredSelectedCuts.length > 0
+    ? input.scoredSelectedCuts.map((cut, index) => `- ${index + 1}: ${cut.sourceStartMs}ms - ${cut.sourceEndMs}ms: ${cut.reason}`)
+    : ['- なし'];
+  const excludedSelectedLines = input.excludedSelectedCuts.length > 0
+    ? input.excludedSelectedCuts.map((item) => `- 元の選択${item.selectedCutIndex + 1}: ${item.selectedCut.sourceStartMs}ms - ${item.selectedCut.sourceEndMs}ms / 除外区間 ${item.excludedRange.sourceStartMs}ms - ${item.excludedRange.sourceEndMs}ms / 重なり ${item.overlapMs}ms / ${item.reason}`)
+    : ['- なし'];
+  const excludedRangeLines = input.excludedRanges.length > 0
+    ? input.excludedRanges.map((range, index) => `- ${index + 1}: ${range.sourceStartMs}ms - ${range.sourceEndMs}ms: ${range.reason}`)
+    : ['- なし'];
+  const timestampIssueLines = input.timestampPlausibility.issues.length > 0
+    ? input.timestampPlausibility.issues.map((issue) => `- 選択${issue.selectedCutIndex + 1} ${issue.boundary}: ${issue.valueMs}ms / 最寄り発話境界 ${issue.nearestTranscriptBoundaryMs}ms / 差 ${issue.distanceFromNearestBoundaryMs}ms / ${issue.status}`)
     : ['- なし'];
   const diffLines = input.cutDiffs.length > 0
     ? input.cutDiffs.map((diff) => [
@@ -584,6 +855,24 @@ function buildSummaryMarkdown(input: {
     '## 期待区間',
     '',
     ...expectedLines,
+    '',
+    '## 採点対象の選択区間',
+    '',
+    ...scoredSelectedLines,
+    '',
+    '## 採点対象外にした選択区間',
+    '',
+    ...excludedSelectedLines,
+    '',
+    '## 採点対象外の期待側区間',
+    '',
+    ...excludedRangeLines,
+    '',
+    '## 時刻の数値妥当性',
+    '',
+    `- 作られた疑いのある時刻: ${input.timestampPlausibility.suspectedFabricatedTimestamp ? 'あり' : 'なし'}`,
+    `- 許容範囲: 発話境界から${input.timestampPlausibility.boundaryMarginMs}ms以内`,
+    ...timestampIssueLines,
     '',
     '## 差分',
     '',
@@ -622,17 +911,24 @@ async function main() {
     throw new Error('fixtureの下書きIDと期待値の下書きIDが一致しません');
   }
 
-  const firstSelected = candidateOutput.selectedCuts[0];
+  const excludedRanges = expectedExcludedRanges(expectedFile);
+  const { scoredSelectedCuts, excludedSelectedCuts } = splitSelectedCutsForScoring(
+    candidateOutput.selectedCuts,
+    expectedFile.expectedCuts,
+    excludedRanges
+  );
+  const timestampPlausibility = buildTimestampPlausibility(transcript, candidateOutput.selectedCuts);
+  const firstSelected = scoredSelectedCuts[0];
   const firstExpected = expectedFile.expectedCuts[0];
   const diff = buildDiff(firstSelected, firstExpected);
-  const cutDiffs = buildCutDiffs(candidateOutput.selectedCuts, expectedFile.expectedCuts);
-  const diffSummary = buildDiffSummary(cutDiffs, candidateOutput.selectedCuts, expectedFile.expectedCuts);
+  const cutDiffs = buildCutDiffs(scoredSelectedCuts, expectedFile.expectedCuts);
+  const diffSummary = buildDiffSummary(cutDiffs, scoredSelectedCuts, expectedFile.expectedCuts);
   const themeCoverage = candidateCoverage(
     transcript,
     themes,
     fixture.selectedThemeId,
     expectedFile.expectedCuts,
-    candidateOutput.selectedCuts
+    scoredSelectedCuts
   );
   const runAt = tokyoTimestamp(new Date());
   const runId = runIdFromTimestamp(runAt);
@@ -654,7 +950,11 @@ async function main() {
     evaluationMode: 'external_prompt_output',
     inputFile: options.inputFile,
     selectedCuts: candidateOutput.selectedCuts,
+    scoredSelectedCuts,
+    excludedSelectedCuts,
     expectedCuts: expectedFile.expectedCuts,
+    excludedRanges,
+    timestampPlausibility,
     diff,
     cutDiffs,
     diffSummary,
@@ -673,11 +973,15 @@ async function main() {
     params: options.params,
     inputFile: options.inputFile,
     selectedCuts: candidateOutput.selectedCuts,
+    scoredSelectedCuts,
+    excludedSelectedCuts,
     expectedCuts: expectedFile.expectedCuts,
+    excludedRanges,
     diff,
     cutDiffs,
     diffSummary,
     themeCoverage,
+    timestampPlausibility,
     resultPath
   }), 'utf8');
 
