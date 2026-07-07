@@ -1,0 +1,41 @@
+{
+  "targetId": "aX-axQMWR3c",
+  "title": "【merise】急に上司が4人増えて困惑する白雪レイドに爆笑する渋谷ハル【渋谷ハル/まふまふ/そらる/おじじ/白雪レイド/切り抜き】",
+  "createdAt": "2026-07-06T19:00:00+09:00",
+  "clip": {
+    "id": "aX-axQMWR3c",
+    "sttId": "aX-axQMWR3c",
+    "url": "https://www.youtube.com/watch?v=aX-axQMWR3c",
+    "localVideoPath": "evals/clip_composition/research/downloads/aX-axQMWR3c/aX-axQMWR3c.mp4",
+    "durationSec": 155,
+    "sttRole": "clip",
+    "notes": [
+      "BGM、SE、字幕由来の誤認識、切り抜き師が追加した要素を正常なノイズとして扱う。"
+    ]
+  },
+  "sourceCandidates": [
+    {
+      "id": "SGQqVJXsNNE",
+      "sttId": "aX-axQMWR3c_SGQqVJXsNNE_local30_v001",
+      "url": "https://youtu.be/SGQqVJXsNNE",
+      "localVideoPath": "evals/clip_composition/research/downloads/aX-axQMWR3c/sources/SGQqVJXsNNE/SGQqVJXsNNE.mp4",
+      "durationSec": 5113,
+      "sttRole": "source",
+      "notes": [
+        "切り抜き説明欄の本配信URLから抽出した元動画候補。対応確定はSTT照合、音声比較、目視確認後。",
+        "300秒チャンクではSTTサーバーが同じ箇所で応答不能になったため、30秒チャンクで単語タイムスタンプを作成した。"
+      ]
+    }
+  ],
+  "requiredOutputs": [
+    "clip側STT結果",
+    "元動画候補の単語タイムスタンプ付きSTT結果",
+    "DP単調アラインメント結果",
+    "素材境界確認パッケージ",
+    "人間確認後のexpectedCuts候補"
+  ],
+  "freezeStatus": {
+    "readyForFreeze": false,
+    "reason": "STT、DP照合、素材境界の人間確認が未完了。"
+  }
+}

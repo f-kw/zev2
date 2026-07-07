@@ -23,6 +23,7 @@ type CliOptions = {
   traceClipEndMs?: number;
   traceSourceStartMs?: number;
   traceSourceEndMs?: number;
+  skipCurrentComparison: boolean;
 };
 
 type WordTimestamp = {
@@ -173,6 +174,7 @@ function workspaceRoot(): string {
 
 function parseOptions(argv: string[]): CliOptions {
   const values = new Map<string, string>();
+  const flags = new Set<string>();
   for (let index = 0; index < argv.length; index += 1) {
     const item = argv[index];
     if (!item.startsWith('--')) {
@@ -186,6 +188,7 @@ function parseOptions(argv: string[]): CliOptions {
     const key = item.slice(2);
     const next = argv[index + 1];
     if (!next || next.startsWith('--')) {
+      flags.add(key);
       values.set(key, 'true');
       continue;
     }
@@ -221,7 +224,8 @@ function parseOptions(argv: string[]): CliOptions {
     traceClipStartMs: optionalPositiveNumber(values.get('traceClipStartMs'), '--traceClipStartMs'),
     traceClipEndMs: optionalPositiveNumber(values.get('traceClipEndMs'), '--traceClipEndMs'),
     traceSourceStartMs: optionalPositiveNumber(values.get('traceSourceStartMs'), '--traceSourceStartMs'),
-    traceSourceEndMs: optionalPositiveNumber(values.get('traceSourceEndMs'), '--traceSourceEndMs')
+    traceSourceEndMs: optionalPositiveNumber(values.get('traceSourceEndMs'), '--traceSourceEndMs'),
+    skipCurrentComparison: flags.has('skipCurrentComparison')
   };
 }
 
@@ -1182,8 +1186,12 @@ async function main(): Promise<void> {
   const directRunCandidate = candidateRuns.find((run) => confirmedPasses(run, options));
   const bestRunCandidate = directRunCandidate ?? bestConfirmedLikeRun(candidateRuns, options);
   const confirmedConnectedCandidate = connectedConfirmedComparison(candidateRuns, options);
-  const current16Run = await readJson<RealignmentFile>(options.current16Path);
-  const current41Run = await readJson<RealignmentFile>(options.current41Path);
+  const current16Run = options.skipCurrentComparison
+    ? { sourceId: options.sourceId, segments: [], humanConfirmedPairPolicy: { applied: [] } }
+    : await readJson<RealignmentFile>(options.current16Path);
+  const current41Run = options.skipCurrentComparison
+    ? { sourceId: options.sourceId, segments: [], humanConfirmedPairPolicy: { applied: [] } }
+    : await readJson<RealignmentFile>(options.current41Path);
 
   const outputDir = path.join(evalRoot, 'outputs');
   const reportDir = path.join(evalRoot, 'reports');

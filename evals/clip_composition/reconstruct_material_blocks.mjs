@@ -3,20 +3,19 @@ import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { spawn } from 'node:child_process';
 import path from 'node:path';
 
-const clipId = 'r_ztjHaHmcg';
-const sourceVideoId = '-DwSCDMCWDQ';
-const outputId = '20260706-material-boundaries-v001';
-const materialJumpThresholdMs = 10000;
-const dpResultRelativePath = 'evals/clip_composition/outputs/global-dp-word-alignment-r_ztjHaHmcg-20260706-offset-jump-v001.json';
-
 const root = workspaceRoot();
 const evalRoot = path.join(root, 'evals', 'clip_composition');
-const dpResultPath = path.join(root, dpResultRelativePath);
-const confirmedPairPath = path.join(evalRoot, 'confirmed_pairs', `${clipId}.json`);
-const clipMedia = path.join(evalRoot, 'research', 'downloads', clipId, `${clipId}.mp4`);
-const sourceMedia = path.join(evalRoot, 'research', 'downloads', clipId, 'sources', sourceVideoId, `${sourceVideoId}.mp4`);
-const outputJsonPath = path.join(evalRoot, 'outputs', `material-blocks-${clipId}-20260706-v001.json`);
-const reportPath = path.join(evalRoot, 'reports', `material-blocks-${clipId}-20260706-v001.md`);
+const options = parseOptions(process.argv.slice(2));
+const clipId = options.clipId;
+const sourceVideoId = options.sourceVideoId;
+const outputId = options.outputId;
+const materialJumpThresholdMs = options.materialJumpThresholdMs;
+const dpResultPath = resolveWorkspacePath(options.dpResultPath);
+const confirmedPairPath = options.confirmedPairPath ? resolveWorkspacePath(options.confirmedPairPath) : path.join(evalRoot, 'confirmed_pairs', `${clipId}.json`);
+const clipMedia = resolveWorkspacePath(options.clipMedia);
+const sourceMedia = resolveWorkspacePath(options.sourceMedia);
+const outputJsonPath = path.join(evalRoot, 'outputs', `material-blocks-${clipId}-${outputId}.json`);
+const reportPath = path.join(evalRoot, 'reports', `material-blocks-${clipId}-${outputId}.md`);
 const packageDir = path.join(evalRoot, 'outputs', 'boundary-check', clipId, outputId);
 const stillDir = path.join(packageDir, 'stills');
 const audioDir = path.join(packageDir, 'audio');
@@ -35,6 +34,62 @@ function workspaceRoot() {
     }
     current = parent;
   }
+}
+
+function parseOptions(argv) {
+  const values = new Map();
+  for (let index = 0; index < argv.length; index += 1) {
+    const item = argv[index];
+    if (!item.startsWith('--')) {
+      continue;
+    }
+    const inlineValueIndex = item.indexOf('=');
+    if (inlineValueIndex >= 0) {
+      values.set(item.slice(2, inlineValueIndex), item.slice(inlineValueIndex + 1));
+      continue;
+    }
+    const key = item.slice(2);
+    const next = argv[index + 1];
+    if (!next || next.startsWith('--')) {
+      values.set(key, 'true');
+      continue;
+    }
+    values.set(key, next);
+    index += 1;
+  }
+
+  const clipId = sanitizePathPart(values.get('clipId') ?? 'r_ztjHaHmcg');
+  const sourceVideoId = sanitizePathPart(values.get('sourceVideoId') ?? '-DwSCDMCWDQ');
+  const outputId = sanitizePathPart(values.get('outputId') ?? '20260706-material-boundaries-v001');
+  return {
+    clipId,
+    sourceVideoId,
+    outputId,
+    materialJumpThresholdMs: positiveInteger(values.get('materialJumpThresholdMs'), 10000, '--materialJumpThresholdMs'),
+    dpResultPath: values.get('dpResult') ?? 'evals/clip_composition/outputs/global-dp-word-alignment-r_ztjHaHmcg-20260706-offset-jump-v001.json',
+    confirmedPairPath: values.get('confirmedPair'),
+    clipMedia: values.get('clipMedia') ?? `evals/clip_composition/research/downloads/${clipId}/${clipId}.mp4`,
+    sourceMedia: values.get('sourceMedia') ?? `evals/clip_composition/research/downloads/${clipId}/sources/${sourceVideoId}/${sourceVideoId}.mp4`
+  };
+}
+
+function resolveWorkspacePath(filePath) {
+  return path.isAbsolute(filePath) ? filePath : path.join(root, filePath);
+}
+
+function sanitizePathPart(value) {
+  return value.replace(/[^a-zA-Z0-9_-]/g, '_');
+}
+
+function positiveInteger(value, fallback, label) {
+  if (!value?.trim()) {
+    return fallback;
+  }
+  const parsed = Number.parseInt(value, 10);
+  if (!Number.isInteger(parsed) || parsed <= 0) {
+    throw new Error(`${label} は1以上の整数で指定してください`);
+  }
+  return parsed;
 }
 
 async function readJson(filePath) {
@@ -181,6 +236,12 @@ function reconstructBlocks(candidateRuns, offsetJumpCandidates) {
 }
 
 function confirmedRelation(blocks, confirmedPair) {
+  if (!confirmedPair?.activePair) {
+    return {
+      status: 'not_checked',
+      message: 'この対象には確認済みペアをまだ持たせていないため、素材ブロックとの包含関係は未判定。'
+    };
+  }
   const pair = confirmedPair.activePair;
   const toleranceMs = pair.toleranceMs ?? 500;
   const containing = blocks.find((block) => (
@@ -610,7 +671,9 @@ function reportMarkdown(result) {
     '',
     '## 確定済み最終ブロックとの関係',
     '',
-    `- 確定ペア: clip ${msText(result.confirmedPair.activePair.clipStartMs)}-${msText(result.confirmedPair.activePair.clipEndMs)} / source ${msText(result.confirmedPair.activePair.sourceStartMs)}-${msText(result.confirmedPair.activePair.sourceEndMs)}`,
+    result.confirmedPair?.activePair
+      ? `- 確定ペア: clip ${msText(result.confirmedPair.activePair.clipStartMs)}-${msText(result.confirmedPair.activePair.clipEndMs)} / source ${msText(result.confirmedPair.activePair.sourceStartMs)}-${msText(result.confirmedPair.activePair.sourceEndMs)}`
+      : '- 確定ペア: なし',
     `- 判定: ${result.confirmedRelation.status}`,
     `- 関係: ${result.confirmedRelation.message}`,
     result.confirmedRelation.blockIndex
@@ -737,7 +800,7 @@ function htmlIndex(result) {
 
 async function main() {
   const dpResult = await readJson(dpResultPath);
-  const confirmedPair = await readJson(confirmedPairPath);
+  const confirmedPair = existsSync(confirmedPairPath) ? await readJson(confirmedPairPath) : null;
   const candidateRuns = dpResult.alignment.candidateRuns ?? [];
   const offsetJumpCandidates = dpResult.alignment.boundaryCandidates?.offsetJumpCandidates ?? [];
   if (candidateRuns.length === 0) {
@@ -760,7 +823,7 @@ async function main() {
     clipId,
     sourceVideoId,
     input: {
-      dpResultPath: dpResultRelativePath,
+      dpResultPath: path.relative(root, dpResultPath),
       candidateRunCount: candidateRuns.length,
       allLinearRunCount: dpResult.alignment.allRuns?.length ?? 0,
       offsetJumpCandidateCount: offsetJumpCandidates.length

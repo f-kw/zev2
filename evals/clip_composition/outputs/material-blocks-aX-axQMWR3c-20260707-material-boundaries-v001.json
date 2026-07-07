@@ -1,0 +1,135 @@
+{
+  "kind": "clip_composition_material_blocks",
+  "runAt": "2026-07-06T16:35:47.093Z",
+  "clipId": "aX-axQMWR3c",
+  "sourceVideoId": "SGQqVJXsNNE",
+  "input": {
+    "dpResultPath": "evals/clip_composition/outputs/global-dp-word-alignment-aX-axQMWR3c-20260707-global-dp-local30-v001.json",
+    "candidateRunCount": 10,
+    "allLinearRunCount": 65,
+    "offsetJumpCandidateCount": 22
+  },
+  "definition": {
+    "expectedCutsBoundary": "素材対応の切り替わり点。元動画の別位置へ飛ぶ点だけを境界とし、同一素材内の詰めはinternalGapMs系の注記にする。",
+    "materialJumpThresholdMs": 10000,
+    "thresholdSource": "ユーザー指定の「10秒以上」を使用"
+  },
+  "confirmedPair": null,
+  "blocks": [
+    {
+      "blockIndex": 1,
+      "runIndexes": [
+        32,
+        41,
+        43,
+        45,
+        47,
+        49,
+        57,
+        59,
+        61,
+        62
+      ],
+      "clipStartMs": 27258,
+      "clipEndMs": 149530,
+      "sourceStartMs": 4922443,
+      "sourceEndMs": 5056495,
+      "matchedWordPairCount": 326,
+      "clipDurationMs": 122272,
+      "sourceDurationMs": 134052,
+      "sourceMinusClipDurationMs": 11780,
+      "internalGapMs": {
+        "sourceExtraInsideMs": 8878,
+        "clipExtraInsideMs": 742,
+        "note": "同一素材ブロック内でsource側の進みがclip側より大きい分は、切り抜き内部の詰め候補として扱う。境界にはしない。"
+      },
+      "internalTransitions": [
+        {
+          "fromRun": 32,
+          "toRun": 41,
+          "clipGapMs": 31623,
+          "sourceGapMs": 31460,
+          "materialJumpMs": -163
+        },
+        {
+          "fromRun": 41,
+          "toRun": 43,
+          "clipGapMs": 1801,
+          "sourceGapMs": 4783,
+          "materialJumpMs": 2982
+        },
+        {
+          "fromRun": 43,
+          "toRun": 45,
+          "clipGapMs": 340,
+          "sourceGapMs": 140,
+          "materialJumpMs": -200
+        },
+        {
+          "fromRun": 45,
+          "toRun": 47,
+          "clipGapMs": 380,
+          "sourceGapMs": 541,
+          "materialJumpMs": 161
+        },
+        {
+          "fromRun": 47,
+          "toRun": 49,
+          "clipGapMs": 4583,
+          "sourceGapMs": 4525,
+          "materialJumpMs": -58
+        },
+        {
+          "fromRun": 49,
+          "toRun": 57,
+          "clipGapMs": 30334,
+          "sourceGapMs": 31628,
+          "materialJumpMs": 1294
+        },
+        {
+          "fromRun": 57,
+          "toRun": 59,
+          "clipGapMs": 561,
+          "sourceGapMs": 240,
+          "materialJumpMs": -321
+        },
+        {
+          "fromRun": 59,
+          "toRun": 61,
+          "clipGapMs": 520,
+          "sourceGapMs": 2340,
+          "materialJumpMs": 1820
+        },
+        {
+          "fromRun": 61,
+          "toRun": 62,
+          "clipGapMs": 0,
+          "sourceGapMs": 2621,
+          "materialJumpMs": 2621
+        }
+      ]
+    }
+  ],
+  "boundaries": [],
+  "confirmedRelation": {
+    "status": "not_checked",
+    "message": "この対象には確認済みペアをまだ持たせていないため、素材ブロックとの包含関係は未判定。"
+  },
+  "decisionsProposal": [
+    "- expectedCutsの開始・終了境界は「素材対応の切り替わり点」、つまり元動画の別位置へ飛ぶ点として扱う。同一素材対応の内部で間・沈黙・フィラーを詰めた箇所はexpectedCuts境界にしない。",
+    "- 同一素材ブロック内のジャンプカットや詰めは `internalGapMs` 系の注記として保持する。境界採点では「別素材への飛び」と「同一素材内の編集詰め」を分ける。",
+    "- 人間確認済みの使用範囲が、より粗い素材対応ブロックの内側に入る場合は矛盾ではない。境界を書き換える前に、素材切り替わり点と編集上の使用開始・終了を分けて確認する。"
+  ],
+  "outputs": {
+    "report": "evals/clip_composition/reports/material-blocks-aX-axQMWR3c-20260707-material-boundaries-v001.md",
+    "htmlPackage": "evals/clip_composition/outputs/boundary-check/aX-axQMWR3c/20260707-material-boundaries-v001/index.html"
+  },
+  "productionImpact": {
+    "fixtureCreated": false,
+    "expectedCreated": false,
+    "confirmedPairChanged": false,
+    "runtimeWrites": false,
+    "productionCodeChanged": false
+  },
+  "boundaryAssets": []
+}

@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <title>Material boundary check aX-axQMWR3c</title>
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif; margin: 24px; color: #111827; }
+    table { border-collapse: collapse; margin: 12px 0 20px; }
+    th, td { border: 1px solid #d1d5db; padding: 6px 9px; text-align: right; }
+    th:first-child, td:first-child { text-align: left; }
+    article { border-top: 1px solid #cbd5e1; padding-top: 20px; margin-top: 24px; }
+    .strip { margin: 18px 0; }
+    audio { display: block; width: 520px; max-width: 100%; margin: 6px 0 10px; }
+    video { display: block; width: 100%; background: #0f172a; }
+    .instructions { max-width: 980px; background: #f8fafc; border: 1px solid #cbd5e1; padding: 14px 16px; margin: 12px 0 18px; }
+    .instructions h2 { margin-top: 0; }
+    .instructions li { margin: 6px 0; }
+    .videos { display: grid; gap: 16px; align-items: start; }
+    .primary-videos { grid-template-columns: repeat(2, minmax(280px, 1fr)); margin-bottom: 18px; }
+    .support-videos { grid-template-columns: repeat(2, minmax(260px, 1fr)); }
+    .videos figure { margin: 0; }
+    .videos figcaption { font-size: 13px; line-height: 1.45; color: #374151; margin-top: 6px; }
+    .frames { display: grid; grid-template-columns: repeat(5, minmax(120px, 1fr)); gap: 10px; align-items: start; }
+    figure { margin: 0; }
+    img { width: 100%; border: 1px solid #d1d5db; background: #f9fafb; }
+    figcaption { font-size: 12px; color: #4b5563; line-height: 1.35; margin-top: 3px; }
+    @media (max-width: 900px) {
+      .primary-videos, .support-videos { grid-template-columns: 1fr; }
+      .frames { grid-template-columns: repeat(2, minmax(120px, 1fr)); }
+    }
+  </style>
+</head>
+<body>
+  <h1>素材境界確認 aX-axQMWR3c</h1>
+  <section class="instructions">
+    <h2>何を見るか</h2>
+    <ol>
+      <li><strong>clip連続再生</strong>を見る。切り抜き単体で、境界前から境界後まで実際の順番で見る。ここで切り替わりが起きているかを見る。</li>
+      <li><strong>source前後連続再生</strong>を見る。元動画の前側対応2秒、後側対応2秒を順番につないだ人工連結。前後が別位置に見えるかを見る。</li>
+      <li><strong>前側対応確認</strong>と<strong>後側対応確認</strong>は補助。左が切り抜き、右が元動画。対応が合っていそうかを見る。</li>
+      <li>静止画は補助。切り替わり判定は連続再生動画で判断する。</li>
+      <li>見ないこと: 同一素材内の細かい詰め、口元の完全同期、expectedCutsの最終開始・終了秒の確定。</li>
+    </ol>
+  </section>
+  <h2>ブロック表</h2>
+  <table>
+    <thead><tr><th>block</th><th>run</th><th>clip</th><th>source</th><th>対応語</th><th>内部詰め候補</th></tr></thead>
+    <tbody><tr><td>1</td><td>32, 41, 43, 45, 47, 49, 57, 59, 61, 62</td><td>0:27.258-2:29.530</td><td>82:02.443-84:16.495</td><td>326</td><td>+8878ms</td></tr></tbody>
+  </table>
+  
+</body>
+</html>
