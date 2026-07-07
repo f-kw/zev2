@@ -1,0 +1,401 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <title>Audio-separated block review aX-axQMWR3c</title>
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif; margin: 24px; color: #111827; }
+    .instructions { max-width: 980px; background: #f8fafc; border: 1px solid #cbd5e1; padding: 14px 16px; margin: 12px 0 18px; }
+    .run-card { border-top: 1px solid #cbd5e1; padding-top: 18px; margin-top: 22px; }
+    header { display: flex; align-items: center; gap: 12px; }
+    h1, h2 { margin: 0.2em 0; }
+    table { border-collapse: collapse; margin: 10px 0 12px; }
+    th, td { border: 1px solid #d1d5db; padding: 6px 9px; text-align: left; }
+    .controls { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0 12px; }
+    button { border: 1px solid #9ca3af; background: #ffffff; padding: 7px 10px; cursor: pointer; }
+    button:hover { background: #f3f4f6; }
+    .pair { display: grid; grid-template-columns: repeat(2, minmax(320px, 1fr)); gap: 14px; }
+    video { display: block; width: 100%; background: #0f172a; }
+    figure { margin: 0; }
+    figcaption { font-size: 13px; color: #374151; margin-top: 5px; }
+    .badge { display: inline-block; border: 1px solid #9ca3af; padding: 3px 7px; font-size: 13px; }
+    .badge.match { background: #ecfdf5; border-color: #34d399; }
+    .badge.not_match { background: #fef2f2; border-color: #f87171; }
+    .badge.uncertain { background: #fffbeb; border-color: #f59e0b; }
+    @media (max-width: 900px) { .pair { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <h1>音声分離確認 aX-axQMWR3c</h1>
+  <section class="instructions">
+    <h2>何を見るか</h2>
+    <ol>
+      <li>このページは、左右同時音声で判定しづらかった候補を、切り抜き音声と元配信音声に分けて確認する。</li>
+      <li>まず「切り抜き→元配信」を押し、同じ発話に聞こえるかを見る。</li>
+      <li>迷ったら「切り抜きだけ」「元配信だけ」で片方ずつ再生する。片方が無音なら、その候補は判定困難として残す。</li>
+      <li>ここで確認するのは素材対応の妥当性。fixture凍結やconfirmed化はまだ行わない。</li>
+    </ol>
+  </section>
+  <p>素材境界候補: 0件。2026-07-07 kawafmm確認では、音声分離版の全runが一致。</p>
+  <article class="run-card" id="run-32">
+  <header>
+    <h2>run 32</h2>
+    <span class="badge match">音声分離: 一致</span>
+  </header>
+  <table>
+    <tr><th>block</th><td>1</td></tr>
+    <tr><th>clip</th><td>0:27.258-0:29.079</td></tr>
+    <tr><th>source</th><td>82:02.443-82:05.405</td></tr>
+    <tr><th>対応語</th><td>10</td></tr>
+    <tr><th>同時再生一次判定</th><td>不一致</td></tr>
+    <tr><th>音声分離最終判定</th><td>一致</td></tr>
+  </table>
+  <div class="controls">
+    <button type="button" data-action="play-clip" data-run="32">切り抜きだけ再生</button>
+    <button type="button" data-action="play-source" data-run="32">元配信だけ再生</button>
+    <button type="button" data-action="play-sequence" data-run="32">切り抜き→元配信</button>
+    <button type="button" data-action="pause" data-run="32">停止</button>
+  </div>
+  <div class="pair">
+    <figure>
+      <video controls preload="metadata" data-role="clip" data-run="32" src="videos/block_01_run_032_clip.mp4"></video>
+      <figcaption>切り抜き</figcaption>
+    </figure>
+    <figure>
+      <video controls preload="metadata" data-role="source" data-run="32" src="videos/block_01_run_032_source.mp4"></video>
+      <figcaption>元配信</figcaption>
+    </figure>
+  </div>
+</article>
+<article class="run-card" id="run-41">
+  <header>
+    <h2>run 41</h2>
+    <span class="badge match">音声分離: 一致</span>
+  </header>
+  <table>
+    <tr><th>block</th><td>1</td></tr>
+    <tr><th>clip</th><td>1:00.702-1:04.905</td></tr>
+    <tr><th>source</th><td>82:36.865-82:41.488</td></tr>
+    <tr><th>対応語</th><td>23</td></tr>
+    <tr><th>同時再生一次判定</th><td>不一致</td></tr>
+    <tr><th>音声分離最終判定</th><td>一致</td></tr>
+  </table>
+  <div class="controls">
+    <button type="button" data-action="play-clip" data-run="41">切り抜きだけ再生</button>
+    <button type="button" data-action="play-source" data-run="41">元配信だけ再生</button>
+    <button type="button" data-action="play-sequence" data-run="41">切り抜き→元配信</button>
+    <button type="button" data-action="pause" data-run="41">停止</button>
+  </div>
+  <div class="pair">
+    <figure>
+      <video controls preload="metadata" data-role="clip" data-run="41" src="videos/block_01_run_041_clip.mp4"></video>
+      <figcaption>切り抜き</figcaption>
+    </figure>
+    <figure>
+      <video controls preload="metadata" data-role="source" data-run="41" src="videos/block_01_run_041_source.mp4"></video>
+      <figcaption>元配信</figcaption>
+    </figure>
+  </div>
+</article>
+<article class="run-card" id="run-43">
+  <header>
+    <h2>run 43</h2>
+    <span class="badge match">音声分離: 一致</span>
+  </header>
+  <table>
+    <tr><th>block</th><td>1</td></tr>
+    <tr><th>clip</th><td>1:06.706-1:11.509</td></tr>
+    <tr><th>source</th><td>82:46.271-82:51.214</td></tr>
+    <tr><th>対応語</th><td>47</td></tr>
+    <tr><th>同時再生一次判定</th><td>一致</td></tr>
+    <tr><th>音声分離最終判定</th><td>一致</td></tr>
+  </table>
+  <div class="controls">
+    <button type="button" data-action="play-clip" data-run="43">切り抜きだけ再生</button>
+    <button type="button" data-action="play-source" data-run="43">元配信だけ再生</button>
+    <button type="button" data-action="play-sequence" data-run="43">切り抜き→元配信</button>
+    <button type="button" data-action="pause" data-run="43">停止</button>
+  </div>
+  <div class="pair">
+    <figure>
+      <video controls preload="metadata" data-role="clip" data-run="43" src="videos/block_01_run_043_clip.mp4"></video>
+      <figcaption>切り抜き</figcaption>
+    </figure>
+    <figure>
+      <video controls preload="metadata" data-role="source" data-run="43" src="videos/block_01_run_043_source.mp4"></video>
+      <figcaption>元配信</figcaption>
+    </figure>
+  </div>
+</article>
+<article class="run-card" id="run-45">
+  <header>
+    <h2>run 45</h2>
+    <span class="badge match">音声分離: 一致</span>
+  </header>
+  <table>
+    <tr><th>block</th><td>1</td></tr>
+    <tr><th>clip</th><td>1:11.849-1:15.211</td></tr>
+    <tr><th>source</th><td>82:51.354-82:54.616</td></tr>
+    <tr><th>対応語</th><td>30</td></tr>
+    <tr><th>同時再生一次判定</th><td>一致</td></tr>
+    <tr><th>音声分離最終判定</th><td>一致</td></tr>
+  </table>
+  <div class="controls">
+    <button type="button" data-action="play-clip" data-run="45">切り抜きだけ再生</button>
+    <button type="button" data-action="play-source" data-run="45">元配信だけ再生</button>
+    <button type="button" data-action="play-sequence" data-run="45">切り抜き→元配信</button>
+    <button type="button" data-action="pause" data-run="45">停止</button>
+  </div>
+  <div class="pair">
+    <figure>
+      <video controls preload="metadata" data-role="clip" data-run="45" src="videos/block_01_run_045_clip.mp4"></video>
+      <figcaption>切り抜き</figcaption>
+    </figure>
+    <figure>
+      <video controls preload="metadata" data-role="source" data-run="45" src="videos/block_01_run_045_source.mp4"></video>
+      <figcaption>元配信</figcaption>
+    </figure>
+  </div>
+</article>
+<article class="run-card" id="run-47">
+  <header>
+    <h2>run 47</h2>
+    <span class="badge match">音声分離: 一致</span>
+  </header>
+  <table>
+    <tr><th>block</th><td>1</td></tr>
+    <tr><th>clip</th><td>1:15.591-1:18.693</td></tr>
+    <tr><th>source</th><td>82:55.157-82:58.259</td></tr>
+    <tr><th>対応語</th><td>18</td></tr>
+    <tr><th>同時再生一次判定</th><td>一致</td></tr>
+    <tr><th>音声分離最終判定</th><td>一致</td></tr>
+  </table>
+  <div class="controls">
+    <button type="button" data-action="play-clip" data-run="47">切り抜きだけ再生</button>
+    <button type="button" data-action="play-source" data-run="47">元配信だけ再生</button>
+    <button type="button" data-action="play-sequence" data-run="47">切り抜き→元配信</button>
+    <button type="button" data-action="pause" data-run="47">停止</button>
+  </div>
+  <div class="pair">
+    <figure>
+      <video controls preload="metadata" data-role="clip" data-run="47" src="videos/block_01_run_047_clip.mp4"></video>
+      <figcaption>切り抜き</figcaption>
+    </figure>
+    <figure>
+      <video controls preload="metadata" data-role="source" data-run="47" src="videos/block_01_run_047_source.mp4"></video>
+      <figcaption>元配信</figcaption>
+    </figure>
+  </div>
+</article>
+<article class="run-card" id="run-49">
+  <header>
+    <h2>run 49</h2>
+    <span class="badge match">音声分離: 一致</span>
+  </header>
+  <table>
+    <tr><th>block</th><td>1</td></tr>
+    <tr><th>clip</th><td>1:23.276-1:29.980</td></tr>
+    <tr><th>source</th><td>83:02.784-83:09.648</td></tr>
+    <tr><th>対応語</th><td>24</td></tr>
+    <tr><th>同時再生一次判定</th><td>一致</td></tr>
+    <tr><th>音声分離最終判定</th><td>一致</td></tr>
+  </table>
+  <div class="controls">
+    <button type="button" data-action="play-clip" data-run="49">切り抜きだけ再生</button>
+    <button type="button" data-action="play-source" data-run="49">元配信だけ再生</button>
+    <button type="button" data-action="play-sequence" data-run="49">切り抜き→元配信</button>
+    <button type="button" data-action="pause" data-run="49">停止</button>
+  </div>
+  <div class="pair">
+    <figure>
+      <video controls preload="metadata" data-role="clip" data-run="49" src="videos/block_01_run_049_clip.mp4"></video>
+      <figcaption>切り抜き</figcaption>
+    </figure>
+    <figure>
+      <video controls preload="metadata" data-role="source" data-run="49" src="videos/block_01_run_049_source.mp4"></video>
+      <figcaption>元配信</figcaption>
+    </figure>
+  </div>
+</article>
+<article class="run-card" id="run-57">
+  <header>
+    <h2>run 57</h2>
+    <span class="badge match">音声分離: 一致</span>
+  </header>
+  <table>
+    <tr><th>block</th><td>1</td></tr>
+    <tr><th>clip</th><td>2:00.314-2:06.137</td></tr>
+    <tr><th>source</th><td>83:41.276-83:47.538</td></tr>
+    <tr><th>対応語</th><td>29</td></tr>
+    <tr><th>同時再生一次判定</th><td>不一致</td></tr>
+    <tr><th>音声分離最終判定</th><td>一致</td></tr>
+  </table>
+  <div class="controls">
+    <button type="button" data-action="play-clip" data-run="57">切り抜きだけ再生</button>
+    <button type="button" data-action="play-source" data-run="57">元配信だけ再生</button>
+    <button type="button" data-action="play-sequence" data-run="57">切り抜き→元配信</button>
+    <button type="button" data-action="pause" data-run="57">停止</button>
+  </div>
+  <div class="pair">
+    <figure>
+      <video controls preload="metadata" data-role="clip" data-run="57" src="videos/block_01_run_057_clip.mp4"></video>
+      <figcaption>切り抜き</figcaption>
+    </figure>
+    <figure>
+      <video controls preload="metadata" data-role="source" data-run="57" src="videos/block_01_run_057_source.mp4"></video>
+      <figcaption>元配信</figcaption>
+    </figure>
+  </div>
+</article>
+<article class="run-card" id="run-59">
+  <header>
+    <h2>run 59</h2>
+    <span class="badge match">音声分離: 一致</span>
+  </header>
+  <table>
+    <tr><th>block</th><td>1</td></tr>
+    <tr><th>clip</th><td>2:06.698-2:12.641</td></tr>
+    <tr><th>source</th><td>83:47.778-83:53.699</td></tr>
+    <tr><th>対応語</th><td>41</td></tr>
+    <tr><th>同時再生一次判定</th><td>一致</td></tr>
+    <tr><th>音声分離最終判定</th><td>一致</td></tr>
+  </table>
+  <div class="controls">
+    <button type="button" data-action="play-clip" data-run="59">切り抜きだけ再生</button>
+    <button type="button" data-action="play-source" data-run="59">元配信だけ再生</button>
+    <button type="button" data-action="play-sequence" data-run="59">切り抜き→元配信</button>
+    <button type="button" data-action="pause" data-run="59">停止</button>
+  </div>
+  <div class="pair">
+    <figure>
+      <video controls preload="metadata" data-role="clip" data-run="59" src="videos/block_01_run_059_clip.mp4"></video>
+      <figcaption>切り抜き</figcaption>
+    </figure>
+    <figure>
+      <video controls preload="metadata" data-role="source" data-run="59" src="videos/block_01_run_059_source.mp4"></video>
+      <figcaption>元配信</figcaption>
+    </figure>
+  </div>
+</article>
+<article class="run-card" id="run-61">
+  <header>
+    <h2>run 61</h2>
+    <span class="badge match">音声分離: 一致</span>
+  </header>
+  <table>
+    <tr><th>block</th><td>1</td></tr>
+    <tr><th>clip</th><td>2:13.161-2:28.109</td></tr>
+    <tr><th>source</th><td>83:56.039-84:11.072</td></tr>
+    <tr><th>対応語</th><td>86</td></tr>
+    <tr><th>同時再生一次判定</th><td>判定困難</td></tr>
+    <tr><th>音声分離最終判定</th><td>一致</td></tr>
+  </table>
+  <div class="controls">
+    <button type="button" data-action="play-clip" data-run="61">切り抜きだけ再生</button>
+    <button type="button" data-action="play-source" data-run="61">元配信だけ再生</button>
+    <button type="button" data-action="play-sequence" data-run="61">切り抜き→元配信</button>
+    <button type="button" data-action="pause" data-run="61">停止</button>
+  </div>
+  <div class="pair">
+    <figure>
+      <video controls preload="metadata" data-role="clip" data-run="61" src="videos/block_01_run_061_clip.mp4"></video>
+      <figcaption>切り抜き</figcaption>
+    </figure>
+    <figure>
+      <video controls preload="metadata" data-role="source" data-run="61" src="videos/block_01_run_061_source.mp4"></video>
+      <figcaption>元配信</figcaption>
+    </figure>
+  </div>
+</article>
+<article class="run-card" id="run-62">
+  <header>
+    <h2>run 62</h2>
+    <span class="badge match">音声分離: 一致</span>
+  </header>
+  <table>
+    <tr><th>block</th><td>1</td></tr>
+    <tr><th>clip</th><td>2:28.109-2:29.530</td></tr>
+    <tr><th>source</th><td>84:13.693-84:16.495</td></tr>
+    <tr><th>対応語</th><td>18</td></tr>
+    <tr><th>同時再生一次判定</th><td>判定困難</td></tr>
+    <tr><th>音声分離最終判定</th><td>一致</td></tr>
+  </table>
+  <div class="controls">
+    <button type="button" data-action="play-clip" data-run="62">切り抜きだけ再生</button>
+    <button type="button" data-action="play-source" data-run="62">元配信だけ再生</button>
+    <button type="button" data-action="play-sequence" data-run="62">切り抜き→元配信</button>
+    <button type="button" data-action="pause" data-run="62">停止</button>
+  </div>
+  <div class="pair">
+    <figure>
+      <video controls preload="metadata" data-role="clip" data-run="62" src="videos/block_01_run_062_clip.mp4"></video>
+      <figcaption>切り抜き</figcaption>
+    </figure>
+    <figure>
+      <video controls preload="metadata" data-role="source" data-run="62" src="videos/block_01_run_062_source.mp4"></video>
+      <figcaption>元配信</figcaption>
+    </figure>
+  </div>
+</article>
+  <script>
+    function videos(run) {
+      return {
+        clip: document.querySelector('video[data-run="' + run + '"][data-role="clip"]'),
+        source: document.querySelector('video[data-run="' + run + '"][data-role="source"]')
+      };
+    }
+    function stop(video) {
+      if (!video) return;
+      video.pause();
+      video.currentTime = 0;
+    }
+    function stopBoth(run) {
+      const pair = videos(run);
+      stop(pair.clip);
+      stop(pair.source);
+    }
+    async function playOne(video) {
+      if (!video) return;
+      video.currentTime = 0;
+      await video.play();
+    }
+    function playSequence(run) {
+      const pair = videos(run);
+      stopBoth(run);
+      if (!pair.clip || !pair.source) return;
+      const handler = async () => {
+        pair.clip.removeEventListener('ended', handler);
+        pair.source.currentTime = 0;
+        await pair.source.play();
+      };
+      pair.clip.addEventListener('ended', handler);
+      pair.clip.currentTime = 0;
+      pair.clip.play();
+    }
+    document.addEventListener('click', async (event) => {
+      const button = event.target.closest('button[data-action]');
+      if (!button) return;
+      const run = button.dataset.run;
+      const action = button.dataset.action;
+      const pair = videos(run);
+      if (action === 'pause') {
+        stopBoth(run);
+        return;
+      }
+      if (action === 'play-clip') {
+        stopBoth(run);
+        await playOne(pair.clip);
+        return;
+      }
+      if (action === 'play-source') {
+        stopBoth(run);
+        await playOne(pair.source);
+        return;
+      }
+      if (action === 'play-sequence') {
+        playSequence(run);
+      }
+    });
+  </script>
+</body>
+</html>
