@@ -1,0 +1,21 @@
+{
+  "fixtureId": "aX-axQMWR3c_single_material_v001",
+  "draftId": "aX-axQMWR3c_single_material_v001",
+  "description": "音声分離確認で全run一致した単一区間素材ブロックを、composition評価用に固定したfixture。",
+  "copiedFrom": [
+    "evals/clip_composition/outputs/material-blocks-aX-axQMWR3c-20260707-material-boundaries-v001.json",
+    "evals/clip_composition/reports/material-block-audio-review-aX-axQMWR3c-20260707-material-block-audio-review-v002.md",
+    "stt/aX-axQMWR3c_SGQqVJXsNNE_local30_v001/source/word-timestamps.json"
+  ],
+  "copiedAt": "2026-07-07T01:23:02.751Z",
+  "sourceUri": "https://youtu.be/SGQqVJXsNNE",
+  "transcriptPath": "transcript.json",
+  "themesPath": "themes.json",
+  "selectedThemeId": "theme_material_block_1",
+  "notes": [
+    "評価実行時はruntime/artifactsを読まず、このfixture配下のファイルだけを読む。",
+    "expectedCutsは素材対応の切り替わり点の定義に基づく単一区間素材ブロック。",
+    "固定テーマは人間が正解区間から逆算して書いた。",
+    "同一素材内の詰めは境界ではなくinternalGapMsとして記録する。"
+  ]
+}

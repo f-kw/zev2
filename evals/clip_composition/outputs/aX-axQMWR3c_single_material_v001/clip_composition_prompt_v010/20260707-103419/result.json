@@ -1,0 +1,331 @@
+{
+  "runAt": "2026-07-07T10:34:19+09:00",
+  "draftId": "aX-axQMWR3c_single_material_v001",
+  "fixtureId": "aX-axQMWR3c_single_material_v001",
+  "promptVersion": "clip_composition_prompt_v010",
+  "generationSystem": {
+    "id": "llm-v010",
+    "kind": "llm",
+    "intervalGenerator": "web-gemini+prompt",
+    "promptVersion": "clip_composition_prompt_v010",
+    "usesPromptVersionForGeneration": true,
+    "model": "gemini-web-flash",
+    "sourceOutput": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/aX-axQMWR3c_single_material_v001/clip_composition_prompt_v010/20260707-102450/gemini-web-flash-output-run1-repaired.json"
+  },
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "runIndex": 1,
+    "repair": "rawResponseText-first-answer"
+  },
+  "evaluationMode": "external_prompt_output",
+  "inputFile": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/aX-axQMWR3c_single_material_v001/clip_composition_prompt_v010/20260707-102450/gemini-web-flash-output-run1-repaired.json",
+  "selectedCuts": [
+    {
+      "sourceStartMs": 4922443,
+      "sourceEndMs": 5056495,
+      "reason": "開始根拠: 組織内の不満や関係性に関する話題の切り出しとなる最初の一文字の発話から始まるためです。終了根拠: 組織の体制や相談の仕組みに関する結論と余韻が収束する最後の発話まで含めるためです。除外判断: 単一区間素材ブロックとして一連の流れに意味の連続性があるため、内部の区間は除外せずすべて含めています。"
+    }
+  ],
+  "scoredSelectedCuts": [
+    {
+      "sourceStartMs": 4922443,
+      "sourceEndMs": 5056495,
+      "reason": "開始根拠: 組織内の不満や関係性に関する話題の切り出しとなる最初の一文字の発話から始まるためです。終了根拠: 組織の体制や相談の仕組みに関する結論と余韻が収束する最後の発話まで含めるためです。除外判断: 単一区間素材ブロックとして一連の流れに意味の連続性があるため、内部の区間は除外せずすべて含めています。"
+    }
+  ],
+  "excludedSelectedCuts": [],
+  "expectedCuts": [
+    {
+      "sourceStartMs": 4922443,
+      "sourceEndMs": 5056495,
+      "reason": "音声分離確認で切り抜き側と元配信側の素材対応サンプルが全run一致した単一区間素材ブロックのため。",
+      "sourceVideoId": "SGQqVJXsNNE",
+      "sourceUrl": "https://youtu.be/SGQqVJXsNNE",
+      "sourceSttId": "aX-axQMWR3c_SGQqVJXsNNE_local30_v001",
+      "clipId": "aX-axQMWR3c",
+      "clipUrl": "https://www.youtube.com/watch?v=aX-axQMWR3c",
+      "verificationStatus": "material_block_audio_separated_human_confirmed",
+      "usableForClipLocationEval": true,
+      "usableForCompositionPromptEval": true,
+      "qualityGrade": "material_block_granularity",
+      "clipStartMs": 27258,
+      "clipEndMs": 149530,
+      "internalGapMs": {
+        "sourceExtraInsideMs": 8878,
+        "clipExtraInsideMs": 742,
+        "note": "同一素材ブロック内でsource側の進みがclip側より大きい分は、切り抜き内部の詰め候補として扱う。境界にはしない。"
+      },
+      "materialBlock": {
+        "blockIndex": 1,
+        "matchedWordPairCount": 326,
+        "clipDurationMs": 122272,
+        "sourceDurationMs": 134052,
+        "sourceMinusClipDurationMs": 11780,
+        "runIndexes": [
+          32,
+          41,
+          43,
+          45,
+          47,
+          49,
+          57,
+          59,
+          61,
+          62
+        ],
+        "internalTransitions": [
+          {
+            "fromRun": 32,
+            "toRun": 41,
+            "clipGapMs": 31623,
+            "sourceGapMs": 31460,
+            "materialJumpMs": -163
+          },
+          {
+            "fromRun": 41,
+            "toRun": 43,
+            "clipGapMs": 1801,
+            "sourceGapMs": 4783,
+            "materialJumpMs": 2982
+          },
+          {
+            "fromRun": 43,
+            "toRun": 45,
+            "clipGapMs": 340,
+            "sourceGapMs": 140,
+            "materialJumpMs": -200
+          },
+          {
+            "fromRun": 45,
+            "toRun": 47,
+            "clipGapMs": 380,
+            "sourceGapMs": 541,
+            "materialJumpMs": 161
+          },
+          {
+            "fromRun": 47,
+            "toRun": 49,
+            "clipGapMs": 4583,
+            "sourceGapMs": 4525,
+            "materialJumpMs": -58
+          },
+          {
+            "fromRun": 49,
+            "toRun": 57,
+            "clipGapMs": 30334,
+            "sourceGapMs": 31628,
+            "materialJumpMs": 1294
+          },
+          {
+            "fromRun": 57,
+            "toRun": 59,
+            "clipGapMs": 561,
+            "sourceGapMs": 240,
+            "materialJumpMs": -321
+          },
+          {
+            "fromRun": 59,
+            "toRun": 61,
+            "clipGapMs": 520,
+            "sourceGapMs": 2340,
+            "materialJumpMs": 1820
+          },
+          {
+            "fromRun": 61,
+            "toRun": 62,
+            "clipGapMs": 0,
+            "sourceGapMs": 2621,
+            "materialJumpMs": 2621
+          }
+        ]
+      },
+      "humanAudioSeparatedVerification": {
+        "status": "confirmed",
+        "checkedBy": "kawafmm",
+        "checkedAt": "2026-07-07",
+        "method": "音声分離確認パッケージ(v002)",
+        "reportPath": "evals/clip_composition/reports/material-block-audio-review-aX-axQMWR3c-20260707-material-block-audio-review-v002.md",
+        "note": "同時再生では一部が不一致/判定困難に見えたが、切り抜き側と元配信側を分離して順番に聴く確認では全run一致。"
+      },
+      "freezeGuard": {
+        "allMaterialBlocksConfirmed": true,
+        "fixedThemeHumanReverseWritten": true,
+        "fixedThemeTitle": "Vの組織内あれこれ",
+        "fixedThemeSummary": "Vの組織内あれこれ"
+      }
+    }
+  ],
+  "excludedRanges": [],
+  "timestampPlausibility": {
+    "boundaryMarginMs": 5000,
+    "transcriptBoundaryCount": 1262,
+    "suspectedFabricatedTimestamp": false,
+    "issues": []
+  },
+  "diff": {
+    "startDeltaMs": 0,
+    "endDeltaMs": 0,
+    "overlapSummary": "期待区間と完全に一致しています"
+  },
+  "cutDiffs": [
+    {
+      "cutIndex": 0,
+      "status": "compared",
+      "selectedCut": {
+        "sourceStartMs": 4922443,
+        "sourceEndMs": 5056495,
+        "reason": "開始根拠: 組織内の不満や関係性に関する話題の切り出しとなる最初の一文字の発話から始まるためです。終了根拠: 組織の体制や相談の仕組みに関する結論と余韻が収束する最後の発話まで含めるためです。除外判断: 単一区間素材ブロックとして一連の流れに意味の連続性があるため、内部の区間は除外せずすべて含めています。"
+      },
+      "expectedCut": {
+        "sourceStartMs": 4922443,
+        "sourceEndMs": 5056495,
+        "reason": "音声分離確認で切り抜き側と元配信側の素材対応サンプルが全run一致した単一区間素材ブロックのため。",
+        "sourceVideoId": "SGQqVJXsNNE",
+        "sourceUrl": "https://youtu.be/SGQqVJXsNNE",
+        "sourceSttId": "aX-axQMWR3c_SGQqVJXsNNE_local30_v001",
+        "clipId": "aX-axQMWR3c",
+        "clipUrl": "https://www.youtube.com/watch?v=aX-axQMWR3c",
+        "verificationStatus": "material_block_audio_separated_human_confirmed",
+        "usableForClipLocationEval": true,
+        "usableForCompositionPromptEval": true,
+        "qualityGrade": "material_block_granularity",
+        "clipStartMs": 27258,
+        "clipEndMs": 149530,
+        "internalGapMs": {
+          "sourceExtraInsideMs": 8878,
+          "clipExtraInsideMs": 742,
+          "note": "同一素材ブロック内でsource側の進みがclip側より大きい分は、切り抜き内部の詰め候補として扱う。境界にはしない。"
+        },
+        "materialBlock": {
+          "blockIndex": 1,
+          "matchedWordPairCount": 326,
+          "clipDurationMs": 122272,
+          "sourceDurationMs": 134052,
+          "sourceMinusClipDurationMs": 11780,
+          "runIndexes": [
+            32,
+            41,
+            43,
+            45,
+            47,
+            49,
+            57,
+            59,
+            61,
+            62
+          ],
+          "internalTransitions": [
+            {
+              "fromRun": 32,
+              "toRun": 41,
+              "clipGapMs": 31623,
+              "sourceGapMs": 31460,
+              "materialJumpMs": -163
+            },
+            {
+              "fromRun": 41,
+              "toRun": 43,
+              "clipGapMs": 1801,
+              "sourceGapMs": 4783,
+              "materialJumpMs": 2982
+            },
+            {
+              "fromRun": 43,
+              "toRun": 45,
+              "clipGapMs": 340,
+              "sourceGapMs": 140,
+              "materialJumpMs": -200
+            },
+            {
+              "fromRun": 45,
+              "toRun": 47,
+              "clipGapMs": 380,
+              "sourceGapMs": 541,
+              "materialJumpMs": 161
+            },
+            {
+              "fromRun": 47,
+              "toRun": 49,
+              "clipGapMs": 4583,
+              "sourceGapMs": 4525,
+              "materialJumpMs": -58
+            },
+            {
+              "fromRun": 49,
+              "toRun": 57,
+              "clipGapMs": 30334,
+              "sourceGapMs": 31628,
+              "materialJumpMs": 1294
+            },
+            {
+              "fromRun": 57,
+              "toRun": 59,
+              "clipGapMs": 561,
+              "sourceGapMs": 240,
+              "materialJumpMs": -321
+            },
+            {
+              "fromRun": 59,
+              "toRun": 61,
+              "clipGapMs": 520,
+              "sourceGapMs": 2340,
+              "materialJumpMs": 1820
+            },
+            {
+              "fromRun": 61,
+              "toRun": 62,
+              "clipGapMs": 0,
+              "sourceGapMs": 2621,
+              "materialJumpMs": 2621
+            }
+          ]
+        },
+        "humanAudioSeparatedVerification": {
+          "status": "confirmed",
+          "checkedBy": "kawafmm",
+          "checkedAt": "2026-07-07",
+          "method": "音声分離確認パッケージ(v002)",
+          "reportPath": "evals/clip_composition/reports/material-block-audio-review-aX-axQMWR3c-20260707-material-block-audio-review-v002.md",
+          "note": "同時再生では一部が不一致/判定困難に見えたが、切り抜き側と元配信側を分離して順番に聴く確認では全run一致。"
+        },
+        "freezeGuard": {
+          "allMaterialBlocksConfirmed": true,
+          "fixedThemeHumanReverseWritten": true,
+          "fixedThemeTitle": "Vの組織内あれこれ",
+          "fixedThemeSummary": "Vの組織内あれこれ"
+        }
+      },
+      "startDeltaMs": 0,
+      "endDeltaMs": 0,
+      "overlapMs": 134052,
+      "overlapSummary": "期待区間と完全に一致しています"
+    }
+  ],
+  "diffSummary": {
+    "expectedCutCount": 1,
+    "selectedCutCount": 1,
+    "comparedCutCount": 1,
+    "exactMatchCount": 1,
+    "overlappingCutCount": 1,
+    "missingExpectedCutCount": 0,
+    "extraSelectedCutCount": 0,
+    "allExpectedCutsMatchedExactlyByIndex": true,
+    "allExpectedCutsHaveOverlapByIndex": true,
+    "summary": "期待区間1件に対して選択区間1件。 完全一致1件、重なりあり1件。 未選択の期待区間0件、余分な選択区間0件。"
+  },
+  "themeCoverage": {
+    "selectedThemeId": "theme_material_block_1",
+    "candidateStartMs": 4922443,
+    "candidateEndMs": 5056495,
+    "coverageSummary": "期待区間はすべて選択済みテーマの候補範囲に入り、LLMが選んだ区間も同じ順番で一致しています",
+    "themeSidePossibility": "theme側で正解区間が候補に入っていない可能性は低い",
+    "compositionSidePossibility": "composition側の候補選択差分はありません"
+  },
+  "sourceFiles": {
+    "fixture": "fixtures/aX-axQMWR3c_single_material_v001",
+    "expected": "expected/aX-axQMWR3c_single_material_v001.json"
+  }
+}
