@@ -1,0 +1,87 @@
+{
+  "kind": "clip_composition_xau_part01_partial_fixture_human_decision",
+  "fixtureId": "XauLZgnWHtA_part01_partial_material_v001",
+  "checkedBy": "kawafmm",
+  "checkedAt": "2026-07-08",
+  "acceptedBlocks": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "rejectedBlocks": [
+    {
+      "blockIndex": 7,
+      "reason": "人間判定で違う素材"
+    }
+  ],
+  "excludedUnjudgeableRanges": [
+    {
+      "id": "unresolved_volume_warning_clip_115000_148000",
+      "label": "※音量注意",
+      "clipStartMs": 115000,
+      "clipEndMs": 148000,
+      "evidenceStatus": "stt_missing_no_source_match",
+      "scoringTreatment": "excluded_from_fixture_expected",
+      "reason": "切り抜き側STTが再取得後も0語で、比較先が見つかっていない。人間が判断できる材料ではないため、採点対象外にする。"
+    },
+    {
+      "id": "unresolved_pants_group_clip_176000_221000",
+      "label": "パンツ集団",
+      "clipStartMs": 176000,
+      "clipEndMs": 221000,
+      "evidenceStatus": "insufficient_continuous_alignment",
+      "scoringTreatment": "excluded_from_fixture_expected",
+      "reason": "STTはあるが、章全体を素材ブロックとして確定できる連続対応がない。短い一致候補は章全体の確定証拠ではないため、採点対象外にする。"
+    },
+    {
+      "id": "unresolved_two_people_room_clip_382000_425000",
+      "label": "部屋に2人きり",
+      "clipStartMs": 382000,
+      "clipEndMs": 425000,
+      "evidenceStatus": "insufficient_continuous_alignment",
+      "scoringTreatment": "excluded_from_fixture_expected",
+      "reason": "STTはあるが、章全体を素材ブロックとして確定できる連続対応がない。短い一致候補は章全体の確定証拠ではないため、採点対象外にする。"
+    }
+  ],
+  "fixedTheme": {
+    "title": "4. 【2023年6月①週】10分でわかる先週のにじさんじ爆笑シーンまとめ / 前半 0:00-7:05",
+    "summary": "4. 【2023年6月①週】10分でわかる先週のにじさんじ爆笑シーンまとめ / 前半 0:00-7:05"
+  },
+  "acceptedBlocksHumanConfirmation": {
+    "status": "confirmed",
+    "checkedBy": "kawafmm",
+    "checkedAt": "2026-07-08",
+    "materialCorrespondence": "all_accepted_blocks_correct",
+    "acceptedBlocks": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "rejectedBlocks": [
+      7
+    ],
+    "method": "凍結前確認ダッシュボードの音声確認",
+    "reportPath": "evals/clip_composition/reports/fourth-candidate-XauLZgnWHtA-part01-human-review-20260708-v001.md",
+    "note": "採用6ブロックは人間確認済み。素材対応は全ブロック正しい。境界は目視レベルで±数百msのブレを含む。",
+    "boundaryPrecision": {
+      "grade": "material_block_granularity",
+      "measurementLimitMs": 1000,
+      "meaning": "境界精度: 素材ブロック粒度。境界は目視レベルで±数百msのブレを含むため、±1秒未満の差分は測定限界内として扱う。",
+      "note": "このfixtureは高精度境界サンプルではなく、素材対応ブロックとしての採否を測る。"
+    }
+  },
+  "boundaryPrecision": {
+    "grade": "material_block_granularity",
+    "measurementLimitMs": 1000,
+    "meaning": "境界精度: 素材ブロック粒度。境界は目視レベルで±数百msのブレを含むため、±1秒未満の差分は測定限界内として扱う。",
+    "note": "このfixtureは高精度境界サンプルではなく、素材対応ブロックとしての採否を測る。"
+  },
+  "readyForFreeze": true,
+  "note": "人間が判断できない材料を人間確認待ちにしない。証拠不足の範囲は採点対象外として扱う。"
+}

@@ -11,11 +11,13 @@
 
 ## 版番号の結論
 
-最新の改訂版は `clip_composition_prompt_v011`。
+最新の改訂版は `clip_composition_prompt_v012`。
 
 `v010` は、`v007` から `v009` までが既に実体を持つため作成した。`v007` は終端の結論反復、`v008` は短い相づち、`v009` は境界候補入力の実験であり、「複数区間の扱い、reason指定、few-shot」を同じ版番号で上書きしないため。
 
 `v011` は `v010` から差分1点だけで、区間採否の基準を「長さではなく前後との意味の連続性」とする指示を追加した。
+
+`v012` は `v011` から判断方針を変えず、出力契約だけを変更した。`usedSpeechIds` を全列挙ではなく、連続範囲文字列と不連続な個別IDの混在形式で返す。
 
 `v007` から `v009` は `prompts/archive/` へ移動済み。過去の `outputs/` と `reports/` は移動せず、参照できる状態を維持する。
 
@@ -34,6 +36,7 @@
 | v009 | 初出 `b61cd8b`、実体化 `227778f` / 2026-07-05 21:18 / Add v009 boundary signal prompt input | v008の終端過多に対し、字幕/STT由来の境界候補を入力へ追加して発話途中境界を扱えるか試した版。 | v006に、`boundarySignals` の読み方と、境界候補を理由で説明する指示を追加。 | result 1件。LLM 1件。UpRyakf5j80で終了差分 +1992ms。境界候補入力漏えい検査はpass。 | 境界候補とreason指定の一部は今回改訂と重なる。ただし複数区間とfew-shotは未対応。標準入力に境界候補が無い場合は扱いが特殊。 | 実験版として `prompts/archive/clip_composition_prompt_v009.md` へ移動済み。 |
 | v010 | 2026-07-06 / この作業で作成 | 2fixture再採点の測定対象をbaseline-ruleとllm系へ分離した後、複数素材ブロックfixtureをLLM実測へ進めるために作成。 | v006に、離れた素材場面を複数 `selectedCuts` として返す指示、開始根拠・終了根拠・除外判断をreasonに書く指示、架空素材の単一区間few-shotと複数区間few-shotを追加。`boundarySignals` は入れない。 | result 6件。2fixture×3回をWeb Geminiで実走し、`reports/prompt-result-comparison-20260706-v010-three-way-v003.md` と `reports/llm-v010-runs3-three-way-summary-20260706-v001.md` に記録。 | 今回の正式実験版。 | 正式版として台帳登録。 |
 | v011 | 2026-07-06 / この作業で作成 | v010の複数区間実走で、r_ztjHaHmcgの短い期待区間2が3回とも選ばれなかったため作成。 | v010との差分は1点のみ。判断方針に「区間を採用するか除外するかは、長さではなく、前後の区間と意味が連続しているかで判断する」を追加。 | result 6件。2fixture×3回をWeb Geminiで実走し、`reports/prompt-result-comparison-20260706-v011-v010-baseline-v001.md` と `reports/llm-v011-runs3-v010-baseline-summary-20260706-v001.md` に記録。 | v010の構造揺れ確認用。期待区間2は3回とも未選択。 | 正式実験版として台帳登録。 |
+| v012 | 2026-07-08 / この作業で作成 | 4fixture採点で、長い複数区間JSONが途中切れし、後方ブロックが欠落したため作成。意味判断の指示を変えず、出力総量だけを減らす。 | v011との差分は出力契約のみ。`usedSpeechIds` を、連続IDは `"12-47"`、不連続IDは数値として混ぜる圧縮表記へ変更。few-shotと出力例も同じ表記に更新。 | result 12件。4fixture×3回をWeb Geminiで実走し、`reports/prompt-result-comparison-20260708-four-fixture-v010-v011-v012-baseline-v001.md` と `reports/llm-v012-runs3-four-fixture-summary-20260708-v001.md` に記録。4件目は3回とも6/6完全一致。 | 途中切れ対策の正式実験版。期待区間2は未解決。 | 正式版として台帳登録。 |
 
 ## v007-v009と次回改訂の関係
 
@@ -57,3 +60,12 @@
 `v011` では、`v010` の判断方針に次の1行だけを追加した。
 
 - 区間を採用するか除外するかは、長さではなく、前後の区間と意味が連続しているかで判断する。
+
+## v012への反映
+
+`v012` では、`v011` の判断方針を変更せず、出力契約だけを変更した。
+
+- `usedSpeechIds` は廃止しない。
+- 連続する発話IDは `"12-47"` のような範囲文字列で返す。
+- 不連続な発話IDは、個別の数値として同じ配列に入れる。
+- `from` と `to` の2値だけにする方式は、同時発話や割り込み発話を除外する表現力を失うため採用しない。

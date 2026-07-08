@@ -1,0 +1,24 @@
+{
+  "selectedCuts": [
+    {
+      "sourceStartMs": 11364140,
+      "sourceEndMs": 11405460,
+      "reason": "開始根拠: リスナーが「世界2位なんだと取り上げられているのを見ました」と話題を提示する発話から切り抜きを開始します。終了根拠: 「どうせまた変わるしみたいな感じ あんま喜べないんだよね」と順位変動への冷静な結論が収束する発話までを含めます。除外判断: 話題提示の前の挨拶発話（speechId: 1）や、結論以降の相槌のみの発話（speechId: 20）はテーマと直接関係がないため除外します。",
+      "usedSpeechIds": [
+        "2-19"
+      ]
+    }
+  ],
+  "runAt": "2026-07-08T11:55:17+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "runIndex": 3,
+    "usedSpeechIdsFormat": "compressed-ranges"
+  },
+  "promptFile": "reports/UpRyakf5j80_clip_audio_v001/clip_composition_prompt_v012/20260708-115350/prompt.md",
+  "pageUrl": "https://gemini.google.com/app/53295e2f1b7b038f?hl=ja",
+  "rawResponseText": "{\n\"selectedCuts\": [\n{\n\"sourceStartMs\": 11364140,\n\"sourceEndMs\": 11405460,\n\"reason\": \"開始根拠: リスナーが「世界2位なんだと取り上げられているのを見ました」と話題を提示する発話から切り抜きを開始します。終了根拠: 「どうせまた変わるしみたいな感じ あんま喜べないんだよね」と順位変動への冷静な結論が収束する発話までを含めます。除外判断: 話題提示の前の挨拶発話（speechId: 1）や、結論以降の相槌のみの発話（speechId: 20）はテーマと直接関係がないため除外します。\",\n\"usedSpeechIds\": [\"2-19\"]\n}\n]\n}\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

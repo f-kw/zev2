@@ -493,22 +493,35 @@ function candidateCoverage(
 }
 
 function buildStability(runs: RunResult[]) {
-  const starts = runs.flatMap((run) => run.selectedCuts.map((cut) => cut.sourceStartMs));
-  const ends = runs.flatMap((run) => run.selectedCuts.map((cut) => cut.sourceEndMs));
   const intervalKeys = new Set(runs.map((run) => JSON.stringify(run.selectedCuts.map((cut) => ({
     sourceStartMs: cut.sourceStartMs,
     sourceEndMs: cut.sourceEndMs
   })))));
-  const reasons = new Set(runs.flatMap((run) => run.selectedCuts.map((cut) => cut.reason)));
+  const reasonSignatures = new Set(runs.map((run) => JSON.stringify(run.selectedCuts.map((cut) => cut.reason))));
+  const maxCutCount = Math.max(0, ...runs.map((run) => run.selectedCuts.length));
+  const perCutJitter = Array.from({ length: maxCutCount }, (_, cutIndex) => {
+    const starts = runs
+      .map((run) => run.selectedCuts[cutIndex]?.sourceStartMs)
+      .filter((value): value is number => typeof value === 'number');
+    const ends = runs
+      .map((run) => run.selectedCuts[cutIndex]?.sourceEndMs)
+      .filter((value): value is number => typeof value === 'number');
+    return {
+      cutIndex,
+      startJitterMs: starts.length > 1 ? Math.max(...starts) - Math.min(...starts) : 0,
+      endJitterMs: ends.length > 1 ? Math.max(...ends) - Math.min(...ends) : 0
+    };
+  });
 
   return {
     allRunsSelectedSameCuts: intervalKeys.size === 1,
-    startJitterMs: starts.length > 0 ? Math.max(...starts) - Math.min(...starts) : 0,
-    endJitterMs: ends.length > 0 ? Math.max(...ends) - Math.min(...ends) : 0,
-    reasonVariantCount: reasons.size,
-    reasonVariationSummary: reasons.size === 1
+    startJitterMs: Math.max(0, ...perCutJitter.map((item) => item.startJitterMs)),
+    endJitterMs: Math.max(0, ...perCutJitter.map((item) => item.endJitterMs)),
+    reasonVariantCount: reasonSignatures.size,
+    reasonVariationSummary: reasonSignatures.size === 1
       ? '判断理由は全実行で同じです'
-      : `判断理由が${reasons.size}種類に分かれました`
+      : `判断理由の組み合わせが${reasonSignatures.size}種類に分かれました`,
+    perCutJitter
   };
 }
 

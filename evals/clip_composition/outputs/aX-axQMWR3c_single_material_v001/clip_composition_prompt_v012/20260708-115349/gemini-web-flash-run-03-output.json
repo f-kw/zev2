@@ -1,0 +1,25 @@
+{
+  "selectedCuts": [
+    {
+      "sourceStartMs": 4922443,
+      "sourceEndMs": 5056495,
+      "reason": "開始根拠: 組織内の体制や上司の人数に違和感を持つ話題が始まる最初の発話から選択しているためです。終了根拠: 1期生に関しては自分たちが直接話を聞けるから安心であるという一連の組織内トークが収束する最後の発話まで含めるためです。除外判断: 単一区間素材ブロックとして意味の連続性が全編にわたり保たれているため、内部で区間を分けずすべて一続きの範囲として採用しました。",
+      "usedSpeechIds": [
+        "1-631"
+      ]
+    }
+  ],
+  "runAt": "2026-07-08T12:16:12+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "runIndex": 3,
+    "usedSpeechIdsFormat": "compressed-ranges",
+    "retryAfterCdpHang": true
+  },
+  "promptFile": "reports/aX-axQMWR3c_single_material_v001/clip_composition_prompt_v012/20260708-115349/prompt.md",
+  "pageUrl": "https://gemini.google.com/app/19ba0176401b99b4?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"selectedCuts\": [\n    {\n      \"sourceStartMs\": 4922443,\n      \"sourceEndMs\": 5056495,\n      \"reason\": \"開始根拠: 組織内の体制や上司の人数に違和感を持つ話題が始まる最初の発話から選択しているためです。終了根拠: 1期生に関しては自分たちが直接話を聞けるから安心であるという一連の組織内トークが収束する最後の発話まで含めるためです。除外判断: 単一区間素材ブロックとして意味の連続性が全編にわたり保たれているため、内部で区間を分けずすべて一続きの範囲として採用しました。\",\n      \"usedSpeechIds\": [\n        \"1-631\"\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

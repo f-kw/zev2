@@ -1,0 +1,58 @@
+{
+  "fixtureId": "XauLZgnWHtA_part01_partial_material_v001",
+  "draftId": "XauLZgnWHtA_part01_partial_material_v001",
+  "description": "人間確認で一致したblock 1〜6だけを採用し、人間が判断できない未解決3章と違う素材のblock 7を除外した部分fixture。",
+  "copiedFrom": [
+    "evals/clip_composition/stt-targets/XauLZgnWHtA_part01.json",
+    "evals/clip_composition/outputs/material-block-review-XauLZgnWHtA_part01-20260707-text-material-block-review-v001.json",
+    "evals/clip_composition/reports/fourth-candidate-XauLZgnWHtA-part01-human-review-20260708-v001.md",
+    "evals/clip_composition/reports/stt-retry-XauLZgnWHtA_part01-20260707-stt-restart-v001.md",
+    "evals/clip_composition/reports/fourth-candidate-XauLZgnWHtA-part01-review-dashboard-20260707-freeze-precheck-v001.md"
+  ],
+  "copiedAt": "2026-07-08T01:28:30.443Z",
+  "sourceUri": "multi-source",
+  "transcriptPath": "transcript.json",
+  "themesPath": "themes.json",
+  "selectedThemeId": "theme_xau_part01_partial_material_1",
+  "notes": [
+    "評価実行時はruntime/artifactsを読まず、このfixture配下のファイルだけを読む。",
+    "expectedCutsは人間が素材として同じと確認したblock 1〜6だけ。",
+    "採用6ブロックは人間確認済み。素材対応は全ブロック正しい。",
+    "境界精度は素材ブロック粒度。±1秒未満の差分は測定限界内として扱う。",
+    "未解決3章は人間が判断できる比較材料ではないため、証拠不足として採点対象外にした。",
+    "block 7は人間判定で違う素材だったため除外した。",
+    "固定テーマはナンバリングと元動画タイトルで作った。"
+  ],
+  "humanConfirmation": {
+    "status": "confirmed",
+    "checkedBy": "kawafmm",
+    "checkedAt": "2026-07-08",
+    "materialCorrespondence": "all_accepted_blocks_correct",
+    "acceptedBlocks": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "rejectedBlocks": [
+      7
+    ],
+    "method": "凍結前確認ダッシュボードの音声確認",
+    "reportPath": "evals/clip_composition/reports/fourth-candidate-XauLZgnWHtA-part01-human-review-20260708-v001.md",
+    "note": "採用6ブロックは人間確認済み。素材対応は全ブロック正しい。境界は目視レベルで±数百msのブレを含む。",
+    "boundaryPrecision": {
+      "grade": "material_block_granularity",
+      "measurementLimitMs": 1000,
+      "meaning": "境界精度: 素材ブロック粒度。境界は目視レベルで±数百msのブレを含むため、±1秒未満の差分は測定限界内として扱う。",
+      "note": "このfixtureは高精度境界サンプルではなく、素材対応ブロックとしての採否を測る。"
+    }
+  },
+  "boundaryPrecision": {
+    "grade": "material_block_granularity",
+    "measurementLimitMs": 1000,
+    "meaning": "境界精度: 素材ブロック粒度。境界は目視レベルで±数百msのブレを含むため、±1秒未満の差分は測定限界内として扱う。",
+    "note": "このfixtureは高精度境界サンプルではなく、素材対応ブロックとしての採否を測る。"
+  }
+}

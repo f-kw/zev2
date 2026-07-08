@@ -1,0 +1,1258 @@
+{
+  "runAt": "2026-07-08T10:12:43+09:00",
+  "draftId": "XauLZgnWHtA_part01_partial_material_v001",
+  "fixtureId": "XauLZgnWHtA_part01_partial_material_v001",
+  "promptVersion": "clip_composition_prompt_baseline-rule",
+  "generationSystem": {
+    "id": "baseline-rule",
+    "kind": "baseline-rule",
+    "intervalGenerator": "runner.buildClipComposition",
+    "promptVersion": null,
+    "usesPromptVersionForGeneration": false,
+    "model": "baseline-rule",
+    "note": "互換用のpromptVersionラベルは記録しているが、区間生成には使っていない。"
+  },
+  "model": "baseline-rule",
+  "params": {
+    "temperature": 0,
+    "llmCall": false,
+    "selection": "固定済みテーマIDに対応する発話まとまりから最終区間を作る",
+    "promptVersionUsedForGeneration": false
+  },
+  "selectedCuts": [
+    {
+      "sourceStartMs": 440672,
+      "sourceEndMs": 450696,
+      "reason": "選ばれたテーマ「4. 【2023年6月①週】10分でわかる先週のにじさんじ爆笑シーンまとめ / 前半 0:00-7:05」の編集元場面1。 役割: 導入。 選ばれたテーマを見せる入口にする block 1〜6を切り抜き内の素材順に別々のselectedCutsとして扱う。未解決3章とblock 7は採点対象外であり、選択しない。"
+    },
+    {
+      "sourceStartMs": 1809559,
+      "sourceEndMs": 1829518,
+      "reason": "選ばれたテーマ「4. 【2023年6月①週】10分でわかる先週のにじさんじ爆笑シーンまとめ / 前半 0:00-7:05」の編集元場面2。 役割: 展開。 前の発話を受けて話の流れをつなぐ block 1〜6を切り抜き内の素材順に別々のselectedCutsとして扱う。未解決3章とblock 7は採点対象外であり、選択しない。"
+    },
+    {
+      "sourceStartMs": 7478079,
+      "sourceEndMs": 7500512,
+      "reason": "選ばれたテーマ「4. 【2023年6月①週】10分でわかる先週のにじさんじ爆笑シーンまとめ / 前半 0:00-7:05」の編集元場面3。 役割: 展開。 前の発話を受けて話の流れをつなぐ block 1〜6を切り抜き内の素材順に別々のselectedCutsとして扱う。未解決3章とblock 7は採点対象外であり、選択しない。"
+    },
+    {
+      "sourceStartMs": 3432777,
+      "sourceEndMs": 3434438,
+      "reason": "選ばれたテーマ「4. 【2023年6月①週】10分でわかる先週のにじさんじ爆笑シーンまとめ / 前半 0:00-7:05」の編集元場面4。 役割: 展開。 前の発話を受けて話の流れをつなぐ block 1〜6を切り抜き内の素材順に別々のselectedCutsとして扱う。未解決3章とblock 7は採点対象外であり、選択しない。"
+    },
+    {
+      "sourceStartMs": 5427822,
+      "sourceEndMs": 5436145,
+      "reason": "選ばれたテーマ「4. 【2023年6月①週】10分でわかる先週のにじさんじ爆笑シーンまとめ / 前半 0:00-7:05」の編集元場面5。 役割: 展開。 前の発話を受けて話の流れをつなぐ block 1〜6を切り抜き内の素材順に別々のselectedCutsとして扱う。未解決3章とblock 7は採点対象外であり、選択しない。"
+    },
+    {
+      "sourceStartMs": 4049549,
+      "sourceEndMs": 4052650,
+      "reason": "選ばれたテーマ「4. 【2023年6月①週】10分でわかる先週のにじさんじ爆笑シーンまとめ / 前半 0:00-7:05」の編集元場面6。 役割: 結論。 前の発話を受けて話の流れをつなぐ block 1〜6を切り抜き内の素材順に別々のselectedCutsとして扱う。未解決3章とblock 7は採点対象外であり、選択しない。"
+    }
+  ],
+  "expectedCuts": [
+    {
+      "sourceStartMs": 440672,
+      "sourceEndMs": 450696,
+      "reason": "人間確認で切り抜き側と元配信側が同じ素材と判定された素材ブロックのため。",
+      "sourceVideoId": "OJoi31bq8lk",
+      "sourceUrl": "https://www.youtube.com/live/OJoi31bq8lk?feature=share",
+      "sourceSttId": "XauLZgnWHtA_OJoi31bq8lk_000405028_000455028_text_window_v001",
+      "clipId": "XauLZgnWHtA_part01_000000_000705",
+      "clipUrl": "https://www.youtube.com/watch?v=XauLZgnWHtA",
+      "verificationStatus": "partial_material_human_confirmed_with_unjudgeable_exclusions",
+      "usableForClipLocationEval": true,
+      "usableForCompositionPromptEval": true,
+      "multicutPartIndex": 0,
+      "clipStartMs": 34928,
+      "clipEndMs": 44633,
+      "qualityGrade": "material_block_granularity",
+      "label": "逆凸遊戯王",
+      "materialBlock": {
+        "blockIndex": 1,
+        "runCount": 5,
+        "matchedWordPairCount": 61,
+        "internalGapMs": 2022,
+        "sourceVideoId": "OJoi31bq8lk"
+      },
+      "internalGapMs": {
+        "sourceExtraInsideMs": 319,
+        "clipExtraInsideMs": 0,
+        "detectedInternalGapMs": 2022,
+        "note": "同一素材ブロック内の詰め候補。素材対応の切り替わり点ではないため境界にはしない。"
+      },
+      "humanVerification": {
+        "status": "confirmed",
+        "checkedBy": "kawafmm",
+        "checkedAt": "2026-07-08",
+        "method": "凍結前確認ダッシュボードの音声確認",
+        "reportPath": "evals/clip_composition/reports/fourth-candidate-XauLZgnWHtA-part01-human-review-20260708-v001.md",
+        "note": "人間判定で一致。"
+      },
+      "partialFixturePolicy": {
+        "unresolvedExcluded": true,
+        "unresolvedRangeIds": [
+          "unresolved_volume_warning_clip_115000_148000",
+          "unresolved_pants_group_clip_176000_221000",
+          "unresolved_two_people_room_clip_382000_425000"
+        ],
+        "falsePositiveBlockIds": [
+          "false_positive_block_7_oyAW0m4FtXE"
+        ],
+        "note": "人間が判断できない未解決3章は採点対象外。block 7は人間判定で違う素材のため除外。"
+      }
+    },
+    {
+      "sourceStartMs": 1809559,
+      "sourceEndMs": 1829518,
+      "reason": "人間確認で切り抜き側と元配信側が同じ素材と判定された素材ブロックのため。",
+      "sourceVideoId": "O4ryDQBcMDc",
+      "sourceUrl": "https://www.youtube.com/live/O4ryDQBcMDc?feature=share",
+      "sourceSttId": "XauLZgnWHtA_O4ryDQBcMDc_001791383_001856383_text_window_v001",
+      "clipId": "XauLZgnWHtA_part01_000000_000705",
+      "clipUrl": "https://www.youtube.com/watch?v=XauLZgnWHtA",
+      "verificationStatus": "partial_material_human_confirmed_with_unjudgeable_exclusions",
+      "usableForClipLocationEval": true,
+      "usableForCompositionPromptEval": true,
+      "multicutPartIndex": 1,
+      "clipStartMs": 69013,
+      "clipEndMs": 88720,
+      "qualityGrade": "material_block_granularity",
+      "label": "スタッフと相談",
+      "materialBlock": {
+        "blockIndex": 2,
+        "runCount": 2,
+        "matchedWordPairCount": 43,
+        "internalGapMs": 0,
+        "sourceVideoId": "O4ryDQBcMDc"
+      },
+      "internalGapMs": {
+        "sourceExtraInsideMs": 252,
+        "clipExtraInsideMs": 0,
+        "detectedInternalGapMs": 0,
+        "note": "同一素材ブロック内の詰め候補。素材対応の切り替わり点ではないため境界にはしない。"
+      },
+      "humanVerification": {
+        "status": "confirmed",
+        "checkedBy": "kawafmm",
+        "checkedAt": "2026-07-08",
+        "method": "凍結前確認ダッシュボードの音声確認",
+        "reportPath": "evals/clip_composition/reports/fourth-candidate-XauLZgnWHtA-part01-human-review-20260708-v001.md",
+        "note": "人間判定で一致。"
+      },
+      "partialFixturePolicy": {
+        "unresolvedExcluded": true,
+        "unresolvedRangeIds": [
+          "unresolved_volume_warning_clip_115000_148000",
+          "unresolved_pants_group_clip_176000_221000",
+          "unresolved_two_people_room_clip_382000_425000"
+        ],
+        "falsePositiveBlockIds": [
+          "false_positive_block_7_oyAW0m4FtXE"
+        ],
+        "note": "人間が判断できない未解決3章は採点対象外。block 7は人間判定で違う素材のため除外。"
+      }
+    },
+    {
+      "sourceStartMs": 7478079,
+      "sourceEndMs": 7500512,
+      "reason": "人間確認で切り抜き側と元配信側が同じ素材と判定された素材ブロックのため。",
+      "sourceVideoId": "vWv9H-hfHXo",
+      "sourceUrl": "https://www.youtube.com/live/vWv9H-hfHXo?feature=share",
+      "sourceSttId": "XauLZgnWHtA_vWv9H-hfHXo_007476308_007504308_text_window_v001",
+      "clipId": "XauLZgnWHtA_part01_000000_000705",
+      "clipUrl": "https://www.youtube.com/watch?v=XauLZgnWHtA",
+      "verificationStatus": "partial_material_human_confirmed_with_unjudgeable_exclusions",
+      "usableForClipLocationEval": true,
+      "usableForCompositionPromptEval": true,
+      "multicutPartIndex": 2,
+      "clipStartMs": 150510,
+      "clipEndMs": 166177,
+      "qualityGrade": "material_block_granularity",
+      "label": "変態女装おじさん",
+      "materialBlock": {
+        "blockIndex": 3,
+        "runCount": 5,
+        "matchedWordPairCount": 75,
+        "internalGapMs": 6425,
+        "sourceVideoId": "vWv9H-hfHXo"
+      },
+      "internalGapMs": {
+        "sourceExtraInsideMs": 6766,
+        "clipExtraInsideMs": 0,
+        "detectedInternalGapMs": 6425,
+        "note": "同一素材ブロック内の詰め候補。素材対応の切り替わり点ではないため境界にはしない。"
+      },
+      "humanVerification": {
+        "status": "confirmed",
+        "checkedBy": "kawafmm",
+        "checkedAt": "2026-07-08",
+        "method": "凍結前確認ダッシュボードの音声確認",
+        "reportPath": "evals/clip_composition/reports/fourth-candidate-XauLZgnWHtA-part01-human-review-20260708-v001.md",
+        "note": "人間判定で一致。"
+      },
+      "partialFixturePolicy": {
+        "unresolvedExcluded": true,
+        "unresolvedRangeIds": [
+          "unresolved_volume_warning_clip_115000_148000",
+          "unresolved_pants_group_clip_176000_221000",
+          "unresolved_two_people_room_clip_382000_425000"
+        ],
+        "falsePositiveBlockIds": [
+          "false_positive_block_7_oyAW0m4FtXE"
+        ],
+        "note": "人間が判断できない未解決3章は採点対象外。block 7は人間判定で違う素材のため除外。"
+      }
+    },
+    {
+      "sourceStartMs": 3432777,
+      "sourceEndMs": 3434438,
+      "reason": "人間確認で切り抜き側と元配信側が同じ素材と判定された素材ブロックのため。",
+      "sourceVideoId": "Lw_FdQPTOs8",
+      "sourceUrl": "https://www.youtube.com/live/Lw_FdQPTOs8?feature=share",
+      "sourceSttId": "XauLZgnWHtA_Lw_FdQPTOs8_003431311_003465311_text_window_v001",
+      "clipId": "XauLZgnWHtA_part01_000000_000705",
+      "clipUrl": "https://www.youtube.com/watch?v=XauLZgnWHtA",
+      "verificationStatus": "partial_material_human_confirmed_with_unjudgeable_exclusions",
+      "usableForClipLocationEval": true,
+      "usableForCompositionPromptEval": true,
+      "multicutPartIndex": 3,
+      "clipStartMs": 222589,
+      "clipEndMs": 225071,
+      "qualityGrade": "material_block_granularity",
+      "label": "拍手の音",
+      "materialBlock": {
+        "blockIndex": 4,
+        "runCount": 1,
+        "matchedWordPairCount": 28,
+        "internalGapMs": 0,
+        "sourceVideoId": "Lw_FdQPTOs8"
+      },
+      "internalGapMs": {
+        "sourceExtraInsideMs": 0,
+        "clipExtraInsideMs": 821,
+        "detectedInternalGapMs": 0,
+        "note": "同一素材ブロック内の詰め候補。素材対応の切り替わり点ではないため境界にはしない。"
+      },
+      "humanVerification": {
+        "status": "confirmed",
+        "checkedBy": "kawafmm",
+        "checkedAt": "2026-07-08",
+        "method": "凍結前確認ダッシュボードの音声確認",
+        "reportPath": "evals/clip_composition/reports/fourth-candidate-XauLZgnWHtA-part01-human-review-20260708-v001.md",
+        "note": "人間判定で一致。"
+      },
+      "partialFixturePolicy": {
+        "unresolvedExcluded": true,
+        "unresolvedRangeIds": [
+          "unresolved_volume_warning_clip_115000_148000",
+          "unresolved_pants_group_clip_176000_221000",
+          "unresolved_two_people_room_clip_382000_425000"
+        ],
+        "falsePositiveBlockIds": [
+          "false_positive_block_7_oyAW0m4FtXE"
+        ],
+        "note": "人間が判断できない未解決3章は採点対象外。block 7は人間判定で違う素材のため除外。"
+      }
+    },
+    {
+      "sourceStartMs": 5427822,
+      "sourceEndMs": 5436145,
+      "reason": "人間確認で切り抜き側と元配信側が同じ素材と判定された素材ブロックのため。",
+      "sourceVideoId": "hKVrBcgAIpQ",
+      "sourceUrl": "https://www.youtube.com/live/hKVrBcgAIpQ?feature=share",
+      "sourceSttId": "XauLZgnWHtA_hKVrBcgAIpQ_005406305_005437305_text_window_v001",
+      "clipId": "XauLZgnWHtA_part01_000000_000705",
+      "clipUrl": "https://www.youtube.com/watch?v=XauLZgnWHtA",
+      "verificationStatus": "partial_material_human_confirmed_with_unjudgeable_exclusions",
+      "usableForClipLocationEval": true,
+      "usableForCompositionPromptEval": true,
+      "multicutPartIndex": 4,
+      "clipStartMs": 276055,
+      "clipEndMs": 284437,
+      "qualityGrade": "material_block_granularity",
+      "label": "実装から2年 朝4時",
+      "materialBlock": {
+        "blockIndex": 5,
+        "runCount": 3,
+        "matchedWordPairCount": 44,
+        "internalGapMs": 200,
+        "sourceVideoId": "hKVrBcgAIpQ"
+      },
+      "internalGapMs": {
+        "sourceExtraInsideMs": 0,
+        "clipExtraInsideMs": 59,
+        "detectedInternalGapMs": 200,
+        "note": "同一素材ブロック内の詰め候補。素材対応の切り替わり点ではないため境界にはしない。"
+      },
+      "humanVerification": {
+        "status": "confirmed",
+        "checkedBy": "kawafmm",
+        "checkedAt": "2026-07-08",
+        "method": "凍結前確認ダッシュボードの音声確認",
+        "reportPath": "evals/clip_composition/reports/fourth-candidate-XauLZgnWHtA-part01-human-review-20260708-v001.md",
+        "note": "人間判定で一致。"
+      },
+      "partialFixturePolicy": {
+        "unresolvedExcluded": true,
+        "unresolvedRangeIds": [
+          "unresolved_volume_warning_clip_115000_148000",
+          "unresolved_pants_group_clip_176000_221000",
+          "unresolved_two_people_room_clip_382000_425000"
+        ],
+        "falsePositiveBlockIds": [
+          "false_positive_block_7_oyAW0m4FtXE"
+        ],
+        "note": "人間が判断できない未解決3章は採点対象外。block 7は人間判定で違う素材のため除外。"
+      }
+    },
+    {
+      "sourceStartMs": 4049549,
+      "sourceEndMs": 4052650,
+      "reason": "人間確認で切り抜き側と元配信側が同じ素材と判定された素材ブロックのため。",
+      "sourceVideoId": "CwmyZc3eskQ",
+      "sourceUrl": "https://www.youtube.com/live/CwmyZc3eskQ?feature=share",
+      "sourceSttId": "XauLZgnWHtA_CwmyZc3eskQ_004048523_004095523_text_window_v001",
+      "clipId": "XauLZgnWHtA_part01_000000_000705",
+      "clipUrl": "https://www.youtube.com/watch?v=XauLZgnWHtA",
+      "verificationStatus": "partial_material_human_confirmed_with_unjudgeable_exclusions",
+      "usableForClipLocationEval": true,
+      "usableForCompositionPromptEval": true,
+      "multicutPartIndex": 5,
+      "clipStartMs": 287017,
+      "clipEndMs": 289838,
+      "qualityGrade": "material_block_granularity",
+      "label": "取りたい資格",
+      "materialBlock": {
+        "blockIndex": 6,
+        "runCount": 2,
+        "matchedWordPairCount": 22,
+        "internalGapMs": 160,
+        "sourceVideoId": "CwmyZc3eskQ"
+      },
+      "internalGapMs": {
+        "sourceExtraInsideMs": 280,
+        "clipExtraInsideMs": 0,
+        "detectedInternalGapMs": 160,
+        "note": "同一素材ブロック内の詰め候補。素材対応の切り替わり点ではないため境界にはしない。"
+      },
+      "humanVerification": {
+        "status": "confirmed",
+        "checkedBy": "kawafmm",
+        "checkedAt": "2026-07-08",
+        "method": "凍結前確認ダッシュボードの音声確認",
+        "reportPath": "evals/clip_composition/reports/fourth-candidate-XauLZgnWHtA-part01-human-review-20260708-v001.md",
+        "note": "人間判定では僅かにずれがあるが、素材としては同じなので採用。"
+      },
+      "partialFixturePolicy": {
+        "unresolvedExcluded": true,
+        "unresolvedRangeIds": [
+          "unresolved_volume_warning_clip_115000_148000",
+          "unresolved_pants_group_clip_176000_221000",
+          "unresolved_two_people_room_clip_382000_425000"
+        ],
+        "falsePositiveBlockIds": [
+          "false_positive_block_7_oyAW0m4FtXE"
+        ],
+        "note": "人間が判断できない未解決3章は採点対象外。block 7は人間判定で違う素材のため除外。"
+      }
+    }
+  ],
+  "diff": {
+    "startDeltaMs": 0,
+    "endDeltaMs": 0,
+    "overlapSummary": "期待区間と完全に一致しています"
+  },
+  "cutDiffs": [
+    {
+      "cutIndex": 0,
+      "status": "compared",
+      "selectedCut": {
+        "sourceStartMs": 440672,
+        "sourceEndMs": 450696,
+        "reason": "選ばれたテーマ「4. 【2023年6月①週】10分でわかる先週のにじさんじ爆笑シーンまとめ / 前半 0:00-7:05」の編集元場面1。 役割: 導入。 選ばれたテーマを見せる入口にする block 1〜6を切り抜き内の素材順に別々のselectedCutsとして扱う。未解決3章とblock 7は採点対象外であり、選択しない。"
+      },
+      "expectedCut": {
+        "sourceStartMs": 440672,
+        "sourceEndMs": 450696,
+        "reason": "人間確認で切り抜き側と元配信側が同じ素材と判定された素材ブロックのため。",
+        "sourceVideoId": "OJoi31bq8lk",
+        "sourceUrl": "https://www.youtube.com/live/OJoi31bq8lk?feature=share",
+        "sourceSttId": "XauLZgnWHtA_OJoi31bq8lk_000405028_000455028_text_window_v001",
+        "clipId": "XauLZgnWHtA_part01_000000_000705",
+        "clipUrl": "https://www.youtube.com/watch?v=XauLZgnWHtA",
+        "verificationStatus": "partial_material_human_confirmed_with_unjudgeable_exclusions",
+        "usableForClipLocationEval": true,
+        "usableForCompositionPromptEval": true,
+        "multicutPartIndex": 0,
+        "clipStartMs": 34928,
+        "clipEndMs": 44633,
+        "qualityGrade": "material_block_granularity",
+        "label": "逆凸遊戯王",
+        "materialBlock": {
+          "blockIndex": 1,
+          "runCount": 5,
+          "matchedWordPairCount": 61,
+          "internalGapMs": 2022,
+          "sourceVideoId": "OJoi31bq8lk"
+        },
+        "internalGapMs": {
+          "sourceExtraInsideMs": 319,
+          "clipExtraInsideMs": 0,
+          "detectedInternalGapMs": 2022,
+          "note": "同一素材ブロック内の詰め候補。素材対応の切り替わり点ではないため境界にはしない。"
+        },
+        "humanVerification": {
+          "status": "confirmed",
+          "checkedBy": "kawafmm",
+          "checkedAt": "2026-07-08",
+          "method": "凍結前確認ダッシュボードの音声確認",
+          "reportPath": "evals/clip_composition/reports/fourth-candidate-XauLZgnWHtA-part01-human-review-20260708-v001.md",
+          "note": "人間判定で一致。"
+        },
+        "partialFixturePolicy": {
+          "unresolvedExcluded": true,
+          "unresolvedRangeIds": [
+            "unresolved_volume_warning_clip_115000_148000",
+            "unresolved_pants_group_clip_176000_221000",
+            "unresolved_two_people_room_clip_382000_425000"
+          ],
+          "falsePositiveBlockIds": [
+            "false_positive_block_7_oyAW0m4FtXE"
+          ],
+          "note": "人間が判断できない未解決3章は採点対象外。block 7は人間判定で違う素材のため除外。"
+        }
+      },
+      "startDeltaMs": 0,
+      "endDeltaMs": 0,
+      "overlapMs": 10024,
+      "overlapSummary": "期待区間と完全に一致しています"
+    },
+    {
+      "cutIndex": 1,
+      "status": "compared",
+      "selectedCut": {
+        "sourceStartMs": 1809559,
+        "sourceEndMs": 1829518,
+        "reason": "選ばれたテーマ「4. 【2023年6月①週】10分でわかる先週のにじさんじ爆笑シーンまとめ / 前半 0:00-7:05」の編集元場面2。 役割: 展開。 前の発話を受けて話の流れをつなぐ block 1〜6を切り抜き内の素材順に別々のselectedCutsとして扱う。未解決3章とblock 7は採点対象外であり、選択しない。"
+      },
+      "expectedCut": {
+        "sourceStartMs": 1809559,
+        "sourceEndMs": 1829518,
+        "reason": "人間確認で切り抜き側と元配信側が同じ素材と判定された素材ブロックのため。",
+        "sourceVideoId": "O4ryDQBcMDc",
+        "sourceUrl": "https://www.youtube.com/live/O4ryDQBcMDc?feature=share",
+        "sourceSttId": "XauLZgnWHtA_O4ryDQBcMDc_001791383_001856383_text_window_v001",
+        "clipId": "XauLZgnWHtA_part01_000000_000705",
+        "clipUrl": "https://www.youtube.com/watch?v=XauLZgnWHtA",
+        "verificationStatus": "partial_material_human_confirmed_with_unjudgeable_exclusions",
+        "usableForClipLocationEval": true,
+        "usableForCompositionPromptEval": true,
+        "multicutPartIndex": 1,
+        "clipStartMs": 69013,
+        "clipEndMs": 88720,
+        "qualityGrade": "material_block_granularity",
+        "label": "スタッフと相談",
+        "materialBlock": {
+          "blockIndex": 2,
+          "runCount": 2,
+          "matchedWordPairCount": 43,
+          "internalGapMs": 0,
+          "sourceVideoId": "O4ryDQBcMDc"
+        },
+        "internalGapMs": {
+          "sourceExtraInsideMs": 252,
+          "clipExtraInsideMs": 0,
+          "detectedInternalGapMs": 0,
+          "note": "同一素材ブロック内の詰め候補。素材対応の切り替わり点ではないため境界にはしない。"
+        },
+        "humanVerification": {
+          "status": "confirmed",
+          "checkedBy": "kawafmm",
+          "checkedAt": "2026-07-08",
+          "method": "凍結前確認ダッシュボードの音声確認",
+          "reportPath": "evals/clip_composition/reports/fourth-candidate-XauLZgnWHtA-part01-human-review-20260708-v001.md",
+          "note": "人間判定で一致。"
+        },
+        "partialFixturePolicy": {
+          "unresolvedExcluded": true,
+          "unresolvedRangeIds": [
+            "unresolved_volume_warning_clip_115000_148000",
+            "unresolved_pants_group_clip_176000_221000",
+            "unresolved_two_people_room_clip_382000_425000"
+          ],
+          "falsePositiveBlockIds": [
+            "false_positive_block_7_oyAW0m4FtXE"
+          ],
+          "note": "人間が判断できない未解決3章は採点対象外。block 7は人間判定で違う素材のため除外。"
+        }
+      },
+      "startDeltaMs": 0,
+      "endDeltaMs": 0,
+      "overlapMs": 19959,
+      "overlapSummary": "期待区間と完全に一致しています"
+    },
+    {
+      "cutIndex": 2,
+      "status": "compared",
+      "selectedCut": {
+        "sourceStartMs": 7478079,
+        "sourceEndMs": 7500512,
+        "reason": "選ばれたテーマ「4. 【2023年6月①週】10分でわかる先週のにじさんじ爆笑シーンまとめ / 前半 0:00-7:05」の編集元場面3。 役割: 展開。 前の発話を受けて話の流れをつなぐ block 1〜6を切り抜き内の素材順に別々のselectedCutsとして扱う。未解決3章とblock 7は採点対象外であり、選択しない。"
+      },
+      "expectedCut": {
+        "sourceStartMs": 7478079,
+        "sourceEndMs": 7500512,
+        "reason": "人間確認で切り抜き側と元配信側が同じ素材と判定された素材ブロックのため。",
+        "sourceVideoId": "vWv9H-hfHXo",
+        "sourceUrl": "https://www.youtube.com/live/vWv9H-hfHXo?feature=share",
+        "sourceSttId": "XauLZgnWHtA_vWv9H-hfHXo_007476308_007504308_text_window_v001",
+        "clipId": "XauLZgnWHtA_part01_000000_000705",
+        "clipUrl": "https://www.youtube.com/watch?v=XauLZgnWHtA",
+        "verificationStatus": "partial_material_human_confirmed_with_unjudgeable_exclusions",
+        "usableForClipLocationEval": true,
+        "usableForCompositionPromptEval": true,
+        "multicutPartIndex": 2,
+        "clipStartMs": 150510,
+        "clipEndMs": 166177,
+        "qualityGrade": "material_block_granularity",
+        "label": "変態女装おじさん",
+        "materialBlock": {
+          "blockIndex": 3,
+          "runCount": 5,
+          "matchedWordPairCount": 75,
+          "internalGapMs": 6425,
+          "sourceVideoId": "vWv9H-hfHXo"
+        },
+        "internalGapMs": {
+          "sourceExtraInsideMs": 6766,
+          "clipExtraInsideMs": 0,
+          "detectedInternalGapMs": 6425,
+          "note": "同一素材ブロック内の詰め候補。素材対応の切り替わり点ではないため境界にはしない。"
+        },
+        "humanVerification": {
+          "status": "confirmed",
+          "checkedBy": "kawafmm",
+          "checkedAt": "2026-07-08",
+          "method": "凍結前確認ダッシュボードの音声確認",
+          "reportPath": "evals/clip_composition/reports/fourth-candidate-XauLZgnWHtA-part01-human-review-20260708-v001.md",
+          "note": "人間判定で一致。"
+        },
+        "partialFixturePolicy": {
+          "unresolvedExcluded": true,
+          "unresolvedRangeIds": [
+            "unresolved_volume_warning_clip_115000_148000",
+            "unresolved_pants_group_clip_176000_221000",
+            "unresolved_two_people_room_clip_382000_425000"
+          ],
+          "falsePositiveBlockIds": [
+            "false_positive_block_7_oyAW0m4FtXE"
+          ],
+          "note": "人間が判断できない未解決3章は採点対象外。block 7は人間判定で違う素材のため除外。"
+        }
+      },
+      "startDeltaMs": 0,
+      "endDeltaMs": 0,
+      "overlapMs": 22433,
+      "overlapSummary": "期待区間と完全に一致しています"
+    },
+    {
+      "cutIndex": 3,
+      "status": "compared",
+      "selectedCut": {
+        "sourceStartMs": 3432777,
+        "sourceEndMs": 3434438,
+        "reason": "選ばれたテーマ「4. 【2023年6月①週】10分でわかる先週のにじさんじ爆笑シーンまとめ / 前半 0:00-7:05」の編集元場面4。 役割: 展開。 前の発話を受けて話の流れをつなぐ block 1〜6を切り抜き内の素材順に別々のselectedCutsとして扱う。未解決3章とblock 7は採点対象外であり、選択しない。"
+      },
+      "expectedCut": {
+        "sourceStartMs": 3432777,
+        "sourceEndMs": 3434438,
+        "reason": "人間確認で切り抜き側と元配信側が同じ素材と判定された素材ブロックのため。",
+        "sourceVideoId": "Lw_FdQPTOs8",
+        "sourceUrl": "https://www.youtube.com/live/Lw_FdQPTOs8?feature=share",
+        "sourceSttId": "XauLZgnWHtA_Lw_FdQPTOs8_003431311_003465311_text_window_v001",
+        "clipId": "XauLZgnWHtA_part01_000000_000705",
+        "clipUrl": "https://www.youtube.com/watch?v=XauLZgnWHtA",
+        "verificationStatus": "partial_material_human_confirmed_with_unjudgeable_exclusions",
+        "usableForClipLocationEval": true,
+        "usableForCompositionPromptEval": true,
+        "multicutPartIndex": 3,
+        "clipStartMs": 222589,
+        "clipEndMs": 225071,
+        "qualityGrade": "material_block_granularity",
+        "label": "拍手の音",
+        "materialBlock": {
+          "blockIndex": 4,
+          "runCount": 1,
+          "matchedWordPairCount": 28,
+          "internalGapMs": 0,
+          "sourceVideoId": "Lw_FdQPTOs8"
+        },
+        "internalGapMs": {
+          "sourceExtraInsideMs": 0,
+          "clipExtraInsideMs": 821,
+          "detectedInternalGapMs": 0,
+          "note": "同一素材ブロック内の詰め候補。素材対応の切り替わり点ではないため境界にはしない。"
+        },
+        "humanVerification": {
+          "status": "confirmed",
+          "checkedBy": "kawafmm",
+          "checkedAt": "2026-07-08",
+          "method": "凍結前確認ダッシュボードの音声確認",
+          "reportPath": "evals/clip_composition/reports/fourth-candidate-XauLZgnWHtA-part01-human-review-20260708-v001.md",
+          "note": "人間判定で一致。"
+        },
+        "partialFixturePolicy": {
+          "unresolvedExcluded": true,
+          "unresolvedRangeIds": [
+            "unresolved_volume_warning_clip_115000_148000",
+            "unresolved_pants_group_clip_176000_221000",
+            "unresolved_two_people_room_clip_382000_425000"
+          ],
+          "falsePositiveBlockIds": [
+            "false_positive_block_7_oyAW0m4FtXE"
+          ],
+          "note": "人間が判断できない未解決3章は採点対象外。block 7は人間判定で違う素材のため除外。"
+        }
+      },
+      "startDeltaMs": 0,
+      "endDeltaMs": 0,
+      "overlapMs": 1661,
+      "overlapSummary": "期待区間と完全に一致しています"
+    },
+    {
+      "cutIndex": 4,
+      "status": "compared",
+      "selectedCut": {
+        "sourceStartMs": 5427822,
+        "sourceEndMs": 5436145,
+        "reason": "選ばれたテーマ「4. 【2023年6月①週】10分でわかる先週のにじさんじ爆笑シーンまとめ / 前半 0:00-7:05」の編集元場面5。 役割: 展開。 前の発話を受けて話の流れをつなぐ block 1〜6を切り抜き内の素材順に別々のselectedCutsとして扱う。未解決3章とblock 7は採点対象外であり、選択しない。"
+      },
+      "expectedCut": {
+        "sourceStartMs": 5427822,
+        "sourceEndMs": 5436145,
+        "reason": "人間確認で切り抜き側と元配信側が同じ素材と判定された素材ブロックのため。",
+        "sourceVideoId": "hKVrBcgAIpQ",
+        "sourceUrl": "https://www.youtube.com/live/hKVrBcgAIpQ?feature=share",
+        "sourceSttId": "XauLZgnWHtA_hKVrBcgAIpQ_005406305_005437305_text_window_v001",
+        "clipId": "XauLZgnWHtA_part01_000000_000705",
+        "clipUrl": "https://www.youtube.com/watch?v=XauLZgnWHtA",
+        "verificationStatus": "partial_material_human_confirmed_with_unjudgeable_exclusions",
+        "usableForClipLocationEval": true,
+        "usableForCompositionPromptEval": true,
+        "multicutPartIndex": 4,
+        "clipStartMs": 276055,
+        "clipEndMs": 284437,
+        "qualityGrade": "material_block_granularity",
+        "label": "実装から2年 朝4時",
+        "materialBlock": {
+          "blockIndex": 5,
+          "runCount": 3,
+          "matchedWordPairCount": 44,
+          "internalGapMs": 200,
+          "sourceVideoId": "hKVrBcgAIpQ"
+        },
+        "internalGapMs": {
+          "sourceExtraInsideMs": 0,
+          "clipExtraInsideMs": 59,
+          "detectedInternalGapMs": 200,
+          "note": "同一素材ブロック内の詰め候補。素材対応の切り替わり点ではないため境界にはしない。"
+        },
+        "humanVerification": {
+          "status": "confirmed",
+          "checkedBy": "kawafmm",
+          "checkedAt": "2026-07-08",
+          "method": "凍結前確認ダッシュボードの音声確認",
+          "reportPath": "evals/clip_composition/reports/fourth-candidate-XauLZgnWHtA-part01-human-review-20260708-v001.md",
+          "note": "人間判定で一致。"
+        },
+        "partialFixturePolicy": {
+          "unresolvedExcluded": true,
+          "unresolvedRangeIds": [
+            "unresolved_volume_warning_clip_115000_148000",
+            "unresolved_pants_group_clip_176000_221000",
+            "unresolved_two_people_room_clip_382000_425000"
+          ],
+          "falsePositiveBlockIds": [
+            "false_positive_block_7_oyAW0m4FtXE"
+          ],
+          "note": "人間が判断できない未解決3章は採点対象外。block 7は人間判定で違う素材のため除外。"
+        }
+      },
+      "startDeltaMs": 0,
+      "endDeltaMs": 0,
+      "overlapMs": 8323,
+      "overlapSummary": "期待区間と完全に一致しています"
+    },
+    {
+      "cutIndex": 5,
+      "status": "compared",
+      "selectedCut": {
+        "sourceStartMs": 4049549,
+        "sourceEndMs": 4052650,
+        "reason": "選ばれたテーマ「4. 【2023年6月①週】10分でわかる先週のにじさんじ爆笑シーンまとめ / 前半 0:00-7:05」の編集元場面6。 役割: 結論。 前の発話を受けて話の流れをつなぐ block 1〜6を切り抜き内の素材順に別々のselectedCutsとして扱う。未解決3章とblock 7は採点対象外であり、選択しない。"
+      },
+      "expectedCut": {
+        "sourceStartMs": 4049549,
+        "sourceEndMs": 4052650,
+        "reason": "人間確認で切り抜き側と元配信側が同じ素材と判定された素材ブロックのため。",
+        "sourceVideoId": "CwmyZc3eskQ",
+        "sourceUrl": "https://www.youtube.com/live/CwmyZc3eskQ?feature=share",
+        "sourceSttId": "XauLZgnWHtA_CwmyZc3eskQ_004048523_004095523_text_window_v001",
+        "clipId": "XauLZgnWHtA_part01_000000_000705",
+        "clipUrl": "https://www.youtube.com/watch?v=XauLZgnWHtA",
+        "verificationStatus": "partial_material_human_confirmed_with_unjudgeable_exclusions",
+        "usableForClipLocationEval": true,
+        "usableForCompositionPromptEval": true,
+        "multicutPartIndex": 5,
+        "clipStartMs": 287017,
+        "clipEndMs": 289838,
+        "qualityGrade": "material_block_granularity",
+        "label": "取りたい資格",
+        "materialBlock": {
+          "blockIndex": 6,
+          "runCount": 2,
+          "matchedWordPairCount": 22,
+          "internalGapMs": 160,
+          "sourceVideoId": "CwmyZc3eskQ"
+        },
+        "internalGapMs": {
+          "sourceExtraInsideMs": 280,
+          "clipExtraInsideMs": 0,
+          "detectedInternalGapMs": 160,
+          "note": "同一素材ブロック内の詰め候補。素材対応の切り替わり点ではないため境界にはしない。"
+        },
+        "humanVerification": {
+          "status": "confirmed",
+          "checkedBy": "kawafmm",
+          "checkedAt": "2026-07-08",
+          "method": "凍結前確認ダッシュボードの音声確認",
+          "reportPath": "evals/clip_composition/reports/fourth-candidate-XauLZgnWHtA-part01-human-review-20260708-v001.md",
+          "note": "人間判定では僅かにずれがあるが、素材としては同じなので採用。"
+        },
+        "partialFixturePolicy": {
+          "unresolvedExcluded": true,
+          "unresolvedRangeIds": [
+            "unresolved_volume_warning_clip_115000_148000",
+            "unresolved_pants_group_clip_176000_221000",
+            "unresolved_two_people_room_clip_382000_425000"
+          ],
+          "falsePositiveBlockIds": [
+            "false_positive_block_7_oyAW0m4FtXE"
+          ],
+          "note": "人間が判断できない未解決3章は採点対象外。block 7は人間判定で違う素材のため除外。"
+        }
+      },
+      "startDeltaMs": 0,
+      "endDeltaMs": 0,
+      "overlapMs": 3101,
+      "overlapSummary": "期待区間と完全に一致しています"
+    }
+  ],
+  "diffSummary": {
+    "expectedCutCount": 6,
+    "selectedCutCount": 6,
+    "comparedCutCount": 6,
+    "exactMatchCount": 6,
+    "overlappingCutCount": 6,
+    "missingExpectedCutCount": 0,
+    "extraSelectedCutCount": 0,
+    "allExpectedCutsMatchedExactlyByIndex": true,
+    "allExpectedCutsHaveOverlapByIndex": true,
+    "summary": "期待区間6件に対して選択区間6件。 完全一致6件、重なりあり6件。 未選択の期待区間0件、余分な選択区間0件。"
+  },
+  "runs": [
+    {
+      "runIndex": 1,
+      "selectedCuts": [
+        {
+          "sourceStartMs": 440672,
+          "sourceEndMs": 450696,
+          "reason": "選ばれたテーマ「4. 【2023年6月①週】10分でわかる先週のにじさんじ爆笑シーンまとめ / 前半 0:00-7:05」の編集元場面1。 役割: 導入。 選ばれたテーマを見せる入口にする block 1〜6を切り抜き内の素材順に別々のselectedCutsとして扱う。未解決3章とblock 7は採点対象外であり、選択しない。"
+        },
+        {
+          "sourceStartMs": 1809559,
+          "sourceEndMs": 1829518,
+          "reason": "選ばれたテーマ「4. 【2023年6月①週】10分でわかる先週のにじさんじ爆笑シーンまとめ / 前半 0:00-7:05」の編集元場面2。 役割: 展開。 前の発話を受けて話の流れをつなぐ block 1〜6を切り抜き内の素材順に別々のselectedCutsとして扱う。未解決3章とblock 7は採点対象外であり、選択しない。"
+        },
+        {
+          "sourceStartMs": 7478079,
+          "sourceEndMs": 7500512,
+          "reason": "選ばれたテーマ「4. 【2023年6月①週】10分でわかる先週のにじさんじ爆笑シーンまとめ / 前半 0:00-7:05」の編集元場面3。 役割: 展開。 前の発話を受けて話の流れをつなぐ block 1〜6を切り抜き内の素材順に別々のselectedCutsとして扱う。未解決3章とblock 7は採点対象外であり、選択しない。"
+        },
+        {
+          "sourceStartMs": 3432777,
+          "sourceEndMs": 3434438,
+          "reason": "選ばれたテーマ「4. 【2023年6月①週】10分でわかる先週のにじさんじ爆笑シーンまとめ / 前半 0:00-7:05」の編集元場面4。 役割: 展開。 前の発話を受けて話の流れをつなぐ block 1〜6を切り抜き内の素材順に別々のselectedCutsとして扱う。未解決3章とblock 7は採点対象外であり、選択しない。"
+        },
+        {
+          "sourceStartMs": 5427822,
+          "sourceEndMs": 5436145,
+          "reason": "選ばれたテーマ「4. 【2023年6月①週】10分でわかる先週のにじさんじ爆笑シーンまとめ / 前半 0:00-7:05」の編集元場面5。 役割: 展開。 前の発話を受けて話の流れをつなぐ block 1〜6を切り抜き内の素材順に別々のselectedCutsとして扱う。未解決3章とblock 7は採点対象外であり、選択しない。"
+        },
+        {
+          "sourceStartMs": 4049549,
+          "sourceEndMs": 4052650,
+          "reason": "選ばれたテーマ「4. 【2023年6月①週】10分でわかる先週のにじさんじ爆笑シーンまとめ / 前半 0:00-7:05」の編集元場面6。 役割: 結論。 前の発話を受けて話の流れをつなぐ block 1〜6を切り抜き内の素材順に別々のselectedCutsとして扱う。未解決3章とblock 7は採点対象外であり、選択しない。"
+        }
+      ],
+      "diff": {
+        "startDeltaMs": 0,
+        "endDeltaMs": 0,
+        "overlapSummary": "期待区間と完全に一致しています"
+      },
+      "cutDiffs": [
+        {
+          "cutIndex": 0,
+          "status": "compared",
+          "selectedCut": {
+            "sourceStartMs": 440672,
+            "sourceEndMs": 450696,
+            "reason": "選ばれたテーマ「4. 【2023年6月①週】10分でわかる先週のにじさんじ爆笑シーンまとめ / 前半 0:00-7:05」の編集元場面1。 役割: 導入。 選ばれたテーマを見せる入口にする block 1〜6を切り抜き内の素材順に別々のselectedCutsとして扱う。未解決3章とblock 7は採点対象外であり、選択しない。"
+          },
+          "expectedCut": {
+            "sourceStartMs": 440672,
+            "sourceEndMs": 450696,
+            "reason": "人間確認で切り抜き側と元配信側が同じ素材と判定された素材ブロックのため。",
+            "sourceVideoId": "OJoi31bq8lk",
+            "sourceUrl": "https://www.youtube.com/live/OJoi31bq8lk?feature=share",
+            "sourceSttId": "XauLZgnWHtA_OJoi31bq8lk_000405028_000455028_text_window_v001",
+            "clipId": "XauLZgnWHtA_part01_000000_000705",
+            "clipUrl": "https://www.youtube.com/watch?v=XauLZgnWHtA",
+            "verificationStatus": "partial_material_human_confirmed_with_unjudgeable_exclusions",
+            "usableForClipLocationEval": true,
+            "usableForCompositionPromptEval": true,
+            "multicutPartIndex": 0,
+            "clipStartMs": 34928,
+            "clipEndMs": 44633,
+            "qualityGrade": "material_block_granularity",
+            "label": "逆凸遊戯王",
+            "materialBlock": {
+              "blockIndex": 1,
+              "runCount": 5,
+              "matchedWordPairCount": 61,
+              "internalGapMs": 2022,
+              "sourceVideoId": "OJoi31bq8lk"
+            },
+            "internalGapMs": {
+              "sourceExtraInsideMs": 319,
+              "clipExtraInsideMs": 0,
+              "detectedInternalGapMs": 2022,
+              "note": "同一素材ブロック内の詰め候補。素材対応の切り替わり点ではないため境界にはしない。"
+            },
+            "humanVerification": {
+              "status": "confirmed",
+              "checkedBy": "kawafmm",
+              "checkedAt": "2026-07-08",
+              "method": "凍結前確認ダッシュボードの音声確認",
+              "reportPath": "evals/clip_composition/reports/fourth-candidate-XauLZgnWHtA-part01-human-review-20260708-v001.md",
+              "note": "人間判定で一致。"
+            },
+            "partialFixturePolicy": {
+              "unresolvedExcluded": true,
+              "unresolvedRangeIds": [
+                "unresolved_volume_warning_clip_115000_148000",
+                "unresolved_pants_group_clip_176000_221000",
+                "unresolved_two_people_room_clip_382000_425000"
+              ],
+              "falsePositiveBlockIds": [
+                "false_positive_block_7_oyAW0m4FtXE"
+              ],
+              "note": "人間が判断できない未解決3章は採点対象外。block 7は人間判定で違う素材のため除外。"
+            }
+          },
+          "startDeltaMs": 0,
+          "endDeltaMs": 0,
+          "overlapMs": 10024,
+          "overlapSummary": "期待区間と完全に一致しています"
+        },
+        {
+          "cutIndex": 1,
+          "status": "compared",
+          "selectedCut": {
+            "sourceStartMs": 1809559,
+            "sourceEndMs": 1829518,
+            "reason": "選ばれたテーマ「4. 【2023年6月①週】10分でわかる先週のにじさんじ爆笑シーンまとめ / 前半 0:00-7:05」の編集元場面2。 役割: 展開。 前の発話を受けて話の流れをつなぐ block 1〜6を切り抜き内の素材順に別々のselectedCutsとして扱う。未解決3章とblock 7は採点対象外であり、選択しない。"
+          },
+          "expectedCut": {
+            "sourceStartMs": 1809559,
+            "sourceEndMs": 1829518,
+            "reason": "人間確認で切り抜き側と元配信側が同じ素材と判定された素材ブロックのため。",
+            "sourceVideoId": "O4ryDQBcMDc",
+            "sourceUrl": "https://www.youtube.com/live/O4ryDQBcMDc?feature=share",
+            "sourceSttId": "XauLZgnWHtA_O4ryDQBcMDc_001791383_001856383_text_window_v001",
+            "clipId": "XauLZgnWHtA_part01_000000_000705",
+            "clipUrl": "https://www.youtube.com/watch?v=XauLZgnWHtA",
+            "verificationStatus": "partial_material_human_confirmed_with_unjudgeable_exclusions",
+            "usableForClipLocationEval": true,
+            "usableForCompositionPromptEval": true,
+            "multicutPartIndex": 1,
+            "clipStartMs": 69013,
+            "clipEndMs": 88720,
+            "qualityGrade": "material_block_granularity",
+            "label": "スタッフと相談",
+            "materialBlock": {
+              "blockIndex": 2,
+              "runCount": 2,
+              "matchedWordPairCount": 43,
+              "internalGapMs": 0,
+              "sourceVideoId": "O4ryDQBcMDc"
+            },
+            "internalGapMs": {
+              "sourceExtraInsideMs": 252,
+              "clipExtraInsideMs": 0,
+              "detectedInternalGapMs": 0,
+              "note": "同一素材ブロック内の詰め候補。素材対応の切り替わり点ではないため境界にはしない。"
+            },
+            "humanVerification": {
+              "status": "confirmed",
+              "checkedBy": "kawafmm",
+              "checkedAt": "2026-07-08",
+              "method": "凍結前確認ダッシュボードの音声確認",
+              "reportPath": "evals/clip_composition/reports/fourth-candidate-XauLZgnWHtA-part01-human-review-20260708-v001.md",
+              "note": "人間判定で一致。"
+            },
+            "partialFixturePolicy": {
+              "unresolvedExcluded": true,
+              "unresolvedRangeIds": [
+                "unresolved_volume_warning_clip_115000_148000",
+                "unresolved_pants_group_clip_176000_221000",
+                "unresolved_two_people_room_clip_382000_425000"
+              ],
+              "falsePositiveBlockIds": [
+                "false_positive_block_7_oyAW0m4FtXE"
+              ],
+              "note": "人間が判断できない未解決3章は採点対象外。block 7は人間判定で違う素材のため除外。"
+            }
+          },
+          "startDeltaMs": 0,
+          "endDeltaMs": 0,
+          "overlapMs": 19959,
+          "overlapSummary": "期待区間と完全に一致しています"
+        },
+        {
+          "cutIndex": 2,
+          "status": "compared",
+          "selectedCut": {
+            "sourceStartMs": 7478079,
+            "sourceEndMs": 7500512,
+            "reason": "選ばれたテーマ「4. 【2023年6月①週】10分でわかる先週のにじさんじ爆笑シーンまとめ / 前半 0:00-7:05」の編集元場面3。 役割: 展開。 前の発話を受けて話の流れをつなぐ block 1〜6を切り抜き内の素材順に別々のselectedCutsとして扱う。未解決3章とblock 7は採点対象外であり、選択しない。"
+          },
+          "expectedCut": {
+            "sourceStartMs": 7478079,
+            "sourceEndMs": 7500512,
+            "reason": "人間確認で切り抜き側と元配信側が同じ素材と判定された素材ブロックのため。",
+            "sourceVideoId": "vWv9H-hfHXo",
+            "sourceUrl": "https://www.youtube.com/live/vWv9H-hfHXo?feature=share",
+            "sourceSttId": "XauLZgnWHtA_vWv9H-hfHXo_007476308_007504308_text_window_v001",
+            "clipId": "XauLZgnWHtA_part01_000000_000705",
+            "clipUrl": "https://www.youtube.com/watch?v=XauLZgnWHtA",
+            "verificationStatus": "partial_material_human_confirmed_with_unjudgeable_exclusions",
+            "usableForClipLocationEval": true,
+            "usableForCompositionPromptEval": true,
+            "multicutPartIndex": 2,
+            "clipStartMs": 150510,
+            "clipEndMs": 166177,
+            "qualityGrade": "material_block_granularity",
+            "label": "変態女装おじさん",
+            "materialBlock": {
+              "blockIndex": 3,
+              "runCount": 5,
+              "matchedWordPairCount": 75,
+              "internalGapMs": 6425,
+              "sourceVideoId": "vWv9H-hfHXo"
+            },
+            "internalGapMs": {
+              "sourceExtraInsideMs": 6766,
+              "clipExtraInsideMs": 0,
+              "detectedInternalGapMs": 6425,
+              "note": "同一素材ブロック内の詰め候補。素材対応の切り替わり点ではないため境界にはしない。"
+            },
+            "humanVerification": {
+              "status": "confirmed",
+              "checkedBy": "kawafmm",
+              "checkedAt": "2026-07-08",
+              "method": "凍結前確認ダッシュボードの音声確認",
+              "reportPath": "evals/clip_composition/reports/fourth-candidate-XauLZgnWHtA-part01-human-review-20260708-v001.md",
+              "note": "人間判定で一致。"
+            },
+            "partialFixturePolicy": {
+              "unresolvedExcluded": true,
+              "unresolvedRangeIds": [
+                "unresolved_volume_warning_clip_115000_148000",
+                "unresolved_pants_group_clip_176000_221000",
+                "unresolved_two_people_room_clip_382000_425000"
+              ],
+              "falsePositiveBlockIds": [
+                "false_positive_block_7_oyAW0m4FtXE"
+              ],
+              "note": "人間が判断できない未解決3章は採点対象外。block 7は人間判定で違う素材のため除外。"
+            }
+          },
+          "startDeltaMs": 0,
+          "endDeltaMs": 0,
+          "overlapMs": 22433,
+          "overlapSummary": "期待区間と完全に一致しています"
+        },
+        {
+          "cutIndex": 3,
+          "status": "compared",
+          "selectedCut": {
+            "sourceStartMs": 3432777,
+            "sourceEndMs": 3434438,
+            "reason": "選ばれたテーマ「4. 【2023年6月①週】10分でわかる先週のにじさんじ爆笑シーンまとめ / 前半 0:00-7:05」の編集元場面4。 役割: 展開。 前の発話を受けて話の流れをつなぐ block 1〜6を切り抜き内の素材順に別々のselectedCutsとして扱う。未解決3章とblock 7は採点対象外であり、選択しない。"
+          },
+          "expectedCut": {
+            "sourceStartMs": 3432777,
+            "sourceEndMs": 3434438,
+            "reason": "人間確認で切り抜き側と元配信側が同じ素材と判定された素材ブロックのため。",
+            "sourceVideoId": "Lw_FdQPTOs8",
+            "sourceUrl": "https://www.youtube.com/live/Lw_FdQPTOs8?feature=share",
+            "sourceSttId": "XauLZgnWHtA_Lw_FdQPTOs8_003431311_003465311_text_window_v001",
+            "clipId": "XauLZgnWHtA_part01_000000_000705",
+            "clipUrl": "https://www.youtube.com/watch?v=XauLZgnWHtA",
+            "verificationStatus": "partial_material_human_confirmed_with_unjudgeable_exclusions",
+            "usableForClipLocationEval": true,
+            "usableForCompositionPromptEval": true,
+            "multicutPartIndex": 3,
+            "clipStartMs": 222589,
+            "clipEndMs": 225071,
+            "qualityGrade": "material_block_granularity",
+            "label": "拍手の音",
+            "materialBlock": {
+              "blockIndex": 4,
+              "runCount": 1,
+              "matchedWordPairCount": 28,
+              "internalGapMs": 0,
+              "sourceVideoId": "Lw_FdQPTOs8"
+            },
+            "internalGapMs": {
+              "sourceExtraInsideMs": 0,
+              "clipExtraInsideMs": 821,
+              "detectedInternalGapMs": 0,
+              "note": "同一素材ブロック内の詰め候補。素材対応の切り替わり点ではないため境界にはしない。"
+            },
+            "humanVerification": {
+              "status": "confirmed",
+              "checkedBy": "kawafmm",
+              "checkedAt": "2026-07-08",
+              "method": "凍結前確認ダッシュボードの音声確認",
+              "reportPath": "evals/clip_composition/reports/fourth-candidate-XauLZgnWHtA-part01-human-review-20260708-v001.md",
+              "note": "人間判定で一致。"
+            },
+            "partialFixturePolicy": {
+              "unresolvedExcluded": true,
+              "unresolvedRangeIds": [
+                "unresolved_volume_warning_clip_115000_148000",
+                "unresolved_pants_group_clip_176000_221000",
+                "unresolved_two_people_room_clip_382000_425000"
+              ],
+              "falsePositiveBlockIds": [
+                "false_positive_block_7_oyAW0m4FtXE"
+              ],
+              "note": "人間が判断できない未解決3章は採点対象外。block 7は人間判定で違う素材のため除外。"
+            }
+          },
+          "startDeltaMs": 0,
+          "endDeltaMs": 0,
+          "overlapMs": 1661,
+          "overlapSummary": "期待区間と完全に一致しています"
+        },
+        {
+          "cutIndex": 4,
+          "status": "compared",
+          "selectedCut": {
+            "sourceStartMs": 5427822,
+            "sourceEndMs": 5436145,
+            "reason": "選ばれたテーマ「4. 【2023年6月①週】10分でわかる先週のにじさんじ爆笑シーンまとめ / 前半 0:00-7:05」の編集元場面5。 役割: 展開。 前の発話を受けて話の流れをつなぐ block 1〜6を切り抜き内の素材順に別々のselectedCutsとして扱う。未解決3章とblock 7は採点対象外であり、選択しない。"
+          },
+          "expectedCut": {
+            "sourceStartMs": 5427822,
+            "sourceEndMs": 5436145,
+            "reason": "人間確認で切り抜き側と元配信側が同じ素材と判定された素材ブロックのため。",
+            "sourceVideoId": "hKVrBcgAIpQ",
+            "sourceUrl": "https://www.youtube.com/live/hKVrBcgAIpQ?feature=share",
+            "sourceSttId": "XauLZgnWHtA_hKVrBcgAIpQ_005406305_005437305_text_window_v001",
+            "clipId": "XauLZgnWHtA_part01_000000_000705",
+            "clipUrl": "https://www.youtube.com/watch?v=XauLZgnWHtA",
+            "verificationStatus": "partial_material_human_confirmed_with_unjudgeable_exclusions",
+            "usableForClipLocationEval": true,
+            "usableForCompositionPromptEval": true,
+            "multicutPartIndex": 4,
+            "clipStartMs": 276055,
+            "clipEndMs": 284437,
+            "qualityGrade": "material_block_granularity",
+            "label": "実装から2年 朝4時",
+            "materialBlock": {
+              "blockIndex": 5,
+              "runCount": 3,
+              "matchedWordPairCount": 44,
+              "internalGapMs": 200,
+              "sourceVideoId": "hKVrBcgAIpQ"
+            },
+            "internalGapMs": {
+              "sourceExtraInsideMs": 0,
+              "clipExtraInsideMs": 59,
+              "detectedInternalGapMs": 200,
+              "note": "同一素材ブロック内の詰め候補。素材対応の切り替わり点ではないため境界にはしない。"
+            },
+            "humanVerification": {
+              "status": "confirmed",
+              "checkedBy": "kawafmm",
+              "checkedAt": "2026-07-08",
+              "method": "凍結前確認ダッシュボードの音声確認",
+              "reportPath": "evals/clip_composition/reports/fourth-candidate-XauLZgnWHtA-part01-human-review-20260708-v001.md",
+              "note": "人間判定で一致。"
+            },
+            "partialFixturePolicy": {
+              "unresolvedExcluded": true,
+              "unresolvedRangeIds": [
+                "unresolved_volume_warning_clip_115000_148000",
+                "unresolved_pants_group_clip_176000_221000",
+                "unresolved_two_people_room_clip_382000_425000"
+              ],
+              "falsePositiveBlockIds": [
+                "false_positive_block_7_oyAW0m4FtXE"
+              ],
+              "note": "人間が判断できない未解決3章は採点対象外。block 7は人間判定で違う素材のため除外。"
+            }
+          },
+          "startDeltaMs": 0,
+          "endDeltaMs": 0,
+          "overlapMs": 8323,
+          "overlapSummary": "期待区間と完全に一致しています"
+        },
+        {
+          "cutIndex": 5,
+          "status": "compared",
+          "selectedCut": {
+            "sourceStartMs": 4049549,
+            "sourceEndMs": 4052650,
+            "reason": "選ばれたテーマ「4. 【2023年6月①週】10分でわかる先週のにじさんじ爆笑シーンまとめ / 前半 0:00-7:05」の編集元場面6。 役割: 結論。 前の発話を受けて話の流れをつなぐ block 1〜6を切り抜き内の素材順に別々のselectedCutsとして扱う。未解決3章とblock 7は採点対象外であり、選択しない。"
+          },
+          "expectedCut": {
+            "sourceStartMs": 4049549,
+            "sourceEndMs": 4052650,
+            "reason": "人間確認で切り抜き側と元配信側が同じ素材と判定された素材ブロックのため。",
+            "sourceVideoId": "CwmyZc3eskQ",
+            "sourceUrl": "https://www.youtube.com/live/CwmyZc3eskQ?feature=share",
+            "sourceSttId": "XauLZgnWHtA_CwmyZc3eskQ_004048523_004095523_text_window_v001",
+            "clipId": "XauLZgnWHtA_part01_000000_000705",
+            "clipUrl": "https://www.youtube.com/watch?v=XauLZgnWHtA",
+            "verificationStatus": "partial_material_human_confirmed_with_unjudgeable_exclusions",
+            "usableForClipLocationEval": true,
+            "usableForCompositionPromptEval": true,
+            "multicutPartIndex": 5,
+            "clipStartMs": 287017,
+            "clipEndMs": 289838,
+            "qualityGrade": "material_block_granularity",
+            "label": "取りたい資格",
+            "materialBlock": {
+              "blockIndex": 6,
+              "runCount": 2,
+              "matchedWordPairCount": 22,
+              "internalGapMs": 160,
+              "sourceVideoId": "CwmyZc3eskQ"
+            },
+            "internalGapMs": {
+              "sourceExtraInsideMs": 280,
+              "clipExtraInsideMs": 0,
+              "detectedInternalGapMs": 160,
+              "note": "同一素材ブロック内の詰め候補。素材対応の切り替わり点ではないため境界にはしない。"
+            },
+            "humanVerification": {
+              "status": "confirmed",
+              "checkedBy": "kawafmm",
+              "checkedAt": "2026-07-08",
+              "method": "凍結前確認ダッシュボードの音声確認",
+              "reportPath": "evals/clip_composition/reports/fourth-candidate-XauLZgnWHtA-part01-human-review-20260708-v001.md",
+              "note": "人間判定では僅かにずれがあるが、素材としては同じなので採用。"
+            },
+            "partialFixturePolicy": {
+              "unresolvedExcluded": true,
+              "unresolvedRangeIds": [
+                "unresolved_volume_warning_clip_115000_148000",
+                "unresolved_pants_group_clip_176000_221000",
+                "unresolved_two_people_room_clip_382000_425000"
+              ],
+              "falsePositiveBlockIds": [
+                "false_positive_block_7_oyAW0m4FtXE"
+              ],
+              "note": "人間が判断できない未解決3章は採点対象外。block 7は人間判定で違う素材のため除外。"
+            }
+          },
+          "startDeltaMs": 0,
+          "endDeltaMs": 0,
+          "overlapMs": 3101,
+          "overlapSummary": "期待区間と完全に一致しています"
+        }
+      ],
+      "diffSummary": {
+        "expectedCutCount": 6,
+        "selectedCutCount": 6,
+        "comparedCutCount": 6,
+        "exactMatchCount": 6,
+        "overlappingCutCount": 6,
+        "missingExpectedCutCount": 0,
+        "extraSelectedCutCount": 0,
+        "allExpectedCutsMatchedExactlyByIndex": true,
+        "allExpectedCutsHaveOverlapByIndex": true,
+        "summary": "期待区間6件に対して選択区間6件。 完全一致6件、重なりあり6件。 未選択の期待区間0件、余分な選択区間0件。"
+      }
+    }
+  ],
+  "stability": {
+    "allRunsSelectedSameCuts": true,
+    "startJitterMs": 0,
+    "endJitterMs": 0,
+    "reasonVariantCount": 1,
+    "reasonVariationSummary": "判断理由は全実行で同じです",
+    "perCutJitter": [
+      {
+        "cutIndex": 0,
+        "startJitterMs": 0,
+        "endJitterMs": 0
+      },
+      {
+        "cutIndex": 1,
+        "startJitterMs": 0,
+        "endJitterMs": 0
+      },
+      {
+        "cutIndex": 2,
+        "startJitterMs": 0,
+        "endJitterMs": 0
+      },
+      {
+        "cutIndex": 3,
+        "startJitterMs": 0,
+        "endJitterMs": 0
+      },
+      {
+        "cutIndex": 4,
+        "startJitterMs": 0,
+        "endJitterMs": 0
+      },
+      {
+        "cutIndex": 5,
+        "startJitterMs": 0,
+        "endJitterMs": 0
+      }
+    ]
+  },
+  "themeCoverage": {
+    "selectedThemeId": "theme_xau_part01_partial_material_1",
+    "candidateStartMs": 440672,
+    "candidateEndMs": 7500512,
+    "coverageSummary": "期待区間はすべて選択済みテーマの候補範囲に入り、AIが選んだ区間も同じ順番で一致しています",
+    "themeSidePossibility": "theme側で正解区間が候補に入っていない可能性は低い",
+    "compositionSidePossibility": "composition側の候補選択差分はありません"
+  },
+  "sourceFiles": {
+    "fixture": "fixtures/XauLZgnWHtA_part01_partial_material_v001",
+    "transcript": "fixtures/XauLZgnWHtA_part01_partial_material_v001/transcript.json",
+    "themes": "fixtures/XauLZgnWHtA_part01_partial_material_v001/themes.json",
+    "expected": "expected/XauLZgnWHtA_part01_partial_material_v001.json"
+  }
+}

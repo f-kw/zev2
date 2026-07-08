@@ -1,0 +1,24 @@
+{
+  "selectedCuts": [
+    {
+      "sourceStartMs": 11364140,
+      "sourceEndMs": 11404850,
+      "reason": "開始根拠: リスナーから世界2位の記事について取り上げられた話題提示（お便りの読み上げ）が始まる発話を選択しました。終了根拠: 順位は変動するものだからあまり喜べないという結論の補足が完了する発話までを含めました。除外判断: 冒頭のお便り前の挨拶（speechId: 1）や、末尾の次の話題に切り替わる相槌（speechId: 19の後半以降、20）はテーマに直接関係がないため除外しました。",
+      "usedSpeechIds": [
+        "2-18"
+      ]
+    }
+  ],
+  "runAt": "2026-07-08T11:54:51+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "runIndex": 2,
+    "usedSpeechIdsFormat": "compressed-ranges"
+  },
+  "promptFile": "reports/UpRyakf5j80_clip_audio_v001/clip_composition_prompt_v012/20260708-115350/prompt.md",
+  "pageUrl": "https://gemini.google.com/app/180a0eae13af429a?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"selectedCuts\": [\n    {\n      \"sourceStartMs\": 11364140,\n      \"sourceEndMs\": 11404850,\n      \"reason\": \"開始根拠: リスナーから世界2位の記事について取り上げられた話題提示（お便りの読み上げ）が始まる発話を選択しました。終了根拠: 順位は変動するものだからあまり喜べないという結論の補足が完了する発話までを含めました。除外判断: 冒頭のお便り前の挨拶（speechId: 1）や、末尾の次の話題に切り替わる相槌（speechId: 19の後半以降、20）はテーマに直接関係がないため除外しました。\",\n      \"usedSpeechIds\": [\n        \"2-18\"\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

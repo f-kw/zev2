@@ -1,0 +1,24 @@
+{
+  "selectedCuts": [
+    {
+      "sourceStartMs": 4922443,
+      "sourceEndMs": 5056495,
+      "reason": "開始根拠: 組織内の人数増加や体制に関する話題が切り出される最初の発話（「欲しがってる人いるな」）から開始するためです。終了根拠: 一期生との関係性について話し「安心できるんじゃないでしょうか」と結論づけて一連の話題が収束する最後の発話まで含めるためです。除外判断: 単一のテーマで意味の連続性が保たれている一連の流れであるため、途中の区間は除外せず一本の連続区間として採用しました。",
+      "usedSpeechIds": [
+        "1-631"
+      ]
+    }
+  ],
+  "runAt": "2026-07-08T12:09:07+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "runIndex": 2,
+    "usedSpeechIdsFormat": "compressed-ranges"
+  },
+  "promptFile": "reports/aX-axQMWR3c_single_material_v001/clip_composition_prompt_v012/20260708-115349/prompt.md",
+  "pageUrl": "https://gemini.google.com/app/ecd31dd6339bccf6?hl=ja",
+  "rawResponseText": "{\"selectedCuts\": [{\"sourceStartMs\": 4922443, \"sourceEndMs\": 5056495, \"reason\": \"開始根拠: 組織内の人数増加や体制に関する話題が切り出される最初の発話（「欲しがってる人いるな」）から開始するためです。終了根拠: 一期生との関係性について話し「安心できるんじゃないでしょうか」と結論づけて一連の話題が収束する最後の発話まで含めるためです。除外判断: 単一のテーマで意味の連続性が保たれている一連の流れであるため、途中の区間は除外せず一本の連続区間として採用しました。\", \"usedSpeechIds\": [\"1-631\"]}]}\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

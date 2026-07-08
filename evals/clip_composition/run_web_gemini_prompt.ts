@@ -551,34 +551,64 @@ function normalizeText(text: string): string {
   return text.replace(/\r/g, '').trim();
 }
 
+function truncateTrailingPromptEcho(answerText: string, promptText: string): string {
+  const markers = [
+    normalizeText(promptText).split('\n')[0],
+    '# clip_composition_prompt_',
+    '## 入力JSON'
+  ].filter((marker): marker is string => Boolean(marker && marker.trim()));
+
+  let truncated = answerText;
+  for (const marker of markers) {
+    const index = truncated.indexOf(marker);
+    if (index > 0) {
+      truncated = truncated.slice(0, index);
+    }
+  }
+  return truncated.trim();
+}
+
 function extractAnswerText(bodyText: string, promptText: string): string {
   const normalizedBody = normalizeText(bodyText);
   const answerMarker = 'Gemini の回答';
   const answerStart = normalizedBody.lastIndexOf(answerMarker);
   if (answerStart >= 0) {
-    return normalizedBody.slice(answerStart + answerMarker.length).trim();
+    return truncateTrailingPromptEcho(normalizedBody.slice(answerStart + answerMarker.length), promptText);
   }
 
   const promptHead = normalizeText(promptText).split('\n')[0] ?? '';
   const promptStart = promptHead ? normalizedBody.lastIndexOf(promptHead) : -1;
   if (promptStart >= 0) {
-    return normalizedBody.slice(promptStart + normalizeText(promptText).length).trim();
+    return truncateTrailingPromptEcho(normalizedBody.slice(promptStart + normalizeText(promptText).length), promptText);
   }
 
-  return normalizedBody;
+  return truncateTrailingPromptEcho(normalizedBody, promptText);
 }
 
-function extractPromptOutput(text: string): PromptOutput | undefined {
-  const fenceOutput = extractFromCodeFences(text);
+type ExtractOptions = {
+  prefer: 'first' | 'last';
+  allowPartial: boolean;
+};
+
+function extractPromptOutput(text: string, options: ExtractOptions = { prefer: 'last', allowPartial: false }): PromptOutput | undefined {
+  const fenceOutput = extractFromCodeFences(text, options.prefer);
   if (fenceOutput) {
     return fenceOutput;
   }
-  return extractFromBalancedObjects(text);
+  const balancedOutput = extractFromBalancedObjects(text, options.prefer);
+  if (balancedOutput) {
+    return balancedOutput;
+  }
+  return options.allowPartial ? extractPartialSelectedCuts(text) : undefined;
 }
 
-function extractFromCodeFences(text: string): PromptOutput | undefined {
-  const matches = [...text.matchAll(/```(?:json)?\s*([\s\S]*?)```/gi)].reverse();
-  for (const match of matches) {
+function ordered<T>(items: T[], prefer: 'first' | 'last'): T[] {
+  return prefer === 'first' ? items : [...items].reverse();
+}
+
+function extractFromCodeFences(text: string, prefer: 'first' | 'last'): PromptOutput | undefined {
+  const matches = [...text.matchAll(/```(?:json)?\s*([\s\S]*?)```/gi)];
+  for (const match of ordered(matches, prefer)) {
     const parsed = safeParsePromptOutput(match[1]?.trim() ?? '');
     if (parsed) {
       return parsed;
@@ -587,7 +617,7 @@ function extractFromCodeFences(text: string): PromptOutput | undefined {
   return undefined;
 }
 
-function extractFromBalancedObjects(text: string): PromptOutput | undefined {
+function extractFromBalancedObjects(text: string, prefer: 'first' | 'last'): PromptOutput | undefined {
   const starts: number[] = [];
   for (let index = 0; index < text.length; index += 1) {
     if (text[index] === '{') {
@@ -595,7 +625,7 @@ function extractFromBalancedObjects(text: string): PromptOutput | undefined {
     }
   }
 
-  for (const start of starts.reverse()) {
+  for (const start of ordered(starts, prefer)) {
     const end = findJsonObjectEnd(text, start);
     if (end < 0) {
       continue;
@@ -606,6 +636,70 @@ function extractFromBalancedObjects(text: string): PromptOutput | undefined {
     }
   }
   return undefined;
+}
+
+function extractPartialSelectedCuts(text: string): PromptOutput | undefined {
+  if (!text.includes('"selectedCuts"')) {
+    return undefined;
+  }
+
+  const selectedCuts: SelectedCut[] = [];
+  const cutPattern = /"sourceStartMs"\s*:\s*(\d+)[\s\S]{0,500}?"sourceEndMs"\s*:\s*(\d+)([\s\S]{0,900}?)(?=\n\s*\}\s*,|\n\s*\}\s*\]|\n\s*\{\s*"sourceStartMs"|$)/g;
+  for (const match of text.matchAll(cutPattern)) {
+    const sourceStartMs = Number(match[1]);
+    const sourceEndMs = Number(match[2]);
+    if (!Number.isFinite(sourceStartMs) || !Number.isFinite(sourceEndMs) || sourceEndMs <= sourceStartMs) {
+      continue;
+    }
+
+    const reason = extractReasonFromCutText(match[3] ?? '')
+      ?? 'Gemini回答が途中で切れたため、理由文字列は完全には取得できなかった。sourceStartMs/sourceEndMsは回答本文に出ていた値を採点用に保持した。';
+    selectedCuts.push({
+      sourceStartMs,
+      sourceEndMs,
+      reason
+    });
+  }
+
+  if (selectedCuts.length === 0) {
+    return undefined;
+  }
+
+  return {
+    selectedCuts,
+    extractionStatus: {
+      status: 'partial_selectedCuts_extracted_from_answer_text',
+      reason: 'Gemini回答JSONが完結していないため、回答本文に出ていた区間だけを採点候補として抽出した。',
+      extractedCutCount: selectedCuts.length
+    }
+  };
+}
+
+function extractReasonFromCutText(text: string): string | undefined {
+  const marker = text.match(/"reason"\s*:\s*"/);
+  if (!marker || marker.index === undefined) {
+    return undefined;
+  }
+  const start = marker.index + marker[0].length;
+  let escaped = false;
+  let reason = '';
+  for (let index = start; index < text.length; index += 1) {
+    const char = text[index];
+    if (escaped) {
+      reason += char;
+      escaped = false;
+      continue;
+    }
+    if (char === '\\') {
+      escaped = true;
+      continue;
+    }
+    if (char === '"') {
+      return reason;
+    }
+    reason += char;
+  }
+  return reason.trim() ? `${reason.trim()} [回答途中切れ]` : undefined;
 }
 
 function findJsonObjectEnd(text: string, start: number): number {
@@ -724,11 +818,18 @@ async function waitForGeminiOutput(
       return { bodyText, stillRunning, pageUrl: location.href };
     })()`);
     const answerText = extractAnswerText(state.bodyText ?? '', promptText);
-    const output = extractPromptOutput(answerText) ?? extractPromptOutput(state.bodyText ?? '');
+    const answerOutput = extractPromptOutput(answerText, { prefer: 'first', allowPartial: true });
+    const output = answerOutput ?? (
+      answerText.includes('"selectedCuts"')
+        ? undefined
+        : extractPromptOutput(state.bodyText ?? '', { prefer: 'last', allowPartial: false })
+    );
     const currentCanonical = canonicalOutput(output);
-    if (output && currentCanonical && currentCanonical !== previousCanonical && !state.stillRunning) {
+    if (output && currentCanonical && currentCanonical !== previousCanonical) {
       latestRawText = answerText;
       latestOutput = output;
+    }
+    if (output && currentCanonical && currentCanonical !== previousCanonical && !state.stillRunning) {
       if (currentCanonical !== stableCanonical) {
         stableCanonical = currentCanonical;
         stableSince = Date.now();
@@ -792,7 +893,12 @@ async function extractExistingGeminiOutput(options: CliOptions): Promise<void> {
         pageUrl: location.href
       }))()`);
       const answerText = extractAnswerText(state.bodyText ?? '', '');
-      const output = extractPromptOutput(answerText) ?? extractPromptOutput(state.bodyText ?? '');
+      const answerOutput = extractPromptOutput(answerText, { prefer: 'first', allowPartial: true });
+      const output = answerOutput ?? (
+        answerText.includes('"selectedCuts"')
+          ? undefined
+          : extractPromptOutput(state.bodyText ?? '', { prefer: 'last', allowPartial: false })
+      );
       if (!output) {
         continue;
       }

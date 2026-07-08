@@ -359,6 +359,46 @@ function validateExplicitExcludedRanges(value: unknown): ExcludedRange[] {
   });
 }
 
+function normalizeUsedSpeechIds(value: unknown, label: string): number[] | undefined {
+  if (value === undefined) {
+    return undefined;
+  }
+  if (!Array.isArray(value)) {
+    throw new Error(`${label}は配列である必要があります`);
+  }
+
+  const ids: number[] = [];
+  value.forEach((item, index) => {
+    const itemLabel = `${label}[${index}]`;
+    if (typeof item === 'number') {
+      if (!Number.isInteger(item)) {
+        throw new Error(`${itemLabel}は整数の発話IDである必要があります`);
+      }
+      ids.push(item);
+      return;
+    }
+
+    if (typeof item !== 'string') {
+      throw new Error(`${itemLabel}は整数または "12-47" 形式の文字列である必要があります`);
+    }
+
+    const match = item.match(/^(\d+)-(\d+)$/);
+    if (!match) {
+      throw new Error(`${itemLabel}は "12-47" 形式の範囲文字列である必要があります`);
+    }
+    const start = Number(match[1]);
+    const end = Number(match[2]);
+    if (!Number.isSafeInteger(start) || !Number.isSafeInteger(end) || end < start) {
+      throw new Error(`${itemLabel}は開始IDが終了ID以下の安全な整数範囲である必要があります`);
+    }
+    for (let id = start; id <= end; id += 1) {
+      ids.push(id);
+    }
+  });
+
+  return ids;
+}
+
 function validateCandidateOutput(value: unknown): CandidateOutput {
   const record = requireRecord(value, 'LLM出力');
   const selectedCuts = record.selectedCuts;
@@ -381,7 +421,9 @@ function validateCandidateOutput(value: unknown): CandidateOutput {
         sourceStartMs,
         sourceEndMs,
         reason: requireString(cut.reason, `選択区間 ${index + 1} の理由`),
-        ...(Array.isArray(cut.usedSpeechIds) ? { usedSpeechIds: cut.usedSpeechIds.filter((item): item is number => typeof item === 'number') } : {}),
+        ...(cut.usedSpeechIds !== undefined
+          ? { usedSpeechIds: normalizeUsedSpeechIds(cut.usedSpeechIds, `選択区間 ${index + 1} の usedSpeechIds`) }
+          : {}),
         ...extraFields
       };
     })
@@ -809,6 +851,7 @@ function buildSummaryMarkdown(input: {
   diffSummary: DiffSummary;
   themeCoverage: ThemeCoverage;
   timestampPlausibility: TimestampPlausibility;
+  candidateExtractionStatus?: unknown;
   resultPath: string;
 }): string {
   const selectedLines = input.selectedCuts.length > 0
@@ -846,6 +889,7 @@ function buildSummaryMarkdown(input: {
     `- 使用モデル名: ${input.model}`,
     `- 使用パラメータ: ${JSON.stringify(input.params)}`,
     `- LLM出力JSON: ${input.inputFile}`,
+    `- LLM出力の抽出状態: ${input.candidateExtractionStatus === undefined ? 'full_json' : JSON.stringify(input.candidateExtractionStatus)}`,
     `- 評価結果JSON: ${input.resultPath}`,
     '',
     '## LLMが選んだ区間',
@@ -949,6 +993,7 @@ async function main() {
     params: options.params,
     evaluationMode: 'external_prompt_output',
     inputFile: options.inputFile,
+    ...(candidateOutput.extractionStatus !== undefined ? { inputExtractionStatus: candidateOutput.extractionStatus } : {}),
     selectedCuts: candidateOutput.selectedCuts,
     scoredSelectedCuts,
     excludedSelectedCuts,
@@ -982,6 +1027,7 @@ async function main() {
     diffSummary,
     themeCoverage,
     timestampPlausibility,
+    candidateExtractionStatus: candidateOutput.extractionStatus,
     resultPath
   }), 'utf8');
 

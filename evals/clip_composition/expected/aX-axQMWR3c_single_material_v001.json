@@ -121,5 +121,25 @@
         "fixedThemeSummary": "Vの組織内あれこれ"
       }
     }
+  ],
+  "excludedRanges": [
+    {
+      "id": "unconfirmed_head_clip_0_27258",
+      "sourceStartMs": 4890622,
+      "sourceEndMs": 4922443,
+      "reason": "clip 0:00.000-0:27.258 はSTT出力と断片的なDP対応があるが、人間確認済みの素材対応ブロックではないため採点対象外として扱う。",
+      "clipStartMs": 0,
+      "clipEndMs": 27258,
+      "clipRangeStatus": "unconfirmed_head_before_frozen_material_block",
+      "sourceRangeStatus": "fragmented_dp_candidate_not_human_confirmed",
+      "scoringTreatment": "excluded_from_scoring_when_selected_without_expected_overlap",
+      "sourceRangeBasis": {
+        "firstFragmentSourceStartMs": 4890622,
+        "lastFragmentSourceEndMs": 4918319,
+        "nextConfirmedMaterialBlockSourceStartMs": 4922443,
+        "reportPath": "evals/clip_composition/reports/aX-axQMWR3c-unmatched-head-diagnosis-20260707-v001.md"
+      },
+      "note": "現行採点では、選択区間が期待区間と重ならずこの除外区間と重なる場合に採点対象外になる。除外区間と期待区間をまたいで1本に結合した選択は、期待区間との境界差分として採点される。"
+    }
   ]
 }

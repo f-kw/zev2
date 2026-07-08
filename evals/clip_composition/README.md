@@ -407,6 +407,8 @@ pnpm --filter @zev2/agent-runner exec tsx ../evals/clip_composition/score_prompt
 }
 ```
 
+`usedSpeechIds` は、数値の全列挙と、`"12-47"` のような連続範囲文字列をどちらも受け付けます。採点時には、範囲文字列を発話ID列へ展開して記録します。
+
 採点結果は、先頭区間の `diff` に加えて、全区間の `cutDiffs` と `diffSummary` も記録します。複数区間expectedの場合は、期待区間と選択区間を同じ順番で比較し、完全一致件数、重なりあり件数、未選択の期待区間数、余分な選択区間数を表示します。ここでも自動の重み付けや合成スコアは作らず、人間が見る差分をそのまま出します。
 
 採点済み `result.json` を横断比較する場合:
@@ -616,6 +618,8 @@ node evals/clip_composition/run_web_gemini_prompt.ts \
   --params '{"temperature":"web-default","source":"gemini-web","manualRun":false,"runner":"edge-cdp-text-prompt"}' \
   --cdpPort 9222
 ```
+
+Web Geminiの回答が長いJSONの途中で切れた場合、実行器はGemini回答本文に実際に出ていた `selectedCuts` だけを部分抽出し、`extractionStatus.status` に `partial_selectedCuts_extracted_from_answer_text` を記録します。これは欠落した後方区間を補完せず、途中切れを観測として残すための扱いです。回答本文の後ろにプロンプト例が表示されている場合は、回答本文だけを抽出し、プロンプト例の架空区間を採点対象へ混ぜません。
 
 採点済み結果と境界候補payloadの関係を見る場合:
 

@@ -225,8 +225,10 @@ function buildModelInput(input: {
   fixture: FixtureMetadata;
   transcript: TranscriptArtifact;
   theme: ThemeArtifact['themes'][number];
+  promptVersion: string;
 }) {
   const relatedSpeechIds = new Set(input.theme.relatedSpeechIds);
+  const usesCompressedSpeechIds = input.promptVersion === 'clip_composition_prompt_v012';
   return {
     task: 'fixed_theme_clip_interval_selection',
     fixtureId: input.fixture.fixtureId,
@@ -261,7 +263,7 @@ function buildModelInput(input: {
             sourceStartMs: 'number',
             sourceEndMs: 'number',
             reason: 'string',
-            usedSpeechIds: ['number']
+            usedSpeechIds: usesCompressedSpeechIds ? ['number_or_range_string'] : ['number']
           }
         ]
       }
@@ -346,7 +348,7 @@ async function main() {
   await mkdir(outputDir, { recursive: true });
   await mkdir(reportDir, { recursive: true });
 
-  const modelInput = buildModelInput({ fixture, transcript, theme });
+  const modelInput = buildModelInput({ fixture, transcript, theme, promptVersion: options.promptVersion });
   const payload = {
     kind: 'clip_composition_prompt_payload',
     runAt,
