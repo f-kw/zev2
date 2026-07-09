@@ -1,0 +1,41 @@
+{
+  "themes": [
+    {
+      "themeId": "partial_theme_1",
+      "title": "Gemini回答が途中で切れたため、タイトルは完全には取得できなかった。",
+      "sourceStartMs": 373919,
+      "sourceEndMs": 422180,
+      "representativeQuote": "ゲームはプレステ5みたいなテンションにやってもらってマリンはマリンがレトロ感1人で放つ"
+    },
+    {
+      "themeId": "partial_theme_2",
+      "title": "Gemini回答が途中で切れたため、タイトルは完全には取得できなかった。",
+      "sourceStartMs": 1506179,
+      "sourceEndMs": 1520820,
+      "representativeQuote": "昔腰が入ってないってねお局に怒られたんで今となってはね腰を入れてしっかり掃除ができるようになりました"
+    },
+    {
+      "themeId": "partial_theme_3",
+      "title": "Gemini回答が途中で切れたため、タイトルは完全には取得できなかった。",
+      "sourceStartMs": 3210720,
+      "sourceEndMs": 3710240,
+      "representativeQuote": "石焼き芋の歌が本当にうるさい。これからやるやるメンバーに教えてあげたい、クリックじゃなくてエンターでやった方がいいって"
+    }
+  ],
+  "extractionStatus": {
+    "status": "partial_themes_extracted_from_answer_text",
+    "reason": "Gemini回答JSONが完結していないため、回答本文に出ていたテーマ候補だけを採点候補として抽出した。",
+    "extractedThemeCount": 3
+  },
+  "runAt": "2026-07-09T10:14:36+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/UpRyakf5j80_clip_audio_v001/theme-llm-v001/20260709-v001/prompt.md",
+  "pageUrl": "https://gemini.google.com/app/413bfb6828a8d411?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"レトロゲームの画面設定をリスナーに相談するマリン船長\",\n      \"summary\": \"チラズアートの新作ゲームを始める際、画面のレトロ感を残すか切るかをコメントの意見を聞きながら決める場面。\",\n      \"whyItCanBeClipped\": \"配信冒頭のゲーム設定で、リスナーとの掛け合いから「マリン自身がレトロ感を放つ」という独自の結論に至るコミカルな展開が単独のトークとして成立しているため。\",\n      \"sourceVideoId\": \"kNX-wQTvsws\",\n      \"sourceStartMs\": 373919,\n      \"sourceEndMs\": 422180,\n      \"supportingSpeechIds\": [9, 10],\n      \"representativeQuote\": \"ゲームはプレステ5みたいなテンションにやってもらってマリンはマリンがレトロ感1人で放つ\",\n      \"riskNotes\": [\n        \"配信開始直後の音量調整や雑談の流れが含まれており、テンポよくカットする必要がある。\"\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"昔のバイト先のお局に怒られたエピソードを語るマリン船長\",\n      \"summary\": \"ゲーム内の銭湯で掃除のモップ掛けをする際、過去のバイト時代に「腰が入っていない」とお局に怒られた思い出を振り返る場面。\",\n      \"whyItCanBeClipped\": \"ゲーム内の行動（掃除）から、船長自身の過去のリアルなバイト経験談への脱線と、そこからの成長を語る一連の流れが綺麗にまとまっているため。\",\n      \"sourceVideoId\": \"kNX-wQTvsws\",\n      \"sourceStartMs\": 1506179,\n      \"sourceEndMs\": 1520820,\n      \"supportingSpeechIds\": [102],\n      \"representativeQuote\": \"昔腰が入ってないってねお局に怒られたんで今となってはね腰を入れてしっかり掃除ができるようになりました\",\n      \"riskNotes\": [\n        \"発話自体が非常に短いため、前後のゲームプレイ部分（掃除の様子）とセットで切り抜く必要がある。\"\n      ]\n    },\n    {\n      \"themeId\": \"theme_003\",\n      \"title\": \"クセの強すぎる「石焼き芋クイズ」に翻弄され、歌にキレるマリン船長\",\n      \"summary\": \"ゲーム内に登場する芋売り（芋じろう）のさつまいもクイズに挑戦するが、クリックのラグやエンドレスで流れるBGMのうるささに絶叫しながら奮闘する場面。\",\n      \"whyItCanBeClipped\": \"ホラーゲーム特有のシュールなギャグ要素に対して、船長が大きなリアクションでツッコミを入れ続け、最終的にリスナーへの攻略アドバイスに繋がる一連の大きな見どころとなっているため。\",\n      \"sourceVideoId\": \"kNX-wQTvsws\",\n      \"sourceStartMs\": 3210720,\n      \"sourceEndMs\": 3710240,\n      \"supportingSpeechIds\": [266, \"268-271\", 291, 292, 304, 305, 307],\n      \"representativeQuote\": \"石焼き芋の歌が本当にうるさい。これからやるやるメンバーに教えてあげたい、クリックじゃなくてエンターでやった方がいいって\",\n      \"riskNotes\": [\n        \"沼っている時間が長いため、テンポよくクリアまでを要約・編集する必要がある。\"\n      ]\n    },\n    {\n      \"themeId\": \"theme_004\",\n      \"title\": \"自作のLINEスタンプへのこだわりと手の抜きどころの難しさを語る\",\n      \"summary\": \"配信後半のスパチャ読みで、自身が描き上げたLINEスタンプの苦労話を明かし、ラバーストラップ制作との違いや、こだわりすぎて仕事量が増えてしまった反省点を熱弁する場面。\",\n      \"whyItCanBeClipped\": \"イラストレーターとしての側面を持つ船長ならではの、デフォルメ絵における実務的なこだわりや、クリエイターとしての苦悩・裏"
+}

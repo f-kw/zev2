@@ -1,0 +1,83 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "対戦相手の想定外のカードに困惑する星川",
+      "summary": "遊戯王の対戦中に、相手がドヤ顔で出してきた「ティアラメンツ」や見慣れないカードに対して、困惑しつつもツッコミを入れる場面。",
+      "whyItCanBeClipped": "「なんか知らんぞこのゲーム」「ドヤ顔でティアラメンツなんか持ってきやがって」といった、ゲーム展開に対する配信者のリアルでコミカルなリアクションが単独の見どころとして成立しているため。",
+      "sourceVideoId": "OJoi31bq8lk",
+      "sourceStartMs": 13641739,
+      "sourceEndMs": 13713800,
+      "supportingSpeechIds": [
+        "1228-1234"
+      ],
+      "representativeQuote": "なんか知らんぞこのゲーム ドヤ顔でティアラメンツなんか持ってきやがって",
+      "riskNotes": [
+        "具体的な対戦相手のカード効果や盤面の視覚情報がある程度前提となる。"
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "次回の「闇のデュエル」開催を宣言",
+      "summary": "今回は「光のデュエル」だったとし、次回は「研修」から名前を変え、命をかけるつもりで「闇のデュエル」をするとファンや対戦相手に向けて意気込む場面。",
+      "whyItCanBeClipped": "今後の配信への期待感を煽るトークであり、「次は命かけるつもりでくるわ」「闇のデュエルしよう」という明確なパワーワードとオチがあるため。",
+      "sourceVideoId": "OJoi31bq8lk",
+      "sourceStartMs": 13729080,
+      "sourceEndMs": 13770140,
+      "supportingSpeechIds": [
+        "1237-1239"
+      ],
+      "representativeQuote": "次も呼ぶありがとうございます次命かけるつもりでくるわ闇のデュエルしよう今日まだ光のジュエルやから",
+      "riskNotes": [
+        "対戦相手とのこれまでの関係性や「研修」というイベントの文脈が前提にある。"
+      ]
+    },
+    {
+      "themeId": "theme_003",
+      "title": "遊戯王の不況成功と対戦相手への感謝を語る星川",
+      "summary": "対戦相手（リューティ）が誘いをきっかけに遊戯王を始めて課金までしてくれたことに感謝し、不況（布教）成功者として自慢げに語る場面。",
+      "whyItCanBeClipped": "配信終了間際の雑談として、対戦相手のフットワークの軽さや優しさを絶賛しつつ、自分の布教の成果を「褒め称えてほしい」と可愛らしくアピールするまとまったトークになっているため。",
+      "sourceVideoId": "OJoi31bq8lk",
+      "sourceStartMs": 13795560,
+      "sourceEndMs": 13858520,
+      "supportingSpeechIds": [
+        "1244-1246"
+      ],
+      "representativeQuote": "賢いが遊戯王やろうよって言ったら本当に始めてくれてここまでやってくれるのめっちゃ優しくないマジで嬉しい星川が遊戯王の不況に生協に成功しました",
+      "riskNotes": [
+        "「布教」「成功」の音声認識が「不況」「生協」と誤認されているため、テロップ化の際に修正が必要。"
+      ]
+    },
+    {
+      "themeId": "theme_004",
+      "title": "長時間配信による集中力の限界を告白",
+      "summary": "3〜4時間の遊戯王配信を振り返り、集中力が持たずにイライラさせてしまったかもしれないとリスナーに謝りつつ、最初と最後に勝利できて大満足したと語る場面。",
+      "whyItCanBeClipped": "「集中力は12時間が限界（1〜2時間の言い間違いと思われる）」という天然発言や、「終わりよければ全てよし」と本音で配信の満足感を総括するエピソードとして成立しているため。",
+      "sourceVideoId": "OJoi31bq8lk",
+      "sourceStartMs": 13866319,
+      "sourceEndMs": 13915819,
+      "supportingSpeechIds": [
+        "1247"
+      ],
+      "representativeQuote": "集中力は12時間が限界ですでも終わりよければ全てよし最初にフミをボコれて最後ビューティーボコるて大変満足しました",
+      "riskNotes": [
+        "「1〜2時間」を「12時間」と言い間違えている部分のニュアンスの補足が必要。"
+      ]
+    }
+  ],
+  "runAt": "2026-07-09T12:07:59+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_02_OJoi31bq8lk",
+    "windowSourceVideoId": "OJoi31bq8lk",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/XauLZgnWHtA_part01_partial_material_v001/theme-llm-v001/20260709-v001/windows/window_02_OJoi31bq8lk-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/51c7b3dd7158bec8?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"対戦相手の想定外のカードに困惑する星川\",\n      \"summary\": \"遊戯王の対戦中に、相手がドヤ顔で出してきた「ティアラメンツ」や見慣れないカードに対して、困惑しつつもツッコミを入れる場面。\",\n      \"whyItCanBeClipped\": \"「なんか知らんぞこのゲーム」「ドヤ顔でティアラメンツなんか持ってきやがって」といった、ゲーム展開に対する配信者のリアルでコミカルなリアクションが単独の見どころとして成立しているため。\",\n      \"sourceVideoId\": \"OJoi31bq8lk\",\n      \"sourceStartMs\": 13641739,\n      \"sourceEndMs\": 13713800,\n      \"supportingSpeechIds\": [\n        \"1228-1234\"\n      ],\n      \"representativeQuote\": \"なんか知らんぞこのゲーム ドヤ顔でティアラメンツなんか持ってきやがって\",\n      \"riskNotes\": [\n        \"具体的な対戦相手のカード効果や盤面の視覚情報がある程度前提となる。\"\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"次回の「闇のデュエル」開催を宣言\",\n      \"summary\": \"今回は「光のデュエル」だったとし、次回は「研修」から名前を変え、命をかけるつもりで「闇のデュエル」をするとファンや対戦相手に向けて意気込む場面。\",\n      \"whyItCanBeClipped\": \"今後の配信への期待感を煽るトークであり、「次は命かけるつもりでくるわ」「闇のデュエルしよう」という明確なパワーワードとオチがあるため。\",\n      \"sourceVideoId\": \"OJoi31bq8lk\",\n      \"sourceStartMs\": 13729080,\n      \"sourceEndMs\": 13770140,\n      \"supportingSpeechIds\": [\n        \"1237-1239\"\n      ],\n      \"representativeQuote\": \"次も呼ぶありがとうございます次命かけるつもりでくるわ闇のデュエルしよう今日まだ光のジュエルやから\",\n      \"riskNotes\": [\n        \"対戦相手とのこれまでの関係性や「研修」というイベントの文脈が前提にある。\"\n      ]\n    },\n    {\n      \"themeId\": \"theme_003\",\n      \"title\": \"遊戯王の不況成功と対戦相手への感謝を語る星川\",\n      \"summary\": \"対戦相手（リューティ）が誘いをきっかけに遊戯王を始めて課金までしてくれたことに感謝し、不況（布教）成功者として自慢げに語る場面。\",\n      \"whyItCanBeClipped\": \"配信終了間際の雑談として、対戦相手のフットワークの軽さや優しさを絶賛しつつ、自分の布教の成果を「褒め称えてほしい」と可愛らしくアピールするまとまったトークになっているため。\",\n      \"sourceVideoId\": \"OJoi31bq8lk\",\n      \"sourceStartMs\": 13795560,\n      \"sourceEndMs\": 13858520,\n      \"supportingSpeechIds\": [\n        \"1244-1246\"\n      ],\n      \"representativeQuote\": \"賢いが遊戯王やろうよって言ったら本当に始めてくれてここまでやってくれるのめっちゃ優しくないマジで嬉しい星川が遊戯王の不況に生協に成功しました\",\n      \"riskNotes\": [\n        \"「布教」「成功」の音声認識が「不況」「生協」と誤認されているため、テロップ化の際に修正が必要。\"\n      ]\n    },\n    {\n      \"themeId\": \"theme_004\",\n      \"title\": \"長時間配信による集中力の限界を告白\",\n      \"summary\": \"3〜4時間の遊戯王配信を振り返り、集中力が持たずにイライラさせてしまったかもしれないとリスナーに謝りつつ、最初と最後に勝利できて大満足したと語る場面。\",\n      \"whyItCanBeClipped\": \"「集中力は12時間が限界（1〜2時間の言い間違いと思われる）」という天然発言や、「終わりよければ全てよし」と本音で配信の満足感を総括するエピソードとして成立しているため。\",\n      \"sourceVideoId\": \"OJoi31bq8lk\",\n      \"sourceStartMs\": 13866319,\n      \"sourceEndMs\": 13915819,\n      \"supportingSpeechIds\": [\n        \"1247\"\n      ],\n      \"representativeQuote\": \"集中力は12時間が限界ですでも終わりよければ全てよし最初にフミをボコれて最後ビューティーボコるて大変満足しました\",\n      \"riskNotes\": [\n        \"「1〜2時間」を「12時間」と言い間違えている部分のニュアンスの補足が必要。\"\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

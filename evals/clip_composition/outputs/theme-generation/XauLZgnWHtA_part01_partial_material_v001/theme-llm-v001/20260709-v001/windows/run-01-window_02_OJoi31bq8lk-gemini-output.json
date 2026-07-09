@@ -1,0 +1,83 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "対戦相手のティアラメンツに困惑する星川",
+      "summary": "対戦相手が強力なテーマ「ティアラメンツ」のカードを出してきたことに対し、困惑しながら「ドヤ顔でティアラメンツなんか持ってきやがって謝れよ」とツッコミを入れる場面。",
+      "whyItCanBeClipped": "ゲーム（遊戯王）の対戦相手に対する臨場感のあるリアクションとユーモアのある愚痴が単体で見どころとして成立するため。",
+      "sourceVideoId": "OJoi31bq8lk",
+      "sourceStartMs": 13693739,
+      "sourceEndMs": 13713800,
+      "supportingSpeechIds": [
+        "1231-1234"
+      ],
+      "representativeQuote": "ドヤ顔でティアラメンツなんか持ってきやがって謝れよその友達謝れよ",
+      "riskNotes": [
+        "ゲーム画面や相手側の展開が視覚的に見えていることが前提となる"
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "次回「闇のデュエル」を宣言する星川",
+      "summary": "今回の対戦を「序章」とし、次回は取れ高を度外視してガチで勝ちに行く「闇のデュエル」をすると息巻く場面。",
+      "whyItCanBeClipped": "今後の配信へのモチベーションや、次回へのフリとなる配信の締めくくり前の盛り上がりどころであるため。",
+      "sourceVideoId": "OJoi31bq8lk",
+      "sourceStartMs": 13721460,
+      "sourceEndMs": 13770140,
+      "supportingSpeechIds": [
+        "1236-1239"
+      ],
+      "representativeQuote": "次命かけるつもりでくるわ闇のデュエルしよう今日まだ光のジュエルやから",
+      "riskNotes": [
+        "対戦相手との関係性やゲームの勝敗の文脈が多少必要となる"
+      ]
+    },
+    {
+      "themeId": "theme_003",
+      "title": "星川サラ、遊戯王の不普及・布教成功を自慢",
+      "summary": "対戦相手（リューティー）が自分の誘いで遊戯王を始めて課金までしてくれたことに感謝しつつ、不況（布教）成功者として褒めてほしいとアピールする場面。",
+      "whyItCanBeClipped": "コラボ相手との微笑ましいエピソードであり、星川自身の布教成功に対する満足感がトークとして綺麗にまとまっているため。",
+      "sourceVideoId": "OJoi31bq8lk",
+      "sourceStartMs": 13795560,
+      "sourceEndMs": 13835600,
+      "supportingSpeechIds": [
+        1244
+      ],
+      "representativeQuote": "星川が遊戯王の不況に生協に成功しましたこれはうんあの遊戯王復興不況成功者としてもティアラメンツボコったものとしてもこれ褒め称えて欲しいね",
+      "riskNotes": [
+        "自動字幕の誤変換（不況、生協など）を適切に補完してテロップ等にする必要がある"
+      ]
+    },
+    {
+      "themeId": "theme_004",
+      "title": "長時間配信で集中力が限界を迎える星川",
+      "summary": "3〜4時間の遊戯王配信を振り返り、自身のプレイングにイライラした視聴者へ謝罪しつつ、集中力の限界を告白する場面。",
+      "whyItCanBeClipped": "配信全体の総括であり、自身の不器用さを認めつつも満足げに語るファン向けの雑談としてまとまりが良いため。",
+      "sourceVideoId": "OJoi31bq8lk",
+      "sourceStartMs": 13866319,
+      "sourceEndMs": 13915819,
+      "supportingSpeechIds": [
+        1247
+      ],
+      "representativeQuote": "星川があまりに回すの下手でイライラしたおじさんがいたら申し訳ないですが集中力は12時間が限界です",
+      "riskNotes": [
+        "配信全体の感想トークであるため、具体的なゲームプレイの大きな山場ではない"
+      ]
+    }
+  ],
+  "runAt": "2026-07-09T11:10:30+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_02_OJoi31bq8lk",
+    "windowSourceVideoId": "OJoi31bq8lk",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/XauLZgnWHtA_part01_partial_material_v001/theme-llm-v001/20260709-v001/windows/window_02_OJoi31bq8lk-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/af6ffdc1156cc187?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"対戦相手のティアラメンツに困惑する星川\",\n      \"summary\": \"対戦相手が強力なテーマ「ティアラメンツ」のカードを出してきたことに対し、困惑しながら「ドヤ顔でティアラメンツなんか持ってきやがって謝れよ」とツッコミを入れる場面。\",\n      \"whyItCanBeClipped\": \"ゲーム（遊戯王）の対戦相手に対する臨場感のあるリアクションとユーモアのある愚痴が単体で見どころとして成立するため。\",\n      \"sourceVideoId\": \"OJoi31bq8lk\",\n      \"sourceStartMs\": 13693739,\n      \"sourceEndMs\": 13713800,\n      \"supportingSpeechIds\": [\n        \"1231-1234\"\n      ],\n      \"representativeQuote\": \"ドヤ顔でティアラメンツなんか持ってきやがって謝れよその友達謝れよ\",\n      \"riskNotes\": [\n        \"ゲーム画面や相手側の展開が視覚的に見えていることが前提となる\"\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"次回「闇のデュエル」を宣言する星川\",\n      \"summary\": \"今回の対戦を「序章」とし、次回は取れ高を度外視してガチで勝ちに行く「闇のデュエル」をすると息巻く場面。\",\n      \"whyItCanBeClipped\": \"今後の配信へのモチベーションや、次回へのフリとなる配信の締めくくり前の盛り上がりどころであるため。\",\n      \"sourceVideoId\": \"OJoi31bq8lk\",\n      \"sourceStartMs\": 13721460,\n      \"sourceEndMs\": 13770140,\n      \"supportingSpeechIds\": [\n        \"1236-1239\"\n      ],\n      \"representativeQuote\": \"次命かけるつもりでくるわ闇のデュエルしよう今日まだ光のジュエルやから\",\n      \"riskNotes\": [\n        \"対戦相手との関係性やゲームの勝敗の文脈が多少必要となる\"\n      ]\n    },\n    {\n      \"themeId\": \"theme_003\",\n      \"title\": \"星川サラ、遊戯王の不普及・布教成功を自慢\",\n      \"summary\": \"対戦相手（リューティー）が自分の誘いで遊戯王を始めて課金までしてくれたことに感謝しつつ、不況（布教）成功者として褒めてほしいとアピールする場面。\",\n      \"whyItCanBeClipped\": \"コラボ相手との微笑ましいエピソードであり、星川自身の布教成功に対する満足感がトークとして綺麗にまとまっているため。\",\n      \"sourceVideoId\": \"OJoi31bq8lk\",\n      \"sourceStartMs\": 13795560,\n      \"sourceEndMs\": 13835600,\n      \"supportingSpeechIds\": [\n        1244\n      ],\n      \"representativeQuote\": \"星川が遊戯王の不況に生協に成功しましたこれはうんあの遊戯王復興不況成功者としてもティアラメンツボコったものとしてもこれ褒め称えて欲しいね\",\n      \"riskNotes\": [\n        \"自動字幕の誤変換（不況、生協など）を適切に補完してテロップ等にする必要がある\"\n      ]\n    },\n    {\n      \"themeId\": \"theme_004\",\n      \"title\": \"長時間配信で集中力が限界を迎える星川\",\n      \"summary\": \"3〜4時間の遊戯王配信を振り返り、自身のプレイングにイライラした視聴者へ謝罪しつつ、集中力の限界を告白する場面。\",\n      \"whyItCanBeClipped\": \"配信全体の総括であり、自身の不器用さを認めつつも満足げに語るファン向けの雑談としてまとまりが良いため。\",\n      \"sourceVideoId\": \"OJoi31bq8lk\",\n      \"sourceStartMs\": 13866319,\n      \"sourceEndMs\": 13915819,\n      \"supportingSpeechIds\": [\n        1247\n      ],\n      \"representativeQuote\": \"星川があまりに回すの下手でイライラしたおじさんがいたら申し訳ないですが集中力は12時間が限界です\",\n      \"riskNotes\": [\n        \"配信全体の感想トークであるため、具体的なゲームプレイの大きな山場ではない\"\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

@@ -1,0 +1,51 @@
+{
+  "themes": [
+    {
+      "themeId": "partial_theme_1",
+      "title": "Gemini回答が途中で切れたため、タイトルは完全には取得できなかった。",
+      "sourceStartMs": 1021860,
+      "sourceEndMs": 1219940,
+      "representativeQuote": "誰にも頼まてれないんだ俺が勝手にやってるだけなんだ"
+    },
+    {
+      "themeId": "partial_theme_2",
+      "title": "Gemini回答が途中で切れたため、タイトルは完全には取得できなかった。",
+      "sourceStartMs": 1309290,
+      "sourceEndMs": 1362819,
+      "representativeQuote": "配信者は人前で泣いちゃいけないみんなを笑顔にするために安心してます"
+    },
+    {
+      "themeId": "partial_theme_3",
+      "title": "Gemini回答が途中で切れたため、タイトルは完全には取得できなかった。",
+      "sourceStartMs": 2059560,
+      "sourceEndMs": 2123300,
+      "representativeQuote": "このてっむき出しのところに氷張って安全が確保されてないこの労働環境"
+    },
+    {
+      "themeId": "partial_theme_4",
+      "title": "Gemini回答が途中で切れたため、タイトルは完全には取得できなかった。",
+      "sourceStartMs": 4545080,
+      "sourceEndMs": 4626089
+    }
+  ],
+  "extractionStatus": {
+    "status": "partial_themes_extracted_from_answer_text",
+    "reason": "Gemini回答JSONが完結していないため、回答本文に出ていたテーマ候補だけを採点候補として抽出した。",
+    "extractedThemeCount": 4
+  },
+  "runAt": "2026-07-09T12:17:38+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_04_vWv9H-hfHXo",
+    "windowSourceVideoId": "vWv9H-hfHXo",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/XauLZgnWHtA_part01_partial_material_v001/theme-llm-v001/20260709-v001/windows/window_04_vWv9H-hfHXo-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/6117f8f48725b5da?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"マイクラアップデート要素への道引き計画\",\n      \"summary\": \"配信者が1.20アップデート要素をみんなが見られるようにするために、一人で勝手にネザーに1500ブロック先、さらにその先へと氷の道を何年も年単位で引き続けている背景と、今回の参加者に労働（借金返済）を求める理由を説明している場面。\",\n      \"whyItCanBeClipped\": \"トークの前提となる企画趣旨（アプデ要素の観測地域開拓、1000ブロック分の氷引き労働）が綺麗にまとまっており、背景ストーリーとして単独で成立するため。\",\n      \"sourceVideoId\": \"vWv9H-hfHXo\",\n      \"sourceStartMs\": 1021860,\n      \"sourceEndMs\": 1219940,\n      \"supportingSpeechIds\": [\"95-106\"],\n      \"representativeQuote\": \"誰にも頼まてれないんだ俺が勝手にやってるだけなんだ\",\n      \"riskNotes\": [\n        \"配信全体の導入部にあたる説明のため、少し長尺の雑談トークになっている。\"\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"配信者の心得：心で泣いて顔で笑う\",\n      \"summary\": \"競馬で負けてハイライトが消えた顔（仮面）をしていることに対して弄られ、「配信者は人前で泣いちゃいけない」「みんなを笑顔にするために配信してます」と、配信者としての過酷な調教と心得を自虐気味に語る場面。\",\n      \"whyItCanBeClipped\": \"「心で泣いて顔で笑います」という配信者としてのエンタメ魂・あるあるトークが、笑いとオチを伴って綺麗に1区切りになっているため。\",\n      \"sourceVideoId\": \"vWv9H-hfHXo\",\n      \"sourceStartMs\": 1309290,\n      \"sourceEndMs\": 1362819,\n      \"supportingSpeechIds\": [\"116-117\"],\n      \"representativeQuote\": \"配信者は人前で泣いちゃいけないみんなを笑顔にするために安心してます\",\n      \"riskNotes\": [\n        \"直前の競馬の文脈や、ゲーム内の仮面・パラセールの見た目の文脈が少し絡んでいる。\"\n      ]\n    },\n    {\n      \"themeId\": \"theme_003\",\n      \"title\": \"マインクラフト労働環境への労災請求\",\n      \"summary\": \"安全が確保されていない剥き出しのネザーの作業環境で、氷を張る作業中に「骨折した」と訴え、「死なない限り降りないよ」とブラックな労働環境（ヤクザ・ギャング扱い）をネタに掛け合いをしている場面。\",\n      \"whyItCanBeClipped\": \"「労働環境」「労災」「ブラック」というマフィア・ヤクザ風のロールプレイのノリが分かりやすく、掛け合いのテンポが良い見どころとなっているため。\",\n      \"sourceVideoId\": \"vWv9H-hfHXo\",\n      \"sourceStartMs\": 2059560,\n      \"sourceEndMs\": 2123300,\n      \"supportingSpeechIds\": [\"199-206\"],\n      \"representativeQuote\": \"このてっむき出しのところに氷張って安全が確保されてないこの労働環境\",\n      \"riskNotes\": [\n        \"ゲーム画面内の作業の危険度（マグマや足場の狭さなど）の視覚情報に依存する部分がある。\"\n      ]\n    },\n    {\n      \"themeId\": \"theme_004\",\n      \"title\": \"23時カード開封クイズ\",\n      \"summary\": \"1個だけ買えたカード（ゼリーのおまけ）を配信中に開封し、「お気に入りのお洋服を大事にしてるオレンジ色のワンピースの人は誰だ」というクイズを突発的に始めて盛り上がっている場面。\",\n      \"whyItCanBeClipped\": \"マイクラの作業から離れた雑談・開封エンタメとして完全に独立しており、参加メンバーのキャラクター（スタリオン等）の話題も含めて切り抜き映えするため。\",\n      \"sourceVideoId\": \"vWv9H-hfHXo\",\n      \"sourceStartMs\": 4545080,\n      \"sourceEndMs\": 4626089,\n      \""
+}

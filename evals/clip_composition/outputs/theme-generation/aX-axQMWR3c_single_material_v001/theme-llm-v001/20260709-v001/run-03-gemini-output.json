@@ -1,0 +1,62 @@
+{
+  "themes": [
+    {
+      "themeId": "partial_theme_1",
+      "title": "Gemini回答が途中で切れたため、タイトルは完全には取得できなかった。",
+      "sourceStartMs": 2016159,
+      "sourceEndMs": 2115912,
+      "representativeQuote": "バーチャルユーチューバーの事務所を立ち上げます事務所の名前はダイサンジでございます"
+    },
+    {
+      "themeId": "partial_theme_2",
+      "title": "Gemini回答が途中で切れたため、タイトルは完全には取得できなかった。",
+      "sourceStartMs": 2340002,
+      "sourceEndMs": 2367118,
+      "representativeQuote": "明日は君が生まれる日来たはるさきもですか?"
+    },
+    {
+      "themeId": "partial_theme_3",
+      "title": "Gemini回答が途中で切れたため、タイトルは完全には取得できなかった。",
+      "sourceStartMs": 2430270,
+      "sourceEndMs": 2560907,
+      "representativeQuote": "今までやってきた活動のノウハウをねもったいないからさこのまま腐らせてでもねそういうのを使ってこれから頑張っていくVTuberの人とかのサポートをできたらな"
+    },
+    {
+      "themeId": "partial_theme_4",
+      "title": "Gemini回答が途中で切れたため、タイトルは完全には取得できなかった。",
+      "sourceStartMs": 2640310,
+      "sourceEndMs": 2729246,
+      "representativeQuote": "ミライズに所属する人がクレイジーラクーンはあくまでそらるさんまふまふさんはるちゃんと同じ立場のサポートする"
+    },
+    {
+      "themeId": "partial_theme_5",
+      "title": "Gemini回答が途中で切れたため、タイトルは完全には取得できなかった。",
+      "sourceStartMs": 3180194,
+      "sourceEndMs": 3259753,
+      "representativeQuote": "ぬるっと言ったなぬるっとねそらりさんさっき普通に言ったんだよなあ言うんだ今と思いながらめっちゃでかい今めっちゃ盛り上げようとしてたのに"
+    },
+    {
+      "themeId": "partial_theme_6",
+      "title": "Gemini回答が途中で切れたため、タイトルは完全には取得できなかった。",
+      "sourceStartMs": 3300150,
+      "sourceEndMs": 3389520,
+      "representativeQuote": "気まずそうで笑うマジで個人Vで名前がたまーにぼちぼちぐらいで上がる人白雪玲奴です!"
+    }
+  ],
+  "extractionStatus": {
+    "status": "partial_themes_extracted_from_answer_text",
+    "reason": "Gemini回答JSONが完結していないため、回答本文に出ていたテーマ候補だけを採点候補として抽出した。",
+    "extractedThemeCount": 6
+  },
+  "runAt": "2026-07-09T10:47:47+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/aX-axQMWR3c_single_material_v001/theme-llm-v001/20260709-v001/prompt.md",
+  "pageUrl": "https://gemini.google.com/app/8943d8ae32aede10?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"そらる・まふまふ・渋谷ハル・おじじでVTuber事務所「ミライズ」設立発表\",\n      \"summary\": \"カウントダウン終了とともに、渋谷ハル、まふまふ、そらる、おじじの4人が関わる新しいVTuber事務所「ミライズ」の立ち上げが正式に発表される場面。\",\n      \"whyItCanBeClipped\": \"配信のメインテーマであり、カウントダウンから新事務所名の発表（ボケを交えつつ）に至るまでの最も盛り上がる重要な展開であるため。\",\n      \"sourceVideoId\": \"SGQqVJXsNNE\",\n      \"sourceStartMs\": 2016159,\n      \"sourceEndMs\": 2115912,\n      \"supportingSpeechIds\": [\"114-119\"],\n      \"representativeQuote\": \"バーチャルユーチューバーの事務所を立ち上げます事務所の名前はダイサンジでございます\",\n      \"riskNotes\": [\n        \"冗談で言った偽の事務所名「ダイサンジ」から、直後の正式名称「ミライズ」への訂正までの流れを綺麗に収めないと視聴者が誤解するリスクがある。\"\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"まふまふが読み上げる「ミライズ」のミッション（イケボアラーム）\",\n      \"summary\": \"公開されたミライズのウェブサイトに掲載されているミッション「明日は君が生まれる日」を、渋谷ハルのリクエストでまふまふがエコー調のイケボで読み上げる場面。\",\n      \"whyItCanBeClipped\": \"まふまふのイケボでの朗読という明確な見どころがあり、渋谷ハルが「切り抜いて僕のアラームにしよう」と発言するほど綺麗にオチがついているため。\",\n      \"sourceVideoId\": \"SGQqVJXsNNE\",\n      \"sourceStartMs\": 2340002,\n      \"sourceEndMs\": 2367118,\n      \"supportingSpeechIds\": [\"135-140\"],\n      \"representativeQuote\": \"明日は君が生まれる日来たはるさきもですか?\",\n      \"riskNotes\": [\n        \"朗読自体の時間が短いため、前後のウェブサイトを眺めている文脈を少し入れないと唐突感が出る。\"\n      ]\n    },\n    {\n      \"themeId\": \"theme_003\",\n      \"title\": \"なぜこの4人でVTuber事務所を作るのか？それぞれの強みと想い\",\n      \"summary\": \"渋谷ハル、そらる、おじじが、大手や個人勢の垣根を超えてこれから頑張るVTuberをサポートしたいという事務所設立の背景や、音楽面・ゲーム面でのノウハウについて語る場面。\",\n      \"whyItCanBeClipped\": \"リスナーが最も気になっている「設立の理由」について、運営陣が真面目にそれぞれのスタンスや強みを明確に説明しているため、情報価値が高い。\",\n      \"sourceVideoId\": \"SGQqVJXsNNE\",\n      \"sourceStartMs\": 2430270,\n      \"sourceEndMs\": 2560907,\n      \"supportingSpeechIds\": [\"143-147\"],\n      \"representativeQuote\": \"今までやってきた活動のノウハウをねもったいないからさこのまま腐らせてでもねそういうのを使ってこれから頑張っていくVTuberの人とかのサポートをできたらな\",\n      \"riskNotes\": [\n        \"トークが数分間にわたり比較的長いため、テンポよくカット編集をしないと切り抜き動画として間延びする可能性がある。\"\n      ]\n    },\n    {\n      \"themeId\": \"theme_004\",\n      \"title\": \"ミライズ加入は「CRのV部門」ではない？おじじが語る独立した組織体制\",\n      \"summary\": \"おじじが、ミライズへの所属は「クレイジーラクーン（CR）」の所属になるわけではなく、あくまで独立した事務所としてCRのマネジメントノウハウを活かしてサポートする形であることを説明する場面。\",\n      \"whyItCanBeClipped\": \"視聴者や関係者が誤解しやすい「CRとの関係性」について、おじじ本人がはっきりと否定・解説している重要なパートであるため。\",\n      \"sourceVideoId\": \"SGQqVJXsNNE\",\n      \"sourceStartMs\": 2640310,\n      \"sourceEndMs\": 2729246,\n      \"supportingSpeechIds\": [\"150-152\"],\n      \"representativeQuote\": \"ミライズに所属する人がクレイジーラクーンはあくまでそらるさんまふまふさんはるちゃんと同じ立場のサポートする\",\n      \"riskNotes\": [\n        \"真面目なビジネススキームの説明であるため、バラエティ的な面白さは薄い。テロップなどで分かりやすく補足する必要がある。\"\n      ]\n    },\n    {\n      \"themeId\": \"theme_005\",\n      \"title\": \"初期メンバー「渋谷ハル」の所属発表をぬるっとネタバレしてしまうそらる\",\n      \"summary\": \"初期所属タレントが2名いることを大々的に発表しようと渋谷ハルが溜めていたところ、直前にそらるが「春ちゃんも所属」とぬるっとバラしてしまい、慌てて発表をやり直すコントのような一幕。\",\n      \"whyItCanBeClipped\": \"そらるの天然なネタバレと、それに対する渋谷ハルの絶望、周囲の爆笑という奇跡的なお笑い展開が成立しているため。\",\n      \"sourceVideoId\": \"SGQqVJXsNNE\",\n      \"sourceStartMs\": 3180194,\n      \"sourceEndMs\": 3259753,\n      \"supportingSpeechIds\": [\"169-172\"],\n      \"representativeQuote\": \"ぬるっと言ったなぬるっとねそらりさんさっき普通に言ったんだよなあ言うんだ今と思いながらめっちゃでかい今めっちゃ盛り上げようとしてたのに\",\n      \"riskNotes\": [\n        \"「やり直す」というメタな展開を含むため、どこからどこまでを切り取るかの構成センスが問われる。\"\n      ]\n    },\n    {\n      \"themeId\": \"theme_006\",\n      \"title\": \"もう一人の初期メンバー「白雪レイド」がサプライズ登場＆加入発表\",\n      \"summary\": \"渋谷ハルに続くもう一人の所属タレントとして、白雪レイドがVCに呼び込まれ、気まずそうにしながらもミライズ1期生（ゼロ期生）としての加入を発表する場面。\",\n      \"whyItCanBeClipped\": \"新事務所の所属タレント発表という一大イベントであり、白雪レイドのファンにとっても非常に大きなニュースであるため、切り抜きとしての需要が極めて高い。\",\n      \"sourceVideoId\": \"SGQqVJXsNNE\",\n      \"sourceStartMs\": 3300150,\n      \"sourceEndMs\": 3389520,\n      \"supportingSpeechIds\": [\"174-185\"],\n      \"representativeQuote\": \"気まずそうで笑うマジで個人Vで名前がたまーにぼちぼちぐらいで上がる人白雪玲奴です!\",\n      \"riskNotes\": [\n        \"白雪レイドが緊張と気まずさで最初はローテンション気味なので、前後の周囲の歓迎ムードと合わせて編集しないと盛り上がりに欠けて見えるリスクがある。\"\n      ]\n    },\n    {\n      \"themeId\": \"theme_007\",\n      \"title\": \"白雪レイドが明かす恐怖の拉致事件？おじじからの突然の加入事後報告\",\n      \"summary\": \"白雪レイドがミライズに加入することになった経緯を告白。ある日寝ていたらおじじから大量の鬼電とLINEが来て、APEXの誘いだと思ってDiscordに行くとそらるや渋谷"
+}

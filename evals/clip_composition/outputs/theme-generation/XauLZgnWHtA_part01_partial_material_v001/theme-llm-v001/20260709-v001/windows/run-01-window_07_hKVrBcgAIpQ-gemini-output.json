@@ -1,0 +1,59 @@
+{
+  "themes": [
+    {
+      "themeId": "partial_theme_1",
+      "title": "Gemini回答が途中で切れたため、タイトルは完全には取得できなかった。",
+      "sourceStartMs": 576420,
+      "sourceEndMs": 658519,
+      "representativeQuote": "小さくしてみようバンパイアね遠目から見てみたらほらヴァンパイアほらなんとなくいい感じに見えたりしない"
+    },
+    {
+      "themeId": "partial_theme_2",
+      "title": "Gemini回答が途中で切れたため、タイトルは完全には取得できなかった。",
+      "sourceStartMs": 872480,
+      "sourceEndMs": 1231220,
+      "representativeQuote": "アップデートいらんアップデートするくらいならここの操作性をどうにかしてほしいですね"
+    },
+    {
+      "themeId": "partial_theme_3",
+      "title": "Gemini回答が途中で切れたため、タイトルは完全には取得できなかった。",
+      "sourceStartMs": 1339680,
+      "sourceEndMs": 1471159,
+      "representativeQuote": "会いたかったピクセルが増える時ってこんなに痛いんだねということでねなんとかヴァンパイアねこれで"
+    },
+    {
+      "themeId": "partial_theme_4",
+      "title": "Gemini回答が途中で切れたため、タイトルは完全には取得できなかった。",
+      "sourceStartMs": 1477559,
+      "sourceEndMs": 1533740,
+      "representativeQuote": "逆の行かないとねうんこれがね枯れた技術の水平思考っていうんですかね"
+    },
+    {
+      "themeId": "partial_theme_5",
+      "title": "Gemini回答が途中で切れたため、タイトルは完全には取得できなかった。",
+      "sourceStartMs": 3452099,
+      "sourceEndMs": 3507619,
+      "representativeQuote": "勝手にちょっと配信中にしゃべるな何なのいい加減にしろふざけあって"
+    }
+  ],
+  "extractionStatus": {
+    "status": "partial_themes_extracted_from_answer_text",
+    "reason": "Gemini回答JSONが完結していないため、回答本文に出ていたテーマ候補だけを採点候補として抽出した。",
+    "extractedThemeCount": 5
+  },
+  "runAt": "2026-07-09T11:27:41+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_07_hKVrBcgAIpQ",
+    "windowSourceVideoId": "hKVrBcgAIpQ",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/XauLZgnWHtA_part01_partial_material_v001/theme-llm-v001/20260709-v001/windows/window_07_hKVrBcgAIpQ-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/bbd0b2b6490281f1?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"配信画面が小さければそれなりに見えると主張するギルザレンIII世\",\n      \"summary\": \"アバターの復元実験に失敗し、ドットの荒い姿のままお披露目をすることになったギルザレンIII世が、配信画面のサイズを小さくすれば違和感なく見られるとリスナーを説得しようとする場面。\",\n      \"whyItCanBeClipped\": \"自身の低画質な姿を逆手にとり、「遠目から見たらいい感じ」「みんなそんなに目よくないでしょ」と開き直ってリスナーに焦点をずらすよう要求する独特なユーモアが笑いを誘うため、切り抜きとして単独で成立する見どころである。\",\n      \"sourceVideoId\": \"hKVrBcgAIpQ\",\n      \"sourceStartMs\": 576420,\n      \"sourceEndMs\": 658519,\n      \"supportingSpeechIds\": [22],\n      \"representativeQuote\": \"小さくしてみようバンパイアね遠目から見てみたらほらヴァンパイアほらなんとなくいい感じに見えたりしない\",\n      \"riskNotes\": [\n        \"アバターがバグっている視覚的な面白さが前提となるため、テロップや映像での補足が必要となる場合がある。\"\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"ゲームアース（ARBS）への愚痴が止まらないギルザレンIII世\",\n      \"summary\": \"アニマルリボルトバトルシュミレーターをプレイ中、画面が全画面表示になってしまったり、操作性が思い通りにいかないことに対してゲームのユーザビリティへ激しい文句をぶちまける場面。\",\n      \"whyItCanBeClipped\": \"「すぐ全画面になる」「アップデートするくらいならここの操作性をどうにかしてほしい」と、ゲームのUIやユーザビリティに対して容赦なく毒舌を吐き散らす愚痴のキレが良く、エンタメとして面白い。\",\n      \"sourceVideoId\": \"hKVrBcgAIpQ\",\n      \"sourceStartMs\": 872480,\n      \"sourceEndMs\": 1231220,\n      \"supportingSpeechIds\": [32, 38, 41, 42],\n      \"representativeQuote\": \"アップデートいらんアップデートするくらいならここの操作性をどうにかしてほしいですね\",\n      \"riskNotes\": [\n        \"複数の発話にまたがって断続的に愚痴をこぼしているため、動画構成時にテンポよくカット編集を繋ぐ必要がある。\"\n      ]\n    },\n    {\n      \"themeId\": \"theme_003\",\n      \"title\": \"ピクセル（画素）が増える痛みに悶絶するギルザレンIII世\",\n      \"summary\": \"ゲームの勝利報酬として得たDNAを使い、アバターのバージョンを0.5へ進化させる際、画素数が細かくなる負荷にリアルな痛みを訴えて悶絶する場面。\",\n      \"whyItCanBeClipped\": \"2Dアバターの解像度が上がるという技術的な事象に対し、「ピクセルが増える時ってこんなに痛いんだね」とあたかも肉体的な激痛を伴うかのように表現する独特な世界観が非常に面白い。\",\n      \"sourceVideoId\": \"hKVrBcgAIpQ\",\n      \"sourceStartMs\": 1339680,\n      \"sourceEndMs\": 1471159,\n      \"supportingSpeechIds\": [49, 52, 53, 55],\n      \"representativeQuote\": \"会いたかったピクセルが増える時ってこんなに痛いんだねということでねなんとかヴァンパイアねこれで\",\n      \"riskNotes\": [\n        \"前後のゲームでの勝利と、画質が徐々に変わっていく配信映像の文脈が必要になる。\"\n      ]\n    },\n    {\n      \"themeId\": \"theme_004\",\n      \"title\": \"ドットの荒いアバターの魅力を熱弁し「枯れた技術の水平思考」を語る\",\n      \"summary\": \"バージョン0.5に進化しつつも、まだドットの目の荒い状態のアバターを「一番落ち着く」と評価し、昨今の3D化トレンドの逆を行くスタイルを正当化する場面。\",\n      \"whyItCanBeClipped\": \"他のライバーがこぞって3D化や高画質化を目指す中で、あえてドットにこだわり「枯れた技術の水平思考」という言葉を引用して自らのスタイルを語るトークの知的なユーモアが見どころとなる。\",\n      \"sourceVideoId\": \"hKVrBcgAIpQ\",\n      \"sourceStartMs\": 1477559,\n      \"sourceEndMs\": 1533740,\n      \"supportingSpeechIds\": [57],\n      \"representativeQuote\": \"逆の行かないとねうんこれがね枯れた技術の水平思考っていうんですかね\",\n      \"riskNotes\": [\n        \"「枯れた技術の水平思考」という元ネタ（任天堂の開発哲学）のニュアンスが視聴者に伝わるようなテロップ表現があるとより良い。\"\n      ]\n    },\n    {\n      \"themeId\": \"theme_005\",\n      \"title\": \"配信中のナレーションシステムに激怒し一瞬でシャットダウンする場面\",\n      \"summary\": \"ストーリー進行中に、自分が喋っているにもかかわらず、自動のナレーションが割り込んで喋り続けたため、「配信中にしゃべるな」とガチトーンで怒り、音声を強制終了させる場面。\",\n      \"whyItCanBeClipped\": \"演出として用意されたシステムボイスに対して本気で煩わしさを表し、「切ってやる」と即座に排除して「スッキリしましたね」と言い放つシュールな独裁的ムーブが非常にコミカルで切り抜き向きである。\",\n      \"sourceVideoId\": \"hKVrBcgAIpQ\",\n      \"sourceStartMs\": 3452099,\n      \"sourceEndMs\": 3507619,\n      \"supportingSpeechIds\": [146, \"147-150\"],\n      \"representativeQuote\": \"勝手にちょっと配信中にしゃべるな何なのいい加減にしろふざけあって\",\n      \"riskNotes\": [\n        \"ストーリーのナレーションが流れている最中の出来事であるため、何に対して怒っているのかの音声を明確に残す必要がある。\"\n      ]\n    },\n    {\n      \"themeId\": \"theme_006\",\n      \"title\": \"5年の活動で最大の強敵は「自分のマウス」だったと語るギルザレンIII世\",\n      \"summary\": \"ゲームプレイ中にマウスが動かなくなるハプニングが発生し、アバターが1.0に戻れない危機を乗り越えた後、5年間の活動の中で「一番激しい戦いだった」と振り返る場面。\",\n      \"whyItCanBeClipped\": \"ゲーム内のモンスターではなく、自らのPC周辺機器であるマウスとの物理的な格闘を"
+}

@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>theme-llm-v001 media review</title>
+  <style>
+    :root { color-scheme: light; --bg: #f6f7f9; --text: #20242a; --muted: #647080; --line: #d9dee7; --panel: #fff; --accent: #155d9c; }
+    body { margin: 0; background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; line-height: 1.65; }
+    main { max-width: 1220px; margin: 0 auto; padding: 32px 20px 56px; }
+    header, .rule, .case-card { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 22px; margin-bottom: 18px; }
+    h1 { margin: 0 0 8px; font-size: 28px; }
+    h2 { margin: 0; font-size: 20px; }
+    h3 { margin: 0 0 10px; font-size: 15px; color: #1e4f7a; }
+    p { margin: 0 0 10px; }
+    ul, ol { margin: 8px 0 0 22px; padding: 0; }
+    li { margin: 6px 0; }
+    video { width: 100%; max-height: 520px; background: #111; border-radius: 8px; }
+    .muted, .eyebrow { color: var(--muted); }
+    .eyebrow { margin: 0 0 4px; font-size: 12px; font-weight: 700; letter-spacing: .02em; text-transform: uppercase; }
+    .case-head { display: flex; gap: 16px; justify-content: space-between; align-items: flex-start; border-bottom: 1px solid var(--line); padding-bottom: 14px; margin-bottom: 16px; }
+    .badge { border: 1px solid var(--line); border-radius: 999px; padding: 3px 10px; color: var(--muted); white-space: nowrap; font-size: 13px; }
+    .summary, .answer { border: 1px solid var(--line); border-radius: 8px; padding: 14px; background: #fbfcfe; margin-bottom: 16px; }
+    .speech { border: 1px solid var(--line); border-radius: 8px; padding: 14px; background: #fbfcfe; margin-bottom: 16px; }
+    .speech-grid { display: grid; grid-template-columns: 1fr; gap: 12px; }
+    .speech-grid section { border: 1px solid var(--line); border-radius: 8px; padding: 12px; background: #fff; }
+    h4 { margin: 0 0 8px; font-size: 14px; color: #314056; }
+    pre { white-space: pre-wrap; word-break: break-word; background: #101820; color: #eef5ff; border-radius: 8px; padding: 12px; margin: 0; max-height: 220px; overflow: auto; }
+    .callout { border-left: 4px solid var(--accent); background: #eef6fc; padding: 12px 14px; margin: 14px 0 0; }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+    .grid section { border: 1px solid var(--line); border-radius: 8px; padding: 14px; background: #fbfcfe; }
+    .template { border-left: 4px solid var(--accent); background: #eef6fc; padding: 10px 12px; margin-top: 12px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+    @media (max-width: 860px) { .grid { grid-template-columns: 1fr; } main { padding: 18px 12px 40px; } }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>theme-llm-v001 映像確認パッケージ</h1>
+      <p class="muted">文字だけで閉じる意味判定ではなく、正解範囲とGemini候補範囲の映像・音声を見て、同じ切り抜き企画になるかを確認するための画面です。</p>
+      <p class="callout"><strong>時間をかけすぎないでください。</strong>これはv001の初回監査で、境界確定ではありません。1件あたり2分以内、全体で5-8分を目安にし、迷ったら「判定不能」で止めます。20分使う必要はありません。</p>
+    </header>
+    <section class="rule">
+      <h2>最初に読むこと</h2>
+      <ol>
+        <li>これはテーマ生成評価の二段目確認です。機械判定で範囲が重なった候補が、採点上の成功として数えられるかを確認します。</li>
+        <li>同じ元動画の同じ時間帯なので、素材として同じに見えるのは正常です。確認したいのは、候補が広すぎたり中心がずれたりして、別企画として数えるべきではないケースが混ざっていないかです。</li>
+        <li>ここでの「同じ」は、同じ話題、同じ出来事、同じ結論または反応を切り抜きにする状態です。主観的に面白いかは見ません。</li>
+        <li>まず正解範囲を見て「この場面は何の話か」を一文で言えるところまで確認します。長ければ冒頭、中盤、末尾だけで構いません。</li>
+        <li>次に候補範囲を見ます。各確認カードの「短時間で見る場所」と「候補映像内で正解範囲と重なる位置」だけを優先してください。</li>
+        <li>候補が正解より広い場合、正解範囲の話題が候補の中心に含まれていれば「同じ」です。少し触れただけで候補の中心が別なら「違う」です。</li>
+        <li>2分で決まらないものは、品質確認としては十分難しいケースなので「判定不能」で止めてください。</li>
+      </ol>
+    </section>
+
+    <section class="case-card">
+      <div class="case-head">
+        <div>
+          <p class="eyebrow">確認 1</p>
+          <h2>case-01-r_ztjHaHmcg-run1-candidate6</h2>
+        </div>
+        <div class="badge">映像確認</div>
+      </div>
+      <div class="summary">
+        <p><strong>正解ラベル:</strong> 配信者が食べていける同接規模について現実的に答える場面</p>
+        <p><strong>Gemini候補title:</strong> Gemini回答が途中で切れたため、タイトルは完全には取得できなかった。</p>
+        <p><strong>Gemini候補quote:</strong> 一発屋感を醸し出しておきながら結局普通に自分もコンテンツ力持っててただ評価され続ける人っているじゃんマジですげえ…数字って無から生まれないからさその見てる層が…どこの数字を持ってきたらそうなったのかが気になるわちょっと分析する価値ありそうだよな</p>
+        <p><strong>元動画:</strong> -DwSCDMCWDQ</p>
+        <p><strong>短時間で見る場所:</strong> 候補は正解範囲の後半から始まり、その後かなり長く続きます。最初の15秒で同接規模の話が入っているか、その後の主題が別話題へ移っていないかだけを見てください。</p>
+        <p><strong>候補映像内で正解範囲と重なる位置:</strong> 0:00:00.000 - 0:00:15.310</p>
+      </div>
+      <div class="grid">
+        <section>
+          <h3>正解範囲の映像</h3>
+          <p class="muted">0:39:59.621 - 0:40:40.868</p>
+          <video controls preload="metadata" src="file:///Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/theme-generation-media-review/theme-llm-v001-20260709-v001/case-01-r_ztjHaHmcg-run1-candidate6-expected.mp4"></video>
+        </section>
+        <section>
+          <h3>Gemini候補範囲の映像</h3>
+          <p class="muted">0:40:25.558 - 0:43:48.323</p>
+          <video controls preload="metadata" src="file:///Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/theme-generation-media-review/theme-llm-v001-20260709-v001/case-01-r_ztjHaHmcg-run1-candidate6-candidate.mp4"></video>
+        </section>
+      </div>
+      <section class="speech">
+        <h3>発話情報（補助）</h3>
+        <p class="muted">判断の主材料は上の映像・音声です。発話情報は、何の話をしている区間かを短時間で掴むための補助です。</p>
+        <div class="speech-grid">
+          <section>
+            <h4>正解範囲の発話</h4>
+            <pre>[発話93 0:39:59.377-0:39:59.784] そう、あの
+[発話94 0:40:00.812-0:40:23.290] 単純計算だからさマジでだってそうじゃんあのー広告収入が例えば100人に見られてる人は広告収入がじゃあ1円ですと1000人に見られてるなら広告収入が0.5円になりますとかだったらさじゃないじゃんじゃないのよまあなんか日本のサイトとかはそういうことするところありそうだけどYouTubeはそういう仕様じゃないから別に100人
+[発話95 0:40:25.558-0:40:54.458] 再生数が100の動画も再生数が多分1000万の動画もそれでその再生数で国収益の単価は変わんないからそれがすごいよねそういえば最近流行りの登録者寿司バラに迫ってきてる新人さん見てるあ見てないあちらちらっとだけ見たけどあれよね100万点バラサロメさんあれ名前合ってるあの人すごいね</pre>
+          </section>
+          <section>
+            <h4>候補と正解が重なる部分の発話</h4>
+            <pre>[発話95 0:40:25.558-0:40:54.458] 再生数が100の動画も再生数が多分1000万の動画もそれでその再生数で国収益の単価は変わんないからそれがすごいよねそういえば最近流行りの登録者寿司バラに迫ってきてる新人さん見てるあ見てないあちらちらっとだけ見たけどあれよね100万点バラサロメさんあれ名前合ってるあの人すごいね</pre>
+          </section>
+          <section>
+            <h4>候補の重なり後の発話</h4>
+            <pre>[発話95 0:40:25.558-0:40:54.458] 再生数が100の動画も再生数が多分1000万の動画もそれでその再生数で国収益の単価は変わんないからそれがすごいよねそういえば最近流行りの登録者寿司バラに迫ってきてる新人さん見てるあ見てないあちらちらっとだけ見たけどあれよね100万点バラサロメさんあれ名前合ってるあの人すごいね
+[発話96 0:40:58.147-0:41:21.807] 何も何もなんですですわなんだろうなぁ結局ああいうああいうなんだろういや僕本当にすごいなって思うのが
+[発話97 0:41:23.802-0:41:37.995] 一発屋感を醸し出しておきながら結局普通に自分もコンテンツ力持っててただ評価され続ける人っているじゃんマジですげえ</pre>
+          </section>
+        </div>
+      </section>
+      <section class="answer">
+        <h3>答えてほしいこと</h3>
+        <p>この確認は、同じ素材かどうかを見るものではありません。機械判定では候補範囲が正解範囲と重なっただけなので、その重なりを<strong>採点上の成功として数えてよいか</strong>を監査します。</p>
+        <p>映像と音声で見て、Gemini候補を採用した場合に、正解範囲と<strong>同じ切り抜き企画</strong>になるか。</p>
+        <ul>
+          <li><strong>同じ</strong>: 話題、出来事、結論または反応が同じ。候補が広い/狭いだけならこちら。</li>
+          <li><strong>違う</strong>: 同じ時刻周辺でも、候補の中心が別の話題、別の出来事、別の結論または反応に見える。</li>
+          <li><strong>判定不能</strong>: 2分見ても決められない、映像が足りない、音声だけでは主題が取れない、候補が広すぎて中心が分からない。</li>
+        </ul>
+        <p class="template">case-01-r_ztjHaHmcg-run1-candidate6: 同じ / 違う / 判定不能 - 理由1行</p>
+      </section>
+    </section>
+
+
+    <section class="case-card">
+      <div class="case-head">
+        <div>
+          <p class="eyebrow">確認 2</p>
+          <h2>case-02-aX-axQMWR3c-run1-candidate6</h2>
+        </div>
+        <div class="badge">映像確認</div>
+      </div>
+      <div class="summary">
+        <p><strong>正解ラベル:</strong> Vの組織内あれこれ</p>
+        <p><strong>Gemini候補title:</strong> 上司4人に部下1人！？白雪レイド、会社の狂った逆ピラミッド体制に困惑</p>
+        <p><strong>Gemini候補quote:</strong> 4人増えたら気になるな急に上司4人増えた会社の体系いかれてんだろ上4の下1とかいうなんかピラミッドぶっ壊れてる</p>
+        <p><strong>元動画:</strong> SGQqVJXsNNE</p>
+        <p><strong>短時間で見る場所:</strong> 候補は正解範囲の少し前から始まり、正解範囲の途中で終わります。候補の30秒付近から、組織内の体制や関係性の話として同じ企画になるかを見てください。</p>
+        <p><strong>候補映像内で正解範囲と重なる位置:</strong> 0:00:31.821 - 0:01:59.378</p>
+      </div>
+      <div class="grid">
+        <section>
+          <h3>正解範囲の映像</h3>
+          <p class="muted">1:22:02.443 - 1:24:16.495</p>
+          <video controls preload="metadata" src="file:///Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/theme-generation-media-review/theme-llm-v001-20260709-v001/case-02-aX-axQMWR3c-run1-candidate6-expected.mp4"></video>
+        </section>
+        <section>
+          <h3>Gemini候補範囲の映像</h3>
+          <p class="muted">1:21:30.622 - 1:23:30.000</p>
+          <video controls preload="metadata" src="file:///Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/theme-generation-media-review/theme-llm-v001-20260709-v001/case-02-aX-axQMWR3c-run1-candidate6-candidate.mp4"></video>
+        </section>
+      </div>
+      <section class="speech">
+        <h3>発話情報（補助）</h3>
+        <p class="muted">判断の主材料は上の映像・音声です。発話情報は、何の話をしている区間かを短時間で掴むための補助です。</p>
+        <div class="speech-grid">
+          <section>
+            <h4>正解範囲の発話</h4>
+            <pre>[発話259 1:22:01.903-1:22:28.899] なんか欲しがってる人いるな今のところこの5人中1人だけなんかいるけど4人増えたら気になるな急に上司4人増えた会社の体系いかれてんだろ上4の下1とかいうなんかピラミッドぶっ壊れてるレイド君が今後何するかによってこの会社の抑制決まるからやっぱ
+[発話260 1:22:30.000-1:22:58.279] なんとかしてくれないって今なかなかないよこんな逆ピラミッドの会社逆に偉い説ある上4人下1人って俺何もしないよって言った瞬間僕ら困るもん確かにもう俺何もしないよって確かに本当だったらねそこに他にもどうせ10人20人いるから会社っていうのギリギリ回ってくるんだろうけどそうだ俺何もしないよって言った瞬間誰も回らなくて誰も何もできなくなる俺が拗ねたら4人で手厚く看病してくれる
+[発話261 1:23:02.784-1:23:12.329] ガチで言いにくい話とかは俺とかが聞くガチでおじじとかに対する不満が出た時は俺が聞く
+[発話262 1:23:30.034-1:23:59.320] 活動に関して分かんないけどマジでこれだるいみたいなのがあったら直に経営者側に文句言えるっていうのはあるよねそれを解決するの仕方が一方向じゃなくて四方向あるからどうしてもあるあるなのが演者側で不満があって担当のマネージャーさんとかに相談してもマネージャーさんからもう一個上があってさらにもっと上とか上に本当の経営者さんっているわけだからそこまで行き届きにくいんだけど僕らのね
+[発話263 1:24:00.146-1:24:29.582] ところ規模がまあどこまでいくかもちろんわかんないから今後一生とは言えないけど少なくともあの一期生に来て一期生とかの間は絶対僕らが直に聞けるはずだからねそうですねどうしこいそこは安心できるんじゃないでしょうかはいはい何でも相談しておくれ何でも相談してくださいということでよっしゃはいじゃあ配信終わりますかそうですねはい以上でちょっと</pre>
+          </section>
+          <section>
+            <h4>候補と正解が重なる部分の発話</h4>
+            <pre>[発話259 1:22:01.903-1:22:28.899] なんか欲しがってる人いるな今のところこの5人中1人だけなんかいるけど4人増えたら気になるな急に上司4人増えた会社の体系いかれてんだろ上4の下1とかいうなんかピラミッドぶっ壊れてるレイド君が今後何するかによってこの会社の抑制決まるからやっぱ
+[発話260 1:22:30.000-1:22:58.279] なんとかしてくれないって今なかなかないよこんな逆ピラミッドの会社逆に偉い説ある上4人下1人って俺何もしないよって言った瞬間僕ら困るもん確かにもう俺何もしないよって確かに本当だったらねそこに他にもどうせ10人20人いるから会社っていうのギリギリ回ってくるんだろうけどそうだ俺何もしないよって言った瞬間誰も回らなくて誰も何もできなくなる俺が拗ねたら4人で手厚く看病してくれる
+[発話261 1:23:02.784-1:23:12.329] ガチで言いにくい話とかは俺とかが聞くガチでおじじとかに対する不満が出た時は俺が聞く</pre>
+          </section>
+          <section>
+            <h4>候補の重なり後の発話</h4>
+            <pre>候補の重なり後に確認できる範囲がありません。</pre>
+          </section>
+        </div>
+      </section>
+      <section class="answer">
+        <h3>答えてほしいこと</h3>
+        <p>この確認は、同じ素材かどうかを見るものではありません。機械判定では候補範囲が正解範囲と重なっただけなので、その重なりを<strong>採点上の成功として数えてよいか</strong>を監査します。</p>
+        <p>映像と音声で見て、Gemini候補を採用した場合に、正解範囲と<strong>同じ切り抜き企画</strong>になるか。</p>
+        <ul>
+          <li><strong>同じ</strong>: 話題、出来事、結論または反応が同じ。候補が広い/狭いだけならこちら。</li>
+          <li><strong>違う</strong>: 同じ時刻周辺でも、候補の中心が別の話題、別の出来事、別の結論または反応に見える。</li>
+          <li><strong>判定不能</strong>: 2分見ても決められない、映像が足りない、音声だけでは主題が取れない、候補が広すぎて中心が分からない。</li>
+        </ul>
+        <p class="template">case-02-aX-axQMWR3c-run1-candidate6: 同じ / 違う / 判定不能 - 理由1行</p>
+      </section>
+    </section>
+
+
+    <section class="case-card">
+      <div class="case-head">
+        <div>
+          <p class="eyebrow">確認 3</p>
+          <h2>case-03-XauLZgnWHtA-run2-candidate1</h2>
+        </div>
+        <div class="badge">映像確認</div>
+      </div>
+      <div class="summary">
+        <p><strong>正解ラベル:</strong> 逆凸遊戯王</p>
+        <p><strong>Gemini候補title:</strong> Gemini回答が途中で切れたため、タイトルは完全には取得できなかった。</p>
+        <p><strong>Gemini候補quote:</strong> 明日さあうちのお仕事で会うじゃんその時負けた方が飲むヨーグルト買って行こう</p>
+        <p><strong>元動画:</strong> OJoi31bq8lk</p>
+        <p><strong>短時間で見る場所:</strong> 候補全体のうち、手元にある映像は一部だけです。候補の35秒付近に正解範囲が入っています。ローカル映像だけでは主題が確定できなければ判定不能で構いません。</p>
+        <p><strong>候補映像内で正解範囲と重なる位置:</strong> 0:00:34.753 - 0:00:44.777</p>
+      </div>
+      <div class="grid">
+        <section>
+          <h3>正解範囲の映像</h3>
+          <p class="muted">0:07:20.672 - 0:07:30.696</p>
+          <video controls preload="metadata" src="file:///Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/theme-generation-media-review/theme-llm-v001-20260709-v001/case-03-XauLZgnWHtA-run2-candidate1-expected.mp4"></video>
+        </section>
+        <section>
+          <h3>Gemini候補範囲の映像</h3>
+          <p class="muted">0:06:45.919 - 0:07:35.028 / ローカルにある範囲のみ</p>
+          <video controls preload="metadata" src="file:///Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/theme-generation-media-review/theme-llm-v001-20260709-v001/case-03-XauLZgnWHtA-run2-candidate1-candidate.mp4"></video>
+        </section>
+      </div>
+      <section class="speech">
+        <h3>発話情報（補助）</h3>
+        <p class="muted">判断の主材料は上の映像・音声です。発話情報は、何の話をしている区間かを短時間で掴むための補助です。</p>
+        <div class="speech-grid">
+          <section>
+            <h4>正解範囲の発話</h4>
+            <pre>[発話20 0:07:07.819-0:07:33.259] うざかっのたで切りました呼ぶ人間違えました今のはですねまあ一人目なんか自己紹介まとまったなんか蹴られたんだけど大丈夫おかえりゃ人の配信でそんな急に通るとか考えろこっちのこと普通に今挨拶しつもりただったんだけど何かあったのごめん全然聞こえてなかったからもう1回おし願いてもいい</pre>
+          </section>
+          <section>
+            <h4>候補と正解が重なる部分の発話</h4>
+            <pre>[発話20 0:07:07.819-0:07:33.259] うざかっのたで切りました呼ぶ人間違えました今のはですねまあ一人目なんか自己紹介まとまったなんか蹴られたんだけど大丈夫おかえりゃ人の配信でそんな急に通るとか考えろこっちのこと普通に今挨拶しつもりただったんだけど何かあったのごめん全然聞こえてなかったからもう1回おし願いてもいい</pre>
+          </section>
+          <section>
+            <h4>候補の重なり後の発話</h4>
+            <pre>[発話20 0:07:07.819-0:07:33.259] うざかっのたで切りました呼ぶ人間違えました今のはですねまあ一人目なんか自己紹介まとまったなんか蹴られたんだけど大丈夫おかえりゃ人の配信でそんな急に通るとか考えろこっちのこと普通に今挨拶しつもりただったんだけど何かあったのごめん全然聞こえてなかったからもう1回おし願いてもいい
+[発話21 0:07:34.400-0:07:45.080] ごめんねみんなあの聞き苦しいもの聞かせてしまってあごめんごめんめっちゃバグってるめっちゃバグってるね</pre>
+          </section>
+        </div>
+      </section>
+      <section class="answer">
+        <h3>答えてほしいこと</h3>
+        <p>この確認は、同じ素材かどうかを見るものではありません。機械判定では候補範囲が正解範囲と重なっただけなので、その重なりを<strong>採点上の成功として数えてよいか</strong>を監査します。</p>
+        <p>映像と音声で見て、Gemini候補を採用した場合に、正解範囲と<strong>同じ切り抜き企画</strong>になるか。</p>
+        <ul>
+          <li><strong>同じ</strong>: 話題、出来事、結論または反応が同じ。候補が広い/狭いだけならこちら。</li>
+          <li><strong>違う</strong>: 同じ時刻周辺でも、候補の中心が別の話題、別の出来事、別の結論または反応に見える。</li>
+          <li><strong>判定不能</strong>: 2分見ても決められない、映像が足りない、音声だけでは主題が取れない、候補が広すぎて中心が分からない。</li>
+        </ul>
+        <p class="template">case-03-XauLZgnWHtA-run2-candidate1: 同じ / 違う / 判定不能 - 理由1行</p>
+      </section>
+    </section>
+
+  </main>
+</body>
+</html>

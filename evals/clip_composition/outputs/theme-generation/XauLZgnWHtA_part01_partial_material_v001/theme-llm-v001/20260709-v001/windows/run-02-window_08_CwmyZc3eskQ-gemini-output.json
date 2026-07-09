@@ -1,0 +1,52 @@
+{
+  "themes": [
+    {
+      "themeId": "partial_theme_1",
+      "title": "Gemini回答が途中で切れたため、タイトルは完全には取得できなかった。",
+      "sourceStartMs": 529320,
+      "sourceEndMs": 648360,
+      "representativeQuote": "命もらわないのにリリースするのちょっと悩むそういうことなんか弱ったなこいつって思いながら遊びに付き合わしてる感じがね"
+    },
+    {
+      "themeId": "partial_theme_2",
+      "title": "Gemini回答が途中で切れたため、タイトルは完全には取得できなかった。",
+      "sourceStartMs": 762300,
+      "sourceEndMs": 1053140,
+      "representativeQuote": "家庭科はもう将来的にできなくて関係ないじゃないですかだって料理できなくても裁縫できなくても全部お金でなんとかなるから"
+    },
+    {
+      "themeId": "partial_theme_3",
+      "title": "Gemini回答が途中で切れたため、タイトルは完全には取得できなかった。",
+      "sourceStartMs": 1167860,
+      "sourceEndMs": 1288760,
+      "representativeQuote": "ちょっとしか買わない時はほんと甘いから書いたそうだけどもう別に足りてるのに買う時はストレス値がねなってる時だから買うよね"
+    },
+    {
+      "themeId": "partial_theme_4",
+      "title": "Gemini回答が途中で切れたため、タイトルは完全には取得できなかった。",
+      "sourceStartMs": 1428840,
+      "sourceEndMs": 1821440,
+      "representativeQuote": "猫背になるのやだなって思って背もたれに頼らない生活をたまにするよ"
+    }
+  ],
+  "extractionStatus": {
+    "status": "partial_themes_extracted_from_answer_text",
+    "reason": "Gemini回答JSONが完結していないため、回答本文に出ていたテーマ候補だけを採点候補として抽出した。",
+    "extractedThemeCount": 4
+  },
+  "runAt": "2026-07-09T11:59:54+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_08_CwmyZc3eskQ",
+    "windowSourceVideoId": "CwmyZc3eskQ",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/XauLZgnWHtA_part01_partial_material_v001/theme-llm-v001/20260709-v001/windows/window_08_CwmyZc3eskQ-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/70974a1e274bed81?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"釣りとリリースに対する独特な倫理観\",\n      \"summary\": \"コインゲームの待ち時間を釣りに例えた流れから、釣り堀やリリースに対する自身の価値観を語る。命をいただく前提のないリリースは、魚を遊びに付き合わせて弱らせているようで可哀想になってしまうという独自の優しい視点が見どころ。\",\n      \"whyItCanBeClipped\": \"トークテーマとして独立しており、ただのゲーム実況にとどまらない配信者の人間性や優しい倫理観が綺麗にまとまった雑談パートになっているため。\",\n      \"sourceVideoId\": \"CwmyZc3eskQ\",\n      \"sourceStartMs\": 529320,\n      \"sourceEndMs\": 648360,\n      \"supportingSpeechIds\": [\n        \"41-50\"\n      ],\n      \"representativeQuote\": \"命もらわないのにリリースするのちょっと悩むそういうことなんか弱ったなこいつって思いながら遊びに付き合わしてる感じがね\",\n      \"riskNotes\": [\n        \"直前のコインゲームの文脈（待ち時間への不満）からスムーズに移行しているため、冒頭の繋ぎを短くまとめる工夫が必要。\"\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"「家庭科の授業は金で解決できる」極論お悩み相談\",\n      \"summary\": \"リスナーからの「家庭科の授業が嫌い・苦手」というお悩みに対し、「将来料理も裁縫も全部お金（Amazonなど）でなんとかなるから得意になろうとせずテストの点だけ取ればいい」と言い放つ現実的かつ極論な解決策が見どころ。\",\n      \"whyItCanBeClipped\": \"お悩み相談のコーナーとして明確に独立しており、配信者らしいバッサリとした極論と、それに続く「100年後に責任を取る」という冗談混じりの掛け合いがコミカルで引きがあるため。\",\n      \"sourceVideoId\": \"CwmyZc3eskQ\",\n      \"sourceStartMs\": 762300,\n      \"sourceEndMs\": 1053140,\n      \"supportingSpeechIds\": [\n        \"60-83\"\n      ],\n      \"representativeQuote\": \"家庭科はもう将来的にできなくて関係ないじゃないですかだって料理できなくても裁縫できなくても全部お金でなんとかなるから\",\n      \"riskNotes\": [\n        \"途中で皿洗いの話や昔のイキっていたエピソードが挟まるため、テンポよく編集をまとめる必要がある。\"\n      ]\n    },\n    {\n      \"themeId\": \"theme_003\",\n      \"title\": \"爆買いの基準は「ストレス値」とおにぎり6個のエピソード\",\n      \"summary\": \"20%割引セールの話題から、普段どれくらいコスメなどを買うかという話になり、「買う量はストレスによる」と告白。過去にストレスから明太子おにぎりを6個爆買いしたという可愛いエピソードが明かされる場面。\",\n      \"whyItCanBeClipped\": \"リスナーの質問からプライベートな買い物癖や、おにぎり6個という親しみやすくも面白い具体的なエピソードを引き出せており、ショート動画等にも向く明確なオチがあるため。\",\n      \"sourceVideoId\": \"CwmyZc3eskQ\",\n      \"sourceStartMs\": 1167860,\n      \"sourceEndMs\": 1288760,\n      \"supportingSpeechIds\": [\n        \"94-103\"\n      ],\n      \"representativeQuote\": \"ちょっとしか買わない時はほんと甘いから書いたそうだけどもう別に足りてるのに買う時はストレス値がねなってる時だから買うよね\",\n      \"riskNotes\": [\n        \"セールに貢献したという前段の話からおにぎりの爆買いまで、話題がやや急に展開する点。\"\n      ]\n    },\n    {\n      \"themeId\": \"theme_004\",\n      \"title\": \"配信者の椅子事情：パイプ椅子から50万円の高級椅子まで\",\n      \"summary\": \"欲しいものの流れから配信用の椅子の話題になり、姿勢が悪くならないためにあえて背もたれのないパイプ椅子（おばあちゃん家にあるようなもの）を愛用している話や、コメントで出た50万円の高級椅子「エルゴヒューマン」にビビるリアクションが見どころ。\",\n      \"whyItCanBeClipped\": \"配信者ならではの「座り仕事」に直結するこだわり（パイプ椅子を使う理由）と、50万円の椅子にお尻を乗せることへの恐怖感という庶民的な感覚のギャップが面白いため。\",\n      \"sourceVideoId\": \"CwmyZc3eskQ\",\n      \"sourceStartMs\": 1428840,\n      \"sourceEndMs\": 1821440,\n      \"supportingSpeechIds\": [\n        \"116-146\"\n      ],\n      \"representativeQuote\": \"猫背になるのやだなって思って背もたれに頼らない生活をたまにするよ\",\n      \"riskNotes\": [\n        \"途中でキッチンにパイプ椅子を置く話など細かい脱線があるため、椅子についてのメインのトークラインを抽出する必要がある。\"\n      ]\n    },\n    {\n      \"themeId\": \"theme_005\",\n      \"title\": \"危険！レンジで作る温泉卵の爆発体験談\",\n      \"summary\": \"卵かけご飯のアレンジについての質問から、マグカップと電子レンジを使って簡単に温泉卵風にするライフハックを紹介するが、"
+}

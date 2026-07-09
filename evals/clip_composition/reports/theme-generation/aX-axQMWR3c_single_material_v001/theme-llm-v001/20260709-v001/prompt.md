@@ -1,0 +1,1993 @@
+# theme_generation_prompt_v001
+
+あなたは元配信から切り抜きテーマ候補を作る。
+
+## 目的
+
+元配信の文字起こしだけを見て、切り抜きとして成立しそうなテーマ候補を出す。最終的な切り抜き区間を確定する担当ではない。区間選択は後段のcompositionが行う。
+
+## 入力の読み方
+
+- 入力は元配信単体から得られる情報だけである。
+- 切り抜き動画、expected、照合結果、人間確認メモ、既存切り抜きタイトルは入力に含まれない。
+- `sourceTitle` は配信全体の文脈を読む補助情報として使う。
+- `segments` は元配信内の発話で、`speechId`、時刻、本文を持つ。
+- 入力が長尺配信の一部窓である場合は、その窓の範囲内で判断し、配信全体を見たように書かない。
+- 笑い、沈黙、音量変化などの非発話シグナルが入力にある場合は補助情報として扱う。本文より強い根拠として扱わない。
+
+## 禁止
+
+- 切り抜き動画や正解区間を知っている前提で書かない。
+- 元配信本文にない場面や反応を作らない。
+- 秒数だけを根拠に候補を作らない。
+- 「雑談」「面白い場面」のように広すぎて何を切るか決まらないテーマを出さない。
+- 既存切り抜きのタイトル風に盛った表現を、本文根拠なしで作らない。
+
+## 判断方針
+
+- 候補は、元配信内の発話から見どころが説明できる具体的なテーマにする。
+- 単独で視聴者に伝わるフリ、展開、反応、結論がある場面を優先する。
+- 同じ話題が離れた場所で補足される場合は、同じテーマ候補の根拠として複数の発話範囲を持ってよい。
+- 根拠範囲は、候補テーマを説明するために必要な発話だけにする。配信全体や長い雑談を大きく囲わない。
+- 迷う候補は `riskNotes` に弱点を書く。
+
+## 出力
+
+JSONだけを返す。説明文やMarkdownを付けない。
+
+`requestedThemeCount` が指定されている場合は、その件数を上限にする。良い候補が足りない場合は、無理に埋めない。
+
+```json
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "短いテーマ名",
+      "summary": "何が見どころなのか",
+      "whyItCanBeClipped": "切り抜きとして成立すると判断した理由",
+      "sourceVideoId": "元動画ID",
+      "sourceStartMs": 123000,
+      "sourceEndMs": 153000,
+      "supportingSpeechIds": ["12-47", 52, "55-60"],
+      "representativeQuote": "根拠になる短い本文",
+      "riskNotes": [
+        "前後文脈が必要"
+      ]
+    }
+  ]
+}
+```
+
+## supportingSpeechIds
+
+- 連続する発話IDは `"12-47"` のような範囲文字列で返す。
+- 不連続な発話IDは、個別の数値として同じ配列に入れる。
+- 連続範囲と個別IDを混ぜてよい。
+- 根拠に使っていない発話IDを含めない。
+
+## 時刻
+
+- `sourceStartMs` は根拠発話範囲の最初の時刻にする。
+- `sourceEndMs` は根拠発話範囲の最後の時刻にする。
+- 正解境界を当てる評価ではないが、後段の機械判定でexpected区間との重なりを見るため、候補根拠の範囲を本文に基づいて正しく出す。
+
+## 入力JSON
+
+```json
+{
+  "task": "source_only_theme_generation",
+  "generationSystem": "theme-llm-v001",
+  "promptVersion": "theme_generation_prompt_v001",
+  "requestedThemeCount": 8,
+  "inputPolicy": {
+    "sourceOnly": true,
+    "noClipInfo": true,
+    "noExpected": true,
+    "noAlignment": true,
+    "noHumanReverseTheme": true
+  },
+  "windowing": {
+    "applied": false,
+    "reason": "初回はプロンプトを1本に収め、窓統合器の癖を入れない。",
+    "overlapMs": 0,
+    "preMergeCandidateCount": null,
+    "postMergeCandidateCount": null
+  },
+  "sources": [
+    {
+      "sourceVideoId": "SGQqVJXsNNE",
+      "sourceUrl": "https://youtu.be/SGQqVJXsNNE",
+      "transcriptKind": "local_stt",
+      "language": "ja-JP",
+      "durationSec": 5113.103673,
+      "rawSegmentCount": 21248,
+      "promptSegmentCount": 265,
+      "segmentCompaction": {
+        "method": "source-only transcript segments concatenated until sentence-ending punctuation",
+        "scoringRole": "none",
+        "note": "読みやすさのための表現変換であり、expected、切り抜き、照合結果、人間確認メモは使わない。"
+      },
+      "segments": [
+        {
+          "speechId": 1,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 252098,
+          "sourceEndMs": 253079,
+          "text": "訓練所にいてもいい?"
+        },
+        {
+          "speechId": 2,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 253079,
+          "sourceEndMs": 253960,
+          "text": "これ抜けた方がいい?"
+        },
+        {
+          "speechId": 3,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 253960,
+          "sourceEndMs": 259547,
+          "text": "ごめん音入った一番最初に入った音訓練所にいてもいい?"
+        },
+        {
+          "speechId": 4,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 259547,
+          "sourceEndMs": 268578,
+          "text": "なんだけどやばいって意識出てるってこれちゃんと抜けた方がいい?"
+        },
+        {
+          "speechId": 5,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 268578,
+          "sourceEndMs": 269980,
+          "text": "って確認しました"
+        },
+        {
+          "speechId": 6,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 277647,
+          "sourceEndMs": 290094,
+          "text": "皆さんこんばんは配信ついてだけしますねカメラつけてない配信久しぶりだな新鮮だ"
+        },
+        {
+          "speechId": 7,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 300874,
+          "sourceEndMs": 329820,
+          "text": "そうですねこれ一体一体何が行われるんですかこれは武道館でしょあーいいとこつくなー簡易って言われませんよくソラルさんいやよく言われるわうわー新規ユニットかうわーいいとこつくなー適当言ってんね適当言ってんねまずは50%"
+        },
+        {
+          "speechId": 8,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 330060,
+          "sourceEndMs": 336144,
+          "text": "カットに関連してにここの4人から2人削るか一旦ちょっと待ってね一旦50%メンバー50%カット"
+        },
+        {
+          "speechId": 9,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 360086,
+          "sourceEndMs": 389070,
+          "text": "なかなかイカラの道ですよ30分後なんですねそうですねサイトの公開が30分後ですのでそこに至るまではみんなでわちゃわちゃ喋りながらどうしようかな予想大会が何がいいですかねもうあの"
+        },
+        {
+          "speechId": 10,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 390138,
+          "sourceEndMs": 417538,
+          "text": "サイトが公開されてから話すことはざっと決めてはあるんですがこの30分間はまあまあウォーミングアップみたいな感じであんまりまだ喋ることをカチカチに決めてないのでそうウェブサイトはあります概要欄の一番上にあるんですけどmiraizu-vt.jpと書いてありますね27miniそうですねホームページのあれ出せるあのホームページのカウントダウン?"
+        },
+        {
+          "speechId": 11,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 417538,
+          "sourceEndMs": 419039,
+          "text": "カウントダウンあー出しましょうかいいっすよ"
+        },
+        {
+          "speechId": 12,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 420142,
+          "sourceEndMs": 440654,
+          "text": "せっかくだし確かに良いそわそわする実際に言っちゃそわそわするっすねやばいみんな何だと思ってるんだろう結構あったけどね俺とはるちゃんの熱愛映画の汚いからやめてってマジで汚い?"
+        },
+        {
+          "speechId": 13,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 440654,
+          "sourceEndMs": 445737,
+          "text": "汚いなになになにそれ気になる"
+        },
+        {
+          "speechId": 14,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 450162,
+          "sourceEndMs": 479980,
+          "text": "それの主題歌をそらるさんとまふまふさんが歌ううわーすごいタイアップだでかすぎるこれいいな相当払ってもらえないと受けられないな払ったら受けてくれんだ想像もらわないと受けてくれんだでもそこはね友人のツテで25分40秒だってよだいぶこう考えると早めに湧くとかなおじおじはるやばいのおじはるって"
+        },
+        {
+          "speechId": 15,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 480939,
+          "sourceEndMs": 509960,
+          "text": "おじかける春のおじかける春のやめなさいこらこらこんなところでそんな話をするんじゃありませんよしもうゼロでいいなってんだな最初公開したとき6daysかなちょうど1週間前に多分このサイト自体公開されて確かにおじ"
+        },
+        {
+          "speechId": 16,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 510782,
+          "sourceEndMs": 534617,
+          "text": "ブーブー本当に引きこもってましたね本当に引きこもってましたね本日外出もね50%カットになってるからああああああそうですね自然にカットになりますからねうんしないかも本当にそうあのまあここで本舗初公開の話が1個あるんだけどを"
+        },
+        {
+          "speechId": 17,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 540854,
+          "sourceEndMs": 569980,
+          "text": "ブーブーですよあのまたやったエーペックスやってましたらはいっヘッド中国からのハッキングに合いましてあらへエリックスのアカウントもアカウントがバンされるって言うバラのアカウントだけではなく足もカットされたわけアカウントカットされますまあ家にあの家の方に連絡したらまあもう今は普及できてるんですけどできたんだよかいやーでも俺も1回乗っ取られたか"
+        },
+        {
+          "speechId": 18,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 570160,
+          "sourceEndMs": 573362,
+          "text": "2段階認証してたのに乗っ取られた?"
+        },
+        {
+          "speechId": 19,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 600042,
+          "sourceEndMs": 628879,
+          "text": "ダメージデカすぎてやばいんだけど大丈夫かななんかチーターじゃないみたいなアカウントのチーター結構いるじゃんなんかこんな長くやってる人チート使ってんだみたいなあーいるいるいる全部乗っ取りだと思うマジでらしいっすね乗っ取って使ってんだと思うかわいそうだよね怖いってすごいねEAのサーバーに直で入られるから二段階の印象なんて意味ないんだ誰だっけなんか"
+        },
+        {
+          "speechId": 20,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 630680,
+          "sourceEndMs": 635364,
+          "text": "5回10回乗っ取られてるじゃんあの人はぁ?"
+        },
+        {
+          "speechId": 21,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 635364,
+          "sourceEndMs": 636184,
+          "text": "そうなの?"
+        },
+        {
+          "speechId": 22,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 636184,
+          "sourceEndMs": 642248,
+          "text": "なんかあのーゴースティングハックされてるらしいゴースティングハック?"
+        },
+        {
+          "speechId": 23,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 642248,
+          "sourceEndMs": 645390,
+          "text": "言うならねそうマジ?"
+        },
+        {
+          "speechId": 24,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 645390,
+          "sourceEndMs": 659920,
+          "text": "何回作り直してもハッティングされるって言うだろえ本当だ時計止まったごめんこれで動いたかな動いたわダソクさんとかね一晩で1万キルだっけ出た眠りのダソク"
+        },
+        {
+          "speechId": 25,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 660638,
+          "sourceEndMs": 689420,
+          "text": "眠りの打速いやーやばいマジでドキドキするもう22分後ですよこれこの配信20分前でもよかったなちょっと15分前でもよかったなちょっと思ってるけどあのー出せる情報がないですねこれさてはいや予想大会しましょう予想大会いきますか予想大会に"
+        },
+        {
+          "speechId": 26,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 690438,
+          "sourceEndMs": 718890,
+          "text": "イェーイイェーイ正解者の中から1名にシアルコラボPCプレゼントおーっと勝手にアカウント付き本当にもうやっと取り戻したんだよ本当に何日かできなかったらな何かしらの利用規約に引っかかってまた怒られそうもう半分されちゃうもう本当にやめてもう半分されちゃうもう本当にやめて"
+        },
+        {
+          "speechId": 27,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 720790,
+          "sourceEndMs": 749780,
+          "text": "もう50%カットされる生きていけないマジででもなんかさ昔の感覚とかだとさ例えばさ子供の頃にやり終わったゲームを弟にあげるみたいなこととか結構あるじゃんあーまあまあそれはありますねなんかさAPEXとかもさお兄ちゃんがすごいやっててさやらなくなって弟がやり始めて俺のアカウントレジェンダリーのスキンとかあるからあげるよっていうのもさなんか"
+        },
+        {
+          "speechId": 28,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 751198,
+          "sourceEndMs": 777378,
+          "text": "子供の感覚だと当たり前だけど多分引っかかるよねそういうのあー引っかかるっすねおそらくなんか多分そういう感覚で譲渡しちゃってる人とかもいるんだろうまあいないことはないでしょうねなんかでもそれはちょっとあんまり責めらんないわもしそういう子がいたとしてもまあダメなんだけどねすごい予想きてるCR歌い手小野井ローションカーリング歌い手と"
+        },
+        {
+          "speechId": 29,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 780140,
+          "sourceEndMs": 807799,
+          "text": "おじじが主導とおじじの母体とラルフさんマフマフさんを母体としてで僕が子乗りの母体としてあー結構でも遠からず近からずな気も確かにかなり今までの中では一番いい線いってるね結構この4人で無人島行くとかいう説もさっき言う話だもんね出てたしね4人で無人島行って今話題らしいから"
+        },
+        {
+          "speechId": 30,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 810160,
+          "sourceEndMs": 834016,
+          "text": "このカミングスーンして1周こないからねそうそうそうそうそう4人で無人島行きますそれだと20分後に俺たち旅立つことになるけど大丈夫タクシー呼んどくわじゃあ今のうちにどこの島にしようかないいじゃん1週間無人島生活いやまあ最近話題になったやつが2日かな?"
+        },
+        {
+          "speechId": 31,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 834016,
+          "sourceEndMs": 837919,
+          "text": "丸2日足らずだったから僕らじゃあ1週間か1週間はね"
+        },
+        {
+          "speechId": 32,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 840034,
+          "sourceEndMs": 869000,
+          "text": "好み一つでやってみますかいいです家でそうだよ本当に何か1年ぐらい無人島住んでみましたみたいにユーチューバーいるんじゃない探しあるんじゃない普通サバイバル系のユーチューバーとかいるよいる海外にも海外だったら本当にいくらでもいいそうだし日本でも探しているんじゃないかないやいるいる何個なんか取れたものその場で何か料理して食べてる蛇とか向いて食べてる人とか"
+        },
+        {
+          "speechId": 33,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 871843,
+          "sourceEndMs": 894737,
+          "text": "ニコニコの時よく見てた亀頃さんとかあわかる亀頃さん治療生活めっちゃ見てた今日ね渋谷春がそしてATRがCRにありそうあるの?"
+        },
+        {
+          "speechId": 34,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 894737,
+          "sourceEndMs": 898879,
+          "text": "やっぱね小乃りからも何人かCRに入っていってるし"
+        },
+        {
+          "speechId": 35,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 900140,
+          "sourceEndMs": 929562,
+          "text": "部門でプロゲーマーになれますか俺何で何なら慣れるかに何に動くか何で食べる薄いとかじゃないとでもさあ無理だと思うんだよね薄いところそのめっちゃ盛り上がって人口が多いところさあプロゲーマーって無理だと思うんだよカラータイルとか言っとくカラータイルペル人口相談今日からであなたもあるカジュアルで多いから多分勝てるようなすればスリーザリオとかじゃああああああcrフリファリオ部門"
+        },
+        {
+          "speechId": 36,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 930546,
+          "sourceEndMs": 932187,
+          "text": "ゴッドフィールドとか分かりますか?"
+        },
+        {
+          "speechId": 37,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 932187,
+          "sourceEndMs": 934208,
+          "text": "ゴッドフィールドの結構重さ!"
+        },
+        {
+          "speechId": 38,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 934208,
+          "sourceEndMs": 935749,
+          "text": "一生重さ多くない?"
+        },
+        {
+          "speechId": 39,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 935749,
+          "sourceEndMs": 950656,
+          "text": "重さ多いんですよねコセントある中だとウマ娘確かに俺全国4位までなったことあるいけるな!"
+        },
+        {
+          "speechId": 40,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 950656,
+          "sourceEndMs": 959820,
+          "text": "ウマ娘プロゲーマーウマ娘プロゲーマーとしてヤバすぎるんだよなどんななんだろうウマ娘のプロ"
+        },
+        {
+          "speechId": 41,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 960120,
+          "sourceEndMs": 988798,
+          "text": "ゲーマーレジーラくん今娘ブボン今娘ブボン競技シーンできるとしたらどんな感じになるん競技とは一体競技しかもだって試合何十秒とかで終わるでしょそうだ見守るだけだしシャドバはでもガチであるからなプロチームってかプロリーガーあるからなシャドバは"
+        },
+        {
+          "speechId": 42,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 990202,
+          "sourceEndMs": 994765,
+          "text": "研究とかめっちゃちゃんとしてるしポケ科?"
+        },
+        {
+          "speechId": 43,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 994765,
+          "sourceEndMs": 1018619,
+          "text": "ポケ科部門いやーいいとこついてるそれは今日のやついいなそれはポケ科ねそうだねこの4人の共通点といえばやはり確かにポケ科か俺もはや今そんなやってないけどやってはいない今日ポケ科部門がいやあるなCRカップあれでしょポケ科CRカップでしょ"
+        },
+        {
+          "speechId": 44,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 1020420,
+          "sourceEndMs": 1046097,
+          "text": "やろうとしてね本当に副社長にお前何言ってんのって普通に言われた結局やれなくなったんですかそれはいや俺はやりたいとずっと思ってますけどなんかあんまり社内の賛同を得られないそうだろうね出たいって言った人いるけどないっぱいそういやいっぱいいそうやりたいんだよな"
+        },
+        {
+          "speechId": 45,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 1051514,
+          "sourceEndMs": 1079920,
+          "text": "そもそも多分マフマス僕とソラルさんとか僕とオジーって結構多分あるけど僕とマフマスさんっていう関わりも多分表から見ると割と新鮮という説が話してるとこそもそもこれ初いやこの前のヒューマンホールフラットあったんで初ではないですけど多分割と新鮮に感じる方多いと思うんですよねそうだろうね確かにそうなので"
+        },
+        {
+          "speechId": 46,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 1084006,
+          "sourceEndMs": 1109900,
+          "text": "学校か専門学校いいとこついてるな確かにいいな学校ゲーム部門と歌部門みたいな確かに今から学校にします配信に必要な知識を全部教えてくれる学校教えてくれる学校配信者育成専門学校みたいなきたいいねでもなんかいいとこな"
+        },
+        {
+          "speechId": 47,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 1110290,
+          "sourceEndMs": 1129737,
+          "text": "する今までで家やばい出馬とかもやばい書いてるまっすぐばればればればればればればればればればればればればればればればればればればればればればればればればればればればればればればれ"
+        },
+        {
+          "speechId": 48,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 1144315,
+          "sourceEndMs": 1169980,
+          "text": "ペースのコメントで票数50%かっいや何でもカットされんじゃあまず取り上げてくん2万票入ってたから一番ええええええすぎるでしょ選挙とはってなってくるんなんだろうアイドルグループあーアイドルグループか"
+        },
+        {
+          "speechId": 49,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 1171961,
+          "sourceEndMs": 1177865,
+          "text": "リアルアイドルマネージャー来た俺たちがアイドルになるんですか?"
+        },
+        {
+          "speechId": 50,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 1177865,
+          "sourceEndMs": 1182268,
+          "text": "フリフリのスカートで僕たちがフリフリのスカート履くの?"
+        },
+        {
+          "speechId": 51,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 1182268,
+          "sourceEndMs": 1183389,
+          "text": "嘘?"
+        },
+        {
+          "speechId": 52,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 1183389,
+          "sourceEndMs": 1184610,
+          "text": "嘘?"
+        },
+        {
+          "speechId": 53,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 1184610,
+          "sourceEndMs": 1186711,
+          "text": "俺らが演者ですか?"
+        },
+        {
+          "speechId": 54,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 1186711,
+          "sourceEndMs": 1186991,
+          "text": "え?"
+        },
+        {
+          "speechId": 55,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 1186991,
+          "sourceEndMs": 1188532,
+          "text": "そうですか?"
+        },
+        {
+          "speechId": 56,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 1188532,
+          "sourceEndMs": 1191434,
+          "text": "降りるわ俺それちょっと多分降りとくかダメかちょっときついな"
+        },
+        {
+          "speechId": 57,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 1200054,
+          "sourceEndMs": 1229478,
+          "text": "あと13分30秒来ちゃうっすか緊張するななんかなんだなんだなるほどね何すごい今あの僕らの会議窓がピコピコとピコピコと"
+        },
+        {
+          "speechId": 58,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 1230822,
+          "sourceEndMs": 1259094,
+          "text": "すごい話してる内容の緩さとこの中の文章のギャップがいやでもこれこんだけ緩い感じで始まって緩い発表で終わるのかと思いきやまあまあというかだいぶ面白いあれだと思うんだよな確かに"
+        },
+        {
+          "speechId": 59,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 1260274,
+          "sourceEndMs": 1262174,
+          "text": "そうなんですか?"
+        },
+        {
+          "speechId": 60,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 1262174,
+          "sourceEndMs": 1265155,
+          "text": "へー当事者?"
+        },
+        {
+          "speechId": 61,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 1265155,
+          "sourceEndMs": 1285179,
+          "text": "ソラルさんはあんまりご存じないかもしれないですけどあんまりまだわかってないかもしれないこの後の発言を聞いてこの発言を掘り返されたらマジ不安になる人出てきそうちなみにさっきタクシーに乗ってた時にあれ今日の配信って何話すの?"
+        },
+        {
+          "speechId": 62,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 1285179,
+          "sourceEndMs": 1287319,
+          "text": "って言ってたからいやいや言ってないだろお前だろ"
+        },
+        {
+          "speechId": 63,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 1290830,
+          "sourceEndMs": 1319980,
+          "text": "ブーブー言っいいですねいろいろ出てきての会える子で参戦あるなぁ4人で一人こっちやっぱり座部リザーブいるからやっぱでもコーチで入れられるようになったでしょ今コーチのなんかねあれすぐ"
+        },
+        {
+          "speechId": 64,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 1320042,
+          "sourceEndMs": 1322423,
+          "text": "僕ルール書いてまたされたんじゃなかったっけ?"
+        },
+        {
+          "speechId": 65,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 1322423,
+          "sourceEndMs": 1332990,
+          "text": "あ、そうなんだって聞いたけどわかんない、あんまり自分は出てないからなんかふわっとしか聞いてないけどでもALGSってなんか誰でも出れるんでしょ?"
+        },
+        {
+          "speechId": 66,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 1332990,
+          "sourceEndMs": 1348399,
+          "text": "誰でも出れるうん、いやゴールドで出れるよあ、ゴールドでほんと出れるんだ出れる出れるゴールド以上出る人いらんかな、ゴールドワンチャンあるからな、バトラーは"
+        },
+        {
+          "speechId": 67,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 1351061,
+          "sourceEndMs": 1379480,
+          "text": "ワンチャン僕引いた結果一番最初の大会で世界大会の出場権得てるからねやばぁ事実すごいよな危うく僕アメリカに渡るところだったコロナがなかったらすごいよねいや本当にすごいと思う偶然全部のアンチがめっちゃ近くて偶然周りのパーティーやりあってめっちゃギョフレる状況になってなんか偶然めっちゃポイント取っちゃって偶然毎回順位めっちゃいいっていうのがバトラーだったらありえるかな"
+        },
+        {
+          "speechId": 68,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 1381381,
+          "sourceEndMs": 1409500,
+          "text": "もちろん上手い方が強い方がその確率は圧倒的に高いのに対してでも100%はないし0%もないそれがバトロワーの怖さでもあり面白さでもあり最高っすねいけるかもしれないさあそんな混乱してるうちにあと10分ですおじいさんの命もあと10分ですね待ってください俺死ぬんですか大丈夫ですか"
+        },
+        {
+          "speechId": 69,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 1411023,
+          "sourceEndMs": 1411203,
+          "text": "ないかい?"
+        },
+        {
+          "speechId": 70,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 1411203,
+          "sourceEndMs": 1413245,
+          "text": "言い残したこと?"
+        },
+        {
+          "speechId": 71,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 1413245,
+          "sourceEndMs": 1427896,
+          "text": "そうだなぁ今のうちに白状しといた方がいいんですよもう何もないよもう全部もうないもうないもうという言い方になるけどもうないあれとかは言ったんだっけ?"
+        },
+        {
+          "speechId": 72,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 1427896,
+          "sourceEndMs": 1437624,
+          "text": "あ、これ配信電話の方がいいかあーだめだめだめざわつくからまだ出てないやつまだ出てないやつ本当にやめてもう何もない"
+        },
+        {
+          "speechId": 73,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 1441811,
+          "sourceEndMs": 1469354,
+          "text": "ブーブーなんでこんな顔熱くなってもあるんじゃないなさないないあるから暑くなっちゃってんじゃない本当に何もないつつましく生きてる本当につましくつましくかー詰ましくかそういうつましく生きてますかファンフィアルそれは3pしかないなさんある俺が死ぬ前提のコメントが増えるのやめてくるっ"
+        },
+        {
+          "speechId": 74,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 1470622,
+          "sourceEndMs": 1489494,
+          "text": "さよならおじじ生前のおじじは生前のおじじあれもう時間になったらこのアイコンが灰色に灰色になったら爆散するからそんなアニメーション入ってるの?"
+        },
+        {
+          "speechId": 75,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 1489494,
+          "sourceEndMs": 1499960,
+          "text": "入ってる入ってる組み込んどいたさっき喋ってる間になんかこの左上のミライズのマークは何?"
+        },
+        {
+          "speechId": 76,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 1500020,
+          "sourceEndMs": 1503262,
+          "text": "何を表してるんですかね?"
+        },
+        {
+          "speechId": 77,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 1503262,
+          "sourceEndMs": 1510227,
+          "text": "ピカピカしてるやっぱいいところに目をつけますねマハマスさんは何なんですかこれ?"
+        },
+        {
+          "speechId": 78,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 1510227,
+          "sourceEndMs": 1529660,
+          "text": "おじじさんと重ねるとおじじさんが爆散するみたいなこれ星になったおじじだよなんか飛び散ってるみたいな感じになってるからこれ星になったおじじこれ死ぬカウントダウンに俺まで見えてきたから本当にやめて本当にやばいよ"
+        },
+        {
+          "speechId": 79,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 1530450,
+          "sourceEndMs": 1557645,
+          "text": "最後の輝きとか言わないでごめん僕のF5秒ぐらいぶれてるちょっと更新しとく人がどんどん増えてくやべえよこれいやまあでもそれだけの人がやっぱぶち上がるだけのものがあるんじゃないですかうーんなんかもう普通になんか気になるよなだってこの4人で東京ドームよダメだって言っちゃうまだダメ?"
+        },
+        {
+          "speechId": 80,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 1557645,
+          "sourceEndMs": 1559846,
+          "text": "まだだよまだまだまだまだまだだよ"
+        },
+        {
+          "speechId": 81,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 1560106,
+          "sourceEndMs": 1563168,
+          "text": "何すんだろう東京ドームで何する?"
+        },
+        {
+          "speechId": 82,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 1563168,
+          "sourceEndMs": 1565649,
+          "text": "綿菓子とか作る?"
+        },
+        {
+          "speechId": 83,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 1565649,
+          "sourceEndMs": 1589282,
+          "text": "綿菓子屋公園綿菓子屋広いからこう流しそうめんとかやったらすごい長くなるあーいいいいいい日本一長い流しそうめん作っちゃおうぜ東京ドーム流しそうめん公園流しそうめん東京ドーム公園あーいい招待制にしてもリスナーさんも参加させようそうそうそうそう掴むんだ1万人ぐらいいやもっとか"
+        },
+        {
+          "speechId": 84,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 1590226,
+          "sourceEndMs": 1610175,
+          "text": "5万人ぐらい並べさせてさ最後の人まで行き着かないかもしれないけどいやもう最後の人もお腹いっぱいにするぐらい僕がいっぱい流すよはるちゃん並べますよ俺最後尾で待つわじゃあそらるさんがお腹いっぱいになるまで僕流せばいいの?"
+        },
+        {
+          "speechId": 85,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 1610175,
+          "sourceEndMs": 1614497,
+          "text": "俺がこれをOK出すまでも流す5万人いるんでしょ?"
+        },
+        {
+          "speechId": 86,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 1614497,
+          "sourceEndMs": 1619980,
+          "text": "何日間かもお腹いっぱいになったやつもさだんだんお腹すい"
+        },
+        {
+          "speechId": 87,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 1620054,
+          "sourceEndMs": 1643659,
+          "text": "てくるでしょサラルさんがお腹いっぱいだったから最前列の人またお腹空いてるかもしれない東京ドームだったらムービングステージとか作ってそうめんの台動くみたいなことできるいいなーってグーンって動きながらマジで意味ねーなんか円に沿ってやりたいあのなんていうのこう螺旋状って言えばいい?"
+        },
+        {
+          "speechId": 88,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 1643659,
+          "sourceEndMs": 1649780,
+          "text": "なんか外からだったら渦巻き状にさレーン作ってさレーンとレーン長い長い人と出せて"
+        },
+        {
+          "speechId": 89,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 1650881,
+          "sourceEndMs": 1656324,
+          "text": "誰かが掴むためにストロボ炊かれるようにしたい"
+        },
+        {
+          "speechId": 90,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 1680382,
+          "sourceEndMs": 1709338,
+          "text": "多分あの本当に興味ない人は今一旦シャワー浴びに行って30分後なんだ30分後見に来ようって言ってシャワー浴びに行ってるから大丈夫っすよおじじめんつゆ50%カットだよななんでもかんでもカットされるあと二口ぐらいしかないんだけどみたいなめんつゆ50%カットってまあまあ痛いしなめんつゆのかさ50%カットかもしれんあるなあおじじ50%カットされてるカットしてみた"
+        },
+        {
+          "speechId": 91,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 1710470,
+          "sourceEndMs": 1739900,
+          "text": "アイコンも50%カットされてるカットされてる見たわカットしてみたうじじぐらいになってるCRおじじからうじじぐらいになってるカットしてみた端っこでよかったわ真ん中だったらカットしようがなかったから端っこでよかったアイコン50%カットいいねさあさあさあ時間もいやー"
+        },
+        {
+          "speechId": 92,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 1740206,
+          "sourceEndMs": 1769840,
+          "text": "満を持してきたよちょっと話すことこの後話すこと大事だからこの後話すこと整理しとくかよいしょいやーやばいマジで楽しみちょっとお茶飲んでみんなどんな反応するんだろう聞いた瞬間うーん何言われると思う我々何言う"
+        },
+        {
+          "speechId": 93,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 1770226,
+          "sourceEndMs": 1799920,
+          "text": "そうなのかなぁ実際のところ実際のところわかんないよね割と読めないよねうーんおーって感じなんじゃないでおーおーってなってへーそうへーでへーからのはてなよ多分おーへーふーのはてなよあーって感じだよねうーんあ時計止まる"
+        },
+        {
+          "speechId": 94,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 1800042,
+          "sourceEndMs": 1807488,
+          "text": "あ、すまへん、裏板からだ、僕が。"
+        },
+        {
+          "speechId": 95,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 1807488,
+          "sourceEndMs": 1810591,
+          "text": "そしてまた時計が動き始める。"
+        },
+        {
+          "speechId": 96,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 1810591,
+          "sourceEndMs": 1811932,
+          "text": "何しに来たの?"
+        },
+        {
+          "speechId": 97,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 1811932,
+          "sourceEndMs": 1814173,
+          "text": "ラルさんとマフマフさん何しに来たんだよ、マジで。"
+        },
+        {
+          "speechId": 98,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 1814173,
+          "sourceEndMs": 1814414,
+          "text": "マジでこの前。"
+        },
+        {
+          "speechId": 99,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 1814414,
+          "sourceEndMs": 1816255,
+          "text": "オープニングにしてないか作りました。"
+        },
+        {
+          "speechId": 100,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 1816255,
+          "sourceEndMs": 1816595,
+          "text": "同人誌の。"
+        },
+        {
+          "speechId": 101,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 1816595,
+          "sourceEndMs": 1828065,
+          "text": "どんぐらい売れんのかな、俺とはるちゃんの同人誌。"
+        },
+        {
+          "speechId": 102,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 1828065,
+          "sourceEndMs": 1829666,
+          "text": "いや、売れねえだろ。"
+        },
+        {
+          "speechId": 103,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 1831398,
+          "sourceEndMs": 1858666,
+          "text": "ブーバーしろそ面白そうだから面白さで買う一朗読配信とかするあっはぁっはぁっはぁっはぁっはぁっはぁっはぁっはぁっはぁっはぁっはぁっはぁっはぁっ渋谷のオフィスももしかしたら関係あるかもしれないですねあーねーしは渋谷春知らあるだけ渋谷春"
+        },
+        {
+          "speechId": 104,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 1862331,
+          "sourceEndMs": 1889980,
+          "text": "本当に多分みんな完成したの見たら本当にテンション上がる3分切りましたもうカップラーメンすら作れないですちょっと緊張してやばいんでトイレ行ってきますはい了解ですいやでも突然3人しや"
+        },
+        {
+          "speechId": 105,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 1890000,
+          "sourceEndMs": 1890160,
+          "text": "C!"
+        },
+        {
+          "speechId": 106,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 1890160,
+          "sourceEndMs": 1890520,
+          "text": "クレイジーラグーン!"
+        },
+        {
+          "speechId": 107,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 1890520,
+          "sourceEndMs": 1890781,
+          "text": "加入しまーす!"
+        },
+        {
+          "speechId": 108,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 1921138,
+          "sourceEndMs": 1934668,
+          "text": "なりたいけどな4月1日にいつかこれさサイトさこれカウントダウン終わったらもう内容本当に公開される公開されるツイートする内容とか決めてる?"
+        },
+        {
+          "speechId": 109,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 1934668,
+          "sourceEndMs": 1949720,
+          "text": "みんなあ決めてねえやべ俺も決めてねえ気づいたやばいやばいやばい俺はってかCRは決まってるこれ決まってる上に書いてある引用したらいいよね多分それをかなそれでもいいですし"
+        },
+        {
+          "speechId": 110,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 1954084,
+          "sourceEndMs": 1979960,
+          "text": "俺はもう流れであとは流れでサイト落ちる疑惑は30分くだらない話して大事なところやってない一応めっちゃサーバー強いところにしてあるけどわかんないCRは決まってるって言ったせいでCR全体が関わってくるのかっていうコメントがある"
+        },
+        {
+          "speechId": 111,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 1980182,
+          "sourceEndMs": 1983024,
+          "text": "大丈夫ですか?"
+        },
+        {
+          "speechId": 112,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 1983024,
+          "sourceEndMs": 1984705,
+          "text": "出現しましたか?"
+        },
+        {
+          "speechId": 113,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 1984705,
+          "sourceEndMs": 2004817,
+          "text": "あとね、30秒ぐらいやしまたカットするしかねぇ30%までカットしようやめてくれ本当に死ぬ、本当に死ぬ"
+        },
+        {
+          "speechId": 114,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 2010214,
+          "sourceEndMs": 2016159,
+          "text": "リツイートして同時にするの?"
+        },
+        {
+          "speechId": 115,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 2016159,
+          "sourceEndMs": 2038718,
+          "text": "とりあえず先配信メインでいこうぜサイト公開されましたかね重いサイトが重い動いてる見れる見れるというわけでよろしいですかというわけで渋谷はるさんから渋谷はる"
+        },
+        {
+          "speechId": 116,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 2040446,
+          "sourceEndMs": 2066708,
+          "text": "マフマフさんソラルさんおじじ4つが関わってバーチャルユーチューバーの事務所を立ち上げます事務所の名前はダイサンジでございますよろしくお願いします先生先生先生"
+        },
+        {
+          "speechId": 117,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 2071154,
+          "sourceEndMs": 2098334,
+          "text": "いろいろ怒られるからあー失礼しましたというわけで予想してた人もいましたねそうですね多いとは思いますねドメインVTだしなまあそうね予想してた人もいいと思うコメントの8割ぐらいがなんていうのうおーとか記号とかだからほとんどねYouTubeのあれに引っかかってだいたい見えてないコメント8割ぐらい今消えてた僕側多分スパナ持ち上がりとも言えないけど"
+        },
+        {
+          "speechId": 118,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 2100782,
+          "sourceEndMs": 2104385,
+          "text": "はい、というわけで皆さんサイト見えてるかな?"
+        },
+        {
+          "speechId": 119,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 2104385,
+          "sourceEndMs": 2115912,
+          "text": "俺一応繋がった僕も繋がったVTuber事務所ミライズが立ち上がりましたね俺もツイートされた?"
+        },
+        {
+          "speechId": 120,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 2115912,
+          "sourceEndMs": 2121455,
+          "text": "CRからはしてるあ、え、ツイッター使うわけじゃないの?"
+        },
+        {
+          "speechId": 121,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 2121455,
+          "sourceEndMs": 2128779,
+          "text": "さっき作ったあっちのツイッターあんなツイッターで僕ツイートするんかと思ってた違うんか"
+        },
+        {
+          "speechId": 122,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 2131421,
+          "sourceEndMs": 2142548,
+          "text": "同じ内容でいいからそっちツイートしておいてくんねそっちに押したいわ僕おじじ?"
+        },
+        {
+          "speechId": 123,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 2142548,
+          "sourceEndMs": 2155897,
+          "text": "ちょっと待ってねやった1番目のフォロー僕だいいなそれ取り消して俺にしてジャンケンで決めよう"
+        },
+        {
+          "speechId": 124,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 2161883,
+          "sourceEndMs": 2162583,
+          "text": "5番目?"
+        },
+        {
+          "speechId": 125,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 2162583,
+          "sourceEndMs": 2165123,
+          "text": "誰がいんの?"
+        },
+        {
+          "speechId": 126,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 2165123,
+          "sourceEndMs": 2188670,
+          "text": "急に増えたわ急に増えたもう譲れんわもう譲れんわ今からやったら知らん人になるわちなみに俺11番目ぐらいだっためちゃくちゃ遅いTwitterカード作ったの30分前だからな生まれたてだよこんな感じの"
+        },
+        {
+          "speechId": 127,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 2190302,
+          "sourceEndMs": 2216516,
+          "text": "フォローすればみんなも子さんみんなも子さんになりますじゃあまあ事務所を作りますとは言ったものの何も何も言っていないのでそうですねはいこれでかファイトもちゃんと見てないんだけど見てねーのかや見たけど見たけどなんかちゃいちゃいちゃいちゃいちゃいちゃいちゃいちゃいちゃいちゃいちゃいちゃいちゃいちゃいちゃいちゃいちゃいちゃいちゃいちゃいちゃいちゃいちゃいちゃいちゃいちゃいちゃいちゃいちゃいちゃい"
+        },
+        {
+          "speechId": 128,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 2220310,
+          "sourceEndMs": 2220790,
+          "text": "え?"
+        },
+        {
+          "speechId": 129,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 2220790,
+          "sourceEndMs": 2224731,
+          "text": "いやなんか何?"
+        },
+        {
+          "speechId": 130,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 2224731,
+          "sourceEndMs": 2225632,
+          "text": "あれとかできないの?"
+        },
+        {
+          "speechId": 131,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 2225632,
+          "sourceEndMs": 2249940,
+          "text": "わかったわかったなんでかわかったちょっと後で言うわ後で言うわこの話はごめんなさいちゃんと見てましたよ語弊があった今のは僕の知らない情報が載ってるのかと思ってたいや載ってないっすね確認してもらったところでそうよかったよかったでえーっとじゃあこのVTuber事務所ミライズなんで事務所を作ることになったのか"
+        },
+        {
+          "speechId": 132,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 2250586,
+          "sourceEndMs": 2279980,
+          "text": "この4人でっていう話をまずやっていきますかそうですねいろいろ気になってることもあると思いますあると思う本当にはるくんさ画面にサイトとか映せないのかないけるっすよみんなで見ていって話すみたいな確かにいいいいっすね訓練所の抜けようずっとMチョークしてる人いないまだやってたのいやいや始まったら抜けようと思う"
+        },
+        {
+          "speechId": 133,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 2282070,
+          "sourceEndMs": 2308640,
+          "text": "ここまでねだって雑談タイムじゃまあ正しいですよじゃんこんな感じでちゃんとサイトがあるそれだけでちゃんとしてそう"
+        },
+        {
+          "speechId": 134,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 2311294,
+          "sourceEndMs": 2339920,
+          "text": "分かるこの感じいいよねこれ見ながらみんなで触れていきますかはいまずはニュース2021年10月23日ミライス応募募集開始めっちゃこの日本語気になったんだよ応募募集募集開始でよくねって思ったけど寸前だったから何も言わなかった僕何も言わなかったミッション"
+        },
+        {
+          "speechId": 135,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 2340002,
+          "sourceEndMs": 2340722,
+          "text": "あ、来た!"
+        },
+        {
+          "speechId": 136,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 2340722,
+          "sourceEndMs": 2341163,
+          "text": "来た!"
+        },
+        {
+          "speechId": 137,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 2341163,
+          "sourceEndMs": 2343304,
+          "text": "ミッションバリュー!"
+        },
+        {
+          "speechId": 138,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 2343304,
+          "sourceEndMs": 2346066,
+          "text": "まふまつさん、ちょっと声を呼んでもらっていいですか?"
+        },
+        {
+          "speechId": 139,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 2346066,
+          "sourceEndMs": 2353830,
+          "text": "あ、わかりました明日は君が生まれる日来たはるさきもですか?"
+        },
+        {
+          "speechId": 140,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 2353830,
+          "sourceEndMs": 2367118,
+          "text": "いや、こっから先はいいんじゃないですかね主に明日は君が生まれる日をまふまつさんの声で聞きたかった、僕が切り抜こ、切り抜いて僕のアラームにしようさあ、というわけで"
+        },
+        {
+          "speechId": 141,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 2370002,
+          "sourceEndMs": 2399260,
+          "text": "どこから触れていこうかこの辺の情報も結構大事なんだよなもしもデジタルの世界へ行けたらね僕たちはクリエイターだからきっと君のやりたいことを叶えられるとか僕たちはストリーマーだからきっと君の毎日を素敵に見てもらえるとか僕たちはVTuberだからきっと君の最高のパートナーになれるとかそんな諸々がありまして未来図にしかできないことっていうのはたくさんあると思います"
+        },
+        {
+          "speechId": 142,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 2400874,
+          "sourceEndMs": 2429400,
+          "text": "はい新しい君の未来図をね共に描きましょう描きませんかこの辺でもちょっと1個後だな内容としては多分ね気になってる人はやっぱなんでなんでこの4人ってのとなんでそもそも事務所作るのっていうこの2点めっちゃ大きいと思うんですよねなんで"
+        },
+        {
+          "speechId": 143,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 2430270,
+          "sourceEndMs": 2458913,
+          "text": "事務所を作ることになったのかってのはどこまで言えるかななんで事務所を作るのかあれよね面白そうっていうのはもちろん我々的にもトップにあるしその上で今個人勢と言われるね方々であったりだとかあとはこれからもちろんV1話になる方とか諸々"
+        },
+        {
+          "speechId": 144,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 2460374,
+          "sourceEndMs": 2489960,
+          "text": "いろんな人がいると思うんだけどその1話は企業の後ろ盾がない方って言えばいいのかなっていういろいろな方々がなんかもっと動きやすくなるようにであったりもっとできることを増やしたりとかなんかそういう人たちの手助けをしたいっていうのはまず一つ大きくあるかなとこれは多分4人の共通なのかなもちろんそれぞれいろんな思惑はあって僕はさっき言った通り普通に面白いこと"
+        },
+        {
+          "speechId": 145,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 2490022,
+          "sourceEndMs": 2518559,
+          "text": "したいしあとはそういうマネジメント事務所作るとかマネジメントするとかそういうのに憧れじゃないけどやってみたいっていうのがあったっていうのが僕は大きいし多分他のオジジラルさんマフマスさんもそれぞれがそれぞれの思いを持っていてじゃあこのように事務所を作りましょうってなったわけですね俺個人としては"
+        },
+        {
+          "speechId": 146,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 2521294,
+          "sourceEndMs": 2549860,
+          "text": "今まで結構長くやってきた俺とかマフマフ的には多分今までやってきたノウハウだったり技術知識とかがあってでなんか主に強いのは音楽面だったりするけど今までやってきた活動のノウハウをねもったいないからさこのまま腐らせてでもねそういうのを使ってこれから頑張っていくVTuberの人とかのサポートを"
+        },
+        {
+          "speechId": 147,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 2550020,
+          "sourceEndMs": 2560907,
+          "text": "できたらなっていう思いがある感じですね自分たちが事務所を立ち上げるのって"
+        },
+        {
+          "speechId": 148,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 2580002,
+          "sourceEndMs": 2580903,
+          "text": "うーんまあそうねまあそう"
+        },
+        {
+          "speechId": 149,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 2610526,
+          "sourceEndMs": 2639880,
+          "text": "やりたいことをサポートして叶えるみたいなところに行き着くというか運営兼所属タレントとして渋原がいるからそこを親身になって叶えられるんじゃないかと思うんですよねおじじが黙ってるけど話そうかなと思ってまず"
+        },
+        {
+          "speechId": 150,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 2640310,
+          "sourceEndMs": 2669080,
+          "text": "クレイジーラクーンのCが足りないのはそれは多分更新したら直ったわコメント欄がそれで溢れとったからあとなんだろうなCRとしても今までいろんなストリーマーだったりプロゲーマーだったりプロデュースしてたりYouTube活動サポートしたりとかいろんなノウハウがあってやっぱりこれはあくまで"
+        },
+        {
+          "speechId": 151,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 2670490,
+          "sourceEndMs": 2698974,
+          "text": "リスナーのみんなにも分かってもらいたいのがおじじとしてってよりもクレイジーラクーンとしてです事業としてってことやったんだからもちろんクレイジーラクーンの所属になるわけではないしこのミライズに所属する人がクレイジーラクーンはあくまでそらるさんまふまふさんはるちゃんと同じ立場のサポートする"
+        },
+        {
+          "speechId": 152,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 2703224,
+          "sourceEndMs": 2729246,
+          "text": "うちが培ってきたゲーム配信だったりとかゲームってことに関してのノウハウだったりとかマネジメントみたいのをこれから頑張る人たちに向けてサポートできればなっていう感じですだからあくまで例えばミライズに入った人があの人はCRのV部門だみたいなことでは一切ないんでそこだけは"
+        },
+        {
+          "speechId": 153,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 2730294,
+          "sourceEndMs": 2759780,
+          "text": "そこはこう独立したものなのでそれこそ僕とかだったらコノリにもいるわけだしでも関係ないかな別にじゃあミライズにコノリの人が加入するもちろん可能性がゼロとは言わないけどすることはないだろうし別にコノリの形が変わるわけでもないしっていうそんな感じそれこそじゃあソラマ風で言うとATRあるけど"
+        },
+        {
+          "speechId": 154,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 2760042,
+          "sourceEndMs": 2773430,
+          "text": "別にATRが未来部の参加に入るわけでもなければそっちに影響があるわけでもないそれぞれ別個の存在です単純に僕らが元々持っている母体とかとは基本的にそうですね"
+        },
+        {
+          "speechId": 155,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 2790020,
+          "sourceEndMs": 2815365,
+          "text": "僕らが所属をするんじゃなくて僕らが運営をしていってこれから活躍されるVtuberの方々をサポートしていくっていう形に取っていこうとそらまふとかおじじがVtuberになって入るというわけではないよというわけではないそれぞれの話しょうがいいんじゃないですか?"
+        },
+        {
+          "speechId": 156,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 2815365,
+          "sourceEndMs": 2819066,
+          "text": "この4人がじゃあどうしてこれを立ち上げようと思ったのかっていうこととか"
+        },
+        {
+          "speechId": 157,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 2820874,
+          "sourceEndMs": 2849980,
+          "text": "まあ僕はでも本当にさっき言ったような空ルースさん僕は大体ざっくりと通りかなそれこそまああとはおじじとまふまつさんがその辺の思いの丈があればっていうのはまあでも今俺言った通りな感じかな俺もまあ大丈夫4人のスタンスはまあそんな感じですねまあ何にせよでも共通事項であるのは本当になんか4人でね新しいもの作るからこれに関してはもちろん盛り上げたいと思ってるしまあうまくいかない"
+        },
+        {
+          "speechId": 158,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 2850120,
+          "sourceEndMs": 2877979,
+          "text": "せたいし僕らもそこそういうなんだろうなうまくいかせる方面でもちゃんとするしその上であのそのまあある種演者側である僕たちが運営側でもあるっていうので本当比較的ね相当寄り添えるところもあるだろうしあとまあなんだろう僕らがねトラブルシューティングししやすいなんかめっちゃもう本当に細かいところからで言うとそれをしたobsの使い方配信ソフトobsあるけど"
+        },
+        {
+          "speechId": 159,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 2880022,
+          "sourceEndMs": 2906278,
+          "text": "絶対わからないけど多分いろんな事務所があって多分運営の方でも知ってる人もいるだろうけど知らない人も多いと思うんだけどその辺とかは一応わかるっていうそんな細かいところのレベルから僕らもわかるわけでできることはすごい多いこの4人中3人中活動者だからねそうねそうだからなんかこうそれを解決しながら活動してきたと思うし"
+        },
+        {
+          "speechId": 160,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 2913263,
+          "sourceEndMs": 2937590,
+          "text": "公募募集してることとか具体的に入っていった方がいきますかこのホームページを公開して発表したわけなんですけど要するに新しい人たちを今募集してるよという話ですしてます本日からエントリー応募条件来ましたはい"
+        },
+        {
+          "speechId": 161,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 2940302,
+          "sourceEndMs": 2969758,
+          "text": "なんかセンタリングが僕の画面だとズレててキモいななんかもうすぐに100人以上の応募あるらしいえぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇ"
+        },
+        {
+          "speechId": 162,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 2970178,
+          "sourceEndMs": 2999920,
+          "text": "大丈夫なんで僕らは別に今見たりしないから多分だけど急いで書くよりはたぶん本当にじっくりじっくり考えてちゃんとした文章とかで書いた方がいいんじゃないかなやっぱりそうですねちゃんと全部見て確かめるんでうんなんか一個だけ質問あったのがこれは新しい"
+        },
+        {
+          "speechId": 163,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 3000102,
+          "sourceEndMs": 3029980,
+          "text": "Vを募集するっていうことですかって言っちゃえば今現在個人で活動してる人はどうだっていう大事な質問ですねそれはどうなんですかこれはでもいいんじゃない正直思うのは今活動しててそれを金繰り捨てて天秤にかけないといけなくなるわけじゃん今の活動捨てて新しいものにやらないといけない可能性が出てくるってわけだけどもちろん本人がそうしたいって言うなら"
+        },
+        {
+          "speechId": 164,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 3030000,
+          "sourceEndMs": 3058722,
+          "text": "これもう一つの手だと思うし別に僕は転生が悪だとは思ってないしいろんな事情あるだろうからまあでも残したいっていうのであればそこは残してていいんじゃないのっていうのも僕はすごいあるんで今個人勢の人が応募してくるっていうのは全然ありな気がするでその上でもちろん新しくじゃあ新しい名義としてやりたいっていうのであればそれはそれでいいと思うし別にこのままの名義でやりたいっていうのでまあもちろんいろんな問題も出てくるだろうからその問題も解消できるのであればそれは全然いい気がする"
+        },
+        {
+          "speechId": 165,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 3063064,
+          "sourceEndMs": 3089186,
+          "text": "最終的には各々と1対1の面接の上で選ぶことになるからそこは相談してもらって一番いい形を取れればいいかもしれないですね僕らも形当てはめてこうじゃなきゃいけないみたいなルールがこうあるからこうじゃなきゃいけないってのはあんまりなくて単純に僕らはみんながやりやすいように"
+        },
+        {
+          "speechId": 166,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 3090798,
+          "sourceEndMs": 3119940,
+          "text": "できればいいかなって思ってるだけだからそうですね締め切りとか技術的なものが知りたいということですそれはね一応今現状は向上的に募集っていう形であえていつまでっていうのは技術を設けてない状況ですねどこかででも自分たちのタイミングで第一期というか第一弾みたいな"
+        },
+        {
+          "speechId": 167,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 3120042,
+          "sourceEndMs": 3123584,
+          "text": "感じで締め切るけどそこで終わりにするんじゃなくてそのまま"
+        },
+        {
+          "speechId": 168,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 3150022,
+          "sourceEndMs": 3152904,
+          "text": "そして現状所属しているタレントはいないんですか?"
+        },
+        {
+          "speechId": 169,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 3180194,
+          "sourceEndMs": 3209980,
+          "text": "とりあえずはねもうここにも代表でもある代表というかも所属でもあるし経営運営陣でもあるまず春ちゃんまっそうねあもう寿司ぬるっぞ寝ると言ったらちょっとつ大必要があるじゃんこれもなんかそれもそのもんだと思ったんだけどさっきねソラルさんも塗るって言って塗るっていうなぁと思ったけどそう初期メンバー未来部の初期メンバーは82名いますはい1名は今この場にもいる渋谷春がまあその運営兼まあ所属タレントと"
+        },
+        {
+          "speechId": 170,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 3210000,
+          "sourceEndMs": 3239500,
+          "text": "としても今後ミライズ所属渋谷春になるのかな一応はいぬるっと言ったなぬるっとねそらりさんさっき普通に言ったんだよなあ言うんだ今と思いながらめっちゃでかい今めっちゃ盛り上げようとしてたのにめっちゃでかいやり直すやり直すやり直すかやり直そうかやり直そうやり直そうちょっと無しで誰がいるんだ所属タレントがいるんですかってコメントを"
+        },
+        {
+          "speechId": 171,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 3240120,
+          "sourceEndMs": 3244103,
+          "text": "2名はいはいはい2名いますそうですね2名もいるんですか?"
+        },
+        {
+          "speechId": 172,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 3244103,
+          "sourceEndMs": 3259753,
+          "text": "おー2名いるんですよえーえーえーえーえーえーえーえーえーえーえーえーえーえーえーえーえーえーえーえーえーえーえーえーえーえーえーえーえーえーえーえーえーえーえーえーえーえーえーえーえーえーえーえーえーえーえーえーえーえーえーえーえー"
+        },
+        {
+          "speechId": 173,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 3270262,
+          "sourceEndMs": 3298499,
+          "text": "としても渋谷春がいるとはいでもそれはこう新しく入る人からしたらすごくこう助かることであでもそうですよあのそれこそじゃあ未来図加入した人とはやっぱり一緒にゲームしたりとかもするだろうしはいそれは多分まあねあのまあ僕の活動を長く見てきてる人だったらわかると思うけど結構大きなメリットにはなると思いますそうだねそういう事務所としてのブランドが結構確立されるし新しく"
+        },
+        {
+          "speechId": 174,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 3300150,
+          "sourceEndMs": 3329760,
+          "text": "なんだろうある程度の影響力が拡約されてるみたいな感じだもんねそうですね多分バカにできないと思いますんでまあそんな渋谷春がはいいいプープーもう一人じゃあいるってことっすかねもう一人いるんですか全く思いつかんな一体誰やでも渋谷春と肩を並べる人物っていうことです一体誰なんだもしかしてこの"
+        },
+        {
+          "speechId": 175,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 3330594,
+          "sourceEndMs": 3331915,
+          "text": "VCに入ってくるんですか?"
+        },
+        {
+          "speechId": 176,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 3331915,
+          "sourceEndMs": 3335277,
+          "text": "入ってくる?"
+        },
+        {
+          "speechId": 177,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 3335277,
+          "sourceEndMs": 3335497,
+          "text": "まさか…え?"
+        },
+        {
+          "speechId": 178,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 3335497,
+          "sourceEndMs": 3338799,
+          "text": "あー来た!"
+        },
+        {
+          "speechId": 179,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 3338799,
+          "sourceEndMs": 3340119,
+          "text": "あー来た!"
+        },
+        {
+          "speechId": 180,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 3340119,
+          "sourceEndMs": 3341600,
+          "text": "来た…こんにちは!"
+        },
+        {
+          "speechId": 181,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 3341600,
+          "sourceEndMs": 3346263,
+          "text": "気まずそうで笑う気まずいって!"
+        },
+        {
+          "speechId": 182,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 3346263,
+          "sourceEndMs": 3355368,
+          "text": "気まずそうで笑うマジで個人Vで名前がたまーにぼちぼちぐらいで上がる人白雪玲奴です!"
+        },
+        {
+          "speechId": 183,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 3355368,
+          "sourceEndMs": 3358369,
+          "text": "おめでとうございます!"
+        },
+        {
+          "speechId": 184,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 3358369,
+          "sourceEndMs": 3359270,
+          "text": "いや…"
+        },
+        {
+          "speechId": 185,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 3360202,
+          "sourceEndMs": 3389520,
+          "text": "キーワードでさやめろってそういう上げ方でかいなぁもうやむちゃしてないよこっちからするんなんすか第1期生なんすかゼロ規制になるゼロ規制のまあ1期生でいいんじゃねわかりやすいで1期生まあゼロ規制だけどまあ1期生でいっちゃえばここにあとまあね何人かわかんないけどまあ有望な方がいらっしゃったらまあポンポンポンと僕たちしばはるステーキレイドとまあ同じ形で1期生としてまあ"
+        },
+        {
+          "speechId": 186,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 3390380,
+          "sourceEndMs": 3417658,
+          "text": "2から5人ぐらいなのかな今の僕ら含めて2から5人ぐらい未来図一期生として今後活動していくんじゃないですかねなるほどやることそんな変わんないと思うけどね楽しみですねそうですね日本的には活動が変わるわけではないのはご安心ください僕らが変えたいと思ったらもちろん変えるし僕らが変えたくないところは変えないし"
+        },
+        {
+          "speechId": 187,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 3420040,
+          "sourceEndMs": 3448319,
+          "text": "のはありますより良い方向にね変わらないと意味ないからね意味ないんでねそれはもう本人たちもそうだし見てる側の人もね入ってめっちゃ良くなったなっていう風に思ってもらえるものにしないとね意味ないからねそうね本当にそこらへんは心得ているので今ね渋春レイドくんを応援してる番の人もご安心くださいできることを増やしていきたいですね"
+        },
+        {
+          "speechId": 188,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 3450382,
+          "sourceEndMs": 3478619,
+          "text": "もうあのー東京ドームでの公演だってできるってことっすからねいやまあそうっすね僕はでけぇ0%ではないよ僕とレイトくんが個人で活動してたらほぼほぼほぼ0だろうけど今まあねあの言っちゃえば経験者がいらっしゃるわけなんでここにはいや本当にそう考えるとすげーな急に現実に増してくるそうなんだよできない話じゃないからねできるのよメンバーがすごいのよどうですか白雪レイトさん今の心境は"
+        },
+        {
+          "speechId": 189,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 3480000,
+          "sourceEndMs": 3497444,
+          "text": "気まずいって気まずいもうちょっと追いついてきてないのよ感情が今回の件については嬉しすぎるか嬉しすぎるかこれもうだって一番最初に話もらった時の話とかしていいの?"
+        },
+        {
+          "speechId": 190,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 3497444,
+          "sourceEndMs": 3509386,
+          "text": "いいよいいよ僕あの日たぶんねちゃんと録画してたからたぶん無くすんじゃないかな後から本当にあれ出すときに出そうかなと思っていや本当いやマジで口頭で言うとしばらく前にさ"
+        },
+        {
+          "speechId": 191,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 3510322,
+          "sourceEndMs": 3515966,
+          "text": "寝てたら、急にまた、おじじから大量のLINEが飛んでくるのがね。"
+        },
+        {
+          "speechId": 192,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 3515966,
+          "sourceEndMs": 3516386,
+          "text": "はい。"
+        },
+        {
+          "speechId": 193,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 3516386,
+          "sourceEndMs": 3517166,
+          "text": "そうです。"
+        },
+        {
+          "speechId": 194,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 3517166,
+          "sourceEndMs": 3518787,
+          "text": "知らなかった。"
+        },
+        {
+          "speechId": 195,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 3518787,
+          "sourceEndMs": 3520028,
+          "text": "ちょっと今、ボイちゃん来て!"
+        },
+        {
+          "speechId": 196,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 3520028,
+          "sourceEndMs": 3523490,
+          "text": "もう早くもう、ほんとマジ大事だからマジ早くって言われて。"
+        },
+        {
+          "speechId": 197,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 3523490,
+          "sourceEndMs": 3530134,
+          "text": "いやもうどっちかなーって思って、エーペックスかガチのやつかどっちかなって思った。"
+        },
+        {
+          "speechId": 198,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 3530134,
+          "sourceEndMs": 3539159,
+          "text": "まあ8割エーペックスかなって思いながら行きますね、飛ばして行ったら、サーバー張られて、そこにいるのが、ソラルさん渋春おじじ。"
+        },
+        {
+          "speechId": 199,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 3540126,
+          "sourceEndMs": 3550331,
+          "text": "思ってましてメンバーついに殺されるのかなって思ってそろそろ入ったらレイドくん!"
+        },
+        {
+          "speechId": 200,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 3550331,
+          "sourceEndMs": 3551531,
+          "text": "おめでとう!"
+        },
+        {
+          "speechId": 201,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 3551531,
+          "sourceEndMs": 3568139,
+          "text": "白雪レイドが事務所に所属することになっちゃった俺なのに俺初めて知ったからねそこで自分が所属すること自己報告おめでとうよかったねって言われておめでとう!"
+        },
+        {
+          "speechId": 202,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 3568139,
+          "sourceEndMs": 3569420,
+          "text": "ミライル所属だよ今日から君は"
+        },
+        {
+          "speechId": 203,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 3571070,
+          "sourceEndMs": 3599880,
+          "text": "なんだっけ夢かなって真面目になったけど基本おめでとうしか言わなかったもんね僕らも何も決まってないから箱作ることしか決まってないからおめでとうの連行条件はどういう感じなのとかそれはまあまあとりあえずおめでとうまあまあ言うてねでもメンバーがえぐかったからこれがさおじじ単体とかだったらまたおもちゃにされるんかなみたいな"
+        },
+        {
+          "speechId": 204,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 3600074,
+          "sourceEndMs": 3629820,
+          "text": "の気持ちはいちゃうけど3人集まってたからね同時に今日集まったらなんかまた知ら知らないうちに4人目に増えてたけどああ確かにマフマスさんだけじゃ若干若干ね23日あと加入だったから一瞬ラグがあってね心臓止まるかと思った今日もまたお風呂入ってる時に鬼伝されて今日もそうだよねなんか僕ら4人のグループで運営人側のグループで基本"
+        },
+        {
+          "speechId": 205,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 3630000,
+          "sourceEndMs": 3658299,
+          "text": "話が進んでたからレイド君側にこの進捗が全然見えてなくて気づいたらサイトもできてるしなんか発表配信も今日だしなんなら今から多分1,2時間前だよね電話来て今日発表配信するから出れるみたいな電話が急にシャワー上がったのまたおじいちゃんから鬼電気出てうわ来たーって思って来た怖えーって思いながら出たらこの後だからこの後出てもらうからいきなり事務所としてのあれが怖い感じになってきた"
+        },
+        {
+          "speechId": 206,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 3660260,
+          "sourceEndMs": 3689980,
+          "text": "レイドくん以外はちゃんと定調に扱うんでこのね土台のね関係性があるからだけどいいんだけどね全然聞けば聞くほど面白い入った人もおもちゃにされるわけじゃないんだよ絶対それはしないんですご安心くださいもう応募した人顔が青くならなくて大丈夫ですでもおもちゃにされることで輝く人はあえてねそれはもちろんそういう盛り上げ方もありかもしれない"
+        },
+        {
+          "speechId": 207,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 3691581,
+          "sourceEndMs": 3707772,
+          "text": "俺が聞き受けるよアクルヒの後輩に向けて俺が守るよ未来がおもちゃは分身になるから頑張ろうな応募する人がいたらこの2人がいるのはめちゃくちゃ安心やからね"
+        },
+        {
+          "speechId": 208,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 3720000,
+          "sourceEndMs": 3741494,
+          "text": "誤出の厳しさといういやー本当よ無理じゃんだってその名前を売りましょうと思ってもさ何ができるみたいな本当にねYouTubeに広告回すばいいのTwitterに広告でも出せばいいのじゃないしなんか何なんか有名になりたいけどもっとたくさんの人に見てもらいたいけど何をすれば?"
+        },
+        {
+          "speechId": 209,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 3741494,
+          "sourceEndMs": 3749920,
+          "text": "本当にね真面目に考えるほどわけわかんなくなるからねうーんっていう中でまあもがいてきた我々"
+        },
+        {
+          "speechId": 210,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 3751281,
+          "sourceEndMs": 3778559,
+          "text": "が行き着いた結論は露出がすでに露出してる人と絡むっていうのは非常に大きな効果の一つですもちろんそれだけじゃないからねもちろんねすごい大きな効果がそこにはありますそれはもう約束されてるようなものなのでそれは本当にこのミライズのめちゃめちゃ大きなメリットむしろ他はでもおいおいなのかな一番今言えることって正直運営陣のこの4人が関わってます"
+        },
+        {
+          "speechId": 211,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 3780000,
+          "sourceEndMs": 3809582,
+          "text": "あるとレイド君がいます他はもうあとは多分僕らが何やっていってなんかその生まれた結果に対してじゃあ入ってよかったなとかここがいいねが生まれてくるのであって今今は多分言えるのそんぐらい他も言えるけど多分言っても薄っぺらいじゃないけどなんかね分かりやすくないかなとは思ううーんじゃあ僕らそれぞれが想像するようなやりたいこととかも大体やれるようにね"
+        },
+        {
+          "speechId": 212,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 3811234,
+          "sourceEndMs": 3839338,
+          "text": "できるはず10年以上やってきてるからこの中でやってきたようなことって全部できると思ってもらって大丈夫だし存在に同じような悩みを抱えながらやってきてるからちゃんと大事にちゃんと大事にできると思いますそれぞれがどんなことを担当するのかとかも言っておきますか確かに一応モチベ上がりそうなことを"
+        },
+        {
+          "speechId": 213,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 3842019,
+          "sourceEndMs": 3868722,
+          "text": "マネジメント周りとかをおじじさんもうなんかその辺詳しくいくまあいいけどなるほどね無限の人脈を使って手厚くやってくれるそうでそこもう準備万端なんだよね準備万端俺と今CRがそこを担当しますCRは一応マネージャーとかもいっぱいいるはいるので"
+        },
+        {
+          "speechId": 214,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 3870674,
+          "sourceEndMs": 3899370,
+          "text": "担当しますうんはいまふまふ案件取ってきますおーつえー案件をもう僕も横縦の繋がりいっぱいあるんで無限に案件を取ってくるのと斜めはありますか斜めあります難しい難しい雑に振ったら雑に振ったら帰ってきたあるらしい強い本当にあと音楽回り"
+        },
+        {
+          "speechId": 215,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 3900106,
+          "sourceEndMs": 3929980,
+          "text": "音楽で困ったり多分音楽オリジナル出したいよとか歌出したいよとかそういうのはもうゼロから完成まで誰かを繋いだり自分が作ったりとかそこは俺もカバーしますサポートしますやります渋春くんレイドさんが新たに入られる方々とみんなで活動していってくれるとそうですね"
+        },
+        {
+          "speechId": 216,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 3931361,
+          "sourceEndMs": 3958819,
+          "text": "主にはそんな感じのマネジメント周りと音楽関係とか案件とかとあとは最後の実際の活動ですね実際の活動が基本僕とレイド君がメインになるのかな頑張りますもちろんでも実際の活動も別になんだろうな僕らが突き切れて介護するわけじゃないからそこは勘違いしてはいけない僕らは僕らの活動をやっていくので基本的に"
+        },
+        {
+          "speechId": 217,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 3960560,
+          "sourceEndMs": 3989980,
+          "text": "馬が合うとかすごい相性がいいとかあれば僕らに引きずり込むこともあるだろうけど別に一律全員引きずり込むわけではないしもちろん逆に一律全員引きずり込まないわけではないその辺はもうなんか実際に僕たちと一緒にいろいろやってみてその人に合うやり方があるだろうから基本的に手厚いサポートはありますはいらしいです何も知らない男しれびきでいる本当に何も知らないので"
+        },
+        {
+          "speechId": 218,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 3990000,
+          "sourceEndMs": 3990921,
+          "text": "ラルシャ?"
+        },
+        {
+          "speechId": 219,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 4020580,
+          "sourceEndMs": 4046798,
+          "text": "イベントだったりとか案件取ってきたりとかもうちでもやったりいろいろグッズだったりとか動画だったりとか音楽周りだったりとかいろいろ活動の中でやってきたようなことはサポートするしあとレイド君と歌ってみたコラボもします今聞いた僕も今聞いたわ"
+        },
+        {
+          "speechId": 220,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 4051442,
+          "sourceEndMs": 4054964,
+          "text": "歌ってみたなんてやったことないんだけどが、頑張ります!"
+        },
+        {
+          "speechId": 221,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 4054964,
+          "sourceEndMs": 4056005,
+          "text": "ほんとに?"
+        },
+        {
+          "speechId": 222,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 4056005,
+          "sourceEndMs": 4056245,
+          "text": "やる?"
+        },
+        {
+          "speechId": 223,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 4056245,
+          "sourceEndMs": 4057146,
+          "text": "マジでやる?"
+        },
+        {
+          "speechId": 224,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 4057146,
+          "sourceEndMs": 4079980,
+          "text": "やりなよ、やりなよレイドくんの歌は隠した牙でしょもったいないよ、使ってないのはやばい緊張する今からそれが一番やったことないことが一番緊張するまあでもなんかそういう歌ってみた周りだったりのねサポートとかももちろんできるんでまあ確かにこれ出せないのはもったいなすぎるんで"
+        },
+        {
+          "speechId": 225,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 4080000,
+          "sourceEndMs": 4104716,
+          "text": "そういうやりたいことを叶えていきたいなと思っております素晴らしい歌います早速夢が一つ叶ったということよろしいかと未来図急に降って湧いた夢が夢叶えたななんかねこういうこともあるよね話はね今トレンドに入ってるからどの辺が入ってるの?"
+        },
+        {
+          "speechId": 226,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 4104716,
+          "sourceEndMs": 4109740,
+          "text": "これを機にTwitterのプロフィールに"
+        },
+        {
+          "speechId": 227,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 4110042,
+          "sourceEndMs": 4111763,
+          "text": "入れていいか?"
+        },
+        {
+          "speechId": 228,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 4111763,
+          "sourceEndMs": 4114245,
+          "text": "確かになんて入れる?"
+        },
+        {
+          "speechId": 229,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 4114245,
+          "sourceEndMs": 4117927,
+          "text": "みんな確かになんて入れよう?"
+        },
+        {
+          "speechId": 230,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 4117927,
+          "sourceEndMs": 4135357,
+          "text": "ミライズ運営ちなみに応募数1350終わったどういうこと?"
+        },
+        {
+          "speechId": 231,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 4135357,
+          "sourceEndMs": 4137478,
+          "text": "見れないラインがだんだん近づいてきてる"
+        },
+        {
+          "speechId": 232,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 4144403,
+          "sourceEndMs": 4146644,
+          "text": "ミライズ運営でいいの?"
+        },
+        {
+          "speechId": 233,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 4146644,
+          "sourceEndMs": 4149726,
+          "text": "僕はミライズ運営兼タレントですね"
+        },
+        {
+          "speechId": 234,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 4170766,
+          "sourceEndMs": 4214189,
+          "text": "でもリアルユーチューバーにはいるからねやっぱヒカ様がいるんだよヒカ様なんすよヒカ様ポジションだよねそう思うね渋いハルハルキンですブンブンハローブイチュアハルキンっていう怒られろそろそろこの規模ならそろそろ怒られるいや過労死で繋がりあるから怒られないはずあそっかでやつでなずるいな怒られたらLINEだよ悩まれるぐらいの関係性してるから大丈夫素晴らしいダメだ強すぎるまずちょっとサイドなんですけど俺にまた何件かDMが来てるんであくまでCRとは別物なんで本当にそうですね"
+        },
+        {
+          "speechId": 235,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 4230002,
+          "sourceEndMs": 4258898,
+          "text": "CRの現状所属してるラスとかモンドがVTuberになるわけでもないです急にねいやでもね思ってる人居そう一部さっきもあれだけどソラマフがVTuberになって所属すんのとかマジで思ってる人一部居そうだからそういうことじゃないです僕たちはサポートしているですうん"
+        },
+        {
+          "speechId": 236,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 4269125,
+          "sourceEndMs": 4284869,
+          "text": "運営権所属されるのっていう方がカッコよすぎて3度目ぐらいしちゃったかっこいいなマジそれいいなもっとかっこいい言い方できないかなめちゃめちゃ強そうな感じスーパーバイザーとかにしとこうわからないけどスーパーバイザー"
+        },
+        {
+          "speechId": 237,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 4292043,
+          "sourceEndMs": 4319820,
+          "text": "そういうのなんかないの俺もかっこいいの書きたいおめえは未来部所属タレントだろ嘘でもいいから書きたいってレイド書いたら事務所入ることになりました何でもやりますって確かに1.6万フォロワーいんのもう早いすげーの早っほんとだすごいねレイド君追い残すとりあえず注目してもらってね"
+        },
+        {
+          "speechId": 238,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 4320186,
+          "sourceEndMs": 4346578,
+          "text": "いやっあれ日笠もフォローしてくれてるじゃんえええええいらいずほんとさ情報を拾うの早い早すぎるな彦金さんのアンテナの披露してくださってありがとうございます成功するっていうことなんだろうな彦金さんじゃあ誘おうか興味あるんだったらミライブ初国タレントヒカキン"
+        },
+        {
+          "speechId": 239,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 4350000,
+          "sourceEndMs": 4359246,
+          "text": "一番勝ち誰も断れないよしかさま未来図所属バカなフリして聞いてみる?"
+        },
+        {
+          "speechId": 240,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 4359246,
+          "sourceEndMs": 4377779,
+          "text": "バカなフリして絶対やんわり断るバカなフリしてバカすぎるなおだのぶくんも応募してくれてるんだするな"
+        },
+        {
+          "speechId": 241,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 4381181,
+          "sourceEndMs": 4406958,
+          "text": "探し出して省いておいてくれ頼むからウイルスだって話すことは話せたわとりあえず最低限話したかったことはここまですけどコメントで本当に疑問持ってる人多いと思うんでその辺の細かい疑問一応僕ら側でできる限り自分に"
+        },
+        {
+          "speechId": 242,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 4410080,
+          "sourceEndMs": 4439700,
+          "text": "なるだろうなって思って多分このサイトって作ったと思うんですけどなんかさっき細かいところいろいろあったけどそんな感じでこう多分なんていうんですかね細かいところで分かんないところってのはたくさんあると思うんでその辺を解消するかいせっかくなんかここの4人が運営が4人がとりあえずパッて集まってリアルタイムでなんか質疑応答できる場面って実際あまり作れないと思うんでそれはちょっとできる限りやっておきたいなっていうのがありますんで"
+        },
+        {
+          "speechId": 243,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 4441023,
+          "sourceEndMs": 4451629,
+          "text": "コメントとかでもしあれば色々聞いてもらえるといいのかなと多分その疑問解消がレイドくんの今後の疑問解消にもつながると思うから本当に頼みますマジで"
+        },
+        {
+          "speechId": 244,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 4470000,
+          "sourceEndMs": 4496057,
+          "text": "んだったら取れると思うけどなんか想定してるのはやっぱりあの配信メイン今のv界隈のメタって言えばいいのか配信メインでできれば動画も上げていきたいよねみたいなのが多分一番僕らが想定している活動になるかなもちろんなんかね歌だけやっていきたいですとかがあってすげー歌の才能があるんだったらもそれもいいと思うしただまぁねまあ求められているのってやっぱりさ歌とさ"
+        },
+        {
+          "speechId": 245,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 4500022,
+          "sourceEndMs": 4527537,
+          "text": "音楽系って結構V界隈においてメインになるところっていうか求められてるところな気がするんだけどそこは確実にサポートできるそうですねゲーム実況とかゲームの配信の動画を作りたいっていうのもシェアルではサポートができるからそういうのを求めてる人にも一応そういったサービスは提供できるかなっていう感じかなそうですね"
+        },
+        {
+          "speechId": 246,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 4533422,
+          "sourceEndMs": 4559800,
+          "text": "なんか別に何でもなんかこれができないといけないんですかってのは特にないと思うしなんだろうな難しいけどまあそれぞれ自分でも多分わかると思うんですけどなんか相性活動にも相性が正確な相性とかあるだろうしなんかそういうところに僕らできるだけ寄り添いますよ"
+        },
+        {
+          "speechId": 247,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 4560002,
+          "sourceEndMs": 4587879,
+          "text": "っていうのはあったりしますしそこになんだろうねそれこそだけど今所属しているのがそれこそAPEXが上手いはるちゃんとだからAPEXがそれこそマスターとかプレゼンターが上手くなきゃいけないなんてことも一切ないしむしろAPEXが上手くなければいけないわけでもないしPCがないといけないんですかPCなくて大丈夫ですよ"
+        },
+        {
+          "speechId": 248,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 4590422,
+          "sourceEndMs": 4619506,
+          "text": "めちゃくちゃリアルな話すると機材はあるに越したことはないけどでもなくても撮りたいっていうかこの人入ってほしいっていう面白いなって思うそう人がいたら全然そこは関係ない配信環境とかはもちろん整えることは当たり前なので全然そういうのがない人はこちらで整えるので本当に一番大事なのは本当に僕たちが"
+        },
+        {
+          "speechId": 249,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 4621443,
+          "sourceEndMs": 4649980,
+          "text": "ぜひ所属してほしいなと思う光る何かその何かはそれぞれあるものだからゲームでも歌でも何かしら僕たちの近世に引っかかるような何かがあればそうですね元々のものがあった方がいいと思うけどね光る何かを表現する何かを持ってないといけないからiPhone1個でそれを表現するのとPCあって表現するのと多分PCある方ができること増えるからそうだねあった方が才能を見つけてもらいやすいと"
+        },
+        {
+          "speechId": 250,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 4650242,
+          "sourceEndMs": 4678970,
+          "text": "思うよ実際目も止まりやすいしねそう機材がないからはい君ダメとかはやんないけどなんかじゃあ例えばそれこそ応募予行の人たちに動画とかもあると動画とかポートフォリオって言えばいいのかななんか自分が何できるかっていうのを表現する表現したものを送ってくださいっていう場所はあると思うんだけどそういうものはやっぱり大事だからそこがていうか一番大事だから別に年齢が大事とか性別が大事とかそんなんじゃなくて結局その人がどれだけ面白いかとか"
+        },
+        {
+          "speechId": 251,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 4680266,
+          "sourceEndMs": 4703143,
+          "text": "そういうところの軸の方がすごい大事なのでなんか例えば20年前のパソコンポンコツパソコンで一生懸命作っためちゃくちゃいいプロフィールの動画だったりがあったとしてじゃあその入ってもらおうってなった時にその20年前のパソコンじゃさすがに無理だからこちらで新しいのを支給して頑張りましょうねってなるそんぐらいは全然ねうんそうですね"
+        },
+        {
+          "speechId": 252,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 4710959,
+          "sourceEndMs": 4739840,
+          "text": "いろいろやっぱりメリットデメリットじゃない売り出すその人の良さと悪さっていうとあれだけどあると思うけどめっちゃ尖っててめっちゃ輝くものがあったら多分来てほしいってなると思います確かになちなみに今2000人を超える方がある"
+        },
+        {
+          "speechId": 253,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 4740374,
+          "sourceEndMs": 4768780,
+          "text": "そうです1時間経ってないですからね多分マジでそこから10倍とかになると思う勝手な感覚だけど1週間ぐらい1週間か1ヶ月ぐらいは多分ある程度応募見る機会になるとは勝手に思ってたんだけどすごい件数になってそうその頃何万にはなってるだろうね2万来てたら1人5000件ずつ見てそう僕らがもちろん"
+        },
+        {
+          "speechId": 254,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 4770294,
+          "sourceEndMs": 4797620,
+          "text": "二次候補に挙げる人たちを誰が見るって僕らが見るから誰が見るんだそう僕ら自身が見るっていう僕ら自身が見るレイドも見たいでしょちゃんと見れるようにしてあるんだよねレイドも見たいでしょあ見たいんだね人手が一人増えた助かるな本当に怖いってこの事務所あれレイド君さっき引用リピートで何か言ったっけ思い出せないわ思い出せない何か言ったっけ何でもやります実務実務が初"
+        },
+        {
+          "speechId": 255,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 4800334,
+          "sourceEndMs": 4829920,
+          "text": "急に1万ぐらい見ればいいですか助かる5万見れるこれですごい数応募してくれて嬉しいことだけどね本当に普通に見たいな普通に同僚になるからねすげーもぐらVRさんがまとめてくださってる早いな仕事VKのニュースを取り扱ってるサイト"
+        },
+        {
+          "speechId": 256,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 4830702,
+          "sourceEndMs": 4859106,
+          "text": "aアイですまあでもそんな感じかなそうですね相手強化すことが話したんじゃないでしょうかまた多分個々の配信とかで今後2もちょいちょい拾ってことも質問とかあればわかんないけどうんはいはいはいじゃあしますかそんな感じでよろしいですからだらだら長くやってもねまあまあだから"
+        },
+        {
+          "speechId": 257,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 4860478,
+          "sourceEndMs": 4887489,
+          "text": "あのまあ質問とかは多分あのなんだろう届いたものわかんねーけどホームページとかにもしかしたらまとめたりするかなぁq&aは増やしたいよねちょっと実際のその僕ら側で想定しているものより実際疑問やっぱ持たれている場所ってすごい多いからその状態を状況を見ながらそういうものちょっと追加していくかもしれないですねはいはいはいそんな感じでこんな感じですかね"
+        },
+        {
+          "speechId": 258,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 4890622,
+          "sourceEndMs": 4918319,
+          "text": "社長はもうそれぞれ4人ですよここ4人が社長よ社長1日産4なんかそのこの4人は本当にそのそれそれぞれそのなんだろう言い方だけど同じ立場というか本当にこの4社は同じ存在でもあるから誰がなんだろうな誰が一番代表とかっていうのはもう本当特にないないねいいなぁ"
+        },
+        {
+          "speechId": 259,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 4921903,
+          "sourceEndMs": 4948899,
+          "text": "なんか欲しがってる人いるな今のところこの5人中1人だけなんかいるけど4人増えたら気になるな急に上司4人増えた会社の体系いかれてんだろ上4の下1とかいうなんかピラミッドぶっ壊れてるレイド君が今後何するかによってこの会社の抑制決まるからやっぱ"
+        },
+        {
+          "speechId": 260,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 4950000,
+          "sourceEndMs": 4978279,
+          "text": "なんとかしてくれないって今なかなかないよこんな逆ピラミッドの会社逆に偉い説ある上4人下1人って俺何もしないよって言った瞬間僕ら困るもん確かにもう俺何もしないよって確かに本当だったらねそこに他にもどうせ10人20人いるから会社っていうのギリギリ回ってくるんだろうけどそうだ俺何もしないよって言った瞬間誰も回らなくて誰も何もできなくなる俺が拗ねたら4人で手厚く看病してくれる"
+        },
+        {
+          "speechId": 261,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 4982784,
+          "sourceEndMs": 4992329,
+          "text": "ガチで言いにくい話とかは俺とかが聞くガチでおじじとかに対する不満が出た時は俺が聞く"
+        },
+        {
+          "speechId": 262,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 5010034,
+          "sourceEndMs": 5039320,
+          "text": "活動に関して分かんないけどマジでこれだるいみたいなのがあったら直に経営者側に文句言えるっていうのはあるよねそれを解決するの仕方が一方向じゃなくて四方向あるからどうしてもあるあるなのが演者側で不満があって担当のマネージャーさんとかに相談してもマネージャーさんからもう一個上があってさらにもっと上とか上に本当の経営者さんっているわけだからそこまで行き届きにくいんだけど僕らのね"
+        },
+        {
+          "speechId": 263,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 5040146,
+          "sourceEndMs": 5069582,
+          "text": "ところ規模がまあどこまでいくかもちろんわかんないから今後一生とは言えないけど少なくともあの一期生に来て一期生とかの間は絶対僕らが直に聞けるはずだからねそうですねどうしこいそこは安心できるんじゃないでしょうかはいはい何でも相談しておくれ何でも相談してくださいということでよっしゃはいじゃあ配信終わりますかそうですねはい以上でちょっと"
+        },
+        {
+          "speechId": 264,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 5070118,
+          "sourceEndMs": 5099720,
+          "text": "いろいろものがあると思いますがそういうものは受け付けていきますのでまとめていきますので何かある人は僕らも大変だなと言っていますしばらくは発表が一番大変だと思って発表してからの方が大変だなと気づいちゃったどしどし興味ある人は応募していただければと思いますその中に引っかかる人がいそうなのではい以上で配信を締めたいと思いますよろしくお願いします"
+        },
+        {
+          "speechId": 265,
+          "sourceVideoId": "SGQqVJXsNNE",
+          "sourceStartMs": 5100040,
+          "sourceEndMs": 5109105,
+          "text": "皆様よろしくお願いしますたくさんの応募をお待ちしておりますこれからの未来もよろしくお願いしますよろしくお願いしますよろしくお願いしますお疲れ様です"
+        }
+      ]
+    }
+  ],
+  "outputContract": {
+    "format": "json_only",
+    "schema": {
+      "themes": [
+        {
+          "themeId": "string",
+          "title": "string",
+          "summary": "string",
+          "whyItCanBeClipped": "string",
+          "sourceVideoId": "string",
+          "sourceStartMs": "number",
+          "sourceEndMs": "number",
+          "supportingSpeechIds": [
+            "number_or_range_string"
+          ],
+          "representativeQuote": "string",
+          "riskNotes": [
+            "string"
+          ]
+        }
+      ]
+    }
+  }
+}
+```

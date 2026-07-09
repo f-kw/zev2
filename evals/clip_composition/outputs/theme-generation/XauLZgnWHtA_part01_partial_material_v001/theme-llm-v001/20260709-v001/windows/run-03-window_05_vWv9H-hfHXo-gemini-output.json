@@ -1,0 +1,45 @@
+{
+  "themes": [
+    {
+      "themeId": "partial_theme_1",
+      "title": "Gemini回答が途中で切れたため、タイトルは完全には取得できなかった。",
+      "sourceStartMs": 13433939,
+      "sourceEndMs": 13505000,
+      "representativeQuote": "今はクリスタルガイザーの水かクリスタルガイザークリスタルガイザー強そう強そう"
+    },
+    {
+      "themeId": "partial_theme_2",
+      "title": "Gemini回答が途中で切れたため、タイトルは完全には取得できなかった。",
+      "sourceStartMs": 13676000,
+      "sourceEndMs": 13714850,
+      "representativeQuote": "勝手に植え付けられたキャラを守る必要ないんだお金入ったら食うだろそれ"
+    },
+    {
+      "themeId": "partial_theme_3",
+      "title": "Gemini回答が途中で切れたため、タイトルは完全には取得できなかった。",
+      "sourceStartMs": 13820640,
+      "sourceEndMs": 13849700,
+      "representativeQuote": "自分にでは大丈夫大丈夫っつってんのね気づいたら疲れてた体がボロボロに…こういう時に優しい言葉かけられるとポロポロ泣いちゃうんだ"
+    }
+  ],
+  "extractionStatus": {
+    "status": "partial_themes_extracted_from_answer_text",
+    "reason": "Gemini回答JSONが完結していないため、回答本文に出ていたテーマ候補だけを採点候補として抽出した。",
+    "extractedThemeCount": 3
+  },
+  "runAt": "2026-07-09T12:23:28+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_05_vWv9H-hfHXo",
+    "windowSourceVideoId": "vWv9H-hfHXo",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/XauLZgnWHtA_part01_partial_material_v001/theme-llm-v001/20260709-v001/windows/window_05_vWv9H-hfHXo-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/c62deedf456d1b9d?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"身の回りのもので適当なペットの名前決め\",\n      \"summary\": \"新しく手に入れた動物（またはモブ）の名前をリスナーに相談し、身の回りにある「クリスタルガイザー」から名付けようとして盛り上がる場面。\",\n      \"whyItCanBeClipped\": \"名前決めのフリから「クリスタルガイザー」という具体的な商品名が出てきて、強そうという結論に至る一連の流れが単独のトークとして綺麗に成立しているため。\",\n      \"sourceVideoId\": \"vWv9H-hfHXo\",\n      \"sourceStartMs\": 13433939,\n      \"sourceEndMs\": 13505000,\n      \"supportingSpeechIds\": [\n        \"1425-1431\"\n      ],\n      \"representativeQuote\": \"今はクリスタルガイザーの水かクリスタルガイザークリスタルガイザー強そう強そう\",\n      \"riskNotes\": [\n        \"何のモブに対して名前を付けているのかの視覚的情報がないとフリが弱くなる可能性がある。\"\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"勝手に植え付けられた貧乏キャラを守らない配信者\",\n      \"summary\": \"キャラクターを忘れて普通に肉を食べていることに対してツッコミが入り、お金が入ったら肉を食うだろと開き直って笑い合う場面。\",\n      \"whyItCanBeClipped\": \"「勝手に植え付けられたキャラを守る必要ない」「お金入ったら食うだろ」というメタ的かつユーモラスな本音トークが展開され、笑い（シグナル）を誘う見どころになっているため。\",\n      \"sourceVideoId\": \"vWv9H-hfHXo\",\n      \"sourceStartMs\": 13676000,\n      \"sourceEndMs\": 13714850,\n      \"supportingSpeechIds\": [\n        \"1452-1455\"\n      ],\n      \"representativeQuote\": \"勝手に植え付けられたキャラを守る必要ないんだお金入ったら食うだろそれ\",\n      \"riskNotes\": [\n        \"誰が貧乏キャラとされていたのか、前後の関係性や文脈が少し必要。\"\n      ]\n    },\n    {\n      \"themeId\": \"theme_003\",\n      \"title\": \"優しい言葉をかけられるとポロポロ泣いちゃう限界状態\",\n      \"summary\": \"マイクラの田舎の風景に癒され、自分が気づかないうちに体がボロボロに疲れていたかもしれないと語り、優しくされると泣いてしまうと冗談交じりに話す場面。\",\n      \"whyItCanBeClipped\": \"日頃の疲れを自覚する配信者の人間味が垣間見えるエピソードであり、リスナーや共演者とのちょっとした癒やし系の掛け合いとしてまとまっているため。\",\n      \"sourceVideoId\": \"vWv9H-hfHXo\",\n      \"sourceStartMs\": 13820640,\n      \"sourceEndMs\": 13849700,\n      \"supportingSpeechIds\": [\n        \"1464-1465\"\n      ],\n      \"representativeQuote\": \"自分にでは大丈夫大丈夫っつってんのね気づいたら疲れてた体がボロボロに…こういう時に優しい言葉かけられるとポロポロ泣いちゃうんだ\",\n      \"riskNotes\":"
+}

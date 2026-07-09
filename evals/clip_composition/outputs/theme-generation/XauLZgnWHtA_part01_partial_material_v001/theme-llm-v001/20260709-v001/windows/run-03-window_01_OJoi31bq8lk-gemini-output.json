@@ -1,0 +1,38 @@
+{
+  "themes": [
+    {
+      "themeId": "partial_theme_1",
+      "title": "Gemini回答が途中で切れたため、タイトルは完全には取得できなかった。",
+      "sourceStartMs": 467240,
+      "sourceEndMs": 607760,
+      "representativeQuote": "明日さあうちのお仕事で会うじゃんその時負けた方が飲むヨーグルト買って行こうあれな"
+    },
+    {
+      "themeId": "partial_theme_2",
+      "title": "Gemini回答が途中で切れたため、タイトルは完全には取得できなかった。",
+      "sourceStartMs": 1359600,
+      "sourceEndMs": 1437380,
+      "representativeQuote": "ヒットソールえっ有名じゃん3組の生徒会長だよ知らないの"
+    }
+  ],
+  "extractionStatus": {
+    "status": "partial_themes_extracted_from_answer_text",
+    "reason": "Gemini回答JSONが完結していないため、回答本文に出ていたテーマ候補だけを採点候補として抽出した。",
+    "extractedThemeCount": 2
+  },
+  "runAt": "2026-07-09T12:07:40+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_01_OJoi31bq8lk",
+    "windowSourceVideoId": "OJoi31bq8lk",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/XauLZgnWHtA_part01_partial_material_v001/theme-llm-v001/20260709-v001/windows/window_01_OJoi31bq8lk-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/4206e4f2388c62d6?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"同期フミとの明日のお仕事と飲むヨーグルトを賭けたデスマッチ\",\n      \"summary\": \"星川がデビューも遊戯王デビューも同期であるフミを対戦相手に召喚。明日のお仕事で会う際、負けた方が「ストローを刺して途中まで飲みかけのやつを冷蔵庫に入れておかないこと」を条件に飲むヨーグルトを奢るという、プライベート感のある罰ゲームを賭けて命がけの勝負が始まります。\",\n      \"whyItCanBeClipped\": \"同期ならではの気心の知れた掛け合いと、具体的な明日のお仕事、ユニークな飲むヨーグルトのルールというフリから対戦開始までが1つのパッケージとして綺麗にまとまっており、視聴者の興味を引きやすいため。\",\n      \"sourceVideoId\": \"OJoi31bq8lk\",\n      \"sourceStartMs\": 467240,\n      \"sourceEndMs\": 607760,\n      \"supportingSpeechIds\": [\n        \"22-26\"\n      ],\n      \"representativeQuote\": \"明日さあうちのお仕事で会うじゃんその時負けた方が飲むヨーグルト買って行こうあれな\",\n      \"riskNotes\": [\n        \"罰ゲームの条件である飲みかけヨーグルトのやり取りが少し細かいのでテロップなどの補足があるとより伝わりやすい\"\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"カンニングを試みるも『ヒートソウル』を生徒会長と勘違いする星川\",\n      \"summary\": \"フミとの第1戦を終え、残機デッキの正しい回し方が分からなくなった星川がリスナーにコメントでのカンニングを要求。リスナーから「ヒートソウル」を出すよう指示されるも、星川はそれを「3組の生徒会長」と勘違いし、自分がメモに「デコードトーカー」という苗字（別名）で記載していたことに気づくコミカルな一幕です。\",\n      \"whyItCanBeClipped\": \"星川の独特なワードセンス（カード名を人の名前に例える）と、リスナーのコメントを頼りにカンニングしようとするお茶目な姿が凝縮された笑える場面として成立しているため。\",\n      \"sourceVideoId\": \"OJoi31bq8lk\",\n      \"sourceStartMs\": 1359600,\n      \"sourceEndMs\": 1437380,\n      \"supportingSpeechIds\": [\n        \"83-87\"\n      ],\n      \"representativeQuote\": \"ヒットソールえっ有名じゃん3組の生徒会長だよ知らないの\",\n      \"riskNotes\":"
+}

@@ -1,0 +1,8723 @@
+# theme_generation_prompt_v001
+
+あなたは元配信から切り抜きテーマ候補を作る。
+
+## 目的
+
+元配信の文字起こしだけを見て、切り抜きとして成立しそうなテーマ候補を出す。最終的な切り抜き区間を確定する担当ではない。区間選択は後段のcompositionが行う。
+
+## 入力の読み方
+
+- 入力は元配信単体から得られる情報だけである。
+- 切り抜き動画、expected、照合結果、人間確認メモ、既存切り抜きタイトルは入力に含まれない。
+- `sourceTitle` は配信全体の文脈を読む補助情報として使う。
+- `segments` は元配信内の発話で、`speechId`、時刻、本文を持つ。
+- 入力が長尺配信の一部窓である場合は、その窓の範囲内で判断し、配信全体を見たように書かない。
+- 笑い、沈黙、音量変化などの非発話シグナルが入力にある場合は補助情報として扱う。本文より強い根拠として扱わない。
+
+## 禁止
+
+- 切り抜き動画や正解区間を知っている前提で書かない。
+- 元配信本文にない場面や反応を作らない。
+- 秒数だけを根拠に候補を作らない。
+- 「雑談」「面白い場面」のように広すぎて何を切るか決まらないテーマを出さない。
+- 既存切り抜きのタイトル風に盛った表現を、本文根拠なしで作らない。
+
+## 判断方針
+
+- 候補は、元配信内の発話から見どころが説明できる具体的なテーマにする。
+- 単独で視聴者に伝わるフリ、展開、反応、結論がある場面を優先する。
+- 同じ話題が離れた場所で補足される場合は、同じテーマ候補の根拠として複数の発話範囲を持ってよい。
+- 根拠範囲は、候補テーマを説明するために必要な発話だけにする。配信全体や長い雑談を大きく囲わない。
+- 迷う候補は `riskNotes` に弱点を書く。
+
+## 出力
+
+JSONだけを返す。説明文やMarkdownを付けない。
+
+`requestedThemeCount` が指定されている場合は、その件数を上限にする。良い候補が足りない場合は、無理に埋めない。
+
+```json
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "短いテーマ名",
+      "summary": "何が見どころなのか",
+      "whyItCanBeClipped": "切り抜きとして成立すると判断した理由",
+      "sourceVideoId": "元動画ID",
+      "sourceStartMs": 123000,
+      "sourceEndMs": 153000,
+      "supportingSpeechIds": ["12-47", 52, "55-60"],
+      "representativeQuote": "根拠になる短い本文",
+      "riskNotes": [
+        "前後文脈が必要"
+      ]
+    }
+  ]
+}
+```
+
+## supportingSpeechIds
+
+- 連続する発話IDは `"12-47"` のような範囲文字列で返す。
+- 不連続な発話IDは、個別の数値として同じ配列に入れる。
+- 連続範囲と個別IDを混ぜてよい。
+- 根拠に使っていない発話IDを含めない。
+
+## 時刻
+
+- `sourceStartMs` は根拠発話範囲の最初の時刻にする。
+- `sourceEndMs` は根拠発話範囲の最後の時刻にする。
+- 正解境界を当てる評価ではないが、後段の機械判定でexpected区間との重なりを見るため、候補根拠の範囲を本文に基づいて正しく出す。
+
+## 入力JSON
+
+```json
+{
+  "task": "source_only_theme_generation",
+  "generationSystem": "theme-llm-v001",
+  "promptVersion": "theme_generation_prompt_v001",
+  "requestedThemeCount": 8,
+  "inputPolicy": {
+    "sourceOnly": true,
+    "noClipInfo": true,
+    "noExpected": true,
+    "noAlignment": true,
+    "noHumanReverseTheme": true
+  },
+  "windowing": {
+    "applied": true,
+    "mode": "speech-time",
+    "windowId": "window_01_OJoi31bq8lk",
+    "reason": "未分割入力でEdgeレンダラが高負荷化して戻らなかったため、発話境界を保った時間窓へ分割する。",
+    "maxPromptBytes": 340000,
+    "overlapMs": 180000,
+    "sourceVideoId": "OJoi31bq8lk",
+    "sourceStartMs": 96110,
+    "sourceEndMs": 13637460
+  },
+  "sources": [
+    {
+      "sourceVideoId": "OJoi31bq8lk",
+      "sourceUrl": "https://www.youtube.com/live/OJoi31bq8lk?feature=share",
+      "transcriptKind": "youtube_auto_caption",
+      "language": "ja",
+      "rawSegmentCount": 19702,
+      "promptSegmentCount": 1226,
+      "segmentCompaction": {
+        "method": "source-only transcript segments concatenated until sentence-ending punctuation",
+        "scoringRole": "none",
+        "note": "読みやすさのための表現変換であり、expected、切り抜き、照合結果、人間確認メモは使わない。"
+      },
+      "segments": [
+        {
+          "speechId": 1,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 96110,
+          "sourceEndMs": 99180,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 2,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 107140,
+          "sourceEndMs": 110180,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 3,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 146099,
+          "sourceEndMs": 157819,
+          "text": "理解度が前回から増えてないとそんなことないけどね別にいっぱいぐらいからちょっとすいません寝起きで"
+        },
+        {
+          "speechId": 4,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 158700,
+          "sourceEndMs": 167780,
+          "text": "おはようございますついにこの日が来てしまったみんな龍角さん舐めるか"
+        },
+        {
+          "speechId": 5,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 171120,
+          "sourceEndMs": 174800,
+          "text": "厳しく行くぞいえば優しく"
+        },
+        {
+          "speechId": 6,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 178220,
+          "sourceEndMs": 192620,
+          "text": "お昼の配信が終わった後にお昼寝してましたやっぱ今日のこの瞬間のためにちょっと力貯めとかないとと思って今日命がかかってるからね星川の"
+        },
+        {
+          "speechId": 7,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 193500,
+          "sourceEndMs": 211040,
+          "text": "今日よは命がかかってんだということでめちゃくちゃ久しぶりになります34かヶ月ぶりなデュエリストに勝負をふっかけてきたと思います"
+        },
+        {
+          "speechId": 8,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 212819,
+          "sourceEndMs": 219319,
+          "text": "闇のゲームする今日は闇のゲームしてるなんて上にバレたら怒られてしまう"
+        },
+        {
+          "speechId": 9,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 220140,
+          "sourceEndMs": 230360,
+          "text": "これはにじさんじの運営さんには黙っといてくれうんでも今日はそれくらいのつもりで人と戦っていく星川"
+        },
+        {
+          "speechId": 10,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 234799,
+          "sourceEndMs": 252260,
+          "text": "前回もねあの何人かと23戦ずつ勝負して行っんたで今回もそんな感じでやりたいと思います優しいよねみんな星川くれなんかと遊んでて"
+        },
+        {
+          "speechId": 11,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 252900,
+          "sourceEndMs": 281360,
+          "text": "遊戯王を初めて半年経って星川が遊戯をこんだけ続けられてるのっもうてもちろん遊戯王が楽しいのもあるけど遊んでくれる友達がいっぱいいるからっいうてのめちゃくちゃでかいわうーん本当に優しいみんなまぁそんな優しい友達を今日は容赦なくボコって凹ませていきたいと思いますなんて言ったってね知ってますか皆さん残機デッキというものを"
+        },
+        {
+          "speechId": 12,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 281940,
+          "sourceEndMs": 287780,
+          "text": "ご存知ですかざんきデッキ化け物ですこちら"
+        },
+        {
+          "speechId": 13,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 288060,
+          "sourceEndMs": 349880,
+          "text": "使ったら友達を失います現に星川は同期の文と山に縁を切られました一瞬[音楽]そうでまだ半年で欲しく有給を始めてはいこの化け物デッキを使って今日は友達を失いに行く紙の方の環境デッキそう環境デッキらしいうん目まいなったらようこそまただ1個言わせてもらうと固定コメントにもあるけどあの理解度が20%しかないので100%見せれます100パーミスるけどそれでも勝てることあるから相当強いティアラメンツとかねまさか使ってくる人い今日ないと思うからうんそうなんでのさ今日遊ぼうって声かけた人の中でティアラメンツとか使ってこないよねっ確認てしてきた人いたからなわざわざやっぱそんぐらいあれはダメだよね"
+        },
+        {
+          "speechId": 14,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 350720,
+          "sourceEndMs": 359240,
+          "text": "まさかいないでしょさすがにそんな山じゃないんだから"
+        },
+        {
+          "speechId": 15,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 359820,
+          "sourceEndMs": 375080,
+          "text": "皆さん織姫星遊戯王の方もどうかよろしくお願いします大和ふみ一緒に半年間て頑張っきておりました感じでまあ早速1人目召喚するか本当に"
+        },
+        {
+          "speechId": 16,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 381180,
+          "sourceEndMs": 383780,
+          "text": "本当に"
+        },
+        {
+          "speechId": 17,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 384120,
+          "sourceEndMs": 393319,
+          "text": "ゆるく遊びたいですって声かけたけどガチでボコりいるに来てまずはボイチャに待機"
+        },
+        {
+          "speechId": 18,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 394620,
+          "sourceEndMs": 405860,
+          "text": "まあやっぱ1人目はね一人目はさすがにあの人かなみたいなとこあるけどうん特殊召喚"
+        },
+        {
+          "speechId": 19,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 405919,
+          "sourceEndMs": 410660,
+          "text": "こんちゃ完成"
+        },
+        {
+          "speechId": 20,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 427819,
+          "sourceEndMs": 453259,
+          "text": "うざかっのたで切りました呼ぶ人間違えました今のはですねまあ一人目なんか自己紹介まとまったなんか蹴られたんだけど大丈夫おかえりゃ人の配信でそんな急に通るとか考えろこっちのこと普通に今挨拶しつもりただったんだけど何かあったのごめん全然聞こえてなかったからもう1回おし願いてもいい"
+        },
+        {
+          "speechId": 21,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 454400,
+          "sourceEndMs": 465080,
+          "text": "ごめんねみんなあの聞き苦しいもの聞かせてしまってあごめんごめんめっちゃバグってるめっちゃバグってるね"
+        },
+        {
+          "speechId": 22,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 467240,
+          "sourceEndMs": 510020,
+          "text": "なんかエコーとかかけるとちょっとあれかもしれないあわかったわかったわかったわかった書けないね逆に星川だよみんなに紹介しよっかふみのことよろしくお願いしますこちらですね同期のフミでございますよろしくお願いしますまあやっぱ1人目はね一緒に遊戯を始めて頑張ってきた同期しょってことでデビューもこと同期遊戯王デビューも同期というで仲一緒のねスタートからやってますでもねちょっとこの映画の一つの時に来てもらった時にさ星にめちゃ負けたんだよ確か2連敗残機デッキとGalaxyデッキでボコった今日は絶対に勝とうと思って本気で来ました"
+        },
+        {
+          "speechId": 23,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 513300,
+          "sourceEndMs": 516200,
+          "text": "命かける"
+        },
+        {
+          "speechId": 24,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 519300,
+          "sourceEndMs": 571100,
+          "text": "命かける命かけるよえじゃあ明日さあうちのお仕事で会うじゃんその時負けた方が飲むヨーグルト買って行こうあれな前一緒に配信した時に紹介したやつ星鹿はいつも収録くれるん時とかなんか持ってきてようになってさ冷蔵庫に入ってるやつ欲しか女から飲まないでなんかすごい自分のぽくなってこれが紹介したヨーグルトめっちゃ気に入ってると思ったけどあれ買ってくるしかもあれね1回ストロー刺して途中まで飲みかけのやつ冷蔵庫に入れての飲まないでこれ飲まねえよストロー刺さってる奴ってなってるよなうん絶対飲まないからあれかけて勝負しようOK勝負しようOKじゃあ貼ってあります入ってます"
+        },
+        {
+          "speechId": 25,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 571459,
+          "sourceEndMs": 583040,
+          "text": "もしかさんはいないですけどルームに様もテーブルについてうるさいなえ何デッキ使うのまずはえそこも隠していくどうしよう"
+        },
+        {
+          "speechId": 26,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 583140,
+          "sourceEndMs": 607760,
+          "text": "どうしたいよコープギャラクシージャンキー残機勝ちに負けたから残機に一回たいなと思ってきたんだよねしょうがねえなうーんよし着席よし来た行くぞおいリアル開始エール開始"
+        },
+        {
+          "speechId": 27,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 613100,
+          "sourceEndMs": 624500,
+          "text": "か先行がいいんだっけなどっちが有利なんですかねよしテンション上げるためにBGMをちょっと上げるいいね"
+        },
+        {
+          "speechId": 28,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 625050,
+          "sourceEndMs": 634040,
+          "text": "[音楽]始まりましたよゆっくりなちょっと待ってメモメモどっちだどっちだこれは"
+        },
+        {
+          "speechId": 29,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 634860,
+          "sourceEndMs": 644060,
+          "text": "星川からだよどうせ残機デッキのこと知らないでしょうんうんだからまずサーキュラーを出して"
+        },
+        {
+          "speechId": 30,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 644180,
+          "sourceEndMs": 661760,
+          "text": "シグマにを墓地送りそうかそして墓地からシグマ持ってくるなんかいい出来なのかないつもの流れですここで超会場を持ってくるいいよこれは救世主"
+        },
+        {
+          "speechId": 31,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 663740,
+          "sourceEndMs": 671480,
+          "text": "ちょっとしばらく長いけど見といていいよエクシーズ召喚"
+        },
+        {
+          "speechId": 32,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 671760,
+          "sourceEndMs": 678620,
+          "text": "みたいな色してるじゃないかっこいいだろうかっこいいかもしれないここでダイヤを"
+        },
+        {
+          "speechId": 33,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 678839,
+          "sourceEndMs": 681620,
+          "text": "持ってきて"
+        },
+        {
+          "speechId": 34,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 681779,
+          "sourceEndMs": 722060,
+          "text": "召喚これは通常紹介になります効果発動[音楽]何かを召喚したお前のその特殊交換モンスター効果は発動できないぜうるせえこっからがいつも間違えるところえっとちょっとちょっと待ってねつまり今日も間違えるということですか今日は間違えますみたいな星川さんが間違ってるところをやってみる森と勢いで割と勢い"
+        },
+        {
+          "speechId": 35,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 725420,
+          "sourceEndMs": 730579,
+          "text": "だ間違えたよし"
+        },
+        {
+          "speechId": 36,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 731420,
+          "sourceEndMs": 734480,
+          "text": "間違い間違い"
+        },
+        {
+          "speechId": 37,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 749110,
+          "sourceEndMs": 752230,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 38,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 764899,
+          "sourceEndMs": 789620,
+          "text": "よしここで召喚何かを召喚これ意味果たして意味はあるのかまた邪魔集ついてきたことでヘルクがお互い上がりましたアクセスコード交換を出せるんだけど先行だから何もできないんだよなまあでこれもを打ち砕ける攻撃力はこっちが出なければね出ない出るこれ出ない教えてそれだけ"
+        },
+        {
+          "speechId": 39,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 793650,
+          "sourceEndMs": 796799,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 40,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 798600,
+          "sourceEndMs": 802220,
+          "text": "リンク紹介にしようかな"
+        },
+        {
+          "speechId": 41,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 802639,
+          "sourceEndMs": 806480,
+          "text": "相手フィールドの粉茶"
+        },
+        {
+          "speechId": 42,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 808079,
+          "sourceEndMs": 810800,
+          "text": "先に"
+        },
+        {
+          "speechId": 43,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 810839,
+          "sourceEndMs": 819440,
+          "text": "もういいやちょっと1回わかんなくなったから放置するこれはセットこっち側ってこと"
+        },
+        {
+          "speechId": 44,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 826040,
+          "sourceEndMs": 832100,
+          "text": "笑っくれるくれてと笑ってたな意外になよ"
+        },
+        {
+          "speechId": 45,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 834980,
+          "sourceEndMs": 846440,
+          "text": "強欲で貪欲な壺出た踏みつぼな大好きだよ強力な文様ですからね"
+        },
+        {
+          "speechId": 46,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 848579,
+          "sourceEndMs": 856980,
+          "text": "許されたのでサードを引いてそして海様が使うのはこちらは"
+        },
+        {
+          "speechId": 47,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 865639,
+          "sourceEndMs": 870860,
+          "text": "うららだとなんてな嘘だよ"
+        },
+        {
+          "speechId": 48,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 871920,
+          "sourceEndMs": 897260,
+          "text": "びっくりしたじゃないかお前それは嘘かびっくりしたじゃないかなるほど女神様1枚モンスターカードを手に入れたそしてドライブリゲートのこのフラクトールさんを墓地何だいそれは1を使いたい"
+        },
+        {
+          "speechId": 49,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 897680,
+          "sourceEndMs": 930560,
+          "text": "ポーチにいっぱいモンスターを集めてお友達集会を行いたいお友達集会ってここにいっぱい獲物を集めてお友達集会をするのが趣味なんだお前も獣だもんなそうだぞ[音楽]これって何紹介状特殊使ってたやつじゃないかモンスター効果無効にして特殊召喚し海フェナさんあないこれいいんじゃ"
+        },
+        {
+          "speechId": 50,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 931019,
+          "sourceEndMs": 934100,
+          "text": "初めて使う時の本"
+        },
+        {
+          "speechId": 51,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 934620,
+          "sourceEndMs": 952220,
+          "text": "自分の攻撃力アップモンスターが存在するので表が表示カード墓地を送る相手フィールドの高いカード1枚対象としてする破壊しようとしてんだまだできないけどね"
+        },
+        {
+          "speechId": 52,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 952680,
+          "sourceEndMs": 956220,
+          "text": "よし3300"
+        },
+        {
+          "speechId": 53,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 956579,
+          "sourceEndMs": 965660,
+          "text": "アップするということねうんなるほどねそしどうたらしようかなー3000か"
+        },
+        {
+          "speechId": 54,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 966899,
+          "sourceEndMs": 973760,
+          "text": "でかいところだなでかいなでかいからちょっとよ待って"
+        },
+        {
+          "speechId": 55,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 974760,
+          "sourceEndMs": 1012940,
+          "text": "これキャンセルしてちょっと手札を増やしたはいいがなんか思いのほかが欲しからのカードが育っているから神様はちょっと作戦変更で十二支しくる苦労通常召喚900だって見てられねえなお前クックルを笑っていいと思っているのかなんとこのクックルは1枚からエクシーズで進化するんだぜ12時ライカ可愛い可愛い女の子だドキドキ"
+        },
+        {
+          "speechId": 56,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 1016660,
+          "sourceEndMs": 1025360,
+          "text": "しかしここでもう一回変わっちゃうぜなんだそれは大グリス"
+        },
+        {
+          "speechId": 57,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 1026260,
+          "sourceEndMs": 1046959,
+          "text": "いっぱい重ねちゃうぜちょっと待ってこれは何かを出せるんだこれはどうしようかなこれ何をしようとしているが読めるかなこれ1個出してみようかな超会場を使います大好きな知ってるの"
+        },
+        {
+          "speechId": 58,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 1055400,
+          "sourceEndMs": 1070600,
+          "text": "どんとんでもないだろいっぱい出しているじゃないここでラプラス思案を召喚[音楽]強いじゃないかこのモンスター強くね"
+        },
+        {
+          "speechId": 59,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 1072070,
+          "sourceEndMs": 1084320,
+          "text": "[音楽]待って発動して我の大グリスを破壊でもできるのかこいつはその"
+        },
+        {
+          "speechId": 60,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 1085440,
+          "sourceEndMs": 1091539,
+          "text": "[音楽]通り謝罪をして手札からランダム1枚捨てさせる"
+        },
+        {
+          "speechId": 61,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 1092740,
+          "sourceEndMs": 1120460,
+          "text": "このタイミングでGがいたからさっき使えばよかったぜクソこれは何だGGかまただのGだぜやらないやるよね進むよねあGを捨てたわけじゃないんだG捨てれば良かったのに今何あステロそうよしよしよし"
+        },
+        {
+          "speechId": 62,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 1122200,
+          "sourceEndMs": 1129880,
+          "text": "しかしまだ手はある何だと1枚カードを捨てて"
+        },
+        {
+          "speechId": 63,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 1132440,
+          "sourceEndMs": 1137320,
+          "text": "何をしようとしてるんだ残機カードが効果で破壊されれば"
+        },
+        {
+          "speechId": 64,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 1139340,
+          "sourceEndMs": 1142480,
+          "text": "ケラスを通常評価"
+        },
+        {
+          "speechId": 65,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 1145539,
+          "sourceEndMs": 1164440,
+          "text": "なんかねGは普通に我が使ってで捨ててくださいっていうのね選べませんでしたねあそうだよねそうだよねランダムだもんね我の大事なひとしずくが普通に選んでないのに捨てられましたはいはいはいはいはいはいそれは選んではないです"
+        },
+        {
+          "speechId": 66,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 1165980,
+          "sourceEndMs": 1176240,
+          "text": "フミ様はじゃあここでしょうがトライブリゲードないの力を使って戦うこと本当はアーデオスしたかったんだよねだから星からのこの"
+        },
+        {
+          "speechId": 67,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 1177200,
+          "sourceEndMs": 1189340,
+          "text": "墓地に動かすっていうのは非常に良かったそのままダイレクトアタックして次のターンであーデス出してこのフィールド更地にするっていう作戦で行こうとしてましたねなるほどね"
+        },
+        {
+          "speechId": 68,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 1189580,
+          "sourceEndMs": 1198880,
+          "text": "最強どうぞ素材を使ってその効果でお前の効果を無効だ"
+        },
+        {
+          "speechId": 69,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 1199340,
+          "sourceEndMs": 1227200,
+          "text": "なるほどねなるほどね上手いねそしたら何もできないねいやーこれ全部封じられるの痛いわーちゃんキレッキはこれでも次型つくかなもう星川の次のも聞きによるかなここで"
+        },
+        {
+          "speechId": 70,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 1230200,
+          "sourceEndMs": 1245119,
+          "text": "なるほど2000と4500残酷だなんて残酷なドローだ26700+2+2=[音楽]"
+        },
+        {
+          "speechId": 71,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 1251660,
+          "sourceEndMs": 1254500,
+          "text": "えーっと"
+        },
+        {
+          "speechId": 72,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 1254600,
+          "sourceEndMs": 1263260,
+          "text": "えっとねひとしずく打たなかったんだひとしずく打たなかったのはなくなったからだよ"
+        },
+        {
+          "speechId": 73,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 1264039,
+          "sourceEndMs": 1268840,
+          "text": "今コメントに言われたなるほどね"
+        },
+        {
+          "speechId": 74,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 1272500,
+          "sourceEndMs": 1276340,
+          "text": "最悪なの捨てられたよ"
+        },
+        {
+          "speechId": 75,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 1276620,
+          "sourceEndMs": 1286960,
+          "text": "待ってよくわかんないけどアクセスコードトークは出していいよくわかんないけどあ待って一旦待ってよ一旦出しみようて"
+        },
+        {
+          "speechId": 76,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 1289940,
+          "sourceEndMs": 1295659,
+          "text": "あっち間違えた間違えた間違えた"
+        },
+        {
+          "speechId": 77,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 1299740,
+          "sourceEndMs": 1303740,
+          "text": "間違い間違い"
+        },
+        {
+          "speechId": 78,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 1307520,
+          "sourceEndMs": 1309940,
+          "text": "祭り開催"
+        },
+        {
+          "speechId": 79,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 1311840,
+          "sourceEndMs": 1321039,
+          "text": "良くないキャンセル機能ん欲しいだけどおいおいおいおいただのアクセスコードトークンになっちまったよ"
+        },
+        {
+          "speechId": 80,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 1330620,
+          "sourceEndMs": 1339100,
+          "text": "通常召喚しやがった行け絶対行けると思ったんだけどなぁ"
+        },
+        {
+          "speechId": 81,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 1340100,
+          "sourceEndMs": 1344200,
+          "text": "もうもうやろう1回1回"
+        },
+        {
+          "speechId": 82,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 1344659,
+          "sourceEndMs": 1352419,
+          "text": "残機に勝ちたいなちょっとデッキ変えるわOkけどOkえ絶対いけると思うんだ"
+        },
+        {
+          "speechId": 83,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 1359600,
+          "sourceEndMs": 1377080,
+          "text": "ランベルシアンの次に出すべきルートをさあ知ってる人いたらあれコメントで書いて欲しいわあ今今カンニングしようとしてる今ならまだ間に合うこれ今今カンニングしようとしてる休憩中だから今一旦"
+        },
+        {
+          "speechId": 84,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 1377780,
+          "sourceEndMs": 1380380,
+          "text": "準備はできたか"
+        },
+        {
+          "speechId": 85,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 1384020,
+          "sourceEndMs": 1389380,
+          "text": "チートソウルなるほどね"
+        },
+        {
+          "speechId": 86,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 1390679,
+          "sourceEndMs": 1404440,
+          "text": "明治からのヒートソールダランベルシアミイージヒートソールダランメルシアン明治ヒートソール明治ヒートソウルがメモにないのがこれは敗因ですね"
+        },
+        {
+          "speechId": 87,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 1404480,
+          "sourceEndMs": 1437380,
+          "text": "はなちゃんヒートソウル君のこと忘れたの知ってんのヒットソールえっ有名じゃん3組の生徒会長だよ知らないの待ってヒートソウルのことデコードトーカーって呼んでたから全然ちげえそっかそいつの苗字で覚えてた名前で呼べばいいのかそれはメモにあったわアンケートいつでもいける開始ルール開始面白い残機で来てくれるんだね"
+        },
+        {
+          "speechId": 88,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 1440299,
+          "sourceEndMs": 1444100,
+          "text": "負けてんだけど勝ちたい"
+        },
+        {
+          "speechId": 89,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 1445299,
+          "sourceEndMs": 1464919,
+          "text": "なら誰にも負ける気しねえな今までの一番強い感じするするミスっても大丈夫だもんそして俺の手札にはいつでもこいつがいる機器はどうなんだろうさっきの試合は結構良かったでしょ手札めっちゃ良かった今回もいいよ"
+        },
+        {
+          "speechId": 90,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 1465700,
+          "sourceEndMs": 1469299,
+          "text": "シグマを墓地に送り"
+        },
+        {
+          "speechId": 91,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 1472159,
+          "sourceEndMs": 1476179,
+          "text": "増殖するGP"
+        },
+        {
+          "speechId": 92,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 1479620,
+          "sourceEndMs": 1488299,
+          "text": "いいよたくさん特殊召喚していいよ[音楽]"
+        },
+        {
+          "speechId": 93,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 1490100,
+          "sourceEndMs": 1498820,
+          "text": "ちょうど寒かったんだよね手があったかいちょっと待って一旦止めるのはない一旦やりきる"
+        },
+        {
+          "speechId": 94,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 1500600,
+          "sourceEndMs": 1512679,
+          "text": "のあー手札終わったから寒かったんだよねあったかいなぁそしてき超会場持ってて"
+        },
+        {
+          "speechId": 95,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 1512720,
+          "sourceEndMs": 1515620,
+          "text": "どうしようかな"
+        },
+        {
+          "speechId": 96,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 1516380,
+          "sourceEndMs": 1533740,
+          "text": "これシアンもう出すしかない本当か本当だ一体やりきるわお前の手札が40枚になってもやりきる並んでるシアンさんねってことはさっきのことやってくるよねそう"
+        },
+        {
+          "speechId": 97,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 1534700,
+          "sourceEndMs": 1542500,
+          "text": "大丈夫大丈夫逆にフミも手札あって全力で戦えいいた方がんじゃない一旦"
+        },
+        {
+          "speechId": 98,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 1543860,
+          "sourceEndMs": 1547580,
+          "text": "いいでしょううーんと"
+        },
+        {
+          "speechId": 99,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 1548900,
+          "sourceEndMs": 1559000,
+          "text": "今はお母さんこれこのカード2つデッキから残機カード1枚手に入れる"
+        },
+        {
+          "speechId": 100,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 1559600,
+          "sourceEndMs": 1566620,
+          "text": "モンスター手に入れるトラップカードを手に入れるのうちのどれかかそうそうそうそう"
+        },
+        {
+          "speechId": 101,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 1568340,
+          "sourceEndMs": 1576780,
+          "text": "手入れやめてください[音楽]"
+        },
+        {
+          "speechId": 102,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 1583159,
+          "sourceEndMs": 1587980,
+          "text": "だがそこでふむ"
+        },
+        {
+          "speechId": 103,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 1589640,
+          "sourceEndMs": 1592299,
+          "text": "まだ"
+        },
+        {
+          "speechId": 104,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 1594380,
+          "sourceEndMs": 1609200,
+          "text": "出せるのかちょっとわからないがこいつを変わり者にする変わり者さんきなブラブラ一旦さっきやれなかったことをやるためにはい"
+        },
+        {
+          "speechId": 105,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 1609880,
+          "sourceEndMs": 1616210,
+          "text": "こっちを出したかっ[音楽]"
+        },
+        {
+          "speechId": 106,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 1617000,
+          "sourceEndMs": 1620000,
+          "text": "から"
+        },
+        {
+          "speechId": 107,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 1620179,
+          "sourceEndMs": 1623799,
+          "text": "のいやこれ"
+        },
+        {
+          "speechId": 108,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 1626000,
+          "sourceEndMs": 1649299,
+          "text": "どうしたのだってもう手札ふやふやしたくないあそういうことねあー高いなぁって幸せだなぁ最悪のあれのために取っとこううん難しいよねまずいで一旦ヒートソウルね"
+        },
+        {
+          "speechId": 109,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 1652059,
+          "sourceEndMs": 1658600,
+          "text": "ごめんなさい切らしてやれなくてんですか"
+        },
+        {
+          "speechId": 110,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 1658790,
+          "sourceEndMs": 1661849,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 111,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 1677650,
+          "sourceEndMs": 1683140,
+          "text": "[音楽]一旦セットして"
+        },
+        {
+          "speechId": 112,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 1683480,
+          "sourceEndMs": 1687279,
+          "text": "これもセットして"
+        },
+        {
+          "speechId": 113,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 1688340,
+          "sourceEndMs": 1696919,
+          "text": "星川さんのコメントだけ見てるんですけど画面じゃなくてまミスってもふみさん相手なら勝てる"
+        },
+        {
+          "speechId": 114,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 1697460,
+          "sourceEndMs": 1701860,
+          "text": "ブロックするぞこっちの権限で"
+        },
+        {
+          "speechId": 115,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 1702740,
+          "sourceEndMs": 1719380,
+          "text": "お前さまが勝ったお前謝れよコメント欄で申し訳ございませんでしたって謝りなでもフミそれは事実じゃんしょうがないよ腹立つ画面もう右から左まで全部手札あるよ"
+        },
+        {
+          "speechId": 116,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 1720170,
+          "sourceEndMs": 1737919,
+          "text": "[音楽]まさかそんな残機デッキだよここから負けるわけないじゃん2枚ってかわいそうだねおばあちゃんに負けねえよ星川は何を言っているんだよおばあちゃんは頑張るよ"
+        },
+        {
+          "speechId": 117,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 1738740,
+          "sourceEndMs": 1746320,
+          "text": "ディズニーおばあちゃんが遊戯をしてるのおもろい緊急ダイヤここで鍵を外す"
+        },
+        {
+          "speechId": 118,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 1747380,
+          "sourceEndMs": 1759220,
+          "text": "でこれは何だえーっと守備表示特殊召喚するねかわいそうだし使わせてやるかなるほどね"
+        },
+        {
+          "speechId": 119,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 1760960,
+          "sourceEndMs": 1765460,
+          "text": "残機モンスターって今いらっしゃったいない"
+        },
+        {
+          "speechId": 120,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 1769220,
+          "sourceEndMs": 1771340,
+          "text": "な"
+        },
+        {
+          "speechId": 121,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 1772159,
+          "sourceEndMs": 1774399,
+          "text": "許さたれ"
+        },
+        {
+          "speechId": 122,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 1775580,
+          "sourceEndMs": 1792039,
+          "text": "許した許されたから海様はモンスターを2台特殊召喚じゃそうだ持ってきたのはマシーンになってたそして"
+        },
+        {
+          "speechId": 123,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 1793360,
+          "sourceEndMs": 1811539,
+          "text": "カーネルの効果で自分フィールドも聞こえるモンスター1体を対象として発動その攻撃力以下の攻撃力毎年全て一緒に自爆しようぜ待ってよちょっと待ってよそれちょっと一緒に墓地行こう"
+        },
+        {
+          "speechId": 124,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 1815500,
+          "sourceEndMs": 1820480,
+          "text": "これは守備力それでも負ける"
+        },
+        {
+          "speechId": 125,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 1820940,
+          "sourceEndMs": 1823659,
+          "text": "それでも負ける"
+        },
+        {
+          "speechId": 126,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 1826480,
+          "sourceEndMs": 1830260,
+          "text": "死ぬて直前に攻め"
+        },
+        {
+          "speechId": 127,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 1830899,
+          "sourceEndMs": 1835779,
+          "text": "遅延したせめてドローさせてくれ"
+        },
+        {
+          "speechId": 128,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 1836179,
+          "sourceEndMs": 1848260,
+          "text": "何したこれはおまけでデリックレーンを出そうかななるほどあんまり関係ないやつ"
+        },
+        {
+          "speechId": 129,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 1854260,
+          "sourceEndMs": 1858460,
+          "text": "せっかくでどんどん"
+        },
+        {
+          "speechId": 130,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 1861200,
+          "sourceEndMs": 1867520,
+          "text": "あれあれなんか今なんか向こうになった感じしない消えたね"
+        },
+        {
+          "speechId": 131,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 1869899,
+          "sourceEndMs": 1886600,
+          "text": "神様がカーネルの連れてき方が他のカードの効果で連れてきたから無効になりました素材のせいまあ別に残ってもらったって特殊召喚できたことに意味がありますからね"
+        },
+        {
+          "speechId": 132,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 1887539,
+          "sourceEndMs": 1899320,
+          "text": "ここでいや迷うなオーブねフィールド魔法も出しちゃうからなんだと天外走者ふむ"
+        },
+        {
+          "speechId": 133,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 1903100,
+          "sourceEndMs": 1906279,
+          "text": "1かな"
+        },
+        {
+          "speechId": 134,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 1906500,
+          "sourceEndMs": 1913600,
+          "text": "このこれ表に返すタイミングがわからないけどの一旦昨日方はね"
+        },
+        {
+          "speechId": 135,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 1914600,
+          "sourceEndMs": 1920500,
+          "text": "じゃあここで効果を使ってレベル10のモンスターを呼ぶぜナム"
+        },
+        {
+          "speechId": 136,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 1921220,
+          "sourceEndMs": 1960279,
+          "text": "送るのはでもレベル10なんてすぐに出せないんじゃないのかそう思うだろう手札多すぎるレグラが多すぎてなんか慣れてない時あるある手札多すぎてわかんない同じよカードがいっぱいいるんだ紹介状まだ大丈夫かこれのタイミングで残機は変わるバレットライナーも特急だよ"
+        },
+        {
+          "speechId": 137,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 1963220,
+          "sourceEndMs": 1966460,
+          "text": "モンスターどうする"
+        },
+        {
+          "speechId": 138,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 1969440,
+          "sourceEndMs": 1989620,
+          "text": "ちょっと使うか次の次で使うぞ次でなんか使うからな星川次お前がなんかやっ絶対たら使うからなこの伏せてるカード次なんかしてみろ絶対落下するから星川がそして海様が連れてきたのはグスタフマークスだぐんぐん伸びるぜワイルドだろう"
+        },
+        {
+          "speechId": 139,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 1990740,
+          "sourceEndMs": 1992919,
+          "text": "ここ"
+        },
+        {
+          "speechId": 140,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 1993580,
+          "sourceEndMs": 2000840,
+          "text": "あれかさっきのやつなるほどなるほどよし"
+        },
+        {
+          "speechId": 141,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 2003720,
+          "sourceEndMs": 2009600,
+          "text": "スタッフをどかすのかなこれこれは"
+        },
+        {
+          "speechId": 142,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 2010620,
+          "sourceEndMs": 2020100,
+          "text": "ラプラスになってからかど真ん中のブラシアンを紹介今日では1枚捨てろ"
+        },
+        {
+          "speechId": 143,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 2020220,
+          "sourceEndMs": 2029679,
+          "text": "効果を使って墓地へ送るのはこれでさっきやられたのマックス"
+        },
+        {
+          "speechId": 144,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 2030419,
+          "sourceEndMs": 2034140,
+          "text": "なるほどフィールド"
+        },
+        {
+          "speechId": 145,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 2036940,
+          "sourceEndMs": 2039940,
+          "text": "もう"
+        },
+        {
+          "speechId": 146,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 2040840,
+          "sourceEndMs": 2056339,
+          "text": "負けたとでも言うと思ったか[笑い]墓地にルイボスをでかなんだこれ"
+        },
+        {
+          "speechId": 147,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 2057060,
+          "sourceEndMs": 2061080,
+          "text": "ができるモンスターだ"
+        },
+        {
+          "speechId": 148,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 2062740,
+          "sourceEndMs": 2076560,
+          "text": "こいつを超えられるかなこれはジャンキージャンキーラプラスアンがいるからのが昨日方使えるまたまただと"
+        },
+        {
+          "speechId": 149,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 2082020,
+          "sourceEndMs": 2086879,
+          "text": "でも言うと思ったから"
+        },
+        {
+          "speechId": 150,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 2088320,
+          "sourceEndMs": 2102040,
+          "text": "このカードがセンター校から破壊された場合に発動除外されて法人のなんだってそれは測らなくて止めてやるおいやめろやめろ"
+        },
+        {
+          "speechId": 151,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 2104960,
+          "sourceEndMs": 2122640,
+          "text": "[音楽]でも言うと思ったがさすがに予想外なんだけどまぁまぁお前はそういうことを言うと思ったぜ息を回収していくぜ"
+        },
+        {
+          "speechId": 152,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 2123040,
+          "sourceEndMs": 2130839,
+          "text": "予想外だ助けてくれみんなそれでまだ可能性が残ったそれ"
+        },
+        {
+          "speechId": 153,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 2133660,
+          "sourceEndMs": 2139200,
+          "text": "渡さなくなっちまったが海様にはまだ"
+        },
+        {
+          "speechId": 154,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 2139920,
+          "sourceEndMs": 2145740,
+          "text": "だよサッカーボールの分際でレベル10"
+        },
+        {
+          "speechId": 155,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 2147060,
+          "sourceEndMs": 2184859,
+          "text": "あー全部これクソーフライングペガサスもダイヤル出したから効果がないしょうがない特殊召喚でエアレーダーだこれはどうかなこれは耐えられるのかよし手札が増える増える通常紹介リアフレームがいるのですげーの動けるめっちゃなマシンナースのおかげでカードがいっぱいあるから思いますけどねそして手に入れたこの"
+        },
+        {
+          "speechId": 156,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 2185440,
+          "sourceEndMs": 2196800,
+          "text": "アングラスフェアの効果で待て押し込めますスリーペアできている手札でやばいやばいなんてことだ"
+        },
+        {
+          "speechId": 157,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 2197140,
+          "sourceEndMs": 2200640,
+          "text": "これちょっとこいつがいる"
+        },
+        {
+          "speechId": 158,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 2203220,
+          "sourceEndMs": 2214619,
+          "text": "場所がないの場所がないから膝の上にでも置けば場所がないからこいつを"
+        },
+        {
+          "speechId": 159,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 2214780,
+          "sourceEndMs": 2221520,
+          "text": "装備しとこうかな装備装備にしてちょっと開けとこかな"
+        },
+        {
+          "speechId": 160,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 2222760,
+          "sourceEndMs": 2225060,
+          "text": "で"
+        },
+        {
+          "speechId": 161,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 2225960,
+          "sourceEndMs": 2239040,
+          "text": "そして今星川さんが3300がいるんですよねでかい場所それを超えるのがさっき"
+        },
+        {
+          "speechId": 162,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 2239140,
+          "sourceEndMs": 2242460,
+          "text": "除外されてしまったので"
+        },
+        {
+          "speechId": 163,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 2244000,
+          "sourceEndMs": 2251460,
+          "text": "怖いなルインホースこれとこれで"
+        },
+        {
+          "speechId": 164,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 2252240,
+          "sourceEndMs": 2255660,
+          "text": "ハンガーナックルを"
+        },
+        {
+          "speechId": 165,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 2257079,
+          "sourceEndMs": 2260800,
+          "text": "そしてなるほど"
+        },
+        {
+          "speechId": 166,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 2261220,
+          "sourceEndMs": 2265380,
+          "text": "他のモンスターを除外することで"
+        },
+        {
+          "speechId": 167,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 2265660,
+          "sourceEndMs": 2269579,
+          "text": "帰ってきたルインボース"
+        },
+        {
+          "speechId": 168,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 2269940,
+          "sourceEndMs": 2277900,
+          "text": "3回ぐらい帰ってきてるぞなんでね4ペアできたってもデフダンス"
+        },
+        {
+          "speechId": 169,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 2280800,
+          "sourceEndMs": 2290320,
+          "text": "あ待ってあ間違えたかもしれないあで行けるもな間違えた間違えろ間違えろ間違えてない間違えてないでしょ"
+        },
+        {
+          "speechId": 170,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 2292000,
+          "sourceEndMs": 2303540,
+          "text": "星川のすごいもう除外できないでしょあなたのこのモンスター345ペアできたもう手札が見えない"
+        },
+        {
+          "speechId": 171,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 2304119,
+          "sourceEndMs": 2307420,
+          "text": "これスクイーズ"
+        },
+        {
+          "speechId": 172,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 2313260,
+          "sourceEndMs": 2320220,
+          "text": "今の攻撃受けたねなんか痛かったんだけど痛かったな"
+        },
+        {
+          "speechId": 173,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 2323579,
+          "sourceEndMs": 2341640,
+          "text": "効果発動取り除くことによってまずいまずい64に到達したぞ待って6000超えれるのあったけどしかこれの効果で"
+        },
+        {
+          "speechId": 174,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 2342220,
+          "sourceEndMs": 2346859,
+          "text": "墓地に送っ"
+        },
+        {
+          "speechId": 175,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 2347020,
+          "sourceEndMs": 2355140,
+          "text": "てうちのシアンがちっちゃく見えるこれも一体連れてくることができる"
+        },
+        {
+          "speechId": 176,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 2357720,
+          "sourceEndMs": 2369240,
+          "text": "のかえー待って待ってるでも2803でしょ2800がいるからな"
+        },
+        {
+          "speechId": 177,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 2372780,
+          "sourceEndMs": 2378839,
+          "text": "あでこれでいいんだバトルだちょっと待ってよちょっと待って"
+        },
+        {
+          "speechId": 178,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 2380140,
+          "sourceEndMs": 2390599,
+          "text": "あでもこの人しか殴れないのかあそうなんだそうだからこっちを狙うぜ"
+        },
+        {
+          "speechId": 179,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 2393760,
+          "sourceEndMs": 2396420,
+          "text": "めっちゃ手札あるな"
+        },
+        {
+          "speechId": 180,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 2396960,
+          "sourceEndMs": 2415140,
+          "text": "やっと印象いやちゃんと強いんだけど手札どうだった星からた最初の手札最初えまあまあ良かっそっか普通に良かった試合最初に使ったフミ様のデッキの方が相性悪いのかな"
+        },
+        {
+          "speechId": 181,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 2415859,
+          "sourceEndMs": 2453900,
+          "text": "2回さ除外してきたじゃんあれって素材がいっぱいあったからできたのあれはいや手札が噛みってたカードの効果がエクシーズモンスターの効果で素材をこっちにやって踏みサバのフィールドのモンスターをあっち行けするってやつだよねそうとかねいろいろあったなるほどそれ以上に文が何回も何回も起き上がってきたからねちょっとそれができる分その星川に除外されても墓場から戻ってくるって動きができるんよだねこの"
+        },
+        {
+          "speechId": 182,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 2454619,
+          "sourceEndMs": 2485220,
+          "text": "さき強すぎんゴキがねタイミング大事だなこれ手札があったからこんだけ動けたしお高い確かにめっちゃ持ってたもんねカードねねえやっぱゴキが一番強いわじゃあ5期は大事タイミング大事ねはいどうでしたか一生いっぱいなんかいい感じじゃないうちらライバル"
+        },
+        {
+          "speechId": 183,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 2485619,
+          "sourceEndMs": 2515160,
+          "text": "拮抗してるじゃないなあ成長してるじゃんいい感じやるじゃねえか帰っていくやつじゃん今日は一生いっぱい今日はいっぱいだからここらでやめとく[音楽]これからも凸は続くんだろううんあのもう一人のライバルともやるよ今日あそうなんだもうせいぜい残りも頑張るよありがとうありがとう"
+        },
+        {
+          "speechId": 184,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 2519900,
+          "sourceEndMs": 2535800,
+          "text": "すいませんねちょっと絶対なんかこいつやろうと思って切断ボタン構えておりました星川これぞ3年半の同期の絆いやー一生いっぱいちゃんと負けたしちゃんと勝ったわうん"
+        },
+        {
+          "speechId": 185,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 2536140,
+          "sourceEndMs": 2544859,
+          "text": "ということでフミ様でした概要欄に配信終わったらチャンネルとき載せますやっぱいいライバルだわ"
+        },
+        {
+          "speechId": 186,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 2545800,
+          "sourceEndMs": 2562500,
+          "text": "まぁまぁ織姫星を混ぜてみんなよろしくお願いしますそんな織姫星からねあの5月31日明後日かちょっと重大発表ございますのでそちらもよろしくお願いしますって感じでまずは一生いっぱい"
+        },
+        {
+          "speechId": 187,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 2562660,
+          "sourceEndMs": 2573839,
+          "text": "まぁいい感じじゃねえのえちょっと残機デッキさ星川けどミスらずにやれたことないんだ明治からの"
+        },
+        {
+          "speechId": 188,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 2574060,
+          "sourceEndMs": 2577680,
+          "text": "ヒートてソウルでさっき合った"
+        },
+        {
+          "speechId": 189,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 2577960,
+          "sourceEndMs": 2585579,
+          "text": "はい重大発表ございますよろしくお願いしますおっあコメ欄たよろしく"
+        },
+        {
+          "speechId": 190,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 2588579,
+          "sourceEndMs": 2603060,
+          "text": "ピース[音楽]あってたヒートソウルで一旦止まるでいいの残機で聞いてヒートソウルでめっちゃドローして"
+        },
+        {
+          "speechId": 191,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 2604480,
+          "sourceEndMs": 2612240,
+          "text": "アップデートジャーマンとレコード10日ヒートソールでアクセスコードトークを出す"
+        },
+        {
+          "speechId": 192,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 2613660,
+          "sourceEndMs": 2617700,
+          "text": "でてる合っのかなだよね"
+        },
+        {
+          "speechId": 193,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 2618460,
+          "sourceEndMs": 2622260,
+          "text": "目まいだったらようこそ"
+        },
+        {
+          "speechId": 194,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 2625180,
+          "sourceEndMs": 2631079,
+          "text": "そうだよねそこまでちゃんと綺麗にできたことないからちょっと次挑戦しよう"
+        },
+        {
+          "speechId": 195,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 2631780,
+          "sourceEndMs": 2649480,
+          "text": "先行はヒートソウルで止まるなるほどねで相手の1ターン目で星川がめちゃくちゃドローすればいいのかうんうんえでもさ超会場のさ撃つタイミング完璧じゃなかった確かは割と"
+        },
+        {
+          "speechId": 196,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 2650079,
+          "sourceEndMs": 2656099,
+          "text": "うまくいったなって思った初めてちゃんと使えた気がする"
+        },
+        {
+          "speechId": 197,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 2657400,
+          "sourceEndMs": 2660400,
+          "text": "はい"
+        },
+        {
+          "speechId": 198,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 2660700,
+          "sourceEndMs": 2669359,
+          "text": "じゃあ次の挑戦者行くか次の人と初めてデュエルするんよだなしかは"
+        },
+        {
+          "speechId": 199,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 2670359,
+          "sourceEndMs": 2674460,
+          "text": "完璧だったよね気持ち"
+        },
+        {
+          "speechId": 200,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 2675160,
+          "sourceEndMs": 2679859,
+          "text": "次いきますよいしょ今日"
+        },
+        {
+          "speechId": 201,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 2679960,
+          "sourceEndMs": 2690240,
+          "text": "もキープも完璧だ星川[音楽]山じゃないよ今日ヤマトもやるけどね"
+        },
+        {
+          "speechId": 202,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 2694020,
+          "sourceEndMs": 2708300,
+          "text": "なんか重くない空気一流ウイルスの俺に手ほどきしてほしいっていうはの君か6時間ぐらい遊戯王配信してた人ですか全然できない"
+        },
+        {
+          "speechId": 203,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 2708700,
+          "sourceEndMs": 2724079,
+          "text": "読んでるうちに6時間終わった文字読んで6時間終わったわいやなんかすごい予習してきてくれてたあすいませ自己しん紹介お願いますどうも銀河とこ歌いすごい気合入っ"
+        },
+        {
+          "speechId": 204,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 2724420,
+          "sourceEndMs": 2739740,
+          "text": "てんやる気だけど満々だぜ昨日のためにデュエルするみたいなので6時間ぐらいガッツリめちゃくちゃ勉強して出した結論が好きなデッキリか"
+        },
+        {
+          "speechId": 205,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 2740980,
+          "sourceEndMs": 2761160,
+          "text": "分かんねえわつっていや大丈夫なティアラメントは使いません星川はすごかったわほんまに1回リスナーにボコられたんやけどさそうかこれが今のはマスターデュエルかと思って閉じかけマジ試合で危なかったになるですよ"
+        },
+        {
+          "speechId": 206,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 2765599,
+          "sourceEndMs": 2798839,
+          "text": "みんな同じデッキなんかつまんないよそうだよ残機勉強したジャッキー一応今回読んだ雰囲気はわかったなるほどねかっこいい結構いいテーマ使うじゃん星川でしょうちのねGalaxyとホープとなんかゴテゴテしたごついかっこいいパワーな感じ悪くないうんいいじゃんいやなんか星川が使ってなかった俺が使ったもん残機趣味や結構Galaxyで俺好きで組んたよね"
+        },
+        {
+          "speechId": 207,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 2801099,
+          "sourceEndMs": 2806339,
+          "text": "楽しみにしてよ圧倒的なパワーでねじ伏せてやるわ"
+        },
+        {
+          "speechId": 208,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 2806619,
+          "sourceEndMs": 2810579,
+          "text": "よね"
+        },
+        {
+          "speechId": 209,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 2811660,
+          "sourceEndMs": 2816720,
+          "text": "俺の一番のデッキから今見てもう名前と"
+        },
+        {
+          "speechId": 210,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 2817720,
+          "sourceEndMs": 2823800,
+          "text": "僕やその顔で残機とか出すの"
+        },
+        {
+          "speechId": 211,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 2824920,
+          "sourceEndMs": 2835200,
+          "text": "希望欲しかったそれ絶対始まるさっき起動しましたよろしくお願いします"
+        },
+        {
+          "speechId": 212,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 2836200,
+          "sourceEndMs": 2846420,
+          "text": "いけるぞ来いガチや残機がなんぼのもんじゃ開始"
+        },
+        {
+          "speechId": 213,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 2846720,
+          "sourceEndMs": 2850500,
+          "text": "コインたトスが負けだと"
+        },
+        {
+          "speechId": 214,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 2850900,
+          "sourceEndMs": 2862920,
+          "text": "やばいな環境が先行が強すぎるこの俺舞台考えたわけですよはいはいはい高校で絶対勝てるデッメバ勝率8割じゃ"
+        },
+        {
+          "speechId": 215,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 2863380,
+          "sourceEndMs": 2871260,
+          "text": "ないまあ見てなって感想はほそうめっちゃアホじゃん"
+        },
+        {
+          "speechId": 216,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 2871960,
+          "sourceEndMs": 2876599,
+          "text": "早速わかんない頑張れ頑張れ"
+        },
+        {
+          "speechId": 217,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 2877960,
+          "sourceEndMs": 2881560,
+          "text": "しっかりやる"
+        },
+        {
+          "speechId": 218,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 2882940,
+          "sourceEndMs": 2884940,
+          "text": "ぞ"
+        },
+        {
+          "speechId": 219,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 2885520,
+          "sourceEndMs": 2890640,
+          "text": "えーっと以上かダイヤ"
+        },
+        {
+          "speechId": 220,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 2891520,
+          "sourceEndMs": 2895920,
+          "text": "検索うるさい違う違う違う違う違う違う違う違う"
+        },
+        {
+          "speechId": 221,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 2897240,
+          "sourceEndMs": 2901619,
+          "text": "俺が検索したってお前が見せるだけでしょ"
+        },
+        {
+          "speechId": 222,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 2905319,
+          "sourceEndMs": 2908280,
+          "text": "関係ない関係ない"
+        },
+        {
+          "speechId": 223,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 2911260,
+          "sourceEndMs": 2923850,
+          "text": "ダイヤはなんか確か合体した時にクソうぜえエクシーズ効果付くはず確かあー向こうにできんでそうだあったあったこんななら[音楽]"
+        },
+        {
+          "speechId": 224,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 2925000,
+          "sourceEndMs": 2929400,
+          "text": "これけどトランベルシアンは出せる"
+        },
+        {
+          "speechId": 225,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 2930780,
+          "sourceEndMs": 2934380,
+          "text": "あー出たー"
+        },
+        {
+          "speechId": 226,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 2934599,
+          "sourceEndMs": 2941339,
+          "text": "召喚はいはいはいはいはいちょっとさっきねでデッキから持ってくる中継地点おじさんね"
+        },
+        {
+          "speechId": 227,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 2942160,
+          "sourceEndMs": 2948900,
+          "text": "ちょっと待ってタイミング完璧すぎちゃったよ効果読んできたからちゃんと"
+        },
+        {
+          "speechId": 228,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 2949900,
+          "sourceEndMs": 2952680,
+          "text": "はいはいはいはいはい"
+        },
+        {
+          "speechId": 229,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 2954099,
+          "sourceEndMs": 2972780,
+          "text": "なんだこれモンスターの効果を発動した時にその効果を無効にするそうだダイヤがに元なってるから向こうにできるんなるほどだあそうかそうか強いな甘いはねメイカちゃん今回だけじゃ遊戯王勝てんよないだね"
+        },
+        {
+          "speechId": 230,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 2973740,
+          "sourceEndMs": 2978240,
+          "text": "俺のターン来たらなくなるわけねこれね"
+        },
+        {
+          "speechId": 231,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 2979619,
+          "sourceEndMs": 2990480,
+          "text": "ダイヤこうじゃなくてあの似たようなやな攻撃力1500のなんかサッシかなんかそんな感じの名前のやつ"
+        },
+        {
+          "speechId": 232,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 2990780,
+          "sourceEndMs": 2994800,
+          "text": "見た目似てるから間違えた"
+        },
+        {
+          "speechId": 233,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 2994859,
+          "sourceEndMs": 3001339,
+          "text": "なやく2匹目やけどどうすんのこれ一旦これをかけて"
+        },
+        {
+          "speechId": 234,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 3002040,
+          "sourceEndMs": 3006020,
+          "text": "高校譲っちまったなぁ"
+        },
+        {
+          "speechId": 235,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 3006359,
+          "sourceEndMs": 3012410,
+          "text": "終わりだよもう[音楽]"
+        },
+        {
+          "speechId": 236,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 3014880,
+          "sourceEndMs": 3017180,
+          "text": "助けてもらおうか"
+        },
+        {
+          "speechId": 237,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 3018200,
+          "sourceEndMs": 3030740,
+          "text": "はいはいはいはいはいはい俺のデッキはサイバーデッキだぜかっこいいそして手札は理想的だうららもね見てたなあ"
+        },
+        {
+          "speechId": 238,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 3032000,
+          "sourceEndMs": 3036200,
+          "text": "ほいほいほいほいほいと"
+        },
+        {
+          "speechId": 239,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 3037920,
+          "sourceEndMs": 3040040,
+          "text": "伊豆消える"
+        },
+        {
+          "speechId": 240,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 3040260,
+          "sourceEndMs": 3049420,
+          "text": "攻撃力3300これ超えられるのかアメリカちゃん回収しようよふむ[音楽]"
+        },
+        {
+          "speechId": 241,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 3049800,
+          "sourceEndMs": 3075500,
+          "text": "まだいいかなんだ今のまだいいか不穏だな油断せずに行こうみたいでサイバードラゴンノヴァーめっちゃかっこいいんだけどめっちゃかっこいいでしょめっちゃかっこいいでデッキからカード持ってくるやつだねはいはいはいはいはいはいはいはいはいあでこれもミスったか"
+        },
+        {
+          "speechId": 242,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 3076319,
+          "sourceEndMs": 3082880,
+          "text": "ネクステア持ってきてこっちだな今やるの"
+        },
+        {
+          "speechId": 243,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 3089300,
+          "sourceEndMs": 3094220,
+          "text": "はちゃんとまあでもこれしゃあないな"
+        },
+        {
+          "speechId": 244,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 3095880,
+          "sourceEndMs": 3108619,
+          "text": "まずは俺の切り方その1かっこいいインフィニティなるほど魔法なんか効果全部1回向こうえまずいそれは無限本よ"
+        },
+        {
+          "speechId": 245,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 3109160,
+          "sourceEndMs": 3113180,
+          "text": "無限包容を打たれるのか"
+        },
+        {
+          "speechId": 246,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 3113220,
+          "sourceEndMs": 3116960,
+          "text": "打たれるんだったら仕方ないので"
+        },
+        {
+          "speechId": 247,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 3117900,
+          "sourceEndMs": 3122420,
+          "text": "向こうに向こうを無効にしました"
+        },
+        {
+          "speechId": 248,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 3130619,
+          "sourceEndMs": 3139220,
+          "text": "どうしようかなでもこんだけ使ってくれたんならもうインフィニティも上手にか"
+        },
+        {
+          "speechId": 249,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 3143590,
+          "sourceEndMs": 3146949,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 250,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 3148020,
+          "sourceEndMs": 3151400,
+          "text": "居酒屋枝豆"
+        },
+        {
+          "speechId": 251,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 3153680,
+          "sourceEndMs": 3157339,
+          "text": "ネクステアの効果で"
+        },
+        {
+          "speechId": 252,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 3158640,
+          "sourceEndMs": 3161599,
+          "text": "まあまあまあまあ"
+        },
+        {
+          "speechId": 253,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 3162300,
+          "sourceEndMs": 3183680,
+          "text": "まあまあこの間耐えればねあるからね帰ればね帰れば耐えれいいばから同期と3人で昨日メイカちゃんの配信見たてんよ通話しながらそう待ってこの人めっちゃやってるって言ってすげえやだ何それ死ぬほど回すの早いやんって3人で褒めてたありがとう"
+        },
+        {
+          "speechId": 254,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 3184819,
+          "sourceEndMs": 3188900,
+          "text": "ほら終わりにしような"
+        },
+        {
+          "speechId": 255,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 3188940,
+          "sourceEndMs": 3193400,
+          "text": "パンくださいせめて次のタータン"
+        },
+        {
+          "speechId": 256,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 3200160,
+          "sourceEndMs": 3204260,
+          "text": "いやでも俺これを流すと勝てるかわかんないから"
+        },
+        {
+          "speechId": 257,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 3209119,
+          "sourceEndMs": 3215599,
+          "text": "の効果でこのキメラティックか倍になるぜ"
+        },
+        {
+          "speechId": 258,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 3218780,
+          "sourceEndMs": 3226099,
+          "text": "ダメージないんだよこれ買えるんちゃう痛くない痛くないね"
+        },
+        {
+          "speechId": 259,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 3238020,
+          "sourceEndMs": 3243200,
+          "text": "落とすなよ[笑い]"
+        },
+        {
+          "speechId": 260,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 3243980,
+          "sourceEndMs": 3250819,
+          "text": "ちょっと待ってちょっと待ってじゃあ今日はこれでありがとうございました"
+        },
+        {
+          "speechId": 261,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 3252020,
+          "sourceEndMs": 3263000,
+          "text": "一番大好きなデッキ持ってくからもう一回やろう俺も好きなデッキ持ってくかあこのデッキでもう1回やりたいいや別に何でもいいけど"
+        },
+        {
+          "speechId": 262,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 3265760,
+          "sourceEndMs": 3274460,
+          "text": "じゃあこれえっとどこだこれだね"
+        },
+        {
+          "speechId": 263,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 3276480,
+          "sourceEndMs": 3279480,
+          "text": "実力"
+        },
+        {
+          "speechId": 264,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 3282740,
+          "sourceEndMs": 3285920,
+          "text": "感謝です"
+        },
+        {
+          "speechId": 265,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 3290819,
+          "sourceEndMs": 3299059,
+          "text": "先行いただきますなんだホープかGalaxyか"
+        },
+        {
+          "speechId": 266,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 3299760,
+          "sourceEndMs": 3302720,
+          "text": "どっちでしょうか"
+        },
+        {
+          "speechId": 267,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 3304160,
+          "sourceEndMs": 3307700,
+          "text": "悪くない悪くない"
+        },
+        {
+          "speechId": 268,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 3310800,
+          "sourceEndMs": 3315340,
+          "text": "ちゃんとカード読んどこ[音楽]"
+        },
+        {
+          "speechId": 269,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 3318240,
+          "sourceEndMs": 3321200,
+          "text": "オノマトペ"
+        },
+        {
+          "speechId": 270,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 3323160,
+          "sourceEndMs": 3325160,
+          "text": "くん"
+        },
+        {
+          "speechId": 271,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 3330200,
+          "sourceEndMs": 3338000,
+          "text": "ツババアにを墓地送りズババこのマットホープかこれ"
+        },
+        {
+          "speechId": 272,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 3340800,
+          "sourceEndMs": 3343940,
+          "text": "誰んかわから"
+        },
+        {
+          "speechId": 273,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 3346940,
+          "sourceEndMs": 3351780,
+          "text": "このカードが手札にするモンスターズ"
+        },
+        {
+          "speechId": 274,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 3355800,
+          "sourceEndMs": 3359059,
+          "text": "わかんないけどちょっと出します"
+        },
+        {
+          "speechId": 275,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 3369900,
+          "sourceEndMs": 3373090,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 276,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 3379380,
+          "sourceEndMs": 3382380,
+          "text": "か"
+        },
+        {
+          "speechId": 277,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 3382800,
+          "sourceEndMs": 3391640,
+          "text": "あでコープに重ねて重ねて特殊召喚からの"
+        },
+        {
+          "speechId": 278,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 3393240,
+          "sourceEndMs": 3396240,
+          "text": "ドラグ"
+        },
+        {
+          "speechId": 279,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 3396900,
+          "sourceEndMs": 3404119,
+          "text": "ナーの名前を見ろメイカちゃん希望星川だ希望"
+        },
+        {
+          "speechId": 280,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 3405000,
+          "sourceEndMs": 3409819,
+          "text": "そこでキーボードなったな"
+        },
+        {
+          "speechId": 281,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 3411300,
+          "sourceEndMs": 3415489,
+          "text": "これ[音楽]"
+        },
+        {
+          "speechId": 282,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 3418520,
+          "sourceEndMs": 3424040,
+          "text": "ほほほほほほイートピアフォースの効果を発動"
+        },
+        {
+          "speechId": 283,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 3424700,
+          "sourceEndMs": 3430040,
+          "text": "して装備させる"
+        },
+        {
+          "speechId": 284,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 3432540,
+          "sourceEndMs": 3434780,
+          "text": "忙しいな"
+        },
+        {
+          "speechId": 285,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 3447200,
+          "sourceEndMs": 3453500,
+          "text": "はいはいはいはいちょっと後悔を増してなぁ"
+        },
+        {
+          "speechId": 286,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 3458460,
+          "sourceEndMs": 3470660,
+          "text": "発動してドラグナーからさらにもう1体を特殊召喚出てくるのうわうぜー"
+        },
+        {
+          "speechId": 287,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 3471420,
+          "sourceEndMs": 3484940,
+          "text": "魔法こいつ1回向こうだっけそうだそうだでこいつホープドラッグならこいつは戦う時0にするモンスターの効果を1回向こう"
+        },
+        {
+          "speechId": 288,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 3486359,
+          "sourceEndMs": 3499040,
+          "text": "行ったえーとねドラグナーが効果も子えーといや違うえっとこれプレイが"
+        },
+        {
+          "speechId": 289,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 3499559,
+          "sourceEndMs": 3514040,
+          "text": "戦いのターンに一度モンスターカードを装備あ装備している場合IDフィールド交換モンスター1体を対象として効果発動無効にするとお互いのターンになるほどねはいはい装備があるとそうなるんだね"
+        },
+        {
+          "speechId": 290,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 3515000,
+          "sourceEndMs": 3518780,
+          "text": "はいはいはいなるほどね"
+        },
+        {
+          "speechId": 291,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 3523559,
+          "sourceEndMs": 3529160,
+          "text": "モンスター効果だからこれフィールド関係なく全部か"
+        },
+        {
+          "speechId": 292,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 3530240,
+          "sourceEndMs": 3533420,
+          "text": "知らなかった"
+        },
+        {
+          "speechId": 293,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 3535020,
+          "sourceEndMs": 3543020,
+          "text": "オノマトピックはこれ意味あるんか今なさそう残されてるだけ残っただけね"
+        },
+        {
+          "speechId": 294,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 3545599,
+          "sourceEndMs": 3549599,
+          "text": "これえーと"
+        },
+        {
+          "speechId": 295,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 3549660,
+          "sourceEndMs": 3558799,
+          "text": "動くんだよこれがだからこれがはいはいはいはいはいはいはいはい"
+        },
+        {
+          "speechId": 296,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 3560700,
+          "sourceEndMs": 3564079,
+          "text": "ヒーローカード召喚できる"
+        },
+        {
+          "speechId": 297,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 3569059,
+          "sourceEndMs": 3574440,
+          "text": "これが通るのかあーえーとじゃあこれ"
+        },
+        {
+          "speechId": 298,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 3575220,
+          "sourceEndMs": 3578420,
+          "text": "消えてもらおうか"
+        },
+        {
+          "speechId": 299,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 3587540,
+          "sourceEndMs": 3601339,
+          "text": "何だこいつはブルーレイのデッキからなんか超量カードなんか1枚持ってくるぜなるほどこれはどうしようかないやミスったらしいじゃあ効果発動"
+        },
+        {
+          "speechId": 300,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 3605579,
+          "sourceEndMs": 3628220,
+          "text": "タイミング悩んだけどここらしいまあでも墓じゃないからでこいつ出すでしょそれでこうだよなこれで効果で出せるでこいつの効果でこれも出せる変化はさせないではいはいはいはいとこれする"
+        },
+        {
+          "speechId": 301,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 3628740,
+          "sourceEndMs": 3633799,
+          "text": "まずいこれがちょっと待ってね"
+        },
+        {
+          "speechId": 302,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 3637200,
+          "sourceEndMs": 3642380,
+          "text": "リスナーみんなさんこれ何デッキなのわかんの見てて"
+        },
+        {
+          "speechId": 303,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 3642960,
+          "sourceEndMs": 3649819,
+          "text": "はいはい止まんねでこれが"
+        },
+        {
+          "speechId": 304,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 3651140,
+          "sourceEndMs": 3654500,
+          "text": "そうかそうか"
+        },
+        {
+          "speechId": 305,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 3655319,
+          "sourceEndMs": 3661040,
+          "text": "これ一旦経由かファントム"
+        },
+        {
+          "speechId": 306,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 3663420,
+          "sourceEndMs": 3667940,
+          "text": "もないとこれリンクして出して"
+        },
+        {
+          "speechId": 307,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 3668339,
+          "sourceEndMs": 3672200,
+          "text": "で効果発動で"
+        },
+        {
+          "speechId": 308,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 3672839,
+          "sourceEndMs": 3679880,
+          "text": "捨ててデッキに戻すのがこっちだよなこれこっちを戻して"
+        },
+        {
+          "speechId": 309,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 3682520,
+          "sourceEndMs": 3685640,
+          "text": "ほんで"
+        },
+        {
+          "speechId": 310,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 3685890,
+          "sourceEndMs": 3688969,
+          "text": "[拍手]"
+        },
+        {
+          "speechId": 311,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 3692700,
+          "sourceEndMs": 3696619,
+          "text": "これの効果で"
+        },
+        {
+          "speechId": 312,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 3698220,
+          "sourceEndMs": 3704540,
+          "text": "出しましてほいよいしょで"
+        },
+        {
+          "speechId": 313,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 3709740,
+          "sourceEndMs": 3714319,
+          "text": "これとこれでいいのかな"
+        },
+        {
+          "speechId": 314,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 3715579,
+          "sourceEndMs": 3720619,
+          "text": "で横からセットあ待ってミスター"
+        },
+        {
+          "speechId": 315,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 3723720,
+          "sourceEndMs": 3729200,
+          "text": "で自分のフィールド墓地からモンスターリンク一体社会キャストできる"
+        },
+        {
+          "speechId": 316,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 3730500,
+          "sourceEndMs": 3734720,
+          "text": "アクセスコードトーカーの効果使って"
+        },
+        {
+          "speechId": 317,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 3735079,
+          "sourceEndMs": 3740839,
+          "text": "5300はまずいちょっとでかいでかすぎるちょっと待って"
+        },
+        {
+          "speechId": 318,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 3742319,
+          "sourceEndMs": 3745319,
+          "text": "よいしょ"
+        },
+        {
+          "speechId": 319,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 3750119,
+          "sourceEndMs": 3754339,
+          "text": "アクセスコード強すぎる"
+        },
+        {
+          "speechId": 320,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 3755280,
+          "sourceEndMs": 3764599,
+          "text": "よこいつどうせならオノマトピックもし掃除てくれよこいつ何使うのこれ"
+        },
+        {
+          "speechId": 321,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 3767339,
+          "sourceEndMs": 3782059,
+          "text": "激辛以下のカードなんて手札に加えるあそっかここを経由すればもう一回なるほどね理解して理解したアクセスコードとかやっぱクソだなこいつ強すぎ俺こいつのデッキじゃないんですけど今やってんのこれは"
+        },
+        {
+          "speechId": 322,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 3782780,
+          "sourceEndMs": 3786559,
+          "text": "あれしかないあれ"
+        },
+        {
+          "speechId": 323,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 3787319,
+          "sourceEndMs": 3791900,
+          "text": "しかないあれだと思っくれてたらいいぞ"
+        },
+        {
+          "speechId": 324,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 3794460,
+          "sourceEndMs": 3797720,
+          "text": "ほいペガサスあります"
+        },
+        {
+          "speechId": 325,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 3806000,
+          "sourceEndMs": 3813500,
+          "text": "どっちだこれ存在しない場合特殊召喚だからもうどっちでもいいの"
+        },
+        {
+          "speechId": 326,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 3817260,
+          "sourceEndMs": 3822079,
+          "text": "どっちでもいいよね大丈夫だよね持ってきて"
+        },
+        {
+          "speechId": 327,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 3822780,
+          "sourceEndMs": 3825319,
+          "text": "疲れよしよしよし"
+        },
+        {
+          "speechId": 328,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 3825420,
+          "sourceEndMs": 3830900,
+          "text": "うん間違えた間違えた了解"
+        },
+        {
+          "speechId": 329,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 3831299,
+          "sourceEndMs": 3834619,
+          "text": "じゃあ僕の勝ちか"
+        },
+        {
+          "speechId": 330,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 3837359,
+          "sourceEndMs": 3842059,
+          "text": "えじゃあまあ一旦待ってあげるよ俺も入れたことできてないし"
+        },
+        {
+          "speechId": 331,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 3844260,
+          "sourceEndMs": 3846559,
+          "text": "ん"
+        },
+        {
+          "speechId": 332,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 3848220,
+          "sourceEndMs": 3859220,
+          "text": "なんだこいつ[音楽]あたごめん一緒にされワンあるチャン"
+        },
+        {
+          "speechId": 333,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 3861780,
+          "sourceEndMs": 3873180,
+          "text": "間違えた間違えたやばいやばい音してるえっと手札いやちょっと待ってだもんなーと"
+        },
+        {
+          "speechId": 334,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 3873420,
+          "sourceEndMs": 3890660,
+          "text": "ママき出トピアとあー出てたてきたほんでまた出そうやなレールがやべえかもちょっといやどうしようもう手札ないから"
+        },
+        {
+          "speechId": 335,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 3896339,
+          "sourceEndMs": 3902599,
+          "text": "あってるのかな光るかななんかうわ何も引かねえ"
+        },
+        {
+          "speechId": 336,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 3907559,
+          "sourceEndMs": 3914540,
+          "text": "えこいつ殴ったらやばいんかなこれえやばいこいつ殴ったらんじゃこれ"
+        },
+        {
+          "speechId": 337,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 3915520,
+          "sourceEndMs": 3926420,
+          "text": "[笑い]どうしようこいつと思ったらやばいんちゃうこれ"
+        },
+        {
+          "speechId": 338,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 3927119,
+          "sourceEndMs": 3933619,
+          "text": "やばいんだやばいよ何もできないしな"
+        },
+        {
+          "speechId": 339,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 3934740,
+          "sourceEndMs": 3937280,
+          "text": "でも"
+        },
+        {
+          "speechId": 340,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 3938640,
+          "sourceEndMs": 3940940,
+          "text": "倒せるかこれな"
+        },
+        {
+          "speechId": 341,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 3949760,
+          "sourceEndMs": 3955460,
+          "text": "分かったロッキー"
+        },
+        {
+          "speechId": 342,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 3957120,
+          "sourceEndMs": 3966470,
+          "text": "[音楽][笑い]"
+        },
+        {
+          "speechId": 343,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 3968059,
+          "sourceEndMs": 3972260,
+          "text": "俺も正直やりたいことできんかったよ"
+        },
+        {
+          "speechId": 344,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 3973760,
+          "sourceEndMs": 3976880,
+          "text": "マジで"
+        },
+        {
+          "speechId": 345,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 3981059,
+          "sourceEndMs": 3984859,
+          "text": "結局ミストの戦いだからこのゲームそう"
+        },
+        {
+          "speechId": 346,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 3985500,
+          "sourceEndMs": 4007359,
+          "text": "メーカーいつから崖の頃からやってたよはいやっぱそういう感じなんだそうそうでまあなんかやっぱ離れた期間シンクロぐらいかなシンクロぐらいから離れ始めちゃってそれ以降のリンクとか全然触れてない状態で2年前ぐらいに復帰したかなこのマスターデュエルでえ"
+        },
+        {
+          "speechId": 347,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 4010579,
+          "sourceEndMs": 4015559,
+          "text": "ここえーとえーと"
+        },
+        {
+          "speechId": 348,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 4018460,
+          "sourceEndMs": 4022420,
+          "text": "ただこのデッキは一番"
+        },
+        {
+          "speechId": 349,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 4022640,
+          "sourceEndMs": 4025299,
+          "text": "なるほどね"
+        },
+        {
+          "speechId": 350,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 4033010,
+          "sourceEndMs": 4036149,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 351,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 4051280,
+          "sourceEndMs": 4057880,
+          "text": "全力これがこれが今できる全力かな俺の"
+        },
+        {
+          "speechId": 352,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 4060680,
+          "sourceEndMs": 4070299,
+          "text": "まあまあまあまあまあまあまあまあまあまあまあまあまあまあかかったねこのカード"
+        },
+        {
+          "speechId": 353,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 4071079,
+          "sourceEndMs": 4075760,
+          "text": "そうよなんだねでもまあ今使えないんだけど"
+        },
+        {
+          "speechId": 354,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 4077720,
+          "sourceEndMs": 4088180,
+          "text": "ねこのターンで蹴りつけれなかったらもう君かの負けなもうマジで言ってるちなみに無理かもしれないそうね"
+        },
+        {
+          "speechId": 355,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 4090260,
+          "sourceEndMs": 4097780,
+          "text": "布団モンスターこれフォトンじゃないから光らなくてこれは手札に頑張れて頑張れ"
+        },
+        {
+          "speechId": 356,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 4098779,
+          "sourceEndMs": 4108279,
+          "text": "カードでき手札から特集召喚て見せてレベル4になる一発で倒すには"
+        },
+        {
+          "speechId": 357,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 4109880,
+          "sourceEndMs": 4126160,
+          "text": "プライムフォトンじゃなくてなんだっけプライムフォトンじゃなくてGalaxyかgalaxyoneあ違うなんだっけあこれだ"
+        },
+        {
+          "speechId": 358,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 4126500,
+          "sourceEndMs": 4135819,
+          "text": "プライムフォトンドラゴンがプライムフォトンドラゴンで合ってるんだだからあそうだこれと"
+        },
+        {
+          "speechId": 359,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 4141560,
+          "sourceEndMs": 4145900,
+          "text": "むずいねーどっから行くべきまあとりあえず無難にね"
+        },
+        {
+          "speechId": 360,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 4147100,
+          "sourceEndMs": 4150520,
+          "text": "最悪なんだけど"
+        },
+        {
+          "speechId": 361,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 4152859,
+          "sourceEndMs": 4158500,
+          "text": "一旦お互い吐き出すとお互いね全部無駄になったんだけど"
+        },
+        {
+          "speechId": 362,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 4161839,
+          "sourceEndMs": 4173500,
+          "text": "組み立て直して今4枚あるから4枚もあるからお出たえっといいねこれ強いよなそれ"
+        },
+        {
+          "speechId": 363,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 4177160,
+          "sourceEndMs": 4191319,
+          "text": "2枚も増えただって増えたんですからねまだ全然ありそうですけどよしターンエンドえマイクお前は何で"
+        },
+        {
+          "speechId": 364,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 4191420,
+          "sourceEndMs": 4193960,
+          "text": "えー"
+        },
+        {
+          "speechId": 365,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 4196699,
+          "sourceEndMs": 4204219,
+          "text": "待ってやるよお前だの動き待ってるよこっちは全然余裕しマジで"
+        },
+        {
+          "speechId": 366,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 4206980,
+          "sourceEndMs": 4217780,
+          "text": "[音楽]いない[笑い]俺もいないんだよねそうなんだよねいないから"
+        },
+        {
+          "speechId": 367,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 4217950,
+          "sourceEndMs": 4223969,
+          "text": "[笑い]"
+        },
+        {
+          "speechId": 368,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 4225520,
+          "sourceEndMs": 4232300,
+          "text": "もうなんもできんもう無理や何がこいつ"
+        },
+        {
+          "speechId": 369,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 4232659,
+          "sourceEndMs": 4241900,
+          "text": "いらんのばっかり引くってあ来た来た救ってくる俺のことなし作ってくれどうにかしてくれ"
+        },
+        {
+          "speechId": 370,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 4242900,
+          "sourceEndMs": 4247940,
+          "text": "えーっとえーっとえーっと"
+        },
+        {
+          "speechId": 371,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 4249400,
+          "sourceEndMs": 4260380,
+          "text": "はいフォトンドラゴン相手に見せますほら増殖する字大丈夫だよこのターンで終わるから"
+        },
+        {
+          "speechId": 372,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 4261699,
+          "sourceEndMs": 4265360,
+          "text": "言っちゃったえっと"
+        },
+        {
+          "speechId": 373,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 4265699,
+          "sourceEndMs": 4268699,
+          "text": "あれ"
+        },
+        {
+          "speechId": 374,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 4269840,
+          "sourceEndMs": 4275380,
+          "text": "ででもこのターン終わるんでしょえっ"
+        },
+        {
+          "speechId": 375,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 4276100,
+          "sourceEndMs": 4282580,
+          "text": "あのーえっと下手すぎかも"
+        },
+        {
+          "speechId": 376,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 4290679,
+          "sourceEndMs": 4294340,
+          "text": "らいくださいせつんつんやめて"
+        },
+        {
+          "speechId": 377,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 4297440,
+          "sourceEndMs": 4304960,
+          "text": "名前勘違いしてた名前が出てたんだそっくりさんやったこれ"
+        },
+        {
+          "speechId": 378,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 4308600,
+          "sourceEndMs": 4313850,
+          "text": "Galaxちょっと[音楽]"
+        },
+        {
+          "speechId": 379,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 4314540,
+          "sourceEndMs": 4322000,
+          "text": "ヒーロー1を出しとくかここでゴッホーねじゃあ戻すねやめよう"
+        },
+        {
+          "speechId": 380,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 4323060,
+          "sourceEndMs": 4326060,
+          "text": "よし"
+        },
+        {
+          "speechId": 381,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 4335540,
+          "sourceEndMs": 4341239,
+          "text": "来ただけどえーっと"
+        },
+        {
+          "speechId": 382,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 4344020,
+          "sourceEndMs": 4347739,
+          "text": "これだけど"
+        },
+        {
+          "speechId": 383,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 4349140,
+          "sourceEndMs": 4355840,
+          "text": "[音楽]こんな事故ることある"
+        },
+        {
+          "speechId": 384,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 4359659,
+          "sourceEndMs": 4367000,
+          "text": "自分の墓地のフォトモンスター1体だからこっちを捨てればいいんだね"
+        },
+        {
+          "speechId": 385,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 4367159,
+          "sourceEndMs": 4381460,
+          "text": "禁じられた人はちゃんとモンスターが効果使えないんだなここでキャラクター"
+        },
+        {
+          "speechId": 386,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 4382219,
+          "sourceEndMs": 4392980,
+          "text": "さっき捨てたのをなるほど特殊召喚かっこいいよしよしよしよし"
+        },
+        {
+          "speechId": 387,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 4393880,
+          "sourceEndMs": 4400480,
+          "text": "これが出ることでなんとアフターグローが紹介できる"
+        },
+        {
+          "speechId": 388,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 4404160,
+          "sourceEndMs": 4407310,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 389,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 4418700,
+          "sourceEndMs": 4422149,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 390,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 4423140,
+          "sourceEndMs": 4427659,
+          "text": "これ死んだか"
+        },
+        {
+          "speechId": 391,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 4427699,
+          "sourceEndMs": 4430179,
+          "text": "倒されるわけないよ"
+        },
+        {
+          "speechId": 392,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 4435100,
+          "sourceEndMs": 4440440,
+          "text": "特殊召喚また出てくる"
+        },
+        {
+          "speechId": 393,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 4443420,
+          "sourceEndMs": 4446020,
+          "text": "やっ"
+        },
+        {
+          "speechId": 394,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 4447020,
+          "sourceEndMs": 4453280,
+          "text": "たオーバーキル多分ひどいデュエルやったなぁ"
+        },
+        {
+          "speechId": 395,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 4453940,
+          "sourceEndMs": 4459040,
+          "text": "なんか今の違うわなんかちゃうね"
+        },
+        {
+          "speechId": 396,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 4467440,
+          "sourceEndMs": 4473440,
+          "text": "リベンジマッチやったら俺の最強でっき"
+        },
+        {
+          "speechId": 397,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 4473780,
+          "sourceEndMs": 4477880,
+          "text": "何だっけこれじゃないと勝てねえ"
+        },
+        {
+          "speechId": 398,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 4479900,
+          "sourceEndMs": 4483219,
+          "text": "これ自分で考えたんだよね"
+        },
+        {
+          "speechId": 399,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 4484940,
+          "sourceEndMs": 4498159,
+          "text": "めっちゃ昔に考えたやつ今でもそこそこ使えてるわいやそうなんか有識者めっちゃコメント見欄てすごかったよみんなでもう素敵"
+        },
+        {
+          "speechId": 400,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 4498940,
+          "sourceEndMs": 4505780,
+          "text": "大丈夫そう大丈夫そう残機アレルギ出てないなんか"
+        },
+        {
+          "speechId": 401,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 4509000,
+          "sourceEndMs": 4513260,
+          "text": "装飾するG3枚みたいなそういうことそんな"
+        },
+        {
+          "speechId": 402,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 4513380,
+          "sourceEndMs": 4516520,
+          "text": "ないね"
+        },
+        {
+          "speechId": 403,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 4522640,
+          "sourceEndMs": 4525640,
+          "text": "デュエリスト"
+        },
+        {
+          "speechId": 404,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 4526360,
+          "sourceEndMs": 4531520,
+          "text": "俺もさっきなんかフルハウスだけ取っもんたねだって"
+        },
+        {
+          "speechId": 405,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 4532699,
+          "sourceEndMs": 4537100,
+          "text": "これ怖いよちなみにえまじで"
+        },
+        {
+          "speechId": 406,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 4544120,
+          "sourceEndMs": 4551560,
+          "text": "早めに終わらせてなもう一緒やろっかほないやまだ諦めてない"
+        },
+        {
+          "speechId": 407,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 4562640,
+          "sourceEndMs": 4571229,
+          "text": "でしょデッキから持ってきて回ってます[音楽]"
+        },
+        {
+          "speechId": 408,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 4572900,
+          "sourceEndMs": 4578560,
+          "text": "言っいいてよ[音楽]"
+        },
+        {
+          "speechId": 409,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 4584000,
+          "sourceEndMs": 4586659,
+          "text": "プラント売って"
+        },
+        {
+          "speechId": 410,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 4587890,
+          "sourceEndMs": 4599679,
+          "text": "[音楽]まあまあまあまあ加えるのがでもこっちかなリーサルがこうで"
+        },
+        {
+          "speechId": 411,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 4600140,
+          "sourceEndMs": 4618520,
+          "text": "いやそうだよなこっちだねまずいやらかしたちょっとだけちょっとだけねちょっとだけね線をギャラクシーソルジャーだそうそうこいつも入るのよ"
+        },
+        {
+          "speechId": 412,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 4618620,
+          "sourceEndMs": 4620980,
+          "text": "ちょうど良くて"
+        },
+        {
+          "speechId": 413,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 4621020,
+          "sourceEndMs": 4623199,
+          "text": "殴れそう"
+        },
+        {
+          "speechId": 414,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 4625060,
+          "sourceEndMs": 4635500,
+          "text": "そんなさ呼吸乱れること[笑い]楽しみに"
+        },
+        {
+          "speechId": 415,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 4635840,
+          "sourceEndMs": 4643360,
+          "text": "カードと引けて嬉しい思うけどなそんな嬉しいよこのカード以外"
+        },
+        {
+          "speechId": 416,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 4644420,
+          "sourceEndMs": 4656619,
+          "text": "の手札に加えるそうそうデッキからサイバーいうドラゴン持ってくるって[音楽]"
+        },
+        {
+          "speechId": 417,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 4657500,
+          "sourceEndMs": 4666040,
+          "text": "Galaxyソルジャーはいはいはいはいはいはいはいはいいいよねそれじゃあねいやいいね使いやすいね"
+        },
+        {
+          "speechId": 418,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 4671140,
+          "sourceEndMs": 4674800,
+          "text": "はいはいはいはいはいはいはい"
+        },
+        {
+          "speechId": 419,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 4675440,
+          "sourceEndMs": 4678440,
+          "text": "OK"
+        },
+        {
+          "speechId": 420,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 4679179,
+          "sourceEndMs": 4682840,
+          "text": "ソルジャーとソルジャーで"
+        },
+        {
+          "speechId": 421,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 4683540,
+          "sourceEndMs": 4685840,
+          "text": "サイバードラゴン"
+        },
+        {
+          "speechId": 422,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 4688179,
+          "sourceEndMs": 4709540,
+          "text": "の効果使って自分の墓地のサイバードラゴンを使用しているサイバードラゴンサイバードラゴンって柄違うのに同じ名前なんだねなんかそうあのーとするみたいな効果がいっぱい書いてあるサイバードラゴンとする"
+        },
+        {
+          "speechId": 423,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 4712659,
+          "sourceEndMs": 4719739,
+          "text": "までもこれはどうしようもないなよしよしよしよし"
+        },
+        {
+          "speechId": 424,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 4720930,
+          "sourceEndMs": 4727719,
+          "text": "[音楽]まあ仕方ないなほんなら"
+        },
+        {
+          "speechId": 425,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 4734300,
+          "sourceEndMs": 4737080,
+          "text": "まあそうだね"
+        },
+        {
+          "speechId": 426,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 4737120,
+          "sourceEndMs": 4739540,
+          "text": "困っておられる"
+        },
+        {
+          "speechId": 427,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 4743440,
+          "sourceEndMs": 4747880,
+          "text": "ここが限界かな"
+        },
+        {
+          "speechId": 428,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 4748600,
+          "sourceEndMs": 4752020,
+          "text": "できなかったなぁ"
+        },
+        {
+          "speechId": 429,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 4763280,
+          "sourceEndMs": 4770620,
+          "text": "でもどうしようこれでいっ"
+        },
+        {
+          "speechId": 430,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 4772400,
+          "sourceEndMs": 4776140,
+          "text": "かどうしような"
+        },
+        {
+          "speechId": 431,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 4778239,
+          "sourceEndMs": 4787480,
+          "text": "アルミラージは大丈夫サイバードラゴンインフィニティ効果エグい向こうなうん何でも1回だね"
+        },
+        {
+          "speechId": 432,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 4788030,
+          "sourceEndMs": 4792189,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 433,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 4795380,
+          "sourceEndMs": 4805270,
+          "text": "だって素材にしちゃうの相手の攻撃表示のモンスターを吸収できるね自分のため[音楽]"
+        },
+        {
+          "speechId": 434,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 4806840,
+          "sourceEndMs": 4814719,
+          "text": "効果発動した時このカードね[音楽]でも"
+        },
+        {
+          "speechId": 435,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 4814820,
+          "sourceEndMs": 4819159,
+          "text": "どっだかで向こうにされたら嫌から"
+        },
+        {
+          "speechId": 436,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 4819800,
+          "sourceEndMs": 4822460,
+          "text": "待っよて"
+        },
+        {
+          "speechId": 437,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 4826960,
+          "sourceEndMs": 4831100,
+          "text": "やっぱ大事じゃない"
+        },
+        {
+          "speechId": 438,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 4831500,
+          "sourceEndMs": 4838120,
+          "text": "お手札墓地に送ってあーなるほど駅からレベリング"
+        },
+        {
+          "speechId": 439,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 4842830,
+          "sourceEndMs": 4845899,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 440,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 4847940,
+          "sourceEndMs": 4858460,
+          "text": "買っ時たの何かかあった時の何でもいいダイヤとかにしとくか"
+        },
+        {
+          "speechId": 441,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 4859990,
+          "sourceEndMs": 4868460,
+          "text": "[音楽]どうしようかな"
+        },
+        {
+          "speechId": 442,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 4869140,
+          "sourceEndMs": 4872980,
+          "text": "君は賢いな"
+        },
+        {
+          "speechId": 443,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 4875710,
+          "sourceEndMs": 4878880,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 444,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 4898400,
+          "sourceEndMs": 4914320,
+          "text": "これで破壊されへんに何だとうわマジだうわうわうわうわ地味にいたなこれまだ1回もここにできるよ"
+        },
+        {
+          "speechId": 445,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 4915460,
+          "sourceEndMs": 4933940,
+          "text": "なるほどねところがぎっちょん効果マジか意外に途中経過にしか使われないからがち忘れだよねこいつ持ってきとけばよかったなぁサーキュラーを召喚はいはいはいはい"
+        },
+        {
+          "speechId": 446,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 4934940,
+          "sourceEndMs": 4947920,
+          "text": "えーっとこれが確か手札から特殊召喚する効果でこいつがなんか墓地にも置くとなんだシグマかこのカードがエクササイズ"
+        },
+        {
+          "speechId": 447,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 4949880,
+          "sourceEndMs": 4953140,
+          "text": "いやでも今じゃないか"
+        },
+        {
+          "speechId": 448,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 4956300,
+          "sourceEndMs": 4962860,
+          "text": "これで墓地からシグマはいはい"
+        },
+        {
+          "speechId": 449,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 4964900,
+          "sourceEndMs": 4983480,
+          "text": "確かこれでシンクロするんじゃなかったあデッキから残機魔法トラップを手札に加えるあーでそうだそうだあったあったこれでなんか敵のターンに融合するトラップみたいな引っ張ってくんだわ思い出したよし"
+        },
+        {
+          "speechId": 450,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 4986780,
+          "sourceEndMs": 4995380,
+          "text": "よしよ紹介をくる状持ってそうそうそして止めるべきか悩んだけどね"
+        },
+        {
+          "speechId": 451,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 5002580,
+          "sourceEndMs": 5005729,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 452,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 5009300,
+          "sourceEndMs": 5039000,
+          "text": "ここで無効かななるほど多分わからんこようがだが持ってとしてるやつがすでに出たよそうなんだよさっきかこっちから選んだんだよなぁ[拍手][音楽]されたんだけどラッキー[音楽]ダイヤがまだ出せるダイヤの効果発動はいはいはい"
+        },
+        {
+          "speechId": 453,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 5041219,
+          "sourceEndMs": 5052320,
+          "text": "さあくる今日持ってえっと特殊召喚できるのかなるほどねいやー止めるか"
+        },
+        {
+          "speechId": 454,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 5053560,
+          "sourceEndMs": 5057840,
+          "text": "愛しい塾なるほどね"
+        },
+        {
+          "speechId": 455,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 5060340,
+          "sourceEndMs": 5065820,
+          "text": "子供めっちゃ嫌やわーこの間でもこれ"
+        },
+        {
+          "speechId": 456,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 5065860,
+          "sourceEndMs": 5071340,
+          "text": "他にない気がするから"
+        },
+        {
+          "speechId": 457,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 5072340,
+          "sourceEndMs": 5077100,
+          "text": "えこれってこれ使ったことないんだよな使ってみよう"
+        },
+        {
+          "speechId": 458,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 5078040,
+          "sourceEndMs": 5082360,
+          "text": "暗殺はいの指名者はいはいはいはいはいえーと"
+        },
+        {
+          "speechId": 459,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 5086580,
+          "sourceEndMs": 5090719,
+          "text": "この効果で除外したカード"
+        },
+        {
+          "speechId": 460,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 5091560,
+          "sourceEndMs": 5096179,
+          "text": "ダメないなんだこれ俺もよくわかんな"
+        },
+        {
+          "speechId": 461,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 5102480,
+          "sourceEndMs": 5115750,
+          "text": "はいはいはいはいまあいいや面白いなからのアビオン[音楽]"
+        },
+        {
+          "speechId": 462,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 5120120,
+          "sourceEndMs": 5125840,
+          "text": "[拍手][笑い]"
+        },
+        {
+          "speechId": 463,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 5127710,
+          "sourceEndMs": 5130869,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 464,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 5130900,
+          "sourceEndMs": 5136719,
+          "text": "デバイスを突破しなきゃいけないこれ"
+        },
+        {
+          "speechId": 465,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 5136900,
+          "sourceEndMs": 5153179,
+          "text": "ただもうできることがLINEの@でいやーでもきついななんか俺のモンスター持ってかれたんけどだなんか知らんけどおい何でだよシャトルもできなくて"
+        },
+        {
+          "speechId": 466,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 5154780,
+          "sourceEndMs": 5156900,
+          "text": "た"
+        },
+        {
+          "speechId": 467,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 5162580,
+          "sourceEndMs": 5172679,
+          "text": "最高だあーえーとこうこうだからこれでまあここ持ってく形になるかなぁ"
+        },
+        {
+          "speechId": 468,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 5173699,
+          "sourceEndMs": 5176820,
+          "text": "これで"
+        },
+        {
+          "speechId": 469,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 5176980,
+          "sourceEndMs": 5190320,
+          "text": "あ待ってよあいつってまあでも使うしかないなこれどっちにしろでこれでドラゴンノヴァ持ってくる2100これるけどの機械族持ってんだ"
+        },
+        {
+          "speechId": 470,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 5192340,
+          "sourceEndMs": 5197100,
+          "text": "からのもうちょっと待つ"
+        },
+        {
+          "speechId": 471,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 5198400,
+          "sourceEndMs": 5202080,
+          "text": "で出します"
+        },
+        {
+          "speechId": 472,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 5204100,
+          "sourceEndMs": 5208679,
+          "text": "それなるほど"
+        },
+        {
+          "speechId": 473,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 5209260,
+          "sourceEndMs": 5215760,
+          "text": "こいつはまだ無効化効果ないんだけどこの後こいつの上に重ねるね"
+        },
+        {
+          "speechId": 474,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 5216219,
+          "sourceEndMs": 5221159,
+          "text": "教えてあげますねインフィニティになります"
+        },
+        {
+          "speechId": 475,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 5222940,
+          "sourceEndMs": 5228239,
+          "text": "あーでもこっちの悪魔あるのか"
+        },
+        {
+          "speechId": 476,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 5232420,
+          "sourceEndMs": 5241380,
+          "text": "悩むめっちゃ悩むこれを出してやってほんでこいつ着地させるが卓あるんだけど"
+        },
+        {
+          "speechId": 477,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 5241960,
+          "sourceEndMs": 5253980,
+          "text": "そっちの方が勝てそうな気がするかな何が来るんだいやむずいこれどっちがいいんだろう"
+        },
+        {
+          "speechId": 478,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 5258280,
+          "sourceEndMs": 5264239,
+          "text": "いやこれねトークン吸えないんだよねこれ相手は攻撃表示じゃないから"
+        },
+        {
+          "speechId": 479,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 5266800,
+          "sourceEndMs": 5269219,
+          "text": "吸えないんだけど"
+        },
+        {
+          "speechId": 480,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 5276040,
+          "sourceEndMs": 5278820,
+          "text": "星川の大好きな"
+        },
+        {
+          "speechId": 481,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 5280000,
+          "sourceEndMs": 5285239,
+          "text": "こいつを使います無効なんだよね"
+        },
+        {
+          "speechId": 482,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 5288000,
+          "sourceEndMs": 5299639,
+          "text": "冷酷な判断いやでもあーでもそうかでもこうなると言っでしょたそうか"
+        },
+        {
+          "speechId": 483,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 5300239,
+          "sourceEndMs": 5319199,
+          "text": "これをこうしてこれを吸収するでしょはいはいでバトルフェイズでこうするんだよねでここで以前"
+        },
+        {
+          "speechId": 484,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 5325900,
+          "sourceEndMs": 5341880,
+          "text": "これしかないかなやばいなこれでかいなゼウスちょっと待ってよでもまあそうかそうかバトルくらいか"
+        },
+        {
+          "speechId": 485,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 5345820,
+          "sourceEndMs": 5349320,
+          "text": "一旦これ出して"
+        },
+        {
+          "speechId": 486,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 5352120,
+          "sourceEndMs": 5355080,
+          "text": "どうしようかな"
+        },
+        {
+          "speechId": 487,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 5355679,
+          "sourceEndMs": 5359760,
+          "text": "こいつも攻撃表示にして"
+        },
+        {
+          "speechId": 488,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 5361780,
+          "sourceEndMs": 5364260,
+          "text": "ふむ"
+        },
+        {
+          "speechId": 489,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 5368199,
+          "sourceEndMs": 5373620,
+          "text": "だっ生きるするて気がんだけど選択肢が多すぎてパニクっています"
+        },
+        {
+          "speechId": 490,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 5384460,
+          "sourceEndMs": 5387460,
+          "text": "か"
+        },
+        {
+          "speechId": 491,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 5396239,
+          "sourceEndMs": 5412800,
+          "text": "いつでも使えるねはいはいはいはいアドバイスしてあげようお願いしますメインフェイズ1動けば動くこと損だねバトルもうサクッとフェイズでトークに殴らせて効果使わせないと"
+        },
+        {
+          "speechId": 492,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 5412900,
+          "sourceEndMs": 5426840,
+          "text": "でそれでこれも吐くしかないからこれで殺さぐらいれるやったらメインするフェイズ2で展開といいななるほどそうそうすればもうあの先生効果吐くしかないから"
+        },
+        {
+          "speechId": 493,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 5428800,
+          "sourceEndMs": 5438360,
+          "text": "でメインフェイズ2でなんか色々やるしかないな[音楽]頑張れ"
+        },
+        {
+          "speechId": 494,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 5443620,
+          "sourceEndMs": 5451020,
+          "text": "でちょっとも何もできないんだよな俺もこっから展開されたらもうおまけかも"
+        },
+        {
+          "speechId": 495,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 5451420,
+          "sourceEndMs": 5453659,
+          "text": "頑張ってください"
+        },
+        {
+          "speechId": 496,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 5456159,
+          "sourceEndMs": 5469679,
+          "text": "6日ちゃんがこんなに遊戯王好きだなんて知らなかったよいや好きだよなんかあのだからリスナー対戦楽しいかな最近この後もやるけど"
+        },
+        {
+          "speechId": 497,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 5471520,
+          "sourceEndMs": 5477120,
+          "text": "サブトラどっちでもいいの"
+        },
+        {
+          "speechId": 498,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 5478659,
+          "sourceEndMs": 5482139,
+          "text": "かこれはダウン"
+        },
+        {
+          "speechId": 499,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 5484480,
+          "sourceEndMs": 5502020,
+          "text": "攻撃力下がるのかいやでもサーキュラーとサブトラだっもうたら回っちゃいそうだなうんいけそうこっちからトラップカードってかもしれないで"
+        },
+        {
+          "speechId": 500,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 5502840,
+          "sourceEndMs": 5509100,
+          "text": "クランベルシオン通常召喚はして"
+        },
+        {
+          "speechId": 501,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 5509260,
+          "sourceEndMs": 5512340,
+          "text": "スタンド出してみて"
+        },
+        {
+          "speechId": 502,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 5513300,
+          "sourceEndMs": 5525000,
+          "text": "もうバトルフェイズないからねもうねそうかそうだよねこの単独やな次の俺の動きを完封する動きするしかない"
+        },
+        {
+          "speechId": 503,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 5527080,
+          "sourceEndMs": 5530580,
+          "text": "暑いねー持ってくる"
+        },
+        {
+          "speechId": 504,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 5530639,
+          "sourceEndMs": 5533820,
+          "text": "持ってきて"
+        },
+        {
+          "speechId": 505,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 5534639,
+          "sourceEndMs": 5537300,
+          "text": "これも"
+        },
+        {
+          "speechId": 506,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 5538540,
+          "sourceEndMs": 5546300,
+          "text": "出してここでスプラッシュメッセージが出せて"
+        },
+        {
+          "speechId": 507,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 5547719,
+          "sourceEndMs": 5553440,
+          "text": "えでもそうだよな次で死んじゃいそうな"
+        },
+        {
+          "speechId": 508,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 5556060,
+          "sourceEndMs": 5561540,
+          "text": "これも出そういいよパラレルエクシー"
+        },
+        {
+          "speechId": 509,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 5564340,
+          "sourceEndMs": 5567540,
+          "text": "出して出しまして"
+        },
+        {
+          "speechId": 510,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 5573390,
+          "sourceEndMs": 5577419,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 511,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 5579120,
+          "sourceEndMs": 5593580,
+          "text": "よかった時間長くしといてメイクちゃんのことめっちゃ待たせてるけど900名あれこれ知らないよ俺今回山フォローできました"
+        },
+        {
+          "speechId": 512,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 5602800,
+          "sourceEndMs": 5606600,
+          "text": "何でもいい気がする"
+        },
+        {
+          "speechId": 513,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 5606940,
+          "sourceEndMs": 5613260,
+          "text": "はいはいでアップデートアップデートジャマーを"
+        },
+        {
+          "speechId": 514,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 5616719,
+          "sourceEndMs": 5620460,
+          "text": "はいはいはいはいいたなこのやつ"
+        },
+        {
+          "speechId": 515,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 5628750,
+          "sourceEndMs": 5631920,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 516,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 5634179,
+          "sourceEndMs": 5638460,
+          "text": "確かにアクセスでもう"
+        },
+        {
+          "speechId": 517,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 5641820,
+          "sourceEndMs": 5645120,
+          "text": "ちゃんとできた"
+        },
+        {
+          "speechId": 518,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 5646060,
+          "sourceEndMs": 5653159,
+          "text": "墓地ねにリンクモンスターが3体いんのいや強いな"
+        },
+        {
+          "speechId": 519,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 5655800,
+          "sourceEndMs": 5659639,
+          "text": "何引いたらワンチャンあるんだ"
+        },
+        {
+          "speechId": 520,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 5661000,
+          "sourceEndMs": 5664320,
+          "text": "でもエンドはないぜ"
+        },
+        {
+          "speechId": 521,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 5668650,
+          "sourceEndMs": 5678120,
+          "text": "[音楽]アクセスコードトーク相手のターンでも確か相手フィールドのカード1枚選んで破壊する"
+        },
+        {
+          "speechId": 522,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 5682540,
+          "sourceEndMs": 5685500,
+          "text": "よ"
+        },
+        {
+          "speechId": 523,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 5689070,
+          "sourceEndMs": 5694139,
+          "text": "[笑い]こいつがいた"
+        },
+        {
+          "speechId": 524,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 5694780,
+          "sourceEndMs": 5705360,
+          "text": "もうアドバイスはしないぜOkこれ残機いるよな残機いるから今回一応発動しとこうこれこれなんだこれは"
+        },
+        {
+          "speechId": 525,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 5705480,
+          "sourceEndMs": 5710040,
+          "text": "カード1枚を破壊できるあー"
+        },
+        {
+          "speechId": 526,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 5712360,
+          "sourceEndMs": 5718080,
+          "text": "半分払ってそのターンそのトラップ使わないでね"
+        },
+        {
+          "speechId": 527,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 5718700,
+          "sourceEndMs": 5725880,
+          "text": "[音楽]なん特定だこれデッキからのカードセットしますか"
+        },
+        {
+          "speechId": 528,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 5726580,
+          "sourceEndMs": 5735659,
+          "text": "あーなんだっけ相手がトラップ選んであ置けるんだそうそうそうそうありがとうございますあいいですよ"
+        },
+        {
+          "speechId": 529,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 5737560,
+          "sourceEndMs": 5763320,
+          "text": "駅から特殊召喚するモンスターを選んでください待ってよこれあそうなるのかえーっとよ待てちょっと俺もこの効果初めて使ったんだよなここまでこじれることなくてこの形ドラゴンモンスターを一体特殊する召喚あーなるほどじゃあこいつでいいのか"
+        },
+        {
+          "speechId": 530,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 5793610,
+          "sourceEndMs": 5804770,
+          "text": "[笑い]わしの価値やな[笑い][音楽]"
+        },
+        {
+          "speechId": 531,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 5805020,
+          "sourceEndMs": 5811239,
+          "text": "あーよかったおもろかったねせっかく"
+        },
+        {
+          "speechId": 532,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 5811600,
+          "sourceEndMs": 5829440,
+          "text": "教えたかったそれでもサイバーって相手のペロンシーがちなよねでそうそうなんかサイバードラゴンっいうて名前ついてるやつ何でもいいのなんか1匹いて相手のリンクゾーンに1匹いたら今のやつがペロンって"
+        },
+        {
+          "speechId": 533,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 5829560,
+          "sourceEndMs": 5839100,
+          "text": "そうそうだからもうああいう状況なったらサイバー系列が出た瞬間にもう全部どかしていかないと食べられちゃう"
+        },
+        {
+          "speechId": 534,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 5840300,
+          "sourceEndMs": 5849600,
+          "text": "よまたやりましょうよかったまた残機回しといてなぁ"
+        },
+        {
+          "speechId": 535,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 5853620,
+          "sourceEndMs": 5862620,
+          "text": "だいぶた事故ってな俺もいやおもろかったわありがとうまたやろうあーまたやりましょう"
+        },
+        {
+          "speechId": 536,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 5862650,
+          "sourceEndMs": 5871980,
+          "text": "[音楽]ということでメイカちゃんでしたありがとうございますよ"
+        },
+        {
+          "speechId": 537,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 5872020,
+          "sourceEndMs": 5884280,
+          "text": "やっぱあの人なんか普段麻雀やってるイメージ強いからさやっぱ頭いいんだわうーんわからんけどちょっと悔しいシンプル"
+        },
+        {
+          "speechId": 538,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 5884560,
+          "sourceEndMs": 5887219,
+          "text": "うめえ"
+        },
+        {
+          "speechId": 539,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 5888880,
+          "sourceEndMs": 5899940,
+          "text": "いい勝負したいな次はパチパチパチパチえちゃんとねメーカーちゃんだっ遊戯おじさんたうんやっぱ遊戯王で育ってきてたらしい"
+        },
+        {
+          "speechId": 540,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 5901719,
+          "sourceEndMs": 5909239,
+          "text": "ちょっと待ってミリカちゃんボコって次の人に挑む予定だったのにちょっと自信がなくなってしまったぞ"
+        },
+        {
+          "speechId": 541,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 5910380,
+          "sourceEndMs": 5917219,
+          "text": "おいおいおいおい肩が冷えちまったよ待ちすぎてなぁ"
+        },
+        {
+          "speechId": 542,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 5918460,
+          "sourceEndMs": 5932100,
+          "text": "ぶっ飛ばしてやるよ今日ずっとカードゲームやってたからよほかほかやでホカホカよ自己紹介お願いします"
+        },
+        {
+          "speechId": 543,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 5932639,
+          "sourceEndMs": 5936540,
+          "text": "お願いします"
+        },
+        {
+          "speechId": 544,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 5938980,
+          "sourceEndMs": 5946920,
+          "text": "昨日3時間ぐらいカードゲームしてて今日は8時間くらい8時間もう逆に疲れてきません"
+        },
+        {
+          "speechId": 545,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 5953980,
+          "sourceEndMs": 5960239,
+          "text": "[笑い]めちゃくちゃ面白い"
+        },
+        {
+          "speechId": 546,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 5960460,
+          "sourceEndMs": 6000380,
+          "text": "いや今がチャンス任せろいやちゃんということであの今まで使ったことないやつ2つ覚えてきたから今回今日のために嬉しいそんな楽しみにしてくれてたんですか楽しみにしてたしまあなんか調子こいたこと言ってたから今回はうまくできますみたいなでなんか最近いやこれね23時でも使ってる人いるかもしれないんだけどあのなんか最近俺のね好きな作品のねテーマデッキがなんか強化されたって聞いたらそれ持ってきたの何なんだろうテーマやってみようぜやってみます"
+        },
+        {
+          "speechId": 547,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 6000780,
+          "sourceEndMs": 6036080,
+          "text": "嬉しいもうやしろさんがこないだやってくれた時にすごい楽しそうにやってくれたからもう絶対呼ぼうと思って次のありがとう楽しみですね今日は今日は楽しむぜさすがに前回やった時遊戯を始めて3ヶ月くらいだったと思うんでちょっと上手くなりましたマジかじゃあちょっと見せてもらおうかなその実力とやろうじゃあとりあえず闇の誘惑は俺はあれだなあの2枚ドローして闇属性のモンスターを1体手札出してる除外するでそれできなかったら手札前世"
+        },
+        {
+          "speechId": 548,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 6038900,
+          "sourceEndMs": 6043320,
+          "text": "もう1回でえーっと"
+        },
+        {
+          "speechId": 549,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 6045060,
+          "sourceEndMs": 6047900,
+          "text": "すごいちゃんと先生だった"
+        },
+        {
+          "speechId": 550,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 6048020,
+          "sourceEndMs": 6053719,
+          "text": "これ勝手にね無言でサッカーやり始めたら終わりだからな"
+        },
+        {
+          "speechId": 551,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 6054130,
+          "sourceEndMs": 6057199,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 552,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 6058260,
+          "sourceEndMs": 6074820,
+          "text": "るってカードは手札から切るとなんかえっと永続魔法じゃないな海賊か黒バネのやつ扇風機ってやつを持ってこれますこのカードは闇属性シンクロモンスト特殊召喚した時に特殊"
+        },
+        {
+          "speechId": 553,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 6075360,
+          "sourceEndMs": 6124520,
+          "text": "召喚したモンスターより攻撃力低いブラックフェザーモンスターを特殊召喚墓地から墓地か除外されているモンスターの中から特殊感みたいな感じでます俺はシムーンを発動しチムーンはデッキから黒い旋風っていう映像魔法を持ってきてでその後特殊召喚できますシムーンを召喚してで黒い旋風はブラックフェザーモンスターが召喚された時に効果発動そいつより攻撃力のスピーカーカードをこれる持って俺が持ってくるのは現用の硯まだ通常償還金を使っていないので現用の硯を召喚ゲームの綴りと黒い旋風の光波が効果が誘発します"
+        },
+        {
+          "speechId": 554,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 6129000,
+          "sourceEndMs": 6134960,
+          "text": "持ってくるのはえーとですねブライのバーター"
+        },
+        {
+          "speechId": 555,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 6136159,
+          "sourceEndMs": 6149060,
+          "text": "何持ってこようかなこれ何でもいいなもうシャワー[笑い]ブラックバード半年前に"
+        },
+        {
+          "speechId": 556,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 6151340,
+          "sourceEndMs": 6198679,
+          "text": "真剣にやってんだよ真剣にやってんだよこいつはでしますでバータの効果発動バータはデッキからレベルの合計が8になるようにこのカードとチューナー以外のブラックフェザーモンスターを1体以上墓地に送るなるほど俺が送るのはチヌークと絶品なんか墓地から特殊召喚できるモンスターがいるんだけどそれを知りますなんか来たでブラックフェザードラゴンを召喚します戦法の効果からそうですね墓地からバーターを持ってきます"
+        },
+        {
+          "speechId": 557,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 6203820,
+          "sourceEndMs": 6231860,
+          "text": "で墓地にいるゼピロスってカードを持っきてますでこのゼビロってカードは墓地から戦場に戻す時に何かのカードを手札に戻さないといけないっていうこれ一見デメリット効果に見えるんだが俺が戻すのは黒羽の扇風金の旋風は一旦に1回一度しか効果がないんだけどこれを入り直すともう1使い回せ回るっていう"
+        },
+        {
+          "speechId": 558,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 6234540,
+          "sourceEndMs": 6237780,
+          "text": "合法だねいやいや"
+        },
+        {
+          "speechId": 559,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 6238199,
+          "sourceEndMs": 6242780,
+          "text": "合法だね何を言ってるのかがさっぱりわからないな"
+        },
+        {
+          "speechId": 560,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 6244639,
+          "sourceEndMs": 6256040,
+          "text": "俺は真剣に学んできたんだぞ感謝してほしいけどなそしてバートとスズリでノートングを召喚"
+        },
+        {
+          "speechId": 561,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 6258420,
+          "sourceEndMs": 6261739,
+          "text": "権を1回だけ増やせるっていう"
+        },
+        {
+          "speechId": 562,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 6264600,
+          "sourceEndMs": 6288679,
+          "text": "脳天狗をシンクロした時に墓地にいるシャマールの効果を誘発させるシャマールは墓地から手札に除外することで墓地から除外することで手札にブラックペーパーモンスターを戻すという効果があるがで綴りを戻すで硯の通常召喚権増えたため硯を通常召喚する"
+        },
+        {
+          "speechId": 563,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 6289219,
+          "sourceEndMs": 6300619,
+          "text": "お前が受けるんだよそして黒い旋風と硯の効果がもう一度発動する爆破だ"
+        },
+        {
+          "speechId": 564,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 6301610,
+          "sourceEndMs": 6307699,
+          "text": "[音楽]ごめんねご親族でデュエルせよ"
+        },
+        {
+          "speechId": 565,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 6308040,
+          "sourceEndMs": 6310699,
+          "text": "止まらんなぁ"
+        },
+        {
+          "speechId": 566,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 6312920,
+          "sourceEndMs": 6316280,
+          "text": "手札に加える"
+        },
+        {
+          "speechId": 567,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 6316860,
+          "sourceEndMs": 6319880,
+          "text": "一人でやってるよ"
+        },
+        {
+          "speechId": 568,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 6320040,
+          "sourceEndMs": 6384739,
+          "text": "ですずりの効果を発動するつづりは場にいるブラックフェザーモンスターを生贄に捧げることでレベル2のトークンを生み出すことができる俺が俺が除外するのはいつが破壊するのは死ぬん死ぬんお破壊することで原因をトークンこいつはチューナーモンスターだからシンクロモンスターの素材にすることができるぞなるほどでこのレベルにモンスターと勉強になりますこいつを落とすことでボレーアースをシンクロ召喚ボレーアースは戦場に出た時にデッキからブラックフェザーモンスターを墓地に落とすことでそのレベルになることができるなるほどこれは落とすのは俺が落とすのはレベル1のトップのやつはレベル1になるまあまあ見てなさいボレアスとこのボレーレベルアースとブラックドラゴンの1と8でチューニング召喚するのは魂のカード"
+        },
+        {
+          "speechId": 569,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 6385080,
+          "sourceEndMs": 6388940,
+          "text": "エンマリオレッドデーモンアビス"
+        },
+        {
+          "speechId": 570,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 6389000,
+          "sourceEndMs": 6403460,
+          "text": "が強いんだそしてベッドでもサービスが出たことにより車での旋風が誘発[音楽]からボレーアースを戦場に戻す"
+        },
+        {
+          "speechId": 571,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 6404119,
+          "sourceEndMs": 6419960,
+          "text": "そしてこれアーストスズリでチューニングボレーアースはチューナーモンスターだレベル10のモンスターブラックフェザーアサルトドラゴン新キャラ召喚レベル10の最強モンスター"
+        },
+        {
+          "speechId": 572,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 6420500,
+          "sourceEndMs": 6439880,
+          "text": "さらにさらに墓地から墓地からシンクロとなる素材を除外することでもう一強いブラックはアサルトドラゴンシンクロ召喚バニーシンクロモンスターが4体最強お前は死んだ"
+        },
+        {
+          "speechId": 573,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 6440360,
+          "sourceEndMs": 6450739,
+          "text": "あーやばいやばいごめんね種族でデールせよ俺だってレボリューションなんだ"
+        },
+        {
+          "speechId": 574,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 6455719,
+          "sourceEndMs": 6459080,
+          "text": "よもうちゃんと"
+        },
+        {
+          "speechId": 575,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 6459440,
+          "sourceEndMs": 6473100,
+          "text": "効果で変わりません努力はできるなるほどねえーとこのカードはもしかしている"
+        },
+        {
+          "speechId": 576,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 6474600,
+          "sourceEndMs": 6477600,
+          "text": "うわぁ"
+        },
+        {
+          "speechId": 577,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 6478139,
+          "sourceEndMs": 6480980,
+          "text": "嫌すぎるんですけど"
+        },
+        {
+          "speechId": 578,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 6483610,
+          "sourceEndMs": 6491900,
+          "text": "[音楽]ふむまあまあまあとりあえず打つしかないんだよなはいはいはい"
+        },
+        {
+          "speechId": 579,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 6508940,
+          "sourceEndMs": 6513360,
+          "text": "[笑い]"
+        },
+        {
+          "speechId": 580,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 6530600,
+          "sourceEndMs": 6537380,
+          "text": "発動するたびにこのカードにカウンター1つに相手700ダメージを与える"
+        },
+        {
+          "speechId": 581,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 6537619,
+          "sourceEndMs": 6545600,
+          "text": "死なないそのダメージだけでいやワンチャンあるねモンスター効果発動するためにんお前がいただぞ"
+        },
+        {
+          "speechId": 582,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 6547159,
+          "sourceEndMs": 6558360,
+          "text": "7700お前がモンスター効果発動するために1400ダメージあと4回あと4回4回で"
+        },
+        {
+          "speechId": 583,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 6560280,
+          "sourceEndMs": 6575300,
+          "text": "もえーっとこのモンスターがこのカードにモンスターゾーンに存在する状態であああやばいやばいだってデボリューションなんだサーチ制限"
+        },
+        {
+          "speechId": 584,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 6575550,
+          "sourceEndMs": 6581960,
+          "text": "[音楽]あーなるほどねまあいいでしょうでも700クラウン"
+        },
+        {
+          "speechId": 585,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 6582860,
+          "sourceEndMs": 6587900,
+          "text": "あまりをやばい手札から致命軍発動"
+        },
+        {
+          "speechId": 586,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 6588239,
+          "sourceEndMs": 6603210,
+          "text": "力はモンスターの効果を無効化します[笑い]"
+        },
+        {
+          "speechId": 587,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 6605600,
+          "sourceEndMs": 6609020,
+          "text": "でどうすんだ"
+        },
+        {
+          "speechId": 588,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 6614040,
+          "sourceEndMs": 6619699,
+          "text": "発動したから効果効果発動したという結果だけは残ったんだね"
+        },
+        {
+          "speechId": 589,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 6630780,
+          "sourceEndMs": 6654860,
+          "text": "成功した時取り除いて取り除いたはいはいはいはい持ってくるじゃあブラックバードクローズ手札から発動相手フィールドのモンスターの効果発動した時自分のフィールドの表側のブラックフェザーモンスター一体をその発想で購入して破壊するあーあーやばいやばいブラックフェザーっレボリューションてなんだ"
+        },
+        {
+          "speechId": 590,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 6660600,
+          "sourceEndMs": 6663619,
+          "text": "大人になったわ"
+        },
+        {
+          "speechId": 591,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 6664080,
+          "sourceEndMs": 6674360,
+          "text": "ひどい確かに広いこれ使うのか行けはいはいはい"
+        },
+        {
+          "speechId": 592,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 6676199,
+          "sourceEndMs": 6680239,
+          "text": "デッキから特殊召喚するのは"
+        },
+        {
+          "speechId": 593,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 6683840,
+          "sourceEndMs": 6691280,
+          "text": "あれこれちょっとわかんしないこのカードが手札に存在"
+        },
+        {
+          "speechId": 594,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 6691820,
+          "sourceEndMs": 6698960,
+          "text": "持って来れるのではってことはサーキュラー行ったん出してみる"
+        },
+        {
+          "speechId": 595,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 6700760,
+          "sourceEndMs": 6704060,
+          "text": "ちょっと待ってください"
+        },
+        {
+          "speechId": 596,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 6705020,
+          "sourceEndMs": 6716659,
+          "text": "まだまだまだあと1回あと1回だけ効果をてかもう第一効果間違え使ってねえかこれ使ってましたました"
+        },
+        {
+          "speechId": 597,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 6726600,
+          "sourceEndMs": 6734300,
+          "text": "もうカードの効果使ったら死ぬんだよなぁ大丈夫あと1回だけ使えるから"
+        },
+        {
+          "speechId": 598,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 6735500,
+          "sourceEndMs": 6740719,
+          "text": "あと1回暑いからギリギリまで攻めてみるか"
+        },
+        {
+          "speechId": 599,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 6743940,
+          "sourceEndMs": 6748460,
+          "text": "それも発動するんですけどちょっと待ってください"
+        },
+        {
+          "speechId": 600,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 6755600,
+          "sourceEndMs": 6758600,
+          "text": "ね"
+        },
+        {
+          "speechId": 601,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 6758719,
+          "sourceEndMs": 6763880,
+          "text": "どっちにしよう死ぬけどね回ってきたら"
+        },
+        {
+          "speechId": 602,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 6766520,
+          "sourceEndMs": 6774440,
+          "text": "一体これも効果発動できなくてもうできることがないから"
+        },
+        {
+          "speechId": 603,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 6778580,
+          "sourceEndMs": 6789730,
+          "text": "まさか自決ありがとうございました[笑い]"
+        },
+        {
+          "speechId": 604,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 6796840,
+          "sourceEndMs": 6804420,
+          "text": "[笑い]"
+        },
+        {
+          "speechId": 605,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 6812000,
+          "sourceEndMs": 6819540,
+          "text": "俺手加減って言葉親から教わらなかった家庭環境に問題がそんな"
+        },
+        {
+          "speechId": 606,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 6819600,
+          "sourceEndMs": 6826580,
+          "text": "ことすでに弾を取れって言われてたからそのを命取れと"
+        },
+        {
+          "speechId": 607,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 6827239,
+          "sourceEndMs": 6830840,
+          "text": "そのつもりなのに"
+        },
+        {
+          "speechId": 608,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 6830900,
+          "sourceEndMs": 6835699,
+          "text": "もあるし気持ちを持っていこうよ"
+        },
+        {
+          "speechId": 609,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 6838160,
+          "sourceEndMs": 6845119,
+          "text": "[笑い]遊戯王って先行強いから取るでしょ"
+        },
+        {
+          "speechId": 610,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 6852630,
+          "sourceEndMs": 6859709,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 611,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 6866480,
+          "sourceEndMs": 6897739,
+          "text": "苦渋の決断敵からレベル4以下の通常モンスター1回くらいを墓地に置きその同盟モンスター言ったようデッキから手札に加えます俺が送るのはシャリーの軍艦ですねシャリの軍艦寿司デッキを持ってきたぜで切り裂かれしやみこいつは自分が遠く以外の通常モンスターの召喚特殊召喚に成功した時に自分がデッキからワンドローできるという方かシャイリの循環を通常召喚します"
+        },
+        {
+          "speechId": 612,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 6900080,
+          "sourceEndMs": 6913800,
+          "text": "で白魚の軍艦はフィールドにシャリの軍艦が出ている時にすごく召喚がそうだこれで余計腹減るんだよエクシーズ"
+        },
+        {
+          "speechId": 613,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 6921960,
+          "sourceEndMs": 6936800,
+          "text": "型特別召喚はエクシーズ素材のモンスターによってワンドローと魔法トラップのサーチができる俺がサーチするのはもちろん軍艦どころ開戦"
+        },
+        {
+          "speechId": 614,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 6936900,
+          "sourceEndMs": 6952580,
+          "text": "こいつはあれだなこいつはあの軍艦のモンスター召喚特殊召喚に成功した時にデッキから軍艦カード1枚をデッキの一番上に向くというカードだよ俺は2枚カードいや3枚"
+        },
+        {
+          "speechId": 615,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 6952860,
+          "sourceEndMs": 6960320,
+          "text": "終了ふむセットしすぎじゃないですかちょっとまあまあまあまあまあま"
+        },
+        {
+          "speechId": 616,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 6963840,
+          "sourceEndMs": 6969139,
+          "text": "あキャラ出すしかないなはいはいはいはい"
+        },
+        {
+          "speechId": 617,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 6969739,
+          "sourceEndMs": 6972920,
+          "text": "まあいいでしょう"
+        },
+        {
+          "speechId": 618,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 6977840,
+          "sourceEndMs": 6992179,
+          "text": "よし今度こそ最後まで回すぞこのカードが手札墓地に存在しエクストラモンスターゾーンに自分のモンスターが存在しない場合このカードを特殊召喚する召喚いしようとしてます"
+        },
+        {
+          "speechId": 619,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 6992780,
+          "sourceEndMs": 6995840,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 620,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 6996380,
+          "sourceEndMs": 7002380,
+          "text": "1枚持ってこようとしていますあーじゃあさすがにうらら"
+        },
+        {
+          "speechId": 621,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 7003340,
+          "sourceEndMs": 7006520,
+          "text": "止めます"
+        },
+        {
+          "speechId": 622,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 7006760,
+          "sourceEndMs": 7010060,
+          "text": "なるほどね"
+        },
+        {
+          "speechId": 623,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 7010219,
+          "sourceEndMs": 7014920,
+          "text": "じゃあさすがに無限ほうよかちょっと待ってください"
+        },
+        {
+          "speechId": 624,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 7015880,
+          "sourceEndMs": 7019540,
+          "text": "さすがに無限ほう"
+        },
+        {
+          "speechId": 625,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 7020780,
+          "sourceEndMs": 7023860,
+          "text": "止められるかな"
+        },
+        {
+          "speechId": 626,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 7026239,
+          "sourceEndMs": 7034780,
+          "text": "これって何ですかこれ使えるの使えないよねどっちにいもんないね"
+        },
+        {
+          "speechId": 627,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 7035780,
+          "sourceEndMs": 7050500,
+          "text": "でそうだねそれで特殊召喚するっていう効果があーそういうことねあー持ってんだな墓穴の指名者残念だなまだ無限保有は墓地に行ってないんだね"
+        },
+        {
+          "speechId": 628,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 7060970,
+          "sourceEndMs": 7071270,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 629,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 7075820,
+          "sourceEndMs": 7081159,
+          "text": "無限法要はセットした場合縦列の"
+        },
+        {
+          "speechId": 630,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 7082719,
+          "sourceEndMs": 7088420,
+          "text": "青いやばい無限ってデモレストランなんだ"
+        },
+        {
+          "speechId": 631,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 7093199,
+          "sourceEndMs": 7095739,
+          "text": "確かに"
+        },
+        {
+          "speechId": 632,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 7096190,
+          "sourceEndMs": 7100710,
+          "text": "[笑い]"
+        },
+        {
+          "speechId": 633,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 7105560,
+          "sourceEndMs": 7122500,
+          "text": "はいはいはいはいなくても動けるんないじゃまあ強いな並んで残機カード1枚のねいいでしょう許しくださいて"
+        },
+        {
+          "speechId": 634,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 7129040,
+          "sourceEndMs": 7133659,
+          "text": "はい効果発動"
+        },
+        {
+          "speechId": 635,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 7135699,
+          "sourceEndMs": 7139179,
+          "text": "はいはいはいはいはいはい"
+        },
+        {
+          "speechId": 636,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 7140420,
+          "sourceEndMs": 7142719,
+          "text": "午前試合"
+        },
+        {
+          "speechId": 637,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 7143420,
+          "sourceEndMs": 7156760,
+          "text": "えっとこのカードがトラップゾーンにする存在けどお互いのフィールドにそれぞれ1種類の属性をモンスターしか表替え表示で存在できないお互いのプレイヤーは自身のフィールド表側モンスターの属性が2以上種類の場合は1種類になるように墓地に送らなければならない"
+        },
+        {
+          "speechId": 638,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 7160420,
+          "sourceEndMs": 7164980,
+          "text": "制限されるどちらか選びな"
+        },
+        {
+          "speechId": 639,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 7167719,
+          "sourceEndMs": 7177520,
+          "text": "選ばせてやるぜ永続なんだけどだるすぎん[笑い]まだまだ"
+        },
+        {
+          "speechId": 640,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 7179840,
+          "sourceEndMs": 7182679,
+          "text": "どうする"
+        },
+        {
+          "speechId": 641,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 7185679,
+          "sourceEndMs": 7189099,
+          "text": "どうしようか"
+        },
+        {
+          "speechId": 642,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 7189500,
+          "sourceEndMs": 7198699,
+          "text": "どうしようかな光だったか俺来はちなみにガチで勝ちにたぜ"
+        },
+        {
+          "speechId": 643,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 7201080,
+          "sourceEndMs": 7203860,
+          "text": "容赦はしねえよ"
+        },
+        {
+          "speechId": 644,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 7208000,
+          "sourceEndMs": 7213940,
+          "text": "何もできることねまあな"
+        },
+        {
+          "speechId": 645,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 7214719,
+          "sourceEndMs": 7217900,
+          "text": "はいはいはいはい"
+        },
+        {
+          "speechId": 646,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 7218500,
+          "sourceEndMs": 7222099,
+          "text": "うーんどうするかな"
+        },
+        {
+          "speechId": 647,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 7223300,
+          "sourceEndMs": 7227260,
+          "text": "気まぐれ軍艦握るはず"
+        },
+        {
+          "speechId": 648,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 7228740,
+          "sourceEndMs": 7232900,
+          "text": "[音楽]ダメです"
+        },
+        {
+          "speechId": 649,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 7235540,
+          "sourceEndMs": 7239500,
+          "text": "次のドローだなぁ"
+        },
+        {
+          "speechId": 650,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 7248330,
+          "sourceEndMs": 7251430,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 651,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 7253659,
+          "sourceEndMs": 7261100,
+          "text": "売ったらなんかターン帰ってくるまでは無効なが続いてんじゃいっけ[拍手]"
+        },
+        {
+          "speechId": 652,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 7261739,
+          "sourceEndMs": 7267099,
+          "text": "文字通り自分から墓穴をボケてしまったか星川さん"
+        },
+        {
+          "speechId": 653,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 7270300,
+          "sourceEndMs": 7276400,
+          "text": "[音楽]嫌いはいはいはい"
+        },
+        {
+          "speechId": 654,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 7276619,
+          "sourceEndMs": 7278679,
+          "text": "チェンジ"
+        },
+        {
+          "speechId": 655,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 7281550,
+          "sourceEndMs": 7296339,
+          "text": "[笑い]うーんとじゃあチャリの玄関で効果が2回通うか切り裂かれし闇と海戦だ[音楽]"
+        },
+        {
+          "speechId": 656,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 7298179,
+          "sourceEndMs": 7303040,
+          "text": "えーっと自分が軍艦モンスター"
+        },
+        {
+          "speechId": 657,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 7304639,
+          "sourceEndMs": 7312580,
+          "text": "いいでしょうを解決してくれるのかなるほどねどうしようか"
+        },
+        {
+          "speechId": 658,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 7313360,
+          "sourceEndMs": 7326560,
+          "text": "お寿司なんかに負けないんだから[笑い]えーっといくらの分館の食感して"
+        },
+        {
+          "speechId": 659,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 7329780,
+          "sourceEndMs": 7333940,
+          "text": "これあれだな誘発する間違えたかまあいいだろう"
+        },
+        {
+          "speechId": 660,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 7334700,
+          "sourceEndMs": 7360219,
+          "text": "[音楽]3枚で食ってなかったんで今回は発動しなかったねなるほどでいくらとシャリをエクシーズなんだけどこれライブラリー操作するカードがいっぱいあるからそれで一番上を固定していくらの軍艦にシャリの軍艦にしてみたいな"
+        },
+        {
+          "speechId": 661,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 7361119,
+          "sourceEndMs": 7369980,
+          "text": "えーっとこいつはワンドローと2回バトルフェーズに攻撃できるじゃ"
+        },
+        {
+          "speechId": 662,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 7371599,
+          "sourceEndMs": 7373900,
+          "text": "ないですか"
+        },
+        {
+          "speechId": 663,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 7375580,
+          "sourceEndMs": 7385659,
+          "text": "えーっと以下のモンスターとはいモンスターてと宣言を行う攻撃宣言時に自身のモンスターの攻撃力はそのアイテム無さの攻撃力部分アップする"
+        },
+        {
+          "speechId": 664,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 7387590,
+          "sourceEndMs": 7391189,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 665,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 7395500,
+          "sourceEndMs": 7400060,
+          "text": "4500どうするどうする"
+        },
+        {
+          "speechId": 666,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 7403219,
+          "sourceEndMs": 7420280,
+          "text": "どうするさらにエクストラデッカーの特殊召喚された自分の玄関モンスターが相手に戦闘ダメージ当てた時フィールドのカードを破壊するそのセットカードも高いだ魚撃破そして2回攻撃"
+        },
+        {
+          "speechId": 667,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 7420500,
+          "sourceEndMs": 7422980,
+          "text": "終わり"
+        },
+        {
+          "speechId": 668,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 7424400,
+          "sourceEndMs": 7428800,
+          "text": "我々寿司ってレボリューションなんだ"
+        },
+        {
+          "speechId": 669,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 7436940,
+          "sourceEndMs": 7468760,
+          "text": "そんな強いんですか結構強いねネタだと思ってる寿司だけにいや意外と投げたらあかんでもう1回やってみるもう1回やります赤シャリみたいなカードがあるんだあれけどが入ってから強くなったっぽいこのカードはシャリの軍艦として扱うみたいななんかこのカードは何々として扱うみたいなそれが強い"
+        },
+        {
+          "speechId": 670,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 7470659,
+          "sourceEndMs": 7473199,
+          "text": "です"
+        },
+        {
+          "speechId": 671,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 7476739,
+          "sourceEndMs": 7481480,
+          "text": "かなるほどね"
+        },
+        {
+          "speechId": 672,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 7492730,
+          "sourceEndMs": 7503800,
+          "text": "[笑い]なるほどまあまあまあまあこのデッキはね通常召喚を良くするデッキなんです"
+        },
+        {
+          "speechId": 673,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 7505219,
+          "sourceEndMs": 7508000,
+          "text": "よダメです"
+        },
+        {
+          "speechId": 674,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 7512430,
+          "sourceEndMs": 7526190,
+          "text": "[笑い]"
+        },
+        {
+          "speechId": 675,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 7528400,
+          "sourceEndMs": 7531699,
+          "text": "さあこれは"
+        },
+        {
+          "speechId": 676,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 7532840,
+          "sourceEndMs": 7544360,
+          "text": "えーっとこれから行くかサブトラ出してまあとりあえず俺ウッドかなやめてください"
+        },
+        {
+          "speechId": 677,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 7550600,
+          "sourceEndMs": 7553699,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 678,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 7554860,
+          "sourceEndMs": 7562350,
+          "text": "やばいやばいやばいこれやばいここで[音楽]"
+        },
+        {
+          "speechId": 679,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 7565280,
+          "sourceEndMs": 7582699,
+          "text": "はいはいはいはいはいリングからのパラレルエクシード[音楽]何か持ってるの[音楽]もう1回出てくるもう1回出します"
+        },
+        {
+          "speechId": 680,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 7584640,
+          "sourceEndMs": 7587779,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 681,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 7592219,
+          "sourceEndMs": 7595119,
+          "text": "フラッシュと"
+        },
+        {
+          "speechId": 682,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 7595760,
+          "sourceEndMs": 7602260,
+          "text": "ブラッシュとパラスプラッシュとスプラッシュにして"
+        },
+        {
+          "speechId": 683,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 7614500,
+          "sourceEndMs": 7620139,
+          "text": "発動してで対象を選んで"
+        },
+        {
+          "speechId": 684,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 7620360,
+          "sourceEndMs": 7622599,
+          "text": "召喚します"
+        },
+        {
+          "speechId": 685,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 7632480,
+          "sourceEndMs": 7635580,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 686,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 7641860,
+          "sourceEndMs": 7662080,
+          "text": "結構スプラッシュメージって結構制限きついようだななんかそのレシピだとアクセスこれコード今まで持ってなくなるしそうなんだあの地図コードリンク4でしょだからもう一体アップデートジャマーあー1キルのやつ"
+        },
+        {
+          "speechId": 687,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 7662119,
+          "sourceEndMs": 7680560,
+          "text": "かけどいなくなってしまったのでそのまま1個飛ばしますはいはいはいはいはい手順書いてるめちゃくちゃ手帳に書いてありますよトランスコードでで墓地からレベル2のレベル2にはリンクの"
+        },
+        {
+          "speechId": 688,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 7683380,
+          "sourceEndMs": 7686920,
+          "text": "スプラッシュページ持ってくるんだね"
+        },
+        {
+          "speechId": 689,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 7695980,
+          "sourceEndMs": 7700960,
+          "text": "スプラッシュベージュの矢印の先が斜めだから"
+        },
+        {
+          "speechId": 690,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 7705619,
+          "sourceEndMs": 7719980,
+          "text": "あでもここからサンドイッチでアクセスコード効果があるとしたらバランスコード出したから[音楽]一旦のアクセスコード効果"
+        },
+        {
+          "speechId": 691,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 7723320,
+          "sourceEndMs": 7727280,
+          "text": "はいはいはいはいはいか"
+        },
+        {
+          "speechId": 692,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 7729380,
+          "sourceEndMs": 7733340,
+          "text": "攻撃力をアップ1300"
+        },
+        {
+          "speechId": 693,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 7736940,
+          "sourceEndMs": 7743679,
+          "text": "除外した相手フィールドこれなんだ分間ところ改善どうしよう言ったんですよ"
+        },
+        {
+          "speechId": 694,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 7745960,
+          "sourceEndMs": 7750460,
+          "text": "さすがにきついかこれ"
+        },
+        {
+          "speechId": 695,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 7751639,
+          "sourceEndMs": 7777280,
+          "text": "閉店です高確率で閉店いやー次のドローだなこれドロー頼むここでね神ドローでアクセスコードトーカーの体制やべーからなちょっと待ってよいいんじゃない一番いいところだろこれ閉店させてやる金萬で謙虚な壺6枚除外して"
+        },
+        {
+          "speechId": 696,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 7780760,
+          "sourceEndMs": 7789580,
+          "text": "このモンスター離れた場合このコントローラーは最初のモンスターほとんどダメージ"
+        },
+        {
+          "speechId": 697,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 7793099,
+          "sourceEndMs": 7796659,
+          "text": "勝てるで気しかしないみんな"
+        },
+        {
+          "speechId": 698,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 7801380,
+          "sourceEndMs": 7806679,
+          "text": "かな何を知ったん"
+        },
+        {
+          "speechId": 699,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 7807920,
+          "sourceEndMs": 7821380,
+          "text": "だ123えーっとあーまあまああるなまだあるなまだあるなこれアクセスコードトーカーは"
+        },
+        {
+          "speechId": 700,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 7826219,
+          "sourceEndMs": 7845840,
+          "text": "寿司揃えるか次第だ頑張れ俺頑張れここここで引けばあるぞで引けばある今までの戦績は全てなしこの一戦で決めるやめろやばいめくれて頼むって頼むあいけたかえーっと"
+        },
+        {
+          "speechId": 701,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 7848360,
+          "sourceEndMs": 7851260,
+          "text": "予想外たね"
+        },
+        {
+          "speechId": 702,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 7860199,
+          "sourceEndMs": 7866679,
+          "text": "なんだとこれアクセスコードトーカーが"
+        },
+        {
+          "speechId": 703,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 7867040,
+          "sourceEndMs": 7873400,
+          "text": "言ってる自分メインフェイズだから白魚の"
+        },
+        {
+          "speechId": 704,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 7876800,
+          "sourceEndMs": 7880420,
+          "text": "特殊召喚しただけだもんね"
+        },
+        {
+          "speechId": 705,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 7885400,
+          "sourceEndMs": 7888639,
+          "text": "ちょっとね待って"
+        },
+        {
+          "speechId": 706,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 7899840,
+          "sourceEndMs": 7913300,
+          "text": "なんか寿司じゃないの来たこれいけんの来たけどXE素材を2つ取り揃えて相手ビールの特殊召喚された表が攻撃を表示モンスターを"
+        },
+        {
+          "speechId": 707,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 7917139,
+          "sourceEndMs": 7928719,
+          "text": "取り除いて[笑い]これほらほらほら"
+        },
+        {
+          "speechId": 708,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 7929420,
+          "sourceEndMs": 7933280,
+          "text": "アークナイトでデュエルせよ"
+        },
+        {
+          "speechId": 709,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 7935840,
+          "sourceEndMs": 7938260,
+          "text": "何"
+        },
+        {
+          "speechId": 710,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 7939500,
+          "sourceEndMs": 7942940,
+          "text": "最悪のきた"
+        },
+        {
+          "speechId": 711,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 7943140,
+          "sourceEndMs": 7946239,
+          "text": "[拍手]"
+        },
+        {
+          "speechId": 712,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 7954320,
+          "sourceEndMs": 7963580,
+          "text": "けど一旦ターンエンドしますはいはいはいはいはいはいはいはいはいはいはいまだ7000円"
+        },
+        {
+          "speechId": 713,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 7965360,
+          "sourceEndMs": 7968320,
+          "text": "そうなんです"
+        },
+        {
+          "speechId": 714,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 7972040,
+          "sourceEndMs": 7975040,
+          "text": "ね"
+        },
+        {
+          "speechId": 715,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 7980500,
+          "sourceEndMs": 7985179,
+          "text": "何持ってんの星川"
+        },
+        {
+          "speechId": 716,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 7985639,
+          "sourceEndMs": 7989920,
+          "text": "まあまあシャリ軍からラッシュだ"
+        },
+        {
+          "speechId": 717,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 7991280,
+          "sourceEndMs": 7994179,
+          "text": "攻撃力41"
+        },
+        {
+          "speechId": 718,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 7994840,
+          "sourceEndMs": 8005760,
+          "text": "次のターンで私の勝ちだあって頼むよドローこのドローにかかってるヘイ"
+        },
+        {
+          "speechId": 719,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 8007719,
+          "sourceEndMs": 8010020,
+          "text": "は"
+        },
+        {
+          "speechId": 720,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 8011020,
+          "sourceEndMs": 8023099,
+          "text": "これはワンチャンあるぞナブーラナブラ強いぞリリースワンちゃんどころがかなりある"
+        },
+        {
+          "speechId": 721,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 8024579,
+          "sourceEndMs": 8030300,
+          "text": "墓地には何かいますかいないみたいです見てから撃てよ"
+        },
+        {
+          "speechId": 722,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 8032980,
+          "sourceEndMs": 8036239,
+          "text": "墓地見てから持ってこらんかい"
+        },
+        {
+          "speechId": 723,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 8038639,
+          "sourceEndMs": 8042719,
+          "text": "見てから4番かい"
+        },
+        {
+          "speechId": 724,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 8044820,
+          "sourceEndMs": 8050099,
+          "text": "お前はせん"
+        },
+        {
+          "speechId": 725,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 8052179,
+          "sourceEndMs": 8055260,
+          "text": "情けないこのサーチ"
+        },
+        {
+          "speechId": 726,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 8056199,
+          "sourceEndMs": 8064739,
+          "text": "情け[笑い]ないですね"
+        },
+        {
+          "speechId": 727,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 8075060,
+          "sourceEndMs": 8086520,
+          "text": "主人公補正で3桁になったやつから勝つから主人公になってやるをシグマだあ言っちゃったえっと"
+        },
+        {
+          "speechId": 728,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 8087540,
+          "sourceEndMs": 8096239,
+          "text": "でよもこれ出すしかないんだね出すしかないん"
+        },
+        {
+          "speechId": 729,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 8097780,
+          "sourceEndMs": 8101679,
+          "text": "でえーっとエックス"
+        },
+        {
+          "speechId": 730,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 8103480,
+          "sourceEndMs": 8122940,
+          "text": "除外されるこのターン終了時まで自分されるところもうなんか何もできない少ない何を笑ってるんですかいやいやいや頑張ってほしいなと思って"
+        },
+        {
+          "speechId": 731,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 8128560,
+          "sourceEndMs": 8132119,
+          "text": "ファイバースでもねしよう"
+        },
+        {
+          "speechId": 732,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 8132820,
+          "sourceEndMs": 8135900,
+          "text": "ちょっとめっちゃ考えます"
+        },
+        {
+          "speechId": 733,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 8135940,
+          "sourceEndMs": 8144480,
+          "text": "これ違うこれも違うこれも違うこれも違う"
+        },
+        {
+          "speechId": 734,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 8145079,
+          "sourceEndMs": 8149820,
+          "text": "えーっとこれも違うこれも違うから"
+        },
+        {
+          "speechId": 735,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 8149920,
+          "sourceEndMs": 8153360,
+          "text": "これしか出せなくて"
+        },
+        {
+          "speechId": 736,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 8155699,
+          "sourceEndMs": 8160980,
+          "text": "1枚大切に手札もない"
+        },
+        {
+          "speechId": 737,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 8161079,
+          "sourceEndMs": 8164689,
+          "text": "うーん[音楽]"
+        },
+        {
+          "speechId": 738,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 8166480,
+          "sourceEndMs": 8169560,
+          "text": "このカード"
+        },
+        {
+          "speechId": 739,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 8173380,
+          "sourceEndMs": 8182940,
+          "text": "を持ってるこれ収納なんだけどシンクロ残機シグマとあーそうだね"
+        },
+        {
+          "speechId": 740,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 8183219,
+          "sourceEndMs": 8202740,
+          "text": "シンクロできねえな通常通過じゃないモンスターとチューナーだななるほど普通に出すかいやさっきこれ持ってたんですよずっとあーなるほどねてか攻撃表示で大丈夫かいや大丈夫じゃないと思いますこれ2枚守備表示だったら入れたんじゃないの"
+        },
+        {
+          "speechId": 741,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 8209639,
+          "sourceEndMs": 8213780,
+          "text": "チャリビートでデュエルせよ"
+        },
+        {
+          "speechId": 742,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 8214800,
+          "sourceEndMs": 8218040,
+          "text": "レボリューションなんだ"
+        },
+        {
+          "speechId": 743,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 8218979,
+          "sourceEndMs": 8222599,
+          "text": "あいつに殴られて死亡"
+        },
+        {
+          "speechId": 744,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 8222719,
+          "sourceEndMs": 8226559,
+          "text": "シャリ最強シャリ最強"
+        },
+        {
+          "speechId": 745,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 8232380,
+          "sourceEndMs": 8236340,
+          "text": "まあまあ頑張った"
+        },
+        {
+          "speechId": 746,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 8236679,
+          "sourceEndMs": 8251460,
+          "text": "4ヶ月前と比べていやだいぶスムーズになったよねいやちょっと慣れてきたんですよ遊戯王というものにいや本当にすごい複雑なゲームだからよく覚えたね"
+        },
+        {
+          "speechId": 747,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 8252160,
+          "sourceEndMs": 8265679,
+          "text": "条件あるからただ墓地何もないのに墓地のあれ呼んだろ怒ります回収できなかったら怒りますごめんなさい見えますよ"
+        },
+        {
+          "speechId": 748,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 8266399,
+          "sourceEndMs": 8277200,
+          "text": "じゃあ頑張ってねはいかかってこいまた新しいデッキ覚えてくるわよしはいありがとうございましたありがとうございました"
+        },
+        {
+          "speechId": 749,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 8279219,
+          "sourceEndMs": 8281880,
+          "text": "とこというで"
+        },
+        {
+          "speechId": 750,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 8285340,
+          "sourceEndMs": 8308580,
+          "text": "ちょっと頭回らないんだけどまぁまぁまぁ八代さんねあの半年前から星川遊戯に初めて触っんけどたです一番最初のここがモンスターモンスターゾーンでとか色々教えてくれたのはやしろさんでしたいつかボコボコにしたいですまるということで次"
+        },
+        {
+          "speechId": 751,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 8314920,
+          "sourceEndMs": 8331200,
+          "text": "いやてかあのうらら使われて墓穴使って自分がうらら使う時に効果無効にされたの初めてなんけどだあれ結構やりがちじゃない多分ありそうだよね色んなとこでうーん"
+        },
+        {
+          "speechId": 752,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 8332320,
+          "sourceEndMs": 8335160,
+          "text": "次行きます"
+        },
+        {
+          "speechId": 753,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 8342540,
+          "sourceEndMs": 8350260,
+          "text": "効果発動されてからにお疲れ様ですお様疲れです今"
+        },
+        {
+          "speechId": 754,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 8355660,
+          "sourceEndMs": 8366399,
+          "text": "病んでる慰めておりますやばいやばい大丈夫だよ大丈夫だよボコボコにするからもう"
+        },
+        {
+          "speechId": 755,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 8367120,
+          "sourceEndMs": 8397320,
+          "text": "泣きながらデュエルしてたのかわいそう今から泣きながら自己紹介お願いしますはいにじさん見習いから皆さんの生きがいこと山神カルタですよろしくお願いします皆さんの生きがいですお願いしますお願いしますちょっと一旦さぁボコらせて欲しい本当頼むからこっち何使う木駅何がいい逆に"
+        },
+        {
+          "speechId": 756,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 8399420,
+          "sourceEndMs": 8409859,
+          "text": "いやそうなんだよなんかホッチが残機を使うんだったらティアラを持っていこうかなって思ってるのえほんともう人の心ないね君"
+        },
+        {
+          "speechId": 757,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 8410160,
+          "sourceEndMs": 8439620,
+          "text": "いやだって残機はティアラ当てていいっ聞いててるからじゃあ一旦それやるじゃあ一旦それするかいいよまあまあまあまあこの前より少しは強くなったって起こしちゃったからなはいはいはいあよしよし先行ねじゃあ山がもらえますよと全然あねえそのさぁあのーなんだっけちっちゃいキャラクターしかも買おうか悩んだあーこれかわいいよね"
+        },
+        {
+          "speechId": 758,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 8445500,
+          "sourceEndMs": 8453120,
+          "text": "ちょっとよ待てこれはこれは"
+        },
+        {
+          "speechId": 759,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 8454060,
+          "sourceEndMs": 8462120,
+          "text": "ティアラ20パーデッキからモンスター1体を墓地送るやめてくださいのうらあららなるほどね"
+        },
+        {
+          "speechId": 760,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 8462630,
+          "sourceEndMs": 8465760,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 761,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 8468479,
+          "sourceEndMs": 8471600,
+          "text": "これは"
+        },
+        {
+          "speechId": 762,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 8472120,
+          "sourceEndMs": 8488220,
+          "text": "もう墓地をくれたからいいかなるほどこれでえーっと嫌すぎる何をウォッチに送ろうかな"
+        },
+        {
+          "speechId": 763,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 8490300,
+          "sourceEndMs": 8502979,
+          "text": "一旦こうするかなんなんでここからパチンコが始まりますパチンコそうよだよパチンコなんだ"
+        },
+        {
+          "speechId": 764,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 8503140,
+          "sourceEndMs": 8510100,
+          "text": "ああいいねいいねいいねいいねいいねいいねいいねいいね[音楽]"
+        },
+        {
+          "speechId": 765,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 8513240,
+          "sourceEndMs": 8517200,
+          "text": "そういうこともあるのよ"
+        },
+        {
+          "speechId": 766,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 8519040,
+          "sourceEndMs": 8529380,
+          "text": "さようならさようならとはいはいはいはいはいはいこうしてでガラスの効果をはずすの"
+        },
+        {
+          "speechId": 767,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 8533819,
+          "sourceEndMs": 8537939,
+          "text": "やばいねえーっと"
+        },
+        {
+          "speechId": 768,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 8538479,
+          "sourceEndMs": 8554819,
+          "text": "レイドハートを手札に加えますでレールハートを召喚をあれしてネイルを送りますとネイルを墓地に送ったら"
+        },
+        {
+          "speechId": 769,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 8556200,
+          "sourceEndMs": 8559620,
+          "text": "どうしようかな"
+        },
+        {
+          "speechId": 770,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 8563160,
+          "sourceEndMs": 8570300,
+          "text": "体調悪くなっちゃった体調悪くなってるねえーどうしようかな"
+        },
+        {
+          "speechId": 771,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 8574120,
+          "sourceEndMs": 8580800,
+          "text": "友達やめたいんだいやいやいやいやそんなことないよそんなことはないよ"
+        },
+        {
+          "speechId": 772,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 8583080,
+          "sourceEndMs": 8587040,
+          "text": "考えさせて考えさせて考える"
+        },
+        {
+          "speechId": 773,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 8587800,
+          "sourceEndMs": 8590520,
+          "text": "惜しくは泣いて待ってて"
+        },
+        {
+          "speechId": 774,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 8590760,
+          "sourceEndMs": 8596520,
+          "text": "これはこれは一旦じゃあこれにするか"
+        },
+        {
+          "speechId": 775,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 8597420,
+          "sourceEndMs": 8613060,
+          "text": "これと[音楽]これにしようじゃあ顔可愛くねみんな見てでよも見れないんだないや前見なくていいよいい"
+        },
+        {
+          "speechId": 776,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 8618880,
+          "sourceEndMs": 8624540,
+          "text": "じゃんてやろメンズだって生きていたいんだよ頑張ってるんだよ"
+        },
+        {
+          "speechId": 777,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 8624580,
+          "sourceEndMs": 8627580,
+          "text": "特殊"
+        },
+        {
+          "speechId": 778,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 8631840,
+          "sourceEndMs": 8639120,
+          "text": "召喚できるんだすごいねえーとなんで3000点"
+        },
+        {
+          "speechId": 779,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 8639760,
+          "sourceEndMs": 8669299,
+          "text": "から召喚したとて召喚したとてみたいなところはあるから最初のモンスターを強く来る匂いいっぱい悩んでいいよ喋ってていいですしゃべってないみんなあのねさっきのふみと星川とヤマトねあの明後日重大発表あるんで皆さんどうかよろしくお願いしますお願いします[音楽]"
+        },
+        {
+          "speechId": 780,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 8673979,
+          "sourceEndMs": 8696300,
+          "text": "送られたこれ何使えないの使えないんだえ意味ないティアラ使わないって言ってたんだへえ違うよ残金には当てていいって言われたもんやでも逆に言うとさぁうちらにしか使えなくないってやらメンツいや使えないは使えないそうだよね"
+        },
+        {
+          "speechId": 781,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 8696880,
+          "sourceEndMs": 8701640,
+          "text": "本当にねダメなんだからティアラは"
+        },
+        {
+          "speechId": 782,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 8702000,
+          "sourceEndMs": 8715140,
+          "text": "シグマこのカードを特殊召喚しようとしてんのこっちから持ってこようとしてるよ[音楽]嫌だなぁ"
+        },
+        {
+          "speechId": 783,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 8716340,
+          "sourceEndMs": 8720000,
+          "text": "ロスで止めます"
+        },
+        {
+          "speechId": 784,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 8729960,
+          "sourceEndMs": 8735359,
+          "text": "まだいけるよ"
+        },
+        {
+          "speechId": 785,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 8735600,
+          "sourceEndMs": 8760859,
+          "text": "まだ行けるいいねいいねえーとチューナーが出てきたね特殊召喚するキラーの効果って発動してたんだよねさっきは単一でやってたから発動できなくて次はできるはず"
+        },
+        {
+          "speechId": 786,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 8762760,
+          "sourceEndMs": 8780540,
+          "text": "はいはいはいサイキュラーが出てきたとできないんだわもうこれわかんねえわということで一旦スルーしまして出しに行きますとはいはいはいはいはいはいあの交換使えたわ嘘ラッキー"
+        },
+        {
+          "speechId": 787,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 8780600,
+          "sourceEndMs": 8786829,
+          "text": "手札に加えるとあのね[音楽]"
+        },
+        {
+          "speechId": 788,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 8790200,
+          "sourceEndMs": 8796620,
+          "text": "使わせません[音楽]"
+        },
+        {
+          "speechId": 789,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 8797859,
+          "sourceEndMs": 8801600,
+          "text": "ここで並んでるしやん"
+        },
+        {
+          "speechId": 790,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 8807479,
+          "sourceEndMs": 8825420,
+          "text": "でここではいはいはいはいはいはいはいはいはいダイヤを持ってくるなんか回し方はこの前より早くなってるこれ通常紹介やったかどうかでかでかと出してほしいほんと"
+        },
+        {
+          "speechId": 791,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 8825640,
+          "sourceEndMs": 8832200,
+          "text": "忘れちゃうからね忘れちゃうよ[音楽]"
+        },
+        {
+          "speechId": 792,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 8834060,
+          "sourceEndMs": 8837780,
+          "text": "モンスター1体を"
+        },
+        {
+          "speechId": 793,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 8841840,
+          "sourceEndMs": 8851880,
+          "text": "特殊[音楽]召喚あなんでもか"
+        },
+        {
+          "speechId": 794,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 8854080,
+          "sourceEndMs": 8857640,
+          "text": "えっなんかいいか"
+        },
+        {
+          "speechId": 795,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 8858060,
+          "sourceEndMs": 8861120,
+          "text": "もちから"
+        },
+        {
+          "speechId": 796,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 8864340,
+          "sourceEndMs": 8868140,
+          "text": "めっちゃ考えるわ考えない"
+        },
+        {
+          "speechId": 797,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 8869100,
+          "sourceEndMs": 8873540,
+          "text": "これじゃなくってこれも"
+        },
+        {
+          "speechId": 798,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 8878220,
+          "sourceEndMs": 8898500,
+          "text": "すごいなもう1時間2時間ぐらいやってんのこれやってるやば2時間も頭使ってえらいねーでしょもうだから社さんとの勝負凡ミスボロボロだったから集中力がねこれも使っ"
+        },
+        {
+          "speechId": 799,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 8899140,
+          "sourceEndMs": 8907680,
+          "text": "た後はあまだいる[音楽]よ"
+        },
+        {
+          "speechId": 800,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 8908080,
+          "sourceEndMs": 8914220,
+          "text": "山よりこっちの方が墓地に落ちてんなほんとだよ"
+        },
+        {
+          "speechId": 801,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 8914680,
+          "sourceEndMs": 8935580,
+          "text": "さっきふいちゃんと裏でやってたのほんといるから練習しなきゃつってさっきにふーちゃんはボロ勝ちだったんだよ[音楽]今ちなみに買ったよ1回あ本当いやーこれちょっとでもグルグルですね回っますてね"
+        },
+        {
+          "speechId": 802,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 8945960,
+          "sourceEndMs": 8949560,
+          "text": "あ入ってないんだ"
+        },
+        {
+          "speechId": 803,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 8950080,
+          "sourceEndMs": 8954840,
+          "text": "リンク3をつけて"
+        },
+        {
+          "speechId": 804,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 8955000,
+          "sourceEndMs": 8964120,
+          "text": "リングリボーとスプラッシュでさっきできなかったのかわかんないけどやってみよううん"
+        },
+        {
+          "speechId": 805,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 8966280,
+          "sourceEndMs": 8972060,
+          "text": "えっなんかルルカロスの効果ってあれなんか"
+        },
+        {
+          "speechId": 806,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 8972610,
+          "sourceEndMs": 8978780,
+          "text": "[音楽]何でもよ"
+        },
+        {
+          "speechId": 807,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 8985180,
+          "sourceEndMs": 8997319,
+          "text": "あ待ってツイートしてないわそういう全然ちょっと待ってこっちが悩んでる間によしよしよしよしよし何でもよ選択肢"
+        },
+        {
+          "speechId": 808,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 8998080,
+          "sourceEndMs": 9000859,
+          "text": "を選択肢多いんだ"
+        },
+        {
+          "speechId": 809,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 9003540,
+          "sourceEndMs": 9007160,
+          "text": "これにしとく"
+        },
+        {
+          "speechId": 810,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 9011399,
+          "sourceEndMs": 9013880,
+          "text": "一旦"
+        },
+        {
+          "speechId": 811,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 9014580,
+          "sourceEndMs": 9027380,
+          "text": "ね矢はもうこっち誘発なんもないから動けるよね超快適そうそうそうアップデートも来た来た来たほら"
+        },
+        {
+          "speechId": 812,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 9032960,
+          "sourceEndMs": 9045380,
+          "text": "はいアップデートジャマーだってこれで[音楽]トランスコードだな"
+        },
+        {
+          "speechId": 813,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 9045840,
+          "sourceEndMs": 9050060,
+          "text": "挟んではいはいはいはいはいはいはいはいはい"
+        },
+        {
+          "speechId": 814,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 9051020,
+          "sourceEndMs": 9083540,
+          "text": "これもなんか初めてまともにやれてるいいねトランスの効果でストレート持ってくるのはいはいはいはいはいはいはいはいはいはいはいはいはいはいはい2回攻撃できるんだトランスコード東海以外の自分の墓地のリンク可愛くなりましたを[音楽]発動のモンスターをこのカードをリンク先のモンスターに召喚"
+        },
+        {
+          "speechId": 815,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 9086160,
+          "sourceEndMs": 9092340,
+          "text": "何戦闘1とこっち分かんない何でもいいやうん"
+        },
+        {
+          "speechId": 816,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 9092399,
+          "sourceEndMs": 9097040,
+          "text": "ででアクセスコード"
+        },
+        {
+          "speechId": 817,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 9101840,
+          "sourceEndMs": 9106399,
+          "text": "はいはいはいはいはいはいはいはいはいはいはいはいはい"
+        },
+        {
+          "speechId": 818,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 9109140,
+          "sourceEndMs": 9113060,
+          "text": "アクセスコードとか"
+        },
+        {
+          "speechId": 819,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 9113240,
+          "sourceEndMs": 9122899,
+          "text": "はいはいはい親の53で自分フィールドから送った来た来たこれこれ"
+        },
+        {
+          "speechId": 820,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 9123740,
+          "sourceEndMs": 9157399,
+          "text": "何かを壊すと能力壊そうかなどれがいいこのカード以外の自分の装着を先頭では破壊されない残念カラスはなるほどこれやばいカードが大丈夫なんだから自分フィールドの今回は自分のカード全部なんか壊された時のあれないとなんか救済ある措置んだよね送られても結局特殊召喚で戻ってこれるんだろう"
+        },
+        {
+          "speechId": 821,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 9163020,
+          "sourceEndMs": 9168380,
+          "text": "墓地いったら効果使えるからね割とええ"
+        },
+        {
+          "speechId": 822,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 9168439,
+          "sourceEndMs": 9177620,
+          "text": "このカードはどれが一番マシか考えるのは考えてこのカードは"
+        },
+        {
+          "speechId": 823,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 9180200,
+          "sourceEndMs": 9184220,
+          "text": "下に戻してもらえません"
+        },
+        {
+          "speechId": 824,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 9186600,
+          "sourceEndMs": 9195560,
+          "text": "このカード特殊召喚する帰ってくるだけだよこれそうなのそうなんよ"
+        },
+        {
+          "speechId": 825,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 9199160,
+          "sourceEndMs": 9219380,
+          "text": "自分のできないからカード5枚墓地へ送る墓地がいっぱいいた方がいいのかショボチから融合効果で墓地を送られたら融合できるんだよねティアラメンこいつにしようかうんうん"
+        },
+        {
+          "speechId": 826,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 9223319,
+          "sourceEndMs": 9227180,
+          "text": "なんかあるなんかあるな"
+        },
+        {
+          "speechId": 827,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 9227520,
+          "sourceEndMs": 9234080,
+          "text": "これいけんじゃないどこ行け消されるとダメだ"
+        },
+        {
+          "speechId": 828,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 9239760,
+          "sourceEndMs": 9248300,
+          "text": "え戻ってこれたんだけどなんでだよそこ無限法要置いてたんだよ山立てるやつ"
+        },
+        {
+          "speechId": 829,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 9255770,
+          "sourceEndMs": 9262399,
+          "text": "[拍手]ちょっと待って待って待って待って"
+        },
+        {
+          "speechId": 830,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 9264060,
+          "sourceEndMs": 9266420,
+          "text": "望洋ライン"
+        },
+        {
+          "speechId": 831,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 9277880,
+          "sourceEndMs": 9287359,
+          "text": "それはちょっと思ういやバドーまあいいかもしょうがないバロー"
+        },
+        {
+          "speechId": 832,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 9293840,
+          "sourceEndMs": 9299960,
+          "text": "ス以外は本当で破壊されないよね"
+        },
+        {
+          "speechId": 833,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 9304979,
+          "sourceEndMs": 9311240,
+          "text": "いやでもねアクセスコードいやーどうだろう"
+        },
+        {
+          "speechId": 834,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 9317460,
+          "sourceEndMs": 9326180,
+          "text": "はいはいはいはいはいはいはいはいはいはい墓地へ送りづらいのすげえやだなこれすっごい嫌だよね"
+        },
+        {
+          "speechId": 835,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 9332220,
+          "sourceEndMs": 9336020,
+          "text": "あーはいはいはいはいはいはいはいはいはいはいはいはい"
+        },
+        {
+          "speechId": 836,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 9338460,
+          "sourceEndMs": 9341420,
+          "text": "フォーク初動"
+        },
+        {
+          "speechId": 837,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 9348680,
+          "sourceEndMs": 9386899,
+          "text": "対象とするカードはフードに加えるでしょ手札肉はエールで右のハートを持っといてでえーとレイドハートを浄化のでビールのハート以外のメンツモンスターを打って送ってでここでメインのめちゃくちゃ回ってるめちゃくちゃ回しますでえーっとこれとこれで"
+        },
+        {
+          "speechId": 838,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 9386939,
+          "sourceEndMs": 9390620,
+          "text": "はいはいはいこうして"
+        },
+        {
+          "speechId": 839,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 9393120,
+          "sourceEndMs": 9403700,
+          "text": "カレーのハートを置いてドンハートの効果を発動でアクセスコード化をできる"
+        },
+        {
+          "speechId": 840,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 9403860,
+          "sourceEndMs": 9406939,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 841,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 9408560,
+          "sourceEndMs": 9419700,
+          "text": "これでちょっと計算剤は入っていいですか1600+2300+8"
+        },
+        {
+          "speechId": 842,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 9424680,
+          "sourceEndMs": 9451920,
+          "text": "っていうねインチキ効果なんですよ本当に今すぐ山ぶなぐりたいもう使わないもう使わないからもう使わないから殴るねちなみに前回リカード20%だったけど今理解どんなようやくもん今理解度50ぐらいになったって感じ[音楽]"
+        },
+        {
+          "speechId": 843,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 9452939,
+          "sourceEndMs": 9466760,
+          "text": "ですこれがこれがティアラメンツです皆さんはい友達をなくしますありがとう今日から星川とふみの2人になりますありがとうございます"
+        },
+        {
+          "speechId": 844,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 9467420,
+          "sourceEndMs": 9497000,
+          "text": "使わないからしかもホープ君使おうかなちょっと久々こうに本当何持ってかなじゃあ今日全然使ってあげられてないからね久しぶりにイビルツイン使おうかなじゃあそれやだなちょっとどうしようなんかそれそれも強くなかったっけ入れるツインも強いけど強いけど強いけどよね"
+        },
+        {
+          "speechId": 845,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 9504800,
+          "sourceEndMs": 9513380,
+          "text": "コメント欄だけ見てるんだけどさなんかこれが従来告知かって言われてマジでウケる"
+        },
+        {
+          "speechId": 846,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 9514140,
+          "sourceEndMs": 9518840,
+          "text": "織姫星は2人になります重大発表"
+        },
+        {
+          "speechId": 847,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 9519780,
+          "sourceEndMs": 9530100,
+          "text": "嘘でしょ本当に動けないすごいマジのことかわいそうドンマイかわいそう本当にかわいそうかわいそう"
+        },
+        {
+          "speechId": 848,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 9531359,
+          "sourceEndMs": 9537920,
+          "text": "このカードこのカード本当に動けない"
+        },
+        {
+          "speechId": 849,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 9539040,
+          "sourceEndMs": 9542420,
+          "text": "魔法カード1枚してて"
+        },
+        {
+          "speechId": 850,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 9543120,
+          "sourceEndMs": 9552319,
+          "text": "えーでもこれなくなんのやばいよなドローにかかっているどっちをどうするべきだこれ"
+        },
+        {
+          "speechId": 851,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 9557420,
+          "sourceEndMs": 9565760,
+          "text": "は山が本気で悩んでいる時の声がやばいこれは"
+        },
+        {
+          "speechId": 852,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 9565920,
+          "sourceEndMs": 9576080,
+          "text": "もう俺のターンとどうぞえマジですごいイビルツインモンスター1つも引けてなくてウケる"
+        },
+        {
+          "speechId": 853,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 9576100,
+          "sourceEndMs": 9583760,
+          "text": "[音楽]いい感じいいねキモいどうしよう"
+        },
+        {
+          "speechId": 854,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 9583890,
+          "sourceEndMs": 9587480,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 855,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 9589680,
+          "sourceEndMs": 9597080,
+          "text": "特殊で召喚だっけGってそう特殊召喚山の手札が増えてなるほど"
+        },
+        {
+          "speechId": 856,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 9599819,
+          "sourceEndMs": 9614640,
+          "text": "ちなみにこの今セットしてるカード防御めっちゃ高いつけから気をた方がいいよ[音楽]殴ったら入ってくるよ自分の方気つけをなフライパン"
+        },
+        {
+          "speechId": 857,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 9615120,
+          "sourceEndMs": 9617479,
+          "text": "置いといて"
+        },
+        {
+          "speechId": 858,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 9624560,
+          "sourceEndMs": 9633439,
+          "text": "よはいはいはい手札に加えるいいよこれ止められたら死ぬとこだった"
+        },
+        {
+          "speechId": 859,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 9639570,
+          "sourceEndMs": 9646100,
+          "text": "[音楽]あでも結構回ってそう"
+        },
+        {
+          "speechId": 860,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 9647520,
+          "sourceEndMs": 9651859,
+          "text": "ねうんもう伝えたいその5分ほど"
+        },
+        {
+          "speechId": 861,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 9655620,
+          "sourceEndMs": 9662060,
+          "text": "悩んますでこっちが頑張ってます頑張ってますこれ"
+        },
+        {
+          "speechId": 862,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 9662220,
+          "sourceEndMs": 9678080,
+          "text": "めちゃめちゃ特殊召喚するもんねそうなんだよねそうなんだよねだたからG投げんだよね一旦[音楽]うわどうしよう悩め悩め"
+        },
+        {
+          "speechId": 863,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 9679260,
+          "sourceEndMs": 9684620,
+          "text": "これねちょっと一旦止まろうかなって思い始めてる"
+        },
+        {
+          "speechId": 864,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 9685260,
+          "sourceEndMs": 9692420,
+          "text": "選択を自由取れてちゃんと止まる選択したことないんだよな人間"
+        },
+        {
+          "speechId": 865,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 9693380,
+          "sourceEndMs": 9696380,
+          "text": "の"
+        },
+        {
+          "speechId": 866,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 9697399,
+          "sourceEndMs": 9700819,
+          "text": "ちゃんとやってみよう"
+        },
+        {
+          "speechId": 867,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 9701520,
+          "sourceEndMs": 9706520,
+          "text": "あーでもこれちょっと待ってよ"
+        },
+        {
+          "speechId": 868,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 9713520,
+          "sourceEndMs": 9718460,
+          "text": "やばいなこの伏せカード掃除しといてくれたらちょっと嬉しい"
+        },
+        {
+          "speechId": 869,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 9722819,
+          "sourceEndMs": 9734359,
+          "text": "掃除してほしいこれこの後ピックがえ何あれにどっちに送っほしていってことめっちゃなる邪魔あそうなんだほどねちょっと"
+        },
+        {
+          "speechId": 870,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 9737220,
+          "sourceEndMs": 9752060,
+          "text": "待ってピックを確かに墓地に送りに行くことはできるんだけどただこれ山がセットしてしまったことによってそういただけないことになってんだよなどうしようか"
+        },
+        {
+          "speechId": 871,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 9753439,
+          "sourceEndMs": 9756620,
+          "text": "こうして"
+        },
+        {
+          "speechId": 872,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 9760200,
+          "sourceEndMs": 9765319,
+          "text": "占いじゃんだって召喚扱いなの"
+        },
+        {
+          "speechId": 873,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 9767880,
+          "sourceEndMs": 9771200,
+          "text": "反転召喚って召喚扱いな"
+        },
+        {
+          "speechId": 874,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 9775700,
+          "sourceEndMs": 9785000,
+          "text": "えっ通常召喚ってこと通常使っ召喚たことになるうんなんかさりげなく止められたんだけど"
+        },
+        {
+          "speechId": 875,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 9802280,
+          "sourceEndMs": 9808100,
+          "text": "ごめんごめんごめんごめん配信者としてよくなかったよね"
+        },
+        {
+          "speechId": 876,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 9814760,
+          "sourceEndMs": 9830460,
+          "text": "ほんとごめんねそれはそれは謝るわ待ってオノマトさピックってどっちに送ったら悲しい嬉しい[笑い]"
+        },
+        {
+          "speechId": 877,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 9834140,
+          "sourceEndMs": 9838640,
+          "text": "正直嬉しくも悲しくもないって感じ"
+        },
+        {
+          "speechId": 878,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 9840500,
+          "sourceEndMs": 9851399,
+          "text": "いやいやいやいやいやいやいやいやいやなのよねこれちょっとね山動けないんだけど動くな"
+        },
+        {
+          "speechId": 879,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 9852359,
+          "sourceEndMs": 9861740,
+          "text": "死ぬほど動けないうららが邪魔すぎる[音楽]うらら邪魔なんだなんでだろう"
+        },
+        {
+          "speechId": 880,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 9861800,
+          "sourceEndMs": 9868460,
+          "text": "他のモンスターも存在しなければなるほどうららお前一生活かしてやるからな"
+        },
+        {
+          "speechId": 881,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 9869760,
+          "sourceEndMs": 9880760,
+          "text": "しかも間違ってスプラ入ってない方持っきてちゃったからちょっと待って本当に動けないんだよなぁ自分のデッキ一覧整理できないタイプのね部屋着じゃないタイプだ"
+        },
+        {
+          "speechId": 882,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 9880939,
+          "sourceEndMs": 9906380,
+          "text": "ねぇどうしよう山何もできないよこれ本当にどうしようかなおもろいこんなことあるんだどうしよう本当にあるよねまずは部屋の掃除から始めてみたらどうそれはそうかもそれはそうかもじゃないうんいやまあいいか"
+        },
+        {
+          "speechId": 883,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 9909240,
+          "sourceEndMs": 9939439,
+          "text": "頑張れ頑張れ今ちょっと水取ってきての間いいよえーどうしよううららが邪魔なんだけど[音楽]じゃないこのカードがボツに存在しいやいやいやいやいやいやもういいかもう知らん一旦打点強いの作っとこ"
+        },
+        {
+          "speechId": 884,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 9941340,
+          "sourceEndMs": 9943640,
+          "text": "う"
+        },
+        {
+          "speechId": 885,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 9948800,
+          "sourceEndMs": 9954620,
+          "text": "もうダメだ何もできないどうしよう"
+        },
+        {
+          "speechId": 886,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 9956000,
+          "sourceEndMs": 9968600,
+          "text": "ただいまとスキルにしたんだけどさぶん殴ったら自分に帰ってきたんだよね500ポイントえかわいそう"
+        },
+        {
+          "speechId": 887,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 9971880,
+          "sourceEndMs": 9976460,
+          "text": "いやはまぁまだでもまだまだまだまだ希望ある"
+        },
+        {
+          "speechId": 888,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 9982700,
+          "sourceEndMs": 9993380,
+          "text": "ライトニングスターもゴミ箱へおいいんですかはいデッキできるから特殊召喚"
+        },
+        {
+          "speechId": 889,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 9993750,
+          "sourceEndMs": 9997760,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 890,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 10000020,
+          "sourceEndMs": 10017960,
+          "text": "考えて考えてまあまあまあまあまあまあ先程ティアラでボコボコにできたからねあれもうなんか負けた気でいないいやいやまだよまだ私には切り札がまだあるので全然こっちへ送るカードはサモポリ"
+        },
+        {
+          "speechId": 891,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 10019180,
+          "sourceEndMs": 10038600,
+          "text": "アストラルホークの方が発動何かが出てくるんでしょうとはいエクシーズチェンジタクトこそはいはいはいエクシーズをしますよとまあまあ分かりきってるんですわそれは危ねぇ[音楽]"
+        },
+        {
+          "speechId": 892,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 10039920,
+          "sourceEndMs": 10042220,
+          "text": "えーと"
+        },
+        {
+          "speechId": 893,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 10043100,
+          "sourceEndMs": 10056319,
+          "text": "えちなみに星川サラダさんは召喚権をまだ使っていないとこの効果のできないはいはいはいはいはいはいはいはいはい手札に"
+        },
+        {
+          "speechId": 894,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 10057260,
+          "sourceEndMs": 10078040,
+          "text": "なるほどねこれを出してこっちの効果で出さないといけなかったのかだからさっき止まったんだえーっと召喚をしたとでえどこなんだろうなこれなんか高価で特殊召喚できる系のやつがまだ手ふたにあったら"
+        },
+        {
+          "speechId": 895,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 10078200,
+          "sourceEndMs": 10099460,
+          "text": "でも4と4でしょっことてでしょどうしようかなぁレベル42体ちょっとな嫌んだよなぁレベル42体来るぞなのかなこれ作るぞ来るこれ来てしまう"
+        },
+        {
+          "speechId": 896,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 10100399,
+          "sourceEndMs": 10106479,
+          "text": "いやこれでもデーモングリッチ"
+        },
+        {
+          "speechId": 897,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 10107180,
+          "sourceEndMs": 10115899,
+          "text": "レベル42体はちょっとなんか当てるエクシーズべきだったのかなでもされる前に"
+        },
+        {
+          "speechId": 898,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 10121000,
+          "sourceEndMs": 10132020,
+          "text": "苦しそうになってるどうしたどうしたよかってた助けどうした今助けてエンドするいや"
+        },
+        {
+          "speechId": 899,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 10133220,
+          "sourceEndMs": 10135340,
+          "text": "助けて"
+        },
+        {
+          "speechId": 900,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 10135580,
+          "sourceEndMs": 10141200,
+          "text": "はいはいはいはいはいはいはいはいはいはいはいはいはいはいはいはいえーっと"
+        },
+        {
+          "speechId": 901,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 10144260,
+          "sourceEndMs": 10149800,
+          "text": "これはね"
+        },
+        {
+          "speechId": 902,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 10150280,
+          "sourceEndMs": 10155120,
+          "text": "1枚取ろうするタクティクスチェンジ"
+        },
+        {
+          "speechId": 903,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 10155300,
+          "sourceEndMs": 10160120,
+          "text": "めっちゃ強いねもしかして嬉しいカードだねそれ"
+        },
+        {
+          "speechId": 904,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 10161960,
+          "sourceEndMs": 10171399,
+          "text": "一旦コズミックサイクロンうわぁそれまあいいけどねでこうして"
+        },
+        {
+          "speechId": 905,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 10172960,
+          "sourceEndMs": 10178960,
+          "text": "手札に加えるのはこれか"
+        },
+        {
+          "speechId": 906,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 10180620,
+          "sourceEndMs": 10192819,
+          "text": "可愛い女来たそう可愛い女リーダーディーラーこれとこれで一旦こうして"
+        },
+        {
+          "speechId": 907,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 10193040,
+          "sourceEndMs": 10205540,
+          "text": "一旦こうしてリーダーの効果発動はいはいはいで一旦コート一旦こうして帰って帰った発動"
+        },
+        {
+          "speechId": 908,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 10206439,
+          "sourceEndMs": 10214359,
+          "text": "よしよし回り始めたようやく来ましたこれですこれです"
+        },
+        {
+          "speechId": 909,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 10215720,
+          "sourceEndMs": 10218380,
+          "text": "トラブル"
+        },
+        {
+          "speechId": 910,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 10218680,
+          "sourceEndMs": 10226280,
+          "text": "来た立面で一旦殴って一旦"
+        },
+        {
+          "speechId": 911,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 10226399,
+          "sourceEndMs": 10230740,
+          "text": "殴ってからの効果発動で"
+        },
+        {
+          "speechId": 912,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 10231500,
+          "sourceEndMs": 10257800,
+          "text": "リーラといいスキルを出してどうしてディーラーの効果発動こいつを一体壊してまた掃除していった殴ってそうなのよ分解した後殴れるのよはいはいはいはいはいはいはいはいで"
+        },
+        {
+          "speechId": 913,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 10260140,
+          "sourceEndMs": 10266200,
+          "text": "一旦こうかなこうしとくかこうして"
+        },
+        {
+          "speechId": 914,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 10267399,
+          "sourceEndMs": 10278380,
+          "text": "こうしてでまた帰ってこれるんだそうなのよでこうじゃないどうぞなるほどなるほど"
+        },
+        {
+          "speechId": 915,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 10285260,
+          "sourceEndMs": 10294939,
+          "text": "いいよしかもこのトラブルさんは召喚するたびに200ダメージ入りますからねそうですスパチャです"
+        },
+        {
+          "speechId": 916,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 10306040,
+          "sourceEndMs": 10309819,
+          "text": "何に使ってたんだこれ"
+        },
+        {
+          "speechId": 917,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 10310580,
+          "sourceEndMs": 10313600,
+          "text": "わからんカード出てきてない"
+        },
+        {
+          "speechId": 918,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 10329720,
+          "sourceEndMs": 10333740,
+          "text": "悩んでいる[音楽]"
+        },
+        {
+          "speechId": 919,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 10334399,
+          "sourceEndMs": 10337720,
+          "text": "いっぱい悩みな"
+        },
+        {
+          "speechId": 920,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 10337779,
+          "sourceEndMs": 10343040,
+          "text": "あんまり使ったことないなぁ"
+        },
+        {
+          "speechId": 921,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 10346220,
+          "sourceEndMs": 10349899,
+          "text": "そうよ一応なんか持ってるよ"
+        },
+        {
+          "speechId": 922,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 10351939,
+          "sourceEndMs": 10355939,
+          "text": "なるほどなるほど"
+        },
+        {
+          "speechId": 923,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 10356000,
+          "sourceEndMs": 10359560,
+          "text": "はいはいはいはいはいはいはいはいはい"
+        },
+        {
+          "speechId": 924,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 10359660,
+          "sourceEndMs": 10366880,
+          "text": "こうなるのではそっか戻せるので出して"
+        },
+        {
+          "speechId": 925,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 10370600,
+          "sourceEndMs": 10379359,
+          "text": "えーっと待ってよこれは特殊召喚だからまだ待っとく"
+        },
+        {
+          "speechId": 926,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 10379700,
+          "sourceEndMs": 10382600,
+          "text": "でこの出して"
+        },
+        {
+          "speechId": 927,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 10384319,
+          "sourceEndMs": 10387100,
+          "text": "出して"
+        },
+        {
+          "speechId": 928,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 10387740,
+          "sourceEndMs": 10391600,
+          "text": "止まっとくそうするとこっちが"
+        },
+        {
+          "speechId": 929,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 10392000,
+          "sourceEndMs": 10394960,
+          "text": "一応出しとこ"
+        },
+        {
+          "speechId": 930,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 10398319,
+          "sourceEndMs": 10423399,
+          "text": "これスパチャで知りそうあ何この効果モンスターを特殊召喚しようとしてんのかそうあーはいはいはいはいはいはいはいはいそれを一旦墓穴するかはいはいはいはいはいこれは"
+        },
+        {
+          "speechId": 931,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 10426800,
+          "sourceEndMs": 10435100,
+          "text": "墓穴だったのかそう墓穴だったのよお墓使わないからなここで"
+        },
+        {
+          "speechId": 932,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 10443300,
+          "sourceEndMs": 10448479,
+          "text": "あなたの効果をめちゃくちゃ読みます読んでください"
+        },
+        {
+          "speechId": 933,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 10449479,
+          "sourceEndMs": 10452479,
+          "text": "えーっと"
+        },
+        {
+          "speechId": 934,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 10457040,
+          "sourceEndMs": 10478840,
+          "text": "ちなみにトラブルサニーはさっきみたいに分解するよね多分ねそうなんかこの人が効果の対象とかに選ばれたら破壊される前に分解してリーダーとキスキルを出すはいはいはいはいはいはいはいデリーダで破壊できてまーちゃん"
+        },
+        {
+          "speechId": 935,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 10479380,
+          "sourceEndMs": 10486819,
+          "text": "ミイラとスキルの効果読むかうんこれね"
+        },
+        {
+          "speechId": 936,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 10489380,
+          "sourceEndMs": 10503740,
+          "text": "このカードは特殊性紹介に成功したら自分フィールドにキスキルも存在するフィールドカード1枚は大丈夫で発動破壊するのディーラーそうリーダー破壊する1枚えぐくないエグい"
+        },
+        {
+          "speechId": 937,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 10503800,
+          "sourceEndMs": 10507100,
+          "text": "えぐいんですわ"
+        },
+        {
+          "speechId": 938,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 10508160,
+          "sourceEndMs": 10522819,
+          "text": "でも絶対いるもんねキスキルは絶対いるねで1枚ドローはもうできるそう破壊とドローだから"
+        },
+        {
+          "speechId": 939,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 10525260,
+          "sourceEndMs": 10528939,
+          "text": "えーってことは1キルできないよねこれ"
+        },
+        {
+          "speechId": 940,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 10529340,
+          "sourceEndMs": 10535420,
+          "text": "山のことうんうんいやわかんないわかんないけど"
+        },
+        {
+          "speechId": 941,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 10535939,
+          "sourceEndMs": 10538180,
+          "text": "悩むの"
+        },
+        {
+          "speechId": 942,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 10541100,
+          "sourceEndMs": 10545380,
+          "text": "これを何で出そう出してたんだっけ昔"
+        },
+        {
+          "speechId": 943,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 10550340,
+          "sourceEndMs": 10553720,
+          "text": "まあただそうね"
+        },
+        {
+          "speechId": 944,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 10555560,
+          "sourceEndMs": 10558279,
+          "text": "こっちか"
+        },
+        {
+          "speechId": 945,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 10560800,
+          "sourceEndMs": 10568120,
+          "text": "戦闘で破壊されてこのカードで達成するに疑いの戦闘ダメージ0なる"
+        },
+        {
+          "speechId": 946,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 10569359,
+          "sourceEndMs": 10572319,
+          "text": "うわめっちゃ"
+        },
+        {
+          "speechId": 947,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 10574700,
+          "sourceEndMs": 10579340,
+          "text": "悩んでる楽しみが出てくる"
+        },
+        {
+          "speechId": 948,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 10580819,
+          "sourceEndMs": 10590500,
+          "text": "うわぁどっちがいいかななんかドラグナーとさぁダブルと右左になって"
+        },
+        {
+          "speechId": 949,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 10594300,
+          "sourceEndMs": 10605569,
+          "text": "[音楽]やるねかでも大丈夫だよ墓地いっぱいいるしねまだワンチャンあるよね[音楽]"
+        },
+        {
+          "speechId": 950,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 10606800,
+          "sourceEndMs": 10622600,
+          "text": "はいはいはいホープだすげーキラキラしとるこれめっちゃキラキラすげーいやそうだよね紹介したらもあるしこれでいいやなるべく手順少なく"
+        },
+        {
+          "speechId": 951,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 10624160,
+          "sourceEndMs": 10632319,
+          "text": "言って手札に加えるその後ホープダブル以外の"
+        },
+        {
+          "speechId": 952,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 10633560,
+          "sourceEndMs": 10653380,
+          "text": "ただこれあれだよね多分山が分解してリーダーで壊したぞて効果は多分通っちゃうと思うんだよ効果は多分あるんじゃないかな多分わかんない順番"
+        },
+        {
+          "speechId": 953,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 10655640,
+          "sourceEndMs": 10658359,
+          "text": "最後に"
+        },
+        {
+          "speechId": 954,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 10659540,
+          "sourceEndMs": 10669399,
+          "text": "多分効果通るから打ったところで多分すかされるんだよなはいはいはいえーでチェーンてなんだ"
+        },
+        {
+          "speechId": 955,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 10671200,
+          "sourceEndMs": 10681880,
+          "text": "何の話これなんだよいしょえどういうこと何わかんない"
+        },
+        {
+          "speechId": 956,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 10684200,
+          "sourceEndMs": 10690640,
+          "text": "うわなんだなんだわかんないなんかなったなんかなんかなってるね"
+        },
+        {
+          "speechId": 957,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 10692180,
+          "sourceEndMs": 10696460,
+          "text": "ダブルアンプチャンスが出てきた"
+        },
+        {
+          "speechId": 958,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 10698840,
+          "sourceEndMs": 10710020,
+          "text": "分解されるもんいやしてないよ[音楽]入ってる入ってる"
+        },
+        {
+          "speechId": 959,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 10714460,
+          "sourceEndMs": 10721600,
+          "text": "加えてこれあるからまあまあいいか"
+        },
+        {
+          "speechId": 960,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 10723319,
+          "sourceEndMs": 10726100,
+          "text": "えーっと"
+        },
+        {
+          "speechId": 961,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 10727100,
+          "sourceEndMs": 10743479,
+          "text": "希望ホープが自分または相手のモンスターの攻撃宣言時このカードのエクセル素材その攻撃は無効にするでしょっことては効果は無効にされないのかなえーっと"
+        },
+        {
+          "speechId": 962,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 10754100,
+          "sourceEndMs": 10770380,
+          "text": "効果無効にされないんだったら多分破壊の効果かとおるのかなってそうだよねこのカードがない状態で攻撃するこのカードからはいはいはいはいはいはいはいはいはいはいで"
+        },
+        {
+          "speechId": 963,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 10771160,
+          "sourceEndMs": 10775600,
+          "text": "一旦こうして"
+        },
+        {
+          "speechId": 964,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 10777700,
+          "sourceEndMs": 10782540,
+          "text": "はいはいはいはい分裂分裂"
+        },
+        {
+          "speechId": 965,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 10786160,
+          "sourceEndMs": 10791680,
+          "text": "してそうドローからの破壊かも"
+        },
+        {
+          "speechId": 966,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 10794920,
+          "sourceEndMs": 10802600,
+          "text": "待ってこれで一旦ターンエンド了解"
+        },
+        {
+          "speechId": 967,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 10802700,
+          "sourceEndMs": 10806180,
+          "text": "じゃあえーっと"
+        },
+        {
+          "speechId": 968,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 10806420,
+          "sourceEndMs": 10809319,
+          "text": "なると"
+        },
+        {
+          "speechId": 969,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 10809960,
+          "sourceEndMs": 10819220,
+          "text": "ってなると山をもっかいこれを作ってトラブルてになっ"
+        },
+        {
+          "speechId": 970,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 10826330,
+          "sourceEndMs": 10829569,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 971,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 10830600,
+          "sourceEndMs": 10844120,
+          "text": "懐かしいわそのデッキ回してんの久しぶりに回しました時ちょうどやってなかったそれやってたやったやつだよね"
+        },
+        {
+          "speechId": 972,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 10844300,
+          "sourceEndMs": 10847540,
+          "text": "まあまあまあ"
+        },
+        {
+          "speechId": 973,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 10851240,
+          "sourceEndMs": 10873520,
+          "text": "頑張ったんじゃないですか星川さんいや楽しかったありがとうあんよ頑張ってねありがとうバイバイということで山神でしたちょっとみんな申し訳ないんだけどちょっと一瞬遊戯だ王じゃないあの誕生日なんよ友達が誕生日友達が誕生日はちょっと待って友達が誕生日だっけ"
+        },
+        {
+          "speechId": 974,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 10876020,
+          "sourceEndMs": 10887020,
+          "text": "誕生日のは友達いるからちょっと凸に行ってくるねなんかすごい待ってもらっちゃってるみたいなんで一瞬行っまたて他の人とデュエルを再開したいと思います"
+        },
+        {
+          "speechId": 975,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 10891560,
+          "sourceEndMs": 10894560,
+          "text": "と"
+        },
+        {
+          "speechId": 976,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 10901640,
+          "sourceEndMs": 10904640,
+          "text": "あ"
+        },
+        {
+          "speechId": 977,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 10911660,
+          "sourceEndMs": 10915580,
+          "text": "なんねっ言わかちょっと待っててれたから"
+        },
+        {
+          "speechId": 978,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 10924020,
+          "sourceEndMs": 10927100,
+          "text": "どうしようかな"
+        },
+        {
+          "speechId": 979,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 10929060,
+          "sourceEndMs": 10939199,
+          "text": "そうなんか女装して女装して誕生日達し待ちてるみたいで[音楽]"
+        },
+        {
+          "speechId": 980,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 10940040,
+          "sourceEndMs": 10942040,
+          "text": "犬"
+        },
+        {
+          "speechId": 981,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 10942500,
+          "sourceEndMs": 10946479,
+          "text": "犬凸待ちしてんな今見に行こう"
+        },
+        {
+          "speechId": 982,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 10953120,
+          "sourceEndMs": 10958479,
+          "text": "はいはいはいはいはいはい犬はか普通におしゃべりしてんの"
+        },
+        {
+          "speechId": 983,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 10958580,
+          "sourceEndMs": 10962439,
+          "text": "うんちょっと待ってやるか"
+        },
+        {
+          "speechId": 984,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 10962540,
+          "sourceEndMs": 10972760,
+          "text": "いつ来るいつ来るいつ来るみたいなめっちゃ来てたから今やかけていなかったと思ったら今他の人とお話ししてたタイミングが申し訳ないうん"
+        },
+        {
+          "speechId": 985,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 10974359,
+          "sourceEndMs": 10977859,
+          "text": "すごいよね女装って"
+        },
+        {
+          "speechId": 986,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 10978080,
+          "sourceEndMs": 10981700,
+          "text": "見に行くかよいしょ"
+        },
+        {
+          "speechId": 987,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 10982520,
+          "sourceEndMs": 10992620,
+          "text": "頭リフレッシュしとこういやさすがに遊戯を王始めて3時間ぐらい経ったけどあの集中力が終わってきてる"
+        },
+        {
+          "speechId": 988,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 10993560,
+          "sourceEndMs": 10999220,
+          "text": "最初のないや頭使うからなやっぱ遊戯王"
+        },
+        {
+          "speechId": 989,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 11010000,
+          "sourceEndMs": 11015720,
+          "text": "リプレイでも見とくか山の方見とくか"
+        },
+        {
+          "speechId": 990,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 11022300,
+          "sourceEndMs": 11028380,
+          "text": "ね糖分が必要だしお腹も空くわこの時間"
+        },
+        {
+          "speechId": 991,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 11029319,
+          "sourceEndMs": 11032939,
+          "text": "すごいな手札4枚"
+        },
+        {
+          "speechId": 992,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 11054700,
+          "sourceEndMs": 11061979,
+          "text": "手札だいぶ事故ってるね魔法カード罠カードかここで初めて引けたの"
+        },
+        {
+          "speechId": 993,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 11078600,
+          "sourceEndMs": 11084479,
+          "text": "ここ見てなかったけどリンク召喚したのねなるほどね"
+        },
+        {
+          "speechId": 994,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 11087240,
+          "sourceEndMs": 11094859,
+          "text": "なんであそっか1600だからねはいはい見えなかったのか"
+        },
+        {
+          "speechId": 995,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 11095380,
+          "sourceEndMs": 11100620,
+          "text": "うわこれ取っとけばなー他に捨てるのなかったか"
+        },
+        {
+          "speechId": 996,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 11114460,
+          "sourceEndMs": 11119100,
+          "text": "橋川のそうだよ星川の手札には常に語気がいるから"
+        },
+        {
+          "speechId": 997,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 11120220,
+          "sourceEndMs": 11124859,
+          "text": "みんな何時間ぐらい連続で遊戯をできる"
+        },
+        {
+          "speechId": 998,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 11125080,
+          "sourceEndMs": 11128340,
+          "text": "集中力的に"
+        },
+        {
+          "speechId": 999,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 11139120,
+          "sourceEndMs": 11143399,
+          "text": "20分1試合やねそれね"
+        },
+        {
+          "speechId": 1000,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 11143740,
+          "sourceEndMs": 11149939,
+          "text": "無言だったら結構あー10時間"
+        },
+        {
+          "speechId": 1001,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 11154420,
+          "sourceEndMs": 11159359,
+          "text": "紙の方がすごい体力と集中力使えそうだけど"
+        },
+        {
+          "speechId": 1002,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 11162160,
+          "sourceEndMs": 11167819,
+          "text": "1日5時間待って2時間が限界だよ"
+        },
+        {
+          "speechId": 1003,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 11169060,
+          "sourceEndMs": 11172260,
+          "text": "ティアラてるで萎え人もいます"
+        },
+        {
+          "speechId": 1004,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 11172600,
+          "sourceEndMs": 11178620,
+          "text": "今日やって改めて思ったけどティアラは良くないよほんと"
+        },
+        {
+          "speechId": 1005,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 11186840,
+          "sourceEndMs": 11193920,
+          "text": "ランクもイライラしちゃうあ遊戯やっぱ王でイライラすることあるんだ"
+        },
+        {
+          "speechId": 1006,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 11193960,
+          "sourceEndMs": 11208260,
+          "text": "もしくは基本ゲームであんまイライラしないからさわかんないけどでも確かにあの手洗いメンツ持ってこられたらなるかもしれない"
+        },
+        {
+          "speechId": 1007,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 11209500,
+          "sourceEndMs": 11216760,
+          "text": "高評価チャンネル登録しましたありがとうこんちゃろ"
+        },
+        {
+          "speechId": 1008,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 11218380,
+          "sourceEndMs": 11222420,
+          "text": "でもニビルは2ビルはイライラする"
+        },
+        {
+          "speechId": 1009,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 11223859,
+          "sourceEndMs": 11234960,
+          "text": "使われたらイライラするリベルとカダーラと地付きエールは机割れる全然終わろうと思えば"
+        },
+        {
+          "speechId": 1010,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 11235120,
+          "sourceEndMs": 11244500,
+          "text": "別にイライラじゃないしねそれはイライラもうというかしょうがない人間なら誰でもそうなる"
+        },
+        {
+          "speechId": 1011,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 11251080,
+          "sourceEndMs": 11265920,
+          "text": "はいはいはいはいはいはいいやなんかなーでもいい勝負なんかやしろさんとかさアメリカちゃんとかも圧倒的だけどさーふみのみるかちょっと買ったやつ見よう欲しかった"
+        },
+        {
+          "speechId": 1012,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 11268540,
+          "sourceEndMs": 11276120,
+          "text": "やっぱり同期とはさいい勝負できてね同じ楽しい遊戯王時期に始めると"
+        },
+        {
+          "speechId": 1013,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 11277420,
+          "sourceEndMs": 11280979,
+          "text": "お前遅いんだけど"
+        },
+        {
+          "speechId": 1014,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 11281040,
+          "sourceEndMs": 11304140,
+          "text": "うまいけどんだお誕生日おめでとう[音楽]ありがとうございますはいおめでとうお前可愛い女装これなんかもうちょっと姿勢ピシッしとてマスク取れますよマスク取ってよじゃあマスクここまでだって取れるちょっと待ってラグがあるから若干"
+        },
+        {
+          "speechId": 1015,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 11305310,
+          "sourceEndMs": 11307439,
+          "text": "[笑い]可愛い"
+        },
+        {
+          "speechId": 1016,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 11309240,
+          "sourceEndMs": 11318300,
+          "text": "やんいいでしょなんかそっちの方がモテるんじゃない多分同じこと言ってる人何人もいます"
+        },
+        {
+          "speechId": 1017,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 11323319,
+          "sourceEndMs": 11325620,
+          "text": "星川さんです"
+        },
+        {
+          "speechId": 1018,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 11325779,
+          "sourceEndMs": 11339300,
+          "text": "昨日ぶりですねでも遊戯を配信やってて申し訳ないんですけどタイミングがねわからなくて本当だよ似合ってる似合ってるよね"
+        },
+        {
+          "speechId": 1019,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 11341500,
+          "sourceEndMs": 11365460,
+          "text": "誕生日結構過ぎたくねそうで5月22だよ休んたねでからもう配信のあれがなかったからなるほどね確かに確かにおめでとうじゃんあれ使ったあの歌タップル1週間分のいやまだね取っといてる本当に本当に俺が危なくなったら使ういやお前彼女十分危ないだろ今だっていなくない"
+        },
+        {
+          "speechId": 1020,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 11368260,
+          "sourceEndMs": 11376620,
+          "text": "ちょっと待って聞くその言葉ここから彼女いないいやもう4年や"
+        },
+        {
+          "speechId": 1021,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 11382740,
+          "sourceEndMs": 11395580,
+          "text": "真剣に出会おうとしてる人に失礼じゃですないかいやいや出ようとしますよ俺も神経ですよ結果だけ教えて使ったならタップルそうだね"
+        },
+        {
+          "speechId": 1022,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 11395920,
+          "sourceEndMs": 11407279,
+          "text": "悲しい結果になるかもしれませんごめんねなんかオーバーキルしちゃって1万パンチしちゃった今痛い普通にもう本当にまた明日から配信休む1ヶ月"
+        },
+        {
+          "speechId": 1023,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 11410160,
+          "sourceEndMs": 11428399,
+          "text": "ですかいいよそしたら1つ目なんですけど第初対面一あれあの初対面ってどこだっけどこだったっけ初対面配信のそうえっとCRカップじゃないかなえ嘘です"
+        },
+        {
+          "speechId": 1024,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 11432580,
+          "sourceEndMs": 11450660,
+          "text": "ちょうど1年前じゃないよねちょうど1こと年前にお前と全く喋ったなかっのたに誕生日凸待ち行ったんで星川がそうだわなんでなんでだけどえなんか初対面で誕生日はのおもろいかなって"
+        },
+        {
+          "speechId": 1025,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 11451600,
+          "sourceEndMs": 11454080,
+          "text": "めっちゃ長くねなった"
+        },
+        {
+          "speechId": 1026,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 11461260,
+          "sourceEndMs": 11465359,
+          "text": "その後仲良くなったそうだよね"
+        },
+        {
+          "speechId": 1027,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 11468160,
+          "sourceEndMs": 11472859,
+          "text": "びっくりしたよ俺が俺が一番びっくりしたけどたね確かに良かっね"
+        },
+        {
+          "speechId": 1028,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 11478319,
+          "sourceEndMs": 11489359,
+          "text": "普通に祝ってもらったことマジで日記か言ってないけどね今ごめんね"
+        },
+        {
+          "speechId": 1029,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 11489600,
+          "sourceEndMs": 11493620,
+          "text": "今全部聞こえちゃうんだよね"
+        },
+        {
+          "speechId": 1030,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 11494500,
+          "sourceEndMs": 11503399,
+          "text": "精神廃れてるからごめんねなんかそんなセシスされるゲーム作れるんであれ結構なるほどね"
+        },
+        {
+          "speechId": 1031,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 11503939,
+          "sourceEndMs": 11511920,
+          "text": "いつかやろうなお前も遊戯王を覚えるわ本当にアンティークギアゴーレムしか知らないけどいいか"
+        },
+        {
+          "speechId": 1032,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 11513000,
+          "sourceEndMs": 11516720,
+          "text": "も知らないからそれ大丈夫"
+        },
+        {
+          "speechId": 1033,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 11520960,
+          "sourceEndMs": 11528120,
+          "text": "第一印象と今の違い聞いてもいいですか第一印象は"
+        },
+        {
+          "speechId": 1034,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 11534660,
+          "sourceEndMs": 11551700,
+          "text": "第一印象は童貞童貞だしなんかやばいやつ頭なんか本当にそんなイメージだっただってだってさ大気とハル君がさ川瀬さんの真似するの大体変なやつだったからさそれは稀だからでしょ"
+        },
+        {
+          "speechId": 1035,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 11553740,
+          "sourceEndMs": 11558060,
+          "text": "変な人なんだろうなって思ってた"
+        },
+        {
+          "speechId": 1036,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 11558359,
+          "sourceEndMs": 11572939,
+          "text": "それ第一印象だから確かにねそうそう第一衣装だっなっ変な人たて今の印象は変な人変わっないてよ大丈夫よ"
+        },
+        {
+          "speechId": 1037,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 11577200,
+          "sourceEndMs": 11599100,
+          "text": "会話ってやっぱりいいことを悪いことを言ってからいいことなんですよね悪いこと言ったって悪いこと言ったからね下がっはてやっぱりAPEXうまいしあの優しいし大会でピリピリした空気の時に無理くるしてても空気良くして人のすごい印象に残ってる超いいやつ"
+        },
+        {
+          "speechId": 1038,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 11600880,
+          "sourceEndMs": 11611700,
+          "text": "なんでだろうねなんでだろうねなんか残念なイケメンって感じ一番気付く言葉です"
+        },
+        {
+          "speechId": 1039,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 11612880,
+          "sourceEndMs": 11626700,
+          "text": "よまあ喋れなかったらそう喋んなかったらモテるよっていうそれ喋れねなかったら本当にただの悪口だからそんなことない顔顔いいじゃん"
+        },
+        {
+          "speechId": 1040,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 11627899,
+          "sourceEndMs": 11644340,
+          "text": "人間大事だって内面じゃないやっぱりうんそうだよそうだよ頑張れよじゃあね俺が結婚式やったら来てめっちゃ行くめっちゃ行くめっちゃ行く行く"
+        },
+        {
+          "speechId": 1041,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 11647319,
+          "sourceEndMs": 11657540,
+          "text": "俺も結婚はしたいよ結婚式行くわちゃんと大気と"
+        },
+        {
+          "speechId": 1042,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 11657760,
+          "sourceEndMs": 11659880,
+          "text": "冷やかし"
+        },
+        {
+          "speechId": 1043,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 11663340,
+          "sourceEndMs": 11666240,
+          "text": "です"
+        },
+        {
+          "speechId": 1044,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 11671819,
+          "sourceEndMs": 11703620,
+          "text": "けど最後はねあのねもうねあのー俺のことをね褒め称えるだけの会があるんで次の人への質問今聞いてるんですよいろんな人に好きな人次の人です[笑い]びっくりした今全然よくやってたそしたら川瀬の好きなとこを5つ答えと思って気持ち悪い"
+        },
+        {
+          "speechId": 1045,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 11704100,
+          "sourceEndMs": 11714300,
+          "text": "はいそうですね絶対面白がって聞いてるやんだって多分笑ってる最悪だよ"
+        },
+        {
+          "speechId": 1046,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 11715680,
+          "sourceEndMs": 11720840,
+          "text": "好きなとこうーん"
+        },
+        {
+          "speechId": 1047,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 11722580,
+          "sourceEndMs": 11725580,
+          "text": "うーん"
+        },
+        {
+          "speechId": 1048,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 11726660,
+          "sourceEndMs": 11737939,
+          "text": "今今のところまず今メンタルが止み始め明日からまた3ヶ月休むちょっとコメントみんなコメントコメント"
+        },
+        {
+          "speechId": 1049,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 11741540,
+          "sourceEndMs": 11761160,
+          "text": "はまず1個顔でしょ顔マジでかっこいいよお前の顔本当に超いい顔顔しか肩あれだよねゲームが上手いでしょうんあと話がおもろいよねあと声がいいよね"
+        },
+        {
+          "speechId": 1050,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 11777240,
+          "sourceEndMs": 11789720,
+          "text": "そんなもんかななんかそういえばちょっと前になんか為替の声に合わせに行ってるわ悪口だよって言ってましたよね確か言ってないですか"
+        },
+        {
+          "speechId": 1051,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 11801520,
+          "sourceEndMs": 11809700,
+          "text": "仲良くなったということであの次の人への質問を聞いてください最後なんですけど次のが人への質問"
+        },
+        {
+          "speechId": 1052,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 11811800,
+          "sourceEndMs": 11836279,
+          "text": "かわせとデート行きたい場所聞いてあげて聞いとくわうんオッケー任せろじゃあありがとうございました有料頑張ってくださいマジで誕生日おめでとううんまたゲームしようあー長生きしろよ[音楽]すいませんね本当友達の誕生日をねお祝いできたところで"
+        },
+        {
+          "speechId": 1053,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 11836500,
+          "sourceEndMs": 11839680,
+          "text": "うんよし"
+        },
+        {
+          "speechId": 1054,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 11843240,
+          "sourceEndMs": 11858479,
+          "text": "[音楽]1られ分前の法要が覚えない人やぞうるせえなそうだよ無限置かれた立てるやつ覚えてないよ星川は覚えられないよ記憶力が鶏だからね"
+        },
+        {
+          "speechId": 1055,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 11858819,
+          "sourceEndMs": 11867909,
+          "text": "うんということでデュエルに戻る気分転換にはなったな誕生日おめでとう[音楽]"
+        },
+        {
+          "speechId": 1056,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 11869800,
+          "sourceEndMs": 11872520,
+          "text": "とでいうこと"
+        },
+        {
+          "speechId": 1057,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 11872979,
+          "sourceEndMs": 11881279,
+          "text": "川瀬君でした名前を出してなかった1回もはいおCRの川瀬君誕生日めでとうございます"
+        },
+        {
+          "speechId": 1058,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 11882880,
+          "sourceEndMs": 11885960,
+          "text": "次の人もあと"
+        },
+        {
+          "speechId": 1059,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 11894460,
+          "sourceEndMs": 11897479,
+          "text": "あれ行けるのかな"
+        },
+        {
+          "speechId": 1060,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 11904080,
+          "sourceEndMs": 11915060,
+          "text": "これそうね川瀬のチャンネルも概要欄に書いとくかあ星川が入ってなかったわボイチャに"
+        },
+        {
+          "speechId": 1061,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 11915479,
+          "sourceEndMs": 11919479,
+          "text": "もしもーしもしもーし"
+        },
+        {
+          "speechId": 1062,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 11920760,
+          "sourceEndMs": 11927180,
+          "text": "ちょっとすいません20分お待たせ全然全然全然全然"
+        },
+        {
+          "speechId": 1063,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 11928260,
+          "sourceEndMs": 11952840,
+          "text": "お願いします音楽作ってます堂村リュウですよろしくお願いします2度目まして挑めましてのねいやもうマジで俺今日数々今まで今日やってきてると思うんですけどはいあの俺が多分一番初心者であマジででも俺が一番マジ可能性秘めてるか"
+        },
+        {
+          "speechId": 1064,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 11958240,
+          "sourceEndMs": 11964380,
+          "text": "泣かしてしまったらごめんみたいな感じなはっきり言うと泣かしたら申し訳ない"
+        },
+        {
+          "speechId": 1065,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 11974200,
+          "sourceEndMs": 11979500,
+          "text": "ムード行けますこれムード"
+        },
+        {
+          "speechId": 1066,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 11981040,
+          "sourceEndMs": 11986939,
+          "text": "ケツから読んだらなんで見せるかマジで"
+        },
+        {
+          "speechId": 1067,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 11988620,
+          "sourceEndMs": 11999359,
+          "text": "いいのこれごめんなんだけどさ二度目増してすぎてわかんないんだけど名前何て呼んでたっけビューティー"
+        },
+        {
+          "speechId": 1068,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 12000080,
+          "sourceEndMs": 12004160,
+          "text": "に関しては研修生でもいいよ"
+        },
+        {
+          "speechId": 1069,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 12006610,
+          "sourceEndMs": 12014779,
+          "text": "[音楽]お前カエルパクんなよメイト俺が先だから"
+        },
+        {
+          "speechId": 1070,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 12015260,
+          "sourceEndMs": 12024680,
+          "text": "これ4レベちなみにちょっと待ってお前もしかしてティアラメンズとか言ってお前お前さ"
+        },
+        {
+          "speechId": 1071,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 12030979,
+          "sourceEndMs": 12044540,
+          "text": "使ったらどうなるかわかってるお前コメントなんか爆笑してお前すげえ叩かれるぞ言っとくけどいいんかいパパけ勝者こそが正義やからな"
+        },
+        {
+          "speechId": 1072,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 12045439,
+          "sourceEndMs": 12079100,
+          "text": "1日2回持ってやらないやらなきゃいけないんだよもう一人いんだもう一人いた最悪のやついたもう一人初心者でも勝てるとこ見せるかこれこのカードさえ使えば初心者からもう終わりだってお前の人生それ逆にいろんなとこに飛び火してるけどイケてるこれいいけどな俺は炎止めてくださいよほんまにいい俺よ燃やされてでも勝つよこれは"
+        },
+        {
+          "speechId": 1073,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 12082859,
+          "sourceEndMs": 12117439,
+          "text": "ちなみに遊戯王はいつから好きなの俺遊戯王ねほんまに初期の頃からやってたから昔なるほどね最近ちょっと離れてでなんかうちの後輩に結構やってる人がいてはいはいはいはいはいはいおじさんではあるのかまあそうやなまあでも一応まあ復帰勢なんでね最近の遊戯王マジでもうおじさんにはわからんからだから一旦生研修で行くから名前はい保険ねはいはいはいはいそれ燃えても墓地から出てくるねん"
+        },
+        {
+          "speechId": 1074,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 12118560,
+          "sourceEndMs": 12121629,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 1075,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 12122220,
+          "sourceEndMs": 12125300,
+          "text": "ママトピックで"
+        },
+        {
+          "speechId": 1076,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 12125640,
+          "sourceEndMs": 12131120,
+          "text": "オノマトペを毎回持ってくるとでオノマトペアで"
+        },
+        {
+          "speechId": 1077,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 12134100,
+          "sourceEndMs": 12147920,
+          "text": "ダブラックチャンスは2枚あるので1枚墓地に送りますそしてオノマトピアそしてズババンチョを持ってきて名前オノマトペまでは良かった"
+        },
+        {
+          "speechId": 1078,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 12150979,
+          "sourceEndMs": 12155779,
+          "text": "えーっとそして効果発動"
+        },
+        {
+          "speechId": 1079,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 12158840,
+          "sourceEndMs": 12165200,
+          "text": "まあまあ勝てないよそんなカードじゃそうかな待ってこれ"
+        },
+        {
+          "speechId": 1080,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 12170819,
+          "sourceEndMs": 12173600,
+          "text": "見と"
+        },
+        {
+          "speechId": 1081,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 12174960,
+          "sourceEndMs": 12181920,
+          "text": "けよアタック0こいつ"
+        },
+        {
+          "speechId": 1082,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 12183240,
+          "sourceEndMs": 12187819,
+          "text": "守っとけ守っとけそんなんじゃ無理よ"
+        },
+        {
+          "speechId": 1083,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 12187979,
+          "sourceEndMs": 12192859,
+          "text": "リンクしてもゼロね来た来た来たはいはい"
+        },
+        {
+          "speechId": 1084,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 12194880,
+          "sourceEndMs": 12197880,
+          "text": "ダ"
+        },
+        {
+          "speechId": 1085,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 12198479,
+          "sourceEndMs": 12200479,
+          "text": "ブル"
+        },
+        {
+          "speechId": 1086,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 12208620,
+          "sourceEndMs": 12237260,
+          "text": "ゲットしてからのこれはまだ使わなくてよくてこれも使わなくてよくてよっしゃ行くみんなぞ5000あこのゲームって5000といいかんだいます待てよ大丈夫だよな大丈夫かな大丈夫行けるかな本当にやめとった方がいいんじゃないこれいらんこれぞこっからよ呼んでるよ"
+        },
+        {
+          "speechId": 1087,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 12239399,
+          "sourceEndMs": 12251180,
+          "text": "フープの効果を発動攻撃を無効にするそしてダブルアップチャンスを使ってもう一回今度は効果発動せずに"
+        },
+        {
+          "speechId": 1088,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 12255899,
+          "sourceEndMs": 12266120,
+          "text": "8,400円希望ホープとか名前にしてるくせにこいつ結構堅実にちゃんと焦げるあげてる"
+        },
+        {
+          "speechId": 1089,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 12270080,
+          "sourceEndMs": 12290479,
+          "text": "勉強きしてたいや俺ティアラやでマジかギャラクシーで行くかいや待って残機で行くかまぁまぁジャンプ漫画のヒーローここからですからはいはいはいはいはいはいはいマジでちょっとタイミング悪かったか一旦タイミング悪かったか倒されることによって炎上は免れるか"
+        },
+        {
+          "speechId": 1090,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 12294560,
+          "sourceEndMs": 12297680,
+          "text": "今から"
+        },
+        {
+          "speechId": 1091,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 12297899,
+          "sourceEndMs": 12307640,
+          "text": "干すと戦ってもいい勝負できると言われているデッキでさっきみたいな試合をしたら俺があまりにもこのゲームセンスないんだ"
+        },
+        {
+          "speechId": 1092,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 12310500,
+          "sourceEndMs": 12341060,
+          "text": "あれねだよこの間APEXをやった時に勇気をやろうって言ってくれたから入れてくれたんでしょいやマジでいいやつ友達にあの言っ聞いて何使ったらいいってたらティアラ最強って言われたから俺バカし課金てティアラ爆発集めたもんその友達がじゃあ悪いわそれあいつが悪いんだうんあいつが悪い炎上したらよマジ本当そうよ"
+        },
+        {
+          "speechId": 1093,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 12342380,
+          "sourceEndMs": 12347720,
+          "text": "始まってるやんゾクゾクと"
+        },
+        {
+          "speechId": 1094,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 12350060,
+          "sourceEndMs": 12359479,
+          "text": "ありがとうってスパチャ来たからヒール役よこれvtuberないでもから"
+        },
+        {
+          "speechId": 1095,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 12359710,
+          "sourceEndMs": 12362300,
+          "text": "[笑い]友達"
+        },
+        {
+          "speechId": 1096,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 12363359,
+          "sourceEndMs": 12367819,
+          "text": "じゃあ友達が悪い名前ださんとこ"
+        },
+        {
+          "speechId": 1097,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 12368120,
+          "sourceEndMs": 12376700,
+          "text": "絶対出さんとこはこんな赤のティアラ使うだけでみんなもティアラ使うよ"
+        },
+        {
+          "speechId": 1098,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 12377710,
+          "sourceEndMs": 12383960,
+          "text": "[音楽]ダイヤはいるからこっちでもしとくか"
+        },
+        {
+          "speechId": 1099,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 12384359,
+          "sourceEndMs": 12387200,
+          "text": "よしこれで"
+        },
+        {
+          "speechId": 1100,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 12389060,
+          "sourceEndMs": 12397640,
+          "text": "あもうやめてほんとそういうことすんの意味わかんないやられる自分のターンがわからなくなってくる"
+        },
+        {
+          "speechId": 1101,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 12399479,
+          "sourceEndMs": 12401540,
+          "text": "よ"
+        },
+        {
+          "speechId": 1102,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 12415279,
+          "sourceEndMs": 12418640,
+          "text": "ほいこんにちは"
+        },
+        {
+          "speechId": 1103,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 12434600,
+          "sourceEndMs": 12447800,
+          "text": "[音楽]OkOkOk進んでるもしかしてどんどん押してるよ俺もうチェインチェーン説明しとったら配信終わる"
+        },
+        {
+          "speechId": 1104,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 12450960,
+          "sourceEndMs": 12459560,
+          "text": "チェインチェンジまだ行くよこれとりあえず半分ね"
+        },
+        {
+          "speechId": 1105,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 12461180,
+          "sourceEndMs": 12467960,
+          "text": "いいよいいよ半分だろうが何だろうが星川のターンなんだけど"
+        },
+        {
+          "speechId": 1106,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 12468080,
+          "sourceEndMs": 12472760,
+          "text": "お前俺のターンは俺のさ俺のターンはのターン"
+        },
+        {
+          "speechId": 1107,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 12473100,
+          "sourceEndMs": 12476100,
+          "text": "こんにちは"
+        },
+        {
+          "speechId": 1108,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 12477020,
+          "sourceEndMs": 12480739,
+          "text": "出たこいつやばいやつ"
+        },
+        {
+          "speechId": 1109,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 12484020,
+          "sourceEndMs": 12487160,
+          "text": "何も止められない"
+        },
+        {
+          "speechId": 1110,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 12487380,
+          "sourceEndMs": 12493819,
+          "text": "わかる俺はねでも心痛いよこれやりながら"
+        },
+        {
+          "speechId": 1111,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 12495600,
+          "sourceEndMs": 12501859,
+          "text": "友達って悪かったんだなと思いながらやってるよちなみに名前こっそり"
+        },
+        {
+          "speechId": 1112,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 12504000,
+          "sourceEndMs": 12508160,
+          "text": "ほんまになんか来そうこのとこ"
+        },
+        {
+          "speechId": 1113,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 12508200,
+          "sourceEndMs": 12511040,
+          "text": "頑張ってる子だからやめてあげて"
+        },
+        {
+          "speechId": 1114,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 12511880,
+          "sourceEndMs": 12518540,
+          "text": "こんにちはさようならあなたデッキに戻します"
+        },
+        {
+          "speechId": 1115,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 12535979,
+          "sourceEndMs": 12544340,
+          "text": "ここ2000以上しか入れないとこなんでダメージすいません1000の方は申し訳ないんです"
+        },
+        {
+          "speechId": 1116,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 12544500,
+          "sourceEndMs": 12547500,
+          "text": "か"
+        },
+        {
+          "speechId": 1117,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 12553100,
+          "sourceEndMs": 12556279,
+          "text": "もう1回"
+        },
+        {
+          "speechId": 1118,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 12557880,
+          "sourceEndMs": 12564439,
+          "text": "なんか来たよまた来たわでもかなわんよ"
+        },
+        {
+          "speechId": 1119,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 12568710,
+          "sourceEndMs": 12573920,
+          "text": "[音楽]これミスってるこれ"
+        },
+        {
+          "speechId": 1120,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 12578399,
+          "sourceEndMs": 12585380,
+          "text": "終わってるゲームチェンジだよ練習生星川に"
+        },
+        {
+          "speechId": 1121,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 12586500,
+          "sourceEndMs": 12589880,
+          "text": "俺方向が希望行くかこれ"
+        },
+        {
+          "speechId": 1122,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 12596040,
+          "sourceEndMs": 12600180,
+          "text": "あーどうしよう一旦"
+        },
+        {
+          "speechId": 1123,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 12601140,
+          "sourceEndMs": 12604279,
+          "text": "ここから勝てるのが"
+        },
+        {
+          "speechId": 1124,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 12604439,
+          "sourceEndMs": 12610279,
+          "text": "ちょっと見届けるか特殊召喚するモンスター"
+        },
+        {
+          "speechId": 1125,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 12613800,
+          "sourceEndMs": 12636680,
+          "text": "あーもうもう脳が死んでるでもいいか初心者だし相手あーはいはい皆さん聞きましたこういうとこよなするのはこういう侮ってるところがなやっぱ洗濯ミスになってくるのよなもうメモがメモが足りない"
+        },
+        {
+          "speechId": 1126,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 12637850,
+          "sourceEndMs": 12641270,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 1127,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 12641520,
+          "sourceEndMs": 12651600,
+          "text": "ねちょっと読みたくない効果特殊召喚さの効果を無効にするダイヤダイヤ"
+        },
+        {
+          "speechId": 1128,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 12654319,
+          "sourceEndMs": 12670340,
+          "text": "これももう無理冬冬これも無理俺ももう無理ですなんかもう残りライフ500ぐらいまだ言うてまだな言うてあんのよ"
+        },
+        {
+          "speechId": 1129,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 12670979,
+          "sourceEndMs": 12677720,
+          "text": "このゲーム1ターンじゃないと思う"
+        },
+        {
+          "speechId": 1130,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 12686100,
+          "sourceEndMs": 12689100,
+          "text": "あれ"
+        },
+        {
+          "speechId": 1131,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 12690840,
+          "sourceEndMs": 12695960,
+          "text": "なんか強そうやったのにななんかそんな感じかこれ"
+        },
+        {
+          "speechId": 1132,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 12697399,
+          "sourceEndMs": 12712040,
+          "text": "かわいそうなんか残ってるけど降りません[拍手]あいいねいいねいいねOK違うよ後半はそっちを全然"
+        },
+        {
+          "speechId": 1133,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 12712319,
+          "sourceEndMs": 12723859,
+          "text": "俺あのー切って喋ってるけど車で緊張しすぎでからて俺今右足の付け釣ってるな右足のつりながらやってるよ"
+        },
+        {
+          "speechId": 1134,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 12724140,
+          "sourceEndMs": 12733319,
+          "text": "めちゃくちゃ痛いどっちと戦ってるかわからんもんこれもう使うわうるせ"
+        },
+        {
+          "speechId": 1135,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 12736859,
+          "sourceEndMs": 12741260,
+          "text": "えやるゲーム"
+        },
+        {
+          "speechId": 1136,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 12741300,
+          "sourceEndMs": 12744140,
+          "text": "かなんか来たなんか来た"
+        },
+        {
+          "speechId": 1137,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 12750260,
+          "sourceEndMs": 12754340,
+          "text": "やばいやばいやばいやばい怖い怖い怖い"
+        },
+        {
+          "speechId": 1138,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 12759000,
+          "sourceEndMs": 12761120,
+          "text": "ゴリ押し"
+        },
+        {
+          "speechId": 1139,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 12762000,
+          "sourceEndMs": 12765680,
+          "text": "もういいんだもう出しちゃうんだどんどん"
+        },
+        {
+          "speechId": 1140,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 12765979,
+          "sourceEndMs": 12769460,
+          "text": "どんだけ出てくんねん"
+        },
+        {
+          "speechId": 1141,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 12773040,
+          "sourceEndMs": 12776760,
+          "text": "それはまずいか大丈夫"
+        },
+        {
+          "speechId": 1142,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 12777240,
+          "sourceEndMs": 12780299,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 1143,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 12781739,
+          "sourceEndMs": 12787680,
+          "text": "ここが生まれたの"
+        },
+        {
+          "speechId": 1144,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 12789270,
+          "sourceEndMs": 12798190,
+          "text": "[音楽]OkOkOk全然いける全然いけるよ[音楽]"
+        },
+        {
+          "speechId": 1145,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 12800880,
+          "sourceEndMs": 12812360,
+          "text": "はいはいはいはいはいはいはい破壊された時[音楽]"
+        },
+        {
+          "speechId": 1146,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 12816050,
+          "sourceEndMs": 12820390,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 1147,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 12824910,
+          "sourceEndMs": 12828080,
+          "text": "[拍手]"
+        },
+        {
+          "speechId": 1148,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 12831979,
+          "sourceEndMs": 12837380,
+          "text": "だいぶ破壊したバイバイ"
+        },
+        {
+          "speechId": 1149,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 12837779,
+          "sourceEndMs": 12840560,
+          "text": "お願いだからちょっと待って"
+        },
+        {
+          "speechId": 1150,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 12841680,
+          "sourceEndMs": 12843680,
+          "text": "拳"
+        },
+        {
+          "speechId": 1151,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 12845359,
+          "sourceEndMs": 12868620,
+          "text": "うるさいうるさいうるさい練習生ない間違えたわかんこれでこれを高いやめてどうこれそのまずいかもしれないちょっとまずくあるよ誰誰誰誰誰誰誰誰まあまあまあまあ全然全然全然全然全然全然全然大丈夫"
+        },
+        {
+          "speechId": 1152,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 12878000,
+          "sourceEndMs": 12885800,
+          "text": "俺もさっき言った通りやりたてやん俺もねあのチェーンしながらねよくわかってない"
+        },
+        {
+          "speechId": 1153,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 12885979,
+          "sourceEndMs": 12894439,
+          "text": "強すぎて良かったなんかゆるくできる人マジでいいわパリ勉強したから"
+        },
+        {
+          "speechId": 1154,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 12895939,
+          "sourceEndMs": 12909260,
+          "text": "だるすぎはいこんばんはとこんばんはしてうわぁこれか行けるかこれいけるな行けると"
+        },
+        {
+          "speechId": 1155,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 12910520,
+          "sourceEndMs": 12919700,
+          "text": "あれたまたまね重なって俺のティアラがちょっとまだ潜んでたから"
+        },
+        {
+          "speechId": 1156,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 12928739,
+          "sourceEndMs": 12931520,
+          "text": "わかる俺もだるいと思ってる"
+        },
+        {
+          "speechId": 1157,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 12932160,
+          "sourceEndMs": 12939180,
+          "text": "こんなされたら俺捕まったもんじゃないOkOkOkOkOk"
+        },
+        {
+          "speechId": 1158,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 12939840,
+          "sourceEndMs": 12946220,
+          "text": "OkOkほんと回せるようになってんじゃん1日で"
+        },
+        {
+          "speechId": 1159,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 12946739,
+          "sourceEndMs": 12949279,
+          "text": "めっちゃ動画見たよ"
+        },
+        {
+          "speechId": 1160,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 12949920,
+          "sourceEndMs": 12969500,
+          "text": "めっちゃ動画見て俺今日事前に俺4人体制で1枚1枚カード勉強してたからそうでやろ人様の配信出るのだったらボコボコにするんやこっから叩かれても戦われてでも勝つんよだって負けて叩かれるの激ローすぎる"
+        },
+        {
+          "speechId": 1161,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 12970620,
+          "sourceEndMs": 12991100,
+          "text": "遊戯王遊んでくれる友達ってやっぱ限られてるからさこうやって星川が誘ったことで始めてくれる人がいるってマジで嬉しいそんなんもうでも今日がボコったら続けてくれない可能性あるなこれいやでも俺結構負けず嫌い僕怒られないんですけどねこっからはボコられる未来見えないです"
+        },
+        {
+          "speechId": 1162,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 12997560,
+          "sourceEndMs": 13027700,
+          "text": "立てなくなるかもしれんこれ倒しすぎてはいとOKOKOKこれバトルか[音楽]はいはいはいはいはいはいはいはいはいはいはいなんかA勝負するとか言うてましたけどはいはいはいはいいい残すこともありますけどこれ言い残す言葉いいけどはいお疲れ様でした"
+        },
+        {
+          "speechId": 1163,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 13028359,
+          "sourceEndMs": 13032260,
+          "text": "よしよしよしよし"
+        },
+        {
+          "speechId": 1164,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 13032300,
+          "sourceEndMs": 13046600,
+          "text": "よしよし結局環境トップってことやちょっと待ってじゃあ最後にさあのGalaxyで戦っいいて最後何着ても一緒やでもホープだよ"
+        },
+        {
+          "speechId": 1165,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 13048760,
+          "sourceEndMs": 13052120,
+          "text": "最強ですか"
+        },
+        {
+          "speechId": 1166,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 13065620,
+          "sourceEndMs": 13070960,
+          "text": "最近さビューティーが作った曲聞いてんほかのは"
+        },
+        {
+          "speechId": 1167,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 13071899,
+          "sourceEndMs": 13074680,
+          "text": "ありがとうございます"
+        },
+        {
+          "speechId": 1168,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 13075680,
+          "sourceEndMs": 13077920,
+          "text": "めっちゃ可愛い"
+        },
+        {
+          "speechId": 1169,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 13080060,
+          "sourceEndMs": 13088180,
+          "text": "あの夢の中でもはいはいはいはいはいめっちゃ可愛い"
+        },
+        {
+          "speechId": 1170,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 13089140,
+          "sourceEndMs": 13094540,
+          "text": "いつでも可愛い曲作るんで呼んでください頑張"
+        },
+        {
+          "speechId": 1171,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 13095359,
+          "sourceEndMs": 13107680,
+          "text": "る俺もアイドルめっちゃ聞いたでえマジでちょっとなんかやめてよそんなことボコりづらくなるじゃんねぇボコられるかな皆さんすぐこう言うんですよ"
+        },
+        {
+          "speechId": 1172,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 13111020,
+          "sourceEndMs": 13113859,
+          "text": "5来か期た"
+        },
+        {
+          "speechId": 1173,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 13114760,
+          "sourceEndMs": 13128319,
+          "text": "まあまあまあまあまあまあまあまあまあまあいいかあごめんねみんなファイナルシグマ星からねまだ勉強できてないんだよねだから理解度20%ドンキなんですデッキ本当にごめんねうん"
+        },
+        {
+          "speechId": 1174,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 13128600,
+          "sourceEndMs": 13140020,
+          "text": "何だとOkOk何をしようとしているんだどんなにできないカード5枚墓地へ送るダメですダメです"
+        },
+        {
+          "speechId": 1175,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 13145160,
+          "sourceEndMs": 13153280,
+          "text": "ここかに来てなうららの逆襲きた[音楽]"
+        },
+        {
+          "speechId": 1176,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 13158800,
+          "sourceEndMs": 13165580,
+          "text": "うわぁそういう感じか捨てた参戦のガチ課金したね君"
+        },
+        {
+          "speechId": 1177,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 13168680,
+          "sourceEndMs": 13171040,
+          "text": "悩ましいけど"
+        },
+        {
+          "speechId": 1178,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 13172470,
+          "sourceEndMs": 13180100,
+          "text": "[音楽]うざいなCがなぁ"
+        },
+        {
+          "speechId": 1179,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 13182960,
+          "sourceEndMs": 13187000,
+          "text": "わからせていこうわからせていく"
+        },
+        {
+          "speechId": 1180,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 13193540,
+          "sourceEndMs": 13202430,
+          "text": "全然初心者感ないな結構できてる感ある[音楽]"
+        },
+        {
+          "speechId": 1181,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 13204859,
+          "sourceEndMs": 13215680,
+          "text": "なんかチュートリアルの弱い敵とデュエルできるやん俺あれ今日あのティアラジャックで15回回したやめて"
+        },
+        {
+          "speechId": 1182,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 13216739,
+          "sourceEndMs": 13229379,
+          "text": "Galaxy財布のお前その規模で1枚しか壊せれへんのかいカードの規模で[音楽]"
+        },
+        {
+          "speechId": 1183,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 13229479,
+          "sourceEndMs": 13238479,
+          "text": "発動できる[音楽]はいはいはいはいはいはいこれいけんじゃない"
+        },
+        {
+          "speechId": 1184,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 13238640,
+          "sourceEndMs": 13241359,
+          "text": "ガダルか"
+        },
+        {
+          "speechId": 1185,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 13241460,
+          "sourceEndMs": 13247819,
+          "text": "いいよねこだってはい台本お疲れ様でした"
+        },
+        {
+          "speechId": 1186,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 13255439,
+          "sourceEndMs": 13257500,
+          "text": "怪獣"
+        },
+        {
+          "speechId": 1187,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 13259040,
+          "sourceEndMs": 13262120,
+          "text": "怪しい粉で壊す"
+        },
+        {
+          "speechId": 1188,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 13263730,
+          "sourceEndMs": 13269680,
+          "text": "[音楽]装備できるよね"
+        },
+        {
+          "speechId": 1189,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 13270380,
+          "sourceEndMs": 13282340,
+          "text": "よいしょからの効果発動で装備しての効果発動で手札に加えます"
+        },
+        {
+          "speechId": 1190,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 13292660,
+          "sourceEndMs": 13301000,
+          "text": "で効果発動でレベルを上げますレベルを上げるはい8レベル"
+        },
+        {
+          "speechId": 1191,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 13302739,
+          "sourceEndMs": 13306819,
+          "text": "手札加えるかじゃあ一旦"
+        },
+        {
+          "speechId": 1192,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 13308540,
+          "sourceEndMs": 13316780,
+          "text": "こいつ手札に加えてまずいなぁ[音楽]"
+        },
+        {
+          "speechId": 1193,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 13320230,
+          "sourceEndMs": 13329439,
+          "text": "[音楽]だ寝かえろからお前寝返るそのままみんなの怪獣"
+        },
+        {
+          "speechId": 1194,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 13329840,
+          "sourceEndMs": 13342460,
+          "text": "めっちゃいいやつだよこいつ人気者だよこの見た目で人気者とか言ってるけどこれ擁護してるやつ絶対現実現れたら発狂するやろ無理やろこれ"
+        },
+        {
+          "speechId": 1195,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 13359720,
+          "sourceEndMs": 13363979,
+          "text": "これかどうするかってとこなんです"
+        },
+        {
+          "speechId": 1196,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 13366520,
+          "sourceEndMs": 13377319,
+          "text": "持ってる友達にぶっ殺されたよな体重はねいいやつらでほんと味方にいいやつなんだこいつら"
+        },
+        {
+          "speechId": 1197,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 13378080,
+          "sourceEndMs": 13383859,
+          "text": "どうするかいや俺ちょっと勝負に出るか"
+        },
+        {
+          "speechId": 1198,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 13388819,
+          "sourceEndMs": 13401380,
+          "text": "勝負出るわ俺男の急にはいはいはい持っててたまるかという志したこれうわちょっとミスった俺どこに出してんねんお前"
+        },
+        {
+          "speechId": 1199,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 13402800,
+          "sourceEndMs": 13406239,
+          "text": "まあまあまあまあまあまあまあまあ"
+        },
+        {
+          "speechId": 1200,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 13406939,
+          "sourceEndMs": 13409939,
+          "text": "でんでん"
+        },
+        {
+          "speechId": 1201,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 13410060,
+          "sourceEndMs": 13415600,
+          "text": "挟んいくで挟むことによってオセロ効果で寝返るから"
+        },
+        {
+          "speechId": 1202,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 13417040,
+          "sourceEndMs": 13420340,
+          "text": "タイヤ56"
+        },
+        {
+          "speechId": 1203,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 13422840,
+          "sourceEndMs": 13429819,
+          "text": "[音楽]うわーしょっぱいなこれまずいなぁ"
+        },
+        {
+          "speechId": 1204,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 13447620,
+          "sourceEndMs": 13453640,
+          "text": "俺マジ使いこなしてるよこれいけるよまるで初心者じゃないよ"
+        },
+        {
+          "speechId": 1205,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 13458979,
+          "sourceEndMs": 13467899,
+          "text": "はいはいはいはいはいはいはいはいはいおい初めて見るこいつ一番"
+        },
+        {
+          "speechId": 1206,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 13469760,
+          "sourceEndMs": 13472540,
+          "text": "怖い子供もなく"
+        },
+        {
+          "speechId": 1207,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 13473840,
+          "sourceEndMs": 13479140,
+          "text": "OKガーダーラインいなくなったでか"
+        },
+        {
+          "speechId": 1208,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 13479200,
+          "sourceEndMs": 13482319,
+          "text": "まあまあまあ"
+        },
+        {
+          "speechId": 1209,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 13485560,
+          "sourceEndMs": 13491080,
+          "text": "ここで終わると思ったあかんだよ終わんないの終わろうよ"
+        },
+        {
+          "speechId": 1210,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 13501500,
+          "sourceEndMs": 13504620,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 1211,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 13512920,
+          "sourceEndMs": 13516760,
+          "text": "まだ動くのかお前"
+        },
+        {
+          "speechId": 1212,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 13517279,
+          "sourceEndMs": 13519520,
+          "text": "仮面ライダー"
+        },
+        {
+          "speechId": 1213,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 13520340,
+          "sourceEndMs": 13522520,
+          "text": "仮面ライダー"
+        },
+        {
+          "speechId": 1214,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 13525439,
+          "sourceEndMs": 13530560,
+          "text": "込んだやつですか"
+        },
+        {
+          "speechId": 1215,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 13544359,
+          "sourceEndMs": 13547479,
+          "text": "初心者"
+        },
+        {
+          "speechId": 1216,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 13550460,
+          "sourceEndMs": 13554979,
+          "text": "しちゃった大丈夫返す"
+        },
+        {
+          "speechId": 1217,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 13556040,
+          "sourceEndMs": 13558040,
+          "text": "から"
+        },
+        {
+          "speechId": 1218,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 13562100,
+          "sourceEndMs": 13565660,
+          "text": "この優しさが運の月よこれ"
+        },
+        {
+          "speechId": 1219,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 13569000,
+          "sourceEndMs": 13580840,
+          "text": "さてと一旦怒るかえでも借りてなくない一旦足りてないけどこれでやっぱ揺さぶっていくね"
+        },
+        {
+          "speechId": 1220,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 13581000,
+          "sourceEndMs": 13589700,
+          "text": "行け仮面ライダー正義なんてないもんなお前には誰でも倒せ1500円"
+        },
+        {
+          "speechId": 1221,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 13590600,
+          "sourceEndMs": 13595720,
+          "text": "3エンドだよ今度こそ終われよさんです"
+        },
+        {
+          "speechId": 1222,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 13596100,
+          "sourceEndMs": 13600930,
+          "text": "[笑い]"
+        },
+        {
+          "speechId": 1223,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 13604000,
+          "sourceEndMs": 13610479,
+          "text": "増やしいくてとまあ一旦この辺にしといてあげようかな"
+        },
+        {
+          "speechId": 1224,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 13619600,
+          "sourceEndMs": 13627279,
+          "text": "まずいかこれほとんどトークなんか弱いよの来た"
+        },
+        {
+          "speechId": 1225,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 13629620,
+          "sourceEndMs": 13632800,
+          "text": "それから"
+        },
+        {
+          "speechId": 1226,
+          "sourceVideoId": "OJoi31bq8lk",
+          "sourceStartMs": 13634460,
+          "sourceEndMs": 13637460,
+          "text": "の"
+        }
+      ]
+    }
+  ],
+  "outputContract": {
+    "format": "json_only",
+    "schema": {
+      "themes": [
+        {
+          "themeId": "string",
+          "title": "string",
+          "summary": "string",
+          "whyItCanBeClipped": "string",
+          "sourceVideoId": "string",
+          "sourceStartMs": "number",
+          "sourceEndMs": "number",
+          "supportingSpeechIds": [
+            "number_or_range_string"
+          ],
+          "representativeQuote": "string",
+          "riskNotes": [
+            "string"
+          ]
+        }
+      ]
+    }
+  }
+}
+```

@@ -1,0 +1,59 @@
+{
+  "themes": [
+    {
+      "themeId": "partial_theme_1",
+      "title": "Gemini回答が途中で切れたため、タイトルは完全には取得できなかった。",
+      "sourceStartMs": 290419,
+      "sourceEndMs": 337400,
+      "representativeQuote": "任天堂ってなんか土地とか売ってなかったねゲーム性ソフトでお願いしてます1坪とかじゃなかったっけ"
+    },
+    {
+      "themeId": "partial_theme_2",
+      "title": "Gemini回答が途中で切れたため、タイトルは完全には取得できなかった。",
+      "sourceStartMs": 744420,
+      "sourceEndMs": 796339,
+      "representativeQuote": "最終的に投げたら全部オリバー君の責任できるんで絶対にね責任逃れをするためには投げないといけないっすよね"
+    },
+    {
+      "themeId": "partial_theme_3",
+      "title": "Gemini回答が途中で切れたため、タイトルは完全には取得できなかった。",
+      "sourceStartMs": 1173799,
+      "sourceEndMs": 1205840,
+      "representativeQuote": "いやちょっとねこれは我々のことなめすぎなんじゃないんですか識別かスタッフから今メッセージが来ててなめまきてすっててます"
+    },
+    {
+      "themeId": "partial_theme_4",
+      "title": "Gemini回答が途中で切れたため、タイトルは完全には取得できなかった。",
+      "sourceStartMs": 1420440,
+      "sourceEndMs": 1537580,
+      "representativeQuote": "レオスさんは7桁ぐらいだと思ったでリン酸は11か12で足し算してたんですけど無理でした計算間違いです終わりですppm解散終わり"
+    },
+    {
+      "themeId": "partial_theme_5",
+      "title": "Gemini回答が途中で切れたため、タイトルは完全には取得できなかった。",
+      "sourceStartMs": 1893360,
+      "sourceEndMs": 1998740,
+      "representativeQuote": "画面左上にはライフ2つしかマークないですけど皆さんには見えないライフがもう1あり個ますはい誰も想定してませんでしたこれを作 [回答途中切れ]"
+    }
+  ],
+  "extractionStatus": {
+    "status": "partial_themes_extracted_from_answer_text",
+    "reason": "Gemini回答JSONが完結していないため、回答本文に出ていたテーマ候補だけを採点候補として抽出した。",
+    "extractedThemeCount": 5
+  },
+  "runAt": "2026-07-09T11:15:45+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_03_O4ryDQBcMDc",
+    "windowSourceVideoId": "O4ryDQBcMDc",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/XauLZgnWHtA_part01_partial_material_v001/theme-llm-v001/20260709-v001/windows/window_03_O4ryDQBcMDc-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/5718155f3709373b?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"任天堂のソフトではなく土地を欲しがる挑戦者たち\",\n      \"summary\": \"最終クリア賞品として任天堂Switchのソフトが貰えると説明された挑戦者たちが、ゲームではなく任天堂の土地（1坪）を要求し、MCがポケットマネーでゲームソフトを出すと宥める場面。\",\n      \"whyItCanBeClipped\": \"賞品という定番のくだりで、ゲームではなく「土地」を要求するという予想外のボケと、それに対して主催者がポケットマネーで対応しようとする掛け合いが単独の笑いどころとして成立しているため。\",\n      \"sourceVideoId\": \"O4ryDQBcMDc\",\n      \"sourceStartMs\": 290419,\n      \"sourceEndMs\": 337400,\n      \"supportingSpeechIds\": [\"16-20\"],\n      \"representativeQuote\": \"任天堂ってなんか土地とか売ってなかったねゲーム性ソフトでお願いしてます1坪とかじゃなかったっけ\",\n      \"riskNotes\": [\n        \"配信全体のオープニングトークの一部であるため、前後のゲーム説明の文脈を少し挟む必要がある。\"\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"オリバーのファインプレーとレオスの責任逃れ理論\",\n      \"summary\": \"バラバラシアターのセカンドトライアルにて、残り時間が少ない中でオリバーが見事に正解を導き出しクリアする。それに対しレオスが「投げずに繋いだのは責任逃れのため」と言い訳する場面。\",\n      \"whyItCanBeClipped\": \"ゲームの土壇場でのクリアという見応えのあるシーンから、レオスの「投げたらオリバーの責任にできるから投げなかった」という独特のクズ理論が展開される落差が面白い。\",\n      \"sourceVideoId\": \"O4ryDQBcMDc\",\n      \"sourceStartMs\": 744420,\n      \"sourceEndMs\": 796339,\n      \"supportingSpeechIds\": [\"44-46\"],\n      \"representativeQuote\": \"最終的に投げたら全部オリバー君の責任できるんで絶対にね責任逃れをするためには投げないといけないっすよね\",\n      \"riskNotes\": [\n        \"何のゲームをしていたのか、直前の緊迫感が視聴者に伝わりにくい可能性がある。\"\n      ]\n    },\n    {\n      \"themeId\": \"theme_003\",\n      \"title\": \"スタッフに「なめすぎてます」と言われる挑戦者たち\",\n      \"summary\": \"トリプル瞬間ジャッジで、あまりに簡単な肉の種類に関する問題が連続したため、挑戦者たちが「我々のことなめすぎなんじゃないですか」と調子に乗るが、スタッフから「なめてます」と直球のメッセージが返ってくる場面。\",\n      \"whyItCanBeClipped\": \"出演者と裏方（スタッフ）とのリアルタイムな煽り合いの構図が、配信ならではのライブ感と笑いを生んでいるため。\",\n      \"sourceVideoId\": \"O4ryDQBcMDc\",\n      \"sourceStartMs\": 1173799,\n      \"sourceEndMs\": 1205840,\n      \"supportingSpeechIds\": [\"72-75\"],\n      \"representativeQuote\": \"いやちょっとねこれは我々のことなめすぎなんじゃないんですか識別かスタッフから今メッセージが来ててなめまきてすっててます\",\n      \"riskNotes\": [\n        \"直前の2問が簡単だったという前提が必要。\"\n      ]\n    },\n    {\n      \"themeId\": \"theme_004\",\n      \"title\": \"日本の電話番号の桁数が分からず連帯責任で大失敗\",\n      \"summary\": \"日本の電話番号の桁数を答える問題で、3人全員が不正解となりライフを失う。携帯電話の桁数や市外局番の計算が合わず、ボロボロの言い訳を残して失敗が確定する場面。\",\n      \"whyItCanBeClipped\": \"日本人として常識的なクイズである「電話番号の桁数」で、知識人キャラの面々が迷走し、最終的に計算間違いで解散（失敗）に追い込まれるというゲームの大きな転換点であるため。\",\n      \"sourceVideoId\": \"O4ryDQBcMDc\",\n      \"sourceStartMs\": 1420440,\n      \"sourceEndMs\": 1537580,\n      \"supportingSpeechIds\": [\"91-99\"],\n      \"representativeQuote\": \"レオスさんは7桁ぐらいだと思ったでリン酸は11か12で足し算してたんですけど無理でした計算間違いです終わりですppm解散終わり\",\n      \"riskNotes\": [\n        \"3人がそれぞれ何と答えたのかの画面のビジュアル（札）がないと、文字起こしだけでは全容がやや伝わりにくい。\"\n      ]\n    },\n    {\n      \"themeId\": \"theme_005\",\n      \"title\": \"ボロボロの挑戦者に泣きの1回を提案するスタッフ\",\n      \"summary\": \"1セット目で失敗し、視聴者から「バカがバレた」とコメントされる3人。見かねたスタッフが、ゲームの仕様を急遽変更して「見えないライフ3つ目」を追加し、救済措置を与える場面。\",\n      \"whyItCanBeClipped\": \"あまりの不甲斐なさに、番組の規定ルールを曲げてまで救済を施すスタッフの温情（あるいは煽り）と、それに必死にすがる挑戦者たちのプライドを捨てた掛け合いが見どころであるため。\",\n      \"sourceVideoId\": \"O4ryDQBcMDc\",\n      \"sourceStartMs\": 1893360,\n      \"sourceEndMs\": 1998740,\n      \"supportingSpeechIds\": [\"124-130\"],\n      \"representativeQuote\": \"画面左上にはライフ2つしかマークないですけど皆さんには見えないライフがもう1あり個ますはい誰も想定してませんでしたこれを作"
+}

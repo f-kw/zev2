@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>theme_generation 人間意味判定: aX-axQMWR3c_single_material_v001</title>
+  <style>
+    :root { color-scheme: light; --bg: #f6f7f9; --text: #20242a; --muted: #647080; --line: #d9dee7; --panel: #fff; --accent: #155d9c; }
+    body { margin: 0; background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; line-height: 1.65; }
+    main { max-width: 1120px; margin: 0 auto; padding: 32px 20px 56px; }
+    header, .rule, .case-card { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 22px; margin-bottom: 18px; }
+    h1 { margin: 0 0 8px; font-size: 28px; }
+    h2 { margin: 0; font-size: 20px; }
+    h3 { margin: 0 0 10px; font-size: 15px; color: #1e4f7a; }
+    p { margin: 0 0 10px; }
+    ul, ol { margin: 8px 0 0 22px; padding: 0; }
+    li { margin: 6px 0; }
+    .muted, .eyebrow { color: var(--muted); }
+    .eyebrow { margin: 0 0 4px; font-size: 12px; font-weight: 700; letter-spacing: .02em; text-transform: uppercase; }
+    .case-head { display: flex; gap: 16px; justify-content: space-between; align-items: flex-start; border-bottom: 1px solid var(--line); padding-bottom: 14px; margin-bottom: 16px; }
+    .badge { border: 1px solid var(--line); border-radius: 999px; padding: 3px 10px; color: var(--muted); white-space: nowrap; font-size: 13px; }
+    .grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 16px; margin-bottom: 16px; }
+    .grid section, .answer { border: 1px solid var(--line); border-radius: 8px; padding: 14px; background: #fbfcfe; }
+    .callout { border-left: 4px solid var(--accent); background: #eef6fc; padding: 12px 14px; margin: 14px 0 0; }
+    dl { margin: 0; }
+    dt { color: var(--muted); font-size: 12px; margin-top: 10px; }
+    dd { margin: 2px 0 0; }
+    pre { white-space: pre-wrap; word-break: break-word; background: #101820; color: #eef5ff; border-radius: 8px; padding: 14px; overflow: auto; max-height: 420px; }
+    .template { border-left: 4px solid var(--accent); background: #eef6fc; padding: 10px 12px; margin-top: 12px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .empty { font-size: 16px; }
+    @media (max-width: 760px) { .grid { grid-template-columns: 1fr; } main { padding: 18px 12px 40px; } }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>theme_generation 人間意味判定: aX-axQMWR3c_single_material_v001</h1>
+      <p class="muted">文字だけで閉じる意味判定なので、人間への回答依頼ではなく証拠一覧として保存します。</p>
+      <p class="callout">このページで人間確認をしないでください。映像で判断する必要がある場合は、同じレポートディレクトリの <strong>theme-llm-v001-20260709-v001-media-review.html</strong> を使います。</p>
+    </header>
+    <section class="rule">
+      <h2>最初に読むこと</h2>
+
+      <ol>
+        <li>これは人間に回答を依頼する画面ではありません。</li>
+        <li>材料がGemini候補、正解ラベル、transcript抜粋だけなので、文字だけで閉じる意味判定です。</li>
+        <li>この種の判定は評価側またはエージェント側で行い、人間には映像・音声・編集意図・正解ラベルの妥当性など、人間が見る意味のある確認だけを渡します。</li>
+        <li>このHTMLは、後で判定根拠を監査できるように残す証拠一覧です。</li>
+      </ol>
+    </section>
+
+      <section class="case-card" id="case-1">
+        <div class="case-head">
+          <div>
+            <p class="eyebrow">確認 1</p>
+            <h2>aX-axQMWR3c_single_material_v001 / run 1 / candidate 6</h2>
+          </div>
+          <div class="badge">未判定</div>
+        </div>
+        <div class="grid">
+          <section>
+            <h3>正解ラベル</h3>
+            <p>Vの組織内あれこれ</p>
+            <dl>
+              <dt>正解範囲</dt>
+              <dd>SGQqVJXsNNE 4922443-5056495</dd>
+              <dt>候補との重なり</dt>
+              <dd>87557ms</dd>
+            </dl>
+          </section>
+          <section>
+            <h3>Gemini候補</h3>
+            <dl>
+              <dt>title</dt>
+              <dd>上司4人に部下1人！？白雪レイド、会社の狂った逆ピラミッド体制に困惑</dd>
+              <dt>summary</dt>
+              <dd>運営陣4人が全員同じ立場の「社長」であると明かされ、現状唯一の所属タレントである白雪レイドが「上司が急に4人増えた」「逆ピラミッドすぎて会社がいかれてる」と愚痴り、運営陣からイジられる爆笑のラストトーク。</dd>
+              <dt>representativeQuote</dt>
+              <dd>4人増えたら気になるな急に上司4人増えた会社の体系いかれてんだろ上4の下1とかいうなんかピラミッドぶっ壊れてる</dd>
+              <dt>候補範囲</dt>
+              <dd>SGQqVJXsNNE 4890622-5010000</dd>
+            </dl>
+          </section>
+        </div>
+        <section>
+          <h3>該当transcript抜粋</h3>
+          <pre>[81:30.622-81:58.319] 社長はもうそれぞれ4人ですよここ4人が社長よ社長1日産4なんかそのこの4人は本当にそのそれそれぞれそのなんだろう言い方だけど同じ立場というか本当にこの4社は同じ存在でもあるから誰がなんだろうな誰が一番代表とかっていうのはもう本当特にないないねいいなぁ
+[82:01.903-82:28.899] なんか欲しがってる人いるな今のところこの5人中1人だけなんかいるけど4人増えたら気になるな急に上司4人増えた会社の体系いかれてんだろ上4の下1とかいうなんかピラミッドぶっ壊れてるレイド君が今後何するかによってこの会社の抑制決まるからやっぱ
+[82:30.000-82:58.279] なんとかしてくれないって今なかなかないよこんな逆ピラミッドの会社逆に偉い説ある上4人下1人って俺何もしないよって言った瞬間僕ら困るもん確かにもう俺何もしないよって確かに本当だったらねそこに他にもどうせ10人20人いるから会社っていうのギリギリ回ってくるんだろうけどそうだ俺何もしないよって言った瞬間誰も回らなくて誰も何もできなくなる俺が拗ねたら4人で手厚く看病してくれる
+[83:02.784-83:12.329] ガチで言いにくい話とかは俺とかが聞くガチでおじじとかに対する不満が出た時は俺が聞く
+[83:30.034-83:59.320] 活動に関して分かんないけどマジでこれだるいみたいなのがあったら直に経営者側に文句言えるっていうのはあるよねそれを解決するの仕方が一方向じゃなくて四方向あるからどうしてもあるあるなのが演者側で不満があって担当のマネージャーさんとかに相談してもマネージャーさんからもう一個上があってさらにもっと上とか上に本当の経営者さんっているわけだからそこまで行き届きにくいんだけど僕らのね
+[84:00.146-84:29.582] ところ規模がまあどこまでいくかもちろんわかんないから今後一生とは言えないけど少なくともあの一期生に来て一期生とかの間は絶対僕らが直に聞けるはずだからねそうですねどうしこいそこは安心できるんじゃないでしょうかはいはい何でも相談しておくれ何でも相談してくださいということでよっしゃはいじゃあ配信終わりますかそうですねはい以上でちょっと</pre>
+        </section>
+        <section class="answer">
+          <h3>この画面の扱い</h3>
+          <p>これは人間への回答依頼ではなく、文字だけで行える意味判定の証拠一覧です。判定は評価側またはエージェント側で行います。</p>
+          <ul>
+            <li><strong>同じ見どころ</strong>: 候補の主題が正解ラベルと同じ。範囲が多少広い/狭いだけならこちら。</li>
+            <li><strong>違う見どころ</strong>: 時刻は重なっているが、候補の主題が別の話題・別の面白さを指している。</li>
+            <li><strong>判定不能</strong>: 回答が途中切れ、本文が壊れている、ラベルが広すぎるなどで決められない。</li>
+          </ul>
+          <p class="template">aX-axQMWR3c_single_material_v001 / run 1 / candidate 6: 評価側で判定する。人間回答不要。</p>
+        </section>
+      </section>
+  </main>
+</body>
+</html>

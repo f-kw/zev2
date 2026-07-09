@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>theme-llm-v001 20260709-v001 範囲hit証拠一覧</title>
+  <style>
+    :root { color-scheme: light; --bg: #f6f7f9; --text: #20242a; --muted: #647080; --line: #d9dee7; --panel: #fff; --accent: #155d9c; }
+    body { margin: 0; background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; line-height: 1.65; }
+    main { max-width: 1120px; margin: 0 auto; padding: 32px 20px 56px; }
+    header, .rule, .case-card { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 22px; margin-bottom: 18px; }
+    h1 { margin: 0 0 8px; font-size: 28px; }
+    h2 { margin: 0; font-size: 20px; }
+    h3 { margin: 0 0 10px; font-size: 15px; color: #1e4f7a; }
+    p { margin: 0 0 10px; }
+    ul, ol { margin: 8px 0 0 22px; padding: 0; }
+    li { margin: 6px 0; }
+    .muted, .eyebrow { color: var(--muted); }
+    .eyebrow { margin: 0 0 4px; font-size: 12px; font-weight: 700; letter-spacing: .02em; text-transform: uppercase; }
+    .case-head { display: flex; gap: 16px; justify-content: space-between; align-items: flex-start; border-bottom: 1px solid var(--line); padding-bottom: 14px; margin-bottom: 16px; }
+    .badge { border: 1px solid var(--line); border-radius: 999px; padding: 3px 10px; color: var(--muted); white-space: nowrap; font-size: 13px; }
+    .grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 16px; margin-bottom: 16px; }
+    .grid section, .answer { border: 1px solid var(--line); border-radius: 8px; padding: 14px; background: #fbfcfe; }
+    .callout { border-left: 4px solid var(--accent); background: #eef6fc; padding: 12px 14px; margin: 14px 0 0; }
+    dl { margin: 0; }
+    dt { color: var(--muted); font-size: 12px; margin-top: 10px; }
+    dd { margin: 2px 0 0; }
+    pre { white-space: pre-wrap; word-break: break-word; background: #101820; color: #eef5ff; border-radius: 8px; padding: 14px; overflow: auto; max-height: 420px; }
+    .template { border-left: 4px solid var(--accent); background: #eef6fc; padding: 10px 12px; margin-top: 12px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .empty { font-size: 16px; }
+    @media (max-width: 760px) { .grid { grid-template-columns: 1fr; } main { padding: 18px 12px 40px; } }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>theme-llm-v001 20260709-v001 範囲hit証拠一覧</h1>
+      <p class="muted">既存の区間比較と同じ考え方で、Gemini候補範囲と正解区間の重なりを記録します。人間への回答依頼ではありません。</p>
+      <p class="callout"><strong>今回の目的:</strong> Geminiが元配信の文字起こしだけを見て、人間が切り抜きにした正解区間の近くを候補として拾えるかを測ることです。このページは、既存の区間比較と同じ考え方で、候補範囲と正解区間の重なりを記録したものです。</p>
+      <p class="callout">このページで人間確認をしないでください。区間一致は機械採点で扱います。人間に頼むのは、文字だけでは決められない正解ラベルの妥当性や編集意図の確認だけです。</p>
+    </header>
+    <section class="rule">
+      <h2>最初に読むこと</h2>
+
+      <ol>
+        <li>この画面は、人間に採点してもらうための画面ではありません。</li>
+        <li>見ているのは「Geminiが出した候補の時間範囲が、人間の正解区間にどれだけ近かったか」です。</li>
+        <li>これは以前から使っている区間比較と同じ種類の機械採点です。候補が正解区間に重なった場合は範囲hit、重ならなかった場合はその正解区間をGeminiが拾えなかった扱いにします。</li>
+        <li>ここでまだ見ていないのは、切り抜きとして面白いか、候補タイトルが良いか、映像編集として自然か、という点です。</li>
+        <li>人間に頼む必要があるのは、映像・音声・編集意図・正解ラベルの妥当性など、文字だけでは決められない確認だけです。</li>
+      </ol>
+    </section>
+
+      <section class="case-card" id="case-1">
+        <div class="case-head">
+          <div>
+            <p class="eyebrow">確認 1</p>
+            <h2>r_ztjHaHmcg_partial_material_v001 / run 1 / candidate 6</h2>
+          </div>
+          <div class="badge">未判定</div>
+        </div>
+        <div class="grid">
+          <section>
+            <h3>正解ラベル</h3>
+            <p>配信者が食べていける同接規模について現実的に答える場面</p>
+            <dl>
+              <dt>正解範囲</dt>
+              <dd>-DwSCDMCWDQ 2399621-2440868</dd>
+              <dt>候補との重なり</dt>
+              <dd>15310ms</dd>
+            </dl>
+          </section>
+          <section>
+            <h3>Gemini候補</h3>
+            <dl>
+              <dt>title</dt>
+              <dd>Gemini回答が途中で切れたため、タイトルは完全には取得できなかった。</dd>
+              <dt>summary</dt>
+              <dd>(未取得)</dd>
+              <dt>representativeQuote</dt>
+              <dd>一発屋感を醸し出しておきながら結局普通に自分もコンテンツ力持っててただ評価され続ける人っているじゃんマジですげえ…数字って無から生まれないからさその見てる層が…どこの数字を持ってきたらそうなったのかが気になるわちょっと分析する価値ありそうだよな</dd>
+              <dt>候補範囲</dt>
+              <dd>-DwSCDMCWDQ 2425558-2628323</dd>
+            </dl>
+          </section>
+        </div>
+        <section>
+          <h3>該当transcript抜粋</h3>
+          <pre>[39:59.377-39:59.784] そう、あの
+[40:00.812-40:23.290] 単純計算だからさマジでだってそうじゃんあのー広告収入が例えば100人に見られてる人は広告収入がじゃあ1円ですと1000人に見られてるなら広告収入が0.5円になりますとかだったらさじゃないじゃんじゃないのよまあなんか日本のサイトとかはそういうことするところありそうだけどYouTubeはそういう仕様じゃないから別に100人
+[40:25.558-40:54.458] 再生数が100の動画も再生数が多分1000万の動画もそれでその再生数で国収益の単価は変わんないからそれがすごいよねそういえば最近流行りの登録者寿司バラに迫ってきてる新人さん見てるあ見てないあちらちらっとだけ見たけどあれよね100万点バラサロメさんあれ名前合ってるあの人すごいね
+[40:58.147-41:21.807] 何も何もなんですですわなんだろうなぁ結局ああいうああいうなんだろういや僕本当にすごいなって思うのが
+[41:23.802-41:37.995] 一発屋感を醸し出しておきながら結局普通に自分もコンテンツ力持っててただ評価され続ける人っているじゃんマジですげえ
+[41:58.375-42:20.532] 昔その登録者数か新人強い新人が出るとこううってなってたこともあったけど本当にでもなんなくなったな同説12万もいたんだすげーな
+[42:24.362-42:51.448] えーどうせ12万ってやばいなどこの数字それ気になるなどっから持ってきた数字なのか気になる当たり前だけど数字って無から生まれないからさその見てる層がもともと二次三次を見ている層なのかそれともVTuber界隈全体を見ていた層なのか個人VTuberを見ていた層なのか
+[42:52.348-43:17.718] それと全く関係ない本当にVでもなんでもない界隈の数字なのかどこの数字を持ってきたらそうなったのかが気になるわちょっと分析する価値ありそうだよな昔バズった生首の方あの方とか結構ガンダムの数字だろうなって感じのなんかねフォロワー分析とかもしてる人いたけど
+[43:19.225-43:48.323] 確かフォロワーがキズナアイさんとかミライアカリさんとかと全然被ってなくてあれはだから会話以外の数字持ってきてるんだろうなっていう僕はそういう消費者調査消費者調査っていうのか分かんないけどなんか好きよ分析系はちゃんと数字見てやっぱ戦い方考えるのは大事だからね</pre>
+        </section>
+        <section class="answer">
+          <h3>この画面の扱い</h3>
+          <p>これは人間への回答依頼ではありません。既存の区間比較で、Gemini候補の時間範囲が人間の正解区間に重なったかを記録する画面です。</p>
+          <ul>
+            <li><strong>同じ見どころ</strong>: 候補の主題が正解ラベルと同じ。範囲が多少広い/狭いだけならこちら。</li>
+            <li><strong>違う見どころ</strong>: 時刻は重なっているが、候補の主題が別の話題・別の面白さを指している。</li>
+            <li><strong>判定不能</strong>: 回答が途中切れ、本文が壊れている、ラベルが広すぎるなどで決められない。</li>
+          </ul>
+          <p class="template">r_ztjHaHmcg_partial_material_v001 / run 1 / candidate 6: 機械採点の範囲hit記録。人間回答不要。</p>
+        </section>
+      </section>
+
+      <section class="case-card" id="case-2">
+        <div class="case-head">
+          <div>
+            <p class="eyebrow">確認 2</p>
+            <h2>aX-axQMWR3c_single_material_v001 / run 1 / candidate 6</h2>
+          </div>
+          <div class="badge">未判定</div>
+        </div>
+        <div class="grid">
+          <section>
+            <h3>正解ラベル</h3>
+            <p>Vの組織内あれこれ</p>
+            <dl>
+              <dt>正解範囲</dt>
+              <dd>SGQqVJXsNNE 4922443-5056495</dd>
+              <dt>候補との重なり</dt>
+              <dd>87557ms</dd>
+            </dl>
+          </section>
+          <section>
+            <h3>Gemini候補</h3>
+            <dl>
+              <dt>title</dt>
+              <dd>上司4人に部下1人！？白雪レイド、会社の狂った逆ピラミッド体制に困惑</dd>
+              <dt>summary</dt>
+              <dd>運営陣4人が全員同じ立場の「社長」であると明かされ、現状唯一の所属タレントである白雪レイドが「上司が急に4人増えた」「逆ピラミッドすぎて会社がいかれてる」と愚痴り、運営陣からイジられる爆笑のラストトーク。</dd>
+              <dt>representativeQuote</dt>
+              <dd>4人増えたら気になるな急に上司4人増えた会社の体系いかれてんだろ上4の下1とかいうなんかピラミッドぶっ壊れてる</dd>
+              <dt>候補範囲</dt>
+              <dd>SGQqVJXsNNE 4890622-5010000</dd>
+            </dl>
+          </section>
+        </div>
+        <section>
+          <h3>該当transcript抜粋</h3>
+          <pre>[81:30.622-81:58.319] 社長はもうそれぞれ4人ですよここ4人が社長よ社長1日産4なんかそのこの4人は本当にそのそれそれぞれそのなんだろう言い方だけど同じ立場というか本当にこの4社は同じ存在でもあるから誰がなんだろうな誰が一番代表とかっていうのはもう本当特にないないねいいなぁ
+[82:01.903-82:28.899] なんか欲しがってる人いるな今のところこの5人中1人だけなんかいるけど4人増えたら気になるな急に上司4人増えた会社の体系いかれてんだろ上4の下1とかいうなんかピラミッドぶっ壊れてるレイド君が今後何するかによってこの会社の抑制決まるからやっぱ
+[82:30.000-82:58.279] なんとかしてくれないって今なかなかないよこんな逆ピラミッドの会社逆に偉い説ある上4人下1人って俺何もしないよって言った瞬間僕ら困るもん確かにもう俺何もしないよって確かに本当だったらねそこに他にもどうせ10人20人いるから会社っていうのギリギリ回ってくるんだろうけどそうだ俺何もしないよって言った瞬間誰も回らなくて誰も何もできなくなる俺が拗ねたら4人で手厚く看病してくれる
+[83:02.784-83:12.329] ガチで言いにくい話とかは俺とかが聞くガチでおじじとかに対する不満が出た時は俺が聞く
+[83:30.034-83:59.320] 活動に関して分かんないけどマジでこれだるいみたいなのがあったら直に経営者側に文句言えるっていうのはあるよねそれを解決するの仕方が一方向じゃなくて四方向あるからどうしてもあるあるなのが演者側で不満があって担当のマネージャーさんとかに相談してもマネージャーさんからもう一個上があってさらにもっと上とか上に本当の経営者さんっているわけだからそこまで行き届きにくいんだけど僕らのね
+[84:00.146-84:29.582] ところ規模がまあどこまでいくかもちろんわかんないから今後一生とは言えないけど少なくともあの一期生に来て一期生とかの間は絶対僕らが直に聞けるはずだからねそうですねどうしこいそこは安心できるんじゃないでしょうかはいはい何でも相談しておくれ何でも相談してくださいということでよっしゃはいじゃあ配信終わりますかそうですねはい以上でちょっと</pre>
+        </section>
+        <section class="answer">
+          <h3>この画面の扱い</h3>
+          <p>これは人間への回答依頼ではありません。既存の区間比較で、Gemini候補の時間範囲が人間の正解区間に重なったかを記録する画面です。</p>
+          <ul>
+            <li><strong>同じ見どころ</strong>: 候補の主題が正解ラベルと同じ。範囲が多少広い/狭いだけならこちら。</li>
+            <li><strong>違う見どころ</strong>: 時刻は重なっているが、候補の主題が別の話題・別の面白さを指している。</li>
+            <li><strong>判定不能</strong>: 回答が途中切れ、本文が壊れている、ラベルが広すぎるなどで決められない。</li>
+          </ul>
+          <p class="template">aX-axQMWR3c_single_material_v001 / run 1 / candidate 6: 機械採点の範囲hit記録。人間回答不要。</p>
+        </section>
+      </section>
+
+      <section class="case-card" id="case-3">
+        <div class="case-head">
+          <div>
+            <p class="eyebrow">確認 3</p>
+            <h2>XauLZgnWHtA_part01_partial_material_v001 / run 2 / candidate 1</h2>
+          </div>
+          <div class="badge">未判定</div>
+        </div>
+        <div class="grid">
+          <section>
+            <h3>正解ラベル</h3>
+            <p>逆凸遊戯王</p>
+            <dl>
+              <dt>正解範囲</dt>
+              <dd>OJoi31bq8lk 440672-450696</dd>
+              <dt>候補との重なり</dt>
+              <dd>10024ms</dd>
+            </dl>
+          </section>
+          <section>
+            <h3>Gemini候補</h3>
+            <dl>
+              <dt>title</dt>
+              <dd>Gemini回答が途中で切れたため、タイトルは完全には取得できなかった。</dd>
+              <dt>summary</dt>
+              <dd>(未取得)</dd>
+              <dt>representativeQuote</dt>
+              <dd>明日さあうちのお仕事で会うじゃんその時負けた方が飲むヨーグルト買って行こう</dd>
+              <dt>候補範囲</dt>
+              <dd>OJoi31bq8lk 405919-607760</dd>
+            </dl>
+          </section>
+        </div>
+        <section>
+          <h3>該当transcript抜粋</h3>
+          <pre>[6:45.919-6:50.660] こんちゃ完成
+[7:07.819-7:33.259] うざかっのたで切りました呼ぶ人間違えました今のはですねまあ一人目なんか自己紹介まとまったなんか蹴られたんだけど大丈夫おかえりゃ人の配信でそんな急に通るとか考えろこっちのこと普通に今挨拶しつもりただったんだけど何かあったのごめん全然聞こえてなかったからもう1回おし願いてもいい
+[7:34.400-7:45.080] ごめんねみんなあの聞き苦しいもの聞かせてしまってあごめんごめんめっちゃバグってるめっちゃバグってるね
+[7:47.240-8:30.020] なんかエコーとかかけるとちょっとあれかもしれないあわかったわかったわかったわかった書けないね逆に星川だよみんなに紹介しよっかふみのことよろしくお願いしますこちらですね同期のフミでございますよろしくお願いしますまあやっぱ1人目はね一緒に遊戯を始めて頑張ってきた同期しょってことでデビューもこと同期遊戯王デビューも同期というで仲一緒のねスタートからやってますでもねちょっとこの映画の一つの時に来てもらった時にさ星にめちゃ負けたんだよ確か2連敗残機デッキとGalaxyデッキでボコった今日は絶対に勝とうと思って本気で来ました
+[8:33.300-8:36.200] 命かける
+[8:39.300-9:31.100] 命かける命かけるよえじゃあ明日さあうちのお仕事で会うじゃんその時負けた方が飲むヨーグルト買って行こうあれな前一緒に配信した時に紹介したやつ星鹿はいつも収録くれるん時とかなんか持ってきてようになってさ冷蔵庫に入ってるやつ欲しか女から飲まないでなんかすごい自分のぽくなってこれが紹介したヨーグルトめっちゃ気に入ってると思ったけどあれ買ってくるしかもあれね1回ストロー刺して途中まで飲みかけのやつ冷蔵庫に入れての飲まないでこれ飲まねえよストロー刺さってる奴ってなってるよなうん絶対飲まないからあれかけて勝負しようOK勝負しようOKじゃあ貼ってあります入ってます
+[9:31.459-9:43.040] もしかさんはいないですけどルームに様もテーブルについてうるさいなえ何デッキ使うのまずはえそこも隠していくどうしよう
+[9:43.140-10:07.760] どうしたいよコープギャラクシージャンキー残機勝ちに負けたから残機に一回たいなと思ってきたんだよねしょうがねえなうーんよし着席よし来た行くぞおいリアル開始エール開始</pre>
+        </section>
+        <section class="answer">
+          <h3>この画面の扱い</h3>
+          <p>これは人間への回答依頼ではありません。既存の区間比較で、Gemini候補の時間範囲が人間の正解区間に重なったかを記録する画面です。</p>
+          <ul>
+            <li><strong>同じ見どころ</strong>: 候補の主題が正解ラベルと同じ。範囲が多少広い/狭いだけならこちら。</li>
+            <li><strong>違う見どころ</strong>: 時刻は重なっているが、候補の主題が別の話題・別の面白さを指している。</li>
+            <li><strong>判定不能</strong>: 回答が途中切れ、本文が壊れている、ラベルが広すぎるなどで決められない。</li>
+          </ul>
+          <p class="template">XauLZgnWHtA_part01_partial_material_v001 / run 2 / candidate 1: 機械採点の範囲hit記録。人間回答不要。</p>
+        </section>
+      </section>
+  </main>
+</body>
+</html>

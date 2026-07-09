@@ -1,0 +1,48 @@
+{
+  "themes": [
+    {
+      "themeId": "partial_theme_1",
+      "title": "Gemini回答が途中で切れたため、タイトルは完全には取得できなかった。",
+      "sourceStartMs": 350515,
+      "sourceEndMs": 1189703,
+      "representativeQuote": "東京で本当に綺麗な家に住みたかったら15万から20万ぐらいな気がするな"
+    },
+    {
+      "themeId": "partial_theme_2",
+      "title": "Gemini回答が途中で切れたため、タイトルは完全には取得できなかった。",
+      "sourceStartMs": 1408568,
+      "sourceEndMs": 1714733,
+      "representativeQuote": "収入の比率大公開までやってるからね……正確なのは一個も僕は見たことないかも"
+    },
+    {
+      "themeId": "partial_theme_3",
+      "title": "Gemini回答が途中で切れたため、タイトルは完全には取得できなかった。",
+      "sourceStartMs": 1993968,
+      "sourceEndMs": 2144747,
+      "representativeQuote": "結局自分に人気があるってできることがめちゃめちゃ幅が広いわけよなんでもやろうともできるからさ"
+    },
+    {
+      "themeId": "partial_theme_4",
+      "title": "Gemini回答が途中で切れたため、タイトルは完全には取得できなかった。",
+      "sourceStartMs": 2729838,
+      "sourceEndMs": 2966900,
+      "representativeQuote": "オダノブの不快なとこはどこですか？顔、口臭、見た目全て、存在。存在が不快。"
+    }
+  ],
+  "extractionStatus": {
+    "status": "partial_themes_extracted_from_answer_text",
+    "reason": "Gemini回答JSONが完結していないため、回答本文に出ていたテーマ候補だけを採点候補として抽出した。",
+    "extractedThemeCount": 4
+  },
+  "runAt": "2026-07-09T10:36:54+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/r_ztjHaHmcg_partial_material_v001/theme-llm-v001/20260709-v001/prompt.md",
+  "pageUrl": "https://gemini.google.com/app/f5c420e1233b4d18?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"渋谷ハルの引越し遍歴と東京のリアルな家賃事情\",\n      \"summary\": \"渋谷ハルが活動開始から3回行った引越しの詳細（ルームシェア解散、1K、1LDK）や、タクシーが迷うというQOL低下の理由、そして東京の便利なエリアにおける家賃グレードの分岐点（15万〜20万円ライン）について語る場面。\",\n      \"whyItCanBeClipped\": \"配信者としての活動初期から現在に至るまでの具体的な生活の変化や、実体験に基づくリアルな東京の家賃考察が展開されており、視聴者の興味を引きやすい単一のテーマとして成立しているため。\",\n      \"sourceVideoId\": \"-DwSCDMCWDQ\",\n      \"sourceStartMs\": 350515,\n      \"sourceEndMs\": 1189703,\n      \"supportingSpeechIds\": [\n        \"11-31\",\n        \"37-41\"\n      ],\n      \"representativeQuote\": \"東京で本当に綺麗な家に住みたかったら15万から20万ぐらいな気がするな\",\n      \"riskNotes\": [\n        \"途中でスパチャ読みや関係のない雑談（運転や免許の住所変更など）を一部挟んでいるため、切り抜き時には不要な部分を間引く構成力が必要となる。\"\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"独自の収入比率データとYouTuber収入計算サイトの信憑性\",\n      \"summary\": \"渋谷ハルが自身の過去（2020年）の収入比率（広告収益70%、仕事15%など）を明かしつつ、ネット上のYouTuber収入計算サイト（ノックスインフルエンサー等）を実際に検索してその正確性を検証する場面。\",\n      \"whyItCanBeClipped\": \"トップ配信者のリアルな収入の内訳や、多くの人が気になる「収入計算サイトは本当に合っているのか」という疑問に本人が直接切り込んで回答しているため、引きが非常に強い。\",\n      \"sourceVideoId\": \"-DwSCDMCWDQ\",\n      \"sourceStartMs\": 1408568,\n      \"sourceEndMs\": 1714733,\n      \"supportingSpeechIds\": [\n        \"51-62\"\n      ],\n      \"representativeQuote\": \"収入の比率大公開までやってるからね……正確なのは一個も僕は見たことないかも\",\n      \"riskNotes\": [\n        \"実際のサイト画面を見ながら話しているため、音声だけだとどの数値を指しているのかが少し伝わりにくい可能性がある。\"\n      ]\n    },\n    {\n      \"themeId\": \"theme_003\",\n      \"title\": \"「人気がある状態は最強」渋谷ハルが考える人気業のビジネス的価値\",\n      \"summary\": \"人気を獲得することの難しさを前提としつつも、自分自身に人気があればグッズ販売、飲食店、コラボPCなど何をやっても真っ当な商売として成り立たせることができるという「人気の最強さ」について持論を語る場面。\",\n      \"whyItCanBeClipped\": \"単なるゲーム配信の枠を超え、一人のビジネスパーソン・インフルエンサーとしての鋭い視点やマインドセットが綺麗にまとまって語られているため。\",\n      \"sourceVideoId\": \"-DwSCDMCWDQ\",\n      \"sourceStartMs\": 1993968,\n      \"sourceEndMs\": 2144747,\n      \"supportingSpeechIds\": [\n        \"74-79\"\n      ],\n      \"representativeQuote\": \"結局自分に人気があるってできることがめちゃめちゃ幅が広いわけよなんでもやろうともできるからさ\",\n      \"riskNotes\": []\n    },\n    {\n      \"themeId\": \"theme_004\",\n      \"title\": \"同期かなえ（叶）とのデビュー時期の近さとオダノブへの容赦ない毒舌\",\n      \"summary\": \"2018年5月デビューの同期について調べる中で、にじさんじゲーマーズの「かなえ（叶）」とのデビュー日が非常に近いことを再確認しつつ、同じく同期である「オダノブ」の新しい3Dモデルや存在に対して笑いながら辛口な評価を下す場面。\",\n      \"whyItCanBeClipped\": \"VTuber黎明期から活躍する渋谷ハルならではの懐かしい同期トークであり、仲が良いからこそ言えるオダノブへのキレのあるいじりが爆笑を生むシーンとなっているため。\",\n      \"sourceVideoId\": \"-DwSCDMCWDQ\",\n      \"sourceStartMs\": 2729838,\n      \"sourceEndMs\": 2966900,\n      \"supportingSpeechIds\": [\n        \"107-114\"\n      ],\n      \"representativeQuote\": \"オダノブの不快なとこはどこですか？顔、口臭、見た目全て、存在。存在が不快。\",\n      \"riskNotes\": [\n        \"ネット年表を検索しながらの雑談であるため、前後の文脈がやや散らかっている。\"\n      ]\n    },\n    {\n      \"themeId\": \"theme_005\",\n      \"title\": \"「ライバーの月給25万求人」がビジネスモデルとして成立しない理由\",\n      \"summary\": \"求人サイトにある「月給25万のライバー募集」というビジネスについて、もし自分が雇われて人気が出たら「3秒で辞めて独立する」と指摘し、人間の行動を契約で縛ることの限界を語る場面。\",\n      \"whyItCanBeClipped\": \"配信業界の裏側や契約の効力に関する現実的な問題に切り込んでおり、視聴者が「なるほど」と納得できる知的な見どころがあるため。\",\n      \"sourceVideoId\": \"-DwSCDMCWDQ\",\n      \"sourceStartMs\":"
+}

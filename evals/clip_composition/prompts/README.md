@@ -75,4 +75,4 @@
 
 | 版 | ファイル | 作成日 | 目的 | 採点方式 | 採点結果 | 判定 |
 | --- | --- | --- | --- | --- | --- | --- |
-| theme-llm-v001 | `theme_generation_prompt_v001.md` | 2026-07-09 | 元配信単体のtranscriptから、切り抜きテーマ候補を出せるかを測る初版。compositionは実行しない。 | 一段目は候補根拠範囲とexpected区間の機械的な範囲hit。二段目は範囲hit候補だけを人間が意味的等価判定。 | 未実走。 | 設計・台帳登録済み。実走前に計画確認。 |
+| theme-llm-v001 | `theme_generation_prompt_v001.md` | 2026-07-09 | 元配信単体のtranscriptから、切り抜きテーマ候補を出せるかを測る初版。compositionは実行しない。 | 一段目は候補根拠範囲とexpected区間の機械的な範囲hit。二段目は範囲hit候補だけを人間が意味的等価判定。 | 4fixture×runs3をWeb Geminiで実走。`reports/theme-generation/theme-llm-v001-20260709-v001-summary.md` と `reports/theme-generation/theme-llm-v001-20260709-v001-range-score.md` に記録。 | 初回実測済み。二段目の人間意味判定待ち。 |

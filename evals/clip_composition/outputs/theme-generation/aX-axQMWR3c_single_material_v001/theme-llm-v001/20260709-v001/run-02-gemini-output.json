@@ -1,0 +1,55 @@
+{
+  "themes": [
+    {
+      "themeId": "partial_theme_1",
+      "title": "Gemini回答が途中で切れたため、タイトルは完全には取得できなかった。",
+      "sourceStartMs": 420142,
+      "sourceEndMs": 479980,
+      "representativeQuote": "俺とはるちゃんの熱愛映画の汚いからやめてってマジで汚い?"
+    },
+    {
+      "themeId": "partial_theme_2",
+      "title": "Gemini回答が途中で切れたため、タイトルは完全には取得できなかった。",
+      "sourceStartMs": 510782,
+      "sourceEndMs": 659920,
+      "representativeQuote": "中国からのハッキングに合いましてあらへエリックスのアカウントもアカウントがバンされるっていう"
+    },
+    {
+      "themeId": "partial_theme_3",
+      "title": "Gemini回答が途中で切れたため、タイトルは完全には取得できなかった。",
+      "sourceStartMs": 900140,
+      "sourceEndMs": 988798,
+      "representativeQuote": "ウマ娘確かに俺全国4位までなったことあるいけるな!"
+    },
+    {
+      "themeId": "partial_theme_4",
+      "title": "Gemini回答が途中で切れたため、タイトルは完全には取得できなかった。",
+      "sourceStartMs": 994765,
+      "sourceEndMs": 1046097,
+      "representativeQuote": "副社長にお前何言ってんのって普通に言われた結局やれなくなったんですかそれはいや俺はやりたいとずっと思ってますけど"
+    },
+    {
+      "themeId": "partial_theme_5",
+      "title": "Gemini回答が途中で切れたため、タイトルは完全には取得できなかった。",
+      "sourceStartMs": 2016159,
+      "sourceEndMs": 2098334,
+      "representativeQuote": "バーチャルユーチューバーの事務所を立ち上げます事務所の名前はダイサンジでございますよろしくお願いします"
+    }
+  ],
+  "extractionStatus": {
+    "status": "partial_themes_extracted_from_answer_text",
+    "reason": "Gemini回答JSONが完結していないため、回答本文に出ていたテーマ候補だけを採点候補として抽出した。",
+    "extractedThemeCount": 5
+  },
+  "runAt": "2026-07-09T10:42:35+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/aX-axQMWR3c_single_material_v001/theme-llm-v001/20260709-v001/prompt.md",
+  "pageUrl": "https://gemini.google.com/app/adaf29f0a3e092c2?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"渋谷ハルと白雪レイドの熱愛映画の主題歌をそらまふが歌う架空のでかすぎるタイアップ\",\n      \"summary\": \"渋谷ハルと白雪レイドの熱愛映画の主題歌をそらる・まふまふが歌うという、高額な契約金が必要そうな架空の超大型タイアップの妄想で盛り上がる場面。\",\n      \"whyItCanBeClipped\": \"視聴者のコメントから始まった突飛な妄想に対し、出演者たちが「相当払ってもらわないと受けられない」などとノリ良く返しており、会話のテンポと展開が単独の切り抜きとして面白いため。\",\n      \"sourceVideoId\": \"SGQqVJXsNNE\",\n      \"sourceStartMs\": 420142,\n      \"sourceEndMs\": 479980,\n      \"supportingSpeechIds\": [\n        \"12-14\"\n      ],\n      \"representativeQuote\": \"俺とはるちゃんの熱愛映画の汚いからやめてってマジで汚い?\",\n      \"riskNotes\": [\n        \"配信開始直後のウォーミングアップの雑談であり、後半の重大発表とは直接関係がない独立した笑いどころである点に留意が必要。\"\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"中国からのハッキング被害とEAサーバーのセキュリティ事情\",\n      \"summary\": \"渋谷ハルがAPEXアカウントを中国からハッキングされバンされたエピソードを初公開し、2段階認証をすり抜けるEAサーバー直結のハッキングの恐怖を語る場面。\",\n      \"whyItCanBeClipped\": \"「本舗初公開の話」として語られるハッキング被害の具体的かつ衝撃的な内容であり、ゲーマー層の関心が高いテーマで綺麗に会話がまとまっているため。\",\n      \"sourceVideoId\": \"SGQqVJXsNNE\",\n      \"sourceStartMs\": 510782,\n      \"sourceEndMs\": 659920,\n      \"supportingSpeechIds\": [\n        \"16-24\"\n      ],\n      \"representativeQuote\": \"中国からのハッキングに合いましてあらへエリックスのアカウントもアカウントがバンされるっていう\",\n      \"riskNotes\": [\n        \"ダソクさんなどの他配信者の名前が例として挙げられているため、前後の文脈を補完する必要がある。\"\n      ]\n    },\n    {\n      \"themeId\": \"theme_003\",\n      \"title\": \"ウマ娘プロゲーマー誕生!? 人口が少ないゲームでのプロ化を妄想する一同\",\n      \"summary\": \"盛り上がっている人気ゲームではプロになるのが難しいため、カラータイルやスリーザリオ、全国4位になった実績があるウマ娘などでプロゲーマー部門を作ろうと妄想する場面。\",\n      \"whyItCanBeClipped\": \"「CRフリファリオ部門」などの架空の部門名や、ウマ娘のプロシーンのシュールな絵面を想像して笑い合う展開が単独で見どころとして成立しているため。\",\n      \"sourceVideoId\": \"SGQqVJXsNNE\",\n      \"sourceStartMs\": 900140,\n      \"sourceEndMs\": 988798,\n      \"supportingSpeechIds\": [\n        \"35-41\"\n      ],\n      \"representativeQuote\": \"ウマ娘確かに俺全国4位までなったことあるいけるな!\",\n      \"riskNotes\": [\n        \"コメントの「CRにありそう」という流れから派生した大喜利的な雑談である点。\"\n      ]\n    },\n    {\n      \"themeId\": \"theme_004\",\n      \"title\": \"社内で賛同が得られない「ポケカCRカップ」開催への野望\",\n      \"summary\": \"4人の共通点であるポケモンカードのCRカップをやりたいと熱望するものの、副社長をはじめ社内の賛同がなかなか得られない苦悩を明かす場面。\",\n      \"whyItCanBeClipped\": \"実現すれば大反響を呼びそうな「ポケカCRカップ」の構想について、実際の社内交渉の裏話を含めて具体的に語られているため注目度が高い。\",\n      \"sourceVideoId\": \"SGQqVJXsNNE\",\n      \"sourceStartMs\": 994765,\n      \"sourceEndMs\": 1046097,\n      \"supportingSpeechIds\": [\n        \"43-44\"\n      ],\n      \"representativeQuote\": \"副社長にお前何言ってんのって普通に言われた結局やれなくなったんですかそれはいや俺はやりたいとずっと思ってますけど\",\n      \"riskNotes\": [\n        \"短い会話区間の中に企画の裏話が凝縮されているため、前後の文脈がなくても成立するが、ポケカの話題への入りを少し拾う必要がある。\"\n      ]\n    },\n    {\n      \"themeId\": \"theme_005\",\n      \"title\": \"新事務所「ミライズ」立ち上げ発表と「ダイサンジ」という誤爆ギャグ\",\n      \"summary\": \"カウントダウンが終了し、渋谷ハル、まふまふ、そらる、おじじの4人が関わる新しいVTuber事務所「ミライズ」の設立を発表するが、名前を間違えてボケる場面。\",\n      \"whyItCanBeClipped\": \"本配信のメインコンテンツである重大発表の瞬間であり、「ダイサンジ」という名前の言い間違え（ボケ）からツッコミが入る大きな盛り上がりどころであるため。\",\n      \"sourceVideoId\": \"SGQqVJXsNNE\",\n      \"sourceStartMs\": 2016159,\n      \"sourceEndMs\": 2098334,\n      \"meaningful演者反応\": \"事務所の名前をわざと、あるいは間違えて「ダイサンジ」と言ってしまい周囲から怒られるくだり。\",\n      \"supportingSpeechIds\": [\n        \"115-117\"\n      ],\n      \"representativeQuote\": \"バーチャルユーチューバーの事務所を立ち上げます事務所の名前はダイサンジでございますよろしくお願いします\",\n      \"riskNotes\": [\n        \"リスナーのコメントの反応が見えないため、演者側のセリフと空気感だけでテンポよく見せる必要がある。\"\n      ]\n    },\n    {\n      \"themeId\": \"theme_006\",\n      \"title\": \"活動者ならではの手厚いサポート！ミライズ運営4人の驚異の役割分担\",\n      \"summary\": \"新事務所「ミライズ」において、おじじとCRがマネジメント、まふまふが案件獲得、そらるが音楽周り、渋谷ハルが実際の活動サポートを担当するという最強の布陣を明かす場面。\",\n      \"whyItCanBeClipped\": \"応募を検討している人やファンに向けて、それぞれの強みを活かした具体的な担当業務が語られており、事務所のビジョンや強みが"
+}

@@ -1,0 +1,1343 @@
+{
+  "kind": "theme_generation_prompt_payload",
+  "runAt": "2026-07-09T01:05:12.837Z",
+  "fixtureId": "r_ztjHaHmcg_partial_material_v001",
+  "generationSystem": "theme-llm-v001",
+  "promptVersion": "theme_generation_prompt_v001",
+  "requestedThemeCount": 8,
+  "plannedRuns": 3,
+  "llmCall": false,
+  "modelInput": {
+    "task": "source_only_theme_generation",
+    "generationSystem": "theme-llm-v001",
+    "promptVersion": "theme_generation_prompt_v001",
+    "requestedThemeCount": 8,
+    "inputPolicy": {
+      "sourceOnly": true,
+      "noClipInfo": true,
+      "noExpected": true,
+      "noAlignment": true,
+      "noHumanReverseTheme": true
+    },
+    "windowing": {
+      "applied": false,
+      "reason": "初回はプロンプトを1本に収め、窓統合器の癖を入れない。",
+      "overlapMs": 0,
+      "preMergeCandidateCount": null,
+      "postMergeCandidateCount": null
+    },
+    "sources": [
+      {
+        "sourceVideoId": "-DwSCDMCWDQ",
+        "sourceUrl": "https://www.youtube.com/watch?v=-DwSCDMCWDQ",
+        "transcriptKind": "local_stt",
+        "language": "ja-JP",
+        "durationSec": 4817.049252,
+        "rawSegmentCount": 15413,
+        "promptSegmentCount": 181,
+        "segmentCompaction": {
+          "method": "source-only transcript segments concatenated until sentence-ending punctuation",
+          "scoringRole": "none",
+          "note": "読みやすさのための表現変換であり、expected、切り抜き、照合結果、人間確認メモは使わない。"
+        },
+        "segments": [
+          {
+            "speechId": 1,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 173448,
+            "sourceEndMs": 174609,
+            "text": "はい、というわけでどうもこはるでーす。"
+          },
+          {
+            "speechId": 2,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 174609,
+            "sourceEndMs": 174890,
+            "text": "いらっしゃいませー。"
+          },
+          {
+            "speechId": 3,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 174890,
+            "sourceEndMs": 175110,
+            "text": "渋谷はるでーす。"
+          },
+          {
+            "speechId": 4,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 175110,
+            "sourceEndMs": 194971,
+            "text": "コメント欄を出しますぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅ�"
+          },
+          {
+            "speechId": 5,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 202554,
+            "sourceEndMs": 220900,
+            "text": "大丈夫そうかはいというわけでちょっと待ってコメントが僕の目でも見れるようにしてOK配信開始トゥイットが必要か"
+          },
+          {
+            "speechId": 6,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 236120,
+            "sourceEndMs": 243568,
+            "text": "ようやく落ち着いたかごめんよ"
+          },
+          {
+            "speechId": 7,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 249672,
+            "sourceEndMs": 275020,
+            "text": "いやー引っ越しねー僕別にしたくてしやしたくてしたけどしたくてしたけどそのあのもともとしたくてしたわけじゃなくて僕もあの去年引っ越した時にはもうあの向こう10年ぐらいは引っ越さなくていいようにしようと思って引っ越したんだけどなんかなんか気づいたら引っ越すことになってたわーえっ"
+          },
+          {
+            "speechId": 8,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 278613,
+            "sourceEndMs": 299947,
+            "text": "なんでやろねぇ僕もわかんないですねなんで引っ越したか人生何が起こるかわからないんでねやはりそういうことよ回線がねちょっとまだちょっと不安定というか"
+          },
+          {
+            "speechId": 9,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 302553,
+            "sourceEndMs": 316503,
+            "text": "指名的ではないんだけどちゃんと不便な回線速度してて今ちょっと色々対策を講じていってはいるユイタレアネン3面バトルありがとうございます"
+          },
+          {
+            "speechId": 10,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 321775,
+            "sourceEndMs": 346894,
+            "text": "わかる家が燃えて引っ越したわ突然よなそんな理由ではないな僕はそんなそんなバイオレンスな事情ではないけれど幸いそこまで必要に駆られてはないけど部屋がねまあでも1個欲しくなったってのはあるな実際あのえーっとね2個前の家が"
+          },
+          {
+            "speechId": 11,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 350515,
+            "sourceEndMs": 378301,
+            "text": "活動始めてから何回引っ越してるんだちょっと待ってね多分3回3回引っ越してるのかな活動始めてから1回目の引っ越しはルームシェアしててルームシェアが解散になったから引っ越したのよ1回目はで"
+          },
+          {
+            "speechId": 12,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 384867,
+            "sourceEndMs": 397699,
+            "text": "その時そんな高い家賃払えなかったからさその活動始めてどんぐらいだろうあれ覚えてないけど半年ぐらいかな半年だから1年ぐらいいたかんとに1年ぐらいいた確か1年ちょいの時に引っ越してルームシェアの時さやっぱり2人分の"
+          },
+          {
+            "speechId": 13,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 399431,
+            "sourceEndMs": 421062,
+            "text": "その時まあなんか2ldkぐらいの家借りてたんだけど高いわけ家賃が101018万ぐらいの家借りてたから2人で今思うとなんかあの家借りてたのほんと良くないななんで昔あんなに置かれなかったのって思ったけど絶対家賃のせいはあるなそうまぁちょっと高い家借りててその時でなおさら一人になるから"
+          },
+          {
+            "speechId": 14,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 423488,
+            "sourceEndMs": 450481,
+            "text": "まあその時あのあれもあったから家賃補助とかもあったから言うてそのバカみたいにしんどかったわけじゃなかったんだけど家賃的な意味でねまあでもどっちしろ一人になるから引っ越さないとなーってなってでー普通の1Kからだからずっと住んでたのが2個前の家が1Kだね"
+          },
+          {
+            "speechId": 15,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 453195,
+            "sourceEndMs": 482007,
+            "text": "いや2人で18万高かったなあの家普通に高めの家だったやっぱね家探しはねちょっといい家見ちゃうとだめよなんかその時もその予算だいたいいくらで探したか覚えてないけど10万15万ぐらい10万15万ぐらい上限15万ぐらいだよねみたいな感じで探してでも結局そのちょっと綺麗な家見ちゃうとねそこにしちゃいたくなっちゃうんだよなマジ人間って愚かだわ"
+          },
+          {
+            "speechId": 16,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 485258,
+            "sourceEndMs": 507450,
+            "text": "でその後引っ越して1Kそこが一番長く住んでたかな家賃8万ぐらいそれが多分活動始めてからずっと住んでた家になると思う大体の活動はそこで行われてました"
+          },
+          {
+            "speechId": 17,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 518751,
+            "sourceEndMs": 543810,
+            "text": "知ってる人は知ってるPCを組み立てた配信とかはそこで行われた都内高いよそもそもだって一人暮らしも僕今言った一人暮らしの家1Kの家も別に特別綺麗でもないし広くもないしめっちゃ便利なエリアでもないのに86,000円払ったから東京が高いそもそも"
+          },
+          {
+            "speechId": 18,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 555393,
+            "sourceEndMs": 580013,
+            "text": "そんなに不満はなかったあの家はあのーまあちょっと隣人が隣人と僕のどうやら噛み合いがよろしくなかったっぽいけどあの寝てる時に壁に当たるととんでもない壁ドン返ってきたことあって僕ちょっと大きい音苦手なんだよなそっから僕も大概そのボーンシブ使ってたとはいえうん"
+          },
+          {
+            "speechId": 19,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 581118,
+            "sourceEndMs": 599827,
+            "text": "完全に静かだったとは言えないからまあいろいろ向こうからしてもいろいろあったんだろうけど怖かったなあれ臨時何者かしらんけど言わないながらもこっちよとなるとちょっとビビっちゃうんだよねマジで怖い配信者の方が"
+          },
+          {
+            "speechId": 20,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 600111,
+            "sourceEndMs": 624906,
+            "text": "肩身狭いからまあそのこっちもねっちゃんとするつもりだけど音回りってまあどんだけ自分がちゃんとしてもどうなってるかわかんない部分もあるからさていう家にずっと住んでたかな1年前去年の4月まではずっとそこ住んでたから"
+          },
+          {
+            "speechId": 21,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 626401,
+            "sourceEndMs": 645633,
+            "text": "2年ぐらいすんですがそれがない1年ごとくらいにも引っ越してねそれ考えてもいやマジで東京の家賃はカスですねもう100万回くらいこの話してるからあれだけどね"
+          },
+          {
+            "speechId": 22,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 652788,
+            "sourceEndMs": 671567,
+            "text": "1年とかで引っ越すとその分医薬金取られそうだけどそうだねなんかあのあれはあるね契約2年契約が大半だから1年2年以内2年未満で引っ越すとまあ1ヶ月分の家賃とかは結構払わされるねまあそれはしゃーない契約ですからで1K住んでてであのその後1LDK"
+          },
+          {
+            "speechId": 23,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 674760,
+            "sourceEndMs": 701281,
+            "text": "やっぱまあ部屋一つ足んないよなーってなってその時だって配信しててなんだ1Kであそう1Kで僕広めの部屋だったんよその時思い出したそうだちょっと広めだったわ10畳ぐらいあったのかあの時ちょっと広かったんだよね1Kにしてはあそうだでその時にあのなんか話したわあのあのその時の引っ越し配信でいや引っ越したんだよねってで家探してる時に"
+          },
+          {
+            "speechId": 24,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 703639,
+            "sourceEndMs": 726844,
+            "text": "1Kのなんか6畳で6畳でめっちゃ綺麗な家か10畳だけどまあ普通だねーみたいなところかめっちゃ悩んだみたいな話したねしたわちなみにまあ"
+          },
+          {
+            "speechId": 25,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 729657,
+            "sourceEndMs": 755483,
+            "text": "結局オシャレさは必要なかったねどうせ人来なかったし10畳の部屋選んで正解だったあの時はで1LDK引っ越したちょっと前まで住んでた家だねそこもねすげー良かったんだけどねいやマジ1Kから1LDK引っ越して"
+          },
+          {
+            "speechId": 26,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 757203,
+            "sourceEndMs": 781193,
+            "text": "もう十分やろと思ってこんだけ広さあったらもう困らんべえと思ったんだけどちょっとここ1年でマジで物増えてグッズとかもそうだしサンプルとかねあとあの服もなんか自分で買う服もあるしあのボルトルーム定期便によりありがたいことにいただける服もあるし物が本当に増えてきて"
+          },
+          {
+            "speechId": 27,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 785487,
+            "sourceEndMs": 805185,
+            "text": "これはそんなに大きな理由じゃないんだけどめっちゃ細かい理由だけどエリアでいうとめっちゃ便利だったのよ駅も徒歩数分だし家の周りに大体何でもあるし徒歩部分めっちゃ便利だったんだけど"
+          },
+          {
+            "speechId": 28,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 810722,
+            "sourceEndMs": 839719,
+            "text": "僕移動タクシーが多いんだけどさタクシーを呼ぶとタクシーがめっちゃ迷っちゃうなんかちょっと入り組んだ場所に住んでて自分の足で移動するには困らないんだけど車が入るときにどうやら不便っぽくてそれでちょっとねあのなんか無駄ななんだろう外スタジオ行くときとかあるじゃんあの収録で時とかにちょっと無駄な時間あってさなんかタクシー迷ったりとかでついてもらったはいいけどその後こう切り返しめっちゃ時間かかっちゃったりとかで"
+          },
+          {
+            "speechId": 29,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 840535,
+            "sourceEndMs": 865097,
+            "text": "なんかめっちゃ微妙にQOL引く部分があってうーんみたいななんだろう別にこう不便ってほどじゃないんだけどここ便利な方がいいよなみたいな根本的に家とか家からそんな出ることもないし致命的じゃないんだけどなーみたいなのがあってなんかそういう細かい理由が多かったかな今回の引っ越しは"
+          },
+          {
+            "speechId": 30,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 873620,
+            "sourceEndMs": 899947,
+            "text": "なぁとはねあの税金高いしえっどうぞそんなあの1個思ったんだけどどうせどうせ家賃どんだけ散ろうがーぜひん持ってかれるよなぁちょっと高い家の方が自分の"
+          },
+          {
+            "speechId": 31,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 900111,
+            "sourceEndMs": 925969,
+            "text": "ところも痛むけど税金のその払う額もちょっと減るから国と接班してるイメージだからさ家賃が10万円だとしたら5万自分で5万国に納めるとしてこれが20万の家だったら10万10万だから自分が払う額も5万増えてるけど税金に計上できる額も5万なりその半分の2万5千なり増えるわけだからちょっとなんか気持ち的には得なんだよな"
+          },
+          {
+            "speechId": 32,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 930230,
+            "sourceEndMs": 958990,
+            "text": "ニーナちゃんメンバー登録ありがとうございますなんかね損した気分になっちゃうよこれはどうせみたいなどうせみたいなのちょっとあるあとは普通にねあ本当だってか僕免許のあれやってねーや免許の住所変更しないといけないねそう家賃が経費にできるから"
+          },
+          {
+            "speechId": 33,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 959937,
+            "sourceEndMs": 986662,
+            "text": "さっき言った通り結局自分が払う全体的な額も増えてるんだけど税金として納める額はほんのちょっと減る結局払う額は増えてるからね家賃税金として10万払うか家賃として15万払うかみたいな話家賃として15万払う方が高いけど税金として払う額はちょっとだけ減る"
+          },
+          {
+            "speechId": 34,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 992143,
+            "sourceEndMs": 1016235,
+            "text": "君の3面バトルカーありがとうございます運転はまあ仕事でちょっと車使ってたから別に普通にできるけどまあうまくはないと思うていうかもう数年単位で運転しないからしたくねえ正直怖えリスクえぐい事故った時の運転楽しいんだよな"
+          },
+          {
+            "speechId": 35,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 1031325,
+            "sourceEndMs": 1045937,
+            "text": "そっかー免許証のあれはやんないといけないな住民票持って警察住民票いらなくね?"
+          },
+          {
+            "speechId": 36,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 1045937,
+            "sourceEndMs": 1048860,
+            "text": "なんか結構書類が少なくて済んだ気がする"
+          },
+          {
+            "speechId": 37,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 1050943,
+            "sourceEndMs": 1077818,
+            "text": "超超大金持ち曰く家賃で15万と20万天と地の差ほどあるけど20万と50万そんなじゃないらしいから取りたくないあーっとね家賃のさ僕もね引っ越しこんだけしてるから色々な家見たけどえーっとこれ東京ね東京のえーっとまあ普通に便利なエリア想像してほしい便利なエリアってのはまあ練馬ぐらいからかなざっくり"
+          },
+          {
+            "speechId": 38,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 1078819,
+            "sourceEndMs": 1104854,
+            "text": "練馬を便利なエリアで捉えるか捉えないかそれそれそれだと思うけど僕は練馬便利だと思うから下限練馬上限あとは都市部分新宿とか池袋渋谷とかを想像してほしいんだけどこの範囲をだいたい便利として捉えてほしくて便利なエリアでえっと家賃5万はねもうないねまああのいやもちろんないことはないんだけどその1K"
+          },
+          {
+            "speechId": 39,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 1106267,
+            "sourceEndMs": 1135057,
+            "text": "1Kでまあ最低限の小綺麗さとその一応ストレスがなくらせるラインが結局8万9万ぐらいからスタートかなで1015万ぐらい出すとめちゃめちゃ綺麗な家になるマジで1Kか1Lのクッソ綺麗な家が借りれるだからここの"
+          },
+          {
+            "speechId": 40,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 1137877,
+            "sourceEndMs": 1166972,
+            "text": "10万足らずから15万ぐらいへの跳ね上がり方はエグいめちゃめちゃ家のグレードが上がるで15万と20万はまあちょっと変わるかなぐらいかな正直15万でとりあえず綺麗さはほぼほぼ頭打ちかな"
+          },
+          {
+            "speechId": 41,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 1169247,
+            "sourceEndMs": 1189703,
+            "text": "だから東京で本当に綺麗な家に住みたかったら15万から20万ぐらいな気がするな12万ぐらいからクオリティからあそうだね本当にそんぐらい12万の1Kとかは本当に綺麗だねめちゃめちゃ綺麗1LDKにし始めると12万だとちょっと足りなかったりするかな20万ぐらい欲しい"
+          },
+          {
+            "speechId": 42,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 1197297,
+            "sourceEndMs": 1198803,
+            "text": "あ、ボルトルームさんだ。"
+          },
+          {
+            "speechId": 43,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 1198803,
+            "sourceEndMs": 1199345,
+            "text": "1220円サチャ。"
+          },
+          {
+            "speechId": 44,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 1199345,
+            "sourceEndMs": 1199967,
+            "text": "ありがとうございます。"
+          },
+          {
+            "speechId": 45,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 1201032,
+            "sourceEndMs": 1212789,
+            "text": "家賃800万で来ましたあるんすかそんな家あるんすか800万月800万払うなら僕マンション建てるっすよ住んでいいっすよボルトルームさん"
+          },
+          {
+            "speechId": 46,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 1217955,
+            "sourceEndMs": 1244579,
+            "text": "タワマンの下の方が15万くらいあったなあそうだねそんぐらいそんぐらいほんとになんかタワマンってなんか下の方に1Kの部屋とかがあったりするんだけどタワマンじゃなくてもいいめっちゃ綺麗なマンションなんか東京を走っててうわこのマンションクソ綺麗やんみたいなところってだいたい下の方の階が1Kで上の方の階が2Kとか2Lとかが1Lとか2Lが入ってるんだけど下の方は結構そんな感じで借りられたりする"
+          },
+          {
+            "speechId": 47,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 1257995,
+            "sourceEndMs": 1282724,
+            "text": "さや姉さん500円さちゃありがとうございますシアタールーマルって風の朝行きましたそれウルカさんやねそういうウルカさんの家まだ遊びに行ってねーなあのなんか僕に写真を送ってきたなプロジェクターみたいな買ったみたいね遊びに来てよって言ったけど全然遊びに行ってない"
+          },
+          {
+            "speechId": 48,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 1291347,
+            "sourceEndMs": 1311180,
+            "text": "シアターで今そんなバカみたいな額しないなんか10万15万だか10万中田の電気になんかしあたぶんそんなしないかなんかあるんだよめっちゃ便利なやつそれじゃないハルールれるたコパいつやんねんっていう1年くらい経ってるのではやろう"
+          },
+          {
+            "speechId": 49,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 1315229,
+            "sourceEndMs": 1330030,
+            "text": "家建てると6000くらい多分土地代でそれよりかかるね東京半端ねーぞあそうアラジンアラジンあれいいよね"
+          },
+          {
+            "speechId": 50,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 1348398,
+            "sourceEndMs": 1377316,
+            "text": "そうねでだからだいたいその家賃で変わるのまあでもそんぐらいなんかほんと20万15万20万とか出すととんでもなく綺麗な家には住めるねなんかその家の設備ももう十分すぎるやつやつ多分ほんとに選ぶ家によってはあるじゃんジムついてるマンションとかさ"
+          },
+          {
+            "speechId": 51,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 1379503,
+            "sourceEndMs": 1407337,
+            "text": "コーンシェルジュがいるマンション多分そんぐらいでそんぐらい出せばその辺が借りられるようになる僕の収益はね割とオープンになってるよ言うて"
+          },
+          {
+            "speechId": 52,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 1408568,
+            "sourceEndMs": 1430662,
+            "text": "なんか本当に調べようと思ったら調べられるって感じになってるまあ主に自分で書いたノートのせいなんだけどとねー収入の比率大公開までやってるからねどんな感じで広告収益70%仕事15%スパチャ12%スイッチ3%これいつのやつだっけ2020年の収入をグラフ化しています"
+          },
+          {
+            "speechId": 53,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 1457918,
+            "sourceEndMs": 1479408,
+            "text": "あっこっからどんぐらい変わってるかねーんーっとねーパッと想像を働かせるとあーでもちょっと変わってるわ広告3割仕事3割"
+          },
+          {
+            "speechId": 54,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 1484527,
+            "sourceEndMs": 1494657,
+            "text": "いやさすがに文字あるが広告4割仕事3割ぐらいになってるかなその他諸々って感じかな"
+          },
+          {
+            "speechId": 55,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 1500051,
+            "sourceEndMs": 1515875,
+            "text": "広告収入計算サイトって正確なんだろうか正確なのはね見たことないなあここまあまあ近いじゃんみたいなのは一回見たことあるけどなんかそれもどんどん結局ずれてったから結局なんだかんだ正確なのは一個も僕は見たことないかも"
+          },
+          {
+            "speechId": 56,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 1530365,
+            "sourceEndMs": 1555015,
+            "text": "レイドくん2万とかだったあったなそんなことも軽く調べてみるかなんかおもろいのあるかなちょっと見ようぜ暇だしビバルディの"
+          },
+          {
+            "speechId": 57,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 1559923,
+            "sourceEndMs": 1583301,
+            "text": "待ってねYouTuber収入"
+          },
+          {
+            "speechId": 58,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 1590294,
+            "sourceEndMs": 1602217,
+            "text": "何何があるかな何出るあったユーチューバー収入計算サイトこれでいいじゃん"
+          },
+          {
+            "speechId": 59,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 1630838,
+            "sourceEndMs": 1648292,
+            "text": "なんか収まり悪いなまあいいかもちろんティガできるかこれでいい?"
+          },
+          {
+            "speechId": 60,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 1648292,
+            "sourceEndMs": 1655018,
+            "text": "これはノックスインフルエンサーってサイトだねチャンネル登録者数77万人推定月収"
+          },
+          {
+            "speechId": 61,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 1659719,
+            "sourceEndMs": 1686425,
+            "text": "youtubeの推定収益価格動画902,375円ニルさんyoutubeチャンネル計算機面白いなこういうの見るの"
+          },
+          {
+            "speechId": 62,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 1691170,
+            "sourceEndMs": 1714733,
+            "text": "ニルさんのやつ買ってみようクリクションは飛べないのかいくつか見たいなこれ戻れないです"
+          },
+          {
+            "speechId": 63,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 1720026,
+            "sourceEndMs": 1744177,
+            "text": "2022年版ユーチューバーの収入が分かるランティングサイトまとめこんなのあるのか2022年1月現在ユーチューバーの推定収入が分かる際だチューバーターンが分かりやすくておすすめなんでもまとめるやん"
+          },
+          {
+            "speechId": 64,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 1748507,
+            "sourceEndMs": 1774396,
+            "text": "渋谷原の検索結果吉田の年収1600万あるぞ吉田MP4年収1629万あるってこいつ僕に近いぞもうタワーマン吉田"
+          },
+          {
+            "speechId": 65,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 1779217,
+            "sourceEndMs": 1792478,
+            "text": "どんな計算してんだよこれ気になるわ"
+          },
+          {
+            "speechId": 66,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 1807458,
+            "sourceEndMs": 1835239,
+            "text": "えーっと他はユーチューバーネクストそれ聞いてんのかなへーなんかもっといっぱいあったよなー減ったんかなー"
+          },
+          {
+            "speechId": 67,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 1843265,
+            "sourceEndMs": 1861190,
+            "text": "なんかいっぱいあったよね?"
+          },
+          {
+            "speechId": 68,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 1861190,
+            "sourceEndMs": 1870813,
+            "text": "推定時給2230ウォンおぼくの時給2000円かよちょっとちょっと割のいいバイトやん"
+          },
+          {
+            "speechId": 69,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 1880950,
+            "sourceEndMs": 1890956,
+            "text": "やめろやめろ変なもの載せるなこれ加藤さんの加藤純一の年収月収総収入は?"
+          },
+          {
+            "speechId": 70,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 1890956,
+            "sourceEndMs": 1897239,
+            "text": "っていうのが出てくるえー"
+          },
+          {
+            "speechId": 71,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 1904203,
+            "sourceEndMs": 1924217,
+            "text": "YouTube年収一覧いろんなあれがあるんだなそんな感じらしいです"
+          },
+          {
+            "speechId": 72,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 1936398,
+            "sourceEndMs": 1956340,
+            "text": "時給2000円で1日まあ僕最近長い時で10時間配信してるから結構か1日2万だとして休み出して60万結構やな年収720万です"
+          },
+          {
+            "speechId": 73,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 1963636,
+            "sourceEndMs": 1991520,
+            "text": "まあ一人ぐらいそんなに不自由がない一人暮らしならできるなありがとうございますYouTubeドリームはねでもあるよそりゃ人の数は力よ結局それは"
+          },
+          {
+            "speechId": 74,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 1993968,
+            "sourceEndMs": 2018765,
+            "text": "なんだろうあのーこれね僕あのー人気業って結局最強だと思っててなんかその気になればなんでもできるじゃんあのー例えばだけどそれこそグッズ出してさ買ってもらったら"
+          },
+          {
+            "speechId": 75,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 2022513,
+            "sourceEndMs": 2050084,
+            "text": "グップってちゃんとやったらだいたい原価どんぐらいだろうなんかあのなんやかんや原価やらあと発送費用やら最大の手数料とか倉庫費用とかなんだかんだ込み込みでだいたいだいたい3割ぐらい残るはずなのよもろもろちゃんとほどほどにやればそんなもんかなそんなもんだった気がする"
+          },
+          {
+            "speechId": 76,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 2052745,
+            "sourceEndMs": 2079658,
+            "text": "別にグッズってめっちゃわかりやすいじゃん別にグッズにこだわる必要もないから例えば僕みたいにコラオPC出すとかもそうだし新しいサービス立ち上げるでもいいし結局自分に人気があるってできることがめちゃめちゃ幅が広いわけよなんでもやろうともできるからさ"
+          },
+          {
+            "speechId": 77,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 2081025,
+            "sourceEndMs": 2098778,
+            "text": "それこそ飲食店じゃあ作ってさ自分で宣伝すりゃいいわけよ僕がじゃあわかんないじゃん牛丼屋作りましたってぜひみんな来てくださいって言ったら結構みんな来てくれるじゃん間違いなくそこでさ変なこう"
+          },
+          {
+            "speechId": 78,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 2100491,
+            "sourceEndMs": 2127471,
+            "text": "変なことしない普通にちゃんと真っ当な商売としてやってれば多分普通に流行るわけじゃん最強結局人気があるって最強なんだよって僕は思ってる今後困ることはあんまり人気がある限りはないと思ってるし逆を言うと人気がなくなると困ることが増えるだろうなと思ってる雨さん254%ありがとうございます"
+          },
+          {
+            "speechId": 79,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 2133507,
+            "sourceEndMs": 2144747,
+            "text": "人気獲得までが凄まじい努力が必要なんだけどまぁそりゃそうそのないからその簡単にね人気が手に入ってかつその人気が最強ですなんてことはないから人気は獲得するのが難しいから"
+          },
+          {
+            "speechId": 80,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 2156121,
+            "sourceEndMs": 2174676,
+            "text": "渋谷春さんって自分が倒した敵のボックス遊ばれるとき嫌な顔するよねそうかなそんな嫌そうな顔してるから知らんけど誰が倒したボックスかとか見てないだろそんなの名前でも書いてんのかなんだそれ"
+          },
+          {
+            "speechId": 81,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 2179927,
+            "sourceEndMs": 2206548,
+            "text": "銅節100人いれば食べていけるって本当なんだろうかあー100人か100人いたらもういけるんじゃないか銅節銅節100人でしょ銅節100人結構だぞしかも銅節100人"
+          },
+          {
+            "speechId": 82,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 2208172,
+            "sourceEndMs": 2224510,
+            "text": "結構だねだって僕がPUBGでちょうど伸び始めた時期が100人ぐらいだったはずだけどうん常に100人来るなら全然多分普通のサラリーマンぐらいの月収あるんじゃないかちょい下回るかなぐらいか多分"
+          },
+          {
+            "speechId": 83,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 2237767,
+            "sourceEndMs": 2244570,
+            "text": "暇だし昔のアナリティクス見てみるか2018年5月組でしょ?"
+          },
+          {
+            "speechId": 84,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 2244570,
+            "sourceEndMs": 2266218,
+            "text": "僕2018年…じゃあそれこそ7月とかでいいか7月2日…7月1日でいいよ2018年の7月30…30までかあ、31まであ、まあいいや推定周…あれ?"
+          },
+          {
+            "speechId": 85,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 2266218,
+            "sourceEndMs": 2266318,
+            "text": "見えねえ"
+          },
+          {
+            "speechId": 86,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 2270222,
+            "sourceEndMs": 2270502,
+            "text": "あれ?"
+          },
+          {
+            "speechId": 87,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 2270502,
+            "sourceEndMs": 2281687,
+            "text": "昔のやつあれが見れないな仕方ないから12月とかにするん?"
+          },
+          {
+            "speechId": 88,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 2281687,
+            "sourceEndMs": 2299314,
+            "text": "20102018年そうだよねあれ僕数字ちょっと落ちたのいつだっけな9月とかだった気がするなんていうか逆に残ってるかなあー残ってるわはいはいはいはいはい"
+          },
+          {
+            "speechId": 89,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 2313766,
+            "sourceEndMs": 2316828,
+            "text": "動説100人だとまあでも多分生活できると思う"
+          },
+          {
+            "speechId": 90,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 2332687,
+            "sourceEndMs": 2351853,
+            "text": "ってことは銅石3200人はサラリーマン32人分そんな単純計算かなって思うけどまあ穴勝ち間違ってないこともないかもしれない多分でもそうか単純計算ではあるかそうなんだ単純計算なんだよなそれがすごいよなゆうさんをサブスクありがとうございます"
+          },
+          {
+            "speechId": 91,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 2369790,
+            "sourceEndMs": 2378418,
+            "text": "同説数とチャンネル登録者数どっちがお金になるのだろうかチャンネル登録者数は別に何のお金にもなんないよチャンネル売るぐらいしかできなくない?"
+          },
+          {
+            "speechId": 92,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 2378418,
+            "sourceEndMs": 2384983,
+            "text": "分からんけど同説がまあなんだろう結局リアルタイムの数字だから"
+          },
+          {
+            "speechId": 93,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 2399377,
+            "sourceEndMs": 2399784,
+            "text": "そう、あの"
+          },
+          {
+            "speechId": 94,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 2400812,
+            "sourceEndMs": 2423290,
+            "text": "単純計算だからさマジでだってそうじゃんあのー広告収入が例えば100人に見られてる人は広告収入がじゃあ1円ですと1000人に見られてるなら広告収入が0.5円になりますとかだったらさじゃないじゃんじゃないのよまあなんか日本のサイトとかはそういうことするところありそうだけどYouTubeはそういう仕様じゃないから別に100人"
+          },
+          {
+            "speechId": 95,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 2425558,
+            "sourceEndMs": 2454458,
+            "text": "再生数が100の動画も再生数が多分1000万の動画もそれでその再生数で国収益の単価は変わんないからそれがすごいよねそういえば最近流行りの登録者寿司バラに迫ってきてる新人さん見てるあ見てないあちらちらっとだけ見たけどあれよね100万点バラサロメさんあれ名前合ってるあの人すごいね"
+          },
+          {
+            "speechId": 96,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 2458147,
+            "sourceEndMs": 2481807,
+            "text": "何も何もなんですですわなんだろうなぁ結局ああいうああいうなんだろういや僕本当にすごいなって思うのが"
+          },
+          {
+            "speechId": 97,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 2483802,
+            "sourceEndMs": 2497995,
+            "text": "一発屋感を醸し出しておきながら結局普通に自分もコンテンツ力持っててただ評価され続ける人っているじゃんマジですげえ"
+          },
+          {
+            "speechId": 98,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 2518375,
+            "sourceEndMs": 2540532,
+            "text": "昔その登録者数か新人強い新人が出るとこううってなってたこともあったけど本当にでもなんなくなったな同説12万もいたんだすげーな"
+          },
+          {
+            "speechId": 99,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 2544362,
+            "sourceEndMs": 2571448,
+            "text": "えーどうせ12万ってやばいなどこの数字それ気になるなどっから持ってきた数字なのか気になる当たり前だけど数字って無から生まれないからさその見てる層がもともと二次三次を見ている層なのかそれともVTuber界隈全体を見ていた層なのか個人VTuberを見ていた層なのか"
+          },
+          {
+            "speechId": 100,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 2572348,
+            "sourceEndMs": 2597718,
+            "text": "それと全く関係ない本当にVでもなんでもない界隈の数字なのかどこの数字を持ってきたらそうなったのかが気になるわちょっと分析する価値ありそうだよな昔バズった生首の方あの方とか結構ガンダムの数字だろうなって感じのなんかねフォロワー分析とかもしてる人いたけど"
+          },
+          {
+            "speechId": 101,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 2599225,
+            "sourceEndMs": 2628323,
+            "text": "確かフォロワーがキズナアイさんとかミライアカリさんとかと全然被ってなくてあれはだから会話以外の数字持ってきてるんだろうなっていう僕はそういう消費者調査消費者調査っていうのか分かんないけどなんか好きよ分析系はちゃんと数字見てやっぱ戦い方考えるのは大事だからね"
+          },
+          {
+            "speechId": 102,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 2630769,
+            "sourceEndMs": 2647024,
+            "text": "普段V見てない人がすべいてるのよく見るまあそういうことやろね分析ってお金かけてやってるの?"
+          },
+          {
+            "speechId": 103,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 2647024,
+            "sourceEndMs": 2655412,
+            "text": "いやお金はいらないよ基本的に今の時代インターネットで大体何でも調べられるから"
+          },
+          {
+            "speechId": 104,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 2663861,
+            "sourceEndMs": 2676014,
+            "text": "研究は大事だねーだってさー横にさー人がいっぱい並んでるの想像してほしいんだけど何回か話にも出してるけど"
+          },
+          {
+            "speechId": 105,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 2677901,
+            "sourceEndMs": 2699947,
+            "text": "僕のその2018年5月ですら1000人ぐらいVTuberがデビューしてるんですね横に自分と自分の僕と999人が並んでる図を想像してほしいんだけどその999人より確実に面白い絶対こいつら100%面白いって思えるならまあ別にその辺手抜いていいと思うんだけどそれって難しいじゃん"
+          },
+          {
+            "speechId": 106,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 2700151,
+            "sourceEndMs": 2722078,
+            "text": "横にいる999人より面白い人間になろうって難しいじゃんこれってね1ヶ月だけなんですよこれが1年足すとその数が12倍になるんで自分の横に1万2000人が並んでるわけですよ1万2000人の中で一番面白くなろうと思うと無理じゃんそんなもちろん本当に面白いんだったらいいんだけど"
+          },
+          {
+            "speechId": 107,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 2729838,
+            "sourceEndMs": 2753195,
+            "text": "ぺけたさん610冊ありがとうございます渋ハラの時って誰がいるんですかわかんないみんなどっか行っちまったよかなえくんが結構近かった気がするんだよなでもかなえくん"
+          },
+          {
+            "speechId": 108,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 2759672,
+            "sourceEndMs": 2778465,
+            "text": "カナエくんがカナエデビューで調べたらメジャーデビューの方が出てくるすご2018年5月2日かな"
+          },
+          {
+            "speechId": 109,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 2786387,
+            "sourceEndMs": 2814570,
+            "text": "かなえさんは2018年5月2日にゲーム配信特化したグループ虹サンジゲーマーズの立ち上げメンバーとしてデビューえーバリ近いなおたのぶはね不愉快だけど先輩だねそっかかなえくんそんな近かったのかたつさん200円スタチャンありがとうございます"
+          },
+          {
+            "speechId": 110,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 2818233,
+            "sourceEndMs": 2845687,
+            "text": "PCはね分からないならなんかもう適当に出来合いのやつ買った方がいいかもお店行くといいですよカレビ屋とかマジでおすすめいくちゃんさん200個じゃないですかありがとうございますそれは就活終わったやね切り替えていこうお頼むの不快なとこはどこですか顔口臭見た目全て存在存在が不快"
+          },
+          {
+            "speechId": 111,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 2852688,
+            "sourceEndMs": 2877018,
+            "text": "ゴリラさんも先輩当たりますゴリラさんとかバリ先輩よ大先輩よオダノブのオダ感薄れてきて悲しいそんな人いるんだ"
+          },
+          {
+            "speechId": 112,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 2880878,
+            "sourceEndMs": 2902222,
+            "text": "おだかん求めてたファン層もいたのかちなみに僕もなんか新しくなったの見た目は結構不愉快だからいや不愉快って書いた人に失礼だないやなんか違うんだよねなんなんていうかあれなんなんなんなんだわなんなんあれなんであんなになったの"
+          },
+          {
+            "speechId": 113,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 2910528,
+            "sourceEndMs": 2936956,
+            "text": "そういうのじゃないじゃんあいつ別にwww新しい方www上見てピクピクするのガチうかいwwwあれなんなんほんまにwwwあぁ…"
+          },
+          {
+            "speechId": 114,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 2938543,
+            "sourceEndMs": 2966900,
+            "text": "意味がわからんほんまに何がしたいよいっハゲともながらか合ってないな何してんだろうクズ派はデビュー結構早かったはず"
+          },
+          {
+            "speechId": 115,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 2968557,
+            "sourceEndMs": 2992832,
+            "text": "近い人マジ少ないぞ調べるか2018年5月Vtuberバーチャルユーチューバー関連年表2018年こんなんあるの?"
+          },
+          {
+            "speechId": 116,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 2992832,
+            "sourceEndMs": 2995274,
+            "text": "おもろいからこれ見してあ、ギバリティで見れた"
+          },
+          {
+            "speechId": 117,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 3012514,
+            "sourceEndMs": 3035911,
+            "text": "これニコニコの広告なんでバンしないでくださいねそんなエッチじゃないからね頼むよYouTubeさんこんぐらい許してね一応エッチじゃないことアピールするためにより写しとくけどそんなにエッチじゃないよね大丈夫だよねこんなんでバンしないでよエッチな広告じゃないよっていうアピールのために全部切れ目ないとかの写しましたけど"
+          },
+          {
+            "speechId": 118,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 3038370,
+            "sourceEndMs": 3051540,
+            "text": "えーちょっと待って上の航空の方が実はまずいかもしれない私たちは妖魔なんかに絶対負けない同じか違うの上の方がまずいねこれ"
+          },
+          {
+            "speechId": 119,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 3066008,
+            "sourceEndMs": 3083228,
+            "text": "えーっとというわけでVTuber関連年表というのがありましたのでえー2018年がですね"
+          },
+          {
+            "speechId": 120,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 3104099,
+            "sourceEndMs": 3129357,
+            "text": "2018年2月響き青が活動開始かしこまりが活動開始絶対天使くるみちゃんのTwitterアカウントやYouTubeチャンネルが削除される復活してたね最近見ないカルテが活動開始猫宮ひなたが活動開始マグライネが活動開始ケリンが活動開始懐かし美刀怪獣が活動開始この辺2月組だねハタバツグが活動開始"
+          },
+          {
+            "speechId": 121,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 3137639,
+            "sourceEndMs": 3161810,
+            "text": "3月ミソシタが活動開始出たミソシタさんオメシスが活動開始ゲーム部が活動開始田中姫が活動開始するゲーム部にドーミョージハルトが登場朝の姉妹プロジェクトが開始朝の光が活動開始するお前神々やね"
+          },
+          {
+            "speechId": 122,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 3165382,
+            "sourceEndMs": 3167124,
+            "text": "へぇーこんなんしてたんだんー"
+          },
+          {
+            "speechId": 123,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 3198960,
+            "sourceEndMs": 3226488,
+            "text": "黄河竜忍者ポンポコによる24時間生放送へぇー僕がデビューする前にやったのかあれですけど1からが虹サンジシーフのメンバー募集オーディションを開始樋口海でしずかりぃのyoutubeチャンネル登録者数がそろって10万人を突破かなえくんのデビュー書かれてなくね僕イリアムと誕生日同じじゃんあでもイリアムのティザーサイト立ち上がりか"
+          },
+          {
+            "speechId": 124,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 3230468,
+            "sourceEndMs": 3240141,
+            "text": "VTuberグループ空想コードプラスが誕生した10名のメンバーによる自己紹介動画を公開何つあったなえーあ"
+          },
+          {
+            "speechId": 125,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 3260216,
+            "sourceEndMs": 3285892,
+            "text": "なんかさ年表みたいななかったっけあのーいや同期わからんな誰が2018年の前半にデビューした人誰ですかデビュー"
+          },
+          {
+            "speechId": 126,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 3290253,
+            "sourceEndMs": 3299747,
+            "text": "あんまりないなマジであのカナエくんぐらいしかいないかもしれない"
+          },
+          {
+            "speechId": 127,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 3307935,
+            "sourceEndMs": 3321603,
+            "text": "佐藤ホームズさん5月なんだへーそういえばなぜか最近イリアムのCM動画を組めるなイリアム確かどっかに売却してなかったっけDNAなんかどっかに"
+          },
+          {
+            "speechId": 128,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 3325218,
+            "sourceEndMs": 3345869,
+            "text": "カガシマイとか結構後なんだよね実は結構後霊毒もそうだねかなり後かなり2マス僕らのかなりって言うて数ヶ月なんだけどこの頃の数ヶ月マジで重かったんだよな1ヶ月違うだけでなんか1年ぐらい違うぐらいの感覚だった"
+          },
+          {
+            "speechId": 129,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 3353855,
+            "sourceEndMs": 3376500,
+            "text": "青猫エイムは数ちゃんの方近いんじゃない多分1ヶ月に何人くらいデビューしてたんだろうまあ月にはやるけどだいたいね1日に2,30人デビューしてることが多かったね僕の周辺はそれこそ5月とか6月とかだいたい1月あたり900人くらいめっちゃ雑に計算すると"
+          },
+          {
+            "speechId": 130,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 3396497,
+            "sourceEndMs": 3412106,
+            "text": "レイド君とかマジで結構後輩だったよ感覚的にはなしのがレイドくんもどっかで言ったけどなんか僕のやってる大会見てなんかデビューを志したかなんだか言ってなかったっけまあもうふわっとしか覚えてないけど"
+          },
+          {
+            "speechId": 131,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 3421557,
+            "sourceEndMs": 3449522,
+            "text": "その中でよく個人で始めようと思いましたね昔はね今ほどむしろ企業が少なかったのもあるかな今やるなら絶対企業僕も狙うと思うけどあの頃は個人の方が多数派ではあったねそんなに募集かけてる企業もいなかったし今どんぐらいだろうね確かに今最近デビューでも最近もなんだかんだデビューしてるんじゃない僕らがあんま知らないだけで調べたらいくらでもいそうデビューしてる人は"
+          },
+          {
+            "speechId": 132,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 3456263,
+            "sourceEndMs": 3479890,
+            "text": "今から個人はきついと思うけど別に僕の時もきつかったし変わってないよそれで言うと本当に個人でそのきついきつくないの話するときつくないのなんかあの2018年の2月かまあよく見て3月じゃないそれ以降は多分みんなどっこいどっこいだよずっときついフォアシャードだからもう同じっちゃ同じやねノエルさんメンバー取るかありがとうございます"
+          },
+          {
+            "speechId": 133,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 3507265,
+            "sourceEndMs": 3534316,
+            "text": "またどこを目指して活動するかじゃないどんぐらいの人気が欲しいのかとかまあでもなんかなんだろうねその人気が欲しい結構みんなさあ活動を始めるときってその人気が欲しくて活動を始める人多いじゃん案外案外存外ねあの人気を手に入れた人もなんか違うなってなって消えていく人すごい多いから言ってこその人気な状態に耐えられる"
+          },
+          {
+            "speechId": 134,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 3536898,
+            "sourceEndMs": 3565577,
+            "text": "人気人気な状態でも注目される状態に耐えられる人と耐えられない人はいるっぽいねどうしてもわかんないけどいろいろあるわけじゃん例えばだけど日々ツイートしましょうとか日々配信しましょう日々活動しましょうとかまあわかんない他にもじゃあグッズのこと考えましょうなのかいろいろやるべきことって無限にやろうと思ったら出てくるわけでそういういろいろがあるのがを総合してそれに耐えられる人と耐えられない人結構いる"
+          },
+          {
+            "speechId": 135,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 3566520,
+            "sourceEndMs": 3593223,
+            "text": "なーって思うだからなんか数字持ってる人でも活動やっぱやめてく人多いし止まってく人多いし数字持ってるってのは別にそのみんながみんな知ってるぐらいの人じゃなくて普通にじゃあそれこそ配信するとどうせ数十人は絶対いるみたいな人でも結構止まってく人多いからなんか色々"
+          },
+          {
+            "speechId": 136,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 3596815,
+            "sourceEndMs": 3597949,
+            "text": "いろんな事情があるんだろうなとは"
+          },
+          {
+            "speechId": 137,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 3603240,
+            "sourceEndMs": 3629799,
+            "text": "たまにVになりませんかってDMくるけどあれなんだそんなんあるんだえーんーまあいろいろあるとは思うなそっち方向に関しては鈍感の方が楽ではあるね僕とかなんかそっちの方面は結構鈍感だからなんか"
+          },
+          {
+            "speechId": 138,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 3632069,
+            "sourceEndMs": 3655710,
+            "text": "まあよく言ってるけど自分がそのコンテンツ力的な意味でめちゃめちゃ強い人間だとはそんな思ってないけどそっち方面のそういう強さはめちゃめちゃ強いかな僕はなんかいろんなことに対してそんなにこうまあストレスはあれど潰れることはないめいかちゃんは2018年の3月じゃないかな確か"
+          },
+          {
+            "speechId": 139,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 3664316,
+            "sourceEndMs": 3686773,
+            "text": "いろんな強さがあるねVTuberにもコンテンツ力強いのが一番強いんですけどねコンテンツ力最強でそういう人気耐性がない人より僕の方が伸びる可能性伸びた後は生き続けられる可能性が高いってことだからないろんなものがありますね"
+          },
+          {
+            "speechId": 140,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 3703947,
+            "sourceEndMs": 3728150,
+            "text": "VTuberの歴史も解くと本当に面白いな色々喋れること出てくるわまあそう、向き不向きはめちゃめちゃあるよ最近求人サイトとかでもライバーの求人ありますね月給25万からとかでへぇーそれどういうビジネスモデルなの?"
+          },
+          {
+            "speechId": 141,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 3729280,
+            "sourceEndMs": 3756742,
+            "text": "僕25万払って誰かを雇ってそいつに25万以上の稼ぎを出させるのめちゃめちゃ難しいと思うからなしかも何がやばいって仮に僕がその月25万で雇われて人気ライバーになったら間違いなくやめるぞ絶対やめる25万以上自分の力で稼げるって分かった瞬間3秒でやめる"
+          },
+          {
+            "speechId": 142,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 3760755,
+            "sourceEndMs": 3788737,
+            "text": "だから僕はビジネスモデル的に成り立たないと思うんだけどそれどうなんですか知らんけどペンニンさんサブスクありがとうございますんなん独立しろって言ってるようなもんじゃないのどこまで契約で縛れるかまあなんかいろんなその活動周りね契約で縛れるけど縛ったところで感あるからね結局"
+          },
+          {
+            "speechId": 143,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 3792215,
+            "sourceEndMs": 3817832,
+            "text": "正直あのーやめます活動個人でやっていきますって言われたらできることないからできて本当に半年一年同ジャンルで活動するの縛るぐらいで無理だよそれ以外はことこと3500円スパチャンありがとうございますモデル買い取ってもらうくま"
+          },
+          {
+            "speechId": 144,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 3826798,
+            "sourceEndMs": 3855457,
+            "text": "人間の行動って縛れる限界があるから当たり前だけどいくら契約がどうこうつっても契約書にどんだけ盛り込んでようがそもそも限界があるわけで縛れること契約書に書いてる内容だと例えば10年活動できないって書いてあっても10年も人間の行動縛れるわけないじゃん本当にその契約書の効力があるかどうかって話になってくるわけだから無理くまよありがとうございます"
+          },
+          {
+            "speechId": 145,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 3860110,
+            "sourceEndMs": 3879043,
+            "text": "渋春から見て伸びる人に共通点ってある教えてほしい僕があの活動者とんでもない数の活動者を見てきてとんでもない数の活動者さんを研究してきて見つけた本当に多くの人に共通してる共通点はね実は一個だけあるんだよ僕は"
+          },
+          {
+            "speechId": 146,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 3883763,
+            "sourceEndMs": 3899767,
+            "text": "なんとあるんですね共通点はですね僕が見てきた中で伸びてる活動者さんの99%以上の人はなんとなく活動を続けてますね活動をやめてません本当"
+          },
+          {
+            "speechId": 147,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 3900351,
+            "sourceEndMs": 3929018,
+            "text": "ごくごくごくごく一部本当に1%には満たないような割合の人以外は活動をし続けてます以上これが一番の共通点これ言うといや当たり前とか言うけど当たり前って言うならって話よこれが当たり前じゃないからこれに気づいてない人がいるから活動をやめる人がたくさんいるんですよ"
+          },
+          {
+            "speechId": 148,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 3934567,
+            "sourceEndMs": 3953492,
+            "text": "大事よめちゃめちゃ大事よこれセトアサヒじゃん最近どう調子どう多少数字持ってるのにやめたりする人多いから僕知らないのかなと思ってるんだけどみんな知ってんだ"
+          },
+          {
+            "speechId": 149,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 3959356,
+            "sourceEndMs": 3987134,
+            "text": "研究をするためにライバルの配置を見るときに気をつけていたことはありましたかあーまあでもなんかやっぱ数字持ってる人のを見るときはなんでその人がそんなに見られてるのかってのはすげー考えてたな僕は絶対理由あるから黒い猫さん5件のメンバーシップリフトありがとうございます絶対理由あるから何の理由もなしにそんな何百人何千人に見られてる人っていないから"
+          },
+          {
+            "speechId": 150,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 3991500,
+            "sourceEndMs": 4009214,
+            "text": "なんでその人が見られてるのかどこにみんなは価値を感じて見に来てる声質がいいのかゲームのプレイが上手いのか話が面白いのかコメントの拾い方が上手いのか余裕で仕事辞めれたレベルお!"
+          },
+          {
+            "speechId": 151,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 4009214,
+            "sourceEndMs": 4016200,
+            "text": "おめでとう見てくるか瀬戸朝日最近どんな感じよ瀬戸朝日アットマーク動画見てね"
+          },
+          {
+            "speechId": 152,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 4029475,
+            "sourceEndMs": 4056759,
+            "text": "本当だなんかいい感じじゃんいい感じじゃんもういい感じじゃんアベレージ5000再生超えてくるとなんかいい感じだなってなるよねワニさんメンバー登録ありがとうございます"
+          },
+          {
+            "speechId": 153,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 4063717,
+            "sourceEndMs": 4084330,
+            "text": "しばはるは始めた時どれくらい成功する自信あったの自信かぁ成功が何かにもよるけどまあでも自分の中でハードルは僕めっちゃ下げたよいろいろとそういう意味では自信なかったね多分"
+          },
+          {
+            "speechId": 154,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 4091727,
+            "sourceEndMs": 4116646,
+            "text": "まあでもゆっくり長くやっていこうとは思ってたかな割とその多分自分の中で自信があったりだとかハードルを高く設定しちゃうと多分早めに折れちゃうと思うそこは僕マジで地ほど低かったから"
+          },
+          {
+            "speechId": 155,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 4117910,
+            "sourceEndMs": 4143377,
+            "text": "だって人生最後の目標10万人登録の予定だったんだよ僕本当に最後まあ一応もう活動10年やって10万人ヒーコラヒーコラ言いながら1日もう数人単位でも登録者数増やしていっていつかまあ本当に人生の中で10万人到達できるといいなーぐらいのマインドでこれは別にその口で言うだけじゃなくて本当に心の底からそう思ってたからどんな数字でも僕はしんどくなかったな"
+          },
+          {
+            "speechId": 156,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 4146617,
+            "sourceEndMs": 4167014,
+            "text": "これは何度か言ってるけど初めて配信した時の最高同設数が10人だったんだけど僕はめちゃめちゃ嬉しかったからそれが10人も来てくれんだって思ってもちろん最高だからずっと10人いたわけじゃないけどめちゃめちゃ自信になったのを覚えてるそれは"
+          },
+          {
+            "speechId": 157,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 4178140,
+            "sourceEndMs": 4198161,
+            "text": "たまにどうせ数百人とかでなんか小バカにされてる人を見かけるんだけど小バカにしてるやつすごいなって思いながら見てるその10人って比例なしですか?"
+          },
+          {
+            "speechId": 158,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 4198161,
+            "sourceEndMs": 4198822,
+            "text": "僕は全くなしだね"
+          },
+          {
+            "speechId": 159,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 4204880,
+            "sourceEndMs": 4233402,
+            "text": "昔のゲームの知り合いとかにもなんかこうこれからYouTubeで活動してくんだよねとか一切言わなかったからその時10人いたのは動画確か1本その時最初にやった配信PUBG配信だったんだけどニコニコとYouTubeにPUBGの動画を上げて20キルだか何だかの"
+          },
+          {
+            "speechId": 160,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 4239795,
+            "sourceEndMs": 4258183,
+            "text": "あとはTwitterとかも言うて1ヶ月足らずぐらいは多分ずっとツイートしてたんじゃないかなっていうのもあってお初の初配信って5週リモコン見て10人来たんじゃないかな事前の周知と事前の出してたコンテンツとって感じかな"
+          },
+          {
+            "speechId": 161,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 4277748,
+            "sourceEndMs": 4296768,
+            "text": "かなえくん見に来てくれたのとかは動画上げたおかげじゃないやっぱその時ゲーム上手いVTuberってあんまりいなかったからそれでまあかなえくん自身がPUBGやってたわけだけどPUBG自分と同じゲームやってるかつ上手い人がデビューしたからっていう理由で見に来てくれたはずだからその時に僕は動画上げる大事さをやっぱ知ったねー"
+          },
+          {
+            "speechId": 162,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 4325242,
+            "sourceEndMs": 4328869,
+            "text": "その10人から今何年くらい経ってる?"
+          },
+          {
+            "speechId": 163,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 4328869,
+            "sourceEndMs": 4336483,
+            "text": "4年ぐらいじゃないかな確か4年だねこの前に4周年配信したから懐かしいね"
+          },
+          {
+            "speechId": 164,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 4363002,
+            "sourceEndMs": 4382915,
+            "text": "やっぱり下積みというか人気がなくてもずっとやってた人の方が長く告げれるのかねそれはね僕ちなみにめっちゃそうだと思うななんか現実知ってるじゃん結局あの人気がなくてもえっと自分が自分に人気がない状態を"
+          },
+          {
+            "speechId": 165,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 4387319,
+            "sourceEndMs": 4412456,
+            "text": "感じたことがない人って普通の1視聴者さん1人選んでその人が例えば自分で活動を始めると何を思うかっていうと思ったより来ないなとかだと思うよなんで思ったより来ないかなって思うと何と比べてるかっていうと自分が普段見てる配信とか目にしたことある配信とかと比べるんだけど当たり前だけど何にも関係ない人にわざわざお勧めされるような配信者さんって数字持ってる人ばっかなのよ"
+          },
+          {
+            "speechId": 166,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 4416780,
+            "sourceEndMs": 4427668,
+            "text": "それこそじゃあTwitch行ってTwitchのトップで適当にどっか飛ぼうと思うとやっぱ数百人単位で視聴者いる人が基本的にトップにお勧めされてるから自分の中での平均値がそれになるのね"
+          },
+          {
+            "speechId": 167,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 4428864,
+            "sourceEndMs": 4452614,
+            "text": "こんぐらいいるのが当たり前なんだって思うわけよ実際はそこのオススメに表示されていないもっともっと本当その上積みの上積みじゃない大量の視聴者数一桁ないしそれこそゼロ人の人もたくさんいるはずなのに自分が活動してないとそれを目にする機会がないから自分の中の当たり前がそもそもハードルが高く設定されちゃうのでそこでギャップ生まれるとは思う"
+          },
+          {
+            "speechId": 168,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 4460314,
+            "sourceEndMs": 4472682,
+            "text": "ピッツァマンさん200円サーチャンありがとうございますいつぐらいからまあでも僕初と初めて1年経たないぐらいで仕事を辞めてるからまあ半年ちょいぐらいで確かまあとりあえず最低限生きていけるぐらいになったなーってのはあったかな"
+          },
+          {
+            "speechId": 169,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 4489844,
+            "sourceEndMs": 4499907,
+            "text": "どっかでやりたいんだよな子さんだけがコメントできる配信どっかでこの機能追加されてうわどっかでやりてーって思ったらこの前ちょっと前に前澄さんがやってて人がやってたら"
+          },
+          {
+            "speechId": 170,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 4500031,
+            "sourceEndMs": 4503268,
+            "text": "いいかーってなったどっかでまたいい服やろっかな"
+          },
+          {
+            "speechId": 171,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 4543057,
+            "sourceEndMs": 4571913,
+            "text": "モデレーターは貫通できんだえー強いなモデレーター懐かしいねなんか昔の話昔話好きなんだよよいしょはやたさん500円スパチャありがとうございますブログを15年"
+          },
+          {
+            "speechId": 172,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 4572993,
+            "sourceEndMs": 4589612,
+            "text": "すげーなえーレノンもどきさん200円スタチャンありがとうございますそっかメンバーシップもそうね7月とかだよね確か開放したのん?"
+          },
+          {
+            "speechId": 173,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 4589612,
+            "sourceEndMs": 4589953,
+            "text": "7月?"
+          },
+          {
+            "speechId": 174,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 4589953,
+            "sourceEndMs": 4592696,
+            "text": "7月だか8月だか確か僕の収益が通ったのって"
+          },
+          {
+            "speechId": 175,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 4624885,
+            "sourceEndMs": 4652671,
+            "text": "懐かしいね色々といやでもなんか活動を始めるときほんと2,3年2,3年ですらなんか遠い話だったけど今もうすでに4年経ってるしなんか4年経ったら10年も見えてくるよな本当になんかちょっと考えられるもんなその10年10年活動してる自分がちょっと想像つくもんね"
+          },
+          {
+            "speechId": 176,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 4674355,
+            "sourceEndMs": 4689302,
+            "text": "そう考えるとすごいなぁあと6年エペックス続いてるかねわかんねー"
+          },
+          {
+            "speechId": 177,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 4694710,
+            "sourceEndMs": 4718000,
+            "text": "なんかFPSおもろいFPSなかったら割とマジで僕麻雀やってる可能性あるな今自分の中でさ面白いと思えることティアランティングがあって麻雀が結構上にいるんだよ麻雀がけるFPSゲーム出ないかな何言ってるかわかんねえと思うけど"
+          },
+          {
+            "speechId": 178,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 4730145,
+            "sourceEndMs": 4759398,
+            "text": "あそうだそう明日そうですあのたかちゃんさんとかとコラボしますどういうコラボなのかわからんけれど本年くらいとんでもないコラボあれはボコボコにされるのかな僕告知引用だけ後でしとくかさあちょっと"
+          },
+          {
+            "speechId": 179,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 4760475,
+            "sourceEndMs": 4788185,
+            "text": "まだまだ喋りたいことはありますがちょっと用事があるので配信は一旦終わるか本日の配信は一旦終わって明日かなまた明日に"
+          },
+          {
+            "speechId": 180,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 4790155,
+            "sourceEndMs": 4798425,
+            "text": "配信やりますのでそちらでお会いしましょうそれではご視聴ありがとうございましたまたのご利用お待ちしておりますおつかれですバイバーイ"
+          },
+          {
+            "speechId": 181,
+            "sourceVideoId": "-DwSCDMCWDQ",
+            "sourceStartMs": 4809751,
+            "sourceEndMs": 4814695,
+            "text": "ご視聴ありがとうございました"
+          }
+        ]
+      }
+    ],
+    "outputContract": {
+      "format": "json_only",
+      "schema": {
+        "themes": [
+          {
+            "themeId": "string",
+            "title": "string",
+            "summary": "string",
+            "whyItCanBeClipped": "string",
+            "sourceVideoId": "string",
+            "sourceStartMs": "number",
+            "sourceEndMs": "number",
+            "supportingSpeechIds": [
+              "number_or_range_string"
+            ],
+            "representativeQuote": "string",
+            "riskNotes": [
+              "string"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "evaluationOnly": {
+    "expectedPath": "expected/r_ztjHaHmcg_partial_material_v001.json",
+    "expectedCutCount": 6,
+    "note": "モデルへ渡さず、一段目採点と漏えい検査だけで使う。"
+  }
+}

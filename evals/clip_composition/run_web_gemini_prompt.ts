@@ -31,8 +31,23 @@ type SelectedCut = {
   [key: string]: unknown;
 };
 
+type ThemeCandidate = {
+  themeId?: string;
+  title: string;
+  summary?: string;
+  whyItCanBeClipped?: string;
+  sourceVideoId?: string;
+  sourceStartMs: number;
+  sourceEndMs: number;
+  supportingSpeechIds?: Array<number | string>;
+  representativeQuote?: string;
+  riskNotes?: string[];
+  [key: string]: unknown;
+};
+
 type PromptOutput = {
-  selectedCuts: SelectedCut[];
+  selectedCuts?: SelectedCut[];
+  themes?: ThemeCandidate[];
   [key: string]: unknown;
 };
 
@@ -599,7 +614,9 @@ function extractPromptOutput(text: string, options: ExtractOptions = { prefer: '
   if (balancedOutput) {
     return balancedOutput;
   }
-  return options.allowPartial ? extractPartialSelectedCuts(text) : undefined;
+  return options.allowPartial
+    ? (extractPartialSelectedCuts(text) ?? extractPartialThemes(text))
+    : undefined;
 }
 
 function ordered<T>(items: T[], prefer: 'first' | 'last'): T[] {
@@ -673,6 +690,73 @@ function extractPartialSelectedCuts(text: string): PromptOutput | undefined {
       extractedCutCount: selectedCuts.length
     }
   };
+}
+
+function extractPartialThemes(text: string): PromptOutput | undefined {
+  if (!text.includes('"themes"')) {
+    return undefined;
+  }
+
+  const themes: ThemeCandidate[] = [];
+  const themePattern = /"sourceStartMs"\s*:\s*(\d+)[\s\S]{0,900}?"sourceEndMs"\s*:\s*(\d+)([\s\S]{0,1400}?)(?=\n\s*\}\s*,|\n\s*\}\s*\]|\n\s*\{\s*"themeId"|$)/g;
+  for (const match of text.matchAll(themePattern)) {
+    const sourceStartMs = Number(match[1]);
+    const sourceEndMs = Number(match[2]);
+    if (!Number.isFinite(sourceStartMs) || !Number.isFinite(sourceEndMs) || sourceEndMs <= sourceStartMs) {
+      continue;
+    }
+    const body = match[3] ?? '';
+    themes.push({
+      themeId: extractStringField(body, 'themeId') ?? `partial_theme_${themes.length + 1}`,
+      title: extractStringField(body, 'title') ?? 'Gemini回答が途中で切れたため、タイトルは完全には取得できなかった。',
+      summary: extractStringField(body, 'summary'),
+      whyItCanBeClipped: extractStringField(body, 'whyItCanBeClipped'),
+      sourceVideoId: extractStringField(body, 'sourceVideoId'),
+      sourceStartMs,
+      sourceEndMs,
+      representativeQuote: extractStringField(body, 'representativeQuote')
+    });
+  }
+
+  if (themes.length === 0) {
+    return undefined;
+  }
+
+  return {
+    themes,
+    extractionStatus: {
+      status: 'partial_themes_extracted_from_answer_text',
+      reason: 'Gemini回答JSONが完結していないため、回答本文に出ていたテーマ候補だけを採点候補として抽出した。',
+      extractedThemeCount: themes.length
+    }
+  };
+}
+
+function extractStringField(text: string, fieldName: string): string | undefined {
+  const marker = text.match(new RegExp(`"${fieldName}"\\s*:\\s*"`));
+  if (!marker || marker.index === undefined) {
+    return undefined;
+  }
+  const start = marker.index + marker[0].length;
+  let escaped = false;
+  let value = '';
+  for (let index = start; index < text.length; index += 1) {
+    const char = text[index];
+    if (escaped) {
+      value += char;
+      escaped = false;
+      continue;
+    }
+    if (char === '\\') {
+      escaped = true;
+      continue;
+    }
+    if (char === '"') {
+      return value;
+    }
+    value += char;
+  }
+  return value.trim() ? `${value.trim()} [回答途中切れ]` : undefined;
 }
 
 function extractReasonFromCutText(text: string): string | undefined {
@@ -751,27 +835,42 @@ function parsePromptOutput(text: string): PromptOutput | undefined {
   }
 
   const record = parsed as Record<string, unknown>;
-  if (!Array.isArray(record.selectedCuts)) {
+  if (!Array.isArray(record.selectedCuts) && !Array.isArray(record.themes)) {
     return undefined;
   }
 
-  const selectedCuts = record.selectedCuts.map((item, index) => {
-    if (!item || typeof item !== 'object' || Array.isArray(item)) {
-      return undefined;
-    }
-    const cut = item as Record<string, unknown>;
-    if (typeof cut.sourceStartMs !== 'number' || typeof cut.sourceEndMs !== 'number' || typeof cut.reason !== 'string') {
-      return undefined;
-    }
-    return cut as SelectedCut;
-  }).filter((item): item is SelectedCut => Boolean(item));
-  if (selectedCuts.length === 0) {
+  const selectedCuts = Array.isArray(record.selectedCuts)
+    ? record.selectedCuts.map((item) => {
+      if (!item || typeof item !== 'object' || Array.isArray(item)) {
+        return undefined;
+      }
+      const cut = item as Record<string, unknown>;
+      if (typeof cut.sourceStartMs !== 'number' || typeof cut.sourceEndMs !== 'number' || typeof cut.reason !== 'string') {
+        return undefined;
+      }
+      return cut as SelectedCut;
+    }).filter((item): item is SelectedCut => Boolean(item))
+    : undefined;
+  const themes = Array.isArray(record.themes)
+    ? record.themes.map((item) => {
+      if (!item || typeof item !== 'object' || Array.isArray(item)) {
+        return undefined;
+      }
+      const theme = item as Record<string, unknown>;
+      if (typeof theme.title !== 'string' || typeof theme.sourceStartMs !== 'number' || typeof theme.sourceEndMs !== 'number') {
+        return undefined;
+      }
+      return theme as ThemeCandidate;
+    }).filter((item): item is ThemeCandidate => Boolean(item))
+    : undefined;
+  if ((!selectedCuts || selectedCuts.length === 0) && (!themes || themes.length === 0)) {
     return undefined;
   }
 
   return {
     ...record,
-    selectedCuts
+    ...(selectedCuts ? { selectedCuts } : {}),
+    ...(themes ? { themes } : {})
   };
 }
 
@@ -787,11 +886,21 @@ function canonicalOutput(output: PromptOutput | undefined): string {
   if (!output) {
     return '';
   }
-  return JSON.stringify(output.selectedCuts.map((cut) => ({
-    sourceStartMs: cut.sourceStartMs,
-    sourceEndMs: cut.sourceEndMs,
-    reason: cut.reason,
-    usedSpeechIds: cut.usedSpeechIds
+  if (output.selectedCuts) {
+    return JSON.stringify(output.selectedCuts.map((cut) => ({
+      sourceStartMs: cut.sourceStartMs,
+      sourceEndMs: cut.sourceEndMs,
+      reason: cut.reason,
+      usedSpeechIds: cut.usedSpeechIds
+    })));
+  }
+  return JSON.stringify((output.themes ?? []).map((theme) => ({
+    themeId: theme.themeId,
+    title: theme.title,
+    sourceVideoId: theme.sourceVideoId,
+    sourceStartMs: theme.sourceStartMs,
+    sourceEndMs: theme.sourceEndMs,
+    supportingSpeechIds: theme.supportingSpeechIds
   })));
 }
 
@@ -820,7 +929,7 @@ async function waitForGeminiOutput(
     const answerText = extractAnswerText(state.bodyText ?? '', promptText);
     const answerOutput = extractPromptOutput(answerText, { prefer: 'first', allowPartial: true });
     const output = answerOutput ?? (
-      answerText.includes('"selectedCuts"')
+      answerText.includes('"selectedCuts"') || answerText.includes('"themes"')
         ? undefined
         : extractPromptOutput(state.bodyText ?? '', { prefer: 'last', allowPartial: false })
     );
@@ -855,7 +964,7 @@ async function waitForGeminiOutput(
     };
   }
 
-  throw new Error('Gemini返答から selectedCuts JSONを取得できません');
+  throw new Error('Gemini返答から selectedCuts/themes JSONを取得できません');
 }
 
 async function writeGeminiOutput(
@@ -876,7 +985,11 @@ async function writeGeminiOutput(
     rawResponseText
   }, null, 2)}\n`, 'utf8');
   console.log(`gemini output: ${options.outputPath}`);
-  console.log(`selected cut: ${output.selectedCuts[0].sourceStartMs}-${output.selectedCuts[0].sourceEndMs}`);
+  if (output.selectedCuts?.[0]) {
+    console.log(`selected cut: ${output.selectedCuts[0].sourceStartMs}-${output.selectedCuts[0].sourceEndMs}`);
+  } else {
+    console.log(`themes: ${output.themes?.length ?? 0}`);
+  }
 }
 
 async function extractExistingGeminiOutput(options: CliOptions): Promise<void> {
@@ -895,7 +1008,7 @@ async function extractExistingGeminiOutput(options: CliOptions): Promise<void> {
       const answerText = extractAnswerText(state.bodyText ?? '', '');
       const answerOutput = extractPromptOutput(answerText, { prefer: 'first', allowPartial: true });
       const output = answerOutput ?? (
-        answerText.includes('"selectedCuts"')
+        answerText.includes('"selectedCuts"') || answerText.includes('"themes"')
           ? undefined
           : extractPromptOutput(state.bodyText ?? '', { prefer: 'last', allowPartial: false })
       );
@@ -908,7 +1021,7 @@ async function extractExistingGeminiOutput(options: CliOptions): Promise<void> {
       cdp.close();
     }
   }
-  throw new Error('既存のWeb Geminiタブから selectedCuts JSONを取得できません');
+  throw new Error('既存のWeb Geminiタブから selectedCuts/themes JSONを取得できません');
 }
 
 async function runWebGeminiPrompt(options: CliOptions): Promise<void> {

@@ -1,0 +1,10235 @@
+# theme_generation_prompt_v001
+
+あなたは元配信から切り抜きテーマ候補を作る。
+
+## 目的
+
+元配信の文字起こしだけを見て、切り抜きとして成立しそうなテーマ候補を出す。最終的な切り抜き区間を確定する担当ではない。区間選択は後段のcompositionが行う。
+
+## 入力の読み方
+
+- 入力は元配信単体から得られる情報だけである。
+- 切り抜き動画、expected、照合結果、人間確認メモ、既存切り抜きタイトルは入力に含まれない。
+- `sourceTitle` は配信全体の文脈を読む補助情報として使う。
+- `segments` は元配信内の発話で、`speechId`、時刻、本文を持つ。
+- 入力が長尺配信の一部窓である場合は、その窓の範囲内で判断し、配信全体を見たように書かない。
+- 笑い、沈黙、音量変化などの非発話シグナルが入力にある場合は補助情報として扱う。本文より強い根拠として扱わない。
+
+## 禁止
+
+- 切り抜き動画や正解区間を知っている前提で書かない。
+- 元配信本文にない場面や反応を作らない。
+- 秒数だけを根拠に候補を作らない。
+- 「雑談」「面白い場面」のように広すぎて何を切るか決まらないテーマを出さない。
+- 既存切り抜きのタイトル風に盛った表現を、本文根拠なしで作らない。
+
+## 判断方針
+
+- 候補は、元配信内の発話から見どころが説明できる具体的なテーマにする。
+- 単独で視聴者に伝わるフリ、展開、反応、結論がある場面を優先する。
+- 同じ話題が離れた場所で補足される場合は、同じテーマ候補の根拠として複数の発話範囲を持ってよい。
+- 根拠範囲は、候補テーマを説明するために必要な発話だけにする。配信全体や長い雑談を大きく囲わない。
+- 迷う候補は `riskNotes` に弱点を書く。
+
+## 出力
+
+JSONだけを返す。説明文やMarkdownを付けない。
+
+`requestedThemeCount` が指定されている場合は、その件数を上限にする。良い候補が足りない場合は、無理に埋めない。
+
+```json
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "短いテーマ名",
+      "summary": "何が見どころなのか",
+      "whyItCanBeClipped": "切り抜きとして成立すると判断した理由",
+      "sourceVideoId": "元動画ID",
+      "sourceStartMs": 123000,
+      "sourceEndMs": 153000,
+      "supportingSpeechIds": ["12-47", 52, "55-60"],
+      "representativeQuote": "根拠になる短い本文",
+      "riskNotes": [
+        "前後文脈が必要"
+      ]
+    }
+  ]
+}
+```
+
+## supportingSpeechIds
+
+- 連続する発話IDは `"12-47"` のような範囲文字列で返す。
+- 不連続な発話IDは、個別の数値として同じ配列に入れる。
+- 連続範囲と個別IDを混ぜてよい。
+- 根拠に使っていない発話IDを含めない。
+
+## 時刻
+
+- `sourceStartMs` は根拠発話範囲の最初の時刻にする。
+- `sourceEndMs` は根拠発話範囲の最後の時刻にする。
+- 正解境界を当てる評価ではないが、後段の機械判定でexpected区間との重なりを見るため、候補根拠の範囲を本文に基づいて正しく出す。
+
+## 入力JSON
+
+```json
+{
+  "task": "source_only_theme_generation",
+  "generationSystem": "theme-llm-v001",
+  "promptVersion": "theme_generation_prompt_v001",
+  "requestedThemeCount": 8,
+  "inputPolicy": {
+    "sourceOnly": true,
+    "noClipInfo": true,
+    "noExpected": true,
+    "noAlignment": true,
+    "noHumanReverseTheme": true
+  },
+  "windowing": {
+    "applied": true,
+    "mode": "speech-time",
+    "windowId": "window_04_vWv9H-hfHXo",
+    "reason": "未分割入力でEdgeレンダラが高負荷化して戻らなかったため、発話境界を保った時間窓へ分割する。",
+    "maxPromptBytes": 340000,
+    "overlapMs": 180000,
+    "sourceVideoId": "vWv9H-hfHXo",
+    "sourceStartMs": 8810,
+    "sourceEndMs": 13595840
+  },
+  "sources": [
+    {
+      "sourceVideoId": "vWv9H-hfHXo",
+      "sourceUrl": "https://www.youtube.com/live/vWv9H-hfHXo?feature=share",
+      "transcriptKind": "youtube_auto_caption",
+      "language": "ja",
+      "rawSegmentCount": 17356,
+      "promptSegmentCount": 1442,
+      "segmentCompaction": {
+        "method": "source-only transcript segments concatenated until sentence-ending punctuation",
+        "scoringRole": "none",
+        "note": "読みやすさのための表現変換であり、expected、切り抜き、照合結果、人間確認メモは使わない。"
+      },
+      "segments": [
+        {
+          "speechId": 1,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 8810,
+          "sourceEndMs": 23980,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 2,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 32630,
+          "sourceEndMs": 35809,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 3,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 39860,
+          "sourceEndMs": 43049,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 4,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 56370,
+          "sourceEndMs": 63570,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 5,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 96079,
+          "sourceEndMs": 106159,
+          "text": "はい音入れました始まりました[音楽]こんばんは[音楽]"
+        },
+        {
+          "speechId": 6,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 108060,
+          "sourceEndMs": 115520,
+          "text": "タイトルとか前提とかから比べて全然ゆるい流れでやっていくよ"
+        },
+        {
+          "speechId": 7,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 116479,
+          "sourceEndMs": 138920,
+          "text": "声低くないもう完全にオフのテンションだよ配信なのに配信なのに新しいね[音楽]もうねこのメンツだったらなんか自然と緩くなっちゃうんだそれダメですねあなた"
+        },
+        {
+          "speechId": 8,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 139379,
+          "sourceEndMs": 152120,
+          "text": "意識低いですよ意識高いやり方を教えてちょっと意識高いやり方慣れはね怖いということをね知ること"
+        },
+        {
+          "speechId": 9,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 155760,
+          "sourceEndMs": 159500,
+          "text": "なれるのって怖いこと"
+        },
+        {
+          "speechId": 10,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 164780,
+          "sourceEndMs": 170720,
+          "text": "わしら何年目から言ってんだろう"
+        },
+        {
+          "speechId": 11,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 179440,
+          "sourceEndMs": 186920,
+          "text": "[音楽]今どこにいんの"
+        },
+        {
+          "speechId": 12,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 187800,
+          "sourceEndMs": 194720,
+          "text": "を開いた外やんあほんとだ"
+        },
+        {
+          "speechId": 13,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 197120,
+          "sourceEndMs": 200120,
+          "text": "お前お前"
+        },
+        {
+          "speechId": 14,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 200780,
+          "sourceEndMs": 206900,
+          "text": "本気か嘘本当だ"
+        },
+        {
+          "speechId": 15,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 208220,
+          "sourceEndMs": 212659,
+          "text": "私の手シルクタッチついてなかった"
+        },
+        {
+          "speechId": 16,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 213500,
+          "sourceEndMs": 217680,
+          "text": "続いないての"
+        },
+        {
+          "speechId": 17,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 225120,
+          "sourceEndMs": 227659,
+          "text": "奪われたかもしれん"
+        },
+        {
+          "speechId": 18,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 228200,
+          "sourceEndMs": 240620,
+          "text": "新しいの始まると能力元に戻るからさ長期があるんじゃないここほらいか右腕持ってれる"
+        },
+        {
+          "speechId": 19,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 245820,
+          "sourceEndMs": 250760,
+          "text": "[音楽]木の枝だ"
+        },
+        {
+          "speechId": 20,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 251400,
+          "sourceEndMs": 253640,
+          "text": "耐久力"
+        },
+        {
+          "speechId": 21,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 254720,
+          "sourceEndMs": 257900,
+          "text": "入れてね"
+        },
+        {
+          "speechId": 22,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 258299,
+          "sourceEndMs": 260959,
+          "text": "緑の服くれよ"
+        },
+        {
+          "speechId": 23,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 261979,
+          "sourceEndMs": 279560,
+          "text": "ダイヤモンドそれってスクロビルドして作ったってことスクロールそのとして色でしょ確かにテラサラしてるもんなこっから加工できませんよって言われてる"
+        },
+        {
+          "speechId": 24,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 279740,
+          "sourceEndMs": 292160,
+          "text": "マスターなぁフード欲しいでももう疲れちゃってなんでここから動けなくて"
+        },
+        {
+          "speechId": 25,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 293600,
+          "sourceEndMs": 313100,
+          "text": "今日いっぱい働くことになるらしいよそうだよこの間の競馬の借金溜まってんぞいくらになりましたかもうねそのまま耳にスローで返すだけじゃ足りないよリス溜まってくから[音楽]"
+        },
+        {
+          "speechId": 26,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 313139,
+          "sourceEndMs": 318639,
+          "text": "そうだよ[音楽]"
+        },
+        {
+          "speechId": 27,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 318660,
+          "sourceEndMs": 321440,
+          "text": "何それ"
+        },
+        {
+          "speechId": 28,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 323039,
+          "sourceEndMs": 327860,
+          "text": "ゲームやった[音楽]昨日じゃない"
+        },
+        {
+          "speechId": 29,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 327979,
+          "sourceEndMs": 337280,
+          "text": "ってことそうだねもう何日だったかもう覚えてないんだ体で思い出させるしかないんだ"
+        },
+        {
+          "speechId": 30,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 338100,
+          "sourceEndMs": 340759,
+          "text": "それになの"
+        },
+        {
+          "speechId": 31,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 341699,
+          "sourceEndMs": 348979,
+          "text": "最近そろそろマイクラがアップデートされるっていう情報が入りまして"
+        },
+        {
+          "speechId": 32,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 349940,
+          "sourceEndMs": 394520,
+          "text": "また新しくいつもマイクラアップデートからがやってないよ[音楽]地点も知らないこっちゃしてやってないかしてみたいなぁアップデートがウーパールーパーは見た私も見た[音楽]止まってるキツネは見てない今今日やるのはもうApple[音楽]新しいじゃあ[音楽]働いたら見せてやるよ働いたら終わったら見せてやるよ"
+        },
+        {
+          "speechId": 33,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 395430,
+          "sourceEndMs": 400520,
+          "text": "[音楽]見せてやるよ"
+        },
+        {
+          "speechId": 34,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 415940,
+          "sourceEndMs": 419120,
+          "text": "これでいい"
+        },
+        {
+          "speechId": 35,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 422350,
+          "sourceEndMs": 427259,
+          "text": "[音楽]でしょう"
+        },
+        {
+          "speechId": 36,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 435000,
+          "sourceEndMs": 447370,
+          "text": "助けて[音楽]殴ってやったナイスやるじゃん[音楽]"
+        },
+        {
+          "speechId": 37,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 453360,
+          "sourceEndMs": 461900,
+          "text": "目玉と爪翼裏ビルドしよう何も落ちない"
+        },
+        {
+          "speechId": 38,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 462720,
+          "sourceEndMs": 472099,
+          "text": "というわけでどんなきゃって思っちゃったキラキン拾えないの拾えないよ"
+        },
+        {
+          "speechId": 39,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 477479,
+          "sourceEndMs": 480479,
+          "text": "あれ"
+        },
+        {
+          "speechId": 40,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 480660,
+          "sourceEndMs": 482840,
+          "text": "熱くない"
+        },
+        {
+          "speechId": 41,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 483180,
+          "sourceEndMs": 497479,
+          "text": "ダメージないの[音楽]マイクロすげーしかダメージないよ[音楽]やるじゃん"
+        },
+        {
+          "speechId": 42,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 500900,
+          "sourceEndMs": 503970,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 43,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 504120,
+          "sourceEndMs": 507919,
+          "text": "写真撮っとこうやった"
+        },
+        {
+          "speechId": 44,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 508759,
+          "sourceEndMs": 543140,
+          "text": "下半身大炎開けちゃったよかったね時間が解決してくれるんだな歴史に学ぶねやっぱ[音楽]マイクラって歴史なんだよもうもう10年何年だ10年以上やっとるんだよみんな僕が生まれるある前からマイクラってからね[音楽]じゃあそんなマイクラアップデートにて備えこの形ってキノコじゃない"
+        },
+        {
+          "speechId": 45,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 543620,
+          "sourceEndMs": 548959,
+          "text": "話をはての村なんじゃない"
+        },
+        {
+          "speechId": 46,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 551040,
+          "sourceEndMs": 554060,
+          "text": "かも"
+        },
+        {
+          "speechId": 47,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 554880,
+          "sourceEndMs": 563000,
+          "text": "その先にはもうあんななんかもうエメラルドみたいと金のブロックなやつしかねえよ"
+        },
+        {
+          "speechId": 48,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 563580,
+          "sourceEndMs": 569180,
+          "text": "今普通にスティック押し込んで望遠ちゃっ鏡を使おうとした"
+        },
+        {
+          "speechId": 49,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 571440,
+          "sourceEndMs": 576080,
+          "text": "持ってないこれしかない"
+        },
+        {
+          "speechId": 50,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 578240,
+          "sourceEndMs": 600019,
+          "text": "話聞いて話聞いて話を聞いて[音楽]話を聞いて何これからお前らもうネザーで氷を張ってってもらうよ"
+        },
+        {
+          "speechId": 51,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 601800,
+          "sourceEndMs": 615620,
+          "text": "そうじゃあサファイア集めるところからそうだよもう知らね知らねーか俺そこまで進んでねえよそれ"
+        },
+        {
+          "speechId": 52,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 615920,
+          "sourceEndMs": 621920,
+          "text": "サファイアがどうなんて話し知らないよサファイアも手に入れてないの"
+        },
+        {
+          "speechId": 53,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 625920,
+          "sourceEndMs": 633080,
+          "text": "俺よ実況しましたよ実況見て済ましましたそうだよ"
+        },
+        {
+          "speechId": 54,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 635160,
+          "sourceEndMs": 640880,
+          "text": "ネタバレになっちゃうからね全部売って低かったよ"
+        },
+        {
+          "speechId": 55,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 641640,
+          "sourceEndMs": 644870,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 56,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 645720,
+          "sourceEndMs": 653889,
+          "text": "ルビーとトパーズもね全部売ったよ[音楽]"
+        },
+        {
+          "speechId": 57,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 654000,
+          "sourceEndMs": 661040,
+          "text": "トパーズは黄色いやつでしょあえ赤ちゃんも知らないの"
+        },
+        {
+          "speechId": 58,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 661980,
+          "sourceEndMs": 666200,
+          "text": "黄色じゃなくねなんだっけあれ"
+        },
+        {
+          "speechId": 59,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 666959,
+          "sourceEndMs": 673040,
+          "text": "飛ばず[音楽]黄色いやつじゃないよ"
+        },
+        {
+          "speechId": 60,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 673820,
+          "sourceEndMs": 681369,
+          "text": "やめてよついこいてよ[音楽]"
+        },
+        {
+          "speechId": 61,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 682579,
+          "sourceEndMs": 702380,
+          "text": "多分こっち[音楽]トパーズそうそう[音楽]じゃなかったっけなんか銀色の丸くのオパールねそれオパールか"
+        },
+        {
+          "speechId": 62,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 706380,
+          "sourceEndMs": 710120,
+          "text": "私の分もしといてや"
+        },
+        {
+          "speechId": 63,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 710440,
+          "sourceEndMs": 721220,
+          "text": "[音楽]かける3かける[音楽]願いましては"
+        },
+        {
+          "speechId": 64,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 724750,
+          "sourceEndMs": 727840,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 65,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 729360,
+          "sourceEndMs": 732140,
+          "text": "いいね"
+        },
+        {
+          "speechId": 66,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 732730,
+          "sourceEndMs": 735820,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 67,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 740380,
+          "sourceEndMs": 754760,
+          "text": "[音楽]じゃあ説明聞くかそうだなそろそろやっとマグマハウス[音楽]マグマハウス"
+        },
+        {
+          "speechId": 68,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 755220,
+          "sourceEndMs": 758970,
+          "text": "熱いよ[音楽]"
+        },
+        {
+          "speechId": 69,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 763920,
+          "sourceEndMs": 770540,
+          "text": "[笑い]ここは危険"
+        },
+        {
+          "speechId": 70,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 770660,
+          "sourceEndMs": 776899,
+          "text": "じゃあ入ってみるか[音楽]1回目ね"
+        },
+        {
+          "speechId": 71,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 780380,
+          "sourceEndMs": 785510,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 72,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 797820,
+          "sourceEndMs": 804539,
+          "text": "入っちゃったよ俺たちあぶねーからよ[音楽]"
+        },
+        {
+          "speechId": 73,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 806710,
+          "sourceEndMs": 818660,
+          "text": "[音楽]100点何が[音楽]白じゃん"
+        },
+        {
+          "speechId": 74,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 819200,
+          "sourceEndMs": 828800,
+          "text": "がだ作ったお城よ[音楽]つっだたら城よな"
+        },
+        {
+          "speechId": 75,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 830399,
+          "sourceEndMs": 833899,
+          "text": "ハイラルハイラル"
+        },
+        {
+          "speechId": 76,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 836120,
+          "sourceEndMs": 851190,
+          "text": "マウンテンなら作れる確かに手頃な山まず見つけたらいいからなちょいちょい崩したら溶岩流したらいいから[音楽]"
+        },
+        {
+          "speechId": 77,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 851519,
+          "sourceEndMs": 855560,
+          "text": "もうこれからデスマウンテンみたいなとこ行くから"
+        },
+        {
+          "speechId": 78,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 856940,
+          "sourceEndMs": 861800,
+          "text": "見た目のところ行くから加工みたいなところ"
+        },
+        {
+          "speechId": 79,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 862530,
+          "sourceEndMs": 866159,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 80,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 870180,
+          "sourceEndMs": 874220,
+          "text": "記対策しないといけない"
+        },
+        {
+          "speechId": 81,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 876360,
+          "sourceEndMs": 880399,
+          "text": "叫んでるじゃんやべえよ"
+        },
+        {
+          "speechId": 82,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 885000,
+          "sourceEndMs": 898040,
+          "text": "運動会会場乗っイェーイて向こうまで行って[音楽]出ちゃう"
+        },
+        {
+          "speechId": 83,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 900570,
+          "sourceEndMs": 903669,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 84,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 906480,
+          "sourceEndMs": 908899,
+          "text": "買って"
+        },
+        {
+          "speechId": 85,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 912260,
+          "sourceEndMs": 916160,
+          "text": "ここで死ぬんじゃないの"
+        },
+        {
+          "speechId": 86,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 918530,
+          "sourceEndMs": 921679,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 87,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 925040,
+          "sourceEndMs": 933380,
+          "text": "ウルトラハンドを使って今高宮が向いてる方が前でもうわからなかったね"
+        },
+        {
+          "speechId": 88,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 940220,
+          "sourceEndMs": 945440,
+          "text": "しゃがんでたわいいぜ"
+        },
+        {
+          "speechId": 89,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 955139,
+          "sourceEndMs": 964100,
+          "text": "まあもうね見てもらった通りこんなね東西南北に氷のえ道が引かれてるじゃないですかなん"
+        },
+        {
+          "speechId": 90,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 966900,
+          "sourceEndMs": 978500,
+          "text": "[音楽]だからもっとあれしてほしいなおしゃれにしてほしい表記"
+        },
+        {
+          "speechId": 91,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 980600,
+          "sourceEndMs": 992420,
+          "text": "この先とても素敵な新しい世界が広がってるよってじゃあ書いて書いて書いてちょっと字が書けないからやめとこ"
+        },
+        {
+          "speechId": 92,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 997220,
+          "sourceEndMs": 1006279,
+          "text": "写真で撮ったやつってことどうやってなんよとなく頑張るんだ"
+        },
+        {
+          "speechId": 93,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 1007140,
+          "sourceEndMs": 1015759,
+          "text": "[音楽]ビジョンよがある我々ビジョンがあるそれ以外は全部ない"
+        },
+        {
+          "speechId": 94,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 1015920,
+          "sourceEndMs": 1019120,
+          "text": "ビジョンだけある"
+        },
+        {
+          "speechId": 95,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 1021860,
+          "sourceEndMs": 1036280,
+          "text": "それでえっとこのねまあこっから1500ブロックさっき言ったらこのね1.19っていうさマイクラのアップデート予算を楽しめるわけですよ"
+        },
+        {
+          "speechId": 96,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 1040280,
+          "sourceEndMs": 1047789,
+          "text": "えじゃあ最近の流行り何最近の流行り最近の地底だよ[音楽]"
+        },
+        {
+          "speechId": 97,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 1048380,
+          "sourceEndMs": 1052720,
+          "text": "あれだよもう本当に正気とかみたいなあるよ"
+        },
+        {
+          "speechId": 98,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 1054220,
+          "sourceEndMs": 1068080,
+          "text": "だけどもう来月にはそれが時代遅れになるんよだ時代もう次からなんかあの桜の木が生えたりとか"
+        },
+        {
+          "speechId": 99,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 1068140,
+          "sourceEndMs": 1081400,
+          "text": "なんかの色々あるんだよそういうがサクラそうだよ春はもう実況終わってそろそろ次が来るのにだよなんで合わせなかったんだろう"
+        },
+        {
+          "speechId": 100,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 1081799,
+          "sourceEndMs": 1095980,
+          "text": "それのはちょっとマイクラ側アプデのあれがあったんでしょう[音楽]あんまり言わなかったんだねきっとだからなんかいろんなラクダとかそういう動物とか生まれてくるわけですよこれから"
+        },
+        {
+          "speechId": 101,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 1096640,
+          "sourceEndMs": 1121840,
+          "text": "そういうのをみんなが見られるようにこの1500ブロックからさらに先の方に道を引いて1.20の要素を見られるようにするんですよみんなで優しいじゃんでもそれって誰に頼まれたの誰にも頼まてれないんだ俺が勝手にやってるだけなんだ"
+        },
+        {
+          "speechId": 102,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 1124880,
+          "sourceEndMs": 1143500,
+          "text": "もういいやつだね昔ねもうひたすらもう地下を掘りまくってねワールドを開拓した結果みんなその先のアップデート要素に行きつけ話ないじゃんみたいなになったことはありまして"
+        },
+        {
+          "speechId": 103,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 1145240,
+          "sourceEndMs": 1156760,
+          "text": "アップデート前に接続しちゃったからだよ[音楽]観測地域じゃないとここで要素って出てこないのそうだよ"
+        },
+        {
+          "speechId": 104,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 1157250,
+          "sourceEndMs": 1174520,
+          "text": "[笑い]もっと先まで見つけちゃったもっと先まで[音楽]ちょっと道を引いておいてアップデートされてからそこのネザー通ったらもうはいここアップデートされたとこですなるんだよ"
+        },
+        {
+          "speechId": 105,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 1176140,
+          "sourceEndMs": 1202079,
+          "text": "っていうのがあるからもうじゃあそれでね責任とってやるからつってるのを俺は何年かやってんのもう年単位ですか年単位でやってるんだよ頑張るじゃんっていうのでちょっとせっかくだから一人でやるのもなと思ってお前ら借金あるから[音楽]"
+        },
+        {
+          "speechId": 106,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 1202940,
+          "sourceEndMs": 1219940,
+          "text": "借金あるよなタリンタリン足りないからもうこの先まで攻撃引いてもらうのお前らにやってもらうんだよ[音楽]お前お前らがこっから先まで氷を引くんだよ1000ブロック分"
+        },
+        {
+          "speechId": 107,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 1223960,
+          "sourceEndMs": 1227440,
+          "text": "やってもらいますよ"
+        },
+        {
+          "speechId": 108,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 1227660,
+          "sourceEndMs": 1240000,
+          "text": "氷取ってくるからこっちで待ってろえ待ってんだ僕たちも行こうぜ[音楽]"
+        },
+        {
+          "speechId": 109,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 1244160,
+          "sourceEndMs": 1247660,
+          "text": "連れてくから連れて行くから"
+        },
+        {
+          "speechId": 110,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 1248679,
+          "sourceEndMs": 1262780,
+          "text": "なんで待たないの違うなどうしてまたないのここじゃないわ声もいるわどうして待たないの痛い痛い痛い"
+        },
+        {
+          "speechId": 111,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 1269640,
+          "sourceEndMs": 1276820,
+          "text": "[音楽]この岩盤のゲートを通るんだ"
+        },
+        {
+          "speechId": 112,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 1277100,
+          "sourceEndMs": 1280179,
+          "text": "4番のゲート"
+        },
+        {
+          "speechId": 113,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 1280640,
+          "sourceEndMs": 1287740,
+          "text": "被ってんだなんかかぶってんぞ知らないなんで呪われた"
+        },
+        {
+          "speechId": 114,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 1290900,
+          "sourceEndMs": 1296730,
+          "text": "ソロスイッチ[音楽]"
+        },
+        {
+          "speechId": 115,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 1300100,
+          "sourceEndMs": 1308919,
+          "text": "知らない罠[音楽]呪われてる"
+        },
+        {
+          "speechId": 116,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 1309290,
+          "sourceEndMs": 1336760,
+          "text": "[音楽]めっちゃ悲しそうな顔してる競馬たで負け人顔から笑顔が消えたハイライトがない[音楽]じゃあちょっと氷取ってくるからそこで待っとれあ飛んだ飛びたい飛びたいパラセール欲しい"
+        },
+        {
+          "speechId": 117,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 1337900,
+          "sourceEndMs": 1362819,
+          "text": "しかできねえだろうがよ持ったてパラねーセール課金してんじゃよなんで持ってんのこのセール持ってたこここいらはクリアしてよいや[音楽]いやよ生物じゃ[音楽]"
+        },
+        {
+          "speechId": 118,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 1364400,
+          "sourceEndMs": 1367059,
+          "text": "よ"
+        },
+        {
+          "speechId": 119,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 1368150,
+          "sourceEndMs": 1376760,
+          "text": "[音楽]1人でそこで待ってるんだよ[音楽]"
+        },
+        {
+          "speechId": 120,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 1377179,
+          "sourceEndMs": 1396760,
+          "text": "荷物OKと何持ってるの入れちゃえばイカとか紙とかさ陶器とかポピーとかあーもう置いてこいいらない使わない大きくしてないんじゃない僕ねえやってから"
+        },
+        {
+          "speechId": 121,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 1404059,
+          "sourceEndMs": 1411580,
+          "text": "サトウキビちゃん緑で[笑い]"
+        },
+        {
+          "speechId": 122,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 1413940,
+          "sourceEndMs": 1419620,
+          "text": "[音楽]緑じゃないそれはかぼちゃ"
+        },
+        {
+          "speechId": 123,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 1419679,
+          "sourceEndMs": 1429460,
+          "text": "かぼちゃと鎧かぼちゃ使って釣り作ろうどこだ鍋"
+        },
+        {
+          "speechId": 124,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 1430159,
+          "sourceEndMs": 1436480,
+          "text": "鍋に入れてさ直火でやる料理しようぜ"
+        },
+        {
+          "speechId": 125,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 1437179,
+          "sourceEndMs": 1439419,
+          "text": "鍋欲しい"
+        },
+        {
+          "speechId": 126,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 1441260,
+          "sourceEndMs": 1444220,
+          "text": "鍋作りが方わかる"
+        },
+        {
+          "speechId": 127,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 1445960,
+          "sourceEndMs": 1452020,
+          "text": "[音楽]ここへんら"
+        },
+        {
+          "speechId": 128,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 1452050,
+          "sourceEndMs": 1455150,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 129,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 1459860,
+          "sourceEndMs": 1463120,
+          "text": "ゴミ箱ほしいな"
+        },
+        {
+          "speechId": 130,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 1463660,
+          "sourceEndMs": 1467459,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 131,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 1468679,
+          "sourceEndMs": 1475239,
+          "text": "火薬ダイヤモンド[音楽]"
+        },
+        {
+          "speechId": 132,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 1479500,
+          "sourceEndMs": 1482679,
+          "text": "いっぱいあるじゃん"
+        },
+        {
+          "speechId": 133,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 1487039,
+          "sourceEndMs": 1503020,
+          "text": "なんすか[音楽]えこれサファイア[音楽]サファイアのスクラビルトしようあれくっつかないなこれ"
+        },
+        {
+          "speechId": 134,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 1503660,
+          "sourceEndMs": 1507419,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 135,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 1509900,
+          "sourceEndMs": 1513580,
+          "text": "まだ力取り戻してないかも"
+        },
+        {
+          "speechId": 136,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 1516440,
+          "sourceEndMs": 1522159,
+          "text": "序盤だからかスタールホースいいんじゃん"
+        },
+        {
+          "speechId": 137,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 1524360,
+          "sourceEndMs": 1531079,
+          "text": "どこにいんのインパクト[音楽]"
+        },
+        {
+          "speechId": 138,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 1534620,
+          "sourceEndMs": 1537279,
+          "text": "競馬場どうしたんだよ"
+        },
+        {
+          "speechId": 139,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 1540080,
+          "sourceEndMs": 1557320,
+          "text": "夏何年前の話それこの前のさだから企画でさついに競馬場できたんだと思ってさ言ったらさ何もなくてさ[音楽]そこねじゃなかったんだ"
+        },
+        {
+          "speechId": 140,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 1557820,
+          "sourceEndMs": 1560910,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 141,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 1563720,
+          "sourceEndMs": 1567940,
+          "text": "すごいよね逆に歴史"
+        },
+        {
+          "speechId": 142,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 1568760,
+          "sourceEndMs": 1572799,
+          "text": "氷持っよてきたやったー"
+        },
+        {
+          "speechId": 143,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 1573320,
+          "sourceEndMs": 1577240,
+          "text": "じゃあまた戻るよ"
+        },
+        {
+          "speechId": 144,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 1578740,
+          "sourceEndMs": 1585520,
+          "text": "しっかり暑くなりましたよでよまた暑いとこ戻るんだ"
+        },
+        {
+          "speechId": 145,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 1594620,
+          "sourceEndMs": 1611919,
+          "text": "じゃあここからもう[音楽]最果てまで行ってきてちょっと待ってもうこっからもうずっと生き残ってずっと進んで秦野村まで行ってきたよそう私も弟に行こう"
+        },
+        {
+          "speechId": 146,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 1612340,
+          "sourceEndMs": 1621520,
+          "text": "[音楽]その組み合わせになるじゃあついてきて私がこれるついてかな果たして"
+        },
+        {
+          "speechId": 147,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 1623960,
+          "sourceEndMs": 1626500,
+          "text": "ちょっと待って"
+        },
+        {
+          "speechId": 148,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 1627620,
+          "sourceEndMs": 1633760,
+          "text": "泣いてる一人で泣いてるでも涙は見せない"
+        },
+        {
+          "speechId": 149,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 1638360,
+          "sourceEndMs": 1651400,
+          "text": "涙見えない仮面をかぶってるから涙見せそうないようにかぶってんだ[音楽]心で泣いて顔で笑います"
+        },
+        {
+          "speechId": 150,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 1652460,
+          "sourceEndMs": 1659080,
+          "text": "そう風いうに調教されてんだなそう配信者だから"
+        },
+        {
+          "speechId": 151,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 1659360,
+          "sourceEndMs": 1667600,
+          "text": "配信者は人前で泣いちゃいけないみんなを笑顔にするために安心してます"
+        },
+        {
+          "speechId": 152,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 1670060,
+          "sourceEndMs": 1673630,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 153,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 1674120,
+          "sourceEndMs": 1683380,
+          "text": "観光地調べ地てみたらホットな観光[音楽]ホットじゃん"
+        },
+        {
+          "speechId": 154,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 1683480,
+          "sourceEndMs": 1686679,
+          "text": "ここよまで来た"
+        },
+        {
+          "speechId": 155,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 1687140,
+          "sourceEndMs": 1697360,
+          "text": "ホットだね[音楽]じゃあここから先どんどん掘ってって功利て敷いいくよ"
+        },
+        {
+          "speechId": 156,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 1700340,
+          "sourceEndMs": 1704600,
+          "text": "折ってって氷を敷く頂戴"
+        },
+        {
+          "speechId": 157,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 1707990,
+          "sourceEndMs": 1715609,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 158,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 1716480,
+          "sourceEndMs": 1727360,
+          "text": "いいだの持ってんじゃんもう一滴ぼりなんだここはえ何これキモいいいんじゃない"
+        },
+        {
+          "speechId": 159,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 1727520,
+          "sourceEndMs": 1729940,
+          "text": "血管てる浮いよ"
+        },
+        {
+          "speechId": 160,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 1730340,
+          "sourceEndMs": 1734020,
+          "text": "これだこれ実は木なんよ"
+        },
+        {
+          "speechId": 161,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 1734240,
+          "sourceEndMs": 1737080,
+          "text": "本当"
+        },
+        {
+          "speechId": 162,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 1739220,
+          "sourceEndMs": 1742360,
+          "text": "シンクのミキ"
+        },
+        {
+          "speechId": 163,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 1742880,
+          "sourceEndMs": 1747860,
+          "text": "正気だ勝機あるよネザー"
+        },
+        {
+          "speechId": 164,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 1748460,
+          "sourceEndMs": 1751460,
+          "text": "ネザーボートブロック"
+        },
+        {
+          "speechId": 165,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 1751700,
+          "sourceEndMs": 1754700,
+          "text": "ウ"
+        },
+        {
+          "speechId": 166,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 1755000,
+          "sourceEndMs": 1757179,
+          "text": "ムって何"
+        },
+        {
+          "speechId": 167,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 1758659,
+          "sourceEndMs": 1761080,
+          "text": "倒せ倒せ"
+        },
+        {
+          "speechId": 168,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 1763870,
+          "sourceEndMs": 1772419,
+          "text": "[音楽]人間じゃないそれ"
+        },
+        {
+          "speechId": 169,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 1772680,
+          "sourceEndMs": 1776980,
+          "text": "[音楽]友好的だ"
+        },
+        {
+          "speechId": 170,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 1777919,
+          "sourceEndMs": 1787450,
+          "text": "なオスーボコブリンねわざとだよ絶対[音楽]"
+        },
+        {
+          "speechId": 171,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 1789440,
+          "sourceEndMs": 1796299,
+          "text": "いいほしんじゃないこの列だけ掘っていって感じどこにあるの"
+        },
+        {
+          "speechId": 172,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 1802039,
+          "sourceEndMs": 1805240,
+          "text": "ちょうだいいいよ"
+        },
+        {
+          "speechId": 173,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 1806290,
+          "sourceEndMs": 1824799,
+          "text": "[音楽]でなんかえーっと中身はあれだよブロックいろいろさ取れると思うからそれでちょっと壁作っててこんな感じこんな感じでOK"
+        },
+        {
+          "speechId": 174,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 1828980,
+          "sourceEndMs": 1833059,
+          "text": "あれ持ってないよ"
+        },
+        {
+          "speechId": 175,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 1841220,
+          "sourceEndMs": 1850779,
+          "text": "俺じゃないの死んでも大丈夫死んでも大丈夫ボックスゴミしか入ってねえ"
+        },
+        {
+          "speechId": 176,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 1852100,
+          "sourceEndMs": 1855279,
+          "text": "からだろう"
+        },
+        {
+          "speechId": 177,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 1855340,
+          "sourceEndMs": 1858460,
+          "text": "ナイリウムじゃ"
+        },
+        {
+          "speechId": 178,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 1858860,
+          "sourceEndMs": 1861340,
+          "text": "んねいい"
+        },
+        {
+          "speechId": 179,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 1862940,
+          "sourceEndMs": 1875080,
+          "text": "ライトニングゲーテライトいつリングあれ何だっけのなんだっけ[音楽]見て"
+        },
+        {
+          "speechId": 180,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 1876039,
+          "sourceEndMs": 1883960,
+          "text": "前からやってた時に村人からパクったよいいじゃん"
+        },
+        {
+          "speechId": 181,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 1884000,
+          "sourceEndMs": 1897039,
+          "text": "畑のフォーク[音楽]いっぱい預けすぎてる私何そんな持ってんの"
+        },
+        {
+          "speechId": 182,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 1898500,
+          "sourceEndMs": 1903550,
+          "text": "[笑い]"
+        },
+        {
+          "speechId": 183,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 1904220,
+          "sourceEndMs": 1907779,
+          "text": "豚に取られた何を"
+        },
+        {
+          "speechId": 184,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 1911240,
+          "sourceEndMs": 1913539,
+          "text": "殴る殴れ"
+        },
+        {
+          "speechId": 185,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 1915799,
+          "sourceEndMs": 1919120,
+          "text": "殴っくれるたら殴って倒したらどいて"
+        },
+        {
+          "speechId": 186,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 1923140,
+          "sourceEndMs": 1937059,
+          "text": "ナレーションつけろよ[音楽]あのなんかロボットボイスみたいなやつナレーションつけろよ[音楽]笑笑笑"
+        },
+        {
+          "speechId": 187,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 1943100,
+          "sourceEndMs": 1951940,
+          "text": "[笑い]毎回毎回ゼルダに言わせるんだろ"
+        },
+        {
+          "speechId": 188,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 1958360,
+          "sourceEndMs": 1970960,
+          "text": "これさ本当に襲ってこないのこいつら殴らなきゃ襲ってこないよ殴ったら襲ってくるよ配信的にはどっちがいいの"
+        },
+        {
+          "speechId": 189,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 1971899,
+          "sourceEndMs": 1979160,
+          "text": "どっちだろう聞くなよ[笑い]"
+        },
+        {
+          "speechId": 190,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 1985150,
+          "sourceEndMs": 1988269,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 191,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 1988520,
+          "sourceEndMs": 1991899,
+          "text": "やっぱ赤い道にしないとね"
+        },
+        {
+          "speechId": 192,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 1997580,
+          "sourceEndMs": 2003000,
+          "text": "その赤いの見えなくなるんだよまた来た豚"
+        },
+        {
+          "speechId": 193,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 2005610,
+          "sourceEndMs": 2012119,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 194,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 2013120,
+          "sourceEndMs": 2019140,
+          "text": "ちょっと殴ってくる殴ってくるやっちゃったよ"
+        },
+        {
+          "speechId": 195,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 2022059,
+          "sourceEndMs": 2026919,
+          "text": "ねあれ都市伝説だったよ"
+        },
+        {
+          "speechId": 196,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 2033640,
+          "sourceEndMs": 2036720,
+          "text": "襲ってくるやついるよ"
+        },
+        {
+          "speechId": 197,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 2039100,
+          "sourceEndMs": 2047519,
+          "text": "そういう豚じゃないってことだよ襲っこがよてない豚いるんだ黄金ってこと"
+        },
+        {
+          "speechId": 198,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 2049540,
+          "sourceEndMs": 2056220,
+          "text": "[音楽]やってんだなね時代じゃないね"
+        },
+        {
+          "speechId": 199,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 2059560,
+          "sourceEndMs": 2066060,
+          "text": "むき出しじゃん何が道"
+        },
+        {
+          "speechId": 200,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 2067740,
+          "sourceEndMs": 2075960,
+          "text": "このてっむき出しのところに氷張って安全が確保されてないこの労働環境"
+        },
+        {
+          "speechId": 201,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 2076119,
+          "sourceEndMs": 2079440,
+          "text": "今骨折した"
+        },
+        {
+          "speechId": 202,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 2081339,
+          "sourceEndMs": 2095339,
+          "text": "労災取りますか死なない限り降りないよブラック[音楽]ライトが出てきたね"
+        },
+        {
+          "speechId": 203,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 2098640,
+          "sourceEndMs": 2107580,
+          "text": "確かに息が詰まりそうそんなところで地下する労働羽目になってるのはお前たちだよ"
+        },
+        {
+          "speechId": 204,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 2107920,
+          "sourceEndMs": 2110280,
+          "text": "ここから"
+        },
+        {
+          "speechId": 205,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 2110619,
+          "sourceEndMs": 2116579,
+          "text": "ヤクザな俺に物を借りちゃったからだよヤクザ"
+        },
+        {
+          "speechId": 206,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 2116980,
+          "sourceEndMs": 2123300,
+          "text": "ヤクザな俺に物を借りてしまったからこんなとこにいるんだよヤクザなの"
+        },
+        {
+          "speechId": 207,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 2123339,
+          "sourceEndMs": 2135240,
+          "text": "もう一緒に一緒にギャングみたいなことしてるよ俺たちちょっと詰まってるじゃん[音楽]入れなくなっちゃっ"
+        },
+        {
+          "speechId": 208,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 2135280,
+          "sourceEndMs": 2140859,
+          "text": "た人ありがとう優しい"
+        },
+        {
+          "speechId": 209,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 2141099,
+          "sourceEndMs": 2156480,
+          "text": "じゃん[音楽]仕事よできなくなったら困るんだこれさ右側はさなんか追っていく何でも景色いいよ"
+        },
+        {
+          "speechId": 210,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 2158380,
+          "sourceEndMs": 2166960,
+          "text": "壁作って[音楽]これぐらいならどう景観も損ねないよ両立"
+        },
+        {
+          "speechId": 211,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 2170040,
+          "sourceEndMs": 2180400,
+          "text": "そこにガラス貼って後でガラスタッチだったらなぁ"
+        },
+        {
+          "speechId": 212,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 2181079,
+          "sourceEndMs": 2190740,
+          "text": "そうただよなんかあそこ人の上ついてから前回前作の力を失った"
+        },
+        {
+          "speechId": 213,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 2191320,
+          "sourceEndMs": 2193380,
+          "text": "ね"
+        },
+        {
+          "speechId": 214,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 2199440,
+          "sourceEndMs": 2207960,
+          "text": "またまた知らない人の名前が出てきたヒヤキンできない一番最初だよ"
+        },
+        {
+          "speechId": 215,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 2210119,
+          "sourceEndMs": 2216300,
+          "text": "それだわラウルじゃね違う"
+        },
+        {
+          "speechId": 216,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 2217260,
+          "sourceEndMs": 2220260,
+          "text": "んだ"
+        },
+        {
+          "speechId": 217,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 2225540,
+          "sourceEndMs": 2229440,
+          "text": "みんなどこまで進んでんの"
+        },
+        {
+          "speechId": 218,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 2234599,
+          "sourceEndMs": 2238560,
+          "text": "ビット族のとこに行っただけだよ"
+        },
+        {
+          "speechId": 219,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 2245280,
+          "sourceEndMs": 2248820,
+          "text": "うまくことやれって"
+        },
+        {
+          "speechId": 220,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 2249579,
+          "sourceEndMs": 2256610,
+          "text": "誰けども見えねえんだ寂しいね[音楽]"
+        },
+        {
+          "speechId": 221,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 2264160,
+          "sourceEndMs": 2284339,
+          "text": "ほらこれで登ってこいよ[音楽]戻る子自分にもつけれたらいいのにね[音楽]死んだ時発動する戻れこつかおうぜじゃあえっと氷はて立つから貼っいいよ"
+        },
+        {
+          "speechId": 222,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 2287200,
+          "sourceEndMs": 2292859,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 223,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 2297460,
+          "sourceEndMs": 2300460,
+          "text": "コントローラー"
+        },
+        {
+          "speechId": 224,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 2303210,
+          "sourceEndMs": 2308909,
+          "text": "[音楽]今は[音楽]"
+        },
+        {
+          "speechId": 225,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 2309700,
+          "sourceEndMs": 2316760,
+          "text": "キーボードじゃねえんだもんなを変じゃないよ[音楽]"
+        },
+        {
+          "speechId": 226,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 2317099,
+          "sourceEndMs": 2321300,
+          "text": "ゲームからはコントローラーでやるんだね"
+        },
+        {
+          "speechId": 227,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 2322060,
+          "sourceEndMs": 2325060,
+          "text": "ボックス"
+        },
+        {
+          "speechId": 228,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 2327700,
+          "sourceEndMs": 2334619,
+          "text": "[音楽]ね"
+        },
+        {
+          "speechId": 229,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 2337690,
+          "sourceEndMs": 2340969,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 230,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 2342579,
+          "sourceEndMs": 2348439,
+          "text": "賢いねだいぶ楽だわ[音楽]"
+        },
+        {
+          "speechId": 231,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 2348579,
+          "sourceEndMs": 2351240,
+          "text": "慎重にてやってね"
+        },
+        {
+          "speechId": 232,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 2351400,
+          "sourceEndMs": 2358619,
+          "text": "身長[音楽]よし"
+        },
+        {
+          "speechId": 233,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 2362800,
+          "sourceEndMs": 2367200,
+          "text": "欲しいなぁには何があるの"
+        },
+        {
+          "speechId": 234,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 2367980,
+          "sourceEndMs": 2377149,
+          "text": "だけアップデートがあるよ夢のアップデートがあるよ未来[音楽]"
+        },
+        {
+          "speechId": 235,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 2382720,
+          "sourceEndMs": 2389280,
+          "text": "みんなは何をアップデートしたい夢"
+        },
+        {
+          "speechId": 236,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 2389760,
+          "sourceEndMs": 2397380,
+          "text": "自分の夢アップデートしてこうどんなに夢アップデートさせるの"
+        },
+        {
+          "speechId": 237,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 2401339,
+          "sourceEndMs": 2405000,
+          "text": "今どんな意味あるの"
+        },
+        {
+          "speechId": 238,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 2405700,
+          "sourceEndMs": 2410640,
+          "text": "今今持ってる夢"
+        },
+        {
+          "speechId": 239,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 2410800,
+          "sourceEndMs": 2417780,
+          "text": "クマン長者それアップデートしたらどうなるの借金"
+        },
+        {
+          "speechId": 240,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 2423359,
+          "sourceEndMs": 2428040,
+          "text": "悪魔だよマグマだよ"
+        },
+        {
+          "speechId": 241,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 2429839,
+          "sourceEndMs": 2434380,
+          "text": "俺が潰したマジック"
+        },
+        {
+          "speechId": 242,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 2435660,
+          "sourceEndMs": 2445020,
+          "text": "マグママジックマグマ出てるところにブロックを置いたら潰れる[音楽]"
+        },
+        {
+          "speechId": 243,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 2447700,
+          "sourceEndMs": 2454500,
+          "text": "痛くないかも怖いかも[音楽]ちょっと待ってろ"
+        },
+        {
+          "speechId": 244,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 2454960,
+          "sourceEndMs": 2465300,
+          "text": "うわこれってさ何押したら落ちないんだっけえーっとどうかな"
+        },
+        {
+          "speechId": 245,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 2465780,
+          "sourceEndMs": 2469680,
+          "text": "しゃがんだらしゃがんだら大丈夫"
+        },
+        {
+          "speechId": 246,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 2470380,
+          "sourceEndMs": 2472619,
+          "text": "そう"
+        },
+        {
+          "speechId": 247,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 2472660,
+          "sourceEndMs": 2477260,
+          "text": "翼がなぁあれば[音楽]"
+        },
+        {
+          "speechId": 248,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 2478359,
+          "sourceEndMs": 2481800,
+          "text": "私押しは1回たらずっとだよ"
+        },
+        {
+          "speechId": 249,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 2482500,
+          "sourceEndMs": 2493619,
+          "text": "押しそうホールドじゃなくてスイッチ[音楽]そういうことじゃない"
+        },
+        {
+          "speechId": 250,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 2495099,
+          "sourceEndMs": 2501660,
+          "text": "任天堂SWITCHの登場で色々そういうのは難しくなってくるんだ言い方がこれさ"
+        },
+        {
+          "speechId": 251,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 2501940,
+          "sourceEndMs": 2514079,
+          "text": "私落ちる人がいないように加工作ってくるわ[音楽]咲く偉いじゃんすっごいゆっくり帰るじゃん"
+        },
+        {
+          "speechId": 252,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 2514420,
+          "sourceEndMs": 2518400,
+          "text": "怖いから安全第一"
+        },
+        {
+          "speechId": 253,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 2522040,
+          "sourceEndMs": 2525000,
+          "text": "雨こよう持って"
+        },
+        {
+          "speechId": 254,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 2527260,
+          "sourceEndMs": 2530820,
+          "text": "リアルね[音楽]"
+        },
+        {
+          "speechId": 255,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 2531300,
+          "sourceEndMs": 2545440,
+          "text": "マイクラに雨なんてなかった[音楽]雨き持ってたよ何の雨トラベルミンチュロップ"
+        },
+        {
+          "speechId": 256,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 2547300,
+          "sourceEndMs": 2557020,
+          "text": "ぶどう味知らないドロートローチかおいしい"
+        },
+        {
+          "speechId": 257,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 2561700,
+          "sourceEndMs": 2564810,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 258,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 2574370,
+          "sourceEndMs": 2584200,
+          "text": "[音楽]アイスとかぶどう味が好きですアイスのみこんにゃく"
+        },
+        {
+          "speechId": 259,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 2585220,
+          "sourceEndMs": 2589920,
+          "text": "ゼリーのたぶどう味もしょっちゅう食っていいね"
+        },
+        {
+          "speechId": 260,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 2590940,
+          "sourceEndMs": 2594480,
+          "text": "こんにゃくゼリー食べたい"
+        },
+        {
+          "speechId": 261,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 2594760,
+          "sourceEndMs": 2598140,
+          "text": "食べなよ食べなよ"
+        },
+        {
+          "speechId": 262,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 2598720,
+          "sourceEndMs": 2607240,
+          "text": "こんにゃく何ゼリー味が好きカロリー低くないよカロリー低くないのこと"
+        },
+        {
+          "speechId": 263,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 2611099,
+          "sourceEndMs": 2620099,
+          "text": "こんにゃくなのになんでシロップ漬けってことそんなことないけどね"
+        },
+        {
+          "speechId": 264,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 2625810,
+          "sourceEndMs": 2629570,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 265,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 2634190,
+          "sourceEndMs": 2637369,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 266,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 2639860,
+          "sourceEndMs": 2644959,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 267,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 2645940,
+          "sourceEndMs": 2656880,
+          "text": "怖い音なってる今何BGM[音楽]ネザーのBGMだ"
+        },
+        {
+          "speechId": 268,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 2659980,
+          "sourceEndMs": 2671760,
+          "text": "悲しそう悲しそうつけたい設定わかんないこれBGMない気分で流れるんじゃの"
+        },
+        {
+          "speechId": 269,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 2671980,
+          "sourceEndMs": 2677540,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 270,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 2677740,
+          "sourceEndMs": 2684000,
+          "text": "気分でしょうだから常に流れてるわけじゃないみたいな"
+        },
+        {
+          "speechId": 271,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 2684460,
+          "sourceEndMs": 2705240,
+          "text": "たまにちょっと流れるぐらいの[音楽]そうそう夜になったらなんか流れるとかさ朝になったらみたいなだった気がするしばらくてる俺マイクラのBGMオフにしからねえわかんけどお怖いかも"
+        },
+        {
+          "speechId": 272,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 2706530,
+          "sourceEndMs": 2709699,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 273,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 2711980,
+          "sourceEndMs": 2715670,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 274,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 2721940,
+          "sourceEndMs": 2725090,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 275,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 2726579,
+          "sourceEndMs": 2731440,
+          "text": "久しぶりにマイクラやってるわね"
+        },
+        {
+          "speechId": 276,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 2733359,
+          "sourceEndMs": 2736800,
+          "text": "新しいなぁの見たい"
+        },
+        {
+          "speechId": 277,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 2738480,
+          "sourceEndMs": 2744960,
+          "text": "今日見れるから早めに仕事終わったら見れるかもしれんぞ"
+        },
+        {
+          "speechId": 278,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 2745600,
+          "sourceEndMs": 2756060,
+          "text": "[音楽]今今何パーセントだろう進捗確かめるわ"
+        },
+        {
+          "speechId": 279,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 2757300,
+          "sourceEndMs": 2763040,
+          "text": "1戻る回わ俺[音楽]"
+        },
+        {
+          "speechId": 280,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 2764200,
+          "sourceEndMs": 2773640,
+          "text": "いいなぁ持ってんじゃんロケットにつけてんだよ縦いいなぁ"
+        },
+        {
+          "speechId": 281,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 2774570,
+          "sourceEndMs": 2779679,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 282,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 2786070,
+          "sourceEndMs": 2789820,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 283,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 2792100,
+          "sourceEndMs": 2797640,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 284,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 2800280,
+          "sourceEndMs": 2805440,
+          "text": "本当にシフト押してたら落ちないのかな"
+        },
+        {
+          "speechId": 285,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 2806140,
+          "sourceEndMs": 2814560,
+          "text": "何かされたら落ちるんじゃない何かってお歌とか"
+        },
+        {
+          "speechId": 286,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 2814570,
+          "sourceEndMs": 2819820,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 287,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 2826200,
+          "sourceEndMs": 2843240,
+          "text": "[音楽]壮大なBGM流れて笑うなすごい壮大だよ今[音楽]あれねもう半分ぐらい行ってそう"
+        },
+        {
+          "speechId": 288,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 2844619,
+          "sourceEndMs": 2853420,
+          "text": "いうマンパワー最強だよ1000ぐらいブロックいけるからな石神"
+        },
+        {
+          "speechId": 289,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 2856540,
+          "sourceEndMs": 2858780,
+          "text": "襲ってる"
+        },
+        {
+          "speechId": 290,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 2864060,
+          "sourceEndMs": 2868839,
+          "text": "てっちゃんちょっとずれてたよマジ"
+        },
+        {
+          "speechId": 291,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 2869319,
+          "sourceEndMs": 2877769,
+          "text": "襲うぜこれはちょっとずれちゃった[音楽]"
+        },
+        {
+          "speechId": 292,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 2894690,
+          "sourceEndMs": 2903060,
+          "text": "[音楽]何回も落ちそうになって落ちないを繰り返している"
+        },
+        {
+          "speechId": 293,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 2906400,
+          "sourceEndMs": 2909550,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 294,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 2912910,
+          "sourceEndMs": 2921660,
+          "text": "[音楽]女の声がするなんか話しかけられてるわえなんて言ってんの"
+        },
+        {
+          "speechId": 295,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 2922960,
+          "sourceEndMs": 2931619,
+          "text": "もっと聞くわでもこういうのっチャンネル言うて合わせろってしねちょっと寄り添ってあげて"
+        },
+        {
+          "speechId": 296,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 2934119,
+          "sourceEndMs": 2936599,
+          "text": "こんにちは"
+        },
+        {
+          "speechId": 297,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 2939050,
+          "sourceEndMs": 2944700,
+          "text": "[音楽]本当どうしてなんで悲しい"
+        },
+        {
+          "speechId": 298,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 2946400,
+          "sourceEndMs": 2954960,
+          "text": "[音楽]言ってるね"
+        },
+        {
+          "speechId": 299,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 2960400,
+          "sourceEndMs": 2964800,
+          "text": "[音楽]遊んであげるのは正解"
+        },
+        {
+          "speechId": 300,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 2965859,
+          "sourceEndMs": 2968099,
+          "text": "遊んだろ"
+        },
+        {
+          "speechId": 301,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 2972760,
+          "sourceEndMs": 2979200,
+          "text": "新しいなナビゲーションでさ"
+        },
+        {
+          "speechId": 302,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 2980079,
+          "sourceEndMs": 2992099,
+          "text": "崖下に落とそうとするやつはいるじゃんでもマグマはちょっとあれだね新しいね逆にね"
+        },
+        {
+          "speechId": 303,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 2993400,
+          "sourceEndMs": 2999900,
+          "text": "そうでしたって言ってるクラスではください陽気だった"
+        },
+        {
+          "speechId": 304,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3000420,
+          "sourceEndMs": 3009319,
+          "text": "インタビューで[音楽]陽気なやつはマグマなんだ同じクラスですか"
+        },
+        {
+          "speechId": 305,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3009500,
+          "sourceEndMs": 3015980,
+          "text": "同じクラスで[音楽]一緒にプロジェクト"
+        },
+        {
+          "speechId": 306,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3017010,
+          "sourceEndMs": 3030619,
+          "text": "[音楽]物寂しい感じのBGM来てるのやってみて入れてみるわ汁垂れてるここマグマ垂れてるよ"
+        },
+        {
+          "speechId": 307,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3048619,
+          "sourceEndMs": 3053000,
+          "text": "優しよすぎると思うんだね何が"
+        },
+        {
+          "speechId": 308,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3053220,
+          "sourceEndMs": 3061640,
+          "text": "氷引いてさ囲ってあげてさやっぱマグマの1つぐらい垂れてないと確かに罠ね"
+        },
+        {
+          "speechId": 309,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3066319,
+          "sourceEndMs": 3070400,
+          "text": "いいもと思うよあって"
+        },
+        {
+          "speechId": 310,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3070680,
+          "sourceEndMs": 3073819,
+          "text": "進化しちまった"
+        },
+        {
+          "speechId": 311,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3075059,
+          "sourceEndMs": 3090319,
+          "text": "終わったらマグマもうないなもうないよあるあるあるあるあるえ本当だ多分源泉もっと上の方にある"
+        },
+        {
+          "speechId": 312,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3090599,
+          "sourceEndMs": 3092839,
+          "text": "よ"
+        },
+        {
+          "speechId": 313,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3093960,
+          "sourceEndMs": 3099020,
+          "text": "ここ通ったら溢れ出るようにしよう"
+        },
+        {
+          "speechId": 314,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3100020,
+          "sourceEndMs": 3102440,
+          "text": "ただ"
+        },
+        {
+          "speechId": 315,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3102599,
+          "sourceEndMs": 3106579,
+          "text": "これ踏んだら溢れ"
+        },
+        {
+          "speechId": 316,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3107040,
+          "sourceEndMs": 3113839,
+          "text": "何年も積み重ねてきた信用で罠にかけよう"
+        },
+        {
+          "speechId": 317,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3114900,
+          "sourceEndMs": 3121760,
+          "text": "[音楽]ひどいこと言うなよあるよ"
+        },
+        {
+          "speechId": 318,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3122340,
+          "sourceEndMs": 3125459,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 319,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3125460,
+          "sourceEndMs": 3128460,
+          "text": "あれ"
+        },
+        {
+          "speechId": 320,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3130200,
+          "sourceEndMs": 3135319,
+          "text": "来た知らないなあれなぁ"
+        },
+        {
+          "speechId": 321,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3135480,
+          "sourceEndMs": 3146460,
+          "text": "松明終わったら送るだねあれ何何あれー"
+        },
+        {
+          "speechId": 322,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3147780,
+          "sourceEndMs": 3154859,
+          "text": "あれなんだっけ玄武岩だからってやつ[音楽]"
+        },
+        {
+          "speechId": 323,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3161880,
+          "sourceEndMs": 3164720,
+          "text": "外れてきた"
+        },
+        {
+          "speechId": 324,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3167099,
+          "sourceEndMs": 3169579,
+          "text": "あれあれ"
+        },
+        {
+          "speechId": 325,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3172400,
+          "sourceEndMs": 3176000,
+          "text": "あの灰色のやつ"
+        },
+        {
+          "speechId": 326,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3176940,
+          "sourceEndMs": 3179900,
+          "text": "あれ何があるの"
+        },
+        {
+          "speechId": 327,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3181819,
+          "sourceEndMs": 3185819,
+          "text": "家庭石井"
+        },
+        {
+          "speechId": 328,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3187319,
+          "sourceEndMs": 3195200,
+          "text": "洋画すごいなんかTRPGしてる気持ちになるわこのBGM聴いてるとこっち流れてないから"
+        },
+        {
+          "speechId": 329,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3195260,
+          "sourceEndMs": 3206720,
+          "text": "なんか物語は確信に迫ったみたいになってるがうちの配信あの玄武岩のところなんか敵の城に見えるでしょ"
+        },
+        {
+          "speechId": 330,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3208339,
+          "sourceEndMs": 3213680,
+          "text": "今近くにあるよクッパ城じゃん"
+        },
+        {
+          "speechId": 331,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3221700,
+          "sourceEndMs": 3232520,
+          "text": "撃たれてる撃たれてるこっちどっちとりあえず命が欲しいから引っ込んでる確かに任せときゃいいか"
+        },
+        {
+          "speechId": 332,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3232940,
+          "sourceEndMs": 3237980,
+          "text": "じゃないからね裸だし"
+        },
+        {
+          "speechId": 333,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3241520,
+          "sourceEndMs": 3248610,
+          "text": "てたね[笑い]"
+        },
+        {
+          "speechId": 334,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3250680,
+          "sourceEndMs": 3262339,
+          "text": "逃がさないわがたフレンド入りしてよなんでわかんねえなんでかトレンドでしたいつ見て面白いもんな"
+        },
+        {
+          "speechId": 335,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3263119,
+          "sourceEndMs": 3270859,
+          "text": "えどっち派かちょっと記憶があんまり"
+        },
+        {
+          "speechId": 336,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3271559,
+          "sourceEndMs": 3276119,
+          "text": "いねぇそんなに差があるよ"
+        },
+        {
+          "speechId": 337,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3277440,
+          "sourceEndMs": 3283040,
+          "text": "よくわかんないお団子見だけた目"
+        },
+        {
+          "speechId": 338,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3285540,
+          "sourceEndMs": 3288260,
+          "text": "敵の城あるよここに"
+        },
+        {
+          "speechId": 339,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3289200,
+          "sourceEndMs": 3293660,
+          "text": "あるよ"
+        },
+        {
+          "speechId": 340,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3293940,
+          "sourceEndMs": 3298040,
+          "text": "正義の心がこっちにあるよ"
+        },
+        {
+          "speechId": 341,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3298339,
+          "sourceEndMs": 3306140,
+          "text": "どここれゼルダ姫助けるピーチも姫助ける"
+        },
+        {
+          "speechId": 342,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3310740,
+          "sourceEndMs": 3315079,
+          "text": "これやつは新しいやつかあ怖いいる"
+        },
+        {
+          "speechId": 343,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3316940,
+          "sourceEndMs": 3327619,
+          "text": "[音楽]射的上手いやつめっちゃいるぞ私は弱いから今こいつか"
+        },
+        {
+          "speechId": 344,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3330859,
+          "sourceEndMs": 3334640,
+          "text": "何も持ってないから"
+        },
+        {
+          "speechId": 345,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3335700,
+          "sourceEndMs": 3341599,
+          "text": "私をにできるのは氷張ることだけで武器戦えよ取って"
+        },
+        {
+          "speechId": 346,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3343020,
+          "sourceEndMs": 3345020,
+          "text": "欲しい"
+        },
+        {
+          "speechId": 347,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3347660,
+          "sourceEndMs": 3351079,
+          "text": "スクラビルトくれしてた"
+        },
+        {
+          "speechId": 348,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3351839,
+          "sourceEndMs": 3354680,
+          "text": "いいじゃん"
+        },
+        {
+          "speechId": 349,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3355980,
+          "sourceEndMs": 3358220,
+          "text": "裸だけど"
+        },
+        {
+          "speechId": 350,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3359280,
+          "sourceEndMs": 3361819,
+          "text": "これあげる"
+        },
+        {
+          "speechId": 351,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3375920,
+          "sourceEndMs": 3384079,
+          "text": "とか色々置いてきな大事なもの確かにいいけど"
+        },
+        {
+          "speechId": 352,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3391079,
+          "sourceEndMs": 3395760,
+          "text": "拾って前からあるやつ新しい俺"
+        },
+        {
+          "speechId": 353,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3396059,
+          "sourceEndMs": 3399200,
+          "text": "らがデビューした頃からあるやつ"
+        },
+        {
+          "speechId": 354,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3404520,
+          "sourceEndMs": 3408859,
+          "text": "ほら言ってやれよチャイカに"
+        },
+        {
+          "speechId": 355,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3409020,
+          "sourceEndMs": 3411020,
+          "text": "冒険"
+        },
+        {
+          "speechId": 356,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3413119,
+          "sourceEndMs": 3416359,
+          "text": "違うよ"
+        },
+        {
+          "speechId": 357,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3420240,
+          "sourceEndMs": 3425000,
+          "text": "忘れてしまったとかやったことあるんだよ"
+        },
+        {
+          "speechId": 358,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3425480,
+          "sourceEndMs": 3430940,
+          "text": "ほんとだ綺麗これ死の灰じゃない"
+        },
+        {
+          "speechId": 359,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3436859,
+          "sourceEndMs": 3440220,
+          "text": "すごい何これ"
+        },
+        {
+          "speechId": 360,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3442110,
+          "sourceEndMs": 3445239,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 361,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3446220,
+          "sourceEndMs": 3454980,
+          "text": "死ぬぞ死んじゃうよ[音楽]すごい叫び声したかわいそう"
+        },
+        {
+          "speechId": 362,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3458700,
+          "sourceEndMs": 3462059,
+          "text": "殺したね結構"
+        },
+        {
+          "speechId": 363,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3464940,
+          "sourceEndMs": 3473180,
+          "text": "じゃん[音楽]ね明るいからじゃない"
+        },
+        {
+          "speechId": 364,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3473220,
+          "sourceEndMs": 3476000,
+          "text": "出のてこない"
+        },
+        {
+          "speechId": 365,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3476900,
+          "sourceEndMs": 3482000,
+          "text": "だからちょっとはあるかもあるかもよ"
+        },
+        {
+          "speechId": 366,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3488460,
+          "sourceEndMs": 3491300,
+          "text": "し入り口ない"
+        },
+        {
+          "speechId": 367,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3491700,
+          "sourceEndMs": 3500459,
+          "text": "入り口なかったら作ればいいじゃんさすがこれがマインクラフト[音楽]"
+        },
+        {
+          "speechId": 368,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3505020,
+          "sourceEndMs": 3513740,
+          "text": "怒るなよ突然来てるから普段から開いてるよ"
+        },
+        {
+          "speechId": 369,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3525810,
+          "sourceEndMs": 3528969,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 370,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3529500,
+          "sourceEndMs": 3532500,
+          "text": "ネザーウォート"
+        },
+        {
+          "speechId": 371,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3540299,
+          "sourceEndMs": 3543380,
+          "text": "なんか声する"
+        },
+        {
+          "speechId": 372,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3543660,
+          "sourceEndMs": 3546859,
+          "text": "なんかやるやつ"
+        },
+        {
+          "speechId": 373,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3547380,
+          "sourceEndMs": 3559760,
+          "text": "俺たちよりやべえ奴がいるってのかよえこっち下にもあるよどんどん下に向かっていく"
+        },
+        {
+          "speechId": 374,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3560700,
+          "sourceEndMs": 3563119,
+          "text": "いい"
+        },
+        {
+          "speechId": 375,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3563339,
+          "sourceEndMs": 3567729,
+          "text": "ね[音楽]"
+        },
+        {
+          "speechId": 376,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3572660,
+          "sourceEndMs": 3585859,
+          "text": "行き止まりだ持って帰るねえ登録しようぜ名前なんてつけんの名前"
+        },
+        {
+          "speechId": 377,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3593520,
+          "sourceEndMs": 3595760,
+          "text": "反対側"
+        },
+        {
+          "speechId": 378,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3596460,
+          "sourceEndMs": 3598520,
+          "text": "暗い"
+        },
+        {
+          "speechId": 379,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3599640,
+          "sourceEndMs": 3606140,
+          "text": "行き止まり完全にはぐれてんだけど1人"
+        },
+        {
+          "speechId": 380,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3609920,
+          "sourceEndMs": 3616579,
+          "text": "こいつ何もしてこないからこっちは違うっぽい"
+        },
+        {
+          "speechId": 381,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3617059,
+          "sourceEndMs": 3622640,
+          "text": "大家道の行ったが正解かもしれんハズレでしよた"
+        },
+        {
+          "speechId": 382,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3623270,
+          "sourceEndMs": 3631460,
+          "text": "[音楽]何もなかったよ外れ[音楽]もぬけ"
+        },
+        {
+          "speechId": 383,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3632099,
+          "sourceEndMs": 3634400,
+          "text": "から"
+        },
+        {
+          "speechId": 384,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3634559,
+          "sourceEndMs": 3637559,
+          "text": "外れ"
+        },
+        {
+          "speechId": 385,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3646619,
+          "sourceEndMs": 3652940,
+          "text": "こっち行ってないんじゃないのまた女の声がする"
+        },
+        {
+          "speechId": 386,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3653280,
+          "sourceEndMs": 3656180,
+          "text": "女の声する"
+        },
+        {
+          "speechId": 387,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3662540,
+          "sourceEndMs": 3668720,
+          "text": "そうだよなこんなところに女がいるわけないよ"
+        },
+        {
+          "speechId": 388,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3673160,
+          "sourceEndMs": 3693680,
+          "text": "最近忙しいって言ってたしなんか重いBGM流れてきた[笑い][音楽]何もねえじゃん何もね何もなかったね"
+        },
+        {
+          "speechId": 389,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3693839,
+          "sourceEndMs": 3699619,
+          "text": "そういうこともあるだから楽しいんだ"
+        },
+        {
+          "speechId": 390,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3702420,
+          "sourceEndMs": 3706099,
+          "text": "多分コロログどっかいると思うよ"
+        },
+        {
+          "speechId": 391,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3716420,
+          "sourceEndMs": 3720740,
+          "text": "こんなとこに人がいるわけないだろ"
+        },
+        {
+          "speechId": 392,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3721040,
+          "sourceEndMs": 3728420,
+          "text": "あれ反対側あるな言ってる"
+        },
+        {
+          "speechId": 393,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3728579,
+          "sourceEndMs": 3731180,
+          "text": "助けたいい方がんじゃない"
+        },
+        {
+          "speechId": 394,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3732780,
+          "sourceEndMs": 3737960,
+          "text": "あれだよ看板んない立ててくださいつってじゃの"
+        },
+        {
+          "speechId": 395,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3738740,
+          "sourceEndMs": 3746180,
+          "text": "手伝っくださいてカバンカバンだあいつが一番怖えよ"
+        },
+        {
+          "speechId": 396,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3753380,
+          "sourceEndMs": 3757819,
+          "text": "ろい取って"
+        },
+        {
+          "speechId": 397,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3760520,
+          "sourceEndMs": 3764599,
+          "text": "どんどんBGM壮大になっていく"
+        },
+        {
+          "speechId": 398,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3765299,
+          "sourceEndMs": 3770960,
+          "text": "わほんとこの先ラスボスいるかも"
+        },
+        {
+          "speechId": 399,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3774540,
+          "sourceEndMs": 3782480,
+          "text": "ここ探したらラスボスとかライネルいるかもしれない[音楽]"
+        },
+        {
+          "speechId": 400,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3787559,
+          "sourceEndMs": 3790339,
+          "text": "歌"
+        },
+        {
+          "speechId": 401,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3791040,
+          "sourceEndMs": 3797059,
+          "text": "あれ[音楽]敵でしょ"
+        },
+        {
+          "speechId": 402,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3799559,
+          "sourceEndMs": 3808040,
+          "text": "いいね[音楽]壁がもろくなってた爆弾なくてもいけるんだね"
+        },
+        {
+          "speechId": 403,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3808319,
+          "sourceEndMs": 3810799,
+          "text": "いるね"
+        },
+        {
+          "speechId": 404,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3813599,
+          "sourceEndMs": 3818180,
+          "text": "倒して俺武器持ってねえから"
+        },
+        {
+          "speechId": 405,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3819540,
+          "sourceEndMs": 3822559,
+          "text": "俺ない武器持ってから"
+        },
+        {
+          "speechId": 406,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3828180,
+          "sourceEndMs": 3830299,
+          "text": "暑かった"
+        },
+        {
+          "speechId": 407,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3832559,
+          "sourceEndMs": 3836420,
+          "text": "あれ行き止まりじゃん"
+        },
+        {
+          "speechId": 408,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3836460,
+          "sourceEndMs": 3838819,
+          "text": "あれ"
+        },
+        {
+          "speechId": 409,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3839480,
+          "sourceEndMs": 3848370,
+          "text": "終わり終わりですここもう何もないよ[音楽]"
+        },
+        {
+          "speechId": 410,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3850079,
+          "sourceEndMs": 3857900,
+          "text": "ほらなんか新しいダンジョンに向いてないの新しいダンジョン"
+        },
+        {
+          "speechId": 411,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3858000,
+          "sourceEndMs": 3876740,
+          "text": "新しいダンジョン探せば見つかるかもしれないよあれは仕事終わったら探しに行くか新しい種類種類は種類増えてないの増えてるか面白いよ"
+        },
+        {
+          "speechId": 412,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3886980,
+          "sourceEndMs": 3892460,
+          "text": "開けてみた開けてみたやるじゃん"
+        },
+        {
+          "speechId": 413,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3894359,
+          "sourceEndMs": 3897359,
+          "text": "まるで"
+        },
+        {
+          "speechId": 414,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3899579,
+          "sourceEndMs": 3907640,
+          "text": "あなんかあるじゃん宝箱開けて馬鎧"
+        },
+        {
+          "speechId": 415,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3910819,
+          "sourceEndMs": 3918740,
+          "text": "がわ外れた柔らかいねブラックストーンだ"
+        },
+        {
+          "speechId": 416,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3921240,
+          "sourceEndMs": 3923900,
+          "text": "ねどういうこと"
+        },
+        {
+          "speechId": 417,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3924119,
+          "sourceEndMs": 3928160,
+          "text": "やべえ俺ははぐれちゃった開いたわ"
+        },
+        {
+          "speechId": 418,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3930180,
+          "sourceEndMs": 3934040,
+          "text": "え音石炭だこれ"
+        },
+        {
+          "speechId": 419,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3936720,
+          "sourceEndMs": 3939380,
+          "text": "何の音"
+        },
+        {
+          "speechId": 420,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3940619,
+          "sourceEndMs": 3943099,
+          "text": "口も鳴り出した"
+        },
+        {
+          "speechId": 421,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3943140,
+          "sourceEndMs": 3947960,
+          "text": "女の声がする殴っちゃった"
+        },
+        {
+          "speechId": 422,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3952940,
+          "sourceEndMs": 3956540,
+          "text": "仕事に戻ろうぜ"
+        },
+        {
+          "speechId": 423,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3962220,
+          "sourceEndMs": 3970280,
+          "text": "何もないんなら作ればいいんじゃないあれ何この青い方があるよ"
+        },
+        {
+          "speechId": 424,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3982280,
+          "sourceEndMs": 3988640,
+          "text": "あるしねこっちだ"
+        },
+        {
+          "speechId": 425,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3989280,
+          "sourceEndMs": 3992420,
+          "text": "わあとは氷の道"
+        },
+        {
+          "speechId": 426,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 3998400,
+          "sourceEndMs": 4002619,
+          "text": "来来たた僕も"
+        },
+        {
+          "speechId": 427,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 4002630,
+          "sourceEndMs": 4014619,
+          "text": "[音楽]数秒必要じゃ整備していくよもぐもぐぞー"
+        },
+        {
+          "speechId": 428,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 4030200,
+          "sourceEndMs": 4034780,
+          "text": "ドラッグストーンにかっこいい建築材なるよ"
+        },
+        {
+          "speechId": 429,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 4052780,
+          "sourceEndMs": 4057400,
+          "text": "でも見に行くよ面白かったよ"
+        },
+        {
+          "speechId": 430,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 4061039,
+          "sourceEndMs": 4072520,
+          "text": "ちょっとネタバレしないようにマリオどう面白いか教えてよ忘れてきちゃったシェルカーボックスどう面白いか[音楽]面白くはないよ"
+        },
+        {
+          "speechId": 431,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 4075680,
+          "sourceEndMs": 4081339,
+          "text": "見んてきたでしょ見てきたやだ"
+        },
+        {
+          "speechId": 432,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 4089059,
+          "sourceEndMs": 4098539,
+          "text": "めっちゃ体感中で何点満点や何点満点中何点よ面白くて100点面白い"
+        },
+        {
+          "speechId": 433,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 4106210,
+          "sourceEndMs": 4109350,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 434,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 4109580,
+          "sourceEndMs": 4112719,
+          "text": "ゲルド族のハイブリッドだから俺"
+        },
+        {
+          "speechId": 435,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 4114140,
+          "sourceEndMs": 4117940,
+          "text": "言ってなかったんだデビューする時"
+        },
+        {
+          "speechId": 436,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 4119060,
+          "sourceEndMs": 4121239,
+          "text": "ゲルド族"
+        },
+        {
+          "speechId": 437,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 4121540,
+          "sourceEndMs": 4138520,
+          "text": "1回の1人の独特ってことそうだよえもうじゃあ王じゃん約束女の子されてんだよ[音楽]をデビューする時内緒にしたけど"
+        },
+        {
+          "speechId": 438,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 4139130,
+          "sourceEndMs": 4142319,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 439,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 4146960,
+          "sourceEndMs": 4149259,
+          "text": "景色いいね"
+        },
+        {
+          "speechId": 440,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 4149600,
+          "sourceEndMs": 4155500,
+          "text": "え後ろに豚いる入っのてきちゃった"
+        },
+        {
+          "speechId": 441,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 4159300,
+          "sourceEndMs": 4162600,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 442,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 4167900,
+          "sourceEndMs": 4177339,
+          "text": "殺そうとするこっちこいつ殺そうとする怖いやだこれする想像よ"
+        },
+        {
+          "speechId": 443,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 4178699,
+          "sourceEndMs": 4180699,
+          "text": "助かる"
+        },
+        {
+          "speechId": 444,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 4186620,
+          "sourceEndMs": 4191440,
+          "text": "もらったヘルメットなかったら致命傷だったね"
+        },
+        {
+          "speechId": 445,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 4192380,
+          "sourceEndMs": 4194560,
+          "text": "助かった"
+        },
+        {
+          "speechId": 446,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 4198620,
+          "sourceEndMs": 4212679,
+          "text": "教頭って大事だな確かに一人でできないほどみんなでやると戦って勝つんだ"
+        },
+        {
+          "speechId": 447,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 4213380,
+          "sourceEndMs": 4221920,
+          "text": "どっかでさ[音楽]ぁさっき言っとった馬埋めたいね"
+        },
+        {
+          "speechId": 448,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 4223420,
+          "sourceEndMs": 4227579,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 449,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 4228380,
+          "sourceEndMs": 4246040,
+          "text": "飾れないの飾ろうと思えば飾ろうと思ったらとても飾れるんじゃない額縁に入れたりとかできるよあれないよなんかマネキン今までみたいな今まで金ないね"
+        },
+        {
+          "speechId": 450,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 4249260,
+          "sourceEndMs": 4252400,
+          "text": "馬を招きにするしかないね"
+        },
+        {
+          "speechId": 451,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 4264020,
+          "sourceEndMs": 4267020,
+          "text": "何"
+        },
+        {
+          "speechId": 452,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 4268400,
+          "sourceEndMs": 4279280,
+          "text": "色の人にシャンデリアお化けみたいなシャンデリアおばけか回るやつね"
+        },
+        {
+          "speechId": 453,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 4283520,
+          "sourceEndMs": 4289120,
+          "text": "そしてもう道を引くための道具がなくなってしまった"
+        },
+        {
+          "speechId": 454,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 4290480,
+          "sourceEndMs": 4296020,
+          "text": "すごい広大な空間ですね"
+        },
+        {
+          "speechId": 455,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 4296980,
+          "sourceEndMs": 4300760,
+          "text": "天空の世界なんじゃない"
+        },
+        {
+          "speechId": 456,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 4302480,
+          "sourceEndMs": 4307780,
+          "text": "これは何だわかりやすいでしょスライムでは"
+        },
+        {
+          "speechId": 457,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 4308719,
+          "sourceEndMs": 4311560,
+          "text": "受注だよ"
+        },
+        {
+          "speechId": 458,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 4321679,
+          "sourceEndMs": 4326440,
+          "text": "だから壊すよどこだっけローソン"
+        },
+        {
+          "speechId": 459,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 4332239,
+          "sourceEndMs": 4354100,
+          "text": "もうどこにもローソンにもファミマにも売ってないゼリーも一番苦情もないんそんなだ23時10分売れてんのもうなんかどこも売り切れだよあそうなんだ売れてるよ"
+        },
+        {
+          "speechId": 460,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 4355520,
+          "sourceEndMs": 4362739,
+          "text": "絶対て安くなっ置いてあるもんだと思ってた"
+        },
+        {
+          "speechId": 461,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 4363820,
+          "sourceEndMs": 4367179,
+          "text": "よかったね"
+        },
+        {
+          "speechId": 462,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 4370540,
+          "sourceEndMs": 4378939,
+          "text": "1個だけ買ってまだ中身開けてねえやカード開けなよ[音楽]"
+        },
+        {
+          "speechId": 463,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 4381100,
+          "sourceEndMs": 4392860,
+          "text": "なんかカードのやつ何が出るか当てよう1個しか買えなかっんただいいね何当たると思うちょっと誰が参加してるっけ"
+        },
+        {
+          "speechId": 464,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 4394219,
+          "sourceEndMs": 4396760,
+          "text": "参加しがてんの"
+        },
+        {
+          "speechId": 465,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 4397159,
+          "sourceEndMs": 4406179,
+          "text": "不便と戌亥とこと博士冬木と夜見れなと"
+        },
+        {
+          "speechId": 466,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 4407239,
+          "sourceEndMs": 4412239,
+          "text": "魔界のリズムと[音楽]卯月コート"
+        },
+        {
+          "speechId": 467,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 4412760,
+          "sourceEndMs": 4419440,
+          "text": "あと郡道美玲と神田と"
+        },
+        {
+          "speechId": 468,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 4419600,
+          "sourceEndMs": 4422840,
+          "text": "ローレンレオスと"
+        },
+        {
+          "speechId": 469,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 4425970,
+          "sourceEndMs": 4433179,
+          "text": "[音楽]レインパターソン結構いるよ"
+        },
+        {
+          "speechId": 470,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 4444280,
+          "sourceEndMs": 4455679,
+          "text": "スライムがさうちらの作った線路てるに載っこれって敵だよ"
+        },
+        {
+          "speechId": 471,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 4456380,
+          "sourceEndMs": 4461080,
+          "text": "怖いかもそれもそれも仕事のうちだよ"
+        },
+        {
+          "speechId": 472,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 4462620,
+          "sourceEndMs": 4468159,
+          "text": "そうなの倒して支給されてないけど"
+        },
+        {
+          "speechId": 473,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 4469400,
+          "sourceEndMs": 4475000,
+          "text": "自分で自前で用意してでそんないる"
+        },
+        {
+          "speechId": 474,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 4475699,
+          "sourceEndMs": 4478699,
+          "text": "よ"
+        },
+        {
+          "speechId": 475,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 4482000,
+          "sourceEndMs": 4484540,
+          "text": "上から"
+        },
+        {
+          "speechId": 476,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 4485360,
+          "sourceEndMs": 4487960,
+          "text": "来るタイプ"
+        },
+        {
+          "speechId": 477,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 4494659,
+          "sourceEndMs": 4497020,
+          "text": "ここ"
+        },
+        {
+          "speechId": 478,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 4503840,
+          "sourceEndMs": 4506380,
+          "text": "で倒した"
+        },
+        {
+          "speechId": 479,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 4506980,
+          "sourceEndMs": 4510460,
+          "text": "線路引いてるよ"
+        },
+        {
+          "speechId": 480,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 4512540,
+          "sourceEndMs": 4516460,
+          "text": "見ないてない見て"
+        },
+        {
+          "speechId": 481,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 4517040,
+          "sourceEndMs": 4521860,
+          "text": "無視するかもしれない敵無視しちゃった"
+        },
+        {
+          "speechId": 482,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 4524540,
+          "sourceEndMs": 4529420,
+          "text": "やっぱそういうやつは無視するのが一番だから"
+        },
+        {
+          "speechId": 483,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 4530780,
+          "sourceEndMs": 4543500,
+          "text": "無視一番が効果あるもんねそう聞いてるよ[笑い]聞い大丈夫てる"
+        },
+        {
+          "speechId": 484,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 4545080,
+          "sourceEndMs": 4555400,
+          "text": "じゃあカード開けちゃうわいいね来たね1枚だけ1枚だけ入ってるやつ1枚だけだっけ"
+        },
+        {
+          "speechId": 485,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 4557000,
+          "sourceEndMs": 4564219,
+          "text": "何がやってあるって思ったじゃあと答え"
+        },
+        {
+          "speechId": 486,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 4564360,
+          "sourceEndMs": 4567680,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 487,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 4567980,
+          "sourceEndMs": 4570980,
+          "text": "よ"
+        },
+        {
+          "speechId": 488,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 4571670,
+          "sourceEndMs": 4575860,
+          "text": "[音楽]じゃあ行きます"
+        },
+        {
+          "speechId": 489,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 4575920,
+          "sourceEndMs": 4579100,
+          "text": "誰だ"
+        },
+        {
+          "speechId": 490,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 4583120,
+          "sourceEndMs": 4612880,
+          "text": "おお気に入り題の洋服をそれクイズしようぜクイズお気に入りのお洋服を大事にしてる人誰だ答え教えて答えろ答え[音楽]その洋服の答え洋服の答えオレンジ色のワンピース着てあの後ろに可愛いってあの英語に書いてある乾いたのローマで字書いてある"
+        },
+        {
+          "speechId": 491,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 4616100,
+          "sourceEndMs": 4626089,
+          "text": "正解いえそれスタリオンが当たったよ[音楽]"
+        },
+        {
+          "speechId": 492,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 4627440,
+          "sourceEndMs": 4630440,
+          "text": "レッスン"
+        },
+        {
+          "speechId": 493,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 4632460,
+          "sourceEndMs": 4636590,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 494,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 4641179,
+          "sourceEndMs": 4645159,
+          "text": "すげえますよく聞いて"
+        },
+        {
+          "speechId": 495,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 4648980,
+          "sourceEndMs": 4653679,
+          "text": "トリニティの歌外れないよね"
+        },
+        {
+          "speechId": 496,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 4654130,
+          "sourceEndMs": 4659500,
+          "text": "[音楽]私もそう思う"
+        },
+        {
+          "speechId": 497,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 4659780,
+          "sourceEndMs": 4667480,
+          "text": "ちょいちょいいろんなところで流れてたの聞くよ嬉しいかっこ曲いい"
+        },
+        {
+          "speechId": 498,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 4668719,
+          "sourceEndMs": 4673780,
+          "text": "抑えてない曲があってもねあの歌い方ですぐに分かる"
+        },
+        {
+          "speechId": 499,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 4676179,
+          "sourceEndMs": 4684159,
+          "text": "わかりやすいわかりやすいよいいねやっぱ印象的だからね"
+        },
+        {
+          "speechId": 500,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 4685699,
+          "sourceEndMs": 4688699,
+          "text": "嬉しい"
+        },
+        {
+          "speechId": 501,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 4691659,
+          "sourceEndMs": 4696699,
+          "text": "加工やりたいからさなんか欲しいなぁ"
+        },
+        {
+          "speechId": 502,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 4697699,
+          "sourceEndMs": 4708640,
+          "text": "ブロックがいっぱいあるよじゃあこれとこれ私とおくわ全部がブラックストーンもマグマブロックもあるのさ"
+        },
+        {
+          "speechId": 503,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 4711860,
+          "sourceEndMs": 4724699,
+          "text": "壁にするんだったら大丈夫だよちょっと危ないのが逆に安全車と一緒かぼちゃ大切"
+        },
+        {
+          "speechId": 504,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 4726800,
+          "sourceEndMs": 4731440,
+          "text": "配信前にも聞いたけどやってたんでしょ競馬今日"
+        },
+        {
+          "speechId": 505,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 4732679,
+          "sourceEndMs": 4735640,
+          "text": "結果んどうだっただっけ"
+        },
+        {
+          "speechId": 506,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 4738980,
+          "sourceEndMs": 4756520,
+          "text": "今回もさ本当に飼い方絞って絶対に買うよ当たるようにさ買ったの3連単と生まれ同じ絶対に当たる方法があるの"
+        },
+        {
+          "speechId": 507,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 4756860,
+          "sourceEndMs": 4769000,
+          "text": "いや今回ピンと来たわけ絶対これだっねてね結果来たのでも締め切り"
+        },
+        {
+          "speechId": 508,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 4772090,
+          "sourceEndMs": 4797419,
+          "text": "[音楽]からなかったのに考え的中してたら何倍100円が今9000円ぐらいすごいじゃんめっちゃスライムいる[音楽]"
+        },
+        {
+          "speechId": 509,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 4798100,
+          "sourceEndMs": 4810100,
+          "text": "90倍[音楽]でしょ1円だったら90万ってことそうだよそんなことあるの"
+        },
+        {
+          "speechId": 510,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 4814640,
+          "sourceEndMs": 4826780,
+          "text": "コアえもう最近なんかねみんな何番が好きみたいなこと聞いてたやん前まで最近そういう堅実なことやるようだったの"
+        },
+        {
+          "speechId": 511,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 4830239,
+          "sourceEndMs": 4838360,
+          "text": "ちゃんと正しい楽しみ方してるで正しいは正しい敬語をやってる"
+        },
+        {
+          "speechId": 512,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 4840100,
+          "sourceEndMs": 4852699,
+          "text": "G1ってさ毎回さなんか聞かなきゃいけないじゃん毎週それってなんかちょっとうざいかなと思って"
+        },
+        {
+          "speechId": 513,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 4856659,
+          "sourceEndMs": 4860500,
+          "text": "変わっちまったなぁ"
+        },
+        {
+          "speechId": 514,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 4865960,
+          "sourceEndMs": 4875260,
+          "text": "もうあいつらが頼りにならねえと何年前の話してる覚えてねえんだけど"
+        },
+        {
+          "speechId": 515,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 4876980,
+          "sourceEndMs": 4880540,
+          "text": "してくれてたので"
+        },
+        {
+          "speechId": 516,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 4880880,
+          "sourceEndMs": 4885340,
+          "text": "即レスしてくれてたや氷なくなっちゃった"
+        },
+        {
+          "speechId": 517,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 4888260,
+          "sourceEndMs": 4896800,
+          "text": "懲りないじゃあ私がさこれOkお前はさ囲い"
+        },
+        {
+          "speechId": 518,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 4897260,
+          "sourceEndMs": 4899260,
+          "text": "了解"
+        },
+        {
+          "speechId": 519,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 4902360,
+          "sourceEndMs": 4909100,
+          "text": "突然立場なんかが変わっているなんかおしゃれにしてんじゃん"
+        },
+        {
+          "speechId": 520,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 4909260,
+          "sourceEndMs": 4918100,
+          "text": "まるで白何後ろに城はできてんの後ろでできてる"
+        },
+        {
+          "speechId": 521,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 4924500,
+          "sourceEndMs": 4927500,
+          "text": "ATM"
+        },
+        {
+          "speechId": 522,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 4927679,
+          "sourceEndMs": 4929679,
+          "text": "欲しい"
+        },
+        {
+          "speechId": 523,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 4929860,
+          "sourceEndMs": 4936219,
+          "text": "よありがとう燃えてるだけだよ"
+        },
+        {
+          "speechId": 524,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 4943280,
+          "sourceEndMs": 4946179,
+          "text": "23時"
+        },
+        {
+          "speechId": 525,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 4946340,
+          "sourceEndMs": 4948400,
+          "text": "忘れた"
+        },
+        {
+          "speechId": 526,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 4952280,
+          "sourceEndMs": 4961430,
+          "text": "23時オカルト馬券って戦績どうなのあそうだね[音楽]"
+        },
+        {
+          "speechId": 527,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 4966320,
+          "sourceEndMs": 4969219,
+          "text": "人はによって"
+        },
+        {
+          "speechId": 528,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 4972380,
+          "sourceEndMs": 4976719,
+          "text": "何気に何名"
+        },
+        {
+          "speechId": 529,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 4983179,
+          "sourceEndMs": 4985659,
+          "text": "どうした"
+        },
+        {
+          "speechId": 530,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 4987460,
+          "sourceEndMs": 5009000,
+          "text": "すぎていいじゃんちょうどその辺にあるからいらないもの[音楽]全部かゴミ箱だからこっちに流して欲しいもねアーティスティックパーティースティックになってきた"
+        },
+        {
+          "speechId": 531,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 5012699,
+          "sourceEndMs": 5016320,
+          "text": "ボックス取りたいの"
+        },
+        {
+          "speechId": 532,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 5022000,
+          "sourceEndMs": 5024780,
+          "text": "喜べそろそろ終わるぞ"
+        },
+        {
+          "speechId": 533,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 5024900,
+          "sourceEndMs": 5043009,
+          "text": "よかっねたねー早かったもうこの後あれだよもうに白探し行くよ仕事が終わったから[音楽]"
+        },
+        {
+          "speechId": 534,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 5043840,
+          "sourceEndMs": 5049440,
+          "text": "ちゃんと労いの旅行は行くんだ"
+        },
+        {
+          "speechId": 535,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 5049600,
+          "sourceEndMs": 5052199,
+          "text": "社員旅行ってこと"
+        },
+        {
+          "speechId": 536,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 5055719,
+          "sourceEndMs": 5060659,
+          "text": "早かったねそうだね"
+        },
+        {
+          "speechId": 537,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 5061440,
+          "sourceEndMs": 5073440,
+          "text": "声かけるとこだった手伝ってやってうんそのつながり求められているものかもよ"
+        },
+        {
+          "speechId": 538,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 5073719,
+          "sourceEndMs": 5076560,
+          "text": "それ"
+        },
+        {
+          "speechId": 539,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 5077620,
+          "sourceEndMs": 5085800,
+          "text": "いいいいじゃんじゃん繋がり誰でした俺今日で終わりなんて一言も言ってないよ"
+        },
+        {
+          "speechId": 540,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 5088840,
+          "sourceEndMs": 5091620,
+          "text": "今から"
+        },
+        {
+          "speechId": 541,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 5091840,
+          "sourceEndMs": 5095760,
+          "text": "30分後に"
+        },
+        {
+          "speechId": 542,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 5096219,
+          "sourceEndMs": 5099659,
+          "text": "冒険に行く人"
+        },
+        {
+          "speechId": 543,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 5104080,
+          "sourceEndMs": 5108840,
+          "text": "冒険に行くよこのノリができるから高宮はやっぱりいいわ"
+        },
+        {
+          "speechId": 544,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 5111340,
+          "sourceEndMs": 5114120,
+          "text": "冒険に出かけよう"
+        },
+        {
+          "speechId": 545,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 5115480,
+          "sourceEndMs": 5119760,
+          "text": "おじ様さこのATM取って"
+        },
+        {
+          "speechId": 546,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 5119920,
+          "sourceEndMs": 5124140,
+          "text": "どれやつどれさっき俺が出した"
+        },
+        {
+          "speechId": 547,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 5125980,
+          "sourceEndMs": 5136620,
+          "text": "いや俺も今度気軽にそうやって人呼んでやろういいじゃんいいじゃん行きたいです釣れた一人"
+        },
+        {
+          "speechId": 548,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 5137880,
+          "sourceEndMs": 5142080,
+          "text": "イェーイ2人ATM"
+        },
+        {
+          "speechId": 549,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 5142600,
+          "sourceEndMs": 5145140,
+          "text": "みたいです"
+        },
+        {
+          "speechId": 550,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 5156460,
+          "sourceEndMs": 5162179,
+          "text": "ブロックの置き方の速さ明らかテーション"
+        },
+        {
+          "speechId": 551,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 5163780,
+          "sourceEndMs": 5170300,
+          "text": "効率化はや[笑い]"
+        },
+        {
+          "speechId": 552,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 5191080,
+          "sourceEndMs": 5205380,
+          "text": "頑張ってやっぱこれさぁお父さんみたいなの殺したからさ泣いてるこいつらが子供みたいなやつらが泣いてる俺"
+        },
+        {
+          "speechId": 553,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 5206199,
+          "sourceEndMs": 5215400,
+          "text": "たちの音ってちっちゃい子供たちがさ私のこと攻撃しようとしてるけどかわいそう敵討ちに来てる"
+        },
+        {
+          "speechId": 554,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 5216540,
+          "sourceEndMs": 5219900,
+          "text": "石投げ出してくるよ"
+        },
+        {
+          "speechId": 555,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 5226480,
+          "sourceEndMs": 5239159,
+          "text": "仕返しされるからやり返されるだよこうやって憎しみの連鎖は止まらないんだ[音楽]"
+        },
+        {
+          "speechId": 556,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 5240219,
+          "sourceEndMs": 5243239,
+          "text": "不倫レイヤーで見た"
+        },
+        {
+          "speechId": 557,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 5244540,
+          "sourceEndMs": 5247679,
+          "text": "子供だからって"
+        },
+        {
+          "speechId": 558,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 5248139,
+          "sourceEndMs": 5253620,
+          "text": "容赦していたら大人になって容赦しちゃダメなんだ"
+        },
+        {
+          "speechId": 559,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 5256679,
+          "sourceEndMs": 5262800,
+          "text": "大人になってまた村を襲い出すんだそいつらあぶねー"
+        },
+        {
+          "speechId": 560,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 5263679,
+          "sourceEndMs": 5267120,
+          "text": "すごい流れてくる"
+        },
+        {
+          "speechId": 561,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 5267760,
+          "sourceEndMs": 5270760,
+          "text": "空間"
+        },
+        {
+          "speechId": 562,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 5278620,
+          "sourceEndMs": 5282300,
+          "text": "あと大体40ブロックぐらいで終わるよ"
+        },
+        {
+          "speechId": 563,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 5286659,
+          "sourceEndMs": 5289440,
+          "text": "壁張ったら終了だよ"
+        },
+        {
+          "speechId": 564,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 5290320,
+          "sourceEndMs": 5292860,
+          "text": "そうだよ"
+        },
+        {
+          "speechId": 565,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 5303100,
+          "sourceEndMs": 5308760,
+          "text": "私氷いっぱいあるのに"
+        },
+        {
+          "speechId": 566,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 5311800,
+          "sourceEndMs": 5324360,
+          "text": "このタイミングですげえもんこれこれお前ら多分知らない要素だよ楽しそう取っちゃいな"
+        },
+        {
+          "speechId": 567,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 5325000,
+          "sourceEndMs": 5327420,
+          "text": "家庭"
+        },
+        {
+          "speechId": 568,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 5330820,
+          "sourceEndMs": 5336460,
+          "text": "を取って深淵"
+        },
+        {
+          "speechId": 569,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 5338310,
+          "sourceEndMs": 5344639,
+          "text": "[音楽]なんだ古代の残骸"
+        },
+        {
+          "speechId": 570,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 5346179,
+          "sourceEndMs": 5349199,
+          "text": "古代文明のやつ"
+        },
+        {
+          "speechId": 571,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 5349430,
+          "sourceEndMs": 5352549,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 572,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 5356080,
+          "sourceEndMs": 5358739,
+          "text": "やったじゃん"
+        },
+        {
+          "speechId": 573,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 5359080,
+          "sourceEndMs": 5362340,
+          "text": "やったー"
+        },
+        {
+          "speechId": 574,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 5370739,
+          "sourceEndMs": 5374460,
+          "text": "まだ怖くなってるな"
+        },
+        {
+          "speechId": 575,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 5382000,
+          "sourceEndMs": 5389100,
+          "text": "マイクラの良い大丈夫なの大丈夫さっき雨舐めたから"
+        },
+        {
+          "speechId": 576,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 5400360,
+          "sourceEndMs": 5411949,
+          "text": "なんでだろう前大丈夫だった気がしたんだけどねやっぱ久しぶりにやると[音楽]"
+        },
+        {
+          "speechId": 577,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 5413500,
+          "sourceEndMs": 5418860,
+          "text": "Googleもそうだったかも"
+        },
+        {
+          "speechId": 578,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 5419980,
+          "sourceEndMs": 5422639,
+          "text": "本気とかなる"
+        },
+        {
+          "speechId": 579,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 5434550,
+          "sourceEndMs": 5437720,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 580,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 5440760,
+          "sourceEndMs": 5451260,
+          "text": "はず良いだとめちゃくちゃけどなんで恐怖"
+        },
+        {
+          "speechId": 581,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 5455920,
+          "sourceEndMs": 5470340,
+          "text": "良い良いおしゃれポイントgood花とか植えれないの持ってたらダメだ"
+        },
+        {
+          "speechId": 582,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 5472120,
+          "sourceEndMs": 5478080,
+          "text": "いいねこことここに何の"
+        },
+        {
+          "speechId": 583,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 5478179,
+          "sourceEndMs": 5480840,
+          "text": "どこ行った"
+        },
+        {
+          "speechId": 584,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 5481620,
+          "sourceEndMs": 5487440,
+          "text": "あれねあのタイムカプセルみたいなやつね"
+        },
+        {
+          "speechId": 585,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 5490260,
+          "sourceEndMs": 5493980,
+          "text": "本当に安全かな"
+        },
+        {
+          "speechId": 586,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 5500020,
+          "sourceEndMs": 5503040,
+          "text": "ここは安全"
+        },
+        {
+          "speechId": 587,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 5509500,
+          "sourceEndMs": 5516780,
+          "text": "いいねおしゃれだおしゃれになったね"
+        },
+        {
+          "speechId": 588,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 5519040,
+          "sourceEndMs": 5521580,
+          "text": "できた"
+        },
+        {
+          "speechId": 589,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 5521860,
+          "sourceEndMs": 5524580,
+          "text": "なんて書いた"
+        },
+        {
+          "speechId": 590,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 5524679,
+          "sourceEndMs": 5532320,
+          "text": "それともここに入れてよ"
+        },
+        {
+          "speechId": 591,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 5539699,
+          "sourceEndMs": 5549359,
+          "text": "それだとそれとも危険が始まりになっちゃうまあいいか[音楽]"
+        },
+        {
+          "speechId": 592,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 5551440,
+          "sourceEndMs": 5553920,
+          "text": "いいね"
+        },
+        {
+          "speechId": 593,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 5563380,
+          "sourceEndMs": 5578699,
+          "text": "左側安全で書いてあるのに右向いたらだいぶ食い込んでるねこれね暗号だいいじゃんそれとも"
+        },
+        {
+          "speechId": 594,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 5579100,
+          "sourceEndMs": 5586260,
+          "text": "それとも一段落さ下に下げたらきれいに見える"
+        },
+        {
+          "speechId": 595,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 5593020,
+          "sourceEndMs": 5597360,
+          "text": "あれ何だって思わせることが大事"
+        },
+        {
+          "speechId": 596,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 5601120,
+          "sourceEndMs": 5612060,
+          "text": "じゃあ帰り道松明つけたり壁あったりして帰ってくよはおしゃれにしたのに"
+        },
+        {
+          "speechId": 597,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 5612460,
+          "sourceEndMs": 5614880,
+          "text": "埋めるんだこれ"
+        },
+        {
+          "speechId": 598,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 5621100,
+          "sourceEndMs": 5635460,
+          "text": "ちょっと天井高くしようかな[音楽]ここ辺らも壁張ってくよなんか嫌うってきたりなんか爆弾持ってきたりするから"
+        },
+        {
+          "speechId": 599,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 5638620,
+          "sourceEndMs": 5643380,
+          "text": "女の声みたいなやつがいろいろちょっかいかけてくるから"
+        },
+        {
+          "speechId": 600,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 5663520,
+          "sourceEndMs": 5668460,
+          "text": "こうやって覆われておしゃれだなぁ"
+        },
+        {
+          "speechId": 601,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 5678430,
+          "sourceEndMs": 5684600,
+          "text": "[音楽]生かしけどしたね"
+        },
+        {
+          "speechId": 602,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 5692139,
+          "sourceEndMs": 5696890,
+          "text": "ちょっと開けてて[音楽]"
+        },
+        {
+          "speechId": 603,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 5701860,
+          "sourceEndMs": 5711840,
+          "text": "ここ別にちょっと開けとけばいいんじゃないななんかあんな奥までちょっと見せるのまずいけれども"
+        },
+        {
+          "speechId": 604,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 5712120,
+          "sourceEndMs": 5719639,
+          "text": "ちょっと工夫すれば少しは行けそう行けるかもしれんよ"
+        },
+        {
+          "speechId": 605,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 5733420,
+          "sourceEndMs": 5735540,
+          "text": "助かる"
+        },
+        {
+          "speechId": 606,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 5742000,
+          "sourceEndMs": 5745000,
+          "text": "いい"
+        },
+        {
+          "speechId": 607,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 5746620,
+          "sourceEndMs": 5751500,
+          "text": "ねやったとてもとても楽にできたわ"
+        },
+        {
+          "speechId": 608,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 5751780,
+          "sourceEndMs": 5756460,
+          "text": "いつものいつもの3倍早く"
+        },
+        {
+          "speechId": 609,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 5757600,
+          "sourceEndMs": 5761219,
+          "text": "じゃあ次もよろしくね"
+        },
+        {
+          "speechId": 610,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 5763900,
+          "sourceEndMs": 5769260,
+          "text": "これよで終わりじゃないんだどうして"
+        },
+        {
+          "speechId": 611,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 5770199,
+          "sourceEndMs": 5773040,
+          "text": "ここはまだ"
+        },
+        {
+          "speechId": 612,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 5773560,
+          "sourceEndMs": 5779100,
+          "text": "4方向のまだ一方向だけなんだ"
+        },
+        {
+          "speechId": 613,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 5779820,
+          "sourceEndMs": 5784920,
+          "text": "そうよだよ東西南北あるんだ"
+        },
+        {
+          "speechId": 614,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 5785199,
+          "sourceEndMs": 5788400,
+          "text": "なぜそんなことをするん"
+        },
+        {
+          "speechId": 615,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 5788500,
+          "sourceEndMs": 5798120,
+          "text": "だ一方向だけでなくていろんな方向にみんなが行けるようにするためだよ[音楽]それはね"
+        },
+        {
+          "speechId": 616,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 5798340,
+          "sourceEndMs": 5802199,
+          "text": "もう冒険させよう"
+        },
+        {
+          "speechId": 617,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 5802300,
+          "sourceEndMs": 5813840,
+          "text": "そうだよみんなが冒険するためにそうだよみんなはそんな簡単に手に入っちゃ面白くないよ"
+        },
+        {
+          "speechId": 618,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 5815139,
+          "sourceEndMs": 5823380,
+          "text": "確かにやめちゃおうかなもうやめんの"
+        },
+        {
+          "speechId": 619,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 5823420,
+          "sourceEndMs": 5827219,
+          "text": "もう道引くのやめちゃおうかな"
+        },
+        {
+          "speechId": 620,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 5828820,
+          "sourceEndMs": 5842280,
+          "text": "確かに俺はみんなが甘える理由を作っていたのかしれもない冒険行こうよ冒険行こうぜもっと自由に遊ぼうよ確かに"
+        },
+        {
+          "speechId": 621,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 5848199,
+          "sourceEndMs": 5854880,
+          "text": "そうねもうね人のためのことはねやりすぎたよ"
+        },
+        {
+          "speechId": 622,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 5864670,
+          "sourceEndMs": 5871920,
+          "text": "[笑い]中央いいに火山置いての"
+        },
+        {
+          "speechId": 623,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 5877239,
+          "sourceEndMs": 5887560,
+          "text": "カナカナの家にさ水だけどマグマにしようよいいじゃんすごい"
+        },
+        {
+          "speechId": 624,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 5895659,
+          "sourceEndMs": 5897840,
+          "text": "じゃんそれ"
+        },
+        {
+          "speechId": 625,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 5900580,
+          "sourceEndMs": 5910920,
+          "text": "不穏だ[音楽]普通に許されるよ多分ここに許すから許そう"
+        },
+        {
+          "speechId": 626,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 5919300,
+          "sourceEndMs": 5924480,
+          "text": "もうあとはなんかいい感じにやっとくから帰ろう"
+        },
+        {
+          "speechId": 627,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 5925650,
+          "sourceEndMs": 5928820,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 628,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 5933340,
+          "sourceEndMs": 5939179,
+          "text": "なじゃあもうずっと進んでいこう入り口まで"
+        },
+        {
+          "speechId": 629,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 5942699,
+          "sourceEndMs": 5946620,
+          "text": "2人ともあれだボートねえだろ"
+        },
+        {
+          "speechId": 630,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 5946920,
+          "sourceEndMs": 5957359,
+          "text": "ちょっと行ってくるわ持ってるわじゃあ途中で高宮拾って[音楽]"
+        },
+        {
+          "speechId": 631,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 5957580,
+          "sourceEndMs": 5963540,
+          "text": "頑張れ豚だったおいどういうこと"
+        },
+        {
+          "speechId": 632,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 5965679,
+          "sourceEndMs": 5968400,
+          "text": "なこいつんだ"
+        },
+        {
+          "speechId": 633,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 5973660,
+          "sourceEndMs": 5979500,
+          "text": "[音楽]人間に手出したらどうなるか教えてやるよ"
+        },
+        {
+          "speechId": 634,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 5983550,
+          "sourceEndMs": 5998860,
+          "text": "[音楽]豚肉豚肉作ってるの健康にこれ死ぬよこれあなた危ないよね"
+        },
+        {
+          "speechId": 635,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 5999460,
+          "sourceEndMs": 6002699,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 636,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6005340,
+          "sourceEndMs": 6008340,
+          "text": "体"
+        },
+        {
+          "speechId": 637,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6011280,
+          "sourceEndMs": 6014520,
+          "text": "痒いなよ"
+        },
+        {
+          "speechId": 638,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6015070,
+          "sourceEndMs": 6018649,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 639,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6021560,
+          "sourceEndMs": 6033199,
+          "text": "もっと向こうか中身置いてってるよあら何でそんなひどいことするんだ"
+        },
+        {
+          "speechId": 640,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6034440,
+          "sourceEndMs": 6037400,
+          "text": "軽すぎて気づかなかったぜ"
+        },
+        {
+          "speechId": 641,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6039060,
+          "sourceEndMs": 6049820,
+          "text": "気づかなかっれた戻ってきてよちょっと戻るというねそんな高等技術できない"
+        },
+        {
+          "speechId": 642,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6055340,
+          "sourceEndMs": 6058499,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 643,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6062590,
+          "sourceEndMs": 6065729,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 644,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6068060,
+          "sourceEndMs": 6075679,
+          "text": "んだビルド[音楽]ウルトラハンド"
+        },
+        {
+          "speechId": 645,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6077460,
+          "sourceEndMs": 6086760,
+          "text": "エンド守るあれここは違うなさては競馬か場"
+        },
+        {
+          "speechId": 646,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6088530,
+          "sourceEndMs": 6091620,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 647,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6096600,
+          "sourceEndMs": 6099600,
+          "text": "これ"
+        },
+        {
+          "speechId": 648,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6106199,
+          "sourceEndMs": 6118159,
+          "text": "高宮なのかこれ違うのじゃないのだわなんか入れてないのいらない"
+        },
+        {
+          "speechId": 649,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6125540,
+          "sourceEndMs": 6129560,
+          "text": "いっぱいわ持ってるから返す"
+        },
+        {
+          "speechId": 650,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6136080,
+          "sourceEndMs": 6138320,
+          "text": "はい"
+        },
+        {
+          "speechId": 651,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6142800,
+          "sourceEndMs": 6146659,
+          "text": "この旗持ってないじゃん"
+        },
+        {
+          "speechId": 652,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6147600,
+          "sourceEndMs": 6149840,
+          "text": "失礼ね"
+        },
+        {
+          "speechId": 653,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6157580,
+          "sourceEndMs": 6160699,
+          "text": "入ってるよ"
+        },
+        {
+          "speechId": 654,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6163679,
+          "sourceEndMs": 6169760,
+          "text": "これんどっかで拾っただよなどこだっけこれ"
+        },
+        {
+          "speechId": 655,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6172199,
+          "sourceEndMs": 6174500,
+          "text": "祭りかな"
+        },
+        {
+          "speechId": 656,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6182880,
+          "sourceEndMs": 6187520,
+          "text": "そうちゃんと大事にしろよゴミじゃない"
+        },
+        {
+          "speechId": 657,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6188880,
+          "sourceEndMs": 6198260,
+          "text": "ししろよ大事に[笑い]誰でもバカにしたリスナー"
+        },
+        {
+          "speechId": 658,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6200580,
+          "sourceEndMs": 6203659,
+          "text": "とか言いやがって"
+        },
+        {
+          "speechId": 659,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6206880,
+          "sourceEndMs": 6210260,
+          "text": "じゃあ帰りますか"
+        },
+        {
+          "speechId": 660,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6212699,
+          "sourceEndMs": 6215840,
+          "text": "駅前でいいんじゃない"
+        },
+        {
+          "speechId": 661,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6218460,
+          "sourceEndMs": 6221060,
+          "text": "ハチ公"
+        },
+        {
+          "speechId": 662,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6222300,
+          "sourceEndMs": 6224600,
+          "text": "です"
+        },
+        {
+          "speechId": 663,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6225060,
+          "sourceEndMs": 6239510,
+          "text": "どこ行ったこっちか1回帰ってるよ俺集合前にえうちらはなんだこれ自然自然[音楽]"
+        },
+        {
+          "speechId": 664,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6242420,
+          "sourceEndMs": 6247100,
+          "text": "だこれコンセントあるぞ"
+        },
+        {
+          "speechId": 665,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6250080,
+          "sourceEndMs": 6253520,
+          "text": "本当だ鬼門じゃん"
+        },
+        {
+          "speechId": 666,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6254639,
+          "sourceEndMs": 6261139,
+          "text": "信号と1個えっガチャガチャこれ何"
+        },
+        {
+          "speechId": 667,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6261540,
+          "sourceEndMs": 6266480,
+          "text": "ガチャこれ商品ってこと"
+        },
+        {
+          "speechId": 668,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6266960,
+          "sourceEndMs": 6276739,
+          "text": "どこにいるんださっきの旅宝探し冒険で見つけたよな"
+        },
+        {
+          "speechId": 669,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6280199,
+          "sourceEndMs": 6282980,
+          "text": "ダメじゃない"
+        },
+        {
+          "speechId": 670,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6283139,
+          "sourceEndMs": 6285679,
+          "text": "溶かしないたらいいんじゃそれ"
+        },
+        {
+          "speechId": 671,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6285900,
+          "sourceEndMs": 6288800,
+          "text": "金の旨い"
+        },
+        {
+          "speechId": 672,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6298199,
+          "sourceEndMs": 6300440,
+          "text": "馬より溶ける"
+        },
+        {
+          "speechId": 673,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6303260,
+          "sourceEndMs": 6306380,
+          "text": "思い出を"
+        },
+        {
+          "speechId": 674,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6306600,
+          "sourceEndMs": 6309619,
+          "text": "金塊になったわ"
+        },
+        {
+          "speechId": 675,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6313679,
+          "sourceEndMs": 6334100,
+          "text": "ほとんど金の馬鎧ほとんど金使われてねえんだ騙された何持ってったらいいんだっけ冒険するのにインのインゴットしばらく冒険ないいってからもう持ってくものわかんない冒険なんてさ体ひとつでいいでしょそうだよ"
+        },
+        {
+          "speechId": 676,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6335100,
+          "sourceEndMs": 6342080,
+          "text": "軽ければ軽いほど良い何いこうでもかんでも裏持ってとしすぎだったのか"
+        },
+        {
+          "speechId": 677,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6346199,
+          "sourceEndMs": 6350600,
+          "text": "今日は今日は何でもかんでも気づかせくれるてじゃん"
+        },
+        {
+          "speechId": 678,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6352320,
+          "sourceEndMs": 6356659,
+          "text": "うんそうだね死にたくないわ"
+        },
+        {
+          "speechId": 679,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6362340,
+          "sourceEndMs": 6370100,
+          "text": "あの14分くらいじゃいいんじゃないうん店が作ったと"
+        },
+        {
+          "speechId": 680,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6370760,
+          "sourceEndMs": 6374239,
+          "text": "いいセンスじゃ"
+        },
+        {
+          "speechId": 681,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6380760,
+          "sourceEndMs": 6383719,
+          "text": "どこここ行ったさ"
+        },
+        {
+          "speechId": 682,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6383820,
+          "sourceEndMs": 6386540,
+          "text": "クソが"
+        },
+        {
+          "speechId": 683,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6387119,
+          "sourceEndMs": 6393440,
+          "text": "急にキレるやん怖あ許されざることが起きてしまった"
+        },
+        {
+          "speechId": 684,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6393480,
+          "sourceEndMs": 6396139,
+          "text": "看板倒しちゃったんだ"
+        },
+        {
+          "speechId": 685,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6396679,
+          "sourceEndMs": 6405260,
+          "text": "えどれこれ本当だ生肉獣肉にしようぜ"
+        },
+        {
+          "speechId": 686,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6407699,
+          "sourceEndMs": 6418040,
+          "text": "見たことあるの結構前からいない気がする[笑い]ディズニープラス"
+        },
+        {
+          "speechId": 687,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6420360,
+          "sourceEndMs": 6422900,
+          "text": "ディズニープリンセスだった"
+        },
+        {
+          "speechId": 688,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6423199,
+          "sourceEndMs": 6440900,
+          "text": "歌歌ったことある気がするやったことあるディズニープリンセス経験者だろここの[笑い]すごい何だこれ新装ダイヤモンド鉱石"
+        },
+        {
+          "speechId": 689,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6443340,
+          "sourceEndMs": 6446420,
+          "text": "いいものなのか"
+        },
+        {
+          "speechId": 690,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6447540,
+          "sourceEndMs": 6451520,
+          "text": "幻想ダイヤモンド鉱石"
+        },
+        {
+          "speechId": 691,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6453080,
+          "sourceEndMs": 6456560,
+          "text": "一つ貰っとこう"
+        },
+        {
+          "speechId": 692,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6459659,
+          "sourceEndMs": 6464119,
+          "text": "何が違うんだこれ多分準備できてきた"
+        },
+        {
+          "speechId": 693,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6466199,
+          "sourceEndMs": 6469340,
+          "text": "2人ともどこにいんの"
+        },
+        {
+          "speechId": 694,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6470160,
+          "sourceEndMs": 6476420,
+          "text": "[音楽]変な石像"
+        },
+        {
+          "speechId": 695,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6476820,
+          "sourceEndMs": 6483199,
+          "text": "あのキツネがいるあとエメラの家完成させろ"
+        },
+        {
+          "speechId": 696,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6487340,
+          "sourceEndMs": 6493159,
+          "text": "サファイアじゃねえじゃねえかこれ何アメジストだわ"
+        },
+        {
+          "speechId": 697,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6495320,
+          "sourceEndMs": 6498739,
+          "text": "青くねえじゃねえか"
+        },
+        {
+          "speechId": 698,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6499880,
+          "sourceEndMs": 6507260,
+          "text": "よちゃちゃはやめなよ何だってそう"
+        },
+        {
+          "speechId": 699,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6507540,
+          "sourceEndMs": 6509900,
+          "text": "信号はね"
+        },
+        {
+          "speechId": 700,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6510239,
+          "sourceEndMs": 6513860,
+          "text": "緑じゃんそれと一緒で"
+        },
+        {
+          "speechId": 701,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6515639,
+          "sourceEndMs": 6517880,
+          "text": "信号は"
+        },
+        {
+          "speechId": 702,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6518300,
+          "sourceEndMs": 6521659,
+          "text": "青だでいいんよ"
+        },
+        {
+          "speechId": 703,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6526520,
+          "sourceEndMs": 6531679,
+          "text": "スカスカじゃないスカスカよだ"
+        },
+        {
+          "speechId": 704,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6536940,
+          "sourceEndMs": 6541860,
+          "text": "頑張ってこれ作るの大変なんだからなスタミナ"
+        },
+        {
+          "speechId": 705,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6542219,
+          "sourceEndMs": 6545219,
+          "text": "これ"
+        },
+        {
+          "speechId": 706,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6545280,
+          "sourceEndMs": 6553580,
+          "text": "地上に書いたってことでしょ行かれてるよ本当にいか"
+        },
+        {
+          "speechId": 707,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6553679,
+          "sourceEndMs": 6559080,
+          "text": "れてるよこれマップでしょそうそう"
+        },
+        {
+          "speechId": 708,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6560239,
+          "sourceEndMs": 6565340,
+          "text": "俺もこれやる気ないもんこんな大変なの"
+        },
+        {
+          "speechId": 709,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6566340,
+          "sourceEndMs": 6570139,
+          "text": "よくこれ畳作ったよ"
+        },
+        {
+          "speechId": 710,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6571340,
+          "sourceEndMs": 6574580,
+          "text": "すごいよ"
+        },
+        {
+          "speechId": 711,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6578340,
+          "sourceEndMs": 6582560,
+          "text": "素材としてくれるんだもんな駅行こうぜ駅"
+        },
+        {
+          "speechId": 712,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6586440,
+          "sourceEndMs": 6590480,
+          "text": "最初のユニバーサルシティ"
+        },
+        {
+          "speechId": 713,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6592080,
+          "sourceEndMs": 6598820,
+          "text": "ユニバーサルシティユニバーサルいうシティってのいや"
+        },
+        {
+          "speechId": 714,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6599639,
+          "sourceEndMs": 6605360,
+          "text": "適当まあニュアンスで言わんとしてることはけどわかるも"
+        },
+        {
+          "speechId": 715,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6605940,
+          "sourceEndMs": 6612199,
+          "text": "こっちなぁずいぶん派手になりましたね"
+        },
+        {
+          "speechId": 716,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6613320,
+          "sourceEndMs": 6616580,
+          "text": "大きくなったなぁ"
+        },
+        {
+          "speechId": 717,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6617940,
+          "sourceEndMs": 6625629,
+          "text": "私なんで覚えてないんだ[音楽]"
+        },
+        {
+          "speechId": 718,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6628739,
+          "sourceEndMs": 6631739,
+          "text": "ね"
+        },
+        {
+          "speechId": 719,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6641400,
+          "sourceEndMs": 6654380,
+          "text": "めっちゃかっこいいここら辺都会になってね都会の中にさあ置いてかれたみんなとかによくあるさ平凡な家みたいになってんなだようち"
+        },
+        {
+          "speechId": 720,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6655260,
+          "sourceEndMs": 6661820,
+          "text": "私かのマップ更新されてんのからっかた"
+        },
+        {
+          "speechId": 721,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6665179,
+          "sourceEndMs": 6670880,
+          "text": "残ってんじゃんなくなってる"
+        },
+        {
+          "speechId": 722,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6671940,
+          "sourceEndMs": 6674060,
+          "text": "から"
+        },
+        {
+          "speechId": 723,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6675119,
+          "sourceEndMs": 6681930,
+          "text": "こことくでスポンジ店にしいいよ[音楽]"
+        },
+        {
+          "speechId": 724,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6692600,
+          "sourceEndMs": 6697460,
+          "text": "ワクワク言ったらいいか"
+        },
+        {
+          "speechId": 725,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6699020,
+          "sourceEndMs": 6706159,
+          "text": "デビリオンのマイクラで見てたな見てたなぁ"
+        },
+        {
+          "speechId": 726,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6710159,
+          "sourceEndMs": 6721400,
+          "text": "めっちゃ面白かった死んでた[音楽]気笑っむいててたの好きだったな"
+        },
+        {
+          "speechId": 727,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6723540,
+          "sourceEndMs": 6725659,
+          "text": "懐かしい"
+        },
+        {
+          "speechId": 728,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6736619,
+          "sourceEndMs": 6738800,
+          "text": "懐かしい"
+        },
+        {
+          "speechId": 729,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6739619,
+          "sourceEndMs": 6750500,
+          "text": "メリークリスマスしょうもないものしかゴミしかねえわこの家やっぱ弓は思い出じゃねー"
+        },
+        {
+          "speechId": 730,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6751890,
+          "sourceEndMs": 6757009,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 731,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6757460,
+          "sourceEndMs": 6763380,
+          "text": "強いと弓か持ってたけどなくなったくれえ"
+        },
+        {
+          "speechId": 732,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6765020,
+          "sourceEndMs": 6772820,
+          "text": "見てよんの限ここのチェストがデビリオンの限界"
+        },
+        {
+          "speechId": 733,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6778199,
+          "sourceEndMs": 6781580,
+          "text": "ボコブリンのスーじゃん"
+        },
+        {
+          "speechId": 734,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6783800,
+          "sourceEndMs": 6793820,
+          "text": "あと一発でも使ったら壊れるやん[笑い]なんで無駄な成功させた時によ"
+        },
+        {
+          "speechId": 735,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6794940,
+          "sourceEndMs": 6799040,
+          "text": "輝くイカ墨取れた時の感動たるやい"
+        },
+        {
+          "speechId": 736,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6799580,
+          "sourceEndMs": 6830179,
+          "text": "戻ろうその頃にマイクもう資源俺たちにはもう進みすぎてるこの世界1ヶ月ごとにリセットされるから毎月毎月リセットされる[音楽]それくらいがいいよやっぱダイヤの探検で喜んでる時が言っちゃう良かったよ自分で石から面し作ってた頃に戻るか"
+        },
+        {
+          "speechId": 737,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6831960,
+          "sourceEndMs": 6840170,
+          "text": "楽しいやっとダイヤモンド見つけて喜んでたあの頃に戻るが[音楽]"
+        },
+        {
+          "speechId": 738,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6842639,
+          "sourceEndMs": 6847340,
+          "text": "おそらくマイクラやったら思い出させる"
+        },
+        {
+          "speechId": 739,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6852060,
+          "sourceEndMs": 6858929,
+          "text": "が来とる本当だいるじゃん[音楽]"
+        },
+        {
+          "speechId": 740,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6871219,
+          "sourceEndMs": 6875960,
+          "text": "ちょっと通話来れるかどうかやってみっか"
+        },
+        {
+          "speechId": 741,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6878659,
+          "sourceEndMs": 6887719,
+          "text": "駅もだいぶ変わっ立ち食いあるじゃんここ"
+        },
+        {
+          "speechId": 742,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6889260,
+          "sourceEndMs": 6894260,
+          "text": "こっち仮面の罠にはまったわ"
+        },
+        {
+          "speechId": 743,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6908219,
+          "sourceEndMs": 6911900,
+          "text": "なんかさ増えてね"
+        },
+        {
+          "speechId": 744,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6917520,
+          "sourceEndMs": 6919639,
+          "text": "農民"
+        },
+        {
+          "speechId": 745,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6920960,
+          "sourceEndMs": 6924139,
+          "text": "あれを"
+        },
+        {
+          "speechId": 746,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6925739,
+          "sourceEndMs": 6937090,
+          "text": "交換今食器洗うところで風呂入ってたお疲れ様です[音楽]"
+        },
+        {
+          "speechId": 747,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6938000,
+          "sourceEndMs": 6941119,
+          "text": "かこれ"
+        },
+        {
+          "speechId": 748,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6941420,
+          "sourceEndMs": 6958639,
+          "text": "2人はねマイクラやってとにかく親しいんですわねだけどなんかいろいろ冒険したいっつーから多分ね古代遺跡連れてやったら多分喜ぶと思うよ"
+        },
+        {
+          "speechId": 749,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6959160,
+          "sourceEndMs": 6964880,
+          "text": "[音楽]遺跡多分行きましょう"
+        },
+        {
+          "speechId": 750,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6967340,
+          "sourceEndMs": 6972020,
+          "text": "いつよからマイクラやってると思ってんだ"
+        },
+        {
+          "speechId": 751,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6972139,
+          "sourceEndMs": 6980179,
+          "text": "こいつらは多分難しいことをやりたいお年頃だから今なるほど"
+        },
+        {
+          "speechId": 752,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 6988280,
+          "sourceEndMs": 7007350,
+          "text": "何でも用意してくださるもうねいやあのね作っても意味がねえって多分ね分かってもらうからそんなもん役に立たないよあそこで弓矢なんて役に立たないって身を持っよてるんです[音楽]"
+        },
+        {
+          "speechId": 753,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 7014480,
+          "sourceEndMs": 7022600,
+          "text": "こいつらはねもうね身を持つ知ってもらえるないとわかんからうちら"
+        },
+        {
+          "speechId": 754,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 7022940,
+          "sourceEndMs": 7029560,
+          "text": "スクラビングできるよ[音楽][笑い]"
+        },
+        {
+          "speechId": 755,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 7030199,
+          "sourceEndMs": 7032380,
+          "text": "蜘蛛の糸"
+        },
+        {
+          "speechId": 756,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 7033340,
+          "sourceEndMs": 7039380,
+          "text": "ならみろあるけどじゃあどうしてよ"
+        },
+        {
+          "speechId": 757,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 7039440,
+          "sourceEndMs": 7041619,
+          "text": "夏だから"
+        },
+        {
+          "speechId": 758,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 7042790,
+          "sourceEndMs": 7046170,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 759,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 7046580,
+          "sourceEndMs": 7048820,
+          "text": "甘いね"
+        },
+        {
+          "speechId": 760,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 7049099,
+          "sourceEndMs": 7053139,
+          "text": "甘いやばいやばいやばい甘い"
+        },
+        {
+          "speechId": 761,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 7054260,
+          "sourceEndMs": 7057099,
+          "text": "金よはある"
+        },
+        {
+          "speechId": 762,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 7072320,
+          "sourceEndMs": 7075320,
+          "text": "ウーパールーパー"
+        },
+        {
+          "speechId": 763,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 7076699,
+          "sourceEndMs": 7079719,
+          "text": "あれえっとだっけ"
+        },
+        {
+          "speechId": 764,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 7080119,
+          "sourceEndMs": 7083440,
+          "text": "商人が売ってるのはヤシだけだっけ"
+        },
+        {
+          "speechId": 765,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 7083780,
+          "sourceEndMs": 7087040,
+          "text": "さいっぱい持ってるよ"
+        },
+        {
+          "speechId": 766,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 7099699,
+          "sourceEndMs": 7106960,
+          "text": "おしゃれいいでしょいいなぁ"
+        },
+        {
+          "speechId": 767,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 7117030,
+          "sourceEndMs": 7121750,
+          "text": "[笑い]"
+        },
+        {
+          "speechId": 768,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 7132260,
+          "sourceEndMs": 7137739,
+          "text": "でうまいもよ同じぐらいじゃない"
+        },
+        {
+          "speechId": 769,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 7138320,
+          "sourceEndMs": 7146679,
+          "text": "でもでもうまいんだ[音楽]ナスも栄養をほとんどないけどうまいんだ"
+        },
+        {
+          "speechId": 770,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 7148699,
+          "sourceEndMs": 7156820,
+          "text": "キュウリもナスもないって聞いたよ無理かでもそれ嘘だよ実は本当かな"
+        },
+        {
+          "speechId": 771,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 7160460,
+          "sourceEndMs": 7167920,
+          "text": "出してあげたら何が取れんの何摂取できるの栄養食物繊維"
+        },
+        {
+          "speechId": 772,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 7169980,
+          "sourceEndMs": 7174900,
+          "text": "[笑い]"
+        },
+        {
+          "speechId": 773,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 7178159,
+          "sourceEndMs": 7185679,
+          "text": "移籍行くんでしたっけこの遺跡多分行きたいなそっちの方なんだろうなって思った"
+        },
+        {
+          "speechId": 774,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 7186440,
+          "sourceEndMs": 7188980,
+          "text": "腹減ったなぁ"
+        },
+        {
+          "speechId": 775,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 7189760,
+          "sourceEndMs": 7193239,
+          "text": "かもしれないです"
+        },
+        {
+          "speechId": 776,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 7199840,
+          "sourceEndMs": 7215380,
+          "text": "ダイヤモンドダイヤモンドつけたツクラビルドしたやつだろそれ結構高いじゃん絶対こいつ連れてった方いがいってあれマスターソードより多分強いよ[音楽]"
+        },
+        {
+          "speechId": 777,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 7225860,
+          "sourceEndMs": 7230020,
+          "text": "交換それはちょっと高い"
+        },
+        {
+          "speechId": 778,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 7235480,
+          "sourceEndMs": 7245619,
+          "text": "だったらパクってるけど[笑い]研修もありましていやくれてやるよ"
+        },
+        {
+          "speechId": 779,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 7256580,
+          "sourceEndMs": 7261489,
+          "text": "さっき[音楽]"
+        },
+        {
+          "speechId": 780,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 7261739,
+          "sourceEndMs": 7264099,
+          "text": "拾ってたの"
+        },
+        {
+          "speechId": 781,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 7264720,
+          "sourceEndMs": 7273639,
+          "text": "[笑い]ただなの弓んだけどただの意味だよ"
+        },
+        {
+          "speechId": 782,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 7276520,
+          "sourceEndMs": 7282949,
+          "text": "使わけどないんだ[音楽]"
+        },
+        {
+          "speechId": 783,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 7284060,
+          "sourceEndMs": 7289599,
+          "text": "裸にこの夢はちょっとまずくないまずくない"
+        },
+        {
+          "speechId": 784,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 7291260,
+          "sourceEndMs": 7293980,
+          "text": "よ"
+        },
+        {
+          "speechId": 785,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 7303520,
+          "sourceEndMs": 7306639,
+          "text": "まずくよない"
+        },
+        {
+          "speechId": 786,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 7306850,
+          "sourceEndMs": 7310690,
+          "text": "[笑い]"
+        },
+        {
+          "speechId": 787,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 7312560,
+          "sourceEndMs": 7318580,
+          "text": "弓矢ねえまでは知ったこっちゃけどもう鎧とかだったらくれてやるよ"
+        },
+        {
+          "speechId": 788,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 7326320,
+          "sourceEndMs": 7338980,
+          "text": "もうこんな工場地帯になっちゃってシェリンがいろいろ牧歌的な風景はどこに行ってしまったのそんなものはもうないよ"
+        },
+        {
+          "speechId": 789,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 7342760,
+          "sourceEndMs": 7346960,
+          "text": "家の隣工場で来てんだけど"
+        },
+        {
+          "speechId": 790,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 7350320,
+          "sourceEndMs": 7355119,
+          "text": "空気絶対悪いぞ排ガスが"
+        },
+        {
+          "speechId": 791,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 7355159,
+          "sourceEndMs": 7358900,
+          "text": "日照権取られてるよ"
+        },
+        {
+          "speechId": 792,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 7360410,
+          "sourceEndMs": 7364570,
+          "text": "[笑い]"
+        },
+        {
+          "speechId": 793,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 7367639,
+          "sourceEndMs": 7382480,
+          "text": "その奥にもなんか知らねえのが立ってる何あのビルあれオレンジあセブンイレブン相変わる商品な階段に負けたまま作ってくから"
+        },
+        {
+          "speechId": 794,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 7382940,
+          "sourceEndMs": 7385420,
+          "text": "そうだよ"
+        },
+        {
+          "speechId": 795,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 7388719,
+          "sourceEndMs": 7391840,
+          "text": "そういえば"
+        },
+        {
+          "speechId": 796,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 7397400,
+          "sourceEndMs": 7407710,
+          "text": "成金趣味納豆ってちょっと下品です[笑い]"
+        },
+        {
+          "speechId": 797,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 7408500,
+          "sourceEndMs": 7411460,
+          "text": "か"
+        },
+        {
+          "speechId": 798,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 7415820,
+          "sourceEndMs": 7420180,
+          "text": "[笑い]"
+        },
+        {
+          "speechId": 799,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 7427219,
+          "sourceEndMs": 7446760,
+          "text": "取ってもいいかもここにここにあるこのに箱入ってるやつ取ってっていいぞ[笑い]すごいなぁ[音楽][笑い]"
+        },
+        {
+          "speechId": 800,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 7449900,
+          "sourceEndMs": 7452900,
+          "text": "日本"
+        },
+        {
+          "speechId": 801,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 7459920,
+          "sourceEndMs": 7462040,
+          "text": "品です"
+        },
+        {
+          "speechId": 802,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 7462280,
+          "sourceEndMs": 7467629,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 803,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 7477159,
+          "sourceEndMs": 7485619,
+          "text": "そのた辺で拾っやつだから[音楽]ありがとうパンツは"
+        },
+        {
+          "speechId": 804,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 7485900,
+          "sourceEndMs": 7488679,
+          "text": "パンツ"
+        },
+        {
+          "speechId": 805,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 7492159,
+          "sourceEndMs": 7495340,
+          "text": "入ってるよ"
+        },
+        {
+          "speechId": 806,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 7498040,
+          "sourceEndMs": 7515739,
+          "text": "2は欲しいかも[笑い]お前はスカートじゃねえだろう[笑い]普通欲しい"
+        },
+        {
+          "speechId": 807,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 7519400,
+          "sourceEndMs": 7523300,
+          "text": "かなこれでいいか"
+        },
+        {
+          "speechId": 808,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 7532400,
+          "sourceEndMs": 7535659,
+          "text": "これあげるわ"
+        },
+        {
+          "speechId": 809,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 7541900,
+          "sourceEndMs": 7545660,
+          "text": "[笑い]"
+        },
+        {
+          "speechId": 810,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 7550280,
+          "sourceEndMs": 7553840,
+          "text": "長年き歩いてたから"
+        },
+        {
+          "speechId": 811,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 7562780,
+          "sourceEndMs": 7566320,
+          "text": "早く捨てていいよ"
+        },
+        {
+          "speechId": 812,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 7567920,
+          "sourceEndMs": 7571390,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 813,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 7574650,
+          "sourceEndMs": 7584689,
+          "text": "[音楽]エンチャント下行ったらできるから自分でしてこいよ[音楽]"
+        },
+        {
+          "speechId": 814,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 7590739,
+          "sourceEndMs": 7597099,
+          "text": "上でエメラルドとが経験値稼いでこいよ"
+        },
+        {
+          "speechId": 815,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 7599780,
+          "sourceEndMs": 7602780,
+          "text": "ね"
+        },
+        {
+          "speechId": 816,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 7614230,
+          "sourceEndMs": 7617650,
+          "text": "[笑い]"
+        },
+        {
+          "speechId": 817,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 7620199,
+          "sourceEndMs": 7624099,
+          "text": "お前上手いめっちゃじゃん"
+        },
+        {
+          "speechId": 818,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 7627619,
+          "sourceEndMs": 7629679,
+          "text": "わかんない"
+        },
+        {
+          "speechId": 819,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 7629840,
+          "sourceEndMs": 7632500,
+          "text": "の"
+        },
+        {
+          "speechId": 820,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 7635599,
+          "sourceEndMs": 7640840,
+          "text": "箱に入ってたなんか作った"
+        },
+        {
+          "speechId": 821,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 7641179,
+          "sourceEndMs": 7644320,
+          "text": "なんか作れた"
+        },
+        {
+          "speechId": 822,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 7644960,
+          "sourceEndMs": 7651340,
+          "text": "冒険ってさ敵に対峙した時にみたいな感じで"
+        },
+        {
+          "speechId": 823,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 7651860,
+          "sourceEndMs": 7655840,
+          "text": "の時に任せろ"
+        },
+        {
+          "speechId": 824,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 7656440,
+          "sourceEndMs": 7659679,
+          "text": "バフかかるよ"
+        },
+        {
+          "speechId": 825,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 7661159,
+          "sourceEndMs": 7664420,
+          "text": "耳栓耐震"
+        },
+        {
+          "speechId": 826,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 7664880,
+          "sourceEndMs": 7667420,
+          "text": "いいじゃん"
+        },
+        {
+          "speechId": 827,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 7670280,
+          "sourceEndMs": 7673060,
+          "text": "見もらってたら"
+        },
+        {
+          "speechId": 828,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 7677980,
+          "sourceEndMs": 7683980,
+          "text": "さもう弓諦めるからさ早速行く"
+        },
+        {
+          "speechId": 829,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 7684320,
+          "sourceEndMs": 7686860,
+          "text": "じゃあ"
+        },
+        {
+          "speechId": 830,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 7686990,
+          "sourceEndMs": 7690080,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 831,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 7692000,
+          "sourceEndMs": 7696219,
+          "text": "先頭はやっぱみんなに頑張ってもらおう"
+        },
+        {
+          "speechId": 832,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 7698650,
+          "sourceEndMs": 7702570,
+          "text": "[笑い]"
+        },
+        {
+          "speechId": 833,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 7703810,
+          "sourceEndMs": 7717099,
+          "text": "[音楽]30ぐらい分ぐらいかかるよ10分かかるかもしれんな大変だ大変だ"
+        },
+        {
+          "speechId": 834,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 7720440,
+          "sourceEndMs": 7723340,
+          "text": "雨降ってるよ"
+        },
+        {
+          "speechId": 835,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 7724540,
+          "sourceEndMs": 7737380,
+          "text": "でも晴れるサーキット本当晴れるやばいのだから歩きながらポエム言うなや"
+        },
+        {
+          "speechId": 836,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 7738340,
+          "sourceEndMs": 7747760,
+          "text": "[音楽]何よでコードギアスなんだ[笑い]"
+        },
+        {
+          "speechId": 837,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 7748820,
+          "sourceEndMs": 7762099,
+          "text": "オレンジレンジャー流れたのかと思ったらさ終わってたえ終わったの[音楽]誰かに突き落とされた裏切り者がいるな"
+        },
+        {
+          "speechId": 838,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 7767320,
+          "sourceEndMs": 7771639,
+          "text": "その冬めっちゃいいじゃん"
+        },
+        {
+          "speechId": 839,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 7772280,
+          "sourceEndMs": 7775840,
+          "text": "服だけで戦闘してる感じる"
+        },
+        {
+          "speechId": 840,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 7776480,
+          "sourceEndMs": 7783940,
+          "text": "リーダーみたいリーダーもんやってるなしばらく言われてませんけどね"
+        },
+        {
+          "speechId": 841,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 7786340,
+          "sourceEndMs": 7796960,
+          "text": "マジ1年ぐらい呼ばれてないもう懐かしい話になっちゃったなんて言わてんれのじゃあ普通にか"
+        },
+        {
+          "speechId": 842,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 7798590,
+          "sourceEndMs": 7804580,
+          "text": "[音楽]ここか"
+        },
+        {
+          "speechId": 843,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 7805520,
+          "sourceEndMs": 7812679,
+          "text": "毎回てんこれ立っての立ててる人いるんだってえらいねえらいよ"
+        },
+        {
+          "speechId": 844,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 7813070,
+          "sourceEndMs": 7817840,
+          "text": "[音楽]感謝の感謝"
+        },
+        {
+          "speechId": 845,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 7820040,
+          "sourceEndMs": 7824000,
+          "text": "[笑い]"
+        },
+        {
+          "speechId": 846,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 7825520,
+          "sourceEndMs": 7833560,
+          "text": "何でも行けるね[音楽]ちゃんと出口から出ろよ"
+        },
+        {
+          "speechId": 847,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 7835840,
+          "sourceEndMs": 7842500,
+          "text": "ねなんだっけこれから行くね古代みたい遺跡なところは"
+        },
+        {
+          "speechId": 848,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 7842659,
+          "sourceEndMs": 7850119,
+          "text": "竹屋は高い山高い山高山高山"
+        },
+        {
+          "speechId": 849,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 7850520,
+          "sourceEndMs": 7857860,
+          "text": "高い山の地下にあるらしい行ったことないの"
+        },
+        {
+          "speechId": 850,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 7858820,
+          "sourceEndMs": 7900699,
+          "text": "だはけどでもあるかどうかやっぱりそうだよレアだよだから見つけられたらわーいわーいなんだ見つかんない可能性あるのあるよまじかよエンドシティに見えないよ見つけられるかもしれないしそうだね持ってるから配信者だからじゃあ配信者としてのその腕前見せてくれよ"
+        },
+        {
+          "speechId": 851,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 7901940,
+          "sourceEndMs": 7907659,
+          "text": "かかってるよそうらしいですよ"
+        },
+        {
+          "speechId": 852,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 7910580,
+          "sourceEndMs": 7933280,
+          "text": "お花書いてる本当だ[笑い]平和だ戦場に花植えましょうやっぱり平和に平和の象徴平和に敵の血を吸って書けじゃないけどな我々"
+        },
+        {
+          "speechId": 853,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 7935119,
+          "sourceEndMs": 7944940,
+          "text": "が掴むの我々平和は敵にとっての平和ではありません[笑い]"
+        },
+        {
+          "speechId": 854,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 7956900,
+          "sourceEndMs": 7958900,
+          "text": "じゃん"
+        },
+        {
+          "speechId": 855,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 7959619,
+          "sourceEndMs": 7963099,
+          "text": "何したんだよ"
+        },
+        {
+          "speechId": 856,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 7967400,
+          "sourceEndMs": 7971679,
+          "text": "そこはなんだこれ馬じゃん"
+        },
+        {
+          "speechId": 857,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 7978739,
+          "sourceEndMs": 7980920,
+          "text": "刺されるよ"
+        },
+        {
+          "speechId": 858,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 7985430,
+          "sourceEndMs": 7990440,
+          "text": "[笑い]"
+        },
+        {
+          "speechId": 859,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 7994040,
+          "sourceEndMs": 7999099,
+          "text": "つけられるんじゃない着いたよ"
+        },
+        {
+          "speechId": 860,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 8004390,
+          "sourceEndMs": 8016440,
+          "text": "[笑い][音楽][笑い]行くんだよ"
+        },
+        {
+          "speechId": 861,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 8018719,
+          "sourceEndMs": 8028139,
+          "text": "こいつにも角笛を覚えさせなきゃなったら戻せたら増えてくるかも"
+        },
+        {
+          "speechId": 862,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 8029199,
+          "sourceEndMs": 8031679,
+          "text": "じゃない"
+        },
+        {
+          "speechId": 863,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 8033300,
+          "sourceEndMs": 8055440,
+          "text": "今日このパーティーで行こういいねドラゴンクエストモンスターズの新しいの作ってるらしいしなドラクエモンスターズやってんのやってるよ一番好きかもドラクエやってないけどモンスターズだけやってるよ"
+        },
+        {
+          "speechId": 864,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 8055860,
+          "sourceEndMs": 8077520,
+          "text": "なんかやっぱナンバリングやってそれからだなと思ってたわみんなそういうわけじゃないんだ子供にはそんなことわかんなかったねテリーこいつ誰って思いながらやってたよそういうもんなんだなぁ俺も律儀シリーズにやってるわ楽しいけどいいじゃん"
+        },
+        {
+          "speechId": 865,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 8077860,
+          "sourceEndMs": 8080040,
+          "text": "楽しいよ"
+        },
+        {
+          "speechId": 866,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 8080460,
+          "sourceEndMs": 8083590,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 867,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 8085420,
+          "sourceEndMs": 8088420,
+          "text": "ね"
+        },
+        {
+          "speechId": 868,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 8102650,
+          "sourceEndMs": 8107259,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 869,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 8112560,
+          "sourceEndMs": 8125150,
+          "text": "あーちょっと劣等感に苛まれてるよなはい誰も教えてくれないかわいそう[笑い]"
+        },
+        {
+          "speechId": 870,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 8128440,
+          "sourceEndMs": 8131159,
+          "text": "リンクに当たっちゃってね"
+        },
+        {
+          "speechId": 871,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 8135159,
+          "sourceEndMs": 8154139,
+          "text": "確かに周りからなんかもう後ろ指刺されてるゼルダ初めて見たわ[音楽]そうですね意外とね3つ持ってるくせにね[音楽]別れよてないんだね"
+        },
+        {
+          "speechId": 872,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 8154780,
+          "sourceEndMs": 8159480,
+          "text": "強いよね触ったら発動できる"
+        },
+        {
+          "speechId": 873,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 8174599,
+          "sourceEndMs": 8178380,
+          "text": "俺は山じゃねえな"
+        },
+        {
+          "speechId": 874,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 8184100,
+          "sourceEndMs": 8187159,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 875,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 8191739,
+          "sourceEndMs": 8193860,
+          "text": "頑張って"
+        },
+        {
+          "speechId": 876,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 8194380,
+          "sourceEndMs": 8198359,
+          "text": "蜂にねいるから繋がってるから大丈夫じゃない"
+        },
+        {
+          "speechId": 877,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 8200080,
+          "sourceEndMs": 8205420,
+          "text": "ゲゲゲの鬼太郎みたいなカラス"
+        },
+        {
+          "speechId": 878,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 8210700,
+          "sourceEndMs": 8215040,
+          "text": "ここの例えばキャラを出してくれたものなんか"
+        },
+        {
+          "speechId": 879,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 8215099,
+          "sourceEndMs": 8219700,
+          "text": "好きな妖怪何で"
+        },
+        {
+          "speechId": 880,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 8221920,
+          "sourceEndMs": 8227580,
+          "text": "だろうこのやつロリコンどもがって"
+        },
+        {
+          "speechId": 881,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 8231939,
+          "sourceEndMs": 8234599,
+          "text": "だ"
+        },
+        {
+          "speechId": 882,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 8237160,
+          "sourceEndMs": 8240780,
+          "text": "友達かも"
+        },
+        {
+          "speechId": 883,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 8243600,
+          "sourceEndMs": 8251280,
+          "text": "[笑い]立ち近いディズニー"
+        },
+        {
+          "speechId": 884,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 8255290,
+          "sourceEndMs": 8258499,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 885,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 8259120,
+          "sourceEndMs": 8261120,
+          "text": "能力"
+        },
+        {
+          "speechId": 886,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 8267580,
+          "sourceEndMs": 8278639,
+          "text": "私4人分の命だよ私1人で重いねゴブの魂5部の魂じゃ4人分じゃねえじゃん"
+        },
+        {
+          "speechId": 887,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 8279160,
+          "sourceEndMs": 8281939,
+          "text": "2.5だね"
+        },
+        {
+          "speechId": 888,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 8282300,
+          "sourceEndMs": 8285599,
+          "text": "ありますよ"
+        },
+        {
+          "speechId": 889,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 8288719,
+          "sourceEndMs": 8300179,
+          "text": "いいことあるよ[笑い]やってごらんどうなの8使いになる"
+        },
+        {
+          "speechId": 890,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 8303340,
+          "sourceEndMs": 8305880,
+          "text": "よ"
+        },
+        {
+          "speechId": 891,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 8307859,
+          "sourceEndMs": 8310920,
+          "text": "戦闘開始"
+        },
+        {
+          "speechId": 892,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 8313690,
+          "sourceEndMs": 8316799,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 893,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 8322320,
+          "sourceEndMs": 8334139,
+          "text": "戦うって言うもんね一人になるまで戦っていくみたいなそうなんだあれ山じゃね"
+        },
+        {
+          "speechId": 894,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 8335679,
+          "sourceEndMs": 8339059,
+          "text": "蒸し焼きにするんでしょ確かね"
+        },
+        {
+          "speechId": 895,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 8343120,
+          "sourceEndMs": 8348359,
+          "text": "ミツバチじゃない俺結構"
+        },
+        {
+          "speechId": 896,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 8349540,
+          "sourceEndMs": 8353320,
+          "text": "高山運転"
+        },
+        {
+          "speechId": 897,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 8362519,
+          "sourceEndMs": 8366000,
+          "text": "いいんじゃないここ"
+        },
+        {
+          "speechId": 898,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 8366280,
+          "sourceEndMs": 8382740,
+          "text": "らそれすい欲しいぞませんはい別に登らんでいいよこの下だからミツバチ[音楽]減っねえてから"
+        },
+        {
+          "speechId": 899,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 8384399,
+          "sourceEndMs": 8386639,
+          "text": "逃げてるぞ"
+        },
+        {
+          "speechId": 900,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 8393580,
+          "sourceEndMs": 8397540,
+          "text": "消えちゃったよ"
+        },
+        {
+          "speechId": 901,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 8401760,
+          "sourceEndMs": 8408020,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 902,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 8412000,
+          "sourceEndMs": 8418920,
+          "text": "捕まえたけどリードもうなくなっちゃったもうないんだ"
+        },
+        {
+          "speechId": 903,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 8419220,
+          "sourceEndMs": 8429359,
+          "text": "これって付け替えできないのなんかVとかにねつけられなかった"
+        },
+        {
+          "speechId": 904,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 8441660,
+          "sourceEndMs": 8448680,
+          "text": "よ[音楽]新レシピ"
+        },
+        {
+          "speechId": 905,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 8454180,
+          "sourceEndMs": 8457180,
+          "text": "ハニカム"
+        },
+        {
+          "speechId": 906,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 8457660,
+          "sourceEndMs": 8461739,
+          "text": "糸[音楽]"
+        },
+        {
+          "speechId": 907,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 8471040,
+          "sourceEndMs": 8473040,
+          "text": "可愛い"
+        },
+        {
+          "speechId": 908,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 8473319,
+          "sourceEndMs": 8478180,
+          "text": "あいつらのためにポピー植えとくかなんか"
+        },
+        {
+          "speechId": 909,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 8479200,
+          "sourceEndMs": 8484620,
+          "text": "めっちゃ花粉ついてんのこれそういうことだね"
+        },
+        {
+          "speechId": 910,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 8488900,
+          "sourceEndMs": 8493859,
+          "text": "[音楽]こちらは本当だよ"
+        },
+        {
+          "speechId": 911,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 8497080,
+          "sourceEndMs": 8501640,
+          "text": "幸せになれない"
+        },
+        {
+          "speechId": 912,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 8502420,
+          "sourceEndMs": 8508820,
+          "text": "よ[笑い]"
+        },
+        {
+          "speechId": 913,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 8513300,
+          "sourceEndMs": 8523840,
+          "text": "ねこれはねあんまり広い世界を教えると本なんて読む"
+        },
+        {
+          "speechId": 914,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 8526720,
+          "sourceEndMs": 8533280,
+          "text": "教育が行われてる頑張って掘って応援しよう"
+        },
+        {
+          "speechId": 915,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 8535420,
+          "sourceEndMs": 8540360,
+          "text": "[笑い]"
+        },
+        {
+          "speechId": 916,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 8553899,
+          "sourceEndMs": 8555899,
+          "text": "初めて"
+        },
+        {
+          "speechId": 917,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 8557620,
+          "sourceEndMs": 8564840,
+          "text": "ミックスベジタブルだなんかミキサーにかけたらジュースになりそうな色はしてます"
+        },
+        {
+          "speechId": 918,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 8568960,
+          "sourceEndMs": 8571380,
+          "text": "初めて見た"
+        },
+        {
+          "speechId": 919,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 8573100,
+          "sourceEndMs": 8576660,
+          "text": "珍しいよお土産だ"
+        },
+        {
+          "speechId": 920,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 8577660,
+          "sourceEndMs": 8583639,
+          "text": "知らねえんだろうきっと[音楽]"
+        },
+        {
+          "speechId": 921,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 8588880,
+          "sourceEndMs": 8594359,
+          "text": "ちょっと松明作るわやったー"
+        },
+        {
+          "speechId": 922,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 8600720,
+          "sourceEndMs": 8614640,
+          "text": "できた後輩だよ[笑い]回収できなかったありがとうございます誰かに取られた"
+        },
+        {
+          "speechId": 923,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 8615780,
+          "sourceEndMs": 8619200,
+          "text": "やっありがとうた"
+        },
+        {
+          "speechId": 924,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 8622979,
+          "sourceEndMs": 8627300,
+          "text": "これでどんどん掘ってくだんよ"
+        },
+        {
+          "speechId": 925,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 8627399,
+          "sourceEndMs": 8652420,
+          "text": "じゃあ私があれ頑張れ何も何も何もする何もすることが歌歌ってじゃあ先輩[音楽]も広げるに専念して優しい優しいありがたい"
+        },
+        {
+          "speechId": 926,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 8653819,
+          "sourceEndMs": 8658260,
+          "text": "いますお願いします"
+        },
+        {
+          "speechId": 927,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 8660100,
+          "sourceEndMs": 8682720,
+          "text": "ギラギラの太陽濡れた素肌ちんちん痛いよ日焼けのこれフォーカスオンに入ってる私のオリジナル曲いいねいいでしょ[音楽]ちょいちょいなんかCMみたいなやつどっから見たら音声"
+        },
+        {
+          "speechId": 928,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 8687640,
+          "sourceEndMs": 8699680,
+          "text": "本物だ本物の花畑から本物の花畑です[音楽]"
+        },
+        {
+          "speechId": 929,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 8705390,
+          "sourceEndMs": 8718209,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 930,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 8722580,
+          "sourceEndMs": 8735660,
+          "text": "世界へおいで跳ねささい付き合ったり[音楽]めっちゃちゃんと覚えてくれてるちゃんと歌詞まで"
+        },
+        {
+          "speechId": 931,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 8735700,
+          "sourceEndMs": 8739800,
+          "text": "すごいありがとうございます"
+        },
+        {
+          "speechId": 932,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 8741180,
+          "sourceEndMs": 8744770,
+          "text": "[笑い]"
+        },
+        {
+          "speechId": 933,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 8746700,
+          "sourceEndMs": 8749880,
+          "text": "サインカード"
+        },
+        {
+          "speechId": 934,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 8751540,
+          "sourceEndMs": 8754979,
+          "text": "普通そうねに持って帰るの嫌だった"
+        },
+        {
+          "speechId": 935,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 8759220,
+          "sourceEndMs": 8761340,
+          "text": "暗いよ"
+        },
+        {
+          "speechId": 936,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 8763420,
+          "sourceEndMs": 8784420,
+          "text": "この辺でちょっとこの辺でもうずーっと掘っていくいろんな方向に四方方向ここから[音楽]じゃあ私こっちね"
+        },
+        {
+          "speechId": 937,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 8785280,
+          "sourceEndMs": 8788520,
+          "text": "私よ"
+        },
+        {
+          "speechId": 938,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 8794760,
+          "sourceEndMs": 8798540,
+          "text": "これでいけそうです"
+        },
+        {
+          "speechId": 939,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 8803500,
+          "sourceEndMs": 8813660,
+          "text": "使ったらいいのえっとねなんかいつもと違うなんかなんて言ったらいいかなブツブツの黒いブロックなんだよいつもと違う"
+        },
+        {
+          "speechId": 940,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 8814780,
+          "sourceEndMs": 8822660,
+          "text": "ブツブツの黒い真っ黒で青いブツブツみたいなあるやつちょっと光ってる"
+        },
+        {
+          "speechId": 941,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 8823000,
+          "sourceEndMs": 8830040,
+          "text": "ねなんかバイオームがねディープダークっ言っててるのよ"
+        },
+        {
+          "speechId": 942,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 8830510,
+          "sourceEndMs": 8835380,
+          "text": "[音楽]ね"
+        },
+        {
+          "speechId": 943,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 8836819,
+          "sourceEndMs": 8844200,
+          "text": "そのスタンドは砂利だ"
+        },
+        {
+          "speechId": 944,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 8847899,
+          "sourceEndMs": 8851340,
+          "text": "り報告"
+        },
+        {
+          "speechId": 945,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 8855430,
+          "sourceEndMs": 8859569,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 946,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 8864170,
+          "sourceEndMs": 8876479,
+          "text": "[笑い]気がするちょっとくっついちゃおう"
+        },
+        {
+          "speechId": 947,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 8876980,
+          "sourceEndMs": 8882240,
+          "text": "[笑い]これなんかでも音する"
+        },
+        {
+          "speechId": 948,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 8889960,
+          "sourceEndMs": 8893819,
+          "text": "なんか音するどうした"
+        },
+        {
+          "speechId": 949,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 8896760,
+          "sourceEndMs": 8900000,
+          "text": "んじゃないの"
+        },
+        {
+          "speechId": 950,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 8908500,
+          "sourceEndMs": 8910740,
+          "text": "暗いんです"
+        },
+        {
+          "speechId": 951,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 8916479,
+          "sourceEndMs": 8922850,
+          "text": "ね[音楽]"
+        },
+        {
+          "speechId": 952,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 8932150,
+          "sourceEndMs": 8940030,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 953,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 8941040,
+          "sourceEndMs": 8947520,
+          "text": "何も見つけてないけどこれからです"
+        },
+        {
+          "speechId": 954,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 8948540,
+          "sourceEndMs": 8956220,
+          "text": "いじめるのやめなよ良くないよそういう感じ"
+        },
+        {
+          "speechId": 955,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 8958780,
+          "sourceEndMs": 8963800,
+          "text": "[笑い]"
+        },
+        {
+          "speechId": 956,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 8964000,
+          "sourceEndMs": 8966780,
+          "text": "ですか"
+        },
+        {
+          "speechId": 957,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 8970980,
+          "sourceEndMs": 8975620,
+          "text": "[笑い]"
+        },
+        {
+          "speechId": 958,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 8978400,
+          "sourceEndMs": 8999600,
+          "text": "[笑い]150人までだったスタッフさんとかもねいるから考えたらみんなの名前ねちゃんと覚えてる覚えてるよ"
+        },
+        {
+          "speechId": 959,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 9003740,
+          "sourceEndMs": 9010220,
+          "text": "あるんかここなんかポコポコってない"
+        },
+        {
+          "speechId": 960,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 9011520,
+          "sourceEndMs": 9018429,
+          "text": "なえマグマの音する[音楽]"
+        },
+        {
+          "speechId": 961,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 9028399,
+          "sourceEndMs": 9031819,
+          "text": "なかったやつ"
+        },
+        {
+          "speechId": 962,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 9034210,
+          "sourceEndMs": 9037260,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 963,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 9038720,
+          "sourceEndMs": 9041899,
+          "text": "見つけました"
+        },
+        {
+          "speechId": 964,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 9051740,
+          "sourceEndMs": 9055010,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 965,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 9060000,
+          "sourceEndMs": 9064889,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 966,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 9070630,
+          "sourceEndMs": 9073810,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 967,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 9075899,
+          "sourceEndMs": 9078020,
+          "text": "洞窟"
+        },
+        {
+          "speechId": 968,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 9078899,
+          "sourceEndMs": 9081380,
+          "text": "だ普通の"
+        },
+        {
+          "speechId": 969,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 9082859,
+          "sourceEndMs": 9092000,
+          "text": "これなんだなんだこれなんだどう思うどんな"
+        },
+        {
+          "speechId": 970,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 9093359,
+          "sourceEndMs": 9095840,
+          "text": "よナビ"
+        },
+        {
+          "speechId": 971,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 9100580,
+          "sourceEndMs": 9103700,
+          "text": "見つけた"
+        },
+        {
+          "speechId": 972,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 9107460,
+          "sourceEndMs": 9110120,
+          "text": "ダイヤモンド"
+        },
+        {
+          "speechId": 973,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 9124160,
+          "sourceEndMs": 9135500,
+          "text": "じゃ辺ないここらあのね俺も空洞に出ていろいろしれ探索したからそれ今の俺かもん我々"
+        },
+        {
+          "speechId": 974,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 9136620,
+          "sourceEndMs": 9139620,
+          "text": "の"
+        },
+        {
+          "speechId": 975,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 9139859,
+          "sourceEndMs": 9146899,
+          "text": "洞窟みたい風が繋がっちゃったねいつもと違うと思ったけど"
+        },
+        {
+          "speechId": 976,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 9147240,
+          "sourceEndMs": 9150620,
+          "text": "俺って普通なの"
+        },
+        {
+          "speechId": 977,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 9151000,
+          "sourceEndMs": 9154090,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 978,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 9155880,
+          "sourceEndMs": 9163520,
+          "text": "疲れちゃって[音楽]友達のところに行きたいなぁ"
+        },
+        {
+          "speechId": 979,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 9169160,
+          "sourceEndMs": 9177319,
+          "text": "私も見えない緑色のやつないお前にロケットつけて飛ばしてやるよ"
+        },
+        {
+          "speechId": 980,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 9187500,
+          "sourceEndMs": 9198500,
+          "text": "なんかかっこいいなこの洞窟かっこだけいいかこれかっこいいだけの洞窟だったこのままだと"
+        },
+        {
+          "speechId": 981,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 9198540,
+          "sourceEndMs": 9205059,
+          "text": "迷子になるな山の[音楽]"
+        },
+        {
+          "speechId": 982,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 9207180,
+          "sourceEndMs": 9218600,
+          "text": "どこなのそういうわけではないとは思う山の下が一番出やすいよっていう感じ"
+        },
+        {
+          "speechId": 983,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 9219850,
+          "sourceEndMs": 9223020,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 984,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 9225859,
+          "sourceEndMs": 9240920,
+          "text": "バイオームがなんかみたいな感じのやつちょっとラック送って出してもらおう[笑い]身も蓋もないこと言い出す"
+        },
+        {
+          "speechId": 985,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 9242580,
+          "sourceEndMs": 9253280,
+          "text": "そういうのって方々するもんだよね[笑い]初めから用意しといてほしいなって"
+        },
+        {
+          "speechId": 986,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 9253800,
+          "sourceEndMs": 9256220,
+          "text": "言った"
+        },
+        {
+          "speechId": 987,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 9256740,
+          "sourceEndMs": 9268160,
+          "text": "身も蓋もね[音楽]マイクラ最近楽してばっかりじゃないかみたいな何だっけ便利になりやがってよみたいな"
+        },
+        {
+          "speechId": 988,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 9269460,
+          "sourceEndMs": 9274280,
+          "text": "言ってたみたい一番恩恵に預かってんじゃん"
+        },
+        {
+          "speechId": 989,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 9274979,
+          "sourceEndMs": 9278000,
+          "text": "我々って日々成長するから"
+        },
+        {
+          "speechId": 990,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 9278580,
+          "sourceEndMs": 9292760,
+          "text": "やべっすいません亡くなった何もなかった頃に戻りてっつってたやついた気がするんだけどいたな死んだ今でも思ってるよ"
+        },
+        {
+          "speechId": 991,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 9292920,
+          "sourceEndMs": 9294920,
+          "text": "闇"
+        },
+        {
+          "speechId": 992,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 9295140,
+          "sourceEndMs": 9298460,
+          "text": "だた俺の冒険終わっ"
+        },
+        {
+          "speechId": 993,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 9304380,
+          "sourceEndMs": 9317600,
+          "text": "めっちゃでかいとこに繋がったのはベル先輩が松明したってことすかおそらく吾輩おそらくおそらく"
+        },
+        {
+          "speechId": 994,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 9319760,
+          "sourceEndMs": 9324979,
+          "text": "この辺にしようかもしれない説"
+        },
+        {
+          "speechId": 995,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 9325500,
+          "sourceEndMs": 9332120,
+          "text": "じゃあ別の山探すなんかめちゃめちゃ地下に来ためちゃめちゃ近い"
+        },
+        {
+          "speechId": 996,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 9350760,
+          "sourceEndMs": 9353300,
+          "text": "なんだこれ"
+        },
+        {
+          "speechId": 997,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 9355859,
+          "sourceEndMs": 9361640,
+          "text": "鍾乳洞鍾乳ぐらいて洞あと5分頑張っみる"
+        },
+        {
+          "speechId": 998,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 9362460,
+          "sourceEndMs": 9364580,
+          "text": "か"
+        },
+        {
+          "speechId": 999,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 9373880,
+          "sourceEndMs": 9380120,
+          "text": "あれかもっと高い山じゃないと"
+        },
+        {
+          "speechId": 1000,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 9392880,
+          "sourceEndMs": 9397700,
+          "text": "めっちゃありますよもういらないですか"
+        },
+        {
+          "speechId": 1001,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 9397860,
+          "sourceEndMs": 9405070,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 1002,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 9408020,
+          "sourceEndMs": 9411179,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 1003,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 9413560,
+          "sourceEndMs": 9418240,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 1004,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 9423920,
+          "sourceEndMs": 9432159,
+          "text": "まだよマイクラにはウォークマンねえんだ[音楽]"
+        },
+        {
+          "speechId": 1005,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 9435920,
+          "sourceEndMs": 9443660,
+          "text": "マイクラの七不思議して誰かお願いしますパンのそんなそんな"
+        },
+        {
+          "speechId": 1006,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 9446220,
+          "sourceEndMs": 9449540,
+          "text": "マイ不思議クラ七"
+        },
+        {
+          "speechId": 1007,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 9456840,
+          "sourceEndMs": 9463160,
+          "text": "下まで掘ると絶対に壊すことのできないブロックがあるんだよ"
+        },
+        {
+          "speechId": 1008,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 9474720,
+          "sourceEndMs": 9486079,
+          "text": "そして一番下じゃなくても絶対に壊さないブロックはいくつかこの世界にあるんだよ[音楽]"
+        },
+        {
+          "speechId": 1009,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 9487939,
+          "sourceEndMs": 9492080,
+          "text": "すらよゲットできないんだ"
+        },
+        {
+          "speechId": 1010,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 9497830,
+          "sourceEndMs": 9501020,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 1011,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 9502200,
+          "sourceEndMs": 9505740,
+          "text": "めっちゃダイヤ取れるの"
+        },
+        {
+          "speechId": 1012,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 9510780,
+          "sourceEndMs": 9513439,
+          "text": "人間"
+        },
+        {
+          "speechId": 1013,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 9513940,
+          "sourceEndMs": 9520580,
+          "text": "[音楽]ってこと誰も来たことない"
+        },
+        {
+          "speechId": 1014,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 9520800,
+          "sourceEndMs": 9523880,
+          "text": "私だ"
+        },
+        {
+          "speechId": 1015,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 9524480,
+          "sourceEndMs": 9529160,
+          "text": "[音楽]いや私じゃない"
+        },
+        {
+          "speechId": 1016,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 9529750,
+          "sourceEndMs": 9534080,
+          "text": "[音楽]別の人間だ"
+        },
+        {
+          "speechId": 1017,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 9539180,
+          "sourceEndMs": 9542359,
+          "text": "高宮がいる"
+        },
+        {
+          "speechId": 1018,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 9543930,
+          "sourceEndMs": 9549920,
+          "text": "[笑い]繋がったてみたい"
+        },
+        {
+          "speechId": 1019,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 9554640,
+          "sourceEndMs": 9561920,
+          "text": "俺って水とマグマザートっことて"
+        },
+        {
+          "speechId": 1020,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 9564080,
+          "sourceEndMs": 9570560,
+          "text": "変えてしまうほどの戦いがあったってこと"
+        },
+        {
+          "speechId": 1021,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 9570640,
+          "sourceEndMs": 9576110,
+          "text": "[笑い]"
+        },
+        {
+          "speechId": 1022,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 9578160,
+          "sourceEndMs": 9583280,
+          "text": "体罰ないからうろうろしてよ"
+        },
+        {
+          "speechId": 1023,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 9585910,
+          "sourceEndMs": 9589000,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 1024,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 9589399,
+          "sourceEndMs": 9595760,
+          "text": "進んできたのこの道通ってきたよ"
+        },
+        {
+          "speechId": 1025,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 9596600,
+          "sourceEndMs": 9603310,
+          "text": "ねたなんか繋がって[笑い]"
+        },
+        {
+          "speechId": 1026,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 9608240,
+          "sourceEndMs": 9612920,
+          "text": "ここじゃないんじゃないここじゃないかしれもない"
+        },
+        {
+          "speechId": 1027,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 9620240,
+          "sourceEndMs": 9634880,
+          "text": "よそんなやつ俺はダイヤモンド無駄にせんから誰だよ無駄にしてるやつやマグマ塞ぐのに使ったかもお前何やってん"
+        },
+        {
+          "speechId": 1028,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 9636899,
+          "sourceEndMs": 9643100,
+          "text": "の俺だって大切なものはないから"
+        },
+        {
+          "speechId": 1029,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 9644160,
+          "sourceEndMs": 9646700,
+          "text": "こっちから来た"
+        },
+        {
+          "speechId": 1030,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 9648540,
+          "sourceEndMs": 9650899,
+          "text": "どういうこと"
+        },
+        {
+          "speechId": 1031,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 9653340,
+          "sourceEndMs": 9655640,
+          "text": "繋がってるの"
+        },
+        {
+          "speechId": 1032,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 9656020,
+          "sourceEndMs": 9666439,
+          "text": "[音楽]じゃあ入り口に戻ろうっと[音楽]階段ありがとうございます"
+        },
+        {
+          "speechId": 1033,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 9667480,
+          "sourceEndMs": 9677160,
+          "text": "[音楽]だけで作ったからありがとう"
+        },
+        {
+          "speechId": 1034,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 9680360,
+          "sourceEndMs": 9684620,
+          "text": "[音楽]これちげえわ"
+        },
+        {
+          "speechId": 1035,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 9685760,
+          "sourceEndMs": 9690420,
+          "text": "帰り道どっちやったっけなぁ"
+        },
+        {
+          "speechId": 1036,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 9701000,
+          "sourceEndMs": 9705540,
+          "text": "ここ上じゃないこれ"
+        },
+        {
+          "speechId": 1037,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 9708620,
+          "sourceEndMs": 9711800,
+          "text": "違うね"
+        },
+        {
+          "speechId": 1038,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 9716880,
+          "sourceEndMs": 9720380,
+          "text": "2人は合流してんの"
+        },
+        {
+          "speechId": 1039,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 9720720,
+          "sourceEndMs": 9723720,
+          "text": "は"
+        },
+        {
+          "speechId": 1040,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 9723810,
+          "sourceEndMs": 9730640,
+          "text": "[音楽]合流してるけど[音楽]ね"
+        },
+        {
+          "speechId": 1041,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 9743700,
+          "sourceEndMs": 9749240,
+          "text": "あ最初のとこの座標を言いましょうかえっいいんですか"
+        },
+        {
+          "speechId": 1042,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 9753899,
+          "sourceEndMs": 9756899,
+          "text": "304"
+        },
+        {
+          "speechId": 1043,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 9758160,
+          "sourceEndMs": 9767420,
+          "text": "Zがマイナス1258です下の座標やった方がいいんじゃなくて上でいいの"
+        },
+        {
+          "speechId": 1044,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 9777240,
+          "sourceEndMs": 9784439,
+          "text": "舞い続けるあここを上だマイナス130071"
+        },
+        {
+          "speechId": 1045,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 9787920,
+          "sourceEndMs": 9809240,
+          "text": "プラスになってるなそしたら私が戻って階段始まりの誰ここに松明置いたの私あ私だわこっちじゃないこっち私きからじゃない同じとこ掘ってた"
+        },
+        {
+          "speechId": 1046,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 9818939,
+          "sourceEndMs": 9821939,
+          "text": "右左"
+        },
+        {
+          "speechId": 1047,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 9825899,
+          "sourceEndMs": 9838640,
+          "text": "もう普通に階段て掘っ登るか諦めちゃったよこっちじゃね作れないか"
+        },
+        {
+          "speechId": 1048,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 9842359,
+          "sourceEndMs": 9846439,
+          "text": "今どこら辺にいますか"
+        },
+        {
+          "speechId": 1049,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 9847050,
+          "sourceEndMs": 9855840,
+          "text": "[音楽]129マイナス3495ドル"
+        },
+        {
+          "speechId": 1050,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 9857420,
+          "sourceEndMs": 9860660,
+          "text": "使えないから"
+        },
+        {
+          "speechId": 1051,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 9861120,
+          "sourceEndMs": 9871100,
+          "text": "もうよ私はもう上に居る俺は今のうちに次の山探しとくよここ"
+        },
+        {
+          "speechId": 1052,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 9871740,
+          "sourceEndMs": 9874280,
+          "text": "こっち"
+        },
+        {
+          "speechId": 1053,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 9875760,
+          "sourceEndMs": 9879740,
+          "text": "の松明がないから闇だよ"
+        },
+        {
+          "speechId": 1054,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 9890740,
+          "sourceEndMs": 9897240,
+          "text": "[笑い]"
+        },
+        {
+          "speechId": 1055,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 9902980,
+          "sourceEndMs": 9908600,
+          "text": "[音楽]ちょっと2人合流しなよ"
+        },
+        {
+          "speechId": 1056,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 9919680,
+          "sourceEndMs": 9923180,
+          "text": "上ますに掘ってうちら"
+        },
+        {
+          "speechId": 1057,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 9924560,
+          "sourceEndMs": 9934760,
+          "text": "まさか笛が役に立つと思わなかったな本当だね災害いい時もっとおいた方が本当だね"
+        },
+        {
+          "speechId": 1058,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 9936450,
+          "sourceEndMs": 9942140,
+          "text": "[音楽]そうだった対談に行く"
+        },
+        {
+          "speechId": 1059,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 9942780,
+          "sourceEndMs": 9945780,
+          "text": "タイタニック"
+        },
+        {
+          "speechId": 1060,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 9950819,
+          "sourceEndMs": 9958160,
+          "text": "歴史だしいつまで20年前の作品の話してんだよ30年か"
+        },
+        {
+          "speechId": 1061,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 9966660,
+          "sourceEndMs": 9969080,
+          "text": "何"
+        },
+        {
+          "speechId": 1062,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 9969960,
+          "sourceEndMs": 9983000,
+          "text": "こちらよ上に行ってるあもう分かった今後ろにいます[音楽]いるんですけどこれ多分多分"
+        },
+        {
+          "speechId": 1063,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 9983220,
+          "sourceEndMs": 9987439,
+          "text": "いやちょっとでも行ってみますか"
+        },
+        {
+          "speechId": 1064,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 9990490,
+          "sourceEndMs": 9996860,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 1065,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 10006859,
+          "sourceEndMs": 10011020,
+          "text": "いるべき全員が持つ"
+        },
+        {
+          "speechId": 1066,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 10011600,
+          "sourceEndMs": 10014560,
+          "text": "こんなところ"
+        },
+        {
+          "speechId": 1067,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 10016720,
+          "sourceEndMs": 10027160,
+          "text": "でもわかんなくなりそうだねこっちか同時に吹かない拭かなきゃいいのよあえこんなの見逃していたのか"
+        },
+        {
+          "speechId": 1068,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 10034370,
+          "sourceEndMs": 10045760,
+          "text": "[笑い]ここですとりあえず吹いてる山がどこにもないよ完璧"
+        },
+        {
+          "speechId": 1069,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 10046480,
+          "sourceEndMs": 10055120,
+          "text": "[音楽]出られたおかげ様"
+        },
+        {
+          "speechId": 1070,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 10057740,
+          "sourceEndMs": 10060740,
+          "text": "です"
+        },
+        {
+          "speechId": 1071,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 10090110,
+          "sourceEndMs": 10100530,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 1072,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 10114070,
+          "sourceEndMs": 10118020,
+          "text": "[笑い]"
+        },
+        {
+          "speechId": 1073,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 10124540,
+          "sourceEndMs": 10128200,
+          "text": "こんなちゃっ穴掘ってみんな"
+        },
+        {
+          "speechId": 1074,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 10129020,
+          "sourceEndMs": 10136420,
+          "text": "わかんなくなってる本当ことやばいやばいやばいここ来たある"
+        },
+        {
+          "speechId": 1075,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 10143060,
+          "sourceEndMs": 10149380,
+          "text": "もう地下穴ぼこだらそれだよね"
+        },
+        {
+          "speechId": 1076,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 10151650,
+          "sourceEndMs": 10154719,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 1077,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 10157350,
+          "sourceEndMs": 10166120,
+          "text": "[音楽]信じなきゃよかったなんてことなんてこと言って"
+        },
+        {
+          "speechId": 1078,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 10166520,
+          "sourceEndMs": 10172420,
+          "text": "どこや[音楽]戻っこいて"
+        },
+        {
+          "speechId": 1079,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 10175160,
+          "sourceEndMs": 10178060,
+          "text": "お前じゃない"
+        },
+        {
+          "speechId": 1080,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 10180680,
+          "sourceEndMs": 10187940,
+          "text": "[笑い]"
+        },
+        {
+          "speechId": 1081,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 10191080,
+          "sourceEndMs": 10211240,
+          "text": "マジで止まろう[音楽]ちゃんと[音楽]階段になってるの何[音楽]ここは違う"
+        },
+        {
+          "speechId": 1082,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 10212960,
+          "sourceEndMs": 10218800,
+          "text": "こんな深く降ってた結構深かったね"
+        },
+        {
+          "speechId": 1083,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 10220540,
+          "sourceEndMs": 10231880,
+          "text": "今ドラムの音しなかったドラムもいんの嘘セッション始まってます"
+        },
+        {
+          "speechId": 1084,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 10236540,
+          "sourceEndMs": 10239680,
+          "text": "今日すげえ早起きだったし"
+        },
+        {
+          "speechId": 1085,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 10240580,
+          "sourceEndMs": 10250840,
+          "text": "だ7時[音楽]何のでそんな早くしたもうジジイだから"
+        },
+        {
+          "speechId": 1086,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 10253180,
+          "sourceEndMs": 10265600,
+          "text": "こんな時間まで起こしちゃっていいよこんな時間まで深夜だよもう4時ぐらいには寝ないと"
+        },
+        {
+          "speechId": 1087,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 10269140,
+          "sourceEndMs": 10272560,
+          "text": "周りに山が"
+        },
+        {
+          "speechId": 1088,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 10272960,
+          "sourceEndMs": 10284020,
+          "text": "ね産んで探してるのに見つからないってのか飛んで探してるのに残念だもうなんだったらあるやつでもいいけどね"
+        },
+        {
+          "speechId": 1089,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 10287020,
+          "sourceEndMs": 10293920,
+          "text": "あるでしょだいたいあの資源サバで見つけちゃっからたね"
+        },
+        {
+          "speechId": 1090,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 10294080,
+          "sourceEndMs": 10297700,
+          "text": "もう消え1か月ごとにてんだ"
+        },
+        {
+          "speechId": 1091,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 10297939,
+          "sourceEndMs": 10301479,
+          "text": "しか見つけてないの"
+        },
+        {
+          "speechId": 1092,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 10302000,
+          "sourceEndMs": 10309849,
+          "text": "もうねそれ以外で見つけてるやつ俺はて覚えない[音楽]"
+        },
+        {
+          "speechId": 1093,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 10313740,
+          "sourceEndMs": 10316870,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 1094,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 10319520,
+          "sourceEndMs": 10323439,
+          "text": "ひどい帰れる一回ぜ"
+        },
+        {
+          "speechId": 1095,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 10325750,
+          "sourceEndMs": 10328829,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 1096,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 10338120,
+          "sourceEndMs": 10348340,
+          "text": "1戻る回1回戻って別のとこからさどっ山かあるで探したら"
+        },
+        {
+          "speechId": 1097,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 10349160,
+          "sourceEndMs": 10358520,
+          "text": "おちゃんじい眠いならそこまで神社じゃない[笑い]"
+        },
+        {
+          "speechId": 1098,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 10359260,
+          "sourceEndMs": 10362920,
+          "text": "みんなどこ行ったの"
+        },
+        {
+          "speechId": 1099,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 10369210,
+          "sourceEndMs": 10372250,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 1100,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 10375230,
+          "sourceEndMs": 10378350,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 1101,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 10382120,
+          "sourceEndMs": 10386319,
+          "text": "全然全然逆方向行ってない"
+        },
+        {
+          "speechId": 1102,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 10393700,
+          "sourceEndMs": 10399939,
+          "text": "俺持っといて服俺がこの"
+        },
+        {
+          "speechId": 1103,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 10403420,
+          "sourceEndMs": 10407540,
+          "text": "確かに本当"
+        },
+        {
+          "speechId": 1104,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 10408920,
+          "sourceEndMs": 10422170,
+          "text": "便利だったらうーん離れるやつ持った方がいいよあの座標いいで帰れないやつが持った方が[笑い]"
+        },
+        {
+          "speechId": 1105,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 10422620,
+          "sourceEndMs": 10425800,
+          "text": "こっちだよ"
+        },
+        {
+          "speechId": 1106,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 10429340,
+          "sourceEndMs": 10435760,
+          "text": "帰り道よのスクショ確かあったはずなんだ座標のスクショ"
+        },
+        {
+          "speechId": 1107,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 10437290,
+          "sourceEndMs": 10439420,
+          "text": "[音楽]偉い"
+        },
+        {
+          "speechId": 1108,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 10445040,
+          "sourceEndMs": 10451340,
+          "text": "俺だよしOKOK"
+        },
+        {
+          "speechId": 1109,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 10453319,
+          "sourceEndMs": 10455740,
+          "text": "あれ"
+        },
+        {
+          "speechId": 1110,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 10456740,
+          "sourceEndMs": 10461580,
+          "text": "もうはぐれた[笑い]"
+        },
+        {
+          "speechId": 1111,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 10462700,
+          "sourceEndMs": 10466000,
+          "text": "おはようございます"
+        },
+        {
+          "speechId": 1112,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 10468520,
+          "sourceEndMs": 10477040,
+          "text": "[笑い]"
+        },
+        {
+          "speechId": 1113,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 10494840,
+          "sourceEndMs": 10497840,
+          "text": "安心"
+        },
+        {
+          "speechId": 1114,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 10512000,
+          "sourceEndMs": 10521959,
+          "text": "いやでもまさか見つからないとはないくらぐらいチョコレート食べちゃおうえ何アーモンド[音楽]"
+        },
+        {
+          "speechId": 1115,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 10522100,
+          "sourceEndMs": 10528680,
+          "text": "うまいうまいうまいうまいうまいうまいうまい"
+        },
+        {
+          "speechId": 1116,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 10534979,
+          "sourceEndMs": 10538359,
+          "text": "めっちゃめっちゃ声低い"
+        },
+        {
+          "speechId": 1117,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 10540620,
+          "sourceEndMs": 10549520,
+          "text": "ちょっともう一回やって今これ引く今のもっかやったようまいうますぎる"
+        },
+        {
+          "speechId": 1118,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 10557180,
+          "sourceEndMs": 10563329,
+          "text": "ローカルだったっけCM多分そう[音楽]"
+        },
+        {
+          "speechId": 1119,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 10568250,
+          "sourceEndMs": 10575439,
+          "text": "[音楽]覚えてないですねどこのローカル"
+        },
+        {
+          "speechId": 1120,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 10577040,
+          "sourceEndMs": 10585220,
+          "text": "埼玉だって[音楽]そういうお菓子食べたいわ今"
+        },
+        {
+          "speechId": 1121,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 10588859,
+          "sourceEndMs": 10597340,
+          "text": "だからなんかお取り寄せのお菓子とか食べたいなたまにはわかるふるさと納税のおすすめ教えて"
+        },
+        {
+          "speechId": 1122,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 10597380,
+          "sourceEndMs": 10601000,
+          "text": "ふるさと納税でおかしかった人"
+        },
+        {
+          "speechId": 1123,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 10601040,
+          "sourceEndMs": 10604120,
+          "text": "私はね"
+        },
+        {
+          "speechId": 1124,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 10604420,
+          "sourceEndMs": 10616980,
+          "text": "ステーキに行くとすき焼きに行くといくらとうなぎあーいいね[音楽]"
+        },
+        {
+          "speechId": 1125,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 10621819,
+          "sourceEndMs": 10628520,
+          "text": "冷凍庫とか専用で買ってんの買ってないふるさと"
+        },
+        {
+          "speechId": 1126,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 10628880,
+          "sourceEndMs": 10635080,
+          "text": "納税でなんか買っちゃったらさなんか冷凍庫に入んないぐらいの量になったりするじゃん"
+        },
+        {
+          "speechId": 1127,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 10638420,
+          "sourceEndMs": 10644439,
+          "text": "計画性ない[音楽][笑い]村燃やしとこうよ"
+        },
+        {
+          "speechId": 1128,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 10644660,
+          "sourceEndMs": 10649359,
+          "text": "侵略者としてマグマ垂らそう"
+        },
+        {
+          "speechId": 1129,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 10649700,
+          "sourceEndMs": 10652779,
+          "text": "にしないと"
+        },
+        {
+          "speechId": 1130,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 10653180,
+          "sourceEndMs": 10656979,
+          "text": "ただただ歩いてるだけじゃダメだから"
+        },
+        {
+          "speechId": 1131,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 10657560,
+          "sourceEndMs": 10659680,
+          "text": "警報"
+        },
+        {
+          "speechId": 1132,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 10660060,
+          "sourceEndMs": 10667120,
+          "text": "[笑い][音楽]"
+        },
+        {
+          "speechId": 1133,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 10670000,
+          "sourceEndMs": 10673120,
+          "text": "いるじゃん"
+        },
+        {
+          "speechId": 1134,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 10678220,
+          "sourceEndMs": 10682359,
+          "text": "本当だ倒さなきゃ"
+        },
+        {
+          "speechId": 1135,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 10691460,
+          "sourceEndMs": 10693580,
+          "text": "な"
+        },
+        {
+          "speechId": 1136,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 10694720,
+          "sourceEndMs": 10698020,
+          "text": "右クリック"
+        },
+        {
+          "speechId": 1137,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 10705979,
+          "sourceEndMs": 10709720,
+          "text": "えマジで焼いてる人いる"
+        },
+        {
+          "speechId": 1138,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 10716479,
+          "sourceEndMs": 10721830,
+          "text": "笛がからなった[笑い]"
+        },
+        {
+          "speechId": 1139,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 10724840,
+          "sourceEndMs": 10728080,
+          "text": "お前だろう"
+        },
+        {
+          "speechId": 1140,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 10730100,
+          "sourceEndMs": 10742540,
+          "text": "笛がの鳴ったがいけないんだゴーレムガン無視じゃん全然いいんだ燃えるのは村人に被害出てないからね村人いなくない"
+        },
+        {
+          "speechId": 1141,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 10742880,
+          "sourceEndMs": 10750939,
+          "text": "もう滅んだもう滅んじゃったかなそれか気づかず寝てるか"
+        },
+        {
+          "speechId": 1142,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 10751040,
+          "sourceEndMs": 10757640,
+          "text": "寝てる間に村は燃えてなくなるんだかわいそう"
+        },
+        {
+          "speechId": 1143,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 10757880,
+          "sourceEndMs": 10761020,
+          "text": "逆襲されるわ"
+        },
+        {
+          "speechId": 1144,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 10762560,
+          "sourceEndMs": 10766540,
+          "text": "それでもやってるんですね"
+        },
+        {
+          "speechId": 1145,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 10769240,
+          "sourceEndMs": 10775300,
+          "text": "マグマ出してはってことそうです俺これね"
+        },
+        {
+          "speechId": 1146,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 10776140,
+          "sourceEndMs": 10786460,
+          "text": "これ中にしちゃいますよひどいだからなんだ逃げてだからなんだ"
+        },
+        {
+          "speechId": 1147,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 10789580,
+          "sourceEndMs": 10792760,
+          "text": "寝てるじゃん"
+        },
+        {
+          "speechId": 1148,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 10795439,
+          "sourceEndMs": 10798040,
+          "text": "寝よてる"
+        },
+        {
+          "speechId": 1149,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 10799540,
+          "sourceEndMs": 10802840,
+          "text": "やっちゃいけなかった"
+        },
+        {
+          "speechId": 1150,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 10808910,
+          "sourceEndMs": 10812090,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 1151,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 10815600,
+          "sourceEndMs": 10818659,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 1152,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 10819020,
+          "sourceEndMs": 10826180,
+          "text": "爆発まで起きちゃったもうもう家じゃないって"
+        },
+        {
+          "speechId": 1153,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 10828800,
+          "sourceEndMs": 10838120,
+          "text": "知らない何がドロップされるのこうね何も"
+        },
+        {
+          "speechId": 1154,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 10840260,
+          "sourceEndMs": 10849700,
+          "text": "そうだよ何もか覚えてなくなっちゃうんだこの村人守られてる気がするな"
+        },
+        {
+          "speechId": 1155,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 10850040,
+          "sourceEndMs": 10854200,
+          "text": "なんか内側は燃えてないもんな"
+        },
+        {
+          "speechId": 1156,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 10857479,
+          "sourceEndMs": 10861100,
+          "text": "とうとう命令出したね"
+        },
+        {
+          "speechId": 1157,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 10861640,
+          "sourceEndMs": 10869140,
+          "text": "何がさあ何が出てくるのかちょっと気になって"
+        },
+        {
+          "speechId": 1158,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 10871160,
+          "sourceEndMs": 10873640,
+          "text": "村人からね"
+        },
+        {
+          "speechId": 1159,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 10874279,
+          "sourceEndMs": 10881920,
+          "text": "こいつねえやっぱ燃えわどうかな全然燃えない"
+        },
+        {
+          "speechId": 1160,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 10885200,
+          "sourceEndMs": 10890140,
+          "text": "架空だ来てるあ燃えてる燃えてる"
+        },
+        {
+          "speechId": 1161,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 10902859,
+          "sourceEndMs": 10935080,
+          "text": "何もそうだよ死んだら何も残らないのそうだよ[音楽][笑い][音楽]やっとやっと戦闘から解放されたんだ人を傷つけちゃダメなんだ得られるものは何もないということ"
+        },
+        {
+          "speechId": 1162,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 10937220,
+          "sourceEndMs": 10939700,
+          "text": "帰ろう"
+        },
+        {
+          "speechId": 1163,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 10943660,
+          "sourceEndMs": 10946840,
+          "text": "どこ行きたい"
+        },
+        {
+          "speechId": 1164,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 10948979,
+          "sourceEndMs": 10956620,
+          "text": "ディズニー[笑い]絶妙にあるとこ行く言うなよ"
+        },
+        {
+          "speechId": 1165,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 10962120,
+          "sourceEndMs": 10969340,
+          "text": "俺ら作っちゃったじゃんそれ確かにこっちに来た本当だ"
+        },
+        {
+          "speechId": 1166,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 10975500,
+          "sourceEndMs": 10978460,
+          "text": "また村じゃん"
+        },
+        {
+          "speechId": 1167,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 10979420,
+          "sourceEndMs": 10982779,
+          "text": "やりますか"
+        },
+        {
+          "speechId": 1168,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 10984640,
+          "sourceEndMs": 10990520,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 1169,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 10995200,
+          "sourceEndMs": 10999340,
+          "text": "もう帰り道着くんじゃない"
+        },
+        {
+          "speechId": 1170,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 11001779,
+          "sourceEndMs": 11006359,
+          "text": "じゃあするでしょいくらか"
+        },
+        {
+          "speechId": 1171,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 11021910,
+          "sourceEndMs": 11029139,
+          "text": "[音楽]帰っきぜてた[音楽]"
+        },
+        {
+          "speechId": 1172,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 11032450,
+          "sourceEndMs": 11035809,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 1173,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 11037120,
+          "sourceEndMs": 11046560,
+          "text": "多分までボート乗って遠く行けばいくつかあるないんじゃ本当"
+        },
+        {
+          "speechId": 1174,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 11047800,
+          "sourceEndMs": 11053479,
+          "text": "かもしれない[音楽]"
+        },
+        {
+          "speechId": 1175,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 11054399,
+          "sourceEndMs": 11057300,
+          "text": "何してんの"
+        },
+        {
+          "speechId": 1176,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 11061479,
+          "sourceEndMs": 11064479,
+          "text": "から"
+        },
+        {
+          "speechId": 1177,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 11064779,
+          "sourceEndMs": 11069580,
+          "text": "これ片付けろよこの汁かどれ"
+        },
+        {
+          "speechId": 1178,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 11071340,
+          "sourceEndMs": 11083939,
+          "text": "中身を片付けようといらねえよでもバラいらないふざけて"
+        },
+        {
+          "speechId": 1179,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 11084939,
+          "sourceEndMs": 11088859,
+          "text": "うまい要ら棒ないいらない"
+        },
+        {
+          "speechId": 1180,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 11091120,
+          "sourceEndMs": 11094260,
+          "text": "そこに"
+        },
+        {
+          "speechId": 1181,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 11098260,
+          "sourceEndMs": 11100800,
+          "text": "ゴミ箱"
+        },
+        {
+          "speechId": 1182,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 11103899,
+          "sourceEndMs": 11106920,
+          "text": "ここなにして"
+        },
+        {
+          "speechId": 1183,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 11108840,
+          "sourceEndMs": 11112020,
+          "text": "私も"
+        },
+        {
+          "speechId": 1184,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 11117520,
+          "sourceEndMs": 11122200,
+          "text": "はいおじ様の弓矢は取っとくかね"
+        },
+        {
+          "speechId": 1185,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 11125340,
+          "sourceEndMs": 11130380,
+          "text": "一応な捨てられない女よ"
+        },
+        {
+          "speechId": 1186,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 11131880,
+          "sourceEndMs": 11136959,
+          "text": "残しほしいておいて[音楽]"
+        },
+        {
+          "speechId": 1187,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 11144399,
+          "sourceEndMs": 11153359,
+          "text": "じゃあボート乗ってどっち行きたい決めていいよ右か左か真ん中か"
+        },
+        {
+          "speechId": 1188,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 11155500,
+          "sourceEndMs": 11158040,
+          "text": "決めていいよ"
+        },
+        {
+          "speechId": 1189,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 11158640,
+          "sourceEndMs": 11170220,
+          "text": "じゃああかりちゃんそうだよあかりちゃん決めようOkボートいこう乗ってぜ"
+        },
+        {
+          "speechId": 1190,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 11175400,
+          "sourceEndMs": 11178510,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 1191,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 11184190,
+          "sourceEndMs": 11187280,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 1192,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 11193060,
+          "sourceEndMs": 11196439,
+          "text": "ってことはチャイチャイは"
+        },
+        {
+          "speechId": 1193,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 11197740,
+          "sourceEndMs": 11202680,
+          "text": "ちゃんとね乗っますてよ"
+        },
+        {
+          "speechId": 1194,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 11204399,
+          "sourceEndMs": 11208200,
+          "text": "後ろに誰が"
+        },
+        {
+          "speechId": 1195,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 11211540,
+          "sourceEndMs": 11228840,
+          "text": "俺とチャイカ二人で[笑い]見える後ろにえ何これえーすごい殺す"
+        },
+        {
+          "speechId": 1196,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 11232620,
+          "sourceEndMs": 11246180,
+          "text": "外何え色があれだねこれなんか深海みたいじゃないねなんでここから触ったからガラスの色"
+        },
+        {
+          "speechId": 1197,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 11247720,
+          "sourceEndMs": 11251819,
+          "text": "柄しから使ってなんか外見えるようにた"
+        },
+        {
+          "speechId": 1198,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 11252359,
+          "sourceEndMs": 11260340,
+          "text": "ちょっとベッドさあ用意して今日1回も死んでなくない"
+        },
+        {
+          "speechId": 1199,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 11280020,
+          "sourceEndMs": 11284880,
+          "text": "ここでまた高い山見つけるって事ですか"
+        },
+        {
+          "speechId": 1200,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 11286740,
+          "sourceEndMs": 11290399,
+          "text": "いい山あったよ"
+        },
+        {
+          "speechId": 1201,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 11296520,
+          "sourceEndMs": 11302100,
+          "text": "[笑い]憧れは止められねえ"
+        },
+        {
+          "speechId": 1202,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 11312840,
+          "sourceEndMs": 11315899,
+          "text": "あいつら"
+        },
+        {
+          "speechId": 1203,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 11322479,
+          "sourceEndMs": 11327220,
+          "text": "ロマンだよ"
+        },
+        {
+          "speechId": 1204,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 11330320,
+          "sourceEndMs": 11335580,
+          "text": "[音楽]懐かしすぎるだろう"
+        },
+        {
+          "speechId": 1205,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 11341160,
+          "sourceEndMs": 11344700,
+          "text": "山っぽいのあったよ"
+        },
+        {
+          "speechId": 1206,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 11362200,
+          "sourceEndMs": 11369840,
+          "text": "ちょっと歩くかも俺帰り道だった歩くか"
+        },
+        {
+          "speechId": 1207,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 11369939,
+          "sourceEndMs": 11372120,
+          "text": "泣いてるわ"
+        },
+        {
+          "speechId": 1208,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 11372819,
+          "sourceEndMs": 11374939,
+          "text": "泣いてる"
+        },
+        {
+          "speechId": 1209,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 11375880,
+          "sourceEndMs": 11379680,
+          "text": "デートどこにあるか教えてよ"
+        },
+        {
+          "speechId": 1210,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 11386279,
+          "sourceEndMs": 11391439,
+          "text": "のジェットがマイナス340です"
+        },
+        {
+          "speechId": 1211,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 11392370,
+          "sourceEndMs": 11397270,
+          "text": "[笑い]"
+        },
+        {
+          "speechId": 1212,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 11398640,
+          "sourceEndMs": 11408720,
+          "text": "Okじゃああとあかりちゃん帰ってきたら行くかいたわこれはさマジで"
+        },
+        {
+          "speechId": 1213,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 11409960,
+          "sourceEndMs": 11415979,
+          "text": "先輩ませにも立てん[笑い]先に言っときます"
+        },
+        {
+          "speechId": 1214,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 11416279,
+          "sourceEndMs": 11420840,
+          "text": "ソウルソイルいつの間にか拾ってた"
+        },
+        {
+          "speechId": 1215,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 11421359,
+          "sourceEndMs": 11433140,
+          "text": "通るソイルをすごいな久しぶりにやるマイクラで初めて手に入れたソウルソイルをすることができる"
+        },
+        {
+          "speechId": 1216,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 11433420,
+          "sourceEndMs": 11436800,
+          "text": "思い切りのいいパイロット"
+        },
+        {
+          "speechId": 1217,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 11437010,
+          "sourceEndMs": 11440389,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 1218,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 11447540,
+          "sourceEndMs": 11451020,
+          "text": "こっち流れてない"
+        },
+        {
+          "speechId": 1219,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 11453200,
+          "sourceEndMs": 11457800,
+          "text": "[音楽]わかんないです"
+        },
+        {
+          "speechId": 1220,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 11459040,
+          "sourceEndMs": 11462300,
+          "text": "名前ことは行ったないの"
+        },
+        {
+          "speechId": 1221,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 11463180,
+          "sourceEndMs": 11469140,
+          "text": "聞いことたあるけど部屋についてたから"
+        },
+        {
+          "speechId": 1222,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 11472420,
+          "sourceEndMs": 11488399,
+          "text": "板の上に寝るんだよバンバンの上に[音楽]開封の上にお水ない洋服も着てるよ"
+        },
+        {
+          "speechId": 1223,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 11488520,
+          "sourceEndMs": 11491939,
+          "text": "この辺から"
+        },
+        {
+          "speechId": 1224,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 11493740,
+          "sourceEndMs": 11500160,
+          "text": "あったあったなんかそれらしくねワンピースみたいだ"
+        },
+        {
+          "speechId": 1225,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 11501660,
+          "sourceEndMs": 11514439,
+          "text": "あそこラフテルかもしれんマジでポーネグリフ出してきたみたいなない小島みたいなね空島"
+        },
+        {
+          "speechId": 1226,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 11521340,
+          "sourceEndMs": 11525460,
+          "text": "ってますかつて"
+        },
+        {
+          "speechId": 1227,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 11525819,
+          "sourceEndMs": 11529020,
+          "text": "かつてのもんだろう"
+        },
+        {
+          "speechId": 1228,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 11534100,
+          "sourceEndMs": 11536580,
+          "text": "意外と普通だった"
+        },
+        {
+          "speechId": 1229,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 11537340,
+          "sourceEndMs": 11554800,
+          "text": "私のこと正義だと思ってたら明かりが私のこと自由だと思ってる[笑い]ちゃんと見てた到着するまでずっと自由だと思ってる[笑い]"
+        },
+        {
+          "speechId": 1230,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 11555640,
+          "sourceEndMs": 11558640,
+          "text": "ね"
+        },
+        {
+          "speechId": 1231,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 11579399,
+          "sourceEndMs": 11583560,
+          "text": "あれワンピースてなんか地下に行くだっ展開たっけ"
+        },
+        {
+          "speechId": 1232,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 11583660,
+          "sourceEndMs": 11590129,
+          "text": "海底はなかったけど回転はあるけどね[音楽]"
+        },
+        {
+          "speechId": 1233,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 11592270,
+          "sourceEndMs": 11595509,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 1234,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 11607060,
+          "sourceEndMs": 11610920,
+          "text": "私ん3番手ぐらいの方がいいだろうな"
+        },
+        {
+          "speechId": 1235,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 11616000,
+          "sourceEndMs": 11623640,
+          "text": "これで制限させたから石炭だこれがあれば"
+        },
+        {
+          "speechId": 1236,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 11632319,
+          "sourceEndMs": 11638100,
+          "text": "めちゃめちゃ出てきますめっちゃ水流れてくる水なのか"
+        },
+        {
+          "speechId": 1237,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 11650740,
+          "sourceEndMs": 11653740,
+          "text": "頂戴"
+        },
+        {
+          "speechId": 1238,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 11657520,
+          "sourceEndMs": 11660660,
+          "text": "欲しいあるよ"
+        },
+        {
+          "speechId": 1239,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 11662470,
+          "sourceEndMs": 11667390,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 1240,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 11669040,
+          "sourceEndMs": 11674880,
+          "text": "止まってます止まってないかも私が聞いちゃったか"
+        },
+        {
+          "speechId": 1241,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 11674920,
+          "sourceEndMs": 11677920,
+          "text": "okokok"
+        },
+        {
+          "speechId": 1242,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 11681279,
+          "sourceEndMs": 11685080,
+          "text": "うわ水色のブロック"
+        },
+        {
+          "speechId": 1243,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 11686700,
+          "sourceEndMs": 11693180,
+          "text": "見たことない水色のブロック"
+        },
+        {
+          "speechId": 1244,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 11693520,
+          "sourceEndMs": 11698950,
+          "text": "取りたくなっちゃう[音楽]"
+        },
+        {
+          "speechId": 1245,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 11699520,
+          "sourceEndMs": 11702899,
+          "text": "なんでラピスラズリなんだろう"
+        },
+        {
+          "speechId": 1246,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 11719900,
+          "sourceEndMs": 11723810,
+          "text": "[笑い]"
+        },
+        {
+          "speechId": 1247,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 11727779,
+          "sourceEndMs": 11732720,
+          "text": "先輩だから許して"
+        },
+        {
+          "speechId": 1248,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 11736180,
+          "sourceEndMs": 11738840,
+          "text": "先輩だから"
+        },
+        {
+          "speechId": 1249,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 11739120,
+          "sourceEndMs": 11744540,
+          "text": "許して5年間頑張ってきたから"
+        },
+        {
+          "speechId": 1250,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 11745899,
+          "sourceEndMs": 11751740,
+          "text": "うわ水だ[音楽][拍手]"
+        },
+        {
+          "speechId": 1251,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 11752160,
+          "sourceEndMs": 11758040,
+          "text": "まだ流されてるアトラクションみたいで"
+        },
+        {
+          "speechId": 1252,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 11760540,
+          "sourceEndMs": 11766729,
+          "text": "ディズニーの伏線そういうアトラクションみたいで[音楽]"
+        },
+        {
+          "speechId": 1253,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 11767020,
+          "sourceEndMs": 11771840,
+          "text": "自分で歩かなくても良いめちゃめちゃ"
+        },
+        {
+          "speechId": 1254,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 11772020,
+          "sourceEndMs": 11775319,
+          "text": "左クリック"
+        },
+        {
+          "speechId": 1255,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 11780240,
+          "sourceEndMs": 11783660,
+          "text": "そういうことにしよう"
+        },
+        {
+          "speechId": 1256,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 11792240,
+          "sourceEndMs": 11808080,
+          "text": "これは何があるんだじゃあここからまた行っくれて[音楽]ここスタート地点でじゃあ左行くか"
+        },
+        {
+          "speechId": 1257,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 11809200,
+          "sourceEndMs": 11813240,
+          "text": "じゃあ私はどうしようかな"
+        },
+        {
+          "speechId": 1258,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 11813340,
+          "sourceEndMs": 11816420,
+          "text": "構造ならしい"
+        },
+        {
+          "speechId": 1259,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 11818140,
+          "sourceEndMs": 11823319,
+          "text": "またまたこいつらてくか"
+        },
+        {
+          "speechId": 1260,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 11824140,
+          "sourceEndMs": 11827819,
+          "text": "おじいちゃんついてった方がいいよ"
+        },
+        {
+          "speechId": 1261,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 11833200,
+          "sourceEndMs": 11835680,
+          "text": "ムカついていかない"
+        },
+        {
+          "speechId": 1262,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 11838660,
+          "sourceEndMs": 11841380,
+          "text": "ついてきなよ"
+        },
+        {
+          "speechId": 1263,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 11850000,
+          "sourceEndMs": 11853020,
+          "text": "壊れそう"
+        },
+        {
+          "speechId": 1264,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 11853060,
+          "sourceEndMs": 11855359,
+          "text": "経験値を"
+        },
+        {
+          "speechId": 1265,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 11861160,
+          "sourceEndMs": 11864160,
+          "text": "開貫"
+        },
+        {
+          "speechId": 1266,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 11865540,
+          "sourceEndMs": 11868500,
+          "text": "のわかっ見方たっけ"
+        },
+        {
+          "speechId": 1267,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 11868600,
+          "sourceEndMs": 11875640,
+          "text": "あのーF3押したら座標の方にバイオーム見れるやつ知らね後ろね"
+        },
+        {
+          "speechId": 1268,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 11880420,
+          "sourceEndMs": 11891300,
+          "text": "見た方がいいって言っちゃうF3を押してなんか左側にさ真ん中ぐらいの注意したに"
+        },
+        {
+          "speechId": 1269,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 11892680,
+          "sourceEndMs": 11896279,
+          "text": "biomeって書いてあるんだよ"
+        },
+        {
+          "speechId": 1270,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 11902859,
+          "sourceEndMs": 11909240,
+          "text": "聞こえたそれでなんかマインクラフトなんちゃらてみたいに書かれんだけど"
+        },
+        {
+          "speechId": 1271,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 11909520,
+          "sourceEndMs": 11917340,
+          "text": "それがディープダークって書かれてたら多分もしかしたらあるかもしれない"
+        },
+        {
+          "speechId": 1272,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 11918399,
+          "sourceEndMs": 11921479,
+          "text": "イブダークの少年"
+        },
+        {
+          "speechId": 1273,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 11922240,
+          "sourceEndMs": 11927240,
+          "text": "ロハのままだっけピンクドラッグ"
+        },
+        {
+          "speechId": 1274,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 11928600,
+          "sourceEndMs": 11938640,
+          "text": "ルーブル見に行きたいなぁあんなにいけるとはあれはいい実写だね"
+        },
+        {
+          "speechId": 1275,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 11940870,
+          "sourceEndMs": 11945599,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 1276,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 11955180,
+          "sourceEndMs": 11958140,
+          "text": "別れたとこ"
+        },
+        {
+          "speechId": 1277,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 11961960,
+          "sourceEndMs": 11967020,
+          "text": "これ私シルクタッチだから経験値もらえないのかな"
+        },
+        {
+          "speechId": 1278,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 11973479,
+          "sourceEndMs": 11977160,
+          "text": "乗りも聞こえなくなった"
+        },
+        {
+          "speechId": 1279,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 11982200,
+          "sourceEndMs": 11993240,
+          "text": "やつよがないあるよ下の方に下の段にある[音楽]これ"
+        },
+        {
+          "speechId": 1280,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 11994060,
+          "sourceEndMs": 11996479,
+          "text": "いいよ"
+        },
+        {
+          "speechId": 1281,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 11996720,
+          "sourceEndMs": 12007730,
+          "text": "普通にバラ入れとくわいらねーいらない効果交換だね[音楽]"
+        },
+        {
+          "speechId": 1282,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 12007800,
+          "sourceEndMs": 12012120,
+          "text": "じゃあお仕事頑張って寝室"
+        },
+        {
+          "speechId": 1283,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 12012479,
+          "sourceEndMs": 12021500,
+          "text": "繋がったやつ目が怖いいるどれお前ゾンビーどもには"
+        },
+        {
+          "speechId": 1284,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 12022080,
+          "sourceEndMs": 12024439,
+          "text": "勇気がない"
+        },
+        {
+          "speechId": 1285,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 12025439,
+          "sourceEndMs": 12028520,
+          "text": "ノミと同類よ"
+        },
+        {
+          "speechId": 1286,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 12030979,
+          "sourceEndMs": 12045080,
+          "text": "んだろうなぁしばらくやんねえだろここ木があるぞこれ廃坑かこれ廃校だ廃坑付いた最高でいいんか"
+        },
+        {
+          "speechId": 1287,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 12045560,
+          "sourceEndMs": 12052229,
+          "text": "アメジスト見つけました[音楽]"
+        },
+        {
+          "speechId": 1288,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 12058920,
+          "sourceEndMs": 12063989,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 1289,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 12064920,
+          "sourceEndMs": 12067399,
+          "text": "最高"
+        },
+        {
+          "speechId": 1290,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 12070020,
+          "sourceEndMs": 12072020,
+          "text": "欲しい"
+        },
+        {
+          "speechId": 1291,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 12073200,
+          "sourceEndMs": 12075740,
+          "text": "知らない"
+        },
+        {
+          "speechId": 1292,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 12076140,
+          "sourceEndMs": 12078319,
+          "text": "です"
+        },
+        {
+          "speechId": 1293,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 12080819,
+          "sourceEndMs": 12083819,
+          "text": "か"
+        },
+        {
+          "speechId": 1294,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 12130880,
+          "sourceEndMs": 12134840,
+          "text": "空間が広がっております"
+        },
+        {
+          "speechId": 1295,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 12136680,
+          "sourceEndMs": 12139700,
+          "text": "経験値になっていくことはする"
+        },
+        {
+          "speechId": 1296,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 12141310,
+          "sourceEndMs": 12144540,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 1297,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 12153779,
+          "sourceEndMs": 12169100,
+          "text": "ちょっとくる俺別にどこ掘ってわ[音楽]すごい広いなんかこれありがとうこんなに広い空間が広がるようになったのですね"
+        },
+        {
+          "speechId": 1298,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 12178399,
+          "sourceEndMs": 12181580,
+          "text": "ようこそ"
+        },
+        {
+          "speechId": 1299,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 12192060,
+          "sourceEndMs": 12195500,
+          "text": "どこに繋がってんだろう"
+        },
+        {
+          "speechId": 1300,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 12195899,
+          "sourceEndMs": 12198380,
+          "text": "未来さぁ"
+        },
+        {
+          "speechId": 1301,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 12201479,
+          "sourceEndMs": 12204380,
+          "text": "未来そう"
+        },
+        {
+          "speechId": 1302,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 12205439,
+          "sourceEndMs": 12214709,
+          "text": "無駄なんてことある一つもないそう[音楽]"
+        },
+        {
+          "speechId": 1303,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 12223859,
+          "sourceEndMs": 12228380,
+          "text": "かないか[音楽]ね"
+        },
+        {
+          "speechId": 1304,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 12236340,
+          "sourceEndMs": 12239720,
+          "text": "ダイヤモンドユカイ"
+        },
+        {
+          "speechId": 1305,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 12242240,
+          "sourceEndMs": 12245330,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 1306,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 12250220,
+          "sourceEndMs": 12253580,
+          "text": "分かんなくなるよ"
+        },
+        {
+          "speechId": 1307,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 12254460,
+          "sourceEndMs": 12259700,
+          "text": "名前が見えるなんだっけえっと座標"
+        },
+        {
+          "speechId": 1308,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 12260700,
+          "sourceEndMs": 12263000,
+          "text": "大丈夫"
+        },
+        {
+          "speechId": 1309,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 12266160,
+          "sourceEndMs": 12272650,
+          "text": "上の音が聞こえたな[笑い]"
+        },
+        {
+          "speechId": 1310,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 12277859,
+          "sourceEndMs": 12284060,
+          "text": "いいえいいえあ消えた"
+        },
+        {
+          "speechId": 1311,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 12284640,
+          "sourceEndMs": 12288600,
+          "text": "ここないみたい大きい"
+        },
+        {
+          "speechId": 1312,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 12291420,
+          "sourceEndMs": 12295220,
+          "text": "とこみんな同じとこ繋がってる可能性"
+        },
+        {
+          "speechId": 1313,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 12308460,
+          "sourceEndMs": 12323639,
+          "text": "違うか[音楽]なそんなんだってね移籍よう中ですからねもう一目でわかるなねやつなんでしょう[音楽]"
+        },
+        {
+          "speechId": 1314,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 12326880,
+          "sourceEndMs": 12329120,
+          "text": "蜘蛛がいる"
+        },
+        {
+          "speechId": 1315,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 12329740,
+          "sourceEndMs": 12335899,
+          "text": "[音楽]迷子になる前になぁ"
+        },
+        {
+          "speechId": 1316,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 12338180,
+          "sourceEndMs": 12341239,
+          "text": "あった"
+        },
+        {
+          "speechId": 1317,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 12345120,
+          "sourceEndMs": 12352520,
+          "text": "あるけど[音楽]あまり怖いからうろうろしてない"
+        },
+        {
+          "speechId": 1318,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 12353580,
+          "sourceEndMs": 12364399,
+          "text": "ディープダークらしきものあったわあったのちょっと別の山だけどね連れいいてってよ"
+        },
+        {
+          "speechId": 1319,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 12365040,
+          "sourceEndMs": 12374500,
+          "text": "今ちょっと戻るわ飛ばしてこんな機能ね[音楽]"
+        },
+        {
+          "speechId": 1320,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 12400500,
+          "sourceEndMs": 12402800,
+          "text": "明かりいるから"
+        },
+        {
+          "speechId": 1321,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 12403859,
+          "sourceEndMs": 12410479,
+          "text": "聞こえるあれなんか名前書いてありますよ"
+        },
+        {
+          "speechId": 1322,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 12411300,
+          "sourceEndMs": 12414380,
+          "text": "やったぜ"
+        },
+        {
+          "speechId": 1323,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 12414600,
+          "sourceEndMs": 12422000,
+          "text": "上の方でもメルトさっきダメ"
+        },
+        {
+          "speechId": 1324,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 12425220,
+          "sourceEndMs": 12427939,
+          "text": "出ますよ"
+        },
+        {
+          "speechId": 1325,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 12435500,
+          "sourceEndMs": 12438620,
+          "text": "見つけた"
+        },
+        {
+          "speechId": 1326,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 12440600,
+          "sourceEndMs": 12448220,
+          "text": "見てくださいよ[音楽]アメジスト見たい"
+        },
+        {
+          "speechId": 1327,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 12449359,
+          "sourceEndMs": 12453080,
+          "text": "だった川が落ちてる"
+        },
+        {
+          "speechId": 1328,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 12456979,
+          "sourceEndMs": 12460939,
+          "text": "空間が広がっております"
+        },
+        {
+          "speechId": 1329,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 12462500,
+          "sourceEndMs": 12465500,
+          "text": "1988"
+        },
+        {
+          "speechId": 1330,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 12465680,
+          "sourceEndMs": 12473779,
+          "text": "はい-3979ですこれ生えてくるんだよなこうやってね"
+        },
+        {
+          "speechId": 1331,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 12478020,
+          "sourceEndMs": 12480680,
+          "text": "踏んだ時音がする"
+        },
+        {
+          "speechId": 1332,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 12480720,
+          "sourceEndMs": 12486080,
+          "text": "もう一回教えて988の"
+        },
+        {
+          "speechId": 1333,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 12486600,
+          "sourceEndMs": 12489840,
+          "text": "Xが11,988"
+        },
+        {
+          "speechId": 1334,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 12491920,
+          "sourceEndMs": 12497520,
+          "text": "[音楽]Yが-39"
+        },
+        {
+          "speechId": 1335,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 12512359,
+          "sourceEndMs": 12529580,
+          "text": "何に使うかはサラダではないがないその外側の白いやつは何なの大理石みたいなやつこれシルクタッチで取らないとダメなのダメかもそうだよ"
+        },
+        {
+          "speechId": 1336,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 12535380,
+          "sourceEndMs": 12538760,
+          "text": "集めのてる人いない"
+        },
+        {
+          "speechId": 1337,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 12546840,
+          "sourceEndMs": 12553999,
+          "text": "嬉しいなぐらいなんですけど本当ですか[音楽]"
+        },
+        {
+          "speechId": 1338,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 12561540,
+          "sourceEndMs": 12568640,
+          "text": "音は綺麗ねいい音です鉄筋"
+        },
+        {
+          "speechId": 1339,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 12570899,
+          "sourceEndMs": 12572899,
+          "text": "可愛い"
+        },
+        {
+          "speechId": 1340,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 12582120,
+          "sourceEndMs": 12589880,
+          "text": "ギターとかはみんなやるじゃんでもなんで鉄筋とか木琴はやらないの"
+        },
+        {
+          "speechId": 1341,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 12591620,
+          "sourceEndMs": 12595580,
+          "text": "パーカッションがないとできない"
+        },
+        {
+          "speechId": 1342,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 12598859,
+          "sourceEndMs": 12610759,
+          "text": "多分ね場所取るしドラムみたいなドラムぐらいだなドラムはやるじゃん[音楽]"
+        },
+        {
+          "speechId": 1343,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 12614100,
+          "sourceEndMs": 12618560,
+          "text": "だけどバンドで鉄筋ってそんなに使う"
+        },
+        {
+          "speechId": 1344,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 12621720,
+          "sourceEndMs": 12636380,
+          "text": "ということなんじゃない[音楽]今開いてるよポジション100のよ均ポジション空いてる"
+        },
+        {
+          "speechId": 1345,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 12637040,
+          "sourceEndMs": 12640399,
+          "text": "バンドねとか"
+        },
+        {
+          "speechId": 1346,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 12641340,
+          "sourceEndMs": 12652580,
+          "text": "バイオリンとかいるけど敵いよない鉄拳銃高まってる唯一無二個性出せるデッキンなら"
+        },
+        {
+          "speechId": 1347,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 12655380,
+          "sourceEndMs": 12657680,
+          "text": "譲るよ"
+        },
+        {
+          "speechId": 1348,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 12663920,
+          "sourceEndMs": 12669680,
+          "text": "作るのもあるけど"
+        },
+        {
+          "speechId": 1349,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 12671640,
+          "sourceEndMs": 12678200,
+          "text": "稼働してる二刀流じゃん二刀流じゃなくなった"
+        },
+        {
+          "speechId": 1350,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 12686359,
+          "sourceEndMs": 12690800,
+          "text": "結構大きいねそうです"
+        },
+        {
+          "speechId": 1351,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 12691800,
+          "sourceEndMs": 12694040,
+          "text": "ね"
+        },
+        {
+          "speechId": 1352,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 12694080,
+          "sourceEndMs": 12697660,
+          "text": "[笑い]"
+        },
+        {
+          "speechId": 1353,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 12706140,
+          "sourceEndMs": 12715340,
+          "text": "これをやってても復活しないしかこのそこからここにある何か入るよね"
+        },
+        {
+          "speechId": 1354,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 12723700,
+          "sourceEndMs": 12729979,
+          "text": "[音楽]ここで取るしかないんだ"
+        },
+        {
+          "speechId": 1355,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 12739859,
+          "sourceEndMs": 12746899,
+          "text": "こんなか入れとくね欲しい人に話せる顔あげる"
+        },
+        {
+          "speechId": 1356,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 12748340,
+          "sourceEndMs": 12752939,
+          "text": "ダイヤモンド入れとこいい"
+        },
+        {
+          "speechId": 1357,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 12754319,
+          "sourceEndMs": 12764479,
+          "text": "ね真相真相は何が違うの外側か高いの深い"
+        },
+        {
+          "speechId": 1358,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 12765300,
+          "sourceEndMs": 12774920,
+          "text": "深層だからそう普通のダイヤモンドの宝石よりも深いところで取れたから"
+        },
+        {
+          "speechId": 1359,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 12799260,
+          "sourceEndMs": 12807439,
+          "text": "いいじゃんこれ上とか取るの大変そう今あかりちゃん"
+        },
+        {
+          "speechId": 1360,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 12808080,
+          "sourceEndMs": 12823520,
+          "text": "頑張ってるボコボコにしてるよ怒ってますねもったいないかなってもう一生来ないかもしれないのに確かにここら辺はもったいない"
+        },
+        {
+          "speechId": 1361,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 12825359,
+          "sourceEndMs": 12827660,
+          "text": "賢いね"
+        },
+        {
+          "speechId": 1362,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 12852080,
+          "sourceEndMs": 12855620,
+          "text": "全部くる取って"
+        },
+        {
+          "speechId": 1363,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 12858690,
+          "sourceEndMs": 12861780,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 1364,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 12868500,
+          "sourceEndMs": 12877399,
+          "text": "これどんどんアメジストのブロックが降ってくるぞオケラアメジストの目"
+        },
+        {
+          "speechId": 1365,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 12884399,
+          "sourceEndMs": 12887120,
+          "text": "立つんだっけ"
+        },
+        {
+          "speechId": 1366,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 12892520,
+          "sourceEndMs": 12900260,
+          "text": "何あまりにも職人じゃないプロだよありがとう"
+        },
+        {
+          "speechId": 1367,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 12900500,
+          "sourceEndMs": 12903680,
+          "text": "トリプロ"
+        },
+        {
+          "speechId": 1368,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 12908279,
+          "sourceEndMs": 12911120,
+          "text": "なるほど"
+        },
+        {
+          "speechId": 1369,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 12922920,
+          "sourceEndMs": 12933739,
+          "text": "完璧全部[音楽]掘った変なのも取っちゃっていいんじゃないの変なの"
+        },
+        {
+          "speechId": 1370,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 12933779,
+          "sourceEndMs": 12941779,
+          "text": "目のやつ[音楽]日々みたいなやつ"
+        },
+        {
+          "speechId": 1371,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 12942000,
+          "sourceEndMs": 12944960,
+          "text": "どうせも来ねえだろう"
+        },
+        {
+          "speechId": 1372,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 12946560,
+          "sourceEndMs": 12951560,
+          "text": "来るのか来とない思う"
+        },
+        {
+          "speechId": 1373,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 12959760,
+          "sourceEndMs": 12964880,
+          "text": "ちょっと悲しくいただいたと"
+        },
+        {
+          "speechId": 1374,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 12980880,
+          "sourceEndMs": 12984020,
+          "text": "本当にいいんですか"
+        },
+        {
+          "speechId": 1375,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 12996920,
+          "sourceEndMs": 13002200,
+          "text": "[音楽]いただきます"
+        },
+        {
+          "speechId": 1376,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 13015500,
+          "sourceEndMs": 13020420,
+          "text": "びっくりしたここにね"
+        },
+        {
+          "speechId": 1377,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 13022650,
+          "sourceEndMs": 13026219,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 1378,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 13027380,
+          "sourceEndMs": 13035860,
+          "text": "ついについに見つけたから楽しみ[音楽]"
+        },
+        {
+          "speechId": 1379,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 13054560,
+          "sourceEndMs": 13057220,
+          "text": "裏切り"
+        },
+        {
+          "speechId": 1380,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 13057380,
+          "sourceEndMs": 13060399,
+          "text": "なんかダメージあった"
+        },
+        {
+          "speechId": 1381,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 13064490,
+          "sourceEndMs": 13069279,
+          "text": "[音楽]いる"
+        },
+        {
+          "speechId": 1382,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 13072380,
+          "sourceEndMs": 13078700,
+          "text": "ダメージあるのか押したりするの"
+        },
+        {
+          "speechId": 1383,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 13083840,
+          "sourceEndMs": 13090380,
+          "text": "かねえなんかもうよくわかん空気があれあいつ"
+        },
+        {
+          "speechId": 1384,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 13090920,
+          "sourceEndMs": 13093520,
+          "text": "あしまっちゃった"
+        },
+        {
+          "speechId": 1385,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 13097220,
+          "sourceEndMs": 13101710,
+          "text": "[笑い]"
+        },
+        {
+          "speechId": 1386,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 13106870,
+          "sourceEndMs": 13112840,
+          "text": "[笑い]なんか暗くなってる"
+        },
+        {
+          "speechId": 1387,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 13114100,
+          "sourceEndMs": 13117649,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 1388,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 13118670,
+          "sourceEndMs": 13126319,
+          "text": "[笑い]復活の"
+        },
+        {
+          "speechId": 1389,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 13126970,
+          "sourceEndMs": 13134120,
+          "text": "[笑い]情け[笑い]"
+        },
+        {
+          "speechId": 1390,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 13137960,
+          "sourceEndMs": 13148000,
+          "text": "さん輪切りレモン取ってきちゃった何それうまそうおいしそうでしょこれクッションは"
+        },
+        {
+          "speechId": 1391,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 13149920,
+          "sourceEndMs": 13167979,
+          "text": "お酒えーなんかレモンドライフルーツみたいなレモンに砂糖をまぶされてる頭がもう酒粕になってるレモンサワーの名前思っかなとちゃう酒粕よ"
+        },
+        {
+          "speechId": 1392,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 13174680,
+          "sourceEndMs": 13178600,
+          "text": "昔にTwitterで"
+        },
+        {
+          "speechId": 1393,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 13179300,
+          "sourceEndMs": 13185439,
+          "text": "泡上手のやつをなんかこれめちゃくちゃいっ言っててなかった"
+        },
+        {
+          "speechId": 1394,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 13200239,
+          "sourceEndMs": 13203239,
+          "text": "ちょっと"
+        },
+        {
+          "speechId": 1395,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 13203779,
+          "sourceEndMs": 13209620,
+          "text": "あいつ出したいけど先を急ぎたいなぁ"
+        },
+        {
+          "speechId": 1396,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 13211160,
+          "sourceEndMs": 13214720,
+          "text": "早く見たいなぁ"
+        },
+        {
+          "speechId": 1397,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 13217279,
+          "sourceEndMs": 13224139,
+          "text": "遺跡のところに行きたいなぁ[音楽]"
+        },
+        {
+          "speechId": 1398,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 13227120,
+          "sourceEndMs": 13230439,
+          "text": "誰かわいそうなことした人"
+        },
+        {
+          "speechId": 1399,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 13232660,
+          "sourceEndMs": 13236380,
+          "text": "あるよ羊しない"
+        },
+        {
+          "speechId": 1400,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 13242200,
+          "sourceEndMs": 13245739,
+          "text": "この経験は"
+        },
+        {
+          "speechId": 1401,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 13246100,
+          "sourceEndMs": 13249220,
+          "text": "戦闘開始"
+        },
+        {
+          "speechId": 1402,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 13249620,
+          "sourceEndMs": 13252640,
+          "text": "戦闘開始"
+        },
+        {
+          "speechId": 1403,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 13257420,
+          "sourceEndMs": 13260080,
+          "text": "朝じゃん"
+        },
+        {
+          "speechId": 1404,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 13260680,
+          "sourceEndMs": 13263800,
+          "text": "日の出や"
+        },
+        {
+          "speechId": 1405,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 13268279,
+          "sourceEndMs": 13272080,
+          "text": "我らの通り道に生き物はいない"
+        },
+        {
+          "speechId": 1406,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 13276560,
+          "sourceEndMs": 13286840,
+          "text": "それのが鳴ったが悪いな早く止めもう一回笛吹いてないと終わりのレクイエム"
+        },
+        {
+          "speechId": 1407,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 13287979,
+          "sourceEndMs": 13291760,
+          "text": "俺は朝のラッパー"
+        },
+        {
+          "speechId": 1408,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 13293560,
+          "sourceEndMs": 13302859,
+          "text": "早く着替えているラジオ体操行かなきゃ角度いる"
+        },
+        {
+          "speechId": 1409,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 13305779,
+          "sourceEndMs": 13309939,
+          "text": "もううまいうまいよ"
+        },
+        {
+          "speechId": 1410,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 13310800,
+          "sourceEndMs": 13319100,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 1411,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 13320060,
+          "sourceEndMs": 13324640,
+          "text": "酸っぱいの嫌いなんだよね"
+        },
+        {
+          "speechId": 1412,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 13324939,
+          "sourceEndMs": 13331060,
+          "text": "いるよ結構酸っぱいダメだっているよ"
+        },
+        {
+          "speechId": 1413,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 13331279,
+          "sourceEndMs": 13339279,
+          "text": "旨味[笑い]酸っぱいんだよ"
+        },
+        {
+          "speechId": 1414,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 13339680,
+          "sourceEndMs": 13342040,
+          "text": "酸味が強い"
+        },
+        {
+          "speechId": 1415,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 13342260,
+          "sourceEndMs": 13344680,
+          "text": "旨味が好き"
+        },
+        {
+          "speechId": 1416,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 13344899,
+          "sourceEndMs": 13354160,
+          "text": "そううどんとか最高だねうどん"
+        },
+        {
+          "speechId": 1417,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 13358660,
+          "sourceEndMs": 13361960,
+          "text": "二刀流じゃん"
+        },
+        {
+          "speechId": 1418,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 13362420,
+          "sourceEndMs": 13365260,
+          "text": "無理だよ"
+        },
+        {
+          "speechId": 1419,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 13365979,
+          "sourceEndMs": 13377140,
+          "text": "そんなこと言ってね迷子になったらどうするんだ大変なのはそっちだよ俺が悪かった"
+        },
+        {
+          "speechId": 1420,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 13383060,
+          "sourceEndMs": 13386680,
+          "text": "なんで仲間にしたの"
+        },
+        {
+          "speechId": 1421,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 13386710,
+          "sourceEndMs": 13389780,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 1422,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 13390859,
+          "sourceEndMs": 13402520,
+          "text": "犬が増えてるいいじゃんやったね間違って叩かれないようにやったじゃん"
+        },
+        {
+          "speechId": 1423,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 13403220,
+          "sourceEndMs": 13409720,
+          "text": "どっからハチ仲間にしてるやつとはいいだろう"
+        },
+        {
+          "speechId": 1424,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 13421090,
+          "sourceEndMs": 13431650,
+          "text": "[音楽][笑い]"
+        },
+        {
+          "speechId": 1425,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 13433939,
+          "sourceEndMs": 13436479,
+          "text": "名前は"
+        },
+        {
+          "speechId": 1426,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 13441319,
+          "sourceEndMs": 13446060,
+          "text": "毛色決めるを見て正しい"
+        },
+        {
+          "speechId": 1427,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 13448340,
+          "sourceEndMs": 13469720,
+          "text": "名前どうすんのみんなだったらいいねこれじゃあこの辺の名前何[音楽]かおかしい周りにあるもので身の回りにあるものなんですけど"
+        },
+        {
+          "speechId": 1428,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 13469830,
+          "sourceEndMs": 13474420,
+          "text": "[笑い]"
+        },
+        {
+          "speechId": 1429,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 13474690,
+          "sourceEndMs": 13486760,
+          "text": "[音楽]今はクリスタルガイザーの水かクリスタルガイザークリスタルガイザー"
+        },
+        {
+          "speechId": 1430,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 13494800,
+          "sourceEndMs": 13498880,
+          "text": "強そう強そう"
+        },
+        {
+          "speechId": 1431,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 13500500,
+          "sourceEndMs": 13505000,
+          "text": "なのにガムじゃない"
+        },
+        {
+          "speechId": 1432,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 13511160,
+          "sourceEndMs": 13521800,
+          "text": "ここにあるんですかあるよ遺跡が遺跡かどうかは知らねでもディープダークあるよ"
+        },
+        {
+          "speechId": 1433,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 13527260,
+          "sourceEndMs": 13535720,
+          "text": "普通のディープダークとディープダークの中にある遺跡のチェーン"
+        },
+        {
+          "speechId": 1434,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 13536380,
+          "sourceEndMs": 13546340,
+          "text": "エンドシティのさ船があるやつ船が見てやっ[音楽]たよ"
+        },
+        {
+          "speechId": 1435,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 13546560,
+          "sourceEndMs": 13550840,
+          "text": "ゲームの例えゲームでしないでほしい"
+        },
+        {
+          "speechId": 1436,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 13554500,
+          "sourceEndMs": 13561819,
+          "text": "お前らがやったやつだよゼルダでゼルダで例えてゼルダで"
+        },
+        {
+          "speechId": 1437,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 13562640,
+          "sourceEndMs": 13570049,
+          "text": "ゼルダで例えると何だろう[音楽]"
+        },
+        {
+          "speechId": 1438,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 13572660,
+          "sourceEndMs": 13575200,
+          "text": "ゼルダで例えると"
+        },
+        {
+          "speechId": 1439,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 13575800,
+          "sourceEndMs": 13578859,
+          "text": "だから"
+        },
+        {
+          "speechId": 1440,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 13581060,
+          "sourceEndMs": 13585819,
+          "text": "もうゴロンシティにあるでしょ"
+        },
+        {
+          "speechId": 1441,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 13588160,
+          "sourceEndMs": 13592060,
+          "text": "みたいないるかどうか"
+        },
+        {
+          "speechId": 1442,
+          "sourceVideoId": "vWv9H-hfHXo",
+          "sourceStartMs": 13593540,
+          "sourceEndMs": 13595840,
+          "text": "宮崎県"
+        }
+      ]
+    }
+  ],
+  "outputContract": {
+    "format": "json_only",
+    "schema": {
+      "themes": [
+        {
+          "themeId": "string",
+          "title": "string",
+          "summary": "string",
+          "whyItCanBeClipped": "string",
+          "sourceVideoId": "string",
+          "sourceStartMs": "number",
+          "sourceEndMs": "number",
+          "supportingSpeechIds": [
+            "number_or_range_string"
+          ],
+          "representativeQuote": "string",
+          "riskNotes": [
+            "string"
+          ]
+        }
+      ]
+    }
+  }
+}
+```

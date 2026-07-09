@@ -1,0 +1,33 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "短いテーマ名",
+      "summary": "何が見どころなのか",
+      "whyItCanBeClipped": "切り抜きとして成立すると判断した理由",
+      "sourceVideoId": "元動画ID",
+      "sourceStartMs": 123000,
+      "sourceEndMs": 153000,
+      "supportingSpeechIds": [
+        "12-47",
+        52,
+        "55-60"
+      ],
+      "representativeQuote": "根拠になる短い本文",
+      "riskNotes": [
+        "前後文脈が必要"
+      ]
+    }
+  ],
+  "runAt": "2026-07-09T10:25:54+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "recoveredFromExistingTab": true
+  },
+  "pageUrl": "https://gemini.google.com/app/e3b955f495065c3f?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"お局に怒られた過去を活かす船長\",\n      \"summary\": \"ゲーム内の銭湯でモップ掃除をする際、昔お局に「腰が入っていない」と怒られた経験を語り、今では腰を入れてしっかり掃除ができるようになったと明かす場面。\",\n      \"whyItCanBeClipped\": \"船長の過去のリアルな労働経験（お局とのエピソード）がコミカルに語られており、ゲーム内の掃除アクションとも完全にシンクロしているため、短い見どころとして独立している。\",\n      \"sourceVideoId\": \"kNX\n\n\n# theme_generation_prompt_v001\n\n\n\n\nあなたは元配信から切り抜きテーマ候補を作る。\n\n\n\n\n## 目的\n\n\n\n\n元配信の文字起こしだけを見て、切り抜きとして成立しそうなテーマ候補を出す。最終的な切り抜き区間を確定する担当ではない。区間選択は後段のcompositionが行う。\n\n\n\n\n## 入力の読み方\n\n\n\n\n- 入力は元配信単体から得られる情報だけである。\n\n- 切り抜き動画、expected、照合結果、人間確認メモ、既存切り抜きタイトルは入力に含まれない。\n\n- `sourceTitle` は配信全体の文脈を読む補助情報として使う。\n\n- `segments` は元配信内の発話で、`speechId`、時刻、本文を持つ。\n\n- 入力が長尺配信の一部窓である場合は、その窓の範囲内で判断し、配信全体を見たように書かない。\n\n- 笑い、沈黙、音量変化などの非発話シグナルが入力にある場合は補助情報として扱う。本文より強い根拠として扱わない。\n\n\n\n\n## 禁止\n\n\n\n\n- 切り抜き動画や正解区間を知っている前提で書かない。\n\n- 元配信本文にない場面や反応を作らない。\n\n- 秒数だけを根拠に候補を作らない。\n\n- 「雑談」「面白い場面」のように広すぎて何を切るか決まらないテーマを出さない。\n\n- 既存切り抜きのタイトル風に盛った表現を、本文根拠なしで作らない。\n\n\n\n\n## 判断方針\n\n\n\n\n- 候補は、元配信内の発話から見どころが説明できる具体的なテーマにする。\n\n- 単独で視聴者に伝わるフリ、展開、反応、結論がある場面を優先する。\n\n- 同じ話題が離れた場所で補足される場合は、同じテーマ候補の根拠として複数の発話範囲を持ってよい。\n\n- 根拠範囲は、候補テーマを説明するために必要な発話だけにする。配信全体や長い雑談を大きく囲わない。\n\n- 迷う候補は `riskNotes` に弱点を書く。\n\n\n\n\n## 出力\n\n\n\n\nJSONだけを返す。説明文やMarkdownを付けない。\n\n\n\n\n`requestedThemeCount` が指定されている場合は、その件数を上限にする。良い候補が足りない場合は、無理に埋めない。\n\n\n\n\n```json\n\n{\n\n  \"themes\": [\n\n    {\n\n      \"themeId\": \"theme_001\",\n\n      \"title\": \"短いテーマ名\",\n\n      \"summary\": \"何が見どころなのか\",\n\n      \"whyItCanBeClipped\": \"切り抜きとして成立すると判断した理由\",\n\n      \"sourceVideoId\": \"元動画ID\",\n\n      \"sourceStartMs\": 123000,\n\n      \"sourceEndMs\": 153000,\n\n      \"supportingSpeechIds\": [\"12-47\", 52, \"55-60\"],\n\n      \"representativeQuote\": \"根拠になる短い本文\",\n\n      \"riskNotes\": [\n\n        \"前後文脈が必要\"\n\n      ]\n\n    }\n\n  ]\n\n}\n\n```\n\n\n\n\n## supportingSpeechIds\n\n\n\n\n- 連続する発話IDは `\"12-47\"` のような範囲文字列で返す。\n\n- 不連続な発話IDは、個別の数値として同じ配列に入れる。\n\n- 連続範囲と個別IDを混ぜてよい。\n\n- 根拠に使っていない発話IDを含めない。\n\n\n\n\n## 時刻\n\n\n\n\n- `sourceStartMs` は根拠発話範囲の最初の時刻にする。\n\n- `sourceEndMs` は根拠発話範囲の最後の時刻にする。\n\n- 正解境界を当てる評価ではないが、後段の機械判定でexpected区間との重なりを見るため、候補根拠の範囲を本文に基づいて正しく出す。"
+}

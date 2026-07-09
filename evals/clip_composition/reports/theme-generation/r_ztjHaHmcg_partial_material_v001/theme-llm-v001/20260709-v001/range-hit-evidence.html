@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>theme_generation 範囲hit証拠: r_ztjHaHmcg_partial_material_v001</title>
+  <style>
+    :root { color-scheme: light; --bg: #f6f7f9; --text: #20242a; --muted: #647080; --line: #d9dee7; --panel: #fff; --accent: #155d9c; }
+    body { margin: 0; background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; line-height: 1.65; }
+    main { max-width: 1120px; margin: 0 auto; padding: 32px 20px 56px; }
+    header, .rule, .case-card { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 22px; margin-bottom: 18px; }
+    h1 { margin: 0 0 8px; font-size: 28px; }
+    h2 { margin: 0; font-size: 20px; }
+    h3 { margin: 0 0 10px; font-size: 15px; color: #1e4f7a; }
+    p { margin: 0 0 10px; }
+    ul, ol { margin: 8px 0 0 22px; padding: 0; }
+    li { margin: 6px 0; }
+    .muted, .eyebrow { color: var(--muted); }
+    .eyebrow { margin: 0 0 4px; font-size: 12px; font-weight: 700; letter-spacing: .02em; text-transform: uppercase; }
+    .case-head { display: flex; gap: 16px; justify-content: space-between; align-items: flex-start; border-bottom: 1px solid var(--line); padding-bottom: 14px; margin-bottom: 16px; }
+    .badge { border: 1px solid var(--line); border-radius: 999px; padding: 3px 10px; color: var(--muted); white-space: nowrap; font-size: 13px; }
+    .grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 16px; margin-bottom: 16px; }
+    .grid section, .answer { border: 1px solid var(--line); border-radius: 8px; padding: 14px; background: #fbfcfe; }
+    .callout { border-left: 4px solid var(--accent); background: #eef6fc; padding: 12px 14px; margin: 14px 0 0; }
+    dl { margin: 0; }
+    dt { color: var(--muted); font-size: 12px; margin-top: 10px; }
+    dd { margin: 2px 0 0; }
+    pre { white-space: pre-wrap; word-break: break-word; background: #101820; color: #eef5ff; border-radius: 8px; padding: 14px; overflow: auto; max-height: 420px; }
+    .template { border-left: 4px solid var(--accent); background: #eef6fc; padding: 10px 12px; margin-top: 12px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .empty { font-size: 16px; }
+    @media (max-width: 760px) { .grid { grid-template-columns: 1fr; } main { padding: 18px 12px 40px; } }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>theme_generation 範囲hit証拠: r_ztjHaHmcg_partial_material_v001</h1>
+      <p class="muted">既存の区間比較と同じ考え方で、Gemini候補範囲と正解区間の重なりを記録します。</p>
+      <p class="callout"><strong>今回の目的:</strong> Geminiが元配信の文字起こしだけを見て、人間が切り抜きにした正解区間の近くを候補として拾えるかを測ることです。このページは、既存の区間比較と同じ考え方で、候補範囲と正解区間の重なりを記録したものです。</p>
+      <p class="callout">このページで人間確認をしないでください。区間一致は機械採点で扱います。人間に頼むのは、文字だけでは決められない正解ラベルの妥当性や編集意図の確認だけです。</p>
+    </header>
+    <section class="rule">
+      <h2>最初に読むこと</h2>
+
+      <ol>
+        <li>この画面は、人間に採点してもらうための画面ではありません。</li>
+        <li>見ているのは「Geminiが出した候補の時間範囲が、人間の正解区間にどれだけ近かったか」です。</li>
+        <li>これは以前から使っている区間比較と同じ種類の機械採点です。候補が正解区間に重なった場合は範囲hit、重ならなかった場合はその正解区間をGeminiが拾えなかった扱いにします。</li>
+        <li>ここでまだ見ていないのは、切り抜きとして面白いか、候補タイトルが良いか、映像編集として自然か、という点です。</li>
+        <li>人間に頼む必要があるのは、映像・音声・編集意図・正解ラベルの妥当性など、文字だけでは決められない確認だけです。</li>
+      </ol>
+    </section>
+
+      <section class="case-card" id="case-1">
+        <div class="case-head">
+          <div>
+            <p class="eyebrow">確認 1</p>
+            <h2>r_ztjHaHmcg_partial_material_v001 / run 1 / candidate 6</h2>
+          </div>
+          <div class="badge">未判定</div>
+        </div>
+        <div class="grid">
+          <section>
+            <h3>正解ラベル</h3>
+            <p>配信者が食べていける同接規模について現実的に答える場面</p>
+            <dl>
+              <dt>正解範囲</dt>
+              <dd>-DwSCDMCWDQ 2399621-2440868</dd>
+              <dt>候補との重なり</dt>
+              <dd>15310ms</dd>
+            </dl>
+          </section>
+          <section>
+            <h3>Gemini候補</h3>
+            <dl>
+              <dt>title</dt>
+              <dd>Gemini回答が途中で切れたため、タイトルは完全には取得できなかった。</dd>
+              <dt>summary</dt>
+              <dd>(未取得)</dd>
+              <dt>representativeQuote</dt>
+              <dd>一発屋感を醸し出しておきながら結局普通に自分もコンテンツ力持っててただ評価され続ける人っているじゃんマジですげえ…数字って無から生まれないからさその見てる層が…どこの数字を持ってきたらそうなったのかが気になるわちょっと分析する価値ありそうだよな</dd>
+              <dt>候補範囲</dt>
+              <dd>-DwSCDMCWDQ 2425558-2628323</dd>
+            </dl>
+          </section>
+        </div>
+        <section>
+          <h3>該当transcript抜粋</h3>
+          <pre>[39:59.377-39:59.784] そう、あの
+[40:00.812-40:23.290] 単純計算だからさマジでだってそうじゃんあのー広告収入が例えば100人に見られてる人は広告収入がじゃあ1円ですと1000人に見られてるなら広告収入が0.5円になりますとかだったらさじゃないじゃんじゃないのよまあなんか日本のサイトとかはそういうことするところありそうだけどYouTubeはそういう仕様じゃないから別に100人
+[40:25.558-40:54.458] 再生数が100の動画も再生数が多分1000万の動画もそれでその再生数で国収益の単価は変わんないからそれがすごいよねそういえば最近流行りの登録者寿司バラに迫ってきてる新人さん見てるあ見てないあちらちらっとだけ見たけどあれよね100万点バラサロメさんあれ名前合ってるあの人すごいね
+[40:58.147-41:21.807] 何も何もなんですですわなんだろうなぁ結局ああいうああいうなんだろういや僕本当にすごいなって思うのが
+[41:23.802-41:37.995] 一発屋感を醸し出しておきながら結局普通に自分もコンテンツ力持っててただ評価され続ける人っているじゃんマジですげえ
+[41:58.375-42:20.532] 昔その登録者数か新人強い新人が出るとこううってなってたこともあったけど本当にでもなんなくなったな同説12万もいたんだすげーな
+[42:24.362-42:51.448] えーどうせ12万ってやばいなどこの数字それ気になるなどっから持ってきた数字なのか気になる当たり前だけど数字って無から生まれないからさその見てる層がもともと二次三次を見ている層なのかそれともVTuber界隈全体を見ていた層なのか個人VTuberを見ていた層なのか
+[42:52.348-43:17.718] それと全く関係ない本当にVでもなんでもない界隈の数字なのかどこの数字を持ってきたらそうなったのかが気になるわちょっと分析する価値ありそうだよな昔バズった生首の方あの方とか結構ガンダムの数字だろうなって感じのなんかねフォロワー分析とかもしてる人いたけど
+[43:19.225-43:48.323] 確かフォロワーがキズナアイさんとかミライアカリさんとかと全然被ってなくてあれはだから会話以外の数字持ってきてるんだろうなっていう僕はそういう消費者調査消費者調査っていうのか分かんないけどなんか好きよ分析系はちゃんと数字見てやっぱ戦い方考えるのは大事だからね</pre>
+        </section>
+        <section class="answer">
+          <h3>この画面の扱い</h3>
+          <p>これは人間への回答依頼ではありません。既存の区間比較で、Gemini候補の時間範囲が人間の正解区間に重なったかを記録する画面です。</p>
+          <ul>
+            <li><strong>同じ見どころ</strong>: 候補の主題が正解ラベルと同じ。範囲が多少広い/狭いだけならこちら。</li>
+            <li><strong>違う見どころ</strong>: 時刻は重なっているが、候補の主題が別の話題・別の面白さを指している。</li>
+            <li><strong>判定不能</strong>: 回答が途中切れ、本文が壊れている、ラベルが広すぎるなどで決められない。</li>
+          </ul>
+          <p class="template">r_ztjHaHmcg_partial_material_v001 / run 1 / candidate 6: 機械採点の範囲hit記録。人間回答不要。</p>
+        </section>
+      </section>
+  </main>
+</body>
+</html>

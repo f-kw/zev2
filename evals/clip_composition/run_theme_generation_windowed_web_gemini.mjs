@@ -1,0 +1,220 @@
+#!/usr/bin/env node
+import { existsSync } from 'node:fs';
+import { mkdir, readFile, writeFile } from 'node:fs/promises';
+import { spawn } from 'node:child_process';
+import path from 'node:path';
+
+const root = workspaceRoot();
+const evalRoot = path.join(root, 'evals', 'clip_composition');
+const options = parseOptions(process.argv.slice(2));
+
+function workspaceRoot() {
+  let current = process.cwd();
+  while (true) {
+    if (existsSync(path.join(current, 'pnpm-workspace.yaml'))) {
+      return current;
+    }
+    const parent = path.dirname(current);
+    if (parent === current) {
+      throw new Error('pnpm-workspace.yaml が見つかりません');
+    }
+    current = parent;
+  }
+}
+
+function parseOptions(argv) {
+  const values = new Map();
+  for (let index = 0; index < argv.length; index += 1) {
+    const item = argv[index];
+    if (!item.startsWith('--')) {
+      continue;
+    }
+    const inlineValueIndex = item.indexOf('=');
+    if (inlineValueIndex >= 0) {
+      values.set(item.slice(2, inlineValueIndex), item.slice(inlineValueIndex + 1));
+      continue;
+    }
+    const key = item.slice(2);
+    const next = argv[index + 1];
+    if (!next || next.startsWith('--')) {
+      values.set(key, 'true');
+      continue;
+    }
+    values.set(key, next);
+    index += 1;
+  }
+  const fixtureId = values.get('fixture')?.trim();
+  if (!fixtureId) {
+    throw new Error('--fixture を指定してください');
+  }
+  return {
+    fixtureId: fixtureId.replace(/[^a-zA-Z0-9_-]/g, '_'),
+    generationSystem: values.get('generationSystem')?.trim() || 'theme-llm-v001',
+    outputId: (values.get('outputId')?.trim() || '20260709-v001').replace(/[^a-zA-Z0-9_-]/g, '_'),
+    model: values.get('model')?.trim() || 'gemini-web-flash',
+    params: JSON.parse(values.get('params')?.trim() || JSON.stringify({
+      temperature: 0,
+      source: 'gemini-web',
+      runner: 'edge-cdp-text-prompt',
+      requestedThemeCount: 8
+    })),
+    cdpPort: values.get('cdpPort')?.trim() || '9222',
+    timeoutMs: values.get('timeoutMs')?.trim() || '300000'
+  };
+}
+
+async function readJson(filePath) {
+  return JSON.parse(await readFile(filePath, 'utf8'));
+}
+
+function runProcess(command, args) {
+  return new Promise((resolve, reject) => {
+    const child = spawn(command, args, { cwd: root, stdio: 'inherit' });
+    child.on('error', reject);
+    child.on('close', (code) => {
+      if (code === 0) {
+        resolve();
+        return;
+      }
+      reject(new Error(`${command} failed with code ${code ?? 'unknown'}`));
+    });
+  });
+}
+
+function rangesOverlap(left, right) {
+  if (left.sourceVideoId !== right.sourceVideoId) {
+    return false;
+  }
+  return Math.max(0, Math.min(left.sourceEndMs, right.sourceEndMs) - Math.max(left.sourceStartMs, right.sourceStartMs)) > 0;
+}
+
+function normalizeTheme(theme, window) {
+  const sourceVideoId = typeof theme.sourceVideoId === 'string' && theme.sourceVideoId.trim()
+    ? theme.sourceVideoId.trim()
+    : window.sourceVideoId;
+  return {
+    ...theme,
+    sourceVideoId,
+    windowId: window.windowId,
+    windowSourceVideoId: window.sourceVideoId
+  };
+}
+
+function mergeThemes(themes) {
+  const merged = [];
+  for (const theme of themes) {
+    if (typeof theme.sourceStartMs !== 'number' || typeof theme.sourceEndMs !== 'number') {
+      merged.push(theme);
+      continue;
+    }
+    const existing = merged.find((item) =>
+      typeof item.sourceStartMs === 'number'
+      && typeof item.sourceEndMs === 'number'
+      && rangesOverlap(item, theme)
+    );
+    if (!existing) {
+      merged.push({
+        ...theme,
+        mergedWindowThemeIds: [theme.themeId ?? theme.windowId]
+      });
+      continue;
+    }
+    existing.sourceStartMs = Math.min(existing.sourceStartMs, theme.sourceStartMs);
+    existing.sourceEndMs = Math.max(existing.sourceEndMs, theme.sourceEndMs);
+    existing.riskNotes = [
+      ...new Set([
+        ...(Array.isArray(existing.riskNotes) ? existing.riskNotes : []),
+        ...(Array.isArray(theme.riskNotes) ? theme.riskNotes : []),
+        '窓分割後の根拠範囲重なりによる機械統合'
+      ])
+    ];
+    existing.mergedWindowThemeIds = [
+      ...(Array.isArray(existing.mergedWindowThemeIds) ? existing.mergedWindowThemeIds : []),
+      theme.themeId ?? theme.windowId
+    ];
+  }
+  return merged;
+}
+
+async function aggregateRun(plan, run) {
+  const themes = [];
+  const windowResults = [];
+  for (const window of plan.windows) {
+    const windowOutputPath = path.join(evalRoot, 'outputs', 'theme-generation', options.fixtureId, options.generationSystem, options.outputId, 'windows', `run-${String(run).padStart(2, '0')}-${window.windowId}-gemini-output.json`);
+    const output = await readJson(windowOutputPath);
+    const windowThemes = Array.isArray(output.themes) ? output.themes.map((theme) => normalizeTheme(theme, window)) : [];
+    themes.push(...windowThemes);
+    windowResults.push({
+      windowId: window.windowId,
+      sourceVideoId: window.sourceVideoId,
+      themeCount: windowThemes.length,
+      extractionStatus: output.extractionStatus
+    });
+  }
+  const mergedThemes = mergeThemes(themes);
+  const aggregatePath = path.join(evalRoot, 'outputs', 'theme-generation', options.fixtureId, options.generationSystem, options.outputId, `run-${String(run).padStart(2, '0')}-gemini-output.json`);
+  await writeFile(aggregatePath, `${JSON.stringify({
+    runAt: new Date().toISOString(),
+    model: options.model,
+    params: {
+      ...options.params,
+      windowed: true,
+      windowRequestedThemeCount: plan.requestedThemeCount,
+      aggregateCandidateLimit: 'not_applied_no_semantic_ranker'
+    },
+    themes: mergedThemes,
+    windowingResult: {
+      applied: true,
+      windowCount: plan.windows.length,
+      preMergeCandidateCount: themes.length,
+      postMergeCandidateCount: mergedThemes.length,
+      merge: '同一sourceVideoIdで根拠範囲が重なる候補だけを機械統合。意味ベースの統合はしない。',
+      windows: windowResults
+    }
+  }, null, 2)}\n`, 'utf8');
+  console.log(`[aggregate] run ${run}: pre=${themes.length} post=${mergedThemes.length}`);
+}
+
+async function main() {
+  const baseDir = path.join(evalRoot, 'outputs', 'theme-generation', options.fixtureId, options.generationSystem, options.outputId);
+  const plan = await readJson(path.join(baseDir, 'window-plan.json'));
+  const windowOutputDir = path.join(baseDir, 'windows');
+  await mkdir(windowOutputDir, { recursive: true });
+  for (let run = 1; run <= plan.runs; run += 1) {
+    for (const window of plan.windows) {
+      const outputPath = path.join(windowOutputDir, `run-${String(run).padStart(2, '0')}-${window.windowId}-gemini-output.json`);
+      if (existsSync(outputPath)) {
+        console.log(`[skip] run ${run} ${window.windowId}`);
+        continue;
+      }
+      console.log(`[run] ${options.fixtureId} run ${run} ${window.windowId}`);
+      await runProcess(path.join(root, 'runner', 'node_modules', '.bin', 'tsx'), [
+        'evals/clip_composition/run_web_gemini_prompt.ts',
+        '--prompt',
+        path.join(root, window.promptPath),
+        '--output',
+        outputPath,
+        '--model',
+        options.model,
+        '--params',
+        JSON.stringify({
+          ...options.params,
+          windowed: true,
+          windowId: window.windowId,
+          windowSourceVideoId: window.sourceVideoId,
+          windowRequestedThemeCount: plan.requestedThemeCount
+        }),
+        '--cdpPort',
+        options.cdpPort,
+        '--timeoutMs',
+        options.timeoutMs
+      ]);
+    }
+    await aggregateRun(plan, run);
+  }
+}
+
+main().catch((error) => {
+  console.error(error instanceof Error ? error.message : String(error));
+  process.exitCode = 1;
+});

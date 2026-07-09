@@ -1,0 +1,31 @@
+{
+  "themes": [
+    {
+      "themeId": "partial_theme_1",
+      "title": "Gemini回答が途中で切れたため、タイトルは完全には取得できなかった。",
+      "sourceStartMs": 467240,
+      "sourceEndMs": 607760,
+      "representativeQuote": "明日さあうちのお仕事で会うじゃんその時負けた方が飲むヨーグルト買って行こう"
+    }
+  ],
+  "extractionStatus": {
+    "status": "partial_themes_extracted_from_answer_text",
+    "reason": "Gemini回答JSONが完結していないため、回答本文に出ていたテーマ候補だけを採点候補として抽出した。",
+    "extractedThemeCount": 1
+  },
+  "runAt": "2026-07-09T11:10:13+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_01_OJoi31bq8lk",
+    "windowSourceVideoId": "OJoi31bq8lk",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/XauLZgnWHtA_part01_partial_material_v001/theme-llm-v001/20260709-v001/windows/window_01_OJoi31bq8lk-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/9ef7e2e7267ff369?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"同期フミとの再戦と罰ゲームの約束\",\n      \"summary\": \"半年前に遊戯王を始めた同期のフミが、過去の2連敗の雪辱を果たすために本気で勝負を挑んでくる。負けた方が翌日飲むヨーグルトを買ってくるという罰ゲームを賭けて対戦がスタートする。\",\n      \"whyItCanBeClipped\": \"同期同士の仲の良さが伝わる掛け合いと、具体的な罰ゲームを賭けた対戦の導入部分として単独の切り抜きテーマとして成立する。\",\n      \"sourceVideoId\": \"OJoi31bq8lk\",\n      \"sourceStartMs\": 467240,\n      \"sourceEndMs\": 607760,\n      \"supportingSpeechIds\": [22, \"23-26\"],\n      \"representativeQuote\": \"明日さあうちのお仕事で会うじゃんその時負けた方が飲むヨーグルト買って行こう\",\n      \"riskNotes\": [\n        \"対戦自体の結末は含まれないため、導入としての切り出しになる。\"\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"フミとの激闘の結末、お互い一勝一敗の良きライバル\",\n      \"summary\": \"フミとの対戦を終え、結果はお互いに一勝一敗。お互いの成長を認め合い、3年半の同期の絆を感じさせるライバル関係を語る場面。\",\n      \"whyItCanBeClipped\": \"対戦の総括と、同期としてのエモーショナルな絆、そして直後に控える重大発表へのフリが含まれており、見どころが明確である。\",\n      \"sourceVideoId\":"
+}

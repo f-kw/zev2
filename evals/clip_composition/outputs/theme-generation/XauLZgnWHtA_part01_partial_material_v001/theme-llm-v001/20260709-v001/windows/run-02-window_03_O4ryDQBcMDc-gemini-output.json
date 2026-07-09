@@ -1,0 +1,59 @@
+{
+  "themes": [
+    {
+      "themeId": "partial_theme_1",
+      "title": "Gemini回答が途中で切れたため、タイトルは完全には取得できなかった。",
+      "sourceStartMs": 290419,
+      "sourceEndMs": 337400,
+      "representativeQuote": "任天堂ってなんか土地とか売ってなかったねゲーム性ソフトでお願いしてます"
+    },
+    {
+      "themeId": "partial_theme_2",
+      "title": "Gemini回答が途中で切れたため、タイトルは完全には取得できなかった。",
+      "sourceStartMs": 762680,
+      "sourceEndMs": 796339,
+      "representativeQuote": "最終的に投げたら全部オリバー君の責任できるんで絶対に責任逃れをするためには投げないといけないっすよね"
+    },
+    {
+      "themeId": "partial_theme_3",
+      "title": "Gemini回答が途中で切れたため、タイトルは完全には取得できなかった。",
+      "sourceStartMs": 1173799,
+      "sourceEndMs": 1211820,
+      "representativeQuote": "スタッフから今メッセージが来ててなめまきですっててますねこの後からやばいと思ってください皆さん"
+    },
+    {
+      "themeId": "partial_theme_4",
+      "title": "Gemini回答が途中で切れたため、タイトルは完全には取得できなかった。",
+      "sourceStartMs": 1420440,
+      "sourceEndMs": 1537580,
+      "representativeQuote": "レオスさんは7桁くらいだと思ったでリン酸は11か12で足し算してたんですけど無理でした計算間違いです終わりです"
+    },
+    {
+      "themeId": "partial_theme_5",
+      "title": "Gemini回答が途中で切れたため、タイトルは完全には取得できなかった。",
+      "sourceStartMs": 1866500,
+      "sourceEndMs": 1998740,
+      "representativeQuote": "問題余ってるから問題移してこれるそうすればライフ3つでいける誰も想定してませんでしたこれを作った人は"
+    }
+  ],
+  "extractionStatus": {
+    "status": "partial_themes_extracted_from_answer_text",
+    "reason": "Gemini回答JSONが完結していないため、回答本文に出ていたテーマ候補だけを採点候補として抽出した。",
+    "extractedThemeCount": 5
+  },
+  "runAt": "2026-07-09T11:47:23+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_03_O4ryDQBcMDc",
+    "windowSourceVideoId": "O4ryDQBcMDc",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/XauLZgnWHtA_part01_partial_material_v001/theme-llm-v001/20260709-v001/windows/window_03_O4ryDQBcMDc-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/e35b6606d7a5f792?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"任天堂の土地を欲しがるレオス\",\n      \"summary\": \"最終ゲームクリアの賞品としてお好きな任天堂SWITCHのソフトが貰えると聞いたレオスが、「任天堂ってなんか土地とか売ってなかったね」と言い出し、進行役から「ゲームソフトでお願いします」と冷静に突っ込まれる場面。\",\n      \"whyItCanBeClipped\": \"ゲームの賞品という定番の流れから、突如「任天堂の土地（1坪）」を欲しがるというレオスの突飛なボケと、それに対する進行のポケットマネー事情を交えたツッコミの掛け合いが単独の笑いどころとして成立しているため。\",\n      \"sourceVideoId\": \"O4ryDQBcMDc\",\n      \"sourceStartMs\": 290419,\n      \"sourceEndMs\": 337400,\n      \"supportingSpeechIds\": [\n        \"16-20\"\n      ],\n      \"representativeQuote\": \"任天堂ってなんか土地とか売ってなかったねゲーム性ソフトでお願いしてます\",\n      \"riskNotes\": [\n        \"直前のゲーム説明（メダルシステムや賞品の話）が少し入るが、レオスの発言自体が唐突なので前後の文脈を短くまとめる必要がある。\"\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"ミスをオリバーの責任にしようとするレオス\",\n      \"summary\": \"ファーストシアタルをギリギリでクリアした際、レオスが「最終的に投げたら全部オリバー君の責任にできるんで、絶対に責任逃れをするためには投げないといけないっすよね」と、チームプレイに見せかけた最低な責任転嫁の本音を語る場面。\",\n      \"whyItCanBeClipped\": \"クイズにクリアして美談になりそうなところで、レオスが堂々と「責任逃れのためにパスを繋いだ」というクズ全開の言い訳を披露し、笑いを誘うシーンとして綺麗にオチがついているため。\",\n      \"sourceVideoId\": \"O4ryDQBcMDc\",\n      \"sourceStartMs\": 762680,\n      \"sourceEndMs\": 796339,\n      \"supportingSpeechIds\": [\n        46\n      ],\n      \"representativeQuote\": \"最終的に投げたら全部オリバー君の責任できるんで絶対に責任逃れをするためには投げないといけないっすよね\",\n      \"riskNotes\": [\n        \"オリバーが冷静に解き切ったという前提の「パス（問題のバトンタッチ）」の文脈が抜けると、なぜオリバーの責任になるのかが伝わりにくくなる可能性がある。\"\n      ]\n    },\n    {\n      \"themeId\": \"theme_003\",\n      \"title\": \"スタッフの「なめまくってます」に焦る一同\",\n      \"summary\": \"簡単な3択問題に連続正解し、「我々のことなめすぎなんじゃないんですか」と調子に乗ったレオスに対し、進行から「スタッフから今メッセージが来てて、なめまくってますってきてます」と返され、一転して「これからヤバいのが来る」と焦り始める場面。\",\n      \"whyItCanBeClipped\": \"出演者と裏方（スタッフ）のプロレス的なプロットが綺麗に決まっており、調子に乗った直後に一気にフラグが回収されてピンチに陥るバラエティの定番として非常に見栄えが良い構成になっているため。\",\n      \"sourceVideoId\": \"O4ryDQBcMDc\",\n      \"sourceStartMs\": 1173799,\n      \"sourceEndMs\": 1211820,\n      \"supportingSpeechIds\": [\n        \"72-76\"\n      ],\n      \"representativeQuote\": \"スタッフから今メッセージが来ててなめまきですっててますねこの後からやばいと思ってください皆さん\",\n      \"riskNotes\": [\n        \"直前まで問題が本当に簡単だった（チキンやビーフの識別）という事実が視聴者に伝わっていないと、スタッフの煽りの文脈の面白さが半減する。\"\n      ]\n    },\n    {\n      \"themeId\": \"theme_004\",\n      \"title\": \"日本の電話番号の桁数で大混乱して爆死\",\n      \"summary\": \"「日本の電話番号は？」というクイズに対し、全員で「C（どちらでもない）」を選んで不正解になり、理由を聞かれるとレオスは「7桁くらいだと思った」、レインは「11か12で計算間違いした」と、常識クイズでボロを出して言い訳をする場面。\",\n      \"whyItCanBeClipped\": \"大人としての常識レベルのクイズ（電話番号の桁数）に対し、それぞれの謎の思考ロジック（携帯番号をその場で数えて計算ミス、市外局番の忘却など）によって自滅していくポンコツっぷりが綺麗に出ているため。\",\n      \"sourceVideoId\": \"O4ryDQBcMDc\",\n      \"sourceStartMs\": 1420440,\n      \"sourceEndMs\": 1537580,\n      \"supportingSpeechIds\": [\n        \"91-99\"\n      ],\n      \"representativeQuote\": \"レオスさんは7桁くらいだと思ったでリン酸は11か12で足し算してたんですけど無理でした計算間違いです終わりです\",\n      \"riskNotes\": [\n        \"問題の選択肢（AとBが正解だった）の構造や、彼らが何をどう勘違いしたのかのトークを丁寧に拾わないと、単にクイズを間違えただけに見えてしまう。\"\n      ]\n    },\n    {\n      \"themeId\": \"theme_005\",\n      \"title\": \"番組のシステムをハッキング（裏交渉）するレオス\",\n      \"summary\": \"セカンドステージで失敗しライフが無くなった一同に対し、レオスが「さっき問題が余ってるから、それを移してこれればライフ3つでいける」「クリアしてもらうために作ってるはずだから」と、メタ読みと屁理屈でスタッフにルール変更を認めさせる場面。\",\n      \"whyItCanBeClipped\": \"ゲームのルールを無視して、余った問題を強引にライフの代わりにトレードしようとするレオスの必死な「メタ読みトーク」と、それを結果的に受け入れてしまう番組サイドのガバガバな攻防が面白い演出になっているため。\",\n      \"sourceVideoId\": \"O4ryDQBcMDc\",\n      \"sourceStartMs\": 1866500,\n      \"sourceEndMs\": 1998740,\n      \"supportingSpeechIds\": [\n        \"124-130\"\n      ],\n      \"representativeQuote\": \"問題余ってるから問題移してこれるそうすればライフ3つでいける誰も想定してませんでしたこれを作った人は\",\n      \"riskNotes\":"
+}

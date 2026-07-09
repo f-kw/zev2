@@ -1,0 +1,45 @@
+{
+  "themes": [
+    {
+      "themeId": "partial_theme_1",
+      "title": "Gemini回答が途中で切れたため、タイトルは完全には取得できなかった。",
+      "sourceStartMs": 405919,
+      "sourceEndMs": 607760,
+      "representativeQuote": "明日さあうちのお仕事で会うじゃんその時負けた方が飲むヨーグルト買って行こう"
+    },
+    {
+      "themeId": "partial_theme_2",
+      "title": "Gemini回答が途中で切れたため、タイトルは完全には取得できなかった。",
+      "sourceStartMs": 1359600,
+      "sourceEndMs": 1437380,
+      "representativeQuote": "ランベルシアンの次に出すべきルートをさあ知ってる人いたらあれコメントで書いて欲しいわあ今今カンニングしようとしてる"
+    },
+    {
+      "themeId": "partial_theme_3",
+      "title": "Gemini回答が途中で切れたため、タイトルは完全には取得できなかった。",
+      "sourceStartMs": 2694020,
+      "sourceEndMs": 2846420,
+      "representativeQuote": "6時間ぐらいガッツリめちゃくちゃ勉強してだした結論が…楽しみにしてよ圧倒的なパワーでねじ伏せてやるわ"
+    }
+  ],
+  "extractionStatus": {
+    "status": "partial_themes_extracted_from_answer_text",
+    "reason": "Gemini回答JSONが完結していないため、回答本文に出ていたテーマ候補だけを採点候補として抽出した。",
+    "extractedThemeCount": 3
+  },
+  "runAt": "2026-07-09T11:36:28+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_01_OJoi31bq8lk",
+    "windowSourceVideoId": "OJoi31bq8lk",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/XauLZgnWHtA_part01_partial_material_v001/theme-llm-v001/20260709-v001/windows/window_01_OJoi31bq8lk-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/7e1f8b7d511282fc?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"同期フミとの因縁対決と、負けた方が飲むヨーグルトを買う罰ゲーム賭け\",\n      \"summary\": \"久しぶりの遊戯王対決で同期のフミをボイチャに召喚。前回フミに連敗した星川が、明日のお仕事で負けた方が飲むヨーグルトを買ってくる罰ゲームを提案し、因縁の再戦へ挑む流れが見どころ。\",\n      \"whyItCanBeClipped\": \"同期ならではの気心の知れた煽り合いや、明確な罰ゲーム（飲むヨーグルト）の賭けが発生しており、単独の切り抜き動画としてフリと展開が綺麗に成立しているため。\",\n      \"sourceVideoId\": \"OJoi31bq8lk\",\n      \"sourceStartMs\": 405919,\n      \"sourceEndMs\": 607760,\n      \"supportingSpeechIds\": [\n        \"19-26\"\n      ],\n      \"representativeQuote\": \"明日さあうちのお仕事で会うじゃんその時負けた方が飲むヨーグルト買って行こう\",\n      \"riskNotes\": [\n        \"対戦自体の結末は含まれないため、後段の構成で対局の決着シーンまでを繋ぐ必要がある。\"\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"カンニング疑惑？星川、コメント欄の有識者に「残機デッキ」の展開ルートを全力で頼る\",\n      \"summary\": \"フミとの第1戦を終えた星川が、「ランベルシアンの次に出すべきルートを知っている人いたらコメントで書いて欲しい」とリスナーに公開カンニングを試み、ヒートソウルの展開メモを補完する爆笑場面。\",\n      \"whyItCanBeClipped\": \"対戦の合間の休憩中に、堂々とリスナーにデッキの回し方を教えてもらおうとするお茶目なリアクションが単独の見どころとして成立しているため。\",\n      \"sourceVideoId\": \"OJoi31bq8lk\",\n      \"sourceStartMs\": 1359600,\n      \"sourceEndMs\": 1437380,\n      \"supportingSpeechIds\": [\n        \"83-87\"\n      ],\n      \"representativeQuote\": \"ランベルシアンの次に出すべきルートをさあ知ってる人いたらあれコメントで書いて欲しいわあ今今カンニングしようとしてる\",\n      \"riskNotes\": [\n        \"前後の試合内容を軽く補足しないと、唐突にルートを確認しだしたように見える可能性がある。\"\n      ]\n    },\n    {\n      \"themeId\": \"theme_003\",\n      \"title\": \"6時間予習してきたガチ勢・歌衣メイカ登場！圧倒的パワーで星川をねじ伏せる宣言\",\n      \"summary\": \"2人目の対戦者として歌衣メイカが凸待ちに登場。前日に6時間遊戯王配信をして文字を読み込み、星川の「残機デッキ」を予習してきたメイカが、圧倒的なパワーでねじ伏せると豪語する対戦前のトーク。\",\n      \"whyItCanBeClipped\": \"対戦相手のキャラクターが立っており、6時間予習という圧倒的な熱量と「圧倒的なパワーでねじ伏せてやるわ」という強いフリがあるため、エンタメとして非常に引きがある。\",\n      \"sourceVideoId\": \"OJoi31bq8lk\",\n      \"sourceStartMs\": 2694020,\n      \"sourceEndMs\": 2846420,\n      \"supportingSpeechIds\": [\n        \"202-212\"\n      ],\n      \"representativeQuote\": \"6時間ぐらいガッツリめちゃくちゃ勉強してだした結論が…楽しみにしてよ圧倒的なパワーでねじ伏せてやるわ\",\n      \"riskNotes\": [\n        \"実際の対局シーンを含まないため、対戦の勝敗そのものは後段のセグメント選択に依存する。\"\n      ]\n    },\n    {\n      \"themeId\": \"theme_004\",\n      \"title\": \"圧倒的ソリティア！社築の「ブラックフェザー」怒涛の展開に星川置いてけぼり\",\n      \"summary\": \"3人目の対戦者・社築が、強化されたお気に入りテーマ「ブラックフェザー」を引っ提げて参戦。初心者相手"
+}

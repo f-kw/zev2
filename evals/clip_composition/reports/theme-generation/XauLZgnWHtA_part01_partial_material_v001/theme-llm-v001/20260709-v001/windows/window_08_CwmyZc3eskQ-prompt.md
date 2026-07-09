@@ -1,0 +1,4313 @@
+# theme_generation_prompt_v001
+
+あなたは元配信から切り抜きテーマ候補を作る。
+
+## 目的
+
+元配信の文字起こしだけを見て、切り抜きとして成立しそうなテーマ候補を出す。最終的な切り抜き区間を確定する担当ではない。区間選択は後段のcompositionが行う。
+
+## 入力の読み方
+
+- 入力は元配信単体から得られる情報だけである。
+- 切り抜き動画、expected、照合結果、人間確認メモ、既存切り抜きタイトルは入力に含まれない。
+- `sourceTitle` は配信全体の文脈を読む補助情報として使う。
+- `segments` は元配信内の発話で、`speechId`、時刻、本文を持つ。
+- 入力が長尺配信の一部窓である場合は、その窓の範囲内で判断し、配信全体を見たように書かない。
+- 笑い、沈黙、音量変化などの非発話シグナルが入力にある場合は補助情報として扱う。本文より強い根拠として扱わない。
+
+## 禁止
+
+- 切り抜き動画や正解区間を知っている前提で書かない。
+- 元配信本文にない場面や反応を作らない。
+- 秒数だけを根拠に候補を作らない。
+- 「雑談」「面白い場面」のように広すぎて何を切るか決まらないテーマを出さない。
+- 既存切り抜きのタイトル風に盛った表現を、本文根拠なしで作らない。
+
+## 判断方針
+
+- 候補は、元配信内の発話から見どころが説明できる具体的なテーマにする。
+- 単独で視聴者に伝わるフリ、展開、反応、結論がある場面を優先する。
+- 同じ話題が離れた場所で補足される場合は、同じテーマ候補の根拠として複数の発話範囲を持ってよい。
+- 根拠範囲は、候補テーマを説明するために必要な発話だけにする。配信全体や長い雑談を大きく囲わない。
+- 迷う候補は `riskNotes` に弱点を書く。
+
+## 出力
+
+JSONだけを返す。説明文やMarkdownを付けない。
+
+`requestedThemeCount` が指定されている場合は、その件数を上限にする。良い候補が足りない場合は、無理に埋めない。
+
+```json
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "短いテーマ名",
+      "summary": "何が見どころなのか",
+      "whyItCanBeClipped": "切り抜きとして成立すると判断した理由",
+      "sourceVideoId": "元動画ID",
+      "sourceStartMs": 123000,
+      "sourceEndMs": 153000,
+      "supportingSpeechIds": ["12-47", 52, "55-60"],
+      "representativeQuote": "根拠になる短い本文",
+      "riskNotes": [
+        "前後文脈が必要"
+      ]
+    }
+  ]
+}
+```
+
+## supportingSpeechIds
+
+- 連続する発話IDは `"12-47"` のような範囲文字列で返す。
+- 不連続な発話IDは、個別の数値として同じ配列に入れる。
+- 連続範囲と個別IDを混ぜてよい。
+- 根拠に使っていない発話IDを含めない。
+
+## 時刻
+
+- `sourceStartMs` は根拠発話範囲の最初の時刻にする。
+- `sourceEndMs` は根拠発話範囲の最後の時刻にする。
+- 正解境界を当てる評価ではないが、後段の機械判定でexpected区間との重なりを見るため、候補根拠の範囲を本文に基づいて正しく出す。
+
+## 入力JSON
+
+```json
+{
+  "task": "source_only_theme_generation",
+  "generationSystem": "theme-llm-v001",
+  "promptVersion": "theme_generation_prompt_v001",
+  "requestedThemeCount": 8,
+  "inputPolicy": {
+    "sourceOnly": true,
+    "noClipInfo": true,
+    "noExpected": true,
+    "noAlignment": true,
+    "noHumanReverseTheme": true
+  },
+  "windowing": {
+    "applied": true,
+    "mode": "speech-time",
+    "windowId": "window_08_CwmyZc3eskQ",
+    "reason": "未分割入力でEdgeレンダラが高負荷化して戻らなかったため、発話境界を保った時間窓へ分割する。",
+    "maxPromptBytes": 340000,
+    "overlapMs": 180000,
+    "sourceVideoId": "CwmyZc3eskQ",
+    "sourceStartMs": 540,
+    "sourceEndMs": 6678739
+  },
+  "sources": [
+    {
+      "sourceVideoId": "CwmyZc3eskQ",
+      "sourceUrl": "https://www.youtube.com/live/CwmyZc3eskQ?feature=share",
+      "transcriptKind": "youtube_auto_caption",
+      "language": "ja",
+      "rawSegmentCount": 8547,
+      "promptSegmentCount": 596,
+      "segmentCompaction": {
+        "method": "source-only transcript segments concatenated until sentence-ending punctuation",
+        "scoringRole": "none",
+        "note": "読みやすさのための表現変換であり、expected、切り抜き、照合結果、人間確認メモは使わない。"
+      },
+      "segments": [
+        {
+          "speechId": 1,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 540,
+          "sourceEndMs": 68180,
+          "text": "[音楽]はい始まりました"
+        },
+        {
+          "speechId": 2,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 73439,
+          "sourceEndMs": 83780,
+          "text": "久しぶりの感じもあんまりないような気もしなくもなくもないんですけど皆さん新台が出ましたよえー変わらないでしょ"
+        },
+        {
+          "speechId": 3,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 86960,
+          "sourceEndMs": 92900,
+          "text": "全然前回覚えてます前回延長だったじゃないですか"
+        },
+        {
+          "speechId": 4,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 93740,
+          "sourceEndMs": 98060,
+          "text": "皆さんの箱収まってるんですよ"
+        },
+        {
+          "speechId": 5,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 104900,
+          "sourceEndMs": 111200,
+          "text": "1人でプレイしてたんだけどこれ1人だけ"
+        },
+        {
+          "speechId": 6,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 113759,
+          "sourceEndMs": 117200,
+          "text": "反映されるんだと思ってちょっと焦りましたね"
+        },
+        {
+          "speechId": 7,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 121040,
+          "sourceEndMs": 131700,
+          "text": "ちょっとおもろかったねいやちょっと今回ギミックすごいんですけど自己紹介はちょっとお願いします今日ははーい"
+        },
+        {
+          "speechId": 8,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 135250,
+          "sourceEndMs": 138450,
+          "text": "[笑い]"
+        },
+        {
+          "speechId": 9,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 141300,
+          "sourceEndMs": 148340,
+          "text": "久しぶりです今日はもう人のチャンネルなのでグータラやっていこうと思います"
+        },
+        {
+          "speechId": 10,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 151600,
+          "sourceEndMs": 154669,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 11,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 158120,
+          "sourceEndMs": 163220,
+          "text": "パパのチャンネルなので好き放題やりたいと思います"
+        },
+        {
+          "speechId": 12,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 168260,
+          "sourceEndMs": 173959,
+          "text": "のチャンネル詳しいにきましたよろしくお願いします"
+        },
+        {
+          "speechId": 13,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 180080,
+          "sourceEndMs": 183169,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 14,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 183500,
+          "sourceEndMs": 192440,
+          "text": "今日はねこんな先輩方をねちょっと抑えていこうかなと思いますよろしくお願いします"
+        },
+        {
+          "speechId": 15,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 197020,
+          "sourceEndMs": 204340,
+          "text": "[笑い]"
+        },
+        {
+          "speechId": 16,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 205280,
+          "sourceEndMs": 209239,
+          "text": "最初だけだよ元気だね"
+        },
+        {
+          "speechId": 17,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 211680,
+          "sourceEndMs": 218340,
+          "text": "黙々とやっちゃうもんね開始してますねちょっと"
+        },
+        {
+          "speechId": 18,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 222510,
+          "sourceEndMs": 237080,
+          "text": "[音楽]わからない方もいらっしゃると思うん早速でねちょっとまあやってらっしゃるんですけどもやっていこうという感じでございますうんまずはこれwxdでこう横に動くんですよパタッチがピンクでそこから"
+        },
+        {
+          "speechId": 19,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 237920,
+          "sourceEndMs": 247340,
+          "text": "ねすごい分かりやすい今日ダークエルフということでいる先輩はこのブラックそう黒の組織"
+        },
+        {
+          "speechId": 20,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 250560,
+          "sourceEndMs": 254440,
+          "text": "[笑い]"
+        },
+        {
+          "speechId": 21,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 277820,
+          "sourceEndMs": 285979,
+          "text": "そうすごいマリン感あったよねよあの魚だよ"
+        },
+        {
+          "speechId": 22,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 293780,
+          "sourceEndMs": 303259,
+          "text": "いいよねあれね[音楽]先輩あのドクロの体重"
+        },
+        {
+          "speechId": 23,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 304320,
+          "sourceEndMs": 306919,
+          "text": "ほらほら"
+        },
+        {
+          "speechId": 24,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 321800,
+          "sourceEndMs": 343400,
+          "text": "20ぐらい倒しましょう皆さんこれは何なんだえこんなにミニゲームが増えたんだすごいしかも上の段がこうやってあのギミックで段差が出来上がってるんですよでこのなんかいっぱいメダルが上の上どうやって飛ばすのこれ"
+        },
+        {
+          "speechId": 25,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 345660,
+          "sourceEndMs": 361890,
+          "text": "矢印なるほどね本当にあと何匹あと15秒当てのてください全然こっち来ない[音楽]"
+        },
+        {
+          "speechId": 26,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 363479,
+          "sourceEndMs": 369680,
+          "text": "倒した倒したいっぱい来るからいっぱい来るからね忙しい"
+        },
+        {
+          "speechId": 27,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 371990,
+          "sourceEndMs": 375160,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 28,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 377240,
+          "sourceEndMs": 380479,
+          "text": "ありがとうございます"
+        },
+        {
+          "speechId": 29,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 382610,
+          "sourceEndMs": 387970,
+          "text": "[笑い]"
+        },
+        {
+          "speechId": 30,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 400740,
+          "sourceEndMs": 403819,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 31,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 412700,
+          "sourceEndMs": 415829,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 32,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 420520,
+          "sourceEndMs": 429979,
+          "text": "[音楽]という感じで今日やっていこうかなと新要素まさかこれだけミニゲームとか"
+        },
+        {
+          "speechId": 33,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 431160,
+          "sourceEndMs": 445819,
+          "text": "欲しがりねもうちょっと待たなきゃそうかまだかそうだよもうちょっと待とう気持ち早かった真ん中すっごい落ちてる小銭欲しいね"
+        },
+        {
+          "speechId": 34,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 447860,
+          "sourceEndMs": 454280,
+          "text": "それがねなんか金のねしゃちほこみたいなやつだからね"
+        },
+        {
+          "speechId": 35,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 459020,
+          "sourceEndMs": 468259,
+          "text": "今効果もいかついかもしれませんうわぁのたまってるに落ちて"
+        },
+        {
+          "speechId": 36,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 469099,
+          "sourceEndMs": 472880,
+          "text": "もうグツグツしてきたよ"
+        },
+        {
+          "speechId": 37,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 473180,
+          "sourceEndMs": 489860,
+          "text": "落ちそうなのに落ちないねあそういえばさなんか見てる景色一緒になったもしかしえて嘘か確かに前は今うちの上になんかアイテム乗ってる人いる"
+        },
+        {
+          "speechId": 38,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 497460,
+          "sourceEndMs": 511039,
+          "text": "ミニゲームとか誰がどこにいるみたいなのはでも見やすくていいですよねそっかそっかえーなるほどそうなんだ"
+        },
+        {
+          "speechId": 39,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 515060,
+          "sourceEndMs": 523099,
+          "text": "落ちない[音楽]我慢して我慢して腹立つ"
+        },
+        {
+          "speechId": 40,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 524120,
+          "sourceEndMs": 527180,
+          "text": "んだよ"
+        },
+        {
+          "speechId": 41,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 529320,
+          "sourceEndMs": 532640,
+          "text": "釣りと一緒なんだからコインゲームなんて"
+        },
+        {
+          "speechId": 42,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 532820,
+          "sourceEndMs": 539600,
+          "text": "落ちろよ[笑い]"
+        },
+        {
+          "speechId": 43,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 542160,
+          "sourceEndMs": 547279,
+          "text": "じっくり待ってられるかこんな[音楽]"
+        },
+        {
+          "speechId": 44,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 550980,
+          "sourceEndMs": 554700,
+          "text": "釣りとか苦手そう"
+        },
+        {
+          "speechId": 45,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 558540,
+          "sourceEndMs": 567440,
+          "text": "釣り堀とかの方がいいかな釣り堀もあまりなんだなんか釣った後魚弱ってるの見ると萎える"
+        },
+        {
+          "speechId": 46,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 569420,
+          "sourceEndMs": 575060,
+          "text": "そういうことかちょっとかわいそうってなる"
+        },
+        {
+          "speechId": 47,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 575779,
+          "sourceEndMs": 598160,
+          "text": "優しいんだね[笑い]優しいな君たち長生きしてくれって思いながら釣ると私は今一体何をって思うそうなんだえでも釣り堀とかじゃなくてもう食べる前提の釣りだったら全然いただく前提で命頂く前提なら"
+        },
+        {
+          "speechId": 48,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 598220,
+          "sourceEndMs": 627620,
+          "text": "ねただなんか別に命もらわないのにリリースするのちょっと悩むそういうことなんか弱ったなこいつって思いながら遊びに付き合わしてる感じがね私も達人じゃないからうまく口からさ外せないんですよルアーが[音楽]すごいだからかわいそうでさ血まみれになっちゃって私下手だから"
+        },
+        {
+          "speechId": 49,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 631040,
+          "sourceEndMs": 636680,
+          "text": "そうなんだうーんかわいそうになっちゃう"
+        },
+        {
+          "speechId": 50,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 637320,
+          "sourceEndMs": 648360,
+          "text": "ないのツリーいいよねテレビでぐらいしか見たくないYouTube"
+        },
+        {
+          "speechId": 51,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 651480,
+          "sourceEndMs": 658100,
+          "text": "めっちゃ楽しいそうなんだこんな大物まし釣れたとかめっちゃ見ちゃう"
+        },
+        {
+          "speechId": 52,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 660300,
+          "sourceEndMs": 663560,
+          "text": "airpoしかいないもしかし"
+        },
+        {
+          "speechId": 53,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 665920,
+          "sourceEndMs": 675580,
+          "text": "[笑い]誰これまた言い出したの[笑い][音楽]"
+        },
+        {
+          "speechId": 54,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 681440,
+          "sourceEndMs": 698640,
+          "text": "なくなりました私えわかるアイテムないずっとコインひたすらまだ残ってるコインアイテムちょっとだけ残ってる時間経過でなんか落ちてくる感じだったんでこの"
+        },
+        {
+          "speechId": 55,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 701459,
+          "sourceEndMs": 720860,
+          "text": "配信前にいただきまして本日ハッシュタグ4強でつぶやいていただきますと我々がちょっぴりお悩み相談的な何かをやらせていただこうかなと思っておりましてそうなの解決してあげよう"
+        },
+        {
+          "speechId": 56,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 721230,
+          "sourceEndMs": 737540,
+          "text": "[笑い]ニュースで選ばせていいよいいよ真剣に答えるからマジでガチでガチでやらがちで答えるチャンネルだしさ"
+        },
+        {
+          "speechId": 57,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 740220,
+          "sourceEndMs": 742820,
+          "text": "やばいのそれ"
+        },
+        {
+          "speechId": 58,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 743279,
+          "sourceEndMs": 749959,
+          "text": "何言ってやろうかなではではこちらを読ませていただきますね"
+        },
+        {
+          "speechId": 59,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 751279,
+          "sourceEndMs": 758180,
+          "text": "もうお悩み相談来たらウキウキよしてる"
+        },
+        {
+          "speechId": 60,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 762300,
+          "sourceEndMs": 783540,
+          "text": "お悩みですね本当に家庭科の授業は嫌いすぎてどうしようもないです調理実習も裁縫も本当にできないですやる気はあるんですけど本当に苦手で克服方法を教えてくださいとのことです家庭科の授業を皆さんありましたえ家庭科に行こう新しい"
+        },
+        {
+          "speechId": 61,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 784019,
+          "sourceEndMs": 795560,
+          "text": "めっちゃ楽しいですよね楽しい結構好きだった2月なんだでもエルが体育嫌いなのと同じ感覚なんだろうな"
+        },
+        {
+          "speechId": 62,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 796740,
+          "sourceEndMs": 806480,
+          "text": "なんか見せしめだみたいなできない人の見せしめなんですよね"
+        },
+        {
+          "speechId": 63,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 806540,
+          "sourceEndMs": 825300,
+          "text": "運動会とか運動が得意な人の自己漫才大会だみたいな確かに同じ感覚なのかもなるほどでも財布を苦手な人は苦手めっちゃだもんね料理とかもさ確かに嫌なのかも見せしょ"
+        },
+        {
+          "speechId": 64,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 827410,
+          "sourceEndMs": 841519,
+          "text": "[音楽]裁縫さは個人としてなんかお料理とかってなんか普通にチームでやってませんでした皆さんチームだねソロプレイじゃないね"
+        },
+        {
+          "speechId": 65,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 843300,
+          "sourceEndMs": 848550,
+          "text": "Lずっと皿洗ってたよ[笑い]"
+        },
+        {
+          "speechId": 66,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 848839,
+          "sourceEndMs": 854899,
+          "text": "料理したがるからさ皿洗ったらめっちゃ感謝されるんだよね"
+        },
+        {
+          "speechId": 67,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 858490,
+          "sourceEndMs": 865880,
+          "text": "[音楽]こうなんかキーとか使いたくなくないんですか"
+        },
+        {
+          "speechId": 68,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 870300,
+          "sourceEndMs": 874279,
+          "text": "斜に構えてたから別にそれは家でできる"
+        },
+        {
+          "speechId": 69,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 879380,
+          "sourceEndMs": 899480,
+          "text": "イキってたからここは皿洗いだなっていうねうち帰ったらできるからやりな今のうちにするちゃんと自信に参加してるっていう先生からの目もできる女官すごいそれすごいそういうことね生意気その生意気"
+        },
+        {
+          "speechId": 70,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 899639,
+          "sourceEndMs": 912740,
+          "text": "構えたねいやでも家庭科はもう将来的にできなくて関係ないじゃないですかだって料理できなくても裁縫できなくても全部お金でなんとかなるから"
+        },
+        {
+          "speechId": 71,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 920339,
+          "sourceEndMs": 925040,
+          "text": "財布なんかしないで今Amazonで好きなだけ買えばいいのよ"
+        },
+        {
+          "speechId": 72,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 927660,
+          "sourceEndMs": 933980,
+          "text": "確かに裁縫って最近の人ってあんまりやらないっていうよね"
+        },
+        {
+          "speechId": 73,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 938180,
+          "sourceEndMs": 943639,
+          "text": "だから家庭科の授業は金でなんとかなる"
+        },
+        {
+          "speechId": 74,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 944480,
+          "sourceEndMs": 952940,
+          "text": "テストだけいい点取ってればそうだから"
+        },
+        {
+          "speechId": 75,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 954300,
+          "sourceEndMs": 969139,
+          "text": "捨てろ他に力を入れる得意になろうとせずに点数だけもらえばいいって飲み込め将来稼ぐためにあ将来のためにねそう"
+        },
+        {
+          "speechId": 76,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 969360,
+          "sourceEndMs": 982339,
+          "text": "やればええまあそっかためになったな好きになろうとせずにねそううん将来稼げばいいから"
+        },
+        {
+          "speechId": 77,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 983820,
+          "sourceEndMs": 993560,
+          "text": "すぎるなるほどね対決がになったかわかりません入ればいい将来が不安ですけど"
+        },
+        {
+          "speechId": 78,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 994260,
+          "sourceEndMs": 1005680,
+          "text": "大丈夫かないいのよまたブルースちゃんが責任とっくれるてだろうからね10年後っていくね稼いでるって"
+        },
+        {
+          "speechId": 79,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 1006100,
+          "sourceEndMs": 1013600,
+          "text": "言ってるお問い合わせフォームにあの時のものです"
+        },
+        {
+          "speechId": 80,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 1013800,
+          "sourceEndMs": 1017990,
+          "text": "[笑い]"
+        },
+        {
+          "speechId": 81,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 1021090,
+          "sourceEndMs": 1024149,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 82,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 1026099,
+          "sourceEndMs": 1032009,
+          "text": "[笑い]"
+        },
+        {
+          "speechId": 83,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 1034179,
+          "sourceEndMs": 1053140,
+          "text": "か[笑い]もしかしたらそういうこともあるもんね確かに真正面から受け止めずにねなんか回って受け止めですて欲しいよね"
+        },
+        {
+          "speechId": 84,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 1053260,
+          "sourceEndMs": 1059480,
+          "text": "ダメだったか真正面からこれ"
+        },
+        {
+          "speechId": 85,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 1061580,
+          "sourceEndMs": 1077320,
+          "text": "めっちゃタイムリですねえー明日から某お買い物アプリにて某20%割引祭りが始まりますね4最高ショッピングなら今は何が欲しいですかという質問ですありがとうございます"
+        },
+        {
+          "speechId": 86,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 1079280,
+          "sourceEndMs": 1098500,
+          "text": "ショッピングです20%割引のものが目の前にあったとして何買いますかっていう話題です20%割引デカいよねやっぱそういう割引がある時って大きな額の買い物した方がいいのどうなんですか"
+        },
+        {
+          "speechId": 87,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 1099720,
+          "sourceEndMs": 1102749,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 88,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 1106220,
+          "sourceEndMs": 1109269,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 89,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 1112419,
+          "sourceEndMs": 1121880,
+          "text": "どうしようかな今回めっちゃいいですかね"
+        },
+        {
+          "speechId": 90,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 1124460,
+          "sourceEndMs": 1140500,
+          "text": "いやでも私割引関係なくさあそんなあると知らずにめちゃくちゃコスメ買っちゃったんだよねしかも今日届いてさあったのかよっていうねよくあるね"
+        },
+        {
+          "speechId": 91,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 1142720,
+          "sourceEndMs": 1149620,
+          "text": "セールができるんだよ私のおかげってことね"
+        },
+        {
+          "speechId": 92,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 1149900,
+          "sourceEndMs": 1164559,
+          "text": "なんかな貢献やったぁそうだねやっぱりありがとうって感じ許せね他の人か20%されてんの許せねー"
+        },
+        {
+          "speechId": 93,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 1165380,
+          "sourceEndMs": 1167559,
+          "text": "辛い"
+        },
+        {
+          "speechId": 94,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 1167860,
+          "sourceEndMs": 1186039,
+          "text": "俺じゃ足りないかお礼してくれるの感謝を述べたありがとう足りねえ現物じゃねえと現物が欲しいでもコスメとかって1回にどれぐらい買うの"
+        },
+        {
+          "speechId": 95,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 1187660,
+          "sourceEndMs": 1193480,
+          "text": "難しい結構買うのあのストレスによる"
+        },
+        {
+          "speechId": 96,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 1195290,
+          "sourceEndMs": 1199960,
+          "text": "[笑い]わかるよね"
+        },
+        {
+          "speechId": 97,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 1205360,
+          "sourceEndMs": 1230440,
+          "text": "ちょっとしか買わない時はほんと甘いから書いたそうだけどもう別に足りてるのに買う時はストレス値がねなってる時だから買うよねめっちゃなるほど[音楽]今まで一番何爆買いしたえー何爆買いした"
+        },
+        {
+          "speechId": 98,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 1231919,
+          "sourceEndMs": 1234400,
+          "text": "商品だから"
+        },
+        {
+          "speechId": 99,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 1237650,
+          "sourceEndMs": 1251000,
+          "text": "[音楽]ありますねそうなんだそれはあるおにぎり6個ぐらい爆買いした時やったの明太"
+        },
+        {
+          "speechId": 100,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 1252620,
+          "sourceEndMs": 1258559,
+          "text": "子明太子焼きたらこ明太"
+        },
+        {
+          "speechId": 101,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 1259110,
+          "sourceEndMs": 1266260,
+          "text": "[音楽]子明太子をめっちゃ買ったん時があってでもその時はストレスだったかもしれない"
+        },
+        {
+          "speechId": 102,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 1271960,
+          "sourceEndMs": 1275080,
+          "text": "ちゃうよんです"
+        },
+        {
+          "speechId": 103,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 1276340,
+          "sourceEndMs": 1288760,
+          "text": "[音楽]ただの食いしん坊だったら可愛すぎるだろおにぎり6個もでもそれで言うと私コーヒーをいろんなところからめっちゃ買うみたいなありますね"
+        },
+        {
+          "speechId": 104,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 1290559,
+          "sourceEndMs": 1294039,
+          "text": "本当にコーヒー"
+        },
+        {
+          "speechId": 105,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 1294860,
+          "sourceEndMs": 1318640,
+          "text": "普通にインスタントのコーヒー買っちゃうんですけどコーヒーの中でもいろんなところ出してるじゃないですかそれを試すみたいなえ贅沢いっぱい何百円みたいなやつを買ったりとかしますね僕のやつがおしゃれかもおしゃれ贅沢だ"
+        },
+        {
+          "speechId": 106,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 1321150,
+          "sourceEndMs": 1328460,
+          "text": "[音楽]豆とかこだわりあるのいや私それが持っなくててドリ"
+        },
+        {
+          "speechId": 107,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 1333799,
+          "sourceEndMs": 1338380,
+          "text": "ップでお湯に溶けるやつぐらい"
+        },
+        {
+          "speechId": 108,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 1338860,
+          "sourceEndMs": 1348280,
+          "text": "お店とかでさコーヒー豆ありますよねすごいおしゃれだの"
+        },
+        {
+          "speechId": 109,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 1360280,
+          "sourceEndMs": 1369500,
+          "text": "コーヒーメーカーその入れてくれるやつ買ったらなんか日常的に買うようになると思いますよなんか"
+        },
+        {
+          "speechId": 110,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 1372860,
+          "sourceEndMs": 1380890,
+          "text": "[音楽]慣れるとおいしいですよ[音楽]"
+        },
+        {
+          "speechId": 111,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 1381159,
+          "sourceEndMs": 1384640,
+          "text": "家にあります"
+        },
+        {
+          "speechId": 112,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 1386919,
+          "sourceEndMs": 1390919,
+          "text": "か家庭"
+        },
+        {
+          "speechId": 113,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 1393500,
+          "sourceEndMs": 1402039,
+          "text": "科のことああだこうだ言ってたのにだからそれはほら金でなんとかしてるやつじゃですないか"
+        },
+        {
+          "speechId": 114,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 1407010,
+          "sourceEndMs": 1420820,
+          "text": "[笑い]豆は弾けなくてもいいマシーンを買えばいいマシンを買え手引きとかしなくていいな何でもありそう"
+        },
+        {
+          "speechId": 115,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 1421000,
+          "sourceEndMs": 1426640,
+          "text": "だ20%引きで確かに"
+        },
+        {
+          "speechId": 116,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 1428840,
+          "sourceEndMs": 1430840,
+          "text": "椅子"
+        },
+        {
+          "speechId": 117,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 1433840,
+          "sourceEndMs": 1452000,
+          "text": "何がいいのかなと思ってて今使ってるが椅子本当に革のやつを愛用してて皮が涙袋になっちゃって配信用の椅子ってことですか"
+        },
+        {
+          "speechId": 118,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 1453200,
+          "sourceEndMs": 1459280,
+          "text": "腰は痛くなっちゃうかなんかいいですよ欲しいなっちゃうよね"
+        },
+        {
+          "speechId": 119,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 1460280,
+          "sourceEndMs": 1475179,
+          "text": "座り仕事じゃねみんなね大変だからアイスほしいな[音楽]と思ってないかななんかいい姿勢悪くなっちゃうじゃん"
+        },
+        {
+          "speechId": 120,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 1475700,
+          "sourceEndMs": 1481600,
+          "text": "なんかその背もたれとか背中つけて楽な姿勢になっちゃうみたいな"
+        },
+        {
+          "speechId": 121,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 1482780,
+          "sourceEndMs": 1489280,
+          "text": "頼りすぎるだから私たびたびパイプ椅子にしてるよ"
+        },
+        {
+          "speechId": 122,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 1490940,
+          "sourceEndMs": 1496360,
+          "text": "面接受けてるのみたいな"
+        },
+        {
+          "speechId": 123,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 1496460,
+          "sourceEndMs": 1499460,
+          "text": "面白い"
+        },
+        {
+          "speechId": 124,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 1500059,
+          "sourceEndMs": 1503380,
+          "text": "猫背になるのやだなって思って"
+        },
+        {
+          "speechId": 125,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 1504440,
+          "sourceEndMs": 1516100,
+          "text": "背もたれに頼らない生活をたまにするよなるほどなるほど[音楽]クッションシーって"
+        },
+        {
+          "speechId": 126,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 1516559,
+          "sourceEndMs": 1542299,
+          "text": "フランフランとかの可愛いやつそうそうパイプ椅子もあの高級パイプラスに金使うんだよ金で解決するからさ全て高級志向じゃないよ金で解決すんだったらもう布団でそのままやれるやつにするよね"
+        },
+        {
+          "speechId": 127,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 1545419,
+          "sourceEndMs": 1555159,
+          "text": "キッチンとかに置かないなんか煮込んでる間本読むみたいなパイプ椅子なんだ"
+        },
+        {
+          "speechId": 128,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 1556179,
+          "sourceEndMs": 1562659,
+          "text": "よ[音楽]全然立ってます"
+        },
+        {
+          "speechId": 129,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 1571760,
+          "sourceEndMs": 1581140,
+          "text": "[笑い]みたいになんか台の"
+        },
+        {
+          "speechId": 130,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 1583159,
+          "sourceEndMs": 1586000,
+          "text": "床に見よ座っててる"
+        },
+        {
+          "speechId": 131,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 1597030,
+          "sourceEndMs": 1616480,
+          "text": "[笑い]そこお母さん見えるかなーとか言って言われるお風呂と瞬間に呼べやべって言いながらだから言ったでしょ"
+        },
+        {
+          "speechId": 132,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 1617070,
+          "sourceEndMs": 1620170,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 133,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 1620740,
+          "sourceEndMs": 1682900,
+          "text": "でも可愛くないもんパイプ全然可愛くないまあ確かに可愛いパイプ椅子なんてねえからえでもねなんかおばあちゃんみたいななんかクッションがモコモコのなんかわかるパイプ椅子なんだけどおばあちゃんちにありそうなあったかいパイプみたい椅子ななんかジブリみたいなさもうくっついてるのなんかカナダかなみたいなそんな感じのねパイプ椅子なのになんか色可愛い感じのあなんか海外思考があるんだまた悪いから普通のパイプ椅子にするけど[笑い]気にしないけど背もたれさとか買えばええやんって思っちゃうよねそうなるとねとなるとやっぱ一番安いのパイプ椅子だからお手頃節約するんだそうなんだよね大事なところに使うんだよねお金ってなるほど"
+        },
+        {
+          "speechId": 134,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 1683779,
+          "sourceEndMs": 1708700,
+          "text": "メッシュがいいっていう話は聞くんですよやっぱ川よりもメッシュの方ね買えばいいじゃん[音楽]めっちゃ高いやついろいろあるよねいやでもすごいらしいよパーツもつけるかつけないかで高さ変わるけど結構いくらぐらいなんですか"
+        },
+        {
+          "speechId": 135,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 1709179,
+          "sourceEndMs": 1715970,
+          "text": "ねフルカスタムすごいよね[音楽]"
+        },
+        {
+          "speechId": 136,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 1716679,
+          "sourceEndMs": 1722380,
+          "text": "じゃなかったらまだ17万とかで買えるんじゃない"
+        },
+        {
+          "speechId": 137,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 1724279,
+          "sourceEndMs": 1728919,
+          "text": "でも椅子でめっちゃいいって言ったら有名なのは"
+        },
+        {
+          "speechId": 138,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 1729039,
+          "sourceEndMs": 1733039,
+          "text": "ねなるほど"
+        },
+        {
+          "speechId": 139,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 1733279,
+          "sourceEndMs": 1753959,
+          "text": "ねコメントでエルゴヒューマンってやつが50万ぐらいするらしいなんかそこも聞いた50万やべーよソファー欲しくなっちゃうそんなの確かにそこまで言ったら赤いなあ[音楽]"
+        },
+        {
+          "speechId": 140,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 1756279,
+          "sourceEndMs": 1765150,
+          "text": "お仕事につながるからねいいの買ってもいいんじゃない確かにそうなんですよ[音楽]"
+        },
+        {
+          "speechId": 141,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 1767320,
+          "sourceEndMs": 1782620,
+          "text": "いやでもなんか椅子に自分の椅子にそんななんかかけたことないからちょっと怖いあーあれわかるよねお尻に50万円がいると思ったら"
+        },
+        {
+          "speechId": 142,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 1783100,
+          "sourceEndMs": 1795159,
+          "text": "すいません失礼します」って言いながらそうだよねちょっと忘れる忘れるよお菓子とかどうせ忘れるんだから"
+        },
+        {
+          "speechId": 143,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 1796159,
+          "sourceEndMs": 1801039,
+          "text": "忘れちゃうから何時間座るのよそこで"
+        },
+        {
+          "speechId": 144,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 1802420,
+          "sourceEndMs": 1805509,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 145,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 1805520,
+          "sourceEndMs": 1812500,
+          "text": "変わってるからねそうだね作業の時間とか入れてもね"
+        },
+        {
+          "speechId": 146,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 1816080,
+          "sourceEndMs": 1821440,
+          "text": "確かに寝てる時間と同じぐらいかもそうですよね"
+        },
+        {
+          "speechId": 147,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 1824679,
+          "sourceEndMs": 1841059,
+          "text": "考えると確かに[音楽]いいんじゃないですかいいですねありがとうございます20歳のちょっとお悩み相談みたいになっちゃったけどいいねでも20%引きになったじゃ教えてほしいな"
+        },
+        {
+          "speechId": 148,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 1841840,
+          "sourceEndMs": 1849100,
+          "text": "会いよたいねブラックフライデーとかさみんな"
+        },
+        {
+          "speechId": 149,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 1849620,
+          "sourceEndMs": 1853959,
+          "text": "好き[音楽]"
+        },
+        {
+          "speechId": 150,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 1855080,
+          "sourceEndMs": 1866630,
+          "text": "なのかなさすがに決まってるかなんかメガ割とかはなんかななんか4回行われるからだいたいざっくりの時期はもう決まってるんですけど[音楽][拍手][音楽]"
+        },
+        {
+          "speechId": 151,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 1871820,
+          "sourceEndMs": 1886059,
+          "text": "今けどはすぐにでも欲しい椅子[音楽]結構見てみますかはい[音楽]卵かけご飯が大好きあーちょっと待ってください"
+        },
+        {
+          "speechId": 152,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 1895419,
+          "sourceEndMs": 1901299,
+          "text": "何こいつガードなの"
+        },
+        {
+          "speechId": 153,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 1909940,
+          "sourceEndMs": 1917500,
+          "text": "ハートが増えてきてるよあでもすごい誰かがめちゃくちゃやってくれてる"
+        },
+        {
+          "speechId": 154,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 1917679,
+          "sourceEndMs": 1921580,
+          "text": "今から行こう隙間から"
+        },
+        {
+          "speechId": 155,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 1922899,
+          "sourceEndMs": 1926440,
+          "text": "あとちょっとだよ"
+        },
+        {
+          "speechId": 156,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 1941779,
+          "sourceEndMs": 1946159,
+          "text": "敵のゲーム好きかもしれないこれ"
+        },
+        {
+          "speechId": 157,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 1948679,
+          "sourceEndMs": 1950679,
+          "text": "楽しい"
+        },
+        {
+          "speechId": 158,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 1951399,
+          "sourceEndMs": 1957500,
+          "text": "あーアイテム[拍手]"
+        },
+        {
+          "speechId": 159,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 1959419,
+          "sourceEndMs": 1963140,
+          "text": "うめえで"
+        },
+        {
+          "speechId": 160,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 1963919,
+          "sourceEndMs": 1990400,
+          "text": "卵が何だってあごめんごめんタイミングで来たもんね卵かけご飯が大好きなのですがアレンジありますか自分はマップをパックと白身をご飯に混ぜて納豆納豆エッグパックと黄身を上からかけるのが好きです納豆最高ということで卵かけご飯のオリジナルですね[音楽]"
+        },
+        {
+          "speechId": 161,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 1994000,
+          "sourceEndMs": 2005799,
+          "text": "これは卵かけご飯なんよ卵かけご飯食べる時ってこの素朴な感じが欲しいみたいなありますよね[音楽]"
+        },
+        {
+          "speechId": 162,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 2005880,
+          "sourceEndMs": 2012000,
+          "text": "他のもの食べるラー油とか美味しいよ"
+        },
+        {
+          "speechId": 163,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 2013240,
+          "sourceEndMs": 2018240,
+          "text": "辛くなるけどマイルドでちょっとね辛味がね"
+        },
+        {
+          "speechId": 164,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 2019559,
+          "sourceEndMs": 2027419,
+          "text": "お手入れだって難しいよこれ入んないんけどだ"
+        },
+        {
+          "speechId": 165,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 2030299,
+          "sourceEndMs": 2034200,
+          "text": "無理無理無理無理無理無理無理無理"
+        },
+        {
+          "speechId": 166,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 2037380,
+          "sourceEndMs": 2041100,
+          "text": "すごい何これ"
+        },
+        {
+          "speechId": 167,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 2056580,
+          "sourceEndMs": 2064440,
+          "text": "優しいすごいここめっちゃコバあるめっちゃある"
+        },
+        {
+          "speechId": 168,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 2065099,
+          "sourceEndMs": 2082919,
+          "text": "すごいすごいすごいありがたいありがたいこれ[笑い]卵かけフィーバーだよ出てきてくれたんだこれ絶対それ出てきてくれたこれおすすめ行ったから"
+        },
+        {
+          "speechId": 169,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 2085859,
+          "sourceEndMs": 2089220,
+          "text": "443だったね"
+        },
+        {
+          "speechId": 170,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 2097920,
+          "sourceEndMs": 2102480,
+          "text": "お金じゃ解決できないよね"
+        },
+        {
+          "speechId": 171,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 2105880,
+          "sourceEndMs": 2108119,
+          "text": "雇います"
+        },
+        {
+          "speechId": 172,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 2110520,
+          "sourceEndMs": 2114839,
+          "text": "こういう風に傭兵って生まれるんだな"
+        },
+        {
+          "speechId": 173,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 2115890,
+          "sourceEndMs": 2129780,
+          "text": "[笑い]ですよね卵かけご飯にはあんまり私オリジナリって求めたことなかったわそういう意味だわかるそうなんだ"
+        },
+        {
+          "speechId": 174,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 2131500,
+          "sourceEndMs": 2135359,
+          "text": "素朴派だいる私も素朴です"
+        },
+        {
+          "speechId": 175,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 2137099,
+          "sourceEndMs": 2151079,
+          "text": "早く食べたい時に作るもんね今食べてあとあれからご飯をどれだけ混ぜるかみたいな納豆どれだけ混ぜるかみたいなね"
+        },
+        {
+          "speechId": 176,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 2151680,
+          "sourceEndMs": 2159640,
+          "text": "こだわりとか卵かけご飯やるときは網でわ越すそうそう"
+        },
+        {
+          "speechId": 177,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 2160780,
+          "sourceEndMs": 2174839,
+          "text": "綺麗でもその一手間すごいねこだわりある[音楽]ちょっとだけこれぐらい入れますね鶏がら"
+        },
+        {
+          "speechId": 178,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 2174900,
+          "sourceEndMs": 2186359,
+          "text": "あのだし系ねおいしいよねそれはちょっと確かにあるオリジナリティー"
+        },
+        {
+          "speechId": 179,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 2191440,
+          "sourceEndMs": 2195900,
+          "text": "納豆が一番なんか手本出そうな感じしますよね"
+        },
+        {
+          "speechId": 180,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 2196480,
+          "sourceEndMs": 2199730,
+          "text": "納豆[音楽]"
+        },
+        {
+          "speechId": 181,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 2202680,
+          "sourceEndMs": 2220380,
+          "text": "サラサラしで食べたいな白身がドロっててるじゃん[拍手]苦手な人確かにそれがジュロってなるのが全部サラサラで食べたいんだよね"
+        },
+        {
+          "speechId": 182,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 2222000,
+          "sourceEndMs": 2230760,
+          "text": "いいかもあでも温玉みたいにシミあの白身固まらせてやることもあるよ"
+        },
+        {
+          "speechId": 183,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 2231010,
+          "sourceEndMs": 2253140,
+          "text": "[拍手]なんかマグカップの中に水ちょっと入れて水半分ぐらい入れてそこに卵割り入れて電子レンジで30秒1回やった後もう140回秒やるとなんかね水の中にね温泉卵みたいなねできてるんだよ"
+        },
+        {
+          "speechId": 184,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 2257040,
+          "sourceEndMs": 2272579,
+          "text": "そうだよでもねこれね調子乗ってね1分とかね途中で区切らずやるとね爆発するから爆発するよね絶対30と40で絶対区切ってくださいね"
+        },
+        {
+          "speechId": 185,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 2272980,
+          "sourceEndMs": 2278579,
+          "text": "危ないからね1回死にかけたからね"
+        },
+        {
+          "speechId": 186,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 2286920,
+          "sourceEndMs": 2319140,
+          "text": "ドゥルット感が苦手な人とかはぜひぜひ美味しそう美味しいありがとうございます次えーっと次めんどくさいこととか嫌なことを後回しにしがちです先延ばし癖を直すために嫌なことも楽しくできる方法を教えてです欲しいモチベーションの上げ方とかっていうことで皆さんどうですかモチベーションありますかちゃんと"
+        },
+        {
+          "speechId": 187,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 2321960,
+          "sourceEndMs": 2345119,
+          "text": "作業するにもこれ頑張るぞみたいなありますかえなんかLはね夢思考だから作業をする時とかさパソコンカタカタカタってするじゃんでもあーでもこれちょっとめっちゃ寝たいけどこれパソコン使いこなせてたら黒の組織入れるよなぁ"
+        },
+        {
+          "speechId": 188,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 2345900,
+          "sourceEndMs": 2364980,
+          "text": "なるほどどっちかあ配信技術でいけるかなクロスいけるかなジンの兄貴出てくれるコメントしてくれるかないやこいつはなんか才能ありそうだな使えるぞなるほどね"
+        },
+        {
+          "speechId": 189,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 2366940,
+          "sourceEndMs": 2369839,
+          "text": "配信者として頑張ります"
+        },
+        {
+          "speechId": 190,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 2370920,
+          "sourceEndMs": 2376800,
+          "text": "みたいなそれも致命できる便利な生き物"
+        },
+        {
+          "speechId": 191,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 2378720,
+          "sourceEndMs": 2387650,
+          "text": "確かにお金かかってないからねモチベ上げ方でお帰りにそうだね[音楽]"
+        },
+        {
+          "speechId": 192,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 2388780,
+          "sourceEndMs": 2392760,
+          "text": "私は心拍数あげる"
+        },
+        {
+          "speechId": 193,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 2393240,
+          "sourceEndMs": 2399060,
+          "text": "ドキドキしてんのやらないと死ぬみたいな"
+        },
+        {
+          "speechId": 194,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 2399480,
+          "sourceEndMs": 2415560,
+          "text": "そう思い込んで迷惑思っをかける死んでしまうってて無理やりやると分かるでもこれやんないとやばいみたいな横断歩道の黒踏んだら死ぬみたいな"
+        },
+        {
+          "speechId": 195,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 2422280,
+          "sourceEndMs": 2431430,
+          "text": "雨が髪の毛についたら死ぬみたいな[笑い]"
+        },
+        {
+          "speechId": 196,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 2431440,
+          "sourceEndMs": 2459579,
+          "text": "走ってたそうか心拍数かそれで言うと頭の中あれ流しますよ天国と地獄とか剣の名前とかクラシックみたいなのをかけて追い打ちをかけるみたいな[拍手]Lはご褒美方じゃん2人なは追い込み型のご"
+        },
+        {
+          "speechId": 197,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 2460119,
+          "sourceEndMs": 2463260,
+          "text": "褒美型かもしれないです"
+        },
+        {
+          "speechId": 198,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 2474060,
+          "sourceEndMs": 2478380,
+          "text": "手っ取り早いご褒美かな"
+        },
+        {
+          "speechId": 199,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 2482220,
+          "sourceEndMs": 2485700,
+          "text": "かなぁ"
+        },
+        {
+          "speechId": 200,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 2485940,
+          "sourceEndMs": 2495060,
+          "text": "スイッチでも最近はあのなんか胃もたれしないクリーナー"
+        },
+        {
+          "speechId": 201,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 2498720,
+          "sourceEndMs": 2519480,
+          "text": "に会うと幸せを感じるクリームの海に溺れたくなるんですよねたまに[笑い]定期的にっていうかたまにあークリーム食べたいなみたいなわかるでも生クリームがそんなに得意じゃないかな"
+        },
+        {
+          "speechId": 202,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 2519599,
+          "sourceEndMs": 2526380,
+          "text": "そうなんですよだからなんか猫アレルギーの猫好きみたいな人です"
+        },
+        {
+          "speechId": 203,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 2527380,
+          "sourceEndMs": 2530220,
+          "text": "か"
+        },
+        {
+          "speechId": 204,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 2531880,
+          "sourceEndMs": 2538740,
+          "text": "[音楽]スタバのクリーム抜きでって頼むもない"
+        },
+        {
+          "speechId": 205,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 2545200,
+          "sourceEndMs": 2552960,
+          "text": "抜けますもんねあれねうーん私ホイップ追加のチョコチップ追加の"
+        },
+        {
+          "speechId": 206,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 2555520,
+          "sourceEndMs": 2558839,
+          "text": "縦に長くなりすぎないそれ"
+        },
+        {
+          "speechId": 207,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 2560160,
+          "sourceEndMs": 2569280,
+          "text": "みたいになってるでしょしょうがねグランデみんなで頼むか一番でかいやつ"
+        },
+        {
+          "speechId": 208,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 2572700,
+          "sourceEndMs": 2576119,
+          "text": "を見かけるけど"
+        },
+        {
+          "speechId": 209,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 2577420,
+          "sourceEndMs": 2585180,
+          "text": "遊びで買ったことあるけどマジでしんどかったからそれ以降買ったことない"
+        },
+        {
+          "speechId": 210,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 2587160,
+          "sourceEndMs": 2590819,
+          "text": "すごいいっぱいあるもんね"
+        },
+        {
+          "speechId": 211,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 2591540,
+          "sourceEndMs": 2602400,
+          "text": "カスタムとかせずにもうなんか新作とか出たらそのまま頼んじゃいますもうそれが一番うまいとされて提供されてるものだ思っとてるから"
+        },
+        {
+          "speechId": 212,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 2603839,
+          "sourceEndMs": 2623579,
+          "text": "まずはそのまま飲みたいよね[音楽]カスタマイズなあでも確かにご褒美で行くのもいいかしれもん例えばなんかこれ終わったらなんかのみ食べに行こうみたいな仕事終わったら行こうみたいなの"
+        },
+        {
+          "speechId": 213,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 2625020,
+          "sourceEndMs": 2636900,
+          "text": "私はいつもやっぱ心拍数上げなきゃいけないからウーバーイーツ頼んでスタートみたいなみたいな来る前に終わらす"
+        },
+        {
+          "speechId": 214,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 2637260,
+          "sourceEndMs": 2657839,
+          "text": "ねだからずっと自転車があと何分あと何分ってなるの見て車とかだとめちゃくちゃ絶望するやべえあいつ車だとか言っていいね罪悪感型にできるよねそれもなんかそのこんなに贅沢したのにみたいな"
+        },
+        {
+          "speechId": 215,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 2658319,
+          "sourceEndMs": 2678240,
+          "text": "こいつやばいやばいやばいやばいやばいやばいやばい[音楽]当たる当たる当たるいやいやいやいやすごいよ巻き起こしてる魔法使いいる何だこいつ"
+        },
+        {
+          "speechId": 216,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 2679359,
+          "sourceEndMs": 2688749,
+          "text": "自分のところに毎回つけるとかじゃないんだ違うなんかランダムなのかな[音楽]"
+        },
+        {
+          "speechId": 217,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 2690240,
+          "sourceEndMs": 2693300,
+          "text": "早かった"
+        },
+        {
+          "speechId": 218,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 2702960,
+          "sourceEndMs": 2712099,
+          "text": "入れるやたらのだって難しかったあれね[音楽]"
+        },
+        {
+          "speechId": 219,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 2716099,
+          "sourceEndMs": 2722040,
+          "text": "おるね鬼に金棒"
+        },
+        {
+          "speechId": 220,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 2726880,
+          "sourceEndMs": 2734640,
+          "text": "来い来い来い来いよいしょパパお腹減ったがずっとご飯の話するから"
+        },
+        {
+          "speechId": 221,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 2735910,
+          "sourceEndMs": 2749140,
+          "text": "[笑い]さか何のデザートが好きなんです[笑い]"
+        },
+        {
+          "speechId": 222,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 2751880,
+          "sourceEndMs": 2764220,
+          "text": "[音楽]まだ食べてないこれはもう5時間コースかな食べてないって言ってたから"
+        },
+        {
+          "speechId": 223,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 2764579,
+          "sourceEndMs": 2771359,
+          "text": "5時間いやそんなやるゲームじゃないだろう"
+        },
+        {
+          "speechId": 224,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 2774040,
+          "sourceEndMs": 2779400,
+          "text": "腰痛いんでしょ座ってメダルゲームやってる場合じゃないよ"
+        },
+        {
+          "speechId": 225,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 2779579,
+          "sourceEndMs": 2791520,
+          "text": "先輩の腰が許す限りねいやいやいやいや大丈夫だよさっき腰の調子良くなってきたから大丈夫それ後悔しないですか"
+        },
+        {
+          "speechId": 226,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 2792960,
+          "sourceEndMs": 2800930,
+          "text": "大丈夫だよ大丈夫大丈夫[笑い]"
+        },
+        {
+          "speechId": 227,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 2805359,
+          "sourceEndMs": 2821460,
+          "text": "みんな1000円超えてますよすごくないですかえ嘘本当だすごいね確かに爽快感あるかも前回より結構ジリ貧です"
+        },
+        {
+          "speechId": 228,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 2824619,
+          "sourceEndMs": 2836520,
+          "text": "あんだけ小銭拾わせてやって懐かしいな[笑い]放出するからとか言ってやったなってありましたね"
+        },
+        {
+          "speechId": 229,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 2837930,
+          "sourceEndMs": 2842800,
+          "text": "[笑い]みんな"
+        },
+        {
+          "speechId": 230,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 2844720,
+          "sourceEndMs": 2852000,
+          "text": "各々ちゃんと稼いでるすごいルイスなんて私越してるもんだって"
+        },
+        {
+          "speechId": 231,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 2856079,
+          "sourceEndMs": 2861240,
+          "text": "逆にパタゴラ一番最初線あったのになんでまだ"
+        },
+        {
+          "speechId": 232,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 2861390,
+          "sourceEndMs": 2864429,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 233,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 2868090,
+          "sourceEndMs": 2871139,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 234,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 2877260,
+          "sourceEndMs": 2880319,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 235,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 2884680,
+          "sourceEndMs": 2891060,
+          "text": "テンション大丈夫かまだ落ちないまだギリギリ"
+        },
+        {
+          "speechId": 236,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 2893640,
+          "sourceEndMs": 2897480,
+          "text": "500クラスになりましたこれ"
+        },
+        {
+          "speechId": 237,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 2897540,
+          "sourceEndMs": 2903180,
+          "text": "すごいすごいこれめちゃめちゃでかいです"
+        },
+        {
+          "speechId": 238,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 2906180,
+          "sourceEndMs": 2920339,
+          "text": "もしかして全人類のお悩み解決した私たちスライスまだか全人類にはまだダメだったこれ面白い"
+        },
+        {
+          "speechId": 239,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 2921579,
+          "sourceEndMs": 2944579,
+          "text": "刺身が割りリカが250円が490円半額で売ってました半額と中トロに惹かれ中トロを買いましたが今になって安くて量のあるタイが良かったかなと燃やしています量より質と質より量どちらを選ぶか参考にさせてほしいですとのことです"
+        },
+        {
+          "speechId": 240,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 2946600,
+          "sourceEndMs": 2949690,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 241,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 2965480,
+          "sourceEndMs": 2983460,
+          "text": "[音楽]ね違うからうーん両方買うみたいな感じか両方顔情報だからタイムを中トロも買っとけば"
+        },
+        {
+          "speechId": 242,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 2985420,
+          "sourceEndMs": 2995640,
+          "text": "個人的にはもう食べたい方買ったよなどっちかというとあーその時なるほどそれはあるかも確かに"
+        },
+        {
+          "speechId": 243,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 2995740,
+          "sourceEndMs": 3004880,
+          "text": "でもやっぱ売ってるしなーの在庫が少ないのでなんかあの最後の1個買ったみたいな"
+        },
+        {
+          "speechId": 244,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 3004980,
+          "sourceEndMs": 3008599,
+          "text": "選んじゃうかもしれない"
+        },
+        {
+          "speechId": 245,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 3010700,
+          "sourceEndMs": 3023720,
+          "text": "よもう最後の渋滞いただいてみたいなこういう感じになっちゃうかもスーパーとか葉山来からマリンの魚ブロックちゃった"
+        },
+        {
+          "speechId": 246,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 3030430,
+          "sourceEndMs": 3033550,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 247,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 3034260,
+          "sourceEndMs": 3038280,
+          "text": "途中無言だなって思ってたよ"
+        },
+        {
+          "speechId": 248,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 3045430,
+          "sourceEndMs": 3049590,
+          "text": "[笑い]"
+        },
+        {
+          "speechId": 249,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 3051610,
+          "sourceEndMs": 3054749,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 250,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 3055099,
+          "sourceEndMs": 3063260,
+          "text": "どっさり来たパンパンだよもう落ちるよやったー"
+        },
+        {
+          "speechId": 251,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 3063480,
+          "sourceEndMs": 3068059,
+          "text": "になるとタワー落ちてくるのかなメダルの"
+        },
+        {
+          "speechId": 252,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 3068820,
+          "sourceEndMs": 3081260,
+          "text": "[音楽]結構それ重かった記憶ありますよでも落とす3時間かかった記憶ありますメダルのタワーですよ"
+        },
+        {
+          "speechId": 253,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 3085220,
+          "sourceEndMs": 3094819,
+          "text": "じゃあ皆さん両方買うし葉山先輩はあと1つあとね"
+        },
+        {
+          "speechId": 254,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 3098760,
+          "sourceEndMs": 3109460,
+          "text": "続いてはどれだけ寝ても仕事中眠くなってしまいます眠気に勝つ方法を教えていただきたいですとのことです"
+        },
+        {
+          "speechId": 255,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 3115220,
+          "sourceEndMs": 3119300,
+          "text": "ね皆さん"
+        },
+        {
+          "speechId": 256,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 3119599,
+          "sourceEndMs": 3122599,
+          "text": "寝る"
+        },
+        {
+          "speechId": 257,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 3122960,
+          "sourceEndMs": 3127489,
+          "text": "もともともないです[音楽]"
+        },
+        {
+          "speechId": 258,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 3130760,
+          "sourceEndMs": 3140000,
+          "text": "仕事しなきゃいけないそういう時どうしますいや私ねそのエナジードリンク"
+        },
+        {
+          "speechId": 259,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 3140880,
+          "sourceEndMs": 3143240,
+          "text": "めっちゃ聞くの"
+        },
+        {
+          "speechId": 260,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 3143660,
+          "sourceEndMs": 3163760,
+          "text": "そう1缶飲んじゃうと本当に1日眠れなくなっちゃうあそんなにだから気合入れる時はなんか麻雀の大会時とかエナジードリンク飲むそうなんだねそう絶対寝ちゃいけないみたいな"
+        },
+        {
+          "speechId": 261,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 3165000,
+          "sourceEndMs": 3206780,
+          "text": "むしろ1日さそれで眠らなかったって来反動たりしないの来るけどずっと眠くなるみたいななんかそもそも寝るし寝ないし短い時間も何回も寝て長時間起きるみたいなことするんですよちょっとずつ寝るんだなんか34時間寝て昼配信して34時間2時間寝て連言してよみたいななるほどね細かいこといっぱいある漫画読みたいし小説読みたいしアニメ見たいし時間足りないもんね寝てると"
+        },
+        {
+          "speechId": 262,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 3209180,
+          "sourceEndMs": 3215839,
+          "text": "私寝るのめっちゃ早いからもう今寝て3時間後みたいな"
+        },
+        {
+          "speechId": 263,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 3219079,
+          "sourceEndMs": 3227059,
+          "text": "コントロールできるんだよね[音楽]遅刻するけど"
+        },
+        {
+          "speechId": 264,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 3227240,
+          "sourceEndMs": 3230900,
+          "text": "そんなできるの"
+        },
+        {
+          "speechId": 265,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 3235460,
+          "sourceEndMs": 3251040,
+          "text": "俺だんだん通用しなくなってくるからね後から来るんだからしっぺ返しどうやってですか[笑い]"
+        },
+        {
+          "speechId": 266,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 3273470,
+          "sourceEndMs": 3286520,
+          "text": "[音楽]すごい止めるこいつ動く動くなやばい何もできないで動くよこれ周りに任せよ"
+        },
+        {
+          "speechId": 267,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 3288420,
+          "sourceEndMs": 3291319,
+          "text": "ノイズ"
+        },
+        {
+          "speechId": 268,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 3291380,
+          "sourceEndMs": 3297500,
+          "text": "だよやる気出して"
+        },
+        {
+          "speechId": 269,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 3300330,
+          "sourceEndMs": 3304160,
+          "text": "[音楽]可愛いね"
+        },
+        {
+          "speechId": 270,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 3304319,
+          "sourceEndMs": 3307579,
+          "text": "手に入れるとなんかあるのかな"
+        },
+        {
+          "speechId": 271,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 3309119,
+          "sourceEndMs": 3312119,
+          "text": "すごい"
+        },
+        {
+          "speechId": 272,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 3316980,
+          "sourceEndMs": 3323720,
+          "text": "この妖怪倒してアドレナリン出るたびに何のお悩み聞いてたか忘れられない"
+        },
+        {
+          "speechId": 273,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 3324660,
+          "sourceEndMs": 3327260,
+          "text": "眠い時どうする"
+        },
+        {
+          "speechId": 274,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 3328500,
+          "sourceEndMs": 3333440,
+          "text": "眠くても起きて頑張ったらえらいよなって"
+        },
+        {
+          "speechId": 275,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 3333500,
+          "sourceEndMs": 3339140,
+          "text": "自分をね勝てる女ということで"
+        },
+        {
+          "speechId": 276,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 3343460,
+          "sourceEndMs": 3348559,
+          "text": "やっぱ痛みを与える"
+        },
+        {
+          "speechId": 277,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 3349110,
+          "sourceEndMs": 3352169,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 278,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 3353339,
+          "sourceEndMs": 3356300,
+          "text": "爪を立てたりとか"
+        },
+        {
+          "speechId": 279,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 3357079,
+          "sourceEndMs": 3363800,
+          "text": "1回やって懲りたのは目の下にわさびを塗ったら"
+        },
+        {
+          "speechId": 280,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 3364640,
+          "sourceEndMs": 3367700,
+          "text": "かよ"
+        },
+        {
+          "speechId": 281,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 3369180,
+          "sourceEndMs": 3385400,
+          "text": "配信外でなんか眠い眠れないんだよねっ言ってたら友達に目の下にわさびチューブ塗るといいよというところ塗ったらもう目が染みてしばらくその友達ちょっと話さなかったんじゃない"
+        },
+        {
+          "speechId": 282,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 3388400,
+          "sourceEndMs": 3398660,
+          "text": "本当にやると思ってなかったみたいなね本当なのかなと思って"
+        },
+        {
+          "speechId": 283,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 3398819,
+          "sourceEndMs": 3401059,
+          "text": "そうねです"
+        },
+        {
+          "speechId": 284,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 3401880,
+          "sourceEndMs": 3414000,
+          "text": "なるほどじゃあこれもうわさび塗ったら解決ということでですかねいやLINE以外かもしれんラー油ラー油ちょっと"
+        },
+        {
+          "speechId": 285,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 3415740,
+          "sourceEndMs": 3418220,
+          "text": "薄めたい"
+        },
+        {
+          "speechId": 286,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 3418520,
+          "sourceEndMs": 3425059,
+          "text": "あそうだね[拍手]ナイス"
+        },
+        {
+          "speechId": 287,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 3425660,
+          "sourceEndMs": 3429680,
+          "text": "じゃあライオンを塗ろうみんな"
+        },
+        {
+          "speechId": 288,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 3429839,
+          "sourceEndMs": 3432500,
+          "text": "油で保湿して"
+        },
+        {
+          "speechId": 289,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 3433859,
+          "sourceEndMs": 3437300,
+          "text": "なるほどですね"
+        },
+        {
+          "speechId": 290,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 3441260,
+          "sourceEndMs": 3463760,
+          "text": "続いてあこれですね最近梅雨入りしましたがドライブが好きなのでどこかに行きたいと思っています4強の皆さんはどこか行きたいところとかないですかという質問なんですけど多分いいと思うんですこういうところに行ってみたいみたいなとこありますか"
+        },
+        {
+          "speechId": 291,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 3466859,
+          "sourceEndMs": 3483800,
+          "text": "海外風の建物を見るの好きで[音楽]YouTuberとか見てたの海外旅行の街並みすぎがめっちゃ綺麗て建物の街歩きたいなーみたいなとかはありますね"
+        },
+        {
+          "speechId": 292,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 3486900,
+          "sourceEndMs": 3492859,
+          "text": "すごいすごい私たちダメなの"
+        },
+        {
+          "speechId": 293,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 3494240,
+          "sourceEndMs": 3497359,
+          "text": "時だけ"
+        },
+        {
+          "speechId": 294,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 3504440,
+          "sourceEndMs": 3508160,
+          "text": "ちゃんとやんなきゃなっ"
+        },
+        {
+          "speechId": 295,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 3511099,
+          "sourceEndMs": 3519020,
+          "text": "つらかった今なんて言ったって言われても動ける言えないわ"
+        },
+        {
+          "speechId": 296,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 3519119,
+          "sourceEndMs": 3524119,
+          "text": "海外風の建物みたいなんですよ"
+        },
+        {
+          "speechId": 297,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 3526099,
+          "sourceEndMs": 3536660,
+          "text": "みたいな風に思ったりするんですけどドライブで行くならどこ行きたいですか"
+        },
+        {
+          "speechId": 298,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 3537930,
+          "sourceEndMs": 3557599,
+          "text": "[音楽]鎌倉とか鎌倉じゃないなんかインスタ映えスポット多い印象あるなえーそうなんだ今時期だったら時期的に"
+        },
+        {
+          "speechId": 299,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 3557839,
+          "sourceEndMs": 3571640,
+          "text": "会えてやつか大スポットなんかサービスエリアに行ってなんか1日限定の挨拶のラーメンいいね"
+        },
+        {
+          "speechId": 300,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 3574860,
+          "sourceEndMs": 3578110,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 301,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 3581240,
+          "sourceEndMs": 3591420,
+          "text": "すごいすごいすごい[音楽]溜まってるドキドキ"
+        },
+        {
+          "speechId": 302,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 3595980,
+          "sourceEndMs": 3600260,
+          "text": "よりによって今BGMが"
+        },
+        {
+          "speechId": 303,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 3617119,
+          "sourceEndMs": 3639380,
+          "text": "やばいやばいやばいやばいもう倒してる場合じゃないやばいやばいやばいやばいやばい落ちてくるやつに見えない見えない敵が見えない敵に慣れてきどれさ[笑い]"
+        },
+        {
+          "speechId": 304,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 3648020,
+          "sourceEndMs": 3657079,
+          "text": "気持ち悪い目標数20ってみんなでそれとも1人が一人でも"
+        },
+        {
+          "speechId": 305,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 3660799,
+          "sourceEndMs": 3667500,
+          "text": "いいすごいすごいすごいすごいすごいすごいすごい"
+        },
+        {
+          "speechId": 306,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 3667740,
+          "sourceEndMs": 3672200,
+          "text": "すごいすごいすごいすごいすごいすごいすごいすごい"
+        },
+        {
+          "speechId": 307,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 3682099,
+          "sourceEndMs": 3694940,
+          "text": "やばいすごいすごいまだまだあるまだまだあるまだあるすごいすごいずっと落ちてくる"
+        },
+        {
+          "speechId": 308,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 3695540,
+          "sourceEndMs": 3698540,
+          "text": "すごいすごい"
+        },
+        {
+          "speechId": 309,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 3699799,
+          "sourceEndMs": 3702799,
+          "text": "する"
+        },
+        {
+          "speechId": 310,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 3704900,
+          "sourceEndMs": 3707900,
+          "text": "すごい"
+        },
+        {
+          "speechId": 311,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 3712280,
+          "sourceEndMs": 3715460,
+          "text": "また来た"
+        },
+        {
+          "speechId": 312,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 3719960,
+          "sourceEndMs": 3724160,
+          "text": "こいつか巻き上げてくるやつか"
+        },
+        {
+          "speechId": 313,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 3726780,
+          "sourceEndMs": 3729200,
+          "text": "倒せ倒せ"
+        },
+        {
+          "speechId": 314,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 3730920,
+          "sourceEndMs": 3733460,
+          "text": "巻き上げないで"
+        },
+        {
+          "speechId": 315,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 3735780,
+          "sourceEndMs": 3748819,
+          "text": "頑張れ頑張れこっちで来たいっぱい落ちた確かに入っててくれるからすごい落ちてくる早かったな早かったね"
+        },
+        {
+          "speechId": 316,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 3752540,
+          "sourceEndMs": 3758540,
+          "text": "なんか光ってる勾玉あるんすよねすごいすごいすごいすごいすごいすごいすごい"
+        },
+        {
+          "speechId": 317,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 3761520,
+          "sourceEndMs": 3764839,
+          "text": "下にゲージあるよね"
+        },
+        {
+          "speechId": 318,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 3768260,
+          "sourceEndMs": 3778940,
+          "text": "アドレナリン出すぎちゃってさ最高に楽しいやばいやばいやばいやばいやばい"
+        },
+        {
+          "speechId": 319,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 3779510,
+          "sourceEndMs": 3782559,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 320,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 3785280,
+          "sourceEndMs": 3800119,
+          "text": "これ欲しい2まで行けない両手を伸ばしたいこの箱の幅じゃ足りないですか"
+        },
+        {
+          "speechId": 321,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 3803240,
+          "sourceEndMs": 3810079,
+          "text": "前回なんかあったよねそんなあるんだあるはずです"
+        },
+        {
+          "speechId": 322,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 3811140,
+          "sourceEndMs": 3815619,
+          "text": "レベルアップ的なね[音楽]"
+        },
+        {
+          "speechId": 323,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 3825359,
+          "sourceEndMs": 3828680,
+          "text": "お面とかはあるけど"
+        },
+        {
+          "speechId": 324,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 3829200,
+          "sourceEndMs": 3833720,
+          "text": "サイコロおにぎり落ちてるよおにぎり治るよ"
+        },
+        {
+          "speechId": 325,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 3834619,
+          "sourceEndMs": 3841640,
+          "text": "さっき自分取っちゃった今見えないなぁ"
+        },
+        {
+          "speechId": 326,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 3842220,
+          "sourceEndMs": 3846319,
+          "text": "妖怪多くないんだよ"
+        },
+        {
+          "speechId": 327,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 3847220,
+          "sourceEndMs": 3851059,
+          "text": "早い早いです"
+        },
+        {
+          "speechId": 328,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 3863900,
+          "sourceEndMs": 3873799,
+          "text": "すごい最強さっきよりマシ[笑い]よ"
+        },
+        {
+          "speechId": 329,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 3879299,
+          "sourceEndMs": 3886400,
+          "text": "結局景品取るのと俵取るのと小判取るんどっちがうわーいいんだでもどうだろう"
+        },
+        {
+          "speechId": 330,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 3888079,
+          "sourceEndMs": 3894500,
+          "text": "ジャックポットえぐかったからそうだねその後に"
+        },
+        {
+          "speechId": 331,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 3896599,
+          "sourceEndMs": 3899660,
+          "text": "します"
+        },
+        {
+          "speechId": 332,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 3904650,
+          "sourceEndMs": 3907800,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 333,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 3908880,
+          "sourceEndMs": 3911880,
+          "text": "プロポーション"
+        },
+        {
+          "speechId": 334,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 3918359,
+          "sourceEndMs": 3929839,
+          "text": "描いてみたいな履歴書とかに何やってたんですか1年プロプッシャーとしてやってきてすごいね君"
+        },
+        {
+          "speechId": 335,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 3932059,
+          "sourceEndMs": 3938960,
+          "text": "Googleとかなら採用してくれそう面白い人が取られる"
+        },
+        {
+          "speechId": 336,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 3942619,
+          "sourceEndMs": 3948260,
+          "text": "あやっぱそうなんだ君面白いね"
+        },
+        {
+          "speechId": 337,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 3955740,
+          "sourceEndMs": 3959780,
+          "text": "助けてくれなさそういつもメダルでやってた"
+        },
+        {
+          "speechId": 338,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 3961880,
+          "sourceEndMs": 3967460,
+          "text": "すいませんプッシャーの仕事今いいとこなんこれすよ"
+        },
+        {
+          "speechId": 339,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 3968040,
+          "sourceEndMs": 3972319,
+          "text": "危ないよ信用できねえ"
+        },
+        {
+          "speechId": 340,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 3975890,
+          "sourceEndMs": 3981190,
+          "text": "[笑い]"
+        },
+        {
+          "speechId": 341,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 3989339,
+          "sourceEndMs": 3996859,
+          "text": "適当ですよ騙さ行けるれるのは先輩に行けないよって"
+        },
+        {
+          "speechId": 342,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 4002050,
+          "sourceEndMs": 4005530,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 343,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 4007900,
+          "sourceEndMs": 4013839,
+          "text": "なんかメダルゲームやりながらさお悩み相談ってなんか横着だよ"
+        },
+        {
+          "speechId": 344,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 4016059,
+          "sourceEndMs": 4021579,
+          "text": "なんかこいつらの話信用になるかなみたいなね"
+        },
+        {
+          "speechId": 345,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 4023799,
+          "sourceEndMs": 4027640,
+          "text": "じゃあ話聞くかみたいな"
+        },
+        {
+          "speechId": 346,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 4030640,
+          "sourceEndMs": 4035619,
+          "text": "後で終わったと概要欄に解答フィクションです"
+        },
+        {
+          "speechId": 347,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 4045160,
+          "sourceEndMs": 4049160,
+          "text": "か自分"
+        },
+        {
+          "speechId": 348,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 4050000,
+          "sourceEndMs": 4056859,
+          "text": "ダイビングのライセンスを取得しました皆さんはありますか"
+        },
+        {
+          "speechId": 349,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 4058780,
+          "sourceEndMs": 4074260,
+          "text": "すごいすごいウイニングかっこいい何がでもさ資格かしものたじゃないとか"
+        },
+        {
+          "speechId": 350,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 4075700,
+          "sourceEndMs": 4094720,
+          "text": "じゃないと嫌になっちゃうもんね勉強とかねまあね大変なもんねあと声優実力検定受けたいですそういうのあるんですか声優さんが受けているかどうかはなんか闇の中みたい"
+        },
+        {
+          "speechId": 351,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 4095199,
+          "sourceEndMs": 4119980,
+          "text": "ほんで趣味の範囲の検定みたいな審査い員の方に声優さんとかたらねなんか実技検定とかあるんだろうなと思って見てほしい面白そうだね[音楽]試験に出されるんだろう演技はもちろんそうじゃないですか知識としたら何なんですかね"
+        },
+        {
+          "speechId": 352,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 4120160,
+          "sourceEndMs": 4127359,
+          "text": "この雪女に遭遇した時にかわいいこと言ってください"
+        },
+        {
+          "speechId": 353,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 4127600,
+          "sourceEndMs": 4132080,
+          "text": "なるほどなるほどね"
+        },
+        {
+          "speechId": 354,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 4139660,
+          "sourceEndMs": 4143500,
+          "text": "これ面白そうですね"
+        },
+        {
+          "speechId": 355,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 4162160,
+          "sourceEndMs": 4170440,
+          "text": "でもそういうのないのなんかスロットとのかさプロ検定みたいなのかな"
+        },
+        {
+          "speechId": 356,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 4175179,
+          "sourceEndMs": 4180580,
+          "text": "みんな絶対そうなの"
+        },
+        {
+          "speechId": 357,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 4186620,
+          "sourceEndMs": 4197020,
+          "text": "でしょうそうなんだないのかな騙されてたじゃんさすよ"
+        },
+        {
+          "speechId": 358,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 4204510,
+          "sourceEndMs": 4213580,
+          "text": "[音楽]そうなのえじゃあパパもさパチプロですって言ったらプロとして"
+        },
+        {
+          "speechId": 359,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 4214000,
+          "sourceEndMs": 4217000,
+          "text": "プロペシア"
+        },
+        {
+          "speechId": 360,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 4217060,
+          "sourceEndMs": 4220420,
+          "text": "言えたってこと"
+        },
+        {
+          "speechId": 361,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 4220719,
+          "sourceEndMs": 4224800,
+          "text": "入れちゃうけど言わないな"
+        },
+        {
+          "speechId": 362,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 4229040,
+          "sourceEndMs": 4239199,
+          "text": "誰に詳しいわけじゃないんでやっぱりハァハァとか全部そっか詳しくないとか言えないのか"
+        },
+        {
+          "speechId": 363,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 4244100,
+          "sourceEndMs": 4251440,
+          "text": "プロって大変だやっぱ店から選ばないとね3桁台かみたいか"
+        },
+        {
+          "speechId": 364,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 4253159,
+          "sourceEndMs": 4256400,
+          "text": "持ち帰りますよ"
+        },
+        {
+          "speechId": 365,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 4266420,
+          "sourceEndMs": 4269479,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 366,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 4285920,
+          "sourceEndMs": 4292480,
+          "text": "HP高くない敵が強くなってきてるね"
+        },
+        {
+          "speechId": 367,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 4309460,
+          "sourceEndMs": 4317600,
+          "text": "でも私爆弾処理班の検定受けたい資格取りたいなんですなんか"
+        },
+        {
+          "speechId": 368,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 4318440,
+          "sourceEndMs": 4326140,
+          "text": "命かけたいんだよななんか危ないことをしたいから"
+        },
+        {
+          "speechId": 369,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 4328640,
+          "sourceEndMs": 4331780,
+          "text": "命かけて"
+        },
+        {
+          "speechId": 370,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 4332900,
+          "sourceEndMs": 4336100,
+          "text": "ルイスちゃんの仕事に役に立つんじゃない"
+        },
+        {
+          "speechId": 371,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 4336880,
+          "sourceEndMs": 4350199,
+          "text": "取ってほしい取るかちょっとえーかっこいいえーでもいかんせんちょっと教養のいいんだよな私ちょっとあーじゃないけどね"
+        },
+        {
+          "speechId": 372,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 4350920,
+          "sourceEndMs": 4358179,
+          "text": "あれそんなことないよ大丈夫大丈夫"
+        },
+        {
+          "speechId": 373,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 4359739,
+          "sourceEndMs": 4363400,
+          "text": "ちょっと受けてみようかな"
+        },
+        {
+          "speechId": 374,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 4365140,
+          "sourceEndMs": 4370550,
+          "text": "いけるいけるやっちゃおうかな[音楽]"
+        },
+        {
+          "speechId": 375,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 4371960,
+          "sourceEndMs": 4377980,
+          "text": "爆弾処理かっこいいドキドキしたいんだよね"
+        },
+        {
+          "speechId": 376,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 4381280,
+          "sourceEndMs": 4389320,
+          "text": "ドキドキしたくてダメダメそんなのそう隣り合わせになりたい"
+        },
+        {
+          "speechId": 377,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 4391219,
+          "sourceEndMs": 4398739,
+          "text": "最近そういうことかドキドキしたい回答者刺激が足りなくなったの"
+        },
+        {
+          "speechId": 378,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 4399420,
+          "sourceEndMs": 4404739,
+          "text": "[音楽]だけどね"
+        },
+        {
+          "speechId": 379,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 4410600,
+          "sourceEndMs": 4417760,
+          "text": "毎朝やってるとなーみたいなじゃないですかめっちゃドキドキする"
+        },
+        {
+          "speechId": 380,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 4419260,
+          "sourceEndMs": 4424360,
+          "text": "やっぱ自分の身に何か起きないとね"
+        },
+        {
+          "speechId": 381,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 4426980,
+          "sourceEndMs": 4431560,
+          "text": "常にてるそういうものを求めんだ行きたい"
+        },
+        {
+          "speechId": 382,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 4433600,
+          "sourceEndMs": 4440800,
+          "text": "んねだね感じたいんだよそれ大事だね"
+        },
+        {
+          "speechId": 383,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 4444560,
+          "sourceEndMs": 4448360,
+          "text": "みんながいたら100人引きだわ"
+        },
+        {
+          "speechId": 384,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 4453739,
+          "sourceEndMs": 4464620,
+          "text": "片方6700やばうわぁ先輩も6500円いつの間にすごい"
+        },
+        {
+          "speechId": 385,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 4465140,
+          "sourceEndMs": 4467560,
+          "text": "儲かるねこれ"
+        },
+        {
+          "speechId": 386,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 4469480,
+          "sourceEndMs": 4478540,
+          "text": "さっきみんなと合流する前に違う人たちの部屋入っちゃって勝手にさ超気まずかった"
+        },
+        {
+          "speechId": 387,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 4478699,
+          "sourceEndMs": 4492580,
+          "text": "2人でねのんびりやってて急にルイスキャミーとか出てきてさ入っちゃったかすっごい申し訳なくなったわもう"
+        },
+        {
+          "speechId": 388,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 4493600,
+          "sourceEndMs": 4496600,
+          "text": "だって"
+        },
+        {
+          "speechId": 389,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 4496699,
+          "sourceEndMs": 4499120,
+          "text": "今日"
+        },
+        {
+          "speechId": 390,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 4499219,
+          "sourceEndMs": 4501580,
+          "text": "ケバブすぎる"
+        },
+        {
+          "speechId": 391,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 4502940,
+          "sourceEndMs": 4507340,
+          "text": "ちゃいそうだもんね確かに合言葉が似てたり"
+        },
+        {
+          "speechId": 392,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 4509179,
+          "sourceEndMs": 4513820,
+          "text": "4桁なんて適当に入れたら勝手に入れるよね"
+        },
+        {
+          "speechId": 393,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 4515480,
+          "sourceEndMs": 4519340,
+          "text": "思えるもんねーみんな"
+        },
+        {
+          "speechId": 394,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 4520159,
+          "sourceEndMs": 4535900,
+          "text": "開け閉め落ちそう落ちそうで落ちないプルプルしてるすっごいぷるぷるぷるついてるここまで来て落ちない嘘でしょあ来た来た来た来たよかった"
+        },
+        {
+          "speechId": 395,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 4539420,
+          "sourceEndMs": 4548620,
+          "text": "汚染プッシュは結構大揺らし有効なんだよな左右に左右にねちょっと遅いですよね"
+        },
+        {
+          "speechId": 396,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 4550840,
+          "sourceEndMs": 4554020,
+          "text": "確かに"
+        },
+        {
+          "speechId": 397,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 4554380,
+          "sourceEndMs": 4559120,
+          "text": "これのまたどっかの城設定なのかな"
+        },
+        {
+          "speechId": 398,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 4559699,
+          "sourceEndMs": 4562699,
+          "text": "あー"
+        },
+        {
+          "speechId": 399,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 4564010,
+          "sourceEndMs": 4570520,
+          "text": "[音楽]とのが出してくれてんのかなこれ"
+        },
+        {
+          "speechId": 400,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 4574420,
+          "sourceEndMs": 4579340,
+          "text": "確かに在庫処理在庫処理"
+        },
+        {
+          "speechId": 401,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 4583400,
+          "sourceEndMs": 4586480,
+          "text": "世代交代かな"
+        },
+        {
+          "speechId": 402,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 4588080,
+          "sourceEndMs": 4591100,
+          "text": "綺麗にしてんだ身辺をね"
+        },
+        {
+          "speechId": 403,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 4597040,
+          "sourceEndMs": 4637960,
+          "text": "終わりあるのかないやなさそう制限時間とかも特にないよねあんのかな前回はなんで全員ジャックポット見るまでじゃなかったでもみんなチャックポットなったよねすんなり行ったねみんな見えてたんだよでLもあと2個で2個小判でと書いてあるすごい早い私もあと3個あと4つですジャックポット2周ややばいやばいんだよね"
+        },
+        {
+          "speechId": 404,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 4641480,
+          "sourceEndMs": 4647840,
+          "text": "景品落ちるとさっきみたいな妖怪出くるってことてなるほど"
+        },
+        {
+          "speechId": 405,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 4652460,
+          "sourceEndMs": 4746750,
+          "text": "妖怪ポイント妖怪なんかあるね[音楽]今日ちょっと質問もラスト行ってみますか[音楽]ラストじゃないかもしれないですけどジャックカップがいる先輩の見る前にこれ葉山先輩から聞いたことないからあれなんですけど先輩もないかなあの競馬に勝てるようになりたいっていう方がいらっしゃってこの方は競馬買ったことないんですけど馬券買ったことないんですけどどうしたらいいんですかみたいな感じの質問なんですけど言わせれば読んでだったりとかやっぱ知識を求めるだったりとかあると思うんですけどそういう勝負事とかってどういう対策してたりしますみなさん私競馬はめちゃくちゃ動画見るあそうなんだ予想してる人の話とか聞いてこの馬はこうこうでこれに勝ってるから今回のコースは有利だから勝つよみたいなとかめっちゃ見るしなんかねなんかサイトやってるいつも当ててますみたいな豪語してる人のやつも話半分に見たりしてでその情報でその後馬の戦績見て買うかみたいな情報やっぱ情報研究するかなやっぱお金使うしさ確か確か[音楽]"
+        },
+        {
+          "speechId": 406,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 4748719,
+          "sourceEndMs": 4753249,
+          "text": "なるほど[音楽]"
+        },
+        {
+          "speechId": 407,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 4757540,
+          "sourceEndMs": 4761080,
+          "text": "対策とかありますか"
+        },
+        {
+          "speechId": 408,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 4761739,
+          "sourceEndMs": 4776380,
+          "text": "フィーリングとりあえず左手の法則え何それ左手とりあえず左手の逃げ馬なんかいいものありそうみたいに"
+        },
+        {
+          "speechId": 409,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 4777800,
+          "sourceEndMs": 4782679,
+          "text": "迷ったら左側を選択してるかも"
+        },
+        {
+          "speechId": 410,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 4783520,
+          "sourceEndMs": 4787360,
+          "text": "現場に繋がるから"
+        },
+        {
+          "speechId": 411,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 4788120,
+          "sourceEndMs": 4790960,
+          "text": "こんな感じ"
+        },
+        {
+          "speechId": 412,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 4792170,
+          "sourceEndMs": 4803020,
+          "text": "[音楽]でもあんまりそうでね賭け事ってか夢中になっちゃうからNG出されてて"
+        },
+        {
+          "speechId": 413,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 4804880,
+          "sourceEndMs": 4807880,
+          "text": "ね"
+        },
+        {
+          "speechId": 414,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 4808540,
+          "sourceEndMs": 4815920,
+          "text": "出るまでやっちゃうみたいな[音楽]危ないよね"
+        },
+        {
+          "speechId": 415,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 4817000,
+          "sourceEndMs": 4823300,
+          "text": "取り返さなきゃってねやらなきゃ出さなきゃ"
+        },
+        {
+          "speechId": 416,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 4824120,
+          "sourceEndMs": 4827199,
+          "text": "万馬家に手出し始める"
+        },
+        {
+          "speechId": 417,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 4829060,
+          "sourceEndMs": 4835160,
+          "text": "ここに全ベッドを[音楽]"
+        },
+        {
+          "speechId": 418,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 4835219,
+          "sourceEndMs": 4838540,
+          "text": "宝くじ感覚で買う人っていますよね"
+        },
+        {
+          "speechId": 419,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 4841659,
+          "sourceEndMs": 4844780,
+          "text": "みたいな"
+        },
+        {
+          "speechId": 420,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 4847280,
+          "sourceEndMs": 4850179,
+          "text": "ね"
+        },
+        {
+          "speechId": 421,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 4856760,
+          "sourceEndMs": 4860739,
+          "text": "船よりはそうなんですか"
+        },
+        {
+          "speechId": 422,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 4865100,
+          "sourceEndMs": 4868319,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 423,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 4870890,
+          "sourceEndMs": 4874049,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 424,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 4881300,
+          "sourceEndMs": 4884620,
+          "text": "当たりにくいもんね"
+        },
+        {
+          "speechId": 425,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 4887719,
+          "sourceEndMs": 4892179,
+          "text": "私なんか掃除とか換気とかめっちゃしますよ"
+        },
+        {
+          "speechId": 426,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 4895000,
+          "sourceEndMs": 4904239,
+          "text": "でもね麻雀プロの方もその大会前のルーティンは何ですかって聞くとトイレを掃除するとか"
+        },
+        {
+          "speechId": 427,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 4904600,
+          "sourceEndMs": 4908020,
+          "text": "やっぱ言うよ"
+        },
+        {
+          "speechId": 428,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 4908659,
+          "sourceEndMs": 4916780,
+          "text": "めちゃめちゃ友好的だと思ううんもうすぐ簡単にできるねできますね"
+        },
+        {
+          "speechId": 429,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 4919360,
+          "sourceEndMs": 4944140,
+          "text": "なんか自分はその当たるなんか例えばライブチケット当てたいとかだっても当たるにふさわしい生き物になろうとする努力かもし当たんなかっただけいるこそが当たるべきなのにこんなに糸く積んでるのにみたいなこれ辛くない当たんなかった時繋ぎそうよそんなの"
+        },
+        {
+          "speechId": 430,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 4944739,
+          "sourceEndMs": 4956780,
+          "text": "ふさわしい行動したのになんのか王なり方みたいな[笑い]なるほど"
+        },
+        {
+          "speechId": 431,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 4958659,
+          "sourceEndMs": 4964300,
+          "text": "いや多分あのキーバラし"
+        },
+        {
+          "speechId": 432,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 4964540,
+          "sourceEndMs": 4969340,
+          "text": "それねこそトイレの掃除とね似たような"
+        },
+        {
+          "speechId": 433,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 4969920,
+          "sourceEndMs": 4975400,
+          "text": "得かどうかは置いといてね気持ちの問題だ"
+        },
+        {
+          "speechId": 434,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 4977540,
+          "sourceEndMs": 4983560,
+          "text": "で大事もですからねそうですね"
+        },
+        {
+          "speechId": 435,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 4984940,
+          "sourceEndMs": 4997900,
+          "text": "私なんてだって言ったらね来なさそうですもんね本当にそうよね今来なかっただけ次来るみたいなね"
+        },
+        {
+          "speechId": 436,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 4999080,
+          "sourceEndMs": 5016739,
+          "text": "理由作りをさせちゃダメなんだよ神になんかだってなんで外れたんだろう確かに最近サボってたしなみたいなだから神が私に微笑まなかったんだダメダメ新人深いのか何なの"
+        },
+        {
+          "speechId": 437,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 5018340,
+          "sourceEndMs": 5023799,
+          "text": "です[音楽]"
+        },
+        {
+          "speechId": 438,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 5027420,
+          "sourceEndMs": 5037739,
+          "text": "とかいうのは運は収束するって言って悪いことが起きてもその後いいことが絶対起きるからみたいな"
+        },
+        {
+          "speechId": 439,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 5037960,
+          "sourceEndMs": 5041580,
+          "text": "信じるみたいな言葉だ"
+        },
+        {
+          "speechId": 440,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 5041920,
+          "sourceEndMs": 5049140,
+          "text": "悪いことが起きても絶対に次は行くことがあるから誰ですか"
+        },
+        {
+          "speechId": 441,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 5062660,
+          "sourceEndMs": 5070500,
+          "text": "[笑い]もしかして"
+        },
+        {
+          "speechId": 442,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 5071440,
+          "sourceEndMs": 5078420,
+          "text": "[音楽]人のこと騙してくるんだよ"
+        },
+        {
+          "speechId": 443,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 5082659,
+          "sourceEndMs": 5090179,
+          "text": "これうまいこと切り抜いて甘めが言ったことにするしかない言ってたからね"
+        },
+        {
+          "speechId": 444,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 5091020,
+          "sourceEndMs": 5094920,
+          "text": "もうたすごい言って"
+        },
+        {
+          "speechId": 445,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 5098020,
+          "sourceEndMs": 5101820,
+          "text": "でもお豆も小銭やってたのね"
+        },
+        {
+          "speechId": 446,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 5106120,
+          "sourceEndMs": 5115179,
+          "text": "その後パタから小銭プッシャー2新台出ましてたってDiscord来てこいつマジかと思ったテンション"
+        },
+        {
+          "speechId": 447,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 5115870,
+          "sourceEndMs": 5133679,
+          "text": "[笑い]上がったのだから思ったけどね[笑い]だから何やってそんなことないそんなことないよでもそしたらマリンちゃんもさエルサも優しかったからスタンプ押した"
+        },
+        {
+          "speechId": 448,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 5134320,
+          "sourceEndMs": 5137159,
+          "text": "めちゃめちゃ楽しんでくれてるから"
+        },
+        {
+          "speechId": 449,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 5137260,
+          "sourceEndMs": 5139440,
+          "text": "楽しいね"
+        },
+        {
+          "speechId": 450,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 5140199,
+          "sourceEndMs": 5144179,
+          "text": "3出てもまさかこれやる流れ"
+        },
+        {
+          "speechId": 451,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 5146159,
+          "sourceEndMs": 5154739,
+          "text": "です皆さんねそうでも楽しかった"
+        },
+        {
+          "speechId": 452,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 5155770,
+          "sourceEndMs": 5159030,
+          "text": "[笑い]"
+        },
+        {
+          "speechId": 453,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 5161860,
+          "sourceEndMs": 5164460,
+          "text": "終わるまでじゃない"
+        },
+        {
+          "speechId": 454,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 5168300,
+          "sourceEndMs": 5171360,
+          "text": "楽しかった"
+        },
+        {
+          "speechId": 455,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 5171460,
+          "sourceEndMs": 5174060,
+          "text": "雰囲気だったななんか"
+        },
+        {
+          "speechId": 456,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 5174480,
+          "sourceEndMs": 5178020,
+          "text": "お金もいっぱいあるし"
+        },
+        {
+          "speechId": 457,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 5178560,
+          "sourceEndMs": 5187260,
+          "text": "始めたら500円で始めたのに5000円すごい良心的な"
+        },
+        {
+          "speechId": 458,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 5191320,
+          "sourceEndMs": 5200580,
+          "text": "ということであの我々にねあまりないということであまりない"
+        },
+        {
+          "speechId": 459,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 5202659,
+          "sourceEndMs": 5215940,
+          "text": "答え切りましたマジで[音楽]けど4強に答えるには重すぎる内容とかもやっぱあるので何パターのチャンネルじゃいくらやるでもじゃんそんなの"
+        },
+        {
+          "speechId": 460,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 5216460,
+          "sourceEndMs": 5227340,
+          "text": "パタチャンネルじゃん運の話とかはさっきはあってえ声真似とかないのこういうのそうね"
+        },
+        {
+          "speechId": 461,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 5228840,
+          "sourceEndMs": 5236400,
+          "text": "エネルギッシュだから答えるじゃんこういうバナナとか初デートどこがいいですかとかさ"
+        },
+        {
+          "speechId": 462,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 5237780,
+          "sourceEndMs": 5251579,
+          "text": "初デート一緒の家はダメですかとかないの[音楽]玉論争になってるやつ終止符打つじゃんダメですか[音楽]"
+        },
+        {
+          "speechId": 463,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 5253380,
+          "sourceEndMs": 5265260,
+          "text": "デートでご飯食べに行く時に吉野家を選ぶ良いか悪いかみたいなずっと言い争ってないそうなんだ"
+        },
+        {
+          "speechId": 464,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 5266199,
+          "sourceEndMs": 5278350,
+          "text": "ことがあるのそれはえでも待って私吉野家よりさすき家がいいな違うんだやっぱり[音楽]"
+        },
+        {
+          "speechId": 465,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 5287219,
+          "sourceEndMs": 5290760,
+          "text": "なんか流れてるよ"
+        },
+        {
+          "speechId": 466,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 5291480,
+          "sourceEndMs": 5296260,
+          "text": "行ったことないなぁそうそう"
+        },
+        {
+          "speechId": 467,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 5299950,
+          "sourceEndMs": 5303000,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 468,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 5306340,
+          "sourceEndMs": 5308699,
+          "text": "定まってないな"
+        },
+        {
+          "speechId": 469,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 5311860,
+          "sourceEndMs": 5316960,
+          "text": "金あるのかないのかわかんないばかり"
+        },
+        {
+          "speechId": 470,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 5320280,
+          "sourceEndMs": 5323820,
+          "text": "みんなはありなんだ"
+        },
+        {
+          "speechId": 471,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 5324639,
+          "sourceEndMs": 5326820,
+          "text": "わかんないの"
+        },
+        {
+          "speechId": 472,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 5328060,
+          "sourceEndMs": 5337020,
+          "text": "わかんないけどさ例えばディナーに行きますって言われてて吉野家になっちゃったから言い争ってんかのそれとも"
+        },
+        {
+          "speechId": 473,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 5337860,
+          "sourceEndMs": 5345360,
+          "text": "えでもじゃあちょっと帰りに寄って帰るか吉野家で吉野家になっちゃったのか"
+        },
+        {
+          "speechId": 474,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 5345780,
+          "sourceEndMs": 5354780,
+          "text": "確かにシチュエーションがねデート行くぞ吉野家決定とはならなくないですか"
+        },
+        {
+          "speechId": 475,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 5358719,
+          "sourceEndMs": 5398280,
+          "text": "でも私その頑張ってる姿勢にドキドキするんですよだからこの人慣れてないかもしれないけどなんかいいとこ選ぼうとしてくれたんだなみたいな別に吉野家でもいいけどなんかちょっと吉永たら別のあなんか絶対前もって調べてたじゃんみたいなやつ出てくると可愛いとかあるなって思っちゃうだよ気合入れてくれたんだなが伝わるとなんか別にマイナスにはならないけど吉野家にそうそうでもなんか"
+        },
+        {
+          "speechId": 476,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 5398820,
+          "sourceEndMs": 5403980,
+          "text": "見えるとなんか持ってなるよね"
+        },
+        {
+          "speechId": 477,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 5407080,
+          "sourceEndMs": 5411239,
+          "text": "あとは吉野家のプレゼンがうまいかどうかだな"
+        },
+        {
+          "speechId": 478,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 5411300,
+          "sourceEndMs": 5421770,
+          "text": "心がすごく強くってみたいなまじカスタムこんなできんだよやばくないみたいな[音楽]"
+        },
+        {
+          "speechId": 479,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 5424000,
+          "sourceEndMs": 5431040,
+          "text": "めっちゃプレゼンされたら行くもんじゃあね行くかみたいなおもろいなみたいな"
+        },
+        {
+          "speechId": 480,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 5435360,
+          "sourceEndMs": 5441750,
+          "text": "冷凍の吉野家も食べてるよ[音楽]"
+        },
+        {
+          "speechId": 481,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 5448620,
+          "sourceEndMs": 5455760,
+          "text": "出してくるんだへいらっしゃい肉だけバックで売っててさ"
+        },
+        {
+          "speechId": 482,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 5459040,
+          "sourceEndMs": 5462060,
+          "text": "冬だけでお願いします"
+        },
+        {
+          "speechId": 483,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 5465000,
+          "sourceEndMs": 5473940,
+          "text": "白米だけ持ってきたらいけるよでも行かないじゃん吉野家そんな話ありがとう"
+        },
+        {
+          "speechId": 484,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 5475620,
+          "sourceEndMs": 5491820,
+          "text": "エルさんだったらあれだよねじゃあ吉野家行こうよって言われたらエルんち食えるよってあるよなんか逆にさなんかサメられそうじゃないみたいで"
+        },
+        {
+          "speechId": 485,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 5493320,
+          "sourceEndMs": 5524260,
+          "text": "大丈夫だよ誘うんだよじゃあ吉野家食えるならいいじゃん言ってくれるかななるなるなるもしくはなんかイタリアン行こうよっ言っててる人にあエルんちで吉野家食べれるよっちょっとて言ったら待ってちょっと待っしれてって言われるかもないけど[音楽][笑い]言われたいうちで食えるよってえー"
+        },
+        {
+          "speechId": 486,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 5524920,
+          "sourceEndMs": 5528900,
+          "text": "誘っそれてんな確かに"
+        },
+        {
+          "speechId": 487,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 5528960,
+          "sourceEndMs": 5545460,
+          "text": "食えるよやばいなじゃあうちの近所の外のなんかコンクリートのところとコンプリートです"
+        },
+        {
+          "speechId": 488,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 5556500,
+          "sourceEndMs": 5561420,
+          "text": "けどあの出してあげるから"
+        },
+        {
+          "speechId": 489,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 5562420,
+          "sourceEndMs": 5566460,
+          "text": "行くよじゃあもうそうなったら"
+        },
+        {
+          "speechId": 490,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 5568179,
+          "sourceEndMs": 5574080,
+          "text": "なんで外で冷凍の吉野家食べなきゃいけないだって吉野家行くわ"
+        },
+        {
+          "speechId": 491,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 5579820,
+          "sourceEndMs": 5590699,
+          "text": "あそこは家じゃないんだとかなるでもなんかこう個室の吉野家できますよだってえそうなのえ違う違うだから2人で"
+        },
+        {
+          "speechId": 492,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 5591159,
+          "sourceEndMs": 5593520,
+          "text": "びっくりした"
+        },
+        {
+          "speechId": 493,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 5594239,
+          "sourceEndMs": 5612120,
+          "text": "個室のそうない中あったよな危ないようなはいそう実現できる家で作るプレゼンがまた広いうちだった個室だけど外だだったらテラス席けど"
+        },
+        {
+          "speechId": 494,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 5614760,
+          "sourceEndMs": 5618540,
+          "text": "ちょっと気持ちいいかも"
+        },
+        {
+          "speechId": 495,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 5619560,
+          "sourceEndMs": 5635219,
+          "text": "取り繕ってる感じです2回とかだったらどうすんだよその家[笑い]いいちょっとじゃん窓をねね"
+        },
+        {
+          "speechId": 496,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 5637300,
+          "sourceEndMs": 5643500,
+          "text": "めっちゃ石野言わ屋の匂いするってれるそんな匂いきつくねえだろ絶対"
+        },
+        {
+          "speechId": 497,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 5654159,
+          "sourceEndMs": 5664920,
+          "text": "さんには聞かれたくないか[笑い]やだやだーおまたせ"
+        },
+        {
+          "speechId": 498,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 5665199,
+          "sourceEndMs": 5667380,
+          "text": "口説いてる"
+        },
+        {
+          "speechId": 499,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 5668810,
+          "sourceEndMs": 5680940,
+          "text": "[音楽]口説く前提じゃねえのさすがにえでもそれ高校生だったら超可愛くないあ高校生だったらなぁ"
+        },
+        {
+          "speechId": 500,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 5681280,
+          "sourceEndMs": 5685020,
+          "text": "俺テラあるけど"
+        },
+        {
+          "speechId": 501,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 5689820,
+          "sourceEndMs": 5694000,
+          "text": "[笑い]"
+        },
+        {
+          "speechId": 502,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 5694060,
+          "sourceEndMs": 5698880,
+          "text": "小賢しかっかたもうちょっと素直がいい"
+        },
+        {
+          "speechId": 503,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 5701320,
+          "sourceEndMs": 5706620,
+          "text": "難しいねデートって難しいね"
+        },
+        {
+          "speechId": 504,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 5710199,
+          "sourceEndMs": 5713219,
+          "text": "確かに脆かった"
+        },
+        {
+          "speechId": 505,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 5715780,
+          "sourceEndMs": 5722440,
+          "text": "サイゼもさめっちゃ買えるんだよ冷凍のやつそう"
+        },
+        {
+          "speechId": 506,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 5722860,
+          "sourceEndMs": 5726480,
+          "text": "辛味チキンとか冷凍でめっちゃ売っててさ"
+        },
+        {
+          "speechId": 507,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 5727620,
+          "sourceEndMs": 5745500,
+          "text": "でも買えるし店頭行ってもさ売ってんだよこれおいしい味がいいよねめっちゃ美味しい[音楽]エル先輩にしないんですか"
+        },
+        {
+          "speechId": 508,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 5749970,
+          "sourceEndMs": 5760060,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 509,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 5767100,
+          "sourceEndMs": 5771360,
+          "text": "いいですよね色々あるから"
+        },
+        {
+          "speechId": 510,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 5772500,
+          "sourceEndMs": 5787320,
+          "text": "一時期チュロス買ってた冷凍のそれはあるんだおいしいあげるのそれはお大丈夫ちんでいいねちょっとトースターとかでも"
+        },
+        {
+          "speechId": 511,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 5787600,
+          "sourceEndMs": 5797699,
+          "text": "できるんだおいしい冷凍食品か冷凍でもなんかそばそば買うなそば"
+        },
+        {
+          "speechId": 512,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 5798239,
+          "sourceEndMs": 5804060,
+          "text": "うどんとかも買っちゃう麺類は"
+        },
+        {
+          "speechId": 513,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 5804340,
+          "sourceEndMs": 5806340,
+          "text": "美味しい"
+        },
+        {
+          "speechId": 514,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 5807880,
+          "sourceEndMs": 5820920,
+          "text": "何だろうやっぱアイスすかね確かにえ冷凍餃子マジで上手くない餃子は確かにめっちゃ重いよね"
+        },
+        {
+          "speechId": 515,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 5824020,
+          "sourceEndMs": 5827159,
+          "text": "油なし水無し"
+        },
+        {
+          "speechId": 516,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 5827699,
+          "sourceEndMs": 5837960,
+          "text": "食べるんですねうまいあとね冷凍のチャーハンがこんなにもうまいんかってね"
+        },
+        {
+          "speechId": 517,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 5839580,
+          "sourceEndMs": 5852060,
+          "text": "うまいえーちょっとそれどこの商品[笑い]終わってから"
+        },
+        {
+          "speechId": 518,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 5854880,
+          "sourceEndMs": 5859980,
+          "text": "マジでうまいです気になる"
+        },
+        {
+          "speechId": 519,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 5861040,
+          "sourceEndMs": 5864880,
+          "text": "めっちゃ辛いの苦手なんですけどね"
+        },
+        {
+          "speechId": 520,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 5865490,
+          "sourceEndMs": 5868630,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 521,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 5871410,
+          "sourceEndMs": 5874920,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 522,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 5886260,
+          "sourceEndMs": 5901139,
+          "text": "きついか辛いものいけますみなさん辛すぎなかったら大丈夫だねピリ辛は好きでも超辛いはやだあーなるほど"
+        },
+        {
+          "speechId": 523,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 5903880,
+          "sourceEndMs": 5910560,
+          "text": "きついかもしれない多分食べれない"
+        },
+        {
+          "speechId": 524,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 5918100,
+          "sourceEndMs": 5924659,
+          "text": "逃げられてるやばいほらほらほらほらほらほらほら"
+        },
+        {
+          "speechId": 525,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 5925860,
+          "sourceEndMs": 5932040,
+          "text": "もう死んじゃうよ倒されちゃう死んでしまうぞ"
+        },
+        {
+          "speechId": 526,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 5935920,
+          "sourceEndMs": 5941159,
+          "text": "命がもったいないすごい"
+        },
+        {
+          "speechId": 527,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 5946920,
+          "sourceEndMs": 5950760,
+          "text": "市場に削っていた"
+        },
+        {
+          "speechId": 528,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 5951100,
+          "sourceEndMs": 5955080,
+          "text": "評価値6"
+        },
+        {
+          "speechId": 529,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 5956320,
+          "sourceEndMs": 5959880,
+          "text": "データ落とされるやつ"
+        },
+        {
+          "speechId": 530,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 5964960,
+          "sourceEndMs": 5967260,
+          "text": "ザク"
+        },
+        {
+          "speechId": 531,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 5968340,
+          "sourceEndMs": 5971340,
+          "text": "楽しかった"
+        },
+        {
+          "speechId": 532,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 5977020,
+          "sourceEndMs": 5980159,
+          "text": "またやりたいね"
+        },
+        {
+          "speechId": 533,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 5982960,
+          "sourceEndMs": 5989860,
+          "text": "私まだ4枚から進んでないです私も進んじゃないけど"
+        },
+        {
+          "speechId": 534,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 5993040,
+          "sourceEndMs": 5999120,
+          "text": "1回出しちゃったからなんか厳しくなったのかな出現の確かに"
+        },
+        {
+          "speechId": 535,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 6001679,
+          "sourceEndMs": 6008279,
+          "text": "ハッシュタグ4強でね今日はね[音楽]"
+        },
+        {
+          "speechId": 536,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 6008760,
+          "sourceEndMs": 6011719,
+          "text": "更新はないみたいなので"
+        },
+        {
+          "speechId": 537,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 6012560,
+          "sourceEndMs": 6017420,
+          "text": "えーちょっとなんかなんか作ろうかな"
+        },
+        {
+          "speechId": 538,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 6018679,
+          "sourceEndMs": 6030800,
+          "text": "作ろうかなとか吉野家問題も私が言い出したやつだし本当にないよ初デートどこがいいですか"
+        },
+        {
+          "speechId": 539,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 6033679,
+          "sourceEndMs": 6043760,
+          "text": "ねちょっとこれ設定作りませんあのどれぐらいの中なのかすり合わせ大事だね"
+        },
+        {
+          "speechId": 540,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 6047670,
+          "sourceEndMs": 6052880,
+          "text": "[音楽]どっちから誘ったのか"
+        },
+        {
+          "speechId": 541,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 6053219,
+          "sourceEndMs": 6056760,
+          "text": "めっちゃ細かくお"
+        },
+        {
+          "speechId": 542,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 6060360,
+          "sourceEndMs": 6071540,
+          "text": "互いその知り合ってはいたけどずっと付き合っのたが最近で付き合いはとしてそこそこ友達とのして期間は長かった"
+        },
+        {
+          "speechId": 543,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 6072360,
+          "sourceEndMs": 6075739,
+          "text": "友達としての期間は長いと"
+        },
+        {
+          "speechId": 544,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 6078900,
+          "sourceEndMs": 6088560,
+          "text": "相手からいやなんかこんな詳しく言ったらLの実話みたいあー違うけどねこれ"
+        },
+        {
+          "speechId": 545,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 6091139,
+          "sourceEndMs": 6097240,
+          "text": "友達の話なんだけど[笑い]"
+        },
+        {
+          "speechId": 546,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 6100679,
+          "sourceEndMs": 6109460,
+          "text": "え友達期間が長い付き合いたてのカップルで向こうから"
+        },
+        {
+          "speechId": 547,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 6113119,
+          "sourceEndMs": 6128950,
+          "text": "出たよみんなが一番無言になるやつ今このタイミングもう何もできないもうデートとかじゃないもん[笑い]"
+        },
+        {
+          "speechId": 548,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 6129000,
+          "sourceEndMs": 6132000,
+          "text": "よ"
+        },
+        {
+          "speechId": 549,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 6132119,
+          "sourceEndMs": 6139040,
+          "text": "いしょうれしいいやいやいや"
+        },
+        {
+          "speechId": 550,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 6146639,
+          "sourceEndMs": 6154460,
+          "text": "すごいすごいんじゃないのこれめっちゃ来たね"
+        },
+        {
+          "speechId": 551,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 6154639,
+          "sourceEndMs": 6159920,
+          "text": "ノイズナイスすごいすごいすごいすごいすごい"
+        },
+        {
+          "speechId": 552,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 6160199,
+          "sourceEndMs": 6163560,
+          "text": "でかいうん"
+        },
+        {
+          "speechId": 553,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 6165300,
+          "sourceEndMs": 6181820,
+          "text": "やばいやばい初デートもうメダルゲームなんだよねすごいじゃんそうくるしようと思うと小銭がわいてんだもんなね"
+        },
+        {
+          "speechId": 554,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 6185480,
+          "sourceEndMs": 6193520,
+          "text": "相手のいいところも悪いところも見れると思いますよすぐ終わらせようとしたりね"
+        },
+        {
+          "speechId": 555,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 6195730,
+          "sourceEndMs": 6198800,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 556,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 6201800,
+          "sourceEndMs": 6206300,
+          "text": "ごめんちょっと右寄ってくれるとか言って"
+        },
+        {
+          "speechId": 557,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 6206639,
+          "sourceEndMs": 6211520,
+          "text": "話が景品よ取れそうで取れないんだね"
+        },
+        {
+          "speechId": 558,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 6215060,
+          "sourceEndMs": 6220639,
+          "text": "なんかわかるかも人となりがわかるかもしれないよね"
+        },
+        {
+          "speechId": 559,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 6220699,
+          "sourceEndMs": 6233579,
+          "text": "初デートはさそんなん気にせずさ人となりとか関係なく楽しみたくない可愛い楽しかったらよくない[音楽]"
+        },
+        {
+          "speechId": 560,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 6237790,
+          "sourceEndMs": 6240890,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 561,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 6252719,
+          "sourceEndMs": 6257420,
+          "text": "ジャックポット邪魔で来てるよ"
+        },
+        {
+          "speechId": 562,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 6267679,
+          "sourceEndMs": 6272360,
+          "text": "来た来た来たー"
+        },
+        {
+          "speechId": 563,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 6273440,
+          "sourceEndMs": 6277760,
+          "text": "やばい私もジャックポット来るんだけどこれ"
+        },
+        {
+          "speechId": 564,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 6277880,
+          "sourceEndMs": 6283100,
+          "text": "やばいじゃあ来た来た"
+        },
+        {
+          "speechId": 565,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 6283760,
+          "sourceEndMs": 6287119,
+          "text": "気持ちいい"
+        },
+        {
+          "speechId": 566,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 6288900,
+          "sourceEndMs": 6290900,
+          "text": "じゃん"
+        },
+        {
+          "speechId": 567,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 6291160,
+          "sourceEndMs": 6296850,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 568,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 6322159,
+          "sourceEndMs": 6325219,
+          "text": "出てくる"
+        },
+        {
+          "speechId": 569,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 6327739,
+          "sourceEndMs": 6330739,
+          "text": "すごいすごい"
+        },
+        {
+          "speechId": 570,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 6332670,
+          "sourceEndMs": 6345480,
+          "text": "[音楽]すごいすごいすごいすごいうわーもうパンパンなんだけどタイが来てるいっぱい来てるすごい"
+        },
+        {
+          "speechId": 571,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 6346619,
+          "sourceEndMs": 6348920,
+          "text": "離れてきた"
+        },
+        {
+          "speechId": 572,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 6352219,
+          "sourceEndMs": 6355280,
+          "text": "よね"
+        },
+        {
+          "speechId": 573,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 6360560,
+          "sourceEndMs": 6370940,
+          "text": "それを食べるんだまた逆光だろおいそうだよ確かに"
+        },
+        {
+          "speechId": 574,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 6378440,
+          "sourceEndMs": 6381770,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 575,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 6397139,
+          "sourceEndMs": 6399739,
+          "text": "煉獄てるさん泣いよ"
+        },
+        {
+          "speechId": 576,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 6404719,
+          "sourceEndMs": 6413639,
+          "text": "あとちょっと煮詰まるんじゃないすごい行くよこれもすごい"
+        },
+        {
+          "speechId": 577,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 6415199,
+          "sourceEndMs": 6417380,
+          "text": "頑張って"
+        },
+        {
+          "speechId": 578,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 6417840,
+          "sourceEndMs": 6421340,
+          "text": "景品ね落ちちゃえば"
+        },
+        {
+          "speechId": 579,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 6423960,
+          "sourceEndMs": 6426380,
+          "text": "投げてあげよう"
+        },
+        {
+          "speechId": 580,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 6432020,
+          "sourceEndMs": 6436340,
+          "text": "プロこれ名乗っていいよ"
+        },
+        {
+          "speechId": 581,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 6437659,
+          "sourceEndMs": 6446000,
+          "text": "今までありがとうございます皆さんこれがこれが配信になるのです"
+        },
+        {
+          "speechId": 582,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 6446179,
+          "sourceEndMs": 6453380,
+          "text": "ありがとうございましたのにとか言ってしねえよ引退"
+        },
+        {
+          "speechId": 583,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 6453980,
+          "sourceEndMs": 6458119,
+          "text": "しありがとうてございます"
+        },
+        {
+          "speechId": 584,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 6465500,
+          "sourceEndMs": 6473780,
+          "text": "[音楽]初デートはじゃあこの盛り上がりを見せるメタル"
+        },
+        {
+          "speechId": 585,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 6474500,
+          "sourceEndMs": 6479220,
+          "text": "ですね[音楽]"
+        },
+        {
+          "speechId": 586,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 6485360,
+          "sourceEndMs": 6509840,
+          "text": "楽しかった楽しかったねということでボイス皆さん出してますか今回の家族パロディとテーマパーク出してますか期待してますこちら6月4日までなので皆さんよかったらゲットしてください6月4日までなのであと3日ぐらい"
+        },
+        {
+          "speechId": 587,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 6510250,
+          "sourceEndMs": 6515740,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 588,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 6517880,
+          "sourceEndMs": 6540550,
+          "text": "その後に家族パロディーボイスも聞いてねあ家族になってなったんだいいねいいねすごいじゃんできたストーリー逆のパターンの人もあるかもしれないでねよかったらどっちもゲットしてみくださいてそして6月[音楽]"
+        },
+        {
+          "speechId": 589,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 6541020,
+          "sourceEndMs": 6553520,
+          "text": "5日からアイドルパロディボイス販売されますよねこちらも皆さんアイドル出しますてますかはい出して"
+        },
+        {
+          "speechId": 590,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 6555080,
+          "sourceEndMs": 6574219,
+          "text": "のでらしいですこちらも楽しみに待ってていただけるととても嬉しいです最後にこれちょっと入れて終わりますかみんなもこれに夢中だからね入んんないだけど"
+        },
+        {
+          "speechId": 591,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 6575639,
+          "sourceEndMs": 6578420,
+          "text": "えマジで無理"
+        },
+        {
+          "speechId": 592,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 6578639,
+          "sourceEndMs": 6581300,
+          "text": "そう"
+        },
+        {
+          "speechId": 593,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 6587060,
+          "sourceEndMs": 6592340,
+          "text": "これやるとまたチャックポットなんか一生終わらないから"
+        },
+        {
+          "speechId": 594,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 6593480,
+          "sourceEndMs": 6606800,
+          "text": "皆さんのチャンネル貼ってありますねチャンネル登録と高評価よろしくお願い致しますお願いしますお願いします今日で進めさせていただきます"
+        },
+        {
+          "speechId": 595,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 6620580,
+          "sourceEndMs": 6632689,
+          "text": "[音楽]"
+        },
+        {
+          "speechId": 596,
+          "sourceVideoId": "CwmyZc3eskQ",
+          "sourceStartMs": 6635140,
+          "sourceEndMs": 6678739,
+          "text": "[音楽]"
+        }
+      ]
+    }
+  ],
+  "outputContract": {
+    "format": "json_only",
+    "schema": {
+      "themes": [
+        {
+          "themeId": "string",
+          "title": "string",
+          "summary": "string",
+          "whyItCanBeClipped": "string",
+          "sourceVideoId": "string",
+          "sourceStartMs": "number",
+          "sourceEndMs": "number",
+          "supportingSpeechIds": [
+            "number_or_range_string"
+          ],
+          "representativeQuote": "string",
+          "riskNotes": [
+            "string"
+          ]
+        }
+      ]
+    }
+  }
+}
+```
