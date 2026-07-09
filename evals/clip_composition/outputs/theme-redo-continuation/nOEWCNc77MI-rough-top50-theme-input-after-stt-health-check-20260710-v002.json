@@ -1,0 +1,19 @@
+{
+  "kind": "theme_redo_continuation",
+  "runAt": "2026-07-09T16:15:13.782Z",
+  "outputId": "nOEWCNc77MI-rough-top50-theme-input-after-stt-health-check-20260710-v002",
+  "dryRun": false,
+  "manifestPath": "evals/clip_composition/stt/nOEWCNc77MI_YE-faluP7zY_rough_top50_speech_chars_local30_v001/source/manifest.json",
+  "initialManifestComplete": false,
+  "health": {
+    "ok": false,
+    "error": "fetch failed"
+  },
+  "steps": [
+    {
+      "name": "resume selected chunk STT",
+      "status": "blocked_by_stt_health",
+      "command": "node evals/clip_composition/run_local_stt_selected_chunks.mjs --chunksDir evals/clip_composition/stt/nOEWCNc77MI_YE-faluP7zY_local30_v001/source/chunks --id nOEWCNc77MI_YE-faluP7zY_rough_top50_speech_chars_local30_v001 --role source --ranges 7,11,13,14,17,18,19,20,22,29,32,33,40,41,43,51,53,55,59,66,67,80,91,98,99,101,125,128,136,144,165,175,180,182,194,207,216,217,218,224,229,279,323,325,330,362,366,375,376,379 --server http://192.168.1.4:8000 --chunkSec 30 --timeoutMs 1800000"
+    }
+  ]
+}
