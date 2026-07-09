@@ -1,0 +1,50 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "ひよこが立ち並ぶリフォーム後のイカダに爆笑する二人",
+      "reason": "リフォームによってひよこが立ち並んでいるシュールな絵面に、二人が笑い合ったり突っ込んだりして盛り上がっているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 300578,
+          "sourceEndMs": 359330,
+          "supportingSpeechIds": [
+            "21-23"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "ピンク色の朝日を見ながらエモい雰囲気になるマリンところね",
+      "reason": "出発直後にピンク色の美しい景色を見つけ、お互いの心に例えるなど二人の仲の良さが窺えるエモい掛け合いをしているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 396116,
+          "sourceEndMs": 417946,
+          "supportingSpeechIds": [
+            "27-39"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-10T01:04:15+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_02_YE-faluP7zY",
+    "windowSourceVideoId": "YE-faluP7zY",
+    "windowRequestedThemeCount": 8,
+    "retry": "diagnostic-retry"
+  },
+  "promptFile": "reports/theme-generation/nOEWCNc77MI_source_only_first50_redo_v001/theme-llm-v002/20260710-redo-source-first50-v002-12000-window-check-v001/windows/window_02_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/32c46c36632f885f?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"ひよこが立ち並ぶリフォーム後のイカダに爆笑する二人\",\n      \"reason\": \"リフォームによってひよこが立ち並んでいるシュールな絵面に、二人が笑い合ったり突っ込んだりして盛り上がっているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 300578,\n          \"sourceEndMs\": 359330,\n          \"supportingSpeechIds\": [\n            \"21-23\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"ピンク色の朝日を見ながらエモい雰囲気になるマリンところね\",\n      \"reason\": \"出発直後にピンク色の美しい景色を見つけ、お互いの心に例えるなど二人の仲の良さが窺えるエモい掛け合いをしているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 396116,\n          \"sourceEndMs\": 417946,\n          \"supportingSpeechIds\": [\n            \"27-39\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

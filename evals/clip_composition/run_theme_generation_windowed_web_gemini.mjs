@@ -136,12 +136,29 @@ function mergeThemes(themes) {
   return merged;
 }
 
+function isPartialExtractionStatus(status) {
+  const rawStatus = typeof status === 'string'
+    ? status
+    : status && typeof status === 'object'
+      ? String(status.status ?? '')
+      : '';
+  return rawStatus.includes('partial');
+}
+
+function assertCompleteGeminiOutput(output, context) {
+  if (isPartialExtractionStatus(output?.extractionStatus)) {
+    const reason = output.extractionStatus?.reason ?? 'Gemini回答JSONが完結していない';
+    throw new Error(`${context} は途中切れ回答です。人間確認・集計には使いません: ${reason}`);
+  }
+}
+
 async function aggregateRun(plan, run) {
   const themes = [];
   const windowResults = [];
   for (const window of plan.windows) {
     const windowOutputPath = path.join(evalRoot, 'outputs', 'theme-generation', options.fixtureId, options.generationSystem, options.outputId, 'windows', `run-${String(run).padStart(2, '0')}-${window.windowId}-gemini-output.json`);
     const output = await readJson(windowOutputPath);
+    assertCompleteGeminiOutput(output, `run ${run} ${window.windowId}`);
     const windowThemes = Array.isArray(output.themes) ? output.themes.map((theme) => normalizeTheme(theme, window)) : [];
     themes.push(...windowThemes);
     windowResults.push({
@@ -207,8 +224,12 @@ async function main() {
         '--cdpPort',
         options.cdpPort,
         '--timeoutMs',
-        options.timeoutMs
+        options.timeoutMs,
+        '--rejectPartialExtraction',
+        '--closeTabAfterRun'
       ]);
+      const output = await readJson(outputPath);
+      assertCompleteGeminiOutput(output, `run ${run} ${window.windowId}`);
     }
     await aggregateRun(plan, run);
   }

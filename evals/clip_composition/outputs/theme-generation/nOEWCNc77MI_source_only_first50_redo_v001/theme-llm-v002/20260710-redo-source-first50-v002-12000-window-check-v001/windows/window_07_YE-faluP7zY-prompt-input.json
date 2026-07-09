@@ -1,0 +1,240 @@
+{
+  "kind": "theme_redo_source_only_window_prompt_payload",
+  "runAt": "2026-07-09T15:54:53.902Z",
+  "target": "nOEWCNc77MI",
+  "inputSetId": "nOEWCNc77MI_source_only_first50_redo_v001",
+  "sourceVideoId": "YE-faluP7zY",
+  "sourceSttId": "nOEWCNc77MI_YE-faluP7zY_local30_first50_v001",
+  "sourceSttManifestPath": "evals/clip_composition/stt/nOEWCNc77MI_YE-faluP7zY_local30_first50_v001/source/manifest.json",
+  "generationSystem": "theme-llm-v002",
+  "promptVersion": "theme_generation_prompt_v002",
+  "requestedThemeCount": 8,
+  "windowKind": "primary",
+  "llmCall": false,
+  "modelInput": {
+    "task": "source_only_theme_generation",
+    "generationSystem": "theme-llm-v002",
+    "promptVersion": "theme_generation_prompt_v002",
+    "requestedThemeCount": 8,
+    "inputPolicy": {
+      "sourceOnly": true,
+      "noClipInfo": true,
+      "noExpected": true,
+      "noAlignment": true,
+      "noHumanReverseTheme": true
+    },
+    "windowing": {
+      "applied": true,
+      "mode": "speech-time",
+      "windowId": "window_07_YE-faluP7zY",
+      "reason": "元配信全体入力が長いため、発話境界を保った時間窓へ分割する。",
+      "maxPromptBytes": 12000,
+      "overlapMs": 0,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 1006182,
+      "sourceEndMs": 1139684
+    },
+    "sources": [
+      {
+        "sourceVideoId": "YE-faluP7zY",
+        "sourceUrl": "https://www.youtube.com/watch?v=YE-faluP7zY",
+        "sourceTitle": "【Raft】ころね、キミさえいればこの海の果てまでだって──【ホロライブ/宝鐘マリン】",
+        "transcriptKind": "local_stt",
+        "language": "ja-JP",
+        "durationSec": 1500,
+        "rawSegmentCount": 7395,
+        "promptSegmentCount": 23,
+        "segmentCompaction": {
+          "method": "source-only transcript segments concatenated until sentence-ending punctuation",
+          "scoringRole": "none",
+          "note": "読みやすさのための表現変換であり、expected、切り抜き、照合結果、人間確認メモは使わない。"
+        },
+        "segments": [
+          {
+            "speechId": 115,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1006182,
+            "sourceEndMs": 1009243,
+            "text": "オッケーちょっと待ってなイカダどこだ?"
+          },
+          {
+            "speechId": 116,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1009243,
+            "sourceEndMs": 1011184,
+            "text": "じゃあヤ、ヤちょっと弓?"
+          },
+          {
+            "speechId": 117,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1011184,
+            "sourceEndMs": 1011864,
+            "text": "ヤ、ヤ弓?"
+          },
+          {
+            "speechId": 118,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1011864,
+            "sourceEndMs": 1014365,
+            "text": "死ぬかもしれんこれ嘘でしょ?"
+          },
+          {
+            "speechId": 119,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1014365,
+            "sourceEndMs": 1019166,
+            "text": "ちょっとヤと作っとこうコーネも一緒に一緒にさ弓やする?"
+          },
+          {
+            "speechId": 120,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1021002,
+            "sourceEndMs": 1022723,
+            "text": "殺した方が早く殺せるか!"
+          },
+          {
+            "speechId": 121,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1022723,
+            "sourceEndMs": 1034412,
+            "text": "そうそうそう、ちょっとロープちょっと作ってブドウのネバネバはちょっと海藻で作るかなんかそう、1個だ1個もないっけなこれえ、見失っちゃった?"
+          },
+          {
+            "speechId": 122,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1034412,
+            "sourceEndMs": 1039036,
+            "text": "待てねーちょっと待てーどっかにないか?"
+          },
+          {
+            "speechId": 123,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1039036,
+            "sourceEndMs": 1046161,
+            "text": "ネバネバあ、ここね鉱石あるなさてさてさてちょっとまとめてやの数が少ないって!"
+          },
+          {
+            "speechId": 124,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1046161,
+            "sourceEndMs": 1049624,
+            "text": "アドバイスパソーカーなんとない時にね"
+          },
+          {
+            "speechId": 125,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1050106,
+            "sourceEndMs": 1058648,
+            "text": "違う、違う違うね、ごめんねやめてね、そんなつもりじゃないからねや、や、やーだけにやめてもう何も言えねえ!"
+          },
+          {
+            "speechId": 126,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1058648,
+            "sourceEndMs": 1072470,
+            "text": "嘘すぎるもう何も言えねえよわかった、せいちゃんが矢作ったときあ、やばい、いる、いるなあねえ、待って、イノシシ3匹いるあれ、作った矢どこ、あ、21本3匹いる?"
+          },
+          {
+            "speechId": 127,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1072470,
+            "sourceEndMs": 1079852,
+            "text": "3匹いる、3匹いる何個いるかな、ちょっと1人30本ずつ持つか、じゃあここやばいかもあ、でも板足りない"
+          },
+          {
+            "speechId": 128,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1081354,
+            "sourceEndMs": 1081915,
+            "text": "居た?"
+          },
+          {
+            "speechId": 129,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1081915,
+            "sourceEndMs": 1082435,
+            "text": "居た?"
+          },
+          {
+            "speechId": 130,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1082435,
+            "sourceEndMs": 1084155,
+            "text": "居た?"
+          },
+          {
+            "speechId": 131,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1084155,
+            "sourceEndMs": 1085376,
+            "text": "居た?"
+          },
+          {
+            "speechId": 132,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1085376,
+            "sourceEndMs": 1085716,
+            "text": "居た?"
+          },
+          {
+            "speechId": 133,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1085716,
+            "sourceEndMs": 1086196,
+            "text": "居た?"
+          },
+          {
+            "speechId": 134,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1086196,
+            "sourceEndMs": 1086696,
+            "text": "居た?"
+          },
+          {
+            "speechId": 135,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1086696,
+            "sourceEndMs": 1087116,
+            "text": "居た?"
+          },
+          {
+            "speechId": 136,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1087116,
+            "sourceEndMs": 1087296,
+            "text": "居た?"
+          },
+          {
+            "speechId": 137,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1110182,
+            "sourceEndMs": 1139684,
+            "text": "来た時用に矢作ってありがたいねーこれで一緒にターン行こうよちょっと20本ずつちょっとコーネ1本少ない19本だけどまあ細かいことは全然いい全然いいあ全然いい解消できるしねベトベト足りるかなベトベトベトベト足りるかな問題があったわやっと見つけたオッケーあ行けるなよし弓作ったあじゃあ今ここで渡しちゃうねありがてーよこれ弓と"
+          }
+        ]
+      }
+    ],
+    "outputContract": {
+      "format": "json_only",
+      "schema": {
+        "themes": [
+          {
+            "themeId": "string",
+            "title": "string",
+            "reason": "string_one_sentence",
+            "evidenceRanges": [
+              {
+                "sourceVideoId": "string",
+                "sourceStartMs": "number",
+                "sourceEndMs": "number",
+                "supportingSpeechIds": [
+                  "number_or_range_string"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

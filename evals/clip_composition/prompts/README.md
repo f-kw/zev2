@@ -76,3 +76,4 @@
 | 版 | ファイル | 作成日 | 目的 | 採点方式 | 採点結果 | 判定 |
 | --- | --- | --- | --- | --- | --- | --- |
 | theme-llm-v001 | `theme_generation_prompt_v001.md` | 2026-07-09 | 元配信単体のtranscriptから、切り抜きテーマ候補を出せるかを測る初版。compositionは実行しない。 | 一段目は候補根拠範囲とexpected区間の機械的な範囲hit。二段目は範囲hit候補だけを人間が意味的等価判定。 | 4fixture×runs3をWeb Geminiで実走。`reports/theme-generation/theme-llm-v001-20260709-v001-summary.md` と `reports/theme-generation/theme-llm-v001-20260709-v001-range-score.md` に記録。 | 初回実測済み。二段目の人間意味判定待ち。 |
+| theme-llm-v002 | `theme_generation_prompt_v002.md` | 2026-07-09 | theme-llm-v001の判断方針は変えず、出力契約だけを軽量化する。候補ごとの長文説明を廃止し、狭い根拠範囲配列 `evidenceRanges` で返す。 | 一段目は `evidenceRanges` の各範囲とexpected区間の機械的な範囲hit。二段目は必要な場合だけ、根拠範囲と映像・音声で人間確認する。 | B素材 `nOEWCNc77MI` の冒頭50チャンクで方向確認を実走。10窓すべて完全JSON取得、統合後25候補。`reports/theme-redo-B-first50-retry-20260710-v001.md` に記録。 | redo用の実験版。意味判断ではなく出力契約だけを変える。冒頭50は有効範囲として維持。 |

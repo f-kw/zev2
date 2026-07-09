@@ -1,0 +1,64 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "マリンの雑な反応と謎のフォロー",
+      "reason": "マリンの反応が雑であることについてツッコミが入りつつも、ゲームの作業をしっかりこなす点について謎のフォローが入る掛け合いが面白い。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 864927,
+          "sourceEndMs": 904802,
+          "supportingSpeechIds": [
+            "96-104"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "島でのイノシシ遭遇としし鍋の妄想",
+      "reason": "島で遭遇したイノシシを弓矢で狩ろうと盛り上がり、しし鍋やししシチューなどの料理の妄想で会話が弾む場面である。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 925239,
+          "sourceEndMs": 959944,
+          "supportingSpeechIds": [
+            "105-110"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_003",
+      "title": "エイムに自信満々な「マリゾネス」",
+      "reason": "マリンが「マリゾネス」としてエイムへの自信を見せるが、直後にツッコミを入れられるコミカルな流れができている。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 960122,
+          "sourceEndMs": 989832,
+          "supportingSpeechIds": [
+            111
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-10T01:05:34+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_06_YE-faluP7zY",
+    "windowSourceVideoId": "YE-faluP7zY",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nOEWCNc77MI_source_only_first50_redo_v001/theme-llm-v002/20260710-redo-source-first50-v002-12000-window-check-v001/windows/window_06_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/696cd27f8177854c?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"マリンの雑な反応と謎のフォロー\",\n      \"reason\": \"マリンの反応が雑であることについてツッコミが入りつつも、ゲームの作業をしっかりこなす点について謎のフォローが入る掛け合いが面白い。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 864927,\n          \"sourceEndMs\": 904802,\n          \"supportingSpeechIds\": [\"96-104\"]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"島でのイノシシ遭遇としし鍋の妄想\",\n      \"reason\": \"島で遭遇したイノシシを弓矢で狩ろうと盛り上がり、しし鍋やししシチューなどの料理の妄想で会話が弾む場面である。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 925239,\n          \"sourceEndMs\": 959944,\n          \"supportingSpeechIds\": [\"105-110\"]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_003\",\n      \"title\": \"エイムに自信満々な「マリゾネス」\",\n      \"reason\": \"マリンが「マリゾネス」としてエイムへの自信を見せるが、直後にツッコミを入れられるコミカルな流れができている。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 960122,\n          \"sourceEndMs\": 989832,\n          \"supportingSpeechIds\": [111]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

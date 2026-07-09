@@ -1,0 +1,212 @@
+{
+  "kind": "theme_redo_source_only_window_prompt_payload",
+  "runAt": "2026-07-09T15:54:53.902Z",
+  "target": "nOEWCNc77MI",
+  "inputSetId": "nOEWCNc77MI_source_only_first50_redo_v001",
+  "sourceVideoId": "YE-faluP7zY",
+  "sourceSttId": "nOEWCNc77MI_YE-faluP7zY_local30_first50_v001",
+  "sourceSttManifestPath": "evals/clip_composition/stt/nOEWCNc77MI_YE-faluP7zY_local30_first50_v001/source/manifest.json",
+  "generationSystem": "theme-llm-v002",
+  "promptVersion": "theme_generation_prompt_v002",
+  "requestedThemeCount": 8,
+  "windowKind": "primary",
+  "llmCall": false,
+  "modelInput": {
+    "task": "source_only_theme_generation",
+    "generationSystem": "theme-llm-v002",
+    "promptVersion": "theme_generation_prompt_v002",
+    "requestedThemeCount": 8,
+    "inputPolicy": {
+      "sourceOnly": true,
+      "noClipInfo": true,
+      "noExpected": true,
+      "noAlignment": true,
+      "noHumanReverseTheme": true
+    },
+    "windowing": {
+      "applied": true,
+      "mode": "speech-time",
+      "windowId": "window_06_YE-faluP7zY",
+      "reason": "元配信全体入力が長いため、発話境界を保った時間窓へ分割する。",
+      "maxPromptBytes": 12000,
+      "overlapMs": 0,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 864927,
+      "sourceEndMs": 1006182
+    },
+    "sources": [
+      {
+        "sourceVideoId": "YE-faluP7zY",
+        "sourceUrl": "https://www.youtube.com/watch?v=YE-faluP7zY",
+        "sourceTitle": "【Raft】ころね、キミさえいればこの海の果てまでだって──【ホロライブ/宝鐘マリン】",
+        "transcriptKind": "local_stt",
+        "language": "ja-JP",
+        "durationSec": 1500,
+        "rawSegmentCount": 7395,
+        "promptSegmentCount": 19,
+        "segmentCompaction": {
+          "method": "source-only transcript segments concatenated until sentence-ending punctuation",
+          "scoringRole": "none",
+          "note": "読みやすさのための表現変換であり、expected、切り抜き、照合結果、人間確認メモは使わない。"
+        },
+        "segments": [
+          {
+            "speechId": 96,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 864927,
+            "sourceEndMs": 867669,
+            "text": "大丈夫、ダメージ大丈夫まだ平気ほんと?"
+          },
+          {
+            "speechId": 97,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 867669,
+            "sourceEndMs": 868349,
+            "text": "心配かけたな"
+          },
+          {
+            "speechId": 98,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 870042,
+            "sourceEndMs": 874784,
+            "text": "言うほど心配してないよ心配してーよー!"
+          },
+          {
+            "speechId": 99,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 874784,
+            "sourceEndMs": 875844,
+            "text": "はいはい、あれ?"
+          },
+          {
+            "speechId": 100,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 875844,
+            "sourceEndMs": 877525,
+            "text": "あれ?"
+          },
+          {
+            "speechId": 101,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 877525,
+            "sourceEndMs": 878365,
+            "text": "心配して?"
+          },
+          {
+            "speechId": 102,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 878365,
+            "sourceEndMs": 884347,
+            "text": "心配ねしてるしてるちょっと待って、一旦荷物預けて雑すぎ気づいた?"
+          },
+          {
+            "speechId": 103,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 884347,
+            "sourceEndMs": 899732,
+            "text": "雑すぎんやんいやでもマリリンは反応が雑でもこういうゲームのね作業ちゃんとするから偉いと思うわ謎のフォローが入りましたそうなんよ船長ってちょっとね反応たまに雑になるけどでもちゃんとするからねそう言うてね"
+          },
+          {
+            "speechId": 104,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 900098,
+            "sourceEndMs": 904802,
+            "text": "営業をしっかりしてるところがコーポイントだよね、マジでうん、わかるわかる?"
+          },
+          {
+            "speechId": 105,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 904802,
+            "sourceEndMs": 925239,
+            "text": "わかりみが深いえ、ちょ、せんちゃんあれするわあのさぁ海藻とか探すわあのね、結構ねあ、あ、ありがてありがて柔道のネマネマとかがね、今後必要になってくることはサメ、気をつけてね間違いない、オッケーでもさぁ、冷静に考えてさぁうんこうやって、目標がさぁ、どんどん変わってくからさぁ今、するべきことって痛っ、ヤバい!"
+          },
+          {
+            "speechId": 106,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 925239,
+            "sourceEndMs": 926740,
+            "text": "ちょっと待っている?"
+          },
+          {
+            "speechId": 107,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 926740,
+            "sourceEndMs": 928241,
+            "text": "いやああああああああああああああ"
+          },
+          {
+            "speechId": 108,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 932566,
+            "sourceEndMs": 934587,
+            "text": "気をつけてこれイノシシいるの?"
+          },
+          {
+            "speechId": 109,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 934587,
+            "sourceEndMs": 953740,
+            "text": "イノシシもいるわこれわかった助太刀に行こうちょっと矢でさ撃ち殺すかイノシシパーティーしよう今日はここにイノシシいるわしし鍋しし丼しししちゅうみたいなしししちゅうしたいしししちゅうそっかこいつはもう食べれるんだよな多分なそうだよ弓矢あれ弓矢ってどかなかったっけ持ってる?"
+          },
+          {
+            "speechId": 110,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 953740,
+            "sourceEndMs": 959944,
+            "text": "弓矢どっかにあったはずコーネ持ってないんだなコーネ持ってないあったあったちょっとさ弓矢でさ"
+          },
+          {
+            "speechId": 111,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 960122,
+            "sourceEndMs": 989832,
+            "text": "殺すわ食べようよ食べたいこれで撃てるのかな行くわそっち待ってあれマリゾネスどこマリゾネスまだイカダイカダにいる鳥もいるしねなんかねイノシシ2匹ぐらいいたから気をつけてなOKもうみんな撃ち殺すから任してセイチョ結構エイムにはね自信あるからそうでしょ自信はねあったところってなんだよどういう意味だよちょっと待って自信だけ"
+          },
+          {
+            "speechId": 112,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 990278,
+            "sourceEndMs": 993519,
+            "text": "もうダメなんだよこれコロゾネス待った方がいいやつ?"
+          },
+          {
+            "speechId": 113,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 993519,
+            "sourceEndMs": 1001441,
+            "text": "コロゾネス待たなくていいよずっとベリーだって食べちゃうどこだ?"
+          },
+          {
+            "speechId": 114,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1001441,
+            "sourceEndMs": 1006182,
+            "text": "どこだちょっと待って一緒にゴーデスとか行かなこれじゃあイカダでちょっと待っとくか?"
+          }
+        ]
+      }
+    ],
+    "outputContract": {
+      "format": "json_only",
+      "schema": {
+        "themes": [
+          {
+            "themeId": "string",
+            "title": "string",
+            "reason": "string_one_sentence",
+            "evidenceRanges": [
+              {
+                "sourceVideoId": "string",
+                "sourceStartMs": "number",
+                "sourceEndMs": "number",
+                "supportingSpeechIds": [
+                  "number_or_range_string"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "配信画面内でのころねの配置決め",
+      "reason": "宝鐘マリンが配信画面内での戌神ころねの立ち絵の位置（邪魔にならない場所や天の声風の配置など）を模索している場面です。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 153112,
+          "sourceEndMs": 178451,
+          "supportingSpeechIds": [
+            "3-5"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "サザエさんのパロディと独特なBGM再現",
+      "reason": "立ち絵の位置調整からサザエさんのオープニング（みかんから飛び出す演出）を連想し、独特なメロディを口ずさんでいる場面です。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 195199,
+          "sourceEndMs": 236189,
+          "supportingSpeechIds": [
+            "16-18"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_003",
+      "title": "ねずこスタイルと言われるころね",
+      "reason": "ころねの様子を「ねずこスタイル」と表現し、それに対して「どうもどうも」と返すころねと突っ込むマリンの掛け合いです。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 240202,
+          "sourceEndMs": 267270,
+          "supportingSpeechIds": [
+            19
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-10T24:55:59+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_01_YE-faluP7zY",
+    "windowSourceVideoId": "YE-faluP7zY",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nOEWCNc77MI_source_only_first50_redo_v001/theme-llm-v002/20260710-redo-source-first50-v002-12000-window-check-v001/windows/window_01_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/a9dd83db5d38358b?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"配信画面内でのころねの配置決め\",\n      \"reason\": \"宝鐘マリンが配信画面内での戌神ころねの立ち絵の位置（邪魔にならない場所や天の声風の配置など）を模索している場面です。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 153112,\n          \"sourceEndMs\": 178451,\n          \"supportingSpeechIds\": [\n            \"3-5\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"サザエさんのパロディと独特なBGM再現\",\n      \"reason\": \"立ち絵の位置調整からサザエさんのオープニング（みかんから飛び出す演出）を連想し、独特なメロディを口ずさんでいる場面です。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 195199,\n          \"sourceEndMs\": 236189,\n          \"supportingSpeechIds\": [\n            \"16-18\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_003\",\n      \"title\": \"ねずこスタイルと言われるころね\",\n      \"reason\": \"ころねの様子を「ねずこスタイル」と表現し、それに対して「どうもどうも」と返すころねと突っ込むマリンの掛け合いです。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 240202,\n          \"sourceEndMs\": 267270,\n          \"supportingSpeechIds\": [\n            19\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

@@ -1,0 +1,184 @@
+{
+  "kind": "theme_redo_source_only_window_prompt_payload",
+  "runAt": "2026-07-09T15:54:53.904Z",
+  "target": "nOEWCNc77MI",
+  "inputSetId": "nOEWCNc77MI_source_only_first50_redo_v001",
+  "sourceVideoId": "YE-faluP7zY",
+  "sourceSttId": "nOEWCNc77MI_YE-faluP7zY_local30_first50_v001",
+  "sourceSttManifestPath": "evals/clip_composition/stt/nOEWCNc77MI_YE-faluP7zY_local30_first50_v001/source/manifest.json",
+  "generationSystem": "theme-llm-v002",
+  "promptVersion": "theme_generation_prompt_v002",
+  "requestedThemeCount": 8,
+  "windowKind": "primary",
+  "llmCall": false,
+  "modelInput": {
+    "task": "source_only_theme_generation",
+    "generationSystem": "theme-llm-v002",
+    "promptVersion": "theme_generation_prompt_v002",
+    "requestedThemeCount": 8,
+    "inputPolicy": {
+      "sourceOnly": true,
+      "noClipInfo": true,
+      "noExpected": true,
+      "noAlignment": true,
+      "noHumanReverseTheme": true
+    },
+    "windowing": {
+      "applied": true,
+      "mode": "speech-time",
+      "windowId": "window_10_YE-faluP7zY",
+      "reason": "元配信全体入力が長いため、発話境界を保った時間窓へ分割する。",
+      "maxPromptBytes": 12000,
+      "overlapMs": 0,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 1351046,
+      "sourceEndMs": 1498864
+    },
+    "sources": [
+      {
+        "sourceVideoId": "YE-faluP7zY",
+        "sourceUrl": "https://www.youtube.com/watch?v=YE-faluP7zY",
+        "sourceTitle": "【Raft】ころね、キミさえいればこの海の果てまでだって──【ホロライブ/宝鐘マリン】",
+        "transcriptKind": "local_stt",
+        "language": "ja-JP",
+        "durationSec": 1500,
+        "rawSegmentCount": 7395,
+        "promptSegmentCount": 15,
+        "segmentCompaction": {
+          "method": "source-only transcript segments concatenated until sentence-ending punctuation",
+          "scoringRole": "none",
+          "note": "読みやすさのための表現変換であり、expected、切り抜き、照合結果、人間確認メモは使わない。"
+        },
+        "segments": [
+          {
+            "speechId": 184,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1351046,
+            "sourceEndMs": 1380004,
+            "text": "金属とかもないけど粘土とかあそっかでかいなこの島でかいよなでかいくせにさ意外となんもない金属なんもないよ金属欲しいよなゆうて金属あったあった海藻あったナイス降りますあんまり行きすぎると戻るのが大変か分かる分かるでもなさそうだなこの辺砂は取ってったほうがいいか砂もそうだね取っとこう"
+          },
+          {
+            "speechId": 185,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1380850,
+            "sourceEndMs": 1387813,
+            "text": "OKOK砂というもの見つけられり見つけられり?"
+          },
+          {
+            "speechId": 186,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1387813,
+            "sourceEndMs": 1390555,
+            "text": "見つけられり死ぬ死ぬ?"
+          },
+          {
+            "speechId": 187,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1390555,
+            "sourceEndMs": 1392416,
+            "text": "海藻ありけり海藻ありけり?"
+          },
+          {
+            "speechId": 188,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1392416,
+            "sourceEndMs": 1409884,
+            "text": "海藻いっぱいあるいっぱいあるちょっと待って一回上がってよいしょあぁ荷物預けてくればよかったなぁ準備を怠る怠るなかれあーわしもいるわしもやばいこっちはね準備を怠ることなかれだったからね"
+          },
+          {
+            "speechId": 189,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1410846,
+            "sourceEndMs": 1427669,
+            "text": "あーそれはよきかなよきかなとしか言えんあんまり詳しくないお代官様あそっち行ったどっち行った?"
+          },
+          {
+            "speechId": 190,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1427669,
+            "sourceEndMs": 1438592,
+            "text": "あらよあらよあらよあらららよ戦術そっちじゃないかなあ改装めっちゃある14枚も拾ったわえ、じゃあ教えてよ何を?"
+          },
+          {
+            "speechId": 191,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1438592,
+            "sourceEndMs": 1439592,
+            "text": "は?"
+          },
+          {
+            "speechId": 192,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1439592,
+            "sourceEndMs": 1439732,
+            "text": "え、待って"
+          },
+          {
+            "speechId": 193,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1440770,
+            "sourceEndMs": 1469864,
+            "text": "もう全部船長が取ったからねもう今更意味ないよそっちじゃない方のさ教えてよお代官様じゃない方のさそれで言うと船長が言った方の反対の方角に向かってもらうと良き島を違う違うよあれ待ってお代官様のまだその話もう終わったからその話終わったなんでごめんね"
+          },
+          {
+            "speechId": 194,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1470194,
+            "sourceEndMs": 1479457,
+            "text": "終わっちゃったかいつまでそんな話してんだよやる気あるんかお前やばい待て待て仕留められるか?"
+          },
+          {
+            "speechId": 195,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1479457,
+            "sourceEndMs": 1488380,
+            "text": "何かと戦い始めたいいよいいよ痛そう痛そうこっちが痛いですイノシシやってるもしかして?"
+          },
+          {
+            "speechId": 196,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1488380,
+            "sourceEndMs": 1489941,
+            "text": "イノシシやってるやってんの?"
+          },
+          {
+            "speechId": 197,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1489941,
+            "sourceEndMs": 1498203,
+            "text": "でも待て海の中に入っていいじゃんいいじゃん海の中で撃てばねこいつ来れねえよあサメ?"
+          },
+          {
+            "speechId": 198,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1498203,
+            "sourceEndMs": 1498864,
+            "text": "あイノシシ"
+          }
+        ]
+      }
+    ],
+    "outputContract": {
+      "format": "json_only",
+      "schema": {
+        "themes": [
+          {
+            "themeId": "string",
+            "title": "string",
+            "reason": "string_one_sentence",
+            "evidenceRanges": [
+              {
+                "sourceVideoId": "string",
+                "sourceStartMs": "number",
+                "sourceEndMs": "number",
+                "supportingSpeechIds": [
+                  "number_or_range_string"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

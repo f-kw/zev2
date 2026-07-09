@@ -1,0 +1,65 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "ころさんの成長と独り立ちを実感するマリン船長",
+      "reason": "マリン船長がころさんのRaftでの作業効率やアイテム作成の上達を認め、成長と独り立ちを褒める微笑ましいやり取りが展開されているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 752798,
+          "sourceEndMs": 809552,
+          "supportingSpeechIds": [
+            74,
+            76
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "鳥を狩ることに成功し、忘れていたサメ肉も見つける一同",
+      "reason": "食料不足になりかけたタイミングで鳥を仕留め、さらに以前倒したサメの肉を幸運にも発見して大喜びする一連の流れが描かれているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 810330,
+          "sourceEndMs": 859444,
+          "supportingSpeechIds": [
+            "77-85"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_003",
+      "title": "肉を焼いている最中に突然の鳥の襲撃に焦る一同",
+      "reason": "手に入れた肉を調理しようとした直後、突如現れた鳥の脅威に襲われてパニックになるリアクションが切り抜きとして成立するため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 859444,
+          "sourceEndMs": 864927,
+          "supportingSpeechIds": [
+            "85-95"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-10T01:05:19+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_05_YE-faluP7zY",
+    "windowSourceVideoId": "YE-faluP7zY",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nOEWCNc77MI_source_only_first50_redo_v001/theme-llm-v002/20260710-redo-source-first50-v002-12000-window-check-v001/windows/window_05_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/ebd503068ba4dd7a?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"ころさんの成長と独り立ちを実感するマリン船長\",\n      \"reason\": \"マリン船長がころさんのRaftでの作業効率やアイテム作成の上達を認め、成長と独り立ちを褒める微笑ましいやり取りが展開されているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 752798,\n          \"sourceEndMs\": 809552,\n          \"supportingSpeechIds\": [\n            74,\n            76\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"鳥を狩ることに成功し、忘れていたサメ肉も見つける一同\",\n      \"reason\": \"食料不足になりかけたタイミングで鳥を仕留め、さらに以前倒したサメの肉を幸運にも発見して大喜びする一連の流れが描かれているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 810330,\n          \"sourceEndMs\": 859444,\n          \"supportingSpeechIds\": [\n            \"77-85\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_003\",\n      \"title\": \"肉を焼いている最中に突然の鳥の襲撃に焦る一同\",\n      \"reason\": \"手に入れた肉を調理しようとした直後、突如現れた鳥の脅威に襲われてパニックになるリアクションが切り抜きとして成立するため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 859444,\n          \"sourceEndMs\": 864927,\n          \"supportingSpeechIds\": [\n            \"85-95\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

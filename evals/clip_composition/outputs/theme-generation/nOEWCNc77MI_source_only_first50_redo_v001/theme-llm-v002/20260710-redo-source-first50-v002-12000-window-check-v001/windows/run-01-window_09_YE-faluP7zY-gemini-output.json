@@ -1,0 +1,49 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "竹取の翁とかぐや姫を言い間違えるマリン",
+      "reason": "竹の採取から「竹取の翁」を暗唱し始めるも、直後に「かぐや姫や！」と言い間違えに気づいてセルフツッコミを入れるコミカルな展開のため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 1260022,
+          "sourceEndMs": 1275270,
+          "supportingSpeechIds": [
+            "164-165"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "脳死トークでころねに「絡みづらい」と言われるマリン",
+      "reason": "かぐや姫のノリを引っ張るマリンに対し、ころねから「ちょっと絡みづらい」とバッサリ切り捨てられ、自身の脳死状態を白状する掛け合いが面白いため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 1275270,
+          "sourceEndMs": 1311760,
+          "supportingSpeechIds": [
+            "166-177"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-10T01:06:14+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_09_YE-faluP7zY",
+    "windowSourceVideoId": "YE-faluP7zY",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nOEWCNc77MI_source_only_first50_redo_v001/theme-llm-v002/20260710-redo-source-first50-v002-12000-window-check-v001/windows/window_09_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/30137caca1de5d5a?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"竹取の翁とかぐや姫を言い間違えるマリン\",\n      \"reason\": \"竹の採取から「竹取の翁」を暗唱し始めるも、直後に「かぐや姫や！」と言い間違えに気づいてセルフツッコミを入れるコミカルな展開のため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 1260022,\n          \"sourceEndMs\": 1275270,\n          \"supportingSpeechIds\": [\n            \"164-165\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"脳死トークでころねに「絡みづらい」と言われるマリン\",\n      \"reason\": \"かぐや姫のノリを引っ張るマリンに対し、ころねから「ちょっと絡みづらい」とバッサリ切り捨てられ、自身の脳死状態を白状する掛け合いが面白いため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 1275270,\n          \"sourceEndMs\": 1311760,\n          \"supportingSpeechIds\": [\n            \"166-177\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

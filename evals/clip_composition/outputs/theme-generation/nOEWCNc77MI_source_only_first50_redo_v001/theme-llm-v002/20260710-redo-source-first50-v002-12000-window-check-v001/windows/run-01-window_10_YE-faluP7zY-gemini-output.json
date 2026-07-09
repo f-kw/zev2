@@ -1,0 +1,49 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "古風な口調で掛け合いをするマリンと転がる会話",
+      "reason": "宝鐘マリンと戌神ころねが「〜ありけり」「よきかな」とお代官様ごっこを始めるも、話が噛み合わず「は？」と空気が一転する展開が面白い。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 1380850,
+          "sourceEndMs": 1479457,
+          "supportingSpeechIds": [
+            "185-194"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "謎の生物（イノシシ）と戦闘を始める戌神ころね",
+      "reason": "お代官様の話を一方的に終わらせた直後、戌神ころねが島で遭遇した何か（イノシシ）と急に戦闘を始め、海にハメようとする一連の反応が切り抜きに向いている。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 1470194,
+          "sourceEndMs": 1498864,
+          "supportingSpeechIds": [
+            "194-198"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-10T01:06:28+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_10_YE-faluP7zY",
+    "windowSourceVideoId": "YE-faluP7zY",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nOEWCNc77MI_source_only_first50_redo_v001/theme-llm-v002/20260710-redo-source-first50-v002-12000-window-check-v001/windows/window_10_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/e866ddd2a923a34b?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"古風な口調で掛け合いをするマリンと転がる会話\",\n      \"reason\": \"宝鐘マリンと戌神ころねが「〜ありけり」「よきかな」とお代官様ごっこを始めるも、話が噛み合わず「は？」と空気が一転する展開が面白い。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 1380850,\n          \"sourceEndMs\": 1479457,\n          \"supportingSpeechIds\": [\n            \"185-194\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"謎の生物（イノシシ）と戦闘を始める戌神ころね\",\n      \"reason\": \"お代官様の話を一方的に終わらせた直後、戌神ころねが島で遭遇した何か（イノシシ）と急に戦闘を始め、海にハメようとする一連の反応が切り抜きに向いている。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 1470194,\n          \"sourceEndMs\": 1498864,\n          \"supportingSpeechIds\": [\n            \"194-198\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

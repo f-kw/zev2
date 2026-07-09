@@ -1,0 +1,79 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "強化素材の床を作ったものの資材を食いすぎて後悔するマリン",
+      "reason": "マリンが床を強化素材に変えたものの、資材消費が激しくサメにも壊されるため失敗だったと語るシーンが切り抜きとして具体的で面白いため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 511410,
+          "sourceEndMs": 539932,
+          "supportingSpeechIds": [
+            44
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "謎の英語「TingGoodTing」を独自の解釈で「俺らの場所」と言い張る2人",
+      "reason": "入り口に書かれた英語の文字を「俺らの場所」「俺らのフロア」とユニークに翻訳して盛り上がる掛け合いが印象的なため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 540280,
+          "sourceEndMs": 567026,
+          "supportingSpeechIds": [
+            45
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_003",
+      "title": "空腹のころねに大量の「芋」を差し出すマリン",
+      "reason": "お腹が空いたというころねに対し、マリンが「芋」を連呼しながらコミカルに食べ物を分け与えるやり取りが微笑ましいため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 570560,
+          "sourceEndMs": 591351,
+          "supportingSpeechIds": [
+            "47-48"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_004",
+      "title": "2階建築のプレミを認め、今回は船面を広げる方針を決めるころね",
+      "reason": "強化素材での2階作りに失敗したことを認め、今回は通常の素材でベースを広げるという本日の配信目標を提示する場面であるため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 598246,
+          "sourceEndMs": 629792,
+          "supportingSpeechIds": [
+            "49-50"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-10T01:04:52+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_03_YE-faluP7zY",
+    "windowSourceVideoId": "YE-faluP7zY",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nOEWCNc77MI_source_only_first50_redo_v001/theme-llm-v002/20260710-redo-source-first50-v002-12000-window-check-v001/windows/window_03_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/0d696a5c0fad43da?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"強化素材の床を作ったものの資材を食いすぎて後悔するマリン\",\n      \"reason\": \"マリンが床を強化素材に変えたものの、資材消費が激しくサメにも壊されるため失敗だったと語るシーンが切り抜きとして具体的で面白いため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 511410,\n          \"sourceEndMs\": 539932,\n          \"supportingSpeechIds\": [44]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"謎の英語「TingGoodTing」を独自の解釈で「俺らの場所」と言い張る2人\",\n      \"reason\": \"入り口に書かれた英語の文字を「俺らの場所」「俺らのフロア」とユニークに翻訳して盛り上がる掛け合いが印象的なため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 540280,\n          \"sourceEndMs\": 567026,\n          \"supportingSpeechIds\": [45]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_003\",\n      \"title\": \"空腹のころねに大量の「芋」を差し出すマリン\",\n      \"reason\": \"お腹が空いたというころねに対し、マリンが「芋」を連呼しながらコミカルに食べ物を分け与えるやり取りが微笑ましいため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 570560,\n          \"sourceEndMs\": 591351,\n          \"supportingSpeechIds\": [\"47-48\"]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_004\",\n      \"title\": \"2階建築のプレミを認め、今回は船面を広げる方針を決めるころね\",\n      \"reason\": \"強化素材での2階作りに失敗したことを認め、今回は通常の素材でベースを広げるという本日の配信目標を提示する場面であるため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 598246,\n          \"sourceEndMs\": 629792,\n          \"supportingSpeechIds\": [\"49-50\"]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

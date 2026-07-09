@@ -14,6 +14,8 @@ type CliOptions = {
   timeoutMs: number;
   diagnoseOnly: boolean;
   extractExisting: boolean;
+  rejectPartialExtraction: boolean;
+  closeTabAfterRun: boolean;
 };
 
 type BrowserTarget = {
@@ -37,8 +39,14 @@ type ThemeCandidate = {
   summary?: string;
   whyItCanBeClipped?: string;
   sourceVideoId?: string;
-  sourceStartMs: number;
-  sourceEndMs: number;
+  sourceStartMs?: number;
+  sourceEndMs?: number;
+  evidenceRanges?: Array<{
+    sourceVideoId?: string;
+    sourceStartMs: number;
+    sourceEndMs: number;
+    supportingSpeechIds?: Array<number | string>;
+  }>;
   supportingSpeechIds?: Array<number | string>;
   representativeQuote?: string;
   riskNotes?: string[];
@@ -49,6 +57,14 @@ type PromptOutput = {
   selectedCuts?: SelectedCut[];
   themes?: ThemeCandidate[];
   [key: string]: unknown;
+};
+
+type GeminiExtractionFailureDiagnostic = {
+  message: string;
+  pageUrl: string;
+  stillRunning: boolean;
+  rawResponseText: string;
+  bodyTextEnd: string;
 };
 
 type PendingCall = {
@@ -99,6 +115,8 @@ function parseOptions(argv: string[]): CliOptions {
 
   const diagnoseOnly = values.has('diagnoseOnly');
   const extractExisting = values.has('extractExisting');
+  const rejectPartialExtraction = values.has('rejectPartialExtraction');
+  const closeTabAfterRun = values.has('closeTabAfterRun');
   const promptPath = values.get('prompt')?.trim();
   if (!promptPath && !diagnoseOnly && !extractExisting) {
     throw new Error('--prompt でWeb Geminiに送るプロンプトファイルを指定してください');
@@ -127,7 +145,9 @@ function parseOptions(argv: string[]): CliOptions {
     cdpPort: Number(values.get('cdpPort') || '9222'),
     timeoutMs: Number(values.get('timeoutMs') || '240000'),
     diagnoseOnly,
-    extractExisting
+    extractExisting,
+    rejectPartialExtraction,
+    closeTabAfterRun
   };
 }
 
@@ -356,6 +376,13 @@ async function fetchCdpJson<T>(cdpPort: number, pathname: string, init?: Request
     throw new Error(`CDP HTTP ${response.status}: ${pathname}`);
   }
   return response.json() as Promise<T>;
+}
+
+async function closeCdpTarget(cdpPort: number, targetId: string | undefined): Promise<void> {
+  if (!targetId) {
+    return;
+  }
+  await fetch(`http://127.0.0.1:${cdpPort}/json/close/${encodeURIComponent(targetId)}`).catch(() => null);
 }
 
 async function getGeminiTarget(cdpPort: number): Promise<BrowserTarget> {
@@ -857,7 +884,20 @@ function parsePromptOutput(text: string): PromptOutput | undefined {
         return undefined;
       }
       const theme = item as Record<string, unknown>;
-      if (typeof theme.title !== 'string' || typeof theme.sourceStartMs !== 'number' || typeof theme.sourceEndMs !== 'number') {
+      const evidenceRanges = Array.isArray(theme.evidenceRanges)
+        ? theme.evidenceRanges.filter((range) => (
+          range
+          && typeof range === 'object'
+          && !Array.isArray(range)
+          && typeof (range as Record<string, unknown>).sourceStartMs === 'number'
+          && typeof (range as Record<string, unknown>).sourceEndMs === 'number'
+          && Number((range as Record<string, unknown>).sourceEndMs) > Number((range as Record<string, unknown>).sourceStartMs)
+        ))
+        : [];
+      const hasTopLevelRange = typeof theme.sourceStartMs === 'number'
+        && typeof theme.sourceEndMs === 'number'
+        && theme.sourceEndMs > theme.sourceStartMs;
+      if (typeof theme.title !== 'string' || (!hasTopLevelRange && evidenceRanges.length === 0)) {
         return undefined;
       }
       return theme as ThemeCandidate;
@@ -900,21 +940,33 @@ function canonicalOutput(output: PromptOutput | undefined): string {
     sourceVideoId: theme.sourceVideoId,
     sourceStartMs: theme.sourceStartMs,
     sourceEndMs: theme.sourceEndMs,
+    evidenceRanges: theme.evidenceRanges,
     supportingSpeechIds: theme.supportingSpeechIds
   })));
+}
+
+function isPartialExtraction(output: PromptOutput | undefined): boolean {
+  const status = output && typeof output.extractionStatus === 'object' && output.extractionStatus
+    ? String((output.extractionStatus as { status?: unknown }).status ?? '')
+    : '';
+  return status.includes('partial');
 }
 
 async function waitForGeminiOutput(
   cdp: CdpClient,
   promptText: string,
   previousCanonical: string,
-  timeoutMs: number
+  timeoutMs: number,
+  rejectPartialExtraction: boolean
 ): Promise<{ output: PromptOutput; rawResponseText: string; pageUrl: string }> {
   const deadline = Date.now() + timeoutMs;
   let stableCanonical = '';
   let stableSince = 0;
   let latestRawText = '';
   let latestOutput: PromptOutput | undefined;
+  let latestPageUrl = '';
+  let latestStillRunning = false;
+  let latestBodyTextEnd = '';
 
   while (Date.now() < deadline) {
     const state = await evaluateValue<{ bodyText: string; stillRunning: boolean; pageUrl: string }>(cdp, `(() => {
@@ -927,12 +979,19 @@ async function waitForGeminiOutput(
       return { bodyText, stillRunning, pageUrl: location.href };
     })()`);
     const answerText = extractAnswerText(state.bodyText ?? '', promptText);
-    const answerOutput = extractPromptOutput(answerText, { prefer: 'first', allowPartial: true });
+    latestRawText = answerText;
+    latestPageUrl = state.pageUrl;
+    latestStillRunning = state.stillRunning;
+    latestBodyTextEnd = String(state.bodyText ?? '').slice(-8000);
+    const answerOutput = extractPromptOutput(answerText, { prefer: 'first', allowPartial: !rejectPartialExtraction });
     const output = answerOutput ?? (
       answerText.includes('"selectedCuts"') || answerText.includes('"themes"')
         ? undefined
         : extractPromptOutput(state.bodyText ?? '', { prefer: 'last', allowPartial: false })
     );
+    if (output && isPartialExtraction(output) && rejectPartialExtraction) {
+      throw new Error('Gemini回答JSONが完結していないため、途中切れ抽出を保存せず失敗扱いにしました');
+    }
     const currentCanonical = canonicalOutput(output);
     if (output && currentCanonical && currentCanonical !== previousCanonical) {
       latestRawText = answerText;
@@ -956,7 +1015,7 @@ async function waitForGeminiOutput(
     await wait(1000);
   }
 
-  if (latestOutput) {
+  if (latestOutput && !rejectPartialExtraction) {
     return {
       output: latestOutput,
       rawResponseText: latestRawText,
@@ -964,7 +1023,17 @@ async function waitForGeminiOutput(
     };
   }
 
-  throw new Error('Gemini返答から selectedCuts/themes JSONを取得できません');
+  const error = new Error('Gemini返答から selectedCuts/themes JSONを取得できません') as Error & {
+    geminiDiagnostic?: GeminiExtractionFailureDiagnostic;
+  };
+  error.geminiDiagnostic = {
+    message: error.message,
+    pageUrl: latestPageUrl,
+    stillRunning: latestStillRunning,
+    rawResponseText: latestRawText,
+    bodyTextEnd: latestBodyTextEnd
+  };
+  throw error;
 }
 
 async function writeGeminiOutput(
@@ -992,6 +1061,27 @@ async function writeGeminiOutput(
   }
 }
 
+async function writeGeminiFailureDiagnostic(options: CliOptions, error: unknown): Promise<void> {
+  const diagnostic = error instanceof Error && 'geminiDiagnostic' in error
+    ? (error as Error & { geminiDiagnostic?: GeminiExtractionFailureDiagnostic }).geminiDiagnostic
+    : undefined;
+  if (!diagnostic) {
+    return;
+  }
+  const diagnosticPath = `${options.outputPath}.failure.json`;
+  await mkdir(path.dirname(diagnosticPath), { recursive: true });
+  await writeFile(diagnosticPath, `${JSON.stringify({
+    runAt: tokyoTimestamp(new Date()),
+    status: 'not_usable_for_scoring_or_human_review',
+    reason: 'Web Geminiの返答から完全なselectedCuts/themes JSONを取得できなかったため、診断用に画面本文だけを保存した。',
+    model: options.model,
+    params: options.params,
+    promptFile: options.promptPath ? path.relative(evalRoot, options.promptPath) : undefined,
+    diagnostic
+  }, null, 2)}\n`, 'utf8');
+  console.log(`gemini failure diagnostic: ${diagnosticPath}`);
+}
+
 async function extractExistingGeminiOutput(options: CliOptions): Promise<void> {
   const targets = await getExistingGeminiTargets(options.cdpPort);
   for (const target of targets) {
@@ -1006,7 +1096,7 @@ async function extractExistingGeminiOutput(options: CliOptions): Promise<void> {
         pageUrl: location.href
       }))()`);
       const answerText = extractAnswerText(state.bodyText ?? '', '');
-      const answerOutput = extractPromptOutput(answerText, { prefer: 'first', allowPartial: true });
+      const answerOutput = extractPromptOutput(answerText, { prefer: 'first', allowPartial: !options.rejectPartialExtraction });
       const output = answerOutput ?? (
         answerText.includes('"selectedCuts"') || answerText.includes('"themes"')
           ? undefined
@@ -1014,6 +1104,9 @@ async function extractExistingGeminiOutput(options: CliOptions): Promise<void> {
       );
       if (!output) {
         continue;
+      }
+      if (isPartialExtraction(output) && options.rejectPartialExtraction) {
+        throw new Error('既存のWeb Geminiタブの回答JSONが途中切れのため、保存せず失敗扱いにしました');
       }
       await writeGeminiOutput(options, output, answerText, state.pageUrl);
       return;
@@ -1061,11 +1154,18 @@ async function runWebGeminiPrompt(options: CliOptions): Promise<void> {
       cdp,
       promptText,
       previousCanonical,
-      options.timeoutMs
-    );
+      options.timeoutMs,
+      options.rejectPartialExtraction
+    ).catch(async (error: unknown) => {
+      await writeGeminiFailureDiagnostic(options, error);
+      throw error;
+    });
     await writeGeminiOutput(options, output, rawResponseText, pageUrl);
   } finally {
     cdp.close();
+    if (options.closeTabAfterRun) {
+      await closeCdpTarget(options.cdpPort, target.id);
+    }
   }
 }
 

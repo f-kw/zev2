@@ -1,0 +1,1468 @@
+{
+  "kind": "theme_redo_source_only_prompt_payload",
+  "runAt": "2026-07-09T15:54:53.894Z",
+  "target": "nOEWCNc77MI",
+  "inputSetId": "nOEWCNc77MI_source_only_first50_redo_v001",
+  "sourceVideoId": "YE-faluP7zY",
+  "sourceSttId": "nOEWCNc77MI_YE-faluP7zY_local30_first50_v001",
+  "sourceSttManifestPath": "evals/clip_composition/stt/nOEWCNc77MI_YE-faluP7zY_local30_first50_v001/source/manifest.json",
+  "generationSystem": "theme-llm-v002",
+  "promptVersion": "theme_generation_prompt_v002",
+  "requestedThemeCount": 8,
+  "plannedRuns": 1,
+  "llmCall": false,
+  "modelInput": {
+    "task": "source_only_theme_generation",
+    "generationSystem": "theme-llm-v002",
+    "promptVersion": "theme_generation_prompt_v002",
+    "requestedThemeCount": 8,
+    "inputPolicy": {
+      "sourceOnly": true,
+      "noClipInfo": true,
+      "noExpected": true,
+      "noAlignment": true,
+      "noHumanReverseTheme": true
+    },
+    "windowing": {
+      "applied": false,
+      "reason": "元配信全体入力が長いため、実走前に発話境界を保った時間窓を作る。",
+      "overlapMs": 0,
+      "preMergeCandidateCount": null,
+      "postMergeCandidateCount": null
+    },
+    "sources": [
+      {
+        "sourceVideoId": "YE-faluP7zY",
+        "sourceUrl": "https://www.youtube.com/watch?v=YE-faluP7zY",
+        "sourceTitle": "【Raft】ころね、キミさえいればこの海の果てまでだって──【ホロライブ/宝鐘マリン】",
+        "transcriptKind": "local_stt",
+        "language": "ja-JP",
+        "durationSec": 1500,
+        "rawSegmentCount": 7395,
+        "promptSegmentCount": 198,
+        "segmentCompaction": {
+          "method": "source-only transcript segments concatenated until sentence-ending punctuation",
+          "scoringRole": "none",
+          "note": "読みやすさのための表現変換であり、expected、切り抜き、照合結果、人間確認メモは使わない。"
+        },
+        "segments": [
+          {
+            "speechId": 1,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 60482,
+            "sourceEndMs": 62324,
+            "text": "このマリンを本物の海賊に"
+          },
+          {
+            "speechId": 2,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 150610,
+            "sourceEndMs": 153112,
+            "text": "ってなんだ?"
+          },
+          {
+            "speechId": 3,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 153112,
+            "sourceEndMs": 163720,
+            "text": "今日は二人で作業するんですけれどもねそうなんですけどもねちょっと待ってコーネそこいたら邪魔じゃない?"
+          },
+          {
+            "speechId": 4,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 163720,
+            "sourceEndMs": 167062,
+            "text": "コーネもっと下げていい?"
+          },
+          {
+            "speechId": 5,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 167062,
+            "sourceEndMs": 178451,
+            "text": "確かに邪魔だなコーネバカ野郎コーネのいい位置を探すかちょっとどうしようかな天の声的な感じで天の声?"
+          },
+          {
+            "speechId": 6,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 178451,
+            "sourceEndMs": 178571,
+            "text": "上?"
+          },
+          {
+            "speechId": 7,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 180554,
+            "sourceEndMs": 183835,
+            "text": "これ弾だろうがよ!"
+          },
+          {
+            "speechId": 8,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 183835,
+            "sourceEndMs": 184495,
+            "text": "おい!"
+          },
+          {
+            "speechId": 9,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 184495,
+            "sourceEndMs": 185216,
+            "text": "ヒルなんですよ!"
+          },
+          {
+            "speechId": 10,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 185216,
+            "sourceEndMs": 188257,
+            "text": "やめろよ!"
+          },
+          {
+            "speechId": 11,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 188257,
+            "sourceEndMs": 190257,
+            "text": "ヒルなんですどうしよう?"
+          },
+          {
+            "speechId": 12,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 190257,
+            "sourceEndMs": 191938,
+            "text": "どこに?"
+          },
+          {
+            "speechId": 13,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 191938,
+            "sourceEndMs": 193198,
+            "text": "まず、あれか?"
+          },
+          {
+            "speechId": 14,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 193198,
+            "sourceEndMs": 193778,
+            "text": "音声?"
+          },
+          {
+            "speechId": 15,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 193778,
+            "sourceEndMs": 195199,
+            "text": "おい!"
+          },
+          {
+            "speechId": 16,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 195199,
+            "sourceEndMs": 198040,
+            "text": "帽子みたいな感じであ、かわいいかも!"
+          },
+          {
+            "speechId": 17,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 198040,
+            "sourceEndMs": 209884,
+            "text": "かわいくないだろなんかでもサザエさんのエンディングみたいオープニングのそれねサザエさんみたいな感じで弾がさ、こう、みかんから出てくるやつ"
+          },
+          {
+            "speechId": 18,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 210802,
+            "sourceEndMs": 236189,
+            "text": "ねってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってってって"
+          },
+          {
+            "speechId": 19,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 240202,
+            "sourceEndMs": 267270,
+            "text": "コロナが上がっちゃったちょっと諦めようかなちょっとちょっと難易度高めこれにさなんか文句言われたらちょっと考えような確かに文句ないと思うけどね当然ねこっち向くわはいということでねこっち向くわとか言っちゃったちょっとコーネがね今日ねずこスタイルなんでどうもどうもねずこはそんなこと言わないうんうんうんうん"
+          },
+          {
+            "speechId": 20,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 278759,
+            "sourceEndMs": 298984,
+            "text": "ねずこうんわかるよお兄ちゃんにはわかるそうかねずこわかったわかったねずこみんなどうかなねずこと炭治郎の音量どういい感じいい感じありがとういい感じよかったねずこまあねそのそれはあれじゃん鬼の鬼の鬼柱なんだっけ鬼の"
+          },
+          {
+            "speechId": 21,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 300578,
+            "sourceEndMs": 328762,
+            "text": "なんだっけ鬼のさなに鬼もっしらってなんだよ強い鬼なんてなんかあれだ上限の月だ上限のサメだよこれはねえマリンマリンやばい腹も減ってるよこれちょっとお前どうしよう作業するかちょっとあ確かに作業しようちょっと喋ってる場合じゃない作業口を動かすか体を動かすかっていうねえこれ待ってちょっと面白くないこの絵面ひよこが立ち並んでる姿"
+          },
+          {
+            "speechId": 22,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 330060,
+            "sourceEndMs": 335402,
+            "text": "おもろいおもろいいきなりすんごい冷めてる?"
+          },
+          {
+            "speechId": 23,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 335402,
+            "sourceEndMs": 359330,
+            "text": "待ってとりあえずさこれさ島から出るかこれそうだね島からもう出つつ出ほうがいいよなあとちょっと紹介するよじゃあ船長がさ紹介していくねそうねちょっと変わってるもんねこれね皆さんお気づきでしょうか実はねあのリフォームをねいたしましたありがとうありがとうテンションありがとうちょっと今日今夜なんでねちょっとよく見えないからちょっと後にしましょうかじゃあ出発進行しましょう"
+          },
+          {
+            "speechId": 24,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 360354,
+            "sourceEndMs": 366756,
+            "text": "あ、水捨てちゃったわあ、船長も水飲みたいあ、水あれこれ前回も使ってたっけ?"
+          },
+          {
+            "speechId": 25,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 366756,
+            "sourceEndMs": 389704,
+            "text": "いいやつ使ってた、これは使ってたよこれ使ってたか一生懸命働いてる働いてるねずこ頑張ってるな働いてる働いてる仕事するんだぞという一生懸命やってるちょっとねずこが入れた水をどんどん飲んでとなんかやねんかねちょっと気に入っちゃったよ気に入っちゃったよねずこをこうしてとどうしようかなこれとりあえずちょっと潜ってみるわなんか"
+          },
+          {
+            "speechId": 26,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 390874,
+            "sourceEndMs": 391715,
+            "text": "潜るの?"
+          },
+          {
+            "speechId": 27,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 391715,
+            "sourceEndMs": 396116,
+            "text": "もう出発してるよこれスマソン?"
+          },
+          {
+            "speechId": 28,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 396116,
+            "sourceEndMs": 397197,
+            "text": "スマソン?"
+          },
+          {
+            "speechId": 29,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 397197,
+            "sourceEndMs": 398798,
+            "text": "綺麗だね!"
+          },
+          {
+            "speechId": 30,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 398798,
+            "sourceEndMs": 399158,
+            "text": "ね!"
+          },
+          {
+            "speechId": 31,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 399158,
+            "sourceEndMs": 401559,
+            "text": "夕焼けがピンク色だよ!"
+          },
+          {
+            "speechId": 32,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 401559,
+            "sourceEndMs": 404040,
+            "text": "これ朝日じゃねーの?"
+          },
+          {
+            "speechId": 33,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 404040,
+            "sourceEndMs": 406341,
+            "text": "朝日がピンク色だね!"
+          },
+          {
+            "speechId": 34,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 406341,
+            "sourceEndMs": 409602,
+            "text": "なんか二人の心みたいじゃない?"
+          },
+          {
+            "speechId": 35,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 409602,
+            "sourceEndMs": 410102,
+            "text": "どういうこと?"
+          },
+          {
+            "speechId": 36,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 410102,
+            "sourceEndMs": 414484,
+            "text": "わからない誰の心みたい?"
+          },
+          {
+            "speechId": 37,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 414484,
+            "sourceEndMs": 415805,
+            "text": "あったかいってこと?"
+          },
+          {
+            "speechId": 38,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 415805,
+            "sourceEndMs": 417406,
+            "text": "なんかさ、こういう色じゃない?"
+          },
+          {
+            "speechId": 39,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 417406,
+            "sourceEndMs": 417946,
+            "text": "私たちってさ"
+          },
+          {
+            "speechId": 40,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 420358,
+            "sourceEndMs": 438186,
+            "text": "そうかもしれない悩んだそうなのそうだったかもしれねえナルト風のそうだったかもしれねえ朝になったんで皆さんに紹介していきたいと思いますこうねうろうろしてないであれをあげてくれよなどれ?"
+          },
+          {
+            "speechId": 41,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 438186,
+            "sourceEndMs": 449852,
+            "text": "アンカー落としてるんだよね当然これ落としてる落としてる落としてるいきますよ飛び込んでったはいいきますよ"
+          },
+          {
+            "speechId": 42,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 450034,
+            "sourceEndMs": 461818,
+            "text": "オラァイヨォォォォォォォォォォォォォォォォォォォォォォォォォォォォォォォォォ"
+          },
+          {
+            "speechId": 43,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 482374,
+            "sourceEndMs": 507883,
+            "text": "まず紹介やってよ紹介誰がやるのこうなったらこちらの階段はテンテンテンテンテーンテーンテーンテーンテーンテーンテーンテーンテーンテーンテーンテーンテーンテーンテーンテーンテーンテーンテーンテーンテーンテーンテーンテーンテーンテーンテーンテーンテーンテーンテーンテーンテーンテーンテーンテーンテーンテーンテーンテーンテーンテーンテーンテーンテーンテーンテーンテーンテーンテーンテーンテーンテーンテーンテーンテーンテーンテーンテーンテーンテーンテーンテーンテー"
+          },
+          {
+            "speechId": 44,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 511410,
+            "sourceEndMs": 539932,
+            "text": "床を強化素材に変えてみましたこうなったらば簡単にはサメに食われないだろうと思って付けたんですけれどもめちゃめちゃ資材を食う割にはガンガン壊れてしまい意外とそんなに良くなかったなっていう感じだよね遠い目をしてるそして2階を作ったんですけど一旦これ入り口のグッドティンなんていうか"
+          },
+          {
+            "speechId": 45,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 540280,
+            "sourceEndMs": 567026,
+            "text": "こう書いてあるんだこれTingGoodTingCometochooseまああれだよな俺らの場所みたいな俺らの場所や俺らの場所かこれじゃあ俺らの場所俺らのフロアや俺らのフロアということが書いてある階段もつけまして2階というのを設置してねここから先の必需品って誰だろうこのアンテナをねちょっと"
+          },
+          {
+            "speechId": 46,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 567658,
+            "sourceEndMs": 570004,
+            "text": "つけてきましたでもちょっと使い方ちょっと忘れちゃったからね"
+          },
+          {
+            "speechId": 47,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 570560,
+            "sourceEndMs": 582966,
+            "text": "これからねコメントの指示中を見ながら把握していく心づむりでございますといってもやっぱこのアンテナで冒険するのはお腹すいて死ぬお腹すいてる?"
+          },
+          {
+            "speechId": 48,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 582966,
+            "sourceEndMs": 591351,
+            "text": "すいてるちょっと食べるわ芋あるよ芋芋芋芋芋芋芋芋芋芋芋芋芋芋芋芋芋芋芋芋芋芋芋"
+          },
+          {
+            "speechId": 49,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 598246,
+            "sourceEndMs": 600004,
+            "text": "これねマリリンが作ってくれたんですけど"
+          },
+          {
+            "speechId": 50,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 600202,
+            "sourceEndMs": 629792,
+            "text": "この2階あそうそう2階をねちょっと地味に作り始めたんだけど教科書外で作り始めちゃったんだけどもう素材すごい食って全然作らないからちょっとプレミしたなと思ってそれでね今日ちょっと作業するかってなったんだよねそうそうだからちょっとこっからは普通素材でガガガーっと骨組みだけ作っていきたいなと思いながらこのアンテナ使うのは次回4人揃った時でいいかなと思って今回は複面を完成させるというところにそうねということで今日はお邪魔します"
+          },
+          {
+            "speechId": 51,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 631198,
+            "sourceEndMs": 641920,
+            "text": "よろしくおねがいしまーすおねがいしまーす鉄もね、ちょっとまあね、ゆるい感じでいこうやん今日ゆるめにね、いきましょうまったりとまあ、2時間くらいかなえ、ちょっとなんか、なんか悪くね?"
+          },
+          {
+            "speechId": 52,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 641920,
+            "sourceEndMs": 647641,
+            "text": "みたいに思わないでくださいね今日はゆるくいこからこれ大丈夫なの?"
+          },
+          {
+            "speechId": 53,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 647641,
+            "sourceEndMs": 648402,
+            "text": "なんか、あれ?"
+          },
+          {
+            "speechId": 54,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 648402,
+            "sourceEndMs": 649842,
+            "text": "なんか口数少なくね?"
+          },
+          {
+            "speechId": 55,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 649842,
+            "sourceEndMs": 659944,
+            "text": "とか思っても今日はまったり作業デーだからなって思ってくださいあ、気を先につぶしておくあ、そうそうそうそうぷちぷちにニキビのようにニキビのように?"
+          },
+          {
+            "speechId": 56,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 660498,
+            "sourceEndMs": 673141,
+            "text": "例えはちょっとよく分かんないけどまあとりあえず木材がねたっぷり必要なんで船長も拾いながら行きたいと思いますこれここに入れとくねじゃあいつものごとくあいつああこいついつもの木材入れで作ったのにさあなに?"
+          },
+          {
+            "speechId": 57,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 673141,
+            "sourceEndMs": 676321,
+            "text": "いっぱい入ってるわいっぱい入ってる?"
+          },
+          {
+            "speechId": 58,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 676321,
+            "sourceEndMs": 690004,
+            "text": "それまあまあまあまあまあまあねあれよなでもな入れるとこなくなっちゃうこれねちょっとねなんかまあ見やすいからねここねどうしても入れちゃうよねそうねそうね分かるよ気持ち分かるよでかい島にこのままだと"
+          },
+          {
+            "speechId": 59,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 690040,
+            "sourceEndMs": 691501,
+            "text": "ぶつかるぞ?"
+          },
+          {
+            "speechId": 60,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 691501,
+            "sourceEndMs": 693822,
+            "text": "え、じゃあぶつかってみる?"
+          },
+          {
+            "speechId": 61,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 693822,
+            "sourceEndMs": 695422,
+            "text": "ちまにぶつかってみる?"
+          },
+          {
+            "speechId": 62,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 695422,
+            "sourceEndMs": 698183,
+            "text": "ぶつかってしまったらば止まってしまうよね、ねえ?"
+          },
+          {
+            "speechId": 63,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 698183,
+            "sourceEndMs": 700804,
+            "text": "でもなんか木材なかったかな?"
+          },
+          {
+            "speechId": 64,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 700804,
+            "sourceEndMs": 706967,
+            "text": "島にあ、でも確かに木を凝るという発想はあるよねちょっと乗ってもいいかも乗ってもいいよね待って!"
+          },
+          {
+            "speechId": 65,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 706967,
+            "sourceEndMs": 707387,
+            "text": "サメが!"
+          },
+          {
+            "speechId": 66,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 707387,
+            "sourceEndMs": 708367,
+            "text": "あー!"
+          },
+          {
+            "speechId": 67,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 708367,
+            "sourceEndMs": 709128,
+            "text": "あー!"
+          },
+          {
+            "speechId": 68,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 709128,
+            "sourceEndMs": 709448,
+            "text": "いる?"
+          },
+          {
+            "speechId": 69,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 709448,
+            "sourceEndMs": 709768,
+            "text": "食べてる?"
+          },
+          {
+            "speechId": 70,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 709768,
+            "sourceEndMs": 710288,
+            "text": "食べてる?"
+          },
+          {
+            "speechId": 71,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 710288,
+            "sourceEndMs": 712989,
+            "text": "うん、余裕で食べられたわマジ?"
+          },
+          {
+            "speechId": 72,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 712989,
+            "sourceEndMs": 719632,
+            "text": "でもちょっとどうなんだろうこうやって氷河素材使って作ってもさ結局さ、食われるんだよなしっかりした土台"
+          },
+          {
+            "speechId": 73,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 720866,
+            "sourceEndMs": 748894,
+            "text": "もしかしてなんか土台アーマーっていうので作るべきかもしかして土台アーマーとかあるんだえ、待ってこれ金属だわ金属重てえあ、でもやっぱ金属大事よこれ島ついたらうん下潜るかサメの餌作ってあ、待ってあれ作るわアンカー作りますお願いします一旦あれだね釣りもしなきゃだねあ、そう釣りもしたいねでも食料ねあれ食料庫にまだあったよありましたありましたとアンカー"
+          },
+          {
+            "speechId": 74,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 752798,
+            "sourceEndMs": 779564,
+            "text": "アンカーちょっと食べていくか食べて、アンカーアンカーどこやねんアンカーどこやねんアンカーあったですありましたですか作れましたですナイスです降ろしちゃうよこれいいよここです何食べようかな、マナマナカツオ食べよう今ちょっとゴーディ誘ってくる誘ってやってくるじゃねえよ木探してくるわあ、オッケーあれ持ってる?"
+          },
+          {
+            "speechId": 75,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 779564,
+            "sourceEndMs": 779884,
+            "text": "あのー"
+          },
+          {
+            "speechId": 76,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 780346,
+            "sourceEndMs": 809552,
+            "text": "斧持ってるんだなこれが多いでしょすごいすごい独り立ちの日だよもう独り立ちの日かそうだよ良かったね独り立ちコロさんがちゃんと作ってるってもう成長を感じてほしいねコネいや結構ねあれだからねコネはね頑張ってるからねここで頑張ってるんだよなユウってねめちゃめちゃ集めるのも早いしうちの有能だからねしっかり船長がフォローしとくからコネのことサンキューな"
+          },
+          {
+            "speechId": 77,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 810330,
+            "sourceEndMs": 817353,
+            "text": "えっとちょっと待ってココナッツしか取れねぇよ食料確かにちょっとしけてきたなあでも足りない?"
+          },
+          {
+            "speechId": 78,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 817353,
+            "sourceEndMs": 818634,
+            "text": "しけしけになってきた?"
+          },
+          {
+            "speechId": 79,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 818634,
+            "sourceEndMs": 822236,
+            "text": "ちょっと若干了解あ!"
+          },
+          {
+            "speechId": 80,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 822236,
+            "sourceEndMs": 823876,
+            "text": "鳥殺した!"
+          },
+          {
+            "speechId": 81,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 823876,
+            "sourceEndMs": 824557,
+            "text": "鳥殺したの?"
+          },
+          {
+            "speechId": 82,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 824557,
+            "sourceEndMs": 825157,
+            "text": "食べれる?"
+          },
+          {
+            "speechId": 83,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 825157,
+            "sourceEndMs": 839584,
+            "text": "食べれる食べれるちょっと待って鳥肉が絶対取れる食べてみて食べてみてOKOKOKOKちゃんと火通すんよOKあ、こんなとこでサメ肉3つあんじゃんラッキーラッキーラッキーじゃなくてラッキーとかじゃないねあ、サメ倒してたねそういえばね"
+          },
+          {
+            "speechId": 84,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 840194,
+            "sourceEndMs": 840494,
+            "text": "完全忘れてたよね?"
+          },
+          {
+            "speechId": 85,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 840494,
+            "sourceEndMs": 859444,
+            "text": "ちょっと待って、これ焼いてとこれちょっと拾ってともうちょっと一個食べてとなるほどねで、閉まってちょっとサメ肉閉まってで、このチキンを焼いてとやばっ!"
+          },
+          {
+            "speechId": 86,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 859444,
+            "sourceEndMs": 859605,
+            "text": "くっそー!"
+          },
+          {
+            "speechId": 87,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 859605,
+            "sourceEndMs": 860065,
+            "text": "どうした?"
+          },
+          {
+            "speechId": 88,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 860065,
+            "sourceEndMs": 860165,
+            "text": "どうした?"
+          },
+          {
+            "speechId": 89,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 860165,
+            "sourceEndMs": 860485,
+            "text": "何が来た?"
+          },
+          {
+            "speechId": 90,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 860485,
+            "sourceEndMs": 861386,
+            "text": "鳥が!"
+          },
+          {
+            "speechId": 91,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 861386,
+            "sourceEndMs": 861626,
+            "text": "鳥が来てる!"
+          },
+          {
+            "speechId": 92,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 861626,
+            "sourceEndMs": 863347,
+            "text": "大丈夫か?"
+          },
+          {
+            "speechId": 93,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 863347,
+            "sourceEndMs": 864327,
+            "text": "ダメージ?"
+          },
+          {
+            "speechId": 94,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 864327,
+            "sourceEndMs": 864687,
+            "text": "平気?"
+          },
+          {
+            "speechId": 95,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 864687,
+            "sourceEndMs": 864927,
+            "text": "ダメージ?"
+          },
+          {
+            "speechId": 96,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 864927,
+            "sourceEndMs": 867669,
+            "text": "大丈夫、ダメージ大丈夫まだ平気ほんと?"
+          },
+          {
+            "speechId": 97,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 867669,
+            "sourceEndMs": 868349,
+            "text": "心配かけたな"
+          },
+          {
+            "speechId": 98,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 870042,
+            "sourceEndMs": 874784,
+            "text": "言うほど心配してないよ心配してーよー!"
+          },
+          {
+            "speechId": 99,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 874784,
+            "sourceEndMs": 875844,
+            "text": "はいはい、あれ?"
+          },
+          {
+            "speechId": 100,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 875844,
+            "sourceEndMs": 877525,
+            "text": "あれ?"
+          },
+          {
+            "speechId": 101,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 877525,
+            "sourceEndMs": 878365,
+            "text": "心配して?"
+          },
+          {
+            "speechId": 102,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 878365,
+            "sourceEndMs": 884347,
+            "text": "心配ねしてるしてるちょっと待って、一旦荷物預けて雑すぎ気づいた?"
+          },
+          {
+            "speechId": 103,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 884347,
+            "sourceEndMs": 899732,
+            "text": "雑すぎんやんいやでもマリリンは反応が雑でもこういうゲームのね作業ちゃんとするから偉いと思うわ謎のフォローが入りましたそうなんよ船長ってちょっとね反応たまに雑になるけどでもちゃんとするからねそう言うてね"
+          },
+          {
+            "speechId": 104,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 900098,
+            "sourceEndMs": 904802,
+            "text": "営業をしっかりしてるところがコーポイントだよね、マジでうん、わかるわかる?"
+          },
+          {
+            "speechId": 105,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 904802,
+            "sourceEndMs": 925239,
+            "text": "わかりみが深いえ、ちょ、せんちゃんあれするわあのさぁ海藻とか探すわあのね、結構ねあ、あ、ありがてありがて柔道のネマネマとかがね、今後必要になってくることはサメ、気をつけてね間違いない、オッケーでもさぁ、冷静に考えてさぁうんこうやって、目標がさぁ、どんどん変わってくからさぁ今、するべきことって痛っ、ヤバい!"
+          },
+          {
+            "speechId": 106,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 925239,
+            "sourceEndMs": 926740,
+            "text": "ちょっと待っている?"
+          },
+          {
+            "speechId": 107,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 926740,
+            "sourceEndMs": 928241,
+            "text": "いやああああああああああああああ"
+          },
+          {
+            "speechId": 108,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 932566,
+            "sourceEndMs": 934587,
+            "text": "気をつけてこれイノシシいるの?"
+          },
+          {
+            "speechId": 109,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 934587,
+            "sourceEndMs": 953740,
+            "text": "イノシシもいるわこれわかった助太刀に行こうちょっと矢でさ撃ち殺すかイノシシパーティーしよう今日はここにイノシシいるわしし鍋しし丼しししちゅうみたいなしししちゅうしたいしししちゅうそっかこいつはもう食べれるんだよな多分なそうだよ弓矢あれ弓矢ってどかなかったっけ持ってる?"
+          },
+          {
+            "speechId": 110,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 953740,
+            "sourceEndMs": 959944,
+            "text": "弓矢どっかにあったはずコーネ持ってないんだなコーネ持ってないあったあったちょっとさ弓矢でさ"
+          },
+          {
+            "speechId": 111,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 960122,
+            "sourceEndMs": 989832,
+            "text": "殺すわ食べようよ食べたいこれで撃てるのかな行くわそっち待ってあれマリゾネスどこマリゾネスまだイカダイカダにいる鳥もいるしねなんかねイノシシ2匹ぐらいいたから気をつけてなOKもうみんな撃ち殺すから任してセイチョ結構エイムにはね自信あるからそうでしょ自信はねあったところってなんだよどういう意味だよちょっと待って自信だけ"
+          },
+          {
+            "speechId": 112,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 990278,
+            "sourceEndMs": 993519,
+            "text": "もうダメなんだよこれコロゾネス待った方がいいやつ?"
+          },
+          {
+            "speechId": 113,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 993519,
+            "sourceEndMs": 1001441,
+            "text": "コロゾネス待たなくていいよずっとベリーだって食べちゃうどこだ?"
+          },
+          {
+            "speechId": 114,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1001441,
+            "sourceEndMs": 1006182,
+            "text": "どこだちょっと待って一緒にゴーデスとか行かなこれじゃあイカダでちょっと待っとくか?"
+          },
+          {
+            "speechId": 115,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1006182,
+            "sourceEndMs": 1009243,
+            "text": "オッケーちょっと待ってなイカダどこだ?"
+          },
+          {
+            "speechId": 116,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1009243,
+            "sourceEndMs": 1011184,
+            "text": "じゃあヤ、ヤちょっと弓?"
+          },
+          {
+            "speechId": 117,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1011184,
+            "sourceEndMs": 1011864,
+            "text": "ヤ、ヤ弓?"
+          },
+          {
+            "speechId": 118,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1011864,
+            "sourceEndMs": 1014365,
+            "text": "死ぬかもしれんこれ嘘でしょ?"
+          },
+          {
+            "speechId": 119,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1014365,
+            "sourceEndMs": 1019166,
+            "text": "ちょっとヤと作っとこうコーネも一緒に一緒にさ弓やする?"
+          },
+          {
+            "speechId": 120,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1021002,
+            "sourceEndMs": 1022723,
+            "text": "殺した方が早く殺せるか!"
+          },
+          {
+            "speechId": 121,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1022723,
+            "sourceEndMs": 1034412,
+            "text": "そうそうそう、ちょっとロープちょっと作ってブドウのネバネバはちょっと海藻で作るかなんかそう、1個だ1個もないっけなこれえ、見失っちゃった?"
+          },
+          {
+            "speechId": 122,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1034412,
+            "sourceEndMs": 1039036,
+            "text": "待てねーちょっと待てーどっかにないか?"
+          },
+          {
+            "speechId": 123,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1039036,
+            "sourceEndMs": 1046161,
+            "text": "ネバネバあ、ここね鉱石あるなさてさてさてちょっとまとめてやの数が少ないって!"
+          },
+          {
+            "speechId": 124,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1046161,
+            "sourceEndMs": 1049624,
+            "text": "アドバイスパソーカーなんとない時にね"
+          },
+          {
+            "speechId": 125,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1050106,
+            "sourceEndMs": 1058648,
+            "text": "違う、違う違うね、ごめんねやめてね、そんなつもりじゃないからねや、や、やーだけにやめてもう何も言えねえ!"
+          },
+          {
+            "speechId": 126,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1058648,
+            "sourceEndMs": 1072470,
+            "text": "嘘すぎるもう何も言えねえよわかった、せいちゃんが矢作ったときあ、やばい、いる、いるなあねえ、待って、イノシシ3匹いるあれ、作った矢どこ、あ、21本3匹いる?"
+          },
+          {
+            "speechId": 127,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1072470,
+            "sourceEndMs": 1079852,
+            "text": "3匹いる、3匹いる何個いるかな、ちょっと1人30本ずつ持つか、じゃあここやばいかもあ、でも板足りない"
+          },
+          {
+            "speechId": 128,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1081354,
+            "sourceEndMs": 1081915,
+            "text": "居た?"
+          },
+          {
+            "speechId": 129,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1081915,
+            "sourceEndMs": 1082435,
+            "text": "居た?"
+          },
+          {
+            "speechId": 130,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1082435,
+            "sourceEndMs": 1084155,
+            "text": "居た?"
+          },
+          {
+            "speechId": 131,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1084155,
+            "sourceEndMs": 1085376,
+            "text": "居た?"
+          },
+          {
+            "speechId": 132,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1085376,
+            "sourceEndMs": 1085716,
+            "text": "居た?"
+          },
+          {
+            "speechId": 133,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1085716,
+            "sourceEndMs": 1086196,
+            "text": "居た?"
+          },
+          {
+            "speechId": 134,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1086196,
+            "sourceEndMs": 1086696,
+            "text": "居た?"
+          },
+          {
+            "speechId": 135,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1086696,
+            "sourceEndMs": 1087116,
+            "text": "居た?"
+          },
+          {
+            "speechId": 136,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1087116,
+            "sourceEndMs": 1087296,
+            "text": "居た?"
+          },
+          {
+            "speechId": 137,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1110182,
+            "sourceEndMs": 1139684,
+            "text": "来た時用に矢作ってありがたいねーこれで一緒にターン行こうよちょっと20本ずつちょっとコーネ1本少ない19本だけどまあ細かいことは全然いい全然いいあ全然いい解消できるしねベトベト足りるかなベトベトベトベト足りるかな問題があったわやっと見つけたオッケーあ行けるなよし弓作ったあじゃあ今ここで渡しちゃうねありがてーよこれ弓と"
+          },
+          {
+            "speechId": 138,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1140194,
+            "sourceEndMs": 1141995,
+            "text": "はいこれ、嫌ね?"
+          },
+          {
+            "speechId": 139,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1141995,
+            "sourceEndMs": 1142956,
+            "text": "拾ってよ?"
+          },
+          {
+            "speechId": 140,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1142956,
+            "sourceEndMs": 1144276,
+            "text": "水に流される前にね?"
+          },
+          {
+            "speechId": 141,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1144276,
+            "sourceEndMs": 1147819,
+            "text": "はいはいはいはいちょっとご飯も食べるから拾った!"
+          },
+          {
+            "speechId": 142,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1147819,
+            "sourceEndMs": 1148819,
+            "text": "オッケー?"
+          },
+          {
+            "speechId": 143,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1148819,
+            "sourceEndMs": 1154923,
+            "text": "うーんと、サメの頭いらねご飯も食べてよ?"
+          },
+          {
+            "speechId": 144,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1154923,
+            "sourceEndMs": 1156044,
+            "text": "はい!"
+          },
+          {
+            "speechId": 145,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1156044,
+            "sourceEndMs": 1162007,
+            "text": "よし、今日はしし鍋しし丼しし汁しししちゅうね?"
+          },
+          {
+            "speechId": 146,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1162007,
+            "sourceEndMs": 1164989,
+            "text": "そう、しししちゅうが一番好きだわあ、これ夜になるけどこれどう?"
+          },
+          {
+            "speechId": 147,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1164989,
+            "sourceEndMs": 1165249,
+            "text": "いいか?"
+          },
+          {
+            "speechId": 148,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1165249,
+            "sourceEndMs": 1169712,
+            "text": "別に先にねほねば、夜の方がさ、海の中"
+          },
+          {
+            "speechId": 149,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1170418,
+            "sourceEndMs": 1174119,
+            "text": "あれだよな、探索しやすいんだよなあ、する?"
+          },
+          {
+            "speechId": 150,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1174119,
+            "sourceEndMs": 1182180,
+            "text": "最初海の中やっちゃってそうやで、暗いとイノシシも見えなくて危ないしあ、これマリリーさんこれ使ってみるよ、禰豆子あ、禰豆子?"
+          },
+          {
+            "speechId": 151,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1182180,
+            "sourceEndMs": 1183641,
+            "text": "いや、大丈夫だよ平気?"
+          },
+          {
+            "speechId": 152,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1183641,
+            "sourceEndMs": 1199144,
+            "text": "平気平気OK待って、弓矢じゃなくて矢も持って持ち物は大丈夫だなよし生の芋、芋焼いとこうかな食料あるよある?"
+          },
+          {
+            "speechId": 153,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1199144,
+            "sourceEndMs": 1199564,
+            "text": "あるよ、あの"
+          },
+          {
+            "speechId": 154,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1200098,
+            "sourceEndMs": 1223383,
+            "text": "箱に入ってる全部の箱を1個ずつ開けたら見つかるありがとう次はちゃんとね分かりやすくしとくわ2階建てにしたらきてるきてるきてるお前許さねえサメだサメだ多分サメだコーネいる多分というかサメやこれは間違いなくね間違いなくラフトやこれはラフト?"
+          },
+          {
+            "speechId": 155,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1223383,
+            "sourceEndMs": 1229904,
+            "text": "これはラフトというゲームやいたいやサメサメサメほらいるよなやっぱりないるすいませんマリンよりコーネのことを食べてください"
+          },
+          {
+            "speechId": 156,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1230214,
+            "sourceEndMs": 1234815,
+            "text": "なんでやねんコーニーさん狙われたらヤバいで今死にかけの…え、痛っ!"
+          },
+          {
+            "speechId": 157,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1234815,
+            "sourceEndMs": 1235315,
+            "text": "待って!"
+          },
+          {
+            "speechId": 158,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1235315,
+            "sourceEndMs": 1235596,
+            "text": "待って!"
+          },
+          {
+            "speechId": 159,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1235596,
+            "sourceEndMs": 1236016,
+            "text": "痛っ!"
+          },
+          {
+            "speechId": 160,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1236016,
+            "sourceEndMs": 1236436,
+            "text": "痛っ!"
+          },
+          {
+            "speechId": 161,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1236436,
+            "sourceEndMs": 1237096,
+            "text": "痛っ!"
+          },
+          {
+            "speechId": 162,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1237096,
+            "sourceEndMs": 1237476,
+            "text": "痛っ!"
+          },
+          {
+            "speechId": 163,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1237476,
+            "sourceEndMs": 1258062,
+            "text": "コーニーありがとう今まですごい大好きだった本当によいごんサメはさ弓矢で…でももったいないなちょっとでも確かにね弓矢弱えないっすなあ弓矢でも弓でもサメ倒せるよって言われてるなえ待ってもしかしてさもしかしてこの丈さいや無理かコンコンできるかと思った"
+          },
+          {
+            "speechId": 164,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1260022,
+            "sourceEndMs": 1274430,
+            "text": "そんな…竹取りの翁というものありきりやんそんな…竹取りの翁というものありきり…そんな丁寧に…あ、違うわ!"
+          },
+          {
+            "speechId": 165,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1274430,
+            "sourceEndMs": 1275270,
+            "text": "かぐや姫や!"
+          },
+          {
+            "speechId": 166,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1275270,
+            "sourceEndMs": 1277732,
+            "text": "かぐや姫生まれちゃうよそうだねえ?"
+          },
+          {
+            "speechId": 167,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1277732,
+            "sourceEndMs": 1280213,
+            "text": "かぐや姫生まれちゃうよなに?"
+          },
+          {
+            "speechId": 168,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1280213,
+            "sourceEndMs": 1280473,
+            "text": "なに?"
+          },
+          {
+            "speechId": 169,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1280473,
+            "sourceEndMs": 1281894,
+            "text": "絡みづらい?"
+          },
+          {
+            "speechId": 170,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1281894,
+            "sourceEndMs": 1283795,
+            "text": "ちょっと絡みづらい…嘘でしょ?"
+          },
+          {
+            "speechId": 171,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1283795,
+            "sourceEndMs": 1284495,
+            "text": "いつも?"
+          },
+          {
+            "speechId": 172,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1284495,
+            "sourceEndMs": 1285236,
+            "text": "今日だけ?"
+          },
+          {
+            "speechId": 173,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1285236,
+            "sourceEndMs": 1287337,
+            "text": "今日絡みづらい?"
+          },
+          {
+            "speechId": 174,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1287337,
+            "sourceEndMs": 1289358,
+            "text": "いつもは絡みやすい…待って、この魚…"
+          },
+          {
+            "speechId": 175,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1289708,
+            "sourceEndMs": 1290024,
+            "text": "えいちゃん"
+          },
+          {
+            "speechId": 176,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1290150,
+            "sourceEndMs": 1294092,
+            "text": "どうしよう気になるやん今日何があったんやんなりんどこ?"
+          },
+          {
+            "speechId": 177,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1294092,
+            "sourceEndMs": 1311760,
+            "text": "ちょっと今脳死で喋ってるあっ今ね今あの竹取りの桶というものありきりのとこあっよきかなよきかなよきかなちょっとちゃんと時代に染まってるねうんそれはよきかないいじゃんこの辺サメいなさそうな予感する今チャンスなのでは?"
+          },
+          {
+            "speechId": 178,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1311760,
+            "sourceEndMs": 1312480,
+            "text": "マジ?"
+          },
+          {
+            "speechId": 179,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1312480,
+            "sourceEndMs": 1319784,
+            "text": "あっでもこっち来そうだなうそえなんかフグもいるって言われてるようんうん普通にいるねこれでもここ海藻"
+          },
+          {
+            "speechId": 180,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1320162,
+            "sourceEndMs": 1335495,
+            "text": "オンパレードだからちょっと拾うわやばいやばい階層のここの階層も取り尽くした今から来ても遅いからナイス行かねーしそっち行かねーし反対側行ってっしオッケー?"
+          },
+          {
+            "speechId": 181,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1335495,
+            "sourceEndMs": 1348625,
+            "text": "これも階層だすごいなんか楽しいね楽しいねこっち側何もないかな何もないけどこっち側何もない?"
+          },
+          {
+            "speechId": 182,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1348625,
+            "sourceEndMs": 1349286,
+            "text": "何にもない"
+          },
+          {
+            "speechId": 183,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1350426,
+            "sourceEndMs": 1351046,
+            "text": "え?"
+          },
+          {
+            "speechId": 184,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1351046,
+            "sourceEndMs": 1380004,
+            "text": "金属とかもないけど粘土とかあそっかでかいなこの島でかいよなでかいくせにさ意外となんもない金属なんもないよ金属欲しいよなゆうて金属あったあった海藻あったナイス降りますあんまり行きすぎると戻るのが大変か分かる分かるでもなさそうだなこの辺砂は取ってったほうがいいか砂もそうだね取っとこう"
+          },
+          {
+            "speechId": 185,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1380850,
+            "sourceEndMs": 1387813,
+            "text": "OKOK砂というもの見つけられり見つけられり?"
+          },
+          {
+            "speechId": 186,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1387813,
+            "sourceEndMs": 1390555,
+            "text": "見つけられり死ぬ死ぬ?"
+          },
+          {
+            "speechId": 187,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1390555,
+            "sourceEndMs": 1392416,
+            "text": "海藻ありけり海藻ありけり?"
+          },
+          {
+            "speechId": 188,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1392416,
+            "sourceEndMs": 1409884,
+            "text": "海藻いっぱいあるいっぱいあるちょっと待って一回上がってよいしょあぁ荷物預けてくればよかったなぁ準備を怠る怠るなかれあーわしもいるわしもやばいこっちはね準備を怠ることなかれだったからね"
+          },
+          {
+            "speechId": 189,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1410846,
+            "sourceEndMs": 1427669,
+            "text": "あーそれはよきかなよきかなとしか言えんあんまり詳しくないお代官様あそっち行ったどっち行った?"
+          },
+          {
+            "speechId": 190,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1427669,
+            "sourceEndMs": 1438592,
+            "text": "あらよあらよあらよあらららよ戦術そっちじゃないかなあ改装めっちゃある14枚も拾ったわえ、じゃあ教えてよ何を?"
+          },
+          {
+            "speechId": 191,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1438592,
+            "sourceEndMs": 1439592,
+            "text": "は?"
+          },
+          {
+            "speechId": 192,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1439592,
+            "sourceEndMs": 1439732,
+            "text": "え、待って"
+          },
+          {
+            "speechId": 193,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1440770,
+            "sourceEndMs": 1469864,
+            "text": "もう全部船長が取ったからねもう今更意味ないよそっちじゃない方のさ教えてよお代官様じゃない方のさそれで言うと船長が言った方の反対の方角に向かってもらうと良き島を違う違うよあれ待ってお代官様のまだその話もう終わったからその話終わったなんでごめんね"
+          },
+          {
+            "speechId": 194,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1470194,
+            "sourceEndMs": 1479457,
+            "text": "終わっちゃったかいつまでそんな話してんだよやる気あるんかお前やばい待て待て仕留められるか?"
+          },
+          {
+            "speechId": 195,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1479457,
+            "sourceEndMs": 1488380,
+            "text": "何かと戦い始めたいいよいいよ痛そう痛そうこっちが痛いですイノシシやってるもしかして?"
+          },
+          {
+            "speechId": 196,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1488380,
+            "sourceEndMs": 1489941,
+            "text": "イノシシやってるやってんの?"
+          },
+          {
+            "speechId": 197,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1489941,
+            "sourceEndMs": 1498203,
+            "text": "でも待て海の中に入っていいじゃんいいじゃん海の中で撃てばねこいつ来れねえよあサメ?"
+          },
+          {
+            "speechId": 198,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1498203,
+            "sourceEndMs": 1498864,
+            "text": "あイノシシ"
+          }
+        ]
+      }
+    ],
+    "outputContract": {
+      "format": "json_only",
+      "schema": {
+        "themes": [
+          {
+            "themeId": "string",
+            "title": "string",
+            "reason": "string_one_sentence",
+            "evidenceRanges": [
+              {
+                "sourceVideoId": "string",
+                "sourceStartMs": "number",
+                "sourceEndMs": "number",
+                "supportingSpeechIds": [
+                  "number_or_range_string"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "evaluationOnly": {
+    "note": "モデルへ渡さない作業メタデータ。fixture/expected未作成のやり直し候補A用。",
+    "target": "nOEWCNc77MI",
+    "transcriptPath": "evals/clip_composition/stt/nOEWCNc77MI_YE-faluP7zY_local30_first50_v001/source/transcript.json",
+    "sttManifestPath": "evals/clip_composition/stt/nOEWCNc77MI_YE-faluP7zY_local30_first50_v001/source/manifest.json",
+    "sourceInfoPath": "evals/clip_composition/research/downloads/nOEWCNc77MI/sources/YE-faluP7zY/YE-faluP7zY.info.json"
+  }
+}
