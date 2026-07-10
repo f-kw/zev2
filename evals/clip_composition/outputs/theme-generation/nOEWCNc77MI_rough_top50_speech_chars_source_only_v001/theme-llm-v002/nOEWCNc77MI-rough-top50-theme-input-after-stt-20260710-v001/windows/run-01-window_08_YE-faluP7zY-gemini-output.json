@@ -1,0 +1,49 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "女子らしくオシャレにテーブルを作りたい二人",
+      "reason": "粘土を使ってテーブルやランチョンマットを作り、女子アピールをしながら楽しむ会話が切り抜きとしてまとまりがあるため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 10982423,
+          "sourceEndMs": 11009944,
+          "supportingSpeechIds": [
+            "157-162"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "地面に正座で食卓を囲む「わびさび」の提案",
+      "reason": "出来上がったテーブルのデザインを評価しつつ、地面に座るスタイルをわびさびと表現する独特の掛け合いが面白いため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 1251114,
+          "sourceEndMs": 11309582,
+          "supportingSpeechIds": [
+            "163-166"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-10T07:47:27+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_08_YE-faluP7zY",
+    "windowSourceVideoId": "YE-faluP7zY",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nOEWCNc77MI_rough_top50_speech_chars_source_only_v001/theme-llm-v002/nOEWCNc77MI-rough-top50-theme-input-after-stt-20260710-v001/windows/window_08_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/10fb61e292c893d9?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"女子らしくオシャレにテーブルを作りたい二人\",\n      \"reason\": \"粘土を使ってテーブルやランチョンマットを作り、女子アピールをしながら楽しむ会話が切り抜きとしてまとまりがあるため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 10982423,\n          \"sourceEndMs\": 11009944,\n          \"supportingSpeechIds\": [\n            \"157-162\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"地面に正座で食卓を囲む「わびさび」の提案\",\n      \"reason\": \"出来上がったテーブルのデザインを評価しつつ、地面に座るスタイルをわびさびと表現する独特の掛け合いが面白いため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 1251114,\n          \"sourceEndMs\": 11309582,\n          \"supportingSpeechIds\": [\n            \"163-166\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

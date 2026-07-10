@@ -1,0 +1,233 @@
+{
+  "kind": "theme_redo_source_only_window_prompt_payload",
+  "runAt": "2026-07-09T22:44:17.817Z",
+  "target": "nOEWCNc77MI",
+  "inputSetId": "nOEWCNc77MI_rough_top50_speech_chars_source_only_v001",
+  "sourceVideoId": "YE-faluP7zY",
+  "sourceSttId": "nOEWCNc77MI_YE-faluP7zY_rough_top50_speech_chars_local30_v001",
+  "sourceSttManifestPath": "evals/clip_composition/stt/nOEWCNc77MI_YE-faluP7zY_rough_top50_speech_chars_local30_v001/source/manifest.json",
+  "sourceSttComplete": true,
+  "generationSystem": "theme-llm-v002",
+  "promptVersion": "theme_generation_prompt_v002",
+  "requestedThemeCount": 8,
+  "windowKind": "primary",
+  "llmCall": false,
+  "modelInput": {
+    "task": "source_only_theme_generation",
+    "generationSystem": "theme-llm-v002",
+    "promptVersion": "theme_generation_prompt_v002",
+    "requestedThemeCount": 8,
+    "inputPolicy": {
+      "sourceOnly": true,
+      "noClipInfo": true,
+      "noExpected": true,
+      "noAlignment": true,
+      "noHumanReverseTheme": true
+    },
+    "windowing": {
+      "applied": true,
+      "mode": "speech-time",
+      "windowId": "window_04_YE-faluP7zY",
+      "reason": "元配信全体入力が長いため、発話境界を保った時間窓へ分割する。",
+      "maxPromptBytes": 13084,
+      "overlapMs": 0,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 1650098,
+      "sourceEndMs": 2945887
+    },
+    "sources": [
+      {
+        "sourceVideoId": "YE-faluP7zY",
+        "sourceUrl": "https://www.youtube.com/watch?v=YE-faluP7zY",
+        "sourceTitle": "【Raft】ころね、キミさえいればこの海の果てまでだって──【ホロライブ/宝鐘マリン】",
+        "transcriptKind": "local_stt",
+        "language": "ja-JP",
+        "rawSegmentCount": 8039,
+        "promptSegmentCount": 22,
+        "segmentCompaction": {
+          "method": "source-only transcript segments concatenated until sentence-ending punctuation",
+          "scoringRole": "none",
+          "note": "読みやすさのための表現変換であり、expected、切り抜き、照合結果、人間確認メモは使わない。"
+        },
+        "segments": [
+          {
+            "speechId": 65,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1650098,
+            "sourceEndMs": 1674705,
+            "text": "海になるからね海ってか海に入れるぐらいのね端っこだからね行けー砂浜だからでもこの辺だよねすまんよーしかもコーネの枠もないからマジでどこにいるかわかんない確かにあもうホントだねなーあれこれ渡ったかなーこの先コーネマリリン画面見てよマリリン画面マリリンあっそうねいやっ!"
+          },
+          {
+            "speechId": 66,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1674705,
+            "sourceEndMs": 1674985,
+            "text": "あー大丈夫か!"
+          },
+          {
+            "speechId": 67,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1674985,
+            "sourceEndMs": 1675365,
+            "text": "いや!"
+          },
+          {
+            "speechId": 68,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1675365,
+            "sourceEndMs": 1676285,
+            "text": "ちょっと待って!"
+          },
+          {
+            "speechId": 69,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1676285,
+            "sourceEndMs": 1678906,
+            "text": "イノシシというものありきりやばい!"
+          },
+          {
+            "speechId": 70,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1678906,
+            "sourceEndMs": 1679406,
+            "text": "やばいなそれ"
+          },
+          {
+            "speechId": 71,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1770426,
+            "sourceEndMs": 1799772,
+            "text": "なんだけどねでもまだね全然粘土もさっき見かけたしまだまだ何でもありそうではある申し訳ねーけどさほら今武器をさ手に入れたからねこれであればそうね弓ねせんきゅーベイブせんきゅーよしちょっと食べ物あーありがとう持ち歩いた方がいいかもね食べ物そうね待ってでもねちょっと残ってるこれ一個食べてこのねここのこのなんていうのあのさこのコンロじゃなくてなんだこれ洋コンロに近い"
+          },
+          {
+            "speechId": 72,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1980170,
+            "sourceEndMs": 1997078,
+            "text": "入れてる場所が適当すぎてさまあマジで見つけらんないんだよねわかるあとでちょっと整理するわしたいねあっボトル作った作ったあっありがたきしあわせはい置くねかたじけねよしここに水入れ散らかそうありがとう取り合いになっちゃうよこれあいいよいいよ持ってこうねこっぷり持ってるから2杯2杯入れる?"
+          },
+          {
+            "speechId": 73,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1997078,
+            "sourceEndMs": 1997578,
+            "text": "2杯2杯?"
+          },
+          {
+            "speechId": 74,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1997578,
+            "sourceEndMs": 2009944,
+            "text": "あっペットボトルおしゃれやんこれえデザインいいよね地味にいないよこれあ入れちゃったなくなったねちょっとなくなった新しく入れてとまあでもいったん2あれば足りるし"
+          },
+          {
+            "speechId": 75,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 2010702,
+            "sourceEndMs": 2020369,
+            "text": "そうねありがてぇなほんとご飯もちょっと持ってったほうがいいかもねあ、ご飯ね今ねクジラ肉…あ、違う食べ肉持ってるからそこなんで間違えるの?"
+          },
+          {
+            "speechId": 76,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 2020369,
+            "sourceEndMs": 2023511,
+            "text": "まじで食べ肉持ってるからね大丈夫行け?"
+          },
+          {
+            "speechId": 77,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 2023511,
+            "sourceEndMs": 2026994,
+            "text": "せんちゃんも持ってとよしこれで準備万端かな?"
+          },
+          {
+            "speechId": 78,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 2026994,
+            "sourceEndMs": 2038802,
+            "text": "行こうぞ行きますかよし行くぞーうちらいいね成長したねもう弓持って移動してんだよいやさすがよな強くなっちゃったこっち見ておっともたる"
+          },
+          {
+            "speechId": 79,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 2401186,
+            "sourceEndMs": 2410728,
+            "text": "そんなほらよでもさ、あんな小せえのがさ倒すの苦労したからさ猪なんてさ、化け物レベルなんじゃないの?"
+          },
+          {
+            "speechId": 80,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 2410728,
+            "sourceEndMs": 2414189,
+            "text": "俺いや、猪きつそうだねどうやるの?"
+          },
+          {
+            "speechId": 81,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 2414189,
+            "sourceEndMs": 2429652,
+            "text": "絶対なでもさ、さっきと違って逃げていくんじゃなくて向かってくるわけだからさ確かになワンチャン当たりやすいかもね、エイム的にはワタメがBGMがフグ来てる、フグ来てるよ気をつけ、そっち殺されたからな、さっき"
+          },
+          {
+            "speechId": 82,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 2731943,
+            "sourceEndMs": 2759704,
+            "text": "何を今からするかというと目的が次々変わってるんだよねわかる一つに絞らないとね何からやろうか今日の目標は船の2階を監視させたいみたいなそうなんだよさせたいんだけどさ大きい島を見つけてはしゃいじゃったところあるよね"
+          },
+          {
+            "speechId": 83,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 2941666,
+            "sourceEndMs": 2942086,
+            "text": "いいでしょ?"
+          },
+          {
+            "speechId": 84,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 2942086,
+            "sourceEndMs": 2942486,
+            "text": "すごいでしょ?"
+          },
+          {
+            "speechId": 85,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 2942486,
+            "sourceEndMs": 2945307,
+            "text": "ナイス?"
+          },
+          {
+            "speechId": 86,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 2945307,
+            "sourceEndMs": 2945887,
+            "text": "ナイス?"
+          }
+        ]
+      }
+    ],
+    "outputContract": {
+      "format": "json_only",
+      "schema": {
+        "themes": [
+          {
+            "themeId": "string",
+            "title": "string",
+            "reason": "string_one_sentence",
+            "evidenceRanges": [
+              {
+                "sourceVideoId": "string",
+                "sourceStartMs": "number",
+                "sourceEndMs": "number",
+                "supportingSpeechIds": [
+                  "number_or_range_string"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

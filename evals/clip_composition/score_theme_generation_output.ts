@@ -28,6 +28,13 @@ type ThemeCandidate = {
   sourceVideoId?: string;
   sourceStartMs?: number;
   sourceEndMs?: number;
+  reason?: string;
+  evidenceRanges?: Array<{
+    sourceVideoId?: string;
+    sourceStartMs?: number;
+    sourceEndMs?: number;
+    supportingSpeechIds?: Array<number | string>;
+  }>;
   representativeQuote?: string;
   riskNotes?: string[];
   [key: string]: unknown;
@@ -80,6 +87,7 @@ type RangeHit = {
   expectedIndex: number;
   expectedLabel: string;
   candidateIndex: number;
+  candidateRangeIndex: number;
   candidateThemeId?: string;
   candidateTitle: string;
   sourceVideoId: string;
@@ -88,6 +96,13 @@ type RangeHit = {
   expectedStartMs: number;
   expectedEndMs: number;
   overlapMs: number;
+};
+
+type CandidateEvidenceRange = {
+  sourceVideoId?: string;
+  sourceStartMs: number;
+  sourceEndMs: number;
+  rangeIndex: number;
 };
 
 type RunScore = ReturnType<typeof scoreRun>;
@@ -148,6 +163,17 @@ function sanitizePathPart(value: string): string {
   return value.replace(/[^a-zA-Z0-9_-]/g, '_');
 }
 
+function requireOutputModel(output: GeminiOutput, label: string): string {
+  if (typeof output.model !== 'string' || !output.model.trim()) {
+    throw new Error(`${label} に実モデル名 model がありません`);
+  }
+  return output.model.trim();
+}
+
+function generationSystemLabel(baseGenerationSystem: string, model: string): string {
+  return `${baseGenerationSystem}@${model}`;
+}
+
 async function readJson<T>(filePath: string): Promise<T> {
   return JSON.parse(await readFile(filePath, 'utf8')) as T;
 }
@@ -192,13 +218,34 @@ function candidateSourceVideoId(candidate: ThemeCandidate, payload: Payload): st
   return sources.length === 1 ? sources[0].sourceVideoId : undefined;
 }
 
-function validCandidate(candidate: ThemeCandidate): candidate is ThemeCandidate & {
-  sourceStartMs: number;
-  sourceEndMs: number;
-} {
-  return typeof candidate.sourceStartMs === 'number'
+function candidateEvidenceRanges(candidate: ThemeCandidate, payload: Payload): CandidateEvidenceRange[] {
+  if (Array.isArray(candidate.evidenceRanges) && candidate.evidenceRanges.length > 0) {
+    return candidate.evidenceRanges
+      .map((range, index) => ({
+        sourceVideoId: typeof range.sourceVideoId === 'string' && range.sourceVideoId.trim()
+          ? range.sourceVideoId.trim()
+          : candidateSourceVideoId(candidate, payload),
+        sourceStartMs: range.sourceStartMs,
+        sourceEndMs: range.sourceEndMs,
+        rangeIndex: index + 1
+      }))
+      .filter((range): range is CandidateEvidenceRange => (
+        typeof range.sourceStartMs === 'number'
+        && typeof range.sourceEndMs === 'number'
+        && range.sourceEndMs > range.sourceStartMs
+      ));
+  }
+  if (typeof candidate.sourceStartMs === 'number'
     && typeof candidate.sourceEndMs === 'number'
-    && candidate.sourceEndMs > candidate.sourceStartMs;
+    && candidate.sourceEndMs > candidate.sourceStartMs) {
+    return [{
+      sourceVideoId: candidateSourceVideoId(candidate, payload),
+      sourceStartMs: candidate.sourceStartMs,
+      sourceEndMs: candidate.sourceEndMs,
+      rangeIndex: 1
+    }];
+  }
+  return [];
 }
 
 function scoreRun(payload: Payload, expectedCuts: LabelledExpected[], output: GeminiOutput, run: number) {
@@ -207,34 +254,37 @@ function scoreRun(payload: Payload, expectedCuts: LabelledExpected[], output: Ge
   const noHitCandidateIndexes = new Set<number>();
   for (const [candidateOffset, candidate] of themes.entries()) {
     const candidateIndex = candidateOffset + 1;
-    if (!validCandidate(candidate)) {
+    const ranges = candidateEvidenceRanges(candidate, payload);
+    if (ranges.length === 0) {
       noHitCandidateIndexes.add(candidateIndex);
       continue;
     }
-    const sourceVideoId = candidateSourceVideoId(candidate, payload);
     let hit = false;
-    for (const expected of expectedCuts) {
-      if (!sourceVideoId || expected.sourceVideoId !== sourceVideoId) {
-        continue;
+    for (const range of ranges) {
+      for (const expected of expectedCuts) {
+        if (!range.sourceVideoId || expected.sourceVideoId !== range.sourceVideoId) {
+          continue;
+        }
+        const overlap = overlapMs(range.sourceStartMs, range.sourceEndMs, expected.sourceStartMs, expected.sourceEndMs);
+        if (overlap <= 0) {
+          continue;
+        }
+        hit = true;
+        hits.push({
+          expectedIndex: expected.expectedIndex,
+          expectedLabel: expected.label,
+          candidateIndex,
+          candidateRangeIndex: range.rangeIndex,
+          candidateThemeId: typeof candidate.themeId === 'string' ? candidate.themeId : undefined,
+          candidateTitle: typeof candidate.title === 'string' ? candidate.title : '(titleなし)',
+          sourceVideoId: range.sourceVideoId,
+          candidateStartMs: range.sourceStartMs,
+          candidateEndMs: range.sourceEndMs,
+          expectedStartMs: expected.sourceStartMs,
+          expectedEndMs: expected.sourceEndMs,
+          overlapMs: overlap
+        });
       }
-      const overlap = overlapMs(candidate.sourceStartMs, candidate.sourceEndMs, expected.sourceStartMs, expected.sourceEndMs);
-      if (overlap <= 0) {
-        continue;
-      }
-      hit = true;
-      hits.push({
-        expectedIndex: expected.expectedIndex,
-        expectedLabel: expected.label,
-        candidateIndex,
-        candidateThemeId: typeof candidate.themeId === 'string' ? candidate.themeId : undefined,
-        candidateTitle: typeof candidate.title === 'string' ? candidate.title : '(titleなし)',
-        sourceVideoId,
-        candidateStartMs: candidate.sourceStartMs,
-        candidateEndMs: candidate.sourceEndMs,
-        expectedStartMs: expected.sourceStartMs,
-        expectedEndMs: expected.sourceEndMs,
-        overlapMs: overlap
-      });
     }
     if (!hit) {
       noHitCandidateIndexes.add(candidateIndex);
@@ -387,10 +437,12 @@ function humanReviewHtml(input: {
               <dd>${escapeHtml(textOrMissing(row.candidate.title))}</dd>
               <dt>summary</dt>
               <dd>${escapeHtml(textOrMissing(row.candidate.summary))}</dd>
+              <dt>reason</dt>
+              <dd>${escapeHtml(textOrMissing(row.candidate.reason))}</dd>
               <dt>representativeQuote</dt>
               <dd>${escapeHtml(textOrMissing(row.candidate.representativeQuote))}</dd>
               <dt>候補範囲</dt>
-              <dd>${escapeHtml(`${row.hit.sourceVideoId} ${row.hit.candidateStartMs}-${row.hit.candidateEndMs}`)}</dd>
+              <dd>${escapeHtml(`${row.hit.sourceVideoId} range ${row.hit.candidateRangeIndex}: ${row.hit.candidateStartMs}-${row.hit.candidateEndMs}`)}</dd>
             </dl>
           </section>
         </div>
@@ -487,8 +539,8 @@ function sheetMarkdown(input: {
     '',
     '範囲hitした候補だけを載せる。これは人間判定用ではなく、既存の区間比較で得た範囲hitの証拠一覧。',
     '',
-    '| run | expected | candidate | title | summary | quote | transcript excerpt |',
-    '| ---: | --- | ---: | --- | --- | --- | --- |'
+    '| run | expected | candidate | range | title | summary | reason | quote | transcript excerpt |',
+    '| ---: | --- | ---: | ---: | --- | --- | --- | --- | --- |'
   ];
   for (const runScore of input.runs) {
     const output = input.outputs[runScore.run - 1];
@@ -496,7 +548,7 @@ function sheetMarkdown(input: {
       const candidate = output.themes?.[hit.candidateIndex - 1] ?? {};
       const excerpt = transcriptExcerpt(input.payload, hit.sourceVideoId, Math.min(hit.candidateStartMs, hit.expectedStartMs), Math.max(hit.candidateEndMs, hit.expectedEndMs))
         .replace(/\n/g, '<br>');
-      lines.push(`| ${runScore.run} | ${hit.expectedLabel} | ${hit.candidateIndex} | ${String(candidate.title ?? '').replace(/\|/g, '/')} | ${String(candidate.summary ?? '').replace(/\|/g, '/')} | ${String(candidate.representativeQuote ?? '').replace(/\|/g, '/')} | ${excerpt.replace(/\|/g, '/')} |`);
+      lines.push(`| ${runScore.run} | ${hit.expectedLabel} | ${hit.candidateIndex} | ${hit.candidateRangeIndex} | ${String(candidate.title ?? '').replace(/\|/g, '/')} | ${String(candidate.summary ?? '').replace(/\|/g, '/')} | ${String(candidate.reason ?? '').replace(/\|/g, '/')} | ${String(candidate.representativeQuote ?? '').replace(/\|/g, '/')} | ${excerpt.replace(/\|/g, '/')} |`);
     }
   }
   lines.push('');
@@ -544,12 +596,12 @@ function reportMarkdown(input: {
     }
   }
   lines.push('', '## 範囲hit候補', '');
-  lines.push('| fixture | run | expected | candidate | title | sourceVideoId | candidate range | expected range | overlapMs |');
-  lines.push('| --- | ---: | --- | ---: | --- | --- | --- | --- | ---: |');
+  lines.push('| fixture | run | expected | candidate | range | title | sourceVideoId | candidate range | expected range | overlapMs |');
+  lines.push('| --- | ---: | --- | ---: | ---: | --- | --- | --- | --- | ---: |');
   for (const report of input.fixtureReports) {
     for (const score of report.runScores) {
       for (const hit of score.hits) {
-        lines.push(`| ${report.fixtureId} | ${score.run} | ${hit.expectedIndex}: ${hit.expectedLabel.replace(/\|/g, '/')} | ${hit.candidateIndex} | ${hit.candidateTitle.replace(/\|/g, '/')} | ${hit.sourceVideoId} | ${hit.candidateStartMs}-${hit.candidateEndMs} | ${hit.expectedStartMs}-${hit.expectedEndMs} | ${hit.overlapMs} |`);
+        lines.push(`| ${report.fixtureId} | ${score.run} | ${hit.expectedIndex}: ${hit.expectedLabel.replace(/\|/g, '/')} | ${hit.candidateIndex} | ${hit.candidateRangeIndex} | ${hit.candidateTitle.replace(/\|/g, '/')} | ${hit.sourceVideoId} | ${hit.candidateStartMs}-${hit.candidateEndMs} | ${hit.expectedStartMs}-${hit.expectedEndMs} | ${hit.overlapMs} |`);
       }
     }
   }
@@ -620,6 +672,7 @@ async function scoreFixture(options: CliOptions, fixtureId: string) {
       break;
     }
     const output = await readJson<GeminiOutput>(outputPath);
+    requireOutputModel(output, `${fixtureId} run ${run}`);
     outputs.push(output);
     runScores.push(scoreRun(payload, expectedCuts, output, run));
   }
@@ -649,13 +702,26 @@ async function main() {
   for (const fixtureId of options.fixtureIds) {
     fixtureReports.push(await scoreFixture(options, fixtureId));
   }
+  const models = new Set(fixtureReports.flatMap((report) => (
+    report.outputs.map((output, index) => requireOutputModel(output, `${report.fixtureId} run ${index + 1}`))
+  )));
+  if (models.size !== 1) {
+    throw new Error(`異なるモデルの出力を同じ採点結果へ混在できません: ${[...models].join(', ')}`);
+  }
+  const model = [...models][0];
+  if (!model) {
+    throw new Error('採点対象の実モデル名を確定できません');
+  }
+  const labelledGenerationSystem = generationSystemLabel(options.generationSystem, model);
   const outputPath = path.join(evalRoot, 'outputs', 'theme-generation', `${options.generationSystem}-${options.outputId}-range-score.json`);
   const reportPath = path.join(evalRoot, 'reports', 'theme-generation', `${options.generationSystem}-${options.outputId}-range-score.md`);
   await mkdir(path.dirname(outputPath), { recursive: true });
   await mkdir(path.dirname(reportPath), { recursive: true });
   await writeFile(outputPath, `${JSON.stringify({
     runAt: new Date().toISOString(),
-    generationSystem: options.generationSystem,
+    generationSystem: labelledGenerationSystem,
+    generationSystemBase: options.generationSystem,
+    model,
     outputId: options.outputId,
     fixtureReports: fixtureReports.map((report) => ({
       fixtureId: report.fixtureId,
@@ -663,9 +729,9 @@ async function main() {
       titleVolatility: titleVolatility(report.outputs)
     }))
   }, null, 2)}\n`, 'utf8');
-  await writeFile(reportPath, reportMarkdown({ outputId: options.outputId, generationSystem: options.generationSystem, fixtureReports }), 'utf8');
+  await writeFile(reportPath, reportMarkdown({ outputId: options.outputId, generationSystem: labelledGenerationSystem, fixtureReports }), 'utf8');
   await writeFile(path.join(evalRoot, 'reports', 'theme-generation', `${options.generationSystem}-${options.outputId}-range-hit-evidence.html`), humanReviewHtml({
-    title: `${options.generationSystem} ${options.outputId} 範囲hit証拠一覧`,
+    title: `${labelledGenerationSystem} ${options.outputId} 範囲hit証拠一覧`,
     subtitle: '既存の区間比較と同じ考え方で、Gemini候補範囲と正解区間の重なりを記録します。人間への回答依頼ではありません。',
     rows: fixtureReports.flatMap((report) => hitReviewRows({
       fixtureId: report.fixtureId,

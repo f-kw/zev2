@@ -1,0 +1,49 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "サメに襲われころねを身代わりにしようとするマリン",
+      "reason": "サメが現れた際にマリンがころねを身代わりにしようと発言し、その後2人で悲鳴を上げながら襲われる一連の掛け合いが面白い場面であるため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 1200098,
+          "sourceEndMs": 1258062,
+          "supportingSpeechIds": [
+            "45-54"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "島で倒れてしまったころねを助けに向かうマリン",
+      "reason": "逆方向の島で荷物を無くさないよう倒れているころねに対し、マリンが場所を確認して救助へ向かう一連の文脈が成立しているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 1530000,
+          "sourceEndMs": 1619152,
+          "supportingSpeechIds": [
+            "59-64"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-10T07:46:16+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_03_YE-faluP7zY",
+    "windowSourceVideoId": "YE-faluP7zY",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nOEWCNc77MI_rough_top50_speech_chars_source_only_v001/theme-llm-v002/nOEWCNc77MI-rough-top50-theme-input-after-stt-20260710-v001/windows/window_03_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/00f1c444035fcb46?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"サメに襲われころねを身代わりにしようとするマリン\",\n      \"reason\": \"サメが現れた際にマリンがころねを身代わりにしようと発言し、その後2人で悲鳴を上げながら襲われる一連の掛け合いが面白い場面であるため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 1200098,\n          \"sourceEndMs\": 1258062,\n          \"supportingSpeechIds\": [\n            \"45-54\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"島で倒れてしまったころねを助けに向かうマリン\",\n      \"reason\": \"逆方向の島で荷物を無くさないよう倒れているころねに対し、マリンが場所を確認して救助へ向かう一連の文脈が成立しているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 1530000,\n          \"sourceEndMs\": 1619152,\n          \"supportingSpeechIds\": [\n            \"59-64\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

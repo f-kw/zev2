@@ -1,0 +1,64 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "お腹がすいたマリンに芋を配るころね",
+      "reason": "マリンのお腹がすいているという発話に対し、ころねが大量の芋を勧めて食べさせようとする微笑ましいやり取りが完結しているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 570560,
+          "sourceEndMs": 600004,
+          "supportingSpeechIds": [
+            "23-25"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "マリンの雑な反応と予想外のフォロー",
+      "reason": "ころねがマリンに心配を求めるも雑にあしらわれ、その直後にころねがマリンの作業姿勢を褒めるというツンデレ的な展開があるため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 870042,
+          "sourceEndMs": 899732,
+          "supportingSpeechIds": [
+            "30-35"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_003",
+      "title": "エイムに自信があるマリンとイノシシ退治へ",
+      "reason": "島にいるイノシシを撃ち殺すと意気込むマリンのエイムの自信に対するやり取りと、島への探索開始の掛け合いが描かれているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 960122,
+          "sourceEndMs": 1009243,
+          "supportingSpeechIds": [
+            "36-40"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-10T07:46:03+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_02_YE-faluP7zY",
+    "windowSourceVideoId": "YE-faluP7zY",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nOEWCNc77MI_rough_top50_speech_chars_source_only_v001/theme-llm-v002/nOEWCNc77MI-rough-top50-theme-input-after-stt-20260710-v001/windows/window_02_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/e48b3400b2f332da?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"お腹がすいたマリンに芋を配るころね\",\n      \"reason\": \"マリンのお腹がすいているという発話に対し、ころねが大量の芋を勧めて食べさせようとする微笑ましいやり取りが完結しているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 570560,\n          \"sourceEndMs\": 600004,\n          \"supportingSpeechIds\": [\"23-25\"]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"マリンの雑な反応と予想外のフォロー\",\n      \"reason\": \"ころねがマリンに心配を求めるも雑にあしらわれ、その直後にころねがマリンの作業姿勢を褒めるというツンデレ的な展開があるため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 870042,\n          \"sourceEndMs\": 899732,\n          \"supportingSpeechIds\": [\"30-35\"]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_003\",\n      \"title\": \"エイムに自信があるマリンとイノシシ退治へ\",\n      \"reason\": \"島にいるイノシシを撃ち殺すと意気込むマリンのエイムの自信に対するやり取りと、島への探索開始の掛け合いが描かれているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 960122,\n          \"sourceEndMs\": 1009243,\n          \"supportingSpeechIds\": [\"36-40\"]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

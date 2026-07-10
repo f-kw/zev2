@@ -1,0 +1,64 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "島の上陸直後に突如現れたイノシシに驚く二人",
+      "reason": "宝鐘マリンが画面を見てと促した直後にイノシシを発見し、二人がパニックになりながら驚く場面として切り抜きが成立するため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 1650098,
+          "sourceEndMs": 1679406,
+          "supportingSpeechIds": [
+            "65-70"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "「クジラ肉」と言い間違えてツッコまれる宝鐘マリン",
+      "reason": "持ち物の肉を「クジラ肉」と言い間違えた宝鐘マリンに対し、戌神ころねが即座にツッコミを入れるコミカルな掛け合いであるため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 2010702,
+          "sourceEndMs": 2023511,
+          "supportingSpeechIds": [
+            "75-76"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_003",
+      "title": "向かってくるイノシシの対策とエイムを考察する二人",
+      "reason": "手強いイノシシに対して、逃げずに突進してくる特性を活かして弓矢のエイムを当てる作戦を立てる会話として成立するため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 2401186,
+          "sourceEndMs": 2429652,
+          "supportingSpeechIds": [
+            "79-81"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-10T07:46:30+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_04_YE-faluP7zY",
+    "windowSourceVideoId": "YE-faluP7zY",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nOEWCNc77MI_rough_top50_speech_chars_source_only_v001/theme-llm-v002/nOEWCNc77MI-rough-top50-theme-input-after-stt-20260710-v001/windows/window_04_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/d5d65a8ad52f155f?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"島の上陸直後に突如現れたイノシシに驚く二人\",\n      \"reason\": \"宝鐘マリンが画面を見てと促した直後にイノシシを発見し、二人がパニックになりながら驚く場面として切り抜きが成立するため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 1650098,\n          \"sourceEndMs\": 1679406,\n          \"supportingSpeechIds\": [\n            \"65-70\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"「クジラ肉」と言い間違えてツッコまれる宝鐘マリン\",\n      \"reason\": \"持ち物の肉を「クジラ肉」と言い間違えた宝鐘マリンに対し、戌神ころねが即座にツッコミを入れるコミカルな掛け合いであるため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 2010702,\n          \"sourceEndMs\": 2023511,\n          \"supportingSpeechIds\": [\n            \"75-76\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_003\",\n      \"title\": \"向かってくるイノシシの対策とエイムを考察する二人\",\n      \"reason\": \"手強いイノシシに対して、逃げずに突進してくる特性を活かして弓矢のエイムを当てる作戦を立てる会話として成立するため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 2401186,\n          \"sourceEndMs\": 2429652,\n          \"supportingSpeechIds\": [\n            \"79-81\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

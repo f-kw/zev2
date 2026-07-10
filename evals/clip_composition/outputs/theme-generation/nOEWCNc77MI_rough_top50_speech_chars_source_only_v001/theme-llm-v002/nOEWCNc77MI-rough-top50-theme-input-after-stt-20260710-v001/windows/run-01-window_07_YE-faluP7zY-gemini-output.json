@@ -1,0 +1,64 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "資材の収納順を相談するころねとマリン",
+      "reason": "手に入れた板などの資材を、使う順番に応じて一番上の箱からしまっていくルールを二人で決めている場面です。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 6883925,
+          "sourceEndMs": 6898637,
+          "supportingSpeechIds": [
+            "138-140"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "未来の心配をするころねとマリンの軽快な掛け合い",
+      "reason": "木を入れる場所に葉っぱを入れると将来溢れてしまうと心配するころねに対し、マリンが「まだないならいいじゃねえかよ」とテンポよく突っ込む会話が切り抜きとして成立します。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 8370340,
+          "sourceEndMs": 8399703,
+          "supportingSpeechIds": [
+            "141-144"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_003",
+      "title": "ベッドの上位互換からイカダの装飾へ夢を膨らませる二人",
+      "reason": "ベッドの上位互換が旅館ではないかとボケつつ、旗やカーテン、吹き抜けの有無など今後のイカダの建築プランについて楽しく話し合っている場面です。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 9690066,
+          "sourceEndMs": 9779864,
+          "supportingSpeechIds": [
+            "145-154"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-10T07:47:14+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_07_YE-faluP7zY",
+    "windowSourceVideoId": "YE-faluP7zY",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nOEWCNc77MI_rough_top50_speech_chars_source_only_v001/theme-llm-v002/nOEWCNc77MI-rough-top50-theme-input-after-stt-20260710-v001/windows/window_07_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/04b3b7625530656a?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"資材の収納順を相談するころねとマリン\",\n      \"reason\": \"手に入れた板などの資材を、使う順番に応じて一番上の箱からしまっていくルールを二人で決めている場面です。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 6883925,\n          \"sourceEndMs\": 6898637,\n          \"supportingSpeechIds\": [\n            \"138-140\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"未来の心配をするころねとマリンの軽快な掛け合い\",\n      \"reason\": \"木を入れる場所に葉っぱを入れると将来溢れてしまうと心配するころねに対し、マリンが「まだないならいいじゃねえかよ」とテンポよく突っ込む会話が切り抜きとして成立します。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 8370340,\n          \"sourceEndMs\": 8399703,\n          \"supportingSpeechIds\": [\n            \"141-144\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_003\",\n      \"title\": \"ベッドの上位互換からイカダの装飾へ夢を膨らませる二人\",\n      \"reason\": \"ベッドの上位互換が旅館ではないかとボケつつ、旗やカーテン、吹き抜けの有無など今後のイカダの建築プランについて楽しく話し合っている場面です。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 9690066,\n          \"sourceEndMs\": 9779864,\n          \"supportingSpeechIds\": [\n            \"145-154\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

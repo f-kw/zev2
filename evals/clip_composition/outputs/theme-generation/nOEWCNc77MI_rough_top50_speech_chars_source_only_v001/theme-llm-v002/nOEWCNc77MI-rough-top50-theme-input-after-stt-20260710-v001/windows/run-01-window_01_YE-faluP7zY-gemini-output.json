@@ -1,0 +1,57 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "船のリフォームお披露目とまさかの愚痴",
+      "reason": "宝鐘マリンがリスナーに向けて新しくなった船のリフォーム内容と、想像以上に資材を消費した割にサメに壊されてしまうという想定外の不満を語る場面です。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 335402,
+          "sourceEndMs": 359330,
+          "supportingSpeechIds": [
+            3
+          ]
+        },
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 511410,
+          "sourceEndMs": 539932,
+          "supportingSpeechIds": [
+            20
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "ピンク色の空に見立てた二人の関係性",
+      "reason": "綺麗なピンク色の空（朝日）を見ながら、お互いの心や関係性の色に例えようとして独特の空気感になる二人の掛け合いが魅力的です。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 397197,
+          "sourceEndMs": 438186,
+          "supportingSpeechIds": [
+            "7-18"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-10T07:45:49+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_01_YE-faluP7zY",
+    "windowSourceVideoId": "YE-faluP7zY",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nOEWCNc77MI_rough_top50_speech_chars_source_only_v001/theme-llm-v002/nOEWCNc77MI-rough-top50-theme-input-after-stt-20260710-v001/windows/window_01_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/a4f01cc4f14e1c33?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"船のリフォームお披露目とまさかの愚痴\",\n      \"reason\": \"宝鐘マリンがリスナーに向けて新しくなった船のリフォーム内容と、想像以上に資材を消費した割にサメに壊されてしまうという想定外の不満を語る場面です。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 335402,\n          \"sourceEndMs\": 359330,\n          \"supportingSpeechIds\": [3]\n        },\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 511410,\n          \"sourceEndMs\": 539932,\n          \"supportingSpeechIds\": [20]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"ピンク色の空に見立てた二人の関係性\",\n      \"reason\": \"綺麗なピンク色の空（朝日）を見ながら、お互いの心や関係性の色に例えようとして独特の空気感になる二人の掛け合いが魅力的です。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 397197,\n          \"sourceEndMs\": 438186,\n          \"supportingSpeechIds\": [\"7-18\"]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

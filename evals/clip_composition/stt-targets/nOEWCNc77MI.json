@@ -1,0 +1,86 @@
+{
+  "targetId": "nOEWCNc77MI",
+  "title": "ころねのボケ連発で過去1番の大笑いをするマリン船長まとめ【宝鐘マリン/戌神ころね/ホロライブ切り抜き】",
+  "createdAt": "2026-07-09T16:35:10+09:00",
+  "clip": {
+    "id": "nOEWCNc77MI",
+    "sttId": "nOEWCNc77MI",
+    "url": "https://www.youtube.com/watch?v=nOEWCNc77MI",
+    "localVideoPath": "evals/clip_composition/research/downloads/nOEWCNc77MI/nOEWCNc77MI.mp4",
+    "durationSec": 507,
+    "sttRole": "clip",
+    "notes": [
+      "BGM、SE、字幕由来の誤認識、切り抜き師が追加した要素を正常なノイズとして扱う。",
+      "説明欄に元配信URLが複数あり、単一元配信とは限らない。最初から複数元配信型として扱う。"
+    ]
+  },
+  "sourceDiscovery": {
+    "status": "primary_source_downloaded_and_freeze_stt_in_progress",
+    "notes": [
+      "説明欄URL 10本のメタデータを確認した結果、長尺の元配信主候補はYE-faluP7zYのみ。他は関連切り抜きまたはBGM参照として扱う。",
+      "元配信動画は取得済み。発話量上位50のローカルSTT、source-only入力、漏洩検査、theme-llm-v002形式品質判定は完了。",
+      "凍結用全域STTは395チャンク中159件のraw応答があり、先頭123件が連続完了。STTサーバー停止のためindex 123から再開待ち。",
+      "fixture凍結には全域STT完了、DP照合、素材ブロック再構成、人間確認、固定テーマ入力が必要。"
+    ],
+    "primarySourceCandidate": {
+      "id": "YE-faluP7zY",
+      "title": "【Raft】ころね、キミさえいればこの海の果てまでだって──【ホロライブ/宝鐘マリン】",
+      "url": "https://www.youtube.com/watch?v=YE-faluP7zY",
+      "durationSec": 11824,
+      "durationText": "3:17:04",
+      "channel": "Marine Ch. 宝鐘マリン",
+      "sttId": "nOEWCNc77MI_YE-faluP7zY_local30_v001",
+      "localVideoPath": "evals/clip_composition/research/downloads/nOEWCNc77MI/sources/YE-faluP7zY/YE-faluP7zY.mp4"
+    },
+    "relatedReferences": [
+      {
+        "id": "wjfGDpwpK4U",
+        "type": "related_clip"
+      },
+      {
+        "id": "cJ6FAU1KalQ",
+        "type": "related_clip"
+      },
+      {
+        "id": "o7bCgGqJetI",
+        "type": "related_clip"
+      },
+      {
+        "id": "105X7JDFnWk",
+        "type": "related_clip"
+      },
+      {
+        "id": "U2LAv5BZwsM",
+        "type": "related_clip"
+      },
+      {
+        "id": "E1DqdLBLIig",
+        "type": "related_clip"
+      },
+      {
+        "id": "ZCZbl_tfyDE",
+        "type": "related_clip"
+      },
+      {
+        "id": "Z1LLSamGWSM",
+        "type": "related_clip"
+      },
+      {
+        "id": "00KLVYvir2k",
+        "type": "bgm_reference"
+      }
+    ]
+  },
+  "requiredOutputs": [
+    "clip側STT結果",
+    "元動画候補の絞り込み",
+    "元動画候補の単語タイムスタンプ付きSTT結果",
+    "DP単調アラインメント結果",
+    "素材境界確認パッケージ",
+    "人間確認後のexpectedCuts候補"
+  ],
+  "freezeStatus": {
+    "readyForFreeze": false,
+    "reason": "元配信は特定・取得済み。発話量上位50のテーマ生成形式品質判定は有効。凍結用全域STTはSTTサーバー復旧待ちで、DP照合、素材ブロック再構成、人間確認、固定テーマ入力が未完了。"
+  }
+}

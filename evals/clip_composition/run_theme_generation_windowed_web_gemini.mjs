@@ -88,13 +88,93 @@ function rangesOverlap(left, right) {
   return Math.max(0, Math.min(left.sourceEndMs, right.sourceEndMs) - Math.max(left.sourceStartMs, right.sourceStartMs)) > 0;
 }
 
-function normalizeTheme(theme, window) {
-  const sourceVideoId = typeof theme.sourceVideoId === 'string' && theme.sourceVideoId.trim()
-    ? theme.sourceVideoId.trim()
-    : window.sourceVideoId;
+function expandSupportingSpeechIds(values, speechById, context) {
+  if (!Array.isArray(values) || values.length === 0) {
+    throw new Error(`${context} に supportingSpeechIds がありません`);
+  }
+  const ids = [];
+  const seen = new Set();
+  const append = (speechId) => {
+    if (!speechById.has(speechId)) {
+      throw new Error(`${context} が入力窓にない speechId ${speechId} を参照しています`);
+    }
+    if (!seen.has(speechId)) {
+      seen.add(speechId);
+      ids.push(speechId);
+    }
+  };
+  for (const value of values) {
+    if (Number.isInteger(value) && value > 0) {
+      append(value);
+      continue;
+    }
+    const text = String(value).trim();
+    const singleMatch = text.match(/^([1-9]\d*)$/);
+    if (singleMatch) {
+      append(Number(singleMatch[1]));
+      continue;
+    }
+    const rangeMatch = text.match(/^([1-9]\d*)-([1-9]\d*)$/);
+    if (!rangeMatch) {
+      throw new Error(`${context} の supportingSpeechIds 形式が不正です: ${text}`);
+    }
+    const start = Number(rangeMatch[1]);
+    const end = Number(rangeMatch[2]);
+    if (end < start) {
+      throw new Error(`${context} の speechId 範囲が逆順です: ${text}`);
+    }
+    for (let speechId = start; speechId <= end; speechId += 1) {
+      append(speechId);
+    }
+  }
+  return ids;
+}
+
+function resolveEvidenceRanges(theme, window, promptInput, context) {
+  const segments = (Array.isArray(promptInput?.modelInput?.sources) ? promptInput.modelInput.sources : [])
+    .flatMap((source) => Array.isArray(source?.segments) ? source.segments : []);
+  const speechById = new Map(segments.map((segment) => [segment.speechId, segment]));
+  if (speechById.size === 0) {
+    throw new Error(`${context} の入力窓に発話がありません`);
+  }
+  if (!Array.isArray(theme.evidenceRanges) || theme.evidenceRanges.length === 0) {
+    throw new Error(`${context} に evidenceRanges がありません`);
+  }
+  return theme.evidenceRanges.map((range, rangeIndex) => {
+    const rangeContext = `${context} evidenceRanges[${rangeIndex}]`;
+    const speechIds = expandSupportingSpeechIds(range?.supportingSpeechIds, speechById, rangeContext);
+    const selectedSegments = speechIds.map((speechId) => speechById.get(speechId));
+    const sourceVideoIds = [...new Set(selectedSegments.map((segment) => segment.sourceVideoId))];
+    if (sourceVideoIds.length !== 1 || sourceVideoIds[0] !== window.sourceVideoId) {
+      throw new Error(`${rangeContext} の元配信参照が入力窓と一致しません`);
+    }
+    const sourceStartMs = Math.min(...selectedSegments.map((segment) => segment.sourceStartMs));
+    const sourceEndMs = Math.max(...selectedSegments.map((segment) => segment.sourceEndMs));
+    const reportedSourceStartMs = Number.isFinite(range?.sourceStartMs) ? range.sourceStartMs : null;
+    const reportedSourceEndMs = Number.isFinite(range?.sourceEndMs) ? range.sourceEndMs : null;
+    return {
+      ...range,
+      sourceVideoId: sourceVideoIds[0],
+      sourceStartMs,
+      sourceEndMs,
+      supportingSpeechIds: range.supportingSpeechIds,
+      timingResolution: {
+        source: 'supportingSpeechIds',
+        reportedSourceStartMs,
+        reportedSourceEndMs,
+        corrected: reportedSourceStartMs !== sourceStartMs || reportedSourceEndMs !== sourceEndMs
+      }
+    };
+  });
+}
+
+function normalizeTheme(theme, window, promptInput, context) {
+  const evidenceRanges = resolveEvidenceRanges(theme, window, promptInput, context);
+  const sourceVideoId = window.sourceVideoId;
   return {
     ...theme,
     sourceVideoId,
+    evidenceRanges,
     windowId: window.windowId,
     windowSourceVideoId: window.sourceVideoId
   };
@@ -159,12 +239,19 @@ async function aggregateRun(plan, run) {
     const windowOutputPath = path.join(evalRoot, 'outputs', 'theme-generation', options.fixtureId, options.generationSystem, options.outputId, 'windows', `run-${String(run).padStart(2, '0')}-${window.windowId}-gemini-output.json`);
     const output = await readJson(windowOutputPath);
     assertCompleteGeminiOutput(output, `run ${run} ${window.windowId}`);
-    const windowThemes = Array.isArray(output.themes) ? output.themes.map((theme) => normalizeTheme(theme, window)) : [];
+    const promptInput = await readJson(path.join(root, window.payloadPath));
+    const windowThemes = Array.isArray(output.themes)
+      ? output.themes.map((theme, themeIndex) => normalizeTheme(theme, window, promptInput, `run ${run} ${window.windowId} theme ${themeIndex + 1}`))
+      : [];
+    const timingCorrectionCount = windowThemes.reduce((count, theme) => (
+      count + theme.evidenceRanges.filter((range) => range.timingResolution.corrected).length
+    ), 0);
     themes.push(...windowThemes);
     windowResults.push({
       windowId: window.windowId,
       sourceVideoId: window.sourceVideoId,
       themeCount: windowThemes.length,
+      timingCorrectionCount,
       extractionStatus: output.extractionStatus
     });
   }
@@ -177,6 +264,7 @@ async function aggregateRun(plan, run) {
       ...options.params,
       windowed: true,
       windowRequestedThemeCount: plan.requestedThemeCount,
+      evidenceTiming: 'resolved_from_supporting_speech_ids',
       aggregateCandidateLimit: 'not_applied_no_semantic_ranker'
     },
     themes: mergedThemes,
@@ -185,6 +273,7 @@ async function aggregateRun(plan, run) {
       windowCount: plan.windows.length,
       preMergeCandidateCount: themes.length,
       postMergeCandidateCount: mergedThemes.length,
+      timingCorrectionCount: windowResults.reduce((count, window) => count + window.timingCorrectionCount, 0),
       merge: '同一sourceVideoIdで根拠範囲が重なる候補だけを機械統合。意味ベースの統合はしない。',
       windows: windowResults
     }

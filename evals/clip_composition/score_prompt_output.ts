@@ -6,7 +6,7 @@ type CliOptions = {
   fixtureId: string;
   promptVersion: string;
   inputFile: string;
-  model: string;
+  model?: string;
   params: Record<string, unknown>;
 };
 
@@ -198,7 +198,7 @@ function parseOptions(argv: string[]): CliOptions {
     fixtureId: sanitizePathPart(fixtureId),
     promptVersion: normalizePromptVersion(rawPromptVersion),
     inputFile: path.resolve(inputFile),
-    model: values.get('model')?.trim() || 'external-prompt-output',
+    ...(values.get('model')?.trim() ? { model: values.get('model')!.trim() } : {}),
     params: parseParams(values.get('params'))
   };
 }
@@ -230,8 +230,10 @@ function parseParams(value: string | undefined): Record<string, unknown> {
 
 function llmGenerationSystem(promptVersion: string, model: string, inputFile: string): Record<string, unknown> {
   const suffix = promptVersion.replace(/^clip_composition_prompt_/, '');
+  const baseId = `llm-${suffix}`;
   return {
-    id: `llm-${suffix}`,
+    id: `${baseId}@${model}`,
+    baseId,
     kind: 'llm',
     intervalGenerator: 'web-gemini+prompt',
     promptVersion,
@@ -239,6 +241,20 @@ function llmGenerationSystem(promptVersion: string, model: string, inputFile: st
     model,
     sourceOutput: inputFile
   };
+}
+
+function resolveModel(optionModel: string | undefined, candidateOutput: CandidateOutput): string {
+  const outputModel = typeof candidateOutput.model === 'string' && candidateOutput.model.trim()
+    ? candidateOutput.model.trim()
+    : undefined;
+  if (optionModel && outputModel && optionModel !== outputModel) {
+    throw new Error(`--model ${optionModel} とLLM出力のモデル ${outputModel} が一致しません`);
+  }
+  const model = optionModel ?? outputModel;
+  if (!model) {
+    throw new Error('生成系統へ実モデル名を記録するため、LLM出力に model を含めるか --model を指定してください');
+  }
+  return model;
 }
 
 async function readJson<T>(filePath: string): Promise<T> {
@@ -951,6 +967,7 @@ async function main() {
   const themes = validateThemes(await readJson(path.join(fixtureDir, fixture.themesPath)), fixture.selectedThemeId);
   const expectedFile = validateExpectedFile(await readJson(path.join(evalRoot, 'expected', `${options.fixtureId}.json`)));
   const candidateOutput = validateCandidateOutput(await readJson(options.inputFile));
+  const model = resolveModel(options.model, candidateOutput);
   if (expectedFile.draftId !== fixture.draftId) {
     throw new Error('fixtureの下書きIDと期待値の下書きIDが一致しません');
   }
@@ -988,8 +1005,8 @@ async function main() {
     draftId: fixture.draftId,
     fixtureId: fixture.fixtureId,
     promptVersion: options.promptVersion,
-    generationSystem: llmGenerationSystem(options.promptVersion, options.model, options.inputFile),
-    model: options.model,
+    generationSystem: llmGenerationSystem(options.promptVersion, model, options.inputFile),
+    model,
     params: options.params,
     evaluationMode: 'external_prompt_output',
     inputFile: options.inputFile,
@@ -1013,8 +1030,8 @@ async function main() {
   await writeFile(summaryPath, buildSummaryMarkdown({
     fixture,
     promptVersion: options.promptVersion,
-    generationSystem: llmGenerationSystem(options.promptVersion, options.model, options.inputFile),
-    model: options.model,
+    generationSystem: llmGenerationSystem(options.promptVersion, model, options.inputFile),
+    model,
     params: options.params,
     inputFile: options.inputFile,
     selectedCuts: candidateOutput.selectedCuts,

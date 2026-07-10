@@ -1,0 +1,117 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "島の到着と建築計画",
+      "reason": "偶然島に到着したことをきっかけに、3階建ての建築アイデアを二人で膨らませているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 4962185,
+          "sourceEndMs": 4978741,
+          "supportingSpeechIds": [
+            "109-112"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "突如襲いかかるサメへの憤怒",
+      "reason": "ゲーム内で命の危機を感じる昔話から急転直下、サメの急襲を受けて感情を露わにする展開が面白いため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 5250620,
+          "sourceEndMs": 5279310,
+          "supportingSpeechIds": [
+            "113-114"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_003",
+      "title": "階段裏のデッドスペース活用",
+      "reason": "収納スペースの拡張について、階段裏のデッドスペースを使うアイデアを提案し合っているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 5402383,
+          "sourceEndMs": 5430003,
+          "supportingSpeechIds": [
+            "115-119"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_004",
+      "title": "2階のレイアウトと素材集め",
+      "reason": "2階でヤシの木を育てる計画と、移動時の不便さを解消するための素材集めについて話し合っているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 5460342,
+          "sourceEndMs": 5489452,
+          "supportingSpeechIds": [
+            120
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_005",
+      "title": "水遠い問題と清浄機の設置議論",
+      "reason": "水汲みの動線問題を解決するために、各階に清浄機を設置するメリットとデメリットを具体的に議論しているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 5821110,
+          "sourceEndMs": 5849852,
+          "supportingSpeechIds": [
+            "121-123"
+          ]
+        },
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 6531258,
+          "sourceEndMs": 6558467,
+          "supportingSpeechIds": [
+            "127-130"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_006",
+      "title": "呼び捨てのてぇてぇ匂わせ",
+      "reason": "「マリン」と呼び捨てにすることに対して、二人の距離感が縮まっていることを感じさせるてぇてぇ会話が繰り広げられているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 6480406,
+          "sourceEndMs": 6510760,
+          "supportingSpeechIds": [
+            "125-126"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-10T07:47:01+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_06_YE-faluP7zY",
+    "windowSourceVideoId": "YE-faluP7zY",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nOEWCNc77MI_rough_top50_speech_chars_source_only_v001/theme-llm-v002/nOEWCNc77MI-rough-top50-theme-input-after-stt-20260710-v001/windows/window_06_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/ef50d7a96df041ad?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"島の到着と建築計画\",\n      \"reason\": \"偶然島に到着したことをきっかけに、3階建ての建築アイデアを二人で膨らませているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 4962185,\n          \"sourceEndMs\": 4978741,\n          \"supportingSpeechIds\": [\n            \"109-112\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"突如襲いかかるサメへの憤怒\",\n      \"reason\": \"ゲーム内で命の危機を感じる昔話から急転直下、サメの急襲を受けて感情を露わにする展開が面白いため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 5250620,\n          \"sourceEndMs\": 5279310,\n          \"supportingSpeechIds\": [\n            \"113-114\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_003\",\n      \"title\": \"階段裏のデッドスペース活用\",\n      \"reason\": \"収納スペースの拡張について、階段裏のデッドスペースを使うアイデアを提案し合っているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 5402383,\n          \"sourceEndMs\": 5430003,\n          \"supportingSpeechIds\": [\n            \"115-119\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_004\",\n      \"title\": \"2階のレイアウトと素材集め\",\n      \"reason\": \"2階でヤシの木を育てる計画と、移動時の不便さを解消するための素材集めについて話し合っているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 5460342,\n          \"sourceEndMs\": 5489452,\n          \"supportingSpeechIds\": [\n            120\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_005\",\n      \"title\": \"水遠い問題と清浄機の設置議論\",\n      \"reason\": \"水汲みの動線問題を解決するために、各階に清浄機を設置するメリットとデメリットを具体的に議論しているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 5821110,\n          \"sourceEndMs\": 5849852,\n          \"supportingSpeechIds\": [\n            \"121-123\"\n          ]\n        },\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 6531258,\n          \"sourceEndMs\": 6558467,\n          \"supportingSpeechIds\": [\n            \"127-130\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_006\",\n      \"title\": \"呼び捨てのてぇてぇ匂わせ\",\n      \"reason\": \"「マリン」と呼び捨てにすることに対して、二人の距離感が縮まっていることを感じさせるてぇてぇ会話が繰り広げられているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 6480406,\n          \"sourceEndMs\": 6510760,\n          \"supportingSpeechIds\": [\n            \"125-126\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}
