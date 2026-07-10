@@ -347,7 +347,47 @@ node evals/clip_composition/freeze_material_block_fixture.mjs \
 
 dry-runの出力が妥当なら `--dry-run` を外して実行します。
 
-複数区間、除外範囲、複数元動画を含むfixtureは、現時点ではfixtureごとの凍結実装で扱っています。既存の `freeze_xau_part01_partial_fixture.mjs` はXau専用なので、別動画へそのまま使ってはいけません。新しい複数区間fixtureを凍結する場合は、`evals/clip_composition/` 内だけで専用または汎用凍結スクリプトを作り、必ずdry-runと人間確認記録を通します。
+単一元動画から複数素材ブロックを凍結する場合は、汎用のpreview経路を使います。人間確認前に実行すると、全ブロックのSTT対応、素材ブロック数、境界数、書き込み予定先を検査し、人間確認decisionのテンプレートだけを作ります。この段階ではfixture/expectedへ書き込みません。
+
+```bash
+FIXTURE_ID="${CLIP_ID}_multiblock_material_v001"
+PREVIEW_ID="pre-human-v001"
+
+node evals/clip_composition/freeze_multiblock_material_fixture.mjs \
+  --fixture "${FIXTURE_ID}" \
+  --target "evals/clip_composition/stt-targets/${CLIP_ID}.json" \
+  --materialBlocks "evals/clip_composition/outputs/material-blocks-${CLIP_ID}-${BLOCK_OUTPUT_ID}.json" \
+  --reviewPackage "evals/clip_composition/outputs/boundary-check/${CLIP_ID}/${BLOCK_OUTPUT_ID}/index.html" \
+  --sourceSttId "${SOURCE_STT_ID}" \
+  --sourceVideoId "${SOURCE_VIDEO_ID}" \
+  --outputId "${PREVIEW_ID}"
+```
+
+previewは次を検査します。
+
+- 素材ブロックが2件以上で、境界数がブロック数-1である。
+- ブロックと境界の番号・前後関係・時間範囲が矛盾しない。
+- 全ブロックに凍結用ローカルSTTの単語が対応する。
+- 素材ブロックJSONと確認パッケージをSHA-256で人間確認decisionへ固定する。
+- 人間確認、固定テーマ、凍結許可が未入力ならfixture/expected書き込み指定を失敗させる。
+
+人間確認後は、生成されたdecisionテンプレートの全ブロックと全境界を確定し、固定テーマを入力します。採用ブロックは `accepted`、不採用は理由付き `rejected`、判定不能は理由付き `unresolved` とします。連続して採用する2ブロック間の境界は、前側一致・後側一致・元配信位置の切り替わりがすべて確認済みでなければ `confirmed` にできません。
+
+まずdecisionを指定したまま書き込み指定なしで再実行し、`fixtureWriteReady: true` とfixture/transcript/themes/expectedのdraftを確認します。実凍結は、その同じdecisionを指定して `--writeFixture true` を追加したときだけ行います。既存fixture/expectedは上書きしません。
+
+```bash
+node evals/clip_composition/freeze_multiblock_material_fixture.mjs \
+  --fixture "${FIXTURE_ID}" \
+  --target "evals/clip_composition/stt-targets/${CLIP_ID}.json" \
+  --materialBlocks "evals/clip_composition/outputs/material-blocks-${CLIP_ID}-${BLOCK_OUTPUT_ID}.json" \
+  --reviewPackage "evals/clip_composition/outputs/boundary-check/${CLIP_ID}/${BLOCK_OUTPUT_ID}/index.html" \
+  --sourceSttId "${SOURCE_STT_ID}" \
+  --sourceVideoId "${SOURCE_VIDEO_ID}" \
+  --decision "人間確認後のdecision JSON" \
+  --outputId "post-human-dry-run-v001"
+```
+
+複数元動画を含むfixtureは、この汎用経路の対象外です。既存の `freeze_xau_part01_partial_fixture.mjs` はXau専用なので、別動画へそのまま使ってはいけません。新しい複数元動画fixtureは、`evals/clip_composition/` 内で別の凍結経路を作り、必ずdry-runと人間確認記録を通します。
 
 ## 10. 凍結後の確認
 
