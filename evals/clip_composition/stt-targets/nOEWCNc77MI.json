@@ -15,12 +15,14 @@
     ]
   },
   "sourceDiscovery": {
-    "status": "primary_source_downloaded_and_freeze_stt_in_progress",
+    "status": "human_review_package_ready",
     "notes": [
       "説明欄URL 10本のメタデータを確認した結果、長尺の元配信主候補はYE-faluP7zYのみ。他は関連切り抜きまたはBGM参照として扱う。",
       "元配信動画は取得済み。発話量上位50のローカルSTT、source-only入力、漏洩検査、theme-llm-v002形式品質判定は完了。",
-      "凍結用全域STTは395チャンク中159件のraw応答があり、先頭123件が連続完了。STTサーバー停止のためindex 123から再開待ち。",
-      "fixture凍結には全域STT完了、DP照合、素材ブロック再構成、人間確認、固定テーマ入力が必要。"
+      "凍結用全域STTは395/395チャンク完了。STTサーバーの再起動をまたいだが保存済みraw応答を再利用し、欠落なく完走した。",
+      "STT応答は実音声チャンク境界へ正規化済み。16発話・16語をチャンク外として除外し、32発話・32語を境界で補正した。生の応答は変更していない。",
+      "全域DPの29候補と選択窓DPの13候補を、完全一致8件だけ重複除去し、非競合34候補へ統合した。17素材ブロック・16境界の確認パッケージを生成し、参照媒体の欠落と無効時間がないことを機械確認済み。",
+      "fixture凍結には、確認パッケージの人間確認と固定テーマ入力が残っている。"
     ],
     "primarySourceCandidate": {
       "id": "YE-faluP7zY",
@@ -30,6 +32,19 @@
       "durationText": "3:17:04",
       "channel": "Marine Ch. 宝鐘マリン",
       "sttId": "nOEWCNc77MI_YE-faluP7zY_local30_v001",
+      "sttStatus": {
+        "fullChunkCount": 395,
+        "processedChunkCount": 395,
+        "partial": false,
+        "segmentCount": 53180,
+        "wordTimestampCount": 53180,
+        "boundaryResolution": {
+          "discardedSegmentCount": 16,
+          "clampedSegmentCount": 32,
+          "discardedWordCount": 16,
+          "clampedWordCount": 32
+        }
+      },
       "localVideoPath": "evals/clip_composition/research/downloads/nOEWCNc77MI/sources/YE-faluP7zY/YE-faluP7zY.mp4"
     },
     "relatedReferences": [
@@ -81,6 +96,6 @@
   ],
   "freezeStatus": {
     "readyForFreeze": false,
-    "reason": "元配信は特定・取得済み。発話量上位50のテーマ生成形式品質判定は有効。凍結用全域STTはSTTサーバー復旧待ちで、DP照合、素材ブロック再構成、人間確認、固定テーマ入力が未完了。"
+    "reason": "元配信の全域STT、DP照合、素材ブロック再構成、確認パッケージの機械検証まで完了。人間による16境界の確認と固定テーマ入力が未完了のため凍結しない。"
   }
 }

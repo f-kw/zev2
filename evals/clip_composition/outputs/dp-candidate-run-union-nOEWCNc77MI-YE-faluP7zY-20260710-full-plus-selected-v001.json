@@ -1,0 +1,1691 @@
+{
+  "kind": "clip_composition_dp_candidate_run_union",
+  "runAt": "2026-07-10T04:11:32.240Z",
+  "clip": {
+    "id": "nOEWCNc77MI",
+    "sourceUri": "/Users/kawafmm/workspace/zev2/evals/clip_composition/research/downloads/nOEWCNc77MI/nOEWCNc77MI.mp4",
+    "wordCount": 1559
+  },
+  "source": {
+    "id": "nOEWCNc77MI_YE-faluP7zY_local30_v001",
+    "sourceUri": "/Users/kawafmm/workspace/zev2/evals/clip_composition/research/downloads/nOEWCNc77MI/sources/YE-faluP7zY/YE-faluP7zY.mp4",
+    "wordCount": 49558
+  },
+  "settings": {
+    "mergeRule": "候補直線のclip開始/終了とsource開始/終了の4時刻がすべて完全一致する場合だけ重複除外",
+    "conflictRule": "clipまたはsourceの時間範囲が重なる非一致候補があれば処理を失敗させる",
+    "inputPrecedence": "完全一致した候補本体は--inputsの先頭を保持",
+    "coefficientsAdded": false
+  },
+  "inputs": [
+    {
+      "inputIndex": 1,
+      "inputPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/global-dp-word-alignment-nOEWCNc77MI_YE-faluP7zY_20260710-full-local30-freeze-v001_dp.json",
+      "candidateRunCount": 29
+    },
+    {
+      "inputIndex": 2,
+      "inputPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/global-dp-word-alignment-nOEWCNc77MI_YE-faluP7zY_selected_windows_20260709_redo_v001_dp.json",
+      "candidateRunCount": 13
+    }
+  ],
+  "alignment": {
+    "candidateRuns": [
+      {
+        "index": 0,
+        "clipStartMs": 4909,
+        "clipEndMs": 9532,
+        "sourceStartMs": 260068,
+        "sourceEndMs": 264269,
+        "matchedWordPairCount": 23,
+        "clipDurationMs": 4623,
+        "sourceDurationMs": 4201,
+        "sourceMinusClipDurationMs": -422,
+        "maxDeltaDifferenceMs": 301,
+        "firstPairIndex": 0,
+        "lastPairIndex": 22,
+        "candidateRunUnion": {
+          "provenance": [
+            {
+              "inputIndex": 1,
+              "inputPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/global-dp-word-alignment-nOEWCNc77MI_YE-faluP7zY_20260710-full-local30-freeze-v001_dp.json",
+              "originalRunIndex": 0
+            }
+          ]
+        }
+      },
+      {
+        "index": 1,
+        "clipStartMs": 14595,
+        "clipEndMs": 18477,
+        "sourceStartMs": 309446,
+        "sourceEndMs": 313689,
+        "matchedWordPairCount": 10,
+        "clipDurationMs": 3882,
+        "sourceDurationMs": 4243,
+        "sourceMinusClipDurationMs": 361,
+        "maxDeltaDifferenceMs": 12130,
+        "firstPairIndex": 35,
+        "lastPairIndex": 44,
+        "candidateRunUnion": {
+          "provenance": [
+            {
+              "inputIndex": 1,
+              "inputPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/global-dp-word-alignment-nOEWCNc77MI_YE-faluP7zY_20260710-full-local30-freeze-v001_dp.json",
+              "originalRunIndex": 8
+            }
+          ]
+        }
+      },
+      {
+        "index": 2,
+        "clipStartMs": 18477,
+        "clipEndMs": 20198,
+        "sourceStartMs": 325479,
+        "sourceEndMs": 327420,
+        "matchedWordPairCount": 17,
+        "clipDurationMs": 1721,
+        "sourceDurationMs": 1941,
+        "sourceMinusClipDurationMs": 220,
+        "maxDeltaDifferenceMs": 220,
+        "firstPairIndex": 45,
+        "lastPairIndex": 61,
+        "candidateRunUnion": {
+          "provenance": [
+            {
+              "inputIndex": 1,
+              "inputPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/global-dp-word-alignment-nOEWCNc77MI_YE-faluP7zY_20260710-full-local30-freeze-v001_dp.json",
+              "originalRunIndex": 9
+            }
+          ]
+        }
+      },
+      {
+        "index": 3,
+        "clipStartMs": 20418,
+        "clipEndMs": 24321,
+        "sourceStartMs": 327440,
+        "sourceEndMs": 330720,
+        "matchedWordPairCount": 18,
+        "clipDurationMs": 3903,
+        "sourceDurationMs": 3280,
+        "sourceMinusClipDurationMs": -623,
+        "maxDeltaDifferenceMs": 521,
+        "firstPairIndex": 63,
+        "lastPairIndex": 80,
+        "candidateRunUnion": {
+          "provenance": [
+            {
+              "inputIndex": 1,
+              "inputPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/global-dp-word-alignment-nOEWCNc77MI_YE-faluP7zY_20260710-full-local30-freeze-v001_dp.json",
+              "originalRunIndex": 11
+            }
+          ]
+        }
+      },
+      {
+        "index": 4,
+        "clipStartMs": 37539,
+        "clipEndMs": 40120,
+        "sourceStartMs": 1052987,
+        "sourceEndMs": 1055347,
+        "matchedWordPairCount": 19,
+        "clipDurationMs": 2581,
+        "sourceDurationMs": 2360,
+        "sourceMinusClipDurationMs": -221,
+        "maxDeltaDifferenceMs": 280,
+        "firstPairIndex": 132,
+        "lastPairIndex": 150,
+        "candidateRunUnion": {
+          "provenance": [
+            {
+              "inputIndex": 1,
+              "inputPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/global-dp-word-alignment-nOEWCNc77MI_YE-faluP7zY_20260710-full-local30-freeze-v001_dp.json",
+              "originalRunIndex": 47
+            }
+          ]
+        }
+      },
+      {
+        "index": 5,
+        "clipStartMs": 44701,
+        "clipEndMs": 49962,
+        "sourceStartMs": 1254601,
+        "sourceEndMs": 1258062,
+        "matchedWordPairCount": 20,
+        "clipDurationMs": 5261,
+        "sourceDurationMs": 3461,
+        "sourceMinusClipDurationMs": -1800,
+        "maxDeltaDifferenceMs": 160,
+        "firstPairIndex": 167,
+        "lastPairIndex": 186,
+        "candidateRunUnion": {
+          "provenance": [
+            {
+              "inputIndex": 1,
+              "inputPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/global-dp-word-alignment-nOEWCNc77MI_YE-faluP7zY_20260710-full-local30-freeze-v001_dp.json",
+              "originalRunIndex": 54
+            }
+          ]
+        }
+      },
+      {
+        "index": 6,
+        "clipStartMs": 59564,
+        "clipEndMs": 63168,
+        "sourceStartMs": 2790074,
+        "sourceEndMs": 2794916,
+        "matchedWordPairCount": 15,
+        "clipDurationMs": 3604,
+        "sourceDurationMs": 4842,
+        "sourceMinusClipDurationMs": 1238,
+        "maxDeltaDifferenceMs": 2480,
+        "firstPairIndex": 30,
+        "lastPairIndex": 44,
+        "candidateRunUnion": {
+          "provenance": [
+            {
+              "inputIndex": 2,
+              "inputPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/global-dp-word-alignment-nOEWCNc77MI_YE-faluP7zY_selected_windows_20260709_redo_v001_dp.json",
+              "originalRunIndex": 19
+            }
+          ]
+        }
+      },
+      {
+        "index": 7,
+        "clipStartMs": 65530,
+        "clipEndMs": 70773,
+        "sourceStartMs": 2798617,
+        "sourceEndMs": 2803258,
+        "matchedWordPairCount": 23,
+        "clipDurationMs": 5243,
+        "sourceDurationMs": 4641,
+        "sourceMinusClipDurationMs": -602,
+        "maxDeltaDifferenceMs": 179,
+        "firstPairIndex": 51,
+        "lastPairIndex": 73,
+        "candidateRunUnion": {
+          "provenance": [
+            {
+              "inputIndex": 2,
+              "inputPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/global-dp-word-alignment-nOEWCNc77MI_YE-faluP7zY_selected_windows_20260709_redo_v001_dp.json",
+              "originalRunIndex": 22
+            }
+          ]
+        }
+      },
+      {
+        "index": 8,
+        "clipStartMs": 71153,
+        "clipEndMs": 73795,
+        "sourceStartMs": 2804059,
+        "sourceEndMs": 2806680,
+        "matchedWordPairCount": 14,
+        "clipDurationMs": 2642,
+        "sourceDurationMs": 2621,
+        "sourceMinusClipDurationMs": -21,
+        "maxDeltaDifferenceMs": 1640,
+        "firstPairIndex": 75,
+        "lastPairIndex": 88,
+        "candidateRunUnion": {
+          "provenance": [
+            {
+              "inputIndex": 2,
+              "inputPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/global-dp-word-alignment-nOEWCNc77MI_YE-faluP7zY_selected_windows_20260709_redo_v001_dp.json",
+              "originalRunIndex": 24
+            }
+          ]
+        }
+      },
+      {
+        "index": 9,
+        "clipStartMs": 88226,
+        "clipEndMs": 92031,
+        "sourceStartMs": 3006642,
+        "sourceEndMs": 3010805,
+        "matchedWordPairCount": 10,
+        "clipDurationMs": 3805,
+        "sourceDurationMs": 4163,
+        "sourceMinusClipDurationMs": 358,
+        "maxDeltaDifferenceMs": 380,
+        "firstPairIndex": 342,
+        "lastPairIndex": 351,
+        "candidateRunUnion": {
+          "provenance": [
+            {
+              "inputIndex": 1,
+              "inputPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/global-dp-word-alignment-nOEWCNc77MI_YE-faluP7zY_20260710-full-local30-freeze-v001_dp.json",
+              "originalRunIndex": 186
+            }
+          ]
+        }
+      },
+      {
+        "index": 10,
+        "clipStartMs": 92451,
+        "clipEndMs": 100777,
+        "sourceStartMs": 3010825,
+        "sourceEndMs": 3018971,
+        "matchedWordPairCount": 46,
+        "clipDurationMs": 8326,
+        "sourceDurationMs": 8146,
+        "sourceMinusClipDurationMs": -180,
+        "maxDeltaDifferenceMs": 140,
+        "firstPairIndex": 353,
+        "lastPairIndex": 398,
+        "candidateRunUnion": {
+          "provenance": [
+            {
+              "inputIndex": 1,
+              "inputPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/global-dp-word-alignment-nOEWCNc77MI_YE-faluP7zY_20260710-full-local30-freeze-v001_dp.json",
+              "originalRunIndex": 188
+            }
+          ]
+        }
+      },
+      {
+        "index": 11,
+        "clipStartMs": 100877,
+        "clipEndMs": 103019,
+        "sourceStartMs": 3019231,
+        "sourceEndMs": 3021412,
+        "matchedWordPairCount": 15,
+        "clipDurationMs": 2142,
+        "sourceDurationMs": 2181,
+        "sourceMinusClipDurationMs": 39,
+        "maxDeltaDifferenceMs": 2362,
+        "firstPairIndex": 402,
+        "lastPairIndex": 416,
+        "candidateRunUnion": {
+          "provenance": [
+            {
+              "inputIndex": 1,
+              "inputPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/global-dp-word-alignment-nOEWCNc77MI_YE-faluP7zY_20260710-full-local30-freeze-v001_dp.json",
+              "originalRunIndex": 190
+            }
+          ]
+        }
+      },
+      {
+        "index": 12,
+        "clipStartMs": 104380,
+        "clipEndMs": 107802,
+        "sourceStartMs": 3180410,
+        "sourceEndMs": 3183472,
+        "matchedWordPairCount": 21,
+        "clipDurationMs": 3422,
+        "sourceDurationMs": 3062,
+        "sourceMinusClipDurationMs": -360,
+        "maxDeltaDifferenceMs": 1601,
+        "firstPairIndex": 113,
+        "lastPairIndex": 133,
+        "candidateRunUnion": {
+          "provenance": [
+            {
+              "inputIndex": 2,
+              "inputPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/global-dp-word-alignment-nOEWCNc77MI_YE-faluP7zY_selected_windows_20260709_redo_v001_dp.json",
+              "originalRunIndex": 46
+            }
+          ]
+        }
+      },
+      {
+        "index": 13,
+        "clipStartMs": 111165,
+        "clipEndMs": 113446,
+        "sourceStartMs": 3187033,
+        "sourceEndMs": 3190215,
+        "matchedWordPairCount": 15,
+        "clipDurationMs": 2281,
+        "sourceDurationMs": 3182,
+        "sourceMinusClipDurationMs": 901,
+        "maxDeltaDifferenceMs": 741,
+        "firstPairIndex": 456,
+        "lastPairIndex": 470,
+        "candidateRunUnion": {
+          "provenance": [
+            {
+              "inputIndex": 1,
+              "inputPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/global-dp-word-alignment-nOEWCNc77MI_YE-faluP7zY_20260710-full-local30-freeze-v001_dp.json",
+              "originalRunIndex": 218
+            },
+            {
+              "inputIndex": 2,
+              "inputPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/global-dp-word-alignment-nOEWCNc77MI_YE-faluP7zY_selected_windows_20260709_redo_v001_dp.json",
+              "originalRunIndex": 53
+            }
+          ]
+        }
+      },
+      {
+        "index": 14,
+        "clipStartMs": 138480,
+        "clipEndMs": 141901,
+        "sourceStartMs": 3285387,
+        "sourceEndMs": 3288829,
+        "matchedWordPairCount": 17,
+        "clipDurationMs": 3421,
+        "sourceDurationMs": 3442,
+        "sourceMinusClipDurationMs": 21,
+        "maxDeltaDifferenceMs": 1660,
+        "firstPairIndex": 512,
+        "lastPairIndex": 528,
+        "candidateRunUnion": {
+          "provenance": [
+            {
+              "inputIndex": 1,
+              "inputPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/global-dp-word-alignment-nOEWCNc77MI_YE-faluP7zY_20260710-full-local30-freeze-v001_dp.json",
+              "originalRunIndex": 238
+            }
+          ]
+        }
+      },
+      {
+        "index": 15,
+        "clipStartMs": 183024,
+        "clipEndMs": 193011,
+        "sourceStartMs": 3475241,
+        "sourceEndMs": 3485035,
+        "matchedWordPairCount": 55,
+        "clipDurationMs": 9987,
+        "sourceDurationMs": 9794,
+        "sourceMinusClipDurationMs": -193,
+        "maxDeltaDifferenceMs": 801,
+        "firstPairIndex": 544,
+        "lastPairIndex": 598,
+        "candidateRunUnion": {
+          "provenance": [
+            {
+              "inputIndex": 1,
+              "inputPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/global-dp-word-alignment-nOEWCNc77MI_YE-faluP7zY_20260710-full-local30-freeze-v001_dp.json",
+              "originalRunIndex": 247
+            }
+          ]
+        }
+      },
+      {
+        "index": 16,
+        "clipStartMs": 230898,
+        "clipEndMs": 235561,
+        "sourceStartMs": 3998452,
+        "sourceEndMs": 4003356,
+        "matchedWordPairCount": 34,
+        "clipDurationMs": 4663,
+        "sourceDurationMs": 4904,
+        "sourceMinusClipDurationMs": 241,
+        "maxDeltaDifferenceMs": 240,
+        "firstPairIndex": 626,
+        "lastPairIndex": 659,
+        "candidateRunUnion": {
+          "provenance": [
+            {
+              "inputIndex": 1,
+              "inputPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/global-dp-word-alignment-nOEWCNc77MI_YE-faluP7zY_20260710-full-local30-freeze-v001_dp.json",
+              "originalRunIndex": 269
+            },
+            {
+              "inputIndex": 2,
+              "inputPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/global-dp-word-alignment-nOEWCNc77MI_YE-faluP7zY_selected_windows_20260709_redo_v001_dp.json",
+              "originalRunIndex": 104
+            }
+          ]
+        }
+      },
+      {
+        "index": 17,
+        "clipStartMs": 235821,
+        "clipEndMs": 242561,
+        "sourceStartMs": 4003376,
+        "sourceEndMs": 4014786,
+        "matchedWordPairCount": 46,
+        "clipDurationMs": 6740,
+        "sourceDurationMs": 11410,
+        "sourceMinusClipDurationMs": 4670,
+        "maxDeltaDifferenceMs": 4624,
+        "firstPairIndex": 661,
+        "lastPairIndex": 706,
+        "candidateRunUnion": {
+          "provenance": [
+            {
+              "inputIndex": 1,
+              "inputPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/global-dp-word-alignment-nOEWCNc77MI_YE-faluP7zY_20260710-full-local30-freeze-v001_dp.json",
+              "originalRunIndex": 271
+            },
+            {
+              "inputIndex": 2,
+              "inputPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/global-dp-word-alignment-nOEWCNc77MI_YE-faluP7zY_selected_windows_20260709_redo_v001_dp.json",
+              "originalRunIndex": 106
+            }
+          ]
+        }
+      },
+      {
+        "index": 18,
+        "clipStartMs": 256787,
+        "clipEndMs": 259188,
+        "sourceStartMs": 4024306,
+        "sourceEndMs": 4026707,
+        "matchedWordPairCount": 19,
+        "clipDurationMs": 2401,
+        "sourceDurationMs": 2401,
+        "sourceMinusClipDurationMs": 0,
+        "maxDeltaDifferenceMs": 1420,
+        "firstPairIndex": 729,
+        "lastPairIndex": 747,
+        "candidateRunUnion": {
+          "provenance": [
+            {
+              "inputIndex": 1,
+              "inputPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/global-dp-word-alignment-nOEWCNc77MI_YE-faluP7zY_20260710-full-local30-freeze-v001_dp.json",
+              "originalRunIndex": 284
+            },
+            {
+              "inputIndex": 2,
+              "inputPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/global-dp-word-alignment-nOEWCNc77MI_YE-faluP7zY_selected_windows_20260709_redo_v001_dp.json",
+              "originalRunIndex": 119
+            }
+          ]
+        }
+      },
+      {
+        "index": 19,
+        "clipStartMs": 265210,
+        "clipEndMs": 273665,
+        "sourceStartMs": 4102099,
+        "sourceEndMs": 4109864,
+        "matchedWordPairCount": 43,
+        "clipDurationMs": 8455,
+        "sourceDurationMs": 7765,
+        "sourceMinusClipDurationMs": -690,
+        "maxDeltaDifferenceMs": 5953,
+        "firstPairIndex": 768,
+        "lastPairIndex": 810,
+        "candidateRunUnion": {
+          "provenance": [
+            {
+              "inputIndex": 1,
+              "inputPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/global-dp-word-alignment-nOEWCNc77MI_YE-faluP7zY_20260710-full-local30-freeze-v001_dp.json",
+              "originalRunIndex": 295
+            }
+          ]
+        }
+      },
+      {
+        "index": 20,
+        "clipStartMs": 279029,
+        "clipEndMs": 283252,
+        "sourceStartMs": 4877136,
+        "sourceEndMs": 4881779,
+        "matchedWordPairCount": 17,
+        "clipDurationMs": 4223,
+        "sourceDurationMs": 4643,
+        "sourceMinusClipDurationMs": 420,
+        "maxDeltaDifferenceMs": 340,
+        "firstPairIndex": 392,
+        "lastPairIndex": 408,
+        "candidateRunUnion": {
+          "provenance": [
+            {
+              "inputIndex": 2,
+              "inputPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/global-dp-word-alignment-nOEWCNc77MI_YE-faluP7zY_selected_windows_20260709_redo_v001_dp.json",
+              "originalRunIndex": 146
+            }
+          ]
+        }
+      },
+      {
+        "index": 21,
+        "clipStartMs": 288175,
+        "clipEndMs": 291898,
+        "sourceStartMs": 4886282,
+        "sourceEndMs": 4889844,
+        "matchedWordPairCount": 12,
+        "clipDurationMs": 3723,
+        "sourceDurationMs": 3562,
+        "sourceMinusClipDurationMs": -161,
+        "maxDeltaDifferenceMs": 10265,
+        "firstPairIndex": 851,
+        "lastPairIndex": 862,
+        "candidateRunUnion": {
+          "provenance": [
+            {
+              "inputIndex": 1,
+              "inputPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/global-dp-word-alignment-nOEWCNc77MI_YE-faluP7zY_20260710-full-local30-freeze-v001_dp.json",
+              "originalRunIndex": 335
+            },
+            {
+              "inputIndex": 2,
+              "inputPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/global-dp-word-alignment-nOEWCNc77MI_YE-faluP7zY_selected_windows_20260709_redo_v001_dp.json",
+              "originalRunIndex": 149
+            }
+          ]
+        }
+      },
+      {
+        "index": 22,
+        "clipStartMs": 316355,
+        "clipEndMs": 318537,
+        "sourceStartMs": 5183974,
+        "sourceEndMs": 5186016,
+        "matchedWordPairCount": 20,
+        "clipDurationMs": 2182,
+        "sourceDurationMs": 2042,
+        "sourceMinusClipDurationMs": -140,
+        "maxDeltaDifferenceMs": 159,
+        "firstPairIndex": 932,
+        "lastPairIndex": 951,
+        "candidateRunUnion": {
+          "provenance": [
+            {
+              "inputIndex": 1,
+              "inputPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/global-dp-word-alignment-nOEWCNc77MI_YE-faluP7zY_20260710-full-local30-freeze-v001_dp.json",
+              "originalRunIndex": 377
+            },
+            {
+              "inputIndex": 2,
+              "inputPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/global-dp-word-alignment-nOEWCNc77MI_YE-faluP7zY_selected_windows_20260709_redo_v001_dp.json",
+              "originalRunIndex": 185
+            }
+          ]
+        }
+      },
+      {
+        "index": 23,
+        "clipStartMs": 319398,
+        "clipEndMs": 322480,
+        "sourceStartMs": 5187016,
+        "sourceEndMs": 5189318,
+        "matchedWordPairCount": 22,
+        "clipDurationMs": 3082,
+        "sourceDurationMs": 2302,
+        "sourceMinusClipDurationMs": -780,
+        "maxDeltaDifferenceMs": 16570,
+        "firstPairIndex": 955,
+        "lastPairIndex": 976,
+        "candidateRunUnion": {
+          "provenance": [
+            {
+              "inputIndex": 1,
+              "inputPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/global-dp-word-alignment-nOEWCNc77MI_YE-faluP7zY_20260710-full-local30-freeze-v001_dp.json",
+              "originalRunIndex": 380
+            },
+            {
+              "inputIndex": 2,
+              "inputPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/global-dp-word-alignment-nOEWCNc77MI_YE-faluP7zY_selected_windows_20260709_redo_v001_dp.json",
+              "originalRunIndex": 188
+            }
+          ]
+        }
+      },
+      {
+        "index": 24,
+        "clipStartMs": 338724,
+        "clipEndMs": 340845,
+        "sourceStartMs": 5217231,
+        "sourceEndMs": 5218992,
+        "matchedWordPairCount": 13,
+        "clipDurationMs": 2121,
+        "sourceDurationMs": 1761,
+        "sourceMinusClipDurationMs": -360,
+        "maxDeltaDifferenceMs": 16429,
+        "firstPairIndex": 1023,
+        "lastPairIndex": 1035,
+        "candidateRunUnion": {
+          "provenance": [
+            {
+              "inputIndex": 1,
+              "inputPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/global-dp-word-alignment-nOEWCNc77MI_YE-faluP7zY_20260710-full-local30-freeze-v001_dp.json",
+              "originalRunIndex": 397
+            },
+            {
+              "inputIndex": 2,
+              "inputPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/global-dp-word-alignment-nOEWCNc77MI_YE-faluP7zY_selected_windows_20260709_redo_v001_dp.json",
+              "originalRunIndex": 205
+            }
+          ]
+        }
+      },
+      {
+        "index": 25,
+        "clipStartMs": 358151,
+        "clipEndMs": 359552,
+        "sourceStartMs": 10439052,
+        "sourceEndMs": 10441215,
+        "matchedWordPairCount": 11,
+        "clipDurationMs": 1401,
+        "sourceDurationMs": 2163,
+        "sourceMinusClipDurationMs": 762,
+        "maxDeltaDifferenceMs": 721,
+        "firstPairIndex": 1062,
+        "lastPairIndex": 1072,
+        "candidateRunUnion": {
+          "provenance": [
+            {
+              "inputIndex": 1,
+              "inputPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/global-dp-word-alignment-nOEWCNc77MI_YE-faluP7zY_20260710-full-local30-freeze-v001_dp.json",
+              "originalRunIndex": 416
+            }
+          ]
+        }
+      },
+      {
+        "index": 26,
+        "clipStartMs": 364883,
+        "clipEndMs": 369645,
+        "sourceStartMs": 10445778,
+        "sourceEndMs": 10449280,
+        "matchedWordPairCount": 10,
+        "clipDurationMs": 4762,
+        "sourceDurationMs": 3502,
+        "sourceMinusClipDurationMs": -1260,
+        "maxDeltaDifferenceMs": 4141,
+        "firstPairIndex": 1085,
+        "lastPairIndex": 1094,
+        "candidateRunUnion": {
+          "provenance": [
+            {
+              "inputIndex": 1,
+              "inputPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/global-dp-word-alignment-nOEWCNc77MI_YE-faluP7zY_20260710-full-local30-freeze-v001_dp.json",
+              "originalRunIndex": 423
+            }
+          ]
+        }
+      },
+      {
+        "index": 27,
+        "clipStartMs": 372545,
+        "clipEndMs": 373786,
+        "sourceStartMs": 10449280,
+        "sourceEndMs": 10450741,
+        "matchedWordPairCount": 10,
+        "clipDurationMs": 1241,
+        "sourceDurationMs": 1461,
+        "sourceMinusClipDurationMs": 220,
+        "maxDeltaDifferenceMs": 360,
+        "firstPairIndex": 1095,
+        "lastPairIndex": 1104,
+        "candidateRunUnion": {
+          "provenance": [
+            {
+              "inputIndex": 1,
+              "inputPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/global-dp-word-alignment-nOEWCNc77MI_YE-faluP7zY_20260710-full-local30-freeze-v001_dp.json",
+              "originalRunIndex": 424
+            }
+          ]
+        }
+      },
+      {
+        "index": 28,
+        "clipStartMs": 425880,
+        "clipEndMs": 437166,
+        "sourceStartMs": 11541555,
+        "sourceEndMs": 11553068,
+        "matchedWordPairCount": 42,
+        "clipDurationMs": 11286,
+        "sourceDurationMs": 11513,
+        "sourceMinusClipDurationMs": 227,
+        "maxDeltaDifferenceMs": 260,
+        "firstPairIndex": 1235,
+        "lastPairIndex": 1276,
+        "candidateRunUnion": {
+          "provenance": [
+            {
+              "inputIndex": 1,
+              "inputPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/global-dp-word-alignment-nOEWCNc77MI_YE-faluP7zY_20260710-full-local30-freeze-v001_dp.json",
+              "originalRunIndex": 504
+            }
+          ]
+        }
+      },
+      {
+        "index": 29,
+        "clipStartMs": 438446,
+        "clipEndMs": 443569,
+        "sourceStartMs": 11554128,
+        "sourceEndMs": 11560292,
+        "matchedWordPairCount": 24,
+        "clipDurationMs": 5123,
+        "sourceDurationMs": 6164,
+        "sourceMinusClipDurationMs": 1041,
+        "maxDeltaDifferenceMs": 1081,
+        "firstPairIndex": 1279,
+        "lastPairIndex": 1302,
+        "candidateRunUnion": {
+          "provenance": [
+            {
+              "inputIndex": 1,
+              "inputPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/global-dp-word-alignment-nOEWCNc77MI_YE-faluP7zY_20260710-full-local30-freeze-v001_dp.json",
+              "originalRunIndex": 507
+            }
+          ]
+        }
+      },
+      {
+        "index": 30,
+        "clipStartMs": 444850,
+        "clipEndMs": 447811,
+        "sourceStartMs": 11560472,
+        "sourceEndMs": 11563434,
+        "matchedWordPairCount": 16,
+        "clipDurationMs": 2961,
+        "sourceDurationMs": 2962,
+        "sourceMinusClipDurationMs": 1,
+        "maxDeltaDifferenceMs": 1441,
+        "firstPairIndex": 1304,
+        "lastPairIndex": 1319,
+        "candidateRunUnion": {
+          "provenance": [
+            {
+              "inputIndex": 1,
+              "inputPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/global-dp-word-alignment-nOEWCNc77MI_YE-faluP7zY_20260710-full-local30-freeze-v001_dp.json",
+              "originalRunIndex": 509
+            }
+          ]
+        }
+      },
+      {
+        "index": 31,
+        "clipStartMs": 450420,
+        "clipEndMs": 451781,
+        "sourceStartMs": 11565995,
+        "sourceEndMs": 11567356,
+        "matchedWordPairCount": 11,
+        "clipDurationMs": 1361,
+        "sourceDurationMs": 1361,
+        "sourceMinusClipDurationMs": 0,
+        "maxDeltaDifferenceMs": 160,
+        "firstPairIndex": 1324,
+        "lastPairIndex": 1334,
+        "candidateRunUnion": {
+          "provenance": [
+            {
+              "inputIndex": 1,
+              "inputPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/global-dp-word-alignment-nOEWCNc77MI_YE-faluP7zY_20260710-full-local30-freeze-v001_dp.json",
+              "originalRunIndex": 512
+            }
+          ]
+        }
+      },
+      {
+        "index": 32,
+        "clipStartMs": 451781,
+        "clipEndMs": 455463,
+        "sourceStartMs": 11567356,
+        "sourceEndMs": 11571899,
+        "matchedWordPairCount": 14,
+        "clipDurationMs": 3682,
+        "sourceDurationMs": 4543,
+        "sourceMinusClipDurationMs": 861,
+        "maxDeltaDifferenceMs": 900,
+        "firstPairIndex": 1335,
+        "lastPairIndex": 1348,
+        "candidateRunUnion": {
+          "provenance": [
+            {
+              "inputIndex": 1,
+              "inputPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/global-dp-word-alignment-nOEWCNc77MI_YE-faluP7zY_20260710-full-local30-freeze-v001_dp.json",
+              "originalRunIndex": 513
+            }
+          ]
+        }
+      },
+      {
+        "index": 33,
+        "clipStartMs": 456324,
+        "clipEndMs": 459146,
+        "sourceStartMs": 11572059,
+        "sourceEndMs": 11575281,
+        "matchedWordPairCount": 14,
+        "clipDurationMs": 2822,
+        "sourceDurationMs": 3222,
+        "sourceMinusClipDurationMs": 400,
+        "maxDeltaDifferenceMs": 579,
+        "firstPairIndex": 1350,
+        "lastPairIndex": 1363,
+        "candidateRunUnion": {
+          "provenance": [
+            {
+              "inputIndex": 1,
+              "inputPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/global-dp-word-alignment-nOEWCNc77MI_YE-faluP7zY_20260710-full-local30-freeze-v001_dp.json",
+              "originalRunIndex": 515
+            }
+          ]
+        }
+      }
+    ],
+    "allRuns": [
+      {
+        "index": 0,
+        "clipStartMs": 4909,
+        "clipEndMs": 9532,
+        "sourceStartMs": 260068,
+        "sourceEndMs": 264269,
+        "matchedWordPairCount": 23,
+        "clipDurationMs": 4623,
+        "sourceDurationMs": 4201,
+        "sourceMinusClipDurationMs": -422,
+        "maxDeltaDifferenceMs": 301,
+        "firstPairIndex": 0,
+        "lastPairIndex": 22,
+        "candidateRunUnion": {
+          "provenance": [
+            {
+              "inputIndex": 1,
+              "inputPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/global-dp-word-alignment-nOEWCNc77MI_YE-faluP7zY_20260710-full-local30-freeze-v001_dp.json",
+              "originalRunIndex": 0
+            }
+          ]
+        }
+      },
+      {
+        "index": 1,
+        "clipStartMs": 14595,
+        "clipEndMs": 18477,
+        "sourceStartMs": 309446,
+        "sourceEndMs": 313689,
+        "matchedWordPairCount": 10,
+        "clipDurationMs": 3882,
+        "sourceDurationMs": 4243,
+        "sourceMinusClipDurationMs": 361,
+        "maxDeltaDifferenceMs": 12130,
+        "firstPairIndex": 35,
+        "lastPairIndex": 44,
+        "candidateRunUnion": {
+          "provenance": [
+            {
+              "inputIndex": 1,
+              "inputPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/global-dp-word-alignment-nOEWCNc77MI_YE-faluP7zY_20260710-full-local30-freeze-v001_dp.json",
+              "originalRunIndex": 8
+            }
+          ]
+        }
+      },
+      {
+        "index": 2,
+        "clipStartMs": 18477,
+        "clipEndMs": 20198,
+        "sourceStartMs": 325479,
+        "sourceEndMs": 327420,
+        "matchedWordPairCount": 17,
+        "clipDurationMs": 1721,
+        "sourceDurationMs": 1941,
+        "sourceMinusClipDurationMs": 220,
+        "maxDeltaDifferenceMs": 220,
+        "firstPairIndex": 45,
+        "lastPairIndex": 61,
+        "candidateRunUnion": {
+          "provenance": [
+            {
+              "inputIndex": 1,
+              "inputPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/global-dp-word-alignment-nOEWCNc77MI_YE-faluP7zY_20260710-full-local30-freeze-v001_dp.json",
+              "originalRunIndex": 9
+            }
+          ]
+        }
+      },
+      {
+        "index": 3,
+        "clipStartMs": 20418,
+        "clipEndMs": 24321,
+        "sourceStartMs": 327440,
+        "sourceEndMs": 330720,
+        "matchedWordPairCount": 18,
+        "clipDurationMs": 3903,
+        "sourceDurationMs": 3280,
+        "sourceMinusClipDurationMs": -623,
+        "maxDeltaDifferenceMs": 521,
+        "firstPairIndex": 63,
+        "lastPairIndex": 80,
+        "candidateRunUnion": {
+          "provenance": [
+            {
+              "inputIndex": 1,
+              "inputPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/global-dp-word-alignment-nOEWCNc77MI_YE-faluP7zY_20260710-full-local30-freeze-v001_dp.json",
+              "originalRunIndex": 11
+            }
+          ]
+        }
+      },
+      {
+        "index": 4,
+        "clipStartMs": 37539,
+        "clipEndMs": 40120,
+        "sourceStartMs": 1052987,
+        "sourceEndMs": 1055347,
+        "matchedWordPairCount": 19,
+        "clipDurationMs": 2581,
+        "sourceDurationMs": 2360,
+        "sourceMinusClipDurationMs": -221,
+        "maxDeltaDifferenceMs": 280,
+        "firstPairIndex": 132,
+        "lastPairIndex": 150,
+        "candidateRunUnion": {
+          "provenance": [
+            {
+              "inputIndex": 1,
+              "inputPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/global-dp-word-alignment-nOEWCNc77MI_YE-faluP7zY_20260710-full-local30-freeze-v001_dp.json",
+              "originalRunIndex": 47
+            }
+          ]
+        }
+      },
+      {
+        "index": 5,
+        "clipStartMs": 44701,
+        "clipEndMs": 49962,
+        "sourceStartMs": 1254601,
+        "sourceEndMs": 1258062,
+        "matchedWordPairCount": 20,
+        "clipDurationMs": 5261,
+        "sourceDurationMs": 3461,
+        "sourceMinusClipDurationMs": -1800,
+        "maxDeltaDifferenceMs": 160,
+        "firstPairIndex": 167,
+        "lastPairIndex": 186,
+        "candidateRunUnion": {
+          "provenance": [
+            {
+              "inputIndex": 1,
+              "inputPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/global-dp-word-alignment-nOEWCNc77MI_YE-faluP7zY_20260710-full-local30-freeze-v001_dp.json",
+              "originalRunIndex": 54
+            }
+          ]
+        }
+      },
+      {
+        "index": 6,
+        "clipStartMs": 59564,
+        "clipEndMs": 63168,
+        "sourceStartMs": 2790074,
+        "sourceEndMs": 2794916,
+        "matchedWordPairCount": 15,
+        "clipDurationMs": 3604,
+        "sourceDurationMs": 4842,
+        "sourceMinusClipDurationMs": 1238,
+        "maxDeltaDifferenceMs": 2480,
+        "firstPairIndex": 30,
+        "lastPairIndex": 44,
+        "candidateRunUnion": {
+          "provenance": [
+            {
+              "inputIndex": 2,
+              "inputPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/global-dp-word-alignment-nOEWCNc77MI_YE-faluP7zY_selected_windows_20260709_redo_v001_dp.json",
+              "originalRunIndex": 19
+            }
+          ]
+        }
+      },
+      {
+        "index": 7,
+        "clipStartMs": 65530,
+        "clipEndMs": 70773,
+        "sourceStartMs": 2798617,
+        "sourceEndMs": 2803258,
+        "matchedWordPairCount": 23,
+        "clipDurationMs": 5243,
+        "sourceDurationMs": 4641,
+        "sourceMinusClipDurationMs": -602,
+        "maxDeltaDifferenceMs": 179,
+        "firstPairIndex": 51,
+        "lastPairIndex": 73,
+        "candidateRunUnion": {
+          "provenance": [
+            {
+              "inputIndex": 2,
+              "inputPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/global-dp-word-alignment-nOEWCNc77MI_YE-faluP7zY_selected_windows_20260709_redo_v001_dp.json",
+              "originalRunIndex": 22
+            }
+          ]
+        }
+      },
+      {
+        "index": 8,
+        "clipStartMs": 71153,
+        "clipEndMs": 73795,
+        "sourceStartMs": 2804059,
+        "sourceEndMs": 2806680,
+        "matchedWordPairCount": 14,
+        "clipDurationMs": 2642,
+        "sourceDurationMs": 2621,
+        "sourceMinusClipDurationMs": -21,
+        "maxDeltaDifferenceMs": 1640,
+        "firstPairIndex": 75,
+        "lastPairIndex": 88,
+        "candidateRunUnion": {
+          "provenance": [
+            {
+              "inputIndex": 2,
+              "inputPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/global-dp-word-alignment-nOEWCNc77MI_YE-faluP7zY_selected_windows_20260709_redo_v001_dp.json",
+              "originalRunIndex": 24
+            }
+          ]
+        }
+      },
+      {
+        "index": 9,
+        "clipStartMs": 88226,
+        "clipEndMs": 92031,
+        "sourceStartMs": 3006642,
+        "sourceEndMs": 3010805,
+        "matchedWordPairCount": 10,
+        "clipDurationMs": 3805,
+        "sourceDurationMs": 4163,
+        "sourceMinusClipDurationMs": 358,
+        "maxDeltaDifferenceMs": 380,
+        "firstPairIndex": 342,
+        "lastPairIndex": 351,
+        "candidateRunUnion": {
+          "provenance": [
+            {
+              "inputIndex": 1,
+              "inputPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/global-dp-word-alignment-nOEWCNc77MI_YE-faluP7zY_20260710-full-local30-freeze-v001_dp.json",
+              "originalRunIndex": 186
+            }
+          ]
+        }
+      },
+      {
+        "index": 10,
+        "clipStartMs": 92451,
+        "clipEndMs": 100777,
+        "sourceStartMs": 3010825,
+        "sourceEndMs": 3018971,
+        "matchedWordPairCount": 46,
+        "clipDurationMs": 8326,
+        "sourceDurationMs": 8146,
+        "sourceMinusClipDurationMs": -180,
+        "maxDeltaDifferenceMs": 140,
+        "firstPairIndex": 353,
+        "lastPairIndex": 398,
+        "candidateRunUnion": {
+          "provenance": [
+            {
+              "inputIndex": 1,
+              "inputPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/global-dp-word-alignment-nOEWCNc77MI_YE-faluP7zY_20260710-full-local30-freeze-v001_dp.json",
+              "originalRunIndex": 188
+            }
+          ]
+        }
+      },
+      {
+        "index": 11,
+        "clipStartMs": 100877,
+        "clipEndMs": 103019,
+        "sourceStartMs": 3019231,
+        "sourceEndMs": 3021412,
+        "matchedWordPairCount": 15,
+        "clipDurationMs": 2142,
+        "sourceDurationMs": 2181,
+        "sourceMinusClipDurationMs": 39,
+        "maxDeltaDifferenceMs": 2362,
+        "firstPairIndex": 402,
+        "lastPairIndex": 416,
+        "candidateRunUnion": {
+          "provenance": [
+            {
+              "inputIndex": 1,
+              "inputPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/global-dp-word-alignment-nOEWCNc77MI_YE-faluP7zY_20260710-full-local30-freeze-v001_dp.json",
+              "originalRunIndex": 190
+            }
+          ]
+        }
+      },
+      {
+        "index": 12,
+        "clipStartMs": 104380,
+        "clipEndMs": 107802,
+        "sourceStartMs": 3180410,
+        "sourceEndMs": 3183472,
+        "matchedWordPairCount": 21,
+        "clipDurationMs": 3422,
+        "sourceDurationMs": 3062,
+        "sourceMinusClipDurationMs": -360,
+        "maxDeltaDifferenceMs": 1601,
+        "firstPairIndex": 113,
+        "lastPairIndex": 133,
+        "candidateRunUnion": {
+          "provenance": [
+            {
+              "inputIndex": 2,
+              "inputPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/global-dp-word-alignment-nOEWCNc77MI_YE-faluP7zY_selected_windows_20260709_redo_v001_dp.json",
+              "originalRunIndex": 46
+            }
+          ]
+        }
+      },
+      {
+        "index": 13,
+        "clipStartMs": 111165,
+        "clipEndMs": 113446,
+        "sourceStartMs": 3187033,
+        "sourceEndMs": 3190215,
+        "matchedWordPairCount": 15,
+        "clipDurationMs": 2281,
+        "sourceDurationMs": 3182,
+        "sourceMinusClipDurationMs": 901,
+        "maxDeltaDifferenceMs": 741,
+        "firstPairIndex": 456,
+        "lastPairIndex": 470,
+        "candidateRunUnion": {
+          "provenance": [
+            {
+              "inputIndex": 1,
+              "inputPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/global-dp-word-alignment-nOEWCNc77MI_YE-faluP7zY_20260710-full-local30-freeze-v001_dp.json",
+              "originalRunIndex": 218
+            },
+            {
+              "inputIndex": 2,
+              "inputPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/global-dp-word-alignment-nOEWCNc77MI_YE-faluP7zY_selected_windows_20260709_redo_v001_dp.json",
+              "originalRunIndex": 53
+            }
+          ]
+        }
+      },
+      {
+        "index": 14,
+        "clipStartMs": 138480,
+        "clipEndMs": 141901,
+        "sourceStartMs": 3285387,
+        "sourceEndMs": 3288829,
+        "matchedWordPairCount": 17,
+        "clipDurationMs": 3421,
+        "sourceDurationMs": 3442,
+        "sourceMinusClipDurationMs": 21,
+        "maxDeltaDifferenceMs": 1660,
+        "firstPairIndex": 512,
+        "lastPairIndex": 528,
+        "candidateRunUnion": {
+          "provenance": [
+            {
+              "inputIndex": 1,
+              "inputPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/global-dp-word-alignment-nOEWCNc77MI_YE-faluP7zY_20260710-full-local30-freeze-v001_dp.json",
+              "originalRunIndex": 238
+            }
+          ]
+        }
+      },
+      {
+        "index": 15,
+        "clipStartMs": 183024,
+        "clipEndMs": 193011,
+        "sourceStartMs": 3475241,
+        "sourceEndMs": 3485035,
+        "matchedWordPairCount": 55,
+        "clipDurationMs": 9987,
+        "sourceDurationMs": 9794,
+        "sourceMinusClipDurationMs": -193,
+        "maxDeltaDifferenceMs": 801,
+        "firstPairIndex": 544,
+        "lastPairIndex": 598,
+        "candidateRunUnion": {
+          "provenance": [
+            {
+              "inputIndex": 1,
+              "inputPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/global-dp-word-alignment-nOEWCNc77MI_YE-faluP7zY_20260710-full-local30-freeze-v001_dp.json",
+              "originalRunIndex": 247
+            }
+          ]
+        }
+      },
+      {
+        "index": 16,
+        "clipStartMs": 230898,
+        "clipEndMs": 235561,
+        "sourceStartMs": 3998452,
+        "sourceEndMs": 4003356,
+        "matchedWordPairCount": 34,
+        "clipDurationMs": 4663,
+        "sourceDurationMs": 4904,
+        "sourceMinusClipDurationMs": 241,
+        "maxDeltaDifferenceMs": 240,
+        "firstPairIndex": 626,
+        "lastPairIndex": 659,
+        "candidateRunUnion": {
+          "provenance": [
+            {
+              "inputIndex": 1,
+              "inputPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/global-dp-word-alignment-nOEWCNc77MI_YE-faluP7zY_20260710-full-local30-freeze-v001_dp.json",
+              "originalRunIndex": 269
+            },
+            {
+              "inputIndex": 2,
+              "inputPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/global-dp-word-alignment-nOEWCNc77MI_YE-faluP7zY_selected_windows_20260709_redo_v001_dp.json",
+              "originalRunIndex": 104
+            }
+          ]
+        }
+      },
+      {
+        "index": 17,
+        "clipStartMs": 235821,
+        "clipEndMs": 242561,
+        "sourceStartMs": 4003376,
+        "sourceEndMs": 4014786,
+        "matchedWordPairCount": 46,
+        "clipDurationMs": 6740,
+        "sourceDurationMs": 11410,
+        "sourceMinusClipDurationMs": 4670,
+        "maxDeltaDifferenceMs": 4624,
+        "firstPairIndex": 661,
+        "lastPairIndex": 706,
+        "candidateRunUnion": {
+          "provenance": [
+            {
+              "inputIndex": 1,
+              "inputPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/global-dp-word-alignment-nOEWCNc77MI_YE-faluP7zY_20260710-full-local30-freeze-v001_dp.json",
+              "originalRunIndex": 271
+            },
+            {
+              "inputIndex": 2,
+              "inputPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/global-dp-word-alignment-nOEWCNc77MI_YE-faluP7zY_selected_windows_20260709_redo_v001_dp.json",
+              "originalRunIndex": 106
+            }
+          ]
+        }
+      },
+      {
+        "index": 18,
+        "clipStartMs": 256787,
+        "clipEndMs": 259188,
+        "sourceStartMs": 4024306,
+        "sourceEndMs": 4026707,
+        "matchedWordPairCount": 19,
+        "clipDurationMs": 2401,
+        "sourceDurationMs": 2401,
+        "sourceMinusClipDurationMs": 0,
+        "maxDeltaDifferenceMs": 1420,
+        "firstPairIndex": 729,
+        "lastPairIndex": 747,
+        "candidateRunUnion": {
+          "provenance": [
+            {
+              "inputIndex": 1,
+              "inputPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/global-dp-word-alignment-nOEWCNc77MI_YE-faluP7zY_20260710-full-local30-freeze-v001_dp.json",
+              "originalRunIndex": 284
+            },
+            {
+              "inputIndex": 2,
+              "inputPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/global-dp-word-alignment-nOEWCNc77MI_YE-faluP7zY_selected_windows_20260709_redo_v001_dp.json",
+              "originalRunIndex": 119
+            }
+          ]
+        }
+      },
+      {
+        "index": 19,
+        "clipStartMs": 265210,
+        "clipEndMs": 273665,
+        "sourceStartMs": 4102099,
+        "sourceEndMs": 4109864,
+        "matchedWordPairCount": 43,
+        "clipDurationMs": 8455,
+        "sourceDurationMs": 7765,
+        "sourceMinusClipDurationMs": -690,
+        "maxDeltaDifferenceMs": 5953,
+        "firstPairIndex": 768,
+        "lastPairIndex": 810,
+        "candidateRunUnion": {
+          "provenance": [
+            {
+              "inputIndex": 1,
+              "inputPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/global-dp-word-alignment-nOEWCNc77MI_YE-faluP7zY_20260710-full-local30-freeze-v001_dp.json",
+              "originalRunIndex": 295
+            }
+          ]
+        }
+      },
+      {
+        "index": 20,
+        "clipStartMs": 279029,
+        "clipEndMs": 283252,
+        "sourceStartMs": 4877136,
+        "sourceEndMs": 4881779,
+        "matchedWordPairCount": 17,
+        "clipDurationMs": 4223,
+        "sourceDurationMs": 4643,
+        "sourceMinusClipDurationMs": 420,
+        "maxDeltaDifferenceMs": 340,
+        "firstPairIndex": 392,
+        "lastPairIndex": 408,
+        "candidateRunUnion": {
+          "provenance": [
+            {
+              "inputIndex": 2,
+              "inputPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/global-dp-word-alignment-nOEWCNc77MI_YE-faluP7zY_selected_windows_20260709_redo_v001_dp.json",
+              "originalRunIndex": 146
+            }
+          ]
+        }
+      },
+      {
+        "index": 21,
+        "clipStartMs": 288175,
+        "clipEndMs": 291898,
+        "sourceStartMs": 4886282,
+        "sourceEndMs": 4889844,
+        "matchedWordPairCount": 12,
+        "clipDurationMs": 3723,
+        "sourceDurationMs": 3562,
+        "sourceMinusClipDurationMs": -161,
+        "maxDeltaDifferenceMs": 10265,
+        "firstPairIndex": 851,
+        "lastPairIndex": 862,
+        "candidateRunUnion": {
+          "provenance": [
+            {
+              "inputIndex": 1,
+              "inputPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/global-dp-word-alignment-nOEWCNc77MI_YE-faluP7zY_20260710-full-local30-freeze-v001_dp.json",
+              "originalRunIndex": 335
+            },
+            {
+              "inputIndex": 2,
+              "inputPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/global-dp-word-alignment-nOEWCNc77MI_YE-faluP7zY_selected_windows_20260709_redo_v001_dp.json",
+              "originalRunIndex": 149
+            }
+          ]
+        }
+      },
+      {
+        "index": 22,
+        "clipStartMs": 316355,
+        "clipEndMs": 318537,
+        "sourceStartMs": 5183974,
+        "sourceEndMs": 5186016,
+        "matchedWordPairCount": 20,
+        "clipDurationMs": 2182,
+        "sourceDurationMs": 2042,
+        "sourceMinusClipDurationMs": -140,
+        "maxDeltaDifferenceMs": 159,
+        "firstPairIndex": 932,
+        "lastPairIndex": 951,
+        "candidateRunUnion": {
+          "provenance": [
+            {
+              "inputIndex": 1,
+              "inputPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/global-dp-word-alignment-nOEWCNc77MI_YE-faluP7zY_20260710-full-local30-freeze-v001_dp.json",
+              "originalRunIndex": 377
+            },
+            {
+              "inputIndex": 2,
+              "inputPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/global-dp-word-alignment-nOEWCNc77MI_YE-faluP7zY_selected_windows_20260709_redo_v001_dp.json",
+              "originalRunIndex": 185
+            }
+          ]
+        }
+      },
+      {
+        "index": 23,
+        "clipStartMs": 319398,
+        "clipEndMs": 322480,
+        "sourceStartMs": 5187016,
+        "sourceEndMs": 5189318,
+        "matchedWordPairCount": 22,
+        "clipDurationMs": 3082,
+        "sourceDurationMs": 2302,
+        "sourceMinusClipDurationMs": -780,
+        "maxDeltaDifferenceMs": 16570,
+        "firstPairIndex": 955,
+        "lastPairIndex": 976,
+        "candidateRunUnion": {
+          "provenance": [
+            {
+              "inputIndex": 1,
+              "inputPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/global-dp-word-alignment-nOEWCNc77MI_YE-faluP7zY_20260710-full-local30-freeze-v001_dp.json",
+              "originalRunIndex": 380
+            },
+            {
+              "inputIndex": 2,
+              "inputPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/global-dp-word-alignment-nOEWCNc77MI_YE-faluP7zY_selected_windows_20260709_redo_v001_dp.json",
+              "originalRunIndex": 188
+            }
+          ]
+        }
+      },
+      {
+        "index": 24,
+        "clipStartMs": 338724,
+        "clipEndMs": 340845,
+        "sourceStartMs": 5217231,
+        "sourceEndMs": 5218992,
+        "matchedWordPairCount": 13,
+        "clipDurationMs": 2121,
+        "sourceDurationMs": 1761,
+        "sourceMinusClipDurationMs": -360,
+        "maxDeltaDifferenceMs": 16429,
+        "firstPairIndex": 1023,
+        "lastPairIndex": 1035,
+        "candidateRunUnion": {
+          "provenance": [
+            {
+              "inputIndex": 1,
+              "inputPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/global-dp-word-alignment-nOEWCNc77MI_YE-faluP7zY_20260710-full-local30-freeze-v001_dp.json",
+              "originalRunIndex": 397
+            },
+            {
+              "inputIndex": 2,
+              "inputPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/global-dp-word-alignment-nOEWCNc77MI_YE-faluP7zY_selected_windows_20260709_redo_v001_dp.json",
+              "originalRunIndex": 205
+            }
+          ]
+        }
+      },
+      {
+        "index": 25,
+        "clipStartMs": 358151,
+        "clipEndMs": 359552,
+        "sourceStartMs": 10439052,
+        "sourceEndMs": 10441215,
+        "matchedWordPairCount": 11,
+        "clipDurationMs": 1401,
+        "sourceDurationMs": 2163,
+        "sourceMinusClipDurationMs": 762,
+        "maxDeltaDifferenceMs": 721,
+        "firstPairIndex": 1062,
+        "lastPairIndex": 1072,
+        "candidateRunUnion": {
+          "provenance": [
+            {
+              "inputIndex": 1,
+              "inputPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/global-dp-word-alignment-nOEWCNc77MI_YE-faluP7zY_20260710-full-local30-freeze-v001_dp.json",
+              "originalRunIndex": 416
+            }
+          ]
+        }
+      },
+      {
+        "index": 26,
+        "clipStartMs": 364883,
+        "clipEndMs": 369645,
+        "sourceStartMs": 10445778,
+        "sourceEndMs": 10449280,
+        "matchedWordPairCount": 10,
+        "clipDurationMs": 4762,
+        "sourceDurationMs": 3502,
+        "sourceMinusClipDurationMs": -1260,
+        "maxDeltaDifferenceMs": 4141,
+        "firstPairIndex": 1085,
+        "lastPairIndex": 1094,
+        "candidateRunUnion": {
+          "provenance": [
+            {
+              "inputIndex": 1,
+              "inputPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/global-dp-word-alignment-nOEWCNc77MI_YE-faluP7zY_20260710-full-local30-freeze-v001_dp.json",
+              "originalRunIndex": 423
+            }
+          ]
+        }
+      },
+      {
+        "index": 27,
+        "clipStartMs": 372545,
+        "clipEndMs": 373786,
+        "sourceStartMs": 10449280,
+        "sourceEndMs": 10450741,
+        "matchedWordPairCount": 10,
+        "clipDurationMs": 1241,
+        "sourceDurationMs": 1461,
+        "sourceMinusClipDurationMs": 220,
+        "maxDeltaDifferenceMs": 360,
+        "firstPairIndex": 1095,
+        "lastPairIndex": 1104,
+        "candidateRunUnion": {
+          "provenance": [
+            {
+              "inputIndex": 1,
+              "inputPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/global-dp-word-alignment-nOEWCNc77MI_YE-faluP7zY_20260710-full-local30-freeze-v001_dp.json",
+              "originalRunIndex": 424
+            }
+          ]
+        }
+      },
+      {
+        "index": 28,
+        "clipStartMs": 425880,
+        "clipEndMs": 437166,
+        "sourceStartMs": 11541555,
+        "sourceEndMs": 11553068,
+        "matchedWordPairCount": 42,
+        "clipDurationMs": 11286,
+        "sourceDurationMs": 11513,
+        "sourceMinusClipDurationMs": 227,
+        "maxDeltaDifferenceMs": 260,
+        "firstPairIndex": 1235,
+        "lastPairIndex": 1276,
+        "candidateRunUnion": {
+          "provenance": [
+            {
+              "inputIndex": 1,
+              "inputPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/global-dp-word-alignment-nOEWCNc77MI_YE-faluP7zY_20260710-full-local30-freeze-v001_dp.json",
+              "originalRunIndex": 504
+            }
+          ]
+        }
+      },
+      {
+        "index": 29,
+        "clipStartMs": 438446,
+        "clipEndMs": 443569,
+        "sourceStartMs": 11554128,
+        "sourceEndMs": 11560292,
+        "matchedWordPairCount": 24,
+        "clipDurationMs": 5123,
+        "sourceDurationMs": 6164,
+        "sourceMinusClipDurationMs": 1041,
+        "maxDeltaDifferenceMs": 1081,
+        "firstPairIndex": 1279,
+        "lastPairIndex": 1302,
+        "candidateRunUnion": {
+          "provenance": [
+            {
+              "inputIndex": 1,
+              "inputPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/global-dp-word-alignment-nOEWCNc77MI_YE-faluP7zY_20260710-full-local30-freeze-v001_dp.json",
+              "originalRunIndex": 507
+            }
+          ]
+        }
+      },
+      {
+        "index": 30,
+        "clipStartMs": 444850,
+        "clipEndMs": 447811,
+        "sourceStartMs": 11560472,
+        "sourceEndMs": 11563434,
+        "matchedWordPairCount": 16,
+        "clipDurationMs": 2961,
+        "sourceDurationMs": 2962,
+        "sourceMinusClipDurationMs": 1,
+        "maxDeltaDifferenceMs": 1441,
+        "firstPairIndex": 1304,
+        "lastPairIndex": 1319,
+        "candidateRunUnion": {
+          "provenance": [
+            {
+              "inputIndex": 1,
+              "inputPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/global-dp-word-alignment-nOEWCNc77MI_YE-faluP7zY_20260710-full-local30-freeze-v001_dp.json",
+              "originalRunIndex": 509
+            }
+          ]
+        }
+      },
+      {
+        "index": 31,
+        "clipStartMs": 450420,
+        "clipEndMs": 451781,
+        "sourceStartMs": 11565995,
+        "sourceEndMs": 11567356,
+        "matchedWordPairCount": 11,
+        "clipDurationMs": 1361,
+        "sourceDurationMs": 1361,
+        "sourceMinusClipDurationMs": 0,
+        "maxDeltaDifferenceMs": 160,
+        "firstPairIndex": 1324,
+        "lastPairIndex": 1334,
+        "candidateRunUnion": {
+          "provenance": [
+            {
+              "inputIndex": 1,
+              "inputPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/global-dp-word-alignment-nOEWCNc77MI_YE-faluP7zY_20260710-full-local30-freeze-v001_dp.json",
+              "originalRunIndex": 512
+            }
+          ]
+        }
+      },
+      {
+        "index": 32,
+        "clipStartMs": 451781,
+        "clipEndMs": 455463,
+        "sourceStartMs": 11567356,
+        "sourceEndMs": 11571899,
+        "matchedWordPairCount": 14,
+        "clipDurationMs": 3682,
+        "sourceDurationMs": 4543,
+        "sourceMinusClipDurationMs": 861,
+        "maxDeltaDifferenceMs": 900,
+        "firstPairIndex": 1335,
+        "lastPairIndex": 1348,
+        "candidateRunUnion": {
+          "provenance": [
+            {
+              "inputIndex": 1,
+              "inputPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/global-dp-word-alignment-nOEWCNc77MI_YE-faluP7zY_20260710-full-local30-freeze-v001_dp.json",
+              "originalRunIndex": 513
+            }
+          ]
+        }
+      },
+      {
+        "index": 33,
+        "clipStartMs": 456324,
+        "clipEndMs": 459146,
+        "sourceStartMs": 11572059,
+        "sourceEndMs": 11575281,
+        "matchedWordPairCount": 14,
+        "clipDurationMs": 2822,
+        "sourceDurationMs": 3222,
+        "sourceMinusClipDurationMs": 400,
+        "maxDeltaDifferenceMs": 579,
+        "firstPairIndex": 1350,
+        "lastPairIndex": 1363,
+        "candidateRunUnion": {
+          "provenance": [
+            {
+              "inputIndex": 1,
+              "inputPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/global-dp-word-alignment-nOEWCNc77MI_YE-faluP7zY_20260710-full-local30-freeze-v001_dp.json",
+              "originalRunIndex": 515
+            }
+          ]
+        }
+      }
+    ],
+    "boundaryCandidates": {
+      "offsetJumpCandidates": [],
+      "note": "入力ごとにpairIndex系が異なるため、統合結果でoffset jumpのpairIndexを作らない。素材境界は統合候補直線の実時刻差から再構成する。"
+    },
+    "unionSummary": {
+      "inputCandidateRunCount": 42,
+      "exactDuplicateCount": 8,
+      "mergedCandidateRunCount": 34
+    }
+  }
+}

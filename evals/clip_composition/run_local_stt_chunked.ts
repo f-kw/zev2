@@ -11,6 +11,8 @@ type CliOptions = {
   language: string;
   timeoutMs: number;
   chunkSec: number;
+  maxChunks?: number;
+  reuseChunkDir?: string;
   ffmpegCommand: string;
   ffprobeCommand: string;
   force: boolean;
@@ -31,6 +33,13 @@ type WordTimestamp = {
   confidence?: number;
   speaker?: string;
   segmentId?: number;
+};
+
+type ChunkBoundaryResolution = {
+  discardedSegmentCount: number;
+  clampedSegmentCount: number;
+  discardedWordCount: number;
+  clampedWordCount: number;
 };
 
 const evalRoot = path.join(workspaceRoot(), 'evals', 'clip_composition');
@@ -92,6 +101,11 @@ function parseOptions(argv: string[]): CliOptions {
   if (!Number.isFinite(timeoutMs) || timeoutMs < 0) {
     throw new Error('--timeoutMs は0以上の整数で指定してください');
   }
+  const rawMaxChunks = values.get('maxChunks')?.trim();
+  const maxChunks = rawMaxChunks ? Number.parseInt(rawMaxChunks, 10) : undefined;
+  if (rawMaxChunks && (!Number.isFinite(maxChunks) || maxChunks <= 0)) {
+    throw new Error('--maxChunks は1以上の整数で指定してください');
+  }
 
   return {
     inputPath: path.resolve(inputPath),
@@ -101,6 +115,8 @@ function parseOptions(argv: string[]): CliOptions {
     language: values.get('language')?.trim() || process.env.ZEV2_STT_LANGUAGE?.trim() || 'ja-JP',
     timeoutMs,
     chunkSec,
+    ...(maxChunks ? { maxChunks } : {}),
+    ...(values.get('reuseChunkDir')?.trim() ? { reuseChunkDir: path.resolve(values.get('reuseChunkDir')!.trim()) } : {}),
     ffmpegCommand: values.get('ffmpeg')?.trim() || process.env.ZEV2_FFMPEG_BIN?.trim() || process.env.FFMPEG_BIN?.trim() || 'ffmpeg',
     ffprobeCommand: values.get('ffprobe')?.trim() || process.env.ZEV2_FFPROBE_BIN?.trim() || process.env.FFPROBE_BIN?.trim() || 'ffprobe',
     force: flags.has('force')
@@ -295,6 +311,62 @@ function collectWords(payload: unknown, offsetMs: number, segmentIdOffset: numbe
   return words;
 }
 
+function constrainToChunkBoundary(
+  segments: SttSegment[],
+  words: WordTimestamp[],
+  chunkStartMs: number,
+  chunkEndMs: number,
+  segmentIdOffset: number
+): { segments: SttSegment[]; words: WordTimestamp[]; resolution: ChunkBoundaryResolution } {
+  const keptSegments = segments.filter((segment) => segment.startMs < chunkEndMs && segment.endMs > chunkStartMs);
+  const discardedSegmentCount = segments.length - keptSegments.length;
+  let clampedSegmentCount = 0;
+  const segmentIdMap = new Map<number, number>();
+  const constrainedSegments = keptSegments.map((segment, index) => {
+    const startMs = Math.max(chunkStartMs, segment.startMs);
+    const endMs = Math.min(chunkEndMs, segment.endMs);
+    if (startMs !== segment.startMs || endMs !== segment.endMs) {
+      clampedSegmentCount += 1;
+    }
+    const id = segmentIdOffset + index + 1;
+    segmentIdMap.set(segment.id, id);
+    return { ...segment, id, startMs, endMs };
+  });
+
+  const keptWords = words.filter((word) => word.startMs < chunkEndMs && word.endMs > chunkStartMs);
+  const discardedWordCount = words.length - keptWords.length;
+  let clampedWordCount = 0;
+  const constrainedWords = keptWords.map((word) => {
+    const startMs = Math.max(chunkStartMs, word.startMs);
+    const endMs = Math.min(chunkEndMs, word.endMs);
+    if (startMs !== word.startMs || endMs !== word.endMs) {
+      clampedWordCount += 1;
+    }
+    const mappedSegmentId = word.segmentId === undefined ? undefined : segmentIdMap.get(word.segmentId);
+    if (word.segmentId !== undefined && mappedSegmentId === undefined) {
+      throw new Error(`チャンク境界正規化後の単語が存在しない発話ID ${word.segmentId} を参照しています`);
+    }
+    const { segmentId: _segmentId, ...rest } = word;
+    return {
+      ...rest,
+      startMs,
+      endMs,
+      ...(mappedSegmentId !== undefined ? { segmentId: mappedSegmentId } : {})
+    };
+  });
+
+  return {
+    segments: constrainedSegments,
+    words: constrainedWords,
+    resolution: {
+      discardedSegmentCount,
+      clampedSegmentCount,
+      discardedWordCount,
+      clampedWordCount
+    }
+  };
+}
+
 function buildSpeechUnitGroups(segments: SttSegment[]): number[][] {
   return segments.map((segment) => [segment.id]);
 }
@@ -317,6 +389,7 @@ async function main() {
 
   const durationSec = await mediaDurationSec(options);
   const chunkCount = Math.ceil(durationSec / options.chunkSec);
+  const chunksToProcess = options.maxChunks ? Math.min(options.maxChunks, chunkCount) : chunkCount;
   const chunks: Array<{
     index: number;
     startMs: number;
@@ -325,34 +398,64 @@ async function main() {
     segmentCount: number;
     wordTimestampCount: number;
     rawResponsePath: string;
+    boundaryResolution: ChunkBoundaryResolution;
   }> = [];
   const segments: SttSegment[] = [];
   const words: WordTimestamp[] = [];
+  const boundaryResolution: ChunkBoundaryResolution = {
+    discardedSegmentCount: 0,
+    clampedSegmentCount: 0,
+    discardedWordCount: 0,
+    clampedWordCount: 0
+  };
 
-  for (let index = 0; index < chunkCount; index += 1) {
+  for (let index = 0; index < chunksToProcess; index += 1) {
     const startSec = index * options.chunkSec;
     const durationForChunkSec = Math.min(options.chunkSec, durationSec - startSec);
     const offsetMs = Math.round(startSec * 1000);
-    const audioPath = await extractChunkAudio(options, outputDir, index, startSec, durationForChunkSec);
-    console.log(`chunk ${index + 1}/${chunkCount}: ${Math.round(startSec)}s-${Math.round(startSec + durationForChunkSec)}s`);
-    const rawResponsePath = path.join(outputDir, 'chunks', `chunk-${String(index).padStart(4, '0')}.raw.json`);
+    const chunkName = `chunk-${String(index).padStart(4, '0')}`;
+    const reusedAudioPath = options.reuseChunkDir ? path.join(options.reuseChunkDir, `${chunkName}.flac`) : undefined;
+    const audioPath = reusedAudioPath && existsSync(reusedAudioPath)
+      ? reusedAudioPath
+      : await extractChunkAudio(options, outputDir, index, startSec, durationForChunkSec);
+    console.log(`chunk ${index + 1}/${chunksToProcess}: ${Math.round(startSec)}s-${Math.round(startSec + durationForChunkSec)}s`);
+    const outputRawResponsePath = path.join(outputDir, 'chunks', `${chunkName}.raw.json`);
+    const reusedRawResponsePath = options.reuseChunkDir ? path.join(options.reuseChunkDir, `${chunkName}.raw.json`) : undefined;
+    let rawResponsePath = reusedRawResponsePath && existsSync(reusedRawResponsePath)
+      ? reusedRawResponsePath
+      : outputRawResponsePath;
     let rawPayload: unknown;
     if (existsSync(rawResponsePath) && !options.force) {
       rawPayload = await readJson(rawResponsePath);
-      console.log(`chunk ${index + 1}/${chunkCount}: existing STT response reused`);
+      console.log(`chunk ${index + 1}/${chunksToProcess}: existing STT response reused`);
     } else {
       try {
         rawPayload = await transcribe(audioPath, options);
       } catch (error) {
         throw new Error(
-          `chunk ${index + 1}/${chunkCount} のSTTに失敗しました: ${error instanceof Error ? error.message : String(error)}`
+          `chunk ${index + 1}/${chunksToProcess} のSTTに失敗しました: ${error instanceof Error ? error.message : String(error)}`
         );
       }
-      await writeJson(rawResponsePath, rawPayload);
+      await mkdir(path.dirname(outputRawResponsePath), { recursive: true });
+      await writeJson(outputRawResponsePath, rawPayload);
+      rawResponsePath = outputRawResponsePath;
     }
     const segmentIdOffset = segments.length;
-    const chunkSegments = normalizeSegments(rawPayload, offsetMs, segmentIdOffset);
-    const chunkWords = collectWords(rawPayload, offsetMs, segmentIdOffset);
+    const rawChunkSegments = normalizeSegments(rawPayload, offsetMs, segmentIdOffset);
+    const rawChunkWords = collectWords(rawPayload, offsetMs, segmentIdOffset);
+    const constrained = constrainToChunkBoundary(
+      rawChunkSegments,
+      rawChunkWords,
+      offsetMs,
+      Math.round((startSec + durationForChunkSec) * 1000),
+      segmentIdOffset
+    );
+    const chunkSegments = constrained.segments;
+    const chunkWords = constrained.words;
+    boundaryResolution.discardedSegmentCount += constrained.resolution.discardedSegmentCount;
+    boundaryResolution.clampedSegmentCount += constrained.resolution.clampedSegmentCount;
+    boundaryResolution.discardedWordCount += constrained.resolution.discardedWordCount;
+    boundaryResolution.clampedWordCount += constrained.resolution.clampedWordCount;
     segments.push(...chunkSegments);
     words.push(...chunkWords);
     chunks.push({
@@ -362,7 +465,8 @@ async function main() {
       audioPath,
       segmentCount: chunkSegments.length,
       wordTimestampCount: chunkWords.length,
-      rawResponsePath
+      rawResponsePath,
+      boundaryResolution: constrained.resolution
     });
   }
 
@@ -374,11 +478,16 @@ async function main() {
       'clip_composition評価環境でローカルSTTサーバーを分割利用して文字起こしした結果です。',
       options.role === 'clip'
         ? '切り抜き側はBGM、SE、追加音声が混ざる前提で扱います。'
-        : '元動画側はexpectedCuts作成の時刻基準として扱います。'
+        : '元動画側はexpectedCuts作成の時刻基準として扱います。',
+      'STT応答の時刻は各音声チャンクの実範囲内に正規化し、範囲外の語は評価入力から除外します。'
     ],
     generatedAt: new Date().toISOString(),
     language: options.language,
-    durationSec,
+    durationSec: options.maxChunks ? Math.min(durationSec, chunksToProcess * options.chunkSec) : durationSec,
+    originalDurationSec: durationSec,
+    processedChunkCount: chunksToProcess,
+    fullChunkCount: chunkCount,
+    partial: chunksToProcess < chunkCount,
     segmentCount: segments.length,
     segments,
     speechUnitGroups: buildSpeechUnitGroups(segments)
@@ -392,10 +501,17 @@ async function main() {
     serverUrl: options.serverUrl,
     language: options.language,
     chunkSec: options.chunkSec,
-    chunkCount,
+    ...(options.reuseChunkDir ? { reuseChunkDir: options.reuseChunkDir } : {}),
+    fullChunkCount: chunkCount,
+    processedChunkCount: chunksToProcess,
+    partial: chunksToProcess < chunkCount,
     segmentCount: segments.length,
     wordTimestampCount: words.length,
     hasWordTimestamps: words.length > 0,
+    boundaryResolution: {
+      basis: 'exact_audio_chunk_boundaries',
+      ...boundaryResolution
+    },
     chunks,
     outputs: {
       rawResponse: path.join(outputDir, 'local-stt-response.raw.json'),
