@@ -488,6 +488,7 @@ async function main() {
       rawPayload = await readJson(rawResponsePath);
       console.log(`chunk ${index + 1}/${chunksToProcess}: existing STT response reused`);
     } else {
+      let retriedAfterConfirmedRestart = false;
       while (true) {
         try {
           rawPayload = await transcribe(audioPath, options);
@@ -498,8 +499,14 @@ async function main() {
               `chunk ${index + 1}/${chunksToProcess} のSTTに失敗しました: ${error instanceof Error ? error.message : String(error)}`
             );
           }
+          if (retriedAfterConfirmedRestart) {
+            throw new Error(
+              `chunk ${index + 1}/${chunksToProcess} はサーバー再起動後の再送でも接続失敗しました。同じ音声で再現するため、短いサブチャンクへ分割してください。`
+            );
+          }
           console.log(`chunk ${index + 1}/${chunksToProcess}: STT server connection failed; preserving completed chunks and waiting for restart`);
           await waitForServerRestart(options);
+          retriedAfterConfirmedRestart = true;
           console.log(`chunk ${index + 1}/${chunksToProcess}: retrying after STT server restart`);
         }
       }
