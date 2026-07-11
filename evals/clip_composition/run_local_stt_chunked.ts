@@ -15,6 +15,8 @@ type CliOptions = {
   reuseChunkDir?: string;
   ffmpegCommand: string;
   ffprobeCommand: string;
+  prepareOnly: boolean;
+  resumeAfterServerRestart: boolean;
   force: boolean;
 };
 
@@ -119,6 +121,8 @@ function parseOptions(argv: string[]): CliOptions {
     ...(values.get('reuseChunkDir')?.trim() ? { reuseChunkDir: path.resolve(values.get('reuseChunkDir')!.trim()) } : {}),
     ffmpegCommand: values.get('ffmpeg')?.trim() || process.env.ZEV2_FFMPEG_BIN?.trim() || process.env.FFMPEG_BIN?.trim() || 'ffmpeg',
     ffprobeCommand: values.get('ffprobe')?.trim() || process.env.ZEV2_FFPROBE_BIN?.trim() || process.env.FFPROBE_BIN?.trim() || 'ffprobe',
+    prepareOnly: flags.has('prepare-only'),
+    resumeAfterServerRestart: flags.has('resume-after-server-restart'),
     force: flags.has('force')
   };
 }
@@ -229,6 +233,31 @@ async function transcribe(audioPath: string, options: CliOptions): Promise<unkno
     throw new Error(`ローカルSTTサーバがエラーを返しました (${response.status}): ${responseText}`);
   }
   return JSON.parse(responseText) as unknown;
+}
+
+function retryableServerFailure(error: unknown): boolean {
+  return error instanceof TypeError || (
+    error instanceof DOMException && (error.name === 'TimeoutError' || error.name === 'AbortError')
+  );
+}
+
+async function waitForServerRestart(options: CliOptions): Promise<void> {
+  const healthUrl = new URL('/health', options.serverUrl).toString();
+  let attempt = 0;
+  while (true) {
+    attempt += 1;
+    try {
+      const response = await fetch(healthUrl, { signal: AbortSignal.timeout(10_000) });
+      if (response.ok) {
+        console.log(`STT server recovered after ${attempt} health check(s)`);
+        return;
+      }
+      console.log(`STT server health returned ${response.status}; waiting for automatic restart`);
+    } catch (error) {
+      console.log(`STT server unavailable (${error instanceof Error ? error.message : String(error)}); waiting for automatic restart`);
+    }
+    await new Promise((resolve) => setTimeout(resolve, 5_000));
+  }
 }
 
 function recordFrom(value: unknown): Record<string, unknown> {
@@ -390,6 +419,36 @@ async function main() {
   const durationSec = await mediaDurationSec(options);
   const chunkCount = Math.ceil(durationSec / options.chunkSec);
   const chunksToProcess = options.maxChunks ? Math.min(options.maxChunks, chunkCount) : chunkCount;
+  if (options.prepareOnly) {
+    const preparedChunks = [];
+    for (let index = 0; index < chunksToProcess; index += 1) {
+      const startSec = index * options.chunkSec;
+      const durationForChunkSec = Math.min(options.chunkSec, durationSec - startSec);
+      const audioPath = await extractChunkAudio(options, outputDir, index, startSec, durationForChunkSec);
+      preparedChunks.push({
+        index,
+        startMs: Math.round(startSec * 1000),
+        endMs: Math.round((startSec + durationForChunkSec) * 1000),
+        audioPath
+      });
+      console.log(`prepared ${index + 1}/${chunksToProcess}: ${Math.round(startSec)}s-${Math.round(startSec + durationForChunkSec)}s`);
+    }
+    const preparationPath = path.join(outputDir, 'audio-preparation.json');
+    await writeJson(preparationPath, {
+      kind: 'clip_composition_local_stt_audio_preparation',
+      createdAt: new Date().toISOString(),
+      itemId: options.itemId,
+      role: options.role,
+      inputPath: options.inputPath,
+      chunkSec: options.chunkSec,
+      fullChunkCount: chunkCount,
+      preparedChunkCount: preparedChunks.length,
+      partial: preparedChunks.length < chunkCount,
+      chunks: preparedChunks
+    });
+    console.log(`preparation: ${preparationPath}`);
+    return;
+  }
   const chunks: Array<{
     index: number;
     startMs: number;
@@ -429,12 +488,20 @@ async function main() {
       rawPayload = await readJson(rawResponsePath);
       console.log(`chunk ${index + 1}/${chunksToProcess}: existing STT response reused`);
     } else {
-      try {
-        rawPayload = await transcribe(audioPath, options);
-      } catch (error) {
-        throw new Error(
-          `chunk ${index + 1}/${chunksToProcess} のSTTに失敗しました: ${error instanceof Error ? error.message : String(error)}`
-        );
+      while (true) {
+        try {
+          rawPayload = await transcribe(audioPath, options);
+          break;
+        } catch (error) {
+          if (!options.resumeAfterServerRestart || !retryableServerFailure(error)) {
+            throw new Error(
+              `chunk ${index + 1}/${chunksToProcess} のSTTに失敗しました: ${error instanceof Error ? error.message : String(error)}`
+            );
+          }
+          console.log(`chunk ${index + 1}/${chunksToProcess}: STT server connection failed; preserving completed chunks and waiting for restart`);
+          await waitForServerRestart(options);
+          console.log(`chunk ${index + 1}/${chunksToProcess}: retrying after STT server restart`);
+        }
       }
       await mkdir(path.dirname(outputRawResponsePath), { recursive: true });
       await writeJson(outputRawResponsePath, rawPayload);
