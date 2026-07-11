@@ -1,0 +1,776 @@
+{
+  "kind": "clip_composition_theme_input_selection_analysis",
+  "runAt": "2026-07-11T07:00:09.988Z",
+  "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+  "outputId": "nOEWCNc77MI-theme-input-selection-diagnosis-20260711-v001",
+  "inputs": {
+    "candidatePlanPath": "evals/clip_composition/outputs/theme-source-candidate-chunks/nOEWCNc77MI-YE-faluP7zY-rough-source-candidate-chunks-20260710-v001.json",
+    "roughTranscriptPath": "evals/clip_composition/stt/nOEWCNc77MI_YE-faluP7zY_youtube_auto_rough/source/transcript.json",
+    "localTranscriptPath": "evals/clip_composition/stt/nOEWCNc77MI_YE-faluP7zY_local30_v001/source/transcript.json",
+    "promptInputPath": "evals/clip_composition/outputs/theme-generation/nOEWCNc77MI_rough_top50_speech_chars_source_only_v001/theme-llm-v002/nOEWCNc77MI-rough-top50-theme-input-after-stt-20260710-v001/prompt-input.json",
+    "geminiOutputPath": "evals/clip_composition/outputs/theme-generation/nOEWCNc77MI_rough_top50_speech_chars_source_only_v001/theme-llm-v002/nOEWCNc77MI-rough-top50-theme-input-after-stt-20260710-v001/run-01-gemini-output.json",
+    "expectedPath": "evals/clip_composition/expected/nOEWCNc77MI_multiblock_material_v001.json"
+  },
+  "rankDefinition": {
+    "unit": "30 second fixed chunk",
+    "populationChunkCount": 394,
+    "metric": "roughSpeechCharCount",
+    "nonSpeechTreatment": "角括弧だけの非発話表記を除外",
+    "tieBreak": "sourceStartMs ascending",
+    "crossChunkSegmentTreatment": "元の上位50選定と同じく、またがるsegmentの全文字数を各chunkへ計上",
+    "multiChunkExpectedTreatment": "全overlap chunkを記録し、最小rankをbestSpeechCharRankとして併記"
+  },
+  "summary": {
+    "expectedCount": 13,
+    "selectedTop50ExpectedCount": 1,
+    "inputVisibleExpectedCount": 1,
+    "sortedBestSpeechCharRanks": [
+      1,
+      69,
+      75,
+      79,
+      83,
+      85,
+      110,
+      129,
+      238,
+      252,
+      257,
+      334,
+      367
+    ]
+  },
+  "diagnosticAlternativeCoverage": {
+    "globalTop50SpeechChars": {
+      "selectedChunkCount": 50,
+      "coveredExpectedIndexes": [
+        2
+      ]
+    },
+    "timeStratified50TopSpeechCharsPerBand": {
+      "selectedChunkCount": 50,
+      "definition": "394 chunkを時刻順に50帯へ決定的に分け、各帯で発話文字数最大の1 chunkを選ぶ",
+      "coveredExpectedIndexes": [
+        2,
+        8
+      ]
+    },
+    "roughLaughMarkedChunks": {
+      "selectedChunkCount": 85,
+      "definition": "粗字幕に[笑い]または笑を含む30秒chunkをすべて選ぶ",
+      "coveredExpectedIndexes": [
+        2,
+        7,
+        9,
+        10,
+        11,
+        13
+      ]
+    },
+    "fullSource": {
+      "selectedChunkCount": 394,
+      "coveredExpectedIndexes": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13
+      ]
+    }
+  },
+  "expectedFacts": [
+    {
+      "expectedIndex": 1,
+      "materialBlockIndex": 1,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 260068,
+      "sourceEndMs": 264269,
+      "durationMs": 4201,
+      "overlappingChunks": [
+        {
+          "chunkIndex": 8,
+          "sourceStartMs": 240000,
+          "sourceEndMs": 270000,
+          "roughSpeechCharCount": 129,
+          "roughSpeechSegmentCount": 62,
+          "speechCharRank": 85,
+          "selectedInTop50": false
+        }
+      ],
+      "bestSpeechCharRank": 85,
+      "inputOverlapMs": 0,
+      "inputVisible": false,
+      "localTranscript": {
+        "segmentCount": 24,
+        "visibleCharCount": 24,
+        "text": "コーネがね今日ねずこスタイルなんでどうもどうもね",
+        "gapBeforeMs": 0,
+        "gapAfterMs": 0,
+        "positiveInternalGapsMs": [],
+        "maxInternalGapMs": 0,
+        "exactTextSignals": {
+          "questionMarkCount": 0,
+          "exclamationMarkCount": 0,
+          "laughTextCount": 0
+        }
+      },
+      "roughMarkers": []
+    },
+    {
+      "expectedIndex": 2,
+      "materialBlockIndex": 3,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 325479,
+      "sourceEndMs": 330720,
+      "durationMs": 5241,
+      "overlappingChunks": [
+        {
+          "chunkIndex": 10,
+          "sourceStartMs": 300000,
+          "sourceEndMs": 330000,
+          "roughSpeechCharCount": 123,
+          "roughSpeechSegmentCount": 62,
+          "speechCharRank": 112,
+          "selectedInTop50": false
+        },
+        {
+          "chunkIndex": 11,
+          "sourceStartMs": 330000,
+          "sourceEndMs": 360000,
+          "roughSpeechCharCount": 205,
+          "roughSpeechSegmentCount": 98,
+          "speechCharRank": 1,
+          "selectedInTop50": true
+        }
+      ],
+      "bestSpeechCharRank": 1,
+      "inputOverlapMs": 660,
+      "inputVisible": true,
+      "localTranscript": {
+        "segmentCount": 36,
+        "visibleCharCount": 36,
+        "text": "これ待ってちょっと面白くないこの絵面ひよこが立ち並んでる姿おもろいおもろ",
+        "gapBeforeMs": 0,
+        "gapAfterMs": 0,
+        "positiveInternalGapsMs": [
+          1298
+        ],
+        "maxInternalGapMs": 1298,
+        "exactTextSignals": {
+          "questionMarkCount": 0,
+          "exclamationMarkCount": 0,
+          "laughTextCount": 0
+        }
+      },
+      "roughMarkers": [
+        {
+          "text": "[笑い]",
+          "startMs": 310590,
+          "endMs": 317759,
+          "relationToExpected": "before"
+        },
+        {
+          "text": "[音楽]",
+          "startMs": 314820,
+          "endMs": 319560,
+          "relationToExpected": "before"
+        }
+      ]
+    },
+    {
+      "expectedIndex": 3,
+      "materialBlockIndex": 4,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 1052987,
+      "sourceEndMs": 1055347,
+      "durationMs": 2360,
+      "overlappingChunks": [
+        {
+          "chunkIndex": 35,
+          "sourceStartMs": 1050000,
+          "sourceEndMs": 1080000,
+          "roughSpeechCharCount": 133,
+          "roughSpeechSegmentCount": 70,
+          "speechCharRank": 75,
+          "selectedInTop50": false
+        }
+      ],
+      "bestSpeechCharRank": 75,
+      "inputOverlapMs": 0,
+      "inputVisible": false,
+      "localTranscript": {
+        "segmentCount": 23,
+        "visibleCharCount": 23,
+        "text": "ね、そんなつもりじゃないからねや、や、やーだけ",
+        "gapBeforeMs": 0,
+        "gapAfterMs": 0,
+        "positiveInternalGapsMs": [],
+        "maxInternalGapMs": 0,
+        "exactTextSignals": {
+          "questionMarkCount": 0,
+          "exclamationMarkCount": 0,
+          "laughTextCount": 0
+        }
+      },
+      "roughMarkers": [
+        {
+          "text": "[音楽]",
+          "startMs": 1063160,
+          "endMs": 1068120,
+          "relationToExpected": "after"
+        }
+      ]
+    },
+    {
+      "expectedIndex": 4,
+      "materialBlockIndex": 6,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 2790074,
+      "sourceEndMs": 2806680,
+      "durationMs": 16606,
+      "overlappingChunks": [
+        {
+          "chunkIndex": 93,
+          "sourceStartMs": 2790000,
+          "sourceEndMs": 2820000,
+          "roughSpeechCharCount": 98,
+          "roughSpeechSegmentCount": 57,
+          "speechCharRank": 252,
+          "selectedInTop50": false
+        }
+      ],
+      "bestSpeechCharRank": 252,
+      "inputOverlapMs": 0,
+      "inputVisible": false,
+      "localTranscript": {
+        "segmentCount": 70,
+        "visibleCharCount": 70,
+        "text": "なんか君の心みたいにあったかいあなたの心はどこ行った?あっこっちよもうお茶目だなどこ行ったんだい?待て待て!待て!気持ち悪いからついてこない",
+        "gapBeforeMs": 1044,
+        "gapAfterMs": 0,
+        "positiveInternalGapsMs": [],
+        "maxInternalGapMs": 0,
+        "exactTextSignals": {
+          "questionMarkCount": 2,
+          "exclamationMarkCount": 2,
+          "laughTextCount": 0
+        }
+      },
+      "roughMarkers": [
+        {
+          "text": "[音楽]",
+          "startMs": 2817410,
+          "endMs": 2821380,
+          "relationToExpected": "after"
+        }
+      ]
+    },
+    {
+      "expectedIndex": 5,
+      "materialBlockIndex": 7,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 3006642,
+      "sourceEndMs": 3021412,
+      "durationMs": 14770,
+      "overlappingChunks": [
+        {
+          "chunkIndex": 100,
+          "sourceStartMs": 3000000,
+          "sourceEndMs": 3030000,
+          "roughSpeechCharCount": 101,
+          "roughSpeechSegmentCount": 52,
+          "speechCharRank": 238,
+          "selectedInTop50": false
+        }
+      ],
+      "bestSpeechCharRank": 238,
+      "inputOverlapMs": 0,
+      "inputVisible": false,
+      "localTranscript": {
+        "segmentCount": 82,
+        "visibleCharCount": 82,
+        "text": "れてます大丈夫?大丈夫じゃないもう木がないから今探しに行くところ木が木じゃないね、そしたらねコーネがつまんないこと言うたびにさなんでそういうこと言うの?罰を与えたい",
+        "gapBeforeMs": 0,
+        "gapAfterMs": 0,
+        "positiveInternalGapsMs": [],
+        "maxInternalGapMs": 0,
+        "exactTextSignals": {
+          "questionMarkCount": 2,
+          "exclamationMarkCount": 0,
+          "laughTextCount": 0
+        }
+      },
+      "roughMarkers": []
+    },
+    {
+      "expectedIndex": 6,
+      "materialBlockIndex": 8,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 3180410,
+      "sourceEndMs": 3190215,
+      "durationMs": 9805,
+      "overlappingChunks": [
+        {
+          "chunkIndex": 106,
+          "sourceStartMs": 3180000,
+          "sourceEndMs": 3210000,
+          "roughSpeechCharCount": 135,
+          "roughSpeechSegmentCount": 70,
+          "speechCharRank": 69,
+          "selectedInTop50": false
+        }
+      ],
+      "bestSpeechCharRank": 69,
+      "inputOverlapMs": 0,
+      "inputVisible": false,
+      "localTranscript": {
+        "segmentCount": 55,
+        "visibleCharCount": 55,
+        "text": "肉焼いてる?しし肉あ、ごめんなさい焼いてなかったわもうしっかりしてくれよごめんなさいあなたお前がちゃんとしない",
+        "gapBeforeMs": 0,
+        "gapAfterMs": 0,
+        "positiveInternalGapsMs": [],
+        "maxInternalGapMs": 0,
+        "exactTextSignals": {
+          "questionMarkCount": 1,
+          "exclamationMarkCount": 0,
+          "laughTextCount": 0
+        }
+      },
+      "roughMarkers": []
+    },
+    {
+      "expectedIndex": 7,
+      "materialBlockIndex": 9,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 3285387,
+      "sourceEndMs": 3288829,
+      "durationMs": 3442,
+      "overlappingChunks": [
+        {
+          "chunkIndex": 109,
+          "sourceStartMs": 3270000,
+          "sourceEndMs": 3300000,
+          "roughSpeechCharCount": 75,
+          "roughSpeechSegmentCount": 41,
+          "speechCharRank": 334,
+          "selectedInTop50": false
+        }
+      ],
+      "bestSpeechCharRank": 334,
+      "inputOverlapMs": 0,
+      "inputVisible": false,
+      "localTranscript": {
+        "segmentCount": 19,
+        "visibleCharCount": 19,
+        "text": "とさ、それって共存してる?共存できない",
+        "gapBeforeMs": 0,
+        "gapAfterMs": 0,
+        "positiveInternalGapsMs": [],
+        "maxInternalGapMs": 0,
+        "exactTextSignals": {
+          "questionMarkCount": 1,
+          "exclamationMarkCount": 0,
+          "laughTextCount": 0
+        }
+      },
+      "roughMarkers": [
+        {
+          "text": "[笑い]",
+          "startMs": 3299250,
+          "endMs": 3313400,
+          "relationToExpected": "after"
+        }
+      ]
+    },
+    {
+      "expectedIndex": 8,
+      "materialBlockIndex": 10,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 3475241,
+      "sourceEndMs": 3485035,
+      "durationMs": 9794,
+      "overlappingChunks": [
+        {
+          "chunkIndex": 115,
+          "sourceStartMs": 3450000,
+          "sourceEndMs": 3480000,
+          "roughSpeechCharCount": 114,
+          "roughSpeechSegmentCount": 59,
+          "speechCharRank": 170,
+          "selectedInTop50": false
+        },
+        {
+          "chunkIndex": 116,
+          "sourceStartMs": 3480000,
+          "sourceEndMs": 3510000,
+          "roughSpeechCharCount": 121,
+          "roughSpeechSegmentCount": 60,
+          "speechCharRank": 129,
+          "selectedInTop50": false
+        }
+      ],
+      "bestSpeechCharRank": 129,
+      "inputOverlapMs": 0,
+      "inputVisible": false,
+      "localTranscript": {
+        "segmentCount": 56,
+        "visibleCharCount": 56,
+        "text": "やばいマリリンちょっと待ってマジでさ食材なくなったけどあ食材なんて全ての食材を船長が今握ってるからねねーすごいな",
+        "gapBeforeMs": 0,
+        "gapAfterMs": 0,
+        "positiveInternalGapsMs": [
+          290
+        ],
+        "maxInternalGapMs": 290,
+        "exactTextSignals": {
+          "questionMarkCount": 0,
+          "exclamationMarkCount": 0,
+          "laughTextCount": 0
+        }
+      },
+      "roughMarkers": [
+        {
+          "text": "[音楽]",
+          "startMs": 3473620,
+          "endMs": 3477540,
+          "relationToExpected": "overlap"
+        }
+      ]
+    },
+    {
+      "expectedIndex": 9,
+      "materialBlockIndex": 11,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 3998452,
+      "sourceEndMs": 4026707,
+      "durationMs": 28255,
+      "overlappingChunks": [
+        {
+          "chunkIndex": 133,
+          "sourceStartMs": 3990000,
+          "sourceEndMs": 4020000,
+          "roughSpeechCharCount": 130,
+          "roughSpeechSegmentCount": 71,
+          "speechCharRank": 83,
+          "selectedInTop50": false
+        },
+        {
+          "chunkIndex": 134,
+          "sourceStartMs": 4020000,
+          "sourceEndMs": 4050000,
+          "roughSpeechCharCount": 84,
+          "roughSpeechSegmentCount": 50,
+          "speechCharRank": 314,
+          "selectedInTop50": false
+        }
+      ],
+      "bestSpeechCharRank": 83,
+      "inputOverlapMs": 0,
+      "inputVisible": false,
+      "localTranscript": {
+        "segmentCount": 133,
+        "visibleCharCount": 133,
+        "text": "今更なんだけどさコーネのさ顔さもうちょい下げてもいいかもよマリリンの顔がさ可愛いフェイスが見えなくなっちゃうあでもね船長はねこうやって下を向いた時にコーネのねあの頭の匂い嗅いでるのからえ、いい匂い?うん、臭い泣いちゃったー泣くまで時間かかるからねごめんねじわじわ泣く",
+        "gapBeforeMs": 0,
+        "gapAfterMs": 0,
+        "positiveInternalGapsMs": [
+          4916
+        ],
+        "maxInternalGapMs": 4916,
+        "exactTextSignals": {
+          "questionMarkCount": 1,
+          "exclamationMarkCount": 0,
+          "laughTextCount": 0
+        }
+      },
+      "roughMarkers": [
+        {
+          "text": "[笑い]",
+          "startMs": 4014640,
+          "endMs": 4020740,
+          "relationToExpected": "overlap"
+        }
+      ]
+    },
+    {
+      "expectedIndex": 10,
+      "materialBlockIndex": 13,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 4877136,
+      "sourceEndMs": 4889844,
+      "durationMs": 12708,
+      "overlappingChunks": [
+        {
+          "chunkIndex": 162,
+          "sourceStartMs": 4860000,
+          "sourceEndMs": 4890000,
+          "roughSpeechCharCount": 53,
+          "roughSpeechSegmentCount": 29,
+          "speechCharRank": 367,
+          "selectedInTop50": false
+        }
+      ],
+      "bestSpeechCharRank": 367,
+      "inputOverlapMs": 0,
+      "inputVisible": false,
+      "localTranscript": {
+        "segmentCount": 41,
+        "visibleCharCount": 41,
+        "text": "かなかさいいよ取るよコーネがせんちょーの方が早いから大丈夫サメ来てるし謎の今の江戸",
+        "gapBeforeMs": 0,
+        "gapAfterMs": 1802,
+        "positiveInternalGapsMs": [],
+        "maxInternalGapMs": 0,
+        "exactTextSignals": {
+          "questionMarkCount": 0,
+          "exclamationMarkCount": 0,
+          "laughTextCount": 0
+        }
+      },
+      "roughMarkers": [
+        {
+          "text": "[笑い]",
+          "startMs": 4884110,
+          "endMs": 4888880,
+          "relationToExpected": "overlap"
+        }
+      ]
+    },
+    {
+      "expectedIndex": 11,
+      "materialBlockIndex": 14,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 5183974,
+      "sourceEndMs": 5189318,
+      "durationMs": 5344,
+      "overlappingChunks": [
+        {
+          "chunkIndex": 172,
+          "sourceStartMs": 5160000,
+          "sourceEndMs": 5190000,
+          "roughSpeechCharCount": 131,
+          "roughSpeechSegmentCount": 53,
+          "speechCharRank": 79,
+          "selectedInTop50": false
+        }
+      ],
+      "bestSpeechCharRank": 79,
+      "inputOverlapMs": 0,
+      "inputVisible": false,
+      "localTranscript": {
+        "segmentCount": 45,
+        "visibleCharCount": 45,
+        "text": "の好きなんだよねそういうくだらないやつがさそんなおもろくないことでいっぱい笑われると気まず",
+        "gapBeforeMs": 0,
+        "gapAfterMs": 1004,
+        "positiveInternalGapsMs": [],
+        "maxInternalGapMs": 0,
+        "exactTextSignals": {
+          "questionMarkCount": 0,
+          "exclamationMarkCount": 0,
+          "laughTextCount": 1
+        }
+      },
+      "roughMarkers": [
+        {
+          "text": "笑わ",
+          "startMs": 5174639,
+          "endMs": 5174820,
+          "relationToExpected": "before"
+        },
+        {
+          "text": "笑う",
+          "startMs": 5176080,
+          "endMs": 5176320,
+          "relationToExpected": "before"
+        },
+        {
+          "text": "笑わ",
+          "startMs": 5188679,
+          "endMs": 5188980,
+          "relationToExpected": "overlap"
+        }
+      ]
+    },
+    {
+      "expectedIndex": 12,
+      "materialBlockIndex": 15,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 5217231,
+      "sourceEndMs": 5218992,
+      "durationMs": 1761,
+      "overlappingChunks": [
+        {
+          "chunkIndex": 173,
+          "sourceStartMs": 5190000,
+          "sourceEndMs": 5220000,
+          "roughSpeechCharCount": 97,
+          "roughSpeechSegmentCount": 49,
+          "speechCharRank": 257,
+          "selectedInTop50": false
+        }
+      ],
+      "bestSpeechCharRank": 257,
+      "inputOverlapMs": 0,
+      "inputVisible": false,
+      "localTranscript": {
+        "segmentCount": 13,
+        "visibleCharCount": 13,
+        "text": "気づけなくてごめんそういう",
+        "gapBeforeMs": 0,
+        "gapAfterMs": 0,
+        "positiveInternalGapsMs": [],
+        "maxInternalGapMs": 0,
+        "exactTextSignals": {
+          "questionMarkCount": 0,
+          "exclamationMarkCount": 0,
+          "laughTextCount": 0
+        }
+      },
+      "roughMarkers": []
+    },
+    {
+      "expectedIndex": 13,
+      "materialBlockIndex": 17,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 11541555,
+      "sourceEndMs": 11575281,
+      "durationMs": 33726,
+      "overlappingChunks": [
+        {
+          "chunkIndex": 384,
+          "sourceStartMs": 11520000,
+          "sourceEndMs": 11550000,
+          "roughSpeechCharCount": 124,
+          "roughSpeechSegmentCount": 57,
+          "speechCharRank": 110,
+          "selectedInTop50": false
+        },
+        {
+          "chunkIndex": 385,
+          "sourceStartMs": 11550000,
+          "sourceEndMs": 11580000,
+          "roughSpeechCharCount": 124,
+          "roughSpeechSegmentCount": 63,
+          "speechCharRank": 111,
+          "selectedInTop50": false
+        }
+      ],
+      "bestSpeechCharRank": 110,
+      "inputOverlapMs": 0,
+      "inputVisible": false,
+      "localTranscript": {
+        "segmentCount": 142,
+        "visibleCharCount": 142,
+        "text": "終わりが見えないな、ちょっと閉めだけしてあとは水面下でこっそり進めとくわ、船長はでも誘って?本当?付き合ってくれるの?付き合いたいマリーンそれ告白だよもうでもマリーンはいろんな女いるからな気づいた?だいぶ前から気づいてるけどねバレたか誰でもいいんでしょ?そんなことないよ誰でもよくはな",
+        "gapBeforeMs": 0,
+        "gapAfterMs": 0,
+        "positiveInternalGapsMs": [
+          1629
+        ],
+        "maxInternalGapMs": 1629,
+        "exactTextSignals": {
+          "questionMarkCount": 5,
+          "exclamationMarkCount": 0,
+          "laughTextCount": 0
+        }
+      },
+      "roughMarkers": [
+        {
+          "text": "[笑い]",
+          "startMs": 11577470,
+          "endMs": 11582279,
+          "relationToExpected": "after"
+        }
+      ]
+    }
+  ],
+  "nearestCandidateToInputVisibleExpected": {
+    "expectedIndex": 2,
+    "materialBlockIndex": 3,
+    "inputOverlapMs": 660,
+    "nearest": {
+      "candidateIndex": 1,
+      "rangeIndex": 1,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 335402,
+      "sourceEndMs": 359330,
+      "title": "船のリフォームお披露目とまさかの愚痴",
+      "summary": null,
+      "summaryFieldPresent": false,
+      "reason": "宝鐘マリンがリスナーに向けて新しくなった船のリフォーム内容と、想像以上に資材を消費した割にサメに壊されてしまうという想定外の不満を語る場面です。",
+      "distanceMs": 4682
+    },
+    "nextNearest": [
+      {
+        "candidateIndex": 2,
+        "rangeIndex": 1,
+        "sourceVideoId": "YE-faluP7zY",
+        "sourceStartMs": 397197,
+        "sourceEndMs": 438186,
+        "title": "ピンク色の空に見立てた二人の関係性",
+        "summary": null,
+        "summaryFieldPresent": false,
+        "reason": "綺麗なピンク色の空（朝日）を見ながら、お互いの心や関係性の色に例えようとして独特の空気感になる二人の掛け合いが魅力的です。",
+        "distanceMs": 66477
+      },
+      {
+        "candidateIndex": 1,
+        "rangeIndex": 2,
+        "sourceVideoId": "YE-faluP7zY",
+        "sourceStartMs": 511410,
+        "sourceEndMs": 539932,
+        "title": "船のリフォームお披露目とまさかの愚痴",
+        "summary": null,
+        "summaryFieldPresent": false,
+        "reason": "宝鐘マリンがリスナーに向けて新しくなった船のリフォーム内容と、想像以上に資材を消費した割にサメに壊されてしまうという想定外の不満を語る場面です。",
+        "distanceMs": 180690
+      },
+      {
+        "candidateIndex": 3,
+        "rangeIndex": 1,
+        "sourceVideoId": "YE-faluP7zY",
+        "sourceStartMs": 570560,
+        "sourceEndMs": 600004,
+        "title": "お腹がすいたマリンに芋を配るころね",
+        "summary": null,
+        "summaryFieldPresent": false,
+        "reason": "マリンのお腹がすいているという発話に対し、ころねが大量の芋を勧めて食べさせようとする微笑ましいやり取りが完結しているため。",
+        "distanceMs": 239840
+      },
+      {
+        "candidateIndex": 4,
+        "rangeIndex": 1,
+        "sourceVideoId": "YE-faluP7zY",
+        "sourceStartMs": 870042,
+        "sourceEndMs": 899732,
+        "title": "マリンの雑な反応と予想外のフォロー",
+        "summary": null,
+        "summaryFieldPresent": false,
+        "reason": "ころねがマリンに心配を求めるも雑にあしらわれ、その直後にころねがマリンの作業姿勢を褒めるというツンデレ的な展開があるため。",
+        "distanceMs": 539322
+      }
+    ]
+  },
+  "v003Isolation": {
+    "changeOnly": "input selection",
+    "proposedInput": "同じローカルSTTの全sourceを既存windowingへ渡す",
+    "heldConstant": [
+      "theme_generation_prompt_v002",
+      "gemini-web-flash",
+      "requestedThemeCount",
+      "window byte limit and merge rule",
+      "output contract and formal scorer"
+    ],
+    "namingNote": "プロンプトを変えないためtheme-llm-v003とはせず、input-selection-v003として記録する"
+  }
+}
