@@ -1,0 +1,37 @@
+{
+  "kind": "clip_composition_chat_replay_integrity",
+  "inspectedAt": "2026-07-11T15:50:29.155Z",
+  "sourceVideoId": "o8rZAhARXAc",
+  "sourceDurationMs": 11898441,
+  "acquisition": {
+    "filePath": "evals/clip_composition/research/chat-replay/9dtwF5Exu5w/o8rZAhARXAc.live_chat.json",
+    "fileBytes": 183190813,
+    "sha256": "12321c8e1ef9db2cf0586057bffaeb7ab58ecd9ac1c0f2544b2227fda3b9bbfc",
+    "lineCount": 121495,
+    "parseErrorCount": 0,
+    "minOffsetMs": 0,
+    "maxOffsetMs": 11899823,
+    "rendererCounts": {
+      "liveChatViewerEngagementMessageRenderer": 1,
+      "liveChatSponsorshipsGiftPurchaseAnnouncementRenderer": 5,
+      "liveChatPaidMessageRenderer": 36,
+      "liveChatMembershipItemRenderer": 32,
+      "liveChatTextMessageRenderer": 116657,
+      "liveChatPlaceholderItemRenderer": 4700,
+      "liveChatSponsorshipsGiftRedemptionAnnouncementRenderer": 2
+    }
+  },
+  "preregisteredSelectionCounts": {
+    "formalTopN": 100,
+    "durationRatioReference": 100,
+    "topPercentReference": 100,
+    "targetFullMinuteCount": 198,
+    "note": "配信長だけからexpected作成前に確定。入力可視性と流速値は計算していない。"
+  },
+  "safeguards": {
+    "chatTextOrAuthorPersisted": false,
+    "perMinuteVelocityComputed": false,
+    "expectedRead": false,
+    "llmExecuted": false
+  }
+}
