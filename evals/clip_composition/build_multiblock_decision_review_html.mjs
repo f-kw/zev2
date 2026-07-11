@@ -93,44 +93,44 @@ function boundaryForm(boundary) {
   const id = boundary.boundaryIndex;
   return `
   <section class="decision-answer" data-boundary-answer="${id}">
-    <h3>境界${id}の回答</h3>
-    <p>4項目を動画で確認してください。判定不能は無理に合格へ寄せず、そのまま選べます。</p>
+    <h3>確認${id}の答え</h3>
+    <p>上の2本、下の2本を見て答えてください。迷ったら「わからない」で大丈夫です。</p>
     <div class="decision-grid">
-      <label>切り抜き連続再生で素材が切り替わるか
+      <label>1. 上の左：この所で、話や場面が変わりましたか？
         <select data-boundary-field="clipSwitch">
           ${option('', '未回答')}
-          ${option('true', '切り替わる')}
-          ${option('false', '切り替わらない')}
-          ${option('unresolved', '判定不能')}
+          ${option('true', 'はい、変わった')}
+          ${option('false', 'いいえ、そのまま続いている')}
+          ${option('unresolved', 'わからない')}
         </select>
       </label>
-      <label>元配信の対応位置が切り替わるか
+      <label>2. 上の右：前半と後半は、元配信の別の所ですか？
         <select data-boundary-field="sourcePositionSwitches">
           ${option('', '未回答')}
-          ${option('true', '別位置へ切り替わる')}
-          ${option('false', '同じ位置に見える')}
-          ${option('unresolved', '判定不能')}
+          ${option('true', 'はい、別の所')}
+          ${option('false', 'いいえ、同じ所の続き')}
+          ${option('unresolved', 'わからない')}
         </select>
       </label>
-      <label>境界前は切り抜きと元配信で同じ素材か
+      <label>3. 下の左：左右は同じ会話・場面ですか？
         <select data-boundary-field="beforeMatches">
           ${option('', '未回答')}
-          ${option('true', '同じ素材')}
-          ${option('false', '違う素材')}
-          ${option('unresolved', '判定不能')}
+          ${option('true', 'はい、同じ')}
+          ${option('false', 'いいえ、違う')}
+          ${option('unresolved', 'わからない')}
         </select>
       </label>
-      <label>境界後は切り抜きと元配信で同じ素材か
+      <label>4. 下の右：左右は同じ会話・場面ですか？
         <select data-boundary-field="afterMatches">
           ${option('', '未回答')}
-          ${option('true', '同じ素材')}
-          ${option('false', '違う素材')}
-          ${option('unresolved', '判定不能')}
+          ${option('true', 'はい、同じ')}
+          ${option('false', 'いいえ、違う')}
+          ${option('unresolved', 'わからない')}
         </select>
       </label>
     </div>
-    <label>境界メモ
-      <textarea data-boundary-field="note" placeholder="不一致・判定不能・crossfadeなど、後で判断根拠になることだけ記録"></textarea>
+    <label>気づいたこと（なければ空欄）
+      <textarea data-boundary-field="note" placeholder="例：音は同じだが画面だけ切り替わる。途中で少し重なっている。"></textarea>
     </label>
     <p class="answer-state" data-boundary-state="${id}">未回答</p>
   </section>`;
@@ -144,27 +144,27 @@ function blockRows(blocks) {
         <td>${block.sourceRange.startMs}-${block.sourceRange.endMs}</td>
         <td>
           <select data-block-field="status">
-            ${option('pending', '未回答')}
-            ${option('accepted', '採用')}
-            ${option('rejected', '不採用')}
-            ${option('unresolved', '判定不能')}
+            ${option('pending', '未確認')}
+            ${option('accepted', '正しい')}
+            ${option('rejected', '違う')}
+            ${option('unresolved', 'わからない')}
           </select>
         </td>
-        <td><textarea data-block-field="note" placeholder="不採用・判定不能では理由必須"></textarea></td>
+        <td><textarea data-block-field="note" placeholder="「違う」「わからない」のときだけ理由を書く"></textarea></td>
       </tr>`).join('');
 }
 
 function finalForm(template) {
   return `
   <section class="decision-final" id="decision-final">
-    <h2>最終確認とdecision JSON</h2>
-    <p>境界回答からブロック状態を埋めた後、各ブロックの採否を人間が確認してください。自動提案は確定ではありません。</p>
+    <h2>最後の確認</h2>
+    <p>機械が「切り抜きは元配信のこの17か所を使った」と予想しています。下のボタンで、さきほどの回答から17か所を仮入力します。基本は内容を見るだけで、違う所やわからない所があれば直してください。</p>
     <div class="decision-actions">
-      <button type="button" id="derive-blocks">境界回答からブロック状態を埋める</button>
+      <button type="button" id="derive-blocks">さきほどの回答から17か所を仮入力する</button>
     </div>
     <div class="block-table-wrap">
       <table class="block-decision-table">
-        <thead><tr><th>block</th><th>clip ms</th><th>source ms</th><th>人間判定</th><th>理由・メモ</th></tr></thead>
+        <thead><tr><th>候補</th><th>切り抜き内の時刻</th><th>元配信内の時刻</th><th>この候補は正しい？</th><th>違う・わからない理由</th></tr></thead>
         <tbody>${blockRows(template.blocks)}</tbody>
       </table>
     </div>
@@ -175,28 +175,28 @@ function finalForm(template) {
       <label>確認日
         <input id="checked-at" type="date" value="${escapeHtml(options.checkedAt)}">
       </label>
-      <label class="wide">固定テーマ1行
-        <input id="fixed-theme" placeholder="採用区間から人間が逆算したテーマ。候補LLMの文をそのまま使わない">
+      <label class="wide">この切り抜きは、何についての動画ですか？ 1文で入力
+        <input id="fixed-theme" placeholder="例：マリンところねがRaftでじゃれ合いながら船を作る場面">
       </label>
-      <label class="wide">全体メモ
-        <textarea id="confirmation-note" placeholder="確認手段の限界、crossfade、除外理由など"></textarea>
+      <label class="wide">全体を通して気づいたこと（なければ空欄）
+        <textarea id="confirmation-note" placeholder="例：確認8だけ画面が重なっていて判断しづらい"></textarea>
       </label>
     </div>
     <label class="freeze-consent">
       <input type="checkbox" id="freeze-consent">
-      この回答を凍結候補として確定する。実際のfixture/expected書き込みは、別工程のpost-human dry-run後に行う。
+      以上の回答で次の確認へ進んでよい。ここにチェックしても、まだ正解データの書き込みは行いません。
     </label>
     <div class="decision-actions">
-      <button type="button" id="build-decision">回答を検査してJSONを作る</button>
-      <button type="button" id="copy-summary">回答文をコピー</button>
-      <button type="button" id="copy-decision">JSONをコピー</button>
-      <button type="button" id="download-decision">JSONを保存</button>
-      <button type="button" class="secondary" id="clear-saved">この画面の保存回答を消す</button>
+      <button type="button" id="build-decision">未回答を確認して結果を作る</button>
+      <button type="button" id="copy-summary">チャットに返す文をコピー</button>
+      <button type="button" id="copy-decision">作業用JSONをコピー</button>
+      <button type="button" id="download-decision">作業用JSONを保存</button>
+      <button type="button" class="secondary" id="clear-saved">入力を最初からやり直す</button>
     </div>
     <div id="validation-summary" class="validation-summary"></div>
     <h3>チャットへ返す回答</h3>
     <textarea id="review-summary" readonly placeholder="確認結果をまとめると、ここにチャットへ貼れる回答が出ます"></textarea>
-    <h3>凍結用decision JSON</h3>
+    <h3>作業用JSON（通常は見なくてよい）</h3>
     <textarea id="decision-output" readonly placeholder="入力内容を検査すると、凍結用decision JSONがここに出ます"></textarea>
     <p id="copy-status" class="copy-status"></p>
   </section>`;
@@ -215,6 +215,8 @@ function styles() {
     :root { --ink: #172033; --muted: #5f6b7a; --line: #d8dee8; --blue: #2563eb; --blue-soft: #eff6ff; --ok: #166534; --ok-soft: #f0fdf4; --warn: #9a3412; --warn-soft: #fff7ed; --bad: #991b1b; --bad-soft: #fef2f2; }
     body { max-width: 1240px; margin: 0 auto !important; padding: 28px 24px 80px; background: #f8fafc; color: var(--ink) !important; }
     body > h1 { margin-top: 74px; }
+    body > h2:first-of-type, body > h2:first-of-type + table { display: none; }
+    article > table, section.strip { display: none; }
     article, .decision-final, .decision-meta { background: white; border: 1px solid var(--line); border-radius: 14px; padding: 22px; box-shadow: 0 6px 22px rgba(15, 23, 42, .06); }
     article { border-top: 1px solid var(--line) !important; }
     .decision-progress { position: fixed; z-index: 20; top: 0; left: 0; right: 0; display: flex; justify-content: center; gap: 22px; padding: 13px 20px; color: white; background: rgba(15, 23, 42, .96); backdrop-filter: blur(8px); font-weight: 700; }
@@ -257,18 +259,25 @@ function styles() {
 function topPanel(template) {
   return `
   <div class="decision-progress">
-    <span id="boundary-progress">境界 0/${template.boundaries.length}</span>
-    <span id="block-progress">ブロック 0/${template.blocks.length}</span>
+    <span id="boundary-progress">切り替わり 0/${template.boundaries.length}</span>
+    <span id="block-progress">使用箇所 0/${template.blocks.length}</span>
     <span id="save-state">自動保存待ち</span>
   </div>
   <section class="decision-meta">
-    <h2>この画面で行うこと</h2>
-    <p>動画を見ながら境界1から順に4項目へ回答します。最後に17ブロックの採否と固定テーマを確認すると、凍結処理が直接読めるdecision JSONを出力します。</p>
+    <h2>何を確認する画面？</h2>
+    <p>この切り抜きは、元配信の17か所をつないで作られていると機械が予想しました。その予想が本当に合っているかを、16個の切り替わりで確認します。</p>
+    <p><strong>各番号で見る動画は4本だけです。</strong></p>
+    <ol>
+      <li><strong>上の左</strong>：切り抜きだけを見る。この所で話や場面が変わったか。</li>
+      <li><strong>上の右</strong>：元配信の前半と後半をつないだ動画。別の所へ飛んでいるか。</li>
+      <li><strong>下の左</strong>：切り替わる前。左右が同じ会話・場面か。</li>
+      <li><strong>下の右</strong>：切り替わった後。左右が同じ会話・場面か。</li>
+    </ol>
+    <p>口の動きが完全に同じか、数秒の細かい違いまでは見なくて大丈夫です。迷ったら「わからない」を選んでください。</p>
     <ul>
       <li>回答はこのブラウザー内へ自動保存されます。</li>
-      <li>判定不能・不一致を選んでも構いません。理由を残し、凍結を止めるための選択肢です。</li>
-      <li>このHTML自身はfixture/expectedへ書き込みません。</li>
-      <li>JSON生成後も、実凍結前に書き込みなしのpost-human dry-runを行います。</li>
+      <li>「違う」「わからない」を選んでも問題ありません。正解データを間違って作らないための回答です。</li>
+      <li>この画面へ入力しても、まだ正解データは書き込まれません。</li>
     </ul>
   </section>`;
 }
@@ -329,13 +338,13 @@ function script(template) {
         if (!element) return;
         element.className = 'answer-state';
         if (result.status === 'confirmed') {
-          element.textContent = '4項目とも確認済み';
+          element.textContent = '4つとも「はい」';
           element.classList.add('confirmed');
         } else if (result.status === 'rejected') {
-          element.textContent = '不一致あり。凍結前に扱いの確認が必要';
+          element.textContent = '「いいえ」があります。ここは後で確認します';
           element.classList.add('rejected');
         } else if (result.status === 'unresolved') {
-          element.textContent = '判定不能あり。凍結を止める';
+          element.textContent = '「わからない」があります。ここは正解に入れません';
         } else {
           const answered = result._ui.facts.filter((fact) => !fact.endsWith('未回答')).length;
           element.textContent = '回答 ' + answered + '/4';
@@ -427,38 +436,38 @@ function script(template) {
         const answered = boundaries.filter((boundary) => boundary._ui.answered).length;
         const blocks = template.blocks.map(blockResult);
         const decided = blocks.filter((block) => block.status !== 'pending').length;
-        document.getElementById('boundary-progress').textContent = '境界 ' + answered + '/' + boundaries.length;
-        document.getElementById('block-progress').textContent = 'ブロック ' + decided + '/' + blocks.length;
+        document.getElementById('boundary-progress').textContent = '切り替わり ' + answered + '/' + boundaries.length;
+        document.getElementById('block-progress').textContent = '使用箇所 ' + decided + '/' + blocks.length;
       }
 
       function validate(decision, boundaryUi) {
         const issues = [];
-        if (!decision.humanConfirmation.checkedBy) issues.push('確認者が未入力');
-        if (!decision.humanConfirmation.checkedAt) issues.push('確認日が未入力');
-        if (!decision.humanConfirmation.allBoundariesReviewed) issues.push('未回答の境界がある');
-        if (!decision.humanConfirmation.allBlocksReviewed) issues.push('未回答のブロックがある');
-        if (!decision.fixedTheme.title) issues.push('固定テーマ1行が未入力');
-        if (!decision.blocks.some((block) => block.status === 'accepted')) issues.push('採用ブロックが1件もない');
+        if (!decision.humanConfirmation.checkedBy) issues.push('確認した人の名前がありません');
+        if (!decision.humanConfirmation.checkedAt) issues.push('確認した日がありません');
+        if (!decision.humanConfirmation.allBoundariesReviewed) issues.push('16個の切り替わりに未回答があります');
+        if (!decision.humanConfirmation.allBlocksReviewed) issues.push('17個の使用箇所に未確認があります');
+        if (!decision.fixedTheme.title) issues.push('「この切り抜きは何についての動画か」が未入力です');
+        if (!decision.blocks.some((block) => block.status === 'accepted')) issues.push('正しいと確認できた使用箇所がありません');
         for (const block of decision.blocks) {
           if ((block.status === 'rejected' || block.status === 'unresolved') && !block.note) {
-            issues.push('block ' + block.blockIndex + ' の不採用・判定不能理由がない');
+            issues.push('使用箇所' + block.blockIndex + 'の「違う・わからない」理由がありません');
           }
         }
         for (const boundary of decision.boundaries) {
           if ((boundary.status === 'rejected' || boundary.status === 'unresolved') && !boundary.note) {
-            issues.push('境界' + boundary.boundaryIndex + ' の不一致・判定不能理由がない');
+            issues.push('確認' + boundary.boundaryIndex + 'の「違う・わからない」理由がありません');
           }
           if (boundary.status === 'confirmed' && boundaryUi[boundary.boundaryIndex].clipSwitch !== 'true') {
-            issues.push('境界' + boundary.boundaryIndex + ' は切り抜き側の切替確認がない');
+            issues.push('確認' + boundary.boundaryIndex + 'で、切り抜き側の場面変化が「はい」になっていません');
           }
         }
         const accepted = new Set(decision.blocks.filter((block) => block.status === 'accepted').map((block) => block.blockIndex));
         for (const boundary of decision.boundaries) {
           if (accepted.has(boundary.beforeBlockIndex) && accepted.has(boundary.afterBlockIndex) && boundary.status !== 'confirmed') {
-            issues.push('採用block ' + boundary.beforeBlockIndex + '/' + boundary.afterBlockIndex + ' 間の境界' + boundary.boundaryIndex + 'が未確定');
+            issues.push('正しい使用箇所' + boundary.beforeBlockIndex + 'と' + boundary.afterBlockIndex + 'の間の確認' + boundary.boundaryIndex + 'が終わっていません');
           }
         }
-        if (!document.getElementById('freeze-consent').checked) issues.push('凍結候補として確定するチェックが未入力');
+        if (!document.getElementById('freeze-consent').checked) issues.push('「以上の回答で次の確認へ進んでよい」にチェックがありません');
         return [...new Set(issues)];
       }
 
@@ -484,17 +493,19 @@ function script(template) {
         decision.readyForFreeze = issues.length === 0;
         const acceptedBlocks = decision.blocks.filter((block) => block.status === 'accepted').map((block) => block.blockIndex);
         const excludedBlocks = decision.blocks.filter((block) => block.status !== 'accepted').map((block) => block.blockIndex + ':' + block.status);
+        const boundaryStatusText = { confirmed: '問題なし', rejected: '違う可能性あり', unresolved: 'わからない', pending: '未回答' };
+        const blockStatusText = { accepted: '正しい', rejected: '違う', unresolved: 'わからない', pending: '未確認' };
         const summaryLines = [
           'B素材 nOEWCNc77MI 人間確認結果',
           '確認者: ' + (decision.humanConfirmation.checkedBy || '未入力'),
           '確認日: ' + (decision.humanConfirmation.checkedAt || '未入力'),
           '',
-          ...decision.boundaries.map((boundary) => '境界' + boundary.boundaryIndex + ': ' + boundary.status + ' / ' + boundary.note),
+          ...decision.boundaries.map((boundary) => '確認' + boundary.boundaryIndex + ': ' + boundaryStatusText[boundary.status] + ' / ' + boundary.note),
           '',
-          '採用block: ' + (acceptedBlocks.length ? acceptedBlocks.join(', ') : 'なし'),
-          '除外・判定不能block: ' + (excludedBlocks.length ? excludedBlocks.join(', ') : 'なし'),
-          '固定テーマ: ' + (decision.fixedTheme.title || '未入力'),
-          'readyForFreeze: ' + decision.readyForFreeze,
+          '正しい使用箇所: ' + (acceptedBlocks.length ? acceptedBlocks.join(', ') : 'なし'),
+          '違う・わからない使用箇所: ' + (excludedBlocks.length ? decision.blocks.filter((block) => block.status !== 'accepted').map((block) => block.blockIndex + ':' + blockStatusText[block.status]).join(', ') : 'なし'),
+          'この切り抜きの内容: ' + (decision.fixedTheme.title || '未入力'),
+          '次の確認へ進める: ' + (decision.readyForFreeze ? 'はい' : 'いいえ'),
           ...(issues.length ? ['', '未完了:', ...issues.map((issue) => '- ' + issue)] : [])
         ];
         document.getElementById('review-summary').value = summaryLines.join('\\n') + '\\n';
@@ -596,6 +607,9 @@ async function main() {
   assert(headings.length === template.boundaries.length, `HTML境界数とdecision templateが一致しません: ${headings.length}/${template.boundaries.length}`);
 
   let html = sourceHtml;
+  html = html.replace(/  <section class="instructions">[\s\S]*?<\/section>/, '');
+  html = html.replace(/<title>[^<]+<\/title>/, '<title>B素材：切り抜きと元配信の確認</title>');
+  html = html.replace(/<h1>[^<]+<\/h1>/, '<h1>B素材：切り抜きと元配信が同じ場面か確認</h1>');
   html = html.replace('</style>', `${styles()}\n  </style>`);
   html = html.replace(/(<h1>[^<]+<\/h1>)/, `$1\n${topPanel(template)}`);
   for (const boundary of template.boundaries) {
@@ -603,6 +617,13 @@ async function main() {
     assert(headingPattern.test(html), `境界${boundary.boundaryIndex}見出しがありません`);
     html = html.replace(headingPattern, `$1\n${boundaryForm(boundary)}`);
   }
+  html = html.replace(/<h2>境界(\d+): block (\d+) -> (\d+)<\/h2>/g, '<h2>確認$1：候補$2から候補$3へ変わる所</h2>');
+  html = html.replaceAll('<h3>最初に見る動画</h3>', '<h3>上の2本</h3>');
+  html = html.replaceAll('<h3>対応確認の補助</h3>', '<h3>下の2本</h3>');
+  html = html.replaceAll('clip連続再生。切り抜き単体で、境界前から境界後まで実際の順番で見る。', '上の左。切り抜きだけの動画。この所で話や場面が変わるかを見る。');
+  html = html.replaceAll('source前後連続再生。元動画の前側対応2秒、後側対応2秒を順番につないだ人工連結。別位置に飛んでいるかを見る。', '上の右。元配信の前半と後半をつないだ動画。前後が別の所かを見る。');
+  html = html.replaceAll('前側対応確認。左が切り抜き、右が元動画。境界前の対応が合っているかを見る。', '下の左。切り替わる前。左右が同じ会話・場面かを見る。');
+  html = html.replaceAll('後側対応確認。左が切り抜き、右が元動画。境界後の対応が合っているかを見る。', '下の右。切り替わった後。左右が同じ会話・場面かを見る。');
   html = html.replace('</body>', `${finalForm(template)}\n${script(template)}\n</body>`);
   await writeFile(options.output, html, 'utf8');
   console.log(`output: ${path.relative(root, options.output)}`);

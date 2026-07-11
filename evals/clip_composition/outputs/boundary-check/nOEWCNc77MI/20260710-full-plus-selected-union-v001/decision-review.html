@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
   <meta charset="utf-8">
-  <title>Material boundary check nOEWCNc77MI</title>
+  <title>B素材：切り抜きと元配信の確認</title>
   <style>
     body { font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif; margin: 24px; color: #111827; }
     table { border-collapse: collapse; margin: 12px 0 20px; }
@@ -31,6 +31,8 @@
   :root { --ink: #172033; --muted: #5f6b7a; --line: #d8dee8; --blue: #2563eb; --blue-soft: #eff6ff; --ok: #166534; --ok-soft: #f0fdf4; --warn: #9a3412; --warn-soft: #fff7ed; --bad: #991b1b; --bad-soft: #fef2f2; }
     body { max-width: 1240px; margin: 0 auto !important; padding: 28px 24px 80px; background: #f8fafc; color: var(--ink) !important; }
     body > h1 { margin-top: 74px; }
+    body > h2:first-of-type, body > h2:first-of-type + table { display: none; }
+    article > table, section.strip { display: none; }
     article, .decision-final, .decision-meta { background: white; border: 1px solid var(--line); border-radius: 14px; padding: 22px; box-shadow: 0 6px 22px rgba(15, 23, 42, .06); }
     article { border-top: 1px solid var(--line) !important; }
     .decision-progress { position: fixed; z-index: 20; top: 0; left: 0; right: 0; display: flex; justify-content: center; gap: 22px; padding: 13px 20px; color: white; background: rgba(15, 23, 42, .96); backdrop-filter: blur(8px); font-weight: 700; }
@@ -70,33 +72,31 @@
   </style>
 </head>
 <body>
-  <h1>素材境界確認 nOEWCNc77MI</h1>
+  <h1>B素材：切り抜きと元配信が同じ場面か確認</h1>
 
   <div class="decision-progress">
-    <span id="boundary-progress">境界 0/16</span>
-    <span id="block-progress">ブロック 0/17</span>
+    <span id="boundary-progress">切り替わり 0/16</span>
+    <span id="block-progress">使用箇所 0/17</span>
     <span id="save-state">自動保存待ち</span>
   </div>
   <section class="decision-meta">
-    <h2>この画面で行うこと</h2>
-    <p>動画を見ながら境界1から順に4項目へ回答します。最後に17ブロックの採否と固定テーマを確認すると、凍結処理が直接読めるdecision JSONを出力します。</p>
+    <h2>何を確認する画面？</h2>
+    <p>この切り抜きは、元配信の17か所をつないで作られていると機械が予想しました。その予想が本当に合っているかを、16個の切り替わりで確認します。</p>
+    <p><strong>各番号で見る動画は4本だけです。</strong></p>
+    <ol>
+      <li><strong>上の左</strong>：切り抜きだけを見る。この所で話や場面が変わったか。</li>
+      <li><strong>上の右</strong>：元配信の前半と後半をつないだ動画。別の所へ飛んでいるか。</li>
+      <li><strong>下の左</strong>：切り替わる前。左右が同じ会話・場面か。</li>
+      <li><strong>下の右</strong>：切り替わった後。左右が同じ会話・場面か。</li>
+    </ol>
+    <p>口の動きが完全に同じか、数秒の細かい違いまでは見なくて大丈夫です。迷ったら「わからない」を選んでください。</p>
     <ul>
       <li>回答はこのブラウザー内へ自動保存されます。</li>
-      <li>判定不能・不一致を選んでも構いません。理由を残し、凍結を止めるための選択肢です。</li>
-      <li>このHTML自身はfixture/expectedへ書き込みません。</li>
-      <li>JSON生成後も、実凍結前に書き込みなしのpost-human dry-runを行います。</li>
+      <li>「違う」「わからない」を選んでも問題ありません。正解データを間違って作らないための回答です。</li>
+      <li>この画面へ入力しても、まだ正解データは書き込まれません。</li>
     </ul>
   </section>
-  <section class="instructions">
-    <h2>何を見るか</h2>
-    <ol>
-      <li><strong>clip連続再生</strong>を見る。切り抜き単体で、境界前から境界後まで実際の順番で見る。ここで切り替わりが起きているかを見る。</li>
-      <li><strong>source前後連続再生</strong>を見る。元動画の前側対応2秒、後側対応2秒を順番につないだ人工連結。前後が別位置に見えるかを見る。</li>
-      <li><strong>前側対応確認</strong>と<strong>後側対応確認</strong>は補助。左が切り抜き、右が元動画。対応が合っていそうかを見る。</li>
-      <li>静止画は補助。切り替わり判定は連続再生動画で判断する。</li>
-      <li>見ないこと: 同一素材内の細かい詰め、口元の完全同期、expectedCutsの最終開始・終了秒の確定。</li>
-    </ol>
-  </section>
+
   <h2>ブロック表</h2>
   <table>
     <thead><tr><th>block</th><th>run</th><th>clip</th><th>source</th><th>対応語</th><th>内部詰め候補</th></tr></thead>
@@ -119,47 +119,47 @@
 <tr><td>17</td><td>29, 30, 31, 32, 33, 34</td><td>7:05.880-7:39.146</td><td>192:21.555-192:55.281</td><td>121</td><td>+0ms</td></tr></tbody>
   </table>
   <article>
-  <h2>境界1: block 1 -> 2</h2>
+  <h2>確認1：候補1から候補2へ変わる所</h2>
 
   <section class="decision-answer" data-boundary-answer="1">
-    <h3>境界1の回答</h3>
-    <p>4項目を動画で確認してください。判定不能は無理に合格へ寄せず、そのまま選べます。</p>
+    <h3>確認1の答え</h3>
+    <p>上の2本、下の2本を見て答えてください。迷ったら「わからない」で大丈夫です。</p>
     <div class="decision-grid">
-      <label>切り抜き連続再生で素材が切り替わるか
+      <label>1. 上の左：この所で、話や場面が変わりましたか？
         <select data-boundary-field="clipSwitch">
           <option value="">未回答</option>
-          <option value="true">切り替わる</option>
-          <option value="false">切り替わらない</option>
-          <option value="unresolved">判定不能</option>
+          <option value="true">はい、変わった</option>
+          <option value="false">いいえ、そのまま続いている</option>
+          <option value="unresolved">わからない</option>
         </select>
       </label>
-      <label>元配信の対応位置が切り替わるか
+      <label>2. 上の右：前半と後半は、元配信の別の所ですか？
         <select data-boundary-field="sourcePositionSwitches">
           <option value="">未回答</option>
-          <option value="true">別位置へ切り替わる</option>
-          <option value="false">同じ位置に見える</option>
-          <option value="unresolved">判定不能</option>
+          <option value="true">はい、別の所</option>
+          <option value="false">いいえ、同じ所の続き</option>
+          <option value="unresolved">わからない</option>
         </select>
       </label>
-      <label>境界前は切り抜きと元配信で同じ素材か
+      <label>3. 下の左：左右は同じ会話・場面ですか？
         <select data-boundary-field="beforeMatches">
           <option value="">未回答</option>
-          <option value="true">同じ素材</option>
-          <option value="false">違う素材</option>
-          <option value="unresolved">判定不能</option>
+          <option value="true">はい、同じ</option>
+          <option value="false">いいえ、違う</option>
+          <option value="unresolved">わからない</option>
         </select>
       </label>
-      <label>境界後は切り抜きと元配信で同じ素材か
+      <label>4. 下の右：左右は同じ会話・場面ですか？
         <select data-boundary-field="afterMatches">
           <option value="">未回答</option>
-          <option value="true">同じ素材</option>
-          <option value="false">違う素材</option>
-          <option value="unresolved">判定不能</option>
+          <option value="true">はい、同じ</option>
+          <option value="false">いいえ、違う</option>
+          <option value="unresolved">わからない</option>
         </select>
       </label>
     </div>
-    <label>境界メモ
-      <textarea data-boundary-field="note" placeholder="不一致・判定不能・crossfadeなど、後で判断根拠になることだけ記録"></textarea>
+    <label>気づいたこと（なければ空欄）
+      <textarea data-boundary-field="note" placeholder="例：音は同じだが画面だけ切り替わる。途中で少し重なっている。"></textarea>
     </label>
     <p class="answer-state" data-boundary-state="1">未回答</p>
   </section>
@@ -169,26 +169,26 @@
     <tr><th>素材飛び量</th><td colspan="2">+40114ms</td></tr>
   </table>
   <section class="watch">
-    <h3>最初に見る動画</h3>
+    <h3>上の2本</h3>
     <div class="videos primary-videos">
       <figure>
         <video controls src="videos/boundary_01_clip_context.mp4"></video>
-        <figcaption>clip連続再生。切り抜き単体で、境界前から境界後まで実際の順番で見る。</figcaption>
+        <figcaption>上の左。切り抜きだけの動画。この所で話や場面が変わるかを見る。</figcaption>
       </figure>
       <figure>
         <video controls src="videos/boundary_01_source_sequence.mp4"></video>
-        <figcaption>source前後連続再生。元動画の前側対応2秒、後側対応2秒を順番につないだ人工連結。別位置に飛んでいるかを見る。</figcaption>
+        <figcaption>上の右。元配信の前半と後半をつないだ動画。前後が別の所かを見る。</figcaption>
       </figure>
     </div>
-    <h3>対応確認の補助</h3>
+    <h3>下の2本</h3>
     <div class="videos support-videos">
       <figure>
         <video controls src="videos/boundary_01_before_match.mp4"></video>
-        <figcaption>前側対応確認。左が切り抜き、右が元動画。境界前の対応が合っているかを見る。</figcaption>
+        <figcaption>下の左。切り替わる前。左右が同じ会話・場面かを見る。</figcaption>
       </figure>
       <figure>
         <video controls src="videos/boundary_01_after_match.mp4"></video>
-        <figcaption>後側対応確認。左が切り抜き、右が元動画。境界後の対応が合っているかを見る。</figcaption>
+        <figcaption>下の右。切り替わった後。左右が同じ会話・場面かを見る。</figcaption>
       </figure>
     </div>
   </section>
@@ -230,47 +230,47 @@
 </section>
 </article>
 <article>
-  <h2>境界2: block 2 -> 3</h2>
+  <h2>確認2：候補2から候補3へ変わる所</h2>
 
   <section class="decision-answer" data-boundary-answer="2">
-    <h3>境界2の回答</h3>
-    <p>4項目を動画で確認してください。判定不能は無理に合格へ寄せず、そのまま選べます。</p>
+    <h3>確認2の答え</h3>
+    <p>上の2本、下の2本を見て答えてください。迷ったら「わからない」で大丈夫です。</p>
     <div class="decision-grid">
-      <label>切り抜き連続再生で素材が切り替わるか
+      <label>1. 上の左：この所で、話や場面が変わりましたか？
         <select data-boundary-field="clipSwitch">
           <option value="">未回答</option>
-          <option value="true">切り替わる</option>
-          <option value="false">切り替わらない</option>
-          <option value="unresolved">判定不能</option>
+          <option value="true">はい、変わった</option>
+          <option value="false">いいえ、そのまま続いている</option>
+          <option value="unresolved">わからない</option>
         </select>
       </label>
-      <label>元配信の対応位置が切り替わるか
+      <label>2. 上の右：前半と後半は、元配信の別の所ですか？
         <select data-boundary-field="sourcePositionSwitches">
           <option value="">未回答</option>
-          <option value="true">別位置へ切り替わる</option>
-          <option value="false">同じ位置に見える</option>
-          <option value="unresolved">判定不能</option>
+          <option value="true">はい、別の所</option>
+          <option value="false">いいえ、同じ所の続き</option>
+          <option value="unresolved">わからない</option>
         </select>
       </label>
-      <label>境界前は切り抜きと元配信で同じ素材か
+      <label>3. 下の左：左右は同じ会話・場面ですか？
         <select data-boundary-field="beforeMatches">
           <option value="">未回答</option>
-          <option value="true">同じ素材</option>
-          <option value="false">違う素材</option>
-          <option value="unresolved">判定不能</option>
+          <option value="true">はい、同じ</option>
+          <option value="false">いいえ、違う</option>
+          <option value="unresolved">わからない</option>
         </select>
       </label>
-      <label>境界後は切り抜きと元配信で同じ素材か
+      <label>4. 下の右：左右は同じ会話・場面ですか？
         <select data-boundary-field="afterMatches">
           <option value="">未回答</option>
-          <option value="true">同じ素材</option>
-          <option value="false">違う素材</option>
-          <option value="unresolved">判定不能</option>
+          <option value="true">はい、同じ</option>
+          <option value="false">いいえ、違う</option>
+          <option value="unresolved">わからない</option>
         </select>
       </label>
     </div>
-    <label>境界メモ
-      <textarea data-boundary-field="note" placeholder="不一致・判定不能・crossfadeなど、後で判断根拠になることだけ記録"></textarea>
+    <label>気づいたこと（なければ空欄）
+      <textarea data-boundary-field="note" placeholder="例：音は同じだが画面だけ切り替わる。途中で少し重なっている。"></textarea>
     </label>
     <p class="answer-state" data-boundary-state="2">未回答</p>
   </section>
@@ -280,26 +280,26 @@
     <tr><th>素材飛び量</th><td colspan="2">+11790ms</td></tr>
   </table>
   <section class="watch">
-    <h3>最初に見る動画</h3>
+    <h3>上の2本</h3>
     <div class="videos primary-videos">
       <figure>
         <video controls src="videos/boundary_02_clip_context.mp4"></video>
-        <figcaption>clip連続再生。切り抜き単体で、境界前から境界後まで実際の順番で見る。</figcaption>
+        <figcaption>上の左。切り抜きだけの動画。この所で話や場面が変わるかを見る。</figcaption>
       </figure>
       <figure>
         <video controls src="videos/boundary_02_source_sequence.mp4"></video>
-        <figcaption>source前後連続再生。元動画の前側対応2秒、後側対応2秒を順番につないだ人工連結。別位置に飛んでいるかを見る。</figcaption>
+        <figcaption>上の右。元配信の前半と後半をつないだ動画。前後が別の所かを見る。</figcaption>
       </figure>
     </div>
-    <h3>対応確認の補助</h3>
+    <h3>下の2本</h3>
     <div class="videos support-videos">
       <figure>
         <video controls src="videos/boundary_02_before_match.mp4"></video>
-        <figcaption>前側対応確認。左が切り抜き、右が元動画。境界前の対応が合っているかを見る。</figcaption>
+        <figcaption>下の左。切り替わる前。左右が同じ会話・場面かを見る。</figcaption>
       </figure>
       <figure>
         <video controls src="videos/boundary_02_after_match.mp4"></video>
-        <figcaption>後側対応確認。左が切り抜き、右が元動画。境界後の対応が合っているかを見る。</figcaption>
+        <figcaption>下の右。切り替わった後。左右が同じ会話・場面かを見る。</figcaption>
       </figure>
     </div>
   </section>
@@ -341,47 +341,47 @@
 </section>
 </article>
 <article>
-  <h2>境界3: block 3 -> 4</h2>
+  <h2>確認3：候補3から候補4へ変わる所</h2>
 
   <section class="decision-answer" data-boundary-answer="3">
-    <h3>境界3の回答</h3>
-    <p>4項目を動画で確認してください。判定不能は無理に合格へ寄せず、そのまま選べます。</p>
+    <h3>確認3の答え</h3>
+    <p>上の2本、下の2本を見て答えてください。迷ったら「わからない」で大丈夫です。</p>
     <div class="decision-grid">
-      <label>切り抜き連続再生で素材が切り替わるか
+      <label>1. 上の左：この所で、話や場面が変わりましたか？
         <select data-boundary-field="clipSwitch">
           <option value="">未回答</option>
-          <option value="true">切り替わる</option>
-          <option value="false">切り替わらない</option>
-          <option value="unresolved">判定不能</option>
+          <option value="true">はい、変わった</option>
+          <option value="false">いいえ、そのまま続いている</option>
+          <option value="unresolved">わからない</option>
         </select>
       </label>
-      <label>元配信の対応位置が切り替わるか
+      <label>2. 上の右：前半と後半は、元配信の別の所ですか？
         <select data-boundary-field="sourcePositionSwitches">
           <option value="">未回答</option>
-          <option value="true">別位置へ切り替わる</option>
-          <option value="false">同じ位置に見える</option>
-          <option value="unresolved">判定不能</option>
+          <option value="true">はい、別の所</option>
+          <option value="false">いいえ、同じ所の続き</option>
+          <option value="unresolved">わからない</option>
         </select>
       </label>
-      <label>境界前は切り抜きと元配信で同じ素材か
+      <label>3. 下の左：左右は同じ会話・場面ですか？
         <select data-boundary-field="beforeMatches">
           <option value="">未回答</option>
-          <option value="true">同じ素材</option>
-          <option value="false">違う素材</option>
-          <option value="unresolved">判定不能</option>
+          <option value="true">はい、同じ</option>
+          <option value="false">いいえ、違う</option>
+          <option value="unresolved">わからない</option>
         </select>
       </label>
-      <label>境界後は切り抜きと元配信で同じ素材か
+      <label>4. 下の右：左右は同じ会話・場面ですか？
         <select data-boundary-field="afterMatches">
           <option value="">未回答</option>
-          <option value="true">同じ素材</option>
-          <option value="false">違う素材</option>
-          <option value="unresolved">判定不能</option>
+          <option value="true">はい、同じ</option>
+          <option value="false">いいえ、違う</option>
+          <option value="unresolved">わからない</option>
         </select>
       </label>
     </div>
-    <label>境界メモ
-      <textarea data-boundary-field="note" placeholder="不一致・判定不能・crossfadeなど、後で判断根拠になることだけ記録"></textarea>
+    <label>気づいたこと（なければ空欄）
+      <textarea data-boundary-field="note" placeholder="例：音は同じだが画面だけ切り替わる。途中で少し重なっている。"></textarea>
     </label>
     <p class="answer-state" data-boundary-state="3">未回答</p>
   </section>
@@ -391,26 +391,26 @@
     <tr><th>素材飛び量</th><td colspan="2">+709049ms</td></tr>
   </table>
   <section class="watch">
-    <h3>最初に見る動画</h3>
+    <h3>上の2本</h3>
     <div class="videos primary-videos">
       <figure>
         <video controls src="videos/boundary_03_clip_context.mp4"></video>
-        <figcaption>clip連続再生。切り抜き単体で、境界前から境界後まで実際の順番で見る。</figcaption>
+        <figcaption>上の左。切り抜きだけの動画。この所で話や場面が変わるかを見る。</figcaption>
       </figure>
       <figure>
         <video controls src="videos/boundary_03_source_sequence.mp4"></video>
-        <figcaption>source前後連続再生。元動画の前側対応2秒、後側対応2秒を順番につないだ人工連結。別位置に飛んでいるかを見る。</figcaption>
+        <figcaption>上の右。元配信の前半と後半をつないだ動画。前後が別の所かを見る。</figcaption>
       </figure>
     </div>
-    <h3>対応確認の補助</h3>
+    <h3>下の2本</h3>
     <div class="videos support-videos">
       <figure>
         <video controls src="videos/boundary_03_before_match.mp4"></video>
-        <figcaption>前側対応確認。左が切り抜き、右が元動画。境界前の対応が合っているかを見る。</figcaption>
+        <figcaption>下の左。切り替わる前。左右が同じ会話・場面かを見る。</figcaption>
       </figure>
       <figure>
         <video controls src="videos/boundary_03_after_match.mp4"></video>
-        <figcaption>後側対応確認。左が切り抜き、右が元動画。境界後の対応が合っているかを見る。</figcaption>
+        <figcaption>下の右。切り替わった後。左右が同じ会話・場面かを見る。</figcaption>
       </figure>
     </div>
   </section>
@@ -452,47 +452,47 @@
 </section>
 </article>
 <article>
-  <h2>境界4: block 4 -> 5</h2>
+  <h2>確認4：候補4から候補5へ変わる所</h2>
 
   <section class="decision-answer" data-boundary-answer="4">
-    <h3>境界4の回答</h3>
-    <p>4項目を動画で確認してください。判定不能は無理に合格へ寄せず、そのまま選べます。</p>
+    <h3>確認4の答え</h3>
+    <p>上の2本、下の2本を見て答えてください。迷ったら「わからない」で大丈夫です。</p>
     <div class="decision-grid">
-      <label>切り抜き連続再生で素材が切り替わるか
+      <label>1. 上の左：この所で、話や場面が変わりましたか？
         <select data-boundary-field="clipSwitch">
           <option value="">未回答</option>
-          <option value="true">切り替わる</option>
-          <option value="false">切り替わらない</option>
-          <option value="unresolved">判定不能</option>
+          <option value="true">はい、変わった</option>
+          <option value="false">いいえ、そのまま続いている</option>
+          <option value="unresolved">わからない</option>
         </select>
       </label>
-      <label>元配信の対応位置が切り替わるか
+      <label>2. 上の右：前半と後半は、元配信の別の所ですか？
         <select data-boundary-field="sourcePositionSwitches">
           <option value="">未回答</option>
-          <option value="true">別位置へ切り替わる</option>
-          <option value="false">同じ位置に見える</option>
-          <option value="unresolved">判定不能</option>
+          <option value="true">はい、別の所</option>
+          <option value="false">いいえ、同じ所の続き</option>
+          <option value="unresolved">わからない</option>
         </select>
       </label>
-      <label>境界前は切り抜きと元配信で同じ素材か
+      <label>3. 下の左：左右は同じ会話・場面ですか？
         <select data-boundary-field="beforeMatches">
           <option value="">未回答</option>
-          <option value="true">同じ素材</option>
-          <option value="false">違う素材</option>
-          <option value="unresolved">判定不能</option>
+          <option value="true">はい、同じ</option>
+          <option value="false">いいえ、違う</option>
+          <option value="unresolved">わからない</option>
         </select>
       </label>
-      <label>境界後は切り抜きと元配信で同じ素材か
+      <label>4. 下の右：左右は同じ会話・場面ですか？
         <select data-boundary-field="afterMatches">
           <option value="">未回答</option>
-          <option value="true">同じ素材</option>
-          <option value="false">違う素材</option>
-          <option value="unresolved">判定不能</option>
+          <option value="true">はい、同じ</option>
+          <option value="false">いいえ、違う</option>
+          <option value="unresolved">わからない</option>
         </select>
       </label>
     </div>
-    <label>境界メモ
-      <textarea data-boundary-field="note" placeholder="不一致・判定不能・crossfadeなど、後で判断根拠になることだけ記録"></textarea>
+    <label>気づいたこと（なければ空欄）
+      <textarea data-boundary-field="note" placeholder="例：音は同じだが画面だけ切り替わる。途中で少し重なっている。"></textarea>
     </label>
     <p class="answer-state" data-boundary-state="4">未回答</p>
   </section>
@@ -502,26 +502,26 @@
     <tr><th>素材飛び量</th><td colspan="2">+194673ms</td></tr>
   </table>
   <section class="watch">
-    <h3>最初に見る動画</h3>
+    <h3>上の2本</h3>
     <div class="videos primary-videos">
       <figure>
         <video controls src="videos/boundary_04_clip_context.mp4"></video>
-        <figcaption>clip連続再生。切り抜き単体で、境界前から境界後まで実際の順番で見る。</figcaption>
+        <figcaption>上の左。切り抜きだけの動画。この所で話や場面が変わるかを見る。</figcaption>
       </figure>
       <figure>
         <video controls src="videos/boundary_04_source_sequence.mp4"></video>
-        <figcaption>source前後連続再生。元動画の前側対応2秒、後側対応2秒を順番につないだ人工連結。別位置に飛んでいるかを見る。</figcaption>
+        <figcaption>上の右。元配信の前半と後半をつないだ動画。前後が別の所かを見る。</figcaption>
       </figure>
     </div>
-    <h3>対応確認の補助</h3>
+    <h3>下の2本</h3>
     <div class="videos support-videos">
       <figure>
         <video controls src="videos/boundary_04_before_match.mp4"></video>
-        <figcaption>前側対応確認。左が切り抜き、右が元動画。境界前の対応が合っているかを見る。</figcaption>
+        <figcaption>下の左。切り替わる前。左右が同じ会話・場面かを見る。</figcaption>
       </figure>
       <figure>
         <video controls src="videos/boundary_04_after_match.mp4"></video>
-        <figcaption>後側対応確認。左が切り抜き、右が元動画。境界後の対応が合っているかを見る。</figcaption>
+        <figcaption>下の右。切り替わった後。左右が同じ会話・場面かを見る。</figcaption>
       </figure>
     </div>
   </section>
@@ -563,47 +563,47 @@
 </section>
 </article>
 <article>
-  <h2>境界5: block 5 -> 6</h2>
+  <h2>確認5：候補5から候補6へ変わる所</h2>
 
   <section class="decision-answer" data-boundary-answer="5">
-    <h3>境界5の回答</h3>
-    <p>4項目を動画で確認してください。判定不能は無理に合格へ寄せず、そのまま選べます。</p>
+    <h3>確認5の答え</h3>
+    <p>上の2本、下の2本を見て答えてください。迷ったら「わからない」で大丈夫です。</p>
     <div class="decision-grid">
-      <label>切り抜き連続再生で素材が切り替わるか
+      <label>1. 上の左：この所で、話や場面が変わりましたか？
         <select data-boundary-field="clipSwitch">
           <option value="">未回答</option>
-          <option value="true">切り替わる</option>
-          <option value="false">切り替わらない</option>
-          <option value="unresolved">判定不能</option>
+          <option value="true">はい、変わった</option>
+          <option value="false">いいえ、そのまま続いている</option>
+          <option value="unresolved">わからない</option>
         </select>
       </label>
-      <label>元配信の対応位置が切り替わるか
+      <label>2. 上の右：前半と後半は、元配信の別の所ですか？
         <select data-boundary-field="sourcePositionSwitches">
           <option value="">未回答</option>
-          <option value="true">別位置へ切り替わる</option>
-          <option value="false">同じ位置に見える</option>
-          <option value="unresolved">判定不能</option>
+          <option value="true">はい、別の所</option>
+          <option value="false">いいえ、同じ所の続き</option>
+          <option value="unresolved">わからない</option>
         </select>
       </label>
-      <label>境界前は切り抜きと元配信で同じ素材か
+      <label>3. 下の左：左右は同じ会話・場面ですか？
         <select data-boundary-field="beforeMatches">
           <option value="">未回答</option>
-          <option value="true">同じ素材</option>
-          <option value="false">違う素材</option>
-          <option value="unresolved">判定不能</option>
+          <option value="true">はい、同じ</option>
+          <option value="false">いいえ、違う</option>
+          <option value="unresolved">わからない</option>
         </select>
       </label>
-      <label>境界後は切り抜きと元配信で同じ素材か
+      <label>4. 下の右：左右は同じ会話・場面ですか？
         <select data-boundary-field="afterMatches">
           <option value="">未回答</option>
-          <option value="true">同じ素材</option>
-          <option value="false">違う素材</option>
-          <option value="unresolved">判定不能</option>
+          <option value="true">はい、同じ</option>
+          <option value="false">いいえ、違う</option>
+          <option value="unresolved">わからない</option>
         </select>
       </label>
     </div>
-    <label>境界メモ
-      <textarea data-boundary-field="note" placeholder="不一致・判定不能・crossfadeなど、後で判断根拠になることだけ記録"></textarea>
+    <label>気づいたこと（なければ空欄）
+      <textarea data-boundary-field="note" placeholder="例：音は同じだが画面だけ切り替わる。途中で少し重なっている。"></textarea>
     </label>
     <p class="answer-state" data-boundary-state="5">未回答</p>
   </section>
@@ -613,26 +613,26 @@
     <tr><th>素材飛び量</th><td colspan="2">+1522410ms</td></tr>
   </table>
   <section class="watch">
-    <h3>最初に見る動画</h3>
+    <h3>上の2本</h3>
     <div class="videos primary-videos">
       <figure>
         <video controls src="videos/boundary_05_clip_context.mp4"></video>
-        <figcaption>clip連続再生。切り抜き単体で、境界前から境界後まで実際の順番で見る。</figcaption>
+        <figcaption>上の左。切り抜きだけの動画。この所で話や場面が変わるかを見る。</figcaption>
       </figure>
       <figure>
         <video controls src="videos/boundary_05_source_sequence.mp4"></video>
-        <figcaption>source前後連続再生。元動画の前側対応2秒、後側対応2秒を順番につないだ人工連結。別位置に飛んでいるかを見る。</figcaption>
+        <figcaption>上の右。元配信の前半と後半をつないだ動画。前後が別の所かを見る。</figcaption>
       </figure>
     </div>
-    <h3>対応確認の補助</h3>
+    <h3>下の2本</h3>
     <div class="videos support-videos">
       <figure>
         <video controls src="videos/boundary_05_before_match.mp4"></video>
-        <figcaption>前側対応確認。左が切り抜き、右が元動画。境界前の対応が合っているかを見る。</figcaption>
+        <figcaption>下の左。切り替わる前。左右が同じ会話・場面かを見る。</figcaption>
       </figure>
       <figure>
         <video controls src="videos/boundary_05_after_match.mp4"></video>
-        <figcaption>後側対応確認。左が切り抜き、右が元動画。境界後の対応が合っているかを見る。</figcaption>
+        <figcaption>下の右。切り替わった後。左右が同じ会話・場面かを見る。</figcaption>
       </figure>
     </div>
   </section>
@@ -674,47 +674,47 @@
 </section>
 </article>
 <article>
-  <h2>境界6: block 6 -> 7</h2>
+  <h2>確認6：候補6から候補7へ変わる所</h2>
 
   <section class="decision-answer" data-boundary-answer="6">
-    <h3>境界6の回答</h3>
-    <p>4項目を動画で確認してください。判定不能は無理に合格へ寄せず、そのまま選べます。</p>
+    <h3>確認6の答え</h3>
+    <p>上の2本、下の2本を見て答えてください。迷ったら「わからない」で大丈夫です。</p>
     <div class="decision-grid">
-      <label>切り抜き連続再生で素材が切り替わるか
+      <label>1. 上の左：この所で、話や場面が変わりましたか？
         <select data-boundary-field="clipSwitch">
           <option value="">未回答</option>
-          <option value="true">切り替わる</option>
-          <option value="false">切り替わらない</option>
-          <option value="unresolved">判定不能</option>
+          <option value="true">はい、変わった</option>
+          <option value="false">いいえ、そのまま続いている</option>
+          <option value="unresolved">わからない</option>
         </select>
       </label>
-      <label>元配信の対応位置が切り替わるか
+      <label>2. 上の右：前半と後半は、元配信の別の所ですか？
         <select data-boundary-field="sourcePositionSwitches">
           <option value="">未回答</option>
-          <option value="true">別位置へ切り替わる</option>
-          <option value="false">同じ位置に見える</option>
-          <option value="unresolved">判定不能</option>
+          <option value="true">はい、別の所</option>
+          <option value="false">いいえ、同じ所の続き</option>
+          <option value="unresolved">わからない</option>
         </select>
       </label>
-      <label>境界前は切り抜きと元配信で同じ素材か
+      <label>3. 下の左：左右は同じ会話・場面ですか？
         <select data-boundary-field="beforeMatches">
           <option value="">未回答</option>
-          <option value="true">同じ素材</option>
-          <option value="false">違う素材</option>
-          <option value="unresolved">判定不能</option>
+          <option value="true">はい、同じ</option>
+          <option value="false">いいえ、違う</option>
+          <option value="unresolved">わからない</option>
         </select>
       </label>
-      <label>境界後は切り抜きと元配信で同じ素材か
+      <label>4. 下の右：左右は同じ会話・場面ですか？
         <select data-boundary-field="afterMatches">
           <option value="">未回答</option>
-          <option value="true">同じ素材</option>
-          <option value="false">違う素材</option>
-          <option value="unresolved">判定不能</option>
+          <option value="true">はい、同じ</option>
+          <option value="false">いいえ、違う</option>
+          <option value="unresolved">わからない</option>
         </select>
       </label>
     </div>
-    <label>境界メモ
-      <textarea data-boundary-field="note" placeholder="不一致・判定不能・crossfadeなど、後で判断根拠になることだけ記録"></textarea>
+    <label>気づいたこと（なければ空欄）
+      <textarea data-boundary-field="note" placeholder="例：音は同じだが画面だけ切り替わる。途中で少し重なっている。"></textarea>
     </label>
     <p class="answer-state" data-boundary-state="6">未回答</p>
   </section>
@@ -724,26 +724,26 @@
     <tr><th>素材飛び量</th><td colspan="2">+185531ms</td></tr>
   </table>
   <section class="watch">
-    <h3>最初に見る動画</h3>
+    <h3>上の2本</h3>
     <div class="videos primary-videos">
       <figure>
         <video controls src="videos/boundary_06_clip_context.mp4"></video>
-        <figcaption>clip連続再生。切り抜き単体で、境界前から境界後まで実際の順番で見る。</figcaption>
+        <figcaption>上の左。切り抜きだけの動画。この所で話や場面が変わるかを見る。</figcaption>
       </figure>
       <figure>
         <video controls src="videos/boundary_06_source_sequence.mp4"></video>
-        <figcaption>source前後連続再生。元動画の前側対応2秒、後側対応2秒を順番につないだ人工連結。別位置に飛んでいるかを見る。</figcaption>
+        <figcaption>上の右。元配信の前半と後半をつないだ動画。前後が別の所かを見る。</figcaption>
       </figure>
     </div>
-    <h3>対応確認の補助</h3>
+    <h3>下の2本</h3>
     <div class="videos support-videos">
       <figure>
         <video controls src="videos/boundary_06_before_match.mp4"></video>
-        <figcaption>前側対応確認。左が切り抜き、右が元動画。境界前の対応が合っているかを見る。</figcaption>
+        <figcaption>下の左。切り替わる前。左右が同じ会話・場面かを見る。</figcaption>
       </figure>
       <figure>
         <video controls src="videos/boundary_06_after_match.mp4"></video>
-        <figcaption>後側対応確認。左が切り抜き、右が元動画。境界後の対応が合っているかを見る。</figcaption>
+        <figcaption>下の右。切り替わった後。左右が同じ会話・場面かを見る。</figcaption>
       </figure>
     </div>
   </section>
@@ -785,47 +785,47 @@
 </section>
 </article>
 <article>
-  <h2>境界7: block 7 -> 8</h2>
+  <h2>確認7：候補7から候補8へ変わる所</h2>
 
   <section class="decision-answer" data-boundary-answer="7">
-    <h3>境界7の回答</h3>
-    <p>4項目を動画で確認してください。判定不能は無理に合格へ寄せず、そのまま選べます。</p>
+    <h3>確認7の答え</h3>
+    <p>上の2本、下の2本を見て答えてください。迷ったら「わからない」で大丈夫です。</p>
     <div class="decision-grid">
-      <label>切り抜き連続再生で素材が切り替わるか
+      <label>1. 上の左：この所で、話や場面が変わりましたか？
         <select data-boundary-field="clipSwitch">
           <option value="">未回答</option>
-          <option value="true">切り替わる</option>
-          <option value="false">切り替わらない</option>
-          <option value="unresolved">判定不能</option>
+          <option value="true">はい、変わった</option>
+          <option value="false">いいえ、そのまま続いている</option>
+          <option value="unresolved">わからない</option>
         </select>
       </label>
-      <label>元配信の対応位置が切り替わるか
+      <label>2. 上の右：前半と後半は、元配信の別の所ですか？
         <select data-boundary-field="sourcePositionSwitches">
           <option value="">未回答</option>
-          <option value="true">別位置へ切り替わる</option>
-          <option value="false">同じ位置に見える</option>
-          <option value="unresolved">判定不能</option>
+          <option value="true">はい、別の所</option>
+          <option value="false">いいえ、同じ所の続き</option>
+          <option value="unresolved">わからない</option>
         </select>
       </label>
-      <label>境界前は切り抜きと元配信で同じ素材か
+      <label>3. 下の左：左右は同じ会話・場面ですか？
         <select data-boundary-field="beforeMatches">
           <option value="">未回答</option>
-          <option value="true">同じ素材</option>
-          <option value="false">違う素材</option>
-          <option value="unresolved">判定不能</option>
+          <option value="true">はい、同じ</option>
+          <option value="false">いいえ、違う</option>
+          <option value="unresolved">わからない</option>
         </select>
       </label>
-      <label>境界後は切り抜きと元配信で同じ素材か
+      <label>4. 下の右：左右は同じ会話・場面ですか？
         <select data-boundary-field="afterMatches">
           <option value="">未回答</option>
-          <option value="true">同じ素材</option>
-          <option value="false">違う素材</option>
-          <option value="unresolved">判定不能</option>
+          <option value="true">はい、同じ</option>
+          <option value="false">いいえ、違う</option>
+          <option value="unresolved">わからない</option>
         </select>
       </label>
     </div>
-    <label>境界メモ
-      <textarea data-boundary-field="note" placeholder="不一致・判定不能・crossfadeなど、後で判断根拠になることだけ記録"></textarea>
+    <label>気づいたこと（なければ空欄）
+      <textarea data-boundary-field="note" placeholder="例：音は同じだが画面だけ切り替わる。途中で少し重なっている。"></textarea>
     </label>
     <p class="answer-state" data-boundary-state="7">未回答</p>
   </section>
@@ -835,26 +835,26 @@
     <tr><th>素材飛び量</th><td colspan="2">+157637ms</td></tr>
   </table>
   <section class="watch">
-    <h3>最初に見る動画</h3>
+    <h3>上の2本</h3>
     <div class="videos primary-videos">
       <figure>
         <video controls src="videos/boundary_07_clip_context.mp4"></video>
-        <figcaption>clip連続再生。切り抜き単体で、境界前から境界後まで実際の順番で見る。</figcaption>
+        <figcaption>上の左。切り抜きだけの動画。この所で話や場面が変わるかを見る。</figcaption>
       </figure>
       <figure>
         <video controls src="videos/boundary_07_source_sequence.mp4"></video>
-        <figcaption>source前後連続再生。元動画の前側対応2秒、後側対応2秒を順番につないだ人工連結。別位置に飛んでいるかを見る。</figcaption>
+        <figcaption>上の右。元配信の前半と後半をつないだ動画。前後が別の所かを見る。</figcaption>
       </figure>
     </div>
-    <h3>対応確認の補助</h3>
+    <h3>下の2本</h3>
     <div class="videos support-videos">
       <figure>
         <video controls src="videos/boundary_07_before_match.mp4"></video>
-        <figcaption>前側対応確認。左が切り抜き、右が元動画。境界前の対応が合っているかを見る。</figcaption>
+        <figcaption>下の左。切り替わる前。左右が同じ会話・場面かを見る。</figcaption>
       </figure>
       <figure>
         <video controls src="videos/boundary_07_after_match.mp4"></video>
-        <figcaption>後側対応確認。左が切り抜き、右が元動画。境界後の対応が合っているかを見る。</figcaption>
+        <figcaption>下の右。切り替わった後。左右が同じ会話・場面かを見る。</figcaption>
       </figure>
     </div>
   </section>
@@ -896,47 +896,47 @@
 </section>
 </article>
 <article>
-  <h2>境界8: block 8 -> 9</h2>
+  <h2>確認8：候補8から候補9へ変わる所</h2>
 
   <section class="decision-answer" data-boundary-answer="8">
-    <h3>境界8の回答</h3>
-    <p>4項目を動画で確認してください。判定不能は無理に合格へ寄せず、そのまま選べます。</p>
+    <h3>確認8の答え</h3>
+    <p>上の2本、下の2本を見て答えてください。迷ったら「わからない」で大丈夫です。</p>
     <div class="decision-grid">
-      <label>切り抜き連続再生で素材が切り替わるか
+      <label>1. 上の左：この所で、話や場面が変わりましたか？
         <select data-boundary-field="clipSwitch">
           <option value="">未回答</option>
-          <option value="true">切り替わる</option>
-          <option value="false">切り替わらない</option>
-          <option value="unresolved">判定不能</option>
+          <option value="true">はい、変わった</option>
+          <option value="false">いいえ、そのまま続いている</option>
+          <option value="unresolved">わからない</option>
         </select>
       </label>
-      <label>元配信の対応位置が切り替わるか
+      <label>2. 上の右：前半と後半は、元配信の別の所ですか？
         <select data-boundary-field="sourcePositionSwitches">
           <option value="">未回答</option>
-          <option value="true">別位置へ切り替わる</option>
-          <option value="false">同じ位置に見える</option>
-          <option value="unresolved">判定不能</option>
+          <option value="true">はい、別の所</option>
+          <option value="false">いいえ、同じ所の続き</option>
+          <option value="unresolved">わからない</option>
         </select>
       </label>
-      <label>境界前は切り抜きと元配信で同じ素材か
+      <label>3. 下の左：左右は同じ会話・場面ですか？
         <select data-boundary-field="beforeMatches">
           <option value="">未回答</option>
-          <option value="true">同じ素材</option>
-          <option value="false">違う素材</option>
-          <option value="unresolved">判定不能</option>
+          <option value="true">はい、同じ</option>
+          <option value="false">いいえ、違う</option>
+          <option value="unresolved">わからない</option>
         </select>
       </label>
-      <label>境界後は切り抜きと元配信で同じ素材か
+      <label>4. 下の右：左右は同じ会話・場面ですか？
         <select data-boundary-field="afterMatches">
           <option value="">未回答</option>
-          <option value="true">同じ素材</option>
-          <option value="false">違う素材</option>
-          <option value="unresolved">判定不能</option>
+          <option value="true">はい、同じ</option>
+          <option value="false">いいえ、違う</option>
+          <option value="unresolved">わからない</option>
         </select>
       </label>
     </div>
-    <label>境界メモ
-      <textarea data-boundary-field="note" placeholder="不一致・判定不能・crossfadeなど、後で判断根拠になることだけ記録"></textarea>
+    <label>気づいたこと（なければ空欄）
+      <textarea data-boundary-field="note" placeholder="例：音は同じだが画面だけ切り替わる。途中で少し重なっている。"></textarea>
     </label>
     <p class="answer-state" data-boundary-state="8">未回答</p>
   </section>
@@ -946,26 +946,26 @@
     <tr><th>素材飛び量</th><td colspan="2">+70138ms</td></tr>
   </table>
   <section class="watch">
-    <h3>最初に見る動画</h3>
+    <h3>上の2本</h3>
     <div class="videos primary-videos">
       <figure>
         <video controls src="videos/boundary_08_clip_context.mp4"></video>
-        <figcaption>clip連続再生。切り抜き単体で、境界前から境界後まで実際の順番で見る。</figcaption>
+        <figcaption>上の左。切り抜きだけの動画。この所で話や場面が変わるかを見る。</figcaption>
       </figure>
       <figure>
         <video controls src="videos/boundary_08_source_sequence.mp4"></video>
-        <figcaption>source前後連続再生。元動画の前側対応2秒、後側対応2秒を順番につないだ人工連結。別位置に飛んでいるかを見る。</figcaption>
+        <figcaption>上の右。元配信の前半と後半をつないだ動画。前後が別の所かを見る。</figcaption>
       </figure>
     </div>
-    <h3>対応確認の補助</h3>
+    <h3>下の2本</h3>
     <div class="videos support-videos">
       <figure>
         <video controls src="videos/boundary_08_before_match.mp4"></video>
-        <figcaption>前側対応確認。左が切り抜き、右が元動画。境界前の対応が合っているかを見る。</figcaption>
+        <figcaption>下の左。切り替わる前。左右が同じ会話・場面かを見る。</figcaption>
       </figure>
       <figure>
         <video controls src="videos/boundary_08_after_match.mp4"></video>
-        <figcaption>後側対応確認。左が切り抜き、右が元動画。境界後の対応が合っているかを見る。</figcaption>
+        <figcaption>下の右。切り替わった後。左右が同じ会話・場面かを見る。</figcaption>
       </figure>
     </div>
   </section>
@@ -1007,47 +1007,47 @@
 </section>
 </article>
 <article>
-  <h2>境界9: block 9 -> 10</h2>
+  <h2>確認9：候補9から候補10へ変わる所</h2>
 
   <section class="decision-answer" data-boundary-answer="9">
-    <h3>境界9の回答</h3>
-    <p>4項目を動画で確認してください。判定不能は無理に合格へ寄せず、そのまま選べます。</p>
+    <h3>確認9の答え</h3>
+    <p>上の2本、下の2本を見て答えてください。迷ったら「わからない」で大丈夫です。</p>
     <div class="decision-grid">
-      <label>切り抜き連続再生で素材が切り替わるか
+      <label>1. 上の左：この所で、話や場面が変わりましたか？
         <select data-boundary-field="clipSwitch">
           <option value="">未回答</option>
-          <option value="true">切り替わる</option>
-          <option value="false">切り替わらない</option>
-          <option value="unresolved">判定不能</option>
+          <option value="true">はい、変わった</option>
+          <option value="false">いいえ、そのまま続いている</option>
+          <option value="unresolved">わからない</option>
         </select>
       </label>
-      <label>元配信の対応位置が切り替わるか
+      <label>2. 上の右：前半と後半は、元配信の別の所ですか？
         <select data-boundary-field="sourcePositionSwitches">
           <option value="">未回答</option>
-          <option value="true">別位置へ切り替わる</option>
-          <option value="false">同じ位置に見える</option>
-          <option value="unresolved">判定不能</option>
+          <option value="true">はい、別の所</option>
+          <option value="false">いいえ、同じ所の続き</option>
+          <option value="unresolved">わからない</option>
         </select>
       </label>
-      <label>境界前は切り抜きと元配信で同じ素材か
+      <label>3. 下の左：左右は同じ会話・場面ですか？
         <select data-boundary-field="beforeMatches">
           <option value="">未回答</option>
-          <option value="true">同じ素材</option>
-          <option value="false">違う素材</option>
-          <option value="unresolved">判定不能</option>
+          <option value="true">はい、同じ</option>
+          <option value="false">いいえ、違う</option>
+          <option value="unresolved">わからない</option>
         </select>
       </label>
-      <label>境界後は切り抜きと元配信で同じ素材か
+      <label>4. 下の右：左右は同じ会話・場面ですか？
         <select data-boundary-field="afterMatches">
           <option value="">未回答</option>
-          <option value="true">同じ素材</option>
-          <option value="false">違う素材</option>
-          <option value="unresolved">判定不能</option>
+          <option value="true">はい、同じ</option>
+          <option value="false">いいえ、違う</option>
+          <option value="unresolved">わからない</option>
         </select>
       </label>
     </div>
-    <label>境界メモ
-      <textarea data-boundary-field="note" placeholder="不一致・判定不能・crossfadeなど、後で判断根拠になることだけ記録"></textarea>
+    <label>気づいたこと（なければ空欄）
+      <textarea data-boundary-field="note" placeholder="例：音は同じだが画面だけ切り替わる。途中で少し重なっている。"></textarea>
     </label>
     <p class="answer-state" data-boundary-state="9">未回答</p>
   </section>
@@ -1057,26 +1057,26 @@
     <tr><th>素材飛び量</th><td colspan="2">+145289ms</td></tr>
   </table>
   <section class="watch">
-    <h3>最初に見る動画</h3>
+    <h3>上の2本</h3>
     <div class="videos primary-videos">
       <figure>
         <video controls src="videos/boundary_09_clip_context.mp4"></video>
-        <figcaption>clip連続再生。切り抜き単体で、境界前から境界後まで実際の順番で見る。</figcaption>
+        <figcaption>上の左。切り抜きだけの動画。この所で話や場面が変わるかを見る。</figcaption>
       </figure>
       <figure>
         <video controls src="videos/boundary_09_source_sequence.mp4"></video>
-        <figcaption>source前後連続再生。元動画の前側対応2秒、後側対応2秒を順番につないだ人工連結。別位置に飛んでいるかを見る。</figcaption>
+        <figcaption>上の右。元配信の前半と後半をつないだ動画。前後が別の所かを見る。</figcaption>
       </figure>
     </div>
-    <h3>対応確認の補助</h3>
+    <h3>下の2本</h3>
     <div class="videos support-videos">
       <figure>
         <video controls src="videos/boundary_09_before_match.mp4"></video>
-        <figcaption>前側対応確認。左が切り抜き、右が元動画。境界前の対応が合っているかを見る。</figcaption>
+        <figcaption>下の左。切り替わる前。左右が同じ会話・場面かを見る。</figcaption>
       </figure>
       <figure>
         <video controls src="videos/boundary_09_after_match.mp4"></video>
-        <figcaption>後側対応確認。左が切り抜き、右が元動画。境界後の対応が合っているかを見る。</figcaption>
+        <figcaption>下の右。切り替わった後。左右が同じ会話・場面かを見る。</figcaption>
       </figure>
     </div>
   </section>
@@ -1118,47 +1118,47 @@
 </section>
 </article>
 <article>
-  <h2>境界10: block 10 -> 11</h2>
+  <h2>確認10：候補10から候補11へ変わる所</h2>
 
   <section class="decision-answer" data-boundary-answer="10">
-    <h3>境界10の回答</h3>
-    <p>4項目を動画で確認してください。判定不能は無理に合格へ寄せず、そのまま選べます。</p>
+    <h3>確認10の答え</h3>
+    <p>上の2本、下の2本を見て答えてください。迷ったら「わからない」で大丈夫です。</p>
     <div class="decision-grid">
-      <label>切り抜き連続再生で素材が切り替わるか
+      <label>1. 上の左：この所で、話や場面が変わりましたか？
         <select data-boundary-field="clipSwitch">
           <option value="">未回答</option>
-          <option value="true">切り替わる</option>
-          <option value="false">切り替わらない</option>
-          <option value="unresolved">判定不能</option>
+          <option value="true">はい、変わった</option>
+          <option value="false">いいえ、そのまま続いている</option>
+          <option value="unresolved">わからない</option>
         </select>
       </label>
-      <label>元配信の対応位置が切り替わるか
+      <label>2. 上の右：前半と後半は、元配信の別の所ですか？
         <select data-boundary-field="sourcePositionSwitches">
           <option value="">未回答</option>
-          <option value="true">別位置へ切り替わる</option>
-          <option value="false">同じ位置に見える</option>
-          <option value="unresolved">判定不能</option>
+          <option value="true">はい、別の所</option>
+          <option value="false">いいえ、同じ所の続き</option>
+          <option value="unresolved">わからない</option>
         </select>
       </label>
-      <label>境界前は切り抜きと元配信で同じ素材か
+      <label>3. 下の左：左右は同じ会話・場面ですか？
         <select data-boundary-field="beforeMatches">
           <option value="">未回答</option>
-          <option value="true">同じ素材</option>
-          <option value="false">違う素材</option>
-          <option value="unresolved">判定不能</option>
+          <option value="true">はい、同じ</option>
+          <option value="false">いいえ、違う</option>
+          <option value="unresolved">わからない</option>
         </select>
       </label>
-      <label>境界後は切り抜きと元配信で同じ素材か
+      <label>4. 下の右：左右は同じ会話・場面ですか？
         <select data-boundary-field="afterMatches">
           <option value="">未回答</option>
-          <option value="true">同じ素材</option>
-          <option value="false">違う素材</option>
-          <option value="unresolved">判定不能</option>
+          <option value="true">はい、同じ</option>
+          <option value="false">いいえ、違う</option>
+          <option value="unresolved">わからない</option>
         </select>
       </label>
     </div>
-    <label>境界メモ
-      <textarea data-boundary-field="note" placeholder="不一致・判定不能・crossfadeなど、後で判断根拠になることだけ記録"></textarea>
+    <label>気づいたこと（なければ空欄）
+      <textarea data-boundary-field="note" placeholder="例：音は同じだが画面だけ切り替わる。途中で少し重なっている。"></textarea>
     </label>
     <p class="answer-state" data-boundary-state="10">未回答</p>
   </section>
@@ -1168,26 +1168,26 @@
     <tr><th>素材飛び量</th><td colspan="2">+475530ms</td></tr>
   </table>
   <section class="watch">
-    <h3>最初に見る動画</h3>
+    <h3>上の2本</h3>
     <div class="videos primary-videos">
       <figure>
         <video controls src="videos/boundary_10_clip_context.mp4"></video>
-        <figcaption>clip連続再生。切り抜き単体で、境界前から境界後まで実際の順番で見る。</figcaption>
+        <figcaption>上の左。切り抜きだけの動画。この所で話や場面が変わるかを見る。</figcaption>
       </figure>
       <figure>
         <video controls src="videos/boundary_10_source_sequence.mp4"></video>
-        <figcaption>source前後連続再生。元動画の前側対応2秒、後側対応2秒を順番につないだ人工連結。別位置に飛んでいるかを見る。</figcaption>
+        <figcaption>上の右。元配信の前半と後半をつないだ動画。前後が別の所かを見る。</figcaption>
       </figure>
     </div>
-    <h3>対応確認の補助</h3>
+    <h3>下の2本</h3>
     <div class="videos support-videos">
       <figure>
         <video controls src="videos/boundary_10_before_match.mp4"></video>
-        <figcaption>前側対応確認。左が切り抜き、右が元動画。境界前の対応が合っているかを見る。</figcaption>
+        <figcaption>下の左。切り替わる前。左右が同じ会話・場面かを見る。</figcaption>
       </figure>
       <figure>
         <video controls src="videos/boundary_10_after_match.mp4"></video>
-        <figcaption>後側対応確認。左が切り抜き、右が元動画。境界後の対応が合っているかを見る。</figcaption>
+        <figcaption>下の右。切り替わった後。左右が同じ会話・場面かを見る。</figcaption>
       </figure>
     </div>
   </section>
@@ -1229,47 +1229,47 @@
 </section>
 </article>
 <article>
-  <h2>境界11: block 11 -> 12</h2>
+  <h2>確認11：候補11から候補12へ変わる所</h2>
 
   <section class="decision-answer" data-boundary-answer="11">
-    <h3>境界11の回答</h3>
-    <p>4項目を動画で確認してください。判定不能は無理に合格へ寄せず、そのまま選べます。</p>
+    <h3>確認11の答え</h3>
+    <p>上の2本、下の2本を見て答えてください。迷ったら「わからない」で大丈夫です。</p>
     <div class="decision-grid">
-      <label>切り抜き連続再生で素材が切り替わるか
+      <label>1. 上の左：この所で、話や場面が変わりましたか？
         <select data-boundary-field="clipSwitch">
           <option value="">未回答</option>
-          <option value="true">切り替わる</option>
-          <option value="false">切り替わらない</option>
-          <option value="unresolved">判定不能</option>
+          <option value="true">はい、変わった</option>
+          <option value="false">いいえ、そのまま続いている</option>
+          <option value="unresolved">わからない</option>
         </select>
       </label>
-      <label>元配信の対応位置が切り替わるか
+      <label>2. 上の右：前半と後半は、元配信の別の所ですか？
         <select data-boundary-field="sourcePositionSwitches">
           <option value="">未回答</option>
-          <option value="true">別位置へ切り替わる</option>
-          <option value="false">同じ位置に見える</option>
-          <option value="unresolved">判定不能</option>
+          <option value="true">はい、別の所</option>
+          <option value="false">いいえ、同じ所の続き</option>
+          <option value="unresolved">わからない</option>
         </select>
       </label>
-      <label>境界前は切り抜きと元配信で同じ素材か
+      <label>3. 下の左：左右は同じ会話・場面ですか？
         <select data-boundary-field="beforeMatches">
           <option value="">未回答</option>
-          <option value="true">同じ素材</option>
-          <option value="false">違う素材</option>
-          <option value="unresolved">判定不能</option>
+          <option value="true">はい、同じ</option>
+          <option value="false">いいえ、違う</option>
+          <option value="unresolved">わからない</option>
         </select>
       </label>
-      <label>境界後は切り抜きと元配信で同じ素材か
+      <label>4. 下の右：左右は同じ会話・場面ですか？
         <select data-boundary-field="afterMatches">
           <option value="">未回答</option>
-          <option value="true">同じ素材</option>
-          <option value="false">違う素材</option>
-          <option value="unresolved">判定不能</option>
+          <option value="true">はい、同じ</option>
+          <option value="false">いいえ、違う</option>
+          <option value="unresolved">わからない</option>
         </select>
       </label>
     </div>
-    <label>境界メモ
-      <textarea data-boundary-field="note" placeholder="不一致・判定不能・crossfadeなど、後で判断根拠になることだけ記録"></textarea>
+    <label>気づいたこと（なければ空欄）
+      <textarea data-boundary-field="note" placeholder="例：音は同じだが画面だけ切り替わる。途中で少し重なっている。"></textarea>
     </label>
     <p class="answer-state" data-boundary-state="11">未回答</p>
   </section>
@@ -1279,26 +1279,26 @@
     <tr><th>素材飛び量</th><td colspan="2">+69370ms</td></tr>
   </table>
   <section class="watch">
-    <h3>最初に見る動画</h3>
+    <h3>上の2本</h3>
     <div class="videos primary-videos">
       <figure>
         <video controls src="videos/boundary_11_clip_context.mp4"></video>
-        <figcaption>clip連続再生。切り抜き単体で、境界前から境界後まで実際の順番で見る。</figcaption>
+        <figcaption>上の左。切り抜きだけの動画。この所で話や場面が変わるかを見る。</figcaption>
       </figure>
       <figure>
         <video controls src="videos/boundary_11_source_sequence.mp4"></video>
-        <figcaption>source前後連続再生。元動画の前側対応2秒、後側対応2秒を順番につないだ人工連結。別位置に飛んでいるかを見る。</figcaption>
+        <figcaption>上の右。元配信の前半と後半をつないだ動画。前後が別の所かを見る。</figcaption>
       </figure>
     </div>
-    <h3>対応確認の補助</h3>
+    <h3>下の2本</h3>
     <div class="videos support-videos">
       <figure>
         <video controls src="videos/boundary_11_before_match.mp4"></video>
-        <figcaption>前側対応確認。左が切り抜き、右が元動画。境界前の対応が合っているかを見る。</figcaption>
+        <figcaption>下の左。切り替わる前。左右が同じ会話・場面かを見る。</figcaption>
       </figure>
       <figure>
         <video controls src="videos/boundary_11_after_match.mp4"></video>
-        <figcaption>後側対応確認。左が切り抜き、右が元動画。境界後の対応が合っているかを見る。</figcaption>
+        <figcaption>下の右。切り替わった後。左右が同じ会話・場面かを見る。</figcaption>
       </figure>
     </div>
   </section>
@@ -1340,47 +1340,47 @@
 </section>
 </article>
 <article>
-  <h2>境界12: block 12 -> 13</h2>
+  <h2>確認12：候補12から候補13へ変わる所</h2>
 
   <section class="decision-answer" data-boundary-answer="12">
-    <h3>境界12の回答</h3>
-    <p>4項目を動画で確認してください。判定不能は無理に合格へ寄せず、そのまま選べます。</p>
+    <h3>確認12の答え</h3>
+    <p>上の2本、下の2本を見て答えてください。迷ったら「わからない」で大丈夫です。</p>
     <div class="decision-grid">
-      <label>切り抜き連続再生で素材が切り替わるか
+      <label>1. 上の左：この所で、話や場面が変わりましたか？
         <select data-boundary-field="clipSwitch">
           <option value="">未回答</option>
-          <option value="true">切り替わる</option>
-          <option value="false">切り替わらない</option>
-          <option value="unresolved">判定不能</option>
+          <option value="true">はい、変わった</option>
+          <option value="false">いいえ、そのまま続いている</option>
+          <option value="unresolved">わからない</option>
         </select>
       </label>
-      <label>元配信の対応位置が切り替わるか
+      <label>2. 上の右：前半と後半は、元配信の別の所ですか？
         <select data-boundary-field="sourcePositionSwitches">
           <option value="">未回答</option>
-          <option value="true">別位置へ切り替わる</option>
-          <option value="false">同じ位置に見える</option>
-          <option value="unresolved">判定不能</option>
+          <option value="true">はい、別の所</option>
+          <option value="false">いいえ、同じ所の続き</option>
+          <option value="unresolved">わからない</option>
         </select>
       </label>
-      <label>境界前は切り抜きと元配信で同じ素材か
+      <label>3. 下の左：左右は同じ会話・場面ですか？
         <select data-boundary-field="beforeMatches">
           <option value="">未回答</option>
-          <option value="true">同じ素材</option>
-          <option value="false">違う素材</option>
-          <option value="unresolved">判定不能</option>
+          <option value="true">はい、同じ</option>
+          <option value="false">いいえ、違う</option>
+          <option value="unresolved">わからない</option>
         </select>
       </label>
-      <label>境界後は切り抜きと元配信で同じ素材か
+      <label>4. 下の右：左右は同じ会話・場面ですか？
         <select data-boundary-field="afterMatches">
           <option value="">未回答</option>
-          <option value="true">同じ素材</option>
-          <option value="false">違う素材</option>
-          <option value="unresolved">判定不能</option>
+          <option value="true">はい、同じ</option>
+          <option value="false">いいえ、違う</option>
+          <option value="unresolved">わからない</option>
         </select>
       </label>
     </div>
-    <label>境界メモ
-      <textarea data-boundary-field="note" placeholder="不一致・判定不能・crossfadeなど、後で判断根拠になることだけ記録"></textarea>
+    <label>気づいたこと（なければ空欄）
+      <textarea data-boundary-field="note" placeholder="例：音は同じだが画面だけ切り替わる。途中で少し重なっている。"></textarea>
     </label>
     <p class="answer-state" data-boundary-state="12">未回答</p>
   </section>
@@ -1390,26 +1390,26 @@
     <tr><th>素材飛び量</th><td colspan="2">+761908ms</td></tr>
   </table>
   <section class="watch">
-    <h3>最初に見る動画</h3>
+    <h3>上の2本</h3>
     <div class="videos primary-videos">
       <figure>
         <video controls src="videos/boundary_12_clip_context.mp4"></video>
-        <figcaption>clip連続再生。切り抜き単体で、境界前から境界後まで実際の順番で見る。</figcaption>
+        <figcaption>上の左。切り抜きだけの動画。この所で話や場面が変わるかを見る。</figcaption>
       </figure>
       <figure>
         <video controls src="videos/boundary_12_source_sequence.mp4"></video>
-        <figcaption>source前後連続再生。元動画の前側対応2秒、後側対応2秒を順番につないだ人工連結。別位置に飛んでいるかを見る。</figcaption>
+        <figcaption>上の右。元配信の前半と後半をつないだ動画。前後が別の所かを見る。</figcaption>
       </figure>
     </div>
-    <h3>対応確認の補助</h3>
+    <h3>下の2本</h3>
     <div class="videos support-videos">
       <figure>
         <video controls src="videos/boundary_12_before_match.mp4"></video>
-        <figcaption>前側対応確認。左が切り抜き、右が元動画。境界前の対応が合っているかを見る。</figcaption>
+        <figcaption>下の左。切り替わる前。左右が同じ会話・場面かを見る。</figcaption>
       </figure>
       <figure>
         <video controls src="videos/boundary_12_after_match.mp4"></video>
-        <figcaption>後側対応確認。左が切り抜き、右が元動画。境界後の対応が合っているかを見る。</figcaption>
+        <figcaption>下の右。切り替わった後。左右が同じ会話・場面かを見る。</figcaption>
       </figure>
     </div>
   </section>
@@ -1451,47 +1451,47 @@
 </section>
 </article>
 <article>
-  <h2>境界13: block 13 -> 14</h2>
+  <h2>確認13：候補13から候補14へ変わる所</h2>
 
   <section class="decision-answer" data-boundary-answer="13">
-    <h3>境界13の回答</h3>
-    <p>4項目を動画で確認してください。判定不能は無理に合格へ寄せず、そのまま選べます。</p>
+    <h3>確認13の答え</h3>
+    <p>上の2本、下の2本を見て答えてください。迷ったら「わからない」で大丈夫です。</p>
     <div class="decision-grid">
-      <label>切り抜き連続再生で素材が切り替わるか
+      <label>1. 上の左：この所で、話や場面が変わりましたか？
         <select data-boundary-field="clipSwitch">
           <option value="">未回答</option>
-          <option value="true">切り替わる</option>
-          <option value="false">切り替わらない</option>
-          <option value="unresolved">判定不能</option>
+          <option value="true">はい、変わった</option>
+          <option value="false">いいえ、そのまま続いている</option>
+          <option value="unresolved">わからない</option>
         </select>
       </label>
-      <label>元配信の対応位置が切り替わるか
+      <label>2. 上の右：前半と後半は、元配信の別の所ですか？
         <select data-boundary-field="sourcePositionSwitches">
           <option value="">未回答</option>
-          <option value="true">別位置へ切り替わる</option>
-          <option value="false">同じ位置に見える</option>
-          <option value="unresolved">判定不能</option>
+          <option value="true">はい、別の所</option>
+          <option value="false">いいえ、同じ所の続き</option>
+          <option value="unresolved">わからない</option>
         </select>
       </label>
-      <label>境界前は切り抜きと元配信で同じ素材か
+      <label>3. 下の左：左右は同じ会話・場面ですか？
         <select data-boundary-field="beforeMatches">
           <option value="">未回答</option>
-          <option value="true">同じ素材</option>
-          <option value="false">違う素材</option>
-          <option value="unresolved">判定不能</option>
+          <option value="true">はい、同じ</option>
+          <option value="false">いいえ、違う</option>
+          <option value="unresolved">わからない</option>
         </select>
       </label>
-      <label>境界後は切り抜きと元配信で同じ素材か
+      <label>4. 下の右：左右は同じ会話・場面ですか？
         <select data-boundary-field="afterMatches">
           <option value="">未回答</option>
-          <option value="true">同じ素材</option>
-          <option value="false">違う素材</option>
-          <option value="unresolved">判定不能</option>
+          <option value="true">はい、同じ</option>
+          <option value="false">いいえ、違う</option>
+          <option value="unresolved">わからない</option>
         </select>
       </label>
     </div>
-    <label>境界メモ
-      <textarea data-boundary-field="note" placeholder="不一致・判定不能・crossfadeなど、後で判断根拠になることだけ記録"></textarea>
+    <label>気づいたこと（なければ空欄）
+      <textarea data-boundary-field="note" placeholder="例：音は同じだが画面だけ切り替わる。途中で少し重なっている。"></textarea>
     </label>
     <p class="answer-state" data-boundary-state="13">未回答</p>
   </section>
@@ -1501,26 +1501,26 @@
     <tr><th>素材飛び量</th><td colspan="2">+269673ms</td></tr>
   </table>
   <section class="watch">
-    <h3>最初に見る動画</h3>
+    <h3>上の2本</h3>
     <div class="videos primary-videos">
       <figure>
         <video controls src="videos/boundary_13_clip_context.mp4"></video>
-        <figcaption>clip連続再生。切り抜き単体で、境界前から境界後まで実際の順番で見る。</figcaption>
+        <figcaption>上の左。切り抜きだけの動画。この所で話や場面が変わるかを見る。</figcaption>
       </figure>
       <figure>
         <video controls src="videos/boundary_13_source_sequence.mp4"></video>
-        <figcaption>source前後連続再生。元動画の前側対応2秒、後側対応2秒を順番につないだ人工連結。別位置に飛んでいるかを見る。</figcaption>
+        <figcaption>上の右。元配信の前半と後半をつないだ動画。前後が別の所かを見る。</figcaption>
       </figure>
     </div>
-    <h3>対応確認の補助</h3>
+    <h3>下の2本</h3>
     <div class="videos support-videos">
       <figure>
         <video controls src="videos/boundary_13_before_match.mp4"></video>
-        <figcaption>前側対応確認。左が切り抜き、右が元動画。境界前の対応が合っているかを見る。</figcaption>
+        <figcaption>下の左。切り替わる前。左右が同じ会話・場面かを見る。</figcaption>
       </figure>
       <figure>
         <video controls src="videos/boundary_13_after_match.mp4"></video>
-        <figcaption>後側対応確認。左が切り抜き、右が元動画。境界後の対応が合っているかを見る。</figcaption>
+        <figcaption>下の右。切り替わった後。左右が同じ会話・場面かを見る。</figcaption>
       </figure>
     </div>
   </section>
@@ -1562,47 +1562,47 @@
 </section>
 </article>
 <article>
-  <h2>境界14: block 14 -> 15</h2>
+  <h2>確認14：候補14から候補15へ変わる所</h2>
 
   <section class="decision-answer" data-boundary-answer="14">
-    <h3>境界14の回答</h3>
-    <p>4項目を動画で確認してください。判定不能は無理に合格へ寄せず、そのまま選べます。</p>
+    <h3>確認14の答え</h3>
+    <p>上の2本、下の2本を見て答えてください。迷ったら「わからない」で大丈夫です。</p>
     <div class="decision-grid">
-      <label>切り抜き連続再生で素材が切り替わるか
+      <label>1. 上の左：この所で、話や場面が変わりましたか？
         <select data-boundary-field="clipSwitch">
           <option value="">未回答</option>
-          <option value="true">切り替わる</option>
-          <option value="false">切り替わらない</option>
-          <option value="unresolved">判定不能</option>
+          <option value="true">はい、変わった</option>
+          <option value="false">いいえ、そのまま続いている</option>
+          <option value="unresolved">わからない</option>
         </select>
       </label>
-      <label>元配信の対応位置が切り替わるか
+      <label>2. 上の右：前半と後半は、元配信の別の所ですか？
         <select data-boundary-field="sourcePositionSwitches">
           <option value="">未回答</option>
-          <option value="true">別位置へ切り替わる</option>
-          <option value="false">同じ位置に見える</option>
-          <option value="unresolved">判定不能</option>
+          <option value="true">はい、別の所</option>
+          <option value="false">いいえ、同じ所の続き</option>
+          <option value="unresolved">わからない</option>
         </select>
       </label>
-      <label>境界前は切り抜きと元配信で同じ素材か
+      <label>3. 下の左：左右は同じ会話・場面ですか？
         <select data-boundary-field="beforeMatches">
           <option value="">未回答</option>
-          <option value="true">同じ素材</option>
-          <option value="false">違う素材</option>
-          <option value="unresolved">判定不能</option>
+          <option value="true">はい、同じ</option>
+          <option value="false">いいえ、違う</option>
+          <option value="unresolved">わからない</option>
         </select>
       </label>
-      <label>境界後は切り抜きと元配信で同じ素材か
+      <label>4. 下の右：左右は同じ会話・場面ですか？
         <select data-boundary-field="afterMatches">
           <option value="">未回答</option>
-          <option value="true">同じ素材</option>
-          <option value="false">違う素材</option>
-          <option value="unresolved">判定不能</option>
+          <option value="true">はい、同じ</option>
+          <option value="false">いいえ、違う</option>
+          <option value="unresolved">わからない</option>
         </select>
       </label>
     </div>
-    <label>境界メモ
-      <textarea data-boundary-field="note" placeholder="不一致・判定不能・crossfadeなど、後で判断根拠になることだけ記録"></textarea>
+    <label>気づいたこと（なければ空欄）
+      <textarea data-boundary-field="note" placeholder="例：音は同じだが画面だけ切り替わる。途中で少し重なっている。"></textarea>
     </label>
     <p class="answer-state" data-boundary-state="14">未回答</p>
   </section>
@@ -1612,26 +1612,26 @@
     <tr><th>素材飛び量</th><td colspan="2">+11669ms</td></tr>
   </table>
   <section class="watch">
-    <h3>最初に見る動画</h3>
+    <h3>上の2本</h3>
     <div class="videos primary-videos">
       <figure>
         <video controls src="videos/boundary_14_clip_context.mp4"></video>
-        <figcaption>clip連続再生。切り抜き単体で、境界前から境界後まで実際の順番で見る。</figcaption>
+        <figcaption>上の左。切り抜きだけの動画。この所で話や場面が変わるかを見る。</figcaption>
       </figure>
       <figure>
         <video controls src="videos/boundary_14_source_sequence.mp4"></video>
-        <figcaption>source前後連続再生。元動画の前側対応2秒、後側対応2秒を順番につないだ人工連結。別位置に飛んでいるかを見る。</figcaption>
+        <figcaption>上の右。元配信の前半と後半をつないだ動画。前後が別の所かを見る。</figcaption>
       </figure>
     </div>
-    <h3>対応確認の補助</h3>
+    <h3>下の2本</h3>
     <div class="videos support-videos">
       <figure>
         <video controls src="videos/boundary_14_before_match.mp4"></video>
-        <figcaption>前側対応確認。左が切り抜き、右が元動画。境界前の対応が合っているかを見る。</figcaption>
+        <figcaption>下の左。切り替わる前。左右が同じ会話・場面かを見る。</figcaption>
       </figure>
       <figure>
         <video controls src="videos/boundary_14_after_match.mp4"></video>
-        <figcaption>後側対応確認。左が切り抜き、右が元動画。境界後の対応が合っているかを見る。</figcaption>
+        <figcaption>下の右。切り替わった後。左右が同じ会話・場面かを見る。</figcaption>
       </figure>
     </div>
   </section>
@@ -1673,47 +1673,47 @@
 </section>
 </article>
 <article>
-  <h2>境界15: block 15 -> 16</h2>
+  <h2>確認15：候補15から候補16へ変わる所</h2>
 
   <section class="decision-answer" data-boundary-answer="15">
-    <h3>境界15の回答</h3>
-    <p>4項目を動画で確認してください。判定不能は無理に合格へ寄せず、そのまま選べます。</p>
+    <h3>確認15の答え</h3>
+    <p>上の2本、下の2本を見て答えてください。迷ったら「わからない」で大丈夫です。</p>
     <div class="decision-grid">
-      <label>切り抜き連続再生で素材が切り替わるか
+      <label>1. 上の左：この所で、話や場面が変わりましたか？
         <select data-boundary-field="clipSwitch">
           <option value="">未回答</option>
-          <option value="true">切り替わる</option>
-          <option value="false">切り替わらない</option>
-          <option value="unresolved">判定不能</option>
+          <option value="true">はい、変わった</option>
+          <option value="false">いいえ、そのまま続いている</option>
+          <option value="unresolved">わからない</option>
         </select>
       </label>
-      <label>元配信の対応位置が切り替わるか
+      <label>2. 上の右：前半と後半は、元配信の別の所ですか？
         <select data-boundary-field="sourcePositionSwitches">
           <option value="">未回答</option>
-          <option value="true">別位置へ切り替わる</option>
-          <option value="false">同じ位置に見える</option>
-          <option value="unresolved">判定不能</option>
+          <option value="true">はい、別の所</option>
+          <option value="false">いいえ、同じ所の続き</option>
+          <option value="unresolved">わからない</option>
         </select>
       </label>
-      <label>境界前は切り抜きと元配信で同じ素材か
+      <label>3. 下の左：左右は同じ会話・場面ですか？
         <select data-boundary-field="beforeMatches">
           <option value="">未回答</option>
-          <option value="true">同じ素材</option>
-          <option value="false">違う素材</option>
-          <option value="unresolved">判定不能</option>
+          <option value="true">はい、同じ</option>
+          <option value="false">いいえ、違う</option>
+          <option value="unresolved">わからない</option>
         </select>
       </label>
-      <label>境界後は切り抜きと元配信で同じ素材か
+      <label>4. 下の右：左右は同じ会話・場面ですか？
         <select data-boundary-field="afterMatches">
           <option value="">未回答</option>
-          <option value="true">同じ素材</option>
-          <option value="false">違う素材</option>
-          <option value="unresolved">判定不能</option>
+          <option value="true">はい、同じ</option>
+          <option value="false">いいえ、違う</option>
+          <option value="unresolved">わからない</option>
         </select>
       </label>
     </div>
-    <label>境界メモ
-      <textarea data-boundary-field="note" placeholder="不一致・判定不能・crossfadeなど、後で判断根拠になることだけ記録"></textarea>
+    <label>気づいたこと（なければ空欄）
+      <textarea data-boundary-field="note" placeholder="例：音は同じだが画面だけ切り替わる。途中で少し重なっている。"></textarea>
     </label>
     <p class="answer-state" data-boundary-state="15">未回答</p>
   </section>
@@ -1723,26 +1723,26 @@
     <tr><th>素材飛び量</th><td colspan="2">+5202754ms</td></tr>
   </table>
   <section class="watch">
-    <h3>最初に見る動画</h3>
+    <h3>上の2本</h3>
     <div class="videos primary-videos">
       <figure>
         <video controls src="videos/boundary_15_clip_context.mp4"></video>
-        <figcaption>clip連続再生。切り抜き単体で、境界前から境界後まで実際の順番で見る。</figcaption>
+        <figcaption>上の左。切り抜きだけの動画。この所で話や場面が変わるかを見る。</figcaption>
       </figure>
       <figure>
         <video controls src="videos/boundary_15_source_sequence.mp4"></video>
-        <figcaption>source前後連続再生。元動画の前側対応2秒、後側対応2秒を順番につないだ人工連結。別位置に飛んでいるかを見る。</figcaption>
+        <figcaption>上の右。元配信の前半と後半をつないだ動画。前後が別の所かを見る。</figcaption>
       </figure>
     </div>
-    <h3>対応確認の補助</h3>
+    <h3>下の2本</h3>
     <div class="videos support-videos">
       <figure>
         <video controls src="videos/boundary_15_before_match.mp4"></video>
-        <figcaption>前側対応確認。左が切り抜き、右が元動画。境界前の対応が合っているかを見る。</figcaption>
+        <figcaption>下の左。切り替わる前。左右が同じ会話・場面かを見る。</figcaption>
       </figure>
       <figure>
         <video controls src="videos/boundary_15_after_match.mp4"></video>
-        <figcaption>後側対応確認。左が切り抜き、右が元動画。境界後の対応が合っているかを見る。</figcaption>
+        <figcaption>下の右。切り替わった後。左右が同じ会話・場面かを見る。</figcaption>
       </figure>
     </div>
   </section>
@@ -1784,47 +1784,47 @@
 </section>
 </article>
 <article>
-  <h2>境界16: block 16 -> 17</h2>
+  <h2>確認16：候補16から候補17へ変わる所</h2>
 
   <section class="decision-answer" data-boundary-answer="16">
-    <h3>境界16の回答</h3>
-    <p>4項目を動画で確認してください。判定不能は無理に合格へ寄せず、そのまま選べます。</p>
+    <h3>確認16の答え</h3>
+    <p>上の2本、下の2本を見て答えてください。迷ったら「わからない」で大丈夫です。</p>
     <div class="decision-grid">
-      <label>切り抜き連続再生で素材が切り替わるか
+      <label>1. 上の左：この所で、話や場面が変わりましたか？
         <select data-boundary-field="clipSwitch">
           <option value="">未回答</option>
-          <option value="true">切り替わる</option>
-          <option value="false">切り替わらない</option>
-          <option value="unresolved">判定不能</option>
+          <option value="true">はい、変わった</option>
+          <option value="false">いいえ、そのまま続いている</option>
+          <option value="unresolved">わからない</option>
         </select>
       </label>
-      <label>元配信の対応位置が切り替わるか
+      <label>2. 上の右：前半と後半は、元配信の別の所ですか？
         <select data-boundary-field="sourcePositionSwitches">
           <option value="">未回答</option>
-          <option value="true">別位置へ切り替わる</option>
-          <option value="false">同じ位置に見える</option>
-          <option value="unresolved">判定不能</option>
+          <option value="true">はい、別の所</option>
+          <option value="false">いいえ、同じ所の続き</option>
+          <option value="unresolved">わからない</option>
         </select>
       </label>
-      <label>境界前は切り抜きと元配信で同じ素材か
+      <label>3. 下の左：左右は同じ会話・場面ですか？
         <select data-boundary-field="beforeMatches">
           <option value="">未回答</option>
-          <option value="true">同じ素材</option>
-          <option value="false">違う素材</option>
-          <option value="unresolved">判定不能</option>
+          <option value="true">はい、同じ</option>
+          <option value="false">いいえ、違う</option>
+          <option value="unresolved">わからない</option>
         </select>
       </label>
-      <label>境界後は切り抜きと元配信で同じ素材か
+      <label>4. 下の右：左右は同じ会話・場面ですか？
         <select data-boundary-field="afterMatches">
           <option value="">未回答</option>
-          <option value="true">同じ素材</option>
-          <option value="false">違う素材</option>
-          <option value="unresolved">判定不能</option>
+          <option value="true">はい、同じ</option>
+          <option value="false">いいえ、違う</option>
+          <option value="unresolved">わからない</option>
         </select>
       </label>
     </div>
-    <label>境界メモ
-      <textarea data-boundary-field="note" placeholder="不一致・判定不能・crossfadeなど、後で判断根拠になることだけ記録"></textarea>
+    <label>気づいたこと（なければ空欄）
+      <textarea data-boundary-field="note" placeholder="例：音は同じだが画面だけ切り替わる。途中で少し重なっている。"></textarea>
     </label>
     <p class="answer-state" data-boundary-state="16">未回答</p>
   </section>
@@ -1834,26 +1834,26 @@
     <tr><th>素材飛び量</th><td colspan="2">+1038720ms</td></tr>
   </table>
   <section class="watch">
-    <h3>最初に見る動画</h3>
+    <h3>上の2本</h3>
     <div class="videos primary-videos">
       <figure>
         <video controls src="videos/boundary_16_clip_context.mp4"></video>
-        <figcaption>clip連続再生。切り抜き単体で、境界前から境界後まで実際の順番で見る。</figcaption>
+        <figcaption>上の左。切り抜きだけの動画。この所で話や場面が変わるかを見る。</figcaption>
       </figure>
       <figure>
         <video controls src="videos/boundary_16_source_sequence.mp4"></video>
-        <figcaption>source前後連続再生。元動画の前側対応2秒、後側対応2秒を順番につないだ人工連結。別位置に飛んでいるかを見る。</figcaption>
+        <figcaption>上の右。元配信の前半と後半をつないだ動画。前後が別の所かを見る。</figcaption>
       </figure>
     </div>
-    <h3>対応確認の補助</h3>
+    <h3>下の2本</h3>
     <div class="videos support-videos">
       <figure>
         <video controls src="videos/boundary_16_before_match.mp4"></video>
-        <figcaption>前側対応確認。左が切り抜き、右が元動画。境界前の対応が合っているかを見る。</figcaption>
+        <figcaption>下の左。切り替わる前。左右が同じ会話・場面かを見る。</figcaption>
       </figure>
       <figure>
         <video controls src="videos/boundary_16_after_match.mp4"></video>
-        <figcaption>後側対応確認。左が切り抜き、右が元動画。境界後の対応が合っているかを見る。</figcaption>
+        <figcaption>下の右。切り替わった後。左右が同じ会話・場面かを見る。</figcaption>
       </figure>
     </div>
   </section>
@@ -1896,14 +1896,14 @@
 </article>
 
   <section class="decision-final" id="decision-final">
-    <h2>最終確認とdecision JSON</h2>
-    <p>境界回答からブロック状態を埋めた後、各ブロックの採否を人間が確認してください。自動提案は確定ではありません。</p>
+    <h2>最後の確認</h2>
+    <p>機械が「切り抜きは元配信のこの17か所を使った」と予想しています。下のボタンで、さきほどの回答から17か所を仮入力します。基本は内容を見るだけで、違う所やわからない所があれば直してください。</p>
     <div class="decision-actions">
-      <button type="button" id="derive-blocks">境界回答からブロック状態を埋める</button>
+      <button type="button" id="derive-blocks">さきほどの回答から17か所を仮入力する</button>
     </div>
     <div class="block-table-wrap">
       <table class="block-decision-table">
-        <thead><tr><th>block</th><th>clip ms</th><th>source ms</th><th>人間判定</th><th>理由・メモ</th></tr></thead>
+        <thead><tr><th>候補</th><th>切り抜き内の時刻</th><th>元配信内の時刻</th><th>この候補は正しい？</th><th>違う・わからない理由</th></tr></thead>
         <tbody>
       <tr data-block-row="1">
         <td>1</td>
@@ -1911,13 +1911,13 @@
         <td>260068-264269</td>
         <td>
           <select data-block-field="status">
-            <option value="pending">未回答</option>
-            <option value="accepted">採用</option>
-            <option value="rejected">不採用</option>
-            <option value="unresolved">判定不能</option>
+            <option value="pending">未確認</option>
+            <option value="accepted">正しい</option>
+            <option value="rejected">違う</option>
+            <option value="unresolved">わからない</option>
           </select>
         </td>
-        <td><textarea data-block-field="note" placeholder="不採用・判定不能では理由必須"></textarea></td>
+        <td><textarea data-block-field="note" placeholder="「違う」「わからない」のときだけ理由を書く"></textarea></td>
       </tr>
       <tr data-block-row="2">
         <td>2</td>
@@ -1925,13 +1925,13 @@
         <td>309446-313689</td>
         <td>
           <select data-block-field="status">
-            <option value="pending">未回答</option>
-            <option value="accepted">採用</option>
-            <option value="rejected">不採用</option>
-            <option value="unresolved">判定不能</option>
+            <option value="pending">未確認</option>
+            <option value="accepted">正しい</option>
+            <option value="rejected">違う</option>
+            <option value="unresolved">わからない</option>
           </select>
         </td>
-        <td><textarea data-block-field="note" placeholder="不採用・判定不能では理由必須"></textarea></td>
+        <td><textarea data-block-field="note" placeholder="「違う」「わからない」のときだけ理由を書く"></textarea></td>
       </tr>
       <tr data-block-row="3">
         <td>3</td>
@@ -1939,13 +1939,13 @@
         <td>325479-330720</td>
         <td>
           <select data-block-field="status">
-            <option value="pending">未回答</option>
-            <option value="accepted">採用</option>
-            <option value="rejected">不採用</option>
-            <option value="unresolved">判定不能</option>
+            <option value="pending">未確認</option>
+            <option value="accepted">正しい</option>
+            <option value="rejected">違う</option>
+            <option value="unresolved">わからない</option>
           </select>
         </td>
-        <td><textarea data-block-field="note" placeholder="不採用・判定不能では理由必須"></textarea></td>
+        <td><textarea data-block-field="note" placeholder="「違う」「わからない」のときだけ理由を書く"></textarea></td>
       </tr>
       <tr data-block-row="4">
         <td>4</td>
@@ -1953,13 +1953,13 @@
         <td>1052987-1055347</td>
         <td>
           <select data-block-field="status">
-            <option value="pending">未回答</option>
-            <option value="accepted">採用</option>
-            <option value="rejected">不採用</option>
-            <option value="unresolved">判定不能</option>
+            <option value="pending">未確認</option>
+            <option value="accepted">正しい</option>
+            <option value="rejected">違う</option>
+            <option value="unresolved">わからない</option>
           </select>
         </td>
-        <td><textarea data-block-field="note" placeholder="不採用・判定不能では理由必須"></textarea></td>
+        <td><textarea data-block-field="note" placeholder="「違う」「わからない」のときだけ理由を書く"></textarea></td>
       </tr>
       <tr data-block-row="5">
         <td>5</td>
@@ -1967,13 +1967,13 @@
         <td>1254601-1258062</td>
         <td>
           <select data-block-field="status">
-            <option value="pending">未回答</option>
-            <option value="accepted">採用</option>
-            <option value="rejected">不採用</option>
-            <option value="unresolved">判定不能</option>
+            <option value="pending">未確認</option>
+            <option value="accepted">正しい</option>
+            <option value="rejected">違う</option>
+            <option value="unresolved">わからない</option>
           </select>
         </td>
-        <td><textarea data-block-field="note" placeholder="不採用・判定不能では理由必須"></textarea></td>
+        <td><textarea data-block-field="note" placeholder="「違う」「わからない」のときだけ理由を書く"></textarea></td>
       </tr>
       <tr data-block-row="6">
         <td>6</td>
@@ -1981,13 +1981,13 @@
         <td>2790074-2806680</td>
         <td>
           <select data-block-field="status">
-            <option value="pending">未回答</option>
-            <option value="accepted">採用</option>
-            <option value="rejected">不採用</option>
-            <option value="unresolved">判定不能</option>
+            <option value="pending">未確認</option>
+            <option value="accepted">正しい</option>
+            <option value="rejected">違う</option>
+            <option value="unresolved">わからない</option>
           </select>
         </td>
-        <td><textarea data-block-field="note" placeholder="不採用・判定不能では理由必須"></textarea></td>
+        <td><textarea data-block-field="note" placeholder="「違う」「わからない」のときだけ理由を書く"></textarea></td>
       </tr>
       <tr data-block-row="7">
         <td>7</td>
@@ -1995,13 +1995,13 @@
         <td>3006642-3021412</td>
         <td>
           <select data-block-field="status">
-            <option value="pending">未回答</option>
-            <option value="accepted">採用</option>
-            <option value="rejected">不採用</option>
-            <option value="unresolved">判定不能</option>
+            <option value="pending">未確認</option>
+            <option value="accepted">正しい</option>
+            <option value="rejected">違う</option>
+            <option value="unresolved">わからない</option>
           </select>
         </td>
-        <td><textarea data-block-field="note" placeholder="不採用・判定不能では理由必須"></textarea></td>
+        <td><textarea data-block-field="note" placeholder="「違う」「わからない」のときだけ理由を書く"></textarea></td>
       </tr>
       <tr data-block-row="8">
         <td>8</td>
@@ -2009,13 +2009,13 @@
         <td>3180410-3190215</td>
         <td>
           <select data-block-field="status">
-            <option value="pending">未回答</option>
-            <option value="accepted">採用</option>
-            <option value="rejected">不採用</option>
-            <option value="unresolved">判定不能</option>
+            <option value="pending">未確認</option>
+            <option value="accepted">正しい</option>
+            <option value="rejected">違う</option>
+            <option value="unresolved">わからない</option>
           </select>
         </td>
-        <td><textarea data-block-field="note" placeholder="不採用・判定不能では理由必須"></textarea></td>
+        <td><textarea data-block-field="note" placeholder="「違う」「わからない」のときだけ理由を書く"></textarea></td>
       </tr>
       <tr data-block-row="9">
         <td>9</td>
@@ -2023,13 +2023,13 @@
         <td>3285387-3288829</td>
         <td>
           <select data-block-field="status">
-            <option value="pending">未回答</option>
-            <option value="accepted">採用</option>
-            <option value="rejected">不採用</option>
-            <option value="unresolved">判定不能</option>
+            <option value="pending">未確認</option>
+            <option value="accepted">正しい</option>
+            <option value="rejected">違う</option>
+            <option value="unresolved">わからない</option>
           </select>
         </td>
-        <td><textarea data-block-field="note" placeholder="不採用・判定不能では理由必須"></textarea></td>
+        <td><textarea data-block-field="note" placeholder="「違う」「わからない」のときだけ理由を書く"></textarea></td>
       </tr>
       <tr data-block-row="10">
         <td>10</td>
@@ -2037,13 +2037,13 @@
         <td>3475241-3485035</td>
         <td>
           <select data-block-field="status">
-            <option value="pending">未回答</option>
-            <option value="accepted">採用</option>
-            <option value="rejected">不採用</option>
-            <option value="unresolved">判定不能</option>
+            <option value="pending">未確認</option>
+            <option value="accepted">正しい</option>
+            <option value="rejected">違う</option>
+            <option value="unresolved">わからない</option>
           </select>
         </td>
-        <td><textarea data-block-field="note" placeholder="不採用・判定不能では理由必須"></textarea></td>
+        <td><textarea data-block-field="note" placeholder="「違う」「わからない」のときだけ理由を書く"></textarea></td>
       </tr>
       <tr data-block-row="11">
         <td>11</td>
@@ -2051,13 +2051,13 @@
         <td>3998452-4026707</td>
         <td>
           <select data-block-field="status">
-            <option value="pending">未回答</option>
-            <option value="accepted">採用</option>
-            <option value="rejected">不採用</option>
-            <option value="unresolved">判定不能</option>
+            <option value="pending">未確認</option>
+            <option value="accepted">正しい</option>
+            <option value="rejected">違う</option>
+            <option value="unresolved">わからない</option>
           </select>
         </td>
-        <td><textarea data-block-field="note" placeholder="不採用・判定不能では理由必須"></textarea></td>
+        <td><textarea data-block-field="note" placeholder="「違う」「わからない」のときだけ理由を書く"></textarea></td>
       </tr>
       <tr data-block-row="12">
         <td>12</td>
@@ -2065,13 +2065,13 @@
         <td>4102099-4109864</td>
         <td>
           <select data-block-field="status">
-            <option value="pending">未回答</option>
-            <option value="accepted">採用</option>
-            <option value="rejected">不採用</option>
-            <option value="unresolved">判定不能</option>
+            <option value="pending">未確認</option>
+            <option value="accepted">正しい</option>
+            <option value="rejected">違う</option>
+            <option value="unresolved">わからない</option>
           </select>
         </td>
-        <td><textarea data-block-field="note" placeholder="不採用・判定不能では理由必須"></textarea></td>
+        <td><textarea data-block-field="note" placeholder="「違う」「わからない」のときだけ理由を書く"></textarea></td>
       </tr>
       <tr data-block-row="13">
         <td>13</td>
@@ -2079,13 +2079,13 @@
         <td>4877136-4889844</td>
         <td>
           <select data-block-field="status">
-            <option value="pending">未回答</option>
-            <option value="accepted">採用</option>
-            <option value="rejected">不採用</option>
-            <option value="unresolved">判定不能</option>
+            <option value="pending">未確認</option>
+            <option value="accepted">正しい</option>
+            <option value="rejected">違う</option>
+            <option value="unresolved">わからない</option>
           </select>
         </td>
-        <td><textarea data-block-field="note" placeholder="不採用・判定不能では理由必須"></textarea></td>
+        <td><textarea data-block-field="note" placeholder="「違う」「わからない」のときだけ理由を書く"></textarea></td>
       </tr>
       <tr data-block-row="14">
         <td>14</td>
@@ -2093,13 +2093,13 @@
         <td>5183974-5189318</td>
         <td>
           <select data-block-field="status">
-            <option value="pending">未回答</option>
-            <option value="accepted">採用</option>
-            <option value="rejected">不採用</option>
-            <option value="unresolved">判定不能</option>
+            <option value="pending">未確認</option>
+            <option value="accepted">正しい</option>
+            <option value="rejected">違う</option>
+            <option value="unresolved">わからない</option>
           </select>
         </td>
-        <td><textarea data-block-field="note" placeholder="不採用・判定不能では理由必須"></textarea></td>
+        <td><textarea data-block-field="note" placeholder="「違う」「わからない」のときだけ理由を書く"></textarea></td>
       </tr>
       <tr data-block-row="15">
         <td>15</td>
@@ -2107,13 +2107,13 @@
         <td>5217231-5218992</td>
         <td>
           <select data-block-field="status">
-            <option value="pending">未回答</option>
-            <option value="accepted">採用</option>
-            <option value="rejected">不採用</option>
-            <option value="unresolved">判定不能</option>
+            <option value="pending">未確認</option>
+            <option value="accepted">正しい</option>
+            <option value="rejected">違う</option>
+            <option value="unresolved">わからない</option>
           </select>
         </td>
-        <td><textarea data-block-field="note" placeholder="不採用・判定不能では理由必須"></textarea></td>
+        <td><textarea data-block-field="note" placeholder="「違う」「わからない」のときだけ理由を書く"></textarea></td>
       </tr>
       <tr data-block-row="16">
         <td>16</td>
@@ -2121,13 +2121,13 @@
         <td>10439052-10450741</td>
         <td>
           <select data-block-field="status">
-            <option value="pending">未回答</option>
-            <option value="accepted">採用</option>
-            <option value="rejected">不採用</option>
-            <option value="unresolved">判定不能</option>
+            <option value="pending">未確認</option>
+            <option value="accepted">正しい</option>
+            <option value="rejected">違う</option>
+            <option value="unresolved">わからない</option>
           </select>
         </td>
-        <td><textarea data-block-field="note" placeholder="不採用・判定不能では理由必須"></textarea></td>
+        <td><textarea data-block-field="note" placeholder="「違う」「わからない」のときだけ理由を書く"></textarea></td>
       </tr>
       <tr data-block-row="17">
         <td>17</td>
@@ -2135,13 +2135,13 @@
         <td>11541555-11575281</td>
         <td>
           <select data-block-field="status">
-            <option value="pending">未回答</option>
-            <option value="accepted">採用</option>
-            <option value="rejected">不採用</option>
-            <option value="unresolved">判定不能</option>
+            <option value="pending">未確認</option>
+            <option value="accepted">正しい</option>
+            <option value="rejected">違う</option>
+            <option value="unresolved">わからない</option>
           </select>
         </td>
-        <td><textarea data-block-field="note" placeholder="不採用・判定不能では理由必須"></textarea></td>
+        <td><textarea data-block-field="note" placeholder="「違う」「わからない」のときだけ理由を書く"></textarea></td>
       </tr></tbody>
       </table>
     </div>
@@ -2152,28 +2152,28 @@
       <label>確認日
         <input id="checked-at" type="date" value="2026-07-11">
       </label>
-      <label class="wide">固定テーマ1行
-        <input id="fixed-theme" placeholder="採用区間から人間が逆算したテーマ。候補LLMの文をそのまま使わない">
+      <label class="wide">この切り抜きは、何についての動画ですか？ 1文で入力
+        <input id="fixed-theme" placeholder="例：マリンところねがRaftでじゃれ合いながら船を作る場面">
       </label>
-      <label class="wide">全体メモ
-        <textarea id="confirmation-note" placeholder="確認手段の限界、crossfade、除外理由など"></textarea>
+      <label class="wide">全体を通して気づいたこと（なければ空欄）
+        <textarea id="confirmation-note" placeholder="例：確認8だけ画面が重なっていて判断しづらい"></textarea>
       </label>
     </div>
     <label class="freeze-consent">
       <input type="checkbox" id="freeze-consent">
-      この回答を凍結候補として確定する。実際のfixture/expected書き込みは、別工程のpost-human dry-run後に行う。
+      以上の回答で次の確認へ進んでよい。ここにチェックしても、まだ正解データの書き込みは行いません。
     </label>
     <div class="decision-actions">
-      <button type="button" id="build-decision">回答を検査してJSONを作る</button>
-      <button type="button" id="copy-summary">回答文をコピー</button>
-      <button type="button" id="copy-decision">JSONをコピー</button>
-      <button type="button" id="download-decision">JSONを保存</button>
-      <button type="button" class="secondary" id="clear-saved">この画面の保存回答を消す</button>
+      <button type="button" id="build-decision">未回答を確認して結果を作る</button>
+      <button type="button" id="copy-summary">チャットに返す文をコピー</button>
+      <button type="button" id="copy-decision">作業用JSONをコピー</button>
+      <button type="button" id="download-decision">作業用JSONを保存</button>
+      <button type="button" class="secondary" id="clear-saved">入力を最初からやり直す</button>
     </div>
     <div id="validation-summary" class="validation-summary"></div>
     <h3>チャットへ返す回答</h3>
     <textarea id="review-summary" readonly placeholder="確認結果をまとめると、ここにチャットへ貼れる回答が出ます"></textarea>
-    <h3>凍結用decision JSON</h3>
+    <h3>作業用JSON（通常は見なくてよい）</h3>
     <textarea id="decision-output" readonly placeholder="入力内容を検査すると、凍結用decision JSONがここに出ます"></textarea>
     <p id="copy-status" class="copy-status"></p>
   </section>
@@ -2231,13 +2231,13 @@
         if (!element) return;
         element.className = 'answer-state';
         if (result.status === 'confirmed') {
-          element.textContent = '4項目とも確認済み';
+          element.textContent = '4つとも「はい」';
           element.classList.add('confirmed');
         } else if (result.status === 'rejected') {
-          element.textContent = '不一致あり。凍結前に扱いの確認が必要';
+          element.textContent = '「いいえ」があります。ここは後で確認します';
           element.classList.add('rejected');
         } else if (result.status === 'unresolved') {
-          element.textContent = '判定不能あり。凍結を止める';
+          element.textContent = '「わからない」があります。ここは正解に入れません';
         } else {
           const answered = result._ui.facts.filter((fact) => !fact.endsWith('未回答')).length;
           element.textContent = '回答 ' + answered + '/4';
@@ -2329,38 +2329,38 @@
         const answered = boundaries.filter((boundary) => boundary._ui.answered).length;
         const blocks = template.blocks.map(blockResult);
         const decided = blocks.filter((block) => block.status !== 'pending').length;
-        document.getElementById('boundary-progress').textContent = '境界 ' + answered + '/' + boundaries.length;
-        document.getElementById('block-progress').textContent = 'ブロック ' + decided + '/' + blocks.length;
+        document.getElementById('boundary-progress').textContent = '切り替わり ' + answered + '/' + boundaries.length;
+        document.getElementById('block-progress').textContent = '使用箇所 ' + decided + '/' + blocks.length;
       }
 
       function validate(decision, boundaryUi) {
         const issues = [];
-        if (!decision.humanConfirmation.checkedBy) issues.push('確認者が未入力');
-        if (!decision.humanConfirmation.checkedAt) issues.push('確認日が未入力');
-        if (!decision.humanConfirmation.allBoundariesReviewed) issues.push('未回答の境界がある');
-        if (!decision.humanConfirmation.allBlocksReviewed) issues.push('未回答のブロックがある');
-        if (!decision.fixedTheme.title) issues.push('固定テーマ1行が未入力');
-        if (!decision.blocks.some((block) => block.status === 'accepted')) issues.push('採用ブロックが1件もない');
+        if (!decision.humanConfirmation.checkedBy) issues.push('確認した人の名前がありません');
+        if (!decision.humanConfirmation.checkedAt) issues.push('確認した日がありません');
+        if (!decision.humanConfirmation.allBoundariesReviewed) issues.push('16個の切り替わりに未回答があります');
+        if (!decision.humanConfirmation.allBlocksReviewed) issues.push('17個の使用箇所に未確認があります');
+        if (!decision.fixedTheme.title) issues.push('「この切り抜きは何についての動画か」が未入力です');
+        if (!decision.blocks.some((block) => block.status === 'accepted')) issues.push('正しいと確認できた使用箇所がありません');
         for (const block of decision.blocks) {
           if ((block.status === 'rejected' || block.status === 'unresolved') && !block.note) {
-            issues.push('block ' + block.blockIndex + ' の不採用・判定不能理由がない');
+            issues.push('使用箇所' + block.blockIndex + 'の「違う・わからない」理由がありません');
           }
         }
         for (const boundary of decision.boundaries) {
           if ((boundary.status === 'rejected' || boundary.status === 'unresolved') && !boundary.note) {
-            issues.push('境界' + boundary.boundaryIndex + ' の不一致・判定不能理由がない');
+            issues.push('確認' + boundary.boundaryIndex + 'の「違う・わからない」理由がありません');
           }
           if (boundary.status === 'confirmed' && boundaryUi[boundary.boundaryIndex].clipSwitch !== 'true') {
-            issues.push('境界' + boundary.boundaryIndex + ' は切り抜き側の切替確認がない');
+            issues.push('確認' + boundary.boundaryIndex + 'で、切り抜き側の場面変化が「はい」になっていません');
           }
         }
         const accepted = new Set(decision.blocks.filter((block) => block.status === 'accepted').map((block) => block.blockIndex));
         for (const boundary of decision.boundaries) {
           if (accepted.has(boundary.beforeBlockIndex) && accepted.has(boundary.afterBlockIndex) && boundary.status !== 'confirmed') {
-            issues.push('採用block ' + boundary.beforeBlockIndex + '/' + boundary.afterBlockIndex + ' 間の境界' + boundary.boundaryIndex + 'が未確定');
+            issues.push('正しい使用箇所' + boundary.beforeBlockIndex + 'と' + boundary.afterBlockIndex + 'の間の確認' + boundary.boundaryIndex + 'が終わっていません');
           }
         }
-        if (!document.getElementById('freeze-consent').checked) issues.push('凍結候補として確定するチェックが未入力');
+        if (!document.getElementById('freeze-consent').checked) issues.push('「以上の回答で次の確認へ進んでよい」にチェックがありません');
         return [...new Set(issues)];
       }
 
@@ -2386,17 +2386,19 @@
         decision.readyForFreeze = issues.length === 0;
         const acceptedBlocks = decision.blocks.filter((block) => block.status === 'accepted').map((block) => block.blockIndex);
         const excludedBlocks = decision.blocks.filter((block) => block.status !== 'accepted').map((block) => block.blockIndex + ':' + block.status);
+        const boundaryStatusText = { confirmed: '問題なし', rejected: '違う可能性あり', unresolved: 'わからない', pending: '未回答' };
+        const blockStatusText = { accepted: '正しい', rejected: '違う', unresolved: 'わからない', pending: '未確認' };
         const summaryLines = [
           'B素材 nOEWCNc77MI 人間確認結果',
           '確認者: ' + (decision.humanConfirmation.checkedBy || '未入力'),
           '確認日: ' + (decision.humanConfirmation.checkedAt || '未入力'),
           '',
-          ...decision.boundaries.map((boundary) => '境界' + boundary.boundaryIndex + ': ' + boundary.status + ' / ' + boundary.note),
+          ...decision.boundaries.map((boundary) => '確認' + boundary.boundaryIndex + ': ' + boundaryStatusText[boundary.status] + ' / ' + boundary.note),
           '',
-          '採用block: ' + (acceptedBlocks.length ? acceptedBlocks.join(', ') : 'なし'),
-          '除外・判定不能block: ' + (excludedBlocks.length ? excludedBlocks.join(', ') : 'なし'),
-          '固定テーマ: ' + (decision.fixedTheme.title || '未入力'),
-          'readyForFreeze: ' + decision.readyForFreeze,
+          '正しい使用箇所: ' + (acceptedBlocks.length ? acceptedBlocks.join(', ') : 'なし'),
+          '違う・わからない使用箇所: ' + (excludedBlocks.length ? decision.blocks.filter((block) => block.status !== 'accepted').map((block) => block.blockIndex + ':' + blockStatusText[block.status]).join(', ') : 'なし'),
+          'この切り抜きの内容: ' + (decision.fixedTheme.title || '未入力'),
+          '次の確認へ進める: ' + (decision.readyForFreeze ? 'はい' : 'いいえ'),
           ...(issues.length ? ['', '未完了:', ...issues.map((issue) => '- ' + issue)] : [])
         ];
         document.getElementById('review-summary').value = summaryLines.join('\n') + '\n';
