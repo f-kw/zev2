@@ -1,0 +1,82 @@
+{
+  "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+  "draftId": "nOEWCNc77MI_multiblock_material_v001",
+  "description": "人間確認済みの複数素材ブロックを切り抜き内の順番で固定したfixture。",
+  "copiedFrom": [
+    "evals/clip_composition/stt-targets/nOEWCNc77MI.json",
+    "evals/clip_composition/outputs/material-blocks-nOEWCNc77MI-20260710-full-plus-selected-union-v001.json",
+    "evals/clip_composition/outputs/boundary-check/nOEWCNc77MI/20260710-full-plus-selected-union-v001/index.html",
+    "evals/clip_composition/outputs/boundary-review-responses/nOEWCNc77MI/nOEWCNc77MI-multiblock-human-decision-20260711-v001.json",
+    "evals/clip_composition/stt/nOEWCNc77MI_YE-faluP7zY_local30_v001/source/word-timestamps.json"
+  ],
+  "copiedAt": "2026-07-11T06:31:23.870Z",
+  "sourceUri": "https://www.youtube.com/watch?v=YE-faluP7zY",
+  "transcriptPath": "transcript.json",
+  "themesPath": "themes.json",
+  "selectedThemeId": "theme_multiblock_material_1",
+  "notes": [
+    "評価実行時はruntime/artifactsを読まず、このfixture配下のファイルだけを読む。",
+    "expectedCutsは人間確認でacceptedになった素材ブロックだけ。",
+    "rejectedとunresolvedは採点対象外としてexpectedに記録する。",
+    "固定テーマは人間が正解区間から逆算して書いた。",
+    "同一素材内の細かい詰めはexpected境界にしない。"
+  ],
+  "humanConfirmation": {
+    "status": "confirmed",
+    "checkedBy": "kawafmm",
+    "checkedAt": "2026-07-11",
+    "method": "境界確認パッケージの動画・音声確認",
+    "note": "人間確認で使用箇所2・5・12・16を不採用とした。4箇所はいずれも境目前側で元配信と素材が一致せず、照合誤対応または別素材由来と判断した。コラボ同時配信の可能性は人間判断で否定済み。",
+    "acceptedBlocks": [
+      1,
+      3,
+      4,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      13,
+      14,
+      15,
+      17
+    ],
+    "rejectedBlocks": [
+      2,
+      5,
+      12,
+      16
+    ],
+    "unresolvedBlocks": [],
+    "confirmedBoundaries": [
+      3,
+      6,
+      7,
+      8,
+      9,
+      10,
+      13,
+      14
+    ],
+    "rejectedBoundaries": [
+      1,
+      2,
+      4,
+      5,
+      11,
+      12,
+      15,
+      16
+    ],
+    "unresolvedBoundaries": [],
+    "materialBlocksPath": "evals/clip_composition/outputs/material-blocks-nOEWCNc77MI-20260710-full-plus-selected-union-v001.json",
+    "materialBlocksSha256": "fa5445dc04d9776eb09ec778cc981d1fc6a5a92c914dc882c963514afd01d96a",
+    "reviewPackagePath": "evals/clip_composition/outputs/boundary-check/nOEWCNc77MI/20260710-full-plus-selected-union-v001/index.html",
+    "reviewPackageSha256": "610d93dd2572c65ba7fb797ae0a2894eaf7f4c81e17907610344b38299f9c082"
+  },
+  "boundaryPrecision": {
+    "grade": "material_block_granularity",
+    "meaning": "素材対応の切り替わりを表す粒度。細かい詰めは境界にしない。"
+  }
+}
