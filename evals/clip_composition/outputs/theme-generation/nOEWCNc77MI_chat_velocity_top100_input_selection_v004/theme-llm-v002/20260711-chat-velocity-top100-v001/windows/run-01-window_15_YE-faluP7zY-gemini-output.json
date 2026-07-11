@@ -1,0 +1,64 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "バーベキューの網の上を歩くころねにツッコむマリン",
+      "reason": "ころねがバーベキューの網の上を歩く奇行に対し、マリンが理由を問い詰めてコミカルな言い合いに発展しているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 3211310,
+          "sourceEndMs": 3238642,
+          "supportingSpeechIds": [
+            477
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "イノシシの被り物で始まる鬼滅の刃ごっこ",
+      "reason": "ゲーム内で手に入れたイノシシの頭を被り、伊之助やねずこなどの名前を出してノリノリでごっこ遊びを始めているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 3252153,
+          "sourceEndMs": 3292350,
+          "supportingSpeechIds": [
+            "481-491"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_003",
+      "title": "イノシシの頭を被った姿にツボる二人",
+      "reason": "ステータス的な得がないにもかかわらず、イノシシの頭を被ったシュールな見た目に対して笑いが止まらなくなっているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 3366903,
+          "sourceEndMs": 3467816,
+          "supportingSpeechIds": [
+            "496-502"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-11T21:52:34+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_15_YE-faluP7zY",
+    "windowSourceVideoId": "YE-faluP7zY",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nOEWCNc77MI_chat_velocity_top100_input_selection_v004/theme-llm-v002/20260711-chat-velocity-top100-v001/windows/window_15_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/4f30e6b56a866331?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"バーベキューの網の上を歩くころねにツッコむマリン\",\n      \"reason\": \"ころねがバーベキューの網の上を歩く奇行に対し、マリンが理由を問い詰めてコミカルな言い合いに発展しているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 3211310,\n          \"sourceEndMs\": 3238642,\n          \"supportingSpeechIds\": [\n            477\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"イノシシの被り物で始まる鬼滅の刃ごっこ\",\n      \"reason\": \"ゲーム内で手に入れたイノシシの頭を被り、伊之助やねずこなどの名前を出してノリノリでごっこ遊びを始めているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 3252153,\n          \"sourceEndMs\": 3292350,\n          \"supportingSpeechIds\": [\n            \"481-491\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_003\",\n      \"title\": \"イノシシの頭を被った姿にツボる二人\",\n      \"reason\": \"ステータス的な得がないにもかかわらず、イノシシの頭を被ったシュールな見た目に対して笑いが止まらなくなっているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 3366903,\n          \"sourceEndMs\": 3467816,\n          \"supportingSpeechIds\": [\n            \"496-502\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

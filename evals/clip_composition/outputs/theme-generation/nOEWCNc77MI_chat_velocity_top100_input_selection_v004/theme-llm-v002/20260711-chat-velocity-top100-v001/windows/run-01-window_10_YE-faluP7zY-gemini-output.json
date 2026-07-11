@@ -1,0 +1,64 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "博衣こよりを「コヨーテだからサメ殺しが好き」とディスる二人",
+      "reason": "狩りの才能について話す中、コヨーテの博衣こよりを引き合いに出して弄り倒すコミカルなトーク展開が切り抜きに適しています。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 2196966,
+          "sourceEndMs": 2243688,
+          "supportingSpeechIds": [
+            "313-317"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "絶体絶命の危機でなぜかスイカを食べる宝鐘マリン",
+      "reason": "緊迫したBGMや終わりのムードが漂う中、冷静にスイカを食べ始める船長のシュールな行動と、角巻わためへの言及が面白い見どころとなっています。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 2220674,
+          "sourceEndMs": 2279144,
+          "supportingSpeechIds": [
+            "317-319"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_003",
+      "title": "激闘の末に討伐成功するも、まさかのドロップ無しで困惑する二人",
+      "reason": "弓が壊れるトラブルを乗り越えてようやく敵を倒したものの、何も落とさないというオチに対して息の合った困惑のリアクションを見せる場面です。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 2279144,
+          "sourceEndMs": 2304763,
+          "supportingSpeechIds": [
+            "320-331"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-11T21:36:00+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_10_YE-faluP7zY",
+    "windowSourceVideoId": "YE-faluP7zY",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nOEWCNc77MI_chat_velocity_top100_input_selection_v004/theme-llm-v002/20260711-chat-velocity-top100-v001/windows/window_10_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/b77ff64bb0861bf8?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"博衣こよりを「コヨーテだからサメ殺しが好き」とディスる二人\",\n      \"reason\": \"狩りの才能について話す中、コヨーテの博衣こよりを引き合いに出して弄り倒すコミカルなトーク展開が切り抜きに適しています。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 2196966,\n          \"sourceEndMs\": 2243688,\n          \"supportingSpeechIds\": [\n            \"313-317\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"絶体絶命の危機でなぜかスイカを食べる宝鐘マリン\",\n      \"reason\": \"緊迫したBGMや終わりのムードが漂う中、冷静にスイカを食べ始める船長のシュールな行動と、角巻わためへの言及が面白い見どころとなっています。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 2220674,\n          \"sourceEndMs\": 2279144,\n          \"supportingSpeechIds\": [\n            \"317-319\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_003\",\n      \"title\": \"激闘の末に討伐成功するも、まさかのドロップ無しで困惑する二人\",\n      \"reason\": \"弓が壊れるトラブルを乗り越えてようやく敵を倒したものの、何も落とさないというオチに対して息の合った困惑のリアクションを見せる場面です。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 2279144,\n          \"sourceEndMs\": 2304763,\n          \"supportingSpeechIds\": [\n            \"320-331\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

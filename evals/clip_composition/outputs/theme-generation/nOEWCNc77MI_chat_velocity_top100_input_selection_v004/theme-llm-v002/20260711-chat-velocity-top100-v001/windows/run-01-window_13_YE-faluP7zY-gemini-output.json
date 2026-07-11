@@ -1,0 +1,64 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "構えた弓矢を戻したいマリン",
+      "reason": "マリンが構えた矢を撃たずに下ろす方法をころねに相談し、スクロールなどの操作を試行錯誤するやり取りが具体的で切り抜きに適している。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 2916151,
+          "sourceEndMs": 2938310,
+          "supportingSpeechIds": [
+            "435-438"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "トッポの中身をレンジで消す珍説",
+      "reason": "お菓子のトッポを電子レンジで加熱すると中身がなくなって空洞を食べられるのではないかという、独自の理論でリスナーに検証を丸投げする一連の会話が面白い。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 2945887,
+          "sourceEndMs": 2999444,
+          "supportingSpeechIds": [
+            "443-447"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_003",
+      "title": "つまんないことを言うころねへの罰",
+      "reason": "船がサメに食われている緊迫した状況のなかで、ころねの言動に対してマリンが「罰を与えたい」と理不尽に詰め寄る掛け合いが際立っている。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 3000738,
+          "sourceEndMs": 3026556,
+          "supportingSpeechIds": [
+            "448-452"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-11T21:46:54+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_13_YE-faluP7zY",
+    "windowSourceVideoId": "YE-faluP7zY",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nOEWCNc77MI_chat_velocity_top100_input_selection_v004/theme-llm-v002/20260711-chat-velocity-top100-v001/windows/window_13_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/115cdf7a94d28cae?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"構えた弓矢を戻したいマリン\",\n      \"reason\": \"マリンが構えた矢を撃たずに下ろす方法をころねに相談し、スクロールなどの操作を試行錯誤するやり取りが具体的で切り抜きに適している。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 2916151,\n          \"sourceEndMs\": 2938310,\n          \"supportingSpeechIds\": [\n            \"435-438\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"トッポの中身をレンジで消す珍説\",\n      \"reason\": \"お菓子のトッポを電子レンジで加熱すると中身がなくなって空洞を食べられるのではないかという、独自の理論でリスナーに検証を丸投げする一連の会話が面白い。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 2945887,\n          \"sourceEndMs\": 2999444,\n          \"supportingSpeechIds\": [\n            \"443-447\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_003\",\n      \"title\": \"つまんないことを言うころねへの罰\",\n      \"reason\": \"船がサメに食われている緊迫した状況のなかで、ころねの言動に対してマリンが「罰を与えたい」と理不尽に詰め寄る掛け合いが際立っている。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 3000738,\n          \"sourceEndMs\": 3026556,\n          \"supportingSpeechIds\": [\n            \"448-452\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

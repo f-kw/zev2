@@ -1,0 +1,64 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "イノシシ3匹に焦る2人",
+      "reason": "ゲーム内でイノシシが3匹もいる危機的状況に遭遇し、慌てて矢の準備や作戦を立てるコミカルな掛け合いが切り抜きに適している。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 1021002,
+          "sourceEndMs": 1079852,
+          "supportingSpeechIds": [
+            "120-127"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "竹取物語から始まる「絡みづらい」プロレス",
+      "reason": "「竹取りの翁」のセリフからかぐや姫の話題に発展し、そこから「今日絡みづらい？」と脳死トークをいじり合う一連の流れが面白い。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 1260022,
+          "sourceEndMs": 1311760,
+          "supportingSpeechIds": [
+            "164-177"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_003",
+      "title": "古文風の会話に染まる2人",
+      "reason": "竹取物語の流れを引きずり、アイテム発見の報告を「見つけられり」「ありけり」と古文風に言い合って楽しんでいる様子が微笑ましい。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 1380850,
+          "sourceEndMs": 1392416,
+          "supportingSpeechIds": [
+            "185-187"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-11T21:09:02+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_06_YE-faluP7zY",
+    "windowSourceVideoId": "YE-faluP7zY",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nOEWCNc77MI_chat_velocity_top100_input_selection_v004/theme-llm-v002/20260711-chat-velocity-top100-v001/windows/window_06_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/59fde988ac9db745?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"イノシシ3匹に焦る2人\",\n      \"reason\": \"ゲーム内でイノシシが3匹もいる危機的状況に遭遇し、慌てて矢の準備や作戦を立てるコミカルな掛け合いが切り抜きに適している。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 1021002,\n          \"sourceEndMs\": 1079852,\n          \"supportingSpeechIds\": [\n            \"120-127\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"竹取物語から始まる「絡みづらい」プロレス\",\n      \"reason\": \"「竹取りの翁」のセリフからかぐや姫の話題に発展し、そこから「今日絡みづらい？」と脳死トークをいじり合う一連の流れが面白い。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 1260022,\n          \"sourceEndMs\": 1311760,\n          \"supportingSpeechIds\": [\n            \"164-177\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_003\",\n      \"title\": \"古文風の会話に染まる2人\",\n      \"reason\": \"竹取物語の流れを引きずり、アイテム発見の報告を「見つけられり」「ありけり」と古文風に言い合って楽しんでいる様子が微笑ましい。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 1380850,\n          \"sourceEndMs\": 1392416,\n          \"supportingSpeechIds\": [\n            \"185-187\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

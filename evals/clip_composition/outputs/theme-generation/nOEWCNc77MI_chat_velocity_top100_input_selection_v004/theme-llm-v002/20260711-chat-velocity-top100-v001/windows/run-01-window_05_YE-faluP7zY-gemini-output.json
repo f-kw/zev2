@@ -1,0 +1,64 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "マリンの雑な反応に対するころねの謎のフォロー",
+      "reason": "宝鐘マリンの雑な反応を指摘しつつも、ゲームの作業をしっかりこなす点を戌神ころねが褒めてフォローする一連のやり取りが綺麗にまとまっているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 864927,
+          "sourceEndMs": 904802,
+          "supportingSpeechIds": [
+            "96-104"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "島に潜むイノシシとの遭遇と、しし鍋パーティーの計画",
+      "reason": "島で突然イノシシに襲われ、それを弓矢で仕留めてしし鍋やしし丼にしようと2人で盛り上がる展開がコミカルで切り抜きに適しているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 920000,
+          "sourceEndMs": 959944,
+          "supportingSpeechIds": [
+            "105-110"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_003",
+      "title": "エイムの自信をツッコまれるマリンと、イカダでの合流作戦",
+      "reason": "マリンがエイムの自信を語るもツッコミを入れられ、その後「マリゾネス」「コロゾネス」と呼び合いながら弓矢の準備や合流を試みる掛け合いが面白い。 ",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 960122,
+          "sourceEndMs": 1019166,
+          "supportingSpeechIds": [
+            "111-119"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-11T21:08:47+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_05_YE-faluP7zY",
+    "windowSourceVideoId": "YE-faluP7zY",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nOEWCNc77MI_chat_velocity_top100_input_selection_v004/theme-llm-v002/20260711-chat-velocity-top100-v001/windows/window_05_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/c4b1cfd5283c9e14?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"マリンの雑な反応に対するころねの謎のフォロー\",\n      \"reason\": \"宝鐘マリンの雑な反応を指摘しつつも、ゲームの作業をしっかりこなす点を戌神ころねが褒めてフォローする一連のやり取りが綺麗にまとまっているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 864927,\n          \"sourceEndMs\": 904802,\n          \"supportingSpeechIds\": [\n            \"96-104\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"島に潜むイノシシとの遭遇と、しし鍋パーティーの計画\",\n      \"reason\": \"島で突然イノシシに襲われ、それを弓矢で仕留めてしし鍋やしし丼にしようと2人で盛り上がる展開がコミカルで切り抜きに適しているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 920000,\n          \"sourceEndMs\": 959944,\n          \"supportingSpeechIds\": [\n            \"105-110\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_003\",\n      \"title\": \"エイムの自信をツッコまれるマリンと、イカダでの合流作戦\",\n      \"reason\": \"マリンがエイムの自信を語るもツッコミを入れられ、その後「マリゾネス」「コロゾネス」と呼び合いながら弓矢の準備や合流を試みる掛け合いが面白い。 \",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 960122,\n          \"sourceEndMs\": 1019166,\n          \"supportingSpeechIds\": [\n            \"111-119\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

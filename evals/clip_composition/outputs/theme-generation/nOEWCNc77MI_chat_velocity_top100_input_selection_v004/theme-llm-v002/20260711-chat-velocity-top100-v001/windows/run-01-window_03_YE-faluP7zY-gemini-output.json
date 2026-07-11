@@ -1,0 +1,65 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "芋の連呼とお腹空いたやり取り",
+      "reason": "お腹が空いたころねに対して、芋を過剰に連呼しながら差し出すコミカルな掛け合いが行われているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 570560,
+          "sourceEndMs": 600000,
+          "supportingSpeechIds": [
+            47,
+            49
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "口数が少なく不穏な空気になる二人",
+      "reason": "今日はまったり作業デーだと説明しつつも、お互いに口数の少なさや空気感を弄り合うやり取りが展開されているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 631198,
+          "sourceEndMs": 659944,
+          "supportingSpeechIds": [
+            "51-55"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_003",
+      "title": "でかい島にぶつかりそうになる船",
+      "reason": "目の前に迫る大きな島にぶつかるかどうかを、二人が独特のノリで相談しながら直面しているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 690040,
+          "sourceEndMs": 700804,
+          "supportingSpeechIds": [
+            "59-63"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-11T21:08:18+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_03_YE-faluP7zY",
+    "windowSourceVideoId": "YE-faluP7zY",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nOEWCNc77MI_chat_velocity_top100_input_selection_v004/theme-llm-v002/20260711-chat-velocity-top100-v001/windows/window_03_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/68f398a12b8c4ea0?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"芋の連呼とお腹空いたやり取り\",\n      \"reason\": \"お腹が空いたころねに対して、芋を過剰に連呼しながら差し出すコミカルな掛け合いが行われているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 570560,\n          \"sourceEndMs\": 600000,\n          \"supportingSpeechIds\": [\n            47,\n            49\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"口数が少なく不穏な空気になる二人\",\n      \"reason\": \"今日はまったり作業デーだと説明しつつも、お互いに口数の少なさや空気感を弄り合うやり取りが展開されているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 631198,\n          \"sourceEndMs\": 659944,\n          \"supportingSpeechIds\": [\n            \"51-55\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_003\",\n      \"title\": \"でかい島にぶつかりそうになる船\",\n      \"reason\": \"目の前に迫る大きな島にぶつかるかどうかを、二人が独特のノリで相談しながら直面しているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 690040,\n          \"sourceEndMs\": 700804,\n          \"supportingSpeechIds\": [\n            \"59-63\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

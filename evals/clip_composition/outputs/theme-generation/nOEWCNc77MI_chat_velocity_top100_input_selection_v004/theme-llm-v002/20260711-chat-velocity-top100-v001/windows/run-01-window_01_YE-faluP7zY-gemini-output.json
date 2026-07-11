@@ -1,0 +1,64 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "ころねの配置に悩むマリンとサザエさん風の例え",
+      "reason": "配信画面上でのころねの配置について試行錯誤し、サザエさんのオープニングのような例えやBGMの口真似で盛り上がっているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 153112,
+          "sourceEndMs": 236189,
+          "supportingSpeechIds": [
+            "3-18"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "ねずこ風のころねと炭治郎になりきるマリンの掛け合い",
+      "reason": "ころねが『鬼滅の刃』のねずこのように「うんだうんだ」と喋るスタイルに対し、マリンが炭治郎になりきって会話を成立させようとしているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 240202,
+          "sourceEndMs": 298984,
+          "supportingSpeechIds": [
+            "19-20"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_003",
+      "title": "言い間違え連発から我に返って作業を始めようとする二人",
+      "reason": "「鬼の鬼柱」「上限のサメ」といった謎の言い間違えで笑い合った後、ゲーム内の空腹や作業の遅れに気づいて慌てて口と体を動かそうとする展開が面白いため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 300578,
+          "sourceEndMs": 328762,
+          "supportingSpeechIds": [
+            21
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-11T21:02:30+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_01_YE-faluP7zY",
+    "windowSourceVideoId": "YE-faluP7zY",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nOEWCNc77MI_chat_velocity_top100_input_selection_v004/theme-llm-v002/20260711-chat-velocity-top100-v001/windows/window_01_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/73c041b3f9f1e86b?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"ころねの配置に悩むマリンとサザエさん風の例え\",\n      \"reason\": \"配信画面上でのころねの配置について試行錯誤し、サザエさんのオープニングのような例えやBGMの口真似で盛り上がっているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 153112,\n          \"sourceEndMs\": 236189,\n          \"supportingSpeechIds\": [\n            \"3-18\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"ねずこ風のころねと炭治郎になりきるマリンの掛け合い\",\n      \"reason\": \"ころねが『鬼滅の刃』のねずこのように「うんだうんだ」と喋るスタイルに対し、マリンが炭治郎になりきって会話を成立させようとしているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 240202,\n          \"sourceEndMs\": 298984,\n          \"supportingSpeechIds\": [\n            \"19-20\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_003\",\n      \"title\": \"言い間違え連発から我に返って作業を始めようとする二人\",\n      \"reason\": \"「鬼の鬼柱」「上限のサメ」といった謎の言い間違えで笑い合った後、ゲーム内の空腹や作業の遅れに気づいて慌てて口と体を動かそうとする展開が面白いため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 300578,\n          \"sourceEndMs\": 328762,\n          \"supportingSpeechIds\": [\n            21\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

@@ -1,0 +1,50 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "サメをクジラと言い間違えるころね",
+      "reason": "ころねがサメの肉をもらう際に「クジラ」と言い間違え、マリンにツッコまれるコミカルなやり取りが切り抜きとして成立するため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 1809147,
+          "sourceEndMs": 1819996,
+          "supportingSpeechIds": [
+            243,
+            244
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "葉っぱ60枚獲得に大喜びする二人",
+      "reason": "ころねが葉っぱを60枚集めたことを報告し、マリンと共にテンション高く喜び合う掛け合いが見どころであるため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 1819996,
+          "sourceEndMs": 1827662,
+          "supportingSpeechIds": [
+            "245-254"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-11T21:19:40+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_08_YE-faluP7zY",
+    "windowSourceVideoId": "YE-faluP7zY",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nOEWCNc77MI_chat_velocity_top100_input_selection_v004/theme-llm-v002/20260711-chat-velocity-top100-v001/windows/window_08_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/9a91e20ccca758a1?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"サメをクジラと言い間違えるころね\",\n      \"reason\": \"ころねがサメの肉をもらう際に「クジラ」と言い間違え、マリンにツッコまれるコミカルなやり取りが切り抜きとして成立するため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 1809147,\n          \"sourceEndMs\": 1819996,\n          \"supportingSpeechIds\": [\n            243,\n            244\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"葉っぱ60枚獲得に大喜びする二人\",\n      \"reason\": \"ころねが葉っぱを60枚集めたことを報告し、マリンと共にテンション高く喜び合う掛け合いが見どころであるため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 1819996,\n          \"sourceEndMs\": 1827662,\n          \"supportingSpeechIds\": [\n            \"245-254\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

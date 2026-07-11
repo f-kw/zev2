@@ -1,0 +1,49 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "栽培のためのストレージ作り",
+      "reason": "ヤシの種をいらないと判断しかけたところから、栽培して木材を集めるために新しくストレージを作るという展開がまとまっているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 1834199,
+          "sourceEndMs": 1859504,
+          "supportingSpeechIds": [
+            "257-261"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "足の速い獲物にガバガバエイムで挑む二人",
+      "reason": "イノシシかと思いきや足の速い動物（小ヤギ）に遭遇し、当たらない弓矢やエイムに苦戦しながら仕留めようとする一連の戦闘シーンになっているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 2040950,
+          "sourceEndMs": 2099744,
+          "supportingSpeechIds": [
+            "287-308"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-11T21:19:54+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_09_YE-faluP7zY",
+    "windowSourceVideoId": "YE-faluP7zY",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nOEWCNc77MI_chat_velocity_top100_input_selection_v004/theme-llm-v002/20260711-chat-velocity-top100-v001/windows/window_09_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/3b692c13dd5f4e92?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"栽培のためのストレージ作り\",\n      \"reason\": \"ヤシの種をいらないと判断しかけたところから、栽培して木材を集めるために新しくストレージを作るという展開がまとまっているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 1834199,\n          \"sourceEndMs\": 1859504,\n          \"supportingSpeechIds\": [\"257-261\"]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"足の速い獲物にガバガバエイムで挑む二人\",\n      \"reason\": \"イノシシかと思いきや足の速い動物（小ヤギ）に遭遇し、当たらない弓矢やエイムに苦戦しながら仕留めようとする一連の戦闘シーンになっているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 2040950,\n          \"sourceEndMs\": 2099744,\n          \"supportingSpeechIds\": [\"287-308\"]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

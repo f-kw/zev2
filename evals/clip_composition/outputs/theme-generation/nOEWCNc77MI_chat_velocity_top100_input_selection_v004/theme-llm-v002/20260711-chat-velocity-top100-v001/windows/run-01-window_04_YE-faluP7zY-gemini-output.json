@@ -1,0 +1,79 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "せっかく作った土台をサメに食べられるマリン",
+      "reason": "島で木を伐採するという発想から土台を作るも、すぐにサメに食べられてしまい嘆く一連のくだりが切り抜きとして成立するため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 700804,
+          "sourceEndMs": 719632,
+          "supportingSpeechIds": [
+            "64-72"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "ころねの成長を実感して自慢げになるマリン",
+      "reason": "斧を使いこなし、素材集めも早い有能なころねに対して、マリンが「独り立ちの日」「成長を感じてほしい」とフォローを交えて絶賛するため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 780346,
+          "sourceEndMs": 809552,
+          "supportingSpeechIds": [
+            76
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_003",
+      "title": "食料不足の中で鳥を仕留めるころね",
+      "reason": "ココナッツしか取れず食料がしけてきた状況で、ころねが見事に鳥を殺して肉を確保し、マリンが驚き喜ぶ展開が綺麗にまとまっているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 810330,
+          "sourceEndMs": 839584,
+          "supportingSpeechIds": [
+            "77-83"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_004",
+      "title": "肉を焼いている最中に鳥に襲われるハプニング",
+      "reason": "手に入れたサメ肉やチキンを忙しく調理している最中に突然鳥に襲撃され、マリンが悔しがりながら騒ぐリアクションが面白い場面であるため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 840194,
+          "sourceEndMs": 864927,
+          "supportingSpeechIds": [
+            "84-95"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-11T21:08:33+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_04_YE-faluP7zY",
+    "windowSourceVideoId": "YE-faluP7zY",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nOEWCNc77MI_chat_velocity_top100_input_selection_v004/theme-llm-v002/20260711-chat-velocity-top100-v001/windows/window_04_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/a31e5217f120cba9?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"せっかく作った土台をサメに食べられるマリン\",\n      \"reason\": \"島で木を伐採するという発想から土台を作るも、すぐにサメに食べられてしまい嘆く一連のくだりが切り抜きとして成立するため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 700804,\n          \"sourceEndMs\": 719632,\n          \"supportingSpeechIds\": [\n            \"64-72\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"ころねの成長を実感して自慢げになるマリン\",\n      \"reason\": \"斧を使いこなし、素材集めも早い有能なころねに対して、マリンが「独り立ちの日」「成長を感じてほしい」とフォローを交えて絶賛するため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 780346,\n          \"sourceEndMs\": 809552,\n          \"supportingSpeechIds\": [\n            76\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_003\",\n      \"title\": \"食料不足の中で鳥を仕留めるころね\",\n      \"reason\": \"ココナッツしか取れず食料がしけてきた状況で、ころねが見事に鳥を殺して肉を確保し、マリンが驚き喜ぶ展開が綺麗にまとまっているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 810330,\n          \"sourceEndMs\": 839584,\n          \"supportingSpeechIds\": [\n            \"77-83\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_004\",\n      \"title\": \"肉を焼いている最中に鳥に襲われるハプニング\",\n      \"reason\": \"手に入れたサメ肉やチキンを忙しく調理している最中に突然鳥に襲撃され、マリンが悔しがりながら騒ぐリアクションが面白い場面であるため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 840194,\n          \"sourceEndMs\": 864927,\n          \"supportingSpeechIds\": [\n            \"84-95\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

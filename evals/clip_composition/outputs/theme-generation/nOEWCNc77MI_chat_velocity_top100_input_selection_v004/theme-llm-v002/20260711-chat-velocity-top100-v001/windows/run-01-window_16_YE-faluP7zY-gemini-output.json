@@ -1,0 +1,64 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "食材を全て握る船長と肉をめぐる攻防",
+      "reason": "宝鐘マリンが全ての食材を独占している状態から、戌神ころねが肉を食べようと交渉するコミカルな掛け合いが描かれているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 3467816,
+          "sourceEndMs": 3519167,
+          "supportingSpeechIds": [
+            "503-510"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "温存したイノシシ肉の回復量にツッコミ",
+      "reason": "ここぞという時のために温存していたイノシシの肉を一緒に食べるが、期待していたほど回復量が変わらずツッコミを入れる展開が面白いため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 3634469,
+          "sourceEndMs": 3689086,
+          "supportingSpeechIds": [
+            "521-522"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_003",
+      "title": "笑いすぎて限界を迎える中での鳥襲来",
+      "reason": "イノシシ肉の件で大笑いして泣きそうになっている最中に、突然鳥が連続で襲来してパニックになる落差が見どころであるため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 3696786,
+          "sourceEndMs": 3719724,
+          "supportingSpeechIds": [
+            523
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-11T22:34:47+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_16_YE-faluP7zY",
+    "windowSourceVideoId": "YE-faluP7zY",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nOEWCNc77MI_chat_velocity_top100_input_selection_v004/theme-llm-v002/20260711-chat-velocity-top100-v001/windows/window_16_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/1d324646ed81394f?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"食材を全て握る船長と肉をめぐる攻防\",\n      \"reason\": \"宝鐘マリンが全ての食材を独占している状態から、戌神ころねが肉を食べようと交渉するコミカルな掛け合いが描かれているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 3467816,\n          \"sourceEndMs\": 3519167,\n          \"supportingSpeechIds\": [\n            \"503-510\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"温存したイノシシ肉の回復量にツッコミ\",\n      \"reason\": \"ここぞという時のために温存していたイノシシの肉を一緒に食べるが、期待していたほど回復量が変わらずツッコミを入れる展開が面白いため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 3634469,\n          \"sourceEndMs\": 3689086,\n          \"supportingSpeechIds\": [\n            \"521-522\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_003\",\n      \"title\": \"笑いすぎて限界を迎える中での鳥襲来\",\n      \"reason\": \"イノシシ肉の件で大笑いして泣きそうになっている最中に、突然鳥が連続で襲来してパニックになる落差が見どころであるため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 3696786,\n          \"sourceEndMs\": 3719724,\n          \"supportingSpeechIds\": [\n            523\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

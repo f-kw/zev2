@@ -1,0 +1,64 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "ピンク色の朝日と二人の心",
+      "reason": "朝日のピンク色を「二人の心みたいじゃない？」と例えるが、上手く伝わらず独特な空気感になる掛け合いが切り抜きとして成立すると判断したため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 397197,
+          "sourceEndMs": 438186,
+          "supportingSpeechIds": [
+            "29-40"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "マリンのハイテンションな叫び声",
+      "reason": "アンカーをあげる際に宝鐘マリンが突然大音量で「オラァイヨォォォ」と叫ぶ場面が単独の見どころとしてインパクトがあるため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 438186,
+          "sourceEndMs": 461818,
+          "supportingSpeechIds": [
+            "41-42"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_003",
+      "title": "船のリフォーム紹介とBGM再現",
+      "reason": "朝を待ってリフォームした船の紹介を始める際、劇的ビフォーアフター風のBGMを口ずさみ続ける展開が面白いため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 482374,
+          "sourceEndMs": 507883,
+          "supportingSpeechIds": [
+            43
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-11T21:08:02+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_02_YE-faluP7zY",
+    "windowSourceVideoId": "YE-faluP7zY",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nOEWCNc77MI_chat_velocity_top100_input_selection_v004/theme-llm-v002/20260711-chat-velocity-top100-v001/windows/window_02_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/73e0e14731f0d79e?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"ピンク色の朝日と二人の心\",\n      \"reason\": \"朝日のピンク色を「二人の心みたいじゃない？」と例えるが、上手く伝わらず独特な空気感になる掛け合いが切り抜きとして成立すると判断したため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 397197,\n          \"sourceEndMs\": 438186,\n          \"supportingSpeechIds\": [\n            \"29-40\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"マリンのハイテンションな叫び声\",\n      \"reason\": \"アンカーをあげる際に宝鐘マリンが突然大音量で「オラァイヨォォォ」と叫ぶ場面が単独の見どころとしてインパクトがあるため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 438186,\n          \"sourceEndMs\": 461818,\n          \"supportingSpeechIds\": [\n            \"41-42\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_003\",\n      \"title\": \"船のリフォーム紹介とBGM再現\",\n      \"reason\": \"朝を待ってリフォームした船の紹介を始める際、劇的ビフォーアフター風のBGMを口ずさみ続ける展開が面白いため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 482374,\n          \"sourceEndMs\": 507883,\n          \"supportingSpeechIds\": [\n            43\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

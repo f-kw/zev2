@@ -67,7 +67,8 @@ function parseOptions(argv) {
     maxPromptBytes,
     overlapMs,
     bridgeSeams: values.has('bridgeSeams'),
-    allowIncompleteStt: values.has('allowIncompleteStt')
+    allowIncompleteStt: values.has('allowIncompleteStt'),
+    selectionPlanPath: resolvePath(values.get('selectionPlan')?.trim() || '')
   };
 }
 
@@ -185,6 +186,47 @@ function compactSegments(sourceVideoId, transcript) {
     compacted.push(current);
   }
   return compacted.map((segment, index) => ({ ...segment, speechId: index + 1 }));
+}
+
+function overlapMs(left, right) {
+  if (left.sourceVideoId !== right.sourceVideoId) return 0;
+  return Math.max(0, Math.min(left.sourceEndMs, right.sourceEndMs) - Math.max(left.sourceStartMs, right.sourceStartMs));
+}
+
+function selectedPromptSegments(allPromptSegments, selectionPlan) {
+  if (!selectionPlan) return allPromptSegments;
+  if (selectionPlan.kind !== 'chat_velocity_source_only_input_selection_plan') {
+    throw new Error('selection planのkindが対応形式ではありません');
+  }
+  if (selectionPlan.sourceVideoId !== options.sourceVideoId) {
+    throw new Error('selection planの元配信IDが入力と一致しません');
+  }
+  if (!/^input-selection-v\d{3}$/.test(String(selectionPlan.inputSelectionVersion ?? ''))) {
+    throw new Error('selection planに有効な入力選定版がありません');
+  }
+  if (!Array.isArray(selectionPlan.selectedRanges) || selectionPlan.selectedRanges.length === 0) {
+    throw new Error('selection planに選択区間がありません');
+  }
+  const serialized = JSON.stringify(selectionPlan);
+  for (const forbidden of ['expectedCuts', 'clipUrl', 'humanVerification', 'materialBlock']) {
+    if (serialized.includes(forbidden)) {
+      throw new Error(`selection planに評価専用情報が含まれています: ${forbidden}`);
+    }
+  }
+  const ranges = selectionPlan.selectedRanges.map((range, index) => {
+    if (range.sourceVideoId !== options.sourceVideoId
+      || !Number.isFinite(range.sourceStartMs)
+      || !Number.isFinite(range.sourceEndMs)
+      || range.sourceEndMs <= range.sourceStartMs) {
+      throw new Error(`selection planのselectedRanges[${index}]が不正です`);
+    }
+    return range;
+  });
+  const selected = allPromptSegments.filter((segment) => ranges.some((range) => overlapMs(segment, range) > 0));
+  if (selected.length === 0) {
+    throw new Error('selection planと重なる発話がありません');
+  }
+  return selected;
 }
 
 function outputContract() {
@@ -536,6 +578,8 @@ function summaryMarkdown(input) {
     '',
     `- 対象: ${input.target}`,
     `- 入力セット: ${input.inputSetId}`,
+    `- 入力選定版: ${input.inputSelectionVersion || '全発話（版指定なし）'}`,
+    `- 入力選定計画: ${input.selectionPlanPath || 'なし'}`,
     `- 元配信: ${input.sourceVideoId}`,
     `- 生成系統: ${input.generationSystem}`,
     `- プロンプト版: ${input.promptVersion}`,
@@ -615,7 +659,9 @@ async function main() {
   const transcript = await readJson(options.transcriptPath);
   const sttManifest = await readSttManifest();
   const sourceTitle = await readSourceTitle();
-  const promptSegments = compactSegments(options.sourceVideoId, transcript);
+  const selectionPlan = options.selectionPlanPath ? await readJson(options.selectionPlanPath) : undefined;
+  const allPromptSegments = compactSegments(options.sourceVideoId, transcript);
+  const promptSegments = selectedPromptSegments(allPromptSegments, selectionPlan);
   const source = sourceInput({ sourceTitle, transcript, promptSegments });
   const modelInput = baseModelInput(source);
   const fullPromptText = buildPromptMarkdown(promptTemplate, modelInput);
@@ -643,16 +689,19 @@ async function main() {
     promptVersion: options.promptVersion,
     requestedThemeCount: options.requestedThemeCount,
     plannedRuns: options.runs,
+    inputSelectionVersion: selectionPlan?.inputSelectionVersion,
+    selectionPlanPath: options.selectionPlanPath ? relative(options.selectionPlanPath) : undefined,
     llmCall: false,
     modelInput,
     evaluationOnly: {
-      note: 'モデルへ渡さない作業メタデータ。fixture/expected未作成のやり直し候補A用。',
+      note: 'モデルへ渡さない作業メタデータ。入力選定の来歴とsource-only条件を検証するためのもの。',
       target: options.target,
       transcriptPath: relative(options.transcriptPath),
       sttManifestPath: options.sttManifestPath ? relative(options.sttManifestPath) : undefined,
       sttManifestComplete: sttManifest?.complete,
       sttManifestProcessedRanges: sttManifest?.processedRanges,
-      sourceInfoPath: relative(options.sourceInfoPath)
+      sourceInfoPath: relative(options.sourceInfoPath),
+      selectionPlanPath: options.selectionPlanPath ? relative(options.selectionPlanPath) : undefined
     }
   };
   await mkdir(outputDir, { recursive: true });
@@ -741,6 +790,8 @@ async function main() {
     sourceVideoId: options.sourceVideoId,
     sourceSttManifestPath: options.sttManifestPath ? relative(options.sttManifestPath) : undefined,
     sourceSttComplete: sttManifest?.complete,
+    inputSelectionVersion: selectionPlan?.inputSelectionVersion,
+    selectionPlanPath: options.selectionPlanPath ? relative(options.selectionPlanPath) : undefined,
     generationSystem: options.generationSystem,
     outputId: options.outputId,
     promptVersion: options.promptVersion,
@@ -761,6 +812,8 @@ async function main() {
     target: options.target,
     sourceVideoId: options.sourceVideoId,
     sourceSttId: options.sttId,
+    inputSelectionVersion: selectionPlan?.inputSelectionVersion,
+    selectionPlanPath: options.selectionPlanPath ? relative(options.selectionPlanPath) : undefined,
     generationSystem: options.generationSystem,
     promptVersion: options.promptVersion,
     requestedThemeCount: options.requestedThemeCount,
@@ -793,6 +846,8 @@ async function main() {
     sourceVideoId: options.sourceVideoId,
     generationSystem: options.generationSystem,
     promptVersion: options.promptVersion,
+    inputSelectionVersion: selectionPlan?.inputSelectionVersion,
+    selectionPlanPath: options.selectionPlanPath ? relative(options.selectionPlanPath) : undefined,
     requestedThemeCount: options.requestedThemeCount,
     runs: options.runs,
     fullPromptBytes,

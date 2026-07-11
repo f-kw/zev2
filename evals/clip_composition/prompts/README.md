@@ -87,6 +87,7 @@
 | input-selection-v001 | 2026-07-10 | 元配信の先頭50チャンク | 出力形式の方向確認用。正式主結果へ統合しない参考入力。 | theme-llm-v002 | 実走済み・参考結果 |
 | input-selection-v002 | 2026-07-10 | 粗字幕の発話文字数上位50チャンク | B素材での最初の正式主結果。正解13件中、入力内は1件。 | theme-llm-v002 | 正式採点済み |
 | input-selection-v003 | 2026-07-11 | 完了済みローカルSTTの元配信全文を既存byte窓へ分割 | 入力選定損失ゼロの上界測定。入力設計の最終形ではない。 | theme-llm-v002 | run 1完走。69窓・175候補・12/13 hit。`reports/theme-input-selection-comparison/nOEWCNc77MI-v003-upper-bound-execution-20260711-v001.md` |
+| input-selection-v004 | 2026-07-11 | チャット流速上位100分。配信内の完全な1分区間の平均を1.0とした相対順位で選択 | v003から入力選定だけを変更する削減実験。N=100はB素材1本で正解13件を参照して選んだ閾値であり、汎化未検証。 | theme-llm-v002 | run 1実走中断。37窓中16窓を完全保存、window 17がWeb Geminiで20分経過後も生成途中のため停止。統合・採点未実施。`reports/theme-input-selection-comparison/nOEWCNc77MI-v004-execution-interruption-20260711-v001.md` |
 
 ### 入力削減実験の固定比較基準
 

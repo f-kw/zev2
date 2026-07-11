@@ -1,0 +1,64 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "ワタメに理不尽な謝罪要求",
+      "reason": "時間経過やアイテムドロップの不満から、その場にいないワタメに対して理不尽に謝罪を求めるくだりがコミカルで切り抜きに適している。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 2304763,
+          "sourceEndMs": 2334328,
+          "supportingSpeechIds": [
+            "332-341"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "満身創痍のマリンと危機回避",
+      "reason": "マリンが急にダメージを受けて死にかけ、焦るころねとのやり取りや地上担当へ回る一連の流れが起承転結を含んでいる。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 2580020,
+          "sourceEndMs": 2639126,
+          "supportingSpeechIds": [
+            "379-386"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_003",
+      "title": "サメに慣れすぎたラフト末期症状",
+      "reason": "脅威であるはずのサメを見ても何も思わなくなり、「ラフト末期」と自嘲するゲーム慣れ特有の面白い一幕である。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 2648288,
+          "sourceEndMs": 2669504,
+          "supportingSpeechIds": [
+            "388-389"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-11T21:46:26+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_11_YE-faluP7zY",
+    "windowSourceVideoId": "YE-faluP7zY",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nOEWCNc77MI_chat_velocity_top100_input_selection_v004/theme-llm-v002/20260711-chat-velocity-top100-v001/windows/window_11_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/2def03f20e652d4b?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"ワタメに理不尽な謝罪要求\",\n      \"reason\": \"時間経過やアイテムドロップの不満から、その場にいないワタメに対して理不尽に謝罪を求めるくだりがコミカルで切り抜きに適している。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 2304763,\n          \"sourceEndMs\": 2334328,\n          \"supportingSpeechIds\": [\n            \"332-341\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"満身創痍のマリンと危機回避\",\n      \"reason\": \"マリンが急にダメージを受けて死にかけ、焦るころねとのやり取りや地上担当へ回る一連の流れが起承転結を含んでいる。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 2580020,\n          \"sourceEndMs\": 2639126,\n          \"supportingSpeechIds\": [\n            \"379-386\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_003\",\n      \"title\": \"サメに慣れすぎたラフト末期症状\",\n      \"reason\": \"脅威であるはずのサメを見ても何も思わなくなり、「ラフト末期」と自嘲するゲーム慣れ特有の面白い一幕である。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 2648288,\n          \"sourceEndMs\": 2669504,\n          \"supportingSpeechIds\": [\n            \"388-389\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

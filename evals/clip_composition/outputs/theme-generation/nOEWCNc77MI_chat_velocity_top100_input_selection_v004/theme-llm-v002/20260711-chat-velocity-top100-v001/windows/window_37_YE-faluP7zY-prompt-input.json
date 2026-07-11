@@ -1,0 +1,157 @@
+{
+  "kind": "theme_redo_source_only_window_prompt_payload",
+  "runAt": "2026-07-11T11:55:59.188Z",
+  "target": "nOEWCNc77MI",
+  "inputSetId": "nOEWCNc77MI_chat_velocity_top100_input_selection_v004",
+  "sourceVideoId": "YE-faluP7zY",
+  "sourceSttId": "nOEWCNc77MI_YE-faluP7zY_local30_v001",
+  "sourceSttManifestPath": "evals/clip_composition/stt/nOEWCNc77MI_YE-faluP7zY_local30_v001/source/manifest.json",
+  "sourceSttComplete": true,
+  "generationSystem": "theme-llm-v002",
+  "promptVersion": "theme_generation_prompt_v002",
+  "requestedThemeCount": 8,
+  "windowKind": "primary",
+  "llmCall": false,
+  "modelInput": {
+    "task": "source_only_theme_generation",
+    "generationSystem": "theme-llm-v002",
+    "promptVersion": "theme_generation_prompt_v002",
+    "requestedThemeCount": 8,
+    "inputPolicy": {
+      "sourceOnly": true,
+      "noClipInfo": true,
+      "noExpected": true,
+      "noAlignment": true,
+      "noHumanReverseTheme": true
+    },
+    "windowing": {
+      "applied": true,
+      "mode": "speech-time",
+      "windowId": "window_37_YE-faluP7zY",
+      "reason": "元配信全体入力が長いため、発話境界を保った時間窓へ分割する。",
+      "maxPromptBytes": 13084,
+      "overlapMs": 0,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 11612844,
+      "sourceEndMs": 11740238
+    },
+    "sources": [
+      {
+        "sourceVideoId": "YE-faluP7zY",
+        "sourceUrl": "https://www.youtube.com/watch?v=YE-faluP7zY",
+        "sourceTitle": "【Raft】ころね、キミさえいればこの海の果てまでだって──【ホロライブ/宝鐘マリン】",
+        "transcriptKind": "local_stt",
+        "language": "ja-JP",
+        "durationSec": 11824.121,
+        "rawSegmentCount": 53180,
+        "promptSegmentCount": 11,
+        "segmentCompaction": {
+          "method": "source-only transcript segments concatenated until sentence-ending punctuation",
+          "scoringRole": "none",
+          "note": "読みやすさのための表現変換であり、expected、切り抜き、照合結果、人間確認メモは使わない。"
+        },
+        "segments": [
+          {
+            "speechId": 1739,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 11612844,
+            "sourceEndMs": 11657128,
+            "text": "ということでねこんな感じでねかなり駆け回ってねかなり清涼感のあふれるお家がもう出来上がり始めていますのでねこれはちょっと船長たち裏でねさらに完成度高めておくのでちょっともう作業になりすぎて我々がね非常にまったりしてきちゃったのでちょっと一旦区切りをつけたいと思います割に皆様はお邪魔しましたーありがとうございましたーありがとうございましたーじゃあ、それでは、出航しようかなお、お、お、お、お、おお、お、お、お、お、お来るぞ、来るぞ、来るぞ、来るぞ、来るぞそれでは、行きますよー!"
+          },
+          {
+            "speechId": 1740,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 11657128,
+            "sourceEndMs": 11657508,
+            "text": "出航ー!"
+          },
+          {
+            "speechId": 1741,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 11657508,
+            "sourceEndMs": 11662511,
+            "text": "やったー!"
+          },
+          {
+            "speechId": 1742,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 11662511,
+            "sourceEndMs": 11665172,
+            "text": "ヨーソロなんですけどえ?"
+          },
+          {
+            "speechId": 1743,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 11665172,
+            "sourceEndMs": 11669134,
+            "text": "ヨーソロなんですけどあ、ヨーソロねあ、配信見てない?"
+          },
+          {
+            "speechId": 1744,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 11669134,
+            "sourceEndMs": 11669394,
+            "text": "もしかして"
+          },
+          {
+            "speechId": 1745,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 11670162,
+            "sourceEndMs": 11673186,
+            "text": "それでは行きますよー!"
+          },
+          {
+            "speechId": 1746,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 11673186,
+            "sourceEndMs": 11678012,
+            "text": "出航!"
+          },
+          {
+            "speechId": 1747,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 11678012,
+            "sourceEndMs": 11679954,
+            "text": "よっしゃろー!"
+          },
+          {
+            "speechId": 1748,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 11679954,
+            "sourceEndMs": 11684860,
+            "text": "発音違うんだよな"
+          },
+          {
+            "speechId": 1749,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 11740116,
+            "sourceEndMs": 11740238,
+            "text": "またね。"
+          }
+        ]
+      }
+    ],
+    "outputContract": {
+      "format": "json_only",
+      "schema": {
+        "themes": [
+          {
+            "themeId": "string",
+            "title": "string",
+            "reason": "string_one_sentence",
+            "evidenceRanges": [
+              {
+                "sourceVideoId": "string",
+                "sourceStartMs": "number",
+                "sourceEndMs": "number",
+                "supportingSpeechIds": [
+                  "number_or_range_string"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}
