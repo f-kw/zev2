@@ -1,0 +1,65 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "急に冷たくなるころねとキレるマリン",
+      "reason": "マリンの「味方じゃん」という言葉に対し、ころねがいつから味方だと思っていたのかと冷たく突き放し、マリンが即座にキレるプロレス的な掛け合いが面白い場面です。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 8280340,
+          "sourceEndMs": 8339014,
+          "supportingSpeechIds": [
+            "1276-1286"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "本当は仲がいいのか疑う二人の掛け合い",
+      "reason": "お互いに辛辣な言葉を浴びせ合いながらも「本当は仲いいんだけど」と関係性に言及する、切り抜きとして単独で成立する展開です。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 8400086,
+          "sourceEndMs": 8429984,
+          "supportingSpeechIds": [
+            "1296-1298"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_003",
+      "title": "「備品」の定義で揉めるアイテム整理",
+      "reason": "収納ボックスのルール決めをする中で、備品の具体例として釘や槍を挙げるころねと、それに困惑しつつ従うマリンのやり取りが綺麗にまとまっています。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 8440504,
+          "sourceEndMs": 8489342,
+          "supportingSpeechIds": [
+            "1300",
+            "1302-1303"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-11T23:51:21+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_28_YE-faluP7zY",
+    "windowSourceVideoId": "YE-faluP7zY",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nOEWCNc77MI_chat_velocity_top100_input_selection_v004/theme-llm-v002/20260711-chat-velocity-top100-v001/windows/window_28_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/902d39abb32034b9?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"急に冷たくなるころねとキレるマリン\",\n      \"reason\": \"マリンの「味方じゃん」という言葉に対し、ころねがいつから味方だと思っていたのかと冷たく突き放し、マリンが即座にキレるプロレス的な掛け合いが面白い場面です。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 8280340,\n          \"sourceEndMs\": 8339014,\n          \"supportingSpeechIds\": [\n            \"1276-1286\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"本当は仲がいいのか疑う二人の掛け合い\",\n      \"reason\": \"お互いに辛辣な言葉を浴びせ合いながらも「本当は仲いいんだけど」と関係性に言及する、切り抜きとして単独で成立する展開です。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 8400086,\n          \"sourceEndMs\": 8429984,\n          \"supportingSpeechIds\": [\n            \"1296-1298\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_003\",\n      \"title\": \"「備品」の定義で揉めるアイテム整理\",\n      \"reason\": \"収納ボックスのルール決めをする中で、備品の具体例として釘や槍を挙げるころねと、それに困惑しつつ従うマリンのやり取りが綺麗にまとまっています。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 8440504,\n          \"sourceEndMs\": 8489342,\n          \"supportingSpeechIds\": [\n            \"1300\",\n            \"1302-1303\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

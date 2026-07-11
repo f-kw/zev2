@@ -1,0 +1,23 @@
+{
+  "kind": "clip_composition_theme_input_selection_comparison_plan",
+  "outputId": "nOEWCNc77MI-v002-v003-v004-efficiency-20260711-v001",
+  "sourceTranscript": "evals/clip_composition/stt/nOEWCNc77MI_YE-faluP7zY_local30_v001/source/transcript.json",
+  "thresholdCaveat": "input-selection-v004のN=100はB素材1本の正解13件を参照して選んだ閾値であり、汎化未検証。",
+  "entries": [
+    {
+      "label": "input-selection-v002 発話量上位50",
+      "bundle": "evals/clip_composition/outputs/theme-generation/nOEWCNc77MI_rough_top50_speech_chars_source_only_v001/theme-llm-v002/nOEWCNc77MI-rough-top50-theme-input-after-stt-20260710-v001",
+      "score": "evals/clip_composition/outputs/theme-generation/theme-llm-v002-20260711-B-top50-formal-v001-formal-score.json"
+    },
+    {
+      "label": "input-selection-v003 全文上界",
+      "bundle": "evals/clip_composition/outputs/theme-generation/nOEWCNc77MI_full_source_input_selection_v003/theme-llm-v002/20260711-full-source-upper-bound-v001",
+      "score": "evals/clip_composition/outputs/theme-generation/theme-llm-v002-20260711-B-full-source-input-selection-v003-upper-bound-v001-formal-score.json"
+    },
+    {
+      "label": "input-selection-v004 チャット流速上位100分",
+      "bundle": "evals/clip_composition/outputs/theme-generation/nOEWCNc77MI_chat_velocity_top100_input_selection_v004/theme-llm-v002/20260711-chat-velocity-top100-v001",
+      "score": "evals/clip_composition/outputs/theme-generation/theme-llm-v002-20260711-B-chat-velocity-input-selection-v004-v001-formal-score.json"
+    }
+  ]
+}

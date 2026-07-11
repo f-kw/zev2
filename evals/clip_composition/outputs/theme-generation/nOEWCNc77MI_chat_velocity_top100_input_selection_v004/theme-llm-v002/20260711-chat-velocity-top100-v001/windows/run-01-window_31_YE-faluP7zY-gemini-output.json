@@ -1,0 +1,57 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "海で見つけた生き物を巡る見間違いトーク",
+      "reason": "クラゲやイルカなど、視界に入ってきた海の生き物を巡って2人が騒ぐコミカルなやり取りが成立しているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 9155980,
+          "sourceEndMs": 9209924,
+          "supportingSpeechIds": [
+            "1378-1388"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "設置した絨毯への反応とこだわり",
+      "reason": "新しく作った可愛い絨毯を披露し、その感想や設置場所のこだわりについて会話が盛り上がっているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 9232688,
+          "sourceEndMs": 9238850,
+          "supportingSpeechIds": [
+            "1390-1391"
+          ]
+        },
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 9544166,
+          "sourceEndMs": 9599564,
+          "supportingSpeechIds": [
+            "1437-1451"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-12T24:02:29+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_31_YE-faluP7zY",
+    "windowSourceVideoId": "YE-faluP7zY",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nOEWCNc77MI_chat_velocity_top100_input_selection_v004/theme-llm-v002/20260711-chat-velocity-top100-v001/windows/window_31_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/681a40792bcf0d50?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"海で見つけた生き物を巡る見間違いトーク\",\n      \"reason\": \"クラゲやイルカなど、視界に入ってきた海の生き物を巡って2人が騒ぐコミカルなやり取りが成立しているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 9155980,\n          \"sourceEndMs\": 9209924,\n          \"supportingSpeechIds\": [\n            \"1378-1388\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"設置した絨毯への反応とこだわり\",\n      \"reason\": \"新しく作った可愛い絨毯を披露し、その感想や設置場所のこだわりについて会話が盛り上がっているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 9232688,\n          \"sourceEndMs\": 9238850,\n          \"supportingSpeechIds\": [\n            \"1390-1391\"\n          ]\n        },\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 9544166,\n          \"sourceEndMs\": 9599564,\n          \"supportingSpeechIds\": [\n            \"1437-1451\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

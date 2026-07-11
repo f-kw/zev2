@@ -1,0 +1,49 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "エモい演技を台無しにされるマリン",
+      "reason": "マリンが景色に感動してエモい演技をするも、ころねに伝わらず空回りして「絡みづらい」と言われてしまう掛け合いが面白い。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 5190322,
+          "sourceEndMs": 5279310,
+          "supportingSpeechIds": [
+            "771-784"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "帆の向きが逆で進まず煽り合う二人",
+      "reason": "マリンが豪快に広げた帆の向きが実は逆で進まず、そこからお互いに泣き真似を煽り合ったりパドルを漕ぎ出す展開が微笑ましい。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 5581366,
+          "sourceEndMs": 5672062,
+          "supportingSpeechIds": [
+            "830-842"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-11T23:49:24+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_20_YE-faluP7zY",
+    "windowSourceVideoId": "YE-faluP7zY",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nOEWCNc77MI_chat_velocity_top100_input_selection_v004/theme-llm-v002/20260711-chat-velocity-top100-v001/windows/window_20_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/f6ad6948bbe7550b?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"エモい演技を台無しにされるマリン\",\n      \"reason\": \"マリンが景色に感動してエモい演技をするも、ころねに伝わらず空回りして「絡みづらい」と言われてしまう掛け合いが面白い。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 5190322,\n          \"sourceEndMs\": 5279310,\n          \"supportingSpeechIds\": [\n            \"771-784\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"帆の向きが逆で進まず煽り合う二人\",\n      \"reason\": \"マリンが豪快に広げた帆の向きが実は逆で進まず、そこからお互いに泣き真似を煽り合ったりパドルを漕ぎ出す展開が微笑ましい。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 5581366,\n          \"sourceEndMs\": 5672062,\n          \"supportingSpeechIds\": [\n            \"830-842\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

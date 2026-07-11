@@ -1,0 +1,49 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "サメ退治の代償で船を見失い迷子になるマリンと ころね",
+      "reason": "サメを倒した直後に船を見失ってお互いを探し合うという、ゲーム内のハプニングとパニックの展開が明確で切り抜きとして成立するため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 8499668,
+          "sourceEndMs": 8639498,
+          "supportingSpeechIds": [
+            "1305-1324"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "コンパスのない世界で島を目印に合流を試みる二人",
+      "reason": "迷子になった状態からアンカーを下ろし、見えた島を目標地点に指定して合流しようとする問題解決のやり取りが描かれているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 8760034,
+          "sourceEndMs": 8805267,
+          "supportingSpeechIds": [
+            "1338-1342"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-11T23:51:40+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_29_YE-faluP7zY",
+    "windowSourceVideoId": "YE-faluP7zY",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nOEWCNc77MI_chat_velocity_top100_input_selection_v004/theme-llm-v002/20260711-chat-velocity-top100-v001/windows/window_29_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/2740b93a59fd19a3?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"サメ退治の代償で船を見失い迷子になるマリンと ころね\",\n      \"reason\": \"サメを倒した直後に船を見失ってお互いを探し合うという、ゲーム内のハプニングとパニックの展開が明確で切り抜きとして成立するため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 8499668,\n          \"sourceEndMs\": 8639498,\n          \"supportingSpeechIds\": [\"1305-1324\"]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"コンパスのない世界で島を目印に合流を試みる二人\",\n      \"reason\": \"迷子になった状態からアンカーを下ろし、見えた島を目標地点に指定して合流しようとする問題解決のやり取りが描かれているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 8760034,\n          \"sourceEndMs\": 8805267,\n          \"supportingSpeechIds\": [\"1338-1342\"]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

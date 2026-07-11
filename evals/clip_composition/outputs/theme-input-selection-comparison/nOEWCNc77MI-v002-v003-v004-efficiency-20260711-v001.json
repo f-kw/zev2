@@ -1,0 +1,167 @@
+{
+  "kind": "clip_composition_theme_input_selection_experiment_comparison",
+  "runAt": "2026-07-11T15:27:52.261Z",
+  "outputId": "nOEWCNc77MI-v002-v003-v004-efficiency-20260711-v001",
+  "sourceDurationMs": 11824121,
+  "controlledVariables": {
+    "generationSystem": "theme-llm-v002@gemini-web-flash",
+    "promptVersion": "theme_generation_prompt_v002",
+    "modelParams": {
+      "temperature": 0,
+      "source": "gemini-web",
+      "runner": "edge-cdp-text-prompt",
+      "requestedThemeCount": 8,
+      "windowed": true,
+      "windowRequestedThemeCount": 8,
+      "evidenceTiming": "resolved_from_supporting_speech_ids",
+      "aggregateCandidateLimit": "not_applied_no_semantic_ranker"
+    },
+    "evidenceMergeRule": "同一sourceVideoIdで根拠範囲が重なる候補だけを機械統合。意味ベースの統合はしない。",
+    "scorer": "score_theme_generation_formal.ts"
+  },
+  "coverageDefinition": "candidate evidence range union on source timeline / source duration",
+  "hitEfficiencyDefinition": "hit expected count / candidate count",
+  "thresholdCaveat": "input-selection-v004のN=100はB素材1本の正解13件を参照して選んだ閾値であり、汎化未検証。",
+  "results": [
+    {
+      "label": "input-selection-v002 発話量上位50",
+      "role": "formal-primary",
+      "generationSystem": "theme-llm-v002@gemini-web-flash",
+      "promptVersion": "theme_generation_prompt_v002",
+      "modelParams": {
+        "temperature": 0,
+        "source": "gemini-web",
+        "runner": "edge-cdp-text-prompt",
+        "requestedThemeCount": 8,
+        "windowed": true,
+        "windowRequestedThemeCount": 8,
+        "evidenceTiming": "resolved_from_supporting_speech_ids",
+        "aggregateCandidateLimit": "not_applied_no_semantic_ranker"
+      },
+      "mergeRule": "同一sourceVideoIdで根拠範囲が重なる候補だけを機械統合。意味ベースの統合はしない。",
+      "inputSetId": "nOEWCNc77MI_rough_top50_speech_chars_source_only_v001",
+      "bundlePath": "evals/clip_composition/outputs/theme-generation/nOEWCNc77MI_rough_top50_speech_chars_source_only_v001/theme-llm-v002/nOEWCNc77MI-rough-top50-theme-input-after-stt-20260710-v001",
+      "windowCount": 8,
+      "candidateCount": 25,
+      "evidenceRangeCount": 27,
+      "inputVisibleExpectedCount": 1,
+      "inputVisibleHitCount": 0,
+      "inputNotVisibleExpectedCount": 12,
+      "inputNotVisibleHitCount": 0,
+      "allExpectedCount": 13,
+      "allExpectedHitCount": 0,
+      "candidateClassificationCounts": {
+        "rangeHit": 0,
+        "overbroadRange": 0,
+        "offTopic": 25,
+        "noEvidence": 0
+      },
+      "unionCandidateCoverageMs": 953402,
+      "unionCandidateCoverageRatio": 0.08063195564389099,
+      "sourceDurationMs": 11824121,
+      "inputVisibleHitPerCandidate": 0,
+      "allExpectedHitPerCandidate": 0,
+      "perSourceCoverage": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "coveredMs": 953402,
+          "mergedRangeCount": 27
+        }
+      ]
+    },
+    {
+      "label": "input-selection-v003 全文上界",
+      "role": "upper-bound",
+      "generationSystem": "theme-llm-v002@gemini-web-flash",
+      "promptVersion": "theme_generation_prompt_v002",
+      "modelParams": {
+        "temperature": 0,
+        "source": "gemini-web",
+        "runner": "edge-cdp-text-prompt",
+        "requestedThemeCount": 8,
+        "windowed": true,
+        "windowRequestedThemeCount": 8,
+        "evidenceTiming": "resolved_from_supporting_speech_ids",
+        "aggregateCandidateLimit": "not_applied_no_semantic_ranker"
+      },
+      "mergeRule": "同一sourceVideoIdで根拠範囲が重なる候補だけを機械統合。意味ベースの統合はしない。",
+      "inputSetId": "nOEWCNc77MI_full_source_input_selection_v003",
+      "inputSelectionVersion": "input-selection-v003",
+      "bundlePath": "evals/clip_composition/outputs/theme-generation/nOEWCNc77MI_full_source_input_selection_v003/theme-llm-v002/20260711-full-source-upper-bound-v001",
+      "windowCount": 69,
+      "candidateCount": 175,
+      "evidenceRangeCount": 177,
+      "inputVisibleExpectedCount": 13,
+      "inputVisibleHitCount": 12,
+      "inputNotVisibleExpectedCount": 0,
+      "inputNotVisibleHitCount": 0,
+      "allExpectedCount": 13,
+      "allExpectedHitCount": 12,
+      "candidateClassificationCounts": {
+        "rangeHit": 6,
+        "overbroadRange": 8,
+        "offTopic": 161,
+        "noEvidence": 0
+      },
+      "unionCandidateCoverageMs": 7684159,
+      "unionCandidateCoverageRatio": 0.6498714788185946,
+      "sourceDurationMs": 11824121,
+      "inputVisibleHitPerCandidate": 0.06857142857142857,
+      "allExpectedHitPerCandidate": 0.06857142857142857,
+      "perSourceCoverage": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "coveredMs": 7684159,
+          "mergedRangeCount": 144
+        }
+      ]
+    },
+    {
+      "label": "input-selection-v004 チャット流速上位100分",
+      "role": "formal-primary",
+      "generationSystem": "theme-llm-v002@gemini-web-flash",
+      "promptVersion": "theme_generation_prompt_v002",
+      "modelParams": {
+        "temperature": 0,
+        "source": "gemini-web",
+        "runner": "edge-cdp-text-prompt",
+        "requestedThemeCount": 8,
+        "windowed": true,
+        "windowRequestedThemeCount": 8,
+        "evidenceTiming": "resolved_from_supporting_speech_ids",
+        "aggregateCandidateLimit": "not_applied_no_semantic_ranker"
+      },
+      "mergeRule": "同一sourceVideoIdで根拠範囲が重なる候補だけを機械統合。意味ベースの統合はしない。",
+      "inputSetId": "nOEWCNc77MI_chat_velocity_top100_input_selection_v004",
+      "inputSelectionVersion": "input-selection-v004",
+      "bundlePath": "evals/clip_composition/outputs/theme-generation/nOEWCNc77MI_chat_velocity_top100_input_selection_v004/theme-llm-v002/20260711-chat-velocity-top100-v001",
+      "windowCount": 37,
+      "candidateCount": 89,
+      "evidenceRangeCount": 91,
+      "inputVisibleExpectedCount": 12,
+      "inputVisibleHitCount": 12,
+      "inputNotVisibleExpectedCount": 1,
+      "inputNotVisibleHitCount": 0,
+      "allExpectedCount": 13,
+      "allExpectedHitCount": 12,
+      "candidateClassificationCounts": {
+        "rangeHit": 5,
+        "overbroadRange": 8,
+        "offTopic": 76,
+        "noEvidence": 0
+      },
+      "unionCandidateCoverageMs": 3739400,
+      "unionCandidateCoverageRatio": 0.3162518380858924,
+      "sourceDurationMs": 11824121,
+      "inputVisibleHitPerCandidate": 0.1348314606741573,
+      "allExpectedHitPerCandidate": 0.1348314606741573,
+      "perSourceCoverage": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "coveredMs": 3739400,
+          "mergedRangeCount": 75
+        }
+      ]
+    }
+  ]
+}

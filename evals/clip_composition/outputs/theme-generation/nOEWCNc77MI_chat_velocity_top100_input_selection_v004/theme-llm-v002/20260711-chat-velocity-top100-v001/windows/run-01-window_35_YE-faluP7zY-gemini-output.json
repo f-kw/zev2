@@ -1,0 +1,49 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "ローテーブル設置とわびさび論争",
+      "reason": "ゲーム内で設置するテーブルの高さについて、食卓としての実用性と地面に座る「わびさび」の良さで意見を交わし合う具体的なゲームプレイ展開があるため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 11220314,
+          "sourceEndMs": 11280000,
+          "supportingSpeechIds": [
+            "1676-1686"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "リスナーへの呼びかけ大喜利と唐突な褒め合い",
+      "reason": "リスナーへの呼びかけを過激にエスカレートさせた直後、唐突に宝鐘マリンを「いい女」と褒めちぎる急な会話の展開が面白いから。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 11400666,
+          "sourceEndMs": 11434852,
+          "supportingSpeechIds": [
+            "1697-1707"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-12T24:23:55+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_35_YE-faluP7zY",
+    "windowSourceVideoId": "YE-faluP7zY",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nOEWCNc77MI_chat_velocity_top100_input_selection_v004/theme-llm-v002/20260711-chat-velocity-top100-v001/windows/window_35_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/3ca52ff98af0cc95?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"ローテーブル設置とわびさび論争\",\n      \"reason\": \"ゲーム内で設置するテーブルの高さについて、食卓としての実用性と地面に座る「わびさび」の良さで意見を交わし合う具体的なゲームプレイ展開があるため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 11220314,\n          \"sourceEndMs\": 11280000,\n          \"supportingSpeechIds\": [\n            \"1676-1686\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"リスナーへの呼びかけ大喜利と唐突な褒め合い\",\n      \"reason\": \"リスナーへの呼びかけを過激にエスカレートさせた直後、唐突に宝鐘マリンを「いい女」と褒めちぎる急な会話の展開が面白いから。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 11400666,\n          \"sourceEndMs\": 11434852,\n          \"supportingSpeechIds\": [\n            \"1697-1707\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

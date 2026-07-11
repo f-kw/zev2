@@ -1,0 +1,65 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "マリンと呼び捨てする関係の匂わせ",
+      "reason": "宝鐘マリンの呼び方や最近の呼び捨てについて、2人の距離感の変化を匂わせながら楽しく雑談している場面。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 6480406,
+          "sourceEndMs": 6510760,
+          "supportingSpeechIds": [
+            956,
+            957
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "1ミリも見ずに褒める船長",
+      "reason": "壁掛けストレージをびっしり作ったことをアピールするも、1ミリも見ないで適当に褒めたことを見抜かれてツッコむコミカルな掛け合い。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 6693504,
+          "sourceEndMs": 6719884,
+          "supportingSpeechIds": [
+            978
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_003",
+      "title": "突然のサメ討伐と怒涛の質問攻め",
+      "reason": "普通にサメを倒した報告に対し、驚いて「なんで？どうして？どこで？」と息ぴったりに質問を畳み掛けるテンポの良い展開。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 6693504,
+          "sourceEndMs": 6749852,
+          "supportingSpeechIds": [
+            "978-982"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-11T23:50:08+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_23_YE-faluP7zY",
+    "windowSourceVideoId": "YE-faluP7zY",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nOEWCNc77MI_chat_velocity_top100_input_selection_v004/theme-llm-v002/20260711-chat-velocity-top100-v001/windows/window_23_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/19b7d6fd396dd248?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"マリンと呼び捨てする関係の匂わせ\",\n      \"reason\": \"宝鐘マリンの呼び方や最近の呼び捨てについて、2人の距離感の変化を匂わせながら楽しく雑談している場面。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 6480406,\n          \"sourceEndMs\": 6510760,\n          \"supportingSpeechIds\": [\n            956,\n            957\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"1ミリも見ずに褒める船長\",\n      \"reason\": \"壁掛けストレージをびっしり作ったことをアピールするも、1ミリも見ないで適当に褒めたことを見抜かれてツッコむコミカルな掛け合い。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 6693504,\n          \"sourceEndMs\": 6719884,\n          \"supportingSpeechIds\": [\n            978\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_003\",\n      \"title\": \"突然のサメ討伐と怒涛の質問攻め\",\n      \"reason\": \"普通にサメを倒した報告に対し、驚いて「なんで？どうして？どこで？」と息ぴったりに質問を畳み掛けるテンポの良い展開。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 6693504,\n          \"sourceEndMs\": 6749852,\n          \"supportingSpeechIds\": [\n            \"978-982\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

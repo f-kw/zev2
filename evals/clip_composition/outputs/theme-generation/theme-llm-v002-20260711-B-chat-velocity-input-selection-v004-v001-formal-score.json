@@ -1,0 +1,3639 @@
+{
+  "kind": "clip_composition_theme_generation_formal_score",
+  "runAt": "2026-07-11T15:24:58.838Z",
+  "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+  "resultRole": "formal-primary",
+  "generationSystem": "theme-llm-v002@gemini-web-flash",
+  "generationSystemBase": "theme-llm-v002",
+  "model": "gemini-web-flash",
+  "outputId": "20260711-B-chat-velocity-input-selection-v004-v001",
+  "input": {
+    "inputSetId": "nOEWCNc77MI_chat_velocity_top100_input_selection_v004",
+    "inputSelectionVersion": "input-selection-v004",
+    "promptVersion": "theme_generation_prompt_v002",
+    "bundlePath": "evals/clip_composition/outputs/theme-generation/nOEWCNc77MI_chat_velocity_top100_input_selection_v004/theme-llm-v002/20260711-chat-velocity-top100-v001",
+    "leakageInspectionStatus": "pass",
+    "policy": "正式な主結果として単独採点し、参考結果とは統合しない。"
+  },
+  "summary": {
+    "candidateCount": 89,
+    "validEvidenceRangeCount": 91,
+    "inputVisible": {
+      "expectedCount": 12,
+      "hitCount": 12
+    },
+    "inputNotVisible": {
+      "expectedCount": 1,
+      "hitCount": 0
+    },
+    "allExpected": {
+      "expectedCount": 13,
+      "hitCount": 12
+    },
+    "candidateClassificationCounts": {
+      "rangeHit": 5,
+      "overbroadRange": 8,
+      "offTopic": 76,
+      "noEvidence": 0
+    }
+  },
+  "expectedAssessments": [
+    {
+      "sourceStartMs": 260068,
+      "sourceEndMs": 264269,
+      "reason": "人間が切り抜き側と元配信側で同じ素材と確認した素材ブロックのため。",
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceUrl": "https://www.youtube.com/watch?v=YE-faluP7zY",
+      "sourceSttId": "nOEWCNc77MI_YE-faluP7zY_local30_v001",
+      "clipId": "nOEWCNc77MI",
+      "clipUrl": "https://www.youtube.com/watch?v=nOEWCNc77MI",
+      "verificationStatus": "multiblock_material_human_confirmed",
+      "usableForClipLocationEval": true,
+      "usableForCompositionPromptEval": true,
+      "multicutPartIndex": 0,
+      "clipStartMs": 4909,
+      "clipEndMs": 9532,
+      "qualityGrade": "material_block_granularity",
+      "boundaryPrecision": {
+        "grade": "material_block_granularity",
+        "meaning": "素材対応の切り替わりを表す粒度。細かい詰めは境界にしない。"
+      },
+      "label": "block 1",
+      "materialBlock": {
+        "blockIndex": 1,
+        "matchedWordPairCount": 23,
+        "internalGapMs": {
+          "sourceExtraInsideMs": 0,
+          "clipExtraInsideMs": 0,
+          "note": "同一素材ブロック内でsource側の進みがclip側より大きい分は、切り抜き内部の詰め候補として扱う。境界にはしない。"
+        },
+        "internalTransitions": [],
+        "runIndexes": [
+          1
+        ]
+      },
+      "humanVerification": {
+        "status": "confirmed",
+        "checkedBy": "kawafmm",
+        "checkedAt": "2026-07-11",
+        "method": "境界確認パッケージの動画・音声確認",
+        "note": "人間確認で使用箇所2・5・12・16を不採用とした。4箇所はいずれも境目前側で元配信と素材が一致せず、照合誤対応または別素材由来と判断した。コラボ同時配信の可能性は人間判断で否定済み。",
+        "acceptedBlocks": [
+          1,
+          3,
+          4,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          13,
+          14,
+          15,
+          17
+        ],
+        "rejectedBlocks": [
+          2,
+          5,
+          12,
+          16
+        ],
+        "unresolvedBlocks": [],
+        "confirmedBoundaries": [
+          3,
+          6,
+          7,
+          8,
+          9,
+          10,
+          13,
+          14
+        ],
+        "rejectedBoundaries": [
+          1,
+          2,
+          4,
+          5,
+          11,
+          12,
+          15,
+          16
+        ],
+        "unresolvedBoundaries": [],
+        "materialBlocksPath": "evals/clip_composition/outputs/material-blocks-nOEWCNc77MI-20260710-full-plus-selected-union-v001.json",
+        "materialBlocksSha256": "fa5445dc04d9776eb09ec778cc981d1fc6a5a92c914dc882c963514afd01d96a",
+        "reviewPackagePath": "evals/clip_composition/outputs/boundary-check/nOEWCNc77MI/20260710-full-plus-selected-union-v001/index.html",
+        "reviewPackageSha256": "610d93dd2572c65ba7fb797ae0a2894eaf7f4c81e17907610344b38299f9c082"
+      },
+      "expectedIndex": 1,
+      "inputVisibility": "input-visible",
+      "overlappingInputSpeechIds": [
+        19
+      ],
+      "hit": true,
+      "hitCandidateIndexes": [
+        2
+      ]
+    },
+    {
+      "sourceStartMs": 325479,
+      "sourceEndMs": 330720,
+      "reason": "人間が切り抜き側と元配信側で同じ素材と確認した素材ブロックのため。",
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceUrl": "https://www.youtube.com/watch?v=YE-faluP7zY",
+      "sourceSttId": "nOEWCNc77MI_YE-faluP7zY_local30_v001",
+      "clipId": "nOEWCNc77MI",
+      "clipUrl": "https://www.youtube.com/watch?v=nOEWCNc77MI",
+      "verificationStatus": "multiblock_material_human_confirmed",
+      "usableForClipLocationEval": true,
+      "usableForCompositionPromptEval": true,
+      "multicutPartIndex": 1,
+      "clipStartMs": 18477,
+      "clipEndMs": 24321,
+      "qualityGrade": "material_block_granularity",
+      "boundaryPrecision": {
+        "grade": "material_block_granularity",
+        "meaning": "素材対応の切り替わりを表す粒度。細かい詰めは境界にしない。"
+      },
+      "label": "block 3",
+      "materialBlock": {
+        "blockIndex": 3,
+        "matchedWordPairCount": 35,
+        "internalGapMs": {
+          "sourceExtraInsideMs": 0,
+          "clipExtraInsideMs": 200,
+          "note": "同一素材ブロック内でsource側の進みがclip側より大きい分は、切り抜き内部の詰め候補として扱う。境界にはしない。"
+        },
+        "internalTransitions": [
+          {
+            "fromRun": 3,
+            "toRun": 4,
+            "clipGapMs": 220,
+            "sourceGapMs": 20,
+            "materialJumpMs": -200
+          }
+        ],
+        "runIndexes": [
+          3,
+          4
+        ]
+      },
+      "humanVerification": {
+        "status": "confirmed",
+        "checkedBy": "kawafmm",
+        "checkedAt": "2026-07-11",
+        "method": "境界確認パッケージの動画・音声確認",
+        "note": "人間確認で使用箇所2・5・12・16を不採用とした。4箇所はいずれも境目前側で元配信と素材が一致せず、照合誤対応または別素材由来と判断した。コラボ同時配信の可能性は人間判断で否定済み。",
+        "acceptedBlocks": [
+          1,
+          3,
+          4,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          13,
+          14,
+          15,
+          17
+        ],
+        "rejectedBlocks": [
+          2,
+          5,
+          12,
+          16
+        ],
+        "unresolvedBlocks": [],
+        "confirmedBoundaries": [
+          3,
+          6,
+          7,
+          8,
+          9,
+          10,
+          13,
+          14
+        ],
+        "rejectedBoundaries": [
+          1,
+          2,
+          4,
+          5,
+          11,
+          12,
+          15,
+          16
+        ],
+        "unresolvedBoundaries": [],
+        "materialBlocksPath": "evals/clip_composition/outputs/material-blocks-nOEWCNc77MI-20260710-full-plus-selected-union-v001.json",
+        "materialBlocksSha256": "fa5445dc04d9776eb09ec778cc981d1fc6a5a92c914dc882c963514afd01d96a",
+        "reviewPackagePath": "evals/clip_composition/outputs/boundary-check/nOEWCNc77MI/20260710-full-plus-selected-union-v001/index.html",
+        "reviewPackageSha256": "610d93dd2572c65ba7fb797ae0a2894eaf7f4c81e17907610344b38299f9c082"
+      },
+      "expectedIndex": 2,
+      "inputVisibility": "input-visible",
+      "overlappingInputSpeechIds": [
+        21,
+        22
+      ],
+      "hit": true,
+      "hitCandidateIndexes": [
+        3
+      ]
+    },
+    {
+      "sourceStartMs": 1052987,
+      "sourceEndMs": 1055347,
+      "reason": "人間が切り抜き側と元配信側で同じ素材と確認した素材ブロックのため。",
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceUrl": "https://www.youtube.com/watch?v=YE-faluP7zY",
+      "sourceSttId": "nOEWCNc77MI_YE-faluP7zY_local30_v001",
+      "clipId": "nOEWCNc77MI",
+      "clipUrl": "https://www.youtube.com/watch?v=nOEWCNc77MI",
+      "verificationStatus": "multiblock_material_human_confirmed",
+      "usableForClipLocationEval": true,
+      "usableForCompositionPromptEval": true,
+      "multicutPartIndex": 2,
+      "clipStartMs": 37539,
+      "clipEndMs": 40120,
+      "qualityGrade": "material_block_granularity",
+      "boundaryPrecision": {
+        "grade": "material_block_granularity",
+        "meaning": "素材対応の切り替わりを表す粒度。細かい詰めは境界にしない。"
+      },
+      "label": "block 4",
+      "materialBlock": {
+        "blockIndex": 4,
+        "matchedWordPairCount": 19,
+        "internalGapMs": {
+          "sourceExtraInsideMs": 0,
+          "clipExtraInsideMs": 0,
+          "note": "同一素材ブロック内でsource側の進みがclip側より大きい分は、切り抜き内部の詰め候補として扱う。境界にはしない。"
+        },
+        "internalTransitions": [],
+        "runIndexes": [
+          5
+        ]
+      },
+      "humanVerification": {
+        "status": "confirmed",
+        "checkedBy": "kawafmm",
+        "checkedAt": "2026-07-11",
+        "method": "境界確認パッケージの動画・音声確認",
+        "note": "人間確認で使用箇所2・5・12・16を不採用とした。4箇所はいずれも境目前側で元配信と素材が一致せず、照合誤対応または別素材由来と判断した。コラボ同時配信の可能性は人間判断で否定済み。",
+        "acceptedBlocks": [
+          1,
+          3,
+          4,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          13,
+          14,
+          15,
+          17
+        ],
+        "rejectedBlocks": [
+          2,
+          5,
+          12,
+          16
+        ],
+        "unresolvedBlocks": [],
+        "confirmedBoundaries": [
+          3,
+          6,
+          7,
+          8,
+          9,
+          10,
+          13,
+          14
+        ],
+        "rejectedBoundaries": [
+          1,
+          2,
+          4,
+          5,
+          11,
+          12,
+          15,
+          16
+        ],
+        "unresolvedBoundaries": [],
+        "materialBlocksPath": "evals/clip_composition/outputs/material-blocks-nOEWCNc77MI-20260710-full-plus-selected-union-v001.json",
+        "materialBlocksSha256": "fa5445dc04d9776eb09ec778cc981d1fc6a5a92c914dc882c963514afd01d96a",
+        "reviewPackagePath": "evals/clip_composition/outputs/boundary-check/nOEWCNc77MI/20260710-full-plus-selected-union-v001/index.html",
+        "reviewPackageSha256": "610d93dd2572c65ba7fb797ae0a2894eaf7f4c81e17907610344b38299f9c082"
+      },
+      "expectedIndex": 3,
+      "inputVisibility": "input-visible",
+      "overlappingInputSpeechIds": [
+        125
+      ],
+      "hit": true,
+      "hitCandidateIndexes": [
+        17
+      ]
+    },
+    {
+      "sourceStartMs": 2790074,
+      "sourceEndMs": 2806680,
+      "reason": "人間が切り抜き側と元配信側で同じ素材と確認した素材ブロックのため。",
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceUrl": "https://www.youtube.com/watch?v=YE-faluP7zY",
+      "sourceSttId": "nOEWCNc77MI_YE-faluP7zY_local30_v001",
+      "clipId": "nOEWCNc77MI",
+      "clipUrl": "https://www.youtube.com/watch?v=nOEWCNc77MI",
+      "verificationStatus": "multiblock_material_human_confirmed",
+      "usableForClipLocationEval": true,
+      "usableForCompositionPromptEval": true,
+      "multicutPartIndex": 3,
+      "clipStartMs": 59564,
+      "clipEndMs": 73795,
+      "qualityGrade": "material_block_granularity",
+      "boundaryPrecision": {
+        "grade": "material_block_granularity",
+        "meaning": "素材対応の切り替わりを表す粒度。細かい詰めは境界にしない。"
+      },
+      "label": "block 6",
+      "materialBlock": {
+        "blockIndex": 6,
+        "matchedWordPairCount": 52,
+        "internalGapMs": {
+          "sourceExtraInsideMs": 1760,
+          "clipExtraInsideMs": 0,
+          "note": "同一素材ブロック内でsource側の進みがclip側より大きい分は、切り抜き内部の詰め候補として扱う。境界にはしない。"
+        },
+        "internalTransitions": [
+          {
+            "fromRun": 7,
+            "toRun": 8,
+            "clipGapMs": 2362,
+            "sourceGapMs": 3701,
+            "materialJumpMs": 1339
+          },
+          {
+            "fromRun": 8,
+            "toRun": 9,
+            "clipGapMs": 380,
+            "sourceGapMs": 801,
+            "materialJumpMs": 421
+          }
+        ],
+        "runIndexes": [
+          7,
+          8,
+          9
+        ]
+      },
+      "humanVerification": {
+        "status": "confirmed",
+        "checkedBy": "kawafmm",
+        "checkedAt": "2026-07-11",
+        "method": "境界確認パッケージの動画・音声確認",
+        "note": "人間確認で使用箇所2・5・12・16を不採用とした。4箇所はいずれも境目前側で元配信と素材が一致せず、照合誤対応または別素材由来と判断した。コラボ同時配信の可能性は人間判断で否定済み。",
+        "acceptedBlocks": [
+          1,
+          3,
+          4,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          13,
+          14,
+          15,
+          17
+        ],
+        "rejectedBlocks": [
+          2,
+          5,
+          12,
+          16
+        ],
+        "unresolvedBlocks": [],
+        "confirmedBoundaries": [
+          3,
+          6,
+          7,
+          8,
+          9,
+          10,
+          13,
+          14
+        ],
+        "rejectedBoundaries": [
+          1,
+          2,
+          4,
+          5,
+          11,
+          12,
+          15,
+          16
+        ],
+        "unresolvedBoundaries": [],
+        "materialBlocksPath": "evals/clip_composition/outputs/material-blocks-nOEWCNc77MI-20260710-full-plus-selected-union-v001.json",
+        "materialBlocksSha256": "fa5445dc04d9776eb09ec778cc981d1fc6a5a92c914dc882c963514afd01d96a",
+        "reviewPackagePath": "evals/clip_composition/outputs/boundary-check/nOEWCNc77MI/20260710-full-plus-selected-union-v001/index.html",
+        "reviewPackageSha256": "610d93dd2572c65ba7fb797ae0a2894eaf7f4c81e17907610344b38299f9c082"
+      },
+      "expectedIndex": 4,
+      "inputVisibility": "input-visible",
+      "overlappingInputSpeechIds": [
+        400,
+        401,
+        402,
+        403,
+        404
+      ],
+      "hit": true,
+      "hitCandidateIndexes": [
+        32
+      ]
+    },
+    {
+      "sourceStartMs": 3006642,
+      "sourceEndMs": 3021412,
+      "reason": "人間が切り抜き側と元配信側で同じ素材と確認した素材ブロックのため。",
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceUrl": "https://www.youtube.com/watch?v=YE-faluP7zY",
+      "sourceSttId": "nOEWCNc77MI_YE-faluP7zY_local30_v001",
+      "clipId": "nOEWCNc77MI",
+      "clipUrl": "https://www.youtube.com/watch?v=nOEWCNc77MI",
+      "verificationStatus": "multiblock_material_human_confirmed",
+      "usableForClipLocationEval": true,
+      "usableForCompositionPromptEval": true,
+      "multicutPartIndex": 4,
+      "clipStartMs": 88226,
+      "clipEndMs": 103019,
+      "qualityGrade": "material_block_granularity",
+      "boundaryPrecision": {
+        "grade": "material_block_granularity",
+        "meaning": "素材対応の切り替わりを表す粒度。細かい詰めは境界にしない。"
+      },
+      "label": "block 7",
+      "materialBlock": {
+        "blockIndex": 7,
+        "matchedWordPairCount": 71,
+        "internalGapMs": {
+          "sourceExtraInsideMs": 160,
+          "clipExtraInsideMs": 400,
+          "note": "同一素材ブロック内でsource側の進みがclip側より大きい分は、切り抜き内部の詰め候補として扱う。境界にはしない。"
+        },
+        "internalTransitions": [
+          {
+            "fromRun": 10,
+            "toRun": 11,
+            "clipGapMs": 420,
+            "sourceGapMs": 20,
+            "materialJumpMs": -400
+          },
+          {
+            "fromRun": 11,
+            "toRun": 12,
+            "clipGapMs": 100,
+            "sourceGapMs": 260,
+            "materialJumpMs": 160
+          }
+        ],
+        "runIndexes": [
+          10,
+          11,
+          12
+        ]
+      },
+      "humanVerification": {
+        "status": "confirmed",
+        "checkedBy": "kawafmm",
+        "checkedAt": "2026-07-11",
+        "method": "境界確認パッケージの動画・音声確認",
+        "note": "人間確認で使用箇所2・5・12・16を不採用とした。4箇所はいずれも境目前側で元配信と素材が一致せず、照合誤対応または別素材由来と判断した。コラボ同時配信の可能性は人間判断で否定済み。",
+        "acceptedBlocks": [
+          1,
+          3,
+          4,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          13,
+          14,
+          15,
+          17
+        ],
+        "rejectedBlocks": [
+          2,
+          5,
+          12,
+          16
+        ],
+        "unresolvedBlocks": [],
+        "confirmedBoundaries": [
+          3,
+          6,
+          7,
+          8,
+          9,
+          10,
+          13,
+          14
+        ],
+        "rejectedBoundaries": [
+          1,
+          2,
+          4,
+          5,
+          11,
+          12,
+          15,
+          16
+        ],
+        "unresolvedBoundaries": [],
+        "materialBlocksPath": "evals/clip_composition/outputs/material-blocks-nOEWCNc77MI-20260710-full-plus-selected-union-v001.json",
+        "materialBlocksSha256": "fa5445dc04d9776eb09ec778cc981d1fc6a5a92c914dc882c963514afd01d96a",
+        "reviewPackagePath": "evals/clip_composition/outputs/boundary-check/nOEWCNc77MI/20260710-full-plus-selected-union-v001/index.html",
+        "reviewPackageSha256": "610d93dd2572c65ba7fb797ae0a2894eaf7f4c81e17907610344b38299f9c082"
+      },
+      "expectedIndex": 5,
+      "inputVisibility": "input-visible",
+      "overlappingInputSpeechIds": [
+        449,
+        450,
+        451
+      ],
+      "hit": true,
+      "hitCandidateIndexes": [
+        35
+      ]
+    },
+    {
+      "sourceStartMs": 3180410,
+      "sourceEndMs": 3190215,
+      "reason": "人間が切り抜き側と元配信側で同じ素材と確認した素材ブロックのため。",
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceUrl": "https://www.youtube.com/watch?v=YE-faluP7zY",
+      "sourceSttId": "nOEWCNc77MI_YE-faluP7zY_local30_v001",
+      "clipId": "nOEWCNc77MI",
+      "clipUrl": "https://www.youtube.com/watch?v=nOEWCNc77MI",
+      "verificationStatus": "multiblock_material_human_confirmed",
+      "usableForClipLocationEval": true,
+      "usableForCompositionPromptEval": true,
+      "multicutPartIndex": 5,
+      "clipStartMs": 104380,
+      "clipEndMs": 113446,
+      "qualityGrade": "material_block_granularity",
+      "boundaryPrecision": {
+        "grade": "material_block_granularity",
+        "meaning": "素材対応の切り替わりを表す粒度。細かい詰めは境界にしない。"
+      },
+      "label": "block 8",
+      "materialBlock": {
+        "blockIndex": 8,
+        "matchedWordPairCount": 36,
+        "internalGapMs": {
+          "sourceExtraInsideMs": 198,
+          "clipExtraInsideMs": 0,
+          "note": "同一素材ブロック内でsource側の進みがclip側より大きい分は、切り抜き内部の詰め候補として扱う。境界にはしない。"
+        },
+        "internalTransitions": [
+          {
+            "fromRun": 13,
+            "toRun": 14,
+            "clipGapMs": 3363,
+            "sourceGapMs": 3561,
+            "materialJumpMs": 198
+          }
+        ],
+        "runIndexes": [
+          13,
+          14
+        ]
+      },
+      "humanVerification": {
+        "status": "confirmed",
+        "checkedBy": "kawafmm",
+        "checkedAt": "2026-07-11",
+        "method": "境界確認パッケージの動画・音声確認",
+        "note": "人間確認で使用箇所2・5・12・16を不採用とした。4箇所はいずれも境目前側で元配信と素材が一致せず、照合誤対応または別素材由来と判断した。コラボ同時配信の可能性は人間判断で否定済み。",
+        "acceptedBlocks": [
+          1,
+          3,
+          4,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          13,
+          14,
+          15,
+          17
+        ],
+        "rejectedBlocks": [
+          2,
+          5,
+          12,
+          16
+        ],
+        "unresolvedBlocks": [],
+        "confirmedBoundaries": [
+          3,
+          6,
+          7,
+          8,
+          9,
+          10,
+          13,
+          14
+        ],
+        "rejectedBoundaries": [
+          1,
+          2,
+          4,
+          5,
+          11,
+          12,
+          15,
+          16
+        ],
+        "unresolvedBoundaries": [],
+        "materialBlocksPath": "evals/clip_composition/outputs/material-blocks-nOEWCNc77MI-20260710-full-plus-selected-union-v001.json",
+        "materialBlocksSha256": "fa5445dc04d9776eb09ec778cc981d1fc6a5a92c914dc882c963514afd01d96a",
+        "reviewPackagePath": "evals/clip_composition/outputs/boundary-check/nOEWCNc77MI/20260710-full-plus-selected-union-v001/index.html",
+        "reviewPackageSha256": "610d93dd2572c65ba7fb797ae0a2894eaf7f4c81e17907610344b38299f9c082"
+      },
+      "expectedIndex": 6,
+      "inputVisibility": "input-visible",
+      "overlappingInputSpeechIds": [
+        470,
+        471
+      ],
+      "hit": true,
+      "hitCandidateIndexes": [
+        37
+      ]
+    },
+    {
+      "sourceStartMs": 3285387,
+      "sourceEndMs": 3288829,
+      "reason": "人間が切り抜き側と元配信側で同じ素材と確認した素材ブロックのため。",
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceUrl": "https://www.youtube.com/watch?v=YE-faluP7zY",
+      "sourceSttId": "nOEWCNc77MI_YE-faluP7zY_local30_v001",
+      "clipId": "nOEWCNc77MI",
+      "clipUrl": "https://www.youtube.com/watch?v=nOEWCNc77MI",
+      "verificationStatus": "multiblock_material_human_confirmed",
+      "usableForClipLocationEval": true,
+      "usableForCompositionPromptEval": true,
+      "multicutPartIndex": 6,
+      "clipStartMs": 138480,
+      "clipEndMs": 141901,
+      "qualityGrade": "material_block_granularity",
+      "boundaryPrecision": {
+        "grade": "material_block_granularity",
+        "meaning": "素材対応の切り替わりを表す粒度。細かい詰めは境界にしない。"
+      },
+      "label": "block 9",
+      "materialBlock": {
+        "blockIndex": 9,
+        "matchedWordPairCount": 17,
+        "internalGapMs": {
+          "sourceExtraInsideMs": 0,
+          "clipExtraInsideMs": 0,
+          "note": "同一素材ブロック内でsource側の進みがclip側より大きい分は、切り抜き内部の詰め候補として扱う。境界にはしない。"
+        },
+        "internalTransitions": [],
+        "runIndexes": [
+          15
+        ]
+      },
+      "humanVerification": {
+        "status": "confirmed",
+        "checkedBy": "kawafmm",
+        "checkedAt": "2026-07-11",
+        "method": "境界確認パッケージの動画・音声確認",
+        "note": "人間確認で使用箇所2・5・12・16を不採用とした。4箇所はいずれも境目前側で元配信と素材が一致せず、照合誤対応または別素材由来と判断した。コラボ同時配信の可能性は人間判断で否定済み。",
+        "acceptedBlocks": [
+          1,
+          3,
+          4,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          13,
+          14,
+          15,
+          17
+        ],
+        "rejectedBlocks": [
+          2,
+          5,
+          12,
+          16
+        ],
+        "unresolvedBlocks": [],
+        "confirmedBoundaries": [
+          3,
+          6,
+          7,
+          8,
+          9,
+          10,
+          13,
+          14
+        ],
+        "rejectedBoundaries": [
+          1,
+          2,
+          4,
+          5,
+          11,
+          12,
+          15,
+          16
+        ],
+        "unresolvedBoundaries": [],
+        "materialBlocksPath": "evals/clip_composition/outputs/material-blocks-nOEWCNc77MI-20260710-full-plus-selected-union-v001.json",
+        "materialBlocksSha256": "fa5445dc04d9776eb09ec778cc981d1fc6a5a92c914dc882c963514afd01d96a",
+        "reviewPackagePath": "evals/clip_composition/outputs/boundary-check/nOEWCNc77MI/20260710-full-plus-selected-union-v001/index.html",
+        "reviewPackageSha256": "610d93dd2572c65ba7fb797ae0a2894eaf7f4c81e17907610344b38299f9c082"
+      },
+      "expectedIndex": 7,
+      "inputVisibility": "input-visible",
+      "overlappingInputSpeechIds": [
+        489,
+        490
+      ],
+      "hit": true,
+      "hitCandidateIndexes": [
+        39
+      ]
+    },
+    {
+      "sourceStartMs": 3475241,
+      "sourceEndMs": 3485035,
+      "reason": "人間が切り抜き側と元配信側で同じ素材と確認した素材ブロックのため。",
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceUrl": "https://www.youtube.com/watch?v=YE-faluP7zY",
+      "sourceSttId": "nOEWCNc77MI_YE-faluP7zY_local30_v001",
+      "clipId": "nOEWCNc77MI",
+      "clipUrl": "https://www.youtube.com/watch?v=nOEWCNc77MI",
+      "verificationStatus": "multiblock_material_human_confirmed",
+      "usableForClipLocationEval": true,
+      "usableForCompositionPromptEval": true,
+      "multicutPartIndex": 7,
+      "clipStartMs": 183024,
+      "clipEndMs": 193011,
+      "qualityGrade": "material_block_granularity",
+      "boundaryPrecision": {
+        "grade": "material_block_granularity",
+        "meaning": "素材対応の切り替わりを表す粒度。細かい詰めは境界にしない。"
+      },
+      "label": "block 10",
+      "materialBlock": {
+        "blockIndex": 10,
+        "matchedWordPairCount": 55,
+        "internalGapMs": {
+          "sourceExtraInsideMs": 0,
+          "clipExtraInsideMs": 0,
+          "note": "同一素材ブロック内でsource側の進みがclip側より大きい分は、切り抜き内部の詰め候補として扱う。境界にはしない。"
+        },
+        "internalTransitions": [],
+        "runIndexes": [
+          16
+        ]
+      },
+      "humanVerification": {
+        "status": "confirmed",
+        "checkedBy": "kawafmm",
+        "checkedAt": "2026-07-11",
+        "method": "境界確認パッケージの動画・音声確認",
+        "note": "人間確認で使用箇所2・5・12・16を不採用とした。4箇所はいずれも境目前側で元配信と素材が一致せず、照合誤対応または別素材由来と判断した。コラボ同時配信の可能性は人間判断で否定済み。",
+        "acceptedBlocks": [
+          1,
+          3,
+          4,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          13,
+          14,
+          15,
+          17
+        ],
+        "rejectedBlocks": [
+          2,
+          5,
+          12,
+          16
+        ],
+        "unresolvedBlocks": [],
+        "confirmedBoundaries": [
+          3,
+          6,
+          7,
+          8,
+          9,
+          10,
+          13,
+          14
+        ],
+        "rejectedBoundaries": [
+          1,
+          2,
+          4,
+          5,
+          11,
+          12,
+          15,
+          16
+        ],
+        "unresolvedBoundaries": [],
+        "materialBlocksPath": "evals/clip_composition/outputs/material-blocks-nOEWCNc77MI-20260710-full-plus-selected-union-v001.json",
+        "materialBlocksSha256": "fa5445dc04d9776eb09ec778cc981d1fc6a5a92c914dc882c963514afd01d96a",
+        "reviewPackagePath": "evals/clip_composition/outputs/boundary-check/nOEWCNc77MI/20260710-full-plus-selected-union-v001/index.html",
+        "reviewPackageSha256": "610d93dd2572c65ba7fb797ae0a2894eaf7f4c81e17907610344b38299f9c082"
+      },
+      "expectedIndex": 8,
+      "inputVisibility": "input-visible",
+      "overlappingInputSpeechIds": [
+        503,
+        504
+      ],
+      "hit": true,
+      "hitCandidateIndexes": [
+        41
+      ]
+    },
+    {
+      "sourceStartMs": 3998452,
+      "sourceEndMs": 4026707,
+      "reason": "人間が切り抜き側と元配信側で同じ素材と確認した素材ブロックのため。",
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceUrl": "https://www.youtube.com/watch?v=YE-faluP7zY",
+      "sourceSttId": "nOEWCNc77MI_YE-faluP7zY_local30_v001",
+      "clipId": "nOEWCNc77MI",
+      "clipUrl": "https://www.youtube.com/watch?v=nOEWCNc77MI",
+      "verificationStatus": "multiblock_material_human_confirmed",
+      "usableForClipLocationEval": true,
+      "usableForCompositionPromptEval": true,
+      "multicutPartIndex": 8,
+      "clipStartMs": 230898,
+      "clipEndMs": 259188,
+      "qualityGrade": "material_block_granularity",
+      "boundaryPrecision": {
+        "grade": "material_block_granularity",
+        "meaning": "素材対応の切り替わりを表す粒度。細かい詰めは境界にしない。"
+      },
+      "label": "block 11",
+      "materialBlock": {
+        "blockIndex": 11,
+        "matchedWordPairCount": 99,
+        "internalGapMs": {
+          "sourceExtraInsideMs": 0,
+          "clipExtraInsideMs": 4946,
+          "note": "同一素材ブロック内でsource側の進みがclip側より大きい分は、切り抜き内部の詰め候補として扱う。境界にはしない。"
+        },
+        "internalTransitions": [
+          {
+            "fromRun": 17,
+            "toRun": 18,
+            "clipGapMs": 260,
+            "sourceGapMs": 20,
+            "materialJumpMs": -240
+          },
+          {
+            "fromRun": 18,
+            "toRun": 19,
+            "clipGapMs": 14226,
+            "sourceGapMs": 9520,
+            "materialJumpMs": -4706
+          }
+        ],
+        "runIndexes": [
+          17,
+          18,
+          19
+        ]
+      },
+      "humanVerification": {
+        "status": "confirmed",
+        "checkedBy": "kawafmm",
+        "checkedAt": "2026-07-11",
+        "method": "境界確認パッケージの動画・音声確認",
+        "note": "人間確認で使用箇所2・5・12・16を不採用とした。4箇所はいずれも境目前側で元配信と素材が一致せず、照合誤対応または別素材由来と判断した。コラボ同時配信の可能性は人間判断で否定済み。",
+        "acceptedBlocks": [
+          1,
+          3,
+          4,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          13,
+          14,
+          15,
+          17
+        ],
+        "rejectedBlocks": [
+          2,
+          5,
+          12,
+          16
+        ],
+        "unresolvedBlocks": [],
+        "confirmedBoundaries": [
+          3,
+          6,
+          7,
+          8,
+          9,
+          10,
+          13,
+          14
+        ],
+        "rejectedBoundaries": [
+          1,
+          2,
+          4,
+          5,
+          11,
+          12,
+          15,
+          16
+        ],
+        "unresolvedBoundaries": [],
+        "materialBlocksPath": "evals/clip_composition/outputs/material-blocks-nOEWCNc77MI-20260710-full-plus-selected-union-v001.json",
+        "materialBlocksSha256": "fa5445dc04d9776eb09ec778cc981d1fc6a5a92c914dc882c963514afd01d96a",
+        "reviewPackagePath": "evals/clip_composition/outputs/boundary-check/nOEWCNc77MI/20260710-full-plus-selected-union-v001/index.html",
+        "reviewPackageSha256": "610d93dd2572c65ba7fb797ae0a2894eaf7f4c81e17907610344b38299f9c082"
+      },
+      "expectedIndex": 9,
+      "inputVisibility": "input-visible",
+      "overlappingInputSpeechIds": [
+        578,
+        579,
+        580
+      ],
+      "hit": true,
+      "hitCandidateIndexes": [
+        46
+      ]
+    },
+    {
+      "sourceStartMs": 4877136,
+      "sourceEndMs": 4889844,
+      "reason": "人間が切り抜き側と元配信側で同じ素材と確認した素材ブロックのため。",
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceUrl": "https://www.youtube.com/watch?v=YE-faluP7zY",
+      "sourceSttId": "nOEWCNc77MI_YE-faluP7zY_local30_v001",
+      "clipId": "nOEWCNc77MI",
+      "clipUrl": "https://www.youtube.com/watch?v=nOEWCNc77MI",
+      "verificationStatus": "multiblock_material_human_confirmed",
+      "usableForClipLocationEval": true,
+      "usableForCompositionPromptEval": true,
+      "multicutPartIndex": 9,
+      "clipStartMs": 279029,
+      "clipEndMs": 291898,
+      "qualityGrade": "material_block_granularity",
+      "boundaryPrecision": {
+        "grade": "material_block_granularity",
+        "meaning": "素材対応の切り替わりを表す粒度。細かい詰めは境界にしない。"
+      },
+      "label": "block 13",
+      "materialBlock": {
+        "blockIndex": 13,
+        "matchedWordPairCount": 29,
+        "internalGapMs": {
+          "sourceExtraInsideMs": 0,
+          "clipExtraInsideMs": 420,
+          "note": "同一素材ブロック内でsource側の進みがclip側より大きい分は、切り抜き内部の詰め候補として扱う。境界にはしない。"
+        },
+        "internalTransitions": [
+          {
+            "fromRun": 21,
+            "toRun": 22,
+            "clipGapMs": 4923,
+            "sourceGapMs": 4503,
+            "materialJumpMs": -420
+          }
+        ],
+        "runIndexes": [
+          21,
+          22
+        ]
+      },
+      "humanVerification": {
+        "status": "confirmed",
+        "checkedBy": "kawafmm",
+        "checkedAt": "2026-07-11",
+        "method": "境界確認パッケージの動画・音声確認",
+        "note": "人間確認で使用箇所2・5・12・16を不採用とした。4箇所はいずれも境目前側で元配信と素材が一致せず、照合誤対応または別素材由来と判断した。コラボ同時配信の可能性は人間判断で否定済み。",
+        "acceptedBlocks": [
+          1,
+          3,
+          4,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          13,
+          14,
+          15,
+          17
+        ],
+        "rejectedBlocks": [
+          2,
+          5,
+          12,
+          16
+        ],
+        "unresolvedBlocks": [],
+        "confirmedBoundaries": [
+          3,
+          6,
+          7,
+          8,
+          9,
+          10,
+          13,
+          14
+        ],
+        "rejectedBoundaries": [
+          1,
+          2,
+          4,
+          5,
+          11,
+          12,
+          15,
+          16
+        ],
+        "unresolvedBoundaries": [],
+        "materialBlocksPath": "evals/clip_composition/outputs/material-blocks-nOEWCNc77MI-20260710-full-plus-selected-union-v001.json",
+        "materialBlocksSha256": "fa5445dc04d9776eb09ec778cc981d1fc6a5a92c914dc882c963514afd01d96a",
+        "reviewPackagePath": "evals/clip_composition/outputs/boundary-check/nOEWCNc77MI/20260710-full-plus-selected-union-v001/index.html",
+        "reviewPackageSha256": "610d93dd2572c65ba7fb797ae0a2894eaf7f4c81e17907610344b38299f9c082"
+      },
+      "expectedIndex": 10,
+      "inputVisibility": "input-not-visible",
+      "overlappingInputSpeechIds": [],
+      "hit": false,
+      "hitCandidateIndexes": []
+    },
+    {
+      "sourceStartMs": 5183974,
+      "sourceEndMs": 5189318,
+      "reason": "人間が切り抜き側と元配信側で同じ素材と確認した素材ブロックのため。",
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceUrl": "https://www.youtube.com/watch?v=YE-faluP7zY",
+      "sourceSttId": "nOEWCNc77MI_YE-faluP7zY_local30_v001",
+      "clipId": "nOEWCNc77MI",
+      "clipUrl": "https://www.youtube.com/watch?v=nOEWCNc77MI",
+      "verificationStatus": "multiblock_material_human_confirmed",
+      "usableForClipLocationEval": true,
+      "usableForCompositionPromptEval": true,
+      "multicutPartIndex": 10,
+      "clipStartMs": 316355,
+      "clipEndMs": 322480,
+      "qualityGrade": "material_block_granularity",
+      "boundaryPrecision": {
+        "grade": "material_block_granularity",
+        "meaning": "素材対応の切り替わりを表す粒度。細かい詰めは境界にしない。"
+      },
+      "label": "block 14",
+      "materialBlock": {
+        "blockIndex": 14,
+        "matchedWordPairCount": 42,
+        "internalGapMs": {
+          "sourceExtraInsideMs": 139,
+          "clipExtraInsideMs": 0,
+          "note": "同一素材ブロック内でsource側の進みがclip側より大きい分は、切り抜き内部の詰め候補として扱う。境界にはしない。"
+        },
+        "internalTransitions": [
+          {
+            "fromRun": 23,
+            "toRun": 24,
+            "clipGapMs": 861,
+            "sourceGapMs": 1000,
+            "materialJumpMs": 139
+          }
+        ],
+        "runIndexes": [
+          23,
+          24
+        ]
+      },
+      "humanVerification": {
+        "status": "confirmed",
+        "checkedBy": "kawafmm",
+        "checkedAt": "2026-07-11",
+        "method": "境界確認パッケージの動画・音声確認",
+        "note": "人間確認で使用箇所2・5・12・16を不採用とした。4箇所はいずれも境目前側で元配信と素材が一致せず、照合誤対応または別素材由来と判断した。コラボ同時配信の可能性は人間判断で否定済み。",
+        "acceptedBlocks": [
+          1,
+          3,
+          4,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          13,
+          14,
+          15,
+          17
+        ],
+        "rejectedBlocks": [
+          2,
+          5,
+          12,
+          16
+        ],
+        "unresolvedBlocks": [],
+        "confirmedBoundaries": [
+          3,
+          6,
+          7,
+          8,
+          9,
+          10,
+          13,
+          14
+        ],
+        "rejectedBoundaries": [
+          1,
+          2,
+          4,
+          5,
+          11,
+          12,
+          15,
+          16
+        ],
+        "unresolvedBoundaries": [],
+        "materialBlocksPath": "evals/clip_composition/outputs/material-blocks-nOEWCNc77MI-20260710-full-plus-selected-union-v001.json",
+        "materialBlocksSha256": "fa5445dc04d9776eb09ec778cc981d1fc6a5a92c914dc882c963514afd01d96a",
+        "reviewPackagePath": "evals/clip_composition/outputs/boundary-check/nOEWCNc77MI/20260710-full-plus-selected-union-v001/index.html",
+        "reviewPackageSha256": "610d93dd2572c65ba7fb797ae0a2894eaf7f4c81e17907610344b38299f9c082"
+      },
+      "expectedIndex": 11,
+      "inputVisibility": "input-visible",
+      "overlappingInputSpeechIds": [
+        770
+      ],
+      "hit": true,
+      "hitCandidateIndexes": [
+        52
+      ]
+    },
+    {
+      "sourceStartMs": 5217231,
+      "sourceEndMs": 5218992,
+      "reason": "人間が切り抜き側と元配信側で同じ素材と確認した素材ブロックのため。",
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceUrl": "https://www.youtube.com/watch?v=YE-faluP7zY",
+      "sourceSttId": "nOEWCNc77MI_YE-faluP7zY_local30_v001",
+      "clipId": "nOEWCNc77MI",
+      "clipUrl": "https://www.youtube.com/watch?v=nOEWCNc77MI",
+      "verificationStatus": "multiblock_material_human_confirmed",
+      "usableForClipLocationEval": true,
+      "usableForCompositionPromptEval": true,
+      "multicutPartIndex": 11,
+      "clipStartMs": 338724,
+      "clipEndMs": 340845,
+      "qualityGrade": "material_block_granularity",
+      "boundaryPrecision": {
+        "grade": "material_block_granularity",
+        "meaning": "素材対応の切り替わりを表す粒度。細かい詰めは境界にしない。"
+      },
+      "label": "block 15",
+      "materialBlock": {
+        "blockIndex": 15,
+        "matchedWordPairCount": 13,
+        "internalGapMs": {
+          "sourceExtraInsideMs": 0,
+          "clipExtraInsideMs": 0,
+          "note": "同一素材ブロック内でsource側の進みがclip側より大きい分は、切り抜き内部の詰め候補として扱う。境界にはしない。"
+        },
+        "internalTransitions": [],
+        "runIndexes": [
+          25
+        ]
+      },
+      "humanVerification": {
+        "status": "confirmed",
+        "checkedBy": "kawafmm",
+        "checkedAt": "2026-07-11",
+        "method": "境界確認パッケージの動画・音声確認",
+        "note": "人間確認で使用箇所2・5・12・16を不採用とした。4箇所はいずれも境目前側で元配信と素材が一致せず、照合誤対応または別素材由来と判断した。コラボ同時配信の可能性は人間判断で否定済み。",
+        "acceptedBlocks": [
+          1,
+          3,
+          4,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          13,
+          14,
+          15,
+          17
+        ],
+        "rejectedBlocks": [
+          2,
+          5,
+          12,
+          16
+        ],
+        "unresolvedBlocks": [],
+        "confirmedBoundaries": [
+          3,
+          6,
+          7,
+          8,
+          9,
+          10,
+          13,
+          14
+        ],
+        "rejectedBoundaries": [
+          1,
+          2,
+          4,
+          5,
+          11,
+          12,
+          15,
+          16
+        ],
+        "unresolvedBoundaries": [],
+        "materialBlocksPath": "evals/clip_composition/outputs/material-blocks-nOEWCNc77MI-20260710-full-plus-selected-union-v001.json",
+        "materialBlocksSha256": "fa5445dc04d9776eb09ec778cc981d1fc6a5a92c914dc882c963514afd01d96a",
+        "reviewPackagePath": "evals/clip_composition/outputs/boundary-check/nOEWCNc77MI/20260710-full-plus-selected-union-v001/index.html",
+        "reviewPackageSha256": "610d93dd2572c65ba7fb797ae0a2894eaf7f4c81e17907610344b38299f9c082"
+      },
+      "expectedIndex": 12,
+      "inputVisibility": "input-visible",
+      "overlappingInputSpeechIds": [
+        777
+      ],
+      "hit": true,
+      "hitCandidateIndexes": [
+        53
+      ]
+    },
+    {
+      "sourceStartMs": 11541555,
+      "sourceEndMs": 11575281,
+      "reason": "人間が切り抜き側と元配信側で同じ素材と確認した素材ブロックのため。",
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceUrl": "https://www.youtube.com/watch?v=YE-faluP7zY",
+      "sourceSttId": "nOEWCNc77MI_YE-faluP7zY_local30_v001",
+      "clipId": "nOEWCNc77MI",
+      "clipUrl": "https://www.youtube.com/watch?v=nOEWCNc77MI",
+      "verificationStatus": "multiblock_material_human_confirmed",
+      "usableForClipLocationEval": true,
+      "usableForCompositionPromptEval": true,
+      "multicutPartIndex": 12,
+      "clipStartMs": 425880,
+      "clipEndMs": 459146,
+      "qualityGrade": "material_block_granularity",
+      "boundaryPrecision": {
+        "grade": "material_block_granularity",
+        "meaning": "素材対応の切り替わりを表す粒度。細かい詰めは境界にしない。"
+      },
+      "label": "block 17",
+      "materialBlock": {
+        "blockIndex": 17,
+        "matchedWordPairCount": 121,
+        "internalGapMs": {
+          "sourceExtraInsideMs": 0,
+          "clipExtraInsideMs": 2070,
+          "note": "同一素材ブロック内でsource側の進みがclip側より大きい分は、切り抜き内部の詰め候補として扱う。境界にはしない。"
+        },
+        "internalTransitions": [
+          {
+            "fromRun": 29,
+            "toRun": 30,
+            "clipGapMs": 1280,
+            "sourceGapMs": 1060,
+            "materialJumpMs": -220
+          },
+          {
+            "fromRun": 30,
+            "toRun": 31,
+            "clipGapMs": 1281,
+            "sourceGapMs": 180,
+            "materialJumpMs": -1101
+          },
+          {
+            "fromRun": 31,
+            "toRun": 32,
+            "clipGapMs": 2609,
+            "sourceGapMs": 2561,
+            "materialJumpMs": -48
+          },
+          {
+            "fromRun": 32,
+            "toRun": 33,
+            "clipGapMs": 0,
+            "sourceGapMs": 0,
+            "materialJumpMs": 0
+          },
+          {
+            "fromRun": 33,
+            "toRun": 34,
+            "clipGapMs": 861,
+            "sourceGapMs": 160,
+            "materialJumpMs": -701
+          }
+        ],
+        "runIndexes": [
+          29,
+          30,
+          31,
+          32,
+          33,
+          34
+        ]
+      },
+      "humanVerification": {
+        "status": "confirmed",
+        "checkedBy": "kawafmm",
+        "checkedAt": "2026-07-11",
+        "method": "境界確認パッケージの動画・音声確認",
+        "note": "人間確認で使用箇所2・5・12・16を不採用とした。4箇所はいずれも境目前側で元配信と素材が一致せず、照合誤対応または別素材由来と判断した。コラボ同時配信の可能性は人間判断で否定済み。",
+        "acceptedBlocks": [
+          1,
+          3,
+          4,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          13,
+          14,
+          15,
+          17
+        ],
+        "rejectedBlocks": [
+          2,
+          5,
+          12,
+          16
+        ],
+        "unresolvedBlocks": [],
+        "confirmedBoundaries": [
+          3,
+          6,
+          7,
+          8,
+          9,
+          10,
+          13,
+          14
+        ],
+        "rejectedBoundaries": [
+          1,
+          2,
+          4,
+          5,
+          11,
+          12,
+          15,
+          16
+        ],
+        "unresolvedBoundaries": [],
+        "materialBlocksPath": "evals/clip_composition/outputs/material-blocks-nOEWCNc77MI-20260710-full-plus-selected-union-v001.json",
+        "materialBlocksSha256": "fa5445dc04d9776eb09ec778cc981d1fc6a5a92c914dc882c963514afd01d96a",
+        "reviewPackagePath": "evals/clip_composition/outputs/boundary-check/nOEWCNc77MI/20260710-full-plus-selected-union-v001/index.html",
+        "reviewPackageSha256": "610d93dd2572c65ba7fb797ae0a2894eaf7f4c81e17907610344b38299f9c082"
+      },
+      "expectedIndex": 13,
+      "inputVisibility": "input-visible",
+      "overlappingInputSpeechIds": [
+        1719,
+        1720,
+        1721,
+        1722,
+        1723,
+        1724,
+        1725
+      ],
+      "hit": true,
+      "hitCandidateIndexes": [
+        87,
+        88
+      ]
+    }
+  ],
+  "candidateAssessments": [
+    {
+      "candidateIndex": 1,
+      "themeId": "theme_001",
+      "title": "ころねの配置に悩むマリンとサザエさん風の例え",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 153112,
+          "sourceEndMs": 236189,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 2,
+      "themeId": "theme_002",
+      "title": "ねずこ風のころねと炭治郎になりきるマリンの掛け合い",
+      "classification": "overbroad-range",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [
+        1
+      ],
+      "hitInputVisibleExpectedIndexes": [
+        1
+      ],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 240202,
+          "sourceEndMs": 298984,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [
+            1
+          ],
+          "strictlyContainedExpectedIndexes": [
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "candidateIndex": 3,
+      "themeId": "theme_003",
+      "title": "言い間違え連発から我に返って作業を始めようとする二人",
+      "classification": "range-hit",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [
+        2
+      ],
+      "hitInputVisibleExpectedIndexes": [
+        2
+      ],
+      "overlappedExcludedRangeIds": [
+        "rejected_material_block_2"
+      ],
+      "ranges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 300578,
+          "sourceEndMs": 328762,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [
+            2
+          ],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 4,
+      "themeId": "theme_001",
+      "title": "ピンク色の朝日と二人の心",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 397197,
+          "sourceEndMs": 438186,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 5,
+      "themeId": "theme_002",
+      "title": "マリンのハイテンションな叫び声",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 438186,
+          "sourceEndMs": 461818,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 6,
+      "themeId": "theme_003",
+      "title": "船のリフォーム紹介とBGM再現",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 482374,
+          "sourceEndMs": 507883,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 7,
+      "themeId": "theme_001",
+      "title": "芋の連呼とお腹空いたやり取り",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 570560,
+          "sourceEndMs": 600000,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 8,
+      "themeId": "theme_002",
+      "title": "口数が少なく不穏な空気になる二人",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 631198,
+          "sourceEndMs": 659944,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 9,
+      "themeId": "theme_003",
+      "title": "でかい島にぶつかりそうになる船",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 690040,
+          "sourceEndMs": 700804,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 10,
+      "themeId": "theme_001",
+      "title": "せっかく作った土台をサメに食べられるマリン",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 700804,
+          "sourceEndMs": 719632,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 11,
+      "themeId": "theme_002",
+      "title": "ころねの成長を実感して自慢げになるマリン",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 780346,
+          "sourceEndMs": 809552,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 12,
+      "themeId": "theme_003",
+      "title": "食料不足の中で鳥を仕留めるころね",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 810330,
+          "sourceEndMs": 839584,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 13,
+      "themeId": "theme_004",
+      "title": "肉を焼いている最中に鳥に襲われるハプニング",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 840194,
+          "sourceEndMs": 864927,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 14,
+      "themeId": "theme_001",
+      "title": "マリンの雑な反応に対するころねの謎のフォロー",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 864927,
+          "sourceEndMs": 904802,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 15,
+      "themeId": "theme_002",
+      "title": "島に潜むイノシシとの遭遇と、しし鍋パーティーの計画",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 904802,
+          "sourceEndMs": 959944,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 16,
+      "themeId": "theme_003",
+      "title": "エイムの自信をツッコまれるマリンと、イカダでの合流作戦",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 960122,
+          "sourceEndMs": 1019166,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 17,
+      "themeId": "theme_001",
+      "title": "イノシシ3匹に焦る2人",
+      "classification": "overbroad-range",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [
+        3
+      ],
+      "hitInputVisibleExpectedIndexes": [
+        3
+      ],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 1021002,
+          "sourceEndMs": 1079852,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [
+            3
+          ],
+          "strictlyContainedExpectedIndexes": [
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "candidateIndex": 18,
+      "themeId": "theme_002",
+      "title": "竹取物語から始まる「絡みづらい」プロレス",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 1260022,
+          "sourceEndMs": 1311760,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 19,
+      "themeId": "theme_003",
+      "title": "古文風の会話に染まる2人",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 1380850,
+          "sourceEndMs": 1392416,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 20,
+      "themeId": "theme_001",
+      "title": "会話が噛み合わず「主語をつけよう」と提案する二人",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 1427669,
+          "sourceEndMs": 1509402,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 21,
+      "themeId": "theme_002",
+      "title": "イノシシ（？）に倒され「死に死に」状態になるマリン",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 1509402,
+          "sourceEndMs": 1560000,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 22,
+      "themeId": "theme_001",
+      "title": "サメをクジラと言い間違えるころね",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 1809147,
+          "sourceEndMs": 1819996,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 23,
+      "themeId": "theme_002",
+      "title": "葉っぱ60枚獲得に大喜びする二人",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 1819996,
+          "sourceEndMs": 1827662,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 24,
+      "themeId": "theme_001",
+      "title": "栽培のためのストレージ作り",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 1834199,
+          "sourceEndMs": 1859504,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 25,
+      "themeId": "theme_002",
+      "title": "足の速い獲物にガバガバエイムで挑む二人",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 2040950,
+          "sourceEndMs": 2099744,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 26,
+      "themeId": "theme_001",
+      "title": "博衣こよりを「コヨーテだからサメ殺しが好き」とディスる二人",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 2196966,
+          "sourceEndMs": 2243688,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 27,
+      "themeId": "theme_002",
+      "title": "絶体絶命の危機でなぜかスイカを食べる宝鐘マリン",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 2220674,
+          "sourceEndMs": 2279144,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 28,
+      "themeId": "theme_003",
+      "title": "激闘の末に討伐成功するも、まさかのドロップ無しで困惑する二人",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 2279144,
+          "sourceEndMs": 2304763,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 29,
+      "themeId": "theme_001",
+      "title": "ワタメに理不尽な謝罪要求",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 2304763,
+          "sourceEndMs": 2334328,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 30,
+      "themeId": "theme_002",
+      "title": "満身創痍のマリンと危機回避",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 2580020,
+          "sourceEndMs": 2639126,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 31,
+      "themeId": "theme_003",
+      "title": "サメに慣れすぎたラフト末期症状",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 2648288,
+          "sourceEndMs": 2669504,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 32,
+      "themeId": "theme_001",
+      "title": "マリンの甘い言葉に急に冷たくなるころねと連呼される「キモい」",
+      "classification": "range-hit",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [
+        4
+      ],
+      "hitInputVisibleExpectedIndexes": [
+        4
+      ],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 2790074,
+          "sourceEndMs": 2848146,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [
+            4
+          ],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 33,
+      "themeId": "theme_001",
+      "title": "構えた弓矢を戻したいマリン",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 2916151,
+          "sourceEndMs": 2938310,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 34,
+      "themeId": "theme_002",
+      "title": "トッポの中身をレンジで消す珍説",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 2945887,
+          "sourceEndMs": 2999444,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 35,
+      "themeId": "theme_003",
+      "title": "つまんないことを言うころねへの罰",
+      "classification": "overbroad-range",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [
+        5
+      ],
+      "hitInputVisibleExpectedIndexes": [
+        5
+      ],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 3000738,
+          "sourceEndMs": 3026556,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [
+            5
+          ],
+          "strictlyContainedExpectedIndexes": [
+            5
+          ]
+        }
+      ]
+    },
+    {
+      "candidateIndex": 36,
+      "themeId": "theme_001",
+      "title": "マリンが我慢できず2回目のトイレへ、留守を預かるころねの緊張",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 3072540,
+          "sourceEndMs": 3179964,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 37,
+      "themeId": "theme_002",
+      "title": "肉を焼き忘れたころねにキレるマリンと、夫婦漫才からのバーベキュー完成",
+      "classification": "overbroad-range",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [
+        6
+      ],
+      "hitInputVisibleExpectedIndexes": [
+        6
+      ],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 3180190,
+          "sourceEndMs": 3209684,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [
+            6
+          ],
+          "strictlyContainedExpectedIndexes": [
+            6
+          ]
+        }
+      ]
+    },
+    {
+      "candidateIndex": 38,
+      "themeId": "theme_001",
+      "title": "バーベキューの網の上を歩くころねにツッコむマリン",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 3211310,
+          "sourceEndMs": 3238642,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 39,
+      "themeId": "theme_002",
+      "title": "イノシシの被り物で始まる鬼滅の刃ごっこ",
+      "classification": "overbroad-range",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [
+        7
+      ],
+      "hitInputVisibleExpectedIndexes": [
+        7
+      ],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 3252153,
+          "sourceEndMs": 3292350,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [
+            7
+          ],
+          "strictlyContainedExpectedIndexes": [
+            7
+          ]
+        }
+      ]
+    },
+    {
+      "candidateIndex": 40,
+      "themeId": "theme_003",
+      "title": "イノシシの頭を被った姿にツボる二人",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 3366903,
+          "sourceEndMs": 3467816,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 41,
+      "themeId": "theme_001",
+      "title": "食材を全て握る船長と肉をめぐる攻防",
+      "classification": "overbroad-range",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [
+        8
+      ],
+      "hitInputVisibleExpectedIndexes": [
+        8
+      ],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 3467816,
+          "sourceEndMs": 3519167,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [
+            8
+          ],
+          "strictlyContainedExpectedIndexes": [
+            8
+          ]
+        }
+      ]
+    },
+    {
+      "candidateIndex": 42,
+      "themeId": "theme_002",
+      "title": "温存したイノシシ肉の回復量にツッコミ",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 3634469,
+          "sourceEndMs": 3689086,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 43,
+      "themeId": "theme_003",
+      "title": "笑いすぎて限界を迎える中での鳥襲来",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 3696786,
+          "sourceEndMs": 3719724,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 44,
+      "themeId": "theme_001",
+      "title": "太すぎる声でイノシシを探すマリン船長",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 3903595,
+          "sourceEndMs": 3920401,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 45,
+      "themeId": "theme_002",
+      "title": "サメに船を食われまくっていてブチギレるふたり",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 3961702,
+          "sourceEndMs": 3988230,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 46,
+      "themeId": "theme_003",
+      "title": "ころねの頭の匂いを嗅いだマリンの一言にじわじわ泣いちゃうころね",
+      "classification": "overbroad-range",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [
+        9
+      ],
+      "hitInputVisibleExpectedIndexes": [
+        9
+      ],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 3991226,
+          "sourceEndMs": 4029707,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [
+            9
+          ],
+          "strictlyContainedExpectedIndexes": [
+            9
+          ]
+        }
+      ]
+    },
+    {
+      "candidateIndex": 47,
+      "themeId": "theme_001",
+      "title": "食レポで「アムアム」と連呼する宝鐘マリン",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 4263026,
+          "sourceEndMs": 4289544,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 48,
+      "themeId": "theme_002",
+      "title": "サザエさん（磯野家）のテーマだと気づく二人",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 4802562,
+          "sourceEndMs": 4831414,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 49,
+      "themeId": "theme_003",
+      "title": "建築の仕様を急に思い出すころねとマリン",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 4516312,
+          "sourceEndMs": 4548779,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 50,
+      "themeId": "theme_001",
+      "title": "箱の中の仲間外れ探し",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 5008544,
+          "sourceEndMs": 5035930,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 51,
+      "themeId": "theme_002",
+      "title": "謎の言葉「イノシシンリー」にセルフツッコミ",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 5128111,
+          "sourceEndMs": 5158994,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 52,
+      "themeId": "theme_003",
+      "title": "くだらないことで笑われて気まずくなるマリン",
+      "classification": "range-hit",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [
+        11
+      ],
+      "hitInputVisibleExpectedIndexes": [
+        11
+      ],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 5162499,
+          "sourceEndMs": 5189318,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [
+            11
+          ],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 53,
+      "themeId": "theme_001",
+      "title": "エモい演技を台無しにされるマリン",
+      "classification": "overbroad-range",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [
+        12
+      ],
+      "hitInputVisibleExpectedIndexes": [
+        12
+      ],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 5190322,
+          "sourceEndMs": 5279310,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [
+            12
+          ],
+          "strictlyContainedExpectedIndexes": [
+            12
+          ]
+        }
+      ]
+    },
+    {
+      "candidateIndex": 54,
+      "themeId": "theme_002",
+      "title": "帆の向きが逆で進まず煽り合う二人",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 5581366,
+          "sourceEndMs": 5672062,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 55,
+      "themeId": "theme_001",
+      "title": "帆の向きを間違えて焦る宝鐘マリン",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 2,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 5672062,
+          "sourceEndMs": 5727982,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        },
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 5744414,
+          "sourceEndMs": 5783643,
+          "rangeIndex": 2,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 56,
+      "themeId": "theme_002",
+      "title": "「足しか引っ張れずに魚釣ります」と開き直る戌神ころね",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 5796179,
+          "sourceEndMs": 5820000,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 57,
+      "themeId": "theme_001",
+      "title": "リスナーの意見を採用するマリン船長",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 6071644,
+          "sourceEndMs": 6213315,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 58,
+      "themeId": "theme_002",
+      "title": "置き去りにされそうになって焦る戌神ころね",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 6300522,
+          "sourceEndMs": 6361383,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 59,
+      "themeId": "theme_003",
+      "title": "不意の口説き文句にツッコむマリン船長",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 6390286,
+          "sourceEndMs": 6404515,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 60,
+      "themeId": "theme_001",
+      "title": "マリンと呼び捨てする関係の匂わせ",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 6480406,
+          "sourceEndMs": 6510760,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 61,
+      "themeId": "theme_002",
+      "title": "1ミリも見ずに褒める船長",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 6693504,
+          "sourceEndMs": 6719884,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 62,
+      "themeId": "theme_003",
+      "title": "突然のサメ討伐と怒涛の質問攻め",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 6693504,
+          "sourceEndMs": 6749852,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 63,
+      "themeId": "theme_001",
+      "title": "サメの肉が笑っていると言う宝鐘マリンの独特な感性",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 6780086,
+          "sourceEndMs": 6792473,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 64,
+      "themeId": "theme_002",
+      "title": "配信を見て場所が分かったら結婚するという約束と、いらない特典",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 7575441,
+          "sourceEndMs": 7606467,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 65,
+      "themeId": "theme_003",
+      "title": "本当に見つけてしまい、結婚を迫られる展開",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 7606467,
+          "sourceEndMs": 7640969,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 66,
+      "themeId": "theme_001",
+      "title": "階段横に不要なアイテムを入れるゴミ箱（ストレージ）を設置する場面",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 7860254,
+          "sourceEndMs": 7872042,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 67,
+      "themeId": "theme_001",
+      "title": "急に冷たくなるころねとキレるマリン",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 8280340,
+          "sourceEndMs": 8339014,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 68,
+      "themeId": "theme_002",
+      "title": "本当は仲がいいのか疑う二人の掛け合い",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 8400086,
+          "sourceEndMs": 8429984,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 69,
+      "themeId": "theme_003",
+      "title": "「備品」の定義で揉めるアイテム整理",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 8440504,
+          "sourceEndMs": 8489342,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 70,
+      "themeId": "theme_001",
+      "title": "サメ退治の代償で船を見失い迷子になるマリンと ころね",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 8499668,
+          "sourceEndMs": 8639498,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 71,
+      "themeId": "theme_002",
+      "title": "コンパスのない世界で島を目印に合流を試みる二人",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 8760034,
+          "sourceEndMs": 8805267,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 72,
+      "themeId": "theme_001",
+      "title": "謎のオリジナルソングを上機嫌で口ずさむマリン船長",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 9094796,
+          "sourceEndMs": 9117453,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 73,
+      "themeId": "theme_002",
+      "title": "海上で発見したイルカの群れに大興奮する二人",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 9120194,
+          "sourceEndMs": 9141803,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 74,
+      "themeId": "theme_003",
+      "title": "無茶振りされたイルカの鳴き声モノマネのクオリティがエゲツナイ",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 9133740,
+          "sourceEndMs": 9155980,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 75,
+      "themeId": "theme_001",
+      "title": "海で見つけた生き物を巡る見間違いトーク",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 9155980,
+          "sourceEndMs": 9209924,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 76,
+      "themeId": "theme_002",
+      "title": "設置した絨毯への反応とこだわり",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 2,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 9232688,
+          "sourceEndMs": 9238850,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        },
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 9544166,
+          "sourceEndMs": 9599564,
+          "rangeIndex": 2,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 77,
+      "themeId": "theme_001",
+      "title": "ベッドの上位互換は旅館？",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 9676921,
+          "sourceEndMs": 9703529,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 78,
+      "themeId": "theme_002",
+      "title": "うそっぷとわざっぷ",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 10260642,
+          "sourceEndMs": 10290000,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 79,
+      "themeId": "theme_003",
+      "title": "建築中の奇跡的な斧破壊と絶叫",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 10470482,
+          "sourceEndMs": 10499844,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 80,
+      "themeId": "theme_001",
+      "title": "マリンところねの「いないいないばぁ」",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 10563042,
+          "sourceEndMs": 10619692,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 81,
+      "themeId": "theme_002",
+      "title": "生魚を食べてしまう宝鐘マリン",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 10696829,
+          "sourceEndMs": 10738182,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 82,
+      "themeId": "theme_003",
+      "title": "マリンのデザインセンスを絶賛するころね",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 10740498,
+          "sourceEndMs": 10795851,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 83,
+      "themeId": "theme_001",
+      "title": "ローテーブルを巡る巨人の星とちゃぶ台返し弄り",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 10982423,
+          "sourceEndMs": 11068992,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 84,
+      "themeId": "theme_002",
+      "title": "間違えてテーブルを量産してしまう宝鐘マリン",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 11062309,
+          "sourceEndMs": 11098463,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 85,
+      "themeId": "theme_001",
+      "title": "ローテーブル設置とわびさび論争",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 11220314,
+          "sourceEndMs": 11280000,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 86,
+      "themeId": "theme_002",
+      "title": "リスナーへの呼びかけ大喜利と唐突な褒め合い",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 11400666,
+          "sourceEndMs": 11434852,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 87,
+      "themeId": "theme_001",
+      "title": "船にベッドルームを作る宝鐘マリンと戌神ころね",
+      "classification": "range-hit",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [
+        13
+      ],
+      "hitInputVisibleExpectedIndexes": [
+        13
+      ],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 11520066,
+          "sourceEndMs": 11549658,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [
+            13
+          ],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 88,
+      "themeId": "theme_002",
+      "title": "宝鐘マリンの浮気性に釘を刺す戌神ころね",
+      "classification": "range-hit",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [
+        13
+      ],
+      "hitInputVisibleExpectedIndexes": [
+        13
+      ],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 11551287,
+          "sourceEndMs": 11593310,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [
+            13
+          ],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 89,
+      "themeId": "theme_001",
+      "title": "マリンの「ヨーソロー」に独特な発音で返すころね",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 11662511,
+          "sourceEndMs": 11684860,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    }
+  ],
+  "excludedRanges": {
+    "count": 4,
+    "scoringTreatment": "audit-only; excluded from hit counts and all denominators",
+    "ranges": [
+      {
+        "id": "rejected_material_block_2",
+        "sourceStartMs": 309446,
+        "sourceEndMs": 313689,
+        "clipStartMs": 14595,
+        "clipEndMs": 18477,
+        "sourceVideoId": "YE-faluP7zY",
+        "sourceUrl": "https://www.youtube.com/watch?v=YE-faluP7zY",
+        "evidenceStatus": "human_rejected_material_candidate",
+        "scoringTreatment": "excluded_from_fixture_expected",
+        "reason": "境目前側で元配信と素材が一致しない。近い時間ではあるが同じ素材ではなく、照合誤対応または別素材由来と判断した。コラボ同時配信の可能性は人間判断で否定済み。"
+      },
+      {
+        "id": "rejected_material_block_5",
+        "sourceStartMs": 1254601,
+        "sourceEndMs": 1258062,
+        "clipStartMs": 44701,
+        "clipEndMs": 49962,
+        "sourceVideoId": "YE-faluP7zY",
+        "sourceUrl": "https://www.youtube.com/watch?v=YE-faluP7zY",
+        "evidenceStatus": "human_rejected_material_candidate",
+        "scoringTreatment": "excluded_from_fixture_expected",
+        "reason": "境目前側で元配信と素材が一致しないため、照合誤対応または別素材由来と判断した。コラボ同時配信の可能性は人間判断で否定済み。"
+      },
+      {
+        "id": "rejected_material_block_12",
+        "sourceStartMs": 4102099,
+        "sourceEndMs": 4109864,
+        "clipStartMs": 265210,
+        "clipEndMs": 273665,
+        "sourceVideoId": "YE-faluP7zY",
+        "sourceUrl": "https://www.youtube.com/watch?v=YE-faluP7zY",
+        "evidenceStatus": "human_rejected_material_candidate",
+        "scoringTreatment": "excluded_from_fixture_expected",
+        "reason": "境目前側で元配信と素材が一致しないため、照合誤対応または別素材由来と判断した。コラボ同時配信の可能性は人間判断で否定済み。"
+      },
+      {
+        "id": "rejected_material_block_16",
+        "sourceStartMs": 10439052,
+        "sourceEndMs": 10450741,
+        "clipStartMs": 358151,
+        "clipEndMs": 373786,
+        "sourceVideoId": "YE-faluP7zY",
+        "sourceUrl": "https://www.youtube.com/watch?v=YE-faluP7zY",
+        "evidenceStatus": "human_rejected_material_candidate",
+        "scoringTreatment": "excluded_from_fixture_expected",
+        "reason": "境目前側で元配信と素材が一致しないため、照合誤対応または別素材由来と判断した。コラボ同時配信の可能性は人間判断で否定済み。"
+      }
+    ]
+  },
+  "windowingResult": {
+    "applied": true,
+    "windowCount": 37,
+    "preMergeCandidateCount": 89,
+    "postMergeCandidateCount": 89,
+    "timingCorrectionCount": 6,
+    "merge": "同一sourceVideoIdで根拠範囲が重なる候補だけを機械統合。意味ベースの統合はしない。",
+    "windows": [
+      {
+        "windowId": "window_01_YE-faluP7zY",
+        "sourceVideoId": "YE-faluP7zY",
+        "themeCount": 3,
+        "timingCorrectionCount": 0
+      },
+      {
+        "windowId": "window_02_YE-faluP7zY",
+        "sourceVideoId": "YE-faluP7zY",
+        "themeCount": 3,
+        "timingCorrectionCount": 0
+      },
+      {
+        "windowId": "window_03_YE-faluP7zY",
+        "sourceVideoId": "YE-faluP7zY",
+        "themeCount": 3,
+        "timingCorrectionCount": 0
+      },
+      {
+        "windowId": "window_04_YE-faluP7zY",
+        "sourceVideoId": "YE-faluP7zY",
+        "themeCount": 4,
+        "timingCorrectionCount": 0
+      },
+      {
+        "windowId": "window_05_YE-faluP7zY",
+        "sourceVideoId": "YE-faluP7zY",
+        "themeCount": 3,
+        "timingCorrectionCount": 1
+      },
+      {
+        "windowId": "window_06_YE-faluP7zY",
+        "sourceVideoId": "YE-faluP7zY",
+        "themeCount": 3,
+        "timingCorrectionCount": 0
+      },
+      {
+        "windowId": "window_07_YE-faluP7zY",
+        "sourceVideoId": "YE-faluP7zY",
+        "themeCount": 2,
+        "timingCorrectionCount": 1
+      },
+      {
+        "windowId": "window_08_YE-faluP7zY",
+        "sourceVideoId": "YE-faluP7zY",
+        "themeCount": 2,
+        "timingCorrectionCount": 0
+      },
+      {
+        "windowId": "window_09_YE-faluP7zY",
+        "sourceVideoId": "YE-faluP7zY",
+        "themeCount": 2,
+        "timingCorrectionCount": 0
+      },
+      {
+        "windowId": "window_10_YE-faluP7zY",
+        "sourceVideoId": "YE-faluP7zY",
+        "themeCount": 3,
+        "timingCorrectionCount": 0
+      },
+      {
+        "windowId": "window_11_YE-faluP7zY",
+        "sourceVideoId": "YE-faluP7zY",
+        "themeCount": 3,
+        "timingCorrectionCount": 0
+      },
+      {
+        "windowId": "window_12_YE-faluP7zY",
+        "sourceVideoId": "YE-faluP7zY",
+        "themeCount": 1,
+        "timingCorrectionCount": 0
+      },
+      {
+        "windowId": "window_13_YE-faluP7zY",
+        "sourceVideoId": "YE-faluP7zY",
+        "themeCount": 3,
+        "timingCorrectionCount": 0
+      },
+      {
+        "windowId": "window_14_YE-faluP7zY",
+        "sourceVideoId": "YE-faluP7zY",
+        "themeCount": 2,
+        "timingCorrectionCount": 1
+      },
+      {
+        "windowId": "window_15_YE-faluP7zY",
+        "sourceVideoId": "YE-faluP7zY",
+        "themeCount": 3,
+        "timingCorrectionCount": 0
+      },
+      {
+        "windowId": "window_16_YE-faluP7zY",
+        "sourceVideoId": "YE-faluP7zY",
+        "themeCount": 3,
+        "timingCorrectionCount": 0
+      },
+      {
+        "windowId": "window_17_YE-faluP7zY",
+        "sourceVideoId": "YE-faluP7zY",
+        "themeCount": 3,
+        "timingCorrectionCount": 0
+      },
+      {
+        "windowId": "window_18_YE-faluP7zY",
+        "sourceVideoId": "YE-faluP7zY",
+        "themeCount": 3,
+        "timingCorrectionCount": 0
+      },
+      {
+        "windowId": "window_19_YE-faluP7zY",
+        "sourceVideoId": "YE-faluP7zY",
+        "themeCount": 3,
+        "timingCorrectionCount": 0
+      },
+      {
+        "windowId": "window_20_YE-faluP7zY",
+        "sourceVideoId": "YE-faluP7zY",
+        "themeCount": 2,
+        "timingCorrectionCount": 0
+      },
+      {
+        "windowId": "window_21_YE-faluP7zY",
+        "sourceVideoId": "YE-faluP7zY",
+        "themeCount": 2,
+        "timingCorrectionCount": 1
+      },
+      {
+        "windowId": "window_22_YE-faluP7zY",
+        "sourceVideoId": "YE-faluP7zY",
+        "themeCount": 3,
+        "timingCorrectionCount": 0
+      },
+      {
+        "windowId": "window_23_YE-faluP7zY",
+        "sourceVideoId": "YE-faluP7zY",
+        "themeCount": 3,
+        "timingCorrectionCount": 0
+      },
+      {
+        "windowId": "window_24_YE-faluP7zY",
+        "sourceVideoId": "YE-faluP7zY",
+        "themeCount": 3,
+        "timingCorrectionCount": 1
+      },
+      {
+        "windowId": "window_25_YE-faluP7zY",
+        "sourceVideoId": "YE-faluP7zY",
+        "themeCount": 0,
+        "timingCorrectionCount": 0
+      },
+      {
+        "windowId": "window_26_YE-faluP7zY",
+        "sourceVideoId": "YE-faluP7zY",
+        "themeCount": 0,
+        "timingCorrectionCount": 0
+      },
+      {
+        "windowId": "window_27_YE-faluP7zY",
+        "sourceVideoId": "YE-faluP7zY",
+        "themeCount": 1,
+        "timingCorrectionCount": 0
+      },
+      {
+        "windowId": "window_28_YE-faluP7zY",
+        "sourceVideoId": "YE-faluP7zY",
+        "themeCount": 3,
+        "timingCorrectionCount": 0
+      },
+      {
+        "windowId": "window_29_YE-faluP7zY",
+        "sourceVideoId": "YE-faluP7zY",
+        "themeCount": 2,
+        "timingCorrectionCount": 0
+      },
+      {
+        "windowId": "window_30_YE-faluP7zY",
+        "sourceVideoId": "YE-faluP7zY",
+        "themeCount": 3,
+        "timingCorrectionCount": 0
+      },
+      {
+        "windowId": "window_31_YE-faluP7zY",
+        "sourceVideoId": "YE-faluP7zY",
+        "themeCount": 2,
+        "timingCorrectionCount": 0
+      },
+      {
+        "windowId": "window_32_YE-faluP7zY",
+        "sourceVideoId": "YE-faluP7zY",
+        "themeCount": 3,
+        "timingCorrectionCount": 0
+      },
+      {
+        "windowId": "window_33_YE-faluP7zY",
+        "sourceVideoId": "YE-faluP7zY",
+        "themeCount": 3,
+        "timingCorrectionCount": 0
+      },
+      {
+        "windowId": "window_34_YE-faluP7zY",
+        "sourceVideoId": "YE-faluP7zY",
+        "themeCount": 2,
+        "timingCorrectionCount": 1
+      },
+      {
+        "windowId": "window_35_YE-faluP7zY",
+        "sourceVideoId": "YE-faluP7zY",
+        "themeCount": 2,
+        "timingCorrectionCount": 0
+      },
+      {
+        "windowId": "window_36_YE-faluP7zY",
+        "sourceVideoId": "YE-faluP7zY",
+        "themeCount": 2,
+        "timingCorrectionCount": 0
+      },
+      {
+        "windowId": "window_37_YE-faluP7zY",
+        "sourceVideoId": "YE-faluP7zY",
+        "themeCount": 1,
+        "timingCorrectionCount": 0
+      }
+    ]
+  }
+}

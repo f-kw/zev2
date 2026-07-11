@@ -1,0 +1,64 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "謎のオリジナルソングを上機嫌で口ずさむマリン船長",
+      "reason": "資材整理中にマリン船長が独特なメロディの謎の歌を上機嫌で歌い、ゲームをプレイしている様子が微笑ましい見どころとなっているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 9094796,
+          "sourceEndMs": 9117453,
+          "supportingSpeechIds": [
+            1358
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "海上で発見したイルカの群れに大興奮する二人",
+      "reason": "クラゲの話題から一転してイルカの群れを発見し、二人で「かわいい」と歓声をあげて盛り上がっている展開に一体感があるため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 9120194,
+          "sourceEndMs": 9141803,
+          "supportingSpeechIds": [
+            "1361-1370"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_003",
+      "title": "無茶振りされたイルカの鳴き声モノマネのクオリティがエゲツナイ",
+      "reason": "イルカの鳴き声ができるかという無茶振りに対して披露したモノマネが、独特でエゲツナイ反応を生み出す面白いオチになっているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 9133740,
+          "sourceEndMs": 9155980,
+          "supportingSpeechIds": [
+            "1370-1377"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-11T23:51:55+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_30_YE-faluP7zY",
+    "windowSourceVideoId": "YE-faluP7zY",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nOEWCNc77MI_chat_velocity_top100_input_selection_v004/theme-llm-v002/20260711-chat-velocity-top100-v001/windows/window_30_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/fe71220fe314b8a3?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"謎のオリジナルソングを上機嫌で口ずさむマリン船長\",\n      \"reason\": \"資材整理中にマリン船長が独特なメロディの謎の歌を上機嫌で歌い、ゲームをプレイしている様子が微笑ましい見どころとなっているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 9094796,\n          \"sourceEndMs\": 9117453,\n          \"supportingSpeechIds\": [1358]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"海上で発見したイルカの群れに大興奮する二人\",\n      \"reason\": \"クラゲの話題から一転してイルカの群れを発見し、二人で「かわいい」と歓声をあげて盛り上がっている展開に一体感があるため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 9120194,\n          \"sourceEndMs\": 9141803,\n          \"supportingSpeechIds\": [\"1361-1370\"]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_003\",\n      \"title\": \"無茶振りされたイルカの鳴き声モノマネのクオリティがエゲツナイ\",\n      \"reason\": \"イルカの鳴き声ができるかという無茶振りに対して披露したモノマネが、独特でエゲツナイ反応を生み出す面白いオチになっているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 9133740,\n          \"sourceEndMs\": 9155980,\n          \"supportingSpeechIds\": [\"1370-1377\"]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

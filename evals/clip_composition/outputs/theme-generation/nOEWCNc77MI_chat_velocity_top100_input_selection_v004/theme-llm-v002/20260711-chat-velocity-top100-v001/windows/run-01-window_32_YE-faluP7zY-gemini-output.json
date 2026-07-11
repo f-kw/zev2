@@ -1,0 +1,64 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "ベッドの上位互換は旅館？",
+      "reason": "ゲーム内でベッドの上位互換があるかという話題から「旅館」というスケールの大きいボケが生まれる面白い掛け合いです。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 9676921,
+          "sourceEndMs": 9703529,
+          "supportingSpeechIds": [
+            "1460-1464"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "うそっぷとわざっぷ",
+      "reason": "キャラクターの「うそっぷ」の由来を「わざっぷ」と勘違いしたような発言に対してツッコミが入るコミカルな一幕です。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 10260642,
+          "sourceEndMs": 10290000,
+          "supportingSpeechIds": [
+            "1539-1541"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_003",
+      "title": "建築中の奇跡的な斧破壊と絶叫",
+      "reason": "新しくドア式を取り入れた建築を楽しんでいた最中に、突然斧が壊れて激しく絶叫するリアクションが見どころとなっています。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 10470482,
+          "sourceEndMs": 10499844,
+          "supportingSpeechIds": [
+            "1559-1563"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-12T24:12:58+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_32_YE-faluP7zY",
+    "windowSourceVideoId": "YE-faluP7zY",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nOEWCNc77MI_chat_velocity_top100_input_selection_v004/theme-llm-v002/20260711-chat-velocity-top100-v001/windows/window_32_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/75fb94e60f3a3e88?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"ベッドの上位互換は旅館？\",\n      \"reason\": \"ゲーム内でベッドの上位互換があるかという話題から「旅館」というスケールの大きいボケが生まれる面白い掛け合いです。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 9676921,\n          \"sourceEndMs\": 9703529,\n          \"supportingSpeechIds\": [\"1460-1464\"]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"うそっぷとわざっぷ\",\n      \"reason\": \"キャラクターの「うそっぷ」の由来を「わざっぷ」と勘違いしたような発言に対してツッコミが入るコミカルな一幕です。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 10260642,\n          \"sourceEndMs\": 10290000,\n          \"supportingSpeechIds\": [\"1539-1541\"]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_003\",\n      \"title\": \"建築中の奇跡的な斧破壊と絶叫\",\n      \"reason\": \"新しくドア式を取り入れた建築を楽しんでいた最中に、突然斧が壊れて激しく絶叫するリアクションが見どころとなっています。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 10470482,\n          \"sourceEndMs\": 10499844,\n          \"supportingSpeechIds\": [\"1559-1563\"]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

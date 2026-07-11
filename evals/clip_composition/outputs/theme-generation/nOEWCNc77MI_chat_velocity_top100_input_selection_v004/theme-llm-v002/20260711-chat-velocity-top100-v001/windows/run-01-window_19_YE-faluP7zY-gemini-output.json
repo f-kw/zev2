@@ -1,0 +1,64 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "箱の中の仲間外れ探し",
+      "reason": "箱の中に紛れ込んだ仲間外れの葉っぱを2人で楽しそうに探して見つける一連のくだりがコミカルで切り抜きに適している。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 5008544,
+          "sourceEndMs": 5035930,
+          "supportingSpeechIds": [
+            "743-751"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "謎の言葉「イノシシンリー」にセルフツッコミ",
+      "reason": "ノープランで話し始めて口走ってしまった謎の言葉「イノシシンリー」に対して、自分で即座に反省して無視を求める展開が面白い。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 5128111,
+          "sourceEndMs": 5158994,
+          "supportingSpeechIds": [
+            "766-769"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_003",
+      "title": "くだらないことで笑われて気まずくなるマリン",
+      "reason": "「ぴょんぴょんマンゴー」という何気ないフレーズで大笑いされ、おもろくないことで笑われるのが気まずいと吐露するやり取りに妙味がある。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 5162499,
+          "sourceEndMs": 5189318,
+          "supportingSpeechIds": [
+            "770"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-11T23:49:10+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_19_YE-faluP7zY",
+    "windowSourceVideoId": "YE-faluP7zY",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nOEWCNc77MI_chat_velocity_top100_input_selection_v004/theme-llm-v002/20260711-chat-velocity-top100-v001/windows/window_19_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/90d2f3ee0e882799?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"箱の中の仲間外れ探し\",\n      \"reason\": \"箱の中に紛れ込んだ仲間外れの葉っぱを2人で楽しそうに探して見つける一連のくだりがコミカルで切り抜きに適している。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 5008544,\n          \"sourceEndMs\": 5035930,\n          \"supportingSpeechIds\": [\n            \"743-751\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"謎の言葉「イノシシンリー」にセルフツッコミ\",\n      \"reason\": \"ノープランで話し始めて口走ってしまった謎の言葉「イノシシンリー」に対して、自分で即座に反省して無視を求める展開が面白い。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 5128111,\n          \"sourceEndMs\": 5158994,\n          \"supportingSpeechIds\": [\n            \"766-769\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_003\",\n      \"title\": \"くだらないことで笑われて気まずくなるマリン\",\n      \"reason\": \"「ぴょんぴょんマンゴー」という何気ないフレーズで大笑いされ、おもろくないことで笑われるのが気まずいと吐露するやり取りに妙味がある。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 5162499,\n          \"sourceEndMs\": 5189318,\n          \"supportingSpeechIds\": [\n            \"770\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

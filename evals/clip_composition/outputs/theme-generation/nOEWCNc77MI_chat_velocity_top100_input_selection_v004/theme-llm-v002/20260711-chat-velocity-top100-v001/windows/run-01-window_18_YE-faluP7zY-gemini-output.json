@@ -1,0 +1,65 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "食レポで「アムアム」と連呼する宝鐘マリン",
+      "reason": "お味を聞かれた宝鐘マリンが独特な表現で「アムアム」と執拗に連呼し続けるシュールな見どころシーン。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 4263026,
+          "sourceEndMs": 4289544,
+          "supportingSpeechIds": [
+            628,
+            629
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "サザエさん（磯野家）のテーマだと気づく二人",
+      "reason": "カツオなどの釣れる魚や海という環境から、このゲームのテーマがサザエさん（磯野家）なのではないかと盛り上がる場面。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 4802562,
+          "sourceEndMs": 4831414,
+          "supportingSpeechIds": [
+            "717-720"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_003",
+      "title": "建築の仕様を急に思い出すころねとマリン",
+      "reason": "建築が上手くいかない理由をリスナーに問いかけつつ、土台ではなく木製フロアが必要だったことを思い出して解決する一連の流れ。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 4516312,
+          "sourceEndMs": 4548779,
+          "supportingSpeechIds": [
+            "668-676"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-11T23:41:50+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_18_YE-faluP7zY",
+    "windowSourceVideoId": "YE-faluP7zY",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nOEWCNc77MI_chat_velocity_top100_input_selection_v004/theme-llm-v002/20260711-chat-velocity-top100-v001/windows/window_18_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/3809ca9abe53f63e?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"食レポで「アムアム」と連呼する宝鐘マリン\",\n      \"reason\": \"お味を聞かれた宝鐘マリンが独特な表現で「アムアム」と執拗に連呼し続けるシュールな見どころシーン。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 4263026,\n          \"sourceEndMs\": 4289544,\n          \"supportingSpeechIds\": [\n            628,\n            629\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"サザエさん（磯野家）のテーマだと気づく二人\",\n      \"reason\": \"カツオなどの釣れる魚や海という環境から、このゲームのテーマがサザエさん（磯野家）なのではないかと盛り上がる場面。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 4802562,\n          \"sourceEndMs\": 4831414,\n          \"supportingSpeechIds\": [\n            \"717-720\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_003\",\n      \"title\": \"建築の仕様を急に思い出すころねとマリン\",\n      \"reason\": \"建築が上手くいかない理由をリスナーに問いかけつつ、土台ではなく木製フロアが必要だったことを思い出して解決する一連の流れ。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 4516312,\n          \"sourceEndMs\": 4548779,\n          \"supportingSpeechIds\": [\n            \"668-676\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

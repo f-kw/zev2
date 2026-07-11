@@ -1,0 +1,64 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "マリンところねの「いないいないばぁ」",
+      "reason": "ゲームのギミックや隠れる動作を使いながら「いないいないばぁ」で遊ぶ二人のコミカルな掛け合いが成立しているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 10563042,
+          "sourceEndMs": 10619692,
+          "supportingSpeechIds": [
+            "1568-1577"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "生魚を食べてしまう宝鐘マリン",
+      "reason": "「取っていいよ」と言われた魚を焼かずに生で食べてしまい、呆れられるリアクションが面白い場面であるため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 10696829,
+          "sourceEndMs": 10738182,
+          "supportingSpeechIds": [
+            "1590-1593"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_003",
+      "title": "マリンのデザインセンスを絶賛するころね",
+      "reason": "建築物のデザインに対してころねが「デザイナーの才能ある」と褒めちぎり、カウボーイの村みたいだと盛り上がる展開があるため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 10740498,
+          "sourceEndMs": 10795851,
+          "supportingSpeechIds": [
+            "1594-1602"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-12T24:13:13+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_33_YE-faluP7zY",
+    "windowSourceVideoId": "YE-faluP7zY",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nOEWCNc77MI_chat_velocity_top100_input_selection_v004/theme-llm-v002/20260711-chat-velocity-top100-v001/windows/window_33_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/a8405d75c06ea402?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"マリンところねの「いないいないばぁ」\",\n      \"reason\": \"ゲームのギミックや隠れる動作を使いながら「いないいないばぁ」で遊ぶ二人のコミカルな掛け合いが成立しているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 10563042,\n          \"sourceEndMs\": 10619692,\n          \"supportingSpeechIds\": [\n            \"1568-1577\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"生魚を食べてしまう宝鐘マリン\",\n      \"reason\": \"「取っていいよ」と言われた魚を焼かずに生で食べてしまい、呆れられるリアクションが面白い場面であるため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 10696829,\n          \"sourceEndMs\": 10738182,\n          \"supportingSpeechIds\": [\n            \"1590-1593\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_003\",\n      \"title\": \"マリンのデザインセンスを絶賛するころね\",\n      \"reason\": \"建築物のデザインに対してころねが「デザイナーの才能ある」と褒めちぎり、カウボーイの村みたいだと盛り上がる展開があるため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 10740498,\n          \"sourceEndMs\": 10795851,\n          \"supportingSpeechIds\": [\n            \"1594-1602\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}
