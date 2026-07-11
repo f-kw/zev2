@@ -1,0 +1,2487 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <title>Material boundary check nOEWCNc77MI</title>
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif; margin: 24px; color: #111827; }
+    table { border-collapse: collapse; margin: 12px 0 20px; }
+    th, td { border: 1px solid #d1d5db; padding: 6px 9px; text-align: right; }
+    th:first-child, td:first-child { text-align: left; }
+    article { border-top: 1px solid #cbd5e1; padding-top: 20px; margin-top: 24px; }
+    .strip { margin: 18px 0; }
+    audio { display: block; width: 520px; max-width: 100%; margin: 6px 0 10px; }
+    video { display: block; width: 100%; background: #0f172a; }
+    .instructions { max-width: 980px; background: #f8fafc; border: 1px solid #cbd5e1; padding: 14px 16px; margin: 12px 0 18px; }
+    .instructions h2 { margin-top: 0; }
+    .instructions li { margin: 6px 0; }
+    .videos { display: grid; gap: 16px; align-items: start; }
+    .primary-videos { grid-template-columns: repeat(2, minmax(280px, 1fr)); margin-bottom: 18px; }
+    .support-videos { grid-template-columns: repeat(2, minmax(260px, 1fr)); }
+    .videos figure { margin: 0; }
+    .videos figcaption { font-size: 13px; line-height: 1.45; color: #374151; margin-top: 6px; }
+    .frames { display: grid; grid-template-columns: repeat(5, minmax(120px, 1fr)); gap: 10px; align-items: start; }
+    figure { margin: 0; }
+    img { width: 100%; border: 1px solid #d1d5db; background: #f9fafb; }
+    figcaption { font-size: 12px; color: #4b5563; line-height: 1.35; margin-top: 3px; }
+    @media (max-width: 900px) {
+      .primary-videos, .support-videos { grid-template-columns: 1fr; }
+      .frames { grid-template-columns: repeat(2, minmax(120px, 1fr)); }
+    }
+  :root { --ink: #172033; --muted: #5f6b7a; --line: #d8dee8; --blue: #2563eb; --blue-soft: #eff6ff; --ok: #166534; --ok-soft: #f0fdf4; --warn: #9a3412; --warn-soft: #fff7ed; --bad: #991b1b; --bad-soft: #fef2f2; }
+    body { max-width: 1240px; margin: 0 auto !important; padding: 28px 24px 80px; background: #f8fafc; color: var(--ink) !important; }
+    body > h1 { margin-top: 74px; }
+    article, .decision-final, .decision-meta { background: white; border: 1px solid var(--line); border-radius: 14px; padding: 22px; box-shadow: 0 6px 22px rgba(15, 23, 42, .06); }
+    article { border-top: 1px solid var(--line) !important; }
+    .decision-progress { position: fixed; z-index: 20; top: 0; left: 0; right: 0; display: flex; justify-content: center; gap: 22px; padding: 13px 20px; color: white; background: rgba(15, 23, 42, .96); backdrop-filter: blur(8px); font-weight: 700; }
+    .decision-meta { margin: 18px 0 24px; background: linear-gradient(135deg, #eff6ff, #fff); }
+    .decision-meta p { color: var(--muted); }
+    .decision-answer { margin: 18px 0; padding: 18px; border: 2px solid #bfdbfe; border-radius: 12px; background: var(--blue-soft); }
+    .decision-answer h3 { margin-top: 0; }
+    .decision-grid { display: grid; grid-template-columns: repeat(2, minmax(260px, 1fr)); gap: 14px 18px; }
+    .decision-grid label, .decision-answer > label, .decision-final label { display: grid; gap: 6px; color: #334155; font-weight: 650; }
+    .decision-grid .wide { grid-column: 1 / -1; }
+    select, input, textarea { box-sizing: border-box; width: 100%; padding: 9px 11px; border: 1px solid #aeb8c6; border-radius: 8px; background: white; color: #172033; font: inherit; }
+    textarea { min-height: 72px; resize: vertical; }
+    select:focus, input:focus, textarea:focus { outline: 3px solid rgba(37, 99, 235, .18); border-color: var(--blue); }
+    .answer-state { display: inline-block; margin-bottom: 0; padding: 5px 9px; border-radius: 999px; color: var(--warn); background: var(--warn-soft); font-weight: 700; }
+    .answer-state.confirmed { color: var(--ok); background: var(--ok-soft); }
+    .answer-state.rejected { color: var(--bad); background: var(--bad-soft); }
+    .decision-final { margin-top: 32px; }
+    .decision-actions { display: flex; flex-wrap: wrap; gap: 10px; margin: 16px 0; }
+    button { border: 0; border-radius: 9px; padding: 10px 15px; color: white; background: var(--blue); font: inherit; font-weight: 750; cursor: pointer; }
+    button.secondary, #clear-saved { color: #334155; background: #e2e8f0; }
+    button:hover { filter: brightness(.96); }
+    .block-table-wrap { overflow-x: auto; }
+    .block-decision-table { width: 100%; }
+    .block-decision-table textarea { min-width: 280px; min-height: 48px; }
+    .block-decision-table td { text-align: left; }
+    .final-fields { margin-top: 20px; }
+    .freeze-consent { display: flex !important; grid-template-columns: auto 1fr; align-items: start; margin: 20px 0; padding: 14px; border: 1px solid #f59e0b; background: #fffbeb; border-radius: 9px; }
+    .freeze-consent input { width: auto; margin-top: 3px; }
+    .validation-summary { margin: 15px 0; padding: 14px; border-radius: 9px; background: #f1f5f9; }
+    .validation-summary.ok { color: var(--ok); background: var(--ok-soft); }
+    .validation-summary.bad { color: var(--bad); background: var(--bad-soft); }
+    #review-summary { width: 100%; min-height: 260px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 13px; }
+    #decision-output { width: 100%; min-height: 420px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; }
+    .copy-status { min-height: 1.4em; color: var(--ok); font-weight: 700; }
+    details.optional-evidence { margin: 12px 0; padding: 10px 12px; border: 1px solid var(--line); border-radius: 8px; }
+    @media (max-width: 820px) { .decision-grid { grid-template-columns: 1fr; } .decision-grid .wide { grid-column: auto; } .decision-progress { justify-content: flex-start; overflow-x: auto; } }
+  </style>
+</head>
+<body>
+  <h1>素材境界確認 nOEWCNc77MI</h1>
+
+  <div class="decision-progress">
+    <span id="boundary-progress">境界 0/16</span>
+    <span id="block-progress">ブロック 0/17</span>
+    <span id="save-state">自動保存待ち</span>
+  </div>
+  <section class="decision-meta">
+    <h2>この画面で行うこと</h2>
+    <p>動画を見ながら境界1から順に4項目へ回答します。最後に17ブロックの採否と固定テーマを確認すると、凍結処理が直接読めるdecision JSONを出力します。</p>
+    <ul>
+      <li>回答はこのブラウザー内へ自動保存されます。</li>
+      <li>判定不能・不一致を選んでも構いません。理由を残し、凍結を止めるための選択肢です。</li>
+      <li>このHTML自身はfixture/expectedへ書き込みません。</li>
+      <li>JSON生成後も、実凍結前に書き込みなしのpost-human dry-runを行います。</li>
+    </ul>
+  </section>
+  <section class="instructions">
+    <h2>何を見るか</h2>
+    <ol>
+      <li><strong>clip連続再生</strong>を見る。切り抜き単体で、境界前から境界後まで実際の順番で見る。ここで切り替わりが起きているかを見る。</li>
+      <li><strong>source前後連続再生</strong>を見る。元動画の前側対応2秒、後側対応2秒を順番につないだ人工連結。前後が別位置に見えるかを見る。</li>
+      <li><strong>前側対応確認</strong>と<strong>後側対応確認</strong>は補助。左が切り抜き、右が元動画。対応が合っていそうかを見る。</li>
+      <li>静止画は補助。切り替わり判定は連続再生動画で判断する。</li>
+      <li>見ないこと: 同一素材内の細かい詰め、口元の完全同期、expectedCutsの最終開始・終了秒の確定。</li>
+    </ol>
+  </section>
+  <h2>ブロック表</h2>
+  <table>
+    <thead><tr><th>block</th><th>run</th><th>clip</th><th>source</th><th>対応語</th><th>内部詰め候補</th></tr></thead>
+    <tbody><tr><td>1</td><td>1</td><td>0:04.909-0:09.532</td><td>4:20.068-4:24.269</td><td>23</td><td>+0ms</td></tr>
+<tr><td>2</td><td>2</td><td>0:14.595-0:18.477</td><td>5:09.446-5:13.689</td><td>10</td><td>+0ms</td></tr>
+<tr><td>3</td><td>3, 4</td><td>0:18.477-0:24.321</td><td>5:25.479-5:30.720</td><td>35</td><td>+0ms</td></tr>
+<tr><td>4</td><td>5</td><td>0:37.539-0:40.120</td><td>17:32.987-17:35.347</td><td>19</td><td>+0ms</td></tr>
+<tr><td>5</td><td>6</td><td>0:44.701-0:49.962</td><td>20:54.601-20:58.062</td><td>20</td><td>+0ms</td></tr>
+<tr><td>6</td><td>7, 8, 9</td><td>0:59.564-1:13.795</td><td>46:30.074-46:46.680</td><td>52</td><td>+1760ms</td></tr>
+<tr><td>7</td><td>10, 11, 12</td><td>1:28.226-1:43.019</td><td>50:06.642-50:21.412</td><td>71</td><td>+160ms</td></tr>
+<tr><td>8</td><td>13, 14</td><td>1:44.380-1:53.446</td><td>53:00.410-53:10.215</td><td>36</td><td>+198ms</td></tr>
+<tr><td>9</td><td>15</td><td>2:18.480-2:21.901</td><td>54:45.387-54:48.829</td><td>17</td><td>+0ms</td></tr>
+<tr><td>10</td><td>16</td><td>3:03.024-3:13.011</td><td>57:55.241-58:05.035</td><td>55</td><td>+0ms</td></tr>
+<tr><td>11</td><td>17, 18, 19</td><td>3:50.898-4:19.188</td><td>66:38.452-67:06.707</td><td>99</td><td>+0ms</td></tr>
+<tr><td>12</td><td>20</td><td>4:25.210-4:33.665</td><td>68:22.099-68:29.864</td><td>43</td><td>+0ms</td></tr>
+<tr><td>13</td><td>21, 22</td><td>4:39.029-4:51.898</td><td>81:17.136-81:29.844</td><td>29</td><td>+0ms</td></tr>
+<tr><td>14</td><td>23, 24</td><td>5:16.355-5:22.480</td><td>86:23.974-86:29.318</td><td>42</td><td>+139ms</td></tr>
+<tr><td>15</td><td>25</td><td>5:38.724-5:40.845</td><td>86:57.231-86:58.992</td><td>13</td><td>+0ms</td></tr>
+<tr><td>16</td><td>26, 27, 28</td><td>5:58.151-6:13.786</td><td>173:59.052-174:10.741</td><td>31</td><td>+0ms</td></tr>
+<tr><td>17</td><td>29, 30, 31, 32, 33, 34</td><td>7:05.880-7:39.146</td><td>192:21.555-192:55.281</td><td>121</td><td>+0ms</td></tr></tbody>
+  </table>
+  <article>
+  <h2>境界1: block 1 -> 2</h2>
+
+  <section class="decision-answer" data-boundary-answer="1">
+    <h3>境界1の回答</h3>
+    <p>4項目を動画で確認してください。判定不能は無理に合格へ寄せず、そのまま選べます。</p>
+    <div class="decision-grid">
+      <label>切り抜き連続再生で素材が切り替わるか
+        <select data-boundary-field="clipSwitch">
+          <option value="">未回答</option>
+          <option value="true">切り替わる</option>
+          <option value="false">切り替わらない</option>
+          <option value="unresolved">判定不能</option>
+        </select>
+      </label>
+      <label>元配信の対応位置が切り替わるか
+        <select data-boundary-field="sourcePositionSwitches">
+          <option value="">未回答</option>
+          <option value="true">別位置へ切り替わる</option>
+          <option value="false">同じ位置に見える</option>
+          <option value="unresolved">判定不能</option>
+        </select>
+      </label>
+      <label>境界前は切り抜きと元配信で同じ素材か
+        <select data-boundary-field="beforeMatches">
+          <option value="">未回答</option>
+          <option value="true">同じ素材</option>
+          <option value="false">違う素材</option>
+          <option value="unresolved">判定不能</option>
+        </select>
+      </label>
+      <label>境界後は切り抜きと元配信で同じ素材か
+        <select data-boundary-field="afterMatches">
+          <option value="">未回答</option>
+          <option value="true">同じ素材</option>
+          <option value="false">違う素材</option>
+          <option value="unresolved">判定不能</option>
+        </select>
+      </label>
+    </div>
+    <label>境界メモ
+      <textarea data-boundary-field="note" placeholder="不一致・判定不能・crossfadeなど、後で判断根拠になることだけ記録"></textarea>
+    </label>
+    <p class="answer-state" data-boundary-state="1">未回答</p>
+  </section>
+  <table>
+    <tr><th>clip</th><td>0:09.532 -> 0:14.595</td><td>+5063ms</td></tr>
+    <tr><th>source</th><td>4:24.269 -> 5:09.446</td><td>+45177ms</td></tr>
+    <tr><th>素材飛び量</th><td colspan="2">+40114ms</td></tr>
+  </table>
+  <section class="watch">
+    <h3>最初に見る動画</h3>
+    <div class="videos primary-videos">
+      <figure>
+        <video controls src="videos/boundary_01_clip_context.mp4"></video>
+        <figcaption>clip連続再生。切り抜き単体で、境界前から境界後まで実際の順番で見る。</figcaption>
+      </figure>
+      <figure>
+        <video controls src="videos/boundary_01_source_sequence.mp4"></video>
+        <figcaption>source前後連続再生。元動画の前側対応2秒、後側対応2秒を順番につないだ人工連結。別位置に飛んでいるかを見る。</figcaption>
+      </figure>
+    </div>
+    <h3>対応確認の補助</h3>
+    <div class="videos support-videos">
+      <figure>
+        <video controls src="videos/boundary_01_before_match.mp4"></video>
+        <figcaption>前側対応確認。左が切り抜き、右が元動画。境界前の対応が合っているかを見る。</figcaption>
+      </figure>
+      <figure>
+        <video controls src="videos/boundary_01_after_match.mp4"></video>
+        <figcaption>後側対応確認。左が切り抜き、右が元動画。境界後の対応が合っているかを見る。</figcaption>
+      </figure>
+    </div>
+  </section>
+  <section class="strip">
+  <h3>clip前素材終端 0:09.532</h3>
+  <audio controls src="audio/boundary_01_clip_before_pm2s.wav"></audio>
+  <div class="frames"><figure><img src="stills/boundary_01/clip_before/clip_before_minus1000ms.jpg" alt="clip_before minus1000ms"><figcaption>clip前素材終端<br>minus1000ms<br>0:08.532</figcaption></figure>
+<figure><img src="stills/boundary_01/clip_before/clip_before_minus500ms.jpg" alt="clip_before minus500ms"><figcaption>clip前素材終端<br>minus500ms<br>0:09.032</figcaption></figure>
+<figure><img src="stills/boundary_01/clip_before/clip_before_exact.jpg" alt="clip_before exact"><figcaption>clip前素材終端<br>exact<br>0:09.532</figcaption></figure>
+<figure><img src="stills/boundary_01/clip_before/clip_before_plus500ms.jpg" alt="clip_before plus500ms"><figcaption>clip前素材終端<br>plus500ms<br>0:10.032</figcaption></figure>
+<figure><img src="stills/boundary_01/clip_before/clip_before_plus1000ms.jpg" alt="clip_before plus1000ms"><figcaption>clip前素材終端<br>plus1000ms<br>0:10.532</figcaption></figure></div>
+</section>
+<section class="strip">
+  <h3>clip後素材開始 0:14.595</h3>
+  <audio controls src="audio/boundary_01_clip_after_pm2s.wav"></audio>
+  <div class="frames"><figure><img src="stills/boundary_01/clip_after/clip_after_minus1000ms.jpg" alt="clip_after minus1000ms"><figcaption>clip後素材開始<br>minus1000ms<br>0:13.595</figcaption></figure>
+<figure><img src="stills/boundary_01/clip_after/clip_after_minus500ms.jpg" alt="clip_after minus500ms"><figcaption>clip後素材開始<br>minus500ms<br>0:14.095</figcaption></figure>
+<figure><img src="stills/boundary_01/clip_after/clip_after_exact.jpg" alt="clip_after exact"><figcaption>clip後素材開始<br>exact<br>0:14.595</figcaption></figure>
+<figure><img src="stills/boundary_01/clip_after/clip_after_plus500ms.jpg" alt="clip_after plus500ms"><figcaption>clip後素材開始<br>plus500ms<br>0:15.095</figcaption></figure>
+<figure><img src="stills/boundary_01/clip_after/clip_after_plus1000ms.jpg" alt="clip_after plus1000ms"><figcaption>clip後素材開始<br>plus1000ms<br>0:15.595</figcaption></figure></div>
+</section>
+<section class="strip">
+  <h3>source前素材終端 4:24.269</h3>
+  <audio controls src="audio/boundary_01_source_before_pm2s.wav"></audio>
+  <div class="frames"><figure><img src="stills/boundary_01/source_before/source_before_minus1000ms.jpg" alt="source_before minus1000ms"><figcaption>source前素材終端<br>minus1000ms<br>4:23.269</figcaption></figure>
+<figure><img src="stills/boundary_01/source_before/source_before_minus500ms.jpg" alt="source_before minus500ms"><figcaption>source前素材終端<br>minus500ms<br>4:23.769</figcaption></figure>
+<figure><img src="stills/boundary_01/source_before/source_before_exact.jpg" alt="source_before exact"><figcaption>source前素材終端<br>exact<br>4:24.269</figcaption></figure>
+<figure><img src="stills/boundary_01/source_before/source_before_plus500ms.jpg" alt="source_before plus500ms"><figcaption>source前素材終端<br>plus500ms<br>4:24.769</figcaption></figure>
+<figure><img src="stills/boundary_01/source_before/source_before_plus1000ms.jpg" alt="source_before plus1000ms"><figcaption>source前素材終端<br>plus1000ms<br>4:25.269</figcaption></figure></div>
+</section>
+<section class="strip">
+  <h3>source後素材開始 5:09.446</h3>
+  <audio controls src="audio/boundary_01_source_after_pm2s.wav"></audio>
+  <div class="frames"><figure><img src="stills/boundary_01/source_after/source_after_minus1000ms.jpg" alt="source_after minus1000ms"><figcaption>source後素材開始<br>minus1000ms<br>5:08.446</figcaption></figure>
+<figure><img src="stills/boundary_01/source_after/source_after_minus500ms.jpg" alt="source_after minus500ms"><figcaption>source後素材開始<br>minus500ms<br>5:08.946</figcaption></figure>
+<figure><img src="stills/boundary_01/source_after/source_after_exact.jpg" alt="source_after exact"><figcaption>source後素材開始<br>exact<br>5:09.446</figcaption></figure>
+<figure><img src="stills/boundary_01/source_after/source_after_plus500ms.jpg" alt="source_after plus500ms"><figcaption>source後素材開始<br>plus500ms<br>5:09.946</figcaption></figure>
+<figure><img src="stills/boundary_01/source_after/source_after_plus1000ms.jpg" alt="source_after plus1000ms"><figcaption>source後素材開始<br>plus1000ms<br>5:10.446</figcaption></figure></div>
+</section>
+</article>
+<article>
+  <h2>境界2: block 2 -> 3</h2>
+
+  <section class="decision-answer" data-boundary-answer="2">
+    <h3>境界2の回答</h3>
+    <p>4項目を動画で確認してください。判定不能は無理に合格へ寄せず、そのまま選べます。</p>
+    <div class="decision-grid">
+      <label>切り抜き連続再生で素材が切り替わるか
+        <select data-boundary-field="clipSwitch">
+          <option value="">未回答</option>
+          <option value="true">切り替わる</option>
+          <option value="false">切り替わらない</option>
+          <option value="unresolved">判定不能</option>
+        </select>
+      </label>
+      <label>元配信の対応位置が切り替わるか
+        <select data-boundary-field="sourcePositionSwitches">
+          <option value="">未回答</option>
+          <option value="true">別位置へ切り替わる</option>
+          <option value="false">同じ位置に見える</option>
+          <option value="unresolved">判定不能</option>
+        </select>
+      </label>
+      <label>境界前は切り抜きと元配信で同じ素材か
+        <select data-boundary-field="beforeMatches">
+          <option value="">未回答</option>
+          <option value="true">同じ素材</option>
+          <option value="false">違う素材</option>
+          <option value="unresolved">判定不能</option>
+        </select>
+      </label>
+      <label>境界後は切り抜きと元配信で同じ素材か
+        <select data-boundary-field="afterMatches">
+          <option value="">未回答</option>
+          <option value="true">同じ素材</option>
+          <option value="false">違う素材</option>
+          <option value="unresolved">判定不能</option>
+        </select>
+      </label>
+    </div>
+    <label>境界メモ
+      <textarea data-boundary-field="note" placeholder="不一致・判定不能・crossfadeなど、後で判断根拠になることだけ記録"></textarea>
+    </label>
+    <p class="answer-state" data-boundary-state="2">未回答</p>
+  </section>
+  <table>
+    <tr><th>clip</th><td>0:18.477 -> 0:18.477</td><td>+0ms</td></tr>
+    <tr><th>source</th><td>5:13.689 -> 5:25.479</td><td>+11790ms</td></tr>
+    <tr><th>素材飛び量</th><td colspan="2">+11790ms</td></tr>
+  </table>
+  <section class="watch">
+    <h3>最初に見る動画</h3>
+    <div class="videos primary-videos">
+      <figure>
+        <video controls src="videos/boundary_02_clip_context.mp4"></video>
+        <figcaption>clip連続再生。切り抜き単体で、境界前から境界後まで実際の順番で見る。</figcaption>
+      </figure>
+      <figure>
+        <video controls src="videos/boundary_02_source_sequence.mp4"></video>
+        <figcaption>source前後連続再生。元動画の前側対応2秒、後側対応2秒を順番につないだ人工連結。別位置に飛んでいるかを見る。</figcaption>
+      </figure>
+    </div>
+    <h3>対応確認の補助</h3>
+    <div class="videos support-videos">
+      <figure>
+        <video controls src="videos/boundary_02_before_match.mp4"></video>
+        <figcaption>前側対応確認。左が切り抜き、右が元動画。境界前の対応が合っているかを見る。</figcaption>
+      </figure>
+      <figure>
+        <video controls src="videos/boundary_02_after_match.mp4"></video>
+        <figcaption>後側対応確認。左が切り抜き、右が元動画。境界後の対応が合っているかを見る。</figcaption>
+      </figure>
+    </div>
+  </section>
+  <section class="strip">
+  <h3>clip前素材終端 0:18.477</h3>
+  <audio controls src="audio/boundary_02_clip_before_pm2s.wav"></audio>
+  <div class="frames"><figure><img src="stills/boundary_02/clip_before/clip_before_minus1000ms.jpg" alt="clip_before minus1000ms"><figcaption>clip前素材終端<br>minus1000ms<br>0:17.477</figcaption></figure>
+<figure><img src="stills/boundary_02/clip_before/clip_before_minus500ms.jpg" alt="clip_before minus500ms"><figcaption>clip前素材終端<br>minus500ms<br>0:17.977</figcaption></figure>
+<figure><img src="stills/boundary_02/clip_before/clip_before_exact.jpg" alt="clip_before exact"><figcaption>clip前素材終端<br>exact<br>0:18.477</figcaption></figure>
+<figure><img src="stills/boundary_02/clip_before/clip_before_plus500ms.jpg" alt="clip_before plus500ms"><figcaption>clip前素材終端<br>plus500ms<br>0:18.977</figcaption></figure>
+<figure><img src="stills/boundary_02/clip_before/clip_before_plus1000ms.jpg" alt="clip_before plus1000ms"><figcaption>clip前素材終端<br>plus1000ms<br>0:19.477</figcaption></figure></div>
+</section>
+<section class="strip">
+  <h3>clip後素材開始 0:18.477</h3>
+  <audio controls src="audio/boundary_02_clip_after_pm2s.wav"></audio>
+  <div class="frames"><figure><img src="stills/boundary_02/clip_after/clip_after_minus1000ms.jpg" alt="clip_after minus1000ms"><figcaption>clip後素材開始<br>minus1000ms<br>0:17.477</figcaption></figure>
+<figure><img src="stills/boundary_02/clip_after/clip_after_minus500ms.jpg" alt="clip_after minus500ms"><figcaption>clip後素材開始<br>minus500ms<br>0:17.977</figcaption></figure>
+<figure><img src="stills/boundary_02/clip_after/clip_after_exact.jpg" alt="clip_after exact"><figcaption>clip後素材開始<br>exact<br>0:18.477</figcaption></figure>
+<figure><img src="stills/boundary_02/clip_after/clip_after_plus500ms.jpg" alt="clip_after plus500ms"><figcaption>clip後素材開始<br>plus500ms<br>0:18.977</figcaption></figure>
+<figure><img src="stills/boundary_02/clip_after/clip_after_plus1000ms.jpg" alt="clip_after plus1000ms"><figcaption>clip後素材開始<br>plus1000ms<br>0:19.477</figcaption></figure></div>
+</section>
+<section class="strip">
+  <h3>source前素材終端 5:13.689</h3>
+  <audio controls src="audio/boundary_02_source_before_pm2s.wav"></audio>
+  <div class="frames"><figure><img src="stills/boundary_02/source_before/source_before_minus1000ms.jpg" alt="source_before minus1000ms"><figcaption>source前素材終端<br>minus1000ms<br>5:12.689</figcaption></figure>
+<figure><img src="stills/boundary_02/source_before/source_before_minus500ms.jpg" alt="source_before minus500ms"><figcaption>source前素材終端<br>minus500ms<br>5:13.189</figcaption></figure>
+<figure><img src="stills/boundary_02/source_before/source_before_exact.jpg" alt="source_before exact"><figcaption>source前素材終端<br>exact<br>5:13.689</figcaption></figure>
+<figure><img src="stills/boundary_02/source_before/source_before_plus500ms.jpg" alt="source_before plus500ms"><figcaption>source前素材終端<br>plus500ms<br>5:14.189</figcaption></figure>
+<figure><img src="stills/boundary_02/source_before/source_before_plus1000ms.jpg" alt="source_before plus1000ms"><figcaption>source前素材終端<br>plus1000ms<br>5:14.689</figcaption></figure></div>
+</section>
+<section class="strip">
+  <h3>source後素材開始 5:25.479</h3>
+  <audio controls src="audio/boundary_02_source_after_pm2s.wav"></audio>
+  <div class="frames"><figure><img src="stills/boundary_02/source_after/source_after_minus1000ms.jpg" alt="source_after minus1000ms"><figcaption>source後素材開始<br>minus1000ms<br>5:24.479</figcaption></figure>
+<figure><img src="stills/boundary_02/source_after/source_after_minus500ms.jpg" alt="source_after minus500ms"><figcaption>source後素材開始<br>minus500ms<br>5:24.979</figcaption></figure>
+<figure><img src="stills/boundary_02/source_after/source_after_exact.jpg" alt="source_after exact"><figcaption>source後素材開始<br>exact<br>5:25.479</figcaption></figure>
+<figure><img src="stills/boundary_02/source_after/source_after_plus500ms.jpg" alt="source_after plus500ms"><figcaption>source後素材開始<br>plus500ms<br>5:25.979</figcaption></figure>
+<figure><img src="stills/boundary_02/source_after/source_after_plus1000ms.jpg" alt="source_after plus1000ms"><figcaption>source後素材開始<br>plus1000ms<br>5:26.479</figcaption></figure></div>
+</section>
+</article>
+<article>
+  <h2>境界3: block 3 -> 4</h2>
+
+  <section class="decision-answer" data-boundary-answer="3">
+    <h3>境界3の回答</h3>
+    <p>4項目を動画で確認してください。判定不能は無理に合格へ寄せず、そのまま選べます。</p>
+    <div class="decision-grid">
+      <label>切り抜き連続再生で素材が切り替わるか
+        <select data-boundary-field="clipSwitch">
+          <option value="">未回答</option>
+          <option value="true">切り替わる</option>
+          <option value="false">切り替わらない</option>
+          <option value="unresolved">判定不能</option>
+        </select>
+      </label>
+      <label>元配信の対応位置が切り替わるか
+        <select data-boundary-field="sourcePositionSwitches">
+          <option value="">未回答</option>
+          <option value="true">別位置へ切り替わる</option>
+          <option value="false">同じ位置に見える</option>
+          <option value="unresolved">判定不能</option>
+        </select>
+      </label>
+      <label>境界前は切り抜きと元配信で同じ素材か
+        <select data-boundary-field="beforeMatches">
+          <option value="">未回答</option>
+          <option value="true">同じ素材</option>
+          <option value="false">違う素材</option>
+          <option value="unresolved">判定不能</option>
+        </select>
+      </label>
+      <label>境界後は切り抜きと元配信で同じ素材か
+        <select data-boundary-field="afterMatches">
+          <option value="">未回答</option>
+          <option value="true">同じ素材</option>
+          <option value="false">違う素材</option>
+          <option value="unresolved">判定不能</option>
+        </select>
+      </label>
+    </div>
+    <label>境界メモ
+      <textarea data-boundary-field="note" placeholder="不一致・判定不能・crossfadeなど、後で判断根拠になることだけ記録"></textarea>
+    </label>
+    <p class="answer-state" data-boundary-state="3">未回答</p>
+  </section>
+  <table>
+    <tr><th>clip</th><td>0:24.321 -> 0:37.539</td><td>+13218ms</td></tr>
+    <tr><th>source</th><td>5:30.720 -> 17:32.987</td><td>+722267ms</td></tr>
+    <tr><th>素材飛び量</th><td colspan="2">+709049ms</td></tr>
+  </table>
+  <section class="watch">
+    <h3>最初に見る動画</h3>
+    <div class="videos primary-videos">
+      <figure>
+        <video controls src="videos/boundary_03_clip_context.mp4"></video>
+        <figcaption>clip連続再生。切り抜き単体で、境界前から境界後まで実際の順番で見る。</figcaption>
+      </figure>
+      <figure>
+        <video controls src="videos/boundary_03_source_sequence.mp4"></video>
+        <figcaption>source前後連続再生。元動画の前側対応2秒、後側対応2秒を順番につないだ人工連結。別位置に飛んでいるかを見る。</figcaption>
+      </figure>
+    </div>
+    <h3>対応確認の補助</h3>
+    <div class="videos support-videos">
+      <figure>
+        <video controls src="videos/boundary_03_before_match.mp4"></video>
+        <figcaption>前側対応確認。左が切り抜き、右が元動画。境界前の対応が合っているかを見る。</figcaption>
+      </figure>
+      <figure>
+        <video controls src="videos/boundary_03_after_match.mp4"></video>
+        <figcaption>後側対応確認。左が切り抜き、右が元動画。境界後の対応が合っているかを見る。</figcaption>
+      </figure>
+    </div>
+  </section>
+  <section class="strip">
+  <h3>clip前素材終端 0:24.321</h3>
+  <audio controls src="audio/boundary_03_clip_before_pm2s.wav"></audio>
+  <div class="frames"><figure><img src="stills/boundary_03/clip_before/clip_before_minus1000ms.jpg" alt="clip_before minus1000ms"><figcaption>clip前素材終端<br>minus1000ms<br>0:23.321</figcaption></figure>
+<figure><img src="stills/boundary_03/clip_before/clip_before_minus500ms.jpg" alt="clip_before minus500ms"><figcaption>clip前素材終端<br>minus500ms<br>0:23.821</figcaption></figure>
+<figure><img src="stills/boundary_03/clip_before/clip_before_exact.jpg" alt="clip_before exact"><figcaption>clip前素材終端<br>exact<br>0:24.321</figcaption></figure>
+<figure><img src="stills/boundary_03/clip_before/clip_before_plus500ms.jpg" alt="clip_before plus500ms"><figcaption>clip前素材終端<br>plus500ms<br>0:24.821</figcaption></figure>
+<figure><img src="stills/boundary_03/clip_before/clip_before_plus1000ms.jpg" alt="clip_before plus1000ms"><figcaption>clip前素材終端<br>plus1000ms<br>0:25.321</figcaption></figure></div>
+</section>
+<section class="strip">
+  <h3>clip後素材開始 0:37.539</h3>
+  <audio controls src="audio/boundary_03_clip_after_pm2s.wav"></audio>
+  <div class="frames"><figure><img src="stills/boundary_03/clip_after/clip_after_minus1000ms.jpg" alt="clip_after minus1000ms"><figcaption>clip後素材開始<br>minus1000ms<br>0:36.539</figcaption></figure>
+<figure><img src="stills/boundary_03/clip_after/clip_after_minus500ms.jpg" alt="clip_after minus500ms"><figcaption>clip後素材開始<br>minus500ms<br>0:37.039</figcaption></figure>
+<figure><img src="stills/boundary_03/clip_after/clip_after_exact.jpg" alt="clip_after exact"><figcaption>clip後素材開始<br>exact<br>0:37.539</figcaption></figure>
+<figure><img src="stills/boundary_03/clip_after/clip_after_plus500ms.jpg" alt="clip_after plus500ms"><figcaption>clip後素材開始<br>plus500ms<br>0:38.039</figcaption></figure>
+<figure><img src="stills/boundary_03/clip_after/clip_after_plus1000ms.jpg" alt="clip_after plus1000ms"><figcaption>clip後素材開始<br>plus1000ms<br>0:38.539</figcaption></figure></div>
+</section>
+<section class="strip">
+  <h3>source前素材終端 5:30.720</h3>
+  <audio controls src="audio/boundary_03_source_before_pm2s.wav"></audio>
+  <div class="frames"><figure><img src="stills/boundary_03/source_before/source_before_minus1000ms.jpg" alt="source_before minus1000ms"><figcaption>source前素材終端<br>minus1000ms<br>5:29.720</figcaption></figure>
+<figure><img src="stills/boundary_03/source_before/source_before_minus500ms.jpg" alt="source_before minus500ms"><figcaption>source前素材終端<br>minus500ms<br>5:30.220</figcaption></figure>
+<figure><img src="stills/boundary_03/source_before/source_before_exact.jpg" alt="source_before exact"><figcaption>source前素材終端<br>exact<br>5:30.720</figcaption></figure>
+<figure><img src="stills/boundary_03/source_before/source_before_plus500ms.jpg" alt="source_before plus500ms"><figcaption>source前素材終端<br>plus500ms<br>5:31.220</figcaption></figure>
+<figure><img src="stills/boundary_03/source_before/source_before_plus1000ms.jpg" alt="source_before plus1000ms"><figcaption>source前素材終端<br>plus1000ms<br>5:31.720</figcaption></figure></div>
+</section>
+<section class="strip">
+  <h3>source後素材開始 17:32.987</h3>
+  <audio controls src="audio/boundary_03_source_after_pm2s.wav"></audio>
+  <div class="frames"><figure><img src="stills/boundary_03/source_after/source_after_minus1000ms.jpg" alt="source_after minus1000ms"><figcaption>source後素材開始<br>minus1000ms<br>17:31.987</figcaption></figure>
+<figure><img src="stills/boundary_03/source_after/source_after_minus500ms.jpg" alt="source_after minus500ms"><figcaption>source後素材開始<br>minus500ms<br>17:32.487</figcaption></figure>
+<figure><img src="stills/boundary_03/source_after/source_after_exact.jpg" alt="source_after exact"><figcaption>source後素材開始<br>exact<br>17:32.987</figcaption></figure>
+<figure><img src="stills/boundary_03/source_after/source_after_plus500ms.jpg" alt="source_after plus500ms"><figcaption>source後素材開始<br>plus500ms<br>17:33.487</figcaption></figure>
+<figure><img src="stills/boundary_03/source_after/source_after_plus1000ms.jpg" alt="source_after plus1000ms"><figcaption>source後素材開始<br>plus1000ms<br>17:33.987</figcaption></figure></div>
+</section>
+</article>
+<article>
+  <h2>境界4: block 4 -> 5</h2>
+
+  <section class="decision-answer" data-boundary-answer="4">
+    <h3>境界4の回答</h3>
+    <p>4項目を動画で確認してください。判定不能は無理に合格へ寄せず、そのまま選べます。</p>
+    <div class="decision-grid">
+      <label>切り抜き連続再生で素材が切り替わるか
+        <select data-boundary-field="clipSwitch">
+          <option value="">未回答</option>
+          <option value="true">切り替わる</option>
+          <option value="false">切り替わらない</option>
+          <option value="unresolved">判定不能</option>
+        </select>
+      </label>
+      <label>元配信の対応位置が切り替わるか
+        <select data-boundary-field="sourcePositionSwitches">
+          <option value="">未回答</option>
+          <option value="true">別位置へ切り替わる</option>
+          <option value="false">同じ位置に見える</option>
+          <option value="unresolved">判定不能</option>
+        </select>
+      </label>
+      <label>境界前は切り抜きと元配信で同じ素材か
+        <select data-boundary-field="beforeMatches">
+          <option value="">未回答</option>
+          <option value="true">同じ素材</option>
+          <option value="false">違う素材</option>
+          <option value="unresolved">判定不能</option>
+        </select>
+      </label>
+      <label>境界後は切り抜きと元配信で同じ素材か
+        <select data-boundary-field="afterMatches">
+          <option value="">未回答</option>
+          <option value="true">同じ素材</option>
+          <option value="false">違う素材</option>
+          <option value="unresolved">判定不能</option>
+        </select>
+      </label>
+    </div>
+    <label>境界メモ
+      <textarea data-boundary-field="note" placeholder="不一致・判定不能・crossfadeなど、後で判断根拠になることだけ記録"></textarea>
+    </label>
+    <p class="answer-state" data-boundary-state="4">未回答</p>
+  </section>
+  <table>
+    <tr><th>clip</th><td>0:40.120 -> 0:44.701</td><td>+4581ms</td></tr>
+    <tr><th>source</th><td>17:35.347 -> 20:54.601</td><td>+199254ms</td></tr>
+    <tr><th>素材飛び量</th><td colspan="2">+194673ms</td></tr>
+  </table>
+  <section class="watch">
+    <h3>最初に見る動画</h3>
+    <div class="videos primary-videos">
+      <figure>
+        <video controls src="videos/boundary_04_clip_context.mp4"></video>
+        <figcaption>clip連続再生。切り抜き単体で、境界前から境界後まで実際の順番で見る。</figcaption>
+      </figure>
+      <figure>
+        <video controls src="videos/boundary_04_source_sequence.mp4"></video>
+        <figcaption>source前後連続再生。元動画の前側対応2秒、後側対応2秒を順番につないだ人工連結。別位置に飛んでいるかを見る。</figcaption>
+      </figure>
+    </div>
+    <h3>対応確認の補助</h3>
+    <div class="videos support-videos">
+      <figure>
+        <video controls src="videos/boundary_04_before_match.mp4"></video>
+        <figcaption>前側対応確認。左が切り抜き、右が元動画。境界前の対応が合っているかを見る。</figcaption>
+      </figure>
+      <figure>
+        <video controls src="videos/boundary_04_after_match.mp4"></video>
+        <figcaption>後側対応確認。左が切り抜き、右が元動画。境界後の対応が合っているかを見る。</figcaption>
+      </figure>
+    </div>
+  </section>
+  <section class="strip">
+  <h3>clip前素材終端 0:40.120</h3>
+  <audio controls src="audio/boundary_04_clip_before_pm2s.wav"></audio>
+  <div class="frames"><figure><img src="stills/boundary_04/clip_before/clip_before_minus1000ms.jpg" alt="clip_before minus1000ms"><figcaption>clip前素材終端<br>minus1000ms<br>0:39.120</figcaption></figure>
+<figure><img src="stills/boundary_04/clip_before/clip_before_minus500ms.jpg" alt="clip_before minus500ms"><figcaption>clip前素材終端<br>minus500ms<br>0:39.620</figcaption></figure>
+<figure><img src="stills/boundary_04/clip_before/clip_before_exact.jpg" alt="clip_before exact"><figcaption>clip前素材終端<br>exact<br>0:40.120</figcaption></figure>
+<figure><img src="stills/boundary_04/clip_before/clip_before_plus500ms.jpg" alt="clip_before plus500ms"><figcaption>clip前素材終端<br>plus500ms<br>0:40.620</figcaption></figure>
+<figure><img src="stills/boundary_04/clip_before/clip_before_plus1000ms.jpg" alt="clip_before plus1000ms"><figcaption>clip前素材終端<br>plus1000ms<br>0:41.120</figcaption></figure></div>
+</section>
+<section class="strip">
+  <h3>clip後素材開始 0:44.701</h3>
+  <audio controls src="audio/boundary_04_clip_after_pm2s.wav"></audio>
+  <div class="frames"><figure><img src="stills/boundary_04/clip_after/clip_after_minus1000ms.jpg" alt="clip_after minus1000ms"><figcaption>clip後素材開始<br>minus1000ms<br>0:43.701</figcaption></figure>
+<figure><img src="stills/boundary_04/clip_after/clip_after_minus500ms.jpg" alt="clip_after minus500ms"><figcaption>clip後素材開始<br>minus500ms<br>0:44.201</figcaption></figure>
+<figure><img src="stills/boundary_04/clip_after/clip_after_exact.jpg" alt="clip_after exact"><figcaption>clip後素材開始<br>exact<br>0:44.701</figcaption></figure>
+<figure><img src="stills/boundary_04/clip_after/clip_after_plus500ms.jpg" alt="clip_after plus500ms"><figcaption>clip後素材開始<br>plus500ms<br>0:45.201</figcaption></figure>
+<figure><img src="stills/boundary_04/clip_after/clip_after_plus1000ms.jpg" alt="clip_after plus1000ms"><figcaption>clip後素材開始<br>plus1000ms<br>0:45.701</figcaption></figure></div>
+</section>
+<section class="strip">
+  <h3>source前素材終端 17:35.347</h3>
+  <audio controls src="audio/boundary_04_source_before_pm2s.wav"></audio>
+  <div class="frames"><figure><img src="stills/boundary_04/source_before/source_before_minus1000ms.jpg" alt="source_before minus1000ms"><figcaption>source前素材終端<br>minus1000ms<br>17:34.347</figcaption></figure>
+<figure><img src="stills/boundary_04/source_before/source_before_minus500ms.jpg" alt="source_before minus500ms"><figcaption>source前素材終端<br>minus500ms<br>17:34.847</figcaption></figure>
+<figure><img src="stills/boundary_04/source_before/source_before_exact.jpg" alt="source_before exact"><figcaption>source前素材終端<br>exact<br>17:35.347</figcaption></figure>
+<figure><img src="stills/boundary_04/source_before/source_before_plus500ms.jpg" alt="source_before plus500ms"><figcaption>source前素材終端<br>plus500ms<br>17:35.847</figcaption></figure>
+<figure><img src="stills/boundary_04/source_before/source_before_plus1000ms.jpg" alt="source_before plus1000ms"><figcaption>source前素材終端<br>plus1000ms<br>17:36.347</figcaption></figure></div>
+</section>
+<section class="strip">
+  <h3>source後素材開始 20:54.601</h3>
+  <audio controls src="audio/boundary_04_source_after_pm2s.wav"></audio>
+  <div class="frames"><figure><img src="stills/boundary_04/source_after/source_after_minus1000ms.jpg" alt="source_after minus1000ms"><figcaption>source後素材開始<br>minus1000ms<br>20:53.601</figcaption></figure>
+<figure><img src="stills/boundary_04/source_after/source_after_minus500ms.jpg" alt="source_after minus500ms"><figcaption>source後素材開始<br>minus500ms<br>20:54.101</figcaption></figure>
+<figure><img src="stills/boundary_04/source_after/source_after_exact.jpg" alt="source_after exact"><figcaption>source後素材開始<br>exact<br>20:54.601</figcaption></figure>
+<figure><img src="stills/boundary_04/source_after/source_after_plus500ms.jpg" alt="source_after plus500ms"><figcaption>source後素材開始<br>plus500ms<br>20:55.101</figcaption></figure>
+<figure><img src="stills/boundary_04/source_after/source_after_plus1000ms.jpg" alt="source_after plus1000ms"><figcaption>source後素材開始<br>plus1000ms<br>20:55.601</figcaption></figure></div>
+</section>
+</article>
+<article>
+  <h2>境界5: block 5 -> 6</h2>
+
+  <section class="decision-answer" data-boundary-answer="5">
+    <h3>境界5の回答</h3>
+    <p>4項目を動画で確認してください。判定不能は無理に合格へ寄せず、そのまま選べます。</p>
+    <div class="decision-grid">
+      <label>切り抜き連続再生で素材が切り替わるか
+        <select data-boundary-field="clipSwitch">
+          <option value="">未回答</option>
+          <option value="true">切り替わる</option>
+          <option value="false">切り替わらない</option>
+          <option value="unresolved">判定不能</option>
+        </select>
+      </label>
+      <label>元配信の対応位置が切り替わるか
+        <select data-boundary-field="sourcePositionSwitches">
+          <option value="">未回答</option>
+          <option value="true">別位置へ切り替わる</option>
+          <option value="false">同じ位置に見える</option>
+          <option value="unresolved">判定不能</option>
+        </select>
+      </label>
+      <label>境界前は切り抜きと元配信で同じ素材か
+        <select data-boundary-field="beforeMatches">
+          <option value="">未回答</option>
+          <option value="true">同じ素材</option>
+          <option value="false">違う素材</option>
+          <option value="unresolved">判定不能</option>
+        </select>
+      </label>
+      <label>境界後は切り抜きと元配信で同じ素材か
+        <select data-boundary-field="afterMatches">
+          <option value="">未回答</option>
+          <option value="true">同じ素材</option>
+          <option value="false">違う素材</option>
+          <option value="unresolved">判定不能</option>
+        </select>
+      </label>
+    </div>
+    <label>境界メモ
+      <textarea data-boundary-field="note" placeholder="不一致・判定不能・crossfadeなど、後で判断根拠になることだけ記録"></textarea>
+    </label>
+    <p class="answer-state" data-boundary-state="5">未回答</p>
+  </section>
+  <table>
+    <tr><th>clip</th><td>0:49.962 -> 0:59.564</td><td>+9602ms</td></tr>
+    <tr><th>source</th><td>20:58.062 -> 46:30.074</td><td>+1532012ms</td></tr>
+    <tr><th>素材飛び量</th><td colspan="2">+1522410ms</td></tr>
+  </table>
+  <section class="watch">
+    <h3>最初に見る動画</h3>
+    <div class="videos primary-videos">
+      <figure>
+        <video controls src="videos/boundary_05_clip_context.mp4"></video>
+        <figcaption>clip連続再生。切り抜き単体で、境界前から境界後まで実際の順番で見る。</figcaption>
+      </figure>
+      <figure>
+        <video controls src="videos/boundary_05_source_sequence.mp4"></video>
+        <figcaption>source前後連続再生。元動画の前側対応2秒、後側対応2秒を順番につないだ人工連結。別位置に飛んでいるかを見る。</figcaption>
+      </figure>
+    </div>
+    <h3>対応確認の補助</h3>
+    <div class="videos support-videos">
+      <figure>
+        <video controls src="videos/boundary_05_before_match.mp4"></video>
+        <figcaption>前側対応確認。左が切り抜き、右が元動画。境界前の対応が合っているかを見る。</figcaption>
+      </figure>
+      <figure>
+        <video controls src="videos/boundary_05_after_match.mp4"></video>
+        <figcaption>後側対応確認。左が切り抜き、右が元動画。境界後の対応が合っているかを見る。</figcaption>
+      </figure>
+    </div>
+  </section>
+  <section class="strip">
+  <h3>clip前素材終端 0:49.962</h3>
+  <audio controls src="audio/boundary_05_clip_before_pm2s.wav"></audio>
+  <div class="frames"><figure><img src="stills/boundary_05/clip_before/clip_before_minus1000ms.jpg" alt="clip_before minus1000ms"><figcaption>clip前素材終端<br>minus1000ms<br>0:48.962</figcaption></figure>
+<figure><img src="stills/boundary_05/clip_before/clip_before_minus500ms.jpg" alt="clip_before minus500ms"><figcaption>clip前素材終端<br>minus500ms<br>0:49.462</figcaption></figure>
+<figure><img src="stills/boundary_05/clip_before/clip_before_exact.jpg" alt="clip_before exact"><figcaption>clip前素材終端<br>exact<br>0:49.962</figcaption></figure>
+<figure><img src="stills/boundary_05/clip_before/clip_before_plus500ms.jpg" alt="clip_before plus500ms"><figcaption>clip前素材終端<br>plus500ms<br>0:50.462</figcaption></figure>
+<figure><img src="stills/boundary_05/clip_before/clip_before_plus1000ms.jpg" alt="clip_before plus1000ms"><figcaption>clip前素材終端<br>plus1000ms<br>0:50.962</figcaption></figure></div>
+</section>
+<section class="strip">
+  <h3>clip後素材開始 0:59.564</h3>
+  <audio controls src="audio/boundary_05_clip_after_pm2s.wav"></audio>
+  <div class="frames"><figure><img src="stills/boundary_05/clip_after/clip_after_minus1000ms.jpg" alt="clip_after minus1000ms"><figcaption>clip後素材開始<br>minus1000ms<br>0:58.564</figcaption></figure>
+<figure><img src="stills/boundary_05/clip_after/clip_after_minus500ms.jpg" alt="clip_after minus500ms"><figcaption>clip後素材開始<br>minus500ms<br>0:59.064</figcaption></figure>
+<figure><img src="stills/boundary_05/clip_after/clip_after_exact.jpg" alt="clip_after exact"><figcaption>clip後素材開始<br>exact<br>0:59.564</figcaption></figure>
+<figure><img src="stills/boundary_05/clip_after/clip_after_plus500ms.jpg" alt="clip_after plus500ms"><figcaption>clip後素材開始<br>plus500ms<br>1:00.064</figcaption></figure>
+<figure><img src="stills/boundary_05/clip_after/clip_after_plus1000ms.jpg" alt="clip_after plus1000ms"><figcaption>clip後素材開始<br>plus1000ms<br>1:00.564</figcaption></figure></div>
+</section>
+<section class="strip">
+  <h3>source前素材終端 20:58.062</h3>
+  <audio controls src="audio/boundary_05_source_before_pm2s.wav"></audio>
+  <div class="frames"><figure><img src="stills/boundary_05/source_before/source_before_minus1000ms.jpg" alt="source_before minus1000ms"><figcaption>source前素材終端<br>minus1000ms<br>20:57.062</figcaption></figure>
+<figure><img src="stills/boundary_05/source_before/source_before_minus500ms.jpg" alt="source_before minus500ms"><figcaption>source前素材終端<br>minus500ms<br>20:57.562</figcaption></figure>
+<figure><img src="stills/boundary_05/source_before/source_before_exact.jpg" alt="source_before exact"><figcaption>source前素材終端<br>exact<br>20:58.062</figcaption></figure>
+<figure><img src="stills/boundary_05/source_before/source_before_plus500ms.jpg" alt="source_before plus500ms"><figcaption>source前素材終端<br>plus500ms<br>20:58.562</figcaption></figure>
+<figure><img src="stills/boundary_05/source_before/source_before_plus1000ms.jpg" alt="source_before plus1000ms"><figcaption>source前素材終端<br>plus1000ms<br>20:59.062</figcaption></figure></div>
+</section>
+<section class="strip">
+  <h3>source後素材開始 46:30.074</h3>
+  <audio controls src="audio/boundary_05_source_after_pm2s.wav"></audio>
+  <div class="frames"><figure><img src="stills/boundary_05/source_after/source_after_minus1000ms.jpg" alt="source_after minus1000ms"><figcaption>source後素材開始<br>minus1000ms<br>46:29.074</figcaption></figure>
+<figure><img src="stills/boundary_05/source_after/source_after_minus500ms.jpg" alt="source_after minus500ms"><figcaption>source後素材開始<br>minus500ms<br>46:29.574</figcaption></figure>
+<figure><img src="stills/boundary_05/source_after/source_after_exact.jpg" alt="source_after exact"><figcaption>source後素材開始<br>exact<br>46:30.074</figcaption></figure>
+<figure><img src="stills/boundary_05/source_after/source_after_plus500ms.jpg" alt="source_after plus500ms"><figcaption>source後素材開始<br>plus500ms<br>46:30.574</figcaption></figure>
+<figure><img src="stills/boundary_05/source_after/source_after_plus1000ms.jpg" alt="source_after plus1000ms"><figcaption>source後素材開始<br>plus1000ms<br>46:31.074</figcaption></figure></div>
+</section>
+</article>
+<article>
+  <h2>境界6: block 6 -> 7</h2>
+
+  <section class="decision-answer" data-boundary-answer="6">
+    <h3>境界6の回答</h3>
+    <p>4項目を動画で確認してください。判定不能は無理に合格へ寄せず、そのまま選べます。</p>
+    <div class="decision-grid">
+      <label>切り抜き連続再生で素材が切り替わるか
+        <select data-boundary-field="clipSwitch">
+          <option value="">未回答</option>
+          <option value="true">切り替わる</option>
+          <option value="false">切り替わらない</option>
+          <option value="unresolved">判定不能</option>
+        </select>
+      </label>
+      <label>元配信の対応位置が切り替わるか
+        <select data-boundary-field="sourcePositionSwitches">
+          <option value="">未回答</option>
+          <option value="true">別位置へ切り替わる</option>
+          <option value="false">同じ位置に見える</option>
+          <option value="unresolved">判定不能</option>
+        </select>
+      </label>
+      <label>境界前は切り抜きと元配信で同じ素材か
+        <select data-boundary-field="beforeMatches">
+          <option value="">未回答</option>
+          <option value="true">同じ素材</option>
+          <option value="false">違う素材</option>
+          <option value="unresolved">判定不能</option>
+        </select>
+      </label>
+      <label>境界後は切り抜きと元配信で同じ素材か
+        <select data-boundary-field="afterMatches">
+          <option value="">未回答</option>
+          <option value="true">同じ素材</option>
+          <option value="false">違う素材</option>
+          <option value="unresolved">判定不能</option>
+        </select>
+      </label>
+    </div>
+    <label>境界メモ
+      <textarea data-boundary-field="note" placeholder="不一致・判定不能・crossfadeなど、後で判断根拠になることだけ記録"></textarea>
+    </label>
+    <p class="answer-state" data-boundary-state="6">未回答</p>
+  </section>
+  <table>
+    <tr><th>clip</th><td>1:13.795 -> 1:28.226</td><td>+14431ms</td></tr>
+    <tr><th>source</th><td>46:46.680 -> 50:06.642</td><td>+199962ms</td></tr>
+    <tr><th>素材飛び量</th><td colspan="2">+185531ms</td></tr>
+  </table>
+  <section class="watch">
+    <h3>最初に見る動画</h3>
+    <div class="videos primary-videos">
+      <figure>
+        <video controls src="videos/boundary_06_clip_context.mp4"></video>
+        <figcaption>clip連続再生。切り抜き単体で、境界前から境界後まで実際の順番で見る。</figcaption>
+      </figure>
+      <figure>
+        <video controls src="videos/boundary_06_source_sequence.mp4"></video>
+        <figcaption>source前後連続再生。元動画の前側対応2秒、後側対応2秒を順番につないだ人工連結。別位置に飛んでいるかを見る。</figcaption>
+      </figure>
+    </div>
+    <h3>対応確認の補助</h3>
+    <div class="videos support-videos">
+      <figure>
+        <video controls src="videos/boundary_06_before_match.mp4"></video>
+        <figcaption>前側対応確認。左が切り抜き、右が元動画。境界前の対応が合っているかを見る。</figcaption>
+      </figure>
+      <figure>
+        <video controls src="videos/boundary_06_after_match.mp4"></video>
+        <figcaption>後側対応確認。左が切り抜き、右が元動画。境界後の対応が合っているかを見る。</figcaption>
+      </figure>
+    </div>
+  </section>
+  <section class="strip">
+  <h3>clip前素材終端 1:13.795</h3>
+  <audio controls src="audio/boundary_06_clip_before_pm2s.wav"></audio>
+  <div class="frames"><figure><img src="stills/boundary_06/clip_before/clip_before_minus1000ms.jpg" alt="clip_before minus1000ms"><figcaption>clip前素材終端<br>minus1000ms<br>1:12.795</figcaption></figure>
+<figure><img src="stills/boundary_06/clip_before/clip_before_minus500ms.jpg" alt="clip_before minus500ms"><figcaption>clip前素材終端<br>minus500ms<br>1:13.295</figcaption></figure>
+<figure><img src="stills/boundary_06/clip_before/clip_before_exact.jpg" alt="clip_before exact"><figcaption>clip前素材終端<br>exact<br>1:13.795</figcaption></figure>
+<figure><img src="stills/boundary_06/clip_before/clip_before_plus500ms.jpg" alt="clip_before plus500ms"><figcaption>clip前素材終端<br>plus500ms<br>1:14.295</figcaption></figure>
+<figure><img src="stills/boundary_06/clip_before/clip_before_plus1000ms.jpg" alt="clip_before plus1000ms"><figcaption>clip前素材終端<br>plus1000ms<br>1:14.795</figcaption></figure></div>
+</section>
+<section class="strip">
+  <h3>clip後素材開始 1:28.226</h3>
+  <audio controls src="audio/boundary_06_clip_after_pm2s.wav"></audio>
+  <div class="frames"><figure><img src="stills/boundary_06/clip_after/clip_after_minus1000ms.jpg" alt="clip_after minus1000ms"><figcaption>clip後素材開始<br>minus1000ms<br>1:27.226</figcaption></figure>
+<figure><img src="stills/boundary_06/clip_after/clip_after_minus500ms.jpg" alt="clip_after minus500ms"><figcaption>clip後素材開始<br>minus500ms<br>1:27.726</figcaption></figure>
+<figure><img src="stills/boundary_06/clip_after/clip_after_exact.jpg" alt="clip_after exact"><figcaption>clip後素材開始<br>exact<br>1:28.226</figcaption></figure>
+<figure><img src="stills/boundary_06/clip_after/clip_after_plus500ms.jpg" alt="clip_after plus500ms"><figcaption>clip後素材開始<br>plus500ms<br>1:28.726</figcaption></figure>
+<figure><img src="stills/boundary_06/clip_after/clip_after_plus1000ms.jpg" alt="clip_after plus1000ms"><figcaption>clip後素材開始<br>plus1000ms<br>1:29.226</figcaption></figure></div>
+</section>
+<section class="strip">
+  <h3>source前素材終端 46:46.680</h3>
+  <audio controls src="audio/boundary_06_source_before_pm2s.wav"></audio>
+  <div class="frames"><figure><img src="stills/boundary_06/source_before/source_before_minus1000ms.jpg" alt="source_before minus1000ms"><figcaption>source前素材終端<br>minus1000ms<br>46:45.680</figcaption></figure>
+<figure><img src="stills/boundary_06/source_before/source_before_minus500ms.jpg" alt="source_before minus500ms"><figcaption>source前素材終端<br>minus500ms<br>46:46.180</figcaption></figure>
+<figure><img src="stills/boundary_06/source_before/source_before_exact.jpg" alt="source_before exact"><figcaption>source前素材終端<br>exact<br>46:46.680</figcaption></figure>
+<figure><img src="stills/boundary_06/source_before/source_before_plus500ms.jpg" alt="source_before plus500ms"><figcaption>source前素材終端<br>plus500ms<br>46:47.180</figcaption></figure>
+<figure><img src="stills/boundary_06/source_before/source_before_plus1000ms.jpg" alt="source_before plus1000ms"><figcaption>source前素材終端<br>plus1000ms<br>46:47.680</figcaption></figure></div>
+</section>
+<section class="strip">
+  <h3>source後素材開始 50:06.642</h3>
+  <audio controls src="audio/boundary_06_source_after_pm2s.wav"></audio>
+  <div class="frames"><figure><img src="stills/boundary_06/source_after/source_after_minus1000ms.jpg" alt="source_after minus1000ms"><figcaption>source後素材開始<br>minus1000ms<br>50:05.642</figcaption></figure>
+<figure><img src="stills/boundary_06/source_after/source_after_minus500ms.jpg" alt="source_after minus500ms"><figcaption>source後素材開始<br>minus500ms<br>50:06.142</figcaption></figure>
+<figure><img src="stills/boundary_06/source_after/source_after_exact.jpg" alt="source_after exact"><figcaption>source後素材開始<br>exact<br>50:06.642</figcaption></figure>
+<figure><img src="stills/boundary_06/source_after/source_after_plus500ms.jpg" alt="source_after plus500ms"><figcaption>source後素材開始<br>plus500ms<br>50:07.142</figcaption></figure>
+<figure><img src="stills/boundary_06/source_after/source_after_plus1000ms.jpg" alt="source_after plus1000ms"><figcaption>source後素材開始<br>plus1000ms<br>50:07.642</figcaption></figure></div>
+</section>
+</article>
+<article>
+  <h2>境界7: block 7 -> 8</h2>
+
+  <section class="decision-answer" data-boundary-answer="7">
+    <h3>境界7の回答</h3>
+    <p>4項目を動画で確認してください。判定不能は無理に合格へ寄せず、そのまま選べます。</p>
+    <div class="decision-grid">
+      <label>切り抜き連続再生で素材が切り替わるか
+        <select data-boundary-field="clipSwitch">
+          <option value="">未回答</option>
+          <option value="true">切り替わる</option>
+          <option value="false">切り替わらない</option>
+          <option value="unresolved">判定不能</option>
+        </select>
+      </label>
+      <label>元配信の対応位置が切り替わるか
+        <select data-boundary-field="sourcePositionSwitches">
+          <option value="">未回答</option>
+          <option value="true">別位置へ切り替わる</option>
+          <option value="false">同じ位置に見える</option>
+          <option value="unresolved">判定不能</option>
+        </select>
+      </label>
+      <label>境界前は切り抜きと元配信で同じ素材か
+        <select data-boundary-field="beforeMatches">
+          <option value="">未回答</option>
+          <option value="true">同じ素材</option>
+          <option value="false">違う素材</option>
+          <option value="unresolved">判定不能</option>
+        </select>
+      </label>
+      <label>境界後は切り抜きと元配信で同じ素材か
+        <select data-boundary-field="afterMatches">
+          <option value="">未回答</option>
+          <option value="true">同じ素材</option>
+          <option value="false">違う素材</option>
+          <option value="unresolved">判定不能</option>
+        </select>
+      </label>
+    </div>
+    <label>境界メモ
+      <textarea data-boundary-field="note" placeholder="不一致・判定不能・crossfadeなど、後で判断根拠になることだけ記録"></textarea>
+    </label>
+    <p class="answer-state" data-boundary-state="7">未回答</p>
+  </section>
+  <table>
+    <tr><th>clip</th><td>1:43.019 -> 1:44.380</td><td>+1361ms</td></tr>
+    <tr><th>source</th><td>50:21.412 -> 53:00.410</td><td>+158998ms</td></tr>
+    <tr><th>素材飛び量</th><td colspan="2">+157637ms</td></tr>
+  </table>
+  <section class="watch">
+    <h3>最初に見る動画</h3>
+    <div class="videos primary-videos">
+      <figure>
+        <video controls src="videos/boundary_07_clip_context.mp4"></video>
+        <figcaption>clip連続再生。切り抜き単体で、境界前から境界後まで実際の順番で見る。</figcaption>
+      </figure>
+      <figure>
+        <video controls src="videos/boundary_07_source_sequence.mp4"></video>
+        <figcaption>source前後連続再生。元動画の前側対応2秒、後側対応2秒を順番につないだ人工連結。別位置に飛んでいるかを見る。</figcaption>
+      </figure>
+    </div>
+    <h3>対応確認の補助</h3>
+    <div class="videos support-videos">
+      <figure>
+        <video controls src="videos/boundary_07_before_match.mp4"></video>
+        <figcaption>前側対応確認。左が切り抜き、右が元動画。境界前の対応が合っているかを見る。</figcaption>
+      </figure>
+      <figure>
+        <video controls src="videos/boundary_07_after_match.mp4"></video>
+        <figcaption>後側対応確認。左が切り抜き、右が元動画。境界後の対応が合っているかを見る。</figcaption>
+      </figure>
+    </div>
+  </section>
+  <section class="strip">
+  <h3>clip前素材終端 1:43.019</h3>
+  <audio controls src="audio/boundary_07_clip_before_pm2s.wav"></audio>
+  <div class="frames"><figure><img src="stills/boundary_07/clip_before/clip_before_minus1000ms.jpg" alt="clip_before minus1000ms"><figcaption>clip前素材終端<br>minus1000ms<br>1:42.019</figcaption></figure>
+<figure><img src="stills/boundary_07/clip_before/clip_before_minus500ms.jpg" alt="clip_before minus500ms"><figcaption>clip前素材終端<br>minus500ms<br>1:42.519</figcaption></figure>
+<figure><img src="stills/boundary_07/clip_before/clip_before_exact.jpg" alt="clip_before exact"><figcaption>clip前素材終端<br>exact<br>1:43.019</figcaption></figure>
+<figure><img src="stills/boundary_07/clip_before/clip_before_plus500ms.jpg" alt="clip_before plus500ms"><figcaption>clip前素材終端<br>plus500ms<br>1:43.519</figcaption></figure>
+<figure><img src="stills/boundary_07/clip_before/clip_before_plus1000ms.jpg" alt="clip_before plus1000ms"><figcaption>clip前素材終端<br>plus1000ms<br>1:44.019</figcaption></figure></div>
+</section>
+<section class="strip">
+  <h3>clip後素材開始 1:44.380</h3>
+  <audio controls src="audio/boundary_07_clip_after_pm2s.wav"></audio>
+  <div class="frames"><figure><img src="stills/boundary_07/clip_after/clip_after_minus1000ms.jpg" alt="clip_after minus1000ms"><figcaption>clip後素材開始<br>minus1000ms<br>1:43.380</figcaption></figure>
+<figure><img src="stills/boundary_07/clip_after/clip_after_minus500ms.jpg" alt="clip_after minus500ms"><figcaption>clip後素材開始<br>minus500ms<br>1:43.880</figcaption></figure>
+<figure><img src="stills/boundary_07/clip_after/clip_after_exact.jpg" alt="clip_after exact"><figcaption>clip後素材開始<br>exact<br>1:44.380</figcaption></figure>
+<figure><img src="stills/boundary_07/clip_after/clip_after_plus500ms.jpg" alt="clip_after plus500ms"><figcaption>clip後素材開始<br>plus500ms<br>1:44.880</figcaption></figure>
+<figure><img src="stills/boundary_07/clip_after/clip_after_plus1000ms.jpg" alt="clip_after plus1000ms"><figcaption>clip後素材開始<br>plus1000ms<br>1:45.380</figcaption></figure></div>
+</section>
+<section class="strip">
+  <h3>source前素材終端 50:21.412</h3>
+  <audio controls src="audio/boundary_07_source_before_pm2s.wav"></audio>
+  <div class="frames"><figure><img src="stills/boundary_07/source_before/source_before_minus1000ms.jpg" alt="source_before minus1000ms"><figcaption>source前素材終端<br>minus1000ms<br>50:20.412</figcaption></figure>
+<figure><img src="stills/boundary_07/source_before/source_before_minus500ms.jpg" alt="source_before minus500ms"><figcaption>source前素材終端<br>minus500ms<br>50:20.912</figcaption></figure>
+<figure><img src="stills/boundary_07/source_before/source_before_exact.jpg" alt="source_before exact"><figcaption>source前素材終端<br>exact<br>50:21.412</figcaption></figure>
+<figure><img src="stills/boundary_07/source_before/source_before_plus500ms.jpg" alt="source_before plus500ms"><figcaption>source前素材終端<br>plus500ms<br>50:21.912</figcaption></figure>
+<figure><img src="stills/boundary_07/source_before/source_before_plus1000ms.jpg" alt="source_before plus1000ms"><figcaption>source前素材終端<br>plus1000ms<br>50:22.412</figcaption></figure></div>
+</section>
+<section class="strip">
+  <h3>source後素材開始 53:00.410</h3>
+  <audio controls src="audio/boundary_07_source_after_pm2s.wav"></audio>
+  <div class="frames"><figure><img src="stills/boundary_07/source_after/source_after_minus1000ms.jpg" alt="source_after minus1000ms"><figcaption>source後素材開始<br>minus1000ms<br>52:59.410</figcaption></figure>
+<figure><img src="stills/boundary_07/source_after/source_after_minus500ms.jpg" alt="source_after minus500ms"><figcaption>source後素材開始<br>minus500ms<br>52:59.910</figcaption></figure>
+<figure><img src="stills/boundary_07/source_after/source_after_exact.jpg" alt="source_after exact"><figcaption>source後素材開始<br>exact<br>53:00.410</figcaption></figure>
+<figure><img src="stills/boundary_07/source_after/source_after_plus500ms.jpg" alt="source_after plus500ms"><figcaption>source後素材開始<br>plus500ms<br>53:00.910</figcaption></figure>
+<figure><img src="stills/boundary_07/source_after/source_after_plus1000ms.jpg" alt="source_after plus1000ms"><figcaption>source後素材開始<br>plus1000ms<br>53:01.410</figcaption></figure></div>
+</section>
+</article>
+<article>
+  <h2>境界8: block 8 -> 9</h2>
+
+  <section class="decision-answer" data-boundary-answer="8">
+    <h3>境界8の回答</h3>
+    <p>4項目を動画で確認してください。判定不能は無理に合格へ寄せず、そのまま選べます。</p>
+    <div class="decision-grid">
+      <label>切り抜き連続再生で素材が切り替わるか
+        <select data-boundary-field="clipSwitch">
+          <option value="">未回答</option>
+          <option value="true">切り替わる</option>
+          <option value="false">切り替わらない</option>
+          <option value="unresolved">判定不能</option>
+        </select>
+      </label>
+      <label>元配信の対応位置が切り替わるか
+        <select data-boundary-field="sourcePositionSwitches">
+          <option value="">未回答</option>
+          <option value="true">別位置へ切り替わる</option>
+          <option value="false">同じ位置に見える</option>
+          <option value="unresolved">判定不能</option>
+        </select>
+      </label>
+      <label>境界前は切り抜きと元配信で同じ素材か
+        <select data-boundary-field="beforeMatches">
+          <option value="">未回答</option>
+          <option value="true">同じ素材</option>
+          <option value="false">違う素材</option>
+          <option value="unresolved">判定不能</option>
+        </select>
+      </label>
+      <label>境界後は切り抜きと元配信で同じ素材か
+        <select data-boundary-field="afterMatches">
+          <option value="">未回答</option>
+          <option value="true">同じ素材</option>
+          <option value="false">違う素材</option>
+          <option value="unresolved">判定不能</option>
+        </select>
+      </label>
+    </div>
+    <label>境界メモ
+      <textarea data-boundary-field="note" placeholder="不一致・判定不能・crossfadeなど、後で判断根拠になることだけ記録"></textarea>
+    </label>
+    <p class="answer-state" data-boundary-state="8">未回答</p>
+  </section>
+  <table>
+    <tr><th>clip</th><td>1:53.446 -> 2:18.480</td><td>+25034ms</td></tr>
+    <tr><th>source</th><td>53:10.215 -> 54:45.387</td><td>+95172ms</td></tr>
+    <tr><th>素材飛び量</th><td colspan="2">+70138ms</td></tr>
+  </table>
+  <section class="watch">
+    <h3>最初に見る動画</h3>
+    <div class="videos primary-videos">
+      <figure>
+        <video controls src="videos/boundary_08_clip_context.mp4"></video>
+        <figcaption>clip連続再生。切り抜き単体で、境界前から境界後まで実際の順番で見る。</figcaption>
+      </figure>
+      <figure>
+        <video controls src="videos/boundary_08_source_sequence.mp4"></video>
+        <figcaption>source前後連続再生。元動画の前側対応2秒、後側対応2秒を順番につないだ人工連結。別位置に飛んでいるかを見る。</figcaption>
+      </figure>
+    </div>
+    <h3>対応確認の補助</h3>
+    <div class="videos support-videos">
+      <figure>
+        <video controls src="videos/boundary_08_before_match.mp4"></video>
+        <figcaption>前側対応確認。左が切り抜き、右が元動画。境界前の対応が合っているかを見る。</figcaption>
+      </figure>
+      <figure>
+        <video controls src="videos/boundary_08_after_match.mp4"></video>
+        <figcaption>後側対応確認。左が切り抜き、右が元動画。境界後の対応が合っているかを見る。</figcaption>
+      </figure>
+    </div>
+  </section>
+  <section class="strip">
+  <h3>clip前素材終端 1:53.446</h3>
+  <audio controls src="audio/boundary_08_clip_before_pm2s.wav"></audio>
+  <div class="frames"><figure><img src="stills/boundary_08/clip_before/clip_before_minus1000ms.jpg" alt="clip_before minus1000ms"><figcaption>clip前素材終端<br>minus1000ms<br>1:52.446</figcaption></figure>
+<figure><img src="stills/boundary_08/clip_before/clip_before_minus500ms.jpg" alt="clip_before minus500ms"><figcaption>clip前素材終端<br>minus500ms<br>1:52.946</figcaption></figure>
+<figure><img src="stills/boundary_08/clip_before/clip_before_exact.jpg" alt="clip_before exact"><figcaption>clip前素材終端<br>exact<br>1:53.446</figcaption></figure>
+<figure><img src="stills/boundary_08/clip_before/clip_before_plus500ms.jpg" alt="clip_before plus500ms"><figcaption>clip前素材終端<br>plus500ms<br>1:53.946</figcaption></figure>
+<figure><img src="stills/boundary_08/clip_before/clip_before_plus1000ms.jpg" alt="clip_before plus1000ms"><figcaption>clip前素材終端<br>plus1000ms<br>1:54.446</figcaption></figure></div>
+</section>
+<section class="strip">
+  <h3>clip後素材開始 2:18.480</h3>
+  <audio controls src="audio/boundary_08_clip_after_pm2s.wav"></audio>
+  <div class="frames"><figure><img src="stills/boundary_08/clip_after/clip_after_minus1000ms.jpg" alt="clip_after minus1000ms"><figcaption>clip後素材開始<br>minus1000ms<br>2:17.480</figcaption></figure>
+<figure><img src="stills/boundary_08/clip_after/clip_after_minus500ms.jpg" alt="clip_after minus500ms"><figcaption>clip後素材開始<br>minus500ms<br>2:17.980</figcaption></figure>
+<figure><img src="stills/boundary_08/clip_after/clip_after_exact.jpg" alt="clip_after exact"><figcaption>clip後素材開始<br>exact<br>2:18.480</figcaption></figure>
+<figure><img src="stills/boundary_08/clip_after/clip_after_plus500ms.jpg" alt="clip_after plus500ms"><figcaption>clip後素材開始<br>plus500ms<br>2:18.980</figcaption></figure>
+<figure><img src="stills/boundary_08/clip_after/clip_after_plus1000ms.jpg" alt="clip_after plus1000ms"><figcaption>clip後素材開始<br>plus1000ms<br>2:19.480</figcaption></figure></div>
+</section>
+<section class="strip">
+  <h3>source前素材終端 53:10.215</h3>
+  <audio controls src="audio/boundary_08_source_before_pm2s.wav"></audio>
+  <div class="frames"><figure><img src="stills/boundary_08/source_before/source_before_minus1000ms.jpg" alt="source_before minus1000ms"><figcaption>source前素材終端<br>minus1000ms<br>53:09.215</figcaption></figure>
+<figure><img src="stills/boundary_08/source_before/source_before_minus500ms.jpg" alt="source_before minus500ms"><figcaption>source前素材終端<br>minus500ms<br>53:09.715</figcaption></figure>
+<figure><img src="stills/boundary_08/source_before/source_before_exact.jpg" alt="source_before exact"><figcaption>source前素材終端<br>exact<br>53:10.215</figcaption></figure>
+<figure><img src="stills/boundary_08/source_before/source_before_plus500ms.jpg" alt="source_before plus500ms"><figcaption>source前素材終端<br>plus500ms<br>53:10.715</figcaption></figure>
+<figure><img src="stills/boundary_08/source_before/source_before_plus1000ms.jpg" alt="source_before plus1000ms"><figcaption>source前素材終端<br>plus1000ms<br>53:11.215</figcaption></figure></div>
+</section>
+<section class="strip">
+  <h3>source後素材開始 54:45.387</h3>
+  <audio controls src="audio/boundary_08_source_after_pm2s.wav"></audio>
+  <div class="frames"><figure><img src="stills/boundary_08/source_after/source_after_minus1000ms.jpg" alt="source_after minus1000ms"><figcaption>source後素材開始<br>minus1000ms<br>54:44.387</figcaption></figure>
+<figure><img src="stills/boundary_08/source_after/source_after_minus500ms.jpg" alt="source_after minus500ms"><figcaption>source後素材開始<br>minus500ms<br>54:44.887</figcaption></figure>
+<figure><img src="stills/boundary_08/source_after/source_after_exact.jpg" alt="source_after exact"><figcaption>source後素材開始<br>exact<br>54:45.387</figcaption></figure>
+<figure><img src="stills/boundary_08/source_after/source_after_plus500ms.jpg" alt="source_after plus500ms"><figcaption>source後素材開始<br>plus500ms<br>54:45.887</figcaption></figure>
+<figure><img src="stills/boundary_08/source_after/source_after_plus1000ms.jpg" alt="source_after plus1000ms"><figcaption>source後素材開始<br>plus1000ms<br>54:46.387</figcaption></figure></div>
+</section>
+</article>
+<article>
+  <h2>境界9: block 9 -> 10</h2>
+
+  <section class="decision-answer" data-boundary-answer="9">
+    <h3>境界9の回答</h3>
+    <p>4項目を動画で確認してください。判定不能は無理に合格へ寄せず、そのまま選べます。</p>
+    <div class="decision-grid">
+      <label>切り抜き連続再生で素材が切り替わるか
+        <select data-boundary-field="clipSwitch">
+          <option value="">未回答</option>
+          <option value="true">切り替わる</option>
+          <option value="false">切り替わらない</option>
+          <option value="unresolved">判定不能</option>
+        </select>
+      </label>
+      <label>元配信の対応位置が切り替わるか
+        <select data-boundary-field="sourcePositionSwitches">
+          <option value="">未回答</option>
+          <option value="true">別位置へ切り替わる</option>
+          <option value="false">同じ位置に見える</option>
+          <option value="unresolved">判定不能</option>
+        </select>
+      </label>
+      <label>境界前は切り抜きと元配信で同じ素材か
+        <select data-boundary-field="beforeMatches">
+          <option value="">未回答</option>
+          <option value="true">同じ素材</option>
+          <option value="false">違う素材</option>
+          <option value="unresolved">判定不能</option>
+        </select>
+      </label>
+      <label>境界後は切り抜きと元配信で同じ素材か
+        <select data-boundary-field="afterMatches">
+          <option value="">未回答</option>
+          <option value="true">同じ素材</option>
+          <option value="false">違う素材</option>
+          <option value="unresolved">判定不能</option>
+        </select>
+      </label>
+    </div>
+    <label>境界メモ
+      <textarea data-boundary-field="note" placeholder="不一致・判定不能・crossfadeなど、後で判断根拠になることだけ記録"></textarea>
+    </label>
+    <p class="answer-state" data-boundary-state="9">未回答</p>
+  </section>
+  <table>
+    <tr><th>clip</th><td>2:21.901 -> 3:03.024</td><td>+41123ms</td></tr>
+    <tr><th>source</th><td>54:48.829 -> 57:55.241</td><td>+186412ms</td></tr>
+    <tr><th>素材飛び量</th><td colspan="2">+145289ms</td></tr>
+  </table>
+  <section class="watch">
+    <h3>最初に見る動画</h3>
+    <div class="videos primary-videos">
+      <figure>
+        <video controls src="videos/boundary_09_clip_context.mp4"></video>
+        <figcaption>clip連続再生。切り抜き単体で、境界前から境界後まで実際の順番で見る。</figcaption>
+      </figure>
+      <figure>
+        <video controls src="videos/boundary_09_source_sequence.mp4"></video>
+        <figcaption>source前後連続再生。元動画の前側対応2秒、後側対応2秒を順番につないだ人工連結。別位置に飛んでいるかを見る。</figcaption>
+      </figure>
+    </div>
+    <h3>対応確認の補助</h3>
+    <div class="videos support-videos">
+      <figure>
+        <video controls src="videos/boundary_09_before_match.mp4"></video>
+        <figcaption>前側対応確認。左が切り抜き、右が元動画。境界前の対応が合っているかを見る。</figcaption>
+      </figure>
+      <figure>
+        <video controls src="videos/boundary_09_after_match.mp4"></video>
+        <figcaption>後側対応確認。左が切り抜き、右が元動画。境界後の対応が合っているかを見る。</figcaption>
+      </figure>
+    </div>
+  </section>
+  <section class="strip">
+  <h3>clip前素材終端 2:21.901</h3>
+  <audio controls src="audio/boundary_09_clip_before_pm2s.wav"></audio>
+  <div class="frames"><figure><img src="stills/boundary_09/clip_before/clip_before_minus1000ms.jpg" alt="clip_before minus1000ms"><figcaption>clip前素材終端<br>minus1000ms<br>2:20.901</figcaption></figure>
+<figure><img src="stills/boundary_09/clip_before/clip_before_minus500ms.jpg" alt="clip_before minus500ms"><figcaption>clip前素材終端<br>minus500ms<br>2:21.401</figcaption></figure>
+<figure><img src="stills/boundary_09/clip_before/clip_before_exact.jpg" alt="clip_before exact"><figcaption>clip前素材終端<br>exact<br>2:21.901</figcaption></figure>
+<figure><img src="stills/boundary_09/clip_before/clip_before_plus500ms.jpg" alt="clip_before plus500ms"><figcaption>clip前素材終端<br>plus500ms<br>2:22.401</figcaption></figure>
+<figure><img src="stills/boundary_09/clip_before/clip_before_plus1000ms.jpg" alt="clip_before plus1000ms"><figcaption>clip前素材終端<br>plus1000ms<br>2:22.901</figcaption></figure></div>
+</section>
+<section class="strip">
+  <h3>clip後素材開始 3:03.024</h3>
+  <audio controls src="audio/boundary_09_clip_after_pm2s.wav"></audio>
+  <div class="frames"><figure><img src="stills/boundary_09/clip_after/clip_after_minus1000ms.jpg" alt="clip_after minus1000ms"><figcaption>clip後素材開始<br>minus1000ms<br>3:02.024</figcaption></figure>
+<figure><img src="stills/boundary_09/clip_after/clip_after_minus500ms.jpg" alt="clip_after minus500ms"><figcaption>clip後素材開始<br>minus500ms<br>3:02.524</figcaption></figure>
+<figure><img src="stills/boundary_09/clip_after/clip_after_exact.jpg" alt="clip_after exact"><figcaption>clip後素材開始<br>exact<br>3:03.024</figcaption></figure>
+<figure><img src="stills/boundary_09/clip_after/clip_after_plus500ms.jpg" alt="clip_after plus500ms"><figcaption>clip後素材開始<br>plus500ms<br>3:03.524</figcaption></figure>
+<figure><img src="stills/boundary_09/clip_after/clip_after_plus1000ms.jpg" alt="clip_after plus1000ms"><figcaption>clip後素材開始<br>plus1000ms<br>3:04.024</figcaption></figure></div>
+</section>
+<section class="strip">
+  <h3>source前素材終端 54:48.829</h3>
+  <audio controls src="audio/boundary_09_source_before_pm2s.wav"></audio>
+  <div class="frames"><figure><img src="stills/boundary_09/source_before/source_before_minus1000ms.jpg" alt="source_before minus1000ms"><figcaption>source前素材終端<br>minus1000ms<br>54:47.829</figcaption></figure>
+<figure><img src="stills/boundary_09/source_before/source_before_minus500ms.jpg" alt="source_before minus500ms"><figcaption>source前素材終端<br>minus500ms<br>54:48.329</figcaption></figure>
+<figure><img src="stills/boundary_09/source_before/source_before_exact.jpg" alt="source_before exact"><figcaption>source前素材終端<br>exact<br>54:48.829</figcaption></figure>
+<figure><img src="stills/boundary_09/source_before/source_before_plus500ms.jpg" alt="source_before plus500ms"><figcaption>source前素材終端<br>plus500ms<br>54:49.329</figcaption></figure>
+<figure><img src="stills/boundary_09/source_before/source_before_plus1000ms.jpg" alt="source_before plus1000ms"><figcaption>source前素材終端<br>plus1000ms<br>54:49.829</figcaption></figure></div>
+</section>
+<section class="strip">
+  <h3>source後素材開始 57:55.241</h3>
+  <audio controls src="audio/boundary_09_source_after_pm2s.wav"></audio>
+  <div class="frames"><figure><img src="stills/boundary_09/source_after/source_after_minus1000ms.jpg" alt="source_after minus1000ms"><figcaption>source後素材開始<br>minus1000ms<br>57:54.241</figcaption></figure>
+<figure><img src="stills/boundary_09/source_after/source_after_minus500ms.jpg" alt="source_after minus500ms"><figcaption>source後素材開始<br>minus500ms<br>57:54.741</figcaption></figure>
+<figure><img src="stills/boundary_09/source_after/source_after_exact.jpg" alt="source_after exact"><figcaption>source後素材開始<br>exact<br>57:55.241</figcaption></figure>
+<figure><img src="stills/boundary_09/source_after/source_after_plus500ms.jpg" alt="source_after plus500ms"><figcaption>source後素材開始<br>plus500ms<br>57:55.741</figcaption></figure>
+<figure><img src="stills/boundary_09/source_after/source_after_plus1000ms.jpg" alt="source_after plus1000ms"><figcaption>source後素材開始<br>plus1000ms<br>57:56.241</figcaption></figure></div>
+</section>
+</article>
+<article>
+  <h2>境界10: block 10 -> 11</h2>
+
+  <section class="decision-answer" data-boundary-answer="10">
+    <h3>境界10の回答</h3>
+    <p>4項目を動画で確認してください。判定不能は無理に合格へ寄せず、そのまま選べます。</p>
+    <div class="decision-grid">
+      <label>切り抜き連続再生で素材が切り替わるか
+        <select data-boundary-field="clipSwitch">
+          <option value="">未回答</option>
+          <option value="true">切り替わる</option>
+          <option value="false">切り替わらない</option>
+          <option value="unresolved">判定不能</option>
+        </select>
+      </label>
+      <label>元配信の対応位置が切り替わるか
+        <select data-boundary-field="sourcePositionSwitches">
+          <option value="">未回答</option>
+          <option value="true">別位置へ切り替わる</option>
+          <option value="false">同じ位置に見える</option>
+          <option value="unresolved">判定不能</option>
+        </select>
+      </label>
+      <label>境界前は切り抜きと元配信で同じ素材か
+        <select data-boundary-field="beforeMatches">
+          <option value="">未回答</option>
+          <option value="true">同じ素材</option>
+          <option value="false">違う素材</option>
+          <option value="unresolved">判定不能</option>
+        </select>
+      </label>
+      <label>境界後は切り抜きと元配信で同じ素材か
+        <select data-boundary-field="afterMatches">
+          <option value="">未回答</option>
+          <option value="true">同じ素材</option>
+          <option value="false">違う素材</option>
+          <option value="unresolved">判定不能</option>
+        </select>
+      </label>
+    </div>
+    <label>境界メモ
+      <textarea data-boundary-field="note" placeholder="不一致・判定不能・crossfadeなど、後で判断根拠になることだけ記録"></textarea>
+    </label>
+    <p class="answer-state" data-boundary-state="10">未回答</p>
+  </section>
+  <table>
+    <tr><th>clip</th><td>3:13.011 -> 3:50.898</td><td>+37887ms</td></tr>
+    <tr><th>source</th><td>58:05.035 -> 66:38.452</td><td>+513417ms</td></tr>
+    <tr><th>素材飛び量</th><td colspan="2">+475530ms</td></tr>
+  </table>
+  <section class="watch">
+    <h3>最初に見る動画</h3>
+    <div class="videos primary-videos">
+      <figure>
+        <video controls src="videos/boundary_10_clip_context.mp4"></video>
+        <figcaption>clip連続再生。切り抜き単体で、境界前から境界後まで実際の順番で見る。</figcaption>
+      </figure>
+      <figure>
+        <video controls src="videos/boundary_10_source_sequence.mp4"></video>
+        <figcaption>source前後連続再生。元動画の前側対応2秒、後側対応2秒を順番につないだ人工連結。別位置に飛んでいるかを見る。</figcaption>
+      </figure>
+    </div>
+    <h3>対応確認の補助</h3>
+    <div class="videos support-videos">
+      <figure>
+        <video controls src="videos/boundary_10_before_match.mp4"></video>
+        <figcaption>前側対応確認。左が切り抜き、右が元動画。境界前の対応が合っているかを見る。</figcaption>
+      </figure>
+      <figure>
+        <video controls src="videos/boundary_10_after_match.mp4"></video>
+        <figcaption>後側対応確認。左が切り抜き、右が元動画。境界後の対応が合っているかを見る。</figcaption>
+      </figure>
+    </div>
+  </section>
+  <section class="strip">
+  <h3>clip前素材終端 3:13.011</h3>
+  <audio controls src="audio/boundary_10_clip_before_pm2s.wav"></audio>
+  <div class="frames"><figure><img src="stills/boundary_10/clip_before/clip_before_minus1000ms.jpg" alt="clip_before minus1000ms"><figcaption>clip前素材終端<br>minus1000ms<br>3:12.011</figcaption></figure>
+<figure><img src="stills/boundary_10/clip_before/clip_before_minus500ms.jpg" alt="clip_before minus500ms"><figcaption>clip前素材終端<br>minus500ms<br>3:12.511</figcaption></figure>
+<figure><img src="stills/boundary_10/clip_before/clip_before_exact.jpg" alt="clip_before exact"><figcaption>clip前素材終端<br>exact<br>3:13.011</figcaption></figure>
+<figure><img src="stills/boundary_10/clip_before/clip_before_plus500ms.jpg" alt="clip_before plus500ms"><figcaption>clip前素材終端<br>plus500ms<br>3:13.511</figcaption></figure>
+<figure><img src="stills/boundary_10/clip_before/clip_before_plus1000ms.jpg" alt="clip_before plus1000ms"><figcaption>clip前素材終端<br>plus1000ms<br>3:14.011</figcaption></figure></div>
+</section>
+<section class="strip">
+  <h3>clip後素材開始 3:50.898</h3>
+  <audio controls src="audio/boundary_10_clip_after_pm2s.wav"></audio>
+  <div class="frames"><figure><img src="stills/boundary_10/clip_after/clip_after_minus1000ms.jpg" alt="clip_after minus1000ms"><figcaption>clip後素材開始<br>minus1000ms<br>3:49.898</figcaption></figure>
+<figure><img src="stills/boundary_10/clip_after/clip_after_minus500ms.jpg" alt="clip_after minus500ms"><figcaption>clip後素材開始<br>minus500ms<br>3:50.398</figcaption></figure>
+<figure><img src="stills/boundary_10/clip_after/clip_after_exact.jpg" alt="clip_after exact"><figcaption>clip後素材開始<br>exact<br>3:50.898</figcaption></figure>
+<figure><img src="stills/boundary_10/clip_after/clip_after_plus500ms.jpg" alt="clip_after plus500ms"><figcaption>clip後素材開始<br>plus500ms<br>3:51.398</figcaption></figure>
+<figure><img src="stills/boundary_10/clip_after/clip_after_plus1000ms.jpg" alt="clip_after plus1000ms"><figcaption>clip後素材開始<br>plus1000ms<br>3:51.898</figcaption></figure></div>
+</section>
+<section class="strip">
+  <h3>source前素材終端 58:05.035</h3>
+  <audio controls src="audio/boundary_10_source_before_pm2s.wav"></audio>
+  <div class="frames"><figure><img src="stills/boundary_10/source_before/source_before_minus1000ms.jpg" alt="source_before minus1000ms"><figcaption>source前素材終端<br>minus1000ms<br>58:04.035</figcaption></figure>
+<figure><img src="stills/boundary_10/source_before/source_before_minus500ms.jpg" alt="source_before minus500ms"><figcaption>source前素材終端<br>minus500ms<br>58:04.535</figcaption></figure>
+<figure><img src="stills/boundary_10/source_before/source_before_exact.jpg" alt="source_before exact"><figcaption>source前素材終端<br>exact<br>58:05.035</figcaption></figure>
+<figure><img src="stills/boundary_10/source_before/source_before_plus500ms.jpg" alt="source_before plus500ms"><figcaption>source前素材終端<br>plus500ms<br>58:05.535</figcaption></figure>
+<figure><img src="stills/boundary_10/source_before/source_before_plus1000ms.jpg" alt="source_before plus1000ms"><figcaption>source前素材終端<br>plus1000ms<br>58:06.035</figcaption></figure></div>
+</section>
+<section class="strip">
+  <h3>source後素材開始 66:38.452</h3>
+  <audio controls src="audio/boundary_10_source_after_pm2s.wav"></audio>
+  <div class="frames"><figure><img src="stills/boundary_10/source_after/source_after_minus1000ms.jpg" alt="source_after minus1000ms"><figcaption>source後素材開始<br>minus1000ms<br>66:37.452</figcaption></figure>
+<figure><img src="stills/boundary_10/source_after/source_after_minus500ms.jpg" alt="source_after minus500ms"><figcaption>source後素材開始<br>minus500ms<br>66:37.952</figcaption></figure>
+<figure><img src="stills/boundary_10/source_after/source_after_exact.jpg" alt="source_after exact"><figcaption>source後素材開始<br>exact<br>66:38.452</figcaption></figure>
+<figure><img src="stills/boundary_10/source_after/source_after_plus500ms.jpg" alt="source_after plus500ms"><figcaption>source後素材開始<br>plus500ms<br>66:38.952</figcaption></figure>
+<figure><img src="stills/boundary_10/source_after/source_after_plus1000ms.jpg" alt="source_after plus1000ms"><figcaption>source後素材開始<br>plus1000ms<br>66:39.452</figcaption></figure></div>
+</section>
+</article>
+<article>
+  <h2>境界11: block 11 -> 12</h2>
+
+  <section class="decision-answer" data-boundary-answer="11">
+    <h3>境界11の回答</h3>
+    <p>4項目を動画で確認してください。判定不能は無理に合格へ寄せず、そのまま選べます。</p>
+    <div class="decision-grid">
+      <label>切り抜き連続再生で素材が切り替わるか
+        <select data-boundary-field="clipSwitch">
+          <option value="">未回答</option>
+          <option value="true">切り替わる</option>
+          <option value="false">切り替わらない</option>
+          <option value="unresolved">判定不能</option>
+        </select>
+      </label>
+      <label>元配信の対応位置が切り替わるか
+        <select data-boundary-field="sourcePositionSwitches">
+          <option value="">未回答</option>
+          <option value="true">別位置へ切り替わる</option>
+          <option value="false">同じ位置に見える</option>
+          <option value="unresolved">判定不能</option>
+        </select>
+      </label>
+      <label>境界前は切り抜きと元配信で同じ素材か
+        <select data-boundary-field="beforeMatches">
+          <option value="">未回答</option>
+          <option value="true">同じ素材</option>
+          <option value="false">違う素材</option>
+          <option value="unresolved">判定不能</option>
+        </select>
+      </label>
+      <label>境界後は切り抜きと元配信で同じ素材か
+        <select data-boundary-field="afterMatches">
+          <option value="">未回答</option>
+          <option value="true">同じ素材</option>
+          <option value="false">違う素材</option>
+          <option value="unresolved">判定不能</option>
+        </select>
+      </label>
+    </div>
+    <label>境界メモ
+      <textarea data-boundary-field="note" placeholder="不一致・判定不能・crossfadeなど、後で判断根拠になることだけ記録"></textarea>
+    </label>
+    <p class="answer-state" data-boundary-state="11">未回答</p>
+  </section>
+  <table>
+    <tr><th>clip</th><td>4:19.188 -> 4:25.210</td><td>+6022ms</td></tr>
+    <tr><th>source</th><td>67:06.707 -> 68:22.099</td><td>+75392ms</td></tr>
+    <tr><th>素材飛び量</th><td colspan="2">+69370ms</td></tr>
+  </table>
+  <section class="watch">
+    <h3>最初に見る動画</h3>
+    <div class="videos primary-videos">
+      <figure>
+        <video controls src="videos/boundary_11_clip_context.mp4"></video>
+        <figcaption>clip連続再生。切り抜き単体で、境界前から境界後まで実際の順番で見る。</figcaption>
+      </figure>
+      <figure>
+        <video controls src="videos/boundary_11_source_sequence.mp4"></video>
+        <figcaption>source前後連続再生。元動画の前側対応2秒、後側対応2秒を順番につないだ人工連結。別位置に飛んでいるかを見る。</figcaption>
+      </figure>
+    </div>
+    <h3>対応確認の補助</h3>
+    <div class="videos support-videos">
+      <figure>
+        <video controls src="videos/boundary_11_before_match.mp4"></video>
+        <figcaption>前側対応確認。左が切り抜き、右が元動画。境界前の対応が合っているかを見る。</figcaption>
+      </figure>
+      <figure>
+        <video controls src="videos/boundary_11_after_match.mp4"></video>
+        <figcaption>後側対応確認。左が切り抜き、右が元動画。境界後の対応が合っているかを見る。</figcaption>
+      </figure>
+    </div>
+  </section>
+  <section class="strip">
+  <h3>clip前素材終端 4:19.188</h3>
+  <audio controls src="audio/boundary_11_clip_before_pm2s.wav"></audio>
+  <div class="frames"><figure><img src="stills/boundary_11/clip_before/clip_before_minus1000ms.jpg" alt="clip_before minus1000ms"><figcaption>clip前素材終端<br>minus1000ms<br>4:18.188</figcaption></figure>
+<figure><img src="stills/boundary_11/clip_before/clip_before_minus500ms.jpg" alt="clip_before minus500ms"><figcaption>clip前素材終端<br>minus500ms<br>4:18.688</figcaption></figure>
+<figure><img src="stills/boundary_11/clip_before/clip_before_exact.jpg" alt="clip_before exact"><figcaption>clip前素材終端<br>exact<br>4:19.188</figcaption></figure>
+<figure><img src="stills/boundary_11/clip_before/clip_before_plus500ms.jpg" alt="clip_before plus500ms"><figcaption>clip前素材終端<br>plus500ms<br>4:19.688</figcaption></figure>
+<figure><img src="stills/boundary_11/clip_before/clip_before_plus1000ms.jpg" alt="clip_before plus1000ms"><figcaption>clip前素材終端<br>plus1000ms<br>4:20.188</figcaption></figure></div>
+</section>
+<section class="strip">
+  <h3>clip後素材開始 4:25.210</h3>
+  <audio controls src="audio/boundary_11_clip_after_pm2s.wav"></audio>
+  <div class="frames"><figure><img src="stills/boundary_11/clip_after/clip_after_minus1000ms.jpg" alt="clip_after minus1000ms"><figcaption>clip後素材開始<br>minus1000ms<br>4:24.210</figcaption></figure>
+<figure><img src="stills/boundary_11/clip_after/clip_after_minus500ms.jpg" alt="clip_after minus500ms"><figcaption>clip後素材開始<br>minus500ms<br>4:24.710</figcaption></figure>
+<figure><img src="stills/boundary_11/clip_after/clip_after_exact.jpg" alt="clip_after exact"><figcaption>clip後素材開始<br>exact<br>4:25.210</figcaption></figure>
+<figure><img src="stills/boundary_11/clip_after/clip_after_plus500ms.jpg" alt="clip_after plus500ms"><figcaption>clip後素材開始<br>plus500ms<br>4:25.710</figcaption></figure>
+<figure><img src="stills/boundary_11/clip_after/clip_after_plus1000ms.jpg" alt="clip_after plus1000ms"><figcaption>clip後素材開始<br>plus1000ms<br>4:26.210</figcaption></figure></div>
+</section>
+<section class="strip">
+  <h3>source前素材終端 67:06.707</h3>
+  <audio controls src="audio/boundary_11_source_before_pm2s.wav"></audio>
+  <div class="frames"><figure><img src="stills/boundary_11/source_before/source_before_minus1000ms.jpg" alt="source_before minus1000ms"><figcaption>source前素材終端<br>minus1000ms<br>67:05.707</figcaption></figure>
+<figure><img src="stills/boundary_11/source_before/source_before_minus500ms.jpg" alt="source_before minus500ms"><figcaption>source前素材終端<br>minus500ms<br>67:06.207</figcaption></figure>
+<figure><img src="stills/boundary_11/source_before/source_before_exact.jpg" alt="source_before exact"><figcaption>source前素材終端<br>exact<br>67:06.707</figcaption></figure>
+<figure><img src="stills/boundary_11/source_before/source_before_plus500ms.jpg" alt="source_before plus500ms"><figcaption>source前素材終端<br>plus500ms<br>67:07.207</figcaption></figure>
+<figure><img src="stills/boundary_11/source_before/source_before_plus1000ms.jpg" alt="source_before plus1000ms"><figcaption>source前素材終端<br>plus1000ms<br>67:07.707</figcaption></figure></div>
+</section>
+<section class="strip">
+  <h3>source後素材開始 68:22.099</h3>
+  <audio controls src="audio/boundary_11_source_after_pm2s.wav"></audio>
+  <div class="frames"><figure><img src="stills/boundary_11/source_after/source_after_minus1000ms.jpg" alt="source_after minus1000ms"><figcaption>source後素材開始<br>minus1000ms<br>68:21.099</figcaption></figure>
+<figure><img src="stills/boundary_11/source_after/source_after_minus500ms.jpg" alt="source_after minus500ms"><figcaption>source後素材開始<br>minus500ms<br>68:21.599</figcaption></figure>
+<figure><img src="stills/boundary_11/source_after/source_after_exact.jpg" alt="source_after exact"><figcaption>source後素材開始<br>exact<br>68:22.099</figcaption></figure>
+<figure><img src="stills/boundary_11/source_after/source_after_plus500ms.jpg" alt="source_after plus500ms"><figcaption>source後素材開始<br>plus500ms<br>68:22.599</figcaption></figure>
+<figure><img src="stills/boundary_11/source_after/source_after_plus1000ms.jpg" alt="source_after plus1000ms"><figcaption>source後素材開始<br>plus1000ms<br>68:23.099</figcaption></figure></div>
+</section>
+</article>
+<article>
+  <h2>境界12: block 12 -> 13</h2>
+
+  <section class="decision-answer" data-boundary-answer="12">
+    <h3>境界12の回答</h3>
+    <p>4項目を動画で確認してください。判定不能は無理に合格へ寄せず、そのまま選べます。</p>
+    <div class="decision-grid">
+      <label>切り抜き連続再生で素材が切り替わるか
+        <select data-boundary-field="clipSwitch">
+          <option value="">未回答</option>
+          <option value="true">切り替わる</option>
+          <option value="false">切り替わらない</option>
+          <option value="unresolved">判定不能</option>
+        </select>
+      </label>
+      <label>元配信の対応位置が切り替わるか
+        <select data-boundary-field="sourcePositionSwitches">
+          <option value="">未回答</option>
+          <option value="true">別位置へ切り替わる</option>
+          <option value="false">同じ位置に見える</option>
+          <option value="unresolved">判定不能</option>
+        </select>
+      </label>
+      <label>境界前は切り抜きと元配信で同じ素材か
+        <select data-boundary-field="beforeMatches">
+          <option value="">未回答</option>
+          <option value="true">同じ素材</option>
+          <option value="false">違う素材</option>
+          <option value="unresolved">判定不能</option>
+        </select>
+      </label>
+      <label>境界後は切り抜きと元配信で同じ素材か
+        <select data-boundary-field="afterMatches">
+          <option value="">未回答</option>
+          <option value="true">同じ素材</option>
+          <option value="false">違う素材</option>
+          <option value="unresolved">判定不能</option>
+        </select>
+      </label>
+    </div>
+    <label>境界メモ
+      <textarea data-boundary-field="note" placeholder="不一致・判定不能・crossfadeなど、後で判断根拠になることだけ記録"></textarea>
+    </label>
+    <p class="answer-state" data-boundary-state="12">未回答</p>
+  </section>
+  <table>
+    <tr><th>clip</th><td>4:33.665 -> 4:39.029</td><td>+5364ms</td></tr>
+    <tr><th>source</th><td>68:29.864 -> 81:17.136</td><td>+767272ms</td></tr>
+    <tr><th>素材飛び量</th><td colspan="2">+761908ms</td></tr>
+  </table>
+  <section class="watch">
+    <h3>最初に見る動画</h3>
+    <div class="videos primary-videos">
+      <figure>
+        <video controls src="videos/boundary_12_clip_context.mp4"></video>
+        <figcaption>clip連続再生。切り抜き単体で、境界前から境界後まで実際の順番で見る。</figcaption>
+      </figure>
+      <figure>
+        <video controls src="videos/boundary_12_source_sequence.mp4"></video>
+        <figcaption>source前後連続再生。元動画の前側対応2秒、後側対応2秒を順番につないだ人工連結。別位置に飛んでいるかを見る。</figcaption>
+      </figure>
+    </div>
+    <h3>対応確認の補助</h3>
+    <div class="videos support-videos">
+      <figure>
+        <video controls src="videos/boundary_12_before_match.mp4"></video>
+        <figcaption>前側対応確認。左が切り抜き、右が元動画。境界前の対応が合っているかを見る。</figcaption>
+      </figure>
+      <figure>
+        <video controls src="videos/boundary_12_after_match.mp4"></video>
+        <figcaption>後側対応確認。左が切り抜き、右が元動画。境界後の対応が合っているかを見る。</figcaption>
+      </figure>
+    </div>
+  </section>
+  <section class="strip">
+  <h3>clip前素材終端 4:33.665</h3>
+  <audio controls src="audio/boundary_12_clip_before_pm2s.wav"></audio>
+  <div class="frames"><figure><img src="stills/boundary_12/clip_before/clip_before_minus1000ms.jpg" alt="clip_before minus1000ms"><figcaption>clip前素材終端<br>minus1000ms<br>4:32.665</figcaption></figure>
+<figure><img src="stills/boundary_12/clip_before/clip_before_minus500ms.jpg" alt="clip_before minus500ms"><figcaption>clip前素材終端<br>minus500ms<br>4:33.165</figcaption></figure>
+<figure><img src="stills/boundary_12/clip_before/clip_before_exact.jpg" alt="clip_before exact"><figcaption>clip前素材終端<br>exact<br>4:33.665</figcaption></figure>
+<figure><img src="stills/boundary_12/clip_before/clip_before_plus500ms.jpg" alt="clip_before plus500ms"><figcaption>clip前素材終端<br>plus500ms<br>4:34.165</figcaption></figure>
+<figure><img src="stills/boundary_12/clip_before/clip_before_plus1000ms.jpg" alt="clip_before plus1000ms"><figcaption>clip前素材終端<br>plus1000ms<br>4:34.665</figcaption></figure></div>
+</section>
+<section class="strip">
+  <h3>clip後素材開始 4:39.029</h3>
+  <audio controls src="audio/boundary_12_clip_after_pm2s.wav"></audio>
+  <div class="frames"><figure><img src="stills/boundary_12/clip_after/clip_after_minus1000ms.jpg" alt="clip_after minus1000ms"><figcaption>clip後素材開始<br>minus1000ms<br>4:38.029</figcaption></figure>
+<figure><img src="stills/boundary_12/clip_after/clip_after_minus500ms.jpg" alt="clip_after minus500ms"><figcaption>clip後素材開始<br>minus500ms<br>4:38.529</figcaption></figure>
+<figure><img src="stills/boundary_12/clip_after/clip_after_exact.jpg" alt="clip_after exact"><figcaption>clip後素材開始<br>exact<br>4:39.029</figcaption></figure>
+<figure><img src="stills/boundary_12/clip_after/clip_after_plus500ms.jpg" alt="clip_after plus500ms"><figcaption>clip後素材開始<br>plus500ms<br>4:39.529</figcaption></figure>
+<figure><img src="stills/boundary_12/clip_after/clip_after_plus1000ms.jpg" alt="clip_after plus1000ms"><figcaption>clip後素材開始<br>plus1000ms<br>4:40.029</figcaption></figure></div>
+</section>
+<section class="strip">
+  <h3>source前素材終端 68:29.864</h3>
+  <audio controls src="audio/boundary_12_source_before_pm2s.wav"></audio>
+  <div class="frames"><figure><img src="stills/boundary_12/source_before/source_before_minus1000ms.jpg" alt="source_before minus1000ms"><figcaption>source前素材終端<br>minus1000ms<br>68:28.864</figcaption></figure>
+<figure><img src="stills/boundary_12/source_before/source_before_minus500ms.jpg" alt="source_before minus500ms"><figcaption>source前素材終端<br>minus500ms<br>68:29.364</figcaption></figure>
+<figure><img src="stills/boundary_12/source_before/source_before_exact.jpg" alt="source_before exact"><figcaption>source前素材終端<br>exact<br>68:29.864</figcaption></figure>
+<figure><img src="stills/boundary_12/source_before/source_before_plus500ms.jpg" alt="source_before plus500ms"><figcaption>source前素材終端<br>plus500ms<br>68:30.364</figcaption></figure>
+<figure><img src="stills/boundary_12/source_before/source_before_plus1000ms.jpg" alt="source_before plus1000ms"><figcaption>source前素材終端<br>plus1000ms<br>68:30.864</figcaption></figure></div>
+</section>
+<section class="strip">
+  <h3>source後素材開始 81:17.136</h3>
+  <audio controls src="audio/boundary_12_source_after_pm2s.wav"></audio>
+  <div class="frames"><figure><img src="stills/boundary_12/source_after/source_after_minus1000ms.jpg" alt="source_after minus1000ms"><figcaption>source後素材開始<br>minus1000ms<br>81:16.136</figcaption></figure>
+<figure><img src="stills/boundary_12/source_after/source_after_minus500ms.jpg" alt="source_after minus500ms"><figcaption>source後素材開始<br>minus500ms<br>81:16.636</figcaption></figure>
+<figure><img src="stills/boundary_12/source_after/source_after_exact.jpg" alt="source_after exact"><figcaption>source後素材開始<br>exact<br>81:17.136</figcaption></figure>
+<figure><img src="stills/boundary_12/source_after/source_after_plus500ms.jpg" alt="source_after plus500ms"><figcaption>source後素材開始<br>plus500ms<br>81:17.636</figcaption></figure>
+<figure><img src="stills/boundary_12/source_after/source_after_plus1000ms.jpg" alt="source_after plus1000ms"><figcaption>source後素材開始<br>plus1000ms<br>81:18.136</figcaption></figure></div>
+</section>
+</article>
+<article>
+  <h2>境界13: block 13 -> 14</h2>
+
+  <section class="decision-answer" data-boundary-answer="13">
+    <h3>境界13の回答</h3>
+    <p>4項目を動画で確認してください。判定不能は無理に合格へ寄せず、そのまま選べます。</p>
+    <div class="decision-grid">
+      <label>切り抜き連続再生で素材が切り替わるか
+        <select data-boundary-field="clipSwitch">
+          <option value="">未回答</option>
+          <option value="true">切り替わる</option>
+          <option value="false">切り替わらない</option>
+          <option value="unresolved">判定不能</option>
+        </select>
+      </label>
+      <label>元配信の対応位置が切り替わるか
+        <select data-boundary-field="sourcePositionSwitches">
+          <option value="">未回答</option>
+          <option value="true">別位置へ切り替わる</option>
+          <option value="false">同じ位置に見える</option>
+          <option value="unresolved">判定不能</option>
+        </select>
+      </label>
+      <label>境界前は切り抜きと元配信で同じ素材か
+        <select data-boundary-field="beforeMatches">
+          <option value="">未回答</option>
+          <option value="true">同じ素材</option>
+          <option value="false">違う素材</option>
+          <option value="unresolved">判定不能</option>
+        </select>
+      </label>
+      <label>境界後は切り抜きと元配信で同じ素材か
+        <select data-boundary-field="afterMatches">
+          <option value="">未回答</option>
+          <option value="true">同じ素材</option>
+          <option value="false">違う素材</option>
+          <option value="unresolved">判定不能</option>
+        </select>
+      </label>
+    </div>
+    <label>境界メモ
+      <textarea data-boundary-field="note" placeholder="不一致・判定不能・crossfadeなど、後で判断根拠になることだけ記録"></textarea>
+    </label>
+    <p class="answer-state" data-boundary-state="13">未回答</p>
+  </section>
+  <table>
+    <tr><th>clip</th><td>4:51.898 -> 5:16.355</td><td>+24457ms</td></tr>
+    <tr><th>source</th><td>81:29.844 -> 86:23.974</td><td>+294130ms</td></tr>
+    <tr><th>素材飛び量</th><td colspan="2">+269673ms</td></tr>
+  </table>
+  <section class="watch">
+    <h3>最初に見る動画</h3>
+    <div class="videos primary-videos">
+      <figure>
+        <video controls src="videos/boundary_13_clip_context.mp4"></video>
+        <figcaption>clip連続再生。切り抜き単体で、境界前から境界後まで実際の順番で見る。</figcaption>
+      </figure>
+      <figure>
+        <video controls src="videos/boundary_13_source_sequence.mp4"></video>
+        <figcaption>source前後連続再生。元動画の前側対応2秒、後側対応2秒を順番につないだ人工連結。別位置に飛んでいるかを見る。</figcaption>
+      </figure>
+    </div>
+    <h3>対応確認の補助</h3>
+    <div class="videos support-videos">
+      <figure>
+        <video controls src="videos/boundary_13_before_match.mp4"></video>
+        <figcaption>前側対応確認。左が切り抜き、右が元動画。境界前の対応が合っているかを見る。</figcaption>
+      </figure>
+      <figure>
+        <video controls src="videos/boundary_13_after_match.mp4"></video>
+        <figcaption>後側対応確認。左が切り抜き、右が元動画。境界後の対応が合っているかを見る。</figcaption>
+      </figure>
+    </div>
+  </section>
+  <section class="strip">
+  <h3>clip前素材終端 4:51.898</h3>
+  <audio controls src="audio/boundary_13_clip_before_pm2s.wav"></audio>
+  <div class="frames"><figure><img src="stills/boundary_13/clip_before/clip_before_minus1000ms.jpg" alt="clip_before minus1000ms"><figcaption>clip前素材終端<br>minus1000ms<br>4:50.898</figcaption></figure>
+<figure><img src="stills/boundary_13/clip_before/clip_before_minus500ms.jpg" alt="clip_before minus500ms"><figcaption>clip前素材終端<br>minus500ms<br>4:51.398</figcaption></figure>
+<figure><img src="stills/boundary_13/clip_before/clip_before_exact.jpg" alt="clip_before exact"><figcaption>clip前素材終端<br>exact<br>4:51.898</figcaption></figure>
+<figure><img src="stills/boundary_13/clip_before/clip_before_plus500ms.jpg" alt="clip_before plus500ms"><figcaption>clip前素材終端<br>plus500ms<br>4:52.398</figcaption></figure>
+<figure><img src="stills/boundary_13/clip_before/clip_before_plus1000ms.jpg" alt="clip_before plus1000ms"><figcaption>clip前素材終端<br>plus1000ms<br>4:52.898</figcaption></figure></div>
+</section>
+<section class="strip">
+  <h3>clip後素材開始 5:16.355</h3>
+  <audio controls src="audio/boundary_13_clip_after_pm2s.wav"></audio>
+  <div class="frames"><figure><img src="stills/boundary_13/clip_after/clip_after_minus1000ms.jpg" alt="clip_after minus1000ms"><figcaption>clip後素材開始<br>minus1000ms<br>5:15.355</figcaption></figure>
+<figure><img src="stills/boundary_13/clip_after/clip_after_minus500ms.jpg" alt="clip_after minus500ms"><figcaption>clip後素材開始<br>minus500ms<br>5:15.855</figcaption></figure>
+<figure><img src="stills/boundary_13/clip_after/clip_after_exact.jpg" alt="clip_after exact"><figcaption>clip後素材開始<br>exact<br>5:16.355</figcaption></figure>
+<figure><img src="stills/boundary_13/clip_after/clip_after_plus500ms.jpg" alt="clip_after plus500ms"><figcaption>clip後素材開始<br>plus500ms<br>5:16.855</figcaption></figure>
+<figure><img src="stills/boundary_13/clip_after/clip_after_plus1000ms.jpg" alt="clip_after plus1000ms"><figcaption>clip後素材開始<br>plus1000ms<br>5:17.355</figcaption></figure></div>
+</section>
+<section class="strip">
+  <h3>source前素材終端 81:29.844</h3>
+  <audio controls src="audio/boundary_13_source_before_pm2s.wav"></audio>
+  <div class="frames"><figure><img src="stills/boundary_13/source_before/source_before_minus1000ms.jpg" alt="source_before minus1000ms"><figcaption>source前素材終端<br>minus1000ms<br>81:28.844</figcaption></figure>
+<figure><img src="stills/boundary_13/source_before/source_before_minus500ms.jpg" alt="source_before minus500ms"><figcaption>source前素材終端<br>minus500ms<br>81:29.344</figcaption></figure>
+<figure><img src="stills/boundary_13/source_before/source_before_exact.jpg" alt="source_before exact"><figcaption>source前素材終端<br>exact<br>81:29.844</figcaption></figure>
+<figure><img src="stills/boundary_13/source_before/source_before_plus500ms.jpg" alt="source_before plus500ms"><figcaption>source前素材終端<br>plus500ms<br>81:30.344</figcaption></figure>
+<figure><img src="stills/boundary_13/source_before/source_before_plus1000ms.jpg" alt="source_before plus1000ms"><figcaption>source前素材終端<br>plus1000ms<br>81:30.844</figcaption></figure></div>
+</section>
+<section class="strip">
+  <h3>source後素材開始 86:23.974</h3>
+  <audio controls src="audio/boundary_13_source_after_pm2s.wav"></audio>
+  <div class="frames"><figure><img src="stills/boundary_13/source_after/source_after_minus1000ms.jpg" alt="source_after minus1000ms"><figcaption>source後素材開始<br>minus1000ms<br>86:22.974</figcaption></figure>
+<figure><img src="stills/boundary_13/source_after/source_after_minus500ms.jpg" alt="source_after minus500ms"><figcaption>source後素材開始<br>minus500ms<br>86:23.474</figcaption></figure>
+<figure><img src="stills/boundary_13/source_after/source_after_exact.jpg" alt="source_after exact"><figcaption>source後素材開始<br>exact<br>86:23.974</figcaption></figure>
+<figure><img src="stills/boundary_13/source_after/source_after_plus500ms.jpg" alt="source_after plus500ms"><figcaption>source後素材開始<br>plus500ms<br>86:24.474</figcaption></figure>
+<figure><img src="stills/boundary_13/source_after/source_after_plus1000ms.jpg" alt="source_after plus1000ms"><figcaption>source後素材開始<br>plus1000ms<br>86:24.974</figcaption></figure></div>
+</section>
+</article>
+<article>
+  <h2>境界14: block 14 -> 15</h2>
+
+  <section class="decision-answer" data-boundary-answer="14">
+    <h3>境界14の回答</h3>
+    <p>4項目を動画で確認してください。判定不能は無理に合格へ寄せず、そのまま選べます。</p>
+    <div class="decision-grid">
+      <label>切り抜き連続再生で素材が切り替わるか
+        <select data-boundary-field="clipSwitch">
+          <option value="">未回答</option>
+          <option value="true">切り替わる</option>
+          <option value="false">切り替わらない</option>
+          <option value="unresolved">判定不能</option>
+        </select>
+      </label>
+      <label>元配信の対応位置が切り替わるか
+        <select data-boundary-field="sourcePositionSwitches">
+          <option value="">未回答</option>
+          <option value="true">別位置へ切り替わる</option>
+          <option value="false">同じ位置に見える</option>
+          <option value="unresolved">判定不能</option>
+        </select>
+      </label>
+      <label>境界前は切り抜きと元配信で同じ素材か
+        <select data-boundary-field="beforeMatches">
+          <option value="">未回答</option>
+          <option value="true">同じ素材</option>
+          <option value="false">違う素材</option>
+          <option value="unresolved">判定不能</option>
+        </select>
+      </label>
+      <label>境界後は切り抜きと元配信で同じ素材か
+        <select data-boundary-field="afterMatches">
+          <option value="">未回答</option>
+          <option value="true">同じ素材</option>
+          <option value="false">違う素材</option>
+          <option value="unresolved">判定不能</option>
+        </select>
+      </label>
+    </div>
+    <label>境界メモ
+      <textarea data-boundary-field="note" placeholder="不一致・判定不能・crossfadeなど、後で判断根拠になることだけ記録"></textarea>
+    </label>
+    <p class="answer-state" data-boundary-state="14">未回答</p>
+  </section>
+  <table>
+    <tr><th>clip</th><td>5:22.480 -> 5:38.724</td><td>+16244ms</td></tr>
+    <tr><th>source</th><td>86:29.318 -> 86:57.231</td><td>+27913ms</td></tr>
+    <tr><th>素材飛び量</th><td colspan="2">+11669ms</td></tr>
+  </table>
+  <section class="watch">
+    <h3>最初に見る動画</h3>
+    <div class="videos primary-videos">
+      <figure>
+        <video controls src="videos/boundary_14_clip_context.mp4"></video>
+        <figcaption>clip連続再生。切り抜き単体で、境界前から境界後まで実際の順番で見る。</figcaption>
+      </figure>
+      <figure>
+        <video controls src="videos/boundary_14_source_sequence.mp4"></video>
+        <figcaption>source前後連続再生。元動画の前側対応2秒、後側対応2秒を順番につないだ人工連結。別位置に飛んでいるかを見る。</figcaption>
+      </figure>
+    </div>
+    <h3>対応確認の補助</h3>
+    <div class="videos support-videos">
+      <figure>
+        <video controls src="videos/boundary_14_before_match.mp4"></video>
+        <figcaption>前側対応確認。左が切り抜き、右が元動画。境界前の対応が合っているかを見る。</figcaption>
+      </figure>
+      <figure>
+        <video controls src="videos/boundary_14_after_match.mp4"></video>
+        <figcaption>後側対応確認。左が切り抜き、右が元動画。境界後の対応が合っているかを見る。</figcaption>
+      </figure>
+    </div>
+  </section>
+  <section class="strip">
+  <h3>clip前素材終端 5:22.480</h3>
+  <audio controls src="audio/boundary_14_clip_before_pm2s.wav"></audio>
+  <div class="frames"><figure><img src="stills/boundary_14/clip_before/clip_before_minus1000ms.jpg" alt="clip_before minus1000ms"><figcaption>clip前素材終端<br>minus1000ms<br>5:21.480</figcaption></figure>
+<figure><img src="stills/boundary_14/clip_before/clip_before_minus500ms.jpg" alt="clip_before minus500ms"><figcaption>clip前素材終端<br>minus500ms<br>5:21.980</figcaption></figure>
+<figure><img src="stills/boundary_14/clip_before/clip_before_exact.jpg" alt="clip_before exact"><figcaption>clip前素材終端<br>exact<br>5:22.480</figcaption></figure>
+<figure><img src="stills/boundary_14/clip_before/clip_before_plus500ms.jpg" alt="clip_before plus500ms"><figcaption>clip前素材終端<br>plus500ms<br>5:22.980</figcaption></figure>
+<figure><img src="stills/boundary_14/clip_before/clip_before_plus1000ms.jpg" alt="clip_before plus1000ms"><figcaption>clip前素材終端<br>plus1000ms<br>5:23.480</figcaption></figure></div>
+</section>
+<section class="strip">
+  <h3>clip後素材開始 5:38.724</h3>
+  <audio controls src="audio/boundary_14_clip_after_pm2s.wav"></audio>
+  <div class="frames"><figure><img src="stills/boundary_14/clip_after/clip_after_minus1000ms.jpg" alt="clip_after minus1000ms"><figcaption>clip後素材開始<br>minus1000ms<br>5:37.724</figcaption></figure>
+<figure><img src="stills/boundary_14/clip_after/clip_after_minus500ms.jpg" alt="clip_after minus500ms"><figcaption>clip後素材開始<br>minus500ms<br>5:38.224</figcaption></figure>
+<figure><img src="stills/boundary_14/clip_after/clip_after_exact.jpg" alt="clip_after exact"><figcaption>clip後素材開始<br>exact<br>5:38.724</figcaption></figure>
+<figure><img src="stills/boundary_14/clip_after/clip_after_plus500ms.jpg" alt="clip_after plus500ms"><figcaption>clip後素材開始<br>plus500ms<br>5:39.224</figcaption></figure>
+<figure><img src="stills/boundary_14/clip_after/clip_after_plus1000ms.jpg" alt="clip_after plus1000ms"><figcaption>clip後素材開始<br>plus1000ms<br>5:39.724</figcaption></figure></div>
+</section>
+<section class="strip">
+  <h3>source前素材終端 86:29.318</h3>
+  <audio controls src="audio/boundary_14_source_before_pm2s.wav"></audio>
+  <div class="frames"><figure><img src="stills/boundary_14/source_before/source_before_minus1000ms.jpg" alt="source_before minus1000ms"><figcaption>source前素材終端<br>minus1000ms<br>86:28.318</figcaption></figure>
+<figure><img src="stills/boundary_14/source_before/source_before_minus500ms.jpg" alt="source_before minus500ms"><figcaption>source前素材終端<br>minus500ms<br>86:28.818</figcaption></figure>
+<figure><img src="stills/boundary_14/source_before/source_before_exact.jpg" alt="source_before exact"><figcaption>source前素材終端<br>exact<br>86:29.318</figcaption></figure>
+<figure><img src="stills/boundary_14/source_before/source_before_plus500ms.jpg" alt="source_before plus500ms"><figcaption>source前素材終端<br>plus500ms<br>86:29.818</figcaption></figure>
+<figure><img src="stills/boundary_14/source_before/source_before_plus1000ms.jpg" alt="source_before plus1000ms"><figcaption>source前素材終端<br>plus1000ms<br>86:30.318</figcaption></figure></div>
+</section>
+<section class="strip">
+  <h3>source後素材開始 86:57.231</h3>
+  <audio controls src="audio/boundary_14_source_after_pm2s.wav"></audio>
+  <div class="frames"><figure><img src="stills/boundary_14/source_after/source_after_minus1000ms.jpg" alt="source_after minus1000ms"><figcaption>source後素材開始<br>minus1000ms<br>86:56.231</figcaption></figure>
+<figure><img src="stills/boundary_14/source_after/source_after_minus500ms.jpg" alt="source_after minus500ms"><figcaption>source後素材開始<br>minus500ms<br>86:56.731</figcaption></figure>
+<figure><img src="stills/boundary_14/source_after/source_after_exact.jpg" alt="source_after exact"><figcaption>source後素材開始<br>exact<br>86:57.231</figcaption></figure>
+<figure><img src="stills/boundary_14/source_after/source_after_plus500ms.jpg" alt="source_after plus500ms"><figcaption>source後素材開始<br>plus500ms<br>86:57.731</figcaption></figure>
+<figure><img src="stills/boundary_14/source_after/source_after_plus1000ms.jpg" alt="source_after plus1000ms"><figcaption>source後素材開始<br>plus1000ms<br>86:58.231</figcaption></figure></div>
+</section>
+</article>
+<article>
+  <h2>境界15: block 15 -> 16</h2>
+
+  <section class="decision-answer" data-boundary-answer="15">
+    <h3>境界15の回答</h3>
+    <p>4項目を動画で確認してください。判定不能は無理に合格へ寄せず、そのまま選べます。</p>
+    <div class="decision-grid">
+      <label>切り抜き連続再生で素材が切り替わるか
+        <select data-boundary-field="clipSwitch">
+          <option value="">未回答</option>
+          <option value="true">切り替わる</option>
+          <option value="false">切り替わらない</option>
+          <option value="unresolved">判定不能</option>
+        </select>
+      </label>
+      <label>元配信の対応位置が切り替わるか
+        <select data-boundary-field="sourcePositionSwitches">
+          <option value="">未回答</option>
+          <option value="true">別位置へ切り替わる</option>
+          <option value="false">同じ位置に見える</option>
+          <option value="unresolved">判定不能</option>
+        </select>
+      </label>
+      <label>境界前は切り抜きと元配信で同じ素材か
+        <select data-boundary-field="beforeMatches">
+          <option value="">未回答</option>
+          <option value="true">同じ素材</option>
+          <option value="false">違う素材</option>
+          <option value="unresolved">判定不能</option>
+        </select>
+      </label>
+      <label>境界後は切り抜きと元配信で同じ素材か
+        <select data-boundary-field="afterMatches">
+          <option value="">未回答</option>
+          <option value="true">同じ素材</option>
+          <option value="false">違う素材</option>
+          <option value="unresolved">判定不能</option>
+        </select>
+      </label>
+    </div>
+    <label>境界メモ
+      <textarea data-boundary-field="note" placeholder="不一致・判定不能・crossfadeなど、後で判断根拠になることだけ記録"></textarea>
+    </label>
+    <p class="answer-state" data-boundary-state="15">未回答</p>
+  </section>
+  <table>
+    <tr><th>clip</th><td>5:40.845 -> 5:58.151</td><td>+17306ms</td></tr>
+    <tr><th>source</th><td>86:58.992 -> 173:59.052</td><td>+5220060ms</td></tr>
+    <tr><th>素材飛び量</th><td colspan="2">+5202754ms</td></tr>
+  </table>
+  <section class="watch">
+    <h3>最初に見る動画</h3>
+    <div class="videos primary-videos">
+      <figure>
+        <video controls src="videos/boundary_15_clip_context.mp4"></video>
+        <figcaption>clip連続再生。切り抜き単体で、境界前から境界後まで実際の順番で見る。</figcaption>
+      </figure>
+      <figure>
+        <video controls src="videos/boundary_15_source_sequence.mp4"></video>
+        <figcaption>source前後連続再生。元動画の前側対応2秒、後側対応2秒を順番につないだ人工連結。別位置に飛んでいるかを見る。</figcaption>
+      </figure>
+    </div>
+    <h3>対応確認の補助</h3>
+    <div class="videos support-videos">
+      <figure>
+        <video controls src="videos/boundary_15_before_match.mp4"></video>
+        <figcaption>前側対応確認。左が切り抜き、右が元動画。境界前の対応が合っているかを見る。</figcaption>
+      </figure>
+      <figure>
+        <video controls src="videos/boundary_15_after_match.mp4"></video>
+        <figcaption>後側対応確認。左が切り抜き、右が元動画。境界後の対応が合っているかを見る。</figcaption>
+      </figure>
+    </div>
+  </section>
+  <section class="strip">
+  <h3>clip前素材終端 5:40.845</h3>
+  <audio controls src="audio/boundary_15_clip_before_pm2s.wav"></audio>
+  <div class="frames"><figure><img src="stills/boundary_15/clip_before/clip_before_minus1000ms.jpg" alt="clip_before minus1000ms"><figcaption>clip前素材終端<br>minus1000ms<br>5:39.845</figcaption></figure>
+<figure><img src="stills/boundary_15/clip_before/clip_before_minus500ms.jpg" alt="clip_before minus500ms"><figcaption>clip前素材終端<br>minus500ms<br>5:40.345</figcaption></figure>
+<figure><img src="stills/boundary_15/clip_before/clip_before_exact.jpg" alt="clip_before exact"><figcaption>clip前素材終端<br>exact<br>5:40.845</figcaption></figure>
+<figure><img src="stills/boundary_15/clip_before/clip_before_plus500ms.jpg" alt="clip_before plus500ms"><figcaption>clip前素材終端<br>plus500ms<br>5:41.345</figcaption></figure>
+<figure><img src="stills/boundary_15/clip_before/clip_before_plus1000ms.jpg" alt="clip_before plus1000ms"><figcaption>clip前素材終端<br>plus1000ms<br>5:41.845</figcaption></figure></div>
+</section>
+<section class="strip">
+  <h3>clip後素材開始 5:58.151</h3>
+  <audio controls src="audio/boundary_15_clip_after_pm2s.wav"></audio>
+  <div class="frames"><figure><img src="stills/boundary_15/clip_after/clip_after_minus1000ms.jpg" alt="clip_after minus1000ms"><figcaption>clip後素材開始<br>minus1000ms<br>5:57.151</figcaption></figure>
+<figure><img src="stills/boundary_15/clip_after/clip_after_minus500ms.jpg" alt="clip_after minus500ms"><figcaption>clip後素材開始<br>minus500ms<br>5:57.651</figcaption></figure>
+<figure><img src="stills/boundary_15/clip_after/clip_after_exact.jpg" alt="clip_after exact"><figcaption>clip後素材開始<br>exact<br>5:58.151</figcaption></figure>
+<figure><img src="stills/boundary_15/clip_after/clip_after_plus500ms.jpg" alt="clip_after plus500ms"><figcaption>clip後素材開始<br>plus500ms<br>5:58.651</figcaption></figure>
+<figure><img src="stills/boundary_15/clip_after/clip_after_plus1000ms.jpg" alt="clip_after plus1000ms"><figcaption>clip後素材開始<br>plus1000ms<br>5:59.151</figcaption></figure></div>
+</section>
+<section class="strip">
+  <h3>source前素材終端 86:58.992</h3>
+  <audio controls src="audio/boundary_15_source_before_pm2s.wav"></audio>
+  <div class="frames"><figure><img src="stills/boundary_15/source_before/source_before_minus1000ms.jpg" alt="source_before minus1000ms"><figcaption>source前素材終端<br>minus1000ms<br>86:57.992</figcaption></figure>
+<figure><img src="stills/boundary_15/source_before/source_before_minus500ms.jpg" alt="source_before minus500ms"><figcaption>source前素材終端<br>minus500ms<br>86:58.492</figcaption></figure>
+<figure><img src="stills/boundary_15/source_before/source_before_exact.jpg" alt="source_before exact"><figcaption>source前素材終端<br>exact<br>86:58.992</figcaption></figure>
+<figure><img src="stills/boundary_15/source_before/source_before_plus500ms.jpg" alt="source_before plus500ms"><figcaption>source前素材終端<br>plus500ms<br>86:59.492</figcaption></figure>
+<figure><img src="stills/boundary_15/source_before/source_before_plus1000ms.jpg" alt="source_before plus1000ms"><figcaption>source前素材終端<br>plus1000ms<br>86:59.992</figcaption></figure></div>
+</section>
+<section class="strip">
+  <h3>source後素材開始 173:59.052</h3>
+  <audio controls src="audio/boundary_15_source_after_pm2s.wav"></audio>
+  <div class="frames"><figure><img src="stills/boundary_15/source_after/source_after_minus1000ms.jpg" alt="source_after minus1000ms"><figcaption>source後素材開始<br>minus1000ms<br>173:58.052</figcaption></figure>
+<figure><img src="stills/boundary_15/source_after/source_after_minus500ms.jpg" alt="source_after minus500ms"><figcaption>source後素材開始<br>minus500ms<br>173:58.552</figcaption></figure>
+<figure><img src="stills/boundary_15/source_after/source_after_exact.jpg" alt="source_after exact"><figcaption>source後素材開始<br>exact<br>173:59.052</figcaption></figure>
+<figure><img src="stills/boundary_15/source_after/source_after_plus500ms.jpg" alt="source_after plus500ms"><figcaption>source後素材開始<br>plus500ms<br>173:59.552</figcaption></figure>
+<figure><img src="stills/boundary_15/source_after/source_after_plus1000ms.jpg" alt="source_after plus1000ms"><figcaption>source後素材開始<br>plus1000ms<br>174:00.052</figcaption></figure></div>
+</section>
+</article>
+<article>
+  <h2>境界16: block 16 -> 17</h2>
+
+  <section class="decision-answer" data-boundary-answer="16">
+    <h3>境界16の回答</h3>
+    <p>4項目を動画で確認してください。判定不能は無理に合格へ寄せず、そのまま選べます。</p>
+    <div class="decision-grid">
+      <label>切り抜き連続再生で素材が切り替わるか
+        <select data-boundary-field="clipSwitch">
+          <option value="">未回答</option>
+          <option value="true">切り替わる</option>
+          <option value="false">切り替わらない</option>
+          <option value="unresolved">判定不能</option>
+        </select>
+      </label>
+      <label>元配信の対応位置が切り替わるか
+        <select data-boundary-field="sourcePositionSwitches">
+          <option value="">未回答</option>
+          <option value="true">別位置へ切り替わる</option>
+          <option value="false">同じ位置に見える</option>
+          <option value="unresolved">判定不能</option>
+        </select>
+      </label>
+      <label>境界前は切り抜きと元配信で同じ素材か
+        <select data-boundary-field="beforeMatches">
+          <option value="">未回答</option>
+          <option value="true">同じ素材</option>
+          <option value="false">違う素材</option>
+          <option value="unresolved">判定不能</option>
+        </select>
+      </label>
+      <label>境界後は切り抜きと元配信で同じ素材か
+        <select data-boundary-field="afterMatches">
+          <option value="">未回答</option>
+          <option value="true">同じ素材</option>
+          <option value="false">違う素材</option>
+          <option value="unresolved">判定不能</option>
+        </select>
+      </label>
+    </div>
+    <label>境界メモ
+      <textarea data-boundary-field="note" placeholder="不一致・判定不能・crossfadeなど、後で判断根拠になることだけ記録"></textarea>
+    </label>
+    <p class="answer-state" data-boundary-state="16">未回答</p>
+  </section>
+  <table>
+    <tr><th>clip</th><td>6:13.786 -> 7:05.880</td><td>+52094ms</td></tr>
+    <tr><th>source</th><td>174:10.741 -> 192:21.555</td><td>+1090814ms</td></tr>
+    <tr><th>素材飛び量</th><td colspan="2">+1038720ms</td></tr>
+  </table>
+  <section class="watch">
+    <h3>最初に見る動画</h3>
+    <div class="videos primary-videos">
+      <figure>
+        <video controls src="videos/boundary_16_clip_context.mp4"></video>
+        <figcaption>clip連続再生。切り抜き単体で、境界前から境界後まで実際の順番で見る。</figcaption>
+      </figure>
+      <figure>
+        <video controls src="videos/boundary_16_source_sequence.mp4"></video>
+        <figcaption>source前後連続再生。元動画の前側対応2秒、後側対応2秒を順番につないだ人工連結。別位置に飛んでいるかを見る。</figcaption>
+      </figure>
+    </div>
+    <h3>対応確認の補助</h3>
+    <div class="videos support-videos">
+      <figure>
+        <video controls src="videos/boundary_16_before_match.mp4"></video>
+        <figcaption>前側対応確認。左が切り抜き、右が元動画。境界前の対応が合っているかを見る。</figcaption>
+      </figure>
+      <figure>
+        <video controls src="videos/boundary_16_after_match.mp4"></video>
+        <figcaption>後側対応確認。左が切り抜き、右が元動画。境界後の対応が合っているかを見る。</figcaption>
+      </figure>
+    </div>
+  </section>
+  <section class="strip">
+  <h3>clip前素材終端 6:13.786</h3>
+  <audio controls src="audio/boundary_16_clip_before_pm2s.wav"></audio>
+  <div class="frames"><figure><img src="stills/boundary_16/clip_before/clip_before_minus1000ms.jpg" alt="clip_before minus1000ms"><figcaption>clip前素材終端<br>minus1000ms<br>6:12.786</figcaption></figure>
+<figure><img src="stills/boundary_16/clip_before/clip_before_minus500ms.jpg" alt="clip_before minus500ms"><figcaption>clip前素材終端<br>minus500ms<br>6:13.286</figcaption></figure>
+<figure><img src="stills/boundary_16/clip_before/clip_before_exact.jpg" alt="clip_before exact"><figcaption>clip前素材終端<br>exact<br>6:13.786</figcaption></figure>
+<figure><img src="stills/boundary_16/clip_before/clip_before_plus500ms.jpg" alt="clip_before plus500ms"><figcaption>clip前素材終端<br>plus500ms<br>6:14.286</figcaption></figure>
+<figure><img src="stills/boundary_16/clip_before/clip_before_plus1000ms.jpg" alt="clip_before plus1000ms"><figcaption>clip前素材終端<br>plus1000ms<br>6:14.786</figcaption></figure></div>
+</section>
+<section class="strip">
+  <h3>clip後素材開始 7:05.880</h3>
+  <audio controls src="audio/boundary_16_clip_after_pm2s.wav"></audio>
+  <div class="frames"><figure><img src="stills/boundary_16/clip_after/clip_after_minus1000ms.jpg" alt="clip_after minus1000ms"><figcaption>clip後素材開始<br>minus1000ms<br>7:04.880</figcaption></figure>
+<figure><img src="stills/boundary_16/clip_after/clip_after_minus500ms.jpg" alt="clip_after minus500ms"><figcaption>clip後素材開始<br>minus500ms<br>7:05.380</figcaption></figure>
+<figure><img src="stills/boundary_16/clip_after/clip_after_exact.jpg" alt="clip_after exact"><figcaption>clip後素材開始<br>exact<br>7:05.880</figcaption></figure>
+<figure><img src="stills/boundary_16/clip_after/clip_after_plus500ms.jpg" alt="clip_after plus500ms"><figcaption>clip後素材開始<br>plus500ms<br>7:06.380</figcaption></figure>
+<figure><img src="stills/boundary_16/clip_after/clip_after_plus1000ms.jpg" alt="clip_after plus1000ms"><figcaption>clip後素材開始<br>plus1000ms<br>7:06.880</figcaption></figure></div>
+</section>
+<section class="strip">
+  <h3>source前素材終端 174:10.741</h3>
+  <audio controls src="audio/boundary_16_source_before_pm2s.wav"></audio>
+  <div class="frames"><figure><img src="stills/boundary_16/source_before/source_before_minus1000ms.jpg" alt="source_before minus1000ms"><figcaption>source前素材終端<br>minus1000ms<br>174:09.741</figcaption></figure>
+<figure><img src="stills/boundary_16/source_before/source_before_minus500ms.jpg" alt="source_before minus500ms"><figcaption>source前素材終端<br>minus500ms<br>174:10.241</figcaption></figure>
+<figure><img src="stills/boundary_16/source_before/source_before_exact.jpg" alt="source_before exact"><figcaption>source前素材終端<br>exact<br>174:10.741</figcaption></figure>
+<figure><img src="stills/boundary_16/source_before/source_before_plus500ms.jpg" alt="source_before plus500ms"><figcaption>source前素材終端<br>plus500ms<br>174:11.241</figcaption></figure>
+<figure><img src="stills/boundary_16/source_before/source_before_plus1000ms.jpg" alt="source_before plus1000ms"><figcaption>source前素材終端<br>plus1000ms<br>174:11.741</figcaption></figure></div>
+</section>
+<section class="strip">
+  <h3>source後素材開始 192:21.555</h3>
+  <audio controls src="audio/boundary_16_source_after_pm2s.wav"></audio>
+  <div class="frames"><figure><img src="stills/boundary_16/source_after/source_after_minus1000ms.jpg" alt="source_after minus1000ms"><figcaption>source後素材開始<br>minus1000ms<br>192:20.555</figcaption></figure>
+<figure><img src="stills/boundary_16/source_after/source_after_minus500ms.jpg" alt="source_after minus500ms"><figcaption>source後素材開始<br>minus500ms<br>192:21.055</figcaption></figure>
+<figure><img src="stills/boundary_16/source_after/source_after_exact.jpg" alt="source_after exact"><figcaption>source後素材開始<br>exact<br>192:21.555</figcaption></figure>
+<figure><img src="stills/boundary_16/source_after/source_after_plus500ms.jpg" alt="source_after plus500ms"><figcaption>source後素材開始<br>plus500ms<br>192:22.055</figcaption></figure>
+<figure><img src="stills/boundary_16/source_after/source_after_plus1000ms.jpg" alt="source_after plus1000ms"><figcaption>source後素材開始<br>plus1000ms<br>192:22.555</figcaption></figure></div>
+</section>
+</article>
+
+  <section class="decision-final" id="decision-final">
+    <h2>最終確認とdecision JSON</h2>
+    <p>境界回答からブロック状態を埋めた後、各ブロックの採否を人間が確認してください。自動提案は確定ではありません。</p>
+    <div class="decision-actions">
+      <button type="button" id="derive-blocks">境界回答からブロック状態を埋める</button>
+    </div>
+    <div class="block-table-wrap">
+      <table class="block-decision-table">
+        <thead><tr><th>block</th><th>clip ms</th><th>source ms</th><th>人間判定</th><th>理由・メモ</th></tr></thead>
+        <tbody>
+      <tr data-block-row="1">
+        <td>1</td>
+        <td>4909-9532</td>
+        <td>260068-264269</td>
+        <td>
+          <select data-block-field="status">
+            <option value="pending">未回答</option>
+            <option value="accepted">採用</option>
+            <option value="rejected">不採用</option>
+            <option value="unresolved">判定不能</option>
+          </select>
+        </td>
+        <td><textarea data-block-field="note" placeholder="不採用・判定不能では理由必須"></textarea></td>
+      </tr>
+      <tr data-block-row="2">
+        <td>2</td>
+        <td>14595-18477</td>
+        <td>309446-313689</td>
+        <td>
+          <select data-block-field="status">
+            <option value="pending">未回答</option>
+            <option value="accepted">採用</option>
+            <option value="rejected">不採用</option>
+            <option value="unresolved">判定不能</option>
+          </select>
+        </td>
+        <td><textarea data-block-field="note" placeholder="不採用・判定不能では理由必須"></textarea></td>
+      </tr>
+      <tr data-block-row="3">
+        <td>3</td>
+        <td>18477-24321</td>
+        <td>325479-330720</td>
+        <td>
+          <select data-block-field="status">
+            <option value="pending">未回答</option>
+            <option value="accepted">採用</option>
+            <option value="rejected">不採用</option>
+            <option value="unresolved">判定不能</option>
+          </select>
+        </td>
+        <td><textarea data-block-field="note" placeholder="不採用・判定不能では理由必須"></textarea></td>
+      </tr>
+      <tr data-block-row="4">
+        <td>4</td>
+        <td>37539-40120</td>
+        <td>1052987-1055347</td>
+        <td>
+          <select data-block-field="status">
+            <option value="pending">未回答</option>
+            <option value="accepted">採用</option>
+            <option value="rejected">不採用</option>
+            <option value="unresolved">判定不能</option>
+          </select>
+        </td>
+        <td><textarea data-block-field="note" placeholder="不採用・判定不能では理由必須"></textarea></td>
+      </tr>
+      <tr data-block-row="5">
+        <td>5</td>
+        <td>44701-49962</td>
+        <td>1254601-1258062</td>
+        <td>
+          <select data-block-field="status">
+            <option value="pending">未回答</option>
+            <option value="accepted">採用</option>
+            <option value="rejected">不採用</option>
+            <option value="unresolved">判定不能</option>
+          </select>
+        </td>
+        <td><textarea data-block-field="note" placeholder="不採用・判定不能では理由必須"></textarea></td>
+      </tr>
+      <tr data-block-row="6">
+        <td>6</td>
+        <td>59564-73795</td>
+        <td>2790074-2806680</td>
+        <td>
+          <select data-block-field="status">
+            <option value="pending">未回答</option>
+            <option value="accepted">採用</option>
+            <option value="rejected">不採用</option>
+            <option value="unresolved">判定不能</option>
+          </select>
+        </td>
+        <td><textarea data-block-field="note" placeholder="不採用・判定不能では理由必須"></textarea></td>
+      </tr>
+      <tr data-block-row="7">
+        <td>7</td>
+        <td>88226-103019</td>
+        <td>3006642-3021412</td>
+        <td>
+          <select data-block-field="status">
+            <option value="pending">未回答</option>
+            <option value="accepted">採用</option>
+            <option value="rejected">不採用</option>
+            <option value="unresolved">判定不能</option>
+          </select>
+        </td>
+        <td><textarea data-block-field="note" placeholder="不採用・判定不能では理由必須"></textarea></td>
+      </tr>
+      <tr data-block-row="8">
+        <td>8</td>
+        <td>104380-113446</td>
+        <td>3180410-3190215</td>
+        <td>
+          <select data-block-field="status">
+            <option value="pending">未回答</option>
+            <option value="accepted">採用</option>
+            <option value="rejected">不採用</option>
+            <option value="unresolved">判定不能</option>
+          </select>
+        </td>
+        <td><textarea data-block-field="note" placeholder="不採用・判定不能では理由必須"></textarea></td>
+      </tr>
+      <tr data-block-row="9">
+        <td>9</td>
+        <td>138480-141901</td>
+        <td>3285387-3288829</td>
+        <td>
+          <select data-block-field="status">
+            <option value="pending">未回答</option>
+            <option value="accepted">採用</option>
+            <option value="rejected">不採用</option>
+            <option value="unresolved">判定不能</option>
+          </select>
+        </td>
+        <td><textarea data-block-field="note" placeholder="不採用・判定不能では理由必須"></textarea></td>
+      </tr>
+      <tr data-block-row="10">
+        <td>10</td>
+        <td>183024-193011</td>
+        <td>3475241-3485035</td>
+        <td>
+          <select data-block-field="status">
+            <option value="pending">未回答</option>
+            <option value="accepted">採用</option>
+            <option value="rejected">不採用</option>
+            <option value="unresolved">判定不能</option>
+          </select>
+        </td>
+        <td><textarea data-block-field="note" placeholder="不採用・判定不能では理由必須"></textarea></td>
+      </tr>
+      <tr data-block-row="11">
+        <td>11</td>
+        <td>230898-259188</td>
+        <td>3998452-4026707</td>
+        <td>
+          <select data-block-field="status">
+            <option value="pending">未回答</option>
+            <option value="accepted">採用</option>
+            <option value="rejected">不採用</option>
+            <option value="unresolved">判定不能</option>
+          </select>
+        </td>
+        <td><textarea data-block-field="note" placeholder="不採用・判定不能では理由必須"></textarea></td>
+      </tr>
+      <tr data-block-row="12">
+        <td>12</td>
+        <td>265210-273665</td>
+        <td>4102099-4109864</td>
+        <td>
+          <select data-block-field="status">
+            <option value="pending">未回答</option>
+            <option value="accepted">採用</option>
+            <option value="rejected">不採用</option>
+            <option value="unresolved">判定不能</option>
+          </select>
+        </td>
+        <td><textarea data-block-field="note" placeholder="不採用・判定不能では理由必須"></textarea></td>
+      </tr>
+      <tr data-block-row="13">
+        <td>13</td>
+        <td>279029-291898</td>
+        <td>4877136-4889844</td>
+        <td>
+          <select data-block-field="status">
+            <option value="pending">未回答</option>
+            <option value="accepted">採用</option>
+            <option value="rejected">不採用</option>
+            <option value="unresolved">判定不能</option>
+          </select>
+        </td>
+        <td><textarea data-block-field="note" placeholder="不採用・判定不能では理由必須"></textarea></td>
+      </tr>
+      <tr data-block-row="14">
+        <td>14</td>
+        <td>316355-322480</td>
+        <td>5183974-5189318</td>
+        <td>
+          <select data-block-field="status">
+            <option value="pending">未回答</option>
+            <option value="accepted">採用</option>
+            <option value="rejected">不採用</option>
+            <option value="unresolved">判定不能</option>
+          </select>
+        </td>
+        <td><textarea data-block-field="note" placeholder="不採用・判定不能では理由必須"></textarea></td>
+      </tr>
+      <tr data-block-row="15">
+        <td>15</td>
+        <td>338724-340845</td>
+        <td>5217231-5218992</td>
+        <td>
+          <select data-block-field="status">
+            <option value="pending">未回答</option>
+            <option value="accepted">採用</option>
+            <option value="rejected">不採用</option>
+            <option value="unresolved">判定不能</option>
+          </select>
+        </td>
+        <td><textarea data-block-field="note" placeholder="不採用・判定不能では理由必須"></textarea></td>
+      </tr>
+      <tr data-block-row="16">
+        <td>16</td>
+        <td>358151-373786</td>
+        <td>10439052-10450741</td>
+        <td>
+          <select data-block-field="status">
+            <option value="pending">未回答</option>
+            <option value="accepted">採用</option>
+            <option value="rejected">不採用</option>
+            <option value="unresolved">判定不能</option>
+          </select>
+        </td>
+        <td><textarea data-block-field="note" placeholder="不採用・判定不能では理由必須"></textarea></td>
+      </tr>
+      <tr data-block-row="17">
+        <td>17</td>
+        <td>425880-459146</td>
+        <td>11541555-11575281</td>
+        <td>
+          <select data-block-field="status">
+            <option value="pending">未回答</option>
+            <option value="accepted">採用</option>
+            <option value="rejected">不採用</option>
+            <option value="unresolved">判定不能</option>
+          </select>
+        </td>
+        <td><textarea data-block-field="note" placeholder="不採用・判定不能では理由必須"></textarea></td>
+      </tr></tbody>
+      </table>
+    </div>
+    <div class="decision-grid final-fields">
+      <label>確認者
+        <input id="checked-by" value="kawafmm">
+      </label>
+      <label>確認日
+        <input id="checked-at" type="date" value="2026-07-11">
+      </label>
+      <label class="wide">固定テーマ1行
+        <input id="fixed-theme" placeholder="採用区間から人間が逆算したテーマ。候補LLMの文をそのまま使わない">
+      </label>
+      <label class="wide">全体メモ
+        <textarea id="confirmation-note" placeholder="確認手段の限界、crossfade、除外理由など"></textarea>
+      </label>
+    </div>
+    <label class="freeze-consent">
+      <input type="checkbox" id="freeze-consent">
+      この回答を凍結候補として確定する。実際のfixture/expected書き込みは、別工程のpost-human dry-run後に行う。
+    </label>
+    <div class="decision-actions">
+      <button type="button" id="build-decision">回答を検査してJSONを作る</button>
+      <button type="button" id="copy-summary">回答文をコピー</button>
+      <button type="button" id="copy-decision">JSONをコピー</button>
+      <button type="button" id="download-decision">JSONを保存</button>
+      <button type="button" class="secondary" id="clear-saved">この画面の保存回答を消す</button>
+    </div>
+    <div id="validation-summary" class="validation-summary"></div>
+    <h3>チャットへ返す回答</h3>
+    <textarea id="review-summary" readonly placeholder="確認結果をまとめると、ここにチャットへ貼れる回答が出ます"></textarea>
+    <h3>凍結用decision JSON</h3>
+    <textarea id="decision-output" readonly placeholder="入力内容を検査すると、凍結用decision JSONがここに出ます"></textarea>
+    <p id="copy-status" class="copy-status"></p>
+  </section>
+
+  <script id="decision-template" type="application/json">{"kind":"clip_composition_multiblock_material_human_decision","fixtureId":"nOEWCNc77MI_multiblock_material_v001","targetId":"nOEWCNc77MI","sourceVideoId":"YE-faluP7zY","sourceSttId":"nOEWCNc77MI_YE-faluP7zY_local30_v001","evidence":{"materialBlocksPath":"evals/clip_composition/outputs/material-blocks-nOEWCNc77MI-20260710-full-plus-selected-union-v001.json","materialBlocksSha256":"fa5445dc04d9776eb09ec778cc981d1fc6a5a92c914dc882c963514afd01d96a","reviewPackagePath":"evals/clip_composition/outputs/boundary-check/nOEWCNc77MI/20260710-full-plus-selected-union-v001/index.html","reviewPackageSha256":"610d93dd2572c65ba7fb797ae0a2894eaf7f4c81e17907610344b38299f9c082"},"humanConfirmation":{"checkedBy":"","checkedAt":"","method":"境界確認パッケージの動画・音声確認","allBlocksReviewed":false,"allBoundariesReviewed":false,"note":""},"blocks":[{"blockIndex":1,"status":"pending","clipRange":{"startMs":4909,"endMs":9532},"sourceRange":{"startMs":260068,"endMs":264269},"note":""},{"blockIndex":2,"status":"pending","clipRange":{"startMs":14595,"endMs":18477},"sourceRange":{"startMs":309446,"endMs":313689},"note":""},{"blockIndex":3,"status":"pending","clipRange":{"startMs":18477,"endMs":24321},"sourceRange":{"startMs":325479,"endMs":330720},"note":""},{"blockIndex":4,"status":"pending","clipRange":{"startMs":37539,"endMs":40120},"sourceRange":{"startMs":1052987,"endMs":1055347},"note":""},{"blockIndex":5,"status":"pending","clipRange":{"startMs":44701,"endMs":49962},"sourceRange":{"startMs":1254601,"endMs":1258062},"note":""},{"blockIndex":6,"status":"pending","clipRange":{"startMs":59564,"endMs":73795},"sourceRange":{"startMs":2790074,"endMs":2806680},"note":""},{"blockIndex":7,"status":"pending","clipRange":{"startMs":88226,"endMs":103019},"sourceRange":{"startMs":3006642,"endMs":3021412},"note":""},{"blockIndex":8,"status":"pending","clipRange":{"startMs":104380,"endMs":113446},"sourceRange":{"startMs":3180410,"endMs":3190215},"note":""},{"blockIndex":9,"status":"pending","clipRange":{"startMs":138480,"endMs":141901},"sourceRange":{"startMs":3285387,"endMs":3288829},"note":""},{"blockIndex":10,"status":"pending","clipRange":{"startMs":183024,"endMs":193011},"sourceRange":{"startMs":3475241,"endMs":3485035},"note":""},{"blockIndex":11,"status":"pending","clipRange":{"startMs":230898,"endMs":259188},"sourceRange":{"startMs":3998452,"endMs":4026707},"note":""},{"blockIndex":12,"status":"pending","clipRange":{"startMs":265210,"endMs":273665},"sourceRange":{"startMs":4102099,"endMs":4109864},"note":""},{"blockIndex":13,"status":"pending","clipRange":{"startMs":279029,"endMs":291898},"sourceRange":{"startMs":4877136,"endMs":4889844},"note":""},{"blockIndex":14,"status":"pending","clipRange":{"startMs":316355,"endMs":322480},"sourceRange":{"startMs":5183974,"endMs":5189318},"note":""},{"blockIndex":15,"status":"pending","clipRange":{"startMs":338724,"endMs":340845},"sourceRange":{"startMs":5217231,"endMs":5218992},"note":""},{"blockIndex":16,"status":"pending","clipRange":{"startMs":358151,"endMs":373786},"sourceRange":{"startMs":10439052,"endMs":10450741},"note":""},{"blockIndex":17,"status":"pending","clipRange":{"startMs":425880,"endMs":459146},"sourceRange":{"startMs":11541555,"endMs":11575281},"note":""}],"boundaries":[{"boundaryIndex":1,"beforeBlockIndex":1,"afterBlockIndex":2,"status":"pending","beforeMatches":null,"afterMatches":null,"sourcePositionSwitches":null,"note":""},{"boundaryIndex":2,"beforeBlockIndex":2,"afterBlockIndex":3,"status":"pending","beforeMatches":null,"afterMatches":null,"sourcePositionSwitches":null,"note":""},{"boundaryIndex":3,"beforeBlockIndex":3,"afterBlockIndex":4,"status":"pending","beforeMatches":null,"afterMatches":null,"sourcePositionSwitches":null,"note":""},{"boundaryIndex":4,"beforeBlockIndex":4,"afterBlockIndex":5,"status":"pending","beforeMatches":null,"afterMatches":null,"sourcePositionSwitches":null,"note":""},{"boundaryIndex":5,"beforeBlockIndex":5,"afterBlockIndex":6,"status":"pending","beforeMatches":null,"afterMatches":null,"sourcePositionSwitches":null,"note":""},{"boundaryIndex":6,"beforeBlockIndex":6,"afterBlockIndex":7,"status":"pending","beforeMatches":null,"afterMatches":null,"sourcePositionSwitches":null,"note":""},{"boundaryIndex":7,"beforeBlockIndex":7,"afterBlockIndex":8,"status":"pending","beforeMatches":null,"afterMatches":null,"sourcePositionSwitches":null,"note":""},{"boundaryIndex":8,"beforeBlockIndex":8,"afterBlockIndex":9,"status":"pending","beforeMatches":null,"afterMatches":null,"sourcePositionSwitches":null,"note":""},{"boundaryIndex":9,"beforeBlockIndex":9,"afterBlockIndex":10,"status":"pending","beforeMatches":null,"afterMatches":null,"sourcePositionSwitches":null,"note":""},{"boundaryIndex":10,"beforeBlockIndex":10,"afterBlockIndex":11,"status":"pending","beforeMatches":null,"afterMatches":null,"sourcePositionSwitches":null,"note":""},{"boundaryIndex":11,"beforeBlockIndex":11,"afterBlockIndex":12,"status":"pending","beforeMatches":null,"afterMatches":null,"sourcePositionSwitches":null,"note":""},{"boundaryIndex":12,"beforeBlockIndex":12,"afterBlockIndex":13,"status":"pending","beforeMatches":null,"afterMatches":null,"sourcePositionSwitches":null,"note":""},{"boundaryIndex":13,"beforeBlockIndex":13,"afterBlockIndex":14,"status":"pending","beforeMatches":null,"afterMatches":null,"sourcePositionSwitches":null,"note":""},{"boundaryIndex":14,"beforeBlockIndex":14,"afterBlockIndex":15,"status":"pending","beforeMatches":null,"afterMatches":null,"sourcePositionSwitches":null,"note":""},{"boundaryIndex":15,"beforeBlockIndex":15,"afterBlockIndex":16,"status":"pending","beforeMatches":null,"afterMatches":null,"sourcePositionSwitches":null,"note":""},{"boundaryIndex":16,"beforeBlockIndex":16,"afterBlockIndex":17,"status":"pending","beforeMatches":null,"afterMatches":null,"sourcePositionSwitches":null,"note":""}],"fixedTheme":{"title":"","summary":"","compositionNote":"人間確認で採用した複数素材ブロックを、切り抜き内の順番どおり別々のselectedCutsとして扱う。"},"readyForFreeze":false}</script>
+  <script>
+    (() => {
+      const template = JSON.parse(document.getElementById('decision-template').textContent);
+      const storageKey = 'zev-multiblock-decision-review:' + template.fixtureId + ':' + template.evidence.materialBlocksSha256;
+      const boundaryFields = ['clipSwitch', 'sourcePositionSwitches', 'beforeMatches', 'afterMatches'];
+
+      function boundarySection(index) {
+        return document.querySelector('[data-boundary-answer="' + index + '"]');
+      }
+
+      function boundaryValue(index, field) {
+        return boundarySection(index)?.querySelector('[data-boundary-field="' + field + '"]')?.value || '';
+      }
+
+      function toBoolean(value) {
+        if (value === 'true') return true;
+        if (value === 'false') return false;
+        return null;
+      }
+
+      function boundaryResult(boundary) {
+        const id = boundary.boundaryIndex;
+        const values = Object.fromEntries(boundaryFields.map((field) => [field, boundaryValue(id, field)]));
+        const noteInput = boundaryValue(id, 'note').trim();
+        const answered = boundaryFields.every((field) => values[field]);
+        const allConfirmed = answered && boundaryFields.every((field) => values[field] === 'true');
+        const hasUnresolved = boundaryFields.some((field) => values[field] === 'unresolved');
+        const status = !answered ? 'pending' : allConfirmed ? 'confirmed' : hasUnresolved ? 'unresolved' : 'rejected';
+        const facts = [
+          'clip連続再生=' + (values.clipSwitch || '未回答'),
+          'source位置切替=' + (values.sourcePositionSwitches || '未回答'),
+          '前側対応=' + (values.beforeMatches || '未回答'),
+          '後側対応=' + (values.afterMatches || '未回答')
+        ];
+        const note = facts.join(' / ') + (noteInput ? ' / メモ=' + noteInput : '');
+        return {
+          ...boundary,
+          status,
+          beforeMatches: toBoolean(values.beforeMatches),
+          afterMatches: toBoolean(values.afterMatches),
+          sourcePositionSwitches: toBoolean(values.sourcePositionSwitches),
+          note,
+          _ui: { ...values, answered, facts }
+        };
+      }
+
+      function setBoundaryState(index) {
+        const result = boundaryResult(template.boundaries[index - 1]);
+        const element = document.querySelector('[data-boundary-state="' + index + '"]');
+        if (!element) return;
+        element.className = 'answer-state';
+        if (result.status === 'confirmed') {
+          element.textContent = '4項目とも確認済み';
+          element.classList.add('confirmed');
+        } else if (result.status === 'rejected') {
+          element.textContent = '不一致あり。凍結前に扱いの確認が必要';
+          element.classList.add('rejected');
+        } else if (result.status === 'unresolved') {
+          element.textContent = '判定不能あり。凍結を止める';
+        } else {
+          const answered = result._ui.facts.filter((fact) => !fact.endsWith('未回答')).length;
+          element.textContent = '回答 ' + answered + '/4';
+        }
+      }
+
+      function blockControl(index, field) {
+        return document.querySelector('[data-block-row="' + index + '"] [data-block-field="' + field + '"]');
+      }
+
+      function deriveBlocks() {
+        for (const block of template.blocks) {
+          const refs = [];
+          if (block.blockIndex > 1) {
+            refs.push({ boundary: block.blockIndex - 1, side: 'afterMatches', value: boundaryValue(block.blockIndex - 1, 'afterMatches') });
+          }
+          if (block.blockIndex <= template.boundaries.length) {
+            refs.push({ boundary: block.blockIndex, side: 'beforeMatches', value: boundaryValue(block.blockIndex, 'beforeMatches') });
+          }
+          let status = 'pending';
+          if (refs.every((ref) => ref.value === 'true')) {
+            status = 'accepted';
+          } else if (refs.some((ref) => ref.value === 'false')) {
+            status = 'rejected';
+          } else if (refs.every((ref) => ref.value) && refs.some((ref) => ref.value === 'unresolved')) {
+            status = 'unresolved';
+          }
+          const reasons = refs
+            .filter((ref) => ref.value !== 'true')
+            .map((ref) => '境界' + ref.boundary + 'の' + (ref.side === 'beforeMatches' ? '前側' : '後側') + '=' + (ref.value || '未回答'));
+          blockControl(block.blockIndex, 'status').value = status;
+          blockControl(block.blockIndex, 'note').value = status === 'accepted' || status === 'pending' ? '' : reasons.join(' / ');
+        }
+        saveState();
+        updateProgress();
+      }
+
+      function blockResult(block) {
+        return {
+          ...block,
+          status: blockControl(block.blockIndex, 'status').value,
+          note: blockControl(block.blockIndex, 'note').value.trim()
+        };
+      }
+
+      function collectState() {
+        const controls = [...document.querySelectorAll('select, input, textarea')].filter((control) => !['decision-output', 'review-summary'].includes(control.id));
+        const state = {};
+        controls.forEach((control, index) => {
+          const key = control.id || control.dataset.boundaryField || control.dataset.blockField || 'control-' + index;
+          const boundary = control.closest('[data-boundary-answer]')?.dataset.boundaryAnswer || '';
+          const block = control.closest('[data-block-row]')?.dataset.blockRow || '';
+          state[boundary + ':' + block + ':' + key + ':' + index] = control.type === 'checkbox' ? control.checked : control.value;
+        });
+        return state;
+      }
+
+      function restoreState() {
+        const raw = localStorage.getItem(storageKey);
+        if (!raw) return;
+        try {
+          const state = JSON.parse(raw);
+          const controls = [...document.querySelectorAll('select, input, textarea')].filter((control) => !['decision-output', 'review-summary'].includes(control.id));
+          controls.forEach((control, index) => {
+            const key = control.id || control.dataset.boundaryField || control.dataset.blockField || 'control-' + index;
+            const boundary = control.closest('[data-boundary-answer]')?.dataset.boundaryAnswer || '';
+            const block = control.closest('[data-block-row]')?.dataset.blockRow || '';
+            const value = state[boundary + ':' + block + ':' + key + ':' + index];
+            if (value === undefined) return;
+            if (control.type === 'checkbox') control.checked = Boolean(value);
+            else control.value = value;
+          });
+        } catch {
+          localStorage.removeItem(storageKey);
+        }
+      }
+
+      function saveState() {
+        localStorage.setItem(storageKey, JSON.stringify(collectState()));
+        const state = document.getElementById('save-state');
+        state.textContent = '回答を保存済み';
+        window.clearTimeout(saveState.timeout);
+        saveState.timeout = window.setTimeout(() => { state.textContent = '自動保存中'; }, 1200);
+      }
+
+      function updateProgress() {
+        const boundaries = template.boundaries.map(boundaryResult);
+        boundaries.forEach((boundary) => setBoundaryState(boundary.boundaryIndex));
+        const answered = boundaries.filter((boundary) => boundary._ui.answered).length;
+        const blocks = template.blocks.map(blockResult);
+        const decided = blocks.filter((block) => block.status !== 'pending').length;
+        document.getElementById('boundary-progress').textContent = '境界 ' + answered + '/' + boundaries.length;
+        document.getElementById('block-progress').textContent = 'ブロック ' + decided + '/' + blocks.length;
+      }
+
+      function validate(decision, boundaryUi) {
+        const issues = [];
+        if (!decision.humanConfirmation.checkedBy) issues.push('確認者が未入力');
+        if (!decision.humanConfirmation.checkedAt) issues.push('確認日が未入力');
+        if (!decision.humanConfirmation.allBoundariesReviewed) issues.push('未回答の境界がある');
+        if (!decision.humanConfirmation.allBlocksReviewed) issues.push('未回答のブロックがある');
+        if (!decision.fixedTheme.title) issues.push('固定テーマ1行が未入力');
+        if (!decision.blocks.some((block) => block.status === 'accepted')) issues.push('採用ブロックが1件もない');
+        for (const block of decision.blocks) {
+          if ((block.status === 'rejected' || block.status === 'unresolved') && !block.note) {
+            issues.push('block ' + block.blockIndex + ' の不採用・判定不能理由がない');
+          }
+        }
+        for (const boundary of decision.boundaries) {
+          if ((boundary.status === 'rejected' || boundary.status === 'unresolved') && !boundary.note) {
+            issues.push('境界' + boundary.boundaryIndex + ' の不一致・判定不能理由がない');
+          }
+          if (boundary.status === 'confirmed' && boundaryUi[boundary.boundaryIndex].clipSwitch !== 'true') {
+            issues.push('境界' + boundary.boundaryIndex + ' は切り抜き側の切替確認がない');
+          }
+        }
+        const accepted = new Set(decision.blocks.filter((block) => block.status === 'accepted').map((block) => block.blockIndex));
+        for (const boundary of decision.boundaries) {
+          if (accepted.has(boundary.beforeBlockIndex) && accepted.has(boundary.afterBlockIndex) && boundary.status !== 'confirmed') {
+            issues.push('採用block ' + boundary.beforeBlockIndex + '/' + boundary.afterBlockIndex + ' 間の境界' + boundary.boundaryIndex + 'が未確定');
+          }
+        }
+        if (!document.getElementById('freeze-consent').checked) issues.push('凍結候補として確定するチェックが未入力');
+        return [...new Set(issues)];
+      }
+
+      function buildDecision() {
+        const decision = structuredClone(template);
+        const boundariesWithUi = template.boundaries.map(boundaryResult);
+        const boundaryUi = Object.fromEntries(boundariesWithUi.map((boundary) => [boundary.boundaryIndex, boundary._ui]));
+        decision.boundaries = boundariesWithUi.map(({ _ui, ...boundary }) => boundary);
+        decision.blocks = template.blocks.map(blockResult);
+        decision.humanConfirmation = {
+          checkedBy: document.getElementById('checked-by').value.trim(),
+          checkedAt: document.getElementById('checked-at').value,
+          method: '境界確認パッケージの動画・音声確認と入力HTMLによる記録',
+          allBlocksReviewed: decision.blocks.every((block) => block.status !== 'pending'),
+          allBoundariesReviewed: boundariesWithUi.every((boundary) => boundary._ui.answered),
+          note: document.getElementById('confirmation-note').value.trim()
+        };
+        const theme = document.getElementById('fixed-theme').value.trim();
+        decision.fixedTheme.title = theme;
+        decision.fixedTheme.summary = theme;
+        decision.readyForFreeze = false;
+        const issues = validate(decision, boundaryUi);
+        decision.readyForFreeze = issues.length === 0;
+        const acceptedBlocks = decision.blocks.filter((block) => block.status === 'accepted').map((block) => block.blockIndex);
+        const excludedBlocks = decision.blocks.filter((block) => block.status !== 'accepted').map((block) => block.blockIndex + ':' + block.status);
+        const summaryLines = [
+          'B素材 nOEWCNc77MI 人間確認結果',
+          '確認者: ' + (decision.humanConfirmation.checkedBy || '未入力'),
+          '確認日: ' + (decision.humanConfirmation.checkedAt || '未入力'),
+          '',
+          ...decision.boundaries.map((boundary) => '境界' + boundary.boundaryIndex + ': ' + boundary.status + ' / ' + boundary.note),
+          '',
+          '採用block: ' + (acceptedBlocks.length ? acceptedBlocks.join(', ') : 'なし'),
+          '除外・判定不能block: ' + (excludedBlocks.length ? excludedBlocks.join(', ') : 'なし'),
+          '固定テーマ: ' + (decision.fixedTheme.title || '未入力'),
+          'readyForFreeze: ' + decision.readyForFreeze,
+          ...(issues.length ? ['', '未完了:', ...issues.map((issue) => '- ' + issue)] : [])
+        ];
+        document.getElementById('review-summary').value = summaryLines.join('\n') + '\n';
+        document.getElementById('decision-output').value = JSON.stringify(decision, null, 2) + '\n';
+        const summary = document.getElementById('validation-summary');
+        summary.className = 'validation-summary ' + (issues.length ? 'bad' : 'ok');
+        summary.innerHTML = issues.length
+          ? '<strong>まだ凍結候補にできません</strong><ul>' + issues.map((issue) => '<li>' + escapeText(issue) + '</li>').join('') + '</ul>'
+          : '<strong>入力完了</strong><p>decision JSONはpost-human dry-runへ渡せる状態です。このHTMLからfixture/expectedへは書き込んでいません。</p>';
+        saveState();
+        return { decision, issues };
+      }
+
+      function escapeText(value) {
+        const div = document.createElement('div');
+        div.textContent = value;
+        return div.innerHTML;
+      }
+
+      async function copyDecision() {
+        const { decision } = buildDecision();
+        const text = JSON.stringify(decision, null, 2) + '\n';
+        try {
+          await navigator.clipboard.writeText(text);
+          document.getElementById('copy-status').textContent = 'JSONをコピーしました。';
+        } catch {
+          const output = document.getElementById('decision-output');
+          output.focus();
+          output.select();
+          document.execCommand('copy');
+          document.getElementById('copy-status').textContent = 'JSONを選択しました。コピーできない場合は手動でコピーしてください。';
+        }
+      }
+
+      async function copySummary() {
+        buildDecision();
+        const text = document.getElementById('review-summary').value;
+        try {
+          await navigator.clipboard.writeText(text);
+          document.getElementById('copy-status').textContent = 'チャット用回答をコピーしました。';
+        } catch {
+          const output = document.getElementById('review-summary');
+          output.focus();
+          output.select();
+          document.execCommand('copy');
+          document.getElementById('copy-status').textContent = '回答を選択しました。コピーできない場合は手動でコピーしてください。';
+        }
+      }
+
+      function downloadDecision() {
+        const { decision } = buildDecision();
+        const blob = new Blob([JSON.stringify(decision, null, 2) + '\n'], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = template.fixtureId + '-human-decision.json';
+        link.click();
+        URL.revokeObjectURL(url);
+      }
+
+      document.addEventListener('input', (event) => {
+        if (event.target.matches('select, input, textarea') && !['decision-output', 'review-summary'].includes(event.target.id)) {
+          saveState();
+          updateProgress();
+        }
+      });
+      document.addEventListener('change', (event) => {
+        if (event.target.matches('select, input, textarea') && !['decision-output', 'review-summary'].includes(event.target.id)) {
+          saveState();
+          updateProgress();
+        }
+      });
+      document.getElementById('derive-blocks').addEventListener('click', deriveBlocks);
+      document.getElementById('build-decision').addEventListener('click', buildDecision);
+      document.getElementById('copy-summary').addEventListener('click', copySummary);
+      document.getElementById('copy-decision').addEventListener('click', copyDecision);
+      document.getElementById('download-decision').addEventListener('click', downloadDecision);
+      document.getElementById('clear-saved').addEventListener('click', () => {
+        if (!window.confirm('この画面に自動保存した回答を消しますか？')) return;
+        localStorage.removeItem(storageKey);
+        window.location.reload();
+      });
+      restoreState();
+      updateProgress();
+    })();
+  </script>
+</body>
+</html>

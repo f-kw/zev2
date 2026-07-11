@@ -266,6 +266,27 @@ node evals/clip_composition/build_material_block_audio_review_package.mjs \
 - STT 0語で比較材料がない区間を採否判断すること。
 - 期待区間に入れるべきかを、テーマ評価やプロンプト評価込みで判断すること。
 
+複数素材ブロックの確認では、確認媒体HTMLと人間確認decisionテンプレートから、入力・回答保存・JSON出力を行う別HTMLを作れます。元の確認媒体HTMLは変更せず、同じディレクトリに出力します。
+
+```bash
+node evals/clip_composition/build_multiblock_decision_review_html.mjs \
+  --sourceHtml "evals/clip_composition/outputs/boundary-check/${CLIP_ID}/${BLOCK_OUTPUT_ID}/index.html" \
+  --decisionTemplate "人間確認decisionテンプレートJSON" \
+  --output "evals/clip_composition/outputs/boundary-check/${CLIP_ID}/${BLOCK_OUTPUT_ID}/decision-review.html" \
+  --checkedBy "kawafmm" \
+  --checkedAt "2026-07-11"
+```
+
+入力HTMLで行うこと:
+
+- 各境界について、切り抜き側の切り替わり、元配信位置の切り替わり、境界前後の素材対応を入力する。
+- 不一致・判定不能を合格へ寄せず、そのまま理由付きで記録する。
+- 境界回答からブロック採否の下書きを作るが、人間が17ブロックを再確認して確定する。
+- 確認者、確認日、固定テーマ1行、最終確認を入力する。
+- チャットへ返す回答文と、凍結処理が読むdecision JSONを出力する。
+
+回答はブラウザー内へ自動保存されます。HTML自身はfixture/expectedへ書き込みません。出力JSONを受け取った後も、実凍結前に書き込みなしのpost-human dry-runを行います。
+
 ## 7. 人間確認結果を記録する
 
 確認後、レポートまたは凍結用メタデータに次を残します。
