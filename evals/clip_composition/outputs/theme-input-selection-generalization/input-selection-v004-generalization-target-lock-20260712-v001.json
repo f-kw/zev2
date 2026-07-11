@@ -1,0 +1,60 @@
+{
+  "kind": "clip_composition_input_selection_generalization_target_lock",
+  "lockedAt": "2026-07-12",
+  "experimentId": "input-selection-v004-generalization-001",
+  "preregistration": "evals/clip_composition/outputs/theme-input-selection-generalization/input-selection-v004-generalization-preregistration-20260712-v001.json",
+  "source": {
+    "sourceVideoId": "o8rZAhARXAc",
+    "url": "https://www.youtube.com/watch?v=o8rZAhARXAc",
+    "title": "【 #ホロライブ甲子園2025】2年目夏！！夏合宿と甲子園初戦で狙え育成上振れ！！【ホロライブ/宝鐘マリン】",
+    "channel": "Marine Ch. 宝鐘マリン",
+    "durationMs": 11899000,
+    "referenceDurationMs": 11824121,
+    "absoluteDurationDifferenceMs": 74879,
+    "genre": "Vtuber game stream",
+    "chatReplayAvailability": "yt-dlp --list-subsでlive_chat jsonを確認"
+  },
+  "selectionEvidence": {
+    "channelScope": "Marine Ch. 宝鐘マリン /streams の全公開配信",
+    "durationSearch": "B素材との差が74879ms未満になり得る11749秒以上11899秒以下を全件抽出",
+    "nearerNonGameVideos": [
+      "nh7pActmvIM",
+      "Xj_nQp20ws0",
+      "shnXu2VLJTw",
+      "ZZ9Y2fRAVFI",
+      "Plv46mUPo2A"
+    ],
+    "excludedReference": "YE-faluP7zY",
+    "conclusion": "抽出範囲内で別のゲーム配信はo8rZAhARXAcだけだったため、事前登録の時間差最小規則で固定"
+  },
+  "clipDiscovery": {
+    "query": "ホロライブ甲子園2025 2年目夏 夏合宿 甲子園初戦 宝鐘マリン 切り抜き",
+    "resultLimit": 20,
+    "candidateVideoIdsBeforeMetadataInspection": [
+      "9dtwF5Exu5w",
+      "g9Hhh0iOEPk",
+      "V_Z6ipxgb-k",
+      "zJj2vx1q_Z0",
+      "P2sQrR3PFTQ",
+      "L9icxi2cEZQ",
+      "MaAqNIOYKyU",
+      "1YR9XPD3Yow"
+    ],
+    "eligibility": "公開動画で、説明欄または出典表記がo8rZAhARXAcを示し、この1配信だけから切り抜いた動画",
+    "selectionRule": "適格候補のうちview_count最大を教師切り抜きにする。同数ならupload_dateが早い方、それも同じならvideoIdの辞書順",
+    "notInspectedYet": [
+      "view_count",
+      "description source link",
+      "clip transcript",
+      "source correspondence",
+      "expected ranges",
+      "chat velocity series"
+    ]
+  },
+  "lockPolicy": {
+    "sourceReplacement": "チャットrawの完全取得または新規fixture製造が技術的に不可能な場合だけ不適格として記録する。入力可視性、LLM候補、採点結果では差し替えない",
+    "clipReplacement": "最上位の適格切り抜きが取得不能または単一配信由来でない場合だけ、同じ固定順位の次候補へ進む",
+    "llmExecution": "fixture凍結と入力可視性の事前計算が完了するまで禁止"
+  },
+  "state": "source-locked-before-clip-metadata-before-chat-velocity-before-expected"
+}
