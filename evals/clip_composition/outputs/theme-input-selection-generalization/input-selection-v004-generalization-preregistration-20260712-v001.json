@@ -1,0 +1,60 @@
+{
+  "kind": "clip_composition_input_selection_generalization_preregistration",
+  "registeredAt": "2026-07-12",
+  "experimentId": "input-selection-v004-generalization-001",
+  "purpose": "B素材の正解を参照して選んだN=100が、正解位置を見ずに選ぶ別素材でも機能するかを測る",
+  "formalSelection": {
+    "inputSelectionVersion": "input-selection-v004",
+    "signal": "one-minute chat replay comment velocity",
+    "selectionCount": 100,
+    "baseline": "対象配信内に完全に収まる1分区間すべての平均コメント数を1.0とする",
+    "ranking": "配信内平均比の降順。同値は配信時刻が早い1分区間を先にする",
+    "role": "formal-primary",
+    "llmRunCount": 1
+  },
+  "referenceSelections": [
+    {
+      "id": "duration-ratio-reference",
+      "definition": "floor(targetDurationMs * 100 / 11824121)個の1分区間を流速順に選ぶ",
+      "origin": "B素材で選んだ6000000msをB素材配信長11824121msで割った配信長比を、そのまま対象配信へ移す",
+      "llmExecution": false
+    },
+    {
+      "id": "top-percent-reference",
+      "definition": "floor(targetFullMinuteCount * 100 / 197)個の完全な1分区間を流速順に選ぶ",
+      "origin": "B素材の完全な1分区間197個に対して上位100個を選んだ割合を、そのまま対象配信へ移す",
+      "llmExecution": false
+    }
+  ],
+  "targetEligibility": {
+    "differentFromSourceVideoId": "YE-faluP7zY",
+    "genre": "Vtuberのゲーム配信。雑談、発表、歌、イベントを主目的とする配信は除外",
+    "creatorPool": "承認済みプールのうち、B素材と同じホロライブを先に使う",
+    "durationRule": "適格候補のうちB素材配信長11824121msとの絶対時間差が最小の配信を選ぶ。独自の許容幅は置かない",
+    "chatReplay": "live_chatリプレイを取得でき、配信末尾までJSON解析できる",
+    "groundTruth": "実績ある切り抜きから素材ブロックを製造でき、ローカルSTT、大域照合、人間確認、固定テーマを経て新規fixtureとして凍結できる",
+    "blindness": "対象固定前はexpected時刻、チャット流速集計、候補テーマ、過去の範囲hit結果を見ない",
+    "existingFixturePolicy": "2026-07-12の候補調査で既存fixtureの正解件数と時刻を確認したため、既存fixtureは今回の汎化対象から除外する"
+  },
+  "targetDiscovery": {
+    "sourceOrder": "Marine Ch. 宝鐘マリンの公開済みゲーム配信をメタデータで列挙し、B素材自身と既存fixtureのsourceを除外して配信時間差順に並べる",
+    "eligibilityOrder": "時間差順にチャットリプレイ有無と実績切り抜きの有無だけを確認する。条件を満たす最初の配信を対象として固定する",
+    "replacementRule": "チャット取得不能またはfixture製造不能なら不適格理由を記録して次順位へ進む。採点値や正解位置を理由に差し替えない"
+  },
+  "executionControls": {
+    "promptVersion": "theme_generation_prompt_v002",
+    "generationSystem": "theme-llm-v002@gemini-web-flash",
+    "windowing": "input-selection-v003とv004 B実走で使った窓分割条件を固定",
+    "merge": "同一sourceVideoIdで根拠範囲が重なる候補だけを機械統合し、意味統合しない",
+    "scorer": "score_theme_generation_formal.ts",
+    "excludedRanges": "人間が除外した素材ブロックは採点対象外",
+    "noThresholdChangeAfterScoring": true
+  },
+  "reporting": {
+    "formal": "N=100について入力内expected、入力外expected、全expected、候補数、根拠範囲カバー率、hit/候補数、失敗分類を記録",
+    "references": "配信長比と上位割合についてexpectedの入力可視性だけを同じチャットログから機械計算",
+    "failureSeparation": "N=100入力外は入力選定失敗、N=100入力内でmissはモデル失敗として分ける",
+    "adoption": "1素材の結果だけでNまたは割合を再調整せず、生の比較結果を人間判断へ返す"
+  },
+  "state": "conditions-locked-before-target-selection-and-before-llm-run"
+}
