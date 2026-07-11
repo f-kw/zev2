@@ -1,0 +1,67 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "鬼滅の刃ごっこで盛り上がる二人",
+      "reason": "イノシシの被り物を見つけたことをきっかけに、伊之助やねずこ、炭治郎の名前を出して鬼滅の刃のキャラクターになりきる掛け合いが面白いから。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 3252153,
+          "sourceEndMs": 3342545,
+          "supportingSpeechIds": [
+            "481-491",
+            493,
+            494,
+            495
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "猪の頭を被って爆笑をかっさらう",
+      "reason": "猪の頭を被るだけで何も得がないと言いつつも、その見た目の面白さに相手がツボに入って爆笑し続けるシーンが魅力的だから。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 3366903,
+          "sourceEndMs": 3467816,
+          "supportingSpeechIds": [
+            "496-502"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_003",
+      "title": "食材を全て握るシェフマリン",
+      "reason": "船長であるマリンが全ての食材を握っていることが発覚し、お腹を空かせた相手と肉を食べるかどうかやり取りする掛け合いが微笑ましいから。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 3467816,
+          "sourceEndMs": 3495718,
+          "supportingSpeechIds": [
+            "503-507"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-11T17:03:13+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_20_YE-faluP7zY",
+    "windowSourceVideoId": "YE-faluP7zY",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nOEWCNc77MI_full_source_input_selection_v003/theme-llm-v002/20260711-full-source-upper-bound-v001/windows/window_20_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/c30fa2fc51e1d6c9?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"鬼滅の刃ごっこで盛り上がる二人\",\n      \"reason\": \"イノシシの被り物を見つけたことをきっかけに、伊之助やねずこ、炭治郎の名前を出して鬼滅の刃のキャラクターになりきる掛け合いが面白いから。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 3252153,\n          \"sourceEndMs\": 3342545,\n          \"supportingSpeechIds\": [\n            \"481-491\",\n            493,\n            494,\n            495\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"猪の頭を被って爆笑をかっさらう\",\n      \"reason\": \"猪の頭を被るだけで何も得がないと言いつつも、その見た目の面白さに相手がツボに入って爆笑し続けるシーンが魅力的だから。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 3366903,\n          \"sourceEndMs\": 3467816,\n          \"supportingSpeechIds\": [\n            \"496-502\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_003\",\n      \"title\": \"食材を全て握るシェフマリン\",\n      \"reason\": \"船長であるマリンが全ての食材を握っていることが発覚し、お腹を空かせた相手と肉を食べるかどうかやり取りする掛け合いが微笑ましいから。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 3467816,\n          \"sourceEndMs\": 3495718,\n          \"supportingSpeechIds\": [\n            \"503-507\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

@@ -1,0 +1,65 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "強化床のプレミと2階の建築計画",
+      "reason": "サメ対策の強化床が資材を消費する割に合わなかったプレミ報告と、今後の2階建築の方針を説明している場面。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 511410,
+          "sourceEndMs": 629792,
+          "supportingSpeechIds": [
+            "44-46",
+            50
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "今日が「まったり作業デー」である理由の釈明",
+      "reason": "口数が少なく感じられるかもしれない視聴者に対し、今日はゆるめの「まったり作業デー」であることを伝えるやり取り。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 631198,
+          "sourceEndMs": 659944,
+          "supportingSpeechIds": [
+            "51-55"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_003",
+      "title": "でかい島への衝突の危機",
+      "reason": "進行方向にでかい島を発見し、このままぶつかってみるか、止まってしまうかを相談し始める場面。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 690040,
+          "sourceEndMs": 700804,
+          "supportingSpeechIds": [
+            "58-63"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-11T16:19:48+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_03_YE-faluP7zY",
+    "windowSourceVideoId": "YE-faluP7zY",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nOEWCNc77MI_full_source_input_selection_v003/theme-llm-v002/20260711-full-source-upper-bound-v001/windows/window_03_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/44541f6e0d8f8f60?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"強化床のプレミと2階の建築計画\",\n      \"reason\": \"サメ対策の強化床が資材を消費する割に合わなかったプレミ報告と、今後の2階建築の方針を説明している場面。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 511410,\n          \"sourceEndMs\": 629792,\n          \"supportingSpeechIds\": [\"44-46\", 50]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"今日が「まったり作業デー」である理由の釈明\",\n      \"reason\": \"口数が少なく感じられるかもしれない視聴者に対し、今日はゆるめの「まったり作業デー」であることを伝えるやり取り。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 631198,\n          \"sourceEndMs\": 659944,\n          \"supportingSpeechIds\": [\"51-55\"]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_003\",\n      \"title\": \"でかい島への衝突の危機\",\n      \"reason\": \"進行方向にでかい島を発見し、このままぶつかってみるか、止まってしまうかを相談し始める場面。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 690040,\n          \"sourceEndMs\": 700804,\n          \"supportingSpeechIds\": [\"58-63\"]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

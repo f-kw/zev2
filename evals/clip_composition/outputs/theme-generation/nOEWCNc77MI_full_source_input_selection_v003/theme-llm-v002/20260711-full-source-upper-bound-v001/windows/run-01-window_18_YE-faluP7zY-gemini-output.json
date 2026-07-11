@@ -1,0 +1,79 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "構えた弓矢の戻し方に戸惑うマリン",
+      "reason": "鳥を狙うために弓矢を構えたものの、撃たずに下ろす方法が分からず困惑している掛け合いが描かれているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 2910166,
+          "sourceEndMs": 2938310,
+          "supportingSpeechIds": [
+            "434-438"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "トッポの中身をレンジで消す検証をリスナーに丸投げする二人",
+      "reason": "お菓子のトッポを電子レンジで加熱すると中身がなくなって空洞だけになるのではないかという独特な仮説をリスナーに検証させようとするため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 2945887,
+          "sourceEndMs": 2999444,
+          "supportingSpeechIds": [
+            "443-447"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_003",
+      "title": "つまんないことを言うころねに罰を与えたいマリン",
+      "reason": "船がサメに喰われている深刻な状況の中、ころねの言動に対してマリンが「罰を与えたい」と理不尽に怒る理不尽な掛け合いが面白いため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 3000738,
+          "sourceEndMs": 3020432,
+          "supportingSpeechIds": [
+            "448-450"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_004",
+      "title": "皮の研究からバックパックなどの新レシピが解放される瞬間",
+      "reason": "入手した皮を研究台で研究した結果、バックパックやハンモックといった重要な新アイテムのクラフトが解放されて盛り上がる場面であるため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 3020432,
+          "sourceEndMs": 3034400,
+          "supportingSpeechIds": [
+            "451-456"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-11T17:02:44+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_18_YE-faluP7zY",
+    "windowSourceVideoId": "YE-faluP7zY",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nOEWCNc77MI_full_source_input_selection_v003/theme-llm-v002/20260711-full-source-upper-bound-v001/windows/window_18_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/ce8b48e37f92941d?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"構えた弓矢の戻し方に戸惑うマリン\",\n      \"reason\": \"鳥を狙うために弓矢を構えたものの、撃たずに下ろす方法が分からず困惑している掛け合いが描かれているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 2910166,\n          \"sourceEndMs\": 2938310,\n          \"supportingSpeechIds\": [\n            \"434-438\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"トッポの中身をレンジで消す検証をリスナーに丸投げする二人\",\n      \"reason\": \"お菓子のトッポを電子レンジで加熱すると中身がなくなって空洞だけになるのではないかという独特な仮説をリスナーに検証させようとするため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 2945887,\n          \"sourceEndMs\": 2999444,\n          \"supportingSpeechIds\": [\n            \"443-447\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_003\",\n      \"title\": \"つまんないことを言うころねに罰を与えたいマリン\",\n      \"reason\": \"船がサメに喰われている深刻な状況の中、ころねの言動に対してマリンが「罰を与えたい」と理不尽に怒る理不尽な掛け合いが面白いため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 3000738,\n          \"sourceEndMs\": 3020432,\n          \"supportingSpeechIds\": [\n            \"448-450\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_004\",\n      \"title\": \"皮の研究からバックパックなどの新レシピが解放される瞬間\",\n      \"reason\": \"入手した皮を研究台で研究した結果、バックパックやハンモックといった重要な新アイテムのクラフトが解放されて盛り上がる場面であるため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 3020432,\n          \"sourceEndMs\": 3034400,\n          \"supportingSpeechIds\": [\n            \"451-456\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

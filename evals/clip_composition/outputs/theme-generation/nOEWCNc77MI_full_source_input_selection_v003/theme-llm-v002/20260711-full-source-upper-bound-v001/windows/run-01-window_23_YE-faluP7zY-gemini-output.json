@@ -1,0 +1,64 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "太すぎる声で行くぞと叫ぶシーン",
+      "reason": "「行くぞ！」と掛け声をかける際の発話者の声が太すぎることをお互いにいじり合って盛り上がっているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 3915439,
+          "sourceEndMs": 3920401,
+          "supportingSpeechIds": [
+            "561-562"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "気づいたらイカダがサメに結構食われていた件",
+      "reason": "島からの移動を検討している最中に、サメによって拠点のイカダが予想以上に破壊されていることに気づいて憤慨する展開があるため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 3961702,
+          "sourceEndMs": 3988230,
+          "supportingSpeechIds": [
+            "574-576"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_003",
+      "title": "頭の匂いを嗅がれて臭いと言われじわじわ泣くころね",
+      "reason": "ゲーム内での画面の立ち位置から頭の匂いを嗅いでいると明かしたマリンが、冗談で「臭い」と言ったことでころねがじわじわと泣き出す掛け合いが面白いため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 3991226,
+          "sourceEndMs": 4029707,
+          "supportingSpeechIds": [
+            "578-580"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-11T17:03:55+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_23_YE-faluP7zY",
+    "windowSourceVideoId": "YE-faluP7zY",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nOEWCNc77MI_full_source_input_selection_v003/theme-llm-v002/20260711-full-source-upper-bound-v001/windows/window_23_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/f7d60b4ff1ffa1b6?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"太すぎる声で行くぞと叫ぶシーン\",\n      \"reason\": \"「行くぞ！」と掛け声をかける際の発話者の声が太すぎることをお互いにいじり合って盛り上がっているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 3915439,\n          \"sourceEndMs\": 3920401,\n          \"supportingSpeechIds\": [\n            \"561-562\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"気づいたらイカダがサメに結構食われていた件\",\n      \"reason\": \"島からの移動を検討している最中に、サメによって拠点のイカダが予想以上に破壊されていることに気づいて憤慨する展開があるため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 3961702,\n          \"sourceEndMs\": 3988230,\n          \"supportingSpeechIds\": [\n            \"574-576\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_003\",\n      \"title\": \"頭の匂いを嗅がれて臭いと言われじわじわ泣くころね\",\n      \"reason\": \"ゲーム内での画面の立ち位置から頭の匂いを嗅いでいると明かしたマリンが、冗談で「臭い」と言ったことでころねがじわじわと泣き出す掛け合いが面白いため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 3991226,\n          \"sourceEndMs\": 4029707,\n          \"supportingSpeechIds\": [\n            \"578-580\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

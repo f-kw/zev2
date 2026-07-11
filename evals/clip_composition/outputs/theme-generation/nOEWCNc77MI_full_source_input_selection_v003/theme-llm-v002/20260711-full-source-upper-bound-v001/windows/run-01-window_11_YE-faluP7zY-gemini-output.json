@@ -1,0 +1,64 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "サメをクジラと言い間違える宝鐘マリン",
+      "reason": "宝鐘マリンがサメをクジラと言い間違え、すぐにセルフツッコミを入れるコミカルな場面。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 1809147,
+          "sourceEndMs": 1819996,
+          "supportingSpeechIds": [
+            "243-244"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "「役に立つ」の言い方で遊び始める二人",
+      "reason": "戌神ころねの「役に立つ」という発言に、独特なイントネーションで乗っかる宝鐘マリンとの掛け合いが面白い場面。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 1858764,
+          "sourceEndMs": 1866456,
+          "supportingSpeechIds": [
+            "261-263"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_003",
+      "title": "朝から物騒な「殺戮」を提案する戌神ころね",
+      "reason": "朝になった途端に「殺戮してぇなぁ」と言い出す戌神ころねと、それに付き合おうとする宝鐘マリンの物騒なトークが展開される場面。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 1870097,
+          "sourceEndMs": 1889522,
+          "supportingSpeechIds": [
+            "265-270"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-11T16:38:02+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_11_YE-faluP7zY",
+    "windowSourceVideoId": "YE-faluP7zY",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nOEWCNc77MI_full_source_input_selection_v003/theme-llm-v002/20260711-full-source-upper-bound-v001/windows/window_11_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/92ca3454548c5f7f?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"サメをクジラと言い間違える宝鐘マリン\",\n      \"reason\": \"宝鐘マリンがサメをクジラと言い間違え、すぐにセルフツッコミを入れるコミカルな場面。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 1809147,\n          \"sourceEndMs\": 1819996,\n          \"supportingSpeechIds\": [\n            \"243-244\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"「役に立つ」の言い方で遊び始める二人\",\n      \"reason\": \"戌神ころねの「役に立つ」という発言に、独特なイントネーションで乗っかる宝鐘マリンとの掛け合いが面白い場面。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 1858764,\n          \"sourceEndMs\": 1866456,\n          \"supportingSpeechIds\": [\n            \"261-263\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_003\",\n      \"title\": \"朝から物騒な「殺戮」を提案する戌神ころね\",\n      \"reason\": \"朝になった途端に「殺戮してぇなぁ」と言い出す戌神ころねと、それに付き合おうとする宝鐘マリンの物騒なトークが展開される場面。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 1870097,\n          \"sourceEndMs\": 1889522,\n          \"supportingSpeechIds\": [\n            \"265-270\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

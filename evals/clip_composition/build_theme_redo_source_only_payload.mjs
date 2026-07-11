@@ -133,7 +133,13 @@ async function readSttManifest() {
     throw new Error(`STT manifestがありません: ${options.sttManifestPath}`);
   }
   const manifest = await readJson(options.sttManifestPath);
-  if (manifest.complete === false && !options.allowIncompleteStt) {
+  const complete = typeof manifest.complete === 'boolean'
+    ? manifest.complete
+    : manifest.partial === false
+      && Number.isInteger(manifest.processedChunkCount)
+      && Number.isInteger(manifest.fullChunkCount)
+      && manifest.processedChunkCount === manifest.fullChunkCount;
+  if (!complete && !options.allowIncompleteStt) {
     throw new Error([
       'STT manifestが未完了です。',
       `manifest: ${options.sttManifestPath}`,
@@ -141,7 +147,7 @@ async function readSttManifest() {
       '検査目的で明示的に使う場合のみ --allowIncompleteStt を付けてください。'
     ].join('\n'));
   }
-  return manifest;
+  return { ...manifest, complete };
 }
 
 function compactSegments(sourceVideoId, transcript) {

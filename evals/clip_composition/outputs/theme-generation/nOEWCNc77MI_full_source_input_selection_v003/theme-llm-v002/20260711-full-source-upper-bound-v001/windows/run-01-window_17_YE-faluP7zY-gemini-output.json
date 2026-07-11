@@ -1,0 +1,49 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "マリンの好意を拒絶するころねと「キモい」の連呼",
+      "reason": "マリンがロマンチックな雰囲気にしようとするも、ころねが急に冷たくなり「キモい」を連呼して拒絶するやり取りがユーモラスで見どころになっているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 2790074,
+          "sourceEndMs": 2848146,
+          "supportingSpeechIds": [
+            "400-425"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "ころねを煽る「お尻ぷりぷり」の応酬",
+      "reason": "拒絶されたマリンが「お尻ぷりぷりしちゃおう」と対抗し、謎のフレーズを執拗に連呼して煽るシュールな展開が切り抜きとして成立するため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 2851182,
+          "sourceEndMs": 2878230,
+          "supportingSpeechIds": [
+            "426-428"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-11T17:01:43+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_17_YE-faluP7zY",
+    "windowSourceVideoId": "YE-faluP7zY",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nOEWCNc77MI_full_source_input_selection_v003/theme-llm-v002/20260711-full-source-upper-bound-v001/windows/window_17_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/f3134387b92a121c?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"マリンの好意を拒絶するころねと「キモい」の連呼\",\n      \"reason\": \"マリンがロマンチックな雰囲気にしようとするも、ころねが急に冷たくなり「キモい」を連呼して拒絶するやり取りがユーモラスで見どころになっているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 2790074,\n          \"sourceEndMs\": 2848146,\n          \"supportingSpeechIds\": [\n            \"400-425\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"ころねを煽る「お尻ぷりぷり」の応酬\",\n      \"reason\": \"拒絶されたマリンが「お尻ぷりぷりしちゃおう」と対抗し、謎のフレーズを執拗に連呼して煽るシュールな展開が切り抜きとして成立するため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 2851182,\n          \"sourceEndMs\": 2878230,\n          \"supportingSpeechIds\": [\n            \"426-428\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

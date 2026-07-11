@@ -1,0 +1,49 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "苦労して倒したのに何も落とさない敵に理不尽さを感じる場面",
+      "reason": "強敵を協力して倒したにもかかわらずドロップアイテムが一切なく、2人が困惑し、挙句の果てに「ワタメ」に対して理不尽に謝罪を要求する一連の掛け合いが切り抜きとして見どころがあるため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 2243688,
+          "sourceEndMs": 2334328,
+          "supportingSpeechIds": [
+            "318-341"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "今後の敵「イノシシ」の強さに戦々恐々とする場面",
+      "reason": "小さな敵を倒すのすら非常に苦労した経験から、今後遭遇するであろう「イノシシ」の強さが化け物レベルではないかと怯える展開が面白いから。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 2362619,
+          "sourceEndMs": 2410728,
+          "supportingSpeechIds": [
+            "342-345"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-11T16:49:21+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_14_YE-faluP7zY",
+    "windowSourceVideoId": "YE-faluP7zY",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nOEWCNc77MI_full_source_input_selection_v003/theme-llm-v002/20260711-full-source-upper-bound-v001/windows/window_14_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/4d9954800fe551e1?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"苦労して倒したのに何も落とさない敵に理不尽さを感じる場面\",\n      \"reason\": \"強敵を協力して倒したにもかかわらずドロップアイテムが一切なく、2人が困惑し、挙句の果てに「ワタメ」に対して理不尽に謝罪を要求する一連の掛け合いが切り抜きとして見どころがあるため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 2243688,\n          \"sourceEndMs\": 2334328,\n          \"supportingSpeechIds\": [\n            \"318-341\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"今後の敵「イノシシ」の強さに戦々恐々とする場面\",\n      \"reason\": \"小さな敵を倒すのすら非常に苦労した経験から、今後遭遇するであろう「イノシシ」の強さが化け物レベルではないかと怯える展開が面白いから。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 2362619,\n          \"sourceEndMs\": 2410728,\n          \"supportingSpeechIds\": [\n            \"342-345\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

@@ -1,0 +1,290 @@
+{
+  "kind": "theme_redo_source_only_window_prompt_payload",
+  "runAt": "2026-07-11T07:17:32.388Z",
+  "target": "nOEWCNc77MI",
+  "inputSetId": "nOEWCNc77MI_full_source_input_selection_v003",
+  "sourceVideoId": "YE-faluP7zY",
+  "sourceSttId": "nOEWCNc77MI_YE-faluP7zY_local30_v001",
+  "sourceSttManifestPath": "evals/clip_composition/stt/nOEWCNc77MI_YE-faluP7zY_local30_v001/source/manifest.json",
+  "sourceSttComplete": true,
+  "generationSystem": "theme-llm-v002",
+  "promptVersion": "theme_generation_prompt_v002",
+  "requestedThemeCount": 8,
+  "windowKind": "primary",
+  "llmCall": false,
+  "modelInput": {
+    "task": "source_only_theme_generation",
+    "generationSystem": "theme-llm-v002",
+    "promptVersion": "theme_generation_prompt_v002",
+    "requestedThemeCount": 8,
+    "inputPolicy": {
+      "sourceOnly": true,
+      "noClipInfo": true,
+      "noExpected": true,
+      "noAlignment": true,
+      "noHumanReverseTheme": true
+    },
+    "windowing": {
+      "applied": true,
+      "mode": "speech-time",
+      "windowId": "window_26_YE-faluP7zY",
+      "reason": "元配信全体入力が長いため、発話境界を保った時間窓へ分割する。",
+      "maxPromptBytes": 13084,
+      "overlapMs": 0,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 4354127,
+      "sourceEndMs": 4499672
+    },
+    "sources": [
+      {
+        "sourceVideoId": "YE-faluP7zY",
+        "sourceUrl": "https://www.youtube.com/watch?v=YE-faluP7zY",
+        "sourceTitle": "【Raft】ころね、キミさえいればこの海の果てまでだって──【ホロライブ/宝鐘マリン】",
+        "transcriptKind": "local_stt",
+        "language": "ja-JP",
+        "durationSec": 11824.121,
+        "rawSegmentCount": 53180,
+        "promptSegmentCount": 30,
+        "segmentCompaction": {
+          "method": "source-only transcript segments concatenated until sentence-ending punctuation",
+          "scoringRole": "none",
+          "note": "読みやすさのための表現変換であり、expected、切り抜き、照合結果、人間確認メモは使わない。"
+        },
+        "segments": [
+          {
+            "speechId": 634,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 4354127,
+            "sourceEndMs": 4359148,
+            "text": "ここなんでできない?"
+          },
+          {
+            "speechId": 635,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 4359148,
+            "sourceEndMs": 4362929,
+            "text": "ティラピアかーここなんでできない?"
+          },
+          {
+            "speechId": 636,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 4362929,
+            "sourceEndMs": 4367131,
+            "text": "ここなんでできない?"
+          },
+          {
+            "speechId": 637,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 4367131,
+            "sourceEndMs": 4367271,
+            "text": "キメチ?"
+          },
+          {
+            "speechId": 638,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 4367271,
+            "sourceEndMs": 4368391,
+            "text": "ここなんでできない?"
+          },
+          {
+            "speechId": 639,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 4368391,
+            "sourceEndMs": 4368991,
+            "text": "あ、柱が足りない?"
+          },
+          {
+            "speechId": 640,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 4368991,
+            "sourceEndMs": 4369611,
+            "text": "こんなにあるのに?"
+          },
+          {
+            "speechId": 641,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 4369611,
+            "sourceEndMs": 4370812,
+            "text": "柱足りない?"
+          },
+          {
+            "speechId": 642,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 4370812,
+            "sourceEndMs": 4379194,
+            "text": "うん、足りなかったしっかりした木の柱ダメじゃん何柱が足りない?"
+          },
+          {
+            "speechId": 643,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 4379194,
+            "sourceEndMs": 4379694,
+            "text": "何柱が?"
+          },
+          {
+            "speechId": 644,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 4382826,
+            "sourceEndMs": 4385147,
+            "text": "イノスケってさ柱ですか?"
+          },
+          {
+            "speechId": 645,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 4385147,
+            "sourceEndMs": 4387227,
+            "text": "イノスケは柱じゃないんじゃない?"
+          },
+          {
+            "speechId": 646,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 4387227,
+            "sourceEndMs": 4394109,
+            "text": "柱じゃないかここに1個いてこれでいけるかな?"
+          },
+          {
+            "speechId": 647,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 4394109,
+            "sourceEndMs": 4401190,
+            "text": "もう1個くらいいるか?"
+          },
+          {
+            "speechId": 648,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 4401190,
+            "sourceEndMs": 4409592,
+            "text": "水も作っといてこれ焼かなきゃなそういえば意外と板"
+          },
+          {
+            "speechId": 649,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 4411581,
+            "sourceEndMs": 4412382,
+            "text": "あ、ない?"
+          },
+          {
+            "speechId": 650,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 4412382,
+            "sourceEndMs": 4426994,
+            "text": "すぐ無くなってしまうよね分かる板拾いに海に落ちるわなんかワイルドないよ集め方今来ないっしょ多分今?"
+          },
+          {
+            "speechId": 651,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 4426994,
+            "sourceEndMs": 4429195,
+            "text": "樽が全然流れて来ないんだが?"
+          },
+          {
+            "speechId": 652,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 4429195,
+            "sourceEndMs": 4434580,
+            "text": "もうちょっと真っ直ぐ行けばねこれから樽が来ますよのムードがほんと?"
+          },
+          {
+            "speechId": 653,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 4434580,
+            "sourceEndMs": 4436441,
+            "text": "これで行けるかしら?"
+          },
+          {
+            "speechId": 654,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 4436441,
+            "sourceEndMs": 4437202,
+            "text": "結構集めたわ"
+          },
+          {
+            "speechId": 655,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 4438975,
+            "sourceEndMs": 4439943,
+            "text": "今度は木の板が足りなくなる"
+          },
+          {
+            "speechId": 656,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 4443842,
+            "sourceEndMs": 4453370,
+            "text": "ココネがイノカキで集めている全然サメ来ないよこれイノシシだ、イノカキでイノカキ?"
+          },
+          {
+            "speechId": 657,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 4453370,
+            "sourceEndMs": 4455292,
+            "text": "イノカキで集めてるほら!"
+          },
+          {
+            "speechId": 658,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 4455292,
+            "sourceEndMs": 4456072,
+            "text": "12枚!"
+          },
+          {
+            "speechId": 659,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 4456072,
+            "sourceEndMs": 4469844,
+            "text": "あ、入れとくわあそこにあっちに入れとくわこっち入れとくよOKあ、なんかヒヨコ拾ってるわヒヨコそう、結構拾うよね"
+          },
+          {
+            "speechId": 660,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 4470922,
+            "sourceEndMs": 4484987,
+            "text": "スクラップもいるってことよねこれさやべこれA型の人見たらイライラするやつかなこれえ、なに?"
+          },
+          {
+            "speechId": 661,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 4484987,
+            "sourceEndMs": 4485567,
+            "text": "大丈夫?"
+          },
+          {
+            "speechId": 662,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 4485567,
+            "sourceEndMs": 4491629,
+            "text": "大丈夫全然大したことじゃないよかったでも気になるなに?"
+          },
+          {
+            "speechId": 663,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 4491629,
+            "sourceEndMs": 4499672,
+            "text": "そこにパッケージ落としちゃったからあ、なるほどね拾ったわフフフナイスナイスフフフナイスフフフ"
+          }
+        ]
+      }
+    ],
+    "outputContract": {
+      "format": "json_only",
+      "schema": {
+        "themes": [
+          {
+            "themeId": "string",
+            "title": "string",
+            "reason": "string_one_sentence",
+            "evidenceRanges": [
+              {
+                "sourceVideoId": "string",
+                "sourceStartMs": "number",
+                "sourceEndMs": "number",
+                "supportingSpeechIds": [
+                  "number_or_range_string"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

@@ -6,7 +6,8 @@ type CliOptions = {
   fixtureId: string;
   bundlePath: string;
   generationSystem: string;
-  resultRole: 'formal-primary' | 'reference';
+  inputSelectionVersion: string;
+  resultRole: 'formal-primary' | 'reference' | 'upper-bound';
   outputId: string;
 };
 
@@ -116,10 +117,14 @@ function parseOptions(argv: string[]): CliOptions {
   const fixtureId = required(values, 'fixture');
   const bundle = required(values, 'bundle');
   const generationSystem = required(values, 'generationSystem');
+  const inputSelectionVersion = required(values, 'inputSelectionVersion');
   const resultRole = required(values, 'resultRole');
   const outputId = required(values, 'outputId');
-  if (resultRole !== 'formal-primary' && resultRole !== 'reference') {
-    throw new Error('--resultRole は formal-primary または reference を指定してください');
+  if (!/^input-selection-v\d{3}$/.test(inputSelectionVersion)) {
+    throw new Error('--inputSelectionVersion は input-selection-vNNN 形式で指定してください');
+  }
+  if (resultRole !== 'formal-primary' && resultRole !== 'reference' && resultRole !== 'upper-bound') {
+    throw new Error('--resultRole は formal-primary、reference、upper-bound のいずれかを指定してください');
   }
   const bundlePath = path.resolve(root, bundle);
   if (path.relative(evalRoot, bundlePath).startsWith('..')) {
@@ -129,6 +134,7 @@ function parseOptions(argv: string[]): CliOptions {
     fixtureId: sanitize(fixtureId),
     bundlePath,
     generationSystem,
+    inputSelectionVersion,
     resultRole,
     outputId: sanitize(outputId)
   };
@@ -142,6 +148,22 @@ function required(values: Map<string, string>, key: string): string {
 
 function sanitize(value: string): string {
   return value.replace(/[^a-zA-Z0-9_-]/g, '_');
+}
+
+function resultRoleLabel(role: CliOptions['resultRole']): string {
+  if (role === 'formal-primary') return '正式な主結果';
+  if (role === 'reference') return '正式な主結果とは統合しない参考結果';
+  return '入力選定損失ゼロの上限測定（最終入力設計ではない）';
+}
+
+function resultPolicy(role: CliOptions['resultRole']): string {
+  if (role === 'formal-primary') {
+    return '正式な主結果として単独採点し、参考結果とは統合しない。';
+  }
+  if (role === 'reference') {
+    return '参考結果として単独記録し、正式な主結果とは統合しない。';
+  }
+  return '全発話を入力して入力選定損失をゼロにした上限測定。最終入力設計としては採用しない。';
 }
 
 async function readJson<T>(filePath: string): Promise<T> {
@@ -177,7 +199,8 @@ function reportMarkdown(result: ReturnType<typeof buildResult>): string {
     '',
     `- fixture: ${result.fixtureId}`,
     `- 入力: ${result.input.inputSetId}`,
-    `- 結果の扱い: ${result.resultRole === 'formal-primary' ? '正式な主結果' : '参考結果'}`,
+    `- 入力選定版: ${result.input.inputSelectionVersion}`,
+    `- 結果の扱い: ${resultRoleLabel(result.resultRole)}`,
     `- 候補: ${result.summary.candidateCount}件 / 根拠範囲: ${result.summary.validEvidenceRangeCount}件`,
     `- 採点対象外: 人間が除外した${result.excludedRanges.count}区間`,
     '',
@@ -329,12 +352,11 @@ function buildResult(input: {
     outputId: options.outputId,
     input: {
       inputSetId: payload.inputSetId,
+      inputSelectionVersion: options.inputSelectionVersion,
       promptVersion: payload.promptVersion,
       bundlePath: path.relative(root, options.bundlePath),
       leakageInspectionStatus: 'pass',
-      policy: options.resultRole === 'formal-primary'
-        ? '発話量上位50を正式な主結果として単独採点。先頭50とは統合しない。'
-        : '参考結果として単独記録。正式な主結果とは統合しない。'
+      policy: resultPolicy(options.resultRole)
     },
     summary: {
       candidateCount: themes.length,

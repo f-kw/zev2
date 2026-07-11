@@ -1,0 +1,64 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "マリン、HPがギリギリの満身創痍で生還する",
+      "reason": "宝鐘マリンがダメージを受けて死にかけ、ギリギリ生き残って満身創痍のまま地上担当に切り替える展開が具体的で見どころがあるため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 2580020,
+          "sourceEndMs": 2639126,
+          "supportingSpeechIds": [
+            "379-386"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "サメを見ても何も思わなくなる「ラフト末期」",
+      "reason": "サメに慣れすぎて見つけても何とも思わなくなった状況を「ラフト末期ですね」と自虐混じりに語る掛け合いが面白いため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 2648288,
+          "sourceEndMs": 2669504,
+          "supportingSpeechIds": [
+            "388-389"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_003",
+      "title": "今日こそイノシシを狩ることを決意する二人",
+      "reason": "目的がブレがちになりながらも、目標をイノシシ狩りに定めて料理の予定を立てながら意気揚々と出発する流れが綺麗にまとまっているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 2701871,
+          "sourceEndMs": 2773337,
+          "supportingSpeechIds": [
+            "392-397"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-11T17:01:30+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_16_YE-faluP7zY",
+    "windowSourceVideoId": "YE-faluP7zY",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nOEWCNc77MI_full_source_input_selection_v003/theme-llm-v002/20260711-full-source-upper-bound-v001/windows/window_16_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/704db71857089ba1?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"マリン、HPがギリギリの満身創痍で生還する\",\n      \"reason\": \"宝鐘マリンがダメージを受けて死にかけ、ギリギリ生き残って満身創痍のまま地上担当に切り替える展開が具体的で見どころがあるため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 2580020,\n          \"sourceEndMs\": 2639126,\n          \"supportingSpeechIds\": [\n            \"379-386\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"サメを見ても何も思わなくなる「ラフト末期」\",\n      \"reason\": \"サメに慣れすぎて見つけても何とも思わなくなった状況を「ラフト末期ですね」と自虐混じりに語る掛け合いが面白いため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 2648288,\n          \"sourceEndMs\": 2669504,\n          \"supportingSpeechIds\": [\n            \"388-389\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_003\",\n      \"title\": \"今日こそイノシシを狩ることを決意する二人\",\n      \"reason\": \"目的がブレがちになりながらも、目標をイノシシ狩りに定めて料理の予定を立てながら意気揚々と出発する流れが綺麗にまとまっているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 2701871,\n          \"sourceEndMs\": 2773337,\n          \"supportingSpeechIds\": [\n            \"392-397\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

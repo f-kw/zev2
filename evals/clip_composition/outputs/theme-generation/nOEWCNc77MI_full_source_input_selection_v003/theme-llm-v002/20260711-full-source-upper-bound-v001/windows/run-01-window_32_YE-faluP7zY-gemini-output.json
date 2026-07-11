@@ -1,0 +1,79 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "次言わせたらマジでガタガタ言わせるからな",
+      "reason": "材料不足に対して何度も同じことを言わされる状況に憤慨し、冗談交じりに相手を脅す発言がインパクトのある見どころとなっています。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 5310822,
+          "sourceEndMs": 5337362,
+          "supportingSpeechIds": [
+            "795-796"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "建築の開放感を求めて「1階は壁なし」に決定するシーン",
+      "reason": "開放感を出すために1階の壁をなくし、2階だけに壁を作るというイカダの建築方針を相談して決める一連の展開が明確です。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 5370342,
+          "sourceEndMs": 5399952,
+          "supportingSpeechIds": [
+            "804-807"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_003",
+      "title": "階段裏のデッドスペースを活かした収納アイデアの提案",
+      "reason": "イカダの階段の裏側などの空きスペースを活用してクローゼットのような収納を作ろうと提案・試行錯誤する場面が具体的です。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 5404665,
+          "sourceEndMs": 5428318,
+          "supportingSpeechIds": [
+            "809-811"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_004",
+      "title": "2階でヤシの木や作物を育てたいという建築計画",
+      "reason": "2階エリアの完成を急ぐ目的として、作物の栽培やヤシの木を育てる場所にする計画を二人が共感しながら話し合っています。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 5460342,
+          "sourceEndMs": 5489452,
+          "supportingSpeechIds": [
+            814
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-11T17:06:09+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_32_YE-faluP7zY",
+    "windowSourceVideoId": "YE-faluP7zY",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nOEWCNc77MI_full_source_input_selection_v003/theme-llm-v002/20260711-full-source-upper-bound-v001/windows/window_32_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/63f4f3dabc7be369?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"次言わせたらマジでガタガタ言わせるからな\",\n      \"reason\": \"材料不足に対して何度も同じことを言わされる状況に憤慨し、冗談交じりに相手を脅す発言がインパクトのある見どころとなっています。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 5310822,\n          \"sourceEndMs\": 5337362,\n          \"supportingSpeechIds\": [\n            \"795-796\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"建築の開放感を求めて「1階は壁なし」に決定するシーン\",\n      \"reason\": \"開放感を出すために1階の壁をなくし、2階だけに壁を作るというイカダの建築方針を相談して決める一連の展開が明確です。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 5370342,\n          \"sourceEndMs\": 5399952,\n          \"supportingSpeechIds\": [\n            \"804-807\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_003\",\n      \"title\": \"階段裏のデッドスペースを活かした収納アイデアの提案\",\n      \"reason\": \"イカダの階段の裏側などの空きスペースを活用してクローゼットのような収納を作ろうと提案・試行錯誤する場面が具体的です。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 5404665,\n          \"sourceEndMs\": 5428318,\n          \"supportingSpeechIds\": [\n            \"809-811\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_004\",\n      \"title\": \"2階でヤシの木や作物を育てたいという建築計画\",\n      \"reason\": \"2階エリアの完成を急ぐ目的として、作物の栽培やヤシの木を育てる場所にする計画を二人が共感しながら話し合っています。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 5460342,\n          \"sourceEndMs\": 5489452,\n          \"supportingSpeechIds\": [\n            814\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

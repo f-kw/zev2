@@ -1,0 +1,248 @@
+{
+  "kind": "theme_redo_source_only_window_prompt_payload",
+  "runAt": "2026-07-11T07:17:32.383Z",
+  "target": "nOEWCNc77MI",
+  "inputSetId": "nOEWCNc77MI_full_source_input_selection_v003",
+  "sourceVideoId": "YE-faluP7zY",
+  "sourceSttId": "nOEWCNc77MI_YE-faluP7zY_local30_v001",
+  "sourceSttManifestPath": "evals/clip_composition/stt/nOEWCNc77MI_YE-faluP7zY_local30_v001/source/manifest.json",
+  "sourceSttComplete": true,
+  "generationSystem": "theme-llm-v002",
+  "promptVersion": "theme_generation_prompt_v002",
+  "requestedThemeCount": 8,
+  "windowKind": "primary",
+  "llmCall": false,
+  "modelInput": {
+    "task": "source_only_theme_generation",
+    "generationSystem": "theme-llm-v002",
+    "promptVersion": "theme_generation_prompt_v002",
+    "requestedThemeCount": 8,
+    "inputPolicy": {
+      "sourceOnly": true,
+      "noClipInfo": true,
+      "noExpected": true,
+      "noAlignment": true,
+      "noHumanReverseTheme": true
+    },
+    "windowing": {
+      "applied": true,
+      "mode": "speech-time",
+      "windowId": "window_12_YE-faluP7zY",
+      "reason": "元配信全体入力が長いため、発話境界を保った時間窓へ分割する。",
+      "maxPromptBytes": 13084,
+      "overlapMs": 0,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 1891194,
+      "sourceEndMs": 2055081
+    },
+    "sources": [
+      {
+        "sourceVideoId": "YE-faluP7zY",
+        "sourceUrl": "https://www.youtube.com/watch?v=YE-faluP7zY",
+        "sourceTitle": "【Raft】ころね、キミさえいればこの海の果てまでだって──【ホロライブ/宝鐘マリン】",
+        "transcriptKind": "local_stt",
+        "language": "ja-JP",
+        "durationSec": 11824.121,
+        "rawSegmentCount": 53180,
+        "promptSegmentCount": 24,
+        "segmentCompaction": {
+          "method": "source-only transcript segments concatenated until sentence-ending punctuation",
+          "scoringRole": "none",
+          "note": "読みやすさのための表現変換であり、expected、切り抜き、照合結果、人間確認メモは使わない。"
+        },
+        "segments": [
+          {
+            "speechId": 271,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1891194,
+            "sourceEndMs": 1896796,
+            "text": "ロープ…あ、蝶津貝がないから小さいのでいいかオッケー?"
+          },
+          {
+            "speechId": 272,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1896796,
+            "sourceEndMs": 1904279,
+            "text": "どうしようかな、ここら辺でいいか蝶津貝は金属のインゴットで作れるから小さいのでも作ったら一応オッケーちょっとしのいでね、ここでいいよ?"
+          },
+          {
+            "speechId": 273,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1904279,
+            "sourceEndMs": 1919384,
+            "text": "こうやってこうやって、こうやって、こうやって木はこっちかこうやってワイワイランランラン"
+          },
+          {
+            "speechId": 274,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1922483,
+            "sourceEndMs": 1929850,
+            "text": "ぬりぬりじゃんねえびっくりしたわ自分でも予想だにしないびっくりしたわそんなことある?"
+          },
+          {
+            "speechId": 275,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1929850,
+            "sourceEndMs": 1948666,
+            "text": "蝶津貝あるじゃんあるよ蝶津貝あすまん箱にありますねこっちもあったないいよそれでそれはそれでいい水汲んでいこうあ水ねなんかねペットボトルみたいのがそういえばあったなあ作れるんだなこれで"
+          },
+          {
+            "speechId": 276,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1950126,
+            "sourceEndMs": 1957327,
+            "text": "ブドウのベトベトいっぱい作ったからこれ作れるなやだーやだ?"
+          },
+          {
+            "speechId": 277,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1957327,
+            "sourceEndMs": 1958208,
+            "text": "やなの?"
+          },
+          {
+            "speechId": 278,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1958208,
+            "sourceEndMs": 1965009,
+            "text": "え、やだーいいねー女の心理みたいなそうそうそうそう難しいよな女ってえ、じゃあボトル作ろうから持ってく?"
+          },
+          {
+            "speechId": 279,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1965009,
+            "sourceEndMs": 1979632,
+            "text": "あ、そうだね作ったほうがいいかなこれなもう一本作るかちょっと待ってもう一本作るからえ、プラスチックどっかでこれゴミ箱待てよえっと横のいや"
+          },
+          {
+            "speechId": 280,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1980170,
+            "sourceEndMs": 1997078,
+            "text": "入れてる場所が適当すぎてさまあマジで見つけらんないんだよねわかるあとでちょっと整理するわしたいねあっボトル作った作ったあっありがたきしあわせはい置くねかたじけねよしここに水入れ散らかそうありがとう取り合いになっちゃうよこれあいいよいいよ持ってこうねこっぷり持ってるから2杯2杯入れる?"
+          },
+          {
+            "speechId": 281,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1997078,
+            "sourceEndMs": 1997578,
+            "text": "2杯2杯?"
+          },
+          {
+            "speechId": 282,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1997578,
+            "sourceEndMs": 2009944,
+            "text": "あっペットボトルおしゃれやんこれえデザインいいよね地味にいないよこれあ入れちゃったなくなったねちょっとなくなった新しく入れてとまあでもいったん2あれば足りるし"
+          },
+          {
+            "speechId": 283,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 2010702,
+            "sourceEndMs": 2020369,
+            "text": "そうねありがてぇなほんとご飯もちょっと持ってったほうがいいかもねあ、ご飯ね今ねクジラ肉…あ、違う食べ肉持ってるからそこなんで間違えるの?"
+          },
+          {
+            "speechId": 284,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 2020369,
+            "sourceEndMs": 2023511,
+            "text": "まじで食べ肉持ってるからね大丈夫行け?"
+          },
+          {
+            "speechId": 285,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 2023511,
+            "sourceEndMs": 2026994,
+            "text": "せんちゃんも持ってとよしこれで準備万端かな?"
+          },
+          {
+            "speechId": 286,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 2026994,
+            "sourceEndMs": 2038802,
+            "text": "行こうぞ行きますかよし行くぞーうちらいいね成長したねもう弓持って移動してんだよいやさすがよな強くなっちゃったこっち見ておっともたる"
+          },
+          {
+            "speechId": 287,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 2040950,
+            "sourceEndMs": 2042391,
+            "text": "なんか変装してる。"
+          },
+          {
+            "speechId": 288,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 2042391,
+            "sourceEndMs": 2044813,
+            "text": "なりこの変装ってこういうこと?"
+          },
+          {
+            "speechId": 289,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 2044813,
+            "sourceEndMs": 2046774,
+            "text": "嘘やな!"
+          },
+          {
+            "speechId": 290,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 2046774,
+            "sourceEndMs": 2048896,
+            "text": "行くぞ!"
+          },
+          {
+            "speechId": 291,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 2048896,
+            "sourceEndMs": 2049416,
+            "text": "イノシシ!"
+          },
+          {
+            "speechId": 292,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 2049416,
+            "sourceEndMs": 2050617,
+            "text": "やろうよ!"
+          },
+          {
+            "speechId": 293,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 2050617,
+            "sourceEndMs": 2052759,
+            "text": "え、これだってでも害なさそうだぜ。"
+          },
+          {
+            "speechId": 294,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 2052759,
+            "sourceEndMs": 2055081,
+            "text": "とか言ってたらやられるよな。"
+          }
+        ]
+      }
+    ],
+    "outputContract": {
+      "format": "json_only",
+      "schema": {
+        "themes": [
+          {
+            "themeId": "string",
+            "title": "string",
+            "reason": "string_one_sentence",
+            "evidenceRanges": [
+              {
+                "sourceVideoId": "string",
+                "sourceStartMs": "number",
+                "sourceEndMs": "number",
+                "supportingSpeechIds": [
+                  "number_or_range_string"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

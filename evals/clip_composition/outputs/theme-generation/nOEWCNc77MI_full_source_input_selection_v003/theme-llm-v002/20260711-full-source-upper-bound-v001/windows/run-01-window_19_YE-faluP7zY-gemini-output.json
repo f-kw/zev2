@@ -1,0 +1,49 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "宝鐘マリンの離席中に一味と緊張しながら話す戌神ころね",
+      "reason": "宝鐘マリンが配信中に我慢できずトイレへ行くため離席し、残された戌神ころねがマリンのリスナー（一味）と二人きりになって緊張しながら雑談を繋ぐ場面。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 3072540,
+          "sourceEndMs": 3173801,
+          "supportingSpeechIds": [
+            "463-468"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "しし肉を焼き忘れて怒られる宝鐘マリンと、夫婦漫才のような言い合い",
+      "reason": "肉を焼き忘れた宝鐘マリンを戌神ころねが叱り、そこからバーベキューの網の上を歩くマリンと二人のコントのような掛け合いに発展する場面。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 3180190,
+          "sourceEndMs": 3238642,
+          "supportingSpeechIds": [
+            "470-477"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-11T17:02:58+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_19_YE-faluP7zY",
+    "windowSourceVideoId": "YE-faluP7zY",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nOEWCNc77MI_full_source_input_selection_v003/theme-llm-v002/20260711-full-source-upper-bound-v001/windows/window_19_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/c22c036ad7bd6481?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"宝鐘マリンの離席中に一味と緊張しながら話す戌神ころね\",\n      \"reason\": \"宝鐘マリンが配信中に我慢できずトイレへ行くため離席し、残された戌神ころねがマリンのリスナー（一味）と二人きりになって緊張しながら雑談を繋ぐ場面。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 3072540,\n          \"sourceEndMs\": 3173801,\n          \"supportingSpeechIds\": [\"463-468\"]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"しし肉を焼き忘れて怒られる宝鐘マリンと、夫婦漫才のような言い合い\",\n      \"reason\": \"肉を焼き忘れた宝鐘マリンを戌神ころねが叱り、そこからバーベキューの網の上を歩くマリンと二人のコントのような掛け合いに発展する場面。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 3180190,\n          \"sourceEndMs\": 3238642,\n          \"supportingSpeechIds\": [\"470-477\"]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

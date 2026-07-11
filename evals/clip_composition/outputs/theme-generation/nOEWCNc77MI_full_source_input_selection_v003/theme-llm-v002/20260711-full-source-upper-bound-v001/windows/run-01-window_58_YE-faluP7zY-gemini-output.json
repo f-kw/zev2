@@ -1,0 +1,64 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "建築の吹き抜けについてリスナーに意見を求める2人",
+      "reason": "イカダの2階建築で壁や吹き抜けをどうするか迷い、視聴者（君たち）へ意見を問いかけている一連の掛け合いが切り抜きとしてまとまりが良いため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 9750066,
+          "sourceEndMs": 9799684,
+          "supportingSpeechIds": [
+            "1470-1481"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "「いらねーよな」虫捕り網の必要性を一蹴する2人",
+      "reason": "ゲーム内のクラフト要素である虫捕り網を使う機会があるか疑問に思い、最終的に不要であるとバッサリ切り捨てる会話がコミカルで面白いため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 9872154,
+          "sourceEndMs": 9899474,
+          "supportingSpeechIds": [
+            1489
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_003",
+      "title": "激しくなる独り言と「寝言に返事をしてはいけない」の噂",
+      "reason": "プレイ中の独り言が激しくなったことに端を発し、寝言に返事をしてはいけないという都市伝説的な話題で盛り上がる展開が切り抜きとして成立するため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 9900130,
+          "sourceEndMs": 9932704,
+          "supportingSpeechIds": [
+            "1490-1491"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-11T18:35:15+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_58_YE-faluP7zY",
+    "windowSourceVideoId": "YE-faluP7zY",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nOEWCNc77MI_full_source_input_selection_v003/theme-llm-v002/20260711-full-source-upper-bound-v001/windows/window_58_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/88be369d3e97ae34?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"建築の吹き抜けについてリスナーに意見を求める2人\",\n      \"reason\": \"イカダの2階建築で壁や吹き抜けをどうするか迷い、視聴者（君たち）へ意見を問いかけている一連の掛け合いが切り抜きとしてまとまりが良いため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 9750066,\n          \"sourceEndMs\": 9799684,\n          \"supportingSpeechIds\": [\n            \"1470-1481\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"「いらねーよな」虫捕り網の必要性を一蹴する2人\",\n      \"reason\": \"ゲーム内のクラフト要素である虫捕り網を使う機会があるか疑問に思い、最終的に不要であるとバッサリ切り捨てる会話がコミカルで面白いため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 9872154,\n          \"sourceEndMs\": 9899474,\n          \"supportingSpeechIds\": [\n            1489\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_003\",\n      \"title\": \"激しくなる独り言と「寝言に返事をしてはいけない」の噂\",\n      \"reason\": \"プレイ中の独り言が激しくなったことに端を発し、寝言に返事をしてはいけないという都市伝説的な話題で盛り上がる展開が切り抜きとして成立するため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 9900130,\n          \"sourceEndMs\": 9932704,\n          \"supportingSpeechIds\": [\n            \"1490-1491\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

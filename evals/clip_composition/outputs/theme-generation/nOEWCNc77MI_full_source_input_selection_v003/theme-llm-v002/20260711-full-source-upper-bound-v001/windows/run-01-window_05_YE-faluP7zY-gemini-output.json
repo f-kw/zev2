@@ -1,0 +1,64 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "宝鐘マリンの雑な反応と謎のフォロー",
+      "reason": "戌神ころねの心配に対する宝鐘マリンの雑な返しから、作業の真面目さを褒める謎のフォローが入る一連の流れが面白いから。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 867669,
+          "sourceEndMs": 904802,
+          "supportingSpeechIds": [
+            "97-104"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "イノシシ襲来とししシチューの計画",
+      "reason": "島でイノシシに襲われたことをきっかけに、弓矢で仕留めてししシチューなどの料理にしようと盛り上がる場面。 ",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 925239,
+          "sourceEndMs": 959944,
+          "supportingSpeechIds": [
+            "105-110"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_003",
+      "title": "エイムの自信とツッコミ",
+      "reason": "宝鐘マリンがエイムへの自信を満々に見せるものの、戌神ころねに「自信があったところって何」とツッコまれるコミカルなやり取りのため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 960122,
+          "sourceEndMs": 993519,
+          "supportingSpeechIds": [
+            "111-112"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-11T16:36:35+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_05_YE-faluP7zY",
+    "windowSourceVideoId": "YE-faluP7zY",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nOEWCNc77MI_full_source_input_selection_v003/theme-llm-v002/20260711-full-source-upper-bound-v001/windows/window_05_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/c35dffdb6bb74acf?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"宝鐘マリンの雑な反応と謎のフォロー\",\n      \"reason\": \"戌神ころねの心配に対する宝鐘マリンの雑な返しから、作業の真面目さを褒める謎のフォローが入る一連の流れが面白いから。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 867669,\n          \"sourceEndMs\": 904802,\n          \"supportingSpeechIds\": [\n            \"97-104\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"イノシシ襲来とししシチューの計画\",\n      \"reason\": \"島でイノシシに襲われたことをきっかけに、弓矢で仕留めてししシチューなどの料理にしようと盛り上がる場面。 \",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 925239,\n          \"sourceEndMs\": 959944,\n          \"supportingSpeechIds\": [\n            \"105-110\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_003\",\n      \"title\": \"エイムの自信とツッコミ\",\n      \"reason\": \"宝鐘マリンがエイムへの自信を満々に見せるものの、戌神ころねに「自信があったところって何」とツッコまれるコミカルなやり取りのため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 960122,\n          \"sourceEndMs\": 993519,\n          \"supportingSpeechIds\": [\n            \"111-112\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

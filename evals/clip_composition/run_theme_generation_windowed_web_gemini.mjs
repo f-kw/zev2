@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import { existsSync } from 'node:fs';
-import { mkdir, readFile, writeFile } from 'node:fs/promises';
+import { mkdir, readFile, rename, writeFile } from 'node:fs/promises';
 import { spawn } from 'node:child_process';
 import path from 'node:path';
 
@@ -59,12 +59,37 @@ function parseOptions(argv) {
       requestedThemeCount: 8
     })),
     cdpPort: values.get('cdpPort')?.trim() || '9222',
-    timeoutMs: values.get('timeoutMs')?.trim() || '300000'
+    timeoutMs: values.get('timeoutMs')?.trim() || '300000',
+    scanOnly: values.has('scanOnly'),
+    maxAttemptsPerWindow: values.has('maxAttemptsPerWindow')
+      ? positiveInt(values.get('maxAttemptsPerWindow'), 'maxAttemptsPerWindow')
+      : 1,
+    maxWindowsThisInvocation: values.has('maxWindowsThisInvocation')
+      ? positiveInt(values.get('maxWindowsThisInvocation'), 'maxWindowsThisInvocation')
+      : undefined
   };
+}
+
+function positiveInt(value, key) {
+  const parsed = Number.parseInt(String(value), 10);
+  if (!Number.isInteger(parsed) || parsed < 1) {
+    throw new Error(`--${key} は1以上の整数で指定してください`);
+  }
+  return parsed;
 }
 
 async function readJson(filePath) {
   return JSON.parse(await readFile(filePath, 'utf8'));
+}
+
+function timestampForFile() {
+  return new Date().toISOString().replace(/[:.]/g, '-');
+}
+
+async function writeJsonAtomic(filePath, value) {
+  const temporaryPath = `${filePath}.tmp`;
+  await writeFile(temporaryPath, `${JSON.stringify(value, null, 2)}\n`, 'utf8');
+  await rename(temporaryPath, filePath);
 }
 
 function runProcess(command, args) {
@@ -232,6 +257,66 @@ function assertCompleteGeminiOutput(output, context) {
   }
 }
 
+async function validateOrArchiveSavedWindow(outputPath, context) {
+  if (!existsSync(outputPath)) return { valid: false, archivedPath: null };
+  try {
+    const output = await readJson(outputPath);
+    assertCompleteGeminiOutput(output, context);
+    if (!Array.isArray(output.themes)) {
+      throw new Error(`${context} にthemes配列がありません`);
+    }
+    return { valid: true, output, archivedPath: null };
+  } catch (error) {
+    const archivedPath = outputPath.replace(/\.json$/, `.invalid-${timestampForFile()}.json`);
+    await rename(outputPath, archivedPath);
+    console.log(`[archive-invalid] ${path.relative(root, outputPath)} -> ${path.relative(root, archivedPath)}`);
+    console.log(`[archive-reason] ${error instanceof Error ? error.message : String(error)}`);
+    return { valid: false, archivedPath };
+  }
+}
+
+async function archivePreviousFailureDiagnostic(outputPath, attempt) {
+  const failurePath = `${outputPath}.failure.json`;
+  if (!existsSync(failurePath)) return null;
+  const archivedPath = `${outputPath}.before-attempt-${String(attempt).padStart(2, '0')}-failure-${timestampForFile()}.json`;
+  await rename(failurePath, archivedPath);
+  console.log(`[archive-failure] ${path.relative(root, failurePath)} -> ${path.relative(root, archivedPath)}`);
+  return archivedPath;
+}
+
+async function writeProgress(input) {
+  const completedWindowIds = [];
+  const missingWindowIds = [];
+  for (const window of input.plan.windows) {
+    const outputPath = path.join(
+      input.windowOutputDir,
+      `run-${String(input.run).padStart(2, '0')}-${window.windowId}-gemini-output.json`
+    );
+    if (existsSync(outputPath)) completedWindowIds.push(window.windowId);
+    else missingWindowIds.push(window.windowId);
+  }
+  const progressPath = path.join(input.baseDir, `run-${String(input.run).padStart(2, '0')}-execution-progress.json`);
+  await writeJsonAtomic(progressPath, {
+    kind: 'theme_generation_window_execution_progress',
+    updatedAt: new Date().toISOString(),
+    fixtureId: options.fixtureId,
+    generationSystem: options.generationSystem,
+    outputId: options.outputId,
+    run: input.run,
+    status: input.status,
+    totalWindowCount: input.plan.windows.length,
+    completedWindowCount: completedWindowIds.length,
+    missingWindowCount: missingWindowIds.length,
+    completedWindowIds,
+    missingWindowIds,
+    nextWindowId: missingWindowIds[0] ?? null,
+    newWindowsThisInvocation: input.newWindowsThisInvocation,
+    maxWindowsThisInvocation: options.maxWindowsThisInvocation ?? null,
+    note: '各window出力を個別保存し、再実行時は完全な保存済みwindowを検証してskipする。途中切れ・壊れたJSONは証拠を別名保存して再実行する。'
+  });
+  return progressPath;
+}
+
 async function aggregateRun(plan, run) {
   const themes = [];
   const windowResults = [];
@@ -286,41 +371,124 @@ async function main() {
   const plan = await readJson(path.join(baseDir, 'window-plan.json'));
   const windowOutputDir = path.join(baseDir, 'windows');
   await mkdir(windowOutputDir, { recursive: true });
+  let newWindowsThisInvocation = 0;
   for (let run = 1; run <= plan.runs; run += 1) {
+    await writeProgress({
+      baseDir,
+      windowOutputDir,
+      plan,
+      run,
+      status: 'scanning_saved_windows',
+      newWindowsThisInvocation
+    });
     for (const window of plan.windows) {
       const outputPath = path.join(windowOutputDir, `run-${String(run).padStart(2, '0')}-${window.windowId}-gemini-output.json`);
-      if (existsSync(outputPath)) {
+      const saved = await validateOrArchiveSavedWindow(outputPath, `run ${run} ${window.windowId}`);
+      if (saved.valid) {
         console.log(`[skip] run ${run} ${window.windowId}`);
         continue;
       }
-      console.log(`[run] ${options.fixtureId} run ${run} ${window.windowId}`);
-      await runProcess(path.join(root, 'runner', 'node_modules', '.bin', 'tsx'), [
-        'evals/clip_composition/run_web_gemini_prompt.ts',
-        '--prompt',
-        path.join(root, window.promptPath),
-        '--output',
-        outputPath,
-        '--model',
-        options.model,
-        '--params',
-        JSON.stringify({
-          ...options.params,
-          windowed: true,
-          windowId: window.windowId,
-          windowSourceVideoId: window.sourceVideoId,
-          windowRequestedThemeCount: plan.requestedThemeCount
-        }),
-        '--cdpPort',
-        options.cdpPort,
-        '--timeoutMs',
-        options.timeoutMs,
-        '--rejectPartialExtraction',
-        '--closeTabAfterRun'
-      ]);
-      const output = await readJson(outputPath);
-      assertCompleteGeminiOutput(output, `run ${run} ${window.windowId}`);
+      if (options.scanOnly) {
+        const progressPath = await writeProgress({
+          baseDir,
+          windowOutputDir,
+          plan,
+          run,
+          status: 'scan_only_partial_state',
+          newWindowsThisInvocation
+        });
+        console.log(`[scan-only] next=${window.windowId}`);
+        console.log(`[progress] ${path.relative(root, progressPath)}`);
+        return;
+      }
+      if (options.maxWindowsThisInvocation !== undefined
+        && newWindowsThisInvocation >= options.maxWindowsThisInvocation) {
+        const progressPath = await writeProgress({
+          baseDir,
+          windowOutputDir,
+          plan,
+          run,
+          status: 'paused_after_window_limit',
+          newWindowsThisInvocation
+        });
+        console.log(`[pause] maxWindowsThisInvocation=${options.maxWindowsThisInvocation}`);
+        console.log(`[progress] ${path.relative(root, progressPath)}`);
+        return;
+      }
+      let completedWindow = false;
+      let lastError;
+      for (let attempt = 1; attempt <= options.maxAttemptsPerWindow; attempt += 1) {
+        await archivePreviousFailureDiagnostic(outputPath, attempt);
+        console.log(`[run] ${options.fixtureId} run ${run} ${window.windowId} attempt ${attempt}/${options.maxAttemptsPerWindow}`);
+        try {
+          await runProcess(path.join(root, 'runner', 'node_modules', '.bin', 'tsx'), [
+            'evals/clip_composition/run_web_gemini_prompt.ts',
+            '--prompt',
+            path.join(root, window.promptPath),
+            '--output',
+            outputPath,
+            '--model',
+            options.model,
+            '--params',
+            JSON.stringify({
+              ...options.params,
+              windowed: true,
+              windowId: window.windowId,
+              windowSourceVideoId: window.sourceVideoId,
+              windowRequestedThemeCount: plan.requestedThemeCount
+            }),
+            '--cdpPort',
+            options.cdpPort,
+            '--timeoutMs',
+            options.timeoutMs,
+            '--rejectPartialExtraction',
+            '--closeTabAfterRun'
+          ]);
+          const completed = await validateOrArchiveSavedWindow(outputPath, `run ${run} ${window.windowId}`);
+          if (!completed.valid) {
+            throw new Error(`run ${run} ${window.windowId} の保存結果が完全ではありません`);
+          }
+          completedWindow = true;
+          break;
+        } catch (error) {
+          lastError = error;
+          console.log(`[attempt-failed] run ${run} ${window.windowId} attempt ${attempt}/${options.maxAttemptsPerWindow}`);
+          if (attempt < options.maxAttemptsPerWindow) {
+            console.log(`[retry] run ${run} ${window.windowId}`);
+          }
+        }
+      }
+      if (!completedWindow) {
+        await writeProgress({
+          baseDir,
+          windowOutputDir,
+          plan,
+          run,
+          status: 'stopped_after_window_error',
+          newWindowsThisInvocation
+        });
+        throw lastError ?? new Error(`run ${run} ${window.windowId} が完了しませんでした`);
+      }
+      newWindowsThisInvocation += 1;
+      await writeProgress({
+        baseDir,
+        windowOutputDir,
+        plan,
+        run,
+        status: 'window_saved',
+        newWindowsThisInvocation
+      });
     }
     await aggregateRun(plan, run);
+    const progressPath = await writeProgress({
+      baseDir,
+      windowOutputDir,
+      plan,
+      run,
+      status: 'completed_and_aggregated',
+      newWindowsThisInvocation
+    });
+    console.log(`[progress] ${path.relative(root, progressPath)}`);
   }
 }
 

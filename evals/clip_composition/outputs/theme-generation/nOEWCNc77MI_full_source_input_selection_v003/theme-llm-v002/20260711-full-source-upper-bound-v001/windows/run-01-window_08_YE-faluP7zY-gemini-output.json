@@ -1,0 +1,35 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "脳死で古文風の喋り方になってしまうマリン",
+      "reason": "「竹取りの桶というものありきり」などと脳死で口走り、その後も二人で「〜ありけり」「怠ることなかれ」と古文風の掛け合いを楽しんでいる独特な一幕です。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 1294092,
+          "sourceEndMs": 1427669,
+          "supportingSpeechIds": [
+            177,
+            "185-189"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-11T16:37:20+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_08_YE-faluP7zY",
+    "windowSourceVideoId": "YE-faluP7zY",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nOEWCNc77MI_full_source_input_selection_v003/theme-llm-v002/20260711-full-source-upper-bound-v001/windows/window_08_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/563085184bdbe84a?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"脳死で古文風の喋り方になってしまうマリン\",\n      \"reason\": \"「竹取りの桶というものありきり」などと脳死で口走り、その後も二人で「〜ありけり」「怠ることなかれ」と古文風の掛け合いを楽しんでいる独特な一幕です。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 1294092,\n          \"sourceEndMs\": 1427669,\n          \"supportingSpeechIds\": [\n            177,\n            \"185-189\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

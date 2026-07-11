@@ -1,0 +1,269 @@
+{
+  "kind": "theme_redo_source_only_window_prompt_payload",
+  "runAt": "2026-07-11T07:17:32.415Z",
+  "target": "nOEWCNc77MI",
+  "inputSetId": "nOEWCNc77MI_full_source_input_selection_v003",
+  "sourceVideoId": "YE-faluP7zY",
+  "sourceSttId": "nOEWCNc77MI_YE-faluP7zY_local30_v001",
+  "sourceSttManifestPath": "evals/clip_composition/stt/nOEWCNc77MI_YE-faluP7zY_local30_v001/source/manifest.json",
+  "sourceSttComplete": true,
+  "generationSystem": "theme-llm-v002",
+  "promptVersion": "theme_generation_prompt_v002",
+  "requestedThemeCount": 8,
+  "windowKind": "primary",
+  "llmCall": false,
+  "modelInput": {
+    "task": "source_only_theme_generation",
+    "generationSystem": "theme-llm-v002",
+    "promptVersion": "theme_generation_prompt_v002",
+    "requestedThemeCount": 8,
+    "inputPolicy": {
+      "sourceOnly": true,
+      "noClipInfo": true,
+      "noExpected": true,
+      "noAlignment": true,
+      "noHumanReverseTheme": true
+    },
+    "windowing": {
+      "applied": true,
+      "mode": "speech-time",
+      "windowId": "window_66_YE-faluP7zY",
+      "reason": "元配信全体入力が長いため、発話境界を保った時間窓へ分割する。",
+      "maxPromptBytes": 13084,
+      "overlapMs": 0,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 11161334,
+      "sourceEndMs": 11310898
+    },
+    "sources": [
+      {
+        "sourceVideoId": "YE-faluP7zY",
+        "sourceUrl": "https://www.youtube.com/watch?v=YE-faluP7zY",
+        "sourceTitle": "【Raft】ころね、キミさえいればこの海の果てまでだって──【ホロライブ/宝鐘マリン】",
+        "transcriptKind": "local_stt",
+        "language": "ja-JP",
+        "durationSec": 11824.121,
+        "rawSegmentCount": 53180,
+        "promptSegmentCount": 27,
+        "segmentCompaction": {
+          "method": "source-only transcript segments concatenated until sentence-ending punctuation",
+          "scoringRole": "none",
+          "note": "読みやすさのための表現変換であり、expected、切り抜き、照合結果、人間確認メモは使わない。"
+        },
+        "segments": [
+          {
+            "speechId": 1663,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 11161334,
+            "sourceEndMs": 11184442,
+            "text": "こうやってくると机の位置ずれが気になってきたなひまわりの位置もずれてる気がしてきた1個気になるとめっちゃ気になっちゃうやつなそれなそうなんよよし暖炉とのバランスを見ながらいいなこれが友達かそうだよこの辺かなうん"
+          },
+          {
+            "speechId": 1664,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 11193138,
+            "sourceEndMs": 11193818,
+            "text": "ちょっと晴れてきた。"
+          },
+          {
+            "speechId": 1665,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 11193818,
+            "sourceEndMs": 11195859,
+            "text": "そろそろさ、島にも行きたいね。"
+          },
+          {
+            "speechId": 1666,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 11195859,
+            "sourceEndMs": 11197099,
+            "text": "あ、たしかにね。"
+          },
+          {
+            "speechId": 1667,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 11197099,
+            "sourceEndMs": 11205401,
+            "text": "ね。"
+          },
+          {
+            "speechId": 1668,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 11205401,
+            "sourceEndMs": 11210322,
+            "text": "違うな。"
+          },
+          {
+            "speechId": 1669,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 11210322,
+            "sourceEndMs": 11211962,
+            "text": "完璧?"
+          },
+          {
+            "speechId": 1670,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 11211962,
+            "sourceEndMs": 11216283,
+            "text": "もうちょい。"
+          },
+          {
+            "speechId": 1671,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 11216283,
+            "sourceEndMs": 11218544,
+            "text": "いいね。"
+          },
+          {
+            "speechId": 1672,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 11218544,
+            "sourceEndMs": 11219144,
+            "text": "ここ!"
+          },
+          {
+            "speechId": 1673,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 11219144,
+            "sourceEndMs": 11219484,
+            "text": "いいじゃん!"
+          },
+          {
+            "speechId": 1674,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 11219484,
+            "sourceEndMs": 11219664,
+            "text": "椅子の交換。"
+          },
+          {
+            "speechId": 1675,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 11219664,
+            "sourceEndMs": 11219964,
+            "text": "椅子?"
+          },
+          {
+            "speechId": 1676,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 11220314,
+            "sourceEndMs": 11224838,
+            "text": "椅子ってさぁ、あってもなくてもさぁでもローテーブルなんでしょ?"
+          },
+          {
+            "speechId": 1677,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 11224838,
+            "sourceEndMs": 11226559,
+            "text": "あ、いいじゃん!"
+          },
+          {
+            "speechId": 1678,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 11226559,
+            "sourceEndMs": 11228121,
+            "text": "あ、いい?"
+          },
+          {
+            "speechId": 1679,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 11228121,
+            "sourceEndMs": 11229081,
+            "text": "めっちゃいいじゃん!"
+          },
+          {
+            "speechId": 1680,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 11229081,
+            "sourceEndMs": 11229682,
+            "text": "あ、めっちゃいい?"
+          },
+          {
+            "speechId": 1681,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 11229682,
+            "sourceEndMs": 11235026,
+            "text": "え、ロ、あ、これローテーブルじゃないやつ?"
+          },
+          {
+            "speechId": 1682,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 11235026,
+            "sourceEndMs": 11241071,
+            "text": "これは、これはローテーブルじゃないやつローテーブルも見てみたかったけどね見てみる?"
+          },
+          {
+            "speechId": 1683,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 11241071,
+            "sourceEndMs": 11245835,
+            "text": "おくねじゃあ見てみていい?"
+          },
+          {
+            "speechId": 1684,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 11245835,
+            "sourceEndMs": 11248698,
+            "text": "これ、でも可愛いよなぁ、これ可愛いよ"
+          },
+          {
+            "speechId": 1685,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 11251114,
+            "sourceEndMs": 11271141,
+            "text": "デザインはかわいいよワッフルみたいじゃん、ワッフルね、かわいいんだけどな確かにかわいいな、どっかに飾ったらかわいい、普通にかわいいよそれかわいいねうんでもやっぱ食卓囲むときこの高さだなクロスはいいんだけどないいんじゃない?"
+          },
+          {
+            "speechId": 1686,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 11271141,
+            "sourceEndMs": 11280000,
+            "text": "でも地面に座ってこう、星座しながら食べるのもツーでしょわびさびわびさびですかわびさびだと思うけど"
+          },
+          {
+            "speechId": 1687,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 11281763,
+            "sourceEndMs": 11283424,
+            "text": "いいと思うよほんと?"
+          },
+          {
+            "speechId": 1688,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 11283424,
+            "sourceEndMs": 11309582,
+            "text": "じゃあ、カーペット敷いてその上にいいじゃんあそこまで考えて置いたひまわりをあっけなく撤去してしまったなんか、あれよ、あのそういう話あったよ、あのミッキーのさ、ミックスアドベンチャーっていうやつでさはいミッキーたちがさ、日本に遊びに来る話があってさうんミニーちゃんがびっくりする"
+          },
+          {
+            "speechId": 1689,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 11310778,
+            "sourceEndMs": 11310898,
+            "text": "何が?"
+          }
+        ]
+      }
+    ],
+    "outputContract": {
+      "format": "json_only",
+      "schema": {
+        "themes": [
+          {
+            "themeId": "string",
+            "title": "string",
+            "reason": "string_one_sentence",
+            "evidenceRanges": [
+              {
+                "sourceVideoId": "string",
+                "sourceStartMs": "number",
+                "sourceEndMs": "number",
+                "supportingSpeechIds": [
+                  "number_or_range_string"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

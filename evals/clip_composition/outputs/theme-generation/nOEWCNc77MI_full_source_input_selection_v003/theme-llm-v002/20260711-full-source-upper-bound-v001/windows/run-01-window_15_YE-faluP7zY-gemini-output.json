@@ -1,0 +1,49 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "フグの襲来に警戒する宝鐘マリン",
+      "reason": "フグが来ていることに気づき、前回の毒による死亡を踏まえて周囲に強く注意喚起しているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 2414189,
+          "sourceEndMs": 2449059,
+          "supportingSpeechIds": [
+            "347-350"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "「死ぬ死ぬ死ぬ！」酸素ボンベで調子に乗り溺れかける",
+      "reason": "酸素ボンベを手に入れて水中で息ができると過信し、危うく窒息死しかけてパニックになる展開が面白いため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 2488337,
+          "sourceEndMs": 2536639,
+          "supportingSpeechIds": [
+            "361-369"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-11T16:49:38+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_15_YE-faluP7zY",
+    "windowSourceVideoId": "YE-faluP7zY",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nOEWCNc77MI_full_source_input_selection_v003/theme-llm-v002/20260711-full-source-upper-bound-v001/windows/window_15_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/8fa051a580a6c9a2?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"フグの襲来に警戒する宝鐘マリン\",\n      \"reason\": \"フグが来ていることに気づき、前回の毒による死亡を踏まえて周囲に強く注意喚起しているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 2414189,\n          \"sourceEndMs\": 2449059,\n          \"supportingSpeechIds\": [\"347-350\"]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"「死ぬ死ぬ死ぬ！」酸素ボンベで調子に乗り溺れかける\",\n      \"reason\": \"酸素ボンベを手に入れて水中で息ができると過信し、危うく窒息死しかけてパニックになる展開が面白いため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 2488337,\n          \"sourceEndMs\": 2536639,\n          \"supportingSpeechIds\": [\"361-369\"]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

@@ -1,0 +1,64 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "サメの頭を壁に飾るかリスナーに問いかけるマリン",
+      "reason": "手に入れたサメの頭の使い道をリスナーに問いかけ、壁に飾れるというコメントを拾って納得する一連のやり取りが綺麗に収まっているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 6048569,
+          "sourceEndMs": 6119386,
+          "supportingSpeechIds": [
+            "896-905"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "ヤシの木を植える大きめのプランター設置をリスナーと決める場面",
+      "reason": "大規格の作物を3個ほど作る提案をリスナーと戌神ころねに問いかけ、意見を採用して作成に移る流れがコミカルに描かれているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 6180274,
+          "sourceEndMs": 6213315,
+          "supportingSpeechIds": [
+            "911-915"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_003",
+      "title": "釘の在庫に気づかず一瞬焦るも解決するマリン",
+      "reason": "クラフトに必要な釘の消費量に驚くものの、実はたくさん持っていたことに気づいて一人で解決する一幕が綺麗に完結しているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 6241023,
+          "sourceEndMs": 6268278,
+          "supportingSpeechIds": [
+            "916-918"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-11T17:17:22+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_36_YE-faluP7zY",
+    "windowSourceVideoId": "YE-faluP7zY",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nOEWCNc77MI_full_source_input_selection_v003/theme-llm-v002/20260711-full-source-upper-bound-v001/windows/window_36_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/4d9930af951ff505?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"サメの頭を壁に飾るかリスナーに問いかけるマリン\",\n      \"reason\": \"手に入れたサメの頭の使い道をリスナーに問いかけ、壁に飾れるというコメントを拾って納得する一連のやり取りが綺麗に収まっているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 6048569,\n          \"sourceEndMs\": 6119386,\n          \"supportingSpeechIds\": [\n            \"896-905\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"ヤシの木を植える大きめのプランター設置をリスナーと決める場面\",\n      \"reason\": \"大規格の作物を3個ほど作る提案をリスナーと戌神ころねに問いかけ、意見を採用して作成に移る流れがコミカルに描かれているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 6180274,\n          \"sourceEndMs\": 6213315,\n          \"supportingSpeechIds\": [\n            \"911-915\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_003\",\n      \"title\": \"釘の在庫に気づかず一瞬焦るも解決するマリン\",\n      \"reason\": \"クラフトに必要な釘の消費量に驚くものの、実はたくさん持っていたことに気づいて一人で解決する一幕が綺麗に完結しているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 6241023,\n          \"sourceEndMs\": 6268278,\n          \"supportingSpeechIds\": [\n            \"916-918\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

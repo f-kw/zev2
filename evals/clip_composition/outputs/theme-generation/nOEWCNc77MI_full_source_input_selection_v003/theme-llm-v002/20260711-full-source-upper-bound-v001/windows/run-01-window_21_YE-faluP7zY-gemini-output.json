@@ -1,0 +1,59 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "温存していた肉の回復量にツッコむ宝鐘マリン",
+      "reason": "ここぞという時のために温存していたイノシシの肉を2人で食べたが、回復量が大したことなくてツッコミを入れる展開が面白いから。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 3495718,
+          "sourceEndMs": 3511621,
+          "supportingSpeechIds": [
+            508,
+            509,
+            510
+          ]
+        },
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 3634469,
+          "sourceEndMs": 3719724,
+          "supportingSpeechIds": [
+            "521-523"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "すぐはぐれてしまう戌神ころねに困惑する宝鐘マリン",
+      "reason": "「すぐはぐれるじゃん」と言いながら、岩を落としてくる敵の出所を探しつつもお互いを見失いそうになる掛け合いが微笑ましいから。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 3720322,
+          "sourceEndMs": 3767029,
+          "supportingSpeechIds": [
+            "524-527"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-11T17:03:26+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_21_YE-faluP7zY",
+    "windowSourceVideoId": "YE-faluP7zY",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nOEWCNc77MI_full_source_input_selection_v003/theme-llm-v002/20260711-full-source-upper-bound-v001/windows/window_21_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/67bf1762bd9d54e3?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"温存していた肉の回復量にツッコむ宝鐘マリン\",\n      \"reason\": \"ここぞという時のために温存していたイノシシの肉を2人で食べたが、回復量が大したことなくてツッコミを入れる展開が面白いから。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 3495718,\n          \"sourceEndMs\": 3511621,\n          \"supportingSpeechIds\": [508, 509, 510]\n        },\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 3634469,\n          \"sourceEndMs\": 3719724,\n          \"supportingSpeechIds\": [\"521-523\"]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"すぐはぐれてしまう戌神ころねに困惑する宝鐘マリン\",\n      \"reason\": \"「すぐはぐれるじゃん」と言いながら、岩を落としてくる敵の出所を探しつつもお互いを見失いそうになる掛け合いが微笑ましいから。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 3720322,\n          \"sourceEndMs\": 3767029,\n          \"supportingSpeechIds\": [\"524-527\"]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

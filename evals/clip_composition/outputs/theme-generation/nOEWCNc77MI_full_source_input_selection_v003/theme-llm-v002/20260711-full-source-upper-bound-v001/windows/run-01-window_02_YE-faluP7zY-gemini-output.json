@@ -1,0 +1,49 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "ピンク色の空に「二人の心みたいじゃない？」とロマンチックになるマリン船長",
+      "reason": "夕焼け（朝日）のピンク色の空を見た宝鐘マリンが、戌神ころねに対して二人の心のようだとロマンチックな表現を投げかける展開が切り抜きとして成立するため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 397197,
+          "sourceEndMs": 420358,
+          "supportingSpeechIds": [
+            "29-40"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "リフォームした船の紹介を始めようとする宝鐘マリン",
+      "reason": "朝になったタイミングで宝鐘マリンがリフォームの紹介をハイテンションなBGMの口ずさみと共に始めようとする場面が見どころとなるため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 420358,
+          "sourceEndMs": 507883,
+          "supportingSpeechIds": [
+            "40-43"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-11T16:19:35+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_02_YE-faluP7zY",
+    "windowSourceVideoId": "YE-faluP7zY",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nOEWCNc77MI_full_source_input_selection_v003/theme-llm-v002/20260711-full-source-upper-bound-v001/windows/window_02_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/62393ea650da3ecf?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"ピンク色の空に「二人の心みたいじゃない？」とロマンチックになるマリン船長\",\n      \"reason\": \"夕焼け（朝日）のピンク色の空を見た宝鐘マリンが、戌神ころねに対して二人の心のようだとロマンチックな表現を投げかける展開が切り抜きとして成立するため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 397197,\n          \"sourceEndMs\": 420358,\n          \"supportingSpeechIds\": [\n            \"29-40\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"リフォームした船の紹介を始めようとする宝鐘マリン\",\n      \"reason\": \"朝になったタイミングで宝鐘マリンがリフォームの紹介をハイテンションなBGMの口ずさみと共に始めようとする場面が見どころとなるため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 420358,\n          \"sourceEndMs\": 507883,\n          \"supportingSpeechIds\": [\n            \"40-43\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

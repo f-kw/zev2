@@ -1,0 +1,64 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "木の枚数に関する期待と現実のギャップ",
+      "reason": "何枚持っているかという問いに対して50枚という大きな期待をかけるも、実際は6枚しかなく落胆するコミカルなやり取りが成立しているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 5501533,
+          "sourceEndMs": 5523691,
+          "supportingSpeechIds": [
+            "818-821"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "船が進まない原因を巡るパドルと帆の張り合い",
+      "reason": "船が進まない状況でパドルと帆のどちらが早いか言い合い、結果的に帆の向きが逆だったことが発覚して煽り合う一連の流れに明確なオチがあるため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 5537818,
+          "sourceEndMs": 5648235,
+          "supportingSpeechIds": [
+            "825-840"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_003",
+      "title": "パドルで船を動かすもぬるっと壊れる結末",
+      "reason": "再びパドルを使って船を進めることに成功するが、直後にパドルがぬるっと壊れてしまうシュールなオチがついているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 5648235,
+          "sourceEndMs": 5686333,
+          "supportingSpeechIds": [
+            "841-844"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-11T17:06:25+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_33_YE-faluP7zY",
+    "windowSourceVideoId": "YE-faluP7zY",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nOEWCNc77MI_full_source_input_selection_v003/theme-llm-v002/20260711-full-source-upper-bound-v001/windows/window_33_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/58d1ad1fd5d13d86?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"木の枚数に関する期待と現実のギャップ\",\n      \"reason\": \"何枚持っているかという問いに対して50枚という大きな期待をかけるも、実際は6枚しかなく落胆するコミカルなやり取りが成立しているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 5501533,\n          \"sourceEndMs\": 5523691,\n          \"supportingSpeechIds\": [\n            \"818-821\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"船が進まない原因を巡るパドルと帆の張り合い\",\n      \"reason\": \"船が進まない状況でパドルと帆のどちらが早いか言い合い、結果的に帆の向きが逆だったことが発覚して煽り合う一連の流れに明確なオチがあるため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 5537818,\n          \"sourceEndMs\": 5648235,\n          \"supportingSpeechIds\": [\n            \"825-840\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_003\",\n      \"title\": \"パドルで船を動かすもぬるっと壊れる結末\",\n      \"reason\": \"再びパドルを使って船を進めることに成功するが、直後にパドルがぬるっと壊れてしまうシュールなオチがついているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 5648235,\n          \"sourceEndMs\": 5686333,\n          \"supportingSpeechIds\": [\n            \"841-844\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

@@ -1,0 +1,49 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "反対側から岩を登れることに気づくシーン",
+      "reason": "登れないと思っていた岩に対して、コメントを頼りに反対側から登れることを発見し実践する一連のやり取りが綺麗に収まっているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 3767029,
+          "sourceEndMs": 3839904,
+          "supportingSpeechIds": [
+            "528-551"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "鳥の行動の秘密と満身創痍の探索",
+      "reason": "襲ってくる鳥が岩を拾っているという発見や、登った先での探索が上手くいかず満身創痍になる展開が描かれているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 3824737,
+          "sourceEndMs": 3879156,
+          "supportingSpeechIds": [
+            "551-555"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-11T17:03:40+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_22_YE-faluP7zY",
+    "windowSourceVideoId": "YE-faluP7zY",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nOEWCNc77MI_full_source_input_selection_v003/theme-llm-v002/20260711-full-source-upper-bound-v001/windows/window_22_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/9f15da9d309a27bc?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"反対側から岩を登れることに気づくシーン\",\n      \"reason\": \"登れないと思っていた岩に対して、コメントを頼りに反対側から登れることを発見し実践する一連のやり取りが綺麗に収まっているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 3767029,\n          \"sourceEndMs\": 3839904,\n          \"supportingSpeechIds\": [\n            \"528-551\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"鳥の行動の秘密と満身創痍の探索\",\n      \"reason\": \"襲ってくる鳥が岩を拾っているという発見や、登った先での探索が上手くいかず満身創痍になる展開が描かれているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 3824737,\n          \"sourceEndMs\": 3879156,\n          \"supportingSpeechIds\": [\n            \"551-555\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

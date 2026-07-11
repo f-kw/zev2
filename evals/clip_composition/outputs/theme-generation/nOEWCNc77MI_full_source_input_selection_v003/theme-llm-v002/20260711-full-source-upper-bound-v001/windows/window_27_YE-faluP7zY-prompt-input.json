@@ -1,0 +1,269 @@
+{
+  "kind": "theme_redo_source_only_window_prompt_payload",
+  "runAt": "2026-07-11T07:17:32.389Z",
+  "target": "nOEWCNc77MI",
+  "inputSetId": "nOEWCNc77MI_full_source_input_selection_v003",
+  "sourceVideoId": "YE-faluP7zY",
+  "sourceSttId": "nOEWCNc77MI_YE-faluP7zY_local30_v001",
+  "sourceSttManifestPath": "evals/clip_composition/stt/nOEWCNc77MI_YE-faluP7zY_local30_v001/source/manifest.json",
+  "sourceSttComplete": true,
+  "generationSystem": "theme-llm-v002",
+  "promptVersion": "theme_generation_prompt_v002",
+  "requestedThemeCount": 8,
+  "windowKind": "primary",
+  "llmCall": false,
+  "modelInput": {
+    "task": "source_only_theme_generation",
+    "generationSystem": "theme-llm-v002",
+    "promptVersion": "theme_generation_prompt_v002",
+    "requestedThemeCount": 8,
+    "inputPolicy": {
+      "sourceOnly": true,
+      "noClipInfo": true,
+      "noExpected": true,
+      "noAlignment": true,
+      "noHumanReverseTheme": true
+    },
+    "windowing": {
+      "applied": true,
+      "mode": "speech-time",
+      "windowId": "window_27_YE-faluP7zY",
+      "reason": "元配信全体入力が長いため、発話境界を保った時間窓へ分割する。",
+      "maxPromptBytes": 13084,
+      "overlapMs": 0,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 4500000,
+      "sourceEndMs": 4626690
+    },
+    "sources": [
+      {
+        "sourceVideoId": "YE-faluP7zY",
+        "sourceUrl": "https://www.youtube.com/watch?v=YE-faluP7zY",
+        "sourceTitle": "【Raft】ころね、キミさえいればこの海の果てまでだって──【ホロライブ/宝鐘マリン】",
+        "transcriptKind": "local_stt",
+        "language": "ja-JP",
+        "durationSec": 11824.121,
+        "rawSegmentCount": 53180,
+        "promptSegmentCount": 27,
+        "segmentCompaction": {
+          "method": "source-only transcript segments concatenated until sentence-ending punctuation",
+          "scoringRole": "none",
+          "note": "読みやすさのための表現変換であり、expected、切り抜き、照合結果、人間確認メモは使わない。"
+        },
+        "segments": [
+          {
+            "speechId": 664,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 4500000,
+            "sourceEndMs": 4501901,
+            "text": "ここすごいたるい!"
+          },
+          {
+            "speechId": 665,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 4501901,
+            "sourceEndMs": 4503002,
+            "text": "あ、来た!"
+          },
+          {
+            "speechId": 666,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 4503002,
+            "sourceEndMs": 4505604,
+            "text": "ライオン!"
+          },
+          {
+            "speechId": 667,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 4505604,
+            "sourceEndMs": 4516312,
+            "text": "あれも拾おうか自分で拾いに行ってる助かるわこれ回収ネットで拾えるからねダイオン今日という虚構図つけるあれ?"
+          },
+          {
+            "speechId": 668,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 4516312,
+            "sourceEndMs": 4516973,
+            "text": "何が?"
+          },
+          {
+            "speechId": 669,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 4516973,
+            "sourceEndMs": 4519194,
+            "text": "もしかして下にコンロあるから?"
+          },
+          {
+            "speechId": 670,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 4519194,
+            "sourceEndMs": 4521716,
+            "text": "なんでダメなのこれ?"
+          },
+          {
+            "speechId": 671,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 4521716,
+            "sourceEndMs": 4526640,
+            "text": "説明よろしく頼むで作れない?"
+          },
+          {
+            "speechId": 672,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 4526640,
+            "sourceEndMs": 4529642,
+            "text": "そりゃ参ったな君たち説明して"
+          },
+          {
+            "speechId": 673,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 4530130,
+            "sourceEndMs": 4531331,
+            "text": "あ、そうだ!"
+          },
+          {
+            "speechId": 674,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 4531331,
+            "sourceEndMs": 4531951,
+            "text": "そうだそうだ!"
+          },
+          {
+            "speechId": 675,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 4531951,
+            "sourceEndMs": 4535332,
+            "text": "土台じゃないんだった、そういえばそうなの?"
+          },
+          {
+            "speechId": 676,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 4535332,
+            "sourceEndMs": 4548779,
+            "text": "これだ、木製フロアだライオンあ、こうだこうだ思い出しましたあ、もう板なくなっちゃったまじ、板全然ないあ、板ね、ここにね、今ね、20枚入ってるナイスー!"
+          },
+          {
+            "speechId": 677,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 4548779,
+            "sourceEndMs": 4551780,
+            "text": "ナイスー!"
+          },
+          {
+            "speechId": 678,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 4551780,
+            "sourceEndMs": 4559584,
+            "text": "集めるの達人じゃん、こうね私なすばらしい全然サメがここないんだけどいいねいいよね、これね"
+          },
+          {
+            "speechId": 679,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 4561908,
+            "sourceEndMs": 4589210,
+            "text": "もはや船いらねえんじゃねえかぐらいのいかだいらねえんじゃねえかちょっと言い過ぎたきていりますいかだいりますすみませんでした情けないな情けないですねこれは申し訳ない生酢やっとこうかないいね食料もしっかりね生酢食べるか食べて何の音だこれハマった音か板集めてとか"
+          },
+          {
+            "speechId": 680,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 4590034,
+            "sourceEndMs": 4590114,
+            "text": "ぽろり?"
+          },
+          {
+            "speechId": 681,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 4590114,
+            "sourceEndMs": 4590154,
+            "text": "ん?"
+          },
+          {
+            "speechId": 682,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 4590154,
+            "sourceEndMs": 4590314,
+            "text": "どこだ?"
+          },
+          {
+            "speechId": 683,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 4590314,
+            "sourceEndMs": 4591955,
+            "text": "あっ大丈夫?"
+          },
+          {
+            "speechId": 684,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 4591955,
+            "sourceEndMs": 4592115,
+            "text": "させっか!"
+          },
+          {
+            "speechId": 685,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 4592115,
+            "sourceEndMs": 4596457,
+            "text": "これでちょっと荷物整理したいなぁこれでよし、一旦OKだよいしょん?"
+          },
+          {
+            "speechId": 686,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 4596457,
+            "sourceEndMs": 4596578,
+            "text": "ん?"
+          },
+          {
+            "speechId": 687,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 4596578,
+            "sourceEndMs": 4596618,
+            "text": "ん?"
+          },
+          {
+            "speechId": 688,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 4596618,
+            "sourceEndMs": 4619170,
+            "text": "ランララランランランランラララララランランランラララララランランラララララララララララララララララララララララララララララララララララララララララララララララララララララララララララララララララララララララララララララララララララララララララララララララララララララララララララララララララララララララララララララララララララララララララララララララララ"
+          },
+          {
+            "speechId": 689,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 4620226,
+            "sourceEndMs": 4624969,
+            "text": "コーネがご機嫌だとマリリンも嬉しくなっちゃうんだよほんと?"
+          },
+          {
+            "speechId": 690,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 4624969,
+            "sourceEndMs": 4626690,
+            "text": "どれぐらい嬉しい?"
+          }
+        ]
+      }
+    ],
+    "outputContract": {
+      "format": "json_only",
+      "schema": {
+        "themes": [
+          {
+            "themeId": "string",
+            "title": "string",
+            "reason": "string_one_sentence",
+            "evidenceRanges": [
+              {
+                "sourceVideoId": "string",
+                "sourceStartMs": "number",
+                "sourceEndMs": "number",
+                "supportingSpeechIds": [
+                  "number_or_range_string"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

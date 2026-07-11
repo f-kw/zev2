@@ -1,0 +1,283 @@
+{
+  "kind": "theme_redo_source_only_window_prompt_payload",
+  "runAt": "2026-07-11T07:17:32.388Z",
+  "target": "nOEWCNc77MI",
+  "inputSetId": "nOEWCNc77MI_full_source_input_selection_v003",
+  "sourceVideoId": "YE-faluP7zY",
+  "sourceSttId": "nOEWCNc77MI_YE-faluP7zY_local30_v001",
+  "sourceSttManifestPath": "evals/clip_composition/stt/nOEWCNc77MI_YE-faluP7zY_local30_v001/source/manifest.json",
+  "sourceSttComplete": true,
+  "generationSystem": "theme-llm-v002",
+  "promptVersion": "theme_generation_prompt_v002",
+  "requestedThemeCount": 8,
+  "windowKind": "primary",
+  "llmCall": false,
+  "modelInput": {
+    "task": "source_only_theme_generation",
+    "generationSystem": "theme-llm-v002",
+    "promptVersion": "theme_generation_prompt_v002",
+    "requestedThemeCount": 8,
+    "inputPolicy": {
+      "sourceOnly": true,
+      "noClipInfo": true,
+      "noExpected": true,
+      "noAlignment": true,
+      "noHumanReverseTheme": true
+    },
+    "windowing": {
+      "applied": true,
+      "mode": "speech-time",
+      "windowId": "window_25_YE-faluP7zY",
+      "reason": "元配信全体入力が長いため、発話境界を保った時間窓へ分割する。",
+      "maxPromptBytes": 13084,
+      "overlapMs": 0,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 4233359,
+      "sourceEndMs": 4354127
+    },
+    "sources": [
+      {
+        "sourceVideoId": "YE-faluP7zY",
+        "sourceUrl": "https://www.youtube.com/watch?v=YE-faluP7zY",
+        "sourceTitle": "【Raft】ころね、キミさえいればこの海の果てまでだって──【ホロライブ/宝鐘マリン】",
+        "transcriptKind": "local_stt",
+        "language": "ja-JP",
+        "durationSec": 11824.121,
+        "rawSegmentCount": 53180,
+        "promptSegmentCount": 29,
+        "segmentCompaction": {
+          "method": "source-only transcript segments concatenated until sentence-ending punctuation",
+          "scoringRole": "none",
+          "note": "読みやすさのための表現変換であり、expected、切り抜き、照合結果、人間確認メモは使わない。"
+        },
+        "segments": [
+          {
+            "speechId": 605,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 4233359,
+            "sourceEndMs": 4233799,
+            "text": "OK!"
+          },
+          {
+            "speechId": 606,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 4233799,
+            "sourceEndMs": 4236259,
+            "text": "釣竿できました!"
+          },
+          {
+            "speechId": 607,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 4236259,
+            "sourceEndMs": 4236799,
+            "text": "助かる!"
+          },
+          {
+            "speechId": 608,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 4236799,
+            "sourceEndMs": 4237699,
+            "text": "助かる!"
+          },
+          {
+            "speechId": 609,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 4237699,
+            "sourceEndMs": 4238900,
+            "text": "渡しまーす!"
+          },
+          {
+            "speechId": 610,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 4238900,
+            "sourceEndMs": 4240980,
+            "text": "ありがとうございます!"
+          },
+          {
+            "speechId": 611,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 4240980,
+            "sourceEndMs": 4242040,
+            "text": "Thankyouverymuch!"
+          },
+          {
+            "speechId": 612,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 4242040,
+            "sourceEndMs": 4242280,
+            "text": "すごい!"
+          },
+          {
+            "speechId": 613,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 4242280,
+            "sourceEndMs": 4243321,
+            "text": "資材もいっぱい来てる!"
+          },
+          {
+            "speechId": 614,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 4243321,
+            "sourceEndMs": 4245021,
+            "text": "どんどん拾うわよ!"
+          },
+          {
+            "speechId": 615,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 4245021,
+            "sourceEndMs": 4246521,
+            "text": "取る取る取る!"
+          },
+          {
+            "speechId": 616,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 4246521,
+            "sourceEndMs": 4246901,
+            "text": "いいよ!"
+          },
+          {
+            "speechId": 617,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 4246901,
+            "sourceEndMs": 4248482,
+            "text": "ここに取るから!"
+          },
+          {
+            "speechId": 618,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 4248482,
+            "sourceEndMs": 4249482,
+            "text": "ここ取れるのか?"
+          },
+          {
+            "speechId": 619,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 4249482,
+            "sourceEndMs": 4254543,
+            "text": "空腹の雨より視界がぼやけてる今お魚焼いてるからね!"
+          },
+          {
+            "speechId": 620,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 4254543,
+            "sourceEndMs": 4254763,
+            "text": "頼む!"
+          },
+          {
+            "speechId": 621,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 4254763,
+            "sourceEndMs": 4255583,
+            "text": "焼けててくれ!"
+          },
+          {
+            "speechId": 622,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 4255583,
+            "sourceEndMs": 4256263,
+            "text": "お願い!"
+          },
+          {
+            "speechId": 623,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 4256263,
+            "sourceEndMs": 4256563,
+            "text": "いいよ!"
+          },
+          {
+            "speechId": 624,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 4256563,
+            "sourceEndMs": 4256963,
+            "text": "いいよ!"
+          },
+          {
+            "speechId": 625,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 4256963,
+            "sourceEndMs": 4257604,
+            "text": "焼けてる!"
+          },
+          {
+            "speechId": 626,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 4257604,
+            "sourceEndMs": 4257844,
+            "text": "助かる!"
+          },
+          {
+            "speechId": 627,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 4257844,
+            "sourceEndMs": 4259964,
+            "text": "ナイス!"
+          },
+          {
+            "speechId": 628,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 4263026,
+            "sourceEndMs": 4264307,
+            "text": "お味はいかがでしょうか?"
+          },
+          {
+            "speechId": 629,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 4264307,
+            "sourceEndMs": 4289544,
+            "text": "お味はですね、これ食べてアムアムアムアムアムアムアムアムアムアムアムアムアムアムアムアムアムアムアムアムアムアムアムアムアムアムアムアムアムアムアムアムアムアムアムアムアムアムアムアムアムアムアムアムアムアムアムアムアムアムアムアムアムアムアムアムアムアムアムアムアムアムアムアムアムアムアムアムアムアムアムアムアムアムアムアムアムアムアムアムアムアムアムアムアムアムアムアムアムアムアムアムアムアムアムアムアムアムアムアムアムアムアムアム"
+          },
+          {
+            "speechId": 630,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 4290094,
+            "sourceEndMs": 4308985,
+            "text": "なめんなよサメだからって撮影が高いえっとネット壊されちゃったなこれは痛えネットでもどうしようかなとりあえず気にしちゃいけない気にしちゃ負けだわあそういうこと?"
+          },
+          {
+            "speechId": 631,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 4308985,
+            "sourceEndMs": 4319892,
+            "text": "うんとりあえずちょっとお魚釣って食材多めに確保しといてOKあナマズ釣ったナマズあナマズいいよナマズいい食料"
+          },
+          {
+            "speechId": 632,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 4320114,
+            "sourceEndMs": 4348870,
+            "text": "いいよー盛りだくさんだからナマズはプリプリプリプリプリプリプリプリプリプリプリプリプリプリプリプリプリプリプリプリプリプリプリプリプリプリプリプリプリプリプリプリプリプリプリプリプリプリ"
+          },
+          {
+            "speechId": 633,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 4350866,
+            "sourceEndMs": 4354127,
+            "text": "ここなんでできない?"
+          }
+        ]
+      }
+    ],
+    "outputContract": {
+      "format": "json_only",
+      "schema": {
+        "themes": [
+          {
+            "themeId": "string",
+            "title": "string",
+            "reason": "string_one_sentence",
+            "evidenceRanges": [
+              {
+                "sourceVideoId": "string",
+                "sourceStartMs": "number",
+                "sourceEndMs": "number",
+                "supportingSpeechIds": [
+                  "number_or_range_string"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

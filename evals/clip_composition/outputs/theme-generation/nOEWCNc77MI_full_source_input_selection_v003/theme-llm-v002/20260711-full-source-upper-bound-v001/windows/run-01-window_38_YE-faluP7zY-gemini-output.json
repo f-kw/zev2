@@ -1,0 +1,49 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "ころねの「船長」呼びを巡る掛け合いと呼び捨ての匂わせ",
+      "reason": "ころねがマリンのことを「船長」ではなく「マリン」と呼んでいる特別な関係性や、最近の呼び捨てについての2人のトークが見どころとして成立するため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 6451610,
+          "sourceEndMs": 6510760,
+          "supportingSpeechIds": [
+            "955-957"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "謎のワード「種次郎」にツボるころね",
+      "reason": "マリンが発した「種次郎」という言葉に対してころねがじわじわと笑い出してツッコミを入れる掛け合いがユーモラスな一幕となっているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 6576625,
+          "sourceEndMs": 6613465,
+          "supportingSpeechIds": [
+            "964-967"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-11T17:17:49+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_38_YE-faluP7zY",
+    "windowSourceVideoId": "YE-faluP7zY",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nOEWCNc77MI_full_source_input_selection_v003/theme-llm-v002/20260711-full-source-upper-bound-v001/windows/window_38_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/f4cd13b66ee70c56?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"ころねの「船長」呼びを巡る掛け合いと呼び捨ての匂わせ\",\n      \"reason\": \"ころねがマリンのことを「船長」ではなく「マリン」と呼んでいる特別な関係性や、最近の呼び捨てについての2人のトークが見どころとして成立するため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 6451610,\n          \"sourceEndMs\": 6510760,\n          \"supportingSpeechIds\": [\n            \"955-957\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"謎のワード「種次郎」にツボるころね\",\n      \"reason\": \"マリンが発した「種次郎」という言葉に対してころねがじわじわと笑い出してツッコミを入れる掛け合いがユーモラスな一幕となっているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 6576625,\n          \"sourceEndMs\": 6613465,\n          \"supportingSpeechIds\": [\n            \"964-967\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

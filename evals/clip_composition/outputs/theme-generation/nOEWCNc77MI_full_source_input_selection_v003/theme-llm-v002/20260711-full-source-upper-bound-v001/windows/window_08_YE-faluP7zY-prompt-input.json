@@ -1,0 +1,255 @@
+{
+  "kind": "theme_redo_source_only_window_prompt_payload",
+  "runAt": "2026-07-11T07:17:32.381Z",
+  "target": "nOEWCNc77MI",
+  "inputSetId": "nOEWCNc77MI_full_source_input_selection_v003",
+  "sourceVideoId": "YE-faluP7zY",
+  "sourceSttId": "nOEWCNc77MI_YE-faluP7zY_local30_v001",
+  "sourceSttManifestPath": "evals/clip_composition/stt/nOEWCNc77MI_YE-faluP7zY_local30_v001/source/manifest.json",
+  "sourceSttComplete": true,
+  "generationSystem": "theme-llm-v002",
+  "promptVersion": "theme_generation_prompt_v002",
+  "requestedThemeCount": 8,
+  "windowKind": "primary",
+  "llmCall": false,
+  "modelInput": {
+    "task": "source_only_theme_generation",
+    "generationSystem": "theme-llm-v002",
+    "promptVersion": "theme_generation_prompt_v002",
+    "requestedThemeCount": 8,
+    "inputPolicy": {
+      "sourceOnly": true,
+      "noClipInfo": true,
+      "noExpected": true,
+      "noAlignment": true,
+      "noHumanReverseTheme": true
+    },
+    "windowing": {
+      "applied": true,
+      "mode": "speech-time",
+      "windowId": "window_08_YE-faluP7zY",
+      "reason": "元配信全体入力が長いため、発話境界を保った時間窓へ分割する。",
+      "maxPromptBytes": 13084,
+      "overlapMs": 0,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 1280213,
+      "sourceEndMs": 1439732
+    },
+    "sources": [
+      {
+        "sourceVideoId": "YE-faluP7zY",
+        "sourceUrl": "https://www.youtube.com/watch?v=YE-faluP7zY",
+        "sourceTitle": "【Raft】ころね、キミさえいればこの海の果てまでだって──【ホロライブ/宝鐘マリン】",
+        "transcriptKind": "local_stt",
+        "language": "ja-JP",
+        "durationSec": 11824.121,
+        "rawSegmentCount": 53180,
+        "promptSegmentCount": 25,
+        "segmentCompaction": {
+          "method": "source-only transcript segments concatenated until sentence-ending punctuation",
+          "scoringRole": "none",
+          "note": "読みやすさのための表現変換であり、expected、切り抜き、照合結果、人間確認メモは使わない。"
+        },
+        "segments": [
+          {
+            "speechId": 168,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1280213,
+            "sourceEndMs": 1280473,
+            "text": "なに?"
+          },
+          {
+            "speechId": 169,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1280473,
+            "sourceEndMs": 1281894,
+            "text": "絡みづらい?"
+          },
+          {
+            "speechId": 170,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1281894,
+            "sourceEndMs": 1283795,
+            "text": "ちょっと絡みづらい…嘘でしょ?"
+          },
+          {
+            "speechId": 171,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1283795,
+            "sourceEndMs": 1284495,
+            "text": "いつも?"
+          },
+          {
+            "speechId": 172,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1284495,
+            "sourceEndMs": 1285236,
+            "text": "今日だけ?"
+          },
+          {
+            "speechId": 173,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1285236,
+            "sourceEndMs": 1287337,
+            "text": "今日絡みづらい?"
+          },
+          {
+            "speechId": 174,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1287337,
+            "sourceEndMs": 1289358,
+            "text": "いつもは絡みやすい…待って、この魚…"
+          },
+          {
+            "speechId": 175,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1289708,
+            "sourceEndMs": 1290000,
+            "text": "えいちゃ"
+          },
+          {
+            "speechId": 176,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1290150,
+            "sourceEndMs": 1294092,
+            "text": "どうしよう気になるやん今日何があったんやんなりんどこ?"
+          },
+          {
+            "speechId": 177,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1294092,
+            "sourceEndMs": 1311760,
+            "text": "ちょっと今脳死で喋ってるあっ今ね今あの竹取りの桶というものありきりのとこあっよきかなよきかなよきかなちょっとちゃんと時代に染まってるねうんそれはよきかないいじゃんこの辺サメいなさそうな予感する今チャンスなのでは?"
+          },
+          {
+            "speechId": 178,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1311760,
+            "sourceEndMs": 1312480,
+            "text": "マジ?"
+          },
+          {
+            "speechId": 179,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1312480,
+            "sourceEndMs": 1319784,
+            "text": "あっでもこっち来そうだなうそえなんかフグもいるって言われてるようんうん普通にいるねこれでもここ海藻"
+          },
+          {
+            "speechId": 180,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1320162,
+            "sourceEndMs": 1335495,
+            "text": "オンパレードだからちょっと拾うわやばいやばい階層のここの階層も取り尽くした今から来ても遅いからナイス行かねーしそっち行かねーし反対側行ってっしオッケー?"
+          },
+          {
+            "speechId": 181,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1335495,
+            "sourceEndMs": 1348625,
+            "text": "これも階層だすごいなんか楽しいね楽しいねこっち側何もないかな何もないけどこっち側何もない?"
+          },
+          {
+            "speechId": 182,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1348625,
+            "sourceEndMs": 1349286,
+            "text": "何にもない"
+          },
+          {
+            "speechId": 183,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1350426,
+            "sourceEndMs": 1351046,
+            "text": "え?"
+          },
+          {
+            "speechId": 184,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1351046,
+            "sourceEndMs": 1380000,
+            "text": "金属とかもないけど粘土とかあそっかでかいなこの島でかいよなでかいくせにさ意外となんもない金属なんもないよ金属欲しいよなゆうて金属あったあった海藻あったナイス降りますあんまり行きすぎると戻るのが大変か分かる分かるでもなさそうだなこの辺砂は取ってったほうがいいか砂もそうだね取っとこう"
+          },
+          {
+            "speechId": 185,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1380850,
+            "sourceEndMs": 1387813,
+            "text": "OKOK砂というもの見つけられり見つけられり?"
+          },
+          {
+            "speechId": 186,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1387813,
+            "sourceEndMs": 1390555,
+            "text": "見つけられり死ぬ死ぬ?"
+          },
+          {
+            "speechId": 187,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1390555,
+            "sourceEndMs": 1392416,
+            "text": "海藻ありけり海藻ありけり?"
+          },
+          {
+            "speechId": 188,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1392416,
+            "sourceEndMs": 1409884,
+            "text": "海藻いっぱいあるいっぱいあるちょっと待って一回上がってよいしょあぁ荷物預けてくればよかったなぁ準備を怠る怠るなかれあーわしもいるわしもやばいこっちはね準備を怠ることなかれだったからね"
+          },
+          {
+            "speechId": 189,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1410846,
+            "sourceEndMs": 1427669,
+            "text": "あーそれはよきかなよきかなとしか言えんあんまり詳しくないお代官様あそっち行ったどっち行った?"
+          },
+          {
+            "speechId": 190,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1427669,
+            "sourceEndMs": 1438592,
+            "text": "あらよあらよあらよあらららよ戦術そっちじゃないかなあ改装めっちゃある14枚も拾ったわえ、じゃあ教えてよ何を?"
+          },
+          {
+            "speechId": 191,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1438592,
+            "sourceEndMs": 1439592,
+            "text": "は?"
+          },
+          {
+            "speechId": 192,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1439592,
+            "sourceEndMs": 1439732,
+            "text": "え、待って"
+          }
+        ]
+      }
+    ],
+    "outputContract": {
+      "format": "json_only",
+      "schema": {
+        "themes": [
+          {
+            "themeId": "string",
+            "title": "string",
+            "reason": "string_one_sentence",
+            "evidenceRanges": [
+              {
+                "sourceVideoId": "string",
+                "sourceStartMs": "number",
+                "sourceEndMs": "number",
+                "supportingSpeechIds": [
+                  "number_or_range_string"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

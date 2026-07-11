@@ -1,0 +1,49 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "置き去りを心配するマリンと愛の告白",
+      "reason": "マリンがころねを置き去りにすることを心配したのに対し、ころねが「犬だからそっちまで泳いでいく」と健気に応え、それに感動したマリンが愛の告白をするという二人の甘いやり取りが切り抜きとして成立するため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 6300522,
+          "sourceEndMs": 6362286,
+          "supportingSpeechIds": [
+            "927-933"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "「君の笑顔が鉱石だよ」と口説くマリンとサメに追われるころね",
+      "reason": "鉱石の成果を聞かれたマリンが歯の浮くようなセリフで口説き始め、それに対してころねがサメの襲来でそれどころではないとツッコミを入れる掛け合いがコミカルで面白いため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 6390286,
+          "sourceEndMs": 6419384,
+          "supportingSpeechIds": [
+            "934-945"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-11T17:17:36+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_37_YE-faluP7zY",
+    "windowSourceVideoId": "YE-faluP7zY",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nOEWCNc77MI_full_source_input_selection_v003/theme-llm-v002/20260711-full-source-upper-bound-v001/windows/window_37_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/e47c43eaf4c987b9?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"置き去りを心配するマリンと愛の告白\",\n      \"reason\": \"マリンがころねを置き去りにすることを心配したのに対し、ころねが「犬だからそっちまで泳いでいく」と健気に応え、それに感動したマリンが愛の告白をするという二人の甘いやり取りが切り抜きとして成立するため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 6300522,\n          \"sourceEndMs\": 6362286,\n          \"supportingSpeechIds\": [\n            \"927-933\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"「君の笑顔が鉱石だよ」と口説くマリンとサメに追われるころね\",\n      \"reason\": \"鉱石の成果を聞かれたマリンが歯の浮くようなセリフで口説き始め、それに対してころねがサメの襲来でそれどころではないとツッコミを入れる掛け合いがコミカルで面白いため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 6390286,\n          \"sourceEndMs\": 6419384,\n          \"supportingSpeechIds\": [\n            \"934-945\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

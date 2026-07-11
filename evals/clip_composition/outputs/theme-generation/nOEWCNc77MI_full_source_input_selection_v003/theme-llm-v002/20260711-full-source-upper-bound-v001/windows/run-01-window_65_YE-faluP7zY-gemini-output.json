@@ -1,0 +1,64 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "ローテーブルを巡る「巨人の星」のやり取りと粘土の無駄遣い",
+      "reason": "ローテーブルを「巨人の星」やチャブ台と表現するユーモラスな会話から、サイズが合わず粘土を無駄にして憤慨するまでの展開が綺麗にまとまっています。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 11017404,
+          "sourceEndMs": 11098463,
+          "supportingSpeechIds": [
+            "1635-1651"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "たくさん作ったテーブルをウェディングケーキ風に重ねようとする提案",
+      "reason": "作りすぎてしまった複数のテーブルをウェディングケーキのように重ねられないか提案するボケと、それに対する冷静なツッコミのやり取りが面白い場面です。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 11082476,
+          "sourceEndMs": 11117710,
+          "supportingSpeechIds": [
+            "1651-1656"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_003",
+      "title": "暖炉作成と「匠のリフォーム」でみんなを驚かせようとする計画",
+      "reason": "魚釣りに専念する相方に感謝しつつ、暖炉の設置や温かみのある「匠のリフォーム」で驚かせようと楽しそうに語るシーンで一区切りついています。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 11126234,
+          "sourceEndMs": 11159512,
+          "supportingSpeechIds": [
+            "1659-1662"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-11T18:36:56+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_65_YE-faluP7zY",
+    "windowSourceVideoId": "YE-faluP7zY",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nOEWCNc77MI_full_source_input_selection_v003/theme-llm-v002/20260711-full-source-upper-bound-v001/windows/window_65_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/c8c828cd01492b34?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"ローテーブルを巡る「巨人の星」のやり取りと粘土の無駄遣い\",\n      \"reason\": \"ローテーブルを「巨人の星」やチャブ台と表現するユーモラスな会話から、サイズが合わず粘土を無駄にして憤慨するまでの展開が綺麗にまとまっています。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 11017404,\n          \"sourceEndMs\": 11098463,\n          \"supportingSpeechIds\": [\n            \"1635-1651\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"たくさん作ったテーブルをウェディングケーキ風に重ねようとする提案\",\n      \"reason\": \"作りすぎてしまった複数のテーブルをウェディングケーキのように重ねられないか提案するボケと、それに対する冷静なツッコミのやり取りが面白い場面です。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 11082476,\n          \"sourceEndMs\": 11117710,\n          \"supportingSpeechIds\": [\n            \"1651-1656\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_003\",\n      \"title\": \"暖炉作成と「匠のリフォーム」でみんなを驚かせようとする計画\",\n      \"reason\": \"魚釣りに専念する相方に感謝しつつ、暖炉の設置や温かみのある「匠のリフォーム」で驚かせようと楽しそうに語るシーンで一区切りついています。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 11126234,\n          \"sourceEndMs\": 11159512,\n          \"supportingSpeechIds\": [\n            \"1659-1662\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

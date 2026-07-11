@@ -1,0 +1,65 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "一人ぼっちの海で迷子になり不安を募らせる二人",
+      "reason": "離れ離れになってしまい、夜の海でサメの恐怖や資材の状況に焦りながら合流を目指す緊迫した展開が描かれているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 8580578,
+          "sourceEndMs": 8697662,
+          "supportingSpeechIds": [
+            "1320-1330"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "「待って」を連呼しながらパニックになる船長",
+      "reason": "月の方向を目指そうとした直後、何らかのハプニングにより「待って」を狂気的に連呼するインパクトの強い場面であるため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 8700506,
+          "sourceEndMs": 8729872,
+          "supportingSpeechIds": [
+            1333,
+            1334
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_003",
+      "title": "アンカー作成時の勘違いと島を発見する瞬間",
+      "reason": "デスクトップのゴミをアンカーと見間違えるボケがありつつ、直後に島を発見して合流への希望が見える一連の流れとなっているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 8730218,
+          "sourceEndMs": 8783482,
+          "supportingSpeechIds": [
+            "1335-1338"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-11T18:33:23+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_52_YE-faluP7zY",
+    "windowSourceVideoId": "YE-faluP7zY",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nOEWCNc77MI_full_source_input_selection_v003/theme-llm-v002/20260711-full-source-upper-bound-v001/windows/window_52_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/aeb9f24c83c8642f?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"一人ぼっちの海で迷子になり不安を募らせる二人\",\n      \"reason\": \"離れ離れになってしまい、夜の海でサメの恐怖や資材の状況に焦りながら合流を目指す緊迫した展開が描かれているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 8580578,\n          \"sourceEndMs\": 8697662,\n          \"supportingSpeechIds\": [\"1320-1330\"]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"「待って」を連呼しながらパニックになる船長\",\n      \"reason\": \"月の方向を目指そうとした直後、何らかのハプニングにより「待って」を狂気的に連呼するインパクトの強い場面であるため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 8700506,\n          \"sourceEndMs\": 8729872,\n          \"supportingSpeechIds\": [1333, 1334]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_003\",\n      \"title\": \"アンカー作成時の勘違いと島を発見する瞬間\",\n      \"reason\": \"デスクトップのゴミをアンカーと見間違えるボケがありつつ、直後に島を発見して合流への希望が見える一連の流れとなっているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 8730218,\n          \"sourceEndMs\": 8783482,\n          \"supportingSpeechIds\": [\"1335-1338\"]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

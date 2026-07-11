@@ -1,0 +1,64 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "釣竿作成と空腹からの魚の息の合った連携",
+      "reason": "釣竿を渡してすぐに空腹で視界がぼやける中、焼けたお魚を連携して食べるというサバイバルのフリと展開が成立しているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 4233359,
+          "sourceEndMs": 4259964,
+          "supportingSpeechIds": [
+            "605-627"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "独特すぎるお魚の食レポ「アムアムアム…」",
+      "reason": "焼き魚の味を聞かれたことに対する独特で長い咀嚼音のリアクションが見どころになっているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 4263026,
+          "sourceEndMs": 4289544,
+          "supportingSpeechIds": [
+            "628-629"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_003",
+      "title": "ナマズを釣った時の独特な盛り上がり",
+      "reason": "貴重な食料であるナマズを釣った報告から、独特の擬音を交えたリアクションに繋がる展開が面白いため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 4308985,
+          "sourceEndMs": 4348870,
+          "supportingSpeechIds": [
+            "631-632"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-11T17:04:26+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_25_YE-faluP7zY",
+    "windowSourceVideoId": "YE-faluP7zY",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nOEWCNc77MI_full_source_input_selection_v003/theme-llm-v002/20260711-full-source-upper-bound-v001/windows/window_25_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/d5658080e33ed1fd?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"釣竿作成と空腹からの魚の息の合った連携\",\n      \"reason\": \"釣竿を渡してすぐに空腹で視界がぼやける中、焼けたお魚を連携して食べるというサバイバルのフリと展開が成立しているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 4233359,\n          \"sourceEndMs\": 4259964,\n          \"supportingSpeechIds\": [\n            \"605-627\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"独特すぎるお魚の食レポ「アムアムアム…」\",\n      \"reason\": \"焼き魚の味を聞かれたことに対する独特で長い咀嚼音のリアクションが見どころになっているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 4263026,\n          \"sourceEndMs\": 4289544,\n          \"supportingSpeechIds\": [\n            \"628-629\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_003\",\n      \"title\": \"ナマズを釣った時の独特な盛り上がり\",\n      \"reason\": \"貴重な食料であるナマズを釣った報告から、独特の擬音を交えたリアクションに繋がる展開が面白いため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 4308985,\n          \"sourceEndMs\": 4348870,\n          \"supportingSpeechIds\": [\n            \"631-632\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

@@ -1,0 +1,64 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "壁掛けストレージを設置するマリンと1ミリも見ないころね",
+      "reason": "マリンが壁に設置したストレージを自慢するも、ころねが全く見ていないという温度差のある掛け合いが面白い場面です。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 6630162,
+          "sourceEndMs": 6719884,
+          "supportingSpeechIds": [
+            "973-978"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "いつの間にかサメを倒していたころね",
+      "reason": "ゲーム内でいつの間にか普通にサメを討伐していたころねに対し、マリンが驚きながら問い詰める展開が切り抜きに適しています。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 6721494,
+          "sourceEndMs": 6749852,
+          "supportingSpeechIds": [
+            "979-982"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_003",
+      "title": "「サメの肉が笑ってる」ころねの独特すぎる感性にツッコむマリン",
+      "reason": "サメの肉を見て「にっこり笑ってる」と発言したころねに対し、マリンがその独特な感性に即座にツッコミを入れる掛け合いが見どころです。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 6780086,
+          "sourceEndMs": 6792473,
+          "supportingSpeechIds": [
+            "992-996"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-11T17:18:05+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_39_YE-faluP7zY",
+    "windowSourceVideoId": "YE-faluP7zY",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nOEWCNc77MI_full_source_input_selection_v003/theme-llm-v002/20260711-full-source-upper-bound-v001/windows/window_39_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/6c4c7b66f9c8b87a?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"壁掛けストレージを設置するマリンと1ミリも見ないころね\",\n      \"reason\": \"マリンが壁に設置したストレージを自慢するも、ころねが全く見ていないという温度差のある掛け合いが面白い場面です。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 6630162,\n          \"sourceEndMs\": 6719884,\n          \"supportingSpeechIds\": [\"973-978\"]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"いつの間にかサメを倒していたころね\",\n      \"reason\": \"ゲーム内でいつの間にか普通にサメを討伐していたころねに対し、マリンが驚きながら問い詰める展開が切り抜きに適しています。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 6721494,\n          \"sourceEndMs\": 6749852,\n          \"supportingSpeechIds\": [\"979-982\"]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_003\",\n      \"title\": \"「サメの肉が笑ってる」ころねの独特すぎる感性にツッコむマリン\",\n      \"reason\": \"サメの肉を見て「にっこり笑ってる」と発言したころねに対し、マリンがその独特な感性に即座にツッコミを入れる掛け合いが見どころです。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 6780086,\n          \"sourceEndMs\": 6792473,\n          \"supportingSpeechIds\": [\"992-996\"]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

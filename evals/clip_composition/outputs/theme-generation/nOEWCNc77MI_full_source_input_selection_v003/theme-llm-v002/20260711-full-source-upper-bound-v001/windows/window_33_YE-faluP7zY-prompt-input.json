@@ -1,0 +1,269 @@
+{
+  "kind": "theme_redo_source_only_window_prompt_payload",
+  "runAt": "2026-07-11T07:17:32.391Z",
+  "target": "nOEWCNc77MI",
+  "inputSetId": "nOEWCNc77MI_full_source_input_selection_v003",
+  "sourceVideoId": "YE-faluP7zY",
+  "sourceSttId": "nOEWCNc77MI_YE-faluP7zY_local30_v001",
+  "sourceSttManifestPath": "evals/clip_composition/stt/nOEWCNc77MI_YE-faluP7zY_local30_v001/source/manifest.json",
+  "sourceSttComplete": true,
+  "generationSystem": "theme-llm-v002",
+  "promptVersion": "theme_generation_prompt_v002",
+  "requestedThemeCount": 8,
+  "windowKind": "primary",
+  "llmCall": false,
+  "modelInput": {
+    "task": "source_only_theme_generation",
+    "generationSystem": "theme-llm-v002",
+    "promptVersion": "theme_generation_prompt_v002",
+    "requestedThemeCount": 8,
+    "inputPolicy": {
+      "sourceOnly": true,
+      "noClipInfo": true,
+      "noExpected": true,
+      "noAlignment": true,
+      "noHumanReverseTheme": true
+    },
+    "windowing": {
+      "applied": true,
+      "mode": "speech-time",
+      "windowId": "window_33_YE-faluP7zY",
+      "reason": "元配信全体入力が長いため、発話境界を保った時間窓へ分割する。",
+      "maxPromptBytes": 13084,
+      "overlapMs": 0,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 5501533,
+      "sourceEndMs": 5686333
+    },
+    "sources": [
+      {
+        "sourceVideoId": "YE-faluP7zY",
+        "sourceUrl": "https://www.youtube.com/watch?v=YE-faluP7zY",
+        "sourceTitle": "【Raft】ころね、キミさえいればこの海の果てまでだって──【ホロライブ/宝鐘マリン】",
+        "transcriptKind": "local_stt",
+        "language": "ja-JP",
+        "durationSec": 11824.121,
+        "rawSegmentCount": 53180,
+        "promptSegmentCount": 27,
+        "segmentCompaction": {
+          "method": "source-only transcript segments concatenated until sentence-ending punctuation",
+          "scoringRole": "none",
+          "note": "読みやすさのための表現変換であり、expected、切り抜き、照合結果、人間確認メモは使わない。"
+        },
+        "segments": [
+          {
+            "speechId": 818,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 5501533,
+            "sourceEndMs": 5514140,
+            "text": "サメサメねジャンプで木なくなった木なくなった木なくなった待ってよ何枚持ってると思う?"
+          },
+          {
+            "speechId": 819,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 5514140,
+            "sourceEndMs": 5519964,
+            "text": "ちょっと待って期待を込めて50枚マジで言ってる?"
+          },
+          {
+            "speechId": 820,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 5520750,
+            "sourceEndMs": 5522671,
+            "text": "50枚ある?"
+          },
+          {
+            "speechId": 821,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 5522671,
+            "sourceEndMs": 5523691,
+            "text": "6枚6枚?"
+          },
+          {
+            "speechId": 822,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 5523691,
+            "sourceEndMs": 5529994,
+            "text": "まあまあまあまあでも待ってここになかった?"
+          },
+          {
+            "speechId": 823,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 5529994,
+            "sourceEndMs": 5530275,
+            "text": "どこ?"
+          },
+          {
+            "speechId": 824,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 5530275,
+            "sourceEndMs": 5537818,
+            "text": "ここなかったなかったかもうないよごめんね本当にまたコツコツ今から集めるから進んでなくない?"
+          },
+          {
+            "speechId": 825,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 5537818,
+            "sourceEndMs": 5546502,
+            "text": "待ってやばいきっと大区画の作物になっちゃって進んでないのであれ?"
+          },
+          {
+            "speechId": 826,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 5546502,
+            "sourceEndMs": 5549244,
+            "text": "ん?"
+          },
+          {
+            "speechId": 827,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 5549244,
+            "sourceEndMs": 5549924,
+            "text": "船がね進んでない"
+          },
+          {
+            "speechId": 828,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 5552102,
+            "sourceEndMs": 5578382,
+            "text": "あれかな、ちょっと一回砲つけてさそうね、砲つけないとね、これねOK、つけるわよーほーよーほーだわ、これさーけばーあれ、砲どこやったっけ、船長あ、持ってたわ、手に待って、ここにこれパドルがあるから必要なのほらほら、行く行くほらほら、見ていや、砲立てたほうが早いからほら見てよ、移動してない?"
+          },
+          {
+            "speechId": 829,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 5578382,
+            "sourceEndMs": 5578702,
+            "text": "してる"
+          },
+          {
+            "speechId": 830,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 5581366,
+            "sourceEndMs": 5584688,
+            "text": "捨てるけど、頬を立てたほうがほら!"
+          },
+          {
+            "speechId": 831,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 5584688,
+            "sourceEndMs": 5586909,
+            "text": "ほらほらほらほら!"
+          },
+          {
+            "speechId": 832,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 5586909,
+            "sourceEndMs": 5591793,
+            "text": "そんな、そんなちまちまやってさぁひどしてるよ!"
+          },
+          {
+            "speechId": 833,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 5591793,
+            "sourceEndMs": 5593073,
+            "text": "まどろっこしいんだよ!"
+          },
+          {
+            "speechId": 834,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 5593073,
+            "sourceEndMs": 5605881,
+            "text": "なんでなんちゅうこと今、頬開いてやったからよ感謝しろよなぁよし、進み始めた?"
+          },
+          {
+            "speechId": 835,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 5605881,
+            "sourceEndMs": 5607402,
+            "text": "ん?"
+          },
+          {
+            "speechId": 836,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 5607402,
+            "sourceEndMs": 5608963,
+            "text": "進んでるこれ?"
+          },
+          {
+            "speechId": 837,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 5608963,
+            "sourceEndMs": 5609183,
+            "text": "あれ?"
+          },
+          {
+            "speechId": 838,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 5609183,
+            "sourceEndMs": 5609944,
+            "text": "すでに進んでるよ"
+          },
+          {
+            "speechId": 839,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 5610114,
+            "sourceEndMs": 5639964,
+            "text": "逆でしたと向きが逆でしたおいおい何やってんだおんじゃんお前がやれよ泣くぞ泣くぞぐずってるぐずってる早く泣けよ泣くまでが長いでまだぐすぐすしてるあれ?"
+          },
+          {
+            "speechId": 840,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 5641350,
+            "sourceEndMs": 5648235,
+            "text": "もう遅いよもういつまでグズってんだよあれ進まないんだけどおかしくない?"
+          },
+          {
+            "speechId": 841,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 5648235,
+            "sourceEndMs": 5669490,
+            "text": "なんかやっぱパドルの出番ってわけよこれがおかしいなぁ向きは合ってると思うんだけどねちょっと待ってなぁパドルでこくから今行けパドルでやった方がいいと思うんだよね待っちょ待っちょ"
+          },
+          {
+            "speechId": 842,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 5671582,
+            "sourceEndMs": 5672062,
+            "text": "進んでる?"
+          },
+          {
+            "speechId": 843,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 5672062,
+            "sourceEndMs": 5676266,
+            "text": "これであ、進んだ進んだ進んだ!"
+          },
+          {
+            "speechId": 844,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 5676266,
+            "sourceEndMs": 5686333,
+            "text": "ほらよ、感謝しな壊れたわぬるっと壊れたね、今壊れたわパドルいいじゃん、これあ、でも移動してる?"
+          }
+        ]
+      }
+    ],
+    "outputContract": {
+      "format": "json_only",
+      "schema": {
+        "themes": [
+          {
+            "themeId": "string",
+            "title": "string",
+            "reason": "string_one_sentence",
+            "evidenceRanges": [
+              {
+                "sourceVideoId": "string",
+                "sourceStartMs": "number",
+                "sourceEndMs": "number",
+                "supportingSpeechIds": [
+                  "number_or_range_string"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,269 @@
+{
+  "kind": "theme_redo_source_only_window_prompt_payload",
+  "runAt": "2026-07-11T07:17:32.380Z",
+  "target": "nOEWCNc77MI",
+  "inputSetId": "nOEWCNc77MI_full_source_input_selection_v003",
+  "sourceVideoId": "YE-faluP7zY",
+  "sourceSttId": "nOEWCNc77MI_YE-faluP7zY_local30_v001",
+  "sourceSttManifestPath": "evals/clip_composition/stt/nOEWCNc77MI_YE-faluP7zY_local30_v001/source/manifest.json",
+  "sourceSttComplete": true,
+  "generationSystem": "theme-llm-v002",
+  "promptVersion": "theme_generation_prompt_v002",
+  "requestedThemeCount": 8,
+  "windowKind": "primary",
+  "llmCall": false,
+  "modelInput": {
+    "task": "source_only_theme_generation",
+    "generationSystem": "theme-llm-v002",
+    "promptVersion": "theme_generation_prompt_v002",
+    "requestedThemeCount": 8,
+    "inputPolicy": {
+      "sourceOnly": true,
+      "noClipInfo": true,
+      "noExpected": true,
+      "noAlignment": true,
+      "noHumanReverseTheme": true
+    },
+    "windowing": {
+      "applied": true,
+      "mode": "speech-time",
+      "windowId": "window_07_YE-faluP7zY",
+      "reason": "元配信全体入力が長いため、発話境界を保った時間窓へ分割する。",
+      "maxPromptBytes": 13084,
+      "overlapMs": 0,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 1144276,
+      "sourceEndMs": 1280213
+    },
+    "sources": [
+      {
+        "sourceVideoId": "YE-faluP7zY",
+        "sourceUrl": "https://www.youtube.com/watch?v=YE-faluP7zY",
+        "sourceTitle": "【Raft】ころね、キミさえいればこの海の果てまでだって──【ホロライブ/宝鐘マリン】",
+        "transcriptKind": "local_stt",
+        "language": "ja-JP",
+        "durationSec": 11824.121,
+        "rawSegmentCount": 53180,
+        "promptSegmentCount": 27,
+        "segmentCompaction": {
+          "method": "source-only transcript segments concatenated until sentence-ending punctuation",
+          "scoringRole": "none",
+          "note": "読みやすさのための表現変換であり、expected、切り抜き、照合結果、人間確認メモは使わない。"
+        },
+        "segments": [
+          {
+            "speechId": 141,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1144276,
+            "sourceEndMs": 1147819,
+            "text": "はいはいはいはいちょっとご飯も食べるから拾った!"
+          },
+          {
+            "speechId": 142,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1147819,
+            "sourceEndMs": 1148819,
+            "text": "オッケー?"
+          },
+          {
+            "speechId": 143,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1148819,
+            "sourceEndMs": 1154923,
+            "text": "うーんと、サメの頭いらねご飯も食べてよ?"
+          },
+          {
+            "speechId": 144,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1154923,
+            "sourceEndMs": 1156044,
+            "text": "はい!"
+          },
+          {
+            "speechId": 145,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1156044,
+            "sourceEndMs": 1162007,
+            "text": "よし、今日はしし鍋しし丼しし汁しししちゅうね?"
+          },
+          {
+            "speechId": 146,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1162007,
+            "sourceEndMs": 1164989,
+            "text": "そう、しししちゅうが一番好きだわあ、これ夜になるけどこれどう?"
+          },
+          {
+            "speechId": 147,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1164989,
+            "sourceEndMs": 1165249,
+            "text": "いいか?"
+          },
+          {
+            "speechId": 148,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1165249,
+            "sourceEndMs": 1169712,
+            "text": "別に先にねほねば、夜の方がさ、海の中"
+          },
+          {
+            "speechId": 149,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1170418,
+            "sourceEndMs": 1174119,
+            "text": "あれだよな、探索しやすいんだよなあ、する?"
+          },
+          {
+            "speechId": 150,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1174119,
+            "sourceEndMs": 1182180,
+            "text": "最初海の中やっちゃってそうやで、暗いとイノシシも見えなくて危ないしあ、これマリリーさんこれ使ってみるよ、禰豆子あ、禰豆子?"
+          },
+          {
+            "speechId": 151,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1182180,
+            "sourceEndMs": 1183641,
+            "text": "いや、大丈夫だよ平気?"
+          },
+          {
+            "speechId": 152,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1183641,
+            "sourceEndMs": 1199144,
+            "text": "平気平気OK待って、弓矢じゃなくて矢も持って持ち物は大丈夫だなよし生の芋、芋焼いとこうかな食料あるよある?"
+          },
+          {
+            "speechId": 153,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1199144,
+            "sourceEndMs": 1199564,
+            "text": "あるよ、あの"
+          },
+          {
+            "speechId": 154,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1200098,
+            "sourceEndMs": 1223383,
+            "text": "箱に入ってる全部の箱を1個ずつ開けたら見つかるありがとう次はちゃんとね分かりやすくしとくわ2階建てにしたらきてるきてるきてるお前許さねえサメだサメだ多分サメだコーネいる多分というかサメやこれは間違いなくね間違いなくラフトやこれはラフト?"
+          },
+          {
+            "speechId": 155,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1223383,
+            "sourceEndMs": 1229904,
+            "text": "これはラフトというゲームやいたいやサメサメサメほらいるよなやっぱりないるすいませんマリンよりコーネのことを食べてください"
+          },
+          {
+            "speechId": 156,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1230214,
+            "sourceEndMs": 1234815,
+            "text": "なんでやねんコーニーさん狙われたらヤバいで今死にかけの…え、痛っ!"
+          },
+          {
+            "speechId": 157,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1234815,
+            "sourceEndMs": 1235315,
+            "text": "待って!"
+          },
+          {
+            "speechId": 158,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1235315,
+            "sourceEndMs": 1235596,
+            "text": "待って!"
+          },
+          {
+            "speechId": 159,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1235596,
+            "sourceEndMs": 1236016,
+            "text": "痛っ!"
+          },
+          {
+            "speechId": 160,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1236016,
+            "sourceEndMs": 1236436,
+            "text": "痛っ!"
+          },
+          {
+            "speechId": 161,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1236436,
+            "sourceEndMs": 1237096,
+            "text": "痛っ!"
+          },
+          {
+            "speechId": 162,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1237096,
+            "sourceEndMs": 1237476,
+            "text": "痛っ!"
+          },
+          {
+            "speechId": 163,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1237476,
+            "sourceEndMs": 1258062,
+            "text": "コーニーありがとう今まですごい大好きだった本当によいごんサメはさ弓矢で…でももったいないなちょっとでも確かにね弓矢弱えないっすなあ弓矢でも弓でもサメ倒せるよって言われてるなえ待ってもしかしてさもしかしてこの丈さいや無理かコンコンできるかと思った"
+          },
+          {
+            "speechId": 164,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1260022,
+            "sourceEndMs": 1274430,
+            "text": "そんな…竹取りの翁というものありきりやんそんな…竹取りの翁というものありきり…そんな丁寧に…あ、違うわ!"
+          },
+          {
+            "speechId": 165,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1274430,
+            "sourceEndMs": 1275270,
+            "text": "かぐや姫や!"
+          },
+          {
+            "speechId": 166,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1275270,
+            "sourceEndMs": 1277732,
+            "text": "かぐや姫生まれちゃうよそうだねえ?"
+          },
+          {
+            "speechId": 167,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1277732,
+            "sourceEndMs": 1280213,
+            "text": "かぐや姫生まれちゃうよなに?"
+          }
+        ]
+      }
+    ],
+    "outputContract": {
+      "format": "json_only",
+      "schema": {
+        "themes": [
+          {
+            "themeId": "string",
+            "title": "string",
+            "reason": "string_one_sentence",
+            "evidenceRanges": [
+              {
+                "sourceVideoId": "string",
+                "sourceStartMs": "number",
+                "sourceEndMs": "number",
+                "supportingSpeechIds": [
+                  "number_or_range_string"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

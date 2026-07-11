@@ -1,0 +1,64 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "生魚をそのまま食べてしまうマリン",
+      "reason": "マリンが魚を焼かずに生魚のまま食べてしまい突っ込まれるコミカルな掛け合いが切り抜きに適しているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 10710962,
+          "sourceEndMs": 10738182,
+          "supportingSpeechIds": [
+            "1591-1593"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "マリンのデザインセンスを絶賛するころね",
+      "reason": "マリンが作ったドアの配置やデザインをころねが「デザイナーの才能ある」と褒めちぎる微笑ましい展開があるため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 10740498,
+          "sourceEndMs": 10795851,
+          "supportingSpeechIds": [
+            "1594-1602"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_003",
+      "title": "武器の修理やクラフトに苦戦してやらかすマリン",
+      "reason": "間違えて矢を作ったり、意図しない大きな三角形のオブジェクトを作ってしまい謝るマリンの慌てぶりが面白いため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 10800520,
+          "sourceEndMs": 10860000,
+          "supportingSpeechIds": [
+            "1603-1608"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-11T18:36:27+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_63_YE-faluP7zY",
+    "windowSourceVideoId": "YE-faluP7zY",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nOEWCNc77MI_full_source_input_selection_v003/theme-llm-v002/20260711-full-source-upper-bound-v001/windows/window_63_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/44d1814c03cba21b?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"生魚をそのまま食べてしまうマリン\",\n      \"reason\": \"マリンが魚を焼かずに生魚のまま食べてしまい突っ込まれるコミカルな掛け合いが切り抜きに適しているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 10710962,\n          \"sourceEndMs\": 10738182,\n          \"supportingSpeechIds\": [\n            \"1591-1593\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"マリンのデザインセンスを絶賛するころね\",\n      \"reason\": \"マリンが作ったドアの配置やデザインをころねが「デザイナーの才能ある」と褒めちぎる微笑ましい展開があるため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 10740498,\n          \"sourceEndMs\": 10795851,\n          \"supportingSpeechIds\": [\n            \"1594-1602\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_003\",\n      \"title\": \"武器の修理やクラフトに苦戦してやらかすマリン\",\n      \"reason\": \"間違えて矢を作ったり、意図しない大きな三角形のオブジェクトを作ってしまい謝るマリンの慌てぶりが面白いため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 10800520,\n          \"sourceEndMs\": 10860000,\n          \"supportingSpeechIds\": [\n            \"1603-1608\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

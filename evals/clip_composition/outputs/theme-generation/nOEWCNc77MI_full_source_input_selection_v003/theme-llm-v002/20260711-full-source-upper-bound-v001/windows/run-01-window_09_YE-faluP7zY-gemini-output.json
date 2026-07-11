@@ -1,0 +1,49 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "会話が噛み合わず「主語をつけよう」と提案するシーン",
+      "reason": "イノシシとの戦闘をめぐって二人の会話が噛み合わず、リスナーからギスギスしていると言われたため「主語をつけよう」と反省する一連の流れが面白い。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 1479457,
+          "sourceEndMs": 1529752,
+          "supportingSpeechIds": [
+            "195-204"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "島で倒れてしまったマリンを救助に向かうシーン",
+      "reason": "マリンが島で倒れて不甲斐なさを滲ませる中、ころねがご飯を食べて準備を整えながら温かく救助に向かう掛け合いにドラマ性がある。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 1530000,
+          "sourceEndMs": 1619152,
+          "supportingSpeechIds": [
+            "205-213"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-11T16:37:33+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_09_YE-faluP7zY",
+    "windowSourceVideoId": "YE-faluP7zY",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nOEWCNc77MI_full_source_input_selection_v003/theme-llm-v002/20260711-full-source-upper-bound-v001/windows/window_09_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/144db5627a0362c2?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"会話が噛み合わず「主語をつけよう」と提案するシーン\",\n      \"reason\": \"イノシシとの戦闘をめぐって二人の会話が噛み合わず、リスナーからギスギスしていると言われたため「主語をつけよう」と反省する一連の流れが面白い。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 1479457,\n          \"sourceEndMs\": 1529752,\n          \"supportingSpeechIds\": [\n            \"195-204\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"島で倒れてしまったマリンを救助に向かうシーン\",\n      \"reason\": \"マリンが島で倒れて不甲斐なさを滲ませる中、ころねがご飯を食べて準備を整えながら温かく救助に向かう掛け合いにドラマ性がある。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 1530000,\n          \"sourceEndMs\": 1619152,\n          \"supportingSpeechIds\": [\n            \"205-213\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

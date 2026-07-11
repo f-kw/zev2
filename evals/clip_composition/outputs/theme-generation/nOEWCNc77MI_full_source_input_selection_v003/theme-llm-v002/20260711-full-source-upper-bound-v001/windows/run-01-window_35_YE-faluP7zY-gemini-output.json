@@ -1,0 +1,64 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "反省はするが学習しないやり取り",
+      "reason": "帆を閉じ忘れて同じミスを繰り返したことについて反省する素振りを見せつつも、すぐに「学習もしない」と開き直るテンポの良い掛け合いが切り抜きとして成立するため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 5852255,
+          "sourceEndMs": 5888349,
+          "supportingSpeechIds": [
+            "873-876"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "マリンへの愛を込めたナマズ調理",
+      "reason": "流されずに残ったナマズを「マリリー（宝鐘マリン）のため」に愛を込めて美味しく焼こうとする、配信者同士の仲の良さが窺える場面であるため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 5910746,
+          "sourceEndMs": 5939452,
+          "supportingSpeechIds": [
+            881
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_003",
+      "title": "サメに足場をゴリゴリ食われる窮地",
+      "reason": "気づかないうちにサメに筏の足場を激しく食い荒らされており、対策やコストの重さに頭を悩ませながら板不足に焦るゲーム特有の見どころであるため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 5950937,
+          "sourceEndMs": 6012348,
+          "supportingSpeechIds": [
+            "883-888"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-11T17:17:07+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_35_YE-faluP7zY",
+    "windowSourceVideoId": "YE-faluP7zY",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nOEWCNc77MI_full_source_input_selection_v003/theme-llm-v002/20260711-full-source-upper-bound-v001/windows/window_35_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/261771fd35b776f6?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"反省はするが学習しないやり取り\",\n      \"reason\": \"帆を閉じ忘れて同じミスを繰り返したことについて反省する素振りを見せつつも、すぐに「学習もしない」と開き直るテンポの良い掛け合いが切り抜きとして成立するため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 5852255,\n          \"sourceEndMs\": 5888349,\n          \"supportingSpeechIds\": [\n            \"873-876\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"マリンへの愛を込めたナマズ調理\",\n      \"reason\": \"流されずに残ったナマズを「マリリー（宝鐘マリン）のため」に愛を込めて美味しく焼こうとする、配信者同士の仲の良さが窺える場面であるため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 5910746,\n          \"sourceEndMs\": 5939452,\n          \"supportingSpeechIds\": [\n            881\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_003\",\n      \"title\": \"サメに足場をゴリゴリ食われる窮地\",\n      \"reason\": \"気づかないうちにサメに筏の足場を激しく食い荒らされており、対策やコストの重さに頭を悩ませながら板不足に焦るゲーム特有の見どころであるため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 5950937,\n          \"sourceEndMs\": 6012348,\n          \"supportingSpeechIds\": [\n            \"883-888\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

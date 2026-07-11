@@ -1,0 +1,49 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "リスナーに収納の仕方を相談するマリンと意気投合するころね",
+      "reason": "新しく設置した大きなストレージの整理整頓について、リスナーのアドバイスを参考にしながら二人が楽しそうに仕分けのルールを決めていく一連のやり取りが切り抜きとして成立すると判断した。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 6800778,
+          "sourceEndMs": 6928882,
+          "supportingSpeechIds": [
+            "998-1010"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "階段のデッドスペースを活用し「大人の女」をアピールするマリン",
+      "reason": "階段横の空きスペースを有効活用しようと考えたマリンが「大人の女のやること」と自慢し、箱の配置の向きについて悩む場面が見どころになると判断した。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 6930382,
+          "sourceEndMs": 6975330,
+          "supportingSpeechIds": [
+            "1011-1017"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-11T17:18:19+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_40_YE-faluP7zY",
+    "windowSourceVideoId": "YE-faluP7zY",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nOEWCNc77MI_full_source_input_selection_v003/theme-llm-v002/20260711-full-source-upper-bound-v001/windows/window_40_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/90fee28685bb8e5a?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"リスナーに収納の仕方を相談するマリンと意気投合するころね\",\n      \"reason\": \"新しく設置した大きなストレージの整理整頓について、リスナーのアドバイスを参考にしながら二人が楽しそうに仕分けのルールを決めていく一連のやり取りが切り抜きとして成立すると判断した。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 6800778,\n          \"sourceEndMs\": 6928882,\n          \"supportingSpeechIds\": [\n            \"998-1010\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"階段のデッドスペースを活用し「大人の女」をアピールするマリン\",\n      \"reason\": \"階段横の空きスペースを有効活用しようと考えたマリンが「大人の女のやること」と自慢し、箱の配置の向きについて悩む場面が見どころになると判断した。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 6930382,\n          \"sourceEndMs\": 6975330,\n          \"supportingSpeechIds\": [\n            \"1011-1017\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

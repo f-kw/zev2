@@ -1,0 +1,49 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "集中しててもお腹は減るという謎理論を展開するころね",
+      "reason": "ころねの「集中しててもお腹すくからお腹ってすごい」という独特な主張に対し、マリンが困惑しながらツッコミを入れる掛け合いが面白いため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 7500122,
+          "sourceEndMs": 7571820,
+          "supportingSpeechIds": [
+            "1087-1090"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "配信を見て自分の居場所が分かったら結婚してあげると上から目線なマリン",
+      "reason": "マリンが配信を見て自分の場所が分かったら結婚してあげると提案するも、ころねから「いらない特典」と即答され、その後に見事見つけ出されて結婚を迫られる展開が面白いため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 7571820,
+          "sourceEndMs": 7649732,
+          "supportingSpeechIds": [
+            "1091-1102"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-11T17:49:37+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_44_YE-faluP7zY",
+    "windowSourceVideoId": "YE-faluP7zY",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nOEWCNc77MI_full_source_input_selection_v003/theme-llm-v002/20260711-full-source-upper-bound-v001/windows/window_44_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/38429ed60ff5a3eb?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"集中しててもお腹は減るという謎理論を展開するころね\",\n      \"reason\": \"ころねの「集中しててもお腹すくからお腹ってすごい」という独特な主張に対し、マリンが困惑しながらツッコミを入れる掛け合いが面白いため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 7500122,\n          \"sourceEndMs\": 7571820,\n          \"supportingSpeechIds\": [\n            \"1087-1090\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"配信を見て自分の居場所が分かったら結婚してあげると上から目線なマリン\",\n      \"reason\": \"マリンが配信を見て自分の場所が分かったら結婚してあげると提案するも、ころねから「いらない特典」と即答され、その後に見事見つけ出されて結婚を迫られる展開が面白いため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 7571820,\n          \"sourceEndMs\": 7649732,\n          \"supportingSpeechIds\": [\n            \"1091-1102\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

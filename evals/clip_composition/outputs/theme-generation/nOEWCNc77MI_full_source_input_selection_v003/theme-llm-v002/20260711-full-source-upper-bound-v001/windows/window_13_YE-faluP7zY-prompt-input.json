@@ -1,0 +1,241 @@
+{
+  "kind": "theme_redo_source_only_window_prompt_payload",
+  "runAt": "2026-07-11T07:17:32.383Z",
+  "target": "nOEWCNc77MI",
+  "inputSetId": "nOEWCNc77MI_full_source_input_selection_v003",
+  "sourceVideoId": "YE-faluP7zY",
+  "sourceSttId": "nOEWCNc77MI_YE-faluP7zY_local30_v001",
+  "sourceSttManifestPath": "evals/clip_composition/stt/nOEWCNc77MI_YE-faluP7zY_local30_v001/source/manifest.json",
+  "sourceSttComplete": true,
+  "generationSystem": "theme-llm-v002",
+  "promptVersion": "theme_generation_prompt_v002",
+  "requestedThemeCount": 8,
+  "windowKind": "primary",
+  "llmCall": false,
+  "modelInput": {
+    "task": "source_only_theme_generation",
+    "generationSystem": "theme-llm-v002",
+    "promptVersion": "theme_generation_prompt_v002",
+    "requestedThemeCount": 8,
+    "inputPolicy": {
+      "sourceOnly": true,
+      "noClipInfo": true,
+      "noExpected": true,
+      "noAlignment": true,
+      "noHumanReverseTheme": true
+    },
+    "windowing": {
+      "applied": true,
+      "mode": "speech-time",
+      "windowId": "window_13_YE-faluP7zY",
+      "reason": "元配信全体入力が長いため、発話境界を保った時間窓へ分割する。",
+      "maxPromptBytes": 13084,
+      "overlapMs": 0,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 2055081,
+      "sourceEndMs": 2243688
+    },
+    "sources": [
+      {
+        "sourceVideoId": "YE-faluP7zY",
+        "sourceUrl": "https://www.youtube.com/watch?v=YE-faluP7zY",
+        "sourceTitle": "【Raft】ころね、キミさえいればこの海の果てまでだって──【ホロライブ/宝鐘マリン】",
+        "transcriptKind": "local_stt",
+        "language": "ja-JP",
+        "durationSec": 11824.121,
+        "rawSegmentCount": 53180,
+        "promptSegmentCount": 23,
+        "segmentCompaction": {
+          "method": "source-only transcript segments concatenated until sentence-ending punctuation",
+          "scoringRole": "none",
+          "note": "読みやすさのための表現変換であり、expected、切り抜き、照合結果、人間確認メモは使わない。"
+        },
+        "segments": [
+          {
+            "speechId": 295,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 2055081,
+            "sourceEndMs": 2059864,
+            "text": "害ないからこそ逆に、これ長押しか?"
+          },
+          {
+            "speechId": 296,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 2059864,
+            "sourceEndMs": 2061506,
+            "text": "待って、めっちゃ速い。"
+          },
+          {
+            "speechId": 297,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 2061506,
+            "sourceEndMs": 2062366,
+            "text": "クソ難しい。"
+          },
+          {
+            "speechId": 298,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 2062366,
+            "sourceEndMs": 2062666,
+            "text": "こいつ速いな!"
+          },
+          {
+            "speechId": 299,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 2062666,
+            "sourceEndMs": 2065709,
+            "text": "こっちの方がいいのでは?"
+          },
+          {
+            "speechId": 300,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 2065709,
+            "sourceEndMs": 2067810,
+            "text": "ちょっとガバガバのエイムが。"
+          },
+          {
+            "speechId": 301,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 2070322,
+            "sourceEndMs": 2071923,
+            "text": "これ当たってるでもこれ当たってるとか?"
+          },
+          {
+            "speechId": 302,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 2071923,
+            "sourceEndMs": 2076186,
+            "text": "ほんとあれ回収できるよなんかうそ!"
+          },
+          {
+            "speechId": 303,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 2076186,
+            "sourceEndMs": 2076987,
+            "text": "これ当たってる?"
+          },
+          {
+            "speechId": 304,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 2076987,
+            "sourceEndMs": 2080750,
+            "text": "これなんか刺さってるよこっちで行く?"
+          },
+          {
+            "speechId": 305,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 2080750,
+            "sourceEndMs": 2083372,
+            "text": "鉛筆で行くわちょっと鉛筆?"
+          },
+          {
+            "speechId": 306,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 2083372,
+            "sourceEndMs": 2091418,
+            "text": "こっちの弓矢の方であ、普通にね確かにこいつだったらば普通にこれ!"
+          },
+          {
+            "speechId": 307,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 2091418,
+            "sourceEndMs": 2097362,
+            "text": "なんかやらされてる当たらないこれさ、これさ、小ヤギじゃないのこれ小ヤギ?"
+          },
+          {
+            "speechId": 308,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 2097362,
+            "sourceEndMs": 2099744,
+            "text": "ヤギいいねヤギ食べたいこれさ、倒したらさ"
+          },
+          {
+            "speechId": 309,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 2100342,
+            "sourceEndMs": 2129864,
+            "text": "やめてやめてやめてやめてやめてやめてやめてやめてやめてやめてやめてやめてやめてやめてやめてやめてやめてやめてやめてやめてやめてやめてやめてやめてやめてやめてやめてやめてやめてやめてやめてやめてやめてやめてやめてやめてやめてやめてやめてやめてやめてやめてやめてやめてやめてやめてやめてやめてやめてやめてやめてやめてやめてやめてやめてやめてやめてやめてやめてやめてやめてやめてやめてやめてやめてやめてやめてやめてやめてやめてやめてやめてやめてやめてやめてやめてやめてやめてやめてやめてやめてやめてやめてやめてやめてやめてやめてやめてやめてやめてやめてやめてやめてやめてやめてやめてやめてやめてやめてやめてやめてやめてやめてやめてやめてやめてやめてやめてやめてやめてやめてやめて"
+          },
+          {
+            "speechId": 310,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 2138355,
+            "sourceEndMs": 2140677,
+            "text": "今晩はジンギスカンだな"
+          },
+          {
+            "speechId": 311,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 2164145,
+            "sourceEndMs": 2165246,
+            "text": "今だ!"
+          },
+          {
+            "speechId": 312,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 2165246,
+            "sourceEndMs": 2189444,
+            "text": "どれくらいで死んだんだろうねこれねわかんない、でも4発くらいは当ててるはずだからこっちもね、当ててる、結構全然当たらないどうしよう、ずっとこうしてるのかでも、こんだけさ、痛いからさとどめさせなきゃかわいそうだねな確かにね、2時間ずっとこれだった"
+          },
+          {
+            "speechId": 313,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 2196966,
+            "sourceEndMs": 2199027,
+            "text": "え、馬狩りの才能あるって!"
+          },
+          {
+            "speechId": 314,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 2199027,
+            "sourceEndMs": 2207410,
+            "text": "やっぱ犬だから…リオ…コヨリとかこういうの好きそうだなどこ行った?"
+          },
+          {
+            "speechId": 315,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 2207410,
+            "sourceEndMs": 2217413,
+            "text": "二人でやっちゃおうかななんかサメをさ、殺すのが好きじゃんわかるコヨリはわかるんだコヨーテだしなコヨーテ!"
+          },
+          {
+            "speechId": 316,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 2217413,
+            "sourceEndMs": 2218814,
+            "text": "確かにコヨーテって…ボケ!"
+          },
+          {
+            "speechId": 317,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 2220674,
+            "sourceEndMs": 2243688,
+            "text": "やっぱどうもなんかのこういうお手ってえ、どうなんだろうね待ってワタメがヒャーって言ってるワタメ気づいてしまったから自分のピンチに船長冷静にスイカ食べようスイカ食べんな落ちてんのもスイカがいいねスイカそこ登れるんだそれえ、死んの?"
+          }
+        ]
+      }
+    ],
+    "outputContract": {
+      "format": "json_only",
+      "schema": {
+        "themes": [
+          {
+            "themeId": "string",
+            "title": "string",
+            "reason": "string_one_sentence",
+            "evidenceRanges": [
+              {
+                "sourceVideoId": "string",
+                "sourceStartMs": "number",
+                "sourceEndMs": "number",
+                "supportingSpeechIds": [
+                  "number_or_range_string"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

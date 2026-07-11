@@ -1,0 +1,79 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "海で全てが揃う『サザエさん』トーク",
+      "reason": "カツオなどの海の幸から磯野家を連想し、このゲームのテーマはサザエさんなのではないかと盛り上がる場面。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 4779554,
+          "sourceEndMs": 4827190,
+          "supportingSpeechIds": [
+            "716-719"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "鼻筋の整った謎の弾",
+      "reason": "ゲーム内の弾のグラフィックに対して「鼻筋の整えがすごい」「鼻筋やってる？」と独特の着眼点で盛り上がる場面。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 4830974,
+          "sourceEndMs": 4856150,
+          "supportingSpeechIds": [
+            "720-725"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_003",
+      "title": "突然の江戸っ子風の掛け合い",
+      "reason": "板不足のトラブルの中で、突如「ベラボーメイ！」などの江戸っ子のような口調でテンション高く掛け合う場面。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 4860606,
+          "sourceEndMs": 4919634,
+          "supportingSpeechIds": [
+            "727-734"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_004",
+      "title": "フックの有用性に気付くのが遅すぎて怒涛のツッコミ",
+      "reason": "フックを使った方がいいと今更気付いた発言に対して、間髪入れずに「遅遅遅遅遅」と凄まじい勢いでツッコミが連呼される場面。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 4925857,
+          "sourceEndMs": 4949872,
+          "supportingSpeechIds": [
+            735
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-11T17:05:26+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_29_YE-faluP7zY",
+    "windowSourceVideoId": "YE-faluP7zY",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nOEWCNc77MI_full_source_input_selection_v003/theme-llm-v002/20260711-full-source-upper-bound-v001/windows/window_29_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/a5ec79d7e7a01ed5?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"海で全てが揃う『サザエさん』トーク\",\n      \"reason\": \"カツオなどの海の幸から磯野家を連想し、このゲームのテーマはサザエさんなのではないかと盛り上がる場面。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 4779554,\n          \"sourceEndMs\": 4827190,\n          \"supportingSpeechIds\": [\n            \"716-719\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"鼻筋の整った謎の弾\",\n      \"reason\": \"ゲーム内の弾のグラフィックに対して「鼻筋の整えがすごい」「鼻筋やってる？」と独特の着眼点で盛り上がる場面。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 4830974,\n          \"sourceEndMs\": 4856150,\n          \"supportingSpeechIds\": [\n            \"720-725\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_003\",\n      \"title\": \"突然の江戸っ子風の掛け合い\",\n      \"reason\": \"板不足のトラブルの中で、突如「ベラボーメイ！」などの江戸っ子のような口調でテンション高く掛け合う場面。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 4860606,\n          \"sourceEndMs\": 4919634,\n          \"supportingSpeechIds\": [\n            \"727-734\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_004\",\n      \"title\": \"フックの有用性に気付くのが遅すぎて怒涛のツッコミ\",\n      \"reason\": \"フックを使った方がいいと今更気付いた発言に対して、間髪入れずに「遅遅遅遅遅」と凄まじい勢いでツッコミが連呼される場面。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 4925857,\n          \"sourceEndMs\": 4949872,\n          \"supportingSpeechIds\": [\n            735\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

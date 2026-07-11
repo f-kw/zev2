@@ -1,0 +1,64 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "鬼滅の刃の『柱』を勘違いする宝鐘マリン",
+      "reason": "クラフト用の柱が必要な場面で「何柱が足りない？」から鬼滅の刃の話題になり、伊之助を柱と勘違いするコミカルな掛け合いが展開されているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 4354127,
+          "sourceEndMs": 4394109,
+          "supportingSpeechIds": [
+            "634-647"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "戌神ころねの謎の造語「イノカキ」",
+      "reason": "木の板を集める方法を説明する際、戌神ころねが「イノカキで集めてる」と言い間違いか謎の造語を披露し、宝鐘マリンにツッコまれる場面が切り抜きに適しているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 4443842,
+          "sourceEndMs": 4456072,
+          "supportingSpeechIds": [
+            "656-658"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_003",
+      "title": "A型の人が見たらイライラする？些細な心配",
+      "reason": "宝鐘マリンが「A型の人が見たらイライラするやつかな」と気に病むも、理由がただパッケージを落としただけという拍子抜けなオチで笑い合っているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 4470922,
+          "sourceEndMs": 4499672,
+          "supportingSpeechIds": [
+            "660-663"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-11T17:04:42+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_26_YE-faluP7zY",
+    "windowSourceVideoId": "YE-faluP7zY",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nOEWCNc77MI_full_source_input_selection_v003/theme-llm-v002/20260711-full-source-upper-bound-v001/windows/window_26_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/634cf60bbf9be130?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"鬼滅の刃の『柱』を勘違いする宝鐘マリン\",\n      \"reason\": \"クラフト用の柱が必要な場面で「何柱が足りない？」から鬼滅の刃の話題になり、伊之助を柱と勘違いするコミカルな掛け合いが展開されているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 4354127,\n          \"sourceEndMs\": 4394109,\n          \"supportingSpeechIds\": [\n            \"634-647\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"戌神ころねの謎の造語「イノカキ」\",\n      \"reason\": \"木の板を集める方法を説明する際、戌神ころねが「イノカキで集めてる」と言い間違いか謎の造語を披露し、宝鐘マリンにツッコまれる場面が切り抜きに適しているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 4443842,\n          \"sourceEndMs\": 4456072,\n          \"supportingSpeechIds\": [\n            \"656-658\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_003\",\n      \"title\": \"A型の人が見たらイライラする？些細な心配\",\n      \"reason\": \"宝鐘マリンが「A型の人が見たらイライラするやつかな」と気に病むも、理由がただパッケージを落としただけという拍子抜けなオチで笑い合っているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 4470922,\n          \"sourceEndMs\": 4499672,\n          \"supportingSpeechIds\": [\n            \"660-663\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

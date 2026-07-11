@@ -1,0 +1,49 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "出し惜しみは人生つまらないと粘土の使用を促すマリン",
+      "reason": "暖炉作成に粘土を8個使うことに躊躇する流れから、「出し惜しみしてたら人生つまらないでしょ」と名言風に説得するやり取りが切り抜きとして成立するため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 10890274,
+          "sourceEndMs": 10943043,
+          "supportingSpeechIds": [
+            "1610-1617"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "女子っぽくオシャレにしたいと盛り上がるもローテーブルに絶望する二人",
+      "reason": "船の上を女子らしく花やテーブルでオシャレに飾ろうと意気投合して作った結果、想定外のローテーブルでオチがつく展開が綺麗にまとまっているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 10943043,
+          "sourceEndMs": 11017404,
+          "supportingSpeechIds": [
+            "1618-1634"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-11T18:36:41+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_64_YE-faluP7zY",
+    "windowSourceVideoId": "YE-faluP7zY",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nOEWCNc77MI_full_source_input_selection_v003/theme-llm-v002/20260711-full-source-upper-bound-v001/windows/window_64_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/da5fb473790131a8?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"出し惜しみは人生つまらないと粘土の使用を促すマリン\",\n      \"reason\": \"暖炉作成に粘土を8個使うことに躊躇する流れから、「出し惜しみしてたら人生つまらないでしょ」と名言風に説得するやり取りが切り抜きとして成立するため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 10890274,\n          \"sourceEndMs\": 10943043,\n          \"supportingSpeechIds\": [\n            \"1610-1617\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"女子っぽくオシャレにしたいと盛り上がるもローテーブルに絶望する二人\",\n      \"reason\": \"船の上を女子らしく花やテーブルでオシャレに飾ろうと意気投合して作った結果、想定外のローテーブルでオチがつく展開が綺麗にまとまっているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 10943043,\n          \"sourceEndMs\": 11017404,\n          \"supportingSpeechIds\": [\n            \"1618-1634\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

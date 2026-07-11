@@ -1,0 +1,64 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "クラフトの仕様に苦戦するもリスナーの手を借りず自力で思い出す場面",
+      "reason": "設置がうまくいかない理由をリスナーに頼ろうとするも、自力で木製フロアの仕様を思い出して解決する一連の流れが綺麗に収まっているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 4516973,
+          "sourceEndMs": 4548779,
+          "supportingSpeechIds": [
+            "669-676"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "「いかだいらねえんじゃねえか」と暴言を吐いた直後に即謝罪する宝鐘マリン",
+      "reason": "ゲームの根幹全否定からの一転しての情けない即謝罪への流れにテンポの良さとユーモアがあるため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 4561908,
+          "sourceEndMs": 4589210,
+          "supportingSpeechIds": [
+            679
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_003",
+      "title": "ご機嫌で鼻歌を歌うころねとそれを喜ぶマリンのてぇてぇ掛け合い",
+      "reason": "長めの楽しそうな鼻歌から、二人の仲の良さが伝わる会話へ繋がる微笑ましいシーンであるため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 4596618,
+          "sourceEndMs": 4626690,
+          "supportingSpeechIds": [
+            "688-690"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-11T17:04:56+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_27_YE-faluP7zY",
+    "windowSourceVideoId": "YE-faluP7zY",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nOEWCNc77MI_full_source_input_selection_v003/theme-llm-v002/20260711-full-source-upper-bound-v001/windows/window_27_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/9308804610642560?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"クラフトの仕様に苦戦するもリスナーの手を借りず自力で思い出す場面\",\n      \"reason\": \"設置がうまくいかない理由をリスナーに頼ろうとするも、自力で木製フロアの仕様を思い出して解決する一連の流れが綺麗に収まっているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 4516973,\n          \"sourceEndMs\": 4548779,\n          \"supportingSpeechIds\": [\"669-676\"]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"「いかだいらねえんじゃねえか」と暴言を吐いた直後に即謝罪する宝鐘マリン\",\n      \"reason\": \"ゲームの根幹全否定からの一転しての情けない即謝罪への流れにテンポの良さとユーモアがあるため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 4561908,\n          \"sourceEndMs\": 4589210,\n          \"supportingSpeechIds\": [679]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_003\",\n      \"title\": \"ご機嫌で鼻歌を歌うころねとそれを喜ぶマリンのてぇてぇ掛け合い\",\n      \"reason\": \"長めの楽しそうな鼻歌から、二人の仲の良さが伝わる会話へ繋がる微笑ましいシーンであるため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 4596618,\n          \"sourceEndMs\": 4626690,\n          \"supportingSpeechIds\": [\"688-690\"]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

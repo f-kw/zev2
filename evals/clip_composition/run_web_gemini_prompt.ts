@@ -903,7 +903,18 @@ function parsePromptOutput(text: string): PromptOutput | undefined {
       return theme as ThemeCandidate;
     }).filter((item): item is ThemeCandidate => Boolean(item))
     : undefined;
-  if ((!selectedCuts || selectedCuts.length === 0) && (!themes || themes.length === 0)) {
+  const isValidEmptyThemes = Array.isArray(record.themes)
+    && record.themes.length === 0;
+  const containsOnlyInvalidThemes = Array.isArray(record.themes)
+    && record.themes.length > 0
+    && themes?.length === 0;
+  const containsOnlyInvalidSelectedCuts = Array.isArray(record.selectedCuts)
+    && record.selectedCuts.length > 0
+    && selectedCuts?.length === 0;
+  if (containsOnlyInvalidThemes || containsOnlyInvalidSelectedCuts) {
+    return undefined;
+  }
+  if ((!selectedCuts || selectedCuts.length === 0) && (!themes || themes.length === 0) && !isValidEmptyThemes) {
     return undefined;
   }
 

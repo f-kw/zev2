@@ -1,0 +1,64 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "箱の中の仲間外れ探し",
+      "reason": "宝鐘マリンが戌神ころねに箱の中の「仲間外れの葉っぱ」を見せ、二人で盛り上がっている具体的な掛け合いがあるため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 5008544,
+          "sourceEndMs": 5047946,
+          "supportingSpeechIds": [
+            "743-754"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "言い間違いから日本語の神秘を感じる二人",
+      "reason": "「お水にペットボトル汲みな」という言い間違いに対して、二人がツッコミを入れながら日本語の面白さを語り合う展開が成立しているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 5087336,
+          "sourceEndMs": 5128111,
+          "supportingSpeechIds": [
+            "758-765"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_003",
+      "title": "謎のワード「イノシシンリー」",
+      "reason": "木こりをしながら出た「イノシシンリー」という独特なフレーズに対して、困惑するツッコミでオチがつく短い笑いどころであるため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 5128111,
+          "sourceEndMs": 5135367,
+          "supportingSpeechIds": [
+            "766-768"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-11T17:05:40+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_30_YE-faluP7zY",
+    "windowSourceVideoId": "YE-faluP7zY",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nOEWCNc77MI_full_source_input_selection_v003/theme-llm-v002/20260711-full-source-upper-bound-v001/windows/window_30_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/f16834c8271b609e?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"箱の中の仲間外れ探し\",\n      \"reason\": \"宝鐘マリンが戌神ころねに箱の中の「仲間外れの葉っぱ」を見せ、二人で盛り上がっている具体的な掛け合いがあるため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 5008544,\n          \"sourceEndMs\": 5047946,\n          \"supportingSpeechIds\": [\n            \"743-754\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"言い間違いから日本語の神秘を感じる二人\",\n      \"reason\": \"「お水にペットボトル汲みな」という言い間違いに対して、二人がツッコミを入れながら日本語の面白さを語り合う展開が成立しているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 5087336,\n          \"sourceEndMs\": 5128111,\n          \"supportingSpeechIds\": [\n            \"758-765\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_003\",\n      \"title\": \"謎のワード「イノシシンリー」\",\n      \"reason\": \"木こりをしながら出た「イノシシンリー」という独特なフレーズに対して、困惑するツッコミでオチがつく短い笑いどころであるため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 5128111,\n          \"sourceEndMs\": 5135367,\n          \"supportingSpeechIds\": [\n            \"766-768\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

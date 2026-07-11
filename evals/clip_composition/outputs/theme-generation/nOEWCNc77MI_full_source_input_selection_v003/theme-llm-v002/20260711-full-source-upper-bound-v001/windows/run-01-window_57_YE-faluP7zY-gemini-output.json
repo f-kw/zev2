@@ -1,0 +1,64 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "武器の切り替えに苦戦する二人",
+      "reason": "敵の攻撃に対して槍に切り替えるのに時間がかかるという、ゲームプレイあるあるの共感できるやり取りが行われているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 9585121,
+          "sourceEndMs": 9619695,
+          "supportingSpeechIds": [
+            "1451-1452"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "ベッドの上位互換は「旅館」？",
+      "reason": "ゲーム内のベッドの上位互換を尋ねられたのに対し、スケールの大きな「旅館」とボケて返すコミカルな会話の応酬があるため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 9683323,
+          "sourceEndMs": 9703529,
+          "supportingSpeechIds": [
+            "1461-1464"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_003",
+      "title": "旗に絵が描ける可能性にワクワクする二人",
+      "reason": "新しく解放されたペイント機能から、旗に自分たちで絵が描けるのではないかと期待を膨らませる見どころシーンのため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 9706129,
+          "sourceEndMs": 9719232,
+          "supportingSpeechIds": [
+            "1466-1468"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-11T18:35:00+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_57_YE-faluP7zY",
+    "windowSourceVideoId": "YE-faluP7zY",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nOEWCNc77MI_full_source_input_selection_v003/theme-llm-v002/20260711-full-source-upper-bound-v001/windows/window_57_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/e276630952f00ebe?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"武器の切り替えに苦戦する二人\",\n      \"reason\": \"敵の攻撃に対して槍に切り替えるのに時間がかかるという、ゲームプレイあるあるの共感できるやり取りが行われているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 9585121,\n          \"sourceEndMs\": 9619695,\n          \"supportingSpeechIds\": [\n            \"1451-1452\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"ベッドの上位互換は「旅館」？\",\n      \"reason\": \"ゲーム内のベッドの上位互換を尋ねられたのに対し、スケールの大きな「旅館」とボケて返すコミカルな会話の応酬があるため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 9683323,\n          \"sourceEndMs\": 9703529,\n          \"supportingSpeechIds\": [\n            \"1461-1464\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_003\",\n      \"title\": \"旗に絵が描ける可能性にワクワクする二人\",\n      \"reason\": \"新しく解放されたペイント機能から、旗に自分たちで絵が描けるのではないかと期待を膨らませる見どころシーンのため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 9706129,\n          \"sourceEndMs\": 9719232,\n          \"supportingSpeechIds\": [\n            \"1466-1468\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

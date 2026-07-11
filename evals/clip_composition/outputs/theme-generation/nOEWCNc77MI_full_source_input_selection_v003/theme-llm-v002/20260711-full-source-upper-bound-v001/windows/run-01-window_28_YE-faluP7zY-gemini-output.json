@@ -1,0 +1,49 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "序盤にあれだけ足りなかった葉っぱが余りまくる現状を嘆く二人",
+      "reason": "ゲーム序盤で不足していた葉っぱ素材が中盤以降に過剰に集まり、「いらんまである」と二人で愚痴をこぼし合う様子がコミカルで切り抜きに適しているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 4654115,
+          "sourceEndMs": 4679452,
+          "supportingSpeechIds": [
+            "697-698"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "マリンが海から上がってきたころねの音をサメと勘違いするシーン",
+      "reason": "サメの襲撃を警戒するマリンが、ころねの海から上がってくる音をサメの音と誤認して焦る一瞬の掛け合いが面白いから。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 4738066,
+          "sourceEndMs": 4750240,
+          "supportingSpeechIds": [
+            "708-709"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-11T17:05:10+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_28_YE-faluP7zY",
+    "windowSourceVideoId": "YE-faluP7zY",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nOEWCNc77MI_full_source_input_selection_v003/theme-llm-v002/20260711-full-source-upper-bound-v001/windows/window_28_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/2de6c5f400447cb4?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"序盤にあれだけ足りなかった葉っぱが余りまくる現状を嘆く二人\",\n      \"reason\": \"ゲーム序盤で不足していた葉っぱ素材が中盤以降に過剰に集まり、「いらんまである」と二人で愚痴をこぼし合う様子がコミカルで切り抜きに適しているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 4654115,\n          \"sourceEndMs\": 4679452,\n          \"supportingSpeechIds\": [\n            \"697-698\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"マリンが海から上がってきたころねの音をサメと勘違いするシーン\",\n      \"reason\": \"サメの襲撃を警戒するマリンが、ころねの海から上がってくる音をサメの音と誤認して焦る一瞬の掛け合いが面白いから。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 4738066,\n          \"sourceEndMs\": 4750240,\n          \"supportingSpeechIds\": [\n            \"708-709\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

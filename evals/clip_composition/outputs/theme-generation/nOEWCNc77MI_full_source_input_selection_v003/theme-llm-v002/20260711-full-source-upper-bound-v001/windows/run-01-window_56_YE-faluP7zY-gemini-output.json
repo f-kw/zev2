@@ -1,0 +1,64 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "生カチオって何やねん",
+      "reason": "「生カチオばかりなら生カチオって何やねん」と聞き慣れないワードに対して自分でツッコミを入れている面白い場面です。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 9437694,
+          "sourceEndMs": 9449122,
+          "supportingSpeechIds": [
+            "1425-1426"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "イルカと思ったらサメだった",
+      "reason": "サメをイルカと見間違えて焦る、ゲームプレイ中の突発的なリアクションが見どころとなる場面です。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 9517106,
+          "sourceEndMs": 9528293,
+          "supportingSpeechIds": [
+            "1430-1431"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_003",
+      "title": "じゅうたんへの反応を期待するマリン",
+      "reason": "階段を上がった場所に設置した絨毯について、相手に気づいてほしいと問いかける展開が明確で切り抜きに適しています。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 9544166,
+          "sourceEndMs": 9574159,
+          "supportingSpeechIds": [
+            "1437-1443"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-11T18:34:44+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_56_YE-faluP7zY",
+    "windowSourceVideoId": "YE-faluP7zY",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nOEWCNc77MI_full_source_input_selection_v003/theme-llm-v002/20260711-full-source-upper-bound-v001/windows/window_56_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/1742e59ff05f643b?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"生カチオって何やねん\",\n      \"reason\": \"「生カチオばかりなら生カチオって何やねん」と聞き慣れないワードに対して自分でツッコミを入れている面白い場面です。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 9437694,\n          \"sourceEndMs\": 9449122,\n          \"supportingSpeechIds\": [\n            \"1425-1426\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"イルカと思ったらサメだった\",\n      \"reason\": \"サメをイルカと見間違えて焦る、ゲームプレイ中の突発的なリアクションが見どころとなる場面です。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 9517106,\n          \"sourceEndMs\": 9528293,\n          \"supportingSpeechIds\": [\n            \"1430-1431\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_003\",\n      \"title\": \"じゅうたんへの反応を期待するマリン\",\n      \"reason\": \"階段を上がった場所に設置した絨毯について、相手に気づいてほしいと問いかける展開が明確で切り抜きに適しています。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 9544166,\n          \"sourceEndMs\": 9574159,\n          \"supportingSpeechIds\": [\n            \"1437-1443\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

@@ -1,0 +1,49 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "マリンの告白と浮気性へのツッコミ",
+      "reason": "マリンがころねに「付き合いたい」と告白するも、複数の女性関係を指摘され、選んでいると言い訳する展開が面白いから。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 11551287,
+          "sourceEndMs": 11593310,
+          "supportingSpeechIds": [
+            "1720-1726"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "船のベッドルーム作成",
+      "reason": "マリンが船内にベッドルームを作る提案をし、ころねが最高と絶賛して盛り上がっているから。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 11520066,
+          "sourceEndMs": 11549658,
+          "supportingSpeechIds": [
+            "1713-1719"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-11T18:37:39+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_68_YE-faluP7zY",
+    "windowSourceVideoId": "YE-faluP7zY",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nOEWCNc77MI_full_source_input_selection_v003/theme-llm-v002/20260711-full-source-upper-bound-v001/windows/window_68_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/72cb5945affe33db?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"マリンの告白と浮気性へのツッコミ\",\n      \"reason\": \"マリンがころねに「付き合いたい」と告白するも、複数の女性関係を指摘され、選んでいると言い訳する展開が面白いから。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 11551287,\n          \"sourceEndMs\": 11593310,\n          \"supportingSpeechIds\": [\n            \"1720-1726\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"船のベッドルーム作成\",\n      \"reason\": \"マリンが船内にベッドルームを作る提案をし、ころねが最高と絶賛して盛り上がっているから。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 11520066,\n          \"sourceEndMs\": 11549658,\n          \"supportingSpeechIds\": [\n            \"1713-1719\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

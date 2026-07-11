@@ -1,0 +1,67 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "合流のためにデスルーラを決断する二人",
+      "reason": "サメの肉を諦めてでもお互いに合流するためにゲーム内で一度死亡することを選択する展開が具体的で切り抜きに適しています。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 8820374,
+          "sourceEndMs": 8875610,
+          "supportingSpeechIds": [
+            1344,
+            1345
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "実績解除のために深海へ特攻するマリン船長",
+      "reason": "実績解除の可能性を求めて限界まで深海へ潜り続け、最終的に何もなくて溺死するコミカルな一連の流れが成立しています。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 8877478,
+          "sourceEndMs": 8938130,
+          "supportingSpeechIds": [
+            "1346-1349"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_003",
+      "title": "ゲームプレイ中にGoogle Chromeがクラッシュするハプニング",
+      "reason": "作業や壁の建築を進めている最中に突然ブラウザがクラッシュして焦るリアルな反応が切り抜きとしての見どころになります。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 8971195,
+          "sourceEndMs": 9029018,
+          "supportingSpeechIds": [
+            1351,
+            1352,
+            1353
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-11T18:34:01+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_53_YE-faluP7zY",
+    "windowSourceVideoId": "YE-faluP7zY",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nOEWCNc77MI_full_source_input_selection_v003/theme-llm-v002/20260711-full-source-upper-bound-v001/windows/window_53_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/6fb5f3f2bc70ad9d?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"合流のためにデスルーラを決断する二人\",\n      \"reason\": \"サメの肉を諦めてでもお互いに合流するためにゲーム内で一度死亡することを選択する展開が具体的で切り抜きに適しています。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 8820374,\n          \"sourceEndMs\": 8875610,\n          \"supportingSpeechIds\": [1344, 1345]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"実績解除のために深海へ特攻するマリン船長\",\n      \"reason\": \"実績解除の可能性を求めて限界まで深海へ潜り続け、最終的に何もなくて溺死するコミカルな一連の流れが成立しています。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 8877478,\n          \"sourceEndMs\": 8938130,\n          \"supportingSpeechIds\": [\"1346-1349\"]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_003\",\n      \"title\": \"ゲームプレイ中にGoogle Chromeがクラッシュするハプニング\",\n      \"reason\": \"作業や壁の建築を進めている最中に突然ブラウザがクラッシュして焦るリアルな反応が切り抜きとしての見どころになります。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 8971195,\n          \"sourceEndMs\": 9029018,\n          \"supportingSpeechIds\": [1351, 1352, 1353]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

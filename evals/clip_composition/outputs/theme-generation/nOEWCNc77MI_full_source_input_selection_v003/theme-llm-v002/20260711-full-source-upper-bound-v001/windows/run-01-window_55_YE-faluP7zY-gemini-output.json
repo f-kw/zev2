@@ -1,0 +1,49 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "作った絨毯の小ささにキレる",
+      "reason": "新しく作れるようになった可愛い絨毯（カーペット）を作成したものの、想像以上の小ささに「ふざけてんのか？」とツッコミを入れる展開が面白い。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 9232688,
+          "sourceEndMs": 9266352,
+          "supportingSpeechIds": [
+            "1390-1395"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "家族団らんスペースの計画とサメの頭の飾り方",
+      "reason": "絨毯を使って家族団らんのような空間を作ろうと計画し、さらにサメの頭を壁に飾るための方法（トロフィーボード）について情報交換をしながら試行錯誤する流れが具体的であるため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 9276870,
+          "sourceEndMs": 9356069,
+          "supportingSpeechIds": [
+            "1400-1410"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-11T18:34:30+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_55_YE-faluP7zY",
+    "windowSourceVideoId": "YE-faluP7zY",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nOEWCNc77MI_full_source_input_selection_v003/theme-llm-v002/20260711-full-source-upper-bound-v001/windows/window_55_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/8aeb17d07194be29?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"作った絨毯の小ささにキレる\",\n      \"reason\": \"新しく作れるようになった可愛い絨毯（カーペット）を作成したものの、想像以上の小ささに「ふざけてんのか？」とツッコミを入れる展開が面白い。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 9232688,\n          \"sourceEndMs\": 9266352,\n          \"supportingSpeechIds\": [\n            \"1390-1395\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"家族団らんスペースの計画とサメの頭の飾り方\",\n      \"reason\": \"絨毯を使って家族団らんのような空間を作ろうと計画し、さらにサメの頭を壁に飾るための方法（トロフィーボード）について情報交換をしながら試行錯誤する流れが具体的であるため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 9276870,\n          \"sourceEndMs\": 9356069,\n          \"supportingSpeechIds\": [\n            \"1400-1410\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

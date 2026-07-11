@@ -1,0 +1,64 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "マリンとトゲトゲしいころねのプロレス",
+      "reason": "マリンが可愛く言うようリスナーに求めた流れから、ころねが「いつから味方になったと思ってんの？」などと冷たく突き放し、二人のテンポの良いプロレスが展開されているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 8254193,
+          "sourceEndMs": 8339014,
+          "supportingSpeechIds": [
+            "1275-1286"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "マリンのお母さん構文にツボるころね",
+      "reason": "マリンが不意に発した「きついかしらね」という言葉が母親のようだところねに弄られ、マリンが即座にキレる掛け合いが面白い一幕であるため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 8312099,
+          "sourceEndMs": 8363551,
+          "supportingSpeechIds": [
+            "1286-1290"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_003",
+      "title": "まだない未来の心配をして怒られるマリン",
+      "reason": "マリンが「葉っぱで溢れちゃうよ」と収納の心配をしたものの、ころねに「まだないならいいじゃねえかよ」と強めの正論でツッコまれるオチがついているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 8370340,
+          "sourceEndMs": 8392918,
+          "supportingSpeechIds": [
+            "1292-1293"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-11T18:32:52+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_50_YE-faluP7zY",
+    "windowSourceVideoId": "YE-faluP7zY",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nOEWCNc77MI_full_source_input_selection_v003/theme-llm-v002/20260711-full-source-upper-bound-v001/windows/window_50_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/a7f1ac42e4de9de1?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"マリンとトゲトゲしいころねのプロレス\",\n      \"reason\": \"マリンが可愛く言うようリスナーに求めた流れから、ころねが「いつから味方になったと思ってんの？」などと冷たく突き放し、二人のテンポの良いプロレスが展開されているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 8254193,\n          \"sourceEndMs\": 8339014,\n          \"supportingSpeechIds\": [\"1275-1286\"]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"マリンのお母さん構文にツボるころね\",\n      \"reason\": \"マリンが不意に発した「きついかしらね」という言葉が母親のようだところねに弄られ、マリンが即座にキレる掛け合いが面白い一幕であるため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 8312099,\n          \"sourceEndMs\": 8363551,\n          \"supportingSpeechIds\": [\"1286-1290\"]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_003\",\n      \"title\": \"まだない未来の心配をして怒られるマリン\",\n      \"reason\": \"マリンが「葉っぱで溢れちゃうよ」と収納の心配をしたものの、ころねに「まだないならいいじゃねえかよ」と強めの正論でツッコまれるオチがついているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 8370340,\n          \"sourceEndMs\": 8392918,\n          \"supportingSpeechIds\": [\"1292-1293\"]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

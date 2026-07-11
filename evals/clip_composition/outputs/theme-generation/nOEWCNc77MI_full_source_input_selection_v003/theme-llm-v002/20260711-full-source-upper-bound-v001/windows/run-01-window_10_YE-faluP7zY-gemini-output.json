@@ -1,0 +1,49 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "イノシシに怯えながらも無事に合流を果たすシーン",
+      "reason": "宝鐘マリンがイノシシの襲撃を警戒しつつ、どこにいるか分からない戌神ころねを必死に探し出して合流する一連の流れが綺麗に収まっているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 1628344,
+          "sourceEndMs": 1739066,
+          "supportingSpeechIds": [
+            "215-233"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "島に残るかどうかの相談と新たな武器の入手",
+      "reason": "合流後に次の目的地へ行くか島に残るかを相談しつつ、手に入れた武器についてやり取りするゲームの進行上の転換点となっているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 1740386,
+          "sourceEndMs": 1804243,
+          "supportingSpeechIds": [
+            "234-239"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-11T16:37:48+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_10_YE-faluP7zY",
+    "windowSourceVideoId": "YE-faluP7zY",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nOEWCNc77MI_full_source_input_selection_v003/theme-llm-v002/20260711-full-source-upper-bound-v001/windows/window_10_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/d70bcf2e280d0d2b?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"イノシシに怯えながらも無事に合流を果たすシーン\",\n      \"reason\": \"宝鐘マリンがイノシシの襲撃を警戒しつつ、どこにいるか分からない戌神ころねを必死に探し出して合流する一連の流れが綺麗に収まっているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 1628344,\n          \"sourceEndMs\": 1739066,\n          \"supportingSpeechIds\": [\n            \"215-233\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"島に残るかどうかの相談と新たな武器の入手\",\n      \"reason\": \"合流後に次の目的地へ行くか島に残るかを相談しつつ、手に入れた武器についてやり取りするゲームの進行上の転換点となっているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 1740386,\n          \"sourceEndMs\": 1804243,\n          \"supportingSpeechIds\": [\n            \"234-239\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

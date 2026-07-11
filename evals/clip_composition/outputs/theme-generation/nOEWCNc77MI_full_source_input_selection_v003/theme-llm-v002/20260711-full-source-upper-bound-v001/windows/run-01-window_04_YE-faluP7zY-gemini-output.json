@@ -1,0 +1,65 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "土台がサメに食われるハプニング",
+      "reason": "島付近でサメに襲われ、せっかく作った土台を余裕で食べられてしまう一連のくだりが切り抜きとして成立するため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 700804,
+          "sourceEndMs": 719632,
+          "supportingSpeechIds": [
+            "64-72"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "船長が語る「ころねの独り立ち」と成長への嬉しさ",
+      "reason": "斧を持って島を探索しに行くころねに対して、船長が親心のように成長を感じて褒め称える掛け合いが印象的なため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 752798,
+          "sourceEndMs": 809552,
+          "supportingSpeechIds": [
+            74,
+            "76"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_003",
+      "title": "突然の鳥殺害とサメ肉の発見",
+      "reason": "食料が枯渇しそうなタイミングで突如鳥を倒し、さらに存在を忘れていたサメ肉を大量に見つけて歓喜する展開が見どころとなるため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 810330,
+          "sourceEndMs": 839584,
+          "supportingSpeechIds": [
+            "77-83"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-11T16:36:21+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_04_YE-faluP7zY",
+    "windowSourceVideoId": "YE-faluP7zY",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nOEWCNc77MI_full_source_input_selection_v003/theme-llm-v002/20260711-full-source-upper-bound-v001/windows/window_04_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/6e3bcb523dbcb12a?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"土台がサメに食われるハプニング\",\n      \"reason\": \"島付近でサメに襲われ、せっかく作った土台を余裕で食べられてしまう一連のくだりが切り抜きとして成立するため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 700804,\n          \"sourceEndMs\": 719632,\n          \"supportingSpeechIds\": [\n            \"64-72\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"船長が語る「ころねの独り立ち」と成長への嬉しさ\",\n      \"reason\": \"斧を持って島を探索しに行くころねに対して、船長が親心のように成長を感じて褒め称える掛け合いが印象的なため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 752798,\n          \"sourceEndMs\": 809552,\n          \"supportingSpeechIds\": [\n            74,\n            \"76\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_003\",\n      \"title\": \"突然の鳥殺害とサメ肉の発見\",\n      \"reason\": \"食料が枯渇しそうなタイミングで突如鳥を倒し、さらに存在を忘れていたサメ肉を大量に見つけて歓喜する展開が見どころとなるため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 810330,\n          \"sourceEndMs\": 839584,\n          \"supportingSpeechIds\": [\n            \"77-83\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

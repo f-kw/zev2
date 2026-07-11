@@ -1,0 +1,64 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "クラゲが食べられるか話す二人",
+      "reason": "クラゲの酢の物などの話題を出しながら、ゲーム内のクラゲが食べられるか考察しているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 9094796,
+          "sourceEndMs": 9124816,
+          "supportingSpeechIds": [
+            "1358-1362"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "イルカの群れに遭遇して喜ぶ二人",
+      "reason": "海でイルカの群れを見つけて、二人が「かわいい」と歓声を上げて盛り上がっているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 9124816,
+          "sourceEndMs": 9141803,
+          "supportingSpeechIds": [
+            "1363-1370"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_003",
+      "title": "独特すぎるイルカの鳴き声真似",
+      "reason": "イルカの鳴き声を真似したものの「エゲツナイ」と突っ込まれ、お互いに鳴き声の解釈で揉めているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 9141803,
+          "sourceEndMs": 9179872,
+          "supportingSpeechIds": [
+            "1370-1387"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-11T18:34:16+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_54_YE-faluP7zY",
+    "windowSourceVideoId": "YE-faluP7zY",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nOEWCNc77MI_full_source_input_selection_v003/theme-llm-v002/20260711-full-source-upper-bound-v001/windows/window_54_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/a581a5cd68177b2d?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"クラゲが食べられるか話す二人\",\n      \"reason\": \"クラゲの酢の物などの話題を出しながら、ゲーム内のクラゲが食べられるか考察しているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 9094796,\n          \"sourceEndMs\": 9124816,\n          \"supportingSpeechIds\": [\"1358-1362\"]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"イルカの群れに遭遇して喜ぶ二人\",\n      \"reason\": \"海でイルカの群れを見つけて、二人が「かわいい」と歓声を上げて盛り上がっているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 9124816,\n          \"sourceEndMs\": 9141803,\n          \"supportingSpeechIds\": [\"1363-1370\"]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_003\",\n      \"title\": \"独特すぎるイルカの鳴き声真似\",\n      \"reason\": \"イルカの鳴き声を真似したものの「エゲツナイ」と突っ込まれ、お互いに鳴き声の解釈で揉めているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 9141803,\n          \"sourceEndMs\": 9179872,\n          \"supportingSpeechIds\": [\"1370-1387\"]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

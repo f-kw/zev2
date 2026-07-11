@@ -1,0 +1,255 @@
+{
+  "kind": "theme_redo_source_only_window_prompt_payload",
+  "runAt": "2026-07-11T07:17:32.379Z",
+  "target": "nOEWCNc77MI",
+  "inputSetId": "nOEWCNc77MI_full_source_input_selection_v003",
+  "sourceVideoId": "YE-faluP7zY",
+  "sourceSttId": "nOEWCNc77MI_YE-faluP7zY_local30_v001",
+  "sourceSttManifestPath": "evals/clip_composition/stt/nOEWCNc77MI_YE-faluP7zY_local30_v001/source/manifest.json",
+  "sourceSttComplete": true,
+  "generationSystem": "theme-llm-v002",
+  "promptVersion": "theme_generation_prompt_v002",
+  "requestedThemeCount": 8,
+  "windowKind": "primary",
+  "llmCall": false,
+  "modelInput": {
+    "task": "source_only_theme_generation",
+    "generationSystem": "theme-llm-v002",
+    "promptVersion": "theme_generation_prompt_v002",
+    "requestedThemeCount": 8,
+    "inputPolicy": {
+      "sourceOnly": true,
+      "noClipInfo": true,
+      "noExpected": true,
+      "noAlignment": true,
+      "noHumanReverseTheme": true
+    },
+    "windowing": {
+      "applied": true,
+      "mode": "speech-time",
+      "windowId": "window_05_YE-faluP7zY",
+      "reason": "元配信全体入力が長いため、発話境界を保った時間窓へ分割する。",
+      "maxPromptBytes": 13084,
+      "overlapMs": 0,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 860065,
+      "sourceEndMs": 993519
+    },
+    "sources": [
+      {
+        "sourceVideoId": "YE-faluP7zY",
+        "sourceUrl": "https://www.youtube.com/watch?v=YE-faluP7zY",
+        "sourceTitle": "【Raft】ころね、キミさえいればこの海の果てまでだって──【ホロライブ/宝鐘マリン】",
+        "transcriptKind": "local_stt",
+        "language": "ja-JP",
+        "durationSec": 11824.121,
+        "rawSegmentCount": 53180,
+        "promptSegmentCount": 25,
+        "segmentCompaction": {
+          "method": "source-only transcript segments concatenated until sentence-ending punctuation",
+          "scoringRole": "none",
+          "note": "読みやすさのための表現変換であり、expected、切り抜き、照合結果、人間確認メモは使わない。"
+        },
+        "segments": [
+          {
+            "speechId": 88,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 860065,
+            "sourceEndMs": 860165,
+            "text": "どうした?"
+          },
+          {
+            "speechId": 89,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 860165,
+            "sourceEndMs": 860485,
+            "text": "何が来た?"
+          },
+          {
+            "speechId": 90,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 860485,
+            "sourceEndMs": 861386,
+            "text": "鳥が!"
+          },
+          {
+            "speechId": 91,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 861386,
+            "sourceEndMs": 861626,
+            "text": "鳥が来てる!"
+          },
+          {
+            "speechId": 92,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 861626,
+            "sourceEndMs": 863347,
+            "text": "大丈夫か?"
+          },
+          {
+            "speechId": 93,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 863347,
+            "sourceEndMs": 864327,
+            "text": "ダメージ?"
+          },
+          {
+            "speechId": 94,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 864327,
+            "sourceEndMs": 864687,
+            "text": "平気?"
+          },
+          {
+            "speechId": 95,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 864687,
+            "sourceEndMs": 864927,
+            "text": "ダメージ?"
+          },
+          {
+            "speechId": 96,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 864927,
+            "sourceEndMs": 867669,
+            "text": "大丈夫、ダメージ大丈夫まだ平気ほんと?"
+          },
+          {
+            "speechId": 97,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 867669,
+            "sourceEndMs": 868349,
+            "text": "心配かけたな"
+          },
+          {
+            "speechId": 98,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 870042,
+            "sourceEndMs": 874784,
+            "text": "言うほど心配してないよ心配してーよー!"
+          },
+          {
+            "speechId": 99,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 874784,
+            "sourceEndMs": 875844,
+            "text": "はいはい、あれ?"
+          },
+          {
+            "speechId": 100,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 875844,
+            "sourceEndMs": 877525,
+            "text": "あれ?"
+          },
+          {
+            "speechId": 101,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 877525,
+            "sourceEndMs": 878365,
+            "text": "心配して?"
+          },
+          {
+            "speechId": 102,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 878365,
+            "sourceEndMs": 884347,
+            "text": "心配ねしてるしてるちょっと待って、一旦荷物預けて雑すぎ気づいた?"
+          },
+          {
+            "speechId": 103,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 884347,
+            "sourceEndMs": 899732,
+            "text": "雑すぎんやんいやでもマリリンは反応が雑でもこういうゲームのね作業ちゃんとするから偉いと思うわ謎のフォローが入りましたそうなんよ船長ってちょっとね反応たまに雑になるけどでもちゃんとするからねそう言うてね"
+          },
+          {
+            "speechId": 104,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 900098,
+            "sourceEndMs": 904802,
+            "text": "営業をしっかりしてるところがコーポイントだよね、マジでうん、わかるわかる?"
+          },
+          {
+            "speechId": 105,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 904802,
+            "sourceEndMs": 925239,
+            "text": "わかりみが深いえ、ちょ、せんちゃんあれするわあのさぁ海藻とか探すわあのね、結構ねあ、あ、ありがてありがて柔道のネマネマとかがね、今後必要になってくることはサメ、気をつけてね間違いない、オッケーでもさぁ、冷静に考えてさぁうんこうやって、目標がさぁ、どんどん変わってくからさぁ今、するべきことって痛っ、ヤバい!"
+          },
+          {
+            "speechId": 106,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 925239,
+            "sourceEndMs": 926740,
+            "text": "ちょっと待っている?"
+          },
+          {
+            "speechId": 107,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 926740,
+            "sourceEndMs": 928241,
+            "text": "いやああああああああああああああ"
+          },
+          {
+            "speechId": 108,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 932566,
+            "sourceEndMs": 934587,
+            "text": "気をつけてこれイノシシいるの?"
+          },
+          {
+            "speechId": 109,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 934587,
+            "sourceEndMs": 953740,
+            "text": "イノシシもいるわこれわかった助太刀に行こうちょっと矢でさ撃ち殺すかイノシシパーティーしよう今日はここにイノシシいるわしし鍋しし丼しししちゅうみたいなしししちゅうしたいしししちゅうそっかこいつはもう食べれるんだよな多分なそうだよ弓矢あれ弓矢ってどかなかったっけ持ってる?"
+          },
+          {
+            "speechId": 110,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 953740,
+            "sourceEndMs": 959944,
+            "text": "弓矢どっかにあったはずコーネ持ってないんだなコーネ持ってないあったあったちょっとさ弓矢でさ"
+          },
+          {
+            "speechId": 111,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 960122,
+            "sourceEndMs": 989832,
+            "text": "殺すわ食べようよ食べたいこれで撃てるのかな行くわそっち待ってあれマリゾネスどこマリゾネスまだイカダイカダにいる鳥もいるしねなんかねイノシシ2匹ぐらいいたから気をつけてなOKもうみんな撃ち殺すから任してセイチョ結構エイムにはね自信あるからそうでしょ自信はねあったところってなんだよどういう意味だよちょっと待って自信だけ"
+          },
+          {
+            "speechId": 112,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 990278,
+            "sourceEndMs": 993519,
+            "text": "もうダメなんだよこれコロゾネス待った方がいいやつ?"
+          }
+        ]
+      }
+    ],
+    "outputContract": {
+      "format": "json_only",
+      "schema": {
+        "themes": [
+          {
+            "themeId": "string",
+            "title": "string",
+            "reason": "string_one_sentence",
+            "evidenceRanges": [
+              {
+                "sourceVideoId": "string",
+                "sourceStartMs": "number",
+                "sourceEndMs": "number",
+                "supportingSpeechIds": [
+                  "number_or_range_string"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

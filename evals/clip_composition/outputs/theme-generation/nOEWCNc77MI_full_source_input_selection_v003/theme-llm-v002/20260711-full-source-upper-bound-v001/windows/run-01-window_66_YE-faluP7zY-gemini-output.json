@@ -1,0 +1,64 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "机や椅子の配置にこだわる二人",
+      "reason": "家具の位置ズレを気にしながら、暖炉とのバランスや椅子の交換について細かく試行錯誤するやり取りが切り抜きとして成立すると判断した。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 11161334,
+          "sourceEndMs": 11224838,
+          "supportingSpeechIds": [
+            "1663-1676"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "ローテーブルのデザインを巡る相談",
+      "reason": "ローテーブルを実際に置いてみて、デザインの可愛さをワッフルに例えたり、食卓としての高さを議論したりする場面に明確な展開があるため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 11224838,
+          "sourceEndMs": 11271141,
+          "supportingSpeechIds": [
+            "1676-1685"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_003",
+      "title": "床座りの「わびさび」とひまわりの撤去",
+      "reason": "地面に正座して食べるスタイルを「わびさび」と表現し、せっかく置いたひまわりをあっけなく撤去してしまうというオチが面白いと判断した。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 11271141,
+          "sourceEndMs": 11309582,
+          "supportingSpeechIds": [
+            "1686-1688"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-11T18:37:10+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_66_YE-faluP7zY",
+    "windowSourceVideoId": "YE-faluP7zY",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nOEWCNc77MI_full_source_input_selection_v003/theme-llm-v002/20260711-full-source-upper-bound-v001/windows/window_66_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/83b03f2c09cae89e?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"机や椅子の配置にこだわる二人\",\n      \"reason\": \"家具の位置ズレを気にしながら、暖炉とのバランスや椅子の交換について細かく試行錯誤するやり取りが切り抜きとして成立すると判断した。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 11161334,\n          \"sourceEndMs\": 11224838,\n          \"supportingSpeechIds\": [\"1663-1676\"]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"ローテーブルのデザインを巡る相談\",\n      \"reason\": \"ローテーブルを実際に置いてみて、デザインの可愛さをワッフルに例えたり、食卓としての高さを議論したりする場面に明確な展開があるため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 11224838,\n          \"sourceEndMs\": 11271141,\n          \"supportingSpeechIds\": [\"1676-1685\"]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_003\",\n      \"title\": \"床座りの「わびさび」とひまわりの撤去\",\n      \"reason\": \"地面に正座して食べるスタイルを「わびさび」と表現し、せっかく置いたひまわりをあっけなく撤去してしまうというオチが面白いと判断した。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 11271141,\n          \"sourceEndMs\": 11309582,\n          \"supportingSpeechIds\": [\"1686-1688\"]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

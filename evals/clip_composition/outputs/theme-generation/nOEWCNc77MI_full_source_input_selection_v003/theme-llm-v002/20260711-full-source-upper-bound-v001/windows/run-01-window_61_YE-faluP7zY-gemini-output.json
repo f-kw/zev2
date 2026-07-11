@@ -1,0 +1,49 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "二人の完璧な収納・整理整頓連携",
+      "reason": "宝鐘マリンと戌神ころねが、釘などの備品を「工具系」や「消耗品」に仕分けしてストレージが劇的にスッキリするまでの楽しげな掛け合いが綺麗にまとまっているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 10320020,
+          "sourceEndMs": 10422286,
+          "supportingSpeechIds": [
+            "1544-1554"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "ラジオ消去で試される二人のトーク力",
+      "reason": "ラジオを外したことで静かになることを心配する戌神ころねに対し、二人のトーク力でカバーしようと盛り上がる展開が切り抜きとして成立するため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 10422286,
+          "sourceEndMs": 10462969,
+          "supportingSpeechIds": [
+            "1555-1558"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-11T18:36:00+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_61_YE-faluP7zY",
+    "windowSourceVideoId": "YE-faluP7zY",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nOEWCNc77MI_full_source_input_selection_v003/theme-llm-v002/20260711-full-source-upper-bound-v001/windows/window_61_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/e160e26fb7371f01?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"二人の完璧な収納・整理整頓連携\",\n      \"reason\": \"宝鐘マリンと戌神ころねが、釘などの備品を「工具系」や「消耗品」に仕分けしてストレージが劇的にスッキリするまでの楽しげな掛け合いが綺麗にまとまっているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 10320020,\n          \"sourceEndMs\": 10422286,\n          \"supportingSpeechIds\": [\n            \"1544-1554\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"ラジオ消去で試される二人のトーク力\",\n      \"reason\": \"ラジオを外したことで静かになることを心配する戌神ころねに対し、二人のトーク力でカバーしようと盛り上がる展開が切り抜きとして成立するため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 10422286,\n          \"sourceEndMs\": 10462969,\n          \"supportingSpeechIds\": [\n            \"1555-1558\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

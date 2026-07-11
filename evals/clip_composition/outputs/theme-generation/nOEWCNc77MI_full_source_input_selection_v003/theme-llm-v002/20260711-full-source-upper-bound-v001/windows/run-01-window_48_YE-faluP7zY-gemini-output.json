@@ -1,0 +1,64 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "「待って」「待てないよ」すれ違う2人の短い掛け合い",
+      "reason": "宝鐘マリンが「待って」と言ったのに対し、戌神ころねが「待てないよ別に」と冷たく返し、マリンが「ひどーい」と嘆くテンポの良いすれ違いが面白い場面です。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 7784215,
+          "sourceEndMs": 7829952,
+          "supportingSpeechIds": [
+            "1226-1227"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "コメントの「いらないものボックス」にキレる場面",
+      "reason": "リスナーからのコメントによる提案に対し、過激な暴言（「死ね！」）で突っ込みを入れるインパクトのある瞬間です。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 7833238,
+          "sourceEndMs": 7856703,
+          "supportingSpeechIds": [
+            "1229-1230"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_003",
+      "title": "乾杯したいのに時間がなくて食べられちゃう一幕",
+      "reason": "乾杯を持ちかけるも「そんな時間ない」とあしらわれ、隙に食べ物を食べられてしまい「一人で食べまーす」と拗ねるコミカルな展開です。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 7874984,
+          "sourceEndMs": 7948778,
+          "supportingSpeechIds": [
+            "1234-1240"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-11T18:31:50+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_48_YE-faluP7zY",
+    "windowSourceVideoId": "YE-faluP7zY",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nOEWCNc77MI_full_source_input_selection_v003/theme-llm-v002/20260711-full-source-upper-bound-v001/windows/window_48_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/664bc793c33dfb66?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"「待って」「待てないよ」すれ違う2人の短い掛け合い\",\n      \"reason\": \"宝鐘マリンが「待って」と言ったのに対し、戌神ころねが「待てないよ別に」と冷たく返し、マリンが「ひどーい」と嘆くテンポの良いすれ違いが面白い場面です。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 7784215,\n          \"sourceEndMs\": 7829952,\n          \"supportingSpeechIds\": [\n            \"1226-1227\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"コメントの「いらないものボックス」にキレる場面\",\n      \"reason\": \"リスナーからのコメントによる提案に対し、過激な暴言（「死ね！」）で突っ込みを入れるインパクトのある瞬間です。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 7833238,\n          \"sourceEndMs\": 7856703,\n          \"supportingSpeechIds\": [\n            \"1229-1230\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_003\",\n      \"title\": \"乾杯したいのに時間がなくて食べられちゃう一幕\",\n      \"reason\": \"乾杯を持ちかけるも「そんな時間ない」とあしらわれ、隙に食べ物を食べられてしまい「一人で食べまーす」と拗ねるコミカルな展開です。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 7874984,\n          \"sourceEndMs\": 7948778,\n          \"supportingSpeechIds\": [\n            \"1234-1240\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

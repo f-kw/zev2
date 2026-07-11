@@ -1,0 +1,65 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "矢のダジャレに呆れる宝鐘マリン",
+      "reason": "「や」を連呼したことを「矢」にかけたダジャレのように捉えられ、何も言えなくなってしまう掛け合いが面白い場面です。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 1050106,
+          "sourceEndMs": 1072470,
+          "supportingSpeechIds": [
+            125,
+            126
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "「居た？」の猛烈なリフレイン",
+      "reason": "イノシシがいるかどうかを確認する「居た？」という短いフレーズが、2人の間でテンポよく大量に連呼されるコミカルなシーンです。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 1081354,
+          "sourceEndMs": 1087296,
+          "supportingSpeechIds": [
+            "128-136"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_003",
+      "title": "手作りの弓矢をプレゼント",
+      "reason": "イノシシに対抗するために素材を集めて作った弓と矢を、水に流される前に無事相方に手渡して共有する協力プレイの場面です。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 1110182,
+          "sourceEndMs": 1144276,
+          "supportingSpeechIds": [
+            "137-140"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-11T16:36:51+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_06_YE-faluP7zY",
+    "windowSourceVideoId": "YE-faluP7zY",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nOEWCNc77MI_full_source_input_selection_v003/theme-llm-v002/20260711-full-source-upper-bound-v001/windows/window_06_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/a807c45419c7c5e3?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"矢のダジャレに呆れる宝鐘マリン\",\n      \"reason\": \"「や」を連呼したことを「矢」にかけたダジャレのように捉えられ、何も言えなくなってしまう掛け合いが面白い場面です。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 1050106,\n          \"sourceEndMs\": 1072470,\n          \"supportingSpeechIds\": [125, 126]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"「居た？」の猛烈なリフレイン\",\n      \"reason\": \"イノシシがいるかどうかを確認する「居た？」という短いフレーズが、2人の間でテンポよく大量に連呼されるコミカルなシーンです。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 1081354,\n          \"sourceEndMs\": 1087296,\n          \"supportingSpeechIds\": [\"128-136\"]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_003\",\n      \"title\": \"手作りの弓矢をプレゼント\",\n      \"reason\": \"イノシシに対抗するために素材を集めて作った弓と矢を、水に流される前に無事相方に手渡して共有する協力プレイの場面です。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 1110182,\n          \"sourceEndMs\": 1144276,\n          \"supportingSpeechIds\": [\"137-140\"]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

@@ -1,0 +1,79 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "「イノスキ」のツボに入り爆笑する宝鐘マリンと戌神ころね",
+      "reason": "直前の出来事である「イノスキ」を思い出し、お腹がよじれるほど大爆笑したことを楽しそうに振り返っているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 4095935,
+          "sourceEndMs": 4122562,
+          "supportingSpeechIds": [
+            "589-590"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "釣った魚のちっちゃさにツッコミを入れる掛け合い",
+      "reason": "頑張って釣った魚が想像以上に小さく、顔のデカさとのスケール感をイジられるコミカルなやり取りが行われているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 4140240,
+          "sourceEndMs": 4165790,
+          "supportingSpeechIds": [
+            "594-595"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_003",
+      "title": "金属の釣り竿を作るか否かの素材相談",
+      "reason": "壊れた釣り竿の代わりに金属で新調することの損得を相談し、板を使わず長持ちするという結論に至る一連の流れがあるため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 4172355,
+          "sourceEndMs": 4202646,
+          "supportingSpeechIds": [
+            "597-602"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_004",
+      "title": "空腹で奇声をあげるころねと冷静なマリンの「他人事」ツッコミ",
+      "reason": "突然お腹が空いて謎の奇声を連呼しだした相方に対し、冷静に「他人事？」と言い放つシュールなオチがついているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 4202646,
+          "sourceEndMs": 4233359,
+          "supportingSpeechIds": [
+            "603-604"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-11T17:04:12+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_24_YE-faluP7zY",
+    "windowSourceVideoId": "YE-faluP7zY",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nOEWCNc77MI_full_source_input_selection_v003/theme-llm-v002/20260711-full-source-upper-bound-v001/windows/window_24_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/c36e4d0843f0e635?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"「イノスキ」のツボに入り爆笑する宝鐘マリンと戌神ころね\",\n      \"reason\": \"直前の出来事である「イノスキ」を思い出し、お腹がよじれるほど大爆笑したことを楽しそうに振り返っているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 4095935,\n          \"sourceEndMs\": 4122562,\n          \"supportingSpeechIds\": [\n            \"589-590\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"釣った魚のちっちゃさにツッコミを入れる掛け合い\",\n      \"reason\": \"頑張って釣った魚が想像以上に小さく、顔のデカさとのスケール感をイジられるコミカルなやり取りが行われているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 4140240,\n          \"sourceEndMs\": 4165790,\n          \"supportingSpeechIds\": [\n            \"594-595\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_003\",\n      \"title\": \"金属の釣り竿を作るか否かの素材相談\",\n      \"reason\": \"壊れた釣り竿の代わりに金属で新調することの損得を相談し、板を使わず長持ちするという結論に至る一連の流れがあるため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 4172355,\n          \"sourceEndMs\": 4202646,\n          \"supportingSpeechIds\": [\n            \"597-602\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_004\",\n      \"title\": \"空腹で奇声をあげるころねと冷静なマリンの「他人事」ツッコミ\",\n      \"reason\": \"突然お腹が空いて謎の奇声を連呼しだした相方に対し、冷静に「他人事？」と言い放つシュールなオチがついているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 4202646,\n          \"sourceEndMs\": 4233359,\n          \"supportingSpeechIds\": [\n            \"603-604\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

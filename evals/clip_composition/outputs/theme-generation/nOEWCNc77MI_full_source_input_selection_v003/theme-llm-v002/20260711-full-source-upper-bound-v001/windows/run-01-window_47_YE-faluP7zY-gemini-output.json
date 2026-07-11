@@ -1,0 +1,49 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "見つめ合って照れる二人",
+      "reason": "宝鐘マリンが視線に気づいて「なんでこっち見てくんの？」と反応し、戌神ころねが「見ただけじゃん」と返す二人の掛け合いが微笑ましいため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 7687365,
+          "sourceEndMs": 7708118,
+          "supportingSpeechIds": [
+            "1217-1219"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "セルフツッコミと謎の笑い",
+      "reason": "「言われてねーけどさ」と一人でツッコミを入れ、それにツボる相方との楽しげな空気感が切り抜きとして魅力的なため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 7740970,
+          "sourceEndMs": 7769844,
+          "supportingSpeechIds": [
+            1222
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-11T18:31:36+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_47_YE-faluP7zY",
+    "windowSourceVideoId": "YE-faluP7zY",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nOEWCNc77MI_full_source_input_selection_v003/theme-llm-v002/20260711-full-source-upper-bound-v001/windows/window_47_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/82f55fb502062a73?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"見つめ合って照れる二人\",\n      \"reason\": \"宝鐘マリンが視線に気づいて「なんでこっち見てくんの？」と反応し、戌神ころねが「見ただけじゃん」と返す二人の掛け合いが微笑ましいため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 7687365,\n          \"sourceEndMs\": 7708118,\n          \"supportingSpeechIds\": [\n            \"1217-1219\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"セルフツッコミと謎の笑い\",\n      \"reason\": \"「言われてねーけどさ」と一人でツッコミを入れ、それにツボる相方との楽しげな空気感が切り抜きとして魅力的なため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 7740970,\n          \"sourceEndMs\": 7769844,\n          \"supportingSpeechIds\": [\n            1222\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

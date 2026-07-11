@@ -1,0 +1,297 @@
+{
+  "kind": "theme_redo_source_only_window_prompt_payload",
+  "runAt": "2026-07-11T07:17:32.382Z",
+  "target": "nOEWCNc77MI",
+  "inputSetId": "nOEWCNc77MI_full_source_input_selection_v003",
+  "sourceVideoId": "YE-faluP7zY",
+  "sourceSttId": "nOEWCNc77MI_YE-faluP7zY_local30_v001",
+  "sourceSttManifestPath": "evals/clip_composition/stt/nOEWCNc77MI_YE-faluP7zY_local30_v001/source/manifest.json",
+  "sourceSttComplete": true,
+  "generationSystem": "theme-llm-v002",
+  "promptVersion": "theme_generation_prompt_v002",
+  "requestedThemeCount": 8,
+  "windowKind": "primary",
+  "llmCall": false,
+  "modelInput": {
+    "task": "source_only_theme_generation",
+    "generationSystem": "theme-llm-v002",
+    "promptVersion": "theme_generation_prompt_v002",
+    "requestedThemeCount": 8,
+    "inputPolicy": {
+      "sourceOnly": true,
+      "noClipInfo": true,
+      "noExpected": true,
+      "noAlignment": true,
+      "noHumanReverseTheme": true
+    },
+    "windowing": {
+      "applied": true,
+      "mode": "speech-time",
+      "windowId": "window_11_YE-faluP7zY",
+      "reason": "元配信全体入力が長いため、発話境界を保った時間窓へ分割する。",
+      "maxPromptBytes": 13084,
+      "overlapMs": 0,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 1804243,
+      "sourceEndMs": 1889522
+    },
+    "sources": [
+      {
+        "sourceVideoId": "YE-faluP7zY",
+        "sourceUrl": "https://www.youtube.com/watch?v=YE-faluP7zY",
+        "sourceTitle": "【Raft】ころね、キミさえいればこの海の果てまでだって──【ホロライブ/宝鐘マリン】",
+        "transcriptKind": "local_stt",
+        "language": "ja-JP",
+        "durationSec": 11824.121,
+        "rawSegmentCount": 53180,
+        "promptSegmentCount": 31,
+        "segmentCompaction": {
+          "method": "source-only transcript segments concatenated until sentence-ending punctuation",
+          "scoringRole": "none",
+          "note": "読みやすさのための表現変換であり、expected、切り抜き、照合結果、人間確認メモは使わない。"
+        },
+        "segments": [
+          {
+            "speechId": 240,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1804243,
+            "sourceEndMs": 1807086,
+            "text": "サンキュー!"
+          },
+          {
+            "speechId": 241,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1807086,
+            "sourceEndMs": 1807786,
+            "text": "よーこいろ!"
+          },
+          {
+            "speechId": 242,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1807786,
+            "sourceEndMs": 1809147,
+            "text": "ありがとう!"
+          },
+          {
+            "speechId": 243,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1809147,
+            "sourceEndMs": 1817494,
+            "text": "ちょっと、じゃあクジラ、クジラじゃないやサメもらうわクジラ?"
+          },
+          {
+            "speechId": 244,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1817494,
+            "sourceEndMs": 1819996,
+            "text": "あ、オッケオッケオッケサメ!"
+          },
+          {
+            "speechId": 245,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1819996,
+            "sourceEndMs": 1821817,
+            "text": "サメもらって葉っぱがね、あ、60枚集めたねえ、めっちゃ集めてる!"
+          },
+          {
+            "speechId": 246,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1821817,
+            "sourceEndMs": 1823419,
+            "text": "葉っぱ60枚!"
+          },
+          {
+            "speechId": 247,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1823419,
+            "sourceEndMs": 1823439,
+            "text": "?"
+          },
+          {
+            "speechId": 248,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1823419,
+            "sourceEndMs": 1823439,
+            "text": "?"
+          },
+          {
+            "speechId": 249,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1823439,
+            "sourceEndMs": 1824459,
+            "text": "60枚あるよ!"
+          },
+          {
+            "speechId": 250,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1824459,
+            "sourceEndMs": 1825120,
+            "text": "葉っぱ大じゃん!"
+          },
+          {
+            "speechId": 251,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1825120,
+            "sourceEndMs": 1826201,
+            "text": "やったね!"
+          },
+          {
+            "speechId": 252,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1826201,
+            "sourceEndMs": 1826481,
+            "text": "やったね!"
+          },
+          {
+            "speechId": 253,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1826481,
+            "sourceEndMs": 1827061,
+            "text": "やった!"
+          },
+          {
+            "speechId": 254,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1827061,
+            "sourceEndMs": 1827662,
+            "text": "やった!"
+          },
+          {
+            "speechId": 255,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1829721,
+            "sourceEndMs": 1830000,
+            "text": "どこにいるの"
+          },
+          {
+            "speechId": 256,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1830618,
+            "sourceEndMs": 1834199,
+            "text": "入れるところがないなあ葉っぱ?"
+          },
+          {
+            "speechId": 257,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1834199,
+            "sourceEndMs": 1841020,
+            "text": "うんあ、ここにあるわここに入れて優秀やなえ、これさ、いらなくない?"
+          },
+          {
+            "speechId": 258,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1841020,
+            "sourceEndMs": 1843381,
+            "text": "種みたいなやつヤシの種いる?"
+          },
+          {
+            "speechId": 259,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1843381,
+            "sourceEndMs": 1846181,
+            "text": "ヤシの種はまだいらんの?"
+          },
+          {
+            "speechId": 260,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1846181,
+            "sourceEndMs": 1858764,
+            "text": "うん、そうだね栽培してヤシの木生やしてそしたら木材集めなくても来ればいけるようになるからもう一個ストレージ作ろうか、そしたらそうだね、作ろっかほうがいいよなちょっと待ってね、作るわあ、作る?"
+          },
+          {
+            "speechId": 261,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1858764,
+            "sourceEndMs": 1859504,
+            "text": "役に立つ"
+          },
+          {
+            "speechId": 262,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1861934,
+            "sourceEndMs": 1864835,
+            "text": "よく似たつなぁ今ではよく似たつぞぉ?"
+          },
+          {
+            "speechId": 263,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1864835,
+            "sourceEndMs": 1866456,
+            "text": "立ってるよぉ?"
+          },
+          {
+            "speechId": 264,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1866456,
+            "sourceEndMs": 1870097,
+            "text": "ストレージスクラップとロープOK?"
+          },
+          {
+            "speechId": 265,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1870097,
+            "sourceEndMs": 1876578,
+            "text": "よし、日朝だし、殺戮してぇなぁあ、いいよ、行ってきていいよあ、一緒にいた方がいかないこれ?"
+          },
+          {
+            "speechId": 266,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1876578,
+            "sourceEndMs": 1881480,
+            "text": "一緒に殺戮しようよ待つとストレージできるまで待つけどOK?"
+          },
+          {
+            "speechId": 267,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1881480,
+            "sourceEndMs": 1886201,
+            "text": "殺戮したーいえっと、スクラップ、スクラップね?"
+          },
+          {
+            "speechId": 268,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1886201,
+            "sourceEndMs": 1886901,
+            "text": "させ、させるか!"
+          },
+          {
+            "speechId": 269,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1886901,
+            "sourceEndMs": 1888122,
+            "text": "させるか!"
+          },
+          {
+            "speechId": 270,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 1888122,
+            "sourceEndMs": 1889522,
+            "text": "おいで"
+          }
+        ]
+      }
+    ],
+    "outputContract": {
+      "format": "json_only",
+      "schema": {
+        "themes": [
+          {
+            "themeId": "string",
+            "title": "string",
+            "reason": "string_one_sentence",
+            "evidenceRanges": [
+              {
+                "sourceVideoId": "string",
+                "sourceStartMs": "number",
+                "sourceEndMs": "number",
+                "supportingSpeechIds": [
+                  "number_or_range_string"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

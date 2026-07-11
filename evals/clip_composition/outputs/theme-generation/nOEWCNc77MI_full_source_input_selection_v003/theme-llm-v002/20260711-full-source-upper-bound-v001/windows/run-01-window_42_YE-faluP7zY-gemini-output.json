@@ -1,0 +1,64 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "イノシシ討伐の作戦会議と素材集め",
+      "reason": "イノシシへの挑戦を計画し、それに向けて海でのスクラップやワカメの収集を開始する一連の流れが描かれているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 7171942,
+          "sourceEndMs": 7222096,
+          "supportingSpeechIds": [
+            "1047-1050"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "収納するアイテムの確認と整理",
+      "reason": "ストレージに入れるべきアイテムが何だったかを思い出し、砂や粘土、ブドウのベトベトの配置場所を話し合う具体的なやり取りがあるため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 7222096,
+          "sourceEndMs": 7288098,
+          "supportingSpeechIds": [
+            "1051-1057"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_003",
+      "title": "海に流されて焦るアクシデント",
+      "reason": "プレイ中に突然大きく流されてしまい、慌てて戻ろうとしたり船を旋回させたりする緊迫したリアクションがあるため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 7292063,
+          "sourceEndMs": 7319298,
+          "supportingSpeechIds": [
+            "1058-1066"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-11T17:18:52+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_42_YE-faluP7zY",
+    "windowSourceVideoId": "YE-faluP7zY",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nOEWCNc77MI_full_source_input_selection_v003/theme-llm-v002/20260711-full-source-upper-bound-v001/windows/window_42_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/63c7bdea9ced6da7?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"イノシシ討伐の作戦会議と素材集め\",\n      \"reason\": \"イノシシへの挑戦を計画し、それに向けて海でのスクラップやワカメの収集を開始する一連の流れが描かれているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 7171942,\n          \"sourceEndMs\": 7222096,\n          \"supportingSpeechIds\": [\n            \"1047-1050\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"収納するアイテムの確認と整理\",\n      \"reason\": \"ストレージに入れるべきアイテムが何だったかを思い出し、砂や粘土、ブドウのベトベトの配置場所を話し合う具体的なやり取りがあるため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 7222096,\n          \"sourceEndMs\": 7288098,\n          \"supportingSpeechIds\": [\n            \"1051-1057\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_003\",\n      \"title\": \"海に流されて焦るアクシデント\",\n      \"reason\": \"プレイ中に突然大きく流されてしまい、慌てて戻ろうとしたり船を旋回させたりする緊迫したリアクションがあるため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 7292063,\n          \"sourceEndMs\": 7319298,\n          \"supportingSpeechIds\": [\n            \"1058-1066\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

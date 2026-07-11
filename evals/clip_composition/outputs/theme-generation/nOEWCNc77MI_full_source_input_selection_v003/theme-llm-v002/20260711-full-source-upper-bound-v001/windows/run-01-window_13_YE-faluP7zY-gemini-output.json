@@ -1,0 +1,79 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "ガバガバエイムで素早い獲物に大苦戦",
+      "reason": "動きが速い獲物に対してエイムが定まらず、弓矢などの武器を切り替えながら試行錯誤する一連のパニック気味なゲームプレイが見どころとなるため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 2055081,
+          "sourceEndMs": 2097362,
+          "supportingSpeechIds": [
+            "295-307"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "「やめて」を連呼し狂気を感じる怒涛のラッシュ",
+      "reason": "「やめて」という単語を異常な回数で連呼し続ける強烈なインパクトを残すシーンであり、切り抜きとしての引きが非常に強いため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 2100342,
+          "sourceEndMs": 2129864,
+          "supportingSpeechIds": [
+            309
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_003",
+      "title": "狩りの最中に飛び出す「今晩はジンギスカンだな」",
+      "reason": "ヤギ（または小動物）を仕留めようとする流れから唐突に「ジンギスカン」と言い放つコミカルでシュールな発言が際立っているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 2097362,
+          "sourceEndMs": 2140677,
+          "supportingSpeechIds": [
+            "307-310"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_004",
+      "title": "狩りの才能に目覚めて他メンバーを連想する二人",
+      "reason": "「馬狩りの才能ある」という自画自賛から、サメの討伐が好きな博衣こよりなどの他ホロライブメンバーの名前を挙げて盛り上がるトークが面白いため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 2196966,
+          "sourceEndMs": 2218814,
+          "supportingSpeechIds": [
+            "313-316"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-11T16:38:32+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_13_YE-faluP7zY",
+    "windowSourceVideoId": "YE-faluP7zY",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nOEWCNc77MI_full_source_input_selection_v003/theme-llm-v002/20260711-full-source-upper-bound-v001/windows/window_13_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/f47b3dba9de3bb05?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"ガバガバエイムで素早い獲物に大苦戦\",\n      \"reason\": \"動きが速い獲物に対してエイムが定まらず、弓矢などの武器を切り替えながら試行錯誤する一連のパニック気味なゲームプレイが見どころとなるため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 2055081,\n          \"sourceEndMs\": 2097362,\n          \"supportingSpeechIds\": [\"295-307\"]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"「やめて」を連呼し狂気を感じる怒涛のラッシュ\",\n      \"reason\": \"「やめて」という単語を異常な回数で連呼し続ける強烈なインパクトを残すシーンであり、切り抜きとしての引きが非常に強いため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 2100342,\n          \"sourceEndMs\": 2129864,\n          \"supportingSpeechIds\": [309]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_003\",\n      \"title\": \"狩りの最中に飛び出す「今晩はジンギスカンだな」\",\n      \"reason\": \"ヤギ（または小動物）を仕留めようとする流れから唐突に「ジンギスカン」と言い放つコミカルでシュールな発言が際立っているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 2097362,\n          \"sourceEndMs\": 2140677,\n          \"supportingSpeechIds\": [\"307-310\"]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_004\",\n      \"title\": \"狩りの才能に目覚めて他メンバーを連想する二人\",\n      \"reason\": \"「馬狩りの才能ある」という自画自賛から、サメの討伐が好きな博衣こよりなどの他ホロライブメンバーの名前を挙げて盛り上がるトークが面白いため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 2196966,\n          \"sourceEndMs\": 2218814,\n          \"supportingSpeechIds\": [\"313-316\"]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

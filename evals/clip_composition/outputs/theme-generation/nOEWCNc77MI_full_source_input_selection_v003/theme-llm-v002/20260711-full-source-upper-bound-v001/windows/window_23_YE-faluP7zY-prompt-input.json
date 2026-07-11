@@ -1,0 +1,262 @@
+{
+  "kind": "theme_redo_source_only_window_prompt_payload",
+  "runAt": "2026-07-11T07:17:32.387Z",
+  "target": "nOEWCNc77MI",
+  "inputSetId": "nOEWCNc77MI_full_source_input_selection_v003",
+  "sourceVideoId": "YE-faluP7zY",
+  "sourceSttId": "nOEWCNc77MI_YE-faluP7zY_local30_v001",
+  "sourceSttManifestPath": "evals/clip_composition/stt/nOEWCNc77MI_YE-faluP7zY_local30_v001/source/manifest.json",
+  "sourceSttComplete": true,
+  "generationSystem": "theme-llm-v002",
+  "promptVersion": "theme_generation_prompt_v002",
+  "requestedThemeCount": 8,
+  "windowKind": "primary",
+  "llmCall": false,
+  "modelInput": {
+    "task": "source_only_theme_generation",
+    "generationSystem": "theme-llm-v002",
+    "promptVersion": "theme_generation_prompt_v002",
+    "requestedThemeCount": 8,
+    "inputPolicy": {
+      "sourceOnly": true,
+      "noClipInfo": true,
+      "noExpected": true,
+      "noAlignment": true,
+      "noHumanReverseTheme": true
+    },
+    "windowing": {
+      "applied": true,
+      "mode": "speech-time",
+      "windowId": "window_23_YE-faluP7zY",
+      "reason": "元配信全体入力が長いため、発話境界を保った時間窓へ分割する。",
+      "maxPromptBytes": 13084,
+      "overlapMs": 0,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 3879156,
+      "sourceEndMs": 4040050
+    },
+    "sources": [
+      {
+        "sourceVideoId": "YE-faluP7zY",
+        "sourceUrl": "https://www.youtube.com/watch?v=YE-faluP7zY",
+        "sourceTitle": "【Raft】ころね、キミさえいればこの海の果てまでだって──【ホロライブ/宝鐘マリン】",
+        "transcriptKind": "local_stt",
+        "language": "ja-JP",
+        "durationSec": 11824.121,
+        "rawSegmentCount": 53180,
+        "promptSegmentCount": 26,
+        "segmentCompaction": {
+          "method": "source-only transcript segments concatenated until sentence-ending punctuation",
+          "scoringRole": "none",
+          "note": "読みやすさのための表現変換であり、expected、切り抜き、照合結果、人間確認メモは使わない。"
+        },
+        "segments": [
+          {
+            "speechId": 556,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 3879156,
+            "sourceEndMs": 3900000,
+            "text": "やばいねでもねあ、今下にいてランチタブなんだうぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅ"
+          },
+          {
+            "speechId": 557,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 3900514,
+            "sourceEndMs": 3903595,
+            "text": "やめようちょっと待ってどこ行った?"
+          },
+          {
+            "speechId": 558,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 3903595,
+            "sourceEndMs": 3904615,
+            "text": "こうね後ろ?"
+          },
+          {
+            "speechId": 559,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 3904615,
+            "sourceEndMs": 3906196,
+            "text": "どこ?"
+          },
+          {
+            "speechId": 560,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 3906196,
+            "sourceEndMs": 3915439,
+            "text": "後ろを振り返ってごらんイノシシ君行きましょう行くぞ!"
+          },
+          {
+            "speechId": 561,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 3915439,
+            "sourceEndMs": 3918880,
+            "text": "声が声が太すぎる行くぞ!"
+          },
+          {
+            "speechId": 562,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 3918880,
+            "sourceEndMs": 3920401,
+            "text": "行くぞ!"
+          },
+          {
+            "speechId": 563,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 3920401,
+            "sourceEndMs": 3923242,
+            "text": "でもイノシシもいなくないか?"
+          },
+          {
+            "speechId": 564,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 3923242,
+            "sourceEndMs": 3927483,
+            "text": "もしかしてもうやっちゃったかもねやっちゃった?"
+          },
+          {
+            "speechId": 565,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 3927483,
+            "sourceEndMs": 3929884,
+            "text": "川他にねえ待ってもうさ移動するこれ?"
+          },
+          {
+            "speechId": 566,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 3930774,
+            "sourceEndMs": 3936278,
+            "text": "ワンチャンありだね、この島結構居だしね、ずっとね、魚釣ってた方がこれ、こう、良いのでは?"
+          },
+          {
+            "speechId": 567,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 3936278,
+            "sourceEndMs": 3947364,
+            "text": "効率確かに、ぐるっと、こっからぐるっとさ、一瞬回ってくか何かさ、特別なものがないか見ながらえっ、目の前に居る?"
+          },
+          {
+            "speechId": 568,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 3947364,
+            "sourceEndMs": 3948205,
+            "text": "えっ?"
+          },
+          {
+            "speechId": 569,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 3948205,
+            "sourceEndMs": 3948425,
+            "text": "居んの?"
+          },
+          {
+            "speechId": 570,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 3948425,
+            "sourceEndMs": 3951647,
+            "text": "こ、こんなのことじゃない?"
+          },
+          {
+            "speechId": 571,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 3951647,
+            "sourceEndMs": 3952167,
+            "text": "分かりづれー!"
+          },
+          {
+            "speechId": 572,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 3952167,
+            "sourceEndMs": 3952407,
+            "text": "分かりづれーこと言うな!"
+          },
+          {
+            "speechId": 573,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 3952407,
+            "sourceEndMs": 3959892,
+            "text": "あ、ま、ま、ま、ま、ま、ま、ま、ま、ま、ま、ま、ま、ま、ま、ま、ま、ま、ま、ま、ま、ま、ま、ま、ま、ま、ま、ま、ま、ま、ま、ま、ま、ま、ま、ま、ま、ま、ま、ま、ま、ま、ま、ま、ま、ま、ま、ま、ま、ま、ま"
+          },
+          {
+            "speechId": 574,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 3961702,
+            "sourceEndMs": 3980088,
+            "text": "こんな顔でこびられてもって話かこの顔ですよとりあえず移動して魚釣りながら素材集めながらダンサーだね行きますか気づいたら結構欠けてるよふざけんなふざけんなふざけんなマジ?"
+          },
+          {
+            "speechId": 575,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 3980088,
+            "sourceEndMs": 3981448,
+            "text": "サメに?"
+          },
+          {
+            "speechId": 576,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 3981448,
+            "sourceEndMs": 3988230,
+            "text": "結構食われてるねこれマジでそういうことするのかするだろうよそりゃ"
+          },
+          {
+            "speechId": 577,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 3989600,
+            "sourceEndMs": 3989963,
+            "text": "とりあえず"
+          },
+          {
+            "speechId": 578,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 3991226,
+            "sourceEndMs": 4017368,
+            "text": "話題がすり減ってますとよしじゃあ出発しますかマリリン今更なんだけどさコーネのさ顔さもうちょい下げてもいいかもよマリリンの顔がさ可愛いフェイスが見えなくなっちゃうあでもね船長はねこうやって下を向いた時にコーネのねあの頭の匂い嗅いでるのからえ、いい匂い?"
+          },
+          {
+            "speechId": 579,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 4017368,
+            "sourceEndMs": 4018950,
+            "text": "うん、臭い泣いちゃったー"
+          },
+          {
+            "speechId": 580,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 4023866,
+            "sourceEndMs": 4029707,
+            "text": "泣くまで時間かかるからねごめんねじわじわ泣くやん早よ泣けやんこれも出発した?"
+          },
+          {
+            "speechId": 581,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 4029707,
+            "sourceEndMs": 4040050,
+            "text": "酷い酷いよあ、もうアンカー外したごめんねはいよーあ、待ってせーの出航!"
+          }
+        ]
+      }
+    ],
+    "outputContract": {
+      "format": "json_only",
+      "schema": {
+        "themes": [
+          {
+            "themeId": "string",
+            "title": "string",
+            "reason": "string_one_sentence",
+            "evidenceRanges": [
+              {
+                "sourceVideoId": "string",
+                "sourceStartMs": "number",
+                "sourceEndMs": "number",
+                "supportingSpeechIds": [
+                  "number_or_range_string"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

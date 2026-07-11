@@ -1,0 +1,34 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "変な場所のカーテンで「いないいないばぁ」を試みる二人",
+      "reason": "間違えて設置してしまったカーテンを使い、お互いに見つめ合いながら「いないいないばぁ」で遊ぶコミカルな掛け合いが綺麗に成立しています。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 10539459,
+          "sourceEndMs": 10617471,
+          "supportingSpeechIds": [
+            "1565-1575"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-11T18:36:12+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_62_YE-faluP7zY",
+    "windowSourceVideoId": "YE-faluP7zY",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nOEWCNc77MI_full_source_input_selection_v003/theme-llm-v002/20260711-full-source-upper-bound-v001/windows/window_62_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/de2c799b84230c8e?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"変な場所のカーテンで「いないいないばぁ」を試みる二人\",\n      \"reason\": \"間違えて設置してしまったカーテンを使い、お互いに見つめ合いながら「いないいないばぁ」で遊ぶコミカルな掛け合いが綺麗に成立しています。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 10539459,\n          \"sourceEndMs\": 10617471,\n          \"supportingSpeechIds\": [\"1565-1575\"]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

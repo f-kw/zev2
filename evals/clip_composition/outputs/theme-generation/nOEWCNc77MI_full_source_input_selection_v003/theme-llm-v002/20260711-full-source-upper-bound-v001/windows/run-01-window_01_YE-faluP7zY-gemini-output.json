@@ -1,0 +1,64 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "ころねの配置に悩むマリン、サザエさん弄りへ発展",
+      "reason": "配信画面上でのころねの最適な配置を模索する中で、サザエさんのオープニングを模した独特のボケや歌が展開され見どころとなっているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 153112,
+          "sourceEndMs": 236189,
+          "supportingSpeechIds": [
+            "3-18"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "竹筒を咥えた『ねずこスタイル』で喋るころね",
+      "reason": "ころねが『鬼滅の刃』のねずこ風の喋り方を真似し、マリンが炭治郎になりきって掛け合いをするコミカルな一幕であるため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 240202,
+          "sourceEndMs": 298984,
+          "supportingSpeechIds": [
+            "19-20"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_003",
+      "title": "上限のサメ襲来？鬼滅の刃のうろ覚えトーク",
+      "reason": "『鬼滅の刃』の用語をうろ覚えのまま喋り「上限のサメ」というパワーワードが生まれ、ゲーム内の空腹や異常な絵面に気づく展開が面白いため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 300578,
+          "sourceEndMs": 328762,
+          "supportingSpeechIds": [
+            21
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-11T16:18:57+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_01_YE-faluP7zY",
+    "windowSourceVideoId": "YE-faluP7zY",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nOEWCNc77MI_full_source_input_selection_v003/theme-llm-v002/20260711-full-source-upper-bound-v001/windows/window_01_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/29b9e4c6f0062e4c?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"ころねの配置に悩むマリン、サザエさん弄りへ発展\",\n      \"reason\": \"配信画面上でのころねの最適な配置を模索する中で、サザエさんのオープニングを模した独特のボケや歌が展開され見どころとなっているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 153112,\n          \"sourceEndMs\": 236189,\n          \"supportingSpeechIds\": [\n            \"3-18\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"竹筒を咥えた『ねずこスタイル』で喋るころね\",\n      \"reason\": \"ころねが『鬼滅の刃』のねずこ風の喋り方を真似し、マリンが炭治郎になりきって掛け合いをするコミカルな一幕であるため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 240202,\n          \"sourceEndMs\": 298984,\n          \"supportingSpeechIds\": [\n            \"19-20\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_003\",\n      \"title\": \"上限のサメ襲来？鬼滅の刃のうろ覚えトーク\",\n      \"reason\": \"『鬼滅の刃』の用語をうろ覚えのまま喋り「上限のサメ」というパワーワードが生まれ、ゲーム内の空腹や異常な絵面に気づく展開が面白いため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 300578,\n          \"sourceEndMs\": 328762,\n          \"supportingSpeechIds\": [\n            21\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

@@ -1,0 +1,64 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "「了解ウォッチ」を連呼するマリンと困惑するころね",
+      "reason": "宝鐘マリンが発した死語「了解ウォッチ」に対して、戌神ころねが突っ込み、さらにマリンが1年分連呼して笑い合う展開が切り抜きとして成立するため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 10140822,
+          "sourceEndMs": 10169298,
+          "supportingSpeechIds": [
+            "1524-1525"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "ゲーム内の「レシピ」の用途と調理台の存在を知る二人",
+      "reason": "レシピの必要性について議論していた二人が、壁に貼れる飾りであることや、調理台があれば料理ができるという仕様をリスナー経由で知る一連の流れが具体的であるため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 10170450,
+          "sourceEndMs": 10230000,
+          "supportingSpeechIds": [
+            "1526-1537"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_003",
+      "title": "リスナーの情報を「ほんとっぷ」と盲信するマリンの持論",
+      "reason": "コメントの情報（本当の情報＝ほんとっぷ）の信憑性を、人数の多さを根拠に「本トップ」と呼び、独自の理論を展開するやり取りが面白いため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 10231174,
+          "sourceEndMs": 10273031,
+          "supportingSpeechIds": [
+            "1538-1540"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-11T18:35:44+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_60_YE-faluP7zY",
+    "windowSourceVideoId": "YE-faluP7zY",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nOEWCNc77MI_full_source_input_selection_v003/theme-llm-v002/20260711-full-source-upper-bound-v001/windows/window_60_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/879bfc23c6604071?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"「了解ウォッチ」を連呼するマリンと困惑するころね\",\n      \"reason\": \"宝鐘マリンが発した死語「了解ウォッチ」に対して、戌神ころねが突っ込み、さらにマリンが1年分連呼して笑い合う展開が切り抜きとして成立するため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 10140822,\n          \"sourceEndMs\": 10169298,\n          \"supportingSpeechIds\": [\n            \"1524-1525\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"ゲーム内の「レシピ」の用途と調理台の存在を知る二人\",\n      \"reason\": \"レシピの必要性について議論していた二人が、壁に貼れる飾りであることや、調理台があれば料理ができるという仕様をリスナー経由で知る一連の流れが具体的であるため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 10170450,\n          \"sourceEndMs\": 10230000,\n          \"supportingSpeechIds\": [\n            \"1526-1537\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_003\",\n      \"title\": \"リスナーの情報を「ほんとっぷ」と盲信するマリンの持論\",\n      \"reason\": \"コメントの情報（本当の情報＝ほんとっぷ）の信憑性を、人数の多さを根拠に「本トップ」と呼び、独自の理論を展開するやり取りが面白いため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 10231174,\n          \"sourceEndMs\": 10273031,\n          \"supportingSpeechIds\": [\n            \"1538-1540\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

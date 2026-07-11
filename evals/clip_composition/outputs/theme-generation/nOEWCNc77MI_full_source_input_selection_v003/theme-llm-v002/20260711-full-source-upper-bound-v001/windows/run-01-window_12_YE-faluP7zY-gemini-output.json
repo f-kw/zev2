@@ -1,0 +1,64 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "女の心理を語る二人",
+      "reason": "アイテム作成時のやり取りから、女の心理や難しさについて共感し合う短い掛け合いが展開されているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 1950126,
+          "sourceEndMs": 1965009,
+          "supportingSpeechIds": [
+            "276-278"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "クジラ肉と言い間違える宝鐘マリン",
+      "reason": "ご飯の準備中に「鳥肉」などの食べ肉を「クジラ肉」と言い間違え、すかさずツッコミを入れられる面白いやり取りがあるため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 2010702,
+          "sourceEndMs": 2023511,
+          "supportingSpeechIds": [
+            "283-284"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_003",
+      "title": "成長を実感して島へ進軍する二人",
+      "reason": "準備を終えて弓を持ち、自分たちの成長を喜びながら次の目的地へ威勢よく出発する様子が描かれているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 2023511,
+          "sourceEndMs": 2049416,
+          "supportingSpeechIds": [
+            "285-291"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-11T16:38:16+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_12_YE-faluP7zY",
+    "windowSourceVideoId": "YE-faluP7zY",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nOEWCNc77MI_full_source_input_selection_v003/theme-llm-v002/20260711-full-source-upper-bound-v001/windows/window_12_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/59e2dfadc274eafc?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"女の心理を語る二人\",\n      \"reason\": \"アイテム作成時のやり取りから、女の心理や難しさについて共感し合う短い掛け合いが展開されているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 1950126,\n          \"sourceEndMs\": 1965009,\n          \"supportingSpeechIds\": [\n            \"276-278\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"クジラ肉と言い間違える宝鐘マリン\",\n      \"reason\": \"ご飯の準備中に「鳥肉」などの食べ肉を「クジラ肉」と言い間違え、すかさずツッコミを入れられる面白いやり取りがあるため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 2010702,\n          \"sourceEndMs\": 2023511,\n          \"supportingSpeechIds\": [\n            \"283-284\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_003\",\n      \"title\": \"成長を実感して島へ進軍する二人\",\n      \"reason\": \"準備を終えて弓を持ち、自分たちの成長を喜びながら次の目的地へ威勢よく出発する様子が描かれているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 2023511,\n          \"sourceEndMs\": 2049416,\n          \"supportingSpeechIds\": [\n            \"285-291\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

@@ -1,0 +1,49 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "サメに襲われころねを身代わりにしようとするマリン",
+      "reason": "マリンがサメに襲われた際、「マリンよりコーネのことを食べてください」と身代わりに差し出そうとするコミカルな掛け合いが切り抜きとして成立するため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 1200098,
+          "sourceEndMs": 1237476,
+          "supportingSpeechIds": [
+            "154-163"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "竹を見つけて『竹取物語』の冒頭を唱え出す二人",
+      "reason": "ゲーム内の竹を見て唐突に「竹取りの翁というものありきり」と古典の暗唱や生き別れの挨拶が始まるシュールな展開が見どころになるため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 1260022,
+          "sourceEndMs": 1280213,
+          "supportingSpeechIds": [
+            "164-167"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-11T16:37:08+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_07_YE-faluP7zY",
+    "windowSourceVideoId": "YE-faluP7zY",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nOEWCNc77MI_full_source_input_selection_v003/theme-llm-v002/20260711-full-source-upper-bound-v001/windows/window_07_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/72ce2f6f3f9b035e?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"サメに襲われころねを身代わりにしようとするマリン\",\n      \"reason\": \"マリンがサメに襲われた際、「マリンよりコーネのことを食べてください」と身代わりに差し出そうとするコミカルな掛け合いが切り抜きとして成立するため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 1200098,\n          \"sourceEndMs\": 1237476,\n          \"supportingSpeechIds\": [\n            \"154-163\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"竹を見つけて『竹取物語』の冒頭を唱え出す二人\",\n      \"reason\": \"ゲーム内の竹を見て唐突に「竹取りの翁というものありきり」と古典の暗唱や生き別れの挨拶が始まるシュールな展開が見どころになるため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 1260022,\n          \"sourceEndMs\": 1280213,\n          \"supportingSpeechIds\": [\n            \"164-167\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

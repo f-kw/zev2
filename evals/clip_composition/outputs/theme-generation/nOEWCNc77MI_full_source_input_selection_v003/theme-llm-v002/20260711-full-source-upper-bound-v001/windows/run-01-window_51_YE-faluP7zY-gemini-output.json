@@ -1,0 +1,79 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "チェストの分別に悩むマリンところね",
+      "reason": "チェストの一画を「備品」や「種置き場」にする提案をしつつ、中身のルール決めに試行錯誤する掛け合いが展開されているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 8440504,
+          "sourceEndMs": 8499668,
+          "supportingSpeechIds": [
+            "1300-1304"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "サメを退治したことを報告するころね",
+      "reason": "マリンのために水中でサメを討伐したころねと、それを聞いて感謝するマリンの微笑ましい協力プレイが見られるため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 8500388,
+          "sourceEndMs": 8516178,
+          "supportingSpeechIds": [
+            "1305-1308"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_003",
+      "title": "海上で船を見失い焦るマリン",
+      "reason": "サメ退治の後に自分たちの船の位置が分からなくなり、お互いに名前を呼び合ってパニックになるコミカルなトラブルが発生しているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 8516178,
+          "sourceEndMs": 8548450,
+          "supportingSpeechIds": [
+            "1308-1318"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_004",
+      "title": "資材の流れから船の方向を推理するマリン",
+      "reason": "船を見失った極限状態から、流れてくる資材の方向をヒントに帰還ルートを閃くという機転の利いた解決策を提示しているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 8550290,
+          "sourceEndMs": 8577698,
+          "supportingSpeechIds": [
+            1319
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-11T18:33:08+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_51_YE-faluP7zY",
+    "windowSourceVideoId": "YE-faluP7zY",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nOEWCNc77MI_full_source_input_selection_v003/theme-llm-v002/20260711-full-source-upper-bound-v001/windows/window_51_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/e32d74dfb36ad540?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"チェストの分別に悩むマリンところね\",\n      \"reason\": \"チェストの一画を「備品」や「種置き場」にする提案をしつつ、中身のルール決めに試行錯誤する掛け合いが展開されているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 8440504,\n          \"sourceEndMs\": 8499668,\n          \"supportingSpeechIds\": [\n            \"1300-1304\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"サメを退治したことを報告するころね\",\n      \"reason\": \"マリンのために水中でサメを討伐したころねと、それを聞いて感謝するマリンの微笑ましい協力プレイが見られるため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 8500388,\n          \"sourceEndMs\": 8516178,\n          \"supportingSpeechIds\": [\n            \"1305-1308\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_003\",\n      \"title\": \"海上で船を見失い焦るマリン\",\n      \"reason\": \"サメ退治の後に自分たちの船の位置が分からなくなり、お互いに名前を呼び合ってパニックになるコミカルなトラブルが発生しているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 8516178,\n          \"sourceEndMs\": 8548450,\n          \"supportingSpeechIds\": [\n            \"1308-1318\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_004\",\n      \"title\": \"資材の流れから船の方向を推理するマリン\",\n      \"reason\": \"船を見失った極限状態から、流れてくる資材の方向をヒントに帰還ルートを閃くという機転の利いた解決策を提示しているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"YE-faluP7zY\",\n          \"sourceStartMs\": 8550290,\n          \"sourceEndMs\": 8577698,\n          \"supportingSpeechIds\": [\n            1319\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}
