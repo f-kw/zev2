@@ -97,7 +97,18 @@ function validateUsedSpeechId(value: unknown): boolean {
   return Boolean(match && Number(match[1]) > 0 && Number(match[2]) >= Number(match[1]));
 }
 
-function parseSelectedCuts(output: JsonRecord): { valid: true; cuts: SelectedCut[] } | { valid: false; cuts: []; issues: string[] } {
+function usedSpeechIdEndpoints(value: unknown): [number, number] | undefined {
+  if (typeof value === 'number' && Number.isInteger(value) && value > 0) return [value, value];
+  if (typeof value !== 'string') return undefined;
+  if (/^\d+$/.test(value) && Number(value) > 0) return [Number(value), Number(value)];
+  const match = value.match(/^(\d+)-(\d+)$/);
+  if (!match) return undefined;
+  const start = Number(match[1]);
+  const end = Number(match[2]);
+  return start > 0 && end >= start ? [start, end] : undefined;
+}
+
+function parseSelectedCuts(output: JsonRecord, inputSpeechIds: Set<number>): { valid: true; cuts: SelectedCut[] } | { valid: false; cuts: []; issues: string[] } {
   if (!Array.isArray(output.selectedCuts)) {
     return { valid: false, cuts: [], issues: ['selectedCutsが配列ではない'] };
   }
@@ -121,6 +132,12 @@ function parseSelectedCuts(output: JsonRecord): { valid: true; cuts: SelectedCut
     if (typeof reason !== 'string' || !reason.trim()) issues.push(`selectedCuts[${index}]のreasonが空`);
     if (!Array.isArray(usedSpeechIds) || usedSpeechIds.length === 0 || !usedSpeechIds.every(validateUsedSpeechId)) {
       issues.push(`selectedCuts[${index}]のusedSpeechIdsが不正`);
+    } else {
+      const missingEndpoints = usedSpeechIds.flatMap((value) => usedSpeechIdEndpoints(value) ?? [])
+        .filter((id) => !inputSpeechIds.has(id));
+      if (missingEndpoints.length > 0) {
+        issues.push(`selectedCuts[${index}]のusedSpeechIds端点が入力に存在しない: ${[...new Set(missingEndpoints)].join(',')}`);
+      }
     }
     if (typeof start === 'number' && typeof end === 'number' && end > start
       && typeof reason === 'string' && reason.trim()
@@ -264,6 +281,12 @@ async function main() {
     if (!evidenceRanges?.length) throw new Error(`候補${candidateIndex}に根拠範囲がありません`);
     const evidenceRangeDurationMs = evidenceRanges.reduce((sum, range) => sum + range.sourceEndMs - range.sourceStartMs, 0);
     const conditionDir = path.dirname(path.join(root, String(input.promptPath)));
+    const payload = await readJson<JsonRecord>(path.join(root, String(input.payloadPath)));
+    const payloadModelInput = payload.modelInput as JsonRecord;
+    const payloadTranscript = payloadModelInput.transcript as JsonRecord;
+    const inputSegments = payloadTranscript.segments;
+    if (!Array.isArray(inputSegments)) throw new Error(`候補${candidateIndex}の入力発話がありません`);
+    const inputSpeechIds = new Set(inputSegments.map((segment) => Number((segment as JsonRecord).speechId)));
 
     for (let runIndex = 1; runIndex <= 3; runIndex += 1) {
       const outputPath = path.join(conditionDir, `run-${String(runIndex).padStart(2, '0')}-gemini-output.json`);
@@ -273,7 +296,7 @@ async function main() {
       let formatIssues: string[] = [];
       if (existsSync(outputPath)) {
         output = await readJson<JsonRecord>(outputPath);
-        const parsed = parseSelectedCuts(output);
+        const parsed = parseSelectedCuts(output, inputSpeechIds);
         formatValid = parsed.valid;
         cuts = parsed.cuts;
         if ('issues' in parsed) formatIssues = parsed.issues;
