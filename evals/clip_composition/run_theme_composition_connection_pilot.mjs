@@ -89,9 +89,11 @@ async function main() {
         inputPromptSha256: input.promptSha256
       };
       await run('pnpm', [
+        '--filter',
+        '@zev2/agent-runner',
         'exec',
         'tsx',
-        'evals/clip_composition/run_web_gemini_prompt.ts',
+        '../evals/clip_composition/run_web_gemini_prompt.ts',
         '--prompt', promptPath,
         '--output', outputPath,
         '--model', 'gemini-web-flash',
