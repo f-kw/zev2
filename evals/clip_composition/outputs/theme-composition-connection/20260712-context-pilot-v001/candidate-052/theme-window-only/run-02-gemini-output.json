@@ -1,0 +1,33 @@
+{
+  "selectedCuts": [
+    {
+      "sourceStartMs": 5162499,
+      "sourceEndMs": 5189318,
+      "reason": "開始根拠: テーマの対象である「ぴょんぴょんマンゴー」という何気ないフレーズが発話される冒頭から切り抜くためです。終了根拠: おもろくないことで笑われるのが気まずいと吐露するやり取りのオチが収束する部分まで含めるためです。除外判断: 候補範囲より前の発話は、別作業に関する雑談であり本テーマと無関係なため除外しました。",
+      "usedSpeechIds": [
+        770
+      ]
+    }
+  ],
+  "runAt": "2026-07-12T17:14:26+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "manualRun": false,
+    "runner": "edge-cdp-text-prompt",
+    "generationSystem": "llm-v012@gemini-web-flash",
+    "upstreamGenerationSystem": "theme-llm-v002@gemini-web-flash",
+    "resultRole": "connected-composition-eval-pilot",
+    "conditionalOnUpstreamRangeHit": true,
+    "promptVersion": "clip_composition_prompt_v012",
+    "runs": 3,
+    "runIndex": 2,
+    "candidateIndex": 52,
+    "contextCondition": "theme-window-only",
+    "inputPromptSha256": "a0888c06ffee4d9f43bdbb96a5ebe1eb84fadccb6a2dcb6d71d815888a0cb061"
+  },
+  "promptFile": "outputs/theme-composition-connection/20260712-context-pilot-v001/candidate-052/theme-window-only/prompt.md",
+  "pageUrl": "https://gemini.google.com/app/23380d41bc90993a?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"selectedCuts\": [\n    {\n      \"sourceStartMs\": 5162499,\n      \"sourceEndMs\": 5189318,\n      \"reason\": \"開始根拠: テーマの対象である「ぴょんぴょんマンゴー」という何気ないフレーズが発話される冒頭から切り抜くためです。終了根拠: おもろくないことで笑われるのが気まずいと吐露するやり取りのオチが収束する部分まで含めるためです。除外判断: 候補範囲より前の発話は、別作業に関する雑談であり本テーマと無関係なため除外しました。\",\n      \"usedSpeechIds\": [\n        770\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

@@ -1,0 +1,33 @@
+{
+  "selectedCuts": [
+    {
+      "sourceStartMs": 278759,
+      "sourceEndMs": 328762,
+      "reason": "開始根拠: テーマである「鬼の鬼柱」という言い間違えのフリとなる、ねずこスタイルについての雑談が始まる発話から選ぶためです。終了根拠: 言い間違えの応酬から我に返り、お腹が空いていることや作業の遅れに気づいて「体を動かすか」と作業を始めようとする展開が収束する発話の終わりまで含めるためです。除外判断: 続く発話22は「いきなりすんごい冷めてる？」と文脈のトーンが変わり、切り抜きのオチの余韻としては別の流れになるため除外しました。",
+      "usedSpeechIds": [
+        "20-21"
+      ]
+    }
+  ],
+  "runAt": "2026-07-12T17:16:41+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "manualRun": false,
+    "runner": "edge-cdp-text-prompt",
+    "generationSystem": "llm-v012@gemini-web-flash",
+    "upstreamGenerationSystem": "theme-llm-v002@gemini-web-flash",
+    "resultRole": "connected-composition-eval-pilot",
+    "conditionalOnUpstreamRangeHit": true,
+    "promptVersion": "clip_composition_prompt_v012",
+    "runs": 3,
+    "runIndex": 1,
+    "candidateIndex": 3,
+    "contextCondition": "theme-window-plus-minus-5m",
+    "inputPromptSha256": "259e343974298a2ce85aba621feec706a6a8996ef36a894ec91dcb38a069ec72"
+  },
+  "promptFile": "outputs/theme-composition-connection/20260712-context-pilot-v001/candidate-003/theme-window-plus-minus-5m/prompt.md",
+  "pageUrl": "https://gemini.google.com/app/bfb589194a4c6707?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"selectedCuts\": [\n    {\n      \"sourceStartMs\": 278759,\n      \"sourceEndMs\": 328762,\n      \"reason\": \"開始根拠: テーマである「鬼の鬼柱」という言い間違えのフリとなる、ねずこスタイルについての雑談が始まる発話から選ぶためです。終了根拠: 言い間違えの応酬から我に返り、お腹が空いていることや作業の遅れに気づいて「体を動かすか」と作業を始めようとする展開が収束する発話の終わりまで含めるためです。除外判断: 続く発話22は「いきなりすんごい冷めてる？」と文脈のトーンが変わり、切り抜きのオチの余韻としては別の流れになるため除外しました。\",\n      \"usedSpeechIds\": [\"20-21\"]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

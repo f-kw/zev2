@@ -1,0 +1,33 @@
+{
+  "selectedCuts": [
+    {
+      "sourceStartMs": 5195944,
+      "sourceEndMs": 5244903,
+      "reason": "開始根拠: マリンが景色に対して「この景色一生忘れないと思う」とエモい演技を始める発話から選択しました。終了根拠: ころねに演技が伝わらず空回りした末に「今日絡みづらい」と言われてオチがつく発話の終了時刻まで含めました。除外判断: 候補範囲冒頭の景色を確認している雑談や、オチの後に伊之助の話など別話題へと移った区間はテーマから外れるため除外しました。",
+      "usedSpeechIds": [
+        "775-81"
+      ]
+    }
+  ],
+  "runAt": "2026-07-12T17:17:24+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "manualRun": false,
+    "runner": "edge-cdp-text-prompt",
+    "generationSystem": "llm-v012@gemini-web-flash",
+    "upstreamGenerationSystem": "theme-llm-v002@gemini-web-flash",
+    "resultRole": "connected-composition-eval-pilot",
+    "conditionalOnUpstreamRangeHit": true,
+    "promptVersion": "clip_composition_prompt_v012",
+    "runs": 3,
+    "runIndex": 1,
+    "candidateIndex": 53,
+    "contextCondition": "theme-window-only",
+    "inputPromptSha256": "b7f3970368064cadcaa57898d0135f18fb3192e98cd5b336b9ac61cd35834252"
+  },
+  "promptFile": "outputs/theme-composition-connection/20260712-context-pilot-v001/candidate-053/theme-window-only/prompt.md",
+  "pageUrl": "https://gemini.google.com/app/e5ea78035b7be9ec?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"selectedCuts\": [\n    {\n      \"sourceStartMs\": 5195944,\n      \"sourceEndMs\": 5244903,\n      \"reason\": \"開始根拠: マリンが景色に対して「この景色一生忘れないと思う」とエモい演技を始める発話から選択しました。終了根拠: ころねに演技が伝わらず空回りした末に「今日絡みづらい」と言われてオチがつく発話の終了時刻まで含めました。除外判断: 候補範囲冒頭の景色を確認している雑談や、オチの後に伊之助の話など別話題へと移った区間はテーマから外れるため除外しました。\",\n      \"usedSpeechIds\": [\"775-81\"]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

@@ -1,0 +1,33 @@
+{
+  "selectedCuts": [
+    {
+      "sourceStartMs": 5190322,
+      "sourceEndMs": 5244903,
+      "reason": "開始根拠: マリンが景色に感動してエモい演技を始める最初の発話から選択しました。終了根拠: ころねに演技が伝わらず空回りした結果、「今日絡みづらい」と言われてオチがつく発話の終了時刻まで含めました。除外判断: それ以降の発話（782〜784）は別のゲーム内エピソードやサメの話題に移っており、テーマの文脈から外れるため除外しました。",
+      "usedSpeechIds": [
+        "771-781"
+      ]
+    }
+  ],
+  "runAt": "2026-07-12T17:17:54+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "manualRun": false,
+    "runner": "edge-cdp-text-prompt",
+    "generationSystem": "llm-v012@gemini-web-flash",
+    "upstreamGenerationSystem": "theme-llm-v002@gemini-web-flash",
+    "resultRole": "connected-composition-eval-pilot",
+    "conditionalOnUpstreamRangeHit": true,
+    "promptVersion": "clip_composition_prompt_v012",
+    "runs": 3,
+    "runIndex": 3,
+    "candidateIndex": 53,
+    "contextCondition": "theme-window-only",
+    "inputPromptSha256": "b7f3970368064cadcaa57898d0135f18fb3192e98cd5b336b9ac61cd35834252"
+  },
+  "promptFile": "outputs/theme-composition-connection/20260712-context-pilot-v001/candidate-053/theme-window-only/prompt.md",
+  "pageUrl": "https://gemini.google.com/app/3eaa847a36353610?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"selectedCuts\": [\n    {\n      \"sourceStartMs\": 5190322,\n      \"sourceEndMs\": 5244903,\n      \"reason\": \"開始根拠: マリンが景色に感動してエモい演技を始める最初の発話から選択しました。終了根拠: ころねに演技が伝わらず空回りした結果、「今日絡みづらい」と言われてオチがつく発話の終了時刻まで含めました。除外判断: それ以降の発話（782〜784）は別のゲーム内エピソードやサメの話題に移っており、テーマの文脈から外れるため除外しました。\",\n      \"usedSpeechIds\": [\n        \"771-781\"\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

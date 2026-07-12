@@ -1,0 +1,1032 @@
+{
+  "kind": "theme_composition_connection_score",
+  "resultRole": "connected-composition-eval-pilot-conditional-on-upstream-range-hit",
+  "runAt": "2026-07-12T08:23:01.232Z",
+  "outputId": "20260712-context-pilot-v001",
+  "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+  "generationSystem": "llm-v012@gemini-web-flash",
+  "upstreamGenerationSystem": "theme-llm-v002@gemini-web-flash",
+  "inputSelectionVersion": "input-selection-v004",
+  "conditionalOnUpstreamRangeHit": true,
+  "successCriterion": {
+    "boundaryToleranceMs": 1000,
+    "match": "all target expected intervals reached and both boundaries within ±1000ms",
+    "reach": "at least one target expected interval has overlap, but match condition is not met",
+    "miss": "no target expected overlap or invalid output format",
+    "candidateAggregation": "best of 3 and majority of 3; one vote each is no-majority"
+  },
+  "runCount": 18,
+  "stageDistribution": {
+    "match": 0,
+    "reach": 17,
+    "miss": 1
+  },
+  "runs": [
+    {
+      "candidateIndex": 52,
+      "contextCondition": "theme-window-only",
+      "runIndex": 1,
+      "stage": "reach",
+      "formatValid": true,
+      "failureTypes": [],
+      "selectedCutCount": 1,
+      "selectedDurationMs": 26819,
+      "evidenceRangeDurationMs": 26819,
+      "selectedToEvidenceDurationRatio": 1,
+      "reachedExpectedIndexes": [
+        11
+      ],
+      "targetExpectedIndexes": [
+        11
+      ],
+      "exactExpectedIndexes": [],
+      "unmatchedTargetExpectedIndexes": [],
+      "unlabeledSelectedCutIndexes": [],
+      "excludedOnlySelectedCutIndexes": [],
+      "outsideEvidenceSelectedCutIndexes": [],
+      "selectedCuts": [
+        {
+          "sourceStartMs": 5162499,
+          "sourceEndMs": 5189318,
+          "reason": "開始根拠: テーマのトリガーである「ぴょんぴょんマンゴー」というフレーズを話し始める発話から開始するためです。終了根拠: くだらないことで大笑いされて気まずくなると吐露する結論の余韻までを含めて収束するためです。除外判断: 前方の発話群（721-769）はゲーム進行や別の雑談でありテーマと無関係なため除外しました。",
+          "usedSpeechIds": [
+            770
+          ]
+        }
+      ],
+      "targetAssessments": [
+        {
+          "expectedIndex": 11,
+          "status": "reached",
+          "selectedCutIndex": 1,
+          "overlapMs": 5344,
+          "startDeltaMs": -21475,
+          "endDeltaMs": 0
+        }
+      ],
+      "outputPath": "evals/clip_composition/outputs/theme-composition-connection/20260712-context-pilot-v001/candidate-052/theme-window-only/run-01-gemini-output.json"
+    },
+    {
+      "candidateIndex": 52,
+      "contextCondition": "theme-window-only",
+      "runIndex": 2,
+      "stage": "reach",
+      "formatValid": true,
+      "failureTypes": [],
+      "selectedCutCount": 1,
+      "selectedDurationMs": 26819,
+      "evidenceRangeDurationMs": 26819,
+      "selectedToEvidenceDurationRatio": 1,
+      "reachedExpectedIndexes": [
+        11
+      ],
+      "targetExpectedIndexes": [
+        11
+      ],
+      "exactExpectedIndexes": [],
+      "unmatchedTargetExpectedIndexes": [],
+      "unlabeledSelectedCutIndexes": [],
+      "excludedOnlySelectedCutIndexes": [],
+      "outsideEvidenceSelectedCutIndexes": [],
+      "selectedCuts": [
+        {
+          "sourceStartMs": 5162499,
+          "sourceEndMs": 5189318,
+          "reason": "開始根拠: テーマの対象である「ぴょんぴょんマンゴー」という何気ないフレーズが発話される冒頭から切り抜くためです。終了根拠: おもろくないことで笑われるのが気まずいと吐露するやり取りのオチが収束する部分まで含めるためです。除外判断: 候補範囲より前の発話は、別作業に関する雑談であり本テーマと無関係なため除外しました。",
+          "usedSpeechIds": [
+            770
+          ]
+        }
+      ],
+      "targetAssessments": [
+        {
+          "expectedIndex": 11,
+          "status": "reached",
+          "selectedCutIndex": 1,
+          "overlapMs": 5344,
+          "startDeltaMs": -21475,
+          "endDeltaMs": 0
+        }
+      ],
+      "outputPath": "evals/clip_composition/outputs/theme-composition-connection/20260712-context-pilot-v001/candidate-052/theme-window-only/run-02-gemini-output.json"
+    },
+    {
+      "candidateIndex": 52,
+      "contextCondition": "theme-window-only",
+      "runIndex": 3,
+      "stage": "reach",
+      "formatValid": true,
+      "failureTypes": [],
+      "selectedCutCount": 1,
+      "selectedDurationMs": 26819,
+      "evidenceRangeDurationMs": 26819,
+      "selectedToEvidenceDurationRatio": 1,
+      "reachedExpectedIndexes": [
+        11
+      ],
+      "targetExpectedIndexes": [
+        11
+      ],
+      "exactExpectedIndexes": [],
+      "unmatchedTargetExpectedIndexes": [],
+      "unlabeledSelectedCutIndexes": [],
+      "excludedOnlySelectedCutIndexes": [],
+      "outsideEvidenceSelectedCutIndexes": [],
+      "selectedCuts": [
+        {
+          "sourceStartMs": 5162499,
+          "sourceEndMs": 5189318,
+          "reason": "開始根拠: テーマのトリガーである「ぴょんぴょんマンゴー」というフレーズの発話から開始するためです。終了根拠: 面白くないことで大笑いされて気まずいと吐露する一連のリアクションとオチが収束する最後の時刻まで含めるためです。除外判断: 候補範囲より前にある発話は、イノシシや板集めに関する別の文脈であるため除外しました。",
+          "usedSpeechIds": [
+            770
+          ]
+        }
+      ],
+      "targetAssessments": [
+        {
+          "expectedIndex": 11,
+          "status": "reached",
+          "selectedCutIndex": 1,
+          "overlapMs": 5344,
+          "startDeltaMs": -21475,
+          "endDeltaMs": 0
+        }
+      ],
+      "outputPath": "evals/clip_composition/outputs/theme-composition-connection/20260712-context-pilot-v001/candidate-052/theme-window-only/run-03-gemini-output.json"
+    },
+    {
+      "candidateIndex": 52,
+      "contextCondition": "theme-window-plus-minus-5m",
+      "runIndex": 1,
+      "stage": "reach",
+      "formatValid": true,
+      "failureTypes": [],
+      "selectedCutCount": 1,
+      "selectedDurationMs": 26819,
+      "evidenceRangeDurationMs": 26819,
+      "selectedToEvidenceDurationRatio": 1,
+      "reachedExpectedIndexes": [
+        11
+      ],
+      "targetExpectedIndexes": [
+        11
+      ],
+      "exactExpectedIndexes": [],
+      "unmatchedTargetExpectedIndexes": [],
+      "unlabeledSelectedCutIndexes": [],
+      "excludedOnlySelectedCutIndexes": [],
+      "outsideEvidenceSelectedCutIndexes": [],
+      "selectedCuts": [
+        {
+          "sourceStartMs": 5162499,
+          "sourceEndMs": 5189318,
+          "reason": "開始根拠: テーマの核心である「ぴょんぴょんマンゴー」というフレーズを自ら発言して笑いを生むポイントから開始するためです。終了根拠: 何気ない言葉で大笑いされたことに対して「おもろくないことでいっぱい笑われると気まずい」と自身の心情を吐露してやり取りが収束する瞬間までを含めるためです。除外判断: 直後の発話は夕焼けの景色に関する別の話題へと完全に切り替わっているため区間から除外します。",
+          "usedSpeechIds": [
+            770
+          ]
+        }
+      ],
+      "targetAssessments": [
+        {
+          "expectedIndex": 11,
+          "status": "reached",
+          "selectedCutIndex": 1,
+          "overlapMs": 5344,
+          "startDeltaMs": -21475,
+          "endDeltaMs": 0
+        }
+      ],
+      "outputPath": "evals/clip_composition/outputs/theme-composition-connection/20260712-context-pilot-v001/candidate-052/theme-window-plus-minus-5m/run-01-gemini-output.json"
+    },
+    {
+      "candidateIndex": 52,
+      "contextCondition": "theme-window-plus-minus-5m",
+      "runIndex": 2,
+      "stage": "reach",
+      "formatValid": true,
+      "failureTypes": [],
+      "selectedCutCount": 1,
+      "selectedDurationMs": 26819,
+      "evidenceRangeDurationMs": 26819,
+      "selectedToEvidenceDurationRatio": 1,
+      "reachedExpectedIndexes": [
+        11
+      ],
+      "targetExpectedIndexes": [
+        11
+      ],
+      "exactExpectedIndexes": [],
+      "unmatchedTargetExpectedIndexes": [],
+      "unlabeledSelectedCutIndexes": [],
+      "excludedOnlySelectedCutIndexes": [],
+      "outsideEvidenceSelectedCutIndexes": [],
+      "selectedCuts": [
+        {
+          "sourceStartMs": 5162499,
+          "sourceEndMs": 5189318,
+          "reason": "開始根拠: テーマの中心となる「ぴょんぴょんマンゴー」というフレーズとそれに対する大笑いが始まる発話から選択しているためです。終了根拠: 面白くないことで笑われるのが気まずいと吐露し、そのやり取りのオチと反応が収束する発話の終端に合わせるためです。除外判断: 前後の発話はゲーム内の夕焼けや別の作業に関する話題であり、テーマと無関係なため除外しています。",
+          "usedSpeechIds": [
+            770
+          ]
+        }
+      ],
+      "targetAssessments": [
+        {
+          "expectedIndex": 11,
+          "status": "reached",
+          "selectedCutIndex": 1,
+          "overlapMs": 5344,
+          "startDeltaMs": -21475,
+          "endDeltaMs": 0
+        }
+      ],
+      "outputPath": "evals/clip_composition/outputs/theme-composition-connection/20260712-context-pilot-v001/candidate-052/theme-window-plus-minus-5m/run-02-gemini-output.json"
+    },
+    {
+      "candidateIndex": 52,
+      "contextCondition": "theme-window-plus-minus-5m",
+      "runIndex": 3,
+      "stage": "reach",
+      "formatValid": true,
+      "failureTypes": [],
+      "selectedCutCount": 1,
+      "selectedDurationMs": 26819,
+      "evidenceRangeDurationMs": 26819,
+      "selectedToEvidenceDurationRatio": 1,
+      "reachedExpectedIndexes": [
+        11
+      ],
+      "targetExpectedIndexes": [
+        11
+      ],
+      "exactExpectedIndexes": [],
+      "unmatchedTargetExpectedIndexes": [],
+      "unlabeledSelectedCutIndexes": [],
+      "excludedOnlySelectedCutIndexes": [],
+      "outsideEvidenceSelectedCutIndexes": [],
+      "selectedCuts": [
+        {
+          "sourceStartMs": 5162499,
+          "sourceEndMs": 5189318,
+          "reason": "開始根拠: テーマの中心となる「ぴょんぴょんマンゴー」のフレーズを口にする発話から始まるためです。終了根拠: 何気ない言葉で大笑いされたことに対して、おもろくないことで笑われるのが気まずいと吐露する一連のやり取りが収束するまで含めるためです。除外判断: 前後の発話はゲーム内のアイテム集めや景色の話をしており、テーマの文脈と無関係なため除外します。",
+          "usedSpeechIds": [
+            770
+          ]
+        }
+      ],
+      "targetAssessments": [
+        {
+          "expectedIndex": 11,
+          "status": "reached",
+          "selectedCutIndex": 1,
+          "overlapMs": 5344,
+          "startDeltaMs": -21475,
+          "endDeltaMs": 0
+        }
+      ],
+      "outputPath": "evals/clip_composition/outputs/theme-composition-connection/20260712-context-pilot-v001/candidate-052/theme-window-plus-minus-5m/run-03-gemini-output.json"
+    },
+    {
+      "candidateIndex": 3,
+      "contextCondition": "theme-window-only",
+      "runIndex": 1,
+      "stage": "reach",
+      "formatValid": true,
+      "failureTypes": [
+        "outside-theme-range-audit"
+      ],
+      "selectedCutCount": 1,
+      "selectedDurationMs": 50003,
+      "evidenceRangeDurationMs": 28184,
+      "selectedToEvidenceDurationRatio": 1.7741626454726085,
+      "reachedExpectedIndexes": [
+        2
+      ],
+      "targetExpectedIndexes": [
+        2
+      ],
+      "exactExpectedIndexes": [],
+      "unmatchedTargetExpectedIndexes": [],
+      "unlabeledSelectedCutIndexes": [],
+      "excludedOnlySelectedCutIndexes": [],
+      "outsideEvidenceSelectedCutIndexes": [
+        1
+      ],
+      "selectedCuts": [
+        {
+          "sourceStartMs": 278759,
+          "sourceEndMs": 328762,
+          "reason": "開始根拠: テーマの「ねずこ」のフリから「鬼の鬼柱」と言い間違え始める流れの起点となる発話のためです。終了根拠: 言い間違えで笑い合った後、空腹に気づいて作業を始めようとする結論までの展開が収束するためです。除外判断: それ以前のサザエさんの歌や位置調整の雑談は、テーマである言い間違えの文脈と無関係なため除外しました。",
+          "usedSpeechIds": [
+            "20-21"
+          ]
+        }
+      ],
+      "targetAssessments": [
+        {
+          "expectedIndex": 2,
+          "status": "reached",
+          "selectedCutIndex": 1,
+          "overlapMs": 3283,
+          "startDeltaMs": -46720,
+          "endDeltaMs": -1958
+        }
+      ],
+      "outputPath": "evals/clip_composition/outputs/theme-composition-connection/20260712-context-pilot-v001/candidate-003/theme-window-only/run-01-gemini-output.json"
+    },
+    {
+      "candidateIndex": 3,
+      "contextCondition": "theme-window-only",
+      "runIndex": 2,
+      "stage": "reach",
+      "formatValid": true,
+      "failureTypes": [
+        "outside-theme-range-audit"
+      ],
+      "selectedCutCount": 1,
+      "selectedDurationMs": 50003,
+      "evidenceRangeDurationMs": 28184,
+      "selectedToEvidenceDurationRatio": 1.7741626454726085,
+      "reachedExpectedIndexes": [
+        2
+      ],
+      "targetExpectedIndexes": [
+        2
+      ],
+      "exactExpectedIndexes": [],
+      "unmatchedTargetExpectedIndexes": [],
+      "unlabeledSelectedCutIndexes": [],
+      "excludedOnlySelectedCutIndexes": [],
+      "outsideEvidenceSelectedCutIndexes": [
+        1
+      ],
+      "selectedCuts": [
+        {
+          "sourceStartMs": 278759,
+          "sourceEndMs": 328762,
+          "reason": "開始根拠: テーマのフリとなる「ねずこ」や「鬼の鬼柱」といった言い間違えが始まる発話から選択しました。終了根拠: 言い間違えから我に返り、作業を始めようとしつつ画面の絵面にツッコミを入れる一連の流れが収束する発話まで含めるためです。除外判断: それ以前のサザエさんや音量調節に関する雑談はテーマの文脈と直接関係がないため除外しました。",
+          "usedSpeechIds": [
+            "20-21"
+          ]
+        }
+      ],
+      "targetAssessments": [
+        {
+          "expectedIndex": 2,
+          "status": "reached",
+          "selectedCutIndex": 1,
+          "overlapMs": 3283,
+          "startDeltaMs": -46720,
+          "endDeltaMs": -1958
+        }
+      ],
+      "outputPath": "evals/clip_composition/outputs/theme-composition-connection/20260712-context-pilot-v001/candidate-003/theme-window-only/run-02-gemini-output.json"
+    },
+    {
+      "candidateIndex": 3,
+      "contextCondition": "theme-window-only",
+      "runIndex": 3,
+      "stage": "reach",
+      "formatValid": true,
+      "failureTypes": [
+        "outside-theme-range-audit"
+      ],
+      "selectedCutCount": 1,
+      "selectedDurationMs": 50003,
+      "evidenceRangeDurationMs": 28184,
+      "selectedToEvidenceDurationRatio": 1.7741626454726085,
+      "reachedExpectedIndexes": [
+        2
+      ],
+      "targetExpectedIndexes": [
+        2
+      ],
+      "exactExpectedIndexes": [],
+      "unmatchedTargetExpectedIndexes": [],
+      "unlabeledSelectedCutIndexes": [],
+      "excludedOnlySelectedCutIndexes": [],
+      "outsideEvidenceSelectedCutIndexes": [
+        1
+      ],
+      "selectedCuts": [
+        {
+          "sourceStartMs": 278759,
+          "sourceEndMs": 328762,
+          "reason": "開始根拠: テーマのフリとなる「ねずこスタイル」の会話から派生して「鬼の鬼柱」と言い間違える発話の起点から開始するためです。終了根拠: 言い間違えの笑いから我に返って「作業しよう」と結論づけて話が収束する最後の発話まで含めるためです。除外判断: それ以前のサザエさんや音量調整に関する雑談はテーマである言い間違いの展開とは無関係であるため除外しました。",
+          "usedSpeechIds": [
+            "20-21"
+          ]
+        }
+      ],
+      "targetAssessments": [
+        {
+          "expectedIndex": 2,
+          "status": "reached",
+          "selectedCutIndex": 1,
+          "overlapMs": 3283,
+          "startDeltaMs": -46720,
+          "endDeltaMs": -1958
+        }
+      ],
+      "outputPath": "evals/clip_composition/outputs/theme-composition-connection/20260712-context-pilot-v001/candidate-003/theme-window-only/run-03-gemini-output.json"
+    },
+    {
+      "candidateIndex": 3,
+      "contextCondition": "theme-window-plus-minus-5m",
+      "runIndex": 1,
+      "stage": "reach",
+      "formatValid": true,
+      "failureTypes": [
+        "outside-theme-range-audit"
+      ],
+      "selectedCutCount": 1,
+      "selectedDurationMs": 50003,
+      "evidenceRangeDurationMs": 28184,
+      "selectedToEvidenceDurationRatio": 1.7741626454726085,
+      "reachedExpectedIndexes": [
+        2
+      ],
+      "targetExpectedIndexes": [
+        2
+      ],
+      "exactExpectedIndexes": [],
+      "unmatchedTargetExpectedIndexes": [],
+      "unlabeledSelectedCutIndexes": [],
+      "excludedOnlySelectedCutIndexes": [],
+      "outsideEvidenceSelectedCutIndexes": [
+        1
+      ],
+      "selectedCuts": [
+        {
+          "sourceStartMs": 278759,
+          "sourceEndMs": 328762,
+          "reason": "開始根拠: テーマである「鬼の鬼柱」という言い間違えのフリとなる、ねずこスタイルについての雑談が始まる発話から選ぶためです。終了根拠: 言い間違えの応酬から我に返り、お腹が空いていることや作業の遅れに気づいて「体を動かすか」と作業を始めようとする展開が収束する発話の終わりまで含めるためです。除外判断: 続く発話22は「いきなりすんごい冷めてる？」と文脈のトーンが変わり、切り抜きのオチの余韻としては別の流れになるため除外しました。",
+          "usedSpeechIds": [
+            "20-21"
+          ]
+        }
+      ],
+      "targetAssessments": [
+        {
+          "expectedIndex": 2,
+          "status": "reached",
+          "selectedCutIndex": 1,
+          "overlapMs": 3283,
+          "startDeltaMs": -46720,
+          "endDeltaMs": -1958
+        }
+      ],
+      "outputPath": "evals/clip_composition/outputs/theme-composition-connection/20260712-context-pilot-v001/candidate-003/theme-window-plus-minus-5m/run-01-gemini-output.json"
+    },
+    {
+      "candidateIndex": 3,
+      "contextCondition": "theme-window-plus-minus-5m",
+      "runIndex": 2,
+      "stage": "reach",
+      "formatValid": true,
+      "failureTypes": [
+        "outside-theme-range-audit"
+      ],
+      "selectedCutCount": 1,
+      "selectedDurationMs": 56643,
+      "evidenceRangeDurationMs": 28184,
+      "selectedToEvidenceDurationRatio": 2.009757309111553,
+      "reachedExpectedIndexes": [
+        2
+      ],
+      "targetExpectedIndexes": [
+        2
+      ],
+      "exactExpectedIndexes": [],
+      "unmatchedTargetExpectedIndexes": [],
+      "unlabeledSelectedCutIndexes": [],
+      "excludedOnlySelectedCutIndexes": [],
+      "outsideEvidenceSelectedCutIndexes": [
+        1
+      ],
+      "selectedCuts": [
+        {
+          "sourceStartMs": 278759,
+          "sourceEndMs": 335402,
+          "reason": "開始根拠: テーマのフリとなる「ねずこスタイル」のトークと「鬼の鬼柱」と言い間違え始める流れが含まれる発話から開始するためです。終了根拠: 言い間違えから我に返って作業を始めようとするやり取りと、それに対する冷めた反応でオチが収束する発話まで含めるためです。除外判断: それ以降の発話は島から出発する具体的なゲーム進行の話題に移るため除外します。",
+          "usedSpeechIds": [
+            "20-22"
+          ]
+        }
+      ],
+      "targetAssessments": [
+        {
+          "expectedIndex": 2,
+          "status": "reached",
+          "selectedCutIndex": 1,
+          "overlapMs": 5241,
+          "startDeltaMs": -46720,
+          "endDeltaMs": 4682
+        }
+      ],
+      "outputPath": "evals/clip_composition/outputs/theme-composition-connection/20260712-context-pilot-v001/candidate-003/theme-window-plus-minus-5m/run-02-gemini-output.json"
+    },
+    {
+      "candidateIndex": 3,
+      "contextCondition": "theme-window-plus-minus-5m",
+      "runIndex": 3,
+      "stage": "reach",
+      "formatValid": true,
+      "failureTypes": [
+        "outside-theme-range-audit"
+      ],
+      "selectedCutCount": 1,
+      "selectedDurationMs": 56643,
+      "evidenceRangeDurationMs": 28184,
+      "selectedToEvidenceDurationRatio": 2.009757309111553,
+      "reachedExpectedIndexes": [
+        2
+      ],
+      "targetExpectedIndexes": [
+        2
+      ],
+      "exactExpectedIndexes": [],
+      "unmatchedTargetExpectedIndexes": [],
+      "unlabeledSelectedCutIndexes": [],
+      "excludedOnlySelectedCutIndexes": [],
+      "outsideEvidenceSelectedCutIndexes": [
+        1
+      ],
+      "selectedCuts": [
+        {
+          "sourceStartMs": 278759,
+          "sourceEndMs": 335402,
+          "reason": "開始根拠: テーマである「鬼の鬼柱」という言い間違えのフリが始まる発話から選択しているためです。終了根拠: 言い間違えで笑い合った後、空腹や作業の遅れに気づいて「作業しよう」という結論になり、相手の冷めた反応で一連の展開が収束する瞬間まで含めるためです。除外判断: それ以降の発話は島から出るゲームの進行やリフォームの紹介といった別の話題へ移行するため除外しています。",
+          "usedSpeechIds": [
+            "20-22"
+          ]
+        }
+      ],
+      "targetAssessments": [
+        {
+          "expectedIndex": 2,
+          "status": "reached",
+          "selectedCutIndex": 1,
+          "overlapMs": 5241,
+          "startDeltaMs": -46720,
+          "endDeltaMs": 4682
+        }
+      ],
+      "outputPath": "evals/clip_composition/outputs/theme-composition-connection/20260712-context-pilot-v001/candidate-003/theme-window-plus-minus-5m/run-03-gemini-output.json"
+    },
+    {
+      "candidateIndex": 53,
+      "contextCondition": "theme-window-only",
+      "runIndex": 1,
+      "stage": "miss",
+      "formatValid": false,
+      "failureTypes": [
+        "output-format",
+        "format:selectedCuts[0]のusedSpeechIdsが不正"
+      ],
+      "selectedCutCount": 0,
+      "selectedDurationMs": 0,
+      "evidenceRangeDurationMs": 88988,
+      "selectedToEvidenceDurationRatio": 0,
+      "reachedExpectedIndexes": [],
+      "targetExpectedIndexes": [
+        12
+      ],
+      "exactExpectedIndexes": [],
+      "unmatchedTargetExpectedIndexes": [
+        12
+      ],
+      "unlabeledSelectedCutIndexes": [],
+      "excludedOnlySelectedCutIndexes": [],
+      "outsideEvidenceSelectedCutIndexes": [],
+      "selectedCuts": [],
+      "targetAssessments": [
+        {
+          "expectedIndex": 12,
+          "status": "not_reached"
+        }
+      ],
+      "outputPath": "evals/clip_composition/outputs/theme-composition-connection/20260712-context-pilot-v001/candidate-053/theme-window-only/run-01-gemini-output.json"
+    },
+    {
+      "candidateIndex": 53,
+      "contextCondition": "theme-window-only",
+      "runIndex": 2,
+      "stage": "reach",
+      "formatValid": true,
+      "failureTypes": [],
+      "selectedCutCount": 1,
+      "selectedDurationMs": 54581,
+      "evidenceRangeDurationMs": 88988,
+      "selectedToEvidenceDurationRatio": 0.6133523621162404,
+      "reachedExpectedIndexes": [
+        12
+      ],
+      "targetExpectedIndexes": [
+        12
+      ],
+      "exactExpectedIndexes": [],
+      "unmatchedTargetExpectedIndexes": [],
+      "unlabeledSelectedCutIndexes": [],
+      "excludedOnlySelectedCutIndexes": [],
+      "outsideEvidenceSelectedCutIndexes": [],
+      "selectedCuts": [
+        {
+          "sourceStartMs": 5190322,
+          "sourceEndMs": 5244903,
+          "reason": "開始根拠: マリンが景色に対して「綺麗」とエモい演技のフリを始める発話からカットを開始するためです。終了根拠: ころねに「今日絡みづらい」と突っ込まれ、掛け合いのオチと余韻が収束する発話までを含めるためです。除外判断: 発話782以降は伊之助の話題やゲームのサメに関する別の話題に移行しているため、テーマ対象外として除外しました。",
+          "usedSpeechIds": [
+            "771-781"
+          ]
+        }
+      ],
+      "targetAssessments": [
+        {
+          "expectedIndex": 12,
+          "status": "reached",
+          "selectedCutIndex": 1,
+          "overlapMs": 1761,
+          "startDeltaMs": -26909,
+          "endDeltaMs": 25911
+        }
+      ],
+      "outputPath": "evals/clip_composition/outputs/theme-composition-connection/20260712-context-pilot-v001/candidate-053/theme-window-only/run-02-gemini-output.json"
+    },
+    {
+      "candidateIndex": 53,
+      "contextCondition": "theme-window-only",
+      "runIndex": 3,
+      "stage": "reach",
+      "formatValid": true,
+      "failureTypes": [],
+      "selectedCutCount": 1,
+      "selectedDurationMs": 54581,
+      "evidenceRangeDurationMs": 88988,
+      "selectedToEvidenceDurationRatio": 0.6133523621162404,
+      "reachedExpectedIndexes": [
+        12
+      ],
+      "targetExpectedIndexes": [
+        12
+      ],
+      "exactExpectedIndexes": [],
+      "unmatchedTargetExpectedIndexes": [],
+      "unlabeledSelectedCutIndexes": [],
+      "excludedOnlySelectedCutIndexes": [],
+      "outsideEvidenceSelectedCutIndexes": [],
+      "selectedCuts": [
+        {
+          "sourceStartMs": 5190322,
+          "sourceEndMs": 5244903,
+          "reason": "開始根拠: マリンが景色に感動してエモい演技を始める最初の発話から選択しました。終了根拠: ころねに演技が伝わらず空回りした結果、「今日絡みづらい」と言われてオチがつく発話の終了時刻まで含めました。除外判断: それ以降の発話（782〜784）は別のゲーム内エピソードやサメの話題に移っており、テーマの文脈から外れるため除外しました。",
+          "usedSpeechIds": [
+            "771-781"
+          ]
+        }
+      ],
+      "targetAssessments": [
+        {
+          "expectedIndex": 12,
+          "status": "reached",
+          "selectedCutIndex": 1,
+          "overlapMs": 1761,
+          "startDeltaMs": -26909,
+          "endDeltaMs": 25911
+        }
+      ],
+      "outputPath": "evals/clip_composition/outputs/theme-composition-connection/20260712-context-pilot-v001/candidate-053/theme-window-only/run-03-gemini-output.json"
+    },
+    {
+      "candidateIndex": 53,
+      "contextCondition": "theme-window-plus-minus-5m",
+      "runIndex": 1,
+      "stage": "reach",
+      "formatValid": true,
+      "failureTypes": [],
+      "selectedCutCount": 1,
+      "selectedDurationMs": 88988,
+      "evidenceRangeDurationMs": 88988,
+      "selectedToEvidenceDurationRatio": 1,
+      "reachedExpectedIndexes": [
+        12
+      ],
+      "targetExpectedIndexes": [
+        12
+      ],
+      "exactExpectedIndexes": [],
+      "unmatchedTargetExpectedIndexes": [],
+      "unlabeledSelectedCutIndexes": [],
+      "excludedOnlySelectedCutIndexes": [],
+      "outsideEvidenceSelectedCutIndexes": [],
+      "selectedCuts": [
+        {
+          "sourceStartMs": 5190322,
+          "sourceEndMs": 5279310,
+          "reason": "開始根拠: マリンが景色に感動してエモい演技（フリ）を始める発話から開始するためです。終了根拠: ころねに「絡みづらい」と言われた後、別の話題（サメの襲来）に移って会話の余韻が収束する瞬間までを含めるためです。除外判断: 候補範囲外の前後（speechId: 770以前、785以降）は全く別の作業や雑談を行っているため除外します。",
+          "usedSpeechIds": [
+            "771-784"
+          ]
+        }
+      ],
+      "targetAssessments": [
+        {
+          "expectedIndex": 12,
+          "status": "reached",
+          "selectedCutIndex": 1,
+          "overlapMs": 1761,
+          "startDeltaMs": -26909,
+          "endDeltaMs": 60318
+        }
+      ],
+      "outputPath": "evals/clip_composition/outputs/theme-composition-connection/20260712-context-pilot-v001/candidate-053/theme-window-plus-minus-5m/run-01-gemini-output.json"
+    },
+    {
+      "candidateIndex": 53,
+      "contextCondition": "theme-window-plus-minus-5m",
+      "runIndex": 2,
+      "stage": "reach",
+      "formatValid": true,
+      "failureTypes": [],
+      "selectedCutCount": 1,
+      "selectedDurationMs": 54581,
+      "evidenceRangeDurationMs": 88988,
+      "selectedToEvidenceDurationRatio": 0.6133523621162404,
+      "reachedExpectedIndexes": [
+        12
+      ],
+      "targetExpectedIndexes": [
+        12
+      ],
+      "exactExpectedIndexes": [],
+      "unmatchedTargetExpectedIndexes": [],
+      "unlabeledSelectedCutIndexes": [],
+      "excludedOnlySelectedCutIndexes": [],
+      "outsideEvidenceSelectedCutIndexes": [],
+      "selectedCuts": [
+        {
+          "sourceStartMs": 5190322,
+          "sourceEndMs": 5244903,
+          "reason": "開始根拠: マリンが景色に感動してエモい演技（フリ）を始める発話から開始するためです。終了根拠: ころねから「今日絡みづらい」と言われて掛け合いのオチが成立し、その反応が収束する発話まで含めるためです。除外判断: 候補範囲の末尾にある伊之助に関する話題やサメ襲来のくだりは、テーマであるエモい演技の空回りとは関係がないため除外しました。",
+          "usedSpeechIds": [
+            "771-781"
+          ]
+        }
+      ],
+      "targetAssessments": [
+        {
+          "expectedIndex": 12,
+          "status": "reached",
+          "selectedCutIndex": 1,
+          "overlapMs": 1761,
+          "startDeltaMs": -26909,
+          "endDeltaMs": 25911
+        }
+      ],
+      "outputPath": "evals/clip_composition/outputs/theme-composition-connection/20260712-context-pilot-v001/candidate-053/theme-window-plus-minus-5m/run-02-gemini-output.json"
+    },
+    {
+      "candidateIndex": 53,
+      "contextCondition": "theme-window-plus-minus-5m",
+      "runIndex": 3,
+      "stage": "reach",
+      "formatValid": true,
+      "failureTypes": [],
+      "selectedCutCount": 1,
+      "selectedDurationMs": 88988,
+      "evidenceRangeDurationMs": 88988,
+      "selectedToEvidenceDurationRatio": 1,
+      "reachedExpectedIndexes": [
+        12
+      ],
+      "targetExpectedIndexes": [
+        12
+      ],
+      "exactExpectedIndexes": [],
+      "unmatchedTargetExpectedIndexes": [],
+      "unlabeledSelectedCutIndexes": [],
+      "excludedOnlySelectedCutIndexes": [],
+      "outsideEvidenceSelectedCutIndexes": [],
+      "selectedCuts": [
+        {
+          "sourceStartMs": 5190322,
+          "sourceEndMs": 5279310,
+          "reason": "開始根拠: マリンが景色に感動してエモい演技を始める最初の発話から開始するためです。終了根拠: 演技が空回りした後に「今日絡みづらい」と言われるオチから、直後のサメ襲来で話題が変わる直前の余韻までを最小区間として含めるためです。除外判断: 候補範囲外の前後（ID 770以前、ID 785以降）は、テーマとは関係のない別の雑談や作業を行っているため除外します。",
+          "usedSpeechIds": [
+            "771-784"
+          ]
+        }
+      ],
+      "targetAssessments": [
+        {
+          "expectedIndex": 12,
+          "status": "reached",
+          "selectedCutIndex": 1,
+          "overlapMs": 1761,
+          "startDeltaMs": -26909,
+          "endDeltaMs": 60318
+        }
+      ],
+      "outputPath": "evals/clip_composition/outputs/theme-composition-connection/20260712-context-pilot-v001/candidate-053/theme-window-plus-minus-5m/run-03-gemini-output.json"
+    }
+  ],
+  "candidateConditions": [
+    {
+      "candidateIndex": 3,
+      "contextCondition": "theme-window-only",
+      "counts": {
+        "match": 0,
+        "reach": 3,
+        "miss": 0
+      },
+      "best": "reach",
+      "majority": "reach",
+      "fluctuation": "stable",
+      "structureSignatures": [
+        "1:2",
+        "1:2",
+        "1:2"
+      ],
+      "boundarySignatures": [
+        "278759-328762",
+        "278759-328762",
+        "278759-328762"
+      ],
+      "selectedToEvidenceDurationRatios": [
+        1.7741626454726085,
+        1.7741626454726085,
+        1.7741626454726085
+      ],
+      "failureTypes": [
+        "outside-theme-range-audit"
+      ]
+    },
+    {
+      "candidateIndex": 3,
+      "contextCondition": "theme-window-plus-minus-5m",
+      "counts": {
+        "match": 0,
+        "reach": 3,
+        "miss": 0
+      },
+      "best": "reach",
+      "majority": "reach",
+      "fluctuation": "boundary",
+      "structureSignatures": [
+        "1:2",
+        "1:2",
+        "1:2"
+      ],
+      "boundarySignatures": [
+        "278759-328762",
+        "278759-335402",
+        "278759-335402"
+      ],
+      "selectedToEvidenceDurationRatios": [
+        1.7741626454726085,
+        2.009757309111553,
+        2.009757309111553
+      ],
+      "failureTypes": [
+        "outside-theme-range-audit"
+      ]
+    },
+    {
+      "candidateIndex": 52,
+      "contextCondition": "theme-window-only",
+      "counts": {
+        "match": 0,
+        "reach": 3,
+        "miss": 0
+      },
+      "best": "reach",
+      "majority": "reach",
+      "fluctuation": "stable",
+      "structureSignatures": [
+        "1:11",
+        "1:11",
+        "1:11"
+      ],
+      "boundarySignatures": [
+        "5162499-5189318",
+        "5162499-5189318",
+        "5162499-5189318"
+      ],
+      "selectedToEvidenceDurationRatios": [
+        1,
+        1,
+        1
+      ],
+      "failureTypes": []
+    },
+    {
+      "candidateIndex": 52,
+      "contextCondition": "theme-window-plus-minus-5m",
+      "counts": {
+        "match": 0,
+        "reach": 3,
+        "miss": 0
+      },
+      "best": "reach",
+      "majority": "reach",
+      "fluctuation": "stable",
+      "structureSignatures": [
+        "1:11",
+        "1:11",
+        "1:11"
+      ],
+      "boundarySignatures": [
+        "5162499-5189318",
+        "5162499-5189318",
+        "5162499-5189318"
+      ],
+      "selectedToEvidenceDurationRatios": [
+        1,
+        1,
+        1
+      ],
+      "failureTypes": []
+    },
+    {
+      "candidateIndex": 53,
+      "contextCondition": "theme-window-only",
+      "counts": {
+        "match": 0,
+        "reach": 2,
+        "miss": 1
+      },
+      "best": "reach",
+      "majority": "reach",
+      "fluctuation": "structural",
+      "structureSignatures": [
+        "0:",
+        "1:12",
+        "1:12"
+      ],
+      "boundarySignatures": [
+        "",
+        "5190322-5244903",
+        "5190322-5244903"
+      ],
+      "selectedToEvidenceDurationRatios": [
+        0,
+        0.6133523621162404,
+        0.6133523621162404
+      ],
+      "failureTypes": [
+        "output-format",
+        "format:selectedCuts[0]のusedSpeechIdsが不正"
+      ]
+    },
+    {
+      "candidateIndex": 53,
+      "contextCondition": "theme-window-plus-minus-5m",
+      "counts": {
+        "match": 0,
+        "reach": 3,
+        "miss": 0
+      },
+      "best": "reach",
+      "majority": "reach",
+      "fluctuation": "boundary",
+      "structureSignatures": [
+        "1:12",
+        "1:12",
+        "1:12"
+      ],
+      "boundarySignatures": [
+        "5190322-5279310",
+        "5190322-5244903",
+        "5190322-5279310"
+      ],
+      "selectedToEvidenceDurationRatios": [
+        1,
+        0.6133523621162404,
+        1
+      ],
+      "failureTypes": []
+    }
+  ],
+  "conditionStats": [
+    {
+      "condition": "theme-window-only",
+      "majorityMatch": 0,
+      "majorityReach": 3,
+      "bestMatch": 0,
+      "bestReach": 3,
+      "structuralFluctuation": 1
+    },
+    {
+      "condition": "theme-window-plus-minus-5m",
+      "majorityMatch": 0,
+      "majorityReach": 3,
+      "bestMatch": 0,
+      "bestReach": 3,
+      "structuralFluctuation": 0
+    }
+  ],
+  "contextComparison": {
+    "recommendedContextCondition": "theme-window-plus-minus-5m",
+    "reason": "事前登録順で比較し、多数決一致 0、多数決到達 3、最良一致 0、最良到達 3、構造揺れ 0 だったため。",
+    "rule": "majority match, majority reach, best match, best reach, fewer structural fluctuations, then theme-window-only"
+  }
+}

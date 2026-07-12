@@ -1,0 +1,33 @@
+{
+  "selectedCuts": [
+    {
+      "sourceStartMs": 5162499,
+      "sourceEndMs": 5189318,
+      "reason": "開始根拠: テーマの核心である「ぴょんぴょんマンゴー」というフレーズを自ら発言して笑いを生むポイントから開始するためです。終了根拠: 何気ない言葉で大笑いされたことに対して「おもろくないことでいっぱい笑われると気まずい」と自身の心情を吐露してやり取りが収束する瞬間までを含めるためです。除外判断: 直後の発話は夕焼けの景色に関する別の話題へと完全に切り替わっているため区間から除外します。",
+      "usedSpeechIds": [
+        770
+      ]
+    }
+  ],
+  "runAt": "2026-07-12T17:14:58+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "manualRun": false,
+    "runner": "edge-cdp-text-prompt",
+    "generationSystem": "llm-v012@gemini-web-flash",
+    "upstreamGenerationSystem": "theme-llm-v002@gemini-web-flash",
+    "resultRole": "connected-composition-eval-pilot",
+    "conditionalOnUpstreamRangeHit": true,
+    "promptVersion": "clip_composition_prompt_v012",
+    "runs": 3,
+    "runIndex": 1,
+    "candidateIndex": 52,
+    "contextCondition": "theme-window-plus-minus-5m",
+    "inputPromptSha256": "8daaf9d9fd17ebbdfebad515709a4ccd9d74acccd47b2fa66370c65add5c4ca1"
+  },
+  "promptFile": "outputs/theme-composition-connection/20260712-context-pilot-v001/candidate-052/theme-window-plus-minus-5m/prompt.md",
+  "pageUrl": "https://gemini.google.com/app/3269da17fd2b6c8a?hl=ja",
+  "rawResponseText": "{\n\"selectedCuts\": [\n{\n\"sourceStartMs\": 5162499,\n\"sourceEndMs\": 5189318,\n\"reason\": \"開始根拠: テーマの核心である「ぴょんぴょんマンゴー」というフレーズを自ら発言して笑いを生むポイントから開始するためです。終了根拠: 何気ない言葉で大笑いされたことに対して「おもろくないことでいっぱい笑われると気まずい」と自身の心情を吐露してやり取りが収束する瞬間までを含めるためです。除外判断: 直後の発話は夕焼けの景色に関する別の話題へと完全に切り替わっているため区間から除外します。\",\n\"usedSpeechIds\": [\n770\n]\n}\n]\n}\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

@@ -1,0 +1,33 @@
+{
+  "selectedCuts": [
+    {
+      "sourceStartMs": 278759,
+      "sourceEndMs": 335402,
+      "reason": "開始根拠: テーマである「鬼の鬼柱」という言い間違えのフリが始まる発話から選択しているためです。終了根拠: 言い間違えで笑い合った後、空腹や作業の遅れに気づいて「作業しよう」という結論になり、相手の冷めた反応で一連の展開が収束する瞬間まで含めるためです。除外判断: それ以降の発話は島から出るゲームの進行やリフォームの紹介といった別の話題へ移行するため除外しています。",
+      "usedSpeechIds": [
+        "20-22"
+      ]
+    }
+  ],
+  "runAt": "2026-07-12T17:17:10+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "manualRun": false,
+    "runner": "edge-cdp-text-prompt",
+    "generationSystem": "llm-v012@gemini-web-flash",
+    "upstreamGenerationSystem": "theme-llm-v002@gemini-web-flash",
+    "resultRole": "connected-composition-eval-pilot",
+    "conditionalOnUpstreamRangeHit": true,
+    "promptVersion": "clip_composition_prompt_v012",
+    "runs": 3,
+    "runIndex": 3,
+    "candidateIndex": 3,
+    "contextCondition": "theme-window-plus-minus-5m",
+    "inputPromptSha256": "259e343974298a2ce85aba621feec706a6a8996ef36a894ec91dcb38a069ec72"
+  },
+  "promptFile": "outputs/theme-composition-connection/20260712-context-pilot-v001/candidate-003/theme-window-plus-minus-5m/prompt.md",
+  "pageUrl": "https://gemini.google.com/app/3f19f4146ad12a67?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"selectedCuts\": [\n    {\n      \"sourceStartMs\": 278759,\n      \"sourceEndMs\": 335402,\n      \"reason\": \"開始根拠: テーマである「鬼の鬼柱」という言い間違えのフリが始まる発話から選択しているためです。終了根拠: 言い間違えで笑い合った後、空腹や作業の遅れに気づいて「作業しよう」という結論になり、相手の冷めた反応で一連の展開が収束する瞬間まで含めるためです。除外判断: それ以降の発話は島から出るゲームの進行やリフォームの紹介といった別の話題へ移行するため除外しています。\",\n      \"usedSpeechIds\": [\n        \"20-22\"\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

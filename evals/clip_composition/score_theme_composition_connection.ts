@@ -184,6 +184,17 @@ function stageLabel(value: string): string {
 function reportMarkdown(result: JsonRecord): string {
   const candidateConditions = result.candidateConditions as JsonRecord[];
   const runs = result.runs as RunAssessment[];
+  const conditionStats = ['theme-window-only', 'theme-window-plus-minus-5m'].map((condition) => {
+    const conditionRuns = runs.filter((run) => run.contextCondition === condition);
+    return {
+      condition,
+      match: conditionRuns.filter((run) => run.stage === 'match').length,
+      reach: conditionRuns.filter((run) => run.stage === 'reach').length,
+      miss: conditionRuns.filter((run) => run.stage === 'miss').length,
+      formatFailure: conditionRuns.filter((run) => run.failureTypes.includes('output-format')).length,
+      outsideAudit: conditionRuns.filter((run) => run.failureTypes.includes('outside-theme-range-audit')).length
+    };
+  });
   const lines = [
     '# theme-llm-v002 → llm-v012 文脈パイロット結果',
     '',
@@ -193,16 +204,33 @@ function reportMarkdown(result: JsonRecord): string {
     '- 成功基準: 一致=対象expected全件へ到達し両境界±1000ms以内、到達=少なくとも1件と重なる、不達=重なり0または形式不成立',
     '- 未ラベル選択は即減点しない',
     '',
+    '## 条件別の三段階分布',
+    '',
+    '| 文脈 | 一致 | 到達 | 不達 | 出力形式 | 根拠範囲外へ出た監査 |',
+    '| --- | ---: | ---: | ---: | ---: | ---: |'
+  ];
+  for (const item of conditionStats) {
+    lines.push(`| ${item.condition} | ${item.match} | ${item.reach} | ${item.miss} | ${item.formatFailure} | ${item.outsideAudit} |`);
+  }
+  lines.push(
+    '',
     '## 候補×条件の3 run集計',
     '',
     '| 候補 | 文脈 | 一致 | 到達 | 不達 | 最良 | 多数決 | 揺れ | 選択/根拠 長さ比 |',
     '| ---: | --- | ---: | ---: | ---: | --- | --- | --- | --- |'
-  ];
+  );
   for (const item of candidateConditions) {
     const counts = item.counts as Record<Stage, number>;
     const ratios = item.selectedToEvidenceDurationRatios as number[];
     lines.push(`| ${item.candidateIndex} | ${item.contextCondition} | ${counts.match} | ${counts.reach} | ${counts.miss} | ${stageLabel(String(item.best))} | ${stageLabel(String(item.majority))} | ${item.fluctuation} | ${ratios.map((ratio) => ratio.toFixed(4)).join(' / ')} |`);
   }
+  const broad = candidateConditions.filter((item) => item.candidateIndex === 53);
+  lines.push('', '## 広い根拠範囲を絞れたか', '');
+  for (const item of broad) {
+    const ratios = item.selectedToEvidenceDurationRatios as number[];
+    lines.push(`- ${item.contextCondition}: 根拠88.988秒に対する選択長の比は ${ratios.map((ratio) => ratio.toFixed(4)).join(' / ')}。`);
+  }
+  lines.push('- 比が1未満なら根拠範囲より短く絞った、1なら全範囲、0は採点可能な区間を得られなかったことを表す。');
   lines.push('', '## run別', '', '| 候補 | 文脈 | run | 判定 | 到達expected | 一致expected | 選択数 | 失敗型 |', '| ---: | --- | ---: | --- | --- | --- | ---: | --- |');
   for (const run of runs) {
     lines.push(`| ${run.candidateIndex} | ${run.contextCondition} | ${run.runIndex} | ${stageLabel(run.stage)} | ${run.reachedExpectedIndexes.join(', ') || '-'} | ${run.exactExpectedIndexes.join(', ') || '-'} | ${run.selectedCutCount} | ${run.failureTypes.join(', ') || '-'} |`);
@@ -211,6 +239,8 @@ function reportMarkdown(result: JsonRecord): string {
   const comparison = result.contextComparison as JsonRecord;
   lines.push(`- 事前登録規則による本走候補: ${comparison.recommendedContextCondition}`);
   lines.push(`- 決定理由: ${comparison.reason}`);
+  lines.push('- 2条件とも候補単位の多数決と最良は3候補すべて「到達」で、「一致」は0候補だった。選択差は、テーマ窓のみで1件の出力形式不成立が構造揺れとして残り、拡張条件では不達が0件だった点。');
+  lines.push('- 拡張条件は境界精度を改善したとは読まない。候補3では終端が長くなる揺れ、候補53では根拠全体を使うrunと61.34%まで絞るrunの境界揺れがあった。');
   lines.push('');
   return lines.join('\n');
 }
