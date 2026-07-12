@@ -96,11 +96,11 @@ function boundaryForm(boundary) {
     <h3>確認${id}の答え</h3>
     <p>上の2本、下の2本を見て答えてください。迷ったら「わからない」で大丈夫です。</p>
     <div class="decision-grid">
-      <label>1. 上の左：この所で、話や場面が変わりましたか？
+      <label>1. 上の左：ここで途中を飛ばし、別の時刻へジャンプしたように見えますか？
         <select data-boundary-field="clipSwitch">
           ${option('', '未回答')}
-          ${option('true', 'はい、変わった')}
-          ${option('false', 'いいえ、そのまま続いている')}
+          ${option('true', 'はい、時間がジャンプした')}
+          ${option('false', 'いいえ、元配信の時間どおり続いている')}
           ${option('unresolved', 'わからない')}
         </select>
       </label>
@@ -155,12 +155,13 @@ function blockRows(blocks) {
 }
 
 function finalForm(template) {
+  const blockCount = template.blocks.length;
   return `
   <section class="decision-final" id="decision-final">
     <h2>最後の確認</h2>
-    <p>機械が「切り抜きは元配信のこの17か所を使った」と予想しています。下のボタンで、さきほどの回答から17か所を仮入力します。基本は内容を見るだけで、違う所やわからない所があれば直してください。</p>
+    <p>機械が「切り抜きは元配信のこの${blockCount}か所を使った」と予想しています。下のボタンで、さきほどの回答から${blockCount}か所を仮入力します。基本は内容を見るだけで、違う所やわからない所があれば直してください。</p>
     <div class="decision-actions">
-      <button type="button" id="derive-blocks">さきほどの回答から17か所を仮入力する</button>
+      <button type="button" id="derive-blocks">さきほどの回答から${blockCount}か所を仮入力する</button>
     </div>
     <div class="block-table-wrap">
       <table class="block-decision-table">
@@ -257,18 +258,21 @@ function styles() {
 }
 
 function topPanel(template) {
+  const blockCount = template.blocks.length;
+  const boundaryCount = template.boundaries.length;
   return `
   <div class="decision-progress">
-    <span id="boundary-progress">切り替わり 0/${template.boundaries.length}</span>
+    <span id="boundary-progress">時間ジャンプ 0/${template.boundaries.length}</span>
     <span id="block-progress">使用箇所 0/${template.blocks.length}</span>
     <span id="save-state">自動保存待ち</span>
   </div>
   <section class="decision-meta">
     <h2>何を確認する画面？</h2>
-    <p>この切り抜きは、元配信の17か所をつないで作られていると機械が予想しました。その予想が本当に合っているかを、16個の切り替わりで確認します。</p>
+    <p>この切り抜きは、元配信の${blockCount}か所をつないで作られていると機械が予想しました。その予想が本当に合っているかを、${boundaryCount}個の「元配信の時間がジャンプした所」で確認します。</p>
+    <p><strong>話題が変わったかは見ません。</strong>話題が変わっても元配信が時間どおり続いていれば「ジャンプしていない」です。同じ話題の途中でも、編集で間を飛ばして別の時刻へつないでいれば「ジャンプした」です。</p>
     <p><strong>各番号で見る動画は4本だけです。</strong></p>
     <ol>
-      <li><strong>上の左</strong>：切り抜きだけを見る。この所で話や場面が変わったか。</li>
+      <li><strong>上の左</strong>：切り抜きだけを見る。編集で途中を飛ばし、別の時刻へジャンプしたように見えるか。</li>
       <li><strong>上の右</strong>：元配信の前半と後半をつないだ動画。別の所へ飛んでいるか。</li>
       <li><strong>下の左</strong>：切り替わる前。左右が同じ会話・場面か。</li>
       <li><strong>下の右</strong>：切り替わった後。左右が同じ会話・場面か。</li>
@@ -436,7 +440,7 @@ function script(template) {
         const answered = boundaries.filter((boundary) => boundary._ui.answered).length;
         const blocks = template.blocks.map(blockResult);
         const decided = blocks.filter((block) => block.status !== 'pending').length;
-        document.getElementById('boundary-progress').textContent = '切り替わり ' + answered + '/' + boundaries.length;
+        document.getElementById('boundary-progress').textContent = '時間ジャンプ ' + answered + '/' + boundaries.length;
         document.getElementById('block-progress').textContent = '使用箇所 ' + decided + '/' + blocks.length;
       }
 
@@ -444,8 +448,8 @@ function script(template) {
         const issues = [];
         if (!decision.humanConfirmation.checkedBy) issues.push('確認した人の名前がありません');
         if (!decision.humanConfirmation.checkedAt) issues.push('確認した日がありません');
-        if (!decision.humanConfirmation.allBoundariesReviewed) issues.push('16個の切り替わりに未回答があります');
-        if (!decision.humanConfirmation.allBlocksReviewed) issues.push('17個の使用箇所に未確認があります');
+        if (!decision.humanConfirmation.allBoundariesReviewed) issues.push('${template.boundaries.length}個の時間ジャンプ確認に未回答があります');
+        if (!decision.humanConfirmation.allBlocksReviewed) issues.push('${template.blocks.length}個の使用箇所に未確認があります');
         if (!decision.fixedTheme.title) issues.push('「この切り抜きは何についての動画か」が未入力です');
         if (!decision.blocks.some((block) => block.status === 'accepted')) issues.push('正しいと確認できた使用箇所がありません');
         for (const block of decision.blocks) {
@@ -458,7 +462,7 @@ function script(template) {
             issues.push('確認' + boundary.boundaryIndex + 'の「違う・わからない」理由がありません');
           }
           if (boundary.status === 'confirmed' && boundaryUi[boundary.boundaryIndex].clipSwitch !== 'true') {
-            issues.push('確認' + boundary.boundaryIndex + 'で、切り抜き側の場面変化が「はい」になっていません');
+            issues.push('確認' + boundary.boundaryIndex + 'で、切り抜き側の時間ジャンプが「はい」になっていません');
           }
         }
         const accepted = new Set(decision.blocks.filter((block) => block.status === 'accepted').map((block) => block.blockIndex));
@@ -496,7 +500,7 @@ function script(template) {
         const boundaryStatusText = { confirmed: '問題なし', rejected: '違う可能性あり', unresolved: 'わからない', pending: '未回答' };
         const blockStatusText = { accepted: '正しい', rejected: '違う', unresolved: 'わからない', pending: '未確認' };
         const summaryLines = [
-          'B素材 nOEWCNc77MI 人間確認結果',
+          '${template.targetId} 人間確認結果',
           '確認者: ' + (decision.humanConfirmation.checkedBy || '未入力'),
           '確認日: ' + (decision.humanConfirmation.checkedAt || '未入力'),
           '',
@@ -608,8 +612,9 @@ async function main() {
 
   let html = sourceHtml;
   html = html.replace(/  <section class="instructions">[\s\S]*?<\/section>/, '');
-  html = html.replace(/<title>[^<]+<\/title>/, '<title>B素材：切り抜きと元配信の確認</title>');
-  html = html.replace(/<h1>[^<]+<\/h1>/, '<h1>B素材：切り抜きと元配信が同じ場面か確認</h1>');
+  const pageLabel = `${template.targetId}：切り抜きと元配信の確認`;
+  html = html.replace(/<title>[^<]+<\/title>/, `<title>${escapeHtml(pageLabel)}</title>`);
+  html = html.replace(/<h1>[^<]+<\/h1>/, `<h1>${escapeHtml(pageLabel)}</h1>`);
   html = html.replace('</style>', `${styles()}\n  </style>`);
   html = html.replace(/(<h1>[^<]+<\/h1>)/, `$1\n${topPanel(template)}`);
   for (const boundary of template.boundaries) {
@@ -617,10 +622,10 @@ async function main() {
     assert(headingPattern.test(html), `境界${boundary.boundaryIndex}見出しがありません`);
     html = html.replace(headingPattern, `$1\n${boundaryForm(boundary)}`);
   }
-  html = html.replace(/<h2>境界(\d+): block (\d+) -> (\d+)<\/h2>/g, '<h2>確認$1：候補$2から候補$3へ変わる所</h2>');
+  html = html.replace(/<h2>境界(\d+): block (\d+) -> (\d+)<\/h2>/g, '<h2>確認$1：候補$2の後から候補$3へ時間がジャンプする所</h2>');
   html = html.replaceAll('<h3>最初に見る動画</h3>', '<h3>上の2本</h3>');
   html = html.replaceAll('<h3>対応確認の補助</h3>', '<h3>下の2本</h3>');
-  html = html.replaceAll('clip連続再生。切り抜き単体で、境界前から境界後まで実際の順番で見る。', '上の左。切り抜きだけの動画。この所で話や場面が変わるかを見る。');
+  html = html.replaceAll('clip連続再生。切り抜き単体で、境界前から境界後まで実際の順番で見る。', '上の左。切り抜きだけの動画。編集で途中を飛ばし、別の時刻へジャンプしたように見えるかを見る。');
   html = html.replaceAll('source前後連続再生。元動画の前側対応2秒、後側対応2秒を順番につないだ人工連結。別位置に飛んでいるかを見る。', '上の右。元配信の前半と後半をつないだ動画。前後が別の所かを見る。');
   html = html.replaceAll('前側対応確認。左が切り抜き、右が元動画。境界前の対応が合っているかを見る。', '下の左。切り替わる前。左右が同じ会話・場面かを見る。');
   html = html.replaceAll('後側対応確認。左が切り抜き、右が元動画。境界後の対応が合っているかを見る。', '下の右。切り替わった後。左右が同じ会話・場面かを見る。');

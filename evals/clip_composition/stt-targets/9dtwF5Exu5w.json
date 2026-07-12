@@ -14,22 +14,53 @@
       "教師切り抜きは元配信・チャット流速・expected確認前に再生実績順で固定した。"
     ]
   },
-  "sourceCandidates": [
-    {
+  "sourceDiscovery": {
+    "status": "human_review_package_ready",
+    "notes": [
+      "教師切り抜きは元配信・チャット流速・expected確認前に、事前固定した再生実績順で選定した。",
+      "元配信のローカルSTTは30秒分割397/397チャンクを完走した。途中の接続断は完了済みraw応答を保持して同一区間を再送し、3区間のみ15秒分割で補完した。",
+      "STT応答は実音声チャンク境界へ正規化済み。チャンク外の除外・境界補正はいずれも0件。",
+      "切り抜きと元配信の全域DP照合から52候補を得て、10秒以上の元配信位置切り替わりを基準に31素材ブロック・30境界を再構成した。",
+      "31素材ブロック・30境界の入力HTMLを生成し、比較動画180本・音声120本・静止画600枚の存在と動画再生時間を機械確認した。",
+      "fixture凍結には確認パッケージの人間確認と、人間による固定テーマ入力が残っている。"
+    ],
+    "primarySourceCandidate": {
       "id": "o8rZAhARXAc",
-      "sttId": "9dtwF5Exu5w_o8rZAhARXAc_local300_v001",
       "title": "ホロライブ甲子園2025 2年目夏・夏合宿と甲子園初戦",
       "url": "https://www.youtube.com/watch?v=o8rZAhARXAc",
       "localVideoPath": "evals/clip_composition/research/downloads/9dtwF5Exu5w/sources/o8rZAhARXAc/o8rZAhARXAc.mp4",
       "durationSec": 11898.441,
-      "sttRole": "source",
+      "durationText": "3:18:18",
+      "channel": "Marine Ch. 宝鐘マリン",
+      "sttId": "9dtwF5Exu5w_o8rZAhARXAc_local30_v001",
+      "sttStatus": {
+        "fullChunkCount": 397,
+        "processedChunkCount": 397,
+        "partial": false,
+        "segmentCount": 34507,
+        "wordTimestampCount": 34507,
+        "boundaryResolution": {
+          "discardedSegmentCount": 0,
+          "clampedSegmentCount": 0,
+          "discardedWordCount": 0,
+          "clampedWordCount": 0
+        }
+      },
       "notes": [
         "説明欄が示す単一元配信。対応確定はローカルSTT、大域照合、素材ブロック再構成、人間確認後。"
       ]
     }
+  },
+  "requiredOutputs": [
+    "clip側STT結果",
+    "元動画候補の事前固定",
+    "元動画候補の単語タイムスタンプ付きSTT結果",
+    "DP単調アラインメント結果",
+    "素材境界確認パッケージ",
+    "人間確認後のexpectedCuts候補"
   ],
   "freezeStatus": {
     "readyForFreeze": false,
-    "reason": "ローカルSTT、大域照合、素材ブロック再構成、人間確認、固定テーマが未完了。"
+    "reason": "ローカルSTT、大域照合、素材ブロック再構成まで完了。確認パッケージの人間確認と固定テーマが未完了。"
   }
 }
