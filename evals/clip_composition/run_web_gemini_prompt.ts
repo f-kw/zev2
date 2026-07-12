@@ -53,9 +53,19 @@ type ThemeCandidate = {
   [key: string]: unknown;
 };
 
+type BoundaryRefinement = {
+  provisionalCutIndex: number;
+  startBoundaryPointId: string;
+  endBoundaryPointId: string;
+  startReason: string;
+  endReason: string;
+  [key: string]: unknown;
+};
+
 type PromptOutput = {
   selectedCuts?: SelectedCut[];
   themes?: ThemeCandidate[];
+  refinements?: BoundaryRefinement[];
   [key: string]: unknown;
 };
 
@@ -862,7 +872,7 @@ function parsePromptOutput(text: string): PromptOutput | undefined {
   }
 
   const record = parsed as Record<string, unknown>;
-  if (!Array.isArray(record.selectedCuts) && !Array.isArray(record.themes)) {
+  if (!Array.isArray(record.selectedCuts) && !Array.isArray(record.themes) && !Array.isArray(record.refinements)) {
     return undefined;
   }
 
@@ -903,6 +913,23 @@ function parsePromptOutput(text: string): PromptOutput | undefined {
       return theme as ThemeCandidate;
     }).filter((item): item is ThemeCandidate => Boolean(item))
     : undefined;
+  const refinements = Array.isArray(record.refinements)
+    ? record.refinements.map((item) => {
+      if (!item || typeof item !== 'object' || Array.isArray(item)) {
+        return undefined;
+      }
+      const refinement = item as Record<string, unknown>;
+      if (typeof refinement.provisionalCutIndex !== 'number'
+        || !Number.isInteger(refinement.provisionalCutIndex)
+        || typeof refinement.startBoundaryPointId !== 'string'
+        || typeof refinement.endBoundaryPointId !== 'string'
+        || typeof refinement.startReason !== 'string'
+        || typeof refinement.endReason !== 'string') {
+        return undefined;
+      }
+      return refinement as BoundaryRefinement;
+    }).filter((item): item is BoundaryRefinement => Boolean(item))
+    : undefined;
   const isValidEmptyThemes = Array.isArray(record.themes)
     && record.themes.length === 0;
   const containsOnlyInvalidThemes = Array.isArray(record.themes)
@@ -911,17 +938,21 @@ function parsePromptOutput(text: string): PromptOutput | undefined {
   const containsOnlyInvalidSelectedCuts = Array.isArray(record.selectedCuts)
     && record.selectedCuts.length > 0
     && selectedCuts?.length === 0;
-  if (containsOnlyInvalidThemes || containsOnlyInvalidSelectedCuts) {
+  const containsOnlyInvalidRefinements = Array.isArray(record.refinements)
+    && record.refinements.length > 0
+    && refinements?.length === 0;
+  if (containsOnlyInvalidThemes || containsOnlyInvalidSelectedCuts || containsOnlyInvalidRefinements) {
     return undefined;
   }
-  if ((!selectedCuts || selectedCuts.length === 0) && (!themes || themes.length === 0) && !isValidEmptyThemes) {
+  if ((!selectedCuts || selectedCuts.length === 0) && (!themes || themes.length === 0) && (!refinements || refinements.length === 0) && !isValidEmptyThemes) {
     return undefined;
   }
 
   return {
     ...record,
     ...(selectedCuts ? { selectedCuts } : {}),
-    ...(themes ? { themes } : {})
+    ...(themes ? { themes } : {}),
+    ...(refinements ? { refinements } : {})
   };
 }
 
@@ -943,6 +974,15 @@ function canonicalOutput(output: PromptOutput | undefined): string {
       sourceEndMs: cut.sourceEndMs,
       reason: cut.reason,
       usedSpeechIds: cut.usedSpeechIds
+    })));
+  }
+  if (output.refinements) {
+    return JSON.stringify(output.refinements.map((refinement) => ({
+      provisionalCutIndex: refinement.provisionalCutIndex,
+      startBoundaryPointId: refinement.startBoundaryPointId,
+      endBoundaryPointId: refinement.endBoundaryPointId,
+      startReason: refinement.startReason,
+      endReason: refinement.endReason
     })));
   }
   return JSON.stringify((output.themes ?? []).map((theme) => ({
@@ -996,7 +1036,7 @@ async function waitForGeminiOutput(
     latestBodyTextEnd = String(state.bodyText ?? '').slice(-8000);
     const answerOutput = extractPromptOutput(answerText, { prefer: 'first', allowPartial: !rejectPartialExtraction });
     const output = answerOutput ?? (
-      answerText.includes('"selectedCuts"') || answerText.includes('"themes"')
+      answerText.includes('"selectedCuts"') || answerText.includes('"themes"') || answerText.includes('"refinements"')
         ? undefined
         : extractPromptOutput(state.bodyText ?? '', { prefer: 'last', allowPartial: false })
     );
@@ -1034,7 +1074,7 @@ async function waitForGeminiOutput(
     };
   }
 
-  const error = new Error('Gemini返答から selectedCuts/themes JSONを取得できません') as Error & {
+  const error = new Error('Gemini返答から selectedCuts/themes/refinements JSONを取得できません') as Error & {
     geminiDiagnostic?: GeminiExtractionFailureDiagnostic;
   };
   error.geminiDiagnostic = {
@@ -1067,6 +1107,8 @@ async function writeGeminiOutput(
   console.log(`gemini output: ${options.outputPath}`);
   if (output.selectedCuts?.[0]) {
     console.log(`selected cut: ${output.selectedCuts[0].sourceStartMs}-${output.selectedCuts[0].sourceEndMs}`);
+  } else if (output.refinements) {
+    console.log(`refinements: ${output.refinements.length}`);
   } else {
     console.log(`themes: ${output.themes?.length ?? 0}`);
   }
@@ -1084,7 +1126,7 @@ async function writeGeminiFailureDiagnostic(options: CliOptions, error: unknown)
   await writeFile(diagnosticPath, `${JSON.stringify({
     runAt: tokyoTimestamp(new Date()),
     status: 'not_usable_for_scoring_or_human_review',
-    reason: 'Web Geminiの返答から完全なselectedCuts/themes JSONを取得できなかったため、診断用に画面本文だけを保存した。',
+    reason: 'Web Geminiの返答から完全なselectedCuts/themes/refinements JSONを取得できなかったため、診断用に画面本文だけを保存した。',
     model: options.model,
     params: options.params,
     promptFile: options.promptPath ? path.relative(evalRoot, options.promptPath) : undefined,
