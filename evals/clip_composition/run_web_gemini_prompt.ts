@@ -440,7 +440,7 @@ async function waitForExpression<T>(
   label: string,
   timeoutMs = 60000
 ): Promise<T> {
-  const deadline = timeoutMs > 0 ? Date.now() + timeoutMs : Number.POSITIVE_INFINITY;
+  const deadline = Date.now() + timeoutMs;
   while (Date.now() < deadline) {
     const value = await evaluateValue<T | undefined>(cdp, expression).catch(() => undefined);
     if (value) {
@@ -1010,7 +1010,7 @@ async function waitForGeminiOutput(
   timeoutMs: number,
   rejectPartialExtraction: boolean
 ): Promise<{ output: PromptOutput; rawResponseText: string; pageUrl: string }> {
-  const deadline = Date.now() + timeoutMs;
+  const deadline = timeoutMs > 0 ? Date.now() + timeoutMs : Number.POSITIVE_INFINITY;
   let stableCanonical = '';
   let stableSince = 0;
   let latestRawText = '';
