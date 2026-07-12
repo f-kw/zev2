@@ -1,0 +1,2229 @@
+{
+  "kind": "clip_composition_boundary_granularity_two_fixture",
+  "runAt": "2026-07-12T15:58:38.777Z",
+  "purpose": "boundary-v001 design upper-bound diagnosis",
+  "sourcePolicy": "pre-freeze full-source local STT only; frozen fixture transcript is not used because it is clipped at expected material-block boundaries",
+  "relationDefinitions": {
+    "speech_boundary_exact": "expected boundary equals at least one compacted speech start or end",
+    "inside_speech": "not exact and strictly inside at least one compacted speech segment",
+    "non_speech_interval": "not exact and not inside any compacted speech segment"
+  },
+  "fixtures": [
+    {
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "sourceVideoId": "YE-faluP7zY",
+      "expectedPath": "evals/clip_composition/expected/nOEWCNc77MI_multiblock_material_v001.json",
+      "sourceTranscriptPath": "evals/clip_composition/stt/nOEWCNc77MI_YE-faluP7zY_local30_v001/source/transcript.json",
+      "sourceTranscriptIsPreFreezeFullStream": true,
+      "rawWordSegmentCount": 53180,
+      "compactedSpeechSegmentCount": 1749,
+      "expectedCutCount": 13,
+      "cuts": [
+        {
+          "expectedIndex": 1,
+          "sourceStartMs": 260068,
+          "sourceEndMs": 264269,
+          "start": {
+            "boundaryMs": 260068,
+            "relation": "inside_speech",
+            "exactSpeechPoints": [],
+            "coveringSpeechIds": [
+              19
+            ],
+            "nearestSpeechBoundary": {
+              "timeMs": 267270,
+              "kind": "end",
+              "segmentId": 19,
+              "text": "コロナが上がっちゃったちょっと諦めようかなちょっとちょっと難易度高めこれにさなんか文句言われたらちょっと考えような確かに文句ないと思うけどね当然ねこっち向くわはいということでねこっち向くわとか言っちゃったちょっとコーネがね今日ねずこスタイルなんでどうもどうもねずこはそんなこと言わないうんうんうんうん",
+              "signedDistanceMs": 7202,
+              "absoluteDistanceMs": 7202
+            },
+            "nearestWordBoundary": {
+              "timeMs": 260068,
+              "kind": "start",
+              "segmentId": 825,
+              "text": "コ",
+              "signedDistanceMs": 0,
+              "absoluteDistanceMs": 0
+            }
+          },
+          "end": {
+            "boundaryMs": 264269,
+            "relation": "inside_speech",
+            "exactSpeechPoints": [],
+            "coveringSpeechIds": [
+              19
+            ],
+            "nearestSpeechBoundary": {
+              "timeMs": 267270,
+              "kind": "end",
+              "segmentId": 19,
+              "text": "コロナが上がっちゃったちょっと諦めようかなちょっとちょっと難易度高めこれにさなんか文句言われたらちょっと考えような確かに文句ないと思うけどね当然ねこっち向くわはいということでねこっち向くわとか言っちゃったちょっとコーネがね今日ねずこスタイルなんでどうもどうもねずこはそんなこと言わないうんうんうんうん",
+              "signedDistanceMs": 3001,
+              "absoluteDistanceMs": 3001
+            },
+            "nearestWordBoundary": {
+              "timeMs": 264269,
+              "kind": "start",
+              "segmentId": 849,
+              "text": "ず",
+              "signedDistanceMs": 0,
+              "absoluteDistanceMs": 0
+            }
+          }
+        },
+        {
+          "expectedIndex": 2,
+          "sourceStartMs": 325479,
+          "sourceEndMs": 330720,
+          "start": {
+            "boundaryMs": 325479,
+            "relation": "inside_speech",
+            "exactSpeechPoints": [],
+            "coveringSpeechIds": [
+              21
+            ],
+            "nearestSpeechBoundary": {
+              "timeMs": 328762,
+              "kind": "end",
+              "segmentId": 21,
+              "text": "なんだっけ鬼のさなに鬼もっしらってなんだよ強い鬼なんてなんかあれだ上限の月だ上限のサメだよこれはねえマリンマリンやばい腹も減ってるよこれちょっとお前どうしよう作業するかちょっとあ確かに作業しようちょっと喋ってる場合じゃない作業口を動かすか体を動かすかっていうねえこれ待ってちょっと面白くないこの絵面ひよこが立ち並んでる姿",
+              "signedDistanceMs": 3283,
+              "absoluteDistanceMs": 3283
+            },
+            "nearestWordBoundary": {
+              "timeMs": 325479,
+              "kind": "start",
+              "segmentId": 1105,
+              "text": "こ",
+              "signedDistanceMs": 0,
+              "absoluteDistanceMs": 0
+            }
+          },
+          "end": {
+            "boundaryMs": 330720,
+            "relation": "inside_speech",
+            "exactSpeechPoints": [],
+            "coveringSpeechIds": [
+              22
+            ],
+            "nearestSpeechBoundary": {
+              "timeMs": 330060,
+              "kind": "start",
+              "segmentId": 22,
+              "text": "おもろいおもろいいきなりすんごい冷めてる?",
+              "signedDistanceMs": -660,
+              "absoluteDistanceMs": 660
+            },
+            "nearestWordBoundary": {
+              "timeMs": 330720,
+              "kind": "start",
+              "segmentId": 1141,
+              "text": "い",
+              "signedDistanceMs": 0,
+              "absoluteDistanceMs": 0
+            }
+          }
+        },
+        {
+          "expectedIndex": 3,
+          "sourceStartMs": 1052987,
+          "sourceEndMs": 1055347,
+          "start": {
+            "boundaryMs": 1052987,
+            "relation": "inside_speech",
+            "exactSpeechPoints": [],
+            "coveringSpeechIds": [
+              125
+            ],
+            "nearestSpeechBoundary": {
+              "timeMs": 1050106,
+              "kind": "start",
+              "segmentId": 125,
+              "text": "違う、違う違うね、ごめんねやめてね、そんなつもりじゃないからねや、や、やーだけにやめてもう何も言えねえ!",
+              "signedDistanceMs": -2881,
+              "absoluteDistanceMs": 2881
+            },
+            "nearestWordBoundary": {
+              "timeMs": 1052987,
+              "kind": "start",
+              "segmentId": 5271,
+              "text": "ね",
+              "signedDistanceMs": 0,
+              "absoluteDistanceMs": 0
+            }
+          },
+          "end": {
+            "boundaryMs": 1055347,
+            "relation": "inside_speech",
+            "exactSpeechPoints": [],
+            "coveringSpeechIds": [
+              125
+            ],
+            "nearestSpeechBoundary": {
+              "timeMs": 1058648,
+              "kind": "start",
+              "segmentId": 126,
+              "text": "嘘すぎるもう何も言えねえよわかった、せいちゃんが矢作ったときあ、やばい、いる、いるなあねえ、待って、イノシシ3匹いるあれ、作った矢どこ、あ、21本3匹いる?",
+              "signedDistanceMs": 3301,
+              "absoluteDistanceMs": 3301
+            },
+            "nearestWordBoundary": {
+              "timeMs": 1055347,
+              "kind": "start",
+              "segmentId": 5294,
+              "text": "に",
+              "signedDistanceMs": 0,
+              "absoluteDistanceMs": 0
+            }
+          }
+        },
+        {
+          "expectedIndex": 4,
+          "sourceStartMs": 2790074,
+          "sourceEndMs": 2806680,
+          "start": {
+            "boundaryMs": 2790074,
+            "relation": "speech_boundary_exact",
+            "exactSpeechPoints": [
+              {
+                "timeMs": 2790074,
+                "kind": "start",
+                "segmentId": 400,
+                "text": "なんか君の心みたいにあったかいあなたの心はどこ行った?"
+              }
+            ],
+            "coveringSpeechIds": [],
+            "nearestSpeechBoundary": {
+              "timeMs": 2790074,
+              "kind": "start",
+              "segmentId": 400,
+              "text": "なんか君の心みたいにあったかいあなたの心はどこ行った?",
+              "signedDistanceMs": 0,
+              "absoluteDistanceMs": 0
+            },
+            "nearestWordBoundary": {
+              "timeMs": 2790074,
+              "kind": "start",
+              "segmentId": 13567,
+              "text": "な",
+              "signedDistanceMs": 0,
+              "absoluteDistanceMs": 0
+            }
+          },
+          "end": {
+            "boundaryMs": 2806680,
+            "relation": "inside_speech",
+            "exactSpeechPoints": [],
+            "coveringSpeechIds": [
+              404
+            ],
+            "nearestSpeechBoundary": {
+              "timeMs": 2805559,
+              "kind": "start",
+              "segmentId": 404,
+              "text": "気持ち悪いからついてこないで血を見ずにでも使ってなさい急に冷たくなっちゃって来ないね気持ち悪いわ照れているのかな?",
+              "signedDistanceMs": -1121,
+              "absoluteDistanceMs": 1121
+            },
+            "nearestWordBoundary": {
+              "timeMs": 2806680,
+              "kind": "start",
+              "segmentId": 13637,
+              "text": "で",
+              "signedDistanceMs": 0,
+              "absoluteDistanceMs": 0
+            }
+          }
+        },
+        {
+          "expectedIndex": 5,
+          "sourceStartMs": 3006642,
+          "sourceEndMs": 3021412,
+          "start": {
+            "boundaryMs": 3006642,
+            "relation": "inside_speech",
+            "exactSpeechPoints": [],
+            "coveringSpeechIds": [
+              449
+            ],
+            "nearestSpeechBoundary": {
+              "timeMs": 3004881,
+              "kind": "start",
+              "segmentId": 449,
+              "text": "あのね、船が食われてます大丈夫?",
+              "signedDistanceMs": -1761,
+              "absoluteDistanceMs": 1761
+            },
+            "nearestWordBoundary": {
+              "timeMs": 3006642,
+              "kind": "start",
+              "segmentId": 14501,
+              "text": "れ",
+              "signedDistanceMs": 0,
+              "absoluteDistanceMs": 0
+            }
+          },
+          "end": {
+            "boundaryMs": 3021412,
+            "relation": "inside_speech",
+            "exactSpeechPoints": [],
+            "coveringSpeechIds": [
+              451
+            ],
+            "nearestSpeechBoundary": {
+              "timeMs": 3020432,
+              "kind": "start",
+              "segmentId": 451,
+              "text": "罰を与えたいよねねぇ、増えたよ?",
+              "signedDistanceMs": -980,
+              "absoluteDistanceMs": 980
+            },
+            "nearestWordBoundary": {
+              "timeMs": 3021412,
+              "kind": "start",
+              "segmentId": 14583,
+              "text": "よ",
+              "signedDistanceMs": 0,
+              "absoluteDistanceMs": 0
+            }
+          }
+        },
+        {
+          "expectedIndex": 6,
+          "sourceStartMs": 3180410,
+          "sourceEndMs": 3190215,
+          "start": {
+            "boundaryMs": 3180410,
+            "relation": "inside_speech",
+            "exactSpeechPoints": [],
+            "coveringSpeechIds": [
+              470
+            ],
+            "nearestSpeechBoundary": {
+              "timeMs": 3180190,
+              "kind": "start",
+              "segmentId": 470,
+              "text": "しし肉焼いてる?",
+              "signedDistanceMs": -220,
+              "absoluteDistanceMs": 220
+            },
+            "nearestWordBoundary": {
+              "timeMs": 3180410,
+              "kind": "start",
+              "segmentId": 15304,
+              "text": "肉",
+              "signedDistanceMs": 0,
+              "absoluteDistanceMs": 0
+            }
+          },
+          "end": {
+            "boundaryMs": 3190215,
+            "relation": "inside_speech",
+            "exactSpeechPoints": [],
+            "coveringSpeechIds": [
+              471
+            ],
+            "nearestSpeechBoundary": {
+              "timeMs": 3197098,
+              "kind": "start",
+              "segmentId": 472,
+              "text": "マリン見てこれ!",
+              "signedDistanceMs": 6883,
+              "absoluteDistanceMs": 6883
+            },
+            "nearestWordBoundary": {
+              "timeMs": 3190215,
+              "kind": "start",
+              "segmentId": 15359,
+              "text": "と",
+              "signedDistanceMs": 0,
+              "absoluteDistanceMs": 0
+            }
+          }
+        },
+        {
+          "expectedIndex": 7,
+          "sourceStartMs": 3285387,
+          "sourceEndMs": 3288829,
+          "start": {
+            "boundaryMs": 3285387,
+            "relation": "inside_speech",
+            "exactSpeechPoints": [],
+            "coveringSpeechIds": [
+              489
+            ],
+            "nearestSpeechBoundary": {
+              "timeMs": 3283867,
+              "kind": "start",
+              "segmentId": 489,
+              "text": "え、それさ、待ってねずことさ、それって共存してる?",
+              "signedDistanceMs": -1520,
+              "absoluteDistanceMs": 1520
+            },
+            "nearestWordBoundary": {
+              "timeMs": 3285387,
+              "kind": "start",
+              "segmentId": 15814,
+              "text": "と",
+              "signedDistanceMs": 0,
+              "absoluteDistanceMs": 0
+            }
+          },
+          "end": {
+            "boundaryMs": 3288829,
+            "relation": "inside_speech",
+            "exactSpeechPoints": [],
+            "coveringSpeechIds": [
+              490
+            ],
+            "nearestSpeechBoundary": {
+              "timeMs": 3287408,
+              "kind": "start",
+              "segmentId": 490,
+              "text": "共存できない!",
+              "signedDistanceMs": -1421,
+              "absoluteDistanceMs": 1421
+            },
+            "nearestWordBoundary": {
+              "timeMs": 3288829,
+              "kind": "start",
+              "segmentId": 15833,
+              "text": "!",
+              "signedDistanceMs": 0,
+              "absoluteDistanceMs": 0
+            }
+          }
+        },
+        {
+          "expectedIndex": 8,
+          "sourceStartMs": 3475241,
+          "sourceEndMs": 3485035,
+          "start": {
+            "boundaryMs": 3475241,
+            "relation": "inside_speech",
+            "exactSpeechPoints": [],
+            "coveringSpeechIds": [
+              503
+            ],
+            "nearestSpeechBoundary": {
+              "timeMs": 3479844,
+              "kind": "end",
+              "segmentId": 503,
+              "text": "斧いいよあーマジで死ぬかと思ったほら笑われすぎてえやばいマリリンちょっと待ってマジでさ食材なくなったけどあ食材なんて",
+              "signedDistanceMs": 4603,
+              "absoluteDistanceMs": 4603
+            },
+            "nearestWordBoundary": {
+              "timeMs": 3475241,
+              "kind": "start",
+              "segmentId": 16181,
+              "text": "や",
+              "signedDistanceMs": 0,
+              "absoluteDistanceMs": 0
+            }
+          },
+          "end": {
+            "boundaryMs": 3485035,
+            "relation": "inside_speech",
+            "exactSpeechPoints": [],
+            "coveringSpeechIds": [
+              504
+            ],
+            "nearestSpeechBoundary": {
+              "timeMs": 3485956,
+              "kind": "start",
+              "segmentId": 505,
+              "text": "シェフだの?",
+              "signedDistanceMs": 921,
+              "absoluteDistanceMs": 921
+            },
+            "nearestWordBoundary": {
+              "timeMs": 3485035,
+              "kind": "start",
+              "segmentId": 16237,
+              "text": "、",
+              "signedDistanceMs": 0,
+              "absoluteDistanceMs": 0
+            }
+          }
+        },
+        {
+          "expectedIndex": 9,
+          "sourceStartMs": 3998452,
+          "sourceEndMs": 4026707,
+          "start": {
+            "boundaryMs": 3998452,
+            "relation": "inside_speech",
+            "exactSpeechPoints": [],
+            "coveringSpeechIds": [
+              578
+            ],
+            "nearestSpeechBoundary": {
+              "timeMs": 3991226,
+              "kind": "start",
+              "segmentId": 578,
+              "text": "話題がすり減ってますとよしじゃあ出発しますかマリリン今更なんだけどさコーネのさ顔さもうちょい下げてもいいかもよマリリンの顔がさ可愛いフェイスが見えなくなっちゃうあでもね船長はねこうやって下を向いた時にコーネのねあの頭の匂い嗅いでるのからえ、いい匂い?",
+              "signedDistanceMs": -7226,
+              "absoluteDistanceMs": 7226
+            },
+            "nearestWordBoundary": {
+              "timeMs": 3998452,
+              "kind": "start",
+              "segmentId": 18596,
+              "text": "今",
+              "signedDistanceMs": 0,
+              "absoluteDistanceMs": 0
+            }
+          },
+          "end": {
+            "boundaryMs": 4026707,
+            "relation": "inside_speech",
+            "exactSpeechPoints": [],
+            "coveringSpeechIds": [
+              580
+            ],
+            "nearestSpeechBoundary": {
+              "timeMs": 4023866,
+              "kind": "start",
+              "segmentId": 580,
+              "text": "泣くまで時間かかるからねごめんねじわじわ泣くやん早よ泣けやんこれも出発した?",
+              "signedDistanceMs": -2841,
+              "absoluteDistanceMs": 2841
+            },
+            "nearestWordBoundary": {
+              "timeMs": 4026707,
+              "kind": "start",
+              "segmentId": 18729,
+              "text": "や",
+              "signedDistanceMs": 0,
+              "absoluteDistanceMs": 0
+            }
+          }
+        },
+        {
+          "expectedIndex": 10,
+          "sourceStartMs": 4877136,
+          "sourceEndMs": 4889844,
+          "start": {
+            "boundaryMs": 4877136,
+            "relation": "inside_speech",
+            "exactSpeechPoints": [],
+            "coveringSpeechIds": [
+              727
+            ],
+            "nearestSpeechBoundary": {
+              "timeMs": 4889844,
+              "kind": "end",
+              "segmentId": 727,
+              "text": "違うわ板足りなくなったコーネ板足りない分かった任しなコーネ何もないよ板が任しな板が今16枚入れたナイスあれ取ろっかななかなかさいいよ取るよコーネがせんちょーの方が早いから大丈夫サメ来てるし謎の今の江戸",
+              "signedDistanceMs": 12708,
+              "absoluteDistanceMs": 12708
+            },
+            "nearestWordBoundary": {
+              "timeMs": 4877136,
+              "kind": "start",
+              "segmentId": 22758,
+              "text": "か",
+              "signedDistanceMs": 0,
+              "absoluteDistanceMs": 0
+            }
+          },
+          "end": {
+            "boundaryMs": 4889844,
+            "relation": "speech_boundary_exact",
+            "exactSpeechPoints": [
+              {
+                "timeMs": 4889844,
+                "kind": "end",
+                "segmentId": 727,
+                "text": "違うわ板足りなくなったコーネ板足りない分かった任しなコーネ何もないよ板が任しな板が今16枚入れたナイスあれ取ろっかななかなかさいいよ取るよコーネがせんちょーの方が早いから大丈夫サメ来てるし謎の今の江戸"
+              }
+            ],
+            "coveringSpeechIds": [],
+            "nearestSpeechBoundary": {
+              "timeMs": 4889844,
+              "kind": "end",
+              "segmentId": 727,
+              "text": "違うわ板足りなくなったコーネ板足りない分かった任しなコーネ何もないよ板が任しな板が今16枚入れたナイスあれ取ろっかななかなかさいいよ取るよコーネがせんちょーの方が早いから大丈夫サメ来てるし謎の今の江戸",
+              "signedDistanceMs": 0,
+              "absoluteDistanceMs": 0
+            },
+            "nearestWordBoundary": {
+              "timeMs": 4889844,
+              "kind": "end",
+              "segmentId": 22798,
+              "text": "戸",
+              "signedDistanceMs": 0,
+              "absoluteDistanceMs": 0
+            }
+          }
+        },
+        {
+          "expectedIndex": 11,
+          "sourceStartMs": 5183974,
+          "sourceEndMs": 5189318,
+          "start": {
+            "boundaryMs": 5183974,
+            "relation": "inside_speech",
+            "exactSpeechPoints": [],
+            "coveringSpeechIds": [
+              770
+            ],
+            "nearestSpeechBoundary": {
+              "timeMs": 5189318,
+              "kind": "end",
+              "segmentId": 770,
+              "text": "よー取れるぴょんぴょんぴょんぴょんマンゴー邪魔だから食べようじゃマンゴーマンゴーじゃんじゃんそんな笑わないそんな笑うとこじゃねーから今の面白いいやそういうの好きなんだよねそういうくだらないやつがさそんなおもろくないことでいっぱい笑われると気まず",
+              "signedDistanceMs": 5344,
+              "absoluteDistanceMs": 5344
+            },
+            "nearestWordBoundary": {
+              "timeMs": 5183974,
+              "kind": "start",
+              "segmentId": 24054,
+              "text": "の",
+              "signedDistanceMs": 0,
+              "absoluteDistanceMs": 0
+            }
+          },
+          "end": {
+            "boundaryMs": 5189318,
+            "relation": "speech_boundary_exact",
+            "exactSpeechPoints": [
+              {
+                "timeMs": 5189318,
+                "kind": "end",
+                "segmentId": 770,
+                "text": "よー取れるぴょんぴょんぴょんぴょんマンゴー邪魔だから食べようじゃマンゴーマンゴーじゃんじゃんそんな笑わないそんな笑うとこじゃねーから今の面白いいやそういうの好きなんだよねそういうくだらないやつがさそんなおもろくないことでいっぱい笑われると気まず"
+              }
+            ],
+            "coveringSpeechIds": [],
+            "nearestSpeechBoundary": {
+              "timeMs": 5189318,
+              "kind": "end",
+              "segmentId": 770,
+              "text": "よー取れるぴょんぴょんぴょんぴょんマンゴー邪魔だから食べようじゃマンゴーマンゴーじゃんじゃんそんな笑わないそんな笑うとこじゃねーから今の面白いいやそういうの好きなんだよねそういうくだらないやつがさそんなおもろくないことでいっぱい笑われると気まず",
+              "signedDistanceMs": 0,
+              "absoluteDistanceMs": 0
+            },
+            "nearestWordBoundary": {
+              "timeMs": 5189318,
+              "kind": "end",
+              "segmentId": 24098,
+              "text": "ず",
+              "signedDistanceMs": 0,
+              "absoluteDistanceMs": 0
+            }
+          }
+        },
+        {
+          "expectedIndex": 12,
+          "sourceStartMs": 5217231,
+          "sourceEndMs": 5218992,
+          "start": {
+            "boundaryMs": 5217231,
+            "relation": "inside_speech",
+            "exactSpeechPoints": [],
+            "coveringSpeechIds": [
+              777
+            ],
+            "nearestSpeechBoundary": {
+              "timeMs": 5219192,
+              "kind": "end",
+              "segmentId": 777,
+              "text": "バカされてるあ、そういう演技かそういう演技ごめんね、ごめんね気づけなくてごめんそういう演技",
+              "signedDistanceMs": 1961,
+              "absoluteDistanceMs": 1961
+            },
+            "nearestWordBoundary": {
+              "timeMs": 5217231,
+              "kind": "start",
+              "segmentId": 24201,
+              "text": "気",
+              "signedDistanceMs": 0,
+              "absoluteDistanceMs": 0
+            }
+          },
+          "end": {
+            "boundaryMs": 5218992,
+            "relation": "inside_speech",
+            "exactSpeechPoints": [],
+            "coveringSpeechIds": [
+              777
+            ],
+            "nearestSpeechBoundary": {
+              "timeMs": 5219192,
+              "kind": "end",
+              "segmentId": 777,
+              "text": "バカされてるあ、そういう演技かそういう演技ごめんね、ごめんね気づけなくてごめんそういう演技",
+              "signedDistanceMs": 200,
+              "absoluteDistanceMs": 200
+            },
+            "nearestWordBoundary": {
+              "timeMs": 5218992,
+              "kind": "start",
+              "segmentId": 24214,
+              "text": "演",
+              "signedDistanceMs": 0,
+              "absoluteDistanceMs": 0
+            }
+          }
+        },
+        {
+          "expectedIndex": 13,
+          "sourceStartMs": 11541555,
+          "sourceEndMs": 11575281,
+          "start": {
+            "boundaryMs": 11541555,
+            "relation": "inside_speech",
+            "exactSpeechPoints": [],
+            "coveringSpeechIds": [
+              1719
+            ],
+            "nearestSpeechBoundary": {
+              "timeMs": 11549658,
+              "kind": "end",
+              "segmentId": 1719,
+              "text": "最高すぎいいでしょ、いいでしょ最高ここベッドルームねいや、いいなー終わりが見えないな、ちょっと閉めだけしてあとは水面下でこっそり進めとくわ、船長は",
+              "signedDistanceMs": 8103,
+              "absoluteDistanceMs": 8103
+            },
+            "nearestWordBoundary": {
+              "timeMs": 11541555,
+              "kind": "start",
+              "segmentId": 52548,
+              "text": "終",
+              "signedDistanceMs": 0,
+              "absoluteDistanceMs": 0
+            }
+          },
+          "end": {
+            "boundaryMs": 11575281,
+            "relation": "inside_speech",
+            "exactSpeechPoints": [],
+            "coveringSpeechIds": [
+              1725
+            ],
+            "nearestSpeechBoundary": {
+              "timeMs": 11578423,
+              "kind": "end",
+              "segmentId": 1725,
+              "text": "そんなことないよ誰でもよくはない選んでんだちゃっかりちゃっかり選んでるよ",
+              "signedDistanceMs": 3142,
+              "absoluteDistanceMs": 3142
+            },
+            "nearestWordBoundary": {
+              "timeMs": 11575281,
+              "kind": "start",
+              "segmentId": 52690,
+              "text": "い",
+              "signedDistanceMs": 0,
+              "absoluteDistanceMs": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "sourceVideoId": "o8rZAhARXAc",
+      "expectedPath": "evals/clip_composition/expected/9dtwF5Exu5w_multiblock_material_v001.json",
+      "sourceTranscriptPath": "evals/clip_composition/stt/9dtwF5Exu5w_o8rZAhARXAc_local30_v001/source/transcript.json",
+      "sourceTranscriptIsPreFreezeFullStream": true,
+      "rawWordSegmentCount": 34507,
+      "compactedSpeechSegmentCount": 1323,
+      "expectedCutCount": 25,
+      "cuts": [
+        {
+          "expectedIndex": 1,
+          "sourceStartMs": 281521,
+          "sourceEndMs": 282642,
+          "start": {
+            "boundaryMs": 281521,
+            "relation": "inside_speech",
+            "exactSpeechPoints": [],
+            "coveringSpeechIds": [
+              19
+            ],
+            "nearestSpeechBoundary": {
+              "timeMs": 280801,
+              "kind": "start",
+              "segmentId": 19,
+              "text": "んー1で紅白使ってますあ、オッケオッケオッケオッケあ、占い師が出るかも?",
+              "signedDistanceMs": -720,
+              "absoluteDistanceMs": 720
+            },
+            "nearestWordBoundary": {
+              "timeMs": 281521,
+              "kind": "start",
+              "segmentId": 831,
+              "text": "あ",
+              "signedDistanceMs": 0,
+              "absoluteDistanceMs": 0
+            }
+          },
+          "end": {
+            "boundaryMs": 282642,
+            "relation": "inside_speech",
+            "exactSpeechPoints": [],
+            "coveringSpeechIds": [
+              19
+            ],
+            "nearestSpeechBoundary": {
+              "timeMs": 283863,
+              "kind": "start",
+              "segmentId": 20,
+              "text": "あ、オッケオッケオッケオッケじゃあ、一旦1で紅白戦で一旦1ではいトレーニングをしたあ、おまかせせいちょうあー、この方いいねはいファッション監督優勝したことで我が校への注目度が高まっています",
+              "signedDistanceMs": 1221,
+              "absoluteDistanceMs": 1221
+            },
+            "nearestWordBoundary": {
+              "timeMs": 282642,
+              "kind": "start",
+              "segmentId": 845,
+              "text": "あ",
+              "signedDistanceMs": 0,
+              "absoluteDistanceMs": 0
+            }
+          }
+        },
+        {
+          "expectedIndex": 2,
+          "sourceStartMs": 300714,
+          "sourceEndMs": 301675,
+          "start": {
+            "boundaryMs": 300714,
+            "relation": "inside_speech",
+            "exactSpeechPoints": [],
+            "coveringSpeechIds": [
+              21
+            ],
+            "nearestSpeechBoundary": {
+              "timeMs": 300034,
+              "kind": "start",
+              "segmentId": 21,
+              "text": "しばらくいろいろな出会いがありそうですね占い師かい!",
+              "signedDistanceMs": -680,
+              "absoluteDistanceMs": 680
+            },
+            "nearestWordBoundary": {
+              "timeMs": 300714,
+              "kind": "start",
+              "segmentId": 958,
+              "text": "な",
+              "signedDistanceMs": 0,
+              "absoluteDistanceMs": 0
+            }
+          },
+          "end": {
+            "boundaryMs": 301675,
+            "relation": "inside_speech",
+            "exactSpeechPoints": [],
+            "coveringSpeechIds": [
+              21
+            ],
+            "nearestSpeechBoundary": {
+              "timeMs": 300034,
+              "kind": "start",
+              "segmentId": 21,
+              "text": "しばらくいろいろな出会いがありそうですね占い師かい!",
+              "signedDistanceMs": -1641,
+              "absoluteDistanceMs": 1641
+            },
+            "nearestWordBoundary": {
+              "timeMs": 301675,
+              "kind": "start",
+              "segmentId": 968,
+              "text": "す",
+              "signedDistanceMs": 0,
+              "absoluteDistanceMs": 0
+            }
+          }
+        },
+        {
+          "expectedIndex": 3,
+          "sourceStartMs": 338755,
+          "sourceEndMs": 341516,
+          "start": {
+            "boundaryMs": 338755,
+            "relation": "inside_speech",
+            "exactSpeechPoints": [],
+            "coveringSpeechIds": [
+              33
+            ],
+            "nearestSpeechBoundary": {
+              "timeMs": 338495,
+              "kind": "start",
+              "segmentId": 33,
+              "text": "占い師といろんな奴らショップ店員とかいろんな奴らを大きく取り上げられてるそうですやばいどうしようえっとまあ占い師かなとりあえずちょっといろいろ踏みたいけど本当は全部踏みたいところも本当は全部踏みたいけど",
+              "signedDistanceMs": -260,
+              "absoluteDistanceMs": 260
+            },
+            "nearestWordBoundary": {
+              "timeMs": 338755,
+              "kind": "start",
+              "segmentId": 1149,
+              "text": "師",
+              "signedDistanceMs": 0,
+              "absoluteDistanceMs": 0
+            }
+          },
+          "end": {
+            "boundaryMs": 341516,
+            "relation": "inside_speech",
+            "exactSpeechPoints": [],
+            "coveringSpeechIds": [
+              33
+            ],
+            "nearestSpeechBoundary": {
+              "timeMs": 338495,
+              "kind": "start",
+              "segmentId": 33,
+              "text": "占い師といろんな奴らショップ店員とかいろんな奴らを大きく取り上げられてるそうですやばいどうしようえっとまあ占い師かなとりあえずちょっといろいろ踏みたいけど本当は全部踏みたいところも本当は全部踏みたいけど",
+              "signedDistanceMs": -3021,
+              "absoluteDistanceMs": 3021
+            },
+            "nearestWordBoundary": {
+              "timeMs": 341516,
+              "kind": "start",
+              "segmentId": 1170,
+              "text": "ら",
+              "signedDistanceMs": 0,
+              "absoluteDistanceMs": 0
+            }
+          }
+        },
+        {
+          "expectedIndex": 4,
+          "sourceStartMs": 441877,
+          "sourceEndMs": 447039,
+          "start": {
+            "boundaryMs": 441877,
+            "relation": "inside_speech",
+            "exactSpeechPoints": [],
+            "coveringSpeechIds": [
+              44
+            ],
+            "nearestSpeechBoundary": {
+              "timeMs": 441797,
+              "kind": "start",
+              "segmentId": 44,
+              "text": "イチナ?",
+              "signedDistanceMs": -80,
+              "absoluteDistanceMs": 80
+            },
+            "nearestWordBoundary": {
+              "timeMs": 441877,
+              "kind": "start",
+              "segmentId": 1562,
+              "text": "チ",
+              "signedDistanceMs": 0,
+              "absoluteDistanceMs": 0
+            }
+          },
+          "end": {
+            "boundaryMs": 447039,
+            "relation": "inside_speech",
+            "exactSpeechPoints": [],
+            "coveringSpeechIds": [
+              45
+            ],
+            "nearestSpeechBoundary": {
+              "timeMs": 449540,
+              "kind": "end",
+              "segmentId": 45,
+              "text": "どうせ消えるもんねえ、待って覚えとかないと誰調査したかえ、強いとこがいいよね幸福高校かな?",
+              "signedDistanceMs": 2501,
+              "absoluteDistanceMs": 2501
+            },
+            "nearestWordBoundary": {
+              "timeMs": 447039,
+              "kind": "start",
+              "segmentId": 1592,
+              "text": "え",
+              "signedDistanceMs": 0,
+              "absoluteDistanceMs": 0
+            }
+          }
+        },
+        {
+          "expectedIndex": 5,
+          "sourceStartMs": 502720,
+          "sourceEndMs": 517104,
+          "start": {
+            "boundaryMs": 502720,
+            "relation": "inside_speech",
+            "exactSpeechPoints": [],
+            "coveringSpeechIds": [
+              49
+            ],
+            "nearestSpeechBoundary": {
+              "timeMs": 503300,
+              "kind": "start",
+              "segmentId": 50,
+              "text": "何くれたの?",
+              "signedDistanceMs": 580,
+              "absoluteDistanceMs": 580
+            },
+            "nearestWordBoundary": {
+              "timeMs": 502720,
+              "kind": "start",
+              "segmentId": 1707,
+              "text": "ン",
+              "signedDistanceMs": 0,
+              "absoluteDistanceMs": 0
+            }
+          },
+          "end": {
+            "boundaryMs": 517104,
+            "relation": "inside_speech",
+            "exactSpeechPoints": [],
+            "coveringSpeechIds": [
+              56
+            ],
+            "nearestSpeechBoundary": {
+              "timeMs": 516924,
+              "kind": "start",
+              "segmentId": 56,
+              "text": "え、ちょっと待って!",
+              "signedDistanceMs": -180,
+              "absoluteDistanceMs": 180
+            },
+            "nearestWordBoundary": {
+              "timeMs": 517104,
+              "kind": "start",
+              "segmentId": 1775,
+              "text": "っ",
+              "signedDistanceMs": 0,
+              "absoluteDistanceMs": 0
+            }
+          }
+        },
+        {
+          "expectedIndex": 6,
+          "sourceStartMs": 1250139,
+          "sourceEndMs": 1254342,
+          "start": {
+            "boundaryMs": 1250139,
+            "relation": "inside_speech",
+            "exactSpeechPoints": [],
+            "coveringSpeechIds": [
+              153
+            ],
+            "nearestSpeechBoundary": {
+              "timeMs": 1253121,
+              "kind": "start",
+              "segmentId": 154,
+              "text": "なんか知らんけど見るか",
+              "signedDistanceMs": 2982,
+              "absoluteDistanceMs": 2982
+            },
+            "nearestWordBoundary": {
+              "timeMs": 1250139,
+              "kind": "start",
+              "segmentId": 4476,
+              "text": "ク",
+              "signedDistanceMs": 0,
+              "absoluteDistanceMs": 0
+            }
+          },
+          "end": {
+            "boundaryMs": 1254342,
+            "relation": "inside_speech",
+            "exactSpeechPoints": [],
+            "coveringSpeechIds": [
+              154
+            ],
+            "nearestSpeechBoundary": {
+              "timeMs": 1254562,
+              "kind": "end",
+              "segmentId": 154,
+              "text": "なんか知らんけど見るか",
+              "signedDistanceMs": 220,
+              "absoluteDistanceMs": 220
+            },
+            "nearestWordBoundary": {
+              "timeMs": 1254342,
+              "kind": "start",
+              "segmentId": 4506,
+              "text": "見",
+              "signedDistanceMs": 0,
+              "absoluteDistanceMs": 0
+            }
+          }
+        },
+        {
+          "expectedIndex": 7,
+          "sourceStartMs": 2013635,
+          "sourceEndMs": 2017195,
+          "start": {
+            "boundaryMs": 2013635,
+            "relation": "inside_speech",
+            "exactSpeechPoints": [],
+            "coveringSpeechIds": [
+              220
+            ],
+            "nearestSpeechBoundary": {
+              "timeMs": 2010874,
+              "kind": "start",
+              "segmentId": 220,
+              "text": "リリカがチャットくれてるえっとリリカコロナなのにどうもありがとうごめんなコロナ中にありがとうえっとリリカが去年ボタン先輩にお伝えしたのオリジナル九州やっぱりフォークが一番強いとのことおーなるほどえ待ってちょっと相談してみようえっとちょっとコロナで今つらいと思うからチャットで送ってみるかえっと今うぶちゃん",
+              "signedDistanceMs": -2761,
+              "absoluteDistanceMs": 2761
+            },
+            "nearestWordBoundary": {
+              "timeMs": 2013635,
+              "kind": "start",
+              "segmentId": 6626,
+              "text": "リ",
+              "signedDistanceMs": 0,
+              "absoluteDistanceMs": 0
+            }
+          },
+          "end": {
+            "boundaryMs": 2017195,
+            "relation": "inside_speech",
+            "exactSpeechPoints": [],
+            "coveringSpeechIds": [
+              220
+            ],
+            "nearestSpeechBoundary": {
+              "timeMs": 2010874,
+              "kind": "start",
+              "segmentId": 220,
+              "text": "リリカがチャットくれてるえっとリリカコロナなのにどうもありがとうごめんなコロナ中にありがとうえっとリリカが去年ボタン先輩にお伝えしたのオリジナル九州やっぱりフォークが一番強いとのことおーなるほどえ待ってちょっと相談してみようえっとちょっとコロナで今つらいと思うからチャットで送ってみるかえっと今うぶちゃん",
+              "signedDistanceMs": -6321,
+              "absoluteDistanceMs": 6321
+            },
+            "nearestWordBoundary": {
+              "timeMs": 2017195,
+              "kind": "start",
+              "segmentId": 6653,
+              "text": "り",
+              "signedDistanceMs": 0,
+              "absoluteDistanceMs": 0
+            }
+          }
+        },
+        {
+          "expectedIndex": 8,
+          "sourceStartMs": 3690566,
+          "sourceEndMs": 3697689,
+          "start": {
+            "boundaryMs": 3690566,
+            "relation": "speech_boundary_exact",
+            "exactSpeechPoints": [
+              {
+                "timeMs": 3690566,
+                "kind": "start",
+                "segmentId": 351,
+                "text": "諸説ありすぎて喧嘩になってるから助けてマジでマジわからんこよりー助けてよーわかんないよーこよりこよりー助けてーこよりー迷う迷うなこれー教科書持ちのこよりー教科書"
+              }
+            ],
+            "coveringSpeechIds": [],
+            "nearestSpeechBoundary": {
+              "timeMs": 3690566,
+              "kind": "start",
+              "segmentId": 351,
+              "text": "諸説ありすぎて喧嘩になってるから助けてマジでマジわからんこよりー助けてよーわかんないよーこよりこよりー助けてーこよりー迷う迷うなこれー教科書持ちのこよりー教科書",
+              "signedDistanceMs": 0,
+              "absoluteDistanceMs": 0
+            },
+            "nearestWordBoundary": {
+              "timeMs": 3690566,
+              "kind": "start",
+              "segmentId": 10733,
+              "text": "諸",
+              "signedDistanceMs": 0,
+              "absoluteDistanceMs": 0
+            }
+          },
+          "end": {
+            "boundaryMs": 3697689,
+            "relation": "inside_speech",
+            "exactSpeechPoints": [],
+            "coveringSpeechIds": [
+              351
+            ],
+            "nearestSpeechBoundary": {
+              "timeMs": 3690566,
+              "kind": "start",
+              "segmentId": 351,
+              "text": "諸説ありすぎて喧嘩になってるから助けてマジでマジわからんこよりー助けてよーわかんないよーこよりこよりー助けてーこよりー迷う迷うなこれー教科書持ちのこよりー教科書",
+              "signedDistanceMs": -7123,
+              "absoluteDistanceMs": 7123
+            },
+            "nearestWordBoundary": {
+              "timeMs": 3697689,
+              "kind": "start",
+              "segmentId": 10774,
+              "text": "い",
+              "signedDistanceMs": 0,
+              "absoluteDistanceMs": 0
+            }
+          }
+        },
+        {
+          "expectedIndex": 9,
+          "sourceStartMs": 3741344,
+          "sourceEndMs": 3758425,
+          "start": {
+            "boundaryMs": 3741344,
+            "relation": "inside_speech",
+            "exactSpeechPoints": [],
+            "coveringSpeechIds": [
+              355
+            ],
+            "nearestSpeechBoundary": {
+              "timeMs": 3742444,
+              "kind": "start",
+              "segmentId": 356,
+              "text": "コヨリは教えてくれないんだ!",
+              "signedDistanceMs": 1100,
+              "absoluteDistanceMs": 1100
+            },
+            "nearestWordBoundary": {
+              "timeMs": 3741344,
+              "kind": "start",
+              "segmentId": 10878,
+              "text": "教",
+              "signedDistanceMs": 0,
+              "absoluteDistanceMs": 0
+            }
+          },
+          "end": {
+            "boundaryMs": 3758425,
+            "relation": "inside_speech",
+            "exactSpeechPoints": [],
+            "coveringSpeechIds": [
+              358
+            ],
+            "nearestSpeechBoundary": {
+              "timeMs": 3750062,
+              "kind": "start",
+              "segmentId": 358,
+              "text": "なんかそれで何かうまくいかないことがあった時にコメントがこよりがわざと弱いの教えたとか言ってそれでわやわや言われたらうざいからやめとこう確かに聞かんとこうんやめとこうんこよりがわざとなんか弱いの教えたとか言われたら鬱陶しいからやめよううんどうしようじゃあきまちと決めるわそうしよううんそれがいいきまちと一緒に決めるうん",
+              "signedDistanceMs": -8363,
+              "absoluteDistanceMs": 8363
+            },
+            "nearestWordBoundary": {
+              "timeMs": 3758425,
+              "kind": "start",
+              "segmentId": 11013,
+              "text": "か",
+              "signedDistanceMs": 0,
+              "absoluteDistanceMs": 0
+            }
+          }
+        },
+        {
+          "expectedIndex": 10,
+          "sourceStartMs": 4207639,
+          "sourceEndMs": 4210641,
+          "start": {
+            "boundaryMs": 4207639,
+            "relation": "inside_speech",
+            "exactSpeechPoints": [],
+            "coveringSpeechIds": [
+              382
+            ],
+            "nearestSpeechBoundary": {
+              "timeMs": 4207479,
+              "kind": "start",
+              "segmentId": 382,
+              "text": "えいっおーなんかいいねーなんか知らんけど良さげー!",
+              "signedDistanceMs": -160,
+              "absoluteDistanceMs": 160
+            },
+            "nearestWordBoundary": {
+              "timeMs": 4207639,
+              "kind": "start",
+              "segmentId": 12619,
+              "text": "な",
+              "signedDistanceMs": 0,
+              "absoluteDistanceMs": 0
+            }
+          },
+          "end": {
+            "boundaryMs": 4210641,
+            "relation": "inside_speech",
+            "exactSpeechPoints": [],
+            "coveringSpeechIds": [
+              382
+            ],
+            "nearestSpeechBoundary": {
+              "timeMs": 4212203,
+              "kind": "start",
+              "segmentId": 383,
+              "text": "強そう!",
+              "signedDistanceMs": 1562,
+              "absoluteDistanceMs": 1562
+            },
+            "nearestWordBoundary": {
+              "timeMs": 4210641,
+              "kind": "start",
+              "segmentId": 12637,
+              "text": "ー",
+              "signedDistanceMs": 0,
+              "absoluteDistanceMs": 0
+            }
+          }
+        },
+        {
+          "expectedIndex": 11,
+          "sourceStartMs": 4232807,
+          "sourceEndMs": 4239410,
+          "start": {
+            "boundaryMs": 4232807,
+            "relation": "speech_boundary_exact",
+            "exactSpeechPoints": [
+              {
+                "timeMs": 4232807,
+                "kind": "start",
+                "segmentId": 386,
+                "text": "さらに下行ってる重いやつを見せるOKじゃあ重いバージョンがこれですいくよ重い方はこうだドスンと落ちていく感じがありますねはいどうでしょうかさっきとはまた違う"
+              }
+            ],
+            "coveringSpeechIds": [],
+            "nearestSpeechBoundary": {
+              "timeMs": 4232807,
+              "kind": "start",
+              "segmentId": 386,
+              "text": "さらに下行ってる重いやつを見せるOKじゃあ重いバージョンがこれですいくよ重い方はこうだドスンと落ちていく感じがありますねはいどうでしょうかさっきとはまた違う",
+              "signedDistanceMs": 0,
+              "absoluteDistanceMs": 0
+            },
+            "nearestWordBoundary": {
+              "timeMs": 4232807,
+              "kind": "start",
+              "segmentId": 12669,
+              "text": "さ",
+              "signedDistanceMs": 0,
+              "absoluteDistanceMs": 0
+            }
+          },
+          "end": {
+            "boundaryMs": 4239410,
+            "relation": "inside_speech",
+            "exactSpeechPoints": [],
+            "coveringSpeechIds": [
+              386
+            ],
+            "nearestSpeechBoundary": {
+              "timeMs": 4232807,
+              "kind": "start",
+              "segmentId": 386,
+              "text": "さらに下行ってる重いやつを見せるOKじゃあ重いバージョンがこれですいくよ重い方はこうだドスンと落ちていく感じがありますねはいどうでしょうかさっきとはまた違う",
+              "signedDistanceMs": -6603,
+              "absoluteDistanceMs": 6603
+            },
+            "nearestWordBoundary": {
+              "timeMs": 4239410,
+              "kind": "start",
+              "segmentId": 12701,
+              "text": "す",
+              "signedDistanceMs": 0,
+              "absoluteDistanceMs": 0
+            }
+          }
+        },
+        {
+          "expectedIndex": 12,
+          "sourceStartMs": 4273428,
+          "sourceEndMs": 4279472,
+          "start": {
+            "boundaryMs": 4273428,
+            "relation": "inside_speech",
+            "exactSpeechPoints": [],
+            "coveringSpeechIds": [
+              387
+            ],
+            "nearestSpeechBoundary": {
+              "timeMs": 4260438,
+              "kind": "start",
+              "segmentId": 387,
+              "text": "同じにしか見えないけどまた違うこのドスンと落ちていくんですこれということで重いわーこれよりも重いは言うとりますということでさあ皆さんこんなに違うこの2球種果たしてどっちがいいかさあ決めてまいりましょうそれでは皆さん投票で",
+              "signedDistanceMs": -12990,
+              "absoluteDistanceMs": 12990
+            },
+            "nearestWordBoundary": {
+              "timeMs": 4273428,
+              "kind": "start",
+              "segmentId": 12784,
+              "text": "重",
+              "signedDistanceMs": 0,
+              "absoluteDistanceMs": 0
+            }
+          },
+          "end": {
+            "boundaryMs": 4279472,
+            "relation": "inside_speech",
+            "exactSpeechPoints": [],
+            "coveringSpeechIds": [
+              387
+            ],
+            "nearestSpeechBoundary": {
+              "timeMs": 4289960,
+              "kind": "end",
+              "segmentId": 387,
+              "text": "同じにしか見えないけどまた違うこのドスンと落ちていくんですこれということで重いわーこれよりも重いは言うとりますということでさあ皆さんこんなに違うこの2球種果たしてどっちがいいかさあ決めてまいりましょうそれでは皆さん投票で",
+              "signedDistanceMs": 10488,
+              "absoluteDistanceMs": 10488
+            },
+            "nearestWordBoundary": {
+              "timeMs": 4279472,
+              "kind": "start",
+              "segmentId": 12808,
+              "text": "さ",
+              "signedDistanceMs": 0,
+              "absoluteDistanceMs": 0
+            }
+          }
+        },
+        {
+          "expectedIndex": 13,
+          "sourceStartMs": 4367214,
+          "sourceEndMs": 4369035,
+          "start": {
+            "boundaryMs": 4367214,
+            "relation": "inside_speech",
+            "exactSpeechPoints": [],
+            "coveringSpeechIds": [
+              390
+            ],
+            "nearestSpeechBoundary": {
+              "timeMs": 4379860,
+              "kind": "end",
+              "segmentId": 390,
+              "text": "えー新旧宿発ボールをはいそしてスロットに登録はいします1時間1時間経っちゃったやばいこれで1時間経っちゃったこれ迷いすぎてすいませんどうも迷いましためっちゃはい迷いましためっちゃありがとうございましたでは行きたいと思いますこれをふぶちゃんに応募させます迷いに迷った末にもう誰に応募させるかどんな弾を作るかで非常に",
+              "signedDistanceMs": 12646,
+              "absoluteDistanceMs": 12646
+            },
+            "nearestWordBoundary": {
+              "timeMs": 4367214,
+              "kind": "start",
+              "segmentId": 13089,
+              "text": "迷",
+              "signedDistanceMs": 0,
+              "absoluteDistanceMs": 0
+            }
+          },
+          "end": {
+            "boundaryMs": 4369035,
+            "relation": "inside_speech",
+            "exactSpeechPoints": [],
+            "coveringSpeechIds": [
+              390
+            ],
+            "nearestSpeechBoundary": {
+              "timeMs": 4379860,
+              "kind": "end",
+              "segmentId": 390,
+              "text": "えー新旧宿発ボールをはいそしてスロットに登録はいします1時間1時間経っちゃったやばいこれで1時間経っちゃったこれ迷いすぎてすいませんどうも迷いましためっちゃはい迷いましためっちゃありがとうございましたでは行きたいと思いますこれをふぶちゃんに応募させます迷いに迷った末にもう誰に応募させるかどんな弾を作るかで非常に",
+              "signedDistanceMs": 10825,
+              "absoluteDistanceMs": 10825
+            },
+            "nearestWordBoundary": {
+              "timeMs": 4369035,
+              "kind": "start",
+              "segmentId": 13105,
+              "text": "い",
+              "signedDistanceMs": 0,
+              "absoluteDistanceMs": 0
+            }
+          }
+        },
+        {
+          "expectedIndex": 14,
+          "sourceStartMs": 4723988,
+          "sourceEndMs": 4731031,
+          "start": {
+            "boundaryMs": 4723988,
+            "relation": "inside_speech",
+            "exactSpeechPoints": [],
+            "coveringSpeechIds": [
+              440
+            ],
+            "nearestSpeechBoundary": {
+              "timeMs": 4723728,
+              "kind": "start",
+              "segmentId": 440,
+              "text": "しおりんがつくかもしんないもんね!",
+              "signedDistanceMs": -260,
+              "absoluteDistanceMs": 260
+            },
+            "nearestWordBoundary": {
+              "timeMs": 4723988,
+              "kind": "start",
+              "segmentId": 14391,
+              "text": "が",
+              "signedDistanceMs": 0,
+              "absoluteDistanceMs": 0
+            }
+          },
+          "end": {
+            "boundaryMs": 4731031,
+            "relation": "inside_speech",
+            "exactSpeechPoints": [],
+            "coveringSpeechIds": [
+              444
+            ],
+            "nearestSpeechBoundary": {
+              "timeMs": 4730931,
+              "kind": "start",
+              "segmentId": 444,
+              "text": "お前かん!",
+              "signedDistanceMs": -100,
+              "absoluteDistanceMs": 100
+            },
+            "nearestWordBoundary": {
+              "timeMs": 4731031,
+              "kind": "start",
+              "segmentId": 14423,
+              "text": "前",
+              "signedDistanceMs": 0,
+              "absoluteDistanceMs": 0
+            }
+          }
+        },
+        {
+          "expectedIndex": 15,
+          "sourceStartMs": 6289092,
+          "sourceEndMs": 6298479,
+          "start": {
+            "boundaryMs": 6289092,
+            "relation": "inside_speech",
+            "exactSpeechPoints": [],
+            "coveringSpeechIds": [
+              631
+            ],
+            "nearestSpeechBoundary": {
+              "timeMs": 6288972,
+              "kind": "start",
+              "segmentId": 631,
+              "text": "どいつもこいつも似た顔しやがって負けてらんねん総合力戦力B!",
+              "signedDistanceMs": -120,
+              "absoluteDistanceMs": 120
+            },
+            "nearestWordBoundary": {
+              "timeMs": 6289092,
+              "kind": "start",
+              "segmentId": 18893,
+              "text": "も",
+              "signedDistanceMs": 0,
+              "absoluteDistanceMs": 0
+            }
+          },
+          "end": {
+            "boundaryMs": 6298479,
+            "relation": "inside_speech",
+            "exactSpeechPoints": [],
+            "coveringSpeechIds": [
+              633
+            ],
+            "nearestSpeechBoundary": {
+              "timeMs": 6299360,
+              "kind": "end",
+              "segmentId": 633,
+              "text": "お前初めてのくせにちょ、やばいやばい1点取られた",
+              "signedDistanceMs": 881,
+              "absoluteDistanceMs": 881
+            },
+            "nearestWordBoundary": {
+              "timeMs": 6298479,
+              "kind": "start",
+              "segmentId": 18949,
+              "text": "い",
+              "signedDistanceMs": 0,
+              "absoluteDistanceMs": 0
+            }
+          }
+        },
+        {
+          "expectedIndex": 16,
+          "sourceStartMs": 6526271,
+          "sourceEndMs": 6527012,
+          "start": {
+            "boundaryMs": 6526271,
+            "relation": "speech_boundary_exact",
+            "exactSpeechPoints": [
+              {
+                "timeMs": 6526271,
+                "kind": "start",
+                "segmentId": 655,
+                "text": "よーしよしよしよしよしよしよし!"
+              },
+              {
+                "timeMs": 6526271,
+                "kind": "end",
+                "segmentId": 654,
+                "text": "転がったら!"
+              }
+            ],
+            "coveringSpeechIds": [],
+            "nearestSpeechBoundary": {
+              "timeMs": 6526271,
+              "kind": "start",
+              "segmentId": 655,
+              "text": "よーしよしよしよしよしよしよし!",
+              "signedDistanceMs": 0,
+              "absoluteDistanceMs": 0
+            },
+            "nearestWordBoundary": {
+              "timeMs": 6526271,
+              "kind": "start",
+              "segmentId": 19677,
+              "text": "よ",
+              "signedDistanceMs": 0,
+              "absoluteDistanceMs": 0
+            }
+          },
+          "end": {
+            "boundaryMs": 6527012,
+            "relation": "inside_speech",
+            "exactSpeechPoints": [],
+            "coveringSpeechIds": [
+              655
+            ],
+            "nearestSpeechBoundary": {
+              "timeMs": 6527292,
+              "kind": "start",
+              "segmentId": 656,
+              "text": "泡の工夫!",
+              "signedDistanceMs": 280,
+              "absoluteDistanceMs": 280
+            },
+            "nearestWordBoundary": {
+              "timeMs": 6527012,
+              "kind": "start",
+              "segmentId": 19692,
+              "text": "!",
+              "signedDistanceMs": 0,
+              "absoluteDistanceMs": 0
+            }
+          }
+        },
+        {
+          "expectedIndex": 17,
+          "sourceStartMs": 7010155,
+          "sourceEndMs": 7011256,
+          "start": {
+            "boundaryMs": 7010155,
+            "relation": "inside_speech",
+            "exactSpeechPoints": [],
+            "coveringSpeechIds": [
+              765
+            ],
+            "nearestSpeechBoundary": {
+              "timeMs": 7007135,
+              "kind": "start",
+              "segmentId": 765,
+              "text": "オーケーオーケーオーケーオーケーオーケーオーケーオーケーオーケーオーケーオーケーオーケーオーケーオーケーオーケーオーケーオーケーオーケーオーケーオーケーオーケーオーケーオーケーオーケーオーケーオーケーオーケーオーケーオーケーオーケーオーケーオーケーオーケーオーケーオーケーオーケーオーケーオーケーオーケーオーケーオ",
+              "signedDistanceMs": -3020,
+              "absoluteDistanceMs": 3020
+            },
+            "nearestWordBoundary": {
+              "timeMs": 7010155,
+              "kind": "start",
+              "segmentId": 21486,
+              "text": "オ",
+              "signedDistanceMs": 0,
+              "absoluteDistanceMs": 0
+            }
+          },
+          "end": {
+            "boundaryMs": 7011256,
+            "relation": "inside_speech",
+            "exactSpeechPoints": [],
+            "coveringSpeechIds": [
+              765
+            ],
+            "nearestSpeechBoundary": {
+              "timeMs": 7007135,
+              "kind": "start",
+              "segmentId": 765,
+              "text": "オーケーオーケーオーケーオーケーオーケーオーケーオーケーオーケーオーケーオーケーオーケーオーケーオーケーオーケーオーケーオーケーオーケーオーケーオーケーオーケーオーケーオーケーオーケーオーケーオーケーオーケーオーケーオーケーオーケーオーケーオーケーオーケーオーケーオーケーオーケーオーケーオーケーオーケーオーケーオ",
+              "signedDistanceMs": -4121,
+              "absoluteDistanceMs": 4121
+            },
+            "nearestWordBoundary": {
+              "timeMs": 7011256,
+              "kind": "start",
+              "segmentId": 21515,
+              "text": "ー",
+              "signedDistanceMs": 0,
+              "absoluteDistanceMs": 0
+            }
+          }
+        },
+        {
+          "expectedIndex": 18,
+          "sourceStartMs": 7945178,
+          "sourceEndMs": 7947279,
+          "start": {
+            "boundaryMs": 7945178,
+            "relation": "inside_speech",
+            "exactSpeechPoints": [],
+            "coveringSpeechIds": [
+              846
+            ],
+            "nearestSpeechBoundary": {
+              "timeMs": 7948219,
+              "kind": "end",
+              "segmentId": 846,
+              "text": "普通にうんうんボール多いなフォアボールなのかあ、打ったあ、いいじゃんいいじゃんよう転がっとる",
+              "signedDistanceMs": 3041,
+              "absoluteDistanceMs": 3041
+            },
+            "nearestWordBoundary": {
+              "timeMs": 7945178,
+              "kind": "start",
+              "segmentId": 24582,
+              "text": "打",
+              "signedDistanceMs": 0,
+              "absoluteDistanceMs": 0
+            }
+          },
+          "end": {
+            "boundaryMs": 7947279,
+            "relation": "inside_speech",
+            "exactSpeechPoints": [],
+            "coveringSpeechIds": [
+              846
+            ],
+            "nearestSpeechBoundary": {
+              "timeMs": 7948219,
+              "kind": "end",
+              "segmentId": 846,
+              "text": "普通にうんうんボール多いなフォアボールなのかあ、打ったあ、いいじゃんいいじゃんよう転がっとる",
+              "signedDistanceMs": 940,
+              "absoluteDistanceMs": 940
+            },
+            "nearestWordBoundary": {
+              "timeMs": 7947279,
+              "kind": "start",
+              "segmentId": 24596,
+              "text": "ん",
+              "signedDistanceMs": 0,
+              "absoluteDistanceMs": 0
+            }
+          }
+        },
+        {
+          "expectedIndex": 19,
+          "sourceStartMs": 9117659,
+          "sourceEndMs": 9119080,
+          "start": {
+            "boundaryMs": 9117659,
+            "relation": "speech_boundary_exact",
+            "exactSpeechPoints": [
+              {
+                "timeMs": 9117659,
+                "kind": "start",
+                "segmentId": 1000,
+                "text": "あ、打たれたけど…でも大丈夫か?"
+              },
+              {
+                "timeMs": 9117659,
+                "kind": "end",
+                "segmentId": 999,
+                "text": "行け!"
+              }
+            ],
+            "coveringSpeechIds": [],
+            "nearestSpeechBoundary": {
+              "timeMs": 9117659,
+              "kind": "start",
+              "segmentId": 1000,
+              "text": "あ、打たれたけど…でも大丈夫か?",
+              "signedDistanceMs": 0,
+              "absoluteDistanceMs": 0
+            },
+            "nearestWordBoundary": {
+              "timeMs": 9117659,
+              "kind": "start",
+              "segmentId": 27599,
+              "text": "あ",
+              "signedDistanceMs": 0,
+              "absoluteDistanceMs": 0
+            }
+          },
+          "end": {
+            "boundaryMs": 9119080,
+            "relation": "inside_speech",
+            "exactSpeechPoints": [],
+            "coveringSpeechIds": [
+              1002
+            ],
+            "nearestSpeechBoundary": {
+              "timeMs": 9118480,
+              "kind": "start",
+              "segmentId": 1002,
+              "text": "あーでもそっかー、1点取られて…",
+              "signedDistanceMs": -600,
+              "absoluteDistanceMs": 600
+            },
+            "nearestWordBoundary": {
+              "timeMs": 9119080,
+              "kind": "start",
+              "segmentId": 27629,
+              "text": "ー",
+              "signedDistanceMs": 0,
+              "absoluteDistanceMs": 0
+            }
+          }
+        },
+        {
+          "expectedIndex": 20,
+          "sourceStartMs": 9150522,
+          "sourceEndMs": 9152464,
+          "start": {
+            "boundaryMs": 9150522,
+            "relation": "inside_speech",
+            "exactSpeechPoints": [],
+            "coveringSpeechIds": [
+              1004
+            ],
+            "nearestSpeechBoundary": {
+              "timeMs": 9150322,
+              "kind": "start",
+              "segmentId": 1004,
+              "text": "お、スーパーノヴァが撃たれた!",
+              "signedDistanceMs": -200,
+              "absoluteDistanceMs": 200
+            },
+            "nearestWordBoundary": {
+              "timeMs": 9150522,
+              "kind": "start",
+              "segmentId": 27706,
+              "text": "ス",
+              "signedDistanceMs": 0,
+              "absoluteDistanceMs": 0
+            }
+          },
+          "end": {
+            "boundaryMs": 9152464,
+            "relation": "inside_speech",
+            "exactSpeechPoints": [],
+            "coveringSpeechIds": [
+              1005
+            ],
+            "nearestSpeechBoundary": {
+              "timeMs": 9152524,
+              "kind": "start",
+              "segmentId": 1006,
+              "text": "ナイス!",
+              "signedDistanceMs": 60,
+              "absoluteDistanceMs": 60
+            },
+            "nearestWordBoundary": {
+              "timeMs": 9152464,
+              "kind": "start",
+              "segmentId": 27730,
+              "text": "た",
+              "signedDistanceMs": 0,
+              "absoluteDistanceMs": 0
+            }
+          }
+        },
+        {
+          "expectedIndex": 21,
+          "sourceStartMs": 10077799,
+          "sourceEndMs": 10088896,
+          "start": {
+            "boundaryMs": 10077799,
+            "relation": "inside_speech",
+            "exactSpeechPoints": [],
+            "coveringSpeechIds": [
+              1106
+            ],
+            "nearestSpeechBoundary": {
+              "timeMs": 10077638,
+              "kind": "start",
+              "segmentId": 1106,
+              "text": "行け引っ張れー!",
+              "signedDistanceMs": -161,
+              "absoluteDistanceMs": 161
+            },
+            "nearestWordBoundary": {
+              "timeMs": 10077799,
+              "kind": "start",
+              "segmentId": 30023,
+              "text": "け",
+              "signedDistanceMs": 0,
+              "absoluteDistanceMs": 0
+            }
+          },
+          "end": {
+            "boundaryMs": 10088896,
+            "relation": "inside_speech",
+            "exactSpeechPoints": [],
+            "coveringSpeechIds": [
+              1108
+            ],
+            "nearestSpeechBoundary": {
+              "timeMs": 10080974,
+              "kind": "start",
+              "segmentId": 1108,
+              "text": "取られそう取られる取られたよ引っ張ったよ頑張った頑張ったしょうがないこればっかりはじゃあカエラさん出しますかついに満を持していこうん?",
+              "signedDistanceMs": -7922,
+              "absoluteDistanceMs": 7922
+            },
+            "nearestWordBoundary": {
+              "timeMs": 10088896,
+              "kind": "start",
+              "segmentId": 30058,
+              "text": "っ",
+              "signedDistanceMs": 0,
+              "absoluteDistanceMs": 0
+            }
+          }
+        },
+        {
+          "expectedIndex": 22,
+          "sourceStartMs": 10221096,
+          "sourceEndMs": 10221656,
+          "start": {
+            "boundaryMs": 10221096,
+            "relation": "inside_speech",
+            "exactSpeechPoints": [],
+            "coveringSpeechIds": [
+              1124
+            ],
+            "nearestSpeechBoundary": {
+              "timeMs": 10222216,
+              "kind": "start",
+              "segmentId": 1125,
+              "text": "取れるか?",
+              "signedDistanceMs": 1120,
+              "absoluteDistanceMs": 1120
+            },
+            "nearestWordBoundary": {
+              "timeMs": 10221096,
+              "kind": "start",
+              "segmentId": 30432,
+              "text": "わ",
+              "signedDistanceMs": 0,
+              "absoluteDistanceMs": 0
+            }
+          },
+          "end": {
+            "boundaryMs": 10221656,
+            "relation": "inside_speech",
+            "exactSpeechPoints": [],
+            "coveringSpeechIds": [
+              1124
+            ],
+            "nearestSpeechBoundary": {
+              "timeMs": 10222216,
+              "kind": "start",
+              "segmentId": 1125,
+              "text": "取れるか?",
+              "signedDistanceMs": 560,
+              "absoluteDistanceMs": 560
+            },
+            "nearestWordBoundary": {
+              "timeMs": 10221656,
+              "kind": "start",
+              "segmentId": 30448,
+              "text": "る",
+              "signedDistanceMs": 0,
+              "absoluteDistanceMs": 0
+            }
+          }
+        },
+        {
+          "expectedIndex": 23,
+          "sourceStartMs": 10521894,
+          "sourceEndMs": 10529420,
+          "start": {
+            "boundaryMs": 10521894,
+            "relation": "inside_speech",
+            "exactSpeechPoints": [],
+            "coveringSpeechIds": [
+              1189
+            ],
+            "nearestSpeechBoundary": {
+              "timeMs": 10529860,
+              "kind": "end",
+              "segmentId": 1189,
+              "text": "肩DのクイックCそして内は投類C総力Cさすがに投類かさすがに投類なのかここはやるべきだよね投類しないとクイックCはちょっといいけど危ない",
+              "signedDistanceMs": 7966,
+              "absoluteDistanceMs": 7966
+            },
+            "nearestWordBoundary": {
+              "timeMs": 10521894,
+              "kind": "start",
+              "segmentId": 31610,
+              "text": "し",
+              "signedDistanceMs": 0,
+              "absoluteDistanceMs": 0
+            }
+          },
+          "end": {
+            "boundaryMs": 10529420,
+            "relation": "inside_speech",
+            "exactSpeechPoints": [],
+            "coveringSpeechIds": [
+              1189
+            ],
+            "nearestSpeechBoundary": {
+              "timeMs": 10529860,
+              "kind": "end",
+              "segmentId": 1189,
+              "text": "肩DのクイックCそして内は投類C総力Cさすがに投類かさすがに投類なのかここはやるべきだよね投類しないとクイックCはちょっといいけど危ない",
+              "signedDistanceMs": 440,
+              "absoluteDistanceMs": 440
+            },
+            "nearestWordBoundary": {
+              "timeMs": 10529420,
+              "kind": "start",
+              "segmentId": 31627,
+              "text": "ど",
+              "signedDistanceMs": 0,
+              "absoluteDistanceMs": 0
+            }
+          }
+        },
+        {
+          "expectedIndex": 24,
+          "sourceStartMs": 10790744,
+          "sourceEndMs": 10803724,
+          "start": {
+            "boundaryMs": 10790744,
+            "relation": "speech_boundary_exact",
+            "exactSpeechPoints": [
+              {
+                "timeMs": 10790744,
+                "kind": "start",
+                "segmentId": 1230,
+                "text": "うん、トールする?"
+              },
+              {
+                "timeMs": 10790744,
+                "kind": "end",
+                "segmentId": 1229,
+                "text": "どうする?"
+              }
+            ],
+            "coveringSpeechIds": [],
+            "nearestSpeechBoundary": {
+              "timeMs": 10790744,
+              "kind": "start",
+              "segmentId": 1230,
+              "text": "うん、トールする?",
+              "signedDistanceMs": 0,
+              "absoluteDistanceMs": 0
+            },
+            "nearestWordBoundary": {
+              "timeMs": 10790744,
+              "kind": "start",
+              "segmentId": 32045,
+              "text": "う",
+              "signedDistanceMs": 0,
+              "absoluteDistanceMs": 0
+            }
+          },
+          "end": {
+            "boundaryMs": 10803724,
+            "relation": "inside_speech",
+            "exactSpeechPoints": [],
+            "coveringSpeechIds": [
+              1235
+            ],
+            "nearestSpeechBoundary": {
+              "timeMs": 10800122,
+              "kind": "start",
+              "segmentId": 1235,
+              "text": "ミートじゃない走力BBトールEEなんだけどこれ大丈夫ぞBなんだけどBDDEトールEなんだけどやれないか?",
+              "signedDistanceMs": -3602,
+              "absoluteDistanceMs": 3602
+            },
+            "nearestWordBoundary": {
+              "timeMs": 10803724,
+              "kind": "start",
+              "segmentId": 32104,
+              "text": "ぞ",
+              "signedDistanceMs": 0,
+              "absoluteDistanceMs": 0
+            }
+          }
+        },
+        {
+          "expectedIndex": 25,
+          "sourceStartMs": 11730442,
+          "sourceEndMs": 11733624,
+          "start": {
+            "boundaryMs": 11730442,
+            "relation": "inside_speech",
+            "exactSpeechPoints": [],
+            "coveringSpeechIds": [
+              1321
+            ],
+            "nearestSpeechBoundary": {
+              "timeMs": 11730322,
+              "kind": "start",
+              "segmentId": 1321,
+              "text": "甲子園大会2回戦でやっていこうと思います次回の予定を発表したいと思います9月24日今日は24日なので明日の明日のホロコー配信はみこちになっています明日はみこちそしてマリンの次回はですね9月28日から",
+              "signedDistanceMs": -120,
+              "absoluteDistanceMs": 120
+            },
+            "nearestWordBoundary": {
+              "timeMs": 11730442,
+              "kind": "start",
+              "segmentId": 34268,
+              "text": "子",
+              "signedDistanceMs": 0,
+              "absoluteDistanceMs": 0
+            }
+          },
+          "end": {
+            "boundaryMs": 11733624,
+            "relation": "inside_speech",
+            "exactSpeechPoints": [],
+            "coveringSpeechIds": [
+              1321
+            ],
+            "nearestSpeechBoundary": {
+              "timeMs": 11730322,
+              "kind": "start",
+              "segmentId": 1321,
+              "text": "甲子園大会2回戦でやっていこうと思います次回の予定を発表したいと思います9月24日今日は24日なので明日の明日のホロコー配信はみこちになっています明日はみこちそしてマリンの次回はですね9月28日から",
+              "signedDistanceMs": -3302,
+              "absoluteDistanceMs": 3302
+            },
+            "nearestWordBoundary": {
+              "timeMs": 11733624,
+              "kind": "start",
+              "segmentId": 34282,
+              "text": "と",
+              "signedDistanceMs": 0,
+              "absoluteDistanceMs": 0
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "fixtureCount": 2,
+    "expectedCutCount": 38,
+    "boundaryCount": 76,
+    "relation": {
+      "speechBoundaryExact": 8,
+      "insideSpeech": 68,
+      "nonSpeechInterval": 0
+    },
+    "relationBySide": {
+      "start": {
+        "speechBoundaryExact": 6,
+        "insideSpeech": 32,
+        "nonSpeechInterval": 0
+      },
+      "end": {
+        "speechBoundaryExact": 2,
+        "insideSpeech": 36,
+        "nonSpeechInterval": 0
+      }
+    },
+    "nearestSpeechBoundaryDistance": {
+      "count": 76,
+      "meanMs": 2830.618,
+      "medianMs": 1221,
+      "p75Ms": 3302,
+      "p90Ms": 7966,
+      "maxMs": 12990,
+      "within1000Count": 34,
+      "within3000Count": 49,
+      "within5000Count": 60
+    },
+    "nearestWordBoundaryDistance": {
+      "count": 76,
+      "meanMs": 0,
+      "medianMs": 0,
+      "p75Ms": 0,
+      "p90Ms": 0,
+      "maxMs": 0,
+      "within1000Count": 76,
+      "within3000Count": 76,
+      "within5000Count": 76
+    },
+    "speechBoundaryOracleByCut": {
+      "bothWithin0Count": 0,
+      "bothWithin1000Count": 6,
+      "bothWithin3000Count": 16,
+      "bothWithin5000Count": 24
+    },
+    "wordBoundaryOracleByCut": {
+      "bothWithin0Count": 38,
+      "bothWithin1000Count": 38,
+      "bothWithin3000Count": 38,
+      "bothWithin5000Count": 38
+    },
+    "byFixture": {
+      "nOEWCNc77MI_multiblock_material_v001": {
+        "expectedCutCount": 13,
+        "boundaryCount": 26,
+        "relation": {
+          "speechBoundaryExact": 3,
+          "insideSpeech": 23,
+          "nonSpeechInterval": 0
+        },
+        "nearestSpeechBoundaryDistance": {
+          "count": 26,
+          "meanMs": 3126.269,
+          "medianMs": 1961,
+          "p75Ms": 4603,
+          "p90Ms": 7226,
+          "maxMs": 12708,
+          "within1000Count": 8,
+          "within3000Count": 15,
+          "within5000Count": 20
+        },
+        "nearestWordBoundaryDistance": {
+          "count": 26,
+          "meanMs": 0,
+          "medianMs": 0,
+          "p75Ms": 0,
+          "p90Ms": 0,
+          "maxMs": 0,
+          "within1000Count": 26,
+          "within3000Count": 26,
+          "within5000Count": 26
+        }
+      },
+      "9dtwF5Exu5w_multiblock_material_v001": {
+        "expectedCutCount": 25,
+        "boundaryCount": 50,
+        "relation": {
+          "speechBoundaryExact": 5,
+          "insideSpeech": 45,
+          "nonSpeechInterval": 0
+        },
+        "nearestSpeechBoundaryDistance": {
+          "count": 50,
+          "meanMs": 2676.88,
+          "medianMs": 881,
+          "p75Ms": 3302,
+          "p90Ms": 7966,
+          "maxMs": 12990,
+          "within1000Count": 26,
+          "within3000Count": 34,
+          "within5000Count": 40
+        },
+        "nearestWordBoundaryDistance": {
+          "count": 50,
+          "meanMs": 0,
+          "medianMs": 0,
+          "p75Ms": 0,
+          "p90Ms": 0,
+          "maxMs": 0,
+          "within1000Count": 50,
+          "within3000Count": 50,
+          "within5000Count": 50
+        }
+      }
+    }
+  }
+}
