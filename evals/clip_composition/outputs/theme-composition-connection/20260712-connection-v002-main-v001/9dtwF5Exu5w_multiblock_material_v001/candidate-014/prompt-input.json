@@ -1,0 +1,633 @@
+{
+  "kind": "theme_composition_connection_prompt_payload",
+  "resultRole": "connected-composition-eval-connection-v002-input",
+  "runAt": "2026-07-12T12:07:46.009Z",
+  "connectionVersion": "connection-v002",
+  "generationSystem": "llm-v013@gemini-web-flash",
+  "upstreamGenerationSystem": "theme-llm-v002@gemini-web-flash",
+  "inputSelectionVersion": "input-selection-v004",
+  "promptVersion": "clip_composition_prompt_v013",
+  "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+  "candidateIndex": 14,
+  "contextCondition": "theme-window-plus-minus-5m",
+  "plannedRuns": 3,
+  "evidenceRangeDurationMs": 70987,
+  "candidateSpeechIds": [
+    354,
+    355,
+    356,
+    357,
+    358,
+    359
+  ],
+  "baselinePayloadPath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-014/prompt-input.json",
+  "fixedConditions": {
+    "model": "gemini-web-flash",
+    "contextWindow": "theme-window-plus-minus-5m",
+    "scoring": "three-stage-with-1000ms-boundary-match",
+    "usedSpeechIdsValidation": "syntax-order-and-input-endpoint-existence"
+  },
+  "modelInput": {
+    "task": "fixed_theme_clip_interval_selection",
+    "evaluationInputId": "o8rZAhARXAc-theme-candidate-014",
+    "sourceVideoId": "o8rZAhARXAc",
+    "selectedTheme": {
+      "id": "input-selection-v004-candidate-014",
+      "title": "アドバイス起因の荒れを懸念し、こよりへの相談をやめるマリン",
+      "summary": "こよりのアドバイスで育成がうまくいかなかった場合に彼女が叩かれるリスクを考慮し、優しさから相談をやめて星街すいせい（きまち）と決めることを選ぶ場面です。",
+      "candidateSpeechIds": [
+        354,
+        355,
+        356,
+        357,
+        358,
+        359
+      ],
+      "whyItCanBeClipped": "こよりのアドバイスで育成がうまくいかなかった場合に彼女が叩かれるリスクを考慮し、優しさから相談をやめて星街すいせい（きまち）と決めることを選ぶ場面です。",
+      "compositionNote": "候補発話はテーマ中心の照準。前後の周辺文脈を読み、中心を含む適切な区間を自分の境界判断で切る。根拠範囲の端をそのまま境界へ写さない。",
+      "candidateSpeechIdsRole": "theme_center_aim"
+    },
+    "transcript": {
+      "language": "ja-JP",
+      "durationSec": 11898.441,
+      "speechUnitGroups": [
+        [
+          323,
+          324,
+          325,
+          326,
+          327,
+          328,
+          329,
+          330,
+          331,
+          332,
+          333,
+          334,
+          335,
+          336,
+          337,
+          338,
+          339,
+          340,
+          341,
+          342,
+          343,
+          344,
+          345,
+          346,
+          347,
+          348,
+          349,
+          350,
+          351,
+          352,
+          353,
+          354,
+          355,
+          356,
+          357,
+          358,
+          359,
+          360,
+          361,
+          362,
+          363,
+          364,
+          365,
+          366,
+          367,
+          368,
+          369,
+          370,
+          371,
+          372,
+          373,
+          374,
+          375,
+          376,
+          377,
+          378,
+          379,
+          380,
+          381,
+          382,
+          383,
+          384,
+          385,
+          386,
+          387,
+          388,
+          389,
+          390,
+          391
+        ]
+      ],
+      "segments": [
+        {
+          "speechId": 323,
+          "sourceStartMs": 3240258,
+          "sourceEndMs": 3261814,
+          "text": "これで名前はちょっと待ってフブちゃんの必殺技の名前フブちゃんの技の名前えっとちょっと待ってねホロウィッチのフブちゃんのホロウィッチ",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 324,
+          "sourceStartMs": 3285237,
+          "sourceEndMs": 3285817,
+          "text": "フブちゃんの技なんかやってなかった?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 325,
+          "sourceStartMs": 3285817,
+          "sourceEndMs": 3295742,
+          "text": "ちょっと待ってね忘れるビーム忘れるビームはフブちゃんの技じゃなくて石丸くんの技やんけトリックスター?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 326,
+          "sourceStartMs": 3308622,
+          "sourceEndMs": 3328810,
+          "text": "マリンの回の時のチャンフブチャンフブの技トリッキービクセン",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 327,
+          "sourceStartMs": 3345969,
+          "sourceEndMs": 3352672,
+          "text": "もうちょっと星っぽい名前がいいよトリックスターはあれだ心躍らすトリックスターって自分のスーパーノヴァいいね!",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 328,
+          "sourceStartMs": 3352672,
+          "sourceEndMs": 3355694,
+          "text": "スーパーノヴァいい!",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 329,
+          "sourceStartMs": 3355694,
+          "sourceEndMs": 3356514,
+          "text": "スーパーノヴァにしよう",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 330,
+          "sourceStartMs": 3362262,
+          "sourceEndMs": 3389062,
+          "text": "星で加工をうか星で貼ってスーパー感じのがいいかな感じのがいいかなだから長いか",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 331,
+          "sourceStartMs": 3392459,
+          "sourceEndMs": 3418214,
+          "text": "あ、落ちるまた落ちた",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 332,
+          "sourceStartMs": 3422110,
+          "sourceEndMs": 3438265,
+          "text": "FPSが落ちるなぁ漢字で行くか!",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 333,
+          "sourceStartMs": 3438265,
+          "sourceEndMs": 3439666,
+          "text": "漢字じゃない!",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 334,
+          "sourceStartMs": 3439666,
+          "sourceEndMs": 3440206,
+          "text": "英語で行くか!",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 335,
+          "sourceStartMs": 3440206,
+          "sourceEndMs": 3440407,
+          "text": "英語で!",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 336,
+          "sourceStartMs": 3440407,
+          "sourceEndMs": 3448674,
+          "text": "1,2,3,4,5,6,7,8,9待って、9文字1,2,3これ、これいらない?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 337,
+          "sourceStartMs": 3456229,
+          "sourceEndMs": 3472798,
+          "text": "英語英語英語入るかこうちゃんとググってちゃんとググって見てるから大丈夫間に腰入れる?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 338,
+          "sourceStartMs": 3480150,
+          "sourceEndMs": 3509840,
+          "text": "ギリギリで草ギリギリすぎるだろこれぴったりだよこれぴったりどうかっこいいしどうですかぴったりふぶちゃんみこちが読めない読めるやろふぶちゃんの曲",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 339,
+          "sourceStartMs": 3511986,
+          "sourceEndMs": 3520409,
+          "text": "OKじゃあスーパーノヴァでもう一回投げてみよう",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 340,
+          "sourceStartMs": 3542099,
+          "sourceEndMs": 3549262,
+          "text": "いいかわいいいいのでは?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 341,
+          "sourceStartMs": 3549262,
+          "sourceEndMs": 3551303,
+          "text": "これでいいのかな?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 342,
+          "sourceStartMs": 3551303,
+          "sourceEndMs": 3554885,
+          "text": "キョウジいいと思う?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 343,
+          "sourceStartMs": 3554885,
+          "sourceEndMs": 3561748,
+          "text": "意見大募集重さいらんえ、じゃあ重さなくして何あげんの?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 344,
+          "sourceStartMs": 3561748,
+          "sourceEndMs": 3566910,
+          "text": "重さいるって言ってる人もいるんだけどマジわからんのだけど何を取ればいいんだこれ",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 345,
+          "sourceStartMs": 3570914,
+          "sourceEndMs": 3599054,
+          "text": "重さ削って重さ削って変化上げてほしい重さ削って変化上げピッタリになんないんだよな98になっちゃう98になっちゃうんだよな急速上げれば100になる",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 346,
+          "sourceStartMs": 3603458,
+          "sourceEndMs": 3627422,
+          "text": "下げる上げるどっちか上げるか下げるブレーキってなんだブレーキ上げこう",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 347,
+          "sourceStartMs": 3633294,
+          "sourceEndMs": 3637975,
+          "text": "お重さが一番いる?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 348,
+          "sourceStartMs": 3637975,
+          "sourceEndMs": 3645837,
+          "text": "重さが一番いるの?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 349,
+          "sourceStartMs": 3645837,
+          "sourceEndMs": 3659620,
+          "text": "えー待って待ってえーフォークだと重さが大切って感じでカーブだとそもそも調度が出にくい球種なので重さがあんまりいらないって感じですだって多分フォークの変化球種しかやったことないからみんな重さ重さって言ってんのかなじゃあ",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 350,
+          "sourceStartMs": 3663138,
+          "sourceEndMs": 3685038,
+          "text": "こうなるんだって間違えた、これストレートこうなるらしいカーブでも重さはいるってもう分からんなマジ分からんなもうこれ",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 351,
+          "sourceStartMs": 3690566,
+          "sourceEndMs": 3719880,
+          "text": "諸説ありすぎて喧嘩になってるから助けてマジでマジわからんこよりー助けてよーわかんないよーこよりこよりー助けてーこよりー迷う迷うなこれー教科書持ちのこよりー教科書",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 352,
+          "sourceStartMs": 3720278,
+          "sourceEndMs": 3723159,
+          "text": "こっちのコヨリー!",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 353,
+          "sourceStartMs": 3723159,
+          "sourceEndMs": 3723879,
+          "text": "助けてくれー!",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 354,
+          "sourceStartMs": 3723879,
+          "sourceEndMs": 3737903,
+          "text": "んーさっき配信終わった?",
+          "isThemeCandidate": true
+        },
+        {
+          "speechId": 355,
+          "sourceStartMs": 3737903,
+          "sourceEndMs": 3742444,
+          "text": "ヤワンちゃん来てくれるかもしれんうんあもう当初強いから適当でいいよコヨリは教えてくれない!",
+          "isThemeCandidate": true
+        },
+        {
+          "speechId": 356,
+          "sourceStartMs": 3742444,
+          "sourceEndMs": 3743864,
+          "text": "コヨリは教えてくれないんだ!",
+          "isThemeCandidate": true
+        },
+        {
+          "speechId": 357,
+          "sourceStartMs": 3743864,
+          "sourceEndMs": 3749206,
+          "text": "でも確かにコヨリの言う通りコヨリがこう言ったからこうしたでマリンがそうしてさそれでなんか",
+          "isThemeCandidate": true
+        },
+        {
+          "speechId": 358,
+          "sourceStartMs": 3750062,
+          "sourceEndMs": 3779014,
+          "text": "なんかそれで何かうまくいかないことがあった時にコメントがこよりがわざと弱いの教えたとか言ってそれでわやわや言われたらうざいからやめとこう確かに聞かんとこうんやめとこうんこよりがわざとなんか弱いの教えたとか言われたら鬱陶しいからやめよううんどうしようじゃあきまちと決めるわそうしよううんそれがいいきまちと一緒に決めるうん",
+          "isThemeCandidate": true
+        },
+        {
+          "speechId": 359,
+          "sourceStartMs": 3781954,
+          "sourceEndMs": 3794866,
+          "text": "それがいいよし、じゃあ重さいる説、いらない説重さいる説、いらない説キャッチドーンキャッチ",
+          "isThemeCandidate": true
+        },
+        {
+          "speechId": 360,
+          "sourceStartMs": 3813170,
+          "sourceEndMs": 3816493,
+          "text": "さっきのがベストだった?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 361,
+          "sourceStartMs": 3816493,
+          "sourceEndMs": 3822197,
+          "text": "いらない派もいれば、いる派もいて、ちょっと欲しいと思っちゃう?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 362,
+          "sourceStartMs": 3822197,
+          "sourceEndMs": 3837229,
+          "text": "さっきのまんでいいのかもね最初にやろうとしてた100ピッタだったし100ピッタだったしね",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 363,
+          "sourceStartMs": 3845475,
+          "sourceEndMs": 3869720,
+          "text": "これがさっき最初のもともとやろうとしてたやつなこれなこれなこれこれな違いがわからないそれなガチでガチ違いわからんそれなんだよなはいはい",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 364,
+          "sourceStartMs": 3871698,
+          "sourceEndMs": 3882024,
+          "text": "ふぶちゃんは球も速いし球種も多く変化してもらうのでオリジナル球種をほとんど投げないのでもったいないあ、もうそこから?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 365,
+          "sourceStartMs": 3882024,
+          "sourceEndMs": 3882985,
+          "text": "そこまで戻る?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 366,
+          "sourceStartMs": 3882985,
+          "sourceEndMs": 3885306,
+          "text": "ふぶちゃんにするのがもったいないから始まる?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 367,
+          "sourceStartMs": 3885306,
+          "sourceEndMs": 3897854,
+          "text": "またなるほどカーブとフォークは目的が違うのでフォークは空振りカーブはどちらかと言えばボンダーを取りに行くボンダー?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 368,
+          "sourceStartMs": 3902410,
+          "sourceEndMs": 3929820,
+          "text": "えっと、急所なのでフォークと比べれば重さは必要なくカーブはストライクを取るよりははいはいはいあ、ボテボテのゴロあー、あーなるほどナイアゴロなるほどなるほどはははしたらうんうんうんうんってことはやっぱり重さは",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 369,
+          "sourceStartMs": 3933714,
+          "sourceEndMs": 3959700,
+          "text": "フープだから重さはそんなにいらないよなのねうんOKOKはいはいはいはいふんふんフープさんはキレの金属持ってるんでキレはあった方がいい重さはマスト打たれるとき飛びにくいが軌道が下振れになるのでフォークと相性いいけどフォークは相性普通なんで好みで振っていい変化は",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 370,
+          "sourceStartMs": 3960174,
+          "sourceEndMs": 3989420,
+          "text": "空振りさせやすいそっかじゃあもう空振りさせたるぞこれって感じでうんうんうん逆お、うんなるほどうーんなるほどね変化量増えすぎてフォアボール増えるのも怖いあーなるほどうんうんうんうんうんうんうんうんうん",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 371,
+          "sourceStartMs": 3991622,
+          "sourceEndMs": 4007146,
+          "text": "パワーカーブで行くならそのままが一番ベストですこれで行きましょう変化量少なくて重さを最大にしたいならナックルを折り辺にした方がいいです重さよりも",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 372,
+          "sourceStartMs": 4047799,
+          "sourceEndMs": 4049960,
+          "text": "めっちゃ飛ばないで欲しいなら重さに",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 373,
+          "sourceStartMs": 4052862,
+          "sourceEndMs": 4071314,
+          "text": "カーブはそもそも飛びづらいからそんなに重さに振らなくていいってみんな言ってんだだから重さは減らしてよくて変化を上げて重さを下げて",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 374,
+          "sourceStartMs": 4081634,
+          "sourceEndMs": 4094980,
+          "text": "と、飛ぶ、飛ぶ、飛ば、なくて、あーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあー",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 375,
+          "sourceStartMs": 4096310,
+          "sourceEndMs": 4105949,
+          "text": "ちょっとな、なや、なや、悩んでてえっとーえっとーえっとーえっとーうーんとー",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 376,
+          "sourceStartMs": 4110482,
+          "sourceEndMs": 4139500,
+          "text": "分かんない分かんない分かんないなちょっと全然分かんないな重さ変化ブレーキ変化",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 377,
+          "sourceStartMs": 4142230,
+          "sourceEndMs": 4160724,
+          "text": "これがさっきやろうとしたやつがこれかさっきやろうとしたのがこれかじゃこれ、これがじゃこれが重く重さ削ったバージョンねどっちがいいと思う?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 378,
+          "sourceStartMs": 4160724,
+          "sourceEndMs": 4168490,
+          "text": "重さ重さ重いやつと変化",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 379,
+          "sourceStartMs": 4170238,
+          "sourceEndMs": 4185730,
+          "text": "1増えるやつはい変化1増えるやつがこれブレーキは逆?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 380,
+          "sourceStartMs": 4185730,
+          "sourceEndMs": 4194998,
+          "text": "そうかブレーキは逆かブレーキは逆効果投げてみて分かった投げるわ",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 381,
+          "sourceStartMs": 4200714,
+          "sourceEndMs": 4207479,
+          "text": "1でどれくらいかマジ分からんマリン的に見た目じゃちょっとよく分かんないこれだ!",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 382,
+          "sourceStartMs": 4207479,
+          "sourceEndMs": 4212203,
+          "text": "えいっおーなんかいいねーなんか知らんけど良さげー!",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 383,
+          "sourceStartMs": 4212203,
+          "sourceEndMs": 4215045,
+          "text": "強そう!",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 384,
+          "sourceStartMs": 4215045,
+          "sourceEndMs": 4226753,
+          "text": "強そうですこれうんこれ強そうなんか強そうです!",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 385,
+          "sourceStartMs": 4226753,
+          "sourceEndMs": 4227534,
+          "text": "うん!",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 386,
+          "sourceStartMs": 4232807,
+          "sourceEndMs": 4259478,
+          "text": "さらに下行ってる重いやつを見せるOKじゃあ重いバージョンがこれですいくよ重い方はこうだドスンと落ちていく感じがありますねはいどうでしょうかさっきとはまた違う",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 387,
+          "sourceStartMs": 4260438,
+          "sourceEndMs": 4289960,
+          "text": "同じにしか見えないけどまた違うこのドスンと落ちていくんですこれということで重いわーこれよりも重いは言うとりますということでさあ皆さんこんなに違うこの2球種果たしてどっちがいいかさあ決めてまいりましょうそれでは皆さん投票で",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 388,
+          "sourceStartMs": 4290554,
+          "sourceEndMs": 4319580,
+          "text": "いきますよ10987654321では締め切りますはい皆さんたくさんの投票どうもありがとうございましたということでこの変化球はこれでいきますこちらの",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 389,
+          "sourceStartMs": 4321194,
+          "sourceEndMs": 4348170,
+          "text": "重さを削った方でいこうと思いますはいちょっとマジでわかんないけどうーんまあこれでいいということでうーん意見もよう割れたはいじゃあこれでOKで作りたいと思います",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 390,
+          "sourceStartMs": 4350706,
+          "sourceEndMs": 4379860,
+          "text": "えー新旧宿発ボールをはいそしてスロットに登録はいします1時間1時間経っちゃったやばいこれで1時間経っちゃったこれ迷いすぎてすいませんどうも迷いましためっちゃはい迷いましためっちゃありがとうございましたでは行きたいと思いますこれをふぶちゃんに応募させます迷いに迷った末にもう誰に応募させるかどんな弾を作るかで非常に",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 391,
+          "sourceStartMs": 4381338,
+          "sourceEndMs": 4408126,
+          "text": "ましたがこれで行きたいと思います甲子園はお待たせしましたこれから甲子園です大変お待たせしました初めての出来事だったいやでもありがたいことやでこんな良さげなアイテムが出たってきたっていうのはじゃあオリジナル球種習得ボールってこれをフブちゃんに覚えさせてそしてフブちゃんに今からこれを一生懸命練習指示来てくれないとまずいでこれ",
+          "isThemeCandidate": false
+        }
+      ]
+    },
+    "outputContract": {
+      "format": "json_only",
+      "schema": {
+        "selectedCuts": [
+          {
+            "sourceStartMs": "number",
+            "sourceEndMs": "number",
+            "reason": "string",
+            "usedSpeechIds": [
+              "number_or_range_string"
+            ]
+          }
+        ]
+      }
+    },
+    "connectionContract": {
+      "version": "connection-v002",
+      "candidateSpeechIdsRole": "theme_center_aim",
+      "surroundingContextRole": "boundary_search_space"
+    }
+  }
+}

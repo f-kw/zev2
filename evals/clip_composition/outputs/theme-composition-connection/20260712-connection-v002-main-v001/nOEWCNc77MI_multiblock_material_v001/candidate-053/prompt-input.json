@@ -1,0 +1,1361 @@
+{
+  "kind": "theme_composition_connection_prompt_payload",
+  "resultRole": "connected-composition-eval-connection-v002-input",
+  "runAt": "2026-07-12T12:07:46.000Z",
+  "connectionVersion": "connection-v002",
+  "generationSystem": "llm-v013@gemini-web-flash",
+  "upstreamGenerationSystem": "theme-llm-v002@gemini-web-flash",
+  "inputSelectionVersion": "input-selection-v004",
+  "promptVersion": "clip_composition_prompt_v013",
+  "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+  "candidateIndex": 53,
+  "contextCondition": "theme-window-plus-minus-5m",
+  "plannedRuns": 3,
+  "evidenceRangeDurationMs": 88988,
+  "candidateSpeechIds": [
+    771,
+    772,
+    773,
+    774,
+    775,
+    776,
+    777,
+    778,
+    779,
+    780,
+    781,
+    782,
+    783,
+    784
+  ],
+  "baselinePayloadPath": "evals/clip_composition/outputs/theme-composition-connection/20260712-context-pilot-v001/candidate-053/theme-window-plus-minus-5m/prompt-input.json",
+  "fixedConditions": {
+    "model": "gemini-web-flash",
+    "contextWindow": "theme-window-plus-minus-5m",
+    "scoring": "three-stage-with-1000ms-boundary-match",
+    "usedSpeechIdsValidation": "syntax-order-and-input-endpoint-existence"
+  },
+  "modelInput": {
+    "task": "fixed_theme_clip_interval_selection",
+    "evaluationInputId": "YE-faluP7zY-theme-candidate-053",
+    "sourceVideoId": "YE-faluP7zY",
+    "selectedTheme": {
+      "id": "input-selection-v004-candidate-053",
+      "title": "エモい演技を台無しにされるマリン",
+      "summary": "マリンが景色に感動してエモい演技をするも、ころねに伝わらず空回りして「絡みづらい」と言われてしまう掛け合いが面白い。",
+      "candidateSpeechIds": [
+        771,
+        772,
+        773,
+        774,
+        775,
+        776,
+        777,
+        778,
+        779,
+        780,
+        781,
+        782,
+        783,
+        784
+      ],
+      "whyItCanBeClipped": "マリンが景色に感動してエモい演技をするも、ころねに伝わらず空回りして「絡みづらい」と言われてしまう掛け合いが面白い。",
+      "compositionNote": "候補発話はテーマ中心の照準。前後の周辺文脈を読み、中心を含む適切な区間を自分の境界判断で切る。根拠範囲の端をそのまま境界へ写さない。",
+      "candidateSpeechIdsRole": "theme_center_aim"
+    },
+    "transcript": {
+      "language": "ja-JP",
+      "durationSec": 11824.121,
+      "speechUnitGroups": [
+        [
+          728,
+          729,
+          730,
+          731,
+          732,
+          733,
+          734,
+          735,
+          736,
+          737,
+          738,
+          739,
+          740,
+          741,
+          742,
+          743,
+          744,
+          745,
+          746,
+          747,
+          748,
+          749,
+          750,
+          751,
+          752,
+          753,
+          754,
+          755,
+          756,
+          757,
+          758,
+          759,
+          760,
+          761,
+          762,
+          763,
+          764,
+          765,
+          766,
+          767,
+          768,
+          769,
+          770,
+          771,
+          772,
+          773,
+          774,
+          775,
+          776,
+          777,
+          778,
+          779,
+          780,
+          781,
+          782,
+          783,
+          784,
+          785,
+          786,
+          787,
+          788,
+          789,
+          790,
+          791,
+          792,
+          793,
+          794,
+          795,
+          796,
+          797,
+          798,
+          799,
+          800,
+          801,
+          802,
+          803,
+          804,
+          805,
+          806,
+          807,
+          808,
+          809,
+          810,
+          811,
+          812,
+          813,
+          814,
+          815,
+          816,
+          817,
+          818,
+          819,
+          820,
+          821,
+          822,
+          823,
+          824,
+          825,
+          826,
+          827,
+          828,
+          829,
+          830,
+          831,
+          832,
+          833,
+          834,
+          835,
+          836,
+          837,
+          838,
+          839,
+          840,
+          841,
+          842,
+          843,
+          844,
+          845,
+          846,
+          847,
+          848,
+          849,
+          850,
+          851,
+          852,
+          853,
+          854,
+          855,
+          856,
+          857,
+          858,
+          859,
+          860,
+          861,
+          862,
+          863,
+          864,
+          865,
+          866,
+          867,
+          868,
+          869,
+          870,
+          871,
+          872,
+          873,
+          874,
+          875,
+          876,
+          877,
+          878,
+          879,
+          880,
+          881,
+          882,
+          883,
+          884,
+          885
+        ]
+      ],
+      "segments": [
+        {
+          "speechId": 728,
+          "sourceStartMs": 4891646,
+          "sourceEndMs": 4907911,
+          "text": "いやでもこれいいなネットのおかげで結構集まってきてるよここに置けるかな?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 729,
+          "sourceStartMs": 4907911,
+          "sourceEndMs": 4908751,
+          "text": "ほらよなんでダメなの?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 730,
+          "sourceStartMs": 4908751,
+          "sourceEndMs": 4910211,
+          "text": "あ、板が足りない板足りない!",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 731,
+          "sourceStartMs": 4910211,
+          "sourceEndMs": 4910491,
+          "text": "こうね!",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 732,
+          "sourceStartMs": 4910491,
+          "sourceEndMs": 4914633,
+          "text": "今23枚入ってるよこっちにナイス!",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 733,
+          "sourceStartMs": 4914633,
+          "sourceEndMs": 4917333,
+          "text": "ベラボーメイ!",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 734,
+          "sourceStartMs": 4917333,
+          "sourceEndMs": 4919634,
+          "text": "ベラボーベラボーあ、これまた",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 735,
+          "sourceStartMs": 4925857,
+          "sourceEndMs": 4949872,
+          "text": "やっぱフック使った方がいいわそうだね気づいたわ今遅いよ気づくよ遅遅遅遅遅遅遅遅遅遅遅遅遅遅遅遅遅遅遅遅遅遅遅遅遅遅遅遅遅遅遅遅遅遅遅遅遅遅遅遅遅遅遅遅遅遅遅遅遅遅遅遅遅遅遅遅遅遅遅遅遅遅遅遅遅遅遅遅遅遅遅遅遅遅遅遅遅遅遅遅遅遅遅遅遅遅遅遅遅遅遅遅遅遅遅遅遅遅�",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 736,
+          "sourceStartMs": 4956599,
+          "sourceEndMs": 4961304,
+          "text": "嫌ではないこれさ、1階つけたこれ外せんのかな?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 737,
+          "sourceStartMs": 4961304,
+          "sourceEndMs": 4962185,
+          "text": "もう外せないのかな?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 738,
+          "sourceStartMs": 4962185,
+          "sourceEndMs": 4963286,
+          "text": "いやでも、いいんじゃない?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 739,
+          "sourceStartMs": 4963286,
+          "sourceEndMs": 4972915,
+          "text": "これぐらいで3階建てとかにしようよ、そしたらあ、1階は狭めでね、天井引くマジで多分これさ、物がいっぱい置いてあるからさ狭く見えるだけじゃない?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 740,
+          "sourceStartMs": 4972915,
+          "sourceEndMs": 4976199,
+          "text": "なんか勝手に島に到着しちゃったマジ?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 741,
+          "sourceStartMs": 4976199,
+          "sourceEndMs": 4978741,
+          "text": "ここに行けというお告げだじゃあアンカー作ります?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 742,
+          "sourceStartMs": 4980118,
+          "sourceEndMs": 5008544,
+          "text": "あ、確かにじゃあここでまたねまた集めよっかいのししもいるかもしれないしね反応してる反応してるいのししも喜んでるロープ石嬉しいぞ声がもう嬉しい嬉しいぞ本当さごめんなんだけどマリリンここの箱見てここここ?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 743,
+          "sourceStartMs": 5008544,
+          "sourceEndMs": 5009944,
+          "text": "仲間外れがいるよこっちこっち",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 744,
+          "sourceStartMs": 5010074,
+          "sourceEndMs": 5013056,
+          "text": "手前の箱仲間外れの葉っぱはどれかな?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 745,
+          "sourceStartMs": 5013056,
+          "sourceEndMs": 5021861,
+          "text": "これこれねこれねこれねこれだー!",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 746,
+          "sourceStartMs": 5021861,
+          "sourceEndMs": 5023902,
+          "text": "買いぞー!",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 747,
+          "sourceStartMs": 5023902,
+          "sourceEndMs": 5025143,
+          "text": "見つけた!",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 748,
+          "sourceStartMs": 5025143,
+          "sourceEndMs": 5026684,
+          "text": "見つけたぞー!",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 749,
+          "sourceStartMs": 5026684,
+          "sourceEndMs": 5027064,
+          "text": "見ーっけー!",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 750,
+          "sourceStartMs": 5027064,
+          "sourceEndMs": 5030987,
+          "text": "仲間外れ見っけー!",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 751,
+          "sourceStartMs": 5030987,
+          "sourceEndMs": 5035930,
+          "text": "終わったごめん面白すぎてちょっと見せたかったわご飯ある?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 752,
+          "sourceStartMs": 5035930,
+          "sourceEndMs": 5038751,
+          "text": "ご飯あるよ生酢焼けてるよ食べない?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 753,
+          "sourceStartMs": 5038751,
+          "sourceEndMs": 5039712,
+          "text": "ここ生酢あるから",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 754,
+          "sourceStartMs": 5040042,
+          "sourceEndMs": 5047946,
+          "text": "いただきますわ食べて食べてマジくだらねーわ気づいた?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 755,
+          "sourceStartMs": 5047946,
+          "sourceEndMs": 5069478,
+          "text": "気づいた作業しまーすまず食べようはい、あんこ落としたよナイスナイスナイスパクパクナマズ一息で全部食べたわオッケオッケまだ魚いっぱいあるから焼きますあまりの空腹に美味しかったねどんどん食べとどっかに集めようかな焼くわ",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 756,
+          "sourceStartMs": 5070266,
+          "sourceEndMs": 5074108,
+          "text": "なんか、ある程度分けたんだよね?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 757,
+          "sourceStartMs": 5074108,
+          "sourceEndMs": 5087336,
+          "text": "あ、ここブドウのベトベトのエリアだな終わったやだな、触りたくないねベトベトだからねうんこれでもうちょっと余裕できたら改めて整理整頓したいねそうね!",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 758,
+          "sourceStartMs": 5087336,
+          "sourceEndMs": 5099083,
+          "text": "今別にいっかいったねお水にさ、ペットボトル汲みなありがとうお水にペットボトル汲みな?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 759,
+          "sourceStartMs": 5099083,
+          "sourceEndMs": 5099244,
+          "text": "ん?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 760,
+          "sourceStartMs": 5099244,
+          "sourceEndMs": 5099344,
+          "text": "ん?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 761,
+          "sourceStartMs": 5099344,
+          "sourceEndMs": 5099744,
+          "text": "な、なに?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 762,
+          "sourceStartMs": 5099744,
+          "sourceEndMs": 5099944,
+          "text": "ん?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 763,
+          "sourceStartMs": 5101438,
+          "sourceEndMs": 5103939,
+          "text": "おかしくないか?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 764,
+          "sourceStartMs": 5103939,
+          "sourceEndMs": 5109002,
+          "text": "お水にペットボトルそういうことねペットボトルにお水組みなか?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 765,
+          "sourceStartMs": 5109002,
+          "sourceEndMs": 5128111,
+          "text": "そうだね順番が違うだけでこうもさ意味が違ってくるなすごいよな日本語の神秘を感じてるすごいよ木でも凝ろうかなじゃあいいね木こりしながら探すわ木こりしながらイノシシになる?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 766,
+          "sourceStartMs": 5128111,
+          "sourceEndMs": 5128291,
+          "text": "あれ?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 767,
+          "sourceStartMs": 5130066,
+          "sourceEndMs": 5133747,
+          "text": "イノシシンリーでいいのかなこれイノシシンリーやん?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 768,
+          "sourceStartMs": 5133747,
+          "sourceEndMs": 5135367,
+          "text": "イノシシンリーなに言ってる?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 769,
+          "sourceStartMs": 5135367,
+          "sourceEndMs": 5158994,
+          "text": "ごめんねなんでもないわ無視してノープランに話し始めるな申し訳ちょっと木凝っちゃお魚焼いてあーこれあれかそっか魚焼くのにも板がいるんだなあそうでも板今ね凝ってるからね持ってくわ今からありがとう板はめとくからちょ待ってよこれもいける",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 770,
+          "sourceStartMs": 5162499,
+          "sourceEndMs": 5189318,
+          "text": "よー取れるぴょんぴょんぴょんぴょんマンゴー邪魔だから食べようじゃマンゴーマンゴーじゃんじゃんそんな笑わないそんな笑うとこじゃねーから今の面白いいやそういうの好きなんだよねそういうくだらないやつがさそんなおもろくないことでいっぱい笑われると気まず",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 771,
+          "sourceStartMs": 5190322,
+          "sourceEndMs": 5195044,
+          "text": "そんな面白くないと思ったえ、綺麗え、綺麗?",
+          "isThemeCandidate": true
+        },
+        {
+          "speechId": 772,
+          "sourceStartMs": 5195044,
+          "sourceEndMs": 5195084,
+          "text": "何?",
+          "isThemeCandidate": true
+        },
+        {
+          "speechId": 773,
+          "sourceStartMs": 5195084,
+          "sourceEndMs": 5195464,
+          "text": "夕焼け?",
+          "isThemeCandidate": true
+        },
+        {
+          "speechId": 774,
+          "sourceStartMs": 5195464,
+          "sourceEndMs": 5195944,
+          "text": "朝日?",
+          "isThemeCandidate": true
+        },
+        {
+          "speechId": 775,
+          "sourceStartMs": 5195944,
+          "sourceEndMs": 5212850,
+          "text": "うんほんとだほら、すごいね私さ、この景色一生忘れないと思うなんで?",
+          "isThemeCandidate": true
+        },
+        {
+          "speechId": 776,
+          "sourceStartMs": 5212850,
+          "sourceEndMs": 5213570,
+          "text": "そんな思い出ある?",
+          "isThemeCandidate": true
+        },
+        {
+          "speechId": 777,
+          "sourceStartMs": 5213570,
+          "sourceEndMs": 5219192,
+          "text": "バカされてるあ、そういう演技かそういう演技ごめんね、ごめんね気づけなくてごめんそういう演技",
+          "isThemeCandidate": true
+        },
+        {
+          "speechId": 778,
+          "sourceStartMs": 5225398,
+          "sourceEndMs": 5231500,
+          "text": "ごめんねごめんね縁目だからちゃんと読んできた縁目今日の縁目縁目?",
+          "isThemeCandidate": true
+        },
+        {
+          "speechId": 779,
+          "sourceStartMs": 5231500,
+          "sourceEndMs": 5234981,
+          "text": "縁目なんてあった?",
+          "isThemeCandidate": true
+        },
+        {
+          "speechId": 780,
+          "sourceStartMs": 5234981,
+          "sourceEndMs": 5236381,
+          "text": "あ、待ってそれも演技か?",
+          "isThemeCandidate": true
+        },
+        {
+          "speechId": 781,
+          "sourceStartMs": 5236381,
+          "sourceEndMs": 5244903,
+          "text": "マリンやったなぁねぇもう伝わってよマジついでなぁ今日絡みづらい?",
+          "isThemeCandidate": true
+        },
+        {
+          "speechId": 782,
+          "sourceStartMs": 5244903,
+          "sourceEndMs": 5249964,
+          "text": "ちょっとやばいかもでもちょっとねあの絡みづらいのは伊之助の時は本当にねあのマジ",
+          "isThemeCandidate": true
+        },
+        {
+          "speechId": 783,
+          "sourceStartMs": 5250620,
+          "sourceEndMs": 5259163,
+          "text": "いのすけ限定やんそれその時はね本当に死ぬと思ったね命も覚悟した船長本当に?",
+          "isThemeCandidate": true
+        },
+        {
+          "speechId": 784,
+          "sourceStartMs": 5259163,
+          "sourceEndMs": 5279310,
+          "text": "まあでも死ななくてよかったねこっちが死にそうですなんなんなんどうした急にサメが来たから地道に泳いでるよしよしよし逃げれた逃げれたサメの餌作ってちょっとあれやりたいけどなもったいないんだよなそんなやつのためにクソがよどういう感情それ",
+          "isThemeCandidate": true
+        },
+        {
+          "speechId": 785,
+          "sourceStartMs": 5280554,
+          "sourceEndMs": 5283936,
+          "text": "で、これ作ったやつ…あ、これもしかして斧で?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 786,
+          "sourceStartMs": 5283936,
+          "sourceEndMs": 5284357,
+          "text": "どれ?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 787,
+          "sourceStartMs": 5284357,
+          "sourceEndMs": 5284977,
+          "text": "斧?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 788,
+          "sourceStartMs": 5284977,
+          "sourceEndMs": 5287619,
+          "text": "あ、斧で壊せるじゃん!",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 789,
+          "sourceStartMs": 5287619,
+          "sourceEndMs": 5288399,
+          "text": "何を?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 790,
+          "sourceStartMs": 5288399,
+          "sourceEndMs": 5289900,
+          "text": "あ、あ、作ったやつ?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 791,
+          "sourceStartMs": 5289900,
+          "sourceEndMs": 5299307,
+          "text": "うん、これは気づきでしたはい、すごーいおめでとうあ、へぇーえ、天井高くする?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 792,
+          "sourceStartMs": 5299307,
+          "sourceEndMs": 5302869,
+          "text": "そうなったら…あ、でも、なんか大変じゃない?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 793,
+          "sourceStartMs": 5302869,
+          "sourceEndMs": 5305131,
+          "text": "そう、なんか壊して作るの大変じゃない?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 794,
+          "sourceStartMs": 5305131,
+          "sourceEndMs": 5309614,
+          "text": "材料がちょっと減ってる感じする、元よりね、なんかここだけ粗いけど何?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 795,
+          "sourceStartMs": 5310822,
+          "sourceEndMs": 5320109,
+          "text": "だから、材料が足りないからあ、あ、あ、そうだ、同じこと、何回も強制で、強制!",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 796,
+          "sourceStartMs": 5320109,
+          "sourceEndMs": 5337362,
+          "text": "次言わせたらマジで、ガタガタ言わせるからなやばいやばいやばいよこれ、どうしようご機嫌そこにいちゃったわで、ここにもあれつけたいなOKここ無理なのかな?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 797,
+          "sourceStartMs": 5337362,
+          "sourceEndMs": 5338002,
+          "text": "ちょっと、素材が足りないのかな?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 798,
+          "sourceStartMs": 5338002,
+          "sourceEndMs": 5339944,
+          "text": "あれ、ここ無理なのかな?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 799,
+          "sourceStartMs": 5341314,
+          "sourceEndMs": 5341775,
+          "text": "あれかな?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 800,
+          "sourceStartMs": 5341775,
+          "sourceEndMs": 5343575,
+          "text": "柱がないからか?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 801,
+          "sourceStartMs": 5343575,
+          "sourceEndMs": 5350698,
+          "text": "ちょっと階層集めてきまーすあ、ナイスーこれでどうだ?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 802,
+          "sourceStartMs": 5350698,
+          "sourceEndMs": 5350938,
+          "text": "サラサラ?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 803,
+          "sourceStartMs": 5350938,
+          "sourceEndMs": 5369824,
+          "text": "サラサラサラサラ行ける行ける行けるあ、できたできたいいよいいよいいよいいよいいよいいよいいよいいよいいよいいよいいよいいよいいよいいよいいよいいよいいよいいよいいよいいよいいよいいよいいよいいよいいよいいよいいよいいよいいよいいよいいよいいよいいよいいよいいよいいよいいよいいよいいよいいよいいよいいよいいよいいよいいよいいよいいよいいよいいよいいよいいよいいよいいよいいよいいよいいよいいよいいよいいよいいよいいよいいよいいよいいよいいよいいよいいよいいよいいよいいよいいよいいよいいよいいよいいよいいよいいよいいよいいよいいよいいよいいよいいよいいよ",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 804,
+          "sourceStartMs": 5370342,
+          "sourceEndMs": 5372123,
+          "text": "角刈り用?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 805,
+          "sourceStartMs": 5372123,
+          "sourceEndMs": 5384947,
+          "text": "角刈り用角刈り用ねうんこれつけるかでもやっぱ開放感も欲しいからさまあ確かに壁いらなくね?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 806,
+          "sourceStartMs": 5384947,
+          "sourceEndMs": 5388388,
+          "text": "そういうわけじゃない?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 807,
+          "sourceStartMs": 5388388,
+          "sourceEndMs": 5399952,
+          "text": "1階は開放するかいいな2階は2階は壁ありOKOK",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 808,
+          "sourceStartMs": 5402383,
+          "sourceEndMs": 5404665,
+          "text": "周りに何もないかもここない?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 809,
+          "sourceStartMs": 5404665,
+          "sourceEndMs": 5415130,
+          "text": "OK早々に移動した方がいいかもしれない壁にストレージできる?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 810,
+          "sourceStartMs": 5415130,
+          "sourceEndMs": 5416951,
+          "text": "クローゼットみたいな感じ?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 811,
+          "sourceStartMs": 5416951,
+          "sourceEndMs": 5428318,
+          "text": "ちょっと待ってやってみていいよ階段の裏側とかデッドスペースを活かしてさ収納をここにさ",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 812,
+          "sourceStartMs": 5429346,
+          "sourceEndMs": 5430000,
+          "text": "え、ちょっと待って",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 813,
+          "sourceStartMs": 5431915,
+          "sourceEndMs": 5459098,
+          "text": "ちょっと待って忙しくなって気上がりましたわすごいじゃんなんかしたいなちょっとじゃあもうここ離して移動しました移動してまた板とか集めて欲しいかなじゃあアンカー外します壁の収納所気になりますちょっともう一回魚釣ろうこれちょっとぶち壊して待って待ってまず2階の",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 814,
+          "sourceStartMs": 5460342,
+          "sourceEndMs": 5489452,
+          "text": "ここの完成させようここをこのエリアを2階で何をしたいかって言ったらやっぱり作物とかヤシの木を2階で育てたいよねそれなそれなじゃあとりあえず魚釣りながらあれだ材料集めるわんでもやっぱさ1回さジャンプでさ移動できないのちょっとだるいよね引っかかってあジャンプあー別にいいようーんあー",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 815,
+          "sourceStartMs": 5490987,
+          "sourceEndMs": 5499272,
+          "text": "わかるわかるジャンプに移動できた方がいいわな何してる?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 816,
+          "sourceStartMs": 5499272,
+          "sourceEndMs": 5499512,
+          "text": "大丈夫?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 817,
+          "sourceStartMs": 5499512,
+          "sourceEndMs": 5501533,
+          "text": "大丈夫サメ?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 818,
+          "sourceStartMs": 5501533,
+          "sourceEndMs": 5514140,
+          "text": "サメサメねジャンプで木なくなった木なくなった木なくなった待ってよ何枚持ってると思う?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 819,
+          "sourceStartMs": 5514140,
+          "sourceEndMs": 5519964,
+          "text": "ちょっと待って期待を込めて50枚マジで言ってる?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 820,
+          "sourceStartMs": 5520750,
+          "sourceEndMs": 5522671,
+          "text": "50枚ある?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 821,
+          "sourceStartMs": 5522671,
+          "sourceEndMs": 5523691,
+          "text": "6枚6枚?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 822,
+          "sourceStartMs": 5523691,
+          "sourceEndMs": 5529994,
+          "text": "まあまあまあまあでも待ってここになかった?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 823,
+          "sourceStartMs": 5529994,
+          "sourceEndMs": 5530275,
+          "text": "どこ?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 824,
+          "sourceStartMs": 5530275,
+          "sourceEndMs": 5537818,
+          "text": "ここなかったなかったかもうないよごめんね本当にまたコツコツ今から集めるから進んでなくない?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 825,
+          "sourceStartMs": 5537818,
+          "sourceEndMs": 5546502,
+          "text": "待ってやばいきっと大区画の作物になっちゃって進んでないのであれ?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 826,
+          "sourceStartMs": 5546502,
+          "sourceEndMs": 5549244,
+          "text": "ん?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 827,
+          "sourceStartMs": 5549244,
+          "sourceEndMs": 5549924,
+          "text": "船がね進んでない",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 828,
+          "sourceStartMs": 5552102,
+          "sourceEndMs": 5578382,
+          "text": "あれかな、ちょっと一回砲つけてさそうね、砲つけないとね、これねOK、つけるわよーほーよーほーだわ、これさーけばーあれ、砲どこやったっけ、船長あ、持ってたわ、手に待って、ここにこれパドルがあるから必要なのほらほら、行く行くほらほら、見ていや、砲立てたほうが早いからほら見てよ、移動してない?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 829,
+          "sourceStartMs": 5578382,
+          "sourceEndMs": 5578702,
+          "text": "してる",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 830,
+          "sourceStartMs": 5581366,
+          "sourceEndMs": 5584688,
+          "text": "捨てるけど、頬を立てたほうがほら!",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 831,
+          "sourceStartMs": 5584688,
+          "sourceEndMs": 5586909,
+          "text": "ほらほらほらほら!",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 832,
+          "sourceStartMs": 5586909,
+          "sourceEndMs": 5591793,
+          "text": "そんな、そんなちまちまやってさぁひどしてるよ!",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 833,
+          "sourceStartMs": 5591793,
+          "sourceEndMs": 5593073,
+          "text": "まどろっこしいんだよ!",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 834,
+          "sourceStartMs": 5593073,
+          "sourceEndMs": 5605881,
+          "text": "なんでなんちゅうこと今、頬開いてやったからよ感謝しろよなぁよし、進み始めた?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 835,
+          "sourceStartMs": 5605881,
+          "sourceEndMs": 5607402,
+          "text": "ん?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 836,
+          "sourceStartMs": 5607402,
+          "sourceEndMs": 5608963,
+          "text": "進んでるこれ?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 837,
+          "sourceStartMs": 5608963,
+          "sourceEndMs": 5609183,
+          "text": "あれ?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 838,
+          "sourceStartMs": 5609183,
+          "sourceEndMs": 5609944,
+          "text": "すでに進んでるよ",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 839,
+          "sourceStartMs": 5610114,
+          "sourceEndMs": 5639964,
+          "text": "逆でしたと向きが逆でしたおいおい何やってんだおんじゃんお前がやれよ泣くぞ泣くぞぐずってるぐずってる早く泣けよ泣くまでが長いでまだぐすぐすしてるあれ?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 840,
+          "sourceStartMs": 5641350,
+          "sourceEndMs": 5648235,
+          "text": "もう遅いよもういつまでグズってんだよあれ進まないんだけどおかしくない?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 841,
+          "sourceStartMs": 5648235,
+          "sourceEndMs": 5669490,
+          "text": "なんかやっぱパドルの出番ってわけよこれがおかしいなぁ向きは合ってると思うんだけどねちょっと待ってなぁパドルでこくから今行けパドルでやった方がいいと思うんだよね待っちょ待っちょ",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 842,
+          "sourceStartMs": 5671582,
+          "sourceEndMs": 5672062,
+          "text": "進んでる?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 843,
+          "sourceStartMs": 5672062,
+          "sourceEndMs": 5676266,
+          "text": "これであ、進んだ進んだ進んだ!",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 844,
+          "sourceStartMs": 5676266,
+          "sourceEndMs": 5686333,
+          "text": "ほらよ、感謝しな壊れたわぬるっと壊れたね、今壊れたわパドルいいじゃん、これあ、でも移動してる?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 845,
+          "sourceStartMs": 5686333,
+          "sourceEndMs": 5688435,
+          "text": "これもういいかな?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 846,
+          "sourceStartMs": 5688435,
+          "sourceEndMs": 5689396,
+          "text": "逆、方が逆向きなのかな?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 847,
+          "sourceStartMs": 5689396,
+          "sourceEndMs": 5690517,
+          "text": "あー!",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 848,
+          "sourceStartMs": 5690517,
+          "sourceEndMs": 5699584,
+          "text": "方外したらまた戻っちゃった待って、パドル作るわ、ちょっともう方いいかなと思ってさごめんね、ソーリーいいよ",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 849,
+          "sourceStartMs": 5700502,
+          "sourceEndMs": 5727982,
+          "text": "もっかいつけまーすはーいあーどっこいしょとそっかこんな止まっちゃうんだねすぐねこうよいやーほんとありがてありがてありがとねてっきりもういいのかと思ってさちょっと木終わる木の対策にねここでねヤシの木の栽培をね始めていきたいと思いまーすありがとございまーすえっとじゃあヤシの種種種種種種ある?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 850,
+          "sourceStartMs": 5727982,
+          "sourceEndMs": 5729864,
+          "text": "ありますよー種どっかで",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 851,
+          "sourceStartMs": 5732991,
+          "sourceEndMs": 5735231,
+          "text": "マリリン、さっきジャガイモ焼いてた?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 852,
+          "sourceStartMs": 5735231,
+          "sourceEndMs": 5739913,
+          "text": "あ、焼いたー焼けたからさ、これいる?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 853,
+          "sourceStartMs": 5739913,
+          "sourceEndMs": 5744414,
+          "text": "あ、コーネ食べたければ食べてもいいよあ、いいよ、コーネにお魚あるからねあんた?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 854,
+          "sourceStartMs": 5744414,
+          "sourceEndMs": 5756917,
+          "text": "じゃあ貰うわほらあ、そっかはい見せびらかしてたわ、今うんごめんね気づきちゃう進んでる?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 855,
+          "sourceStartMs": 5756917,
+          "sourceEndMs": 5758878,
+          "text": "これあ、進んでないな、これ進んない?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 856,
+          "sourceStartMs": 5767379,
+          "sourceEndMs": 5772220,
+          "text": "逆だったん?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 857,
+          "sourceStartMs": 5772220,
+          "sourceEndMs": 5775261,
+          "text": "逆でしたでもこれってさ船長が悪いと思う?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 858,
+          "sourceStartMs": 5775261,
+          "sourceEndMs": 5783643,
+          "text": "ううんこのほうが悪いと思うねえ難しいあ、ここにあったげるちゃんいくよ?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 859,
+          "sourceStartMs": 5783643,
+          "sourceEndMs": 5787383,
+          "text": "あら?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 860,
+          "sourceStartMs": 5787383,
+          "sourceEndMs": 5788664,
+          "text": "見上げてるもう任せろよ",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 861,
+          "sourceStartMs": 5790578,
+          "sourceEndMs": 5796179,
+          "text": "コーネにはさぁ…こうかな?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 862,
+          "sourceStartMs": 5796179,
+          "sourceEndMs": 5796999,
+          "text": "何笑ってんだよ!",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 863,
+          "sourceStartMs": 5796999,
+          "sourceEndMs": 5797319,
+          "text": "コーネ!",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 864,
+          "sourceStartMs": 5797319,
+          "sourceEndMs": 5797899,
+          "text": "コーネ!",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 865,
+          "sourceStartMs": 5797899,
+          "sourceEndMs": 5798500,
+          "text": "ほんとに!",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 866,
+          "sourceStartMs": 5798500,
+          "sourceEndMs": 5798980,
+          "text": "ほんとに!",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 867,
+          "sourceStartMs": 5798980,
+          "sourceEndMs": 5800020,
+          "text": "足しか引っ張れずに魚釣ります!",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 868,
+          "sourceStartMs": 5800020,
+          "sourceEndMs": 5813083,
+          "text": "マジで…あーごめんなさい頼むよ、犬神様…いや、頼まれよう頼まれよう…何笑ってんだよ!",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 869,
+          "sourceStartMs": 5813083,
+          "sourceEndMs": 5820000,
+          "text": "ごめんなさい…ごめんなさい…ごめんなさい…お魚…お魚釣って…お魚…よいしょ…お魚…お魚…お水入れて",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 870,
+          "sourceStartMs": 5821110,
+          "sourceEndMs": 5824633,
+          "text": "水遠いのだる水遠いのだるいな2個作る?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 871,
+          "sourceStartMs": 5824633,
+          "sourceEndMs": 5831798,
+          "text": "2個いらないか水はでも割ってもいいかもね作るコスト的にそんな重くなければ2回にも作れば?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 872,
+          "sourceStartMs": 5831798,
+          "sourceEndMs": 5849852,
+          "text": "そうだね2回にも作ろうかなワンチャンありだよね便利だよね4人でやるわけだしガラスならね砂焼けば作れるしありだなありありその意見素敵ですえっとどっかに魚が釣れなくなったあったかな砂とりあえずじゃあぶち込んで",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 873,
+          "sourceStartMs": 5852255,
+          "sourceEndMs": 5871583,
+          "text": "雨降ってきた雨か、今日はまた居た、亡くなったなんか全然流れてこないねあれだ、フォー開いてるからだちょっと閉じるわあ、そっかそっか、ごめんごめん、そうだそうだ何回同じこと言うねんって言うねん反省した?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 874,
+          "sourceStartMs": 5871583,
+          "sourceEndMs": 5872143,
+          "text": "こうね?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 875,
+          "sourceStartMs": 5872143,
+          "sourceEndMs": 5877946,
+          "text": "反省した、今反省したよしよし分かればよろしいさすがやな",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 876,
+          "sourceStartMs": 5880002,
+          "sourceEndMs": 5888349,
+          "text": "反省できるだがしかし学習もしないごめんなさい!",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 877,
+          "sourceStartMs": 5888349,
+          "sourceEndMs": 5889129,
+          "text": "サメもいる!",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 878,
+          "sourceStartMs": 5889129,
+          "sourceEndMs": 5899738,
+          "text": "気をつけてね落ちないように板がなくてさ砂が焼けないよ魚食べる?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 879,
+          "sourceStartMs": 5899738,
+          "sourceEndMs": 5900879,
+          "text": "残されてる!",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 880,
+          "sourceStartMs": 5908790,
+          "sourceEndMs": 5910000,
+          "text": "流されちゃったってこと",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 881,
+          "sourceStartMs": 5910746,
+          "sourceEndMs": 5939452,
+          "text": "でもね、ナマズは流されなかった神やんナマズさえあればね3色いけるからなナマズでナマズ焼くねこれマリリーにあげるわえっとナマズえっとこうで美味しく焼けますようにマリリーのためによいしょ愛を込めてるそうだよ意識高いないたいたいたいたいたいたいたないかな",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 882,
+          "sourceStartMs": 5940650,
+          "sourceEndMs": 5950937,
+          "text": "いたねーちょっと泳いでるすぐ野生に帰るいた流れてこないな全然あ、頬畳むか畳んだ?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 883,
+          "sourceStartMs": 5950937,
+          "sourceEndMs": 5969090,
+          "text": "畳んだOKOKOKあ、流れてきた流れてきたよしよしよしよしだいぶ流れてきたわね気づいたらめっちゃめっちゃすり減ってるわこれほらよ食われてる味方がゴリゴリ食われてるやばいな",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 884,
+          "sourceStartMs": 5970194,
+          "sourceEndMs": 5971655,
+          "text": "あいつらマジでえ、これ?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 885,
+          "sourceStartMs": 5971655,
+          "sourceEndMs": 5975696,
+          "text": "あ、でもそっか止まってないとん?",
+          "isThemeCandidate": false
+        }
+      ]
+    },
+    "outputContract": {
+      "format": "json_only",
+      "schema": {
+        "selectedCuts": [
+          {
+            "sourceStartMs": "number",
+            "sourceEndMs": "number",
+            "reason": "string",
+            "usedSpeechIds": [
+              "number_or_range_string"
+            ]
+          }
+        ]
+      }
+    },
+    "connectionContract": {
+      "version": "connection-v002",
+      "candidateSpeechIdsRole": "theme_center_aim",
+      "surroundingContextRole": "boundary_search_space"
+    }
+  }
+}

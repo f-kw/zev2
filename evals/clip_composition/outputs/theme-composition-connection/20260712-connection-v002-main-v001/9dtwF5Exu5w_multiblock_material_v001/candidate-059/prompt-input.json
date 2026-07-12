@@ -1,0 +1,647 @@
+{
+  "kind": "theme_composition_connection_prompt_payload",
+  "resultRole": "connected-composition-eval-connection-v002-input",
+  "runAt": "2026-07-12T12:07:46.020Z",
+  "connectionVersion": "connection-v002",
+  "generationSystem": "llm-v013@gemini-web-flash",
+  "upstreamGenerationSystem": "theme-llm-v002@gemini-web-flash",
+  "inputSelectionVersion": "input-selection-v004",
+  "promptVersion": "clip_composition_prompt_v013",
+  "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+  "candidateIndex": 59,
+  "contextCondition": "theme-window-plus-minus-5m",
+  "plannedRuns": 3,
+  "evidenceRangeDurationMs": 88124,
+  "candidateSpeechIds": [
+    1318,
+    1319,
+    1320,
+    1321,
+    1322
+  ],
+  "baselinePayloadPath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-059/prompt-input.json",
+  "fixedConditions": {
+    "model": "gemini-web-flash",
+    "contextWindow": "theme-window-plus-minus-5m",
+    "scoring": "three-stage-with-1000ms-boundary-match",
+    "usedSpeechIdsValidation": "syntax-order-and-input-endpoint-existence"
+  },
+  "modelInput": {
+    "task": "fixed_theme_clip_interval_selection",
+    "evaluationInputId": "o8rZAhARXAc-theme-candidate-059",
+    "sourceVideoId": "o8rZAhARXAc",
+    "selectedTheme": {
+      "id": "input-selection-v004-candidate-059",
+      "title": "次戦の相手判明と次回配信への持ち越し",
+      "summary": "次の対戦相手がBランクであることに反応しつつ、打ち気ガチャや試合を次回に持ち越して配信の告知と締めに入る一連の流れが綺麗にまとまっているため。",
+      "candidateSpeechIds": [
+        1318,
+        1319,
+        1320,
+        1321,
+        1322
+      ],
+      "whyItCanBeClipped": "次の対戦相手がBランクであることに反応しつつ、打ち気ガチャや試合を次回に持ち越して配信の告知と締めに入る一連の流れが綺麗にまとまっているため。",
+      "compositionNote": "候補発話はテーマ中心の照準。前後の周辺文脈を読み、中心を含む適切な区間を自分の境界判断で切る。根拠範囲の端をそのまま境界へ写さない。",
+      "candidateSpeechIdsRole": "theme_center_aim"
+    },
+    "transcript": {
+      "language": "ja-JP",
+      "durationSec": 11898.441,
+      "speechUnitGroups": [
+        [
+          1253,
+          1254,
+          1255,
+          1256,
+          1257,
+          1258,
+          1259,
+          1260,
+          1261,
+          1262,
+          1263,
+          1264,
+          1265,
+          1266,
+          1267,
+          1268,
+          1269,
+          1270,
+          1271,
+          1272,
+          1273,
+          1274,
+          1275,
+          1276,
+          1277,
+          1278,
+          1279,
+          1280,
+          1281,
+          1282,
+          1283,
+          1284,
+          1285,
+          1286,
+          1287,
+          1288,
+          1289,
+          1290,
+          1291,
+          1292,
+          1293,
+          1294,
+          1295,
+          1296,
+          1297,
+          1298,
+          1299,
+          1300,
+          1301,
+          1302,
+          1303,
+          1304,
+          1305,
+          1306,
+          1307,
+          1308,
+          1309,
+          1310,
+          1311,
+          1312,
+          1313,
+          1314,
+          1315,
+          1316,
+          1317,
+          1318,
+          1319,
+          1320,
+          1321,
+          1322,
+          1323
+        ]
+      ],
+      "segments": [
+        {
+          "speechId": 1253,
+          "sourceStartMs": 10927714,
+          "sourceEndMs": 10928062,
+          "text": "マジで?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 1254,
+          "sourceStartMs": 10957266,
+          "sourceEndMs": 10958769,
+          "text": "やめろいいわまずいはい",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 1255,
+          "sourceStartMs": 10980390,
+          "sourceEndMs": 10981311,
+          "text": "犠牲フライしてやばい!",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 1256,
+          "sourceStartMs": 10981311,
+          "sourceEndMs": 10985234,
+          "text": "2ストライクや!",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 1257,
+          "sourceStartMs": 10985234,
+          "sourceEndMs": 10986114,
+          "text": "になったらスクイズ?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 1258,
+          "sourceStartMs": 10986114,
+          "sourceEndMs": 10987796,
+          "text": "か?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 1259,
+          "sourceStartMs": 10987796,
+          "sourceEndMs": 11005829,
+          "text": "うん分かった分かったストライク",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 1260,
+          "sourceStartMs": 11010002,
+          "sourceEndMs": 11034742,
+          "text": "ああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああ",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 1261,
+          "sourceStartMs": 11083154,
+          "sourceEndMs": 11083575,
+          "text": "涙出た",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 1262,
+          "sourceStartMs": 11100566,
+          "sourceEndMs": 11106251,
+          "text": "辛かった本当にもう嫌だやった!",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 1263,
+          "sourceStartMs": 11106251,
+          "sourceEndMs": 11106471,
+          "text": "勝ちましたね!",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 1264,
+          "sourceStartMs": 11106471,
+          "sourceEndMs": 11121986,
+          "text": "はいふぶちゃん何も上がってないのかー",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 1265,
+          "sourceStartMs": 11140562,
+          "sourceEndMs": 11142104,
+          "text": "この試合すごい活躍だったね!",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 1266,
+          "sourceStartMs": 11142104,
+          "sourceEndMs": 11142625,
+          "text": "これからも頑張ってね!",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 1267,
+          "sourceStartMs": 11142625,
+          "sourceEndMs": 11158005,
+          "text": "いいね、いいね、いいね分かったら特訓ある今日はここまでです",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 1268,
+          "sourceStartMs": 11180811,
+          "sourceEndMs": 11189520,
+          "text": "もうつらいんだよこれでいいかな?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 1269,
+          "sourceStartMs": 11199718,
+          "sourceEndMs": 11218614,
+          "text": "動いた上がった上がった総合で総合3で上がった総合3でみんなの今効率上がってんのこれイヤン",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 1270,
+          "sourceStartMs": 11223006,
+          "sourceEndMs": 11235132,
+          "text": "何も書いてなくて分かんにゃいうん、じゃあ総合ね、分かった、はいあ、もう今?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 1271,
+          "sourceStartMs": 11235132,
+          "sourceEndMs": 11236172,
+          "text": "今買い物?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 1272,
+          "sourceStartMs": 11236172,
+          "sourceEndMs": 11236312,
+          "text": "もう今?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 1273,
+          "sourceStartMs": 11236312,
+          "sourceEndMs": 11236873,
+          "text": "もう今なの?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 1274,
+          "sourceStartMs": 11236873,
+          "sourceEndMs": 11242335,
+          "text": "もう分かった、今ね何買おう君たち何があったらいいかな?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 1275,
+          "sourceStartMs": 11242335,
+          "sourceEndMs": 11246037,
+          "text": "何があったらいいと思う?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 1276,
+          "sourceStartMs": 11246037,
+          "sourceEndMs": 11248178,
+          "text": "これ何買おう",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 1277,
+          "sourceStartMs": 11261110,
+          "sourceEndMs": 11277872,
+          "text": "お褒めないお褒め自分探し",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 1278,
+          "sourceStartMs": 11281846,
+          "sourceEndMs": 11283567,
+          "text": "お褒めね?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 1279,
+          "sourceStartMs": 11283567,
+          "sourceEndMs": 11285847,
+          "text": "うーんお褒め何個買う?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 1280,
+          "sourceStartMs": 11285847,
+          "sourceEndMs": 11285987,
+          "text": "1個?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 1281,
+          "sourceStartMs": 11285987,
+          "sourceEndMs": 11298871,
+          "text": "うーんうーん2個?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 1282,
+          "sourceStartMs": 11298871,
+          "sourceEndMs": 11299751,
+          "text": "うーんうーん自分探し?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 1283,
+          "sourceStartMs": 11299751,
+          "sourceEndMs": 11307954,
+          "text": "うーん自分探しの本うん",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 1284,
+          "sourceStartMs": 11315570,
+          "sourceEndMs": 11316431,
+          "text": "あと何買う?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 1285,
+          "sourceStartMs": 11316431,
+          "sourceEndMs": 11320753,
+          "text": "あと何見る?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 1286,
+          "sourceStartMs": 11320753,
+          "sourceEndMs": 11321654,
+          "text": "機材見る?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 1287,
+          "sourceStartMs": 11321654,
+          "sourceEndMs": 11339806,
+          "text": "機材はこんな感じこんな感じ何買う?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 1288,
+          "sourceStartMs": 11357404,
+          "sourceEndMs": 11364591,
+          "text": "うんうんうんうん自分探し確かに年齢が偏りが半端じゃないんだよなもう一個あってもいいよねストープウォッチうんうん",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 1289,
+          "sourceStartMs": 11376935,
+          "sourceEndMs": 11385057,
+          "text": "じゃあもう900円しかないからもう一個自分探し買うどこ行った?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 1290,
+          "sourceStartMs": 11385057,
+          "sourceEndMs": 11399720,
+          "text": "あった偏りがすごいからあと今いるフブちゃん達が2年生なんだけどここが3年になった時にウチキがいないからフブちゃん達の代の3年生のみんなを",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 1291,
+          "sourceStartMs": 11400970,
+          "sourceEndMs": 11428900,
+          "text": "打ち気にするチャレンジとか緩和極意は1個ある1個だけど500円あるあとあと500円ある何がいいかな",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 1292,
+          "sourceStartMs": 11430022,
+          "sourceEndMs": 11432764,
+          "text": "変更とか?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 1293,
+          "sourceStartMs": 11432764,
+          "sourceEndMs": 11435126,
+          "text": "強化極意も1個あると便利?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 1294,
+          "sourceStartMs": 11435126,
+          "sourceEndMs": 11439649,
+          "text": "強化極意にする?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 1295,
+          "sourceStartMs": 11439649,
+          "sourceEndMs": 11441990,
+          "text": "1個スケヘンがいいかな?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 1296,
+          "sourceStartMs": 11441990,
+          "sourceEndMs": 11448095,
+          "text": "あれがいいと思うスケヘン?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 1297,
+          "sourceStartMs": 11448095,
+          "sourceEndMs": 11449215,
+          "text": "スケヘン?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 1298,
+          "sourceStartMs": 11449215,
+          "sourceEndMs": 11458001,
+          "text": "うんじゃあスケヘンにするか多項調査とか引けるかもしんないもんね自分探しもう1個?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 1299,
+          "sourceStartMs": 11458001,
+          "sourceEndMs": 11458582,
+          "text": "どっちにしよう",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 1300,
+          "sourceStartMs": 11460214,
+          "sourceEndMs": 11473477,
+          "text": "しよううん好けへんかうんうん自分探し?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 1301,
+          "sourceStartMs": 11473477,
+          "sourceEndMs": 11479838,
+          "text": "好けへん?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 1302,
+          "sourceStartMs": 11479838,
+          "sourceEndMs": 11480898,
+          "text": "自分探し?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 1303,
+          "sourceStartMs": 11480898,
+          "sourceEndMs": 11482478,
+          "text": "好けへん?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 1304,
+          "sourceStartMs": 11482478,
+          "sourceEndMs": 11489940,
+          "text": "好けへんにするか個人に勝ちたいかでも性格の偏り",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 1305,
+          "sourceStartMs": 11490898,
+          "sourceEndMs": 11519254,
+          "text": "伝令がさ2年生に守備伝がもう一個来てくれれば諏訪を下げなきゃみたいなのがなくなるのにねって思うとさ自分探しのがいいかなそもそもさこのさ諏訪を下げなきゃいけないっていうのがさまずさ守備伝がないせいじゃん結局秋も守備伝がないってことになるじゃんこれってつまり秋になったら守備伝もう誰もいないってことになるでって思うと自分探しか",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 1306,
+          "sourceStartMs": 11526771,
+          "sourceEndMs": 11549880,
+          "text": "そうスワがいなくなっちゃうから出ると限らんけどやらないといないままだからでもいやでも占い師もいるからそんなに占い師もいるからそんなに買いまくる必要ないのか占い師もいるのにそんなに買いまくる必要ないのかな",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 1307,
+          "sourceStartMs": 11552570,
+          "sourceEndMs": 11568079,
+          "text": "スケヘンのがいいかぁ一旦…うーん…はどっちだろう?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 1308,
+          "sourceStartMs": 11568079,
+          "sourceEndMs": 11569500,
+          "text": "キャッチどっちがいると思う?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 1309,
+          "sourceStartMs": 11569500,
+          "sourceEndMs": 11571741,
+          "text": "スケヘンもガチャだ、そうだね、スケヘンもガチャだふんふんふんふんふん",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 1310,
+          "sourceStartMs": 11590611,
+          "sourceEndMs": 11600416,
+          "text": "ふんふんふんふんえーどっちでもガチャ?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 1311,
+          "sourceStartMs": 11600416,
+          "sourceEndMs": 11600516,
+          "text": "好み?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 1312,
+          "sourceStartMs": 11600516,
+          "sourceEndMs": 11600676,
+          "text": "好み?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 1313,
+          "sourceStartMs": 11600676,
+          "sourceEndMs": 11609220,
+          "text": "まぁそうだよねー好みだよねーご支援中は透けへん髪頼み?",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 1314,
+          "sourceStartMs": 11609220,
+          "sourceEndMs": 11609880,
+          "text": "そうだねー確かにまぁでも今後の",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 1315,
+          "sourceStartMs": 11612063,
+          "sourceEndMs": 11639700,
+          "text": "自分探しかな今後も考えて秋とかまで見越して一旦甲子園勝ち抜くならスケ編かもだけどスケ編して何も出なかったらバカみたいだから自分探しの方がいいのかもしれないうん打ち気も増やしてるし増やせないかもしれないけどこれにします明日が明日じゃない今度がジャローじゃあ",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 1316,
+          "sourceStartMs": 11640566,
+          "sourceEndMs": 11669820,
+          "text": "はい、本書館の花にあ、甲子園大会初調理おめでとうございますありがとうございますあ、贈り物ベンチブレスベンチブレスって持てなかったっけ置いとくか、忘れないうちにお、満腹弁当あれか、スタミナ回復系かなみんなスタミナ終わりになってるからありかもしれないみんなのスタミナ終わってるからありかも",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 1317,
+          "sourceStartMs": 11674674,
+          "sourceEndMs": 11699540,
+          "text": "体力回復ありだなお、いいねじゃあ体力も回復しとこうでBかー",
+          "isThemeCandidate": false
+        },
+        {
+          "speechId": 1318,
+          "sourceStartMs": 11701322,
+          "sourceEndMs": 11722274,
+          "text": "次BでしたBBかーということではいいったんね打ち気ガチャしとく?",
+          "isThemeCandidate": true
+        },
+        {
+          "speechId": 1319,
+          "sourceStartMs": 11722274,
+          "sourceEndMs": 11722674,
+          "text": "今?",
+          "isThemeCandidate": true
+        },
+        {
+          "speechId": 1320,
+          "sourceStartMs": 11722674,
+          "sourceEndMs": 11729378,
+          "text": "いやいや次回にしとくわ次回にうんはい次回正確ガチャと",
+          "isThemeCandidate": true
+        },
+        {
+          "speechId": 1321,
+          "sourceStartMs": 11730322,
+          "sourceEndMs": 11759740,
+          "text": "甲子園大会2回戦でやっていこうと思います次回の予定を発表したいと思います9月24日今日は24日なので明日の明日のホロコー配信はみこちになっています明日はみこちそしてマリンの次回はですね9月28日から",
+          "isThemeCandidate": true
+        },
+        {
+          "speechId": 1322,
+          "sourceStartMs": 11763275,
+          "sourceEndMs": 11789446,
+          "text": "次回9月28日になっていますはいよろしくお願いいたしますですねはいてなわけではい4日後次回もいっぱいアドバイスよろしくお願いしますセーブして終了してキメジの心を安定させてそれではどうも",
+          "isThemeCandidate": true
+        },
+        {
+          "speechId": 1323,
+          "sourceStartMs": 11823654,
+          "sourceEndMs": 11839582,
+          "text": "この船では美少女無罪が適用されますけど任せて魔法で若返り秘密の素顔は君にだけ特別ですよあたしやったよ",
+          "isThemeCandidate": false
+        }
+      ]
+    },
+    "outputContract": {
+      "format": "json_only",
+      "schema": {
+        "selectedCuts": [
+          {
+            "sourceStartMs": "number",
+            "sourceEndMs": "number",
+            "reason": "string",
+            "usedSpeechIds": [
+              "number_or_range_string"
+            ]
+          }
+        ]
+      }
+    },
+    "connectionContract": {
+      "version": "connection-v002",
+      "candidateSpeechIdsRole": "theme_center_aim",
+      "surroundingContextRole": "boundary_search_space"
+    }
+  }
+}
