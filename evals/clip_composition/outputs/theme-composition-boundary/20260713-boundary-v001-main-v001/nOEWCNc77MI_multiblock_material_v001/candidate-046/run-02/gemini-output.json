@@ -1,0 +1,142 @@
+{
+  "refinements": [
+    {
+      "provisionalCutIndex": 1,
+      "startBoundaryPointId": "word-018592:start",
+      "endBoundaryPointId": "word-018744:end",
+      "startReason": "マリンがころねの顔の位置を下げてほしいと指摘する「マリリン今更なんだけどさ」の発言からトークテーマの前提が始まるためです。",
+      "endReason": "「これ出発した?」という発話により、頭の匂いを嗅ぐくだりから次の出航の文脈へ完全に切り替わる直前までを含めるためです。"
+    }
+  ],
+  "runAt": "2026-07-13T07:04:16+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "manualRun": false,
+    "runner": "edge-cdp-text-prompt",
+    "generationSystem": "boundary-v001@gemini-web-flash",
+    "upstreamGenerationSystems": [
+      "theme-llm-v002@gemini-web-flash",
+      "llm-v012@gemini-web-flash"
+    ],
+    "resultRole": "boundary-refinement-eval",
+    "promptVersion": "boundary_refinement_prompt_v001",
+    "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+    "candidateIndex": 46,
+    "runIndex": 2,
+    "contextRadiusMs": 90000,
+    "inputPromptSha256": "76ccdf34299f6dbd379af446965c060b068b81c9e50b018496d99f13c42a1441"
+  },
+  "promptFile": "outputs/theme-composition-boundary/20260713-boundary-v001-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-046/run-02/prompt.md",
+  "pageUrl": "https://gemini.google.com/app/52a2b2840d268c1b?hl=ja",
+  "rawResponseText": "{\n\"refinements\": [\n{\n\"provisionalCutIndex\": 1,\n\"startBoundaryPointId\": \"word-018592:start\",\n\"endBoundaryPointId\": \"word-018744:end\",\n\"startReason\": \"マリンがころねの顔の位置を下げてほしいと指摘する「マリリン今更なんだけどさ」の発言からトークテーマの前提が始まるためです。\",\n\"endReason\": \"「これ出発した?」という発話により、頭の匂いを嗅ぐくだりから次の出航の文脈へ完全に切り替わる直前までを含めるためです。\"\n}\n]\n}\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。",
+  "boundaryContractValidation": {
+    "passed": true,
+    "issues": [],
+    "checkedAt": "2026-07-12T22:04:16.889Z",
+    "checks": [
+      "point-id-exists",
+      "point-in-correct-90s-window",
+      "start-before-end",
+      "same-cut-count",
+      "no-duplicate-or-missing-cut-index",
+      "reasons-present"
+    ]
+  },
+  "selectedBoundaryEvidence": [
+    {
+      "provisionalCutIndex": 1,
+      "start": {
+        "pointId": "word-018592:start",
+        "timeMs": 3997952,
+        "kind": "start",
+        "wordIndex": 502,
+        "selectedWord": {
+          "id": "word-018592",
+          "s": 3997952,
+          "e": 3998112,
+          "t": "マ"
+        },
+        "surroundingWords": [
+          {
+            "wordId": "word-018590",
+            "sourceStartMs": 3995810,
+            "sourceEndMs": 3995890,
+            "text": "す"
+          },
+          {
+            "wordId": "word-018591",
+            "sourceStartMs": 3995890,
+            "sourceEndMs": 3997952,
+            "text": "か"
+          },
+          {
+            "wordId": "word-018592",
+            "sourceStartMs": 3997952,
+            "sourceEndMs": 3998112,
+            "text": "マ"
+          },
+          {
+            "wordId": "word-018593",
+            "sourceStartMs": 3998112,
+            "sourceEndMs": 3998212,
+            "text": "リ"
+          },
+          {
+            "wordId": "word-018594",
+            "sourceStartMs": 3998212,
+            "sourceEndMs": 3998252,
+            "text": "リ"
+          }
+        ],
+        "reason": "マリンがころねの顔の位置を下げてほしいと指摘する「マリリン今更なんだけどさ」の発言からトークテーマの前提が始まるためです。"
+      },
+      "end": {
+        "pointId": "word-018744:end",
+        "timeMs": 4029707,
+        "kind": "end",
+        "wordIndex": 654,
+        "selectedWord": {
+          "id": "word-018744",
+          "s": 4029627,
+          "e": 4029707,
+          "t": "?"
+        },
+        "surroundingWords": [
+          {
+            "wordId": "word-018742",
+            "sourceStartMs": 4029527,
+            "sourceEndMs": 4029607,
+            "text": "し"
+          },
+          {
+            "wordId": "word-018743",
+            "sourceStartMs": 4029607,
+            "sourceEndMs": 4029627,
+            "text": "た"
+          },
+          {
+            "wordId": "word-018744",
+            "sourceStartMs": 4029627,
+            "sourceEndMs": 4029707,
+            "text": "?"
+          },
+          {
+            "wordId": "word-018745",
+            "sourceStartMs": 4029707,
+            "sourceEndMs": 4029767,
+            "text": "酷"
+          },
+          {
+            "wordId": "word-018746",
+            "sourceStartMs": 4029767,
+            "sourceEndMs": 4029827,
+            "text": "い"
+          }
+        ],
+        "reason": "「これ出発した?」という発話により、頭の匂いを嗅ぐくだりから次の出航の文脈へ完全に切り替わる直前までを含めるためです。"
+      }
+    }
+  ]
+}

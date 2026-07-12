@@ -1,0 +1,142 @@
+{
+  "refinements": [
+    {
+      "provisionalCutIndex": 1,
+      "startBoundaryPointId": "word-000961:start",
+      "endBoundaryPointId": "word-001154:end",
+      "startReason": "テーマである言い間違えのフリが「鬼の鬼の鬼柱」という発話から明確に始まっているため選択しました。",
+      "endReason": "言い間違えのくだりで盛り上がった後、「いきなりすんごい冷めてる?」というリアクションで一連の展開が綺麗に収束しているため選択しました。"
+    }
+  ],
+  "runAt": "2026-07-13T06:36:12+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "manualRun": false,
+    "runner": "edge-cdp-text-prompt",
+    "generationSystem": "boundary-v001@gemini-web-flash",
+    "upstreamGenerationSystems": [
+      "theme-llm-v002@gemini-web-flash",
+      "llm-v012@gemini-web-flash"
+    ],
+    "resultRole": "boundary-refinement-eval",
+    "promptVersion": "boundary_refinement_prompt_v001",
+    "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+    "candidateIndex": 3,
+    "runIndex": 3,
+    "contextRadiusMs": 90000,
+    "inputPromptSha256": "43cb579f1804bf0cf4158b8db738549f7e1ed38ac3cde837ace5270ec3b075b2"
+  },
+  "promptFile": "outputs/theme-composition-boundary/20260713-boundary-v001-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-003/run-03/prompt.md",
+  "pageUrl": "https://gemini.google.com/app/7127ddf8edd43342?hl=ja",
+  "rawResponseText": "{\n\"refinements\": [\n{\n\"provisionalCutIndex\": 1,\n\"startBoundaryPointId\": \"word-000961:start\",\n\"endBoundaryPointId\": \"word-001154:end\",\n\"startReason\": \"テーマである言い間違えのフリが「鬼の鬼の鬼柱」という発話から明確に始まっているため選択しました。\",\n\"endReason\": \"言い間違えのくだりで盛り上がった後、「いきなりすんごい冷めてる?」というリアクションで一連の展開が綺麗に収束しているため選択しました。\"\n}\n]\n}\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。",
+  "boundaryContractValidation": {
+    "passed": true,
+    "issues": [],
+    "checkedAt": "2026-07-12T21:36:12.068Z",
+    "checks": [
+      "point-id-exists",
+      "point-in-correct-90s-window",
+      "start-before-end",
+      "same-cut-count",
+      "no-duplicate-or-missing-cut-index",
+      "reasons-present"
+    ]
+  },
+  "selectedBoundaryEvidence": [
+    {
+      "provisionalCutIndex": 1,
+      "start": {
+        "pointId": "word-000961:start",
+        "timeMs": 296983,
+        "kind": "start",
+        "wordIndex": 799,
+        "selectedWord": {
+          "id": "word-000961",
+          "s": 296983,
+          "e": 297203,
+          "t": "鬼"
+        },
+        "surroundingWords": [
+          {
+            "wordId": "word-000959",
+            "sourceStartMs": 296663,
+            "sourceEndMs": 296703,
+            "text": "ゃ"
+          },
+          {
+            "wordId": "word-000960",
+            "sourceStartMs": 296703,
+            "sourceEndMs": 296983,
+            "text": "ん"
+          },
+          {
+            "wordId": "word-000961",
+            "sourceStartMs": 296983,
+            "sourceEndMs": 297203,
+            "text": "鬼"
+          },
+          {
+            "wordId": "word-000962",
+            "sourceStartMs": 297203,
+            "sourceEndMs": 297563,
+            "text": "の"
+          },
+          {
+            "wordId": "word-000963",
+            "sourceStartMs": 297563,
+            "sourceEndMs": 297763,
+            "text": "鬼"
+          }
+        ],
+        "reason": "テーマである言い間違えのフリが「鬼の鬼の鬼柱」という発話から明確に始まっているため選択しました。"
+      },
+      "end": {
+        "pointId": "word-001154:end",
+        "timeMs": 335402,
+        "kind": "end",
+        "wordIndex": 992,
+        "selectedWord": {
+          "id": "word-001154",
+          "s": 335242,
+          "e": 335402,
+          "t": "?"
+        },
+        "surroundingWords": [
+          {
+            "wordId": "word-001152",
+            "sourceStartMs": 334361,
+            "sourceEndMs": 334462,
+            "text": "て"
+          },
+          {
+            "wordId": "word-001153",
+            "sourceStartMs": 334462,
+            "sourceEndMs": 335242,
+            "text": "る"
+          },
+          {
+            "wordId": "word-001154",
+            "sourceStartMs": 335242,
+            "sourceEndMs": 335402,
+            "text": "?"
+          },
+          {
+            "wordId": "word-001155",
+            "sourceStartMs": 335402,
+            "sourceEndMs": 335502,
+            "text": "待"
+          },
+          {
+            "wordId": "word-001156",
+            "sourceStartMs": 335502,
+            "sourceEndMs": 335562,
+            "text": "っ"
+          }
+        ],
+        "reason": "言い間違えのくだりで盛り上がった後、「いきなりすんごい冷めてる?」というリアクションで一連の展開が綺麗に収束しているため選択しました。"
+      }
+    }
+  ]
+}

@@ -1,0 +1,142 @@
+{
+  "refinements": [
+    {
+      "provisionalCutIndex": 1,
+      "startBoundaryPointId": "word-010829:start",
+      "endBoundaryPointId": "word-011146:end",
+      "startReason": "こよりの配信状況を気にかける「んーさっき配信終わった？」という発話から新しいトークテーマが明確に開始するためです。",
+      "endReason": "「きまちと一緒に決める」という結論に至った後、トークが収束する「キャッチ」という最後の言葉までを収めるためです。"
+    }
+  ],
+  "runAt": "2026-07-13T07:45:27+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "manualRun": false,
+    "runner": "edge-cdp-text-prompt",
+    "generationSystem": "boundary-v001@gemini-web-flash",
+    "upstreamGenerationSystems": [
+      "theme-llm-v002@gemini-web-flash",
+      "llm-v012@gemini-web-flash"
+    ],
+    "resultRole": "boundary-refinement-eval",
+    "promptVersion": "boundary_refinement_prompt_v001",
+    "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+    "candidateIndex": 14,
+    "runIndex": 2,
+    "contextRadiusMs": 90000,
+    "inputPromptSha256": "a8244064dbe7b5fc9d89bf510f625c79e4610239342ef08b6021293345ec0d5e"
+  },
+  "promptFile": "outputs/theme-composition-boundary/20260713-boundary-v001-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-014/run-02/prompt.md",
+  "pageUrl": "https://gemini.google.com/app/115fbe54e453c752?hl=ja",
+  "rawResponseText": "{\n\"refinements\": [\n{\n\"provisionalCutIndex\": 1,\n\"startBoundaryPointId\": \"word-010829:start\",\n\"endBoundaryPointId\": \"word-011146:end\",\n\"startReason\": \"こよりの配信状況を気にかける「んーさっき配信終わった？」という発話から新しいトークテーマが明確に開始するためです。\",\n\"endReason\": \"「きまちと一緒に決める」という結論に至った後、トークが収束する「キャッチ」という最後の言葉までを収めるためです。\"\n}\n]\n}\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。",
+  "boundaryContractValidation": {
+    "passed": true,
+    "issues": [],
+    "checkedAt": "2026-07-12T22:45:27.351Z",
+    "checks": [
+      "point-id-exists",
+      "point-in-correct-90s-window",
+      "start-before-end",
+      "same-cut-count",
+      "no-duplicate-or-missing-cut-index",
+      "reasons-present"
+    ]
+  },
+  "selectedBoundaryEvidence": [
+    {
+      "provisionalCutIndex": 1,
+      "start": {
+        "pointId": "word-010829:start",
+        "timeMs": 3723879,
+        "kind": "start",
+        "wordIndex": 275,
+        "selectedWord": {
+          "id": "word-010829",
+          "s": 3723879,
+          "e": 3723919,
+          "t": "ん"
+        },
+        "surroundingWords": [
+          {
+            "wordId": "word-010827",
+            "sourceStartMs": 3723839,
+            "sourceEndMs": 3723859,
+            "text": "ー"
+          },
+          {
+            "wordId": "word-010828",
+            "sourceStartMs": 3723859,
+            "sourceEndMs": 3723879,
+            "text": "!"
+          },
+          {
+            "wordId": "word-010829",
+            "sourceStartMs": 3723879,
+            "sourceEndMs": 3723919,
+            "text": "ん"
+          },
+          {
+            "wordId": "word-010830",
+            "sourceStartMs": 3723919,
+            "sourceEndMs": 3731421,
+            "text": "ー"
+          },
+          {
+            "wordId": "word-010831",
+            "sourceStartMs": 3731421,
+            "sourceEndMs": 3731441,
+            "text": "さ"
+          }
+        ],
+        "reason": "こよりの配信状況を気にかける「んーさっき配信終わった？」という発話から新しいトークテーマが明確に開始するためです。"
+      },
+      "end": {
+        "pointId": "word-011146:end",
+        "timeMs": 3794866,
+        "kind": "end",
+        "wordIndex": 592,
+        "selectedWord": {
+          "id": "word-011146",
+          "s": 3794846,
+          "e": 3794866,
+          "t": "チ"
+        },
+        "surroundingWords": [
+          {
+            "wordId": "word-011144",
+            "sourceStartMs": 3794746,
+            "sourceEndMs": 3794766,
+            "text": "ャ"
+          },
+          {
+            "wordId": "word-011145",
+            "sourceStartMs": 3794766,
+            "sourceEndMs": 3794846,
+            "text": "ッ"
+          },
+          {
+            "wordId": "word-011146",
+            "sourceStartMs": 3794846,
+            "sourceEndMs": 3794866,
+            "text": "チ"
+          },
+          {
+            "wordId": "word-011147",
+            "sourceStartMs": 3813170,
+            "sourceEndMs": 3813270,
+            "text": "さ"
+          },
+          {
+            "wordId": "word-011148",
+            "sourceStartMs": 3813270,
+            "sourceEndMs": 3813310,
+            "text": "っ"
+          }
+        ],
+        "reason": "「きまちと一緒に決める」という結論に至った後、トークが収束する「キャッチ」という最後の言葉までを収めるためです。"
+      }
+    }
+  ]
+}

@@ -1,0 +1,142 @@
+{
+  "refinements": [
+    {
+      "provisionalCutIndex": 1,
+      "startBoundaryPointId": "word-000869:start",
+      "endBoundaryPointId": "word-001154:end",
+      "startReason": "テーマのフリとなる「ねずこ」のやり取りが本格的に開始する「ねずこうんわかるよ」の発話頭を選定しました。",
+      "endReason": "ひよこが立ち並ぶ絵面に関する一連のトークが「冷めてる？」というリアクションでオチとして収束する発話末を選定しました。"
+    }
+  ],
+  "runAt": "2026-07-13T06:32:29+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "manualRun": false,
+    "runner": "edge-cdp-text-prompt",
+    "generationSystem": "boundary-v001@gemini-web-flash",
+    "upstreamGenerationSystems": [
+      "theme-llm-v002@gemini-web-flash",
+      "llm-v012@gemini-web-flash"
+    ],
+    "resultRole": "boundary-refinement-eval",
+    "promptVersion": "boundary_refinement_prompt_v001",
+    "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+    "candidateIndex": 3,
+    "runIndex": 2,
+    "contextRadiusMs": 90000,
+    "inputPromptSha256": "2b6e28731dcd0b3590015c5cbf68b5d03f2d943a0d2adbc68ced6711944a4215"
+  },
+  "promptFile": "outputs/theme-composition-boundary/20260713-boundary-v001-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-003/run-02/prompt.md",
+  "pageUrl": "https://gemini.google.com/app/7a87e8d301a912b0?hl=ja",
+  "rawResponseText": "{\n\"refinements\": [\n{\n\"provisionalCutIndex\": 1,\n\"startBoundaryPointId\": \"word-000869:start\",\n\"endBoundaryPointId\": \"word-001154:end\",\n\"startReason\": \"テーマのフリとなる「ねずこ」のやり取りが本格的に開始する「ねずこうんわかるよ」の発話頭を選定しました。\",\n\"endReason\": \"ひよこが立ち並ぶ絵面に関する一連のトークが「冷めてる？」というリアクションでオチとして収束する発話末を選定しました。\"\n}\n]\n}\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。",
+  "boundaryContractValidation": {
+    "passed": true,
+    "issues": [],
+    "checkedAt": "2026-07-12T21:32:29.251Z",
+    "checks": [
+      "point-id-exists",
+      "point-in-correct-90s-window",
+      "start-before-end",
+      "same-cut-count",
+      "no-duplicate-or-missing-cut-index",
+      "reasons-present"
+    ]
+  },
+  "selectedBoundaryEvidence": [
+    {
+      "provisionalCutIndex": 1,
+      "start": {
+        "pointId": "word-000869:start",
+        "timeMs": 278759,
+        "kind": "start",
+        "wordIndex": 707,
+        "selectedWord": {
+          "id": "word-000869",
+          "s": 278759,
+          "e": 278899,
+          "t": "ね"
+        },
+        "surroundingWords": [
+          {
+            "wordId": "word-000867",
+            "sourceStartMs": 267190,
+            "sourceEndMs": 267250,
+            "text": "う"
+          },
+          {
+            "wordId": "word-000868",
+            "sourceStartMs": 267250,
+            "sourceEndMs": 267270,
+            "text": "ん"
+          },
+          {
+            "wordId": "word-000869",
+            "sourceStartMs": 278759,
+            "sourceEndMs": 278899,
+            "text": "ね"
+          },
+          {
+            "wordId": "word-000870",
+            "sourceStartMs": 278899,
+            "sourceEndMs": 278999,
+            "text": "ず"
+          },
+          {
+            "wordId": "word-000871",
+            "sourceStartMs": 278999,
+            "sourceEndMs": 279199,
+            "text": "こ"
+          }
+        ],
+        "reason": "テーマのフリとなる「ねずこ」のやり取りが本格的に開始する「ねずこうんわかるよ」の発話頭を選定しました。"
+      },
+      "end": {
+        "pointId": "word-001154:end",
+        "timeMs": 335402,
+        "kind": "end",
+        "wordIndex": 992,
+        "selectedWord": {
+          "id": "word-001154",
+          "s": 335242,
+          "e": 335402,
+          "t": "?"
+        },
+        "surroundingWords": [
+          {
+            "wordId": "word-001152",
+            "sourceStartMs": 334361,
+            "sourceEndMs": 334462,
+            "text": "て"
+          },
+          {
+            "wordId": "word-001153",
+            "sourceStartMs": 334462,
+            "sourceEndMs": 335242,
+            "text": "る"
+          },
+          {
+            "wordId": "word-001154",
+            "sourceStartMs": 335242,
+            "sourceEndMs": 335402,
+            "text": "?"
+          },
+          {
+            "wordId": "word-001155",
+            "sourceStartMs": 335402,
+            "sourceEndMs": 335502,
+            "text": "待"
+          },
+          {
+            "wordId": "word-001156",
+            "sourceStartMs": 335502,
+            "sourceEndMs": 335562,
+            "text": "っ"
+          }
+        ],
+        "reason": "ひよこが立ち並ぶ絵面に関する一連のトークが「冷めてる？」というリアクションでオチとして収束する発話末を選定しました。"
+      }
+    }
+  ]
+}

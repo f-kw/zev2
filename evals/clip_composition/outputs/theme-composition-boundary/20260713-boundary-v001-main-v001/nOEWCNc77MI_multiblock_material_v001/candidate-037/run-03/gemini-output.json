@@ -1,0 +1,142 @@
+{
+  "refinements": [
+    {
+      "provisionalCutIndex": 1,
+      "startBoundaryPointId": "word-015302:start",
+      "endBoundaryPointId": "word-015448:end",
+      "startReason": "テーマの導入部である「しし肉焼いてる？」という問いかけの開始点を選びました。",
+      "endReason": "バーベキューの完成に歓喜する一連の流れを収束させる「ちょっとそこ」の最後の言葉までを含めました。"
+    }
+  ],
+  "runAt": "2026-07-13T06:55:36+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "manualRun": false,
+    "runner": "edge-cdp-text-prompt",
+    "generationSystem": "boundary-v001@gemini-web-flash",
+    "upstreamGenerationSystems": [
+      "theme-llm-v002@gemini-web-flash",
+      "llm-v012@gemini-web-flash"
+    ],
+    "resultRole": "boundary-refinement-eval",
+    "promptVersion": "boundary_refinement_prompt_v001",
+    "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+    "candidateIndex": 37,
+    "runIndex": 3,
+    "contextRadiusMs": 90000,
+    "inputPromptSha256": "b996ee275594d7f2a6cc739be42c03a9c1f0c91b02530440e856af1873dc44ee"
+  },
+  "promptFile": "outputs/theme-composition-boundary/20260713-boundary-v001-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-037/run-03/prompt.md",
+  "pageUrl": "https://gemini.google.com/app/d0d33fc6984e14f5?hl=ja",
+  "rawResponseText": "{\n\"refinements\": [\n{\n\"provisionalCutIndex\": 1,\n\"startBoundaryPointId\": \"word-015302:start\",\n\"endBoundaryPointId\": \"word-015448:end\",\n\"startReason\": \"テーマの導入部である「しし肉焼いてる？」という問いかけの開始点を選びました。\",\n\"endReason\": \"バーベキューの完成に歓喜する一連の流れを収束させる「ちょっとそこ」の最後の言葉までを含めました。\"\n}\n]\n}\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。",
+  "boundaryContractValidation": {
+    "passed": true,
+    "issues": [],
+    "checkedAt": "2026-07-12T21:55:36.436Z",
+    "checks": [
+      "point-id-exists",
+      "point-in-correct-90s-window",
+      "start-before-end",
+      "same-cut-count",
+      "no-duplicate-or-missing-cut-index",
+      "reasons-present"
+    ]
+  },
+  "selectedBoundaryEvidence": [
+    {
+      "provisionalCutIndex": 1,
+      "start": {
+        "pointId": "word-015302:start",
+        "timeMs": 3180190,
+        "kind": "start",
+        "wordIndex": 360,
+        "selectedWord": {
+          "id": "word-015302",
+          "s": 3180190,
+          "e": 3180290,
+          "t": "し"
+        },
+        "surroundingWords": [
+          {
+            "wordId": "word-015300",
+            "sourceStartMs": 3179844,
+            "sourceEndMs": 3179944,
+            "text": "に"
+          },
+          {
+            "wordId": "word-015301",
+            "sourceStartMs": 3179944,
+            "sourceEndMs": 3179964,
+            "text": "?"
+          },
+          {
+            "wordId": "word-015302",
+            "sourceStartMs": 3180190,
+            "sourceEndMs": 3180290,
+            "text": "し"
+          },
+          {
+            "wordId": "word-015303",
+            "sourceStartMs": 3180290,
+            "sourceEndMs": 3180410,
+            "text": "し"
+          },
+          {
+            "wordId": "word-015304",
+            "sourceStartMs": 3180410,
+            "sourceEndMs": 3180670,
+            "text": "肉"
+          }
+        ],
+        "reason": "テーマの導入部である「しし肉焼いてる？」という問いかけの開始点を選びました。"
+      },
+      "end": {
+        "pointId": "word-015448:end",
+        "timeMs": 3209684,
+        "kind": "end",
+        "wordIndex": 506,
+        "selectedWord": {
+          "id": "word-015448",
+          "s": 3209664,
+          "e": 3209684,
+          "t": "こ"
+        },
+        "surroundingWords": [
+          {
+            "wordId": "word-015446",
+            "sourceStartMs": 3209364,
+            "sourceEndMs": 3209524,
+            "text": "と"
+          },
+          {
+            "wordId": "word-015447",
+            "sourceStartMs": 3209524,
+            "sourceEndMs": 3209664,
+            "text": "そ"
+          },
+          {
+            "wordId": "word-015448",
+            "sourceStartMs": 3209664,
+            "sourceEndMs": 3209684,
+            "text": "こ"
+          },
+          {
+            "wordId": "word-015449",
+            "sourceStartMs": 3211310,
+            "sourceEndMs": 3211410,
+            "text": "ご"
+          },
+          {
+            "wordId": "word-015450",
+            "sourceStartMs": 3211410,
+            "sourceEndMs": 3211430,
+            "text": "め"
+          }
+        ],
+        "reason": "バーベキューの完成に歓喜する一連の流れを収束させる「ちょっとそこ」の最後の言葉までを含めました。"
+      }
+    }
+  ]
+}

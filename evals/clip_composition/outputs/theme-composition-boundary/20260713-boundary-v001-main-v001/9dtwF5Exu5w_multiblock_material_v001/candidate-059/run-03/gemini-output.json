@@ -1,0 +1,142 @@
+{
+  "refinements": [
+    {
+      "provisionalCutIndex": 1,
+      "startBoundaryPointId": "word-034203:start",
+      "endBoundaryPointId": "word-034457:end",
+      "startReason": "次戦の相手がBランクであることに反応する「でBかー」という発話の開始点を選びました。",
+      "endReason": "セーブ後の最後の挨拶である「それではどうも」という発話の終了点を選びました。"
+    }
+  ],
+  "runAt": "2026-07-13T08:03:38+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "manualRun": false,
+    "runner": "edge-cdp-text-prompt",
+    "generationSystem": "boundary-v001@gemini-web-flash",
+    "upstreamGenerationSystems": [
+      "theme-llm-v002@gemini-web-flash",
+      "llm-v012@gemini-web-flash"
+    ],
+    "resultRole": "boundary-refinement-eval",
+    "promptVersion": "boundary_refinement_prompt_v001",
+    "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+    "candidateIndex": 59,
+    "runIndex": 3,
+    "contextRadiusMs": 90000,
+    "inputPromptSha256": "11b600b641eea6af96e12a1ff8f89d730699aa99214ffd5547f73998f7ba7399"
+  },
+  "promptFile": "outputs/theme-composition-boundary/20260713-boundary-v001-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-059/run-03/prompt.md",
+  "pageUrl": "https://gemini.google.com/app/b468defb0eeaecd5?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"refinements\": [\n    {\n      \"provisionalCutIndex\": 1,\n      \"startBoundaryPointId\": \"word-034203:start\",\n      \"endBoundaryPointId\": \"word-034457:end\",\n      \"startReason\": \"次戦の相手がBランクであることに反応する「でBかー」という発話の開始点を選びました。\",\n      \"endReason\": \"セーブ後の最後の挨拶である「それではどうも」という発話の終了点を選びました。\"\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。",
+  "boundaryContractValidation": {
+    "passed": true,
+    "issues": [],
+    "checkedAt": "2026-07-12T23:03:38.215Z",
+    "checks": [
+      "point-id-exists",
+      "point-in-correct-90s-window",
+      "start-before-end",
+      "same-cut-count",
+      "no-duplicate-or-missing-cut-index",
+      "reasons-present"
+    ]
+  },
+  "selectedBoundaryEvidence": [
+    {
+      "provisionalCutIndex": 1,
+      "start": {
+        "pointId": "word-034203:start",
+        "timeMs": 11698980,
+        "kind": "start",
+        "wordIndex": 300,
+        "selectedWord": {
+          "id": "word-034203",
+          "s": 11698980,
+          "e": 11699000,
+          "t": "で"
+        },
+        "surroundingWords": [
+          {
+            "wordId": "word-034201",
+            "sourceStartMs": 11698840,
+            "sourceEndMs": 11698960,
+            "text": "こ"
+          },
+          {
+            "wordId": "word-034202",
+            "sourceStartMs": 11698960,
+            "sourceEndMs": 11698980,
+            "text": "う"
+          },
+          {
+            "wordId": "word-034203",
+            "sourceStartMs": 11698980,
+            "sourceEndMs": 11699000,
+            "text": "で"
+          },
+          {
+            "wordId": "word-034204",
+            "sourceStartMs": 11699000,
+            "sourceEndMs": 11699160,
+            "text": "B"
+          },
+          {
+            "wordId": "word-034205",
+            "sourceStartMs": 11699160,
+            "sourceEndMs": 11699520,
+            "text": "か"
+          }
+        ],
+        "reason": "次戦の相手がBランクであることに反応する「でBかー」という発話の開始点を選びました。"
+      },
+      "end": {
+        "pointId": "word-034457:end",
+        "timeMs": 11789446,
+        "kind": "end",
+        "wordIndex": 554,
+        "selectedWord": {
+          "id": "word-034457",
+          "s": 11789426,
+          "e": 11789446,
+          "t": "も"
+        },
+        "surroundingWords": [
+          {
+            "wordId": "word-034455",
+            "sourceStartMs": 11789326,
+            "sourceEndMs": 11789406,
+            "text": "ど"
+          },
+          {
+            "wordId": "word-034456",
+            "sourceStartMs": 11789406,
+            "sourceEndMs": 11789426,
+            "text": "う"
+          },
+          {
+            "wordId": "word-034457",
+            "sourceStartMs": 11789426,
+            "sourceEndMs": 11789446,
+            "text": "も"
+          },
+          {
+            "wordId": "word-034458",
+            "sourceStartMs": 11823654,
+            "sourceEndMs": 11823794,
+            "text": "こ"
+          },
+          {
+            "wordId": "word-034459",
+            "sourceStartMs": 11823794,
+            "sourceEndMs": 11823874,
+            "text": "の"
+          }
+        ],
+        "reason": "セーブ後の最後の挨拶である「それではどうも」という発話の終了点を選びました。"
+      }
+    }
+  ]
+}

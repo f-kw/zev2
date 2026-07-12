@@ -1,0 +1,142 @@
+{
+  "refinements": [
+    {
+      "provisionalCutIndex": 1,
+      "startBoundaryPointId": "word-017376:start",
+      "endBoundaryPointId": "word-019141:end",
+      "startReason": "組み合わせ抽選会で対戦相手が「1Bかー」と決まり、強さに警戒し始める発話の開始点として適切であるため選択しました。",
+      "endReason": "相手チームの詳細なステータスを確認し、全員星300前後という驚異の戦力に絶望する一連のリアクションが「あ、こいつだけエラー」と収束する発話の終了点として適切であるため選択しました。"
+    }
+  ],
+  "runAt": "2026-07-13T07:53:04+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "manualRun": false,
+    "runner": "edge-cdp-text-prompt",
+    "generationSystem": "boundary-v001@gemini-web-flash",
+    "upstreamGenerationSystems": [
+      "theme-llm-v002@gemini-web-flash",
+      "llm-v012@gemini-web-flash"
+    ],
+    "resultRole": "boundary-refinement-eval",
+    "promptVersion": "boundary_refinement_prompt_v001",
+    "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+    "candidateIndex": 28,
+    "runIndex": 3,
+    "contextRadiusMs": 90000,
+    "inputPromptSha256": "d3bdc50e106caf429bd516e6887f6399d0451845158e5168b7d19d482343b6a8"
+  },
+  "promptFile": "outputs/theme-composition-boundary/20260713-boundary-v001-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-028/run-03/prompt.md",
+  "pageUrl": "https://gemini.google.com/app/d12a2927e145b75a?hl=ja",
+  "rawResponseText": "{\n\"refinements\": [\n{\n\"provisionalCutIndex\": 1,\n\"startBoundaryPointId\": \"word-017376:start\",\n\"endBoundaryPointId\": \"word-019141:end\",\n\"startReason\": \"組み合わせ抽選会で対戦相手が「1Bかー」と決まり、強さに警戒し始める発話の開始点として適切であるため選択しました。\",\n\"endReason\": \"相手チームの詳細なステータスを確認し、全員星300前後という驚異の戦力に絶望する一連のリアクションが「あ、こいつだけエラー」と収束する発話の終了点として適切であるため選択しました。\"\n}\n]\n}\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。",
+  "boundaryContractValidation": {
+    "passed": true,
+    "issues": [],
+    "checkedAt": "2026-07-12T22:53:04.176Z",
+    "checks": [
+      "point-id-exists",
+      "point-in-correct-90s-window",
+      "start-before-end",
+      "same-cut-count",
+      "no-duplicate-or-missing-cut-index",
+      "reasons-present"
+    ]
+  },
+  "selectedBoundaryEvidence": [
+    {
+      "provisionalCutIndex": 1,
+      "start": {
+        "pointId": "word-017376:start",
+        "timeMs": 5728519,
+        "kind": "start",
+        "wordIndex": 275,
+        "selectedWord": {
+          "id": "word-017376",
+          "s": 5728519,
+          "e": 5728539,
+          "t": "1"
+        },
+        "surroundingWords": [
+          {
+            "wordId": "word-017374",
+            "sourceStartMs": 5721796,
+            "sourceEndMs": 5721836,
+            "text": "1"
+          },
+          {
+            "wordId": "word-017375",
+            "sourceStartMs": 5721836,
+            "sourceEndMs": 5728519,
+            "text": "?"
+          },
+          {
+            "wordId": "word-017376",
+            "sourceStartMs": 5728519,
+            "sourceEndMs": 5728539,
+            "text": "1"
+          },
+          {
+            "wordId": "word-017377",
+            "sourceStartMs": 5728539,
+            "sourceEndMs": 5728980,
+            "text": "B"
+          },
+          {
+            "wordId": "word-017378",
+            "sourceStartMs": 5728980,
+            "sourceEndMs": 5729320,
+            "text": "か"
+          }
+        ],
+        "reason": "組み合わせ抽選会で対戦相手が「1Bかー」と決まり、強さに警戒し始める発話の開始点として適切であるため選択しました。"
+      },
+      "end": {
+        "pointId": "word-019141:end",
+        "timeMs": 6359980,
+        "kind": "end",
+        "wordIndex": 819,
+        "selectedWord": {
+          "id": "word-019141",
+          "s": 6359960,
+          "e": 6359980,
+          "t": "ー"
+        },
+        "surroundingWords": [
+          {
+            "wordId": "word-019139",
+            "sourceStartMs": 6359820,
+            "sourceEndMs": 6359940,
+            "text": "エ"
+          },
+          {
+            "wordId": "word-019140",
+            "sourceStartMs": 6359940,
+            "sourceEndMs": 6359960,
+            "text": "ラ"
+          },
+          {
+            "wordId": "word-019141",
+            "sourceStartMs": 6359960,
+            "sourceEndMs": 6359980,
+            "text": "ー"
+          },
+          {
+            "wordId": "word-019142",
+            "sourceStartMs": 6360082,
+            "sourceEndMs": 6360202,
+            "text": "と"
+          },
+          {
+            "wordId": "word-019143",
+            "sourceStartMs": 6360202,
+            "sourceEndMs": 6360262,
+            "text": "か"
+          }
+        ],
+        "reason": "相手チームの詳細なステータスを確認し、全員星300前後という驚異の戦力に絶望する一連のリアクションが「あ、こいつだけエラー」と収束する発話の終了点として適切であるため選択しました。"
+      }
+    }
+  ]
+}

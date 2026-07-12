@@ -1,0 +1,142 @@
+{
+  "refinements": [
+    {
+      "provisionalCutIndex": 1,
+      "startBoundaryPointId": "word-000825:start",
+      "endBoundaryPointId": "word-000945:end",
+      "startReason": "マリンが「ちょっとコーネがね今日ねずこスタイルなんで」と、本区間の主軸となる話題を切り出し前提を提示する発言の開始点から選択しました。",
+      "endReason": "ねずこ風のころねに対するなりきり掛け合いのやり取りと、「音量どういい感じ」といった音量確認の一連の会話が収束する最後の言葉までを含めるため選択しました。"
+    }
+  ],
+  "runAt": "2026-07-13T05:47:22+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "manualRun": false,
+    "runner": "edge-cdp-text-prompt",
+    "generationSystem": "boundary-v001@gemini-web-flash",
+    "upstreamGenerationSystems": [
+      "theme-llm-v002@gemini-web-flash",
+      "llm-v012@gemini-web-flash"
+    ],
+    "resultRole": "boundary-refinement-eval",
+    "promptVersion": "boundary_refinement_prompt_v001",
+    "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+    "candidateIndex": 2,
+    "runIndex": 1,
+    "contextRadiusMs": 90000,
+    "inputPromptSha256": "aaa9e523a091d9099b865f81a2c1fa85f076c2ad60a450acca5e48b877f2ed42"
+  },
+  "promptFile": "outputs/theme-composition-boundary/20260713-boundary-v001-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-002/run-01/prompt.md",
+  "pageUrl": "https://gemini.google.com/app/8c2718b1e45e398f?hl=ja",
+  "rawResponseText": "{\n\"refinements\": [\n{\n\"provisionalCutIndex\": 1,\n\"startBoundaryPointId\": \"word-000825:start\",\n\"endBoundaryPointId\": \"word-000945:end\",\n\"startReason\": \"マリンが「ちょっとコーネがね今日ねずこスタイルなんで」と、本区間の主軸となる話題を切り出し前提を提示する発言の開始点から選択しました。\",\n\"endReason\": \"ねずこ風のころねに対するなりきり掛け合いのやり取りと、「音量どういい感じ」といった音量確認の一連の会話が収束する最後の言葉までを含めるため選択しました。\"\n}\n]\n}\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。",
+  "boundaryContractValidation": {
+    "passed": true,
+    "issues": [],
+    "checkedAt": "2026-07-12T20:47:22.790Z",
+    "checks": [
+      "point-id-exists",
+      "point-in-correct-90s-window",
+      "start-before-end",
+      "same-cut-count",
+      "no-duplicate-or-missing-cut-index",
+      "reasons-present"
+    ]
+  },
+  "selectedBoundaryEvidence": [
+    {
+      "provisionalCutIndex": 1,
+      "start": {
+        "pointId": "word-000825:start",
+        "timeMs": 260068,
+        "kind": "start",
+        "wordIndex": 812,
+        "selectedWord": {
+          "id": "word-000825",
+          "s": 260068,
+          "e": 260128,
+          "t": "コ"
+        },
+        "surroundingWords": [
+          {
+            "wordId": "word-000823",
+            "sourceStartMs": 259708,
+            "sourceEndMs": 259768,
+            "text": "っ"
+          },
+          {
+            "wordId": "word-000824",
+            "sourceStartMs": 259768,
+            "sourceEndMs": 260068,
+            "text": "と"
+          },
+          {
+            "wordId": "word-000825",
+            "sourceStartMs": 260068,
+            "sourceEndMs": 260128,
+            "text": "コ"
+          },
+          {
+            "wordId": "word-000826",
+            "sourceStartMs": 260128,
+            "sourceEndMs": 260168,
+            "text": "ー"
+          },
+          {
+            "wordId": "word-000827",
+            "sourceStartMs": 260168,
+            "sourceEndMs": 260268,
+            "text": "ネ"
+          }
+        ],
+        "reason": "マリンが「ちょっとコーネがね今日ねずこスタイルなんで」と、本区間の主軸となる話題を切り出し前提を提示する発言の開始点から選択しました。"
+      },
+      "end": {
+        "pointId": "word-000945:end",
+        "timeMs": 293823,
+        "kind": "end",
+        "wordIndex": 932,
+        "selectedWord": {
+          "id": "word-000945",
+          "s": 293682,
+          "e": 293823,
+          "t": "ね"
+        },
+        "surroundingWords": [
+          {
+            "wordId": "word-000943",
+            "sourceStartMs": 293002,
+            "sourceEndMs": 293062,
+            "text": "っ"
+          },
+          {
+            "wordId": "word-000944",
+            "sourceStartMs": 293062,
+            "sourceEndMs": 293682,
+            "text": "た"
+          },
+          {
+            "wordId": "word-000945",
+            "sourceStartMs": 293682,
+            "sourceEndMs": 293823,
+            "text": "ね"
+          },
+          {
+            "wordId": "word-000946",
+            "sourceStartMs": 293823,
+            "sourceEndMs": 293923,
+            "text": "ず"
+          },
+          {
+            "wordId": "word-000947",
+            "sourceStartMs": 293923,
+            "sourceEndMs": 294063,
+            "text": "こ"
+          }
+        ],
+        "reason": "ねずこ風のころねに対するなりきり掛け合いのやり取りと、「音量どういい感じ」といった音量確認の一連の会話が収束する最後の言葉までを含めるため選択しました。"
+      }
+    }
+  ]
+}

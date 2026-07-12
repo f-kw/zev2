@@ -1,0 +1,142 @@
+{
+  "refinements": [
+    {
+      "provisionalCutIndex": 1,
+      "startBoundaryPointId": "word-034207:start",
+      "endBoundaryPointId": "word-034457:end",
+      "startReason": "次の対戦相手がBランクであると言及する「次Bでした」という発言の開始点を切り出しの起点としました。",
+      "endReason": "配信の締めと終了の挨拶である「それではどうも」の最後の言葉の終了点までを収束点として選択しました。"
+    }
+  ],
+  "runAt": "2026-07-13T08:03:01+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "manualRun": false,
+    "runner": "edge-cdp-text-prompt",
+    "generationSystem": "boundary-v001@gemini-web-flash",
+    "upstreamGenerationSystems": [
+      "theme-llm-v002@gemini-web-flash",
+      "llm-v012@gemini-web-flash"
+    ],
+    "resultRole": "boundary-refinement-eval",
+    "promptVersion": "boundary_refinement_prompt_v001",
+    "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+    "candidateIndex": 59,
+    "runIndex": 2,
+    "contextRadiusMs": 90000,
+    "inputPromptSha256": "93bf8482ee62bf7d9ab09c46e2640a373bb3585f912a435266f215deac823002"
+  },
+  "promptFile": "outputs/theme-composition-boundary/20260713-boundary-v001-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-059/run-02/prompt.md",
+  "pageUrl": "https://gemini.google.com/app/566ed34ab2ab2fd8?hl=ja",
+  "rawResponseText": "{\n\"refinements\": [\n{\n\"provisionalCutIndex\": 1,\n\"startBoundaryPointId\": \"word-034207:start\",\n\"endBoundaryPointId\": \"word-034457:end\",\n\"startReason\": \"次の対戦相手がBランクであると言及する「次Bでした」という発言の開始点を切り出しの起点としました。\",\n\"endReason\": \"配信の締めと終了の挨拶である「それではどうも」の最後の言葉の終了点までを収束点として選択しました。\"\n}\n]\n}\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。",
+  "boundaryContractValidation": {
+    "passed": true,
+    "issues": [],
+    "checkedAt": "2026-07-12T23:03:01.855Z",
+    "checks": [
+      "point-id-exists",
+      "point-in-correct-90s-window",
+      "start-before-end",
+      "same-cut-count",
+      "no-duplicate-or-missing-cut-index",
+      "reasons-present"
+    ]
+  },
+  "selectedBoundaryEvidence": [
+    {
+      "provisionalCutIndex": 1,
+      "start": {
+        "pointId": "word-034207:start",
+        "timeMs": 11701322,
+        "kind": "start",
+        "wordIndex": 298,
+        "selectedWord": {
+          "id": "word-034207",
+          "s": 11701322,
+          "e": 11701422,
+          "t": "次"
+        },
+        "surroundingWords": [
+          {
+            "wordId": "word-034205",
+            "sourceStartMs": 11699160,
+            "sourceEndMs": 11699520,
+            "text": "か"
+          },
+          {
+            "wordId": "word-034206",
+            "sourceStartMs": 11699520,
+            "sourceEndMs": 11699540,
+            "text": "ー"
+          },
+          {
+            "wordId": "word-034207",
+            "sourceStartMs": 11701322,
+            "sourceEndMs": 11701422,
+            "text": "次"
+          },
+          {
+            "wordId": "word-034208",
+            "sourceStartMs": 11701422,
+            "sourceEndMs": 11701722,
+            "text": "B"
+          },
+          {
+            "wordId": "word-034209",
+            "sourceStartMs": 11701722,
+            "sourceEndMs": 11701842,
+            "text": "で"
+          }
+        ],
+        "reason": "次の対戦相手がBランクであると言及する「次Bでした」という発言の開始点を切り出しの起点としました。"
+      },
+      "end": {
+        "pointId": "word-034457:end",
+        "timeMs": 11789446,
+        "kind": "end",
+        "wordIndex": 548,
+        "selectedWord": {
+          "id": "word-034457",
+          "s": 11789426,
+          "e": 11789446,
+          "t": "も"
+        },
+        "surroundingWords": [
+          {
+            "wordId": "word-034455",
+            "sourceStartMs": 11789326,
+            "sourceEndMs": 11789406,
+            "text": "ど"
+          },
+          {
+            "wordId": "word-034456",
+            "sourceStartMs": 11789406,
+            "sourceEndMs": 11789426,
+            "text": "う"
+          },
+          {
+            "wordId": "word-034457",
+            "sourceStartMs": 11789426,
+            "sourceEndMs": 11789446,
+            "text": "も"
+          },
+          {
+            "wordId": "word-034458",
+            "sourceStartMs": 11823654,
+            "sourceEndMs": 11823794,
+            "text": "こ"
+          },
+          {
+            "wordId": "word-034459",
+            "sourceStartMs": 11823794,
+            "sourceEndMs": 11823874,
+            "text": "の"
+          }
+        ],
+        "reason": "配信の締めと終了の挨拶である「それではどうも」の最後の言葉の終了点までを収束点として選択しました。"
+      }
+    }
+  ]
+}

@@ -1,0 +1,142 @@
+{
+  "refinements": [
+    {
+      "provisionalCutIndex": 1,
+      "startBoundaryPointId": "word-005099:start",
+      "endBoundaryPointId": "word-005434:end",
+      "startReason": "イノシシへの攻撃方針として「殺した方が早く殺せるか!」と作戦を決定するセリフから会話の芯が始まるため、ここを開始境界としました。",
+      "endReason": "「でも板足りない」という発話により、イノシシ3匹に対する具体的な目標設定とそれに伴う課題の露呈を伴う掛け合いが一旦収束するため、ここを終了境界としました。"
+    }
+  ],
+  "runAt": "2026-07-13T06:42:58+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "manualRun": false,
+    "runner": "edge-cdp-text-prompt",
+    "generationSystem": "boundary-v001@gemini-web-flash",
+    "upstreamGenerationSystems": [
+      "theme-llm-v002@gemini-web-flash",
+      "llm-v012@gemini-web-flash"
+    ],
+    "resultRole": "boundary-refinement-eval",
+    "promptVersion": "boundary_refinement_prompt_v001",
+    "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+    "candidateIndex": 17,
+    "runIndex": 3,
+    "contextRadiusMs": 90000,
+    "inputPromptSha256": "fe6aa2417e6c3dc4288f2cab0b96b786cd29f3f9bb1e8442932ccdffc26a9ff5"
+  },
+  "promptFile": "outputs/theme-composition-boundary/20260713-boundary-v001-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-017/run-03/prompt.md",
+  "pageUrl": "https://gemini.google.com/app/53333c746ee4c5d4?hl=ja",
+  "rawResponseText": "{\n\"refinements\": [\n{\n\"provisionalCutIndex\": 1,\n\"startBoundaryPointId\": \"word-005099:start\",\n\"endBoundaryPointId\": \"word-005434:end\",\n\"startReason\": \"イノシシへの攻撃方針として「殺した方が早く殺せるか!」と作戦を決定するセリフから会話の芯が始まるため、ここを開始境界としました。\",\n\"endReason\": \"「でも板足りない」という発話により、イノシシ3匹に対する具体的な目標設定とそれに伴う課題の露呈を伴う掛け合いが一旦収束するため、ここを終了境界としました。\"\n}\n]\n}\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。",
+  "boundaryContractValidation": {
+    "passed": true,
+    "issues": [],
+    "checkedAt": "2026-07-12T21:42:58.680Z",
+    "checks": [
+      "point-id-exists",
+      "point-in-correct-90s-window",
+      "start-before-end",
+      "same-cut-count",
+      "no-duplicate-or-missing-cut-index",
+      "reasons-present"
+    ]
+  },
+  "selectedBoundaryEvidence": [
+    {
+      "provisionalCutIndex": 1,
+      "start": {
+        "pointId": "word-005099:start",
+        "timeMs": 1021002,
+        "kind": "start",
+        "wordIndex": 526,
+        "selectedWord": {
+          "id": "word-005099",
+          "s": 1021002,
+          "e": 1021162,
+          "t": "殺"
+        },
+        "surroundingWords": [
+          {
+            "wordId": "word-005097",
+            "sourceStartMs": 1018786,
+            "sourceEndMs": 1019146,
+            "text": "る"
+          },
+          {
+            "wordId": "word-005098",
+            "sourceStartMs": 1019146,
+            "sourceEndMs": 1019166,
+            "text": "?"
+          },
+          {
+            "wordId": "word-005099",
+            "sourceStartMs": 1021002,
+            "sourceEndMs": 1021162,
+            "text": "殺"
+          },
+          {
+            "wordId": "word-005100",
+            "sourceStartMs": 1021162,
+            "sourceEndMs": 1021182,
+            "text": "し"
+          },
+          {
+            "wordId": "word-005101",
+            "sourceStartMs": 1021182,
+            "sourceEndMs": 1021282,
+            "text": "た"
+          }
+        ],
+        "reason": "イノシシへの攻撃方針として「殺した方が早く殺せるか!」と作戦を決定するセリフから会話の芯が始まるため、ここを開始境界としました。"
+      },
+      "end": {
+        "pointId": "word-005434:end",
+        "timeMs": 1079852,
+        "kind": "end",
+        "wordIndex": 861,
+        "selectedWord": {
+          "id": "word-005434",
+          "s": 1079832,
+          "e": 1079852,
+          "t": "い"
+        },
+        "surroundingWords": [
+          {
+            "wordId": "word-005432",
+            "sourceStartMs": 1079632,
+            "sourceEndMs": 1079732,
+            "text": "り"
+          },
+          {
+            "wordId": "word-005433",
+            "sourceStartMs": 1079732,
+            "sourceEndMs": 1079832,
+            "text": "な"
+          },
+          {
+            "wordId": "word-005434",
+            "sourceStartMs": 1079832,
+            "sourceEndMs": 1079852,
+            "text": "い"
+          },
+          {
+            "wordId": "word-005435",
+            "sourceStartMs": 1081354,
+            "sourceEndMs": 1081454,
+            "text": "居"
+          },
+          {
+            "wordId": "word-005436",
+            "sourceStartMs": 1081454,
+            "sourceEndMs": 1081655,
+            "text": "た"
+          }
+        ],
+        "reason": "「でも板足りない」という発話により、イノシシ3匹に対する具体的な目標設定とそれに伴う課題の露呈を伴う掛け合いが一旦収束するため、ここを終了境界としました。"
+      }
+    }
+  ]
+}

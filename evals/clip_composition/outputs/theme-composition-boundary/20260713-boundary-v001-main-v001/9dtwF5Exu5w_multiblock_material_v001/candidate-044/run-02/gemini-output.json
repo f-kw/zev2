@@ -1,0 +1,142 @@
+{
+  "refinements": [
+    {
+      "provisionalCutIndex": 1,
+      "startBoundaryPointId": "word-027638:start",
+      "endBoundaryPointId": "word-027933:end",
+      "startReason": "同点に追いつかれた緊迫した状況を受け、「ミートビーパファイ」で作戦の指示が始まる最初の単語の開始点を選択しました。",
+      "endReason": "ピッチャー交代と代打にビブーを起用する一連の作戦の思考と結論が「負けない」という言葉で収束する最後の単語の終了点を選択しました。"
+    }
+  ],
+  "runAt": "2026-07-13T07:57:03+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "manualRun": false,
+    "runner": "edge-cdp-text-prompt",
+    "generationSystem": "boundary-v001@gemini-web-flash",
+    "upstreamGenerationSystems": [
+      "theme-llm-v002@gemini-web-flash",
+      "llm-v012@gemini-web-flash"
+    ],
+    "resultRole": "boundary-refinement-eval",
+    "promptVersion": "boundary_refinement_prompt_v001",
+    "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+    "candidateIndex": 44,
+    "runIndex": 2,
+    "contextRadiusMs": 90000,
+    "inputPromptSha256": "c6340050320ca5daa7951d194e8e85b40169541753b4503f8b6cb0a33750bf6c"
+  },
+  "promptFile": "outputs/theme-composition-boundary/20260713-boundary-v001-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-044/run-02/prompt.md",
+  "pageUrl": "https://gemini.google.com/app/9f8cde2e6fea01e1?hl=ja",
+  "rawResponseText": "{\n\"refinements\": [\n{\n\"provisionalCutIndex\": 1,\n\"startBoundaryPointId\": \"word-027638:start\",\n\"endBoundaryPointId\": \"word-027933:end\",\n\"startReason\": \"同点に追いつかれた緊迫した状況を受け、「ミートビーパファイ」で作戦の指示が始まる最初の単語の開始点を選択しました。\",\n\"endReason\": \"ピッチャー交代と代打にビブーを起用する一連の作戦の思考と結論が「負けない」という言葉で収束する最後の単語の終了点を選択しました。\"\n}\n]\n}\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。",
+  "boundaryContractValidation": {
+    "passed": true,
+    "issues": [],
+    "checkedAt": "2026-07-12T22:57:03.051Z",
+    "checks": [
+      "point-id-exists",
+      "point-in-correct-90s-window",
+      "start-before-end",
+      "same-cut-count",
+      "no-duplicate-or-missing-cut-index",
+      "reasons-present"
+    ]
+  },
+  "selectedBoundaryEvidence": [
+    {
+      "provisionalCutIndex": 1,
+      "start": {
+        "pointId": "word-027638:start",
+        "timeMs": 9126634,
+        "kind": "start",
+        "wordIndex": 199,
+        "selectedWord": {
+          "id": "word-027638",
+          "s": 9126634,
+          "e": 9126694,
+          "t": "ミ"
+        },
+        "surroundingWords": [
+          {
+            "wordId": "word-027636",
+            "sourceStartMs": 9119580,
+            "sourceEndMs": 9119900,
+            "text": "て"
+          },
+          {
+            "wordId": "word-027637",
+            "sourceStartMs": 9119900,
+            "sourceEndMs": 9119920,
+            "text": "…"
+          },
+          {
+            "wordId": "word-027638",
+            "sourceStartMs": 9126634,
+            "sourceEndMs": 9126694,
+            "text": "ミ"
+          },
+          {
+            "wordId": "word-027639",
+            "sourceStartMs": 9126694,
+            "sourceEndMs": 9126794,
+            "text": "ー"
+          },
+          {
+            "wordId": "word-027640",
+            "sourceStartMs": 9126794,
+            "sourceEndMs": 9126914,
+            "text": "ト"
+          }
+        ],
+        "reason": "同点に追いつかれた緊迫した状況を受け、「ミートビーパファイ」で作戦の指示が始まる最初の単語の開始点を選択しました。"
+      },
+      "end": {
+        "pointId": "word-027933:end",
+        "timeMs": 9239820,
+        "kind": "end",
+        "wordIndex": 494,
+        "selectedWord": {
+          "id": "word-027933",
+          "s": 9239800,
+          "e": 9239820,
+          "t": "い"
+        },
+        "surroundingWords": [
+          {
+            "wordId": "word-027931",
+            "sourceStartMs": 9239640,
+            "sourceEndMs": 9239740,
+            "text": "け"
+          },
+          {
+            "wordId": "word-027932",
+            "sourceStartMs": 9239740,
+            "sourceEndMs": 9239800,
+            "text": "な"
+          },
+          {
+            "wordId": "word-027933",
+            "sourceStartMs": 9239800,
+            "sourceEndMs": 9239820,
+            "text": "い"
+          },
+          {
+            "wordId": "word-027934",
+            "sourceStartMs": 9240530,
+            "sourceEndMs": 9240650,
+            "text": "変"
+          },
+          {
+            "wordId": "word-027935",
+            "sourceStartMs": 9240650,
+            "sourceEndMs": 9240670,
+            "text": "わ"
+          }
+        ],
+        "reason": "ピッチャー交代と代打にビブーを起用する一連の作戦の思考と結論が「負けない」という言葉で収束する最後の単語の終了点を選択しました。"
+      }
+    }
+  ]
+}

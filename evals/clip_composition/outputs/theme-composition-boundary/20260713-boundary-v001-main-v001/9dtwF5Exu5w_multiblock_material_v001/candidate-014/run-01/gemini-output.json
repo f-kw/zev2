@@ -1,0 +1,142 @@
+{
+  "refinements": [
+    {
+      "provisionalCutIndex": 1,
+      "startBoundaryPointId": "word-010829:start",
+      "endBoundaryPointId": "word-011107:end",
+      "startReason": "こよりへの相談状況を確認し始める「んーさっき配信終わった？」という発話の開始点を選択しました。",
+      "endReason": "荒れを考慮して相談を断念し、「それがいい」と結論づけて納得した余韻の最後の言葉を選択しました。"
+    }
+  ],
+  "runAt": "2026-07-13T07:44:23+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "manualRun": false,
+    "runner": "edge-cdp-text-prompt",
+    "generationSystem": "boundary-v001@gemini-web-flash",
+    "upstreamGenerationSystems": [
+      "theme-llm-v002@gemini-web-flash",
+      "llm-v012@gemini-web-flash"
+    ],
+    "resultRole": "boundary-refinement-eval",
+    "promptVersion": "boundary_refinement_prompt_v001",
+    "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+    "candidateIndex": 14,
+    "runIndex": 1,
+    "contextRadiusMs": 90000,
+    "inputPromptSha256": "5d11f2f3feec576dda114ec398e874980aa93cde47481a11887651127f0abd33"
+  },
+  "promptFile": "outputs/theme-composition-boundary/20260713-boundary-v001-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-014/run-01/prompt.md",
+  "pageUrl": "https://gemini.google.com/app/d81116eec8f58f38?hl=ja",
+  "rawResponseText": "{\n\"refinements\": [\n{\n\"provisionalCutIndex\": 1,\n\"startBoundaryPointId\": \"word-010829:start\",\n\"endBoundaryPointId\": \"word-011107:end\",\n\"startReason\": \"こよりへの相談状況を確認し始める「んーさっき配信終わった？」という発話の開始点を選択しました。\",\n\"endReason\": \"荒れを考慮して相談を断念し、「それがいい」と結論づけて納得した余韻の最後の言葉を選択しました。\"\n}\n]\n}\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。",
+  "boundaryContractValidation": {
+    "passed": true,
+    "issues": [],
+    "checkedAt": "2026-07-12T22:44:23.654Z",
+    "checks": [
+      "point-id-exists",
+      "point-in-correct-90s-window",
+      "start-before-end",
+      "same-cut-count",
+      "no-duplicate-or-missing-cut-index",
+      "reasons-present"
+    ]
+  },
+  "selectedBoundaryEvidence": [
+    {
+      "provisionalCutIndex": 1,
+      "start": {
+        "pointId": "word-010829:start",
+        "timeMs": 3723879,
+        "kind": "start",
+        "wordIndex": 275,
+        "selectedWord": {
+          "id": "word-010829",
+          "s": 3723879,
+          "e": 3723919,
+          "t": "ん"
+        },
+        "surroundingWords": [
+          {
+            "wordId": "word-010827",
+            "sourceStartMs": 3723839,
+            "sourceEndMs": 3723859,
+            "text": "ー"
+          },
+          {
+            "wordId": "word-010828",
+            "sourceStartMs": 3723859,
+            "sourceEndMs": 3723879,
+            "text": "!"
+          },
+          {
+            "wordId": "word-010829",
+            "sourceStartMs": 3723879,
+            "sourceEndMs": 3723919,
+            "text": "ん"
+          },
+          {
+            "wordId": "word-010830",
+            "sourceStartMs": 3723919,
+            "sourceEndMs": 3731421,
+            "text": "ー"
+          },
+          {
+            "wordId": "word-010831",
+            "sourceStartMs": 3731421,
+            "sourceEndMs": 3731441,
+            "text": "さ"
+          }
+        ],
+        "reason": "こよりへの相談状況を確認し始める「んーさっき配信終わった？」という発話の開始点を選択しました。"
+      },
+      "end": {
+        "pointId": "word-011107:end",
+        "timeMs": 3785457,
+        "kind": "end",
+        "wordIndex": 553,
+        "selectedWord": {
+          "id": "word-011107",
+          "s": 3782254,
+          "e": 3785457,
+          "t": "い"
+        },
+        "surroundingWords": [
+          {
+            "wordId": "word-011105",
+            "sourceStartMs": 3782134,
+            "sourceEndMs": 3782234,
+            "text": "が"
+          },
+          {
+            "wordId": "word-011106",
+            "sourceStartMs": 3782234,
+            "sourceEndMs": 3782254,
+            "text": "い"
+          },
+          {
+            "wordId": "word-011107",
+            "sourceStartMs": 3782254,
+            "sourceEndMs": 3785457,
+            "text": "い"
+          },
+          {
+            "wordId": "word-011108",
+            "sourceStartMs": 3785457,
+            "sourceEndMs": 3785577,
+            "text": "よ"
+          },
+          {
+            "wordId": "word-011109",
+            "sourceStartMs": 3785577,
+            "sourceEndMs": 3785597,
+            "text": "し"
+          }
+        ],
+        "reason": "荒れを考慮して相談を断念し、「それがいい」と結論づけて納得した余韻の最後の言葉を選択しました。"
+      }
+    }
+  ]
+}

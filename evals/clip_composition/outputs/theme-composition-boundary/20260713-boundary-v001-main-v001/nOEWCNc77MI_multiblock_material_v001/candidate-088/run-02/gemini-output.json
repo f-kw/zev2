@@ -1,0 +1,142 @@
+{
+  "refinements": [
+    {
+      "provisionalCutIndex": 1,
+      "startBoundaryPointId": "word-052588:start",
+      "endBoundaryPointId": "word-052758:end",
+      "startReason": "ころねが「でも誘って?」とマリンへアプローチを仕掛ける発話の開始位置を選択しました。",
+      "endReason": "マリンが「コーネとならやっていける気がする」と結論付け、掛け合いが収束する「ほんと?」の終了位置を選択しました。"
+    }
+  ],
+  "runAt": "2026-07-13T07:28:07+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "manualRun": false,
+    "runner": "edge-cdp-text-prompt",
+    "generationSystem": "boundary-v001@gemini-web-flash",
+    "upstreamGenerationSystems": [
+      "theme-llm-v002@gemini-web-flash",
+      "llm-v012@gemini-web-flash"
+    ],
+    "resultRole": "boundary-refinement-eval",
+    "promptVersion": "boundary_refinement_prompt_v001",
+    "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+    "candidateIndex": 88,
+    "runIndex": 2,
+    "contextRadiusMs": 90000,
+    "inputPromptSha256": "cbe4e174e3044c12ed060ce23157166d8cb6ae26aa86680d6cd21650a4138114"
+  },
+  "promptFile": "outputs/theme-composition-boundary/20260713-boundary-v001-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-088/run-02/prompt.md",
+  "pageUrl": "https://gemini.google.com/app/312e8b6ff7d4fee6?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"refinements\": [\n    {\n      \"provisionalCutIndex\": 1,\n      \"startBoundaryPointId\": \"word-052588:start\",\n      \"endBoundaryPointId\": \"word-052758:end\",\n      \"startReason\": \"ころねが「でも誘って?」とマリンへアプローチを仕掛ける発話の開始位置を選択しました。\",\n      \"endReason\": \"マリンが「コーネとならやっていける気がする」と結論付け、掛け合いが収束する「ほんと?」の終了位置を選択しました。\"\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。",
+  "boundaryContractValidation": {
+    "passed": true,
+    "issues": [],
+    "checkedAt": "2026-07-12T22:28:07.413Z",
+    "checks": [
+      "point-id-exists",
+      "point-in-correct-90s-window",
+      "start-before-end",
+      "same-cut-count",
+      "no-duplicate-or-missing-cut-index",
+      "reasons-present"
+    ]
+  },
+  "selectedBoundaryEvidence": [
+    {
+      "provisionalCutIndex": 1,
+      "start": {
+        "pointId": "word-052588:start",
+        "timeMs": 11551287,
+        "kind": "start",
+        "wordIndex": 444,
+        "selectedWord": {
+          "id": "word-052588",
+          "s": 11551287,
+          "e": 11551407,
+          "t": "で"
+        },
+        "surroundingWords": [
+          {
+            "wordId": "word-052586",
+            "sourceStartMs": 11549438,
+            "sourceEndMs": 11549638,
+            "text": "長"
+          },
+          {
+            "wordId": "word-052587",
+            "sourceStartMs": 11549638,
+            "sourceEndMs": 11549658,
+            "text": "は"
+          },
+          {
+            "wordId": "word-052588",
+            "sourceStartMs": 11551287,
+            "sourceEndMs": 11551407,
+            "text": "で"
+          },
+          {
+            "wordId": "word-052589",
+            "sourceStartMs": 11551407,
+            "sourceEndMs": 11551627,
+            "text": "も"
+          },
+          {
+            "wordId": "word-052590",
+            "sourceStartMs": 11551627,
+            "sourceEndMs": 11551827,
+            "text": "誘"
+          }
+        ],
+        "reason": "ころねが「でも誘って?」とマリンへアプローチを仕掛ける発話の開始位置を選択しました。"
+      },
+      "end": {
+        "pointId": "word-052758:end",
+        "timeMs": 11593310,
+        "kind": "end",
+        "wordIndex": 614,
+        "selectedWord": {
+          "id": "word-052758",
+          "s": 11593270,
+          "e": 11593310,
+          "t": "?"
+        },
+        "surroundingWords": [
+          {
+            "wordId": "word-052756",
+            "sourceStartMs": 11593190,
+            "sourceEndMs": 11593210,
+            "text": "ん"
+          },
+          {
+            "wordId": "word-052757",
+            "sourceStartMs": 11593210,
+            "sourceEndMs": 11593270,
+            "text": "と"
+          },
+          {
+            "wordId": "word-052758",
+            "sourceStartMs": 11593270,
+            "sourceEndMs": 11593310,
+            "text": "?"
+          },
+          {
+            "wordId": "word-052759",
+            "sourceStartMs": 11593310,
+            "sourceEndMs": 11593350,
+            "text": "じ"
+          },
+          {
+            "wordId": "word-052760",
+            "sourceStartMs": 11593350,
+            "sourceEndMs": 11593370,
+            "text": "ゃ"
+          }
+        ],
+        "reason": "マリンが「コーネとならやっていける気がする」と結論付け、掛け合いが収束する「ほんと?」の終了位置を選択しました。"
+      }
+    }
+  ]
+}

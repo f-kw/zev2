@@ -1,0 +1,142 @@
+{
+  "refinements": [
+    {
+      "provisionalCutIndex": 1,
+      "startBoundaryPointId": "word-018879:start",
+      "endBoundaryPointId": "word-019141:end",
+      "startReason": "対戦相手のチーム名である「ザサミ商業!」と大声で叫び、試合開始のリアクションが明確に始まるためです。",
+      "endReason": "相手チームの能力を確認して「あ、こいつだけエラー」と述べ、ステータスの絶望と確認が一区切りつくためです。"
+    }
+  ],
+  "runAt": "2026-07-13T07:50:07+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "manualRun": false,
+    "runner": "edge-cdp-text-prompt",
+    "generationSystem": "boundary-v001@gemini-web-flash",
+    "upstreamGenerationSystems": [
+      "theme-llm-v002@gemini-web-flash",
+      "llm-v012@gemini-web-flash"
+    ],
+    "resultRole": "boundary-refinement-eval",
+    "promptVersion": "boundary_refinement_prompt_v001",
+    "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+    "candidateIndex": 28,
+    "runIndex": 1,
+    "contextRadiusMs": 90000,
+    "inputPromptSha256": "766f8abc64132755ad3539ef4ce3da4dd0aa72bb05f5348a2cbad0e57f386b0f"
+  },
+  "promptFile": "outputs/theme-composition-boundary/20260713-boundary-v001-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-028/run-01/prompt.md",
+  "pageUrl": "https://gemini.google.com/app/689195e83eb62fb3?hl=ja",
+  "rawResponseText": "{\n\"refinements\": [\n{\n\"provisionalCutIndex\": 1,\n\"startBoundaryPointId\": \"word-018879:start\",\n\"endBoundaryPointId\": \"word-019141:end\",\n\"startReason\": \"対戦相手のチーム名である「ザサミ商業!」と大声で叫び、試合開始のリアクションが明確に始まるためです。\",\n\"endReason\": \"相手チームの能力を確認して「あ、こいつだけエラー」と述べ、ステータスの絶望と確認が一区切りつくためです。\"\n}\n]\n}\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。",
+  "boundaryContractValidation": {
+    "passed": true,
+    "issues": [],
+    "checkedAt": "2026-07-12T22:50:07.992Z",
+    "checks": [
+      "point-id-exists",
+      "point-in-correct-90s-window",
+      "start-before-end",
+      "same-cut-count",
+      "no-duplicate-or-missing-cut-index",
+      "reasons-present"
+    ]
+  },
+  "selectedBoundaryEvidence": [
+    {
+      "provisionalCutIndex": 1,
+      "start": {
+        "pointId": "word-018879:start",
+        "timeMs": 6281687,
+        "kind": "start",
+        "wordIndex": 286,
+        "selectedWord": {
+          "id": "word-018879",
+          "s": 6281687,
+          "e": 6281747,
+          "t": "ザ"
+        },
+        "surroundingWords": [
+          {
+            "wordId": "word-018877",
+            "sourceStartMs": 6281526,
+            "sourceEndMs": 6281626,
+            "text": "で"
+          },
+          {
+            "wordId": "word-018878",
+            "sourceStartMs": 6281626,
+            "sourceEndMs": 6281687,
+            "text": "!"
+          },
+          {
+            "wordId": "word-018879",
+            "sourceStartMs": 6281687,
+            "sourceEndMs": 6281747,
+            "text": "ザ"
+          },
+          {
+            "wordId": "word-018880",
+            "sourceStartMs": 6281747,
+            "sourceEndMs": 6281887,
+            "text": "サ"
+          },
+          {
+            "wordId": "word-018881",
+            "sourceStartMs": 6281887,
+            "sourceEndMs": 6281907,
+            "text": "ミ"
+          }
+        ],
+        "reason": "対戦相手のチーム名である「ザサミ商業!」と大声で叫び、試合開始のリアクションが明確に始まるためです。"
+      },
+      "end": {
+        "pointId": "word-019141:end",
+        "timeMs": 6359980,
+        "kind": "end",
+        "wordIndex": 548,
+        "selectedWord": {
+          "id": "word-019141",
+          "s": 6359960,
+          "e": 6359980,
+          "t": "ー"
+        },
+        "surroundingWords": [
+          {
+            "wordId": "word-019139",
+            "sourceStartMs": 6359820,
+            "sourceEndMs": 6359940,
+            "text": "エ"
+          },
+          {
+            "wordId": "word-019140",
+            "sourceStartMs": 6359940,
+            "sourceEndMs": 6359960,
+            "text": "ラ"
+          },
+          {
+            "wordId": "word-019141",
+            "sourceStartMs": 6359960,
+            "sourceEndMs": 6359980,
+            "text": "ー"
+          },
+          {
+            "wordId": "word-019142",
+            "sourceStartMs": 6360082,
+            "sourceEndMs": 6360202,
+            "text": "と"
+          },
+          {
+            "wordId": "word-019143",
+            "sourceStartMs": 6360202,
+            "sourceEndMs": 6360262,
+            "text": "か"
+          }
+        ],
+        "reason": "相手チームの能力を確認して「あ、こいつだけエラー」と述べ、ステータスの絶望と確認が一区切りつくためです。"
+      }
+    }
+  ]
+}

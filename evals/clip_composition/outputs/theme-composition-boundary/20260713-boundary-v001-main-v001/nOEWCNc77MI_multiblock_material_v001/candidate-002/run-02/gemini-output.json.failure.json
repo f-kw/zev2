@@ -1,0 +1,32 @@
+{
+  "runAt": "2026-07-13T05:58:56+09:00",
+  "status": "not_usable_for_scoring_or_human_review",
+  "reason": "Web Geminiの返答から完全なselectedCuts/themes/refinements JSONを取得できなかったため、診断用に画面本文だけを保存した。",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "manualRun": false,
+    "runner": "edge-cdp-text-prompt",
+    "generationSystem": "boundary-v001@gemini-web-flash",
+    "upstreamGenerationSystems": [
+      "theme-llm-v002@gemini-web-flash",
+      "llm-v012@gemini-web-flash"
+    ],
+    "resultRole": "boundary-refinement-eval",
+    "promptVersion": "boundary_refinement_prompt_v001",
+    "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+    "candidateIndex": 2,
+    "runIndex": 2,
+    "contextRadiusMs": 90000,
+    "inputPromptSha256": "617a24d6262e5c32f4851d9ae2cc3025a92c665b9ddbd7947b4c4a8f2df71577"
+  },
+  "promptFile": "outputs/theme-composition-boundary/20260713-boundary-v001-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-002/run-02/prompt.md",
+  "diagnostic": {
+    "message": "Gemini返答から selectedCuts/themes/refinements JSONを取得できません",
+    "pageUrl": "",
+    "stillRunning": false,
+    "rawResponseText": "",
+    "bodyTextEnd": ""
+  }
+}

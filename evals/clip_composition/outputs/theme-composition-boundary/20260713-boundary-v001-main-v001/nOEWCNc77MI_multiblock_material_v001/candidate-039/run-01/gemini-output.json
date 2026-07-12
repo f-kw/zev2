@@ -1,0 +1,142 @@
+{
+  "refinements": [
+    {
+      "provisionalCutIndex": 1,
+      "startBoundaryPointId": "word-015709:start",
+      "endBoundaryPointId": "word-015845:end",
+      "startReason": "イノシシの被り物を披露して鬼滅の刃ごっこが始まる最初の単語である「イノシシ（イノシシやるか）」を選択しました。",
+      "endReason": "「お前はこっちを使うんだ！」と言い放ち、ごっこの流れにひと区切りがつく最後の単語「だ」を選択しました。"
+    }
+  ],
+  "runAt": "2026-07-13T06:56:28+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "manualRun": false,
+    "runner": "edge-cdp-text-prompt",
+    "generationSystem": "boundary-v001@gemini-web-flash",
+    "upstreamGenerationSystems": [
+      "theme-llm-v002@gemini-web-flash",
+      "llm-v012@gemini-web-flash"
+    ],
+    "resultRole": "boundary-refinement-eval",
+    "promptVersion": "boundary_refinement_prompt_v001",
+    "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+    "candidateIndex": 39,
+    "runIndex": 1,
+    "contextRadiusMs": 90000,
+    "inputPromptSha256": "e94bdc463f6123871d825417d38127786743a6efda479fe56c99f0b41846b166"
+  },
+  "promptFile": "outputs/theme-composition-boundary/20260713-boundary-v001-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-039/run-01/prompt.md",
+  "pageUrl": "https://gemini.google.com/app/4c5b5507c7d5575f?hl=ja",
+  "rawResponseText": "{\"refinements\":[{\"provisionalCutIndex\":1,\"startBoundaryPointId\":\"word-015709:start\",\"endBoundaryPointId\":\"word-015845:end\",\"startReason\":\"イノシシの被り物を披露して鬼滅の刃ごっこが始まる最初の単語である「イノシシ（イノシシやるか）」を選択しました。\",\"endReason\":\"「お前はこっちを使うんだ！」と言い放ち、ごっこの流れにひと区切りがつく最後の単語「だ」を選択しました。\"}]}\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。",
+  "boundaryContractValidation": {
+    "passed": true,
+    "issues": [],
+    "checkedAt": "2026-07-12T21:56:28.860Z",
+    "checks": [
+      "point-id-exists",
+      "point-in-correct-90s-window",
+      "start-before-end",
+      "same-cut-count",
+      "no-duplicate-or-missing-cut-index",
+      "reasons-present"
+    ]
+  },
+  "selectedBoundaryEvidence": [
+    {
+      "provisionalCutIndex": 1,
+      "start": {
+        "pointId": "word-015709:start",
+        "timeMs": 3254555,
+        "kind": "start",
+        "wordIndex": 516,
+        "selectedWord": {
+          "id": "word-015709",
+          "s": 3254555,
+          "e": 3254655,
+          "t": "イ"
+        },
+        "surroundingWords": [
+          {
+            "wordId": "word-015707",
+            "sourceStartMs": 3254174,
+            "sourceEndMs": 3254354,
+            "text": "れ"
+          },
+          {
+            "wordId": "word-015708",
+            "sourceStartMs": 3254354,
+            "sourceEndMs": 3254555,
+            "text": "か"
+          },
+          {
+            "wordId": "word-015709",
+            "sourceStartMs": 3254555,
+            "sourceEndMs": 3254655,
+            "text": "イ"
+          },
+          {
+            "wordId": "word-015710",
+            "sourceStartMs": 3254655,
+            "sourceEndMs": 3254775,
+            "text": "ノ"
+          },
+          {
+            "wordId": "word-015711",
+            "sourceStartMs": 3254775,
+            "sourceEndMs": 3254895,
+            "text": "シ"
+          }
+        ],
+        "reason": "イノシシの被り物を披露して鬼滅の刃ごっこが始まる最初の単語である「イノシシ（イノシシやるか）」を選択しました。"
+      },
+      "end": {
+        "pointId": "word-015845:end",
+        "timeMs": 3292350,
+        "kind": "end",
+        "wordIndex": 652,
+        "selectedWord": {
+          "id": "word-015845",
+          "s": 3292330,
+          "e": 3292350,
+          "t": "!"
+        },
+        "surroundingWords": [
+          {
+            "wordId": "word-015843",
+            "sourceStartMs": 3292030,
+            "sourceEndMs": 3292090,
+            "text": "ん"
+          },
+          {
+            "wordId": "word-015844",
+            "sourceStartMs": 3292090,
+            "sourceEndMs": 3292330,
+            "text": "だ"
+          },
+          {
+            "wordId": "word-015845",
+            "sourceStartMs": 3292330,
+            "sourceEndMs": 3292350,
+            "text": "!"
+          },
+          {
+            "wordId": "word-015846",
+            "sourceStartMs": 3306889,
+            "sourceEndMs": 3307053,
+            "text": "あ"
+          },
+          {
+            "wordId": "word-015847",
+            "sourceStartMs": 3307053,
+            "sourceEndMs": 3307217,
+            "text": "は"
+          }
+        ],
+        "reason": "「お前はこっちを使うんだ！」と言い放ち、ごっこの流れにひと区切りがつく最後の単語「だ」を選択しました。"
+      }
+    }
+  ]
+}

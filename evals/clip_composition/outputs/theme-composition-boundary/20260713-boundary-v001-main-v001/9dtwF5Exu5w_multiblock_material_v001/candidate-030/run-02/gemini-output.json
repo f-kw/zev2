@@ -1,0 +1,142 @@
+{
+  "refinements": [
+    {
+      "provisionalCutIndex": 1,
+      "startBoundaryPointId": "word-019665:start",
+      "endBoundaryPointId": "word-019744:end",
+      "startReason": "作戦を実行に移して選手に「頑張ってよ！」と声をかける発話の開始点であるため選定しました。",
+      "endReason": "「スワスワスワ！」と叫んで大興奮のリアクションが収束する最後の言葉の終了点であるため選定しました。"
+    }
+  ],
+  "runAt": "2026-07-13T07:54:41+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "manualRun": false,
+    "runner": "edge-cdp-text-prompt",
+    "generationSystem": "boundary-v001@gemini-web-flash",
+    "upstreamGenerationSystems": [
+      "theme-llm-v002@gemini-web-flash",
+      "llm-v012@gemini-web-flash"
+    ],
+    "resultRole": "boundary-refinement-eval",
+    "promptVersion": "boundary_refinement_prompt_v001",
+    "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+    "candidateIndex": 30,
+    "runIndex": 2,
+    "contextRadiusMs": 90000,
+    "inputPromptSha256": "4e3196c50b094b9ccc30c7ed856dee6d5c1eaa0a181c758c14ac11c8cc5d20fb"
+  },
+  "promptFile": "outputs/theme-composition-boundary/20260713-boundary-v001-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-030/run-02/prompt.md",
+  "pageUrl": "https://gemini.google.com/app/e2ab42dcbf218f10?hl=ja",
+  "rawResponseText": "{\n\"refinements\": [\n{\n\"provisionalCutIndex\": 1,\n\"startBoundaryPointId\": \"word-019665:start\",\n\"endBoundaryPointId\": \"word-019744:end\",\n\"startReason\": \"作戦を実行に移して選手に「頑張ってよ！」と声をかける発話の開始点であるため選定しました。\",\n\"endReason\": \"「スワスワスワ！」と叫んで大興奮のリアクションが収束する最後の言葉の終了点であるため選定しました。\"\n}\n]\n}\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。",
+  "boundaryContractValidation": {
+    "passed": true,
+    "issues": [],
+    "checkedAt": "2026-07-12T22:54:41.340Z",
+    "checks": [
+      "point-id-exists",
+      "point-in-correct-90s-window",
+      "start-before-end",
+      "same-cut-count",
+      "no-duplicate-or-missing-cut-index",
+      "reasons-present"
+    ]
+  },
+  "selectedBoundaryEvidence": [
+    {
+      "provisionalCutIndex": 1,
+      "start": {
+        "pointId": "word-019665:start",
+        "timeMs": 6525131,
+        "kind": "start",
+        "wordIndex": 269,
+        "selectedWord": {
+          "id": "word-019665",
+          "s": 6525131,
+          "e": 6525391,
+          "t": "頑"
+        },
+        "surroundingWords": [
+          {
+            "wordId": "word-019663",
+            "sourceStartMs": 6525011,
+            "sourceEndMs": 6525031,
+            "text": "い"
+          },
+          {
+            "wordId": "word-019664",
+            "sourceStartMs": 6525031,
+            "sourceEndMs": 6525131,
+            "text": "!"
+          },
+          {
+            "wordId": "word-019665",
+            "sourceStartMs": 6525131,
+            "sourceEndMs": 6525391,
+            "text": "頑"
+          },
+          {
+            "wordId": "word-019666",
+            "sourceStartMs": 6525391,
+            "sourceEndMs": 6525591,
+            "text": "張"
+          },
+          {
+            "wordId": "word-019667",
+            "sourceStartMs": 6525591,
+            "sourceEndMs": 6525631,
+            "text": "っ"
+          }
+        ],
+        "reason": "作戦を実行に移して選手に「頑張ってよ！」と声をかける発話の開始点であるため選定しました。"
+      },
+      "end": {
+        "pointId": "word-019744:end",
+        "timeMs": 6539920,
+        "kind": "end",
+        "wordIndex": 348,
+        "selectedWord": {
+          "id": "word-019744",
+          "s": 6539900,
+          "e": 6539920,
+          "t": "!"
+        },
+        "surroundingWords": [
+          {
+            "wordId": "word-019742",
+            "sourceStartMs": 6536818,
+            "sourceEndMs": 6536958,
+            "text": "ス"
+          },
+          {
+            "wordId": "word-019743",
+            "sourceStartMs": 6536958,
+            "sourceEndMs": 6539900,
+            "text": "ワ"
+          },
+          {
+            "wordId": "word-019744",
+            "sourceStartMs": 6539900,
+            "sourceEndMs": 6539920,
+            "text": "!"
+          },
+          {
+            "wordId": "word-019745",
+            "sourceStartMs": 6540034,
+            "sourceEndMs": 6540134,
+            "text": "い"
+          },
+          {
+            "wordId": "word-019746",
+            "sourceStartMs": 6540134,
+            "sourceEndMs": 6540454,
+            "text": "い"
+          }
+        ],
+        "reason": "「スワスワスワ！」と叫んで大興奮のリアクションが収束する最後の言葉の終了点であるため選定しました。"
+      }
+    }
+  ]
+}

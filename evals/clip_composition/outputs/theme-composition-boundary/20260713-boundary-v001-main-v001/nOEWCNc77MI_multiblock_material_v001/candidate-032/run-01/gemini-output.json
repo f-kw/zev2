@@ -1,0 +1,142 @@
+{
+  "refinements": [
+    {
+      "provisionalCutIndex": 1,
+      "startBoundaryPointId": "word-013567:start",
+      "endBoundaryPointId": "word-013774:end",
+      "startReason": "テーマの始まりとなる「なんか君の心みたいにあったかい」というアプローチの第一声の起点であるword-013567を選択しました。",
+      "endReason": "「キモい！」という連呼が収束し、別の話題に移る直前の最後の言葉であるword-013774を選択しました。"
+    }
+  ],
+  "runAt": "2026-07-13T06:44:25+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "manualRun": false,
+    "runner": "edge-cdp-text-prompt",
+    "generationSystem": "boundary-v001@gemini-web-flash",
+    "upstreamGenerationSystems": [
+      "theme-llm-v002@gemini-web-flash",
+      "llm-v012@gemini-web-flash"
+    ],
+    "resultRole": "boundary-refinement-eval",
+    "promptVersion": "boundary_refinement_prompt_v001",
+    "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+    "candidateIndex": 32,
+    "runIndex": 1,
+    "contextRadiusMs": 90000,
+    "inputPromptSha256": "16f0aee11f66555f40a9a83182e5cb94351168e9cfd1c4dcc1ba1ece688d7575"
+  },
+  "promptFile": "outputs/theme-composition-boundary/20260713-boundary-v001-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-032/run-01/prompt.md",
+  "pageUrl": "https://gemini.google.com/app/f5ef587369217e9d?hl=ja",
+  "rawResponseText": "{\n\"refinements\": [\n{\n\"provisionalCutIndex\": 1,\n\"startBoundaryPointId\": \"word-013567:start\",\n\"endBoundaryPointId\": \"word-013774:end\",\n\"startReason\": \"テーマの始まりとなる「なんか君の心みたいにあったかい」というアプローチの第一声の起点であるword-013567を選択しました。\",\n\"endReason\": \"「キモい！」という連呼が収束し、別の話題に移る直前の最後の言葉であるword-013774を選択しました。\"\n}\n]\n}\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。",
+  "boundaryContractValidation": {
+    "passed": true,
+    "issues": [],
+    "checkedAt": "2026-07-12T21:44:25.484Z",
+    "checks": [
+      "point-id-exists",
+      "point-in-correct-90s-window",
+      "start-before-end",
+      "same-cut-count",
+      "no-duplicate-or-missing-cut-index",
+      "reasons-present"
+    ]
+  },
+  "selectedBoundaryEvidence": [
+    {
+      "provisionalCutIndex": 1,
+      "start": {
+        "pointId": "word-013567:start",
+        "timeMs": 2790074,
+        "kind": "start",
+        "wordIndex": 323,
+        "selectedWord": {
+          "id": "word-013567",
+          "s": 2790074,
+          "e": 2790134,
+          "t": "な"
+        },
+        "surroundingWords": [
+          {
+            "wordId": "word-013565",
+            "sourceStartMs": 2788990,
+            "sourceEndMs": 2789010,
+            "text": "う"
+          },
+          {
+            "wordId": "word-013566",
+            "sourceStartMs": 2789010,
+            "sourceEndMs": 2789030,
+            "text": "ん"
+          },
+          {
+            "wordId": "word-013567",
+            "sourceStartMs": 2790074,
+            "sourceEndMs": 2790134,
+            "text": "な"
+          },
+          {
+            "wordId": "word-013568",
+            "sourceStartMs": 2790134,
+            "sourceEndMs": 2790234,
+            "text": "ん"
+          },
+          {
+            "wordId": "word-013569",
+            "sourceStartMs": 2790234,
+            "sourceEndMs": 2791114,
+            "text": "か"
+          }
+        ],
+        "reason": "テーマの始まりとなる「なんか君の心みたいにあったかい」というアプローチの第一声の起点であるword-013567を選択しました。"
+      },
+      "end": {
+        "pointId": "word-013774:end",
+        "timeMs": 2848146,
+        "kind": "end",
+        "wordIndex": 530,
+        "selectedWord": {
+          "id": "word-013774",
+          "s": 2848126,
+          "e": 2848146,
+          "t": "!"
+        },
+        "surroundingWords": [
+          {
+            "wordId": "word-013772",
+            "sourceStartMs": 2847146,
+            "sourceEndMs": 2848006,
+            "text": "モ"
+          },
+          {
+            "wordId": "word-013773",
+            "sourceStartMs": 2848006,
+            "sourceEndMs": 2848126,
+            "text": "い"
+          },
+          {
+            "wordId": "word-013774",
+            "sourceStartMs": 2848126,
+            "sourceEndMs": 2848146,
+            "text": "!"
+          },
+          {
+            "wordId": "word-013775",
+            "sourceStartMs": 2851182,
+            "sourceEndMs": 2851562,
+            "text": "お"
+          },
+          {
+            "wordId": "word-013776",
+            "sourceStartMs": 2851562,
+            "sourceEndMs": 2852022,
+            "text": "尻"
+          }
+        ],
+        "reason": "「キモい！」という連呼が収束し、別の話題に移る直前の最後の言葉であるword-013774を選択しました。"
+      }
+    }
+  ]
+}

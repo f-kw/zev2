@@ -1,0 +1,142 @@
+{
+  "refinements": [
+    {
+      "provisionalCutIndex": 1,
+      "startBoundaryPointId": "word-014351:start",
+      "endBoundaryPointId": "word-014455:end",
+      "startReason": "しおりんを意識して練習メニューを決める発話の起点である「ミートに！」の箇所を開始境界として選定しました。",
+      "endReason": "狙い通り「カット打ち」の特殊能力が付き、「ええやん！」と歓喜する一連のリアクションの終端を終了境界として選定しました。"
+    }
+  ],
+  "runAt": "2026-07-13T07:48:14+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "manualRun": false,
+    "runner": "edge-cdp-text-prompt",
+    "generationSystem": "boundary-v001@gemini-web-flash",
+    "upstreamGenerationSystems": [
+      "theme-llm-v002@gemini-web-flash",
+      "llm-v012@gemini-web-flash"
+    ],
+    "resultRole": "boundary-refinement-eval",
+    "promptVersion": "boundary_refinement_prompt_v001",
+    "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+    "candidateIndex": 22,
+    "runIndex": 2,
+    "contextRadiusMs": 90000,
+    "inputPromptSha256": "158fb6db51a5074b254c8e42427dc75f568023bf338e92726ae2ccec9a38a536"
+  },
+  "promptFile": "outputs/theme-composition-boundary/20260713-boundary-v001-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-022/run-02/prompt.md",
+  "pageUrl": "https://gemini.google.com/app/0e346270c6d075a6?hl=ja",
+  "rawResponseText": "{\n\"refinements\": [\n{\n\"provisionalCutIndex\": 1,\n\"startBoundaryPointId\": \"word-014351:start\",\n\"endBoundaryPointId\": \"word-014455:end\",\n\"startReason\": \"しおりんを意識して練習メニューを決める発話の起点である「ミートに！」の箇所を開始境界として選定しました。\",\n\"endReason\": \"狙い通り「カット打ち」の特殊能力が付き、「ええやん！」と歓喜する一連のリアクションの終端を終了境界として選定しました。\"\n}\n]\n}\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。",
+  "boundaryContractValidation": {
+    "passed": true,
+    "issues": [],
+    "checkedAt": "2026-07-12T22:48:14.251Z",
+    "checks": [
+      "point-id-exists",
+      "point-in-correct-90s-window",
+      "start-before-end",
+      "same-cut-count",
+      "no-duplicate-or-missing-cut-index",
+      "reasons-present"
+    ]
+  },
+  "selectedBoundaryEvidence": [
+    {
+      "provisionalCutIndex": 1,
+      "start": {
+        "pointId": "word-014351:start",
+        "timeMs": 4710742,
+        "kind": "start",
+        "wordIndex": 314,
+        "selectedWord": {
+          "id": "word-014351",
+          "s": 4710742,
+          "e": 4710862,
+          "t": "ミ"
+        },
+        "surroundingWords": [
+          {
+            "wordId": "word-014349",
+            "sourceStartMs": 4710502,
+            "sourceEndMs": 4710602,
+            "text": "か"
+          },
+          {
+            "wordId": "word-014350",
+            "sourceStartMs": 4710602,
+            "sourceEndMs": 4710742,
+            "text": "!"
+          },
+          {
+            "wordId": "word-014351",
+            "sourceStartMs": 4710742,
+            "sourceEndMs": 4710862,
+            "text": "ミ"
+          },
+          {
+            "wordId": "word-014352",
+            "sourceStartMs": 4710862,
+            "sourceEndMs": 4710922,
+            "text": "ー"
+          },
+          {
+            "wordId": "word-014353",
+            "sourceStartMs": 4710922,
+            "sourceEndMs": 4711042,
+            "text": "ト"
+          }
+        ],
+        "reason": "しおりんを意識して練習メニューを決める発話の起点である「ミートに！」の箇所を開始境界として選定しました。"
+      },
+      "end": {
+        "pointId": "word-014455:end",
+        "timeMs": 4738494,
+        "kind": "end",
+        "wordIndex": 418,
+        "selectedWord": {
+          "id": "word-014455",
+          "s": 4738474,
+          "e": 4738494,
+          "t": "!"
+        },
+        "surroundingWords": [
+          {
+            "wordId": "word-014453",
+            "sourceStartMs": 4738334,
+            "sourceEndMs": 4738374,
+            "text": "や"
+          },
+          {
+            "wordId": "word-014454",
+            "sourceStartMs": 4738374,
+            "sourceEndMs": 4738474,
+            "text": "ん"
+          },
+          {
+            "wordId": "word-014455",
+            "sourceStartMs": 4738474,
+            "sourceEndMs": 4738494,
+            "text": "!"
+          },
+          {
+            "wordId": "word-014456",
+            "sourceStartMs": 4741026,
+            "sourceEndMs": 4741146,
+            "text": "ま"
+          },
+          {
+            "wordId": "word-014457",
+            "sourceStartMs": 4741146,
+            "sourceEndMs": 4741246,
+            "text": "た"
+          }
+        ],
+        "reason": "狙い通り「カット打ち」の特殊能力が付き、「ええやん！」と歓喜する一連のリアクションの終端を終了境界として選定しました。"
+      }
+    }
+  ]
+}

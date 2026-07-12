@@ -1,0 +1,42 @@
+{
+  "refinements": [],
+  "runAt": null,
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "manualRun": false,
+    "runner": "edge-cdp-text-prompt",
+    "generationSystem": "boundary-v001@gemini-web-flash",
+    "upstreamGenerationSystems": [
+      "theme-llm-v002@gemini-web-flash",
+      "llm-v012@gemini-web-flash"
+    ],
+    "resultRole": "boundary-refinement-eval",
+    "promptVersion": "boundary_refinement_prompt_v001",
+    "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+    "candidateIndex": 2,
+    "runIndex": 2,
+    "contextRadiusMs": 90000,
+    "inputPromptSha256": "617a24d6262e5c32f4851d9ae2cc3025a92c665b9ddbd7947b4c4a8f2df71577"
+  },
+  "executionFailure": {
+    "type": "web-generation-incomplete-or-runner-failure",
+    "message": "The pre-registered 240-second response wait ended while Gemini was still generating an incomplete refinements JSON. Later operational retries are not substituted for this run, to avoid success-until-picked resampling.",
+    "failureDiagnosticPath": "evals/clip_composition/outputs/theme-composition-boundary/20260713-boundary-v001-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-002/run-02/gemini-output.json.failure.json",
+    "timestampNote": "The first failure timestamp was overwritten by later operational retries; no replacement timestamp is inferred."
+  },
+  "boundaryContractValidation": {
+    "passed": false,
+    "issues": [
+      "web-generation-incomplete-or-runner-failure"
+    ],
+    "checkedAt": "2026-07-13T06:17:39+09:00",
+    "checks": [
+      "complete-refinements-json-required",
+      "partial-output-not-scored",
+      "no-success-until-picked-retry"
+    ]
+  },
+  "selectedBoundaryEvidence": []
+}

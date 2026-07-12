@@ -1,0 +1,142 @@
+{
+  "refinements": [
+    {
+      "provisionalCutIndex": 1,
+      "startBoundaryPointId": "word-018592:start",
+      "endBoundaryPointId": "word-018736:end",
+      "startReason": "マリンがころねの顔の位置に関する提案をする発話の冒頭である「マリリン今更なんだけどさ」から切り抜きを開始するためです。",
+      "endReason": "マリンがころねの泣き真似リアクションに対して「早よ泣けやん」とツッコミを入れ、一連のトークのオチが収束するポイントを終了境界に指定しました。"
+    }
+  ],
+  "runAt": "2026-07-13T07:02:30+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "manualRun": false,
+    "runner": "edge-cdp-text-prompt",
+    "generationSystem": "boundary-v001@gemini-web-flash",
+    "upstreamGenerationSystems": [
+      "theme-llm-v002@gemini-web-flash",
+      "llm-v012@gemini-web-flash"
+    ],
+    "resultRole": "boundary-refinement-eval",
+    "promptVersion": "boundary_refinement_prompt_v001",
+    "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+    "candidateIndex": 46,
+    "runIndex": 1,
+    "contextRadiusMs": 90000,
+    "inputPromptSha256": "3cc63db5ccd079bd103e55740c6e88c3d48b7d88d37d9cb905e12db697197f64"
+  },
+  "promptFile": "outputs/theme-composition-boundary/20260713-boundary-v001-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-046/run-01/prompt.md",
+  "pageUrl": "https://gemini.google.com/app/6688b4601ca2211c?hl=ja",
+  "rawResponseText": "{\n\"refinements\": [\n{\n\"provisionalCutIndex\": 1,\n\"startBoundaryPointId\": \"word-018592:start\",\n\"endBoundaryPointId\": \"word-018736:end\",\n\"startReason\": \"マリンがころねの顔の位置に関する提案をする発話の冒頭である「マリリン今更なんだけどさ」から切り抜きを開始するためです。\",\n\"endReason\": \"マリンがころねの泣き真似リアクションに対して「早よ泣けやん」とツッコミを入れ、一連のトークのオチが収束するポイントを終了境界に指定しました。\"\n}\n]\n}\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。",
+  "boundaryContractValidation": {
+    "passed": true,
+    "issues": [],
+    "checkedAt": "2026-07-12T22:02:30.860Z",
+    "checks": [
+      "point-id-exists",
+      "point-in-correct-90s-window",
+      "start-before-end",
+      "same-cut-count",
+      "no-duplicate-or-missing-cut-index",
+      "reasons-present"
+    ]
+  },
+  "selectedBoundaryEvidence": [
+    {
+      "provisionalCutIndex": 1,
+      "start": {
+        "pointId": "word-018592:start",
+        "timeMs": 3997952,
+        "kind": "start",
+        "wordIndex": 502,
+        "selectedWord": {
+          "id": "word-018592",
+          "s": 3997952,
+          "e": 3998112,
+          "t": "マ"
+        },
+        "surroundingWords": [
+          {
+            "wordId": "word-018590",
+            "sourceStartMs": 3995810,
+            "sourceEndMs": 3995890,
+            "text": "す"
+          },
+          {
+            "wordId": "word-018591",
+            "sourceStartMs": 3995890,
+            "sourceEndMs": 3997952,
+            "text": "か"
+          },
+          {
+            "wordId": "word-018592",
+            "sourceStartMs": 3997952,
+            "sourceEndMs": 3998112,
+            "text": "マ"
+          },
+          {
+            "wordId": "word-018593",
+            "sourceStartMs": 3998112,
+            "sourceEndMs": 3998212,
+            "text": "リ"
+          },
+          {
+            "wordId": "word-018594",
+            "sourceStartMs": 3998212,
+            "sourceEndMs": 3998252,
+            "text": "リ"
+          }
+        ],
+        "reason": "マリンがころねの顔の位置に関する提案をする発話の冒頭である「マリリン今更なんだけどさ」から切り抜きを開始するためです。"
+      },
+      "end": {
+        "pointId": "word-018736:end",
+        "timeMs": 4029187,
+        "kind": "end",
+        "wordIndex": 646,
+        "selectedWord": {
+          "id": "word-018736",
+          "s": 4029107,
+          "e": 4029187,
+          "t": "ん"
+        },
+        "surroundingWords": [
+          {
+            "wordId": "word-018734",
+            "sourceStartMs": 4027967,
+            "sourceEndMs": 4028127,
+            "text": "け"
+          },
+          {
+            "wordId": "word-018735",
+            "sourceStartMs": 4028127,
+            "sourceEndMs": 4029107,
+            "text": "や"
+          },
+          {
+            "wordId": "word-018736",
+            "sourceStartMs": 4029107,
+            "sourceEndMs": 4029187,
+            "text": "ん"
+          },
+          {
+            "wordId": "word-018737",
+            "sourceStartMs": 4029187,
+            "sourceEndMs": 4029287,
+            "text": "こ"
+          },
+          {
+            "wordId": "word-018738",
+            "sourceStartMs": 4029287,
+            "sourceEndMs": 4029387,
+            "text": "れ"
+          }
+        ],
+        "reason": "マリンがころねの泣き真似リアクションに対して「早よ泣けやん」とツッコミを入れ、一連のトークのオチが収束するポイントを終了境界に指定しました。"
+      }
+    }
+  ]
+}

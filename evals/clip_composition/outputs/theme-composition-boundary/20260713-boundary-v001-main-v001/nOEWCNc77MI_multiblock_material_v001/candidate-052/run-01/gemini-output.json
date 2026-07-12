@@ -1,0 +1,142 @@
+{
+  "refinements": [
+    {
+      "provisionalCutIndex": 1,
+      "startBoundaryPointId": "word-023982:start",
+      "endBoundaryPointId": "word-024098:end",
+      "startReason": "テーマの核心である「ぴょんぴょんマンゴー」というフレーズを自ら発言する直前の「ぴょ」から切り抜きを開始します。",
+      "endReason": "「おもろくないことでいっぱい笑われると気まずい」という発言の最後の単語である「ず」の終了点で区間を閉じます。"
+    }
+  ],
+  "runAt": "2026-07-13T07:07:20+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "manualRun": false,
+    "runner": "edge-cdp-text-prompt",
+    "generationSystem": "boundary-v001@gemini-web-flash",
+    "upstreamGenerationSystems": [
+      "theme-llm-v002@gemini-web-flash",
+      "llm-v012@gemini-web-flash"
+    ],
+    "resultRole": "boundary-refinement-eval",
+    "promptVersion": "boundary_refinement_prompt_v001",
+    "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+    "candidateIndex": 52,
+    "runIndex": 1,
+    "contextRadiusMs": 90000,
+    "inputPromptSha256": "a17c65b5e08bacaabc15da14124a85787ba3ef7d7c4697aca48addb5bc1ec334"
+  },
+  "promptFile": "outputs/theme-composition-boundary/20260713-boundary-v001-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-052/run-01/prompt.md",
+  "pageUrl": "https://gemini.google.com/app/77acbce5c82e35bd?hl=ja",
+  "rawResponseText": "{\n\"refinements\": [\n{\n\"provisionalCutIndex\": 1,\n\"startBoundaryPointId\": \"word-023982:start\",\n\"endBoundaryPointId\": \"word-024098:end\",\n\"startReason\": \"テーマの核心である「ぴょんぴょんマンゴー」というフレーズを自ら発言する直前の「ぴょ」から切り抜きを開始します。\",\n\"endReason\": \"「おもろくないことでいっぱい笑われると気まずい」という発言の最後の単語である「ず」の終了点で区間を閉じます。\"\n}\n]\n}\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。",
+  "boundaryContractValidation": {
+    "passed": true,
+    "issues": [],
+    "checkedAt": "2026-07-12T22:07:20.928Z",
+    "checks": [
+      "point-id-exists",
+      "point-in-correct-90s-window",
+      "start-before-end",
+      "same-cut-count",
+      "no-duplicate-or-missing-cut-index",
+      "reasons-present"
+    ]
+  },
+  "selectedBoundaryEvidence": [
+    {
+      "provisionalCutIndex": 1,
+      "start": {
+        "pointId": "word-023982:start",
+        "timeMs": 5171466,
+        "kind": "start",
+        "wordIndex": 416,
+        "selectedWord": {
+          "id": "word-023982",
+          "s": 5171466,
+          "e": 5171646,
+          "t": "ぴ"
+        },
+        "surroundingWords": [
+          {
+            "wordId": "word-023980",
+            "sourceStartMs": 5171065,
+            "sourceEndMs": 5171265,
+            "text": "れ"
+          },
+          {
+            "wordId": "word-023981",
+            "sourceStartMs": 5171265,
+            "sourceEndMs": 5171466,
+            "text": "る"
+          },
+          {
+            "wordId": "word-023982",
+            "sourceStartMs": 5171466,
+            "sourceEndMs": 5171646,
+            "text": "ぴ"
+          },
+          {
+            "wordId": "word-023983",
+            "sourceStartMs": 5171646,
+            "sourceEndMs": 5171826,
+            "text": "ょ"
+          },
+          {
+            "wordId": "word-023984",
+            "sourceStartMs": 5171826,
+            "sourceEndMs": 5171986,
+            "text": "ん"
+          }
+        ],
+        "reason": "テーマの核心である「ぴょんぴょんマンゴー」というフレーズを自ら発言する直前の「ぴょ」から切り抜きを開始します。"
+      },
+      "end": {
+        "pointId": "word-024098:end",
+        "timeMs": 5189318,
+        "kind": "end",
+        "wordIndex": 532,
+        "selectedWord": {
+          "id": "word-024098",
+          "s": 5189298,
+          "e": 5189318,
+          "t": "ず"
+        },
+        "surroundingWords": [
+          {
+            "wordId": "word-024096",
+            "sourceStartMs": 5189018,
+            "sourceEndMs": 5189138,
+            "text": "気"
+          },
+          {
+            "wordId": "word-024097",
+            "sourceStartMs": 5189138,
+            "sourceEndMs": 5189298,
+            "text": "ま"
+          },
+          {
+            "wordId": "word-024098",
+            "sourceStartMs": 5189298,
+            "sourceEndMs": 5189318,
+            "text": "ず"
+          },
+          {
+            "wordId": "word-024099",
+            "sourceStartMs": 5190322,
+            "sourceEndMs": 5190362,
+            "text": "そ"
+          },
+          {
+            "wordId": "word-024100",
+            "sourceStartMs": 5190362,
+            "sourceEndMs": 5190482,
+            "text": "ん"
+          }
+        ],
+        "reason": "「おもろくないことでいっぱい笑われると気まずい」という発言の最後の単語である「ず」の終了点で区間を閉じます。"
+      }
+    }
+  ]
+}

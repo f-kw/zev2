@@ -1,0 +1,41 @@
+{
+  "refinements": [],
+  "runAt": "2026-07-12T21:28:49.771Z",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "manualRun": false,
+    "runner": "edge-cdp-text-prompt",
+    "generationSystem": "boundary-v001@gemini-web-flash",
+    "upstreamGenerationSystems": [
+      "theme-llm-v002@gemini-web-flash",
+      "llm-v012@gemini-web-flash"
+    ],
+    "resultRole": "boundary-refinement-eval",
+    "promptVersion": "boundary_refinement_prompt_v001",
+    "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+    "candidateIndex": 3,
+    "runIndex": 1,
+    "contextRadiusMs": 90000,
+    "inputPromptSha256": "b20c4b65eb8b454b1af0b4465d7bb29c15eb5d54159690f96dff69f693b0598f"
+  },
+  "promptFile": "evals/clip_composition/outputs/theme-composition-boundary/20260713-boundary-v001-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-003/run-01/prompt.md",
+  "executionFailure": {
+    "type": "web-generation-incomplete-or-runner-failure",
+    "message": "exit 1",
+    "failureDiagnosticPath": "evals/clip_composition/outputs/theme-composition-boundary/20260713-boundary-v001-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-003/run-01/gemini-output.json.failure.json"
+  },
+  "boundaryContractValidation": {
+    "passed": false,
+    "issues": [
+      "web-generation-incomplete-or-runner-failure"
+    ],
+    "checkedAt": "2026-07-12T21:28:49.771Z",
+    "checks": [
+      "complete-refinements-json-required",
+      "partial-output-not-scored"
+    ]
+  },
+  "selectedBoundaryEvidence": []
+}

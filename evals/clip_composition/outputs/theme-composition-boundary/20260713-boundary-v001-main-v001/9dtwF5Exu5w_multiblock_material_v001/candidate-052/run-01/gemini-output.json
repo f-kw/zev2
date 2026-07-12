@@ -1,0 +1,142 @@
+{
+  "refinements": [
+    {
+      "provisionalCutIndex": 1,
+      "startBoundaryPointId": "word-031563:start",
+      "endBoundaryPointId": "word-031832:end",
+      "startReason": "相手のステータスを確認して盗塁の是非を検討し始める「肩DのクイックC」という最初の言葉から開始するためです。",
+      "endReason": "リスクを冒すべきか葛藤した末に別の作戦を思案する「送りバント？」という最後の言葉の収束まで含めるためです。"
+    }
+  ],
+  "runAt": "2026-07-13T07:58:42+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "manualRun": false,
+    "runner": "edge-cdp-text-prompt",
+    "generationSystem": "boundary-v001@gemini-web-flash",
+    "upstreamGenerationSystems": [
+      "theme-llm-v002@gemini-web-flash",
+      "llm-v012@gemini-web-flash"
+    ],
+    "resultRole": "boundary-refinement-eval",
+    "promptVersion": "boundary_refinement_prompt_v001",
+    "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+    "candidateIndex": 52,
+    "runIndex": 1,
+    "contextRadiusMs": 90000,
+    "inputPromptSha256": "5de5f6fe5afae2a2c3c3341b77264d20a8762fc422b58fd349087bb1b5feff1e"
+  },
+  "promptFile": "outputs/theme-composition-boundary/20260713-boundary-v001-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-052/run-01/prompt.md",
+  "pageUrl": "https://gemini.google.com/app/58b09430a2ed3f9c?hl=ja",
+  "rawResponseText": "{\n\"refinements\": [\n{\n\"provisionalCutIndex\": 1,\n\"startBoundaryPointId\": \"word-031563:start\",\n\"endBoundaryPointId\": \"word-031832:end\",\n\"startReason\": \"相手のステータスを確認して盗塁の是非を検討し始める「肩DのクイックC」という最初の言葉から開始するためです。\",\n\"endReason\": \"リスクを冒すべきか葛藤した末に別の作戦を思案する「送りバント？」という最後の言葉の収束まで含めるためです。\"\n}\n]\n}\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。",
+  "boundaryContractValidation": {
+    "passed": true,
+    "issues": [],
+    "checkedAt": "2026-07-12T22:58:42.920Z",
+    "checks": [
+      "point-id-exists",
+      "point-in-correct-90s-window",
+      "start-before-end",
+      "same-cut-count",
+      "no-duplicate-or-missing-cut-index",
+      "reasons-present"
+    ]
+  },
+  "selectedBoundaryEvidence": [
+    {
+      "provisionalCutIndex": 1,
+      "start": {
+        "pointId": "word-031563:start",
+        "timeMs": 10503922,
+        "kind": "start",
+        "wordIndex": 403,
+        "selectedWord": {
+          "id": "word-031563",
+          "s": 10503922,
+          "e": 10504262,
+          "t": "肩"
+        },
+        "surroundingWords": [
+          {
+            "wordId": "word-031561",
+            "sourceStartMs": 10499245,
+            "sourceEndMs": 10499346,
+            "text": "ー"
+          },
+          {
+            "wordId": "word-031562",
+            "sourceStartMs": 10499346,
+            "sourceEndMs": 10499366,
+            "text": "ナ"
+          },
+          {
+            "wordId": "word-031563",
+            "sourceStartMs": 10503922,
+            "sourceEndMs": 10504262,
+            "text": "肩"
+          },
+          {
+            "wordId": "word-031564",
+            "sourceStartMs": 10504262,
+            "sourceEndMs": 10504563,
+            "text": "D"
+          },
+          {
+            "wordId": "word-031565",
+            "sourceStartMs": 10504563,
+            "sourceEndMs": 10506024,
+            "text": "の"
+          }
+        ],
+        "reason": "相手のステータスを確認して盗塁の是非を検討し始める「肩DのクイックC」という最初の言葉から開始するためです。"
+      },
+      "end": {
+        "pointId": "word-031832:end",
+        "timeMs": 10618318,
+        "kind": "end",
+        "wordIndex": 672,
+        "selectedWord": {
+          "id": "word-031832",
+          "s": 10618298,
+          "e": 10618318,
+          "t": "?"
+        },
+        "surroundingWords": [
+          {
+            "wordId": "word-031830",
+            "sourceStartMs": 10606551,
+            "sourceEndMs": 10606611,
+            "text": "ン"
+          },
+          {
+            "wordId": "word-031831",
+            "sourceStartMs": 10606611,
+            "sourceEndMs": 10618298,
+            "text": "ト"
+          },
+          {
+            "wordId": "word-031832",
+            "sourceStartMs": 10618298,
+            "sourceEndMs": 10618318,
+            "text": "?"
+          },
+          {
+            "wordId": "word-031833",
+            "sourceStartMs": 10628796,
+            "sourceEndMs": 10629276,
+            "text": "あ"
+          },
+          {
+            "wordId": "word-031834",
+            "sourceStartMs": 10629276,
+            "sourceEndMs": 10629376,
+            "text": "あ"
+          }
+        ],
+        "reason": "リスクを冒すべきか葛藤した末に別の作戦を思案する「送りバント？」という最後の言葉の収束まで含めるためです。"
+      }
+    }
+  ]
+}

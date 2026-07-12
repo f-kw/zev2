@@ -1,0 +1,142 @@
+{
+  "refinements": [
+    {
+      "provisionalCutIndex": 1,
+      "startBoundaryPointId": "word-014479:start",
+      "endBoundaryPointId": "word-014598:end",
+      "startReason": "サメに食われている状況を「めっちさ、食われるダメに?」と訴え始める発話の開始点を選択しました。",
+      "endReason": "ころねの言動に対してマリンが「マリゾネス?」と問いかけて掛け合いが収束する発話の終了点を選択しました。"
+    }
+  ],
+  "runAt": "2026-07-13T06:51:49+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "manualRun": false,
+    "runner": "edge-cdp-text-prompt",
+    "generationSystem": "boundary-v001@gemini-web-flash",
+    "upstreamGenerationSystems": [
+      "theme-llm-v002@gemini-web-flash",
+      "llm-v012@gemini-web-flash"
+    ],
+    "resultRole": "boundary-refinement-eval",
+    "promptVersion": "boundary_refinement_prompt_v001",
+    "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+    "candidateIndex": 35,
+    "runIndex": 3,
+    "contextRadiusMs": 90000,
+    "inputPromptSha256": "f4e150f3f9ac0c06c6d11ed3c23a0569deb22d8bcd3b6ca7d9ea5dc1c737ba73"
+  },
+  "promptFile": "outputs/theme-composition-boundary/20260713-boundary-v001-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-035/run-03/prompt.md",
+  "pageUrl": "https://gemini.google.com/app/1d7e96774c6b862e?hl=ja",
+  "rawResponseText": "{\n\"refinements\": [\n{\n\"provisionalCutIndex\": 1,\n\"startBoundaryPointId\": \"word-014479:start\",\n\"endBoundaryPointId\": \"word-014598:end\",\n\"startReason\": \"サメに食われている状況を「めっちさ、食われるダメに?」と訴え始める発話の開始点を選択しました。\",\n\"endReason\": \"ころねの言動に対してマリンが「マリゾネス?」と問いかけて掛け合いが収束する発話の終了点を選択しました。\"\n}\n]\n}\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。",
+  "boundaryContractValidation": {
+    "passed": true,
+    "issues": [],
+    "checkedAt": "2026-07-12T21:51:49.056Z",
+    "checks": [
+      "point-id-exists",
+      "point-in-correct-90s-window",
+      "start-before-end",
+      "same-cut-count",
+      "no-duplicate-or-missing-cut-index",
+      "reasons-present"
+    ]
+  },
+  "selectedBoundaryEvidence": [
+    {
+      "provisionalCutIndex": 1,
+      "start": {
+        "pointId": "word-014479:start",
+        "timeMs": 3000738,
+        "kind": "start",
+        "wordIndex": 461,
+        "selectedWord": {
+          "id": "word-014479",
+          "s": 3000738,
+          "e": 3000878,
+          "t": "め"
+        },
+        "surroundingWords": [
+          {
+            "wordId": "word-014477",
+            "sourceStartMs": 2999144,
+            "sourceEndMs": 2999424,
+            "text": "ね"
+          },
+          {
+            "wordId": "word-014478",
+            "sourceStartMs": 2999424,
+            "sourceEndMs": 2999444,
+            "text": "ー"
+          },
+          {
+            "wordId": "word-014479",
+            "sourceStartMs": 3000738,
+            "sourceEndMs": 3000878,
+            "text": "め"
+          },
+          {
+            "wordId": "word-014480",
+            "sourceStartMs": 3000878,
+            "sourceEndMs": 3000938,
+            "text": "っ"
+          },
+          {
+            "wordId": "word-014481",
+            "sourceStartMs": 3000938,
+            "sourceEndMs": 3000998,
+            "text": "ち"
+          }
+        ],
+        "reason": "サメに食われている状況を「めっちさ、食われるダメに?」と訴え始める発話の開始点を選択しました。"
+      },
+      "end": {
+        "pointId": "word-014598:end",
+        "timeMs": 3026556,
+        "kind": "end",
+        "wordIndex": 580,
+        "selectedWord": {
+          "id": "word-014598",
+          "s": 3026356,
+          "e": 3026556,
+          "t": "?"
+        },
+        "surroundingWords": [
+          {
+            "wordId": "word-014596",
+            "sourceStartMs": 3025735,
+            "sourceEndMs": 3025855,
+            "text": "ネ"
+          },
+          {
+            "wordId": "word-014597",
+            "sourceStartMs": 3025855,
+            "sourceEndMs": 3026356,
+            "text": "ス"
+          },
+          {
+            "wordId": "word-014598",
+            "sourceStartMs": 3026356,
+            "sourceEndMs": 3026556,
+            "text": "?"
+          },
+          {
+            "wordId": "word-014599",
+            "sourceStartMs": 3026556,
+            "sourceEndMs": 3026676,
+            "text": "な"
+          },
+          {
+            "wordId": "word-014600",
+            "sourceStartMs": 3026676,
+            "sourceEndMs": 3026796,
+            "text": "に"
+          }
+        ],
+        "reason": "ころねの言動に対してマリンが「マリゾネス?」と問いかけて掛け合いが収束する発話の終了点を選択しました。"
+      }
+    }
+  ]
+}

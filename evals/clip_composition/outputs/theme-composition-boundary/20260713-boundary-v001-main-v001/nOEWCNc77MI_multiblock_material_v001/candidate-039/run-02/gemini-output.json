@@ -1,0 +1,142 @@
+{
+  "refinements": [
+    {
+      "provisionalCutIndex": 1,
+      "startBoundaryPointId": "word-015728:start",
+      "endBoundaryPointId": "word-015845:end",
+      "startReason": "イノシシの話題から「えーイノスケじゃん」と鬼滅の刃ごっこが明確に始まる発話の開始点を選びました。",
+      "endReason": "「お前はこっちを使うんだ！」とキャラクターの被り物に関する掛け合いとツッコミが綺麗に収束する最後の言葉の終了点を選びました。"
+    }
+  ],
+  "runAt": "2026-07-13T06:57:22+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "manualRun": false,
+    "runner": "edge-cdp-text-prompt",
+    "generationSystem": "boundary-v001@gemini-web-flash",
+    "upstreamGenerationSystems": [
+      "theme-llm-v002@gemini-web-flash",
+      "llm-v012@gemini-web-flash"
+    ],
+    "resultRole": "boundary-refinement-eval",
+    "promptVersion": "boundary_refinement_prompt_v001",
+    "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+    "candidateIndex": 39,
+    "runIndex": 2,
+    "contextRadiusMs": 90000,
+    "inputPromptSha256": "47a23d4f9731ce6aa0fc514874e2fb657e445f26ddb18835bf19594c8ae2897e"
+  },
+  "promptFile": "outputs/theme-composition-boundary/20260713-boundary-v001-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-039/run-02/prompt.md",
+  "pageUrl": "https://gemini.google.com/app/d65ae5081b10cfdb?hl=ja",
+  "rawResponseText": "{\n\"refinements\": [\n{\n\"provisionalCutIndex\": 1,\n\"startBoundaryPointId\": \"word-015728:start\",\n\"endBoundaryPointId\": \"word-015845:end\",\n\"startReason\": \"イノシシの話題から「えーイノスケじゃん」と鬼滅の刃ごっこが明確に始まる発話の開始点を選びました。\",\n\"endReason\": \"「お前はこっちを使うんだ！」とキャラクターの被り物に関する掛け合いとツッコミが綺麗に収束する最後の言葉の終了点を選びました。\"\n}\n]\n}\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。",
+  "boundaryContractValidation": {
+    "passed": true,
+    "issues": [],
+    "checkedAt": "2026-07-12T21:57:22.308Z",
+    "checks": [
+      "point-id-exists",
+      "point-in-correct-90s-window",
+      "start-before-end",
+      "same-cut-count",
+      "no-duplicate-or-missing-cut-index",
+      "reasons-present"
+    ]
+  },
+  "selectedBoundaryEvidence": [
+    {
+      "provisionalCutIndex": 1,
+      "start": {
+        "pointId": "word-015728:start",
+        "timeMs": 3258737,
+        "kind": "start",
+        "wordIndex": 535,
+        "selectedWord": {
+          "id": "word-015728",
+          "s": 3258737,
+          "e": 3259898,
+          "t": "え"
+        },
+        "surroundingWords": [
+          {
+            "wordId": "word-015726",
+            "sourceStartMs": 3258397,
+            "sourceEndMs": 3258577,
+            "text": "シ"
+          },
+          {
+            "wordId": "word-015727",
+            "sourceStartMs": 3258577,
+            "sourceEndMs": 3258737,
+            "text": "ね"
+          },
+          {
+            "wordId": "word-015728",
+            "sourceStartMs": 3258737,
+            "sourceEndMs": 3259898,
+            "text": "え"
+          },
+          {
+            "wordId": "word-015729",
+            "sourceStartMs": 3259898,
+            "sourceEndMs": 3259998,
+            "text": "マ"
+          },
+          {
+            "wordId": "word-015730",
+            "sourceStartMs": 3259998,
+            "sourceEndMs": 3260098,
+            "text": "ー"
+          }
+        ],
+        "reason": "イノシシの話題から「えーイノスケじゃん」と鬼滅の刃ごっこが明確に始まる発話の開始点を選びました。"
+      },
+      "end": {
+        "pointId": "word-015845:end",
+        "timeMs": 3292350,
+        "kind": "end",
+        "wordIndex": 652,
+        "selectedWord": {
+          "id": "word-015845",
+          "s": 3292330,
+          "e": 3292350,
+          "t": "!"
+        },
+        "surroundingWords": [
+          {
+            "wordId": "word-015843",
+            "sourceStartMs": 3292030,
+            "sourceEndMs": 3292090,
+            "text": "ん"
+          },
+          {
+            "wordId": "word-015844",
+            "sourceStartMs": 3292090,
+            "sourceEndMs": 3292330,
+            "text": "だ"
+          },
+          {
+            "wordId": "word-015845",
+            "sourceStartMs": 3292330,
+            "sourceEndMs": 3292350,
+            "text": "!"
+          },
+          {
+            "wordId": "word-015846",
+            "sourceStartMs": 3306889,
+            "sourceEndMs": 3307053,
+            "text": "あ"
+          },
+          {
+            "wordId": "word-015847",
+            "sourceStartMs": 3307053,
+            "sourceEndMs": 3307217,
+            "text": "は"
+          }
+        ],
+        "reason": "「お前はこっちを使うんだ！」とキャラクターの被り物に関する掛け合いとツッコミが綺麗に収束する最後の言葉の終了点を選びました。"
+      }
+    }
+  ]
+}

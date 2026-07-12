@@ -1,0 +1,142 @@
+{
+  "refinements": [
+    {
+      "provisionalCutIndex": 1,
+      "startBoundaryPointId": "word-016184:start",
+      "endBoundaryPointId": "word-016405:end",
+      "startReason": "宝鐘マリンが全ての食材を握っている状況の前提となる、戌神ころねの「やばいマリリンちょっと待ってマジでさ食材なくなったけど」という発話の開始点を選びました。",
+      "endReason": "肉を温存しようとする宝鐘マリンに対し、戌神ころねが魚を返す交渉をして納得した「そんなに握ってんじゃねーよって話」という最後の言葉が収束する地点を終了境界としました。"
+    }
+  ],
+  "runAt": "2026-07-13T06:59:55+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "manualRun": false,
+    "runner": "edge-cdp-text-prompt",
+    "generationSystem": "boundary-v001@gemini-web-flash",
+    "upstreamGenerationSystems": [
+      "theme-llm-v002@gemini-web-flash",
+      "llm-v012@gemini-web-flash"
+    ],
+    "resultRole": "boundary-refinement-eval",
+    "promptVersion": "boundary_refinement_prompt_v001",
+    "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+    "candidateIndex": 41,
+    "runIndex": 2,
+    "contextRadiusMs": 90000,
+    "inputPromptSha256": "f562ed21b66f788d37f6ab612106b9b611dddbd34094ad5607394475275e22dd"
+  },
+  "promptFile": "outputs/theme-composition-boundary/20260713-boundary-v001-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-041/run-02/prompt.md",
+  "pageUrl": "https://gemini.google.com/app/d6fd5145aadf57ee?hl=ja",
+  "rawResponseText": "{\n\"refinements\": [\n{\n\"provisionalCutIndex\": 1,\n\"startBoundaryPointId\": \"word-016184:start\",\n\"endBoundaryPointId\": \"word-016405:end\",\n\"startReason\": \"宝鐘マリンが全ての食材を握っている状況の前提となる、戌神ころねの「やばいマリリンちょっと待ってマジでさ食材なくなったけど」という発話の開始点を選びました。\",\n\"endReason\": \"肉を温存しようとする宝鐘マリンに対し、戌神ころねが魚を返す交渉をして納得した「そんなに握ってんじゃねーよって話」という最後の言葉が収束する地点を終了境界としました。\"\n}\n]\n}\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。",
+  "boundaryContractValidation": {
+    "passed": true,
+    "issues": [],
+    "checkedAt": "2026-07-12T21:59:55.333Z",
+    "checks": [
+      "point-id-exists",
+      "point-in-correct-90s-window",
+      "start-before-end",
+      "same-cut-count",
+      "no-duplicate-or-missing-cut-index",
+      "reasons-present"
+    ]
+  },
+  "selectedBoundaryEvidence": [
+    {
+      "provisionalCutIndex": 1,
+      "start": {
+        "pointId": "word-016184:start",
+        "timeMs": 3475641,
+        "kind": "start",
+        "wordIndex": 268,
+        "selectedWord": {
+          "id": "word-016184",
+          "s": 3475641,
+          "e": 3475781,
+          "t": "マ"
+        },
+        "surroundingWords": [
+          {
+            "wordId": "word-016182",
+            "sourceStartMs": 3475401,
+            "sourceEndMs": 3475541,
+            "text": "ば"
+          },
+          {
+            "wordId": "word-016183",
+            "sourceStartMs": 3475541,
+            "sourceEndMs": 3475641,
+            "text": "い"
+          },
+          {
+            "wordId": "word-016184",
+            "sourceStartMs": 3475641,
+            "sourceEndMs": 3475781,
+            "text": "マ"
+          },
+          {
+            "wordId": "word-016185",
+            "sourceStartMs": 3475781,
+            "sourceEndMs": 3475921,
+            "text": "リ"
+          },
+          {
+            "wordId": "word-016186",
+            "sourceStartMs": 3475921,
+            "sourceEndMs": 3476041,
+            "text": "リ"
+          }
+        ],
+        "reason": "宝鐘マリンが全ての食材を握っている状況の前提となる、戌神ころねの「やばいマリリンちょっと待ってマジでさ食材なくなったけど」という発話の開始点を選びました。"
+      },
+      "end": {
+        "pointId": "word-016405:end",
+        "timeMs": 3514644,
+        "kind": "end",
+        "wordIndex": 489,
+        "selectedWord": {
+          "id": "word-016405",
+          "s": 3514564,
+          "e": 3514644,
+          "t": "話"
+        },
+        "surroundingWords": [
+          {
+            "wordId": "word-016403",
+            "sourceStartMs": 3514443,
+            "sourceEndMs": 3514463,
+            "text": "っ"
+          },
+          {
+            "wordId": "word-016404",
+            "sourceStartMs": 3514463,
+            "sourceEndMs": 3514564,
+            "text": "て"
+          },
+          {
+            "wordId": "word-016405",
+            "sourceStartMs": 3514564,
+            "sourceEndMs": 3514644,
+            "text": "話"
+          },
+          {
+            "wordId": "word-016406",
+            "sourceStartMs": 3514644,
+            "sourceEndMs": 3514904,
+            "text": "あ"
+          },
+          {
+            "wordId": "word-016407",
+            "sourceStartMs": 3514904,
+            "sourceEndMs": 3514984,
+            "text": "待"
+          }
+        ],
+        "reason": "肉を温存しようとする宝鐘マリンに対し、戌神ころねが魚を返す交渉をして納得した「そんなに握ってんじゃねーよって話」という最後の言葉が収束する地点を終了境界としました。"
+      }
+    }
+  ]
+}

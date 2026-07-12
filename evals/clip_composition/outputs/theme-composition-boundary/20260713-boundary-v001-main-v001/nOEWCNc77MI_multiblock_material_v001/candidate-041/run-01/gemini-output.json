@@ -1,0 +1,142 @@
+{
+  "refinements": [
+    {
+      "provisionalCutIndex": 1,
+      "startBoundaryPointId": "word-016214:start",
+      "endBoundaryPointId": "word-016405:end",
+      "startReason": "「全ての食材を船長が今握ってるからね」という本区間の主テーマである食材の話題が切り出される発話の開始点を選びました。",
+      "endReason": "肉をめぐる攻防の会話が一段落し、「ちょっと逆にそんなに握ってんじゃねーよって話」という結論で会話が収束する最後の言葉を選びました。"
+    }
+  ],
+  "runAt": "2026-07-13T06:59:04+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "manualRun": false,
+    "runner": "edge-cdp-text-prompt",
+    "generationSystem": "boundary-v001@gemini-web-flash",
+    "upstreamGenerationSystems": [
+      "theme-llm-v002@gemini-web-flash",
+      "llm-v012@gemini-web-flash"
+    ],
+    "resultRole": "boundary-refinement-eval",
+    "promptVersion": "boundary_refinement_prompt_v001",
+    "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+    "candidateIndex": 41,
+    "runIndex": 1,
+    "contextRadiusMs": 90000,
+    "inputPromptSha256": "5f10ef3c4809cd79e1925bbfee7191966e774597c472f2e586d52d7802ce5f35"
+  },
+  "promptFile": "outputs/theme-composition-boundary/20260713-boundary-v001-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-041/run-01/prompt.md",
+  "pageUrl": "https://gemini.google.com/app/b71dfcddaf60a446?hl=ja",
+  "rawResponseText": "{\n\"refinements\": [\n{\n\"provisionalCutIndex\": 1,\n\"startBoundaryPointId\": \"word-016214:start\",\n\"endBoundaryPointId\": \"word-016405:end\",\n\"startReason\": \"「全ての食材を船長が今握ってるからね」という本区間の主テーマである食材の話題が切り出される発話の開始点を選びました。\",\n\"endReason\": \"肉をめぐる攻防の会話が一段落し、「ちょっと逆にそんなに握ってんじゃねーよって話」という結論で会話が収束する最後の言葉を選びました。\"\n}\n]\n}\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。",
+  "boundaryContractValidation": {
+    "passed": true,
+    "issues": [],
+    "checkedAt": "2026-07-12T21:59:04.827Z",
+    "checks": [
+      "point-id-exists",
+      "point-in-correct-90s-window",
+      "start-before-end",
+      "same-cut-count",
+      "no-duplicate-or-missing-cut-index",
+      "reasons-present"
+    ]
+  },
+  "selectedBoundaryEvidence": [
+    {
+      "provisionalCutIndex": 1,
+      "start": {
+        "pointId": "word-016214:start",
+        "timeMs": 3480134,
+        "kind": "start",
+        "wordIndex": 298,
+        "selectedWord": {
+          "id": "word-016214",
+          "s": 3480134,
+          "e": 3480234,
+          "t": "全"
+        },
+        "surroundingWords": [
+          {
+            "wordId": "word-016212",
+            "sourceStartMs": 3479664,
+            "sourceEndMs": 3479824,
+            "text": "ん"
+          },
+          {
+            "wordId": "word-016213",
+            "sourceStartMs": 3479824,
+            "sourceEndMs": 3479844,
+            "text": "て"
+          },
+          {
+            "wordId": "word-016214",
+            "sourceStartMs": 3480134,
+            "sourceEndMs": 3480234,
+            "text": "全"
+          },
+          {
+            "wordId": "word-016215",
+            "sourceStartMs": 3480234,
+            "sourceEndMs": 3480254,
+            "text": "て"
+          },
+          {
+            "wordId": "word-016216",
+            "sourceStartMs": 3480254,
+            "sourceEndMs": 3480374,
+            "text": "の"
+          }
+        ],
+        "reason": "「全ての食材を船長が今握ってるからね」という本区間の主テーマである食材の話題が切り出される発話の開始点を選びました。"
+      },
+      "end": {
+        "pointId": "word-016405:end",
+        "timeMs": 3514644,
+        "kind": "end",
+        "wordIndex": 489,
+        "selectedWord": {
+          "id": "word-016405",
+          "s": 3514564,
+          "e": 3514644,
+          "t": "話"
+        },
+        "surroundingWords": [
+          {
+            "wordId": "word-016403",
+            "sourceStartMs": 3514443,
+            "sourceEndMs": 3514463,
+            "text": "っ"
+          },
+          {
+            "wordId": "word-016404",
+            "sourceStartMs": 3514463,
+            "sourceEndMs": 3514564,
+            "text": "て"
+          },
+          {
+            "wordId": "word-016405",
+            "sourceStartMs": 3514564,
+            "sourceEndMs": 3514644,
+            "text": "話"
+          },
+          {
+            "wordId": "word-016406",
+            "sourceStartMs": 3514644,
+            "sourceEndMs": 3514904,
+            "text": "あ"
+          },
+          {
+            "wordId": "word-016407",
+            "sourceStartMs": 3514904,
+            "sourceEndMs": 3514984,
+            "text": "待"
+          }
+        ],
+        "reason": "肉をめぐる攻防の会話が一段落し、「ちょっと逆にそんなに握ってんじゃねーよって話」という結論で会話が収束する最後の言葉を選びました。"
+      }
+    }
+  ]
+}

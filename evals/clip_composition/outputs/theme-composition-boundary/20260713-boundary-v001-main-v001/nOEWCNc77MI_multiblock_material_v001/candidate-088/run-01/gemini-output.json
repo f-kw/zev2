@@ -1,0 +1,142 @@
+{
+  "refinements": [
+    {
+      "provisionalCutIndex": 1,
+      "startBoundaryPointId": "word-052588:start",
+      "endBoundaryPointId": "word-052758:end",
+      "startReason": "ころねが恋愛風の掛け合いのフリとなる発話を「でも誘って?」と切り出す位置を開始境界としました。",
+      "endReason": "マリンが「コーネとならやっていける気がする、マリンは」と言い終えた直後のころねの「ほんと?」という応答までを含めてオチが収束する位置を終了境界としました。"
+    }
+  ],
+  "runAt": "2026-07-13T07:26:28+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "manualRun": false,
+    "runner": "edge-cdp-text-prompt",
+    "generationSystem": "boundary-v001@gemini-web-flash",
+    "upstreamGenerationSystems": [
+      "theme-llm-v002@gemini-web-flash",
+      "llm-v012@gemini-web-flash"
+    ],
+    "resultRole": "boundary-refinement-eval",
+    "promptVersion": "boundary_refinement_prompt_v001",
+    "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+    "candidateIndex": 88,
+    "runIndex": 1,
+    "contextRadiusMs": 90000,
+    "inputPromptSha256": "955a10f3270739da006653f59140d21d5b9f707251a926e1e3dee4846d4e025f"
+  },
+  "promptFile": "outputs/theme-composition-boundary/20260713-boundary-v001-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-088/run-01/prompt.md",
+  "pageUrl": "https://gemini.google.com/app/d07d1574c8dd8f34?hl=ja",
+  "rawResponseText": "{\n\"refinements\": [\n{\n\"provisionalCutIndex\": 1,\n\"startBoundaryPointId\": \"word-052588:start\",\n\"endBoundaryPointId\": \"word-052758:end\",\n\"startReason\": \"ころねが恋愛風の掛け合いのフリとなる発話を「でも誘って?」と切り出す位置を開始境界としました。\",\n\"endReason\": \"マリンが「コーネとならやっていける気がする、マリンは」と言い終えた直後のころねの「ほんと?」という応答までを含めてオチが収束する位置を終了境界としました。\"\n}\n]\n}\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。",
+  "boundaryContractValidation": {
+    "passed": true,
+    "issues": [],
+    "checkedAt": "2026-07-12T22:26:28.297Z",
+    "checks": [
+      "point-id-exists",
+      "point-in-correct-90s-window",
+      "start-before-end",
+      "same-cut-count",
+      "no-duplicate-or-missing-cut-index",
+      "reasons-present"
+    ]
+  },
+  "selectedBoundaryEvidence": [
+    {
+      "provisionalCutIndex": 1,
+      "start": {
+        "pointId": "word-052588:start",
+        "timeMs": 11551287,
+        "kind": "start",
+        "wordIndex": 444,
+        "selectedWord": {
+          "id": "word-052588",
+          "s": 11551287,
+          "e": 11551407,
+          "t": "で"
+        },
+        "surroundingWords": [
+          {
+            "wordId": "word-052586",
+            "sourceStartMs": 11549438,
+            "sourceEndMs": 11549638,
+            "text": "長"
+          },
+          {
+            "wordId": "word-052587",
+            "sourceStartMs": 11549638,
+            "sourceEndMs": 11549658,
+            "text": "は"
+          },
+          {
+            "wordId": "word-052588",
+            "sourceStartMs": 11551287,
+            "sourceEndMs": 11551407,
+            "text": "で"
+          },
+          {
+            "wordId": "word-052589",
+            "sourceStartMs": 11551407,
+            "sourceEndMs": 11551627,
+            "text": "も"
+          },
+          {
+            "wordId": "word-052590",
+            "sourceStartMs": 11551627,
+            "sourceEndMs": 11551827,
+            "text": "誘"
+          }
+        ],
+        "reason": "ころねが恋愛風の掛け合いのフリとなる発話を「でも誘って?」と切り出す位置を開始境界としました。"
+      },
+      "end": {
+        "pointId": "word-052758:end",
+        "timeMs": 11593310,
+        "kind": "end",
+        "wordIndex": 614,
+        "selectedWord": {
+          "id": "word-052758",
+          "s": 11593270,
+          "e": 11593310,
+          "t": "?"
+        },
+        "surroundingWords": [
+          {
+            "wordId": "word-052756",
+            "sourceStartMs": 11593190,
+            "sourceEndMs": 11593210,
+            "text": "ん"
+          },
+          {
+            "wordId": "word-052757",
+            "sourceStartMs": 11593210,
+            "sourceEndMs": 11593270,
+            "text": "と"
+          },
+          {
+            "wordId": "word-052758",
+            "sourceStartMs": 11593270,
+            "sourceEndMs": 11593310,
+            "text": "?"
+          },
+          {
+            "wordId": "word-052759",
+            "sourceStartMs": 11593310,
+            "sourceEndMs": 11593350,
+            "text": "じ"
+          },
+          {
+            "wordId": "word-052760",
+            "sourceStartMs": 11593350,
+            "sourceEndMs": 11593370,
+            "text": "ゃ"
+          }
+        ],
+        "reason": "マリンが「コーネとならやっていける気がする、マリンは」と言い終えた直後のころねの「ほんと?」という応答までを含めてオチが収束する位置を終了境界としました。"
+      }
+    }
+  ]
+}

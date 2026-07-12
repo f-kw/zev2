@@ -1,0 +1,142 @@
+{
+  "refinements": [
+    {
+      "provisionalCutIndex": 1,
+      "startBoundaryPointId": "word-005099:start",
+      "endBoundaryPointId": "word-005434:end",
+      "startReason": "戦闘への意気込みを示す「殺した方が早く殺せるか!」という発話の開始点を選びました。",
+      "endReason": "イノシシ3匹への対策を話し終え、作戦の結論が「でも板足りない」と収束する最後の言葉を選びました。"
+    }
+  ],
+  "runAt": "2026-07-13T06:38:27+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "manualRun": false,
+    "runner": "edge-cdp-text-prompt",
+    "generationSystem": "boundary-v001@gemini-web-flash",
+    "upstreamGenerationSystems": [
+      "theme-llm-v002@gemini-web-flash",
+      "llm-v012@gemini-web-flash"
+    ],
+    "resultRole": "boundary-refinement-eval",
+    "promptVersion": "boundary_refinement_prompt_v001",
+    "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+    "candidateIndex": 17,
+    "runIndex": 1,
+    "contextRadiusMs": 90000,
+    "inputPromptSha256": "4200b31c76ef36f5fb23af6db9e434a1979de693832eb2b74bdd6e63c60f20e7"
+  },
+  "promptFile": "outputs/theme-composition-boundary/20260713-boundary-v001-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-017/run-01/prompt.md",
+  "pageUrl": "https://gemini.google.com/app/d7fce9413f484711?hl=ja",
+  "rawResponseText": "{\n\"refinements\": [\n{\n\"provisionalCutIndex\": 1,\n\"startBoundaryPointId\": \"word-005099:start\",\n\"endBoundaryPointId\": \"word-005434:end\",\n\"startReason\": \"戦闘への意気込みを示す「殺した方が早く殺せるか!」という発話の開始点を選びました。\",\n\"endReason\": \"イノシシ3匹への対策を話し終え、作戦の結論が「でも板足りない」と収束する最後の言葉を選びました。\"\n}\n]\n}\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。",
+  "boundaryContractValidation": {
+    "passed": true,
+    "issues": [],
+    "checkedAt": "2026-07-12T21:38:27.661Z",
+    "checks": [
+      "point-id-exists",
+      "point-in-correct-90s-window",
+      "start-before-end",
+      "same-cut-count",
+      "no-duplicate-or-missing-cut-index",
+      "reasons-present"
+    ]
+  },
+  "selectedBoundaryEvidence": [
+    {
+      "provisionalCutIndex": 1,
+      "start": {
+        "pointId": "word-005099:start",
+        "timeMs": 1021002,
+        "kind": "start",
+        "wordIndex": 526,
+        "selectedWord": {
+          "id": "word-005099",
+          "s": 1021002,
+          "e": 1021162,
+          "t": "殺"
+        },
+        "surroundingWords": [
+          {
+            "wordId": "word-005097",
+            "sourceStartMs": 1018786,
+            "sourceEndMs": 1019146,
+            "text": "る"
+          },
+          {
+            "wordId": "word-005098",
+            "sourceStartMs": 1019146,
+            "sourceEndMs": 1019166,
+            "text": "?"
+          },
+          {
+            "wordId": "word-005099",
+            "sourceStartMs": 1021002,
+            "sourceEndMs": 1021162,
+            "text": "殺"
+          },
+          {
+            "wordId": "word-005100",
+            "sourceStartMs": 1021162,
+            "sourceEndMs": 1021182,
+            "text": "し"
+          },
+          {
+            "wordId": "word-005101",
+            "sourceStartMs": 1021182,
+            "sourceEndMs": 1021282,
+            "text": "た"
+          }
+        ],
+        "reason": "戦闘への意気込みを示す「殺した方が早く殺せるか!」という発話の開始点を選びました。"
+      },
+      "end": {
+        "pointId": "word-005434:end",
+        "timeMs": 1079852,
+        "kind": "end",
+        "wordIndex": 861,
+        "selectedWord": {
+          "id": "word-005434",
+          "s": 1079832,
+          "e": 1079852,
+          "t": "い"
+        },
+        "surroundingWords": [
+          {
+            "wordId": "word-005432",
+            "sourceStartMs": 1079632,
+            "sourceEndMs": 1079732,
+            "text": "り"
+          },
+          {
+            "wordId": "word-005433",
+            "sourceStartMs": 1079732,
+            "sourceEndMs": 1079832,
+            "text": "な"
+          },
+          {
+            "wordId": "word-005434",
+            "sourceStartMs": 1079832,
+            "sourceEndMs": 1079852,
+            "text": "い"
+          },
+          {
+            "wordId": "word-005435",
+            "sourceStartMs": 1081354,
+            "sourceEndMs": 1081454,
+            "text": "居"
+          },
+          {
+            "wordId": "word-005436",
+            "sourceStartMs": 1081454,
+            "sourceEndMs": 1081655,
+            "text": "た"
+          }
+        ],
+        "reason": "イノシシ3匹への対策を話し終え、作戦の結論が「でも板足りない」と収束する最後の言葉を選びました。"
+      }
+    }
+  ]
+}

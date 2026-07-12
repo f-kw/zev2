@@ -214,6 +214,7 @@ async function main() {
     compressedSpeechBothWithin3000UpperBoundCount: 16,
     totalExpectedCount: 38,
     wordBoundaryBestObservedBothWithin3000Count: successfulExpected.size,
+    successfulExpectedKeys: [...successfulExpected].sort(),
     exceededCompressedSpeechUpperBound: successfulExpected.size > 16,
     note: 'best observed across non-structurally-excluded candidates/runs; main conclusion still uses the pre-registered 61 observations'
   };
@@ -248,6 +249,23 @@ async function main() {
     boundaryReachedMajorityCount: candidateMajority.filter((item) => item.boundaryReachedMajority).length,
     candidates: candidateMajority
   };
+  const byFixture = Object.keys(expectedByFixture).map((fixtureId) => {
+    const items = assessable.filter((item) => item.fixtureId === fixtureId);
+    return {
+      fixtureId,
+      observationCount: items.length,
+      validReachedCount: items.filter((item) => item.boundary.status === 'reached').length,
+      bothWithin3000Count: items.filter((item) => item.boundary.status === 'reached' && Math.abs(item.boundary.startDeltaMs) <= 3000 && Math.abs(item.boundary.endDeltaMs) <= 3000).length,
+      comparison: compare(items)
+    };
+  });
+  const adoptionDecision = {
+    boundaryImprovementCriterionMet: mainTable.boundaryV001.bothWithin3000Count > mainTable.v012.bothWithin3000Count && mainTable.comparison.improved > mainTable.comparison.worse,
+    candidateMajorityReachMaintained: candidateMajoritySummary.boundaryReachedMajorityCount === candidateMajoritySummary.v012ReachedMajorityCount,
+    status: 'passes-as-next-stage-candidate-not-generalized-standard',
+    reason: 'The pre-registered 61-observation criteria pass, but all three ±3s observations are three runs of one B-material expected cut; unique coverage is 1/38 and the second fixture has zero.'
+  };
+  if (!adoptionDecision.boundaryImprovementCriterionMet || !adoptionDecision.candidateMajorityReachMaintained) adoptionDecision.status = 'does-not-pass-pre-registered-next-stage-criteria';
   const result = {
     kind: 'boundary_v001_score',
     resultRole: 'word-boundary-refinement-eval-conditional-on-upstream-theme-hit-and-v012-reach',
@@ -267,6 +285,8 @@ async function main() {
     upperBoundComparison,
     fourStage: { definitions: { match: 'all target expected cuts reached and both boundaries within ±1000ms', gate: 'all target expected cuts reached and both boundaries within ±3000ms', reach: 'at least one target expected cut overlaps', miss: 'no target overlap or invalid output' }, v012: baselineRunStageDistribution, boundaryV001: runStageDistribution },
     candidateMajoritySummary,
+    byFixture,
+    adoptionDecision,
     runStages,
     observations
   };
@@ -302,6 +322,10 @@ async function main() {
     '| 段階 | v012 | boundary-v001 |', '| --- | ---: | ---: |',
     ...stageNames.map((stage) => `| ${stage} | ${baselineRunStageDistribution[stage]}/72 | ${runStageDistribution[stage]}/72 |`), '',
     `- 候補単位で2/3 run以上が到達: v012 ${candidateMajoritySummary.v012ReachedMajorityCount}/24 / boundary-v001 ${candidateMajoritySummary.boundaryReachedMajorityCount}/24`, '',
+    '## 素材別', '',
+    '| fixture | 採点観測 | 有効到達 | 両境界±3秒 | 改善 | 同値 | 悪化 | 形式不成立/不達 |',
+    '| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |',
+    ...byFixture.map((item) => `| ${item.fixtureId} | ${item.observationCount} | ${item.validReachedCount} | ${item.bothWithin3000Count} | ${item.comparison.improved} | ${item.comparison.equal} | ${item.comparison.worse} | ${item.comparison.lostOrInvalid} |`), '',
     '## 形式検査', '',
     `- 形式不成立: ${formatFailures.length}/71`,
     ...Object.entries(failureCounts).map(([type, count]) => `- ${type}: ${count}`),
@@ -310,6 +334,10 @@ async function main() {
     `- 発話境界だけを正しく選ぶ理論上界: 両境界±3秒 ${upperBoundComparison.compressedSpeechBothWithin3000UpperBoundCount}/38`,
     `- 単語境界方式の実測（候補・runの最良観測）: 両境界±3秒 ${upperBoundComparison.wordBoundaryBestObservedBothWithin3000Count}/38`,
     `- 発話単位上界を超えたか: ${upperBoundComparison.exceededCompressedSpeechUpperBound ? 'はい' : 'いいえ'}`, '',
+    '- 主表の±3秒3観測は、B素材の候補46が同じexpected 9を3runとも拾ったもの。成功した固有正解は1件で、第二素材の±3秒は0件。', '',
+    '## 判定', '',
+    `- 事前登録条件: 境界改善=${adoptionDecision.boundaryImprovementCriterionMet ? '合格' : '不合格'}、候補多数決到達維持=${adoptionDecision.candidateMajorityReachMaintained ? '合格' : '不合格'}。`,
+    '- boundary-v001は次段候補としては限定合格。ただし成功が1正解に集中し、発話単位上界16/38も超えていないため、一般化済み標準や第二関門到達とは認定しない。', '',
     '## 構造上の別課題', '',
     '- 9dtwF5Exu5wの候補16は、1仮区間が4正解に重なるためboundary-v001の対象外。将来の「区間分割」課題として扱う。', ''
   ];

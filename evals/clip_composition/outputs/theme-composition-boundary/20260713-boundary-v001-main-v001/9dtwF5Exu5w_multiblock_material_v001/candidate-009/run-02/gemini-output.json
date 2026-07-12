@@ -1,0 +1,142 @@
+{
+  "refinements": [
+    {
+      "provisionalCutIndex": 1,
+      "startBoundaryPointId": "word-006611:start",
+      "endBoundaryPointId": "word-007161:end",
+      "startReason": "コロナ療養中のリリカがチャットをくれたことに気づき、「リリカがチャットくれてる」と言及して感謝を述べる場面から会話のテーマが始まるためです。",
+      "endReason": "卒業生の設定に合わせた「嬉しいですかなって言ったかも」という妄想や寸劇のようなやり取りが一段落する発話の最後を境界としました。"
+    }
+  ],
+  "runAt": "2026-07-13T07:37:23+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "manualRun": false,
+    "runner": "edge-cdp-text-prompt",
+    "generationSystem": "boundary-v001@gemini-web-flash",
+    "upstreamGenerationSystems": [
+      "theme-llm-v002@gemini-web-flash",
+      "llm-v012@gemini-web-flash"
+    ],
+    "resultRole": "boundary-refinement-eval",
+    "promptVersion": "boundary_refinement_prompt_v001",
+    "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+    "candidateIndex": 9,
+    "runIndex": 2,
+    "contextRadiusMs": 90000,
+    "inputPromptSha256": "48d06ad74a05e5810affb3e1acde5b1f5918a7b616f68a9d65f0f5b6c9fdc931"
+  },
+  "promptFile": "outputs/theme-composition-boundary/20260713-boundary-v001-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-009/run-02/prompt.md",
+  "pageUrl": "https://gemini.google.com/app/d1883694eb8b300b?hl=ja",
+  "rawResponseText": "{\n\"refinements\": [\n{\n\"provisionalCutIndex\": 1,\n\"startBoundaryPointId\": \"word-006611:start\",\n\"endBoundaryPointId\": \"word-007161:end\",\n\"startReason\": \"コロナ療養中のリリカがチャットをくれたことに気づき、「リリカがチャットくれてる」と言及して感謝を述べる場面から会話のテーマが始まるためです。\",\n\"endReason\": \"卒業生の設定に合わせた「嬉しいですかなって言ったかも」という妄想や寸劇のようなやり取りが一段落する発話の最後を境界としました。\"\n}\n]\n}\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。",
+  "boundaryContractValidation": {
+    "passed": true,
+    "issues": [],
+    "checkedAt": "2026-07-12T22:37:23.307Z",
+    "checks": [
+      "point-id-exists",
+      "point-in-correct-90s-window",
+      "start-before-end",
+      "same-cut-count",
+      "no-duplicate-or-missing-cut-index",
+      "reasons-present"
+    ]
+  },
+  "selectedBoundaryEvidence": [
+    {
+      "provisionalCutIndex": 1,
+      "start": {
+        "pointId": "word-006611:start",
+        "timeMs": 2010874,
+        "kind": "start",
+        "wordIndex": 300,
+        "selectedWord": {
+          "id": "word-006611",
+          "s": 2010874,
+          "e": 2010894,
+          "t": "リ"
+        },
+        "surroundingWords": [
+          {
+            "wordId": "word-006609",
+            "sourceStartMs": 2008078,
+            "sourceEndMs": 2008258,
+            "text": "な"
+          },
+          {
+            "wordId": "word-006610",
+            "sourceStartMs": 2008258,
+            "sourceEndMs": 2008278,
+            "text": "い"
+          },
+          {
+            "wordId": "word-006611",
+            "sourceStartMs": 2010874,
+            "sourceEndMs": 2010894,
+            "text": "リ"
+          },
+          {
+            "wordId": "word-006612",
+            "sourceStartMs": 2010894,
+            "sourceEndMs": 2011114,
+            "text": "リ"
+          },
+          {
+            "wordId": "word-006613",
+            "sourceStartMs": 2011114,
+            "sourceEndMs": 2011234,
+            "text": "カ"
+          }
+        ],
+        "reason": "コロナ療養中のリリカがチャットをくれたことに気づき、「リリカがチャットくれてる」と言及して感謝を述べる場面から会話のテーマが始まるためです。"
+      },
+      "end": {
+        "pointId": "word-007161:end",
+        "timeMs": 2155086,
+        "kind": "end",
+        "wordIndex": 850,
+        "selectedWord": {
+          "id": "word-007161",
+          "s": 2155066,
+          "e": 2155086,
+          "t": "も"
+        },
+        "surroundingWords": [
+          {
+            "wordId": "word-007159",
+            "sourceStartMs": 2154886,
+            "sourceEndMs": 2154986,
+            "text": "た"
+          },
+          {
+            "wordId": "word-007160",
+            "sourceStartMs": 2154986,
+            "sourceEndMs": 2155066,
+            "text": "か"
+          },
+          {
+            "wordId": "word-007161",
+            "sourceStartMs": 2155066,
+            "sourceEndMs": 2155086,
+            "text": "も"
+          },
+          {
+            "wordId": "word-007162",
+            "sourceStartMs": 2164080,
+            "sourceEndMs": 2164200,
+            "text": "確"
+          },
+          {
+            "wordId": "word-007163",
+            "sourceStartMs": 2164200,
+            "sourceEndMs": 2164220,
+            "text": "か"
+          }
+        ],
+        "reason": "卒業生の設定に合わせた「嬉しいですかなって言ったかも」という妄想や寸劇のようなやり取りが一段落する発話の最後を境界としました。"
+      }
+    }
+  ]
+}

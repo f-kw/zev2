@@ -1,0 +1,142 @@
+{
+  "refinements": [
+    {
+      "provisionalCutIndex": 1,
+      "startBoundaryPointId": "word-016184:start",
+      "endBoundaryPointId": "word-016405:end",
+      "startReason": "食材を独占している状況の前提フリとなる「マリリンちょっと待ってマジでさ食材なくなったけど」の切り出し直前の発話開始点を選定。",
+      "endReason": "肉をめぐるやり取りと船長へのツッコミが「そんなに握ってんじゃねーよって話」という言葉で綺麗に収束する最後の瞬間を選定。"
+    }
+  ],
+  "runAt": "2026-07-13T07:00:44+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "manualRun": false,
+    "runner": "edge-cdp-text-prompt",
+    "generationSystem": "boundary-v001@gemini-web-flash",
+    "upstreamGenerationSystems": [
+      "theme-llm-v002@gemini-web-flash",
+      "llm-v012@gemini-web-flash"
+    ],
+    "resultRole": "boundary-refinement-eval",
+    "promptVersion": "boundary_refinement_prompt_v001",
+    "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+    "candidateIndex": 41,
+    "runIndex": 3,
+    "contextRadiusMs": 90000,
+    "inputPromptSha256": "4e8e16cdc06b5bb47c75ecc3369964834a3c9c955147af0d4621e30bd0e0c8e1"
+  },
+  "promptFile": "outputs/theme-composition-boundary/20260713-boundary-v001-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-041/run-03/prompt.md",
+  "pageUrl": "https://gemini.google.com/app/3ea9bf2c9ded7441?hl=ja",
+  "rawResponseText": "{\n\"refinements\": [\n{\n\"provisionalCutIndex\": 1,\n\"startBoundaryPointId\": \"word-016184:start\",\n\"endBoundaryPointId\": \"word-016405:end\",\n\"startReason\": \"食材を独占している状況の前提フリとなる「マリリンちょっと待ってマジでさ食材なくなったけど」の切り出し直前の発話開始点を選定。\",\n\"endReason\": \"肉をめぐるやり取りと船長へのツッコミが「そんなに握ってんじゃねーよって話」という言葉で綺麗に収束する最後の瞬間を選定。\"\n}\n]\n}\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。",
+  "boundaryContractValidation": {
+    "passed": true,
+    "issues": [],
+    "checkedAt": "2026-07-12T22:00:44.287Z",
+    "checks": [
+      "point-id-exists",
+      "point-in-correct-90s-window",
+      "start-before-end",
+      "same-cut-count",
+      "no-duplicate-or-missing-cut-index",
+      "reasons-present"
+    ]
+  },
+  "selectedBoundaryEvidence": [
+    {
+      "provisionalCutIndex": 1,
+      "start": {
+        "pointId": "word-016184:start",
+        "timeMs": 3475641,
+        "kind": "start",
+        "wordIndex": 268,
+        "selectedWord": {
+          "id": "word-016184",
+          "s": 3475641,
+          "e": 3475781,
+          "t": "マ"
+        },
+        "surroundingWords": [
+          {
+            "wordId": "word-016182",
+            "sourceStartMs": 3475401,
+            "sourceEndMs": 3475541,
+            "text": "ば"
+          },
+          {
+            "wordId": "word-016183",
+            "sourceStartMs": 3475541,
+            "sourceEndMs": 3475641,
+            "text": "い"
+          },
+          {
+            "wordId": "word-016184",
+            "sourceStartMs": 3475641,
+            "sourceEndMs": 3475781,
+            "text": "マ"
+          },
+          {
+            "wordId": "word-016185",
+            "sourceStartMs": 3475781,
+            "sourceEndMs": 3475921,
+            "text": "リ"
+          },
+          {
+            "wordId": "word-016186",
+            "sourceStartMs": 3475921,
+            "sourceEndMs": 3476041,
+            "text": "リ"
+          }
+        ],
+        "reason": "食材を独占している状況の前提フリとなる「マリリンちょっと待ってマジでさ食材なくなったけど」の切り出し直前の発話開始点を選定。"
+      },
+      "end": {
+        "pointId": "word-016405:end",
+        "timeMs": 3514644,
+        "kind": "end",
+        "wordIndex": 489,
+        "selectedWord": {
+          "id": "word-016405",
+          "s": 3514564,
+          "e": 3514644,
+          "t": "話"
+        },
+        "surroundingWords": [
+          {
+            "wordId": "word-016403",
+            "sourceStartMs": 3514443,
+            "sourceEndMs": 3514463,
+            "text": "っ"
+          },
+          {
+            "wordId": "word-016404",
+            "sourceStartMs": 3514463,
+            "sourceEndMs": 3514564,
+            "text": "て"
+          },
+          {
+            "wordId": "word-016405",
+            "sourceStartMs": 3514564,
+            "sourceEndMs": 3514644,
+            "text": "話"
+          },
+          {
+            "wordId": "word-016406",
+            "sourceStartMs": 3514644,
+            "sourceEndMs": 3514904,
+            "text": "あ"
+          },
+          {
+            "wordId": "word-016407",
+            "sourceStartMs": 3514904,
+            "sourceEndMs": 3514984,
+            "text": "待"
+          }
+        ],
+        "reason": "肉をめぐるやり取りと船長へのツッコミが「そんなに握ってんじゃねーよって話」という言葉で綺麗に収束する最後の瞬間を選定。"
+      }
+    }
+  ]
+}

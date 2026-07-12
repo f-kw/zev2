@@ -1,0 +1,142 @@
+{
+  "refinements": [
+    {
+      "provisionalCutIndex": 1,
+      "startBoundaryPointId": "word-031952:start",
+      "endBoundaryPointId": "word-032135:end",
+      "startReason": "テーマである盗塁の指示についてリスナーへ問いかけ葛藤し始める「トール行こう？」の発話から開始するためです。",
+      "endReason": "走力や能力値を確認して「やめとくか？」と盗塁の葛藤に対する結論を出す発話の終了地点を選択しました。"
+    }
+  ],
+  "runAt": "2026-07-13T08:01:20+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "manualRun": false,
+    "runner": "edge-cdp-text-prompt",
+    "generationSystem": "boundary-v001@gemini-web-flash",
+    "upstreamGenerationSystems": [
+      "theme-llm-v002@gemini-web-flash",
+      "llm-v012@gemini-web-flash"
+    ],
+    "resultRole": "boundary-refinement-eval",
+    "promptVersion": "boundary_refinement_prompt_v001",
+    "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+    "candidateIndex": 54,
+    "runIndex": 2,
+    "contextRadiusMs": 90000,
+    "inputPromptSha256": "7a7e7d86ab82d7804ab1616bf897e0d5f9ad63dfba9aded66d1d07661eff4c18"
+  },
+  "promptFile": "outputs/theme-composition-boundary/20260713-boundary-v001-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-054/run-02/prompt.md",
+  "pageUrl": "https://gemini.google.com/app/475c33238e5a0f38?hl=ja",
+  "rawResponseText": "{\n\"refinements\": [\n{\n\"provisionalCutIndex\": 1,\n\"startBoundaryPointId\": \"word-031952:start\",\n\"endBoundaryPointId\": \"word-032135:end\",\n\"startReason\": \"テーマである盗塁の指示についてリスナーへ問いかけ葛藤し始める「トール行こう？」の発話から開始するためです。\",\n\"endReason\": \"走力や能力値を確認して「やめとくか？」と盗塁の葛藤に対する結論を出す発話の終了地点を選択しました。\"\n}\n]\n}\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。",
+  "boundaryContractValidation": {
+    "passed": true,
+    "issues": [],
+    "checkedAt": "2026-07-12T23:01:20.312Z",
+    "checks": [
+      "point-id-exists",
+      "point-in-correct-90s-window",
+      "start-before-end",
+      "same-cut-count",
+      "no-duplicate-or-missing-cut-index",
+      "reasons-present"
+    ]
+  },
+  "selectedBoundaryEvidence": [
+    {
+      "provisionalCutIndex": 1,
+      "start": {
+        "pointId": "word-031952:start",
+        "timeMs": 10776694,
+        "kind": "start",
+        "wordIndex": 109,
+        "selectedWord": {
+          "id": "word-031952",
+          "s": 10776694,
+          "e": 10776834,
+          "t": "ト"
+        },
+        "surroundingWords": [
+          {
+            "wordId": "word-031950",
+            "sourceStartMs": 10775854,
+            "sourceEndMs": 10775874,
+            "text": "ー"
+          },
+          {
+            "wordId": "word-031951",
+            "sourceStartMs": 10775874,
+            "sourceEndMs": 10776694,
+            "text": "!"
+          },
+          {
+            "wordId": "word-031952",
+            "sourceStartMs": 10776694,
+            "sourceEndMs": 10776834,
+            "text": "ト"
+          },
+          {
+            "wordId": "word-031953",
+            "sourceStartMs": 10776834,
+            "sourceEndMs": 10776854,
+            "text": "ー"
+          },
+          {
+            "wordId": "word-031954",
+            "sourceStartMs": 10776854,
+            "sourceEndMs": 10776994,
+            "text": "ル"
+          }
+        ],
+        "reason": "テーマである盗塁の指示についてリスナーへ問いかけ葛藤し始める「トール行こう？」の発話から開始するためです。"
+      },
+      "end": {
+        "pointId": "word-032135:end",
+        "timeMs": 10817172,
+        "kind": "end",
+        "wordIndex": 292,
+        "selectedWord": {
+          "id": "word-032135",
+          "s": 10816372,
+          "e": 10817172,
+          "t": "?"
+        },
+        "surroundingWords": [
+          {
+            "wordId": "word-032133",
+            "sourceStartMs": 10816112,
+            "sourceEndMs": 10816252,
+            "text": "く"
+          },
+          {
+            "wordId": "word-032134",
+            "sourceStartMs": 10816252,
+            "sourceEndMs": 10816372,
+            "text": "か"
+          },
+          {
+            "wordId": "word-032135",
+            "sourceStartMs": 10816372,
+            "sourceEndMs": 10817172,
+            "text": "?"
+          },
+          {
+            "wordId": "word-032136",
+            "sourceStartMs": 10817172,
+            "sourceEndMs": 10817372,
+            "text": "犠"
+          },
+          {
+            "wordId": "word-032137",
+            "sourceStartMs": 10817372,
+            "sourceEndMs": 10817633,
+            "text": "牲"
+          }
+        ],
+        "reason": "走力や能力値を確認して「やめとくか？」と盗塁の葛藤に対する結論を出す発話の終了地点を選択しました。"
+      }
+    }
+  ]
+}

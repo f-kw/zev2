@@ -1,0 +1,142 @@
+{
+  "refinements": [
+    {
+      "provisionalCutIndex": 1,
+      "startBoundaryPointId": "word-024111:start",
+      "endBoundaryPointId": "word-024491:end",
+      "startReason": "マリンが景色に反応して「え、綺麗え、綺麗?」とエモい演技のフリを始める最初の単語「え」を開始境界に選定しました。",
+      "endReason": "ころねの「絡みづらい」というくだりからサメの襲来を経て、会話の余韻が収束する「それ」の単語の終わりを終了境界に選定しました。"
+    }
+  ],
+  "runAt": "2026-07-13T07:13:10+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "manualRun": false,
+    "runner": "edge-cdp-text-prompt",
+    "generationSystem": "boundary-v001@gemini-web-flash",
+    "upstreamGenerationSystems": [
+      "theme-llm-v002@gemini-web-flash",
+      "llm-v012@gemini-web-flash"
+    ],
+    "resultRole": "boundary-refinement-eval",
+    "promptVersion": "boundary_refinement_prompt_v001",
+    "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+    "candidateIndex": 53,
+    "runIndex": 1,
+    "contextRadiusMs": 90000,
+    "inputPromptSha256": "12e292999c7ba28079437099e2dcd32a72da6adfcb0ee39c91cef8914a566f69"
+  },
+  "promptFile": "outputs/theme-composition-boundary/20260713-boundary-v001-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-053/run-01/prompt.md",
+  "pageUrl": "https://gemini.google.com/app/f381025b68f6eaf0?hl=ja",
+  "rawResponseText": "{\n\"refinements\": [\n{\n\"provisionalCutIndex\": 1,\n\"startBoundaryPointId\": \"word-024111:start\",\n\"endBoundaryPointId\": \"word-024491:end\",\n\"startReason\": \"マリンが景色に反応して「え、綺麗え、綺麗?」とエモい演技のフリを始める最初の単語「え」を開始境界に選定しました。\",\n\"endReason\": \"ころねの「絡みづらい」というくだりからサメの襲来を経て、会話の余韻が収束する「それ」の単語の終わりを終了境界に選定しました。\"\n}\n]\n}\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。",
+  "boundaryContractValidation": {
+    "passed": true,
+    "issues": [],
+    "checkedAt": "2026-07-12T22:13:10.544Z",
+    "checks": [
+      "point-id-exists",
+      "point-in-correct-90s-window",
+      "start-before-end",
+      "same-cut-count",
+      "no-duplicate-or-missing-cut-index",
+      "reasons-present"
+    ]
+  },
+  "selectedBoundaryEvidence": [
+    {
+      "provisionalCutIndex": 1,
+      "start": {
+        "pointId": "word-024111:start",
+        "timeMs": 5193243,
+        "kind": "start",
+        "wordIndex": 412,
+        "selectedWord": {
+          "id": "word-024111",
+          "s": 5193243,
+          "e": 5193263,
+          "t": "え"
+        },
+        "surroundingWords": [
+          {
+            "wordId": "word-024109",
+            "sourceStartMs": 5191342,
+            "sourceEndMs": 5191382,
+            "text": "っ"
+          },
+          {
+            "wordId": "word-024110",
+            "sourceStartMs": 5191382,
+            "sourceEndMs": 5193243,
+            "text": "た"
+          },
+          {
+            "wordId": "word-024111",
+            "sourceStartMs": 5193243,
+            "sourceEndMs": 5193263,
+            "text": "え"
+          },
+          {
+            "wordId": "word-024112",
+            "sourceStartMs": 5193263,
+            "sourceEndMs": 5193563,
+            "text": "、"
+          },
+          {
+            "wordId": "word-024113",
+            "sourceStartMs": 5193563,
+            "sourceEndMs": 5194844,
+            "text": "綺"
+          }
+        ],
+        "reason": "マリンが景色に反応して「え、綺麗え、綺麗?」とエモい演技のフリを始める最初の単語「え」を開始境界に選定しました。"
+      },
+      "end": {
+        "pointId": "word-024491:end",
+        "timeMs": 5279310,
+        "kind": "end",
+        "wordIndex": 792,
+        "selectedWord": {
+          "id": "word-024491",
+          "s": 5279290,
+          "e": 5279310,
+          "t": "れ"
+        },
+        "surroundingWords": [
+          {
+            "wordId": "word-024489",
+            "sourceStartMs": 5279050,
+            "sourceEndMs": 5279190,
+            "text": "情"
+          },
+          {
+            "wordId": "word-024490",
+            "sourceStartMs": 5279190,
+            "sourceEndMs": 5279290,
+            "text": "そ"
+          },
+          {
+            "wordId": "word-024491",
+            "sourceStartMs": 5279290,
+            "sourceEndMs": 5279310,
+            "text": "れ"
+          },
+          {
+            "wordId": "word-024492",
+            "sourceStartMs": 5280554,
+            "sourceEndMs": 5280574,
+            "text": "で"
+          },
+          {
+            "wordId": "word-024493",
+            "sourceStartMs": 5280574,
+            "sourceEndMs": 5280694,
+            "text": "、"
+          }
+        ],
+        "reason": "ころねの「絡みづらい」というくだりからサメの襲来を経て、会話の余韻が収束する「それ」の単語の終わりを終了境界に選定しました。"
+      }
+    }
+  ]
+}

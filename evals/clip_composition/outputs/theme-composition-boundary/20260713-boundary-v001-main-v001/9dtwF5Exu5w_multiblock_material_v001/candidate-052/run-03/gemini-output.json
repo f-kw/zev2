@@ -1,0 +1,142 @@
+{
+  "refinements": [
+    {
+      "provisionalCutIndex": 1,
+      "startBoundaryPointId": "word-031563:start",
+      "endBoundaryPointId": "word-031832:end",
+      "startReason": "作戦思案の契機となる相手の能力確認のセリフ「肩DのクイックC」から葛藤が始まるため、ここを開始点としました。",
+      "endReason": "盗塁かバントかで揺れる一連の作戦思案が「送りバント？」という最後の自問で収束するため、ここを終了点としました。"
+    }
+  ],
+  "runAt": "2026-07-13T08:00:24+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "manualRun": false,
+    "runner": "edge-cdp-text-prompt",
+    "generationSystem": "boundary-v001@gemini-web-flash",
+    "upstreamGenerationSystems": [
+      "theme-llm-v002@gemini-web-flash",
+      "llm-v012@gemini-web-flash"
+    ],
+    "resultRole": "boundary-refinement-eval",
+    "promptVersion": "boundary_refinement_prompt_v001",
+    "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+    "candidateIndex": 52,
+    "runIndex": 3,
+    "contextRadiusMs": 90000,
+    "inputPromptSha256": "908e2f89a7ea2583488ef05bd04794db79bf15dbea6054922c8b4faecbe41430"
+  },
+  "promptFile": "outputs/theme-composition-boundary/20260713-boundary-v001-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-052/run-03/prompt.md",
+  "pageUrl": "https://gemini.google.com/app/947899e4e25a2470?hl=ja",
+  "rawResponseText": "{\n\"refinements\": [\n{\n\"provisionalCutIndex\": 1,\n\"startBoundaryPointId\": \"word-031563:start\",\n\"endBoundaryPointId\": \"word-031832:end\",\n\"startReason\": \"作戦思案の契機となる相手の能力確認のセリフ「肩DのクイックC」から葛藤が始まるため、ここを開始点としました。\",\n\"endReason\": \"盗塁かバントかで揺れる一連の作戦思案が「送りバント？」という最後の自問で収束するため、ここを終了点としました。\"\n}\n]\n}\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。",
+  "boundaryContractValidation": {
+    "passed": true,
+    "issues": [],
+    "checkedAt": "2026-07-12T23:00:24.786Z",
+    "checks": [
+      "point-id-exists",
+      "point-in-correct-90s-window",
+      "start-before-end",
+      "same-cut-count",
+      "no-duplicate-or-missing-cut-index",
+      "reasons-present"
+    ]
+  },
+  "selectedBoundaryEvidence": [
+    {
+      "provisionalCutIndex": 1,
+      "start": {
+        "pointId": "word-031563:start",
+        "timeMs": 10503922,
+        "kind": "start",
+        "wordIndex": 403,
+        "selectedWord": {
+          "id": "word-031563",
+          "s": 10503922,
+          "e": 10504262,
+          "t": "肩"
+        },
+        "surroundingWords": [
+          {
+            "wordId": "word-031561",
+            "sourceStartMs": 10499245,
+            "sourceEndMs": 10499346,
+            "text": "ー"
+          },
+          {
+            "wordId": "word-031562",
+            "sourceStartMs": 10499346,
+            "sourceEndMs": 10499366,
+            "text": "ナ"
+          },
+          {
+            "wordId": "word-031563",
+            "sourceStartMs": 10503922,
+            "sourceEndMs": 10504262,
+            "text": "肩"
+          },
+          {
+            "wordId": "word-031564",
+            "sourceStartMs": 10504262,
+            "sourceEndMs": 10504563,
+            "text": "D"
+          },
+          {
+            "wordId": "word-031565",
+            "sourceStartMs": 10504563,
+            "sourceEndMs": 10506024,
+            "text": "の"
+          }
+        ],
+        "reason": "作戦思案の契機となる相手の能力確認のセリフ「肩DのクイックC」から葛藤が始まるため、ここを開始点としました。"
+      },
+      "end": {
+        "pointId": "word-031832:end",
+        "timeMs": 10618318,
+        "kind": "end",
+        "wordIndex": 672,
+        "selectedWord": {
+          "id": "word-031832",
+          "s": 10618298,
+          "e": 10618318,
+          "t": "?"
+        },
+        "surroundingWords": [
+          {
+            "wordId": "word-031830",
+            "sourceStartMs": 10606551,
+            "sourceEndMs": 10606611,
+            "text": "ン"
+          },
+          {
+            "wordId": "word-031831",
+            "sourceStartMs": 10606611,
+            "sourceEndMs": 10618298,
+            "text": "ト"
+          },
+          {
+            "wordId": "word-031832",
+            "sourceStartMs": 10618298,
+            "sourceEndMs": 10618318,
+            "text": "?"
+          },
+          {
+            "wordId": "word-031833",
+            "sourceStartMs": 10628796,
+            "sourceEndMs": 10629276,
+            "text": "あ"
+          },
+          {
+            "wordId": "word-031834",
+            "sourceStartMs": 10629276,
+            "sourceEndMs": 10629376,
+            "text": "あ"
+          }
+        ],
+        "reason": "盗塁かバントかで揺れる一連の作戦思案が「送りバント？」という最後の自問で収束するため、ここを終了点としました。"
+      }
+    }
+  ]
+}

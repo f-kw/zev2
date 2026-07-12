@@ -1,0 +1,142 @@
+{
+  "refinements": [
+    {
+      "provisionalCutIndex": 1,
+      "startBoundaryPointId": "word-024111:start",
+      "endBoundaryPointId": "word-024401:end",
+      "startReason": "マリンが夕焼けの景色に気づいて「え、綺麗」と感動的な演技のきっかけを作る発話から開始します。",
+      "endReason": "「今日絡みづらい」というオチのやり取りが収束し、直後にサメ襲来で話題が変わる直前の言葉「死そうですな」で終了します。"
+    }
+  ],
+  "runAt": "2026-07-13T07:21:54+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "manualRun": false,
+    "runner": "edge-cdp-text-prompt",
+    "generationSystem": "boundary-v001@gemini-web-flash",
+    "upstreamGenerationSystems": [
+      "theme-llm-v002@gemini-web-flash",
+      "llm-v012@gemini-web-flash"
+    ],
+    "resultRole": "boundary-refinement-eval",
+    "promptVersion": "boundary_refinement_prompt_v001",
+    "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+    "candidateIndex": 53,
+    "runIndex": 3,
+    "contextRadiusMs": 90000,
+    "inputPromptSha256": "5bf480ec34882359272798cadd3cbeec800f662a3d98ffed07aad043607f2dba"
+  },
+  "promptFile": "outputs/theme-composition-boundary/20260713-boundary-v001-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-053/run-03/prompt.md",
+  "pageUrl": "https://gemini.google.com/app/3dc284ad68e21668?hl=ja",
+  "rawResponseText": "{\n\"refinements\": [\n{\n\"provisionalCutIndex\": 1,\n\"startBoundaryPointId\": \"word-024111:start\",\n\"endBoundaryPointId\": \"word-024401:end\",\n\"startReason\": \"マリンが夕焼けの景色に気づいて「え、綺麗」と感動的な演技のきっかけを作る発話から開始します。\",\n\"endReason\": \"「今日絡みづらい」というオチのやり取りが収束し、直後にサメ襲来で話題が変わる直前の言葉「死そうですな」で終了します。\"\n}\n]\n}\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。",
+  "boundaryContractValidation": {
+    "passed": true,
+    "issues": [],
+    "checkedAt": "2026-07-12T22:21:54.612Z",
+    "checks": [
+      "point-id-exists",
+      "point-in-correct-90s-window",
+      "start-before-end",
+      "same-cut-count",
+      "no-duplicate-or-missing-cut-index",
+      "reasons-present"
+    ]
+  },
+  "selectedBoundaryEvidence": [
+    {
+      "provisionalCutIndex": 1,
+      "start": {
+        "pointId": "word-024111:start",
+        "timeMs": 5193243,
+        "kind": "start",
+        "wordIndex": 412,
+        "selectedWord": {
+          "id": "word-024111",
+          "s": 5193243,
+          "e": 5193263,
+          "t": "え"
+        },
+        "surroundingWords": [
+          {
+            "wordId": "word-024109",
+            "sourceStartMs": 5191342,
+            "sourceEndMs": 5191382,
+            "text": "っ"
+          },
+          {
+            "wordId": "word-024110",
+            "sourceStartMs": 5191382,
+            "sourceEndMs": 5193243,
+            "text": "た"
+          },
+          {
+            "wordId": "word-024111",
+            "sourceStartMs": 5193243,
+            "sourceEndMs": 5193263,
+            "text": "え"
+          },
+          {
+            "wordId": "word-024112",
+            "sourceStartMs": 5193263,
+            "sourceEndMs": 5193563,
+            "text": "、"
+          },
+          {
+            "wordId": "word-024113",
+            "sourceStartMs": 5193563,
+            "sourceEndMs": 5194844,
+            "text": "綺"
+          }
+        ],
+        "reason": "マリンが夕焼けの景色に気づいて「え、綺麗」と感動的な演技のきっかけを作る発話から開始します。"
+      },
+      "end": {
+        "pointId": "word-024401:end",
+        "timeMs": 5262284,
+        "kind": "end",
+        "wordIndex": 702,
+        "selectedWord": {
+          "id": "word-024401",
+          "s": 5262144,
+          "e": 5262284,
+          "t": "な"
+        },
+        "surroundingWords": [
+          {
+            "wordId": "word-024399",
+            "sourceStartMs": 5261644,
+            "sourceEndMs": 5261764,
+            "text": "で"
+          },
+          {
+            "wordId": "word-024400",
+            "sourceStartMs": 5261764,
+            "sourceEndMs": 5262144,
+            "text": "す"
+          },
+          {
+            "wordId": "word-024401",
+            "sourceStartMs": 5262144,
+            "sourceEndMs": 5262284,
+            "text": "な"
+          },
+          {
+            "wordId": "word-024402",
+            "sourceStartMs": 5262284,
+            "sourceEndMs": 5262324,
+            "text": "ん"
+          },
+          {
+            "wordId": "word-024403",
+            "sourceStartMs": 5262324,
+            "sourceEndMs": 5262424,
+            "text": "な"
+          }
+        ],
+        "reason": "「今日絡みづらい」というオチのやり取りが収束し、直後にサメ襲来で話題が変わる直前の言葉「死そうですな」で終了します。"
+      }
+    }
+  ]
+}

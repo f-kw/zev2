@@ -1,0 +1,142 @@
+{
+  "refinements": [
+    {
+      "provisionalCutIndex": 1,
+      "startBoundaryPointId": "word-004132:start",
+      "endBoundaryPointId": "word-004638:end",
+      "startReason": "白上フブキに合わせた名前やテイストの試行錯誤が始まる「フブちゃんっぽいテイスト入れて」の発話の開始点を境界として選択しました。",
+      "endReason": "ショップでの仕様確認に話題が移る直前の「ショップでエフェクト変える？」という発話の終了点を境界として選択しました。"
+    }
+  ],
+  "runAt": "2026-07-13T07:31:02+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "manualRun": false,
+    "runner": "edge-cdp-text-prompt",
+    "generationSystem": "boundary-v001@gemini-web-flash",
+    "upstreamGenerationSystems": [
+      "theme-llm-v002@gemini-web-flash",
+      "llm-v012@gemini-web-flash"
+    ],
+    "resultRole": "boundary-refinement-eval",
+    "promptVersion": "boundary_refinement_prompt_v001",
+    "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+    "candidateIndex": 5,
+    "runIndex": 1,
+    "contextRadiusMs": 90000,
+    "inputPromptSha256": "18b7f95f2f1eac43993167d29e484b00f28898749ae39c8673fd429e15836552"
+  },
+  "promptFile": "outputs/theme-composition-boundary/20260713-boundary-v001-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-005/run-01/prompt.md",
+  "pageUrl": "https://gemini.google.com/app/21b2630fbeccfe6f?hl=ja",
+  "rawResponseText": "{\n\"refinements\": [\n{\n\"provisionalCutIndex\": 1,\n\"startBoundaryPointId\": \"word-004132:start\",\n\"endBoundaryPointId\": \"word-004638:end\",\n\"startReason\": \"白上フブキに合わせた名前やテイストの試行錯誤が始まる「フブちゃんっぽいテイスト入れて」の発話の開始点を境界として選択しました。\",\n\"endReason\": \"ショップでの仕様確認に話題が移る直前の「ショップでエフェクト変える？」という発話の終了点を境界として選択しました。\"\n}\n]\n}\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。",
+  "boundaryContractValidation": {
+    "passed": true,
+    "issues": [],
+    "checkedAt": "2026-07-12T22:31:02.783Z",
+    "checks": [
+      "point-id-exists",
+      "point-in-correct-90s-window",
+      "start-before-end",
+      "same-cut-count",
+      "no-duplicate-or-missing-cut-index",
+      "reasons-present"
+    ]
+  },
+  "selectedBoundaryEvidence": [
+    {
+      "provisionalCutIndex": 1,
+      "start": {
+        "pointId": "word-004132:start",
+        "timeMs": 1113054,
+        "kind": "start",
+        "wordIndex": 261,
+        "selectedWord": {
+          "id": "word-004132",
+          "s": 1113054,
+          "e": 1113214,
+          "t": "フ"
+        },
+        "surroundingWords": [
+          {
+            "wordId": "word-004130",
+            "sourceStartMs": 1109580,
+            "sourceEndMs": 1109700,
+            "text": "ク"
+          },
+          {
+            "wordId": "word-004131",
+            "sourceStartMs": 1109700,
+            "sourceEndMs": 1109720,
+            "text": "で"
+          },
+          {
+            "wordId": "word-004132",
+            "sourceStartMs": 1113054,
+            "sourceEndMs": 1113214,
+            "text": "フ"
+          },
+          {
+            "wordId": "word-004133",
+            "sourceStartMs": 1113214,
+            "sourceEndMs": 1121984,
+            "text": "ブ"
+          },
+          {
+            "wordId": "word-004134",
+            "sourceStartMs": 1121984,
+            "sourceEndMs": 1122044,
+            "text": "ち"
+          }
+        ],
+        "reason": "白上フブキに合わせた名前やテイストの試行錯誤が始まる「フブちゃんっぽいテイスト入れて」の発話の開始点を境界として選択しました。"
+      },
+      "end": {
+        "pointId": "word-004638:end",
+        "timeMs": 1317150,
+        "kind": "end",
+        "wordIndex": 723,
+        "selectedWord": {
+          "id": "word-004638",
+          "s": 1317130,
+          "e": 1317150,
+          "t": "?"
+        },
+        "surroundingWords": [
+          {
+            "wordId": "word-004636",
+            "sourceStartMs": 1316830,
+            "sourceEndMs": 1316930,
+            "text": "え"
+          },
+          {
+            "wordId": "word-004637",
+            "sourceStartMs": 1316930,
+            "sourceEndMs": 1317130,
+            "text": "る"
+          },
+          {
+            "wordId": "word-004638",
+            "sourceStartMs": 1317130,
+            "sourceEndMs": 1317150,
+            "text": "?"
+          },
+          {
+            "wordId": "word-004639",
+            "sourceStartMs": 1323478,
+            "sourceEndMs": 1323838,
+            "text": "粉"
+          },
+          {
+            "wordId": "word-004640",
+            "sourceStartMs": 1323838,
+            "sourceEndMs": 1323898,
+            "text": "っ"
+          }
+        ],
+        "reason": "ショップでの仕様確認に話題が移る直前の「ショップでエフェクト変える？」という発話の終了点を境界として選択しました。"
+      }
+    }
+  ]
+}

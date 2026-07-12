@@ -1,0 +1,142 @@
+{
+  "refinements": [
+    {
+      "provisionalCutIndex": 1,
+      "startBoundaryPointId": "word-000825:start",
+      "endBoundaryPointId": "word-000973:end",
+      "startReason": "マリンが「ちょっとコーネがね今日ねずこスタイルなんで」と紹介して掛け合いの前提説明を始める発話の開始点として、word-000825（コ）を選定しました。",
+      "endReason": "炭治郎になりきって会話を繰り広げ、音量確認の後に「ねずこまあねそのそれはあれじゃん鬼の鬼の鬼柱なんだっけ鬼の」とトークが一区切りする最後の言葉として、word-000973（の）を選定しました。"
+    }
+  ],
+  "runAt": "2026-07-13T06:21:27+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "manualRun": false,
+    "runner": "edge-cdp-text-prompt",
+    "generationSystem": "boundary-v001@gemini-web-flash",
+    "upstreamGenerationSystems": [
+      "theme-llm-v002@gemini-web-flash",
+      "llm-v012@gemini-web-flash"
+    ],
+    "resultRole": "boundary-refinement-eval",
+    "promptVersion": "boundary_refinement_prompt_v001",
+    "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+    "candidateIndex": 2,
+    "runIndex": 3,
+    "contextRadiusMs": 90000,
+    "inputPromptSha256": "2dd3390dfd9bf6bca60b1d643d30fd6fb8e89dd7a401fdec1d80cf2f37795e92"
+  },
+  "promptFile": "outputs/theme-composition-boundary/20260713-boundary-v001-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-002/run-03/prompt.md",
+  "pageUrl": "https://gemini.google.com/app/55a209a2bf749cf1?hl=ja",
+  "rawResponseText": "{\n\"refinements\": [\n{\n\"provisionalCutIndex\": 1,\n\"startBoundaryPointId\": \"word-000825:start\",\n\"endBoundaryPointId\": \"word-000973:end\",\n\"startReason\": \"マリンが「ちょっとコーネがね今日ねずこスタイルなんで」と紹介して掛け合いの前提説明を始める発話の開始点として、word-000825（コ）を選定しました。\",\n\"endReason\": \"炭治郎になりきって会話を繰り広げ、音量確認の後に「ねずこまあねそのそれはあれじゃん鬼の鬼の鬼柱なんだっけ鬼の」とトークが一区切りする最後の言葉として、word-000973（の）を選定しました。\"\n}\n]\n}\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。",
+  "boundaryContractValidation": {
+    "passed": true,
+    "issues": [],
+    "checkedAt": "2026-07-12T21:21:27.620Z",
+    "checks": [
+      "point-id-exists",
+      "point-in-correct-90s-window",
+      "start-before-end",
+      "same-cut-count",
+      "no-duplicate-or-missing-cut-index",
+      "reasons-present"
+    ]
+  },
+  "selectedBoundaryEvidence": [
+    {
+      "provisionalCutIndex": 1,
+      "start": {
+        "pointId": "word-000825:start",
+        "timeMs": 260068,
+        "kind": "start",
+        "wordIndex": 812,
+        "selectedWord": {
+          "id": "word-000825",
+          "s": 260068,
+          "e": 260128,
+          "t": "コ"
+        },
+        "surroundingWords": [
+          {
+            "wordId": "word-000823",
+            "sourceStartMs": 259708,
+            "sourceEndMs": 259768,
+            "text": "っ"
+          },
+          {
+            "wordId": "word-000824",
+            "sourceStartMs": 259768,
+            "sourceEndMs": 260068,
+            "text": "と"
+          },
+          {
+            "wordId": "word-000825",
+            "sourceStartMs": 260068,
+            "sourceEndMs": 260128,
+            "text": "コ"
+          },
+          {
+            "wordId": "word-000826",
+            "sourceStartMs": 260128,
+            "sourceEndMs": 260168,
+            "text": "ー"
+          },
+          {
+            "wordId": "word-000827",
+            "sourceStartMs": 260168,
+            "sourceEndMs": 260268,
+            "text": "ネ"
+          }
+        ],
+        "reason": "マリンが「ちょっとコーネがね今日ねずこスタイルなんで」と紹介して掛け合いの前提説明を始める発話の開始点として、word-000825（コ）を選定しました。"
+      },
+      "end": {
+        "pointId": "word-000973:end",
+        "timeMs": 298984,
+        "kind": "end",
+        "wordIndex": 960,
+        "selectedWord": {
+          "id": "word-000973",
+          "s": 298964,
+          "e": 298984,
+          "t": "の"
+        },
+        "surroundingWords": [
+          {
+            "wordId": "word-000971",
+            "sourceStartMs": 298744,
+            "sourceEndMs": 298804,
+            "text": "け"
+          },
+          {
+            "wordId": "word-000972",
+            "sourceStartMs": 298804,
+            "sourceEndMs": 298964,
+            "text": "鬼"
+          },
+          {
+            "wordId": "word-000973",
+            "sourceStartMs": 298964,
+            "sourceEndMs": 298984,
+            "text": "の"
+          },
+          {
+            "wordId": "word-000974",
+            "sourceStartMs": 300578,
+            "sourceEndMs": 300718,
+            "text": "な"
+          },
+          {
+            "wordId": "word-000975",
+            "sourceStartMs": 300718,
+            "sourceEndMs": 300758,
+            "text": "ん"
+          }
+        ],
+        "reason": "炭治郎になりきって会話を繰り広げ、音量確認の後に「ねずこまあねそのそれはあれじゃん鬼の鬼の鬼柱なんだっけ鬼の」とトークが一区切りする最後の言葉として、word-000973（の）を選定しました。"
+      }
+    }
+  ]
+}

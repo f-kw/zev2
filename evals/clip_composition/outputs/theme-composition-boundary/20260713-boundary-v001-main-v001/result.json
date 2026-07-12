@@ -1,0 +1,4545 @@
+{
+  "kind": "boundary_v001_score",
+  "resultRole": "word-boundary-refinement-eval-conditional-on-upstream-theme-hit-and-v012-reach",
+  "runAt": "2026-07-12T23:05:08.401Z",
+  "generationSystem": "boundary-v001@gemini-web-flash",
+  "upstreamGenerationSystems": [
+    "theme-llm-v002@gemini-web-flash",
+    "llm-v012@gemini-web-flash"
+  ],
+  "contextRadiusMs": 90000,
+  "plannedCallCount": 71,
+  "completedOutputCount": 71,
+  "preRegisteredConclusionBasis": "primary-visible-61",
+  "structuralExclusion": {
+    "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+    "candidateIndex": 16,
+    "reason": "one provisional interval overlaps four expected cuts; two-point refinement cannot split it"
+  },
+  "mainTable": {
+    "cohort": "true-boundaries-visible-in-both-90s-windows",
+    "conclusionBasis": true,
+    "v012": {
+      "populationCount": 61,
+      "reachedCount": 61,
+      "lostOrInvalidCount": 0,
+      "startAbsoluteMeanMs": 17086.90163934426,
+      "startAbsoluteMedianMs": 17465,
+      "endAbsoluteMeanMs": 29361.77049180328,
+      "endAbsoluteMedianMs": 24505,
+      "pooledAbsoluteMeanMs": 23224.33606557377,
+      "pooledAbsoluteMedianMs": 18029,
+      "pooledAbsoluteP75Ms": 33234,
+      "pooledAbsoluteP90Ms": 55822,
+      "bothWithin3000Count": 0,
+      "bothWithin3000Rate": 0,
+      "bothWithin5000Count": 0,
+      "bothWithin5000Rate": 0
+    },
+    "boundaryV001": {
+      "populationCount": 61,
+      "reachedCount": 57,
+      "lostOrInvalidCount": 4,
+      "startAbsoluteMeanMs": 13843.947368421053,
+      "startAbsoluteMedianMs": 13246,
+      "endAbsoluteMeanMs": 27963.175438596492,
+      "endAbsoluteMedianMs": 19469,
+      "pooledAbsoluteMeanMs": 20903.56140350877,
+      "pooledAbsoluteMedianMs": 15757.5,
+      "pooledAbsoluteP75Ms": 29120,
+      "pooledAbsoluteP90Ms": 46720,
+      "bothWithin3000Count": 3,
+      "bothWithin3000Rate": 0.04918032786885246,
+      "bothWithin5000Count": 3,
+      "bothWithin5000Rate": 0.04918032786885246
+    },
+    "comparison": {
+      "improved": 18,
+      "equal": 37,
+      "worse": 2,
+      "lostOrInvalid": 4
+    }
+  },
+  "secondaryTable": {
+    "cohort": "all-v012-reached-observations",
+    "conclusionBasis": false,
+    "fullPopulationCount": 79,
+    "structuralExcludedCount": 8,
+    "assessedCount": 71,
+    "visibleAssessedCount": 61,
+    "invisibleAssessedCount": 10,
+    "v012OnAssessed": {
+      "populationCount": 71,
+      "reachedCount": 71,
+      "lostOrInvalidCount": 0,
+      "startAbsoluteMeanMs": 34217.67605633803,
+      "startAbsoluteMedianMs": 17972,
+      "endAbsoluteMeanMs": 35679.380281690144,
+      "endAbsoluteMedianMs": 25911,
+      "pooledAbsoluteMeanMs": 34948.528169014084,
+      "pooledAbsoluteMedianMs": 20670.5,
+      "pooledAbsoluteP75Ms": 36441,
+      "pooledAbsoluteP90Ms": 87356,
+      "bothWithin3000Count": 0,
+      "bothWithin3000Rate": 0,
+      "bothWithin5000Count": 0,
+      "bothWithin5000Rate": 0
+    },
+    "boundaryV001OnAssessed": {
+      "populationCount": 71,
+      "reachedCount": 67,
+      "lostOrInvalidCount": 4,
+      "startAbsoluteMeanMs": 32481.4776119403,
+      "startAbsoluteMedianMs": 13986,
+      "endAbsoluteMeanMs": 34866.701492537315,
+      "endAbsoluteMedianMs": 25623,
+      "pooledAbsoluteMeanMs": 33674.08955223881,
+      "pooledAbsoluteMedianMs": 18029,
+      "pooledAbsoluteP75Ms": 31985,
+      "pooledAbsoluteP90Ms": 87356,
+      "bothWithin3000Count": 3,
+      "bothWithin3000Rate": 0.04225352112676056,
+      "bothWithin5000Count": 3,
+      "bothWithin5000Rate": 0.04225352112676056
+    },
+    "comparisonOnAssessed": {
+      "improved": 18,
+      "equal": 47,
+      "worse": 2,
+      "lostOrInvalid": 4
+    }
+  },
+  "formatFailureCount": 4,
+  "formatFailureTypeCounts": {
+    "web-generation-incomplete": 3,
+    "nonexistent-boundary-id": 1
+  },
+  "formatFailures": [
+    {
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 2,
+      "runIndex": 2,
+      "type": "web-generation-incomplete",
+      "issues": [
+        "web-generation-incomplete-or-runner-failure"
+      ],
+      "outputPath": "evals/clip_composition/outputs/theme-composition-boundary/20260713-boundary-v001-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-002/run-02/gemini-output.json"
+    },
+    {
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 3,
+      "runIndex": 1,
+      "type": "web-generation-incomplete",
+      "issues": [
+        "web-generation-incomplete-or-runner-failure"
+      ],
+      "outputPath": "evals/clip_composition/outputs/theme-composition-boundary/20260713-boundary-v001-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-003/run-01/gemini-output.json"
+    },
+    {
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 53,
+      "runIndex": 2,
+      "type": "web-generation-incomplete",
+      "issues": [
+        "web-generation-incomplete-or-runner-failure"
+      ],
+      "outputPath": "evals/clip_composition/outputs/theme-composition-boundary/20260713-boundary-v001-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-053/run-02/gemini-output.json"
+    },
+    {
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 52,
+      "runIndex": 2,
+      "type": "nonexistent-boundary-id",
+      "issues": [
+        "missing-start-point:word-031563",
+        "missing-end-point:word-031832"
+      ],
+      "outputPath": "evals/clip_composition/outputs/theme-composition-boundary/20260713-boundary-v001-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-052/run-02/gemini-output.json"
+    }
+  ],
+  "upperBoundComparison": {
+    "compressedSpeechBothWithin3000UpperBoundCount": 16,
+    "totalExpectedCount": 38,
+    "wordBoundaryBestObservedBothWithin3000Count": 1,
+    "successfulExpectedKeys": [
+      "nOEWCNc77MI_multiblock_material_v001:9"
+    ],
+    "exceededCompressedSpeechUpperBound": false,
+    "note": "best observed across non-structurally-excluded candidates/runs; main conclusion still uses the pre-registered 61 observations"
+  },
+  "fourStage": {
+    "definitions": {
+      "match": "all target expected cuts reached and both boundaries within ±1000ms",
+      "gate": "all target expected cuts reached and both boundaries within ±3000ms",
+      "reach": "at least one target expected cut overlaps",
+      "miss": "no target overlap or invalid output"
+    },
+    "v012": {
+      "match": 0,
+      "gate": 0,
+      "reach": 71,
+      "miss": 1
+    },
+    "boundaryV001": {
+      "match": 0,
+      "gate": 3,
+      "reach": 64,
+      "miss": 5
+    }
+  },
+  "candidateMajoritySummary": {
+    "candidateCount": 24,
+    "v012ReachedMajorityCount": 24,
+    "boundaryReachedMajorityCount": 24,
+    "candidates": [
+      {
+        "key": "nOEWCNc77MI_multiblock_material_v001:2",
+        "v012ReachedMajority": true,
+        "boundaryReachedMajority": true,
+        "boundaryStages": {
+          "match": 0,
+          "gate": 0,
+          "reach": 2,
+          "miss": 1
+        }
+      },
+      {
+        "key": "nOEWCNc77MI_multiblock_material_v001:3",
+        "v012ReachedMajority": true,
+        "boundaryReachedMajority": true,
+        "boundaryStages": {
+          "match": 0,
+          "gate": 0,
+          "reach": 2,
+          "miss": 1
+        }
+      },
+      {
+        "key": "nOEWCNc77MI_multiblock_material_v001:17",
+        "v012ReachedMajority": true,
+        "boundaryReachedMajority": true,
+        "boundaryStages": {
+          "match": 0,
+          "gate": 0,
+          "reach": 3,
+          "miss": 0
+        }
+      },
+      {
+        "key": "nOEWCNc77MI_multiblock_material_v001:32",
+        "v012ReachedMajority": true,
+        "boundaryReachedMajority": true,
+        "boundaryStages": {
+          "match": 0,
+          "gate": 0,
+          "reach": 3,
+          "miss": 0
+        }
+      },
+      {
+        "key": "nOEWCNc77MI_multiblock_material_v001:35",
+        "v012ReachedMajority": true,
+        "boundaryReachedMajority": true,
+        "boundaryStages": {
+          "match": 0,
+          "gate": 0,
+          "reach": 3,
+          "miss": 0
+        }
+      },
+      {
+        "key": "nOEWCNc77MI_multiblock_material_v001:37",
+        "v012ReachedMajority": true,
+        "boundaryReachedMajority": true,
+        "boundaryStages": {
+          "match": 0,
+          "gate": 0,
+          "reach": 3,
+          "miss": 0
+        }
+      },
+      {
+        "key": "nOEWCNc77MI_multiblock_material_v001:39",
+        "v012ReachedMajority": true,
+        "boundaryReachedMajority": true,
+        "boundaryStages": {
+          "match": 0,
+          "gate": 0,
+          "reach": 3,
+          "miss": 0
+        }
+      },
+      {
+        "key": "nOEWCNc77MI_multiblock_material_v001:41",
+        "v012ReachedMajority": true,
+        "boundaryReachedMajority": true,
+        "boundaryStages": {
+          "match": 0,
+          "gate": 0,
+          "reach": 3,
+          "miss": 0
+        }
+      },
+      {
+        "key": "nOEWCNc77MI_multiblock_material_v001:46",
+        "v012ReachedMajority": true,
+        "boundaryReachedMajority": true,
+        "boundaryStages": {
+          "match": 0,
+          "gate": 3,
+          "reach": 0,
+          "miss": 0
+        }
+      },
+      {
+        "key": "nOEWCNc77MI_multiblock_material_v001:52",
+        "v012ReachedMajority": true,
+        "boundaryReachedMajority": true,
+        "boundaryStages": {
+          "match": 0,
+          "gate": 0,
+          "reach": 3,
+          "miss": 0
+        }
+      },
+      {
+        "key": "nOEWCNc77MI_multiblock_material_v001:53",
+        "v012ReachedMajority": true,
+        "boundaryReachedMajority": true,
+        "boundaryStages": {
+          "match": 0,
+          "gate": 0,
+          "reach": 2,
+          "miss": 1
+        }
+      },
+      {
+        "key": "nOEWCNc77MI_multiblock_material_v001:87",
+        "v012ReachedMajority": true,
+        "boundaryReachedMajority": true,
+        "boundaryStages": {
+          "match": 0,
+          "gate": 0,
+          "reach": 2,
+          "miss": 1
+        }
+      },
+      {
+        "key": "nOEWCNc77MI_multiblock_material_v001:88",
+        "v012ReachedMajority": true,
+        "boundaryReachedMajority": true,
+        "boundaryStages": {
+          "match": 0,
+          "gate": 0,
+          "reach": 3,
+          "miss": 0
+        }
+      },
+      {
+        "key": "9dtwF5Exu5w_multiblock_material_v001:5",
+        "v012ReachedMajority": true,
+        "boundaryReachedMajority": true,
+        "boundaryStages": {
+          "match": 0,
+          "gate": 0,
+          "reach": 3,
+          "miss": 0
+        }
+      },
+      {
+        "key": "9dtwF5Exu5w_multiblock_material_v001:9",
+        "v012ReachedMajority": true,
+        "boundaryReachedMajority": true,
+        "boundaryStages": {
+          "match": 0,
+          "gate": 0,
+          "reach": 3,
+          "miss": 0
+        }
+      },
+      {
+        "key": "9dtwF5Exu5w_multiblock_material_v001:13",
+        "v012ReachedMajority": true,
+        "boundaryReachedMajority": true,
+        "boundaryStages": {
+          "match": 0,
+          "gate": 0,
+          "reach": 3,
+          "miss": 0
+        }
+      },
+      {
+        "key": "9dtwF5Exu5w_multiblock_material_v001:14",
+        "v012ReachedMajority": true,
+        "boundaryReachedMajority": true,
+        "boundaryStages": {
+          "match": 0,
+          "gate": 0,
+          "reach": 3,
+          "miss": 0
+        }
+      },
+      {
+        "key": "9dtwF5Exu5w_multiblock_material_v001:22",
+        "v012ReachedMajority": true,
+        "boundaryReachedMajority": true,
+        "boundaryStages": {
+          "match": 0,
+          "gate": 0,
+          "reach": 3,
+          "miss": 0
+        }
+      },
+      {
+        "key": "9dtwF5Exu5w_multiblock_material_v001:28",
+        "v012ReachedMajority": true,
+        "boundaryReachedMajority": true,
+        "boundaryStages": {
+          "match": 0,
+          "gate": 0,
+          "reach": 3,
+          "miss": 0
+        }
+      },
+      {
+        "key": "9dtwF5Exu5w_multiblock_material_v001:30",
+        "v012ReachedMajority": true,
+        "boundaryReachedMajority": true,
+        "boundaryStages": {
+          "match": 0,
+          "gate": 0,
+          "reach": 3,
+          "miss": 0
+        }
+      },
+      {
+        "key": "9dtwF5Exu5w_multiblock_material_v001:44",
+        "v012ReachedMajority": true,
+        "boundaryReachedMajority": true,
+        "boundaryStages": {
+          "match": 0,
+          "gate": 0,
+          "reach": 3,
+          "miss": 0
+        }
+      },
+      {
+        "key": "9dtwF5Exu5w_multiblock_material_v001:52",
+        "v012ReachedMajority": true,
+        "boundaryReachedMajority": true,
+        "boundaryStages": {
+          "match": 0,
+          "gate": 0,
+          "reach": 2,
+          "miss": 1
+        }
+      },
+      {
+        "key": "9dtwF5Exu5w_multiblock_material_v001:54",
+        "v012ReachedMajority": true,
+        "boundaryReachedMajority": true,
+        "boundaryStages": {
+          "match": 0,
+          "gate": 0,
+          "reach": 3,
+          "miss": 0
+        }
+      },
+      {
+        "key": "9dtwF5Exu5w_multiblock_material_v001:59",
+        "v012ReachedMajority": true,
+        "boundaryReachedMajority": true,
+        "boundaryStages": {
+          "match": 0,
+          "gate": 0,
+          "reach": 3,
+          "miss": 0
+        }
+      }
+    ]
+  },
+  "byFixture": [
+    {
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "observationCount": 38,
+      "validReachedCount": 35,
+      "bothWithin3000Count": 3,
+      "comparison": {
+        "improved": 17,
+        "equal": 18,
+        "worse": 0,
+        "lostOrInvalid": 3
+      }
+    },
+    {
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "observationCount": 33,
+      "validReachedCount": 32,
+      "bothWithin3000Count": 0,
+      "comparison": {
+        "improved": 1,
+        "equal": 29,
+        "worse": 2,
+        "lostOrInvalid": 1
+      }
+    }
+  ],
+  "adoptionDecision": {
+    "boundaryImprovementCriterionMet": true,
+    "candidateMajorityReachMaintained": true,
+    "status": "passes-as-next-stage-candidate-not-generalized-standard",
+    "reason": "The pre-registered 61-observation criteria pass, but all three ±3s observations are three runs of one B-material expected cut; unique coverage is 1/38 and the second fixture has zero."
+  },
+  "runStages": [
+    {
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 2,
+      "runIndex": 1,
+      "v012Stage": "reach",
+      "boundaryStage": "reach",
+      "boundaryAssessments": [
+        {
+          "expectedIndex": 1,
+          "reached": true,
+          "startDeltaMs": 0,
+          "endDeltaMs": 29554
+        }
+      ],
+      "outputStatus": "valid"
+    },
+    {
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 2,
+      "runIndex": 2,
+      "v012Stage": "reach",
+      "boundaryStage": "miss",
+      "boundaryAssessments": [],
+      "outputStatus": "format-invalid"
+    },
+    {
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 2,
+      "runIndex": 3,
+      "v012Stage": "reach",
+      "boundaryStage": "reach",
+      "boundaryAssessments": [
+        {
+          "expectedIndex": 1,
+          "reached": true,
+          "startDeltaMs": 0,
+          "endDeltaMs": 34715
+        }
+      ],
+      "outputStatus": "valid"
+    },
+    {
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 3,
+      "runIndex": 1,
+      "v012Stage": "reach",
+      "boundaryStage": "miss",
+      "boundaryAssessments": [],
+      "outputStatus": "format-invalid"
+    },
+    {
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 3,
+      "runIndex": 2,
+      "v012Stage": "reach",
+      "boundaryStage": "reach",
+      "boundaryAssessments": [
+        {
+          "expectedIndex": 2,
+          "reached": true,
+          "startDeltaMs": -46720,
+          "endDeltaMs": 4682
+        }
+      ],
+      "outputStatus": "valid"
+    },
+    {
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 3,
+      "runIndex": 3,
+      "v012Stage": "reach",
+      "boundaryStage": "reach",
+      "boundaryAssessments": [
+        {
+          "expectedIndex": 2,
+          "reached": true,
+          "startDeltaMs": -28496,
+          "endDeltaMs": 4682
+        }
+      ],
+      "outputStatus": "valid"
+    },
+    {
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 17,
+      "runIndex": 1,
+      "v012Stage": "reach",
+      "boundaryStage": "reach",
+      "boundaryAssessments": [
+        {
+          "expectedIndex": 3,
+          "reached": true,
+          "startDeltaMs": -31985,
+          "endDeltaMs": 24505
+        }
+      ],
+      "outputStatus": "valid"
+    },
+    {
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 17,
+      "runIndex": 2,
+      "v012Stage": "reach",
+      "boundaryStage": "reach",
+      "boundaryAssessments": [
+        {
+          "expectedIndex": 3,
+          "reached": true,
+          "startDeltaMs": -31985,
+          "endDeltaMs": 24505
+        }
+      ],
+      "outputStatus": "valid"
+    },
+    {
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 17,
+      "runIndex": 3,
+      "v012Stage": "reach",
+      "boundaryStage": "reach",
+      "boundaryAssessments": [
+        {
+          "expectedIndex": 3,
+          "reached": true,
+          "startDeltaMs": -31985,
+          "endDeltaMs": 24505
+        }
+      ],
+      "outputStatus": "valid"
+    },
+    {
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 32,
+      "runIndex": 1,
+      "v012Stage": "reach",
+      "boundaryStage": "reach",
+      "boundaryAssessments": [
+        {
+          "expectedIndex": 4,
+          "reached": true,
+          "startDeltaMs": 0,
+          "endDeltaMs": 41466
+        }
+      ],
+      "outputStatus": "valid"
+    },
+    {
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 32,
+      "runIndex": 2,
+      "v012Stage": "reach",
+      "boundaryStage": "reach",
+      "boundaryAssessments": [
+        {
+          "expectedIndex": 4,
+          "reached": true,
+          "startDeltaMs": 0,
+          "endDeltaMs": 41466
+        }
+      ],
+      "outputStatus": "valid"
+    },
+    {
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 32,
+      "runIndex": 3,
+      "v012Stage": "reach",
+      "boundaryStage": "reach",
+      "boundaryAssessments": [
+        {
+          "expectedIndex": 4,
+          "reached": true,
+          "startDeltaMs": 0,
+          "endDeltaMs": 41466
+        }
+      ],
+      "outputStatus": "valid"
+    },
+    {
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 35,
+      "runIndex": 1,
+      "v012Stage": "reach",
+      "boundaryStage": "reach",
+      "boundaryAssessments": [
+        {
+          "expectedIndex": 5,
+          "reached": true,
+          "startDeltaMs": -5904,
+          "endDeltaMs": 5144
+        }
+      ],
+      "outputStatus": "valid"
+    },
+    {
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 35,
+      "runIndex": 2,
+      "v012Stage": "reach",
+      "boundaryStage": "reach",
+      "boundaryAssessments": [
+        {
+          "expectedIndex": 5,
+          "reached": true,
+          "startDeltaMs": -5904,
+          "endDeltaMs": 5144
+        }
+      ],
+      "outputStatus": "valid"
+    },
+    {
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 35,
+      "runIndex": 3,
+      "v012Stage": "reach",
+      "boundaryStage": "reach",
+      "boundaryAssessments": [
+        {
+          "expectedIndex": 5,
+          "reached": true,
+          "startDeltaMs": -5904,
+          "endDeltaMs": 5144
+        }
+      ],
+      "outputStatus": "valid"
+    },
+    {
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 37,
+      "runIndex": 1,
+      "v012Stage": "reach",
+      "boundaryStage": "reach",
+      "boundaryAssessments": [
+        {
+          "expectedIndex": 6,
+          "reached": true,
+          "startDeltaMs": -220,
+          "endDeltaMs": 19469
+        }
+      ],
+      "outputStatus": "valid"
+    },
+    {
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 37,
+      "runIndex": 2,
+      "v012Stage": "reach",
+      "boundaryStage": "reach",
+      "boundaryAssessments": [
+        {
+          "expectedIndex": 6,
+          "reached": true,
+          "startDeltaMs": -220,
+          "endDeltaMs": 19469
+        }
+      ],
+      "outputStatus": "valid"
+    },
+    {
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 37,
+      "runIndex": 3,
+      "v012Stage": "reach",
+      "boundaryStage": "reach",
+      "boundaryAssessments": [
+        {
+          "expectedIndex": 6,
+          "reached": true,
+          "startDeltaMs": -220,
+          "endDeltaMs": 19469
+        }
+      ],
+      "outputStatus": "valid"
+    },
+    {
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 39,
+      "runIndex": 1,
+      "v012Stage": "reach",
+      "boundaryStage": "reach",
+      "boundaryAssessments": [
+        {
+          "expectedIndex": 7,
+          "reached": true,
+          "startDeltaMs": -30832,
+          "endDeltaMs": 3521
+        }
+      ],
+      "outputStatus": "valid"
+    },
+    {
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 39,
+      "runIndex": 2,
+      "v012Stage": "reach",
+      "boundaryStage": "reach",
+      "boundaryAssessments": [
+        {
+          "expectedIndex": 7,
+          "reached": true,
+          "startDeltaMs": -26650,
+          "endDeltaMs": 3521
+        }
+      ],
+      "outputStatus": "valid"
+    },
+    {
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 39,
+      "runIndex": 3,
+      "v012Stage": "reach",
+      "boundaryStage": "reach",
+      "boundaryAssessments": [
+        {
+          "expectedIndex": 7,
+          "reached": true,
+          "startDeltaMs": -26650,
+          "endDeltaMs": 3521
+        }
+      ],
+      "outputStatus": "valid"
+    },
+    {
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 41,
+      "runIndex": 1,
+      "v012Stage": "reach",
+      "boundaryStage": "reach",
+      "boundaryAssessments": [
+        {
+          "expectedIndex": 8,
+          "reached": true,
+          "startDeltaMs": 4893,
+          "endDeltaMs": 29609
+        }
+      ],
+      "outputStatus": "valid"
+    },
+    {
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 41,
+      "runIndex": 2,
+      "v012Stage": "reach",
+      "boundaryStage": "reach",
+      "boundaryAssessments": [
+        {
+          "expectedIndex": 8,
+          "reached": true,
+          "startDeltaMs": 400,
+          "endDeltaMs": 29609
+        }
+      ],
+      "outputStatus": "valid"
+    },
+    {
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 41,
+      "runIndex": 3,
+      "v012Stage": "reach",
+      "boundaryStage": "reach",
+      "boundaryAssessments": [
+        {
+          "expectedIndex": 8,
+          "reached": true,
+          "startDeltaMs": 400,
+          "endDeltaMs": 29609
+        }
+      ],
+      "outputStatus": "valid"
+    },
+    {
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 46,
+      "runIndex": 1,
+      "v012Stage": "reach",
+      "boundaryStage": "gate",
+      "boundaryAssessments": [
+        {
+          "expectedIndex": 9,
+          "reached": true,
+          "startDeltaMs": -500,
+          "endDeltaMs": 2480
+        }
+      ],
+      "outputStatus": "valid"
+    },
+    {
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 46,
+      "runIndex": 2,
+      "v012Stage": "reach",
+      "boundaryStage": "gate",
+      "boundaryAssessments": [
+        {
+          "expectedIndex": 9,
+          "reached": true,
+          "startDeltaMs": -500,
+          "endDeltaMs": 3000
+        }
+      ],
+      "outputStatus": "valid"
+    },
+    {
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 46,
+      "runIndex": 3,
+      "v012Stage": "reach",
+      "boundaryStage": "gate",
+      "boundaryAssessments": [
+        {
+          "expectedIndex": 9,
+          "reached": true,
+          "startDeltaMs": -500,
+          "endDeltaMs": 3000
+        }
+      ],
+      "outputStatus": "valid"
+    },
+    {
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 52,
+      "runIndex": 1,
+      "v012Stage": "reach",
+      "boundaryStage": "reach",
+      "boundaryAssessments": [
+        {
+          "expectedIndex": 11,
+          "reached": true,
+          "startDeltaMs": -12508,
+          "endDeltaMs": 0
+        }
+      ],
+      "outputStatus": "valid"
+    },
+    {
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 52,
+      "runIndex": 2,
+      "v012Stage": "reach",
+      "boundaryStage": "reach",
+      "boundaryAssessments": [
+        {
+          "expectedIndex": 11,
+          "reached": true,
+          "startDeltaMs": -12508,
+          "endDeltaMs": 0
+        }
+      ],
+      "outputStatus": "valid"
+    },
+    {
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 52,
+      "runIndex": 3,
+      "v012Stage": "reach",
+      "boundaryStage": "reach",
+      "boundaryAssessments": [
+        {
+          "expectedIndex": 11,
+          "reached": true,
+          "startDeltaMs": -12508,
+          "endDeltaMs": 0
+        }
+      ],
+      "outputStatus": "valid"
+    },
+    {
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 53,
+      "runIndex": 1,
+      "v012Stage": "reach",
+      "boundaryStage": "reach",
+      "boundaryAssessments": [
+        {
+          "expectedIndex": 12,
+          "reached": true,
+          "startDeltaMs": -23988,
+          "endDeltaMs": 60318
+        }
+      ],
+      "outputStatus": "valid"
+    },
+    {
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 53,
+      "runIndex": 2,
+      "v012Stage": "reach",
+      "boundaryStage": "miss",
+      "boundaryAssessments": [],
+      "outputStatus": "format-invalid"
+    },
+    {
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 53,
+      "runIndex": 3,
+      "v012Stage": "reach",
+      "boundaryStage": "reach",
+      "boundaryAssessments": [
+        {
+          "expectedIndex": 12,
+          "reached": true,
+          "startDeltaMs": -23988,
+          "endDeltaMs": 43292
+        }
+      ],
+      "outputStatus": "valid"
+    },
+    {
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 87,
+      "runIndex": 1,
+      "v012Stage": "reach",
+      "boundaryStage": "reach",
+      "boundaryAssessments": [
+        {
+          "expectedIndex": 13,
+          "reached": true,
+          "startDeltaMs": -21489,
+          "endDeltaMs": -25623
+        }
+      ],
+      "outputStatus": "valid"
+    },
+    {
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 87,
+      "runIndex": 2,
+      "v012Stage": "miss",
+      "boundaryStage": "miss",
+      "boundaryAssessments": [],
+      "outputStatus": "v012-not-runnable"
+    },
+    {
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 87,
+      "runIndex": 3,
+      "v012Stage": "reach",
+      "boundaryStage": "reach",
+      "boundaryAssessments": [
+        {
+          "expectedIndex": 13,
+          "reached": true,
+          "startDeltaMs": -21489,
+          "endDeltaMs": -25623
+        }
+      ],
+      "outputStatus": "valid"
+    },
+    {
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 88,
+      "runIndex": 1,
+      "v012Stage": "reach",
+      "boundaryStage": "reach",
+      "boundaryAssessments": [
+        {
+          "expectedIndex": 13,
+          "reached": true,
+          "startDeltaMs": 9732,
+          "endDeltaMs": 18029
+        }
+      ],
+      "outputStatus": "valid"
+    },
+    {
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 88,
+      "runIndex": 2,
+      "v012Stage": "reach",
+      "boundaryStage": "reach",
+      "boundaryAssessments": [
+        {
+          "expectedIndex": 13,
+          "reached": true,
+          "startDeltaMs": 9732,
+          "endDeltaMs": 18029
+        }
+      ],
+      "outputStatus": "valid"
+    },
+    {
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 88,
+      "runIndex": 3,
+      "v012Stage": "reach",
+      "boundaryStage": "reach",
+      "boundaryAssessments": [
+        {
+          "expectedIndex": 13,
+          "reached": true,
+          "startDeltaMs": 9732,
+          "endDeltaMs": 18029
+        }
+      ],
+      "outputStatus": "valid"
+    },
+    {
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 5,
+      "runIndex": 1,
+      "v012Stage": "reach",
+      "boundaryStage": "reach",
+      "boundaryAssessments": [
+        {
+          "expectedIndex": 6,
+          "reached": true,
+          "startDeltaMs": -137085,
+          "endDeltaMs": 62808
+        }
+      ],
+      "outputStatus": "valid"
+    },
+    {
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 5,
+      "runIndex": 2,
+      "v012Stage": "reach",
+      "boundaryStage": "reach",
+      "boundaryAssessments": [
+        {
+          "expectedIndex": 6,
+          "reached": true,
+          "startDeltaMs": -137085,
+          "endDeltaMs": 62808
+        }
+      ],
+      "outputStatus": "valid"
+    },
+    {
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 5,
+      "runIndex": 3,
+      "v012Stage": "reach",
+      "boundaryStage": "reach",
+      "boundaryAssessments": [
+        {
+          "expectedIndex": 6,
+          "reached": true,
+          "startDeltaMs": -137085,
+          "endDeltaMs": 62808
+        }
+      ],
+      "outputStatus": "valid"
+    },
+    {
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 9,
+      "runIndex": 1,
+      "v012Stage": "reach",
+      "boundaryStage": "reach",
+      "boundaryAssessments": [
+        {
+          "expectedIndex": 7,
+          "reached": true,
+          "startDeltaMs": -2761,
+          "endDeltaMs": 137891
+        }
+      ],
+      "outputStatus": "valid"
+    },
+    {
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 9,
+      "runIndex": 2,
+      "v012Stage": "reach",
+      "boundaryStage": "reach",
+      "boundaryAssessments": [
+        {
+          "expectedIndex": 7,
+          "reached": true,
+          "startDeltaMs": -2761,
+          "endDeltaMs": 137891
+        }
+      ],
+      "outputStatus": "valid"
+    },
+    {
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 9,
+      "runIndex": 3,
+      "v012Stage": "reach",
+      "boundaryStage": "reach",
+      "boundaryAssessments": [
+        {
+          "expectedIndex": 7,
+          "reached": true,
+          "startDeltaMs": -2761,
+          "endDeltaMs": 137891
+        }
+      ],
+      "outputStatus": "valid"
+    },
+    {
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 13,
+      "runIndex": 1,
+      "v012Stage": "reach",
+      "boundaryStage": "reach",
+      "boundaryAssessments": [
+        {
+          "expectedIndex": 8,
+          "reached": true,
+          "startDeltaMs": -135681,
+          "endDeltaMs": 26190
+        }
+      ],
+      "outputStatus": "valid"
+    },
+    {
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 13,
+      "runIndex": 2,
+      "v012Stage": "reach",
+      "boundaryStage": "reach",
+      "boundaryAssessments": [
+        {
+          "expectedIndex": 8,
+          "reached": true,
+          "startDeltaMs": -135681,
+          "endDeltaMs": 26190
+        }
+      ],
+      "outputStatus": "valid"
+    },
+    {
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 13,
+      "runIndex": 3,
+      "v012Stage": "reach",
+      "boundaryStage": "reach",
+      "boundaryAssessments": [
+        {
+          "expectedIndex": 8,
+          "reached": true,
+          "startDeltaMs": -135681,
+          "endDeltaMs": 26190
+        }
+      ],
+      "outputStatus": "valid"
+    },
+    {
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 14,
+      "runIndex": 1,
+      "v012Stage": "reach",
+      "boundaryStage": "reach",
+      "boundaryAssessments": [
+        {
+          "expectedIndex": 9,
+          "reached": true,
+          "startDeltaMs": -17465,
+          "endDeltaMs": 27032
+        }
+      ],
+      "outputStatus": "valid"
+    },
+    {
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 14,
+      "runIndex": 2,
+      "v012Stage": "reach",
+      "boundaryStage": "reach",
+      "boundaryAssessments": [
+        {
+          "expectedIndex": 9,
+          "reached": true,
+          "startDeltaMs": -17465,
+          "endDeltaMs": 36441
+        }
+      ],
+      "outputStatus": "valid"
+    },
+    {
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 14,
+      "runIndex": 3,
+      "v012Stage": "reach",
+      "boundaryStage": "reach",
+      "boundaryAssessments": [
+        {
+          "expectedIndex": 9,
+          "reached": true,
+          "startDeltaMs": -17465,
+          "endDeltaMs": 36441
+        }
+      ],
+      "outputStatus": "valid"
+    },
+    {
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 22,
+      "runIndex": 1,
+      "v012Stage": "reach",
+      "boundaryStage": "reach",
+      "boundaryAssessments": [
+        {
+          "expectedIndex": 14,
+          "reached": true,
+          "startDeltaMs": -13986,
+          "endDeltaMs": 7463
+        }
+      ],
+      "outputStatus": "valid"
+    },
+    {
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 22,
+      "runIndex": 2,
+      "v012Stage": "reach",
+      "boundaryStage": "reach",
+      "boundaryAssessments": [
+        {
+          "expectedIndex": 14,
+          "reached": true,
+          "startDeltaMs": -13246,
+          "endDeltaMs": 7463
+        }
+      ],
+      "outputStatus": "valid"
+    },
+    {
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 22,
+      "runIndex": 3,
+      "v012Stage": "reach",
+      "boundaryStage": "reach",
+      "boundaryAssessments": [
+        {
+          "expectedIndex": 14,
+          "reached": true,
+          "startDeltaMs": -13246,
+          "endDeltaMs": 7463
+        }
+      ],
+      "outputStatus": "valid"
+    },
+    {
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 28,
+      "runIndex": 1,
+      "v012Stage": "reach",
+      "boundaryStage": "reach",
+      "boundaryAssessments": [
+        {
+          "expectedIndex": 15,
+          "reached": true,
+          "startDeltaMs": -7405,
+          "endDeltaMs": 61501
+        }
+      ],
+      "outputStatus": "valid"
+    },
+    {
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 28,
+      "runIndex": 2,
+      "v012Stage": "reach",
+      "boundaryStage": "reach",
+      "boundaryAssessments": [
+        {
+          "expectedIndex": 15,
+          "reached": true,
+          "startDeltaMs": -7405,
+          "endDeltaMs": 61501
+        }
+      ],
+      "outputStatus": "valid"
+    },
+    {
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 28,
+      "runIndex": 3,
+      "v012Stage": "reach",
+      "boundaryStage": "reach",
+      "boundaryAssessments": [
+        {
+          "expectedIndex": 15,
+          "reached": true,
+          "startDeltaMs": -560573,
+          "endDeltaMs": 61501
+        }
+      ],
+      "outputStatus": "valid"
+    },
+    {
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 30,
+      "runIndex": 1,
+      "v012Stage": "reach",
+      "boundaryStage": "reach",
+      "boundaryAssessments": [
+        {
+          "expectedIndex": 16,
+          "reached": true,
+          "startDeltaMs": -1140,
+          "endDeltaMs": 12908
+        }
+      ],
+      "outputStatus": "valid"
+    },
+    {
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 30,
+      "runIndex": 2,
+      "v012Stage": "reach",
+      "boundaryStage": "reach",
+      "boundaryAssessments": [
+        {
+          "expectedIndex": 16,
+          "reached": true,
+          "startDeltaMs": -1140,
+          "endDeltaMs": 12908
+        }
+      ],
+      "outputStatus": "valid"
+    },
+    {
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 30,
+      "runIndex": 3,
+      "v012Stage": "reach",
+      "boundaryStage": "reach",
+      "boundaryAssessments": [
+        {
+          "expectedIndex": 16,
+          "reached": true,
+          "startDeltaMs": -1140,
+          "endDeltaMs": 12908
+        }
+      ],
+      "outputStatus": "valid"
+    },
+    {
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 44,
+      "runIndex": 1,
+      "v012Stage": "reach",
+      "boundaryStage": "reach",
+      "boundaryAssessments": [
+        {
+          "expectedIndex": 20,
+          "reached": true,
+          "startDeltaMs": -23888,
+          "endDeltaMs": 87356
+        }
+      ],
+      "outputStatus": "valid"
+    },
+    {
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 44,
+      "runIndex": 2,
+      "v012Stage": "reach",
+      "boundaryStage": "reach",
+      "boundaryAssessments": [
+        {
+          "expectedIndex": 20,
+          "reached": true,
+          "startDeltaMs": -23888,
+          "endDeltaMs": 87356
+        }
+      ],
+      "outputStatus": "valid"
+    },
+    {
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 44,
+      "runIndex": 3,
+      "v012Stage": "reach",
+      "boundaryStage": "reach",
+      "boundaryAssessments": [
+        {
+          "expectedIndex": 20,
+          "reached": true,
+          "startDeltaMs": -23888,
+          "endDeltaMs": 87356
+        }
+      ],
+      "outputStatus": "valid"
+    },
+    {
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 52,
+      "runIndex": 1,
+      "v012Stage": "reach",
+      "boundaryStage": "reach",
+      "boundaryAssessments": [
+        {
+          "expectedIndex": 23,
+          "reached": true,
+          "startDeltaMs": -17972,
+          "endDeltaMs": 88898
+        }
+      ],
+      "outputStatus": "valid"
+    },
+    {
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 52,
+      "runIndex": 2,
+      "v012Stage": "reach",
+      "boundaryStage": "miss",
+      "boundaryAssessments": [],
+      "outputStatus": "format-invalid"
+    },
+    {
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 52,
+      "runIndex": 3,
+      "v012Stage": "reach",
+      "boundaryStage": "reach",
+      "boundaryAssessments": [
+        {
+          "expectedIndex": 23,
+          "reached": true,
+          "startDeltaMs": -17972,
+          "endDeltaMs": 88898
+        }
+      ],
+      "outputStatus": "valid"
+    },
+    {
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 54,
+      "runIndex": 1,
+      "v012Stage": "reach",
+      "boundaryStage": "reach",
+      "boundaryAssessments": [
+        {
+          "expectedIndex": 24,
+          "reached": true,
+          "startDeltaMs": -14050,
+          "endDeltaMs": 13448
+        }
+      ],
+      "outputStatus": "valid"
+    },
+    {
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 54,
+      "runIndex": 2,
+      "v012Stage": "reach",
+      "boundaryStage": "reach",
+      "boundaryAssessments": [
+        {
+          "expectedIndex": 24,
+          "reached": true,
+          "startDeltaMs": -14050,
+          "endDeltaMs": 13448
+        }
+      ],
+      "outputStatus": "valid"
+    },
+    {
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 54,
+      "runIndex": 3,
+      "v012Stage": "reach",
+      "boundaryStage": "reach",
+      "boundaryAssessments": [
+        {
+          "expectedIndex": 24,
+          "reached": true,
+          "startDeltaMs": -14050,
+          "endDeltaMs": 13448
+        }
+      ],
+      "outputStatus": "valid"
+    },
+    {
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 59,
+      "runIndex": 1,
+      "v012Stage": "reach",
+      "boundaryStage": "reach",
+      "boundaryAssessments": [
+        {
+          "expectedIndex": 25,
+          "reached": true,
+          "startDeltaMs": -29120,
+          "endDeltaMs": 55822
+        }
+      ],
+      "outputStatus": "valid"
+    },
+    {
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 59,
+      "runIndex": 2,
+      "v012Stage": "reach",
+      "boundaryStage": "reach",
+      "boundaryAssessments": [
+        {
+          "expectedIndex": 25,
+          "reached": true,
+          "startDeltaMs": -29120,
+          "endDeltaMs": 55822
+        }
+      ],
+      "outputStatus": "valid"
+    },
+    {
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 59,
+      "runIndex": 3,
+      "v012Stage": "reach",
+      "boundaryStage": "reach",
+      "boundaryAssessments": [
+        {
+          "expectedIndex": 25,
+          "reached": true,
+          "startDeltaMs": -31462,
+          "endDeltaMs": 55822
+        }
+      ],
+      "outputStatus": "valid"
+    }
+  ],
+  "observations": [
+    {
+      "key": "nOEWCNc77MI_multiblock_material_v001:2:1:1",
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 2,
+      "runIndex": 1,
+      "expectedIndex": 1,
+      "inputVisible90s": true,
+      "structuralExcluded": false,
+      "v012": {
+        "status": "reached",
+        "startDeltaMs": -19866,
+        "endDeltaMs": 34715,
+        "cut": {
+          "sourceStartMs": 240202,
+          "sourceEndMs": 298984,
+          "reason": "開始根拠: マリンが今日のごろねのスタイルを『鬼滅の刃』の「ねずこスタイル」と紹介し、「うんだうんだ」という反応が始まる発話から選択したためです。終了根拠: ねずこ風のころねに対するマリンの炭治郎のなりきり掛け合いのやり取りが一通り収束し、音量確認などのメタ的な話題に移る直前の発話まで含めるためです。除外判断: 続く発話21以降は、鬼滅の刃の用語の言い間違いから通常のゲーム内作業やリフォームの紹介といった別の話題へ完全に移っているため除外しました。",
+          "usedSpeechIds": [
+            "19-20"
+          ]
+        }
+      },
+      "boundary": {
+        "status": "reached",
+        "startDeltaMs": 0,
+        "endDeltaMs": 29554,
+        "cut": {
+          "sourceStartMs": 260068,
+          "sourceEndMs": 293823,
+          "startBoundaryPointId": "word-000825:start",
+          "endBoundaryPointId": "word-000945:end",
+          "startReason": "マリンが「ちょっとコーネがね今日ねずこスタイルなんで」と、本区間の主軸となる話題を切り出し前提を提示する発言の開始点から選択しました。",
+          "endReason": "ねずこ風のころねに対するなりきり掛け合いのやり取りと、「音量どういい感じ」といった音量確認の一連の会話が収束する最後の言葉までを含めるため選択しました。",
+          "provisionalSourceStartMs": 240202,
+          "provisionalSourceEndMs": 298984
+        },
+        "selectedCutIndex": 1,
+        "overlapMs": 4201
+      }
+    },
+    {
+      "key": "nOEWCNc77MI_multiblock_material_v001:2:2:1",
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 2,
+      "runIndex": 2,
+      "expectedIndex": 1,
+      "inputVisible90s": true,
+      "structuralExcluded": false,
+      "v012": {
+        "status": "reached",
+        "startDeltaMs": -19866,
+        "endDeltaMs": 34715,
+        "cut": {
+          "sourceStartMs": 240202,
+          "sourceEndMs": 298984,
+          "reason": "開始根拠: マリンが、ころねが今日「ねずこスタイル」であることを紹介し、ころねが「うんうんうんうん」とねずこの真似を始める発話から該当テーマが開始されるためです。終了根拠: ねずこの真似をするころねに対し、マリンが炭治郎になりきって会話の掛け合いを成立させ、音量の確認をして話がひと段落する発話までを含めるためです。除外判断: 続く発話21以降は、ゲームの作業や別の雑談（鬼の柱や上限のサメなど）へ話題が移行し、ねずこと炭治郎のなりきり掛け合いの芯から外れるため除外しました。",
+          "usedSpeechIds": [
+            "19-20"
+          ]
+        }
+      },
+      "boundary": {
+        "status": "format-invalid",
+        "issues": [
+          "web-generation-incomplete-or-runner-failure"
+        ]
+      }
+    },
+    {
+      "key": "nOEWCNc77MI_multiblock_material_v001:2:3:1",
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 2,
+      "runIndex": 3,
+      "expectedIndex": 1,
+      "inputVisible90s": true,
+      "structuralExcluded": false,
+      "v012": {
+        "status": "reached",
+        "startDeltaMs": -19866,
+        "endDeltaMs": 34715,
+        "cut": {
+          "sourceStartMs": 240202,
+          "sourceEndMs": 298984,
+          "reason": "開始根拠: マリンがころねの様子を「今日ねずこスタイルなんで」と紹介して掛け合いの状況説明を始める発話から採用するためです。終了根拠: マリンが炭治郎になりきって「ねずこ、お兄ちゃんにはわかる」と会話し、音量の確認など視聴者への配慮を挟みつつねずこトークの結論が一区切りする発話まで含めるためです。除外判断: 続く発話以降は鬼滅の刃に関連した単語を探しつつも別作業の話題や画面のイジりへと移るため除外しました。",
+          "usedSpeechIds": [
+            "19-20"
+          ]
+        }
+      },
+      "boundary": {
+        "status": "reached",
+        "startDeltaMs": 0,
+        "endDeltaMs": 34715,
+        "cut": {
+          "sourceStartMs": 260068,
+          "sourceEndMs": 298984,
+          "startBoundaryPointId": "word-000825:start",
+          "endBoundaryPointId": "word-000973:end",
+          "startReason": "マリンが「ちょっとコーネがね今日ねずこスタイルなんで」と紹介して掛け合いの前提説明を始める発話の開始点として、word-000825（コ）を選定しました。",
+          "endReason": "炭治郎になりきって会話を繰り広げ、音量確認の後に「ねずこまあねそのそれはあれじゃん鬼の鬼の鬼柱なんだっけ鬼の」とトークが一区切りする最後の言葉として、word-000973（の）を選定しました。",
+          "provisionalSourceStartMs": 240202,
+          "provisionalSourceEndMs": 298984
+        },
+        "selectedCutIndex": 1,
+        "overlapMs": 4201
+      }
+    },
+    {
+      "key": "nOEWCNc77MI_multiblock_material_v001:3:1:2",
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 3,
+      "runIndex": 1,
+      "expectedIndex": 2,
+      "inputVisible90s": true,
+      "structuralExcluded": false,
+      "v012": {
+        "status": "reached",
+        "startDeltaMs": -46720,
+        "endDeltaMs": -1958,
+        "cut": {
+          "sourceStartMs": 278759,
+          "sourceEndMs": 328762,
+          "reason": "開始根拠: テーマである「鬼の鬼柱」という言い間違えのフリとなる、ねずこスタイルについての雑談が始まる発話から選ぶためです。終了根拠: 言い間違えの応酬から我に返り、お腹が空いていることや作業の遅れに気づいて「体を動かすか」と作業を始めようとする展開が収束する発話の終わりまで含めるためです。除外判断: 続く発話22は「いきなりすんごい冷めてる？」と文脈のトーンが変わり、切り抜きのオチの余韻としては別の流れになるため除外しました。",
+          "usedSpeechIds": [
+            "20-21"
+          ]
+        }
+      },
+      "boundary": {
+        "status": "format-invalid",
+        "issues": [
+          "web-generation-incomplete-or-runner-failure"
+        ]
+      }
+    },
+    {
+      "key": "nOEWCNc77MI_multiblock_material_v001:3:2:2",
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 3,
+      "runIndex": 2,
+      "expectedIndex": 2,
+      "inputVisible90s": true,
+      "structuralExcluded": false,
+      "v012": {
+        "status": "reached",
+        "startDeltaMs": -46720,
+        "endDeltaMs": 4682,
+        "cut": {
+          "sourceStartMs": 278759,
+          "sourceEndMs": 335402,
+          "reason": "開始根拠: テーマのフリとなる「ねずこスタイル」のトークと「鬼の鬼柱」と言い間違え始める流れが含まれる発話から開始するためです。終了根拠: 言い間違えから我に返って作業を始めようとするやり取りと、それに対する冷めた反応でオチが収束する発話まで含めるためです。除外判断: それ以降の発話は島から出発する具体的なゲーム進行の話題に移るため除外します。",
+          "usedSpeechIds": [
+            "20-22"
+          ]
+        }
+      },
+      "boundary": {
+        "status": "reached",
+        "startDeltaMs": -46720,
+        "endDeltaMs": 4682,
+        "cut": {
+          "sourceStartMs": 278759,
+          "sourceEndMs": 335402,
+          "startBoundaryPointId": "word-000869:start",
+          "endBoundaryPointId": "word-001154:end",
+          "startReason": "テーマのフリとなる「ねずこ」のやり取りが本格的に開始する「ねずこうんわかるよ」の発話頭を選定しました。",
+          "endReason": "ひよこが立ち並ぶ絵面に関する一連のトークが「冷めてる？」というリアクションでオチとして収束する発話末を選定しました。",
+          "provisionalSourceStartMs": 278759,
+          "provisionalSourceEndMs": 335402
+        },
+        "selectedCutIndex": 1,
+        "overlapMs": 5241
+      }
+    },
+    {
+      "key": "nOEWCNc77MI_multiblock_material_v001:3:3:2",
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 3,
+      "runIndex": 3,
+      "expectedIndex": 2,
+      "inputVisible90s": true,
+      "structuralExcluded": false,
+      "v012": {
+        "status": "reached",
+        "startDeltaMs": -46720,
+        "endDeltaMs": 4682,
+        "cut": {
+          "sourceStartMs": 278759,
+          "sourceEndMs": 335402,
+          "reason": "開始根拠: テーマである「鬼の鬼柱」という言い間違えのフリが始まる発話から選択しているためです。終了根拠: 言い間違えで笑い合った後、空腹や作業の遅れに気づいて「作業しよう」という結論になり、相手の冷めた反応で一連の展開が収束する瞬間まで含めるためです。除外判断: それ以降の発話は島から出るゲームの進行やリフォームの紹介といった別の話題へ移行するため除外しています。",
+          "usedSpeechIds": [
+            "20-22"
+          ]
+        }
+      },
+      "boundary": {
+        "status": "reached",
+        "startDeltaMs": -28496,
+        "endDeltaMs": 4682,
+        "cut": {
+          "sourceStartMs": 296983,
+          "sourceEndMs": 335402,
+          "startBoundaryPointId": "word-000961:start",
+          "endBoundaryPointId": "word-001154:end",
+          "startReason": "テーマである言い間違えのフリが「鬼の鬼の鬼柱」という発話から明確に始まっているため選択しました。",
+          "endReason": "言い間違えのくだりで盛り上がった後、「いきなりすんごい冷めてる?」というリアクションで一連の展開が綺麗に収束しているため選択しました。",
+          "provisionalSourceStartMs": 278759,
+          "provisionalSourceEndMs": 335402
+        },
+        "selectedCutIndex": 1,
+        "overlapMs": 5241
+      }
+    },
+    {
+      "key": "nOEWCNc77MI_multiblock_material_v001:17:1:3",
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 17,
+      "runIndex": 1,
+      "expectedIndex": 3,
+      "inputVisible90s": true,
+      "structuralExcluded": false,
+      "v012": {
+        "status": "reached",
+        "startDeltaMs": -31985,
+        "endDeltaMs": 24505,
+        "cut": {
+          "sourceStartMs": 1021002,
+          "sourceEndMs": 1079852,
+          "reason": "開始根拠: 危機的状況のイノシシに対抗するため、早く殺せるかという戦闘のフリから発話が始まるためです。終了根拠: イノシシが3匹いることが発覚して慌て、1人30本ずつ矢を持つという作戦・掛け合いの結論が収束する発話まで含めるためです。除外判断: 候補範囲外の前後（speechId: 119以前および128以降）は、矢の作成準備や別行動の雑談でありイノシシ3匹に焦る中心的な掛け合いから外れるため除外します。",
+          "usedSpeechIds": [
+            "120-127"
+          ]
+        }
+      },
+      "boundary": {
+        "status": "reached",
+        "startDeltaMs": -31985,
+        "endDeltaMs": 24505,
+        "cut": {
+          "sourceStartMs": 1021002,
+          "sourceEndMs": 1079852,
+          "startBoundaryPointId": "word-005099:start",
+          "endBoundaryPointId": "word-005434:end",
+          "startReason": "戦闘への意気込みを示す「殺した方が早く殺せるか!」という発話の開始点を選びました。",
+          "endReason": "イノシシ3匹への対策を話し終え、作戦の結論が「でも板足りない」と収束する最後の言葉を選びました。",
+          "provisionalSourceStartMs": 1021002,
+          "provisionalSourceEndMs": 1079852
+        },
+        "selectedCutIndex": 1,
+        "overlapMs": 2360
+      }
+    },
+    {
+      "key": "nOEWCNc77MI_multiblock_material_v001:17:2:3",
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 17,
+      "runIndex": 2,
+      "expectedIndex": 3,
+      "inputVisible90s": true,
+      "structuralExcluded": false,
+      "v012": {
+        "status": "reached",
+        "startDeltaMs": -31985,
+        "endDeltaMs": 24505,
+        "cut": {
+          "sourceStartMs": 1021002,
+          "sourceEndMs": 1079852,
+          "reason": "開始根拠: イノシシを倒す方針を確認し、矢の作成や準備に関する会話が始まる発話から選択しているためです。終了根拠: 目の前にイノシシが3匹いることを発見し、1人30本ずつ矢を持つという危機の共有と作戦立てが収束する発話まで含めるためです。除外判断: 候補範囲外の直後の発話は、イノシシの危機から離れて個別の探索や別の雑談に移っているため含めていません。",
+          "usedSpeechIds": [
+            "120-127"
+          ]
+        }
+      },
+      "boundary": {
+        "status": "reached",
+        "startDeltaMs": -31985,
+        "endDeltaMs": 24505,
+        "cut": {
+          "sourceStartMs": 1021002,
+          "sourceEndMs": 1079852,
+          "startBoundaryPointId": "word-005099:start",
+          "endBoundaryPointId": "word-005434:end",
+          "startReason": "イノシシをより早く倒す作戦のフリとなる発言「殺した方が早く殺せるか!」の開始点を選択しました。",
+          "endReason": "目の前のイノシシ3匹への危機を共有し、各自の矢の数と板の不足を確認して作戦立てが収束する「ない」の終了点を選択しました。",
+          "provisionalSourceStartMs": 1021002,
+          "provisionalSourceEndMs": 1079852
+        },
+        "selectedCutIndex": 1,
+        "overlapMs": 2360
+      }
+    },
+    {
+      "key": "nOEWCNc77MI_multiblock_material_v001:17:3:3",
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 17,
+      "runIndex": 3,
+      "expectedIndex": 3,
+      "inputVisible90s": true,
+      "structuralExcluded": false,
+      "v012": {
+        "status": "reached",
+        "startDeltaMs": -31985,
+        "endDeltaMs": 24505,
+        "cut": {
+          "sourceStartMs": 1021002,
+          "sourceEndMs": 1079852,
+          "reason": "開始根拠: イノシシを早く倒すための作戦を相談し、矢の準備を急ぐ掛け合いが始まる発話のためです。終了根拠: 危機的状況である「イノシシが3匹いる」という発見と、それに対する具体的な矢の配分目標を決定してコミカルな会話が一段落する発話まで含めるためです。除外判断: 候補範囲より前の発話や、範囲外の128番以降の単なる相づちや武器の受け渡しといった作業フェーズは、テーマの芯である「イノシシ3匹への焦りと掛け合い」から外れるため除外します。",
+          "usedSpeechIds": [
+            "120-127"
+          ]
+        }
+      },
+      "boundary": {
+        "status": "reached",
+        "startDeltaMs": -31985,
+        "endDeltaMs": 24505,
+        "cut": {
+          "sourceStartMs": 1021002,
+          "sourceEndMs": 1079852,
+          "startBoundaryPointId": "word-005099:start",
+          "endBoundaryPointId": "word-005434:end",
+          "startReason": "イノシシへの攻撃方針として「殺した方が早く殺せるか!」と作戦を決定するセリフから会話の芯が始まるため、ここを開始境界としました。",
+          "endReason": "「でも板足りない」という発話により、イノシシ3匹に対する具体的な目標設定とそれに伴う課題の露呈を伴う掛け合いが一旦収束するため、ここを終了境界としました。",
+          "provisionalSourceStartMs": 1021002,
+          "provisionalSourceEndMs": 1079852
+        },
+        "selectedCutIndex": 1,
+        "overlapMs": 2360
+      }
+    },
+    {
+      "key": "nOEWCNc77MI_multiblock_material_v001:32:1:4",
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 32,
+      "runIndex": 1,
+      "expectedIndex": 4,
+      "inputVisible90s": true,
+      "structuralExcluded": false,
+      "v012": {
+        "status": "reached",
+        "startDeltaMs": 0,
+        "endDeltaMs": 41466,
+        "cut": {
+          "sourceStartMs": 2790074,
+          "sourceEndMs": 2848146,
+          "reason": "開始根拠: 宝鐘マリンが「君の心みたいにあったかい」とロマンチックなアプローチを開始する発話から始めるためです。終了根拠: 戌神ころねが冷たく「キモい」と言い放つ激しい連呼が収束する最後の発話まで含めるためです。除外判断: 候補範囲の直後にある「お尻ぷりぷりしちゃおう！」という発話は、テーマである「冷たい態度とキモいの連呼」から外れた別の悪ふざけの話題に移っているため含めません。",
+          "usedSpeechIds": [
+            "400-425"
+          ]
+        }
+      },
+      "boundary": {
+        "status": "reached",
+        "startDeltaMs": 0,
+        "endDeltaMs": 41466,
+        "cut": {
+          "sourceStartMs": 2790074,
+          "sourceEndMs": 2848146,
+          "startBoundaryPointId": "word-013567:start",
+          "endBoundaryPointId": "word-013774:end",
+          "startReason": "テーマの始まりとなる「なんか君の心みたいにあったかい」というアプローチの第一声の起点であるword-013567を選択しました。",
+          "endReason": "「キモい！」という連呼が収束し、別の話題に移る直前の最後の言葉であるword-013774を選択しました。",
+          "provisionalSourceStartMs": 2790074,
+          "provisionalSourceEndMs": 2848146
+        },
+        "selectedCutIndex": 1,
+        "overlapMs": 16606
+      }
+    },
+    {
+      "key": "nOEWCNc77MI_multiblock_material_v001:32:2:4",
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 32,
+      "runIndex": 2,
+      "expectedIndex": 4,
+      "inputVisible90s": true,
+      "structuralExcluded": false,
+      "v012": {
+        "status": "reached",
+        "startDeltaMs": 0,
+        "endDeltaMs": 41466,
+        "cut": {
+          "sourceStartMs": 2790074,
+          "sourceEndMs": 2848146,
+          "reason": "開始根拠: マリンが「なんか君の心みたいにあったかい」と甘い言葉のアプローチを開始する発話から切り出すためです。終了根拠: ころねが激しく連呼する「キモい」というツッコミの余韻が完全に収束する最後の発話まで含めるためです。除外判断: 前後のイノシシ狩りの準備や別のアクションの場面はテーマの温度差の面白さと無関係であるため除外しました。",
+          "usedSpeechIds": [
+            "400-425"
+          ]
+        }
+      },
+      "boundary": {
+        "status": "reached",
+        "startDeltaMs": 0,
+        "endDeltaMs": 41466,
+        "cut": {
+          "sourceStartMs": 2790074,
+          "sourceEndMs": 2848146,
+          "startBoundaryPointId": "word-013567:start",
+          "endBoundaryPointId": "word-013774:end",
+          "startReason": "マリンが「なんか君の心みたいにあったかい」と甘い言葉のアプローチを開始する発話の先頭「なんか」を選定。",
+          "endReason": "ころねが連呼する「キモい！」というツッコミが完全に収束する最後の発話「キモい！」の末尾を選定。",
+          "provisionalSourceStartMs": 2790074,
+          "provisionalSourceEndMs": 2848146
+        },
+        "selectedCutIndex": 1,
+        "overlapMs": 16606
+      }
+    },
+    {
+      "key": "nOEWCNc77MI_multiblock_material_v001:32:3:4",
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 32,
+      "runIndex": 3,
+      "expectedIndex": 4,
+      "inputVisible90s": true,
+      "structuralExcluded": false,
+      "v012": {
+        "status": "reached",
+        "startDeltaMs": 0,
+        "endDeltaMs": 41466,
+        "cut": {
+          "sourceStartMs": 2790074,
+          "sourceEndMs": 2848146,
+          "reason": "開始根拠: 宝鐘マリンがロマンチックなアプローチ（「君の心みたいにあったかい」）を開始する発話から切り抜きを開始するためです。終了根拠: 戌神ころねによる激しい「キモい」の連呼と二人の温度差のオチが完全に収束する最後の発話まで含めるためです。除外判断: 前後のイノシシ狩りの準備やその後の別のやり取り（お尻ぷりぷり）はテーマの趣旨とは異なるため除外しています。",
+          "usedSpeechIds": [
+            "400-425"
+          ]
+        }
+      },
+      "boundary": {
+        "status": "reached",
+        "startDeltaMs": 0,
+        "endDeltaMs": 41466,
+        "cut": {
+          "sourceStartMs": 2790074,
+          "sourceEndMs": 2848146,
+          "startBoundaryPointId": "word-013567:start",
+          "endBoundaryPointId": "word-013774:end",
+          "startReason": "宝鐘マリンによる「なんか君の心みたいにあったかい」というロマンチックなアプローチの切り出し単語から開始点として選択しました。",
+          "endReason": "戌神ころねによる一連の「キモい！」という連呼の最後となる発話の締めくくり単語を終了点として選択しました。",
+          "provisionalSourceStartMs": 2790074,
+          "provisionalSourceEndMs": 2848146
+        },
+        "selectedCutIndex": 1,
+        "overlapMs": 16606
+      }
+    },
+    {
+      "key": "nOEWCNc77MI_multiblock_material_v001:35:1:5",
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 35,
+      "runIndex": 1,
+      "expectedIndex": 5,
+      "inputVisible90s": true,
+      "structuralExcluded": false,
+      "v012": {
+        "status": "reached",
+        "startDeltaMs": -5904,
+        "endDeltaMs": 5144,
+        "cut": {
+          "sourceStartMs": 3000738,
+          "sourceEndMs": 3026556,
+          "reason": "開始根拠: サメに船が食われている状況を報告し、会話の起点となる発話から始まるためです。終了根拠: ころねの言動に対してマリンが罰を与えたいと詰め寄り、掛け合いが収束する発話まで含めるためです。除外判断: 続く発話は研究可能なアイテムの羅列という別のゲームプレイの話題へ移っているため除外します。",
+          "usedSpeechIds": [
+            "448-452"
+          ]
+        }
+      },
+      "boundary": {
+        "status": "reached",
+        "startDeltaMs": -5904,
+        "endDeltaMs": 5144,
+        "cut": {
+          "sourceStartMs": 3000738,
+          "sourceEndMs": 3026556,
+          "startBoundaryPointId": "word-014479:start",
+          "endBoundaryPointId": "word-014598:end",
+          "startReason": "サメに船が食われている状況を報告する会話の起点となる「めっちゃさ、食われる」の冒頭の単語「め」を選択しました。",
+          "endReason": "ころねの言動に対してマリンが罰を提案した一連の掛け合いが収束する「マリゾネス？」の最後の単語「ス」を選択しました。",
+          "provisionalSourceStartMs": 3000738,
+          "provisionalSourceEndMs": 3026556
+        },
+        "selectedCutIndex": 1,
+        "overlapMs": 14770
+      }
+    },
+    {
+      "key": "nOEWCNc77MI_multiblock_material_v001:35:2:5",
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 35,
+      "runIndex": 2,
+      "expectedIndex": 5,
+      "inputVisible90s": true,
+      "structuralExcluded": false,
+      "v012": {
+        "status": "reached",
+        "startDeltaMs": -5904,
+        "endDeltaMs": 5144,
+        "cut": {
+          "sourceStartMs": 3000738,
+          "sourceEndMs": 3026556,
+          "reason": "開始根拠: 船がサメに食われている緊迫した状況を訴える、切り抜きのフリとなる発話から開始するためです。終了根拠: ころねの言動に対してマリンが「罰を与えたい」「マリゾネス？」と理不尽に詰め寄る一連の掛け合いが収束する瞬間まで含めるためです。除外判断: 候補範囲外の前後（研究の話や蜂の巣の話など）は、テーマである「ころねへの罰」の掛け合いとは無関係な別話題のため除外しました。",
+          "usedSpeechIds": [
+            "448-452"
+          ]
+        }
+      },
+      "boundary": {
+        "status": "reached",
+        "startDeltaMs": -5904,
+        "endDeltaMs": 5144,
+        "cut": {
+          "sourceStartMs": 3000738,
+          "sourceEndMs": 3026556,
+          "startBoundaryPointId": "word-014479:start",
+          "endBoundaryPointId": "word-014598:end",
+          "startReason": "サメに食われている緊迫した状況を訴える「めっちゃさ、食われるダメに?」という発言の開始点を境界としました。",
+          "endReason": "ころねの言動に対してマリンが「マリゾネス?」と理不尽に詰め寄る掛け合いの収束点を境界としました。",
+          "provisionalSourceStartMs": 3000738,
+          "provisionalSourceEndMs": 3026556
+        },
+        "selectedCutIndex": 1,
+        "overlapMs": 14770
+      }
+    },
+    {
+      "key": "nOEWCNc77MI_multiblock_material_v001:35:3:5",
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 35,
+      "runIndex": 3,
+      "expectedIndex": 5,
+      "inputVisible90s": true,
+      "structuralExcluded": false,
+      "v012": {
+        "status": "reached",
+        "startDeltaMs": -5904,
+        "endDeltaMs": 5144,
+        "cut": {
+          "sourceStartMs": 3000738,
+          "sourceEndMs": 3026556,
+          "reason": "開始根拠: サメに船が食われている状況を訴える候補範囲の最初の発話から開始するためです。終了根拠: ころねの言動に対してマリンが「罰を与えたい」と理不尽に詰め寄る掛け合いが収束する発話まで含めるためです。除外判断: 続く発話からは別のゲーム内アイテム制作に関する具体的な解説の話題へ移行するため除外します。",
+          "usedSpeechIds": [
+            "448-452"
+          ]
+        }
+      },
+      "boundary": {
+        "status": "reached",
+        "startDeltaMs": -5904,
+        "endDeltaMs": 5144,
+        "cut": {
+          "sourceStartMs": 3000738,
+          "sourceEndMs": 3026556,
+          "startBoundaryPointId": "word-014479:start",
+          "endBoundaryPointId": "word-014598:end",
+          "startReason": "サメに食われている状況を「めっちさ、食われるダメに?」と訴え始める発話の開始点を選択しました。",
+          "endReason": "ころねの言動に対してマリンが「マリゾネス?」と問いかけて掛け合いが収束する発話の終了点を選択しました。",
+          "provisionalSourceStartMs": 3000738,
+          "provisionalSourceEndMs": 3026556
+        },
+        "selectedCutIndex": 1,
+        "overlapMs": 14770
+      }
+    },
+    {
+      "key": "nOEWCNc77MI_multiblock_material_v001:37:1:6",
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 37,
+      "runIndex": 1,
+      "expectedIndex": 6,
+      "inputVisible90s": true,
+      "structuralExcluded": false,
+      "v012": {
+        "status": "reached",
+        "startDeltaMs": -220,
+        "endDeltaMs": 19469,
+        "cut": {
+          "sourceStartMs": 3180190,
+          "sourceEndMs": 3209684,
+          "reason": "開始根拠: マリンが「しし肉焼いてる？」と問いかけ、焼き忘れへの指摘から夫婦風の掛け合いが始まる最初の発話であるためです。終了根拠: 豪華なバーベキューが完成して2人で盛り上がり、回復量に関する説明が一段落する発話の終わりまで含めるためです。除外判断: 候補外である発話ID477以降は、網の上を歩く別のいざこざや愚痴に話題が変わるため除外しました。",
+          "usedSpeechIds": [
+            "470-476"
+          ]
+        }
+      },
+      "boundary": {
+        "status": "reached",
+        "startDeltaMs": -220,
+        "endDeltaMs": 19469,
+        "cut": {
+          "sourceStartMs": 3180190,
+          "sourceEndMs": 3209684,
+          "startBoundaryPointId": "word-015302:start",
+          "endBoundaryPointId": "word-015448:end",
+          "startReason": "会話のテーマがBBQの肉焼き忘れに対する夫婦風の掛け合いへと切り替わる最初の言葉「しし肉」の開始点を選びました。",
+          "endReason": "網の上を歩くトラブルへ話題が移行する直前の、回復量の説明と注意喚起が収束する「そこ」の終了点を選びました。",
+          "provisionalSourceStartMs": 3180190,
+          "provisionalSourceEndMs": 3209684
+        },
+        "selectedCutIndex": 1,
+        "overlapMs": 9805
+      }
+    },
+    {
+      "key": "nOEWCNc77MI_multiblock_material_v001:37:2:6",
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 37,
+      "runIndex": 2,
+      "expectedIndex": 6,
+      "inputVisible90s": true,
+      "structuralExcluded": false,
+      "v012": {
+        "status": "reached",
+        "startDeltaMs": -220,
+        "endDeltaMs": 19469,
+        "cut": {
+          "sourceStartMs": 3180190,
+          "sourceEndMs": 3209684,
+          "reason": "開始根拠: マリンがしし肉を焼いているか尋ね、焼き忘れに対する夫婦漫才風の掛け合いが始まる最初の発話だからです。終了根拠: バーベキュー完成の歓喜から、料理の回復量について話が収束する最後の発話まで含めるためです。除外判断: 直後の発話（speechId: 477）は網の上を歩く別のいざこざに話題が変化しているため含めません。",
+          "usedSpeechIds": [
+            "470-476"
+          ]
+        }
+      },
+      "boundary": {
+        "status": "reached",
+        "startDeltaMs": -220,
+        "endDeltaMs": 19469,
+        "cut": {
+          "sourceStartMs": 3180190,
+          "sourceEndMs": 3209684,
+          "startBoundaryPointId": "word-015302:start",
+          "endBoundaryPointId": "word-015448:end",
+          "startReason": "マリンが「しし肉焼いてる？」と問いかけ、焼き忘れに対する夫婦漫才風の掛け合いが始まる最初の単語だからです。",
+          "endReason": "バーベキュー完成の歓喜から、回復量に関する話題が収束する最後の単語「そこ」までを含めるためです。",
+          "provisionalSourceStartMs": 3180190,
+          "provisionalSourceEndMs": 3209684
+        },
+        "selectedCutIndex": 1,
+        "overlapMs": 9805
+      }
+    },
+    {
+      "key": "nOEWCNc77MI_multiblock_material_v001:37:3:6",
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 37,
+      "runIndex": 3,
+      "expectedIndex": 6,
+      "inputVisible90s": true,
+      "structuralExcluded": false,
+      "v012": {
+        "status": "reached",
+        "startDeltaMs": -220,
+        "endDeltaMs": 19469,
+        "cut": {
+          "sourceStartMs": 3180190,
+          "sourceEndMs": 3209684,
+          "reason": "開始根拠: しし肉を焼いているかどうかの確認からテーマが始まるためです。終了根拠: 豪華なバーベキューが完成して回復量の多さに歓喜する一連の流れが収束する発話まで含めるためです。除外判断: 候補範囲外の直後の発話は、バーベキューの網の上を歩く別の下りへ移行しているため含めません。",
+          "usedSpeechIds": [
+            "470-476"
+          ]
+        }
+      },
+      "boundary": {
+        "status": "reached",
+        "startDeltaMs": -220,
+        "endDeltaMs": 19469,
+        "cut": {
+          "sourceStartMs": 3180190,
+          "sourceEndMs": 3209684,
+          "startBoundaryPointId": "word-015302:start",
+          "endBoundaryPointId": "word-015448:end",
+          "startReason": "テーマの導入部である「しし肉焼いてる？」という問いかけの開始点を選びました。",
+          "endReason": "バーベキューの完成に歓喜する一連の流れを収束させる「ちょっとそこ」の最後の言葉までを含めました。",
+          "provisionalSourceStartMs": 3180190,
+          "provisionalSourceEndMs": 3209684
+        },
+        "selectedCutIndex": 1,
+        "overlapMs": 9805
+      }
+    },
+    {
+      "key": "nOEWCNc77MI_multiblock_material_v001:39:1:7",
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 39,
+      "runIndex": 1,
+      "expectedIndex": 7,
+      "inputVisible90s": true,
+      "structuralExcluded": false,
+      "v012": {
+        "status": "reached",
+        "startDeltaMs": -33234,
+        "endDeltaMs": 3521,
+        "cut": {
+          "sourceStartMs": 3252153,
+          "sourceEndMs": 3292350,
+          "reason": "開始根拠: イノシシをやる流れから被り物を披露して「イノスケじゃん」と鬼滅の刃ごっこが始まる発話のためです。終了根拠: 別の役を振られた相手に対して「お前はこっちを使うんだ！」と言い放ちごっこのひと区切りがつく発話まで含めるためです。除外判断: 候補範囲外の直後の笑い声やその後のやりとりは、元の話題から時間的・内容的に離れていくため最小区間として含めません。",
+          "usedSpeechIds": [
+            "481-491"
+          ]
+        }
+      },
+      "boundary": {
+        "status": "reached",
+        "startDeltaMs": -30832,
+        "endDeltaMs": 3521,
+        "cut": {
+          "sourceStartMs": 3254555,
+          "sourceEndMs": 3292350,
+          "startBoundaryPointId": "word-015709:start",
+          "endBoundaryPointId": "word-015845:end",
+          "startReason": "イノシシの被り物を披露して鬼滅の刃ごっこが始まる最初の単語である「イノシシ（イノシシやるか）」を選択しました。",
+          "endReason": "「お前はこっちを使うんだ！」と言い放ち、ごっこの流れにひと区切りがつく最後の単語「だ」を選択しました。",
+          "provisionalSourceStartMs": 3252153,
+          "provisionalSourceEndMs": 3292350
+        },
+        "selectedCutIndex": 1,
+        "overlapMs": 3442
+      }
+    },
+    {
+      "key": "nOEWCNc77MI_multiblock_material_v001:39:2:7",
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 39,
+      "runIndex": 2,
+      "expectedIndex": 7,
+      "inputVisible90s": true,
+      "structuralExcluded": false,
+      "v012": {
+        "status": "reached",
+        "startDeltaMs": -33234,
+        "endDeltaMs": 3521,
+        "cut": {
+          "sourceStartMs": 3252153,
+          "sourceEndMs": 3292350,
+          "reason": "開始根拠: イノシシをやる話からイノスケやねずこの名前を出して鬼滅の刃ごっこ遊びのノリが始まる発話のためです。終了根拠: 鬼滅の刃のキャラクターに関する掛け合いとツッコミが収束する候補範囲の最後の発話まで含めるためです。除外判断: 候補範囲外のこれより前の発話はバーベキューに関する別の雑談であり、これ以降の発話は一度笑い声や別のやり取りで文脈が途切れるため含めません。",
+          "usedSpeechIds": [
+            "481-491"
+          ]
+        }
+      },
+      "boundary": {
+        "status": "reached",
+        "startDeltaMs": -26650,
+        "endDeltaMs": 3521,
+        "cut": {
+          "sourceStartMs": 3258737,
+          "sourceEndMs": 3292350,
+          "startBoundaryPointId": "word-015728:start",
+          "endBoundaryPointId": "word-015845:end",
+          "startReason": "イノシシの話題から「えーイノスケじゃん」と鬼滅の刃ごっこが明確に始まる発話の開始点を選びました。",
+          "endReason": "「お前はこっちを使うんだ！」とキャラクターの被り物に関する掛け合いとツッコミが綺麗に収束する最後の言葉の終了点を選びました。",
+          "provisionalSourceStartMs": 3252153,
+          "provisionalSourceEndMs": 3292350
+        },
+        "selectedCutIndex": 1,
+        "overlapMs": 3442
+      }
+    },
+    {
+      "key": "nOEWCNc77MI_multiblock_material_v001:39:3:7",
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 39,
+      "runIndex": 3,
+      "expectedIndex": 7,
+      "inputVisible90s": true,
+      "structuralExcluded": false,
+      "v012": {
+        "status": "reached",
+        "startDeltaMs": -33234,
+        "endDeltaMs": 3521,
+        "cut": {
+          "sourceStartMs": 3252153,
+          "sourceEndMs": 3292350,
+          "reason": "開始根拠: イノシシをやる話題から被り物を発見して鬼滅の刃ごっこを始める発話の開始位置とするためです。終了根拠: ねずことの共存を否定し「お前はこっちを使うんだ！」とノリノリの掛け合いが一段落する発話の終了時刻とするためです。除外判断: 候補範囲外の直後の発話は笑い声のみのセグメントであり、会話の文脈がここで一区切りつくため含めません。",
+          "usedSpeechIds": [
+            "481-491"
+          ]
+        }
+      },
+      "boundary": {
+        "status": "reached",
+        "startDeltaMs": -26650,
+        "endDeltaMs": 3521,
+        "cut": {
+          "sourceStartMs": 3258737,
+          "sourceEndMs": 3292350,
+          "startBoundaryPointId": "word-015728:start",
+          "endBoundaryPointId": "word-015845:end",
+          "startReason": "イノシシの被り物を発見して「えーマーリン何よ見て」と相手に呼びかける発話の開始位置を選択しました。",
+          "endReason": "「お前はこっちを使うんだ！」とノリノリの掛け合いが一段落するセグメントの終了位置を選択しました。",
+          "provisionalSourceStartMs": 3252153,
+          "provisionalSourceEndMs": 3292350
+        },
+        "selectedCutIndex": 1,
+        "overlapMs": 3442
+      }
+    },
+    {
+      "key": "nOEWCNc77MI_multiblock_material_v001:41:1:8",
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 41,
+      "runIndex": 1,
+      "expectedIndex": 8,
+      "inputVisible90s": true,
+      "structuralExcluded": false,
+      "v012": {
+        "status": "reached",
+        "startDeltaMs": -7425,
+        "endDeltaMs": 34132,
+        "cut": {
+          "sourceStartMs": 3467816,
+          "sourceEndMs": 3519167,
+          "reason": "開始根拠: 食材がなくなったことに気づき、宝鐘マリンが全ての食材を握っていることを説明する発話から会話が展開するためです。終了根拠: 肉をめぐる交渉が終わった後、別のアイテム（斧や板）の話題に完全に切り替わる直前の発話までを含めるためです。除外判断: 候補範囲（503-510）の直前にある森での雑談や、直後にある板のやり取りに関する発話は、食材や肉をめぐる攻防というテーマから外れるため除外しました。",
+          "usedSpeechIds": [
+            "503-510"
+          ]
+        }
+      },
+      "boundary": {
+        "status": "reached",
+        "startDeltaMs": 4893,
+        "endDeltaMs": 29609,
+        "cut": {
+          "sourceStartMs": 3480134,
+          "sourceEndMs": 3514644,
+          "startBoundaryPointId": "word-016214:start",
+          "endBoundaryPointId": "word-016405:end",
+          "startReason": "「全ての食材を船長が今握ってるからね」という本区間の主テーマである食材の話題が切り出される発話の開始点を選びました。",
+          "endReason": "肉をめぐる攻防の会話が一段落し、「ちょっと逆にそんなに握ってんじゃねーよって話」という結論で会話が収束する最後の言葉を選びました。",
+          "provisionalSourceStartMs": 3467816,
+          "provisionalSourceEndMs": 3519167
+        },
+        "selectedCutIndex": 1,
+        "overlapMs": 4901
+      }
+    },
+    {
+      "key": "nOEWCNc77MI_multiblock_material_v001:41:2:8",
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 41,
+      "runIndex": 2,
+      "expectedIndex": 8,
+      "inputVisible90s": true,
+      "structuralExcluded": false,
+      "v012": {
+        "status": "reached",
+        "startDeltaMs": -7425,
+        "endDeltaMs": 34132,
+        "cut": {
+          "sourceStartMs": 3467816,
+          "sourceEndMs": 3519167,
+          "reason": "開始根拠: 食材がなくなったという発話から、宝鐘マリンが食材を独占している状況のやり取りが始まるためです。終了根拠: 戌神ころねが肉を譲ってもらう代わりに魚を返す交渉がひと段落し、話題が斧や板の作成に移る直前まで含めるためです。除外判断: 候補範囲外の前後（502以前や511以降）は、テーマである食材の独占や肉をめぐる攻防とは無関係なクラフトや移動の話題であるため除外しました。",
+          "usedSpeechIds": [
+            "503-510"
+          ]
+        }
+      },
+      "boundary": {
+        "status": "reached",
+        "startDeltaMs": 400,
+        "endDeltaMs": 29609,
+        "cut": {
+          "sourceStartMs": 3475641,
+          "sourceEndMs": 3514644,
+          "startBoundaryPointId": "word-016184:start",
+          "endBoundaryPointId": "word-016405:end",
+          "startReason": "宝鐘マリンが全ての食材を握っている状況の前提となる、戌神ころねの「やばいマリリンちょっと待ってマジでさ食材なくなったけど」という発話の開始点を選びました。",
+          "endReason": "肉を温存しようとする宝鐘マリンに対し、戌神ころねが魚を返す交渉をして納得した「そんなに握ってんじゃねーよって話」という最後の言葉が収束する地点を終了境界としました。",
+          "provisionalSourceStartMs": 3467816,
+          "provisionalSourceEndMs": 3519167
+        },
+        "selectedCutIndex": 1,
+        "overlapMs": 9394
+      }
+    },
+    {
+      "key": "nOEWCNc77MI_multiblock_material_v001:41:3:8",
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 41,
+      "runIndex": 3,
+      "expectedIndex": 8,
+      "inputVisible90s": true,
+      "structuralExcluded": false,
+      "v012": {
+        "status": "reached",
+        "startDeltaMs": -7425,
+        "endDeltaMs": 34132,
+        "cut": {
+          "sourceStartMs": 3467816,
+          "sourceEndMs": 3519167,
+          "reason": "開始根拠: マリンが「食材なくなったけど」と切り出し、食材を独占している状況のフリが始まる発話のためです。終了根拠: 肉をめぐる攻防と交渉のやり取りが一段落し、別件の斧や板の話題に移る直前の発話まで含めるためです。除外判断: 候補範囲外の前後（502以前、511以降）は別の作業や雑談に移行しており、本テーマの掛け合いと直接関係がないため除外しました。",
+          "usedSpeechIds": [
+            "503-510"
+          ]
+        }
+      },
+      "boundary": {
+        "status": "reached",
+        "startDeltaMs": 400,
+        "endDeltaMs": 29609,
+        "cut": {
+          "sourceStartMs": 3475641,
+          "sourceEndMs": 3514644,
+          "startBoundaryPointId": "word-016184:start",
+          "endBoundaryPointId": "word-016405:end",
+          "startReason": "食材を独占している状況の前提フリとなる「マリリンちょっと待ってマジでさ食材なくなったけど」の切り出し直前の発話開始点を選定。",
+          "endReason": "肉をめぐるやり取りと船長へのツッコミが「そんなに握ってんじゃねーよって話」という言葉で綺麗に収束する最後の瞬間を選定。",
+          "provisionalSourceStartMs": 3467816,
+          "provisionalSourceEndMs": 3519167
+        },
+        "selectedCutIndex": 1,
+        "overlapMs": 9394
+      }
+    },
+    {
+      "key": "nOEWCNc77MI_multiblock_material_v001:46:1:9",
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 46,
+      "runIndex": 1,
+      "expectedIndex": 9,
+      "inputVisible90s": true,
+      "structuralExcluded": false,
+      "v012": {
+        "status": "reached",
+        "startDeltaMs": -7226,
+        "endDeltaMs": 3000,
+        "cut": {
+          "sourceStartMs": 3991226,
+          "sourceEndMs": 4029707,
+          "reason": "開始根拠: マリンがころねの頭の匂いを嗅ぐきっかけとなる、顔の位置に関する会話から切り抜きを開始するためです。終了根拠: マリンの「臭い」という発言に対してころねがじわじわと泣き真似をする一連のプロレス的なオチとリアクションが収束する発話まで含めるためです。除外判断: 直後の「これも出発した？」以降の発話は、船の出航という次のゲーム内進行の話題に移っているため除外しました。",
+          "usedSpeechIds": [
+            "578-580"
+          ]
+        }
+      },
+      "boundary": {
+        "status": "reached",
+        "startDeltaMs": -500,
+        "endDeltaMs": 2480,
+        "cut": {
+          "sourceStartMs": 3997952,
+          "sourceEndMs": 4029187,
+          "startBoundaryPointId": "word-018592:start",
+          "endBoundaryPointId": "word-018736:end",
+          "startReason": "マリンがころねの顔の位置に関する提案をする発話の冒頭である「マリリン今更なんだけどさ」から切り抜きを開始するためです。",
+          "endReason": "マリンがころねの泣き真似リアクションに対して「早よ泣けやん」とツッコミを入れ、一連のトークのオチが収束するポイントを終了境界に指定しました。",
+          "provisionalSourceStartMs": 3991226,
+          "provisionalSourceEndMs": 4029707
+        },
+        "selectedCutIndex": 1,
+        "overlapMs": 28255
+      }
+    },
+    {
+      "key": "nOEWCNc77MI_multiblock_material_v001:46:2:9",
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 46,
+      "runIndex": 2,
+      "expectedIndex": 9,
+      "inputVisible90s": true,
+      "structuralExcluded": false,
+      "v012": {
+        "status": "reached",
+        "startDeltaMs": -7226,
+        "endDeltaMs": 3000,
+        "cut": {
+          "sourceStartMs": 3991226,
+          "sourceEndMs": 4029707,
+          "reason": "開始根拠: マリンがころねの顔の位置について指摘し、頭の匂いを嗅ぐ流れのきっかけとなる発話から始まるためです。終了根拠: マリンの「臭い」という言葉に対し、ころねがじわじわと泣き真似をしてプロレスが収束するやり取りまでを含めるためです。除外判断: その後に続く出航の話題はテーマと関係がないため含めません。",
+          "usedSpeechIds": [
+            "578-580"
+          ]
+        }
+      },
+      "boundary": {
+        "status": "reached",
+        "startDeltaMs": -500,
+        "endDeltaMs": 3000,
+        "cut": {
+          "sourceStartMs": 3997952,
+          "sourceEndMs": 4029707,
+          "startBoundaryPointId": "word-018592:start",
+          "endBoundaryPointId": "word-018744:end",
+          "startReason": "マリンがころねの顔の位置を下げてほしいと指摘する「マリリン今更なんだけどさ」の発言からトークテーマの前提が始まるためです。",
+          "endReason": "「これ出発した?」という発話により、頭の匂いを嗅ぐくだりから次の出航の文脈へ完全に切り替わる直前までを含めるためです。",
+          "provisionalSourceStartMs": 3991226,
+          "provisionalSourceEndMs": 4029707
+        },
+        "selectedCutIndex": 1,
+        "overlapMs": 28255
+      }
+    },
+    {
+      "key": "nOEWCNc77MI_multiblock_material_v001:46:3:9",
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 46,
+      "runIndex": 3,
+      "expectedIndex": 9,
+      "inputVisible90s": true,
+      "structuralExcluded": false,
+      "v012": {
+        "status": "reached",
+        "startDeltaMs": -7226,
+        "endDeltaMs": 3000,
+        "cut": {
+          "sourceStartMs": 3991226,
+          "sourceEndMs": 4029707,
+          "reason": "開始根拠: マリンがころねの頭の匂いを嗅ぐきっかけとなる、顔の位置に関する話題が始まる発話から選択しました。終了根拠: 匂いを臭いと言われたころねがじわじわと泣き真似をする一連のプロレスのくだりが収束する発話まで含めました。除外判断: 候補範囲外の出航の話題やアンカーのやり取りは、本テーマと無関係なため除外しています。",
+          "usedSpeechIds": [
+            "578-580"
+          ]
+        }
+      },
+      "boundary": {
+        "status": "reached",
+        "startDeltaMs": -500,
+        "endDeltaMs": 3000,
+        "cut": {
+          "sourceStartMs": 3997952,
+          "sourceEndMs": 4029707,
+          "startBoundaryPointId": "word-018592:start",
+          "endBoundaryPointId": "word-018744:end",
+          "startReason": "マリンの顔が見えるように顔の位置を下げる提案から匂いの話題が展開するため、「マリリン今更なんだけどさ」の「マ」を開始点に選択しました。",
+          "endReason": "匂いネタに起因するプロレス的な一連のやり取りが「出発した？」という発話で完全に収束するため、この発話の最後の疑問符を選択しました。",
+          "provisionalSourceStartMs": 3991226,
+          "provisionalSourceEndMs": 4029707
+        },
+        "selectedCutIndex": 1,
+        "overlapMs": 28255
+      }
+    },
+    {
+      "key": "nOEWCNc77MI_multiblock_material_v001:52:1:11",
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 52,
+      "runIndex": 1,
+      "expectedIndex": 11,
+      "inputVisible90s": true,
+      "structuralExcluded": false,
+      "v012": {
+        "status": "reached",
+        "startDeltaMs": -21475,
+        "endDeltaMs": 0,
+        "cut": {
+          "sourceStartMs": 5162499,
+          "sourceEndMs": 5189318,
+          "reason": "開始根拠: テーマの核心である「ぴょんぴょんマンゴー」というフレーズを自ら発言して笑いを生むポイントから開始するためです。終了根拠: 何気ない言葉で大笑いされたことに対して「おもろくないことでいっぱい笑われると気まずい」と自身の心情を吐露してやり取りが収束する瞬間までを含めるためです。除外判断: 直後の発話は夕焼けの景色に関する別の話題へと完全に切り替わっているため区間から除外します。",
+          "usedSpeechIds": [
+            770
+          ]
+        }
+      },
+      "boundary": {
+        "status": "reached",
+        "startDeltaMs": -12508,
+        "endDeltaMs": 0,
+        "cut": {
+          "sourceStartMs": 5171466,
+          "sourceEndMs": 5189318,
+          "startBoundaryPointId": "word-023982:start",
+          "endBoundaryPointId": "word-024098:end",
+          "startReason": "テーマの核心である「ぴょんぴょんマンゴー」というフレーズを自ら発言する直前の「ぴょ」から切り抜きを開始します。",
+          "endReason": "「おもろくないことでいっぱい笑われると気まずい」という発言の最後の単語である「ず」の終了点で区間を閉じます。",
+          "provisionalSourceStartMs": 5162499,
+          "provisionalSourceEndMs": 5189318
+        },
+        "selectedCutIndex": 1,
+        "overlapMs": 5344
+      }
+    },
+    {
+      "key": "nOEWCNc77MI_multiblock_material_v001:52:2:11",
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 52,
+      "runIndex": 2,
+      "expectedIndex": 11,
+      "inputVisible90s": true,
+      "structuralExcluded": false,
+      "v012": {
+        "status": "reached",
+        "startDeltaMs": -21475,
+        "endDeltaMs": 0,
+        "cut": {
+          "sourceStartMs": 5162499,
+          "sourceEndMs": 5189318,
+          "reason": "開始根拠: テーマの中心となる「ぴょんぴょんマンゴー」というフレーズとそれに対する大笑いが始まる発話から選択しているためです。終了根拠: 面白くないことで笑われるのが気まずいと吐露し、そのやり取りのオチと反応が収束する発話の終端に合わせるためです。除外判断: 前後の発話はゲーム内の夕焼けや別の作業に関する話題であり、テーマと無関係なため除外しています。",
+          "usedSpeechIds": [
+            770
+          ]
+        }
+      },
+      "boundary": {
+        "status": "reached",
+        "startDeltaMs": -12508,
+        "endDeltaMs": 0,
+        "cut": {
+          "sourceStartMs": 5171466,
+          "sourceEndMs": 5189318,
+          "startBoundaryPointId": "word-023982:start",
+          "endBoundaryPointId": "word-024098:end",
+          "startReason": "テーマの中心となる「ぴょんぴょんマンゴー」という発言の開始である単語「ぴ」の始点を選択しました。",
+          "endReason": "面白くないことで笑われるのが気まずいと吐露しオチが収束する「気まず」の終点を選択しました。",
+          "provisionalSourceStartMs": 5162499,
+          "provisionalSourceEndMs": 5189318
+        },
+        "selectedCutIndex": 1,
+        "overlapMs": 5344
+      }
+    },
+    {
+      "key": "nOEWCNc77MI_multiblock_material_v001:52:3:11",
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 52,
+      "runIndex": 3,
+      "expectedIndex": 11,
+      "inputVisible90s": true,
+      "structuralExcluded": false,
+      "v012": {
+        "status": "reached",
+        "startDeltaMs": -21475,
+        "endDeltaMs": 0,
+        "cut": {
+          "sourceStartMs": 5162499,
+          "sourceEndMs": 5189318,
+          "reason": "開始根拠: テーマの中心となる「ぴょんぴょんマンゴー」のフレーズを口にする発話から始まるためです。終了根拠: 何気ない言葉で大笑いされたことに対して、おもろくないことで笑われるのが気まずいと吐露する一連のやり取りが収束するまで含めるためです。除外判断: 前後の発話はゲーム内のアイテム集めや景色の話をしており、テーマの文脈と無関係なため除外します。",
+          "usedSpeechIds": [
+            770
+          ]
+        }
+      },
+      "boundary": {
+        "status": "reached",
+        "startDeltaMs": -12508,
+        "endDeltaMs": 0,
+        "cut": {
+          "sourceStartMs": 5171466,
+          "sourceEndMs": 5189318,
+          "startBoundaryPointId": "word-023982:start",
+          "endBoundaryPointId": "word-024098:end",
+          "startReason": "テーマの中心となる「ぴょんぴょんマンゴー」のフレーズを含む発話の頭である「ぴ」を開始境界として選択しました。",
+          "endReason": "おもろくないことで笑われると気まずいと吐露する一連のやり取りの締めくくりである「気まず」を終了境界として選択しました。",
+          "provisionalSourceStartMs": 5162499,
+          "provisionalSourceEndMs": 5189318
+        },
+        "selectedCutIndex": 1,
+        "overlapMs": 5344
+      }
+    },
+    {
+      "key": "nOEWCNc77MI_multiblock_material_v001:53:1:12",
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 53,
+      "runIndex": 1,
+      "expectedIndex": 12,
+      "inputVisible90s": true,
+      "structuralExcluded": false,
+      "v012": {
+        "status": "reached",
+        "startDeltaMs": -26909,
+        "endDeltaMs": 60318,
+        "cut": {
+          "sourceStartMs": 5190322,
+          "sourceEndMs": 5279310,
+          "reason": "開始根拠: マリンが景色に感動してエモい演技（フリ）を始める発話から開始するためです。終了根拠: ころねに「絡みづらい」と言われた後、別の話題（サメの襲来）に移って会話の余韻が収束する瞬間までを含めるためです。除外判断: 候補範囲外の前後（speechId: 770以前、785以降）は全く別の作業や雑談を行っているため除外します。",
+          "usedSpeechIds": [
+            "771-784"
+          ]
+        }
+      },
+      "boundary": {
+        "status": "reached",
+        "startDeltaMs": -23988,
+        "endDeltaMs": 60318,
+        "cut": {
+          "sourceStartMs": 5193243,
+          "sourceEndMs": 5279310,
+          "startBoundaryPointId": "word-024111:start",
+          "endBoundaryPointId": "word-024491:end",
+          "startReason": "マリンが景色に反応して「え、綺麗え、綺麗?」とエモい演技のフリを始める最初の単語「え」を開始境界に選定しました。",
+          "endReason": "ころねの「絡みづらい」というくだりからサメの襲来を経て、会話の余韻が収束する「それ」の単語の終わりを終了境界に選定しました。",
+          "provisionalSourceStartMs": 5190322,
+          "provisionalSourceEndMs": 5279310
+        },
+        "selectedCutIndex": 1,
+        "overlapMs": 1761
+      }
+    },
+    {
+      "key": "nOEWCNc77MI_multiblock_material_v001:53:2:12",
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 53,
+      "runIndex": 2,
+      "expectedIndex": 12,
+      "inputVisible90s": true,
+      "structuralExcluded": false,
+      "v012": {
+        "status": "reached",
+        "startDeltaMs": -26909,
+        "endDeltaMs": 25911,
+        "cut": {
+          "sourceStartMs": 5190322,
+          "sourceEndMs": 5244903,
+          "reason": "開始根拠: マリンが景色に感動してエモい演技（フリ）を始める発話から開始するためです。終了根拠: ころねから「今日絡みづらい」と言われて掛け合いのオチが成立し、その反応が収束する発話まで含めるためです。除外判断: 候補範囲の末尾にある伊之助に関する話題やサメ襲来のくだりは、テーマであるエモい演技の空回りとは関係がないため除外しました。",
+          "usedSpeechIds": [
+            "771-781"
+          ]
+        }
+      },
+      "boundary": {
+        "status": "format-invalid",
+        "issues": [
+          "web-generation-incomplete-or-runner-failure"
+        ]
+      }
+    },
+    {
+      "key": "nOEWCNc77MI_multiblock_material_v001:53:3:12",
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 53,
+      "runIndex": 3,
+      "expectedIndex": 12,
+      "inputVisible90s": true,
+      "structuralExcluded": false,
+      "v012": {
+        "status": "reached",
+        "startDeltaMs": -26909,
+        "endDeltaMs": 60318,
+        "cut": {
+          "sourceStartMs": 5190322,
+          "sourceEndMs": 5279310,
+          "reason": "開始根拠: マリンが景色に感動してエモい演技を始める最初の発話から開始するためです。終了根拠: 演技が空回りした後に「今日絡みづらい」と言われるオチから、直後のサメ襲来で話題が変わる直前の余韻までを最小区間として含めるためです。除外判断: 候補範囲外の前後（ID 770以前、ID 785以降）は、テーマとは関係のない別の雑談や作業を行っているため除外します。",
+          "usedSpeechIds": [
+            "771-784"
+          ]
+        }
+      },
+      "boundary": {
+        "status": "reached",
+        "startDeltaMs": -23988,
+        "endDeltaMs": 43292,
+        "cut": {
+          "sourceStartMs": 5193243,
+          "sourceEndMs": 5262284,
+          "startBoundaryPointId": "word-024111:start",
+          "endBoundaryPointId": "word-024401:end",
+          "startReason": "マリンが夕焼けの景色に気づいて「え、綺麗」と感動的な演技のきっかけを作る発話から開始します。",
+          "endReason": "「今日絡みづらい」というオチのやり取りが収束し、直後にサメ襲来で話題が変わる直前の言葉「死そうですな」で終了します。",
+          "provisionalSourceStartMs": 5190322,
+          "provisionalSourceEndMs": 5279310
+        },
+        "selectedCutIndex": 1,
+        "overlapMs": 1761
+      }
+    },
+    {
+      "key": "nOEWCNc77MI_multiblock_material_v001:87:1:13",
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 87,
+      "runIndex": 1,
+      "expectedIndex": 13,
+      "inputVisible90s": true,
+      "structuralExcluded": false,
+      "v012": {
+        "status": "reached",
+        "startDeltaMs": -21489,
+        "endDeltaMs": -25623,
+        "cut": {
+          "sourceStartMs": 11520066,
+          "sourceEndMs": 11549658,
+          "reason": "開始根拠: 船内にベッドルームを作る提案を切り出す発話から始まるためです。終了根拠: 4つのベッドが置ける広さに大満足し、ベッドルームの配置について納得して締めくくる発話まで含めるためです。除外判断: 直後の発話からは配信を終了する雰囲気の別話題や雑談へと移行するため含めていません。",
+          "usedSpeechIds": [
+            "1713-1719"
+          ]
+        }
+      },
+      "boundary": {
+        "status": "reached",
+        "startDeltaMs": -21489,
+        "endDeltaMs": -25623,
+        "cut": {
+          "sourceStartMs": 11520066,
+          "sourceEndMs": 11549658,
+          "startBoundaryPointId": "word-052461:start",
+          "endBoundaryPointId": "word-052587:end",
+          "startReason": "ベッドルームの提案を切り出す最初の言葉である「あ、ここベッドルームにしよっかな」の「あ」を開始点として選択しました。",
+          "endReason": "提案に対する一連のやり取りが収束し、船長が次のアクションへ移行しようとする「船長は」を終了点として選択しました。",
+          "provisionalSourceStartMs": 11520066,
+          "provisionalSourceEndMs": 11549658
+        },
+        "selectedCutIndex": 1,
+        "overlapMs": 8103
+      }
+    },
+    {
+      "key": "nOEWCNc77MI_multiblock_material_v001:87:3:13",
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 87,
+      "runIndex": 3,
+      "expectedIndex": 13,
+      "inputVisible90s": true,
+      "structuralExcluded": false,
+      "v012": {
+        "status": "reached",
+        "startDeltaMs": -21489,
+        "endDeltaMs": -25623,
+        "cut": {
+          "sourceStartMs": 11520066,
+          "sourceEndMs": 11549658,
+          "reason": "開始根拠: 船内にベッドルームを作る提案を切り出す発話から始まるためです。終了根拠: 4つのベッドが置ける広さに大満足し、ベッドルームの設置に関する一連のやり取りが綺麗に収束する発話まで含めるためです。除外判断: 候補範囲外の、その後に続く配信の締めや別の話題に関する発話はテーマに無関係なため除外しています。",
+          "usedSpeechIds": [
+            "1713-1719"
+          ]
+        }
+      },
+      "boundary": {
+        "status": "reached",
+        "startDeltaMs": -21489,
+        "endDeltaMs": -25623,
+        "cut": {
+          "sourceStartMs": 11520066,
+          "sourceEndMs": 11549658,
+          "startBoundaryPointId": "word-052461:start",
+          "endBoundaryPointId": "word-052587:end",
+          "startReason": "ベッドルームの提案を切り出す最初の言葉である「あ、ここベッドルームにしよっかな」の「あ」を開始境界に選択しました。",
+          "endReason": "ベッドルーム設置に関する一連の話がきれいに収まる「船長は」を終了境界に選択しました。",
+          "provisionalSourceStartMs": 11520066,
+          "provisionalSourceEndMs": 11549658
+        },
+        "selectedCutIndex": 1,
+        "overlapMs": 8103
+      }
+    },
+    {
+      "key": "nOEWCNc77MI_multiblock_material_v001:88:1:13",
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 88,
+      "runIndex": 1,
+      "expectedIndex": 13,
+      "inputVisible90s": true,
+      "structuralExcluded": false,
+      "v012": {
+        "status": "reached",
+        "startDeltaMs": 9732,
+        "endDeltaMs": 18029,
+        "cut": {
+          "sourceStartMs": 11551287,
+          "sourceEndMs": 11593310,
+          "reason": "開始根拠: マリンが水面下で進めると話したのに対し、ころねが「でも誘って?」と恋愛風の掛け合いのフリとなる発話を始めるためです。終了根拠: ころねとの恋愛風の掛け合いのオチに対して、マリンが「コーネとならやっていける気がする」と結論づけて余韻が収束する発話まで含めるためです。除外判断: 直後の「じゃあ愛しのマリン?」以降は別のゲーム内オブジェクトを発見した話題へ移るため含めません。",
+          "usedSpeechIds": [
+            "1720-1726"
+          ]
+        }
+      },
+      "boundary": {
+        "status": "reached",
+        "startDeltaMs": 9732,
+        "endDeltaMs": 18029,
+        "cut": {
+          "sourceStartMs": 11551287,
+          "sourceEndMs": 11593310,
+          "startBoundaryPointId": "word-052588:start",
+          "endBoundaryPointId": "word-052758:end",
+          "startReason": "ころねが恋愛風の掛け合いのフリとなる発話を「でも誘って?」と切り出す位置を開始境界としました。",
+          "endReason": "マリンが「コーネとならやっていける気がする、マリンは」と言い終えた直後のころねの「ほんと?」という応答までを含めてオチが収束する位置を終了境界としました。",
+          "provisionalSourceStartMs": 11551287,
+          "provisionalSourceEndMs": 11593310
+        },
+        "selectedCutIndex": 1,
+        "overlapMs": 23994
+      }
+    },
+    {
+      "key": "nOEWCNc77MI_multiblock_material_v001:88:2:13",
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 88,
+      "runIndex": 2,
+      "expectedIndex": 13,
+      "inputVisible90s": true,
+      "structuralExcluded": false,
+      "v012": {
+        "status": "reached",
+        "startDeltaMs": 9732,
+        "endDeltaMs": 18029,
+        "cut": {
+          "sourceStartMs": 11551287,
+          "sourceEndMs": 11593310,
+          "reason": "開始根拠: マリンが水面下で進めると話したのに対し、ころねが「でも誘って?」と掛け合いの起点となるアプローチを始める発話から選択しました。終了根拠: マリンが「コーネとならやっていける気がする」と弁明の結論を述べ、恋愛風の掛け合いが収束する発話までを含めました。除外判断: 直後の発話からはゲーム内で別のものを発見して話題が完全に切り替わるため、これ以降の区間は除外しました。",
+          "usedSpeechIds": [
+            "1720-1726"
+          ]
+        }
+      },
+      "boundary": {
+        "status": "reached",
+        "startDeltaMs": 9732,
+        "endDeltaMs": 18029,
+        "cut": {
+          "sourceStartMs": 11551287,
+          "sourceEndMs": 11593310,
+          "startBoundaryPointId": "word-052588:start",
+          "endBoundaryPointId": "word-052758:end",
+          "startReason": "ころねが「でも誘って?」とマリンへアプローチを仕掛ける発話の開始位置を選択しました。",
+          "endReason": "マリンが「コーネとならやっていける気がする」と結論付け、掛け合いが収束する「ほんと?」の終了位置を選択しました。",
+          "provisionalSourceStartMs": 11551287,
+          "provisionalSourceEndMs": 11593310
+        },
+        "selectedCutIndex": 1,
+        "overlapMs": 23994
+      }
+    },
+    {
+      "key": "nOEWCNc77MI_multiblock_material_v001:88:3:13",
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 88,
+      "runIndex": 3,
+      "expectedIndex": 13,
+      "inputVisible90s": true,
+      "structuralExcluded": false,
+      "v012": {
+        "status": "reached",
+        "startDeltaMs": 9732,
+        "endDeltaMs": 18029,
+        "cut": {
+          "sourceStartMs": 11551287,
+          "sourceEndMs": 11593310,
+          "reason": "開始根拠: マリンの「でも誘って?」という、告白の掛け合いのフリとなる発話から始まるためです。終了根拠: マリンが「コーネとならやっていける気がする」と締めくくり、恋愛風の掛け合いのオチと余韻が収束する発話まで含めるためです。除外判断: 候補範囲外のspeechId 1727以降はゲーム内の別の発見に話題が移っているため含めません。",
+          "usedSpeechIds": [
+            "1720-1726"
+          ]
+        }
+      },
+      "boundary": {
+        "status": "reached",
+        "startDeltaMs": 9732,
+        "endDeltaMs": 18029,
+        "cut": {
+          "sourceStartMs": 11551287,
+          "sourceEndMs": 11593310,
+          "startBoundaryPointId": "word-052588:start",
+          "endBoundaryPointId": "word-052758:end",
+          "startReason": "掛け合いのフリとなる「でも誘って?」の「で」の開始点を選択しました。",
+          "endReason": "「マリンはほんと?」の締めくくりの「?」の終了点を選択しました。",
+          "provisionalSourceStartMs": 11551287,
+          "provisionalSourceEndMs": 11593310
+        },
+        "selectedCutIndex": 1,
+        "overlapMs": 23994
+      }
+    },
+    {
+      "key": "9dtwF5Exu5w_multiblock_material_v001:5:1:6",
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 5,
+      "runIndex": 1,
+      "expectedIndex": 6,
+      "inputVisible90s": false,
+      "structuralExcluded": false,
+      "v012": {
+        "status": "reached",
+        "startDeltaMs": -137085,
+        "endDeltaMs": 62808,
+        "cut": {
+          "sourceStartMs": 1113054,
+          "sourceEndMs": 1317150,
+          "reason": "開始根拠: 白上フブキに合わせた名前やエフェクトのテイストにしようと試行錯誤を始める発話からカットを開始します。終了根拠: クレッセントムーンなどを試し投げして白神さんっぽい第一候補を決めた後、ショップでの仕様確認へ話題が移る手前までを含めるためです。除外判断: 候補範囲外の163番以降は、パワプロショップでの仕様確認やリスナーとの育成方針に関する長い相談に移るため除外しました。",
+          "usedSpeechIds": [
+            "145-162"
+          ]
+        }
+      },
+      "boundary": {
+        "status": "reached",
+        "startDeltaMs": -137085,
+        "endDeltaMs": 62808,
+        "cut": {
+          "sourceStartMs": 1113054,
+          "sourceEndMs": 1317150,
+          "startBoundaryPointId": "word-004132:start",
+          "endBoundaryPointId": "word-004638:end",
+          "startReason": "白上フブキに合わせた名前やテイストの試行錯誤が始まる「フブちゃんっぽいテイスト入れて」の発話の開始点を境界として選択しました。",
+          "endReason": "ショップでの仕様確認に話題が移る直前の「ショップでエフェクト変える？」という発話の終了点を境界として選択しました。",
+          "provisionalSourceStartMs": 1113054,
+          "provisionalSourceEndMs": 1317150
+        },
+        "selectedCutIndex": 1,
+        "overlapMs": 4203
+      }
+    },
+    {
+      "key": "9dtwF5Exu5w_multiblock_material_v001:5:2:6",
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 5,
+      "runIndex": 2,
+      "expectedIndex": 6,
+      "inputVisible90s": false,
+      "structuralExcluded": false,
+      "v012": {
+        "status": "reached",
+        "startDeltaMs": -137085,
+        "endDeltaMs": 62808,
+        "cut": {
+          "sourceStartMs": 1113054,
+          "sourceEndMs": 1317150,
+          "reason": "開始根拠: フブキ（白上フブキ）に合わせたオリジナル変化球のエフェクト選びと名前付けについて言及する発話からテーマが始まるためです。終了根拠: 複数のエフェクトを試し投げした後にショップでエフェクトを変更するか検討し、一連の試行錯誤が一段落する発話までを含めるためです。除外判断: 候補範囲外の163以降はショップへの移動やその後の育成方針などの異なる議論に移るため除外します。",
+          "usedSpeechIds": [
+            "145-162"
+          ]
+        }
+      },
+      "boundary": {
+        "status": "reached",
+        "startDeltaMs": -137085,
+        "endDeltaMs": 62808,
+        "cut": {
+          "sourceStartMs": 1113054,
+          "sourceEndMs": 1317150,
+          "startBoundaryPointId": "word-004132:start",
+          "endBoundaryPointId": "word-004638:end",
+          "startReason": "フブキに合わせた名前付けやテイストについて言及する「フブちゃんっぽいテイスト入れて」という発言からテーマが明確に始まるためです。",
+          "endReason": "エフェクトの試し投げが一通り終わり、ショップでの変更について検討する「ショップでエフェクト変える?」という発言の区切りまでを含めるためです。",
+          "provisionalSourceStartMs": 1113054,
+          "provisionalSourceEndMs": 1317150
+        },
+        "selectedCutIndex": 1,
+        "overlapMs": 4203
+      }
+    },
+    {
+      "key": "9dtwF5Exu5w_multiblock_material_v001:5:3:6",
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 5,
+      "runIndex": 3,
+      "expectedIndex": 6,
+      "inputVisible90s": false,
+      "structuralExcluded": false,
+      "v012": {
+        "status": "reached",
+        "startDeltaMs": -137085,
+        "endDeltaMs": 62808,
+        "cut": {
+          "sourceStartMs": 1113054,
+          "sourceEndMs": 1317150,
+          "reason": "開始根拠: フブキ（白上フブキ）風の名前を付けようと提案し、エフェクト選びを始める発話から展開するためです。終了根拠: 試し投げを一通り終え、ショップでエフェクトを変えるかどうかの話題に移る直前の発話までを網羅するためです。除外判断: 候補範囲外のspeechId 163以降は、ショップの機能や全体の育成方針・アンケートの悩みに話が移るため除外しました。",
+          "usedSpeechIds": [
+            "145-162"
+          ]
+        }
+      },
+      "boundary": {
+        "status": "reached",
+        "startDeltaMs": -137085,
+        "endDeltaMs": 62808,
+        "cut": {
+          "sourceStartMs": 1113054,
+          "sourceEndMs": 1317150,
+          "startBoundaryPointId": "word-004132:start",
+          "endBoundaryPointId": "word-004638:end",
+          "startReason": "フブキ風の名前を付けようと提案する発話の冒頭である「フ」を選びました。",
+          "endReason": "ショップに行く直前の発話で、エフェクト変更の話題の締めくくりとなる「ショップでエフェクト変える？」の最後の言葉を選びました。",
+          "provisionalSourceStartMs": 1113054,
+          "provisionalSourceEndMs": 1317150
+        },
+        "selectedCutIndex": 1,
+        "overlapMs": 4203
+      }
+    },
+    {
+      "key": "9dtwF5Exu5w_multiblock_material_v001:9:1:7",
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 9,
+      "runIndex": 1,
+      "expectedIndex": 7,
+      "inputVisible90s": false,
+      "structuralExcluded": false,
+      "v012": {
+        "status": "reached",
+        "startDeltaMs": -2761,
+        "endDeltaMs": 137891,
+        "cut": {
+          "sourceStartMs": 2010874,
+          "sourceEndMs": 2155086,
+          "reason": "開始根拠: 療養中のリリカからチャットでアドバイスをもらい感謝を述べる場面から始まるためです。終了根拠: リリカの限界受験卒業生としての架空の思い出話を繰り広げる寸劇のようなやり取りが収束する発話まで含めるためです。除外判断: 中間に挟まるゲーム性能の客観的な解説発話（ID 221-222）は、寸劇テーマの面白さから外れるため使用発話IDの対象から除外して構成しています。",
+          "usedSpeechIds": [
+            220,
+            "223-224"
+          ]
+        }
+      },
+      "boundary": {
+        "status": "reached",
+        "startDeltaMs": -2761,
+        "endDeltaMs": 137891,
+        "cut": {
+          "sourceStartMs": 2010874,
+          "sourceEndMs": 2155086,
+          "startBoundaryPointId": "word-006611:start",
+          "endBoundaryPointId": "word-007161:end",
+          "startReason": "療養中のリリカからチャットでアドバイスが届き、感謝と状況の確認を述べる「リリカがチャットくれてる」から話題が始まるためここを開始点としました。",
+          "endReason": "リリカの限界受験卒業生としての架空の思い出話を繰り広げる寸劇的なやり取りが「言ったかも」という発話で収束するためここを終了点としました。",
+          "provisionalSourceStartMs": 2010874,
+          "provisionalSourceEndMs": 2155086
+        },
+        "selectedCutIndex": 1,
+        "overlapMs": 3560
+      }
+    },
+    {
+      "key": "9dtwF5Exu5w_multiblock_material_v001:9:2:7",
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 9,
+      "runIndex": 2,
+      "expectedIndex": 7,
+      "inputVisible90s": false,
+      "structuralExcluded": false,
+      "v012": {
+        "status": "reached",
+        "startDeltaMs": -2761,
+        "endDeltaMs": 137891,
+        "cut": {
+          "sourceStartMs": 2010874,
+          "sourceEndMs": 2155086,
+          "reason": "開始根拠: コロナで療養中のリリカがチャットをくれたことに気づき、感謝を述べる場面から会話が始まるためです。終了根拠: 卒業生としての設定に合わせた妄想や寸劇のようなやり取りが一段落する発話までを含めるためです。除外判断: それ以降のフブキの育成状況や他の選手データの見直しなど、具体的なゲームシステムの話に戻る部分はテーマから外れるため除外しました。",
+          "usedSpeechIds": [
+            "220-224"
+          ]
+        }
+      },
+      "boundary": {
+        "status": "reached",
+        "startDeltaMs": -2761,
+        "endDeltaMs": 137891,
+        "cut": {
+          "sourceStartMs": 2010874,
+          "sourceEndMs": 2155086,
+          "startBoundaryPointId": "word-006611:start",
+          "endBoundaryPointId": "word-007161:end",
+          "startReason": "コロナ療養中のリリカがチャットをくれたことに気づき、「リリカがチャットくれてる」と言及して感謝を述べる場面から会話のテーマが始まるためです。",
+          "endReason": "卒業生の設定に合わせた「嬉しいですかなって言ったかも」という妄想や寸劇のようなやり取りが一段落する発話の最後を境界としました。",
+          "provisionalSourceStartMs": 2010874,
+          "provisionalSourceEndMs": 2155086
+        },
+        "selectedCutIndex": 1,
+        "overlapMs": 3560
+      }
+    },
+    {
+      "key": "9dtwF5Exu5w_multiblock_material_v001:9:3:7",
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 9,
+      "runIndex": 3,
+      "expectedIndex": 7,
+      "inputVisible90s": false,
+      "structuralExcluded": false,
+      "v012": {
+        "status": "reached",
+        "startDeltaMs": -2761,
+        "endDeltaMs": 137891,
+        "cut": {
+          "sourceStartMs": 2010874,
+          "sourceEndMs": 2155086,
+          "reason": "開始根拠: コロナ療養中のリリカからチャットでアドバイスが届いたことを紹介し、感謝を伝える発話から始まるためです。終了根拠: 卒業生としての設定に合わせた妄想寸劇のやり取りが一区切りつく発話まで含めるためです。除外判断: 候補外の前後の区間は、オリジナル変化球の仕様や育成に関する別のゲームプレイ相談であるため除外しました。",
+          "usedSpeechIds": [
+            "220-224"
+          ]
+        }
+      },
+      "boundary": {
+        "status": "reached",
+        "startDeltaMs": -2761,
+        "endDeltaMs": 137891,
+        "cut": {
+          "sourceStartMs": 2010874,
+          "sourceEndMs": 2155086,
+          "startBoundaryPointId": "word-006611:start",
+          "endBoundaryPointId": "word-007161:end",
+          "startReason": "コロナ療養中のリリカからチャットによるアドバイスが届いたことを紹介し感謝を伝える「リリカがチャットくれてる」から区間を開始しました。",
+          "endReason": "卒業生としての設定に合わせた妄想寸劇のやり取りが一区切りつく発話である「言ったかも」の末尾を終了境界に指定しました。",
+          "provisionalSourceStartMs": 2010874,
+          "provisionalSourceEndMs": 2155086
+        },
+        "selectedCutIndex": 1,
+        "overlapMs": 3560
+      }
+    },
+    {
+      "key": "9dtwF5Exu5w_multiblock_material_v001:13:1:8",
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 13,
+      "runIndex": 1,
+      "expectedIndex": 8,
+      "inputVisible90s": false,
+      "structuralExcluded": false,
+      "v012": {
+        "status": "reached",
+        "startDeltaMs": -135681,
+        "endDeltaMs": 26190,
+        "cut": {
+          "sourceStartMs": 3554885,
+          "sourceEndMs": 3723879,
+          "reason": "開始根拠: 「重さ」の育成方針についてリスナーに意見を募集し始める発話から始まるためです。終了根拠: 混乱したマリンが同期の博衣こよりに大声で助けを求める一連のコミカルな反応が収束する発話まで含めるためです。除外判断: それ以前の技の名前を決める話題や、それ以降のこよりに聞くのをやめる話題は、テーマの最小区間から外れるため除外しました。",
+          "usedSpeechIds": [
+            "343-345",
+            "350-353"
+          ]
+        }
+      },
+      "boundary": {
+        "status": "reached",
+        "startDeltaMs": -135681,
+        "endDeltaMs": 26190,
+        "cut": {
+          "sourceStartMs": 3554885,
+          "sourceEndMs": 3723879,
+          "startBoundaryPointId": "word-010378:start",
+          "endBoundaryPointId": "word-010828:end",
+          "startReason": "育成方針について「意見大募集」とリスナーへの呼びかけが始まる最初の単語を選択しました。",
+          "endReason": "博衣こよりへ大声で「助けてくれー！」と叫び声を上げるコミカルなくだりの最後の単語を選択しました。",
+          "provisionalSourceStartMs": 3554885,
+          "provisionalSourceEndMs": 3723879
+        },
+        "selectedCutIndex": 1,
+        "overlapMs": 7123
+      }
+    },
+    {
+      "key": "9dtwF5Exu5w_multiblock_material_v001:13:2:8",
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 13,
+      "runIndex": 2,
+      "expectedIndex": 8,
+      "inputVisible90s": false,
+      "structuralExcluded": false,
+      "v012": {
+        "status": "reached",
+        "startDeltaMs": -135681,
+        "endDeltaMs": 26190,
+        "cut": {
+          "sourceStartMs": 3554885,
+          "sourceEndMs": 3723879,
+          "reason": "開始根拠: リスナーに対して「重さ」の育成方針に関する意見を募集し、混乱が始まる発話から選択するためです。終了根拠: 意見の対立に困り果てたマリンが、同期の博衣こよりに助けを求めるコミカルな叫びが収束する瞬間まで含めるためです。除外判断: それ以前の技の名前に関する相談や、それ以降のこよりの配信状況を確認する無関係な独り言の区間はテーマ外のため除外しました。",
+          "usedSpeechIds": [
+            "343-345",
+            "350-353"
+          ]
+        }
+      },
+      "boundary": {
+        "status": "reached",
+        "startDeltaMs": -135681,
+        "endDeltaMs": 26190,
+        "cut": {
+          "sourceStartMs": 3554885,
+          "sourceEndMs": 3723879,
+          "startBoundaryPointId": "word-010378:start",
+          "endBoundaryPointId": "word-010828:end",
+          "startReason": "リスナーに対して育成方針の意見募集を呼びかけ混乱が始まる「意見大募集」という発話の開始点を選択しました。",
+          "endReason": "対立する意見に困り果てたマリンが同期の博衣こよりに助けを求めるコミカルな叫びが収束する「助けてくれー！」の終了点を選択しました。",
+          "provisionalSourceStartMs": 3554885,
+          "provisionalSourceEndMs": 3723879
+        },
+        "selectedCutIndex": 1,
+        "overlapMs": 7123
+      }
+    },
+    {
+      "key": "9dtwF5Exu5w_multiblock_material_v001:13:3:8",
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 13,
+      "runIndex": 3,
+      "expectedIndex": 8,
+      "inputVisible90s": false,
+      "structuralExcluded": false,
+      "v012": {
+        "status": "reached",
+        "startDeltaMs": -135681,
+        "endDeltaMs": 26190,
+        "cut": {
+          "sourceStartMs": 3554885,
+          "sourceEndMs": 3723879,
+          "reason": "開始根拠: リスナーへ「重さ」の育成方針に関する意見を募集し、混乱が始まる最初の発話から選択しました。終了根拠: 混乱したマリンが同期の博衣こよりに助けを求めるコミカルな叫びの余韻が収束する瞬間まで含めるためです。除外判断: 候補範囲の直前（speechId: 342以前）および直後（speechId: 354以降）は、技の命名やこよりへの連絡を諦める別の文脈へ移るため除外しました。",
+          "usedSpeechIds": [
+            "343-345",
+            "350-353"
+          ]
+        }
+      },
+      "boundary": {
+        "status": "reached",
+        "startDeltaMs": -135681,
+        "endDeltaMs": 26190,
+        "cut": {
+          "sourceStartMs": 3554885,
+          "sourceEndMs": 3723879,
+          "startBoundaryPointId": "word-010378:start",
+          "endBoundaryPointId": "word-010828:end",
+          "startReason": "リスナーへ意見を募る最初の言葉「意見大募集」の開始点を選択しました。",
+          "endReason": "こよりへ助けを求める叫びの最後の言葉「助けてくれー!」の終了点を選択しました。",
+          "provisionalSourceStartMs": 3554885,
+          "provisionalSourceEndMs": 3723879
+        },
+        "selectedCutIndex": 1,
+        "overlapMs": 7123
+      }
+    },
+    {
+      "key": "9dtwF5Exu5w_multiblock_material_v001:14:1:9",
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 14,
+      "runIndex": 1,
+      "expectedIndex": 9,
+      "inputVisible90s": true,
+      "structuralExcluded": false,
+      "v012": {
+        "status": "reached",
+        "startDeltaMs": -17465,
+        "endDeltaMs": 36441,
+        "cut": {
+          "sourceStartMs": 3723879,
+          "sourceEndMs": 3794866,
+          "reason": "開始根拠: こよりへの相談を検討し、彼女の配信状況などを確認する最初の手がかりとなる発話から選択しました。終了根拠: こよりを荒れから守るために相談をやめ、きまち（星街すいせい）と一緒に決めるという結論に達して余韻が収束する発話までを含めました。除外判断: 候補範囲外の直前にあるこよりを呼び出す発話（speechId: 351-353）や、直後の具体的なパラメータの悩み（speechId: 359以降）は、テーマの芯である「相談を断念する葛藤と優しさ」とは別の文脈となるため除外しました。",
+          "usedSpeechIds": [
+            "354-359"
+          ]
+        }
+      },
+      "boundary": {
+        "status": "reached",
+        "startDeltaMs": -17465,
+        "endDeltaMs": 27032,
+        "cut": {
+          "sourceStartMs": 3723879,
+          "sourceEndMs": 3785457,
+          "startBoundaryPointId": "word-010829:start",
+          "endBoundaryPointId": "word-011107:end",
+          "startReason": "こよりへの相談状況を確認し始める「んーさっき配信終わった？」という発話の開始点を選択しました。",
+          "endReason": "荒れを考慮して相談を断念し、「それがいい」と結論づけて納得した余韻の最後の言葉を選択しました。",
+          "provisionalSourceStartMs": 3723879,
+          "provisionalSourceEndMs": 3794866
+        },
+        "selectedCutIndex": 1,
+        "overlapMs": 17081
+      }
+    },
+    {
+      "key": "9dtwF5Exu5w_multiblock_material_v001:14:2:9",
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 14,
+      "runIndex": 2,
+      "expectedIndex": 9,
+      "inputVisible90s": true,
+      "structuralExcluded": false,
+      "v012": {
+        "status": "reached",
+        "startDeltaMs": -17465,
+        "endDeltaMs": 36441,
+        "cut": {
+          "sourceStartMs": 3723879,
+          "sourceEndMs": 3794866,
+          "reason": "開始根拠: こよりの配信状況やアドバイスの有無を気にかける発話からテーマが開始するためです。終了根拠: 荒れるリスクを考慮して相談をやめ、星街すいせい（きまち）と決めると結論づけて会話が収束する発話まで含めるためです。除外判断: 候補範囲外の直前の発話は単なるこよりへの呼びかけであり、直後の発話は再び別の育成仕様（重さ）の議論に戻っているため除外しました。",
+          "usedSpeechIds": [
+            "354-359"
+          ]
+        }
+      },
+      "boundary": {
+        "status": "reached",
+        "startDeltaMs": -17465,
+        "endDeltaMs": 36441,
+        "cut": {
+          "sourceStartMs": 3723879,
+          "sourceEndMs": 3794866,
+          "startBoundaryPointId": "word-010829:start",
+          "endBoundaryPointId": "word-011146:end",
+          "startReason": "こよりの配信状況を気にかける「んーさっき配信終わった？」という発話から新しいトークテーマが明確に開始するためです。",
+          "endReason": "「きまちと一緒に決める」という結論に至った後、トークが収束する「キャッチ」という最後の言葉までを収めるためです。",
+          "provisionalSourceStartMs": 3723879,
+          "provisionalSourceEndMs": 3794866
+        },
+        "selectedCutIndex": 1,
+        "overlapMs": 17081
+      }
+    },
+    {
+      "key": "9dtwF5Exu5w_multiblock_material_v001:14:3:9",
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 14,
+      "runIndex": 3,
+      "expectedIndex": 9,
+      "inputVisible90s": true,
+      "structuralExcluded": false,
+      "v012": {
+        "status": "reached",
+        "startDeltaMs": -17465,
+        "endDeltaMs": 36441,
+        "cut": {
+          "sourceStartMs": 3723879,
+          "sourceEndMs": 3794866,
+          "reason": "開始根拠: こよりへの相談について言及し始める発話から開始するためです。終了根拠: 荒れるリスクを懸念して相談をやめ、きまちと決めるという結論に達して一連の会話が収束する発話まで含めるためです。除外判断: 候補範囲より前のこよりを呼ぶ叫びや、後ろの別の話題に移った部分はテーマに直接関係がないため除外しました。",
+          "usedSpeechIds": [
+            "354-359"
+          ]
+        }
+      },
+      "boundary": {
+        "status": "reached",
+        "startDeltaMs": -17465,
+        "endDeltaMs": 36441,
+        "cut": {
+          "sourceStartMs": 3723879,
+          "sourceEndMs": 3794866,
+          "startBoundaryPointId": "word-010829:start",
+          "endBoundaryPointId": "word-011146:end",
+          "startReason": "こよりへの相談について「んーさっき配信終わった？」と言及し始める最初の発話の開始点を選びました。",
+          "endReason": "「重さいる説、いらない説キャッチドーンキャッチ」と結論に達して一連の会話が収束する最後の言葉の終了点を選びました。",
+          "provisionalSourceStartMs": 3723879,
+          "provisionalSourceEndMs": 3794866
+        },
+        "selectedCutIndex": 1,
+        "overlapMs": 17081
+      }
+    },
+    {
+      "key": "9dtwF5Exu5w_multiblock_material_v001:16:1:10",
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 16,
+      "runIndex": 1,
+      "expectedIndex": 10,
+      "inputVisible90s": false,
+      "structuralExcluded": true,
+      "v012": {
+        "status": "reached",
+        "startDeltaMs": -6925,
+        "endDeltaMs": 169219,
+        "cut": {
+          "sourceStartMs": 4200714,
+          "sourceEndMs": 4379860,
+          "reason": "開始根拠: 新球種の性能について迷い、リスナーにどっちが良いか確認し始める発話から開始するためです。終了根拠: 投票結果をもとに球種を決定した直後、迷いすぎて1時間経ってしまったことを明かして謝罪・感謝する発話が収束するまで含めるためです。除外判断: 候補範囲の先頭にある悩み中の断片（speechId: 375-376）は、その後に一度別のテスト投球などを挟んでから本格的な投票と結論の流れが始まるため、切り抜きとして単独で綺麗に成立する後半のまとまりのみを最小区間として選択しました。",
+          "usedSpeechIds": [
+            "381-390"
+          ]
+        }
+      },
+      "boundary": {
+        "status": "structural-excluded"
+      }
+    },
+    {
+      "key": "9dtwF5Exu5w_multiblock_material_v001:16:1:11",
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 16,
+      "runIndex": 1,
+      "expectedIndex": 11,
+      "inputVisible90s": false,
+      "structuralExcluded": true,
+      "v012": {
+        "status": "reached",
+        "startDeltaMs": -32093,
+        "endDeltaMs": 140450,
+        "cut": {
+          "sourceStartMs": 4200714,
+          "sourceEndMs": 4379860,
+          "reason": "開始根拠: 新球種の性能について迷い、リスナーにどっちが良いか確認し始める発話から開始するためです。終了根拠: 投票結果をもとに球種を決定した直後、迷いすぎて1時間経ってしまったことを明かして謝罪・感謝する発話が収束するまで含めるためです。除外判断: 候補範囲の先頭にある悩み中の断片（speechId: 375-376）は、その後に一度別のテスト投球などを挟んでから本格的な投票と結論の流れが始まるため、切り抜きとして単独で綺麗に成立する後半のまとまりのみを最小区間として選択しました。",
+          "usedSpeechIds": [
+            "381-390"
+          ]
+        }
+      },
+      "boundary": {
+        "status": "structural-excluded"
+      }
+    },
+    {
+      "key": "9dtwF5Exu5w_multiblock_material_v001:16:1:12",
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 16,
+      "runIndex": 1,
+      "expectedIndex": 12,
+      "inputVisible90s": false,
+      "structuralExcluded": true,
+      "v012": {
+        "status": "reached",
+        "startDeltaMs": -72714,
+        "endDeltaMs": 100388,
+        "cut": {
+          "sourceStartMs": 4200714,
+          "sourceEndMs": 4379860,
+          "reason": "開始根拠: 新球種の性能について迷い、リスナーにどっちが良いか確認し始める発話から開始するためです。終了根拠: 投票結果をもとに球種を決定した直後、迷いすぎて1時間経ってしまったことを明かして謝罪・感謝する発話が収束するまで含めるためです。除外判断: 候補範囲の先頭にある悩み中の断片（speechId: 375-376）は、その後に一度別のテスト投球などを挟んでから本格的な投票と結論の流れが始まるため、切り抜きとして単独で綺麗に成立する後半のまとまりのみを最小区間として選択しました。",
+          "usedSpeechIds": [
+            "381-390"
+          ]
+        }
+      },
+      "boundary": {
+        "status": "structural-excluded"
+      }
+    },
+    {
+      "key": "9dtwF5Exu5w_multiblock_material_v001:16:1:13",
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 16,
+      "runIndex": 1,
+      "expectedIndex": 13,
+      "inputVisible90s": false,
+      "structuralExcluded": true,
+      "v012": {
+        "status": "reached",
+        "startDeltaMs": -166500,
+        "endDeltaMs": 10825,
+        "cut": {
+          "sourceStartMs": 4200714,
+          "sourceEndMs": 4379860,
+          "reason": "開始根拠: 新球種の性能について迷い、リスナーにどっちが良いか確認し始める発話から開始するためです。終了根拠: 投票結果をもとに球種を決定した直後、迷いすぎて1時間経ってしまったことを明かして謝罪・感謝する発話が収束するまで含めるためです。除外判断: 候補範囲の先頭にある悩み中の断片（speechId: 375-376）は、その後に一度別のテスト投球などを挟んでから本格的な投票と結論の流れが始まるため、切り抜きとして単独で綺麗に成立する後半のまとまりのみを最小区間として選択しました。",
+          "usedSpeechIds": [
+            "381-390"
+          ]
+        }
+      },
+      "boundary": {
+        "status": "structural-excluded"
+      }
+    },
+    {
+      "key": "9dtwF5Exu5w_multiblock_material_v001:16:3:10",
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 16,
+      "runIndex": 3,
+      "expectedIndex": 10,
+      "inputVisible90s": false,
+      "structuralExcluded": true,
+      "v012": {
+        "status": "reached",
+        "startDeltaMs": -6925,
+        "endDeltaMs": 169219,
+        "cut": {
+          "sourceStartMs": 4200714,
+          "sourceEndMs": 4379860,
+          "reason": "開始根拠: 2つの新球種の性能差が分からないと言いつつ試投と比較投票を始める発話から開始するためです。終了根拠: 迷いすぎて1時間経ってしまったことを明かしてリスナーに謝罪し、テーマの結論が綺麗に収まる発話まで含めるためです。除外判断: 前の区間との間にある試投の準備発話はテーマに直接関係しないため除外し、2つの独立した区間として分けています。",
+          "usedSpeechIds": [
+            "381-390"
+          ]
+        }
+      },
+      "boundary": {
+        "status": "structural-excluded"
+      }
+    },
+    {
+      "key": "9dtwF5Exu5w_multiblock_material_v001:16:3:11",
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 16,
+      "runIndex": 3,
+      "expectedIndex": 11,
+      "inputVisible90s": false,
+      "structuralExcluded": true,
+      "v012": {
+        "status": "reached",
+        "startDeltaMs": -32093,
+        "endDeltaMs": 140450,
+        "cut": {
+          "sourceStartMs": 4200714,
+          "sourceEndMs": 4379860,
+          "reason": "開始根拠: 2つの新球種の性能差が分からないと言いつつ試投と比較投票を始める発話から開始するためです。終了根拠: 迷いすぎて1時間経ってしまったことを明かしてリスナーに謝罪し、テーマの結論が綺麗に収まる発話まで含めるためです。除外判断: 前の区間との間にある試投の準備発話はテーマに直接関係しないため除外し、2つの独立した区間として分けています。",
+          "usedSpeechIds": [
+            "381-390"
+          ]
+        }
+      },
+      "boundary": {
+        "status": "structural-excluded"
+      }
+    },
+    {
+      "key": "9dtwF5Exu5w_multiblock_material_v001:16:3:12",
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 16,
+      "runIndex": 3,
+      "expectedIndex": 12,
+      "inputVisible90s": false,
+      "structuralExcluded": true,
+      "v012": {
+        "status": "reached",
+        "startDeltaMs": -72714,
+        "endDeltaMs": 100388,
+        "cut": {
+          "sourceStartMs": 4200714,
+          "sourceEndMs": 4379860,
+          "reason": "開始根拠: 2つの新球種の性能差が分からないと言いつつ試投と比較投票を始める発話から開始するためです。終了根拠: 迷いすぎて1時間経ってしまったことを明かしてリスナーに謝罪し、テーマの結論が綺麗に収まる発話まで含めるためです。除外判断: 前の区間との間にある試投の準備発話はテーマに直接関係しないため除外し、2つの独立した区間として分けています。",
+          "usedSpeechIds": [
+            "381-390"
+          ]
+        }
+      },
+      "boundary": {
+        "status": "structural-excluded"
+      }
+    },
+    {
+      "key": "9dtwF5Exu5w_multiblock_material_v001:16:3:13",
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 16,
+      "runIndex": 3,
+      "expectedIndex": 13,
+      "inputVisible90s": false,
+      "structuralExcluded": true,
+      "v012": {
+        "status": "reached",
+        "startDeltaMs": -166500,
+        "endDeltaMs": 10825,
+        "cut": {
+          "sourceStartMs": 4200714,
+          "sourceEndMs": 4379860,
+          "reason": "開始根拠: 2つの新球種の性能差が分からないと言いつつ試投と比較投票を始める発話から開始するためです。終了根拠: 迷いすぎて1時間経ってしまったことを明かしてリスナーに謝罪し、テーマの結論が綺麗に収まる発話まで含めるためです。除外判断: 前の区間との間にある試投の準備発話はテーマに直接関係しないため除外し、2つの独立した区間として分けています。",
+          "usedSpeechIds": [
+            "381-390"
+          ]
+        }
+      },
+      "boundary": {
+        "status": "structural-excluded"
+      }
+    },
+    {
+      "key": "9dtwF5Exu5w_multiblock_material_v001:22:1:14",
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 22,
+      "runIndex": 1,
+      "expectedIndex": 14,
+      "inputVisible90s": true,
+      "structuralExcluded": false,
+      "v012": {
+        "status": "reached",
+        "startDeltaMs": -13246,
+        "endDeltaMs": 7463,
+        "cut": {
+          "sourceStartMs": 4710742,
+          "sourceEndMs": 4738494,
+          "reason": "開始根拠: しおりんに狙い通り特殊能力を付けるためにミート練習の選択を決定する発話から始まるためです。終了根拠: 狙い通り『カット打ち』の特殊能力が付き、宝鐘マリンが「ええやん！」と歓喜して場面の余韻が収束する瞬間まで含めるためです。除外判断: 候補範囲外の直前の練習内容の検討や、直後の3年生の強化に関する別話題の場面はテーマに含まれないため除外しました。",
+          "usedSpeechIds": [
+            "435-451"
+          ]
+        }
+      },
+      "boundary": {
+        "status": "reached",
+        "startDeltaMs": -13986,
+        "endDeltaMs": 7463,
+        "cut": {
+          "sourceStartMs": 4710002,
+          "sourceEndMs": 4738494,
+          "startBoundaryPointId": "word-014343:start",
+          "endBoundaryPointId": "word-014455:end",
+          "startReason": "しおりんに特殊能力を付けるための選択基準となる「ミートにするか！」という発話から出来事が始まっているためここを開始点としました。",
+          "endReason": "狙い通りに『カット打ち』が付き、宝鐘マリンが「ええやん！」と歓喜して場面が収束する最後の言葉までを含めるためここを終了点としました。",
+          "provisionalSourceStartMs": 4710742,
+          "provisionalSourceEndMs": 4738494
+        },
+        "selectedCutIndex": 1,
+        "overlapMs": 7043
+      }
+    },
+    {
+      "key": "9dtwF5Exu5w_multiblock_material_v001:22:2:14",
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 22,
+      "runIndex": 2,
+      "expectedIndex": 14,
+      "inputVisible90s": true,
+      "structuralExcluded": false,
+      "v012": {
+        "status": "reached",
+        "startDeltaMs": -13246,
+        "endDeltaMs": 7463,
+        "cut": {
+          "sourceStartMs": 4710742,
+          "sourceEndMs": 4738494,
+          "reason": "開始根拠: 候補範囲の冒頭で「ミートに！」としおりんを意識して練習を選択する発話から始まるためです。終了根拠: しおりんに狙い通り『カット打ち』の特殊能力が付いて「ええやん！」と歓喜する一連の反応が収束する発話まで含めるためです。除外判断: 候補範囲外の直前（speechId: 434以前）および直後（speechId: 452以降）は、別の練習の相談や次の進行に移っているため除外します。",
+          "usedSpeechIds": [
+            "435-451"
+          ]
+        }
+      },
+      "boundary": {
+        "status": "reached",
+        "startDeltaMs": -13246,
+        "endDeltaMs": 7463,
+        "cut": {
+          "sourceStartMs": 4710742,
+          "sourceEndMs": 4738494,
+          "startBoundaryPointId": "word-014351:start",
+          "endBoundaryPointId": "word-014455:end",
+          "startReason": "しおりんを意識して練習メニューを決める発話の起点である「ミートに！」の箇所を開始境界として選定しました。",
+          "endReason": "狙い通り「カット打ち」の特殊能力が付き、「ええやん！」と歓喜する一連のリアクションの終端を終了境界として選定しました。",
+          "provisionalSourceStartMs": 4710742,
+          "provisionalSourceEndMs": 4738494
+        },
+        "selectedCutIndex": 1,
+        "overlapMs": 7043
+      }
+    },
+    {
+      "key": "9dtwF5Exu5w_multiblock_material_v001:22:3:14",
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 22,
+      "runIndex": 3,
+      "expectedIndex": 14,
+      "inputVisible90s": true,
+      "structuralExcluded": false,
+      "v012": {
+        "status": "reached",
+        "startDeltaMs": -13246,
+        "endDeltaMs": 7463,
+        "cut": {
+          "sourceStartMs": 4710742,
+          "sourceEndMs": 4738494,
+          "reason": "開始根拠: しおりんに狙いの能力が付く可能性を考慮してミートの練習指示を選ぶ発話から開始するためです。終了根拠: 狙い通りしおりんに『カット打ち』の特殊能力が付いて歓喜する一連のリアクションが収束する発話まで含めるためです。除外判断: 候補範囲より前後の発話は別選手の指示や合宿の別の進行に関する話題のため除外しています。",
+          "usedSpeechIds": [
+            "435-451"
+          ]
+        }
+      },
+      "boundary": {
+        "status": "reached",
+        "startDeltaMs": -13246,
+        "endDeltaMs": 7463,
+        "cut": {
+          "sourceStartMs": 4710742,
+          "sourceEndMs": 4738494,
+          "startBoundaryPointId": "word-014351:start",
+          "endBoundaryPointId": "word-014455:end",
+          "startReason": "しおりんに狙いの能力が付く可能性を考慮してミートの練習指示を選ぶ決定打となる「ミートに！」という発言から開始するためです。",
+          "endReason": "狙い通りしおりんに『カット打ち』の特殊能力が付いて歓喜する「ええやん！」というリアクションの収束まで含めるためです。",
+          "provisionalSourceStartMs": 4710742,
+          "provisionalSourceEndMs": 4738494
+        },
+        "selectedCutIndex": 1,
+        "overlapMs": 7043
+      }
+    },
+    {
+      "key": "9dtwF5Exu5w_multiblock_material_v001:28:1:15",
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 28,
+      "runIndex": 1,
+      "expectedIndex": 15,
+      "inputVisible90s": true,
+      "structuralExcluded": false,
+      "v012": {
+        "status": "reached",
+        "startDeltaMs": -7405,
+        "endDeltaMs": 61501,
+        "cut": {
+          "sourceStartMs": 6281687,
+          "sourceEndMs": 6359980,
+          "reason": "開始根拠: 対戦相手である「ザサミ商業」の名前を叫び、試合開始のリアクションが始まる発話（speechId: 629）から区間を開始するためです。終了根拠: 相手チームのステータスを確認して「全員星300あるこれ」と絶望し、確認が一段落する発話（speechId: 636）まで含めるためです。除外判断: speechId: 637以降は特定の個別選手に対する育成状況や戦術の雑談、およびその後の試合展開に移るため、強さに絶望するテーマからは除外します。",
+          "usedSpeechIds": [
+            "629-636"
+          ]
+        }
+      },
+      "boundary": {
+        "status": "reached",
+        "startDeltaMs": -7405,
+        "endDeltaMs": 61501,
+        "cut": {
+          "sourceStartMs": 6281687,
+          "sourceEndMs": 6359980,
+          "startBoundaryPointId": "word-018879:start",
+          "endBoundaryPointId": "word-019141:end",
+          "startReason": "対戦相手のチーム名である「ザサミ商業!」と大声で叫び、試合開始のリアクションが明確に始まるためです。",
+          "endReason": "相手チームの能力を確認して「あ、こいつだけエラー」と述べ、ステータスの絶望と確認が一区切りつくためです。",
+          "provisionalSourceStartMs": 6281687,
+          "provisionalSourceEndMs": 6359980
+        },
+        "selectedCutIndex": 1,
+        "overlapMs": 9387
+      }
+    },
+    {
+      "key": "9dtwF5Exu5w_multiblock_material_v001:28:2:15",
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 28,
+      "runIndex": 2,
+      "expectedIndex": 15,
+      "inputVisible90s": true,
+      "structuralExcluded": false,
+      "v012": {
+        "status": "reached",
+        "startDeltaMs": -7405,
+        "endDeltaMs": 61501,
+        "cut": {
+          "sourceStartMs": 6281687,
+          "sourceEndMs": 6359980,
+          "reason": "開始根拠: 初戦の対戦相手である「ザサミ商業」の名前を叫び、驚きとともに焦り始める発話から始まるためです。終了根拠: 相手チーム全員のステータスが星300前後あるという驚異の強さに絶望し、例外の選手を一人見つけるリアクションが収束する瞬間まで含めるためです。除外判断: 続く発話からはその例外である長谷川という特定の選手に関する個別の深掘りや試合の具体的な展開の考察に移るため、テーマの最小区間として除外しました。",
+          "usedSpeechIds": [
+            "629-636"
+          ]
+        }
+      },
+      "boundary": {
+        "status": "reached",
+        "startDeltaMs": -7405,
+        "endDeltaMs": 61501,
+        "cut": {
+          "sourceStartMs": 6281687,
+          "sourceEndMs": 6359980,
+          "startBoundaryPointId": "word-018879:start",
+          "endBoundaryPointId": "word-019141:end",
+          "startReason": "初戦の対戦相手である「ザサミ商業!」と叫び声を上げて驚き始める発話の開始点を選びました。",
+          "endReason": "相手チームの能力を確認し「全員星300あるこれマン?」に続いて「あ、こいつだけエラー」とリアクションが収束する最後の言葉を選びました。",
+          "provisionalSourceStartMs": 6281687,
+          "provisionalSourceEndMs": 6359980
+        },
+        "selectedCutIndex": 1,
+        "overlapMs": 9387
+      }
+    },
+    {
+      "key": "9dtwF5Exu5w_multiblock_material_v001:28:3:15",
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 28,
+      "runIndex": 3,
+      "expectedIndex": 15,
+      "inputVisible90s": false,
+      "structuralExcluded": false,
+      "v012": {
+        "status": "reached",
+        "startDeltaMs": -560573,
+        "endDeltaMs": 61501,
+        "cut": {
+          "sourceStartMs": 5728519,
+          "sourceEndMs": 6359980,
+          "reason": "開始根拠: 組み合わせ抽選会で初戦の相手が「ザサミ商業（1B）」に決まり、強さに警戒し始める発話から始まるためです。終了根拠: 試合開始後に相手チームの詳細なステータスを確認し、全員星300前後という驚異の戦力に絶望する一連のリアクションが収束する発話まで含めるためです。除外判断: 試合の具体的な作戦指示や打席の展開へ移るspeechId 637以降の区間はテーマの本質から外れるため除外しました。",
+          "usedSpeechIds": [
+            "570-571",
+            "629-636"
+          ]
+        }
+      },
+      "boundary": {
+        "status": "reached",
+        "startDeltaMs": -560573,
+        "endDeltaMs": 61501,
+        "cut": {
+          "sourceStartMs": 5728519,
+          "sourceEndMs": 6359980,
+          "startBoundaryPointId": "word-017376:start",
+          "endBoundaryPointId": "word-019141:end",
+          "startReason": "組み合わせ抽選会で対戦相手が「1Bかー」と決まり、強さに警戒し始める発話の開始点として適切であるため選択しました。",
+          "endReason": "相手チームの詳細なステータスを確認し、全員星300前後という驚異の戦力に絶望する一連のリアクションが「あ、こいつだけエラー」と収束する発話の終了点として適切であるため選択しました。",
+          "provisionalSourceStartMs": 5728519,
+          "provisionalSourceEndMs": 6359980
+        },
+        "selectedCutIndex": 1,
+        "overlapMs": 9387
+      }
+    },
+    {
+      "key": "9dtwF5Exu5w_multiblock_material_v001:30:1:16",
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 30,
+      "runIndex": 1,
+      "expectedIndex": 16,
+      "inputVisible90s": true,
+      "structuralExcluded": false,
+      "v012": {
+        "status": "reached",
+        "startDeltaMs": -1140,
+        "endDeltaMs": 12908,
+        "cut": {
+          "sourceStartMs": 6525131,
+          "sourceEndMs": 6539920,
+          "reason": "開始根拠: 悩んだ末の作戦を実行に移し、選手へ「頑張ってよ！」と声援を送る発話から始まるためです。終了根拠: 作戦が成功し「やればできるじゃない！」と選手を褒めちぎる大興奮のリアクションと余韻が収束する発話まで含めるためです。除外判断: 候補範囲外の直前にある作戦に悩む発話や、直後の新たな戦況分析に移る発話は、大喜びする中心場面の文脈から外れるため除外しました。",
+          "usedSpeechIds": [
+            "653-663"
+          ]
+        }
+      },
+      "boundary": {
+        "status": "reached",
+        "startDeltaMs": -1140,
+        "endDeltaMs": 12908,
+        "cut": {
+          "sourceStartMs": 6525131,
+          "sourceEndMs": 6539920,
+          "startBoundaryPointId": "word-019665:start",
+          "endBoundaryPointId": "word-019744:end",
+          "startReason": "選手へ「頑張ってよ!」と声援を送り作戦を実行に移す最初の言葉の開始点を選びました。",
+          "endReason": "作戦成功による興奮のリアクションである「スワスワスワ!」という発話の余韻が収束する終了点を選びました。",
+          "provisionalSourceStartMs": 6525131,
+          "provisionalSourceEndMs": 6539920
+        },
+        "selectedCutIndex": 1,
+        "overlapMs": 741
+      }
+    },
+    {
+      "key": "9dtwF5Exu5w_multiblock_material_v001:30:2:16",
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 30,
+      "runIndex": 2,
+      "expectedIndex": 16,
+      "inputVisible90s": true,
+      "structuralExcluded": false,
+      "v012": {
+        "status": "reached",
+        "startDeltaMs": -1140,
+        "endDeltaMs": 12908,
+        "cut": {
+          "sourceStartMs": 6525131,
+          "sourceEndMs": 6539920,
+          "reason": "開始根拠: 悩んだ末の作戦を実行に移し、選手に「頑張ってよ！」と声をかける発話から始まるためです。終了根拠: 作戦が成功し「やればできるじゃない！」と大興奮で選手を褒めちぎるリアクションが収束する発話まで含めるためです。除外判断: 候補範囲外の直前の迷っている場面や、直後の別の指示を出す場面はテーマの中心から外れるため除外しました。",
+          "usedSpeechIds": [
+            "653-663"
+          ]
+        }
+      },
+      "boundary": {
+        "status": "reached",
+        "startDeltaMs": -1140,
+        "endDeltaMs": 12908,
+        "cut": {
+          "sourceStartMs": 6525131,
+          "sourceEndMs": 6539920,
+          "startBoundaryPointId": "word-019665:start",
+          "endBoundaryPointId": "word-019744:end",
+          "startReason": "作戦を実行に移して選手に「頑張ってよ！」と声をかける発話の開始点であるため選定しました。",
+          "endReason": "「スワスワスワ！」と叫んで大興奮のリアクションが収束する最後の言葉の終了点であるため選定しました。",
+          "provisionalSourceStartMs": 6525131,
+          "provisionalSourceEndMs": 6539920
+        },
+        "selectedCutIndex": 1,
+        "overlapMs": 741
+      }
+    },
+    {
+      "key": "9dtwF5Exu5w_multiblock_material_v001:30:3:16",
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 30,
+      "runIndex": 3,
+      "expectedIndex": 16,
+      "inputVisible90s": true,
+      "structuralExcluded": false,
+      "v012": {
+        "status": "reached",
+        "startDeltaMs": -1140,
+        "endDeltaMs": 12908,
+        "cut": {
+          "sourceStartMs": 6525131,
+          "sourceEndMs": 6539920,
+          "reason": "開始根拠: 悩んだ末に作戦を選択し選手に「頑張ってよ！」と声をかける発話から始まるためです。終了根拠: 作戦成功により大喜びするリアクションと歓声が収束する発話まで含めるためです。除外判断: 候補範囲外のこれ以前の迷っている場面や、これ以降の次の作戦選択へ移る場面はテーマの最小区間から除外します。",
+          "usedSpeechIds": [
+            "653-663"
+          ]
+        }
+      },
+      "boundary": {
+        "status": "reached",
+        "startDeltaMs": -1140,
+        "endDeltaMs": 12908,
+        "cut": {
+          "sourceStartMs": 6525131,
+          "sourceEndMs": 6539920,
+          "startBoundaryPointId": "word-019665:start",
+          "endBoundaryPointId": "word-019744:end",
+          "startReason": "作戦決定後の選手へ向けた最初の掛け声である「頑張ってよ！」の「頑」を開始点としました。",
+          "endReason": "作戦成功による喜びのリアクションと「スワスワスワ！」という歓声の最後の感嘆符を終了点としました。",
+          "provisionalSourceStartMs": 6525131,
+          "provisionalSourceEndMs": 6539920
+        },
+        "selectedCutIndex": 1,
+        "overlapMs": 741
+      }
+    },
+    {
+      "key": "9dtwF5Exu5w_multiblock_material_v001:44:1:20",
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 44,
+      "runIndex": 1,
+      "expectedIndex": 20,
+      "inputVisible90s": true,
+      "structuralExcluded": false,
+      "v012": {
+        "status": "reached",
+        "startDeltaMs": -23888,
+        "endDeltaMs": 87356,
+        "cut": {
+          "sourceStartMs": 9126634,
+          "sourceEndMs": 9239820,
+          "reason": "開始根拠: 同点に追いつかれた緊迫した状況を確認し、投手のスタミナや配球の限界について思考し始める発話から開始するためです。終了根拠: 限界を迎えたフブキの投手交代と、代打にビブーを起用する決断を下す一連の作戦の組み立てが完了する発話まで含めるためです。除外判断: 候補範囲外のそれ以降の発話は、ビブーのスキル確認や具体的な次の戦術相談に話題が移っているため含めません。",
+          "usedSpeechIds": [
+            "1003-1012"
+          ]
+        }
+      },
+      "boundary": {
+        "status": "reached",
+        "startDeltaMs": -23888,
+        "endDeltaMs": 87356,
+        "cut": {
+          "sourceStartMs": 9126634,
+          "sourceEndMs": 9239820,
+          "startBoundaryPointId": "word-027638:start",
+          "endBoundaryPointId": "word-027933:end",
+          "startReason": "同点に追いつかれた状況を確認し、投手の配球限界について思考し始める「ミートビーパファイ低めしかないかなぁ」という発話の開始点を選びました。",
+          "endReason": "フブキの投手交代と代打にビブーを起用する決断が収束する「変わっても負けない」という発話の終了点を選びました。",
+          "provisionalSourceStartMs": 9126634,
+          "provisionalSourceEndMs": 9239820
+        },
+        "selectedCutIndex": 1,
+        "overlapMs": 1942
+      }
+    },
+    {
+      "key": "9dtwF5Exu5w_multiblock_material_v001:44:2:20",
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 44,
+      "runIndex": 2,
+      "expectedIndex": 20,
+      "inputVisible90s": true,
+      "structuralExcluded": false,
+      "v012": {
+        "status": "reached",
+        "startDeltaMs": -23888,
+        "endDeltaMs": 87356,
+        "cut": {
+          "sourceStartMs": 9126634,
+          "sourceEndMs": 9239820,
+          "reason": "開始根拠: 同点に追いつかれた緊迫した状況を確認し、指示の組み立てが始まる最初の発話から選択しました。終了根拠: ピッチャー交代と代打にビブーを起用する一連の作戦の思考と結論が収束する発話までを含めました。除外判断: 候補範囲外の1013以降はスキルや詳細な作戦指示の別展開へ移るため最小区間として含めません。",
+          "usedSpeechIds": [
+            "1003-1012"
+          ]
+        }
+      },
+      "boundary": {
+        "status": "reached",
+        "startDeltaMs": -23888,
+        "endDeltaMs": 87356,
+        "cut": {
+          "sourceStartMs": 9126634,
+          "sourceEndMs": 9239820,
+          "startBoundaryPointId": "word-027638:start",
+          "endBoundaryPointId": "word-027933:end",
+          "startReason": "同点に追いつかれた緊迫した状況を受け、「ミートビーパファイ」で作戦の指示が始まる最初の単語の開始点を選択しました。",
+          "endReason": "ピッチャー交代と代打にビブーを起用する一連の作戦の思考と結論が「負けない」という言葉で収束する最後の単語の終了点を選択しました。",
+          "provisionalSourceStartMs": 9126634,
+          "provisionalSourceEndMs": 9239820
+        },
+        "selectedCutIndex": 1,
+        "overlapMs": 1942
+      }
+    },
+    {
+      "key": "9dtwF5Exu5w_multiblock_material_v001:44:3:20",
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 44,
+      "runIndex": 3,
+      "expectedIndex": 20,
+      "inputVisible90s": true,
+      "structuralExcluded": false,
+      "v012": {
+        "status": "reached",
+        "startDeltaMs": -23888,
+        "endDeltaMs": 87356,
+        "cut": {
+          "sourceStartMs": 9126634,
+          "sourceEndMs": 9239820,
+          "reason": "開始根拠: 同点に追いつかれた緊迫した状況下で、戦術を組み立てる思考の起点となる発話から始まるためです。終了根拠: 限界を迎えた投手の交代と代打にビブーを起用する一連の作戦構築が収束する発話まで含めるためです。除外判断: 候補範囲外の近接発話は、その後の代打スキルの確認や具体的なコマンドの相談など、別の議論に移っているため除外します。",
+          "usedSpeechIds": [
+            "1003-1012"
+          ]
+        }
+      },
+      "boundary": {
+        "status": "reached",
+        "startDeltaMs": -23888,
+        "endDeltaMs": 87356,
+        "cut": {
+          "sourceStartMs": 9126634,
+          "sourceEndMs": 9239820,
+          "startBoundaryPointId": "word-027638:start",
+          "endBoundaryPointId": "word-027933:end",
+          "startReason": "同点に追いつかれた緊迫した戦術構築の起点である「ミートビーパファイ低めしかないかなぁ」という発話の開始点を選択しました。",
+          "endReason": "限界を迎えた投手の交代から代打ビブー起用の一連の作戦が「変わっても負けない」と結論づいて収束する発話の終了点を選択しました。",
+          "provisionalSourceStartMs": 9126634,
+          "provisionalSourceEndMs": 9239820
+        },
+        "selectedCutIndex": 1,
+        "overlapMs": 1942
+      }
+    },
+    {
+      "key": "9dtwF5Exu5w_multiblock_material_v001:52:1:23",
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 52,
+      "runIndex": 1,
+      "expectedIndex": 23,
+      "inputVisible90s": true,
+      "structuralExcluded": false,
+      "v012": {
+        "status": "reached",
+        "startDeltaMs": -17972,
+        "endDeltaMs": 88898,
+        "cut": {
+          "sourceStartMs": 10503922,
+          "sourceEndMs": 10618318,
+          "reason": "開始根拠: 相手の能力値とこちらの走力から盗塁の是非を検討し始める発話から開始するためです。終了根拠: リスクを冒すべきか葛藤した末に送りバントの選択肢を思案する発話の収束まで含めるためです。除外判断: 候補範囲外の直後の場面は試合展開が動いて別の話題に移るため除外しました。",
+          "usedSpeechIds": [
+            "1189-1203"
+          ]
+        }
+      },
+      "boundary": {
+        "status": "reached",
+        "startDeltaMs": -17972,
+        "endDeltaMs": 88898,
+        "cut": {
+          "sourceStartMs": 10503922,
+          "sourceEndMs": 10618318,
+          "startBoundaryPointId": "word-031563:start",
+          "endBoundaryPointId": "word-031832:end",
+          "startReason": "相手のステータスを確認して盗塁の是非を検討し始める「肩DのクイックC」という最初の言葉から開始するためです。",
+          "endReason": "リスクを冒すべきか葛藤した末に別の作戦を思案する「送りバント？」という最後の言葉の収束まで含めるためです。",
+          "provisionalSourceStartMs": 10503922,
+          "provisionalSourceEndMs": 10618318
+        },
+        "selectedCutIndex": 1,
+        "overlapMs": 7526
+      }
+    },
+    {
+      "key": "9dtwF5Exu5w_multiblock_material_v001:52:2:23",
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 52,
+      "runIndex": 2,
+      "expectedIndex": 23,
+      "inputVisible90s": true,
+      "structuralExcluded": false,
+      "v012": {
+        "status": "reached",
+        "startDeltaMs": -17972,
+        "endDeltaMs": 88898,
+        "cut": {
+          "sourceStartMs": 10503922,
+          "sourceEndMs": 10618318,
+          "reason": "開始根拠: 相手投手の能力や走者の走塁能力を確認しながら、盗塁の是非を検討し始める発話から始まるためです。終了根拠: リスクとリターンを天秤にかけながら「送りバント？」と作戦の思案が一段落する発話までを含めるためです。除外判断: 候補範囲外の直後の発話（1204以降）は、実際のプレー展開や別の作戦会議に移るため除外しました。",
+          "usedSpeechIds": [
+            "1189-1203"
+          ]
+        }
+      },
+      "boundary": {
+        "status": "format-invalid",
+        "issues": [
+          "missing-start-point:word-031563",
+          "missing-end-point:word-031832"
+        ]
+      }
+    },
+    {
+      "key": "9dtwF5Exu5w_multiblock_material_v001:52:3:23",
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 52,
+      "runIndex": 3,
+      "expectedIndex": 23,
+      "inputVisible90s": true,
+      "structuralExcluded": false,
+      "v012": {
+        "status": "reached",
+        "startDeltaMs": -17972,
+        "endDeltaMs": 88898,
+        "cut": {
+          "sourceStartMs": 10503922,
+          "sourceEndMs": 10618318,
+          "reason": "開始根拠: 相手のクイック能力や自軍の走力を確認し、盗塁するかどうかを思案し始める発話から開始するためです。終了根拠: リスクを犯さなければ勝てないかと考えながら、最終的に「送りバント？」と作戦を迷う一連の葛藤が収束する発話まで含めるためです。除外判断: 候補範囲外（speechId 1204以降）の場面は、実際の投球アクションやその後のスクイズの話題に切り替わり、テーマである「盗塁とスクイーズを巡る事前の作戦思案と葛藤」の最小区間からは外れるため除外しました。",
+          "usedSpeechIds": [
+            "1189-1203"
+          ]
+        }
+      },
+      "boundary": {
+        "status": "reached",
+        "startDeltaMs": -17972,
+        "endDeltaMs": 88898,
+        "cut": {
+          "sourceStartMs": 10503922,
+          "sourceEndMs": 10618318,
+          "startBoundaryPointId": "word-031563:start",
+          "endBoundaryPointId": "word-031832:end",
+          "startReason": "作戦思案の契機となる相手の能力確認のセリフ「肩DのクイックC」から葛藤が始まるため、ここを開始点としました。",
+          "endReason": "盗塁かバントかで揺れる一連の作戦思案が「送りバント？」という最後の自問で収束するため、ここを終了点としました。",
+          "provisionalSourceStartMs": 10503922,
+          "provisionalSourceEndMs": 10618318
+        },
+        "selectedCutIndex": 1,
+        "overlapMs": 7526
+      }
+    },
+    {
+      "key": "9dtwF5Exu5w_multiblock_material_v001:54:1:24",
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 54,
+      "runIndex": 1,
+      "expectedIndex": 24,
+      "inputVisible90s": true,
+      "structuralExcluded": false,
+      "v012": {
+        "status": "reached",
+        "startDeltaMs": -14050,
+        "endDeltaMs": 13448,
+        "cut": {
+          "sourceStartMs": 10776694,
+          "sourceEndMs": 10817172,
+          "reason": "開始根拠: リスナーに対して「トール行こう？」と盗塁の指示を迷いながら問いかけ始める発話から開始するためです。終了根拠: 走力や盗塁の能力値を気にして「やめとくか？」と葛藤の末に一度結論づける発話の収束までを含めるためです。除外判断: それ以降の「犠牲フライか？」やスクイズに関する相談は、盗塁指示に関する葛藤のテーマから外れるため除外しました。",
+          "usedSpeechIds": [
+            "1216-1236"
+          ]
+        }
+      },
+      "boundary": {
+        "status": "reached",
+        "startDeltaMs": -14050,
+        "endDeltaMs": 13448,
+        "cut": {
+          "sourceStartMs": 10776694,
+          "sourceEndMs": 10817172,
+          "startBoundaryPointId": "word-031952:start",
+          "endBoundaryPointId": "word-032135:end",
+          "startReason": "盗塁の指示を迷いながら問いかけ始める発話の最初の文字である「ト」に対応するIDを選択しました。",
+          "endReason": "盗塁能力を懸念した葛藤の末に「やめとくか？」と一度結論づける発話の最後の文字に対応するIDを選択しました。",
+          "provisionalSourceStartMs": 10776694,
+          "provisionalSourceEndMs": 10817172
+        },
+        "selectedCutIndex": 1,
+        "overlapMs": 12980
+      }
+    },
+    {
+      "key": "9dtwF5Exu5w_multiblock_material_v001:54:2:24",
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 54,
+      "runIndex": 2,
+      "expectedIndex": 24,
+      "inputVisible90s": true,
+      "structuralExcluded": false,
+      "v012": {
+        "status": "reached",
+        "startDeltaMs": -14050,
+        "endDeltaMs": 13448,
+        "cut": {
+          "sourceStartMs": 10776694,
+          "sourceEndMs": 10817172,
+          "reason": "開始根拠: テーマである盗塁の指示についてリスナーへ問いかけ葛藤し始める発話から開始するためです。終了根拠: 走力や盗塁の能力値（トールE）を確認して「やめとくか？」と盗塁の葛藤に対する結論を出す発話の終了時刻まで含めるためです。除外判断: 直後の発話（speechId: 1237以降）は「犠牲フライ」や「スクイズ」といった別の作戦に関する話題に移っているため除外しました。",
+          "usedSpeechIds": [
+            "1216-1236"
+          ]
+        }
+      },
+      "boundary": {
+        "status": "reached",
+        "startDeltaMs": -14050,
+        "endDeltaMs": 13448,
+        "cut": {
+          "sourceStartMs": 10776694,
+          "sourceEndMs": 10817172,
+          "startBoundaryPointId": "word-031952:start",
+          "endBoundaryPointId": "word-032135:end",
+          "startReason": "テーマである盗塁の指示についてリスナーへ問いかけ葛藤し始める「トール行こう？」の発話から開始するためです。",
+          "endReason": "走力や能力値を確認して「やめとくか？」と盗塁の葛藤に対する結論を出す発話の終了地点を選択しました。",
+          "provisionalSourceStartMs": 10776694,
+          "provisionalSourceEndMs": 10817172
+        },
+        "selectedCutIndex": 1,
+        "overlapMs": 12980
+      }
+    },
+    {
+      "key": "9dtwF5Exu5w_multiblock_material_v001:54:3:24",
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 54,
+      "runIndex": 3,
+      "expectedIndex": 24,
+      "inputVisible90s": true,
+      "structuralExcluded": false,
+      "v012": {
+        "status": "reached",
+        "startDeltaMs": -14050,
+        "endDeltaMs": 13448,
+        "cut": {
+          "sourceStartMs": 10776694,
+          "sourceEndMs": 10817172,
+          "reason": "開始根拠: リスナーに対して盗塁を指示すべきか問いかけ始める発話から始まるためです。終了根拠: 走力や盗塁の能力値を確認し、盗塁を指示すべきか葛藤した末にやめとくかという結論に至る発話まで含めるためです。除外判断: 次の発話からは犠牲フライやスクイズといった別の作戦の相談に移るため、テーマ外として除外しました。",
+          "usedSpeechIds": [
+            "1216-1236"
+          ]
+        }
+      },
+      "boundary": {
+        "status": "reached",
+        "startDeltaMs": -14050,
+        "endDeltaMs": 13448,
+        "cut": {
+          "sourceStartMs": 10776694,
+          "sourceEndMs": 10817172,
+          "startBoundaryPointId": "word-031952:start",
+          "endBoundaryPointId": "word-032135:end",
+          "startReason": "リスナーに対して「トール行こう？」と盗塁の作戦を提案し始める言葉の開始点を選択しました。",
+          "endReason": "ステータスを確認して葛藤した末に「やめとくか？」と盗塁断念の結論に至る発話の終了点を選択しました。",
+          "provisionalSourceStartMs": 10776694,
+          "provisionalSourceEndMs": 10817172
+        },
+        "selectedCutIndex": 1,
+        "overlapMs": 12980
+      }
+    },
+    {
+      "key": "9dtwF5Exu5w_multiblock_material_v001:59:1:25",
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 59,
+      "runIndex": 1,
+      "expectedIndex": 25,
+      "inputVisible90s": true,
+      "structuralExcluded": false,
+      "v012": {
+        "status": "reached",
+        "startDeltaMs": -29120,
+        "endDeltaMs": 55822,
+        "cut": {
+          "sourceStartMs": 11701322,
+          "sourceEndMs": 11789446,
+          "reason": "開始根拠: 次の対戦相手がBランクだと判明してリアクションを取る発話からテーマが始まるためです。終了根拠: 次回配信の告知と締めくくりの挨拶が綺麗に収束する発話の終わりまでを含めるためです。除外判断: 候補範囲より前にあるアイテム使用やスタミナ回復の雑談、および後ろにあるエンディング用の定型文（歌など）はテーマと無関係なため除外しています。",
+          "usedSpeechIds": [
+            "1318-1322"
+          ]
+        }
+      },
+      "boundary": {
+        "status": "reached",
+        "startDeltaMs": -29120,
+        "endDeltaMs": 55822,
+        "cut": {
+          "sourceStartMs": 11701322,
+          "sourceEndMs": 11789446,
+          "startBoundaryPointId": "word-034207:start",
+          "endBoundaryPointId": "word-034457:end",
+          "startReason": "次の対戦相手のランクが判明したリアクションである「次Bでした」という発言の開始点を起点としました。",
+          "endReason": "配信の締めくくりの挨拶である「それではどうも」という発言の終了点を終点として選択しました。",
+          "provisionalSourceStartMs": 11701322,
+          "provisionalSourceEndMs": 11789446
+        },
+        "selectedCutIndex": 1,
+        "overlapMs": 3182
+      }
+    },
+    {
+      "key": "9dtwF5Exu5w_multiblock_material_v001:59:2:25",
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 59,
+      "runIndex": 2,
+      "expectedIndex": 25,
+      "inputVisible90s": true,
+      "structuralExcluded": false,
+      "v012": {
+        "status": "reached",
+        "startDeltaMs": -29120,
+        "endDeltaMs": 55822,
+        "cut": {
+          "sourceStartMs": 11701322,
+          "sourceEndMs": 11789446,
+          "reason": "開始根拠: 次の対戦相手がBランクだと判明し、それに反応して次回への持ち越しを提案する発話から始まるためです。終了根拠: 配信の告知と締めのアナウンスが終わり、配信終了に向けた最後の挨拶が収束するタイミングまで含めるためです。除外判断: 候補範囲外の直前の試合終了後のアイテム処理や、直後のエンディング曲と思われる発話はテーマに直接関係しないため除外しました。",
+          "usedSpeechIds": [
+            "1318-1322"
+          ]
+        }
+      },
+      "boundary": {
+        "status": "reached",
+        "startDeltaMs": -29120,
+        "endDeltaMs": 55822,
+        "cut": {
+          "sourceStartMs": 11701322,
+          "sourceEndMs": 11789446,
+          "startBoundaryPointId": "word-034207:start",
+          "endBoundaryPointId": "word-034457:end",
+          "startReason": "次の対戦相手がBランクであると言及する「次Bでした」という発言の開始点を切り出しの起点としました。",
+          "endReason": "配信の締めと終了の挨拶である「それではどうも」の最後の言葉の終了点までを収束点として選択しました。",
+          "provisionalSourceStartMs": 11701322,
+          "provisionalSourceEndMs": 11789446
+        },
+        "selectedCutIndex": 1,
+        "overlapMs": 3182
+      }
+    },
+    {
+      "key": "9dtwF5Exu5w_multiblock_material_v001:59:3:25",
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 59,
+      "runIndex": 3,
+      "expectedIndex": 25,
+      "inputVisible90s": true,
+      "structuralExcluded": false,
+      "v012": {
+        "status": "reached",
+        "startDeltaMs": -30902,
+        "endDeltaMs": 55822,
+        "cut": {
+          "sourceStartMs": 11699540,
+          "sourceEndMs": 11789446,
+          "reason": "開始根拠: 次戦の相手がBランクだと判明し反応する「でBかー」という発話の直前から開始するためです。終了根拠: 配信の告知と次回の挨拶を終えてセーブして締めくくる一連の流れが収束する発話まで含めるためです。除外判断: 1317以前のアイテム購入や体力回復のくだりはテーマと無関係であり、1323のエンディング曲と思われる発話は余韻が別の話題に移った後なので含めません。",
+          "usedSpeechIds": [
+            "1318-1322"
+          ]
+        }
+      },
+      "boundary": {
+        "status": "reached",
+        "startDeltaMs": -31462,
+        "endDeltaMs": 55822,
+        "cut": {
+          "sourceStartMs": 11698980,
+          "sourceEndMs": 11789446,
+          "startBoundaryPointId": "word-034203:start",
+          "endBoundaryPointId": "word-034457:end",
+          "startReason": "次戦の相手がBランクであることに反応する「でBかー」という発話の開始点を選びました。",
+          "endReason": "セーブ後の最後の挨拶である「それではどうも」という発話の終了点を選びました。",
+          "provisionalSourceStartMs": 11699540,
+          "provisionalSourceEndMs": 11789446
+        },
+        "selectedCutIndex": 1,
+        "overlapMs": 3182
+      }
+    }
+  ]
+}

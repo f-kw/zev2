@@ -1,0 +1,142 @@
+{
+  "refinements": [
+    {
+      "provisionalCutIndex": 1,
+      "startBoundaryPointId": "word-014343:start",
+      "endBoundaryPointId": "word-014455:end",
+      "startReason": "しおりんに特殊能力を付けるための選択基準となる「ミートにするか！」という発話から出来事が始まっているためここを開始点としました。",
+      "endReason": "狙い通りに『カット打ち』が付き、宝鐘マリンが「ええやん！」と歓喜して場面が収束する最後の言葉までを含めるためここを終了点としました。"
+    }
+  ],
+  "runAt": "2026-07-13T07:47:24+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "manualRun": false,
+    "runner": "edge-cdp-text-prompt",
+    "generationSystem": "boundary-v001@gemini-web-flash",
+    "upstreamGenerationSystems": [
+      "theme-llm-v002@gemini-web-flash",
+      "llm-v012@gemini-web-flash"
+    ],
+    "resultRole": "boundary-refinement-eval",
+    "promptVersion": "boundary_refinement_prompt_v001",
+    "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+    "candidateIndex": 22,
+    "runIndex": 1,
+    "contextRadiusMs": 90000,
+    "inputPromptSha256": "f6b0f9106ab4ddeeb30013ddbfb69e178bd0aa654827ef524379c8f39dbff53f"
+  },
+  "promptFile": "outputs/theme-composition-boundary/20260713-boundary-v001-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-022/run-01/prompt.md",
+  "pageUrl": "https://gemini.google.com/app/cc2044e954d25ca6?hl=ja",
+  "rawResponseText": "{\n\"refinements\": [\n{\n\"provisionalCutIndex\": 1,\n\"startBoundaryPointId\": \"word-014343:start\",\n\"endBoundaryPointId\": \"word-014455:end\",\n\"startReason\": \"しおりんに特殊能力を付けるための選択基準となる「ミートにするか！」という発話から出来事が始まっているためここを開始点としました。\",\n\"endReason\": \"狙い通りに『カット打ち』が付き、宝鐘マリンが「ええやん！」と歓喜して場面が収束する最後の言葉までを含めるためここを終了点としました。\"\n}\n]\n}\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。",
+  "boundaryContractValidation": {
+    "passed": true,
+    "issues": [],
+    "checkedAt": "2026-07-12T22:47:24.105Z",
+    "checks": [
+      "point-id-exists",
+      "point-in-correct-90s-window",
+      "start-before-end",
+      "same-cut-count",
+      "no-duplicate-or-missing-cut-index",
+      "reasons-present"
+    ]
+  },
+  "selectedBoundaryEvidence": [
+    {
+      "provisionalCutIndex": 1,
+      "start": {
+        "pointId": "word-014343:start",
+        "timeMs": 4710002,
+        "kind": "start",
+        "wordIndex": 306,
+        "selectedWord": {
+          "id": "word-014343",
+          "s": 4710002,
+          "e": 4710022,
+          "t": "ミ"
+        },
+        "surroundingWords": [
+          {
+            "wordId": "word-014341",
+            "sourceStartMs": 4709820,
+            "sourceEndMs": 4709880,
+            "text": "ゃ"
+          },
+          {
+            "wordId": "word-014342",
+            "sourceStartMs": 4709880,
+            "sourceEndMs": 4709900,
+            "text": "ん"
+          },
+          {
+            "wordId": "word-014343",
+            "sourceStartMs": 4710002,
+            "sourceEndMs": 4710022,
+            "text": "ミ"
+          },
+          {
+            "wordId": "word-014344",
+            "sourceStartMs": 4710022,
+            "sourceEndMs": 4710082,
+            "text": "ー"
+          },
+          {
+            "wordId": "word-014345",
+            "sourceStartMs": 4710082,
+            "sourceEndMs": 4710162,
+            "text": "ト"
+          }
+        ],
+        "reason": "しおりんに特殊能力を付けるための選択基準となる「ミートにするか！」という発話から出来事が始まっているためここを開始点としました。"
+      },
+      "end": {
+        "pointId": "word-014455:end",
+        "timeMs": 4738494,
+        "kind": "end",
+        "wordIndex": 418,
+        "selectedWord": {
+          "id": "word-014455",
+          "s": 4738474,
+          "e": 4738494,
+          "t": "!"
+        },
+        "surroundingWords": [
+          {
+            "wordId": "word-014453",
+            "sourceStartMs": 4738334,
+            "sourceEndMs": 4738374,
+            "text": "や"
+          },
+          {
+            "wordId": "word-014454",
+            "sourceStartMs": 4738374,
+            "sourceEndMs": 4738474,
+            "text": "ん"
+          },
+          {
+            "wordId": "word-014455",
+            "sourceStartMs": 4738474,
+            "sourceEndMs": 4738494,
+            "text": "!"
+          },
+          {
+            "wordId": "word-014456",
+            "sourceStartMs": 4741026,
+            "sourceEndMs": 4741146,
+            "text": "ま"
+          },
+          {
+            "wordId": "word-014457",
+            "sourceStartMs": 4741146,
+            "sourceEndMs": 4741246,
+            "text": "た"
+          }
+        ],
+        "reason": "狙い通りに『カット打ち』が付き、宝鐘マリンが「ええやん！」と歓喜して場面が収束する最後の言葉までを含めるためここを終了点としました。"
+      }
+    }
+  ]
+}

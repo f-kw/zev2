@@ -1,0 +1,142 @@
+{
+  "refinements": [
+    {
+      "provisionalCutIndex": 1,
+      "startBoundaryPointId": "word-010378:start",
+      "endBoundaryPointId": "word-010828:end",
+      "startReason": "リスナーに対して育成方針の意見募集を呼びかけ混乱が始まる「意見大募集」という発話の開始点を選択しました。",
+      "endReason": "対立する意見に困り果てたマリンが同期の博衣こよりに助けを求めるコミカルな叫びが収束する「助けてくれー！」の終了点を選択しました。"
+    }
+  ],
+  "runAt": "2026-07-13T07:41:57+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "manualRun": false,
+    "runner": "edge-cdp-text-prompt",
+    "generationSystem": "boundary-v001@gemini-web-flash",
+    "upstreamGenerationSystems": [
+      "theme-llm-v002@gemini-web-flash",
+      "llm-v012@gemini-web-flash"
+    ],
+    "resultRole": "boundary-refinement-eval",
+    "promptVersion": "boundary_refinement_prompt_v001",
+    "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+    "candidateIndex": 13,
+    "runIndex": 2,
+    "contextRadiusMs": 90000,
+    "inputPromptSha256": "b07de419ec505cc9a8713b0f28598d02abbd652802ba5b124e3afba7365a5457"
+  },
+  "promptFile": "outputs/theme-composition-boundary/20260713-boundary-v001-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-013/run-02/prompt.md",
+  "pageUrl": "https://gemini.google.com/app/216a31bbea04ba2b?hl=ja",
+  "rawResponseText": "{\n\"refinements\": [\n{\n\"provisionalCutIndex\": 1,\n\"startBoundaryPointId\": \"word-010378:start\",\n\"endBoundaryPointId\": \"word-010828:end\",\n\"startReason\": \"リスナーに対して育成方針の意見募集を呼びかけ混乱が始まる「意見大募集」という発話の開始点を選択しました。\",\n\"endReason\": \"対立する意見に困り果てたマリンが同期の博衣こよりに助けを求めるコミカルな叫びが収束する「助けてくれー！」の終了点を選択しました。\"\n}\n]\n}\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。",
+  "boundaryContractValidation": {
+    "passed": true,
+    "issues": [],
+    "checkedAt": "2026-07-12T22:41:57.902Z",
+    "checks": [
+      "point-id-exists",
+      "point-in-correct-90s-window",
+      "start-before-end",
+      "same-cut-count",
+      "no-duplicate-or-missing-cut-index",
+      "reasons-present"
+    ]
+  },
+  "selectedBoundaryEvidence": [
+    {
+      "provisionalCutIndex": 1,
+      "start": {
+        "pointId": "word-010378:start",
+        "timeMs": 3554885,
+        "kind": "start",
+        "wordIndex": 158,
+        "selectedWord": {
+          "id": "word-010378",
+          "s": 3554885,
+          "e": 3555025,
+          "t": "意"
+        },
+        "surroundingWords": [
+          {
+            "wordId": "word-010376",
+            "sourceStartMs": 3552583,
+            "sourceEndMs": 3552603,
+            "text": "う"
+          },
+          {
+            "wordId": "word-010377",
+            "sourceStartMs": 3552603,
+            "sourceEndMs": 3554885,
+            "text": "?"
+          },
+          {
+            "wordId": "word-010378",
+            "sourceStartMs": 3554885,
+            "sourceEndMs": 3555025,
+            "text": "意"
+          },
+          {
+            "wordId": "word-010379",
+            "sourceStartMs": 3555025,
+            "sourceEndMs": 3555945,
+            "text": "見"
+          },
+          {
+            "wordId": "word-010380",
+            "sourceStartMs": 3555945,
+            "sourceEndMs": 3556145,
+            "text": "大"
+          }
+        ],
+        "reason": "リスナーに対して育成方針の意見募集を呼びかけ混乱が始まる「意見大募集」という発話の開始点を選択しました。"
+      },
+      "end": {
+        "pointId": "word-010828:end",
+        "timeMs": 3723879,
+        "kind": "end",
+        "wordIndex": 608,
+        "selectedWord": {
+          "id": "word-010828",
+          "s": 3723859,
+          "e": 3723879,
+          "t": "!"
+        },
+        "surroundingWords": [
+          {
+            "wordId": "word-010826",
+            "sourceStartMs": 3723479,
+            "sourceEndMs": 3723839,
+            "text": "れ"
+          },
+          {
+            "wordId": "word-010827",
+            "sourceStartMs": 3723839,
+            "sourceEndMs": 3723859,
+            "text": "ー"
+          },
+          {
+            "wordId": "word-010828",
+            "sourceStartMs": 3723859,
+            "sourceEndMs": 3723879,
+            "text": "!"
+          },
+          {
+            "wordId": "word-010829",
+            "sourceStartMs": 3723879,
+            "sourceEndMs": 3723919,
+            "text": "ん"
+          },
+          {
+            "wordId": "word-010830",
+            "sourceStartMs": 3723919,
+            "sourceEndMs": 3731421,
+            "text": "ー"
+          }
+        ],
+        "reason": "対立する意見に困り果てたマリンが同期の博衣こよりに助けを求めるコミカルな叫びが収束する「助けてくれー！」の終了点を選択しました。"
+      }
+    }
+  ]
+}

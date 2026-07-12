@@ -1,0 +1,63 @@
+{
+  "refinements": [
+    {
+      "provisionalCutIndex": 1,
+      "startBoundaryPointId": "word-031563",
+      "endBoundaryPointId": "word-031832",
+      "startReason": "相手投手の能力を「肩DのクイックC」と確認して盗塁の検討を始める最初の単語であるため選択しました。",
+      "endReason": "作戦の思案が一段落する「送りバント?」の最後の助詞であるため選択しました。"
+    }
+  ],
+  "runAt": "2026-07-13T07:59:33+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "manualRun": false,
+    "runner": "edge-cdp-text-prompt",
+    "generationSystem": "boundary-v001@gemini-web-flash",
+    "upstreamGenerationSystems": [
+      "theme-llm-v002@gemini-web-flash",
+      "llm-v012@gemini-web-flash"
+    ],
+    "resultRole": "boundary-refinement-eval",
+    "promptVersion": "boundary_refinement_prompt_v001",
+    "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+    "candidateIndex": 52,
+    "runIndex": 2,
+    "contextRadiusMs": 90000,
+    "inputPromptSha256": "57369adcafecff8cc7644a1200593daa1c8c2f327d8ec8af888dbb9fee4adc1e"
+  },
+  "promptFile": "outputs/theme-composition-boundary/20260713-boundary-v001-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-052/run-02/prompt.md",
+  "pageUrl": "https://gemini.google.com/app/267a6675300fcc09?hl=ja",
+  "rawResponseText": "{\n\"refinements\": [\n{\n\"provisionalCutIndex\": 1,\n\"startBoundaryPointId\": \"word-031563\",\n\"endBoundaryPointId\": \"word-031832\",\n\"startReason\": \"相手投手の能力を「肩DのクイックC」と確認して盗塁の検討を始める最初の単語であるため選択しました。\",\n\"endReason\": \"作戦の思案が一段落する「送りバント?」の最後の助詞であるため選択しました。\"\n}\n]\n}\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。",
+  "boundaryContractValidation": {
+    "passed": false,
+    "issues": [
+      "missing-start-point:word-031563",
+      "missing-end-point:word-031832"
+    ],
+    "checkedAt": "2026-07-12T22:59:33.807Z",
+    "checks": [
+      "point-id-exists",
+      "point-in-correct-90s-window",
+      "start-before-end",
+      "same-cut-count",
+      "no-duplicate-or-missing-cut-index",
+      "reasons-present"
+    ]
+  },
+  "selectedBoundaryEvidence": [
+    {
+      "provisionalCutIndex": 1,
+      "start": {
+        "pointId": "word-031563",
+        "reason": "相手投手の能力を「肩DのクイックC」と確認して盗塁の検討を始める最初の単語であるため選択しました。"
+      },
+      "end": {
+        "pointId": "word-031832",
+        "reason": "作戦の思案が一段落する「送りバント?」の最後の助詞であるため選択しました。"
+      }
+    }
+  ]
+}

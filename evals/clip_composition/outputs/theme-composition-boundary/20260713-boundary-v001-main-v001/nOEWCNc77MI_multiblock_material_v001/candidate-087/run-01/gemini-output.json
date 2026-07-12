@@ -1,0 +1,142 @@
+{
+  "refinements": [
+    {
+      "provisionalCutIndex": 1,
+      "startBoundaryPointId": "word-052461:start",
+      "endBoundaryPointId": "word-052587:end",
+      "startReason": "ベッドルームの提案を切り出す最初の言葉である「あ、ここベッドルームにしよっかな」の「あ」を開始点として選択しました。",
+      "endReason": "提案に対する一連のやり取りが収束し、船長が次のアクションへ移行しようとする「船長は」を終了点として選択しました。"
+    }
+  ],
+  "runAt": "2026-07-13T07:23:19+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "manualRun": false,
+    "runner": "edge-cdp-text-prompt",
+    "generationSystem": "boundary-v001@gemini-web-flash",
+    "upstreamGenerationSystems": [
+      "theme-llm-v002@gemini-web-flash",
+      "llm-v012@gemini-web-flash"
+    ],
+    "resultRole": "boundary-refinement-eval",
+    "promptVersion": "boundary_refinement_prompt_v001",
+    "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+    "candidateIndex": 87,
+    "runIndex": 1,
+    "contextRadiusMs": 90000,
+    "inputPromptSha256": "eb8bc2d20cfca1cb7f7fc252b9a076132464d7e7845e9ab6037fe575140c3159"
+  },
+  "promptFile": "outputs/theme-composition-boundary/20260713-boundary-v001-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-087/run-01/prompt.md",
+  "pageUrl": "https://gemini.google.com/app/f133fa94a5170005?hl=ja",
+  "rawResponseText": "{\n\"refinements\": [\n{\n\"provisionalCutIndex\": 1,\n\"startBoundaryPointId\": \"word-052461:start\",\n\"endBoundaryPointId\": \"word-052587:end\",\n\"startReason\": \"ベッドルームの提案を切り出す最初の言葉である「あ、ここベッドルームにしよっかな」の「あ」を開始点として選択しました。\",\n\"endReason\": \"提案に対する一連のやり取りが収束し、船長が次のアクションへ移行しようとする「船長は」を終了点として選択しました。\"\n}\n]\n}\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。",
+  "boundaryContractValidation": {
+    "passed": true,
+    "issues": [],
+    "checkedAt": "2026-07-12T22:23:19.777Z",
+    "checks": [
+      "point-id-exists",
+      "point-in-correct-90s-window",
+      "start-before-end",
+      "same-cut-count",
+      "no-duplicate-or-missing-cut-index",
+      "reasons-present"
+    ]
+  },
+  "selectedBoundaryEvidence": [
+    {
+      "provisionalCutIndex": 1,
+      "start": {
+        "pointId": "word-052461:start",
+        "timeMs": 11520066,
+        "kind": "start",
+        "wordIndex": 424,
+        "selectedWord": {
+          "id": "word-052461",
+          "s": 11520066,
+          "e": 11520086,
+          "t": "あ"
+        },
+        "surroundingWords": [
+          {
+            "wordId": "word-052459",
+            "sourceStartMs": 11518418,
+            "sourceEndMs": 11518498,
+            "text": "し"
+          },
+          {
+            "wordId": "word-052460",
+            "sourceStartMs": 11518498,
+            "sourceEndMs": 11518518,
+            "text": "ょ"
+          },
+          {
+            "wordId": "word-052461",
+            "sourceStartMs": 11520066,
+            "sourceEndMs": 11520086,
+            "text": "あ"
+          },
+          {
+            "wordId": "word-052462",
+            "sourceStartMs": 11520086,
+            "sourceEndMs": 11520166,
+            "text": "、"
+          },
+          {
+            "wordId": "word-052463",
+            "sourceStartMs": 11520166,
+            "sourceEndMs": 11520246,
+            "text": "こ"
+          }
+        ],
+        "reason": "ベッドルームの提案を切り出す最初の言葉である「あ、ここベッドルームにしよっかな」の「あ」を開始点として選択しました。"
+      },
+      "end": {
+        "pointId": "word-052587:end",
+        "timeMs": 11549658,
+        "kind": "end",
+        "wordIndex": 550,
+        "selectedWord": {
+          "id": "word-052587",
+          "s": 11549638,
+          "e": 11549658,
+          "t": "は"
+        },
+        "surroundingWords": [
+          {
+            "wordId": "word-052585",
+            "sourceStartMs": 11549218,
+            "sourceEndMs": 11549438,
+            "text": "船"
+          },
+          {
+            "wordId": "word-052586",
+            "sourceStartMs": 11549438,
+            "sourceEndMs": 11549638,
+            "text": "長"
+          },
+          {
+            "wordId": "word-052587",
+            "sourceStartMs": 11549638,
+            "sourceEndMs": 11549658,
+            "text": "は"
+          },
+          {
+            "wordId": "word-052588",
+            "sourceStartMs": 11551287,
+            "sourceEndMs": 11551407,
+            "text": "で"
+          },
+          {
+            "wordId": "word-052589",
+            "sourceStartMs": 11551407,
+            "sourceEndMs": 11551627,
+            "text": "も"
+          }
+        ],
+        "reason": "提案に対する一連のやり取りが収束し、船長が次のアクションへ移行しようとする「船長は」を終了点として選択しました。"
+      }
+    }
+  ]
+}
