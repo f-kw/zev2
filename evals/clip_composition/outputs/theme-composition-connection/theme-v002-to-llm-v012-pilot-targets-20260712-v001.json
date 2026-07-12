@@ -1,0 +1,27 @@
+{
+  "kind": "theme_composition_connection_pilot_target_manifest",
+  "resultRole": "pre_registered_pilot_targets",
+  "runAt": "2026-07-12T00:00:00+09:00",
+  "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+  "inputSetId": "nOEWCNc77MI_chat_velocity_top100_input_selection_v004",
+  "upstreamGenerationSystem": "theme-llm-v002@gemini-web-flash",
+  "compositionGenerationSystem": "llm-v012@gemini-web-flash",
+  "promptVersion": "clip_composition_prompt_v012",
+  "runsPerCondition": 3,
+  "contextConditions": [
+    {
+      "id": "theme-window-only",
+      "meaning": "テーマ候補を生成した保存済み入力窓だけを文脈として使う"
+    },
+    {
+      "id": "theme-window-plus-minus-5m",
+      "meaning": "保存済み入力窓の開始より300000ms前から終了より300000ms後までを文脈として使う",
+      "extensionBeforeMs": 300000,
+      "extensionAfterMs": 300000
+    }
+  ],
+  "candidateIndexes": [52, 3, 53],
+  "plannedGeminiCallCount": 18,
+  "containsExpectedData": false,
+  "status": "locked_before_execution"
+}
