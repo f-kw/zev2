@@ -1,0 +1,35 @@
+{
+  "selectedCuts": [
+    {
+      "sourceStartMs": 3180190,
+      "sourceEndMs": 3238642,
+      "reason": "開始根拠: マリンがしし肉を焼いているか尋ね、テーマのきっかけとなる肉の焼き忘れが発覚する発話から開始するためです。終了根拠: 焼き忘れから発展した夫婦風の掛け合い（言い合い）のオチがついて一連のやり取りが収束する発話まで含めるためです。除外判断: それ以降のイノシシに関する発話は別の話題へ移行しており、バーベキュー完成のくだりとは意味的な連続性が薄いため除外しました。",
+      "usedSpeechIds": [
+        "470-477"
+      ]
+    }
+  ],
+  "runAt": "2026-07-12T21:17:11+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "manualRun": false,
+    "runner": "edge-cdp-text-prompt",
+    "connectionVersion": "connection-v002",
+    "generationSystem": "llm-v013@gemini-web-flash",
+    "upstreamGenerationSystem": "theme-llm-v002@gemini-web-flash",
+    "resultRole": "connected-composition-eval-connection-v002",
+    "conditionalOnUpstreamRangeHit": true,
+    "promptVersion": "clip_composition_prompt_v013",
+    "contextCondition": "theme-window-plus-minus-5m",
+    "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+    "candidateIndex": 37,
+    "runs": 3,
+    "runIndex": 2,
+    "inputPromptSha256": "0df9291b9765e1cca86e7fccdebafb144811e855263513f982c62143c9f89ac3"
+  },
+  "promptFile": "outputs/theme-composition-connection/20260712-connection-v002-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-037/prompt.md",
+  "pageUrl": "https://gemini.google.com/app/c2f61f3ee5083ab2?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"selectedCuts\": [\n    {\n      \"sourceStartMs\": 3180190,\n      \"sourceEndMs\": 3238642,\n      \"reason\": \"開始根拠: マリンがしし肉を焼いているか尋ね、テーマのきっかけとなる肉の焼き忘れが発覚する発話から開始するためです。終了根拠: 焼き忘れから発展した夫婦風の掛け合い（言い合い）のオチがついて一連のやり取りが収束する発話まで含めるためです。除外判断: それ以降のイノシシに関する発話は別の話題へ移行しており、バーベキュー完成のくだりとは意味的な連続性が薄いため除外しました。\",\n      \"usedSpeechIds\": [\n        \"470-477\"\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

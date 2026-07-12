@@ -1,0 +1,35 @@
+{
+  "selectedCuts": [
+    {
+      "sourceStartMs": 3000738,
+      "sourceEndMs": 3026556,
+      "reason": "開始根拠: テーマの中心であるサメに船が食われている緊迫した状況を訴える発話から開始するためです。終了根拠: ころねのつまんないことに対する罰の話題から、マリンが「マリゾネス」と呼びかけられて次のゲーム内クラフトの話題へ移行する直前まで含めるためです。除外判断: それ以前の皮の研究に関する雑談や、それ以降の蜂の巣などのアイテム作成の話題はテーマ外のため除外しました。",
+      "usedSpeechIds": [
+        "448-452"
+      ]
+    }
+  ],
+  "runAt": "2026-07-12T21:16:05+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "manualRun": false,
+    "runner": "edge-cdp-text-prompt",
+    "connectionVersion": "connection-v002",
+    "generationSystem": "llm-v013@gemini-web-flash",
+    "upstreamGenerationSystem": "theme-llm-v002@gemini-web-flash",
+    "resultRole": "connected-composition-eval-connection-v002",
+    "conditionalOnUpstreamRangeHit": true,
+    "promptVersion": "clip_composition_prompt_v013",
+    "contextCondition": "theme-window-plus-minus-5m",
+    "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+    "candidateIndex": 35,
+    "runs": 3,
+    "runIndex": 1,
+    "inputPromptSha256": "5f6b4f0c9ca77db63553468deb72ba2f4a6acad6fe51989277c590c4d2a182a4"
+  },
+  "promptFile": "outputs/theme-composition-connection/20260712-connection-v002-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-035/prompt.md",
+  "pageUrl": "https://gemini.google.com/app/91491ed0bc0b35ce?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"selectedCuts\": [\n    {\n      \"sourceStartMs\": 3000738,\n      \"sourceEndMs\": 3026556,\n      \"reason\": \"開始根拠: テーマの中心であるサメに船が食われている緊迫した状況を訴える発話から開始するためです。終了根拠: ころねのつまんないことに対する罰の話題から、マリンが「マリゾネス」と呼びかけられて次のゲーム内クラフトの話題へ移行する直前まで含めるためです。除外判断: それ以前の皮の研究に関する雑談や、それ以降の蜂の巣などのアイテム作成の話題はテーマ外のため除外しました。\",\n      \"usedSpeechIds\": [\n        \"448-452\"\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

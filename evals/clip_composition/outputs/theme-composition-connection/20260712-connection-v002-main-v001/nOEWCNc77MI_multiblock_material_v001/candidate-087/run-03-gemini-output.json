@@ -1,0 +1,35 @@
+{
+  "selectedCuts": [
+    {
+      "sourceStartMs": 11520066,
+      "sourceEndMs": 11549658,
+      "reason": "開始根拠: 宝鐘マリンが「ここベッドルームにしよっかな」と提案を持ちかける発話から始まるためです。終了根拠: 4つのベッドが置ける広さに大満足し、ベッドルームにする場所が確定して余韻が収束する発話まで含めるためです。除外判断: 直後の「でも誘って？」から始まる会話は、ベッドルーム作成のテーマから離れてお互いの関係性に関する別の雑談に移るため除外しました。",
+      "usedSpeechIds": [
+        "1713-1719"
+      ]
+    }
+  ],
+  "runAt": "2026-07-12T21:36:01+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "manualRun": false,
+    "runner": "edge-cdp-text-prompt",
+    "connectionVersion": "connection-v002",
+    "generationSystem": "llm-v013@gemini-web-flash",
+    "upstreamGenerationSystem": "theme-llm-v002@gemini-web-flash",
+    "resultRole": "connected-composition-eval-connection-v002",
+    "conditionalOnUpstreamRangeHit": true,
+    "promptVersion": "clip_composition_prompt_v013",
+    "contextCondition": "theme-window-plus-minus-5m",
+    "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+    "candidateIndex": 87,
+    "runs": 3,
+    "runIndex": 3,
+    "inputPromptSha256": "b80b5afd2e7361b23e309dc035cd60b5b59f80b56825d8fd711545ecd3b890b0"
+  },
+  "promptFile": "outputs/theme-composition-connection/20260712-connection-v002-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-087/prompt.md",
+  "pageUrl": "https://gemini.google.com/app/e36a700c7af52fe4?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"selectedCuts\": [\n    {\n      \"sourceStartMs\": 11520066,\n      \"sourceEndMs\": 11549658,\n      \"reason\": \"開始根拠: 宝鐘マリンが「ここベッドルームにしよっかな」と提案を持ちかける発話から始まるためです。終了根拠: 4つのベッドが置ける広さに大満足し、ベッドルームにする場所が確定して余韻が収束する発話まで含めるためです。除外判断: 直後の「でも誘って？」から始まる会話は、ベッドルーム作成のテーマから離れてお互いの関係性に関する別の雑談に移るため除外しました。\",\n      \"usedSpeechIds\": [\n        \"1713-1719\"\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

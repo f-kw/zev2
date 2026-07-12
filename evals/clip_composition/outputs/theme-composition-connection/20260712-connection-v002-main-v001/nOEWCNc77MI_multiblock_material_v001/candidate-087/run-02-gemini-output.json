@@ -1,0 +1,35 @@
+{
+  "selectedCuts": [
+    {
+      "sourceStartMs": 11520066,
+      "sourceEndMs": 11549658,
+      "reason": "開始根拠: 船内にベッドルームを作る提案を切り出す最初の発話（speechId: 1713）から開始するためです。終了根拠: ベッドルームの広さに大満足してやり取りがひと段落し、配信の締めや今後の進め方に話題が移る発話の終了時刻（speechId: 1719）まで含めるためです。除外判断: それ以降の発話（speechId: 1720〜）は、ベッドルーム作成とは無関係な恋愛トークや別の発見、配信の終了挨拶へ話題が転換しているため除外しました。",
+      "usedSpeechIds": [
+        "1713-1719"
+      ]
+    }
+  ],
+  "runAt": "2026-07-12T21:35:45+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "manualRun": false,
+    "runner": "edge-cdp-text-prompt",
+    "connectionVersion": "connection-v002",
+    "generationSystem": "llm-v013@gemini-web-flash",
+    "upstreamGenerationSystem": "theme-llm-v002@gemini-web-flash",
+    "resultRole": "connected-composition-eval-connection-v002",
+    "conditionalOnUpstreamRangeHit": true,
+    "promptVersion": "clip_composition_prompt_v013",
+    "contextCondition": "theme-window-plus-minus-5m",
+    "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+    "candidateIndex": 87,
+    "runs": 3,
+    "runIndex": 2,
+    "inputPromptSha256": "b80b5afd2e7361b23e309dc035cd60b5b59f80b56825d8fd711545ecd3b890b0"
+  },
+  "promptFile": "outputs/theme-composition-connection/20260712-connection-v002-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-087/prompt.md",
+  "pageUrl": "https://gemini.google.com/app/d905d89e786556c7?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"selectedCuts\": [\n    {\n      \"sourceStartMs\": 11520066,\n      \"sourceEndMs\": 11549658,\n      \"reason\": \"開始根拠: 船内にベッドルームを作る提案を切り出す最初の発話（speechId: 1713）から開始するためです。終了根拠: ベッドルームの広さに大満足してやり取りがひと段落し、配信の締めや今後の進め方に話題が移る発話の終了時刻（speechId: 1719）まで含めるためです。除外判断: それ以降の発話（speechId: 1720〜）は、ベッドルーム作成とは無関係な恋愛トークや別の発見、配信の終了挨拶へ話題が転換しているため除外しました。\",\n      \"usedSpeechIds\": [\n        \"1713-1719\"\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

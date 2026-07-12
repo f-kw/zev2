@@ -1,0 +1,35 @@
+{
+  "selectedCuts": [
+    {
+      "sourceStartMs": 6484639,
+      "sourceEndMs": 6539920,
+      "reason": "開始根拠: チャンスの場面で作戦に迷いながらも決断して祈る発話から含めることで、成功時のリアクションのフリにするためです。終了根拠: 作戦が成功し、大喜びして選手を褒めちぎる興奮の余韻が収束する発話までを含めるためです。除外判断: 直後の発話は次のプレイに向けた戦力分析に移っており、テーマの文脈が途切れるため除外します。",
+      "usedSpeechIds": [
+        "646-663"
+      ]
+    }
+  ],
+  "runAt": "2026-07-12T21:43:05+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "manualRun": false,
+    "runner": "edge-cdp-text-prompt",
+    "connectionVersion": "connection-v002",
+    "generationSystem": "llm-v013@gemini-web-flash",
+    "upstreamGenerationSystem": "theme-llm-v002@gemini-web-flash",
+    "resultRole": "connected-composition-eval-connection-v002",
+    "conditionalOnUpstreamRangeHit": true,
+    "promptVersion": "clip_composition_prompt_v013",
+    "contextCondition": "theme-window-plus-minus-5m",
+    "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+    "candidateIndex": 30,
+    "runs": 3,
+    "runIndex": 1,
+    "inputPromptSha256": "7d73ed025eed8f2f56e06e29fbaad70a5794467ac4e13112d55514fef95ec127"
+  },
+  "promptFile": "outputs/theme-composition-connection/20260712-connection-v002-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-030/prompt.md",
+  "pageUrl": "https://gemini.google.com/app/ebad48bcbe21d524?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"selectedCuts\": [\n    {\n      \"sourceStartMs\": 6484639,\n      \"sourceEndMs\": 6539920,\n      \"reason\": \"開始根拠: チャンスの場面で作戦に迷いながらも決断して祈る発話から含めることで、成功時のリアクションのフリにするためです。終了根拠: 作戦が成功し、大喜びして選手を褒めちぎる興奮の余韻が収束する発話までを含めるためです。除外判断: 直後の発話は次のプレイに向けた戦力分析に移っており、テーマの文脈が途切れるため除外します。\",\n      \"usedSpeechIds\": [\n        \"646-663\"\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

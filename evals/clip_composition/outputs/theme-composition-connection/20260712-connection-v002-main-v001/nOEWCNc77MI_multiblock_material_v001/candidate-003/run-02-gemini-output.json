@@ -1,0 +1,35 @@
+{
+  "selectedCuts": [
+    {
+      "sourceStartMs": 278759,
+      "sourceEndMs": 335402,
+      "reason": "開始根拠: テーマの「ねずこスタイル」のフリから始まり、言い間違えの連発に繋がる文脈をカバーするため、発話ID20を開始位置としました。終了根拠: 言い間違えで笑い合った後、空腹や作業の遅れに気付いて作業を始めようとするものの、相方が冷めた反応を見せてオチがつく発話ID22までを含めるためです。除外判断: 発話ID19以前はサザエさんの話などテーマとは無関係な別話題の雑談であるため除外しました。",
+      "usedSpeechIds": [
+        "20-22"
+      ]
+    }
+  ],
+  "runAt": "2026-07-12T21:09:32+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "manualRun": false,
+    "runner": "edge-cdp-text-prompt",
+    "connectionVersion": "connection-v002",
+    "generationSystem": "llm-v013@gemini-web-flash",
+    "upstreamGenerationSystem": "theme-llm-v002@gemini-web-flash",
+    "resultRole": "connected-composition-eval-connection-v002",
+    "conditionalOnUpstreamRangeHit": true,
+    "promptVersion": "clip_composition_prompt_v013",
+    "contextCondition": "theme-window-plus-minus-5m",
+    "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+    "candidateIndex": 3,
+    "runs": 3,
+    "runIndex": 2,
+    "inputPromptSha256": "05f5cf8165c0387ab717801933ef25d46a78e4602fa7a7da361e5dbd29d23100"
+  },
+  "promptFile": "outputs/theme-composition-connection/20260712-connection-v002-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-003/prompt.md",
+  "pageUrl": "https://gemini.google.com/app/3abf0dc7d9d5a36e?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"selectedCuts\": [\n    {\n      \"sourceStartMs\": 278759,\n      \"sourceEndMs\": 335402,\n      \"reason\": \"開始根拠: テーマの「ねずこスタイル」のフリから始まり、言い間違えの連発に繋がる文脈をカバーするため、発話ID20を開始位置としました。終了根拠: 言い間違えで笑い合った後、空腹や作業の遅れに気付いて作業を始めようとするものの、相方が冷めた反応を見せてオチがつく発話ID22までを含めるためです。除外判断: 発話ID19以前はサザエさんの話などテーマとは無関係な別話題の雑談であるため除外しました。\",\n      \"usedSpeechIds\": [\n        \"20-22\"\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

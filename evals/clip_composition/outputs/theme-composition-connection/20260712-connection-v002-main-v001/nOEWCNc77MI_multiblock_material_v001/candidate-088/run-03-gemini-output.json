@@ -1,0 +1,35 @@
+{
+  "selectedCuts": [
+    {
+      "sourceStartMs": 11551287,
+      "sourceEndMs": 11593310,
+      "reason": "開始根拠: テーマの照準である浮気性のやり取りへ繋がる、ころねからの「でも誘って?」というフリの発話から開始するためです。終了根拠: マリンが「コーネとならやっていける気がする」と述べ、一連の恋愛風の掛け合いのオチと余韻が収束する発話まで含めるためです。除外判断: 直後の「なんか見つけたよ」以降の発話は、ゲーム内の別の事象へ視線が移り話題が完全に転換しているため除外しました。",
+      "usedSpeechIds": [
+        "1720-1726"
+      ]
+    }
+  ],
+  "runAt": "2026-07-12T21:36:49+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "manualRun": false,
+    "runner": "edge-cdp-text-prompt",
+    "connectionVersion": "connection-v002",
+    "generationSystem": "llm-v013@gemini-web-flash",
+    "upstreamGenerationSystem": "theme-llm-v002@gemini-web-flash",
+    "resultRole": "connected-composition-eval-connection-v002",
+    "conditionalOnUpstreamRangeHit": true,
+    "promptVersion": "clip_composition_prompt_v013",
+    "contextCondition": "theme-window-plus-minus-5m",
+    "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+    "candidateIndex": 88,
+    "runs": 3,
+    "runIndex": 3,
+    "inputPromptSha256": "a338266352c8b02d0c741fe9585e36f8c7aeebfd855f236c63b708d7f90d4541"
+  },
+  "promptFile": "outputs/theme-composition-connection/20260712-connection-v002-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-088/prompt.md",
+  "pageUrl": "https://gemini.google.com/app/411a253621e2a7f0?hl=ja",
+  "rawResponseText": "{\n\"selectedCuts\": [\n{\n\"sourceStartMs\": 11551287,\n\"sourceEndMs\": 11593310,\n\"reason\": \"開始根拠: テーマの照準である浮気性のやり取りへ繋がる、ころねからの「でも誘って?」というフリの発話から開始するためです。終了根拠: マリンが「コーネとならやっていける気がする」と述べ、一連の恋愛風の掛け合いのオチと余韻が収束する発話まで含めるためです。除外判断: 直後の「なんか見つけたよ」以降の発話は、ゲーム内の別の事象へ視線が移り話題が完全に転換しているため除外しました。\",\n\"usedSpeechIds\": [\n\"1720-1726\"\n]\n}\n]\n}\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

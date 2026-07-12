@@ -1,0 +1,35 @@
+{
+  "selectedCuts": [
+    {
+      "sourceStartMs": 4096310,
+      "sourceEndMs": 4379860,
+      "reason": "開始根拠: 新球種の調整についてリスナーへの相談と悩みが本格化する発話から始めるためです。終了根拠: 投票結果を受けて球種を決定し、1時間経過したことへの謝罪と余韻が収束する発話まで含めるためです。除外判断: 続く発話以降は実際に球種をキャラクターに覚えさせたり次のゲーム進行に移る場面のため除外しました。",
+      "usedSpeechIds": [
+        "375-390"
+      ]
+    }
+  ],
+  "runAt": "2026-07-12T21:40:37+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "manualRun": false,
+    "runner": "edge-cdp-text-prompt",
+    "connectionVersion": "connection-v002",
+    "generationSystem": "llm-v013@gemini-web-flash",
+    "upstreamGenerationSystem": "theme-llm-v002@gemini-web-flash",
+    "resultRole": "connected-composition-eval-connection-v002",
+    "conditionalOnUpstreamRangeHit": true,
+    "promptVersion": "clip_composition_prompt_v013",
+    "contextCondition": "theme-window-plus-minus-5m",
+    "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+    "candidateIndex": 16,
+    "runs": 3,
+    "runIndex": 2,
+    "inputPromptSha256": "5fdc8b94f9a0893199aa1d72856ef36fccd51137f4114a27a26664598010fb31"
+  },
+  "promptFile": "outputs/theme-composition-connection/20260712-connection-v002-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-016/prompt.md",
+  "pageUrl": "https://gemini.google.com/app/28f6aba8a13ca9ba?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"selectedCuts\": [\n    {\n      \"sourceStartMs\": 4096310,\n      \"sourceEndMs\": 4379860,\n      \"reason\": \"開始根拠: 新球種の調整についてリスナーへの相談と悩みが本格化する発話から始めるためです。終了根拠: 投票結果を受けて球種を決定し、1時間経過したことへの謝罪と余韻が収束する発話まで含めるためです。除外判断: 続く発話以降は実際に球種をキャラクターに覚えさせたり次のゲーム進行に移る場面のため除外しました。\",\n      \"usedSpeechIds\": [\n        \"375-390\"\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

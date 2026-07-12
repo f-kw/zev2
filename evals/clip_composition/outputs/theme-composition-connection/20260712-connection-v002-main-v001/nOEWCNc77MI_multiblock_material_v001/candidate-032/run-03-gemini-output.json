@@ -1,0 +1,35 @@
+{
+  "selectedCuts": [
+    {
+      "sourceStartMs": 2790074,
+      "sourceEndMs": 2848146,
+      "reason": "開始根拠: マリンが「なんか君の心みたいにあったかい」とロマンチックなアプローチ（フリ）を始める発話から選択しました。終了根拠: ころねが「キモい」と激しく連呼するツッコミと、その反応の余韻が収束する最後の発話まで含めるためです。除外判断: 前後のイノシシ狩りの相談やお尻のぷりぷりに関する発話は、テーマの温度差のコミカルさとは直接関係がないため除外しました。",
+      "usedSpeechIds": [
+        "400-425"
+      ]
+    }
+  ],
+  "runAt": "2026-07-12T21:15:50+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "manualRun": false,
+    "runner": "edge-cdp-text-prompt",
+    "connectionVersion": "connection-v002",
+    "generationSystem": "llm-v013@gemini-web-flash",
+    "upstreamGenerationSystem": "theme-llm-v002@gemini-web-flash",
+    "resultRole": "connected-composition-eval-connection-v002",
+    "conditionalOnUpstreamRangeHit": true,
+    "promptVersion": "clip_composition_prompt_v013",
+    "contextCondition": "theme-window-plus-minus-5m",
+    "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+    "candidateIndex": 32,
+    "runs": 3,
+    "runIndex": 3,
+    "inputPromptSha256": "25c8cba401feba2c403613902cb2a0578a1e9ba9d6fc564e34dbaa15d8dd4dbe"
+  },
+  "promptFile": "outputs/theme-composition-connection/20260712-connection-v002-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-032/prompt.md",
+  "pageUrl": "https://gemini.google.com/app/c0e78b1e0d3da2f3?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"selectedCuts\": [\n    {\n      \"sourceStartMs\": 2790074,\n      \"sourceEndMs\": 2848146,\n      \"reason\": \"開始根拠: マリンが「なんか君の心みたいにあったかい」とロマンチックなアプローチ（フリ）を始める発話から選択しました。終了根拠: ころねが「キモい」と激しく連呼するツッコミと、その反応の余韻が収束する最後の発話まで含めるためです。除外判断: 前後のイノシシ狩りの相談やお尻のぷりぷりに関する発話は、テーマの温度差のコミカルさとは直接関係がないため除外しました。\",\n      \"usedSpeechIds\": [\n        \"400-425\"\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

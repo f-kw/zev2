@@ -1,0 +1,35 @@
+{
+  "selectedCuts": [
+    {
+      "sourceStartMs": 3467816,
+      "sourceEndMs": 3519167,
+      "reason": "開始根拠: 食材がなくなったことに驚き、船長が全て握っている状態に言及し始める発話から開始するためです。終了根拠: 肉を温存しようとする攻防から、魚を渡して一連の掛け合いが収束し次のクラフトの話題に移る直前まで含めるためです。除外判断: それ以前のイノシシの被り物に関する雑談や、それ以降の板や斧の作成に関する話題はテーマ外のため除外しました。",
+      "usedSpeechIds": [
+        "503-510"
+      ]
+    }
+  ],
+  "runAt": "2026-07-12T21:22:50+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "manualRun": false,
+    "runner": "edge-cdp-text-prompt",
+    "connectionVersion": "connection-v002",
+    "generationSystem": "llm-v013@gemini-web-flash",
+    "upstreamGenerationSystem": "theme-llm-v002@gemini-web-flash",
+    "resultRole": "connected-composition-eval-connection-v002",
+    "conditionalOnUpstreamRangeHit": true,
+    "promptVersion": "clip_composition_prompt_v013",
+    "contextCondition": "theme-window-plus-minus-5m",
+    "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+    "candidateIndex": 41,
+    "runs": 3,
+    "runIndex": 1,
+    "inputPromptSha256": "ab8d0d3d57b3532e74e42d525410167abadc12e43b319d83215bc8e466fef00d"
+  },
+  "promptFile": "outputs/theme-composition-connection/20260712-connection-v002-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-041/prompt.md",
+  "pageUrl": "https://gemini.google.com/app/53f775c167b03585?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"selectedCuts\": [\n    {\n      \"sourceStartMs\": 3467816,\n      \"sourceEndMs\": 3519167,\n      \"reason\": \"開始根拠: 食材がなくなったことに驚き、船長が全て握っている状態に言及し始める発話から開始するためです。終了根拠: 肉を温存しようとする攻防から、魚を渡して一連の掛け合いが収束し次のクラフトの話題に移る直前まで含めるためです。除外判断: それ以前のイノシシの被り物に関する雑談や、それ以降の板や斧の作成に関する話題はテーマ外のため除外しました。\",\n      \"usedSpeechIds\": [\n        \"503-510\"\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

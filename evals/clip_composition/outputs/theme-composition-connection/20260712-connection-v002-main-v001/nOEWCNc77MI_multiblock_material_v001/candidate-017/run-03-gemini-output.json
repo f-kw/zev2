@@ -1,0 +1,35 @@
+{
+  "selectedCuts": [
+    {
+      "sourceStartMs": 925239,
+      "sourceEndMs": 1079852,
+      "reason": "開始根拠: ゲーム内でイノシシに遭遇して悲鳴を上げ、危機的状況が始まる発話から選択するためです。終了根拠: イノシシ3匹の存在を確認し、1人30本ずつ矢を持つ作戦を立てる会話が収束するところまで含めるためです。除外判断: それ以降の発話は、矢の作成が完了した後の別行動や移動の話に移行するため除外します。",
+      "usedSpeechIds": [
+        "105-127"
+      ]
+    }
+  ],
+  "runAt": "2026-07-12T21:15:02+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "manualRun": false,
+    "runner": "edge-cdp-text-prompt",
+    "connectionVersion": "connection-v002",
+    "generationSystem": "llm-v013@gemini-web-flash",
+    "upstreamGenerationSystem": "theme-llm-v002@gemini-web-flash",
+    "resultRole": "connected-composition-eval-connection-v002",
+    "conditionalOnUpstreamRangeHit": true,
+    "promptVersion": "clip_composition_prompt_v013",
+    "contextCondition": "theme-window-plus-minus-5m",
+    "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+    "candidateIndex": 17,
+    "runs": 3,
+    "runIndex": 3,
+    "inputPromptSha256": "5a4ecad9e50556d83f286d97d46a2b14b25cb0ed11ea7eedd3eb3de66bd52fd3"
+  },
+  "promptFile": "outputs/theme-composition-connection/20260712-connection-v002-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-017/prompt.md",
+  "pageUrl": "https://gemini.google.com/app/103b271cb5e35a29?hl=ja",
+  "rawResponseText": "{\n\"selectedCuts\": [\n{\n\"sourceStartMs\": 925239,\n\"sourceEndMs\": 1079852,\n\"reason\": \"開始根拠: ゲーム内でイノシシに遭遇して悲鳴を上げ、危機的状況が始まる発話から選択するためです。終了根拠: イノシシ3匹の存在を確認し、1人30本ずつ矢を持つ作戦を立てる会話が収束するところまで含めるためです。除外判断: それ以降の発話は、矢の作成が完了した後の別行動や移動の話に移行するため除外します。\",\n\"usedSpeechIds\": [\n\"105-127\"\n]\n}\n]\n}\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

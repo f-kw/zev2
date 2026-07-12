@@ -1,0 +1,35 @@
+{
+  "selectedCuts": [
+    {
+      "sourceStartMs": 3991226,
+      "sourceEndMs": 4029707,
+      "reason": "開始根拠: マリンがころねの頭の匂いを嗅いでいるというプロレスのフリとなる発話から開始するためです。終了根拠: 匂いを「臭い」と言われたころねがじわじわと泣き真似をし、マリンがそれに突っ込む一連の反応が収束する発話まで含めるためです。除外判断: その後に続く出航の合図や資材集めの話は、テーマと関係のない別話題への転換であるため除外しました。",
+      "usedSpeechIds": [
+        "578-580"
+      ]
+    }
+  ],
+  "runAt": "2026-07-12T21:28:32+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "manualRun": false,
+    "runner": "edge-cdp-text-prompt",
+    "connectionVersion": "connection-v002",
+    "generationSystem": "llm-v013@gemini-web-flash",
+    "upstreamGenerationSystem": "theme-llm-v002@gemini-web-flash",
+    "resultRole": "connected-composition-eval-connection-v002",
+    "conditionalOnUpstreamRangeHit": true,
+    "promptVersion": "clip_composition_prompt_v013",
+    "contextCondition": "theme-window-plus-minus-5m",
+    "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+    "candidateIndex": 46,
+    "runs": 3,
+    "runIndex": 3,
+    "inputPromptSha256": "dbdfdd18122836bbab235bf904a3ba509b326ec80c5b4080b7831e0873bf3c20"
+  },
+  "promptFile": "outputs/theme-composition-connection/20260712-connection-v002-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-046/prompt.md",
+  "pageUrl": "https://gemini.google.com/app/1437819ec29f6f0c?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"selectedCuts\": [\n    {\n      \"sourceStartMs\": 3991226,\n      \"sourceEndMs\": 4029707,\n      \"reason\": \"開始根拠: マリンがころねの頭の匂いを嗅いでいるというプロレスのフリとなる発話から開始するためです。終了根拠: 匂いを「臭い」と言われたころねがじわじわと泣き真似をし、マリンがそれに突っ込む一連の反応が収束する発話まで含めるためです。除外判断: その後に続く出航の合図や資材集めの話は、テーマと関係のない別話題への転換であるため除外しました。\",\n      \"usedSpeechIds\": [\n        \"578-580\"\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

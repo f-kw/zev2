@@ -1,0 +1,35 @@
+{
+  "selectedCuts": [
+    {
+      "sourceStartMs": 3690566,
+      "sourceEndMs": 3794866,
+      "reason": "開始根拠: 育成方針の意見が割れて混乱し、こよりに助けを求める発話からテーマへのフリが始まるためです。終了根拠: 荒れを懸念して相談をやめ、星街すいせいと決めるという結論に達して余韻が収束する発話まで含めるためです。除外判断: 結論が出た後の、再度育成のステータス検証に戻る発話はテーマから外れるため除外しました。",
+      "usedSpeechIds": [
+        "351-359"
+      ]
+    }
+  ],
+  "runAt": "2026-07-12T21:39:48+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "manualRun": false,
+    "runner": "edge-cdp-text-prompt",
+    "connectionVersion": "connection-v002",
+    "generationSystem": "llm-v013@gemini-web-flash",
+    "upstreamGenerationSystem": "theme-llm-v002@gemini-web-flash",
+    "resultRole": "connected-composition-eval-connection-v002",
+    "conditionalOnUpstreamRangeHit": true,
+    "promptVersion": "clip_composition_prompt_v013",
+    "contextCondition": "theme-window-plus-minus-5m",
+    "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+    "candidateIndex": 14,
+    "runs": 3,
+    "runIndex": 2,
+    "inputPromptSha256": "8e9d573db25cce4cd3677239d940615e3af5ec48d195eefbf9e732ee9db267e5"
+  },
+  "promptFile": "outputs/theme-composition-connection/20260712-connection-v002-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-014/prompt.md",
+  "pageUrl": "https://gemini.google.com/app/583518f3ff285d95?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"selectedCuts\": [\n    {\n      \"sourceStartMs\": 3690566,\n      \"sourceEndMs\": 3794866,\n      \"reason\": \"開始根拠: 育成方針の意見が割れて混乱し、こよりに助けを求める発話からテーマへのフリが始まるためです。終了根拠: 荒れを懸念して相談をやめ、星街すいせいと決めるという結論に達して余韻が収束する発話まで含めるためです。除外判断: 結論が出た後の、再度育成のステータス検証に戻る発話はテーマから外れるため除外しました。\",\n      \"usedSpeechIds\": [\n        \"351-359\"\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

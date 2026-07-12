@@ -1,0 +1,35 @@
+{
+  "selectedCuts": [
+    {
+      "sourceStartMs": 3180190,
+      "sourceEndMs": 3238642,
+      "reason": "開始根拠: マリンがしし肉を焼いているか確認し、夫婦風の掛け合いが始まる発話から選択しました。終了根拠: バーベキュー完成に歓喜した後の夫婦漫才風のやり取りが落ち着き、次の行動を考え始める前の発話まで含めました。除外判断: それ以降のイノシシの被り物に関する話題はテーマ外の別展開となるため除外しました。",
+      "usedSpeechIds": [
+        "470-477"
+      ]
+    }
+  ],
+  "runAt": "2026-07-12T21:16:55+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "manualRun": false,
+    "runner": "edge-cdp-text-prompt",
+    "connectionVersion": "connection-v002",
+    "generationSystem": "llm-v013@gemini-web-flash",
+    "upstreamGenerationSystem": "theme-llm-v002@gemini-web-flash",
+    "resultRole": "connected-composition-eval-connection-v002",
+    "conditionalOnUpstreamRangeHit": true,
+    "promptVersion": "clip_composition_prompt_v013",
+    "contextCondition": "theme-window-plus-minus-5m",
+    "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+    "candidateIndex": 37,
+    "runs": 3,
+    "runIndex": 1,
+    "inputPromptSha256": "0df9291b9765e1cca86e7fccdebafb144811e855263513f982c62143c9f89ac3"
+  },
+  "promptFile": "outputs/theme-composition-connection/20260712-connection-v002-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-037/prompt.md",
+  "pageUrl": "https://gemini.google.com/app/a8fed2fde14ccf6a?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"selectedCuts\": [\n    {\n      \"sourceStartMs\": 3180190,\n      \"sourceEndMs\": 3238642,\n      \"reason\": \"開始根拠: マリンがしし肉を焼いているか確認し、夫婦風の掛け合いが始まる発話から選択しました。終了根拠: バーベキュー完成に歓喜した後の夫婦漫才風のやり取りが落ち着き、次の行動を考え始める前の発話まで含めました。除外判断: それ以降のイノシシの被り物に関する話題はテーマ外の別展開となるため除外しました。\",\n      \"usedSpeechIds\": [\n        \"470-477\"\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

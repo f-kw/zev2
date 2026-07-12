@@ -1,0 +1,35 @@
+{
+  "selectedCuts": [
+    {
+      "sourceStartMs": 9126634,
+      "sourceEndMs": 9239820,
+      "reason": "開始根拠: 同点に追いつかれた緊迫した状況下で、数字や戦術の選択肢を迷いながら確認し始める発話から開始するためです。終了根拠: 限界を迎えたフブキの投手交代と代打にビブーを起用する一連の作戦の組み立てが一段落する発話まで含めるためです。除外判断: それ以降のビブーの固有スキルや他の一年生の起用に関する詳細な雑談・検討は、テーマの中心から外れるため除外しました。",
+      "usedSpeechIds": [
+        "1003-1012"
+      ]
+    }
+  ],
+  "runAt": "2026-07-12T21:44:01+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "manualRun": false,
+    "runner": "edge-cdp-text-prompt",
+    "connectionVersion": "connection-v002",
+    "generationSystem": "llm-v013@gemini-web-flash",
+    "upstreamGenerationSystem": "theme-llm-v002@gemini-web-flash",
+    "resultRole": "connected-composition-eval-connection-v002",
+    "conditionalOnUpstreamRangeHit": true,
+    "promptVersion": "clip_composition_prompt_v013",
+    "contextCondition": "theme-window-plus-minus-5m",
+    "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+    "candidateIndex": 44,
+    "runs": 3,
+    "runIndex": 1,
+    "inputPromptSha256": "a136d77cd93cf78f84aed8f17aa5c884f16f720c4df028d8568eb36cc4c16963"
+  },
+  "promptFile": "outputs/theme-composition-connection/20260712-connection-v002-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-044/prompt.md",
+  "pageUrl": "https://gemini.google.com/app/acd4446e152791a3?hl=ja",
+  "rawResponseText": "{\n\"selectedCuts\": [\n{\n\"sourceStartMs\": 9126634,\n\"sourceEndMs\": 9239820,\n\"reason\": \"開始根拠: 同点に追いつかれた緊迫した状況下で、数字や戦術の選択肢を迷いながら確認し始める発話から開始するためです。終了根拠: 限界を迎えたフブキの投手交代と代打にビブーを起用する一連の作戦の組み立てが一段落する発話まで含めるためです。除外判断: それ以降のビブーの固有スキルや他の一年生の起用に関する詳細な雑談・検討は、テーマの中心から外れるため除外しました。\",\n\"usedSpeechIds\": [\n\"1003-1012\"\n]\n}\n]\n}\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

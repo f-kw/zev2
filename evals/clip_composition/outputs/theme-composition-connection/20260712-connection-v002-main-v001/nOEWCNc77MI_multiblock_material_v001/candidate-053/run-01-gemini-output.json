@@ -1,0 +1,35 @@
+{
+  "selectedCuts": [
+    {
+      "sourceStartMs": 5190322,
+      "sourceEndMs": 5279310,
+      "reason": "開始根拠: マリンが景色に感動してエモい演技（セリフ）を切り出す発話から開始するためです。終了根拠: ころねに「絡みづらい」と一蹴され、その後のサメ襲来で話題が完全に切り替わる直前のリアクションの収束までを含めるためです。除外判断: 候補外の周辺区間は、船の移動トラブルや素材集めなどの別話題であるため除外しました。",
+      "usedSpeechIds": [
+        "771-885"
+      ]
+    }
+  ],
+  "runAt": "2026-07-12T21:34:37+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "manualRun": false,
+    "runner": "edge-cdp-text-prompt",
+    "connectionVersion": "connection-v002",
+    "generationSystem": "llm-v013@gemini-web-flash",
+    "upstreamGenerationSystem": "theme-llm-v002@gemini-web-flash",
+    "resultRole": "connected-composition-eval-connection-v002",
+    "conditionalOnUpstreamRangeHit": true,
+    "promptVersion": "clip_composition_prompt_v013",
+    "contextCondition": "theme-window-plus-minus-5m",
+    "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+    "candidateIndex": 53,
+    "runs": 3,
+    "runIndex": 1,
+    "inputPromptSha256": "8a1a8f2694b640ce9feba5318325906188677c0f2e7d221a7ef132b1cbcff7f3"
+  },
+  "promptFile": "outputs/theme-composition-connection/20260712-connection-v002-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-053/prompt.md",
+  "pageUrl": "https://gemini.google.com/app/019c297c3d1f31a2?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"selectedCuts\": [\n    {\n      \"sourceStartMs\": 5190322,\n      \"sourceEndMs\": 5279310,\n      \"reason\": \"開始根拠: マリンが景色に感動してエモい演技（セリフ）を切り出す発話から開始するためです。終了根拠: ころねに「絡みづらい」と一蹴され、その後のサメ襲来で話題が完全に切り替わる直前のリアクションの収束までを含めるためです。除外判断: 候補外の周辺区間は、船の移動トラブルや素材集めなどの別話題であるため除外しました。\",\n      \"usedSpeechIds\": [\n        \"771-885\"\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

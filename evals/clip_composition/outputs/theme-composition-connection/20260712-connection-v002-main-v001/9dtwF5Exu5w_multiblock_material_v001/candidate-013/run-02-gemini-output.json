@@ -1,0 +1,35 @@
+{
+  "selectedCuts": [
+    {
+      "sourceStartMs": 3554885,
+      "sourceEndMs": 3779014,
+      "reason": "開始根拠: リスナーに対して「重さ」の意見を大募集し、育成方針についての迷いが始まる発話から選択しました。終了根拠: 博衣こよりに助けを求めたものの、最終的にアドバイスを聞かないことにして別のリスナー（きまち）と決めるという一連の流れが収束する発話まで含めました。除外判断: これ以降の発話は実際にどちらの育成方針にするかの具体的な検証や投票に移るため、こよりに助けを求めるコミカルな一幕というテーマから外れるため除外しました。",
+      "usedSpeechIds": [
+        "343-358"
+      ]
+    }
+  ],
+  "runAt": "2026-07-12T21:39:01+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "manualRun": false,
+    "runner": "edge-cdp-text-prompt",
+    "connectionVersion": "connection-v002",
+    "generationSystem": "llm-v013@gemini-web-flash",
+    "upstreamGenerationSystem": "theme-llm-v002@gemini-web-flash",
+    "resultRole": "connected-composition-eval-connection-v002",
+    "conditionalOnUpstreamRangeHit": true,
+    "promptVersion": "clip_composition_prompt_v013",
+    "contextCondition": "theme-window-plus-minus-5m",
+    "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+    "candidateIndex": 13,
+    "runs": 3,
+    "runIndex": 2,
+    "inputPromptSha256": "98dc1c2e8a98c9830cf5063f7a85e9af5c6537448fc3aab2931e6c9593ce4675"
+  },
+  "promptFile": "outputs/theme-composition-connection/20260712-connection-v002-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-013/prompt.md",
+  "pageUrl": "https://gemini.google.com/app/20ccf89ed4c58fd7?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"selectedCuts\": [\n    {\n      \"sourceStartMs\": 3554885,\n      \"sourceEndMs\": 3779014,\n      \"reason\": \"開始根拠: リスナーに対して「重さ」の意見を大募集し、育成方針についての迷いが始まる発話から選択しました。終了根拠: 博衣こよりに助けを求めたものの、最終的にアドバイスを聞かないことにして別のリスナー（きまち）と決めるという一連の流れが収束する発話まで含めました。除外判断: これ以降の発話は実際にどちらの育成方針にするかの具体的な検証や投票に移るため、こよりに助けを求めるコミカルな一幕というテーマから外れるため除外しました。\",\n      \"usedSpeechIds\": [\n        \"343-358\"\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

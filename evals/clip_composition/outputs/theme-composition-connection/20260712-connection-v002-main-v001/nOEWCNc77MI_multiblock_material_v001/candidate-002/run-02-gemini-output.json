@@ -1,0 +1,35 @@
+{
+  "selectedCuts": [
+    {
+      "sourceStartMs": 240202,
+      "sourceEndMs": 328762,
+      "reason": "開始根拠: 今日はころねがねずこスタイルであることを明かし、ねずこの声真似のフリが始まる発話から選択するためです。終了根拠: ねずこと炭治郎のなりきり掛け合いから鬼滅の刃の用語の言い間違いを経て、次の作業の話題へと移る直前の発話までを含めるためです。除外判断: それより前の発話はサザエさんのエンディングの話などテーマと無関係な雑談であるため除外しました。",
+      "usedSpeechIds": [
+        "19-21"
+      ]
+    }
+  ],
+  "runAt": "2026-07-12T21:08:47+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "manualRun": false,
+    "runner": "edge-cdp-text-prompt",
+    "connectionVersion": "connection-v002",
+    "generationSystem": "llm-v013@gemini-web-flash",
+    "upstreamGenerationSystem": "theme-llm-v002@gemini-web-flash",
+    "resultRole": "connected-composition-eval-connection-v002",
+    "conditionalOnUpstreamRangeHit": true,
+    "promptVersion": "clip_composition_prompt_v013",
+    "contextCondition": "theme-window-plus-minus-5m",
+    "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+    "candidateIndex": 2,
+    "runs": 3,
+    "runIndex": 2,
+    "inputPromptSha256": "71e1daa0263c130cbdd11a7a56e5d5c941af8686a145ff79688a629f3d7d7351"
+  },
+  "promptFile": "outputs/theme-composition-connection/20260712-connection-v002-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-002/prompt.md",
+  "pageUrl": "https://gemini.google.com/app/c33f668a9a20b32b?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"selectedCuts\": [\n    {\n      \"sourceStartMs\": 240202,\n      \"sourceEndMs\": 328762,\n      \"reason\": \"開始根拠: 今日はころねがねずこスタイルであることを明かし、ねずこの声真似のフリが始まる発話から選択するためです。終了根拠: ねずこと炭治郎のなりきり掛け合いから鬼滅の刃の用語の言い間違いを経て、次の作業の話題へと移る直前の発話までを含めるためです。除外判断: それより前の発話はサザエさんのエンディングの話などテーマと無関係な雑談であるため除外しました。\",\n      \"usedSpeechIds\": [\n        \"19-21\"\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

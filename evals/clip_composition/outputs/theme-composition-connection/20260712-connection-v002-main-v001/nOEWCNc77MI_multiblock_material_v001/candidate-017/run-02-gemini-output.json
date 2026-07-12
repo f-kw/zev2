@@ -1,0 +1,35 @@
+{
+  "selectedCuts": [
+    {
+      "sourceStartMs": 1009243,
+      "sourceEndMs": 1079852,
+      "reason": "開始根拠: イノシシに対抗するための矢や弓の準備について具体的に相談し始める発話から開始するためです。終了根拠: 3匹のイノシシを発見して慌てて作戦を立てるコミカルな掛け合いが収束する発話まで含めるためです。除外判断: それ以降の発話（128-136）は「居た？」という単語の短い断片的な繰り返しであり、文脈が進まないため除外しました。",
+      "usedSpeechIds": [
+        "116-127"
+      ]
+    }
+  ],
+  "runAt": "2026-07-12T21:14:41+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "manualRun": false,
+    "runner": "edge-cdp-text-prompt",
+    "connectionVersion": "connection-v002",
+    "generationSystem": "llm-v013@gemini-web-flash",
+    "upstreamGenerationSystem": "theme-llm-v002@gemini-web-flash",
+    "resultRole": "connected-composition-eval-connection-v002",
+    "conditionalOnUpstreamRangeHit": true,
+    "promptVersion": "clip_composition_prompt_v013",
+    "contextCondition": "theme-window-plus-minus-5m",
+    "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+    "candidateIndex": 17,
+    "runs": 3,
+    "runIndex": 2,
+    "inputPromptSha256": "5a4ecad9e50556d83f286d97d46a2b14b25cb0ed11ea7eedd3eb3de66bd52fd3"
+  },
+  "promptFile": "outputs/theme-composition-connection/20260712-connection-v002-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-017/prompt.md",
+  "pageUrl": "https://gemini.google.com/app/ad0a96ed2e19504d?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"selectedCuts\": [\n    {\n      \"sourceStartMs\": 1009243,\n      \"sourceEndMs\": 1079852,\n      \"reason\": \"開始根拠: イノシシに対抗するための矢や弓の準備について具体的に相談し始める発話から開始するためです。終了根拠: 3匹のイノシシを発見して慌てて作戦を立てるコミカルな掛け合いが収束する発話まで含めるためです。除外判断: それ以降の発話（128-136）は「居た？」という単語の短い断片的な繰り返しであり、文脈が進まないため除外しました。\",\n      \"usedSpeechIds\": [\n        \"116-127\"\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

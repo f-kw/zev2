@@ -1,0 +1,35 @@
+{
+  "selectedCuts": [
+    {
+      "sourceStartMs": 5162499,
+      "sourceEndMs": 5189318,
+      "reason": "開始根拠: テーマの中心である「ぴょんぴょんマンゴー」というフレーズを発話し、それに対して大笑いされる流れの起点となる発話から開始するためです。終了根拠: おもろくないことで笑われるのが気まずいと吐露し、そのやり取りのオチと余韻が収束する発話の終端に合わせるためです。除外判断: 直後の発話からは綺麗に見える夕焼けや朝日の話題へと完全に切り替わっているため、これ以降の区間は含めず除外しました。",
+      "usedSpeechIds": [
+        770
+      ]
+    }
+  ],
+  "runAt": "2026-07-12T21:29:42+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "manualRun": false,
+    "runner": "edge-cdp-text-prompt",
+    "connectionVersion": "connection-v002",
+    "generationSystem": "llm-v013@gemini-web-flash",
+    "upstreamGenerationSystem": "theme-llm-v002@gemini-web-flash",
+    "resultRole": "connected-composition-eval-connection-v002",
+    "conditionalOnUpstreamRangeHit": true,
+    "promptVersion": "clip_composition_prompt_v013",
+    "contextCondition": "theme-window-plus-minus-5m",
+    "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+    "candidateIndex": 52,
+    "runs": 3,
+    "runIndex": 2,
+    "inputPromptSha256": "53be9120716bae2fb00b3e659dc462f9a6917cedd4aba52960afe34d486e6ee1"
+  },
+  "promptFile": "outputs/theme-composition-connection/20260712-connection-v002-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-052/prompt.md",
+  "pageUrl": "https://gemini.google.com/app/38a82413e7cea4f8?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"selectedCuts\": [\n    {\n      \"sourceStartMs\": 5162499,\n      \"sourceEndMs\": 5189318,\n      \"reason\": \"開始根拠: テーマの中心である「ぴょんぴょんマンゴー」というフレーズを発話し、それに対して大笑いされる流れの起点となる発話から開始するためです。終了根拠: おもろくないことで笑われるのが気まずいと吐露し、そのやり取りのオチと余韻が収束する発話の終端に合わせるためです。除外判断: 直後の発話からは綺麗に見える夕焼けや朝日の話題へと完全に切り替わっているため、これ以降の区間は含めず除外しました。\",\n      \"usedSpeechIds\": [\n        770\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

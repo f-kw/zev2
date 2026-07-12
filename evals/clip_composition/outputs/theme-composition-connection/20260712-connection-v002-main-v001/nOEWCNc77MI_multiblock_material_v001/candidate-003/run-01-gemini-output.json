@@ -1,0 +1,35 @@
+{
+  "selectedCuts": [
+    {
+      "sourceStartMs": 278759,
+      "sourceEndMs": 335402,
+      "reason": "開始根拠: テーマのフリとなる「ねずこスタイル」の雑談から言い間違えの展開へ繋がる発話から始めるためです。終了根拠: 言い間違え連発のオチから我に返って「作業しよう」と結論づけた後のリアクションが収束する発話まで含めるためです。除外判断: それ以降の島から出る具体的なゲーム内進行の会話はテーマの趣旨から外れるため除外しました。",
+      "usedSpeechIds": [
+        "20-22"
+      ]
+    }
+  ],
+  "runAt": "2026-07-12T21:09:17+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "manualRun": false,
+    "runner": "edge-cdp-text-prompt",
+    "connectionVersion": "connection-v002",
+    "generationSystem": "llm-v013@gemini-web-flash",
+    "upstreamGenerationSystem": "theme-llm-v002@gemini-web-flash",
+    "resultRole": "connected-composition-eval-connection-v002",
+    "conditionalOnUpstreamRangeHit": true,
+    "promptVersion": "clip_composition_prompt_v013",
+    "contextCondition": "theme-window-plus-minus-5m",
+    "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+    "candidateIndex": 3,
+    "runs": 3,
+    "runIndex": 1,
+    "inputPromptSha256": "05f5cf8165c0387ab717801933ef25d46a78e4602fa7a7da361e5dbd29d23100"
+  },
+  "promptFile": "outputs/theme-composition-connection/20260712-connection-v002-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-003/prompt.md",
+  "pageUrl": "https://gemini.google.com/app/5b81c20b1351a8cd?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"selectedCuts\": [\n    {\n      \"sourceStartMs\": 278759,\n      \"sourceEndMs\": 335402,\n      \"reason\": \"開始根拠: テーマのフリとなる「ねずこスタイル」の雑談から言い間違えの展開へ繋がる発話から始めるためです。終了根拠: 言い間違え連発のオチから我に返って「作業しよう」と結論づけた後のリアクションが収束する発話まで含めるためです。除外判断: それ以降の島から出る具体的なゲーム内進行の会話はテーマの趣旨から外れるため除外しました。\",\n      \"usedSpeechIds\": [\n        \"20-22\"\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

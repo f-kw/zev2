@@ -1,0 +1,35 @@
+{
+  "selectedCuts": [
+    {
+      "sourceStartMs": 6511002,
+      "sourceEndMs": 6539920,
+      "reason": "開始根拠: 作戦を「転がすか」と迷った末に決断してプレイヤーに「お願い！」と命じる、フリとして重要な発話から開始するためです。終了根拠: 作戦が成功して「やればできるじゃない！」と選手を大喜びで褒めちぎるリアクションが収束する発話まで含めるためです。除外判断: 直後の発話（speechId: 664）からは、次の打者のステータス確認と新たな作戦思案に移っており、別の文脈になるため除外しました。",
+      "usedSpeechIds": [
+        "652-663"
+      ]
+    }
+  ],
+  "runAt": "2026-07-12T21:43:38+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "manualRun": false,
+    "runner": "edge-cdp-text-prompt",
+    "connectionVersion": "connection-v002",
+    "generationSystem": "llm-v013@gemini-web-flash",
+    "upstreamGenerationSystem": "theme-llm-v002@gemini-web-flash",
+    "resultRole": "connected-composition-eval-connection-v002",
+    "conditionalOnUpstreamRangeHit": true,
+    "promptVersion": "clip_composition_prompt_v013",
+    "contextCondition": "theme-window-plus-minus-5m",
+    "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+    "candidateIndex": 30,
+    "runs": 3,
+    "runIndex": 3,
+    "inputPromptSha256": "7d73ed025eed8f2f56e06e29fbaad70a5794467ac4e13112d55514fef95ec127"
+  },
+  "promptFile": "outputs/theme-composition-connection/20260712-connection-v002-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-030/prompt.md",
+  "pageUrl": "https://gemini.google.com/app/d0db629ab7fa8921?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"selectedCuts\": [\n    {\n      \"sourceStartMs\": 6511002,\n      \"sourceEndMs\": 6539920,\n      \"reason\": \"開始根拠: 作戦を「転がすか」と迷った末に決断してプレイヤーに「お願い！」と命じる、フリとして重要な発話から開始するためです。終了根拠: 作戦が成功して「やればできるじゃない！」と選手を大喜びで褒めちぎるリアクションが収束する発話まで含めるためです。除外判断: 直後の発話（speechId: 664）からは、次の打者のステータス確認と新たな作戦思案に移っており、別の文脈になるため除外しました。\",\n      \"usedSpeechIds\": [\n        \"652-663\"\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

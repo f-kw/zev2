@@ -1,0 +1,35 @@
+{
+  "selectedCuts": [
+    {
+      "sourceStartMs": 10503922,
+      "sourceEndMs": 10618318,
+      "reason": "開始根拠: 相手投手の能力や自チームの走力を踏まえて、盗塁の作戦を検討し始める発話から開始するためです。終了根拠: 盗塁のリスクとリターンを天秤にかけ、送りバントの選択肢を思案する一連の葛藤が収束する発話まで含めるためです。除外判断: 直前の天野くんへの応援や、その後に続くスクイーズの具体的な指示に関するやり取りは、テーマの中心であるリスクとリターンの激しい葛藤から話題が変化しているため除外しました。",
+      "usedSpeechIds": [
+        "1189-1203"
+      ]
+    }
+  ],
+  "runAt": "2026-07-12T21:58:39+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "manualRun": false,
+    "runner": "edge-cdp-text-prompt",
+    "connectionVersion": "connection-v002",
+    "generationSystem": "llm-v013@gemini-web-flash",
+    "upstreamGenerationSystem": "theme-llm-v002@gemini-web-flash",
+    "resultRole": "connected-composition-eval-connection-v002",
+    "conditionalOnUpstreamRangeHit": true,
+    "promptVersion": "clip_composition_prompt_v013",
+    "contextCondition": "theme-window-plus-minus-5m",
+    "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+    "candidateIndex": 52,
+    "runs": 3,
+    "runIndex": 3,
+    "inputPromptSha256": "2935110b1cb6a80d8b4f90238a50e85157c7563d87f7b0713db7d93ffa02958e"
+  },
+  "promptFile": "outputs/theme-composition-connection/20260712-connection-v002-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-052/prompt.md",
+  "pageUrl": "https://gemini.google.com/app/09b887a32b59ce93?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"selectedCuts\": [\n    {\n      \"sourceStartMs\": 10503922,\n      \"sourceEndMs\": 10618318,\n      \"reason\": \"開始根拠: 相手投手の能力や自チームの走力を踏まえて、盗塁の作戦を検討し始める発話から開始するためです。終了根拠: 盗塁のリスクとリターンを天秤にかけ、送りバントの選択肢を思案する一連の葛藤が収束する発話まで含めるためです。除外判断: 直前の天野くんへの応援や、その後に続くスクイーズの具体的な指示に関するやり取りは、テーマの中心であるリスクとリターンの激しい葛藤から話題が変化しているため除外しました。\",\n      \"usedSpeechIds\": [\n        \"1189-1203\"\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

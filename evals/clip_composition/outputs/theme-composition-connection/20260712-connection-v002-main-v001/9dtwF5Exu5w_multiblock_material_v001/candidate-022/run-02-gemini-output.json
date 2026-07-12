@@ -1,0 +1,35 @@
+{
+  "selectedCuts": [
+    {
+      "sourceStartMs": 4680822,
+      "sourceEndMs": 4741026,
+      "reason": "開始根拠: 合宿の練習メニューの選択で、しおりんに特殊能力が付く可能性を考慮してミートを選ぶフリの発話から開始するためです。終了根拠: 狙い通りにしおりんに『カット打ち』が付き、歓喜した反応が収束する瞬間までを含めるためです。除外判断: それ以降の別の練習指示や3年生に関する話題はテーマ外のため除外しました。",
+      "usedSpeechIds": [
+        "431-451"
+      ]
+    }
+  ],
+  "runAt": "2026-07-12T21:41:26+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "manualRun": false,
+    "runner": "edge-cdp-text-prompt",
+    "connectionVersion": "connection-v002",
+    "generationSystem": "llm-v013@gemini-web-flash",
+    "upstreamGenerationSystem": "theme-llm-v002@gemini-web-flash",
+    "resultRole": "connected-composition-eval-connection-v002",
+    "conditionalOnUpstreamRangeHit": true,
+    "promptVersion": "clip_composition_prompt_v013",
+    "contextCondition": "theme-window-plus-minus-5m",
+    "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+    "candidateIndex": 22,
+    "runs": 3,
+    "runIndex": 2,
+    "inputPromptSha256": "3bcf27a7d7347a21fd2474b0ea81337516e37b33483dd479ba75042e558e11d9"
+  },
+  "promptFile": "outputs/theme-composition-connection/20260712-connection-v002-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-022/prompt.md",
+  "pageUrl": "https://gemini.google.com/app/c57c28eb2ca62428?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"selectedCuts\": [\n    {\n      \"sourceStartMs\": 4680822,\n      \"sourceEndMs\": 4741026,\n      \"reason\": \"開始根拠: 合宿の練習メニューの選択で、しおりんに特殊能力が付く可能性を考慮してミートを選ぶフリの発話から開始するためです。終了根拠: 狙い通りにしおりんに『カット打ち』が付き、歓喜した反応が収束する瞬間までを含めるためです。除外判断: それ以降の別の練習指示や3年生に関する話題はテーマ外のため除外しました。\",\n      \"usedSpeechIds\": [\"431-451\"]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

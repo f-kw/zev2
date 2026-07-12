@@ -1,0 +1,35 @@
+{
+  "selectedCuts": [
+    {
+      "sourceStartMs": 2790074,
+      "sourceEndMs": 2848146,
+      "reason": "開始根拠: マリンが夕日などの景色を見てロマンチックに語りかけるフリの発話から開始するためです。終了根拠: ころねが「キモい」と激しく連呼する反応が収束する最後の発話まで含めるためです。除外判断: 直前のイノシシ狩りの相談や、直後のお尻ぷりぷりという別のノリへ移行する発話はテーマ外のため除外しました。",
+      "usedSpeechIds": [
+        "400-25"
+      ]
+    }
+  ],
+  "runAt": "2026-07-12T21:15:18+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "manualRun": false,
+    "runner": "edge-cdp-text-prompt",
+    "connectionVersion": "connection-v002",
+    "generationSystem": "llm-v013@gemini-web-flash",
+    "upstreamGenerationSystem": "theme-llm-v002@gemini-web-flash",
+    "resultRole": "connected-composition-eval-connection-v002",
+    "conditionalOnUpstreamRangeHit": true,
+    "promptVersion": "clip_composition_prompt_v013",
+    "contextCondition": "theme-window-plus-minus-5m",
+    "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+    "candidateIndex": 32,
+    "runs": 3,
+    "runIndex": 1,
+    "inputPromptSha256": "25c8cba401feba2c403613902cb2a0578a1e9ba9d6fc564e34dbaa15d8dd4dbe"
+  },
+  "promptFile": "outputs/theme-composition-connection/20260712-connection-v002-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-032/prompt.md",
+  "pageUrl": "https://gemini.google.com/app/f71f3190e753ad70?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"selectedCuts\": [\n    {\n      \"sourceStartMs\": 2790074,\n      \"sourceEndMs\": 2848146,\n      \"reason\": \"開始根拠: マリンが夕日などの景色を見てロマンチックに語りかけるフリの発話から開始するためです。終了根拠: ころねが「キモい」と激しく連呼する反応が収束する最後の発話まで含めるためです。除外判断: 直前のイノシシ狩りの相談や、直後のお尻ぷりぷりという別のノリへ移行する発話はテーマ外のため除外しました。\",\n      \"usedSpeechIds\": [\n        \"400-25\"\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

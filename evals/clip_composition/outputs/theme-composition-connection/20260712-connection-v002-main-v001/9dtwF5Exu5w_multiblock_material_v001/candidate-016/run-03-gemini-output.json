@@ -1,0 +1,35 @@
+{
+  "selectedCuts": [
+    {
+      "sourceStartMs": 4200714,
+      "sourceEndMs": 4379860,
+      "reason": "開始根拠: 新球種の性能を確かめるためにテスト投球を開始する発話から始めるためです。終了根拠: 迷いすぎて1時間経過してしまったことを明かして謝罪するテーマのオチとなる発話まで含めるためです。除外判断: 391番以降は甲子園に向けた練習指示の話題に移っているため除外します。",
+      "usedSpeechIds": [
+        "381-390"
+      ]
+    }
+  ],
+  "runAt": "2026-07-12T21:40:53+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "manualRun": false,
+    "runner": "edge-cdp-text-prompt",
+    "connectionVersion": "connection-v002",
+    "generationSystem": "llm-v013@gemini-web-flash",
+    "upstreamGenerationSystem": "theme-llm-v002@gemini-web-flash",
+    "resultRole": "connected-composition-eval-connection-v002",
+    "conditionalOnUpstreamRangeHit": true,
+    "promptVersion": "clip_composition_prompt_v013",
+    "contextCondition": "theme-window-plus-minus-5m",
+    "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+    "candidateIndex": 16,
+    "runs": 3,
+    "runIndex": 3,
+    "inputPromptSha256": "5fdc8b94f9a0893199aa1d72856ef36fccd51137f4114a27a26664598010fb31"
+  },
+  "promptFile": "outputs/theme-composition-connection/20260712-connection-v002-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-016/prompt.md",
+  "pageUrl": "https://gemini.google.com/app/c195df8f7fb04243?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"selectedCuts\": [\n    {\n      \"sourceStartMs\": 4200714,\n      \"sourceEndMs\": 4379860,\n      \"reason\": \"開始根拠: 新球種の性能を確かめるためにテスト投球を開始する発話から始めるためです。終了根拠: 迷いすぎて1時間経過してしまったことを明かして謝罪するテーマのオチとなる発話まで含めるためです。除外判断: 391番以降は甲子園に向けた練習指示の話題に移っているため除外します。\",\n      \"usedSpeechIds\": [\n        \"381-390\"\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

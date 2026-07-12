@@ -1,0 +1,35 @@
+{
+  "selectedCuts": [
+    {
+      "sourceStartMs": 2010874,
+      "sourceEndMs": 2342207,
+      "reason": "開始根拠: コロナ療養中のリリカからチャットで助言が届いたことに気づき、感謝を述べる場面から始まるためです。終了根拠: 卒業生の設定に合わせた寸劇風のやり取りを繰り広げ、最後に謝罪でオチがつく発話の終了時刻まで含めるためです。除外判断: それ以降の区間はオリヘンの詳細なパラメータ調整など別のゲーム内作業に移るため除外しました。",
+      "usedSpeechIds": [
+        "220-232"
+      ]
+    }
+  ],
+  "runAt": "2026-07-12T21:37:56+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "manualRun": false,
+    "runner": "edge-cdp-text-prompt",
+    "connectionVersion": "connection-v002",
+    "generationSystem": "llm-v013@gemini-web-flash",
+    "upstreamGenerationSystem": "theme-llm-v002@gemini-web-flash",
+    "resultRole": "connected-composition-eval-connection-v002",
+    "conditionalOnUpstreamRangeHit": true,
+    "promptVersion": "clip_composition_prompt_v013",
+    "contextCondition": "theme-window-plus-minus-5m",
+    "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+    "candidateIndex": 9,
+    "runs": 3,
+    "runIndex": 1,
+    "inputPromptSha256": "8bceab2e9345be51ed42e739548f9ff563247b6de698186bb26cec1fa45806b4"
+  },
+  "promptFile": "outputs/theme-composition-connection/20260712-connection-v002-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-009/prompt.md",
+  "pageUrl": "https://gemini.google.com/app/4b25d0066bc9a955?hl=ja",
+  "rawResponseText": "{\n\"selectedCuts\": [\n{\n\"sourceStartMs\": 2010874,\n\"sourceEndMs\": 2342207,\n\"reason\": \"開始根拠: コロナ療養中のリリカからチャットで助言が届いたことに気づき、感謝を述べる場面から始まるためです。終了根拠: 卒業生の設定に合わせた寸劇風のやり取りを繰り広げ、最後に謝罪でオチがつく発話の終了時刻まで含めるためです。除外判断: それ以降の区間はオリヘンの詳細なパラメータ調整など別のゲーム内作業に移るため除外しました。\",\n\"usedSpeechIds\": [\n\"220-232\"\n]\n}\n]\n}\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

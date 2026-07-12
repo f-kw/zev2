@@ -1,0 +1,4522 @@
+{
+  "kind": "theme_composition_connection_v002_score",
+  "resultRole": "connected-composition-eval-connection-v002-conditional-on-upstream-range-hit",
+  "runAt": "2026-07-12T13:05:14.250Z",
+  "connectionVersion": "connection-v002",
+  "generationSystem": "llm-v013@gemini-web-flash",
+  "upstreamGenerationSystem": "theme-llm-v002@gemini-web-flash",
+  "inputSelectionVersion": "input-selection-v004",
+  "conditionalOnUpstreamRangeHit": true,
+  "contextCondition": "theme-window-plus-minus-5m",
+  "successCriterion": {
+    "boundaryToleranceMs": 1000
+  },
+  "withdrawalCriterion": {
+    "definition": "candidate-majority reached count falls below 25 and match run count remains zero",
+    "triggered": false
+  },
+  "runCount": 75,
+  "distribution": {
+    "match": 0,
+    "reach": 74,
+    "miss": 1
+  },
+  "reachedRunCount": 74,
+  "candidateMajorityReachedCount": 25,
+  "withinContextWrongSceneCount": 0,
+  "byFixture": [
+    {
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "match": 0,
+      "reach": 38,
+      "miss": 1,
+      "exactRangeCopy": 22,
+      "inheritedRangeBoundary": 13,
+      "outsideEvidence": 16
+    },
+    {
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "match": 0,
+      "reach": 36,
+      "miss": 0,
+      "exactRangeCopy": 18,
+      "inheritedRangeBoundary": 15,
+      "outsideEvidence": 17
+    }
+  ],
+  "ratioCounts": {
+    "belowOne": 1,
+    "exactlyOne": 40,
+    "aboveOne": 33,
+    "invalid": 1
+  },
+  "exactRangeCopyCount": 40,
+  "exactRangeCopyRate": 0.5333333333333333,
+  "inheritedRangeBoundaryCount": 28,
+  "inheritedRangeBoundaryRate": 0.37333333333333335,
+  "evidenceBoundaryUseCount": 68,
+  "evidenceBoundaryUseRate": 0.9066666666666666,
+  "formatFailureCount": 1,
+  "formatFailures": [
+    {
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 32,
+      "runIndex": 1,
+      "issues": [
+        "cut-1-usedSpeechIds-syntax"
+      ],
+      "outputPath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-v002-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-032/run-01-gemini-output.json"
+    }
+  ],
+  "outsideEvidenceRunCount": 33,
+  "unlabeledRunCount": 0,
+  "fluctuationCounts": {
+    "stable": 14,
+    "boundary": 10,
+    "structural": 1
+  },
+  "baselineComparison": {
+    "baselineGenerationSystem": "llm-v012@gemini-web-flash",
+    "baselineMatchRunCount": 0,
+    "matchRunDelta": 0,
+    "baselineReachedRunCount": 73,
+    "reachedRunDelta": 1,
+    "baselineExactRangeCopyCount": 65,
+    "exactRangeCopyDelta": -25,
+    "baselineInheritedRangeBoundaryCount": 6,
+    "inheritedRangeBoundaryDelta": 22,
+    "baselineEvidenceBoundaryUseCount": 71,
+    "evidenceBoundaryUseDelta": -3,
+    "baselineWithinContextWrongSceneCount": 0,
+    "withinContextWrongSceneDelta": 0
+  },
+  "candidates": [
+    {
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 2,
+      "counts": {
+        "match": 0,
+        "reach": 3,
+        "miss": 0
+      },
+      "best": "reach",
+      "majority": "reach",
+      "fluctuation": "stable"
+    },
+    {
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 3,
+      "counts": {
+        "match": 0,
+        "reach": 3,
+        "miss": 0
+      },
+      "best": "reach",
+      "majority": "reach",
+      "fluctuation": "stable"
+    },
+    {
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 17,
+      "counts": {
+        "match": 0,
+        "reach": 3,
+        "miss": 0
+      },
+      "best": "reach",
+      "majority": "reach",
+      "fluctuation": "boundary"
+    },
+    {
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 32,
+      "counts": {
+        "match": 0,
+        "reach": 2,
+        "miss": 1
+      },
+      "best": "reach",
+      "majority": "reach",
+      "fluctuation": "structural"
+    },
+    {
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 35,
+      "counts": {
+        "match": 0,
+        "reach": 3,
+        "miss": 0
+      },
+      "best": "reach",
+      "majority": "reach",
+      "fluctuation": "stable"
+    },
+    {
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 37,
+      "counts": {
+        "match": 0,
+        "reach": 3,
+        "miss": 0
+      },
+      "best": "reach",
+      "majority": "reach",
+      "fluctuation": "stable"
+    },
+    {
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 39,
+      "counts": {
+        "match": 0,
+        "reach": 3,
+        "miss": 0
+      },
+      "best": "reach",
+      "majority": "reach",
+      "fluctuation": "boundary"
+    },
+    {
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 41,
+      "counts": {
+        "match": 0,
+        "reach": 3,
+        "miss": 0
+      },
+      "best": "reach",
+      "majority": "reach",
+      "fluctuation": "stable"
+    },
+    {
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 46,
+      "counts": {
+        "match": 0,
+        "reach": 3,
+        "miss": 0
+      },
+      "best": "reach",
+      "majority": "reach",
+      "fluctuation": "stable"
+    },
+    {
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 52,
+      "counts": {
+        "match": 0,
+        "reach": 3,
+        "miss": 0
+      },
+      "best": "reach",
+      "majority": "reach",
+      "fluctuation": "boundary"
+    },
+    {
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 53,
+      "counts": {
+        "match": 0,
+        "reach": 3,
+        "miss": 0
+      },
+      "best": "reach",
+      "majority": "reach",
+      "fluctuation": "stable"
+    },
+    {
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 87,
+      "counts": {
+        "match": 0,
+        "reach": 3,
+        "miss": 0
+      },
+      "best": "reach",
+      "majority": "reach",
+      "fluctuation": "stable"
+    },
+    {
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 88,
+      "counts": {
+        "match": 0,
+        "reach": 3,
+        "miss": 0
+      },
+      "best": "reach",
+      "majority": "reach",
+      "fluctuation": "boundary"
+    },
+    {
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 5,
+      "counts": {
+        "match": 0,
+        "reach": 3,
+        "miss": 0
+      },
+      "best": "reach",
+      "majority": "reach",
+      "fluctuation": "boundary"
+    },
+    {
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 9,
+      "counts": {
+        "match": 0,
+        "reach": 3,
+        "miss": 0
+      },
+      "best": "reach",
+      "majority": "reach",
+      "fluctuation": "boundary"
+    },
+    {
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 13,
+      "counts": {
+        "match": 0,
+        "reach": 3,
+        "miss": 0
+      },
+      "best": "reach",
+      "majority": "reach",
+      "fluctuation": "boundary"
+    },
+    {
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 14,
+      "counts": {
+        "match": 0,
+        "reach": 3,
+        "miss": 0
+      },
+      "best": "reach",
+      "majority": "reach",
+      "fluctuation": "stable"
+    },
+    {
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 16,
+      "counts": {
+        "match": 0,
+        "reach": 3,
+        "miss": 0
+      },
+      "best": "reach",
+      "majority": "reach",
+      "fluctuation": "boundary"
+    },
+    {
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 22,
+      "counts": {
+        "match": 0,
+        "reach": 3,
+        "miss": 0
+      },
+      "best": "reach",
+      "majority": "reach",
+      "fluctuation": "boundary"
+    },
+    {
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 28,
+      "counts": {
+        "match": 0,
+        "reach": 3,
+        "miss": 0
+      },
+      "best": "reach",
+      "majority": "reach",
+      "fluctuation": "stable"
+    },
+    {
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 30,
+      "counts": {
+        "match": 0,
+        "reach": 3,
+        "miss": 0
+      },
+      "best": "reach",
+      "majority": "reach",
+      "fluctuation": "boundary"
+    },
+    {
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 44,
+      "counts": {
+        "match": 0,
+        "reach": 3,
+        "miss": 0
+      },
+      "best": "reach",
+      "majority": "reach",
+      "fluctuation": "stable"
+    },
+    {
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 52,
+      "counts": {
+        "match": 0,
+        "reach": 3,
+        "miss": 0
+      },
+      "best": "reach",
+      "majority": "reach",
+      "fluctuation": "stable"
+    },
+    {
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 54,
+      "counts": {
+        "match": 0,
+        "reach": 3,
+        "miss": 0
+      },
+      "best": "reach",
+      "majority": "reach",
+      "fluctuation": "stable"
+    },
+    {
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 59,
+      "counts": {
+        "match": 0,
+        "reach": 3,
+        "miss": 0
+      },
+      "best": "reach",
+      "majority": "reach",
+      "fluctuation": "stable"
+    }
+  ],
+  "runs": [
+    {
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 2,
+      "runIndex": 1,
+      "stage": "reach",
+      "formatValid": true,
+      "formatIssues": [],
+      "targetExpectedIndexes": [
+        1
+      ],
+      "reachedExpectedIndexes": [
+        1
+      ],
+      "exactExpectedIndexes": [],
+      "selectedCutCount": 1,
+      "selectedDurationMs": 88560,
+      "evidenceRangeDurationMs": 58782,
+      "selectedToEvidenceDurationRatio": 1.5065836480555272,
+      "exactRangeCopy": false,
+      "inheritedRangeBoundary": true,
+      "outsideEvidenceCutCount": 1,
+      "unlabeledCutCount": 0,
+      "selectedCuts": [
+        {
+          "sourceStartMs": 240202,
+          "sourceEndMs": 328762,
+          "reason": "開始根拠: マリンが今日のころねの様子を『ねずこスタイル』と説明し、ころねが「うんうん」と反応してテーマの掛け合いが始まる発話であるためです。終了根拠: 鬼滅の刃の用語の言い間違い（鬼柱、上限のサメ）などのやり取りを経て、マリンが「作業するか」と別の話題へ移行を促す発話の終わりまでを含めるためです。除外判断: speechId 22以降は完全にゲームの作業や拠点紹介の別の話題へ移っているため、切り抜き区間からは除外しました。",
+          "usedSpeechIds": [
+            "19-21"
+          ]
+        }
+      ],
+      "targetAssessments": [
+        {
+          "expectedIndex": 1,
+          "reached": true,
+          "exact": false,
+          "cut": {
+            "sourceStartMs": 240202,
+            "sourceEndMs": 328762,
+            "reason": "開始根拠: マリンが今日のころねの様子を『ねずこスタイル』と説明し、ころねが「うんうん」と反応してテーマの掛け合いが始まる発話であるためです。終了根拠: 鬼滅の刃の用語の言い間違い（鬼柱、上限のサメ）などのやり取りを経て、マリンが「作業するか」と別の話題へ移行を促す発話の終わりまでを含めるためです。除外判断: speechId 22以降は完全にゲームの作業や拠点紹介の別の話題へ移っているため、切り抜き区間からは除外しました。",
+            "usedSpeechIds": [
+              "19-21"
+            ]
+          },
+          "index": 1,
+          "overlapMs": 4201,
+          "startDeltaMs": -19866,
+          "endDeltaMs": 64493
+        }
+      ],
+      "outputPath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-v002-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-002/run-01-gemini-output.json"
+    },
+    {
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 2,
+      "runIndex": 2,
+      "stage": "reach",
+      "formatValid": true,
+      "formatIssues": [],
+      "targetExpectedIndexes": [
+        1
+      ],
+      "reachedExpectedIndexes": [
+        1
+      ],
+      "exactExpectedIndexes": [],
+      "selectedCutCount": 1,
+      "selectedDurationMs": 88560,
+      "evidenceRangeDurationMs": 58782,
+      "selectedToEvidenceDurationRatio": 1.5065836480555272,
+      "exactRangeCopy": false,
+      "inheritedRangeBoundary": true,
+      "outsideEvidenceCutCount": 1,
+      "unlabeledCutCount": 0,
+      "selectedCuts": [
+        {
+          "sourceStartMs": 240202,
+          "sourceEndMs": 328762,
+          "reason": "開始根拠: 今日はころねがねずこスタイルであることを明かし、ねずこの声真似のフリが始まる発話から選択するためです。終了根拠: ねずこと炭治郎のなりきり掛け合いから鬼滅の刃の用語の言い間違いを経て、次の作業の話題へと移る直前の発話までを含めるためです。除外判断: それより前の発話はサザエさんのエンディングの話などテーマと無関係な雑談であるため除外しました。",
+          "usedSpeechIds": [
+            "19-21"
+          ]
+        }
+      ],
+      "targetAssessments": [
+        {
+          "expectedIndex": 1,
+          "reached": true,
+          "exact": false,
+          "cut": {
+            "sourceStartMs": 240202,
+            "sourceEndMs": 328762,
+            "reason": "開始根拠: 今日はころねがねずこスタイルであることを明かし、ねずこの声真似のフリが始まる発話から選択するためです。終了根拠: ねずこと炭治郎のなりきり掛け合いから鬼滅の刃の用語の言い間違いを経て、次の作業の話題へと移る直前の発話までを含めるためです。除外判断: それより前の発話はサザエさんのエンディングの話などテーマと無関係な雑談であるため除外しました。",
+            "usedSpeechIds": [
+              "19-21"
+            ]
+          },
+          "index": 1,
+          "overlapMs": 4201,
+          "startDeltaMs": -19866,
+          "endDeltaMs": 64493
+        }
+      ],
+      "outputPath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-v002-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-002/run-02-gemini-output.json"
+    },
+    {
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 2,
+      "runIndex": 3,
+      "stage": "reach",
+      "formatValid": true,
+      "formatIssues": [],
+      "targetExpectedIndexes": [
+        1
+      ],
+      "reachedExpectedIndexes": [
+        1
+      ],
+      "exactExpectedIndexes": [],
+      "selectedCutCount": 1,
+      "selectedDurationMs": 88560,
+      "evidenceRangeDurationMs": 58782,
+      "selectedToEvidenceDurationRatio": 1.5065836480555272,
+      "exactRangeCopy": false,
+      "inheritedRangeBoundary": true,
+      "outsideEvidenceCutCount": 1,
+      "unlabeledCutCount": 0,
+      "selectedCuts": [
+        {
+          "sourceStartMs": 240202,
+          "sourceEndMs": 328762,
+          "reason": "開始根拠: マリンがころねの『ねずこスタイル』について言及し、掛け合いの前提となる状況説明を始める発話から選択しました。終了根拠: 炭治郎になりきったマリンところねのねずこ風のやり取りが一段落し、作業に移ろうと話題が転換する発話までを含めました。除外判断: 前後のサザエさんのネタや船のリフォームの紹介などの雑談・作業フェーズはテーマから外れるため除外しました。",
+          "usedSpeechIds": [
+            "19-21"
+          ]
+        }
+      ],
+      "targetAssessments": [
+        {
+          "expectedIndex": 1,
+          "reached": true,
+          "exact": false,
+          "cut": {
+            "sourceStartMs": 240202,
+            "sourceEndMs": 328762,
+            "reason": "開始根拠: マリンがころねの『ねずこスタイル』について言及し、掛け合いの前提となる状況説明を始める発話から選択しました。終了根拠: 炭治郎になりきったマリンところねのねずこ風のやり取りが一段落し、作業に移ろうと話題が転換する発話までを含めました。除外判断: 前後のサザエさんのネタや船のリフォームの紹介などの雑談・作業フェーズはテーマから外れるため除外しました。",
+            "usedSpeechIds": [
+              "19-21"
+            ]
+          },
+          "index": 1,
+          "overlapMs": 4201,
+          "startDeltaMs": -19866,
+          "endDeltaMs": 64493
+        }
+      ],
+      "outputPath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-v002-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-002/run-03-gemini-output.json"
+    },
+    {
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 3,
+      "runIndex": 1,
+      "stage": "reach",
+      "formatValid": true,
+      "formatIssues": [],
+      "targetExpectedIndexes": [
+        2
+      ],
+      "reachedExpectedIndexes": [
+        2
+      ],
+      "exactExpectedIndexes": [],
+      "selectedCutCount": 1,
+      "selectedDurationMs": 56643,
+      "evidenceRangeDurationMs": 28184,
+      "selectedToEvidenceDurationRatio": 2.009757309111553,
+      "exactRangeCopy": false,
+      "inheritedRangeBoundary": false,
+      "outsideEvidenceCutCount": 1,
+      "unlabeledCutCount": 0,
+      "selectedCuts": [
+        {
+          "sourceStartMs": 278759,
+          "sourceEndMs": 335402,
+          "reason": "開始根拠: テーマのフリとなる「ねずこスタイル」の雑談から言い間違えの展開へ繋がる発話から始めるためです。終了根拠: 言い間違え連発のオチから我に返って「作業しよう」と結論づけた後のリアクションが収束する発話まで含めるためです。除外判断: それ以降の島から出る具体的なゲーム内進行の会話はテーマの趣旨から外れるため除外しました。",
+          "usedSpeechIds": [
+            "20-22"
+          ]
+        }
+      ],
+      "targetAssessments": [
+        {
+          "expectedIndex": 2,
+          "reached": true,
+          "exact": false,
+          "cut": {
+            "sourceStartMs": 278759,
+            "sourceEndMs": 335402,
+            "reason": "開始根拠: テーマのフリとなる「ねずこスタイル」の雑談から言い間違えの展開へ繋がる発話から始めるためです。終了根拠: 言い間違え連発のオチから我に返って「作業しよう」と結論づけた後のリアクションが収束する発話まで含めるためです。除外判断: それ以降の島から出る具体的なゲーム内進行の会話はテーマの趣旨から外れるため除外しました。",
+            "usedSpeechIds": [
+              "20-22"
+            ]
+          },
+          "index": 1,
+          "overlapMs": 5241,
+          "startDeltaMs": -46720,
+          "endDeltaMs": 4682
+        }
+      ],
+      "outputPath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-v002-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-003/run-01-gemini-output.json"
+    },
+    {
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 3,
+      "runIndex": 2,
+      "stage": "reach",
+      "formatValid": true,
+      "formatIssues": [],
+      "targetExpectedIndexes": [
+        2
+      ],
+      "reachedExpectedIndexes": [
+        2
+      ],
+      "exactExpectedIndexes": [],
+      "selectedCutCount": 1,
+      "selectedDurationMs": 56643,
+      "evidenceRangeDurationMs": 28184,
+      "selectedToEvidenceDurationRatio": 2.009757309111553,
+      "exactRangeCopy": false,
+      "inheritedRangeBoundary": false,
+      "outsideEvidenceCutCount": 1,
+      "unlabeledCutCount": 0,
+      "selectedCuts": [
+        {
+          "sourceStartMs": 278759,
+          "sourceEndMs": 335402,
+          "reason": "開始根拠: テーマの「ねずこスタイル」のフリから始まり、言い間違えの連発に繋がる文脈をカバーするため、発話ID20を開始位置としました。終了根拠: 言い間違えで笑い合った後、空腹や作業の遅れに気付いて作業を始めようとするものの、相方が冷めた反応を見せてオチがつく発話ID22までを含めるためです。除外判断: 発話ID19以前はサザエさんの話などテーマとは無関係な別話題の雑談であるため除外しました。",
+          "usedSpeechIds": [
+            "20-22"
+          ]
+        }
+      ],
+      "targetAssessments": [
+        {
+          "expectedIndex": 2,
+          "reached": true,
+          "exact": false,
+          "cut": {
+            "sourceStartMs": 278759,
+            "sourceEndMs": 335402,
+            "reason": "開始根拠: テーマの「ねずこスタイル」のフリから始まり、言い間違えの連発に繋がる文脈をカバーするため、発話ID20を開始位置としました。終了根拠: 言い間違えで笑い合った後、空腹や作業の遅れに気付いて作業を始めようとするものの、相方が冷めた反応を見せてオチがつく発話ID22までを含めるためです。除外判断: 発話ID19以前はサザエさんの話などテーマとは無関係な別話題の雑談であるため除外しました。",
+            "usedSpeechIds": [
+              "20-22"
+            ]
+          },
+          "index": 1,
+          "overlapMs": 5241,
+          "startDeltaMs": -46720,
+          "endDeltaMs": 4682
+        }
+      ],
+      "outputPath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-v002-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-003/run-02-gemini-output.json"
+    },
+    {
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 3,
+      "runIndex": 3,
+      "stage": "reach",
+      "formatValid": true,
+      "formatIssues": [],
+      "targetExpectedIndexes": [
+        2
+      ],
+      "reachedExpectedIndexes": [
+        2
+      ],
+      "exactExpectedIndexes": [],
+      "selectedCutCount": 1,
+      "selectedDurationMs": 56643,
+      "evidenceRangeDurationMs": 28184,
+      "selectedToEvidenceDurationRatio": 2.009757309111553,
+      "exactRangeCopy": false,
+      "inheritedRangeBoundary": false,
+      "outsideEvidenceCutCount": 1,
+      "unlabeledCutCount": 0,
+      "selectedCuts": [
+        {
+          "sourceStartMs": 278759,
+          "sourceEndMs": 335402,
+          "reason": "開始根拠: テーマの言い間違え（「鬼の鬼柱」）の文脈に繋がる、ねずこ風のロールプレイのやり取りから会話を含めるためです。終了根拠: 言い間違え（「上限のサメ」）で笑い合った後、空腹や作業の遅れに気づいて「作業しよう」と我に返り、相方の冷めた反応でオチが収束する瞬間まで含めるためです。除外判断: 次の発話（speechId 23）以降は島から出る具体的なゲーム内移動とリフォームの紹介に移るため、この切り抜き区間からは除外します。",
+          "usedSpeechIds": [
+            "20-22"
+          ]
+        }
+      ],
+      "targetAssessments": [
+        {
+          "expectedIndex": 2,
+          "reached": true,
+          "exact": false,
+          "cut": {
+            "sourceStartMs": 278759,
+            "sourceEndMs": 335402,
+            "reason": "開始根拠: テーマの言い間違え（「鬼の鬼柱」）の文脈に繋がる、ねずこ風のロールプレイのやり取りから会話を含めるためです。終了根拠: 言い間違え（「上限のサメ」）で笑い合った後、空腹や作業の遅れに気づいて「作業しよう」と我に返り、相方の冷めた反応でオチが収束する瞬間まで含めるためです。除外判断: 次の発話（speechId 23）以降は島から出る具体的なゲーム内移動とリフォームの紹介に移るため、この切り抜き区間からは除外します。",
+            "usedSpeechIds": [
+              "20-22"
+            ]
+          },
+          "index": 1,
+          "overlapMs": 5241,
+          "startDeltaMs": -46720,
+          "endDeltaMs": 4682
+        }
+      ],
+      "outputPath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-v002-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-003/run-03-gemini-output.json"
+    },
+    {
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 17,
+      "runIndex": 1,
+      "stage": "reach",
+      "formatValid": true,
+      "formatIssues": [],
+      "targetExpectedIndexes": [
+        3
+      ],
+      "reachedExpectedIndexes": [
+        3
+      ],
+      "exactExpectedIndexes": [],
+      "selectedCutCount": 1,
+      "selectedDurationMs": 58850,
+      "evidenceRangeDurationMs": 58850,
+      "selectedToEvidenceDurationRatio": 1,
+      "exactRangeCopy": true,
+      "inheritedRangeBoundary": false,
+      "outsideEvidenceCutCount": 0,
+      "unlabeledCutCount": 0,
+      "selectedCuts": [
+        {
+          "sourceStartMs": 1021002,
+          "sourceEndMs": 1079852,
+          "reason": "開始根拠: イノシシを仕留める作戦として武器を準備し始める発話から始まるためです。終了根拠: イノシシが3匹いる危機的状況に遭遇し、1人30本ずつ矢を持つという慌てた作戦の結論が収束する発話まで含めるためです。除外判断: 1081354ms以降の「居た?」の連呼やその後の別行動（素材渡しや海中探索の相談）は、テーマである「焦る2人の掛け合い」のピークから外れるため除外しました。",
+          "usedSpeechIds": [
+            "120-127"
+          ]
+        }
+      ],
+      "targetAssessments": [
+        {
+          "expectedIndex": 3,
+          "reached": true,
+          "exact": false,
+          "cut": {
+            "sourceStartMs": 1021002,
+            "sourceEndMs": 1079852,
+            "reason": "開始根拠: イノシシを仕留める作戦として武器を準備し始める発話から始まるためです。終了根拠: イノシシが3匹いる危機的状況に遭遇し、1人30本ずつ矢を持つという慌てた作戦の結論が収束する発話まで含めるためです。除外判断: 1081354ms以降の「居た?」の連呼やその後の別行動（素材渡しや海中探索の相談）は、テーマである「焦る2人の掛け合い」のピークから外れるため除外しました。",
+            "usedSpeechIds": [
+              "120-127"
+            ]
+          },
+          "index": 1,
+          "overlapMs": 2360,
+          "startDeltaMs": -31985,
+          "endDeltaMs": 24505
+        }
+      ],
+      "outputPath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-v002-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-017/run-01-gemini-output.json"
+    },
+    {
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 17,
+      "runIndex": 2,
+      "stage": "reach",
+      "formatValid": true,
+      "formatIssues": [],
+      "targetExpectedIndexes": [
+        3
+      ],
+      "reachedExpectedIndexes": [
+        3
+      ],
+      "exactExpectedIndexes": [],
+      "selectedCutCount": 1,
+      "selectedDurationMs": 70609,
+      "evidenceRangeDurationMs": 58850,
+      "selectedToEvidenceDurationRatio": 1.1998130841121495,
+      "exactRangeCopy": false,
+      "inheritedRangeBoundary": true,
+      "outsideEvidenceCutCount": 1,
+      "unlabeledCutCount": 0,
+      "selectedCuts": [
+        {
+          "sourceStartMs": 1009243,
+          "sourceEndMs": 1079852,
+          "reason": "開始根拠: イノシシに対抗するための矢や弓の準備について具体的に相談し始める発話から開始するためです。終了根拠: 3匹のイノシシを発見して慌てて作戦を立てるコミカルな掛け合いが収束する発話まで含めるためです。除外判断: それ以降の発話（128-136）は「居た？」という単語の短い断片的な繰り返しであり、文脈が進まないため除外しました。",
+          "usedSpeechIds": [
+            "116-127"
+          ]
+        }
+      ],
+      "targetAssessments": [
+        {
+          "expectedIndex": 3,
+          "reached": true,
+          "exact": false,
+          "cut": {
+            "sourceStartMs": 1009243,
+            "sourceEndMs": 1079852,
+            "reason": "開始根拠: イノシシに対抗するための矢や弓の準備について具体的に相談し始める発話から開始するためです。終了根拠: 3匹のイノシシを発見して慌てて作戦を立てるコミカルな掛け合いが収束する発話まで含めるためです。除外判断: それ以降の発話（128-136）は「居た？」という単語の短い断片的な繰り返しであり、文脈が進まないため除外しました。",
+            "usedSpeechIds": [
+              "116-127"
+            ]
+          },
+          "index": 1,
+          "overlapMs": 2360,
+          "startDeltaMs": -43744,
+          "endDeltaMs": 24505
+        }
+      ],
+      "outputPath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-v002-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-017/run-02-gemini-output.json"
+    },
+    {
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 17,
+      "runIndex": 3,
+      "stage": "reach",
+      "formatValid": true,
+      "formatIssues": [],
+      "targetExpectedIndexes": [
+        3
+      ],
+      "reachedExpectedIndexes": [
+        3
+      ],
+      "exactExpectedIndexes": [],
+      "selectedCutCount": 1,
+      "selectedDurationMs": 154613,
+      "evidenceRangeDurationMs": 58850,
+      "selectedToEvidenceDurationRatio": 2.6272387425658454,
+      "exactRangeCopy": false,
+      "inheritedRangeBoundary": true,
+      "outsideEvidenceCutCount": 1,
+      "unlabeledCutCount": 0,
+      "selectedCuts": [
+        {
+          "sourceStartMs": 925239,
+          "sourceEndMs": 1079852,
+          "reason": "開始根拠: ゲーム内でイノシシに遭遇して悲鳴を上げ、危機的状況が始まる発話から選択するためです。終了根拠: イノシシ3匹の存在を確認し、1人30本ずつ矢を持つ作戦を立てる会話が収束するところまで含めるためです。除外判断: それ以降の発話は、矢の作成が完了した後の別行動や移動の話に移行するため除外します。",
+          "usedSpeechIds": [
+            "105-127"
+          ]
+        }
+      ],
+      "targetAssessments": [
+        {
+          "expectedIndex": 3,
+          "reached": true,
+          "exact": false,
+          "cut": {
+            "sourceStartMs": 925239,
+            "sourceEndMs": 1079852,
+            "reason": "開始根拠: ゲーム内でイノシシに遭遇して悲鳴を上げ、危機的状況が始まる発話から選択するためです。終了根拠: イノシシ3匹の存在を確認し、1人30本ずつ矢を持つ作戦を立てる会話が収束するところまで含めるためです。除外判断: それ以降の発話は、矢の作成が完了した後の別行動や移動の話に移行するため除外します。",
+            "usedSpeechIds": [
+              "105-127"
+            ]
+          },
+          "index": 1,
+          "overlapMs": 2360,
+          "startDeltaMs": -127748,
+          "endDeltaMs": 24505
+        }
+      ],
+      "outputPath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-v002-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-017/run-03-gemini-output.json"
+    },
+    {
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 32,
+      "runIndex": 1,
+      "stage": "miss",
+      "formatValid": false,
+      "formatIssues": [
+        "cut-1-usedSpeechIds-syntax"
+      ],
+      "targetExpectedIndexes": [
+        4
+      ],
+      "reachedExpectedIndexes": [],
+      "exactExpectedIndexes": [],
+      "selectedCutCount": 0,
+      "selectedDurationMs": 0,
+      "evidenceRangeDurationMs": 58072,
+      "selectedToEvidenceDurationRatio": 0,
+      "exactRangeCopy": false,
+      "inheritedRangeBoundary": false,
+      "outsideEvidenceCutCount": 0,
+      "unlabeledCutCount": 0,
+      "selectedCuts": [],
+      "targetAssessments": [
+        {
+          "expectedIndex": 4,
+          "reached": false,
+          "exact": false
+        }
+      ],
+      "outputPath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-v002-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-032/run-01-gemini-output.json"
+    },
+    {
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 32,
+      "runIndex": 2,
+      "stage": "reach",
+      "formatValid": true,
+      "formatIssues": [],
+      "targetExpectedIndexes": [
+        4
+      ],
+      "reachedExpectedIndexes": [
+        4
+      ],
+      "exactExpectedIndexes": [],
+      "selectedCutCount": 1,
+      "selectedDurationMs": 58072,
+      "evidenceRangeDurationMs": 58072,
+      "selectedToEvidenceDurationRatio": 1,
+      "exactRangeCopy": true,
+      "inheritedRangeBoundary": false,
+      "outsideEvidenceCutCount": 0,
+      "unlabeledCutCount": 0,
+      "selectedCuts": [
+        {
+          "sourceStartMs": 2790074,
+          "sourceEndMs": 2848146,
+          "reason": "開始根拠: マリンがころねに対して「君の心みたいにあったかい」と甘い言葉でアプローチを開始する発話から切り抜くためです。終了根拠: ころねが冷たく拒絶して放った「キモい」という連呼の最後の余韻が収束する瞬間まで含めるためです。除外判断: 直前のイノシシ狩りの相談（発話399以前）や、直後の「お尻ぷりぷりしちゃおう」（発話426以降）はテーマの温度差から話題が逸れるため除外しました。",
+          "usedSpeechIds": [
+            "400-425"
+          ]
+        }
+      ],
+      "targetAssessments": [
+        {
+          "expectedIndex": 4,
+          "reached": true,
+          "exact": false,
+          "cut": {
+            "sourceStartMs": 2790074,
+            "sourceEndMs": 2848146,
+            "reason": "開始根拠: マリンがころねに対して「君の心みたいにあったかい」と甘い言葉でアプローチを開始する発話から切り抜くためです。終了根拠: ころねが冷たく拒絶して放った「キモい」という連呼の最後の余韻が収束する瞬間まで含めるためです。除外判断: 直前のイノシシ狩りの相談（発話399以前）や、直後の「お尻ぷりぷりしちゃおう」（発話426以降）はテーマの温度差から話題が逸れるため除外しました。",
+            "usedSpeechIds": [
+              "400-425"
+            ]
+          },
+          "index": 1,
+          "overlapMs": 16606,
+          "startDeltaMs": 0,
+          "endDeltaMs": 41466
+        }
+      ],
+      "outputPath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-v002-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-032/run-02-gemini-output.json"
+    },
+    {
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 32,
+      "runIndex": 3,
+      "stage": "reach",
+      "formatValid": true,
+      "formatIssues": [],
+      "targetExpectedIndexes": [
+        4
+      ],
+      "reachedExpectedIndexes": [
+        4
+      ],
+      "exactExpectedIndexes": [],
+      "selectedCutCount": 1,
+      "selectedDurationMs": 58072,
+      "evidenceRangeDurationMs": 58072,
+      "selectedToEvidenceDurationRatio": 1,
+      "exactRangeCopy": true,
+      "inheritedRangeBoundary": false,
+      "outsideEvidenceCutCount": 0,
+      "unlabeledCutCount": 0,
+      "selectedCuts": [
+        {
+          "sourceStartMs": 2790074,
+          "sourceEndMs": 2848146,
+          "reason": "開始根拠: マリンが「なんか君の心みたいにあったかい」とロマンチックなアプローチ（フリ）を始める発話から選択しました。終了根拠: ころねが「キモい」と激しく連呼するツッコミと、その反応の余韻が収束する最後の発話まで含めるためです。除外判断: 前後のイノシシ狩りの相談やお尻のぷりぷりに関する発話は、テーマの温度差のコミカルさとは直接関係がないため除外しました。",
+          "usedSpeechIds": [
+            "400-425"
+          ]
+        }
+      ],
+      "targetAssessments": [
+        {
+          "expectedIndex": 4,
+          "reached": true,
+          "exact": false,
+          "cut": {
+            "sourceStartMs": 2790074,
+            "sourceEndMs": 2848146,
+            "reason": "開始根拠: マリンが「なんか君の心みたいにあったかい」とロマンチックなアプローチ（フリ）を始める発話から選択しました。終了根拠: ころねが「キモい」と激しく連呼するツッコミと、その反応の余韻が収束する最後の発話まで含めるためです。除外判断: 前後のイノシシ狩りの相談やお尻のぷりぷりに関する発話は、テーマの温度差のコミカルさとは直接関係がないため除外しました。",
+            "usedSpeechIds": [
+              "400-425"
+            ]
+          },
+          "index": 1,
+          "overlapMs": 16606,
+          "startDeltaMs": 0,
+          "endDeltaMs": 41466
+        }
+      ],
+      "outputPath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-v002-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-032/run-03-gemini-output.json"
+    },
+    {
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 35,
+      "runIndex": 1,
+      "stage": "reach",
+      "formatValid": true,
+      "formatIssues": [],
+      "targetExpectedIndexes": [
+        5
+      ],
+      "reachedExpectedIndexes": [
+        5
+      ],
+      "exactExpectedIndexes": [],
+      "selectedCutCount": 1,
+      "selectedDurationMs": 25818,
+      "evidenceRangeDurationMs": 25818,
+      "selectedToEvidenceDurationRatio": 1,
+      "exactRangeCopy": true,
+      "inheritedRangeBoundary": false,
+      "outsideEvidenceCutCount": 0,
+      "unlabeledCutCount": 0,
+      "selectedCuts": [
+        {
+          "sourceStartMs": 3000738,
+          "sourceEndMs": 3026556,
+          "reason": "開始根拠: テーマの中心であるサメに船が食われている緊迫した状況を訴える発話から開始するためです。終了根拠: ころねのつまんないことに対する罰の話題から、マリンが「マリゾネス」と呼びかけられて次のゲーム内クラフトの話題へ移行する直前まで含めるためです。除外判断: それ以前の皮の研究に関する雑談や、それ以降の蜂の巣などのアイテム作成の話題はテーマ外のため除外しました。",
+          "usedSpeechIds": [
+            "448-452"
+          ]
+        }
+      ],
+      "targetAssessments": [
+        {
+          "expectedIndex": 5,
+          "reached": true,
+          "exact": false,
+          "cut": {
+            "sourceStartMs": 3000738,
+            "sourceEndMs": 3026556,
+            "reason": "開始根拠: テーマの中心であるサメに船が食われている緊迫した状況を訴える発話から開始するためです。終了根拠: ころねのつまんないことに対する罰の話題から、マリンが「マリゾネス」と呼びかけられて次のゲーム内クラフトの話題へ移行する直前まで含めるためです。除外判断: それ以前の皮の研究に関する雑談や、それ以降の蜂の巣などのアイテム作成の話題はテーマ外のため除外しました。",
+            "usedSpeechIds": [
+              "448-452"
+            ]
+          },
+          "index": 1,
+          "overlapMs": 14770,
+          "startDeltaMs": -5904,
+          "endDeltaMs": 5144
+        }
+      ],
+      "outputPath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-v002-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-035/run-01-gemini-output.json"
+    },
+    {
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 35,
+      "runIndex": 2,
+      "stage": "reach",
+      "formatValid": true,
+      "formatIssues": [],
+      "targetExpectedIndexes": [
+        5
+      ],
+      "reachedExpectedIndexes": [
+        5
+      ],
+      "exactExpectedIndexes": [],
+      "selectedCutCount": 1,
+      "selectedDurationMs": 25818,
+      "evidenceRangeDurationMs": 25818,
+      "selectedToEvidenceDurationRatio": 1,
+      "exactRangeCopy": true,
+      "inheritedRangeBoundary": false,
+      "outsideEvidenceCutCount": 0,
+      "unlabeledCutCount": 0,
+      "selectedCuts": [
+        {
+          "sourceStartMs": 3000738,
+          "sourceEndMs": 3026556,
+          "reason": "開始根拠: サメに船を食われている緊迫した状況を伝える、テーマの導入となる発話から選択しているためです。終了根拠: ころねのつまんない言葉（マリゾネス）に対してマリンが理不尽に詰め寄る掛け合いが収束する瞬間までを含めるためです。除外判断: それ以降の発話は新しいアイテムのクラフト（蜂の巣など）に関する全く別の話題に移っているため除外しました。",
+          "usedSpeechIds": [
+            "448-452"
+          ]
+        }
+      ],
+      "targetAssessments": [
+        {
+          "expectedIndex": 5,
+          "reached": true,
+          "exact": false,
+          "cut": {
+            "sourceStartMs": 3000738,
+            "sourceEndMs": 3026556,
+            "reason": "開始根拠: サメに船を食われている緊迫した状況を伝える、テーマの導入となる発話から選択しているためです。終了根拠: ころねのつまんない言葉（マリゾネス）に対してマリンが理不尽に詰め寄る掛け合いが収束する瞬間までを含めるためです。除外判断: それ以降の発話は新しいアイテムのクラフト（蜂の巣など）に関する全く別の話題に移っているため除外しました。",
+            "usedSpeechIds": [
+              "448-452"
+            ]
+          },
+          "index": 1,
+          "overlapMs": 14770,
+          "startDeltaMs": -5904,
+          "endDeltaMs": 5144
+        }
+      ],
+      "outputPath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-v002-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-035/run-02-gemini-output.json"
+    },
+    {
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 35,
+      "runIndex": 3,
+      "stage": "reach",
+      "formatValid": true,
+      "formatIssues": [],
+      "targetExpectedIndexes": [
+        5
+      ],
+      "reachedExpectedIndexes": [
+        5
+      ],
+      "exactExpectedIndexes": [],
+      "selectedCutCount": 1,
+      "selectedDurationMs": 25818,
+      "evidenceRangeDurationMs": 25818,
+      "selectedToEvidenceDurationRatio": 1,
+      "exactRangeCopy": true,
+      "inheritedRangeBoundary": false,
+      "outsideEvidenceCutCount": 0,
+      "unlabeledCutCount": 0,
+      "selectedCuts": [
+        {
+          "sourceStartMs": 3000738,
+          "sourceEndMs": 3026556,
+          "reason": "開始根拠: サメに船が食われている状況を報告し合うテーマの前提となる会話から開始するためです。終了根拠: ころねの言動に対してマリンが「罰を与えたい」と理不尽に詰め寄るオチの掛け合いが収束する発話まで含めるためです。除外判断: 直前のトッポに関する雑談や、直後の新しく作れるアイテム（蜂の巣など）に関する話題は、テーマの文脈と異なるため除外しました。",
+          "usedSpeechIds": [
+            "448-452"
+          ]
+        }
+      ],
+      "targetAssessments": [
+        {
+          "expectedIndex": 5,
+          "reached": true,
+          "exact": false,
+          "cut": {
+            "sourceStartMs": 3000738,
+            "sourceEndMs": 3026556,
+            "reason": "開始根拠: サメに船が食われている状況を報告し合うテーマの前提となる会話から開始するためです。終了根拠: ころねの言動に対してマリンが「罰を与えたい」と理不尽に詰め寄るオチの掛け合いが収束する発話まで含めるためです。除外判断: 直前のトッポに関する雑談や、直後の新しく作れるアイテム（蜂の巣など）に関する話題は、テーマの文脈と異なるため除外しました。",
+            "usedSpeechIds": [
+              "448-452"
+            ]
+          },
+          "index": 1,
+          "overlapMs": 14770,
+          "startDeltaMs": -5904,
+          "endDeltaMs": 5144
+        }
+      ],
+      "outputPath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-v002-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-035/run-03-gemini-output.json"
+    },
+    {
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 37,
+      "runIndex": 1,
+      "stage": "reach",
+      "formatValid": true,
+      "formatIssues": [],
+      "targetExpectedIndexes": [
+        6
+      ],
+      "reachedExpectedIndexes": [
+        6
+      ],
+      "exactExpectedIndexes": [],
+      "selectedCutCount": 1,
+      "selectedDurationMs": 58452,
+      "evidenceRangeDurationMs": 29494,
+      "selectedToEvidenceDurationRatio": 1.9818268122329965,
+      "exactRangeCopy": false,
+      "inheritedRangeBoundary": true,
+      "outsideEvidenceCutCount": 1,
+      "unlabeledCutCount": 0,
+      "selectedCuts": [
+        {
+          "sourceStartMs": 3180190,
+          "sourceEndMs": 3238642,
+          "reason": "開始根拠: マリンがしし肉を焼いているか確認し、夫婦風の掛け合いが始まる発話から選択しました。終了根拠: バーベキュー完成に歓喜した後の夫婦漫才風のやり取りが落ち着き、次の行動を考え始める前の発話まで含めました。除外判断: それ以降のイノシシの被り物に関する話題はテーマ外の別展開となるため除外しました。",
+          "usedSpeechIds": [
+            "470-477"
+          ]
+        }
+      ],
+      "targetAssessments": [
+        {
+          "expectedIndex": 6,
+          "reached": true,
+          "exact": false,
+          "cut": {
+            "sourceStartMs": 3180190,
+            "sourceEndMs": 3238642,
+            "reason": "開始根拠: マリンがしし肉を焼いているか確認し、夫婦風の掛け合いが始まる発話から選択しました。終了根拠: バーベキュー完成に歓喜した後の夫婦漫才風のやり取りが落ち着き、次の行動を考え始める前の発話まで含めました。除外判断: それ以降のイノシシの被り物に関する話題はテーマ外の別展開となるため除外しました。",
+            "usedSpeechIds": [
+              "470-477"
+            ]
+          },
+          "index": 1,
+          "overlapMs": 9805,
+          "startDeltaMs": -220,
+          "endDeltaMs": 48427
+        }
+      ],
+      "outputPath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-v002-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-037/run-01-gemini-output.json"
+    },
+    {
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 37,
+      "runIndex": 2,
+      "stage": "reach",
+      "formatValid": true,
+      "formatIssues": [],
+      "targetExpectedIndexes": [
+        6
+      ],
+      "reachedExpectedIndexes": [
+        6
+      ],
+      "exactExpectedIndexes": [],
+      "selectedCutCount": 1,
+      "selectedDurationMs": 58452,
+      "evidenceRangeDurationMs": 29494,
+      "selectedToEvidenceDurationRatio": 1.9818268122329965,
+      "exactRangeCopy": false,
+      "inheritedRangeBoundary": true,
+      "outsideEvidenceCutCount": 1,
+      "unlabeledCutCount": 0,
+      "selectedCuts": [
+        {
+          "sourceStartMs": 3180190,
+          "sourceEndMs": 3238642,
+          "reason": "開始根拠: マリンがしし肉を焼いているか尋ね、テーマのきっかけとなる肉の焼き忘れが発覚する発話から開始するためです。終了根拠: 焼き忘れから発展した夫婦風の掛け合い（言い合い）のオチがついて一連のやり取りが収束する発話まで含めるためです。除外判断: それ以降のイノシシに関する発話は別の話題へ移行しており、バーベキュー完成のくだりとは意味的な連続性が薄いため除外しました。",
+          "usedSpeechIds": [
+            "470-477"
+          ]
+        }
+      ],
+      "targetAssessments": [
+        {
+          "expectedIndex": 6,
+          "reached": true,
+          "exact": false,
+          "cut": {
+            "sourceStartMs": 3180190,
+            "sourceEndMs": 3238642,
+            "reason": "開始根拠: マリンがしし肉を焼いているか尋ね、テーマのきっかけとなる肉の焼き忘れが発覚する発話から開始するためです。終了根拠: 焼き忘れから発展した夫婦風の掛け合い（言い合い）のオチがついて一連のやり取りが収束する発話まで含めるためです。除外判断: それ以降のイノシシに関する発話は別の話題へ移行しており、バーベキュー完成のくだりとは意味的な連続性が薄いため除外しました。",
+            "usedSpeechIds": [
+              "470-477"
+            ]
+          },
+          "index": 1,
+          "overlapMs": 9805,
+          "startDeltaMs": -220,
+          "endDeltaMs": 48427
+        }
+      ],
+      "outputPath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-v002-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-037/run-02-gemini-output.json"
+    },
+    {
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 37,
+      "runIndex": 3,
+      "stage": "reach",
+      "formatValid": true,
+      "formatIssues": [],
+      "targetExpectedIndexes": [
+        6
+      ],
+      "reachedExpectedIndexes": [
+        6
+      ],
+      "exactExpectedIndexes": [],
+      "selectedCutCount": 1,
+      "selectedDurationMs": 58452,
+      "evidenceRangeDurationMs": 29494,
+      "selectedToEvidenceDurationRatio": 1.9818268122329965,
+      "exactRangeCopy": false,
+      "inheritedRangeBoundary": true,
+      "outsideEvidenceCutCount": 1,
+      "unlabeledCutCount": 0,
+      "selectedCuts": [
+        {
+          "sourceStartMs": 3180190,
+          "sourceEndMs": 3238642,
+          "reason": "開始根拠: マリンが「しし肉焼いてる？」と焼き忘れを指摘し、テーマである夫婦漫才風の掛け合いが始まる発話から選択しました。終了根拠: 焼き忘れの怒りからバーベキュー完成への歓喜、そしてその後の網の上を歩くボケとツッコミの余韻が一旦収束する発話まで含めました。除外判断: 直後の「なんだっけ？」以降はアイテム整理や次の行動への移行で話題が切り替わるため除外しました。",
+          "usedSpeechIds": [
+            "470-477"
+          ]
+        }
+      ],
+      "targetAssessments": [
+        {
+          "expectedIndex": 6,
+          "reached": true,
+          "exact": false,
+          "cut": {
+            "sourceStartMs": 3180190,
+            "sourceEndMs": 3238642,
+            "reason": "開始根拠: マリンが「しし肉焼いてる？」と焼き忘れを指摘し、テーマである夫婦漫才風の掛け合いが始まる発話から選択しました。終了根拠: 焼き忘れの怒りからバーベキュー完成への歓喜、そしてその後の網の上を歩くボケとツッコミの余韻が一旦収束する発話まで含めました。除外判断: 直後の「なんだっけ？」以降はアイテム整理や次の行動への移行で話題が切り替わるため除外しました。",
+            "usedSpeechIds": [
+              "470-477"
+            ]
+          },
+          "index": 1,
+          "overlapMs": 9805,
+          "startDeltaMs": -220,
+          "endDeltaMs": 48427
+        }
+      ],
+      "outputPath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-v002-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-037/run-03-gemini-output.json"
+    },
+    {
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 39,
+      "runIndex": 1,
+      "stage": "reach",
+      "formatValid": true,
+      "formatIssues": [],
+      "targetExpectedIndexes": [
+        7
+      ],
+      "reachedExpectedIndexes": [
+        7
+      ],
+      "exactExpectedIndexes": [],
+      "selectedCutCount": 1,
+      "selectedDurationMs": 90392,
+      "evidenceRangeDurationMs": 40197,
+      "selectedToEvidenceDurationRatio": 2.248725029231037,
+      "exactRangeCopy": false,
+      "inheritedRangeBoundary": true,
+      "outsideEvidenceCutCount": 1,
+      "unlabeledCutCount": 0,
+      "selectedCuts": [
+        {
+          "sourceStartMs": 3252153,
+          "sourceEndMs": 3342545,
+          "reason": "開始根拠: イノシシの被り物を使って鬼滅の刃ごっこ遊びのフリを始める発話から選択しました。終了根拠: 被り物をきっかけとしたごっこ遊びの掛け合いと、それに対する笑いや泣き笑いの反応がひとまず収束する発話までを含めました。除外判断: 被り物のゲーム上の効果について冷静に確認するその後の発話は、ごっこ遊びのノリから移行しているため除外しました。",
+          "usedSpeechIds": [
+            "481-495"
+          ]
+        }
+      ],
+      "targetAssessments": [
+        {
+          "expectedIndex": 7,
+          "reached": true,
+          "exact": false,
+          "cut": {
+            "sourceStartMs": 3252153,
+            "sourceEndMs": 3342545,
+            "reason": "開始根拠: イノシシの被り物を使って鬼滅の刃ごっこ遊びのフリを始める発話から選択しました。終了根拠: 被り物をきっかけとしたごっこ遊びの掛け合いと、それに対する笑いや泣き笑いの反応がひとまず収束する発話までを含めました。除外判断: 被り物のゲーム上の効果について冷静に確認するその後の発話は、ごっこ遊びのノリから移行しているため除外しました。",
+            "usedSpeechIds": [
+              "481-495"
+            ]
+          },
+          "index": 1,
+          "overlapMs": 3442,
+          "startDeltaMs": -33234,
+          "endDeltaMs": 53716
+        }
+      ],
+      "outputPath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-v002-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-039/run-01-gemini-output.json"
+    },
+    {
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 39,
+      "runIndex": 2,
+      "stage": "reach",
+      "formatValid": true,
+      "formatIssues": [],
+      "targetExpectedIndexes": [
+        7
+      ],
+      "reachedExpectedIndexes": [
+        7
+      ],
+      "exactExpectedIndexes": [],
+      "selectedCutCount": 1,
+      "selectedDurationMs": 55557,
+      "evidenceRangeDurationMs": 40197,
+      "selectedToEvidenceDurationRatio": 1.3821180685125756,
+      "exactRangeCopy": false,
+      "inheritedRangeBoundary": true,
+      "outsideEvidenceCutCount": 1,
+      "unlabeledCutCount": 0,
+      "selectedCuts": [
+        {
+          "sourceStartMs": 3252153,
+          "sourceEndMs": 3307710,
+          "reason": "開始根拠: イノシシの被り物から鬼滅の刃（伊之助やねずこ）のごっこ遊びを始める発話の冒頭から選択しました。終了根拠: ごっこ遊びのやり取りとそれに対する一連の笑い声（非発話シグナル）が収束するタイミングまで含めました。除外判断: それ以降の肉の調理やゲーム攻略に関する雑談はテーマから外れるため除外しました。",
+          "usedSpeechIds": [
+            "481-492"
+          ]
+        }
+      ],
+      "targetAssessments": [
+        {
+          "expectedIndex": 7,
+          "reached": true,
+          "exact": false,
+          "cut": {
+            "sourceStartMs": 3252153,
+            "sourceEndMs": 3307710,
+            "reason": "開始根拠: イノシシの被り物から鬼滅の刃（伊之助やねずこ）のごっこ遊びを始める発話の冒頭から選択しました。終了根拠: ごっこ遊びのやり取りとそれに対する一連の笑い声（非発話シグナル）が収束するタイミングまで含めました。除外判断: それ以降の肉の調理やゲーム攻略に関する雑談はテーマから外れるため除外しました。",
+            "usedSpeechIds": [
+              "481-492"
+            ]
+          },
+          "index": 1,
+          "overlapMs": 3442,
+          "startDeltaMs": -33234,
+          "endDeltaMs": 18881
+        }
+      ],
+      "outputPath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-v002-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-039/run-02-gemini-output.json"
+    },
+    {
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 39,
+      "runIndex": 3,
+      "stage": "reach",
+      "formatValid": true,
+      "formatIssues": [],
+      "targetExpectedIndexes": [
+        7
+      ],
+      "reachedExpectedIndexes": [
+        7
+      ],
+      "exactExpectedIndexes": [],
+      "selectedCutCount": 1,
+      "selectedDurationMs": 90392,
+      "evidenceRangeDurationMs": 40197,
+      "selectedToEvidenceDurationRatio": 2.248725029231037,
+      "exactRangeCopy": false,
+      "inheritedRangeBoundary": true,
+      "outsideEvidenceCutCount": 1,
+      "unlabeledCutCount": 0,
+      "selectedCuts": [
+        {
+          "sourceStartMs": 3252153,
+          "sourceEndMs": 3342545,
+          "reason": "開始根拠: テーマの導入となる「イノシシやるか」という発言と、直後に被り物を取り出して「イノスケじゃん」と名前を出し始める発話の開始時刻に合わせるためです。終了根拠: 鬼滅の刃ごっこのノリで掛け合いをして、大爆笑（あははは）や「伊之助がいい？」というやり取りを経て、一連の笑いと反応が一旦落ち着く発話の終了時刻に合わせるためです。除外判断: それ以降の発話は、被り物の効果の確認や、焼けた肉を食べるゲーム進行の話題に切り替わっているため除外しました。",
+          "usedSpeechIds": [
+            "481-495"
+          ]
+        }
+      ],
+      "targetAssessments": [
+        {
+          "expectedIndex": 7,
+          "reached": true,
+          "exact": false,
+          "cut": {
+            "sourceStartMs": 3252153,
+            "sourceEndMs": 3342545,
+            "reason": "開始根拠: テーマの導入となる「イノシシやるか」という発言と、直後に被り物を取り出して「イノスケじゃん」と名前を出し始める発話の開始時刻に合わせるためです。終了根拠: 鬼滅の刃ごっこのノリで掛け合いをして、大爆笑（あははは）や「伊之助がいい？」というやり取りを経て、一連の笑いと反応が一旦落ち着く発話の終了時刻に合わせるためです。除外判断: それ以降の発話は、被り物の効果の確認や、焼けた肉を食べるゲーム進行の話題に切り替わっているため除外しました。",
+            "usedSpeechIds": [
+              "481-495"
+            ]
+          },
+          "index": 1,
+          "overlapMs": 3442,
+          "startDeltaMs": -33234,
+          "endDeltaMs": 53716
+        }
+      ],
+      "outputPath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-v002-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-039/run-03-gemini-output.json"
+    },
+    {
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 41,
+      "runIndex": 1,
+      "stage": "reach",
+      "formatValid": true,
+      "formatIssues": [],
+      "targetExpectedIndexes": [
+        8
+      ],
+      "reachedExpectedIndexes": [
+        8
+      ],
+      "exactExpectedIndexes": [],
+      "selectedCutCount": 1,
+      "selectedDurationMs": 51351,
+      "evidenceRangeDurationMs": 51351,
+      "selectedToEvidenceDurationRatio": 1,
+      "exactRangeCopy": true,
+      "inheritedRangeBoundary": false,
+      "outsideEvidenceCutCount": 0,
+      "unlabeledCutCount": 0,
+      "selectedCuts": [
+        {
+          "sourceStartMs": 3467816,
+          "sourceEndMs": 3519167,
+          "reason": "開始根拠: 食材がなくなったことに驚き、船長が全て握っている状態に言及し始める発話から開始するためです。終了根拠: 肉を温存しようとする攻防から、魚を渡して一連の掛け合いが収束し次のクラフトの話題に移る直前まで含めるためです。除外判断: それ以前のイノシシの被り物に関する雑談や、それ以降の板や斧の作成に関する話題はテーマ外のため除外しました。",
+          "usedSpeechIds": [
+            "503-510"
+          ]
+        }
+      ],
+      "targetAssessments": [
+        {
+          "expectedIndex": 8,
+          "reached": true,
+          "exact": false,
+          "cut": {
+            "sourceStartMs": 3467816,
+            "sourceEndMs": 3519167,
+            "reason": "開始根拠: 食材がなくなったことに驚き、船長が全て握っている状態に言及し始める発話から開始するためです。終了根拠: 肉を温存しようとする攻防から、魚を渡して一連の掛け合いが収束し次のクラフトの話題に移る直前まで含めるためです。除外判断: それ以前のイノシシの被り物に関する雑談や、それ以降の板や斧の作成に関する話題はテーマ外のため除外しました。",
+            "usedSpeechIds": [
+              "503-510"
+            ]
+          },
+          "index": 1,
+          "overlapMs": 9794,
+          "startDeltaMs": -7425,
+          "endDeltaMs": 34132
+        }
+      ],
+      "outputPath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-v002-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-041/run-01-gemini-output.json"
+    },
+    {
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 41,
+      "runIndex": 2,
+      "stage": "reach",
+      "formatValid": true,
+      "formatIssues": [],
+      "targetExpectedIndexes": [
+        8
+      ],
+      "reachedExpectedIndexes": [
+        8
+      ],
+      "exactExpectedIndexes": [],
+      "selectedCutCount": 1,
+      "selectedDurationMs": 51351,
+      "evidenceRangeDurationMs": 51351,
+      "selectedToEvidenceDurationRatio": 1,
+      "exactRangeCopy": true,
+      "inheritedRangeBoundary": false,
+      "outsideEvidenceCutCount": 0,
+      "unlabeledCutCount": 0,
+      "selectedCuts": [
+        {
+          "sourceStartMs": 3467816,
+          "sourceEndMs": 3519167,
+          "reason": "開始根拠: 食材がなくなったことに気づき、船長が全て握っているという話題が始まる発話から選択するためです。終了根拠: 肉をめぐる攻防から、話が次のクラフト（板や斧）の話題へと切り替わる直前の発話まで含めるためです。除外判断: それ以前の伊之助の被り物に関する雑談や、以降の板の受け渡しに関するやり取りは、テーマである肉の攻防とは文脈が異なるため除外しています。",
+          "usedSpeechIds": [
+            "503-510"
+          ]
+        }
+      ],
+      "targetAssessments": [
+        {
+          "expectedIndex": 8,
+          "reached": true,
+          "exact": false,
+          "cut": {
+            "sourceStartMs": 3467816,
+            "sourceEndMs": 3519167,
+            "reason": "開始根拠: 食材がなくなったことに気づき、船長が全て握っているという話題が始まる発話から選択するためです。終了根拠: 肉をめぐる攻防から、話が次のクラフト（板や斧）の話題へと切り替わる直前の発話まで含めるためです。除外判断: それ以前の伊之助の被り物に関する雑談や、以降の板の受け渡しに関するやり取りは、テーマである肉の攻防とは文脈が異なるため除外しています。",
+            "usedSpeechIds": [
+              "503-510"
+            ]
+          },
+          "index": 1,
+          "overlapMs": 9794,
+          "startDeltaMs": -7425,
+          "endDeltaMs": 34132
+        }
+      ],
+      "outputPath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-v002-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-041/run-02-gemini-output.json"
+    },
+    {
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 41,
+      "runIndex": 3,
+      "stage": "reach",
+      "formatValid": true,
+      "formatIssues": [],
+      "targetExpectedIndexes": [
+        8
+      ],
+      "reachedExpectedIndexes": [
+        8
+      ],
+      "exactExpectedIndexes": [],
+      "selectedCutCount": 1,
+      "selectedDurationMs": 51351,
+      "evidenceRangeDurationMs": 51351,
+      "selectedToEvidenceDurationRatio": 1,
+      "exactRangeCopy": true,
+      "inheritedRangeBoundary": false,
+      "outsideEvidenceCutCount": 0,
+      "unlabeledCutCount": 0,
+      "selectedCuts": [
+        {
+          "sourceStartMs": 3467816,
+          "sourceEndMs": 3519167,
+          "reason": "開始根拠: マリンが全ての食材を握っているという状況への言及から、肉をめぐる攻防の前提が始まるためです。終了根拠: 魚を返す代わりに肉を食べようとする交渉のやり取りが終わり、次のクラフトの話題へ移る直前までを含めるためです。除外判断: それ以前の伊之助の被り物に関する雑談や、それ以降の板の受け渡しに関する会話はテーマの主軸から外れるため除外しました。",
+          "usedSpeechIds": [
+            "503-510"
+          ]
+        }
+      ],
+      "targetAssessments": [
+        {
+          "expectedIndex": 8,
+          "reached": true,
+          "exact": false,
+          "cut": {
+            "sourceStartMs": 3467816,
+            "sourceEndMs": 3519167,
+            "reason": "開始根拠: マリンが全ての食材を握っているという状況への言及から、肉をめぐる攻防の前提が始まるためです。終了根拠: 魚を返す代わりに肉を食べようとする交渉のやり取りが終わり、次のクラフトの話題へ移る直前までを含めるためです。除外判断: それ以前の伊之助の被り物に関する雑談や、それ以降の板の受け渡しに関する会話はテーマの主軸から外れるため除外しました。",
+            "usedSpeechIds": [
+              "503-510"
+            ]
+          },
+          "index": 1,
+          "overlapMs": 9794,
+          "startDeltaMs": -7425,
+          "endDeltaMs": 34132
+        }
+      ],
+      "outputPath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-v002-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-041/run-03-gemini-output.json"
+    },
+    {
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 46,
+      "runIndex": 1,
+      "stage": "reach",
+      "formatValid": true,
+      "formatIssues": [],
+      "targetExpectedIndexes": [
+        9
+      ],
+      "reachedExpectedIndexes": [
+        9
+      ],
+      "exactExpectedIndexes": [],
+      "selectedCutCount": 1,
+      "selectedDurationMs": 38481,
+      "evidenceRangeDurationMs": 38481,
+      "selectedToEvidenceDurationRatio": 1,
+      "exactRangeCopy": true,
+      "inheritedRangeBoundary": false,
+      "outsideEvidenceCutCount": 0,
+      "unlabeledCutCount": 0,
+      "selectedCuts": [
+        {
+          "sourceStartMs": 3991226,
+          "sourceEndMs": 4029707,
+          "reason": "開始根拠: マリンが下を向いたときにころねの頭の匂いを嗅いでいるというフリの発話から開始するためです。終了根拠: ころねがじわじわと泣き真似をしてマリンがそれに突っ込み、次の出航の話題へ移る直前の発話まで含めるためです。除外判断: 出航の合図以降の発話は完全に別のゲーム進行の話題となるため除外しました。",
+          "usedSpeechIds": [
+            "578-580"
+          ]
+        }
+      ],
+      "targetAssessments": [
+        {
+          "expectedIndex": 9,
+          "reached": true,
+          "exact": false,
+          "cut": {
+            "sourceStartMs": 3991226,
+            "sourceEndMs": 4029707,
+            "reason": "開始根拠: マリンが下を向いたときにころねの頭の匂いを嗅いでいるというフリの発話から開始するためです。終了根拠: ころねがじわじわと泣き真似をしてマリンがそれに突っ込み、次の出航の話題へ移る直前の発話まで含めるためです。除外判断: 出航の合図以降の発話は完全に別のゲーム進行の話題となるため除外しました。",
+            "usedSpeechIds": [
+              "578-580"
+            ]
+          },
+          "index": 1,
+          "overlapMs": 28255,
+          "startDeltaMs": -7226,
+          "endDeltaMs": 3000
+        }
+      ],
+      "outputPath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-v002-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-046/run-01-gemini-output.json"
+    },
+    {
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 46,
+      "runIndex": 2,
+      "stage": "reach",
+      "formatValid": true,
+      "formatIssues": [],
+      "targetExpectedIndexes": [
+        9
+      ],
+      "reachedExpectedIndexes": [
+        9
+      ],
+      "exactExpectedIndexes": [],
+      "selectedCutCount": 1,
+      "selectedDurationMs": 38481,
+      "evidenceRangeDurationMs": 38481,
+      "selectedToEvidenceDurationRatio": 1,
+      "exactRangeCopy": true,
+      "inheritedRangeBoundary": false,
+      "outsideEvidenceCutCount": 0,
+      "unlabeledCutCount": 0,
+      "selectedCuts": [
+        {
+          "sourceStartMs": 3991226,
+          "sourceEndMs": 4029707,
+          "reason": "開始根拠: マリンがころねの頭の匂いを嗅ぐきっかけとなる、画面内のアバター位置の調整を提案する発話から開始するためです。終了根拠: ころねが時間をかけてじわじわと泣き真似をするプロレスのやり取りと、それに対するマリンのツッコミが収束する発話まで含めるためです。除外判断: 直後のアンカー外しや出航などのゲーム進行に関する話題は、テーマである匂いプロレスの文脈から外れるため除外しました。",
+          "usedSpeechIds": [
+            "578-580"
+          ]
+        }
+      ],
+      "targetAssessments": [
+        {
+          "expectedIndex": 9,
+          "reached": true,
+          "exact": false,
+          "cut": {
+            "sourceStartMs": 3991226,
+            "sourceEndMs": 4029707,
+            "reason": "開始根拠: マリンがころねの頭の匂いを嗅ぐきっかけとなる、画面内のアバター位置の調整を提案する発話から開始するためです。終了根拠: ころねが時間をかけてじわじわと泣き真似をするプロレスのやり取りと、それに対するマリンのツッコミが収束する発話まで含めるためです。除外判断: 直後のアンカー外しや出航などのゲーム進行に関する話題は、テーマである匂いプロレスの文脈から外れるため除外しました。",
+            "usedSpeechIds": [
+              "578-580"
+            ]
+          },
+          "index": 1,
+          "overlapMs": 28255,
+          "startDeltaMs": -7226,
+          "endDeltaMs": 3000
+        }
+      ],
+      "outputPath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-v002-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-046/run-02-gemini-output.json"
+    },
+    {
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 46,
+      "runIndex": 3,
+      "stage": "reach",
+      "formatValid": true,
+      "formatIssues": [],
+      "targetExpectedIndexes": [
+        9
+      ],
+      "reachedExpectedIndexes": [
+        9
+      ],
+      "exactExpectedIndexes": [],
+      "selectedCutCount": 1,
+      "selectedDurationMs": 38481,
+      "evidenceRangeDurationMs": 38481,
+      "selectedToEvidenceDurationRatio": 1,
+      "exactRangeCopy": true,
+      "inheritedRangeBoundary": false,
+      "outsideEvidenceCutCount": 0,
+      "unlabeledCutCount": 0,
+      "selectedCuts": [
+        {
+          "sourceStartMs": 3991226,
+          "sourceEndMs": 4029707,
+          "reason": "開始根拠: マリンがころねの頭の匂いを嗅いでいるというプロレスのフリとなる発話から開始するためです。終了根拠: 匂いを「臭い」と言われたころねがじわじわと泣き真似をし、マリンがそれに突っ込む一連の反応が収束する発話まで含めるためです。除外判断: その後に続く出航の合図や資材集めの話は、テーマと関係のない別話題への転換であるため除外しました。",
+          "usedSpeechIds": [
+            "578-580"
+          ]
+        }
+      ],
+      "targetAssessments": [
+        {
+          "expectedIndex": 9,
+          "reached": true,
+          "exact": false,
+          "cut": {
+            "sourceStartMs": 3991226,
+            "sourceEndMs": 4029707,
+            "reason": "開始根拠: マリンがころねの頭の匂いを嗅いでいるというプロレスのフリとなる発話から開始するためです。終了根拠: 匂いを「臭い」と言われたころねがじわじわと泣き真似をし、マリンがそれに突っ込む一連の反応が収束する発話まで含めるためです。除外判断: その後に続く出航の合図や資材集めの話は、テーマと関係のない別話題への転換であるため除外しました。",
+            "usedSpeechIds": [
+              "578-580"
+            ]
+          },
+          "index": 1,
+          "overlapMs": 28255,
+          "startDeltaMs": -7226,
+          "endDeltaMs": 3000
+        }
+      ],
+      "outputPath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-v002-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-046/run-03-gemini-output.json"
+    },
+    {
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 52,
+      "runIndex": 1,
+      "stage": "reach",
+      "formatValid": true,
+      "formatIssues": [],
+      "targetExpectedIndexes": [
+        11
+      ],
+      "reachedExpectedIndexes": [
+        11
+      ],
+      "exactExpectedIndexes": [],
+      "selectedCutCount": 1,
+      "selectedDurationMs": 26819,
+      "evidenceRangeDurationMs": 26819,
+      "selectedToEvidenceDurationRatio": 1,
+      "exactRangeCopy": true,
+      "inheritedRangeBoundary": false,
+      "outsideEvidenceCutCount": 0,
+      "unlabeledCutCount": 0,
+      "selectedCuts": [
+        {
+          "sourceStartMs": 5162499,
+          "sourceEndMs": 5189318,
+          "reason": "開始根拠: テーマの中心である「ぴょんぴょんマンゴー」というワードから始まる発話（ID 770）を開始位置としました。終了根拠: くだらないことで大笑いされて気まずいと吐露し、その一連のやり取りのオチと余韻が収束する同発話の終端を終了位置としました。除外判断: 直後の発話（ID 771）からは夕焼けや朝日の景色に関する全く別の話題へ移行しているため除外しました。",
+          "usedSpeechIds": [
+            770
+          ]
+        }
+      ],
+      "targetAssessments": [
+        {
+          "expectedIndex": 11,
+          "reached": true,
+          "exact": false,
+          "cut": {
+            "sourceStartMs": 5162499,
+            "sourceEndMs": 5189318,
+            "reason": "開始根拠: テーマの中心である「ぴょんぴょんマンゴー」というワードから始まる発話（ID 770）を開始位置としました。終了根拠: くだらないことで大笑いされて気まずいと吐露し、その一連のやり取りのオチと余韻が収束する同発話の終端を終了位置としました。除外判断: 直後の発話（ID 771）からは夕焼けや朝日の景色に関する全く別の話題へ移行しているため除外しました。",
+            "usedSpeechIds": [
+              770
+            ]
+          },
+          "index": 1,
+          "overlapMs": 5344,
+          "startDeltaMs": -21475,
+          "endDeltaMs": 0
+        }
+      ],
+      "outputPath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-v002-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-052/run-01-gemini-output.json"
+    },
+    {
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 52,
+      "runIndex": 2,
+      "stage": "reach",
+      "formatValid": true,
+      "formatIssues": [],
+      "targetExpectedIndexes": [
+        11
+      ],
+      "reachedExpectedIndexes": [
+        11
+      ],
+      "exactExpectedIndexes": [],
+      "selectedCutCount": 1,
+      "selectedDurationMs": 26819,
+      "evidenceRangeDurationMs": 26819,
+      "selectedToEvidenceDurationRatio": 1,
+      "exactRangeCopy": true,
+      "inheritedRangeBoundary": false,
+      "outsideEvidenceCutCount": 0,
+      "unlabeledCutCount": 0,
+      "selectedCuts": [
+        {
+          "sourceStartMs": 5162499,
+          "sourceEndMs": 5189318,
+          "reason": "開始根拠: テーマの中心である「ぴょんぴょんマンゴー」というフレーズを発話し、それに対して大笑いされる流れの起点となる発話から開始するためです。終了根拠: おもろくないことで笑われるのが気まずいと吐露し、そのやり取りのオチと余韻が収束する発話の終端に合わせるためです。除外判断: 直後の発話からは綺麗に見える夕焼けや朝日の話題へと完全に切り替わっているため、これ以降の区間は含めず除外しました。",
+          "usedSpeechIds": [
+            770
+          ]
+        }
+      ],
+      "targetAssessments": [
+        {
+          "expectedIndex": 11,
+          "reached": true,
+          "exact": false,
+          "cut": {
+            "sourceStartMs": 5162499,
+            "sourceEndMs": 5189318,
+            "reason": "開始根拠: テーマの中心である「ぴょんぴょんマンゴー」というフレーズを発話し、それに対して大笑いされる流れの起点となる発話から開始するためです。終了根拠: おもろくないことで笑われるのが気まずいと吐露し、そのやり取りのオチと余韻が収束する発話の終端に合わせるためです。除外判断: 直後の発話からは綺麗に見える夕焼けや朝日の話題へと完全に切り替わっているため、これ以降の区間は含めず除外しました。",
+            "usedSpeechIds": [
+              770
+            ]
+          },
+          "index": 1,
+          "overlapMs": 5344,
+          "startDeltaMs": -21475,
+          "endDeltaMs": 0
+        }
+      ],
+      "outputPath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-v002-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-052/run-02-gemini-output.json"
+    },
+    {
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 52,
+      "runIndex": 3,
+      "stage": "reach",
+      "formatValid": true,
+      "formatIssues": [],
+      "targetExpectedIndexes": [
+        11
+      ],
+      "reachedExpectedIndexes": [
+        11
+      ],
+      "exactExpectedIndexes": [],
+      "selectedCutCount": 1,
+      "selectedDurationMs": 82404,
+      "evidenceRangeDurationMs": 26819,
+      "selectedToEvidenceDurationRatio": 3.0725977851523174,
+      "exactRangeCopy": false,
+      "inheritedRangeBoundary": true,
+      "outsideEvidenceCutCount": 1,
+      "unlabeledCutCount": 0,
+      "selectedCuts": [
+        {
+          "sourceStartMs": 5162499,
+          "sourceEndMs": 5244903,
+          "reason": "開始根拠: テーマの中心である「ぴょんぴょんマンゴー」のフレーズが発話されるシーンの冒頭から開始するためです。終了根拠: くだらないことで大笑いされたマリンが「今日絡みづらい？」と気まずさを吐露するやり取りが収束する箇所まで含めるためです。除外判断: 直後の発話812以降は「伊之助」やゲームの生存状況、拠点建築に関する全く別の話題に転換しているため除外します。",
+          "usedSpeechIds": [
+            "770-781"
+          ]
+        }
+      ],
+      "targetAssessments": [
+        {
+          "expectedIndex": 11,
+          "reached": true,
+          "exact": false,
+          "cut": {
+            "sourceStartMs": 5162499,
+            "sourceEndMs": 5244903,
+            "reason": "開始根拠: テーマの中心である「ぴょんぴょんマンゴー」のフレーズが発話されるシーンの冒頭から開始するためです。終了根拠: くだらないことで大笑いされたマリンが「今日絡みづらい？」と気まずさを吐露するやり取りが収束する箇所まで含めるためです。除外判断: 直後の発話812以降は「伊之助」やゲームの生存状況、拠点建築に関する全く別の話題に転換しているため除外します。",
+            "usedSpeechIds": [
+              "770-781"
+            ]
+          },
+          "index": 1,
+          "overlapMs": 5344,
+          "startDeltaMs": -21475,
+          "endDeltaMs": 55585
+        }
+      ],
+      "outputPath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-v002-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-052/run-03-gemini-output.json"
+    },
+    {
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 53,
+      "runIndex": 1,
+      "stage": "reach",
+      "formatValid": true,
+      "formatIssues": [],
+      "targetExpectedIndexes": [
+        12
+      ],
+      "reachedExpectedIndexes": [
+        12
+      ],
+      "exactExpectedIndexes": [],
+      "selectedCutCount": 1,
+      "selectedDurationMs": 88988,
+      "evidenceRangeDurationMs": 88988,
+      "selectedToEvidenceDurationRatio": 1,
+      "exactRangeCopy": true,
+      "inheritedRangeBoundary": false,
+      "outsideEvidenceCutCount": 0,
+      "unlabeledCutCount": 0,
+      "selectedCuts": [
+        {
+          "sourceStartMs": 5190322,
+          "sourceEndMs": 5279310,
+          "reason": "開始根拠: マリンが景色に感動してエモい演技（セリフ）を切り出す発話から開始するためです。終了根拠: ころねに「絡みづらい」と一蹴され、その後のサメ襲来で話題が完全に切り替わる直前のリアクションの収束までを含めるためです。除外判断: 候補外の周辺区間は、船の移動トラブルや素材集めなどの別話題であるため除外しました。",
+          "usedSpeechIds": [
+            "771-885"
+          ]
+        }
+      ],
+      "targetAssessments": [
+        {
+          "expectedIndex": 12,
+          "reached": true,
+          "exact": false,
+          "cut": {
+            "sourceStartMs": 5190322,
+            "sourceEndMs": 5279310,
+            "reason": "開始根拠: マリンが景色に感動してエモい演技（セリフ）を切り出す発話から開始するためです。終了根拠: ころねに「絡みづらい」と一蹴され、その後のサメ襲来で話題が完全に切り替わる直前のリアクションの収束までを含めるためです。除外判断: 候補外の周辺区間は、船の移動トラブルや素材集めなどの別話題であるため除外しました。",
+            "usedSpeechIds": [
+              "771-885"
+            ]
+          },
+          "index": 1,
+          "overlapMs": 1761,
+          "startDeltaMs": -26909,
+          "endDeltaMs": 60318
+        }
+      ],
+      "outputPath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-v002-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-053/run-01-gemini-output.json"
+    },
+    {
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 53,
+      "runIndex": 2,
+      "stage": "reach",
+      "formatValid": true,
+      "formatIssues": [],
+      "targetExpectedIndexes": [
+        12
+      ],
+      "reachedExpectedIndexes": [
+        12
+      ],
+      "exactExpectedIndexes": [],
+      "selectedCutCount": 1,
+      "selectedDurationMs": 88988,
+      "evidenceRangeDurationMs": 88988,
+      "selectedToEvidenceDurationRatio": 1,
+      "exactRangeCopy": true,
+      "inheritedRangeBoundary": false,
+      "outsideEvidenceCutCount": 0,
+      "unlabeledCutCount": 0,
+      "selectedCuts": [
+        {
+          "sourceStartMs": 5190322,
+          "sourceEndMs": 5279310,
+          "reason": "開始根拠: マリンが景色の綺麗さに気づいてエモい演技を始める最初の発話から選択しました。終了根拠: ころねから「今日絡みづらい」と言われ、その後の掛け合いと余韻が収束してサメの話題に移る直前まで含めるためです。除外判断: それ以前のマンゴーに関する雑談や、それ以降のサメ撃退やクラフトの話題はテーマ外のため除外しました。",
+          "usedSpeechIds": [
+            "771-784"
+          ]
+        }
+      ],
+      "targetAssessments": [
+        {
+          "expectedIndex": 12,
+          "reached": true,
+          "exact": false,
+          "cut": {
+            "sourceStartMs": 5190322,
+            "sourceEndMs": 5279310,
+            "reason": "開始根拠: マリンが景色の綺麗さに気づいてエモい演技を始める最初の発話から選択しました。終了根拠: ころねから「今日絡みづらい」と言われ、その後の掛け合いと余韻が収束してサメの話題に移る直前まで含めるためです。除外判断: それ以前のマンゴーに関する雑談や、それ以降のサメ撃退やクラフトの話題はテーマ外のため除外しました。",
+            "usedSpeechIds": [
+              "771-784"
+            ]
+          },
+          "index": 1,
+          "overlapMs": 1761,
+          "startDeltaMs": -26909,
+          "endDeltaMs": 60318
+        }
+      ],
+      "outputPath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-v002-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-053/run-02-gemini-output.json"
+    },
+    {
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 53,
+      "runIndex": 3,
+      "stage": "reach",
+      "formatValid": true,
+      "formatIssues": [],
+      "targetExpectedIndexes": [
+        12
+      ],
+      "reachedExpectedIndexes": [
+        12
+      ],
+      "exactExpectedIndexes": [],
+      "selectedCutCount": 1,
+      "selectedDurationMs": 88988,
+      "evidenceRangeDurationMs": 88988,
+      "selectedToEvidenceDurationRatio": 1,
+      "exactRangeCopy": true,
+      "inheritedRangeBoundary": false,
+      "outsideEvidenceCutCount": 0,
+      "unlabeledCutCount": 0,
+      "selectedCuts": [
+        {
+          "sourceStartMs": 5190322,
+          "sourceEndMs": 5279310,
+          "reason": "開始根拠: マリンが景色に感動してエモい演技を始める最初の発話から選択しているためです。終了根拠: 演技が空回りした後に「今日絡みづらい」と言われ、その後の掛け合いの余韻が収束する発話まで含めるためです。除外判断: 前後の素材はゲームの効率的な作業や移動に関する無関係な雑談であるため含めていません。",
+          "usedSpeechIds": [
+            "771-884"
+          ]
+        }
+      ],
+      "targetAssessments": [
+        {
+          "expectedIndex": 12,
+          "reached": true,
+          "exact": false,
+          "cut": {
+            "sourceStartMs": 5190322,
+            "sourceEndMs": 5279310,
+            "reason": "開始根拠: マリンが景色に感動してエモい演技を始める最初の発話から選択しているためです。終了根拠: 演技が空回りした後に「今日絡みづらい」と言われ、その後の掛け合いの余韻が収束する発話まで含めるためです。除外判断: 前後の素材はゲームの効率的な作業や移動に関する無関係な雑談であるため含めていません。",
+            "usedSpeechIds": [
+              "771-884"
+            ]
+          },
+          "index": 1,
+          "overlapMs": 1761,
+          "startDeltaMs": -26909,
+          "endDeltaMs": 60318
+        }
+      ],
+      "outputPath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-v002-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-053/run-03-gemini-output.json"
+    },
+    {
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 87,
+      "runIndex": 1,
+      "stage": "reach",
+      "formatValid": true,
+      "formatIssues": [],
+      "targetExpectedIndexes": [
+        13
+      ],
+      "reachedExpectedIndexes": [
+        13
+      ],
+      "exactExpectedIndexes": [],
+      "selectedCutCount": 1,
+      "selectedDurationMs": 29592,
+      "evidenceRangeDurationMs": 29592,
+      "selectedToEvidenceDurationRatio": 1,
+      "exactRangeCopy": true,
+      "inheritedRangeBoundary": false,
+      "outsideEvidenceCutCount": 0,
+      "unlabeledCutCount": 0,
+      "selectedCuts": [
+        {
+          "sourceStartMs": 11520066,
+          "sourceEndMs": 11549658,
+          "reason": "開始根拠: 船内にベッドルームを作る提案を切り出す最初の発話から開始するためです。終了根拠: 4つのベッドが置ける広さに大満足し、ベッドルームの場所が決定して会話の余韻が収束する発話までを含めるためです。除外判断: 直後の「でも誘って？」から始まるお互いの関係性に関する雑談や告白のやり取りは、ベッドルーム作成のテーマとは無関係なため除外しました。",
+          "usedSpeechIds": [
+            "1713-1719"
+          ]
+        }
+      ],
+      "targetAssessments": [
+        {
+          "expectedIndex": 13,
+          "reached": true,
+          "exact": false,
+          "cut": {
+            "sourceStartMs": 11520066,
+            "sourceEndMs": 11549658,
+            "reason": "開始根拠: 船内にベッドルームを作る提案を切り出す最初の発話から開始するためです。終了根拠: 4つのベッドが置ける広さに大満足し、ベッドルームの場所が決定して会話の余韻が収束する発話までを含めるためです。除外判断: 直後の「でも誘って？」から始まるお互いの関係性に関する雑談や告白のやり取りは、ベッドルーム作成のテーマとは無関係なため除外しました。",
+            "usedSpeechIds": [
+              "1713-1719"
+            ]
+          },
+          "index": 1,
+          "overlapMs": 8103,
+          "startDeltaMs": -21489,
+          "endDeltaMs": -25623
+        }
+      ],
+      "outputPath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-v002-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-087/run-01-gemini-output.json"
+    },
+    {
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 87,
+      "runIndex": 2,
+      "stage": "reach",
+      "formatValid": true,
+      "formatIssues": [],
+      "targetExpectedIndexes": [
+        13
+      ],
+      "reachedExpectedIndexes": [
+        13
+      ],
+      "exactExpectedIndexes": [],
+      "selectedCutCount": 1,
+      "selectedDurationMs": 29592,
+      "evidenceRangeDurationMs": 29592,
+      "selectedToEvidenceDurationRatio": 1,
+      "exactRangeCopy": true,
+      "inheritedRangeBoundary": false,
+      "outsideEvidenceCutCount": 0,
+      "unlabeledCutCount": 0,
+      "selectedCuts": [
+        {
+          "sourceStartMs": 11520066,
+          "sourceEndMs": 11549658,
+          "reason": "開始根拠: 船内にベッドルームを作る提案を切り出す最初の発話（speechId: 1713）から開始するためです。終了根拠: ベッドルームの広さに大満足してやり取りがひと段落し、配信の締めや今後の進め方に話題が移る発話の終了時刻（speechId: 1719）まで含めるためです。除外判断: それ以降の発話（speechId: 1720〜）は、ベッドルーム作成とは無関係な恋愛トークや別の発見、配信の終了挨拶へ話題が転換しているため除外しました。",
+          "usedSpeechIds": [
+            "1713-1719"
+          ]
+        }
+      ],
+      "targetAssessments": [
+        {
+          "expectedIndex": 13,
+          "reached": true,
+          "exact": false,
+          "cut": {
+            "sourceStartMs": 11520066,
+            "sourceEndMs": 11549658,
+            "reason": "開始根拠: 船内にベッドルームを作る提案を切り出す最初の発話（speechId: 1713）から開始するためです。終了根拠: ベッドルームの広さに大満足してやり取りがひと段落し、配信の締めや今後の進め方に話題が移る発話の終了時刻（speechId: 1719）まで含めるためです。除外判断: それ以降の発話（speechId: 1720〜）は、ベッドルーム作成とは無関係な恋愛トークや別の発見、配信の終了挨拶へ話題が転換しているため除外しました。",
+            "usedSpeechIds": [
+              "1713-1719"
+            ]
+          },
+          "index": 1,
+          "overlapMs": 8103,
+          "startDeltaMs": -21489,
+          "endDeltaMs": -25623
+        }
+      ],
+      "outputPath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-v002-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-087/run-02-gemini-output.json"
+    },
+    {
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 87,
+      "runIndex": 3,
+      "stage": "reach",
+      "formatValid": true,
+      "formatIssues": [],
+      "targetExpectedIndexes": [
+        13
+      ],
+      "reachedExpectedIndexes": [
+        13
+      ],
+      "exactExpectedIndexes": [],
+      "selectedCutCount": 1,
+      "selectedDurationMs": 29592,
+      "evidenceRangeDurationMs": 29592,
+      "selectedToEvidenceDurationRatio": 1,
+      "exactRangeCopy": true,
+      "inheritedRangeBoundary": false,
+      "outsideEvidenceCutCount": 0,
+      "unlabeledCutCount": 0,
+      "selectedCuts": [
+        {
+          "sourceStartMs": 11520066,
+          "sourceEndMs": 11549658,
+          "reason": "開始根拠: 宝鐘マリンが「ここベッドルームにしよっかな」と提案を持ちかける発話から始まるためです。終了根拠: 4つのベッドが置ける広さに大満足し、ベッドルームにする場所が確定して余韻が収束する発話まで含めるためです。除外判断: 直後の「でも誘って？」から始まる会話は、ベッドルーム作成のテーマから離れてお互いの関係性に関する別の雑談に移るため除外しました。",
+          "usedSpeechIds": [
+            "1713-1719"
+          ]
+        }
+      ],
+      "targetAssessments": [
+        {
+          "expectedIndex": 13,
+          "reached": true,
+          "exact": false,
+          "cut": {
+            "sourceStartMs": 11520066,
+            "sourceEndMs": 11549658,
+            "reason": "開始根拠: 宝鐘マリンが「ここベッドルームにしよっかな」と提案を持ちかける発話から始まるためです。終了根拠: 4つのベッドが置ける広さに大満足し、ベッドルームにする場所が確定して余韻が収束する発話まで含めるためです。除外判断: 直後の「でも誘って？」から始まる会話は、ベッドルーム作成のテーマから離れてお互いの関係性に関する別の雑談に移るため除外しました。",
+            "usedSpeechIds": [
+              "1713-1719"
+            ]
+          },
+          "index": 1,
+          "overlapMs": 8103,
+          "startDeltaMs": -21489,
+          "endDeltaMs": -25623
+        }
+      ],
+      "outputPath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-v002-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-087/run-03-gemini-output.json"
+    },
+    {
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 88,
+      "runIndex": 1,
+      "stage": "reach",
+      "formatValid": true,
+      "formatIssues": [],
+      "targetExpectedIndexes": [
+        13
+      ],
+      "reachedExpectedIndexes": [
+        13
+      ],
+      "exactExpectedIndexes": [],
+      "selectedCutCount": 1,
+      "selectedDurationMs": 43652,
+      "evidenceRangeDurationMs": 42023,
+      "selectedToEvidenceDurationRatio": 1.0387644861147467,
+      "exactRangeCopy": false,
+      "inheritedRangeBoundary": true,
+      "outsideEvidenceCutCount": 1,
+      "unlabeledCutCount": 0,
+      "selectedCuts": [
+        {
+          "sourceStartMs": 11549658,
+          "sourceEndMs": 11593310,
+          "reason": "開始根拠: マリンが「水面下で進めとく」と言ったのに対して、ころねが「でも誘って?」とフリを入れる発話から掛け合いが始まるためです。終了根拠: マリンが「コーネとならやっていける気がする」とアプローチし、ころねが「ほんと?」と受け止めて一連の恋愛風トークが収束する瞬間までを含めるためです。除外判断: 直後の「愛しのマリン?」以降は、別のゲーム内オブジェクトを発見した話題へ完全に切り替わっているため含めません。",
+          "usedSpeechIds": [
+            "1719-1726"
+          ]
+        }
+      ],
+      "targetAssessments": [
+        {
+          "expectedIndex": 13,
+          "reached": true,
+          "exact": false,
+          "cut": {
+            "sourceStartMs": 11549658,
+            "sourceEndMs": 11593310,
+            "reason": "開始根拠: マリンが「水面下で進めとく」と言ったのに対して、ころねが「でも誘って?」とフリを入れる発話から掛け合いが始まるためです。終了根拠: マリンが「コーネとならやっていける気がする」とアプローチし、ころねが「ほんと?」と受け止めて一連の恋愛風トークが収束する瞬間までを含めるためです。除外判断: 直後の「愛しのマリン?」以降は、別のゲーム内オブジェクトを発見した話題へ完全に切り替わっているため含めません。",
+            "usedSpeechIds": [
+              "1719-1726"
+            ]
+          },
+          "index": 1,
+          "overlapMs": 25623,
+          "startDeltaMs": 8103,
+          "endDeltaMs": 18029
+        }
+      ],
+      "outputPath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-v002-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-088/run-01-gemini-output.json"
+    },
+    {
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 88,
+      "runIndex": 2,
+      "stage": "reach",
+      "formatValid": true,
+      "formatIssues": [],
+      "targetExpectedIndexes": [
+        13
+      ],
+      "reachedExpectedIndexes": [
+        13
+      ],
+      "exactExpectedIndexes": [],
+      "selectedCutCount": 1,
+      "selectedDurationMs": 42023,
+      "evidenceRangeDurationMs": 42023,
+      "selectedToEvidenceDurationRatio": 1,
+      "exactRangeCopy": true,
+      "inheritedRangeBoundary": false,
+      "outsideEvidenceCutCount": 0,
+      "unlabeledCutCount": 0,
+      "selectedCuts": [
+        {
+          "sourceStartMs": 11551287,
+          "sourceEndMs": 11593310,
+          "reason": "開始根拠: マリンの「水面下で進める」という発言に対し、ころねが「でも誘って？」と切り出し恋愛風の掛け合いのフリが始まるためです。終了根拠: ころねの指摘に対しマリンが「コーネとならやっていける気がする」と結論づけて一連の浮気性に関する掛け合いが収束するためです。除外判断: 直後の発話からは「何か見つけた」とゲーム内の別の状況に話題が完全に切り替わっているため含めません。",
+          "usedSpeechIds": [
+            "1720-1726"
+          ]
+        }
+      ],
+      "targetAssessments": [
+        {
+          "expectedIndex": 13,
+          "reached": true,
+          "exact": false,
+          "cut": {
+            "sourceStartMs": 11551287,
+            "sourceEndMs": 11593310,
+            "reason": "開始根拠: マリンの「水面下で進める」という発言に対し、ころねが「でも誘って？」と切り出し恋愛風の掛け合いのフリが始まるためです。終了根拠: ころねの指摘に対しマリンが「コーネとならやっていける気がする」と結論づけて一連の浮気性に関する掛け合いが収束するためです。除外判断: 直後の発話からは「何か見つけた」とゲーム内の別の状況に話題が完全に切り替わっているため含めません。",
+            "usedSpeechIds": [
+              "1720-1726"
+            ]
+          },
+          "index": 1,
+          "overlapMs": 23994,
+          "startDeltaMs": 9732,
+          "endDeltaMs": 18029
+        }
+      ],
+      "outputPath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-v002-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-088/run-02-gemini-output.json"
+    },
+    {
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateIndex": 88,
+      "runIndex": 3,
+      "stage": "reach",
+      "formatValid": true,
+      "formatIssues": [],
+      "targetExpectedIndexes": [
+        13
+      ],
+      "reachedExpectedIndexes": [
+        13
+      ],
+      "exactExpectedIndexes": [],
+      "selectedCutCount": 1,
+      "selectedDurationMs": 42023,
+      "evidenceRangeDurationMs": 42023,
+      "selectedToEvidenceDurationRatio": 1,
+      "exactRangeCopy": true,
+      "inheritedRangeBoundary": false,
+      "outsideEvidenceCutCount": 0,
+      "unlabeledCutCount": 0,
+      "selectedCuts": [
+        {
+          "sourceStartMs": 11551287,
+          "sourceEndMs": 11593310,
+          "reason": "開始根拠: テーマの照準である浮気性のやり取りへ繋がる、ころねからの「でも誘って?」というフリの発話から開始するためです。終了根拠: マリンが「コーネとならやっていける気がする」と述べ、一連の恋愛風の掛け合いのオチと余韻が収束する発話まで含めるためです。除外判断: 直後の「なんか見つけたよ」以降の発話は、ゲーム内の別の事象へ視線が移り話題が完全に転換しているため除外しました。",
+          "usedSpeechIds": [
+            "1720-1726"
+          ]
+        }
+      ],
+      "targetAssessments": [
+        {
+          "expectedIndex": 13,
+          "reached": true,
+          "exact": false,
+          "cut": {
+            "sourceStartMs": 11551287,
+            "sourceEndMs": 11593310,
+            "reason": "開始根拠: テーマの照準である浮気性のやり取りへ繋がる、ころねからの「でも誘って?」というフリの発話から開始するためです。終了根拠: マリンが「コーネとならやっていける気がする」と述べ、一連の恋愛風の掛け合いのオチと余韻が収束する発話まで含めるためです。除外判断: 直後の「なんか見つけたよ」以降の発話は、ゲーム内の別の事象へ視線が移り話題が完全に転換しているため除外しました。",
+            "usedSpeechIds": [
+              "1720-1726"
+            ]
+          },
+          "index": 1,
+          "overlapMs": 23994,
+          "startDeltaMs": 9732,
+          "endDeltaMs": 18029
+        }
+      ],
+      "outputPath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-v002-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-088/run-03-gemini-output.json"
+    },
+    {
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 5,
+      "runIndex": 1,
+      "stage": "reach",
+      "formatValid": true,
+      "formatIssues": [],
+      "targetExpectedIndexes": [
+        6
+      ],
+      "reachedExpectedIndexes": [
+        6
+      ],
+      "exactExpectedIndexes": [],
+      "selectedCutCount": 1,
+      "selectedDurationMs": 210424,
+      "evidenceRangeDurationMs": 204096,
+      "selectedToEvidenceDurationRatio": 1.0310050172467857,
+      "exactRangeCopy": false,
+      "inheritedRangeBoundary": true,
+      "outsideEvidenceCutCount": 1,
+      "unlabeledCutCount": 0,
+      "selectedCuts": [
+        {
+          "sourceStartMs": 1113054,
+          "sourceEndMs": 1323478,
+          "reason": "開始根拠: フブキ向けのオリジナル変化球の方向性を決め、名前やエフェクトの考案に入りはじめる発話から開始するためです。終了根拠: パワープロショップでエフェクトを購入する流れに移り、初期エフェクトの試行錯誤が一段落する直前の発話までを含めるためです。除外判断: それ以降はショップでの購入の検討やフブキに覚えさせるかどうかの育成上の議論に移るため、エフェクト選びのテーマから外れるとして除外しました。",
+          "usedSpeechIds": [
+            "145-162"
+          ]
+        }
+      ],
+      "targetAssessments": [
+        {
+          "expectedIndex": 6,
+          "reached": true,
+          "exact": false,
+          "cut": {
+            "sourceStartMs": 1113054,
+            "sourceEndMs": 1323478,
+            "reason": "開始根拠: フブキ向けのオリジナル変化球の方向性を決め、名前やエフェクトの考案に入りはじめる発話から開始するためです。終了根拠: パワープロショップでエフェクトを購入する流れに移り、初期エフェクトの試行錯誤が一段落する直前の発話までを含めるためです。除外判断: それ以降はショップでの購入の検討やフブキに覚えさせるかどうかの育成上の議論に移るため、エフェクト選びのテーマから外れるとして除外しました。",
+            "usedSpeechIds": [
+              "145-162"
+            ]
+          },
+          "index": 1,
+          "overlapMs": 4203,
+          "startDeltaMs": -137085,
+          "endDeltaMs": 69136
+        }
+      ],
+      "outputPath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-v002-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-005/run-01-gemini-output.json"
+    },
+    {
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 5,
+      "runIndex": 2,
+      "stage": "reach",
+      "formatValid": true,
+      "formatIssues": [],
+      "targetExpectedIndexes": [
+        6
+      ],
+      "reachedExpectedIndexes": [
+        6
+      ],
+      "exactExpectedIndexes": [],
+      "selectedCutCount": 1,
+      "selectedDurationMs": 204096,
+      "evidenceRangeDurationMs": 204096,
+      "selectedToEvidenceDurationRatio": 1,
+      "exactRangeCopy": true,
+      "inheritedRangeBoundary": false,
+      "outsideEvidenceCutCount": 0,
+      "unlabeledCutCount": 0,
+      "selectedCuts": [
+        {
+          "sourceStartMs": 1113054,
+          "sourceEndMs": 1317150,
+          "reason": "開始根拠: オリジナル変化球の名前やエフェクトの方向性を「フブちゃんっぽくする」と決めて試行錯誤し始める発話から開始するためです。終了根拠: 初期候補のエフェクト確認を終え、ショップでの購入に関する話題へと展開する直前の発話までを含めるためです。除外判断: 発話ID 163以降は、ショップの機能確認やアンケート結果に基づく育成方針の議論へと話題が移行するため除外しました。",
+          "usedSpeechIds": [
+            "145-162"
+          ]
+        }
+      ],
+      "targetAssessments": [
+        {
+          "expectedIndex": 6,
+          "reached": true,
+          "exact": false,
+          "cut": {
+            "sourceStartMs": 1113054,
+            "sourceEndMs": 1317150,
+            "reason": "開始根拠: オリジナル変化球の名前やエフェクトの方向性を「フブちゃんっぽくする」と決めて試行錯誤し始める発話から開始するためです。終了根拠: 初期候補のエフェクト確認を終え、ショップでの購入に関する話題へと展開する直前の発話までを含めるためです。除外判断: 発話ID 163以降は、ショップの機能確認やアンケート結果に基づく育成方針の議論へと話題が移行するため除外しました。",
+            "usedSpeechIds": [
+              "145-162"
+            ]
+          },
+          "index": 1,
+          "overlapMs": 4203,
+          "startDeltaMs": -137085,
+          "endDeltaMs": 62808
+        }
+      ],
+      "outputPath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-v002-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-005/run-02-gemini-output.json"
+    },
+    {
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 5,
+      "runIndex": 3,
+      "stage": "reach",
+      "formatValid": true,
+      "formatIssues": [],
+      "targetExpectedIndexes": [
+        6
+      ],
+      "reachedExpectedIndexes": [
+        6
+      ],
+      "exactExpectedIndexes": [],
+      "selectedCutCount": 1,
+      "selectedDurationMs": 204096,
+      "evidenceRangeDurationMs": 204096,
+      "selectedToEvidenceDurationRatio": 1,
+      "exactRangeCopy": true,
+      "inheritedRangeBoundary": false,
+      "outsideEvidenceCutCount": 0,
+      "unlabeledCutCount": 0,
+      "selectedCuts": [
+        {
+          "sourceStartMs": 1113054,
+          "sourceEndMs": 1317150,
+          "reason": "開始根拠: フブキ（フブちゃん）に合わせたエフェクトや名前の方向性を決め、エフェクト選びを開始する発話から切り抜くためです。終了根拠: 複数のエフェクトを試し投げした後に、ショップでさらに変更できるかという疑問で一区切りつく発話まで含めるためです。除外判断: それ以降の発話（163以降）はショップでの別画面の操作や誰に覚えさせるかの育成方針の相談に移るため、エフェクト選びの試行錯誤というテーマから外れるため除外しました。",
+          "usedSpeechIds": [
+            "145-162"
+          ]
+        }
+      ],
+      "targetAssessments": [
+        {
+          "expectedIndex": 6,
+          "reached": true,
+          "exact": false,
+          "cut": {
+            "sourceStartMs": 1113054,
+            "sourceEndMs": 1317150,
+            "reason": "開始根拠: フブキ（フブちゃん）に合わせたエフェクトや名前の方向性を決め、エフェクト選びを開始する発話から切り抜くためです。終了根拠: 複数のエフェクトを試し投げした後に、ショップでさらに変更できるかという疑問で一区切りつく発話まで含めるためです。除外判断: それ以降の発話（163以降）はショップでの別画面の操作や誰に覚えさせるかの育成方針の相談に移るため、エフェクト選びの試行錯誤というテーマから外れるため除外しました。",
+            "usedSpeechIds": [
+              "145-162"
+            ]
+          },
+          "index": 1,
+          "overlapMs": 4203,
+          "startDeltaMs": -137085,
+          "endDeltaMs": 62808
+        }
+      ],
+      "outputPath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-v002-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-005/run-03-gemini-output.json"
+    },
+    {
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 9,
+      "runIndex": 1,
+      "stage": "reach",
+      "formatValid": true,
+      "formatIssues": [],
+      "targetExpectedIndexes": [
+        7
+      ],
+      "reachedExpectedIndexes": [
+        7
+      ],
+      "exactExpectedIndexes": [],
+      "selectedCutCount": 1,
+      "selectedDurationMs": 331333,
+      "evidenceRangeDurationMs": 144212,
+      "selectedToEvidenceDurationRatio": 2.2975411200177516,
+      "exactRangeCopy": false,
+      "inheritedRangeBoundary": true,
+      "outsideEvidenceCutCount": 1,
+      "unlabeledCutCount": 0,
+      "selectedCuts": [
+        {
+          "sourceStartMs": 2010874,
+          "sourceEndMs": 2342207,
+          "reason": "開始根拠: コロナ療養中のリリカからチャットで助言が届いたことに気づき、感謝を述べる場面から始まるためです。終了根拠: 卒業生の設定に合わせた寸劇風のやり取りを繰り広げ、最後に謝罪でオチがつく発話の終了時刻まで含めるためです。除外判断: それ以降の区間はオリヘンの詳細なパラメータ調整など別のゲーム内作業に移るため除外しました。",
+          "usedSpeechIds": [
+            "220-232"
+          ]
+        }
+      ],
+      "targetAssessments": [
+        {
+          "expectedIndex": 7,
+          "reached": true,
+          "exact": false,
+          "cut": {
+            "sourceStartMs": 2010874,
+            "sourceEndMs": 2342207,
+            "reason": "開始根拠: コロナ療養中のリリカからチャットで助言が届いたことに気づき、感謝を述べる場面から始まるためです。終了根拠: 卒業生の設定に合わせた寸劇風のやり取りを繰り広げ、最後に謝罪でオチがつく発話の終了時刻まで含めるためです。除外判断: それ以降の区間はオリヘンの詳細なパラメータ調整など別のゲーム内作業に移るため除外しました。",
+            "usedSpeechIds": [
+              "220-232"
+            ]
+          },
+          "index": 1,
+          "overlapMs": 3560,
+          "startDeltaMs": -2761,
+          "endDeltaMs": 325012
+        }
+      ],
+      "outputPath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-v002-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-009/run-01-gemini-output.json"
+    },
+    {
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 9,
+      "runIndex": 2,
+      "stage": "reach",
+      "formatValid": true,
+      "formatIssues": [],
+      "targetExpectedIndexes": [
+        7
+      ],
+      "reachedExpectedIndexes": [
+        7
+      ],
+      "exactExpectedIndexes": [],
+      "selectedCutCount": 1,
+      "selectedDurationMs": 144212,
+      "evidenceRangeDurationMs": 144212,
+      "selectedToEvidenceDurationRatio": 1,
+      "exactRangeCopy": true,
+      "inheritedRangeBoundary": false,
+      "outsideEvidenceCutCount": 0,
+      "unlabeledCutCount": 0,
+      "selectedCuts": [
+        {
+          "sourceStartMs": 2010874,
+          "sourceEndMs": 2155086,
+          "reason": "開始根拠: リリカがチャットで助言をくれたことに気づき、感謝を述べながら話題を切り出す発話から始めるためです。終了根拠: リリカの配信の卒業生としての設定に合わせた寸劇のような妄想のやり取りが一通り収束する発話まで含めるためです。除外判断: それ以降の通常のゲーム内の育成論（他選手への割り振り検討）の話題は、テーマの寸劇的な面白さから外れるため除外しました。",
+          "usedSpeechIds": [
+            "220-224"
+          ]
+        }
+      ],
+      "targetAssessments": [
+        {
+          "expectedIndex": 7,
+          "reached": true,
+          "exact": false,
+          "cut": {
+            "sourceStartMs": 2010874,
+            "sourceEndMs": 2155086,
+            "reason": "開始根拠: リリカがチャットで助言をくれたことに気づき、感謝を述べながら話題を切り出す発話から始めるためです。終了根拠: リリカの配信の卒業生としての設定に合わせた寸劇のような妄想のやり取りが一通り収束する発話まで含めるためです。除外判断: それ以降の通常のゲーム内の育成論（他選手への割り振り検討）の話題は、テーマの寸劇的な面白さから外れるため除外しました。",
+            "usedSpeechIds": [
+              "220-224"
+            ]
+          },
+          "index": 1,
+          "overlapMs": 3560,
+          "startDeltaMs": -2761,
+          "endDeltaMs": 137891
+        }
+      ],
+      "outputPath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-v002-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-009/run-02-gemini-output.json"
+    },
+    {
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 9,
+      "runIndex": 3,
+      "stage": "reach",
+      "formatValid": true,
+      "formatIssues": [],
+      "targetExpectedIndexes": [
+        7
+      ],
+      "reachedExpectedIndexes": [
+        7
+      ],
+      "exactExpectedIndexes": [],
+      "selectedCutCount": 1,
+      "selectedDurationMs": 144212,
+      "evidenceRangeDurationMs": 144212,
+      "selectedToEvidenceDurationRatio": 1,
+      "exactRangeCopy": true,
+      "inheritedRangeBoundary": false,
+      "outsideEvidenceCutCount": 0,
+      "unlabeledCutCount": 0,
+      "selectedCuts": [
+        {
+          "sourceStartMs": 2010874,
+          "sourceEndMs": 2155086,
+          "reason": "開始根拠: コロナで療養中の一条コーリリカがチャットをくれたことに気づき、感謝の言葉とアドバイスの紹介を始める発話であるためです。終了根拠: リリカの元で勉強したという設定に基づく寸劇的な掛け合いが落ち着き、次の文脈へ移る手前の発話まで含めるためです。除外判断: それ以降の発話は他の投手の育成状況の確認やオリジナル変化球の具体的なパラメータ調整の話題となるため除外しました。",
+          "usedSpeechIds": [
+            "220-224"
+          ]
+        }
+      ],
+      "targetAssessments": [
+        {
+          "expectedIndex": 7,
+          "reached": true,
+          "exact": false,
+          "cut": {
+            "sourceStartMs": 2010874,
+            "sourceEndMs": 2155086,
+            "reason": "開始根拠: コロナで療養中の一条コーリリカがチャットをくれたことに気づき、感謝の言葉とアドバイスの紹介を始める発話であるためです。終了根拠: リリカの元で勉強したという設定に基づく寸劇的な掛け合いが落ち着き、次の文脈へ移る手前の発話まで含めるためです。除外判断: それ以降の発話は他の投手の育成状況の確認やオリジナル変化球の具体的なパラメータ調整の話題となるため除外しました。",
+            "usedSpeechIds": [
+              "220-224"
+            ]
+          },
+          "index": 1,
+          "overlapMs": 3560,
+          "startDeltaMs": -2761,
+          "endDeltaMs": 137891
+        }
+      ],
+      "outputPath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-v002-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-009/run-03-gemini-output.json"
+    },
+    {
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 13,
+      "runIndex": 1,
+      "stage": "reach",
+      "formatValid": true,
+      "formatIssues": [],
+      "targetExpectedIndexes": [
+        8
+      ],
+      "reachedExpectedIndexes": [
+        8
+      ],
+      "exactExpectedIndexes": [],
+      "selectedCutCount": 1,
+      "selectedDurationMs": 239981,
+      "evidenceRangeDurationMs": 168994,
+      "selectedToEvidenceDurationRatio": 1.4200563333609477,
+      "exactRangeCopy": false,
+      "inheritedRangeBoundary": true,
+      "outsideEvidenceCutCount": 1,
+      "unlabeledCutCount": 0,
+      "selectedCuts": [
+        {
+          "sourceStartMs": 3554885,
+          "sourceEndMs": 3794866,
+          "reason": "開始根拠: リスナーへ球の「重さ」に関する意見を大募集し、育成方針の迷いが始まる発話から選択しました。終了根拠: こよりへ助けを求めたものの、後々のコメント欄の反応を懸念してやっぱり聞くのをやめようと自己完結し、話題が落ち着く発話まで含めました。除外判断: 前後のフブちゃんの技名決め（342以前）および再度リスナーのコメントを読み解く場面（359以降）は、こよりに助けを求めるコミカルな一幕というテーマから外れるため除外しました。",
+          "usedSpeechIds": [
+            "343-358"
+          ]
+        }
+      ],
+      "targetAssessments": [
+        {
+          "expectedIndex": 8,
+          "reached": true,
+          "exact": false,
+          "cut": {
+            "sourceStartMs": 3554885,
+            "sourceEndMs": 3794866,
+            "reason": "開始根拠: リスナーへ球の「重さ」に関する意見を大募集し、育成方針の迷いが始まる発話から選択しました。終了根拠: こよりへ助けを求めたものの、後々のコメント欄の反応を懸念してやっぱり聞くのをやめようと自己完結し、話題が落ち着く発話まで含めました。除外判断: 前後のフブちゃんの技名決め（342以前）および再度リスナーのコメントを読み解く場面（359以降）は、こよりに助けを求めるコミカルな一幕というテーマから外れるため除外しました。",
+            "usedSpeechIds": [
+              "343-358"
+            ]
+          },
+          "index": 1,
+          "overlapMs": 7123,
+          "startDeltaMs": -135681,
+          "endDeltaMs": 97177
+        }
+      ],
+      "outputPath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-v002-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-013/run-01-gemini-output.json"
+    },
+    {
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 13,
+      "runIndex": 2,
+      "stage": "reach",
+      "formatValid": true,
+      "formatIssues": [],
+      "targetExpectedIndexes": [
+        8
+      ],
+      "reachedExpectedIndexes": [
+        8
+      ],
+      "exactExpectedIndexes": [],
+      "selectedCutCount": 1,
+      "selectedDurationMs": 224129,
+      "evidenceRangeDurationMs": 168994,
+      "selectedToEvidenceDurationRatio": 1.326254186539167,
+      "exactRangeCopy": false,
+      "inheritedRangeBoundary": true,
+      "outsideEvidenceCutCount": 1,
+      "unlabeledCutCount": 0,
+      "selectedCuts": [
+        {
+          "sourceStartMs": 3554885,
+          "sourceEndMs": 3779014,
+          "reason": "開始根拠: リスナーに対して「重さ」の意見を大募集し、育成方針についての迷いが始まる発話から選択しました。終了根拠: 博衣こよりに助けを求めたものの、最終的にアドバイスを聞かないことにして別のリスナー（きまち）と決めるという一連の流れが収束する発話まで含めました。除外判断: これ以降の発話は実際にどちらの育成方針にするかの具体的な検証や投票に移るため、こよりに助けを求めるコミカルな一幕というテーマから外れるため除外しました。",
+          "usedSpeechIds": [
+            "343-358"
+          ]
+        }
+      ],
+      "targetAssessments": [
+        {
+          "expectedIndex": 8,
+          "reached": true,
+          "exact": false,
+          "cut": {
+            "sourceStartMs": 3554885,
+            "sourceEndMs": 3779014,
+            "reason": "開始根拠: リスナーに対して「重さ」の意見を大募集し、育成方針についての迷いが始まる発話から選択しました。終了根拠: 博衣こよりに助けを求めたものの、最終的にアドバイスを聞かないことにして別のリスナー（きまち）と決めるという一連の流れが収束する発話まで含めました。除外判断: これ以降の発話は実際にどちらの育成方針にするかの具体的な検証や投票に移るため、こよりに助けを求めるコミカルな一幕というテーマから外れるため除外しました。",
+            "usedSpeechIds": [
+              "343-358"
+            ]
+          },
+          "index": 1,
+          "overlapMs": 7123,
+          "startDeltaMs": -135681,
+          "endDeltaMs": 81325
+        }
+      ],
+      "outputPath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-v002-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-013/run-02-gemini-output.json"
+    },
+    {
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 13,
+      "runIndex": 3,
+      "stage": "reach",
+      "formatValid": true,
+      "formatIssues": [],
+      "targetExpectedIndexes": [
+        8
+      ],
+      "reachedExpectedIndexes": [
+        8
+      ],
+      "exactExpectedIndexes": [],
+      "selectedCutCount": 1,
+      "selectedDurationMs": 224129,
+      "evidenceRangeDurationMs": 168994,
+      "selectedToEvidenceDurationRatio": 1.326254186539167,
+      "exactRangeCopy": false,
+      "inheritedRangeBoundary": true,
+      "outsideEvidenceCutCount": 1,
+      "unlabeledCutCount": 0,
+      "selectedCuts": [
+        {
+          "sourceStartMs": 3554885,
+          "sourceEndMs": 3779014,
+          "reason": "開始根拠: マリンが「重さ」の育成方針についてリスナーに意見を募り、困惑し始める発話から開始します。終了根拠: こよりに助けを求めたものの教えてもらえず、最終的に自分で決めることを決意して一連の流れが収束する発話までを含めます。除外判断: それ以前の必殺技の名前を決める場面や、それ以降の具体的な仕様検討・投票の場面は、こよりに助けを求めるコミカルな一幕というテーマから外れるため除外しました。",
+          "usedSpeechIds": [
+            "343-358"
+          ]
+        }
+      ],
+      "targetAssessments": [
+        {
+          "expectedIndex": 8,
+          "reached": true,
+          "exact": false,
+          "cut": {
+            "sourceStartMs": 3554885,
+            "sourceEndMs": 3779014,
+            "reason": "開始根拠: マリンが「重さ」の育成方針についてリスナーに意見を募り、困惑し始める発話から開始します。終了根拠: こよりに助けを求めたものの教えてもらえず、最終的に自分で決めることを決意して一連の流れが収束する発話までを含めます。除外判断: それ以前の必殺技の名前を決める場面や、それ以降の具体的な仕様検討・投票の場面は、こよりに助けを求めるコミカルな一幕というテーマから外れるため除外しました。",
+            "usedSpeechIds": [
+              "343-358"
+            ]
+          },
+          "index": 1,
+          "overlapMs": 7123,
+          "startDeltaMs": -135681,
+          "endDeltaMs": 81325
+        }
+      ],
+      "outputPath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-v002-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-013/run-03-gemini-output.json"
+    },
+    {
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 14,
+      "runIndex": 1,
+      "stage": "reach",
+      "formatValid": true,
+      "formatIssues": [],
+      "targetExpectedIndexes": [
+        9
+      ],
+      "reachedExpectedIndexes": [
+        9
+      ],
+      "exactExpectedIndexes": [],
+      "selectedCutCount": 1,
+      "selectedDurationMs": 104300,
+      "evidenceRangeDurationMs": 70987,
+      "selectedToEvidenceDurationRatio": 1.4692831081747362,
+      "exactRangeCopy": false,
+      "inheritedRangeBoundary": true,
+      "outsideEvidenceCutCount": 1,
+      "unlabeledCutCount": 0,
+      "selectedCuts": [
+        {
+          "sourceStartMs": 3690566,
+          "sourceEndMs": 3794866,
+          "reason": "開始根拠: 育成に関するリスナーの意見が割れ、マリンが困惑してこよりへ助けを求め始める発話からフリとして含めるためです。終了根拠: こよりへの相談をやめて星街すいせいと決めるというテーマの結論と余韻が収束する発話まで含めるためです。除外判断: それ以降の発話は再びリスナーとの育成方針の議論に戻るため、テーマから外れるので除外しました。",
+          "usedSpeechIds": [
+            "351-359"
+          ]
+        }
+      ],
+      "targetAssessments": [
+        {
+          "expectedIndex": 9,
+          "reached": true,
+          "exact": false,
+          "cut": {
+            "sourceStartMs": 3690566,
+            "sourceEndMs": 3794866,
+            "reason": "開始根拠: 育成に関するリスナーの意見が割れ、マリンが困惑してこよりへ助けを求め始める発話からフリとして含めるためです。終了根拠: こよりへの相談をやめて星街すいせいと決めるというテーマの結論と余韻が収束する発話まで含めるためです。除外判断: それ以降の発話は再びリスナーとの育成方針の議論に戻るため、テーマから外れるので除外しました。",
+            "usedSpeechIds": [
+              "351-359"
+            ]
+          },
+          "index": 1,
+          "overlapMs": 17081,
+          "startDeltaMs": -50778,
+          "endDeltaMs": 36441
+        }
+      ],
+      "outputPath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-v002-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-014/run-01-gemini-output.json"
+    },
+    {
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 14,
+      "runIndex": 2,
+      "stage": "reach",
+      "formatValid": true,
+      "formatIssues": [],
+      "targetExpectedIndexes": [
+        9
+      ],
+      "reachedExpectedIndexes": [
+        9
+      ],
+      "exactExpectedIndexes": [],
+      "selectedCutCount": 1,
+      "selectedDurationMs": 104300,
+      "evidenceRangeDurationMs": 70987,
+      "selectedToEvidenceDurationRatio": 1.4692831081747362,
+      "exactRangeCopy": false,
+      "inheritedRangeBoundary": true,
+      "outsideEvidenceCutCount": 1,
+      "unlabeledCutCount": 0,
+      "selectedCuts": [
+        {
+          "sourceStartMs": 3690566,
+          "sourceEndMs": 3794866,
+          "reason": "開始根拠: 育成方針の意見が割れて混乱し、こよりに助けを求める発話からテーマへのフリが始まるためです。終了根拠: 荒れを懸念して相談をやめ、星街すいせいと決めるという結論に達して余韻が収束する発話まで含めるためです。除外判断: 結論が出た後の、再度育成のステータス検証に戻る発話はテーマから外れるため除外しました。",
+          "usedSpeechIds": [
+            "351-359"
+          ]
+        }
+      ],
+      "targetAssessments": [
+        {
+          "expectedIndex": 9,
+          "reached": true,
+          "exact": false,
+          "cut": {
+            "sourceStartMs": 3690566,
+            "sourceEndMs": 3794866,
+            "reason": "開始根拠: 育成方針の意見が割れて混乱し、こよりに助けを求める発話からテーマへのフリが始まるためです。終了根拠: 荒れを懸念して相談をやめ、星街すいせいと決めるという結論に達して余韻が収束する発話まで含めるためです。除外判断: 結論が出た後の、再度育成のステータス検証に戻る発話はテーマから外れるため除外しました。",
+            "usedSpeechIds": [
+              "351-359"
+            ]
+          },
+          "index": 1,
+          "overlapMs": 17081,
+          "startDeltaMs": -50778,
+          "endDeltaMs": 36441
+        }
+      ],
+      "outputPath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-v002-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-014/run-02-gemini-output.json"
+    },
+    {
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 14,
+      "runIndex": 3,
+      "stage": "reach",
+      "formatValid": true,
+      "formatIssues": [],
+      "targetExpectedIndexes": [
+        9
+      ],
+      "reachedExpectedIndexes": [
+        9
+      ],
+      "exactExpectedIndexes": [],
+      "selectedCutCount": 1,
+      "selectedDurationMs": 104300,
+      "evidenceRangeDurationMs": 70987,
+      "selectedToEvidenceDurationRatio": 1.4692831081747362,
+      "exactRangeCopy": false,
+      "inheritedRangeBoundary": true,
+      "outsideEvidenceCutCount": 1,
+      "unlabeledCutCount": 0,
+      "selectedCuts": [
+        {
+          "sourceStartMs": 3690566,
+          "sourceEndMs": 3794866,
+          "reason": "開始根拠: 育成方針についてリスナーの意見が割れ、こよりに助けを求め始める発話からフリとして含めるためです。終了根拠: こよりへの相談をやめて星街すいせい（きまち）と決めると納得する一連の結論が収束する発話まで含めるためです。除外判断: 結論が出た後の359番以降の発話は、再び元の育成ステータス調整の話に戻っているため除外しました。",
+          "usedSpeechIds": [
+            "351-359"
+          ]
+        }
+      ],
+      "targetAssessments": [
+        {
+          "expectedIndex": 9,
+          "reached": true,
+          "exact": false,
+          "cut": {
+            "sourceStartMs": 3690566,
+            "sourceEndMs": 3794866,
+            "reason": "開始根拠: 育成方針についてリスナーの意見が割れ、こよりに助けを求め始める発話からフリとして含めるためです。終了根拠: こよりへの相談をやめて星街すいせい（きまち）と決めると納得する一連の結論が収束する発話まで含めるためです。除外判断: 結論が出た後の359番以降の発話は、再び元の育成ステータス調整の話に戻っているため除外しました。",
+            "usedSpeechIds": [
+              "351-359"
+            ]
+          },
+          "index": 1,
+          "overlapMs": 17081,
+          "startDeltaMs": -50778,
+          "endDeltaMs": 36441
+        }
+      ],
+      "outputPath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-v002-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-014/run-03-gemini-output.json"
+    },
+    {
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 16,
+      "runIndex": 1,
+      "stage": "reach",
+      "formatValid": true,
+      "formatIssues": [],
+      "targetExpectedIndexes": [
+        10,
+        11,
+        12,
+        13
+      ],
+      "reachedExpectedIndexes": [
+        10,
+        11,
+        12,
+        13
+      ],
+      "exactExpectedIndexes": [],
+      "selectedCutCount": 1,
+      "selectedDurationMs": 283550,
+      "evidenceRangeDurationMs": 283550,
+      "selectedToEvidenceDurationRatio": 1,
+      "exactRangeCopy": true,
+      "inheritedRangeBoundary": false,
+      "outsideEvidenceCutCount": 0,
+      "unlabeledCutCount": 0,
+      "selectedCuts": [
+        {
+          "sourceStartMs": 4096310,
+          "sourceEndMs": 4379860,
+          "reason": "開始根拠: 新球種の性能調整について本格的に悩み始める発話から開始するためです。終了根拠: リスナー投票を経て球種を決定し、1時間経過したことへの謝罪と結論が収束する発話まで含めるためです。除外判断: 決定した球種をキャラクターに習得させて次の甲子園の話題へ完全に移行する発話以降は、テーマ外のため含めません。",
+          "usedSpeechIds": [
+            "375-390"
+          ]
+        }
+      ],
+      "targetAssessments": [
+        {
+          "expectedIndex": 10,
+          "reached": true,
+          "exact": false,
+          "cut": {
+            "sourceStartMs": 4096310,
+            "sourceEndMs": 4379860,
+            "reason": "開始根拠: 新球種の性能調整について本格的に悩み始める発話から開始するためです。終了根拠: リスナー投票を経て球種を決定し、1時間経過したことへの謝罪と結論が収束する発話まで含めるためです。除外判断: 決定した球種をキャラクターに習得させて次の甲子園の話題へ完全に移行する発話以降は、テーマ外のため含めません。",
+            "usedSpeechIds": [
+              "375-390"
+            ]
+          },
+          "index": 1,
+          "overlapMs": 3002,
+          "startDeltaMs": -111329,
+          "endDeltaMs": 169219
+        },
+        {
+          "expectedIndex": 11,
+          "reached": true,
+          "exact": false,
+          "cut": {
+            "sourceStartMs": 4096310,
+            "sourceEndMs": 4379860,
+            "reason": "開始根拠: 新球種の性能調整について本格的に悩み始める発話から開始するためです。終了根拠: リスナー投票を経て球種を決定し、1時間経過したことへの謝罪と結論が収束する発話まで含めるためです。除外判断: 決定した球種をキャラクターに習得させて次の甲子園の話題へ完全に移行する発話以降は、テーマ外のため含めません。",
+            "usedSpeechIds": [
+              "375-390"
+            ]
+          },
+          "index": 1,
+          "overlapMs": 6603,
+          "startDeltaMs": -136497,
+          "endDeltaMs": 140450
+        },
+        {
+          "expectedIndex": 12,
+          "reached": true,
+          "exact": false,
+          "cut": {
+            "sourceStartMs": 4096310,
+            "sourceEndMs": 4379860,
+            "reason": "開始根拠: 新球種の性能調整について本格的に悩み始める発話から開始するためです。終了根拠: リスナー投票を経て球種を決定し、1時間経過したことへの謝罪と結論が収束する発話まで含めるためです。除外判断: 決定した球種をキャラクターに習得させて次の甲子園の話題へ完全に移行する発話以降は、テーマ外のため含めません。",
+            "usedSpeechIds": [
+              "375-390"
+            ]
+          },
+          "index": 1,
+          "overlapMs": 6044,
+          "startDeltaMs": -177118,
+          "endDeltaMs": 100388
+        },
+        {
+          "expectedIndex": 13,
+          "reached": true,
+          "exact": false,
+          "cut": {
+            "sourceStartMs": 4096310,
+            "sourceEndMs": 4379860,
+            "reason": "開始根拠: 新球種の性能調整について本格的に悩み始める発話から開始するためです。終了根拠: リスナー投票を経て球種を決定し、1時間経過したことへの謝罪と結論が収束する発話まで含めるためです。除外判断: 決定した球種をキャラクターに習得させて次の甲子園の話題へ完全に移行する発話以降は、テーマ外のため含めません。",
+            "usedSpeechIds": [
+              "375-390"
+            ]
+          },
+          "index": 1,
+          "overlapMs": 1821,
+          "startDeltaMs": -270904,
+          "endDeltaMs": 10825
+        }
+      ],
+      "outputPath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-v002-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-016/run-01-gemini-output.json"
+    },
+    {
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 16,
+      "runIndex": 2,
+      "stage": "reach",
+      "formatValid": true,
+      "formatIssues": [],
+      "targetExpectedIndexes": [
+        10,
+        11,
+        12,
+        13
+      ],
+      "reachedExpectedIndexes": [
+        10,
+        11,
+        12,
+        13
+      ],
+      "exactExpectedIndexes": [],
+      "selectedCutCount": 1,
+      "selectedDurationMs": 283550,
+      "evidenceRangeDurationMs": 283550,
+      "selectedToEvidenceDurationRatio": 1,
+      "exactRangeCopy": true,
+      "inheritedRangeBoundary": false,
+      "outsideEvidenceCutCount": 0,
+      "unlabeledCutCount": 0,
+      "selectedCuts": [
+        {
+          "sourceStartMs": 4096310,
+          "sourceEndMs": 4379860,
+          "reason": "開始根拠: 新球種の調整についてリスナーへの相談と悩みが本格化する発話から始めるためです。終了根拠: 投票結果を受けて球種を決定し、1時間経過したことへの謝罪と余韻が収束する発話まで含めるためです。除外判断: 続く発話以降は実際に球種をキャラクターに覚えさせたり次のゲーム進行に移る場面のため除外しました。",
+          "usedSpeechIds": [
+            "375-390"
+          ]
+        }
+      ],
+      "targetAssessments": [
+        {
+          "expectedIndex": 10,
+          "reached": true,
+          "exact": false,
+          "cut": {
+            "sourceStartMs": 4096310,
+            "sourceEndMs": 4379860,
+            "reason": "開始根拠: 新球種の調整についてリスナーへの相談と悩みが本格化する発話から始めるためです。終了根拠: 投票結果を受けて球種を決定し、1時間経過したことへの謝罪と余韻が収束する発話まで含めるためです。除外判断: 続く発話以降は実際に球種をキャラクターに覚えさせたり次のゲーム進行に移る場面のため除外しました。",
+            "usedSpeechIds": [
+              "375-390"
+            ]
+          },
+          "index": 1,
+          "overlapMs": 3002,
+          "startDeltaMs": -111329,
+          "endDeltaMs": 169219
+        },
+        {
+          "expectedIndex": 11,
+          "reached": true,
+          "exact": false,
+          "cut": {
+            "sourceStartMs": 4096310,
+            "sourceEndMs": 4379860,
+            "reason": "開始根拠: 新球種の調整についてリスナーへの相談と悩みが本格化する発話から始めるためです。終了根拠: 投票結果を受けて球種を決定し、1時間経過したことへの謝罪と余韻が収束する発話まで含めるためです。除外判断: 続く発話以降は実際に球種をキャラクターに覚えさせたり次のゲーム進行に移る場面のため除外しました。",
+            "usedSpeechIds": [
+              "375-390"
+            ]
+          },
+          "index": 1,
+          "overlapMs": 6603,
+          "startDeltaMs": -136497,
+          "endDeltaMs": 140450
+        },
+        {
+          "expectedIndex": 12,
+          "reached": true,
+          "exact": false,
+          "cut": {
+            "sourceStartMs": 4096310,
+            "sourceEndMs": 4379860,
+            "reason": "開始根拠: 新球種の調整についてリスナーへの相談と悩みが本格化する発話から始めるためです。終了根拠: 投票結果を受けて球種を決定し、1時間経過したことへの謝罪と余韻が収束する発話まで含めるためです。除外判断: 続く発話以降は実際に球種をキャラクターに覚えさせたり次のゲーム進行に移る場面のため除外しました。",
+            "usedSpeechIds": [
+              "375-390"
+            ]
+          },
+          "index": 1,
+          "overlapMs": 6044,
+          "startDeltaMs": -177118,
+          "endDeltaMs": 100388
+        },
+        {
+          "expectedIndex": 13,
+          "reached": true,
+          "exact": false,
+          "cut": {
+            "sourceStartMs": 4096310,
+            "sourceEndMs": 4379860,
+            "reason": "開始根拠: 新球種の調整についてリスナーへの相談と悩みが本格化する発話から始めるためです。終了根拠: 投票結果を受けて球種を決定し、1時間経過したことへの謝罪と余韻が収束する発話まで含めるためです。除外判断: 続く発話以降は実際に球種をキャラクターに覚えさせたり次のゲーム進行に移る場面のため除外しました。",
+            "usedSpeechIds": [
+              "375-390"
+            ]
+          },
+          "index": 1,
+          "overlapMs": 1821,
+          "startDeltaMs": -270904,
+          "endDeltaMs": 10825
+        }
+      ],
+      "outputPath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-v002-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-016/run-02-gemini-output.json"
+    },
+    {
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 16,
+      "runIndex": 3,
+      "stage": "reach",
+      "formatValid": true,
+      "formatIssues": [],
+      "targetExpectedIndexes": [
+        10,
+        11,
+        12,
+        13
+      ],
+      "reachedExpectedIndexes": [
+        10,
+        11,
+        12,
+        13
+      ],
+      "exactExpectedIndexes": [],
+      "selectedCutCount": 1,
+      "selectedDurationMs": 179146,
+      "evidenceRangeDurationMs": 283550,
+      "selectedToEvidenceDurationRatio": 0.6317968612237701,
+      "exactRangeCopy": false,
+      "inheritedRangeBoundary": true,
+      "outsideEvidenceCutCount": 0,
+      "unlabeledCutCount": 0,
+      "selectedCuts": [
+        {
+          "sourceStartMs": 4200714,
+          "sourceEndMs": 4379860,
+          "reason": "開始根拠: 新球種の性能を確かめるためにテスト投球を開始する発話から始めるためです。終了根拠: 迷いすぎて1時間経過してしまったことを明かして謝罪するテーマのオチとなる発話まで含めるためです。除外判断: 391番以降は甲子園に向けた練習指示の話題に移っているため除外します。",
+          "usedSpeechIds": [
+            "381-390"
+          ]
+        }
+      ],
+      "targetAssessments": [
+        {
+          "expectedIndex": 10,
+          "reached": true,
+          "exact": false,
+          "cut": {
+            "sourceStartMs": 4200714,
+            "sourceEndMs": 4379860,
+            "reason": "開始根拠: 新球種の性能を確かめるためにテスト投球を開始する発話から始めるためです。終了根拠: 迷いすぎて1時間経過してしまったことを明かして謝罪するテーマのオチとなる発話まで含めるためです。除外判断: 391番以降は甲子園に向けた練習指示の話題に移っているため除外します。",
+            "usedSpeechIds": [
+              "381-390"
+            ]
+          },
+          "index": 1,
+          "overlapMs": 3002,
+          "startDeltaMs": -6925,
+          "endDeltaMs": 169219
+        },
+        {
+          "expectedIndex": 11,
+          "reached": true,
+          "exact": false,
+          "cut": {
+            "sourceStartMs": 4200714,
+            "sourceEndMs": 4379860,
+            "reason": "開始根拠: 新球種の性能を確かめるためにテスト投球を開始する発話から始めるためです。終了根拠: 迷いすぎて1時間経過してしまったことを明かして謝罪するテーマのオチとなる発話まで含めるためです。除外判断: 391番以降は甲子園に向けた練習指示の話題に移っているため除外します。",
+            "usedSpeechIds": [
+              "381-390"
+            ]
+          },
+          "index": 1,
+          "overlapMs": 6603,
+          "startDeltaMs": -32093,
+          "endDeltaMs": 140450
+        },
+        {
+          "expectedIndex": 12,
+          "reached": true,
+          "exact": false,
+          "cut": {
+            "sourceStartMs": 4200714,
+            "sourceEndMs": 4379860,
+            "reason": "開始根拠: 新球種の性能を確かめるためにテスト投球を開始する発話から始めるためです。終了根拠: 迷いすぎて1時間経過してしまったことを明かして謝罪するテーマのオチとなる発話まで含めるためです。除外判断: 391番以降は甲子園に向けた練習指示の話題に移っているため除外します。",
+            "usedSpeechIds": [
+              "381-390"
+            ]
+          },
+          "index": 1,
+          "overlapMs": 6044,
+          "startDeltaMs": -72714,
+          "endDeltaMs": 100388
+        },
+        {
+          "expectedIndex": 13,
+          "reached": true,
+          "exact": false,
+          "cut": {
+            "sourceStartMs": 4200714,
+            "sourceEndMs": 4379860,
+            "reason": "開始根拠: 新球種の性能を確かめるためにテスト投球を開始する発話から始めるためです。終了根拠: 迷いすぎて1時間経過してしまったことを明かして謝罪するテーマのオチとなる発話まで含めるためです。除外判断: 391番以降は甲子園に向けた練習指示の話題に移っているため除外します。",
+            "usedSpeechIds": [
+              "381-390"
+            ]
+          },
+          "index": 1,
+          "overlapMs": 1821,
+          "startDeltaMs": -166500,
+          "endDeltaMs": 10825
+        }
+      ],
+      "outputPath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-v002-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-016/run-03-gemini-output.json"
+    },
+    {
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 22,
+      "runIndex": 1,
+      "stage": "reach",
+      "formatValid": true,
+      "formatIssues": [],
+      "targetExpectedIndexes": [
+        14
+      ],
+      "reachedExpectedIndexes": [
+        14
+      ],
+      "exactExpectedIndexes": [],
+      "selectedCutCount": 1,
+      "selectedDurationMs": 83476,
+      "evidenceRangeDurationMs": 27752,
+      "selectedToEvidenceDurationRatio": 3.0079273565869125,
+      "exactRangeCopy": false,
+      "inheritedRangeBoundary": false,
+      "outsideEvidenceCutCount": 1,
+      "unlabeledCutCount": 0,
+      "selectedCuts": [
+        {
+          "sourceStartMs": 4680822,
+          "sourceEndMs": 4764298,
+          "reason": "開始根拠: しおりんに狙いを定めてミート練習を選ぶ相談をリスナーと始める発話から開始するためです。終了根拠: 狙い通りしおりんにカット打ちが付いて歓喜し、その余韻と次の状況確認が収束する発話まで含めるためです。除外判断: それ以前の合宿開始に伴う雑談や無関係なメニュー選びのやり取りはテーマ外のため除外しました。",
+          "usedSpeechIds": [
+            "431-452"
+          ]
+        }
+      ],
+      "targetAssessments": [
+        {
+          "expectedIndex": 14,
+          "reached": true,
+          "exact": false,
+          "cut": {
+            "sourceStartMs": 4680822,
+            "sourceEndMs": 4764298,
+            "reason": "開始根拠: しおりんに狙いを定めてミート練習を選ぶ相談をリスナーと始める発話から開始するためです。終了根拠: 狙い通りしおりんにカット打ちが付いて歓喜し、その余韻と次の状況確認が収束する発話まで含めるためです。除外判断: それ以前の合宿開始に伴う雑談や無関係なメニュー選びのやり取りはテーマ外のため除外しました。",
+            "usedSpeechIds": [
+              "431-452"
+            ]
+          },
+          "index": 1,
+          "overlapMs": 7043,
+          "startDeltaMs": -43166,
+          "endDeltaMs": 33267
+        }
+      ],
+      "outputPath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-v002-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-022/run-01-gemini-output.json"
+    },
+    {
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 22,
+      "runIndex": 2,
+      "stage": "reach",
+      "formatValid": true,
+      "formatIssues": [],
+      "targetExpectedIndexes": [
+        14
+      ],
+      "reachedExpectedIndexes": [
+        14
+      ],
+      "exactExpectedIndexes": [],
+      "selectedCutCount": 1,
+      "selectedDurationMs": 60204,
+      "evidenceRangeDurationMs": 27752,
+      "selectedToEvidenceDurationRatio": 2.1693571634476796,
+      "exactRangeCopy": false,
+      "inheritedRangeBoundary": false,
+      "outsideEvidenceCutCount": 1,
+      "unlabeledCutCount": 0,
+      "selectedCuts": [
+        {
+          "sourceStartMs": 4680822,
+          "sourceEndMs": 4741026,
+          "reason": "開始根拠: 合宿の練習メニューの選択で、しおりんに特殊能力が付く可能性を考慮してミートを選ぶフリの発話から開始するためです。終了根拠: 狙い通りにしおりんに『カット打ち』が付き、歓喜した反応が収束する瞬間までを含めるためです。除外判断: それ以降の別の練習指示や3年生に関する話題はテーマ外のため除外しました。",
+          "usedSpeechIds": [
+            "431-451"
+          ]
+        }
+      ],
+      "targetAssessments": [
+        {
+          "expectedIndex": 14,
+          "reached": true,
+          "exact": false,
+          "cut": {
+            "sourceStartMs": 4680822,
+            "sourceEndMs": 4741026,
+            "reason": "開始根拠: 合宿の練習メニューの選択で、しおりんに特殊能力が付く可能性を考慮してミートを選ぶフリの発話から開始するためです。終了根拠: 狙い通りにしおりんに『カット打ち』が付き、歓喜した反応が収束する瞬間までを含めるためです。除外判断: それ以降の別の練習指示や3年生に関する話題はテーマ外のため除外しました。",
+            "usedSpeechIds": [
+              "431-451"
+            ]
+          },
+          "index": 1,
+          "overlapMs": 7043,
+          "startDeltaMs": -43166,
+          "endDeltaMs": 9995
+        }
+      ],
+      "outputPath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-v002-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-022/run-02-gemini-output.json"
+    },
+    {
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 22,
+      "runIndex": 3,
+      "stage": "reach",
+      "formatValid": true,
+      "formatIssues": [],
+      "targetExpectedIndexes": [
+        14
+      ],
+      "reachedExpectedIndexes": [
+        14
+      ],
+      "exactExpectedIndexes": [],
+      "selectedCutCount": 1,
+      "selectedDurationMs": 83476,
+      "evidenceRangeDurationMs": 27752,
+      "selectedToEvidenceDurationRatio": 3.0079273565869125,
+      "exactRangeCopy": false,
+      "inheritedRangeBoundary": false,
+      "outsideEvidenceCutCount": 1,
+      "unlabeledCutCount": 0,
+      "selectedCuts": [
+        {
+          "sourceStartMs": 4680822,
+          "sourceEndMs": 4764298,
+          "reason": "開始根拠: しおりんに『カット打ち』を狙うためにどの練習にするかをリスナーと相談し始める発話から開始するためです。終了根拠: しおりんの『カット打ち』獲得に歓喜した直後、その後の育成状況の確認と次の話題に移行する発話の終わりまでを含めるためです。除外判断: 相談開始前の合宿冒頭に関する雑談や、その後の別の練習選択の場面はテーマ外のため除外しました。",
+          "usedSpeechIds": [
+            "431-452"
+          ]
+        }
+      ],
+      "targetAssessments": [
+        {
+          "expectedIndex": 14,
+          "reached": true,
+          "exact": false,
+          "cut": {
+            "sourceStartMs": 4680822,
+            "sourceEndMs": 4764298,
+            "reason": "開始根拠: しおりんに『カット打ち』を狙うためにどの練習にするかをリスナーと相談し始める発話から開始するためです。終了根拠: しおりんの『カット打ち』獲得に歓喜した直後、その後の育成状況の確認と次の話題に移行する発話の終わりまでを含めるためです。除外判断: 相談開始前の合宿冒頭に関する雑談や、その後の別の練習選択の場面はテーマ外のため除外しました。",
+            "usedSpeechIds": [
+              "431-452"
+            ]
+          },
+          "index": 1,
+          "overlapMs": 7043,
+          "startDeltaMs": -43166,
+          "endDeltaMs": 33267
+        }
+      ],
+      "outputPath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-v002-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-022/run-03-gemini-output.json"
+    },
+    {
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 28,
+      "runIndex": 1,
+      "stage": "reach",
+      "formatValid": true,
+      "formatIssues": [],
+      "targetExpectedIndexes": [
+        15
+      ],
+      "reachedExpectedIndexes": [
+        15
+      ],
+      "exactExpectedIndexes": [],
+      "selectedCutCount": 1,
+      "selectedDurationMs": 78293,
+      "evidenceRangeDurationMs": 78293,
+      "selectedToEvidenceDurationRatio": 1,
+      "exactRangeCopy": true,
+      "inheritedRangeBoundary": false,
+      "outsideEvidenceCutCount": 0,
+      "unlabeledCutCount": 0,
+      "selectedCuts": [
+        {
+          "sourceStartMs": 6281687,
+          "sourceEndMs": 6359980,
+          "reason": "開始根拠: 初戦の対戦相手である「ザサミ商業」の名前を読み上げて試合が始まる発話から選択しました。終了根拠: 相手チームの選手能力を次々に確認し、「全員星300あるこれ」と驚愕するリアクションが収束する発話までを含めました。除外判断: 直後の発話からは特定の1年生選手や投手能力の詳細な分析に入り、ステータスの全体像に絶望するテーマの主旨から外れるため除外しました。",
+          "usedSpeechIds": [
+            "629-636"
+          ]
+        }
+      ],
+      "targetAssessments": [
+        {
+          "expectedIndex": 15,
+          "reached": true,
+          "exact": false,
+          "cut": {
+            "sourceStartMs": 6281687,
+            "sourceEndMs": 6359980,
+            "reason": "開始根拠: 初戦の対戦相手である「ザサミ商業」の名前を読み上げて試合が始まる発話から選択しました。終了根拠: 相手チームの選手能力を次々に確認し、「全員星300あるこれ」と驚愕するリアクションが収束する発話までを含めました。除外判断: 直後の発話からは特定の1年生選手や投手能力の詳細な分析に入り、ステータスの全体像に絶望するテーマの主旨から外れるため除外しました。",
+            "usedSpeechIds": [
+              "629-636"
+            ]
+          },
+          "index": 1,
+          "overlapMs": 9387,
+          "startDeltaMs": -7405,
+          "endDeltaMs": 61501
+        }
+      ],
+      "outputPath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-v002-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-028/run-01-gemini-output.json"
+    },
+    {
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 28,
+      "runIndex": 2,
+      "stage": "reach",
+      "formatValid": true,
+      "formatIssues": [],
+      "targetExpectedIndexes": [
+        15
+      ],
+      "reachedExpectedIndexes": [
+        15
+      ],
+      "exactExpectedIndexes": [],
+      "selectedCutCount": 1,
+      "selectedDurationMs": 78293,
+      "evidenceRangeDurationMs": 78293,
+      "selectedToEvidenceDurationRatio": 1,
+      "exactRangeCopy": true,
+      "inheritedRangeBoundary": false,
+      "outsideEvidenceCutCount": 0,
+      "unlabeledCutCount": 0,
+      "selectedCuts": [
+        {
+          "sourceStartMs": 6281687,
+          "sourceEndMs": 6359980,
+          "reason": "開始根拠: 初戦の対戦相手である「ザサミ商業」の名前を叫び、試合画面に突入する発話から開始するためです。終了根拠: 相手チームの全員が星300前後という驚異のステータスを確認し、一人だけ例外（エラー持ち）を見つけてリアクションが一段落する発話まで含めるためです。除外判断: 続く発話からはピッチャーの能力分析や自チームの戦術考案に話題が移るため、テーマから除外しました。",
+          "usedSpeechIds": [
+            "629-636"
+          ]
+        }
+      ],
+      "targetAssessments": [
+        {
+          "expectedIndex": 15,
+          "reached": true,
+          "exact": false,
+          "cut": {
+            "sourceStartMs": 6281687,
+            "sourceEndMs": 6359980,
+            "reason": "開始根拠: 初戦の対戦相手である「ザサミ商業」の名前を叫び、試合画面に突入する発話から開始するためです。終了根拠: 相手チームの全員が星300前後という驚異のステータスを確認し、一人だけ例外（エラー持ち）を見つけてリアクションが一段落する発話まで含めるためです。除外判断: 続く発話からはピッチャーの能力分析や自チームの戦術考案に話題が移るため、テーマから除外しました。",
+            "usedSpeechIds": [
+              "629-636"
+            ]
+          },
+          "index": 1,
+          "overlapMs": 9387,
+          "startDeltaMs": -7405,
+          "endDeltaMs": 61501
+        }
+      ],
+      "outputPath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-v002-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-028/run-02-gemini-output.json"
+    },
+    {
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 28,
+      "runIndex": 3,
+      "stage": "reach",
+      "formatValid": true,
+      "formatIssues": [],
+      "targetExpectedIndexes": [
+        15
+      ],
+      "reachedExpectedIndexes": [
+        15
+      ],
+      "exactExpectedIndexes": [],
+      "selectedCutCount": 1,
+      "selectedDurationMs": 78293,
+      "evidenceRangeDurationMs": 78293,
+      "selectedToEvidenceDurationRatio": 1,
+      "exactRangeCopy": true,
+      "inheritedRangeBoundary": false,
+      "outsideEvidenceCutCount": 0,
+      "unlabeledCutCount": 0,
+      "selectedCuts": [
+        {
+          "sourceStartMs": 6281687,
+          "sourceEndMs": 6359980,
+          "reason": "開始根拠: 対戦相手「ザサミ商業」の名前を呼んで試合が始まる発話から開始するためです。終了根拠: 相手チーム全員のステータスが星300前後ある驚異的な強さに絶望し、例外的な選手を一人見つけ出すまでのリアクションの区切りまで含めるためです。除外判断: 試合前のトイレ等の雑談や、これ以降の具体的な試合の戦術・打席指示のシーンはテーマから外れるため除外しました。",
+          "usedSpeechIds": [
+            "629-636"
+          ]
+        }
+      ],
+      "targetAssessments": [
+        {
+          "expectedIndex": 15,
+          "reached": true,
+          "exact": false,
+          "cut": {
+            "sourceStartMs": 6281687,
+            "sourceEndMs": 6359980,
+            "reason": "開始根拠: 対戦相手「ザサミ商業」の名前を呼んで試合が始まる発話から開始するためです。終了根拠: 相手チーム全員のステータスが星300前後ある驚異的な強さに絶望し、例外的な選手を一人見つけ出すまでのリアクションの区切りまで含めるためです。除外判断: 試合前のトイレ等の雑談や、これ以降の具体的な試合の戦術・打席指示のシーンはテーマから外れるため除外しました。",
+            "usedSpeechIds": [
+              "629-636"
+            ]
+          },
+          "index": 1,
+          "overlapMs": 9387,
+          "startDeltaMs": -7405,
+          "endDeltaMs": 61501
+        }
+      ],
+      "outputPath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-v002-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-028/run-03-gemini-output.json"
+    },
+    {
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 30,
+      "runIndex": 1,
+      "stage": "reach",
+      "formatValid": true,
+      "formatIssues": [],
+      "targetExpectedIndexes": [
+        16
+      ],
+      "reachedExpectedIndexes": [
+        16
+      ],
+      "exactExpectedIndexes": [],
+      "selectedCutCount": 1,
+      "selectedDurationMs": 55281,
+      "evidenceRangeDurationMs": 14789,
+      "selectedToEvidenceDurationRatio": 3.7379809317736155,
+      "exactRangeCopy": false,
+      "inheritedRangeBoundary": true,
+      "outsideEvidenceCutCount": 1,
+      "unlabeledCutCount": 0,
+      "selectedCuts": [
+        {
+          "sourceStartMs": 6484639,
+          "sourceEndMs": 6539920,
+          "reason": "開始根拠: チャンスの場面で作戦に迷いながらも決断して祈る発話から含めることで、成功時のリアクションのフリにするためです。終了根拠: 作戦が成功し、大喜びして選手を褒めちぎる興奮の余韻が収束する発話までを含めるためです。除外判断: 直後の発話は次のプレイに向けた戦力分析に移っており、テーマの文脈が途切れるため除外します。",
+          "usedSpeechIds": [
+            "646-663"
+          ]
+        }
+      ],
+      "targetAssessments": [
+        {
+          "expectedIndex": 16,
+          "reached": true,
+          "exact": false,
+          "cut": {
+            "sourceStartMs": 6484639,
+            "sourceEndMs": 6539920,
+            "reason": "開始根拠: チャンスの場面で作戦に迷いながらも決断して祈る発話から含めることで、成功時のリアクションのフリにするためです。終了根拠: 作戦が成功し、大喜びして選手を褒めちぎる興奮の余韻が収束する発話までを含めるためです。除外判断: 直後の発話は次のプレイに向けた戦力分析に移っており、テーマの文脈が途切れるため除外します。",
+            "usedSpeechIds": [
+              "646-663"
+            ]
+          },
+          "index": 1,
+          "overlapMs": 741,
+          "startDeltaMs": -41632,
+          "endDeltaMs": 12908
+        }
+      ],
+      "outputPath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-v002-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-030/run-01-gemini-output.json"
+    },
+    {
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 30,
+      "runIndex": 2,
+      "stage": "reach",
+      "formatValid": true,
+      "formatIssues": [],
+      "targetExpectedIndexes": [
+        16
+      ],
+      "reachedExpectedIndexes": [
+        16
+      ],
+      "exactExpectedIndexes": [],
+      "selectedCutCount": 1,
+      "selectedDurationMs": 28918,
+      "evidenceRangeDurationMs": 14789,
+      "selectedToEvidenceDurationRatio": 1.9553722361214416,
+      "exactRangeCopy": false,
+      "inheritedRangeBoundary": true,
+      "outsideEvidenceCutCount": 1,
+      "unlabeledCutCount": 0,
+      "selectedCuts": [
+        {
+          "sourceStartMs": 6511002,
+          "sourceEndMs": 6539920,
+          "reason": "開始根拠: スクイーズか転がすか迷った末に「お願い！」と作戦を指示するフリの発話から開始するためです。終了根拠: 作戦が成功し「やればできるじゃない！」と大興奮で選手を褒めちぎるリアクションが収束する発話まで含めるためです。除外判断: 作戦実行前の悩んでいる長い思考プロセス（speechId: 651以前）や、成功後に次の戦術を考え始める発話（speechId: 664以降）は、大喜びする見どころの文脈から外れるため除外しました。",
+          "usedSpeechIds": [
+            "652-663"
+          ]
+        }
+      ],
+      "targetAssessments": [
+        {
+          "expectedIndex": 16,
+          "reached": true,
+          "exact": false,
+          "cut": {
+            "sourceStartMs": 6511002,
+            "sourceEndMs": 6539920,
+            "reason": "開始根拠: スクイーズか転がすか迷った末に「お願い！」と作戦を指示するフリの発話から開始するためです。終了根拠: 作戦が成功し「やればできるじゃない！」と大興奮で選手を褒めちぎるリアクションが収束する発話まで含めるためです。除外判断: 作戦実行前の悩んでいる長い思考プロセス（speechId: 651以前）や、成功後に次の戦術を考え始める発話（speechId: 664以降）は、大喜びする見どころの文脈から外れるため除外しました。",
+            "usedSpeechIds": [
+              "652-663"
+            ]
+          },
+          "index": 1,
+          "overlapMs": 741,
+          "startDeltaMs": -15269,
+          "endDeltaMs": 12908
+        }
+      ],
+      "outputPath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-v002-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-030/run-02-gemini-output.json"
+    },
+    {
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 30,
+      "runIndex": 3,
+      "stage": "reach",
+      "formatValid": true,
+      "formatIssues": [],
+      "targetExpectedIndexes": [
+        16
+      ],
+      "reachedExpectedIndexes": [
+        16
+      ],
+      "exactExpectedIndexes": [],
+      "selectedCutCount": 1,
+      "selectedDurationMs": 28918,
+      "evidenceRangeDurationMs": 14789,
+      "selectedToEvidenceDurationRatio": 1.9553722361214416,
+      "exactRangeCopy": false,
+      "inheritedRangeBoundary": true,
+      "outsideEvidenceCutCount": 1,
+      "unlabeledCutCount": 0,
+      "selectedCuts": [
+        {
+          "sourceStartMs": 6511002,
+          "sourceEndMs": 6539920,
+          "reason": "開始根拠: 作戦を「転がすか」と迷った末に決断してプレイヤーに「お願い！」と命じる、フリとして重要な発話から開始するためです。終了根拠: 作戦が成功して「やればできるじゃない！」と選手を大喜びで褒めちぎるリアクションが収束する発話まで含めるためです。除外判断: 直後の発話（speechId: 664）からは、次の打者のステータス確認と新たな作戦思案に移っており、別の文脈になるため除外しました。",
+          "usedSpeechIds": [
+            "652-663"
+          ]
+        }
+      ],
+      "targetAssessments": [
+        {
+          "expectedIndex": 16,
+          "reached": true,
+          "exact": false,
+          "cut": {
+            "sourceStartMs": 6511002,
+            "sourceEndMs": 6539920,
+            "reason": "開始根拠: 作戦を「転がすか」と迷った末に決断してプレイヤーに「お願い！」と命じる、フリとして重要な発話から開始するためです。終了根拠: 作戦が成功して「やればできるじゃない！」と選手を大喜びで褒めちぎるリアクションが収束する発話まで含めるためです。除外判断: 直後の発話（speechId: 664）からは、次の打者のステータス確認と新たな作戦思案に移っており、別の文脈になるため除外しました。",
+            "usedSpeechIds": [
+              "652-663"
+            ]
+          },
+          "index": 1,
+          "overlapMs": 741,
+          "startDeltaMs": -15269,
+          "endDeltaMs": 12908
+        }
+      ],
+      "outputPath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-v002-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-030/run-03-gemini-output.json"
+    },
+    {
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 44,
+      "runIndex": 1,
+      "stage": "reach",
+      "formatValid": true,
+      "formatIssues": [],
+      "targetExpectedIndexes": [
+        20
+      ],
+      "reachedExpectedIndexes": [
+        20
+      ],
+      "exactExpectedIndexes": [],
+      "selectedCutCount": 1,
+      "selectedDurationMs": 113186,
+      "evidenceRangeDurationMs": 113186,
+      "selectedToEvidenceDurationRatio": 1,
+      "exactRangeCopy": true,
+      "inheritedRangeBoundary": false,
+      "outsideEvidenceCutCount": 0,
+      "unlabeledCutCount": 0,
+      "selectedCuts": [
+        {
+          "sourceStartMs": 9126634,
+          "sourceEndMs": 9239820,
+          "reason": "開始根拠: 同点に追いつかれた緊迫した状況下で、数字や戦術の選択肢を迷いながら確認し始める発話から開始するためです。終了根拠: 限界を迎えたフブキの投手交代と代打にビブーを起用する一連の作戦の組み立てが一段落する発話まで含めるためです。除外判断: それ以降のビブーの固有スキルや他の一年生の起用に関する詳細な雑談・検討は、テーマの中心から外れるため除外しました。",
+          "usedSpeechIds": [
+            "1003-1012"
+          ]
+        }
+      ],
+      "targetAssessments": [
+        {
+          "expectedIndex": 20,
+          "reached": true,
+          "exact": false,
+          "cut": {
+            "sourceStartMs": 9126634,
+            "sourceEndMs": 9239820,
+            "reason": "開始根拠: 同点に追いつかれた緊迫した状況下で、数字や戦術の選択肢を迷いながら確認し始める発話から開始するためです。終了根拠: 限界を迎えたフブキの投手交代と代打にビブーを起用する一連の作戦の組み立てが一段落する発話まで含めるためです。除外判断: それ以降のビブーの固有スキルや他の一年生の起用に関する詳細な雑談・検討は、テーマの中心から外れるため除外しました。",
+            "usedSpeechIds": [
+              "1003-1012"
+            ]
+          },
+          "index": 1,
+          "overlapMs": 1942,
+          "startDeltaMs": -23888,
+          "endDeltaMs": 87356
+        }
+      ],
+      "outputPath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-v002-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-044/run-01-gemini-output.json"
+    },
+    {
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 44,
+      "runIndex": 2,
+      "stage": "reach",
+      "formatValid": true,
+      "formatIssues": [],
+      "targetExpectedIndexes": [
+        20
+      ],
+      "reachedExpectedIndexes": [
+        20
+      ],
+      "exactExpectedIndexes": [],
+      "selectedCutCount": 1,
+      "selectedDurationMs": 113186,
+      "evidenceRangeDurationMs": 113186,
+      "selectedToEvidenceDurationRatio": 1,
+      "exactRangeCopy": true,
+      "inheritedRangeBoundary": false,
+      "outsideEvidenceCutCount": 0,
+      "unlabeledCutCount": 0,
+      "selectedCuts": [
+        {
+          "sourceStartMs": 9126634,
+          "sourceEndMs": 9239820,
+          "reason": "開始根拠: 同点に追いつかれた緊迫した状況を把握して低めの配球を考慮する発話から始まるためです。終了根拠: 投手交代と代打にビブーを起用する作戦を慌てながら組み立てる一連の思考が収束する発話まで含めるためです。除外判断: それ以降のビブーのスキルや詳細な選手選択に関する雑談・議論は、テーマの中心である交代と代打の決断プロセスから外れるため含めません。",
+          "usedSpeechIds": [
+            "1003-1012"
+          ]
+        }
+      ],
+      "targetAssessments": [
+        {
+          "expectedIndex": 20,
+          "reached": true,
+          "exact": false,
+          "cut": {
+            "sourceStartMs": 9126634,
+            "sourceEndMs": 9239820,
+            "reason": "開始根拠: 同点に追いつかれた緊迫した状況を把握して低めの配球を考慮する発話から始まるためです。終了根拠: 投手交代と代打にビブーを起用する作戦を慌てながら組み立てる一連の思考が収束する発話まで含めるためです。除外判断: それ以降のビブーのスキルや詳細な選手選択に関する雑談・議論は、テーマの中心である交代と代打の決断プロセスから外れるため含めません。",
+            "usedSpeechIds": [
+              "1003-1012"
+            ]
+          },
+          "index": 1,
+          "overlapMs": 1942,
+          "startDeltaMs": -23888,
+          "endDeltaMs": 87356
+        }
+      ],
+      "outputPath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-v002-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-044/run-02-gemini-output.json"
+    },
+    {
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 44,
+      "runIndex": 3,
+      "stage": "reach",
+      "formatValid": true,
+      "formatIssues": [],
+      "targetExpectedIndexes": [
+        20
+      ],
+      "reachedExpectedIndexes": [
+        20
+      ],
+      "exactExpectedIndexes": [],
+      "selectedCutCount": 1,
+      "selectedDurationMs": 113186,
+      "evidenceRangeDurationMs": 113186,
+      "selectedToEvidenceDurationRatio": 1,
+      "exactRangeCopy": true,
+      "inheritedRangeBoundary": false,
+      "outsideEvidenceCutCount": 0,
+      "unlabeledCutCount": 0,
+      "selectedCuts": [
+        {
+          "sourceStartMs": 9126634,
+          "sourceEndMs": 9239820,
+          "reason": "開始根拠: 同点に追いつかれ緊迫した場面の状況整理と指示を出す発話から始まるためです。終了根拠: 投手交代の決断と代打ビブーの起用方針がまとまる一連の思考が収束する発話まで含めるためです。除外判断: それ以降のビブーのスキル確認や具体的な戦術指示の雑談は作戦構築の結論が出たあとの別文脈となるため含めません。",
+          "usedSpeechIds": [
+            "1003-1012"
+          ]
+        }
+      ],
+      "targetAssessments": [
+        {
+          "expectedIndex": 20,
+          "reached": true,
+          "exact": false,
+          "cut": {
+            "sourceStartMs": 9126634,
+            "sourceEndMs": 9239820,
+            "reason": "開始根拠: 同点に追いつかれ緊迫した場面の状況整理と指示を出す発話から始まるためです。終了根拠: 投手交代の決断と代打ビブーの起用方針がまとまる一連の思考が収束する発話まで含めるためです。除外判断: それ以降のビブーのスキル確認や具体的な戦術指示の雑談は作戦構築の結論が出たあとの別文脈となるため含めません。",
+            "usedSpeechIds": [
+              "1003-1012"
+            ]
+          },
+          "index": 1,
+          "overlapMs": 1942,
+          "startDeltaMs": -23888,
+          "endDeltaMs": 87356
+        }
+      ],
+      "outputPath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-v002-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-044/run-03-gemini-output.json"
+    },
+    {
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 52,
+      "runIndex": 1,
+      "stage": "reach",
+      "formatValid": true,
+      "formatIssues": [],
+      "targetExpectedIndexes": [
+        23
+      ],
+      "reachedExpectedIndexes": [
+        23
+      ],
+      "exactExpectedIndexes": [],
+      "selectedCutCount": 1,
+      "selectedDurationMs": 114396,
+      "evidenceRangeDurationMs": 114396,
+      "selectedToEvidenceDurationRatio": 1,
+      "exactRangeCopy": true,
+      "inheritedRangeBoundary": false,
+      "outsideEvidenceCutCount": 0,
+      "unlabeledCutCount": 0,
+      "selectedCuts": [
+        {
+          "sourceStartMs": 10503922,
+          "sourceEndMs": 10618318,
+          "reason": "開始根拠: 相手投手の能力やクイックの判定を基に、盗塁をすべきか否かの葛藤を思案し始める発話から開始するためです。終了根拠: リスクとリターンを天秤にかけつつ、次の作戦候補である送りバントを口にするところまでで一連の思考プロセスが収束するためです。除外判断: それ以降のスクイーズに関するやり取りは、場面が切り替わりリスナーとの相談に移行するため除外しました。",
+          "usedSpeechIds": [
+            "1189-1203"
+          ]
+        }
+      ],
+      "targetAssessments": [
+        {
+          "expectedIndex": 23,
+          "reached": true,
+          "exact": false,
+          "cut": {
+            "sourceStartMs": 10503922,
+            "sourceEndMs": 10618318,
+            "reason": "開始根拠: 相手投手の能力やクイックの判定を基に、盗塁をすべきか否かの葛藤を思案し始める発話から開始するためです。終了根拠: リスクとリターンを天秤にかけつつ、次の作戦候補である送りバントを口にするところまでで一連の思考プロセスが収束するためです。除外判断: それ以降のスクイーズに関するやり取りは、場面が切り替わりリスナーとの相談に移行するため除外しました。",
+            "usedSpeechIds": [
+              "1189-1203"
+            ]
+          },
+          "index": 1,
+          "overlapMs": 7526,
+          "startDeltaMs": -17972,
+          "endDeltaMs": 88898
+        }
+      ],
+      "outputPath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-v002-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-052/run-01-gemini-output.json"
+    },
+    {
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 52,
+      "runIndex": 2,
+      "stage": "reach",
+      "formatValid": true,
+      "formatIssues": [],
+      "targetExpectedIndexes": [
+        23
+      ],
+      "reachedExpectedIndexes": [
+        23
+      ],
+      "exactExpectedIndexes": [],
+      "selectedCutCount": 1,
+      "selectedDurationMs": 114396,
+      "evidenceRangeDurationMs": 114396,
+      "selectedToEvidenceDurationRatio": 1,
+      "exactRangeCopy": true,
+      "inheritedRangeBoundary": false,
+      "outsideEvidenceCutCount": 0,
+      "unlabeledCutCount": 0,
+      "selectedCuts": [
+        {
+          "sourceStartMs": 10503922,
+          "sourceEndMs": 10618318,
+          "reason": "開始根拠: 相手投手のクイック能力や走者の走塁能力を考慮しながら盗塁の作戦を検討し始める発話から開始するためです。終了根拠: 葛藤の末に送りバントの選択肢を思案する発話の収束までを含めるためです。除外判断: 直前の天野くんを応援する一連のコールおよびその後の試合展開やスクイーズの具体的な指示に関する会話は、葛藤の思案場面とは異なる文脈のため除外しました。",
+          "usedSpeechIds": [
+            "1189-1203"
+          ]
+        }
+      ],
+      "targetAssessments": [
+        {
+          "expectedIndex": 23,
+          "reached": true,
+          "exact": false,
+          "cut": {
+            "sourceStartMs": 10503922,
+            "sourceEndMs": 10618318,
+            "reason": "開始根拠: 相手投手のクイック能力や走者の走塁能力を考慮しながら盗塁の作戦を検討し始める発話から開始するためです。終了根拠: 葛藤の末に送りバントの選択肢を思案する発話の収束までを含めるためです。除外判断: 直前の天野くんを応援する一連のコールおよびその後の試合展開やスクイーズの具体的な指示に関する会話は、葛藤の思案場面とは異なる文脈のため除外しました。",
+            "usedSpeechIds": [
+              "1189-1203"
+            ]
+          },
+          "index": 1,
+          "overlapMs": 7526,
+          "startDeltaMs": -17972,
+          "endDeltaMs": 88898
+        }
+      ],
+      "outputPath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-v002-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-052/run-02-gemini-output.json"
+    },
+    {
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 52,
+      "runIndex": 3,
+      "stage": "reach",
+      "formatValid": true,
+      "formatIssues": [],
+      "targetExpectedIndexes": [
+        23
+      ],
+      "reachedExpectedIndexes": [
+        23
+      ],
+      "exactExpectedIndexes": [],
+      "selectedCutCount": 1,
+      "selectedDurationMs": 114396,
+      "evidenceRangeDurationMs": 114396,
+      "selectedToEvidenceDurationRatio": 1,
+      "exactRangeCopy": true,
+      "inheritedRangeBoundary": false,
+      "outsideEvidenceCutCount": 0,
+      "unlabeledCutCount": 0,
+      "selectedCuts": [
+        {
+          "sourceStartMs": 10503922,
+          "sourceEndMs": 10618318,
+          "reason": "開始根拠: 相手投手の能力や自チームの走力を踏まえて、盗塁の作戦を検討し始める発話から開始するためです。終了根拠: 盗塁のリスクとリターンを天秤にかけ、送りバントの選択肢を思案する一連の葛藤が収束する発話まで含めるためです。除外判断: 直前の天野くんへの応援や、その後に続くスクイーズの具体的な指示に関するやり取りは、テーマの中心であるリスクとリターンの激しい葛藤から話題が変化しているため除外しました。",
+          "usedSpeechIds": [
+            "1189-1203"
+          ]
+        }
+      ],
+      "targetAssessments": [
+        {
+          "expectedIndex": 23,
+          "reached": true,
+          "exact": false,
+          "cut": {
+            "sourceStartMs": 10503922,
+            "sourceEndMs": 10618318,
+            "reason": "開始根拠: 相手投手の能力や自チームの走力を踏まえて、盗塁の作戦を検討し始める発話から開始するためです。終了根拠: 盗塁のリスクとリターンを天秤にかけ、送りバントの選択肢を思案する一連の葛藤が収束する発話まで含めるためです。除外判断: 直前の天野くんへの応援や、その後に続くスクイーズの具体的な指示に関するやり取りは、テーマの中心であるリスクとリターンの激しい葛藤から話題が変化しているため除外しました。",
+            "usedSpeechIds": [
+              "1189-1203"
+            ]
+          },
+          "index": 1,
+          "overlapMs": 7526,
+          "startDeltaMs": -17972,
+          "endDeltaMs": 88898
+        }
+      ],
+      "outputPath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-v002-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-052/run-03-gemini-output.json"
+    },
+    {
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 54,
+      "runIndex": 1,
+      "stage": "reach",
+      "formatValid": true,
+      "formatIssues": [],
+      "targetExpectedIndexes": [
+        24
+      ],
+      "reachedExpectedIndexes": [
+        24
+      ],
+      "exactExpectedIndexes": [],
+      "selectedCutCount": 1,
+      "selectedDurationMs": 40478,
+      "evidenceRangeDurationMs": 40478,
+      "selectedToEvidenceDurationRatio": 1,
+      "exactRangeCopy": true,
+      "inheritedRangeBoundary": false,
+      "outsideEvidenceCutCount": 0,
+      "unlabeledCutCount": 0,
+      "selectedCuts": [
+        {
+          "sourceStartMs": 10776694,
+          "sourceEndMs": 10817172,
+          "reason": "開始根拠: テーマの対象である盗塁を指示すべきかリスナーに問いかけ始める発話から開始するためです。終了根拠: 走力や盗塁の能力値を確認し、盗塁をやめるべきか葛藤する一連のやり取りが収束する発話まで含めるためです。除外判断: 続く発話からは「犠牲フライ」や「スクイズ」といった別の戦術への相談に移るため、本テーマの対象外として除外しました。",
+          "usedSpeechIds": [
+            "1216-1236"
+          ]
+        }
+      ],
+      "targetAssessments": [
+        {
+          "expectedIndex": 24,
+          "reached": true,
+          "exact": false,
+          "cut": {
+            "sourceStartMs": 10776694,
+            "sourceEndMs": 10817172,
+            "reason": "開始根拠: テーマの対象である盗塁を指示すべきかリスナーに問いかけ始める発話から開始するためです。終了根拠: 走力や盗塁の能力値を確認し、盗塁をやめるべきか葛藤する一連のやり取りが収束する発話まで含めるためです。除外判断: 続く発話からは「犠牲フライ」や「スクイズ」といった別の戦術への相談に移るため、本テーマの対象外として除外しました。",
+            "usedSpeechIds": [
+              "1216-1236"
+            ]
+          },
+          "index": 1,
+          "overlapMs": 12980,
+          "startDeltaMs": -14050,
+          "endDeltaMs": 13448
+        }
+      ],
+      "outputPath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-v002-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-054/run-01-gemini-output.json"
+    },
+    {
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 54,
+      "runIndex": 2,
+      "stage": "reach",
+      "formatValid": true,
+      "formatIssues": [],
+      "targetExpectedIndexes": [
+        24
+      ],
+      "reachedExpectedIndexes": [
+        24
+      ],
+      "exactExpectedIndexes": [],
+      "selectedCutCount": 1,
+      "selectedDurationMs": 40478,
+      "evidenceRangeDurationMs": 40478,
+      "selectedToEvidenceDurationRatio": 1,
+      "exactRangeCopy": true,
+      "inheritedRangeBoundary": false,
+      "outsideEvidenceCutCount": 0,
+      "unlabeledCutCount": 0,
+      "selectedCuts": [
+        {
+          "sourceStartMs": 10776694,
+          "sourceEndMs": 10817172,
+          "reason": "開始根拠: テーマの中心である盗塁（トール）を指示するかどうかをリスナーに問いかけ始める最初の発話から開始するためです。終了根拠: 走力や盗塁の能力値を確認し、盗塁をやめるか葛藤した一連の対話が収束する発話までを含めるためです。除外判断: 続く「犠牲フライか？」以降の発話は、盗塁指示の葛藤から次の作戦検討へ話題が切り替わっているため除外しました。",
+          "usedSpeechIds": [
+            "1216-1236"
+          ]
+        }
+      ],
+      "targetAssessments": [
+        {
+          "expectedIndex": 24,
+          "reached": true,
+          "exact": false,
+          "cut": {
+            "sourceStartMs": 10776694,
+            "sourceEndMs": 10817172,
+            "reason": "開始根拠: テーマの中心である盗塁（トール）を指示するかどうかをリスナーに問いかけ始める最初の発話から開始するためです。終了根拠: 走力や盗塁の能力値を確認し、盗塁をやめるか葛藤した一連の対話が収束する発話までを含めるためです。除外判断: 続く「犠牲フライか？」以降の発話は、盗塁指示の葛藤から次の作戦検討へ話題が切り替わっているため除外しました。",
+            "usedSpeechIds": [
+              "1216-1236"
+            ]
+          },
+          "index": 1,
+          "overlapMs": 12980,
+          "startDeltaMs": -14050,
+          "endDeltaMs": 13448
+        }
+      ],
+      "outputPath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-v002-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-054/run-02-gemini-output.json"
+    },
+    {
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 54,
+      "runIndex": 3,
+      "stage": "reach",
+      "formatValid": true,
+      "formatIssues": [],
+      "targetExpectedIndexes": [
+        24
+      ],
+      "reachedExpectedIndexes": [
+        24
+      ],
+      "exactExpectedIndexes": [],
+      "selectedCutCount": 1,
+      "selectedDurationMs": 40478,
+      "evidenceRangeDurationMs": 40478,
+      "selectedToEvidenceDurationRatio": 1,
+      "exactRangeCopy": true,
+      "inheritedRangeBoundary": false,
+      "outsideEvidenceCutCount": 0,
+      "unlabeledCutCount": 0,
+      "selectedCuts": [
+        {
+          "sourceStartMs": 10776694,
+          "sourceEndMs": 10817172,
+          "reason": "開始根拠: テーマである盗塁の指示についてリスナーへ問いかけ始める発話から開始するためです。終了根拠: 走力や盗塁の能力値を確認し、盗塁をやめるべきか葛藤する一連のくだりが収束する発話まで含めるためです。除外判断: 直後の発話からは犠牲フライやスクイズなど別の作戦へ話題が移行しているため含めません。",
+          "usedSpeechIds": [
+            "1216-1236"
+          ]
+        }
+      ],
+      "targetAssessments": [
+        {
+          "expectedIndex": 24,
+          "reached": true,
+          "exact": false,
+          "cut": {
+            "sourceStartMs": 10776694,
+            "sourceEndMs": 10817172,
+            "reason": "開始根拠: テーマである盗塁の指示についてリスナーへ問いかけ始める発話から開始するためです。終了根拠: 走力や盗塁の能力値を確認し、盗塁をやめるべきか葛藤する一連のくだりが収束する発話まで含めるためです。除外判断: 直後の発話からは犠牲フライやスクイズなど別の作戦へ話題が移行しているため含めません。",
+            "usedSpeechIds": [
+              "1216-1236"
+            ]
+          },
+          "index": 1,
+          "overlapMs": 12980,
+          "startDeltaMs": -14050,
+          "endDeltaMs": 13448
+        }
+      ],
+      "outputPath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-v002-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-054/run-03-gemini-output.json"
+    },
+    {
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 59,
+      "runIndex": 1,
+      "stage": "reach",
+      "formatValid": true,
+      "formatIssues": [],
+      "targetExpectedIndexes": [
+        25
+      ],
+      "reachedExpectedIndexes": [
+        25
+      ],
+      "exactExpectedIndexes": [],
+      "selectedCutCount": 1,
+      "selectedDurationMs": 114772,
+      "evidenceRangeDurationMs": 88124,
+      "selectedToEvidenceDurationRatio": 1.3023920838818028,
+      "exactRangeCopy": false,
+      "inheritedRangeBoundary": true,
+      "outsideEvidenceCutCount": 1,
+      "unlabeledCutCount": 0,
+      "selectedCuts": [
+        {
+          "sourceStartMs": 11674674,
+          "sourceEndMs": 11789446,
+          "reason": "開始根拠: 次の対戦相手のランクがBであることを確認し、リアクションを取る発話の起点から始めるためです。終了根拠: 次回の告知とリスナーへの挨拶、セーブして配信を締める一連の流れが完了する最後の発話まで含めるためです。除外判断: それ以前のアイテム購入や体力回復のくだりはテーマの主軸から外れるため含めず、終了後のED曲のフレーズは配信の本編ではないため除外しました。",
+          "usedSpeechIds": [
+            "1317-1322"
+          ]
+        }
+      ],
+      "targetAssessments": [
+        {
+          "expectedIndex": 25,
+          "reached": true,
+          "exact": false,
+          "cut": {
+            "sourceStartMs": 11674674,
+            "sourceEndMs": 11789446,
+            "reason": "開始根拠: 次の対戦相手のランクがBであることを確認し、リアクションを取る発話の起点から始めるためです。終了根拠: 次回の告知とリスナーへの挨拶、セーブして配信を締める一連の流れが完了する最後の発話まで含めるためです。除外判断: それ以前のアイテム購入や体力回復のくだりはテーマの主軸から外れるため含めず、終了後のED曲のフレーズは配信の本編ではないため除外しました。",
+            "usedSpeechIds": [
+              "1317-1322"
+            ]
+          },
+          "index": 1,
+          "overlapMs": 3182,
+          "startDeltaMs": -55768,
+          "endDeltaMs": 55822
+        }
+      ],
+      "outputPath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-v002-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-059/run-01-gemini-output.json"
+    },
+    {
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 59,
+      "runIndex": 2,
+      "stage": "reach",
+      "formatValid": true,
+      "formatIssues": [],
+      "targetExpectedIndexes": [
+        25
+      ],
+      "reachedExpectedIndexes": [
+        25
+      ],
+      "exactExpectedIndexes": [],
+      "selectedCutCount": 1,
+      "selectedDurationMs": 114772,
+      "evidenceRangeDurationMs": 88124,
+      "selectedToEvidenceDurationRatio": 1.3023920838818028,
+      "exactRangeCopy": false,
+      "inheritedRangeBoundary": true,
+      "outsideEvidenceCutCount": 1,
+      "unlabeledCutCount": 0,
+      "selectedCuts": [
+        {
+          "sourceStartMs": 11674674,
+          "sourceEndMs": 11789446,
+          "reason": "開始根拠: 次の対戦相手のランクがBだと判明して反応する発話から始めるためです。終了根拠: 次回配信の告知と締めが完了し、ゲーム終了を告げる発話の終了時刻まで含めるためです。除外判断: 1317番より前のアイテム購入や回復のくだりはテーマと異なるため含めず、1323番以降のエンディング・定型歌歌唱パートは配信の締めが終わった後のため除外しました。",
+          "usedSpeechIds": [
+            "1317-1322"
+          ]
+        }
+      ],
+      "targetAssessments": [
+        {
+          "expectedIndex": 25,
+          "reached": true,
+          "exact": false,
+          "cut": {
+            "sourceStartMs": 11674674,
+            "sourceEndMs": 11789446,
+            "reason": "開始根拠: 次の対戦相手のランクがBだと判明して反応する発話から始めるためです。終了根拠: 次回配信の告知と締めが完了し、ゲーム終了を告げる発話の終了時刻まで含めるためです。除外判断: 1317番より前のアイテム購入や回復のくだりはテーマと異なるため含めず、1323番以降のエンディング・定型歌歌唱パートは配信の締めが終わった後のため除外しました。",
+            "usedSpeechIds": [
+              "1317-1322"
+            ]
+          },
+          "index": 1,
+          "overlapMs": 3182,
+          "startDeltaMs": -55768,
+          "endDeltaMs": 55822
+        }
+      ],
+      "outputPath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-v002-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-059/run-02-gemini-output.json"
+    },
+    {
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateIndex": 59,
+      "runIndex": 3,
+      "stage": "reach",
+      "formatValid": true,
+      "formatIssues": [],
+      "targetExpectedIndexes": [
+        25
+      ],
+      "reachedExpectedIndexes": [
+        25
+      ],
+      "exactExpectedIndexes": [],
+      "selectedCutCount": 1,
+      "selectedDurationMs": 114772,
+      "evidenceRangeDurationMs": 88124,
+      "selectedToEvidenceDurationRatio": 1.3023920838818028,
+      "exactRangeCopy": false,
+      "inheritedRangeBoundary": true,
+      "outsideEvidenceCutCount": 1,
+      "unlabeledCutCount": 0,
+      "selectedCuts": [
+        {
+          "sourceStartMs": 11674674,
+          "sourceEndMs": 11789446,
+          "reason": "開始根拠: 次の対戦相手が「Bかー」と判明して反応するフリの発話から開始するためです。終了根拠: 配信の告知とセーブ終了の締めくくりが完了して挨拶が収束する発話まで含めるためです。除外判断: 終了後のエンディング曲と思われる定型フレーズの発話は配信の本編ではないため除外しました。",
+          "usedSpeechIds": [
+            "1317-1322"
+          ]
+        }
+      ],
+      "targetAssessments": [
+        {
+          "expectedIndex": 25,
+          "reached": true,
+          "exact": false,
+          "cut": {
+            "sourceStartMs": 11674674,
+            "sourceEndMs": 11789446,
+            "reason": "開始根拠: 次の対戦相手が「Bかー」と判明して反応するフリの発話から開始するためです。終了根拠: 配信の告知とセーブ終了の締めくくりが完了して挨拶が収束する発話まで含めるためです。除外判断: 終了後のエンディング曲と思われる定型フレーズの発話は配信の本編ではないため除外しました。",
+            "usedSpeechIds": [
+              "1317-1322"
+            ]
+          },
+          "index": 1,
+          "overlapMs": 3182,
+          "startDeltaMs": -55768,
+          "endDeltaMs": 55822
+        }
+      ],
+      "outputPath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-v002-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-059/run-03-gemini-output.json"
+    }
+  ]
+}

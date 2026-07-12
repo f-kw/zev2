@@ -1,0 +1,35 @@
+{
+  "selectedCuts": [
+    {
+      "sourceStartMs": 4680822,
+      "sourceEndMs": 4764298,
+      "reason": "開始根拠: しおりんに『カット打ち』を狙うためにどの練習にするかをリスナーと相談し始める発話から開始するためです。終了根拠: しおりんの『カット打ち』獲得に歓喜した直後、その後の育成状況の確認と次の話題に移行する発話の終わりまでを含めるためです。除外判断: 相談開始前の合宿冒頭に関する雑談や、その後の別の練習選択の場面はテーマ外のため除外しました。",
+      "usedSpeechIds": [
+        "431-452"
+      ]
+    }
+  ],
+  "runAt": "2026-07-12T21:41:42+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "manualRun": false,
+    "runner": "edge-cdp-text-prompt",
+    "connectionVersion": "connection-v002",
+    "generationSystem": "llm-v013@gemini-web-flash",
+    "upstreamGenerationSystem": "theme-llm-v002@gemini-web-flash",
+    "resultRole": "connected-composition-eval-connection-v002",
+    "conditionalOnUpstreamRangeHit": true,
+    "promptVersion": "clip_composition_prompt_v013",
+    "contextCondition": "theme-window-plus-minus-5m",
+    "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+    "candidateIndex": 22,
+    "runs": 3,
+    "runIndex": 3,
+    "inputPromptSha256": "3bcf27a7d7347a21fd2474b0ea81337516e37b33483dd479ba75042e558e11d9"
+  },
+  "promptFile": "outputs/theme-composition-connection/20260712-connection-v002-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-022/prompt.md",
+  "pageUrl": "https://gemini.google.com/app/4128e7a54282f9fb?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"selectedCuts\": [\n    {\n      \"sourceStartMs\": 4680822,\n      \"sourceEndMs\": 4764298,\n      \"reason\": \"開始根拠: しおりんに『カット打ち』を狙うためにどの練習にするかをリスナーと相談し始める発話から開始するためです。終了根拠: しおりんの『カット打ち』獲得に歓喜した直後、その後の育成状況の確認と次の話題に移行する発話の終わりまでを含めるためです。除外判断: 相談開始前の合宿冒頭に関する雑談や、その後の別の練習選択の場面はテーマ外のため除外しました。\",\n      \"usedSpeechIds\": [\n        \"431-452\"\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

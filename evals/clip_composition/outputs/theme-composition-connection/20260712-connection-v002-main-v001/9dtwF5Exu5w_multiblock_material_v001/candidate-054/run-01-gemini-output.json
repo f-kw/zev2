@@ -1,0 +1,35 @@
+{
+  "selectedCuts": [
+    {
+      "sourceStartMs": 10776694,
+      "sourceEndMs": 10817172,
+      "reason": "開始根拠: テーマの対象である盗塁を指示すべきかリスナーに問いかけ始める発話から開始するためです。終了根拠: 走力や盗塁の能力値を確認し、盗塁をやめるべきか葛藤する一連のやり取りが収束する発話まで含めるためです。除外判断: 続く発話からは「犠牲フライ」や「スクイズ」といった別の戦術への相談に移るため、本テーマの対象外として除外しました。",
+      "usedSpeechIds": [
+        "1216-1236"
+      ]
+    }
+  ],
+  "runAt": "2026-07-12T21:58:56+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "manualRun": false,
+    "runner": "edge-cdp-text-prompt",
+    "connectionVersion": "connection-v002",
+    "generationSystem": "llm-v013@gemini-web-flash",
+    "upstreamGenerationSystem": "theme-llm-v002@gemini-web-flash",
+    "resultRole": "connected-composition-eval-connection-v002",
+    "conditionalOnUpstreamRangeHit": true,
+    "promptVersion": "clip_composition_prompt_v013",
+    "contextCondition": "theme-window-plus-minus-5m",
+    "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+    "candidateIndex": 54,
+    "runs": 3,
+    "runIndex": 1,
+    "inputPromptSha256": "286fa9fb4711d09f7c3269ef44e82794987612e4ad936fb4a23c480f05b66a47"
+  },
+  "promptFile": "outputs/theme-composition-connection/20260712-connection-v002-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-054/prompt.md",
+  "pageUrl": "https://gemini.google.com/app/bd41cba8ea322ddd?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"selectedCuts\": [\n    {\n      \"sourceStartMs\": 10776694,\n      \"sourceEndMs\": 10817172,\n      \"reason\": \"開始根拠: テーマの対象である盗塁を指示すべきかリスナーに問いかけ始める発話から開始するためです。終了根拠: 走力や盗塁の能力値を確認し、盗塁をやめるべきか葛藤する一連のやり取りが収束する発話まで含めるためです。除外判断: 続く発話からは「犠牲フライ」や「スクイズ」といった別の戦術への相談に移るため、本テーマの対象外として除外しました。\",\n      \"usedSpeechIds\": [\n        \"1216-1236\"\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

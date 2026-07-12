@@ -1,0 +1,35 @@
+{
+  "selectedCuts": [
+    {
+      "sourceStartMs": 6281687,
+      "sourceEndMs": 6359980,
+      "reason": "開始根拠: 初戦の対戦相手である「ザサミ商業」の名前を読み上げて試合が始まる発話から選択しました。終了根拠: 相手チームの選手能力を次々に確認し、「全員星300あるこれ」と驚愕するリアクションが収束する発話までを含めました。除外判断: 直後の発話からは特定の1年生選手や投手能力の詳細な分析に入り、ステータスの全体像に絶望するテーマの主旨から外れるため除外しました。",
+      "usedSpeechIds": [
+        "629-636"
+      ]
+    }
+  ],
+  "runAt": "2026-07-12T21:41:58+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "manualRun": false,
+    "runner": "edge-cdp-text-prompt",
+    "connectionVersion": "connection-v002",
+    "generationSystem": "llm-v013@gemini-web-flash",
+    "upstreamGenerationSystem": "theme-llm-v002@gemini-web-flash",
+    "resultRole": "connected-composition-eval-connection-v002",
+    "conditionalOnUpstreamRangeHit": true,
+    "promptVersion": "clip_composition_prompt_v013",
+    "contextCondition": "theme-window-plus-minus-5m",
+    "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+    "candidateIndex": 28,
+    "runs": 3,
+    "runIndex": 1,
+    "inputPromptSha256": "712ad59ef98a91490ed7bed5e451e98a2ce280e5baf7e854218a64edc114d3fb"
+  },
+  "promptFile": "outputs/theme-composition-connection/20260712-connection-v002-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-028/prompt.md",
+  "pageUrl": "https://gemini.google.com/app/36d95eeabae5df06?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"selectedCuts\": [\n    {\n      \"sourceStartMs\": 6281687,\n      \"sourceEndMs\": 6359980,\n      \"reason\": \"開始根拠: 初戦の対戦相手である「ザサミ商業」の名前を読み上げて試合が始まる発話から選択しました。終了根拠: 相手チームの選手能力を次々に確認し、「全員星300あるこれ」と驚愕するリアクションが収束する発話までを含めました。除外判断: 直後の発話からは特定の1年生選手や投手能力の詳細な分析に入り、ステータスの全体像に絶望するテーマの主旨から外れるため除外しました。\",\n      \"usedSpeechIds\": [\n        \"629-636\"\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

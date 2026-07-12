@@ -1,0 +1,35 @@
+{
+  "selectedCuts": [
+    {
+      "sourceStartMs": 3252153,
+      "sourceEndMs": 3342545,
+      "reason": "開始根拠: テーマの導入となる「イノシシやるか」という発言と、直後に被り物を取り出して「イノスケじゃん」と名前を出し始める発話の開始時刻に合わせるためです。終了根拠: 鬼滅の刃ごっこのノリで掛け合いをして、大爆笑（あははは）や「伊之助がいい？」というやり取りを経て、一連の笑いと反応が一旦落ち着く発話の終了時刻に合わせるためです。除外判断: それ以降の発話は、被り物の効果の確認や、焼けた肉を食べるゲーム進行の話題に切り替わっているため除外しました。",
+      "usedSpeechIds": [
+        "481-495"
+      ]
+    }
+  ],
+  "runAt": "2026-07-12T21:18:17+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "manualRun": false,
+    "runner": "edge-cdp-text-prompt",
+    "connectionVersion": "connection-v002",
+    "generationSystem": "llm-v013@gemini-web-flash",
+    "upstreamGenerationSystem": "theme-llm-v002@gemini-web-flash",
+    "resultRole": "connected-composition-eval-connection-v002",
+    "conditionalOnUpstreamRangeHit": true,
+    "promptVersion": "clip_composition_prompt_v013",
+    "contextCondition": "theme-window-plus-minus-5m",
+    "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+    "candidateIndex": 39,
+    "runs": 3,
+    "runIndex": 3,
+    "inputPromptSha256": "b7fb17fcdfd5a091f5d1f2e6a2aa504781a4f42c1216083cafe96f8c59ba5768"
+  },
+  "promptFile": "outputs/theme-composition-connection/20260712-connection-v002-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-039/prompt.md",
+  "pageUrl": "https://gemini.google.com/app/3248d31be1ae4ad5?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"selectedCuts\": [\n    {\n      \"sourceStartMs\": 3252153,\n      \"sourceEndMs\": 3342545,\n      \"reason\": \"開始根拠: テーマの導入となる「イノシシやるか」という発言と、直後に被り物を取り出して「イノスケじゃん」と名前を出し始める発話の開始時刻に合わせるためです。終了根拠: 鬼滅の刃ごっこのノリで掛け合いをして、大爆笑（あははは）や「伊之助がいい？」というやり取りを経て、一連の笑いと反応が一旦落ち着く発話の終了時刻に合わせるためです。除外判断: それ以降の発話は、被り物の効果の確認や、焼けた肉を食べるゲーム進行の話題に切り替わっているため除外しました。\",\n      \"usedSpeechIds\": [\n        \"481-495\"\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

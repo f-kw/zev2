@@ -1,0 +1,35 @@
+{
+  "selectedCuts": [
+    {
+      "sourceStartMs": 5162499,
+      "sourceEndMs": 5189318,
+      "reason": "開始根拠: テーマの中心である「ぴょんぴょんマンゴー」というワードから始まる発話（ID 770）を開始位置としました。終了根拠: くだらないことで大笑いされて気まずいと吐露し、その一連のやり取りのオチと余韻が収束する同発話の終端を終了位置としました。除外判断: 直後の発話（ID 771）からは夕焼けや朝日の景色に関する全く別の話題へ移行しているため除外しました。",
+      "usedSpeechIds": [
+        770
+      ]
+    }
+  ],
+  "runAt": "2026-07-12T21:29:24+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "manualRun": false,
+    "runner": "edge-cdp-text-prompt",
+    "connectionVersion": "connection-v002",
+    "generationSystem": "llm-v013@gemini-web-flash",
+    "upstreamGenerationSystem": "theme-llm-v002@gemini-web-flash",
+    "resultRole": "connected-composition-eval-connection-v002",
+    "conditionalOnUpstreamRangeHit": true,
+    "promptVersion": "clip_composition_prompt_v013",
+    "contextCondition": "theme-window-plus-minus-5m",
+    "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+    "candidateIndex": 52,
+    "runs": 3,
+    "runIndex": 1,
+    "inputPromptSha256": "53be9120716bae2fb00b3e659dc462f9a6917cedd4aba52960afe34d486e6ee1"
+  },
+  "promptFile": "outputs/theme-composition-connection/20260712-connection-v002-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-052/prompt.md",
+  "pageUrl": "https://gemini.google.com/app/53b94a3204acf0f9?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"selectedCuts\": [\n    {\n      \"sourceStartMs\": 5162499,\n      \"sourceEndMs\": 5189318,\n      \"reason\": \"開始根拠: テーマの中心である「ぴょんぴょんマンゴー」というワードから始まる発話（ID 770）を開始位置としました。終了根拠: くだらないことで大笑いされて気まずいと吐露し、その一連のやり取りのオチと余韻が収束する同発話の終端を終了位置としました。除外判断: 直後の発話（ID 771）からは夕焼けや朝日の景色に関する全く別の話題へ移行しているため除外しました。\",\n      \"usedSpeechIds\": [\n        770\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

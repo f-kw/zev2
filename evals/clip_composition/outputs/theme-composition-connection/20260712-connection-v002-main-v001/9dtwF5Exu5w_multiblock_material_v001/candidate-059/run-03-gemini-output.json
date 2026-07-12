@@ -1,0 +1,35 @@
+{
+  "selectedCuts": [
+    {
+      "sourceStartMs": 11674674,
+      "sourceEndMs": 11789446,
+      "reason": "開始根拠: 次の対戦相手が「Bかー」と判明して反応するフリの発話から開始するためです。終了根拠: 配信の告知とセーブ終了の締めくくりが完了して挨拶が収束する発話まで含めるためです。除外判断: 終了後のエンディング曲と思われる定型フレーズの発話は配信の本編ではないため除外しました。",
+      "usedSpeechIds": [
+        "1317-1322"
+      ]
+    }
+  ],
+  "runAt": "2026-07-12T22:00:12+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "manualRun": false,
+    "runner": "edge-cdp-text-prompt",
+    "connectionVersion": "connection-v002",
+    "generationSystem": "llm-v013@gemini-web-flash",
+    "upstreamGenerationSystem": "theme-llm-v002@gemini-web-flash",
+    "resultRole": "connected-composition-eval-connection-v002",
+    "conditionalOnUpstreamRangeHit": true,
+    "promptVersion": "clip_composition_prompt_v013",
+    "contextCondition": "theme-window-plus-minus-5m",
+    "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+    "candidateIndex": 59,
+    "runs": 3,
+    "runIndex": 3,
+    "inputPromptSha256": "8f60735abcb443835879ea33ce10d74c5dc8a8c12d1a02c61998fec0eb3e3dc4"
+  },
+  "promptFile": "outputs/theme-composition-connection/20260712-connection-v002-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-059/prompt.md",
+  "pageUrl": "https://gemini.google.com/app/aa6693c0aea4267e?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"selectedCuts\": [\n    {\n      \"sourceStartMs\": 11674674,\n      \"sourceEndMs\": 11789446,\n      \"reason\": \"開始根拠: 次の対戦相手が「Bかー」と判明して反応するフリの発話から開始するためです。終了根拠: 配信の告知とセーブ終了の締めくくりが完了して挨拶が収束する発話まで含めるためです。除外判断: 終了後のエンディング曲と思われる定型フレーズの発話は配信の本編ではないため除外しました。\",\n      \"usedSpeechIds\": [\n        \"1317-1322\"\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

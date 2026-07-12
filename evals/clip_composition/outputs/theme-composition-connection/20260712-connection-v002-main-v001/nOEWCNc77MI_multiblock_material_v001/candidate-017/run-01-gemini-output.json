@@ -1,0 +1,35 @@
+{
+  "selectedCuts": [
+    {
+      "sourceStartMs": 1021002,
+      "sourceEndMs": 1079852,
+      "reason": "開始根拠: イノシシを仕留める作戦として武器を準備し始める発話から始まるためです。終了根拠: イノシシが3匹いる危機的状況に遭遇し、1人30本ずつ矢を持つという慌てた作戦の結論が収束する発話まで含めるためです。除外判断: 1081354ms以降の「居た?」の連呼やその後の別行動（素材渡しや海中探索の相談）は、テーマである「焦る2人の掛け合い」のピークから外れるため除外しました。",
+      "usedSpeechIds": [
+        "120-127"
+      ]
+    }
+  ],
+  "runAt": "2026-07-12T21:10:03+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "manualRun": false,
+    "runner": "edge-cdp-text-prompt",
+    "connectionVersion": "connection-v002",
+    "generationSystem": "llm-v013@gemini-web-flash",
+    "upstreamGenerationSystem": "theme-llm-v002@gemini-web-flash",
+    "resultRole": "connected-composition-eval-connection-v002",
+    "conditionalOnUpstreamRangeHit": true,
+    "promptVersion": "clip_composition_prompt_v013",
+    "contextCondition": "theme-window-plus-minus-5m",
+    "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+    "candidateIndex": 17,
+    "runs": 3,
+    "runIndex": 1,
+    "inputPromptSha256": "5a4ecad9e50556d83f286d97d46a2b14b25cb0ed11ea7eedd3eb3de66bd52fd3"
+  },
+  "promptFile": "outputs/theme-composition-connection/20260712-connection-v002-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-017/prompt.md",
+  "pageUrl": "https://gemini.google.com/app/9e7af3db3f699f67?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"selectedCuts\": [\n    {\n      \"sourceStartMs\": 1021002,\n      \"sourceEndMs\": 1079852,\n      \"reason\": \"開始根拠: イノシシを仕留める作戦として武器を準備し始める発話から始まるためです。終了根拠: イノシシが3匹いる危機的状況に遭遇し、1人30本ずつ矢を持つという慌てた作戦の結論が収束する発話まで含めるためです。除外判断: 1081354ms以降の「居た?」の連呼やその後の別行動（素材渡しや海中探索の相談）は、テーマである「焦る2人の掛け合い」のピークから外れるため除外しました。\",\n      \"usedSpeechIds\": [\n        \"120-127\"\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

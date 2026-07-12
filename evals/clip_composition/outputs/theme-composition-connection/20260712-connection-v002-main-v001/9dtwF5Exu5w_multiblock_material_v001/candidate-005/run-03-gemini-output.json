@@ -1,0 +1,35 @@
+{
+  "selectedCuts": [
+    {
+      "sourceStartMs": 1113054,
+      "sourceEndMs": 1317150,
+      "reason": "開始根拠: フブキ（フブちゃん）に合わせたエフェクトや名前の方向性を決め、エフェクト選びを開始する発話から切り抜くためです。終了根拠: 複数のエフェクトを試し投げした後に、ショップでさらに変更できるかという疑問で一区切りつく発話まで含めるためです。除外判断: それ以降の発話（163以降）はショップでの別画面の操作や誰に覚えさせるかの育成方針の相談に移るため、エフェクト選びの試行錯誤というテーマから外れるため除外しました。",
+      "usedSpeechIds": [
+        "145-162"
+      ]
+    }
+  ],
+  "runAt": "2026-07-12T21:37:38+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "manualRun": false,
+    "runner": "edge-cdp-text-prompt",
+    "connectionVersion": "connection-v002",
+    "generationSystem": "llm-v013@gemini-web-flash",
+    "upstreamGenerationSystem": "theme-llm-v002@gemini-web-flash",
+    "resultRole": "connected-composition-eval-connection-v002",
+    "conditionalOnUpstreamRangeHit": true,
+    "promptVersion": "clip_composition_prompt_v013",
+    "contextCondition": "theme-window-plus-minus-5m",
+    "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+    "candidateIndex": 5,
+    "runs": 3,
+    "runIndex": 3,
+    "inputPromptSha256": "4caa846ee4c38210ce3e078b50452317ff94fc6d1a8a5b07b0559671d7319848"
+  },
+  "promptFile": "outputs/theme-composition-connection/20260712-connection-v002-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-005/prompt.md",
+  "pageUrl": "https://gemini.google.com/app/c27551cbbdccf1aa?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"selectedCuts\": [\n    {\n      \"sourceStartMs\": 1113054,\n      \"sourceEndMs\": 1317150,\n      \"reason\": \"開始根拠: フブキ（フブちゃん）に合わせたエフェクトや名前の方向性を決め、エフェクト選びを開始する発話から切り抜くためです。終了根拠: 複数のエフェクトを試し投げした後に、ショップでさらに変更できるかという疑問で一区切りつく発話まで含めるためです。除外判断: それ以降の発話（163以降）はショップでの別画面の操作や誰に覚えさせるかの育成方針の相談に移るため、エフェクト選びの試行錯誤というテーマから外れるため除外しました。\",\n      \"usedSpeechIds\": [\"145-162\"]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

@@ -1,0 +1,35 @@
+{
+  "selectedCuts": [
+    {
+      "sourceStartMs": 5162499,
+      "sourceEndMs": 5244903,
+      "reason": "開始根拠: テーマの中心である「ぴょんぴょんマンゴー」のフレーズが発話されるシーンの冒頭から開始するためです。終了根拠: くだらないことで大笑いされたマリンが「今日絡みづらい？」と気まずさを吐露するやり取りが収束する箇所まで含めるためです。除外判断: 直後の発話812以降は「伊之助」やゲームの生存状況、拠点建築に関する全く別の話題に転換しているため除外します。",
+      "usedSpeechIds": [
+        "770-781"
+      ]
+    }
+  ],
+  "runAt": "2026-07-12T21:34:17+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "manualRun": false,
+    "runner": "edge-cdp-text-prompt",
+    "connectionVersion": "connection-v002",
+    "generationSystem": "llm-v013@gemini-web-flash",
+    "upstreamGenerationSystem": "theme-llm-v002@gemini-web-flash",
+    "resultRole": "connected-composition-eval-connection-v002",
+    "conditionalOnUpstreamRangeHit": true,
+    "promptVersion": "clip_composition_prompt_v013",
+    "contextCondition": "theme-window-plus-minus-5m",
+    "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+    "candidateIndex": 52,
+    "runs": 3,
+    "runIndex": 3,
+    "inputPromptSha256": "53be9120716bae2fb00b3e659dc462f9a6917cedd4aba52960afe34d486e6ee1"
+  },
+  "promptFile": "outputs/theme-composition-connection/20260712-connection-v002-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-052/prompt.md",
+  "pageUrl": "https://gemini.google.com/app/adb9d0a9ca09fa97?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"selectedCuts\": [\n    {\n      \"sourceStartMs\": 5162499,\n      \"sourceEndMs\": 5244903,\n      \"reason\": \"開始根拠: テーマの中心である「ぴょんぴょんマンゴー」のフレーズが発話されるシーンの冒頭から開始するためです。終了根拠: くだらないことで大笑いされたマリンが「今日絡みづらい？」と気まずさを吐露するやり取りが収束する箇所まで含めるためです。除外判断: 直後の発話812以降は「伊之助」やゲームの生存状況、拠点建築に関する全く別の話題に転換しているため除外します。\",\n      \"usedSpeechIds\": [\n        \"770-781\"\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}
