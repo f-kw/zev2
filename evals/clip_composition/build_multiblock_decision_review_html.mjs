@@ -95,6 +95,9 @@ function boundaryForm(boundary) {
   <section class="decision-answer" data-boundary-answer="${id}">
     <h3>確認${id}の答え</h3>
     <p>上の2本、下の2本を見て答えてください。迷ったら「わからない」で大丈夫です。</p>
+    <div class="decision-actions compact-actions">
+      <button type="button" class="all-yes" data-boundary-all-yes="${id}">4項目すべて「はい」</button>
+    </div>
     <div class="decision-grid">
       <label>1. 上の左：ここで途中を飛ばし、別の時刻へジャンプしたように見えますか？
         <select data-boundary-field="clipSwitch">
@@ -236,7 +239,9 @@ function styles() {
     .answer-state.rejected { color: var(--bad); background: var(--bad-soft); }
     .decision-final { margin-top: 32px; }
     .decision-actions { display: flex; flex-wrap: wrap; gap: 10px; margin: 16px 0; }
+    .compact-actions { margin: 10px 0 14px; }
     button { border: 0; border-radius: 9px; padding: 10px 15px; color: white; background: var(--blue); font: inherit; font-weight: 750; cursor: pointer; }
+    button.all-yes { background: #15803d; }
     button.secondary, #clear-saved { color: #334155; background: #e2e8f0; }
     button:hover { filter: brightness(.96); }
     .block-table-wrap { overflow-x: auto; }
@@ -357,6 +362,17 @@ function script(template) {
 
       function blockControl(index, field) {
         return document.querySelector('[data-block-row="' + index + '"] [data-block-field="' + field + '"]');
+      }
+
+      function setAllBoundaryYes(index) {
+        const section = boundarySection(index);
+        if (!section) return;
+        for (const field of boundaryFields) {
+          const control = section.querySelector('[data-boundary-field="' + field + '"]');
+          if (control) control.value = 'true';
+        }
+        saveState();
+        updateProgress();
       }
 
       function deriveBlocks() {
@@ -583,6 +599,9 @@ function script(template) {
         }
       });
       document.getElementById('derive-blocks').addEventListener('click', deriveBlocks);
+      document.querySelectorAll('[data-boundary-all-yes]').forEach((button) => {
+        button.addEventListener('click', () => setAllBoundaryYes(Number(button.dataset.boundaryAllYes)));
+      });
       document.getElementById('build-decision').addEventListener('click', buildDecision);
       document.getElementById('copy-summary').addEventListener('click', copySummary);
       document.getElementById('copy-decision').addEventListener('click', copyDecision);
@@ -618,9 +637,9 @@ async function main() {
   html = html.replace('</style>', `${styles()}\n  </style>`);
   html = html.replace(/(<h1>[^<]+<\/h1>)/, `$1\n${topPanel(template)}`);
   for (const boundary of template.boundaries) {
-    const headingPattern = new RegExp(`(<h2>境界${boundary.boundaryIndex}:.*?<\\/h2>)`);
-    assert(headingPattern.test(html), `境界${boundary.boundaryIndex}見出しがありません`);
-    html = html.replace(headingPattern, `$1\n${boundaryForm(boundary)}`);
+    const articlePattern = new RegExp(`(<article>\\s*<h2>境界${boundary.boundaryIndex}:.*?<\\/h2>[\\s\\S]*?)(<\\/article>)`);
+    assert(articlePattern.test(html), `境界${boundary.boundaryIndex}の記事がありません`);
+    html = html.replace(articlePattern, (_match, article, closeTag) => `${article}\n${boundaryForm(boundary)}\n${closeTag}`);
   }
   html = html.replace(/<h2>境界(\d+): block (\d+) -> (\d+)<\/h2>/g, '<h2>確認$1：候補$2の後から候補$3へ時間がジャンプする所</h2>');
   html = html.replaceAll('<h3>最初に見る動画</h3>', '<h3>上の2本</h3>');

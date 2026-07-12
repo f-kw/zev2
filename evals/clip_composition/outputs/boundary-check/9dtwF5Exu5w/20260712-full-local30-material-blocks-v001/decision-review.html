@@ -51,7 +51,9 @@
     .answer-state.rejected { color: var(--bad); background: var(--bad-soft); }
     .decision-final { margin-top: 32px; }
     .decision-actions { display: flex; flex-wrap: wrap; gap: 10px; margin: 16px 0; }
+    .compact-actions { margin: 10px 0 14px; }
     button { border: 0; border-radius: 9px; padding: 10px 15px; color: white; background: var(--blue); font: inherit; font-weight: 750; cursor: pointer; }
+    button.all-yes { background: #15803d; }
     button.secondary, #clear-saved { color: #334155; background: #e2e8f0; }
     button:hover { filter: brightness(.96); }
     .block-table-wrap { overflow-x: auto; }
@@ -135,49 +137,6 @@
   </table>
   <article>
   <h2>確認1：候補1の後から候補2へ時間がジャンプする所</h2>
-
-  <section class="decision-answer" data-boundary-answer="1">
-    <h3>確認1の答え</h3>
-    <p>上の2本、下の2本を見て答えてください。迷ったら「わからない」で大丈夫です。</p>
-    <div class="decision-grid">
-      <label>1. 上の左：ここで途中を飛ばし、別の時刻へジャンプしたように見えますか？
-        <select data-boundary-field="clipSwitch">
-          <option value="">未回答</option>
-          <option value="true">はい、時間がジャンプした</option>
-          <option value="false">いいえ、元配信の時間どおり続いている</option>
-          <option value="unresolved">わからない</option>
-        </select>
-      </label>
-      <label>2. 上の右：前半と後半は、元配信の別の所ですか？
-        <select data-boundary-field="sourcePositionSwitches">
-          <option value="">未回答</option>
-          <option value="true">はい、別の所</option>
-          <option value="false">いいえ、同じ所の続き</option>
-          <option value="unresolved">わからない</option>
-        </select>
-      </label>
-      <label>3. 下の左：左右は同じ会話・場面ですか？
-        <select data-boundary-field="beforeMatches">
-          <option value="">未回答</option>
-          <option value="true">はい、同じ</option>
-          <option value="false">いいえ、違う</option>
-          <option value="unresolved">わからない</option>
-        </select>
-      </label>
-      <label>4. 下の右：左右は同じ会話・場面ですか？
-        <select data-boundary-field="afterMatches">
-          <option value="">未回答</option>
-          <option value="true">はい、同じ</option>
-          <option value="false">いいえ、違う</option>
-          <option value="unresolved">わからない</option>
-        </select>
-      </label>
-    </div>
-    <label>気づいたこと（なければ空欄）
-      <textarea data-boundary-field="note" placeholder="例：音は同じだが画面だけ切り替わる。途中で少し重なっている。"></textarea>
-    </label>
-    <p class="answer-state" data-boundary-state="1">未回答</p>
-  </section>
   <table>
     <tr><th>clip</th><td>0:04.135 -> 0:12.036</td><td>+7901ms</td></tr>
     <tr><th>source</th><td>4:42.642 -> 5:00.714</td><td>+18072ms</td></tr>
@@ -243,13 +202,14 @@
 <figure><img src="stills/boundary_01/source_after/source_after_plus500ms.jpg" alt="source_after plus500ms"><figcaption>source後素材開始<br>plus500ms<br>5:01.214</figcaption></figure>
 <figure><img src="stills/boundary_01/source_after/source_after_plus1000ms.jpg" alt="source_after plus1000ms"><figcaption>source後素材開始<br>plus1000ms<br>5:01.714</figcaption></figure></div>
 </section>
-</article>
-<article>
-  <h2>確認2：候補2の後から候補3へ時間がジャンプする所</h2>
 
-  <section class="decision-answer" data-boundary-answer="2">
-    <h3>確認2の答え</h3>
+
+  <section class="decision-answer" data-boundary-answer="1">
+    <h3>確認1の答え</h3>
     <p>上の2本、下の2本を見て答えてください。迷ったら「わからない」で大丈夫です。</p>
+    <div class="decision-actions compact-actions">
+      <button type="button" class="all-yes" data-boundary-all-yes="1">4項目すべて「はい」</button>
+    </div>
     <div class="decision-grid">
       <label>1. 上の左：ここで途中を飛ばし、別の時刻へジャンプしたように見えますか？
         <select data-boundary-field="clipSwitch">
@@ -287,8 +247,11 @@
     <label>気づいたこと（なければ空欄）
       <textarea data-boundary-field="note" placeholder="例：音は同じだが画面だけ切り替わる。途中で少し重なっている。"></textarea>
     </label>
-    <p class="answer-state" data-boundary-state="2">未回答</p>
+    <p class="answer-state" data-boundary-state="1">未回答</p>
   </section>
+</article>
+<article>
+  <h2>確認2：候補2の後から候補3へ時間がジャンプする所</h2>
   <table>
     <tr><th>clip</th><td>0:13.276 -> 0:17.557</td><td>+4281ms</td></tr>
     <tr><th>source</th><td>5:01.675 -> 5:38.755</td><td>+37080ms</td></tr>
@@ -354,13 +317,14 @@
 <figure><img src="stills/boundary_02/source_after/source_after_plus500ms.jpg" alt="source_after plus500ms"><figcaption>source後素材開始<br>plus500ms<br>5:39.255</figcaption></figure>
 <figure><img src="stills/boundary_02/source_after/source_after_plus1000ms.jpg" alt="source_after plus1000ms"><figcaption>source後素材開始<br>plus1000ms<br>5:39.755</figcaption></figure></div>
 </section>
-</article>
-<article>
-  <h2>確認3：候補3の後から候補4へ時間がジャンプする所</h2>
 
-  <section class="decision-answer" data-boundary-answer="3">
-    <h3>確認3の答え</h3>
+
+  <section class="decision-answer" data-boundary-answer="2">
+    <h3>確認2の答え</h3>
     <p>上の2本、下の2本を見て答えてください。迷ったら「わからない」で大丈夫です。</p>
+    <div class="decision-actions compact-actions">
+      <button type="button" class="all-yes" data-boundary-all-yes="2">4項目すべて「はい」</button>
+    </div>
     <div class="decision-grid">
       <label>1. 上の左：ここで途中を飛ばし、別の時刻へジャンプしたように見えますか？
         <select data-boundary-field="clipSwitch">
@@ -398,8 +362,11 @@
     <label>気づいたこと（なければ空欄）
       <textarea data-boundary-field="note" placeholder="例：音は同じだが画面だけ切り替わる。途中で少し重なっている。"></textarea>
     </label>
-    <p class="answer-state" data-boundary-state="3">未回答</p>
+    <p class="answer-state" data-boundary-state="2">未回答</p>
   </section>
+</article>
+<article>
+  <h2>確認3：候補3の後から候補4へ時間がジャンプする所</h2>
   <table>
     <tr><th>clip</th><td>0:20.297 -> 0:28.719</td><td>+8422ms</td></tr>
     <tr><th>source</th><td>5:41.516 -> 7:21.877</td><td>+100361ms</td></tr>
@@ -465,13 +432,14 @@
 <figure><img src="stills/boundary_03/source_after/source_after_plus500ms.jpg" alt="source_after plus500ms"><figcaption>source後素材開始<br>plus500ms<br>7:22.377</figcaption></figure>
 <figure><img src="stills/boundary_03/source_after/source_after_plus1000ms.jpg" alt="source_after plus1000ms"><figcaption>source後素材開始<br>plus1000ms<br>7:22.877</figcaption></figure></div>
 </section>
-</article>
-<article>
-  <h2>確認4：候補4の後から候補5へ時間がジャンプする所</h2>
 
-  <section class="decision-answer" data-boundary-answer="4">
-    <h3>確認4の答え</h3>
+
+  <section class="decision-answer" data-boundary-answer="3">
+    <h3>確認3の答え</h3>
     <p>上の2本、下の2本を見て答えてください。迷ったら「わからない」で大丈夫です。</p>
+    <div class="decision-actions compact-actions">
+      <button type="button" class="all-yes" data-boundary-all-yes="3">4項目すべて「はい」</button>
+    </div>
     <div class="decision-grid">
       <label>1. 上の左：ここで途中を飛ばし、別の時刻へジャンプしたように見えますか？
         <select data-boundary-field="clipSwitch">
@@ -509,8 +477,11 @@
     <label>気づいたこと（なければ空欄）
       <textarea data-boundary-field="note" placeholder="例：音は同じだが画面だけ切り替わる。途中で少し重なっている。"></textarea>
     </label>
-    <p class="answer-state" data-boundary-state="4">未回答</p>
+    <p class="answer-state" data-boundary-state="3">未回答</p>
   </section>
+</article>
+<article>
+  <h2>確認4：候補4の後から候補5へ時間がジャンプする所</h2>
   <table>
     <tr><th>clip</th><td>0:33.887 -> 0:44.572</td><td>+10685ms</td></tr>
     <tr><th>source</th><td>7:27.039 -> 8:22.720</td><td>+55681ms</td></tr>
@@ -576,13 +547,14 @@
 <figure><img src="stills/boundary_04/source_after/source_after_plus500ms.jpg" alt="source_after plus500ms"><figcaption>source後素材開始<br>plus500ms<br>8:23.220</figcaption></figure>
 <figure><img src="stills/boundary_04/source_after/source_after_plus1000ms.jpg" alt="source_after plus1000ms"><figcaption>source後素材開始<br>plus1000ms<br>8:23.720</figcaption></figure></div>
 </section>
-</article>
-<article>
-  <h2>確認5：候補5の後から候補6へ時間がジャンプする所</h2>
 
-  <section class="decision-answer" data-boundary-answer="5">
-    <h3>確認5の答え</h3>
+
+  <section class="decision-answer" data-boundary-answer="4">
+    <h3>確認4の答え</h3>
     <p>上の2本、下の2本を見て答えてください。迷ったら「わからない」で大丈夫です。</p>
+    <div class="decision-actions compact-actions">
+      <button type="button" class="all-yes" data-boundary-all-yes="4">4項目すべて「はい」</button>
+    </div>
     <div class="decision-grid">
       <label>1. 上の左：ここで途中を飛ばし、別の時刻へジャンプしたように見えますか？
         <select data-boundary-field="clipSwitch">
@@ -620,8 +592,11 @@
     <label>気づいたこと（なければ空欄）
       <textarea data-boundary-field="note" placeholder="例：音は同じだが画面だけ切り替わる。途中で少し重なっている。"></textarea>
     </label>
-    <p class="answer-state" data-boundary-state="5">未回答</p>
+    <p class="answer-state" data-boundary-state="4">未回答</p>
   </section>
+</article>
+<article>
+  <h2>確認5：候補5の後から候補6へ時間がジャンプする所</h2>
   <table>
     <tr><th>clip</th><td>0:59.078 -> 1:23.838</td><td>+24760ms</td></tr>
     <tr><th>source</th><td>8:37.104 -> 20:50.139</td><td>+733035ms</td></tr>
@@ -687,13 +662,14 @@
 <figure><img src="stills/boundary_05/source_after/source_after_plus500ms.jpg" alt="source_after plus500ms"><figcaption>source後素材開始<br>plus500ms<br>20:50.639</figcaption></figure>
 <figure><img src="stills/boundary_05/source_after/source_after_plus1000ms.jpg" alt="source_after plus1000ms"><figcaption>source後素材開始<br>plus1000ms<br>20:51.139</figcaption></figure></div>
 </section>
-</article>
-<article>
-  <h2>確認6：候補6の後から候補7へ時間がジャンプする所</h2>
 
-  <section class="decision-answer" data-boundary-answer="6">
-    <h3>確認6の答え</h3>
+
+  <section class="decision-answer" data-boundary-answer="5">
+    <h3>確認5の答え</h3>
     <p>上の2本、下の2本を見て答えてください。迷ったら「わからない」で大丈夫です。</p>
+    <div class="decision-actions compact-actions">
+      <button type="button" class="all-yes" data-boundary-all-yes="5">4項目すべて「はい」</button>
+    </div>
     <div class="decision-grid">
       <label>1. 上の左：ここで途中を飛ばし、別の時刻へジャンプしたように見えますか？
         <select data-boundary-field="clipSwitch">
@@ -731,8 +707,11 @@
     <label>気づいたこと（なければ空欄）
       <textarea data-boundary-field="note" placeholder="例：音は同じだが画面だけ切り替わる。途中で少し重なっている。"></textarea>
     </label>
-    <p class="answer-state" data-boundary-state="6">未回答</p>
+    <p class="answer-state" data-boundary-state="5">未回答</p>
   </section>
+</article>
+<article>
+  <h2>確認6：候補6の後から候補7へ時間がジャンプする所</h2>
   <table>
     <tr><th>clip</th><td>1:27.285 -> 1:43.872</td><td>+16587ms</td></tr>
     <tr><th>source</th><td>20:54.342 -> 33:33.635</td><td>+759293ms</td></tr>
@@ -798,13 +777,14 @@
 <figure><img src="stills/boundary_06/source_after/source_after_plus500ms.jpg" alt="source_after plus500ms"><figcaption>source後素材開始<br>plus500ms<br>33:34.135</figcaption></figure>
 <figure><img src="stills/boundary_06/source_after/source_after_plus1000ms.jpg" alt="source_after plus1000ms"><figcaption>source後素材開始<br>plus1000ms<br>33:34.635</figcaption></figure></div>
 </section>
-</article>
-<article>
-  <h2>確認7：候補7の後から候補8へ時間がジャンプする所</h2>
 
-  <section class="decision-answer" data-boundary-answer="7">
-    <h3>確認7の答え</h3>
+
+  <section class="decision-answer" data-boundary-answer="6">
+    <h3>確認6の答え</h3>
     <p>上の2本、下の2本を見て答えてください。迷ったら「わからない」で大丈夫です。</p>
+    <div class="decision-actions compact-actions">
+      <button type="button" class="all-yes" data-boundary-all-yes="6">4項目すべて「はい」</button>
+    </div>
     <div class="decision-grid">
       <label>1. 上の左：ここで途中を飛ばし、別の時刻へジャンプしたように見えますか？
         <select data-boundary-field="clipSwitch">
@@ -842,8 +822,11 @@
     <label>気づいたこと（なければ空欄）
       <textarea data-boundary-field="note" placeholder="例：音は同じだが画面だけ切り替わる。途中で少し重なっている。"></textarea>
     </label>
-    <p class="answer-state" data-boundary-state="7">未回答</p>
+    <p class="answer-state" data-boundary-state="6">未回答</p>
   </section>
+</article>
+<article>
+  <h2>確認7：候補7の後から候補8へ時間がジャンプする所</h2>
   <table>
     <tr><th>clip</th><td>1:47.413 -> 1:50.255</td><td>+2842ms</td></tr>
     <tr><th>source</th><td>33:37.195 -> 34:59.120</td><td>+81925ms</td></tr>
@@ -909,13 +892,14 @@
 <figure><img src="stills/boundary_07/source_after/source_after_plus500ms.jpg" alt="source_after plus500ms"><figcaption>source後素材開始<br>plus500ms<br>34:59.620</figcaption></figure>
 <figure><img src="stills/boundary_07/source_after/source_after_plus1000ms.jpg" alt="source_after plus1000ms"><figcaption>source後素材開始<br>plus1000ms<br>35:00.120</figcaption></figure></div>
 </section>
-</article>
-<article>
-  <h2>確認8：候補8の後から候補9へ時間がジャンプする所</h2>
 
-  <section class="decision-answer" data-boundary-answer="8">
-    <h3>確認8の答え</h3>
+
+  <section class="decision-answer" data-boundary-answer="7">
+    <h3>確認7の答え</h3>
     <p>上の2本、下の2本を見て答えてください。迷ったら「わからない」で大丈夫です。</p>
+    <div class="decision-actions compact-actions">
+      <button type="button" class="all-yes" data-boundary-all-yes="7">4項目すべて「はい」</button>
+    </div>
     <div class="decision-grid">
       <label>1. 上の左：ここで途中を飛ばし、別の時刻へジャンプしたように見えますか？
         <select data-boundary-field="clipSwitch">
@@ -953,8 +937,11 @@
     <label>気づいたこと（なければ空欄）
       <textarea data-boundary-field="note" placeholder="例：音は同じだが画面だけ切り替わる。途中で少し重なっている。"></textarea>
     </label>
-    <p class="answer-state" data-boundary-state="8">未回答</p>
+    <p class="answer-state" data-boundary-state="7">未回答</p>
   </section>
+</article>
+<article>
+  <h2>確認8：候補8の後から候補9へ時間がジャンプする所</h2>
   <table>
     <tr><th>clip</th><td>1:59.560 -> 2:27.079</td><td>+27519ms</td></tr>
     <tr><th>source</th><td>35:07.080 -> 61:30.566</td><td>+1583486ms</td></tr>
@@ -1020,13 +1007,14 @@
 <figure><img src="stills/boundary_08/source_after/source_after_plus500ms.jpg" alt="source_after plus500ms"><figcaption>source後素材開始<br>plus500ms<br>61:31.066</figcaption></figure>
 <figure><img src="stills/boundary_08/source_after/source_after_plus1000ms.jpg" alt="source_after plus1000ms"><figcaption>source後素材開始<br>plus1000ms<br>61:31.566</figcaption></figure></div>
 </section>
-</article>
-<article>
-  <h2>確認9：候補9の後から候補10へ時間がジャンプする所</h2>
 
-  <section class="decision-answer" data-boundary-answer="9">
-    <h3>確認9の答え</h3>
+
+  <section class="decision-answer" data-boundary-answer="8">
+    <h3>確認8の答え</h3>
     <p>上の2本、下の2本を見て答えてください。迷ったら「わからない」で大丈夫です。</p>
+    <div class="decision-actions compact-actions">
+      <button type="button" class="all-yes" data-boundary-all-yes="8">4項目すべて「はい」</button>
+    </div>
     <div class="decision-grid">
       <label>1. 上の左：ここで途中を飛ばし、別の時刻へジャンプしたように見えますか？
         <select data-boundary-field="clipSwitch">
@@ -1064,8 +1052,11 @@
     <label>気づいたこと（なければ空欄）
       <textarea data-boundary-field="note" placeholder="例：音は同じだが画面だけ切り替わる。途中で少し重なっている。"></textarea>
     </label>
-    <p class="answer-state" data-boundary-state="9">未回答</p>
+    <p class="answer-state" data-boundary-state="8">未回答</p>
   </section>
+</article>
+<article>
+  <h2>確認9：候補9の後から候補10へ時間がジャンプする所</h2>
   <table>
     <tr><th>clip</th><td>2:34.084 -> 2:42.489</td><td>+8405ms</td></tr>
     <tr><th>source</th><td>61:37.689 -> 62:21.344</td><td>+43655ms</td></tr>
@@ -1131,13 +1122,14 @@
 <figure><img src="stills/boundary_09/source_after/source_after_plus500ms.jpg" alt="source_after plus500ms"><figcaption>source後素材開始<br>plus500ms<br>62:21.844</figcaption></figure>
 <figure><img src="stills/boundary_09/source_after/source_after_plus1000ms.jpg" alt="source_after plus1000ms"><figcaption>source後素材開始<br>plus1000ms<br>62:22.344</figcaption></figure></div>
 </section>
-</article>
-<article>
-  <h2>確認10：候補10の後から候補11へ時間がジャンプする所</h2>
 
-  <section class="decision-answer" data-boundary-answer="10">
-    <h3>確認10の答え</h3>
+
+  <section class="decision-answer" data-boundary-answer="9">
+    <h3>確認9の答え</h3>
     <p>上の2本、下の2本を見て答えてください。迷ったら「わからない」で大丈夫です。</p>
+    <div class="decision-actions compact-actions">
+      <button type="button" class="all-yes" data-boundary-all-yes="9">4項目すべて「はい」</button>
+    </div>
     <div class="decision-grid">
       <label>1. 上の左：ここで途中を飛ばし、別の時刻へジャンプしたように見えますか？
         <select data-boundary-field="clipSwitch">
@@ -1175,8 +1167,11 @@
     <label>気づいたこと（なければ空欄）
       <textarea data-boundary-field="note" placeholder="例：音は同じだが画面だけ切り替わる。途中で少し重なっている。"></textarea>
     </label>
-    <p class="answer-state" data-boundary-state="10">未回答</p>
+    <p class="answer-state" data-boundary-state="9">未回答</p>
   </section>
+</article>
+<article>
+  <h2>確認10：候補10の後から候補11へ時間がジャンプする所</h2>
   <table>
     <tr><th>clip</th><td>2:59.660 -> 3:03.688</td><td>+4028ms</td></tr>
     <tr><th>source</th><td>62:38.425 -> 70:07.639</td><td>+449214ms</td></tr>
@@ -1242,13 +1237,14 @@
 <figure><img src="stills/boundary_10/source_after/source_after_plus500ms.jpg" alt="source_after plus500ms"><figcaption>source後素材開始<br>plus500ms<br>70:08.139</figcaption></figure>
 <figure><img src="stills/boundary_10/source_after/source_after_plus1000ms.jpg" alt="source_after plus1000ms"><figcaption>source後素材開始<br>plus1000ms<br>70:08.639</figcaption></figure></div>
 </section>
-</article>
-<article>
-  <h2>確認11：候補11の後から候補12へ時間がジャンプする所</h2>
 
-  <section class="decision-answer" data-boundary-answer="11">
-    <h3>確認11の答え</h3>
+
+  <section class="decision-answer" data-boundary-answer="10">
+    <h3>確認10の答え</h3>
     <p>上の2本、下の2本を見て答えてください。迷ったら「わからない」で大丈夫です。</p>
+    <div class="decision-actions compact-actions">
+      <button type="button" class="all-yes" data-boundary-all-yes="10">4項目すべて「はい」</button>
+    </div>
     <div class="decision-grid">
       <label>1. 上の左：ここで途中を飛ばし、別の時刻へジャンプしたように見えますか？
         <select data-boundary-field="clipSwitch">
@@ -1286,8 +1282,11 @@
     <label>気づいたこと（なければ空欄）
       <textarea data-boundary-field="note" placeholder="例：音は同じだが画面だけ切り替わる。途中で少し重なっている。"></textarea>
     </label>
-    <p class="answer-state" data-boundary-state="11">未回答</p>
+    <p class="answer-state" data-boundary-state="10">未回答</p>
   </section>
+</article>
+<article>
+  <h2>確認11：候補11の後から候補12へ時間がジャンプする所</h2>
   <table>
     <tr><th>clip</th><td>3:06.709 -> 3:08.310</td><td>+1601ms</td></tr>
     <tr><th>source</th><td>70:10.641 -> 70:32.807</td><td>+22166ms</td></tr>
@@ -1353,13 +1352,14 @@
 <figure><img src="stills/boundary_11/source_after/source_after_plus500ms.jpg" alt="source_after plus500ms"><figcaption>source後素材開始<br>plus500ms<br>70:33.307</figcaption></figure>
 <figure><img src="stills/boundary_11/source_after/source_after_plus1000ms.jpg" alt="source_after plus1000ms"><figcaption>source後素材開始<br>plus1000ms<br>70:33.807</figcaption></figure></div>
 </section>
-</article>
-<article>
-  <h2>確認12：候補12の後から候補13へ時間がジャンプする所</h2>
 
-  <section class="decision-answer" data-boundary-answer="12">
-    <h3>確認12の答え</h3>
+
+  <section class="decision-answer" data-boundary-answer="11">
+    <h3>確認11の答え</h3>
     <p>上の2本、下の2本を見て答えてください。迷ったら「わからない」で大丈夫です。</p>
+    <div class="decision-actions compact-actions">
+      <button type="button" class="all-yes" data-boundary-all-yes="11">4項目すべて「はい」</button>
+    </div>
     <div class="decision-grid">
       <label>1. 上の左：ここで途中を飛ばし、別の時刻へジャンプしたように見えますか？
         <select data-boundary-field="clipSwitch">
@@ -1397,8 +1397,11 @@
     <label>気づいたこと（なければ空欄）
       <textarea data-boundary-field="note" placeholder="例：音は同じだが画面だけ切り替わる。途中で少し重なっている。"></textarea>
     </label>
-    <p class="answer-state" data-boundary-state="12">未回答</p>
+    <p class="answer-state" data-boundary-state="11">未回答</p>
   </section>
+</article>
+<article>
+  <h2>確認12：候補12の後から候補13へ時間がジャンプする所</h2>
   <table>
     <tr><th>clip</th><td>3:14.913 -> 3:21.636</td><td>+6723ms</td></tr>
     <tr><th>source</th><td>70:39.410 -> 71:13.428</td><td>+34018ms</td></tr>
@@ -1464,13 +1467,14 @@
 <figure><img src="stills/boundary_12/source_after/source_after_plus500ms.jpg" alt="source_after plus500ms"><figcaption>source後素材開始<br>plus500ms<br>71:13.928</figcaption></figure>
 <figure><img src="stills/boundary_12/source_after/source_after_plus1000ms.jpg" alt="source_after plus1000ms"><figcaption>source後素材開始<br>plus1000ms<br>71:14.428</figcaption></figure></div>
 </section>
-</article>
-<article>
-  <h2>確認13：候補13の後から候補14へ時間がジャンプする所</h2>
 
-  <section class="decision-answer" data-boundary-answer="13">
-    <h3>確認13の答え</h3>
+
+  <section class="decision-answer" data-boundary-answer="12">
+    <h3>確認12の答え</h3>
     <p>上の2本、下の2本を見て答えてください。迷ったら「わからない」で大丈夫です。</p>
+    <div class="decision-actions compact-actions">
+      <button type="button" class="all-yes" data-boundary-all-yes="12">4項目すべて「はい」</button>
+    </div>
     <div class="decision-grid">
       <label>1. 上の左：ここで途中を飛ばし、別の時刻へジャンプしたように見えますか？
         <select data-boundary-field="clipSwitch">
@@ -1508,8 +1512,11 @@
     <label>気づいたこと（なければ空欄）
       <textarea data-boundary-field="note" placeholder="例：音は同じだが画面だけ切り替わる。途中で少し重なっている。"></textarea>
     </label>
-    <p class="answer-state" data-boundary-state="13">未回答</p>
+    <p class="answer-state" data-boundary-state="12">未回答</p>
   </section>
+</article>
+<article>
+  <h2>確認13：候補13の後から候補14へ時間がジャンプする所</h2>
   <table>
     <tr><th>clip</th><td>3:27.679 -> 3:37.524</td><td>+9845ms</td></tr>
     <tr><th>source</th><td>71:19.472 -> 72:47.214</td><td>+87742ms</td></tr>
@@ -1575,13 +1582,14 @@
 <figure><img src="stills/boundary_13/source_after/source_after_plus500ms.jpg" alt="source_after plus500ms"><figcaption>source後素材開始<br>plus500ms<br>72:47.714</figcaption></figure>
 <figure><img src="stills/boundary_13/source_after/source_after_plus1000ms.jpg" alt="source_after plus1000ms"><figcaption>source後素材開始<br>plus1000ms<br>72:48.214</figcaption></figure></div>
 </section>
-</article>
-<article>
-  <h2>確認14：候補14の後から候補15へ時間がジャンプする所</h2>
 
-  <section class="decision-answer" data-boundary-answer="14">
-    <h3>確認14の答え</h3>
+
+  <section class="decision-answer" data-boundary-answer="13">
+    <h3>確認13の答え</h3>
     <p>上の2本、下の2本を見て答えてください。迷ったら「わからない」で大丈夫です。</p>
+    <div class="decision-actions compact-actions">
+      <button type="button" class="all-yes" data-boundary-all-yes="13">4項目すべて「はい」</button>
+    </div>
     <div class="decision-grid">
       <label>1. 上の左：ここで途中を飛ばし、別の時刻へジャンプしたように見えますか？
         <select data-boundary-field="clipSwitch">
@@ -1619,8 +1627,11 @@
     <label>気づいたこと（なければ空欄）
       <textarea data-boundary-field="note" placeholder="例：音は同じだが画面だけ切り替わる。途中で少し重なっている。"></textarea>
     </label>
-    <p class="answer-state" data-boundary-state="14">未回答</p>
+    <p class="answer-state" data-boundary-state="13">未回答</p>
   </section>
+</article>
+<article>
+  <h2>確認14：候補14の後から候補15へ時間がジャンプする所</h2>
   <table>
     <tr><th>clip</th><td>3:39.445 -> 4:04.758</td><td>+25313ms</td></tr>
     <tr><th>source</th><td>72:49.035 -> 78:43.988</td><td>+354953ms</td></tr>
@@ -1686,13 +1697,14 @@
 <figure><img src="stills/boundary_14/source_after/source_after_plus500ms.jpg" alt="source_after plus500ms"><figcaption>source後素材開始<br>plus500ms<br>78:44.488</figcaption></figure>
 <figure><img src="stills/boundary_14/source_after/source_after_plus1000ms.jpg" alt="source_after plus1000ms"><figcaption>source後素材開始<br>plus1000ms<br>78:44.988</figcaption></figure></div>
 </section>
-</article>
-<article>
-  <h2>確認15：候補15の後から候補16へ時間がジャンプする所</h2>
 
-  <section class="decision-answer" data-boundary-answer="15">
-    <h3>確認15の答え</h3>
+
+  <section class="decision-answer" data-boundary-answer="14">
+    <h3>確認14の答え</h3>
     <p>上の2本、下の2本を見て答えてください。迷ったら「わからない」で大丈夫です。</p>
+    <div class="decision-actions compact-actions">
+      <button type="button" class="all-yes" data-boundary-all-yes="14">4項目すべて「はい」</button>
+    </div>
     <div class="decision-grid">
       <label>1. 上の左：ここで途中を飛ばし、別の時刻へジャンプしたように見えますか？
         <select data-boundary-field="clipSwitch">
@@ -1730,8 +1742,11 @@
     <label>気づいたこと（なければ空欄）
       <textarea data-boundary-field="note" placeholder="例：音は同じだが画面だけ切り替わる。途中で少し重なっている。"></textarea>
     </label>
-    <p class="answer-state" data-boundary-state="15">未回答</p>
+    <p class="answer-state" data-boundary-state="14">未回答</p>
   </section>
+</article>
+<article>
+  <h2>確認15：候補15の後から候補16へ時間がジャンプする所</h2>
   <table>
     <tr><th>clip</th><td>4:12.004 -> 4:31.898</td><td>+19894ms</td></tr>
     <tr><th>source</th><td>78:51.031 -> 80:45.080</td><td>+114049ms</td></tr>
@@ -1797,13 +1812,14 @@
 <figure><img src="stills/boundary_15/source_after/source_after_plus500ms.jpg" alt="source_after plus500ms"><figcaption>source後素材開始<br>plus500ms<br>80:45.580</figcaption></figure>
 <figure><img src="stills/boundary_15/source_after/source_after_plus1000ms.jpg" alt="source_after plus1000ms"><figcaption>source後素材開始<br>plus1000ms<br>80:46.080</figcaption></figure></div>
 </section>
-</article>
-<article>
-  <h2>確認16：候補16の後から候補17へ時間がジャンプする所</h2>
 
-  <section class="decision-answer" data-boundary-answer="16">
-    <h3>確認16の答え</h3>
+
+  <section class="decision-answer" data-boundary-answer="15">
+    <h3>確認15の答え</h3>
     <p>上の2本、下の2本を見て答えてください。迷ったら「わからない」で大丈夫です。</p>
+    <div class="decision-actions compact-actions">
+      <button type="button" class="all-yes" data-boundary-all-yes="15">4項目すべて「はい」</button>
+    </div>
     <div class="decision-grid">
       <label>1. 上の左：ここで途中を飛ばし、別の時刻へジャンプしたように見えますか？
         <select data-boundary-field="clipSwitch">
@@ -1841,8 +1857,11 @@
     <label>気づいたこと（なければ空欄）
       <textarea data-boundary-field="note" placeholder="例：音は同じだが画面だけ切り替わる。途中で少し重なっている。"></textarea>
     </label>
-    <p class="answer-state" data-boundary-state="16">未回答</p>
+    <p class="answer-state" data-boundary-state="15">未回答</p>
   </section>
+</article>
+<article>
+  <h2>確認16：候補16の後から候補17へ時間がジャンプする所</h2>
   <table>
     <tr><th>clip</th><td>4:35.259 -> 5:43.028</td><td>+67769ms</td></tr>
     <tr><th>source</th><td>80:46.482 -> 104:49.092</td><td>+1442610ms</td></tr>
@@ -1908,13 +1927,14 @@
 <figure><img src="stills/boundary_16/source_after/source_after_plus500ms.jpg" alt="source_after plus500ms"><figcaption>source後素材開始<br>plus500ms<br>104:49.592</figcaption></figure>
 <figure><img src="stills/boundary_16/source_after/source_after_plus1000ms.jpg" alt="source_after plus1000ms"><figcaption>source後素材開始<br>plus1000ms<br>104:50.092</figcaption></figure></div>
 </section>
-</article>
-<article>
-  <h2>確認17：候補17の後から候補18へ時間がジャンプする所</h2>
 
-  <section class="decision-answer" data-boundary-answer="17">
-    <h3>確認17の答え</h3>
+
+  <section class="decision-answer" data-boundary-answer="16">
+    <h3>確認16の答え</h3>
     <p>上の2本、下の2本を見て答えてください。迷ったら「わからない」で大丈夫です。</p>
+    <div class="decision-actions compact-actions">
+      <button type="button" class="all-yes" data-boundary-all-yes="16">4項目すべて「はい」</button>
+    </div>
     <div class="decision-grid">
       <label>1. 上の左：ここで途中を飛ばし、別の時刻へジャンプしたように見えますか？
         <select data-boundary-field="clipSwitch">
@@ -1952,8 +1972,11 @@
     <label>気づいたこと（なければ空欄）
       <textarea data-boundary-field="note" placeholder="例：音は同じだが画面だけ切り替わる。途中で少し重なっている。"></textarea>
     </label>
-    <p class="answer-state" data-boundary-state="17">未回答</p>
+    <p class="answer-state" data-boundary-state="16">未回答</p>
   </section>
+</article>
+<article>
+  <h2>確認17：候補17の後から候補18へ時間がジャンプする所</h2>
   <table>
     <tr><th>clip</th><td>5:52.535 -> 6:29.200</td><td>+36665ms</td></tr>
     <tr><th>source</th><td>104:58.479 -> 108:46.271</td><td>+227792ms</td></tr>
@@ -2019,13 +2042,14 @@
 <figure><img src="stills/boundary_17/source_after/source_after_plus500ms.jpg" alt="source_after plus500ms"><figcaption>source後素材開始<br>plus500ms<br>108:46.771</figcaption></figure>
 <figure><img src="stills/boundary_17/source_after/source_after_plus1000ms.jpg" alt="source_after plus1000ms"><figcaption>source後素材開始<br>plus1000ms<br>108:47.271</figcaption></figure></div>
 </section>
-</article>
-<article>
-  <h2>確認18：候補18の後から候補19へ時間がジャンプする所</h2>
 
-  <section class="decision-answer" data-boundary-answer="18">
-    <h3>確認18の答え</h3>
+
+  <section class="decision-answer" data-boundary-answer="17">
+    <h3>確認17の答え</h3>
     <p>上の2本、下の2本を見て答えてください。迷ったら「わからない」で大丈夫です。</p>
+    <div class="decision-actions compact-actions">
+      <button type="button" class="all-yes" data-boundary-all-yes="17">4項目すべて「はい」</button>
+    </div>
     <div class="decision-grid">
       <label>1. 上の左：ここで途中を飛ばし、別の時刻へジャンプしたように見えますか？
         <select data-boundary-field="clipSwitch">
@@ -2063,8 +2087,11 @@
     <label>気づいたこと（なければ空欄）
       <textarea data-boundary-field="note" placeholder="例：音は同じだが画面だけ切り替わる。途中で少し重なっている。"></textarea>
     </label>
-    <p class="answer-state" data-boundary-state="18">未回答</p>
+    <p class="answer-state" data-boundary-state="17">未回答</p>
   </section>
+</article>
+<article>
+  <h2>確認18：候補18の後から候補19へ時間がジャンプする所</h2>
   <table>
     <tr><th>clip</th><td>6:29.780 -> 7:16.123</td><td>+46343ms</td></tr>
     <tr><th>source</th><td>108:47.012 -> 115:26.857</td><td>+399845ms</td></tr>
@@ -2130,13 +2157,14 @@
 <figure><img src="stills/boundary_18/source_after/source_after_plus500ms.jpg" alt="source_after plus500ms"><figcaption>source後素材開始<br>plus500ms<br>115:27.357</figcaption></figure>
 <figure><img src="stills/boundary_18/source_after/source_after_plus1000ms.jpg" alt="source_after plus1000ms"><figcaption>source後素材開始<br>plus1000ms<br>115:27.857</figcaption></figure></div>
 </section>
-</article>
-<article>
-  <h2>確認19：候補19の後から候補20へ時間がジャンプする所</h2>
 
-  <section class="decision-answer" data-boundary-answer="19">
-    <h3>確認19の答え</h3>
+
+  <section class="decision-answer" data-boundary-answer="18">
+    <h3>確認18の答え</h3>
     <p>上の2本、下の2本を見て答えてください。迷ったら「わからない」で大丈夫です。</p>
+    <div class="decision-actions compact-actions">
+      <button type="button" class="all-yes" data-boundary-all-yes="18">4項目すべて「はい」</button>
+    </div>
     <div class="decision-grid">
       <label>1. 上の左：ここで途中を飛ばし、別の時刻へジャンプしたように見えますか？
         <select data-boundary-field="clipSwitch">
@@ -2174,8 +2202,11 @@
     <label>気づいたこと（なければ空欄）
       <textarea data-boundary-field="note" placeholder="例：音は同じだが画面だけ切り替わる。途中で少し重なっている。"></textarea>
     </label>
-    <p class="answer-state" data-boundary-state="19">未回答</p>
+    <p class="answer-state" data-boundary-state="18">未回答</p>
   </section>
+</article>
+<article>
+  <h2>確認19：候補19の後から候補20へ時間がジャンプする所</h2>
   <table>
     <tr><th>clip</th><td>7:17.184 -> 7:38.963</td><td>+21779ms</td></tr>
     <tr><th>source</th><td>115:27.358 -> 116:50.155</td><td>+82797ms</td></tr>
@@ -2241,13 +2272,14 @@
 <figure><img src="stills/boundary_19/source_after/source_after_plus500ms.jpg" alt="source_after plus500ms"><figcaption>source後素材開始<br>plus500ms<br>116:50.655</figcaption></figure>
 <figure><img src="stills/boundary_19/source_after/source_after_plus1000ms.jpg" alt="source_after plus1000ms"><figcaption>source後素材開始<br>plus1000ms<br>116:51.155</figcaption></figure></div>
 </section>
-</article>
-<article>
-  <h2>確認20：候補20の後から候補21へ時間がジャンプする所</h2>
 
-  <section class="decision-answer" data-boundary-answer="20">
-    <h3>確認20の答え</h3>
+
+  <section class="decision-answer" data-boundary-answer="19">
+    <h3>確認19の答え</h3>
     <p>上の2本、下の2本を見て答えてください。迷ったら「わからない」で大丈夫です。</p>
+    <div class="decision-actions compact-actions">
+      <button type="button" class="all-yes" data-boundary-all-yes="19">4項目すべて「はい」</button>
+    </div>
     <div class="decision-grid">
       <label>1. 上の左：ここで途中を飛ばし、別の時刻へジャンプしたように見えますか？
         <select data-boundary-field="clipSwitch">
@@ -2285,8 +2317,11 @@
     <label>気づいたこと（なければ空欄）
       <textarea data-boundary-field="note" placeholder="例：音は同じだが画面だけ切り替わる。途中で少し重なっている。"></textarea>
     </label>
-    <p class="answer-state" data-boundary-state="20">未回答</p>
+    <p class="answer-state" data-boundary-state="19">未回答</p>
   </section>
+</article>
+<article>
+  <h2>確認20：候補20の後から候補21へ時間がジャンプする所</h2>
   <table>
     <tr><th>clip</th><td>7:39.584 -> 9:42.784</td><td>+123200ms</td></tr>
     <tr><th>source</th><td>116:51.256 -> 132:25.178</td><td>+933922ms</td></tr>
@@ -2352,13 +2387,14 @@
 <figure><img src="stills/boundary_20/source_after/source_after_plus500ms.jpg" alt="source_after plus500ms"><figcaption>source後素材開始<br>plus500ms<br>132:25.678</figcaption></figure>
 <figure><img src="stills/boundary_20/source_after/source_after_plus1000ms.jpg" alt="source_after plus1000ms"><figcaption>source後素材開始<br>plus1000ms<br>132:26.178</figcaption></figure></div>
 </section>
-</article>
-<article>
-  <h2>確認21：候補21の後から候補22へ時間がジャンプする所</h2>
 
-  <section class="decision-answer" data-boundary-answer="21">
-    <h3>確認21の答え</h3>
+
+  <section class="decision-answer" data-boundary-answer="20">
+    <h3>確認20の答え</h3>
     <p>上の2本、下の2本を見て答えてください。迷ったら「わからない」で大丈夫です。</p>
+    <div class="decision-actions compact-actions">
+      <button type="button" class="all-yes" data-boundary-all-yes="20">4項目すべて「はい」</button>
+    </div>
     <div class="decision-grid">
       <label>1. 上の左：ここで途中を飛ばし、別の時刻へジャンプしたように見えますか？
         <select data-boundary-field="clipSwitch">
@@ -2396,8 +2432,11 @@
     <label>気づいたこと（なければ空欄）
       <textarea data-boundary-field="note" placeholder="例：音は同じだが画面だけ切り替わる。途中で少し重なっている。"></textarea>
     </label>
-    <p class="answer-state" data-boundary-state="21">未回答</p>
+    <p class="answer-state" data-boundary-state="20">未回答</p>
   </section>
+</article>
+<article>
+  <h2>確認21：候補21の後から候補22へ時間がジャンプする所</h2>
   <table>
     <tr><th>clip</th><td>9:43.444 -> 10:09.836</td><td>+26392ms</td></tr>
     <tr><th>source</th><td>132:27.279 -> 138:24.378</td><td>+357099ms</td></tr>
@@ -2463,13 +2502,14 @@
 <figure><img src="stills/boundary_21/source_after/source_after_plus500ms.jpg" alt="source_after plus500ms"><figcaption>source後素材開始<br>plus500ms<br>138:24.878</figcaption></figure>
 <figure><img src="stills/boundary_21/source_after/source_after_plus1000ms.jpg" alt="source_after plus1000ms"><figcaption>source後素材開始<br>plus1000ms<br>138:25.378</figcaption></figure></div>
 </section>
-</article>
-<article>
-  <h2>確認22：候補22の後から候補23へ時間がジャンプする所</h2>
 
-  <section class="decision-answer" data-boundary-answer="22">
-    <h3>確認22の答え</h3>
+
+  <section class="decision-answer" data-boundary-answer="21">
+    <h3>確認21の答え</h3>
     <p>上の2本、下の2本を見て答えてください。迷ったら「わからない」で大丈夫です。</p>
+    <div class="decision-actions compact-actions">
+      <button type="button" class="all-yes" data-boundary-all-yes="21">4項目すべて「はい」</button>
+    </div>
     <div class="decision-grid">
       <label>1. 上の左：ここで途中を飛ばし、別の時刻へジャンプしたように見えますか？
         <select data-boundary-field="clipSwitch">
@@ -2507,8 +2547,11 @@
     <label>気づいたこと（なければ空欄）
       <textarea data-boundary-field="note" placeholder="例：音は同じだが画面だけ切り替わる。途中で少し重なっている。"></textarea>
     </label>
-    <p class="answer-state" data-boundary-state="22">未回答</p>
+    <p class="answer-state" data-boundary-state="21">未回答</p>
   </section>
+</article>
+<article>
+  <h2>確認22：候補22の後から候補23へ時間がジャンプする所</h2>
   <table>
     <tr><th>clip</th><td>10:56.958 -> 11:05.120</td><td>+8162ms</td></tr>
     <tr><th>source</th><td>139:26.359 -> 141:40.956</td><td>+134597ms</td></tr>
@@ -2574,13 +2617,14 @@
 <figure><img src="stills/boundary_22/source_after/source_after_plus500ms.jpg" alt="source_after plus500ms"><figcaption>source後素材開始<br>plus500ms<br>141:41.456</figcaption></figure>
 <figure><img src="stills/boundary_22/source_after/source_after_plus1000ms.jpg" alt="source_after plus1000ms"><figcaption>source後素材開始<br>plus1000ms<br>141:41.956</figcaption></figure></div>
 </section>
-</article>
-<article>
-  <h2>確認23：候補23の後から候補24へ時間がジャンプする所</h2>
 
-  <section class="decision-answer" data-boundary-answer="23">
-    <h3>確認23の答え</h3>
+
+  <section class="decision-answer" data-boundary-answer="22">
+    <h3>確認22の答え</h3>
     <p>上の2本、下の2本を見て答えてください。迷ったら「わからない」で大丈夫です。</p>
+    <div class="decision-actions compact-actions">
+      <button type="button" class="all-yes" data-boundary-all-yes="22">4項目すべて「はい」</button>
+    </div>
     <div class="decision-grid">
       <label>1. 上の左：ここで途中を飛ばし、別の時刻へジャンプしたように見えますか？
         <select data-boundary-field="clipSwitch">
@@ -2618,8 +2662,11 @@
     <label>気づいたこと（なければ空欄）
       <textarea data-boundary-field="note" placeholder="例：音は同じだが画面だけ切り替わる。途中で少し重なっている。"></textarea>
     </label>
-    <p class="answer-state" data-boundary-state="23">未回答</p>
+    <p class="answer-state" data-boundary-state="22">未回答</p>
   </section>
+</article>
+<article>
+  <h2>確認23：候補23の後から候補24へ時間がジャンプする所</h2>
   <table>
     <tr><th>clip</th><td>11:09.864 -> 11:46.613</td><td>+36749ms</td></tr>
     <tr><th>source</th><td>141:41.857 -> 151:57.659</td><td>+615802ms</td></tr>
@@ -2685,13 +2732,14 @@
 <figure><img src="stills/boundary_23/source_after/source_after_plus500ms.jpg" alt="source_after plus500ms"><figcaption>source後素材開始<br>plus500ms<br>151:58.159</figcaption></figure>
 <figure><img src="stills/boundary_23/source_after/source_after_plus1000ms.jpg" alt="source_after plus1000ms"><figcaption>source後素材開始<br>plus1000ms<br>151:58.659</figcaption></figure></div>
 </section>
-</article>
-<article>
-  <h2>確認24：候補24の後から候補25へ時間がジャンプする所</h2>
 
-  <section class="decision-answer" data-boundary-answer="24">
-    <h3>確認24の答え</h3>
+
+  <section class="decision-answer" data-boundary-answer="23">
+    <h3>確認23の答え</h3>
     <p>上の2本、下の2本を見て答えてください。迷ったら「わからない」で大丈夫です。</p>
+    <div class="decision-actions compact-actions">
+      <button type="button" class="all-yes" data-boundary-all-yes="23">4項目すべて「はい」</button>
+    </div>
     <div class="decision-grid">
       <label>1. 上の左：ここで途中を飛ばし、別の時刻へジャンプしたように見えますか？
         <select data-boundary-field="clipSwitch">
@@ -2729,8 +2777,11 @@
     <label>気づいたこと（なければ空欄）
       <textarea data-boundary-field="note" placeholder="例：音は同じだが画面だけ切り替わる。途中で少し重なっている。"></textarea>
     </label>
-    <p class="answer-state" data-boundary-state="24">未回答</p>
+    <p class="answer-state" data-boundary-state="23">未回答</p>
   </section>
+</article>
+<article>
+  <h2>確認24：候補24の後から候補25へ時間がジャンプする所</h2>
   <table>
     <tr><th>clip</th><td>11:47.234 -> 11:51.176</td><td>+3942ms</td></tr>
     <tr><th>source</th><td>151:59.080 -> 152:30.522</td><td>+31442ms</td></tr>
@@ -2796,13 +2847,14 @@
 <figure><img src="stills/boundary_24/source_after/source_after_plus500ms.jpg" alt="source_after plus500ms"><figcaption>source後素材開始<br>plus500ms<br>152:31.022</figcaption></figure>
 <figure><img src="stills/boundary_24/source_after/source_after_plus1000ms.jpg" alt="source_after plus1000ms"><figcaption>source後素材開始<br>plus1000ms<br>152:31.522</figcaption></figure></div>
 </section>
-</article>
-<article>
-  <h2>確認25：候補25の後から候補26へ時間がジャンプする所</h2>
 
-  <section class="decision-answer" data-boundary-answer="25">
-    <h3>確認25の答え</h3>
+
+  <section class="decision-answer" data-boundary-answer="24">
+    <h3>確認24の答え</h3>
     <p>上の2本、下の2本を見て答えてください。迷ったら「わからない」で大丈夫です。</p>
+    <div class="decision-actions compact-actions">
+      <button type="button" class="all-yes" data-boundary-all-yes="24">4項目すべて「はい」</button>
+    </div>
     <div class="decision-grid">
       <label>1. 上の左：ここで途中を飛ばし、別の時刻へジャンプしたように見えますか？
         <select data-boundary-field="clipSwitch">
@@ -2840,8 +2892,11 @@
     <label>気づいたこと（なければ空欄）
       <textarea data-boundary-field="note" placeholder="例：音は同じだが画面だけ切り替わる。途中で少し重なっている。"></textarea>
     </label>
-    <p class="answer-state" data-boundary-state="25">未回答</p>
+    <p class="answer-state" data-boundary-state="24">未回答</p>
   </section>
+</article>
+<article>
+  <h2>確認25：候補25の後から候補26へ時間がジャンプする所</h2>
   <table>
     <tr><th>clip</th><td>11:53.537 -> 12:04.092</td><td>+10555ms</td></tr>
     <tr><th>source</th><td>152:32.464 -> 167:57.799</td><td>+925335ms</td></tr>
@@ -2907,13 +2962,14 @@
 <figure><img src="stills/boundary_25/source_after/source_after_plus500ms.jpg" alt="source_after plus500ms"><figcaption>source後素材開始<br>plus500ms<br>167:58.299</figcaption></figure>
 <figure><img src="stills/boundary_25/source_after/source_after_plus1000ms.jpg" alt="source_after plus1000ms"><figcaption>source後素材開始<br>plus1000ms<br>167:58.799</figcaption></figure></div>
 </section>
-</article>
-<article>
-  <h2>確認26：候補26の後から候補27へ時間がジャンプする所</h2>
 
-  <section class="decision-answer" data-boundary-answer="26">
-    <h3>確認26の答え</h3>
+
+  <section class="decision-answer" data-boundary-answer="25">
+    <h3>確認25の答え</h3>
     <p>上の2本、下の2本を見て答えてください。迷ったら「わからない」で大丈夫です。</p>
+    <div class="decision-actions compact-actions">
+      <button type="button" class="all-yes" data-boundary-all-yes="25">4項目すべて「はい」</button>
+    </div>
     <div class="decision-grid">
       <label>1. 上の左：ここで途中を飛ばし、別の時刻へジャンプしたように見えますか？
         <select data-boundary-field="clipSwitch">
@@ -2951,8 +3007,11 @@
     <label>気づいたこと（なければ空欄）
       <textarea data-boundary-field="note" placeholder="例：音は同じだが画面だけ切り替わる。途中で少し重なっている。"></textarea>
     </label>
-    <p class="answer-state" data-boundary-state="26">未回答</p>
+    <p class="answer-state" data-boundary-state="25">未回答</p>
   </section>
+</article>
+<article>
+  <h2>確認26：候補26の後から候補27へ時間がジャンプする所</h2>
   <table>
     <tr><th>clip</th><td>12:15.158 -> 12:34.675</td><td>+19517ms</td></tr>
     <tr><th>source</th><td>168:08.896 -> 170:21.096</td><td>+132200ms</td></tr>
@@ -3018,13 +3077,14 @@
 <figure><img src="stills/boundary_26/source_after/source_after_plus500ms.jpg" alt="source_after plus500ms"><figcaption>source後素材開始<br>plus500ms<br>170:21.596</figcaption></figure>
 <figure><img src="stills/boundary_26/source_after/source_after_plus1000ms.jpg" alt="source_after plus1000ms"><figcaption>source後素材開始<br>plus1000ms<br>170:22.096</figcaption></figure></div>
 </section>
-</article>
-<article>
-  <h2>確認27：候補27の後から候補28へ時間がジャンプする所</h2>
 
-  <section class="decision-answer" data-boundary-answer="27">
-    <h3>確認27の答え</h3>
+
+  <section class="decision-answer" data-boundary-answer="26">
+    <h3>確認26の答え</h3>
     <p>上の2本、下の2本を見て答えてください。迷ったら「わからない」で大丈夫です。</p>
+    <div class="decision-actions compact-actions">
+      <button type="button" class="all-yes" data-boundary-all-yes="26">4項目すべて「はい」</button>
+    </div>
     <div class="decision-grid">
       <label>1. 上の左：ここで途中を飛ばし、別の時刻へジャンプしたように見えますか？
         <select data-boundary-field="clipSwitch">
@@ -3062,8 +3122,11 @@
     <label>気づいたこと（なければ空欄）
       <textarea data-boundary-field="note" placeholder="例：音は同じだが画面だけ切り替わる。途中で少し重なっている。"></textarea>
     </label>
-    <p class="answer-state" data-boundary-state="27">未回答</p>
+    <p class="answer-state" data-boundary-state="26">未回答</p>
   </section>
+</article>
+<article>
+  <h2>確認27：候補27の後から候補28へ時間がジャンプする所</h2>
   <table>
     <tr><th>clip</th><td>12:35.436 -> 13:54.573</td><td>+79137ms</td></tr>
     <tr><th>source</th><td>170:21.656 -> 175:21.894</td><td>+300238ms</td></tr>
@@ -3129,13 +3192,14 @@
 <figure><img src="stills/boundary_27/source_after/source_after_plus500ms.jpg" alt="source_after plus500ms"><figcaption>source後素材開始<br>plus500ms<br>175:22.394</figcaption></figure>
 <figure><img src="stills/boundary_27/source_after/source_after_plus1000ms.jpg" alt="source_after plus1000ms"><figcaption>source後素材開始<br>plus1000ms<br>175:22.894</figcaption></figure></div>
 </section>
-</article>
-<article>
-  <h2>確認28：候補28の後から候補29へ時間がジャンプする所</h2>
 
-  <section class="decision-answer" data-boundary-answer="28">
-    <h3>確認28の答え</h3>
+
+  <section class="decision-answer" data-boundary-answer="27">
+    <h3>確認27の答え</h3>
     <p>上の2本、下の2本を見て答えてください。迷ったら「わからない」で大丈夫です。</p>
+    <div class="decision-actions compact-actions">
+      <button type="button" class="all-yes" data-boundary-all-yes="27">4項目すべて「はい」</button>
+    </div>
     <div class="decision-grid">
       <label>1. 上の左：ここで途中を飛ばし、別の時刻へジャンプしたように見えますか？
         <select data-boundary-field="clipSwitch">
@@ -3173,8 +3237,11 @@
     <label>気づいたこと（なければ空欄）
       <textarea data-boundary-field="note" placeholder="例：音は同じだが画面だけ切り替わる。途中で少し重なっている。"></textarea>
     </label>
-    <p class="answer-state" data-boundary-state="28">未回答</p>
+    <p class="answer-state" data-boundary-state="27">未回答</p>
   </section>
+</article>
+<article>
+  <h2>確認28：候補28の後から候補29へ時間がジャンプする所</h2>
   <table>
     <tr><th>clip</th><td>13:58.177 -> 15:23.195</td><td>+85018ms</td></tr>
     <tr><th>source</th><td>175:29.420 -> 179:50.744</td><td>+261324ms</td></tr>
@@ -3240,13 +3307,14 @@
 <figure><img src="stills/boundary_28/source_after/source_after_plus500ms.jpg" alt="source_after plus500ms"><figcaption>source後素材開始<br>plus500ms<br>179:51.244</figcaption></figure>
 <figure><img src="stills/boundary_28/source_after/source_after_plus1000ms.jpg" alt="source_after plus1000ms"><figcaption>source後素材開始<br>plus1000ms<br>179:51.744</figcaption></figure></div>
 </section>
-</article>
-<article>
-  <h2>確認29：候補29の後から候補30へ時間がジャンプする所</h2>
 
-  <section class="decision-answer" data-boundary-answer="29">
-    <h3>確認29の答え</h3>
+
+  <section class="decision-answer" data-boundary-answer="28">
+    <h3>確認28の答え</h3>
     <p>上の2本、下の2本を見て答えてください。迷ったら「わからない」で大丈夫です。</p>
+    <div class="decision-actions compact-actions">
+      <button type="button" class="all-yes" data-boundary-all-yes="28">4項目すべて「はい」</button>
+    </div>
     <div class="decision-grid">
       <label>1. 上の左：ここで途中を飛ばし、別の時刻へジャンプしたように見えますか？
         <select data-boundary-field="clipSwitch">
@@ -3284,8 +3352,11 @@
     <label>気づいたこと（なければ空欄）
       <textarea data-boundary-field="note" placeholder="例：音は同じだが画面だけ切り替わる。途中で少し重なっている。"></textarea>
     </label>
-    <p class="answer-state" data-boundary-state="29">未回答</p>
+    <p class="answer-state" data-boundary-state="28">未回答</p>
   </section>
+</article>
+<article>
+  <h2>確認29：候補29の後から候補30へ時間がジャンプする所</h2>
   <table>
     <tr><th>clip</th><td>15:36.132 -> 16:06.892</td><td>+30760ms</td></tr>
     <tr><th>source</th><td>180:03.724 -> 183:30.322</td><td>+206598ms</td></tr>
@@ -3351,13 +3422,14 @@
 <figure><img src="stills/boundary_29/source_after/source_after_plus500ms.jpg" alt="source_after plus500ms"><figcaption>source後素材開始<br>plus500ms<br>183:30.822</figcaption></figure>
 <figure><img src="stills/boundary_29/source_after/source_after_plus1000ms.jpg" alt="source_after plus1000ms"><figcaption>source後素材開始<br>plus1000ms<br>183:31.322</figcaption></figure></div>
 </section>
-</article>
-<article>
-  <h2>確認30：候補30の後から候補31へ時間がジャンプする所</h2>
 
-  <section class="decision-answer" data-boundary-answer="30">
-    <h3>確認30の答え</h3>
+
+  <section class="decision-answer" data-boundary-answer="29">
+    <h3>確認29の答え</h3>
     <p>上の2本、下の2本を見て答えてください。迷ったら「わからない」で大丈夫です。</p>
+    <div class="decision-actions compact-actions">
+      <button type="button" class="all-yes" data-boundary-all-yes="29">4項目すべて「はい」</button>
+    </div>
     <div class="decision-grid">
       <label>1. 上の左：ここで途中を飛ばし、別の時刻へジャンプしたように見えますか？
         <select data-boundary-field="clipSwitch">
@@ -3395,8 +3467,11 @@
     <label>気づいたこと（なければ空欄）
       <textarea data-boundary-field="note" placeholder="例：音は同じだが画面だけ切り替わる。途中で少し重なっている。"></textarea>
     </label>
-    <p class="answer-state" data-boundary-state="30">未回答</p>
+    <p class="answer-state" data-boundary-state="29">未回答</p>
   </section>
+</article>
+<article>
+  <h2>確認30：候補30の後から候補31へ時間がジャンプする所</h2>
   <table>
     <tr><th>clip</th><td>16:27.839 -> 17:01.834</td><td>+33995ms</td></tr>
     <tr><th>source</th><td>183:46.195 -> 195:30.442</td><td>+704247ms</td></tr>
@@ -3462,6 +3537,53 @@
 <figure><img src="stills/boundary_30/source_after/source_after_plus500ms.jpg" alt="source_after plus500ms"><figcaption>source後素材開始<br>plus500ms<br>195:30.942</figcaption></figure>
 <figure><img src="stills/boundary_30/source_after/source_after_plus1000ms.jpg" alt="source_after plus1000ms"><figcaption>source後素材開始<br>plus1000ms<br>195:31.442</figcaption></figure></div>
 </section>
+
+
+  <section class="decision-answer" data-boundary-answer="30">
+    <h3>確認30の答え</h3>
+    <p>上の2本、下の2本を見て答えてください。迷ったら「わからない」で大丈夫です。</p>
+    <div class="decision-actions compact-actions">
+      <button type="button" class="all-yes" data-boundary-all-yes="30">4項目すべて「はい」</button>
+    </div>
+    <div class="decision-grid">
+      <label>1. 上の左：ここで途中を飛ばし、別の時刻へジャンプしたように見えますか？
+        <select data-boundary-field="clipSwitch">
+          <option value="">未回答</option>
+          <option value="true">はい、時間がジャンプした</option>
+          <option value="false">いいえ、元配信の時間どおり続いている</option>
+          <option value="unresolved">わからない</option>
+        </select>
+      </label>
+      <label>2. 上の右：前半と後半は、元配信の別の所ですか？
+        <select data-boundary-field="sourcePositionSwitches">
+          <option value="">未回答</option>
+          <option value="true">はい、別の所</option>
+          <option value="false">いいえ、同じ所の続き</option>
+          <option value="unresolved">わからない</option>
+        </select>
+      </label>
+      <label>3. 下の左：左右は同じ会話・場面ですか？
+        <select data-boundary-field="beforeMatches">
+          <option value="">未回答</option>
+          <option value="true">はい、同じ</option>
+          <option value="false">いいえ、違う</option>
+          <option value="unresolved">わからない</option>
+        </select>
+      </label>
+      <label>4. 下の右：左右は同じ会話・場面ですか？
+        <select data-boundary-field="afterMatches">
+          <option value="">未回答</option>
+          <option value="true">はい、同じ</option>
+          <option value="false">いいえ、違う</option>
+          <option value="unresolved">わからない</option>
+        </select>
+      </label>
+    </div>
+    <label>気づいたこと（なければ空欄）
+      <textarea data-boundary-field="note" placeholder="例：音は同じだが画面だけ切り替わる。途中で少し重なっている。"></textarea>
+    </label>
+    <p class="answer-state" data-boundary-state="30">未回答</p>
+  </section>
 </article>
 
   <section class="decision-final" id="decision-final">
@@ -4013,6 +4135,17 @@
         return document.querySelector('[data-block-row="' + index + '"] [data-block-field="' + field + '"]');
       }
 
+      function setAllBoundaryYes(index) {
+        const section = boundarySection(index);
+        if (!section) return;
+        for (const field of boundaryFields) {
+          const control = section.querySelector('[data-boundary-field="' + field + '"]');
+          if (control) control.value = 'true';
+        }
+        saveState();
+        updateProgress();
+      }
+
       function deriveBlocks() {
         for (const block of template.blocks) {
           const refs = [];
@@ -4237,6 +4370,9 @@
         }
       });
       document.getElementById('derive-blocks').addEventListener('click', deriveBlocks);
+      document.querySelectorAll('[data-boundary-all-yes]').forEach((button) => {
+        button.addEventListener('click', () => setAllBoundaryYes(Number(button.dataset.boundaryAllYes)));
+      });
       document.getElementById('build-decision').addEventListener('click', buildDecision);
       document.getElementById('copy-summary').addEventListener('click', copySummary);
       document.getElementById('copy-decision').addEventListener('click', copyDecision);
