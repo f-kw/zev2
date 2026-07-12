@@ -1010,7 +1010,7 @@ async function waitForGeminiOutput(
   timeoutMs: number,
   rejectPartialExtraction: boolean
 ): Promise<{ output: PromptOutput; rawResponseText: string; pageUrl: string }> {
-  const deadline = timeoutMs > 0 ? Date.now() + timeoutMs : Number.POSITIVE_INFINITY;
+  const deadline = Date.now() + timeoutMs;
   let stableCanonical = '';
   let stableSince = 0;
   let latestRawText = '';

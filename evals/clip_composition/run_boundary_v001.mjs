@@ -82,6 +82,7 @@ async function main() {
   if (manifest.generationSystem !== 'boundary-v001@gemini-web-flash' || manifest.plannedGeminiCallCount !== 71 || manifest.contextRadiusMs !== 90000) throw new Error('boundary-v001 manifest不一致');
   const completed = [];
   const reused = [];
+  const failed = [];
   for (const input of manifest.inputs) {
     const inspection = await readJson(path.join(root, input.leakageInspectionPath));
     if (!inspection.passed || inspection.containsExpectedData !== false || !inspection.sourceOnlyTranscript || !inspection.structuralChangesForbidden || inspection.contextRadiusMs !== 90000 || !inspection.closeTabAfterRunRequired) throw new Error(`事前検査不合格 ${input.fixtureId} ${input.candidateIndex} run${input.runIndex}`);
@@ -97,15 +98,43 @@ async function main() {
       generationSystem: 'boundary-v001@gemini-web-flash', upstreamGenerationSystems: ['theme-llm-v002@gemini-web-flash', 'llm-v012@gemini-web-flash'],
       resultRole: 'boundary-refinement-eval', promptVersion: 'boundary_refinement_prompt_v001', fixtureId: input.fixtureId, candidateIndex: input.candidateIndex, runIndex: input.runIndex, contextRadiusMs: 90000, inputPromptSha256: input.promptSha256
     };
-    await run('pnpm', ['--filter', '@zev2/agent-runner', 'exec', 'tsx', '../evals/clip_composition/run_web_gemini_prompt.ts', '--prompt', path.join(root, input.promptPath), '--output', outputPath, '--model', 'gemini-web-flash', '--params', JSON.stringify(params), '--timeoutMs', '0', '--rejectPartialExtraction', '--closeTabAfterRun']);
+    try {
+      await run('pnpm', ['--filter', '@zev2/agent-runner', 'exec', 'tsx', '../evals/clip_composition/run_web_gemini_prompt.ts', '--prompt', path.join(root, input.promptPath), '--output', outputPath, '--model', 'gemini-web-flash', '--params', JSON.stringify(params), '--timeoutMs', '240000', '--rejectPartialExtraction', '--closeTabAfterRun']);
+    } catch (error) {
+      const diagnosticPath = `${outputPath}.failure.json`;
+      const failureRecord = {
+        refinements: [],
+        runAt: new Date().toISOString(),
+        model: 'gemini-web-flash',
+        params,
+        promptFile: input.promptPath,
+        executionFailure: {
+          type: 'web-generation-incomplete-or-runner-failure',
+          message: error instanceof Error ? error.message : String(error),
+          failureDiagnosticPath: existsSync(diagnosticPath) ? path.relative(root, diagnosticPath) : null
+        },
+        boundaryContractValidation: {
+          passed: false,
+          issues: ['web-generation-incomplete-or-runner-failure'],
+          checkedAt: new Date().toISOString(),
+          checks: ['complete-refinements-json-required', 'partial-output-not-scored']
+        },
+        selectedBoundaryEvidence: []
+      };
+      await writeFile(outputPath, `${JSON.stringify(failureRecord, null, 2)}\n`);
+      failed.push(input.outputPath);
+      await writeFile(path.join(outputRoot, 'execution-progress.json'), `${JSON.stringify({ kind: 'boundary_v001_progress', updatedAt: new Date().toISOString(), completed, reused, failed, total: completed.length + reused.length + failed.length, planned: manifest.plannedGeminiCallCount, status: 'running', closeTabAfterRun: true }, null, 2)}\n`);
+      console.error(`boundary run failed and recorded: ${input.fixtureId} candidate ${input.candidateIndex} run ${input.runIndex}`);
+      continue;
+    }
     const rawOutput = await readJson(outputPath);
     const payload = await readJson(path.join(root, input.payloadPath));
     await writeFile(outputPath, `${JSON.stringify(enrichAndValidate(rawOutput, payload), null, 2)}\n`);
     completed.push(input.outputPath);
-    await writeFile(path.join(outputRoot, 'execution-progress.json'), `${JSON.stringify({ kind: 'boundary_v001_progress', updatedAt: new Date().toISOString(), completed, reused, total: completed.length + reused.length, planned: manifest.plannedGeminiCallCount, status: 'running', closeTabAfterRun: true }, null, 2)}\n`);
+    await writeFile(path.join(outputRoot, 'execution-progress.json'), `${JSON.stringify({ kind: 'boundary_v001_progress', updatedAt: new Date().toISOString(), completed, reused, failed, total: completed.length + reused.length + failed.length, planned: manifest.plannedGeminiCallCount, status: 'running', closeTabAfterRun: true }, null, 2)}\n`);
   }
-  await writeFile(path.join(outputRoot, 'execution-progress.json'), `${JSON.stringify({ kind: 'boundary_v001_progress', updatedAt: new Date().toISOString(), completed, reused, total: completed.length + reused.length, planned: manifest.plannedGeminiCallCount, status: 'complete', closeTabAfterRun: true }, null, 2)}\n`);
-  console.log(JSON.stringify({ completed: completed.length, reused: reused.length, total: completed.length + reused.length }, null, 2));
+  await writeFile(path.join(outputRoot, 'execution-progress.json'), `${JSON.stringify({ kind: 'boundary_v001_progress', updatedAt: new Date().toISOString(), completed, reused, failed, total: completed.length + reused.length + failed.length, planned: manifest.plannedGeminiCallCount, status: 'complete', closeTabAfterRun: true }, null, 2)}\n`);
+  console.log(JSON.stringify({ completed: completed.length, reused: reused.length, failed: failed.length, total: completed.length + reused.length + failed.length }, null, 2));
 }
 
 main().catch((error) => {

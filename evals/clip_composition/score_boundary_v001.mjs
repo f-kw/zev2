@@ -115,6 +115,7 @@ function compare(observations) {
 }
 
 function failureType(issues) {
+  if (issues.some((item) => item === 'web-generation-incomplete-or-runner-failure')) return 'web-generation-incomplete';
   if (issues.some((item) => item.startsWith('missing-start-point') || item.startsWith('missing-end-point'))) return 'nonexistent-boundary-id';
   if (issues.some((item) => item.startsWith('boundary-order'))) return 'boundary-order';
   if (issues.some((item) => item.includes('outside-window'))) return 'outside-window';
