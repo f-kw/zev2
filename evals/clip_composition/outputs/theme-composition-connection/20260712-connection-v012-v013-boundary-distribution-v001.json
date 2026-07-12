@@ -1,0 +1,258 @@
+{
+  "kind": "connection_boundary_distribution_comparison",
+  "runAt": "2026-07-12T13:30:11.757Z",
+  "inputs": {
+    "baseline": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-main-v001/result.json",
+    "changed": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-v002-main-v001/result.json"
+  },
+  "boundaryUnit": "each reached run × candidate × expected start/end boundary; pooled treats every boundary as one observation",
+  "absoluteQuantileMethod": "nearest-rank",
+  "baseline": {
+    "generationSystem": "llm-v012@gemini-web-flash",
+    "runCount": 75,
+    "validRunCount": 73,
+    "reachedRunCount": 73,
+    "targetAssessmentCount": 84,
+    "reachedAssessmentCount": 79,
+    "start": {
+      "count": 79,
+      "signedMeanMs": -37057.304,
+      "absoluteMeanMs": 37796.443,
+      "absoluteMedianMs": 17972,
+      "absoluteP75Ms": 31985,
+      "absoluteP90Ms": 135681,
+      "absoluteMaxMs": 560573,
+      "within1000Count": 6,
+      "within1000Rate": 0.076,
+      "within3000Count": 12,
+      "within3000Rate": 0.152
+    },
+    "end": {
+      "count": 79,
+      "signedMeanMs": 41374.582,
+      "absoluteMeanMs": 42721.519,
+      "absoluteMedianMs": 26190,
+      "absoluteP75Ms": 61501,
+      "absoluteP90Ms": 100388,
+      "absoluteMaxMs": 169219,
+      "within1000Count": 3,
+      "within1000Rate": 0.038,
+      "within3000Count": 7,
+      "within3000Rate": 0.089
+    },
+    "pooled": {
+      "count": 158,
+      "signedMeanMs": 2158.639,
+      "absoluteMeanMs": 40258.981,
+      "absoluteMedianMs": 21489,
+      "absoluteP75Ms": 46720,
+      "absoluteP90Ms": 135681,
+      "absoluteMaxMs": 560573,
+      "within1000Count": 9,
+      "within1000Rate": 0.057,
+      "within3000Count": 19,
+      "within3000Rate": 0.12
+    },
+    "bothBoundariesWithin3000Count": 0,
+    "bothBoundariesWithin3000Rate": 0,
+    "byFixture": {
+      "nOEWCNc77MI_multiblock_material_v001": {
+        "reachedAssessmentCount": 38,
+        "pooledAbsoluteMeanMs": 18896.368,
+        "pooledAbsoluteMedianMs": 19469,
+        "pooledWithin3000Count": 13,
+        "pooledBoundaryCount": 76,
+        "bothBoundariesWithin3000Count": 0
+      },
+      "9dtwF5Exu5w_multiblock_material_v001": {
+        "reachedAssessmentCount": 41,
+        "pooledAbsoluteMeanMs": 60058.476,
+        "pooledAbsoluteMedianMs": 29120,
+        "pooledWithin3000Count": 6,
+        "pooledBoundaryCount": 82,
+        "bothBoundariesWithin3000Count": 0
+      }
+    }
+  },
+  "changed": {
+    "generationSystem": "llm-v013@gemini-web-flash",
+    "runCount": 75,
+    "validRunCount": 74,
+    "reachedRunCount": 74,
+    "targetAssessmentCount": 84,
+    "reachedAssessmentCount": 83,
+    "start": {
+      "count": 83,
+      "signedMeanMs": -47651.494,
+      "absoluteMeanMs": 48315.759,
+      "absoluteMedianMs": 23888,
+      "absoluteP75Ms": 50778,
+      "absoluteP90Ms": 136497,
+      "absoluteMaxMs": 270904,
+      "within1000Count": 5,
+      "within1000Rate": 0.06,
+      "within3000Count": 8,
+      "within3000Rate": 0.096
+    },
+    "end": {
+      "count": 83,
+      "signedMeanMs": 53491.819,
+      "absoluteMeanMs": 55344.084,
+      "absoluteMedianMs": 48427,
+      "absoluteP75Ms": 81325,
+      "absoluteP90Ms": 137891,
+      "absoluteMaxMs": 325012,
+      "within1000Count": 2,
+      "within1000Rate": 0.024,
+      "within3000Count": 5,
+      "within3000Rate": 0.06
+    },
+    "pooled": {
+      "count": 166,
+      "signedMeanMs": 2920.163,
+      "absoluteMeanMs": 51829.922,
+      "absoluteMedianMs": 33234,
+      "absoluteP75Ms": 64493,
+      "absoluteP90Ms": 137085,
+      "absoluteMaxMs": 325012,
+      "within1000Count": 7,
+      "within1000Rate": 0.042,
+      "within3000Count": 13,
+      "within3000Rate": 0.078
+    },
+    "bothBoundariesWithin3000Count": 0,
+    "bothBoundariesWithin3000Rate": 0,
+    "byFixture": {
+      "nOEWCNc77MI_multiblock_material_v001": {
+        "reachedAssessmentCount": 38,
+        "pooledAbsoluteMeanMs": 25425.487,
+        "pooledAbsoluteMedianMs": 21475,
+        "pooledWithin3000Count": 10,
+        "pooledBoundaryCount": 76,
+        "bothBoundariesWithin3000Count": 0
+      },
+      "9dtwF5Exu5w_multiblock_material_v001": {
+        "reachedAssessmentCount": 45,
+        "pooledAbsoluteMeanMs": 74127,
+        "pooledAbsoluteMedianMs": 55822,
+        "pooledWithin3000Count": 3,
+        "pooledBoundaryCount": 90,
+        "bothBoundariesWithin3000Count": 0
+      }
+    }
+  },
+  "pairedCommonReached": {
+    "commonReachedAssessmentCount": 78,
+    "startAbsoluteError": {
+      "improved": 2,
+      "equal": 58,
+      "worsened": 18
+    },
+    "endAbsoluteError": {
+      "improved": 0,
+      "equal": 58,
+      "worsened": 20
+    },
+    "twoBoundaryTotalAbsoluteError": {
+      "improved": 2,
+      "equal": 41,
+      "worsened": 35
+    },
+    "baselineTwoBoundaryAbsoluteMeanMs": 40509.314,
+    "changedTwoBoundaryAbsoluteMeanMs": 47691.827,
+    "byFixture": {
+      "nOEWCNc77MI_multiblock_material_v001": {
+        "count": 37,
+        "improved": 1,
+        "equal": 22,
+        "worsened": 14,
+        "baselinePooledAbsoluteMeanMs": 18846.73,
+        "changedPooledAbsoluteMeanMs": 25476.014
+      },
+      "9dtwF5Exu5w_multiblock_material_v001": {
+        "count": 41,
+        "improved": 1,
+        "equal": 19,
+        "worsened": 21,
+        "baselinePooledAbsoluteMeanMs": 60058.476,
+        "changedPooledAbsoluteMeanMs": 67740.244
+      }
+    }
+  },
+  "pipelineRecall": {
+    "baseline": {
+      "allExpectedCount": 38,
+      "upstreamHitExpectedCount": 27,
+      "upstreamHitRecallUpperBound": 0.711,
+      "runs": [
+        {
+          "runIndex": 1,
+          "reachedExpectedCount": 27,
+          "allExpectedCount": 38,
+          "recall": 0.711,
+          "upstreamHitExpectedCount": 27,
+          "conditionalRecall": 1
+        },
+        {
+          "runIndex": 2,
+          "reachedExpectedCount": 23,
+          "allExpectedCount": 38,
+          "recall": 0.605,
+          "upstreamHitExpectedCount": 27,
+          "conditionalRecall": 0.852
+        },
+        {
+          "runIndex": 3,
+          "reachedExpectedCount": 27,
+          "allExpectedCount": 38,
+          "recall": 0.711,
+          "upstreamHitExpectedCount": 27,
+          "conditionalRecall": 1
+        }
+      ]
+    },
+    "changed": {
+      "allExpectedCount": 38,
+      "upstreamHitExpectedCount": 27,
+      "upstreamHitRecallUpperBound": 0.711,
+      "runs": [
+        {
+          "runIndex": 1,
+          "reachedExpectedCount": 26,
+          "allExpectedCount": 38,
+          "recall": 0.684,
+          "upstreamHitExpectedCount": 27,
+          "conditionalRecall": 0.963
+        },
+        {
+          "runIndex": 2,
+          "reachedExpectedCount": 27,
+          "allExpectedCount": 38,
+          "recall": 0.711,
+          "upstreamHitExpectedCount": 27,
+          "conditionalRecall": 1
+        },
+        {
+          "runIndex": 3,
+          "reachedExpectedCount": 27,
+          "allExpectedCount": 38,
+          "recall": 0.711,
+          "upstreamHitExpectedCount": 27,
+          "conditionalRecall": 1
+        }
+      ]
+    }
+  },
+  "conclusion": {
+    "changedPooledAbsoluteMeanIsLower": false,
+    "changedStartAbsoluteMeanIsLower": false,
+    "changedEndAbsoluteMeanIsLower": false,
+    "changedPooledAbsoluteMeanWithin3000": false,
+    "connectionDecision": "return_to_v012_copy_tolerant_contract",
+    "investmentDirection": "improve_upstream_theme_evidence_range_quality",
+    "limitedTwoFixtureRecallTouchesSixtyPercent": true,
+    "limitedTwoFixtureBoundaryTouchesThreeSeconds": false,
+    "formalSecondGateDecisionAllowed": false,
+    "formalDecisionBlocker": "境界±3秒の正式集計単位が未定義で、2素材・上流hit済み候補に条件付けた開発データであり、配信者単位のdev/test分割も未導入"
+  }
+}
