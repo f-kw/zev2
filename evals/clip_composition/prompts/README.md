@@ -87,7 +87,7 @@
 | input-selection-v001 | 2026-07-10 | 元配信の先頭50チャンク | 出力形式の方向確認用。正式主結果へ統合しない参考入力。 | theme-llm-v002 | 実走済み・参考結果 |
 | input-selection-v002 | 2026-07-10 | 粗字幕の発話文字数上位50チャンク | B素材での最初の正式主結果。正解13件中、入力内は1件。 | theme-llm-v002 | 正式採点済み |
 | input-selection-v003 | 2026-07-11 | 完了済みローカルSTTの元配信全文を既存byte窓へ分割 | 入力選定損失ゼロの上界測定。入力設計の最終形ではない。 | theme-llm-v002 | run 1完走。69窓・175候補・12/13 hit。`reports/theme-input-selection-comparison/nOEWCNc77MI-v003-upper-bound-execution-20260711-v001.md` |
-| input-selection-v004 | 2026-07-11 | チャット流速上位100分。配信内の完全な1分区間の平均を1.0とした相対順位で選択 | v003から入力選定だけを変更する削減実験。N=100はB素材1本で正解13件を参照して選んだ閾値。別素材では正解を見る前に条件と対象を固定して検証した。 | theme-llm-v002@gemini-web-flash | B素材は入力内12/12 hit、全体12/13、89候補。初見の別素材9dtwF5Exu5wは入力内15/18 hit、入力外7、全体15/25、60候補。入力可視率は92.3%から72.0%となり、同水準は再現しなかった。`reports/theme-input-selection-generalization/input-selection-v004-generalization-result-20260712-v001.md` |
+| input-selection-v004 | 2026-07-11 | チャット流速上位100分。配信内の完全な1分区間の平均を1.0とした相対順位で選択 | **暫定標準入力選定**。N=100はB素材1本で正解13件を参照して選んだ閾値であり、2素材での汎化は部分的。次の接続評価で使うが、恒久標準とは認定しない。 | theme-llm-v002@gemini-web-flash | B素材の入力可視率は12/13=92.3%、初見の別素材9dtwF5Exu5wは18/25=72.0%。2素材で可視率72〜92%、汎化は部分的、暫定。モデルhitはB素材12/12、別素材15/18。`reports/theme-input-selection-generalization/input-selection-v004-generalization-result-20260712-v001.md` |
 
 ### 入力削減実験の固定比較基準
 

@@ -1,0 +1,27 @@
+{
+  "kind": "theme_composition_connection_target_manifest",
+  "resultRole": "pre_run_target_lock",
+  "runAt": "2026-07-12T00:00:00+09:00",
+  "upstreamGenerationSystem": "theme-llm-v002@gemini-web-flash",
+  "compositionGenerationSystem": "llm-v012@gemini-web-flash",
+  "inputSelectionVersion": "input-selection-v004",
+  "promptVersion": "clip_composition_prompt_v012",
+  "runsPerCandidate": 3,
+  "targetSelectionRule": "formal range score candidates whose hitExpectedIndexes is non-empty; expected indexes and times are not included in this manifest",
+  "targets": [
+    {
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "inputSetId": "nOEWCNc77MI_chat_velocity_top100_input_selection_v004",
+      "candidateIndexes": [2, 3, 17, 32, 35, 37, 39, 41, 46, 52, 53, 87, 88]
+    },
+    {
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "inputSetId": "9dtwF5Exu5w_chat_velocity_top100_input_selection_v004",
+      "candidateIndexes": [5, 9, 13, 14, 16, 22, 28, 30, 44, 52, 54, 59]
+    }
+  ],
+  "totalCandidateCount": 25,
+  "plannedGeminiCallCount": 75,
+  "containsExpectedData": false,
+  "status": "locked_before_execution"
+}
