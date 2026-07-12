@@ -81,6 +81,12 @@
 | theme-llm-v001 | `theme_generation_prompt_v001.md` | 2026-07-09 | 元配信単体のtranscriptから、切り抜きテーマ候補を出せるかを測る初版。compositionは実行しない。 | 一段目は候補根拠範囲とexpected区間の機械的な範囲hit。二段目は範囲hit候補だけを人間が意味的等価判定。 | 4fixture×runs3をWeb Geminiで実走。`reports/theme-generation/theme-llm-v001-20260709-v001-summary.md` と `reports/theme-generation/theme-llm-v001-20260709-v001-range-score.md` に記録。 | 初回実測済み。二段目の人間意味判定待ち。 |
 | theme-llm-v002 | `theme_generation_prompt_v002.md` | 2026-07-09 | theme-llm-v001の判断方針は変えず、出力契約だけを軽量化する。候補ごとの長文説明を廃止し、狭い根拠範囲配列 `evidenceRanges` で返す。 | 一段目は `evidenceRanges` の各範囲とexpected区間の機械的な範囲hit。部分入力では入力内expected・入力外expected・全expectedを分け、正式分母は入力内だけにする。二段目は必要な場合だけ、根拠範囲と映像・音声で人間確認する。 | B素材 `nOEWCNc77MI` の `input-selection-v002` は25候補・入力内0/1 hit・全体0/13。入力選定だけを全文へ変えた上限測定 `input-selection-v003` は175候補・入力内12/13 hit・全体12/13。比較は `reports/theme-input-selection-comparison/nOEWCNc77MI-v002-v003-upper-bound-efficiency-20260711-v001.md` に記録。 | redo用の実験版。意味判断ではなく出力契約だけを変える。入力選定実験でこの版番号を増やさない。 |
 
+## boundary_refinement 一覧
+
+| 版 | ファイル | 作成日 | 目的 | 入出力契約 | 状態 |
+| --- | --- | --- | --- | --- | --- |
+| boundary-v001 | `boundary_refinement_prompt_v001.md` | 2026-07-13 | v012が写した広い仮区間を、局所文脈から単語精度で刈り込めるか測る。テーマ選択や区間分割は行わない。 | 入力は仮境界前後90秒の元配信STTと単語境界ID。出力は開始・終了IDと各1文の理由だけ。時刻変換と区間組み立てはルール。ID実在・開始<終了を検査し、選択単語・前後2語・理由を保存する。 | 条件付き承認済み。主表61観測・従表79観測、候補16は構造的対象外。71入力生成・リーク検査済み、実走前。 |
+
 ## input_selection 一覧
 
 `input-selection-vNNN` は、モデルへ渡す元配信範囲の選び方を表す。`theme-llm-vNNN` はプロンプトと出力契約の版であり、両者は別の版空間として独立に記録する。入力選定だけを変える実験では `theme-llm` の版を増やさない。
