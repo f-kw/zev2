@@ -1,0 +1,42 @@
+{
+  "selectedCuts": [
+    {
+      "sourceStartMs": 4096310,
+      "sourceEndMs": 4139500,
+      "reason": "開始根拠: 新球種の調整について悩み始める発話から区間を開始するためです。終了根拠: 分からないと迷っている一連の発話が収束する箇所までを含めるためです。除外判断: 直後に続く試投やリスナーへの投票を促す場面は、1時間経過したことへの謝罪というテーマの結論へ向かう前に中立的なゲームプレイを挟むため、一旦この区間からは除外します。",
+      "usedSpeechIds": [
+        "375-376"
+      ]
+    },
+    {
+      "sourceStartMs": 4200714,
+      "sourceEndMs": 4379860,
+      "reason": "開始根拠: 2つの新球種の性能差が分からないと言いつつ試投と比較投票を始める発話から開始するためです。終了根拠: 迷いすぎて1時間経ってしまったことを明かしてリスナーに謝罪し、テーマの結論が綺麗に収まる発話まで含めるためです。除外判断: 前の区間との間にある試投の準備発話はテーマに直接関係しないため除外し、2つの独立した区間として分けています。",
+      "usedSpeechIds": [
+        "381-390"
+      ]
+    }
+  ],
+  "runAt": "2026-07-12T17:42:16+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "manualRun": false,
+    "runner": "edge-cdp-text-prompt",
+    "generationSystem": "llm-v012@gemini-web-flash",
+    "upstreamGenerationSystem": "theme-llm-v002@gemini-web-flash",
+    "resultRole": "connected-composition-eval-main",
+    "conditionalOnUpstreamRangeHit": true,
+    "promptVersion": "clip_composition_prompt_v012",
+    "contextCondition": "theme-window-plus-minus-5m",
+    "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+    "candidateIndex": 16,
+    "runs": 3,
+    "runIndex": 3,
+    "inputPromptSha256": "2624e93c31e86e47214f043ab0fb73048772ac38a3eb21e10389c324f1ec9856"
+  },
+  "promptFile": "outputs/theme-composition-connection/20260712-connection-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-016/prompt.md",
+  "pageUrl": "https://gemini.google.com/app/ef44c3a437d9a084?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"selectedCuts\": [\n    {\n      \"sourceStartMs\": 4096310,\n      \"sourceEndMs\": 4139500,\n      \"reason\": \"開始根拠: 新球種の調整について悩み始める発話から区間を開始するためです。終了根拠: 分からないと迷っている一連の発話が収束する箇所までを含めるためです。除外判断: 直後に続く試投やリスナーへの投票を促す場面は、1時間経過したことへの謝罪というテーマの結論へ向かう前に中立的なゲームプレイを挟むため、一旦この区間からは除外します。\",\n      \"usedSpeechIds\": [\n        \"375-376\"\n      ]\n    },\n    {\n      \"sourceStartMs\": 4200714,\n      \"sourceEndMs\": 4379860,\n      \"reason\": \"開始根拠: 2つの新球種の性能差が分からないと言いつつ試投と比較投票を始める発話から開始するためです。終了根拠: 迷いすぎて1時間経ってしまったことを明かしてリスナーに謝罪し、テーマの結論が綺麗に収まる発話まで含めるためです。除外判断: 前の区間との間にある試投の準備発話はテーマに直接関係しないため除外し、2つの独立した区間として分けています。\",\n      \"usedSpeechIds\": [\n        \"381-390\"\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

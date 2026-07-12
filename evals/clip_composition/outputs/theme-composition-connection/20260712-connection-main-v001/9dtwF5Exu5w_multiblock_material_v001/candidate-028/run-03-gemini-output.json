@@ -1,0 +1,35 @@
+{
+  "selectedCuts": [
+    {
+      "sourceStartMs": 5728519,
+      "sourceEndMs": 6359980,
+      "reason": "開始根拠: 組み合わせ抽選会で初戦の相手が「ザサミ商業（1B）」に決まり、強さに警戒し始める発話から始まるためです。終了根拠: 試合開始後に相手チームの詳細なステータスを確認し、全員星300前後という驚異の戦力に絶望する一連のリアクションが収束する発話まで含めるためです。除外判断: 試合の具体的な作戦指示や打席の展開へ移るspeechId 637以降の区間はテーマの本質から外れるため除外しました。",
+      "usedSpeechIds": [
+        "570-571",
+        "629-636"
+      ]
+    }
+  ],
+  "runAt": "2026-07-12T17:43:57+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "manualRun": false,
+    "runner": "edge-cdp-text-prompt",
+    "generationSystem": "llm-v012@gemini-web-flash",
+    "upstreamGenerationSystem": "theme-llm-v002@gemini-web-flash",
+    "resultRole": "connected-composition-eval-main",
+    "conditionalOnUpstreamRangeHit": true,
+    "promptVersion": "clip_composition_prompt_v012",
+    "contextCondition": "theme-window-plus-minus-5m",
+    "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+    "candidateIndex": 28,
+    "runs": 3,
+    "runIndex": 3,
+    "inputPromptSha256": "ff8bcfb6a170921c2ab0125a11e145d5a61589c42a6d1098eb5fe660ff78b46c"
+  },
+  "promptFile": "outputs/theme-composition-connection/20260712-connection-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-028/prompt.md",
+  "pageUrl": "https://gemini.google.com/app/c6445ee75232d37d?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"selectedCuts\": [\n    {\n      \"sourceStartMs\": 5728519,\n      \"sourceEndMs\": 6359980,\n      \"reason\": \"開始根拠: 組み合わせ抽選会で初戦の相手が「ザサミ商業（1B）」に決まり、強さに警戒し始める発話から始まるためです。終了根拠: 試合開始後に相手チームの詳細なステータスを確認し、全員星300前後という驚異の戦力に絶望する一連のリアクションが収束する発話まで含めるためです。除外判断: 試合の具体的な作戦指示や打席の展開へ移るspeechId 637以降の区間はテーマの本質から外れるため除外しました。\",\n      \"usedSpeechIds\": [\"570-571\", \"629-636\"]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

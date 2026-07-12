@@ -1,0 +1,34 @@
+{
+  "selectedCuts": [
+    {
+      "sourceStartMs": 11520066,
+      "sourceEndMs": 11549658,
+      "reason": "開始根拠: 船内にベッドルームを作る提案を切り出す発話から始まるためです。終了根拠: 4つのベッドが置ける広さに大満足し、ベッドルームの配置について納得して締めくくる発話まで含めるためです。除外判断: 直後の発話からは配信を終了する雰囲気の別話題や雑談へと移行するため含めていません。",
+      "usedSpeechIds": [
+        "1713-1719"
+      ]
+    }
+  ],
+  "runAt": "2026-07-12T17:37:03+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "manualRun": false,
+    "runner": "edge-cdp-text-prompt",
+    "generationSystem": "llm-v012@gemini-web-flash",
+    "upstreamGenerationSystem": "theme-llm-v002@gemini-web-flash",
+    "resultRole": "connected-composition-eval-main",
+    "conditionalOnUpstreamRangeHit": true,
+    "promptVersion": "clip_composition_prompt_v012",
+    "contextCondition": "theme-window-plus-minus-5m",
+    "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+    "candidateIndex": 87,
+    "runs": 3,
+    "runIndex": 1,
+    "inputPromptSha256": "f1e26fc72119944d9f3d8f92e0ecd8a3d655e00d8cd84ddb8a6665af29c93bef"
+  },
+  "promptFile": "outputs/theme-composition-connection/20260712-connection-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-087/prompt.md",
+  "pageUrl": "https://gemini.google.com/app/c7a5ff5df8eae46e?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"selectedCuts\": [\n    {\n      \"sourceStartMs\": 11520066,\n      \"sourceEndMs\": 11549658,\n      \"reason\": \"開始根拠: 船内にベッドルームを作る提案を切り出す発話から始まるためです。終了根拠: 4つのベッドが置ける広さに大満足し、ベッドルームの配置について納得して締めくくる発話まで含めるためです。除外判断: 直後の発話からは配信を終了する雰囲気の別話題や雑談へと移行するため含めていません。\",\n      \"usedSpeechIds\": [\n        \"1713-1719\"\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

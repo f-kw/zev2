@@ -1,0 +1,35 @@
+{
+  "selectedCuts": [
+    {
+      "sourceStartMs": 3554885,
+      "sourceEndMs": 3723879,
+      "reason": "開始根拠: 「重さ」の育成方針についてリスナーに意見を募集し始める発話から始まるためです。終了根拠: 混乱したマリンが同期の博衣こよりに大声で助けを求める一連のコミカルな反応が収束する発話まで含めるためです。除外判断: それ以前の技の名前を決める話題や、それ以降のこよりに聞くのをやめる話題は、テーマの最小区間から外れるため除外しました。",
+      "usedSpeechIds": [
+        "343-345",
+        "350-353"
+      ]
+    }
+  ],
+  "runAt": "2026-07-12T17:40:11+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "manualRun": false,
+    "runner": "edge-cdp-text-prompt",
+    "generationSystem": "llm-v012@gemini-web-flash",
+    "upstreamGenerationSystem": "theme-llm-v002@gemini-web-flash",
+    "resultRole": "connected-composition-eval-main",
+    "conditionalOnUpstreamRangeHit": true,
+    "promptVersion": "clip_composition_prompt_v012",
+    "contextCondition": "theme-window-plus-minus-5m",
+    "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+    "candidateIndex": 13,
+    "runs": 3,
+    "runIndex": 1,
+    "inputPromptSha256": "613adcb793da9f50dd096413d15762f809dfad7eeae8186474de97f5f91b30cb"
+  },
+  "promptFile": "outputs/theme-composition-connection/20260712-connection-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-013/prompt.md",
+  "pageUrl": "https://gemini.google.com/app/4eb64072387bef55?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"selectedCuts\": [\n    {\n      \"sourceStartMs\": 3554885,\n      \"sourceEndMs\": 3723879,\n      \"reason\": \"開始根拠: 「重さ」の育成方針についてリスナーに意見を募集し始める発話から始まるためです。終了根拠: 混乱したマリンが同期の博衣こよりに大声で助けを求める一連のコミカルな反応が収束する発話まで含めるためです。除外判断: それ以前の技の名前を決める話題や、それ以降のこよりに聞くのをやめる話題は、テーマの最小区間から外れるため除外しました。\",\n      \"usedSpeechIds\": [\"343-345\", \"350-353\"]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

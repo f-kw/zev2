@@ -1,0 +1,34 @@
+{
+  "selectedCuts": [
+    {
+      "sourceStartMs": 240202,
+      "sourceEndMs": 298984,
+      "reason": "開始根拠: マリンがころねの様子を「今日ねずこスタイルなんで」と紹介して掛け合いの状況説明を始める発話から採用するためです。終了根拠: マリンが炭治郎になりきって「ねずこ、お兄ちゃんにはわかる」と会話し、音量の確認など視聴者への配慮を挟みつつねずこトークの結論が一区切りする発話まで含めるためです。除外判断: 続く発話以降は鬼滅の刃に関連した単語を探しつつも別作業の話題や画面のイジりへと移るため除外しました。",
+      "usedSpeechIds": [
+        "19-20"
+      ]
+    }
+  ],
+  "runAt": "2026-07-12T17:30:57+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "manualRun": false,
+    "runner": "edge-cdp-text-prompt",
+    "generationSystem": "llm-v012@gemini-web-flash",
+    "upstreamGenerationSystem": "theme-llm-v002@gemini-web-flash",
+    "resultRole": "connected-composition-eval-main",
+    "conditionalOnUpstreamRangeHit": true,
+    "promptVersion": "clip_composition_prompt_v012",
+    "contextCondition": "theme-window-plus-minus-5m",
+    "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+    "candidateIndex": 2,
+    "runs": 3,
+    "runIndex": 3,
+    "inputPromptSha256": "eba9dcfd89c6adeec3975debd6c9196f1fa0d77c4c22385bf21684d67035c7f6"
+  },
+  "promptFile": "outputs/theme-composition-connection/20260712-connection-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-002/prompt.md",
+  "pageUrl": "https://gemini.google.com/app/5e17e9d78c12f076?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"selectedCuts\": [\n    {\n      \"sourceStartMs\": 240202,\n      \"sourceEndMs\": 298984,\n      \"reason\": \"開始根拠: マリンがころねの様子を「今日ねずこスタイルなんで」と紹介して掛け合いの状況説明を始める発話から採用するためです。終了根拠: マリンが炭治郎になりきって「ねずこ、お兄ちゃんにはわかる」と会話し、音量の確認など視聴者への配慮を挟みつつねずこトークの結論が一区切りする発話まで含めるためです。除外判断: 続く発話以降は鬼滅の刃に関連した単語を探しつつも別作業の話題や画面のイジりへと移るため除外しました。\",\n      \"usedSpeechIds\": [\"19-20\"]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

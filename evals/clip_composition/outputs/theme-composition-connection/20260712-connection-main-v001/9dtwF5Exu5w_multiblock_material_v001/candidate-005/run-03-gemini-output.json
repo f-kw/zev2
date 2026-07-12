@@ -1,0 +1,34 @@
+{
+  "selectedCuts": [
+    {
+      "sourceStartMs": 1113054,
+      "sourceEndMs": 1317150,
+      "reason": "開始根拠: フブキ（白上フブキ）風の名前を付けようと提案し、エフェクト選びを始める発話から展開するためです。終了根拠: 試し投げを一通り終え、ショップでエフェクトを変えるかどうかの話題に移る直前の発話までを網羅するためです。除外判断: 候補範囲外のspeechId 163以降は、ショップの機能や全体の育成方針・アンケートの悩みに話が移るため除外しました。",
+      "usedSpeechIds": [
+        "145-162"
+      ]
+    }
+  ],
+  "runAt": "2026-07-12T17:39:08+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "manualRun": false,
+    "runner": "edge-cdp-text-prompt",
+    "generationSystem": "llm-v012@gemini-web-flash",
+    "upstreamGenerationSystem": "theme-llm-v002@gemini-web-flash",
+    "resultRole": "connected-composition-eval-main",
+    "conditionalOnUpstreamRangeHit": true,
+    "promptVersion": "clip_composition_prompt_v012",
+    "contextCondition": "theme-window-plus-minus-5m",
+    "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+    "candidateIndex": 5,
+    "runs": 3,
+    "runIndex": 3,
+    "inputPromptSha256": "492ce2411f5dc8fc74b7872c60497ab4a5407b8095626ee506d45d6cce9b8809"
+  },
+  "promptFile": "outputs/theme-composition-connection/20260712-connection-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-005/prompt.md",
+  "pageUrl": "https://gemini.google.com/app/0aa561bf8933049a?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"selectedCuts\": [\n    {\n      \"sourceStartMs\": 1113054,\n      \"sourceEndMs\": 1317150,\n      \"reason\": \"開始根拠: フブキ（白上フブキ）風の名前を付けようと提案し、エフェクト選びを始める発話から展開するためです。終了根拠: 試し投げを一通り終え、ショップでエフェクトを変えるかどうかの話題に移る直前の発話までを網羅するためです。除外判断: 候補範囲外のspeechId 163以降は、ショップの機能や全体の育成方針・アンケートの悩みに話が移るため除外しました。\",\n      \"usedSpeechIds\": [\"145-162\"]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

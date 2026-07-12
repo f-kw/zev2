@@ -1,0 +1,34 @@
+{
+  "selectedCuts": [
+    {
+      "sourceStartMs": 4710742,
+      "sourceEndMs": 4738494,
+      "reason": "開始根拠: しおりんに狙い通り特殊能力を付けるためにミート練習の選択を決定する発話から始まるためです。終了根拠: 狙い通り『カット打ち』の特殊能力が付き、宝鐘マリンが「ええやん！」と歓喜して場面の余韻が収束する瞬間まで含めるためです。除外判断: 候補範囲外の直前の練習内容の検討や、直後の3年生の強化に関する別話題の場面はテーマに含まれないため除外しました。",
+      "usedSpeechIds": [
+        "435-451"
+      ]
+    }
+  ],
+  "runAt": "2026-07-12T17:42:33+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "manualRun": false,
+    "runner": "edge-cdp-text-prompt",
+    "generationSystem": "llm-v012@gemini-web-flash",
+    "upstreamGenerationSystem": "theme-llm-v002@gemini-web-flash",
+    "resultRole": "connected-composition-eval-main",
+    "conditionalOnUpstreamRangeHit": true,
+    "promptVersion": "clip_composition_prompt_v012",
+    "contextCondition": "theme-window-plus-minus-5m",
+    "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+    "candidateIndex": 22,
+    "runs": 3,
+    "runIndex": 1,
+    "inputPromptSha256": "8495e0fb274c13bbe58a9fc5fd293e15562659601a8284a300b2278552e821e1"
+  },
+  "promptFile": "outputs/theme-composition-connection/20260712-connection-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-022/prompt.md",
+  "pageUrl": "https://gemini.google.com/app/bba30a5069aaa980?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"selectedCuts\": [\n    {\n      \"sourceStartMs\": 4710742,\n      \"sourceEndMs\": 4738494,\n      \"reason\": \"開始根拠: しおりんに狙い通り特殊能力を付けるためにミート練習の選択を決定する発話から始まるためです。終了根拠: 狙い通り『カット打ち』の特殊能力が付き、宝鐘マリンが「ええやん！」と歓喜して場面の余韻が収束する瞬間まで含めるためです。除外判断: 候補範囲外の直前の練習内容の検討や、直後の3年生の強化に関する別話題の場面はテーマに含まれないため除外しました。\",\n      \"usedSpeechIds\": [\"435-451\"]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

@@ -1,0 +1,34 @@
+{
+  "selectedCuts": [
+    {
+      "sourceStartMs": 1021002,
+      "sourceEndMs": 1079852,
+      "reason": "開始根拠: 危機的状況のイノシシに対抗するため、早く殺せるかという戦闘のフリから発話が始まるためです。終了根拠: イノシシが3匹いることが発覚して慌て、1人30本ずつ矢を持つという作戦・掛け合いの結論が収束する発話まで含めるためです。除外判断: 候補範囲外の前後（speechId: 119以前および128以降）は、矢の作成準備や別行動の雑談でありイノシシ3匹に焦る中心的な掛け合いから外れるため除外します。",
+      "usedSpeechIds": [
+        "120-127"
+      ]
+    }
+  ],
+  "runAt": "2026-07-12T17:31:14+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "manualRun": false,
+    "runner": "edge-cdp-text-prompt",
+    "generationSystem": "llm-v012@gemini-web-flash",
+    "upstreamGenerationSystem": "theme-llm-v002@gemini-web-flash",
+    "resultRole": "connected-composition-eval-main",
+    "conditionalOnUpstreamRangeHit": true,
+    "promptVersion": "clip_composition_prompt_v012",
+    "contextCondition": "theme-window-plus-minus-5m",
+    "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+    "candidateIndex": 17,
+    "runs": 3,
+    "runIndex": 1,
+    "inputPromptSha256": "3315fe17325d85351c58ae600c186ff4a2eccf23be7a6185ef4746738800decf"
+  },
+  "promptFile": "outputs/theme-composition-connection/20260712-connection-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-017/prompt.md",
+  "pageUrl": "https://gemini.google.com/app/b1dc716e795ed1f0?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"selectedCuts\": [\n    {\n      \"sourceStartMs\": 1021002,\n      \"sourceEndMs\": 1079852,\n      \"reason\": \"開始根拠: 危機的状況のイノシシに対抗するため、早く殺せるかという戦闘のフリから発話が始まるためです。終了根拠: イノシシが3匹いることが発覚して慌て、1人30本ずつ矢を持つという作戦・掛け合いの結論が収束する発話まで含めるためです。除外判断: 候補範囲外の前後（speechId: 119以前および128以降）は、矢の作成準備や別行動の雑談でありイノシシ3匹に焦る中心的な掛け合いから外れるため除外します。\",\n      \"usedSpeechIds\": [\n        \"120-127\"\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

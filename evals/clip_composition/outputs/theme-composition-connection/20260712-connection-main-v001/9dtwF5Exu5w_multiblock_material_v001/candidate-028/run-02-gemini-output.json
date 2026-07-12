@@ -1,0 +1,34 @@
+{
+  "selectedCuts": [
+    {
+      "sourceStartMs": 6281687,
+      "sourceEndMs": 6359980,
+      "reason": "開始根拠: 初戦の対戦相手である「ザサミ商業」の名前を叫び、驚きとともに焦り始める発話から始まるためです。終了根拠: 相手チーム全員のステータスが星300前後あるという驚異の強さに絶望し、例外の選手を一人見つけるリアクションが収束する瞬間まで含めるためです。除外判断: 続く発話からはその例外である長谷川という特定の選手に関する個別の深掘りや試合の具体的な展開の考察に移るため、テーマの最小区間として除外しました。",
+      "usedSpeechIds": [
+        "629-636"
+      ]
+    }
+  ],
+  "runAt": "2026-07-12T17:43:39+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "manualRun": false,
+    "runner": "edge-cdp-text-prompt",
+    "generationSystem": "llm-v012@gemini-web-flash",
+    "upstreamGenerationSystem": "theme-llm-v002@gemini-web-flash",
+    "resultRole": "connected-composition-eval-main",
+    "conditionalOnUpstreamRangeHit": true,
+    "promptVersion": "clip_composition_prompt_v012",
+    "contextCondition": "theme-window-plus-minus-5m",
+    "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+    "candidateIndex": 28,
+    "runs": 3,
+    "runIndex": 2,
+    "inputPromptSha256": "ff8bcfb6a170921c2ab0125a11e145d5a61589c42a6d1098eb5fe660ff78b46c"
+  },
+  "promptFile": "outputs/theme-composition-connection/20260712-connection-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-028/prompt.md",
+  "pageUrl": "https://gemini.google.com/app/3fe09633a52bdb9d?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"selectedCuts\": [\n    {\n      \"sourceStartMs\": 6281687,\n      \"sourceEndMs\": 6359980,\n      \"reason\": \"開始根拠: 初戦の対戦相手である「ザサミ商業」の名前を叫び、驚きとともに焦り始める発話から始まるためです。終了根拠: 相手チーム全員のステータスが星300前後あるという驚異の強さに絶望し、例外の選手を一人見つけるリアクションが収束する瞬間まで含めるためです。除外判断: 続く発話からはその例外である長谷川という特定の選手に関する個別の深掘りや試合の具体的な展開の考察に移るため、テーマの最小区間として除外しました。\",\n      \"usedSpeechIds\": [\"629-636\"]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

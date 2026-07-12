@@ -1,0 +1,34 @@
+{
+  "selectedCuts": [
+    {
+      "sourceStartMs": 11551287,
+      "sourceEndMs": 11593310,
+      "reason": "開始根拠: マリンの「でも誘って?」という、告白の掛け合いのフリとなる発話から始まるためです。終了根拠: マリンが「コーネとならやっていける気がする」と締めくくり、恋愛風の掛け合いのオチと余韻が収束する発話まで含めるためです。除外判断: 候補範囲外のspeechId 1727以降はゲーム内の別の発見に話題が移っているため含めません。",
+      "usedSpeechIds": [
+        "1720-1726"
+      ]
+    }
+  ],
+  "runAt": "2026-07-12T17:38:18+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "manualRun": false,
+    "runner": "edge-cdp-text-prompt",
+    "generationSystem": "llm-v012@gemini-web-flash",
+    "upstreamGenerationSystem": "theme-llm-v002@gemini-web-flash",
+    "resultRole": "connected-composition-eval-main",
+    "conditionalOnUpstreamRangeHit": true,
+    "promptVersion": "clip_composition_prompt_v012",
+    "contextCondition": "theme-window-plus-minus-5m",
+    "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+    "candidateIndex": 88,
+    "runs": 3,
+    "runIndex": 3,
+    "inputPromptSha256": "db49c433be9e5f4e12f013aea305ed702fe06022edd11ba366cc7e9348f6d86d"
+  },
+  "promptFile": "outputs/theme-composition-connection/20260712-connection-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-088/prompt.md",
+  "pageUrl": "https://gemini.google.com/app/56e7c81a1240597d?hl=ja",
+  "rawResponseText": "{\n\"selectedCuts\": [\n{\n\"sourceStartMs\": 11551287,\n\"sourceEndMs\": 11593310,\n\"reason\": \"開始根拠: マリンの「でも誘って?」という、告白の掛け合いのフリとなる発話から始まるためです。終了根拠: マリンが「コーネとならやっていける気がする」と締めくくり、恋愛風の掛け合いのオチと余韻が収束する発話まで含めるためです。除外判断: 候補範囲外のspeechId 1727以降はゲーム内の別の発見に話題が移っているため含めません。\",\n\"usedSpeechIds\": [\"1720-1726\"]\n}\n]\n}\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

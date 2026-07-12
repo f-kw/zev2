@@ -1,0 +1,34 @@
+{
+  "selectedCuts": [
+    {
+      "sourceStartMs": 4200714,
+      "sourceEndMs": 4379860,
+      "reason": "開始根拠: 新球種の性能について迷い、リスナーにどっちが良いか確認し始める発話から開始するためです。終了根拠: 投票結果をもとに球種を決定した直後、迷いすぎて1時間経ってしまったことを明かして謝罪・感謝する発話が収束するまで含めるためです。除外判断: 候補範囲の先頭にある悩み中の断片（speechId: 375-376）は、その後に一度別のテスト投球などを挟んでから本格的な投票と結論の流れが始まるため、切り抜きとして単独で綺麗に成立する後半のまとまりのみを最小区間として選択しました。",
+      "usedSpeechIds": [
+        "381-390"
+      ]
+    }
+  ],
+  "runAt": "2026-07-12T17:41:42+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "manualRun": false,
+    "runner": "edge-cdp-text-prompt",
+    "generationSystem": "llm-v012@gemini-web-flash",
+    "upstreamGenerationSystem": "theme-llm-v002@gemini-web-flash",
+    "resultRole": "connected-composition-eval-main",
+    "conditionalOnUpstreamRangeHit": true,
+    "promptVersion": "clip_composition_prompt_v012",
+    "contextCondition": "theme-window-plus-minus-5m",
+    "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+    "candidateIndex": 16,
+    "runs": 3,
+    "runIndex": 1,
+    "inputPromptSha256": "2624e93c31e86e47214f043ab0fb73048772ac38a3eb21e10389c324f1ec9856"
+  },
+  "promptFile": "outputs/theme-composition-connection/20260712-connection-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-016/prompt.md",
+  "pageUrl": "https://gemini.google.com/app/381dc4626c683c64?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"selectedCuts\": [\n    {\n      \"sourceStartMs\": 4200714,\n      \"sourceEndMs\": 4379860,\n      \"reason\": \"開始根拠: 新球種の性能について迷い、リスナーにどっちが良いか確認し始める発話から開始するためです。終了根拠: 投票結果をもとに球種を決定した直後、迷いすぎて1時間経ってしまったことを明かして謝罪・感謝する発話が収束するまで含めるためです。除外判断: 候補範囲の先頭にある悩み中の断片（speechId: 375-376）は、その後に一度別のテスト投球などを挟んでから本格的な投票と結論の流れが始まるため、切り抜きとして単独で綺麗に成立する後半のまとまりのみを最小区間として選択しました。\",\n      \"usedSpeechIds\": [\n        \"381-390\"\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

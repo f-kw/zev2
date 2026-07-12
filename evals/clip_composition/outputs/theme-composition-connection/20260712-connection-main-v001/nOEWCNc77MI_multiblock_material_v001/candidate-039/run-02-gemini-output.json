@@ -1,0 +1,34 @@
+{
+  "selectedCuts": [
+    {
+      "sourceStartMs": 3252153,
+      "sourceEndMs": 3292350,
+      "reason": "開始根拠: イノシシをやる話からイノスケやねずこの名前を出して鬼滅の刃ごっこ遊びのノリが始まる発話のためです。終了根拠: 鬼滅の刃のキャラクターに関する掛け合いとツッコミが収束する候補範囲の最後の発話まで含めるためです。除外判断: 候補範囲外のこれより前の発話はバーベキューに関する別の雑談であり、これ以降の発話は一度笑い声や別のやり取りで文脈が途切れるため含めません。",
+      "usedSpeechIds": [
+        "481-491"
+      ]
+    }
+  ],
+  "runAt": "2026-07-12T17:34:51+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "manualRun": false,
+    "runner": "edge-cdp-text-prompt",
+    "generationSystem": "llm-v012@gemini-web-flash",
+    "upstreamGenerationSystem": "theme-llm-v002@gemini-web-flash",
+    "resultRole": "connected-composition-eval-main",
+    "conditionalOnUpstreamRangeHit": true,
+    "promptVersion": "clip_composition_prompt_v012",
+    "contextCondition": "theme-window-plus-minus-5m",
+    "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+    "candidateIndex": 39,
+    "runs": 3,
+    "runIndex": 2,
+    "inputPromptSha256": "c2e95d8b9d2ef5700dd7b77e48b0e1fdd678de2fcc85a16af47437e134dbf943"
+  },
+  "promptFile": "outputs/theme-composition-connection/20260712-connection-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-039/prompt.md",
+  "pageUrl": "https://gemini.google.com/app/0d759947080985f8?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"selectedCuts\": [\n    {\n      \"sourceStartMs\": 3252153,\n      \"sourceEndMs\": 3292350,\n      \"reason\": \"開始根拠: イノシシをやる話からイノスケやねずこの名前を出して鬼滅の刃ごっこ遊びのノリが始まる発話のためです。終了根拠: 鬼滅の刃のキャラクターに関する掛け合いとツッコミが収束する候補範囲の最後の発話まで含めるためです。除外判断: 候補範囲外のこれより前の発話はバーベキューに関する別の雑談であり、これ以降の発話は一度笑い声や別のやり取りで文脈が途切れるため含めません。\",\n      \"usedSpeechIds\": [\"481-491\"]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

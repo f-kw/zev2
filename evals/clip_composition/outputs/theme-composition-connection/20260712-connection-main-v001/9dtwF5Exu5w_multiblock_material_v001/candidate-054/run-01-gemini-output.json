@@ -1,0 +1,34 @@
+{
+  "selectedCuts": [
+    {
+      "sourceStartMs": 10776694,
+      "sourceEndMs": 10817172,
+      "reason": "開始根拠: リスナーに対して「トール行こう？」と盗塁の指示を迷いながら問いかけ始める発話から開始するためです。終了根拠: 走力や盗塁の能力値を気にして「やめとくか？」と葛藤の末に一度結論づける発話の収束までを含めるためです。除外判断: それ以降の「犠牲フライか？」やスクイズに関する相談は、盗塁指示に関する葛藤のテーマから外れるため除外しました。",
+      "usedSpeechIds": [
+        "1216-1236"
+      ]
+    }
+  ],
+  "runAt": "2026-07-12T17:46:53+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "manualRun": false,
+    "runner": "edge-cdp-text-prompt",
+    "generationSystem": "llm-v012@gemini-web-flash",
+    "upstreamGenerationSystem": "theme-llm-v002@gemini-web-flash",
+    "resultRole": "connected-composition-eval-main",
+    "conditionalOnUpstreamRangeHit": true,
+    "promptVersion": "clip_composition_prompt_v012",
+    "contextCondition": "theme-window-plus-minus-5m",
+    "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+    "candidateIndex": 54,
+    "runs": 3,
+    "runIndex": 1,
+    "inputPromptSha256": "cd8aeecfd531981499b2441cf7423738c50440b17508f51eecd5c717792be468"
+  },
+  "promptFile": "outputs/theme-composition-connection/20260712-connection-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-054/prompt.md",
+  "pageUrl": "https://gemini.google.com/app/33c5c41ccc90e2c7?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"selectedCuts\": [\n    {\n      \"sourceStartMs\": 10776694,\n      \"sourceEndMs\": 10817172,\n      \"reason\": \"開始根拠: リスナーに対して「トール行こう？」と盗塁の指示を迷いながら問いかけ始める発話から開始するためです。終了根拠: 走力や盗塁の能力値を気にして「やめとくか？」と葛藤の末に一度結論づける発話の収束までを含めるためです。除外判断: それ以降の「犠牲フライか？」やスクイズに関する相談は、盗塁指示に関する葛藤のテーマから外れるため除外しました。\",\n      \"usedSpeechIds\": [\n        \"1216-1236\"\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

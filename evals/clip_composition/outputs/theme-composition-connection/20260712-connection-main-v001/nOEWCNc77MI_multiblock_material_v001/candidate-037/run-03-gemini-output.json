@@ -1,0 +1,34 @@
+{
+  "selectedCuts": [
+    {
+      "sourceStartMs": 3180190,
+      "sourceEndMs": 3209684,
+      "reason": "開始根拠: しし肉を焼いているかどうかの確認からテーマが始まるためです。終了根拠: 豪華なバーベキューが完成して回復量の多さに歓喜する一連の流れが収束する発話まで含めるためです。除外判断: 候補範囲外の直後の発話は、バーベキューの網の上を歩く別の下りへ移行しているため含めません。",
+      "usedSpeechIds": [
+        "470-476"
+      ]
+    }
+  ],
+  "runAt": "2026-07-12T17:34:19+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "manualRun": false,
+    "runner": "edge-cdp-text-prompt",
+    "generationSystem": "llm-v012@gemini-web-flash",
+    "upstreamGenerationSystem": "theme-llm-v002@gemini-web-flash",
+    "resultRole": "connected-composition-eval-main",
+    "conditionalOnUpstreamRangeHit": true,
+    "promptVersion": "clip_composition_prompt_v012",
+    "contextCondition": "theme-window-plus-minus-5m",
+    "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+    "candidateIndex": 37,
+    "runs": 3,
+    "runIndex": 3,
+    "inputPromptSha256": "480b61983ef4502d906fe8078512a90de52b65946ef765e49e0af0f886dcf294"
+  },
+  "promptFile": "outputs/theme-composition-connection/20260712-connection-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-037/prompt.md",
+  "pageUrl": "https://gemini.google.com/app/c9cd5398372498ef?hl=ja",
+  "rawResponseText": "{\n\"selectedCuts\": [\n{\n\"sourceStartMs\": 3180190,\n\"sourceEndMs\": 3209684,\n\"reason\": \"開始根拠: しし肉を焼いているかどうかの確認からテーマが始まるためです。終了根拠: 豪華なバーベキューが完成して回復量の多さに歓喜する一連の流れが収束する発話まで含めるためです。除外判断: 候補範囲外の直後の発話は、バーベキューの網の上を歩く別の下りへ移行しているため含めません。\",\n\"usedSpeechIds\": [\"470-476\"]\n}\n]\n}\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

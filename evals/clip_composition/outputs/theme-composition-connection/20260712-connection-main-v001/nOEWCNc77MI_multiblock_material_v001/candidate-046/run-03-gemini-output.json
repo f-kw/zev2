@@ -1,0 +1,34 @@
+{
+  "selectedCuts": [
+    {
+      "sourceStartMs": 3991226,
+      "sourceEndMs": 4029707,
+      "reason": "開始根拠: マリンがころねの頭の匂いを嗅ぐきっかけとなる、顔の位置に関する話題が始まる発話から選択しました。終了根拠: 匂いを臭いと言われたころねがじわじわと泣き真似をする一連のプロレスのくだりが収束する発話まで含めました。除外判断: 候補範囲外の出航の話題やアンカーのやり取りは、本テーマと無関係なため除外しています。",
+      "usedSpeechIds": [
+        "578-580"
+      ]
+    }
+  ],
+  "runAt": "2026-07-12T17:36:47+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "manualRun": false,
+    "runner": "edge-cdp-text-prompt",
+    "generationSystem": "llm-v012@gemini-web-flash",
+    "upstreamGenerationSystem": "theme-llm-v002@gemini-web-flash",
+    "resultRole": "connected-composition-eval-main",
+    "conditionalOnUpstreamRangeHit": true,
+    "promptVersion": "clip_composition_prompt_v012",
+    "contextCondition": "theme-window-plus-minus-5m",
+    "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+    "candidateIndex": 46,
+    "runs": 3,
+    "runIndex": 3,
+    "inputPromptSha256": "655a793b72ca7fa9b889a02eae554756a361e84c73a2d65419ce4f4b5179a7b8"
+  },
+  "promptFile": "outputs/theme-composition-connection/20260712-connection-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-046/prompt.md",
+  "pageUrl": "https://gemini.google.com/app/a99edb77c2bdc622?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"selectedCuts\": [\n    {\n      \"sourceStartMs\": 3991226,\n      \"sourceEndMs\": 4029707,\n      \"reason\": \"開始根拠: マリンがころねの頭の匂いを嗅ぐきっかけとなる、顔の位置に関する話題が始まる発話から選択しました。終了根拠: 匂いを臭いと言われたころねがじわじわと泣き真似をする一連のプロレスのくだりが収束する発話まで含めました。除外判断: 候補範囲外の出航の話題やアンカーのやり取りは、本テーマと無関係なため除外しています。\",\n      \"usedSpeechIds\": [\"578-580\"]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

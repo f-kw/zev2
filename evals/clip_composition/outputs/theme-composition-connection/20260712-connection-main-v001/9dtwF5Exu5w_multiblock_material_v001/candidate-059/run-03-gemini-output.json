@@ -1,0 +1,34 @@
+{
+  "selectedCuts": [
+    {
+      "sourceStartMs": 11699540,
+      "sourceEndMs": 11789446,
+      "reason": "開始根拠: 次戦の相手がBランクだと判明し反応する「でBかー」という発話の直前から開始するためです。終了根拠: 配信の告知と次回の挨拶を終えてセーブして締めくくる一連の流れが収束する発話まで含めるためです。除外判断: 1317以前のアイテム購入や体力回復のくだりはテーマと無関係であり、1323のエンディング曲と思われる発話は余韻が別の話題に移った後なので含めません。",
+      "usedSpeechIds": [
+        "1318-1322"
+      ]
+    }
+  ],
+  "runAt": "2026-07-12T17:48:11+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "manualRun": false,
+    "runner": "edge-cdp-text-prompt",
+    "generationSystem": "llm-v012@gemini-web-flash",
+    "upstreamGenerationSystem": "theme-llm-v002@gemini-web-flash",
+    "resultRole": "connected-composition-eval-main",
+    "conditionalOnUpstreamRangeHit": true,
+    "promptVersion": "clip_composition_prompt_v012",
+    "contextCondition": "theme-window-plus-minus-5m",
+    "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+    "candidateIndex": 59,
+    "runs": 3,
+    "runIndex": 3,
+    "inputPromptSha256": "ad4285f3625c5a4b6bda174e6ad1885da937ea5f9c9c6547afe722be641d30a9"
+  },
+  "promptFile": "outputs/theme-composition-connection/20260712-connection-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-059/prompt.md",
+  "pageUrl": "https://gemini.google.com/app/02d3745c26dfb94c?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"selectedCuts\": [\n    {\n      \"sourceStartMs\": 11699540,\n      \"sourceEndMs\": 11789446,\n      \"reason\": \"開始根拠: 次戦の相手がBランクだと判明し反応する「でBかー」という発話の直前から開始するためです。終了根拠: 配信の告知と次回の挨拶を終えてセーブして締めくくる一連の流れが収束する発話まで含めるためです。除外判断: 1317以前のアイテム購入や体力回復のくだりはテーマと無関係であり、1323のエンディング曲と思われる発話は余韻が別の話題に移った後なので含めません。\",\n      \"usedSpeechIds\": [\n        \"1318-1322\"\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}
