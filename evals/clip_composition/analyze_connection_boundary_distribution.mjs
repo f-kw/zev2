@@ -19,6 +19,8 @@ const baselinePath = path.join(evalRoot, 'outputs', 'theme-composition-connectio
 const changedPath = path.join(evalRoot, 'outputs', 'theme-composition-connection', '20260712-connection-v002-main-v001', 'result.json');
 const outputPath = path.join(evalRoot, 'outputs', 'theme-composition-connection', '20260712-connection-v012-v013-boundary-distribution-v001.json');
 const reportPath = path.join(evalRoot, 'reports', 'theme-composition-connection', '20260712-connection-v012-v013-boundary-distribution-v001.md');
+const runValuesCsvPath = path.join(evalRoot, 'outputs', 'theme-composition-connection', '20260712-connection-v012-v013-boundary-run-values-v001.csv');
+const observationValuesCsvPath = path.join(evalRoot, 'outputs', 'theme-composition-connection', '20260712-connection-v012-v013-boundary-observation-values-v001.csv');
 const fixtureExpectedCounts = {
   nOEWCNc77MI_multiblock_material_v001: 13,
   '9dtwF5Exu5w_multiblock_material_v001': 25
@@ -35,6 +37,12 @@ const pct = (value, total) => total ? value / total : null;
 const round = (value) => value === null ? null : Math.round(value * 1000) / 1000;
 const percent = (value) => value === null ? '-' : `${(value * 100).toFixed(1)}%`;
 const ms = (value) => value === null ? '-' : `${Math.round(value)}ms`;
+const csvCell = (value) => {
+  if (value === null || value === undefined) return '';
+  const text = String(value);
+  return /[",\n]/.test(text) ? `"${text.replaceAll('"', '""')}"` : text;
+};
+const csvLine = (values) => values.map(csvCell).join(',');
 
 function flattenReached(result) {
   return result.runs.flatMap((run) => run.targetAssessments
@@ -59,6 +67,7 @@ function boundarySummary(values) {
   return {
     count: values.length,
     signedMeanMs: round(mean(signed)),
+    signedMedianMs: nearestRank(signed, 0.5),
     absoluteMeanMs: round(mean(absolute)),
     absoluteMedianMs: nearestRank(absolute, 0.5),
     absoluteP75Ms: nearestRank(absolute, 0.75),
@@ -67,8 +76,53 @@ function boundarySummary(values) {
     within1000Count: absolute.filter((value) => value <= 1000).length,
     within1000Rate: round(pct(absolute.filter((value) => value <= 1000).length, absolute.length)),
     within3000Count: absolute.filter((value) => value <= 3000).length,
-    within3000Rate: round(pct(absolute.filter((value) => value <= 3000).length, absolute.length))
+    within3000Rate: round(pct(absolute.filter((value) => value <= 3000).length, absolute.length)),
+    within5000Count: absolute.filter((value) => value <= 5000).length,
+    within5000Rate: round(pct(absolute.filter((value) => value <= 5000).length, absolute.length))
   };
+}
+
+function fourStage(run) {
+  if (!run.formatValid) return 'miss';
+  const allReached = run.targetAssessments.every((assessment) => assessment.reached);
+  if (allReached && run.targetAssessments.every((assessment) => Math.abs(assessment.startDeltaMs) <= 1000 && Math.abs(assessment.endDeltaMs) <= 1000)) return 'match';
+  if (allReached && run.targetAssessments.every((assessment) => Math.abs(assessment.startDeltaMs) <= 3000 && Math.abs(assessment.endDeltaMs) <= 3000)) return 'gate-level';
+  if (run.targetAssessments.some((assessment) => assessment.reached)) return 'reach';
+  return 'miss';
+}
+
+function rawValues(result) {
+  const runs = result.runs.map((run) => ({
+    generationSystem: result.generationSystem,
+    fixtureId: run.fixtureId,
+    candidateIndex: run.candidateIndex,
+    runIndex: run.runIndex,
+    formatValid: run.formatValid,
+    originalThreeStage: run.stage,
+    fourStage: fourStage(run),
+    targetCount: run.targetAssessments.length,
+    reachedTargetCount: run.targetAssessments.filter((assessment) => assessment.reached).length,
+    startDeltasMs: run.targetAssessments.map((assessment) => `${assessment.expectedIndex}:${assessment.reached ? assessment.startDeltaMs : 'unreached'}`),
+    endDeltasMs: run.targetAssessments.map((assessment) => `${assessment.expectedIndex}:${assessment.reached ? assessment.endDeltaMs : 'unreached'}`)
+  }));
+  const observations = result.runs.flatMap((run) => run.targetAssessments.map((assessment) => ({
+    generationSystem: result.generationSystem,
+    fixtureId: run.fixtureId,
+    candidateIndex: run.candidateIndex,
+    runIndex: run.runIndex,
+    formatValid: run.formatValid,
+    originalThreeStage: run.stage,
+    fourStage: fourStage(run),
+    expectedIndex: assessment.expectedIndex,
+    reached: assessment.reached,
+    startDeltaMs: assessment.reached ? assessment.startDeltaMs : null,
+    endDeltaMs: assessment.reached ? assessment.endDeltaMs : null,
+    startAbsoluteDeltaMs: assessment.reached ? Math.abs(assessment.startDeltaMs) : null,
+    endAbsoluteDeltaMs: assessment.reached ? Math.abs(assessment.endDeltaMs) : null,
+    bothWithin3000: assessment.reached ? Math.abs(assessment.startDeltaMs) <= 3000 && Math.abs(assessment.endDeltaMs) <= 3000 : false,
+    bothWithin5000: assessment.reached ? Math.abs(assessment.startDeltaMs) <= 5000 && Math.abs(assessment.endDeltaMs) <= 5000 : false
+  })));
+  return { runs, observations };
 }
 
 function systemSummary(result) {
@@ -77,6 +131,7 @@ function systemSummary(result) {
   const ends = reached.map((item) => ({ delta: item.endDeltaMs }));
   const pooled = [...starts, ...ends];
   const bothWithin3000Count = reached.filter((item) => item.startAbsMs <= 3000 && item.endAbsMs <= 3000).length;
+  const bothWithin5000Count = reached.filter((item) => item.startAbsMs <= 5000 && item.endAbsMs <= 5000).length;
   const byFixture = Object.fromEntries(Object.keys(fixtureExpectedCounts).map((fixtureId) => {
     const items = reached.filter((item) => item.fixtureId === fixtureId);
     const boundaryAbsolute = items.flatMap((item) => [item.startAbsMs, item.endAbsMs]);
@@ -102,6 +157,14 @@ function systemSummary(result) {
     pooled: boundarySummary(pooled),
     bothBoundariesWithin3000Count: bothWithin3000Count,
     bothBoundariesWithin3000Rate: round(pct(bothWithin3000Count, reached.length)),
+    bothBoundariesWithin5000Count: bothWithin5000Count,
+    bothBoundariesWithin5000Rate: round(pct(bothWithin5000Count, reached.length)),
+    fourStageDistribution: {
+      match: result.runs.filter((run) => fourStage(run) === 'match').length,
+      gateLevel: result.runs.filter((run) => fourStage(run) === 'gate-level').length,
+      reach: result.runs.filter((run) => fourStage(run) === 'reach').length,
+      miss: result.runs.filter((run) => fourStage(run) === 'miss').length
+    },
     byFixture
   };
 }
@@ -164,6 +227,14 @@ async function main() {
     baseline: pipelineRecall(baseline),
     changed: pipelineRecall(changed)
   };
+  const baselineRaw = rawValues(baseline);
+  const changedRaw = rawValues(changed);
+  const allRunValues = [...baselineRaw.runs, ...changedRaw.runs];
+  const allObservationValues = [...baselineRaw.observations, ...changedRaw.observations];
+  const runKeys = new Set(allRunValues.map((run) => `${run.generationSystem}:${run.fixtureId}:${run.candidateIndex}:${run.runIndex}`));
+  const observationKeys = new Set(allObservationValues.map((item) => `${item.generationSystem}:${item.fixtureId}:${item.candidateIndex}:${item.runIndex}:${item.expectedIndex}`));
+  if (allRunValues.length !== 150 || runKeys.size !== 150) throw new Error(`run実数値が150件でない: rows=${allRunValues.length} unique=${runKeys.size}`);
+  if (allObservationValues.length !== 168 || observationKeys.size !== 168) throw new Error(`正解別観測が168件でない: rows=${allObservationValues.length} unique=${observationKeys.size}`);
   const conclusion = {
     changedPooledAbsoluteMeanIsLower: changedSummary.pooled.absoluteMeanMs < baselineSummary.pooled.absoluteMeanMs,
     changedStartAbsoluteMeanIsLower: changedSummary.start.absoluteMeanMs < baselineSummary.start.absoluteMeanMs,
@@ -180,16 +251,28 @@ async function main() {
     kind: 'connection_boundary_distribution_comparison',
     runAt: new Date().toISOString(),
     inputs: { baseline: path.relative(root, baselinePath), changed: path.relative(root, changedPath) },
+    rawValueFiles: { runValuesCsv: path.relative(root, runValuesCsvPath), observationValuesCsv: path.relative(root, observationValuesCsvPath) },
     boundaryUnit: 'each reached run × candidate × expected start/end boundary; pooled treats every boundary as one observation',
     absoluteQuantileMethod: 'nearest-rank',
     baseline: baselineSummary,
     changed: changedSummary,
     pairedCommonReached: paired,
     pipelineRecall: pipeline,
+    rawRunValues: allRunValues,
     conclusion
   };
   await mkdir(path.dirname(outputPath), { recursive: true });
   await writeFile(outputPath, `${JSON.stringify(output, null, 2)}\n`);
+  const runCsv = [
+    csvLine(['generationSystem', 'fixtureId', 'candidateIndex', 'runIndex', 'formatValid', 'originalThreeStage', 'fourStage', 'targetCount', 'reachedTargetCount', 'startDeltasMsByExpected', 'endDeltasMsByExpected']),
+    ...allRunValues.map((run) => csvLine([run.generationSystem, run.fixtureId, run.candidateIndex, run.runIndex, run.formatValid, run.originalThreeStage, run.fourStage, run.targetCount, run.reachedTargetCount, run.startDeltasMs.join(';'), run.endDeltasMs.join(';')]))
+  ];
+  await writeFile(runValuesCsvPath, `${runCsv.join('\n')}\n`);
+  const observationCsv = [
+    csvLine(['generationSystem', 'fixtureId', 'candidateIndex', 'runIndex', 'formatValid', 'originalThreeStage', 'fourStage', 'expectedIndex', 'reached', 'startDeltaMs', 'endDeltaMs', 'startAbsoluteDeltaMs', 'endAbsoluteDeltaMs', 'bothWithin3000', 'bothWithin5000']),
+    ...allObservationValues.map((item) => csvLine([item.generationSystem, item.fixtureId, item.candidateIndex, item.runIndex, item.formatValid, item.originalThreeStage, item.fourStage, item.expectedIndex, item.reached, item.startDeltaMs, item.endDeltaMs, item.startAbsoluteDeltaMs, item.endAbsoluteDeltaMs, item.bothWithin3000, item.bothWithin5000]))
+  ];
+  await writeFile(observationValuesCsvPath, `${observationCsv.join('\n')}\n`);
 
   const lines = [
     '# connection-v001/v002 境界ずれ分布比較',
@@ -197,20 +280,39 @@ async function main() {
     '- 追加LLM実走なし。保存済み150 runだけを再集計。',
     '- 境界の符号付き平均だけで相殺せず、絶対ずれを主比較する。',
     '- 分位点はnearest-rank。各開始・終了境界を1観測として等しく数える。',
+    '- 符号付きずれは負=実績より早い、正=実績より遅い。率と絶対ずれは形式成立かつ正解へ到達した観測を分母にする。',
+    `- 全150 runの実数値: \`${path.relative(root, runValuesCsvPath)}\`。複数正解に重なるrunを正解別に展開した全168観測: \`${path.relative(root, observationValuesCsvPath)}\`。`,
     '',
     '## 境界分布',
     '',
     '| 指標 | v012 / connection-v001 | v013 / connection-v002 |',
     '| --- | ---: | ---: |',
     `| 到達した候補×正解 | ${baselineSummary.reachedAssessmentCount} | ${changedSummary.reachedAssessmentCount} |`,
+    `| 開始境界 符号付き平均 / 中央値 | ${ms(baselineSummary.start.signedMeanMs)} / ${ms(baselineSummary.start.signedMedianMs)} | ${ms(changedSummary.start.signedMeanMs)} / ${ms(changedSummary.start.signedMedianMs)} |`,
     `| 開始境界 絶対ずれ平均 | ${ms(baselineSummary.start.absoluteMeanMs)} | ${ms(changedSummary.start.absoluteMeanMs)} |`,
+    `| 開始境界 ±3秒内 / ±5秒内 | ${baselineSummary.start.within3000Count}/${baselineSummary.start.count} (${percent(baselineSummary.start.within3000Rate)}) / ${baselineSummary.start.within5000Count}/${baselineSummary.start.count} (${percent(baselineSummary.start.within5000Rate)}) | ${changedSummary.start.within3000Count}/${changedSummary.start.count} (${percent(changedSummary.start.within3000Rate)}) / ${changedSummary.start.within5000Count}/${changedSummary.start.count} (${percent(changedSummary.start.within5000Rate)}) |`,
+    `| 終了境界 符号付き平均 / 中央値 | ${ms(baselineSummary.end.signedMeanMs)} / ${ms(baselineSummary.end.signedMedianMs)} | ${ms(changedSummary.end.signedMeanMs)} / ${ms(changedSummary.end.signedMedianMs)} |`,
     `| 終了境界 絶対ずれ平均 | ${ms(baselineSummary.end.absoluteMeanMs)} | ${ms(changedSummary.end.absoluteMeanMs)} |`,
+    `| 終了境界 ±3秒内 / ±5秒内 | ${baselineSummary.end.within3000Count}/${baselineSummary.end.count} (${percent(baselineSummary.end.within3000Rate)}) / ${baselineSummary.end.within5000Count}/${baselineSummary.end.count} (${percent(baselineSummary.end.within5000Rate)}) | ${changedSummary.end.within3000Count}/${changedSummary.end.count} (${percent(changedSummary.end.within3000Rate)}) / ${changedSummary.end.within5000Count}/${changedSummary.end.count} (${percent(changedSummary.end.within5000Rate)}) |`,
     `| 全境界 絶対ずれ平均 | ${ms(baselineSummary.pooled.absoluteMeanMs)} | ${ms(changedSummary.pooled.absoluteMeanMs)} |`,
     `| 全境界 絶対ずれ中央値 | ${ms(baselineSummary.pooled.absoluteMedianMs)} | ${ms(changedSummary.pooled.absoluteMedianMs)} |`,
     `| 全境界 絶対ずれP75 | ${ms(baselineSummary.pooled.absoluteP75Ms)} | ${ms(changedSummary.pooled.absoluteP75Ms)} |`,
     `| 全境界 絶対ずれP90 | ${ms(baselineSummary.pooled.absoluteP90Ms)} | ${ms(changedSummary.pooled.absoluteP90Ms)} |`,
     `| 全境界が±3秒内 | ${baselineSummary.pooled.within3000Count}/${baselineSummary.pooled.count} (${percent(baselineSummary.pooled.within3000Rate)}) | ${changedSummary.pooled.within3000Count}/${changedSummary.pooled.count} (${percent(changedSummary.pooled.within3000Rate)}) |`,
+    `| 全境界が±5秒内 | ${baselineSummary.pooled.within5000Count}/${baselineSummary.pooled.count} (${percent(baselineSummary.pooled.within5000Rate)}) | ${changedSummary.pooled.within5000Count}/${changedSummary.pooled.count} (${percent(changedSummary.pooled.within5000Rate)}) |`,
     `| 両境界とも±3秒内 | ${baselineSummary.bothBoundariesWithin3000Count}/${baselineSummary.reachedAssessmentCount} (${percent(baselineSummary.bothBoundariesWithin3000Rate)}) | ${changedSummary.bothBoundariesWithin3000Count}/${changedSummary.reachedAssessmentCount} (${percent(changedSummary.bothBoundariesWithin3000Rate)}) |`,
+    `| 両境界とも±5秒内 | ${baselineSummary.bothBoundariesWithin5000Count}/${baselineSummary.reachedAssessmentCount} (${percent(baselineSummary.bothBoundariesWithin5000Rate)}) | ${changedSummary.bothBoundariesWithin5000Count}/${changedSummary.reachedAssessmentCount} (${percent(changedSummary.bothBoundariesWithin5000Rate)}) |`,
+    '',
+    '## 四段階の再集計',
+    '',
+    '- 既存の±1000ms一致基準は変更しない。その下に、対象正解すべてへ到達し両境界が±3000ms以内の「関門水準」を別目盛りとして挿入する。',
+    '',
+    '| 段階 | v012 / connection-v001 | v013 / connection-v002 |',
+    '| --- | ---: | ---: |',
+    `| 一致(両境界±1000ms) | ${baselineSummary.fourStageDistribution.match} | ${changedSummary.fourStageDistribution.match} |`,
+    `| 関門水準(両境界±3000ms) | ${baselineSummary.fourStageDistribution.gateLevel} | ${changedSummary.fourStageDistribution.gateLevel} |`,
+    `| 到達 | ${baselineSummary.fourStageDistribution.reach} | ${changedSummary.fourStageDistribution.reach} |`,
+    `| 不達/形式不成立 | ${baselineSummary.fourStageDistribution.miss} | ${changedSummary.fourStageDistribution.miss} |`,
     '',
     '### 素材別',
     '',
