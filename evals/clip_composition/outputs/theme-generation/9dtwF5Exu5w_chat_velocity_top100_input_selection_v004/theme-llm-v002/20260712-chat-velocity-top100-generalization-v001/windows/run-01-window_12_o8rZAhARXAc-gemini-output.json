@@ -1,0 +1,64 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "夏の甲子園大会開幕とオーダーに悩むマリン監督",
+      "reason": "いよいよ始まる夏の甲子園大会を前に、お調子者などの選手特性を見ながら誰を起用するか悩むシーンです。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6002550,
+          "sourceEndMs": 6059980,
+          "supportingSpeechIds": [
+            "608-618"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "トイレに行きたいのをリスナーにイジられ否定するマリン監督",
+      "reason": "甲子園開幕直前にトイレに行きたいと漏らし、リスナーからの「漏らしてるのでは」というツッコミに全力で抗弁するやり取りが面白いためです。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6240322,
+          "sourceEndMs": 6281687,
+          "supportingSpeechIds": [
+            "627-628"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_003",
+      "title": "初戦の相手「ザサミ商業」の強さに絶望するマリン監督",
+      "reason": "試合開始直後に先制点を取られ、相手チームの総合戦力Bや全員星300という驚異のステータスに焦るシーンです。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6281687,
+          "sourceEndMs": 6359980,
+          "supportingSpeechIds": [
+            "629-636"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-12T15:45:48+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_12_o8rZAhARXAc",
+    "windowSourceVideoId": "o8rZAhARXAc",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/9dtwF5Exu5w_chat_velocity_top100_input_selection_v004/theme-llm-v002/20260712-chat-velocity-top100-generalization-v001/windows/window_12_o8rZAhARXAc-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/2745a52e750cbddf?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"夏の甲子園大会開幕とオーダーに悩むマリン監督\",\n      \"reason\": \"いよいよ始まる夏の甲子園大会を前に、お調子者などの選手特性を見ながら誰を起用するか悩むシーンです。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"o8rZAhARXAc\",\n          \"sourceStartMs\": 6002550,\n          \"sourceEndMs\": 6059980,\n          \"supportingSpeechIds\": [\n            \"608-618\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"トイレに行きたいのをリスナーにイジられ否定するマリン監督\",\n      \"reason\": \"甲子園開幕直前にトイレに行きたいと漏らし、リスナーからの「漏らしてるのでは」というツッコミに全力で抗弁するやり取りが面白いためです。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"o8rZAhARXAc\",\n          \"sourceStartMs\": 6240322,\n          \"sourceEndMs\": 6281687,\n          \"supportingSpeechIds\": [\n            \"627-628\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_003\",\n      \"title\": \"初戦の相手「ザサミ商業」の強さに絶望するマリン監督\",\n      \"reason\": \"試合開始直後に先制点を取られ、相手チームの総合戦力Bや全員星300という驚異のステータスに焦るシーンです。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"o8rZAhARXAc\",\n          \"sourceStartMs\": 6281687,\n          \"sourceEndMs\": 6359980,\n          \"supportingSpeechIds\": [\n            \"629-636\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

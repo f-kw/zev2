@@ -1,0 +1,64 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "オリジナル変化球のエフェクト選びに迷うマリン船長",
+      "reason": "フブちゃん（白上フブキ）に似合うオリジナル変化球のエフェクトを、試し投げを交えながら試行錯誤している場面です。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 1113054,
+          "sourceEndMs": 1317150,
+          "supportingSpeechIds": [
+            "145-162"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "クレセントムーンのフェスティバルタイプを確認",
+      "reason": "新しく設定したクレセントムーンのフェスティバルタイプのエフェクトを確認しようとしている場面です。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 1391869,
+          "sourceEndMs": 1439002,
+          "supportingSpeechIds": [
+            "168-174"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_003",
+      "title": "フブちゃんの変化球や投手の起用に悩む",
+      "reason": "栄冠ナイン中のフブちゃんの変化球の微妙さや、他メンバーの球種を考慮した投手起用に頭を悩ませている場面です。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 1800278,
+          "sourceEndMs": 1829780,
+          "supportingSpeechIds": [
+            207
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-12T15:30:59+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_03_o8rZAhARXAc",
+    "windowSourceVideoId": "o8rZAhARXAc",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/9dtwF5Exu5w_chat_velocity_top100_input_selection_v004/theme-llm-v002/20260712-chat-velocity-top100-generalization-v001/windows/window_03_o8rZAhARXAc-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/ccfd8ba5f6cbcd85?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"オリジナル変化球のエフェクト選びに迷うマリン船長\",\n      \"reason\": \"フブちゃん（白上フブキ）に似合うオリジナル変化球のエフェクトを、試し投げを交えながら試行錯誤している場面です。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"o8rZAhARXAc\",\n          \"sourceStartMs\": 1113054,\n          \"sourceEndMs\": 1317150,\n          \"supportingSpeechIds\": [\n            \"145-162\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"クレセントムーンのフェスティバルタイプを確認\",\n      \"reason\": \"新しく設定したクレセントムーンのフェスティバルタイプのエフェクトを確認しようとしている場面です。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"o8rZAhARXAc\",\n          \"sourceStartMs\": 1391869,\n          \"sourceEndMs\": 1439002,\n          \"supportingSpeechIds\": [\n            \"168-174\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_003\",\n      \"title\": \"フブちゃんの変化球や投手の起用に悩む\",\n      \"reason\": \"栄冠ナイン中のフブちゃんの変化球の微妙さや、他メンバーの球種を考慮した投手起用に頭を悩ませている場面です。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"o8rZAhARXAc\",\n          \"sourceStartMs\": 1800278,\n          \"sourceEndMs\": 1829780,\n          \"supportingSpeechIds\": [\n            207\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

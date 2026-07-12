@@ -1,0 +1,4833 @@
+{
+  "kind": "clip_composition_theme_generation_formal_score",
+  "runAt": "2026-07-12T07:05:18.541Z",
+  "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+  "resultRole": "formal-primary",
+  "generationSystem": "theme-llm-v002@gemini-web-flash",
+  "generationSystemBase": "theme-llm-v002",
+  "model": "gemini-web-flash",
+  "outputId": "20260712-chat-velocity-top100-generalization-v001",
+  "input": {
+    "inputSetId": "9dtwF5Exu5w_chat_velocity_top100_input_selection_v004",
+    "inputSelectionVersion": "input-selection-v004",
+    "promptVersion": "theme_generation_prompt_v002",
+    "bundlePath": "evals/clip_composition/outputs/theme-generation/9dtwF5Exu5w_chat_velocity_top100_input_selection_v004/theme-llm-v002/20260712-chat-velocity-top100-generalization-v001",
+    "leakageInspectionStatus": "pass",
+    "policy": "正式な主結果として単独採点し、参考結果とは統合しない。"
+  },
+  "summary": {
+    "candidateCount": 60,
+    "validEvidenceRangeCount": 64,
+    "inputVisible": {
+      "expectedCount": 18,
+      "hitCount": 15
+    },
+    "inputNotVisible": {
+      "expectedCount": 7,
+      "hitCount": 0
+    },
+    "allExpected": {
+      "expectedCount": 25,
+      "hitCount": 15
+    },
+    "candidateClassificationCounts": {
+      "rangeHit": 0,
+      "overbroadRange": 12,
+      "offTopic": 48,
+      "noEvidence": 0
+    }
+  },
+  "expectedAssessments": [
+    {
+      "sourceStartMs": 281521,
+      "sourceEndMs": 282642,
+      "reason": "人間が切り抜き側と元配信側で同じ素材と確認した素材ブロックのため。",
+      "sourceVideoId": "o8rZAhARXAc",
+      "sourceUrl": "https://www.youtube.com/watch?v=o8rZAhARXAc",
+      "sourceSttId": "9dtwF5Exu5w_o8rZAhARXAc_local30_v001",
+      "clipId": "9dtwF5Exu5w",
+      "clipUrl": "https://www.youtube.com/watch?v=9dtwF5Exu5w",
+      "verificationStatus": "multiblock_material_human_confirmed",
+      "usableForClipLocationEval": true,
+      "usableForCompositionPromptEval": true,
+      "multicutPartIndex": 0,
+      "clipStartMs": 3655,
+      "clipEndMs": 4135,
+      "qualityGrade": "material_block_granularity",
+      "boundaryPrecision": {
+        "grade": "material_block_granularity",
+        "meaning": "素材対応の切り替わりを表す粒度。細かい詰めは境界にしない。"
+      },
+      "label": "block 1",
+      "materialBlock": {
+        "blockIndex": 1,
+        "matchedWordPairCount": 13,
+        "internalGapMs": {
+          "sourceExtraInsideMs": 0,
+          "clipExtraInsideMs": 0,
+          "note": "同一素材ブロック内でsource側の進みがclip側より大きい分は、切り抜き内部の詰め候補として扱う。境界にはしない。"
+        },
+        "internalTransitions": [],
+        "runIndexes": [
+          6
+        ]
+      },
+      "humanVerification": {
+        "status": "confirmed",
+        "checkedBy": "kawafmm",
+        "checkedAt": "2026-07-12",
+        "method": "境界確認パッケージの動画・音声確認",
+        "note": "人間確認で使用箇所8・16・19・22・23・30を不採用とした。該当箇所は隣接境界の前側または後側で、切り抜きと元配信の素材が一致しない。境目の時間ジャンプと元配信位置切替の観察は全30境界でtrueとして保持する。",
+        "acceptedBlocks": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          17,
+          18,
+          20,
+          21,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          31
+        ],
+        "rejectedBlocks": [
+          8,
+          16,
+          19,
+          22,
+          23,
+          30
+        ],
+        "unresolvedBlocks": [],
+        "confirmedBoundaries": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          17,
+          20,
+          24,
+          25,
+          26,
+          27,
+          28
+        ],
+        "rejectedBoundaries": [
+          7,
+          8,
+          15,
+          16,
+          18,
+          19,
+          21,
+          22,
+          23,
+          29,
+          30
+        ],
+        "unresolvedBoundaries": [],
+        "materialBlocksPath": "evals/clip_composition/outputs/material-blocks-9dtwF5Exu5w-20260712-full-local30-material-blocks-v001.json",
+        "materialBlocksSha256": "151623c7225c78edae3117552be04cfdca5a3f8a8760bd672540e08e3a43deab",
+        "reviewPackagePath": "evals/clip_composition/outputs/boundary-check/9dtwF5Exu5w/20260712-full-local30-material-blocks-v001/index.html",
+        "reviewPackageSha256": "e85c3eb915875e667d3c3d7cec9fd8e6b78feb4a397411ae6edd8b4dbb576da7"
+      },
+      "expectedIndex": 1,
+      "inputVisibility": "input-not-visible",
+      "overlappingInputSpeechIds": [],
+      "hit": false,
+      "hitCandidateIndexes": []
+    },
+    {
+      "sourceStartMs": 300714,
+      "sourceEndMs": 301675,
+      "reason": "人間が切り抜き側と元配信側で同じ素材と確認した素材ブロックのため。",
+      "sourceVideoId": "o8rZAhARXAc",
+      "sourceUrl": "https://www.youtube.com/watch?v=o8rZAhARXAc",
+      "sourceSttId": "9dtwF5Exu5w_o8rZAhARXAc_local30_v001",
+      "clipId": "9dtwF5Exu5w",
+      "clipUrl": "https://www.youtube.com/watch?v=9dtwF5Exu5w",
+      "verificationStatus": "multiblock_material_human_confirmed",
+      "usableForClipLocationEval": true,
+      "usableForCompositionPromptEval": true,
+      "multicutPartIndex": 1,
+      "clipStartMs": 12036,
+      "clipEndMs": 13276,
+      "qualityGrade": "material_block_granularity",
+      "boundaryPrecision": {
+        "grade": "material_block_granularity",
+        "meaning": "素材対応の切り替わりを表す粒度。細かい詰めは境界にしない。"
+      },
+      "label": "block 2",
+      "materialBlock": {
+        "blockIndex": 2,
+        "matchedWordPairCount": 10,
+        "internalGapMs": {
+          "sourceExtraInsideMs": 0,
+          "clipExtraInsideMs": 0,
+          "note": "同一素材ブロック内でsource側の進みがclip側より大きい分は、切り抜き内部の詰め候補として扱う。境界にはしない。"
+        },
+        "internalTransitions": [],
+        "runIndexes": [
+          24
+        ]
+      },
+      "humanVerification": {
+        "status": "confirmed",
+        "checkedBy": "kawafmm",
+        "checkedAt": "2026-07-12",
+        "method": "境界確認パッケージの動画・音声確認",
+        "note": "人間確認で使用箇所8・16・19・22・23・30を不採用とした。該当箇所は隣接境界の前側または後側で、切り抜きと元配信の素材が一致しない。境目の時間ジャンプと元配信位置切替の観察は全30境界でtrueとして保持する。",
+        "acceptedBlocks": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          17,
+          18,
+          20,
+          21,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          31
+        ],
+        "rejectedBlocks": [
+          8,
+          16,
+          19,
+          22,
+          23,
+          30
+        ],
+        "unresolvedBlocks": [],
+        "confirmedBoundaries": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          17,
+          20,
+          24,
+          25,
+          26,
+          27,
+          28
+        ],
+        "rejectedBoundaries": [
+          7,
+          8,
+          15,
+          16,
+          18,
+          19,
+          21,
+          22,
+          23,
+          29,
+          30
+        ],
+        "unresolvedBoundaries": [],
+        "materialBlocksPath": "evals/clip_composition/outputs/material-blocks-9dtwF5Exu5w-20260712-full-local30-material-blocks-v001.json",
+        "materialBlocksSha256": "151623c7225c78edae3117552be04cfdca5a3f8a8760bd672540e08e3a43deab",
+        "reviewPackagePath": "evals/clip_composition/outputs/boundary-check/9dtwF5Exu5w/20260712-full-local30-material-blocks-v001/index.html",
+        "reviewPackageSha256": "e85c3eb915875e667d3c3d7cec9fd8e6b78feb4a397411ae6edd8b4dbb576da7"
+      },
+      "expectedIndex": 2,
+      "inputVisibility": "input-not-visible",
+      "overlappingInputSpeechIds": [],
+      "hit": false,
+      "hitCandidateIndexes": []
+    },
+    {
+      "sourceStartMs": 338755,
+      "sourceEndMs": 341516,
+      "reason": "人間が切り抜き側と元配信側で同じ素材と確認した素材ブロックのため。",
+      "sourceVideoId": "o8rZAhARXAc",
+      "sourceUrl": "https://www.youtube.com/watch?v=o8rZAhARXAc",
+      "sourceSttId": "9dtwF5Exu5w_o8rZAhARXAc_local30_v001",
+      "clipId": "9dtwF5Exu5w",
+      "clipUrl": "https://www.youtube.com/watch?v=9dtwF5Exu5w",
+      "verificationStatus": "multiblock_material_human_confirmed",
+      "usableForClipLocationEval": true,
+      "usableForCompositionPromptEval": true,
+      "multicutPartIndex": 2,
+      "clipStartMs": 17557,
+      "clipEndMs": 20297,
+      "qualityGrade": "material_block_granularity",
+      "boundaryPrecision": {
+        "grade": "material_block_granularity",
+        "meaning": "素材対応の切り替わりを表す粒度。細かい詰めは境界にしない。"
+      },
+      "label": "block 3",
+      "materialBlock": {
+        "blockIndex": 3,
+        "matchedWordPairCount": 21,
+        "internalGapMs": {
+          "sourceExtraInsideMs": 0,
+          "clipExtraInsideMs": 0,
+          "note": "同一素材ブロック内でsource側の進みがclip側より大きい分は、切り抜き内部の詰め候補として扱う。境界にはしない。"
+        },
+        "internalTransitions": [],
+        "runIndexes": [
+          31
+        ]
+      },
+      "humanVerification": {
+        "status": "confirmed",
+        "checkedBy": "kawafmm",
+        "checkedAt": "2026-07-12",
+        "method": "境界確認パッケージの動画・音声確認",
+        "note": "人間確認で使用箇所8・16・19・22・23・30を不採用とした。該当箇所は隣接境界の前側または後側で、切り抜きと元配信の素材が一致しない。境目の時間ジャンプと元配信位置切替の観察は全30境界でtrueとして保持する。",
+        "acceptedBlocks": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          17,
+          18,
+          20,
+          21,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          31
+        ],
+        "rejectedBlocks": [
+          8,
+          16,
+          19,
+          22,
+          23,
+          30
+        ],
+        "unresolvedBlocks": [],
+        "confirmedBoundaries": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          17,
+          20,
+          24,
+          25,
+          26,
+          27,
+          28
+        ],
+        "rejectedBoundaries": [
+          7,
+          8,
+          15,
+          16,
+          18,
+          19,
+          21,
+          22,
+          23,
+          29,
+          30
+        ],
+        "unresolvedBoundaries": [],
+        "materialBlocksPath": "evals/clip_composition/outputs/material-blocks-9dtwF5Exu5w-20260712-full-local30-material-blocks-v001.json",
+        "materialBlocksSha256": "151623c7225c78edae3117552be04cfdca5a3f8a8760bd672540e08e3a43deab",
+        "reviewPackagePath": "evals/clip_composition/outputs/boundary-check/9dtwF5Exu5w/20260712-full-local30-material-blocks-v001/index.html",
+        "reviewPackageSha256": "e85c3eb915875e667d3c3d7cec9fd8e6b78feb4a397411ae6edd8b4dbb576da7"
+      },
+      "expectedIndex": 3,
+      "inputVisibility": "input-not-visible",
+      "overlappingInputSpeechIds": [],
+      "hit": false,
+      "hitCandidateIndexes": []
+    },
+    {
+      "sourceStartMs": 441877,
+      "sourceEndMs": 447039,
+      "reason": "人間が切り抜き側と元配信側で同じ素材と確認した素材ブロックのため。",
+      "sourceVideoId": "o8rZAhARXAc",
+      "sourceUrl": "https://www.youtube.com/watch?v=o8rZAhARXAc",
+      "sourceSttId": "9dtwF5Exu5w_o8rZAhARXAc_local30_v001",
+      "clipId": "9dtwF5Exu5w",
+      "clipUrl": "https://www.youtube.com/watch?v=9dtwF5Exu5w",
+      "verificationStatus": "multiblock_material_human_confirmed",
+      "usableForClipLocationEval": true,
+      "usableForCompositionPromptEval": true,
+      "multicutPartIndex": 3,
+      "clipStartMs": 28719,
+      "clipEndMs": 33887,
+      "qualityGrade": "material_block_granularity",
+      "boundaryPrecision": {
+        "grade": "material_block_granularity",
+        "meaning": "素材対応の切り替わりを表す粒度。細かい詰めは境界にしない。"
+      },
+      "label": "block 4",
+      "materialBlock": {
+        "blockIndex": 4,
+        "matchedWordPairCount": 17,
+        "internalGapMs": {
+          "sourceExtraInsideMs": 0,
+          "clipExtraInsideMs": 0,
+          "note": "同一素材ブロック内でsource側の進みがclip側より大きい分は、切り抜き内部の詰め候補として扱う。境界にはしない。"
+        },
+        "internalTransitions": [],
+        "runIndexes": [
+          38
+        ]
+      },
+      "humanVerification": {
+        "status": "confirmed",
+        "checkedBy": "kawafmm",
+        "checkedAt": "2026-07-12",
+        "method": "境界確認パッケージの動画・音声確認",
+        "note": "人間確認で使用箇所8・16・19・22・23・30を不採用とした。該当箇所は隣接境界の前側または後側で、切り抜きと元配信の素材が一致しない。境目の時間ジャンプと元配信位置切替の観察は全30境界でtrueとして保持する。",
+        "acceptedBlocks": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          17,
+          18,
+          20,
+          21,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          31
+        ],
+        "rejectedBlocks": [
+          8,
+          16,
+          19,
+          22,
+          23,
+          30
+        ],
+        "unresolvedBlocks": [],
+        "confirmedBoundaries": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          17,
+          20,
+          24,
+          25,
+          26,
+          27,
+          28
+        ],
+        "rejectedBoundaries": [
+          7,
+          8,
+          15,
+          16,
+          18,
+          19,
+          21,
+          22,
+          23,
+          29,
+          30
+        ],
+        "unresolvedBoundaries": [],
+        "materialBlocksPath": "evals/clip_composition/outputs/material-blocks-9dtwF5Exu5w-20260712-full-local30-material-blocks-v001.json",
+        "materialBlocksSha256": "151623c7225c78edae3117552be04cfdca5a3f8a8760bd672540e08e3a43deab",
+        "reviewPackagePath": "evals/clip_composition/outputs/boundary-check/9dtwF5Exu5w/20260712-full-local30-material-blocks-v001/index.html",
+        "reviewPackageSha256": "e85c3eb915875e667d3c3d7cec9fd8e6b78feb4a397411ae6edd8b4dbb576da7"
+      },
+      "expectedIndex": 4,
+      "inputVisibility": "input-not-visible",
+      "overlappingInputSpeechIds": [],
+      "hit": false,
+      "hitCandidateIndexes": []
+    },
+    {
+      "sourceStartMs": 502720,
+      "sourceEndMs": 517104,
+      "reason": "人間が切り抜き側と元配信側で同じ素材と確認した素材ブロックのため。",
+      "sourceVideoId": "o8rZAhARXAc",
+      "sourceUrl": "https://www.youtube.com/watch?v=o8rZAhARXAc",
+      "sourceSttId": "9dtwF5Exu5w_o8rZAhARXAc_local30_v001",
+      "clipId": "9dtwF5Exu5w",
+      "clipUrl": "https://www.youtube.com/watch?v=9dtwF5Exu5w",
+      "verificationStatus": "multiblock_material_human_confirmed",
+      "usableForClipLocationEval": true,
+      "usableForCompositionPromptEval": true,
+      "multicutPartIndex": 4,
+      "clipStartMs": 44572,
+      "clipEndMs": 59078,
+      "qualityGrade": "material_block_granularity",
+      "boundaryPrecision": {
+        "grade": "material_block_granularity",
+        "meaning": "素材対応の切り替わりを表す粒度。細かい詰めは境界にしない。"
+      },
+      "label": "block 5",
+      "materialBlock": {
+        "blockIndex": 5,
+        "matchedWordPairCount": 59,
+        "internalGapMs": {
+          "sourceExtraInsideMs": 0,
+          "clipExtraInsideMs": 0,
+          "note": "同一素材ブロック内でsource側の進みがclip側より大きい分は、切り抜き内部の詰め候補として扱う。境界にはしない。"
+        },
+        "internalTransitions": [],
+        "runIndexes": [
+          51
+        ]
+      },
+      "humanVerification": {
+        "status": "confirmed",
+        "checkedBy": "kawafmm",
+        "checkedAt": "2026-07-12",
+        "method": "境界確認パッケージの動画・音声確認",
+        "note": "人間確認で使用箇所8・16・19・22・23・30を不採用とした。該当箇所は隣接境界の前側または後側で、切り抜きと元配信の素材が一致しない。境目の時間ジャンプと元配信位置切替の観察は全30境界でtrueとして保持する。",
+        "acceptedBlocks": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          17,
+          18,
+          20,
+          21,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          31
+        ],
+        "rejectedBlocks": [
+          8,
+          16,
+          19,
+          22,
+          23,
+          30
+        ],
+        "unresolvedBlocks": [],
+        "confirmedBoundaries": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          17,
+          20,
+          24,
+          25,
+          26,
+          27,
+          28
+        ],
+        "rejectedBoundaries": [
+          7,
+          8,
+          15,
+          16,
+          18,
+          19,
+          21,
+          22,
+          23,
+          29,
+          30
+        ],
+        "unresolvedBoundaries": [],
+        "materialBlocksPath": "evals/clip_composition/outputs/material-blocks-9dtwF5Exu5w-20260712-full-local30-material-blocks-v001.json",
+        "materialBlocksSha256": "151623c7225c78edae3117552be04cfdca5a3f8a8760bd672540e08e3a43deab",
+        "reviewPackagePath": "evals/clip_composition/outputs/boundary-check/9dtwF5Exu5w/20260712-full-local30-material-blocks-v001/index.html",
+        "reviewPackageSha256": "e85c3eb915875e667d3c3d7cec9fd8e6b78feb4a397411ae6edd8b4dbb576da7"
+      },
+      "expectedIndex": 5,
+      "inputVisibility": "input-not-visible",
+      "overlappingInputSpeechIds": [],
+      "hit": false,
+      "hitCandidateIndexes": []
+    },
+    {
+      "sourceStartMs": 1250139,
+      "sourceEndMs": 1254342,
+      "reason": "人間が切り抜き側と元配信側で同じ素材と確認した素材ブロックのため。",
+      "sourceVideoId": "o8rZAhARXAc",
+      "sourceUrl": "https://www.youtube.com/watch?v=o8rZAhARXAc",
+      "sourceSttId": "9dtwF5Exu5w_o8rZAhARXAc_local30_v001",
+      "clipId": "9dtwF5Exu5w",
+      "clipUrl": "https://www.youtube.com/watch?v=9dtwF5Exu5w",
+      "verificationStatus": "multiblock_material_human_confirmed",
+      "usableForClipLocationEval": true,
+      "usableForCompositionPromptEval": true,
+      "multicutPartIndex": 5,
+      "clipStartMs": 83838,
+      "clipEndMs": 87285,
+      "qualityGrade": "material_block_granularity",
+      "boundaryPrecision": {
+        "grade": "material_block_granularity",
+        "meaning": "素材対応の切り替わりを表す粒度。細かい詰めは境界にしない。"
+      },
+      "label": "block 6",
+      "materialBlock": {
+        "blockIndex": 6,
+        "matchedWordPairCount": 28,
+        "internalGapMs": {
+          "sourceExtraInsideMs": 0,
+          "clipExtraInsideMs": 0,
+          "note": "同一素材ブロック内でsource側の進みがclip側より大きい分は、切り抜き内部の詰め候補として扱う。境界にはしない。"
+        },
+        "internalTransitions": [],
+        "runIndexes": [
+          83
+        ]
+      },
+      "humanVerification": {
+        "status": "confirmed",
+        "checkedBy": "kawafmm",
+        "checkedAt": "2026-07-12",
+        "method": "境界確認パッケージの動画・音声確認",
+        "note": "人間確認で使用箇所8・16・19・22・23・30を不採用とした。該当箇所は隣接境界の前側または後側で、切り抜きと元配信の素材が一致しない。境目の時間ジャンプと元配信位置切替の観察は全30境界でtrueとして保持する。",
+        "acceptedBlocks": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          17,
+          18,
+          20,
+          21,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          31
+        ],
+        "rejectedBlocks": [
+          8,
+          16,
+          19,
+          22,
+          23,
+          30
+        ],
+        "unresolvedBlocks": [],
+        "confirmedBoundaries": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          17,
+          20,
+          24,
+          25,
+          26,
+          27,
+          28
+        ],
+        "rejectedBoundaries": [
+          7,
+          8,
+          15,
+          16,
+          18,
+          19,
+          21,
+          22,
+          23,
+          29,
+          30
+        ],
+        "unresolvedBoundaries": [],
+        "materialBlocksPath": "evals/clip_composition/outputs/material-blocks-9dtwF5Exu5w-20260712-full-local30-material-blocks-v001.json",
+        "materialBlocksSha256": "151623c7225c78edae3117552be04cfdca5a3f8a8760bd672540e08e3a43deab",
+        "reviewPackagePath": "evals/clip_composition/outputs/boundary-check/9dtwF5Exu5w/20260712-full-local30-material-blocks-v001/index.html",
+        "reviewPackageSha256": "e85c3eb915875e667d3c3d7cec9fd8e6b78feb4a397411ae6edd8b4dbb576da7"
+      },
+      "expectedIndex": 6,
+      "inputVisibility": "input-visible",
+      "overlappingInputSpeechIds": [
+        153,
+        154
+      ],
+      "hit": true,
+      "hitCandidateIndexes": [
+        5
+      ]
+    },
+    {
+      "sourceStartMs": 2013635,
+      "sourceEndMs": 2017195,
+      "reason": "人間が切り抜き側と元配信側で同じ素材と確認した素材ブロックのため。",
+      "sourceVideoId": "o8rZAhARXAc",
+      "sourceUrl": "https://www.youtube.com/watch?v=o8rZAhARXAc",
+      "sourceSttId": "9dtwF5Exu5w_o8rZAhARXAc_local30_v001",
+      "clipId": "9dtwF5Exu5w",
+      "clipUrl": "https://www.youtube.com/watch?v=9dtwF5Exu5w",
+      "verificationStatus": "multiblock_material_human_confirmed",
+      "usableForClipLocationEval": true,
+      "usableForCompositionPromptEval": true,
+      "multicutPartIndex": 6,
+      "clipStartMs": 103872,
+      "clipEndMs": 107413,
+      "qualityGrade": "material_block_granularity",
+      "boundaryPrecision": {
+        "grade": "material_block_granularity",
+        "meaning": "素材対応の切り替わりを表す粒度。細かい詰めは境界にしない。"
+      },
+      "label": "block 7",
+      "materialBlock": {
+        "blockIndex": 7,
+        "matchedWordPairCount": 27,
+        "internalGapMs": {
+          "sourceExtraInsideMs": 0,
+          "clipExtraInsideMs": 0,
+          "note": "同一素材ブロック内でsource側の進みがclip側より大きい分は、切り抜き内部の詰め候補として扱う。境界にはしない。"
+        },
+        "internalTransitions": [],
+        "runIndexes": [
+          98
+        ]
+      },
+      "humanVerification": {
+        "status": "confirmed",
+        "checkedBy": "kawafmm",
+        "checkedAt": "2026-07-12",
+        "method": "境界確認パッケージの動画・音声確認",
+        "note": "人間確認で使用箇所8・16・19・22・23・30を不採用とした。該当箇所は隣接境界の前側または後側で、切り抜きと元配信の素材が一致しない。境目の時間ジャンプと元配信位置切替の観察は全30境界でtrueとして保持する。",
+        "acceptedBlocks": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          17,
+          18,
+          20,
+          21,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          31
+        ],
+        "rejectedBlocks": [
+          8,
+          16,
+          19,
+          22,
+          23,
+          30
+        ],
+        "unresolvedBlocks": [],
+        "confirmedBoundaries": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          17,
+          20,
+          24,
+          25,
+          26,
+          27,
+          28
+        ],
+        "rejectedBoundaries": [
+          7,
+          8,
+          15,
+          16,
+          18,
+          19,
+          21,
+          22,
+          23,
+          29,
+          30
+        ],
+        "unresolvedBoundaries": [],
+        "materialBlocksPath": "evals/clip_composition/outputs/material-blocks-9dtwF5Exu5w-20260712-full-local30-material-blocks-v001.json",
+        "materialBlocksSha256": "151623c7225c78edae3117552be04cfdca5a3f8a8760bd672540e08e3a43deab",
+        "reviewPackagePath": "evals/clip_composition/outputs/boundary-check/9dtwF5Exu5w/20260712-full-local30-material-blocks-v001/index.html",
+        "reviewPackageSha256": "e85c3eb915875e667d3c3d7cec9fd8e6b78feb4a397411ae6edd8b4dbb576da7"
+      },
+      "expectedIndex": 7,
+      "inputVisibility": "input-visible",
+      "overlappingInputSpeechIds": [
+        220
+      ],
+      "hit": true,
+      "hitCandidateIndexes": [
+        9
+      ]
+    },
+    {
+      "sourceStartMs": 3690566,
+      "sourceEndMs": 3697689,
+      "reason": "人間が切り抜き側と元配信側で同じ素材と確認した素材ブロックのため。",
+      "sourceVideoId": "o8rZAhARXAc",
+      "sourceUrl": "https://www.youtube.com/watch?v=o8rZAhARXAc",
+      "sourceSttId": "9dtwF5Exu5w_o8rZAhARXAc_local30_v001",
+      "clipId": "9dtwF5Exu5w",
+      "clipUrl": "https://www.youtube.com/watch?v=9dtwF5Exu5w",
+      "verificationStatus": "multiblock_material_human_confirmed",
+      "usableForClipLocationEval": true,
+      "usableForCompositionPromptEval": true,
+      "multicutPartIndex": 7,
+      "clipStartMs": 147079,
+      "clipEndMs": 154084,
+      "qualityGrade": "material_block_granularity",
+      "boundaryPrecision": {
+        "grade": "material_block_granularity",
+        "meaning": "素材対応の切り替わりを表す粒度。細かい詰めは境界にしない。"
+      },
+      "label": "block 9",
+      "materialBlock": {
+        "blockIndex": 9,
+        "matchedWordPairCount": 35,
+        "internalGapMs": {
+          "sourceExtraInsideMs": 0,
+          "clipExtraInsideMs": 221,
+          "note": "同一素材ブロック内でsource側の進みがclip側より大きい分は、切り抜き内部の詰め候補として扱う。境界にはしない。"
+        },
+        "internalTransitions": [
+          {
+            "fromRun": 181,
+            "toRun": 184,
+            "clipGapMs": 1022,
+            "sourceGapMs": 801,
+            "materialJumpMs": -221
+          }
+        ],
+        "runIndexes": [
+          181,
+          184
+        ]
+      },
+      "humanVerification": {
+        "status": "confirmed",
+        "checkedBy": "kawafmm",
+        "checkedAt": "2026-07-12",
+        "method": "境界確認パッケージの動画・音声確認",
+        "note": "人間確認で使用箇所8・16・19・22・23・30を不採用とした。該当箇所は隣接境界の前側または後側で、切り抜きと元配信の素材が一致しない。境目の時間ジャンプと元配信位置切替の観察は全30境界でtrueとして保持する。",
+        "acceptedBlocks": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          17,
+          18,
+          20,
+          21,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          31
+        ],
+        "rejectedBlocks": [
+          8,
+          16,
+          19,
+          22,
+          23,
+          30
+        ],
+        "unresolvedBlocks": [],
+        "confirmedBoundaries": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          17,
+          20,
+          24,
+          25,
+          26,
+          27,
+          28
+        ],
+        "rejectedBoundaries": [
+          7,
+          8,
+          15,
+          16,
+          18,
+          19,
+          21,
+          22,
+          23,
+          29,
+          30
+        ],
+        "unresolvedBoundaries": [],
+        "materialBlocksPath": "evals/clip_composition/outputs/material-blocks-9dtwF5Exu5w-20260712-full-local30-material-blocks-v001.json",
+        "materialBlocksSha256": "151623c7225c78edae3117552be04cfdca5a3f8a8760bd672540e08e3a43deab",
+        "reviewPackagePath": "evals/clip_composition/outputs/boundary-check/9dtwF5Exu5w/20260712-full-local30-material-blocks-v001/index.html",
+        "reviewPackageSha256": "e85c3eb915875e667d3c3d7cec9fd8e6b78feb4a397411ae6edd8b4dbb576da7"
+      },
+      "expectedIndex": 8,
+      "inputVisibility": "input-visible",
+      "overlappingInputSpeechIds": [
+        351
+      ],
+      "hit": true,
+      "hitCandidateIndexes": [
+        13
+      ]
+    },
+    {
+      "sourceStartMs": 3741344,
+      "sourceEndMs": 3758425,
+      "reason": "人間が切り抜き側と元配信側で同じ素材と確認した素材ブロックのため。",
+      "sourceVideoId": "o8rZAhARXAc",
+      "sourceUrl": "https://www.youtube.com/watch?v=o8rZAhARXAc",
+      "sourceSttId": "9dtwF5Exu5w_o8rZAhARXAc_local30_v001",
+      "clipId": "9dtwF5Exu5w",
+      "clipUrl": "https://www.youtube.com/watch?v=9dtwF5Exu5w",
+      "verificationStatus": "multiblock_material_human_confirmed",
+      "usableForClipLocationEval": true,
+      "usableForCompositionPromptEval": true,
+      "multicutPartIndex": 8,
+      "clipStartMs": 162489,
+      "clipEndMs": 179660,
+      "qualityGrade": "material_block_granularity",
+      "boundaryPrecision": {
+        "grade": "material_block_granularity",
+        "meaning": "素材対応の切り替わりを表す粒度。細かい詰めは境界にしない。"
+      },
+      "label": "block 10",
+      "materialBlock": {
+        "blockIndex": 10,
+        "matchedWordPairCount": 133,
+        "internalGapMs": {
+          "sourceExtraInsideMs": 0,
+          "clipExtraInsideMs": 0,
+          "note": "同一素材ブロック内でsource側の進みがclip側より大きい分は、切り抜き内部の詰め候補として扱う。境界にはしない。"
+        },
+        "internalTransitions": [
+          {
+            "fromRun": 199,
+            "toRun": 200,
+            "clipGapMs": 0,
+            "sourceGapMs": 0,
+            "materialJumpMs": 0
+          },
+          {
+            "fromRun": 200,
+            "toRun": 201,
+            "clipGapMs": 0,
+            "sourceGapMs": 0,
+            "materialJumpMs": 0
+          }
+        ],
+        "runIndexes": [
+          199,
+          200,
+          201
+        ]
+      },
+      "humanVerification": {
+        "status": "confirmed",
+        "checkedBy": "kawafmm",
+        "checkedAt": "2026-07-12",
+        "method": "境界確認パッケージの動画・音声確認",
+        "note": "人間確認で使用箇所8・16・19・22・23・30を不採用とした。該当箇所は隣接境界の前側または後側で、切り抜きと元配信の素材が一致しない。境目の時間ジャンプと元配信位置切替の観察は全30境界でtrueとして保持する。",
+        "acceptedBlocks": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          17,
+          18,
+          20,
+          21,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          31
+        ],
+        "rejectedBlocks": [
+          8,
+          16,
+          19,
+          22,
+          23,
+          30
+        ],
+        "unresolvedBlocks": [],
+        "confirmedBoundaries": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          17,
+          20,
+          24,
+          25,
+          26,
+          27,
+          28
+        ],
+        "rejectedBoundaries": [
+          7,
+          8,
+          15,
+          16,
+          18,
+          19,
+          21,
+          22,
+          23,
+          29,
+          30
+        ],
+        "unresolvedBoundaries": [],
+        "materialBlocksPath": "evals/clip_composition/outputs/material-blocks-9dtwF5Exu5w-20260712-full-local30-material-blocks-v001.json",
+        "materialBlocksSha256": "151623c7225c78edae3117552be04cfdca5a3f8a8760bd672540e08e3a43deab",
+        "reviewPackagePath": "evals/clip_composition/outputs/boundary-check/9dtwF5Exu5w/20260712-full-local30-material-blocks-v001/index.html",
+        "reviewPackageSha256": "e85c3eb915875e667d3c3d7cec9fd8e6b78feb4a397411ae6edd8b4dbb576da7"
+      },
+      "expectedIndex": 9,
+      "inputVisibility": "input-visible",
+      "overlappingInputSpeechIds": [
+        355,
+        356,
+        357,
+        358
+      ],
+      "hit": true,
+      "hitCandidateIndexes": [
+        14
+      ]
+    },
+    {
+      "sourceStartMs": 4207639,
+      "sourceEndMs": 4210641,
+      "reason": "人間が切り抜き側と元配信側で同じ素材と確認した素材ブロックのため。",
+      "sourceVideoId": "o8rZAhARXAc",
+      "sourceUrl": "https://www.youtube.com/watch?v=o8rZAhARXAc",
+      "sourceSttId": "9dtwF5Exu5w_o8rZAhARXAc_local30_v001",
+      "clipId": "9dtwF5Exu5w",
+      "clipUrl": "https://www.youtube.com/watch?v=9dtwF5Exu5w",
+      "verificationStatus": "multiblock_material_human_confirmed",
+      "usableForClipLocationEval": true,
+      "usableForCompositionPromptEval": true,
+      "multicutPartIndex": 9,
+      "clipStartMs": 183688,
+      "clipEndMs": 186709,
+      "qualityGrade": "material_block_granularity",
+      "boundaryPrecision": {
+        "grade": "material_block_granularity",
+        "meaning": "素材対応の切り替わりを表す粒度。細かい詰めは境界にしない。"
+      },
+      "label": "block 11",
+      "materialBlock": {
+        "blockIndex": 11,
+        "matchedWordPairCount": 16,
+        "internalGapMs": {
+          "sourceExtraInsideMs": 0,
+          "clipExtraInsideMs": 0,
+          "note": "同一素材ブロック内でsource側の進みがclip側より大きい分は、切り抜き内部の詰め候補として扱う。境界にはしない。"
+        },
+        "internalTransitions": [],
+        "runIndexes": [
+          207
+        ]
+      },
+      "humanVerification": {
+        "status": "confirmed",
+        "checkedBy": "kawafmm",
+        "checkedAt": "2026-07-12",
+        "method": "境界確認パッケージの動画・音声確認",
+        "note": "人間確認で使用箇所8・16・19・22・23・30を不採用とした。該当箇所は隣接境界の前側または後側で、切り抜きと元配信の素材が一致しない。境目の時間ジャンプと元配信位置切替の観察は全30境界でtrueとして保持する。",
+        "acceptedBlocks": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          17,
+          18,
+          20,
+          21,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          31
+        ],
+        "rejectedBlocks": [
+          8,
+          16,
+          19,
+          22,
+          23,
+          30
+        ],
+        "unresolvedBlocks": [],
+        "confirmedBoundaries": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          17,
+          20,
+          24,
+          25,
+          26,
+          27,
+          28
+        ],
+        "rejectedBoundaries": [
+          7,
+          8,
+          15,
+          16,
+          18,
+          19,
+          21,
+          22,
+          23,
+          29,
+          30
+        ],
+        "unresolvedBoundaries": [],
+        "materialBlocksPath": "evals/clip_composition/outputs/material-blocks-9dtwF5Exu5w-20260712-full-local30-material-blocks-v001.json",
+        "materialBlocksSha256": "151623c7225c78edae3117552be04cfdca5a3f8a8760bd672540e08e3a43deab",
+        "reviewPackagePath": "evals/clip_composition/outputs/boundary-check/9dtwF5Exu5w/20260712-full-local30-material-blocks-v001/index.html",
+        "reviewPackageSha256": "e85c3eb915875e667d3c3d7cec9fd8e6b78feb4a397411ae6edd8b4dbb576da7"
+      },
+      "expectedIndex": 10,
+      "inputVisibility": "input-visible",
+      "overlappingInputSpeechIds": [
+        382
+      ],
+      "hit": true,
+      "hitCandidateIndexes": [
+        16
+      ]
+    },
+    {
+      "sourceStartMs": 4232807,
+      "sourceEndMs": 4239410,
+      "reason": "人間が切り抜き側と元配信側で同じ素材と確認した素材ブロックのため。",
+      "sourceVideoId": "o8rZAhARXAc",
+      "sourceUrl": "https://www.youtube.com/watch?v=o8rZAhARXAc",
+      "sourceSttId": "9dtwF5Exu5w_o8rZAhARXAc_local30_v001",
+      "clipId": "9dtwF5Exu5w",
+      "clipUrl": "https://www.youtube.com/watch?v=9dtwF5Exu5w",
+      "verificationStatus": "multiblock_material_human_confirmed",
+      "usableForClipLocationEval": true,
+      "usableForCompositionPromptEval": true,
+      "multicutPartIndex": 10,
+      "clipStartMs": 188310,
+      "clipEndMs": 194913,
+      "qualityGrade": "material_block_granularity",
+      "boundaryPrecision": {
+        "grade": "material_block_granularity",
+        "meaning": "素材対応の切り替わりを表す粒度。細かい詰めは境界にしない。"
+      },
+      "label": "block 12",
+      "materialBlock": {
+        "blockIndex": 12,
+        "matchedWordPairCount": 27,
+        "internalGapMs": {
+          "sourceExtraInsideMs": 0,
+          "clipExtraInsideMs": 0,
+          "note": "同一素材ブロック内でsource側の進みがclip側より大きい分は、切り抜き内部の詰め候補として扱う。境界にはしない。"
+        },
+        "internalTransitions": [],
+        "runIndexes": [
+          208
+        ]
+      },
+      "humanVerification": {
+        "status": "confirmed",
+        "checkedBy": "kawafmm",
+        "checkedAt": "2026-07-12",
+        "method": "境界確認パッケージの動画・音声確認",
+        "note": "人間確認で使用箇所8・16・19・22・23・30を不採用とした。該当箇所は隣接境界の前側または後側で、切り抜きと元配信の素材が一致しない。境目の時間ジャンプと元配信位置切替の観察は全30境界でtrueとして保持する。",
+        "acceptedBlocks": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          17,
+          18,
+          20,
+          21,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          31
+        ],
+        "rejectedBlocks": [
+          8,
+          16,
+          19,
+          22,
+          23,
+          30
+        ],
+        "unresolvedBlocks": [],
+        "confirmedBoundaries": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          17,
+          20,
+          24,
+          25,
+          26,
+          27,
+          28
+        ],
+        "rejectedBoundaries": [
+          7,
+          8,
+          15,
+          16,
+          18,
+          19,
+          21,
+          22,
+          23,
+          29,
+          30
+        ],
+        "unresolvedBoundaries": [],
+        "materialBlocksPath": "evals/clip_composition/outputs/material-blocks-9dtwF5Exu5w-20260712-full-local30-material-blocks-v001.json",
+        "materialBlocksSha256": "151623c7225c78edae3117552be04cfdca5a3f8a8760bd672540e08e3a43deab",
+        "reviewPackagePath": "evals/clip_composition/outputs/boundary-check/9dtwF5Exu5w/20260712-full-local30-material-blocks-v001/index.html",
+        "reviewPackageSha256": "e85c3eb915875e667d3c3d7cec9fd8e6b78feb4a397411ae6edd8b4dbb576da7"
+      },
+      "expectedIndex": 11,
+      "inputVisibility": "input-visible",
+      "overlappingInputSpeechIds": [
+        386
+      ],
+      "hit": true,
+      "hitCandidateIndexes": [
+        16
+      ]
+    },
+    {
+      "sourceStartMs": 4273428,
+      "sourceEndMs": 4279472,
+      "reason": "人間が切り抜き側と元配信側で同じ素材と確認した素材ブロックのため。",
+      "sourceVideoId": "o8rZAhARXAc",
+      "sourceUrl": "https://www.youtube.com/watch?v=o8rZAhARXAc",
+      "sourceSttId": "9dtwF5Exu5w_o8rZAhARXAc_local30_v001",
+      "clipId": "9dtwF5Exu5w",
+      "clipUrl": "https://www.youtube.com/watch?v=9dtwF5Exu5w",
+      "verificationStatus": "multiblock_material_human_confirmed",
+      "usableForClipLocationEval": true,
+      "usableForCompositionPromptEval": true,
+      "multicutPartIndex": 11,
+      "clipStartMs": 201636,
+      "clipEndMs": 207679,
+      "qualityGrade": "material_block_granularity",
+      "boundaryPrecision": {
+        "grade": "material_block_granularity",
+        "meaning": "素材対応の切り替わりを表す粒度。細かい詰めは境界にしない。"
+      },
+      "label": "block 13",
+      "materialBlock": {
+        "blockIndex": 13,
+        "matchedWordPairCount": 22,
+        "internalGapMs": {
+          "sourceExtraInsideMs": 0,
+          "clipExtraInsideMs": 0,
+          "note": "同一素材ブロック内でsource側の進みがclip側より大きい分は、切り抜き内部の詰め候補として扱う。境界にはしない。"
+        },
+        "internalTransitions": [],
+        "runIndexes": [
+          216
+        ]
+      },
+      "humanVerification": {
+        "status": "confirmed",
+        "checkedBy": "kawafmm",
+        "checkedAt": "2026-07-12",
+        "method": "境界確認パッケージの動画・音声確認",
+        "note": "人間確認で使用箇所8・16・19・22・23・30を不採用とした。該当箇所は隣接境界の前側または後側で、切り抜きと元配信の素材が一致しない。境目の時間ジャンプと元配信位置切替の観察は全30境界でtrueとして保持する。",
+        "acceptedBlocks": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          17,
+          18,
+          20,
+          21,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          31
+        ],
+        "rejectedBlocks": [
+          8,
+          16,
+          19,
+          22,
+          23,
+          30
+        ],
+        "unresolvedBlocks": [],
+        "confirmedBoundaries": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          17,
+          20,
+          24,
+          25,
+          26,
+          27,
+          28
+        ],
+        "rejectedBoundaries": [
+          7,
+          8,
+          15,
+          16,
+          18,
+          19,
+          21,
+          22,
+          23,
+          29,
+          30
+        ],
+        "unresolvedBoundaries": [],
+        "materialBlocksPath": "evals/clip_composition/outputs/material-blocks-9dtwF5Exu5w-20260712-full-local30-material-blocks-v001.json",
+        "materialBlocksSha256": "151623c7225c78edae3117552be04cfdca5a3f8a8760bd672540e08e3a43deab",
+        "reviewPackagePath": "evals/clip_composition/outputs/boundary-check/9dtwF5Exu5w/20260712-full-local30-material-blocks-v001/index.html",
+        "reviewPackageSha256": "e85c3eb915875e667d3c3d7cec9fd8e6b78feb4a397411ae6edd8b4dbb576da7"
+      },
+      "expectedIndex": 12,
+      "inputVisibility": "input-visible",
+      "overlappingInputSpeechIds": [
+        387
+      ],
+      "hit": true,
+      "hitCandidateIndexes": [
+        16
+      ]
+    },
+    {
+      "sourceStartMs": 4367214,
+      "sourceEndMs": 4369035,
+      "reason": "人間が切り抜き側と元配信側で同じ素材と確認した素材ブロックのため。",
+      "sourceVideoId": "o8rZAhARXAc",
+      "sourceUrl": "https://www.youtube.com/watch?v=o8rZAhARXAc",
+      "sourceSttId": "9dtwF5Exu5w_o8rZAhARXAc_local30_v001",
+      "clipId": "9dtwF5Exu5w",
+      "clipUrl": "https://www.youtube.com/watch?v=9dtwF5Exu5w",
+      "verificationStatus": "multiblock_material_human_confirmed",
+      "usableForClipLocationEval": true,
+      "usableForCompositionPromptEval": true,
+      "multicutPartIndex": 12,
+      "clipStartMs": 217524,
+      "clipEndMs": 219445,
+      "qualityGrade": "material_block_granularity",
+      "boundaryPrecision": {
+        "grade": "material_block_granularity",
+        "meaning": "素材対応の切り替わりを表す粒度。細かい詰めは境界にしない。"
+      },
+      "label": "block 14",
+      "materialBlock": {
+        "blockIndex": 14,
+        "matchedWordPairCount": 16,
+        "internalGapMs": {
+          "sourceExtraInsideMs": 0,
+          "clipExtraInsideMs": 0,
+          "note": "同一素材ブロック内でsource側の進みがclip側より大きい分は、切り抜き内部の詰め候補として扱う。境界にはしない。"
+        },
+        "internalTransitions": [],
+        "runIndexes": [
+          235
+        ]
+      },
+      "humanVerification": {
+        "status": "confirmed",
+        "checkedBy": "kawafmm",
+        "checkedAt": "2026-07-12",
+        "method": "境界確認パッケージの動画・音声確認",
+        "note": "人間確認で使用箇所8・16・19・22・23・30を不採用とした。該当箇所は隣接境界の前側または後側で、切り抜きと元配信の素材が一致しない。境目の時間ジャンプと元配信位置切替の観察は全30境界でtrueとして保持する。",
+        "acceptedBlocks": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          17,
+          18,
+          20,
+          21,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          31
+        ],
+        "rejectedBlocks": [
+          8,
+          16,
+          19,
+          22,
+          23,
+          30
+        ],
+        "unresolvedBlocks": [],
+        "confirmedBoundaries": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          17,
+          20,
+          24,
+          25,
+          26,
+          27,
+          28
+        ],
+        "rejectedBoundaries": [
+          7,
+          8,
+          15,
+          16,
+          18,
+          19,
+          21,
+          22,
+          23,
+          29,
+          30
+        ],
+        "unresolvedBoundaries": [],
+        "materialBlocksPath": "evals/clip_composition/outputs/material-blocks-9dtwF5Exu5w-20260712-full-local30-material-blocks-v001.json",
+        "materialBlocksSha256": "151623c7225c78edae3117552be04cfdca5a3f8a8760bd672540e08e3a43deab",
+        "reviewPackagePath": "evals/clip_composition/outputs/boundary-check/9dtwF5Exu5w/20260712-full-local30-material-blocks-v001/index.html",
+        "reviewPackageSha256": "e85c3eb915875e667d3c3d7cec9fd8e6b78feb4a397411ae6edd8b4dbb576da7"
+      },
+      "expectedIndex": 13,
+      "inputVisibility": "input-visible",
+      "overlappingInputSpeechIds": [
+        390
+      ],
+      "hit": true,
+      "hitCandidateIndexes": [
+        16
+      ]
+    },
+    {
+      "sourceStartMs": 4723988,
+      "sourceEndMs": 4731031,
+      "reason": "人間が切り抜き側と元配信側で同じ素材と確認した素材ブロックのため。",
+      "sourceVideoId": "o8rZAhARXAc",
+      "sourceUrl": "https://www.youtube.com/watch?v=o8rZAhARXAc",
+      "sourceSttId": "9dtwF5Exu5w_o8rZAhARXAc_local30_v001",
+      "clipId": "9dtwF5Exu5w",
+      "clipUrl": "https://www.youtube.com/watch?v=9dtwF5Exu5w",
+      "verificationStatus": "multiblock_material_human_confirmed",
+      "usableForClipLocationEval": true,
+      "usableForCompositionPromptEval": true,
+      "multicutPartIndex": 13,
+      "clipStartMs": 244758,
+      "clipEndMs": 252004,
+      "qualityGrade": "material_block_granularity",
+      "boundaryPrecision": {
+        "grade": "material_block_granularity",
+        "meaning": "素材対応の切り替わりを表す粒度。細かい詰めは境界にしない。"
+      },
+      "label": "block 15",
+      "materialBlock": {
+        "blockIndex": 15,
+        "matchedWordPairCount": 26,
+        "internalGapMs": {
+          "sourceExtraInsideMs": 0,
+          "clipExtraInsideMs": 0,
+          "note": "同一素材ブロック内でsource側の進みがclip側より大きい分は、切り抜き内部の詰め候補として扱う。境界にはしない。"
+        },
+        "internalTransitions": [],
+        "runIndexes": [
+          264
+        ]
+      },
+      "humanVerification": {
+        "status": "confirmed",
+        "checkedBy": "kawafmm",
+        "checkedAt": "2026-07-12",
+        "method": "境界確認パッケージの動画・音声確認",
+        "note": "人間確認で使用箇所8・16・19・22・23・30を不採用とした。該当箇所は隣接境界の前側または後側で、切り抜きと元配信の素材が一致しない。境目の時間ジャンプと元配信位置切替の観察は全30境界でtrueとして保持する。",
+        "acceptedBlocks": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          17,
+          18,
+          20,
+          21,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          31
+        ],
+        "rejectedBlocks": [
+          8,
+          16,
+          19,
+          22,
+          23,
+          30
+        ],
+        "unresolvedBlocks": [],
+        "confirmedBoundaries": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          17,
+          20,
+          24,
+          25,
+          26,
+          27,
+          28
+        ],
+        "rejectedBoundaries": [
+          7,
+          8,
+          15,
+          16,
+          18,
+          19,
+          21,
+          22,
+          23,
+          29,
+          30
+        ],
+        "unresolvedBoundaries": [],
+        "materialBlocksPath": "evals/clip_composition/outputs/material-blocks-9dtwF5Exu5w-20260712-full-local30-material-blocks-v001.json",
+        "materialBlocksSha256": "151623c7225c78edae3117552be04cfdca5a3f8a8760bd672540e08e3a43deab",
+        "reviewPackagePath": "evals/clip_composition/outputs/boundary-check/9dtwF5Exu5w/20260712-full-local30-material-blocks-v001/index.html",
+        "reviewPackageSha256": "e85c3eb915875e667d3c3d7cec9fd8e6b78feb4a397411ae6edd8b4dbb576da7"
+      },
+      "expectedIndex": 14,
+      "inputVisibility": "input-visible",
+      "overlappingInputSpeechIds": [
+        440,
+        441,
+        442,
+        443,
+        444
+      ],
+      "hit": true,
+      "hitCandidateIndexes": [
+        22
+      ]
+    },
+    {
+      "sourceStartMs": 6289092,
+      "sourceEndMs": 6298479,
+      "reason": "人間が切り抜き側と元配信側で同じ素材と確認した素材ブロックのため。",
+      "sourceVideoId": "o8rZAhARXAc",
+      "sourceUrl": "https://www.youtube.com/watch?v=o8rZAhARXAc",
+      "sourceSttId": "9dtwF5Exu5w_o8rZAhARXAc_local30_v001",
+      "clipId": "9dtwF5Exu5w",
+      "clipUrl": "https://www.youtube.com/watch?v=9dtwF5Exu5w",
+      "verificationStatus": "multiblock_material_human_confirmed",
+      "usableForClipLocationEval": true,
+      "usableForCompositionPromptEval": true,
+      "multicutPartIndex": 14,
+      "clipStartMs": 343028,
+      "clipEndMs": 352535,
+      "qualityGrade": "material_block_granularity",
+      "boundaryPrecision": {
+        "grade": "material_block_granularity",
+        "meaning": "素材対応の切り替わりを表す粒度。細かい詰めは境界にしない。"
+      },
+      "label": "block 17",
+      "materialBlock": {
+        "blockIndex": 17,
+        "matchedWordPairCount": 46,
+        "internalGapMs": {
+          "sourceExtraInsideMs": 20,
+          "clipExtraInsideMs": 0,
+          "note": "同一素材ブロック内でsource側の進みがclip側より大きい分は、切り抜き内部の詰め候補として扱う。境界にはしない。"
+        },
+        "internalTransitions": [
+          {
+            "fromRun": 355,
+            "toRun": 360,
+            "clipGapMs": 1681,
+            "sourceGapMs": 1701,
+            "materialJumpMs": 20
+          }
+        ],
+        "runIndexes": [
+          355,
+          360
+        ]
+      },
+      "humanVerification": {
+        "status": "confirmed",
+        "checkedBy": "kawafmm",
+        "checkedAt": "2026-07-12",
+        "method": "境界確認パッケージの動画・音声確認",
+        "note": "人間確認で使用箇所8・16・19・22・23・30を不採用とした。該当箇所は隣接境界の前側または後側で、切り抜きと元配信の素材が一致しない。境目の時間ジャンプと元配信位置切替の観察は全30境界でtrueとして保持する。",
+        "acceptedBlocks": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          17,
+          18,
+          20,
+          21,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          31
+        ],
+        "rejectedBlocks": [
+          8,
+          16,
+          19,
+          22,
+          23,
+          30
+        ],
+        "unresolvedBlocks": [],
+        "confirmedBoundaries": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          17,
+          20,
+          24,
+          25,
+          26,
+          27,
+          28
+        ],
+        "rejectedBoundaries": [
+          7,
+          8,
+          15,
+          16,
+          18,
+          19,
+          21,
+          22,
+          23,
+          29,
+          30
+        ],
+        "unresolvedBoundaries": [],
+        "materialBlocksPath": "evals/clip_composition/outputs/material-blocks-9dtwF5Exu5w-20260712-full-local30-material-blocks-v001.json",
+        "materialBlocksSha256": "151623c7225c78edae3117552be04cfdca5a3f8a8760bd672540e08e3a43deab",
+        "reviewPackagePath": "evals/clip_composition/outputs/boundary-check/9dtwF5Exu5w/20260712-full-local30-material-blocks-v001/index.html",
+        "reviewPackageSha256": "e85c3eb915875e667d3c3d7cec9fd8e6b78feb4a397411ae6edd8b4dbb576da7"
+      },
+      "expectedIndex": 15,
+      "inputVisibility": "input-visible",
+      "overlappingInputSpeechIds": [
+        631,
+        632,
+        633
+      ],
+      "hit": true,
+      "hitCandidateIndexes": [
+        28
+      ]
+    },
+    {
+      "sourceStartMs": 6526271,
+      "sourceEndMs": 6527012,
+      "reason": "人間が切り抜き側と元配信側で同じ素材と確認した素材ブロックのため。",
+      "sourceVideoId": "o8rZAhARXAc",
+      "sourceUrl": "https://www.youtube.com/watch?v=o8rZAhARXAc",
+      "sourceSttId": "9dtwF5Exu5w_o8rZAhARXAc_local30_v001",
+      "clipId": "9dtwF5Exu5w",
+      "clipUrl": "https://www.youtube.com/watch?v=9dtwF5Exu5w",
+      "verificationStatus": "multiblock_material_human_confirmed",
+      "usableForClipLocationEval": true,
+      "usableForCompositionPromptEval": true,
+      "multicutPartIndex": 15,
+      "clipStartMs": 389200,
+      "clipEndMs": 389780,
+      "qualityGrade": "material_block_granularity",
+      "boundaryPrecision": {
+        "grade": "material_block_granularity",
+        "meaning": "素材対応の切り替わりを表す粒度。細かい詰めは境界にしない。"
+      },
+      "label": "block 18",
+      "materialBlock": {
+        "blockIndex": 18,
+        "matchedWordPairCount": 14,
+        "internalGapMs": {
+          "sourceExtraInsideMs": 0,
+          "clipExtraInsideMs": 0,
+          "note": "同一素材ブロック内でsource側の進みがclip側より大きい分は、切り抜き内部の詰め候補として扱う。境界にはしない。"
+        },
+        "internalTransitions": [],
+        "runIndexes": [
+          400
+        ]
+      },
+      "humanVerification": {
+        "status": "confirmed",
+        "checkedBy": "kawafmm",
+        "checkedAt": "2026-07-12",
+        "method": "境界確認パッケージの動画・音声確認",
+        "note": "人間確認で使用箇所8・16・19・22・23・30を不採用とした。該当箇所は隣接境界の前側または後側で、切り抜きと元配信の素材が一致しない。境目の時間ジャンプと元配信位置切替の観察は全30境界でtrueとして保持する。",
+        "acceptedBlocks": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          17,
+          18,
+          20,
+          21,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          31
+        ],
+        "rejectedBlocks": [
+          8,
+          16,
+          19,
+          22,
+          23,
+          30
+        ],
+        "unresolvedBlocks": [],
+        "confirmedBoundaries": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          17,
+          20,
+          24,
+          25,
+          26,
+          27,
+          28
+        ],
+        "rejectedBoundaries": [
+          7,
+          8,
+          15,
+          16,
+          18,
+          19,
+          21,
+          22,
+          23,
+          29,
+          30
+        ],
+        "unresolvedBoundaries": [],
+        "materialBlocksPath": "evals/clip_composition/outputs/material-blocks-9dtwF5Exu5w-20260712-full-local30-material-blocks-v001.json",
+        "materialBlocksSha256": "151623c7225c78edae3117552be04cfdca5a3f8a8760bd672540e08e3a43deab",
+        "reviewPackagePath": "evals/clip_composition/outputs/boundary-check/9dtwF5Exu5w/20260712-full-local30-material-blocks-v001/index.html",
+        "reviewPackageSha256": "e85c3eb915875e667d3c3d7cec9fd8e6b78feb4a397411ae6edd8b4dbb576da7"
+      },
+      "expectedIndex": 16,
+      "inputVisibility": "input-visible",
+      "overlappingInputSpeechIds": [
+        655
+      ],
+      "hit": true,
+      "hitCandidateIndexes": [
+        30
+      ]
+    },
+    {
+      "sourceStartMs": 7010155,
+      "sourceEndMs": 7011256,
+      "reason": "人間が切り抜き側と元配信側で同じ素材と確認した素材ブロックのため。",
+      "sourceVideoId": "o8rZAhARXAc",
+      "sourceUrl": "https://www.youtube.com/watch?v=o8rZAhARXAc",
+      "sourceSttId": "9dtwF5Exu5w_o8rZAhARXAc_local30_v001",
+      "clipId": "9dtwF5Exu5w",
+      "clipUrl": "https://www.youtube.com/watch?v=9dtwF5Exu5w",
+      "verificationStatus": "multiblock_material_human_confirmed",
+      "usableForClipLocationEval": true,
+      "usableForCompositionPromptEval": true,
+      "multicutPartIndex": 16,
+      "clipStartMs": 458963,
+      "clipEndMs": 459584,
+      "qualityGrade": "material_block_granularity",
+      "boundaryPrecision": {
+        "grade": "material_block_granularity",
+        "meaning": "素材対応の切り替わりを表す粒度。細かい詰めは境界にしない。"
+      },
+      "label": "block 20",
+      "materialBlock": {
+        "blockIndex": 20,
+        "matchedWordPairCount": 15,
+        "internalGapMs": {
+          "sourceExtraInsideMs": 0,
+          "clipExtraInsideMs": 0,
+          "note": "同一素材ブロック内でsource側の進みがclip側より大きい分は、切り抜き内部の詰め候補として扱う。境界にはしない。"
+        },
+        "internalTransitions": [],
+        "runIndexes": [
+          479
+        ]
+      },
+      "humanVerification": {
+        "status": "confirmed",
+        "checkedBy": "kawafmm",
+        "checkedAt": "2026-07-12",
+        "method": "境界確認パッケージの動画・音声確認",
+        "note": "人間確認で使用箇所8・16・19・22・23・30を不採用とした。該当箇所は隣接境界の前側または後側で、切り抜きと元配信の素材が一致しない。境目の時間ジャンプと元配信位置切替の観察は全30境界でtrueとして保持する。",
+        "acceptedBlocks": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          17,
+          18,
+          20,
+          21,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          31
+        ],
+        "rejectedBlocks": [
+          8,
+          16,
+          19,
+          22,
+          23,
+          30
+        ],
+        "unresolvedBlocks": [],
+        "confirmedBoundaries": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          17,
+          20,
+          24,
+          25,
+          26,
+          27,
+          28
+        ],
+        "rejectedBoundaries": [
+          7,
+          8,
+          15,
+          16,
+          18,
+          19,
+          21,
+          22,
+          23,
+          29,
+          30
+        ],
+        "unresolvedBoundaries": [],
+        "materialBlocksPath": "evals/clip_composition/outputs/material-blocks-9dtwF5Exu5w-20260712-full-local30-material-blocks-v001.json",
+        "materialBlocksSha256": "151623c7225c78edae3117552be04cfdca5a3f8a8760bd672540e08e3a43deab",
+        "reviewPackagePath": "evals/clip_composition/outputs/boundary-check/9dtwF5Exu5w/20260712-full-local30-material-blocks-v001/index.html",
+        "reviewPackageSha256": "e85c3eb915875e667d3c3d7cec9fd8e6b78feb4a397411ae6edd8b4dbb576da7"
+      },
+      "expectedIndex": 17,
+      "inputVisibility": "input-visible",
+      "overlappingInputSpeechIds": [
+        765
+      ],
+      "hit": false,
+      "hitCandidateIndexes": []
+    },
+    {
+      "sourceStartMs": 7945178,
+      "sourceEndMs": 7947279,
+      "reason": "人間が切り抜き側と元配信側で同じ素材と確認した素材ブロックのため。",
+      "sourceVideoId": "o8rZAhARXAc",
+      "sourceUrl": "https://www.youtube.com/watch?v=o8rZAhARXAc",
+      "sourceSttId": "9dtwF5Exu5w_o8rZAhARXAc_local30_v001",
+      "clipId": "9dtwF5Exu5w",
+      "clipUrl": "https://www.youtube.com/watch?v=9dtwF5Exu5w",
+      "verificationStatus": "multiblock_material_human_confirmed",
+      "usableForClipLocationEval": true,
+      "usableForCompositionPromptEval": true,
+      "multicutPartIndex": 17,
+      "clipStartMs": 582784,
+      "clipEndMs": 583444,
+      "qualityGrade": "material_block_granularity",
+      "boundaryPrecision": {
+        "grade": "material_block_granularity",
+        "meaning": "素材対応の切り替わりを表す粒度。細かい詰めは境界にしない。"
+      },
+      "label": "block 21",
+      "materialBlock": {
+        "blockIndex": 21,
+        "matchedWordPairCount": 13,
+        "internalGapMs": {
+          "sourceExtraInsideMs": 0,
+          "clipExtraInsideMs": 0,
+          "note": "同一素材ブロック内でsource側の進みがclip側より大きい分は、切り抜き内部の詰め候補として扱う。境界にはしない。"
+        },
+        "internalTransitions": [],
+        "runIndexes": [
+          593
+        ]
+      },
+      "humanVerification": {
+        "status": "confirmed",
+        "checkedBy": "kawafmm",
+        "checkedAt": "2026-07-12",
+        "method": "境界確認パッケージの動画・音声確認",
+        "note": "人間確認で使用箇所8・16・19・22・23・30を不採用とした。該当箇所は隣接境界の前側または後側で、切り抜きと元配信の素材が一致しない。境目の時間ジャンプと元配信位置切替の観察は全30境界でtrueとして保持する。",
+        "acceptedBlocks": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          17,
+          18,
+          20,
+          21,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          31
+        ],
+        "rejectedBlocks": [
+          8,
+          16,
+          19,
+          22,
+          23,
+          30
+        ],
+        "unresolvedBlocks": [],
+        "confirmedBoundaries": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          17,
+          20,
+          24,
+          25,
+          26,
+          27,
+          28
+        ],
+        "rejectedBoundaries": [
+          7,
+          8,
+          15,
+          16,
+          18,
+          19,
+          21,
+          22,
+          23,
+          29,
+          30
+        ],
+        "unresolvedBoundaries": [],
+        "materialBlocksPath": "evals/clip_composition/outputs/material-blocks-9dtwF5Exu5w-20260712-full-local30-material-blocks-v001.json",
+        "materialBlocksSha256": "151623c7225c78edae3117552be04cfdca5a3f8a8760bd672540e08e3a43deab",
+        "reviewPackagePath": "evals/clip_composition/outputs/boundary-check/9dtwF5Exu5w/20260712-full-local30-material-blocks-v001/index.html",
+        "reviewPackageSha256": "e85c3eb915875e667d3c3d7cec9fd8e6b78feb4a397411ae6edd8b4dbb576da7"
+      },
+      "expectedIndex": 18,
+      "inputVisibility": "input-visible",
+      "overlappingInputSpeechIds": [
+        846
+      ],
+      "hit": false,
+      "hitCandidateIndexes": []
+    },
+    {
+      "sourceStartMs": 9117659,
+      "sourceEndMs": 9119080,
+      "reason": "人間が切り抜き側と元配信側で同じ素材と確認した素材ブロックのため。",
+      "sourceVideoId": "o8rZAhARXAc",
+      "sourceUrl": "https://www.youtube.com/watch?v=o8rZAhARXAc",
+      "sourceSttId": "9dtwF5Exu5w_o8rZAhARXAc_local30_v001",
+      "clipId": "9dtwF5Exu5w",
+      "clipUrl": "https://www.youtube.com/watch?v=9dtwF5Exu5w",
+      "verificationStatus": "multiblock_material_human_confirmed",
+      "usableForClipLocationEval": true,
+      "usableForCompositionPromptEval": true,
+      "multicutPartIndex": 18,
+      "clipStartMs": 706613,
+      "clipEndMs": 707234,
+      "qualityGrade": "material_block_granularity",
+      "boundaryPrecision": {
+        "grade": "material_block_granularity",
+        "meaning": "素材対応の切り替わりを表す粒度。細かい詰めは境界にしない。"
+      },
+      "label": "block 24",
+      "materialBlock": {
+        "blockIndex": 24,
+        "matchedWordPairCount": 25,
+        "internalGapMs": {
+          "sourceExtraInsideMs": 0,
+          "clipExtraInsideMs": 0,
+          "note": "同一素材ブロック内でsource側の進みがclip側より大きい分は、切り抜き内部の詰め候補として扱う。境界にはしない。"
+        },
+        "internalTransitions": [],
+        "runIndexes": [
+          694
+        ]
+      },
+      "humanVerification": {
+        "status": "confirmed",
+        "checkedBy": "kawafmm",
+        "checkedAt": "2026-07-12",
+        "method": "境界確認パッケージの動画・音声確認",
+        "note": "人間確認で使用箇所8・16・19・22・23・30を不採用とした。該当箇所は隣接境界の前側または後側で、切り抜きと元配信の素材が一致しない。境目の時間ジャンプと元配信位置切替の観察は全30境界でtrueとして保持する。",
+        "acceptedBlocks": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          17,
+          18,
+          20,
+          21,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          31
+        ],
+        "rejectedBlocks": [
+          8,
+          16,
+          19,
+          22,
+          23,
+          30
+        ],
+        "unresolvedBlocks": [],
+        "confirmedBoundaries": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          17,
+          20,
+          24,
+          25,
+          26,
+          27,
+          28
+        ],
+        "rejectedBoundaries": [
+          7,
+          8,
+          15,
+          16,
+          18,
+          19,
+          21,
+          22,
+          23,
+          29,
+          30
+        ],
+        "unresolvedBoundaries": [],
+        "materialBlocksPath": "evals/clip_composition/outputs/material-blocks-9dtwF5Exu5w-20260712-full-local30-material-blocks-v001.json",
+        "materialBlocksSha256": "151623c7225c78edae3117552be04cfdca5a3f8a8760bd672540e08e3a43deab",
+        "reviewPackagePath": "evals/clip_composition/outputs/boundary-check/9dtwF5Exu5w/20260712-full-local30-material-blocks-v001/index.html",
+        "reviewPackageSha256": "e85c3eb915875e667d3c3d7cec9fd8e6b78feb4a397411ae6edd8b4dbb576da7"
+      },
+      "expectedIndex": 19,
+      "inputVisibility": "input-not-visible",
+      "overlappingInputSpeechIds": [],
+      "hit": false,
+      "hitCandidateIndexes": []
+    },
+    {
+      "sourceStartMs": 9150522,
+      "sourceEndMs": 9152464,
+      "reason": "人間が切り抜き側と元配信側で同じ素材と確認した素材ブロックのため。",
+      "sourceVideoId": "o8rZAhARXAc",
+      "sourceUrl": "https://www.youtube.com/watch?v=o8rZAhARXAc",
+      "sourceSttId": "9dtwF5Exu5w_o8rZAhARXAc_local30_v001",
+      "clipId": "9dtwF5Exu5w",
+      "clipUrl": "https://www.youtube.com/watch?v=9dtwF5Exu5w",
+      "verificationStatus": "multiblock_material_human_confirmed",
+      "usableForClipLocationEval": true,
+      "usableForCompositionPromptEval": true,
+      "multicutPartIndex": 19,
+      "clipStartMs": 711176,
+      "clipEndMs": 713537,
+      "qualityGrade": "material_block_granularity",
+      "boundaryPrecision": {
+        "grade": "material_block_granularity",
+        "meaning": "素材対応の切り替わりを表す粒度。細かい詰めは境界にしない。"
+      },
+      "label": "block 25",
+      "materialBlock": {
+        "blockIndex": 25,
+        "matchedWordPairCount": 17,
+        "internalGapMs": {
+          "sourceExtraInsideMs": 0,
+          "clipExtraInsideMs": 0,
+          "note": "同一素材ブロック内でsource側の進みがclip側より大きい分は、切り抜き内部の詰め候補として扱う。境界にはしない。"
+        },
+        "internalTransitions": [],
+        "runIndexes": [
+          697
+        ]
+      },
+      "humanVerification": {
+        "status": "confirmed",
+        "checkedBy": "kawafmm",
+        "checkedAt": "2026-07-12",
+        "method": "境界確認パッケージの動画・音声確認",
+        "note": "人間確認で使用箇所8・16・19・22・23・30を不採用とした。該当箇所は隣接境界の前側または後側で、切り抜きと元配信の素材が一致しない。境目の時間ジャンプと元配信位置切替の観察は全30境界でtrueとして保持する。",
+        "acceptedBlocks": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          17,
+          18,
+          20,
+          21,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          31
+        ],
+        "rejectedBlocks": [
+          8,
+          16,
+          19,
+          22,
+          23,
+          30
+        ],
+        "unresolvedBlocks": [],
+        "confirmedBoundaries": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          17,
+          20,
+          24,
+          25,
+          26,
+          27,
+          28
+        ],
+        "rejectedBoundaries": [
+          7,
+          8,
+          15,
+          16,
+          18,
+          19,
+          21,
+          22,
+          23,
+          29,
+          30
+        ],
+        "unresolvedBoundaries": [],
+        "materialBlocksPath": "evals/clip_composition/outputs/material-blocks-9dtwF5Exu5w-20260712-full-local30-material-blocks-v001.json",
+        "materialBlocksSha256": "151623c7225c78edae3117552be04cfdca5a3f8a8760bd672540e08e3a43deab",
+        "reviewPackagePath": "evals/clip_composition/outputs/boundary-check/9dtwF5Exu5w/20260712-full-local30-material-blocks-v001/index.html",
+        "reviewPackageSha256": "e85c3eb915875e667d3c3d7cec9fd8e6b78feb4a397411ae6edd8b4dbb576da7"
+      },
+      "expectedIndex": 20,
+      "inputVisibility": "input-visible",
+      "overlappingInputSpeechIds": [
+        1004,
+        1005
+      ],
+      "hit": true,
+      "hitCandidateIndexes": [
+        44
+      ]
+    },
+    {
+      "sourceStartMs": 10077799,
+      "sourceEndMs": 10088896,
+      "reason": "人間が切り抜き側と元配信側で同じ素材と確認した素材ブロックのため。",
+      "sourceVideoId": "o8rZAhARXAc",
+      "sourceUrl": "https://www.youtube.com/watch?v=o8rZAhARXAc",
+      "sourceSttId": "9dtwF5Exu5w_o8rZAhARXAc_local30_v001",
+      "clipId": "9dtwF5Exu5w",
+      "clipUrl": "https://www.youtube.com/watch?v=9dtwF5Exu5w",
+      "verificationStatus": "multiblock_material_human_confirmed",
+      "usableForClipLocationEval": true,
+      "usableForCompositionPromptEval": true,
+      "multicutPartIndex": 20,
+      "clipStartMs": 724092,
+      "clipEndMs": 735158,
+      "qualityGrade": "material_block_granularity",
+      "boundaryPrecision": {
+        "grade": "material_block_granularity",
+        "meaning": "素材対応の切り替わりを表す粒度。細かい詰めは境界にしない。"
+      },
+      "label": "block 26",
+      "materialBlock": {
+        "blockIndex": 26,
+        "matchedWordPairCount": 31,
+        "internalGapMs": {
+          "sourceExtraInsideMs": 0,
+          "clipExtraInsideMs": 1421,
+          "note": "同一素材ブロック内でsource側の進みがclip側より大きい分は、切り抜き内部の詰め候補として扱う。境界にはしない。"
+        },
+        "internalTransitions": [
+          {
+            "fromRun": 717,
+            "toRun": 719,
+            "clipGapMs": 2361,
+            "sourceGapMs": 940,
+            "materialJumpMs": -1421
+          }
+        ],
+        "runIndexes": [
+          717,
+          719
+        ]
+      },
+      "humanVerification": {
+        "status": "confirmed",
+        "checkedBy": "kawafmm",
+        "checkedAt": "2026-07-12",
+        "method": "境界確認パッケージの動画・音声確認",
+        "note": "人間確認で使用箇所8・16・19・22・23・30を不採用とした。該当箇所は隣接境界の前側または後側で、切り抜きと元配信の素材が一致しない。境目の時間ジャンプと元配信位置切替の観察は全30境界でtrueとして保持する。",
+        "acceptedBlocks": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          17,
+          18,
+          20,
+          21,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          31
+        ],
+        "rejectedBlocks": [
+          8,
+          16,
+          19,
+          22,
+          23,
+          30
+        ],
+        "unresolvedBlocks": [],
+        "confirmedBoundaries": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          17,
+          20,
+          24,
+          25,
+          26,
+          27,
+          28
+        ],
+        "rejectedBoundaries": [
+          7,
+          8,
+          15,
+          16,
+          18,
+          19,
+          21,
+          22,
+          23,
+          29,
+          30
+        ],
+        "unresolvedBoundaries": [],
+        "materialBlocksPath": "evals/clip_composition/outputs/material-blocks-9dtwF5Exu5w-20260712-full-local30-material-blocks-v001.json",
+        "materialBlocksSha256": "151623c7225c78edae3117552be04cfdca5a3f8a8760bd672540e08e3a43deab",
+        "reviewPackagePath": "evals/clip_composition/outputs/boundary-check/9dtwF5Exu5w/20260712-full-local30-material-blocks-v001/index.html",
+        "reviewPackageSha256": "e85c3eb915875e667d3c3d7cec9fd8e6b78feb4a397411ae6edd8b4dbb576da7"
+      },
+      "expectedIndex": 21,
+      "inputVisibility": "input-not-visible",
+      "overlappingInputSpeechIds": [],
+      "hit": false,
+      "hitCandidateIndexes": []
+    },
+    {
+      "sourceStartMs": 10221096,
+      "sourceEndMs": 10221656,
+      "reason": "人間が切り抜き側と元配信側で同じ素材と確認した素材ブロックのため。",
+      "sourceVideoId": "o8rZAhARXAc",
+      "sourceUrl": "https://www.youtube.com/watch?v=o8rZAhARXAc",
+      "sourceSttId": "9dtwF5Exu5w_o8rZAhARXAc_local30_v001",
+      "clipId": "9dtwF5Exu5w",
+      "clipUrl": "https://www.youtube.com/watch?v=9dtwF5Exu5w",
+      "verificationStatus": "multiblock_material_human_confirmed",
+      "usableForClipLocationEval": true,
+      "usableForCompositionPromptEval": true,
+      "multicutPartIndex": 21,
+      "clipStartMs": 754675,
+      "clipEndMs": 755436,
+      "qualityGrade": "material_block_granularity",
+      "boundaryPrecision": {
+        "grade": "material_block_granularity",
+        "meaning": "素材対応の切り替わりを表す粒度。細かい詰めは境界にしない。"
+      },
+      "label": "block 27",
+      "materialBlock": {
+        "blockIndex": 27,
+        "matchedWordPairCount": 16,
+        "internalGapMs": {
+          "sourceExtraInsideMs": 0,
+          "clipExtraInsideMs": 0,
+          "note": "同一素材ブロック内でsource側の進みがclip側より大きい分は、切り抜き内部の詰め候補として扱う。境界にはしない。"
+        },
+        "internalTransitions": [],
+        "runIndexes": [
+          733
+        ]
+      },
+      "humanVerification": {
+        "status": "confirmed",
+        "checkedBy": "kawafmm",
+        "checkedAt": "2026-07-12",
+        "method": "境界確認パッケージの動画・音声確認",
+        "note": "人間確認で使用箇所8・16・19・22・23・30を不採用とした。該当箇所は隣接境界の前側または後側で、切り抜きと元配信の素材が一致しない。境目の時間ジャンプと元配信位置切替の観察は全30境界でtrueとして保持する。",
+        "acceptedBlocks": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          17,
+          18,
+          20,
+          21,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          31
+        ],
+        "rejectedBlocks": [
+          8,
+          16,
+          19,
+          22,
+          23,
+          30
+        ],
+        "unresolvedBlocks": [],
+        "confirmedBoundaries": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          17,
+          20,
+          24,
+          25,
+          26,
+          27,
+          28
+        ],
+        "rejectedBoundaries": [
+          7,
+          8,
+          15,
+          16,
+          18,
+          19,
+          21,
+          22,
+          23,
+          29,
+          30
+        ],
+        "unresolvedBoundaries": [],
+        "materialBlocksPath": "evals/clip_composition/outputs/material-blocks-9dtwF5Exu5w-20260712-full-local30-material-blocks-v001.json",
+        "materialBlocksSha256": "151623c7225c78edae3117552be04cfdca5a3f8a8760bd672540e08e3a43deab",
+        "reviewPackagePath": "evals/clip_composition/outputs/boundary-check/9dtwF5Exu5w/20260712-full-local30-material-blocks-v001/index.html",
+        "reviewPackageSha256": "e85c3eb915875e667d3c3d7cec9fd8e6b78feb4a397411ae6edd8b4dbb576da7"
+      },
+      "expectedIndex": 22,
+      "inputVisibility": "input-visible",
+      "overlappingInputSpeechIds": [
+        1124
+      ],
+      "hit": false,
+      "hitCandidateIndexes": []
+    },
+    {
+      "sourceStartMs": 10521894,
+      "sourceEndMs": 10529420,
+      "reason": "人間が切り抜き側と元配信側で同じ素材と確認した素材ブロックのため。",
+      "sourceVideoId": "o8rZAhARXAc",
+      "sourceUrl": "https://www.youtube.com/watch?v=o8rZAhARXAc",
+      "sourceSttId": "9dtwF5Exu5w_o8rZAhARXAc_local30_v001",
+      "clipId": "9dtwF5Exu5w",
+      "clipUrl": "https://www.youtube.com/watch?v=9dtwF5Exu5w",
+      "verificationStatus": "multiblock_material_human_confirmed",
+      "usableForClipLocationEval": true,
+      "usableForCompositionPromptEval": true,
+      "multicutPartIndex": 22,
+      "clipStartMs": 834573,
+      "clipEndMs": 838177,
+      "qualityGrade": "material_block_granularity",
+      "boundaryPrecision": {
+        "grade": "material_block_granularity",
+        "meaning": "素材対応の切り替わりを表す粒度。細かい詰めは境界にしない。"
+      },
+      "label": "block 28",
+      "materialBlock": {
+        "blockIndex": 28,
+        "matchedWordPairCount": 17,
+        "internalGapMs": {
+          "sourceExtraInsideMs": 0,
+          "clipExtraInsideMs": 0,
+          "note": "同一素材ブロック内でsource側の進みがclip側より大きい分は、切り抜き内部の詰め候補として扱う。境界にはしない。"
+        },
+        "internalTransitions": [],
+        "runIndexes": [
+          806
+        ]
+      },
+      "humanVerification": {
+        "status": "confirmed",
+        "checkedBy": "kawafmm",
+        "checkedAt": "2026-07-12",
+        "method": "境界確認パッケージの動画・音声確認",
+        "note": "人間確認で使用箇所8・16・19・22・23・30を不採用とした。該当箇所は隣接境界の前側または後側で、切り抜きと元配信の素材が一致しない。境目の時間ジャンプと元配信位置切替の観察は全30境界でtrueとして保持する。",
+        "acceptedBlocks": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          17,
+          18,
+          20,
+          21,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          31
+        ],
+        "rejectedBlocks": [
+          8,
+          16,
+          19,
+          22,
+          23,
+          30
+        ],
+        "unresolvedBlocks": [],
+        "confirmedBoundaries": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          17,
+          20,
+          24,
+          25,
+          26,
+          27,
+          28
+        ],
+        "rejectedBoundaries": [
+          7,
+          8,
+          15,
+          16,
+          18,
+          19,
+          21,
+          22,
+          23,
+          29,
+          30
+        ],
+        "unresolvedBoundaries": [],
+        "materialBlocksPath": "evals/clip_composition/outputs/material-blocks-9dtwF5Exu5w-20260712-full-local30-material-blocks-v001.json",
+        "materialBlocksSha256": "151623c7225c78edae3117552be04cfdca5a3f8a8760bd672540e08e3a43deab",
+        "reviewPackagePath": "evals/clip_composition/outputs/boundary-check/9dtwF5Exu5w/20260712-full-local30-material-blocks-v001/index.html",
+        "reviewPackageSha256": "e85c3eb915875e667d3c3d7cec9fd8e6b78feb4a397411ae6edd8b4dbb576da7"
+      },
+      "expectedIndex": 23,
+      "inputVisibility": "input-visible",
+      "overlappingInputSpeechIds": [
+        1189
+      ],
+      "hit": true,
+      "hitCandidateIndexes": [
+        52
+      ]
+    },
+    {
+      "sourceStartMs": 10790744,
+      "sourceEndMs": 10803724,
+      "reason": "人間が切り抜き側と元配信側で同じ素材と確認した素材ブロックのため。",
+      "sourceVideoId": "o8rZAhARXAc",
+      "sourceUrl": "https://www.youtube.com/watch?v=o8rZAhARXAc",
+      "sourceSttId": "9dtwF5Exu5w_o8rZAhARXAc_local30_v001",
+      "clipId": "9dtwF5Exu5w",
+      "clipUrl": "https://www.youtube.com/watch?v=9dtwF5Exu5w",
+      "verificationStatus": "multiblock_material_human_confirmed",
+      "usableForClipLocationEval": true,
+      "usableForCompositionPromptEval": true,
+      "multicutPartIndex": 23,
+      "clipStartMs": 923195,
+      "clipEndMs": 936132,
+      "qualityGrade": "material_block_granularity",
+      "boundaryPrecision": {
+        "grade": "material_block_granularity",
+        "meaning": "素材対応の切り替わりを表す粒度。細かい詰めは境界にしない。"
+      },
+      "label": "block 29",
+      "materialBlock": {
+        "blockIndex": 29,
+        "matchedWordPairCount": 26,
+        "internalGapMs": {
+          "sourceExtraInsideMs": 34,
+          "clipExtraInsideMs": 0,
+          "note": "同一素材ブロック内でsource側の進みがclip側より大きい分は、切り抜き内部の詰め候補として扱う。境界にはしない。"
+        },
+        "internalTransitions": [
+          {
+            "fromRun": 834,
+            "toRun": 839,
+            "clipGapMs": 3741,
+            "sourceGapMs": 3775,
+            "materialJumpMs": 34
+          }
+        ],
+        "runIndexes": [
+          834,
+          839
+        ]
+      },
+      "humanVerification": {
+        "status": "confirmed",
+        "checkedBy": "kawafmm",
+        "checkedAt": "2026-07-12",
+        "method": "境界確認パッケージの動画・音声確認",
+        "note": "人間確認で使用箇所8・16・19・22・23・30を不採用とした。該当箇所は隣接境界の前側または後側で、切り抜きと元配信の素材が一致しない。境目の時間ジャンプと元配信位置切替の観察は全30境界でtrueとして保持する。",
+        "acceptedBlocks": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          17,
+          18,
+          20,
+          21,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          31
+        ],
+        "rejectedBlocks": [
+          8,
+          16,
+          19,
+          22,
+          23,
+          30
+        ],
+        "unresolvedBlocks": [],
+        "confirmedBoundaries": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          17,
+          20,
+          24,
+          25,
+          26,
+          27,
+          28
+        ],
+        "rejectedBoundaries": [
+          7,
+          8,
+          15,
+          16,
+          18,
+          19,
+          21,
+          22,
+          23,
+          29,
+          30
+        ],
+        "unresolvedBoundaries": [],
+        "materialBlocksPath": "evals/clip_composition/outputs/material-blocks-9dtwF5Exu5w-20260712-full-local30-material-blocks-v001.json",
+        "materialBlocksSha256": "151623c7225c78edae3117552be04cfdca5a3f8a8760bd672540e08e3a43deab",
+        "reviewPackagePath": "evals/clip_composition/outputs/boundary-check/9dtwF5Exu5w/20260712-full-local30-material-blocks-v001/index.html",
+        "reviewPackageSha256": "e85c3eb915875e667d3c3d7cec9fd8e6b78feb4a397411ae6edd8b4dbb576da7"
+      },
+      "expectedIndex": 24,
+      "inputVisibility": "input-visible",
+      "overlappingInputSpeechIds": [
+        1230,
+        1231,
+        1232,
+        1233,
+        1234,
+        1235
+      ],
+      "hit": true,
+      "hitCandidateIndexes": [
+        54
+      ]
+    },
+    {
+      "sourceStartMs": 11730442,
+      "sourceEndMs": 11733624,
+      "reason": "人間が切り抜き側と元配信側で同じ素材と確認した素材ブロックのため。",
+      "sourceVideoId": "o8rZAhARXAc",
+      "sourceUrl": "https://www.youtube.com/watch?v=o8rZAhARXAc",
+      "sourceSttId": "9dtwF5Exu5w_o8rZAhARXAc_local30_v001",
+      "clipId": "9dtwF5Exu5w",
+      "clipUrl": "https://www.youtube.com/watch?v=9dtwF5Exu5w",
+      "verificationStatus": "multiblock_material_human_confirmed",
+      "usableForClipLocationEval": true,
+      "usableForCompositionPromptEval": true,
+      "multicutPartIndex": 24,
+      "clipStartMs": 1021834,
+      "clipEndMs": 1025024,
+      "qualityGrade": "material_block_granularity",
+      "boundaryPrecision": {
+        "grade": "material_block_granularity",
+        "meaning": "素材対応の切り替わりを表す粒度。細かい詰めは境界にしない。"
+      },
+      "label": "block 31",
+      "materialBlock": {
+        "blockIndex": 31,
+        "matchedWordPairCount": 14,
+        "internalGapMs": {
+          "sourceExtraInsideMs": 0,
+          "clipExtraInsideMs": 0,
+          "note": "同一素材ブロック内でsource側の進みがclip側より大きい分は、切り抜き内部の詰め候補として扱う。境界にはしない。"
+        },
+        "internalTransitions": [],
+        "runIndexes": [
+          923
+        ]
+      },
+      "humanVerification": {
+        "status": "confirmed",
+        "checkedBy": "kawafmm",
+        "checkedAt": "2026-07-12",
+        "method": "境界確認パッケージの動画・音声確認",
+        "note": "人間確認で使用箇所8・16・19・22・23・30を不採用とした。該当箇所は隣接境界の前側または後側で、切り抜きと元配信の素材が一致しない。境目の時間ジャンプと元配信位置切替の観察は全30境界でtrueとして保持する。",
+        "acceptedBlocks": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          17,
+          18,
+          20,
+          21,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          31
+        ],
+        "rejectedBlocks": [
+          8,
+          16,
+          19,
+          22,
+          23,
+          30
+        ],
+        "unresolvedBlocks": [],
+        "confirmedBoundaries": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          17,
+          20,
+          24,
+          25,
+          26,
+          27,
+          28
+        ],
+        "rejectedBoundaries": [
+          7,
+          8,
+          15,
+          16,
+          18,
+          19,
+          21,
+          22,
+          23,
+          29,
+          30
+        ],
+        "unresolvedBoundaries": [],
+        "materialBlocksPath": "evals/clip_composition/outputs/material-blocks-9dtwF5Exu5w-20260712-full-local30-material-blocks-v001.json",
+        "materialBlocksSha256": "151623c7225c78edae3117552be04cfdca5a3f8a8760bd672540e08e3a43deab",
+        "reviewPackagePath": "evals/clip_composition/outputs/boundary-check/9dtwF5Exu5w/20260712-full-local30-material-blocks-v001/index.html",
+        "reviewPackageSha256": "e85c3eb915875e667d3c3d7cec9fd8e6b78feb4a397411ae6edd8b4dbb576da7"
+      },
+      "expectedIndex": 25,
+      "inputVisibility": "input-visible",
+      "overlappingInputSpeechIds": [
+        1321
+      ],
+      "hit": true,
+      "hitCandidateIndexes": [
+        59
+      ]
+    }
+  ],
+  "candidateAssessments": [
+    {
+      "candidateIndex": 1,
+      "themeId": "theme_001",
+      "title": "新球種開発モードに戸惑うマリン船長",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 2,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 545346,
+          "sourceEndMs": 659680,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        },
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 840358,
+          "sourceEndMs": 864566,
+          "rangeIndex": 2,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 2,
+      "themeId": "theme_001",
+      "title": "一条コーラルのオリジナル変化球「粉落とし」に驚くマリン船長",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 872562,
+          "sourceEndMs": 892815,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 3,
+      "themeId": "theme_002",
+      "title": "オリジナル変化球の開発が分からずDiscordで助けを求めるマリン船長",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 961718,
+          "sourceEndMs": 1048380,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 4,
+      "themeId": "theme_003",
+      "title": "結局リリカのオリジナル変化球「粉落とし」を丸パクリすることに決めるマリン船長",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 1057442,
+          "sourceEndMs": 1109720,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 5,
+      "themeId": "theme_001",
+      "title": "オリジナル変化球のエフェクト選びに迷うマリン船長",
+      "classification": "overbroad-range",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [
+        6
+      ],
+      "hitInputVisibleExpectedIndexes": [
+        6
+      ],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 1113054,
+          "sourceEndMs": 1317150,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [
+            6
+          ],
+          "strictlyContainedExpectedIndexes": [
+            6
+          ]
+        }
+      ]
+    },
+    {
+      "candidateIndex": 6,
+      "themeId": "theme_002",
+      "title": "クレセントムーンのフェスティバルタイプを確認",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 1391869,
+          "sourceEndMs": 1439002,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 7,
+      "themeId": "theme_003",
+      "title": "フブちゃんの変化球や投手の起用に悩む",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 1800278,
+          "sourceEndMs": 1829780,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 8,
+      "themeId": "theme_001",
+      "title": "オリジナル変化球の習得対象に悩む宝鐘マリン監督",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 2,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 1830198,
+          "sourceEndMs": 1919900,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        },
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 2581422,
+          "sourceEndMs": 2699920,
+          "rangeIndex": 2,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 9,
+      "themeId": "theme_002",
+      "title": "療養中のリリカからの助言と妄想を繰り広げる宝鐘マリン",
+      "classification": "overbroad-range",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [
+        7
+      ],
+      "hitInputVisibleExpectedIndexes": [
+        7
+      ],
+      "overlappedExcludedRangeIds": [
+        "rejected_material_block_8"
+      ],
+      "ranges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 2010874,
+          "sourceEndMs": 2155086,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [
+            7
+          ],
+          "strictlyContainedExpectedIndexes": [
+            7
+          ]
+        }
+      ]
+    },
+    {
+      "candidateIndex": 10,
+      "themeId": "theme_001",
+      "title": "オリジナル変化球「パワーカーブ」作成に苦戦するマリン船長",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 2700146,
+          "sourceEndMs": 2875926,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 11,
+      "themeId": "theme_002",
+      "title": "変化球の軌道を見てテンションが上がるマリン船長とリスナーとの調整",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 2949238,
+          "sourceEndMs": 3037740,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 12,
+      "themeId": "theme_001",
+      "title": "フブキのオリジナル変化球命名に悩むマリン",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 3240258,
+          "sourceEndMs": 3554885,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 13,
+      "themeId": "theme_001",
+      "title": "「重さ」育成方針に迷い、こよりに助けを求めるマリン",
+      "classification": "overbroad-range",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [
+        8
+      ],
+      "hitInputVisibleExpectedIndexes": [
+        8
+      ],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 3554885,
+          "sourceEndMs": 3723879,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [
+            8
+          ],
+          "strictlyContainedExpectedIndexes": [
+            8
+          ]
+        }
+      ]
+    },
+    {
+      "candidateIndex": 14,
+      "themeId": "theme_002",
+      "title": "アドバイス起因の荒れを懸念し、こよりへの相談をやめるマリン",
+      "classification": "overbroad-range",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [
+        9
+      ],
+      "hitInputVisibleExpectedIndexes": [
+        9
+      ],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 3723879,
+          "sourceEndMs": 3794866,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [
+            9
+          ],
+          "strictlyContainedExpectedIndexes": [
+            9
+          ]
+        }
+      ]
+    },
+    {
+      "candidateIndex": 15,
+      "themeId": "theme_003",
+      "title": "リスナーのアドバイスを整理して納得するも、直後に大絶叫",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 4047799,
+          "sourceEndMs": 4094980,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 16,
+      "themeId": "theme_001",
+      "title": "新球種の性能に迷いすぎて1時間経過するマリン船長",
+      "classification": "overbroad-range",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [
+        10,
+        11,
+        12,
+        13
+      ],
+      "hitInputVisibleExpectedIndexes": [
+        10,
+        11,
+        12,
+        13
+      ],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 4096310,
+          "sourceEndMs": 4379860,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [
+            10,
+            11,
+            12,
+            13
+          ],
+          "strictlyContainedExpectedIndexes": [
+            10,
+            11,
+            12,
+            13
+          ]
+        }
+      ]
+    },
+    {
+      "candidateIndex": 17,
+      "themeId": "theme_002",
+      "title": "フブキがオリジナル変化球「スーパーノヴァ」を習得",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 4381338,
+          "sourceEndMs": 4466549,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 18,
+      "themeId": "theme_003",
+      "title": "フブキの星500超えに「MVPやっぞ！」と大興奮",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 4445458,
+          "sourceEndMs": 4486111,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 19,
+      "themeId": "theme_001",
+      "title": "ラオラの特殊能力変更に悩むマリン",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 4560918,
+          "sourceEndMs": 4589420,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 20,
+      "themeId": "theme_002",
+      "title": "使えない占い師にキレるマリン",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 4597071,
+          "sourceEndMs": 4619066,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 21,
+      "themeId": "theme_003",
+      "title": "画面を塞いでいたことを謝るマリン",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 4651086,
+          "sourceEndMs": 4677797,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 22,
+      "themeId": "theme_001",
+      "title": "しおりんのカット打ち獲得",
+      "classification": "overbroad-range",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [
+        14
+      ],
+      "hitInputVisibleExpectedIndexes": [
+        14
+      ],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 4710742,
+          "sourceEndMs": 4738494,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [
+            14
+          ],
+          "strictlyContainedExpectedIndexes": [
+            14
+          ]
+        }
+      ]
+    },
+    {
+      "candidateIndex": 23,
+      "themeId": "theme_002",
+      "title": "3年生ばかりの強化に焦るマリン",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 4741026,
+          "sourceEndMs": 4779937,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 24,
+      "themeId": "theme_001",
+      "title": "3年生ばかりのメンバーに喝を入れ甲子園必勝を誓うマリン船長",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 5049464,
+          "sourceEndMs": 5093371,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 25,
+      "themeId": "theme_002",
+      "title": "チャットの指示で対戦相手を選んだ結果、Bランクの高校を引いて焦るシーン",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 5701367,
+          "sourceEndMs": 5755602,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 26,
+      "themeId": "theme_001",
+      "title": "夏の甲子園大会開幕とオーダーに悩むマリン監督",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6002550,
+          "sourceEndMs": 6059980,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 27,
+      "themeId": "theme_002",
+      "title": "トイレに行きたいのをリスナーにイジられ否定するマリン監督",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6240322,
+          "sourceEndMs": 6281687,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 28,
+      "themeId": "theme_003",
+      "title": "初戦の相手「ザサミ商業」の強さに絶望するマリン監督",
+      "classification": "overbroad-range",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [
+        15
+      ],
+      "hitInputVisibleExpectedIndexes": [
+        15
+      ],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6281687,
+          "sourceEndMs": 6359980,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [
+            15
+          ],
+          "strictlyContainedExpectedIndexes": [
+            15
+          ]
+        }
+      ]
+    },
+    {
+      "candidateIndex": 29,
+      "themeId": "theme_001",
+      "title": "チャンス場面での作戦選択に悩むマリン監督",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6480278,
+          "sourceEndMs": 6525131,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 30,
+      "themeId": "theme_002",
+      "title": "「やればできるじゃない！」作戦成功に大喜びするマリン監督",
+      "classification": "overbroad-range",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [
+        16
+      ],
+      "hitInputVisibleExpectedIndexes": [
+        16
+      ],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6525131,
+          "sourceEndMs": 6539920,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [
+            16
+          ],
+          "strictlyContainedExpectedIndexes": [
+            16
+          ]
+        }
+      ]
+    },
+    {
+      "candidateIndex": 31,
+      "themeId": "theme_003",
+      "title": "「お前やれんのか！」次打者の能力値にハラハラするマリン監督",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6540034,
+          "sourceEndMs": 6579774,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 32,
+      "themeId": "theme_002",
+      "title": "チャンスの場面で盗塁かスクイーズか悩み始めるマリン船長",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6660842,
+          "sourceEndMs": 6680196,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 33,
+      "themeId": "theme_001",
+      "title": "盗塁とスクイーズの作戦に悩むマリン船長",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6680196,
+          "sourceEndMs": 6734205,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 34,
+      "themeId": "theme_002",
+      "title": "スクイーズの戦術数値低下に焦るも「バント職人」に賭ける場面",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6734205,
+          "sourceEndMs": 6797971,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 35,
+      "themeId": "theme_001",
+      "title": "ピンチの場面で葛藤するマリン船長",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [
+        "rejected_material_block_19"
+      ],
+      "ranges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6851910,
+          "sourceEndMs": 6988538,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 36,
+      "themeId": "theme_002",
+      "title": "試合の戦況を見守る実況風の掛け合い",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6993330,
+          "sourceEndMs": 7006574,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 37,
+      "themeId": "theme_001",
+      "title": "天野への怒りを爆発させるマリン",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 7082530,
+          "sourceEndMs": 7137334,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 38,
+      "themeId": "theme_002",
+      "title": "2点ビハインドの満塁チャンスでスクイーズを悩む場面",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 7262158,
+          "sourceEndMs": 7378797,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 39,
+      "themeId": "theme_001",
+      "title": "アイリス・プレアの連続スクイズ・伝令作戦と失敗",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 7381314,
+          "sourceEndMs": 7618940,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 40,
+      "themeId": "theme_002",
+      "title": "ビトが「魔物」ではなく「ラッキーボーイ」でブチギレるマリン",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 7618940,
+          "sourceEndMs": 7727619,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 41,
+      "themeId": "theme_001",
+      "title": "チャンスFだったことを忘れて後悔するマリン",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 7801179,
+          "sourceEndMs": 7858614,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 42,
+      "themeId": "theme_002",
+      "title": "盗塁指示を出すかリスナーと相談して迷うマリン",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 7958739,
+          "sourceEndMs": 8039306,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 43,
+      "themeId": "theme_001",
+      "title": "プルヒッター持ちの打席で風を味方に「引っ張り」を選択するマリン船長",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [
+        "rejected_material_block_22"
+      ],
+      "ranges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 8218519,
+          "sourceEndMs": 8305599,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 44,
+      "themeId": "theme_001",
+      "title": "ピンチで同点に追いつかれ、ピッチャー交代と代打の決断を迫られるマリン",
+      "classification": "overbroad-range",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [
+        20
+      ],
+      "hitInputVisibleExpectedIndexes": [
+        20
+      ],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 9126634,
+          "sourceEndMs": 9239820,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [
+            20
+          ],
+          "strictlyContainedExpectedIndexes": [
+            20
+          ]
+        }
+      ]
+    },
+    {
+      "candidateIndex": 45,
+      "themeId": "theme_002",
+      "title": "突然の代打策が的中！綺麗な転がしから急に訪れた大チャンスに動揺するシーン",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 9482230,
+          "sourceEndMs": 9539326,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 46,
+      "themeId": "theme_001",
+      "title": "転がす戦術も相手の好守に阻まれ絶望するマリン船長",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 9900438,
+          "sourceEndMs": 9958466,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 47,
+      "themeId": "theme_002",
+      "title": "選択肢の数字が悪すぎて「おまかせ」に賭けるしかなくなるマリン船長",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10230000,
+          "sourceEndMs": 10257434,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 48,
+      "themeId": "theme_003",
+      "title": "ストライク判定への不満から最悪の展開を迎え絶叫するマリン船長",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10322284,
+          "sourceEndMs": 10379920,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 49,
+      "themeId": "theme_004",
+      "title": "絶体絶命のピンチを救った守備のファインプレーに感謝するマリン船長",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10385201,
+          "sourceEndMs": 10395149,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 50,
+      "themeId": "theme_001",
+      "title": "限界すぎるヒリヒリした試合展開に絶叫する宝鐘マリン",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10395149,
+          "sourceEndMs": 10472384,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 51,
+      "themeId": "theme_002",
+      "title": "天野くんの好プレーに「ナイス」を連呼して大歓喜する宝鐘マリン",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10472384,
+          "sourceEndMs": 10491099,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 52,
+      "themeId": "theme_001",
+      "title": "盗塁とスクイーズを巡るリスクとリターンの葛藤",
+      "classification": "overbroad-range",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [
+        23
+      ],
+      "hitInputVisibleExpectedIndexes": [
+        23
+      ],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10503922,
+          "sourceEndMs": 10618318,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [
+            23
+          ],
+          "strictlyContainedExpectedIndexes": [
+            23
+          ]
+        }
+      ]
+    },
+    {
+      "candidateIndex": 53,
+      "themeId": "theme_002",
+      "title": "スクイーズの指示に対する困惑と反応",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10721215,
+          "sourceEndMs": 10738500,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 54,
+      "themeId": "theme_001",
+      "title": "盗塁させるか迷いまくるマリン船長",
+      "classification": "overbroad-range",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [
+        24
+      ],
+      "hitInputVisibleExpectedIndexes": [
+        24
+      ],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10776694,
+          "sourceEndMs": 10817172,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [
+            24
+          ],
+          "strictlyContainedExpectedIndexes": [
+            24
+          ]
+        }
+      ]
+    },
+    {
+      "candidateIndex": 55,
+      "themeId": "theme_002",
+      "title": "犠牲フライを狙うか悩むマリン船長",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10817172,
+          "sourceEndMs": 10848424,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 56,
+      "themeId": "theme_001",
+      "title": "スクイズを巡る葛藤とバント職人への信頼",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10848424,
+          "sourceEndMs": 11005829,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 57,
+      "themeId": "theme_002",
+      "title": "劇的勝利に大絶叫し涙を流すマリン船長",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [
+        "rejected_material_block_30"
+      ],
+      "ranges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 11010002,
+          "sourceEndMs": 11106471,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 58,
+      "themeId": "theme_001",
+      "title": "パワプロショップの買い物で悩むマリン船長",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 3,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 11223006,
+          "sourceEndMs": 11248178,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        },
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 11400970,
+          "sourceEndMs": 11458582,
+          "rangeIndex": 2,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        },
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 11526771,
+          "sourceEndMs": 11571741,
+          "rangeIndex": 3,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    },
+    {
+      "candidateIndex": 59,
+      "themeId": "theme_002",
+      "title": "次戦の相手判明と次回配信への持ち越し",
+      "classification": "overbroad-range",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [
+        25
+      ],
+      "hitInputVisibleExpectedIndexes": [
+        25
+      ],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 11701322,
+          "sourceEndMs": 11789446,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [
+            25
+          ],
+          "strictlyContainedExpectedIndexes": [
+            25
+          ]
+        }
+      ]
+    },
+    {
+      "candidateIndex": 60,
+      "themeId": "theme_001",
+      "title": "美少女無罪と魔法の若返りアピール",
+      "classification": "off-topic",
+      "validEvidenceRangeCount": 1,
+      "hitExpectedIndexes": [],
+      "hitInputVisibleExpectedIndexes": [],
+      "overlappedExcludedRangeIds": [],
+      "ranges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 11823654,
+          "sourceEndMs": 11839582,
+          "rangeIndex": 1,
+          "hitExpectedIndexes": [],
+          "strictlyContainedExpectedIndexes": []
+        }
+      ]
+    }
+  ],
+  "excludedRanges": {
+    "count": 6,
+    "scoringTreatment": "audit-only; excluded from hit counts and all denominators",
+    "ranges": [
+      {
+        "id": "rejected_material_block_8",
+        "sourceStartMs": 2099120,
+        "sourceEndMs": 2107080,
+        "clipStartMs": 110255,
+        "clipEndMs": 119560,
+        "sourceVideoId": "o8rZAhARXAc",
+        "sourceUrl": "https://www.youtube.com/watch?v=o8rZAhARXAc",
+        "evidenceStatus": "human_rejected_material_candidate",
+        "scoringTreatment": "excluded_from_fixture_expected",
+        "reason": "確認7の境界後側で、切り抜きと元配信の素材が一致しないと人間が確認したため不採用。"
+      },
+      {
+        "id": "rejected_material_block_16",
+        "sourceStartMs": 4845080,
+        "sourceEndMs": 4846482,
+        "clipStartMs": 271898,
+        "clipEndMs": 275259,
+        "sourceVideoId": "o8rZAhARXAc",
+        "sourceUrl": "https://www.youtube.com/watch?v=o8rZAhARXAc",
+        "evidenceStatus": "human_rejected_material_candidate",
+        "scoringTreatment": "excluded_from_fixture_expected",
+        "reason": "確認16の境界前側で、切り抜きと元配信の素材が一致しないと人間が確認したため不採用。"
+      },
+      {
+        "id": "rejected_material_block_19",
+        "sourceStartMs": 6926857,
+        "sourceEndMs": 6927358,
+        "clipStartMs": 436123,
+        "clipEndMs": 437184,
+        "sourceVideoId": "o8rZAhARXAc",
+        "sourceUrl": "https://www.youtube.com/watch?v=o8rZAhARXAc",
+        "evidenceStatus": "human_rejected_material_candidate",
+        "scoringTreatment": "excluded_from_fixture_expected",
+        "reason": "確認18の境界後側および確認19の境界前側で、切り抜きと元配信の素材が一致しないと人間が確認したため不採用。"
+      },
+      {
+        "id": "rejected_material_block_22",
+        "sourceStartMs": 8304378,
+        "sourceEndMs": 8366359,
+        "clipStartMs": 609836,
+        "clipEndMs": 656958,
+        "sourceVideoId": "o8rZAhARXAc",
+        "sourceUrl": "https://www.youtube.com/watch?v=o8rZAhARXAc",
+        "evidenceStatus": "human_rejected_material_candidate",
+        "scoringTreatment": "excluded_from_fixture_expected",
+        "reason": "確認21の境界後側で、切り抜きと元配信の素材が一致しないと人間が確認したため不採用。"
+      },
+      {
+        "id": "rejected_material_block_23",
+        "sourceStartMs": 8500956,
+        "sourceEndMs": 8501857,
+        "clipStartMs": 665120,
+        "clipEndMs": 669864,
+        "sourceVideoId": "o8rZAhARXAc",
+        "sourceUrl": "https://www.youtube.com/watch?v=o8rZAhARXAc",
+        "evidenceStatus": "human_rejected_material_candidate",
+        "scoringTreatment": "excluded_from_fixture_expected",
+        "reason": "確認23の境界前側で、切り抜きと元配信の素材が一致しないと人間が確認したため不採用。"
+      },
+      {
+        "id": "rejected_material_block_30",
+        "sourceStartMs": 11010322,
+        "sourceEndMs": 11026195,
+        "clipStartMs": 966892,
+        "clipEndMs": 987839,
+        "sourceVideoId": "o8rZAhARXAc",
+        "sourceUrl": "https://www.youtube.com/watch?v=o8rZAhARXAc",
+        "evidenceStatus": "human_rejected_material_candidate",
+        "scoringTreatment": "excluded_from_fixture_expected",
+        "reason": "確認29の境界後側で、切り抜きと元配信の素材が一致しないと人間が確認したため不採用。"
+      }
+    ]
+  },
+  "windowingResult": {
+    "applied": true,
+    "windowCount": 28,
+    "preMergeCandidateCount": 60,
+    "postMergeCandidateCount": 60,
+    "timingCorrectionCount": 2,
+    "merge": "同一sourceVideoIdで根拠範囲が重なる候補だけを機械統合。意味ベースの統合はしない。",
+    "windows": [
+      {
+        "windowId": "window_01_o8rZAhARXAc",
+        "sourceVideoId": "o8rZAhARXAc",
+        "themeCount": 1,
+        "timingCorrectionCount": 0
+      },
+      {
+        "windowId": "window_02_o8rZAhARXAc",
+        "sourceVideoId": "o8rZAhARXAc",
+        "themeCount": 3,
+        "timingCorrectionCount": 0
+      },
+      {
+        "windowId": "window_03_o8rZAhARXAc",
+        "sourceVideoId": "o8rZAhARXAc",
+        "themeCount": 3,
+        "timingCorrectionCount": 0
+      },
+      {
+        "windowId": "window_04_o8rZAhARXAc",
+        "sourceVideoId": "o8rZAhARXAc",
+        "themeCount": 2,
+        "timingCorrectionCount": 0
+      },
+      {
+        "windowId": "window_05_o8rZAhARXAc",
+        "sourceVideoId": "o8rZAhARXAc",
+        "themeCount": 2,
+        "timingCorrectionCount": 0
+      },
+      {
+        "windowId": "window_06_o8rZAhARXAc",
+        "sourceVideoId": "o8rZAhARXAc",
+        "themeCount": 1,
+        "timingCorrectionCount": 0
+      },
+      {
+        "windowId": "window_07_o8rZAhARXAc",
+        "sourceVideoId": "o8rZAhARXAc",
+        "themeCount": 3,
+        "timingCorrectionCount": 1
+      },
+      {
+        "windowId": "window_08_o8rZAhARXAc",
+        "sourceVideoId": "o8rZAhARXAc",
+        "themeCount": 3,
+        "timingCorrectionCount": 1
+      },
+      {
+        "windowId": "window_09_o8rZAhARXAc",
+        "sourceVideoId": "o8rZAhARXAc",
+        "themeCount": 3,
+        "timingCorrectionCount": 0
+      },
+      {
+        "windowId": "window_10_o8rZAhARXAc",
+        "sourceVideoId": "o8rZAhARXAc",
+        "themeCount": 2,
+        "timingCorrectionCount": 0
+      },
+      {
+        "windowId": "window_11_o8rZAhARXAc",
+        "sourceVideoId": "o8rZAhARXAc",
+        "themeCount": 2,
+        "timingCorrectionCount": 0
+      },
+      {
+        "windowId": "window_12_o8rZAhARXAc",
+        "sourceVideoId": "o8rZAhARXAc",
+        "themeCount": 3,
+        "timingCorrectionCount": 0
+      },
+      {
+        "windowId": "window_13_o8rZAhARXAc",
+        "sourceVideoId": "o8rZAhARXAc",
+        "themeCount": 3,
+        "timingCorrectionCount": 0
+      },
+      {
+        "windowId": "window_14_o8rZAhARXAc",
+        "sourceVideoId": "o8rZAhARXAc",
+        "themeCount": 1,
+        "timingCorrectionCount": 0
+      },
+      {
+        "windowId": "window_15_o8rZAhARXAc",
+        "sourceVideoId": "o8rZAhARXAc",
+        "themeCount": 2,
+        "timingCorrectionCount": 0
+      },
+      {
+        "windowId": "window_16_o8rZAhARXAc",
+        "sourceVideoId": "o8rZAhARXAc",
+        "themeCount": 2,
+        "timingCorrectionCount": 0
+      },
+      {
+        "windowId": "window_17_o8rZAhARXAc",
+        "sourceVideoId": "o8rZAhARXAc",
+        "themeCount": 2,
+        "timingCorrectionCount": 0
+      },
+      {
+        "windowId": "window_18_o8rZAhARXAc",
+        "sourceVideoId": "o8rZAhARXAc",
+        "themeCount": 2,
+        "timingCorrectionCount": 0
+      },
+      {
+        "windowId": "window_19_o8rZAhARXAc",
+        "sourceVideoId": "o8rZAhARXAc",
+        "themeCount": 2,
+        "timingCorrectionCount": 0
+      },
+      {
+        "windowId": "window_20_o8rZAhARXAc",
+        "sourceVideoId": "o8rZAhARXAc",
+        "themeCount": 1,
+        "timingCorrectionCount": 0
+      },
+      {
+        "windowId": "window_21_o8rZAhARXAc",
+        "sourceVideoId": "o8rZAhARXAc",
+        "themeCount": 2,
+        "timingCorrectionCount": 0
+      },
+      {
+        "windowId": "window_22_o8rZAhARXAc",
+        "sourceVideoId": "o8rZAhARXAc",
+        "themeCount": 4,
+        "timingCorrectionCount": 0
+      },
+      {
+        "windowId": "window_23_o8rZAhARXAc",
+        "sourceVideoId": "o8rZAhARXAc",
+        "themeCount": 2,
+        "timingCorrectionCount": 0
+      },
+      {
+        "windowId": "window_24_o8rZAhARXAc",
+        "sourceVideoId": "o8rZAhARXAc",
+        "themeCount": 2,
+        "timingCorrectionCount": 0
+      },
+      {
+        "windowId": "window_25_o8rZAhARXAc",
+        "sourceVideoId": "o8rZAhARXAc",
+        "themeCount": 2,
+        "timingCorrectionCount": 0
+      },
+      {
+        "windowId": "window_26_o8rZAhARXAc",
+        "sourceVideoId": "o8rZAhARXAc",
+        "themeCount": 2,
+        "timingCorrectionCount": 0
+      },
+      {
+        "windowId": "window_27_o8rZAhARXAc",
+        "sourceVideoId": "o8rZAhARXAc",
+        "themeCount": 2,
+        "timingCorrectionCount": 0
+      },
+      {
+        "windowId": "window_28_o8rZAhARXAc",
+        "sourceVideoId": "o8rZAhARXAc",
+        "themeCount": 1,
+        "timingCorrectionCount": 0
+      }
+    ]
+  }
+}

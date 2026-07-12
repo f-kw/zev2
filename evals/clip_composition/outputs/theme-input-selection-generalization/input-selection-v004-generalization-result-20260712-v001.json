@@ -1,0 +1,97 @@
+{
+  "kind": "clip_composition_input_selection_generalization_result",
+  "recordedAt": "2026-07-12",
+  "experimentId": "input-selection-v004-generalization-001",
+  "status": "completed-awaiting-human-adoption-decision",
+  "target": {
+    "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+    "sourceVideoId": "o8rZAhARXAc",
+    "fixedTheme": "マリン野球ゲーム",
+    "acceptedExpectedCount": 25,
+    "excludedRangeCount": 6,
+    "sourceDurationMs": 11898441
+  },
+  "formalSelection": {
+    "inputSelectionVersion": "input-selection-v004",
+    "selection": "配信内平均比によるチャット流速上位100分",
+    "selectedDurationMs": 6000000,
+    "inputVisibleExpectedCount": 18,
+    "inputNotVisibleExpectedCount": 7,
+    "inputVisibilityRate": 0.72,
+    "inputVisibleExpectedIndexes": [6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 20, 22, 23, 24, 25],
+    "inputNotVisibleExpectedIndexes": [1, 2, 3, 4, 5, 19, 21]
+  },
+  "formalModelRun": {
+    "generationSystem": "theme-llm-v002@gemini-web-flash",
+    "runCount": 1,
+    "windowCount": 28,
+    "candidateCount": 60,
+    "validEvidenceRangeCount": 64,
+    "inputVisibleHitCount": 15,
+    "inputVisibleExpectedCount": 18,
+    "inputVisibleHitRate": 0.8333333333333334,
+    "inputNotVisibleHitCount": 0,
+    "inputNotVisibleExpectedCount": 7,
+    "allExpectedHitCount": 15,
+    "allExpectedCount": 25,
+    "allExpectedHitRate": 0.6,
+    "candidateEvidenceUnionMs": 4841955,
+    "candidateEvidenceUnionRatio": 0.40694028738723,
+    "inputVisibleHitPerCandidate": 0.25,
+    "allExpectedHitPerCandidate": 0.25,
+    "candidateClassificationCounts": {
+      "rangeHit": 0,
+      "overbroadRange": 12,
+      "offTopic": 48,
+      "noEvidence": 0
+    },
+    "inputVisibleMissExpectedIndexes": [17, 18, 22],
+    "inputVisibleMissMaterialBlocks": [20, 21, 27]
+  },
+  "referenceVisibility": {
+    "durationRatioSelectionCount": 100,
+    "durationRatioInputVisibleExpectedCount": 18,
+    "topPercentSelectionCount": 100,
+    "topPercentInputVisibleExpectedCount": 18,
+    "llmAdditionalRuns": 0,
+    "note": "対象配信がB素材とほぼ同じ長さのため、事前登録した2つの参考計算も正式N=100と同じ選択になった。"
+  },
+  "bMaterialComparison": {
+    "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+    "sourceDurationMs": 11824121,
+    "inputVisibleExpectedCount": 12,
+    "inputNotVisibleExpectedCount": 1,
+    "allExpectedCount": 13,
+    "inputVisibilityRate": 0.9230769230769231,
+    "inputVisibleHitCount": 12,
+    "inputVisibleHitRate": 1,
+    "allExpectedHitCount": 12,
+    "allExpectedHitRate": 0.9230769230769231,
+    "candidateCount": 89,
+    "candidateEvidenceUnionRatio": 0.3162518380858924,
+    "inputVisibleHitPerCandidate": 0.1348314606741573
+  },
+  "controlledVariables": {
+    "promptVersion": "theme_generation_prompt_v002",
+    "model": "gemini-web-flash",
+    "modelParamsIdenticalToB": true,
+    "maxPromptBytes": 13084,
+    "overlapMs": 0,
+    "bridgeSeams": false,
+    "mergeRuleIdenticalToB": true,
+    "scorer": "score_theme_generation_formal.ts",
+    "leakageInspection": "29/29 pass",
+    "geminiTabsAfterRun": 0
+  },
+  "interpretation": {
+    "inputSelection": "別素材でも25件中18件を入力内にしたが、B素材の12/13より低い。固定N=100の効果は再現したものの、B素材と同水準の可視性は再現していない。",
+    "model": "入力内18件中15件を拾い、3件は入力内で見逃した。",
+    "thresholdPolicy": "結果を見た後にNを変更しない。1素材の結果だけで採用・棄却を自動決定せず、人間判断へ返す。"
+  },
+  "evidence": {
+    "preregistration": "evals/clip_composition/outputs/theme-input-selection-generalization/input-selection-v004-generalization-preregistration-20260712-v001.json",
+    "chatVisibility": "evals/clip_composition/outputs/chat-velocity-analysis/9dtwF5Exu5w-chat-velocity-generalization-20260712-v001.json",
+    "formalScore": "evals/clip_composition/outputs/theme-generation/theme-llm-v002-20260712-chat-velocity-top100-generalization-v001-formal-score.json",
+    "geminiTabAudit": "evals/clip_composition/outputs/theme-generation/9dtwF5Exu5w_chat_velocity_top100_input_selection_v004/theme-llm-v002/20260712-chat-velocity-top100-generalization-v001/post-run-gemini-tab-audit-20260712-v002.json"
+  }
+}

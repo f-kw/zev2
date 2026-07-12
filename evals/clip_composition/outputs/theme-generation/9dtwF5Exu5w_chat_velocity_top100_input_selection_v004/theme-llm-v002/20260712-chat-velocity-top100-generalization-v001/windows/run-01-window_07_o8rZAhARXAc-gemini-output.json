@@ -1,0 +1,65 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "「重さ」育成方針に迷い、こよりに助けを求めるマリン",
+      "reason": "ホロライブ甲子園の選手育成で球の「重さ」を上げるべきかリスナーの意見が割れ、混乱したマリンが同期の博衣こよりに助けを求めるコミカルな一幕です。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 3554885,
+          "sourceEndMs": 3723879,
+          "supportingSpeechIds": [
+            "343-345",
+            "350-353"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "アドバイス起因の荒れを懸念し、こよりへの相談をやめるマリン",
+      "reason": "こよりのアドバイスで育成がうまくいかなかった場合に彼女が叩かれるリスクを考慮し、優しさから相談をやめて星街すいせい（きまち）と決めることを選ぶ場面です。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 3737903,
+          "sourceEndMs": 3794866,
+          "supportingSpeechIds": [
+            "354-359"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_003",
+      "title": "リスナーのアドバイスを整理して納得するも、直後に大絶叫",
+      "reason": "変化球の性質から「重さ」を削る方針に納得しかけた直後、予期せぬ展開が発生したのかマリンが言葉にならない大絶叫を見せるインパクトのある場面です。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 4047799,
+          "sourceEndMs": 4094980,
+          "supportingSpeechIds": [
+            "372-374"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-12T15:42:16+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_07_o8rZAhARXAc",
+    "windowSourceVideoId": "o8rZAhARXAc",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/9dtwF5Exu5w_chat_velocity_top100_input_selection_v004/theme-llm-v002/20260712-chat-velocity-top100-generalization-v001/windows/window_07_o8rZAhARXAc-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/3497602eef04bb7e?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"「重さ」育成方針に迷い、こよりに助けを求めるマリン\",\n      \"reason\": \"ホロライブ甲子園の選手育成で球の「重さ」を上げるべきかリスナーの意見が割れ、混乱したマリンが同期の博衣こよりに助けを求めるコミカルな一幕です。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"o8rZAhARXAc\",\n          \"sourceStartMs\": 3554885,\n          \"sourceEndMs\": 3723879,\n          \"supportingSpeechIds\": [\"343-345\", \"350-353\"]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"アドバイス起因の荒れを懸念し、こよりへの相談をやめるマリン\",\n      \"reason\": \"こよりのアドバイスで育成がうまくいかなかった場合に彼女が叩かれるリスクを考慮し、優しさから相談をやめて星街すいせい（きまち）と決めることを選ぶ場面です。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"o8rZAhARXAc\",\n          \"sourceStartMs\": 3737903,\n          \"sourceEndMs\": 3794866,\n          \"supportingSpeechIds\": [\"354-359\"]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_003\",\n      \"title\": \"リスナーのアドバイスを整理して納得するも、直後に大絶叫\",\n      \"reason\": \"変化球の性質から「重さ」を削る方針に納得しかけた直後、予期せぬ展開が発生したのかマリンが言葉にならない大絶叫を見せるインパクトのある場面です。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"o8rZAhARXAc\",\n          \"sourceStartMs\": 4047799,\n          \"sourceEndMs\": 4094980,\n          \"supportingSpeechIds\": [\"372-374\"]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

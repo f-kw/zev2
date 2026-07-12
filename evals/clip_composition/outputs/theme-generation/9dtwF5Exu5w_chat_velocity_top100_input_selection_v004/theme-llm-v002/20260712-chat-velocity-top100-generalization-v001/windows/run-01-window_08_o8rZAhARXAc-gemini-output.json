@@ -1,0 +1,65 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "新球種の性能に迷いすぎて1時間経過するマリン船長",
+      "reason": "オリジナル変化球の重さなどの調整に悩み、リスナーへの投票を交えながら1時間も迷っていたことを明かして謝罪する場面。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 4096310,
+          "sourceEndMs": 4379860,
+          "supportingSpeechIds": [
+            "375-376",
+            "381-390"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "フブキがオリジナル変化球「スーパーノヴァ」を習得",
+      "reason": "迷った末に決めたオリジナル球種習得ボールをフブキに覚えさせ、キレキレの新球種「スーパーノヴァ」の誕生に興奮する場面。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 4381338,
+          "sourceEndMs": 4466549,
+          "supportingSpeechIds": [
+            "391-393"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_003",
+      "title": "フブキの星500超えに「MVPやっぞ！」と大興奮",
+      "reason": "フブキの能力値（星）が500に乗ったことを知り、MVP級の活躍を期待してスケジュール調整をしながら大喜びする場面。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 4466549,
+          "sourceEndMs": 4486111,
+          "supportingSpeechIds": [
+            "393-399"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-12T15:43:33+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_08_o8rZAhARXAc",
+    "windowSourceVideoId": "o8rZAhARXAc",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/9dtwF5Exu5w_chat_velocity_top100_input_selection_v004/theme-llm-v002/20260712-chat-velocity-top100-generalization-v001/windows/window_08_o8rZAhARXAc-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/c3f430b5993b39d5?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"新球種の性能に迷いすぎて1時間経過するマリン船長\",\n      \"reason\": \"オリジナル変化球の重さなどの調整に悩み、リスナーへの投票を交えながら1時間も迷っていたことを明かして謝罪する場面。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"o8rZAhARXAc\",\n          \"sourceStartMs\": 4096310,\n          \"sourceEndMs\": 4379860,\n          \"supportingSpeechIds\": [\n            \"375-376\",\n            \"381-390\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"フブキがオリジナル変化球「スーパーノヴァ」を習得\",\n      \"reason\": \"迷った末に決めたオリジナル球種習得ボールをフブキに覚えさせ、キレキレの新球種「スーパーノヴァ」の誕生に興奮する場面。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"o8rZAhARXAc\",\n          \"sourceStartMs\": 4381338,\n          \"sourceEndMs\": 4466549,\n          \"supportingSpeechIds\": [\n            \"391-393\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_003\",\n      \"title\": \"フブキの星500超えに「MVPやっぞ！」と大興奮\",\n      \"reason\": \"フブキの能力値（星）が500に乗ったことを知り、MVP級の活躍を期待してスケジュール調整をしながら大喜びする場面。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"o8rZAhARXAc\",\n          \"sourceStartMs\": 4466549,\n          \"sourceEndMs\": 4486111,\n          \"supportingSpeechIds\": [\n            \"393-399\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

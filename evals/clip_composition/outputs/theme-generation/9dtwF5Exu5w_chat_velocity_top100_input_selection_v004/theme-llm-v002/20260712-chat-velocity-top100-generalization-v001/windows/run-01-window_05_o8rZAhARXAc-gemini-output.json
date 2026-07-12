@@ -1,0 +1,50 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "オリジナル変化球「パワーカーブ」作成に苦戦するマリン船長",
+      "reason": "オリジナル変化球の設定システムが分からず、リスナー（きまし）のアドバイス通りにした結果、意図しない数値になってしまい慌てる場面が切り抜きとして成立するため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 2700146,
+          "sourceEndMs": 2875926,
+          "supportingSpeechIds": [
+            "261-262",
+            "274-286"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "変化球の軌道を見てテンションが上がるマリン船長とリスナーとの調整",
+      "reason": "作成したパワーカーブのグンと落ちる軌道に興奮しつつも、リスナーの意見を取り入れてキレや重さを細かく再調整していく一連のやり取りが見どころであるため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 2949238,
+          "sourceEndMs": 3037740,
+          "supportingSpeechIds": [
+            "296-309"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-12T15:36:42+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_05_o8rZAhARXAc",
+    "windowSourceVideoId": "o8rZAhARXAc",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/9dtwF5Exu5w_chat_velocity_top100_input_selection_v004/theme-llm-v002/20260712-chat-velocity-top100-generalization-v001/windows/window_05_o8rZAhARXAc-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/822c4bdee248bdd0?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"オリジナル変化球「パワーカーブ」作成に苦戦するマリン船長\",\n      \"reason\": \"オリジナル変化球の設定システムが分からず、リスナー（きまし）のアドバイス通りにした結果、意図しない数値になってしまい慌てる場面が切り抜きとして成立するため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"o8rZAhARXAc\",\n          \"sourceStartMs\": 2700146,\n          \"sourceEndMs\": 2875926,\n          \"supportingSpeechIds\": [\n            \"261-262\",\n            \"274-286\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"変化球の軌道を見てテンションが上がるマリン船長とリスナーとの調整\",\n      \"reason\": \"作成したパワーカーブのグンと落ちる軌道に興奮しつつも、リスナーの意見を取り入れてキレや重さを細かく再調整していく一連のやり取りが見どころであるため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"o8rZAhARXAc\",\n          \"sourceStartMs\": 2949238,\n          \"sourceEndMs\": 3037740,\n          \"supportingSpeechIds\": [\n            \"296-309\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

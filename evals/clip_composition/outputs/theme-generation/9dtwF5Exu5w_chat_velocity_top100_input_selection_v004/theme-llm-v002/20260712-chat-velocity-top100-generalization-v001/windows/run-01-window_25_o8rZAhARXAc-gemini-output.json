@@ -1,0 +1,49 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "盗塁させるか迷いまくるマリン船長",
+      "reason": "走力や盗塁の能力値が低いため、盗塁を指示すべきか葛藤しながらリスナーに問いかけ続ける場面。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10776694,
+          "sourceEndMs": 10817172,
+          "supportingSpeechIds": [
+            "1216-1236"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "犠牲フライを狙うか悩むマリン船長",
+      "reason": "盗塁を諦めた後、パワーやミートの能力値を見ながら犠牲フライを狙うべきか怯えつつ悩む場面。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10817172,
+          "sourceEndMs": 10848424,
+          "supportingSpeechIds": [
+            "1237-1243"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-12T15:59:08+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_25_o8rZAhARXAc",
+    "windowSourceVideoId": "o8rZAhARXAc",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/9dtwF5Exu5w_chat_velocity_top100_input_selection_v004/theme-llm-v002/20260712-chat-velocity-top100-generalization-v001/windows/window_25_o8rZAhARXAc-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/8f65f85c15b7e4d9?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"盗塁させるか迷いまくるマリン船長\",\n      \"reason\": \"走力や盗塁の能力値が低いため、盗塁を指示すべきか葛藤しながらリスナーに問いかけ続ける場面。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"o8rZAhARXAc\",\n          \"sourceStartMs\": 10776694,\n          \"sourceEndMs\": 10817172,\n          \"supportingSpeechIds\": [\n            \"1216-1236\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"犠牲フライを狙うか悩むマリン船長\",\n      \"reason\": \"盗塁を諦めた後、パワーやミートの能力値を見ながら犠牲フライを狙うべきか怯えつつ悩む場面。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"o8rZAhARXAc\",\n          \"sourceStartMs\": 10817172,\n          \"sourceEndMs\": 10848424,\n          \"supportingSpeechIds\": [\n            \"1237-1243\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

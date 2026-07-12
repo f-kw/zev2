@@ -1,0 +1,50 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "しおりんのカット打ち獲得",
+      "reason": "育成中のしおりんに狙い通り『カット打ち』の特殊能力が付き、宝鐘マリンが歓喜する場面。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 4710742,
+          "sourceEndMs": 4738494,
+          "supportingSpeechIds": [
+            "435-451"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "3年生ばかりの強化に焦るマリン",
+      "reason": "強化対象として引退の近い3年生ばかりが選ばれてしまい、これからの育成方針に頭を悩ませて助けを求める場面。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 4741026,
+          "sourceEndMs": 4779937,
+          "supportingSpeechIds": [
+            452,
+            453
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-12T15:44:03+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_10_o8rZAhARXAc",
+    "windowSourceVideoId": "o8rZAhARXAc",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/9dtwF5Exu5w_chat_velocity_top100_input_selection_v004/theme-llm-v002/20260712-chat-velocity-top100-generalization-v001/windows/window_10_o8rZAhARXAc-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/fd7cc49e9d10d475?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"しおりんのカット打ち獲得\",\n      \"reason\": \"育成中のしおりんに狙い通り『カット打ち』の特殊能力が付き、宝鐘マリンが歓喜する場面。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"o8rZAhARXAc\",\n          \"sourceStartMs\": 4710742,\n          \"sourceEndMs\": 4738494,\n          \"supportingSpeechIds\": [\n            \"435-451\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"3年生ばかりの強化に焦るマリン\",\n      \"reason\": \"強化対象として引退の近い3年生ばかりが選ばれてしまい、これからの育成方針に頭を悩ませて助けを求める場面。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"o8rZAhARXAc\",\n          \"sourceStartMs\": 4741026,\n          \"sourceEndMs\": 4779937,\n          \"supportingSpeechIds\": [\n            452,\n            453\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

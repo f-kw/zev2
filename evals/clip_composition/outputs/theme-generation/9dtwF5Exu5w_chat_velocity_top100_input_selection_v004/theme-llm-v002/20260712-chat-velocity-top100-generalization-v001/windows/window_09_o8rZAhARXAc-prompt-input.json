@@ -1,0 +1,283 @@
+{
+  "kind": "theme_redo_source_only_window_prompt_payload",
+  "runAt": "2026-07-12T06:24:15.559Z",
+  "target": "9dtwF5Exu5w",
+  "inputSetId": "9dtwF5Exu5w_chat_velocity_top100_input_selection_v004",
+  "sourceVideoId": "o8rZAhARXAc",
+  "sourceSttId": "9dtwF5Exu5w_o8rZAhARXAc_local30_v001",
+  "sourceSttManifestPath": "evals/clip_composition/stt/9dtwF5Exu5w_o8rZAhARXAc_local30_v001/source/manifest.json",
+  "sourceSttComplete": true,
+  "generationSystem": "theme-llm-v002",
+  "promptVersion": "theme_generation_prompt_v002",
+  "requestedThemeCount": 8,
+  "windowKind": "primary",
+  "llmCall": false,
+  "modelInput": {
+    "task": "source_only_theme_generation",
+    "generationSystem": "theme-llm-v002",
+    "promptVersion": "theme_generation_prompt_v002",
+    "requestedThemeCount": 8,
+    "inputPolicy": {
+      "sourceOnly": true,
+      "noClipInfo": true,
+      "noExpected": true,
+      "noAlignment": true,
+      "noHumanReverseTheme": true
+    },
+    "windowing": {
+      "applied": true,
+      "mode": "speech-time",
+      "windowId": "window_09_o8rZAhARXAc",
+      "reason": "元配信全体入力が長いため、発話境界を保った時間窓へ分割する。",
+      "maxPromptBytes": 13084,
+      "overlapMs": 0,
+      "sourceVideoId": "o8rZAhARXAc",
+      "sourceStartMs": 4486111,
+      "sourceEndMs": 4710742
+    },
+    "sources": [
+      {
+        "sourceVideoId": "o8rZAhARXAc",
+        "sourceUrl": "https://www.youtube.com/watch?v=o8rZAhARXAc",
+        "sourceTitle": "【 #ホロライブ甲子園2025】2年目夏！！夏合宿と甲子園初戦で狙え育成上振れ！！【ホロライブ/宝鐘マリン】",
+        "transcriptKind": "local_stt",
+        "language": "ja-JP",
+        "durationSec": 11898.441,
+        "rawSegmentCount": 34507,
+        "promptSegmentCount": 29,
+        "segmentCompaction": {
+          "method": "source-only transcript segments concatenated until sentence-ending punctuation",
+          "scoringRole": "none",
+          "note": "読みやすさのための表現変換であり、expected、切り抜き、照合結果、人間確認メモは使わない。"
+        },
+        "segments": [
+          {
+            "speechId": 400,
+            "sourceVideoId": "o8rZAhARXAc",
+            "sourceStartMs": 4486111,
+            "sourceEndMs": 4487272,
+            "text": "お、機材交換!"
+          },
+          {
+            "speechId": 401,
+            "sourceVideoId": "o8rZAhARXAc",
+            "sourceStartMs": 4487272,
+            "sourceEndMs": 4488574,
+            "text": "ティ待って?"
+          },
+          {
+            "speechId": 402,
+            "sourceVideoId": "o8rZAhARXAc",
+            "sourceStartMs": 4488574,
+            "sourceEndMs": 4488894,
+            "text": "ティ?"
+          },
+          {
+            "speechId": 409,
+            "sourceVideoId": "o8rZAhARXAc",
+            "sourceStartMs": 4560918,
+            "sourceEndMs": 4565341,
+            "text": "しばき倒されたくなかったらいい加減にしろお前ラオラ?"
+          },
+          {
+            "speechId": 410,
+            "sourceVideoId": "o8rZAhARXAc",
+            "sourceStartMs": 4565341,
+            "sourceEndMs": 4565902,
+            "text": "ごく普通?"
+          },
+          {
+            "speechId": 411,
+            "sourceVideoId": "o8rZAhARXAc",
+            "sourceStartMs": 4565902,
+            "sourceEndMs": 4566782,
+            "text": "え?"
+          },
+          {
+            "speechId": 412,
+            "sourceVideoId": "o8rZAhARXAc",
+            "sourceStartMs": 4566782,
+            "sourceEndMs": 4570005,
+            "text": "どうしよう?"
+          },
+          {
+            "speechId": 413,
+            "sourceVideoId": "o8rZAhARXAc",
+            "sourceStartMs": 4570005,
+            "sourceEndMs": 4572187,
+            "text": "え、君たちラオラって変えるべき?"
+          },
+          {
+            "speechId": 414,
+            "sourceVideoId": "o8rZAhARXAc",
+            "sourceStartMs": 4572187,
+            "sourceEndMs": 4574869,
+            "text": "変えないべき?"
+          },
+          {
+            "speechId": 415,
+            "sourceVideoId": "o8rZAhARXAc",
+            "sourceStartMs": 4574869,
+            "sourceEndMs": 4578431,
+            "text": "気持ちいいどう思う?"
+          },
+          {
+            "speechId": 416,
+            "sourceVideoId": "o8rZAhARXAc",
+            "sourceStartMs": 4578431,
+            "sourceEndMs": 4582574,
+            "text": "ねぇ気持ちいいあかん?"
+          },
+          {
+            "speechId": 417,
+            "sourceVideoId": "o8rZAhARXAc",
+            "sourceStartMs": 4582574,
+            "sourceEndMs": 4582915,
+            "text": "ダメ?"
+          },
+          {
+            "speechId": 418,
+            "sourceVideoId": "o8rZAhARXAc",
+            "sourceStartMs": 4582915,
+            "sourceEndMs": 4584276,
+            "text": "もったいない?"
+          },
+          {
+            "speechId": 419,
+            "sourceVideoId": "o8rZAhARXAc",
+            "sourceStartMs": 4584276,
+            "sourceEndMs": 4585877,
+            "text": "ごく普通は残す?"
+          },
+          {
+            "speechId": 420,
+            "sourceVideoId": "o8rZAhARXAc",
+            "sourceStartMs": 4585877,
+            "sourceEndMs": 4589420,
+            "text": "わ、わかったそうするか変えないでいいか"
+          },
+          {
+            "speechId": 421,
+            "sourceVideoId": "o8rZAhARXAc",
+            "sourceStartMs": 4590066,
+            "sourceEndMs": 4592167,
+            "text": "気になっても仕方ないあるか?"
+          },
+          {
+            "speechId": 422,
+            "sourceVideoId": "o8rZAhARXAc",
+            "sourceStartMs": 4592167,
+            "sourceEndMs": 4597071,
+            "text": "それは確かにあ、だ!"
+          },
+          {
+            "speechId": 423,
+            "sourceVideoId": "o8rZAhARXAc",
+            "sourceStartMs": 4597071,
+            "sourceEndMs": 4602755,
+            "text": "いけいけないバイバイねえ、これ何がいらない?"
+          },
+          {
+            "speechId": 424,
+            "sourceVideoId": "o8rZAhARXAc",
+            "sourceStartMs": 4602755,
+            "sourceEndMs": 4603855,
+            "text": "気持ち!"
+          },
+          {
+            "speechId": 425,
+            "sourceVideoId": "o8rZAhARXAc",
+            "sourceStartMs": 4603855,
+            "sourceEndMs": 4606677,
+            "text": "これ何がいらなーい?"
+          },
+          {
+            "speechId": 426,
+            "sourceVideoId": "o8rZAhARXAc",
+            "sourceStartMs": 4606677,
+            "sourceEndMs": 4619066,
+            "text": "占い師も使えねえな、いつみむらしばき倒すぞ、ほんまにえんとう、わかったえんとう、遠藤くんでいくわ遠藤くんで遠藤くんでいくうん"
+          },
+          {
+            "speechId": 427,
+            "sourceVideoId": "o8rZAhARXAc",
+            "sourceStartMs": 4622026,
+            "sourceEndMs": 4649940,
+            "text": "おー1、待って26、27、28、29あ、もう無理だ青マスなかったインタビューはもうないんだエントー君で行ってさあ合宿だ監督、今日から合宿です頑張りましょうかーこーお、やめろスワとフル"
+          },
+          {
+            "speechId": 428,
+            "sourceVideoId": "o8rZAhARXAc",
+            "sourceStartMs": 4651086,
+            "sourceEndMs": 4662938,
+            "text": "シャシャるなぁお前シャシャってくんななんでシャシャってきちゃったのどうしよう何がいいかなシオレンマリンが邪魔で見えない?"
+          },
+          {
+            "speechId": 429,
+            "sourceVideoId": "o8rZAhARXAc",
+            "sourceStartMs": 4662938,
+            "sourceEndMs": 4664620,
+            "text": "マジそれじゃん失礼しました"
+          },
+          {
+            "speechId": 430,
+            "sourceVideoId": "o8rZAhARXAc",
+            "sourceStartMs": 4665958,
+            "sourceEndMs": 4677797,
+            "text": "邪魔でしたどこにいたらいいかわかんねぇここにいよここにいとこ何がいいかなぁ"
+          },
+          {
+            "speechId": 431,
+            "sourceVideoId": "o8rZAhARXAc",
+            "sourceStartMs": 4680822,
+            "sourceEndMs": 4687906,
+            "text": "スワにキャッチャーついたってな意味ないから走り込み消そう?"
+          },
+          {
+            "speechId": 432,
+            "sourceVideoId": "o8rZAhARXAc",
+            "sourceStartMs": 4687906,
+            "sourceEndMs": 4709200,
+            "text": "確かにこれいらないかこのどうせついたってしょうがないだろみたいな時にまだこれからこいつらと甲子園行くから甲子園まだ行くからミート?"
+          },
+          {
+            "speechId": 433,
+            "sourceVideoId": "o8rZAhARXAc",
+            "sourceStartMs": 4709200,
+            "sourceEndMs": 4709900,
+            "text": "ミートもいらないじゃん"
+          },
+          {
+            "speechId": 434,
+            "sourceVideoId": "o8rZAhARXAc",
+            "sourceStartMs": 4710002,
+            "sourceEndMs": 4710742,
+            "text": "ミートにするか!"
+          }
+        ]
+      }
+    ],
+    "outputContract": {
+      "format": "json_only",
+      "schema": {
+        "themes": [
+          {
+            "themeId": "string",
+            "title": "string",
+            "reason": "string_one_sentence",
+            "evidenceRanges": [
+              {
+                "sourceVideoId": "string",
+                "sourceStartMs": "number",
+                "sourceEndMs": "number",
+                "supportingSpeechIds": [
+                  "number_or_range_string"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

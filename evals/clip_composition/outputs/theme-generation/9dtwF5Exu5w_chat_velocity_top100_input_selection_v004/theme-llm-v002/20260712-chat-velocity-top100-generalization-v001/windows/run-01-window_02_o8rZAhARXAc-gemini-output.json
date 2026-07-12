@@ -1,0 +1,65 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "一条コーラルのオリジナル変化球「粉落とし」に驚くマリン船長",
+      "reason": "一条コーラル（リリカ）が開発したオリジナル変化球の名称が「粉落とし」であることを知り、そのネーミングセンスと開発したことに驚嘆しているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 872562,
+          "sourceEndMs": 892815,
+          "supportingSpeechIds": [
+            "112-115"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "オリジナル変化球の開発が分からずDiscordで助けを求めるマリン船長",
+      "reason": "パワプロのオリジナル変化球の作り方が分からず、ホロライブのDiscordサーバーで他のタレントに質問を投げかける場面が面白いため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 961718,
+          "sourceEndMs": 1048380,
+          "supportingSpeechIds": [
+            "119-122",
+            "127-129"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_003",
+      "title": "結局リリカのオリジナル変化球「粉落とし」を丸パクリすることに決めるマリン船長",
+      "reason": "オリジナル変化球のベースに強いと噂のフォーク系を選んだ結果、最終的にリリカが作った「粉落とし」と全く同じ仕様で真似して作ろうと決意する流れがコミカルなため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 1057442,
+          "sourceEndMs": 1109720,
+          "supportingSpeechIds": [
+            "130-144"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-12T15:30:43+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_02_o8rZAhARXAc",
+    "windowSourceVideoId": "o8rZAhARXAc",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/9dtwF5Exu5w_chat_velocity_top100_input_selection_v004/theme-llm-v002/20260712-chat-velocity-top100-generalization-v001/windows/window_02_o8rZAhARXAc-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/8a6431596ff13222?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"一条コーラルのオリジナル変化球「粉落とし」に驚くマリン船長\",\n      \"reason\": \"一条コーラル（リリカ）が開発したオリジナル変化球の名称が「粉落とし」であることを知り、そのネーミングセンスと開発したことに驚嘆しているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"o8rZAhARXAc\",\n          \"sourceStartMs\": 872562,\n          \"sourceEndMs\": 892815,\n          \"supportingSpeechIds\": [\n            \"112-115\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"オリジナル変化球の開発が分からずDiscordで助けを求めるマリン船長\",\n      \"reason\": \"パワプロのオリジナル変化球の作り方が分からず、ホロライブのDiscordサーバーで他のタレントに質問を投げかける場面が面白いため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"o8rZAhARXAc\",\n          \"sourceStartMs\": 961718,\n          \"sourceEndMs\": 1048380,\n          \"supportingSpeechIds\": [\n            \"119-122\",\n            \"127-129\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_003\",\n      \"title\": \"結局リリカのオリジナル変化球「粉落とし」を丸パクリすることに決めるマリン船長\",\n      \"reason\": \"オリジナル変化球のベースに強いと噂のフォーク系を選んだ結果、最終的にリリカが作った「粉落とし」と全く同じ仕様で真似して作ろうと決意する流れがコミカルなため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"o8rZAhARXAc\",\n          \"sourceStartMs\": 1057442,\n          \"sourceEndMs\": 1109720,\n          \"supportingSpeechIds\": [\n            \"130-144\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

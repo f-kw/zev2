@@ -18,6 +18,7 @@ zev2 は ZEV を参考にするが、既存ZEVの後方互換を持たない新�
 
 - 優先度高: Web版Gemini、Web版ChatGPT、ChatGPT Workflowなど、AIエージェントがWebサービスを操作する場合は Microsoft Edge を使う。Chrome はユーザーの普段使い用なので使わない。
 - 優先度高: Web版GeminiやWeb版ChatGPTで必要な認証は、ユーザーがEdge側で準備する前提にする。認証が必要な場合はChromeへ逃げず、Edgeで認証待ちまたは認証依頼として扱う。
+- Web版Geminiの処理が完了したら、その処理で開いたGeminiタブを閉じる。複数窓の連続実行でも、各窓の結果保存後に対象タブを閉じる。
 - AI向けUIを作らない。
 - JSON閲覧画面を主導線にしない。
 - 巨大な解析結果モデルを最初の正本にしない。

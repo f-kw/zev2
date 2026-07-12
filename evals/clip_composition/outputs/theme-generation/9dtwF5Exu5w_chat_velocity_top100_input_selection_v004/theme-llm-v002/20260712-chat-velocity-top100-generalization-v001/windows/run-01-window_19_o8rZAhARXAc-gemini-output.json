@@ -1,0 +1,49 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "チャンスFだったことを忘れて後悔するマリン",
+      "reason": "選手の特殊能力「チャンスF」を見落として作戦指示を出してしまい、直後に気づいて焦る場面であるため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 7801179,
+          "sourceEndMs": 7858614,
+          "supportingSpeechIds": [
+            "835-837"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "盗塁指示を出すかリスナーと相談して迷うマリン",
+      "reason": "天野くんの盗塁について、アウトになるリスクを懸念しつつリスナーのコメントを頼りに決断しようとする一連の葛藤が描かれているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 7958739,
+          "sourceEndMs": 8039306,
+          "supportingSpeechIds": [
+            "849-866"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-12T15:52:34+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_19_o8rZAhARXAc",
+    "windowSourceVideoId": "o8rZAhARXAc",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/9dtwF5Exu5w_chat_velocity_top100_input_selection_v004/theme-llm-v002/20260712-chat-velocity-top100-generalization-v001/windows/window_19_o8rZAhARXAc-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/95b430b8a24c6e16?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"チャンスFだったことを忘れて後悔するマリン\",\n      \"reason\": \"選手の特殊能力「チャンスF」を見落として作戦指示を出してしまい、直後に気づいて焦る場面であるため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"o8rZAhARXAc\",\n          \"sourceStartMs\": 7801179,\n          \"sourceEndMs\": 7858614,\n          \"supportingSpeechIds\": [\n            \"835-837\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"盗塁指示を出すかリスナーと相談して迷うマリン\",\n      \"reason\": \"天野くんの盗塁について、アウトになるリスクを懸念しつつリスナーのコメントを頼りに決断しようとする一連の葛藤が描かれているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"o8rZAhARXAc\",\n          \"sourceStartMs\": 7958739,\n          \"sourceEndMs\": 8039306,\n          \"supportingSpeechIds\": [\n            \"849-866\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

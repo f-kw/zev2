@@ -1,0 +1,43 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "新球種開発モードに戸惑うマリン船長",
+      "reason": "栄冠ナイン内でオリジナル変化球の習得イベントが発生し、仕様が分からずパニックになりながらセーブしてタイトルに戻るまでの流れがコミカルで切り抜きに適しているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 545346,
+          "sourceEndMs": 659680,
+          "supportingSpeechIds": [
+            "78-92",
+            "96-99"
+          ]
+        },
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 840358,
+          "sourceEndMs": 864566,
+          "supportingSpeechIds": [
+            111
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-12T15:25:23+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_01_o8rZAhARXAc",
+    "windowSourceVideoId": "o8rZAhARXAc",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/9dtwF5Exu5w_chat_velocity_top100_input_selection_v004/theme-llm-v002/20260712-chat-velocity-top100-generalization-v001/windows/window_01_o8rZAhARXAc-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/d0bd729d0ca2f32a?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"新球種開発モードに戸惑うマリン船長\",\n      \"reason\": \"栄冠ナイン内でオリジナル変化球の習得イベントが発生し、仕様が分からずパニックになりながらセーブしてタイトルに戻るまでの流れがコミカルで切り抜きに適しているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"o8rZAhARXAc\",\n          \"sourceStartMs\": 545346,\n          \"sourceEndMs\": 659680,\n          \"supportingSpeechIds\": [\n            \"78-92\",\n            \"96-99\"\n          ]\n        },\n        {\n          \"sourceVideoId\": \"o8rZAhARXAc\",\n          \"sourceStartMs\": 840358,\n          \"sourceEndMs\": 864566,\n          \"supportingSpeechIds\": [\n            111\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

@@ -1,0 +1,58 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "オリジナル変化球の習得対象に悩む宝鐘マリン監督",
+      "reason": "アンケート結果や能力のバランスを考慮し、誰にオリジナル変化球を覚えさせるか葛藤する一連の流れが描かれているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 1830198,
+          "sourceEndMs": 1919900,
+          "supportingSpeechIds": [
+            "208-216"
+          ]
+        },
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 2581422,
+          "sourceEndMs": 2699920,
+          "supportingSpeechIds": [
+            "254-260"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "療養中のリリカからの助言と妄想を繰り広げる宝鐘マリン",
+      "reason": "コロナで療養中の一条コーリリカがチャットでアドバイスをくれたことへの感謝と、卒業生としての設定に合わせた寸劇のようなやり取りが面白いため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 2010874,
+          "sourceEndMs": 2155086,
+          "supportingSpeechIds": [
+            "220",
+            "223-224"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-12T15:31:14+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_04_o8rZAhARXAc",
+    "windowSourceVideoId": "o8rZAhARXAc",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/9dtwF5Exu5w_chat_velocity_top100_input_selection_v004/theme-llm-v002/20260712-chat-velocity-top100-generalization-v001/windows/window_04_o8rZAhARXAc-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/56e2affa598505fd?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"オリジナル変化球の習得対象に悩む宝鐘マリン監督\",\n      \"reason\": \"アンケート結果や能力のバランスを考慮し、誰にオリジナル変化球を覚えさせるか葛藤する一連の流れが描かれているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"o8rZAhARXAc\",\n          \"sourceStartMs\": 1830198,\n          \"sourceEndMs\": 1919900,\n          \"supportingSpeechIds\": [\n            \"208-216\"\n          ]\n        },\n        {\n          \"sourceVideoId\": \"o8rZAhARXAc\",\n          \"sourceStartMs\": 2581422,\n          \"sourceEndMs\": 2699920,\n          \"supportingSpeechIds\": [\n            \"254-260\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"療養中のリリカからの助言と妄想を繰り広げる宝鐘マリン\",\n      \"reason\": \"コロナで療養中の一条コーリリカがチャットでアドバイスをくれたことへの感謝と、卒業生としての設定に合わせた寸劇のようなやり取りが面白いため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"o8rZAhARXAc\",\n          \"sourceStartMs\": 2010874,\n          \"sourceEndMs\": 2155086,\n          \"supportingSpeechIds\": [\n            \"220\",\n            \"223-224\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

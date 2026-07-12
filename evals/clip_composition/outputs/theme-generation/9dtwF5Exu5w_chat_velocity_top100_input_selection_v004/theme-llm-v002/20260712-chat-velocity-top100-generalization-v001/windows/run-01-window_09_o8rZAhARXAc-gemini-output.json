@@ -1,0 +1,64 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "ラオラの特殊能力変更に悩むマリン",
+      "reason": "ラオラ（ラオラ・ジャスティッシマ）の能力を「ごく普通」から変えるべきかリスナーの意見を聞きながら葛藤しているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 4560918,
+          "sourceEndMs": 4589420,
+          "supportingSpeechIds": [
+            "409-420"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "使えない占い師にキレるマリン",
+      "reason": "占い師の指示通りにいかず、いらない能力を消せない状況に「しばき倒すぞ」と激怒しているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 4597071,
+          "sourceEndMs": 4619066,
+          "supportingSpeechIds": [
+            "423-426"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_003",
+      "title": "画面を塞いでいたことを謝るマリン",
+      "reason": "リスナーから「マリンが邪魔で見えない」と指摘され、急いで画面端に移動して謝罪するコミカルな一幕のため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 4651086,
+          "sourceEndMs": 4677797,
+          "supportingSpeechIds": [
+            "428-430"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-12T15:43:49+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_09_o8rZAhARXAc",
+    "windowSourceVideoId": "o8rZAhARXAc",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/9dtwF5Exu5w_chat_velocity_top100_input_selection_v004/theme-llm-v002/20260712-chat-velocity-top100-generalization-v001/windows/window_09_o8rZAhARXAc-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/9894320209bb2adb?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"ラオラの特殊能力変更に悩むマリン\",\n      \"reason\": \"ラオラ（ラオラ・ジャスティッシマ）の能力を「ごく普通」から変えるべきかリスナーの意見を聞きながら葛藤しているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"o8rZAhARXAc\",\n          \"sourceStartMs\": 4560918,\n          \"sourceEndMs\": 4589420,\n          \"supportingSpeechIds\": [\n            \"409-420\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"使えない占い師にキレるマリン\",\n      \"reason\": \"占い師の指示通りにいかず、いらない能力を消せない状況に「しばき倒すぞ」と激怒しているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"o8rZAhARXAc\",\n          \"sourceStartMs\": 4597071,\n          \"sourceEndMs\": 4619066,\n          \"supportingSpeechIds\": [\n            \"423-426\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_003\",\n      \"title\": \"画面を塞いでいたことを謝るマリン\",\n      \"reason\": \"リスナーから「マリンが邪魔で見えない」と指摘され、急いで画面端に移動して謝罪するコミカルな一幕のため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"o8rZAhARXAc\",\n          \"sourceStartMs\": 4651086,\n          \"sourceEndMs\": 4677797,\n          \"supportingSpeechIds\": [\n            \"428-430\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

@@ -1,0 +1,49 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "盗塁とスクイーズを巡るリスクとリターンの葛藤",
+      "reason": "走者の能力と相手投手の球速を天秤にかけ、リスクとリターンの間で激しく葛藤しながら作戦を思案する場面が具体的に描かれているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10503922,
+          "sourceEndMs": 10618318,
+          "supportingSpeechIds": [
+            "1189-1203"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "スクイーズの指示に対する困惑と反応",
+      "reason": "スクイーズの作戦指示に関する独特なフレーズを繰り返しながら、困惑や驚きを表現している展開が単独で見どころとなるため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10721215,
+          "sourceEndMs": 10738500,
+          "supportingSpeechIds": [
+            "1206-1209"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-12T15:58:53+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_24_o8rZAhARXAc",
+    "windowSourceVideoId": "o8rZAhARXAc",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/9dtwF5Exu5w_chat_velocity_top100_input_selection_v004/theme-llm-v002/20260712-chat-velocity-top100-generalization-v001/windows/window_24_o8rZAhARXAc-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/63a7369bdcbd9683?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"盗塁とスクイーズを巡るリスクとリターンの葛藤\",\n      \"reason\": \"走者の能力と相手投手の球速を天秤にかけ、リスクとリターンの間で激しく葛藤しながら作戦を思案する場面が具体的に描かれているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"o8rZAhARXAc\",\n          \"sourceStartMs\": 10503922,\n          \"sourceEndMs\": 10618318,\n          \"supportingSpeechIds\": [\n            \"1189-1203\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"スクイーズの指示に対する困惑と反応\",\n      \"reason\": \"スクイーズの作戦指示に関する独特なフレーズを繰り返しながら、困惑や驚きを表現している展開が単独で見どころとなるため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"o8rZAhARXAc\",\n          \"sourceStartMs\": 10721215,\n          \"sourceEndMs\": 10738500,\n          \"supportingSpeechIds\": [\n            \"1206-1209\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

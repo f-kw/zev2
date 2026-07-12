@@ -1,0 +1,65 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "パワプロショップの買い物で悩むマリン船長",
+      "reason": "栄冠ナインのショップで残りの予算を何に使うか、自分探しやスケヘンなどのアイテム選びでリスナーに意見を聞きながら迷う様子が描かれているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 11223006,
+          "sourceEndMs": 11248178,
+          "supportingSpeechIds": [
+            "1270-1276"
+          ]
+        },
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 11400970,
+          "sourceEndMs": 11458582,
+          "supportingSpeechIds": [
+            "1291-1299"
+          ]
+        },
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 11526771,
+          "sourceEndMs": 11571741,
+          "supportingSpeechIds": [
+            "1306-1309"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "次戦の相手判明と次回配信への持ち越し",
+      "reason": "次の対戦相手がBランクであることに反応しつつ、打ち気ガチャや試合を次回に持ち越して配信の告知と締めに入る一連の流れが綺麗にまとまっているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 11701322,
+          "sourceEndMs": 11789446,
+          "supportingSpeechIds": [
+            "1318-1322"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-12T15:59:37+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_27_o8rZAhARXAc",
+    "windowSourceVideoId": "o8rZAhARXAc",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/9dtwF5Exu5w_chat_velocity_top100_input_selection_v004/theme-llm-v002/20260712-chat-velocity-top100-generalization-v001/windows/window_27_o8rZAhARXAc-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/41be42c647ca4d9b?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"パワプロショップの買い物で悩むマリン船長\",\n      \"reason\": \"栄冠ナインのショップで残りの予算を何に使うか、自分探しやスケヘンなどのアイテム選びでリスナーに意見を聞きながら迷う様子が描かれているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"o8rZAhARXAc\",\n          \"sourceStartMs\": 11223006,\n          \"sourceEndMs\": 11248178,\n          \"supportingSpeechIds\": [\n            \"1270-1276\"\n          ]\n        },\n        {\n          \"sourceVideoId\": \"o8rZAhARXAc\",\n          \"sourceStartMs\": 11400970,\n          \"sourceEndMs\": 11458582,\n          \"supportingSpeechIds\": [\n            \"1291-1299\"\n          ]\n        },\n        {\n          \"sourceVideoId\": \"o8rZAhARXAc\",\n          \"sourceStartMs\": 11526771,\n          \"sourceEndMs\": 11571741,\n          \"supportingSpeechIds\": [\n            \"1306-1309\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"次戦の相手判明と次回配信への持ち越し\",\n      \"reason\": \"次の対戦相手がBランクであることに反応しつつ、打ち気ガチャや試合を次回に持ち越して配信の告知と締めに入る一連の流れが綺麗にまとまっているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"o8rZAhARXAc\",\n          \"sourceStartMs\": 11701322,\n          \"sourceEndMs\": 11789446,\n          \"supportingSpeechIds\": [\n            \"1318-1322\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

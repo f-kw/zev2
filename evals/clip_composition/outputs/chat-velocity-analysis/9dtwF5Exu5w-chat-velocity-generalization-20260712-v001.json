@@ -1,0 +1,3569 @@
+{
+  "schemaVersion": 1,
+  "analysisId": "9dtwF5Exu5w-chat-velocity-generalization-20260712-v001",
+  "generatedAt": "2026-07-12T06:23:17.672Z",
+  "analysisType": "chat-replay-relative-velocity-input-visibility-simulation",
+  "sourceVideoId": "o8rZAhARXAc",
+  "sourceDurationMs": 11898441,
+  "expectedFixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+  "expectedPath": "evals/clip_composition/expected/9dtwF5Exu5w_multiblock_material_v001.json",
+  "expectedCount": 25,
+  "acquisition": {
+    "filePath": "evals/clip_composition/research/chat-replay/9dtwF5Exu5w/o8rZAhARXAc.live_chat.json",
+    "fileBytes": 183190813,
+    "sha256": "12321c8e1ef9db2cf0586057bffaeb7ab58ecd9ac1c0f2544b2227fda3b9bbfc",
+    "lineCount": 121495,
+    "parseErrorCount": 0,
+    "minOffsetMs": 0,
+    "maxOffsetMs": 11899823,
+    "rendererCounts": {
+      "liveChatViewerEngagementMessageRenderer": 1,
+      "liveChatSponsorshipsGiftPurchaseAnnouncementRenderer": 5,
+      "liveChatPaidMessageRenderer": 36,
+      "liveChatMembershipItemRenderer": 32,
+      "liveChatTextMessageRenderer": 116657,
+      "liveChatPlaceholderItemRenderer": 4700,
+      "liveChatSponsorshipsGiftRedemptionAnnouncementRenderer": 2
+    }
+  },
+  "countingPolicy": {
+    "countedRenderers": [
+      "liveChatTextMessageRenderer",
+      "liveChatPaidMessageRenderer",
+      "liveChatPaidStickerRenderer",
+      "liveChatMembershipItemRenderer",
+      "liveChatSponsorshipsGiftPurchaseAnnouncementRenderer",
+      "liveChatSponsorshipsGiftRedemptionAnnouncementRenderer"
+    ],
+    "excludedObservedRenderers": [
+      "liveChatViewerEngagementMessageRenderer",
+      "liveChatPlaceholderItemRenderer"
+    ],
+    "privateChatTextOrAuthorPersistedInAnalysis": false
+  },
+  "useScope": {
+    "evaluationResearchOnly": true,
+    "treatedAsFormalD4Chat": false,
+    "usedForFixtureFreeze": false,
+    "note": "取得したチャット本文や投稿者名はモデル入力・採点・fixture凍結へ使わず、相対流速の机上検証だけに使う。"
+  },
+  "baseline": {
+    "definition": "配信内に完全に収まる1分区間すべての平均コメント数を1.0とする",
+    "absoluteThresholdUsedForSelection": false,
+    "fullMinuteCount": 198,
+    "fullMinuteCommentCount": 116419,
+    "baselineCommentsPerMinute": 587.9747474747475,
+    "partialFinalMinuteDurationMs": 18441,
+    "partialFinalMinuteCommentCount": 282,
+    "beforeStreamCount": 0,
+    "afterStreamCount": 31,
+    "rankTieBreak": "同じベースライン比なら配信時刻が早い1分区間を先にする"
+  },
+  "simulations": [
+    {
+      "selectionCount": 50,
+      "includedExpectedCount": 9,
+      "totalExpectedCount": 25,
+      "includedExpectedIndexes": [
+        9,
+        12,
+        13,
+        16,
+        17,
+        20,
+        23,
+        24,
+        25
+      ],
+      "excludedExpectedIndexes": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        10,
+        11,
+        14,
+        15,
+        18,
+        19,
+        21,
+        22
+      ],
+      "cutoffRelativeToStreamBaseline": 1.1565122531545537,
+      "cutoffCommentCount": 680,
+      "completeMinutesTiedAtCutoffCount": 2
+    },
+    {
+      "selectionCount": 100,
+      "includedExpectedCount": 18,
+      "totalExpectedCount": 25,
+      "includedExpectedIndexes": [
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        20,
+        22,
+        23,
+        24,
+        25
+      ],
+      "excludedExpectedIndexes": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        19,
+        21
+      ],
+      "cutoffRelativeToStreamBaseline": 0.998342195002534,
+      "cutoffCommentCount": 587,
+      "completeMinutesTiedAtCutoffCount": 2
+    },
+    {
+      "selectionCount": 150,
+      "includedExpectedCount": 21,
+      "totalExpectedCount": 25,
+      "includedExpectedIndexes": [
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25
+      ],
+      "excludedExpectedIndexes": [
+        1,
+        2,
+        3,
+        19
+      ],
+      "cutoffRelativeToStreamBaseline": 0.8384713835370515,
+      "cutoffCommentCount": 493,
+      "completeMinutesTiedAtCutoffCount": 1
+    }
+  ],
+  "expectedFacts": [
+    {
+      "expectedIndex": 1,
+      "label": "block 1",
+      "sourceVideoId": "o8rZAhARXAc",
+      "sourceStartMs": 281521,
+      "sourceEndMs": 282642,
+      "overlappingMinutes": [
+        {
+          "minuteIndex": 4,
+          "sourceStartMs": 240000,
+          "sourceEndMs": 300000,
+          "commentCount": 412,
+          "relativeToStreamBaseline": 0.7007103651465826,
+          "velocityRank": 178,
+          "overlapMs": 1121
+        }
+      ],
+      "bestVelocityRank": 178,
+      "bestMinuteIndex": 4,
+      "bestRelativeToStreamBaseline": 0.7007103651465826
+    },
+    {
+      "expectedIndex": 2,
+      "label": "block 2",
+      "sourceVideoId": "o8rZAhARXAc",
+      "sourceStartMs": 300714,
+      "sourceEndMs": 301675,
+      "overlappingMinutes": [
+        {
+          "minuteIndex": 5,
+          "sourceStartMs": 300000,
+          "sourceEndMs": 360000,
+          "commentCount": 379,
+          "relativeToStreamBaseline": 0.6445855058023175,
+          "velocityRank": 184,
+          "overlapMs": 961
+        }
+      ],
+      "bestVelocityRank": 184,
+      "bestMinuteIndex": 5,
+      "bestRelativeToStreamBaseline": 0.6445855058023175
+    },
+    {
+      "expectedIndex": 3,
+      "label": "block 3",
+      "sourceVideoId": "o8rZAhARXAc",
+      "sourceStartMs": 338755,
+      "sourceEndMs": 341516,
+      "overlappingMinutes": [
+        {
+          "minuteIndex": 5,
+          "sourceStartMs": 300000,
+          "sourceEndMs": 360000,
+          "commentCount": 379,
+          "relativeToStreamBaseline": 0.6445855058023175,
+          "velocityRank": 184,
+          "overlapMs": 2761
+        }
+      ],
+      "bestVelocityRank": 184,
+      "bestMinuteIndex": 5,
+      "bestRelativeToStreamBaseline": 0.6445855058023175
+    },
+    {
+      "expectedIndex": 4,
+      "label": "block 4",
+      "sourceVideoId": "o8rZAhARXAc",
+      "sourceStartMs": 441877,
+      "sourceEndMs": 447039,
+      "overlappingMinutes": [
+        {
+          "minuteIndex": 7,
+          "sourceStartMs": 420000,
+          "sourceEndMs": 480000,
+          "commentCount": 573,
+          "relativeToStreamBaseline": 0.9745316486140578,
+          "velocityRank": 114,
+          "overlapMs": 5162
+        }
+      ],
+      "bestVelocityRank": 114,
+      "bestMinuteIndex": 7,
+      "bestRelativeToStreamBaseline": 0.9745316486140578
+    },
+    {
+      "expectedIndex": 5,
+      "label": "block 5",
+      "sourceVideoId": "o8rZAhARXAc",
+      "sourceStartMs": 502720,
+      "sourceEndMs": 517104,
+      "overlappingMinutes": [
+        {
+          "minuteIndex": 8,
+          "sourceStartMs": 480000,
+          "sourceEndMs": 540000,
+          "commentCount": 554,
+          "relativeToStreamBaseline": 0.9422173356582688,
+          "velocityRank": 124,
+          "overlapMs": 14384
+        }
+      ],
+      "bestVelocityRank": 124,
+      "bestMinuteIndex": 8,
+      "bestRelativeToStreamBaseline": 0.9422173356582688
+    },
+    {
+      "expectedIndex": 6,
+      "label": "block 6",
+      "sourceVideoId": "o8rZAhARXAc",
+      "sourceStartMs": 1250139,
+      "sourceEndMs": 1254342,
+      "overlappingMinutes": [
+        {
+          "minuteIndex": 20,
+          "sourceStartMs": 1200000,
+          "sourceEndMs": 1260000,
+          "commentCount": 628,
+          "relativeToStreamBaseline": 1.0680730808544998,
+          "velocityRank": 80,
+          "overlapMs": 4203
+        }
+      ],
+      "bestVelocityRank": 80,
+      "bestMinuteIndex": 20,
+      "bestRelativeToStreamBaseline": 1.0680730808544998
+    },
+    {
+      "expectedIndex": 7,
+      "label": "block 7",
+      "sourceVideoId": "o8rZAhARXAc",
+      "sourceStartMs": 2013635,
+      "sourceEndMs": 2017195,
+      "overlappingMinutes": [
+        {
+          "minuteIndex": 33,
+          "sourceStartMs": 1980000,
+          "sourceEndMs": 2040000,
+          "commentCount": 648,
+          "relativeToStreamBaseline": 1.1020881471237514,
+          "velocityRank": 72,
+          "overlapMs": 3560
+        }
+      ],
+      "bestVelocityRank": 72,
+      "bestMinuteIndex": 33,
+      "bestRelativeToStreamBaseline": 1.1020881471237514
+    },
+    {
+      "expectedIndex": 8,
+      "label": "block 9",
+      "sourceVideoId": "o8rZAhARXAc",
+      "sourceStartMs": 3690566,
+      "sourceEndMs": 3697689,
+      "overlappingMinutes": [
+        {
+          "minuteIndex": 61,
+          "sourceStartMs": 3660000,
+          "sourceEndMs": 3720000,
+          "commentCount": 679,
+          "relativeToStreamBaseline": 1.1548114998410912,
+          "velocityRank": 51,
+          "overlapMs": 7123
+        }
+      ],
+      "bestVelocityRank": 51,
+      "bestMinuteIndex": 61,
+      "bestRelativeToStreamBaseline": 1.1548114998410912
+    },
+    {
+      "expectedIndex": 9,
+      "label": "block 10",
+      "sourceVideoId": "o8rZAhARXAc",
+      "sourceStartMs": 3741344,
+      "sourceEndMs": 3758425,
+      "overlappingMinutes": [
+        {
+          "minuteIndex": 62,
+          "sourceStartMs": 3720000,
+          "sourceEndMs": 3780000,
+          "commentCount": 754,
+          "relativeToStreamBaseline": 1.2823679983507847,
+          "velocityRank": 12,
+          "overlapMs": 17081
+        }
+      ],
+      "bestVelocityRank": 12,
+      "bestMinuteIndex": 62,
+      "bestRelativeToStreamBaseline": 1.2823679983507847
+    },
+    {
+      "expectedIndex": 10,
+      "label": "block 11",
+      "sourceVideoId": "o8rZAhARXAc",
+      "sourceStartMs": 4207639,
+      "sourceEndMs": 4210641,
+      "overlappingMinutes": [
+        {
+          "minuteIndex": 70,
+          "sourceStartMs": 4200000,
+          "sourceEndMs": 4260000,
+          "commentCount": 590,
+          "relativeToStreamBaseline": 1.0034444549429218,
+          "velocityRank": 96,
+          "overlapMs": 3002
+        }
+      ],
+      "bestVelocityRank": 96,
+      "bestMinuteIndex": 70,
+      "bestRelativeToStreamBaseline": 1.0034444549429218
+    },
+    {
+      "expectedIndex": 11,
+      "label": "block 12",
+      "sourceVideoId": "o8rZAhARXAc",
+      "sourceStartMs": 4232807,
+      "sourceEndMs": 4239410,
+      "overlappingMinutes": [
+        {
+          "minuteIndex": 70,
+          "sourceStartMs": 4200000,
+          "sourceEndMs": 4260000,
+          "commentCount": 590,
+          "relativeToStreamBaseline": 1.0034444549429218,
+          "velocityRank": 96,
+          "overlapMs": 6603
+        }
+      ],
+      "bestVelocityRank": 96,
+      "bestMinuteIndex": 70,
+      "bestRelativeToStreamBaseline": 1.0034444549429218
+    },
+    {
+      "expectedIndex": 12,
+      "label": "block 13",
+      "sourceVideoId": "o8rZAhARXAc",
+      "sourceStartMs": 4273428,
+      "sourceEndMs": 4279472,
+      "overlappingMinutes": [
+        {
+          "minuteIndex": 71,
+          "sourceStartMs": 4260000,
+          "sourceEndMs": 4320000,
+          "commentCount": 724,
+          "relativeToStreamBaseline": 1.2313453989469074,
+          "velocityRank": 22,
+          "overlapMs": 6044
+        }
+      ],
+      "bestVelocityRank": 22,
+      "bestMinuteIndex": 71,
+      "bestRelativeToStreamBaseline": 1.2313453989469074
+    },
+    {
+      "expectedIndex": 13,
+      "label": "block 14",
+      "sourceVideoId": "o8rZAhARXAc",
+      "sourceStartMs": 4367214,
+      "sourceEndMs": 4369035,
+      "overlappingMinutes": [
+        {
+          "minuteIndex": 72,
+          "sourceStartMs": 4320000,
+          "sourceEndMs": 4380000,
+          "commentCount": 735,
+          "relativeToStreamBaseline": 1.2500536853949957,
+          "velocityRank": 19,
+          "overlapMs": 1821
+        }
+      ],
+      "bestVelocityRank": 19,
+      "bestMinuteIndex": 72,
+      "bestRelativeToStreamBaseline": 1.2500536853949957
+    },
+    {
+      "expectedIndex": 14,
+      "label": "block 15",
+      "sourceVideoId": "o8rZAhARXAc",
+      "sourceStartMs": 4723988,
+      "sourceEndMs": 4731031,
+      "overlappingMinutes": [
+        {
+          "minuteIndex": 78,
+          "sourceStartMs": 4680000,
+          "sourceEndMs": 4740000,
+          "commentCount": 626,
+          "relativeToStreamBaseline": 1.0646715742275745,
+          "velocityRank": 82,
+          "overlapMs": 7043
+        }
+      ],
+      "bestVelocityRank": 82,
+      "bestMinuteIndex": 78,
+      "bestRelativeToStreamBaseline": 1.0646715742275745
+    },
+    {
+      "expectedIndex": 15,
+      "label": "block 17",
+      "sourceVideoId": "o8rZAhARXAc",
+      "sourceStartMs": 6289092,
+      "sourceEndMs": 6298479,
+      "overlappingMinutes": [
+        {
+          "minuteIndex": 104,
+          "sourceStartMs": 6240000,
+          "sourceEndMs": 6300000,
+          "commentCount": 623,
+          "relativeToStreamBaseline": 1.059569314287187,
+          "velocityRank": 83,
+          "overlapMs": 9387
+        }
+      ],
+      "bestVelocityRank": 83,
+      "bestMinuteIndex": 104,
+      "bestRelativeToStreamBaseline": 1.059569314287187
+    },
+    {
+      "expectedIndex": 16,
+      "label": "block 18",
+      "sourceVideoId": "o8rZAhARXAc",
+      "sourceStartMs": 6526271,
+      "sourceEndMs": 6527012,
+      "overlappingMinutes": [
+        {
+          "minuteIndex": 108,
+          "sourceStartMs": 6480000,
+          "sourceEndMs": 6540000,
+          "commentCount": 707,
+          "relativeToStreamBaseline": 1.2024325926180435,
+          "velocityRank": 35,
+          "overlapMs": 741
+        }
+      ],
+      "bestVelocityRank": 35,
+      "bestMinuteIndex": 108,
+      "bestRelativeToStreamBaseline": 1.2024325926180435
+    },
+    {
+      "expectedIndex": 17,
+      "label": "block 20",
+      "sourceVideoId": "o8rZAhARXAc",
+      "sourceStartMs": 7010155,
+      "sourceEndMs": 7011256,
+      "overlappingMinutes": [
+        {
+          "minuteIndex": 116,
+          "sourceStartMs": 6960000,
+          "sourceEndMs": 7020000,
+          "commentCount": 686,
+          "relativeToStreamBaseline": 1.1667167730353294,
+          "velocityRank": 45,
+          "overlapMs": 1101
+        }
+      ],
+      "bestVelocityRank": 45,
+      "bestMinuteIndex": 116,
+      "bestRelativeToStreamBaseline": 1.1667167730353294
+    },
+    {
+      "expectedIndex": 18,
+      "label": "block 21",
+      "sourceVideoId": "o8rZAhARXAc",
+      "sourceStartMs": 7945178,
+      "sourceEndMs": 7947279,
+      "overlappingMinutes": [
+        {
+          "minuteIndex": 132,
+          "sourceStartMs": 7920000,
+          "sourceEndMs": 7980000,
+          "commentCount": 589,
+          "relativeToStreamBaseline": 1.001743701629459,
+          "velocityRank": 98,
+          "overlapMs": 2101
+        }
+      ],
+      "bestVelocityRank": 98,
+      "bestMinuteIndex": 132,
+      "bestRelativeToStreamBaseline": 1.001743701629459
+    },
+    {
+      "expectedIndex": 19,
+      "label": "block 24",
+      "sourceVideoId": "o8rZAhARXAc",
+      "sourceStartMs": 9117659,
+      "sourceEndMs": 9119080,
+      "overlappingMinutes": [
+        {
+          "minuteIndex": 151,
+          "sourceStartMs": 9060000,
+          "sourceEndMs": 9120000,
+          "commentCount": 350,
+          "relativeToStreamBaseline": 0.5952636597119028,
+          "velocityRank": 189,
+          "overlapMs": 1421
+        }
+      ],
+      "bestVelocityRank": 189,
+      "bestMinuteIndex": 151,
+      "bestRelativeToStreamBaseline": 0.5952636597119028
+    },
+    {
+      "expectedIndex": 20,
+      "label": "block 25",
+      "sourceVideoId": "o8rZAhARXAc",
+      "sourceStartMs": 9150522,
+      "sourceEndMs": 9152464,
+      "overlappingMinutes": [
+        {
+          "minuteIndex": 152,
+          "sourceStartMs": 9120000,
+          "sourceEndMs": 9180000,
+          "commentCount": 708,
+          "relativeToStreamBaseline": 1.204133345931506,
+          "velocityRank": 32,
+          "overlapMs": 1942
+        }
+      ],
+      "bestVelocityRank": 32,
+      "bestMinuteIndex": 152,
+      "bestRelativeToStreamBaseline": 1.204133345931506
+    },
+    {
+      "expectedIndex": 21,
+      "label": "block 26",
+      "sourceVideoId": "o8rZAhARXAc",
+      "sourceStartMs": 10077799,
+      "sourceEndMs": 10088896,
+      "overlappingMinutes": [
+        {
+          "minuteIndex": 167,
+          "sourceStartMs": 10020000,
+          "sourceEndMs": 10080000,
+          "commentCount": 532,
+          "relativeToStreamBaseline": 0.9048007627620921,
+          "velocityRank": 136,
+          "overlapMs": 2201
+        },
+        {
+          "minuteIndex": 168,
+          "sourceStartMs": 10080000,
+          "sourceEndMs": 10140000,
+          "commentCount": 567,
+          "relativeToStreamBaseline": 0.9643271287332824,
+          "velocityRank": 118,
+          "overlapMs": 8896
+        }
+      ],
+      "bestVelocityRank": 118,
+      "bestMinuteIndex": 168,
+      "bestRelativeToStreamBaseline": 0.9643271287332824
+    },
+    {
+      "expectedIndex": 22,
+      "label": "block 27",
+      "sourceVideoId": "o8rZAhARXAc",
+      "sourceStartMs": 10221096,
+      "sourceEndMs": 10221656,
+      "overlappingMinutes": [
+        {
+          "minuteIndex": 170,
+          "sourceStartMs": 10200000,
+          "sourceEndMs": 10260000,
+          "commentCount": 597,
+          "relativeToStreamBaseline": 1.0153497281371597,
+          "velocityRank": 93,
+          "overlapMs": 560
+        }
+      ],
+      "bestVelocityRank": 93,
+      "bestMinuteIndex": 170,
+      "bestRelativeToStreamBaseline": 1.0153497281371597
+    },
+    {
+      "expectedIndex": 23,
+      "label": "block 28",
+      "sourceVideoId": "o8rZAhARXAc",
+      "sourceStartMs": 10521894,
+      "sourceEndMs": 10529420,
+      "overlappingMinutes": [
+        {
+          "minuteIndex": 175,
+          "sourceStartMs": 10500000,
+          "sourceEndMs": 10560000,
+          "commentCount": 749,
+          "relativeToStreamBaseline": 1.2738642317834719,
+          "velocityRank": 14,
+          "overlapMs": 7526
+        }
+      ],
+      "bestVelocityRank": 14,
+      "bestMinuteIndex": 175,
+      "bestRelativeToStreamBaseline": 1.2738642317834719
+    },
+    {
+      "expectedIndex": 24,
+      "label": "block 29",
+      "sourceVideoId": "o8rZAhARXAc",
+      "sourceStartMs": 10790744,
+      "sourceEndMs": 10803724,
+      "overlappingMinutes": [
+        {
+          "minuteIndex": 179,
+          "sourceStartMs": 10740000,
+          "sourceEndMs": 10800000,
+          "commentCount": 752,
+          "relativeToStreamBaseline": 1.2789664917238595,
+          "velocityRank": 13,
+          "overlapMs": 9256
+        },
+        {
+          "minuteIndex": 180,
+          "sourceStartMs": 10800000,
+          "sourceEndMs": 10860000,
+          "commentCount": 692,
+          "relativeToStreamBaseline": 1.1769212929161048,
+          "velocityRank": 43,
+          "overlapMs": 3724
+        }
+      ],
+      "bestVelocityRank": 13,
+      "bestMinuteIndex": 179,
+      "bestRelativeToStreamBaseline": 1.2789664917238595
+    },
+    {
+      "expectedIndex": 25,
+      "label": "block 31",
+      "sourceVideoId": "o8rZAhARXAc",
+      "sourceStartMs": 11730442,
+      "sourceEndMs": 11733624,
+      "overlappingMinutes": [
+        {
+          "minuteIndex": 195,
+          "sourceStartMs": 11700000,
+          "sourceEndMs": 11760000,
+          "commentCount": 1278,
+          "relativeToStreamBaseline": 2.1735627346051762,
+          "velocityRank": 2,
+          "overlapMs": 3182
+        }
+      ],
+      "bestVelocityRank": 2,
+      "bestMinuteIndex": 195,
+      "bestRelativeToStreamBaseline": 2.1735627346051762
+    }
+  ],
+  "minuteSeries": [
+    {
+      "minuteIndex": 0,
+      "sourceStartMs": 0,
+      "sourceEndMs": 60000,
+      "durationMs": 60000,
+      "commentCount": 426,
+      "rendererCounts": {
+        "liveChatSponsorshipsGiftPurchaseAnnouncementRenderer": 3,
+        "liveChatPaidMessageRenderer": 1,
+        "liveChatMembershipItemRenderer": 1,
+        "liveChatTextMessageRenderer": 421
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 426,
+      "relativeToStreamBaseline": 0.7245209115350587,
+      "velocityRank": 172
+    },
+    {
+      "minuteIndex": 1,
+      "sourceStartMs": 60000,
+      "sourceEndMs": 120000,
+      "durationMs": 60000,
+      "commentCount": 391,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 391
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 391,
+      "relativeToStreamBaseline": 0.6649945455638685,
+      "velocityRank": 182
+    },
+    {
+      "minuteIndex": 2,
+      "sourceStartMs": 120000,
+      "sourceEndMs": 180000,
+      "durationMs": 60000,
+      "commentCount": 587,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 583,
+        "liveChatPaidMessageRenderer": 1,
+        "liveChatMembershipItemRenderer": 3
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 587,
+      "relativeToStreamBaseline": 0.998342195002534,
+      "velocityRank": 99
+    },
+    {
+      "minuteIndex": 3,
+      "sourceStartMs": 180000,
+      "sourceEndMs": 240000,
+      "durationMs": 60000,
+      "commentCount": 532,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 530,
+        "liveChatMembershipItemRenderer": 2
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 532,
+      "relativeToStreamBaseline": 0.9048007627620921,
+      "velocityRank": 135
+    },
+    {
+      "minuteIndex": 4,
+      "sourceStartMs": 240000,
+      "sourceEndMs": 300000,
+      "durationMs": 60000,
+      "commentCount": 412,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 411,
+        "liveChatMembershipItemRenderer": 1
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 412,
+      "relativeToStreamBaseline": 0.7007103651465826,
+      "velocityRank": 178
+    },
+    {
+      "minuteIndex": 5,
+      "sourceStartMs": 300000,
+      "sourceEndMs": 360000,
+      "durationMs": 60000,
+      "commentCount": 379,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 379
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 379,
+      "relativeToStreamBaseline": 0.6445855058023175,
+      "velocityRank": 184
+    },
+    {
+      "minuteIndex": 6,
+      "sourceStartMs": 360000,
+      "sourceEndMs": 420000,
+      "durationMs": 60000,
+      "commentCount": 382,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 381,
+        "liveChatMembershipItemRenderer": 1
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 382,
+      "relativeToStreamBaseline": 0.6496877657427053,
+      "velocityRank": 183
+    },
+    {
+      "minuteIndex": 7,
+      "sourceStartMs": 420000,
+      "sourceEndMs": 480000,
+      "durationMs": 60000,
+      "commentCount": 573,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 572,
+        "liveChatMembershipItemRenderer": 1
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 573,
+      "relativeToStreamBaseline": 0.9745316486140578,
+      "velocityRank": 114
+    },
+    {
+      "minuteIndex": 8,
+      "sourceStartMs": 480000,
+      "sourceEndMs": 540000,
+      "durationMs": 60000,
+      "commentCount": 554,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 554
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 554,
+      "relativeToStreamBaseline": 0.9422173356582688,
+      "velocityRank": 124
+    },
+    {
+      "minuteIndex": 9,
+      "sourceStartMs": 540000,
+      "sourceEndMs": 600000,
+      "durationMs": 60000,
+      "commentCount": 667,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 667
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 667,
+      "relativeToStreamBaseline": 1.1344024600795404,
+      "velocityRank": 62
+    },
+    {
+      "minuteIndex": 10,
+      "sourceStartMs": 600000,
+      "sourceEndMs": 660000,
+      "durationMs": 60000,
+      "commentCount": 635,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 632,
+        "liveChatSponsorshipsGiftPurchaseAnnouncementRenderer": 1,
+        "liveChatSponsorshipsGiftRedemptionAnnouncementRenderer": 1,
+        "liveChatMembershipItemRenderer": 1
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 635,
+      "relativeToStreamBaseline": 1.0799783540487378,
+      "velocityRank": 78
+    },
+    {
+      "minuteIndex": 11,
+      "sourceStartMs": 660000,
+      "sourceEndMs": 720000,
+      "durationMs": 60000,
+      "commentCount": 517,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 517
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 517,
+      "relativeToStreamBaseline": 0.8792894630601534,
+      "velocityRank": 145
+    },
+    {
+      "minuteIndex": 12,
+      "sourceStartMs": 720000,
+      "sourceEndMs": 780000,
+      "durationMs": 60000,
+      "commentCount": 450,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 449,
+        "liveChatPaidMessageRenderer": 1
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 450,
+      "relativeToStreamBaseline": 0.7653389910581606,
+      "velocityRank": 164
+    },
+    {
+      "minuteIndex": 13,
+      "sourceStartMs": 780000,
+      "sourceEndMs": 840000,
+      "durationMs": 60000,
+      "commentCount": 519,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 519
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 519,
+      "relativeToStreamBaseline": 0.8826909696870786,
+      "velocityRank": 143
+    },
+    {
+      "minuteIndex": 14,
+      "sourceStartMs": 840000,
+      "sourceEndMs": 900000,
+      "durationMs": 60000,
+      "commentCount": 726,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 726
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 726,
+      "relativeToStreamBaseline": 1.2347469055738325,
+      "velocityRank": 21
+    },
+    {
+      "minuteIndex": 15,
+      "sourceStartMs": 900000,
+      "sourceEndMs": 960000,
+      "durationMs": 60000,
+      "commentCount": 580,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 580
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 580,
+      "relativeToStreamBaseline": 0.9864369218082959,
+      "velocityRank": 105
+    },
+    {
+      "minuteIndex": 16,
+      "sourceStartMs": 960000,
+      "sourceEndMs": 1020000,
+      "durationMs": 60000,
+      "commentCount": 737,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 736,
+        "liveChatPaidMessageRenderer": 1
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 737,
+      "relativeToStreamBaseline": 1.2534551920219208,
+      "velocityRank": 18
+    },
+    {
+      "minuteIndex": 17,
+      "sourceStartMs": 1020000,
+      "sourceEndMs": 1080000,
+      "durationMs": 60000,
+      "commentCount": 652,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 649,
+        "liveChatPaidMessageRenderer": 2,
+        "liveChatMembershipItemRenderer": 1
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 652,
+      "relativeToStreamBaseline": 1.1088911603776017,
+      "velocityRank": 68
+    },
+    {
+      "minuteIndex": 18,
+      "sourceStartMs": 1080000,
+      "sourceEndMs": 1140000,
+      "durationMs": 60000,
+      "commentCount": 704,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 704
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 704,
+      "relativeToStreamBaseline": 1.1973303326776557,
+      "velocityRank": 38
+    },
+    {
+      "minuteIndex": 19,
+      "sourceStartMs": 1140000,
+      "sourceEndMs": 1200000,
+      "durationMs": 60000,
+      "commentCount": 645,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 644,
+        "liveChatPaidMessageRenderer": 1
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 645,
+      "relativeToStreamBaseline": 1.0969858871833635,
+      "velocityRank": 73
+    },
+    {
+      "minuteIndex": 20,
+      "sourceStartMs": 1200000,
+      "sourceEndMs": 1260000,
+      "durationMs": 60000,
+      "commentCount": 628,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 628
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 628,
+      "relativeToStreamBaseline": 1.0680730808544998,
+      "velocityRank": 80
+    },
+    {
+      "minuteIndex": 21,
+      "sourceStartMs": 1260000,
+      "sourceEndMs": 1320000,
+      "durationMs": 60000,
+      "commentCount": 681,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 681
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 681,
+      "relativeToStreamBaseline": 1.1582130064680165,
+      "velocityRank": 47
+    },
+    {
+      "minuteIndex": 22,
+      "sourceStartMs": 1320000,
+      "sourceEndMs": 1380000,
+      "durationMs": 60000,
+      "commentCount": 579,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 578,
+        "liveChatPaidMessageRenderer": 1
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 579,
+      "relativeToStreamBaseline": 0.9847361684948334,
+      "velocityRank": 107
+    },
+    {
+      "minuteIndex": 23,
+      "sourceStartMs": 1380000,
+      "sourceEndMs": 1440000,
+      "durationMs": 60000,
+      "commentCount": 605,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 604,
+        "liveChatMembershipItemRenderer": 1
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 605,
+      "relativeToStreamBaseline": 1.0289557546448604,
+      "velocityRank": 88
+    },
+    {
+      "minuteIndex": 24,
+      "sourceStartMs": 1440000,
+      "sourceEndMs": 1500000,
+      "durationMs": 60000,
+      "commentCount": 567,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 567
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 567,
+      "relativeToStreamBaseline": 0.9643271287332824,
+      "velocityRank": 117
+    },
+    {
+      "minuteIndex": 25,
+      "sourceStartMs": 1500000,
+      "sourceEndMs": 1560000,
+      "durationMs": 60000,
+      "commentCount": 503,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 503
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 503,
+      "relativeToStreamBaseline": 0.8554789166716773,
+      "velocityRank": 147
+    },
+    {
+      "minuteIndex": 26,
+      "sourceStartMs": 1560000,
+      "sourceEndMs": 1620000,
+      "durationMs": 60000,
+      "commentCount": 537,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 537
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 537,
+      "relativeToStreamBaseline": 0.913304529329405,
+      "velocityRank": 132
+    },
+    {
+      "minuteIndex": 27,
+      "sourceStartMs": 1620000,
+      "sourceEndMs": 1680000,
+      "durationMs": 60000,
+      "commentCount": 489,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 488,
+        "liveChatPaidMessageRenderer": 1
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 489,
+      "relativeToStreamBaseline": 0.8316683702832012,
+      "velocityRank": 151
+    },
+    {
+      "minuteIndex": 28,
+      "sourceStartMs": 1680000,
+      "sourceEndMs": 1740000,
+      "durationMs": 60000,
+      "commentCount": 568,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 568
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 568,
+      "relativeToStreamBaseline": 0.966027882046745,
+      "velocityRank": 116
+    },
+    {
+      "minuteIndex": 29,
+      "sourceStartMs": 1740000,
+      "sourceEndMs": 1800000,
+      "durationMs": 60000,
+      "commentCount": 468,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 466,
+        "liveChatPaidMessageRenderer": 2
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 468,
+      "relativeToStreamBaseline": 0.7959525507004871,
+      "velocityRank": 158
+    },
+    {
+      "minuteIndex": 30,
+      "sourceStartMs": 1800000,
+      "sourceEndMs": 1860000,
+      "durationMs": 60000,
+      "commentCount": 640,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 639,
+        "liveChatPaidMessageRenderer": 1
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 640,
+      "relativeToStreamBaseline": 1.0884821206160507,
+      "velocityRank": 76
+    },
+    {
+      "minuteIndex": 31,
+      "sourceStartMs": 1860000,
+      "sourceEndMs": 1920000,
+      "durationMs": 60000,
+      "commentCount": 650,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 649,
+        "liveChatPaidMessageRenderer": 1
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 650,
+      "relativeToStreamBaseline": 1.1054896537506764,
+      "velocityRank": 71
+    },
+    {
+      "minuteIndex": 32,
+      "sourceStartMs": 1920000,
+      "sourceEndMs": 1980000,
+      "durationMs": 60000,
+      "commentCount": 493,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 493
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 493,
+      "relativeToStreamBaseline": 0.8384713835370515,
+      "velocityRank": 150
+    },
+    {
+      "minuteIndex": 33,
+      "sourceStartMs": 1980000,
+      "sourceEndMs": 2040000,
+      "durationMs": 60000,
+      "commentCount": 648,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 648
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 648,
+      "relativeToStreamBaseline": 1.1020881471237514,
+      "velocityRank": 72
+    },
+    {
+      "minuteIndex": 34,
+      "sourceStartMs": 2040000,
+      "sourceEndMs": 2100000,
+      "durationMs": 60000,
+      "commentCount": 322,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 322
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 322,
+      "relativeToStreamBaseline": 0.5476425669349505,
+      "velocityRank": 192
+    },
+    {
+      "minuteIndex": 35,
+      "sourceStartMs": 2100000,
+      "sourceEndMs": 2160000,
+      "durationMs": 60000,
+      "commentCount": 620,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 620
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 620,
+      "relativeToStreamBaseline": 1.054467054346799,
+      "velocityRank": 84
+    },
+    {
+      "minuteIndex": 36,
+      "sourceStartMs": 2160000,
+      "sourceEndMs": 2220000,
+      "durationMs": 60000,
+      "commentCount": 458,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 458
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 458,
+      "relativeToStreamBaseline": 0.7789450175658612,
+      "velocityRank": 160
+    },
+    {
+      "minuteIndex": 37,
+      "sourceStartMs": 2220000,
+      "sourceEndMs": 2280000,
+      "durationMs": 60000,
+      "commentCount": 482,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 481,
+        "liveChatMembershipItemRenderer": 1
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 482,
+      "relativeToStreamBaseline": 0.8197630970889631,
+      "velocityRank": 153
+    },
+    {
+      "minuteIndex": 38,
+      "sourceStartMs": 2280000,
+      "sourceEndMs": 2340000,
+      "durationMs": 60000,
+      "commentCount": 575,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 575
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 575,
+      "relativeToStreamBaseline": 0.977933155240983,
+      "velocityRank": 112
+    },
+    {
+      "minuteIndex": 39,
+      "sourceStartMs": 2340000,
+      "sourceEndMs": 2400000,
+      "durationMs": 60000,
+      "commentCount": 421,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 420,
+        "liveChatPaidMessageRenderer": 1
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 421,
+      "relativeToStreamBaseline": 0.7160171449677458,
+      "velocityRank": 174
+    },
+    {
+      "minuteIndex": 40,
+      "sourceStartMs": 2400000,
+      "sourceEndMs": 2460000,
+      "durationMs": 60000,
+      "commentCount": 359,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 358,
+        "liveChatPaidMessageRenderer": 1
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 359,
+      "relativeToStreamBaseline": 0.6105704395330659,
+      "velocityRank": 188
+    },
+    {
+      "minuteIndex": 41,
+      "sourceStartMs": 2460000,
+      "sourceEndMs": 2520000,
+      "durationMs": 60000,
+      "commentCount": 536,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 536
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 536,
+      "relativeToStreamBaseline": 0.9116037760159424,
+      "velocityRank": 133
+    },
+    {
+      "minuteIndex": 42,
+      "sourceStartMs": 2520000,
+      "sourceEndMs": 2580000,
+      "durationMs": 60000,
+      "commentCount": 543,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 543
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 543,
+      "relativeToStreamBaseline": 0.9235090492101805,
+      "velocityRank": 130
+    },
+    {
+      "minuteIndex": 43,
+      "sourceStartMs": 2580000,
+      "sourceEndMs": 2640000,
+      "durationMs": 60000,
+      "commentCount": 703,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 703
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 703,
+      "relativeToStreamBaseline": 1.1956295793641931,
+      "velocityRank": 39
+    },
+    {
+      "minuteIndex": 44,
+      "sourceStartMs": 2640000,
+      "sourceEndMs": 2700000,
+      "durationMs": 60000,
+      "commentCount": 730,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 728,
+        "liveChatPaidMessageRenderer": 1,
+        "liveChatMembershipItemRenderer": 1
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 730,
+      "relativeToStreamBaseline": 1.2415499188276828,
+      "velocityRank": 20
+    },
+    {
+      "minuteIndex": 45,
+      "sourceStartMs": 2700000,
+      "sourceEndMs": 2760000,
+      "durationMs": 60000,
+      "commentCount": 680,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 680
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 680,
+      "relativeToStreamBaseline": 1.1565122531545537,
+      "velocityRank": 49
+    },
+    {
+      "minuteIndex": 46,
+      "sourceStartMs": 2760000,
+      "sourceEndMs": 2820000,
+      "durationMs": 60000,
+      "commentCount": 450,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 450
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 450,
+      "relativeToStreamBaseline": 0.7653389910581606,
+      "velocityRank": 165
+    },
+    {
+      "minuteIndex": 47,
+      "sourceStartMs": 2820000,
+      "sourceEndMs": 2880000,
+      "durationMs": 60000,
+      "commentCount": 668,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 667,
+        "liveChatPaidMessageRenderer": 1
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 668,
+      "relativeToStreamBaseline": 1.136103213393003,
+      "velocityRank": 61
+    },
+    {
+      "minuteIndex": 48,
+      "sourceStartMs": 2880000,
+      "sourceEndMs": 2940000,
+      "durationMs": 60000,
+      "commentCount": 585,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 584,
+        "liveChatMembershipItemRenderer": 1
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 585,
+      "relativeToStreamBaseline": 0.9949406883756088,
+      "velocityRank": 101
+    },
+    {
+      "minuteIndex": 49,
+      "sourceStartMs": 2940000,
+      "sourceEndMs": 3000000,
+      "durationMs": 60000,
+      "commentCount": 641,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 641
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 641,
+      "relativeToStreamBaseline": 1.0901828739295132,
+      "velocityRank": 75
+    },
+    {
+      "minuteIndex": 50,
+      "sourceStartMs": 3000000,
+      "sourceEndMs": 3060000,
+      "durationMs": 60000,
+      "commentCount": 664,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 664
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 664,
+      "relativeToStreamBaseline": 1.1293002001391526,
+      "velocityRank": 64
+    },
+    {
+      "minuteIndex": 51,
+      "sourceStartMs": 3060000,
+      "sourceEndMs": 3120000,
+      "durationMs": 60000,
+      "commentCount": 542,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 542
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 542,
+      "relativeToStreamBaseline": 0.9218082958967179,
+      "velocityRank": 131
+    },
+    {
+      "minuteIndex": 52,
+      "sourceStartMs": 3120000,
+      "sourceEndMs": 3180000,
+      "durationMs": 60000,
+      "commentCount": 561,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 560,
+        "liveChatMembershipItemRenderer": 1
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 561,
+      "relativeToStreamBaseline": 0.9541226088525069,
+      "velocityRank": 121
+    },
+    {
+      "minuteIndex": 53,
+      "sourceStartMs": 3180000,
+      "sourceEndMs": 3240000,
+      "durationMs": 60000,
+      "commentCount": 644,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 643,
+        "liveChatPaidMessageRenderer": 1
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 644,
+      "relativeToStreamBaseline": 1.095285133869901,
+      "velocityRank": 74
+    },
+    {
+      "minuteIndex": 54,
+      "sourceStartMs": 3240000,
+      "sourceEndMs": 3300000,
+      "durationMs": 60000,
+      "commentCount": 674,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 673,
+        "liveChatPaidMessageRenderer": 1
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 674,
+      "relativeToStreamBaseline": 1.1463077332737783,
+      "velocityRank": 58
+    },
+    {
+      "minuteIndex": 55,
+      "sourceStartMs": 3300000,
+      "sourceEndMs": 3360000,
+      "durationMs": 60000,
+      "commentCount": 602,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 602
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 602,
+      "relativeToStreamBaseline": 1.0238534947044726,
+      "velocityRank": 91
+    },
+    {
+      "minuteIndex": 56,
+      "sourceStartMs": 3360000,
+      "sourceEndMs": 3420000,
+      "durationMs": 60000,
+      "commentCount": 658,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 657,
+        "liveChatMembershipItemRenderer": 1
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 658,
+      "relativeToStreamBaseline": 1.1190956802583771,
+      "velocityRank": 66
+    },
+    {
+      "minuteIndex": 57,
+      "sourceStartMs": 3420000,
+      "sourceEndMs": 3480000,
+      "durationMs": 60000,
+      "commentCount": 587,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 587
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 587,
+      "relativeToStreamBaseline": 0.998342195002534,
+      "velocityRank": 100
+    },
+    {
+      "minuteIndex": 58,
+      "sourceStartMs": 3480000,
+      "sourceEndMs": 3540000,
+      "durationMs": 60000,
+      "commentCount": 651,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 651
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 651,
+      "relativeToStreamBaseline": 1.107190407064139,
+      "velocityRank": 70
+    },
+    {
+      "minuteIndex": 59,
+      "sourceStartMs": 3540000,
+      "sourceEndMs": 3600000,
+      "durationMs": 60000,
+      "commentCount": 715,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 715
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 715,
+      "relativeToStreamBaseline": 1.2160386191257442,
+      "velocityRank": 28
+    },
+    {
+      "minuteIndex": 60,
+      "sourceStartMs": 3600000,
+      "sourceEndMs": 3660000,
+      "durationMs": 60000,
+      "commentCount": 528,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 528
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 528,
+      "relativeToStreamBaseline": 0.8979977495082418,
+      "velocityRank": 137
+    },
+    {
+      "minuteIndex": 61,
+      "sourceStartMs": 3660000,
+      "sourceEndMs": 3720000,
+      "durationMs": 60000,
+      "commentCount": 679,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 679
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 679,
+      "relativeToStreamBaseline": 1.1548114998410912,
+      "velocityRank": 51
+    },
+    {
+      "minuteIndex": 62,
+      "sourceStartMs": 3720000,
+      "sourceEndMs": 3780000,
+      "durationMs": 60000,
+      "commentCount": 754,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 754
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 754,
+      "relativeToStreamBaseline": 1.2823679983507847,
+      "velocityRank": 12
+    },
+    {
+      "minuteIndex": 63,
+      "sourceStartMs": 3780000,
+      "sourceEndMs": 3840000,
+      "durationMs": 60000,
+      "commentCount": 708,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 708
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 708,
+      "relativeToStreamBaseline": 1.204133345931506,
+      "velocityRank": 30
+    },
+    {
+      "minuteIndex": 64,
+      "sourceStartMs": 3840000,
+      "sourceEndMs": 3900000,
+      "durationMs": 60000,
+      "commentCount": 584,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 583,
+        "liveChatPaidMessageRenderer": 1
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 584,
+      "relativeToStreamBaseline": 0.9932399350621463,
+      "velocityRank": 103
+    },
+    {
+      "minuteIndex": 65,
+      "sourceStartMs": 3900000,
+      "sourceEndMs": 3960000,
+      "durationMs": 60000,
+      "commentCount": 518,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 518
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 518,
+      "relativeToStreamBaseline": 0.880990216373616,
+      "velocityRank": 144
+    },
+    {
+      "minuteIndex": 66,
+      "sourceStartMs": 3960000,
+      "sourceEndMs": 4020000,
+      "durationMs": 60000,
+      "commentCount": 410,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 410
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 410,
+      "relativeToStreamBaseline": 0.6973088585196575,
+      "velocityRank": 179
+    },
+    {
+      "minuteIndex": 67,
+      "sourceStartMs": 4020000,
+      "sourceEndMs": 4080000,
+      "durationMs": 60000,
+      "commentCount": 613,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 613
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 613,
+      "relativeToStreamBaseline": 1.042561781152561,
+      "velocityRank": 87
+    },
+    {
+      "minuteIndex": 68,
+      "sourceStartMs": 4080000,
+      "sourceEndMs": 4140000,
+      "durationMs": 60000,
+      "commentCount": 720,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 719,
+        "liveChatPaidMessageRenderer": 1
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 720,
+      "relativeToStreamBaseline": 1.224542385693057,
+      "velocityRank": 26
+    },
+    {
+      "minuteIndex": 69,
+      "sourceStartMs": 4140000,
+      "sourceEndMs": 4200000,
+      "durationMs": 60000,
+      "commentCount": 571,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 571
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 571,
+      "relativeToStreamBaseline": 0.9711301419871327,
+      "velocityRank": 115
+    },
+    {
+      "minuteIndex": 70,
+      "sourceStartMs": 4200000,
+      "sourceEndMs": 4260000,
+      "durationMs": 60000,
+      "commentCount": 590,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 590
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 590,
+      "relativeToStreamBaseline": 1.0034444549429218,
+      "velocityRank": 96
+    },
+    {
+      "minuteIndex": 71,
+      "sourceStartMs": 4260000,
+      "sourceEndMs": 4320000,
+      "durationMs": 60000,
+      "commentCount": 724,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 723,
+        "liveChatPaidMessageRenderer": 1
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 724,
+      "relativeToStreamBaseline": 1.2313453989469074,
+      "velocityRank": 22
+    },
+    {
+      "minuteIndex": 72,
+      "sourceStartMs": 4320000,
+      "sourceEndMs": 4380000,
+      "durationMs": 60000,
+      "commentCount": 735,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 735
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 735,
+      "relativeToStreamBaseline": 1.2500536853949957,
+      "velocityRank": 19
+    },
+    {
+      "minuteIndex": 73,
+      "sourceStartMs": 4380000,
+      "sourceEndMs": 4440000,
+      "durationMs": 60000,
+      "commentCount": 637,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 637
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 637,
+      "relativeToStreamBaseline": 1.0833798606756628,
+      "velocityRank": 77
+    },
+    {
+      "minuteIndex": 74,
+      "sourceStartMs": 4440000,
+      "sourceEndMs": 4500000,
+      "durationMs": 60000,
+      "commentCount": 695,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 695
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 695,
+      "relativeToStreamBaseline": 1.1820235528564926,
+      "velocityRank": 41
+    },
+    {
+      "minuteIndex": 75,
+      "sourceStartMs": 4500000,
+      "sourceEndMs": 4560000,
+      "durationMs": 60000,
+      "commentCount": 560,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 560
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 560,
+      "relativeToStreamBaseline": 0.9524218555390443,
+      "velocityRank": 122
+    },
+    {
+      "minuteIndex": 76,
+      "sourceStartMs": 4560000,
+      "sourceEndMs": 4620000,
+      "durationMs": 60000,
+      "commentCount": 748,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 748
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 748,
+      "relativeToStreamBaseline": 1.2721634784700093,
+      "velocityRank": 15
+    },
+    {
+      "minuteIndex": 77,
+      "sourceStartMs": 4620000,
+      "sourceEndMs": 4680000,
+      "durationMs": 60000,
+      "commentCount": 662,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 662
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 662,
+      "relativeToStreamBaseline": 1.1258986935122275,
+      "velocityRank": 65
+    },
+    {
+      "minuteIndex": 78,
+      "sourceStartMs": 4680000,
+      "sourceEndMs": 4740000,
+      "durationMs": 60000,
+      "commentCount": 626,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 626
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 626,
+      "relativeToStreamBaseline": 1.0646715742275745,
+      "velocityRank": 82
+    },
+    {
+      "minuteIndex": 79,
+      "sourceStartMs": 4740000,
+      "sourceEndMs": 4800000,
+      "durationMs": 60000,
+      "commentCount": 781,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 781
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 781,
+      "relativeToStreamBaseline": 1.3282883378142742,
+      "velocityRank": 6
+    },
+    {
+      "minuteIndex": 80,
+      "sourceStartMs": 4800000,
+      "sourceEndMs": 4860000,
+      "durationMs": 60000,
+      "commentCount": 565,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 565
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 565,
+      "relativeToStreamBaseline": 0.9609256221063572,
+      "velocityRank": 120
+    },
+    {
+      "minuteIndex": 81,
+      "sourceStartMs": 4860000,
+      "sourceEndMs": 4920000,
+      "durationMs": 60000,
+      "commentCount": 719,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 719
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 719,
+      "relativeToStreamBaseline": 1.2228416323795945,
+      "velocityRank": 27
+    },
+    {
+      "minuteIndex": 82,
+      "sourceStartMs": 4920000,
+      "sourceEndMs": 4980000,
+      "durationMs": 60000,
+      "commentCount": 585,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 585
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 585,
+      "relativeToStreamBaseline": 0.9949406883756088,
+      "velocityRank": 102
+    },
+    {
+      "minuteIndex": 83,
+      "sourceStartMs": 4980000,
+      "sourceEndMs": 5040000,
+      "durationMs": 60000,
+      "commentCount": 701,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 701
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 701,
+      "relativeToStreamBaseline": 1.192228072737268,
+      "velocityRank": 40
+    },
+    {
+      "minuteIndex": 84,
+      "sourceStartMs": 5040000,
+      "sourceEndMs": 5100000,
+      "durationMs": 60000,
+      "commentCount": 676,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 676
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 676,
+      "relativeToStreamBaseline": 1.1497092399007036,
+      "velocityRank": 55
+    },
+    {
+      "minuteIndex": 85,
+      "sourceStartMs": 5100000,
+      "sourceEndMs": 5160000,
+      "durationMs": 60000,
+      "commentCount": 418,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 418
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 418,
+      "relativeToStreamBaseline": 0.7109148850273581,
+      "velocityRank": 175
+    },
+    {
+      "minuteIndex": 86,
+      "sourceStartMs": 5160000,
+      "sourceEndMs": 5220000,
+      "durationMs": 60000,
+      "commentCount": 457,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 457
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 457,
+      "relativeToStreamBaseline": 0.7772442642523987,
+      "velocityRank": 162
+    },
+    {
+      "minuteIndex": 87,
+      "sourceStartMs": 5220000,
+      "sourceEndMs": 5280000,
+      "durationMs": 60000,
+      "commentCount": 458,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 458
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 458,
+      "relativeToStreamBaseline": 0.7789450175658612,
+      "velocityRank": 161
+    },
+    {
+      "minuteIndex": 88,
+      "sourceStartMs": 5280000,
+      "sourceEndMs": 5340000,
+      "durationMs": 60000,
+      "commentCount": 536,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 536
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 536,
+      "relativeToStreamBaseline": 0.9116037760159424,
+      "velocityRank": 134
+    },
+    {
+      "minuteIndex": 89,
+      "sourceStartMs": 5340000,
+      "sourceEndMs": 5400000,
+      "durationMs": 60000,
+      "commentCount": 270,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 270
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 270,
+      "relativeToStreamBaseline": 0.4592033946348964,
+      "velocityRank": 195
+    },
+    {
+      "minuteIndex": 90,
+      "sourceStartMs": 5400000,
+      "sourceEndMs": 5460000,
+      "durationMs": 60000,
+      "commentCount": 258,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 258
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 258,
+      "relativeToStreamBaseline": 0.43879435487334545,
+      "velocityRank": 198
+    },
+    {
+      "minuteIndex": 91,
+      "sourceStartMs": 5460000,
+      "sourceEndMs": 5520000,
+      "durationMs": 60000,
+      "commentCount": 300,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 300
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 300,
+      "relativeToStreamBaseline": 0.5102259940387738,
+      "velocityRank": 194
+    },
+    {
+      "minuteIndex": 92,
+      "sourceStartMs": 5520000,
+      "sourceEndMs": 5580000,
+      "durationMs": 60000,
+      "commentCount": 262,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 262
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 262,
+      "relativeToStreamBaseline": 0.44559736812719575,
+      "velocityRank": 197
+    },
+    {
+      "minuteIndex": 93,
+      "sourceStartMs": 5580000,
+      "sourceEndMs": 5640000,
+      "durationMs": 60000,
+      "commentCount": 566,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 566
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 566,
+      "relativeToStreamBaseline": 0.9626263754198198,
+      "velocityRank": 119
+    },
+    {
+      "minuteIndex": 94,
+      "sourceStartMs": 5640000,
+      "sourceEndMs": 5700000,
+      "durationMs": 60000,
+      "commentCount": 509,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 509
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 509,
+      "relativeToStreamBaseline": 0.8656834365524528,
+      "velocityRank": 146
+    },
+    {
+      "minuteIndex": 95,
+      "sourceStartMs": 5700000,
+      "sourceEndMs": 5760000,
+      "durationMs": 60000,
+      "commentCount": 707,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 706,
+        "liveChatPaidMessageRenderer": 1
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 707,
+      "relativeToStreamBaseline": 1.2024325926180435,
+      "velocityRank": 34
+    },
+    {
+      "minuteIndex": 96,
+      "sourceStartMs": 5760000,
+      "sourceEndMs": 5820000,
+      "durationMs": 60000,
+      "commentCount": 577,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 577
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 577,
+      "relativeToStreamBaseline": 0.9813346618679082,
+      "velocityRank": 109
+    },
+    {
+      "minuteIndex": 97,
+      "sourceStartMs": 5820000,
+      "sourceEndMs": 5880000,
+      "durationMs": 60000,
+      "commentCount": 677,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 677
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 677,
+      "relativeToStreamBaseline": 1.1514099932141661,
+      "velocityRank": 54
+    },
+    {
+      "minuteIndex": 98,
+      "sourceStartMs": 5880000,
+      "sourceEndMs": 5940000,
+      "durationMs": 60000,
+      "commentCount": 470,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 470
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 470,
+      "relativeToStreamBaseline": 0.7993540573274122,
+      "velocityRank": 157
+    },
+    {
+      "minuteIndex": 99,
+      "sourceStartMs": 5940000,
+      "sourceEndMs": 6000000,
+      "durationMs": 60000,
+      "commentCount": 574,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 574
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 574,
+      "relativeToStreamBaseline": 0.9762324019275205,
+      "velocityRank": 113
+    },
+    {
+      "minuteIndex": 100,
+      "sourceStartMs": 6000000,
+      "sourceEndMs": 6060000,
+      "durationMs": 60000,
+      "commentCount": 619,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 619
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 619,
+      "relativeToStreamBaseline": 1.0527663010333366,
+      "velocityRank": 85
+    },
+    {
+      "minuteIndex": 101,
+      "sourceStartMs": 6060000,
+      "sourceEndMs": 6120000,
+      "durationMs": 60000,
+      "commentCount": 478,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 478
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 478,
+      "relativeToStreamBaseline": 0.8129600838351129,
+      "velocityRank": 154
+    },
+    {
+      "minuteIndex": 102,
+      "sourceStartMs": 6120000,
+      "sourceEndMs": 6180000,
+      "durationMs": 60000,
+      "commentCount": 438,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 434,
+        "liveChatPaidMessageRenderer": 3,
+        "liveChatMembershipItemRenderer": 1
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 438,
+      "relativeToStreamBaseline": 0.7449299512966097,
+      "velocityRank": 170
+    },
+    {
+      "minuteIndex": 103,
+      "sourceStartMs": 6180000,
+      "sourceEndMs": 6240000,
+      "durationMs": 60000,
+      "commentCount": 528,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 524,
+        "liveChatPaidMessageRenderer": 2,
+        "liveChatMembershipItemRenderer": 2
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 528,
+      "relativeToStreamBaseline": 0.8979977495082418,
+      "velocityRank": 138
+    },
+    {
+      "minuteIndex": 104,
+      "sourceStartMs": 6240000,
+      "sourceEndMs": 6300000,
+      "durationMs": 60000,
+      "commentCount": 623,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 623
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 623,
+      "relativeToStreamBaseline": 1.059569314287187,
+      "velocityRank": 83
+    },
+    {
+      "minuteIndex": 105,
+      "sourceStartMs": 6300000,
+      "sourceEndMs": 6360000,
+      "durationMs": 60000,
+      "commentCount": 654,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 654
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 654,
+      "relativeToStreamBaseline": 1.1122926670045268,
+      "velocityRank": 67
+    },
+    {
+      "minuteIndex": 106,
+      "sourceStartMs": 6360000,
+      "sourceEndMs": 6420000,
+      "durationMs": 60000,
+      "commentCount": 683,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 683
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 683,
+      "relativeToStreamBaseline": 1.1616145130949416,
+      "velocityRank": 46
+    },
+    {
+      "minuteIndex": 107,
+      "sourceStartMs": 6420000,
+      "sourceEndMs": 6480000,
+      "durationMs": 60000,
+      "commentCount": 473,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 473
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 473,
+      "relativeToStreamBaseline": 0.8044563172678,
+      "velocityRank": 155
+    },
+    {
+      "minuteIndex": 108,
+      "sourceStartMs": 6480000,
+      "sourceEndMs": 6540000,
+      "durationMs": 60000,
+      "commentCount": 707,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 707
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 707,
+      "relativeToStreamBaseline": 1.2024325926180435,
+      "velocityRank": 35
+    },
+    {
+      "minuteIndex": 109,
+      "sourceStartMs": 6540000,
+      "sourceEndMs": 6600000,
+      "durationMs": 60000,
+      "commentCount": 680,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 680
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 680,
+      "relativeToStreamBaseline": 1.1565122531545537,
+      "velocityRank": 50
+    },
+    {
+      "minuteIndex": 110,
+      "sourceStartMs": 6600000,
+      "sourceEndMs": 6660000,
+      "durationMs": 60000,
+      "commentCount": 770,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 770
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 770,
+      "relativeToStreamBaseline": 1.309580051366186,
+      "velocityRank": 7
+    },
+    {
+      "minuteIndex": 111,
+      "sourceStartMs": 6660000,
+      "sourceEndMs": 6720000,
+      "durationMs": 60000,
+      "commentCount": 671,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 670,
+        "liveChatMembershipItemRenderer": 1
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 671,
+      "relativeToStreamBaseline": 1.1412054733333907,
+      "velocityRank": 60
+    },
+    {
+      "minuteIndex": 112,
+      "sourceStartMs": 6720000,
+      "sourceEndMs": 6780000,
+      "durationMs": 60000,
+      "commentCount": 652,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 652
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 652,
+      "relativeToStreamBaseline": 1.1088911603776017,
+      "velocityRank": 69
+    },
+    {
+      "minuteIndex": 113,
+      "sourceStartMs": 6780000,
+      "sourceEndMs": 6840000,
+      "durationMs": 60000,
+      "commentCount": 745,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 745
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 745,
+      "relativeToStreamBaseline": 1.2670612185296215,
+      "velocityRank": 16
+    },
+    {
+      "minuteIndex": 114,
+      "sourceStartMs": 6840000,
+      "sourceEndMs": 6900000,
+      "durationMs": 60000,
+      "commentCount": 628,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 628
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 628,
+      "relativeToStreamBaseline": 1.0680730808544998,
+      "velocityRank": 81
+    },
+    {
+      "minuteIndex": 115,
+      "sourceStartMs": 6900000,
+      "sourceEndMs": 6960000,
+      "durationMs": 60000,
+      "commentCount": 666,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 665,
+        "liveChatMembershipItemRenderer": 1
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 666,
+      "relativeToStreamBaseline": 1.1327017067660776,
+      "velocityRank": 63
+    },
+    {
+      "minuteIndex": 116,
+      "sourceStartMs": 6960000,
+      "sourceEndMs": 7020000,
+      "durationMs": 60000,
+      "commentCount": 686,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 686
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 686,
+      "relativeToStreamBaseline": 1.1667167730353294,
+      "velocityRank": 45
+    },
+    {
+      "minuteIndex": 117,
+      "sourceStartMs": 7020000,
+      "sourceEndMs": 7080000,
+      "durationMs": 60000,
+      "commentCount": 496,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 496
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 496,
+      "relativeToStreamBaseline": 0.8435736434774392,
+      "velocityRank": 149
+    },
+    {
+      "minuteIndex": 118,
+      "sourceStartMs": 7080000,
+      "sourceEndMs": 7140000,
+      "durationMs": 60000,
+      "commentCount": 597,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 597
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 597,
+      "relativeToStreamBaseline": 1.0153497281371597,
+      "velocityRank": 92
+    },
+    {
+      "minuteIndex": 119,
+      "sourceStartMs": 7140000,
+      "sourceEndMs": 7200000,
+      "durationMs": 60000,
+      "commentCount": 456,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 456
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 456,
+      "relativeToStreamBaseline": 0.7755435109389361,
+      "velocityRank": 163
+    },
+    {
+      "minuteIndex": 120,
+      "sourceStartMs": 7200000,
+      "sourceEndMs": 7260000,
+      "durationMs": 60000,
+      "commentCount": 549,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 549
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 549,
+      "relativeToStreamBaseline": 0.9337135690909559,
+      "velocityRank": 127
+    },
+    {
+      "minuteIndex": 121,
+      "sourceStartMs": 7260000,
+      "sourceEndMs": 7320000,
+      "durationMs": 60000,
+      "commentCount": 687,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 687
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 687,
+      "relativeToStreamBaseline": 1.168417526348792,
+      "velocityRank": 44
+    },
+    {
+      "minuteIndex": 122,
+      "sourceStartMs": 7320000,
+      "sourceEndMs": 7380000,
+      "durationMs": 60000,
+      "commentCount": 721,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 721
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 721,
+      "relativeToStreamBaseline": 1.2262431390065196,
+      "velocityRank": 25
+    },
+    {
+      "minuteIndex": 123,
+      "sourceStartMs": 7380000,
+      "sourceEndMs": 7440000,
+      "durationMs": 60000,
+      "commentCount": 705,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 705
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 705,
+      "relativeToStreamBaseline": 1.1990310859911184,
+      "velocityRank": 37
+    },
+    {
+      "minuteIndex": 124,
+      "sourceStartMs": 7440000,
+      "sourceEndMs": 7500000,
+      "durationMs": 60000,
+      "commentCount": 674,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 674
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 674,
+      "relativeToStreamBaseline": 1.1463077332737783,
+      "velocityRank": 59
+    },
+    {
+      "minuteIndex": 125,
+      "sourceStartMs": 7500000,
+      "sourceEndMs": 7560000,
+      "durationMs": 60000,
+      "commentCount": 471,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 471
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 471,
+      "relativeToStreamBaseline": 0.8010548106408748,
+      "velocityRank": 156
+    },
+    {
+      "minuteIndex": 126,
+      "sourceStartMs": 7560000,
+      "sourceEndMs": 7620000,
+      "durationMs": 60000,
+      "commentCount": 605,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 605
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 605,
+      "relativeToStreamBaseline": 1.0289557546448604,
+      "velocityRank": 89
+    },
+    {
+      "minuteIndex": 127,
+      "sourceStartMs": 7620000,
+      "sourceEndMs": 7680000,
+      "durationMs": 60000,
+      "commentCount": 441,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 441
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 441,
+      "relativeToStreamBaseline": 0.7500322112369974,
+      "velocityRank": 168
+    },
+    {
+      "minuteIndex": 128,
+      "sourceStartMs": 7680000,
+      "sourceEndMs": 7740000,
+      "durationMs": 60000,
+      "commentCount": 604,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 604
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 604,
+      "relativeToStreamBaseline": 1.027255001331398,
+      "velocityRank": 90
+    },
+    {
+      "minuteIndex": 129,
+      "sourceStartMs": 7740000,
+      "sourceEndMs": 7800000,
+      "durationMs": 60000,
+      "commentCount": 580,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 580
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 580,
+      "relativeToStreamBaseline": 0.9864369218082959,
+      "velocityRank": 106
+    },
+    {
+      "minuteIndex": 130,
+      "sourceStartMs": 7800000,
+      "sourceEndMs": 7860000,
+      "durationMs": 60000,
+      "commentCount": 706,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 706
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 706,
+      "relativeToStreamBaseline": 1.200731839304581,
+      "velocityRank": 36
+    },
+    {
+      "minuteIndex": 131,
+      "sourceStartMs": 7860000,
+      "sourceEndMs": 7920000,
+      "durationMs": 60000,
+      "commentCount": 553,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 553
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 553,
+      "relativeToStreamBaseline": 0.9405165823448063,
+      "velocityRank": 126
+    },
+    {
+      "minuteIndex": 132,
+      "sourceStartMs": 7920000,
+      "sourceEndMs": 7980000,
+      "durationMs": 60000,
+      "commentCount": 589,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 589
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 589,
+      "relativeToStreamBaseline": 1.001743701629459,
+      "velocityRank": 98
+    },
+    {
+      "minuteIndex": 133,
+      "sourceStartMs": 7980000,
+      "sourceEndMs": 8040000,
+      "durationMs": 60000,
+      "commentCount": 592,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 592
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 592,
+      "relativeToStreamBaseline": 1.0068459615698468,
+      "velocityRank": 94
+    },
+    {
+      "minuteIndex": 134,
+      "sourceStartMs": 8040000,
+      "sourceEndMs": 8100000,
+      "durationMs": 60000,
+      "commentCount": 439,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 439
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 439,
+      "relativeToStreamBaseline": 0.7466307046100723,
+      "velocityRank": 169
+    },
+    {
+      "minuteIndex": 135,
+      "sourceStartMs": 8100000,
+      "sourceEndMs": 8160000,
+      "durationMs": 60000,
+      "commentCount": 554,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 554
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 554,
+      "relativeToStreamBaseline": 0.9422173356582688,
+      "velocityRank": 125
+    },
+    {
+      "minuteIndex": 136,
+      "sourceStartMs": 8160000,
+      "sourceEndMs": 8220000,
+      "durationMs": 60000,
+      "commentCount": 678,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 678
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 678,
+      "relativeToStreamBaseline": 1.1531107465276287,
+      "velocityRank": 52
+    },
+    {
+      "minuteIndex": 137,
+      "sourceStartMs": 8220000,
+      "sourceEndMs": 8280000,
+      "durationMs": 60000,
+      "commentCount": 722,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 722
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 722,
+      "relativeToStreamBaseline": 1.2279438923199821,
+      "velocityRank": 24
+    },
+    {
+      "minuteIndex": 138,
+      "sourceStartMs": 8280000,
+      "sourceEndMs": 8340000,
+      "durationMs": 60000,
+      "commentCount": 708,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 708
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 708,
+      "relativeToStreamBaseline": 1.204133345931506,
+      "velocityRank": 31
+    },
+    {
+      "minuteIndex": 139,
+      "sourceStartMs": 8340000,
+      "sourceEndMs": 8400000,
+      "durationMs": 60000,
+      "commentCount": 549,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 549
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 549,
+      "relativeToStreamBaseline": 0.9337135690909559,
+      "velocityRank": 128
+    },
+    {
+      "minuteIndex": 140,
+      "sourceStartMs": 8400000,
+      "sourceEndMs": 8460000,
+      "durationMs": 60000,
+      "commentCount": 449,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 449
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 449,
+      "relativeToStreamBaseline": 0.7636382377446981,
+      "velocityRank": 166
+    },
+    {
+      "minuteIndex": 141,
+      "sourceStartMs": 8460000,
+      "sourceEndMs": 8520000,
+      "durationMs": 60000,
+      "commentCount": 416,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 416
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 416,
+      "relativeToStreamBaseline": 0.7075133784004329,
+      "velocityRank": 176
+    },
+    {
+      "minuteIndex": 142,
+      "sourceStartMs": 8520000,
+      "sourceEndMs": 8580000,
+      "durationMs": 60000,
+      "commentCount": 592,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 591,
+        "liveChatMembershipItemRenderer": 1
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 592,
+      "relativeToStreamBaseline": 1.0068459615698468,
+      "velocityRank": 95
+    },
+    {
+      "minuteIndex": 143,
+      "sourceStartMs": 8580000,
+      "sourceEndMs": 8640000,
+      "durationMs": 60000,
+      "commentCount": 485,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 485
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 485,
+      "relativeToStreamBaseline": 0.8248653570293509,
+      "velocityRank": 152
+    },
+    {
+      "minuteIndex": 144,
+      "sourceStartMs": 8640000,
+      "sourceEndMs": 8700000,
+      "durationMs": 60000,
+      "commentCount": 524,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 524
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 524,
+      "relativeToStreamBaseline": 0.8911947362543915,
+      "velocityRank": 140
+    },
+    {
+      "minuteIndex": 145,
+      "sourceStartMs": 8700000,
+      "sourceEndMs": 8760000,
+      "durationMs": 60000,
+      "commentCount": 302,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 302
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 302,
+      "relativeToStreamBaseline": 0.513627500665699,
+      "velocityRank": 193
+    },
+    {
+      "minuteIndex": 146,
+      "sourceStartMs": 8760000,
+      "sourceEndMs": 8820000,
+      "durationMs": 60000,
+      "commentCount": 413,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 413
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 413,
+      "relativeToStreamBaseline": 0.7024111184600452,
+      "velocityRank": 177
+    },
+    {
+      "minuteIndex": 147,
+      "sourceStartMs": 8820000,
+      "sourceEndMs": 8880000,
+      "durationMs": 60000,
+      "commentCount": 263,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 263
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 263,
+      "relativeToStreamBaseline": 0.44729812144065834,
+      "velocityRank": 196
+    },
+    {
+      "minuteIndex": 148,
+      "sourceStartMs": 8880000,
+      "sourceEndMs": 8940000,
+      "durationMs": 60000,
+      "commentCount": 520,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 520
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 520,
+      "relativeToStreamBaseline": 0.8843917230005411,
+      "velocityRank": 141
+    },
+    {
+      "minuteIndex": 149,
+      "sourceStartMs": 8940000,
+      "sourceEndMs": 9000000,
+      "durationMs": 60000,
+      "commentCount": 467,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 467
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 467,
+      "relativeToStreamBaseline": 0.7942517973870244,
+      "velocityRank": 159
+    },
+    {
+      "minuteIndex": 150,
+      "sourceStartMs": 9000000,
+      "sourceEndMs": 9060000,
+      "durationMs": 60000,
+      "commentCount": 520,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 520
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 520,
+      "relativeToStreamBaseline": 0.8843917230005411,
+      "velocityRank": 142
+    },
+    {
+      "minuteIndex": 151,
+      "sourceStartMs": 9060000,
+      "sourceEndMs": 9120000,
+      "durationMs": 60000,
+      "commentCount": 350,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 350
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 350,
+      "relativeToStreamBaseline": 0.5952636597119028,
+      "velocityRank": 189
+    },
+    {
+      "minuteIndex": 152,
+      "sourceStartMs": 9120000,
+      "sourceEndMs": 9180000,
+      "durationMs": 60000,
+      "commentCount": 708,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 708
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 708,
+      "relativeToStreamBaseline": 1.204133345931506,
+      "velocityRank": 32
+    },
+    {
+      "minuteIndex": 153,
+      "sourceStartMs": 9180000,
+      "sourceEndMs": 9240000,
+      "durationMs": 60000,
+      "commentCount": 675,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 675
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 675,
+      "relativeToStreamBaseline": 1.1480084865872409,
+      "velocityRank": 57
+    },
+    {
+      "minuteIndex": 154,
+      "sourceStartMs": 9240000,
+      "sourceEndMs": 9300000,
+      "durationMs": 60000,
+      "commentCount": 361,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 361
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 361,
+      "relativeToStreamBaseline": 0.6139719461599911,
+      "velocityRank": 187
+    },
+    {
+      "minuteIndex": 155,
+      "sourceStartMs": 9300000,
+      "sourceEndMs": 9360000,
+      "durationMs": 60000,
+      "commentCount": 343,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 343
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 343,
+      "relativeToStreamBaseline": 0.5833583865176647,
+      "velocityRank": 190
+    },
+    {
+      "minuteIndex": 156,
+      "sourceStartMs": 9360000,
+      "sourceEndMs": 9420000,
+      "durationMs": 60000,
+      "commentCount": 434,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 434
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 434,
+      "relativeToStreamBaseline": 0.7381269380427594,
+      "velocityRank": 171
+    },
+    {
+      "minuteIndex": 157,
+      "sourceStartMs": 9420000,
+      "sourceEndMs": 9480000,
+      "durationMs": 60000,
+      "commentCount": 410,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 410
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 410,
+      "relativeToStreamBaseline": 0.6973088585196575,
+      "velocityRank": 180
+    },
+    {
+      "minuteIndex": 158,
+      "sourceStartMs": 9480000,
+      "sourceEndMs": 9540000,
+      "durationMs": 60000,
+      "commentCount": 635,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 635
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 635,
+      "relativeToStreamBaseline": 1.0799783540487378,
+      "velocityRank": 79
+    },
+    {
+      "minuteIndex": 159,
+      "sourceStartMs": 9540000,
+      "sourceEndMs": 9600000,
+      "durationMs": 60000,
+      "commentCount": 560,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 560
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 560,
+      "relativeToStreamBaseline": 0.9524218555390443,
+      "velocityRank": 123
+    },
+    {
+      "minuteIndex": 160,
+      "sourceStartMs": 9600000,
+      "sourceEndMs": 9660000,
+      "durationMs": 60000,
+      "commentCount": 342,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 342
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 342,
+      "relativeToStreamBaseline": 0.581657633204202,
+      "velocityRank": 191
+    },
+    {
+      "minuteIndex": 161,
+      "sourceStartMs": 9660000,
+      "sourceEndMs": 9720000,
+      "durationMs": 60000,
+      "commentCount": 378,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 378
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 378,
+      "relativeToStreamBaseline": 0.6428847524888549,
+      "velocityRank": 185
+    },
+    {
+      "minuteIndex": 162,
+      "sourceStartMs": 9720000,
+      "sourceEndMs": 9780000,
+      "durationMs": 60000,
+      "commentCount": 424,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 424
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 424,
+      "relativeToStreamBaseline": 0.7211194049081335,
+      "velocityRank": 173
+    },
+    {
+      "minuteIndex": 163,
+      "sourceStartMs": 9780000,
+      "sourceEndMs": 9840000,
+      "durationMs": 60000,
+      "commentCount": 442,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 442
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 442,
+      "relativeToStreamBaseline": 0.75173296455046,
+      "velocityRank": 167
+    },
+    {
+      "minuteIndex": 164,
+      "sourceStartMs": 9840000,
+      "sourceEndMs": 9900000,
+      "durationMs": 60000,
+      "commentCount": 372,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 372
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 372,
+      "relativeToStreamBaseline": 0.6326802326080795,
+      "velocityRank": 186
+    },
+    {
+      "minuteIndex": 165,
+      "sourceStartMs": 9900000,
+      "sourceEndMs": 9960000,
+      "durationMs": 60000,
+      "commentCount": 590,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 590
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 590,
+      "relativeToStreamBaseline": 1.0034444549429218,
+      "velocityRank": 97
+    },
+    {
+      "minuteIndex": 166,
+      "sourceStartMs": 9960000,
+      "sourceEndMs": 10020000,
+      "durationMs": 60000,
+      "commentCount": 502,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 502
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 502,
+      "relativeToStreamBaseline": 0.8537781633582148,
+      "velocityRank": 148
+    },
+    {
+      "minuteIndex": 167,
+      "sourceStartMs": 10020000,
+      "sourceEndMs": 10080000,
+      "durationMs": 60000,
+      "commentCount": 532,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 532
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 532,
+      "relativeToStreamBaseline": 0.9048007627620921,
+      "velocityRank": 136
+    },
+    {
+      "minuteIndex": 168,
+      "sourceStartMs": 10080000,
+      "sourceEndMs": 10140000,
+      "durationMs": 60000,
+      "commentCount": 567,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 567
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 567,
+      "relativeToStreamBaseline": 0.9643271287332824,
+      "velocityRank": 118
+    },
+    {
+      "minuteIndex": 169,
+      "sourceStartMs": 10140000,
+      "sourceEndMs": 10200000,
+      "durationMs": 60000,
+      "commentCount": 528,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 528
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 528,
+      "relativeToStreamBaseline": 0.8979977495082418,
+      "velocityRank": 139
+    },
+    {
+      "minuteIndex": 170,
+      "sourceStartMs": 10200000,
+      "sourceEndMs": 10260000,
+      "durationMs": 60000,
+      "commentCount": 597,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 597
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 597,
+      "relativeToStreamBaseline": 1.0153497281371597,
+      "velocityRank": 93
+    },
+    {
+      "minuteIndex": 171,
+      "sourceStartMs": 10260000,
+      "sourceEndMs": 10320000,
+      "durationMs": 60000,
+      "commentCount": 576,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 576
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 576,
+      "relativeToStreamBaseline": 0.9796339085544457,
+      "velocityRank": 111
+    },
+    {
+      "minuteIndex": 172,
+      "sourceStartMs": 10320000,
+      "sourceEndMs": 10380000,
+      "durationMs": 60000,
+      "commentCount": 755,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 755
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 755,
+      "relativeToStreamBaseline": 1.2840687516642473,
+      "velocityRank": 11
+    },
+    {
+      "minuteIndex": 173,
+      "sourceStartMs": 10380000,
+      "sourceEndMs": 10440000,
+      "durationMs": 60000,
+      "commentCount": 758,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 758
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 758,
+      "relativeToStreamBaseline": 1.289171011604635,
+      "velocityRank": 9
+    },
+    {
+      "minuteIndex": 174,
+      "sourceStartMs": 10440000,
+      "sourceEndMs": 10500000,
+      "durationMs": 60000,
+      "commentCount": 678,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 678
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 678,
+      "relativeToStreamBaseline": 1.1531107465276287,
+      "velocityRank": 53
+    },
+    {
+      "minuteIndex": 175,
+      "sourceStartMs": 10500000,
+      "sourceEndMs": 10560000,
+      "durationMs": 60000,
+      "commentCount": 749,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 748,
+        "liveChatMembershipItemRenderer": 1
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 749,
+      "relativeToStreamBaseline": 1.2738642317834719,
+      "velocityRank": 14
+    },
+    {
+      "minuteIndex": 176,
+      "sourceStartMs": 10560000,
+      "sourceEndMs": 10620000,
+      "durationMs": 60000,
+      "commentCount": 757,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 756,
+        "liveChatMembershipItemRenderer": 1
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 757,
+      "relativeToStreamBaseline": 1.2874702582911723,
+      "velocityRank": 10
+    },
+    {
+      "minuteIndex": 177,
+      "sourceStartMs": 10620000,
+      "sourceEndMs": 10680000,
+      "durationMs": 60000,
+      "commentCount": 808,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 807,
+        "liveChatPaidMessageRenderer": 1
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 808,
+      "relativeToStreamBaseline": 1.374208677277764,
+      "velocityRank": 4
+    },
+    {
+      "minuteIndex": 178,
+      "sourceStartMs": 10680000,
+      "sourceEndMs": 10740000,
+      "durationMs": 60000,
+      "commentCount": 765,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 765
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 765,
+      "relativeToStreamBaseline": 1.301076284798873,
+      "velocityRank": 8
+    },
+    {
+      "minuteIndex": 179,
+      "sourceStartMs": 10740000,
+      "sourceEndMs": 10800000,
+      "durationMs": 60000,
+      "commentCount": 752,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 751,
+        "liveChatMembershipItemRenderer": 1
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 752,
+      "relativeToStreamBaseline": 1.2789664917238595,
+      "velocityRank": 13
+    },
+    {
+      "minuteIndex": 180,
+      "sourceStartMs": 10800000,
+      "sourceEndMs": 10860000,
+      "durationMs": 60000,
+      "commentCount": 692,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 691,
+        "liveChatPaidMessageRenderer": 1
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 692,
+      "relativeToStreamBaseline": 1.1769212929161048,
+      "velocityRank": 43
+    },
+    {
+      "minuteIndex": 181,
+      "sourceStartMs": 10860000,
+      "sourceEndMs": 10920000,
+      "durationMs": 60000,
+      "commentCount": 708,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 708
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 708,
+      "relativeToStreamBaseline": 1.204133345931506,
+      "velocityRank": 33
+    },
+    {
+      "minuteIndex": 182,
+      "sourceStartMs": 10920000,
+      "sourceEndMs": 10980000,
+      "durationMs": 60000,
+      "commentCount": 681,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 681
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 681,
+      "relativeToStreamBaseline": 1.1582130064680165,
+      "velocityRank": 48
+    },
+    {
+      "minuteIndex": 183,
+      "sourceStartMs": 10980000,
+      "sourceEndMs": 11040000,
+      "durationMs": 60000,
+      "commentCount": 723,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 722,
+        "liveChatMembershipItemRenderer": 1
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 723,
+      "relativeToStreamBaseline": 1.2296446456334447,
+      "velocityRank": 23
+    },
+    {
+      "minuteIndex": 184,
+      "sourceStartMs": 11040000,
+      "sourceEndMs": 11100000,
+      "durationMs": 60000,
+      "commentCount": 793,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 791,
+        "liveChatPaidMessageRenderer": 1,
+        "liveChatMembershipItemRenderer": 1
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 793,
+      "relativeToStreamBaseline": 1.3486973775758253,
+      "velocityRank": 5
+    },
+    {
+      "minuteIndex": 185,
+      "sourceStartMs": 11100000,
+      "sourceEndMs": 11160000,
+      "durationMs": 60000,
+      "commentCount": 743,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 741,
+        "liveChatSponsorshipsGiftPurchaseAnnouncementRenderer": 1,
+        "liveChatSponsorshipsGiftRedemptionAnnouncementRenderer": 1
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 743,
+      "relativeToStreamBaseline": 1.2636597119026964,
+      "velocityRank": 17
+    },
+    {
+      "minuteIndex": 186,
+      "sourceStartMs": 11160000,
+      "sourceEndMs": 11220000,
+      "durationMs": 60000,
+      "commentCount": 864,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 862,
+        "liveChatPaidMessageRenderer": 1,
+        "liveChatMembershipItemRenderer": 1
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 864,
+      "relativeToStreamBaseline": 1.4694508628316685,
+      "velocityRank": 3
+    },
+    {
+      "minuteIndex": 187,
+      "sourceStartMs": 11220000,
+      "sourceEndMs": 11280000,
+      "durationMs": 60000,
+      "commentCount": 709,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 707,
+        "liveChatPaidMessageRenderer": 2
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 709,
+      "relativeToStreamBaseline": 1.2058340992449685,
+      "velocityRank": 29
+    },
+    {
+      "minuteIndex": 188,
+      "sourceStartMs": 11280000,
+      "sourceEndMs": 11340000,
+      "durationMs": 60000,
+      "commentCount": 583,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 583
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 583,
+      "relativeToStreamBaseline": 0.9915391817486836,
+      "velocityRank": 104
+    },
+    {
+      "minuteIndex": 189,
+      "sourceStartMs": 11340000,
+      "sourceEndMs": 11400000,
+      "durationMs": 60000,
+      "commentCount": 409,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 409
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 409,
+      "relativeToStreamBaseline": 0.6956081052061949,
+      "velocityRank": 181
+    },
+    {
+      "minuteIndex": 190,
+      "sourceStartMs": 11400000,
+      "sourceEndMs": 11460000,
+      "durationMs": 60000,
+      "commentCount": 616,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 616
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 616,
+      "relativeToStreamBaseline": 1.0476640410929488,
+      "velocityRank": 86
+    },
+    {
+      "minuteIndex": 191,
+      "sourceStartMs": 11460000,
+      "sourceEndMs": 11520000,
+      "durationMs": 60000,
+      "commentCount": 579,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 579
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 579,
+      "relativeToStreamBaseline": 0.9847361684948334,
+      "velocityRank": 108
+    },
+    {
+      "minuteIndex": 192,
+      "sourceStartMs": 11520000,
+      "sourceEndMs": 11580000,
+      "durationMs": 60000,
+      "commentCount": 676,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 676
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 676,
+      "relativeToStreamBaseline": 1.1497092399007036,
+      "velocityRank": 56
+    },
+    {
+      "minuteIndex": 193,
+      "sourceStartMs": 11580000,
+      "sourceEndMs": 11640000,
+      "durationMs": 60000,
+      "commentCount": 546,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 546
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 546,
+      "relativeToStreamBaseline": 0.9286113091505682,
+      "velocityRank": 129
+    },
+    {
+      "minuteIndex": 194,
+      "sourceStartMs": 11640000,
+      "sourceEndMs": 11700000,
+      "durationMs": 60000,
+      "commentCount": 577,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 577
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 577,
+      "relativeToStreamBaseline": 0.9813346618679082,
+      "velocityRank": 110
+    },
+    {
+      "minuteIndex": 195,
+      "sourceStartMs": 11700000,
+      "sourceEndMs": 11760000,
+      "durationMs": 60000,
+      "commentCount": 1278,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 1278
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 1278,
+      "relativeToStreamBaseline": 2.1735627346051762,
+      "velocityRank": 2
+    },
+    {
+      "minuteIndex": 196,
+      "sourceStartMs": 11760000,
+      "sourceEndMs": 11820000,
+      "durationMs": 60000,
+      "commentCount": 1548,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 1546,
+        "liveChatMembershipItemRenderer": 1,
+        "liveChatPaidMessageRenderer": 1
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 1548,
+      "relativeToStreamBaseline": 2.6327661292400726,
+      "velocityRank": 1
+    },
+    {
+      "minuteIndex": 197,
+      "sourceStartMs": 11820000,
+      "sourceEndMs": 11880000,
+      "durationMs": 60000,
+      "commentCount": 695,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 693,
+        "liveChatMembershipItemRenderer": 1,
+        "liveChatPaidMessageRenderer": 1
+      },
+      "isFullMinute": true,
+      "commentRatePerMinute": 695,
+      "relativeToStreamBaseline": 1.1820235528564926,
+      "velocityRank": 42
+    },
+    {
+      "minuteIndex": 198,
+      "sourceStartMs": 11880000,
+      "sourceEndMs": 11898441,
+      "durationMs": 18441,
+      "commentCount": 282,
+      "rendererCounts": {
+        "liveChatTextMessageRenderer": 282
+      },
+      "isFullMinute": false,
+      "commentRatePerMinute": 917.5207418252805,
+      "relativeToStreamBaseline": 1.5604764418299895
+    }
+  ]
+}

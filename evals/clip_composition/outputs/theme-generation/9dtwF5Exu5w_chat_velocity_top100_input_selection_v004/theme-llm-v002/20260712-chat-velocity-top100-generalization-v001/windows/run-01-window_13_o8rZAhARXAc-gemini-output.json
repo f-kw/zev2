@@ -1,0 +1,64 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "チャンス場面での作戦選択に悩むマリン監督",
+      "reason": "得点圏のチャンスで「転がす」か「送りバント・スクイーズ」かで葛藤し、最終的に指示を出して成功を祈る一連の流れが切り抜きとして成立するため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6480278,
+          "sourceEndMs": 6525131,
+          "supportingSpeechIds": [
+            "643-652"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "「やればできるじゃない！」作戦成功に大喜びするマリン監督",
+      "reason": "悩んだ末の作戦が成功し、大興奮で選手を褒めちぎるリアクションの見どころがあるため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6525131,
+          "sourceEndMs": 6539920,
+          "supportingSpeechIds": [
+            "653-663"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_003",
+      "title": "「お前やれんのか！」次打者の能力値にハラハラするマリン監督",
+      "reason": "走力や戦術の数字を見て躊躇し、リスナーの「犠牲フライ」という提案に納得しながら次の作戦を思案する展開が描かれているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6540034,
+          "sourceEndMs": 6579774,
+          "supportingSpeechIds": [
+            "664-669"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-12T15:46:03+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_13_o8rZAhARXAc",
+    "windowSourceVideoId": "o8rZAhARXAc",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/9dtwF5Exu5w_chat_velocity_top100_input_selection_v004/theme-llm-v002/20260712-chat-velocity-top100-generalization-v001/windows/window_13_o8rZAhARXAc-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/be57b5b83ea96239?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"チャンス場面での作戦選択に悩むマリン監督\",\n      \"reason\": \"得点圏のチャンスで「転がす」か「送りバント・スクイーズ」かで葛藤し、最終的に指示を出して成功を祈る一連の流れが切り抜きとして成立するため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"o8rZAhARXAc\",\n          \"sourceStartMs\": 6480278,\n          \"sourceEndMs\": 6525131,\n          \"supportingSpeechIds\": [\n            \"643-652\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"「やればできるじゃない！」作戦成功に大喜びするマリン監督\",\n      \"reason\": \"悩んだ末の作戦が成功し、大興奮で選手を褒めちぎるリアクションの見どころがあるため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"o8rZAhARXAc\",\n          \"sourceStartMs\": 6525131,\n          \"sourceEndMs\": 6539920,\n          \"supportingSpeechIds\": [\n            \"653-663\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_003\",\n      \"title\": \"「お前やれんのか！」次打者の能力値にハラハラするマリン監督\",\n      \"reason\": \"走力や戦術の数字を見て躊躇し、リスナーの「犠牲フライ」という提案に納得しながら次の作戦を思案する展開が描かれているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"o8rZAhARXAc\",\n          \"sourceStartMs\": 6540034,\n          \"sourceEndMs\": 6579774,\n          \"supportingSpeechIds\": [\n            \"664-669\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

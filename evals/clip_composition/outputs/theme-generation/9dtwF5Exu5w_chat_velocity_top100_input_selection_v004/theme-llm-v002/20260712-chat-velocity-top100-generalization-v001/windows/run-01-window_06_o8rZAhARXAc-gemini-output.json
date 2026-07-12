@@ -1,0 +1,34 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "フブキのオリジナル変化球命名に悩むマリン",
+      "reason": "ホロライブ甲子園にて白上フブキのオリジナル変化球の名前を決める際、ホロウィッチでの技名や『スーパーノヴァ』といった候補を調べながら試行錯誤する一連のくだりが切り抜きとして成立するため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 3240258,
+          "sourceEndMs": 3554885,
+          "supportingSpeechIds": [
+            "323-342"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-12T15:36:54+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_06_o8rZAhARXAc",
+    "windowSourceVideoId": "o8rZAhARXAc",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/9dtwF5Exu5w_chat_velocity_top100_input_selection_v004/theme-llm-v002/20260712-chat-velocity-top100-generalization-v001/windows/window_06_o8rZAhARXAc-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/483ce5623edb83dc?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"フブキのオリジナル変化球命名に悩むマリン\",\n      \"reason\": \"ホロライブ甲子園にて白上フブキのオリジナル変化球の名前を決める際、ホロウィッチでの技名や『スーパーノヴァ』といった候補を調べながら試行錯誤する一連のくだりが切り抜きとして成立するため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"o8rZAhARXAc\",\n          \"sourceStartMs\": 3240258,\n          \"sourceEndMs\": 3554885,\n          \"supportingSpeechIds\": [\n            \"323-342\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

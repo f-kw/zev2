@@ -1,0 +1,34 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_002",
+      "title": "チャンスの場面で盗塁かスクイーズか悩み始めるマリン船長",
+      "reason": "走者の能力を見つつ、さらなる追加点を狙って盗塁かスクイーズのどちらを仕掛けるか激しく葛藤する場面です。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6660842,
+          "sourceEndMs": 6680196,
+          "supportingSpeechIds": [
+            "690-702"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-12T15:46:17+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_14_o8rZAhARXAc",
+    "windowSourceVideoId": "o8rZAhARXAc",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/9dtwF5Exu5w_chat_velocity_top100_input_selection_v004/theme-llm-v002/20260712-chat-velocity-top100-generalization-v001/windows/window_14_o8rZAhARXAc-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/0e8e483b43c6b17c?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"風向きとゲッツーを警戒しセンター返しを選択するマリン船長\",\n      \"reason\": \"強い風やゲッツーの可能性を考慮して戦術を悩みながらも、センター返しを選択して見事1点を先制する場面です。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"o8rZAhARXAc\",\n          \"sourceStartMs\": 6579774,\n          \"sourceEndMs\": 6557739,\n          \"supportingSpeechIds\": [\n            \"670-689\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"チャンスの場面で盗塁かスクイーズか悩み始めるマリン船長\",\n      \"reason\": \"走者の能力を見つつ、さらなる追加点を狙って盗塁かスクイーズのどちらを仕掛けるか激しく葛藤する場面です。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"o8rZAhARXAc\",\n          \"sourceStartMs\": 6660842,\n          \"sourceEndMs\": 6680196,\n          \"supportingSpeechIds\": [\n            \"690-702\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

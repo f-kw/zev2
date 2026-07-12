@@ -1,0 +1,49 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "限界すぎるヒリヒリした試合展開に絶叫する宝鐘マリン",
+      "reason": "試合の展開が限界を迎え、ヒリヒリした状況に耐えかねて嫌がる感情を爆発させている場面であるため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10395149,
+          "sourceEndMs": 10472384,
+          "supportingSpeechIds": [
+            "1146-1163"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "天野くんの好プレーに「ナイス」を連呼して大歓喜する宝鐘マリン",
+      "reason": "ピンチや緊迫した場面の後に、天野くんの活躍に対して狂喜乱舞しながら同じ言葉を繰り返し連呼している見どころのシーンであるため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10472384,
+          "sourceEndMs": 10491099,
+          "supportingSpeechIds": [
+            "1164-1177"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-12T15:58:37+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_23_o8rZAhARXAc",
+    "windowSourceVideoId": "o8rZAhARXAc",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/9dtwF5Exu5w_chat_velocity_top100_input_selection_v004/theme-llm-v002/20260712-chat-velocity-top100-generalization-v001/windows/window_23_o8rZAhARXAc-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/9fb1c9bc0dba1034?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"限界すぎるヒリヒリした試合展開に絶叫する宝鐘マリン\",\n      \"reason\": \"試合の展開が限界を迎え、ヒリヒリした状況に耐えかねて嫌がる感情を爆発させている場面であるため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"o8rZAhARXAc\",\n          \"sourceStartMs\": 10395149,\n          \"sourceEndMs\": 10472384,\n          \"supportingSpeechIds\": [\n            \"1146-1163\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"天野くんの好プレーに「ナイス」を連呼して大歓喜する宝鐘マリン\",\n      \"reason\": \"ピンチや緊迫した場面の後に、天野くんの活躍に対して狂喜乱舞しながら同じ言葉を繰り返し連呼している見どころのシーンであるため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"o8rZAhARXAc\",\n          \"sourceStartMs\": 10472384,\n          \"sourceEndMs\": 10491099,\n          \"supportingSpeechIds\": [\n            \"1164-1177\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

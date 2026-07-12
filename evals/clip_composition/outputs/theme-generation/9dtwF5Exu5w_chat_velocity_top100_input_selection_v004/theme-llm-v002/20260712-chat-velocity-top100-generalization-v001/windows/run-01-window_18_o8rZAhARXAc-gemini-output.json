@@ -1,0 +1,53 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "アイリス・プレアの連続スクイズ・伝令作戦と失敗",
+      "reason": "1点を取りに行くためにアイリスへのスクイズやプレアへの伝令を熟考して実行したものの、惜しくも打てずに終わるという一連の流れのドラマがあるため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 7381314,
+          "sourceEndMs": 7618940,
+          "supportingSpeechIds": [
+            "788-793",
+            797,
+            "798-801"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "ビトが「魔物」ではなく「ラッキーボーイ」でブチギレるマリン",
+      "reason": "期待していた固有戦術の「魔物」ではなく「ラッキーボーイ」が発動したビトに対して、マリンが激しいツッコミと怒りを露わにするリアクションが見どころだから。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 7618940,
+          "sourceEndMs": 7727619,
+          "supportingSpeechIds": [
+            802,
+            "806-810",
+            "813-817"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-12T15:52:21+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_18_o8rZAhARXAc",
+    "windowSourceVideoId": "o8rZAhARXAc",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/9dtwF5Exu5w_chat_velocity_top100_input_selection_v004/theme-llm-v002/20260712-chat-velocity-top100-generalization-v001/windows/window_18_o8rZAhARXAc-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/7dcbb2791a1c9fb7?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"アイリス・プレアの連続スクイズ・伝令作戦と失敗\",\n      \"reason\": \"1点を取りに行くためにアイリスへのスクイズやプレアへの伝令を熟考して実行したものの、惜しくも打てずに終わるという一連の流れのドラマがあるため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"o8rZAhARXAc\",\n          \"sourceStartMs\": 7381314,\n          \"sourceEndMs\": 7618940,\n          \"supportingSpeechIds\": [\"788-793\", 797, \"798-801\"]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"ビトが「魔物」ではなく「ラッキーボーイ」でブチギレるマリン\",\n      \"reason\": \"期待していた固有戦術の「魔物」ではなく「ラッキーボーイ」が発動したビトに対して、マリンが激しいツッコミと怒りを露わにするリアクションが見どころだから。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"o8rZAhARXAc\",\n          \"sourceStartMs\": 7618940,\n          \"sourceEndMs\": 7727619,\n          \"supportingSpeechIds\": [802, \"806-810\", \"813-817\"]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

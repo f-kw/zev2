@@ -1,0 +1,49 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "3年生ばかりのメンバーに喝を入れ甲子園必勝を誓うマリン船長",
+      "reason": "ホロメンの3年生が多いことに気づいたマリン船長が、甲子園で勝つことを条件にメンバーを鼓舞する一連の展開が切り抜きとして見どころになるため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 5049464,
+          "sourceEndMs": 5093371,
+          "supportingSpeechIds": [
+            "479-494"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "チャットの指示で対戦相手を選んだ結果、Bランクの高校を引いて焦るシーン",
+      "reason": "リスナー（キャージー）に選択を委ねた結果、手強いBランクの「ざまみ商業高校」を引き当ててしまい動揺するリアクションが面白いため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 5701367,
+          "sourceEndMs": 5755602,
+          "supportingSpeechIds": [
+            "565-572"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-12T15:45:35+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_11_o8rZAhARXAc",
+    "windowSourceVideoId": "o8rZAhARXAc",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/9dtwF5Exu5w_chat_velocity_top100_input_selection_v004/theme-llm-v002/20260712-chat-velocity-top100-generalization-v001/windows/window_11_o8rZAhARXAc-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/309ac2a85415ceaa?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"3年生ばかりのメンバーに喝を入れ甲子園必勝を誓うマリン船長\",\n      \"reason\": \"ホロメンの3年生が多いことに気づいたマリン船長が、甲子園で勝つことを条件にメンバーを鼓舞する一連の展開が切り抜きとして見どころになるため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"o8rZAhARXAc\",\n          \"sourceStartMs\": 5049464,\n          \"sourceEndMs\": 5093371,\n          \"supportingSpeechIds\": [\n            \"479-494\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"チャットの指示で対戦相手を選んだ結果、Bランクの高校を引いて焦るシーン\",\n      \"reason\": \"リスナー（キャージー）に選択を委ねた結果、手強いBランクの「ざまみ商業高校」を引き当ててしまい動揺するリアクションが面白いため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"o8rZAhARXAc\",\n          \"sourceStartMs\": 5701367,\n          \"sourceEndMs\": 5755602,\n          \"supportingSpeechIds\": [\n            \"565-572\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

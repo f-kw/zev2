@@ -250,12 +250,6 @@ function topNSimulation(facts, ranked) {
 }
 
 function reportMarkdown(result) {
-  const top50 = result.simulations.find((entry) => entry.selectionCount === 50);
-  const decision = top50.includedExpectedCount >= 10
-    ? '流速上位50で10/13以上のため、次案は input-selection-v004（チャット流速ベース）。'
-    : top50.includedExpectedCount < 8
-      ? '流速上位50で8/13未満のため、次案は二段LLM粗選定。'
-      : '流速上位50が8/13または9/13のため、チャット流速案と二段LLM粗選定案を併記して人間判断へ回す。';
   const expectedRows = result.expectedFacts.map((fact) => (
     `| ${fact.expectedIndex} | ${fact.label} | ${formatTime(fact.sourceStartMs)}–${formatTime(fact.sourceEndMs)} | ${fact.bestVelocityRank ?? '—'} | ${fact.bestMinuteIndex ?? '—'} | ${fact.bestRelativeToStreamBaseline === null ? '—' : fixed(fact.bestRelativeToStreamBaseline)} |`
   ));
@@ -265,13 +259,13 @@ function reportMarkdown(result) {
   const minuteRows = result.minuteSeries.map((bin) => (
     `| ${bin.minuteIndex} | ${formatTime(bin.sourceStartMs)}–${formatTime(bin.sourceEndMs)} | ${bin.commentCount} | ${fixed(bin.commentRatePerMinute)} | ${fixed(bin.relativeToStreamBaseline)} | ${bin.velocityRank ?? '対象外'} | ${bin.isFullMinute ? '1分' : `${fixed(bin.durationMs / 1000, 3)}秒`} |`
   ));
-  return `# B素材 チャット流速机上検証
+  return `# ${result.sourceVideoId} チャット流速入力可視性
 
 ## 結論
 
 - チャットリプレイは取得できた。JSON Lines ${result.acquisition.lineCount}行を全件読め、JSON解析失敗は${result.acquisition.parseErrorCount}件。
 - 配信内の完全な1分区間は${result.baseline.fullMinuteCount}件。各区間を配信内平均との比で順位付けし、絶対件数による足切りはしていない。
-- ${decision}
+- 上位50・100・150分で、凍結済みexpectedが入力内になる件数を機械計算した。ここでは閾値の採否を自動判断しない。
 - これは採点実走前の入力可視性シミュレーションであり、theme-llm-v002は実行していない。
 
 ## 数え方
@@ -300,7 +294,7 @@ function reportMarkdown(result) {
 
 raw取得物には投稿者名と本文が含まれるため、リポジトリの正本にはせず、集計値・ハッシュ・取得条件だけを記録する。今回の取得は評価環境の探索実験に限り、本体の正式D4チャットやfixture凍結根拠にはしない。
 
-## 正解13件と流速順位
+## 正解${result.expectedCount}件と流速順位
 
 「最良順位」は、その正解と重なる1分区間のうち流速順位が最も高いもの。
 

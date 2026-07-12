@@ -210,7 +210,7 @@ function reportMarkdown(result: ReturnType<typeof buildResult>): string {
     '| --- | ---: | ---: | --- |',
     `| 入力内expected | ${result.summary.inputVisible.hitCount} | ${result.summary.inputVisible.expectedCount} | モデルが入力文字として見られた正解だけの正式判定 |`,
     `| 入力外expected | ${result.summary.inputNotVisible.hitCount} | ${result.summary.inputNotVisible.expectedCount} | 原理的に入力から見えなかった正解。モデル失敗には数えない |`,
-    `| 全expected | ${result.summary.allExpected.hitCount} | ${result.summary.allExpected.expectedCount} | 13件全体を見た参考値 |`,
+    `| 全expected | ${result.summary.allExpected.hitCount} | ${result.summary.allExpected.expectedCount} | ${result.summary.allExpected.expectedCount}件全体を見た参考値 |`,
     '',
     '## 候補の失敗タイプ',
     '',
@@ -241,7 +241,7 @@ function reportMarkdown(result: ReturnType<typeof buildResult>): string {
     '- 入力内expected: 保存済みprompt-inputの発話区間がexpectedと1ms以上重なるもの。',
     '- 範囲hit: 候補の有効な根拠範囲がaccepted expectedと1ms以上重なるもの。',
     '- 過広範囲: 根拠範囲がexpectedの開始より前から終了より後まで厳密に内包する、または1根拠範囲が複数expectedに重なるもの。秒数や比率の独自係数は使わない。',
-    '- 除外4区間との重なりは監査欄にだけ残し、hitにも分母にも含めない。',
+    `- 除外${result.excludedRanges.count}区間との重なりは監査欄にだけ残し、hitにも分母にも含めない。`,
     ''
   );
   return lines.join('\n');

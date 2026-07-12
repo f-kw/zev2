@@ -1,0 +1,5391 @@
+# theme_generation_prompt_v002
+
+あなたは元配信から切り抜きテーマ候補を作る。
+
+## 目的
+
+元配信の文字起こしだけを見て、切り抜きとして成立しそうなテーマ候補を出す。最終的な切り抜き区間を確定する担当ではない。区間選択は後段のcompositionが行う。
+
+## 入力の読み方
+
+- 入力は元配信単体から得られる情報だけである。
+- 切り抜き動画、expected、照合結果、人間確認メモ、既存切り抜きタイトルは入力に含まれない。
+- `sourceTitle` は配信全体の文脈を読む補助情報として使う。
+- `segments` は元配信内の発話で、`speechId`、時刻、本文を持つ。
+- 入力が長尺配信の一部窓である場合は、その窓の範囲内で判断し、配信全体を見たように書かない。
+- 笑い、沈黙、音量変化などの非発話シグナルが入力にある場合は補助情報として扱う。本文より強い根拠として扱わない。
+
+## 禁止
+
+- 切り抜き動画や正解区間を知っている前提で書かない。
+- 元配信本文にない場面や反応を作らない。
+- 秒数だけを根拠に候補を作らない。
+- 「雑談」「面白い場面」のように広すぎて何を切るか決まらないテーマを出さない。
+- 既存切り抜きのタイトル風に盛った表現を、本文根拠なしで作らない。
+
+## 判断方針
+
+- 候補は、元配信内の発話から見どころが説明できる具体的なテーマにする。
+- 単独で視聴者に伝わるフリ、展開、反応、結論がある場面を優先する。
+- 同じ話題が離れた場所で補足される場合は、同じテーマ候補の根拠として複数の発話範囲を持ってよい。
+- 根拠範囲は、候補テーマを説明するために必要な発話だけにする。配信全体や長い雑談を大きく囲わない。
+- 別話題をまたぐ場合は、1つの広い範囲にまとめず、該当する狭い範囲だけを返す。
+
+## v002の出力方針
+
+v002では、判断方針はv001から変えない。変えるのは出力形式だけである。
+
+- 候補ごとの長文説明は返さない。
+- 根拠は `evidenceRanges` の配列で返す。
+- 同じ話題が複数シーンに分かれる場合は、1つの広い開始・終了で囲わず、狭い根拠範囲を複数入れる。
+- `reason` は採用理由を1文だけで書く。
+- 弱い候補を無理に埋めない。
+
+## 出力
+
+JSONだけを返す。説明文やMarkdownを付けない。
+
+`requestedThemeCount` が指定されている場合は、その件数を上限にする。良い候補が足りない場合は、無理に埋めない。
+
+```json
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "短いテーマ名",
+      "reason": "切り抜きとして成立すると判断した理由を1文で書く。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "元動画ID",
+          "sourceStartMs": 123000,
+          "sourceEndMs": 153000,
+          "supportingSpeechIds": ["12-47", 52, "55-60"]
+        }
+      ]
+    }
+  ]
+}
+```
+
+## supportingSpeechIds
+
+- 連続する発話IDは `"12-47"` のような範囲文字列で返す。
+- 不連続な発話IDは、個別の数値として同じ配列に入れる。
+- 連続範囲と個別IDを混ぜてよい。
+- 根拠に使っていない発話IDを含めない。
+
+## 時刻
+
+- `sourceStartMs` は、その根拠範囲の最初の発話時刻にする。
+- `sourceEndMs` は、その根拠範囲の最後の発話時刻にする。
+- 同じテーマの根拠が複数箇所にある場合は、`evidenceRanges` を複数に分ける。間にある無関係な別話題を含めない。
+- 正解境界を当てる評価ではないが、後段の機械判定でexpected区間との重なりを見るため、候補根拠の範囲を本文に基づいて正しく出す。
+
+## 入力JSON
+
+```json
+{
+  "task": "source_only_theme_generation",
+  "generationSystem": "theme-llm-v002",
+  "promptVersion": "theme_generation_prompt_v002",
+  "requestedThemeCount": 8,
+  "inputPolicy": {
+    "sourceOnly": true,
+    "noClipInfo": true,
+    "noExpected": true,
+    "noAlignment": true,
+    "noHumanReverseTheme": true
+  },
+  "windowing": {
+    "applied": false,
+    "reason": "元配信全体入力が長いため、実走前に発話境界を保った時間窓を作る。",
+    "overlapMs": 0,
+    "preMergeCandidateCount": null,
+    "postMergeCandidateCount": null
+  },
+  "sources": [
+    {
+      "sourceVideoId": "o8rZAhARXAc",
+      "sourceUrl": "https://www.youtube.com/watch?v=o8rZAhARXAc",
+      "sourceTitle": "【 #ホロライブ甲子園2025】2年目夏！！夏合宿と甲子園初戦で狙え育成上振れ！！【ホロライブ/宝鐘マリン】",
+      "transcriptKind": "local_stt",
+      "language": "ja-JP",
+      "durationSec": 11898.441,
+      "rawSegmentCount": 34507,
+      "promptSegmentCount": 749,
+      "segmentCompaction": {
+        "method": "source-only transcript segments concatenated until sentence-ending punctuation",
+        "scoringRole": "none",
+        "note": "読みやすさのための表現変換であり、expected、切り抜き、照合結果、人間確認メモは使わない。"
+      },
+      "segments": [
+        {
+          "speechId": 4,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 123435,
+          "sourceEndMs": 149046,
+          "text": "アホーイホロライブ3期生宝鐘海賊団船長の宝鐘まりんですはいというわけでねついに今日はなんとえーと夏合宿と甲子園ってことでもうこっからは運が爆裂に良くないと詰んでしまうというのもなんか結構ね見てんだけどみんなのホロコー結構みんなねいい青とくついてるんですよここで誰もいいのがつかないと"
+        },
+        {
+          "speechId": 5,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 150098,
+          "sourceEndMs": 176798,
+          "text": "なんかそういえばカレンダー的に君たちもなんか結構言ってくれてたんですけど甲子園が決定してるとなんかあるんだっけ甲子園インタビュー7月30日までアオマスでランダムで発生するらしくてそれを撮りたいんだけどなんかもしかしてアオマスないかも"
+        },
+        {
+          "speechId": 78,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 545346,
+          "sourceEndMs": 546407,
+          "text": "どうするどうするどうする?"
+        },
+        {
+          "speechId": 79,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 546407,
+          "sourceEndMs": 546607,
+          "text": "え?"
+        },
+        {
+          "speechId": 80,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 546607,
+          "sourceEndMs": 547707,
+          "text": "どうするどうするどうする?"
+        },
+        {
+          "speechId": 81,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 547707,
+          "sourceEndMs": 548348,
+          "text": "誰に使う?"
+        },
+        {
+          "speechId": 82,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 548348,
+          "sourceEndMs": 548448,
+          "text": "え?"
+        },
+        {
+          "speechId": 83,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 548448,
+          "sourceEndMs": 549028,
+          "text": "どうするどうする?"
+        },
+        {
+          "speechId": 84,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 549028,
+          "sourceEndMs": 549468,
+          "text": "え?"
+        },
+        {
+          "speechId": 85,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 549468,
+          "sourceEndMs": 550189,
+          "text": "どうする?"
+        },
+        {
+          "speechId": 86,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 550189,
+          "sourceEndMs": 550469,
+          "text": "え?"
+        },
+        {
+          "speechId": 87,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 550469,
+          "sourceEndMs": 553891,
+          "text": "待って新旧種開発モードで作成したオリジナル喧嘩機を中毒しますえ?"
+        },
+        {
+          "speechId": 88,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 553891,
+          "sourceEndMs": 554151,
+          "text": "え?"
+        },
+        {
+          "speechId": 89,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 554151,
+          "sourceEndMs": 555992,
+          "text": "待って新旧種開発モードって何?"
+        },
+        {
+          "speechId": 90,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 555992,
+          "sourceEndMs": 557293,
+          "text": "何も作ってないけど大丈夫なん?"
+        },
+        {
+          "speechId": 91,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 557293,
+          "sourceEndMs": 558714,
+          "text": "これ何も作ってないんだけど"
+        },
+        {
+          "speechId": 92,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 570318,
+          "sourceEndMs": 592135,
+          "text": "ごめんいっぱい聞きたいことがあるんだがフブちゃんってさエッジスライダーをさこっちにぶんぶん伸ばしてたんだけどさこれでつまりエッジスライダーぶんぶん伸ばしたけどこのことは一旦なかったことにして改めてオリジナル変化球を伸ばし直した方がいいってこと?"
+        },
+        {
+          "speechId": 93,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 592135,
+          "sourceEndMs": 593736,
+          "text": "作りに行こうか?"
+        },
+        {
+          "speechId": 94,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 593736,
+          "sourceEndMs": 595918,
+          "text": "え?"
+        },
+        {
+          "speechId": 95,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 595918,
+          "sourceEndMs": 596178,
+          "text": "まん?"
+        },
+        {
+          "speechId": 96,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 603720,
+          "sourceEndMs": 610025,
+          "text": "まずセーブしよう一旦セーブして作ろう他のピッチャー見る?"
+        },
+        {
+          "speechId": 97,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 610025,
+          "sourceEndMs": 629960,
+          "text": "キムヤチ他のピッチャー見てこれラオーラねラオーラは変化球が微妙だと噂になってるキムヤチの間ででイオフィーはカーブ伸ばしとけって雑にカーブを伸ばしてるカエラはフォークを最初から持ってるからフォークを伸ばしてる"
+        },
+        {
+          "speechId": 98,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 635815,
+          "sourceEndMs": 638735,
+          "text": "ふぶちゃん一択?"
+        },
+        {
+          "speechId": 99,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 638735,
+          "sourceEndMs": 659680,
+          "text": "そうかふぶちゃん最強にしようかそうかえ、じゃあオリジナル変化球を習得したらまたその変化球を伸ばさなきゃいけないってことだよねまた伸ばし直さなきゃいけないってことだよねってことはつまりふぶちゃんを今マリンの計画ではコツコツコツとようやく変化球が伸ばし終わったから今からコツコツと"
+        },
+        {
+          "speechId": 111,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 840358,
+          "sourceEndMs": 864566,
+          "text": "初めてだわどうしたらいいのわかんないわ一旦セーブな絶対セーブして終了してタイトルに戻ればあるどれかしら英館9の中かしらあっこれじゃない新旧種開発これか"
+        },
+        {
+          "speechId": 112,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 872562,
+          "sourceEndMs": 876084,
+          "text": "え、じゃあ粉落としってさリリカが考えたの?"
+        },
+        {
+          "speechId": 113,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 876084,
+          "sourceEndMs": 878566,
+          "text": "あれリリカが考えた弾だったの?"
+        },
+        {
+          "speechId": 114,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 878566,
+          "sourceEndMs": 882228,
+          "text": "すごくない?"
+        },
+        {
+          "speechId": 115,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 882228,
+          "sourceEndMs": 892815,
+          "text": "え、待ってリリカみたいに考えらんなよなんて考えられないのあかんなよ助けて"
+        },
+        {
+          "speechId": 119,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 961718,
+          "sourceEndMs": 964320,
+          "text": "どうやって作ったらいいんだろう?"
+        },
+        {
+          "speechId": 120,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 964320,
+          "sourceEndMs": 976009,
+          "text": "分かんないよ開発する?"
+        },
+        {
+          "speechId": 121,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 976009,
+          "sourceEndMs": 989800,
+          "text": "ほなみこちに聞くかみこちに聞いたって分かるわけないじゃん分かるわけない開発する新旧種が開発"
+        },
+        {
+          "speechId": 122,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 990246,
+          "sourceEndMs": 1001811,
+          "text": "いきますフォーカが強いんじゃないのやっぱみんなフォーカが強いって言ってるよねみおしゃに聞く?"
+        },
+        {
+          "speechId": 123,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 1001811,
+          "sourceEndMs": 1002672,
+          "text": "誰か?"
+        },
+        {
+          "speechId": 124,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 1002672,
+          "sourceEndMs": 1003332,
+          "text": "みお先輩誰か?"
+        },
+        {
+          "speechId": 125,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 1003332,
+          "sourceEndMs": 1003512,
+          "text": "誰か?"
+        },
+        {
+          "speechId": 126,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 1003512,
+          "sourceEndMs": 1005033,
+          "text": "誰か?"
+        },
+        {
+          "speechId": 127,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 1005033,
+          "sourceEndMs": 1013337,
+          "text": "待ってディスコードでちょっと飛ばしてみよう誰かわかる人いませんか?"
+        },
+        {
+          "speechId": 128,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 1013337,
+          "sourceEndMs": 1019860,
+          "text": "ちょっと待ってえっとタレントアット"
+        },
+        {
+          "speechId": 129,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 1021154,
+          "sourceEndMs": 1048380,
+          "text": "タレントえっとすみません今パワープロやってるんですけどオリジナル九州っていうのを作ったことがあってわかる人っていらっしゃいますか全くわからず"
+        },
+        {
+          "speechId": 130,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 1057442,
+          "sourceEndMs": 1059143,
+          "text": "フォークかな?"
+        },
+        {
+          "speechId": 131,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 1059143,
+          "sourceEndMs": 1060783,
+          "text": "フォークかな?"
+        },
+        {
+          "speechId": 132,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 1060783,
+          "sourceEndMs": 1063304,
+          "text": "フォークなのかな?"
+        },
+        {
+          "speechId": 133,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 1063304,
+          "sourceEndMs": 1066625,
+          "text": "とりあえず誰かのリリカしか作ってなくね?"
+        },
+        {
+          "speechId": 134,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 1066625,
+          "sourceEndMs": 1074728,
+          "text": "フォーク系を選択してフォーク系?"
+        },
+        {
+          "speechId": 135,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 1074728,
+          "sourceEndMs": 1076449,
+          "text": "やばい!"
+        },
+        {
+          "speechId": 136,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 1076449,
+          "sourceEndMs": 1078770,
+          "text": "なにこれ!"
+        },
+        {
+          "speechId": 137,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 1078770,
+          "sourceEndMs": 1079410,
+          "text": "フォークか?"
+        },
+        {
+          "speechId": 138,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 1081082,
+          "sourceEndMs": 1083804,
+          "text": "フォークか?"
+        },
+        {
+          "speechId": 139,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 1083804,
+          "sourceEndMs": 1087006,
+          "text": "フォークからのフォーク?"
+        },
+        {
+          "speechId": 140,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 1087006,
+          "sourceEndMs": 1092229,
+          "text": "これフォークからのフォーク?"
+        },
+        {
+          "speechId": 141,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 1092229,
+          "sourceEndMs": 1095091,
+          "text": "粉落としの粉落としのパクる?"
+        },
+        {
+          "speechId": 142,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 1095091,
+          "sourceEndMs": 1098593,
+          "text": "粉落としでリリカがやってたのと全く同じの作ればいいんじゃない?"
+        },
+        {
+          "speechId": 143,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 1098593,
+          "sourceEndMs": 1104637,
+          "text": "パクんな全く同じの作ればいいんじゃないの?"
+        },
+        {
+          "speechId": 144,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 1104637,
+          "sourceEndMs": 1109720,
+          "text": "リリカの真似して作ろうフォークからのフォークで"
+        },
+        {
+          "speechId": 145,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 1113054,
+          "sourceEndMs": 1134218,
+          "text": "フブちゃんっぽいテイスト入れて名前だけフブちゃんっぽくすればええやろそんな中身は粉落としだけど名前だけ白髪っぽくすればええやん"
+        },
+        {
+          "speechId": 146,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 1140130,
+          "sourceEndMs": 1159536,
+          "text": "ふわふわしっぽのごぼう星やごぼう星しっごぼう星ふわふわしっぽごぼう星シューティングスターエフェクトから考えようえ、え、え、え、これ?"
+        },
+        {
+          "speechId": 147,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 1159536,
+          "sourceEndMs": 1162517,
+          "text": "マリンボール?"
+        },
+        {
+          "speechId": 148,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 1162517,
+          "sourceEndMs": 1169700,
+          "text": "クレッセントムーンちょま、わからんマジ、マジわからんなにこれ、なにこれ、なにこれほんまわからんのだがよくだよマジで"
+        },
+        {
+          "speechId": 149,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 1172410,
+          "sourceEndMs": 1184979,
+          "text": "どれやホロウィッチの技目ええやんエフェクト必須なんだマリンボールってなる試し投げできる見れる?"
+        },
+        {
+          "speechId": 150,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 1184979,
+          "sourceEndMs": 1189182,
+          "text": "試し投げで分かったこう?"
+        },
+        {
+          "speechId": 151,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 1208286,
+          "sourceEndMs": 1229880,
+          "text": "こうかおー水が水がブシャーこれマリン船長っぽいなかなりどうやって帰るのこれ戻りたいやめるやめるそんな今から退部しますみたいなそんな憂鬱な"
+        },
+        {
+          "speechId": 152,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 1230886,
+          "sourceEndMs": 1233048,
+          "text": "雰囲気なの?"
+        },
+        {
+          "speechId": 153,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 1233048,
+          "sourceEndMs": 1253121,
+          "text": "終了でいいんだよね終了でいいんだよねクレッセントムーンとかなんかオシャじゃない?"
+        },
+        {
+          "speechId": 154,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 1253121,
+          "sourceEndMs": 1254562,
+          "text": "なんか知らんけど見るか"
+        },
+        {
+          "speechId": 155,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 1264678,
+          "sourceEndMs": 1265459,
+          "text": "よくない?"
+        },
+        {
+          "speechId": 156,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 1265459,
+          "sourceEndMs": 1266200,
+          "text": "これ?"
+        },
+        {
+          "speechId": 157,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 1266200,
+          "sourceEndMs": 1270824,
+          "text": "フブちゃんかもこれ白神さんっぽいえ、何それ?"
+        },
+        {
+          "speechId": 158,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 1270824,
+          "sourceEndMs": 1284898,
+          "text": "間違えたストレートだこれあ、これいいかも白神さんっぽいありかこれ第一候補第一候補で"
+        },
+        {
+          "speechId": 159,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 1292846,
+          "sourceEndMs": 1314127,
+          "text": "3つしかないんだ全力ストレートタイプも見てみるかこうして粉落としどれだったの?"
+        },
+        {
+          "speechId": 160,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 1314127,
+          "sourceEndMs": 1315869,
+          "text": "ん?"
+        },
+        {
+          "speechId": 161,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 1315869,
+          "sourceEndMs": 1316129,
+          "text": "これか?"
+        },
+        {
+          "speechId": 162,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 1316129,
+          "sourceEndMs": 1317150,
+          "text": "ショップでエフェクト変える?"
+        },
+        {
+          "speechId": 168,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 1391869,
+          "sourceEndMs": 1394030,
+          "text": "この4つ?"
+        },
+        {
+          "speechId": 169,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 1394030,
+          "sourceEndMs": 1398233,
+          "text": "この4つ?"
+        },
+        {
+          "speechId": 170,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 1398233,
+          "sourceEndMs": 1398713,
+          "text": "これは違う?"
+        },
+        {
+          "speechId": 171,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 1398713,
+          "sourceEndMs": 1403435,
+          "text": "変えればいいのか?"
+        },
+        {
+          "speechId": 172,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 1403435,
+          "sourceEndMs": 1404036,
+          "text": "変えればいいのか?"
+        },
+        {
+          "speechId": 173,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 1404036,
+          "sourceEndMs": 1408718,
+          "text": "こうこうやって?"
+        },
+        {
+          "speechId": 174,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 1418130,
+          "sourceEndMs": 1439002,
+          "text": "こうかこうかこうかこうかこうかこうかちょっと見てみるか新しくクレセントムーンフェスティバルタイプ見てみるわフェスティバルタイプでこう"
+        },
+        {
+          "speechId": 207,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 1800278,
+          "sourceEndMs": 1829780,
+          "text": "あと一人二人は投げるというのは投げるって感じ確かに栄冠中はフブちゃんしか投げてないけどって感じむずいどうしよう悩むなどうしようなうーんカエラはフォークあるからフォークでいいと思うんだよなただフブちゃんの変化球が微妙なのは"
+        },
+        {
+          "speechId": 208,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 1830198,
+          "sourceEndMs": 1857638,
+          "text": "確かにそうまあアンケート取ったしなアンケート取ったしなみたいな感じアンケート取ったからふーちゃんにすべきなのではって感じはあるよね"
+        },
+        {
+          "speechId": 209,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 1861155,
+          "sourceEndMs": 1865434,
+          "text": "あーですねー"
+        },
+        {
+          "speechId": 210,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 1878306,
+          "sourceEndMs": 1889442,
+          "text": "トーシュ2枚で安定させるっていうので言うと2枚目であるカエラがフォーク持ってるからでフーブちゃんが強い変化球ないからフーブちゃんに強い変化球を持たせるのがいいっていう話なんだよね"
+        },
+        {
+          "speechId": 211,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 1890554,
+          "sourceEndMs": 1891874,
+          "text": "ま、ふぶちゃんでいっかー!"
+        },
+        {
+          "speechId": 212,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 1891874,
+          "sourceEndMs": 1892834,
+          "text": "もう!"
+        },
+        {
+          "speechId": 213,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 1892834,
+          "sourceEndMs": 1893655,
+          "text": "ふぶちゃんでいこう!"
+        },
+        {
+          "speechId": 214,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 1893655,
+          "sourceEndMs": 1896115,
+          "text": "じゃあちょっとこの、みんな角度とかさ変化とかさ一緒に考えてくんね?"
+        },
+        {
+          "speechId": 215,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 1896115,
+          "sourceEndMs": 1898696,
+          "text": "マリには難しいわ一緒に考えてくんね?"
+        },
+        {
+          "speechId": 216,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 1898696,
+          "sourceEndMs": 1919900,
+          "text": "ちょ、これアンケート終了しとこうんえっと折り辺ですがふぶけで作る場合はすでに変化量がいっぱいなのでこの後に通常の1.3倍の経験値があー必要なので変化球、変化量がそっとんどん育ちます"
+        },
+        {
+          "speechId": 219,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 1980758,
+          "sourceEndMs": 2008278,
+          "text": "あ、だとオリヘンはスタミナ消費一緒なんだへーオリヘンだったらスタミナ消費量変わらんらしいよ全部同じなんだってやばいもうたぶんミリシラミリシラしかいないミリシラしかいない"
+        },
+        {
+          "speechId": 220,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 2010874,
+          "sourceEndMs": 2039740,
+          "text": "リリカがチャットくれてるえっとリリカコロナなのにどうもありがとうごめんなコロナ中にありがとうえっとリリカが去年ボタン先輩にお伝えしたのオリジナル九州やっぱりフォークが一番強いとのことおーなるほどえ待ってちょっと相談してみようえっとちょっとコロナで今つらいと思うからチャットで送ってみるかえっと今うぶちゃん"
+        },
+        {
+          "speechId": 223,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 2101938,
+          "sourceEndMs": 2129586,
+          "text": "忘れてるかもしれませんけどねマリン監督はリリカの限界上卒業生なんです監督監督お久しぶりですすいませんマリンが不勉強なせいであのーこの私去年は使えなくてすいませんでしたあのーリリーフのボタンさんあかっこよかったですねいやーマリンすいませんこの私覚えられなくてうーんいやーここに来て勉強になります"
+        },
+        {
+          "speechId": 224,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 2131266,
+          "sourceEndMs": 2155086,
+          "text": "知ってんよマリン黙れ黙りやがれうんはいドラフトの時なんて言ってたっけえなんだったっけえいやリリカ監督のもとでいっぱい勉強できてこうしてうんコロコロに出ることができて嬉しいですかなって言ったかも"
+        },
+        {
+          "speechId": 254,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 2581422,
+          "sourceEndMs": 2584625,
+          "text": "次の新入生待つはないんじゃない?"
+        },
+        {
+          "speechId": 255,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 2584625,
+          "sourceEndMs": 2605742,
+          "text": "あ、それにした場合って春夏しかないで育成できる期間ふぶちゃんかほな古川で古川はもう去るねんこの夏でこの夏でさよならやねんうん"
+        },
+        {
+          "speechId": 256,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 2623306,
+          "sourceEndMs": 2639900,
+          "text": "でもイオフィンは伸びがあるからリリカもこれを見た結果伸びがあるならちょっと微妙になってきたって言ってるからいやもうフブちゃんしかないかもしれないもうフブちゃんでいくかアンケもフブちゃんだったしごめん迷って"
+        },
+        {
+          "speechId": 257,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 2640022,
+          "sourceEndMs": 2668770,
+          "text": "こんなにリリカも伸びがBもあるならちょっと微妙になってきたって言ってたからコメントもそう言ってたしフブちゃんかもフブちゃんムキムキにするもうしょうがない迷った"
+        },
+        {
+          "speechId": 258,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 2671078,
+          "sourceEndMs": 2684228,
+          "text": "のぶちゃん中途半端になりそう確かにね確かにねそう弱体化するんまー弱体化?"
+        },
+        {
+          "speechId": 259,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 2684228,
+          "sourceEndMs": 2690052,
+          "text": "世界大会で勝手に変化量上がるかもマジ?"
+        },
+        {
+          "speechId": 260,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 2690052,
+          "sourceEndMs": 2699920,
+          "text": "までもちょっともう他も他がなもう消去法まであるうん消去法かももはやふぶちゃんね"
+        },
+        {
+          "speechId": 261,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 2700146,
+          "sourceEndMs": 2729660,
+          "text": "何を覚えさせよう何がいいかなこの場合うん弱体化するとしないがいる分からんマジで分からんちょっとマリンもオリジナル変化系初めてだから本当に分かんない分かんないやカーブ系はいはいはいはいあー"
+        },
+        {
+          "speechId": 262,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 2730002,
+          "sourceEndMs": 2759054,
+          "text": "カーブ系したいけど少数…でもカーブ系したいってみんな言ってるよ結構ふんふんカーブカーブ系ねキムヤジのじゃあやってみるかキムヤジのオススメでうんうんうん船長が決めた方がいいガチ分からんガチ分からん分かんないよちょっとじゃあ作るかたまなパワーカーブね分かった作ってみようパワーカーブ"
+        },
+        {
+          "speechId": 274,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 2821270,
+          "sourceEndMs": 2829393,
+          "text": "変化、増し、切れと変化あ、なんか1、1、1こ、1超えた重さ最大?"
+        },
+        {
+          "speechId": 275,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 2829393,
+          "sourceEndMs": 2830033,
+          "text": "え?"
+        },
+        {
+          "speechId": 276,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 2830033,
+          "sourceEndMs": 2832134,
+          "text": "やばい、ちょ、きまし?"
+        },
+        {
+          "speechId": 277,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 2832134,
+          "sourceEndMs": 2832954,
+          "text": "き、きまし!"
+        },
+        {
+          "speechId": 278,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 2832954,
+          "sourceEndMs": 2841037,
+          "text": "きましの言うこと聞いたら136になっちゃった!"
+        },
+        {
+          "speechId": 279,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 2841037,
+          "sourceEndMs": 2842838,
+          "text": "あ、あと、な、なに削る?"
+        },
+        {
+          "speechId": 280,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 2842838,
+          "sourceEndMs": 2843298,
+          "text": "なに削る?"
+        },
+        {
+          "speechId": 281,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 2843298,
+          "sourceEndMs": 2844358,
+          "text": "なに削る?"
+        },
+        {
+          "speechId": 282,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 2844358,
+          "sourceEndMs": 2844918,
+          "text": "急速を下げる!"
+        },
+        {
+          "speechId": 283,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 2844918,
+          "sourceEndMs": 2846479,
+          "text": "オッケー、オッケー急速を下げる!"
+        },
+        {
+          "speechId": 284,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 2846479,
+          "sourceEndMs": 2849420,
+          "text": "オッケーこうか?"
+        },
+        {
+          "speechId": 285,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 2849420,
+          "sourceEndMs": 2849920,
+          "text": "おや?"
+        },
+        {
+          "speechId": 286,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 2850562,
+          "sourceEndMs": 2875926,
+          "text": "なぜか上がるむずい待ってえっと待ってここここかここここここだ遅くしても遅くしてもダメなんだここだなるほど下げると増えるんだってことは"
+        },
+        {
+          "speechId": 296,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 2949238,
+          "sourceEndMs": 2961087,
+          "text": "こうかすごいシューティングしたって感じで下にグンって落ちた見た?"
+        },
+        {
+          "speechId": 297,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 2961087,
+          "sourceEndMs": 2963429,
+          "text": "見て?"
+        },
+        {
+          "speechId": 298,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 2963429,
+          "sourceEndMs": 2966331,
+          "text": "グン!"
+        },
+        {
+          "speechId": 299,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 2966331,
+          "sourceEndMs": 2969514,
+          "text": "かっこいい落ちてる"
+        },
+        {
+          "speechId": 300,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 2971338,
+          "sourceEndMs": 2981764,
+          "text": "シュンって間違えたストレート投げちゃったど、どうかな?"
+        },
+        {
+          "speechId": 301,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 2981764,
+          "sourceEndMs": 2991490,
+          "text": "ど、どうかなこれでカーブに重さ要りません?"
+        },
+        {
+          "speechId": 302,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 2991490,
+          "sourceEndMs": 2994211,
+          "text": "切れないと微妙?"
+        },
+        {
+          "speechId": 303,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 2994211,
+          "sourceEndMs": 2998134,
+          "text": "重さをじゃあ減らして切れを"
+        },
+        {
+          "speechId": 304,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 3000350,
+          "sourceEndMs": 3003213,
+          "text": "増すどう?"
+        },
+        {
+          "speechId": 305,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 3003213,
+          "sourceEndMs": 3020894,
+          "text": "これでやってみようこうしておーどう?"
+        },
+        {
+          "speechId": 306,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 3034278,
+          "sourceEndMs": 3034938,
+          "text": "いい感じ?"
+        },
+        {
+          "speechId": 307,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 3034938,
+          "sourceEndMs": 3035399,
+          "text": "キレてる?"
+        },
+        {
+          "speechId": 308,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 3035399,
+          "sourceEndMs": 3037140,
+          "text": "キレてる?"
+        },
+        {
+          "speechId": 309,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 3037140,
+          "sourceEndMs": 3037740,
+          "text": "キレある?"
+        },
+        {
+          "speechId": 310,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 3037740,
+          "sourceEndMs": 3040601,
+          "text": "オッケオッケオッケこの方がいい?"
+        },
+        {
+          "speechId": 311,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 3040601,
+          "sourceEndMs": 3046384,
+          "text": "オッケオッケオッケオッケオッケもっとキレ欲しい?"
+        },
+        {
+          "speechId": 312,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 3046384,
+          "sourceEndMs": 3049046,
+          "text": "え、じゃああ、もう無理だわこれMAXうん"
+        },
+        {
+          "speechId": 318,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 3189493,
+          "sourceEndMs": 3197240,
+          "text": "エフェクトはこれが一番エフェクト低コストのエフェクトもコスト違うの?"
+        },
+        {
+          "speechId": 319,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 3197240,
+          "sourceEndMs": 3208750,
+          "text": "何も変わんないけど何も変わんないけど全力ストレートタイプだとちょっと軽いわ"
+        },
+        {
+          "speechId": 320,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 3214194,
+          "sourceEndMs": 3227306,
+          "text": "え、でもなんかでもなんか、それはどうなん?"
+        },
+        {
+          "speechId": 321,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 3227306,
+          "sourceEndMs": 3238957,
+          "text": "これにしようよしちゃー!"
+        },
+        {
+          "speechId": 322,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 3238957,
+          "sourceEndMs": 3239698,
+          "text": "いいかな?"
+        },
+        {
+          "speechId": 323,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 3240258,
+          "sourceEndMs": 3261814,
+          "text": "これで名前はちょっと待ってフブちゃんの必殺技の名前フブちゃんの技の名前えっとちょっと待ってねホロウィッチのフブちゃんのホロウィッチ"
+        },
+        {
+          "speechId": 324,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 3285237,
+          "sourceEndMs": 3285817,
+          "text": "フブちゃんの技なんかやってなかった?"
+        },
+        {
+          "speechId": 325,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 3285817,
+          "sourceEndMs": 3295742,
+          "text": "ちょっと待ってね忘れるビーム忘れるビームはフブちゃんの技じゃなくて石丸くんの技やんけトリックスター?"
+        },
+        {
+          "speechId": 326,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 3308622,
+          "sourceEndMs": 3328810,
+          "text": "マリンの回の時のチャンフブチャンフブの技トリッキービクセン"
+        },
+        {
+          "speechId": 327,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 3345969,
+          "sourceEndMs": 3352672,
+          "text": "もうちょっと星っぽい名前がいいよトリックスターはあれだ心躍らすトリックスターって自分のスーパーノヴァいいね!"
+        },
+        {
+          "speechId": 328,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 3352672,
+          "sourceEndMs": 3355694,
+          "text": "スーパーノヴァいい!"
+        },
+        {
+          "speechId": 329,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 3355694,
+          "sourceEndMs": 3356514,
+          "text": "スーパーノヴァにしよう"
+        },
+        {
+          "speechId": 330,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 3362262,
+          "sourceEndMs": 3389062,
+          "text": "星で加工をうか星で貼ってスーパー感じのがいいかな感じのがいいかなだから長いか"
+        },
+        {
+          "speechId": 331,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 3392459,
+          "sourceEndMs": 3418214,
+          "text": "あ、落ちるまた落ちた"
+        },
+        {
+          "speechId": 332,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 3422110,
+          "sourceEndMs": 3438265,
+          "text": "FPSが落ちるなぁ漢字で行くか!"
+        },
+        {
+          "speechId": 333,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 3438265,
+          "sourceEndMs": 3439666,
+          "text": "漢字じゃない!"
+        },
+        {
+          "speechId": 334,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 3439666,
+          "sourceEndMs": 3440206,
+          "text": "英語で行くか!"
+        },
+        {
+          "speechId": 335,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 3440206,
+          "sourceEndMs": 3440407,
+          "text": "英語で!"
+        },
+        {
+          "speechId": 336,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 3440407,
+          "sourceEndMs": 3448674,
+          "text": "1,2,3,4,5,6,7,8,9待って、9文字1,2,3これ、これいらない?"
+        },
+        {
+          "speechId": 337,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 3456229,
+          "sourceEndMs": 3472798,
+          "text": "英語英語英語入るかこうちゃんとググってちゃんとググって見てるから大丈夫間に腰入れる?"
+        },
+        {
+          "speechId": 338,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 3480150,
+          "sourceEndMs": 3509840,
+          "text": "ギリギリで草ギリギリすぎるだろこれぴったりだよこれぴったりどうかっこいいしどうですかぴったりふぶちゃんみこちが読めない読めるやろふぶちゃんの曲"
+        },
+        {
+          "speechId": 339,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 3511986,
+          "sourceEndMs": 3520409,
+          "text": "OKじゃあスーパーノヴァでもう一回投げてみよう"
+        },
+        {
+          "speechId": 340,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 3542099,
+          "sourceEndMs": 3549262,
+          "text": "いいかわいいいいのでは?"
+        },
+        {
+          "speechId": 341,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 3549262,
+          "sourceEndMs": 3551303,
+          "text": "これでいいのかな?"
+        },
+        {
+          "speechId": 342,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 3551303,
+          "sourceEndMs": 3554885,
+          "text": "キョウジいいと思う?"
+        },
+        {
+          "speechId": 343,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 3554885,
+          "sourceEndMs": 3561748,
+          "text": "意見大募集重さいらんえ、じゃあ重さなくして何あげんの?"
+        },
+        {
+          "speechId": 344,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 3561748,
+          "sourceEndMs": 3566910,
+          "text": "重さいるって言ってる人もいるんだけどマジわからんのだけど何を取ればいいんだこれ"
+        },
+        {
+          "speechId": 345,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 3570914,
+          "sourceEndMs": 3599054,
+          "text": "重さ削って重さ削って変化上げてほしい重さ削って変化上げピッタリになんないんだよな98になっちゃう98になっちゃうんだよな急速上げれば100になる"
+        },
+        {
+          "speechId": 350,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 3663138,
+          "sourceEndMs": 3685038,
+          "text": "こうなるんだって間違えた、これストレートこうなるらしいカーブでも重さはいるってもう分からんなマジ分からんなもうこれ"
+        },
+        {
+          "speechId": 351,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 3690566,
+          "sourceEndMs": 3719880,
+          "text": "諸説ありすぎて喧嘩になってるから助けてマジでマジわからんこよりー助けてよーわかんないよーこよりこよりー助けてーこよりー迷う迷うなこれー教科書持ちのこよりー教科書"
+        },
+        {
+          "speechId": 352,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 3720278,
+          "sourceEndMs": 3723159,
+          "text": "こっちのコヨリー!"
+        },
+        {
+          "speechId": 353,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 3723159,
+          "sourceEndMs": 3723879,
+          "text": "助けてくれー!"
+        },
+        {
+          "speechId": 354,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 3723879,
+          "sourceEndMs": 3737903,
+          "text": "んーさっき配信終わった?"
+        },
+        {
+          "speechId": 355,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 3737903,
+          "sourceEndMs": 3742444,
+          "text": "ヤワンちゃん来てくれるかもしれんうんあもう当初強いから適当でいいよコヨリは教えてくれない!"
+        },
+        {
+          "speechId": 356,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 3742444,
+          "sourceEndMs": 3743864,
+          "text": "コヨリは教えてくれないんだ!"
+        },
+        {
+          "speechId": 357,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 3743864,
+          "sourceEndMs": 3749206,
+          "text": "でも確かにコヨリの言う通りコヨリがこう言ったからこうしたでマリンがそうしてさそれでなんか"
+        },
+        {
+          "speechId": 358,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 3750062,
+          "sourceEndMs": 3779014,
+          "text": "なんかそれで何かうまくいかないことがあった時にコメントがこよりがわざと弱いの教えたとか言ってそれでわやわや言われたらうざいからやめとこう確かに聞かんとこうんやめとこうんこよりがわざとなんか弱いの教えたとか言われたら鬱陶しいからやめよううんどうしようじゃあきまちと決めるわそうしよううんそれがいいきまちと一緒に決めるうん"
+        },
+        {
+          "speechId": 359,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 3781954,
+          "sourceEndMs": 3794866,
+          "text": "それがいいよし、じゃあ重さいる説、いらない説重さいる説、いらない説キャッチドーンキャッチ"
+        },
+        {
+          "speechId": 360,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 3813170,
+          "sourceEndMs": 3816493,
+          "text": "さっきのがベストだった?"
+        },
+        {
+          "speechId": 361,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 3816493,
+          "sourceEndMs": 3822197,
+          "text": "いらない派もいれば、いる派もいて、ちょっと欲しいと思っちゃう?"
+        },
+        {
+          "speechId": 362,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 3822197,
+          "sourceEndMs": 3837229,
+          "text": "さっきのまんでいいのかもね最初にやろうとしてた100ピッタだったし100ピッタだったしね"
+        },
+        {
+          "speechId": 372,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 4047799,
+          "sourceEndMs": 4049960,
+          "text": "めっちゃ飛ばないで欲しいなら重さに"
+        },
+        {
+          "speechId": 373,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 4052862,
+          "sourceEndMs": 4071314,
+          "text": "カーブはそもそも飛びづらいからそんなに重さに振らなくていいってみんな言ってんだだから重さは減らしてよくて変化を上げて重さを下げて"
+        },
+        {
+          "speechId": 374,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 4081634,
+          "sourceEndMs": 4094980,
+          "text": "と、飛ぶ、飛ぶ、飛ば、なくて、あーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあーあー"
+        },
+        {
+          "speechId": 375,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 4096310,
+          "sourceEndMs": 4105949,
+          "text": "ちょっとな、なや、なや、悩んでてえっとーえっとーえっとーえっとーうーんとー"
+        },
+        {
+          "speechId": 376,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 4110482,
+          "sourceEndMs": 4139500,
+          "text": "分かんない分かんない分かんないなちょっと全然分かんないな重さ変化ブレーキ変化"
+        },
+        {
+          "speechId": 381,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 4200714,
+          "sourceEndMs": 4207479,
+          "text": "1でどれくらいかマジ分からんマリン的に見た目じゃちょっとよく分かんないこれだ!"
+        },
+        {
+          "speechId": 382,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 4207479,
+          "sourceEndMs": 4212203,
+          "text": "えいっおーなんかいいねーなんか知らんけど良さげー!"
+        },
+        {
+          "speechId": 383,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 4212203,
+          "sourceEndMs": 4215045,
+          "text": "強そう!"
+        },
+        {
+          "speechId": 384,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 4215045,
+          "sourceEndMs": 4226753,
+          "text": "強そうですこれうんこれ強そうなんか強そうです!"
+        },
+        {
+          "speechId": 385,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 4226753,
+          "sourceEndMs": 4227534,
+          "text": "うん!"
+        },
+        {
+          "speechId": 386,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 4232807,
+          "sourceEndMs": 4259478,
+          "text": "さらに下行ってる重いやつを見せるOKじゃあ重いバージョンがこれですいくよ重い方はこうだドスンと落ちていく感じがありますねはいどうでしょうかさっきとはまた違う"
+        },
+        {
+          "speechId": 387,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 4260438,
+          "sourceEndMs": 4289960,
+          "text": "同じにしか見えないけどまた違うこのドスンと落ちていくんですこれということで重いわーこれよりも重いは言うとりますということでさあ皆さんこんなに違うこの2球種果たしてどっちがいいかさあ決めてまいりましょうそれでは皆さん投票で"
+        },
+        {
+          "speechId": 388,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 4290554,
+          "sourceEndMs": 4319580,
+          "text": "いきますよ10987654321では締め切りますはい皆さんたくさんの投票どうもありがとうございましたということでこの変化球はこれでいきますこちらの"
+        },
+        {
+          "speechId": 389,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 4321194,
+          "sourceEndMs": 4348170,
+          "text": "重さを削った方でいこうと思いますはいちょっとマジでわかんないけどうーんまあこれでいいということでうーん意見もよう割れたはいじゃあこれでOKで作りたいと思います"
+        },
+        {
+          "speechId": 390,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 4350706,
+          "sourceEndMs": 4379860,
+          "text": "えー新旧宿発ボールをはいそしてスロットに登録はいします1時間1時間経っちゃったやばいこれで1時間経っちゃったこれ迷いすぎてすいませんどうも迷いましためっちゃはい迷いましためっちゃありがとうございましたでは行きたいと思いますこれをふぶちゃんに応募させます迷いに迷った末にもう誰に応募させるかどんな弾を作るかで非常に"
+        },
+        {
+          "speechId": 391,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 4381338,
+          "sourceEndMs": 4408126,
+          "text": "ましたがこれで行きたいと思います甲子園はお待たせしましたこれから甲子園です大変お待たせしました初めての出来事だったいやでもありがたいことやでこんな良さげなアイテムが出たってきたっていうのはじゃあオリジナル球種習得ボールってこれをフブちゃんに覚えさせてそしてフブちゃんに今からこれを一生懸命練習指示来てくれないとまずいでこれ"
+        },
+        {
+          "speechId": 392,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 4411310,
+          "sourceEndMs": 4439900,
+          "text": "練習指示来ないと厳しいねかなりうんあでも今コントロールアップしてんのがうん行きましょうふぶちゃんについに行っちゃいましょうはいスーパーノヴァ行きましょううおースーパーノヴァ覚えたスーパーノヴァ"
+        },
+        {
+          "speechId": 393,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 4445458,
+          "sourceEndMs": 4466549,
+          "text": "わーお、脅威の切れ味でキレキレのスーパーノヴァをフブちゃん投げていく楽しいですねえ、これ、待って、これさ、あのさこれさ、きまし、あのさこれさ、1で、1でこの社員やって、もっかいスケジュール見直して1を狙う?"
+        },
+        {
+          "speechId": 394,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 4466549,
+          "sourceEndMs": 4467570,
+          "text": "星500乗った?"
+        },
+        {
+          "speechId": 395,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 4467570,
+          "sourceEndMs": 4467950,
+          "text": "ま?"
+        },
+        {
+          "speechId": 396,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 4471494,
+          "sourceEndMs": 4472255,
+          "text": "これMVPやっぞ!"
+        },
+        {
+          "speechId": 397,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 4472255,
+          "sourceEndMs": 4474217,
+          "text": "MVPやっぞ!"
+        },
+        {
+          "speechId": 398,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 4474217,
+          "sourceEndMs": 4483247,
+          "text": "1やってつけへんオッケオッケオッケオッケ行きましょう!"
+        },
+        {
+          "speechId": 399,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 4483247,
+          "sourceEndMs": 4486111,
+          "text": "お、ミゾット社員フジキ!"
+        },
+        {
+          "speechId": 400,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 4486111,
+          "sourceEndMs": 4487272,
+          "text": "お、機材交換!"
+        },
+        {
+          "speechId": 401,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 4487272,
+          "sourceEndMs": 4488574,
+          "text": "ティ待って?"
+        },
+        {
+          "speechId": 402,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 4488574,
+          "sourceEndMs": 4488894,
+          "text": "ティ?"
+        },
+        {
+          "speechId": 409,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 4560918,
+          "sourceEndMs": 4565341,
+          "text": "しばき倒されたくなかったらいい加減にしろお前ラオラ?"
+        },
+        {
+          "speechId": 410,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 4565341,
+          "sourceEndMs": 4565902,
+          "text": "ごく普通?"
+        },
+        {
+          "speechId": 411,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 4565902,
+          "sourceEndMs": 4566782,
+          "text": "え?"
+        },
+        {
+          "speechId": 412,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 4566782,
+          "sourceEndMs": 4570005,
+          "text": "どうしよう?"
+        },
+        {
+          "speechId": 413,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 4570005,
+          "sourceEndMs": 4572187,
+          "text": "え、君たちラオラって変えるべき?"
+        },
+        {
+          "speechId": 414,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 4572187,
+          "sourceEndMs": 4574869,
+          "text": "変えないべき?"
+        },
+        {
+          "speechId": 415,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 4574869,
+          "sourceEndMs": 4578431,
+          "text": "気持ちいいどう思う?"
+        },
+        {
+          "speechId": 416,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 4578431,
+          "sourceEndMs": 4582574,
+          "text": "ねぇ気持ちいいあかん?"
+        },
+        {
+          "speechId": 417,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 4582574,
+          "sourceEndMs": 4582915,
+          "text": "ダメ?"
+        },
+        {
+          "speechId": 418,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 4582915,
+          "sourceEndMs": 4584276,
+          "text": "もったいない?"
+        },
+        {
+          "speechId": 419,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 4584276,
+          "sourceEndMs": 4585877,
+          "text": "ごく普通は残す?"
+        },
+        {
+          "speechId": 420,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 4585877,
+          "sourceEndMs": 4589420,
+          "text": "わ、わかったそうするか変えないでいいか"
+        },
+        {
+          "speechId": 421,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 4590066,
+          "sourceEndMs": 4592167,
+          "text": "気になっても仕方ないあるか?"
+        },
+        {
+          "speechId": 422,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 4592167,
+          "sourceEndMs": 4597071,
+          "text": "それは確かにあ、だ!"
+        },
+        {
+          "speechId": 423,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 4597071,
+          "sourceEndMs": 4602755,
+          "text": "いけいけないバイバイねえ、これ何がいらない?"
+        },
+        {
+          "speechId": 424,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 4602755,
+          "sourceEndMs": 4603855,
+          "text": "気持ち!"
+        },
+        {
+          "speechId": 425,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 4603855,
+          "sourceEndMs": 4606677,
+          "text": "これ何がいらなーい?"
+        },
+        {
+          "speechId": 426,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 4606677,
+          "sourceEndMs": 4619066,
+          "text": "占い師も使えねえな、いつみむらしばき倒すぞ、ほんまにえんとう、わかったえんとう、遠藤くんでいくわ遠藤くんで遠藤くんでいくうん"
+        },
+        {
+          "speechId": 427,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 4622026,
+          "sourceEndMs": 4649940,
+          "text": "おー1、待って26、27、28、29あ、もう無理だ青マスなかったインタビューはもうないんだエントー君で行ってさあ合宿だ監督、今日から合宿です頑張りましょうかーこーお、やめろスワとフル"
+        },
+        {
+          "speechId": 428,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 4651086,
+          "sourceEndMs": 4662938,
+          "text": "シャシャるなぁお前シャシャってくんななんでシャシャってきちゃったのどうしよう何がいいかなシオレンマリンが邪魔で見えない?"
+        },
+        {
+          "speechId": 429,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 4662938,
+          "sourceEndMs": 4664620,
+          "text": "マジそれじゃん失礼しました"
+        },
+        {
+          "speechId": 430,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 4665958,
+          "sourceEndMs": 4677797,
+          "text": "邪魔でしたどこにいたらいいかわかんねぇここにいよここにいとこ何がいいかなぁ"
+        },
+        {
+          "speechId": 431,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 4680822,
+          "sourceEndMs": 4687906,
+          "text": "スワにキャッチャーついたってな意味ないから走り込み消そう?"
+        },
+        {
+          "speechId": 432,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 4687906,
+          "sourceEndMs": 4709200,
+          "text": "確かにこれいらないかこのどうせついたってしょうがないだろみたいな時にまだこれからこいつらと甲子園行くから甲子園まだ行くからミート?"
+        },
+        {
+          "speechId": 433,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 4709200,
+          "sourceEndMs": 4709900,
+          "text": "ミートもいらないじゃん"
+        },
+        {
+          "speechId": 434,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 4710002,
+          "sourceEndMs": 4710742,
+          "text": "ミートにするか!"
+        },
+        {
+          "speechId": 435,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 4710742,
+          "sourceEndMs": 4711703,
+          "text": "ミートに!"
+        },
+        {
+          "speechId": 436,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 4711703,
+          "sourceEndMs": 4713523,
+          "text": "左のミートでこっちか!"
+        },
+        {
+          "speechId": 437,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 4713523,
+          "sourceEndMs": 4715744,
+          "text": "これかん!"
+        },
+        {
+          "speechId": 438,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 4715744,
+          "sourceEndMs": 4719666,
+          "text": "こっちかん!"
+        },
+        {
+          "speechId": 439,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 4719666,
+          "sourceEndMs": 4723728,
+          "text": "左のミートこれな!"
+        },
+        {
+          "speechId": 440,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 4723728,
+          "sourceEndMs": 4725088,
+          "text": "しおりんがつくかもしんないもんね!"
+        },
+        {
+          "speechId": 441,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 4725088,
+          "sourceEndMs": 4726249,
+          "text": "わかった!"
+        },
+        {
+          "speechId": 442,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 4726249,
+          "sourceEndMs": 4727229,
+          "text": "じゃこれで行くわ!"
+        },
+        {
+          "speechId": 443,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 4727229,
+          "sourceEndMs": 4730931,
+          "text": "こっち!"
+        },
+        {
+          "speechId": 444,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 4730931,
+          "sourceEndMs": 4731671,
+          "text": "お前かん!"
+        },
+        {
+          "speechId": 445,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 4731671,
+          "sourceEndMs": 4732992,
+          "text": "古川!"
+        },
+        {
+          "speechId": 446,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 4732992,
+          "sourceEndMs": 4733332,
+          "text": "すまー!"
+        },
+        {
+          "speechId": 447,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 4733332,
+          "sourceEndMs": 4734412,
+          "text": "あ!"
+        },
+        {
+          "speechId": 448,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 4734412,
+          "sourceEndMs": 4735393,
+          "text": "しおりん!"
+        },
+        {
+          "speechId": 449,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 4735393,
+          "sourceEndMs": 4735933,
+          "text": "ついた!"
+        },
+        {
+          "speechId": 450,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 4735933,
+          "sourceEndMs": 4736373,
+          "text": "カット打ち!"
+        },
+        {
+          "speechId": 451,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 4736373,
+          "sourceEndMs": 4738494,
+          "text": "ええやん!"
+        },
+        {
+          "speechId": 452,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 4741026,
+          "sourceEndMs": 4764298,
+          "text": "またつくやんいいやんスワはねまだねマリンのチームのね一軍ですからちょっと待ってもうホンダスワやる気出すなやばい3年生が強化されて意味ないどうしようしかもラオーラどうしようなうわどうしよう"
+        },
+        {
+          "speechId": 453,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 4770854,
+          "sourceEndMs": 4779937,
+          "text": "今のうちどうしよう3年生ばっか来る助けてこれどうしようこれダンベル?"
+        },
+        {
+          "speechId": 454,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 4779937,
+          "sourceEndMs": 4780177,
+          "text": "これ?"
+        },
+        {
+          "speechId": 455,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 4780177,
+          "sourceEndMs": 4785018,
+          "text": "走り込むの?"
+        },
+        {
+          "speechId": 456,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 4785018,
+          "sourceEndMs": 4786338,
+          "text": "これ?"
+        },
+        {
+          "speechId": 457,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 4786338,
+          "sourceEndMs": 4798762,
+          "text": "これやだしょぼいからダンベルにするかあ、あったダンベルななんかつけなんもつかんなかー"
+        },
+        {
+          "speechId": 461,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 4891090,
+          "sourceEndMs": 4895571,
+          "text": "なに?"
+        },
+        {
+          "speechId": 462,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 4895571,
+          "sourceEndMs": 4899312,
+          "text": "何しよう?"
+        },
+        {
+          "speechId": 463,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 4899312,
+          "sourceEndMs": 4910255,
+          "text": "えーえーえーえーどうする?"
+        },
+        {
+          "speechId": 464,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 4910255,
+          "sourceEndMs": 4911456,
+          "text": "何がいいかな?"
+        },
+        {
+          "speechId": 465,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 4911456,
+          "sourceEndMs": 4911936,
+          "text": "ミート?"
+        },
+        {
+          "speechId": 466,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 4911936,
+          "sourceEndMs": 4918818,
+          "text": "粘り打ち固め打ちさよなら男ラインドライブカット打ちさよなら男"
+        },
+        {
+          "speechId": 472,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 4983207,
+          "sourceEndMs": 4988429,
+          "text": "どうする?"
+        },
+        {
+          "speechId": 473,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 4988429,
+          "sourceEndMs": 4990070,
+          "text": "インターバル走?"
+        },
+        {
+          "speechId": 474,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 4990070,
+          "sourceEndMs": 4998554,
+          "text": "これ?"
+        },
+        {
+          "speechId": 475,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 4998554,
+          "sourceEndMs": 5000855,
+          "text": "インターバル?"
+        },
+        {
+          "speechId": 476,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 5000855,
+          "sourceEndMs": 5009920,
+          "text": "総合で対エースかインターバルこれな対エースかインターバルか"
+        },
+        {
+          "speechId": 477,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 5015026,
+          "sourceEndMs": 5030300,
+          "text": "インターバルでもいいかうん、タイエースのがいいかあー別にでもナイアアンダーが良い?"
+        },
+        {
+          "speechId": 478,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 5030300,
+          "sourceEndMs": 5032322,
+          "text": "じゃあインターバル搭載するか"
+        },
+        {
+          "speechId": 479,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 5049464,
+          "sourceEndMs": 5058931,
+          "text": "やばい、ホロメン…3年生ばっかりじゃんホロメン…もうやばい3年生…分かった!"
+        },
+        {
+          "speechId": 480,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 5058931,
+          "sourceEndMs": 5060332,
+          "text": "甲子園勝とうってんだな!"
+        },
+        {
+          "speechId": 481,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 5060332,
+          "sourceEndMs": 5060712,
+          "text": "分かった!"
+        },
+        {
+          "speechId": 482,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 5060712,
+          "sourceEndMs": 5061293,
+          "text": "3年生!"
+        },
+        {
+          "speechId": 483,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 5061293,
+          "sourceEndMs": 5061993,
+          "text": "みんな!"
+        },
+        {
+          "speechId": 484,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 5061993,
+          "sourceEndMs": 5064295,
+          "text": "この甲子園絶対勝とうってんだな!"
+        },
+        {
+          "speechId": 485,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 5064295,
+          "sourceEndMs": 5065576,
+          "text": "やる気があるんだな!"
+        },
+        {
+          "speechId": 486,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 5065576,
+          "sourceEndMs": 5068118,
+          "text": "この甲子園で勝とうってんだ!"
+        },
+        {
+          "speechId": 487,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 5068118,
+          "sourceEndMs": 5068158,
+          "text": "うん"
+        },
+        {
+          "speechId": 488,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 5072158,
+          "sourceEndMs": 5074440,
+          "text": "お前絶対勝ちます僕ってことやね?"
+        },
+        {
+          "speechId": 489,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 5074440,
+          "sourceEndMs": 5074680,
+          "text": "わかった!"
+        },
+        {
+          "speechId": 490,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 5074680,
+          "sourceEndMs": 5076341,
+          "text": "いいでしょう!"
+        },
+        {
+          "speechId": 491,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 5076341,
+          "sourceEndMs": 5077381,
+          "text": "じゃあこの時点で勝とうもう!"
+        },
+        {
+          "speechId": 492,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 5077381,
+          "sourceEndMs": 5079483,
+          "text": "こうなったらしゃーない!"
+        },
+        {
+          "speechId": 493,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 5079483,
+          "sourceEndMs": 5085406,
+          "text": "この時点で勝つことでお前らのこと許してやる!"
+        },
+        {
+          "speechId": 494,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 5085406,
+          "sourceEndMs": 5093371,
+          "text": "勝つなら許すうん、抽選会あるえ、もう30日だから青マス意味ないのかちょっともう他に何かあったっけ?"
+        },
+        {
+          "speechId": 495,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 5093371,
+          "sourceEndMs": 5097654,
+          "text": "いーと7月8月"
+        },
+        {
+          "speechId": 565,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 5701367,
+          "sourceEndMs": 5702247,
+          "text": "どこにする?"
+        },
+        {
+          "speechId": 566,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 5702247,
+          "sourceEndMs": 5714533,
+          "text": "キャージーどれがいい?"
+        },
+        {
+          "speechId": 567,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 5714533,
+          "sourceEndMs": 5719475,
+          "text": "どれがいい?"
+        },
+        {
+          "speechId": 568,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 5719475,
+          "sourceEndMs": 5721796,
+          "text": "魔物でギリかキャージーに決めてもらうわはいはいはいえっと一番右オッケーじゃあ一番右で行きますけ!"
+        },
+        {
+          "speechId": 569,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 5721796,
+          "sourceEndMs": 5728519,
+          "text": "1?"
+        },
+        {
+          "speechId": 570,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 5728519,
+          "sourceEndMs": 5729340,
+          "text": "1Bかー"
+        },
+        {
+          "speechId": 571,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 5733894,
+          "sourceEndMs": 5751200,
+          "text": "ざま…ざまみ…ざまみ商業高校ざまみ…大丈夫かなぁ…Bって…Bやばいか?"
+        },
+        {
+          "speechId": 572,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 5751200,
+          "sourceEndMs": 5755602,
+          "text": "まぁ占い師踏んで…占い師踏んで…"
+        },
+        {
+          "speechId": 584,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 5820002,
+          "sourceEndMs": 5832289,
+          "text": "ダウンは変えていいよね弾道は使うなら3年目は勝ったね、クールって変えていいよね気持ちいこう、いけうちけかい!"
+        },
+        {
+          "speechId": 585,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 5832289,
+          "sourceEndMs": 5833510,
+          "text": "うちけ!"
+        },
+        {
+          "speechId": 586,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 5833510,
+          "sourceEndMs": 5834110,
+          "text": "うちけ!"
+        },
+        {
+          "speechId": 587,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 5834110,
+          "sourceEndMs": 5848959,
+          "text": "もちろん悪くないお祭りはとこ悪くないいちいちで踏めるぞこれいちいちで踏んでいくか全部お調子者いなかったかも"
+        },
+        {
+          "speechId": 588,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 5850898,
+          "sourceEndMs": 5873785,
+          "text": "これどっちでもいいよね、別に悪くはないよね、決して別にどっちでもいいよね、これ気持ちいいOKOKOK個別TOKOKOK今日張り切ってる3人!"
+        },
+        {
+          "speechId": 589,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 5873785,
+          "sourceEndMs": 5874705,
+          "text": "リト!"
+        },
+        {
+          "speechId": 590,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 5874705,
+          "sourceEndMs": 5875806,
+          "text": "アマノ!"
+        },
+        {
+          "speechId": 591,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 5875806,
+          "sourceEndMs": 5876366,
+          "text": "フブキュン!"
+        },
+        {
+          "speechId": 608,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6002550,
+          "sourceEndMs": 6005292,
+          "text": "テンション上がった?"
+        },
+        {
+          "speechId": 609,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6005292,
+          "sourceEndMs": 6005713,
+          "text": "監督!"
+        },
+        {
+          "speechId": 610,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6005713,
+          "sourceEndMs": 6007635,
+          "text": "夏の甲子園大会がいよいよ始まります!"
+        },
+        {
+          "speechId": 611,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6007635,
+          "sourceEndMs": 6009817,
+          "text": "強豪揃いでどこも手強いですが必ず勝ちましょう!"
+        },
+        {
+          "speechId": 612,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6009817,
+          "sourceEndMs": 6010978,
+          "text": "いやー所詮ハイタイは嫌だ!"
+        },
+        {
+          "speechId": 613,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6010978,
+          "sourceEndMs": 6011018,
+          "text": "お?"
+        },
+        {
+          "speechId": 614,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6011018,
+          "sourceEndMs": 6011298,
+          "text": "え、誰にしよう?"
+        },
+        {
+          "speechId": 615,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6011298,
+          "sourceEndMs": 6023529,
+          "text": "いや、これ誰かな?"
+        },
+        {
+          "speechId": 616,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6023529,
+          "sourceEndMs": 6026091,
+          "text": "コロネかな?"
+        },
+        {
+          "speechId": 617,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6026091,
+          "sourceEndMs": 6028754,
+          "text": "でもお調子者お祭りできるよ、いつでも"
+        },
+        {
+          "speechId": 618,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6037366,
+          "sourceEndMs": 6059980,
+          "text": "座はアベヒ大山は乗ってますお調子者です超ノリノリだし大山OK大山ねトイレうんトイレ行きたいトイレ行きたーいあみんないいじゃんいいじゃんえめっちゃやばい向こうの学校超真顔です"
+        },
+        {
+          "speechId": 627,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6240322,
+          "sourceEndMs": 6269840,
+          "text": "あのさあのさあのさあのさかかとでさじかにさまた押さえてるわけないよねパンツとさパンツとさあのーあのあれ履いてるあれをさスカートをさね2枚こしてまいいよもうお前らに言っても意味ないお前らに何言っても意味ないもう分かってくれないならもういいいくぜ染み出てねえよ漏らしてねえつって"
+        },
+        {
+          "speechId": 628,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6271239,
+          "sourceEndMs": 6281687,
+          "text": "シミ出てねーんだよ行くぜ頼むで!"
+        },
+        {
+          "speechId": 629,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6281687,
+          "sourceEndMs": 6284348,
+          "text": "ザサミ商業!"
+        },
+        {
+          "speechId": 630,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6284348,
+          "sourceEndMs": 6288972,
+          "text": "沖縄かよ!"
+        },
+        {
+          "speechId": 631,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6288972,
+          "sourceEndMs": 6293835,
+          "text": "どいつもこいつも似た顔しやがって負けてらんねん総合力戦力B!"
+        },
+        {
+          "speechId": 632,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6293835,
+          "sourceEndMs": 6296257,
+          "text": "おい今日初めて出てくる長谷川!"
+        },
+        {
+          "speechId": 633,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6296257,
+          "sourceEndMs": 6299360,
+          "text": "お前初めてのくせにちょ、やばいやばい1点取られた"
+        },
+        {
+          "speechId": 634,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6305196,
+          "sourceEndMs": 6329174,
+          "text": "右の杉山マウンドに上がりました今日は配球にも注目したいと思います1回の裏パイレーツ攻撃に入ります先頭バッターは大山あれ黄色い声援だお祭り男と勘違いしてたちょっと見るか相手でも強っ強っバランスよ強っ"
+        },
+        {
+          "speechId": 635,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6336132,
+          "sourceEndMs": 6359100,
+          "text": "あ、強あ、ツッツヨツヨスーヨ肩Dツッツヨツヨスーヨバランスよく強いな向こうにもスワいるんだけどやべえよ全員星300ぐらいある全員星300あるこれマン?"
+        },
+        {
+          "speechId": 636,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6359100,
+          "sourceEndMs": 6359980,
+          "text": "あ、こいつだけエラー"
+        },
+        {
+          "speechId": 637,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6360082,
+          "sourceEndMs": 6389414,
+          "text": "とか持ってる長谷川長谷川はこの学校はざまみ小学校じゃないざまみ高校は強すぎるやつの中に一人こういう長谷川みたいなこれ1年生だ1年でお前それから強えな1年生入れてこれ教育中今育成中です育成中投手負け運負け運来たうわー"
+        },
+        {
+          "speechId": 638,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6390562,
+          "sourceEndMs": 6417590,
+          "text": "ムービングファースト、シュート、進化、チェンジアップなるほどクイックはD、盗塁はなんかできそうだなクイックDで肩がDだから盗塁はなんかワンチャンあるな、雰囲気ま、一旦転がしていくとりあえず一旦転がしていく"
+        },
+        {
+          "speechId": 643,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6480278,
+          "sourceEndMs": 6480718,
+          "text": "何類?"
+        },
+        {
+          "speechId": 644,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6480718,
+          "sourceEndMs": 6483039,
+          "text": "えぇー?"
+        },
+        {
+          "speechId": 645,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6483039,
+          "sourceEndMs": 6484639,
+          "text": "まー?"
+        },
+        {
+          "speechId": 646,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6484639,
+          "sourceEndMs": 6485520,
+          "text": "チャンスだけど?"
+        },
+        {
+          "speechId": 647,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6485520,
+          "sourceEndMs": 6488640,
+          "text": "あ、どうしよう?"
+        },
+        {
+          "speechId": 648,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6488640,
+          "sourceEndMs": 6489301,
+          "text": "転がす?"
+        },
+        {
+          "speechId": 649,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6489301,
+          "sourceEndMs": 6493982,
+          "text": "それとも送りバント?"
+        },
+        {
+          "speechId": 650,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6493982,
+          "sourceEndMs": 6500204,
+          "text": "え、あーでも転、うーん転がすか普通にうーん、転がすと出バント?"
+        },
+        {
+          "speechId": 651,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6500204,
+          "sourceEndMs": 6508846,
+          "text": "うーん、まあ一旦転がすかさっきみたいに普通にアウトってなるかもしれんけどバントからスクイーズでちゃんと1点取るべき?"
+        },
+        {
+          "speechId": 652,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6511002,
+          "sourceEndMs": 6525131,
+          "text": "ちゃんと1点取るか迷うなぁ…うーん…ま、これ…剥がすかぁ…一旦…お願い!"
+        },
+        {
+          "speechId": 653,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6525131,
+          "sourceEndMs": 6525871,
+          "text": "頑張ってよ!"
+        },
+        {
+          "speechId": 654,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6525871,
+          "sourceEndMs": 6526271,
+          "text": "転がったら!"
+        },
+        {
+          "speechId": 655,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6526271,
+          "sourceEndMs": 6527292,
+          "text": "よーしよしよしよしよしよしよし!"
+        },
+        {
+          "speechId": 656,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6527292,
+          "sourceEndMs": 6528033,
+          "text": "泡の工夫!"
+        },
+        {
+          "speechId": 657,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6528033,
+          "sourceEndMs": 6529974,
+          "text": "やればできるじゃない!"
+        },
+        {
+          "speechId": 658,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6529974,
+          "sourceEndMs": 6530934,
+          "text": "なんだって!"
+        },
+        {
+          "speechId": 659,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6530934,
+          "sourceEndMs": 6531275,
+          "text": "スワ!"
+        },
+        {
+          "speechId": 660,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6531275,
+          "sourceEndMs": 6532956,
+          "text": "お前やれんのか!"
+        },
+        {
+          "speechId": 661,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6532956,
+          "sourceEndMs": 6534216,
+          "text": "スワ!"
+        },
+        {
+          "speechId": 662,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6534216,
+          "sourceEndMs": 6535777,
+          "text": "やれんのか状態で!"
+        },
+        {
+          "speechId": 663,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6535777,
+          "sourceEndMs": 6539920,
+          "text": "スワスワスワ!"
+        },
+        {
+          "speechId": 664,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6540034,
+          "sourceEndMs": 6569860,
+          "text": "いいかーでも総力はBでも数字が3だとなんか嫌な感じがするよなやばっすわやれんのかお前転がせ5かこれやれんのか状態でまずいやる気かってすわやんのかってどうするってこれトルいくべちょっと怖いちょっと怖い3とか言われるとちょっと嫌な気が"
+        },
+        {
+          "speechId": 665,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6570790,
+          "sourceEndMs": 6572211,
+          "text": "犠牲フライもある?"
+        },
+        {
+          "speechId": 666,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6572211,
+          "sourceEndMs": 6572671,
+          "text": "確かに!"
+        },
+        {
+          "speechId": 667,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6572671,
+          "sourceEndMs": 6573891,
+          "text": "犠牲フライでもいい!"
+        },
+        {
+          "speechId": 668,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6573891,
+          "sourceEndMs": 6577653,
+          "text": "トウコンも切るのか?"
+        },
+        {
+          "speechId": 669,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6577653,
+          "sourceEndMs": 6579774,
+          "text": "これトウコンも切るのか?"
+        },
+        {
+          "speechId": 670,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6579774,
+          "sourceEndMs": 6582235,
+          "text": "これこれトウコン?"
+        },
+        {
+          "speechId": 671,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6582235,
+          "sourceEndMs": 6582775,
+          "text": "いかんか?"
+        },
+        {
+          "speechId": 672,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6582775,
+          "sourceEndMs": 6584636,
+          "text": "これやっとくべきか?"
+        },
+        {
+          "speechId": 673,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6584636,
+          "sourceEndMs": 6589198,
+          "text": "これ最悪ギ…今の風見て飛ばないぞ?"
+        },
+        {
+          "speechId": 674,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6589198,
+          "sourceEndMs": 6590698,
+          "text": "風強いから犠牲ダメ?"
+        },
+        {
+          "speechId": 675,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6590698,
+          "sourceEndMs": 6596661,
+          "text": "そっかそうかもわかった風向きね?"
+        },
+        {
+          "speechId": 676,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6596661,
+          "sourceEndMs": 6598882,
+          "text": "わかったトウコンはまだわかった"
+        },
+        {
+          "speechId": 677,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6601538,
+          "sourceEndMs": 6603359,
+          "text": "ほな、転がす?"
+        },
+        {
+          "speechId": 678,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6603359,
+          "sourceEndMs": 6606102,
+          "text": "じゃあ転がすこれ?"
+        },
+        {
+          "speechId": 679,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6606102,
+          "sourceEndMs": 6611666,
+          "text": "じゃあ転がすこれ?"
+        },
+        {
+          "speechId": 680,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6611666,
+          "sourceEndMs": 6615068,
+          "text": "んー転ごうでいいかな?"
+        },
+        {
+          "speechId": 681,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6615068,
+          "sourceEndMs": 6622814,
+          "text": "ほなほな転ごうか月通が怖い?"
+        },
+        {
+          "speechId": 682,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6622814,
+          "sourceEndMs": 6623315,
+          "text": "そうか!"
+        },
+        {
+          "speechId": 683,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6623315,
+          "sourceEndMs": 6624656,
+          "text": "月通が怖いか!"
+        },
+        {
+          "speechId": 684,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6624656,
+          "sourceEndMs": 6626717,
+          "text": "ほなセンター返しか!"
+        },
+        {
+          "speechId": 685,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6626717,
+          "sourceEndMs": 6629600,
+          "text": "ほなセンター返しか!"
+        },
+        {
+          "speechId": 686,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6629600,
+          "sourceEndMs": 6629780,
+          "text": "じゃあ"
+        },
+        {
+          "speechId": 687,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6634591,
+          "sourceEndMs": 6637592,
+          "text": "いけ!"
+        },
+        {
+          "speechId": 688,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6637592,
+          "sourceEndMs": 6638872,
+          "text": "センター返しだ!"
+        },
+        {
+          "speechId": 689,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6638872,
+          "sourceEndMs": 6657739,
+          "text": "飛んでるこれ犠牲フライみたいな感じになら…な…な…まあまあまあまあ1点入ったいいじゃんチャンスだ"
+        },
+        {
+          "speechId": 690,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6660842,
+          "sourceEndMs": 6662063,
+          "text": "え?"
+        },
+        {
+          "speechId": 691,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6662063,
+          "sourceEndMs": 6665005,
+          "text": "盗塁なんかできそうじゃね?"
+        },
+        {
+          "speechId": 692,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6665005,
+          "sourceEndMs": 6666546,
+          "text": "コロネ?"
+        },
+        {
+          "speechId": 693,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6666546,
+          "sourceEndMs": 6669368,
+          "text": "盗塁D、負草力Bえ、いけるよね?"
+        },
+        {
+          "speechId": 694,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6669368,
+          "sourceEndMs": 6669989,
+          "text": "いけるっしょ?"
+        },
+        {
+          "speechId": 695,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6669989,
+          "sourceEndMs": 6670829,
+          "text": "盗塁していいよね?"
+        },
+        {
+          "speechId": 696,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6670829,
+          "sourceEndMs": 6673791,
+          "text": "気持ちいいしていいっすかこれ?"
+        },
+        {
+          "speechId": 697,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6673791,
+          "sourceEndMs": 6674572,
+          "text": "え、スクイーズ?"
+        },
+        {
+          "speechId": 698,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6674572,
+          "sourceEndMs": 6676974,
+          "text": "え、と、スクイーズ?"
+        },
+        {
+          "speechId": 699,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6676974,
+          "sourceEndMs": 6678715,
+          "text": "と、スクイーズ?"
+        },
+        {
+          "speechId": 700,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6678715,
+          "sourceEndMs": 6679375,
+          "text": "盗塁スクイーズ?"
+        },
+        {
+          "speechId": 701,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6679375,
+          "sourceEndMs": 6679755,
+          "text": "盗塁?"
+        },
+        {
+          "speechId": 702,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6679755,
+          "sourceEndMs": 6680196,
+          "text": "スクイーズ?"
+        },
+        {
+          "speechId": 703,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6680196,
+          "sourceEndMs": 6680536,
+          "text": "盗塁?"
+        },
+        {
+          "speechId": 704,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6680536,
+          "sourceEndMs": 6680996,
+          "text": "スクイーズ?"
+        },
+        {
+          "speechId": 705,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6680996,
+          "sourceEndMs": 6681337,
+          "text": "盗塁?"
+        },
+        {
+          "speechId": 706,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6681337,
+          "sourceEndMs": 6682217,
+          "text": "スクイーズ?"
+        },
+        {
+          "speechId": 707,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6682217,
+          "sourceEndMs": 6682597,
+          "text": "盗塁?"
+        },
+        {
+          "speechId": 708,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6682597,
+          "sourceEndMs": 6683218,
+          "text": "スクイーズ?"
+        },
+        {
+          "speechId": 709,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6683218,
+          "sourceEndMs": 6684279,
+          "text": "盗塁してスクイーズ?"
+        },
+        {
+          "speechId": 710,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6684279,
+          "sourceEndMs": 6685640,
+          "text": "数字変わっちゃうけど良き?"
+        },
+        {
+          "speechId": 711,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6685640,
+          "sourceEndMs": 6687881,
+          "text": "数字変わっちゃうけど良き?"
+        },
+        {
+          "speechId": 712,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6687881,
+          "sourceEndMs": 6688902,
+          "text": "盗塁したら数字変わっちゃうけど"
+        },
+        {
+          "speechId": 713,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6691546,
+          "sourceEndMs": 6696669,
+          "text": "まずいか?"
+        },
+        {
+          "speechId": 714,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6696669,
+          "sourceEndMs": 6703232,
+          "text": "まずいかな?"
+        },
+        {
+          "speechId": 715,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6703232,
+          "sourceEndMs": 6705653,
+          "text": "いけるよね?"
+        },
+        {
+          "speechId": 716,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6705653,
+          "sourceEndMs": 6710035,
+          "text": "肩もクイックもD肩もクイックもDさっき見た?"
+        },
+        {
+          "speechId": 717,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6710035,
+          "sourceEndMs": 6715998,
+          "text": "選手は危ないかな?"
+        },
+        {
+          "speechId": 718,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6715998,
+          "sourceEndMs": 6719260,
+          "text": "いける?"
+        },
+        {
+          "speechId": 719,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6719260,
+          "sourceEndMs": 6719900,
+          "text": "牽制されてるから少し"
+        },
+        {
+          "speechId": 720,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6720540,
+          "sourceEndMs": 6721260,
+          "text": "いける?"
+        },
+        {
+          "speechId": 721,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6721260,
+          "sourceEndMs": 6721901,
+          "text": "いけるか?"
+        },
+        {
+          "speechId": 722,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6721901,
+          "sourceEndMs": 6722181,
+          "text": "いける?"
+        },
+        {
+          "speechId": 723,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6722181,
+          "sourceEndMs": 6722621,
+          "text": "いけます?"
+        },
+        {
+          "speechId": 724,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6722621,
+          "sourceEndMs": 6723001,
+          "text": "いけます?"
+        },
+        {
+          "speechId": 725,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6723001,
+          "sourceEndMs": 6728003,
+          "text": "いけます?"
+        },
+        {
+          "speechId": 726,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6728003,
+          "sourceEndMs": 6728823,
+          "text": "いけるか?"
+        },
+        {
+          "speechId": 727,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6728823,
+          "sourceEndMs": 6734205,
+          "text": "え、ちょっとなんか、全然見えない見えねーよ!"
+        },
+        {
+          "speechId": 728,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6734205,
+          "sourceEndMs": 6748310,
+          "text": "あ、1になっちゃったあいつスクイーズ1になっちゃったこれこれスクイーズ1になっちゃったあ、1になっちゃったけどこれやっちゃったかこれ、転がすか一旦"
+        },
+        {
+          "speechId": 729,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6750866,
+          "sourceEndMs": 6763495,
+          "text": "うんクセモノ切った方がいいかなーこりゃー切るか3かー!"
+        },
+        {
+          "speechId": 730,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6763495,
+          "sourceEndMs": 6776824,
+          "text": "3だってよー3微妙かなーんー3は危険?"
+        },
+        {
+          "speechId": 731,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6776824,
+          "sourceEndMs": 6779286,
+          "text": "ん、うん"
+        },
+        {
+          "speechId": 732,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6780658,
+          "sourceEndMs": 6788384,
+          "text": "微妙かーバンド職人ついてるからいけんじゃね?"
+        },
+        {
+          "speechId": 733,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6788384,
+          "sourceEndMs": 6791586,
+          "text": "まあほんと?"
+        },
+        {
+          "speechId": 734,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6791586,
+          "sourceEndMs": 6793828,
+          "text": "いってみるかじゃあね?"
+        },
+        {
+          "speechId": 735,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6793828,
+          "sourceEndMs": 6797971,
+          "text": "バンド職人があるんだから!"
+        },
+        {
+          "speechId": 736,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6797971,
+          "sourceEndMs": 6798652,
+          "text": "いけるいける!"
+        },
+        {
+          "speechId": 737,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6798652,
+          "sourceEndMs": 6799832,
+          "text": "バンド職人だから!"
+        },
+        {
+          "speechId": 738,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6799832,
+          "sourceEndMs": 6800573,
+          "text": "よしまだチャンスだ"
+        },
+        {
+          "speechId": 739,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6813459,
+          "sourceEndMs": 6818381,
+          "text": "さあ、どうする?"
+        },
+        {
+          "speechId": 740,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6818381,
+          "sourceEndMs": 6827485,
+          "text": "センター返し4だから、センター返しなのかな?"
+        },
+        {
+          "speechId": 741,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6827485,
+          "sourceEndMs": 6829686,
+          "text": "ねぇ、センター返していいかしらね、これ普通に。"
+        },
+        {
+          "speechId": 742,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6829686,
+          "sourceEndMs": 6834008,
+          "text": "撃てるかな?"
+        },
+        {
+          "speechId": 743,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6834008,
+          "sourceEndMs": 6839710,
+          "text": "おっ!"
+        },
+        {
+          "speechId": 744,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6851910,
+          "sourceEndMs": 6869600,
+          "text": "やめるこんな状態で俺に任せてくるなやめてくれ俺にどうしろってんだ一旦スタミナ一旦スタミナですかこれ先生"
+        },
+        {
+          "speechId": 745,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6874583,
+          "sourceEndMs": 6899840,
+          "text": "マジやめてくれミートBパワーE内角も外角も5あるぞ外角5でいいかなここ普通に1点は上げる気でいこううーん低めで月中狙い"
+        },
+        {
+          "speechId": 746,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6900282,
+          "sourceEndMs": 6928078,
+          "text": "おー内角でいいかうん内角で詰まらせるふんふんふんオッケーえ、取れる取れる取れる取れるナイスうわー強ミートAパワーB"
+        },
+        {
+          "speechId": 747,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6931290,
+          "sourceEndMs": 6943314,
+          "text": "外角が外角5だけど撃たせて取れが7パワーもあるからカッキーン!"
+        },
+        {
+          "speechId": 748,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6943314,
+          "sourceEndMs": 6947356,
+          "text": "行くかもしれんカッキーン!"
+        },
+        {
+          "speechId": 749,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6947356,
+          "sourceEndMs": 6958800,
+          "text": "って行くかもな弾道が1か7なら信じたい?"
+        },
+        {
+          "speechId": 750,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6958800,
+          "sourceEndMs": 6959600,
+          "text": "風?"
+        },
+        {
+          "speechId": 751,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6959600,
+          "sourceEndMs": 6959920,
+          "text": "風が?"
+        },
+        {
+          "speechId": 752,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6965498,
+          "sourceEndMs": 6969742,
+          "text": "向かい風逆風だからあり?"
+        },
+        {
+          "speechId": 753,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6969742,
+          "sourceEndMs": 6988538,
+          "text": "んーにゅーんうーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー"
+        },
+        {
+          "speechId": 754,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6993330,
+          "sourceEndMs": 7004994,
+          "text": "第2球投げた!"
+        },
+        {
+          "speechId": 755,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 7004994,
+          "sourceEndMs": 7005314,
+          "text": "打ちました!"
+        },
+        {
+          "speechId": 756,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 7005314,
+          "sourceEndMs": 7005494,
+          "text": "あ、待て!"
+        },
+        {
+          "speechId": 757,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 7005494,
+          "sourceEndMs": 7005614,
+          "text": "ファウル!"
+        },
+        {
+          "speechId": 758,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 7005614,
+          "sourceEndMs": 7006094,
+          "text": "投球はこれから3球目!"
+        },
+        {
+          "speechId": 759,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 7006094,
+          "sourceEndMs": 7006174,
+          "text": "打った!"
+        },
+        {
+          "speechId": 760,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 7006174,
+          "sourceEndMs": 7006394,
+          "text": "あ、ファウルか!"
+        },
+        {
+          "speechId": 761,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 7006394,
+          "sourceEndMs": 7006574,
+          "text": "第4球を投げた!"
+        },
+        {
+          "speechId": 762,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 7006574,
+          "sourceEndMs": 7006694,
+          "text": "あ、これは!"
+        },
+        {
+          "speechId": 763,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 7006694,
+          "sourceEndMs": 7006874,
+          "text": "いやいやいや!"
+        },
+        {
+          "speechId": 764,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 7006874,
+          "sourceEndMs": 7007135,
+          "text": "ナイスナイスナイス!"
+        },
+        {
+          "speechId": 765,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 7007135,
+          "sourceEndMs": 7018038,
+          "text": "オーケーオーケーオーケーオーケーオーケーオーケーオーケーオーケーオーケーオーケーオーケーオーケーオーケーオーケーオーケーオーケーオーケーオーケーオーケーオーケーオーケーオーケーオーケーオーケーオーケーオーケーオーケーオーケーオーケーオーケーオーケーオーケーオーケーオーケーオーケーオーケーオーケーオーケーオーケーオ"
+        },
+        {
+          "speechId": 770,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 7082530,
+          "sourceEndMs": 7082950,
+          "text": "やだわーどうしよう数字が微妙でまだ同点?"
+        },
+        {
+          "speechId": 771,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 7082950,
+          "sourceEndMs": 7109422,
+          "text": "んーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー"
+        },
+        {
+          "speechId": 772,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 7112831,
+          "sourceEndMs": 7137334,
+          "text": "お前を信じてるマリンはいやーまずいかこれお前は何やってるー天野てめーお前が腰へ勝ちたいって言うからお前にいっぱい青徳取っといてなんだてめー天野天野てめーマジで許せねー天野許せない"
+        },
+        {
+          "speechId": 780,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 7262158,
+          "sourceEndMs": 7286557,
+          "text": "アイリス守備職人やお前は4対2パイレーツ2点をリードされていますやばいか2点返せるか2点1アウト1二塁パイレーツここはなんとか追いつきたい1アウトランナー1塁2塁という場面でバッターは2年生犬神一旦強心臓よなここはさあ持ち前の強心臓"
+        },
+        {
+          "speechId": 781,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 7291087,
+          "sourceEndMs": 7317210,
+          "text": "ま、転がせていいよねこれは転がせていいよなここはな5だしうーんオーケーな、ファウルうーん"
+        },
+        {
+          "speechId": 782,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 7322792,
+          "sourceEndMs": 7346270,
+          "text": "おーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー"
+        },
+        {
+          "speechId": 783,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 7353796,
+          "sourceEndMs": 7355797,
+          "text": "うんうんうんスクイーズは怖い?"
+        },
+        {
+          "speechId": 784,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 7355797,
+          "sourceEndMs": 7355857,
+          "text": "ない?"
+        },
+        {
+          "speechId": 785,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 7355857,
+          "sourceEndMs": 7367628,
+          "text": "ないかはいはいはい満塁だから?"
+        },
+        {
+          "speechId": 786,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 7367628,
+          "sourceEndMs": 7378157,
+          "text": "1点ずつ行きたいのはある2点負けてスクイーズちょっと?"
+        },
+        {
+          "speechId": 787,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 7378157,
+          "sourceEndMs": 7378797,
+          "text": "んーなるほど"
+        },
+        {
+          "speechId": 788,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 7381314,
+          "sourceEndMs": 7407126,
+          "text": "ここがいい伝令入れで引っ張るゲッツー、確かゲッツーになったらやばいかうーん、そうだワンアウトだからかただアイリスあんまり打ててないあんまり打ててないここスクイズで次伝令"
+        },
+        {
+          "speechId": 789,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 7411546,
+          "sourceEndMs": 7424578,
+          "text": "ゲッツーはやだねゲッツーはやだよなぁまぁステータス的に撃てない可能性も高いからなぁ確実に行く?"
+        },
+        {
+          "speechId": 790,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 7424578,
+          "sourceEndMs": 7433367,
+          "text": "スクイーズで?"
+        },
+        {
+          "speechId": 791,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 7433367,
+          "sourceEndMs": 7436250,
+          "text": "うんスクイーズしといて次"
+        },
+        {
+          "speechId": 792,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 7440799,
+          "sourceEndMs": 7469400,
+          "text": "次プレアちゃんか次プレアちゃんアイリスの次はプレアちゃんですね次のプレアもあんま打てないんだよな次のプレアもあんま打てないんだよなかといって1点入れたいよなスクイーズしてプレアに伝令かしらそうするか"
+        },
+        {
+          "speechId": 793,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 7490633,
+          "sourceEndMs": 7499840,
+          "text": "はいうーんデプレイヤーちゃん2.0かえっと使っちゃいけないのが"
+        },
+        {
+          "speechId": 797,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 7564002,
+          "sourceEndMs": 7589239,
+          "text": "えー転がせでいいかセンター6だけど6だけどパワーないしな転ごで行くかうん撃てるかプレア頑張れ撃ってねやーばい撃てる?"
+        },
+        {
+          "speechId": 798,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 7589239,
+          "sourceEndMs": 7589640,
+          "text": "プレアちゃん"
+        },
+        {
+          "speechId": 799,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 7590810,
+          "sourceEndMs": 7593311,
+          "text": "撃ってね!"
+        },
+        {
+          "speechId": 800,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 7593311,
+          "sourceEndMs": 7603034,
+          "text": "怖い!"
+        },
+        {
+          "speechId": 801,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 7603034,
+          "sourceEndMs": 7618940,
+          "text": "撃てないかー撃てないかー全然まで使ったのに撃てないかー厳しいですねーもう7回かもうやばくない?"
+        },
+        {
+          "speechId": 802,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 7618940,
+          "sourceEndMs": 7619520,
+          "text": "早くビト見せろよ"
+        },
+        {
+          "speechId": 806,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 7680498,
+          "sourceEndMs": 7687944,
+          "text": "なあ、ビトが魔物かどうかが見れないんだよバントじゃダメ?"
+        },
+        {
+          "speechId": 807,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 7687944,
+          "sourceEndMs": 7708199,
+          "text": "わかった、転がすわじゃあボールな、ボールなあ、ファウルかあ、ナイス!"
+        },
+        {
+          "speechId": 808,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 7708199,
+          "sourceEndMs": 7709920,
+          "text": "大山やればできんじゃんお前"
+        },
+        {
+          "speechId": 809,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 7710254,
+          "sourceEndMs": 7711954,
+          "text": "歩き出したか!"
+        },
+        {
+          "speechId": 810,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 7711954,
+          "sourceEndMs": 7713655,
+          "text": "ビト!"
+        },
+        {
+          "speechId": 811,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 7713655,
+          "sourceEndMs": 7714135,
+          "text": "?"
+        },
+        {
+          "speechId": 812,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 7713655,
+          "sourceEndMs": 7714135,
+          "text": "?"
+        },
+        {
+          "speechId": 813,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 7714135,
+          "sourceEndMs": 7716136,
+          "text": "ラッキーボーイ!"
+        },
+        {
+          "speechId": 814,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 7716136,
+          "sourceEndMs": 7717416,
+          "text": "お前ふざけんなお前!"
+        },
+        {
+          "speechId": 815,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 7717416,
+          "sourceEndMs": 7720497,
+          "text": "何がしたいんだお前は!"
+        },
+        {
+          "speechId": 816,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 7720497,
+          "sourceEndMs": 7723738,
+          "text": "な、勝つ気あんのかお前!"
+        },
+        {
+          "speechId": 817,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 7723738,
+          "sourceEndMs": 7727619,
+          "text": "何がラッキーボーイやふざけんなお前!"
+        },
+        {
+          "speechId": 818,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 7727619,
+          "sourceEndMs": 7735201,
+          "text": "えっとー待て盗塁…できるか?"
+        },
+        {
+          "speechId": 819,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 7735201,
+          "sourceEndMs": 7735761,
+          "text": "3ってどうなの?"
+        },
+        {
+          "speechId": 820,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 7735761,
+          "sourceEndMs": 7737001,
+          "text": "総力C盗塁C結構よくね?"
+        },
+        {
+          "speechId": 821,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 7737001,
+          "sourceEndMs": 7737121,
+          "text": "うん"
+        },
+        {
+          "speechId": 835,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 7801179,
+          "sourceEndMs": 7829520,
+          "text": "ちょっと今いけたかわかんなかった感じの流し打ち6流し打ち6か転がせ5のがいいのかしらどう思う君たち広角打法うわこいつチャンスFだった忘れたこいつチャンスFだったそうだったしまった"
+        },
+        {
+          "speechId": 836,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 7831275,
+          "sourceEndMs": 7857973,
+          "text": "流し6流し派ここは流し一流エラー持ちだから流しOKわかったエラー持ちだからね了解これさミートって対応でいいのかしらミートお任せの方がいいかしらお任せ?"
+        },
+        {
+          "speechId": 837,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 7857973,
+          "sourceEndMs": 7858614,
+          "text": "OKお任せな"
+        },
+        {
+          "speechId": 846,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 7920330,
+          "sourceEndMs": 7948219,
+          "text": "普通にうんうんボール多いなフォアボールなのかあ、打ったあ、いいじゃんいいじゃんよう転がっとる"
+        },
+        {
+          "speechId": 847,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 7954456,
+          "sourceEndMs": 7956477,
+          "text": "こういう感じに。"
+        },
+        {
+          "speechId": 848,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 7956477,
+          "sourceEndMs": 7958739,
+          "text": "えー。"
+        },
+        {
+          "speechId": 849,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 7958739,
+          "sourceEndMs": 7964262,
+          "text": "盗塁もありえるな。"
+        },
+        {
+          "speechId": 850,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 7964262,
+          "sourceEndMs": 7965803,
+          "text": "CCだもんね。"
+        },
+        {
+          "speechId": 851,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 7965803,
+          "sourceEndMs": 7972726,
+          "text": "さっきCCで行けたから盗塁もありだよな。"
+        },
+        {
+          "speechId": 852,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 7972726,
+          "sourceEndMs": 7972866,
+          "text": "うん。"
+        },
+        {
+          "speechId": 853,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 7972866,
+          "sourceEndMs": 7974507,
+          "text": "天野くん!"
+        },
+        {
+          "speechId": 854,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 7974507,
+          "sourceEndMs": 7976588,
+          "text": "盗塁する?"
+        },
+        {
+          "speechId": 855,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 7976588,
+          "sourceEndMs": 7976909,
+          "text": "これ。"
+        },
+        {
+          "speechId": 856,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 7976909,
+          "sourceEndMs": 7979550,
+          "text": "うん。"
+        },
+        {
+          "speechId": 857,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 7981290,
+          "sourceEndMs": 7990495,
+          "text": "行けっかなぁトルーイやれっかなぁ危ない?"
+        },
+        {
+          "speechId": 858,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 7990495,
+          "sourceEndMs": 7996639,
+          "text": "確かにこれでアウトになったらバカみたいが天野くんは死ないあれ?"
+        },
+        {
+          "speechId": 859,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 7996639,
+          "sourceEndMs": 8000761,
+          "text": "マリン見るの間違えた?"
+        },
+        {
+          "speechId": 860,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 8000761,
+          "sourceEndMs": 8007786,
+          "text": "本田くんファイトは切るか意味ないか意味ないけど切るかファイトは"
+        },
+        {
+          "speechId": 861,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 8016753,
+          "sourceEndMs": 8021035,
+          "text": "絶対アウトにならん、余裕?"
+        },
+        {
+          "speechId": 862,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 8021035,
+          "sourceEndMs": 8025338,
+          "text": "絶対アウトに…ならん?"
+        },
+        {
+          "speechId": 863,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 8025338,
+          "sourceEndMs": 8027279,
+          "text": "ま?"
+        },
+        {
+          "speechId": 864,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 8027279,
+          "sourceEndMs": 8028960,
+          "text": "いける?"
+        },
+        {
+          "speechId": 865,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 8028960,
+          "sourceEndMs": 8029040,
+          "text": "ん?"
+        },
+        {
+          "speechId": 866,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 8029040,
+          "sourceEndMs": 8039306,
+          "text": "待って、切るな切っていい、切るな、あーあじゃあ延長4とっとく、OKOKとっとくわじゃあ、トルイして…するか、うん"
+        },
+        {
+          "speechId": 885,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 8160222,
+          "sourceEndMs": 8175715,
+          "text": "左もセンター返しキャージこれバーミアンなのかなキャージバーミアンなのかなこれバーミアンねえミートは?"
+        },
+        {
+          "speechId": 886,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 8175715,
+          "sourceEndMs": 8177637,
+          "text": "ミートは?"
+        },
+        {
+          "speechId": 887,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 8177637,
+          "sourceEndMs": 8178378,
+          "text": "多用のがいいかな"
+        },
+        {
+          "speechId": 888,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 8192339,
+          "sourceEndMs": 8193300,
+          "text": "アベレージヒッターですよお任せでいいんですか?"
+        },
+        {
+          "speechId": 889,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 8193300,
+          "sourceEndMs": 8218519,
+          "text": "はいはいはいはいあ、お、おーはいはいそうですかそうですかそうですか今プルヒになった?"
+        },
+        {
+          "speechId": 890,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 8218519,
+          "sourceEndMs": 8219780,
+          "text": "プルヒッターもついてました"
+        },
+        {
+          "speechId": 891,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 8226920,
+          "sourceEndMs": 8231004,
+          "text": "ほなどっちですか?"
+        },
+        {
+          "speechId": 892,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 8231004,
+          "sourceEndMs": 8237910,
+          "text": "ミート対応でも強振してくれるセンター返し行きます!"
+        },
+        {
+          "speechId": 893,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 8237910,
+          "sourceEndMs": 8240673,
+          "text": "自分センター返し行かしてもらいます!"
+        },
+        {
+          "speechId": 894,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 8240673,
+          "sourceEndMs": 8243275,
+          "text": "期待してません決して!"
+        },
+        {
+          "speechId": 895,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 8243275,
+          "sourceEndMs": 8244817,
+          "text": "引っ張るのがいいんすか?"
+        },
+        {
+          "speechId": 896,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 8244817,
+          "sourceEndMs": 8245998,
+          "text": "でもナナがセンター返しか?"
+        },
+        {
+          "speechId": 897,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 8250754,
+          "sourceEndMs": 8254357,
+          "text": "7だし引っ張り?"
+        },
+        {
+          "speechId": 898,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 8254357,
+          "sourceEndMs": 8261603,
+          "text": "6引っ張りですか?"
+        },
+        {
+          "speechId": 899,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 8261603,
+          "sourceEndMs": 8263465,
+          "text": "センター?"
+        },
+        {
+          "speechId": 900,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 8263465,
+          "sourceEndMs": 8274975,
+          "text": "プロだから引っ張り?"
+        },
+        {
+          "speechId": 901,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 8274975,
+          "sourceEndMs": 8275275,
+          "text": "風?"
+        },
+        {
+          "speechId": 902,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 8275275,
+          "sourceEndMs": 8276596,
+          "text": "風?"
+        },
+        {
+          "speechId": 903,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 8276596,
+          "sourceEndMs": 8276656,
+          "text": "風?"
+        },
+        {
+          "speechId": 904,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 8276656,
+          "sourceEndMs": 8278277,
+          "text": "風ね?"
+        },
+        {
+          "speechId": 905,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 8278277,
+          "sourceEndMs": 8279058,
+          "text": "引っ張り方向が風が来てる?"
+        },
+        {
+          "speechId": 906,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 8280670,
+          "sourceEndMs": 8281050,
+          "text": "引っ張りの風が来てる?"
+        },
+        {
+          "speechId": 907,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 8281050,
+          "sourceEndMs": 8281210,
+          "text": "分かった!"
+        },
+        {
+          "speechId": 908,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 8281210,
+          "sourceEndMs": 8284891,
+          "text": "引っ張りの風が来てるから!"
+        },
+        {
+          "speechId": 909,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 8284891,
+          "sourceEndMs": 8285372,
+          "text": "引っ張りまーす!"
+        },
+        {
+          "speechId": 910,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 8285372,
+          "sourceEndMs": 8286532,
+          "text": "いけるかな?"
+        },
+        {
+          "speechId": 911,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 8286532,
+          "sourceEndMs": 8286972,
+          "text": "えいっ!"
+        },
+        {
+          "speechId": 912,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 8286972,
+          "sourceEndMs": 8298036,
+          "text": "あっ!"
+        },
+        {
+          "speechId": 913,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 8298036,
+          "sourceEndMs": 8298256,
+          "text": "あっ!"
+        },
+        {
+          "speechId": 914,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 8298256,
+          "sourceEndMs": 8304178,
+          "text": "あっ!"
+        },
+        {
+          "speechId": 915,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 8304178,
+          "sourceEndMs": 8304238,
+          "text": "あっ!"
+        },
+        {
+          "speechId": 916,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 8304238,
+          "sourceEndMs": 8304298,
+          "text": "ツバ!"
+        },
+        {
+          "speechId": 917,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 8304298,
+          "sourceEndMs": 8304358,
+          "text": "ツバ!"
+        },
+        {
+          "speechId": 918,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 8304358,
+          "sourceEndMs": 8304438,
+          "text": "あっ!"
+        },
+        {
+          "speechId": 919,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 8304438,
+          "sourceEndMs": 8304538,
+          "text": "入っ!"
+        },
+        {
+          "speechId": 920,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 8304538,
+          "sourceEndMs": 8304818,
+          "text": "入っちゃう!"
+        },
+        {
+          "speechId": 921,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 8304818,
+          "sourceEndMs": 8305218,
+          "text": "入らないかーい!"
+        },
+        {
+          "speechId": 922,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 8305218,
+          "sourceEndMs": 8305378,
+          "text": "入らないかーい!"
+        },
+        {
+          "speechId": 923,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 8305378,
+          "sourceEndMs": 8305478,
+          "text": "まいっか!"
+        },
+        {
+          "speechId": 924,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 8305478,
+          "sourceEndMs": 8305599,
+          "text": "ナーイスー!"
+        },
+        {
+          "speechId": 925,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 8305599,
+          "sourceEndMs": 8309980,
+          "text": "ツバはいつもマリンをドキドキさせてくれるツバお前はいつもマリン"
+        },
+        {
+          "speechId": 926,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 8310178,
+          "sourceEndMs": 8322483,
+          "text": "ドキドキさせてくれるなぁまぁ転がせかなぁ4うん転がせーですかねキャンチどう思う?"
+        },
+        {
+          "speechId": 927,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 8322483,
+          "sourceEndMs": 8328165,
+          "text": "普通に転がせでいいかなこれうん転よん?"
+        },
+        {
+          "speechId": 928,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 8328165,
+          "sourceEndMs": 8333147,
+          "text": "んーオッケオッケオッケこれねめっちゃ撃ってるほんとだ!"
+        },
+        {
+          "speechId": 929,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 8333147,
+          "sourceEndMs": 8336089,
+          "text": "めっちゃ撃ってる撃ってくれるさ"
+        },
+        {
+          "speechId": 947,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 8523287,
+          "sourceEndMs": 8544513,
+          "text": "ひっ…低め…低めかなぁ…んー…ダメか、盗塁…低めですかねぇ…うわぁー!"
+        },
+        {
+          "speechId": 948,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 8544513,
+          "sourceEndMs": 8547674,
+          "text": "うぉー…やーばい!"
+        },
+        {
+          "speechId": 949,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 8547674,
+          "sourceEndMs": 8548974,
+          "text": "まぁ外角行くしかないか…"
+        },
+        {
+          "speechId": 950,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 8553979,
+          "sourceEndMs": 8574138,
+          "text": "しーしーしーうわーやばいなこのままじゃ上位打線になっちゃうぞこれまずいかなーんー1点はしょうがないんー守備変えたほうがいいかなー"
+        },
+        {
+          "speechId": 1003,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 9126634,
+          "sourceEndMs": 9146351,
+          "text": "ミートビーパファイ低めしかないかなぁこれ低めしかないよねー低めしかないよねー同点同点なっちゃったねー低めしかないかここは他の数字的に"
+        },
+        {
+          "speechId": 1004,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 9150322,
+          "sourceEndMs": 9152184,
+          "text": "お、スーパーノヴァが撃たれた!"
+        },
+        {
+          "speechId": 1005,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 9152184,
+          "sourceEndMs": 9152524,
+          "text": "スーパーノヴァが撃たれたぞ!"
+        },
+        {
+          "speechId": 1006,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 9152524,
+          "sourceEndMs": 9152604,
+          "text": "ナイス!"
+        },
+        {
+          "speechId": 1007,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 9152604,
+          "sourceEndMs": 9153025,
+          "text": "青カインを救った!"
+        },
+        {
+          "speechId": 1008,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 9153025,
+          "sourceEndMs": 9153125,
+          "text": "ナイス!"
+        },
+        {
+          "speechId": 1009,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 9153125,
+          "sourceEndMs": 9177566,
+          "text": "さーて…ワンアウト連れ…うわー…引っ張り5かここまで2打席全力三振!"
+        },
+        {
+          "speechId": 1010,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 9186444,
+          "sourceEndMs": 9187624,
+          "text": "えぇー代打?"
+        },
+        {
+          "speechId": 1011,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 9187624,
+          "sourceEndMs": 9206169,
+          "text": "変えてーあ、ピッチャー変わってる、ほんとだ変わってるわクイックし、負けん代打出してーで、フブちゃんももう変えよう限界や、フブチやんはで、カエラに投げてもらううん"
+        },
+        {
+          "speechId": 1012,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 9213658,
+          "sourceEndMs": 9239820,
+          "text": "誰に打ってもらうかビブーかビブーかないっちゃん打ちそうなのは性能的にはビブーがいいかねうんうんうん負ける確かに変わっても負けない"
+        },
+        {
+          "speechId": 1023,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 9482230,
+          "sourceEndMs": 9493714,
+          "text": "転がせ3にするか転がします!"
+        },
+        {
+          "speechId": 1024,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 9493714,
+          "sourceEndMs": 9496975,
+          "text": "おお!"
+        },
+        {
+          "speechId": 1025,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 9496975,
+          "sourceEndMs": 9499476,
+          "text": "めっちゃ綺麗で転がるやん!"
+        },
+        {
+          "speechId": 1026,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 9499476,
+          "sourceEndMs": 9501977,
+          "text": "馬!"
+        },
+        {
+          "speechId": 1027,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 9501977,
+          "sourceEndMs": 9505598,
+          "text": "突然の代打で馬!"
+        },
+        {
+          "speechId": 1028,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 9505598,
+          "sourceEndMs": 9509900,
+          "text": "急に、急にチャンスになってきたやば、どうしよう急にチャンスになってきた"
+        },
+        {
+          "speechId": 1029,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 9511438,
+          "sourceEndMs": 9516319,
+          "text": "流し打ちが5突然のチャンス?"
+        },
+        {
+          "speechId": 1030,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 9516319,
+          "sourceEndMs": 9538626,
+          "text": "どうしようなこのチャンスをどうするべきかんー…ファーストエラーお祈り流し?"
+        },
+        {
+          "speechId": 1031,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 9538626,
+          "sourceEndMs": 9539326,
+          "text": "伝令?"
+        },
+        {
+          "speechId": 1032,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 9539326,
+          "sourceEndMs": 9539826,
+          "text": "今か?"
+        },
+        {
+          "speechId": 1079,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 9900438,
+          "sourceEndMs": 9926026,
+          "text": "タイミングいいからやってるだけなんだがえっとじゃあうんなたんで着地してこれでokはいでーまあ転がすかじゃあ転がすか緊張するけど第2球投げました2球目ストレイク"
+        },
+        {
+          "speechId": 1080,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 9930638,
+          "sourceEndMs": 9931938,
+          "text": "5なし!"
+        },
+        {
+          "speechId": 1081,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 9931938,
+          "sourceEndMs": 9932378,
+          "text": "いける!"
+        },
+        {
+          "speechId": 1082,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 9932378,
+          "sourceEndMs": 9934199,
+          "text": "いける!"
+        },
+        {
+          "speechId": 1083,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 9934199,
+          "sourceEndMs": 9935939,
+          "text": "いける!"
+        },
+        {
+          "speechId": 1084,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 9935939,
+          "sourceEndMs": 9936440,
+          "text": "あー取られたー!"
+        },
+        {
+          "speechId": 1085,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 9936440,
+          "sourceEndMs": 9937780,
+          "text": "すごい反応よ!"
+        },
+        {
+          "speechId": 1086,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 9937780,
+          "sourceEndMs": 9958466,
+          "text": "普通今のって股の間をコロコロと転がっていくやつやんえ、今の上手すぎるなー、よう取ったなー今の取られたならもう、もうどうしようもないでこれーんー、伝令使うにしてもな、2アウトかなー"
+        },
+        {
+          "speechId": 1124,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10200086,
+          "sourceEndMs": 10222216,
+          "text": "どうするか臭いところはコントロールが必要これ心配やなちょっとコントロールあんま良くないDなんだよな一旦臭いところうわめっちゃ走ってるめっちゃ走ってる取れるか?"
+        },
+        {
+          "speechId": 1125,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10222216,
+          "sourceEndMs": 10222456,
+          "text": "取れるか?"
+        },
+        {
+          "speechId": 1126,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10222456,
+          "sourceEndMs": 10222697,
+          "text": "取れるか?"
+        },
+        {
+          "speechId": 1127,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10222697,
+          "sourceEndMs": 10222797,
+          "text": "取れるか?"
+        },
+        {
+          "speechId": 1128,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10222797,
+          "sourceEndMs": 10229400,
+          "text": "ランナー1塁に戻りますはいカミこれでワンアウトランナーは1塁変わりませんひよどしカミ"
+        },
+        {
+          "speechId": 1129,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10230000,
+          "sourceEndMs": 10257434,
+          "text": "数字悪い数字悪い数字悪いおまかせしかないかこれ数字悪すぎるないくらなんでも数字悪すぎるおまかせしかないよねこの数字じゃどうしようもないよなこれはもうおまよんしかないよねもうこれはしょうがないねお願いします"
+        },
+        {
+          "speechId": 1136,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10322284,
+          "sourceEndMs": 10324285,
+          "text": "今のストライクなんだ!"
+        },
+        {
+          "speechId": 1137,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10324285,
+          "sourceEndMs": 10331751,
+          "text": "かなりボールに見えたおぉおぉおぉおぉおぉおぉおぉあ、当たりたけどこれ大丈夫大丈夫!"
+        },
+        {
+          "speechId": 1138,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10331751,
+          "sourceEndMs": 10337776,
+          "text": "あ、あ、待って大丈夫!"
+        },
+        {
+          "speechId": 1139,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10337776,
+          "sourceEndMs": 10349886,
+          "text": "えぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇ"
+        },
+        {
+          "speechId": 1140,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10350502,
+          "sourceEndMs": 10379920,
+          "text": "最悪なんだけど最悪なんだけど数字も悪いしどうすんのこれ助けてやばいですけどこれまずいまあ今のいけただろ絶対今のいけただろ守備伝令はなんだったんだうんまあ低めかな数字は良くないけどいきますか"
+        },
+        {
+          "speechId": 1141,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10385201,
+          "sourceEndMs": 10393267,
+          "text": "しょうがないからねえ、やばくない?"
+        },
+        {
+          "speechId": 1142,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10393267,
+          "sourceEndMs": 10393547,
+          "text": "取れる?"
+        },
+        {
+          "speechId": 1143,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10393547,
+          "sourceEndMs": 10394228,
+          "text": "いける?"
+        },
+        {
+          "speechId": 1144,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10394228,
+          "sourceEndMs": 10394648,
+          "text": "ナイス!"
+        },
+        {
+          "speechId": 1145,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10394648,
+          "sourceEndMs": 10395149,
+          "text": "よう取ってくれた!"
+        },
+        {
+          "speechId": 1146,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10395149,
+          "sourceEndMs": 10400353,
+          "text": "神です!"
+        },
+        {
+          "speechId": 1147,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10400353,
+          "sourceEndMs": 10403515,
+          "text": "これ限界すぎもう試合が限界すぎるの!"
+        },
+        {
+          "speechId": 1148,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10403515,
+          "sourceEndMs": 10403835,
+          "text": "やめとー!"
+        },
+        {
+          "speechId": 1149,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10403835,
+          "sourceEndMs": 10409920,
+          "text": "もう無理よ!"
+        },
+        {
+          "speechId": 1150,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10413554,
+          "sourceEndMs": 10431038,
+          "text": "ま、えっと伝令はちょっとねあれなんだよねスワ君下げちゃったからチョコ先生とかがそんなにミート良くないからどうすんのこれ伝令どこで切る?"
+        },
+        {
+          "speechId": 1151,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10431038,
+          "sourceEndMs": 10431998,
+          "text": "どこで伝令切る?"
+        },
+        {
+          "speechId": 1152,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10431998,
+          "sourceEndMs": 10433759,
+          "text": "とりあえず転がす?"
+        },
+        {
+          "speechId": 1153,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10433759,
+          "sourceEndMs": 10435359,
+          "text": "一旦転がす?"
+        },
+        {
+          "speechId": 1154,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10435359,
+          "sourceEndMs": 10437219,
+          "text": "どこで伝令?"
+        },
+        {
+          "speechId": 1155,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10437219,
+          "sourceEndMs": 10439900,
+          "text": "もうコロさんもいないそうだよコロねも"
+        },
+        {
+          "speechId": 1156,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10441547,
+          "sourceEndMs": 10444708,
+          "text": "どうすんのよ1点取れば勝てる?"
+        },
+        {
+          "speechId": 1157,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10444708,
+          "sourceEndMs": 10469860,
+          "text": "あああああ転がししかないよねこれうーんちょこせんところ転がししかないかそうだよねなんでこんな"
+        },
+        {
+          "speechId": 1158,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10470502,
+          "sourceEndMs": 10471463,
+          "text": "ヒリヒリしてもうこんなヒリヒリした試合はもうやだー!"
+        },
+        {
+          "speechId": 1159,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10471463,
+          "sourceEndMs": 10471723,
+          "text": "もうやだー!"
+        },
+        {
+          "speechId": 1160,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10471723,
+          "sourceEndMs": 10472044,
+          "text": "こんなヒリヒリした試合は嫌!"
+        },
+        {
+          "speechId": 1161,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10472044,
+          "sourceEndMs": 10472124,
+          "text": "やだー!"
+        },
+        {
+          "speechId": 1162,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10472124,
+          "sourceEndMs": 10472284,
+          "text": "やだやだやだ!"
+        },
+        {
+          "speechId": 1163,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10472284,
+          "sourceEndMs": 10472384,
+          "text": "やだよー!"
+        },
+        {
+          "speechId": 1164,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10472384,
+          "sourceEndMs": 10472564,
+          "text": "あーナイス!"
+        },
+        {
+          "speechId": 1165,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10472564,
+          "sourceEndMs": 10472744,
+          "text": "ナイス天野くん!"
+        },
+        {
+          "speechId": 1166,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10472744,
+          "sourceEndMs": 10472864,
+          "text": "あーナイス!"
+        },
+        {
+          "speechId": 1167,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10472864,
+          "sourceEndMs": 10473024,
+          "text": "ナイス天野くん!"
+        },
+        {
+          "speechId": 1168,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10473024,
+          "sourceEndMs": 10473144,
+          "text": "あーナイス!"
+        },
+        {
+          "speechId": 1169,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10473144,
+          "sourceEndMs": 10473345,
+          "text": "ナイス天野くん!"
+        },
+        {
+          "speechId": 1170,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10473345,
+          "sourceEndMs": 10473505,
+          "text": "あーナイス!"
+        },
+        {
+          "speechId": 1171,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10473505,
+          "sourceEndMs": 10473705,
+          "text": "ナイス天野くん!"
+        },
+        {
+          "speechId": 1172,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10473705,
+          "sourceEndMs": 10476947,
+          "text": "あーナイス!"
+        },
+        {
+          "speechId": 1173,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10476947,
+          "sourceEndMs": 10489578,
+          "text": "ナイス天野くん!"
+        },
+        {
+          "speechId": 1174,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10489578,
+          "sourceEndMs": 10490518,
+          "text": "あーナイス!"
+        },
+        {
+          "speechId": 1175,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10490518,
+          "sourceEndMs": 10490759,
+          "text": "ナイス天野くん!"
+        },
+        {
+          "speechId": 1176,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10490759,
+          "sourceEndMs": 10490919,
+          "text": "あーナイス!"
+        },
+        {
+          "speechId": 1177,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10490919,
+          "sourceEndMs": 10491099,
+          "text": "ナイス天野くん!"
+        },
+        {
+          "speechId": 1178,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10491099,
+          "sourceEndMs": 10491219,
+          "text": "あーナイス!"
+        },
+        {
+          "speechId": 1179,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10491219,
+          "sourceEndMs": 10492820,
+          "text": "ナイス天野くん!"
+        },
+        {
+          "speechId": 1180,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10492820,
+          "sourceEndMs": 10495322,
+          "text": "あーナイス!"
+        },
+        {
+          "speechId": 1181,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10495322,
+          "sourceEndMs": 10495763,
+          "text": "ナイス天野くん!"
+        },
+        {
+          "speechId": 1182,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10495763,
+          "sourceEndMs": 10495923,
+          "text": "あーナイス!"
+        },
+        {
+          "speechId": 1183,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10495923,
+          "sourceEndMs": 10496203,
+          "text": "ナイス天野くん!"
+        },
+        {
+          "speechId": 1184,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10496203,
+          "sourceEndMs": 10496423,
+          "text": "あーナイス!"
+        },
+        {
+          "speechId": 1185,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10496423,
+          "sourceEndMs": 10498605,
+          "text": "ナイス天野くん!"
+        },
+        {
+          "speechId": 1186,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10498605,
+          "sourceEndMs": 10498865,
+          "text": "あーナイス!"
+        },
+        {
+          "speechId": 1187,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10498865,
+          "sourceEndMs": 10499225,
+          "text": "ナイス天野くん!"
+        },
+        {
+          "speechId": 1188,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10499225,
+          "sourceEndMs": 10499366,
+          "text": "あーナ"
+        },
+        {
+          "speechId": 1189,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10503922,
+          "sourceEndMs": 10529860,
+          "text": "肩DのクイックCそして内は投類C総力Cさすがに投類かさすがに投類なのかここはやるべきだよね投類しないとクイックCはちょっといいけど危ない"
+        },
+        {
+          "speechId": 1190,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10532138,
+          "sourceEndMs": 10547007,
+          "text": "CCだとキツイかうーん微妙かーリスクリスクは怖いよねー同類版とスクイーズできたら熱い?"
+        },
+        {
+          "speechId": 1191,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10547007,
+          "sourceEndMs": 10558394,
+          "text": "失敗したらヤバいよなーうん失敗したらヤバい"
+        },
+        {
+          "speechId": 1192,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10564926,
+          "sourceEndMs": 10567828,
+          "text": "リターンの方がでかい?"
+        },
+        {
+          "speechId": 1193,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10567828,
+          "sourceEndMs": 10568568,
+          "text": "リスク!"
+        },
+        {
+          "speechId": 1194,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10568568,
+          "sourceEndMs": 10569348,
+          "text": "リターン!"
+        },
+        {
+          "speechId": 1195,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10569348,
+          "sourceEndMs": 10570089,
+          "text": "リスク!"
+        },
+        {
+          "speechId": 1196,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10570089,
+          "sourceEndMs": 10572750,
+          "text": "リターン!"
+        },
+        {
+          "speechId": 1197,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10572750,
+          "sourceEndMs": 10587579,
+          "text": "アヴァの普通に撃ってくれるなら普通に転がしたらで、これでゲッツーだったらどうしようトールイできたらほぼ勝ち?"
+        },
+        {
+          "speechId": 1198,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10587579,
+          "sourceEndMs": 10589220,
+          "text": "待って、こいつってさ早い?"
+        },
+        {
+          "speechId": 1199,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10589220,
+          "sourceEndMs": 10589560,
+          "text": "142キロ"
+        },
+        {
+          "speechId": 1200,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10590002,
+          "sourceEndMs": 10605131,
+          "text": "142キルかーキチいか?"
+        },
+        {
+          "speechId": 1201,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10605131,
+          "sourceEndMs": 10605491,
+          "text": "キチいか?"
+        },
+        {
+          "speechId": 1202,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10605491,
+          "sourceEndMs": 10606131,
+          "text": "リスクを犯さないと勝てない?"
+        },
+        {
+          "speechId": 1203,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10606131,
+          "sourceEndMs": 10618318,
+          "text": "送りバント?"
+        },
+        {
+          "speechId": 1204,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10628796,
+          "sourceEndMs": 10629597,
+          "text": "ああああああ"
+        },
+        {
+          "speechId": 1205,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10680294,
+          "sourceEndMs": 10687940,
+          "text": "しかもセーフだー!"
+        },
+        {
+          "speechId": 1206,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10721215,
+          "sourceEndMs": 10725236,
+          "text": "スクイーズ2なんですけどスクイーズ2なんですけど君たちこれ何?"
+        },
+        {
+          "speechId": 1207,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10725236,
+          "sourceEndMs": 10733158,
+          "text": "スクイーズ2ですけどデンデー?"
+        },
+        {
+          "speechId": 1208,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10733158,
+          "sourceEndMs": 10736439,
+          "text": "デンデー?"
+        },
+        {
+          "speechId": 1209,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10736439,
+          "sourceEndMs": 10738500,
+          "text": "デンデー何入れる?"
+        },
+        {
+          "speechId": 1210,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10738500,
+          "sourceEndMs": 10739420,
+          "text": "チョコ先生はですね"
+        },
+        {
+          "speechId": 1211,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10740342,
+          "sourceEndMs": 10742803,
+          "text": "ミートのやつないミートのやつない"
+        },
+        {
+          "speechId": 1212,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10770830,
+          "sourceEndMs": 10772451,
+          "text": "大激流かな?"
+        },
+        {
+          "speechId": 1213,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10772451,
+          "sourceEndMs": 10773532,
+          "text": "オッケー!"
+        },
+        {
+          "speechId": 1214,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10773532,
+          "sourceEndMs": 10775733,
+          "text": "行け大山!"
+        },
+        {
+          "speechId": 1215,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10775733,
+          "sourceEndMs": 10776694,
+          "text": "あー!"
+        },
+        {
+          "speechId": 1216,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10776694,
+          "sourceEndMs": 10777895,
+          "text": "トール行こう?"
+        },
+        {
+          "speechId": 1217,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10777895,
+          "sourceEndMs": 10778155,
+          "text": "え?"
+        },
+        {
+          "speechId": 1218,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10778155,
+          "sourceEndMs": 10778996,
+          "text": "した方がいい?"
+        },
+        {
+          "speechId": 1219,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10778996,
+          "sourceEndMs": 10780036,
+          "text": "しなくていいか?"
+        },
+        {
+          "speechId": 1220,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10780036,
+          "sourceEndMs": 10781037,
+          "text": "しなくていいか?"
+        },
+        {
+          "speechId": 1221,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10781037,
+          "sourceEndMs": 10782718,
+          "text": "トールは私にはしなくていいか?"
+        },
+        {
+          "speechId": 1222,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10782718,
+          "sourceEndMs": 10783499,
+          "text": "な、なにしたらいい?"
+        },
+        {
+          "speechId": 1223,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10783499,
+          "sourceEndMs": 10784119,
+          "text": "なにしたらどうする?"
+        },
+        {
+          "speechId": 1224,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10784119,
+          "sourceEndMs": 10784319,
+          "text": "なに?"
+        },
+        {
+          "speechId": 1225,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10784319,
+          "sourceEndMs": 10785440,
+          "text": "なに?"
+        },
+        {
+          "speechId": 1226,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10785440,
+          "sourceEndMs": 10785800,
+          "text": "なにする?"
+        },
+        {
+          "speechId": 1227,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10785800,
+          "sourceEndMs": 10786161,
+          "text": "どうする?"
+        },
+        {
+          "speechId": 1228,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10786161,
+          "sourceEndMs": 10786521,
+          "text": "なにする?"
+        },
+        {
+          "speechId": 1229,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10786521,
+          "sourceEndMs": 10790744,
+          "text": "どうする?"
+        },
+        {
+          "speechId": 1230,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10790744,
+          "sourceEndMs": 10792705,
+          "text": "うん、トールする?"
+        },
+        {
+          "speechId": 1231,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10792705,
+          "sourceEndMs": 10793866,
+          "text": "トールしとく?"
+        },
+        {
+          "speechId": 1232,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10793866,
+          "sourceEndMs": 10795707,
+          "text": "オッケー!"
+        },
+        {
+          "speechId": 1233,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10795707,
+          "sourceEndMs": 10798589,
+          "text": "あー!"
+        },
+        {
+          "speechId": 1234,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10798589,
+          "sourceEndMs": 10799430,
+          "text": "ミートB、トールE"
+        },
+        {
+          "speechId": 1235,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10800122,
+          "sourceEndMs": 10815651,
+          "text": "ミートじゃない走力BBトールEEなんだけどこれ大丈夫ぞBなんだけどBDDEトールEなんだけどやれないか?"
+        },
+        {
+          "speechId": 1236,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10815651,
+          "sourceEndMs": 10817172,
+          "text": "やめとくか?"
+        },
+        {
+          "speechId": 1237,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10817172,
+          "sourceEndMs": 10818173,
+          "text": "犠牲フライか?"
+        },
+        {
+          "speechId": 1238,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10818173,
+          "sourceEndMs": 10827438,
+          "text": "これパワーBミートD犠牲フライかな?"
+        },
+        {
+          "speechId": 1239,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10827438,
+          "sourceEndMs": 10827559,
+          "text": "これ"
+        },
+        {
+          "speechId": 1240,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10837818,
+          "sourceEndMs": 10840760,
+          "text": "犠牲?"
+        },
+        {
+          "speechId": 1241,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10840760,
+          "sourceEndMs": 10845703,
+          "text": "犠牲?"
+        },
+        {
+          "speechId": 1242,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10845703,
+          "sourceEndMs": 10847144,
+          "text": "え?"
+        },
+        {
+          "speechId": 1243,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10847144,
+          "sourceEndMs": 10848424,
+          "text": "怖い?"
+        },
+        {
+          "speechId": 1244,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10848424,
+          "sourceEndMs": 10854928,
+          "text": "スクイズ2も怖いだろうがスクイズ2だって怖いだろ怖くねーの?"
+        },
+        {
+          "speechId": 1245,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10854928,
+          "sourceEndMs": 10855268,
+          "text": "え?"
+        },
+        {
+          "speechId": 1246,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10855268,
+          "sourceEndMs": 10856869,
+          "text": "怖くねーのこれ?"
+        },
+        {
+          "speechId": 1247,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10856869,
+          "sourceEndMs": 10857950,
+          "text": "2怖くねーの?"
+        },
+        {
+          "speechId": 1248,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10874134,
+          "sourceEndMs": 10881004,
+          "text": "クイズでバント職人だからいける?"
+        },
+        {
+          "speechId": 1249,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10881004,
+          "sourceEndMs": 10882366,
+          "text": "バント職人に賭けろ?"
+        },
+        {
+          "speechId": 1250,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10891770,
+          "sourceEndMs": 10899476,
+          "text": "分かったバント職人に!"
+        },
+        {
+          "speechId": 1251,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10899476,
+          "sourceEndMs": 10901057,
+          "text": "2はダメ?"
+        },
+        {
+          "speechId": 1252,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10901057,
+          "sourceEndMs": 10917950,
+          "text": "分かんない…分かんないっぴ…分かんないっぴ!"
+        },
+        {
+          "speechId": 1253,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10927714,
+          "sourceEndMs": 10928062,
+          "text": "マジで?"
+        },
+        {
+          "speechId": 1254,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10957266,
+          "sourceEndMs": 10958769,
+          "text": "やめろいいわまずいはい"
+        },
+        {
+          "speechId": 1255,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10980390,
+          "sourceEndMs": 10981311,
+          "text": "犠牲フライしてやばい!"
+        },
+        {
+          "speechId": 1256,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10981311,
+          "sourceEndMs": 10985234,
+          "text": "2ストライクや!"
+        },
+        {
+          "speechId": 1257,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10985234,
+          "sourceEndMs": 10986114,
+          "text": "になったらスクイズ?"
+        },
+        {
+          "speechId": 1258,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10986114,
+          "sourceEndMs": 10987796,
+          "text": "か?"
+        },
+        {
+          "speechId": 1259,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10987796,
+          "sourceEndMs": 11005829,
+          "text": "うん分かった分かったストライク"
+        },
+        {
+          "speechId": 1260,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 11010002,
+          "sourceEndMs": 11034742,
+          "text": "ああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああ"
+        },
+        {
+          "speechId": 1261,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 11083154,
+          "sourceEndMs": 11083575,
+          "text": "涙出た"
+        },
+        {
+          "speechId": 1262,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 11100566,
+          "sourceEndMs": 11106251,
+          "text": "辛かった本当にもう嫌だやった!"
+        },
+        {
+          "speechId": 1263,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 11106251,
+          "sourceEndMs": 11106471,
+          "text": "勝ちましたね!"
+        },
+        {
+          "speechId": 1264,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 11106471,
+          "sourceEndMs": 11121986,
+          "text": "はいふぶちゃん何も上がってないのかー"
+        },
+        {
+          "speechId": 1265,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 11140562,
+          "sourceEndMs": 11142104,
+          "text": "この試合すごい活躍だったね!"
+        },
+        {
+          "speechId": 1266,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 11142104,
+          "sourceEndMs": 11142625,
+          "text": "これからも頑張ってね!"
+        },
+        {
+          "speechId": 1267,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 11142625,
+          "sourceEndMs": 11158005,
+          "text": "いいね、いいね、いいね分かったら特訓ある今日はここまでです"
+        },
+        {
+          "speechId": 1268,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 11180811,
+          "sourceEndMs": 11189520,
+          "text": "もうつらいんだよこれでいいかな?"
+        },
+        {
+          "speechId": 1269,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 11199718,
+          "sourceEndMs": 11218614,
+          "text": "動いた上がった上がった総合で総合3で上がった総合3でみんなの今効率上がってんのこれイヤン"
+        },
+        {
+          "speechId": 1270,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 11223006,
+          "sourceEndMs": 11235132,
+          "text": "何も書いてなくて分かんにゃいうん、じゃあ総合ね、分かった、はいあ、もう今?"
+        },
+        {
+          "speechId": 1271,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 11235132,
+          "sourceEndMs": 11236172,
+          "text": "今買い物?"
+        },
+        {
+          "speechId": 1272,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 11236172,
+          "sourceEndMs": 11236312,
+          "text": "もう今?"
+        },
+        {
+          "speechId": 1273,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 11236312,
+          "sourceEndMs": 11236873,
+          "text": "もう今なの?"
+        },
+        {
+          "speechId": 1274,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 11236873,
+          "sourceEndMs": 11242335,
+          "text": "もう分かった、今ね何買おう君たち何があったらいいかな?"
+        },
+        {
+          "speechId": 1275,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 11242335,
+          "sourceEndMs": 11246037,
+          "text": "何があったらいいと思う?"
+        },
+        {
+          "speechId": 1276,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 11246037,
+          "sourceEndMs": 11248178,
+          "text": "これ何買おう"
+        },
+        {
+          "speechId": 1277,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 11261110,
+          "sourceEndMs": 11277872,
+          "text": "お褒めないお褒め自分探し"
+        },
+        {
+          "speechId": 1291,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 11400970,
+          "sourceEndMs": 11428900,
+          "text": "打ち気にするチャレンジとか緩和極意は1個ある1個だけど500円あるあとあと500円ある何がいいかな"
+        },
+        {
+          "speechId": 1292,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 11430022,
+          "sourceEndMs": 11432764,
+          "text": "変更とか?"
+        },
+        {
+          "speechId": 1293,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 11432764,
+          "sourceEndMs": 11435126,
+          "text": "強化極意も1個あると便利?"
+        },
+        {
+          "speechId": 1294,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 11435126,
+          "sourceEndMs": 11439649,
+          "text": "強化極意にする?"
+        },
+        {
+          "speechId": 1295,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 11439649,
+          "sourceEndMs": 11441990,
+          "text": "1個スケヘンがいいかな?"
+        },
+        {
+          "speechId": 1296,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 11441990,
+          "sourceEndMs": 11448095,
+          "text": "あれがいいと思うスケヘン?"
+        },
+        {
+          "speechId": 1297,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 11448095,
+          "sourceEndMs": 11449215,
+          "text": "スケヘン?"
+        },
+        {
+          "speechId": 1298,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 11449215,
+          "sourceEndMs": 11458001,
+          "text": "うんじゃあスケヘンにするか多項調査とか引けるかもしんないもんね自分探しもう1個?"
+        },
+        {
+          "speechId": 1299,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 11458001,
+          "sourceEndMs": 11458582,
+          "text": "どっちにしよう"
+        },
+        {
+          "speechId": 1306,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 11526771,
+          "sourceEndMs": 11549880,
+          "text": "そうスワがいなくなっちゃうから出ると限らんけどやらないといないままだからでもいやでも占い師もいるからそんなに占い師もいるからそんなに買いまくる必要ないのか占い師もいるのにそんなに買いまくる必要ないのかな"
+        },
+        {
+          "speechId": 1307,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 11552570,
+          "sourceEndMs": 11568079,
+          "text": "スケヘンのがいいかぁ一旦…うーん…はどっちだろう?"
+        },
+        {
+          "speechId": 1308,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 11568079,
+          "sourceEndMs": 11569500,
+          "text": "キャッチどっちがいると思う?"
+        },
+        {
+          "speechId": 1309,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 11569500,
+          "sourceEndMs": 11571741,
+          "text": "スケヘンもガチャだ、そうだね、スケヘンもガチャだふんふんふんふんふん"
+        },
+        {
+          "speechId": 1318,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 11701322,
+          "sourceEndMs": 11722274,
+          "text": "次BでしたBBかーということではいいったんね打ち気ガチャしとく?"
+        },
+        {
+          "speechId": 1319,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 11722274,
+          "sourceEndMs": 11722674,
+          "text": "今?"
+        },
+        {
+          "speechId": 1320,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 11722674,
+          "sourceEndMs": 11729378,
+          "text": "いやいや次回にしとくわ次回にうんはい次回正確ガチャと"
+        },
+        {
+          "speechId": 1321,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 11730322,
+          "sourceEndMs": 11759740,
+          "text": "甲子園大会2回戦でやっていこうと思います次回の予定を発表したいと思います9月24日今日は24日なので明日の明日のホロコー配信はみこちになっています明日はみこちそしてマリンの次回はですね9月28日から"
+        },
+        {
+          "speechId": 1322,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 11763275,
+          "sourceEndMs": 11789446,
+          "text": "次回9月28日になっていますはいよろしくお願いいたしますですねはいてなわけではい4日後次回もいっぱいアドバイスよろしくお願いしますセーブして終了してキメジの心を安定させてそれではどうも"
+        },
+        {
+          "speechId": 1323,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 11823654,
+          "sourceEndMs": 11839582,
+          "text": "この船では美少女無罪が適用されますけど任せて魔法で若返り秘密の素顔は君にだけ特別ですよあたしやったよ"
+        }
+      ]
+    }
+  ],
+  "outputContract": {
+    "format": "json_only",
+    "schema": {
+      "themes": [
+        {
+          "themeId": "string",
+          "title": "string",
+          "reason": "string_one_sentence",
+          "evidenceRanges": [
+            {
+              "sourceVideoId": "string",
+              "sourceStartMs": "number",
+              "sourceEndMs": "number",
+              "supportingSpeechIds": [
+                "number_or_range_string"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
+```

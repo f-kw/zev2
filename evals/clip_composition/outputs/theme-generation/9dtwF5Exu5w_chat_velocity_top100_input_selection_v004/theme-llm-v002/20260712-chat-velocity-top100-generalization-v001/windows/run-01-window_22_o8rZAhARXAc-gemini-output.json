@@ -1,0 +1,79 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "転がす戦術も相手の好守に阻まれ絶望するマリン船長",
+      "reason": "緊張しながらもボールを転がす選択をしたが、相手の予想以上の好守に阻まれてどうしようもないと嘆くリアクションが切り抜きとして成立するため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 9900438,
+          "sourceEndMs": 9958466,
+          "supportingSpeechIds": [
+            "1079-1086"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "選択肢の数字が悪すぎて「おまかせ」に賭けるしかなくなるマリン船長",
+      "reason": "提示されたコマンドの数字がいくら何でも悪すぎて困惑し、絶望しながら「おまかせ」を選ぶしかないというゲーム特有のピンチ場面であるため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10230000,
+          "sourceEndMs": 10257434,
+          "supportingSpeechIds": [
+            1129
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_003",
+      "title": "ストライク判定への不満から最悪の展開を迎え絶叫するマリン船長",
+      "reason": "ボールに見えた球がストライク判定された不満から始まり、その後の最悪の展開に対して大絶叫して助けを求めるリアクションに見どころがあるため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10322284,
+          "sourceEndMs": 10379920,
+          "supportingSpeechIds": [
+            "1136-1140"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_004",
+      "title": "絶体絶命のピンチを救った守備のファインプレーに感謝するマリン船長",
+      "reason": "やばい状況の中で放たれた打球に対して、祈るように見守った末のナイスプレイに大喜びして感謝する感情の起伏が魅力的なため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10385201,
+          "sourceEndMs": 10395149,
+          "supportingSpeechIds": [
+            "1141-1145"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-12T15:58:24+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_22_o8rZAhARXAc",
+    "windowSourceVideoId": "o8rZAhARXAc",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/9dtwF5Exu5w_chat_velocity_top100_input_selection_v004/theme-llm-v002/20260712-chat-velocity-top100-generalization-v001/windows/window_22_o8rZAhARXAc-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/d5ce538275df7c29?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"転がす戦術も相手の好守に阻まれ絶望するマリン船長\",\n      \"reason\": \"緊張しながらもボールを転がす選択をしたが、相手の予想以上の好守に阻まれてどうしようもないと嘆くリアクションが切り抜きとして成立するため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"o8rZAhARXAc\",\n          \"sourceStartMs\": 9900438,\n          \"sourceEndMs\": 9958466,\n          \"supportingSpeechIds\": [\n            \"1079-1086\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"選択肢の数字が悪すぎて「おまかせ」に賭けるしかなくなるマリン船長\",\n      \"reason\": \"提示されたコマンドの数字がいくら何でも悪すぎて困惑し、絶望しながら「おまかせ」を選ぶしかないというゲーム特有のピンチ場面であるため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"o8rZAhARXAc\",\n          \"sourceStartMs\": 10230000,\n          \"sourceEndMs\": 10257434,\n          \"supportingSpeechIds\": [\n            1129\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_003\",\n      \"title\": \"ストライク判定への不満から最悪の展開を迎え絶叫するマリン船長\",\n      \"reason\": \"ボールに見えた球がストライク判定された不満から始まり、その後の最悪の展開に対して大絶叫して助けを求めるリアクションに見どころがあるため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"o8rZAhARXAc\",\n          \"sourceStartMs\": 10322284,\n          \"sourceEndMs\": 10379920,\n          \"supportingSpeechIds\": [\n            \"1136-1140\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_004\",\n      \"title\": \"絶体絶命のピンチを救った守備のファインプレーに感謝するマリン船長\",\n      \"reason\": \"やばい状況の中で放たれた打球に対して、祈るように見守った末のナイスプレイに大喜びして感謝する感情の起伏が魅力的なため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"o8rZAhARXAc\",\n          \"sourceStartMs\": 10385201,\n          \"sourceEndMs\": 10395149,\n          \"supportingSpeechIds\": [\n            \"1141-1145\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

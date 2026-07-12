@@ -1,0 +1,49 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "盗塁とスクイーズの作戦に悩むマリン船長",
+      "reason": "ホロライブ甲子園の試合中、盗塁やスクイーズの戦術指示を出すべきかリスナーの意見を聞きながら激しく葛藤しているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6680196,
+          "sourceEndMs": 6734205,
+          "supportingSpeechIds": [
+            "703-727"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "スクイーズの戦術数値低下に焦るも「バント職人」に賭ける場面",
+      "reason": "スクイーズの指示数値が1に下がり焦るものの、選手の持つ「バント職人」の特殊能力を信じて作戦を敢行しようとするため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 6734205,
+          "sourceEndMs": 6797971,
+          "supportingSpeechIds": [
+            "728-735"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-12T15:46:33+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_15_o8rZAhARXAc",
+    "windowSourceVideoId": "o8rZAhARXAc",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/9dtwF5Exu5w_chat_velocity_top100_input_selection_v004/theme-llm-v002/20260712-chat-velocity-top100-generalization-v001/windows/window_15_o8rZAhARXAc-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/0170b0ea90e82069?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"盗塁とスクイーズの作戦に悩むマリン船長\",\n      \"reason\": \"ホロライブ甲子園の試合中、盗塁やスクイーズの戦術指示を出すべきかリスナーの意見を聞きながら激しく葛藤しているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"o8rZAhARXAc\",\n          \"sourceStartMs\": 6680196,\n          \"sourceEndMs\": 6734205,\n          \"supportingSpeechIds\": [\n            \"703-727\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"スクイーズの戦術数値低下に焦るも「バント職人」に賭ける場面\",\n      \"reason\": \"スクイーズの指示数値が1に下がり焦るものの、選手の持つ「バント職人」の特殊能力を信じて作戦を敢行しようとするため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"o8rZAhARXAc\",\n          \"sourceStartMs\": 6734205,\n          \"sourceEndMs\": 6797971,\n          \"supportingSpeechIds\": [\n            \"728-735\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

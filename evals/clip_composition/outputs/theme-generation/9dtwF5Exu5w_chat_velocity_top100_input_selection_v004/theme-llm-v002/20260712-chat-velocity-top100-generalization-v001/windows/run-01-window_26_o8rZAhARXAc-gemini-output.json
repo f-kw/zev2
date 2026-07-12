@@ -1,0 +1,49 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "スクイズを巡る葛藤とバント職人への信頼",
+      "reason": "ホロライブ甲子園の試合終盤と思われる緊迫した場面で、スクイズを選択すべきか「バント職人」に賭けるべきか、リスナーの意見を交えながら葛藤する一連の流れが描かれているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 10848424,
+          "sourceEndMs": 11005829,
+          "supportingSpeechIds": [
+            "1244-1259"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "劇的勝利に大絶叫し涙を流すマリン船長",
+      "reason": "緊迫した試合展開の末に勝利を収め、超長文の大絶叫から「涙出た」「辛かった」と安堵と喜びを爆発させる切り抜きに最適なハイライトシーンであるため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 11010002,
+          "sourceEndMs": 11106471,
+          "supportingSpeechIds": [
+            "1260-1263"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-12T15:59:21+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_26_o8rZAhARXAc",
+    "windowSourceVideoId": "o8rZAhARXAc",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/9dtwF5Exu5w_chat_velocity_top100_input_selection_v004/theme-llm-v002/20260712-chat-velocity-top100-generalization-v001/windows/window_26_o8rZAhARXAc-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/57de54369f2ade20?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"スクイズを巡る葛藤とバント職人への信頼\",\n      \"reason\": \"ホロライブ甲子園の試合終盤と思われる緊迫した場面で、スクイズを選択すべきか「バント職人」に賭けるべきか、リスナーの意見を交えながら葛藤する一連の流れが描かれているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"o8rZAhARXAc\",\n          \"sourceStartMs\": 10848424,\n          \"sourceEndMs\": 11005829,\n          \"supportingSpeechIds\": [\n            \"1244-1259\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"劇的勝利に大絶叫し涙を流すマリン船長\",\n      \"reason\": \"緊迫した試合展開の末に勝利を収め、超長文の大絶叫から「涙出た」「辛かった」と安堵と喜びを爆発させる切り抜きに最適なハイライトシーンであるため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"o8rZAhARXAc\",\n          \"sourceStartMs\": 11010002,\n          \"sourceEndMs\": 11106471,\n          \"supportingSpeechIds\": [\n            \"1260-1263\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

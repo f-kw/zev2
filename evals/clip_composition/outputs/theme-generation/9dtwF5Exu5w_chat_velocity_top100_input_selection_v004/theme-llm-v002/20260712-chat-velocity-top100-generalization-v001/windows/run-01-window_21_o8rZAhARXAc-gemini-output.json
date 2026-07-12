@@ -1,0 +1,49 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "ピンチで同点に追いつかれ、ピッチャー交代と代打の決断を迫られるマリン",
+      "reason": "同点に追いつかれた緊迫した状況の中、限界を迎えたフブキの投手交代と代打にビブーを起用する作戦を慌てながら組み立てる一連の思考が描かれているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 9126634,
+          "sourceEndMs": 9239820,
+          "supportingSpeechIds": [
+            "1003-1012"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "突然の代打策が的中！綺麗な転がしから急に訪れた大チャンスに動揺するシーン",
+      "reason": "急遽送り出した代打の采配が綺麗に決まり、予期せぬチャンスの到来にどう攻略すべきかパニックになりながら悩むリアクションが面白いため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 9482230,
+          "sourceEndMs": 9539326,
+          "supportingSpeechIds": [
+            "1023-1031"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-12T15:58:08+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_21_o8rZAhARXAc",
+    "windowSourceVideoId": "o8rZAhARXAc",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/9dtwF5Exu5w_chat_velocity_top100_input_selection_v004/theme-llm-v002/20260712-chat-velocity-top100-generalization-v001/windows/window_21_o8rZAhARXAc-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/f733c5f97644400f?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"ピンチで同点に追いつかれ、ピッチャー交代と代打の決断を迫られるマリン\",\n      \"reason\": \"同点に追いつかれた緊迫した状況の中、限界を迎えたフブキの投手交代と代打にビブーを起用する作戦を慌てながら組み立てる一連の思考が描かれているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"o8rZAhARXAc\",\n          \"sourceStartMs\": 9126634,\n          \"sourceEndMs\": 9239820,\n          \"supportingSpeechIds\": [\n            \"1003-1012\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"突然の代打策が的中！綺麗な転がしから急に訪れた大チャンスに動揺するシーン\",\n      \"reason\": \"急遽送り出した代打の采配が綺麗に決まり、予期せぬチャンスの到来にどう攻略すべきかパニックになりながら悩むリアクションが面白いため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"o8rZAhARXAc\",\n          \"sourceStartMs\": 9482230,\n          \"sourceEndMs\": 9539326,\n          \"supportingSpeechIds\": [\n            \"1023-1031\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}
