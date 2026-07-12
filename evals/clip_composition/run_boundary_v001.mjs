@@ -97,7 +97,7 @@ async function main() {
       generationSystem: 'boundary-v001@gemini-web-flash', upstreamGenerationSystems: ['theme-llm-v002@gemini-web-flash', 'llm-v012@gemini-web-flash'],
       resultRole: 'boundary-refinement-eval', promptVersion: 'boundary_refinement_prompt_v001', fixtureId: input.fixtureId, candidateIndex: input.candidateIndex, runIndex: input.runIndex, contextRadiusMs: 90000, inputPromptSha256: input.promptSha256
     };
-    await run('pnpm', ['--filter', '@zev2/agent-runner', 'exec', 'tsx', '../evals/clip_composition/run_web_gemini_prompt.ts', '--prompt', path.join(root, input.promptPath), '--output', outputPath, '--model', 'gemini-web-flash', '--params', JSON.stringify(params), '--timeoutMs', '240000', '--rejectPartialExtraction', '--closeTabAfterRun']);
+    await run('pnpm', ['--filter', '@zev2/agent-runner', 'exec', 'tsx', '../evals/clip_composition/run_web_gemini_prompt.ts', '--prompt', path.join(root, input.promptPath), '--output', outputPath, '--model', 'gemini-web-flash', '--params', JSON.stringify(params), '--timeoutMs', '0', '--rejectPartialExtraction', '--closeTabAfterRun']);
     const rawOutput = await readJson(outputPath);
     const payload = await readJson(path.join(root, input.payloadPath));
     await writeFile(outputPath, `${JSON.stringify(enrichAndValidate(rawOutput, payload), null, 2)}\n`);

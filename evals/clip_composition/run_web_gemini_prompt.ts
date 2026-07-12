@@ -440,7 +440,7 @@ async function waitForExpression<T>(
   label: string,
   timeoutMs = 60000
 ): Promise<T> {
-  const deadline = Date.now() + timeoutMs;
+  const deadline = timeoutMs > 0 ? Date.now() + timeoutMs : Number.POSITIVE_INFINITY;
   while (Date.now() < deadline) {
     const value = await evaluateValue<T | undefined>(cdp, expression).catch(() => undefined);
     if (value) {
