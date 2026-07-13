@@ -1,0 +1,354 @@
+{
+  "kind": "candidate_ranking_v002_run1_final_result",
+  "finalizedAt": "2026-07-13T05:27:28.834Z",
+  "generationSystem": "candidate-ranking-v002@gemini-web-flash",
+  "model": "gemini-web-flash",
+  "runCount": 1,
+  "inputPolicy": "candidateId+title+reason only",
+  "scoringStatus": "final-human-review-complete",
+  "humanReview": {
+    "kind": "candidate_ranking_unlabeled_human_review_result",
+    "reviewId": "20260713-character-context-unlabeled-review-v002",
+    "sourceGenerationSystem": "candidate-ranking-v002@gemini-web-flash",
+    "reviewer": "kawafmm",
+    "reviewedAt": "2026-07-13",
+    "humanWork": {
+      "estimatedItemCount": 1,
+      "estimatedMinutesPerItem": 1,
+      "estimatedTotalSeconds": 60,
+      "actualTotalSeconds": 99,
+      "withinEstimate": false
+    },
+    "choices": {
+      "publish": "公開したい",
+      "okaySkip": "悪くないが選ばない",
+      "boring": "つまらない"
+    },
+    "items": [
+      {
+        "reviewIndex": 1,
+        "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+        "candidateId": 58,
+        "title": "置き去りにされそうになって焦る戌神ころね",
+        "answer": "okay_skip",
+        "answerLabel": "悪くないが選ばない",
+        "reviewerNote": "面白いのかもしれないが文脈がわからないね"
+      }
+    ],
+    "reviewedUnlabeledSummary": {
+      "total": 1,
+      "publish": 0,
+      "okaySkip": 1,
+      "boring": 0
+    },
+    "reviewerFollowUp": "ゲームのシーンが面白くない原因も同じかもしれない",
+    "interpretation": {
+      "observed": "演者の焦りと絶叫は候補価値を感じさせたが、提示された根拠範囲だけでは出来事の文脈を理解できず、公開候補には選ばれなかった。過去に「つまらない」とされたゲーム場面も、場面自体の価値不足ではなく同じ文脈不足で低く見えた可能性が人間から指摘された。",
+      "limitation": "元場面そのものに文脈が欠けるのか、theme-llm-v002の根拠範囲が前提を含まないのか、確認媒体が前後を狭く提示したのかを分離できない。したがって「ゲーム内イベントは公開価値が低い」という因果は確定できない。",
+      "nextHypothesis": "候補内で反応の理由を理解できる文脈の完結性を、ゲーム場面と非ゲーム場面の両方で分離して測る。",
+      "status": "単一観測のためcandidate-ranking-v003へ直ちに変更せず、candidate-ranking-v002の定性限界として記録する。"
+    },
+    "fixtureAndExpectedChanges": false
+  },
+  "fixtures": [
+    {
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateCount": 89,
+      "generationSystem": "candidate-ranking-v002@gemini-web-flash",
+      "model": "gemini-web-flash",
+      "run": 1,
+      "formatValidation": {
+        "passed": true,
+        "errors": []
+      },
+      "leakCheck": {
+        "passed": true,
+        "allowedCandidateFields": [
+          "candidateId",
+          "title",
+          "reason"
+        ],
+        "foundForbiddenFields": [],
+        "candidateCount": 89,
+        "note": "具体候補の人間三択、時刻、transcript、根拠範囲、expected、照合結果、機械信号を入力しない。人間知見はv002プロンプトの抽象原則だけ。"
+      },
+      "knownHit": {
+        "candidateCountAt5": 3,
+        "expectedIndexes": [
+          4,
+          6,
+          9
+        ]
+      },
+      "currentlyKnownMixedScore": {
+        "strongLowerBound": 4,
+        "reviewWorthyLowerBound": 4,
+        "unlabeledCount": 1,
+        "denominator": 5,
+        "finalAfterHumanReview": false
+      },
+      "rankedCandidates": [
+        {
+          "rank": 1,
+          "candidateId": 32,
+          "title": "マリンの甘い言葉に急に冷たくなるころねと連呼される「キモい」",
+          "sourceReason": "宝鐘マリンのロマンチックなアプローチに対して戌神ころねが急に態度を冷たくし、「キモい」と激しく連呼する二人の温度差がコミカルで切り抜きとして成立するため。",
+          "selectionReason": "マリンの甘いアプローチに対し、ころねが態度を急変させて「キモい」と激しく連呼する二人の極端な温度差とリアクションが明確に説明されており、単独の切り抜きとして非常に強力なため。",
+          "isKnownHit": true,
+          "hitExpectedIndexes": [
+            4
+          ],
+          "humanLabel": null,
+          "labelStatus": "known-hit",
+          "countsAsStrong": true,
+          "countsAsReviewWorthy": true
+        },
+        {
+          "rank": 2,
+          "candidateId": 36,
+          "title": "マリンが我慢できず2回目のトイレへ、留守を預かるころねの緊張",
+          "sourceReason": "マリンが配信前にトイレに行ったにもかかわらず再度席を外すというハプニングと、残されたころねがリスナー（一味）と2人きりで緊張しながら場を繋ぐ展開が切り抜きとして成立するため。",
+          "selectionReason": "配信中の2回目のトイレ離席というハプニングのフリから、残されたころねがリスナーと2人きりで緊張しながら場を繋ぐという、明確な展開と本人の感情反応が読み取れるため。",
+          "isKnownHit": false,
+          "hitExpectedIndexes": [],
+          "humanLabel": {
+            "answer": "publish",
+            "answerLabel": "公開したい",
+            "sourceReviewId": "20260713-unlabeled-top5-review-v001"
+          },
+          "labelStatus": "human-reviewed",
+          "countsAsStrong": true,
+          "countsAsReviewWorthy": true
+        },
+        {
+          "rank": 3,
+          "candidateId": 58,
+          "title": "置き去りにされそうになって焦る戌神ころね",
+          "sourceReason": "マリン船長が移動する中で、置き去りにされそうになったころねが「犬かきで行く」と可愛く宣言した直後、どんどん距離が離れていって絶叫する見どころのある展開になっているため。",
+          "selectionReason": "船に置き去りにされそうになったころねが「犬かきで行く」と宣言した直後に、距離が離れて絶叫するという、具体的な出来事の流れと強い感情反応が綺麗に説明されているため。",
+          "isKnownHit": false,
+          "hitExpectedIndexes": [],
+          "humanLabel": {
+            "answer": "okay_skip",
+            "answerLabel": "悪くないが選ばない",
+            "sourceReviewId": "20260713-character-context-unlabeled-review-v002",
+            "reviewerNote": "面白いのかもしれないが文脈がわからないね"
+          },
+          "labelStatus": "human-reviewed",
+          "countsAsStrong": false,
+          "countsAsReviewWorthy": true
+        },
+        {
+          "rank": 4,
+          "candidateId": 37,
+          "title": "肉を焼き忘れたころねにキレるマリンと、夫婦漫才からのバーベキュー完成",
+          "sourceReason": "しし肉を焼き忘れていたころねに対してマリンが「子供に示しがつかないだろ」と夫婦風に怒る掛け合いから、豪華なバーベキューが完成して2人で歓喜する一連の流れが面白い映像になるため。",
+          "selectionReason": "肉の焼き忘れを発端にマリンが夫婦風にキレるという明確なフリから、最終的にバーベキューが完成して2人で歓喜するという、起承転結と関係性が詳細に表れているため。",
+          "isKnownHit": true,
+          "hitExpectedIndexes": [
+            6
+          ],
+          "humanLabel": null,
+          "labelStatus": "known-hit",
+          "countsAsStrong": true,
+          "countsAsReviewWorthy": true
+        },
+        {
+          "rank": 5,
+          "candidateId": 46,
+          "title": "ころねの頭の匂いを嗅いだマリンの一言にじわじわ泣いちゃうころね",
+          "sourceReason": "マリンがころねの頭の匂いを「臭い」と言い放ち、それに対してころねがじわじわと泣き真似をする仲の良いプロレスが展開されているため。",
+          "selectionReason": "頭の匂いを「臭い」と言い放つマリンの一言と、それに対してころねがじわじわ泣き真似をするという、二人の具体的な言動・プロレス的な関係性が分かりやすく記述されているため。",
+          "isKnownHit": true,
+          "hitExpectedIndexes": [
+            9
+          ],
+          "humanLabel": null,
+          "labelStatus": "known-hit",
+          "countsAsStrong": true,
+          "countsAsReviewWorthy": true
+        }
+      ],
+      "unreviewedCandidates": [],
+      "droppedKnownHitsFromV001": [],
+      "finalMixedScore": {
+        "knownHit": 3,
+        "humanPublish": 1,
+        "humanOkaySkip": 1,
+        "humanBoring": 0,
+        "strongKnownOrPublish": 4,
+        "reviewWorthyKnownOrNonBoring": 5,
+        "denominator": 5
+      }
+    },
+    {
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateCount": 60,
+      "generationSystem": "candidate-ranking-v002@gemini-web-flash",
+      "model": "gemini-web-flash",
+      "run": 1,
+      "formatValidation": {
+        "passed": true,
+        "errors": []
+      },
+      "leakCheck": {
+        "passed": true,
+        "allowedCandidateFields": [
+          "candidateId",
+          "title",
+          "reason"
+        ],
+        "foundForbiddenFields": [],
+        "candidateCount": 60,
+        "note": "具体候補の人間三択、時刻、transcript、根拠範囲、expected、照合結果、機械信号を入力しない。人間知見はv002プロンプトの抽象原則だけ。"
+      },
+      "knownHit": {
+        "candidateCountAt5": 2,
+        "expectedIndexes": [
+          7,
+          9
+        ]
+      },
+      "currentlyKnownMixedScore": {
+        "strongLowerBound": 4,
+        "reviewWorthyLowerBound": 4,
+        "unlabeledCount": 0,
+        "denominator": 5,
+        "finalAfterHumanReview": true
+      },
+      "rankedCandidates": [
+        {
+          "rank": 1,
+          "candidateId": 14,
+          "title": "アドバイス起因の荒れを懸念し、こよりへの相談をやめるマリン",
+          "sourceReason": "こよりのアドバイスで育成がうまくいかなかった場合に彼女が叩かれるリスクを考慮し、優しさから相談をやめて星街すいせい（きまち）と決めることを選ぶ場面です。",
+          "selectionReason": "同期のタレントが叩かれるリスクを考慮する本人の具体的な優しさと、別のメンバーに相談先を変えるという明確な結論が理由文から読み取れるため。",
+          "isKnownHit": true,
+          "hitExpectedIndexes": [
+            9
+          ],
+          "humanLabel": null,
+          "labelStatus": "known-hit",
+          "countsAsStrong": true,
+          "countsAsReviewWorthy": true
+        },
+        {
+          "rank": 2,
+          "candidateId": 57,
+          "title": "劇的勝利に大絶叫し涙を流すマリン船長",
+          "sourceReason": "緊迫した試合展開の末に勝利を収め、超長文の大絶叫から「涙出た」「辛かった」と安堵と喜びを爆発させる切り抜きに最適なハイライトシーンであるため。",
+          "selectionReason": "緊迫した試合展開から劇的勝利を収め、大絶叫と涙を流して安堵を爆発させるという本人の最も強い感情反応が具体的に説明されているため。",
+          "isKnownHit": false,
+          "hitExpectedIndexes": [],
+          "humanLabel": {
+            "answer": "publish",
+            "answerLabel": "公開したい",
+            "sourceReviewId": "20260713-unlabeled-top5-review-v001"
+          },
+          "labelStatus": "human-reviewed",
+          "countsAsStrong": true,
+          "countsAsReviewWorthy": true
+        },
+        {
+          "rank": 3,
+          "candidateId": 40,
+          "title": "ビトが「魔物」ではなく「ラッキーボーイ」でブチギレるマリン",
+          "sourceReason": "期待していた固有戦術の「魔物」ではなく「ラッキーボーイ」が発動したビトに対して、マリンが激しいツッコミと怒りを露わにするリアクションが見どころだから。",
+          "selectionReason": "期待していた固有戦術が外れたことに対して、本人が激しいツッコミと怒りを露わにするという明確なフリとリアクションが示されているため。",
+          "isKnownHit": false,
+          "hitExpectedIndexes": [],
+          "humanLabel": {
+            "answer": "publish",
+            "answerLabel": "公開したい",
+            "sourceReviewId": "20260713-unlabeled-top5-review-v001"
+          },
+          "labelStatus": "human-reviewed",
+          "countsAsStrong": true,
+          "countsAsReviewWorthy": true
+        },
+        {
+          "rank": 4,
+          "candidateId": 25,
+          "title": "チャットの指示で対戦相手を選んだ結果、Bランクの高校を引いて焦るシーン",
+          "sourceReason": "リスナー（キャージー）に選択を委ねた結果、手強いBランクの「ざまみ商業高校」を引き当ててしまい動揺するリアクションが面白いため。",
+          "selectionReason": "リスナーに選択を委ねた結果として手強い強敵を引き当ててしまい、本人が激しく動揺するまでの一連の展開とリアクションの因果関係が明確であるため。",
+          "isKnownHit": false,
+          "hitExpectedIndexes": [],
+          "humanLabel": {
+            "answer": "boring",
+            "answerLabel": "つまらない",
+            "sourceReviewId": "20260713-unlabeled-top5-review-v001"
+          },
+          "labelStatus": "human-reviewed",
+          "countsAsStrong": false,
+          "countsAsReviewWorthy": false
+        },
+        {
+          "rank": 5,
+          "candidateId": 9,
+          "title": "療養中のリリカからの助言と妄想を繰り広げる宝鐘マリン",
+          "sourceReason": "コロナで療養中の一条コーリリカがチャットでアドバイスをくれたことへの感謝と、卒業生としての設定に合わせた寸劇のようなやり取りが面白いため。",
+          "selectionReason": "療養中の他タレントによるアドバイスへの感謝だけでなく、卒業生という設定に合わせた独自の寸劇を繰り広げる本人の特別な言動と関係性が表れているため。",
+          "isKnownHit": true,
+          "hitExpectedIndexes": [
+            7
+          ],
+          "humanLabel": null,
+          "labelStatus": "known-hit",
+          "countsAsStrong": true,
+          "countsAsReviewWorthy": true
+        }
+      ],
+      "unreviewedCandidates": [],
+      "droppedKnownHitsFromV001": [],
+      "finalMixedScore": {
+        "knownHit": 2,
+        "humanPublish": 2,
+        "humanOkaySkip": 0,
+        "humanBoring": 1,
+        "strongKnownOrPublish": 4,
+        "reviewWorthyKnownOrNonBoring": 4,
+        "denominator": 5
+      }
+    }
+  ],
+  "overall": {
+    "knownHit": 5,
+    "humanPublish": 3,
+    "humanOkaySkip": 1,
+    "humanBoring": 1,
+    "strongKnownOrPublish": 8,
+    "reviewWorthyKnownOrNonBoring": 9,
+    "denominator": 10
+  },
+  "comparison": [
+    {
+      "system": "generation-order",
+      "knownHit": 3,
+      "strong": 3,
+      "reviewWorthy": 6,
+      "denominator": 10
+    },
+    {
+      "system": "candidate-ranking-v001@gemini-web-flash",
+      "knownHit": 2,
+      "strong": 5,
+      "reviewWorthy": 6,
+      "denominator": 10
+    },
+    {
+      "system": "candidate-ranking-v002@gemini-web-flash",
+      "knownHit": 5,
+      "strong": 8,
+      "reviewWorthy": 9,
+      "denominator": 10
+    }
+  ],
+  "adjudication": {
+    "result": "limited-pass-provisional-standard-for-hand-trim-trial",
+    "reason": "既知hitが生成順3/10・v001 2/10に対してv002 5/10となり、両素材とも現在の人間ラベル上は強い候補4/5を満たし、v001の既知hitを落とさなかった。",
+    "limitation": "2素材・run 1・確認者1名の開発データであり、汎化済み標準ではない。candidate 58と過去のゲーム場面判定には、場面自体の価値と提示文脈の不足を分離できない交絡が残った。",
+    "next": "candidate-ranking-v002の上位5を手直し試験v002の入力に使い、1配信あたり公開3〜5本の仕上げ合計15分以内を測る。"
+  },
+  "fixtureAndExpectedChanges": false
+}

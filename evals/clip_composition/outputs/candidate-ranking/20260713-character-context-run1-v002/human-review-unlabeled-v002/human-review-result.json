@@ -1,0 +1,44 @@
+{
+  "kind": "candidate_ranking_unlabeled_human_review_result",
+  "reviewId": "20260713-character-context-unlabeled-review-v002",
+  "sourceGenerationSystem": "candidate-ranking-v002@gemini-web-flash",
+  "reviewer": "kawafmm",
+  "reviewedAt": "2026-07-13",
+  "humanWork": {
+    "estimatedItemCount": 1,
+    "estimatedMinutesPerItem": 1,
+    "estimatedTotalSeconds": 60,
+    "actualTotalSeconds": 99,
+    "withinEstimate": false
+  },
+  "choices": {
+    "publish": "公開したい",
+    "okaySkip": "悪くないが選ばない",
+    "boring": "つまらない"
+  },
+  "items": [
+    {
+      "reviewIndex": 1,
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateId": 58,
+      "title": "置き去りにされそうになって焦る戌神ころね",
+      "answer": "okay_skip",
+      "answerLabel": "悪くないが選ばない",
+      "reviewerNote": "面白いのかもしれないが文脈がわからないね"
+    }
+  ],
+  "reviewedUnlabeledSummary": {
+    "total": 1,
+    "publish": 0,
+    "okaySkip": 1,
+    "boring": 0
+  },
+  "reviewerFollowUp": "ゲームのシーンが面白くない原因も同じかもしれない",
+  "interpretation": {
+    "observed": "演者の焦りと絶叫は候補価値を感じさせたが、提示された根拠範囲だけでは出来事の文脈を理解できず、公開候補には選ばれなかった。過去に「つまらない」とされたゲーム場面も、場面自体の価値不足ではなく同じ文脈不足で低く見えた可能性が人間から指摘された。",
+    "limitation": "元場面そのものに文脈が欠けるのか、theme-llm-v002の根拠範囲が前提を含まないのか、確認媒体が前後を狭く提示したのかを分離できない。したがって「ゲーム内イベントは公開価値が低い」という因果は確定できない。",
+    "nextHypothesis": "候補内で反応の理由を理解できる文脈の完結性を、ゲーム場面と非ゲーム場面の両方で分離して測る。",
+    "status": "単一観測のためcandidate-ranking-v003へ直ちに変更せず、candidate-ranking-v002の定性限界として記録する。"
+  },
+  "fixtureAndExpectedChanges": false
+}
