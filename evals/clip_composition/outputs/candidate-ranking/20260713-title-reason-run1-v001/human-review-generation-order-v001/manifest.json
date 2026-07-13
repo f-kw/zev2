@@ -1,0 +1,201 @@
+{
+  "kind": "candidate_ranking_generation_order_human_review_package",
+  "packageId": "20260713-generation-order-unreviewed-v001",
+  "createdAt": "2026-07-13T04:41:43.357Z",
+  "purpose": "生成順上位5の未ラベル候補を三択監査し、v001/v002と同じ混成打率で比較できる基準を作る。",
+  "humanWorkEstimate": {
+    "newItemCount": 6,
+    "estimatedMinutesPerItemUpperBound": 1,
+    "estimatedTotalMinutes": 6,
+    "reusedAnswerCount": 1
+  },
+  "playback": {
+    "defaultRate": 1.5,
+    "sourceTotalDurationMs": 393155,
+    "durationAtDefaultRateMs": 262103
+  },
+  "knownHitExcludedFromHumanReview": true,
+  "reusedHumanAnswers": [
+    {
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateId": 4,
+      "title": "結局リリカのオリジナル変化球「粉落とし」を丸パクリすることに決めるマリン船長",
+      "answer": "okay_skip",
+      "answerLabel": "悪くないが選ばない",
+      "sourceReviewId": "20260713-unlabeled-top5-review-v001"
+    }
+  ],
+  "answerStatus": "awaiting-human-review",
+  "fixtureAndExpectedChanges": false,
+  "items": [
+    {
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "fixtureLabel": "B素材（マリン・ころね Raft）",
+      "candidateId": 1,
+      "title": "ころねの配置に悩むマリンとサザエさん風の例え",
+      "reason": "配信画面上でのころねの配置について試行錯誤し、サザエさんのオープニングのような例えやBGMの口真似で盛り上がっているため。",
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceRanges": [
+        {
+          "sourceStartMs": 153112,
+          "sourceEndMs": 236189
+        }
+      ],
+      "segments": [
+        {
+          "sourceStartMs": 153112,
+          "sourceEndMs": 236189,
+          "videoPath": "media/B-candidate-01.mp4",
+          "audioPath": "media/B-candidate-01.m4a",
+          "expectedDurationMs": 83077,
+          "videoDurationMs": 83083,
+          "audioDurationMs": 83077
+        }
+      ],
+      "expectedDurationMs": 83077
+    },
+    {
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "fixtureLabel": "B素材（マリン・ころね Raft）",
+      "candidateId": 4,
+      "title": "ピンク色の朝日と二人の心",
+      "reason": "朝日のピンク色を「二人の心みたいじゃない？」と例えるが、上手く伝わらず独特な空気感になる掛け合いが切り抜きとして成立すると判断したため。",
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceRanges": [
+        {
+          "sourceStartMs": 397197,
+          "sourceEndMs": 438186
+        }
+      ],
+      "segments": [
+        {
+          "sourceStartMs": 397197,
+          "sourceEndMs": 438186,
+          "videoPath": "media/B-candidate-04.mp4",
+          "audioPath": "media/B-candidate-04.m4a",
+          "expectedDurationMs": 40989,
+          "videoDurationMs": 41000,
+          "audioDurationMs": 40989
+        }
+      ],
+      "expectedDurationMs": 40989
+    },
+    {
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "fixtureLabel": "B素材（マリン・ころね Raft）",
+      "candidateId": 5,
+      "title": "マリンのハイテンションな叫び声",
+      "reason": "アンカーをあげる際に宝鐘マリンが突然大音量で「オラァイヨォォォ」と叫ぶ場面が単独の見どころとしてインパクトがあるため。",
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceRanges": [
+        {
+          "sourceStartMs": 438186,
+          "sourceEndMs": 461818
+        }
+      ],
+      "segments": [
+        {
+          "sourceStartMs": 438186,
+          "sourceEndMs": 461818,
+          "videoPath": "media/B-candidate-05.mp4",
+          "audioPath": "media/B-candidate-05.m4a",
+          "expectedDurationMs": 23632,
+          "videoDurationMs": 23649,
+          "audioDurationMs": 23632
+        }
+      ],
+      "expectedDurationMs": 23632
+    },
+    {
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "fixtureLabel": "第二素材（マリン野球ゲーム）",
+      "candidateId": 1,
+      "title": "新球種開発モードに戸惑うマリン船長",
+      "reason": "栄冠ナイン内でオリジナル変化球の習得イベントが発生し、仕様が分からずパニックになりながらセーブしてタイトルに戻るまでの流れがコミカルで切り抜きに適しているため。",
+      "sourceVideoId": "o8rZAhARXAc",
+      "sourceRanges": [
+        {
+          "sourceStartMs": 545346,
+          "sourceEndMs": 659680
+        },
+        {
+          "sourceStartMs": 840358,
+          "sourceEndMs": 864566
+        }
+      ],
+      "segments": [
+        {
+          "sourceStartMs": 545346,
+          "sourceEndMs": 659680,
+          "videoPath": "media/second-candidate-01-part-1.mp4",
+          "audioPath": "media/second-candidate-01-part-1.m4a",
+          "expectedDurationMs": 114334,
+          "videoDurationMs": 114350,
+          "audioDurationMs": 114334
+        },
+        {
+          "sourceStartMs": 840358,
+          "sourceEndMs": 864566,
+          "videoPath": "media/second-candidate-01-part-2.mp4",
+          "audioPath": "media/second-candidate-01-part-2.m4a",
+          "expectedDurationMs": 24208,
+          "videoDurationMs": 24233,
+          "audioDurationMs": 24208
+        }
+      ],
+      "expectedDurationMs": 138542
+    },
+    {
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "fixtureLabel": "第二素材（マリン野球ゲーム）",
+      "candidateId": 2,
+      "title": "一条コーラルのオリジナル変化球「粉落とし」に驚くマリン船長",
+      "reason": "一条コーラル（リリカ）が開発したオリジナル変化球の名称が「粉落とし」であることを知り、そのネーミングセンスと開発したことに驚嘆しているため。",
+      "sourceVideoId": "o8rZAhARXAc",
+      "sourceRanges": [
+        {
+          "sourceStartMs": 872562,
+          "sourceEndMs": 892815
+        }
+      ],
+      "segments": [
+        {
+          "sourceStartMs": 872562,
+          "sourceEndMs": 892815,
+          "videoPath": "media/second-candidate-02.mp4",
+          "audioPath": "media/second-candidate-02.m4a",
+          "expectedDurationMs": 20253,
+          "videoDurationMs": 20267,
+          "audioDurationMs": 20253
+        }
+      ],
+      "expectedDurationMs": 20253
+    },
+    {
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "fixtureLabel": "第二素材（マリン野球ゲーム）",
+      "candidateId": 3,
+      "title": "オリジナル変化球の開発が分からずDiscordで助けを求めるマリン船長",
+      "reason": "パワプロのオリジナル変化球の作り方が分からず、ホロライブのDiscordサーバーで他のタレントに質問を投げかける場面が面白いため。",
+      "sourceVideoId": "o8rZAhARXAc",
+      "sourceRanges": [
+        {
+          "sourceStartMs": 961718,
+          "sourceEndMs": 1048380
+        }
+      ],
+      "segments": [
+        {
+          "sourceStartMs": 961718,
+          "sourceEndMs": 1048380,
+          "videoPath": "media/second-candidate-03.mp4",
+          "audioPath": "media/second-candidate-03.m4a",
+          "expectedDurationMs": 86662,
+          "videoDurationMs": 86683,
+          "audioDurationMs": 86662
+        }
+      ],
+      "expectedDurationMs": 86662
+    }
+  ]
+}
