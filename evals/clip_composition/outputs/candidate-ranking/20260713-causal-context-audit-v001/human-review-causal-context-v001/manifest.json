@@ -1,0 +1,672 @@
+{
+  "kind": "candidate_ranking_causal_context_human_review_package",
+  "packageId": "20260713-causal-context-rereview-v001",
+  "createdAt": "2026-07-13T05:55:12.550Z",
+  "sourceAudit": "evals/clip_composition/outputs/candidate-ranking/20260713-causal-context-audit-v001/desk-audit.json",
+  "purpose": "根拠内の全発話ピースを時系列につぎはぎし、原因と反応が理解できるかを四択で再確認する。",
+  "choices": [
+    "公開したい",
+    "悪くないが選ばない",
+    "つまらない",
+    "文脈不明"
+  ],
+  "humanWorkEstimate": {
+    "itemCount": 4,
+    "estimatedMinutesPerItemUpperBound": 2,
+    "estimatedTotalMinutesUpperBound": 8
+  },
+  "playback": {
+    "defaultRate": 1.5,
+    "sourceTotalDurationMs": 170957,
+    "durationAtDefaultRateMs": 113971
+  },
+  "contextPolicy": {
+    "fixedTimeLeadIn": false,
+    "source": "theme evidence speech pieces only",
+    "chronologicalStitching": true
+  },
+  "answerStatus": "awaiting-human-review",
+  "fixtureAndExpectedChanges": false,
+  "items": [
+    {
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "sourceVideoId": "YE-faluP7zY",
+      "candidateId": 58,
+      "title": "置き去りにされそうになって焦る戌神ころね",
+      "reason": "マリン船長が移動する中で、置き去りにされそうになったころねが「犬かきで行く」と可愛く宣言した直後、どんどん距離が離れていって絶叫する見どころのある展開になっているため。",
+      "previousAnswer": "悪くないが選ばない",
+      "sampleType": "文脈不明の起点",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 6300522,
+          "sourceEndMs": 6361383,
+          "supportingSpeechIds": [
+            "927-931"
+          ],
+          "timingResolution": {
+            "source": "supportingSpeechIds",
+            "reportedSourceStartMs": 6300522,
+            "reportedSourceEndMs": 6361383,
+            "corrected": false
+          }
+        }
+      ],
+      "evidenceSpeechIds": [
+        927,
+        928,
+        929,
+        930,
+        931
+      ],
+      "evidencePieces": [
+        {
+          "speechId": 927,
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 6300522,
+          "sourceEndMs": 6328283,
+          "text": "で、大区画のあ、蝶津貝もいるのかちょっと下に潜って探すねありがとうどうしよう、どんどんこの隙に移動しててさコーネが置き去りにされていてしまったらば置き去りにされたらコーネはでも犬かけにそっちまで行くねなかわいいかわいい!"
+        },
+        {
+          "speechId": 928,
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 6328283,
+          "sourceEndMs": 6328883,
+          "text": "届きましたよ!"
+        },
+        {
+          "speechId": 929,
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 6332538,
+          "sourceEndMs": 6335759,
+          "text": "そういうとこがね、好きなんだねえ、やだぁ?"
+        },
+        {
+          "speechId": 930,
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 6335759,
+          "sourceEndMs": 6336419,
+          "text": "んん?"
+        },
+        {
+          "speechId": 931,
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 6336419,
+          "sourceEndMs": 6361383,
+          "text": "待て待て、めっちゃwwwこ、こね、どんどん離れていってるwwwまねぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇでも、ほんと?"
+        }
+      ],
+      "causeSpeechIds": [
+        927
+      ],
+      "reactionSpeechIds": [
+        931
+      ],
+      "assessment": "cause-in-evidence",
+      "rationale": "移動中に潜っているころねを置き去りにする可能性と、ころねが犬かきで追う宣言がspeech 927にあり、実際に距離が離れて絶叫する反応がspeech 931にある。",
+      "parts": [
+        {
+          "index": 1,
+          "speechId": 927,
+          "sourceStartMs": 6300522,
+          "sourceEndMs": 6328283,
+          "text": "で、大区画のあ、蝶津貝もいるのかちょっと下に潜って探すねありがとうどうしよう、どんどんこの隙に移動しててさコーネが置き去りにされていてしまったらば置き去りにされたらコーネはでも犬かけにそっちまで行くねなかわいいかわいい!",
+          "expectedDurationMs": 27761,
+          "actualDurationMs": 27783,
+          "path": "parts/B-candidate-58/speech-927.mp4"
+        },
+        {
+          "index": 2,
+          "speechId": 928,
+          "sourceStartMs": 6328283,
+          "sourceEndMs": 6328883,
+          "text": "届きましたよ!",
+          "expectedDurationMs": 600,
+          "actualDurationMs": 600,
+          "path": "parts/B-candidate-58/speech-928.mp4"
+        },
+        {
+          "index": 3,
+          "speechId": 929,
+          "sourceStartMs": 6332538,
+          "sourceEndMs": 6335759,
+          "text": "そういうとこがね、好きなんだねえ、やだぁ?",
+          "expectedDurationMs": 3221,
+          "actualDurationMs": 3249,
+          "path": "parts/B-candidate-58/speech-929.mp4"
+        },
+        {
+          "index": 4,
+          "speechId": 930,
+          "sourceStartMs": 6335759,
+          "sourceEndMs": 6336419,
+          "text": "んん?",
+          "expectedDurationMs": 660,
+          "actualDurationMs": 667,
+          "path": "parts/B-candidate-58/speech-930.mp4"
+        },
+        {
+          "index": 5,
+          "speechId": 931,
+          "sourceStartMs": 6336419,
+          "sourceEndMs": 6361383,
+          "text": "待て待て、めっちゃwwwこ、こね、どんどん離れていってるwwwまねぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇでも、ほんと?",
+          "expectedDurationMs": 24964,
+          "actualDurationMs": 24983,
+          "path": "parts/B-candidate-58/speech-931.mp4"
+        }
+      ],
+      "stitchedVideoPath": "media/B-candidate-58-stitched.mp4",
+      "stitchedAudioPath": "media/B-candidate-58-stitched.m4a",
+      "expectedDurationMs": 57206,
+      "videoDurationMs": 57302,
+      "audioDurationMs": 57284
+    },
+    {
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "sourceVideoId": "YE-faluP7zY",
+      "candidateId": 12,
+      "title": "食料不足の中で鳥を仕留めるころね",
+      "reason": "ココナッツしか取れず食料がしけてきた状況で、ころねが見事に鳥を殺して肉を確保し、マリンが驚き喜ぶ展開が綺麗にまとまっているため。",
+      "previousAnswer": "つまらない",
+      "sampleType": "単純なゲーム行動",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 810330,
+          "sourceEndMs": 839584,
+          "supportingSpeechIds": [
+            "77-83"
+          ],
+          "timingResolution": {
+            "source": "supportingSpeechIds",
+            "reportedSourceStartMs": 810330,
+            "reportedSourceEndMs": 839584,
+            "corrected": false
+          }
+        }
+      ],
+      "evidenceSpeechIds": [
+        77,
+        78,
+        79,
+        80,
+        81,
+        82,
+        83
+      ],
+      "evidencePieces": [
+        {
+          "speechId": 77,
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 810330,
+          "sourceEndMs": 817353,
+          "text": "えっとちょっと待ってココナッツしか取れねぇよ食料確かにちょっとしけてきたなあでも足りない?"
+        },
+        {
+          "speechId": 78,
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 817353,
+          "sourceEndMs": 818634,
+          "text": "しけしけになってきた?"
+        },
+        {
+          "speechId": 79,
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 818634,
+          "sourceEndMs": 822236,
+          "text": "ちょっと若干了解あ!"
+        },
+        {
+          "speechId": 80,
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 822236,
+          "sourceEndMs": 823876,
+          "text": "鳥殺した!"
+        },
+        {
+          "speechId": 81,
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 823876,
+          "sourceEndMs": 824557,
+          "text": "鳥殺したの?"
+        },
+        {
+          "speechId": 82,
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 824557,
+          "sourceEndMs": 825157,
+          "text": "食べれる?"
+        },
+        {
+          "speechId": 83,
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 825157,
+          "sourceEndMs": 839584,
+          "text": "食べれる食べれるちょっと待って鳥肉が絶対取れる食べてみて食べてみてOKOKOKOKちゃんと火通すんよOKあ、こんなとこでサメ肉3つあんじゃんラッキーラッキーラッキーじゃなくてラッキーとかじゃないねあ、サメ倒してたねそういえばね"
+        }
+      ],
+      "causeSpeechIds": [
+        77,
+        78,
+        79,
+        80
+      ],
+      "reactionSpeechIds": [
+        81,
+        82,
+        83
+      ],
+      "assessment": "cause-in-evidence",
+      "rationale": "食料がココナッツだけで不足している状態と、ころねが鳥を仕留めた出来事がspeech 77-80にあり、食べられるかの確認と肉確保への反応がspeech 81-83にある。",
+      "parts": [
+        {
+          "index": 1,
+          "speechId": 77,
+          "sourceStartMs": 810330,
+          "sourceEndMs": 817353,
+          "text": "えっとちょっと待ってココナッツしか取れねぇよ食料確かにちょっとしけてきたなあでも足りない?",
+          "expectedDurationMs": 7023,
+          "actualDurationMs": 7033,
+          "path": "parts/B-candidate-12/speech-77.mp4"
+        },
+        {
+          "index": 2,
+          "speechId": 78,
+          "sourceStartMs": 817353,
+          "sourceEndMs": 818634,
+          "text": "しけしけになってきた?",
+          "expectedDurationMs": 1281,
+          "actualDurationMs": 1299,
+          "path": "parts/B-candidate-12/speech-78.mp4"
+        },
+        {
+          "index": 3,
+          "speechId": 79,
+          "sourceStartMs": 818634,
+          "sourceEndMs": 822236,
+          "text": "ちょっと若干了解あ!",
+          "expectedDurationMs": 3602,
+          "actualDurationMs": 3633,
+          "path": "parts/B-candidate-12/speech-79.mp4"
+        },
+        {
+          "index": 4,
+          "speechId": 80,
+          "sourceStartMs": 822236,
+          "sourceEndMs": 823876,
+          "text": "鳥殺した!",
+          "expectedDurationMs": 1640,
+          "actualDurationMs": 1666,
+          "path": "parts/B-candidate-12/speech-80.mp4"
+        },
+        {
+          "index": 5,
+          "speechId": 81,
+          "sourceStartMs": 823876,
+          "sourceEndMs": 824557,
+          "text": "鳥殺したの?",
+          "expectedDurationMs": 681,
+          "actualDurationMs": 683,
+          "path": "parts/B-candidate-12/speech-81.mp4"
+        },
+        {
+          "index": 6,
+          "speechId": 82,
+          "sourceStartMs": 824557,
+          "sourceEndMs": 825157,
+          "text": "食べれる?",
+          "expectedDurationMs": 600,
+          "actualDurationMs": 616,
+          "path": "parts/B-candidate-12/speech-82.mp4"
+        },
+        {
+          "index": 7,
+          "speechId": 83,
+          "sourceStartMs": 825157,
+          "sourceEndMs": 839584,
+          "text": "食べれる食べれるちょっと待って鳥肉が絶対取れる食べてみて食べてみてOKOKOKOKちゃんと火通すんよOKあ、こんなとこでサメ肉3つあんじゃんラッキーラッキーラッキーじゃなくてラッキーとかじゃないねあ、サメ倒してたねそういえばね",
+          "expectedDurationMs": 14427,
+          "actualDurationMs": 14449,
+          "path": "parts/B-candidate-12/speech-83.mp4"
+        }
+      ],
+      "stitchedVideoPath": "media/B-candidate-12-stitched.mp4",
+      "stitchedAudioPath": "media/B-candidate-12-stitched.m4a",
+      "expectedDurationMs": 29254,
+      "videoDurationMs": 29401,
+      "audioDurationMs": 29379
+    },
+    {
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "sourceVideoId": "YE-faluP7zY",
+      "candidateId": 84,
+      "title": "間違えてテーブルを量産してしまう宝鐘マリン",
+      "reason": "別の高いテーブルを作ろうとするも再びローテーブルを作ってしまい、最終的に正解のテーブルを見つけるが大量に余ったテーブルの処理に困るオチがついているため。",
+      "previousAnswer": "つまらない",
+      "sampleType": "本人のゲーム内ミス",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 11062309,
+          "sourceEndMs": 11098463,
+          "supportingSpeechIds": [
+            "1647-1651"
+          ],
+          "timingResolution": {
+            "source": "supportingSpeechIds",
+            "reportedSourceStartMs": 11062309,
+            "reportedSourceEndMs": 11098463,
+            "corrected": false
+          }
+        }
+      ],
+      "evidenceSpeechIds": [
+        1647,
+        1648,
+        1649,
+        1650,
+        1651
+      ],
+      "evidencePieces": [
+        {
+          "speechId": 1647,
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 11062309,
+          "sourceEndMs": 11068992,
+          "text": "粘土返せになるよいや粘土粘土は大ヒロ低いか"
+        },
+        {
+          "speechId": 1648,
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 11070330,
+          "sourceEndMs": 11074092,
+          "text": "でかいやつこれなら絶対これは大丈夫でしょ?"
+        },
+        {
+          "speechId": 1649,
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 11074092,
+          "sourceEndMs": 11078154,
+          "text": "これもローテーブルだったらもうさあねえ小せえ!"
+        },
+        {
+          "speechId": 1650,
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 11078154,
+          "sourceEndMs": 11082476,
+          "text": "もううぜえマジで待ってこれじゃない?"
+        },
+        {
+          "speechId": 1651,
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 11082476,
+          "sourceEndMs": 11098463,
+          "text": "上に物を置くテーブルうわこっちだわ完全こっちねえいっぱいテーブル作っちゃったそれさなんかウェディングケーキみたいに重ねられないの?"
+        }
+      ],
+      "causeSpeechIds": [
+        1647,
+        1648,
+        1649
+      ],
+      "reactionSpeechIds": [
+        1650,
+        1651
+      ],
+      "assessment": "cause-in-evidence",
+      "rationale": "別の大きいテーブルを選び直してもローテーブルだった失敗がspeech 1647-1649にあり、正解発見と大量に作ったテーブルへの困惑がspeech 1650-1651にある。以前の失敗映像はないが、量産した状態はspeech 1651で明示される。",
+      "parts": [
+        {
+          "index": 1,
+          "speechId": 1647,
+          "sourceStartMs": 11062309,
+          "sourceEndMs": 11068992,
+          "text": "粘土返せになるよいや粘土粘土は大ヒロ低いか",
+          "expectedDurationMs": 6683,
+          "actualDurationMs": 6683,
+          "path": "parts/B-candidate-84/speech-1647.mp4"
+        },
+        {
+          "index": 2,
+          "speechId": 1648,
+          "sourceStartMs": 11070330,
+          "sourceEndMs": 11074092,
+          "text": "でかいやつこれなら絶対これは大丈夫でしょ?",
+          "expectedDurationMs": 3762,
+          "actualDurationMs": 3767,
+          "path": "parts/B-candidate-84/speech-1648.mp4"
+        },
+        {
+          "index": 3,
+          "speechId": 1649,
+          "sourceStartMs": 11074092,
+          "sourceEndMs": 11078154,
+          "text": "これもローテーブルだったらもうさあねえ小せえ!",
+          "expectedDurationMs": 4062,
+          "actualDurationMs": 4067,
+          "path": "parts/B-candidate-84/speech-1649.mp4"
+        },
+        {
+          "index": 4,
+          "speechId": 1650,
+          "sourceStartMs": 11078154,
+          "sourceEndMs": 11082476,
+          "text": "もううぜえマジで待ってこれじゃない?",
+          "expectedDurationMs": 4322,
+          "actualDurationMs": 4349,
+          "path": "parts/B-candidate-84/speech-1650.mp4"
+        },
+        {
+          "index": 5,
+          "speechId": 1651,
+          "sourceStartMs": 11082476,
+          "sourceEndMs": 11098463,
+          "text": "上に物を置くテーブルうわこっちだわ完全こっちねえいっぱいテーブル作っちゃったそれさなんかウェディングケーキみたいに重ねられないの?",
+          "expectedDurationMs": 15987,
+          "actualDurationMs": 16000,
+          "path": "parts/B-candidate-84/speech-1651.mp4"
+        }
+      ],
+      "stitchedVideoPath": "media/B-candidate-84-stitched.mp4",
+      "stitchedAudioPath": "media/B-candidate-84-stitched.m4a",
+      "expectedDurationMs": 34816,
+      "videoDurationMs": 34887,
+      "audioDurationMs": 34874
+    },
+    {
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "sourceVideoId": "o8rZAhARXAc",
+      "candidateId": 25,
+      "title": "チャットの指示で対戦相手を選んだ結果、Bランクの高校を引いて焦るシーン",
+      "reason": "リスナー（キャージー）に選択を委ねた結果、手強いBランクの「ざまみ商業高校」を引き当ててしまい動揺するリアクションが面白いため。",
+      "previousAnswer": "つまらない",
+      "sampleType": "外部選択で状況悪化",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 5701367,
+          "sourceEndMs": 5755602,
+          "supportingSpeechIds": [
+            "565-572"
+          ],
+          "timingResolution": {
+            "source": "supportingSpeechIds",
+            "reportedSourceStartMs": 5701367,
+            "reportedSourceEndMs": 5755602,
+            "corrected": false
+          }
+        }
+      ],
+      "evidenceSpeechIds": [
+        565,
+        566,
+        567,
+        568,
+        569,
+        570,
+        571,
+        572
+      ],
+      "evidencePieces": [
+        {
+          "speechId": 565,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 5701367,
+          "sourceEndMs": 5702247,
+          "text": "どこにする?"
+        },
+        {
+          "speechId": 566,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 5702247,
+          "sourceEndMs": 5714533,
+          "text": "キャージーどれがいい?"
+        },
+        {
+          "speechId": 567,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 5714533,
+          "sourceEndMs": 5719475,
+          "text": "どれがいい?"
+        },
+        {
+          "speechId": 568,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 5719475,
+          "sourceEndMs": 5721796,
+          "text": "魔物でギリかキャージーに決めてもらうわはいはいはいえっと一番右オッケーじゃあ一番右で行きますけ!"
+        },
+        {
+          "speechId": 569,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 5721796,
+          "sourceEndMs": 5728519,
+          "text": "1?"
+        },
+        {
+          "speechId": 570,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 5728519,
+          "sourceEndMs": 5729340,
+          "text": "1Bかー"
+        },
+        {
+          "speechId": 571,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 5733894,
+          "sourceEndMs": 5751200,
+          "text": "ざま…ざまみ…ざまみ商業高校ざまみ…大丈夫かなぁ…Bって…Bやばいか?"
+        },
+        {
+          "speechId": 572,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 5751200,
+          "sourceEndMs": 5755602,
+          "text": "まぁ占い師踏んで…占い師踏んで…"
+        }
+      ],
+      "causeSpeechIds": [
+        565,
+        566,
+        567,
+        568,
+        569,
+        570
+      ],
+      "reactionSpeechIds": [
+        571,
+        572
+      ],
+      "assessment": "cause-in-evidence",
+      "rationale": "対戦相手をチャットに選ばせて一番右へ決め、Bランクを引いた経緯がspeech 565-570にあり、学校名を見て不安になる反応がspeech 571-572にある。",
+      "parts": [
+        {
+          "index": 1,
+          "speechId": 565,
+          "sourceStartMs": 5701367,
+          "sourceEndMs": 5702247,
+          "text": "どこにする?",
+          "expectedDurationMs": 880,
+          "actualDurationMs": 899,
+          "path": "parts/second-candidate-25/speech-565.mp4"
+        },
+        {
+          "index": 2,
+          "speechId": 566,
+          "sourceStartMs": 5702247,
+          "sourceEndMs": 5714533,
+          "text": "キャージーどれがいい?",
+          "expectedDurationMs": 12286,
+          "actualDurationMs": 12300,
+          "path": "parts/second-candidate-25/speech-566.mp4"
+        },
+        {
+          "index": 3,
+          "speechId": 567,
+          "sourceStartMs": 5714533,
+          "sourceEndMs": 5719475,
+          "text": "どれがいい?",
+          "expectedDurationMs": 4942,
+          "actualDurationMs": 4950,
+          "path": "parts/second-candidate-25/speech-567.mp4"
+        },
+        {
+          "index": 4,
+          "speechId": 568,
+          "sourceStartMs": 5719475,
+          "sourceEndMs": 5721796,
+          "text": "魔物でギリかキャージーに決めてもらうわはいはいはいえっと一番右オッケーじゃあ一番右で行きますけ!",
+          "expectedDurationMs": 2321,
+          "actualDurationMs": 2349,
+          "path": "parts/second-candidate-25/speech-568.mp4"
+        },
+        {
+          "index": 5,
+          "speechId": 569,
+          "sourceStartMs": 5721796,
+          "sourceEndMs": 5728519,
+          "text": "1?",
+          "expectedDurationMs": 6723,
+          "actualDurationMs": 6733,
+          "path": "parts/second-candidate-25/speech-569.mp4"
+        },
+        {
+          "index": 6,
+          "speechId": 570,
+          "sourceStartMs": 5728519,
+          "sourceEndMs": 5729340,
+          "text": "1Bかー",
+          "expectedDurationMs": 821,
+          "actualDurationMs": 849,
+          "path": "parts/second-candidate-25/speech-570.mp4"
+        },
+        {
+          "index": 7,
+          "speechId": 571,
+          "sourceStartMs": 5733894,
+          "sourceEndMs": 5751200,
+          "text": "ざま…ざまみ…ざまみ商業高校ざまみ…大丈夫かなぁ…Bって…Bやばいか?",
+          "expectedDurationMs": 17306,
+          "actualDurationMs": 17317,
+          "path": "parts/second-candidate-25/speech-571.mp4"
+        },
+        {
+          "index": 8,
+          "speechId": 572,
+          "sourceStartMs": 5751200,
+          "sourceEndMs": 5755602,
+          "text": "まぁ占い師踏んで…占い師踏んで…",
+          "expectedDurationMs": 4402,
+          "actualDurationMs": 4417,
+          "path": "parts/second-candidate-25/speech-572.mp4"
+        }
+      ],
+      "stitchedVideoPath": "media/second-candidate-25-stitched.mp4",
+      "stitchedAudioPath": "media/second-candidate-25-stitched.m4a",
+      "expectedDurationMs": 49681,
+      "videoDurationMs": 49836,
+      "audioDurationMs": 49821
+    }
+  ]
+}
