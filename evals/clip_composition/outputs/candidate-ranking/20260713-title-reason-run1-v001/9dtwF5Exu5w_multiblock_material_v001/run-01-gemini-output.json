@@ -1,0 +1,42 @@
+{
+  "rankedCandidates": [
+    {
+      "rank": 1,
+      "candidateId": 14,
+      "reason": "こよりへの相談で発生し得るリスク（叩かれる可能性）を考慮して別タレント（星街すいせい）に変更するという、気遣いと具体的な決断のストーリーが理由文内に完結して説明されているため。"
+    },
+    {
+      "rank": 2,
+      "candidateId": 40,
+      "reason": "期待していた特殊能力「魔物」ではなく「ラッキーボーイ」が発動したという明確なフリと、それに対する激しいツッコミというリアクションの展開が具体的に説明されているため。"
+    },
+    {
+      "rank": 3,
+      "candidateId": 4,
+      "reason": "変化球の作り方に困ったフリから、最終的に他タレントの「粉落とし」と全く同じ仕様で丸パクリすることに決めるというコミカルな結論までが1つの一連の展開として明確に説明されているため。"
+    },
+    {
+      "rank": 4,
+      "candidateId": 25,
+      "reason": "チャットの指示通りに対戦相手を選んだ結果、手強いBランクの高校を引き当てて動揺するという、因果関係とリアクションが単独の具体的な出来事として伝わる内容になっているため。"
+    },
+    {
+      "rank": 5,
+      "candidateId": 57,
+      "reason": "緊迫した試合の末に劇的勝利を収め、大絶叫から涙を流して安堵するという、フリから感情を爆発させる結末までのハイライト展開が理由文内で明確に説明されているため。"
+    }
+  ],
+  "runAt": "2026-07-13T11:59:51+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "generationSystem": "candidate-ranking-v001@gemini-web-flash",
+    "run": 1,
+    "inputPolicy": "candidateId+title+reason only"
+  },
+  "promptFile": "outputs/candidate-ranking/20260713-title-reason-run1-v001/9dtwF5Exu5w_multiblock_material_v001/prompt.txt",
+  "pageUrl": "https://gemini.google.com/app/90c98a3b4a2ef19d?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"rankedCandidates\": [\n    {\n      \"rank\": 1,\n      \"candidateId\": 14,\n      \"reason\": \"こよりへの相談で発生し得るリスク（叩かれる可能性）を考慮して別タレント（星街すいせい）に変更するという、気遣いと具体的な決断のストーリーが理由文内に完結して説明されているため。\"\n    },\n    {\n      \"rank\": 2,\n      \"candidateId\": 40,\n      \"reason\": \"期待していた特殊能力「魔物」ではなく「ラッキーボーイ」が発動したという明確なフリと、それに対する激しいツッコミというリアクションの展開が具体的に説明されているため。\"\n    },\n    {\n      \"rank\": 3,\n      \"candidateId\": 4,\n      \"reason\": \"変化球の作り方に困ったフリから、最終的に他タレントの「粉落とし」と全く同じ仕様で丸パクリすることに決めるというコミカルな結論までが1つの一連の展開として明確に説明されているため。\"\n    },\n    {\n      \"rank\": 4,\n      \"candidateId\": 25,\n      \"reason\": \"チャットの指示通りに対戦相手を選んだ結果、手強いBランクの高校を引き当てて動揺するという、因果関係とリアクションが単独の具体的な出来事として伝わる内容になっているため。\"\n    },\n    {\n      \"rank\": 5,\n      \"candidateId\": 57,\n      \"reason\": \"緊迫した試合の末に劇的勝利を収め、大絶叫から涙を流して安堵するという、フリから感情を爆発させる結末までのハイライト展開が理由文内で明確に説明されているため。\"\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

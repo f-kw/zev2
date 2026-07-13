@@ -1,0 +1,381 @@
+{
+  "kind": "candidate_ranking_title_reason_run1_result",
+  "scoredAt": "2026-07-13T03:01:23.652Z",
+  "generationSystem": "candidate-ranking-v001@gemini-web-flash",
+  "model": "gemini-web-flash",
+  "runCount": 1,
+  "inputPolicy": "candidateId+title+reason only",
+  "primaryMetric": "known hit candidates in top 5",
+  "nonHitPolicy": "not an error; list as unlabeled discoveries requiring optional human review",
+  "humanReviewPerformed": false,
+  "fixtures": [
+    {
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateCount": 89,
+      "generationSystem": "candidate-ranking-v001@gemini-web-flash",
+      "model": "gemini-web-flash",
+      "run": 1,
+      "formatValidation": {
+        "passed": true,
+        "errors": []
+      },
+      "leakCheck": {
+        "passed": true,
+        "allowedCandidateFields": [
+          "candidateId",
+          "title",
+          "reason"
+        ],
+        "foundForbiddenFields": [],
+        "candidateCount": 89,
+        "note": "候補IDは出力参照用。モデルへ渡す候補内容はtitle/reasonのみ。時刻・transcript・根拠範囲・expected・照合結果・機械信号は含めない。"
+      },
+      "primaryMetric": {
+        "hitCandidateCountAt5": 1
+      },
+      "secondaryMetric": {
+        "coveredExpectedIndexes": [
+          6
+        ],
+        "coveredCount": 1,
+        "denominator": 13
+      },
+      "rankedCandidates": [
+        {
+          "rank": 1,
+          "candidateId": 37,
+          "title": "肉を焼き忘れたころねにキレるマリンと、夫婦漫才からのバーベキュー完成",
+          "sourceReason": "しし肉を焼き忘れていたころねに対してマリンが「子供に示しがつかないだろ」と夫婦風に怒る掛け合いから、豪華なバーベキューが完成して2人で歓喜する一連の流れが面白い映像になるため。",
+          "selectionReason": "食料の焼き忘れという具体的な出来事から、「夫婦漫才」のような掛け合いの展開を経て、バーベキューの完成と歓喜という結末までが1つの理由文内で明確に説明されているため。",
+          "isKnownHit": true,
+          "hitExpectedIndexes": [
+            6
+          ],
+          "assessment": "known-hit"
+        },
+        {
+          "rank": 2,
+          "candidateId": 12,
+          "title": "食料不足の中で鳥を仕留めるころね",
+          "sourceReason": "ココナッツしか取れず食料がしけてきた状況で、ころねが見事に鳥を殺して肉を確保し、マリンが驚き喜ぶ展開が綺麗にまとまっているため。",
+          "selectionReason": "食料不足という具体的な背景、ころねが鳥を仕留めて肉を確保するという明確な展開、そしてマリンが驚き喜ぶという反応・オチまでが単独で伝わる内容として綺麗にまとまっているため。",
+          "isKnownHit": false,
+          "hitExpectedIndexes": [],
+          "assessment": "unlabeled-discovery-needs-human-review-not-error"
+        },
+        {
+          "rank": 3,
+          "candidateId": 84,
+          "title": "間違えてテーブルを量産してしまう宝鐘マリン",
+          "sourceReason": "別の高いテーブルを作ろうとするも再びローテーブルを作ってしまい、最終的に正解のテーブルを見つけるが大量に余ったテーブルの処理に困るオチがついているため。",
+          "selectionReason": "アイテムのクラフトミスという具体的な出来事から、試行錯誤の末に正解を見つける展開、そして大量に余ったテーブルの処理に困るという明確なオチまでが説明されているため。",
+          "isKnownHit": false,
+          "hitExpectedIndexes": [],
+          "assessment": "unlabeled-discovery-needs-human-review-not-error"
+        },
+        {
+          "rank": 4,
+          "candidateId": 70,
+          "title": "サメ退治の代償で船を見失い迷子になるマリンと ころね",
+          "sourceReason": "サメを倒した直後に船を見失ってお互いを探し合うという、ゲーム内のハプニングとパニックの展開が明確で切り抜きとして成立するため。",
+          "selectionReason": "サメ退治の代償として船を見失うという具体的なハプニングから、お互いを探し合うパニック状態の展開、それによる切り抜きとしての単独の成立性が明確に説明されているため。",
+          "isKnownHit": false,
+          "hitExpectedIndexes": [],
+          "assessment": "unlabeled-discovery-needs-human-review-not-error"
+        },
+        {
+          "rank": 5,
+          "candidateId": 36,
+          "title": "マリンが我慢できず2回目のトイレへ、留守を預かるころねの緊張",
+          "sourceReason": "マリンが配信前にトイレに行ったにもかかわらず再度席を外すというハプニングと、残されたころねがリスナー（一味）と2人きりで緊張しながら場を繋ぐ展開が切り抜きとして成立するため。",
+          "selectionReason": "配信中のトイレ離席という具体的なハプニング（フリ）と、残されたころねが緊張しながら場を繋ぐという状況展開が単独で伝わるエピソードとして説明されているため。",
+          "isKnownHit": false,
+          "hitExpectedIndexes": [],
+          "assessment": "unlabeled-discovery-needs-human-review-not-error"
+        }
+      ],
+      "nonHitDiscoveries": [
+        {
+          "rank": 2,
+          "candidateId": 12,
+          "title": "食料不足の中で鳥を仕留めるころね",
+          "sourceReason": "ココナッツしか取れず食料がしけてきた状況で、ころねが見事に鳥を殺して肉を確保し、マリンが驚き喜ぶ展開が綺麗にまとまっているため。",
+          "selectionReason": "食料不足という具体的な背景、ころねが鳥を仕留めて肉を確保するという明確な展開、そしてマリンが驚き喜ぶという反応・オチまでが単独で伝わる内容として綺麗にまとまっているため。",
+          "isKnownHit": false,
+          "hitExpectedIndexes": [],
+          "assessment": "unlabeled-discovery-needs-human-review-not-error"
+        },
+        {
+          "rank": 3,
+          "candidateId": 84,
+          "title": "間違えてテーブルを量産してしまう宝鐘マリン",
+          "sourceReason": "別の高いテーブルを作ろうとするも再びローテーブルを作ってしまい、最終的に正解のテーブルを見つけるが大量に余ったテーブルの処理に困るオチがついているため。",
+          "selectionReason": "アイテムのクラフトミスという具体的な出来事から、試行錯誤の末に正解を見つける展開、そして大量に余ったテーブルの処理に困るという明確なオチまでが説明されているため。",
+          "isKnownHit": false,
+          "hitExpectedIndexes": [],
+          "assessment": "unlabeled-discovery-needs-human-review-not-error"
+        },
+        {
+          "rank": 4,
+          "candidateId": 70,
+          "title": "サメ退治の代償で船を見失い迷子になるマリンと ころね",
+          "sourceReason": "サメを倒した直後に船を見失ってお互いを探し合うという、ゲーム内のハプニングとパニックの展開が明確で切り抜きとして成立するため。",
+          "selectionReason": "サメ退治の代償として船を見失うという具体的なハプニングから、お互いを探し合うパニック状態の展開、それによる切り抜きとしての単独の成立性が明確に説明されているため。",
+          "isKnownHit": false,
+          "hitExpectedIndexes": [],
+          "assessment": "unlabeled-discovery-needs-human-review-not-error"
+        },
+        {
+          "rank": 5,
+          "candidateId": 36,
+          "title": "マリンが我慢できず2回目のトイレへ、留守を預かるころねの緊張",
+          "sourceReason": "マリンが配信前にトイレに行ったにもかかわらず再度席を外すというハプニングと、残されたころねがリスナー（一味）と2人きりで緊張しながら場を繋ぐ展開が切り抜きとして成立するため。",
+          "selectionReason": "配信中のトイレ離席という具体的なハプニング（フリ）と、残されたころねが緊張しながら場を繋ぐという状況展開が単独で伝わるエピソードとして説明されているため。",
+          "isKnownHit": false,
+          "hitExpectedIndexes": [],
+          "assessment": "unlabeled-discovery-needs-human-review-not-error"
+        }
+      ],
+      "comparisonRows": [
+        {
+          "name": "generation_order",
+          "hitCandidateCountAt5": 2,
+          "expectedCoveredCount": 2,
+          "expectedDenominator": 13
+        },
+        {
+          "name": "chat_peak",
+          "hitCandidateCountAt5": 1,
+          "expectedCoveredCount": 1,
+          "expectedDenominator": 13
+        },
+        {
+          "name": "chat_mean",
+          "hitCandidateCountAt5": 1,
+          "expectedCoveredCount": 1,
+          "expectedDenominator": 13
+        },
+        {
+          "name": "evidence_shorter",
+          "hitCandidateCountAt5": 0,
+          "expectedCoveredCount": 0,
+          "expectedDenominator": 13
+        },
+        {
+          "name": "evidence_longer",
+          "hitCandidateCountAt5": 0,
+          "expectedCoveredCount": 0,
+          "expectedDenominator": 13
+        },
+        {
+          "name": "laughter_density",
+          "hitCandidateCountAt5": 1,
+          "expectedCoveredCount": 1,
+          "expectedDenominator": 13
+        },
+        {
+          "name": "position_earlier",
+          "hitCandidateCountAt5": 2,
+          "expectedCoveredCount": 2,
+          "expectedDenominator": 13
+        },
+        {
+          "name": "position_later",
+          "hitCandidateCountAt5": 2,
+          "expectedCoveredCount": 1,
+          "expectedDenominator": 13
+        },
+        {
+          "name": "title_reason_semantic",
+          "hitCandidateCountAt5": 1,
+          "expectedCoveredCount": 1,
+          "expectedDenominator": 13
+        }
+      ]
+    },
+    {
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateCount": 60,
+      "generationSystem": "candidate-ranking-v001@gemini-web-flash",
+      "model": "gemini-web-flash",
+      "run": 1,
+      "formatValidation": {
+        "passed": true,
+        "errors": []
+      },
+      "leakCheck": {
+        "passed": true,
+        "allowedCandidateFields": [
+          "candidateId",
+          "title",
+          "reason"
+        ],
+        "foundForbiddenFields": [],
+        "candidateCount": 60,
+        "note": "候補IDは出力参照用。モデルへ渡す候補内容はtitle/reasonのみ。時刻・transcript・根拠範囲・expected・照合結果・機械信号は含めない。"
+      },
+      "primaryMetric": {
+        "hitCandidateCountAt5": 1
+      },
+      "secondaryMetric": {
+        "coveredExpectedIndexes": [
+          9
+        ],
+        "coveredCount": 1,
+        "denominator": 25
+      },
+      "rankedCandidates": [
+        {
+          "rank": 1,
+          "candidateId": 14,
+          "title": "アドバイス起因の荒れを懸念し、こよりへの相談をやめるマリン",
+          "sourceReason": "こよりのアドバイスで育成がうまくいかなかった場合に彼女が叩かれるリスクを考慮し、優しさから相談をやめて星街すいせい（きまち）と決めることを選ぶ場面です。",
+          "selectionReason": "こよりへの相談で発生し得るリスク（叩かれる可能性）を考慮して別タレント（星街すいせい）に変更するという、気遣いと具体的な決断のストーリーが理由文内に完結して説明されているため。",
+          "isKnownHit": true,
+          "hitExpectedIndexes": [
+            9
+          ],
+          "assessment": "known-hit"
+        },
+        {
+          "rank": 2,
+          "candidateId": 40,
+          "title": "ビトが「魔物」ではなく「ラッキーボーイ」でブチギレるマリン",
+          "sourceReason": "期待していた固有戦術の「魔物」ではなく「ラッキーボーイ」が発動したビトに対して、マリンが激しいツッコミと怒りを露わにするリアクションが見どころだから。",
+          "selectionReason": "期待していた特殊能力「魔物」ではなく「ラッキーボーイ」が発動したという明確なフリと、それに対する激しいツッコミというリアクションの展開が具体的に説明されているため。",
+          "isKnownHit": false,
+          "hitExpectedIndexes": [],
+          "assessment": "unlabeled-discovery-needs-human-review-not-error"
+        },
+        {
+          "rank": 3,
+          "candidateId": 4,
+          "title": "結局リリカのオリジナル変化球「粉落とし」を丸パクリすることに決めるマリン船長",
+          "sourceReason": "オリジナル変化球のベースに強いと噂のフォーク系を選んだ結果、最終的にリリカが作った「粉落とし」と全く同じ仕様で真似して作ろうと決意する流れがコミカルなため。",
+          "selectionReason": "変化球の作り方に困ったフリから、最終的に他タレントの「粉落とし」と全く同じ仕様で丸パクリすることに決めるというコミカルな結論までが1つの一連の展開として明確に説明されているため。",
+          "isKnownHit": false,
+          "hitExpectedIndexes": [],
+          "assessment": "unlabeled-discovery-needs-human-review-not-error"
+        },
+        {
+          "rank": 4,
+          "candidateId": 25,
+          "title": "チャットの指示で対戦相手を選んだ結果、Bランクの高校を引いて焦るシーン",
+          "sourceReason": "リスナー（キャージー）に選択を委ねた結果、手強いBランクの「ざまみ商業高校」を引き当ててしまい動揺するリアクションが面白いため。",
+          "selectionReason": "チャットの指示通りに対戦相手を選んだ結果、手強いBランクの高校を引き当てて動揺するという、因果関係とリアクションが単独の具体的な出来事として伝わる内容になっているため。",
+          "isKnownHit": false,
+          "hitExpectedIndexes": [],
+          "assessment": "unlabeled-discovery-needs-human-review-not-error"
+        },
+        {
+          "rank": 5,
+          "candidateId": 57,
+          "title": "劇的勝利に大絶叫し涙を流すマリン船長",
+          "sourceReason": "緊迫した試合展開の末に勝利を収め、超長文の大絶叫から「涙出た」「辛かった」と安堵と喜びを爆発させる切り抜きに最適なハイライトシーンであるため。",
+          "selectionReason": "緊迫した試合の末に劇的勝利を収め、大絶叫から涙を流して安堵するという、フリから感情を爆発させる結末までのハイライト展開が理由文内で明確に説明されているため。",
+          "isKnownHit": false,
+          "hitExpectedIndexes": [],
+          "assessment": "unlabeled-discovery-needs-human-review-not-error"
+        }
+      ],
+      "nonHitDiscoveries": [
+        {
+          "rank": 2,
+          "candidateId": 40,
+          "title": "ビトが「魔物」ではなく「ラッキーボーイ」でブチギレるマリン",
+          "sourceReason": "期待していた固有戦術の「魔物」ではなく「ラッキーボーイ」が発動したビトに対して、マリンが激しいツッコミと怒りを露わにするリアクションが見どころだから。",
+          "selectionReason": "期待していた特殊能力「魔物」ではなく「ラッキーボーイ」が発動したという明確なフリと、それに対する激しいツッコミというリアクションの展開が具体的に説明されているため。",
+          "isKnownHit": false,
+          "hitExpectedIndexes": [],
+          "assessment": "unlabeled-discovery-needs-human-review-not-error"
+        },
+        {
+          "rank": 3,
+          "candidateId": 4,
+          "title": "結局リリカのオリジナル変化球「粉落とし」を丸パクリすることに決めるマリン船長",
+          "sourceReason": "オリジナル変化球のベースに強いと噂のフォーク系を選んだ結果、最終的にリリカが作った「粉落とし」と全く同じ仕様で真似して作ろうと決意する流れがコミカルなため。",
+          "selectionReason": "変化球の作り方に困ったフリから、最終的に他タレントの「粉落とし」と全く同じ仕様で丸パクリすることに決めるというコミカルな結論までが1つの一連の展開として明確に説明されているため。",
+          "isKnownHit": false,
+          "hitExpectedIndexes": [],
+          "assessment": "unlabeled-discovery-needs-human-review-not-error"
+        },
+        {
+          "rank": 4,
+          "candidateId": 25,
+          "title": "チャットの指示で対戦相手を選んだ結果、Bランクの高校を引いて焦るシーン",
+          "sourceReason": "リスナー（キャージー）に選択を委ねた結果、手強いBランクの「ざまみ商業高校」を引き当ててしまい動揺するリアクションが面白いため。",
+          "selectionReason": "チャットの指示通りに対戦相手を選んだ結果、手強いBランクの高校を引き当てて動揺するという、因果関係とリアクションが単独の具体的な出来事として伝わる内容になっているため。",
+          "isKnownHit": false,
+          "hitExpectedIndexes": [],
+          "assessment": "unlabeled-discovery-needs-human-review-not-error"
+        },
+        {
+          "rank": 5,
+          "candidateId": 57,
+          "title": "劇的勝利に大絶叫し涙を流すマリン船長",
+          "sourceReason": "緊迫した試合展開の末に勝利を収め、超長文の大絶叫から「涙出た」「辛かった」と安堵と喜びを爆発させる切り抜きに最適なハイライトシーンであるため。",
+          "selectionReason": "緊迫した試合の末に劇的勝利を収め、大絶叫から涙を流して安堵するという、フリから感情を爆発させる結末までのハイライト展開が理由文内で明確に説明されているため。",
+          "isKnownHit": false,
+          "hitExpectedIndexes": [],
+          "assessment": "unlabeled-discovery-needs-human-review-not-error"
+        }
+      ],
+      "comparisonRows": [
+        {
+          "name": "generation_order",
+          "hitCandidateCountAt5": 1,
+          "expectedCoveredCount": 1,
+          "expectedDenominator": 25
+        },
+        {
+          "name": "chat_peak",
+          "hitCandidateCountAt5": 1,
+          "expectedCoveredCount": 1,
+          "expectedDenominator": 25
+        },
+        {
+          "name": "chat_mean",
+          "hitCandidateCountAt5": 1,
+          "expectedCoveredCount": 1,
+          "expectedDenominator": 25
+        },
+        {
+          "name": "evidence_shorter",
+          "hitCandidateCountAt5": 1,
+          "expectedCoveredCount": 1,
+          "expectedDenominator": 25
+        },
+        {
+          "name": "evidence_longer",
+          "hitCandidateCountAt5": 2,
+          "expectedCoveredCount": 5,
+          "expectedDenominator": 25
+        },
+        {
+          "name": "laughter_density",
+          "hitCandidateCountAt5": 1,
+          "expectedCoveredCount": 1,
+          "expectedDenominator": 25
+        },
+        {
+          "name": "position_earlier",
+          "hitCandidateCountAt5": 1,
+          "expectedCoveredCount": 1,
+          "expectedDenominator": 25
+        },
+        {
+          "name": "position_later",
+          "hitCandidateCountAt5": 1,
+          "expectedCoveredCount": 1,
+          "expectedDenominator": 25
+        },
+        {
+          "name": "title_reason_semantic",
+          "hitCandidateCountAt5": 1,
+          "expectedCoveredCount": 1,
+          "expectedDenominator": 25
+        }
+      ]
+    }
+  ]
+}

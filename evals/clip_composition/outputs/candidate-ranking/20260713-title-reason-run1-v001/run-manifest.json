@@ -1,0 +1,39 @@
+{
+  "kind": "candidate_ranking_run_manifest",
+  "experimentId": "20260713-title-reason-run1-v001",
+  "preparedAt": "2026-07-13T02:57:46.468Z",
+  "generationSystem": "candidate-ranking-v001@gemini-web-flash",
+  "promptVersion": "candidate-ranking-v001",
+  "model": "gemini-web-flash",
+  "runCount": 1,
+  "inputPolicy": "candidateId+title+reason only",
+  "scoringPolicy": {
+    "primary": "hit candidate count in top 5",
+    "nonHitTreatment": "unlabeled discovery; not an automatic error",
+    "comparisons": "generation order and every precomputed mechanical single-signal ranking"
+  },
+  "humanWork": {
+    "itemCount": 0,
+    "estimatedMinutes": 0
+  },
+  "fixtures": [
+    {
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "sourceOutputPath": "outputs/theme-generation/nOEWCNc77MI_chat_velocity_top100_input_selection_v004/theme-llm-v002/20260711-chat-velocity-top100-v001/run-01-gemini-output.json",
+      "candidateCount": 89,
+      "promptInputPath": "evals/clip_composition/outputs/candidate-ranking/20260713-title-reason-run1-v001/nOEWCNc77MI_multiblock_material_v001/prompt-input.json",
+      "promptPath": "evals/clip_composition/outputs/candidate-ranking/20260713-title-reason-run1-v001/nOEWCNc77MI_multiblock_material_v001/prompt.txt",
+      "leakCheckPath": "evals/clip_composition/outputs/candidate-ranking/20260713-title-reason-run1-v001/nOEWCNc77MI_multiblock_material_v001/leak-check.json",
+      "outputPath": "evals/clip_composition/outputs/candidate-ranking/20260713-title-reason-run1-v001/nOEWCNc77MI_multiblock_material_v001/run-01-gemini-output.json"
+    },
+    {
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "sourceOutputPath": "outputs/theme-generation/9dtwF5Exu5w_chat_velocity_top100_input_selection_v004/theme-llm-v002/20260712-chat-velocity-top100-generalization-v001/run-01-gemini-output.json",
+      "candidateCount": 60,
+      "promptInputPath": "evals/clip_composition/outputs/candidate-ranking/20260713-title-reason-run1-v001/9dtwF5Exu5w_multiblock_material_v001/prompt-input.json",
+      "promptPath": "evals/clip_composition/outputs/candidate-ranking/20260713-title-reason-run1-v001/9dtwF5Exu5w_multiblock_material_v001/prompt.txt",
+      "leakCheckPath": "evals/clip_composition/outputs/candidate-ranking/20260713-title-reason-run1-v001/9dtwF5Exu5w_multiblock_material_v001/leak-check.json",
+      "outputPath": "evals/clip_composition/outputs/candidate-ranking/20260713-title-reason-run1-v001/9dtwF5Exu5w_multiblock_material_v001/run-01-gemini-output.json"
+    }
+  ]
+}

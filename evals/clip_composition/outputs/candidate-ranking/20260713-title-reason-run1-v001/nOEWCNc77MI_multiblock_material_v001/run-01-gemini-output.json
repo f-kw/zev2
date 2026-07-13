@@ -1,0 +1,42 @@
+{
+  "rankedCandidates": [
+    {
+      "rank": 1,
+      "candidateId": 37,
+      "reason": "食料の焼き忘れという具体的な出来事から、「夫婦漫才」のような掛け合いの展開を経て、バーベキューの完成と歓喜という結末までが1つの理由文内で明確に説明されているため。"
+    },
+    {
+      "rank": 2,
+      "candidateId": 12,
+      "reason": "食料不足という具体的な背景、ころねが鳥を仕留めて肉を確保するという明確な展開、そしてマリンが驚き喜ぶという反応・オチまでが単独で伝わる内容として綺麗にまとまっているため。"
+    },
+    {
+      "rank": 3,
+      "candidateId": 84,
+      "reason": "アイテムのクラフトミスという具体的な出来事から、試行錯誤の末に正解を見つける展開、そして大量に余ったテーブルの処理に困るという明確なオチまでが説明されているため。"
+    },
+    {
+      "rank": 4,
+      "candidateId": 70,
+      "reason": "サメ退治の代償として船を見失うという具体的なハプニングから、お互いを探し合うパニック状態の展開、それによる切り抜きとしての単独の成立性が明確に説明されているため。"
+    },
+    {
+      "rank": 5,
+      "candidateId": 36,
+      "reason": "配信中のトイレ離席という具体的なハプニング（フリ）と、残されたころねが緊張しながら場を繋ぐという状況展開が単独で伝わるエピソードとして説明されているため。"
+    }
+  ],
+  "runAt": "2026-07-13T11:59:37+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "generationSystem": "candidate-ranking-v001@gemini-web-flash",
+    "run": 1,
+    "inputPolicy": "candidateId+title+reason only"
+  },
+  "promptFile": "outputs/candidate-ranking/20260713-title-reason-run1-v001/nOEWCNc77MI_multiblock_material_v001/prompt.txt",
+  "pageUrl": "https://gemini.google.com/app/b2ab21b3f6fed73c?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"rankedCandidates\": [\n    {\n      \"rank\": 1,\n      \"candidateId\": 37,\n      \"reason\": \"食料の焼き忘れという具体的な出来事から、「夫婦漫才」のような掛け合いの展開を経て、バーベキューの完成と歓喜という結末までが1つの理由文内で明確に説明されているため。\"\n    },\n    {\n      \"rank\": 2,\n      \"candidateId\": 12,\n      \"reason\": \"食料不足という具体的な背景、ころねが鳥を仕留めて肉を確保するという明確な展開、そしてマリンが驚き喜ぶという反応・オチまでが単独で伝わる内容として綺麗にまとまっているため。\"\n    },\n    {\n      \"rank\": 3,\n      \"candidateId\": 84,\n      \"reason\": \"アイテムのクラフトミスという具体的な出来事から、試行錯誤の末に正解を見つける展開、そして大量に余ったテーブルの処理に困るという明確なオチまでが説明されているため。\"\n    },\n    {\n      \"rank\": 4,\n      \"candidateId\": 70,\n      \"reason\": \"サメ退治の代償として船を見失うという具体的なハプニングから、お互いを探し合うパニック状態の展開、それによる切り抜きとしての単独の成立性が明確に説明されているため。\"\n    },\n    {\n      \"rank\": 5,\n      \"candidateId\": 36,\n      \"reason\": \"配信中のトイレ離席という具体的なハプニング（フリ）と、残されたころねが緊張しながら場を繋ぐという状況展開が単独で伝わるエピソードとして説明されているため。\"\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}
