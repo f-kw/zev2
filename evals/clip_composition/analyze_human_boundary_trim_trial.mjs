@@ -48,23 +48,29 @@ async function main() {
   if (!existsSync(progressPath)) throw new Error('手直し試験のprogress.jsonがまだない');
   const [manifest, progress] = await Promise.all([readJson(manifestPath), readJson(progressPath)]);
   const records = manifest.tasks.map((task, order) => ({ order: order + 1, task, record: progress.tasks[task.id] })).filter((item) => item.record);
-  const complete = records.filter((item) => item.record.status === 'complete');
-  const unable = records.filter((item) => item.record.status === 'unable');
-  const inProgress = records.filter((item) => item.record.status === 'in_progress');
+  const calibration = records.filter((item) => item.task.measurementRole === 'calibration-ui-v001-failure');
+  const candidatePool = records.filter((item) => item.task.measurementRole === 'candidate-pool-not-scheduled');
+  const formal = records.filter((item) => item.task.measurementRole === 'formal');
+  const complete = formal.filter((item) => item.record.status === 'complete');
+  const unable = formal.filter((item) => item.record.status === 'unable');
+  const inProgress = formal.filter((item) => item.record.status === 'in_progress');
   const activeTimes = complete.map((item) => item.record.activeElapsedMs);
   const wallTimes = complete.map((item) => item.record.wallElapsedMs);
   const summary = {
-    plannedTaskCount: manifest.taskCount,
+    plannedTaskCount: manifest.formalTaskCount,
+    calibrationTaskCount: calibration.length,
+    calibrationCompleteCount: calibration.filter((item) => item.record.status === 'complete').length,
+    candidatePoolTaskCount: candidatePool.length,
     completeCount: complete.length,
     unableCount: unable.length,
     inProgressCount: inProgress.length,
-    notStartedCount: manifest.taskCount - complete.length - unable.length - inProgress.length,
+    notStartedCount: manifest.formalTaskCount - complete.length - unable.length - inProgress.length,
     activeTimeMs: { mean: mean(activeTimes), median: median(activeTimes), p90NearestRank: nearestRankP90(activeTimes) },
     wallTimeMs: { mean: mean(wallTimes), median: median(wallTimes), p90NearestRank: nearestRankP90(wallTimes) },
-    operationCounts: Object.fromEntries(['setStart', 'setEnd', 'preview', 'seek', 'step', 'playPause', 'reset'].map((key) => [key, complete.reduce((sum, item) => sum + Number(item.record.operationCounts[key] ?? 0), 0)])),
-    thresholdNMinutes: null,
-    thresholdStatus: 'human-decision-required-after-distribution-review',
-    formalGateResult: 'not_evaluated'
+    operationCounts: Object.fromEntries(['directEntry', 'wordSnap', 'setStart', 'setEnd', 'preview', 'seek', 'step', 'playPause', 'reset'].map((key) => [key, complete.reduce((sum, item) => sum + Number(item.record.operationCounts[key] ?? 0), 0)])),
+    streamFinishingThresholdMinutes: 15,
+    thresholdStatus: 'fixed-by-human-decision',
+    formalGateResult: 'v001-closed-v002-required'
   };
   const teacherData = {
     kind: 'human_adjusted_boundary_training_candidates',
@@ -73,12 +79,14 @@ async function main() {
     reviewer: progress.reviewer,
     automaticallyFrozenAsFixture: false,
     intendedUses: ['future-text-boundary-router', 'boundary-v002-training-candidate'],
-    cuts: complete.map(({ order, task, record }) => ({
+    cuts: records.filter((item) => item.record.status === 'complete').map(({ order, task, record }) => ({
       taskOrder: order,
       taskId: task.id,
       fixtureId: task.fixtureId,
       sourceVideoId: task.sourceVideoId,
       candidateIndex: task.candidateIndex,
+      measurementRole: task.measurementRole,
+      includedInTimeDistribution: task.measurementRole === 'formal',
       theme: { title: task.title, summary: task.summary },
       sourceGenerationSystem: task.generationSystem,
       provisionalStartMs: record.provisionalStartMs,
@@ -100,10 +108,12 @@ async function main() {
     generationSystem: 'llm-v012@gemini-web-flash',
     structuralExclusionCount: manifest.structuralExclusionCount,
     summary,
-    tasks: records.map(({ order, task, record }) => ({ order, taskId: task.id, fixtureId: task.fixtureId, candidateIndex: task.candidateIndex, status: record.status, activeElapsedMs: record.activeElapsedMs, wallElapsedMs: record.wallElapsedMs ?? null, provisionalStartMs: record.provisionalStartMs, provisionalEndMs: record.provisionalEndMs, humanStartMs: record.finalStartMs, humanEndMs: record.finalEndMs, operationCounts: record.operationCounts, notes: record.notes }))
+    tasks: records.map(({ order, task, record }) => ({ order, taskId: task.id, fixtureId: task.fixtureId, candidateIndex: task.candidateIndex, measurementRole: task.measurementRole, status: record.status, activeElapsedMs: record.activeElapsedMs, wallElapsedMs: record.wallElapsedMs ?? null, provisionalStartMs: record.provisionalStartMs, provisionalEndMs: record.provisionalEndMs, humanStartMs: record.finalStartMs, humanEndMs: record.finalEndMs, operationCounts: record.operationCounts, notes: record.notes }))
   };
   const report = `# 人間による境界手直し試験 v001 結果\n\n` +
-    `- 完了: ${summary.completeCount}/${summary.plannedTaskCount}\n` +
+    `- v001正式計測: 中止（全候補処理が目標単位と不一致）\n` +
+    `- UI校正: ${summary.calibrationCompleteCount}/${summary.calibrationTaskCount}（時間分布から除外）\n` +
+    `- 未実施の候補母集団: ${summary.candidatePoolTaskCount}\n` +
     `- 判断不能: ${summary.unableCount}\n` +
     `- 進行中: ${summary.inProgressCount}\n` +
     `- 未開始: ${summary.notStartedCount}\n\n` +
@@ -112,14 +122,14 @@ async function main() {
     `- 中央値: ${seconds(summary.activeTimeMs.median)}\n` +
     `- P90（nearest-rank）: ${seconds(summary.activeTimeMs.p90NearestRank)}\n\n` +
     `## 判定\n\n` +
-    `Nは自動設定しない。24件完了後、分布・操作量・体感を人間が確認して決定する。これは開発2素材の第一関門向け試験であり、第二関門の正式判定ではない。\n`;
+    `v001は、1候補約3分を24候補へ外挿した約72分の比較基準として閉じる。次のv002はcandidate-ranking-v001の上位5候補を確認し、公開する3〜5本を仕上げる1配信合計時間を測る。合格条件は15分以内。\n`;
   await mkdir(path.dirname(reportPath), { recursive: true });
   await Promise.all([
     writeFile(resultPath, `${JSON.stringify(result, null, 2)}\n`),
     writeFile(teacherPath, `${JSON.stringify(teacherData, null, 2)}\n`),
     writeFile(reportPath, report)
   ]);
-  console.log(JSON.stringify({ status: complete.length === manifest.taskCount ? 'complete' : 'incomplete', summary, resultPath: path.relative(root, resultPath), teacherPath: path.relative(root, teacherPath), reportPath: path.relative(root, reportPath) }, null, 2));
+  console.log(JSON.stringify({ status: 'closed-after-ui-calibration', summary, resultPath: path.relative(root, resultPath), teacherPath: path.relative(root, teacherPath), reportPath: path.relative(root, reportPath) }, null, 2));
 }
 
 main().catch((error) => {

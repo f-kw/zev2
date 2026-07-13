@@ -28,9 +28,18 @@ const videoPaths = {
   'YE-faluP7zY': path.join(evalRoot, 'research', 'downloads', 'nOEWCNc77MI', 'sources', 'YE-faluP7zY', 'YE-faluP7zY.mp4'),
   o8rZAhARXAc: path.join(evalRoot, 'research', 'downloads', '9dtwF5Exu5w', 'sources', 'o8rZAhARXAc', 'o8rZAhARXAc.mp4')
 };
+const transcriptPaths = {
+  'YE-faluP7zY': path.join(evalRoot, 'stt', 'nOEWCNc77MI_YE-faluP7zY_local30_v001', 'source', 'transcript.json'),
+  o8rZAhARXAc: path.join(evalRoot, 'stt', '9dtwF5Exu5w_o8rZAhARXAc_local30_v001', 'source', 'transcript.json')
+};
 
 const manifest = JSON.parse(await readFile(manifestPath, 'utf8'));
 const allowedTaskIds = new Set(manifest.tasks.map((item) => item.id));
+const wordTimelines = Object.fromEntries(await Promise.all(Object.entries(transcriptPaths).map(async ([sourceVideoId, file]) => {
+  const transcript = JSON.parse(await readFile(file, 'utf8'));
+  const segments = transcript.segments.filter((item) => Number.isFinite(item.startMs) && Number.isFinite(item.endMs) && String(item.text ?? '').trim()).sort((a, b) => a.startMs - b.startMs || a.endMs - b.endMs);
+  return [sourceVideoId, segments];
+})));
 
 function json(res, status, body) {
   res.writeHead(status, { 'content-type': 'application/json; charset=utf-8', 'cache-control': 'no-store' });
@@ -107,6 +116,31 @@ async function serveVideo(req, res, sourceVideoId) {
   createReadStream(file, { start, end }).pipe(res);
 }
 
+function boundaryOptions(sourceVideoId, timeMs, side) {
+  const segments = wordTimelines[sourceVideoId];
+  if (!segments || !Number.isFinite(timeMs) || !['start', 'end'].includes(side)) throw new Error('境界候補の要求が不正');
+  const point = (segment) => side === 'start' ? segment.startMs : segment.endMs;
+  let beforeIndex = -1;
+  let afterIndex = -1;
+  for (let index = 0; index < segments.length; index += 1) {
+    const value = point(segments[index]);
+    if (value <= timeMs) beforeIndex = index;
+    if (value >= timeMs) { afterIndex = index; break; }
+  }
+  const build = (index, relation) => {
+    if (index < 0 || index >= segments.length) return null;
+    const segment = segments[index];
+    return {
+      relation,
+      timeMs: point(segment),
+      word: String(segment.text).trim(),
+      context: [segments[index - 1], segment, segments[index + 1]].filter(Boolean).map((item) => String(item.text).trim()).join('｜')
+    };
+  };
+  const options = [build(beforeIndex, 'before'), build(afterIndex, 'after')].filter(Boolean).filter((item, index, all) => all.findIndex((other) => other.timeMs === item.timeMs) === index);
+  return { sourceVideoId, requestedTimeMs: timeMs, side, options };
+}
+
 const server = http.createServer(async (req, res) => {
   try {
     const url = new URL(req.url, `http://${host}:${port}`);
@@ -118,6 +152,7 @@ const server = http.createServer(async (req, res) => {
     }
     if (req.method === 'GET' && url.pathname === '/api/manifest') return json(res, 200, manifest);
     if (req.method === 'GET' && url.pathname === '/api/state') return json(res, 200, await initialState());
+    if (req.method === 'GET' && url.pathname === '/api/boundary-options') return json(res, 200, boundaryOptions(url.searchParams.get('sourceVideoId'), Number(url.searchParams.get('timeMs')), url.searchParams.get('side')));
     if (req.method === 'POST' && url.pathname === '/api/save') {
       const value = await bodyJson(req);
       validateProgress(value);

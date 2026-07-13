@@ -61,6 +61,12 @@ const html = String.raw`<!doctype html>
     .time { background:#11151c; border:1px solid var(--line); padding:10px; border-radius:10px; }
     .time strong { display:block; font-size:18px; margin-top:3px; }
     .controls { display:flex; flex-wrap:wrap; gap:8px; margin-top:12px; }
+    .snap-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:12px; }
+    .snap-box { background:#11151c; border:1px solid var(--line); border-radius:10px; padding:10px; }
+    .snap-options { display:flex; flex-wrap:wrap; gap:7px; margin-top:7px; }
+    .snap-options button.selected { border-color:var(--ok); background:#174d35; }
+    details { margin-top:12px; border-top:1px solid var(--line); padding-top:10px; }
+    summary { cursor:pointer; color:var(--muted); }
     button, textarea { font:inherit; }
     button { color:var(--text); background:#252b36; border:1px solid #3b4555; border-radius:9px; padding:10px 13px; cursor:pointer; }
     button:hover { border-color:var(--accent); }
@@ -71,10 +77,13 @@ const html = String.raw`<!doctype html>
     textarea { width:100%; min-height:62px; color:var(--text); background:#11151c; border:1px solid var(--line); border-radius:9px; padding:10px; }
     .bottom { position:fixed; left:0; right:0; bottom:0; background:rgba(16,18,23,.97); border-top:1px solid var(--line); padding:12px 18px; backdrop-filter:blur(8px); }
     .bottom-inner { max-width:1120px; margin:0 auto; display:flex; gap:10px; align-items:center; }
+    .direct { display:flex; gap:6px; align-items:center; font-weight:700; }
+    .direct input { width:92px; color:var(--text); background:#0d1117; border:2px solid #55627a; border-radius:9px; padding:10px; font:inherit; font-size:17px; }
+    .direct input:focus { border-color:var(--accent); outline:none; }
     .bottom .spacer { flex:1; }
     .shortcut { font-size:13px; color:var(--muted); }
     #saveState { min-width:110px; text-align:right; color:var(--muted); }
-    @media (max-width:700px) { .times { grid-template-columns:1fr; } .bottom-inner { flex-wrap:wrap; } .shortcut { display:none; } }
+    @media (max-width:700px) { .times, .snap-grid { grid-template-columns:1fr; } .bottom-inner { flex-wrap:wrap; } .shortcut { display:none; } }
   </style>
 </head>
 <body>
@@ -95,16 +104,22 @@ const html = String.raw`<!doctype html>
       <div class="time"><span class="muted">選択した開始</span><strong id="start">--:--.---</strong></div>
       <div class="time"><span class="muted">選択した終了</span><strong id="end">--:--.---</strong></div>
     </div>
-    <div class="controls">
-      <button data-step="-5">−5秒</button><button data-step="-1">−1秒</button><button data-step="-0.1">−0.1秒</button>
-      <button data-step="0.1">＋0.1秒</button><button data-step="1">＋1秒</button><button data-step="5">＋5秒</button>
-      <button id="jumpStart">開始へ</button><button id="jumpEnd">終了へ</button>
-    </div>
-    <div class="controls">
-      <button class="primary" id="setStart">現在位置を開始に（I）</button>
-      <button class="primary" id="setEnd">現在位置を終了に（O）</button>
-      <button id="preview">選択区間を再生（P）</button>
-      <button id="reset">仮区間へ戻す</button>
+    <details>
+      <summary>細かく位置を合わせたい場合だけ開く</summary>
+      <div class="controls">
+        <button data-step="-5">−5秒</button><button data-step="-1">−1秒</button><button data-step="-0.1">−0.1秒</button>
+        <button data-step="0.1">＋0.1秒</button><button data-step="1">＋1秒</button><button data-step="5">＋5秒</button>
+        <button id="jumpStart">開始へ</button><button id="jumpEnd">終了へ</button>
+      </div>
+      <div class="controls">
+        <button class="primary" id="setStart">現在位置を開始に（I）</button>
+        <button class="primary" id="setEnd">現在位置を終了に（O）</button>
+        <button id="reset">仮区間へ戻す</button>
+      </div>
+    </details>
+    <div class="snap-grid">
+      <div class="snap-box"><strong>開始の単語境界候補</strong><div class="snap-options" id="snapStart"><span class="muted">時刻入力後に直前・直後を表示</span></div></div>
+      <div class="snap-box"><strong>終了の単語境界候補</strong><div class="snap-options" id="snapEnd"><span class="muted">時刻入力後に直前・直後を表示</span></div></div>
     </div>
   </section>
   <section class="panel">
@@ -117,8 +132,11 @@ const html = String.raw`<!doctype html>
     <button id="prev">前へ</button>
     <button id="next">次へ</button>
     <button id="begin" class="ok">この候補の計測を開始</button>
+    <label class="direct">開始 <input id="directStart" inputmode="decimal" placeholder="4:13"></label>
+    <label class="direct">終了 <input id="directEnd" inputmode="decimal" placeholder="5:13"></label>
+    <button id="preview">この範囲を再生</button>
     <button id="unable" class="warn" disabled>境界を決められない</button>
-    <span class="shortcut">Space 再生 / I 開始 / O 終了 / P プレビュー / ←→ 1秒</span>
+    <span class="shortcut">例: 4:13〜5:13 と直接入力</span>
     <span class="spacer"></span>
     <span id="timer">未開始</span>
     <span id="saveState"></span>
@@ -137,8 +155,9 @@ const html = String.raw`<!doctype html>
   let tickTimer;
   let activeStartedAt;
   let hiddenStartedAt;
+  let directDirty = true;
 
-  const blankCounts = () => ({ setStart:0, setEnd:0, preview:0, seek:0, step:0, playPause:0, reset:0 });
+  const blankCounts = () => ({ directEntry:0, wordSnap:0, setStart:0, setEnd:0, preview:0, seek:0, step:0, playPause:0, reset:0 });
   const format = (ms) => {
     if (!Number.isFinite(ms)) return '--:--.---';
     const total = Math.max(0, Math.round(ms));
@@ -147,6 +166,24 @@ const html = String.raw`<!doctype html>
     const s = Math.floor((total % 60000) / 1000);
     const milli = total % 1000;
     return (h ? String(h).padStart(2,'0') + ':' : '') + String(m).padStart(2,'0') + ':' + String(s).padStart(2,'0') + '.' + String(milli).padStart(3,'0');
+  };
+  const formatInput = (ms) => {
+    const total = Math.max(0, ms) / 1000;
+    const h = Math.floor(total / 3600);
+    const m = Math.floor((total % 3600) / 60);
+    const s = total % 60;
+    const sec = Number.isInteger(s) ? String(s).padStart(2,'0') : s.toFixed(3).padStart(6,'0').replace(/0+$/,'').replace(/\.$/,'');
+    return h ? h + ':' + String(m).padStart(2,'0') + ':' + sec : m + ':' + sec;
+  };
+  const parseInput = (value) => {
+    const parts = String(value).trim().split(':').map(Number);
+    if (!parts.length || parts.some((part) => !Number.isFinite(part) || part < 0) || parts.length > 3) return null;
+    let seconds = 0;
+    if (parts.length === 1) seconds = parts[0];
+    if (parts.length === 2) seconds = parts[0] * 60 + parts[1];
+    if (parts.length === 3) seconds = parts[0] * 3600 + parts[1] * 60 + parts[2];
+    if ((parts.length >= 2 && parts.at(-1) >= 60) || (parts.length === 3 && parts[1] >= 60)) return null;
+    return Math.round(seconds * 1000);
   };
   const currentTask = () => manifest.tasks[index];
   const currentRecord = () => state.tasks[currentTask().id];
@@ -209,12 +246,84 @@ const html = String.raw`<!doctype html>
     else $('timer').textContent = '未開始';
   }
 
+  function syncDirectInputs() {
+    const record = currentRecord();
+    $('directStart').value = formatInput(record.finalStartMs);
+    $('directEnd').value = formatInput(record.finalEndMs);
+    $('directStart').setCustomValidity(''); $('directEnd').setCustomValidity('');
+  }
+
+  function setSnapChoice(side, option, requestedTimeMs, automatic) {
+    const record = currentRecord();
+    if (side === 'start') record.finalStartMs = option.timeMs;
+    else record.finalEndMs = option.timeMs;
+    record.snapSelections = record.snapSelections || {};
+    record.snapSelections[side] = { requestedTimeMs, selectedTimeMs:option.timeMs, relation:option.relation, word:option.word, context:option.context, automatic };
+    record.operationCounts.wordSnap = Number(record.operationCounts.wordSnap ?? 0) + 1;
+    event('word_boundary_snap', { side, requestedTimeMs, selectedTimeMs:option.timeMs, relation:option.relation, automatic });
+    directDirty = false;
+    syncDirectInputs(); updateTimes(); updateButtons();
+  }
+
+  function renderSnapOptions(side, data, selectedTimeMs) {
+    const container = side === 'start' ? $('snapStart') : $('snapEnd');
+    container.textContent = '';
+    for (const option of data.options) {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = option.timeMs === selectedTimeMs ? 'selected' : '';
+      button.textContent = (option.relation === 'before' ? '直前 ' : '直後 ') + format(option.timeMs) + '「' + option.context + '」';
+      button.onclick = () => { setSnapChoice(side, option, data.requestedTimeMs, false); renderSnapOptions(side, data, option.timeMs); };
+      container.appendChild(button);
+    }
+  }
+
+  async function fetchAndSnap(side, requestedTimeMs) {
+    const task = currentTask();
+    const response = await fetch('/api/boundary-options?sourceVideoId=' + encodeURIComponent(task.sourceVideoId) + '&timeMs=' + requestedTimeMs + '&side=' + side);
+    if (!response.ok) throw new Error(await response.text());
+    const data = await response.json();
+    if (!data.options.length) return requestedTimeMs;
+    const selected = [...data.options].sort((a,b) => {
+      const distance = Math.abs(a.timeMs-requestedTimeMs)-Math.abs(b.timeMs-requestedTimeMs);
+      if (distance !== 0) return distance;
+      if (side === 'start') return a.timeMs-b.timeMs;
+      return b.timeMs-a.timeMs;
+    })[0];
+    setSnapChoice(side, selected, requestedTimeMs, true);
+    renderSnapOptions(side, data, selected.timeMs);
+    return selected.timeMs;
+  }
+
+  async function applyDirectTime() {
+    const record = currentRecord();
+    if (record.status !== 'in_progress') return false;
+    if (!directDirty && record.snapSelections?.start && record.snapSelections?.end) return true;
+    const startMs = parseInput($('directStart').value);
+    const endMs = parseInput($('directEnd').value);
+    $('directStart').setCustomValidity(startMs == null ? '4:13 のように入力してください' : '');
+    $('directEnd').setCustomValidity(endMs == null ? '5:13 のように入力してください' : '');
+    if (startMs == null || endMs == null || !(startMs < endMs)) {
+      if (startMs != null && endMs != null) $('directEnd').setCustomValidity('終了は開始より後にしてください');
+      $('directStart').reportValidity(); $('directEnd').reportValidity();
+      return false;
+    }
+    record.operationCounts.directEntry = Number(record.operationCounts.directEntry ?? 0) + 1;
+    event('direct_time_entry', { requestedStartMs:startMs, requestedEndMs:endMs });
+    const snappedStartMs = await fetchAndSnap('start', startMs);
+    const snappedEndMs = await fetchAndSnap('end', endMs);
+    if (!(snappedStartMs < snappedEndMs)) { $('directEnd').setCustomValidity('単語境界へ合わせると終了が開始以前になります'); $('directEnd').reportValidity(); return false; }
+    directDirty = false;
+    return true;
+  }
+
   function updateButtons() {
     const record = currentRecord();
     const running = record.status === 'in_progress';
     $('prev').disabled = running || index === 0;
     $('next').disabled = running || index === manifest.tasks.length - 1 || !['complete','unable'].includes(record.status);
     $('begin').hidden = record.status !== 'not_started';
+    $('directStart').disabled = !running; $('directEnd').disabled = !running;
     $('complete').disabled = !running || !(record.finalStartMs < record.finalEndMs);
     $('unable').disabled = !running;
     $('setStart').disabled = !running; $('setEnd').disabled = !running; $('preview').disabled = !running; $('reset').disabled = !running;
@@ -225,14 +334,17 @@ const html = String.raw`<!doctype html>
     index = Math.max(0, Math.min(manifest.tasks.length - 1, nextIndex));
     const task = currentTask();
     const record = ensureRecord(task);
+    directDirty = true;
     $('progress').textContent = (index + 1) + ' / ' + manifest.tasks.length;
     $('source').textContent = task.fixtureLabel + ' / candidate ' + task.candidateIndex;
     $('title').textContent = task.title;
     $('summary').textContent = task.summary;
     $('notes').value = record.notes || '';
+    $('snapStart').innerHTML = '<span class="muted">時刻入力後に直前・直後を表示</span>';
+    $('snapEnd').innerHTML = '<span class="muted">時刻入力後に直前・直後を表示</span>';
     video.src = task.videoRoute;
     video.onloadedmetadata = () => { video.currentTime = record.finalStartMs / 1000; updateTimes(); };
-    updateButtons(); updateTimes(); resumeActive(); scheduleSave();
+    syncDirectInputs(); updateButtons(); updateTimes(); resumeActive(); scheduleSave();
   }
 
   function begin() {
@@ -248,7 +360,8 @@ const html = String.raw`<!doctype html>
     const value = Math.round(video.currentTime * 1000);
     if (side === 'start') { record.finalStartMs = value; record.operationCounts.setStart += 1; }
     else { record.finalEndMs = value; record.operationCounts.setEnd += 1; }
-    event(side === 'start' ? 'set_start' : 'set_end'); updateTimes(); updateButtons();
+    directDirty = false;
+    event(side === 'start' ? 'set_start' : 'set_end'); syncDirectInputs(); updateTimes(); updateButtons();
   }
 
   function step(seconds) {
@@ -257,14 +370,21 @@ const html = String.raw`<!doctype html>
     record.operationCounts.step += 1; event('step', { seconds });
   }
 
-  function preview() {
+  async function preview() {
     const record = currentRecord(); if (record.status !== 'in_progress') return;
-    previewing = true; video.currentTime = record.finalStartMs / 1000; video.play();
+    const requestedStartMs = parseInput($('directStart').value);
+    video.currentTime = (requestedStartMs ?? record.finalStartMs) / 1000;
+    previewing = true;
+    const playback = video.play();
+    if (!(await applyDirectTime())) { previewing = false; video.pause(); return; }
+    video.currentTime = record.finalStartMs / 1000;
+    await playback.catch(() => {});
     record.operationCounts.preview += 1; event('preview');
   }
 
   async function finish(status) {
     const record = currentRecord(); if (record.status !== 'in_progress') return;
+    if (status === 'complete' && !(await applyDirectTime())) return;
     flushActive(); record.status = status; record.completedAt = nowIso(); record.wallElapsedMs = Date.now() - record.wallStartedAtMs;
     record.notes = $('notes').value; record.events.push({ at:nowIso(), action:status, currentTimeMs:Math.round(video.currentTime*1000), startMs:record.finalStartMs, endMs:record.finalEndMs });
     await save(); updateButtons(); updateTimes();
@@ -279,7 +399,11 @@ const html = String.raw`<!doctype html>
   $('jumpStart').onclick = () => { video.currentTime = currentRecord().finalStartMs / 1000; event('jump_start'); };
   $('jumpEnd').onclick = () => { video.currentTime = currentRecord().finalEndMs / 1000; event('jump_end'); };
   $('setStart').onclick = () => setBoundary('start'); $('setEnd').onclick = () => setBoundary('end'); $('preview').onclick = preview;
-  $('reset').onclick = () => { const r=currentRecord(); if (r.status!=='in_progress') return; r.finalStartMs=r.provisionalStartMs; r.finalEndMs=r.provisionalEndMs; r.operationCounts.reset += 1; event('reset'); updateTimes(); };
+  $('directStart').oninput = () => { directDirty = true; }; $('directEnd').oninput = () => { directDirty = true; };
+  $('directStart').onchange = () => applyDirectTime(); $('directEnd').onchange = () => applyDirectTime();
+  $('directStart').onkeydown = (e) => { if (e.key === 'Enter') { e.preventDefault(); $('directEnd').focus(); } };
+  $('directEnd').onkeydown = (e) => { if (e.key === 'Enter') { e.preventDefault(); applyDirectTime(); } };
+  $('reset').onclick = () => { const r=currentRecord(); if (r.status!=='in_progress') return; r.finalStartMs=r.provisionalStartMs; r.finalEndMs=r.provisionalEndMs; r.operationCounts.reset += 1; directDirty=true; event('reset'); syncDirectInputs(); updateTimes(); };
   $('notes').oninput = () => { currentRecord().notes = $('notes').value; scheduleSave(); };
   $('begin').onclick = begin; $('complete').onclick = () => finish('complete'); $('unable').onclick = () => finish('unable'); $('prev').onclick = () => loadTask(index - 1); $('next').onclick = () => loadTask(index + 1);
   document.addEventListener('visibilitychange', () => {
@@ -330,6 +454,7 @@ async function main() {
       fixtureLabel: run.fixtureId.startsWith('nOEW') ? 'マリン・ころね Raft' : 'マリン 野球ゲーム',
       sourceVideoId: payload.modelInput.sourceVideoId,
       candidateIndex: run.candidateIndex,
+      measurementRole: run.fixtureId === 'nOEWCNc77MI_multiblock_material_v001' && run.candidateIndex === 2 ? 'calibration-ui-v001-failure' : 'candidate-pool-not-scheduled',
       title: theme.title,
       summary: theme.summary,
       provisionalStartMs: cut.sourceStartMs,
@@ -347,6 +472,10 @@ async function main() {
     preparedAt: new Date().toISOString(),
     reviewer: 'kawafmm',
     taskCount: tasks.length,
+    formalTaskCount: 0,
+    calibrationTaskCount: tasks.filter((item) => item.measurementRole === 'calibration-ui-v001-failure').length,
+    candidatePoolTaskCount: tasks.filter((item) => item.measurementRole === 'candidate-pool-not-scheduled').length,
+    trialStatus: 'closed-after-ui-calibration',
     sourceCandidateCount: 25,
     structuralExclusionCount: 1,
     taskOrder: 'saved-connection-manifest-order',
@@ -362,6 +491,10 @@ async function main() {
     sourceCandidateCount: result.candidates.length,
     runOneCount: runOne.length,
     includedTaskCount: tasks.length,
+    formalTaskCount: 0,
+    calibrationTaskCount: tasks.filter((item) => item.measurementRole === 'calibration-ui-v001-failure').length,
+    candidatePoolTaskCount: tasks.filter((item) => item.measurementRole === 'candidate-pool-not-scheduled').length,
+    trialStatus: 'closed-after-ui-calibration',
     excluded,
     allIncludedInputsFormatValid: true,
     allIncludedInputsSingleInterval: true,
