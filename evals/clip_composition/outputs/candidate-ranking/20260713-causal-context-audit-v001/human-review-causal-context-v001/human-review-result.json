@@ -1,0 +1,88 @@
+{
+  "kind": "candidate_ranking_causal_context_human_review_result",
+  "reviewId": "20260713-causal-context-rereview-v001",
+  "reviewer": "kawafmm",
+  "reviewedAt": "2026-07-13",
+  "humanWork": {
+    "estimatedItemCount": 4,
+    "estimatedMinutesPerItemUpperBound": 2,
+    "estimatedTotalMinutesUpperBound": 8,
+    "actualTotalSeconds": 106,
+    "withinEstimate": true,
+    "unnecessaryReview": true
+  },
+  "choices": {
+    "publish": "公開したい",
+    "okaySkip": "悪くないが選ばない",
+    "boring": "つまらない",
+    "contextUnknown": "文脈不明"
+  },
+  "items": [
+    {
+      "reviewIndex": 1,
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateId": 58,
+      "title": "置き去りにされそうになって焦る戌神ころね",
+      "previousAnswer": "okay_skip",
+      "previousAnswerLabel": "悪くないが選ばない",
+      "answer": "context_unknown",
+      "answerLabel": "文脈不明"
+    },
+    {
+      "reviewIndex": 2,
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateId": 12,
+      "title": "食料不足の中で鳥を仕留めるころね",
+      "previousAnswer": "boring",
+      "previousAnswerLabel": "つまらない",
+      "answer": "context_unknown",
+      "answerLabel": "文脈不明"
+    },
+    {
+      "reviewIndex": 3,
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateId": 84,
+      "title": "間違えてテーブルを量産してしまう宝鐘マリン",
+      "previousAnswer": "boring",
+      "previousAnswerLabel": "つまらない",
+      "answer": "context_unknown",
+      "answerLabel": "文脈不明"
+    },
+    {
+      "reviewIndex": 4,
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateId": 25,
+      "title": "チャットの指示で対戦相手を選んだ結果、Bランクの高校を引いて焦るシーン",
+      "previousAnswer": "boring",
+      "previousAnswerLabel": "つまらない",
+      "answer": "context_unknown",
+      "answerLabel": "文脈不明"
+    }
+  ],
+  "summary": {
+    "total": 4,
+    "publish": 0,
+    "okaySkip": 0,
+    "boring": 0,
+    "contextUnknown": 4,
+    "contextUnknownRate": {
+      "numerator": 4,
+      "denominator": 4,
+      "ratio": 1
+    }
+  },
+  "reviewerFeedback": "どこが変わったのか不明。文脈は対応する他のシーンを見せないと分かりようがない。",
+  "presentationComparison": {
+    "informationSourceSameAsPreviousReview": true,
+    "otherCauseScenesAdded": false,
+    "speechGapsRemoved": true,
+    "humanPerceivedMeaningfulDifference": false
+  },
+  "interpretation": {
+    "failure": "机上監査が、原因を発話で説明していることと、原因場面を視聴者が理解できることを取り違えた。旧媒体と実質同じ情報をつなぎ直しただけで、人間へ再確認を依頼した設計ミス。",
+    "labelHandling": "旧判定は履歴として保持するが、4件の現在ラベルは文脈不明。旧判定を候補価値の確定ラベルとして再利用しない。",
+    "requiredContext": "候補内で原因を言葉にしているだけでは足りない。反応に対応する別の原因シーンを元配信から特定し、原因シーンと反応シーンを順に提示する必要がある。",
+    "nextStatus": "原因シーン特定を行わないまま追加の人間確認と手直し試験v002を開始しない。"
+  },
+  "fixtureAndExpectedChanges": false
+}
