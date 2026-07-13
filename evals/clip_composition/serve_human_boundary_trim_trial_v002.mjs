@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import http from 'node:http';
 import { createReadStream, existsSync } from 'node:fs';
-import { appendFile, readFile, rename, stat, writeFile } from 'node:fs/promises';
+import { readFile, rename, stat, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 
 function rootDir() {
@@ -21,7 +21,6 @@ const manifestPath = path.join(outputRoot, 'manifest.json');
 const htmlPath = path.join(outputRoot, 'index.html');
 const progressPath = path.join(outputRoot, 'progress.json');
 const tempPath = path.join(outputRoot, 'progress.json.tmp');
-const auditPath = path.join(outputRoot, 'save-audit.jsonl');
 const host = '127.0.0.1';
 const port = Number(process.argv.find((item) => item.startsWith('--port='))?.split('=')[1] ?? 4318);
 const videoPaths = {
@@ -60,26 +59,80 @@ async function bodyJson(req) {
 
 function validateProgress(value) {
   if (!value || value.kind !== 'human_boundary_trim_trial_progress' || value.version !== manifest.version || value.reviewer !== manifest.reviewer) throw new Error('試験識別子不正');
-  if (!value.sessions || !value.tasks) throw new Error('計測状態なし');
+  if (!value.sessions || !value.tasks) throw new Error('確認状態なし');
   for (const [id, session] of Object.entries(value.sessions)) {
     if (!allowedFixtures.has(id) || session.fixtureId !== id) throw new Error(`未知の配信: ${id}`);
     if (!['not_started', 'in_progress', 'complete'].includes(session.status)) throw new Error(`配信状態不正: ${id}`);
-    for (const key of ['activeElapsedMs', 'hiddenElapsedMs']) if (!Number.isFinite(session[key]) || session[key] < 0) throw new Error(`${id} ${key}不正`);
   }
   for (const [id, task] of Object.entries(value.tasks)) {
     if (!allowedTasks.has(id) || task.taskId !== id) throw new Error(`未知の候補: ${id}`);
     if (!['not_started', 'in_progress', 'complete'].includes(task.status)) throw new Error(`候補状態不正: ${id}`);
     if (![null, 'publish', 'skip', 'context_unknown'].includes(task.decision)) throw new Error(`候補判断不正: ${id}`);
-    for (const key of ['provisionalStartMs', 'provisionalEndMs', 'finalStartMs', 'finalEndMs', 'activeElapsedMs']) if (!Number.isFinite(task[key]) || task[key] < 0) throw new Error(`${id} ${key}不正`);
+    for (const key of ['provisionalStartMs', 'provisionalEndMs', 'finalStartMs', 'finalEndMs']) if (!Number.isFinite(task[key]) || task[key] < 0) throw new Error(`${id} ${key}不正`);
     if (task.status === 'complete' && task.decision === 'publish' && !(task.finalStartMs < task.finalEndMs)) throw new Error(`${id} 境界順序不正`);
     if (task.status === 'complete' && task.decision == null) throw new Error(`${id} 完了判断なし`);
-    if (!task.operationCounts || !Array.isArray(task.events)) throw new Error(`${id} 操作記録なし`);
   }
 }
 
+function sanitizeSnapSelection(value) {
+  if (!value || typeof value !== 'object') return undefined;
+  return {
+    requestedTimeMs: value.requestedTimeMs,
+    selectedTimeMs: value.selectedTimeMs,
+    relation: value.relation,
+    word: value.word,
+    context: value.context,
+    automatic: value.automatic
+  };
+}
+
+function sanitizeProgress(value) {
+  const sessions = Object.fromEntries(Object.entries(value.sessions).map(([id, session]) => [id, {
+    fixtureId: session.fixtureId,
+    status: session.status
+  }]));
+  const tasks = Object.fromEntries(Object.entries(value.tasks).map(([id, task]) => {
+    const clean = {
+      taskId: task.taskId,
+      fixtureId: task.fixtureId,
+      candidateId: task.candidateId,
+      rank: task.rank,
+      status: task.status,
+      decision: task.decision,
+      provisionalStartMs: task.provisionalStartMs,
+      provisionalEndMs: task.provisionalEndMs,
+      finalStartMs: task.finalStartMs,
+      finalEndMs: task.finalEndMs,
+      notes: typeof task.notes === 'string' ? task.notes : ''
+    };
+    if (task.snapSelections && typeof task.snapSelections === 'object') {
+      clean.snapSelections = {};
+      for (const side of ['start', 'end']) {
+        const selection = sanitizeSnapSelection(task.snapSelections[side]);
+        if (selection) clean.snapSelections[side] = selection;
+      }
+    }
+    return [id, clean];
+  }));
+  return {
+    kind: 'human_boundary_trim_trial_progress',
+    version: manifest.version,
+    reviewer: manifest.reviewer,
+    sessions,
+    tasks
+  };
+}
+
 async function initialState() {
-  if (existsSync(progressPath)) return JSON.parse(await readFile(progressPath, 'utf8'));
-  return { kind: 'human_boundary_trim_trial_progress', version: manifest.version, reviewer: manifest.reviewer, createdAt: new Date().toISOString(), updatedAt: new Date().toISOString(), sessions: {}, tasks: {} };
+  if (existsSync(progressPath)) {
+    const value = JSON.parse(await readFile(progressPath, 'utf8'));
+    validateProgress(value);
+    const sanitized = sanitizeProgress(value);
+    await writeFile(tempPath, `${JSON.stringify(sanitized, null, 2)}\n`);
+    await rename(tempPath, progressPath);
+    return sanitized;
+  }
+  return { kind: 'human_boundary_trim_trial_progress', version: manifest.version, reviewer: manifest.reviewer, sessions: {}, tasks: {} };
 }
 
 async function serveVideo(req, res, id) {
@@ -148,9 +201,9 @@ const server = http.createServer(async (req, res) => {
     if (req.method === 'POST' && url.pathname === '/api/save') {
       const value = await bodyJson(req);
       validateProgress(value);
-      await writeFile(tempPath, `${JSON.stringify(value, null, 2)}\n`);
+      const sanitized = sanitizeProgress(value);
+      await writeFile(tempPath, `${JSON.stringify(sanitized, null, 2)}\n`);
       await rename(tempPath, progressPath);
-      await appendFile(auditPath, `${JSON.stringify({ savedAt: new Date().toISOString(), completedMaterials: Object.values(value.sessions).filter((item) => item.status === 'complete').length, completedCandidates: Object.values(value.tasks).filter((item) => item.status === 'complete').length })}\n`);
       return json(res, 200, { status: 'saved' });
     }
     if (req.method === 'GET' && url.pathname.startsWith('/video/')) return serveVideo(req, res, decodeURIComponent(url.pathname.slice('/video/'.length)));
