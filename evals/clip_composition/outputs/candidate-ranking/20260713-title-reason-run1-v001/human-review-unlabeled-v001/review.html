@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>candidate-ranking-v001 未ラベル8件確認</title>
+  <style>
+    :root { color-scheme: dark; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background:#0d1117; color:#f0f3f6; }
+    * { box-sizing:border-box; }
+    body { margin:0; padding-bottom:150px; }
+    header, main { width:min(1040px, calc(100% - 28px)); margin:0 auto; }
+    header { padding:28px 0 16px; }
+    h1 { margin:0 0 12px; font-size:clamp(24px,4vw,38px); }
+    .lead { color:#c9d1d9; line-height:1.7; }
+    .notice { background:#161b22; border:1px solid #30363d; border-radius:14px; padding:14px 18px; line-height:1.65; }
+    .progress { margin:18px 0; display:flex; gap:10px; align-items:center; }
+    progress { width:100%; height:16px; }
+    .case { background:#161b22; border:1px solid #30363d; border-radius:18px; padding:clamp(18px,3vw,32px); }
+    .case-number { color:#7ee787; font-weight:700; }
+    h2 { font-size:clamp(22px,3vw,32px); line-height:1.35; }
+    .reason { font-size:17px; line-height:1.75; }
+    .meta { color:#8b949e; }
+    .media-grid { display:grid; grid-template-columns:minmax(0, 2fr) minmax(260px, 1fr); gap:18px; margin-top:22px; }
+    video { width:100%; max-height:58vh; background:#000; border-radius:12px; }
+    audio { width:100%; }
+    .audio-box { background:#0d1117; border-radius:12px; padding:14px; align-self:start; }
+    .audio-box p { color:#8b949e; line-height:1.5; }
+    .decision-bar { position:fixed; z-index:10; left:0; right:0; bottom:0; background:rgba(13,17,23,.96); border-top:1px solid #30363d; padding:12px max(14px, calc((100vw - 1040px)/2)); backdrop-filter:blur(10px); }
+    .choices { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; }
+    button { border:1px solid #484f58; border-radius:12px; padding:15px 10px; color:#f0f3f6; background:#21262d; font-weight:700; font-size:16px; cursor:pointer; }
+    button:hover { border-color:#8b949e; }
+    button.active { outline:3px solid #58a6ff; }
+    button[data-value="publish"] { background:#1f6f3f; }
+    button[data-value="okay_skip"] { background:#6b5419; }
+    button[data-value="boring"] { background:#6e3030; }
+    .nav { display:flex; justify-content:space-between; align-items:center; gap:10px; margin-top:10px; }
+    .nav button { padding:9px 18px; font-size:14px; }
+    #finish { background:#1f6feb; }
+    #outputBox { width:100%; min-height:210px; margin-top:16px; background:#0d1117; color:#f0f3f6; border:1px solid #30363d; border-radius:10px; padding:12px; }
+    .complete { background:#12261b; border:1px solid #2ea043; border-radius:14px; padding:18px; }
+    @media(max-width:760px) { .media-grid { grid-template-columns:1fr; } .choices { grid-template-columns:1fr; } body { padding-bottom:260px; } }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>未ラベル候補 8件の確認</h1>
+    <p class="lead">目的は、既存切り抜きと重ならなかった上位候補に公開価値があるかを見ることです。境界の細かさや既存正解との一致は見ません。動画か音声のどちらかで内容を確認し、三択を1つ選んでください。</p>
+    <div class="notice">
+      <strong>人間作業の登録:</strong> 8件×約1分＝約8分。素材総尺は10分24秒なので、初期再生速度を1.5倍（全編約6分56秒）にしています。聞き取りにくい場合だけ速度を戻してください。<br>
+      選ぶと自動で次へ進み、回答はこのブラウザ内へ保存されます。
+    </div>
+    <div class="progress"><progress id="progress" max="8" value="0"></progress><span id="progressText">0/8</span></div>
+  </header>
+  <main>
+    <article class="case" data-index="0" hidden>
+      <div class="case-number">確認 1 / 8　B素材（マリン・ころね Raft）</div>
+      <h2>食料不足の中で鳥を仕留めるころね</h2>
+      <p class="reason"><strong>候補になった理由:</strong> ココナッツしか取れず食料がしけてきた状況で、ころねが見事に鳥を殺して肉を確保し、マリンが驚き喜ぶ展開が綺麗にまとまっているため。</p>
+      <p class="meta">元配信 0:13:30〜0:13:59・0分29秒</p>
+      <div class="media-grid">
+        <section>
+          <h3>動画で確認</h3>
+          <video controls preload="metadata" src="media/B-candidate-12.mp4"></video>
+        </section>
+        <section class="audio-box">
+          <h3>音声だけで確認</h3>
+          <p>動画と同じ区間です。両方を再生する必要はありません。</p>
+          <audio controls preload="metadata" src="media/B-candidate-12.m4a"></audio>
+        </section>
+      </div>
+    </article>
+
+    <article class="case" data-index="1" hidden>
+      <div class="case-number">確認 2 / 8　B素材（マリン・ころね Raft）</div>
+      <h2>間違えてテーブルを量産してしまう宝鐘マリン</h2>
+      <p class="reason"><strong>候補になった理由:</strong> 別の高いテーブルを作ろうとするも再びローテーブルを作ってしまい、最終的に正解のテーブルを見つけるが大量に余ったテーブルの処理に困るオチがついているため。</p>
+      <p class="meta">元配信 3:04:22〜3:04:58・0分36秒</p>
+      <div class="media-grid">
+        <section>
+          <h3>動画で確認</h3>
+          <video controls preload="metadata" src="media/B-candidate-84.mp4"></video>
+        </section>
+        <section class="audio-box">
+          <h3>音声だけで確認</h3>
+          <p>動画と同じ区間です。両方を再生する必要はありません。</p>
+          <audio controls preload="metadata" src="media/B-candidate-84.m4a"></audio>
+        </section>
+      </div>
+    </article>
+
+    <article class="case" data-index="2" hidden>
+      <div class="case-number">確認 3 / 8　B素材（マリン・ころね Raft）</div>
+      <h2>サメ退治の代償で船を見失い迷子になるマリンと ころね</h2>
+      <p class="reason"><strong>候補になった理由:</strong> サメを倒した直後に船を見失ってお互いを探し合うという、ゲーム内のハプニングとパニックの展開が明確で切り抜きとして成立するため。</p>
+      <p class="meta">元配信 2:21:39〜2:23:59・2分20秒</p>
+      <div class="media-grid">
+        <section>
+          <h3>動画で確認</h3>
+          <video controls preload="metadata" src="media/B-candidate-70.mp4"></video>
+        </section>
+        <section class="audio-box">
+          <h3>音声だけで確認</h3>
+          <p>動画と同じ区間です。両方を再生する必要はありません。</p>
+          <audio controls preload="metadata" src="media/B-candidate-70.m4a"></audio>
+        </section>
+      </div>
+    </article>
+
+    <article class="case" data-index="3" hidden>
+      <div class="case-number">確認 4 / 8　B素材（マリン・ころね Raft）</div>
+      <h2>マリンが我慢できず2回目のトイレへ、留守を預かるころねの緊張</h2>
+      <p class="reason"><strong>候補になった理由:</strong> マリンが配信前にトイレに行ったにもかかわらず再度席を外すというハプニングと、残されたころねがリスナー（一味）と2人きりで緊張しながら場を繋ぐ展開が切り抜きとして成立するため。</p>
+      <p class="meta">元配信 0:51:12〜0:52:59・1分47秒</p>
+      <div class="media-grid">
+        <section>
+          <h3>動画で確認</h3>
+          <video controls preload="metadata" src="media/B-candidate-36.mp4"></video>
+        </section>
+        <section class="audio-box">
+          <h3>音声だけで確認</h3>
+          <p>動画と同じ区間です。両方を再生する必要はありません。</p>
+          <audio controls preload="metadata" src="media/B-candidate-36.m4a"></audio>
+        </section>
+      </div>
+    </article>
+
+    <article class="case" data-index="4" hidden>
+      <div class="case-number">確認 5 / 8　第二素材（マリン野球ゲーム）</div>
+      <h2>ビトが「魔物」ではなく「ラッキーボーイ」でブチギレるマリン</h2>
+      <p class="reason"><strong>候補になった理由:</strong> 期待していた固有戦術の「魔物」ではなく「ラッキーボーイ」が発動したビトに対して、マリンが激しいツッコミと怒りを露わにするリアクションが見どころだから。</p>
+      <p class="meta">元配信 2:06:58〜2:08:47・1分49秒</p>
+      <div class="media-grid">
+        <section>
+          <h3>動画で確認</h3>
+          <video controls preload="metadata" src="media/second-candidate-40.mp4"></video>
+        </section>
+        <section class="audio-box">
+          <h3>音声だけで確認</h3>
+          <p>動画と同じ区間です。両方を再生する必要はありません。</p>
+          <audio controls preload="metadata" src="media/second-candidate-40.m4a"></audio>
+        </section>
+      </div>
+    </article>
+
+    <article class="case" data-index="5" hidden>
+      <div class="case-number">確認 6 / 8　第二素材（マリン野球ゲーム）</div>
+      <h2>結局リリカのオリジナル変化球「粉落とし」を丸パクリすることに決めるマリン船長</h2>
+      <p class="reason"><strong>候補になった理由:</strong> オリジナル変化球のベースに強いと噂のフォーク系を選んだ結果、最終的にリリカが作った「粉落とし」と全く同じ仕様で真似して作ろうと決意する流れがコミカルなため。</p>
+      <p class="meta">元配信 0:17:37〜0:18:29・0分52秒</p>
+      <div class="media-grid">
+        <section>
+          <h3>動画で確認</h3>
+          <video controls preload="metadata" src="media/second-candidate-04.mp4"></video>
+        </section>
+        <section class="audio-box">
+          <h3>音声だけで確認</h3>
+          <p>動画と同じ区間です。両方を再生する必要はありません。</p>
+          <audio controls preload="metadata" src="media/second-candidate-04.m4a"></audio>
+        </section>
+      </div>
+    </article>
+
+    <article class="case" data-index="6" hidden>
+      <div class="case-number">確認 7 / 8　第二素材（マリン野球ゲーム）</div>
+      <h2>チャットの指示で対戦相手を選んだ結果、Bランクの高校を引いて焦るシーン</h2>
+      <p class="reason"><strong>候補になった理由:</strong> リスナー（キャージー）に選択を委ねた結果、手強いBランクの「ざまみ商業高校」を引き当ててしまい動揺するリアクションが面白いため。</p>
+      <p class="meta">元配信 1:35:01〜1:35:55・0分54秒</p>
+      <div class="media-grid">
+        <section>
+          <h3>動画で確認</h3>
+          <video controls preload="metadata" src="media/second-candidate-25.mp4"></video>
+        </section>
+        <section class="audio-box">
+          <h3>音声だけで確認</h3>
+          <p>動画と同じ区間です。両方を再生する必要はありません。</p>
+          <audio controls preload="metadata" src="media/second-candidate-25.m4a"></audio>
+        </section>
+      </div>
+    </article>
+
+    <article class="case" data-index="7" hidden>
+      <div class="case-number">確認 8 / 8　第二素材（マリン野球ゲーム）</div>
+      <h2>劇的勝利に大絶叫し涙を流すマリン船長</h2>
+      <p class="reason"><strong>候補になった理由:</strong> 緊迫した試合展開の末に勝利を収め、超長文の大絶叫から「涙出た」「辛かった」と安堵と喜びを爆発させる切り抜きに最適なハイライトシーンであるため。</p>
+      <p class="meta">元配信 3:03:30〜3:05:06・1分36秒</p>
+      <div class="media-grid">
+        <section>
+          <h3>動画で確認</h3>
+          <video controls preload="metadata" src="media/second-candidate-57.mp4"></video>
+        </section>
+        <section class="audio-box">
+          <h3>音声だけで確認</h3>
+          <p>動画と同じ区間です。両方を再生する必要はありません。</p>
+          <audio controls preload="metadata" src="media/second-candidate-57.m4a"></audio>
+        </section>
+      </div>
+    </article>
+    <section id="complete" class="complete" hidden>
+      <h2>8件の回答が揃いました</h2>
+      <p id="elapsed"></p>
+      <p>下の「回答をコピー」を押して、そのままチャットへ貼り付けてください。</p>
+      <button id="copy">回答をコピー</button>
+      <p><select id="editIndex"><option value="0">確認1: 食料不足の中で鳥を仕留めるころね</option><option value="1">確認2: 間違えてテーブルを量産してしまう宝鐘マリン</option><option value="2">確認3: サメ退治の代償で船を見失い迷子になるマリンと ころね</option><option value="3">確認4: マリンが我慢できず2回目のトイレへ、留守を預かるころねの緊張</option><option value="4">確認5: ビトが「魔物」ではなく「ラッキーボーイ」でブチギレるマリン</option><option value="5">確認6: 結局リリカのオリジナル変化球「粉落とし」を丸パクリすることに決めるマリン船長</option><option value="6">確認7: チャットの指示で対戦相手を選んだ結果、Bランクの高校を引いて焦るシーン</option><option value="7">確認8: 劇的勝利に大絶叫し涙を流すマリン船長</option></select> <button id="editAnswer">選んだ回答を修正</button></p>
+      <textarea id="outputBox" readonly></textarea>
+    </section>
+  </main>
+  <div class="decision-bar" id="decisionBar">
+    <div class="choices">
+      <button data-value="publish">公開したい</button>
+      <button data-value="okay_skip">悪くないが選ばない</button>
+      <button data-value="boring">つまらない</button>
+    </div>
+    <div class="nav"><button id="prev">前へ</button><span id="currentStatus">未回答</span><button id="next">次へ</button></div>
+  </div>
+  <script>
+    const items = [{"fixtureId":"nOEWCNc77MI_multiblock_material_v001","fixtureLabel":"B素材（マリン・ころね Raft）","candidateId":12,"title":"食料不足の中で鳥を仕留めるころね","reason":"ココナッツしか取れず食料がしけてきた状況で、ころねが見事に鳥を殺して肉を確保し、マリンが驚き喜ぶ展開が綺麗にまとまっているため。","sourceVideoId":"YE-faluP7zY","sourceStartMs":810330,"sourceEndMs":839584},{"fixtureId":"nOEWCNc77MI_multiblock_material_v001","fixtureLabel":"B素材（マリン・ころね Raft）","candidateId":84,"title":"間違えてテーブルを量産してしまう宝鐘マリン","reason":"別の高いテーブルを作ろうとするも再びローテーブルを作ってしまい、最終的に正解のテーブルを見つけるが大量に余ったテーブルの処理に困るオチがついているため。","sourceVideoId":"YE-faluP7zY","sourceStartMs":11062309,"sourceEndMs":11098463},{"fixtureId":"nOEWCNc77MI_multiblock_material_v001","fixtureLabel":"B素材（マリン・ころね Raft）","candidateId":70,"title":"サメ退治の代償で船を見失い迷子になるマリンと ころね","reason":"サメを倒した直後に船を見失ってお互いを探し合うという、ゲーム内のハプニングとパニックの展開が明確で切り抜きとして成立するため。","sourceVideoId":"YE-faluP7zY","sourceStartMs":8499668,"sourceEndMs":8639498},{"fixtureId":"nOEWCNc77MI_multiblock_material_v001","fixtureLabel":"B素材（マリン・ころね Raft）","candidateId":36,"title":"マリンが我慢できず2回目のトイレへ、留守を預かるころねの緊張","reason":"マリンが配信前にトイレに行ったにもかかわらず再度席を外すというハプニングと、残されたころねがリスナー（一味）と2人きりで緊張しながら場を繋ぐ展開が切り抜きとして成立するため。","sourceVideoId":"YE-faluP7zY","sourceStartMs":3072540,"sourceEndMs":3179964},{"fixtureId":"9dtwF5Exu5w_multiblock_material_v001","fixtureLabel":"第二素材（マリン野球ゲーム）","candidateId":40,"title":"ビトが「魔物」ではなく「ラッキーボーイ」でブチギレるマリン","reason":"期待していた固有戦術の「魔物」ではなく「ラッキーボーイ」が発動したビトに対して、マリンが激しいツッコミと怒りを露わにするリアクションが見どころだから。","sourceVideoId":"o8rZAhARXAc","sourceStartMs":7618940,"sourceEndMs":7727619},{"fixtureId":"9dtwF5Exu5w_multiblock_material_v001","fixtureLabel":"第二素材（マリン野球ゲーム）","candidateId":4,"title":"結局リリカのオリジナル変化球「粉落とし」を丸パクリすることに決めるマリン船長","reason":"オリジナル変化球のベースに強いと噂のフォーク系を選んだ結果、最終的にリリカが作った「粉落とし」と全く同じ仕様で真似して作ろうと決意する流れがコミカルなため。","sourceVideoId":"o8rZAhARXAc","sourceStartMs":1057442,"sourceEndMs":1109720},{"fixtureId":"9dtwF5Exu5w_multiblock_material_v001","fixtureLabel":"第二素材（マリン野球ゲーム）","candidateId":25,"title":"チャットの指示で対戦相手を選んだ結果、Bランクの高校を引いて焦るシーン","reason":"リスナー（キャージー）に選択を委ねた結果、手強いBランクの「ざまみ商業高校」を引き当ててしまい動揺するリアクションが面白いため。","sourceVideoId":"o8rZAhARXAc","sourceStartMs":5701367,"sourceEndMs":5755602},{"fixtureId":"9dtwF5Exu5w_multiblock_material_v001","fixtureLabel":"第二素材（マリン野球ゲーム）","candidateId":57,"title":"劇的勝利に大絶叫し涙を流すマリン船長","reason":"緊迫した試合展開の末に勝利を収め、超長文の大絶叫から「涙出た」「辛かった」と安堵と喜びを爆発させる切り抜きに最適なハイライトシーンであるため。","sourceVideoId":"o8rZAhARXAc","sourceStartMs":11010002,"sourceEndMs":11106471}];
+    const storageKey = 'zev-candidate-ranking-unlabeled-v001';
+    const labels = { publish:'公開したい', okay_skip:'悪くないが選ばない', boring:'つまらない' };
+    let state = { current:0, answers:{} };
+    try { state = { ...state, ...(JSON.parse(localStorage.getItem(storageKey)) || {}) }; } catch {}
+    const cards = [...document.querySelectorAll('.case')];
+    const media = [...document.querySelectorAll('video,audio')];
+    media.forEach((element) => { element.defaultPlaybackRate = 1.5; element.playbackRate = 1.5; });
+    function save() { localStorage.setItem(storageKey, JSON.stringify(state)); }
+    if (!state.startedAt) { state.startedAt = new Date().toISOString(); save(); }
+    function answeredCount() { return Object.keys(state.answers).length; }
+    function pauseAll() { media.forEach((element) => element.pause()); }
+    function elapsedText() {
+      const end = state.completedAt ? new Date(state.completedAt).getTime() : Date.now();
+      const seconds = Math.max(0, Math.round((end - new Date(state.startedAt).getTime()) / 1000));
+      return Math.floor(seconds / 60) + '分' + String(seconds % 60).padStart(2, '0') + '秒';
+    }
+    function buildOutput() {
+      const lines = ['candidate-ranking-v001 未ラベル8件 人間確認結果','確認者: kawafmm','確認日: 2026-07-13','実測(画面を開いてから回答完了): ' + elapsedText(),''];
+      items.forEach((item, index) => lines.push('確認' + (index + 1) + ': ' + (labels[state.answers[index]] || '未回答') + ' / ' + item.fixtureId + ' / candidate ' + item.candidateId + ' / ' + item.title));
+      lines.push('', '公開したい: ' + (items.map((_,i)=>i).filter(i=>state.answers[i]==='publish').map(i=>i+1).join(', ') || 'なし'));
+      lines.push('悪くないが選ばない: ' + (items.map((_,i)=>i).filter(i=>state.answers[i]==='okay_skip').map(i=>i+1).join(', ') || 'なし'));
+      lines.push('つまらない: ' + (items.map((_,i)=>i).filter(i=>state.answers[i]==='boring').map(i=>i+1).join(', ') || 'なし'));
+      return lines.join('\n');
+    }
+    function render() {
+      const done = answeredCount() === items.length;
+      if (done && !state.completedAt) { state.completedAt = new Date().toISOString(); save(); }
+      cards.forEach((card,index) => { card.hidden = done || index !== state.current; });
+      document.getElementById('complete').hidden = !done;
+      document.getElementById('decisionBar').hidden = done;
+      document.getElementById('progress').value = answeredCount();
+      document.getElementById('progressText').textContent = answeredCount() + '/' + items.length;
+      if (done) {
+        document.getElementById('outputBox').value = buildOutput();
+        document.getElementById('elapsed').textContent = '画面を開いてから回答完了まで: ' + elapsedText();
+      }
+      if (!done) {
+        const answer = state.answers[state.current];
+        document.querySelectorAll('[data-value]').forEach((button) => button.classList.toggle('active', button.dataset.value === answer));
+        document.getElementById('currentStatus').textContent = answer ? labels[answer] : '未回答';
+        document.getElementById('prev').disabled = state.current === 0;
+        document.getElementById('next').disabled = state.current === items.length - 1;
+      }
+    }
+    document.querySelectorAll('[data-value]').forEach((button) => button.addEventListener('click', () => {
+      state.answers[state.current] = button.dataset.value;
+      pauseAll();
+      if (state.current < items.length - 1) state.current += 1;
+      save(); render(); window.scrollTo({top:0,behavior:'smooth'});
+    }));
+    document.getElementById('prev').addEventListener('click', () => { pauseAll(); state.current=Math.max(0,state.current-1); save(); render(); });
+    document.getElementById('next').addEventListener('click', () => { pauseAll(); state.current=Math.min(items.length-1,state.current+1); save(); render(); });
+    document.getElementById('copy').addEventListener('click', async () => {
+      const text = buildOutput();
+      document.getElementById('outputBox').value = text;
+      try {
+        await navigator.clipboard.writeText(text);
+      } catch {
+        const box = document.getElementById('outputBox');
+        box.focus(); box.select(); document.execCommand('copy');
+      }
+      document.getElementById('copy').textContent = 'コピーしました';
+    });
+    document.getElementById('editAnswer').addEventListener('click', () => {
+      const index = Number(document.getElementById('editIndex').value);
+      delete state.answers[index];
+      state.current = index;
+      state.completedAt = null;
+      save(); render();
+    });
+    render();
+  </script>
+</body>
+</html>
