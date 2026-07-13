@@ -1,5 +1,7 @@
 # 残タスク一覧
 
+新しい作業指示は、着手前に[作業指示テンプレート](./WORK_INSTRUCTION_TEMPLATE.md)の定型確認事項を埋める。特に、人間へ要求する件数、1件あたり推定時間、合計推定時間を必ず申告し、0件の場合も省略しない。
+
 レビュー時は、まず [review-brief.md](./review-brief.md) だけを確認する。
 7工程、作り直し、UI導線、runner実行条件を判断する場合は [zev2-flow-contract.md](./zev2-flow-contract.md) を正本として確認する。
 詳細が必要になった場合だけ、現在の実装範囲は [current-implementation.md](./current-implementation.md)、AIエージェント向けAPIは [ai-agent-api.md](./ai-agent-api.md) を確認する。

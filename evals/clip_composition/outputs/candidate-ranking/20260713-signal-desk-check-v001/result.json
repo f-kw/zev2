@@ -1,13 +1,16 @@
 {
   "kind": "candidate_ranking_signal_desk_check",
-  "runAt": "2026-07-13T02:09:00.823Z",
+  "runAt": "2026-07-13T02:22:54.396Z",
   "rankingVersion": "candidate-ranking-v001-design",
   "topN": 5,
   "combinedScoreUsed": false,
+  "additionalLlmRunUsed": false,
   "expectedUsedOnlyForScoring": true,
   "decision": {
-    "mechanicallyGeneralizableSignalCount": 0,
-    "nextSingleVariable": "semantic-ranking-from-title-and-reason-only",
+    "independentlyImprovingMechanicalSignalCount": 0,
+    "baselineEquivalentSignal": "position_earlier (same top5 as generation_order on both fixtures)",
+    "leadingHypothesisPendingHumanApproval": "semantic-ranking-from-title-and-reason-only",
+    "implementationApproved": false,
     "mechanicalSignalsRemainAuditOnly": true
   },
   "fixtures": [
@@ -15,6 +18,7 @@
       "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
       "candidateCount": 89,
       "expectedCount": 13,
+      "sourceDurationMs": 11824121,
       "candidates": [
         {
           "candidateIndex": 1,
@@ -23,6 +27,8 @@
           "reason": "配信画面上でのころねの配置について試行錯誤し、サザエさんのオープニングのような例えやBGMの口真似で盛り上がっているため。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 83077,
+          "sourcePositionStartMs": 153112,
+          "sourcePositionRatio": 0.012949123237152258,
           "chatPeak": 2.218921268473372,
           "chatMean": 2.211367087487907,
           "laughter": {
@@ -42,6 +48,8 @@
             1
           ],
           "evidenceDurationMs": 58782,
+          "sourcePositionStartMs": 240202,
+          "sourcePositionRatio": 0.020314575603548036,
           "chatPeak": 2.4385795819631855,
           "chatMean": 2.4385795819631855,
           "laughter": {
@@ -61,6 +69,8 @@
             2
           ],
           "evidenceDurationMs": 28184,
+          "sourcePositionStartMs": 300578,
+          "sourcePositionRatio": 0.025420747977798943,
           "chatPeak": 1.6418528177797935,
           "chatMean": 1.6418528177797935,
           "laughter": {
@@ -78,6 +88,8 @@
           "reason": "朝日のピンク色を「二人の心みたいじゃない？」と例えるが、上手く伝わらず独特な空気感になる掛け合いが切り抜きとして成立すると判断したため。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 40989,
+          "sourcePositionStartMs": 397197,
+          "sourcePositionRatio": 0.03359209534476178,
           "chatPeak": 2.0737234002343423,
           "chatMean": 1.6367019512183663,
           "laughter": {
@@ -95,6 +107,8 @@
           "reason": "アンカーをあげる際に宝鐘マリンが突然大音量で「オラァイヨォォォ」と叫ぶ場面が単独の見どころとしてインパクトがあるため。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 23632,
+          "sourcePositionStartMs": 438186,
+          "sourcePositionRatio": 0.037058653239424734,
           "chatPeak": 2.0737234002343423,
           "chatMean": 2.0737234002343423,
           "laughter": {
@@ -112,6 +126,8 @@
           "reason": "朝を待ってリフォームした船の紹介を始める際、劇的ビフォーアフター風のBGMを口ずさみ続ける展開が面白いため。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 25509,
+          "sourcePositionStartMs": 482374,
+          "sourcePositionRatio": 0.04079575978628771,
           "chatPeak": 1.7572665079185092,
           "chatMean": 1.7572665079185092,
           "laughter": {
@@ -129,6 +145,8 @@
           "reason": "お腹が空いたころねに対して、芋を過剰に連呼しながら差し出すコミカルな掛け合いが行われているため。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 29440,
+          "sourcePositionStartMs": 570560,
+          "sourcePositionRatio": 0.048253904032274364,
           "chatPeak": 1.3626261480893525,
           "chatMean": 1.3626261480893525,
           "laughter": {
@@ -146,6 +164,8 @@
           "reason": "今日はまったり作業デーだと説明しつつも、お互いに口数の少なさや空気感を弄り合うやり取りが展開されているため。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 28746,
+          "sourcePositionStartMs": 631198,
+          "sourcePositionRatio": 0.05338223450182893,
           "chatPeak": 1.3589031258268134,
           "chatMean": 1.3589031258268134,
           "laughter": {
@@ -163,6 +183,8 @@
           "reason": "目の前に迫る大きな島にぶつかるかどうかを、二人が独特のノリで相談しながら直面しているため。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 10764,
+          "sourcePositionStartMs": 690040,
+          "sourcePositionRatio": 0.05835867207380574,
           "chatPeak": 1.23232036890048,
           "chatMean": 1.23232036890048,
           "laughter": {
@@ -180,6 +202,8 @@
           "reason": "島で木を伐採するという発想から土台を作るも、すぐにサメに食べられてしまい嘆く一連のくだりが切り抜きとして成立するため。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 18828,
+          "sourcePositionStartMs": 700804,
+          "sourcePositionRatio": 0.05926901458467822,
           "chatPeak": 1.23232036890048,
           "chatMean": 1.23232036890048,
           "laughter": {
@@ -197,6 +221,8 @@
           "reason": "斧を使いこなし、素材集めも早い有能なころねに対して、マリンが「独り立ちの日」「成長を感じてほしい」とフォローを交えて絶賛するため。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 29206,
+          "sourcePositionStartMs": 780346,
+          "sourcePositionRatio": 0.0659961108314098,
           "chatPeak": 1.2062592130627054,
           "chatMean": 1.2062592130627054,
           "laughter": {
@@ -214,6 +240,8 @@
           "reason": "ココナッツしか取れず食料がしけてきた状況で、ころねが見事に鳥を殺して肉を確保し、マリンが驚き喜ぶ展開が綺麗にまとまっているため。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 29254,
+          "sourcePositionStartMs": 810330,
+          "sourcePositionRatio": 0.06853194415043622,
           "chatPeak": 1.2062592130627054,
           "chatMean": 1.2062592130627054,
           "laughter": {
@@ -231,6 +259,8 @@
           "reason": "手に入れたサメ肉やチキンを忙しく調理している最中に突然鳥に襲撃され、マリンが悔しがりながら騒ぐリアクションが面白い場面であるため。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 24733,
+          "sourcePositionStartMs": 840194,
+          "sourcePositionRatio": 0.07105762872352203,
           "chatPeak": 1.1913671240125487,
           "chatMean": 1.1913671240125487,
           "laughter": {
@@ -248,6 +278,8 @@
           "reason": "宝鐘マリンの雑な反応を指摘しつつも、ゲームの作業をしっかりこなす点を戌神ころねが褒めてフォローする一連のやり取りが綺麗にまとまっているため。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 39875,
+          "sourcePositionStartMs": 864927,
+          "sourcePositionRatio": 0.07314936983476404,
           "chatPeak": 1.3775182371395094,
           "chatMean": 1.213784619817832,
           "laughter": {
@@ -265,6 +297,8 @@
           "reason": "島で突然イノシシに襲われ、それを弓矢で仕留めてしし鍋やしし丼にしようと2人で盛り上がる展開がコミカルで切り抜きに適しているため。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 55142,
+          "sourcePositionStartMs": 904802,
+          "sourcePositionRatio": 0.07652171353794501,
           "chatPeak": 1.3775182371395094,
           "chatMean": 1.3775182371395094,
           "laughter": {
@@ -282,6 +316,8 @@
           "reason": "マリンがエイムの自信を語るもツッコミを入れられ、その後「マリゾネス」「コロゾネス」と呼び合いながら弓矢の準備や合流を試みる掛け合いが面白い。 ",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 59044,
+          "sourcePositionStartMs": 960122,
+          "sourcePositionRatio": 0.081200285416565,
           "chatPeak": 1.1690289904373135,
           "chatMean": 1.1690289904373135,
           "laughter": {
@@ -301,6 +337,8 @@
             3
           ],
           "evidenceDurationMs": 58850,
+          "sourcePositionStartMs": 1021002,
+          "sourcePositionRatio": 0.08634908252376645,
           "chatPeak": 1.075953433873833,
           "chatMean": 1.075953433873833,
           "laughter": {
@@ -318,6 +356,8 @@
           "reason": "「竹取りの翁」のセリフからかぐや姫の話題に発展し、そこから「今日絡みづらい？」と脳死トークをいじり合う一連の流れが面白い。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 51738,
+          "sourcePositionStartMs": 1260022,
+          "sourcePositionRatio": 0.10656369297979951,
           "chatPeak": 1.6790830404051857,
           "chatMean": 1.6790830404051857,
           "laughter": {
@@ -335,6 +375,8 @@
           "reason": "竹取物語の流れを引きずり、アイテム発見の報告を「見つけられり」「ありけり」と古文風に言い合って楽しんでいる様子が微笑ましい。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 11566,
+          "sourcePositionStartMs": 1380850,
+          "sourcePositionRatio": 0.11678246526739704,
           "chatPeak": 1.2025361908001664,
           "chatMean": 1.2025361908001664,
           "laughter": {
@@ -352,6 +394,8 @@
           "reason": "お互いの話がかみ合わず、今後の会話に主語をつけようとルールを決めようとするやり取りがコミカルで切り抜きに適している。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 81733,
+          "sourcePositionStartMs": 1427669,
+          "sourcePositionRatio": 0.12074208306900784,
           "chatPeak": 1.250935480213176,
           "chatMean": 1.230785390321411,
           "laughter": {
@@ -369,6 +413,8 @@
           "reason": "毒で死にそうになりながらも、噛み合わない会話のせいで「ギスギス」ではなく「死に死に」していると訴える緊迫感とユーモアがある場面のため。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 50598,
+          "sourcePositionStartMs": 1509402,
+          "sourcePositionRatio": 0.12765447850203834,
           "chatPeak": 1.1392448123369996,
           "chatMean": 1.1392448123369996,
           "laughter": {
@@ -386,6 +432,8 @@
           "reason": "ころねがサメの肉をもらう際に「クジラ」と言い間違え、マリンにツッコまれるコミカルなやり取りが切り抜きとして成立するため。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 10849,
+          "sourcePositionStartMs": 1809147,
+          "sourcePositionRatio": 0.1530047772684329,
           "chatPeak": 0.9456476546849605,
           "chatMean": 0.9456476546849605,
           "laughter": {
@@ -403,6 +451,8 @@
           "reason": "ころねが葉っぱを60枚集めたことを報告し、マリンと共にテンション高く喜び合う掛け合いが見どころであるため。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 7666,
+          "sourcePositionStartMs": 1819996,
+          "sourcePositionRatio": 0.15392230847434663,
           "chatPeak": 0.9456476546849605,
           "chatMean": 0.9456476546849606,
           "laughter": {
@@ -420,6 +470,8 @@
           "reason": "ヤシの種をいらないと判断しかけたところから、栽培して木材を集めるために新しくストレージを作るという展開がまとまっているため。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 25305,
+          "sourcePositionStartMs": 1834199,
+          "sourcePositionRatio": 0.15512349712930035,
           "chatPeak": 0.9456476546849605,
           "chatMean": 0.9456476546849605,
           "laughter": {
@@ -437,6 +489,8 @@
           "reason": "イノシシかと思いきや足の速い動物（小ヤギ）に遭遇し、当たらない弓矢やエイムに苦戦しながら仕留めようとする一連の戦闘シーンになっているため。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 58794,
+          "sourcePositionStartMs": 2040950,
+          "sourcePositionRatio": 0.17260902522902125,
           "chatPeak": 1.075953433873833,
           "chatMean": 1.075953433873833,
           "laughter": {
@@ -454,6 +508,8 @@
           "reason": "狩りの才能について話す中、コヨーテの博衣こよりを引き合いに出して弄り倒すコミカルなトーク展開が切り抜きに適しています。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 46722,
+          "sourcePositionStartMs": 2196966,
+          "sourcePositionRatio": 0.1858037481179362,
           "chatPeak": 1.7833276637562838,
           "chatMean": 1.6988967669499593,
           "laughter": {
@@ -471,6 +527,8 @@
           "reason": "緊迫したBGMや終わりのムードが漂う中、冷静にスイカを食べ始める船長のシュールな行動と、角巻わためへの言及が面白い見どころとなっています。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 58470,
+          "sourcePositionStartMs": 2220674,
+          "sourcePositionRatio": 0.18780880202426886,
           "chatPeak": 1.7833276637562838,
           "chatMean": 1.7833276637562838,
           "laughter": {
@@ -488,6 +546,8 @@
           "reason": "弓が壊れるトラブルを乗り越えてようやく敵を倒したものの、何も落とさないというオチに対して息の合った困惑のリアクションを見せる場面です。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 25619,
+          "sourcePositionStartMs": 2279144,
+          "sourcePositionRatio": 0.1927537784838298,
           "chatPeak": 1.7833276637562838,
           "chatMean": 1.4018733044741336,
           "laughter": {
@@ -505,6 +565,8 @@
           "reason": "時間経過やアイテムドロップの不満から、その場にいないワタメに対して理不尽に謝罪を求めるくだりがコミカルで切り抜きに適している。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 29565,
+          "sourcePositionStartMs": 2304763,
+          "sourcePositionRatio": 0.19492045116926662,
           "chatPeak": 1.388687303927127,
           "chatMean": 1.388687303927127,
           "laughter": {
@@ -522,6 +584,8 @@
           "reason": "マリンが急にダメージを受けて死にかけ、焦るころねとのやり取りや地上担当へ回る一連の流れが起承転結を含んでいる。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 59106,
+          "sourcePositionStartMs": 2580020,
+          "sourcePositionRatio": 0.21819972918071456,
           "chatPeak": 0.9419246324224213,
           "chatMean": 0.9419246324224213,
           "laughter": {
@@ -539,6 +603,8 @@
           "reason": "脅威であるはずのサメを見ても何も思わなくなり、「ラフト末期」と自嘲するゲーム慣れ特有の面白い一幕である。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 21216,
+          "sourcePositionStartMs": 2648288,
+          "sourcePositionRatio": 0.2239733507463261,
           "chatPeak": 1.113183656499225,
           "chatMean": 1.113183656499225,
           "laughter": {
@@ -558,6 +624,8 @@
             4
           ],
           "evidenceDurationMs": 58072,
+          "sourcePositionStartMs": 2790074,
+          "sourcePositionRatio": 0.2359646015124507,
           "chatPeak": 1.8987413538949993,
           "chatMean": 1.6301416329963772,
           "laughter": {
@@ -575,6 +643,8 @@
           "reason": "マリンが構えた矢を撃たずに下ろす方法をころねに相談し、スクロールなどの操作を試行錯誤するやり取りが具体的で切り抜きに適している。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 22159,
+          "sourcePositionStartMs": 2916151,
+          "sourcePositionRatio": 0.24662729686206697,
           "chatPeak": 1.0871225006614507,
           "chatMean": 1.0871225006614507,
           "laughter": {
@@ -592,6 +662,8 @@
           "reason": "お菓子のトッポを電子レンジで加熱すると中身がなくなって空洞を食べられるのではないかという、独自の理論でリスナーに検証を丸投げする一連の会話が面白い。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 53557,
+          "sourcePositionStartMs": 2945887,
+          "sourcePositionRatio": 0.24914215610614945,
           "chatPeak": 1.5003779718033035,
           "chatMean": 1.5003779718033035,
           "laughter": {
@@ -611,6 +683,8 @@
             5
           ],
           "evidenceDurationMs": 25818,
+          "sourcePositionStartMs": 3000738,
+          "sourcePositionRatio": 0.2537810633027182,
           "chatPeak": 1.1057376119741467,
           "chatMean": 1.1057376119741467,
           "laughter": {
@@ -628,6 +702,8 @@
           "reason": "マリンが配信前にトイレに行ったにもかかわらず再度席を外すというハプニングと、残されたころねがリスナー（一味）と2人きりで緊張しながら場を繋ぐ展開が切り抜きとして成立するため。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 107424,
+          "sourcePositionStartMs": 3072540,
+          "sourcePositionRatio": 0.25985356543628063,
           "chatPeak": 2.1854140681105187,
           "chatMean": 1.9436234852121317,
           "laughter": {
@@ -647,6 +723,8 @@
             6
           ],
           "evidenceDurationMs": 29494,
+          "sourcePositionStartMs": 3180190,
+          "sourcePositionRatio": 0.2689578362738338,
           "chatPeak": 1.8987413538949993,
           "chatMean": 1.8987413538949993,
           "laughter": {
@@ -664,6 +742,8 @@
           "reason": "ころねがバーベキューの網の上を歩く奇行に対し、マリンが理由を問い詰めてコミカルな言い合いに発展しているため。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 27332,
+          "sourcePositionStartMs": 3211310,
+          "sourcePositionRatio": 0.2715897443877646,
           "chatPeak": 1.8987413538949993,
           "chatMean": 1.8987413538949995,
           "laughter": {
@@ -683,6 +763,8 @@
             7
           ],
           "evidenceDurationMs": 40197,
+          "sourcePositionStartMs": 3252153,
+          "sourcePositionRatio": 0.2750439546415332,
           "chatPeak": 1.8838492648448426,
           "chatMean": 1.8838492648448426,
           "laughter": {
@@ -700,6 +782,8 @@
           "reason": "ステータス的な得がないにもかかわらず、イノシシの頭を被ったシュールな見た目に対して笑いが止まらなくなっているため。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 100913,
+          "sourcePositionStartMs": 3366903,
+          "sourcePositionRatio": 0.284748692947239,
           "chatPeak": 1.6344067732547152,
           "chatMean": 1.5920685137625408,
           "laughter": {
@@ -719,6 +803,8 @@
             8
           ],
           "evidenceDurationMs": 51351,
+          "sourcePositionStartMs": 3467816,
+          "sourcePositionRatio": 0.29328319627310984,
           "chatPeak": 1.545054238953774,
           "chatMean": 1.1815771799192896,
           "laughter": {
@@ -736,6 +822,8 @@
           "reason": "ここぞという時のために温存していたイノシシの肉を一緒に食べるが、期待していたほど回復量が変わらずツッコミを入れる展開が面白いため。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 54617,
+          "sourcePositionStartMs": 3634469,
+          "sourcePositionRatio": 0.30737752091677684,
           "chatPeak": 1.5227161053785387,
           "chatMean": 1.3782673814474227,
           "laughter": {
@@ -753,6 +841,8 @@
           "reason": "イノシシ肉の件で大笑いして泣きそうになっている最中に、突然鳥が連続で襲来してパニックになる落差が見どころであるため。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 22938,
+          "sourcePositionStartMs": 3696786,
+          "sourcePositionRatio": 0.31264784925661704,
           "chatPeak": 1.5227161053785387,
           "chatMean": 1.5227161053785387,
           "laughter": {
@@ -770,6 +860,8 @@
           "reason": "マリンが低い声でイノシシを探し、ころねから声の太さをツッコまれるコミカルな掛け合いが成立しているため。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 16806,
+          "sourcePositionStartMs": 3903595,
+          "sourcePositionRatio": 0.33013828258354255,
           "chatPeak": 0.8600181426465585,
           "chatMean": 0.8600181426465585,
           "laughter": {
@@ -787,6 +879,8 @@
           "reason": "気づかないうちにサメに船の土台を食われていたことが発覚し、憤慨する二人の反応が面白い場面であるため。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 26528,
+          "sourcePositionStartMs": 3961702,
+          "sourcePositionRatio": 0.3350525590866332,
           "chatPeak": 1.0498922780360584,
           "chatMean": 1.0498922780360584,
           "laughter": {
@@ -806,6 +900,8 @@
             9
           ],
           "evidenceDurationMs": 38481,
+          "sourcePositionStartMs": 3991226,
+          "sourcePositionRatio": 0.33754948887955394,
           "chatPeak": 1.4631477491779112,
           "chatMean": 1.1541377721337682,
           "laughter": {
@@ -823,6 +919,8 @@
           "reason": "お味を聞かれた宝鐘マリンが独特な表現で「アムアム」と執拗に連呼し続けるシュールな見どころシーン。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 26518,
+          "sourcePositionStartMs": 4263026,
+          "sourcePositionRatio": 0.36053639843502955,
           "chatPeak": 1.1504138791246172,
           "chatMean": 1.1504138791246172,
           "laughter": {
@@ -840,6 +938,8 @@
           "reason": "カツオなどの釣れる魚や海という環境から、このゲームのテーマがサザエさん（磯野家）なのではないかと盛り上がる場面。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 28852,
+          "sourcePositionStartMs": 4802562,
+          "sourcePositionRatio": 0.40616651335012555,
           "chatPeak": 1.6641909513550288,
           "chatMean": 1.6641909513550288,
           "laughter": {
@@ -857,6 +957,8 @@
           "reason": "建築が上手くいかない理由をリスナーに問いかけつつ、土台ではなく木製フロアが必要だったことを思い出して解決する一連の流れ。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 32467,
+          "sourcePositionStartMs": 4516312,
+          "sourcePositionRatio": 0.38195752563763513,
           "chatPeak": 0.9642627659976566,
           "chatMean": 0.9642627659976566,
           "laughter": {
@@ -874,6 +976,8 @@
           "reason": "箱の中に紛れ込んだ仲間外れの葉っぱを2人で楽しそうに探して見つける一連のくだりがコミカルで切り抜きに適している。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 27386,
+          "sourcePositionStartMs": 5008544,
+          "sourcePositionRatio": 0.42358700490294376,
           "chatPeak": 1.1243527232868427,
           "chatMean": 1.1243527232868427,
           "laughter": {
@@ -891,6 +995,8 @@
           "reason": "ノープランで話し始めて口走ってしまった謎の言葉「イノシシンリー」に対して、自分で即座に反省して無視を求める展開が面白い。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 30883,
+          "sourcePositionStartMs": 5128111,
+          "sourcePositionRatio": 0.43369913078528205,
           "chatPeak": 1.3030577918887252,
           "chatMean": 1.3030577918887252,
           "laughter": {
@@ -910,6 +1016,8 @@
             11
           ],
           "evidenceDurationMs": 26819,
+          "sourcePositionStartMs": 5162499,
+          "sourcePositionRatio": 0.43660742308032874,
           "chatPeak": 1.3477340590391957,
           "chatMean": 1.3477340590391955,
           "laughter": {
@@ -929,6 +1037,8 @@
             12
           ],
           "evidenceDurationMs": 88988,
+          "sourcePositionStartMs": 5190322,
+          "sourcePositionRatio": 0.43896049439954143,
           "chatPeak": 1.3477340590391957,
           "chatMean": 1.3303644456897732,
           "laughter": {
@@ -946,6 +1056,8 @@
           "reason": "マリンが豪快に広げた帆の向きが実は逆で進まず、そこからお互いに泣き真似を煽り合ったりパドルを漕ぎ出す展開が微笑ましい。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 90696,
+          "sourcePositionStartMs": 5581366,
+          "sourcePositionRatio": 0.47203221279619856,
           "chatPeak": 1.3067808141512642,
           "chatMean": 1.2923034067948556,
           "laughter": {
@@ -963,6 +1075,8 @@
           "reason": "宝鐘マリンが帆の向きを逆にしてしまい、船が進まなくなって焦ったり言い訳したりする一連の流れがコミカルで切り抜きに適しているため。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 95149,
+          "sourcePositionStartMs": 5672062,
+          "sourcePositionRatio": 0.47970263497810955,
           "chatPeak": 1.5152700608534604,
           "chatMean": 1.2732582363514524,
           "laughter": {
@@ -980,6 +1094,8 @@
           "reason": "ミスを笑われた戌神ころねが「足しか引っ張れずに魚釣ります」と独特な開き直り方をして謝るまでの掛け合いが面白い。 ",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 23821,
+          "sourcePositionStartMs": 5796179,
+          "sourcePositionRatio": 0.4901995674773626,
           "chatPeak": 1.5152700608534604,
           "chatMean": 1.5152700608534604,
           "laughter": {
@@ -997,6 +1113,8 @@
           "reason": "宝鐘海賊団の鉄則に触れつつ、ヤシの木を植える大区画の作物についてリスナー（一味）に問いかけ、その意見を快く採用する一連の流れが綺麗にまとまっているため。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 141671,
+          "sourcePositionStartMs": 6071644,
+          "sourcePositionRatio": 0.5134964366484409,
           "chatPeak": 1.247212457950637,
           "chatMean": 0.9191152574836616,
           "laughter": {
@@ -1014,6 +1132,8 @@
           "reason": "マリン船長が移動する中で、置き去りにされそうになったころねが「犬かきで行く」と可愛く宣言した直後、どんどん距離が離れていって絶叫する見どころのある展開になっているため。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 60861,
+          "sourcePositionStartMs": 6300522,
+          "sourcePositionRatio": 0.532853308926727,
           "chatPeak": 1.559946328003931,
           "chatMean": 1.1560816377659273,
           "laughter": {
@@ -1031,6 +1151,8 @@
           "reason": "鉱石を探すやり取りの中で、「君の笑顔が鉱石だよ」という突然のキザなセリフに対し、マリン船長が「やかましすぎる」と即座にツッコミを入れるコミカルなオチがついているため。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 14229,
+          "sourcePositionStartMs": 6390286,
+          "sourcePositionRatio": 0.5404449091818326,
           "chatPeak": 1.559946328003931,
           "chatMean": 1.559946328003931,
           "laughter": {
@@ -1048,6 +1170,8 @@
           "reason": "宝鐘マリンの呼び方や最近の呼び捨てについて、2人の距離感の変化を匂わせながら楽しく雑談している場面。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 30354,
+          "sourcePositionStartMs": 6480406,
+          "sourcePositionRatio": 0.5480666173832287,
           "chatPeak": 1.2881657028385682,
           "chatMean": 1.2881657028385682,
           "laughter": {
@@ -1065,6 +1189,8 @@
           "reason": "壁掛けストレージをびっしり作ったことをアピールするも、1ミリも見ないで適当に褒めたことを見抜かれてツッコむコミカルな掛け合い。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 26380,
+          "sourcePositionStartMs": 6693504,
+          "sourcePositionRatio": 0.566088929570325,
           "chatPeak": 0.867464187171637,
           "chatMean": 0.867464187171637,
           "laughter": {
@@ -1082,6 +1208,8 @@
           "reason": "普通にサメを倒した報告に対し、驚いて「なんで？どうして？どこで？」と息ぴったりに質問を畳み掛けるテンポの良い展開。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 56348,
+          "sourcePositionStartMs": 6693504,
+          "sourcePositionRatio": 0.566088929570325,
           "chatPeak": 1.109460634236686,
           "chatMean": 0.9956688783369995,
           "laughter": {
@@ -1099,6 +1227,8 @@
           "reason": "宝鐘マリンがサメの肉を「にっこり笑ってる」と表現したことに対し、戌神ころねが「独特な感性で物を言わないでもらっていい？」とツッコミを入れる掛け合いが面白いため。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 12387,
+          "sourcePositionStartMs": 6780086,
+          "sourcePositionRatio": 0.5734114189122388,
           "chatPeak": 1.403579392977284,
           "chatMean": 1.4035793929772842,
           "laughter": {
@@ -1116,6 +1246,8 @@
           "reason": "宝鐘マリンの配信を見て場所が分かったら「結婚してあげる」という提案に対し、戌神ころねが「いらない特典なの？」とバッサリ切り返す二人の関係性が魅力的であるため。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 31026,
+          "sourcePositionStartMs": 7575441,
+          "sourcePositionRatio": 0.6406768841421701,
           "chatPeak": 1.4482556601277545,
           "chatMean": 1.4482556601277545,
           "laughter": {
@@ -1133,6 +1265,8 @@
           "reason": "絶対に分からないと言われていた場所を戌神ころねが本当に見つけ出し、宝鐘マリンから「結婚しなきゃな」と詰め寄られるコミカルな結末を迎えるため。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 34502,
+          "sourcePositionStartMs": 7606467,
+          "sourcePositionRatio": 0.6433008424051141,
           "chatPeak": 1.4482556601277545,
           "chatMean": 1.3577472214016693,
           "laughter": {
@@ -1150,6 +1284,8 @@
           "reason": "いらないものを整理するために、階段横のスペースをゴミ箱という名のストレージにする具体的な提案と合意が行われているため。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 11788,
+          "sourcePositionStartMs": 7860254,
+          "sourcePositionRatio": 0.6647643406220217,
           "chatPeak": 0.919586498847186,
           "chatMean": 0.9195864988471859,
           "laughter": {
@@ -1167,6 +1303,8 @@
           "reason": "マリンの「味方じゃん」という言葉に対し、ころねがいつから味方だと思っていたのかと冷たく突き放し、マリンが即座にキレるプロレス的な掛け合いが面白い場面です。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 58674,
+          "sourcePositionStartMs": 8280340,
+          "sourcePositionRatio": 0.7002922246820715,
           "chatPeak": 1.7907737082813622,
           "chatMean": 1.7907737082813622,
           "laughter": {
@@ -1184,6 +1322,8 @@
           "reason": "お互いに辛辣な言葉を浴びせ合いながらも「本当は仲いいんだけど」と関係性に言及する、切り抜きとして単独で成立する展開です。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 29898,
+          "sourcePositionStartMs": 8400086,
+          "sourcePositionRatio": 0.7104194891104378,
           "chatPeak": 1.5189930831159995,
           "chatMean": 1.5189930831159995,
           "laughter": {
@@ -1201,6 +1341,8 @@
           "reason": "収納ボックスのルール決めをする中で、備品の具体例として釘や槍を挙げるころねと、それに困惑しつつ従うマリンのやり取りが綺麗にまとまっています。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 48838,
+          "sourcePositionStartMs": 8440504,
+          "sourcePositionRatio": 0.7138377558890001,
           "chatPeak": 1.5189930831159995,
           "chatMean": 1.279655306029826,
           "laughter": {
@@ -1218,6 +1360,8 @@
           "reason": "サメを倒した直後に船を見失ってお互いを探し合うという、ゲーム内のハプニングとパニックの展開が明確で切り抜きとして成立するため。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 139830,
+          "sourcePositionStartMs": 8499668,
+          "sourcePositionRatio": 0.7188414259292509,
           "chatPeak": 1.5525002834788524,
           "chatMean": 1.2156452868671779,
           "laughter": {
@@ -1235,6 +1379,8 @@
           "reason": "迷子になった状態からアンカーを下ろし、見えた島を目標地点に指定して合流しようとする問題解決のやり取りが描かれているため。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 45233,
+          "sourcePositionStartMs": 8760034,
+          "sourcePositionRatio": 0.7408613291423524,
           "chatPeak": 0.8711872094341762,
           "chatMean": 0.8711872094341762,
           "laughter": {
@@ -1252,6 +1398,8 @@
           "reason": "資材整理中にマリン船長が独特なメロディの謎の歌を上機嫌で歌い、ゲームをプレイしている様子が微笑ましい見どころとなっているため。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 22657,
+          "sourcePositionStartMs": 9094796,
+          "sourcePositionRatio": 0.769173116547099,
           "chatPeak": 0.8786332539592546,
           "chatMean": 0.8786332539592545,
           "laughter": {
@@ -1269,6 +1417,8 @@
           "reason": "クラゲの話題から一転してイルカの群れを発見し、二人で「かわいい」と歓声をあげて盛り上がっている展開に一体感があるため。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 21609,
+          "sourcePositionStartMs": 9120194,
+          "sourcePositionRatio": 0.7713210986254285,
           "chatPeak": 1.7572665079185092,
           "chatMean": 1.7572665079185092,
           "laughter": {
@@ -1286,6 +1436,8 @@
           "reason": "イルカの鳴き声ができるかという無茶振りに対して披露したモノマネが、独特でエゲツナイ反応を生み出す面白いオチになっているため。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 22240,
+          "sourcePositionStartMs": 9133740,
+          "sourcePositionRatio": 0.7724667228963573,
           "chatPeak": 1.7572665079185092,
           "chatMean": 1.7572665079185092,
           "laughter": {
@@ -1303,6 +1455,8 @@
           "reason": "クラゲやイルカなど、視界に入ってきた海の生き物を巡って2人が騒ぐコミカルなやり取りが成立しているため。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 53944,
+          "sourcePositionStartMs": 9155980,
+          "sourcePositionRatio": 0.7743476238106832,
           "chatPeak": 1.7572665079185092,
           "chatMean": 1.4165006488721488,
           "laughter": {
@@ -1320,6 +1474,8 @@
           "reason": "新しく作った可愛い絨毯を披露し、その感想や設置場所のこだわりについて会話が盛り上がっているため。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 61560,
+          "sourcePositionStartMs": 9232688,
+          "sourcePositionRatio": 0.7808350405074508,
           "chatPeak": 1.1429678345995389,
           "chatMean": 1.0357564052037507,
           "laughter": {
@@ -1337,6 +1493,8 @@
           "reason": "ゲーム内でベッドの上位互換があるかという話題から「旅館」というスケールの大きいボケが生まれる面白い掛け合いです。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 26608,
+          "sourcePositionStartMs": 9676921,
+          "sourcePositionRatio": 0.8184051059693993,
           "chatPeak": 0.867464187171637,
           "chatMean": 0.867464187171637,
           "laughter": {
@@ -1354,6 +1512,8 @@
           "reason": "キャラクターの「うそっぷ」の由来を「わざっぷ」と勘違いしたような発言に対してツッコミが入るコミカルな一幕です。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 29358,
+          "sourcePositionStartMs": 10260642,
+          "sourcePositionRatio": 0.8677720737127098,
           "chatPeak": 0.919586498847186,
           "chatMean": 0.919586498847186,
           "laughter": {
@@ -1371,6 +1531,8 @@
           "reason": "新しくドア式を取り入れた建築を楽しんでいた最中に、突然斧が壊れて激しく絶叫するリアクションが見どころとなっています。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 29362,
+          "sourcePositionStartMs": 10470482,
+          "sourcePositionRatio": 0.8855188474475185,
           "chatPeak": 1.1615829459122349,
           "chatMean": 1.1615829459122349,
           "laughter": {
@@ -1388,6 +1550,8 @@
           "reason": "ゲームのギミックや隠れる動作を使いながら「いないいないばぁ」で遊ぶ二人のコミカルな掛け合いが成立しているため。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 56650,
+          "sourcePositionStartMs": 10563042,
+          "sourcePositionRatio": 0.8933469134830403,
           "chatPeak": 1.284442680576029,
           "chatMean": 1.284442680576029,
           "laughter": {
@@ -1405,6 +1569,8 @@
           "reason": "「取っていいよ」と言われた魚を焼かずに生で食べてしまい、呆れられるリアクションが面白い場面であるため。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 41353,
+          "sourcePositionStartMs": 10696829,
+          "sourcePositionRatio": 0.9046616657593406,
           "chatPeak": 1.4259175265525192,
           "chatMean": 1.4259175265525192,
           "laughter": {
@@ -1422,6 +1588,8 @@
           "reason": "建築物のデザインに対してころねが「デザイナーの才能ある」と褒めちぎり、カウボーイの村みたいだと盛り上がる展開があるため。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 55353,
+          "sourcePositionStartMs": 10740498,
+          "sourcePositionRatio": 0.9083548789800104,
           "chatPeak": 1.3924103261896663,
           "chatMean": 1.3924103261896663,
           "laughter": {
@@ -1439,6 +1607,8 @@
           "reason": "オシャレに行きたいと作ったテーブルがローテーブル（ちゃぶ台）だったことで、巨人の星やちゃぶ台返しの話題になり粘土の返却を要求するコミカルな掛け合いが成立しているため。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 86569,
+          "sourcePositionStartMs": 10982423,
+          "sourcePositionRatio": 0.928815173660689,
           "chatPeak": 1.2956117473636466,
           "chatMean": 1.2287548791328025,
           "laughter": {
@@ -1456,6 +1626,8 @@
           "reason": "別の高いテーブルを作ろうとするも再びローテーブルを作ってしまい、最終的に正解のテーブルを見つけるが大量に余ったテーブルの処理に困るオチがついているため。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 36154,
+          "sourcePositionStartMs": 11062309,
+          "sourcePositionRatio": 0.935571362979117,
           "chatPeak": 1.2956117473636466,
           "chatMean": 1.2956117473636466,
           "laughter": {
@@ -1473,6 +1645,8 @@
           "reason": "ゲーム内で設置するテーブルの高さについて、食卓としての実用性と地面に座る「わびさび」の良さで意見を交わし合う具体的なゲームプレイ展開があるため。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 59686,
+          "sourcePositionStartMs": 11220314,
+          "sourcePositionRatio": 0.9489343013319975,
           "chatPeak": 0.8860792984843331,
           "chatMean": 0.8860792984843331,
           "laughter": {
@@ -1490,6 +1664,8 @@
           "reason": "リスナーへの呼びかけを過激にエスカレートさせた直後、唐突に宝鐘マリンを「いい女」と褒めちぎる急な会話の展開が面白いから。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 34186,
+          "sourcePositionStartMs": 11400666,
+          "sourcePositionRatio": 0.9641871898976676,
           "chatPeak": 1.5003779718033035,
           "chatMean": 1.5003779718033035,
           "laughter": {
@@ -1509,6 +1685,8 @@
             13
           ],
           "evidenceDurationMs": 29592,
+          "sourcePositionStartMs": 11520066,
+          "sourcePositionRatio": 0.974285192108572,
           "chatPeak": 1.1690289904373135,
           "chatMean": 1.1690289904373135,
           "laughter": {
@@ -1528,6 +1706,8 @@
             13
           ],
           "evidenceDurationMs": 42023,
+          "sourcePositionStartMs": 11551287,
+          "sourcePositionRatio": 0.9769256420836695,
           "chatPeak": 1.370072192614431,
           "chatMean": 1.2327056679943043,
           "laughter": {
@@ -1545,6 +1725,8 @@
           "reason": "出航の合図として宝鐘マリンが言った「ヨーソロー」に対し、戌神ころねが「よっしゃろー！」と独特な発音で返し、マリンにツッコまれる一連の掛け合いが面白い場面だからです。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 22349,
+          "sourcePositionStartMs": 11662511,
+          "sourcePositionRatio": 0.9863321764044871,
           "chatPeak": 1.8131118418565975,
           "chatMean": 1.8131118418565977,
           "laughter": {
@@ -1619,6 +1801,7 @@
               2
             ]
           },
+          "hitCandidateCountAt5": 2,
           "precisionAt5": 0.4,
           "cutoffTie": {
             "value": 5,
@@ -1685,6 +1868,7 @@
               1
             ]
           },
+          "hitCandidateCountAt5": 1,
           "precisionAt5": 0.2,
           "cutoffTie": {
             "value": 2.0737234002343423,
@@ -1751,6 +1935,7 @@
               1
             ]
           },
+          "hitCandidateCountAt5": 1,
           "precisionAt5": 0.2,
           "cutoffTie": {
             "value": 1.8987413538949995,
@@ -1811,6 +1996,7 @@
             "recall": 0,
             "coveredExpectedIndexes": []
           },
+          "hitCandidateCountAt5": 0,
           "precisionAt5": 0,
           "cutoffTie": {
             "value": 11788,
@@ -1871,6 +2057,7 @@
             "recall": 0,
             "coveredExpectedIndexes": []
           },
+          "hitCandidateCountAt5": 0,
           "precisionAt5": 0,
           "cutoffTie": {
             "value": 95149,
@@ -1937,6 +2124,7 @@
               11
             ]
           },
+          "hitCandidateCountAt5": 1,
           "precisionAt5": 0.2,
           "cutoffTie": {
             "value": 0.008368200836820083,
@@ -1944,17 +2132,162 @@
             "availableSlots": 1,
             "ambiguous": false
           }
+        },
+        {
+          "name": "position_earlier",
+          "direction": "asc",
+          "top5": [
+            {
+              "rank": 1,
+              "candidateIndex": 1,
+              "title": "ころねの配置に悩むマリンとサザエさん風の例え",
+              "value": 153112,
+              "hitExpectedIndexes": []
+            },
+            {
+              "rank": 2,
+              "candidateIndex": 2,
+              "title": "ねずこ風のころねと炭治郎になりきるマリンの掛け合い",
+              "value": 240202,
+              "hitExpectedIndexes": [
+                1
+              ]
+            },
+            {
+              "rank": 3,
+              "candidateIndex": 3,
+              "title": "言い間違え連発から我に返って作業を始めようとする二人",
+              "value": 300578,
+              "hitExpectedIndexes": [
+                2
+              ]
+            },
+            {
+              "rank": 4,
+              "candidateIndex": 4,
+              "title": "ピンク色の朝日と二人の心",
+              "value": 397197,
+              "hitExpectedIndexes": []
+            },
+            {
+              "rank": 5,
+              "candidateIndex": 5,
+              "title": "マリンのハイテンションな叫び声",
+              "value": 438186,
+              "hitExpectedIndexes": []
+            }
+          ],
+          "allExpected": {
+            "coveredCount": 2,
+            "denominator": 13,
+            "recall": 0.15384615384615385,
+            "coveredExpectedIndexes": [
+              1,
+              2
+            ]
+          },
+          "inputVisibleExpected": {
+            "coveredCount": 2,
+            "denominator": 12,
+            "recall": 0.16666666666666666,
+            "coveredExpectedIndexes": [
+              1,
+              2
+            ]
+          },
+          "hitCandidateCountAt5": 2,
+          "precisionAt5": 0.4,
+          "cutoffTie": {
+            "value": 438186,
+            "candidateCount": 1,
+            "availableSlots": 1,
+            "ambiguous": false
+          }
+        },
+        {
+          "name": "position_later",
+          "direction": "desc",
+          "top5": [
+            {
+              "rank": 1,
+              "candidateIndex": 89,
+              "title": "マリンの「ヨーソロー」に独特な発音で返すころね",
+              "value": 11662511,
+              "hitExpectedIndexes": []
+            },
+            {
+              "rank": 2,
+              "candidateIndex": 88,
+              "title": "宝鐘マリンの浮気性に釘を刺す戌神ころね",
+              "value": 11551287,
+              "hitExpectedIndexes": [
+                13
+              ]
+            },
+            {
+              "rank": 3,
+              "candidateIndex": 87,
+              "title": "船にベッドルームを作る宝鐘マリンと戌神ころね",
+              "value": 11520066,
+              "hitExpectedIndexes": [
+                13
+              ]
+            },
+            {
+              "rank": 4,
+              "candidateIndex": 86,
+              "title": "リスナーへの呼びかけ大喜利と唐突な褒め合い",
+              "value": 11400666,
+              "hitExpectedIndexes": []
+            },
+            {
+              "rank": 5,
+              "candidateIndex": 85,
+              "title": "ローテーブル設置とわびさび論争",
+              "value": 11220314,
+              "hitExpectedIndexes": []
+            }
+          ],
+          "allExpected": {
+            "coveredCount": 1,
+            "denominator": 13,
+            "recall": 0.07692307692307693,
+            "coveredExpectedIndexes": [
+              13
+            ]
+          },
+          "inputVisibleExpected": {
+            "coveredCount": 1,
+            "denominator": 12,
+            "recall": 0.08333333333333333,
+            "coveredExpectedIndexes": [
+              13
+            ]
+          },
+          "hitCandidateCountAt5": 2,
+          "precisionAt5": 0.4,
+          "cutoffTie": {
+            "value": 11220314,
+            "candidateCount": 1,
+            "availableSlots": 1,
+            "ambiguous": false
+          }
         }
       ],
-      "reasonSignal": {
-        "status": "not-numerically-ranked",
-        "reason": "reasonは自然言語で大小関係がなく、根拠のない文字数代理値や係数を置かない"
+      "semanticSignal": {
+        "fields": [
+          "title",
+          "reason"
+        ],
+        "status": "not-ranked-without-llm",
+        "reason": "title/reasonは自然言語で大小関係がなく、追加LLM実走禁止の机上検証では根拠のない文字数代理値や係数を置かない"
       }
     },
     {
       "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
       "candidateCount": 60,
       "expectedCount": 25,
+      "sourceDurationMs": 11898441,
       "candidates": [
         {
           "candidateIndex": 1,
@@ -1963,6 +2296,8 @@
           "reason": "栄冠ナイン内でオリジナル変化球の習得イベントが発生し、仕様が分からずパニックになりながらセーブしてタイトルに戻るまでの流れがコミカルで切り抜きに適しているため。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 138542,
+          "sourcePositionStartMs": 545346,
+          "sourcePositionRatio": 0.04583339951847473,
           "chatPeak": 1.2347469055738325,
           "chatMean": 1.1284916726548424,
           "laughter": {
@@ -1980,6 +2315,8 @@
           "reason": "一条コーラル（リリカ）が開発したオリジナル変化球の名称が「粉落とし」であることを知り、そのネーミングセンスと開発したことに驚嘆しているため。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 20253,
+          "sourcePositionStartMs": 872562,
+          "sourcePositionRatio": 0.07333414520440115,
           "chatPeak": 1.2347469055738325,
           "chatMean": 1.2347469055738325,
           "laughter": {
@@ -1997,6 +2334,8 @@
           "reason": "パワプロのオリジナル変化球の作り方が分からず、ホロライブのDiscordサーバーで他のタレントに質問を投げかける場面が面白いため。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 86662,
+          "sourcePositionStartMs": 961718,
+          "sourcePositionRatio": 0.08082722770151149,
           "chatPeak": 1.2534551920219208,
           "chatMean": 1.206113482644503,
           "laughter": {
@@ -2014,6 +2353,8 @@
           "reason": "オリジナル変化球のベースに強いと噂のフォーク系を選んだ結果、最終的にリリカが作った「粉落とし」と全く同じ仕様で真似して作ろうと決意する流れがコミカルなため。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 52278,
+          "sourcePositionStartMs": 1057442,
+          "sourcePositionRatio": 0.08887231528903661,
           "chatPeak": 1.1973303326776557,
           "chatMean": 1.1591687570866878,
           "laughter": {
@@ -2033,6 +2374,8 @@
             6
           ],
           "evidenceDurationMs": 204096,
+          "sourcePositionStartMs": 1113054,
+          "sourcePositionRatio": 0.09354620491877885,
           "chatPeak": 1.1973303326776557,
           "chatMean": 1.1188787362136008,
           "laughter": {
@@ -2050,6 +2393,8 @@
           "reason": "新しく設定したクレセントムーンのフェスティバルタイプのエフェクトを確認しようとしている場面です。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 47133,
+          "sourcePositionStartMs": 1391869,
+          "sourcePositionRatio": 0.11697910675860812,
           "chatPeak": 1.0289557546448604,
           "chatMean": 1.0289557546448604,
           "laughter": {
@@ -2067,6 +2412,8 @@
           "reason": "栄冠ナイン中のフブちゃんの変化球の微妙さや、他メンバーの球種を考慮した投手起用に頭を悩ませている場面です。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 29502,
+          "sourcePositionStartMs": 1800278,
+          "sourcePositionRatio": 0.15130368760075374,
           "chatPeak": 1.0884821206160507,
           "chatMean": 1.0884821206160507,
           "laughter": {
@@ -2084,6 +2431,8 @@
           "reason": "アンケート結果や能力のバランスを考慮し、誰にオリジナル変化球を覚えさせるか葛藤する一連の流れが描かれているため。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 208200,
+          "sourcePositionStartMs": 1830198,
+          "sourcePositionRatio": 0.15381830275075534,
           "chatPeak": 1.2415499188276828,
           "chatMean": 1.1675746160154443,
           "laughter": {
@@ -2103,6 +2452,8 @@
             7
           ],
           "evidenceDurationMs": 144212,
+          "sourcePositionStartMs": 2010874,
+          "sourcePositionRatio": 0.1690031492361058,
           "chatPeak": 1.1020881471237514,
           "chatMean": 0.853218494611899,
           "laughter": {
@@ -2120,6 +2471,8 @@
           "reason": "オリジナル変化球の設定システムが分からず、リスナー（きまし）のアドバイス通りにした結果、意図しない数値になってしまい慌てる場面が切り抜きとして成立するため。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 175780,
+          "sourcePositionStartMs": 2700146,
+          "sourcePositionRatio": 0.22693275530802734,
           "chatPeak": 1.1565122531545537,
           "chatMean": 1.0164975092503095,
           "laughter": {
@@ -2137,6 +2490,8 @@
           "reason": "作成したパワーカーブのグンと落ちる軌道に興奮しつつも、リスナーの意見を取り入れてキレや重さを細かく再調整していく一連のやり取りが見どころであるため。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 88502,
+          "sourcePositionStartMs": 2949238,
+          "sourcePositionRatio": 0.2478675987887825,
           "chatPeak": 1.1293002001391526,
           "chatMean": 1.106863716070389,
           "laughter": {
@@ -2154,6 +2509,8 @@
           "reason": "ホロライブ甲子園にて白上フブキのオリジナル変化球の名前を決める際、ホロウィッチでの技名や『スーパーノヴァ』といった候補を調べながら試行錯誤する一連のくだりが切り抜きとして成立するため。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 314627,
+          "sourcePositionStartMs": 3240258,
+          "sourcePositionRatio": 0.27232626526449977,
           "chatPeak": 1.2160386191257442,
           "chatMean": 1.0853879612007238,
           "laughter": {
@@ -2173,6 +2530,8 @@
             8
           ],
           "evidenceDurationMs": 168994,
+          "sourcePositionStartMs": 3554885,
+          "sourcePositionRatio": 0.2987689731789232,
           "chatPeak": 1.2823679983507847,
           "chatMean": 1.0829049713505843,
           "laughter": {
@@ -2192,6 +2551,8 @@
             9
           ],
           "evidenceDurationMs": 70987,
+          "sourcePositionStartMs": 3723879,
+          "sourcePositionRatio": 0.3129720103667363,
           "chatPeak": 1.2823679983507847,
           "chatMean": 1.265984204939808,
           "laughter": {
@@ -2209,6 +2570,8 @@
           "reason": "変化球の性質から「重さ」を削る方針に納得しかけた直後、予期せぬ展開が発生したのかマリンが言葉にならない大絶叫を見せるインパクトのある場面です。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 47181,
+          "sourcePositionStartMs": 4047799,
+          "sourcePositionRatio": 0.34019574497196736,
           "chatPeak": 1.224542385693057,
           "chatMean": 1.1003407484490708,
           "laughter": {
@@ -2231,6 +2594,8 @@
             13
           ],
           "evidenceDurationMs": 283550,
+          "sourcePositionStartMs": 4096310,
+          "sourcePositionRatio": 0.3442728337267042,
           "chatPeak": 1.2500536853949957,
           "chatMean": 1.130959866659467,
           "laughter": {
@@ -2248,6 +2613,8 @@
           "reason": "迷った末に決めたオリジナル球種習得ボールをフブキに覚えさせ、キレキレの新球種「スーパーノヴァ」の誕生に興奮する場面。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 85211,
+          "sourcePositionStartMs": 4381338,
+          "sourcePositionRatio": 0.36822790481542916,
           "chatPeak": 1.1820235528564926,
           "chatMean": 1.1141140544265735,
           "laughter": {
@@ -2265,6 +2632,8 @@
           "reason": "フブキの能力値（星）が500に乗ったことを知り、MVP級の活躍を期待してスケジュール調整をしながら大喜びする場面。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 40653,
+          "sourcePositionStartMs": 4445458,
+          "sourcePositionRatio": 0.37361684610614115,
           "chatPeak": 1.1820235528564926,
           "chatMean": 1.1820235528564926,
           "laughter": {
@@ -2282,6 +2651,8 @@
           "reason": "ラオラ（ラオラ・ジャスティッシマ）の能力を「ごく普通」から変えるべきかリスナーの意見を聞きながら葛藤しているため。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 28502,
+          "sourcePositionStartMs": 4560918,
+          "sourcePositionRatio": 0.38332063839287855,
           "chatPeak": 1.2721634784700093,
           "chatMean": 1.2721634784700093,
           "laughter": {
@@ -2299,6 +2670,8 @@
           "reason": "占い師の指示通りにいかず、いらない能力を消せない状況に「しばき倒すぞ」と激怒しているため。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 21995,
+          "sourcePositionStartMs": 4597071,
+          "sourcePositionRatio": 0.3863591036842558,
           "chatPeak": 1.2721634784700093,
           "chatMean": 1.2721634784700093,
           "laughter": {
@@ -2316,6 +2689,8 @@
           "reason": "リスナーから「マリンが邪魔で見えない」と指摘され、急いで画面端に移動して謝罪するコミカルな一幕のため。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 26711,
+          "sourcePositionStartMs": 4651086,
+          "sourcePositionRatio": 0.3908987740494742,
           "chatPeak": 1.1258986935122275,
           "chatMean": 1.1258986935122275,
           "laughter": {
@@ -2335,6 +2710,8 @@
             14
           ],
           "evidenceDurationMs": 27752,
+          "sourcePositionStartMs": 4710742,
+          "sourcePositionRatio": 0.39591254013866184,
           "chatPeak": 1.0646715742275745,
           "chatMean": 1.0646715742275745,
           "laughter": {
@@ -2352,6 +2729,8 @@
           "reason": "強化対象として引退の近い3年生ばかりが選ばれてしまい、これからの育成方針に頭を悩ませて助けを求める場面。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 38911,
+          "sourcePositionStartMs": 4741026,
+          "sourcePositionRatio": 0.39845774753179847,
           "chatPeak": 1.3282883378142742,
           "chatMean": 1.3282883378142742,
           "laughter": {
@@ -2369,6 +2748,8 @@
           "reason": "ホロメンの3年生が多いことに気づいたマリン船長が、甲子園で勝つことを条件にメンバーを鼓舞する一連の展開が切り抜きとして見どころになるため。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 43907,
+          "sourcePositionStartMs": 5049464,
+          "sourcePositionRatio": 0.4243803032683021,
           "chatPeak": 1.1497092399007036,
           "chatMean": 1.1497092399007036,
           "laughter": {
@@ -2386,6 +2767,8 @@
           "reason": "リスナー（キャージー）に選択を委ねた結果、手強いBランクの「ざまみ商業高校」を引き当ててしまい動揺するリアクションが面白いため。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 54235,
+          "sourcePositionStartMs": 5701367,
+          "sourcePositionRatio": 0.47916924578606557,
           "chatPeak": 1.2024325926180435,
           "chatMean": 1.2024325926180435,
           "laughter": {
@@ -2403,6 +2786,8 @@
           "reason": "いよいよ始まる夏の甲子園大会を前に、お調子者などの選手特性を見ながら誰を起用するか悩むシーンです。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 57430,
+          "sourcePositionStartMs": 6002550,
+          "sourcePositionRatio": 0.5044820577754683,
           "chatPeak": 1.0527663010333366,
           "chatMean": 1.0527663010333366,
           "laughter": {
@@ -2420,6 +2805,8 @@
           "reason": "甲子園開幕直前にトイレに行きたいと漏らし、リスナーからの「漏らしてるのでは」というツッコミに全力で抗弁するやり取りが面白いためです。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 41365,
+          "sourcePositionStartMs": 6240322,
+          "sourcePositionRatio": 0.5244655161125731,
           "chatPeak": 1.059569314287187,
           "chatMean": 1.059569314287187,
           "laughter": {
@@ -2439,6 +2826,8 @@
             15
           ],
           "evidenceDurationMs": 78293,
+          "sourcePositionStartMs": 6281687,
+          "sourcePositionRatio": 0.5279420219842247,
           "chatPeak": 1.1122926670045268,
           "chatMean": 1.0999604948012311,
           "laughter": {
@@ -2456,6 +2845,8 @@
           "reason": "得点圏のチャンスで「転がす」か「送りバント・スクイーズ」かで葛藤し、最終的に指示を出して成功を祈る一連の流れが切り抜きとして成立するため。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 44853,
+          "sourcePositionStartMs": 6480278,
+          "sourcePositionRatio": 0.5446325279084882,
           "chatPeak": 1.2024325926180435,
           "chatMean": 1.2024325926180435,
           "laughter": {
@@ -2475,6 +2866,8 @@
             16
           ],
           "evidenceDurationMs": 14789,
+          "sourcePositionStartMs": 6525131,
+          "sourcePositionRatio": 0.5484021814286426,
           "chatPeak": 1.2024325926180435,
           "chatMean": 1.2024325926180435,
           "laughter": {
@@ -2492,6 +2885,8 @@
           "reason": "走力や戦術の数字を見て躊躇し、リスナーの「犠牲フライ」という提案に納得しながら次の作戦を思案する展開が描かれているため。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 39740,
+          "sourcePositionStartMs": 6540034,
+          "sourcePositionRatio": 0.5496546984600755,
           "chatPeak": 1.1565122531545537,
           "chatMean": 1.1565122531545537,
           "laughter": {
@@ -2509,6 +2904,8 @@
           "reason": "走者の能力を見つつ、さらなる追加点を狙って盗塁かスクイーズのどちらを仕掛けるか激しく葛藤する場面です。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 19354,
+          "sourcePositionStartMs": 6660842,
+          "sourcePositionRatio": 0.5598079613959509,
           "chatPeak": 1.1412054733333907,
           "chatMean": 1.1412054733333907,
           "laughter": {
@@ -2526,6 +2923,8 @@
           "reason": "ホロライブ甲子園の試合中、盗塁やスクイーズの戦術指示を出すべきかリスナーの意見を聞きながら激しく葛藤しているため。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 54009,
+          "sourcePositionStartMs": 6680196,
+          "sourcePositionRatio": 0.5614345610487962,
           "chatPeak": 1.1412054733333907,
           "chatMean": 1.1327064302935828,
           "laughter": {
@@ -2543,6 +2942,8 @@
           "reason": "スクイーズの指示数値が1に下がり焦るものの、選手の持つ「バント職人」の特殊能力を信じて作戦を敢行しようとするため。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 63766,
+          "sourcePositionStartMs": 6734205,
+          "sourcePositionRatio": 0.5659737271462707,
           "chatPeak": 1.2670612185296215,
           "chatMean": 1.1534678017703492,
           "laughter": {
@@ -2560,6 +2961,8 @@
           "reason": "相手の強力な打者に対して指示を迷い、スタミナや球種、風の状況を考慮しながら必死に策を練る緊張感のある場面であるため。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 136628,
+          "sourcePositionStartMs": 6851910,
+          "sourcePositionRatio": 0.5758661996138822,
           "chatPeak": 1.1667167730353294,
           "chatMean": 1.1170587297855474,
           "laughter": {
@@ -2577,6 +2980,8 @@
           "reason": "投球ごとの打撃結果やファウルに一喜一憂しながら、固唾をのんで試合の行方を見守る臨場感があるため。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 13244,
+          "sourcePositionStartMs": 6993330,
+          "sourcePositionRatio": 0.5877517903395916,
           "chatPeak": 1.1667167730353294,
           "chatMean": 1.1667167730353294,
           "laughter": {
@@ -2594,6 +2999,8 @@
           "reason": "甲子園に勝ちたいと言いながら青特を多く取ったにもかかわらず、思うような結果を出さない天野に対して激しい怒りをぶつけているため。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 54804,
+          "sourcePositionStartMs": 7082530,
+          "sourcePositionRatio": 0.5952485708001578,
           "chatPeak": 1.0153497281371597,
           "chatMean": 1.0153497281371597,
           "laughter": {
@@ -2611,6 +3018,8 @@
           "reason": "4対2でリードされている緊迫した場面で、犬神の打席における作戦やスクイーズの是非についてリスナーのアドバイスを交えながら考察しているため。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 116639,
+          "sourcePositionStartMs": 7262158,
+          "sourcePositionRatio": 0.610345338519559,
           "chatPeak": 1.2262431390065196,
           "chatMean": 1.1975670607878426,
           "laughter": {
@@ -2628,6 +3037,8 @@
           "reason": "1点を取りに行くためにアイリスへのスクイズやプレアへの伝令を熟考して実行したものの、惜しくも打てずに終わるという一連の流れのドラマがあるため。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 237626,
+          "sourcePositionStartMs": 7381314,
+          "sourcePositionRatio": 0.6203597597365907,
           "chatPeak": 1.1990310859911184,
           "chatMean": 1.0430455553101179,
           "laughter": {
@@ -2645,6 +3056,8 @@
           "reason": "期待していた固有戦術の「魔物」ではなく「ラッキーボーイ」が発動したビトに対して、マリンが激しいツッコミと怒りを露わにするリアクションが見どころだから。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 108679,
+          "sourcePositionStartMs": 7618940,
+          "sourcePositionRatio": 0.6403309475585919,
           "chatPeak": 1.0289557546448604,
           "chatMean": 0.8742211621614409,
           "laughter": {
@@ -2662,6 +3075,8 @@
           "reason": "選手の特殊能力「チャンスF」を見落として作戦指示を出してしまい、直後に気づいて焦る場面であるため。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 57435,
+          "sourcePositionStartMs": 7801179,
+          "sourcePositionRatio": 0.6556471557912503,
           "chatPeak": 1.200731839304581,
           "chatMean": 1.200731839304581,
           "laughter": {
@@ -2679,6 +3094,8 @@
           "reason": "天野くんの盗塁について、アウトになるリスクを懸念しつつリスナーのコメントを頼りに決断しようとする一連の葛藤が描かれているため。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 80567,
+          "sourcePositionStartMs": 7958739,
+          "sourcePositionRatio": 0.6688892267482773,
           "chatPeak": 1.0068459615698468,
           "chatMean": 1.00549951515143,
           "laughter": {
@@ -2696,6 +3113,8 @@
           "reason": "プルヒッターの特殊能力や風の状況を考慮し、センター返しから一転して引っ張りを選択し、打球の行方に一喜一憂する一連のくだりが切り抜きとして成立すると判断したため。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 87080,
+          "sourcePositionStartMs": 8218519,
+          "sourcePositionRatio": 0.6907223391703166,
           "chatPeak": 1.2279438923199821,
           "chatMean": 1.2196715672635159,
           "laughter": {
@@ -2715,6 +3134,8 @@
             20
           ],
           "evidenceDurationMs": 113186,
+          "sourcePositionStartMs": 9126634,
+          "sourcePositionRatio": 0.7670445228916964,
           "chatPeak": 1.204133345931506,
           "chatMean": 1.1744707632271616,
           "laughter": {
@@ -2732,6 +3153,8 @@
           "reason": "急遽送り出した代打の采配が綺麗に決まり、予期せぬチャンスの到来にどう攻略すべきかパニックになりながら悩むリアクションが面白いため。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 57096,
+          "sourcePositionStartMs": 9482230,
+          "sourcePositionRatio": 0.7969304550066685,
           "chatPeak": 1.0799783540487378,
           "chatMean": 1.0799783540487378,
           "laughter": {
@@ -2749,6 +3172,8 @@
           "reason": "緊張しながらもボールを転がす選択をしたが、相手の予想以上の好守に阻まれてどうしようもないと嘆くリアクションが切り抜きとして成立するため。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 58028,
+          "sourcePositionStartMs": 9900438,
+          "sourcePositionRatio": 0.8320785891193645,
           "chatPeak": 1.0034444549429218,
           "chatMean": 1.0034444549429218,
           "laughter": {
@@ -2766,6 +3191,8 @@
           "reason": "提示されたコマンドの数字がいくら何でも悪すぎて困惑し、絶望しながら「おまかせ」を選ぶしかないというゲーム特有のピンチ場面であるため。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 27434,
+          "sourcePositionStartMs": 10230000,
+          "sourcePositionRatio": 0.8597765034931887,
           "chatPeak": 1.0153497281371597,
           "chatMean": 1.0153497281371597,
           "laughter": {
@@ -2783,6 +3210,8 @@
           "reason": "ボールに見えた球がストライク判定された不満から始まり、その後の最悪の展開に対して大絶叫して助けを求めるリアクションに見どころがあるため。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 57636,
+          "sourcePositionStartMs": 10322284,
+          "sourcePositionRatio": 0.8675324775741629,
           "chatPeak": 1.2840687516642473,
           "chatMean": 1.2840687516642473,
           "laughter": {
@@ -2800,6 +3229,8 @@
           "reason": "やばい状況の中で放たれた打球に対して、祈るように見守った末のナイスプレイに大喜びして感謝する感情の起伏が魅力的なため。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 9948,
+          "sourcePositionStartMs": 10385201,
+          "sourcePositionRatio": 0.872820313182206,
           "chatPeak": 1.289171011604635,
           "chatMean": 1.289171011604635,
           "laughter": {
@@ -2817,6 +3248,8 @@
           "reason": "試合の展開が限界を迎え、ヒリヒリした状況に耐えかねて嫌がる感情を爆発させている場面であるため。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 77235,
+          "sourcePositionStartMs": 10395149,
+          "sourcePositionRatio": 0.8736563891017319,
           "chatPeak": 1.289171011604635,
           "chatMean": 1.2321220619800637,
           "laughter": {
@@ -2834,6 +3267,8 @@
           "reason": "ピンチや緊迫した場面の後に、天野くんの活躍に対して狂喜乱舞しながら同じ言葉を繰り返し連呼している見どころのシーンであるため。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 18715,
+          "sourcePositionStartMs": 10472384,
+          "sourcePositionRatio": 0.8801475756361695,
           "chatPeak": 1.1531107465276287,
           "chatMean": 1.1531107465276287,
           "laughter": {
@@ -2853,6 +3288,8 @@
             23
           ],
           "evidenceDurationMs": 114396,
+          "sourcePositionStartMs": 10503922,
+          "sourcePositionRatio": 0.8827981749877988,
           "chatPeak": 1.2874702582911723,
           "chatMean": 1.2808004555489538,
           "laughter": {
@@ -2870,6 +3307,8 @@
           "reason": "スクイーズの作戦指示に関する独特なフレーズを繰り返しながら、困惑や驚きを表現している展開が単独で見どころとなるため。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 17285,
+          "sourcePositionStartMs": 10721215,
+          "sourcePositionRatio": 0.9010604834700613,
           "chatPeak": 1.301076284798873,
           "chatMean": 1.301076284798873,
           "laughter": {
@@ -2889,6 +3328,8 @@
             24
           ],
           "evidenceDurationMs": 40478,
+          "sourcePositionStartMs": 10776694,
+          "sourcePositionRatio": 0.9057231951648119,
           "chatPeak": 1.2789664917238595,
           "chatMean": 1.2356758115043138,
           "laughter": {
@@ -2906,6 +3347,8 @@
           "reason": "盗塁を諦めた後、パワーやミートの能力値を見ながら犠牲フライを狙うべきか怯えつつ悩む場面。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 31252,
+          "sourcePositionStartMs": 10817172,
+          "sourcePositionRatio": 0.9091251534549778,
           "chatPeak": 1.1769212929161048,
           "chatMean": 1.1769212929161048,
           "laughter": {
@@ -2923,6 +3366,8 @@
           "reason": "ホロライブ甲子園の試合終盤と思われる緊迫した場面で、スクイズを選択すべきか「バント職人」に賭けるべきか、リスナーの意見を交えながら葛藤する一連の流れが描かれているため。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 157405,
+          "sourcePositionStartMs": 10848424,
+          "sourcePositionRatio": 0.911751716044144,
           "chatPeak": 1.2296446456334447,
           "chatMean": 1.1888142916859976,
           "laughter": {
@@ -2940,6 +3385,8 @@
           "reason": "緊迫した試合展開の末に勝利を収め、超長文の大絶叫から「涙出た」「辛かった」と安堵と喜びを爆発させる切り抜きに最適なハイライトシーンであるため。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 96469,
+          "sourcePositionStartMs": 11010002,
+          "sourcePositionRatio": 0.9253314783003924,
           "chatPeak": 1.3486973775758253,
           "chatMean": 1.3059725376025868,
           "laughter": {
@@ -2957,6 +3404,8 @@
           "reason": "栄冠ナインのショップで残りの予算を何に使うか、自分探しやスケヘンなどのアイテム選びでリスナーに意見を聞きながら迷う様子が描かれているため。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 127754,
+          "sourcePositionStartMs": 11223006,
+          "sourcePositionRatio": 0.9432333193903302,
           "chatPeak": 1.2058340992449685,
           "chatMean": 1.1147494497234993,
           "laughter": {
@@ -2976,6 +3425,8 @@
             25
           ],
           "evidenceDurationMs": 88124,
+          "sourcePositionStartMs": 11701322,
+          "sourcePositionRatio": 0.9834332077622606,
           "chatPeak": 2.6327661292400726,
           "chatMean": 2.3270022420993794,
           "laughter": {
@@ -2993,6 +3444,8 @@
           "reason": "宝鐘マリンの代表曲の歌詞や定番フレーズを交えながら、自身の船でのルールや魔法での若返りをユーモラスに宣言している場面であるため。",
           "hitExpectedIndexes": [],
           "evidenceDurationMs": 15928,
+          "sourcePositionStartMs": 11823654,
+          "sourcePositionRatio": 0.993714554705108,
           "chatPeak": 1.1820235528564926,
           "chatMean": 1.1820235528564926,
           "laughter": {
@@ -3063,6 +3516,7 @@
               6
             ]
           },
+          "hitCandidateCountAt5": 1,
           "precisionAt5": 0.2,
           "cutoffTie": {
             "value": 5,
@@ -3129,6 +3583,7 @@
               25
             ]
           },
+          "hitCandidateCountAt5": 1,
           "precisionAt5": 0.2,
           "cutoffTie": {
             "value": 1.289171011604635,
@@ -3195,6 +3650,7 @@
               25
             ]
           },
+          "hitCandidateCountAt5": 1,
           "precisionAt5": 0.2,
           "cutoffTie": {
             "value": 1.289171011604635,
@@ -3261,6 +3717,7 @@
               16
             ]
           },
+          "hitCandidateCountAt5": 1,
           "precisionAt5": 0.2,
           "cutoffTie": {
             "value": 17285,
@@ -3340,6 +3797,7 @@
               13
             ]
           },
+          "hitCandidateCountAt5": 2,
           "precisionAt5": 0.4,
           "cutoffTie": {
             "value": 204096,
@@ -3406,6 +3864,7 @@
               6
             ]
           },
+          "hitCandidateCountAt5": 1,
           "precisionAt5": 0.2,
           "cutoffTie": {
             "value": 0,
@@ -3413,11 +3872,149 @@
             "availableSlots": 5,
             "ambiguous": true
           }
+        },
+        {
+          "name": "position_earlier",
+          "direction": "asc",
+          "top5": [
+            {
+              "rank": 1,
+              "candidateIndex": 1,
+              "title": "新球種開発モードに戸惑うマリン船長",
+              "value": 545346,
+              "hitExpectedIndexes": []
+            },
+            {
+              "rank": 2,
+              "candidateIndex": 2,
+              "title": "一条コーラルのオリジナル変化球「粉落とし」に驚くマリン船長",
+              "value": 872562,
+              "hitExpectedIndexes": []
+            },
+            {
+              "rank": 3,
+              "candidateIndex": 3,
+              "title": "オリジナル変化球の開発が分からずDiscordで助けを求めるマリン船長",
+              "value": 961718,
+              "hitExpectedIndexes": []
+            },
+            {
+              "rank": 4,
+              "candidateIndex": 4,
+              "title": "結局リリカのオリジナル変化球「粉落とし」を丸パクリすることに決めるマリン船長",
+              "value": 1057442,
+              "hitExpectedIndexes": []
+            },
+            {
+              "rank": 5,
+              "candidateIndex": 5,
+              "title": "オリジナル変化球のエフェクト選びに迷うマリン船長",
+              "value": 1113054,
+              "hitExpectedIndexes": [
+                6
+              ]
+            }
+          ],
+          "allExpected": {
+            "coveredCount": 1,
+            "denominator": 25,
+            "recall": 0.04,
+            "coveredExpectedIndexes": [
+              6
+            ]
+          },
+          "inputVisibleExpected": {
+            "coveredCount": 1,
+            "denominator": 18,
+            "recall": 0.05555555555555555,
+            "coveredExpectedIndexes": [
+              6
+            ]
+          },
+          "hitCandidateCountAt5": 1,
+          "precisionAt5": 0.2,
+          "cutoffTie": {
+            "value": 1113054,
+            "candidateCount": 1,
+            "availableSlots": 1,
+            "ambiguous": false
+          }
+        },
+        {
+          "name": "position_later",
+          "direction": "desc",
+          "top5": [
+            {
+              "rank": 1,
+              "candidateIndex": 60,
+              "title": "美少女無罪と魔法の若返りアピール",
+              "value": 11823654,
+              "hitExpectedIndexes": []
+            },
+            {
+              "rank": 2,
+              "candidateIndex": 59,
+              "title": "次戦の相手判明と次回配信への持ち越し",
+              "value": 11701322,
+              "hitExpectedIndexes": [
+                25
+              ]
+            },
+            {
+              "rank": 3,
+              "candidateIndex": 58,
+              "title": "パワプロショップの買い物で悩むマリン船長",
+              "value": 11223006,
+              "hitExpectedIndexes": []
+            },
+            {
+              "rank": 4,
+              "candidateIndex": 57,
+              "title": "劇的勝利に大絶叫し涙を流すマリン船長",
+              "value": 11010002,
+              "hitExpectedIndexes": []
+            },
+            {
+              "rank": 5,
+              "candidateIndex": 56,
+              "title": "スクイズを巡る葛藤とバント職人への信頼",
+              "value": 10848424,
+              "hitExpectedIndexes": []
+            }
+          ],
+          "allExpected": {
+            "coveredCount": 1,
+            "denominator": 25,
+            "recall": 0.04,
+            "coveredExpectedIndexes": [
+              25
+            ]
+          },
+          "inputVisibleExpected": {
+            "coveredCount": 1,
+            "denominator": 18,
+            "recall": 0.05555555555555555,
+            "coveredExpectedIndexes": [
+              25
+            ]
+          },
+          "hitCandidateCountAt5": 1,
+          "precisionAt5": 0.2,
+          "cutoffTie": {
+            "value": 10848424,
+            "candidateCount": 1,
+            "availableSlots": 1,
+            "ambiguous": false
+          }
         }
       ],
-      "reasonSignal": {
-        "status": "not-numerically-ranked",
-        "reason": "reasonは自然言語で大小関係がなく、根拠のない文字数代理値や係数を置かない"
+      "semanticSignal": {
+        "fields": [
+          "title",
+          "reason"
+        ],
+        "status": "not-ranked-without-llm",
+        "reason": "title/reasonは自然言語で大小関係がなく、追加LLM実走禁止の机上検証では根拠のない文字数代理値や係数を置かない"
       }
     }
   ]
