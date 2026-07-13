@@ -1,0 +1,2842 @@
+{
+  "kind": "boundary_text_judgability_blind_evidence",
+  "generatedAt": "2026-07-13T00:10:36.359Z",
+  "blindedFields": [
+    "boundary-v001 outputs",
+    "boundary-v001 success/failure",
+    "candidate index"
+  ],
+  "classificationPolicy": {
+    "text_judgable": "text alone makes this exact word boundary clearly preferable to neighboring boundaries",
+    "audio_visual_cue_likely_needed": "text remains continuous, multiple nearby boundaries are similarly plausible, or pause/laughter/voice/visual reaction is needed",
+    "numericThresholdsOrWeights": false
+  },
+  "fixtures": [
+    {
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "sourceVideoId": "YE-faluP7zY",
+      "expectedCutCount": 13,
+      "cuts": [
+        {
+          "key": "nOEWCNc77MI_multiblock_material_v001:1",
+          "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+          "expectedIndex": 1,
+          "label": "block 1",
+          "sourceStartMs": 260068,
+          "sourceEndMs": 264269,
+          "start": {
+            "side": "start",
+            "boundaryMs": 260068,
+            "beforeWord": {
+              "id": 824,
+              "startMs": 259768,
+              "endMs": 260068,
+              "text": "と"
+            },
+            "afterWord": {
+              "id": 825,
+              "startMs": 260068,
+              "endMs": 260128,
+              "text": "コ"
+            },
+            "adjacentWordGapMs": 0,
+            "nearestCompactedSpeechBoundary": {
+              "timeMs": 267270,
+              "kind": "end",
+              "speechId": 19,
+              "signedDistanceMs": 7202,
+              "absoluteDistanceMs": 7202
+            },
+            "immediatelyAfterTerminalPunctuation": false,
+            "immediatelyBeforeTerminalPunctuation": false,
+            "startsWithTransitionPhrase": [],
+            "leftFragment": "ょっと",
+            "rightFragment": "コーネがね今日ねずこスタイルなん",
+            "markedContext": "ょっと【境界】コーネがね今日ねずこスタイルなん",
+            "previousSentence": "っちゃったち",
+            "nextSentence": "で",
+            "reviewPrompt": "この境界は、新しい前提・出来事・発話の開始としてテキストだけで隣接候補より一意に選べるか。"
+          },
+          "end": {
+            "side": "end",
+            "boundaryMs": 264269,
+            "beforeWord": {
+              "id": 848,
+              "startMs": 264129,
+              "endMs": 264269,
+              "text": "ね"
+            },
+            "afterWord": {
+              "id": 849,
+              "startMs": 264269,
+              "endMs": 264329,
+              "text": "ず"
+            },
+            "adjacentWordGapMs": 0,
+            "nearestCompactedSpeechBoundary": {
+              "timeMs": 267270,
+              "kind": "end",
+              "speechId": 19,
+              "signedDistanceMs": 3001,
+              "absoluteDistanceMs": 3001
+            },
+            "immediatelyAfterTerminalPunctuation": false,
+            "immediatelyBeforeTerminalPunctuation": false,
+            "startsWithTransitionPhrase": [],
+            "leftFragment": "どうもどうもね",
+            "rightFragment": "ずこはそんなこ",
+            "markedContext": "どうもどうもね【境界】ずこはそんなこ",
+            "previousSentence": "で",
+            "nextSentence": "と",
+            "reviewPrompt": "この境界は、文・反応・結論の完結としてテキストだけで隣接候補より一意に選べるか。"
+          }
+        },
+        {
+          "key": "nOEWCNc77MI_multiblock_material_v001:2",
+          "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+          "expectedIndex": 2,
+          "label": "block 3",
+          "sourceStartMs": 325479,
+          "sourceEndMs": 330720,
+          "start": {
+            "side": "start",
+            "boundaryMs": 325479,
+            "beforeWord": {
+              "id": 1104,
+              "startMs": 325339,
+              "endMs": 325479,
+              "text": "え"
+            },
+            "afterWord": {
+              "id": 1105,
+              "startMs": 325479,
+              "endMs": 325579,
+              "text": "こ"
+            },
+            "adjacentWordGapMs": 0,
+            "nearestCompactedSpeechBoundary": {
+              "timeMs": 328762,
+              "kind": "end",
+              "speechId": 21,
+              "signedDistanceMs": 3283,
+              "absoluteDistanceMs": 3283
+            },
+            "immediatelyAfterTerminalPunctuation": false,
+            "immediatelyBeforeTerminalPunctuation": false,
+            "startsWithTransitionPhrase": [],
+            "leftFragment": "え",
+            "rightFragment": "これ待ってちょっと面白くないこの絵面ひよこが立ち並んでる姿",
+            "markedContext": "え【境界】これ待ってちょっと面白くないこの絵面ひよこが立ち並んでる姿",
+            "previousSentence": "ね",
+            "nextSentence": "おもろいおもろいいきなりすんごい冷めて",
+            "reviewPrompt": "この境界は、新しい前提・出来事・発話の開始としてテキストだけで隣接候補より一意に選べるか。"
+          },
+          "end": {
+            "side": "end",
+            "boundaryMs": 330720,
+            "beforeWord": {
+              "id": 1140,
+              "startMs": 330600,
+              "endMs": 330720,
+              "text": "ろ"
+            },
+            "afterWord": {
+              "id": 1141,
+              "startMs": 330720,
+              "endMs": 331080,
+              "text": "い"
+            },
+            "adjacentWordGapMs": 0,
+            "nearestCompactedSpeechBoundary": {
+              "timeMs": 330060,
+              "kind": "start",
+              "speechId": 22,
+              "signedDistanceMs": -660,
+              "absoluteDistanceMs": 660
+            },
+            "immediatelyAfterTerminalPunctuation": false,
+            "immediatelyBeforeTerminalPunctuation": false,
+            "startsWithTransitionPhrase": [],
+            "leftFragment": "おもろいおもろ",
+            "rightFragment": "いいきなりすんごい冷めて",
+            "markedContext": "おもろいおもろ【境界】いいきなりすんごい冷めて",
+            "previousSentence": "えこれ待ってちょっと面白くないこの絵面ひよこが立ち並んでる姿",
+            "nextSentence": "る?",
+            "reviewPrompt": "この境界は、文・反応・結論の完結としてテキストだけで隣接候補より一意に選べるか。"
+          }
+        },
+        {
+          "key": "nOEWCNc77MI_multiblock_material_v001:3",
+          "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+          "expectedIndex": 3,
+          "label": "block 4",
+          "sourceStartMs": 1052987,
+          "sourceEndMs": 1055347,
+          "start": {
+            "side": "start",
+            "boundaryMs": 1052987,
+            "beforeWord": {
+              "id": 5270,
+              "startMs": 1052967,
+              "endMs": 1052987,
+              "text": "て"
+            },
+            "afterWord": {
+              "id": 5271,
+              "startMs": 1052987,
+              "endMs": 1053087,
+              "text": "ね"
+            },
+            "adjacentWordGapMs": 0,
+            "nearestCompactedSpeechBoundary": {
+              "timeMs": 1050106,
+              "kind": "start",
+              "speechId": 125,
+              "signedDistanceMs": -2881,
+              "absoluteDistanceMs": 2881
+            },
+            "immediatelyAfterTerminalPunctuation": false,
+            "immediatelyBeforeTerminalPunctuation": false,
+            "startsWithTransitionPhrase": [],
+            "leftFragment": "ごめんねやめて",
+            "rightFragment": "ね",
+            "markedContext": "ごめんねやめて【境界】ね",
+            "previousSentence": "違うね、",
+            "nextSentence": "、そんなつもりじゃないからねや、や、やーだけにや",
+            "reviewPrompt": "この境界は、新しい前提・出来事・発話の開始としてテキストだけで隣接候補より一意に選べるか。"
+          },
+          "end": {
+            "side": "end",
+            "boundaryMs": 1055347,
+            "beforeWord": {
+              "id": 5293,
+              "startMs": 1055207,
+              "endMs": 1055347,
+              "text": "け"
+            },
+            "afterWord": {
+              "id": 5294,
+              "startMs": 1055347,
+              "endMs": 1055467,
+              "text": "に"
+            },
+            "adjacentWordGapMs": 0,
+            "nearestCompactedSpeechBoundary": {
+              "timeMs": 1058648,
+              "kind": "end",
+              "speechId": 125,
+              "signedDistanceMs": 3301,
+              "absoluteDistanceMs": 3301
+            },
+            "immediatelyAfterTerminalPunctuation": false,
+            "immediatelyBeforeTerminalPunctuation": false,
+            "startsWithTransitionPhrase": [],
+            "leftFragment": "、そんなつもりじゃないからねや、や、やーだけ",
+            "rightFragment": "にや",
+            "markedContext": "、そんなつもりじゃないからねや、や、やーだけ【境界】にや",
+            "previousSentence": "ごめんねやめてね",
+            "nextSentence": "めてもう何も言えねえ",
+            "reviewPrompt": "この境界は、文・反応・結論の完結としてテキストだけで隣接候補より一意に選べるか。"
+          }
+        },
+        {
+          "key": "nOEWCNc77MI_multiblock_material_v001:4",
+          "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+          "expectedIndex": 4,
+          "label": "block 6",
+          "sourceStartMs": 2790074,
+          "sourceEndMs": 2806680,
+          "start": {
+            "side": "start",
+            "boundaryMs": 2790074,
+            "beforeWord": {
+              "id": 13566,
+              "startMs": 2789010,
+              "endMs": 2789030,
+              "text": "ん"
+            },
+            "afterWord": {
+              "id": 13567,
+              "startMs": 2790074,
+              "endMs": 2790134,
+              "text": "な"
+            },
+            "adjacentWordGapMs": 1044,
+            "nearestCompactedSpeechBoundary": {
+              "timeMs": 2790074,
+              "kind": "start",
+              "speechId": 400,
+              "signedDistanceMs": 0,
+              "absoluteDistanceMs": 0
+            },
+            "immediatelyAfterTerminalPunctuation": false,
+            "immediatelyBeforeTerminalPunctuation": false,
+            "startsWithTransitionPhrase": [],
+            "leftFragment": "うん",
+            "rightFragment": "なん",
+            "markedContext": "うん【境界】なん",
+            "previousSentence": "ね",
+            "nextSentence": "か",
+            "reviewPrompt": "この境界は、新しい前提・出来事・発話の開始としてテキストだけで隣接候補より一意に選べるか。"
+          },
+          "end": {
+            "side": "end",
+            "boundaryMs": 2806680,
+            "beforeWord": {
+              "id": 13636,
+              "startMs": 2806600,
+              "endMs": 2806680,
+              "text": "い"
+            },
+            "afterWord": {
+              "id": 13637,
+              "startMs": 2806680,
+              "endMs": 2807720,
+              "text": "で"
+            },
+            "adjacentWordGapMs": 0,
+            "nearestCompactedSpeechBoundary": {
+              "timeMs": 2805559,
+              "kind": "end",
+              "speechId": 403,
+              "signedDistanceMs": -1121,
+              "absoluteDistanceMs": 1121
+            },
+            "immediatelyAfterTerminalPunctuation": false,
+            "immediatelyBeforeTerminalPunctuation": false,
+            "startsWithTransitionPhrase": [],
+            "leftFragment": "からついてこない",
+            "rightFragment": "で血を見ずにでも使ってな",
+            "markedContext": "からついてこない【境界】で血を見ずにでも使ってな",
+            "previousSentence": "気持ち悪い",
+            "nextSentence": "さ",
+            "reviewPrompt": "この境界は、文・反応・結論の完結としてテキストだけで隣接候補より一意に選べるか。"
+          }
+        },
+        {
+          "key": "nOEWCNc77MI_multiblock_material_v001:5",
+          "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+          "expectedIndex": 5,
+          "label": "block 7",
+          "sourceStartMs": 3006642,
+          "sourceEndMs": 3021412,
+          "start": {
+            "side": "start",
+            "boundaryMs": 3006642,
+            "beforeWord": {
+              "id": 14500,
+              "startMs": 3006542,
+              "endMs": 3006642,
+              "text": "わ"
+            },
+            "afterWord": {
+              "id": 14501,
+              "startMs": 3006642,
+              "endMs": 3006762,
+              "text": "れ"
+            },
+            "adjacentWordGapMs": 0,
+            "nearestCompactedSpeechBoundary": {
+              "timeMs": 3004881,
+              "kind": "end",
+              "speechId": 448,
+              "signedDistanceMs": -1761,
+              "absoluteDistanceMs": 1761
+            },
+            "immediatelyAfterTerminalPunctuation": false,
+            "immediatelyBeforeTerminalPunctuation": false,
+            "startsWithTransitionPhrase": [],
+            "leftFragment": "あのね、船が食わ",
+            "rightFragment": "れてま",
+            "markedContext": "あのね、船が食わ【境界】れてま",
+            "previousSentence": "?",
+            "nextSentence": "す",
+            "reviewPrompt": "この境界は、新しい前提・出来事・発話の開始としてテキストだけで隣接候補より一意に選べるか。"
+          },
+          "end": {
+            "side": "end",
+            "boundaryMs": 3021412,
+            "beforeWord": {
+              "id": 14582,
+              "startMs": 3021332,
+              "endMs": 3021412,
+              "text": "い"
+            },
+            "afterWord": {
+              "id": 14583,
+              "startMs": 3021412,
+              "endMs": 3021472,
+              "text": "よ"
+            },
+            "adjacentWordGapMs": 0,
+            "nearestCompactedSpeechBoundary": {
+              "timeMs": 3020432,
+              "kind": "end",
+              "speechId": 450,
+              "signedDistanceMs": -980,
+              "absoluteDistanceMs": 980
+            },
+            "immediatelyAfterTerminalPunctuation": false,
+            "immediatelyBeforeTerminalPunctuation": false,
+            "startsWithTransitionPhrase": [],
+            "leftFragment": "罰を与えたい",
+            "rightFragment": "よ",
+            "markedContext": "罰を与えたい【境界】よ",
+            "previousSentence": "と言うの?",
+            "nextSentence": "ね",
+            "reviewPrompt": "この境界は、文・反応・結論の完結としてテキストだけで隣接候補より一意に選べるか。"
+          }
+        },
+        {
+          "key": "nOEWCNc77MI_multiblock_material_v001:6",
+          "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+          "expectedIndex": 6,
+          "label": "block 8",
+          "sourceStartMs": 3180410,
+          "sourceEndMs": 3190215,
+          "start": {
+            "side": "start",
+            "boundaryMs": 3180410,
+            "beforeWord": {
+              "id": 15303,
+              "startMs": 3180290,
+              "endMs": 3180410,
+              "text": "し"
+            },
+            "afterWord": {
+              "id": 15304,
+              "startMs": 3180410,
+              "endMs": 3180670,
+              "text": "肉"
+            },
+            "adjacentWordGapMs": 0,
+            "nearestCompactedSpeechBoundary": {
+              "timeMs": 3180190,
+              "kind": "start",
+              "speechId": 470,
+              "signedDistanceMs": -220,
+              "absoluteDistanceMs": 220
+            },
+            "immediatelyAfterTerminalPunctuation": false,
+            "immediatelyBeforeTerminalPunctuation": false,
+            "startsWithTransitionPhrase": [],
+            "leftFragment": "しし",
+            "rightFragment": "肉焼いてる?",
+            "markedContext": "しし【境界】肉焼いてる?",
+            "previousSentence": "食材がさ多分どんどんなくなっちゃいそうでさこれさあー確かにそれあるな確かに?",
+            "nextSentence": "しし肉",
+            "reviewPrompt": "この境界は、新しい前提・出来事・発話の開始としてテキストだけで隣接候補より一意に選べるか。"
+          },
+          "end": {
+            "side": "end",
+            "boundaryMs": 3190215,
+            "beforeWord": {
+              "id": 15358,
+              "startMs": 3189374,
+              "endMs": 3190215,
+              "text": "い"
+            },
+            "afterWord": {
+              "id": 15359,
+              "startMs": 3190215,
+              "endMs": 3190315,
+              "text": "と"
+            },
+            "adjacentWordGapMs": 0,
+            "nearestCompactedSpeechBoundary": {
+              "timeMs": 3197098,
+              "kind": "end",
+              "speechId": 471,
+              "signedDistanceMs": 6883,
+              "absoluteDistanceMs": 6883
+            },
+            "immediatelyAfterTerminalPunctuation": false,
+            "immediatelyBeforeTerminalPunctuation": false,
+            "startsWithTransitionPhrase": [],
+            "leftFragment": "お前がちゃんとしない",
+            "rightFragment": "と子供に示しがつかないだろ見て",
+            "markedContext": "お前がちゃんとしない【境界】と子供に示しがつかないだろ見て",
+            "previousSentence": "た",
+            "nextSentence": "!",
+            "reviewPrompt": "この境界は、文・反応・結論の完結としてテキストだけで隣接候補より一意に選べるか。"
+          }
+        },
+        {
+          "key": "nOEWCNc77MI_multiblock_material_v001:7",
+          "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+          "expectedIndex": 7,
+          "label": "block 9",
+          "sourceStartMs": 3285387,
+          "sourceEndMs": 3288829,
+          "start": {
+            "side": "start",
+            "boundaryMs": 3285387,
+            "beforeWord": {
+              "id": 15813,
+              "startMs": 3285267,
+              "endMs": 3285387,
+              "text": "こ"
+            },
+            "afterWord": {
+              "id": 15814,
+              "startMs": 3285387,
+              "endMs": 3285568,
+              "text": "と"
+            },
+            "adjacentWordGapMs": 0,
+            "nearestCompactedSpeechBoundary": {
+              "timeMs": 3283867,
+              "kind": "end",
+              "speechId": 488,
+              "signedDistanceMs": -1520,
+              "absoluteDistanceMs": 1520
+            },
+            "immediatelyAfterTerminalPunctuation": false,
+            "immediatelyBeforeTerminalPunctuation": false,
+            "startsWithTransitionPhrase": [],
+            "leftFragment": "え、それさ、待ってねずこ",
+            "rightFragment": "とさ、それって共存してる",
+            "markedContext": "え、それさ、待ってねずこ【境界】とさ、それって共存してる",
+            "previousSentence": "せいちゃん、じゃあねずこよ。",
+            "nextSentence": "?",
+            "reviewPrompt": "この境界は、新しい前提・出来事・発話の開始としてテキストだけで隣接候補より一意に選べるか。"
+          },
+          "end": {
+            "side": "end",
+            "boundaryMs": 3288829,
+            "beforeWord": {
+              "id": 15832,
+              "startMs": 3288709,
+              "endMs": 3288829,
+              "text": "い"
+            },
+            "afterWord": {
+              "id": 15833,
+              "startMs": 3288829,
+              "endMs": 3290589,
+              "text": "!"
+            },
+            "adjacentWordGapMs": 0,
+            "nearestCompactedSpeechBoundary": {
+              "timeMs": 3287408,
+              "kind": "end",
+              "speechId": 489,
+              "signedDistanceMs": -1421,
+              "absoluteDistanceMs": 1421
+            },
+            "immediatelyAfterTerminalPunctuation": false,
+            "immediatelyBeforeTerminalPunctuation": true,
+            "startsWithTransitionPhrase": [],
+            "leftFragment": "い",
+            "rightFragment": "!",
+            "markedContext": "い【境界】!",
+            "previousSentence": "共存できな",
+            "nextSentence": "お",
+            "reviewPrompt": "この境界は、文・反応・結論の完結としてテキストだけで隣接候補より一意に選べるか。"
+          }
+        },
+        {
+          "key": "nOEWCNc77MI_multiblock_material_v001:8",
+          "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+          "expectedIndex": 8,
+          "label": "block 10",
+          "sourceStartMs": 3475241,
+          "sourceEndMs": 3485035,
+          "start": {
+            "side": "start",
+            "boundaryMs": 3475241,
+            "beforeWord": {
+              "id": 16180,
+              "startMs": 3475061,
+              "endMs": 3475241,
+              "text": "え"
+            },
+            "afterWord": {
+              "id": 16181,
+              "startMs": 3475241,
+              "endMs": 3475401,
+              "text": "や"
+            },
+            "adjacentWordGapMs": 0,
+            "nearestCompactedSpeechBoundary": {
+              "timeMs": 3479844,
+              "kind": "end",
+              "speechId": 503,
+              "signedDistanceMs": 4603,
+              "absoluteDistanceMs": 4603
+            },
+            "immediatelyAfterTerminalPunctuation": false,
+            "immediatelyBeforeTerminalPunctuation": false,
+            "startsWithTransitionPhrase": [],
+            "leftFragment": "え",
+            "rightFragment": "やばいマリリンち",
+            "markedContext": "え【境界】やばいマリリンち",
+            "previousSentence": "て",
+            "nextSentence": "ょっと待ってマジでさ食材なくなったけ",
+            "reviewPrompt": "この境界は、新しい前提・出来事・発話の開始としてテキストだけで隣接候補より一意に選べるか。"
+          },
+          "end": {
+            "side": "end",
+            "boundaryMs": 3485035,
+            "beforeWord": {
+              "id": 16236,
+              "startMs": 3485015,
+              "endMs": 3485035,
+              "text": "な"
+            },
+            "afterWord": {
+              "id": 16237,
+              "startMs": 3485035,
+              "endMs": 3485175,
+              "text": "、"
+            },
+            "adjacentWordGapMs": 0,
+            "nearestCompactedSpeechBoundary": {
+              "timeMs": 3485956,
+              "kind": "end",
+              "speechId": 504,
+              "signedDistanceMs": 921,
+              "absoluteDistanceMs": 921
+            },
+            "immediatelyAfterTerminalPunctuation": false,
+            "immediatelyBeforeTerminalPunctuation": false,
+            "startsWithTransitionPhrase": [],
+            "leftFragment": "ねーすごいな",
+            "rightFragment": "、シェフ?",
+            "markedContext": "ねーすごいな【境界】、シェフ?",
+            "previousSentence": "ね",
+            "nextSentence": "シェ",
+            "reviewPrompt": "この境界は、文・反応・結論の完結としてテキストだけで隣接候補より一意に選べるか。"
+          }
+        },
+        {
+          "key": "nOEWCNc77MI_multiblock_material_v001:9",
+          "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+          "expectedIndex": 9,
+          "label": "block 11",
+          "sourceStartMs": 3998452,
+          "sourceEndMs": 4026707,
+          "start": {
+            "side": "start",
+            "boundaryMs": 3998452,
+            "beforeWord": {
+              "id": 18595,
+              "startMs": 3998252,
+              "endMs": 3998452,
+              "text": "ン"
+            },
+            "afterWord": {
+              "id": 18596,
+              "startMs": 3998452,
+              "endMs": 3998612,
+              "text": "今"
+            },
+            "adjacentWordGapMs": 0,
+            "nearestCompactedSpeechBoundary": {
+              "timeMs": 3991226,
+              "kind": "start",
+              "speechId": 578,
+              "signedDistanceMs": -7226,
+              "absoluteDistanceMs": 7226
+            },
+            "immediatelyAfterTerminalPunctuation": false,
+            "immediatelyBeforeTerminalPunctuation": false,
+            "startsWithTransitionPhrase": [],
+            "leftFragment": "マリリン",
+            "rightFragment": "今更なんだけどさコーネのさ顔さもうちょい下げてもいいかもよマリリンの顔がさ可愛いフェイスが見えなくなっちゃうあでもね船長はねこうやって下を向いた時にコーネのねあの頭の匂い",
+            "markedContext": "マリリン【境界】今更なんだけどさコーネのさ顔さもうちょい下げてもいいかもよマリリンの顔がさ可愛いフェイスが見えなくなっちゃうあでもね船長はねこうやって下を向いた時にコーネのねあの頭の匂い",
+            "previousSentence": "か",
+            "nextSentence": "嗅いでるのからえ、いい匂い?",
+            "reviewPrompt": "この境界は、新しい前提・出来事・発話の開始としてテキストだけで隣接候補より一意に選べるか。"
+          },
+          "end": {
+            "side": "end",
+            "boundaryMs": 4026707,
+            "beforeWord": {
+              "id": 18728,
+              "startMs": 4026587,
+              "endMs": 4026707,
+              "text": "く"
+            },
+            "afterWord": {
+              "id": 18729,
+              "startMs": 4026707,
+              "endMs": 4027247,
+              "text": "や"
+            },
+            "adjacentWordGapMs": 0,
+            "nearestCompactedSpeechBoundary": {
+              "timeMs": 4023866,
+              "kind": "start",
+              "speechId": 580,
+              "signedDistanceMs": -2841,
+              "absoluteDistanceMs": 2841
+            },
+            "immediatelyAfterTerminalPunctuation": false,
+            "immediatelyBeforeTerminalPunctuation": false,
+            "startsWithTransitionPhrase": [],
+            "leftFragment": "じわじわ泣く",
+            "rightFragment": "や",
+            "markedContext": "じわじわ泣く【境界】や",
+            "previousSentence": "で時間かかるからねごめんね",
+            "nextSentence": "ん早よ泣け",
+            "reviewPrompt": "この境界は、文・反応・結論の完結としてテキストだけで隣接候補より一意に選べるか。"
+          }
+        },
+        {
+          "key": "nOEWCNc77MI_multiblock_material_v001:10",
+          "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+          "expectedIndex": 10,
+          "label": "block 13",
+          "sourceStartMs": 4877136,
+          "sourceEndMs": 4889844,
+          "start": {
+            "side": "start",
+            "boundaryMs": 4877136,
+            "beforeWord": {
+              "id": 22757,
+              "startMs": 4876836,
+              "endMs": 4877136,
+              "text": "な"
+            },
+            "afterWord": {
+              "id": 22758,
+              "startMs": 4877136,
+              "endMs": 4877156,
+              "text": "か"
+            },
+            "adjacentWordGapMs": 0,
+            "nearestCompactedSpeechBoundary": {
+              "timeMs": 4889844,
+              "kind": "end",
+              "speechId": 727,
+              "signedDistanceMs": 12708,
+              "absoluteDistanceMs": 12708
+            },
+            "immediatelyAfterTerminalPunctuation": false,
+            "immediatelyBeforeTerminalPunctuation": false,
+            "startsWithTransitionPhrase": [],
+            "leftFragment": "ナイスあれ取ろっかなな",
+            "rightFragment": "かなかさいいよ取るよコーネ",
+            "markedContext": "ナイスあれ取ろっかなな【境界】かなかさいいよ取るよコーネ",
+            "previousSentence": "た",
+            "nextSentence": "がせ",
+            "reviewPrompt": "この境界は、新しい前提・出来事・発話の開始としてテキストだけで隣接候補より一意に選べるか。"
+          },
+          "end": {
+            "side": "end",
+            "boundaryMs": 4889844,
+            "beforeWord": {
+              "id": 22798,
+              "startMs": 4889824,
+              "endMs": 4889844,
+              "text": "戸"
+            },
+            "afterWord": {
+              "id": 22799,
+              "startMs": 4891646,
+              "endMs": 4894007,
+              "text": "い"
+            },
+            "adjacentWordGapMs": 1802,
+            "nearestCompactedSpeechBoundary": {
+              "timeMs": 4889844,
+              "kind": "end",
+              "speechId": 727,
+              "signedDistanceMs": 0,
+              "absoluteDistanceMs": 0
+            },
+            "immediatelyAfterTerminalPunctuation": false,
+            "immediatelyBeforeTerminalPunctuation": false,
+            "startsWithTransitionPhrase": [],
+            "leftFragment": "謎の今の江戸",
+            "rightFragment": "い",
+            "markedContext": "謎の今の江戸【境界】い",
+            "previousSentence": "し",
+            "nextSentence": "やでもこれいいなネッ",
+            "reviewPrompt": "この境界は、文・反応・結論の完結としてテキストだけで隣接候補より一意に選べるか。"
+          }
+        },
+        {
+          "key": "nOEWCNc77MI_multiblock_material_v001:11",
+          "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+          "expectedIndex": 11,
+          "label": "block 14",
+          "sourceStartMs": 5183974,
+          "sourceEndMs": 5189318,
+          "start": {
+            "side": "start",
+            "boundaryMs": 5183974,
+            "beforeWord": {
+              "id": 24053,
+              "startMs": 5183954,
+              "endMs": 5183974,
+              "text": "う"
+            },
+            "afterWord": {
+              "id": 24054,
+              "startMs": 5183974,
+              "endMs": 5184134,
+              "text": "の"
+            },
+            "adjacentWordGapMs": 0,
+            "nearestCompactedSpeechBoundary": {
+              "timeMs": 5189318,
+              "kind": "end",
+              "speechId": 770,
+              "signedDistanceMs": 5344,
+              "absoluteDistanceMs": 5344
+            },
+            "immediatelyAfterTerminalPunctuation": false,
+            "immediatelyBeforeTerminalPunctuation": false,
+            "startsWithTransitionPhrase": [],
+            "leftFragment": "今の面白いいやそういう",
+            "rightFragment": "の好きなんだよねそういうくだらないやつがさそんなおもろくないことでいっぱい笑われると気まず",
+            "markedContext": "今の面白いいやそういう【境界】の好きなんだよねそういうくだらないやつがさそんなおもろくないことでいっぱい笑われると気まず",
+            "previousSentence": "ら",
+            "nextSentence": "そんな面白くないと思っ",
+            "reviewPrompt": "この境界は、新しい前提・出来事・発話の開始としてテキストだけで隣接候補より一意に選べるか。"
+          },
+          "end": {
+            "side": "end",
+            "boundaryMs": 5189318,
+            "beforeWord": {
+              "id": 24098,
+              "startMs": 5189298,
+              "endMs": 5189318,
+              "text": "ず"
+            },
+            "afterWord": {
+              "id": 24099,
+              "startMs": 5190322,
+              "endMs": 5190362,
+              "text": "そ"
+            },
+            "adjacentWordGapMs": 1004,
+            "nearestCompactedSpeechBoundary": {
+              "timeMs": 5189318,
+              "kind": "end",
+              "speechId": 770,
+              "signedDistanceMs": 0,
+              "absoluteDistanceMs": 0
+            },
+            "immediatelyAfterTerminalPunctuation": false,
+            "immediatelyBeforeTerminalPunctuation": false,
+            "startsWithTransitionPhrase": [],
+            "leftFragment": "今の面白いいやそういうの好きなんだよねそういうくだらないやつがさそんなおもろくないことでいっぱい笑われると気まず",
+            "rightFragment": "そんな面白くないと思っ",
+            "markedContext": "今の面白いいやそういうの好きなんだよねそういうくだらないやつがさそんなおもろくないことでいっぱい笑われると気まず【境界】そんな面白くないと思っ",
+            "previousSentence": "ら",
+            "nextSentence": "た",
+            "reviewPrompt": "この境界は、文・反応・結論の完結としてテキストだけで隣接候補より一意に選べるか。"
+          }
+        },
+        {
+          "key": "nOEWCNc77MI_multiblock_material_v001:12",
+          "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+          "expectedIndex": 12,
+          "label": "block 15",
+          "sourceStartMs": 5217231,
+          "sourceEndMs": 5218992,
+          "start": {
+            "side": "start",
+            "boundaryMs": 5217231,
+            "beforeWord": {
+              "id": 24200,
+              "startMs": 5217211,
+              "endMs": 5217231,
+              "text": "ね"
+            },
+            "afterWord": {
+              "id": 24201,
+              "startMs": 5217231,
+              "endMs": 5217331,
+              "text": "気"
+            },
+            "adjacentWordGapMs": 0,
+            "nearestCompactedSpeechBoundary": {
+              "timeMs": 5219192,
+              "kind": "end",
+              "speechId": 777,
+              "signedDistanceMs": 1961,
+              "absoluteDistanceMs": 1961
+            },
+            "immediatelyAfterTerminalPunctuation": false,
+            "immediatelyBeforeTerminalPunctuation": false,
+            "startsWithTransitionPhrase": [],
+            "leftFragment": "、ごめんね",
+            "rightFragment": "気づけなくてごめんそういう演技",
+            "markedContext": "、ごめんね【境界】気づけなくてごめんそういう演技",
+            "previousSentence": "ね",
+            "nextSentence": "ごめんねごめんね縁目だからちゃんと読んできた縁目今日の縁目縁目?",
+            "reviewPrompt": "この境界は、新しい前提・出来事・発話の開始としてテキストだけで隣接候補より一意に選べるか。"
+          },
+          "end": {
+            "side": "end",
+            "boundaryMs": 5218992,
+            "beforeWord": {
+              "id": 24213,
+              "startMs": 5218912,
+              "endMs": 5218992,
+              "text": "う"
+            },
+            "afterWord": {
+              "id": 24214,
+              "startMs": 5218992,
+              "endMs": 5219172,
+              "text": "演"
+            },
+            "adjacentWordGapMs": 0,
+            "nearestCompactedSpeechBoundary": {
+              "timeMs": 5219192,
+              "kind": "end",
+              "speechId": 777,
+              "signedDistanceMs": 200,
+              "absoluteDistanceMs": 200
+            },
+            "immediatelyAfterTerminalPunctuation": false,
+            "immediatelyBeforeTerminalPunctuation": false,
+            "startsWithTransitionPhrase": [],
+            "leftFragment": "、ごめんね気づけなくてごめんそういう",
+            "rightFragment": "演技",
+            "markedContext": "、ごめんね気づけなくてごめんそういう【境界】演技",
+            "previousSentence": "ね",
+            "nextSentence": "ごめんねごめんね縁目だからちゃんと読んできた縁目今日の縁目縁目?",
+            "reviewPrompt": "この境界は、文・反応・結論の完結としてテキストだけで隣接候補より一意に選べるか。"
+          }
+        },
+        {
+          "key": "nOEWCNc77MI_multiblock_material_v001:13",
+          "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+          "expectedIndex": 13,
+          "label": "block 17",
+          "sourceStartMs": 11541555,
+          "sourceEndMs": 11575281,
+          "start": {
+            "side": "start",
+            "boundaryMs": 11541555,
+            "beforeWord": {
+              "id": 52547,
+              "startMs": 11539694,
+              "endMs": 11541555,
+              "text": "ー"
+            },
+            "afterWord": {
+              "id": 52548,
+              "startMs": 11541555,
+              "endMs": 11541615,
+              "text": "終"
+            },
+            "adjacentWordGapMs": 0,
+            "nearestCompactedSpeechBoundary": {
+              "timeMs": 11549658,
+              "kind": "end",
+              "speechId": 1719,
+              "signedDistanceMs": 8103,
+              "absoluteDistanceMs": 8103
+            },
+            "immediatelyAfterTerminalPunctuation": false,
+            "immediatelyBeforeTerminalPunctuation": false,
+            "startsWithTransitionPhrase": [],
+            "leftFragment": "ー",
+            "rightFragment": "終わりが見えないな、ちょっと閉めだけし",
+            "markedContext": "ー【境界】終わりが見えないな、ちょっと閉めだけし",
+            "previousSentence": "、いいでしょ最高ここベッドルームねいや、いいな",
+            "nextSentence": "て",
+            "reviewPrompt": "この境界は、新しい前提・出来事・発話の開始としてテキストだけで隣接候補より一意に選べるか。"
+          },
+          "end": {
+            "side": "end",
+            "boundaryMs": 11575281,
+            "beforeWord": {
+              "id": 52689,
+              "startMs": 11574521,
+              "endMs": 11575281,
+              "text": "な"
+            },
+            "afterWord": {
+              "id": 52690,
+              "startMs": 11575281,
+              "endMs": 11575521,
+              "text": "い"
+            },
+            "adjacentWordGapMs": 0,
+            "nearestCompactedSpeechBoundary": {
+              "timeMs": 11578423,
+              "kind": "end",
+              "speechId": 1725,
+              "signedDistanceMs": 3142,
+              "absoluteDistanceMs": 3142
+            },
+            "immediatelyAfterTerminalPunctuation": false,
+            "immediatelyBeforeTerminalPunctuation": false,
+            "startsWithTransitionPhrase": [],
+            "leftFragment": "よくはな",
+            "rightFragment": "い選んでんだちゃっかりちゃっ",
+            "markedContext": "よくはな【境界】い選んでんだちゃっかりちゃっ",
+            "previousSentence": "誰でも",
+            "nextSentence": "かり選んでるよ",
+            "reviewPrompt": "この境界は、文・反応・結論の完結としてテキストだけで隣接候補より一意に選べるか。"
+          }
+        }
+      ]
+    },
+    {
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "sourceVideoId": "o8rZAhARXAc",
+      "expectedCutCount": 25,
+      "cuts": [
+        {
+          "key": "9dtwF5Exu5w_multiblock_material_v001:1",
+          "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+          "expectedIndex": 1,
+          "label": "block 1",
+          "sourceStartMs": 281521,
+          "sourceEndMs": 282642,
+          "start": {
+            "side": "start",
+            "boundaryMs": 281521,
+            "beforeWord": {
+              "id": 830,
+              "startMs": 281321,
+              "endMs": 281521,
+              "text": "す"
+            },
+            "afterWord": {
+              "id": 831,
+              "startMs": 281521,
+              "endMs": 281562,
+              "text": "あ"
+            },
+            "adjacentWordGapMs": 0,
+            "nearestCompactedSpeechBoundary": {
+              "timeMs": 280801,
+              "kind": "end",
+              "speechId": 18,
+              "signedDistanceMs": -720,
+              "absoluteDistanceMs": 720
+            },
+            "immediatelyAfterTerminalPunctuation": false,
+            "immediatelyBeforeTerminalPunctuation": false,
+            "startsWithTransitionPhrase": [],
+            "leftFragment": "んー1で紅白使ってます",
+            "rightFragment": "あ、オッケオッケオッケオッケあ、占い師が出るかも?",
+            "markedContext": "んー1で紅白使ってます【境界】あ、オッケオッケオッケオッケあ、占い師が出るかも?",
+            "previousSentence": "いいのか?",
+            "nextSentence": "あ、オッケオッケオッケオッケじゃあ、一旦1で紅白戦",
+            "reviewPrompt": "この境界は、新しい前提・出来事・発話の開始としてテキストだけで隣接候補より一意に選べるか。"
+          },
+          "end": {
+            "side": "end",
+            "boundaryMs": 282642,
+            "beforeWord": {
+              "id": 844,
+              "startMs": 282122,
+              "endMs": 282642,
+              "text": "ケ"
+            },
+            "afterWord": {
+              "id": 845,
+              "startMs": 282642,
+              "endMs": 282722,
+              "text": "あ"
+            },
+            "adjacentWordGapMs": 0,
+            "nearestCompactedSpeechBoundary": {
+              "timeMs": 283863,
+              "kind": "end",
+              "speechId": 19,
+              "signedDistanceMs": 1221,
+              "absoluteDistanceMs": 1221
+            },
+            "immediatelyAfterTerminalPunctuation": false,
+            "immediatelyBeforeTerminalPunctuation": false,
+            "startsWithTransitionPhrase": [],
+            "leftFragment": "んー1で紅白使ってますあ、オッケオッケオッケオッケ",
+            "rightFragment": "あ、占い師が出るかも?",
+            "markedContext": "んー1で紅白使ってますあ、オッケオッケオッケオッケ【境界】あ、占い師が出るかも?",
+            "previousSentence": "いいのか?",
+            "nextSentence": "あ、オッケオッケオッケオッケじゃあ、一旦1で紅白戦",
+            "reviewPrompt": "この境界は、文・反応・結論の完結としてテキストだけで隣接候補より一意に選べるか。"
+          }
+        },
+        {
+          "key": "9dtwF5Exu5w_multiblock_material_v001:2",
+          "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+          "expectedIndex": 2,
+          "label": "block 2",
+          "sourceStartMs": 300714,
+          "sourceEndMs": 301675,
+          "start": {
+            "side": "start",
+            "boundaryMs": 300714,
+            "beforeWord": {
+              "id": 957,
+              "startMs": 300614,
+              "endMs": 300714,
+              "text": "ろ"
+            },
+            "afterWord": {
+              "id": 958,
+              "startMs": 300714,
+              "endMs": 300834,
+              "text": "な"
+            },
+            "adjacentWordGapMs": 0,
+            "nearestCompactedSpeechBoundary": {
+              "timeMs": 300034,
+              "kind": "start",
+              "speechId": 21,
+              "signedDistanceMs": -680,
+              "absoluteDistanceMs": 680
+            },
+            "immediatelyAfterTerminalPunctuation": false,
+            "immediatelyBeforeTerminalPunctuation": false,
+            "startsWithTransitionPhrase": [],
+            "leftFragment": "しばらくいろいろ",
+            "rightFragment": "な出会いがありそうです",
+            "markedContext": "しばらくいろいろ【境界】な出会いがありそうです",
+            "previousSentence": "ファッション監督優勝したことで我が校への注目度が高まっています",
+            "nextSentence": "ね",
+            "reviewPrompt": "この境界は、新しい前提・出来事・発話の開始としてテキストだけで隣接候補より一意に選べるか。"
+          },
+          "end": {
+            "side": "end",
+            "boundaryMs": 301675,
+            "beforeWord": {
+              "id": 967,
+              "startMs": 301575,
+              "endMs": 301675,
+              "text": "で"
+            },
+            "afterWord": {
+              "id": 968,
+              "startMs": 301675,
+              "endMs": 301735,
+              "text": "す"
+            },
+            "adjacentWordGapMs": 0,
+            "nearestCompactedSpeechBoundary": {
+              "timeMs": 300034,
+              "kind": "start",
+              "speechId": 21,
+              "signedDistanceMs": -1641,
+              "absoluteDistanceMs": 1641
+            },
+            "immediatelyAfterTerminalPunctuation": false,
+            "immediatelyBeforeTerminalPunctuation": false,
+            "startsWithTransitionPhrase": [],
+            "leftFragment": "しばらくいろいろな出会いがありそうで",
+            "rightFragment": "す",
+            "markedContext": "しばらくいろいろな出会いがありそうで【境界】す",
+            "previousSentence": "ファッション監督優勝したことで我が校への注目度が高まっています",
+            "nextSentence": "ね",
+            "reviewPrompt": "この境界は、文・反応・結論の完結としてテキストだけで隣接候補より一意に選べるか。"
+          }
+        },
+        {
+          "key": "9dtwF5Exu5w_multiblock_material_v001:3",
+          "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+          "expectedIndex": 3,
+          "label": "block 3",
+          "sourceStartMs": 338755,
+          "sourceEndMs": 341516,
+          "start": {
+            "side": "start",
+            "boundaryMs": 338755,
+            "beforeWord": {
+              "id": 1148,
+              "startMs": 338615,
+              "endMs": 338755,
+              "text": "い"
+            },
+            "afterWord": {
+              "id": 1149,
+              "startMs": 338755,
+              "endMs": 338815,
+              "text": "師"
+            },
+            "adjacentWordGapMs": 0,
+            "nearestCompactedSpeechBoundary": {
+              "timeMs": 338495,
+              "kind": "end",
+              "speechId": 32,
+              "signedDistanceMs": -260,
+              "absoluteDistanceMs": 260
+            },
+            "immediatelyAfterTerminalPunctuation": false,
+            "immediatelyBeforeTerminalPunctuation": false,
+            "startsWithTransitionPhrase": [],
+            "leftFragment": "占い",
+            "rightFragment": "師といろんな奴",
+            "markedContext": "占い【境界】師といろんな奴",
+            "previousSentence": "テンション上がんなかったあ、占い師!",
+            "nextSentence": "ら",
+            "reviewPrompt": "この境界は、新しい前提・出来事・発話の開始としてテキストだけで隣接候補より一意に選べるか。"
+          },
+          "end": {
+            "side": "end",
+            "boundaryMs": 341516,
+            "beforeWord": {
+              "id": 1169,
+              "startMs": 341456,
+              "endMs": 341516,
+              "text": "奴"
+            },
+            "afterWord": {
+              "id": 1170,
+              "startMs": 341516,
+              "endMs": 341877,
+              "text": "ら"
+            },
+            "adjacentWordGapMs": 0,
+            "nearestCompactedSpeechBoundary": {
+              "timeMs": 338495,
+              "kind": "end",
+              "speechId": 32,
+              "signedDistanceMs": -3021,
+              "absoluteDistanceMs": 3021
+            },
+            "immediatelyAfterTerminalPunctuation": false,
+            "immediatelyBeforeTerminalPunctuation": false,
+            "startsWithTransitionPhrase": [],
+            "leftFragment": "ショップ店員とかいろんな奴",
+            "rightFragment": "ら",
+            "markedContext": "ショップ店員とかいろんな奴【境界】ら",
+            "previousSentence": "ら",
+            "nextSentence": "を",
+            "reviewPrompt": "この境界は、文・反応・結論の完結としてテキストだけで隣接候補より一意に選べるか。"
+          }
+        },
+        {
+          "key": "9dtwF5Exu5w_multiblock_material_v001:4",
+          "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+          "expectedIndex": 4,
+          "label": "block 4",
+          "sourceStartMs": 441877,
+          "sourceEndMs": 447039,
+          "start": {
+            "side": "start",
+            "boundaryMs": 441877,
+            "beforeWord": {
+              "id": 1561,
+              "startMs": 441797,
+              "endMs": 441877,
+              "text": "イ"
+            },
+            "afterWord": {
+              "id": 1562,
+              "startMs": 441877,
+              "endMs": 441997,
+              "text": "チ"
+            },
+            "adjacentWordGapMs": 0,
+            "nearestCompactedSpeechBoundary": {
+              "timeMs": 441797,
+              "kind": "end",
+              "speechId": 43,
+              "signedDistanceMs": -80,
+              "absoluteDistanceMs": 80
+            },
+            "immediatelyAfterTerminalPunctuation": false,
+            "immediatelyBeforeTerminalPunctuation": false,
+            "startsWithTransitionPhrase": [],
+            "leftFragment": "イ",
+            "rightFragment": "チナ?",
+            "markedContext": "イ【境界】チナ?",
+            "previousSentence": "タコッチョー使おうとりあえずイチナ?",
+            "nextSentence": "どうせ消えるもんねえ、待って覚えとかないと誰調査した",
+            "reviewPrompt": "この境界は、新しい前提・出来事・発話の開始としてテキストだけで隣接候補より一意に選べるか。"
+          },
+          "end": {
+            "side": "end",
+            "boundaryMs": 447039,
+            "beforeWord": {
+              "id": 1591,
+              "startMs": 445618,
+              "endMs": 447039,
+              "text": "か"
+            },
+            "afterWord": {
+              "id": 1592,
+              "startMs": 447039,
+              "endMs": 447179,
+              "text": "え"
+            },
+            "adjacentWordGapMs": 0,
+            "nearestCompactedSpeechBoundary": {
+              "timeMs": 449540,
+              "kind": "end",
+              "speechId": 45,
+              "signedDistanceMs": 2501,
+              "absoluteDistanceMs": 2501
+            },
+            "immediatelyAfterTerminalPunctuation": false,
+            "immediatelyBeforeTerminalPunctuation": false,
+            "startsWithTransitionPhrase": [],
+            "leftFragment": "か",
+            "rightFragment": "え、強いと",
+            "markedContext": "か【境界】え、強いと",
+            "previousSentence": "どうせ消えるもんねえ、待って覚えとかないと誰調査した",
+            "nextSentence": "こがいいよ",
+            "reviewPrompt": "この境界は、文・反応・結論の完結としてテキストだけで隣接候補より一意に選べるか。"
+          }
+        },
+        {
+          "key": "9dtwF5Exu5w_multiblock_material_v001:5",
+          "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+          "expectedIndex": 5,
+          "label": "block 5",
+          "sourceStartMs": 502720,
+          "sourceEndMs": 517104,
+          "start": {
+            "side": "start",
+            "boundaryMs": 502720,
+            "beforeWord": {
+              "id": 1706,
+              "startMs": 502460,
+              "endMs": 502720,
+              "text": "テ"
+            },
+            "afterWord": {
+              "id": 1707,
+              "startMs": 502720,
+              "endMs": 502780,
+              "text": "ン"
+            },
+            "adjacentWordGapMs": 0,
+            "nearestCompactedSpeechBoundary": {
+              "timeMs": 503300,
+              "kind": "end",
+              "speechId": 49,
+              "signedDistanceMs": 580,
+              "absoluteDistanceMs": 580
+            },
+            "immediatelyAfterTerminalPunctuation": false,
+            "immediatelyBeforeTerminalPunctuation": false,
+            "startsWithTransitionPhrase": [],
+            "leftFragment": "チョプテ",
+            "rightFragment": "ン何くれたの?",
+            "markedContext": "チョプテ【境界】ン何くれたの?",
+            "previousSentence": "はい",
+            "nextSentence": "何くれたの?",
+            "reviewPrompt": "この境界は、新しい前提・出来事・発話の開始としてテキストだけで隣接候補より一意に選べるか。"
+          },
+          "end": {
+            "side": "end",
+            "boundaryMs": 517104,
+            "beforeWord": {
+              "id": 1774,
+              "startMs": 517084,
+              "endMs": 517104,
+              "text": "ょ"
+            },
+            "afterWord": {
+              "id": 1775,
+              "startMs": 517104,
+              "endMs": 517124,
+              "text": "っ"
+            },
+            "adjacentWordGapMs": 0,
+            "nearestCompactedSpeechBoundary": {
+              "timeMs": 516924,
+              "kind": "end",
+              "speechId": 55,
+              "signedDistanceMs": -180,
+              "absoluteDistanceMs": 180
+            },
+            "immediatelyAfterTerminalPunctuation": false,
+            "immediatelyBeforeTerminalPunctuation": false,
+            "startsWithTransitionPhrase": [],
+            "leftFragment": "え、ちょ",
+            "rightFragment": "っと待って",
+            "markedContext": "え、ちょ【境界】っと待って",
+            "previousSentence": "?",
+            "nextSentence": "!",
+            "reviewPrompt": "この境界は、文・反応・結論の完結としてテキストだけで隣接候補より一意に選べるか。"
+          }
+        },
+        {
+          "key": "9dtwF5Exu5w_multiblock_material_v001:6",
+          "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+          "expectedIndex": 6,
+          "label": "block 6",
+          "sourceStartMs": 1250139,
+          "sourceEndMs": 1254342,
+          "start": {
+            "side": "start",
+            "boundaryMs": 1250139,
+            "beforeWord": {
+              "id": 4475,
+              "startMs": 1246577,
+              "endMs": 1250139,
+              "text": "ね"
+            },
+            "afterWord": {
+              "id": 4476,
+              "startMs": 1250139,
+              "endMs": 1250239,
+              "text": "ク"
+            },
+            "adjacentWordGapMs": 0,
+            "nearestCompactedSpeechBoundary": {
+              "timeMs": 1253121,
+              "kind": "end",
+              "speechId": 153,
+              "signedDistanceMs": 2982,
+              "absoluteDistanceMs": 2982
+            },
+            "immediatelyAfterTerminalPunctuation": false,
+            "immediatelyBeforeTerminalPunctuation": false,
+            "startsWithTransitionPhrase": [],
+            "leftFragment": "よね",
+            "rightFragment": "クレッセントムーンとかなん",
+            "markedContext": "よね【境界】クレッセントムーンとかなん",
+            "previousSentence": "よね終了でいいんだ",
+            "nextSentence": "か",
+            "reviewPrompt": "この境界は、新しい前提・出来事・発話の開始としてテキストだけで隣接候補より一意に選べるか。"
+          },
+          "end": {
+            "side": "end",
+            "boundaryMs": 1254342,
+            "beforeWord": {
+              "id": 4505,
+              "startMs": 1253621,
+              "endMs": 1254342,
+              "text": "ど"
+            },
+            "afterWord": {
+              "id": 4506,
+              "startMs": 1254342,
+              "endMs": 1254402,
+              "text": "見"
+            },
+            "adjacentWordGapMs": 0,
+            "nearestCompactedSpeechBoundary": {
+              "timeMs": 1254562,
+              "kind": "end",
+              "speechId": 154,
+              "signedDistanceMs": 220,
+              "absoluteDistanceMs": 220
+            },
+            "immediatelyAfterTerminalPunctuation": false,
+            "immediatelyBeforeTerminalPunctuation": false,
+            "startsWithTransitionPhrase": [],
+            "leftFragment": "ど",
+            "rightFragment": "見るか",
+            "markedContext": "ど【境界】見るか",
+            "previousSentence": "なんか知らんけ",
+            "nextSentence": "よくな",
+            "reviewPrompt": "この境界は、文・反応・結論の完結としてテキストだけで隣接候補より一意に選べるか。"
+          }
+        },
+        {
+          "key": "9dtwF5Exu5w_multiblock_material_v001:7",
+          "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+          "expectedIndex": 7,
+          "label": "block 7",
+          "sourceStartMs": 2013635,
+          "sourceEndMs": 2017195,
+          "start": {
+            "side": "start",
+            "boundaryMs": 2013635,
+            "beforeWord": {
+              "id": 6625,
+              "startMs": 2012234,
+              "endMs": 2013635,
+              "text": "と"
+            },
+            "afterWord": {
+              "id": 6626,
+              "startMs": 2013635,
+              "endMs": 2013655,
+              "text": "リ"
+            },
+            "adjacentWordGapMs": 0,
+            "nearestCompactedSpeechBoundary": {
+              "timeMs": 2010874,
+              "kind": "start",
+              "speechId": 220,
+              "signedDistanceMs": -2761,
+              "absoluteDistanceMs": 2761
+            },
+            "immediatelyAfterTerminalPunctuation": false,
+            "immediatelyBeforeTerminalPunctuation": false,
+            "startsWithTransitionPhrase": [],
+            "leftFragment": "っと",
+            "rightFragment": "リリカコロナなのにどうもありがとうごめんなコロナ中にありがとうえっとリリカが去年ボタン先輩にお伝えしたのオリジナル九州やっぱりフォークが一番強いとのことおーなる",
+            "markedContext": "っと【境界】リリカコロナなのにどうもありがとうごめんなコロナ中にありがとうえっとリリカが去年ボタン先輩にお伝えしたのオリジナル九州やっぱりフォークが一番強いとのことおーなる",
+            "previousSentence": "リリカがチャットくれてるえ",
+            "nextSentence": "ほ",
+            "reviewPrompt": "この境界は、新しい前提・出来事・発話の開始としてテキストだけで隣接候補より一意に選べるか。"
+          },
+          "end": {
+            "side": "end",
+            "boundaryMs": 2017195,
+            "beforeWord": {
+              "id": 6652,
+              "startMs": 2017135,
+              "endMs": 2017195,
+              "text": "あ"
+            },
+            "afterWord": {
+              "id": 6653,
+              "startMs": 2017195,
+              "endMs": 2017255,
+              "text": "り"
+            },
+            "adjacentWordGapMs": 0,
+            "nearestCompactedSpeechBoundary": {
+              "timeMs": 2010874,
+              "kind": "start",
+              "speechId": 220,
+              "signedDistanceMs": -6321,
+              "absoluteDistanceMs": 6321
+            },
+            "immediatelyAfterTerminalPunctuation": false,
+            "immediatelyBeforeTerminalPunctuation": false,
+            "startsWithTransitionPhrase": [],
+            "leftFragment": "リリカコロナなのにどうもありがとうごめんなコロナ中にあ",
+            "rightFragment": "りがとうえっとリリカが去年ボタン先輩にお伝えしたのオリジナル九州やっぱりフォークが一番強いとのことおーなる",
+            "markedContext": "リリカコロナなのにどうもありがとうごめんなコロナ中にあ【境界】りがとうえっとリリカが去年ボタン先輩にお伝えしたのオリジナル九州やっぱりフォークが一番強いとのことおーなる",
+            "previousSentence": "っと",
+            "nextSentence": "ほ",
+            "reviewPrompt": "この境界は、文・反応・結論の完結としてテキストだけで隣接候補より一意に選べるか。"
+          }
+        },
+        {
+          "key": "9dtwF5Exu5w_multiblock_material_v001:8",
+          "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+          "expectedIndex": 8,
+          "label": "block 9",
+          "sourceStartMs": 3690566,
+          "sourceEndMs": 3697689,
+          "start": {
+            "side": "start",
+            "boundaryMs": 3690566,
+            "beforeWord": {
+              "id": 10732,
+              "startMs": 3685018,
+              "endMs": 3685038,
+              "text": "れ"
+            },
+            "afterWord": {
+              "id": 10733,
+              "startMs": 3690566,
+              "endMs": 3690726,
+              "text": "諸"
+            },
+            "adjacentWordGapMs": 5528,
+            "nearestCompactedSpeechBoundary": {
+              "timeMs": 3690566,
+              "kind": "start",
+              "speechId": 351,
+              "signedDistanceMs": 0,
+              "absoluteDistanceMs": 0
+            },
+            "immediatelyAfterTerminalPunctuation": false,
+            "immediatelyBeforeTerminalPunctuation": false,
+            "startsWithTransitionPhrase": [],
+            "leftFragment": "マジ分からんなもうこれ",
+            "rightFragment": "諸説ありすぎて喧嘩になってるから助けてマジ",
+            "markedContext": "マジ分からんなもうこれ【境界】諸説ありすぎて喧嘩になってるから助けてマジ",
+            "previousSentence": "分からんな",
+            "nextSentence": "で",
+            "reviewPrompt": "この境界は、新しい前提・出来事・発話の開始としてテキストだけで隣接候補より一意に選べるか。"
+          },
+          "end": {
+            "side": "end",
+            "boundaryMs": 3697689,
+            "beforeWord": {
+              "id": 10773,
+              "startMs": 3697549,
+              "endMs": 3697689,
+              "text": "な"
+            },
+            "afterWord": {
+              "id": 10774,
+              "startMs": 3697689,
+              "endMs": 3697789,
+              "text": "い"
+            },
+            "adjacentWordGapMs": 0,
+            "nearestCompactedSpeechBoundary": {
+              "timeMs": 3690566,
+              "kind": "start",
+              "speechId": 351,
+              "signedDistanceMs": -7123,
+              "absoluteDistanceMs": 7123
+            },
+            "immediatelyAfterTerminalPunctuation": false,
+            "immediatelyBeforeTerminalPunctuation": false,
+            "startsWithTransitionPhrase": [],
+            "leftFragment": "マジわからんこよりー助けてよーわかんな",
+            "rightFragment": "いよーこよりこより",
+            "markedContext": "マジわからんこよりー助けてよーわかんな【境界】いよーこよりこより",
+            "previousSentence": "で",
+            "nextSentence": "ー",
+            "reviewPrompt": "この境界は、文・反応・結論の完結としてテキストだけで隣接候補より一意に選べるか。"
+          }
+        },
+        {
+          "key": "9dtwF5Exu5w_multiblock_material_v001:9",
+          "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+          "expectedIndex": 9,
+          "label": "block 10",
+          "sourceStartMs": 3741344,
+          "sourceEndMs": 3758425,
+          "start": {
+            "side": "start",
+            "boundaryMs": 3741344,
+            "beforeWord": {
+              "id": 10877,
+              "startMs": 3741304,
+              "endMs": 3741344,
+              "text": "は"
+            },
+            "afterWord": {
+              "id": 10878,
+              "startMs": 3741344,
+              "endMs": 3741404,
+              "text": "教"
+            },
+            "adjacentWordGapMs": 0,
+            "nearestCompactedSpeechBoundary": {
+              "timeMs": 3742444,
+              "kind": "end",
+              "speechId": 355,
+              "signedDistanceMs": 1100,
+              "absoluteDistanceMs": 1100
+            },
+            "immediatelyAfterTerminalPunctuation": false,
+            "immediatelyBeforeTerminalPunctuation": false,
+            "startsWithTransitionPhrase": [],
+            "leftFragment": "もう当初強いから適当でいいよコヨリは",
+            "rightFragment": "教",
+            "markedContext": "もう当初強いから適当でいいよコヨリは【境界】教",
+            "previousSentence": "あ",
+            "nextSentence": "えてくれない",
+            "reviewPrompt": "この境界は、新しい前提・出来事・発話の開始としてテキストだけで隣接候補より一意に選べるか。"
+          },
+          "end": {
+            "side": "end",
+            "boundaryMs": 3758425,
+            "beforeWord": {
+              "id": 11012,
+              "startMs": 3758405,
+              "endMs": 3758425,
+              "text": "確"
+            },
+            "afterWord": {
+              "id": 11013,
+              "startMs": 3758425,
+              "endMs": 3758485,
+              "text": "か"
+            },
+            "adjacentWordGapMs": 0,
+            "nearestCompactedSpeechBoundary": {
+              "timeMs": 3750062,
+              "kind": "start",
+              "speechId": 358,
+              "signedDistanceMs": -8363,
+              "absoluteDistanceMs": 8363
+            },
+            "immediatelyAfterTerminalPunctuation": false,
+            "immediatelyBeforeTerminalPunctuation": false,
+            "startsWithTransitionPhrase": [],
+            "leftFragment": "なんかそれで何かうまくいかないことがあった時にコメントがこよりがわざと弱いの教えたとか言ってそれでわやわや言われたらうざいからやめとこう確",
+            "rightFragment": "かに聞かんとこう",
+            "markedContext": "なんかそれで何かうまくいかないことがあった時にコメントがこよりがわざと弱いの教えたとか言ってそれでわやわや言われたらうざいからやめとこう確【境界】かに聞かんとこう",
+            "previousSentence": "でも確かにコヨリの言う通りコヨリがこう言ったからこうしたでマリンがそうしてさそれでなんか",
+            "nextSentence": "ん",
+            "reviewPrompt": "この境界は、文・反応・結論の完結としてテキストだけで隣接候補より一意に選べるか。"
+          }
+        },
+        {
+          "key": "9dtwF5Exu5w_multiblock_material_v001:10",
+          "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+          "expectedIndex": 10,
+          "label": "block 11",
+          "sourceStartMs": 4207639,
+          "sourceEndMs": 4210641,
+          "start": {
+            "side": "start",
+            "boundaryMs": 4207639,
+            "beforeWord": {
+              "id": 12618,
+              "startMs": 4207559,
+              "endMs": 4207639,
+              "text": "ー"
+            },
+            "afterWord": {
+              "id": 12619,
+              "startMs": 4207639,
+              "endMs": 4207799,
+              "text": "な"
+            },
+            "adjacentWordGapMs": 0,
+            "nearestCompactedSpeechBoundary": {
+              "timeMs": 4207479,
+              "kind": "end",
+              "speechId": 381,
+              "signedDistanceMs": -160,
+              "absoluteDistanceMs": 160
+            },
+            "immediatelyAfterTerminalPunctuation": false,
+            "immediatelyBeforeTerminalPunctuation": false,
+            "startsWithTransitionPhrase": [],
+            "leftFragment": "えいっおー",
+            "rightFragment": "なんかいいねーなんか知らんけど良さげー",
+            "markedContext": "えいっおー【境界】なんかいいねーなんか知らんけど良さげー",
+            "previousSentence": "!",
+            "nextSentence": "!",
+            "reviewPrompt": "この境界は、新しい前提・出来事・発話の開始としてテキストだけで隣接候補より一意に選べるか。"
+          },
+          "end": {
+            "side": "end",
+            "boundaryMs": 4210641,
+            "beforeWord": {
+              "id": 12636,
+              "startMs": 4210501,
+              "endMs": 4210641,
+              "text": "げ"
+            },
+            "afterWord": {
+              "id": 12637,
+              "startMs": 4210641,
+              "endMs": 4210862,
+              "text": "ー"
+            },
+            "adjacentWordGapMs": 0,
+            "nearestCompactedSpeechBoundary": {
+              "timeMs": 4212203,
+              "kind": "end",
+              "speechId": 382,
+              "signedDistanceMs": 1562,
+              "absoluteDistanceMs": 1562
+            },
+            "immediatelyAfterTerminalPunctuation": false,
+            "immediatelyBeforeTerminalPunctuation": false,
+            "startsWithTransitionPhrase": [],
+            "leftFragment": "えいっおーなんかいいねーなんか知らんけど良さげ",
+            "rightFragment": "ー",
+            "markedContext": "えいっおーなんかいいねーなんか知らんけど良さげ【境界】ー",
+            "previousSentence": "!",
+            "nextSentence": "!",
+            "reviewPrompt": "この境界は、文・反応・結論の完結としてテキストだけで隣接候補より一意に選べるか。"
+          }
+        },
+        {
+          "key": "9dtwF5Exu5w_multiblock_material_v001:11",
+          "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+          "expectedIndex": 11,
+          "label": "block 12",
+          "sourceStartMs": 4232807,
+          "sourceEndMs": 4239410,
+          "start": {
+            "side": "start",
+            "boundaryMs": 4232807,
+            "beforeWord": {
+              "id": 12668,
+              "startMs": 4227514,
+              "endMs": 4227534,
+              "text": "!"
+            },
+            "afterWord": {
+              "id": 12669,
+              "startMs": 4232807,
+              "endMs": 4232907,
+              "text": "さ"
+            },
+            "adjacentWordGapMs": 5273,
+            "nearestCompactedSpeechBoundary": {
+              "timeMs": 4232807,
+              "kind": "start",
+              "speechId": 386,
+              "signedDistanceMs": 0,
+              "absoluteDistanceMs": 0
+            },
+            "immediatelyAfterTerminalPunctuation": true,
+            "immediatelyBeforeTerminalPunctuation": false,
+            "startsWithTransitionPhrase": [],
+            "leftFragment": "うん!",
+            "rightFragment": "さらに下行ってる重いやつを見せるO",
+            "markedContext": "うん!【境界】さらに下行ってる重いやつを見せるO",
+            "previousSentence": "んか強そうです!",
+            "nextSentence": "K",
+            "reviewPrompt": "この境界は、新しい前提・出来事・発話の開始としてテキストだけで隣接候補より一意に選べるか。"
+          },
+          "end": {
+            "side": "end",
+            "boundaryMs": 4239410,
+            "beforeWord": {
+              "id": 12700,
+              "startMs": 4239169,
+              "endMs": 4239410,
+              "text": "で"
+            },
+            "afterWord": {
+              "id": 12701,
+              "startMs": 4239410,
+              "endMs": 4241190,
+              "text": "す"
+            },
+            "adjacentWordGapMs": 0,
+            "nearestCompactedSpeechBoundary": {
+              "timeMs": 4232807,
+              "kind": "start",
+              "speechId": 386,
+              "signedDistanceMs": -6603,
+              "absoluteDistanceMs": 6603
+            },
+            "immediatelyAfterTerminalPunctuation": false,
+            "immediatelyBeforeTerminalPunctuation": false,
+            "startsWithTransitionPhrase": [],
+            "leftFragment": "これで",
+            "rightFragment": "す",
+            "markedContext": "これで【境界】す",
+            "previousSentence": "が",
+            "nextSentence": "いく",
+            "reviewPrompt": "この境界は、文・反応・結論の完結としてテキストだけで隣接候補より一意に選べるか。"
+          }
+        },
+        {
+          "key": "9dtwF5Exu5w_multiblock_material_v001:12",
+          "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+          "expectedIndex": 12,
+          "label": "block 13",
+          "sourceStartMs": 4273428,
+          "sourceEndMs": 4279472,
+          "start": {
+            "side": "start",
+            "boundaryMs": 4273428,
+            "beforeWord": {
+              "id": 12783,
+              "startMs": 4272927,
+              "endMs": 4273428,
+              "text": "で"
+            },
+            "afterWord": {
+              "id": 12784,
+              "startMs": 4273428,
+              "endMs": 4273568,
+              "text": "重"
+            },
+            "adjacentWordGapMs": 0,
+            "nearestCompactedSpeechBoundary": {
+              "timeMs": 4260438,
+              "kind": "start",
+              "speechId": 387,
+              "signedDistanceMs": -12990,
+              "absoluteDistanceMs": 12990
+            },
+            "immediatelyAfterTerminalPunctuation": false,
+            "immediatelyBeforeTerminalPunctuation": false,
+            "startsWithTransitionPhrase": [],
+            "leftFragment": "で",
+            "rightFragment": "重いわ",
+            "markedContext": "で【境界】重いわ",
+            "previousSentence": "うこと",
+            "nextSentence": "ー",
+            "reviewPrompt": "この境界は、新しい前提・出来事・発話の開始としてテキストだけで隣接候補より一意に選べるか。"
+          },
+          "end": {
+            "side": "end",
+            "boundaryMs": 4279472,
+            "beforeWord": {
+              "id": 12807,
+              "startMs": 4278572,
+              "endMs": 4279472,
+              "text": "で"
+            },
+            "afterWord": {
+              "id": 12808,
+              "startMs": 4279472,
+              "endMs": 4279572,
+              "text": "さ"
+            },
+            "adjacentWordGapMs": 0,
+            "nearestCompactedSpeechBoundary": {
+              "timeMs": 4289960,
+              "kind": "end",
+              "speechId": 387,
+              "signedDistanceMs": 10488,
+              "absoluteDistanceMs": 10488
+            },
+            "immediatelyAfterTerminalPunctuation": false,
+            "immediatelyBeforeTerminalPunctuation": false,
+            "startsWithTransitionPhrase": [],
+            "leftFragment": "で",
+            "rightFragment": "さあ皆さ",
+            "markedContext": "で【境界】さあ皆さ",
+            "previousSentence": "これよりも重いは言うとりますということ",
+            "nextSentence": "ん",
+            "reviewPrompt": "この境界は、文・反応・結論の完結としてテキストだけで隣接候補より一意に選べるか。"
+          }
+        },
+        {
+          "key": "9dtwF5Exu5w_multiblock_material_v001:13",
+          "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+          "expectedIndex": 13,
+          "label": "block 14",
+          "sourceStartMs": 4367214,
+          "sourceEndMs": 4369035,
+          "start": {
+            "side": "start",
+            "boundaryMs": 4367214,
+            "beforeWord": {
+              "id": 13088,
+              "startMs": 4364613,
+              "endMs": 4367214,
+              "text": "い"
+            },
+            "afterWord": {
+              "id": 13089,
+              "startMs": 4367214,
+              "endMs": 4367294,
+              "text": "迷"
+            },
+            "adjacentWordGapMs": 0,
+            "nearestCompactedSpeechBoundary": {
+              "timeMs": 4379860,
+              "kind": "end",
+              "speechId": 390,
+              "signedDistanceMs": 12646,
+              "absoluteDistanceMs": 12646
+            },
+            "immediatelyAfterTerminalPunctuation": false,
+            "immediatelyBeforeTerminalPunctuation": false,
+            "startsWithTransitionPhrase": [],
+            "leftFragment": "はい",
+            "rightFragment": "迷いましためっち",
+            "markedContext": "はい【境界】迷いましためっち",
+            "previousSentence": "迷いすぎてすいませんどうも迷いましためっちゃ",
+            "nextSentence": "ゃ",
+            "reviewPrompt": "この境界は、新しい前提・出来事・発話の開始としてテキストだけで隣接候補より一意に選べるか。"
+          },
+          "end": {
+            "side": "end",
+            "boundaryMs": 4369035,
+            "beforeWord": {
+              "id": 13104,
+              "startMs": 4368955,
+              "endMs": 4369035,
+              "text": "ざ"
+            },
+            "afterWord": {
+              "id": 13105,
+              "startMs": 4369035,
+              "endMs": 4369075,
+              "text": "い"
+            },
+            "adjacentWordGapMs": 0,
+            "nearestCompactedSpeechBoundary": {
+              "timeMs": 4379860,
+              "kind": "end",
+              "speechId": 390,
+              "signedDistanceMs": 10825,
+              "absoluteDistanceMs": 10825
+            },
+            "immediatelyAfterTerminalPunctuation": false,
+            "immediatelyBeforeTerminalPunctuation": false,
+            "startsWithTransitionPhrase": [],
+            "leftFragment": "ありがとうござ",
+            "rightFragment": "いまし",
+            "markedContext": "ありがとうござ【境界】いまし",
+            "previousSentence": "ゃ",
+            "nextSentence": "た",
+            "reviewPrompt": "この境界は、文・反応・結論の完結としてテキストだけで隣接候補より一意に選べるか。"
+          }
+        },
+        {
+          "key": "9dtwF5Exu5w_multiblock_material_v001:14",
+          "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+          "expectedIndex": 14,
+          "label": "block 15",
+          "sourceStartMs": 4723988,
+          "sourceEndMs": 4731031,
+          "start": {
+            "side": "start",
+            "boundaryMs": 4723988,
+            "beforeWord": {
+              "id": 14390,
+              "startMs": 4723968,
+              "endMs": 4723988,
+              "text": "ん"
+            },
+            "afterWord": {
+              "id": 14391,
+              "startMs": 4723988,
+              "endMs": 4724108,
+              "text": "が"
+            },
+            "adjacentWordGapMs": 0,
+            "nearestCompactedSpeechBoundary": {
+              "timeMs": 4723728,
+              "kind": "end",
+              "speechId": 439,
+              "signedDistanceMs": -260,
+              "absoluteDistanceMs": 260
+            },
+            "immediatelyAfterTerminalPunctuation": false,
+            "immediatelyBeforeTerminalPunctuation": false,
+            "startsWithTransitionPhrase": [],
+            "leftFragment": "しおりん",
+            "rightFragment": "がつくかもしんないもんね!",
+            "markedContext": "しおりん【境界】がつくかもしんないもんね!",
+            "previousSentence": "!",
+            "nextSentence": "わかっ",
+            "reviewPrompt": "この境界は、新しい前提・出来事・発話の開始としてテキストだけで隣接候補より一意に選べるか。"
+          },
+          "end": {
+            "side": "end",
+            "boundaryMs": 4731031,
+            "beforeWord": {
+              "id": 14422,
+              "startMs": 4730931,
+              "endMs": 4731031,
+              "text": "お"
+            },
+            "afterWord": {
+              "id": 14423,
+              "startMs": 4731031,
+              "endMs": 4731231,
+              "text": "前"
+            },
+            "adjacentWordGapMs": 0,
+            "nearestCompactedSpeechBoundary": {
+              "timeMs": 4730931,
+              "kind": "end",
+              "speechId": 443,
+              "signedDistanceMs": -100,
+              "absoluteDistanceMs": 100
+            },
+            "immediatelyAfterTerminalPunctuation": false,
+            "immediatelyBeforeTerminalPunctuation": false,
+            "startsWithTransitionPhrase": [],
+            "leftFragment": "お",
+            "rightFragment": "前かん!",
+            "markedContext": "お【境界】前かん!",
+            "previousSentence": "!",
+            "nextSentence": "古",
+            "reviewPrompt": "この境界は、文・反応・結論の完結としてテキストだけで隣接候補より一意に選べるか。"
+          }
+        },
+        {
+          "key": "9dtwF5Exu5w_multiblock_material_v001:15",
+          "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+          "expectedIndex": 15,
+          "label": "block 17",
+          "sourceStartMs": 6289092,
+          "sourceEndMs": 6298479,
+          "start": {
+            "side": "start",
+            "boundaryMs": 6289092,
+            "beforeWord": {
+              "id": 18892,
+              "startMs": 6289012,
+              "endMs": 6289092,
+              "text": "つ"
+            },
+            "afterWord": {
+              "id": 18893,
+              "startMs": 6289092,
+              "endMs": 6289192,
+              "text": "も"
+            },
+            "adjacentWordGapMs": 0,
+            "nearestCompactedSpeechBoundary": {
+              "timeMs": 6288972,
+              "kind": "end",
+              "speechId": 630,
+              "signedDistanceMs": -120,
+              "absoluteDistanceMs": 120
+            },
+            "immediatelyAfterTerminalPunctuation": false,
+            "immediatelyBeforeTerminalPunctuation": false,
+            "startsWithTransitionPhrase": [],
+            "leftFragment": "どいつ",
+            "rightFragment": "もこいつも似た顔しやがって負けてらんねん総合力戦力B",
+            "markedContext": "どいつ【境界】もこいつも似た顔しやがって負けてらんねん総合力戦力B",
+            "previousSentence": "!",
+            "nextSentence": "!",
+            "reviewPrompt": "この境界は、新しい前提・出来事・発話の開始としてテキストだけで隣接候補より一意に選べるか。"
+          },
+          "end": {
+            "side": "end",
+            "boundaryMs": 6298479,
+            "beforeWord": {
+              "id": 18948,
+              "startMs": 6298379,
+              "endMs": 6298479,
+              "text": "ば"
+            },
+            "afterWord": {
+              "id": 18949,
+              "startMs": 6298479,
+              "endMs": 6298699,
+              "text": "い"
+            },
+            "adjacentWordGapMs": 0,
+            "nearestCompactedSpeechBoundary": {
+              "timeMs": 6299360,
+              "kind": "end",
+              "speechId": 633,
+              "signedDistanceMs": 881,
+              "absoluteDistanceMs": 881
+            },
+            "immediatelyAfterTerminalPunctuation": false,
+            "immediatelyBeforeTerminalPunctuation": false,
+            "startsWithTransitionPhrase": [],
+            "leftFragment": "お前初めてのくせにちょ、やば",
+            "rightFragment": "いやばい1点取られた",
+            "markedContext": "お前初めてのくせにちょ、やば【境界】いやばい1点取られた",
+            "previousSentence": "!",
+            "nextSentence": "右の杉山マウンドに上がりました今日",
+            "reviewPrompt": "この境界は、文・反応・結論の完結としてテキストだけで隣接候補より一意に選べるか。"
+          }
+        },
+        {
+          "key": "9dtwF5Exu5w_multiblock_material_v001:16",
+          "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+          "expectedIndex": 16,
+          "label": "block 18",
+          "sourceStartMs": 6526271,
+          "sourceEndMs": 6527012,
+          "start": {
+            "side": "start",
+            "boundaryMs": 6526271,
+            "beforeWord": {
+              "id": 19676,
+              "startMs": 6526251,
+              "endMs": 6526271,
+              "text": "!"
+            },
+            "afterWord": {
+              "id": 19677,
+              "startMs": 6526271,
+              "endMs": 6526292,
+              "text": "よ"
+            },
+            "adjacentWordGapMs": 0,
+            "nearestCompactedSpeechBoundary": {
+              "timeMs": 6526271,
+              "kind": "end",
+              "speechId": 654,
+              "signedDistanceMs": 0,
+              "absoluteDistanceMs": 0
+            },
+            "immediatelyAfterTerminalPunctuation": true,
+            "immediatelyBeforeTerminalPunctuation": false,
+            "startsWithTransitionPhrase": [],
+            "leftFragment": "転がったら!",
+            "rightFragment": "よーしよしよしよしよしよしよし!",
+            "markedContext": "転がったら!【境界】よーしよしよしよしよしよしよし!",
+            "previousSentence": "頑張ってよ!",
+            "nextSentence": "泡",
+            "reviewPrompt": "この境界は、新しい前提・出来事・発話の開始としてテキストだけで隣接候補より一意に選べるか。"
+          },
+          "end": {
+            "side": "end",
+            "boundaryMs": 6527012,
+            "beforeWord": {
+              "id": 19691,
+              "startMs": 6526972,
+              "endMs": 6527012,
+              "text": "し"
+            },
+            "afterWord": {
+              "id": 19692,
+              "startMs": 6527012,
+              "endMs": 6527292,
+              "text": "!"
+            },
+            "adjacentWordGapMs": 0,
+            "nearestCompactedSpeechBoundary": {
+              "timeMs": 6527292,
+              "kind": "end",
+              "speechId": 655,
+              "signedDistanceMs": 280,
+              "absoluteDistanceMs": 280
+            },
+            "immediatelyAfterTerminalPunctuation": false,
+            "immediatelyBeforeTerminalPunctuation": true,
+            "startsWithTransitionPhrase": [],
+            "leftFragment": "よーしよしよしよしよしよしよし",
+            "rightFragment": "!",
+            "markedContext": "よーしよしよしよしよしよしよし【境界】!",
+            "previousSentence": "転がったら!",
+            "nextSentence": "泡",
+            "reviewPrompt": "この境界は、文・反応・結論の完結としてテキストだけで隣接候補より一意に選べるか。"
+          }
+        },
+        {
+          "key": "9dtwF5Exu5w_multiblock_material_v001:17",
+          "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+          "expectedIndex": 17,
+          "label": "block 20",
+          "sourceStartMs": 7010155,
+          "sourceEndMs": 7011256,
+          "start": {
+            "side": "start",
+            "boundaryMs": 7010155,
+            "beforeWord": {
+              "id": 21485,
+              "startMs": 7010135,
+              "endMs": 7010155,
+              "text": "ー"
+            },
+            "afterWord": {
+              "id": 21486,
+              "startMs": 7010155,
+              "endMs": 7010195,
+              "text": "オ"
+            },
+            "adjacentWordGapMs": 0,
+            "nearestCompactedSpeechBoundary": {
+              "timeMs": 7007135,
+              "kind": "end",
+              "speechId": 764,
+              "signedDistanceMs": -3020,
+              "absoluteDistanceMs": 3020
+            },
+            "immediatelyAfterTerminalPunctuation": false,
+            "immediatelyBeforeTerminalPunctuation": false,
+            "startsWithTransitionPhrase": [],
+            "leftFragment": "オーケーオーケーオーケーオーケーオーケーオーケー",
+            "rightFragment": "オーケーオーケーオーケーオーケーオーケーオーケーオーケー",
+            "markedContext": "オーケーオーケーオーケーオーケーオーケーオーケー【境界】オーケーオーケーオーケーオーケーオーケーオーケーオーケー",
+            "previousSentence": "ー",
+            "nextSentence": "オー",
+            "reviewPrompt": "この境界は、新しい前提・出来事・発話の開始としてテキストだけで隣接候補より一意に選べるか。"
+          },
+          "end": {
+            "side": "end",
+            "boundaryMs": 7011256,
+            "beforeWord": {
+              "id": 21514,
+              "startMs": 7011076,
+              "endMs": 7011256,
+              "text": "オ"
+            },
+            "afterWord": {
+              "id": 21515,
+              "startMs": 7011256,
+              "endMs": 7012256,
+              "text": "ー"
+            },
+            "adjacentWordGapMs": 0,
+            "nearestCompactedSpeechBoundary": {
+              "timeMs": 7007135,
+              "kind": "end",
+              "speechId": 764,
+              "signedDistanceMs": -4121,
+              "absoluteDistanceMs": 4121
+            },
+            "immediatelyAfterTerminalPunctuation": false,
+            "immediatelyBeforeTerminalPunctuation": false,
+            "startsWithTransitionPhrase": [],
+            "leftFragment": "オ",
+            "rightFragment": "ー",
+            "markedContext": "オ【境界】ー",
+            "previousSentence": "オーケーオーケーオーケーオーケーオーケーオーケーオーケーオーケーオーケーオーケーオーケーオーケーオーケー",
+            "nextSentence": "ケーオーケーオーケーオーケーオーケーオーケーオーケーオーケ",
+            "reviewPrompt": "この境界は、文・反応・結論の完結としてテキストだけで隣接候補より一意に選べるか。"
+          }
+        },
+        {
+          "key": "9dtwF5Exu5w_multiblock_material_v001:18",
+          "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+          "expectedIndex": 18,
+          "label": "block 21",
+          "sourceStartMs": 7945178,
+          "sourceEndMs": 7947279,
+          "start": {
+            "side": "start",
+            "boundaryMs": 7945178,
+            "beforeWord": {
+              "id": 24581,
+              "startMs": 7944978,
+              "endMs": 7945178,
+              "text": "、"
+            },
+            "afterWord": {
+              "id": 24582,
+              "startMs": 7945178,
+              "endMs": 7945318,
+              "text": "打"
+            },
+            "adjacentWordGapMs": 0,
+            "nearestCompactedSpeechBoundary": {
+              "timeMs": 7948219,
+              "kind": "end",
+              "speechId": 846,
+              "signedDistanceMs": 3041,
+              "absoluteDistanceMs": 3041
+            },
+            "immediatelyAfterTerminalPunctuation": false,
+            "immediatelyBeforeTerminalPunctuation": false,
+            "startsWithTransitionPhrase": [],
+            "leftFragment": "、",
+            "rightFragment": "打ったあ、いいじゃんいいじ",
+            "markedContext": "、【境界】打ったあ、いいじゃんいいじ",
+            "previousSentence": "かあ",
+            "nextSentence": "ゃ",
+            "reviewPrompt": "この境界は、新しい前提・出来事・発話の開始としてテキストだけで隣接候補より一意に選べるか。"
+          },
+          "end": {
+            "side": "end",
+            "boundaryMs": 7947279,
+            "beforeWord": {
+              "id": 24595,
+              "startMs": 7945779,
+              "endMs": 7947279,
+              "text": "ゃ"
+            },
+            "afterWord": {
+              "id": 24596,
+              "startMs": 7947279,
+              "endMs": 7947299,
+              "text": "ん"
+            },
+            "adjacentWordGapMs": 0,
+            "nearestCompactedSpeechBoundary": {
+              "timeMs": 7948219,
+              "kind": "end",
+              "speechId": 846,
+              "signedDistanceMs": 940,
+              "absoluteDistanceMs": 940
+            },
+            "immediatelyAfterTerminalPunctuation": false,
+            "immediatelyBeforeTerminalPunctuation": false,
+            "startsWithTransitionPhrase": [],
+            "leftFragment": "ゃ",
+            "rightFragment": "んよう転がっとる",
+            "markedContext": "ゃ【境界】んよう転がっとる",
+            "previousSentence": "、打ったあ、いいじゃんいいじ",
+            "nextSentence": "こういう感じ",
+            "reviewPrompt": "この境界は、文・反応・結論の完結としてテキストだけで隣接候補より一意に選べるか。"
+          }
+        },
+        {
+          "key": "9dtwF5Exu5w_multiblock_material_v001:19",
+          "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+          "expectedIndex": 19,
+          "label": "block 24",
+          "sourceStartMs": 9117659,
+          "sourceEndMs": 9119080,
+          "start": {
+            "side": "start",
+            "boundaryMs": 9117659,
+            "beforeWord": {
+              "id": 27598,
+              "startMs": 9117539,
+              "endMs": 9117659,
+              "text": "!"
+            },
+            "afterWord": {
+              "id": 27599,
+              "startMs": 9117659,
+              "endMs": 9117679,
+              "text": "あ"
+            },
+            "adjacentWordGapMs": 0,
+            "nearestCompactedSpeechBoundary": {
+              "timeMs": 9117659,
+              "kind": "end",
+              "speechId": 999,
+              "signedDistanceMs": 0,
+              "absoluteDistanceMs": 0
+            },
+            "immediatelyAfterTerminalPunctuation": true,
+            "immediatelyBeforeTerminalPunctuation": false,
+            "startsWithTransitionPhrase": [],
+            "leftFragment": "け!",
+            "rightFragment": "あ、打たれたけど…でも大丈夫か?",
+            "markedContext": "け!【境界】あ、打たれたけど…でも大丈夫か?",
+            "previousSentence": "行",
+            "nextSentence": "これアウトか?",
+            "reviewPrompt": "この境界は、新しい前提・出来事・発話の開始としてテキストだけで隣接候補より一意に選べるか。"
+          },
+          "end": {
+            "side": "end",
+            "boundaryMs": 9119080,
+            "beforeWord": {
+              "id": 27628,
+              "startMs": 9118920,
+              "endMs": 9119080,
+              "text": "か"
+            },
+            "afterWord": {
+              "id": 27629,
+              "startMs": 9119080,
+              "endMs": 9119100,
+              "text": "ー"
+            },
+            "adjacentWordGapMs": 0,
+            "nearestCompactedSpeechBoundary": {
+              "timeMs": 9118480,
+              "kind": "end",
+              "speechId": 1001,
+              "signedDistanceMs": -600,
+              "absoluteDistanceMs": 600
+            },
+            "immediatelyAfterTerminalPunctuation": false,
+            "immediatelyBeforeTerminalPunctuation": false,
+            "startsWithTransitionPhrase": [],
+            "leftFragment": "か",
+            "rightFragment": "ー、1点取られて",
+            "markedContext": "か【境界】ー、1点取られて",
+            "previousSentence": "あーでもそっ",
+            "nextSentence": "…",
+            "reviewPrompt": "この境界は、文・反応・結論の完結としてテキストだけで隣接候補より一意に選べるか。"
+          }
+        },
+        {
+          "key": "9dtwF5Exu5w_multiblock_material_v001:20",
+          "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+          "expectedIndex": 20,
+          "label": "block 25",
+          "sourceStartMs": 9150522,
+          "sourceEndMs": 9152464,
+          "start": {
+            "side": "start",
+            "boundaryMs": 9150522,
+            "beforeWord": {
+              "id": 27705,
+              "startMs": 9150462,
+              "endMs": 9150522,
+              "text": "、"
+            },
+            "afterWord": {
+              "id": 27706,
+              "startMs": 9150522,
+              "endMs": 9150562,
+              "text": "ス"
+            },
+            "adjacentWordGapMs": 0,
+            "nearestCompactedSpeechBoundary": {
+              "timeMs": 9150322,
+              "kind": "start",
+              "speechId": 1004,
+              "signedDistanceMs": -200,
+              "absoluteDistanceMs": 200
+            },
+            "immediatelyAfterTerminalPunctuation": false,
+            "immediatelyBeforeTerminalPunctuation": false,
+            "startsWithTransitionPhrase": [],
+            "leftFragment": "お、",
+            "rightFragment": "スーパーノヴァが撃たれ",
+            "markedContext": "お、【境界】スーパーノヴァが撃たれ",
+            "previousSentence": "低めしかないかここは他の数字的に",
+            "nextSentence": "た",
+            "reviewPrompt": "この境界は、新しい前提・出来事・発話の開始としてテキストだけで隣接候補より一意に選べるか。"
+          },
+          "end": {
+            "side": "end",
+            "boundaryMs": 9152464,
+            "beforeWord": {
+              "id": 27729,
+              "startMs": 9152444,
+              "endMs": 9152464,
+              "text": "れ"
+            },
+            "afterWord": {
+              "id": 27730,
+              "startMs": 9152464,
+              "endMs": 9152484,
+              "text": "た"
+            },
+            "adjacentWordGapMs": 0,
+            "nearestCompactedSpeechBoundary": {
+              "timeMs": 9152524,
+              "kind": "end",
+              "speechId": 1005,
+              "signedDistanceMs": 60,
+              "absoluteDistanceMs": 60
+            },
+            "immediatelyAfterTerminalPunctuation": false,
+            "immediatelyBeforeTerminalPunctuation": false,
+            "startsWithTransitionPhrase": [],
+            "leftFragment": "スーパーノヴァが撃たれ",
+            "rightFragment": "たぞ!",
+            "markedContext": "スーパーノヴァが撃たれ【境界】たぞ!",
+            "previousSentence": "!",
+            "nextSentence": "ナイス!",
+            "reviewPrompt": "この境界は、文・反応・結論の完結としてテキストだけで隣接候補より一意に選べるか。"
+          }
+        },
+        {
+          "key": "9dtwF5Exu5w_multiblock_material_v001:21",
+          "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+          "expectedIndex": 21,
+          "label": "block 26",
+          "sourceStartMs": 10077799,
+          "sourceEndMs": 10088896,
+          "start": {
+            "side": "start",
+            "boundaryMs": 10077799,
+            "beforeWord": {
+              "id": 30022,
+              "startMs": 10077638,
+              "endMs": 10077799,
+              "text": "行"
+            },
+            "afterWord": {
+              "id": 30023,
+              "startMs": 10077799,
+              "endMs": 10077899,
+              "text": "け"
+            },
+            "adjacentWordGapMs": 0,
+            "nearestCompactedSpeechBoundary": {
+              "timeMs": 10077638,
+              "kind": "end",
+              "speechId": 1105,
+              "signedDistanceMs": -161,
+              "absoluteDistanceMs": 161
+            },
+            "immediatelyAfterTerminalPunctuation": false,
+            "immediatelyBeforeTerminalPunctuation": false,
+            "startsWithTransitionPhrase": [],
+            "leftFragment": "行",
+            "rightFragment": "け引っ張れー",
+            "markedContext": "行【境界】け引っ張れー",
+            "previousSentence": "い!",
+            "nextSentence": "!",
+            "reviewPrompt": "この境界は、新しい前提・出来事・発話の開始としてテキストだけで隣接候補より一意に選べるか。"
+          },
+          "end": {
+            "side": "end",
+            "boundaryMs": 10088896,
+            "beforeWord": {
+              "id": 30057,
+              "startMs": 10088756,
+              "endMs": 10088896,
+              "text": "張"
+            },
+            "afterWord": {
+              "id": 30058,
+              "startMs": 10088896,
+              "endMs": 10089036,
+              "text": "っ"
+            },
+            "adjacentWordGapMs": 0,
+            "nearestCompactedSpeechBoundary": {
+              "timeMs": 10080974,
+              "kind": "start",
+              "speechId": 1108,
+              "signedDistanceMs": -7922,
+              "absoluteDistanceMs": 7922
+            },
+            "immediatelyAfterTerminalPunctuation": false,
+            "immediatelyBeforeTerminalPunctuation": false,
+            "startsWithTransitionPhrase": [],
+            "leftFragment": "張",
+            "rightFragment": "っ",
+            "markedContext": "張【境界】っ",
+            "previousSentence": "った頑",
+            "nextSentence": "た",
+            "reviewPrompt": "この境界は、文・反応・結論の完結としてテキストだけで隣接候補より一意に選べるか。"
+          }
+        },
+        {
+          "key": "9dtwF5Exu5w_multiblock_material_v001:22",
+          "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+          "expectedIndex": 22,
+          "label": "block 27",
+          "sourceStartMs": 10221096,
+          "sourceEndMs": 10221656,
+          "start": {
+            "side": "start",
+            "boundaryMs": 10221096,
+            "beforeWord": {
+              "id": 30431,
+              "startMs": 10221076,
+              "endMs": 10221096,
+              "text": "う"
+            },
+            "afterWord": {
+              "id": 30432,
+              "startMs": 10221096,
+              "endMs": 10221116,
+              "text": "わ"
+            },
+            "adjacentWordGapMs": 0,
+            "nearestCompactedSpeechBoundary": {
+              "timeMs": 10222216,
+              "kind": "end",
+              "speechId": 1124,
+              "signedDistanceMs": 1120,
+              "absoluteDistanceMs": 1120
+            },
+            "immediatelyAfterTerminalPunctuation": false,
+            "immediatelyBeforeTerminalPunctuation": false,
+            "startsWithTransitionPhrase": [],
+            "leftFragment": "ところう",
+            "rightFragment": "わめっちゃ走ってるめっちゃ走ってる取れるか?",
+            "markedContext": "ところう【境界】わめっちゃ走ってるめっちゃ走ってる取れるか?",
+            "previousSentence": "い",
+            "nextSentence": "取れるか?",
+            "reviewPrompt": "この境界は、新しい前提・出来事・発話の開始としてテキストだけで隣接候補より一意に選べるか。"
+          },
+          "end": {
+            "side": "end",
+            "boundaryMs": 10221656,
+            "beforeWord": {
+              "id": 30447,
+              "startMs": 10221596,
+              "endMs": 10221656,
+              "text": "て"
+            },
+            "afterWord": {
+              "id": 30448,
+              "startMs": 10221656,
+              "endMs": 10221876,
+              "text": "る"
+            },
+            "adjacentWordGapMs": 0,
+            "nearestCompactedSpeechBoundary": {
+              "timeMs": 10222216,
+              "kind": "end",
+              "speechId": 1124,
+              "signedDistanceMs": 560,
+              "absoluteDistanceMs": 560
+            },
+            "immediatelyAfterTerminalPunctuation": false,
+            "immediatelyBeforeTerminalPunctuation": false,
+            "startsWithTransitionPhrase": [],
+            "leftFragment": "ところうわめっちゃ走ってるめっちゃ走って",
+            "rightFragment": "る取れるか?",
+            "markedContext": "ところうわめっちゃ走ってるめっちゃ走って【境界】る取れるか?",
+            "previousSentence": "い",
+            "nextSentence": "取れるか?",
+            "reviewPrompt": "この境界は、文・反応・結論の完結としてテキストだけで隣接候補より一意に選べるか。"
+          }
+        },
+        {
+          "key": "9dtwF5Exu5w_multiblock_material_v001:23",
+          "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+          "expectedIndex": 23,
+          "label": "block 28",
+          "sourceStartMs": 10521894,
+          "sourceEndMs": 10529420,
+          "start": {
+            "side": "start",
+            "boundaryMs": 10521894,
+            "beforeWord": {
+              "id": 31609,
+              "startMs": 10520634,
+              "endMs": 10521894,
+              "text": "類"
+            },
+            "afterWord": {
+              "id": 31610,
+              "startMs": 10521894,
+              "endMs": 10522075,
+              "text": "し"
+            },
+            "adjacentWordGapMs": 0,
+            "nearestCompactedSpeechBoundary": {
+              "timeMs": 10529860,
+              "kind": "end",
+              "speechId": 1189,
+              "signedDistanceMs": 7966,
+              "absoluteDistanceMs": 7966
+            },
+            "immediatelyAfterTerminalPunctuation": false,
+            "immediatelyBeforeTerminalPunctuation": false,
+            "startsWithTransitionPhrase": [],
+            "leftFragment": "類",
+            "rightFragment": "しない",
+            "markedContext": "類【境界】しない",
+            "previousSentence": "やるべきだよね投",
+            "nextSentence": "と",
+            "reviewPrompt": "この境界は、新しい前提・出来事・発話の開始としてテキストだけで隣接候補より一意に選べるか。"
+          },
+          "end": {
+            "side": "end",
+            "boundaryMs": 10529420,
+            "beforeWord": {
+              "id": 31626,
+              "startMs": 10524516,
+              "endMs": 10529420,
+              "text": "け"
+            },
+            "afterWord": {
+              "id": 31627,
+              "startMs": 10529420,
+              "endMs": 10529580,
+              "text": "ど"
+            },
+            "adjacentWordGapMs": 0,
+            "nearestCompactedSpeechBoundary": {
+              "timeMs": 10529860,
+              "kind": "end",
+              "speechId": 1189,
+              "signedDistanceMs": 440,
+              "absoluteDistanceMs": 440
+            },
+            "immediatelyAfterTerminalPunctuation": false,
+            "immediatelyBeforeTerminalPunctuation": false,
+            "startsWithTransitionPhrase": [],
+            "leftFragment": "け",
+            "rightFragment": "ど危ない",
+            "markedContext": "け【境界】ど危ない",
+            "previousSentence": "クイックCはちょっといい",
+            "nextSentence": "CCだとキツイかうー",
+            "reviewPrompt": "この境界は、文・反応・結論の完結としてテキストだけで隣接候補より一意に選べるか。"
+          }
+        },
+        {
+          "key": "9dtwF5Exu5w_multiblock_material_v001:24",
+          "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+          "expectedIndex": 24,
+          "label": "block 29",
+          "sourceStartMs": 10790744,
+          "sourceEndMs": 10803724,
+          "start": {
+            "side": "start",
+            "boundaryMs": 10790744,
+            "beforeWord": {
+              "id": 32044,
+              "startMs": 10790724,
+              "endMs": 10790744,
+              "text": "?"
+            },
+            "afterWord": {
+              "id": 32045,
+              "startMs": 10790744,
+              "endMs": 10790784,
+              "text": "う"
+            },
+            "adjacentWordGapMs": 0,
+            "nearestCompactedSpeechBoundary": {
+              "timeMs": 10790744,
+              "kind": "end",
+              "speechId": 1229,
+              "signedDistanceMs": 0,
+              "absoluteDistanceMs": 0
+            },
+            "immediatelyAfterTerminalPunctuation": true,
+            "immediatelyBeforeTerminalPunctuation": false,
+            "startsWithTransitionPhrase": [],
+            "leftFragment": "?",
+            "rightFragment": "うん、トールす",
+            "markedContext": "?【境界】うん、トールす",
+            "previousSentence": "どうする",
+            "nextSentence": "る",
+            "reviewPrompt": "この境界は、新しい前提・出来事・発話の開始としてテキストだけで隣接候補より一意に選べるか。"
+          },
+          "end": {
+            "side": "end",
+            "boundaryMs": 10803724,
+            "beforeWord": {
+              "id": 32103,
+              "startMs": 10803644,
+              "endMs": 10803724,
+              "text": "夫"
+            },
+            "afterWord": {
+              "id": 32104,
+              "startMs": 10803724,
+              "endMs": 10807486,
+              "text": "ぞ"
+            },
+            "adjacentWordGapMs": 0,
+            "nearestCompactedSpeechBoundary": {
+              "timeMs": 10800122,
+              "kind": "start",
+              "speechId": 1235,
+              "signedDistanceMs": -3602,
+              "absoluteDistanceMs": 3602
+            },
+            "immediatelyAfterTerminalPunctuation": false,
+            "immediatelyBeforeTerminalPunctuation": false,
+            "startsWithTransitionPhrase": [],
+            "leftFragment": "ミートじゃない走力BBトールEEなんだけどこれ大丈夫",
+            "rightFragment": "ぞ",
+            "markedContext": "ミートじゃない走力BBトールEEなんだけどこれ大丈夫【境界】ぞ",
+            "previousSentence": "ミートB、トールE",
+            "nextSentence": "Bなんだ",
+            "reviewPrompt": "この境界は、文・反応・結論の完結としてテキストだけで隣接候補より一意に選べるか。"
+          }
+        },
+        {
+          "key": "9dtwF5Exu5w_multiblock_material_v001:25",
+          "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+          "expectedIndex": 25,
+          "label": "block 31",
+          "sourceStartMs": 11730442,
+          "sourceEndMs": 11733624,
+          "start": {
+            "side": "start",
+            "boundaryMs": 11730442,
+            "beforeWord": {
+              "id": 34267,
+              "startMs": 11730322,
+              "endMs": 11730442,
+              "text": "甲"
+            },
+            "afterWord": {
+              "id": 34268,
+              "startMs": 11730442,
+              "endMs": 11730582,
+              "text": "子"
+            },
+            "adjacentWordGapMs": 0,
+            "nearestCompactedSpeechBoundary": {
+              "timeMs": 11730322,
+              "kind": "start",
+              "speechId": 1321,
+              "signedDistanceMs": -120,
+              "absoluteDistanceMs": 120
+            },
+            "immediatelyAfterTerminalPunctuation": false,
+            "immediatelyBeforeTerminalPunctuation": false,
+            "startsWithTransitionPhrase": [],
+            "leftFragment": "甲",
+            "rightFragment": "子園大会2回",
+            "markedContext": "甲【境界】子園大会2回",
+            "previousSentence": "次回正確ガチャと",
+            "nextSentence": "戦",
+            "reviewPrompt": "この境界は、新しい前提・出来事・発話の開始としてテキストだけで隣接候補より一意に選べるか。"
+          },
+          "end": {
+            "side": "end",
+            "boundaryMs": 11733624,
+            "beforeWord": {
+              "id": 34281,
+              "startMs": 11733544,
+              "endMs": 11733624,
+              "text": "う"
+            },
+            "afterWord": {
+              "id": 34282,
+              "startMs": 11733624,
+              "endMs": 11733804,
+              "text": "と"
+            },
+            "adjacentWordGapMs": 0,
+            "nearestCompactedSpeechBoundary": {
+              "timeMs": 11730322,
+              "kind": "start",
+              "speechId": 1321,
+              "signedDistanceMs": -3302,
+              "absoluteDistanceMs": 3302
+            },
+            "immediatelyAfterTerminalPunctuation": false,
+            "immediatelyBeforeTerminalPunctuation": false,
+            "startsWithTransitionPhrase": [],
+            "leftFragment": "でやっていこう",
+            "rightFragment": "と思いま",
+            "markedContext": "でやっていこう【境界】と思いま",
+            "previousSentence": "戦",
+            "nextSentence": "す",
+            "reviewPrompt": "この境界は、文・反応・結論の完結としてテキストだけで隣接候補より一意に選べるか。"
+          }
+        }
+      ]
+    }
+  ]
+}
