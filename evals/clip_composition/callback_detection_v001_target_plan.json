@@ -1,0 +1,60 @@
+{
+  "kind": "callback_detection_v001_target_plan",
+  "planId": "20260713-callback-detection-v001",
+  "generationSystem": "callback-detection-v001@gemini-web-flash",
+  "promptVersion": "callback_detection_search_prompt_v001",
+  "verificationPromptVersion": "callback_detection_verification_prompt_v003",
+  "verificationInputVersion": "callback_detection_verification_input_v002",
+  "model": "gemini-web-flash",
+  "runs": 1,
+  "maxPromptBytes": 13084,
+  "bridgeSeams": true,
+  "sources": [
+    {
+      "sourceVideoId": "YE-faluP7zY",
+      "transcriptPath": "evals/clip_composition/stt/nOEWCNc77MI_YE-faluP7zY_local30_v001/source/transcript.json",
+      "manifestPath": "evals/clip_composition/stt/nOEWCNc77MI_YE-faluP7zY_local30_v001/source/manifest.json",
+      "targets": [
+        {
+          "targetId": "YE-faluP7zY-candidate-12",
+          "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+          "candidateId": 12,
+          "title": "食料不足の中で鳥を仕留めるころね",
+          "reason": "ココナッツしか取れず食料がしけてきた状況で、ころねが見事に鳥を殺して肉を確保し、マリンが驚き喜ぶ展開が綺麗にまとまっているため。",
+          "reactionSpeechIds": [77, 78, 79, 80, 81, 82, 83]
+        },
+        {
+          "targetId": "YE-faluP7zY-candidate-58",
+          "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+          "candidateId": 58,
+          "title": "置き去りにされそうになって焦る戌神ころね",
+          "reason": "マリン船長が移動する中で、置き去りにされそうになったころねが「犬かきで行く」と可愛く宣言した直後、どんどん距離が離れていって絶叫する見どころのある展開になっているため。",
+          "reactionSpeechIds": [927, 928, 929, 930, 931]
+        },
+        {
+          "targetId": "YE-faluP7zY-candidate-84",
+          "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+          "candidateId": 84,
+          "title": "間違えてテーブルを量産してしまう宝鐘マリン",
+          "reason": "別の高いテーブルを作ろうとするも再びローテーブルを作ってしまい、最終的に正解のテーブルを見つけるが大量に余ったテーブルの処理に困るオチがついているため。",
+          "reactionSpeechIds": [1647, 1648, 1649, 1650, 1651]
+        }
+      ]
+    },
+    {
+      "sourceVideoId": "o8rZAhARXAc",
+      "transcriptPath": "evals/clip_composition/stt/9dtwF5Exu5w_o8rZAhARXAc_local30_v001/source/transcript.json",
+      "manifestPath": "evals/clip_composition/stt/9dtwF5Exu5w_o8rZAhARXAc_local30_v001/source/manifest.json",
+      "targets": [
+        {
+          "targetId": "o8rZAhARXAc-candidate-25",
+          "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+          "candidateId": 25,
+          "title": "チャットの指示で対戦相手を選んだ結果、Bランクの高校を引いて焦るシーン",
+          "reason": "リスナー（キャージー）に選択を委ねた結果、手強いBランクの「ざまみ商業高校」を引き当ててしまい動揺するリアクションが面白いため。",
+          "reactionSpeechIds": [565, 566, 567, 568, 569, 570, 571, 572]
+        }
+      ]
+    }
+  ]
+}

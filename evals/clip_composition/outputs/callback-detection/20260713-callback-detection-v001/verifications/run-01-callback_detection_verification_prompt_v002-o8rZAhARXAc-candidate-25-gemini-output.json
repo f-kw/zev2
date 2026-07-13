@@ -1,0 +1,24 @@
+{
+  "callbackDecisions": [
+    {
+      "targetId": "o8rZAhARXAc-candidate-25",
+      "decision": "supporting_context_only",
+      "primaryFindingId": null,
+      "alternativeFindingIds": [],
+      "reason": "findingsの場面は組み合わせ抽選会の開始と他ランクへの恐怖を描いており関連情報は含むものの、中心反応である「キャージーの指示でBランクを引いたこと」の直接的な原因そのものではなく、同一の抽選会イベント内の一連の流れ（前文）に過ぎないため。"
+    }
+  ],
+  "runAt": "2026-07-13T17:20:41+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "task": "callback-detection-verification-v001",
+    "run": 1,
+    "targetId": "o8rZAhARXAc-candidate-25"
+  },
+  "promptFile": "reports/callback-detection/20260713-callback-detection-v001/verifications/callback_detection_verification_prompt_v002-o8rZAhARXAc-candidate-25-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/4dd4d16ded4f7d43?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"callbackDecisions\": [\n    {\n      \"targetId\": \"o8rZAhARXAc-candidate-25\",\n      \"decision\": \"supporting_context_only\",\n      \"primaryFindingId\": null,\n      \"alternativeFindingIds\": [],\n      \"reason\": \"findingsの場面は組み合わせ抽選会の開始と他ランクへの恐怖を描いており関連情報は含むものの、中心反応である「キャージーの指示でBランクを引いたこと」の直接的な原因そのものではなく、同一の抽選会イベント内の一連の流れ（前文）に過ぎないため。\"\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

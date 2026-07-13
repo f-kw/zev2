@@ -1,0 +1,26 @@
+{
+  "callbackFindings": [
+    {
+      "targetId": "YE-faluP7zY-candidate-58",
+      "causeSpeechIds": [
+        922
+      ],
+      "sceneDescription": "宝鐘マリンが鉱石を集めるためにイカダを離れて別の場所へ移動し始める場面。",
+      "causalLink": "宝鐘マリンが単独で移動を開始したため、イカダに取り残されて距離が離れていく戌神ころねの焦る反応に繋がった。",
+      "missingContextSupplied": "宝鐘マリンがどのような目的でイカダから離れて行動を開始したのか、そのきっかけを具体的に理解できるようになる。"
+    }
+  ],
+  "runAt": "2026-07-13T17:04:30+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "task": "callback-detection-search-v001",
+    "run": 1,
+    "windowId": "seam_045_YE-faluP7zY"
+  },
+  "promptFile": "reports/callback-detection/20260713-callback-detection-v001/windows/seam_045_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/3967fd35f7ce73ec?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"callbackFindings\": [\n    {\n      \"targetId\": \"YE-faluP7zY-candidate-58\",\n      \"causeSpeechIds\": [\n        922\n      ],\n      \"sceneDescription\": \"宝鐘マリンが鉱石を集めるためにイカダを離れて別の場所へ移動し始める場面。\",\n      \"causalLink\": \"宝鐘マリンが単独で移動を開始したため、イカダに取り残されて距離が離れていく戌神ころねの焦る反応に繋がった。\",\n      \"missingContextSupplied\": \"宝鐘マリンがどのような目的でイカダから離れて行動を開始したのか、そのきっかけを具体的に理解できるようになる。\"\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

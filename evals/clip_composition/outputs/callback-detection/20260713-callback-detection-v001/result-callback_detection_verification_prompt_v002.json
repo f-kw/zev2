@@ -1,0 +1,69 @@
+{
+  "kind": "callback_detection_v001_result",
+  "createdAt": "2026-07-13T08:20:41.500Z",
+  "generationSystem": "callback-detection-v001@gemini-web-flash",
+  "promptVersion": "callback_detection_search_prompt_v001",
+  "verificationPromptVersion": "callback_detection_verification_prompt_v002",
+  "model": "gemini-web-flash",
+  "run": 1,
+  "search": {
+    "windowCount": 168,
+    "completedWindowCount": 168,
+    "rawFindingCount": 20,
+    "validFindingCount": 20,
+    "invalidFindingCount": 0
+  },
+  "targets": [
+    {
+      "targetId": "YE-faluP7zY-candidate-12",
+      "status": "verified",
+      "promptBytes": 6610,
+      "findingCount": 2,
+      "decision": {
+        "targetId": "YE-faluP7zY-candidate-12",
+        "decision": "supporting_context_only",
+        "primaryFindingId": null,
+        "alternativeFindingIds": [],
+        "reason": "中心反応は鳥を仕留めて肉を確保したことですが、提示されたfindingsは末尾の脇話であるサメ肉の由来を説明する場面に留まるため。"
+      },
+      "primaryFinding": null,
+      "alternativeFindings": []
+    },
+    {
+      "targetId": "YE-faluP7zY-candidate-58",
+      "status": "verification_input_overflow",
+      "promptBytes": 17758,
+      "maxPromptBytes": 13084,
+      "findingCount": 8,
+      "decision": null
+    },
+    {
+      "targetId": "YE-faluP7zY-candidate-84",
+      "status": "verification_input_overflow",
+      "promptBytes": 17450,
+      "maxPromptBytes": 13084,
+      "findingCount": 9,
+      "decision": null
+    },
+    {
+      "targetId": "o8rZAhARXAc-candidate-25",
+      "status": "verified",
+      "promptBytes": 6118,
+      "findingCount": 1,
+      "decision": {
+        "targetId": "o8rZAhARXAc-candidate-25",
+        "decision": "supporting_context_only",
+        "primaryFindingId": null,
+        "alternativeFindingIds": [],
+        "reason": "findingsの場面は組み合わせ抽選会の開始と他ランクへの恐怖を描いており関連情報は含むものの、中心反応である「キャージーの指示でBランクを引いたこと」の直接的な原因そのものではなく、同一の抽選会イベント内の一連の流れ（前文）に過ぎないため。"
+      },
+      "primaryFinding": null,
+      "alternativeFindings": []
+    }
+  ],
+  "geminiTabCountAfterRun": 0,
+  "humanWork": {
+    "itemCount": 0,
+    "estimatedMinutes": 0
+  }
+}

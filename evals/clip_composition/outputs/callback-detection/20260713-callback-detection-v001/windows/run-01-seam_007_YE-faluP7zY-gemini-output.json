@@ -1,0 +1,27 @@
+{
+  "callbackFindings": [
+    {
+      "targetId": "YE-faluP7zY-candidate-12",
+      "causeSpeechIds": [
+        65,
+        "66-71"
+      ],
+      "sceneDescription": "イカダの土台がサメに食べられてしまい、ころねがサメに立ち向かっていた場面である。",
+      "causalLink": "後の反応でマリンが「あ、サメ倒してたねそういえばね」と思い出すきっかけとなる直接の戦闘出来事である。",
+      "missingContextSupplied": "後の反応で突然言及されるサメ肉の入手先や、サメを討伐したという事実が事前に起きていたことが理解できるようになる。"
+    }
+  ],
+  "runAt": "2026-07-13T16:55:56+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "task": "callback-detection-search-v001",
+    "run": 1,
+    "windowId": "seam_007_YE-faluP7zY"
+  },
+  "promptFile": "reports/callback-detection/20260713-callback-detection-v001/windows/seam_007_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/0f8b252b7e6222ce?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"callbackFindings\": [\n    {\n      \"targetId\": \"YE-faluP7zY-candidate-12\",\n      \"causeSpeechIds\": [\n        65,\n        \"66-71\"\n      ],\n      \"sceneDescription\": \"イカダの土台がサメに食べられてしまい、ころねがサメに立ち向かっていた場面である。\",\n      \"causalLink\": \"後の反応でマリンが「あ、サメ倒してたねそういえばね」と思い出すきっかけとなる直接の戦闘出来事である。\",\n      \"missingContextSupplied\": \"後の反応で突然言及されるサメ肉の入手先や、サメを討伐したという事実が事前に起きていたことが理解できるようになる。\"\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

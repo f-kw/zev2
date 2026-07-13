@@ -1,0 +1,27 @@
+{
+  "callbackFindings": [
+    {
+      "targetId": "YE-faluP7zY-candidate-58",
+      "causeSpeechIds": [
+        656,
+        657
+      ],
+      "sceneDescription": "戌神ころねが海に落ちて木の板を集める際、自身が「犬（いぬ）」であるにもかかわらず「イノカキ（猪かき）」で集めていると言い間違える場面。",
+      "causalLink": "以前の場面で海を泳ぐ行動を「イノカキ」と言い間違えていたため、後の場面で置き去りにされそうになった際に「今度は（犬らしく）犬かきで行くね」と対比させて宣言する流れに繋がっています。",
+      "missingContextSupplied": "以前に「イノカキ」という独特な言い間違いをしていた前振りを知ることで、後の場面でわざわざ「犬かけ（犬かき）で行くね」と可愛く宣言したユーモアや文脈がより深く理解できるようになります。"
+    }
+  ],
+  "runAt": "2026-07-13T17:01:56+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "task": "callback-detection-search-v001",
+    "run": 1,
+    "windowId": "seam_033_YE-faluP7zY"
+  },
+  "promptFile": "reports/callback-detection/20260713-callback-detection-v001/windows/seam_033_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/4f8f5df860046bf7?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"callbackFindings\": [\n    {\n      \"targetId\": \"YE-faluP7zY-candidate-58\",\n      \"causeSpeechIds\": [\n        656,\n        657\n      ],\n      \"sceneDescription\": \"戌神ころねが海に落ちて木の板を集める際、自身が「犬（いぬ）」であるにもかかわらず「イノカキ（猪かき）」で集めていると言い間違える場面。\",\n      \"causalLink\": \"以前の場面で海を泳ぐ行動を「イノカキ」と言い間違えていたため、後の場面で置き去りにされそうになった際に「今度は（犬らしく）犬かきで行くね」と対比させて宣言する流れに繋がっています。\",\n      \"missingContextSupplied\": \"以前に「イノカキ」という独特な言い間違いをしていた前振りを知ることで、後の場面でわざわざ「犬かけ（犬かき）で行くね」と可愛く宣言したユーモアや文脈がより深く理解できるようになります。\"\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

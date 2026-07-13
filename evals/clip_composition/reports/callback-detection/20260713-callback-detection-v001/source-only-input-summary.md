@@ -1,0 +1,187 @@
+# callback-detection-v001 source-only input summary
+
+- plan: 20260713-callback-detection-v001
+- 生成系統: callback-detection-v001@gemini-web-flash
+- モデル: gemini-web-flash
+- run: 1
+- 対象元配信: 2
+- 対象候補: 4
+- 通常窓: 85
+- 境界補完窓: 83
+- 全文探索Gemini呼び出し: 168
+- 原因候補確認Gemini呼び出し: 0〜4（全文探索で有効候補が出た対象のみ）
+- prompt上限: 13084 bytes
+- 全窓漏洩検査: pass
+- 人間作業: 0件・0分
+- Gemini実走: 未実施
+
+| window | kind | source | range | speeches | targets | bytes |
+| --- | --- | --- | --- | ---: | ---: | ---: |
+| window_001_YE-faluP7zY | primary | YE-faluP7zY | 0:01:00-0:03:18 | 16 | 3 | 12919 |
+| window_002_YE-faluP7zY | primary | YE-faluP7zY | 0:03:18-0:04:58 | 4 | 3 | 12861 |
+| window_003_YE-faluP7zY | primary | YE-faluP7zY | 0:05:00-0:06:38 | 9 | 3 | 13047 |
+| window_004_YE-faluP7zY | primary | YE-faluP7zY | 0:06:38-0:07:41 | 13 | 3 | 12715 |
+| window_005_YE-faluP7zY | primary | YE-faluP7zY | 0:08:02-0:10:00 | 7 | 3 | 12942 |
+| window_006_YE-faluP7zY | primary | YE-faluP7zY | 0:10:00-0:11:16 | 8 | 3 | 12749 |
+| window_007_YE-faluP7zY | primary | YE-faluP7zY | 0:11:16-0:11:59 | 15 | 3 | 13075 |
+| window_008_YE-faluP7zY | primary | YE-faluP7zY | 0:12:00-0:13:44 | 9 | 3 | 13011 |
+| window_009_YE-faluP7zY | primary | YE-faluP7zY | 0:13:44-0:15:25 | 24 | 2 | 12912 |
+| window_010_YE-faluP7zY | primary | YE-faluP7zY | 0:15:25-0:17:38 | 20 | 2 | 12763 |
+| window_011_YE-faluP7zY | primary | YE-faluP7zY | 0:17:38-0:19:43 | 26 | 2 | 13058 |
+| window_012_YE-faluP7zY | primary | YE-faluP7zY | 0:19:43-0:21:34 | 25 | 2 | 13030 |
+| window_013_YE-faluP7zY | primary | YE-faluP7zY | 0:21:34-0:24:48 | 19 | 2 | 12986 |
+| window_014_YE-faluP7zY | primary | YE-faluP7zY | 0:24:48-0:27:19 | 20 | 2 | 13049 |
+| window_015_YE-faluP7zY | primary | YE-faluP7zY | 0:27:19-0:29:29 | 22 | 2 | 12613 |
+| window_016_YE-faluP7zY | primary | YE-faluP7zY | 0:29:30-0:31:06 | 26 | 2 | 13026 |
+| window_017_YE-faluP7zY | primary | YE-faluP7zY | 0:31:06-0:33:40 | 20 | 2 | 13030 |
+| window_018_YE-faluP7zY | primary | YE-faluP7zY | 0:33:40-0:34:59 | 25 | 2 | 12498 |
+| window_019_YE-faluP7zY | primary | YE-faluP7zY | 0:35:00-0:38:18 | 17 | 2 | 12934 |
+| window_020_YE-faluP7zY | primary | YE-faluP7zY | 0:38:18-0:40:49 | 25 | 2 | 13062 |
+| window_021_YE-faluP7zY | primary | YE-faluP7zY | 0:40:49-0:42:28 | 26 | 2 | 13083 |
+| window_022_YE-faluP7zY | primary | YE-faluP7zY | 0:42:28-0:46:13 | 21 | 2 | 13036 |
+| window_023_YE-faluP7zY | primary | YE-faluP7zY | 0:46:13-0:47:33 | 30 | 2 | 12896 |
+| window_024_YE-faluP7zY | primary | YE-faluP7zY | 0:47:33-0:50:09 | 22 | 2 | 12963 |
+| window_025_YE-faluP7zY | primary | YE-faluP7zY | 0:50:09-0:53:01 | 21 | 2 | 13054 |
+| window_026_YE-faluP7zY | primary | YE-faluP7zY | 0:53:01-0:55:42 | 25 | 2 | 12999 |
+| window_027_YE-faluP7zY | primary | YE-faluP7zY | 0:56:06-0:59:32 | 22 | 2 | 12876 |
+| window_028_YE-faluP7zY | primary | YE-faluP7zY | 1:00:01-1:03:12 | 17 | 2 | 12924 |
+| window_029_YE-faluP7zY | primary | YE-faluP7zY | 1:03:12-1:05:06 | 25 | 2 | 12993 |
+| window_030_YE-faluP7zY | primary | YE-faluP7zY | 1:05:06-1:07:24 | 23 | 2 | 13019 |
+| window_031_YE-faluP7zY | primary | YE-faluP7zY | 1:07:24-1:10:02 | 20 | 2 | 12718 |
+| window_032_YE-faluP7zY | primary | YE-faluP7zY | 1:10:02-1:11:04 | 26 | 2 | 12548 |
+| window_033_YE-faluP7zY | primary | YE-faluP7zY | 1:11:04-1:13:46 | 22 | 2 | 12914 |
+| window_034_YE-faluP7zY | primary | YE-faluP7zY | 1:13:46-1:15:48 | 26 | 2 | 13040 |
+| window_035_YE-faluP7zY | primary | YE-faluP7zY | 1:15:48-1:17:59 | 22 | 2 | 12962 |
+| window_036_YE-faluP7zY | primary | YE-faluP7zY | 1:18:01-1:20:38 | 23 | 2 | 13067 |
+| window_037_YE-faluP7zY | primary | YE-faluP7zY | 1:20:38-1:23:29 | 22 | 2 | 12908 |
+| window_038_YE-faluP7zY | primary | YE-faluP7zY | 1:23:30-1:25:35 | 25 | 2 | 12933 |
+| window_039_YE-faluP7zY | primary | YE-faluP7zY | 1:25:35-1:28:09 | 22 | 2 | 12852 |
+| window_040_YE-faluP7zY | primary | YE-faluP7zY | 1:28:09-1:30:28 | 21 | 2 | 12909 |
+| window_041_YE-faluP7zY | primary | YE-faluP7zY | 1:30:29-1:33:13 | 22 | 2 | 12909 |
+| window_042_YE-faluP7zY | primary | YE-faluP7zY | 1:33:13-1:36:12 | 23 | 2 | 13043 |
+| window_043_YE-faluP7zY | primary | YE-faluP7zY | 1:36:12-1:38:30 | 24 | 2 | 12862 |
+| window_044_YE-faluP7zY | primary | YE-faluP7zY | 1:38:30-1:41:22 | 22 | 2 | 12908 |
+| window_045_YE-faluP7zY | primary | YE-faluP7zY | 1:41:22-1:44:31 | 19 | 2 | 12937 |
+| window_046_YE-faluP7zY | primary | YE-faluP7zY | 1:44:31-1:46:55 | 23 | 2 | 12894 |
+| window_047_YE-faluP7zY | primary | YE-faluP7zY | 1:46:55-1:51:20 | 31 | 1 | 12929 |
+| window_048_YE-faluP7zY | primary | YE-faluP7zY | 1:51:20-1:54:56 | 31 | 1 | 13034 |
+| window_049_YE-faluP7zY | primary | YE-faluP7zY | 1:54:56-1:57:58 | 35 | 1 | 12611 |
+| window_050_YE-faluP7zY | primary | YE-faluP7zY | 1:58:01-2:02:29 | 26 | 1 | 12959 |
+| window_051_YE-faluP7zY | primary | YE-faluP7zY | 2:02:33-2:06:57 | 32 | 1 | 12985 |
+| window_052_YE-faluP7zY | primary | YE-faluP7zY | 2:07:00-2:07:38 | 50 | 1 | 13045 |
+| window_053_YE-faluP7zY | primary | YE-faluP7zY | 2:07:38-2:07:56 | 51 | 1 | 13033 |
+| window_054_YE-faluP7zY | primary | YE-faluP7zY | 2:07:56-2:11:29 | 34 | 1 | 12929 |
+| window_055_YE-faluP7zY | primary | YE-faluP7zY | 2:11:31-2:15:34 | 30 | 1 | 12937 |
+| window_056_YE-faluP7zY | primary | YE-faluP7zY | 2:15:34-2:20:29 | 34 | 1 | 12888 |
+| window_057_YE-faluP7zY | primary | YE-faluP7zY | 2:20:31-2:24:59 | 33 | 1 | 12998 |
+| window_058_YE-faluP7zY | primary | YE-faluP7zY | 2:25:00-2:29:59 | 21 | 1 | 12972 |
+| window_059_YE-faluP7zY | primary | YE-faluP7zY | 2:30:00-2:33:52 | 37 | 1 | 12967 |
+| window_060_YE-faluP7zY | primary | YE-faluP7zY | 2:33:52-2:37:29 | 37 | 1 | 12945 |
+| window_061_YE-faluP7zY | primary | YE-faluP7zY | 2:37:31-2:41:37 | 37 | 1 | 12908 |
+| window_062_YE-faluP7zY | primary | YE-faluP7zY | 2:41:37-2:45:32 | 28 | 1 | 12863 |
+| window_063_YE-faluP7zY | primary | YE-faluP7zY | 2:45:32-2:49:08 | 33 | 1 | 13005 |
+| window_064_YE-faluP7zY | primary | YE-faluP7zY | 2:49:08-2:53:29 | 29 | 1 | 13012 |
+| window_065_YE-faluP7zY | primary | YE-faluP7zY | 2:53:31-2:57:44 | 29 | 1 | 13015 |
+| window_066_YE-faluP7zY | primary | YE-faluP7zY | 2:57:44-3:02:09 | 32 | 1 | 13056 |
+| window_067_YE-faluP7zY | primary | YE-faluP7zY | 3:02:09-3:04:22 | 32 | 1 | 11781 |
+| seam_001_YE-faluP7zY | seam_bridge | YE-faluP7zY | 0:03:05-0:03:56 | 9 | 3 | 12990 |
+| seam_002_YE-faluP7zY | seam_bridge | YE-faluP7zY | 0:04:00-0:06:06 | 6 | 3 | 12811 |
+| seam_003_YE-faluP7zY | seam_bridge | YE-faluP7zY | 0:06:06-0:06:57 | 15 | 3 | 13032 |
+| seam_004_YE-faluP7zY | seam_bridge | YE-faluP7zY | 0:06:50-0:08:59 | 9 | 3 | 13057 |
+| seam_005_YE-faluP7zY | seam_bridge | YE-faluP7zY | 0:09:00-0:10:47 | 8 | 3 | 12988 |
+| seam_006_YE-faluP7zY | seam_bridge | YE-faluP7zY | 0:10:47-0:11:46 | 12 | 3 | 12988 |
+| seam_007_YE-faluP7zY | seam_bridge | YE-faluP7zY | 0:11:33-0:12:28 | 13 | 3 | 12949 |
+| seam_008_YE-faluP7zY | seam_bridge | YE-faluP7zY | 0:12:59-0:14:19 | 12 | 3 | 13084 |
+| seam_009_YE-faluP7zY | seam_bridge | YE-faluP7zY | 0:14:21-0:16:29 | 21 | 2 | 12958 |
+| seam_010_YE-faluP7zY | seam_bridge | YE-faluP7zY | 0:16:41-0:18:59 | 24 | 2 | 13000 |
+| seam_011_YE-faluP7zY | seam_bridge | YE-faluP7zY | 0:18:30-0:20:36 | 23 | 2 | 12997 |
+| seam_012_YE-faluP7zY | seam_bridge | YE-faluP7zY | 0:20:35-0:22:31 | 25 | 2 | 13064 |
+| seam_013_YE-faluP7zY | seam_bridge | YE-faluP7zY | 0:23:30-0:26:00 | 21 | 2 | 12811 |
+| seam_014_YE-faluP7zY | seam_bridge | YE-faluP7zY | 0:26:00-0:28:35 | 21 | 2 | 13077 |
+| seam_015_YE-faluP7zY | seam_bridge | YE-faluP7zY | 0:28:33-0:30:26 | 25 | 2 | 12993 |
+| seam_016_YE-faluP7zY | seam_bridge | YE-faluP7zY | 0:30:23-0:31:59 | 27 | 2 | 13073 |
+| seam_017_YE-faluP7zY | seam_bridge | YE-faluP7zY | 0:32:45-0:34:36 | 24 | 2 | 13046 |
+| seam_018_YE-faluP7zY | seam_bridge | YE-faluP7zY | 0:34:00-0:35:40 | 24 | 2 | 13074 |
+| seam_019_YE-faluP7zY | seam_bridge | YE-faluP7zY | 0:37:00-0:39:24 | 26 | 2 | 13076 |
+| seam_020_YE-faluP7zY | seam_bridge | YE-faluP7zY | 0:39:31-0:42:03 | 21 | 2 | 13072 |
+| seam_021_YE-faluP7zY | seam_bridge | YE-faluP7zY | 0:41:28-0:43:29 | 25 | 2 | 13020 |
+| seam_022_YE-faluP7zY | seam_bridge | YE-faluP7zY | 0:45:01-0:47:20 | 27 | 2 | 13070 |
+| seam_023_YE-faluP7zY | seam_bridge | YE-faluP7zY | 0:46:43-0:48:27 | 29 | 2 | 13020 |
+| seam_024_YE-faluP7zY | seam_bridge | YE-faluP7zY | 0:49:02-0:51:20 | 23 | 2 | 13047 |
+| seam_025_YE-faluP7zY | seam_bridge | YE-faluP7zY | 0:51:25-0:54:39 | 20 | 2 | 13031 |
+| seam_026_YE-faluP7zY | seam_bridge | YE-faluP7zY | 0:54:00-0:57:47 | 25 | 2 | 12922 |
+| seam_027_YE-faluP7zY | seam_bridge | YE-faluP7zY | 0:57:47-1:01:29 | 20 | 2 | 12903 |
+| seam_028_YE-faluP7zY | seam_bridge | YE-faluP7zY | 1:02:30-1:03:59 | 27 | 2 | 13076 |
+| seam_029_YE-faluP7zY | seam_bridge | YE-faluP7zY | 1:04:00-1:05:59 | 22 | 2 | 12712 |
+| seam_030_YE-faluP7zY | seam_bridge | YE-faluP7zY | 1:06:01-1:08:59 | 20 | 2 | 12912 |
+| seam_031_YE-faluP7zY | seam_bridge | YE-faluP7zY | 1:09:14-1:10:54 | 25 | 2 | 12945 |
+| seam_032_YE-faluP7zY | seam_bridge | YE-faluP7zY | 1:10:30-1:11:48 | 27 | 2 | 12986 |
+| seam_033_YE-faluP7zY | seam_bridge | YE-faluP7zY | 1:12:42-1:14:51 | 27 | 2 | 13008 |
+| seam_034_YE-faluP7zY | seam_bridge | YE-faluP7zY | 1:14:45-1:16:36 | 26 | 2 | 13043 |
+| seam_035_YE-faluP7zY | seam_bridge | YE-faluP7zY | 1:17:00-1:19:24 | 22 | 2 | 12935 |
+| seam_036_YE-faluP7zY | seam_bridge | YE-faluP7zY | 1:19:10-1:21:57 | 24 | 2 | 13037 |
+| seam_037_YE-faluP7zY | seam_bridge | YE-faluP7zY | 1:21:57-1:24:34 | 23 | 2 | 13014 |
+| seam_038_YE-faluP7zY | seam_bridge | YE-faluP7zY | 1:24:07-1:26:53 | 22 | 2 | 12973 |
+| seam_039_YE-faluP7zY | seam_bridge | YE-faluP7zY | 1:27:05-1:29:10 | 24 | 2 | 12966 |
+| seam_040_YE-faluP7zY | seam_bridge | YE-faluP7zY | 1:29:01-1:31:54 | 20 | 2 | 13062 |
+| seam_041_YE-faluP7zY | seam_bridge | YE-faluP7zY | 1:31:54-1:34:32 | 24 | 2 | 12934 |
+| seam_042_YE-faluP7zY | seam_bridge | YE-faluP7zY | 1:34:50-1:37:11 | 24 | 2 | 12986 |
+| seam_043_YE-faluP7zY | seam_bridge | YE-faluP7zY | 1:36:53-1:40:12 | 20 | 2 | 13057 |
+| seam_044_YE-faluP7zY | seam_bridge | YE-faluP7zY | 1:40:00-1:42:32 | 22 | 2 | 12828 |
+| seam_045_YE-faluP7zY | seam_bridge | YE-faluP7zY | 1:43:00-1:46:01 | 21 | 2 | 13055 |
+| seam_046_YE-faluP7zY | seam_bridge | YE-faluP7zY | 1:45:00-1:48:59 | 33 | 1 | 12812 |
+| seam_047_YE-faluP7zY | seam_bridge | YE-faluP7zY | 1:49:30-1:53:12 | 34 | 1 | 12875 |
+| seam_048_YE-faluP7zY | seam_bridge | YE-faluP7zY | 1:53:00-1:56:55 | 30 | 1 | 12987 |
+| seam_049_YE-faluP7zY | seam_bridge | YE-faluP7zY | 1:56:11-1:59:59 | 34 | 1 | 12987 |
+| seam_050_YE-faluP7zY | seam_bridge | YE-faluP7zY | 2:00:35-2:04:28 | 29 | 1 | 13050 |
+| seam_051_YE-faluP7zY | seam_bridge | YE-faluP7zY | 2:06:15-2:07:37 | 47 | 1 | 13019 |
+| seam_052_YE-faluP7zY | seam_bridge | YE-faluP7zY | 2:07:34-2:07:41 | 51 | 1 | 13035 |
+| seam_053_YE-faluP7zY | seam_bridge | YE-faluP7zY | 2:07:43-2:08:16 | 50 | 1 | 12990 |
+| seam_054_YE-faluP7zY | seam_bridge | YE-faluP7zY | 2:09:00-2:13:29 | 24 | 1 | 12960 |
+| seam_055_YE-faluP7zY | seam_bridge | YE-faluP7zY | 2:13:32-2:18:17 | 36 | 1 | 12899 |
+| seam_056_YE-faluP7zY | seam_bridge | YE-faluP7zY | 2:18:20-2:22:28 | 36 | 1 | 13083 |
+| seam_057_YE-faluP7zY | seam_bridge | YE-faluP7zY | 2:23:00-2:26:58 | 24 | 1 | 12576 |
+| seam_058_YE-faluP7zY | seam_bridge | YE-faluP7zY | 2:27:30-2:32:28 | 30 | 1 | 12982 |
+| seam_059_YE-faluP7zY | seam_bridge | YE-faluP7zY | 2:32:10-2:35:28 | 39 | 1 | 13052 |
+| seam_060_YE-faluP7zY | seam_bridge | YE-faluP7zY | 2:35:22-2:39:35 | 39 | 1 | 13073 |
+| seam_061_YE-faluP7zY | seam_bridge | YE-faluP7zY | 2:39:40-2:43:28 | 35 | 1 | 13036 |
+| seam_062_YE-faluP7zY | seam_bridge | YE-faluP7zY | 2:43:32-2:47:35 | 26 | 1 | 12874 |
+| seam_063_YE-faluP7zY | seam_bridge | YE-faluP7zY | 2:47:30-2:51:08 | 33 | 1 | 12909 |
+| seam_064_YE-faluP7zY | seam_bridge | YE-faluP7zY | 2:51:13-2:55:57 | 25 | 1 | 13027 |
+| seam_065_YE-faluP7zY | seam_bridge | YE-faluP7zY | 2:55:57-2:59:29 | 35 | 1 | 12868 |
+| seam_066_YE-faluP7zY | seam_bridge | YE-faluP7zY | 3:00:19-3:03:51 | 33 | 1 | 13007 |
+| window_001_o8rZAhARXAc | primary | o8rZAhARXAc | 0:00:09-0:05:28 | 30 | 1 | 13045 |
+| window_002_o8rZAhARXAc | primary | o8rZAhARXAc | 0:05:30-0:08:52 | 36 | 1 | 12955 |
+| window_003_o8rZAhARXAc | primary | o8rZAhARXAc | 0:08:52-0:11:29 | 35 | 1 | 12687 |
+| window_004_o8rZAhARXAc | primary | o8rZAhARXAc | 0:11:31-0:16:53 | 26 | 1 | 13081 |
+| window_005_o8rZAhARXAc | primary | o8rZAhARXAc | 0:16:53-0:21:57 | 35 | 1 | 13026 |
+| window_006_o8rZAhARXAc | primary | o8rZAhARXAc | 0:22:03-0:27:22 | 35 | 1 | 12907 |
+| window_007_o8rZAhARXAc | primary | o8rZAhARXAc | 0:27:22-0:33:59 | 23 | 1 | 12941 |
+| window_008_o8rZAhARXAc | primary | o8rZAhARXAc | 0:34:00-0:41:29 | 23 | 1 | 12871 |
+| window_009_o8rZAhARXAc | primary | o8rZAhARXAc | 0:41:31-0:47:10 | 32 | 1 | 12946 |
+| window_010_o8rZAhARXAc | primary | o8rZAhARXAc | 0:47:10-0:51:36 | 39 | 1 | 13046 |
+| window_011_o8rZAhARXAc | primary | o8rZAhARXAc | 0:51:36-1:00:37 | 33 | 1 | 13084 |
+| window_012_o8rZAhARXAc | primary | o8rZAhARXAc | 1:00:37-1:07:29 | 25 | 1 | 13059 |
+| window_013_o8rZAhARXAc | primary | o8rZAhARXAc | 1:07:32-1:13:59 | 20 | 1 | 13033 |
+| window_014_o8rZAhARXAc | primary | o8rZAhARXAc | 1:14:05-1:17:42 | 36 | 1 | 13054 |
+| window_015_o8rZAhARXAc | primary | o8rZAhARXAc | 1:17:42-1:21:51 | 37 | 1 | 12871 |
+| window_016_o8rZAhARXAc | primary | o8rZAhARXAc | 1:21:51-1:25:29 | 36 | 1 | 13026 |
+| window_017_o8rZAhARXAc | primary | o8rZAhARXAc | 1:25:33-1:30:06 | 33 | 1 | 12946 |
+| window_018_o8rZAhARXAc | primary | o8rZAhARXAc | 1:30:06-1:34:58 | 30 | 1 | 12414 |
+| seam_001_o8rZAhARXAc | seam_bridge | o8rZAhARXAc | 0:03:30-0:06:59 | 34 | 1 | 12960 |
+| seam_002_o8rZAhARXAc | seam_bridge | o8rZAhARXAc | 0:08:02-0:09:18 | 44 | 1 | 13013 |
+| seam_003_o8rZAhARXAc | seam_bridge | o8rZAhARXAc | 0:09:08-0:13:54 | 26 | 1 | 13041 |
+| seam_004_o8rZAhARXAc | seam_bridge | o8rZAhARXAc | 0:14:38-0:19:19 | 33 | 1 | 13030 |
+| seam_005_o8rZAhARXAc | seam_bridge | o8rZAhARXAc | 0:19:00-0:24:55 | 34 | 1 | 12966 |
+| seam_006_o8rZAhARXAc | seam_bridge | o8rZAhARXAc | 0:24:38-0:30:29 | 29 | 1 | 12818 |
+| seam_007_o8rZAhARXAc | seam_bridge | o8rZAhARXAc | 0:30:30-0:37:55 | 21 | 1 | 12961 |
+| seam_008_o8rZAhARXAc | seam_bridge | o8rZAhARXAc | 0:38:31-0:44:50 | 29 | 1 | 12895 |
+| seam_009_o8rZAhARXAc | seam_bridge | o8rZAhARXAc | 0:45:00-0:49:23 | 37 | 1 | 13020 |
+| seam_010_o8rZAhARXAc | seam_bridge | o8rZAhARXAc | 0:48:33-0:54:45 | 37 | 1 | 12939 |
+| seam_011_o8rZAhARXAc | seam_bridge | o8rZAhARXAc | 0:57:18-1:03:57 | 30 | 1 | 13080 |
+| seam_012_o8rZAhARXAc | seam_bridge | o8rZAhARXAc | 1:04:31-1:10:27 | 22 | 1 | 12796 |
+| seam_013_o8rZAhARXAc | seam_bridge | o8rZAhARXAc | 1:11:30-1:16:22 | 30 | 1 | 12914 |
+| seam_014_o8rZAhARXAc | seam_bridge | o8rZAhARXAc | 1:16:18-1:19:24 | 37 | 1 | 12989 |
+| seam_015_o8rZAhARXAc | seam_bridge | o8rZAhARXAc | 1:19:01-1:24:25 | 34 | 1 | 13057 |
+| seam_016_o8rZAhARXAc | seam_bridge | o8rZAhARXAc | 1:24:18-1:26:59 | 37 | 1 | 12911 |
+| seam_017_o8rZAhARXAc | seam_bridge | o8rZAhARXAc | 1:27:10-1:32:57 | 30 | 1 | 12818 |

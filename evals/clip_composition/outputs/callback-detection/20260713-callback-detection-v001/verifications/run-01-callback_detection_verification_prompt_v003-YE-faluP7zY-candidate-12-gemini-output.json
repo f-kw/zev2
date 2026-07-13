@@ -1,0 +1,24 @@
+{
+  "callbackDecisions": [
+    {
+      "targetId": "YE-faluP7zY-candidate-12",
+      "decision": "supporting_context_only",
+      "primaryFindingId": null,
+      "alternativeFindingIds": [],
+      "reason": "発見された場面は、中心反応の末尾にある「サメ倒してたね」という脇話の背景を説明するにとどまり、中心イベントである「食料不足の中で鳥を仕留める」ことの直接の原因ではないため。"
+    }
+  ],
+  "runAt": "2026-07-13T17:23:06+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "task": "callback-detection-verification-v001",
+    "run": 1,
+    "targetId": "YE-faluP7zY-candidate-12"
+  },
+  "promptFile": "reports/callback-detection/20260713-callback-detection-v001/verifications/callback_detection_verification_prompt_v003-YE-faluP7zY-candidate-12-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/262deafe08bf6eab?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"callbackDecisions\": [\n    {\n      \"targetId\": \"YE-faluP7zY-candidate-12\",\n      \"decision\": \"supporting_context_only\",\n      \"primaryFindingId\": null,\n      \"alternativeFindingIds\": [],\n      \"reason\": \"発見された場面は、中心反応の末尾にある「サメ倒してたね」という脇話の背景を説明するにとどまり、中心イベントである「食料不足の中で鳥を仕留める」ことの直接の原因ではないため。\"\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

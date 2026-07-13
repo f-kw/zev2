@@ -1,0 +1,191 @@
+{
+  "kind": "callback_detection_v001_result",
+  "createdAt": "2026-07-13T08:23:38.611Z",
+  "generationSystem": "callback-detection-v001@gemini-web-flash",
+  "promptVersion": "callback_detection_search_prompt_v001",
+  "verificationPromptVersion": "callback_detection_verification_prompt_v003",
+  "model": "gemini-web-flash",
+  "run": 1,
+  "search": {
+    "windowCount": 168,
+    "completedWindowCount": 168,
+    "rawFindingCount": 20,
+    "validFindingCount": 20,
+    "invalidFindingCount": 0
+  },
+  "targets": [
+    {
+      "targetId": "YE-faluP7zY-candidate-12",
+      "status": "verified",
+      "promptBytes": 5679,
+      "findingCount": 2,
+      "verificationGroupCount": 1,
+      "decision": {
+        "targetId": "YE-faluP7zY-candidate-12",
+        "decision": "supporting_context_only",
+        "primaryFindingId": null,
+        "alternativeFindingIds": [],
+        "reason": "発見された場面は、中心反応の末尾にある「サメ倒してたね」という脇話の背景を説明するにとどまり、中心イベントである「食料不足の中で鳥を仕留める」ことの直接の原因ではないため。"
+      },
+      "primaryFinding": null,
+      "alternativeFindings": []
+    },
+    {
+      "targetId": "YE-faluP7zY-candidate-58",
+      "status": "verification_input_overflow",
+      "promptBytes": 13114,
+      "maxPromptBytes": 13084,
+      "findingCount": 8,
+      "verificationGroupCount": 6,
+      "decision": null
+    },
+    {
+      "targetId": "YE-faluP7zY-candidate-84",
+      "status": "verified",
+      "promptBytes": 12590,
+      "findingCount": 9,
+      "verificationGroupCount": 6,
+      "decision": {
+        "targetId": "YE-faluP7zY-candidate-84",
+        "decision": "actual_separate_cause",
+        "primaryFindingId": "seam_066_YE-faluP7zY-finding-01",
+        "alternativeFindingIds": [
+          "window_060_YE-faluP7zY-finding-01"
+        ],
+        "reason": "直前にローテーブルを作って失敗し、粘土を浪費して苛立っている場面であり、そのすぐ後に「粘土返せ」「これもローテーブルだったら」とさらに失敗を繰り返してキレる中心反応を直接引き起こした原因であるため。"
+      },
+      "primaryFinding": {
+        "findingId": "seam_066_YE-faluP7zY-finding-01",
+        "targetId": "YE-faluP7zY-candidate-84",
+        "sourceVideoId": "YE-faluP7zY",
+        "windowId": "seam_066_YE-faluP7zY",
+        "windowKind": "seam_bridge",
+        "causeSpeechIds": [
+          1624,
+          "1632-1634"
+        ],
+        "expandedCauseSpeechIds": [
+          1624,
+          1632,
+          1633,
+          1634
+        ],
+        "sourceStartMs": 10982423,
+        "sourceEndMs": 11017404,
+        "reactionStartMs": 11062309,
+        "reactionEndMs": 11098463,
+        "causeSegments": [
+          {
+            "speechId": 1624,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 10982423,
+            "sourceEndMs": 10992250,
+            "text": "あ、でも床に置く式かあ、じゃあこれテーブル作ってテーブルに置こうあ、いいねー!"
+          },
+          {
+            "speechId": 1632,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 11012201,
+            "sourceEndMs": 11014042,
+            "text": "え、待ってローテーブルだこれ!"
+          },
+          {
+            "speechId": 1633,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 11014042,
+            "sourceEndMs": 11015763,
+            "text": "しまった!"
+          },
+          {
+            "speechId": 1634,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 11015763,
+            "sourceEndMs": 11017404,
+            "text": "ローテーブルだ!"
+          }
+        ],
+        "sceneDescription": "宝鐘マリンが花を置くためにテーブルを作ることを提案するが、作成したものが想像より低いローテーブルだったため動揺する場面。",
+        "causalLink": "この直後に、別の高いテーブルを作ろうとして再びローテーブルを作成してしまい、最終的に正解のテーブルを見つけるが大量に余ってしまうというオチに繋がっている。",
+        "missingContextSupplied": "最初のテーブル作成時にすでに意図しない「ローテーブル」を作ってしまっていた失敗の経緯が分かり、その後の再挑戦と量産への流れが理解できるようになる。",
+        "overlapGroupId": "YE-faluP7zY-candidate-84-group-06"
+      },
+      "alternativeFindings": [
+        {
+          "findingId": "window_060_YE-faluP7zY-finding-01",
+          "targetId": "YE-faluP7zY-candidate-84",
+          "sourceVideoId": "YE-faluP7zY",
+          "windowId": "window_060_YE-faluP7zY",
+          "windowKind": "primary",
+          "causeSpeechIds": [
+            "1392-1395"
+          ],
+          "expandedCauseSpeechIds": [
+            1392,
+            1393,
+            1394,
+            1395
+          ],
+          "sourceStartMs": 9242295,
+          "sourceEndMs": 9266352,
+          "reactionStartMs": 11062309,
+          "reactionEndMs": 11098463,
+          "causeSegments": [
+            {
+              "speechId": 1392,
+              "sourceVideoId": "YE-faluP7zY",
+              "sourceStartMs": 9242295,
+              "sourceEndMs": 9249280,
+              "text": "ここにさ、あれないんだわえっと…今の、ど…え?"
+            },
+            {
+              "speechId": 1393,
+              "sourceVideoId": "YE-faluP7zY",
+              "sourceStartMs": 9249280,
+              "sourceEndMs": 9249420,
+              "text": "こいか…あー!"
+            },
+            {
+              "speechId": 1394,
+              "sourceVideoId": "YE-faluP7zY",
+              "sourceStartMs": 9249420,
+              "sourceEndMs": 9252482,
+              "text": "え、しかもめっちゃコスト変わるえ、ちょっと作ってみようかなえ、作ろう作ろう!"
+            },
+            {
+              "speechId": 1395,
+              "sourceVideoId": "YE-faluP7zY",
+              "sourceStartMs": 9252482,
+              "sourceEndMs": 9266352,
+              "text": "え、作るわーありがてぇこいでこーでこいでこーでできたえ、ちっちゃいちっちゃいふざけてんのか?"
+            }
+          ],
+          "sceneDescription": "宝鐘マリンが新しい家具を作ろうとした際、想像以上にサイズの小さいローテーブルが完成してしまい不満を漏らす場面。",
+          "causalLink": "この最初の失敗（1回目のローテーブル作成）があるため、後の場面で「またローテーブルだったらどうしよう」と警戒しながらクラフトし、結果的に大量の不要なテーブルを作ってしまう展開に繋がっています。",
+          "missingContextSupplied": "後の場面でなぜ彼女が「これもローテーブルだったらもうさあ」と苛立っているのか、そしてなぜ「いっぱいテーブルを作っちゃった」という状況に陥ったのかという、一連のやらかしの起点となった最初の失敗を理解できるようになります。",
+          "overlapGroupId": "YE-faluP7zY-candidate-84-group-04"
+        }
+      ]
+    },
+    {
+      "targetId": "o8rZAhARXAc-candidate-25",
+      "status": "verified",
+      "promptBytes": 6130,
+      "findingCount": 1,
+      "verificationGroupCount": 1,
+      "decision": {
+        "targetId": "o8rZAhARXAc-candidate-25",
+        "decision": "same_scene_recap",
+        "primaryFindingId": null,
+        "alternativeFindingIds": [],
+        "reason": "発見された場面は同じ対戦相手選択・抽選イベントの一連の流れの一部（直前のシーン）であり、別場面の出来事が原因となったコールバックの関係ではないため。"
+      },
+      "primaryFinding": null,
+      "alternativeFindings": []
+    }
+  ],
+  "geminiTabCountAfterRun": 0,
+  "humanWork": {
+    "itemCount": 0,
+    "estimatedMinutes": 0
+  }
+}

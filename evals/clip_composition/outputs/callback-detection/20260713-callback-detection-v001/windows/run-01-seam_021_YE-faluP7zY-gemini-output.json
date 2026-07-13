@@ -1,0 +1,27 @@
+{
+  "callbackFindings": [
+    {
+      "targetId": "YE-faluP7zY-candidate-58",
+      "causeSpeechIds": [
+        363,
+        "365-366"
+      ],
+      "sceneDescription": "戌神ころねが水の中で息ができると調子に乗っていたところ、窒息して死にかけ、他のメンバーに驚かれる場面。",
+      "causalLink": "以前に水中で死にかけた失敗があるため、後の場面で置き去りにされそうになった際に「（水中で）犬かきでそっちまで行く」と健気に宣言し、直後に溺れそうになって絶叫する反応がより面白く成立している。",
+      "missingContextSupplied": "ころねがかつて水中で窒息しかけたポンコツな前科を知ることで、彼女の「犬かきで行く」という無茶な宣言と、その後の距離が離れて焦る絶叫の切迫感がより深く理解できるようになる。"
+    }
+  ],
+  "runAt": "2026-07-13T16:59:23+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "task": "callback-detection-search-v001",
+    "run": 1,
+    "windowId": "seam_021_YE-faluP7zY"
+  },
+  "promptFile": "reports/callback-detection/20260713-callback-detection-v001/windows/seam_021_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/27ed9216bc5fec21?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"callbackFindings\": [\n    {\n      \"targetId\": \"YE-faluP7zY-candidate-58\",\n      \"causeSpeechIds\": [\n        363,\n        \"365-366\"\n      ],\n      \"sceneDescription\": \"戌神ころねが水の中で息ができると調子に乗っていたところ、窒息して死にかけ、他のメンバーに驚かれる場面。\",\n      \"causalLink\": \"以前に水中で死にかけた失敗があるため、後の場面で置き去りにされそうになった際に「（水中で）犬かきでそっちまで行く」と健気に宣言し、直後に溺れそうになって絶叫する反応がより面白く成立している。\",\n      \"missingContextSupplied\": \"ころねがかつて水中で窒息しかけたポンコツな前科を知ることで、彼女の「犬かきで行く」という無茶な宣言と、その後の距離が離れて焦る絶叫の切迫感がより深く理解できるようになる。\"\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

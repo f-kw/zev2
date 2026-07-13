@@ -1,0 +1,24 @@
+{
+  "callbackDecisions": [
+    {
+      "targetId": "o8rZAhARXAc-candidate-25",
+      "decision": "supporting_context_only",
+      "primaryFindingId": null,
+      "alternativeFindingIds": [],
+      "reason": "findingsに示された場面は抽選会が始まって全体のランクの高さに怯えている前置きの状況であり、ターゲットの「Bランクを引いて焦る」という結果の直接的な原因そのものではなく、その背景となる関連情報の補足に留まるため。"
+    }
+  ],
+  "runAt": "2026-07-13T17:17:09+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "task": "callback-detection-verification-v001",
+    "run": 1,
+    "targetId": "o8rZAhARXAc-candidate-25"
+  },
+  "promptFile": "reports/callback-detection/20260713-callback-detection-v001/verifications/o8rZAhARXAc-candidate-25-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/4ce0889eb636a71a?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"callbackDecisions\": [\n    {\n      \"targetId\": \"o8rZAhARXAc-candidate-25\",\n      \"decision\": \"supporting_context_only\",\n      \"primaryFindingId\": null,\n      \"alternativeFindingIds\": [],\n      \"reason\": \"findingsに示された場面は抽選会が始まって全体のランクの高さに怯えている前置きの状況であり、ターゲットの「Bランクを引いて焦る」という結果の直接的な原因そのものではなく、その背景となる関連情報の補足に留まるため。\"\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

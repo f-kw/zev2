@@ -1,0 +1,27 @@
+{
+  "callbackFindings": [
+    {
+      "targetId": "YE-faluP7zY-candidate-84",
+      "causeSpeechIds": [
+        1632,
+        "1645-1646"
+      ],
+      "sceneDescription": "宝鐘マリンが花を置くために粘土を使ってテーブルを作るも、完成したものがイメージと違う低いローテーブル（ちゃぶ台）だったため、貴重な粘土を無駄にしてしまい悔しがっている場面。",
+      "causalLink": "この直後に別の高いテーブルを作ろうと再挑戦するものの、再び低いテーブルや別のサイズ違いを作ってしまい、「粘土返せ」「これもローテーブルだったら」とさらに怒りを募らせる反応へと繋がります。",
+      "missingContextSupplied": "最初の挑戦で既にローテーブル（ちゃぶ台）を作ってしまい粘土を無駄にしている前段階を知ることで、なぜ後から「粘土返せ」「これもローテーブルだったら耐えられない」と必死に怒っているのかという文脈が理解できるようになります。"
+    }
+  ],
+  "runAt": "2026-07-13T16:54:28+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "task": "callback-detection-search-v001",
+    "run": 1,
+    "windowId": "window_067_YE-faluP7zY"
+  },
+  "promptFile": "reports/callback-detection/20260713-callback-detection-v001/windows/window_067_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/b43b8037f7353b8d?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"callbackFindings\": [\n    {\n      \"targetId\": \"YE-faluP7zY-candidate-84\",\n      \"causeSpeechIds\": [1632, \"1645-1646\"],\n      \"sceneDescription\": \"宝鐘マリンが花を置くために粘土を使ってテーブルを作るも、完成したものがイメージと違う低いローテーブル（ちゃぶ台）だったため、貴重な粘土を無駄にしてしまい悔しがっている場面。\",\n      \"causalLink\": \"この直後に別の高いテーブルを作ろうと再挑戦するものの、再び低いテーブルや別のサイズ違いを作ってしまい、「粘土返せ」「これもローテーブルだったら」とさらに怒りを募らせる反応へと繋がります。\",\n      \"missingContextSupplied\": \"最初の挑戦で既にローテーブル（ちゃぶ台）を作ってしまい粘土を無駄にしている前段階を知ることで、なぜ後から「粘土返せ」「これもローテーブルだったら耐えられない」と必死に怒っているのかという文脈が理解できるようになります。\"\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

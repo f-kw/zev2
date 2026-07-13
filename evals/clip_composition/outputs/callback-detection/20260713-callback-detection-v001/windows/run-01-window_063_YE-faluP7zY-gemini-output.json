@@ -1,0 +1,27 @@
+{
+  "callbackFindings": [
+    {
+      "targetId": "YE-faluP7zY-candidate-84",
+      "causeSpeechIds": [
+        1521,
+        1522
+      ],
+      "sceneDescription": "宝鐘マリンが配置をいじるために真ん中にテーブルを置こうと計画し、実際に作業を開始する場面です。",
+      "causalLink": "ここでテーブルを置こうとしたことが発端となり、後の場面で誤ってローテーブルを量産してしまう失敗に繋がっています。",
+      "missingContextSupplied": "後の場面でなぜ急にテーブルを制作・配置し始め、粘土の無駄遣いに怒っているのかという、一連の作業の本来の目的が理解できるようになります。"
+    }
+  ],
+  "runAt": "2026-07-13T16:53:32+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "task": "callback-detection-search-v001",
+    "run": 1,
+    "windowId": "window_063_YE-faluP7zY"
+  },
+  "promptFile": "reports/callback-detection/20260713-callback-detection-v001/windows/window_063_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/53503ba63b58a577?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"callbackFindings\": [\n    {\n      \"targetId\": \"YE-faluP7zY-candidate-84\",\n      \"causeSpeechIds\": [\n        1521,\n        1522\n      ],\n      \"sceneDescription\": \"宝鐘マリンが配置をいじるために真ん中にテーブルを置こうと計画し、実際に作業を開始する場面です。\",\n      \"causalLink\": \"ここでテーブルを置こうとしたことが発端となり、後の場面で誤ってローテーブルを量産してしまう失敗に繋がっています。\",\n      \"missingContextSupplied\": \"後の場面でなぜ急にテーブルを制作・配置し始め、粘土の無駄遣いに怒っているのかという、一連の作業の本来の目的が理解できるようになります。\"\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

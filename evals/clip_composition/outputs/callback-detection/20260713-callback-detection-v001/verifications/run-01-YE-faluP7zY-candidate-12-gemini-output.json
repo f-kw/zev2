@@ -1,0 +1,26 @@
+{
+  "callbackDecisions": [
+    {
+      "targetId": "YE-faluP7zY-candidate-12",
+      "decision": "actual_separate_cause",
+      "primaryFindingId": "seam_007_YE-faluP7zY-finding-01",
+      "alternativeFindingIds": [
+        "window_007_YE-faluP7zY-finding-01"
+      ],
+      "reason": "後の反応の終盤で言及されるサメ肉の発見と「サメ倒してたねそういえばね」という納得の直接的な原因となった場面（サメとの交戦）が別場面として含まれているため。"
+    }
+  ],
+  "runAt": "2026-07-13T17:16:57+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "task": "callback-detection-verification-v001",
+    "run": 1,
+    "targetId": "YE-faluP7zY-candidate-12"
+  },
+  "promptFile": "reports/callback-detection/20260713-callback-detection-v001/verifications/YE-faluP7zY-candidate-12-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/520392664443dff5?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"callbackDecisions\": [\n    {\n      \"targetId\": \"YE-faluP7zY-candidate-12\",\n      \"decision\": \"actual_separate_cause\",\n      \"primaryFindingId\": \"seam_007_YE-faluP7zY-finding-01\",\n      \"alternativeFindingIds\": [\n        \"window_007_YE-faluP7zY-finding-01\"\n      ],\n      \"reason\": \"後の反応の終盤で言及されるサメ肉の発見と「サメ倒してたねそういえばね」という納得の直接的な原因となった場面（サメとの交戦）が別場面として含まれているため。\"\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

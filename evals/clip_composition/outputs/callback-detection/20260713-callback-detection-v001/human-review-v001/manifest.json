@@ -1,0 +1,188 @@
+{
+  "kind": "callback_detection_v001_human_review_package",
+  "createdAt": "2026-07-13T08:36:10.057Z",
+  "sourceResult": "evals/clip_composition/outputs/callback-detection/20260713-callback-detection-v001/result.json",
+  "generationSystem": "callback-detection-v001@gemini-web-flash",
+  "verificationPromptVersion": "callback_detection_verification_prompt_v003",
+  "verificationInputVersion": "callback_detection_verification_input_v002",
+  "purpose": "元配信の別位置から機械が見つけた主原因を先に見せ、後の反応の本当の原因か四択で確認する。",
+  "choices": [
+    "原因として正しい",
+    "関連はあるが原因ではない",
+    "関係ない",
+    "判断できない"
+  ],
+  "humanWorkEstimate": {
+    "itemCount": 2,
+    "estimatedMinutesPerItemUpperBound": 2,
+    "estimatedTotalMinutesUpperBound": 4
+  },
+  "playback": {
+    "defaultRate": 1.5,
+    "totalDurationMs": 137539,
+    "durationAtDefaultRateMs": 91693
+  },
+  "answerStatus": "awaiting-human-review",
+  "fixtureAndExpectedChanges": false,
+  "items": [
+    {
+      "targetId": "YE-faluP7zY-candidate-58",
+      "sourceVideoId": "YE-faluP7zY",
+      "candidateId": 58,
+      "title": "置き去りにされそうになって焦る戌神ころね",
+      "reason": "マリン船長が移動する中で、置き去りにされそうになったころねが「犬かきで行く」と可愛く宣言した直後、どんどん距離が離れていって絶叫する見どころのある展開になっているため。",
+      "machineReason": "マリン船長が船を動かして移動を開始した出来事そのものが、ころねが置き去りにされて絶叫する中心反応の直接的な原因となっています。",
+      "causeFindingId": "seam_045_YE-faluP7zY-finding-01",
+      "causeStartMs": 6271020,
+      "causeEndMs": 6276563,
+      "causeSegments": [
+        {
+          "speechId": 922,
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 6271020,
+          "sourceEndMs": 6276563,
+          "text": "あれ鉱石あんだってちょっと集めてくるわちょっとあれ船長?"
+        }
+      ],
+      "reactionStartMs": 6300522,
+      "reactionEndMs": 6361383,
+      "reactionSegments": [
+        {
+          "speechId": 927,
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 6300522,
+          "sourceEndMs": 6328283,
+          "text": "で、大区画のあ、蝶津貝もいるのかちょっと下に潜って探すねありがとうどうしよう、どんどんこの隙に移動しててさコーネが置き去りにされていてしまったらば置き去りにされたらコーネはでも犬かけにそっちまで行くねなかわいいかわいい!"
+        },
+        {
+          "speechId": 928,
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 6328283,
+          "sourceEndMs": 6328883,
+          "text": "届きましたよ!"
+        },
+        {
+          "speechId": 929,
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 6332538,
+          "sourceEndMs": 6335759,
+          "text": "そういうとこがね、好きなんだねえ、やだぁ?"
+        },
+        {
+          "speechId": 930,
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 6335759,
+          "sourceEndMs": 6336419,
+          "text": "んん?"
+        },
+        {
+          "speechId": 931,
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 6336419,
+          "sourceEndMs": 6361383,
+          "text": "待て待て、めっちゃwwwこ、こね、どんどん離れていってるwwwまねぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇぇでも、ほんと?"
+        }
+      ],
+      "causeVideoPath": "media/YE-faluP7zY-candidate-58-cause.mp4",
+      "reactionVideoPath": "media/YE-faluP7zY-candidate-58-reaction.mp4",
+      "causeMedia": {
+        "expectedDurationMs": 5543,
+        "actualDurationMs": 5566
+      },
+      "reactionMedia": {
+        "expectedDurationMs": 60861,
+        "actualDurationMs": 60883
+      }
+    },
+    {
+      "targetId": "YE-faluP7zY-candidate-84",
+      "sourceVideoId": "YE-faluP7zY",
+      "candidateId": 84,
+      "title": "間違えてテーブルを量産してしまう宝鐘マリン",
+      "reason": "別の高いテーブルを作ろうとするも再びローテーブルを作ってしまい、最終的に正解のテーブルを見つけるが大量に余ったテーブルの処理に困るオチがついているため。",
+      "machineReason": "targetの直前でローテーブルを作ってしまい「粘土返して」「これもローテーブルだったら耐えられない」と憤慨している場面（seam_066）が、targetの「粘土返せになる」「これもローテーブルだったら…」というキレながらの再挑戦と量産に直結する最も直接的な原因です（1回目の失敗であるwindow_060も伏線として機能しているためalternativeに含みます）。",
+      "causeFindingId": "seam_066_YE-faluP7zY-finding-01",
+      "causeStartMs": 10982423,
+      "causeEndMs": 11017404,
+      "causeSegments": [
+        {
+          "speechId": 1624,
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 10982423,
+          "sourceEndMs": 10992250,
+          "text": "あ、でも床に置く式かあ、じゃあこれテーブル作ってテーブルに置こうあ、いいねー!"
+        },
+        {
+          "speechId": 1632,
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 11012201,
+          "sourceEndMs": 11014042,
+          "text": "え、待ってローテーブルだこれ!"
+        },
+        {
+          "speechId": 1633,
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 11014042,
+          "sourceEndMs": 11015763,
+          "text": "しまった!"
+        },
+        {
+          "speechId": 1634,
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 11015763,
+          "sourceEndMs": 11017404,
+          "text": "ローテーブルだ!"
+        }
+      ],
+      "reactionStartMs": 11062309,
+      "reactionEndMs": 11098463,
+      "reactionSegments": [
+        {
+          "speechId": 1647,
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 11062309,
+          "sourceEndMs": 11068992,
+          "text": "粘土返せになるよいや粘土粘土は大ヒロ低いか"
+        },
+        {
+          "speechId": 1648,
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 11070330,
+          "sourceEndMs": 11074092,
+          "text": "でかいやつこれなら絶対これは大丈夫でしょ?"
+        },
+        {
+          "speechId": 1649,
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 11074092,
+          "sourceEndMs": 11078154,
+          "text": "これもローテーブルだったらもうさあねえ小せえ!"
+        },
+        {
+          "speechId": 1650,
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 11078154,
+          "sourceEndMs": 11082476,
+          "text": "もううぜえマジで待ってこれじゃない?"
+        },
+        {
+          "speechId": 1651,
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 11082476,
+          "sourceEndMs": 11098463,
+          "text": "上に物を置くテーブルうわこっちだわ完全こっちねえいっぱいテーブル作っちゃったそれさなんかウェディングケーキみたいに重ねられないの?"
+        }
+      ],
+      "causeVideoPath": "media/YE-faluP7zY-candidate-84-cause.mp4",
+      "reactionVideoPath": "media/YE-faluP7zY-candidate-84-reaction.mp4",
+      "causeMedia": {
+        "expectedDurationMs": 34981,
+        "actualDurationMs": 34999
+      },
+      "reactionMedia": {
+        "expectedDurationMs": 36154,
+        "actualDurationMs": 36167
+      }
+    }
+  ]
+}

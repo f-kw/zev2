@@ -1,0 +1,26 @@
+{
+  "callbackFindings": [
+    {
+      "targetId": "YE-faluP7zY-candidate-58",
+      "causeSpeechIds": [
+        918
+      ],
+      "sceneDescription": "宝鐘マリンがイカダを移動させている最中に、戌神ころねが障害物などにハマって動けなくなっている状況が発生した。",
+      "causalLink": "移動するイカダの側で戌神ころねが身動きを取れずに遅れをとっていたため、直後の場面でどんどん距離を離されて置き去りにされかける事態に陥った。",
+      "missingContextSupplied": "戌神ころねが「ハマって動けなくなっていた」という直前のトラブルを知ることで、なぜ彼女がイカダの移動から遅れてしまい、必死に犬かきで追いかける羽目になったのかという状況の理由が理解できるようになる。"
+    }
+  ],
+  "runAt": "2026-07-13T16:49:46+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "task": "callback-detection-search-v001",
+    "run": 1,
+    "windowId": "window_045_YE-faluP7zY"
+  },
+  "promptFile": "reports/callback-detection/20260713-callback-detection-v001/windows/window_045_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/8c754049c4ceea41?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"callbackFindings\": [\n    {\n      \"targetId\": \"YE-faluP7zY-candidate-58\",\n      \"causeSpeechIds\": [\n        918\n      ],\n      \"sceneDescription\": \"宝鐘マリンがイカダを移動させている最中に、戌神ころねが障害物などにハマって動けなくなっている状況が発生した。\",\n      \"causalLink\": \"移動するイカダの側で戌神ころねが身動きを取れずに遅れをとっていたため、直後の場面でどんどん距離を離されて置き去りにされかける事態に陥った。\",\n      \"missingContextSupplied\": \"戌神ころねが「ハマって動けなくなっていた」という直前のトラブルを知ることで、なぜ彼女がイカダの移動から遅れてしまい、必死に犬かきで追いかける羽目になったのかという状況の理由が理解できるようになる。\"\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

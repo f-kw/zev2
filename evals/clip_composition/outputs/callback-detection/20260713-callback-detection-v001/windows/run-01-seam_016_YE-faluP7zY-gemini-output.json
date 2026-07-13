@@ -1,0 +1,27 @@
+{
+  "callbackFindings": [
+    {
+      "targetId": "YE-faluP7zY-candidate-58",
+      "causeSpeechIds": [
+        271,
+        272
+      ],
+      "sceneDescription": "宝鐘マリンが新しいストレージを作ろうとする際、必要な「蝶津貝」が不足しているため小さなサイズで我慢する場面があります。",
+      "causalLink": "後の反応で戌神ころねが「蝶津貝もいるのかちょっと下に潜って探すね」と提案した理由は、この場面でマリンが蝶津貝が足りなくて困っていたからです。",
+      "missingContextSupplied": "事前にこの場面を見ることで、ころねがなぜ急に潜ってまで蝶津貝を探そうとしたのか、その親切心や目的が明確に理解できるようになります。"
+    }
+  ],
+  "runAt": "2026-07-13T16:58:20+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "task": "callback-detection-search-v001",
+    "run": 1,
+    "windowId": "seam_016_YE-faluP7zY"
+  },
+  "promptFile": "reports/callback-detection/20260713-callback-detection-v001/windows/seam_016_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/0c1d04ac31dbf991?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"callbackFindings\": [\n    {\n      \"targetId\": \"YE-faluP7zY-candidate-58\",\n      \"causeSpeechIds\": [271, 272],\n      \"sceneDescription\": \"宝鐘マリンが新しいストレージを作ろうとする際、必要な「蝶津貝」が不足しているため小さなサイズで我慢する場面があります。\",\n      \"causalLink\": \"後の反応で戌神ころねが「蝶津貝もいるのかちょっと下に潜って探すね」と提案した理由は、この場面でマリンが蝶津貝が足りなくて困っていたからです。\",\n      \"missingContextSupplied\": \"事前にこの場面を見ることで、ころねがなぜ急に潜ってまで蝶津貝を探そうとしたのか、その親切心や目的が明確に理解できるようになります。\"\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

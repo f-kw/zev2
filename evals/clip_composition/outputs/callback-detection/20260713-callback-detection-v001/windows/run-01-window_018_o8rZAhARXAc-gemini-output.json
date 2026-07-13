@@ -1,0 +1,26 @@
+{
+  "callbackFindings": [
+    {
+      "targetId": "o8rZAhARXAc-candidate-25",
+      "causeSpeechIds": [
+        "556-564"
+      ],
+      "sceneDescription": "組み合わせ抽選会が始まり、対戦相手の候補にAランクなどの強豪校が存在することを確認して、配信者が恐怖や驚きを感じながら進行している場面。",
+      "causalLink": "抽選の画面で強豪校の存在に怯えていた直後の場面であるため、キャージー（リスナー）の指示で選んだ結果Bランクの高校を引き当てて動揺する反応に直接繋がっている。",
+      "missingContextSupplied": "抽選会全体のランクの高さや強豪校への恐怖心を事前に確認することで、なぜ配信者がBランクの高校を引いただけでこれほど焦り動揺したのかというリアクションの背景が理解できるようになる。"
+    }
+  ],
+  "runAt": "2026-07-13T17:13:10+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "task": "callback-detection-search-v001",
+    "run": 1,
+    "windowId": "window_018_o8rZAhARXAc"
+  },
+  "promptFile": "reports/callback-detection/20260713-callback-detection-v001/windows/window_018_o8rZAhARXAc-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/a6c1d013c65e2b58?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"callbackFindings\": [\n    {\n      \"targetId\": \"o8rZAhARXAc-candidate-25\",\n      \"causeSpeechIds\": [\n        \"556-564\"\n      ],\n      \"sceneDescription\": \"組み合わせ抽選会が始まり、対戦相手の候補にAランクなどの強豪校が存在することを確認して、配信者が恐怖や驚きを感じながら進行している場面。\",\n      \"causalLink\": \"抽選の画面で強豪校の存在に怯えていた直後の場面であるため、キャージー（リスナー）の指示で選んだ結果Bランクの高校を引き当てて動揺する反応に直接繋がっている。\",\n      \"missingContextSupplied\": \"抽選会全体のランクの高さや強豪校への恐怖心を事前に確認することで、なぜ配信者がBランクの高校を引いただけでこれほど焦り動揺したのかというリアクションの背景が理解できるようになる。\"\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

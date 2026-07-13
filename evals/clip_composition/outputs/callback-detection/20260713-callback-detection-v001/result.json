@@ -1,0 +1,317 @@
+{
+  "kind": "callback_detection_v001_result",
+  "createdAt": "2026-07-13T08:35:51.226Z",
+  "generationSystem": "callback-detection-v001@gemini-web-flash",
+  "promptVersion": "callback_detection_search_prompt_v001",
+  "verificationPromptVersion": "callback_detection_verification_prompt_v003",
+  "verificationInputVersion": "callback_detection_verification_input_v002",
+  "model": "gemini-web-flash",
+  "run": 1,
+  "search": {
+    "windowCount": 168,
+    "completedWindowCount": 168,
+    "rawFindingCount": 20,
+    "validFindingCount": 20,
+    "invalidFindingCount": 0
+  },
+  "targets": [
+    {
+      "targetId": "YE-faluP7zY-candidate-12",
+      "status": "verified",
+      "promptBytes": 5227,
+      "findingCount": 2,
+      "verificationGroupCount": 1,
+      "decision": {
+        "targetId": "YE-faluP7zY-candidate-12",
+        "decision": "supporting_context_only",
+        "primaryFindingId": null,
+        "alternativeFindingIds": [],
+        "reason": "発見場面は中心反応である鳥を仕留めた件とは関係がなく、発話末尾のサメに関する脇話のみを説明する場面であるため。"
+      },
+      "primaryFinding": null,
+      "alternativeFindings": []
+    },
+    {
+      "targetId": "YE-faluP7zY-candidate-58",
+      "status": "verified",
+      "promptBytes": 12662,
+      "findingCount": 8,
+      "verificationGroupCount": 6,
+      "decision": {
+        "targetId": "YE-faluP7zY-candidate-58",
+        "decision": "actual_separate_cause",
+        "primaryFindingId": "seam_045_YE-faluP7zY-finding-01",
+        "alternativeFindingIds": [
+          "window_041_YE-faluP7zY-finding-01"
+        ],
+        "reason": "マリン船長が船を動かして移動を開始した出来事そのものが、ころねが置き去りにされて絶叫する中心反応の直接的な原因となっています。"
+      },
+      "primaryFinding": {
+        "findingId": "seam_045_YE-faluP7zY-finding-01",
+        "targetId": "YE-faluP7zY-candidate-58",
+        "sourceVideoId": "YE-faluP7zY",
+        "windowId": "seam_045_YE-faluP7zY",
+        "windowKind": "seam_bridge",
+        "causeSpeechIds": [
+          922
+        ],
+        "expandedCauseSpeechIds": [
+          922
+        ],
+        "sourceStartMs": 6271020,
+        "sourceEndMs": 6276563,
+        "reactionStartMs": 6300522,
+        "reactionEndMs": 6361383,
+        "causeSegments": [
+          {
+            "speechId": 922,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 6271020,
+            "sourceEndMs": 6276563,
+            "text": "あれ鉱石あんだってちょっと集めてくるわちょっとあれ船長?"
+          }
+        ],
+        "sceneDescription": "宝鐘マリンが鉱石を集めるためにイカダを離れて別の場所へ移動し始める場面。",
+        "causalLink": "宝鐘マリンが単独で移動を開始したため、イカダに取り残されて距離が離れていく戌神ころねの焦る反応に繋がった。",
+        "missingContextSupplied": "宝鐘マリンがどのような目的でイカダから離れて行動を開始したのか、そのきっかけを具体的に理解できるようになる。",
+        "overlapGroupId": "YE-faluP7zY-candidate-58-group-06"
+      },
+      "alternativeFindings": [
+        {
+          "findingId": "window_041_YE-faluP7zY-finding-01",
+          "targetId": "YE-faluP7zY-candidate-58",
+          "sourceVideoId": "YE-faluP7zY",
+          "windowId": "window_041_YE-faluP7zY",
+          "windowKind": "primary",
+          "causeSpeechIds": [
+            827,
+            "828-833"
+          ],
+          "expandedCauseSpeechIds": [
+            827,
+            828,
+            829,
+            830,
+            831,
+            832,
+            833
+          ],
+          "sourceStartMs": 5549244,
+          "sourceEndMs": 5593073,
+          "reactionStartMs": 6300522,
+          "reactionEndMs": 6361383,
+          "causeSegments": [
+            {
+              "speechId": 827,
+              "sourceVideoId": "YE-faluP7zY",
+              "sourceStartMs": 5549244,
+              "sourceEndMs": 5549924,
+              "text": "船がね進んでない"
+            },
+            {
+              "speechId": 828,
+              "sourceVideoId": "YE-faluP7zY",
+              "sourceStartMs": 5552102,
+              "sourceEndMs": 5578382,
+              "text": "あれかな、ちょっと一回砲つけてさそうね、砲つけないとね、これねOK、つけるわよーほーよーほーだわ、これさーけばーあれ、砲どこやったっけ、船長あ、持ってたわ、手に待って、ここにこれパドルがあるから必要なのほらほら、行く行くほらほら、見ていや、砲立てたほうが早いからほら見てよ、移動してない?"
+            },
+            {
+              "speechId": 829,
+              "sourceVideoId": "YE-faluP7zY",
+              "sourceStartMs": 5578382,
+              "sourceEndMs": 5578702,
+              "text": "してる"
+            },
+            {
+              "speechId": 830,
+              "sourceVideoId": "YE-faluP7zY",
+              "sourceStartMs": 5581366,
+              "sourceEndMs": 5584688,
+              "text": "捨てるけど、頬を立てたほうがほら!"
+            },
+            {
+              "speechId": 831,
+              "sourceVideoId": "YE-faluP7zY",
+              "sourceStartMs": 5584688,
+              "sourceEndMs": 5586909,
+              "text": "ほらほらほらほら!"
+            },
+            {
+              "speechId": 832,
+              "sourceVideoId": "YE-faluP7zY",
+              "sourceStartMs": 5586909,
+              "sourceEndMs": 5591793,
+              "text": "そんな、そんなちまちまやってさぁひどしてるよ!"
+            },
+            {
+              "speechId": 833,
+              "sourceVideoId": "YE-faluP7zY",
+              "sourceStartMs": 5591793,
+              "sourceEndMs": 5593073,
+              "text": "まどろっこしいんだよ!"
+            }
+          ],
+          "sceneDescription": "マリンが船が進んでいないことに気づき、パドルでちまちま進めようとするころねを尻目に、早く移動するために帆を立てて船を急加速させる。",
+          "causalLink": "この場面でマリンが帆を立てて船を本格的に急進させたため、後の場面で海に潜っていたころねが追いつけずに置き去りにされそうになって絶叫する展開に繋がった。",
+          "missingContextSupplied": "マリンが帆を広げて船の移動速度を上げた経緯を先に見ることで、なぜころねとの距離がどんどん離れて置き去り状態になったのかという原因が理解できるようになる。",
+          "overlapGroupId": "YE-faluP7zY-candidate-58-group-04"
+        }
+      ]
+    },
+    {
+      "targetId": "YE-faluP7zY-candidate-84",
+      "status": "verified",
+      "promptBytes": 12138,
+      "findingCount": 9,
+      "verificationGroupCount": 6,
+      "decision": {
+        "targetId": "YE-faluP7zY-candidate-84",
+        "decision": "actual_separate_cause",
+        "primaryFindingId": "seam_066_YE-faluP7zY-finding-01",
+        "alternativeFindingIds": [
+          "window_060_YE-faluP7zY-finding-01"
+        ],
+        "reason": "targetの直前でローテーブルを作ってしまい「粘土返して」「これもローテーブルだったら耐えられない」と憤慨している場面（seam_066）が、targetの「粘土返せになる」「これもローテーブルだったら…」というキレながらの再挑戦と量産に直結する最も直接的な原因です（1回目の失敗であるwindow_060も伏線として機能しているためalternativeに含みます）。"
+      },
+      "primaryFinding": {
+        "findingId": "seam_066_YE-faluP7zY-finding-01",
+        "targetId": "YE-faluP7zY-candidate-84",
+        "sourceVideoId": "YE-faluP7zY",
+        "windowId": "seam_066_YE-faluP7zY",
+        "windowKind": "seam_bridge",
+        "causeSpeechIds": [
+          1624,
+          "1632-1634"
+        ],
+        "expandedCauseSpeechIds": [
+          1624,
+          1632,
+          1633,
+          1634
+        ],
+        "sourceStartMs": 10982423,
+        "sourceEndMs": 11017404,
+        "reactionStartMs": 11062309,
+        "reactionEndMs": 11098463,
+        "causeSegments": [
+          {
+            "speechId": 1624,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 10982423,
+            "sourceEndMs": 10992250,
+            "text": "あ、でも床に置く式かあ、じゃあこれテーブル作ってテーブルに置こうあ、いいねー!"
+          },
+          {
+            "speechId": 1632,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 11012201,
+            "sourceEndMs": 11014042,
+            "text": "え、待ってローテーブルだこれ!"
+          },
+          {
+            "speechId": 1633,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 11014042,
+            "sourceEndMs": 11015763,
+            "text": "しまった!"
+          },
+          {
+            "speechId": 1634,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 11015763,
+            "sourceEndMs": 11017404,
+            "text": "ローテーブルだ!"
+          }
+        ],
+        "sceneDescription": "宝鐘マリンが花を置くためにテーブルを作ることを提案するが、作成したものが想像より低いローテーブルだったため動揺する場面。",
+        "causalLink": "この直後に、別の高いテーブルを作ろうとして再びローテーブルを作成してしまい、最終的に正解のテーブルを見つけるが大量に余ってしまうというオチに繋がっている。",
+        "missingContextSupplied": "最初のテーブル作成時にすでに意図しない「ローテーブル」を作ってしまっていた失敗の経緯が分かり、その後の再挑戦と量産への流れが理解できるようになる。",
+        "overlapGroupId": "YE-faluP7zY-candidate-84-group-06"
+      },
+      "alternativeFindings": [
+        {
+          "findingId": "window_060_YE-faluP7zY-finding-01",
+          "targetId": "YE-faluP7zY-candidate-84",
+          "sourceVideoId": "YE-faluP7zY",
+          "windowId": "window_060_YE-faluP7zY",
+          "windowKind": "primary",
+          "causeSpeechIds": [
+            "1392-1395"
+          ],
+          "expandedCauseSpeechIds": [
+            1392,
+            1393,
+            1394,
+            1395
+          ],
+          "sourceStartMs": 9242295,
+          "sourceEndMs": 9266352,
+          "reactionStartMs": 11062309,
+          "reactionEndMs": 11098463,
+          "causeSegments": [
+            {
+              "speechId": 1392,
+              "sourceVideoId": "YE-faluP7zY",
+              "sourceStartMs": 9242295,
+              "sourceEndMs": 9249280,
+              "text": "ここにさ、あれないんだわえっと…今の、ど…え?"
+            },
+            {
+              "speechId": 1393,
+              "sourceVideoId": "YE-faluP7zY",
+              "sourceStartMs": 9249280,
+              "sourceEndMs": 9249420,
+              "text": "こいか…あー!"
+            },
+            {
+              "speechId": 1394,
+              "sourceVideoId": "YE-faluP7zY",
+              "sourceStartMs": 9249420,
+              "sourceEndMs": 9252482,
+              "text": "え、しかもめっちゃコスト変わるえ、ちょっと作ってみようかなえ、作ろう作ろう!"
+            },
+            {
+              "speechId": 1395,
+              "sourceVideoId": "YE-faluP7zY",
+              "sourceStartMs": 9252482,
+              "sourceEndMs": 9266352,
+              "text": "え、作るわーありがてぇこいでこーでこいでこーでできたえ、ちっちゃいちっちゃいふざけてんのか?"
+            }
+          ],
+          "sceneDescription": "宝鐘マリンが新しい家具を作ろうとした際、想像以上にサイズの小さいローテーブルが完成してしまい不満を漏らす場面。",
+          "causalLink": "この最初の失敗（1回目のローテーブル作成）があるため、後の場面で「またローテーブルだったらどうしよう」と警戒しながらクラフトし、結果的に大量の不要なテーブルを作ってしまう展開に繋がっています。",
+          "missingContextSupplied": "後の場面でなぜ彼女が「これもローテーブルだったらもうさあ」と苛立っているのか、そしてなぜ「いっぱいテーブルを作っちゃった」という状況に陥ったのかという、一連のやらかしの起点となった最初の失敗を理解できるようになります。",
+          "overlapGroupId": "YE-faluP7zY-candidate-84-group-04"
+        }
+      ]
+    },
+    {
+      "targetId": "o8rZAhARXAc-candidate-25",
+      "status": "verified",
+      "promptBytes": 5678,
+      "findingCount": 1,
+      "verificationGroupCount": 1,
+      "decision": {
+        "targetId": "o8rZAhARXAc-candidate-25",
+        "decision": "supporting_context_only",
+        "primaryFindingId": null,
+        "alternativeFindingIds": [],
+        "reason": "発見された場面は抽選会が始まる直前の状況説明であり、リスナー（キャージー）の指示によってBランク校を引き当てて焦るという中心反応を成立させた直接の原因（別場面の出来事）ではないため。"
+      },
+      "primaryFinding": null,
+      "alternativeFindings": []
+    }
+  ],
+  "geminiTabCountAfterRun": 0,
+  "humanWork": {
+    "execution": {
+      "itemCount": 0,
+      "estimatedMinutes": 0
+    },
+    "review": {
+      "itemCount": 2,
+      "estimatedMinutesPerItemUpperBound": 2,
+      "estimatedTotalMinutesUpperBound": 4
+    }
+  }
+}

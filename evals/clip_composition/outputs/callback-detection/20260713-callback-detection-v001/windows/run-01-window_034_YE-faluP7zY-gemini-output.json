@@ -1,0 +1,26 @@
+{
+  "callbackFindings": [
+    {
+      "targetId": "YE-faluP7zY-candidate-58",
+      "causeSpeechIds": [
+        "656-657"
+      ],
+      "sceneDescription": "戌神ころねが「犬かき（イノカキ）」でアイテムを集めていることを宝鐘マリンにアピールしている場面。",
+      "causalLink": "以前に犬かきで泳げることをアピールしていたため、後の場面で置き去りにされそうになった際にも「犬かきでそっちまで行く」という可愛い宣言に繋がっています。",
+      "missingContextSupplied": "ころねがなぜ移動手段として唐突に「犬かき」を持ち出したのか、その元ネタとなる前振りのやり取りを理解できるようになります。"
+    }
+  ],
+  "runAt": "2026-07-13T16:47:27+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "task": "callback-detection-search-v001",
+    "run": 1,
+    "windowId": "window_034_YE-faluP7zY"
+  },
+  "promptFile": "reports/callback-detection/20260713-callback-detection-v001/windows/window_034_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/bf3275812ddc0619?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"callbackFindings\": [\n    {\n      \"targetId\": \"YE-faluP7zY-candidate-58\",\n      \"causeSpeechIds\": [\n        \"656-657\"\n      ],\n      \"sceneDescription\": \"戌神ころねが「犬かき（イノカキ）」でアイテムを集めていることを宝鐘マリンにアピールしている場面。\",\n      \"causalLink\": \"以前に犬かきで泳げることをアピールしていたため、後の場面で置き去りにされそうになった際にも「犬かきでそっちまで行く」という可愛い宣言に繋がっています。\",\n      \"missingContextSupplied\": \"ころねがなぜ移動手段として唐突に「犬かき」を持ち出したのか、その元ネタとなる前振りのやり取りを理解できるようになります。\"\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

@@ -1,0 +1,26 @@
+{
+  "callbackFindings": [
+    {
+      "targetId": "YE-faluP7zY-candidate-12",
+      "causeSpeechIds": [
+        "65-71"
+      ],
+      "sceneDescription": "サメに土台を食べられてしまう被害が発生し、サメを倒したかもしれないことに言及している場面。",
+      "causalLink": "後の反応でサメ肉が3つあるのを見つけて「あ、サメ倒してたねそういえばね」と納得する原因となっている。",
+      "missingContextSupplied": "事前にサメとの交戦や被害があったことを知ることで、後から見つかったサメ肉の由来が理解できるようになる。"
+    }
+  ],
+  "runAt": "2026-07-13T16:41:33+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "task": "callback-detection-search-v001",
+    "run": 1,
+    "windowId": "window_007_YE-faluP7zY"
+  },
+  "promptFile": "reports/callback-detection/20260713-callback-detection-v001/windows/window_007_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/2f45b6775fcb0072?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"callbackFindings\": [\n    {\n      \"targetId\": \"YE-faluP7zY-candidate-12\",\n      \"causeSpeechIds\": [\n        \"65-71\"\n      ],\n      \"sceneDescription\": \"サメに土台を食べられてしまう被害が発生し、サメを倒したかもしれないことに言及している場面。\",\n      \"causalLink\": \"後の反応でサメ肉が3つあるのを見つけて「あ、サメ倒してたねそういえばね」と納得する原因となっている。\",\n      \"missingContextSupplied\": \"事前にサメとの交戦や被害があったことを知ることで、後から見つかったサメ肉の由来が理解できるようになる。\"\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

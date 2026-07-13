@@ -1,0 +1,26 @@
+{
+  "callbackFindings": [
+    {
+      "targetId": "YE-faluP7zY-candidate-84",
+      "causeSpeechIds": [
+        "1229-1233"
+      ],
+      "sceneDescription": "リスナーからのコメントをきっかけに、拠点内の階段横にいらないもの（ゴミ）を入れるためのストレージボックスを設置することを決める場面。",
+      "causalLink": "この場面でいらないものを入れるゴミ箱用ストレージを設置したため、後の反応で間違えて大量にクラフトしてしまった不要なテーブルの処理（収納・処分）に困るというオチに繋がっています。",
+      "missingContextSupplied": "事前にこのゴミ箱（いらないものボックス）の設置シーンを見ておくことで、なぜ余ったテーブルの処理や置き場所に困っているのかという配信内の状況がより具体的に理解できるようになります。"
+    }
+  ],
+  "runAt": "2026-07-13T17:06:38+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "task": "callback-detection-search-v001",
+    "run": 1,
+    "windowId": "seam_054_YE-faluP7zY"
+  },
+  "promptFile": "reports/callback-detection/20260713-callback-detection-v001/windows/seam_054_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/b60f6712eb369ac0?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"callbackFindings\": [\n    {\n      \"targetId\": \"YE-faluP7zY-candidate-84\",\n      \"causeSpeechIds\": [\n        \"1229-1233\"\n      ],\n      \"sceneDescription\": \"リスナーからのコメントをきっかけに、拠点内の階段横にいらないもの（ゴミ）を入れるためのストレージボックスを設置することを決める場面。\",\n      \"causalLink\": \"この場面でいらないものを入れるゴミ箱用ストレージを設置したため、後の反応で間違えて大量にクラフトしてしまった不要なテーブルの処理（収納・処分）に困るというオチに繋がっています。\",\n      \"missingContextSupplied\": \"事前にこのゴミ箱（いらないものボックス）の設置シーンを見ておくことで、なぜ余ったテーブルの処理や置き場所に困っているのかという配信内の状況がより具体的に理解できるようになります。\"\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

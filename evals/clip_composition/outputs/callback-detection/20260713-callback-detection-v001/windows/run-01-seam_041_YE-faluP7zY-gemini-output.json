@@ -1,0 +1,27 @@
+{
+  "callbackFindings": [
+    {
+      "targetId": "YE-faluP7zY-candidate-58",
+      "causeSpeechIds": [
+        827,
+        "828-842"
+      ],
+      "sceneDescription": "宝鐘マリンが船の帆の向きを間違えたりパドルで漕いだりしながら、船を進めようと試行錯誤している。",
+      "causalLink": "この場面で苦労して動かし始めた船が後の反応場面で本格的に前進し出したため、取り残されそうになった戌神ころねの焦りと絶叫に繋がっている。",
+      "missingContextSupplied": "マリン船長が操船に手こずっていた前振りを先に知ることで、ようやく船が動き出して二人の距離が急速に離れていく展開の急変ぶりがより鮮明に理解できるようになる。"
+    }
+  ],
+  "runAt": "2026-07-13T17:03:37+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "task": "callback-detection-search-v001",
+    "run": 1,
+    "windowId": "seam_041_YE-faluP7zY"
+  },
+  "promptFile": "reports/callback-detection/20260713-callback-detection-v001/windows/seam_041_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/cd248c847cf63022?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"callbackFindings\": [\n    {\n      \"targetId\": \"YE-faluP7zY-candidate-58\",\n      \"causeSpeechIds\": [\n        827,\n        \"828-842\"\n      ],\n      \"sceneDescription\": \"宝鐘マリンが船の帆の向きを間違えたりパドルで漕いだりしながら、船を進めようと試行錯誤している。\",\n      \"causalLink\": \"この場面で苦労して動かし始めた船が後の反応場面で本格的に前進し出したため、取り残されそうになった戌神ころねの焦りと絶叫に繋がっている。\",\n      \"missingContextSupplied\": \"マリン船長が操船に手こずっていた前振りを先に知ることで、ようやく船が動き出して二人の距離が急速に離れていく展開の急変ぶりがより鮮明に理解できるようになる。\"\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

@@ -1,0 +1,26 @@
+{
+  "callbackFindings": [
+    {
+      "targetId": "YE-faluP7zY-candidate-84",
+      "causeSpeechIds": [
+        1395
+      ],
+      "sceneDescription": "宝鐘マリンがテーブルをクラフトした際、想像以上にサイズが小さかったため「ちっちゃいちっちゃいふざけてんのか？」と不満を漏らす場面。",
+      "causalLink": "この最初の一品が後に量産してしまうことになる「ローテーブル」であり、ここでの失敗が後のテーブル作り直しの発端となっている。",
+      "missingContextSupplied": "後の場面でなぜ彼女が「これもローテーブルだったらもうさあ」と苛立ちながら別の大きなテーブルを作ろうと躍起になっているのか、その執着の理由が理解できるようになる。"
+    }
+  ],
+  "runAt": "2026-07-13T17:07:42+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "task": "callback-detection-search-v001",
+    "run": 1,
+    "windowId": "seam_059_YE-faluP7zY"
+  },
+  "promptFile": "reports/callback-detection/20260713-callback-detection-v001/windows/seam_059_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/c277f9e888fcd8a0?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"callbackFindings\": [\n    {\n      \"targetId\": \"YE-faluP7zY-candidate-84\",\n      \"causeSpeechIds\": [1395],\n      \"sceneDescription\": \"宝鐘マリンがテーブルをクラフトした際、想像以上にサイズが小さかったため「ちっちゃいちっちゃいふざけてんのか？」と不満を漏らす場面。\",\n      \"causalLink\": \"この最初の一品が後に量産してしまうことになる「ローテーブル」であり、ここでの失敗が後のテーブル作り直しの発端となっている。\",\n      \"missingContextSupplied\": \"後の場面でなぜ彼女が「これもローテーブルだったらもうさあ」と苛立ちながら別の大きなテーブルを作ろうと躍起になっているのか、その執着の理由が理解できるようになる。\"\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

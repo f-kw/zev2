@@ -1,0 +1,217 @@
+{
+  "kind": "callback_detection_verification_prompt_payload",
+  "createdAt": "2026-07-13T08:16:45.624Z",
+  "modelInput": {
+    "task": "source_only_callback_detection_verification",
+    "generationSystem": "callback-detection-v001@gemini-web-flash",
+    "promptVersion": "callback_detection_verification_prompt_v001",
+    "inputPolicy": {
+      "sourceOnly": true,
+      "noClipInfo": true,
+      "noExpected": true,
+      "noAlignment": true,
+      "noHumanLabels": true,
+      "selectExistingFindingIdsOnly": true
+    },
+    "target": {
+      "targetId": "YE-faluP7zY-candidate-12",
+      "title": "食料不足の中で鳥を仕留めるころね",
+      "reason": "ココナッツしか取れず食料がしけてきた状況で、ころねが見事に鳥を殺して肉を確保し、マリンが驚き喜ぶ展開が綺麗にまとまっているため。",
+      "reactionEvidence": {
+        "sourceVideoId": "YE-faluP7zY",
+        "speechIds": [
+          77,
+          78,
+          79,
+          80,
+          81,
+          82,
+          83
+        ],
+        "segments": [
+          {
+            "speechId": 77,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 810330,
+            "sourceEndMs": 817353,
+            "text": "えっとちょっと待ってココナッツしか取れねぇよ食料確かにちょっとしけてきたなあでも足りない?"
+          },
+          {
+            "speechId": 78,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 817353,
+            "sourceEndMs": 818634,
+            "text": "しけしけになってきた?"
+          },
+          {
+            "speechId": 79,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 818634,
+            "sourceEndMs": 822236,
+            "text": "ちょっと若干了解あ!"
+          },
+          {
+            "speechId": 80,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 822236,
+            "sourceEndMs": 823876,
+            "text": "鳥殺した!"
+          },
+          {
+            "speechId": 81,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 823876,
+            "sourceEndMs": 824557,
+            "text": "鳥殺したの?"
+          },
+          {
+            "speechId": 82,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 824557,
+            "sourceEndMs": 825157,
+            "text": "食べれる?"
+          },
+          {
+            "speechId": 83,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 825157,
+            "sourceEndMs": 839584,
+            "text": "食べれる食べれるちょっと待って鳥肉が絶対取れる食べてみて食べてみてOKOKOKOKちゃんと火通すんよOKあ、こんなとこでサメ肉3つあんじゃんラッキーラッキーラッキーじゃなくてラッキーとかじゃないねあ、サメ倒してたねそういえばね"
+          }
+        ]
+      }
+    },
+    "findings": [
+      {
+        "findingId": "window_007_YE-faluP7zY-finding-01",
+        "overlapGroupId": "YE-faluP7zY-candidate-12-group-01",
+        "sourceVideoId": "YE-faluP7zY",
+        "causeSpeechIds": [
+          "65-71"
+        ],
+        "causeSegments": [
+          {
+            "speechId": 65,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 706967,
+            "sourceEndMs": 707387,
+            "text": "サメが!"
+          },
+          {
+            "speechId": 66,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 707387,
+            "sourceEndMs": 708367,
+            "text": "あー!"
+          },
+          {
+            "speechId": 67,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 708367,
+            "sourceEndMs": 709128,
+            "text": "あー!"
+          },
+          {
+            "speechId": 68,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 709128,
+            "sourceEndMs": 709448,
+            "text": "いる?"
+          },
+          {
+            "speechId": 69,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 709448,
+            "sourceEndMs": 709768,
+            "text": "食べてる?"
+          },
+          {
+            "speechId": 70,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 709768,
+            "sourceEndMs": 710288,
+            "text": "食べてる?"
+          },
+          {
+            "speechId": 71,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 710288,
+            "sourceEndMs": 712989,
+            "text": "うん、余裕で食べられたわマジ?"
+          }
+        ],
+        "sceneDescription": "サメに土台を食べられてしまう被害が発生し、サメを倒したかもしれないことに言及している場面。",
+        "causalLink": "後の反応でサメ肉が3つあるのを見つけて「あ、サメ倒してたねそういえばね」と納得する原因となっている。",
+        "missingContextSupplied": "事前にサメとの交戦や被害があったことを知ることで、後から見つかったサメ肉の由来が理解できるようになる。"
+      },
+      {
+        "findingId": "seam_007_YE-faluP7zY-finding-01",
+        "overlapGroupId": "YE-faluP7zY-candidate-12-group-01",
+        "sourceVideoId": "YE-faluP7zY",
+        "causeSpeechIds": [
+          65,
+          "66-71"
+        ],
+        "causeSegments": [
+          {
+            "speechId": 65,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 706967,
+            "sourceEndMs": 707387,
+            "text": "サメが!"
+          },
+          {
+            "speechId": 66,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 707387,
+            "sourceEndMs": 708367,
+            "text": "あー!"
+          },
+          {
+            "speechId": 67,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 708367,
+            "sourceEndMs": 709128,
+            "text": "あー!"
+          },
+          {
+            "speechId": 68,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 709128,
+            "sourceEndMs": 709448,
+            "text": "いる?"
+          },
+          {
+            "speechId": 69,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 709448,
+            "sourceEndMs": 709768,
+            "text": "食べてる?"
+          },
+          {
+            "speechId": 70,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 709768,
+            "sourceEndMs": 710288,
+            "text": "食べてる?"
+          },
+          {
+            "speechId": 71,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 710288,
+            "sourceEndMs": 712989,
+            "text": "うん、余裕で食べられたわマジ?"
+          }
+        ],
+        "sceneDescription": "イカダの土台がサメに食べられてしまい、ころねがサメに立ち向かっていた場面である。",
+        "causalLink": "後の反応でマリンが「あ、サメ倒してたねそういえばね」と思い出すきっかけとなる直接の戦闘出来事である。",
+        "missingContextSupplied": "後の反応で突然言及されるサメ肉の入手先や、サメを討伐したという事実が事前に起きていたことが理解できるようになる。"
+      }
+    ]
+  },
+  "leakageInspection": {
+    "status": "pass",
+    "hits": []
+  },
+  "llmCall": false
+}

@@ -69,11 +69,31 @@ type RankedCandidate = {
   [key: string]: unknown;
 };
 
+type CallbackFinding = {
+  targetId: string;
+  causeSpeechIds: Array<number | string>;
+  sceneDescription: string;
+  causalLink: string;
+  missingContextSupplied: string;
+  [key: string]: unknown;
+};
+
+type CallbackDecision = {
+  targetId: string;
+  decision: 'actual_separate_cause' | 'supporting_context_only' | 'same_scene_recap' | 'unrelated' | 'insufficient';
+  primaryFindingId: string | null;
+  alternativeFindingIds: string[];
+  reason: string;
+  [key: string]: unknown;
+};
+
 type PromptOutput = {
   selectedCuts?: SelectedCut[];
   themes?: ThemeCandidate[];
   refinements?: BoundaryRefinement[];
   rankedCandidates?: RankedCandidate[];
+  callbackFindings?: CallbackFinding[];
+  callbackDecisions?: CallbackDecision[];
   [key: string]: unknown;
 };
 
@@ -880,7 +900,12 @@ function parsePromptOutput(text: string): PromptOutput | undefined {
   }
 
   const record = parsed as Record<string, unknown>;
-  if (!Array.isArray(record.selectedCuts) && !Array.isArray(record.themes) && !Array.isArray(record.refinements) && !Array.isArray(record.rankedCandidates)) {
+  if (!Array.isArray(record.selectedCuts)
+    && !Array.isArray(record.themes)
+    && !Array.isArray(record.refinements)
+    && !Array.isArray(record.rankedCandidates)
+    && !Array.isArray(record.callbackFindings)
+    && !Array.isArray(record.callbackDecisions)) {
     return undefined;
   }
 
@@ -954,6 +979,58 @@ function parsePromptOutput(text: string): PromptOutput | undefined {
       return ranked as RankedCandidate;
     }).filter((item): item is RankedCandidate => Boolean(item))
     : undefined;
+  const callbackFindings = Array.isArray(record.callbackFindings)
+    ? record.callbackFindings.map((item) => {
+      if (!item || typeof item !== 'object' || Array.isArray(item)) {
+        return undefined;
+      }
+      const finding = item as Record<string, unknown>;
+      if (typeof finding.targetId !== 'string'
+        || !finding.targetId.trim()
+        || !Array.isArray(finding.causeSpeechIds)
+        || finding.causeSpeechIds.length === 0
+        || !finding.causeSpeechIds.every((value) => (
+          (typeof value === 'number' && Number.isInteger(value) && value > 0)
+          || (typeof value === 'string' && value.trim().length > 0)
+        ))
+        || typeof finding.sceneDescription !== 'string'
+        || !finding.sceneDescription.trim()
+        || typeof finding.causalLink !== 'string'
+        || !finding.causalLink.trim()
+        || typeof finding.missingContextSupplied !== 'string'
+        || !finding.missingContextSupplied.trim()) {
+        return undefined;
+      }
+      return finding as CallbackFinding;
+    }).filter((item): item is CallbackFinding => Boolean(item))
+    : undefined;
+  const allowedCallbackDecisions = new Set([
+    'actual_separate_cause',
+    'supporting_context_only',
+    'same_scene_recap',
+    'unrelated',
+    'insufficient'
+  ]);
+  const callbackDecisions = Array.isArray(record.callbackDecisions)
+    ? record.callbackDecisions.map((item) => {
+      if (!item || typeof item !== 'object' || Array.isArray(item)) {
+        return undefined;
+      }
+      const decision = item as Record<string, unknown>;
+      if (typeof decision.targetId !== 'string'
+        || !decision.targetId.trim()
+        || typeof decision.decision !== 'string'
+        || !allowedCallbackDecisions.has(decision.decision)
+        || !(decision.primaryFindingId === null || typeof decision.primaryFindingId === 'string')
+        || !Array.isArray(decision.alternativeFindingIds)
+        || !decision.alternativeFindingIds.every((value) => typeof value === 'string')
+        || typeof decision.reason !== 'string'
+        || !decision.reason.trim()) {
+        return undefined;
+      }
+      return decision as CallbackDecision;
+    }).filter((item): item is CallbackDecision => Boolean(item))
+    : undefined;
   const isValidEmptyThemes = Array.isArray(record.themes)
     && record.themes.length === 0;
   const containsOnlyInvalidThemes = Array.isArray(record.themes)
@@ -968,10 +1045,33 @@ function parsePromptOutput(text: string): PromptOutput | undefined {
   const containsOnlyInvalidRankedCandidates = Array.isArray(record.rankedCandidates)
     && record.rankedCandidates.length > 0
     && rankedCandidates?.length === 0;
-  if (containsOnlyInvalidThemes || containsOnlyInvalidSelectedCuts || containsOnlyInvalidRefinements || containsOnlyInvalidRankedCandidates) {
+  const containsOnlyInvalidCallbackFindings = Array.isArray(record.callbackFindings)
+    && record.callbackFindings.length > 0
+    && callbackFindings?.length === 0;
+  const containsOnlyInvalidCallbackDecisions = Array.isArray(record.callbackDecisions)
+    && record.callbackDecisions.length > 0
+    && callbackDecisions?.length === 0;
+  const isValidEmptyCallbackFindings = Array.isArray(record.callbackFindings)
+    && record.callbackFindings.length === 0;
+  const isValidEmptyCallbackDecisions = Array.isArray(record.callbackDecisions)
+    && record.callbackDecisions.length === 0;
+  if (containsOnlyInvalidThemes
+    || containsOnlyInvalidSelectedCuts
+    || containsOnlyInvalidRefinements
+    || containsOnlyInvalidRankedCandidates
+    || containsOnlyInvalidCallbackFindings
+    || containsOnlyInvalidCallbackDecisions) {
     return undefined;
   }
-  if ((!selectedCuts || selectedCuts.length === 0) && (!themes || themes.length === 0) && (!refinements || refinements.length === 0) && (!rankedCandidates || rankedCandidates.length === 0) && !isValidEmptyThemes) {
+  if ((!selectedCuts || selectedCuts.length === 0)
+    && (!themes || themes.length === 0)
+    && (!refinements || refinements.length === 0)
+    && (!rankedCandidates || rankedCandidates.length === 0)
+    && (!callbackFindings || callbackFindings.length === 0)
+    && (!callbackDecisions || callbackDecisions.length === 0)
+    && !isValidEmptyThemes
+    && !isValidEmptyCallbackFindings
+    && !isValidEmptyCallbackDecisions) {
     return undefined;
   }
 
@@ -980,7 +1080,9 @@ function parsePromptOutput(text: string): PromptOutput | undefined {
     ...(selectedCuts ? { selectedCuts } : {}),
     ...(themes ? { themes } : {}),
     ...(refinements ? { refinements } : {}),
-    ...(rankedCandidates ? { rankedCandidates } : {})
+    ...(rankedCandidates ? { rankedCandidates } : {}),
+    ...(callbackFindings ? { callbackFindings } : {}),
+    ...(callbackDecisions ? { callbackDecisions } : {})
   };
 }
 
@@ -1020,6 +1122,24 @@ function canonicalOutput(output: PromptOutput | undefined): string {
       reason: ranked.reason
     })));
   }
+  if (output.callbackFindings) {
+    return JSON.stringify(output.callbackFindings.map((finding) => ({
+      targetId: finding.targetId,
+      causeSpeechIds: finding.causeSpeechIds,
+      sceneDescription: finding.sceneDescription,
+      causalLink: finding.causalLink,
+      missingContextSupplied: finding.missingContextSupplied
+    })));
+  }
+  if (output.callbackDecisions) {
+    return JSON.stringify(output.callbackDecisions.map((decision) => ({
+      targetId: decision.targetId,
+      decision: decision.decision,
+      primaryFindingId: decision.primaryFindingId,
+      alternativeFindingIds: decision.alternativeFindingIds,
+      reason: decision.reason
+    })));
+  }
   return JSON.stringify((output.themes ?? []).map((theme) => ({
     themeId: theme.themeId,
     title: theme.title,
@@ -1029,6 +1149,15 @@ function canonicalOutput(output: PromptOutput | undefined): string {
     evidenceRanges: theme.evidenceRanges,
     supportingSpeechIds: theme.supportingSpeechIds
   })));
+}
+
+function containsPromptOutputMarker(text: string): boolean {
+  return text.includes('"selectedCuts"')
+    || text.includes('"themes"')
+    || text.includes('"refinements"')
+    || text.includes('"rankedCandidates"')
+    || text.includes('"callbackFindings"')
+    || text.includes('"callbackDecisions"');
 }
 
 function isPartialExtraction(output: PromptOutput | undefined): boolean {
@@ -1071,7 +1200,7 @@ async function waitForGeminiOutput(
     latestBodyTextEnd = String(state.bodyText ?? '').slice(-8000);
     const answerOutput = extractPromptOutput(answerText, { prefer: 'first', allowPartial: !rejectPartialExtraction });
     const output = answerOutput ?? (
-      answerText.includes('"selectedCuts"') || answerText.includes('"themes"') || answerText.includes('"refinements"') || answerText.includes('"rankedCandidates"')
+      containsPromptOutputMarker(answerText)
         ? undefined
         : extractPromptOutput(state.bodyText ?? '', { prefer: 'last', allowPartial: false })
     );
@@ -1109,7 +1238,7 @@ async function waitForGeminiOutput(
     };
   }
 
-  const error = new Error('Gemini返答から selectedCuts/themes/refinements/rankedCandidates JSONを取得できません') as Error & {
+  const error = new Error('Gemini返答から対応する評価JSONを取得できません') as Error & {
     geminiDiagnostic?: GeminiExtractionFailureDiagnostic;
   };
   error.geminiDiagnostic = {
@@ -1146,6 +1275,10 @@ async function writeGeminiOutput(
     console.log(`refinements: ${output.refinements.length}`);
   } else if (output.rankedCandidates) {
     console.log(`ranked candidates: ${output.rankedCandidates.length}`);
+  } else if (output.callbackFindings) {
+    console.log(`callback findings: ${output.callbackFindings.length}`);
+  } else if (output.callbackDecisions) {
+    console.log(`callback decisions: ${output.callbackDecisions.length}`);
   } else {
     console.log(`themes: ${output.themes?.length ?? 0}`);
   }
@@ -1163,7 +1296,7 @@ async function writeGeminiFailureDiagnostic(options: CliOptions, error: unknown)
   await writeFile(diagnosticPath, `${JSON.stringify({
     runAt: tokyoTimestamp(new Date()),
     status: 'not_usable_for_scoring_or_human_review',
-    reason: 'Web Geminiの返答から完全なselectedCuts/themes/refinements/rankedCandidates JSONを取得できなかったため、診断用に画面本文だけを保存した。',
+    reason: 'Web Geminiの返答から完全な評価JSONを取得できなかったため、診断用に画面本文だけを保存した。',
     model: options.model,
     params: options.params,
     promptFile: options.promptPath ? path.relative(evalRoot, options.promptPath) : undefined,
@@ -1188,7 +1321,7 @@ async function extractExistingGeminiOutput(options: CliOptions): Promise<void> {
       const answerText = extractAnswerText(state.bodyText ?? '', '');
       const answerOutput = extractPromptOutput(answerText, { prefer: 'first', allowPartial: !options.rejectPartialExtraction });
       const output = answerOutput ?? (
-        answerText.includes('"selectedCuts"') || answerText.includes('"themes"') || answerText.includes('"refinements"') || answerText.includes('"rankedCandidates"')
+        containsPromptOutputMarker(answerText)
           ? undefined
           : extractPromptOutput(state.bodyText ?? '', { prefer: 'last', allowPartial: false })
       );
@@ -1204,7 +1337,7 @@ async function extractExistingGeminiOutput(options: CliOptions): Promise<void> {
       cdp.close();
     }
   }
-  throw new Error('既存のWeb Geminiタブから selectedCuts/themes/refinements/rankedCandidates JSONを取得できません');
+  throw new Error('既存のWeb Geminiタブから対応する評価JSONを取得できません');
 }
 
 async function runWebGeminiPrompt(options: CliOptions): Promise<void> {

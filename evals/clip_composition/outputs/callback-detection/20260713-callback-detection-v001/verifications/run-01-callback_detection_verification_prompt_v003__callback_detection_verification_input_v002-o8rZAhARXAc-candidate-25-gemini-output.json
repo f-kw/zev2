@@ -1,0 +1,25 @@
+{
+  "callbackDecisions": [
+    {
+      "targetId": "o8rZAhARXAc-candidate-25",
+      "decision": "supporting_context_only",
+      "primaryFindingId": null,
+      "alternativeFindingIds": [],
+      "reason": "発見された場面は抽選会が始まる直前の状況説明であり、リスナー（キャージー）の指示によってBランク校を引き当てて焦るという中心反応を成立させた直接の原因（別場面の出来事）ではないため。"
+    }
+  ],
+  "runAt": "2026-07-13T17:26:15+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "task": "callback-detection-verification-v001",
+    "run": 1,
+    "targetId": "o8rZAhARXAc-candidate-25",
+    "inputVersion": "callback_detection_verification_input_v002"
+  },
+  "promptFile": "reports/callback-detection/20260713-callback-detection-v001/verifications/callback_detection_verification_prompt_v003__callback_detection_verification_input_v002-o8rZAhARXAc-candidate-25-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/d7f3d28cb364ea6f?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"callbackDecisions\": [\n    {\n      \"targetId\": \"o8rZAhARXAc-candidate-25\",\n      \"decision\": \"supporting_context_only\",\n      \"primaryFindingId\": null,\n      \"alternativeFindingIds\": [],\n      \"reason\": \"発見された場面は抽選会が始まる直前の状況説明であり、リスナー（キャージー）の指示によってBランク校を引き当てて焦るという中心反応を成立させた直接の原因（別場面の出来事）ではないため。\"\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

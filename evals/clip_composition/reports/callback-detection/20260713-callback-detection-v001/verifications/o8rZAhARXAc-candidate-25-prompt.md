@@ -1,0 +1,203 @@
+# callback detection verification prompt v001
+
+あなたは、全文探索で見つかった別場面候補が、後の反応の本当の原因場面かを確認します。
+
+## 判定
+
+- `actual_separate_cause`: 後の反応を成立させた出来事そのものが別場面にあり、先に見ると反応の理由が具体的に分かる。
+- `supporting_context_only`: 関連情報ではあるが、その反応を起こした原因そのものではない。
+- `same_scene_recap`: 反応場面の内容を説明・言い換えしただけで、別の原因場面ではない。
+- `unrelated`: 同じ話題や人物が出るだけで因果関係がない。
+- `insufficient`: STTだけでは判断できない。
+
+各対象について、`findings` にある発見だけを判定してください。新しい発話IDや時刻を作ってはいけません。`actual_separate_cause` が複数ある場合は、反応を理解するため最も直接必要な1件を `primaryFindingId` にし、残りを `alternativeFindingIds` に入れてください。該当がなければ `primaryFindingId` は `null` にします。
+
+## 出力
+
+説明やMarkdownを付けず、次のJSONだけを返してください。
+
+```json
+{
+  "callbackDecisions": [
+    {
+      "targetId": "入力にあるtargetId",
+      "decision": "actual_separate_cause",
+      "primaryFindingId": "入力にあるfindingIdまたはnull",
+      "alternativeFindingIds": [],
+      "reason": "判定理由を1文"
+    }
+  ]
+}
+```
+
+## 入力JSON
+
+```json
+{
+  "task": "source_only_callback_detection_verification",
+  "generationSystem": "callback-detection-v001@gemini-web-flash",
+  "promptVersion": "callback_detection_verification_prompt_v001",
+  "inputPolicy": {
+    "sourceOnly": true,
+    "noClipInfo": true,
+    "noExpected": true,
+    "noAlignment": true,
+    "noHumanLabels": true,
+    "selectExistingFindingIdsOnly": true
+  },
+  "target": {
+    "targetId": "o8rZAhARXAc-candidate-25",
+    "title": "チャットの指示で対戦相手を選んだ結果、Bランクの高校を引いて焦るシーン",
+    "reason": "リスナー（キャージー）に選択を委ねた結果、手強いBランクの「ざまみ商業高校」を引き当ててしまい動揺するリアクションが面白いため。",
+    "reactionEvidence": {
+      "sourceVideoId": "o8rZAhARXAc",
+      "speechIds": [
+        565,
+        566,
+        567,
+        568,
+        569,
+        570,
+        571,
+        572
+      ],
+      "segments": [
+        {
+          "speechId": 565,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 5701367,
+          "sourceEndMs": 5702247,
+          "text": "どこにする?"
+        },
+        {
+          "speechId": 566,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 5702247,
+          "sourceEndMs": 5714533,
+          "text": "キャージーどれがいい?"
+        },
+        {
+          "speechId": 567,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 5714533,
+          "sourceEndMs": 5719475,
+          "text": "どれがいい?"
+        },
+        {
+          "speechId": 568,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 5719475,
+          "sourceEndMs": 5721796,
+          "text": "魔物でギリかキャージーに決めてもらうわはいはいはいえっと一番右オッケーじゃあ一番右で行きますけ!"
+        },
+        {
+          "speechId": 569,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 5721796,
+          "sourceEndMs": 5728519,
+          "text": "1?"
+        },
+        {
+          "speechId": 570,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 5728519,
+          "sourceEndMs": 5729340,
+          "text": "1Bかー"
+        },
+        {
+          "speechId": 571,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 5733894,
+          "sourceEndMs": 5751200,
+          "text": "ざま…ざまみ…ざまみ商業高校ざまみ…大丈夫かなぁ…Bって…Bやばいか?"
+        },
+        {
+          "speechId": 572,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 5751200,
+          "sourceEndMs": 5755602,
+          "text": "まぁ占い師踏んで…占い師踏んで…"
+        }
+      ]
+    }
+  },
+  "findings": [
+    {
+      "findingId": "window_018_o8rZAhARXAc-finding-01",
+      "overlapGroupId": "o8rZAhARXAc-candidate-25-group-01",
+      "sourceVideoId": "o8rZAhARXAc",
+      "causeSpeechIds": [
+        "556-564"
+      ],
+      "causeSegments": [
+        {
+          "speechId": 556,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 5647638,
+          "sourceEndMs": 5657966,
+          "text": "さてうわー組み合わせ抽選会やだ怖いわーやだー監督組み合わせ抽選会に参加しませんか?"
+        },
+        {
+          "speechId": 557,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 5657966,
+          "sourceEndMs": 5668494,
+          "text": "どの学校も強豪校ばかりですが甲子園優勝を目指して対戦相手を確認しましょう行ってきます了解しましたでは会場に向かいましょう"
+        },
+        {
+          "speechId": 558,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 5671994,
+          "sourceEndMs": 5672915,
+          "text": "やばい!"
+        },
+        {
+          "speechId": 559,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 5672915,
+          "sourceEndMs": 5682022,
+          "text": "Aとかいるんだけどマリンが邪魔ですよねすいませんどきまーすやばくない?"
+        },
+        {
+          "speechId": 560,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 5682022,
+          "sourceEndMs": 5688206,
+          "text": "AってコヨリAに当たって勝てた?"
+        },
+        {
+          "speechId": 561,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 5688206,
+          "sourceEndMs": 5688987,
+          "text": "え?"
+        },
+        {
+          "speechId": 562,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 5688987,
+          "sourceEndMs": 5690088,
+          "text": "すごくない?"
+        },
+        {
+          "speechId": 563,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 5690088,
+          "sourceEndMs": 5691308,
+          "text": "Aに勝ったん?"
+        },
+        {
+          "speechId": 564,
+          "sourceVideoId": "o8rZAhARXAc",
+          "sourceStartMs": 5691308,
+          "sourceEndMs": 5698514,
+          "text": "もう進みますかAに勝つってもうコヨリSってことじゃん"
+        }
+      ],
+      "sceneDescription": "組み合わせ抽選会が始まり、対戦相手の候補にAランクなどの強豪校が存在することを確認して、配信者が恐怖や驚きを感じながら進行している場面。",
+      "causalLink": "抽選の画面で強豪校の存在に怯えていた直後の場面であるため、キャージー（リスナー）の指示で選んだ結果Bランクの高校を引き当てて動揺する反応に直接繋がっている。",
+      "missingContextSupplied": "抽選会全体のランクの高さや強豪校への恐怖心を事前に確認することで、なぜ配信者がBランクの高校を引いただけでこれほど焦り動揺したのかというリアクションの背景が理解できるようになる。"
+    }
+  ]
+}
+```

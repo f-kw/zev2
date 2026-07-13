@@ -1,0 +1,360 @@
+# callback detection search prompt v001
+
+あなたは、ライブ配信の後の反応を理解するために必要な「以前の別場面」を、元配信の文字起こし窓から探します。
+
+## 仕事
+
+- `targets` の各反応候補について、`sourceSegments` 内に原因場面があれば抽出する。
+- 原因場面とは、後の反応を成立させた宣言、約束、選択、以前の失敗、フラグ、人物間のやり取りなど、出来事そのものが起きた場面である。
+- 原因場面を先に見ることで、「なぜ後でその反応をしたか」が具体的に分かる必要がある。
+- 1つの窓に複数の原因場面があれば、すべて返す。該当がなければ空配列を返す。
+
+## 採用しないもの
+
+- `reactionEvidence` 内や、それと重なる場面
+- 反応の後に行われた振り返り
+- 起きたことを反応場面内で言い直しただけの説明
+- 同じ単語、ゲーム要素、人物が出るだけで因果関係がない場面
+- 配信全体に共通する一般背景
+- `title` や `reason` から推測しただけで、`sourceSegments` に根拠がない出来事
+
+`title` と `reason` は探索仮説であり、事実とは限りません。必ずこの窓の発話本文だけで裏付けてください。別の原因場面が存在しない候補もあるので、無理に作らないでください。
+
+## 発話ID
+
+- `causeSpeechIds` はこの窓の `sourceSegments[].speechId` だけを使う。
+- 連続IDは `"12-17"`、不連続IDは数値として同じ配列へ入れられる。
+- 時刻は返さない。
+
+## 出力
+
+説明やMarkdownを付けず、次のJSONだけを返してください。
+
+```json
+{
+  "callbackFindings": [
+    {
+      "targetId": "入力にあるtargetId",
+      "causeSpeechIds": [12, "14-17"],
+      "sceneDescription": "この別場面で実際に起きたことを1文",
+      "causalLink": "後の反応との因果関係を1文",
+      "missingContextSupplied": "先に見ると何が理解できるようになるかを1文"
+    }
+  ]
+}
+```
+
+## 入力JSON
+
+```json
+{
+  "task": "source_only_callback_detection_search",
+  "generationSystem": "callback-detection-v001@gemini-web-flash",
+  "promptVersion": "callback_detection_search_prompt_v001",
+  "inputPolicy": {
+    "sourceOnly": true,
+    "noClipInfo": true,
+    "noExpected": true,
+    "noAlignment": true,
+    "noHumanLabels": true,
+    "causeMustBeEarlierSeparateScene": true
+  },
+  "window": {
+    "windowId": "seam_066_YE-faluP7zY",
+    "windowKind": "seam_bridge",
+    "sourceVideoId": "YE-faluP7zY"
+  },
+  "targets": [
+    {
+      "targetId": "YE-faluP7zY-candidate-84",
+      "title": "間違えてテーブルを量産してしまう宝鐘マリン",
+      "reason": "別の高いテーブルを作ろうとするも再びローテーブルを作ってしまい、最終的に正解のテーブルを見つけるが大量に余ったテーブルの処理に困るオチがついているため。",
+      "reactionEvidence": {
+        "sourceVideoId": "YE-faluP7zY",
+        "speechIds": [
+          1647,
+          1648,
+          1649,
+          1650,
+          1651
+        ],
+        "segments": [
+          {
+            "speechId": 1647,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 11062309,
+            "sourceEndMs": 11068992,
+            "text": "粘土返せになるよいや粘土粘土は大ヒロ低いか"
+          },
+          {
+            "speechId": 1648,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 11070330,
+            "sourceEndMs": 11074092,
+            "text": "でかいやつこれなら絶対これは大丈夫でしょ?"
+          },
+          {
+            "speechId": 1649,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 11074092,
+            "sourceEndMs": 11078154,
+            "text": "これもローテーブルだったらもうさあねえ小せえ!"
+          },
+          {
+            "speechId": 1650,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 11078154,
+            "sourceEndMs": 11082476,
+            "text": "もううぜえマジで待ってこれじゃない?"
+          },
+          {
+            "speechId": 1651,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 11082476,
+            "sourceEndMs": 11098463,
+            "text": "上に物を置くテーブルうわこっちだわ完全こっちねえいっぱいテーブル作っちゃったそれさなんかウェディングケーキみたいに重ねられないの?"
+          }
+        ]
+      }
+    }
+  ],
+  "sourceSegments": [
+    {
+      "speechId": 1606,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 10819109,
+      "sourceEndMs": 10829114,
+      "text": "あっ待ってあーなんかあれこれどうやって直すんだっけあっこれだあっなんか作っちゃったなにこれーねぇなにこれごめん"
+    },
+    {
+      "speechId": 1607,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 10830726,
+      "sourceEndMs": 10842453,
+      "text": "待ってわかった壊しとくからちょっと待ってよ申し訳ないあれだけは取るこれは行きましたねこれは魚も釣りてえなあれ?"
+    },
+    {
+      "speechId": 1608,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 10842453,
+      "sourceEndMs": 10860000,
+      "text": "マジかよいしょさて壊すねうん突如の三角形のごめんねこれはじゃあオンなんでなんか授業で使うでかい三角形みたいなやつハンマーでね一番下のやつを選ぶんよあ、ありがとう次やるわあ、また取り"
+    },
+    {
+      "speechId": 1609,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 10860182,
+      "sourceEndMs": 10889872,
+      "text": "ひろたけどひよこみたいなやつあね棚作って飾るという手もあるかなと今考え中あいいねでも腹の足しにもなんねワイルドなあでもガチ目にそう今お腹減ってんだよねいっぱい焼いていっぱいではないけど入れてあるから取ってねありがとうねもらうねうんもらってもらってどんどんさどんどんどんどん作ってさ文明発達させていきたいっていうのにさもうお腹が減ったりさ邪魔が"
+    },
+    {
+      "speechId": 1610,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 10890274,
+      "sourceEndMs": 10918263,
+      "text": "ガール全然ダメなんだよなあよしこれ欲しい真ん中にまず明るさの確保が先かなそうねなんか電飾系のものがあったんだよいいね焚火台へえランタンスクラップでできるのか暖炉ほうほうほう暖炉いいねいいよね暖かいかもうん待ってでも粘土8個も使うわマジ?"
+    },
+    {
+      "speechId": 1611,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 10918263,
+      "sourceEndMs": 10919524,
+      "text": "ちょっとやめてほしい"
+    },
+    {
+      "speechId": 1612,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 10920994,
+      "sourceEndMs": 10921815,
+      "text": "本当?"
+    },
+    {
+      "speechId": 1613,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 10921815,
+      "sourceEndMs": 10927917,
+      "text": "粘土使う?"
+    },
+    {
+      "speechId": 1614,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 10927917,
+      "sourceEndMs": 10929598,
+      "text": "使う派?"
+    },
+    {
+      "speechId": 1615,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 10929598,
+      "sourceEndMs": 10930158,
+      "text": "粘土?"
+    },
+    {
+      "speechId": 1616,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 10930158,
+      "sourceEndMs": 10937641,
+      "text": "コーネが使うと言ってくれれば船長は暖炉を作るよ全然使おうよだって出汁を薄めしてたら人生つまらないでしょ?"
+    },
+    {
+      "speechId": 1617,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 10937641,
+      "sourceEndMs": 10943043,
+      "text": "分かったこうでしょ?"
+    },
+    {
+      "speechId": 1618,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 10943043,
+      "sourceEndMs": 10949286,
+      "text": "塗料ミルってのがあるんだこれがあれば花で色を変えるのに使えると"
+    },
+    {
+      "speechId": 1619,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 10950482,
+      "sourceEndMs": 10956564,
+      "text": "花もあるここで粉とか使うんだあ、どういうこと?"
+    },
+    {
+      "speechId": 1620,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 10956564,
+      "sourceEndMs": 10960485,
+      "text": "粉の使い道が花置きたい!"
+    },
+    {
+      "speechId": 1621,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 10960485,
+      "sourceEndMs": 10961666,
+      "text": "花置きたいなぁ!"
+    },
+    {
+      "speechId": 1622,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 10961666,
+      "sourceEndMs": 10966007,
+      "text": "秩序だよね、もはや花置こう?"
+    },
+    {
+      "speechId": 1623,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 10966007,
+      "sourceEndMs": 10979952,
+      "text": "置きたーいこれは粉粉今度島降りたら拾おういっぱい拾おう黄色い粉ならあった黄色い粉か黄色でもいいんじゃない?"
+    },
+    {
+      "speechId": 1624,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 10982423,
+      "sourceEndMs": 10992250,
+      "text": "あ、でも床に置く式かあ、じゃあこれテーブル作ってテーブルに置こうあ、いいねー!"
+    },
+    {
+      "speechId": 1625,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 10992250,
+      "sourceEndMs": 10996093,
+      "text": "え、いいよね、いいよねえ、なんかランチョンマットとかさ作りたくない?"
+    },
+    {
+      "speechId": 1626,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 10996093,
+      "sourceEndMs": 10997114,
+      "text": "あ、いいねー!"
+    },
+    {
+      "speechId": 1627,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 10997114,
+      "sourceEndMs": 10997394,
+      "text": "いいねー!"
+    },
+    {
+      "speechId": 1628,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 10997394,
+      "sourceEndMs": 11004240,
+      "text": "あ、粘土使う、あ、でも粘土使ってもいいかな粘土使ってもいいと思ういいよいいよ、使おう使おうだってオシャレに行きたいじゃん女子よ、女子よ!"
+    },
+    {
+      "speechId": 1629,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 11004240,
+      "sourceEndMs": 11009944,
+      "text": "確かに、女子やしなうちらそうだ、女子なのよかわいいテーブル、自分行っちゃっていい?"
+    },
+    {
+      "speechId": 1630,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 11010020,
+      "sourceEndMs": 11011061,
+      "text": "いいすか?"
+    },
+    {
+      "speechId": 1631,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 11011061,
+      "sourceEndMs": 11012201,
+      "text": "いきましょう!"
+    },
+    {
+      "speechId": 1632,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 11012201,
+      "sourceEndMs": 11014042,
+      "text": "え、待ってローテーブルだこれ!"
+    },
+    {
+      "speechId": 1633,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 11014042,
+      "sourceEndMs": 11015763,
+      "text": "しまった!"
+    },
+    {
+      "speechId": 1634,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 11015763,
+      "sourceEndMs": 11017404,
+      "text": "ローテーブルだ!"
+    },
+    {
+      "speechId": 1635,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 11017404,
+      "sourceEndMs": 11018064,
+      "text": "え、待ってあれ?"
+    },
+    {
+      "speechId": 1636,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 11018064,
+      "sourceEndMs": 11021046,
+      "text": "なんか…巨人の星とか出てくるやつ?"
+    },
+    {
+      "speechId": 1637,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 11021046,
+      "sourceEndMs": 11028429,
+      "text": "ねえ、巨人の…ローテーブルってオシャレな表現してんのになんで巨人の星が出てくるの?"
+    },
+    {
+      "speechId": 1638,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 11028429,
+      "sourceEndMs": 11031211,
+      "text": "ねえ、ローテーブルだよこれ!"
+    }
+  ],
+  "outputContract": {
+    "format": "json_only",
+    "rootKey": "callbackFindings",
+    "timeValuesForbidden": true
+  }
+}
+```

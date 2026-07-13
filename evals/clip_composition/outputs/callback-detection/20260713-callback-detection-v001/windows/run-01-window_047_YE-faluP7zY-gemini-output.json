@@ -1,0 +1,27 @@
+{
+  "callbackFindings": [
+    {
+      "targetId": "YE-faluP7zY-candidate-84",
+      "causeSpeechIds": [
+        973,
+        974
+      ],
+      "sceneDescription": "宝鐘マリンたちがクラフトの選択肢にテーブルが解放されたことを見つけ、何を置くかを話し合っている場面。",
+      "causalLink": "この時点でテーブル作成への関心が生まれており、後の場面で実際にテーブルをクラフトしようとして失敗を繰り返す流れに繋がっている。",
+      "missingContextSupplied": "後の場面で宝鐘マリンがなぜテーブルを必死に作ろうとしていたのか、そのきっかけとなったクラフト解放時の状況が理解できるようになる。"
+    }
+  ],
+  "runAt": "2026-07-13T16:50:12+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "task": "callback-detection-search-v001",
+    "run": 1,
+    "windowId": "window_047_YE-faluP7zY"
+  },
+  "promptFile": "reports/callback-detection/20260713-callback-detection-v001/windows/window_047_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/fed3503d3f6338ed?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"callbackFindings\": [\n    {\n      \"targetId\": \"YE-faluP7zY-candidate-84\",\n      \"causeSpeechIds\": [\n        973,\n        974\n      ],\n      \"sceneDescription\": \"宝鐘マリンたちがクラフトの選択肢にテーブルが解放されたことを見つけ、何を置くかを話し合っている場面。\",\n      \"causalLink\": \"この時点でテーブル作成への関心が生まれており、後の場面で実際にテーブルをクラフトしようとして失敗を繰り返す流れに繋がっている。\",\n      \"missingContextSupplied\": \"後の場面で宝鐘マリンがなぜテーブルを必死に作ろうとしていたのか、そのきっかけとなったクラフト解放時の状況が理解できるようになる。\"\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

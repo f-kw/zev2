@@ -1,0 +1,27 @@
+{
+  "callbackFindings": [
+    {
+      "targetId": "YE-faluP7zY-candidate-84",
+      "causeSpeechIds": [
+        1020,
+        1021
+      ],
+      "sceneDescription": "宝鐘マリンが粘土や砂の収納場所について相談し、粘土・砂系のストレージ（箱）を新しく作ると宣言する場面。",
+      "causalLink": "後の反応場面で「粘土返せになる」「粘土は大ヒロ低いか」と言いながら粘土を消費してテーブルを誤量産してしまうため、ここで粘土を扱うための準備（ストレージ作成）をしていたことが起点となっている。",
+      "missingContextSupplied": "後の場面でなぜ宝鐘マリンが粘土の消費を気にしてテーブルの作成に躍起になっているのか、その素材（粘土）に意識が向いた背景が理解できるようになる。"
+    }
+  ],
+  "runAt": "2026-07-13T17:05:12+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "task": "callback-detection-search-v001",
+    "run": 1,
+    "windowId": "seam_048_YE-faluP7zY"
+  },
+  "promptFile": "reports/callback-detection/20260713-callback-detection-v001/windows/seam_048_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/19869013f3748a5c?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"callbackFindings\": [\n    {\n      \"targetId\": \"YE-faluP7zY-candidate-84\",\n      \"causeSpeechIds\": [1020, 1021],\n      \"sceneDescription\": \"宝鐘マリンが粘土や砂の収納場所について相談し、粘土・砂系のストレージ（箱）を新しく作ると宣言する場面。\",\n      \"causalLink\": \"後の反応場面で「粘土返せになる」「粘土は大ヒロ低いか」と言いながら粘土を消費してテーブルを誤量産してしまうため、ここで粘土を扱うための準備（ストレージ作成）をしていたことが起点となっている。\",\n      \"missingContextSupplied\": \"後の場面でなぜ宝鐘マリンが粘土の消費を気にしてテーブルの作成に躍起になっているのか、その素材（粘土）に意識が向いた背景が理解できるようになる。\"\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

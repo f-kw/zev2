@@ -1,0 +1,458 @@
+# callback detection search prompt v001
+
+あなたは、ライブ配信の後の反応を理解するために必要な「以前の別場面」を、元配信の文字起こし窓から探します。
+
+## 仕事
+
+- `targets` の各反応候補について、`sourceSegments` 内に原因場面があれば抽出する。
+- 原因場面とは、後の反応を成立させた宣言、約束、選択、以前の失敗、フラグ、人物間のやり取りなど、出来事そのものが起きた場面である。
+- 原因場面を先に見ることで、「なぜ後でその反応をしたか」が具体的に分かる必要がある。
+- 1つの窓に複数の原因場面があれば、すべて返す。該当がなければ空配列を返す。
+
+## 採用しないもの
+
+- `reactionEvidence` 内や、それと重なる場面
+- 反応の後に行われた振り返り
+- 起きたことを反応場面内で言い直しただけの説明
+- 同じ単語、ゲーム要素、人物が出るだけで因果関係がない場面
+- 配信全体に共通する一般背景
+- `title` や `reason` から推測しただけで、`sourceSegments` に根拠がない出来事
+
+`title` と `reason` は探索仮説であり、事実とは限りません。必ずこの窓の発話本文だけで裏付けてください。別の原因場面が存在しない候補もあるので、無理に作らないでください。
+
+## 発話ID
+
+- `causeSpeechIds` はこの窓の `sourceSegments[].speechId` だけを使う。
+- 連続IDは `"12-17"`、不連続IDは数値として同じ配列へ入れられる。
+- 時刻は返さない。
+
+## 出力
+
+説明やMarkdownを付けず、次のJSONだけを返してください。
+
+```json
+{
+  "callbackFindings": [
+    {
+      "targetId": "入力にあるtargetId",
+      "causeSpeechIds": [12, "14-17"],
+      "sceneDescription": "この別場面で実際に起きたことを1文",
+      "causalLink": "後の反応との因果関係を1文",
+      "missingContextSupplied": "先に見ると何が理解できるようになるかを1文"
+    }
+  ]
+}
+```
+
+## 入力JSON
+
+```json
+{
+  "task": "source_only_callback_detection_search",
+  "generationSystem": "callback-detection-v001@gemini-web-flash",
+  "promptVersion": "callback_detection_search_prompt_v001",
+  "inputPolicy": {
+    "sourceOnly": true,
+    "noClipInfo": true,
+    "noExpected": true,
+    "noAlignment": true,
+    "noHumanLabels": true,
+    "causeMustBeEarlierSeparateScene": true
+  },
+  "window": {
+    "windowId": "seam_051_YE-faluP7zY",
+    "windowKind": "seam_bridge",
+    "sourceVideoId": "YE-faluP7zY"
+  },
+  "targets": [
+    {
+      "targetId": "YE-faluP7zY-candidate-84",
+      "title": "間違えてテーブルを量産してしまう宝鐘マリン",
+      "reason": "別の高いテーブルを作ろうとするも再びローテーブルを作ってしまい、最終的に正解のテーブルを見つけるが大量に余ったテーブルの処理に困るオチがついているため。",
+      "reactionEvidence": {
+        "sourceVideoId": "YE-faluP7zY",
+        "speechIds": [
+          1647,
+          1648,
+          1649,
+          1650,
+          1651
+        ],
+        "segments": [
+          {
+            "speechId": 1647,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 11062309,
+            "sourceEndMs": 11068992,
+            "text": "粘土返せになるよいや粘土粘土は大ヒロ低いか"
+          },
+          {
+            "speechId": 1648,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 11070330,
+            "sourceEndMs": 11074092,
+            "text": "でかいやつこれなら絶対これは大丈夫でしょ?"
+          },
+          {
+            "speechId": 1649,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 11074092,
+            "sourceEndMs": 11078154,
+            "text": "これもローテーブルだったらもうさあねえ小せえ!"
+          },
+          {
+            "speechId": 1650,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 11078154,
+            "sourceEndMs": 11082476,
+            "text": "もううぜえマジで待ってこれじゃない?"
+          },
+          {
+            "speechId": 1651,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 11082476,
+            "sourceEndMs": 11098463,
+            "text": "上に物を置くテーブルうわこっちだわ完全こっちねえいっぱいテーブル作っちゃったそれさなんかウェディングケーキみたいに重ねられないの?"
+          }
+        ]
+      }
+    }
+  ],
+  "sourceSegments": [
+    {
+      "speechId": 1092,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 7575441,
+      "sourceEndMs": 7589944,
+      "text": "島沿いなのは確かちょっと待ってよ待ってよ今ねより解像度高めてくからね終わったこっちに待ってマリリンの配信見ればいい?"
+    },
+    {
+      "speechId": 1093,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 7591259,
+      "sourceEndMs": 7595281,
+      "text": "見たところでねこれじゃ到底わかんないだろうなマジ?"
+    },
+    {
+      "speechId": 1094,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 7595281,
+      "sourceEndMs": 7597162,
+      "text": "見てわかったらすごい?"
+    },
+    {
+      "speechId": 1095,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 7597162,
+      "sourceEndMs": 7603205,
+      "text": "すごいそしたらねコーネと結婚してあげるねマジ?"
+    },
+    {
+      "speechId": 1096,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 7603205,
+      "sourceEndMs": 7606467,
+      "text": "いらない得点なの?"
+    },
+    {
+      "speechId": 1097,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 7606467,
+      "sourceEndMs": 7614271,
+      "text": "裏腹絵をしたいでしょ見つけた見つけた見つけたようっそだ見て見てこっち見える?"
+    },
+    {
+      "speechId": 1098,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 7614271,
+      "sourceEndMs": 7617533,
+      "text": "壁歩いてる今壁?"
+    },
+    {
+      "speechId": 1099,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 7617533,
+      "sourceEndMs": 7617933,
+      "text": "待って"
+    },
+    {
+      "speechId": 1100,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 7620022,
+      "sourceEndMs": 7627605,
+      "text": "壁歩いてる?"
+    },
+    {
+      "speechId": 1101,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 7627605,
+      "sourceEndMs": 7640969,
+      "text": "すごいでしょ来たよ結婚しなきゃなじゃあ結婚する?"
+    },
+    {
+      "speechId": 1102,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 7640969,
+      "sourceEndMs": 7649732,
+      "text": "楽しそうだな今向かってるからなこっちも向かってるほらなんか持ってるスイカ"
+    },
+    {
+      "speechId": 1103,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 7653690,
+      "sourceEndMs": 7653810,
+      "text": "よし!"
+    },
+    {
+      "speechId": 1104,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 7653810,
+      "sourceEndMs": 7654010,
+      "text": "よし!"
+    },
+    {
+      "speechId": 1105,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 7654010,
+      "sourceEndMs": 7654170,
+      "text": "よし!"
+    },
+    {
+      "speechId": 1106,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 7654170,
+      "sourceEndMs": 7654230,
+      "text": "よし!"
+    },
+    {
+      "speechId": 1107,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 7654230,
+      "sourceEndMs": 7654390,
+      "text": "よし!"
+    },
+    {
+      "speechId": 1108,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 7654390,
+      "sourceEndMs": 7654550,
+      "text": "よし!"
+    },
+    {
+      "speechId": 1109,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 7654550,
+      "sourceEndMs": 7654611,
+      "text": "よし!"
+    },
+    {
+      "speechId": 1110,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 7654611,
+      "sourceEndMs": 7654751,
+      "text": "よし!"
+    },
+    {
+      "speechId": 1111,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 7654751,
+      "sourceEndMs": 7654931,
+      "text": "よし!"
+    },
+    {
+      "speechId": 1112,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 7654931,
+      "sourceEndMs": 7654991,
+      "text": "よし!"
+    },
+    {
+      "speechId": 1113,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 7654991,
+      "sourceEndMs": 7655111,
+      "text": "よし!"
+    },
+    {
+      "speechId": 1114,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 7655111,
+      "sourceEndMs": 7655211,
+      "text": "よし!"
+    },
+    {
+      "speechId": 1115,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 7655211,
+      "sourceEndMs": 7655271,
+      "text": "よし!"
+    },
+    {
+      "speechId": 1116,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 7655271,
+      "sourceEndMs": 7655331,
+      "text": "よし!"
+    },
+    {
+      "speechId": 1117,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 7655331,
+      "sourceEndMs": 7655471,
+      "text": "よし!"
+    },
+    {
+      "speechId": 1118,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 7655471,
+      "sourceEndMs": 7655731,
+      "text": "よし!"
+    },
+    {
+      "speechId": 1119,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 7655731,
+      "sourceEndMs": 7655931,
+      "text": "よし!"
+    },
+    {
+      "speechId": 1120,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 7655931,
+      "sourceEndMs": 7656011,
+      "text": "よし!"
+    },
+    {
+      "speechId": 1121,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 7656011,
+      "sourceEndMs": 7656151,
+      "text": "よし!"
+    },
+    {
+      "speechId": 1122,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 7656151,
+      "sourceEndMs": 7656231,
+      "text": "よし!"
+    },
+    {
+      "speechId": 1123,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 7656231,
+      "sourceEndMs": 7656291,
+      "text": "よし!"
+    },
+    {
+      "speechId": 1124,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 7656291,
+      "sourceEndMs": 7656391,
+      "text": "よし!"
+    },
+    {
+      "speechId": 1125,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 7656391,
+      "sourceEndMs": 7656451,
+      "text": "よし!"
+    },
+    {
+      "speechId": 1126,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 7656451,
+      "sourceEndMs": 7656512,
+      "text": "よし!"
+    },
+    {
+      "speechId": 1127,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 7656512,
+      "sourceEndMs": 7656572,
+      "text": "よし!"
+    },
+    {
+      "speechId": 1128,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 7656572,
+      "sourceEndMs": 7656632,
+      "text": "よし!"
+    },
+    {
+      "speechId": 1129,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 7656632,
+      "sourceEndMs": 7656912,
+      "text": "よし!"
+    },
+    {
+      "speechId": 1130,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 7656912,
+      "sourceEndMs": 7656972,
+      "text": "よし!"
+    },
+    {
+      "speechId": 1131,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 7656972,
+      "sourceEndMs": 7657032,
+      "text": "よし!"
+    },
+    {
+      "speechId": 1132,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 7657032,
+      "sourceEndMs": 7657092,
+      "text": "よし!"
+    },
+    {
+      "speechId": 1133,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 7657092,
+      "sourceEndMs": 7657292,
+      "text": "よし!"
+    },
+    {
+      "speechId": 1134,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 7657292,
+      "sourceEndMs": 7657372,
+      "text": "よし!"
+    },
+    {
+      "speechId": 1135,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 7657372,
+      "sourceEndMs": 7657432,
+      "text": "よし!"
+    },
+    {
+      "speechId": 1136,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 7657432,
+      "sourceEndMs": 7657492,
+      "text": "よし!"
+    },
+    {
+      "speechId": 1137,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 7657492,
+      "sourceEndMs": 7657552,
+      "text": "よし!"
+    },
+    {
+      "speechId": 1138,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 7657552,
+      "sourceEndMs": 7657712,
+      "text": "よし!"
+    }
+  ],
+  "outputContract": {
+    "format": "json_only",
+    "rootKey": "callbackFindings",
+    "timeValuesForbidden": true
+  }
+}
+```

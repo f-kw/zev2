@@ -1,0 +1,27 @@
+{
+  "callbackFindings": [
+    {
+      "targetId": "YE-faluP7zY-candidate-58",
+      "causeSpeechIds": [
+        827,
+        "828-833"
+      ],
+      "sceneDescription": "マリンが船が進んでいないことに気づき、パドルでちまちま進めようとするころねを尻目に、早く移動するために帆を立てて船を急加速させる。",
+      "causalLink": "この場面でマリンが帆を立てて船を本格的に急進させたため、後の場面で海に潜っていたころねが追いつけずに置き去りにされそうになって絶叫する展開に繋がった。",
+      "missingContextSupplied": "マリンが帆を広げて船の移動速度を上げた経緯を先に見ることで、なぜころねとの距離がどんどん離れて置き去り状態になったのかという原因が理解できるようになる。"
+    }
+  ],
+  "runAt": "2026-07-13T16:48:57+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "task": "callback-detection-search-v001",
+    "run": 1,
+    "windowId": "window_041_YE-faluP7zY"
+  },
+  "promptFile": "reports/callback-detection/20260713-callback-detection-v001/windows/window_041_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/745c4304c9b06787?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"callbackFindings\": [\n    {\n      \"targetId\": \"YE-faluP7zY-candidate-58\",\n      \"causeSpeechIds\": [\n        827,\n        \"828-833\"\n      ],\n      \"sceneDescription\": \"マリンが船が進んでいないことに気づき、パドルでちまちま進めようとするころねを尻目に、早く移動するために帆を立てて船を急加速させる。\",\n      \"causalLink\": \"この場面でマリンが帆を立てて船を本格的に急進させたため、後の場面で海に潜っていたころねが追いつけずに置き去りにされそうになって絶叫する展開に繋がった。\",\n      \"missingContextSupplied\": \"マリンが帆を広げて船の移動速度を上げた経緯を先に見ることで、なぜころねとの距離がどんどん離れて置き去り状態になったのかという原因が理解できるようになる。\"\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

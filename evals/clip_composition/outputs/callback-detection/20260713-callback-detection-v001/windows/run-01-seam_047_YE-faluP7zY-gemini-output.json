@@ -1,0 +1,27 @@
+{
+  "callbackFindings": [
+    {
+      "targetId": "YE-faluP7zY-candidate-84",
+      "causeSpeechIds": [
+        973,
+        985
+      ],
+      "sceneDescription": "マリンがテーブルをクラフトできるようになったものの、間違えて「小せいやつ（ローテーブル）」を作ってしまう場面。",
+      "causalLink": "この時点で既に間違えて小さいテーブルを作ってしまっており、これが後の反応で再び「小せえ！」とキレながら量産してしまう原因となっている。",
+      "missingContextSupplied": "マリンが後の場面でなぜ「これもローテーブルだったら」と苛立っているのか、これが初めての間違いではなく以前から繰り返している失敗であることが理解できるようになる。"
+    }
+  ],
+  "runAt": "2026-07-13T17:04:58+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "task": "callback-detection-search-v001",
+    "run": 1,
+    "windowId": "seam_047_YE-faluP7zY"
+  },
+  "promptFile": "reports/callback-detection/20260713-callback-detection-v001/windows/seam_047_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/dac59174ffa148b3?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"callbackFindings\": [\n    {\n      \"targetId\": \"YE-faluP7zY-candidate-84\",\n      \"causeSpeechIds\": [\n        973,\n        985\n      ],\n      \"sceneDescription\": \"マリンがテーブルをクラフトできるようになったものの、間違えて「小せいやつ（ローテーブル）」を作ってしまう場面。\",\n      \"causalLink\": \"この時点で既に間違えて小さいテーブルを作ってしまっており、これが後の反応で再び「小せえ！」とキレながら量産してしまう原因となっている。\",\n      \"missingContextSupplied\": \"マリンが後の場面でなぜ「これもローテーブルだったら」と苛立っているのか、これが初めての間違いではなく以前から繰り返している失敗であることが理解できるようになる。\"\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

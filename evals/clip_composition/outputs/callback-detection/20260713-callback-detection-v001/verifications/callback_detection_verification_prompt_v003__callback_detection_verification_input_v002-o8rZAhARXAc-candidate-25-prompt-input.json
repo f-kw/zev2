@@ -1,0 +1,125 @@
+{
+  "kind": "callback_detection_verification_prompt_payload",
+  "createdAt": "2026-07-13T08:35:51.226Z",
+  "generationSystem": "callback-detection-v001@gemini-web-flash",
+  "promptVersion": "callback_detection_verification_prompt_v003",
+  "inputVersion": "callback_detection_verification_input_v002",
+  "inputPolicy": {
+    "sourceOnly": true,
+    "noClipInfo": true,
+    "noExpected": true,
+    "noAlignment": true,
+    "noHumanLabels": true,
+    "selectExistingFindingIdsOnly": true,
+    "overlappingSearchFindingsAreGroupedWithoutDiscardingEvidence": true
+  },
+  "modelInput": {
+    "target": {
+      "targetId": "o8rZAhARXAc-candidate-25",
+      "title": "チャットの指示で対戦相手を選んだ結果、Bランクの高校を引いて焦るシーン",
+      "reason": "リスナー（キャージー）に選択を委ねた結果、手強いBランクの「ざまみ商業高校」を引き当ててしまい動揺するリアクションが面白いため。",
+      "reactionEvidence": {
+        "sourceVideoId": "o8rZAhARXAc",
+        "speechIds": [
+          565,
+          566,
+          567,
+          568,
+          569,
+          570,
+          571,
+          572
+        ],
+        "segments": [
+          {
+            "speechId": 565,
+            "text": "どこにする?"
+          },
+          {
+            "speechId": 566,
+            "text": "キャージーどれがいい?"
+          },
+          {
+            "speechId": 567,
+            "text": "どれがいい?"
+          },
+          {
+            "speechId": 568,
+            "text": "魔物でギリかキャージーに決めてもらうわはいはいはいえっと一番右オッケーじゃあ一番右で行きますけ!"
+          },
+          {
+            "speechId": 569,
+            "text": "1?"
+          },
+          {
+            "speechId": 570,
+            "text": "1Bかー"
+          },
+          {
+            "speechId": 571,
+            "text": "ざま…ざまみ…ざまみ商業高校ざまみ…大丈夫かなぁ…Bって…Bやばいか?"
+          },
+          {
+            "speechId": 572,
+            "text": "まぁ占い師踏んで…占い師踏んで…"
+          }
+        ]
+      }
+    },
+    "findings": [
+      {
+        "findingId": "window_018_o8rZAhARXAc-finding-01",
+        "sameSceneFindingIds": [
+          "window_018_o8rZAhARXAc-finding-01"
+        ],
+        "overlapGroupId": "o8rZAhARXAc-candidate-25-group-01",
+        "causeSegments": [
+          {
+            "speechId": 556,
+            "text": "さてうわー組み合わせ抽選会やだ怖いわーやだー監督組み合わせ抽選会に参加しませんか?"
+          },
+          {
+            "speechId": 557,
+            "text": "どの学校も強豪校ばかりですが甲子園優勝を目指して対戦相手を確認しましょう行ってきます了解しましたでは会場に向かいましょう"
+          },
+          {
+            "speechId": 558,
+            "text": "やばい!"
+          },
+          {
+            "speechId": 559,
+            "text": "Aとかいるんだけどマリンが邪魔ですよねすいませんどきまーすやばくない?"
+          },
+          {
+            "speechId": 560,
+            "text": "AってコヨリAに当たって勝てた?"
+          },
+          {
+            "speechId": 561,
+            "text": "え?"
+          },
+          {
+            "speechId": 562,
+            "text": "すごくない?"
+          },
+          {
+            "speechId": 563,
+            "text": "Aに勝ったん?"
+          },
+          {
+            "speechId": 564,
+            "text": "もう進みますかAに勝つってもうコヨリSってことじゃん"
+          }
+        ],
+        "causalClaims": [
+          "抽選の画面で強豪校の存在に怯えていた直後の場面であるため、キャージー（リスナー）の指示で選んだ結果Bランクの高校を引き当てて動揺する反応に直接繋がっている。"
+        ]
+      }
+    ]
+  },
+  "leakageInspection": {
+    "status": "pass",
+    "hits": []
+  },
+  "llmCall": false
+}

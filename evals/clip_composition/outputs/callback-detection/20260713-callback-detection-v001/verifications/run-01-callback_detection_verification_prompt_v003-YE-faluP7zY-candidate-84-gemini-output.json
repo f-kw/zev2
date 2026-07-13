@@ -1,0 +1,26 @@
+{
+  "callbackDecisions": [
+    {
+      "targetId": "YE-faluP7zY-candidate-84",
+      "decision": "actual_separate_cause",
+      "primaryFindingId": "seam_066_YE-faluP7zY-finding-01",
+      "alternativeFindingIds": [
+        "window_060_YE-faluP7zY-finding-01"
+      ],
+      "reason": "直前にローテーブルを作って失敗し、粘土を浪費して苛立っている場面であり、そのすぐ後に「粘土返せ」「これもローテーブルだったら」とさらに失敗を繰り返してキレる中心反応を直接引き起こした原因であるため。"
+    }
+  ],
+  "runAt": "2026-07-13T17:23:20+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "task": "callback-detection-verification-v001",
+    "run": 1,
+    "targetId": "YE-faluP7zY-candidate-84"
+  },
+  "promptFile": "reports/callback-detection/20260713-callback-detection-v001/verifications/callback_detection_verification_prompt_v003-YE-faluP7zY-candidate-84-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/4d857bebb06f67e4?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"callbackDecisions\": [\n    {\n      \"targetId\": \"YE-faluP7zY-candidate-84\",\n      \"decision\": \"actual_separate_cause\",\n      \"primaryFindingId\": \"seam_066_YE-faluP7zY-finding-01\",\n      \"alternativeFindingIds\": [\n        \"window_060_YE-faluP7zY-finding-01\"\n      ],\n      \"reason\": \"直前にローテーブルを作って失敗し、粘土を浪費して苛立っている場面であり、そのすぐ後に「粘土返せ」「これもローテーブルだったら」とさらに失敗を繰り返してキレる中心反応を直接引き起こした原因であるため。\"\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

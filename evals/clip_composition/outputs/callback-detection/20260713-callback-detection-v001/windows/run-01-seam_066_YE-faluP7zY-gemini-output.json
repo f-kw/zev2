@@ -1,0 +1,27 @@
+{
+  "callbackFindings": [
+    {
+      "targetId": "YE-faluP7zY-candidate-84",
+      "causeSpeechIds": [
+        1624,
+        "1632-1634"
+      ],
+      "sceneDescription": "宝鐘マリンが花を置くためにテーブルを作ることを提案するが、作成したものが想像より低いローテーブルだったため動揺する場面。",
+      "causalLink": "この直後に、別の高いテーブルを作ろうとして再びローテーブルを作成してしまい、最終的に正解のテーブルを見つけるが大量に余ってしまうというオチに繋がっている。",
+      "missingContextSupplied": "最初のテーブル作成時にすでに意図しない「ローテーブル」を作ってしまっていた失敗の経緯が分かり、その後の再挑戦と量産への流れが理解できるようになる。"
+    }
+  ],
+  "runAt": "2026-07-13T17:09:15+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "task": "callback-detection-search-v001",
+    "run": 1,
+    "windowId": "seam_066_YE-faluP7zY"
+  },
+  "promptFile": "reports/callback-detection/20260713-callback-detection-v001/windows/seam_066_YE-faluP7zY-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/735a47fac0ad85a7?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"callbackFindings\": [\n    {\n      \"targetId\": \"YE-faluP7zY-candidate-84\",\n      \"causeSpeechIds\": [1624, \"1632-1634\"],\n      \"sceneDescription\": \"宝鐘マリンが花を置くためにテーブルを作ることを提案するが、作成したものが想像より低いローテーブルだったため動揺する場面。\",\n      \"causalLink\": \"この直後に、別の高いテーブルを作ろうとして再びローテーブルを作成してしまい、最終的に正解のテーブルを見つけるが大量に余ってしまうというオチに繋がっている。\",\n      \"missingContextSupplied\": \"最初のテーブル作成時にすでに意図しない「ローテーブル」を作ってしまっていた失敗の経緯が分かり、その後の再挑戦と量産への流れが理解できるようになる。\"\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

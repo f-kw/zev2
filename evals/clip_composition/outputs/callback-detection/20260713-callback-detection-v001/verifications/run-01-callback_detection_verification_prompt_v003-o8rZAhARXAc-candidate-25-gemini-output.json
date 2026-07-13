@@ -1,0 +1,24 @@
+{
+  "callbackDecisions": [
+    {
+      "targetId": "o8rZAhARXAc-candidate-25",
+      "decision": "same_scene_recap",
+      "primaryFindingId": null,
+      "alternativeFindingIds": [],
+      "reason": "発見された場面は同じ対戦相手選択・抽選イベントの一連の流れの一部（直前のシーン）であり、別場面の出来事が原因となったコールバックの関係ではないため。"
+    }
+  ],
+  "runAt": "2026-07-13T17:23:38+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "task": "callback-detection-verification-v001",
+    "run": 1,
+    "targetId": "o8rZAhARXAc-candidate-25"
+  },
+  "promptFile": "reports/callback-detection/20260713-callback-detection-v001/verifications/callback_detection_verification_prompt_v003-o8rZAhARXAc-candidate-25-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/0d2e1f910447a1d5?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"callbackDecisions\": [\n    {\n      \"targetId\": \"o8rZAhARXAc-candidate-25\",\n      \"decision\": \"same_scene_recap\",\n      \"primaryFindingId\": null,\n      \"alternativeFindingIds\": [],\n      \"reason\": \"発見された場面は同じ対戦相手選択・抽選イベントの一連の流れの一部（直前のシーン）であり、別場面の出来事が原因となったコールバックの関係ではないため。\"\n    }\n  ]\n}\n\n留意点\nGemini は AI であり、不正確な情報を表示することがあります。Gemini とのチャットはレビューされ、Google AI の改善に利用されます。プライバシーの設定についてご確認ください。ユーザーの位置に関する情報も Gemini アプリ アクティビティとともに保存されます。利用規約とプライバシーに関するお知らせが適用されます。\nOK\n\n\n\n\nGemini\n\nGemini は AI であり、間違えることがあります。"
+}

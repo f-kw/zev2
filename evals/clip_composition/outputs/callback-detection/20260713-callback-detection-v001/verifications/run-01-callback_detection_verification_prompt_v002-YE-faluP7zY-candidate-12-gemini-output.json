@@ -1,0 +1,24 @@
+{
+  "callbackDecisions": [
+    {
+      "targetId": "YE-faluP7zY-candidate-12",
+      "decision": "supporting_context_only",
+      "primaryFindingId": null,
+      "alternativeFindingIds": [],
+      "reason": "中心反応は鳥を仕留めて肉を確保したことですが、提示されたfindingsは末尾の脇話であるサメ肉の由来を説明する場面に留まるため。"
+    }
+  ],
+  "runAt": "2026-07-13T17:20:29+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "task": "callback-detection-verification-v001",
+    "run": 1,
+    "targetId": "YE-faluP7zY-candidate-12"
+  },
+  "promptFile": "reports/callback-detection/20260713-callback-detection-v001/verifications/callback_detection_verification_prompt_v002-YE-faluP7zY-candidate-12-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/6e671097ed7c3067?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"callbackDecisions\": [\n    {\n      \"targetId\": \"YE-faluP7zY-candidate-12\",\n      \"decision\": \"supporting_context_only\",\n      \"primaryFindingId\": null,\n      \"alternativeFindingIds\": [],\n      \"reason\": \"中心反応は鳥を仕留めて肉を確保したことですが、提示されたfindingsは末尾の脇話であるサメ肉の由来を説明する場面に留まるため。\"\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

@@ -1,0 +1,27 @@
+{
+  "callbackDecisions": [
+    {
+      "targetId": "YE-faluP7zY-candidate-84",
+      "decision": "actual_separate_cause",
+      "primaryFindingId": "seam_066_YE-faluP7zY-finding-01",
+      "alternativeFindingIds": [
+        "window_060_YE-faluP7zY-finding-01"
+      ],
+      "reason": "targetの直前でローテーブルを作ってしまい「粘土返して」「これもローテーブルだったら耐えられない」と憤慨している場面（seam_066）が、targetの「粘土返せになる」「これもローテーブルだったら…」というキレながらの再挑戦と量産に直結する最も直接的な原因です（1回目の失敗であるwindow_060も伏線として機能しているためalternativeに含みます）。"
+    }
+  ],
+  "runAt": "2026-07-13T17:26:01+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "task": "callback-detection-verification-v001",
+    "run": 1,
+    "targetId": "YE-faluP7zY-candidate-84",
+    "inputVersion": "callback_detection_verification_input_v002"
+  },
+  "promptFile": "reports/callback-detection/20260713-callback-detection-v001/verifications/callback_detection_verification_prompt_v003__callback_detection_verification_input_v002-YE-faluP7zY-candidate-84-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/a67234e93c85b8f0?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"callbackDecisions\": [\n    {\n      \"targetId\": \"YE-faluP7zY-candidate-84\",\n      \"decision\": \"actual_separate_cause\",\n      \"primaryFindingId\": \"seam_066_YE-faluP7zY-finding-01\",\n      \"alternativeFindingIds\": [\n        \"window_060_YE-faluP7zY-finding-01\"\n      ],\n      \"reason\": \"targetの直前でローテーブルを作ってしまい「粘土返して」「これもローテーブルだったら耐えられない」と憤慨している場面（seam_066）が、targetの「粘土返せになる」「これもローテーブルだったら…」というキレながらの再挑戦と量産に直結する最も直接的な原因です（1回目の失敗であるwindow_060も伏線として機能しているためalternativeに含みます）。\"\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

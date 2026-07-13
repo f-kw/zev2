@@ -1,0 +1,114 @@
+{
+  "kind": "callback_detection_verification_prompt_payload",
+  "createdAt": "2026-07-13T08:22:55.267Z",
+  "modelInput": {
+    "task": "source_only_callback_detection_verification",
+    "generationSystem": "callback-detection-v001@gemini-web-flash",
+    "promptVersion": "callback_detection_verification_prompt_v003",
+    "inputPolicy": {
+      "sourceOnly": true,
+      "noClipInfo": true,
+      "noExpected": true,
+      "noAlignment": true,
+      "noHumanLabels": true,
+      "selectExistingFindingIdsOnly": true,
+      "overlappingSearchFindingsAreGroupedWithoutDiscardingEvidence": true
+    },
+    "target": {
+      "targetId": "YE-faluP7zY-candidate-12",
+      "title": "食料不足の中で鳥を仕留めるころね",
+      "reason": "ココナッツしか取れず食料がしけてきた状況で、ころねが見事に鳥を殺して肉を確保し、マリンが驚き喜ぶ展開が綺麗にまとまっているため。",
+      "reactionEvidence": {
+        "sourceVideoId": "YE-faluP7zY",
+        "speechIds": [
+          77,
+          78,
+          79,
+          80,
+          81,
+          82,
+          83
+        ],
+        "segments": [
+          {
+            "speechId": 77,
+            "text": "えっとちょっと待ってココナッツしか取れねぇよ食料確かにちょっとしけてきたなあでも足りない?"
+          },
+          {
+            "speechId": 78,
+            "text": "しけしけになってきた?"
+          },
+          {
+            "speechId": 79,
+            "text": "ちょっと若干了解あ!"
+          },
+          {
+            "speechId": 80,
+            "text": "鳥殺した!"
+          },
+          {
+            "speechId": 81,
+            "text": "鳥殺したの?"
+          },
+          {
+            "speechId": 82,
+            "text": "食べれる?"
+          },
+          {
+            "speechId": 83,
+            "text": "食べれる食べれるちょっと待って鳥肉が絶対取れる食べてみて食べてみてOKOKOKOKちゃんと火通すんよOKあ、こんなとこでサメ肉3つあんじゃんラッキーラッキーラッキーじゃなくてラッキーとかじゃないねあ、サメ倒してたねそういえばね"
+          }
+        ]
+      }
+    },
+    "findings": [
+      {
+        "findingId": "seam_007_YE-faluP7zY-finding-01",
+        "sameSceneFindingIds": [
+          "seam_007_YE-faluP7zY-finding-01",
+          "window_007_YE-faluP7zY-finding-01"
+        ],
+        "overlapGroupId": "YE-faluP7zY-candidate-12-group-01",
+        "causeSegments": [
+          {
+            "speechId": 65,
+            "text": "サメが!"
+          },
+          {
+            "speechId": 66,
+            "text": "あー!"
+          },
+          {
+            "speechId": 67,
+            "text": "あー!"
+          },
+          {
+            "speechId": 68,
+            "text": "いる?"
+          },
+          {
+            "speechId": 69,
+            "text": "食べてる?"
+          },
+          {
+            "speechId": 70,
+            "text": "食べてる?"
+          },
+          {
+            "speechId": 71,
+            "text": "うん、余裕で食べられたわマジ?"
+          }
+        ],
+        "causalClaims": [
+          "後の反応でマリンが「あ、サメ倒してたねそういえばね」と思い出すきっかけとなる直接の戦闘出来事である。",
+          "後の反応でサメ肉が3つあるのを見つけて「あ、サメ倒してたねそういえばね」と納得する原因となっている。"
+        ]
+      }
+    ]
+  },
+  "leakageInspection": {
+    "status": "pass",
+    "hits": []
+  },
+  "llmCall": false
+}

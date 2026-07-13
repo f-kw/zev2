@@ -1,0 +1,27 @@
+{
+  "callbackDecisions": [
+    {
+      "targetId": "YE-faluP7zY-candidate-58",
+      "decision": "actual_separate_cause",
+      "primaryFindingId": "seam_045_YE-faluP7zY-finding-01",
+      "alternativeFindingIds": [
+        "window_041_YE-faluP7zY-finding-01"
+      ],
+      "reason": "マリン船長が船を動かして移動を開始した出来事そのものが、ころねが置き去りにされて絶叫する中心反応の直接的な原因となっています。"
+    }
+  ],
+  "runAt": "2026-07-13T17:25:43+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "task": "callback-detection-verification-v001",
+    "run": 1,
+    "targetId": "YE-faluP7zY-candidate-58",
+    "inputVersion": "callback_detection_verification_input_v002"
+  },
+  "promptFile": "reports/callback-detection/20260713-callback-detection-v001/verifications/callback_detection_verification_prompt_v003__callback_detection_verification_input_v002-YE-faluP7zY-candidate-58-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/d228b959b4cd5acf?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"callbackDecisions\": [\n    {\n      \"targetId\": \"YE-faluP7zY-candidate-58\",\n      \"decision\": \"actual_separate_cause\",\n      \"primaryFindingId\": \"seam_045_YE-faluP7zY-finding-01\",\n      \"alternativeFindingIds\": [\n        \"window_041_YE-faluP7zY-finding-01\"\n      ],\n      \"reason\": \"マリン船長が船を動かして移動を開始した出来事そのものが、ころねが置き去りにされて絶叫する中心反応の直接的な原因となっています。\"\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

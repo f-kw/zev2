@@ -1,0 +1,332 @@
+# callback detection search prompt v001
+
+あなたは、ライブ配信の後の反応を理解するために必要な「以前の別場面」を、元配信の文字起こし窓から探します。
+
+## 仕事
+
+- `targets` の各反応候補について、`sourceSegments` 内に原因場面があれば抽出する。
+- 原因場面とは、後の反応を成立させた宣言、約束、選択、以前の失敗、フラグ、人物間のやり取りなど、出来事そのものが起きた場面である。
+- 原因場面を先に見ることで、「なぜ後でその反応をしたか」が具体的に分かる必要がある。
+- 1つの窓に複数の原因場面があれば、すべて返す。該当がなければ空配列を返す。
+
+## 採用しないもの
+
+- `reactionEvidence` 内や、それと重なる場面
+- 反応の後に行われた振り返り
+- 起きたことを反応場面内で言い直しただけの説明
+- 同じ単語、ゲーム要素、人物が出るだけで因果関係がない場面
+- 配信全体に共通する一般背景
+- `title` や `reason` から推測しただけで、`sourceSegments` に根拠がない出来事
+
+`title` と `reason` は探索仮説であり、事実とは限りません。必ずこの窓の発話本文だけで裏付けてください。別の原因場面が存在しない候補もあるので、無理に作らないでください。
+
+## 発話ID
+
+- `causeSpeechIds` はこの窓の `sourceSegments[].speechId` だけを使う。
+- 連続IDは `"12-17"`、不連続IDは数値として同じ配列へ入れられる。
+- 時刻は返さない。
+
+## 出力
+
+説明やMarkdownを付けず、次のJSONだけを返してください。
+
+```json
+{
+  "callbackFindings": [
+    {
+      "targetId": "入力にあるtargetId",
+      "causeSpeechIds": [12, "14-17"],
+      "sceneDescription": "この別場面で実際に起きたことを1文",
+      "causalLink": "後の反応との因果関係を1文",
+      "missingContextSupplied": "先に見ると何が理解できるようになるかを1文"
+    }
+  ]
+}
+```
+
+## 入力JSON
+
+```json
+{
+  "task": "source_only_callback_detection_search",
+  "generationSystem": "callback-detection-v001@gemini-web-flash",
+  "promptVersion": "callback_detection_search_prompt_v001",
+  "inputPolicy": {
+    "sourceOnly": true,
+    "noClipInfo": true,
+    "noExpected": true,
+    "noAlignment": true,
+    "noHumanLabels": true,
+    "causeMustBeEarlierSeparateScene": true
+  },
+  "window": {
+    "windowId": "window_065_YE-faluP7zY",
+    "windowKind": "primary",
+    "sourceVideoId": "YE-faluP7zY"
+  },
+  "targets": [
+    {
+      "targetId": "YE-faluP7zY-candidate-84",
+      "title": "間違えてテーブルを量産してしまう宝鐘マリン",
+      "reason": "別の高いテーブルを作ろうとするも再びローテーブルを作ってしまい、最終的に正解のテーブルを見つけるが大量に余ったテーブルの処理に困るオチがついているため。",
+      "reactionEvidence": {
+        "sourceVideoId": "YE-faluP7zY",
+        "speechIds": [
+          1647,
+          1648,
+          1649,
+          1650,
+          1651
+        ],
+        "segments": [
+          {
+            "speechId": 1647,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 11062309,
+            "sourceEndMs": 11068992,
+            "text": "粘土返せになるよいや粘土粘土は大ヒロ低いか"
+          },
+          {
+            "speechId": 1648,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 11070330,
+            "sourceEndMs": 11074092,
+            "text": "でかいやつこれなら絶対これは大丈夫でしょ?"
+          },
+          {
+            "speechId": 1649,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 11074092,
+            "sourceEndMs": 11078154,
+            "text": "これもローテーブルだったらもうさあねえ小せえ!"
+          },
+          {
+            "speechId": 1650,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 11078154,
+            "sourceEndMs": 11082476,
+            "text": "もううぜえマジで待ってこれじゃない?"
+          },
+          {
+            "speechId": 1651,
+            "sourceVideoId": "YE-faluP7zY",
+            "sourceStartMs": 11082476,
+            "sourceEndMs": 11098463,
+            "text": "上に物を置くテーブルうわこっちだわ完全こっちねえいっぱいテーブル作っちゃったそれさなんかウェディングケーキみたいに重ねられないの?"
+          }
+        ]
+      }
+    }
+  ],
+  "sourceSegments": [
+    {
+      "speechId": 1554,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 10411142,
+      "sourceEndMs": 10422286,
+      "text": "え、なんか超スッキリするわマジでスッキリしてる、言っとくけどめっちゃ綺麗になってるからね、今いいやん、できる女やんわかる?"
+    },
+    {
+      "speechId": 1555,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 10422286,
+      "sourceEndMs": 10436991,
+      "text": "2階も作ってくれたし整理整頓もできてラジオ外しちゃったから静かになるけど寂しがらないよねえ、待ってよ、二人のこのトーク力でカバーよえ、マジ?"
+    },
+    {
+      "speechId": 1556,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 10436991,
+      "sourceEndMs": 10439932,
+      "text": "今船長さマジ船長抱えてるわ、ラジオ"
+    },
+    {
+      "speechId": 1557,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 10440054,
+      "sourceEndMs": 10442255,
+      "text": "完全にこれ嘘?"
+    },
+    {
+      "speechId": 1558,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 10442255,
+      "sourceEndMs": 10462969,
+      "text": "ヒップホップになっちゃったよリリーコングやクリアする時のリリーコングやそれBGMが流れてるからねこれね今消えてる船長のところだとBGMがあえて"
+    },
+    {
+      "speechId": 1559,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 10470482,
+      "sourceEndMs": 10475085,
+      "text": "これドア式にしてこうね、どうかなこういうさチラ見せスタイル後ろ見てーあ、いいじゃん!"
+    },
+    {
+      "speechId": 1560,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 10475085,
+      "sourceEndMs": 10476927,
+      "text": "上めっちゃいいじゃん!"
+    },
+    {
+      "speechId": 1561,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 10476927,
+      "sourceEndMs": 10480870,
+      "text": "こんにちはあ、壊れちゃった!"
+    },
+    {
+      "speechId": 1562,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 10480870,
+      "sourceEndMs": 10480910,
+      "text": "斧!"
+    },
+    {
+      "speechId": 1563,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 10480910,
+      "sourceEndMs": 10499844,
+      "text": "待って待って、斧壊れたああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああ"
+    },
+    {
+      "speechId": 1564,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 10500130,
+      "sourceEndMs": 10529171,
+      "text": "こっちこっち作っとくわありがとうじゃげんなよマジでクソがよやられたねまんまと木の門やられたわここ出入りできた方が便利だないやいいななんかいいなどうしよううちら一生やってるのかなもしかしてでもさ"
+    },
+    {
+      "speechId": 1565,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 10539459,
+      "sourceEndMs": 10557783,
+      "text": "回収ネットあれつけれないじゃん釘いただいちゃって回収ネット作ってなんでここにカーテンつけちゃったんだろうちょっとカーテン作ったの?"
+    },
+    {
+      "speechId": 1566,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 10557783,
+      "sourceEndMs": 10559944,
+      "text": "何も考えずに変なとこにカーテンつけちゃったまぁいっか見たい見たいどこ?"
+    },
+    {
+      "speechId": 1567,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 10561041,
+      "sourceEndMs": 10563042,
+      "text": "え、これ閉まるの?"
+    },
+    {
+      "speechId": 1568,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 10563042,
+      "sourceEndMs": 10564203,
+      "text": "プレイ閉まるのかな?"
+    },
+    {
+      "speechId": 1569,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 10564203,
+      "sourceEndMs": 10564823,
+      "text": "え、やってみ?"
+    },
+    {
+      "speechId": 1570,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 10564823,
+      "sourceEndMs": 10568045,
+      "text": "やってみ?"
+    },
+    {
+      "speechId": 1571,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 10568045,
+      "sourceEndMs": 10589758,
+      "text": "え、全然いじれないんだけどえ、マリ、マリミツちゃんそこにいてそこにいていくよでも、でもね、もしかしたらいないでしょ?"
+    },
+    {
+      "speechId": 1572,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 10590322,
+      "sourceEndMs": 10591943,
+      "text": "こういうことなんじゃない?"
+    },
+    {
+      "speechId": 1573,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 10591943,
+      "sourceEndMs": 10592823,
+      "text": "あ、そういうこと?"
+    },
+    {
+      "speechId": 1574,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 10592823,
+      "sourceEndMs": 10595264,
+      "text": "この笑いっていないないバーの笑いなんじゃない?"
+    },
+    {
+      "speechId": 1575,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 10595264,
+      "sourceEndMs": 10617471,
+      "text": "わかるマリンごめんちょっともう5秒ちょうだいいくよいないなーいあ、隠れたわはい、終了見えてないよくそー難しいないないねバーって釘がなくなったもしかしていっぱい使ってたごめんこれ全部取ってたえ?"
+    },
+    {
+      "speechId": 1576,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 10617471,
+      "sourceEndMs": 10618431,
+      "text": "なんで?"
+    },
+    {
+      "speechId": 1577,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 10618431,
+      "sourceEndMs": 10619692,
+      "text": "釘取ってたごめん会社ネットで"
+    },
+    {
+      "speechId": 1578,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 10620122,
+      "sourceEndMs": 10632427,
+      "text": "ああそういうことねでも見てほしいここ見てほら見てほらあ、ほんとだすっきりさっきりできてるできてるいいねえ待ってここどうするここどこ?"
+    },
+    {
+      "speechId": 1579,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 10632427,
+      "sourceEndMs": 10634168,
+      "text": "ここ回収ネットにする?"
+    },
+    {
+      "speechId": 1580,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 10634168,
+      "sourceEndMs": 10638150,
+      "text": "ああしたいしたいでも可能できるかなできそう?"
+    },
+    {
+      "speechId": 1581,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 10638150,
+      "sourceEndMs": 10647054,
+      "text": "やってみるかうんOK一回もう一回釘釘をもらって"
+    },
+    {
+      "speechId": 1582,
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceStartMs": 10657996,
+      "sourceEndMs": 10664879,
+      "text": "いいねええーとあ、やべ、またお腹減ってる、ちょっともう、集中して作りたいのにさあお腹?"
+    }
+  ],
+  "outputContract": {
+    "format": "json_only",
+    "rootKey": "callbackFindings",
+    "timeValuesForbidden": true
+  }
+}
+```
