@@ -1,0 +1,133 @@
+{
+  "kind": "candidate_ranking_unlabeled_human_review_result",
+  "reviewId": "20260713-unlabeled-top5-review-v001",
+  "sourceGenerationSystem": "candidate-ranking-v001@gemini-web-flash",
+  "reviewer": "kawafmm",
+  "reviewedAt": "2026-07-13",
+  "humanWork": {
+    "estimatedItemCount": 8,
+    "estimatedMinutesPerItem": 1,
+    "estimatedTotalSeconds": 480,
+    "actualTotalSeconds": 449,
+    "withinEstimate": true
+  },
+  "choices": {
+    "publish": "公開したい",
+    "okaySkip": "悪くないが選ばない",
+    "boring": "つまらない"
+  },
+  "items": [
+    {
+      "reviewIndex": 1,
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateId": 12,
+      "title": "食料不足の中で鳥を仕留めるころね",
+      "answer": "boring",
+      "answerLabel": "つまらない"
+    },
+    {
+      "reviewIndex": 2,
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateId": 84,
+      "title": "間違えてテーブルを量産してしまう宝鐘マリン",
+      "answer": "boring",
+      "answerLabel": "つまらない"
+    },
+    {
+      "reviewIndex": 3,
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateId": 70,
+      "title": "サメ退治の代償で船を見失い迷子になるマリンと ころね",
+      "answer": "boring",
+      "answerLabel": "つまらない"
+    },
+    {
+      "reviewIndex": 4,
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateId": 36,
+      "title": "マリンが我慢できず2回目のトイレへ、留守を預かるころねの緊張",
+      "answer": "publish",
+      "answerLabel": "公開したい"
+    },
+    {
+      "reviewIndex": 5,
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateId": 40,
+      "title": "ビトが「魔物」ではなく「ラッキーボーイ」でブチギレるマリン",
+      "answer": "publish",
+      "answerLabel": "公開したい"
+    },
+    {
+      "reviewIndex": 6,
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateId": 4,
+      "title": "結局リリカのオリジナル変化球「粉落とし」を丸パクリすることに決めるマリン船長",
+      "answer": "okay_skip",
+      "answerLabel": "悪くないが選ばない"
+    },
+    {
+      "reviewIndex": 7,
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateId": 25,
+      "title": "チャットの指示で対戦相手を選んだ結果、Bランクの高校を引いて焦るシーン",
+      "answer": "boring",
+      "answerLabel": "つまらない"
+    },
+    {
+      "reviewIndex": 8,
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateId": 57,
+      "title": "劇的勝利に大絶叫し涙を流すマリン船長",
+      "answer": "publish",
+      "answerLabel": "公開したい"
+    }
+  ],
+  "reviewedUnlabeledSummary": {
+    "total": 8,
+    "publish": 3,
+    "okaySkip": 1,
+    "boring": 4
+  },
+  "topFiveAsymmetricSummary": {
+    "note": "既知hitは実在切り抜き師の選択、残る8件は今回の人間監査。既知hit2件は今回あらためて人間評価していない。",
+    "fixtures": [
+      {
+        "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+        "knownHit": 1,
+        "humanPublish": 1,
+        "humanOkaySkip": 0,
+        "humanBoring": 3,
+        "strongKnownOrPublish": 2,
+        "reviewWorthyKnownOrNonBoring": 2,
+        "denominator": 5
+      },
+      {
+        "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+        "knownHit": 1,
+        "humanPublish": 2,
+        "humanOkaySkip": 1,
+        "humanBoring": 1,
+        "strongKnownOrPublish": 3,
+        "reviewWorthyKnownOrNonBoring": 4,
+        "denominator": 5
+      }
+    ],
+    "overall": {
+      "knownHit": 2,
+      "humanPublish": 3,
+      "humanOkaySkip": 1,
+      "humanBoring": 4,
+      "strongKnownOrPublish": 5,
+      "reviewWorthyKnownOrNonBoring": 6,
+      "denominator": 10
+    }
+  },
+  "reviewerInsight": "ゲームのクライマックスであるとかは重要じゃなくてVtuber自身が何か特別なことをしないと見どころにならない",
+  "interpretation": {
+    "observed": "意味順位は既知hit以外から公開したい候補を3件発見した。",
+    "limitation": "生成順上位5の未ラベル候補を同じ三択で監査していないため、意味順位が生成順より優れるとは比較できない。",
+    "nextHypothesis": "ゲーム内イベントの重要度より、Vtuber本人の特別な言動・強い反応・関係性が表れた候補を優先する。",
+    "status": "candidate-ranking-v001の標準採否は保留。次の単変数候補として人間知見を使うが、追加実装・実走は未承認。"
+  },
+  "fixtureAndExpectedChanges": false
+}
