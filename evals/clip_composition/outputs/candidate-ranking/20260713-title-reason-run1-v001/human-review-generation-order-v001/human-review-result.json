@@ -1,0 +1,151 @@
+{
+  "kind": "candidate_ranking_generation_order_human_review_result",
+  "reviewId": "20260713-generation-order-top5-review-v001",
+  "sourceRanking": "generation_order",
+  "reviewer": "kawafmm",
+  "reviewedAt": "2026-07-13",
+  "humanWork": {
+    "newItemCount": 6,
+    "reusedAnswerCount": 1,
+    "estimatedTotalSeconds": 360,
+    "actualTotalSeconds": 313,
+    "withinEstimate": true
+  },
+  "choices": {
+    "publish": "公開したい",
+    "okaySkip": "悪くないが選ばない",
+    "boring": "つまらない"
+  },
+  "newItems": [
+    {
+      "reviewIndex": 1,
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateId": 1,
+      "title": "ころねの配置に悩むマリンとサザエさん風の例え",
+      "answer": "okay_skip",
+      "answerLabel": "悪くないが選ばない"
+    },
+    {
+      "reviewIndex": 2,
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateId": 4,
+      "title": "ピンク色の朝日と二人の心",
+      "answer": "okay_skip",
+      "answerLabel": "悪くないが選ばない"
+    },
+    {
+      "reviewIndex": 3,
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateId": 5,
+      "title": "マリンのハイテンションな叫び声",
+      "answer": "boring",
+      "answerLabel": "つまらない"
+    },
+    {
+      "reviewIndex": 4,
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateId": 1,
+      "title": "新球種開発モードに戸惑うマリン船長",
+      "answer": "boring",
+      "answerLabel": "つまらない"
+    },
+    {
+      "reviewIndex": 5,
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateId": 2,
+      "title": "一条コーラルのオリジナル変化球「粉落とし」に驚くマリン船長",
+      "answer": "boring",
+      "answerLabel": "つまらない"
+    },
+    {
+      "reviewIndex": 6,
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateId": 3,
+      "title": "オリジナル変化球の開発が分からずDiscordで助けを求めるマリン船長",
+      "answer": "boring",
+      "answerLabel": "つまらない"
+    }
+  ],
+  "reusedAnswers": [
+    {
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateId": 4,
+      "title": "結局リリカのオリジナル変化球「粉落とし」を丸パクリすることに決めるマリン船長",
+      "answer": "okay_skip",
+      "answerLabel": "悪くないが選ばない",
+      "sourceReviewId": "20260713-unlabeled-top5-review-v001"
+    }
+  ],
+  "newItemSummary": {
+    "total": 6,
+    "publish": 0,
+    "okaySkip": 2,
+    "boring": 4
+  },
+  "topFiveAsymmetricSummary": {
+    "note": "既知hitは実在切り抜き師の選択、残る7件は人間三択。第二素材candidate 4の既存回答を再利用した。",
+    "fixtures": [
+      {
+        "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+        "knownHit": 2,
+        "humanPublish": 0,
+        "humanOkaySkip": 2,
+        "humanBoring": 1,
+        "strongKnownOrPublish": 2,
+        "reviewWorthyKnownOrNonBoring": 4,
+        "denominator": 5
+      },
+      {
+        "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+        "knownHit": 1,
+        "humanPublish": 0,
+        "humanOkaySkip": 1,
+        "humanBoring": 3,
+        "strongKnownOrPublish": 1,
+        "reviewWorthyKnownOrNonBoring": 2,
+        "denominator": 5
+      }
+    ],
+    "overall": {
+      "knownHit": 3,
+      "humanPublish": 0,
+      "humanOkaySkip": 3,
+      "humanBoring": 4,
+      "strongKnownOrPublish": 3,
+      "reviewWorthyKnownOrNonBoring": 6,
+      "denominator": 10
+    }
+  },
+  "comparisonWithCandidateRankingV001": {
+    "fixtures": [
+      {
+        "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+        "generationOrderStrong": 2,
+        "candidateRankingV001Strong": 2,
+        "generationOrderReviewWorthy": 4,
+        "candidateRankingV001ReviewWorthy": 2
+      },
+      {
+        "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+        "generationOrderStrong": 1,
+        "candidateRankingV001Strong": 3,
+        "generationOrderReviewWorthy": 2,
+        "candidateRankingV001ReviewWorthy": 4
+      }
+    ],
+    "overall": {
+      "generationOrderStrong": 3,
+      "candidateRankingV001Strong": 5,
+      "generationOrderReviewWorthy": 6,
+      "candidateRankingV001ReviewWorthy": 6,
+      "denominator": 10
+    }
+  },
+  "interpretation": {
+    "observed": "candidate-ranking-v001は生成順と比べ、強い候補を全体3/10から5/10へ増やした。B素材は2/5で同値、第二素材は1/5から3/5へ改善した。",
+    "tradeoff": "candidate-ranking-v001は既知hitを3件から2件へ1件減らした一方、人間が公開したい非hitを0件から3件へ増やした。確認価値ありは両方式6/10で同数だが、内容の強さが変わった。",
+    "limitation": "2素材・run 1・確認者1名の開発データであり、candidate-ranking-v001もB素材では強い候補2/5のまま。標準採用や汎化を確定しない。",
+    "next": "candidate-ranking-v002の比較基準は固定できた。実走前設計の明示承認後にだけ実走する。"
+  },
+  "fixtureAndExpectedChanges": false
+}
