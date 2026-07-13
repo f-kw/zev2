@@ -1,0 +1,72 @@
+{
+  "kind": "callback_detection_v001_human_review_result",
+  "reviewId": "20260713-callback-detection-v001-human-review",
+  "sourceGenerationSystem": "callback-detection-v001@gemini-web-flash",
+  "reviewer": "kawafmm",
+  "reviewedAt": "2026-07-13",
+  "humanWork": {
+    "estimatedItemCount": 2,
+    "estimatedMinutesPerItemUpperBound": 2,
+    "estimatedTotalMinutesUpperBound": 4,
+    "actualTotalSeconds": 153,
+    "withinEstimate": true
+  },
+  "choices": {
+    "correctCause": "原因として正しい",
+    "relatedNotCause": "関連はあるが原因ではない",
+    "unrelated": "関係ない",
+    "cannotJudge": "判断できない"
+  },
+  "items": [
+    {
+      "reviewIndex": 1,
+      "targetId": "YE-faluP7zY-candidate-58",
+      "title": "置き去りにされそうになって焦る戌神ころね",
+      "causeStartMs": 6271020,
+      "causeEndMs": 6276563,
+      "reactionStartMs": 6300522,
+      "reactionEndMs": 6361383,
+      "gapFromCauseEndToReactionStartMs": 23959,
+      "answer": "related_not_cause",
+      "answerLabel": "関連はあるが原因ではない"
+    },
+    {
+      "reviewIndex": 2,
+      "targetId": "YE-faluP7zY-candidate-84",
+      "title": "間違えてテーブルを量産してしまう宝鐘マリン",
+      "causeStartMs": 10982423,
+      "causeEndMs": 11017404,
+      "reactionStartMs": 11062309,
+      "reactionEndMs": 11098463,
+      "gapFromCauseEndToReactionStartMs": 44905,
+      "answer": "related_not_cause",
+      "answerLabel": "関連はあるが原因ではない"
+    }
+  ],
+  "summary": {
+    "total": 2,
+    "correctCause": 0,
+    "relatedNotCause": 2,
+    "unrelated": 0,
+    "cannotJudge": 0,
+    "machinePrimaryCausePrecision": {
+      "numerator": 0,
+      "denominator": 2,
+      "ratio": 0
+    }
+  },
+  "reviewerFeedback": [
+    "ほとんど連続している場面を原因として見せても文脈補完にならない。",
+    "必要なのは直接原因より前振りである。",
+    "時間帯が離れた場面の方が、重複しない情報を圧縮して足す価値がある可能性がある。",
+    "開始、原因、結果のような複数段のつなぎ方なら見応えが生まれる可能性がある。",
+    "今回の出来事自体の公開価値は低かった。"
+  ],
+  "interpretation": {
+    "observedFailure": "v001は中心反応へ直接つながる直前の出来事を選んだが、人間が必要としていたのは離れた時点から意味や期待を追加する前振りだった。直接因果の正しさと、編集上追加する価値のある文脈は同じではない。",
+    "distanceObservation": "2件の原因候補終了から反応開始までの間隔は23.959秒と44.905秒で、どちらも人間にはほぼ連続した同じ流れと映った。",
+    "hypothesisNotRule": "時間距離が大きいほど価値が高いという人間仮説は保存するが、距離だけの採用閾値にはしない。離れた場面が反応区間にない新しい前提、宣言、失敗、期待を短く補うかを次の設計で定義する必要がある。",
+    "nextStatus": "callback-detection-v001は意味評価0/2で不合格。次版の設計・実装は未承認であり、開始しない。"
+  },
+  "fixtureAndExpectedChanges": false
+}
