@@ -1,0 +1,63 @@
+{
+  "kind": "candidate_ranking_unlabeled_human_review_package",
+  "packageId": "20260713-character-context-unlabeled-review-v002",
+  "createdAt": "2026-07-13T05:19:40.181Z",
+  "sourceExperiment": "evals/clip_composition/outputs/candidate-ranking/20260713-character-context-run1-v002",
+  "purpose": "candidate-ranking-v002の上位5に新しく入った非hit・未監査候補だけを、誤りと決めず公開価値で三択評価する。",
+  "choices": [
+    "公開したい",
+    "悪くないが選ばない",
+    "つまらない"
+  ],
+  "humanWorkEstimate": {
+    "itemCount": 1,
+    "estimatedMinutesPerItem": 1,
+    "estimatedTotalMinutes": 1
+  },
+  "playback": {
+    "defaultRate": 1.5,
+    "sourceTotalDurationMs": 60861,
+    "durationAtDefaultRateMs": 40574
+  },
+  "answerStatus": "awaiting-human-review",
+  "leakCheck": {
+    "passed": true,
+    "excludedFromPage": [
+      "knownHit",
+      "expectedCuts",
+      "hitExpectedIndexes",
+      "human labels for other candidates"
+    ]
+  },
+  "fixtureAndExpectedChanges": false,
+  "items": [
+    {
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "fixtureLabel": "B素材（マリン・ころね Raft）",
+      "candidateId": 58,
+      "title": "置き去りにされそうになって焦る戌神ころね",
+      "sourceReason": "マリン船長が移動する中で、置き去りにされそうになったころねが「犬かきで行く」と可愛く宣言した直後、どんどん距離が離れていって絶叫する見どころのある展開になっているため。",
+      "selectionReason": "船に置き去りにされそうになったころねが「犬かきで行く」と宣言した直後に、距離が離れて絶叫するという、具体的な出来事の流れと強い感情反応が綺麗に説明されているため。",
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceRanges": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 6300522,
+          "sourceEndMs": 6361383
+        }
+      ],
+      "segments": [
+        {
+          "sourceVideoId": "YE-faluP7zY",
+          "sourceStartMs": 6300522,
+          "sourceEndMs": 6361383,
+          "expectedDurationMs": 60861,
+          "videoDurationMs": 60883,
+          "audioDurationMs": 60861,
+          "videoPath": "media/B-candidate-58.mp4",
+          "audioPath": "media/B-candidate-58.m4a"
+        }
+      ]
+    }
+  ]
+}

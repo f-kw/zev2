@@ -1,0 +1,42 @@
+{
+  "rankedCandidates": [
+    {
+      "rank": 1,
+      "candidateId": 32,
+      "reason": "マリンの甘いアプローチに対し、ころねが態度を急変させて「キモい」と激しく連呼する二人の極端な温度差とリアクションが明確に説明されており、単独の切り抜きとして非常に強力なため。"
+    },
+    {
+      "rank": 2,
+      "candidateId": 36,
+      "reason": "配信中の2回目のトイレ離席というハプニングのフリから、残されたころねがリスナーと2人きりで緊張しながら場を繋ぐという、明確な展開と本人の感情反応が読み取れるため。"
+    },
+    {
+      "rank": 3,
+      "candidateId": 58,
+      "reason": "船に置き去りにされそうになったころねが「犬かきで行く」と宣言した直後に、距離が離れて絶叫するという、具体的な出来事の流れと強い感情反応が綺麗に説明されているため。"
+    },
+    {
+      "rank": 4,
+      "candidateId": 37,
+      "reason": "肉の焼き忘れを発端にマリンが夫婦風にキレるという明確なフリから、最終的にバーベキューが完成して2人で歓喜するという、起承転結と関係性が詳細に表れているため。"
+    },
+    {
+      "rank": 5,
+      "candidateId": 46,
+      "reason": "頭の匂いを「臭い」と言い放つマリンの一言と、それに対してころねがじわじわ泣き真似をするという、二人の具体的な言動・プロレス的な関係性が分かりやすく記述されているため。"
+    }
+  ],
+  "runAt": "2026-07-13T14:13:20+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "generationSystem": "candidate-ranking-v002@gemini-web-flash",
+    "run": 1,
+    "inputPolicy": "candidateId+title+reason only"
+  },
+  "promptFile": "outputs/candidate-ranking/20260713-character-context-run1-v002/nOEWCNc77MI_multiblock_material_v001/prompt.txt",
+  "pageUrl": "https://gemini.google.com/app/f70abd85a8cbd120?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"rankedCandidates\": [\n    {\n      \"rank\": 1,\n      \"candidateId\": 32,\n      \"reason\": \"マリンの甘いアプローチに対し、ころねが態度を急変させて「キモい」と激しく連呼する二人の極端な温度差とリアクションが明確に説明されており、単独の切り抜きとして非常に強力なため。\"\n    },\n    {\n      \"rank\": 2,\n      \"candidateId\": 36,\n      \"reason\": \"配信中の2回目のトイレ離席というハプニングのフリから、残されたころねがリスナーと2人きりで緊張しながら場を繋ぐという、明確な展開と本人の感情反応が読み取れるため。\"\n    },\n    {\n      \"rank\": 3,\n      \"candidateId\": 58,\n      \"reason\": \"船に置き去りにされそうになったころねが「犬かきで行く」と宣言した直後に、距離が離れて絶叫するという、具体的な出来事の流れと強い感情反応が綺麗に説明されているため。\"\n    },\n    {\n      \"rank\": 4,\n      \"candidateId\": 37,\n      \"reason\": \"肉の焼き忘れを発端にマリンが夫婦風にキレるという明確なフリから、最終的にバーベキューが完成して2人で歓喜するという、起承転結と関係性が詳細に表れているため。\"\n    },\n    {\n      \"rank\": 5,\n      \"candidateId\": 46,\n      \"reason\": \"頭の匂いを「臭い」と言い放つマリンの一言と、それに対してころねがじわじわ泣き真似をするという、二人の具体的な言動・プロレス的な関係性が分かりやすく記述されているため。\"\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

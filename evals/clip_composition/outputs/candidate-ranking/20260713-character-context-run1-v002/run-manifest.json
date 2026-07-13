@@ -1,0 +1,57 @@
+{
+  "kind": "candidate_ranking_run_manifest",
+  "experimentId": "20260713-character-context-run1-v002",
+  "preparedAt": "2026-07-13T05:12:20.450Z",
+  "generationSystem": "candidate-ranking-v002@gemini-web-flash",
+  "promptVersion": "candidate-ranking-v002",
+  "model": "gemini-web-flash",
+  "runCount": 1,
+  "inputPolicy": "candidateId+title+reason only",
+  "singleVariable": "ranking criterion: game event as trigger, performer-specific action/reaction/relationship as value signal",
+  "fixedBaselineBeforeRun": {
+    "generationOrder": {
+      "strong": 3,
+      "reviewWorthy": 6,
+      "denominator": 10
+    },
+    "candidateRankingV001": {
+      "strong": 5,
+      "reviewWorthy": 6,
+      "denominator": 10
+    }
+  },
+  "scoringPolicy": {
+    "layers": [
+      "known-hit recall",
+      "strong candidate rate after human labels",
+      "generation-order/v001/v002 comparison"
+    ],
+    "nonHitTreatment": "unlabeled discovery; not an automatic error",
+    "knownHitDropDiagnosis": "quote title/reason and judge whether the reason describes performer-specific reaction"
+  },
+  "humanWork": {
+    "exactItemCount": "after-output",
+    "maximumItemCount": 10,
+    "maximumEstimatedMinutes": 10
+  },
+  "fixtures": [
+    {
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "sourceOutputPath": "outputs/theme-generation/nOEWCNc77MI_chat_velocity_top100_input_selection_v004/theme-llm-v002/20260711-chat-velocity-top100-v001/run-01-gemini-output.json",
+      "candidateCount": 89,
+      "promptInputPath": "evals/clip_composition/outputs/candidate-ranking/20260713-character-context-run1-v002/nOEWCNc77MI_multiblock_material_v001/prompt-input.json",
+      "promptPath": "evals/clip_composition/outputs/candidate-ranking/20260713-character-context-run1-v002/nOEWCNc77MI_multiblock_material_v001/prompt.txt",
+      "leakCheckPath": "evals/clip_composition/outputs/candidate-ranking/20260713-character-context-run1-v002/nOEWCNc77MI_multiblock_material_v001/leak-check.json",
+      "outputPath": "evals/clip_composition/outputs/candidate-ranking/20260713-character-context-run1-v002/nOEWCNc77MI_multiblock_material_v001/run-01-gemini-output.json"
+    },
+    {
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "sourceOutputPath": "outputs/theme-generation/9dtwF5Exu5w_chat_velocity_top100_input_selection_v004/theme-llm-v002/20260712-chat-velocity-top100-generalization-v001/run-01-gemini-output.json",
+      "candidateCount": 60,
+      "promptInputPath": "evals/clip_composition/outputs/candidate-ranking/20260713-character-context-run1-v002/9dtwF5Exu5w_multiblock_material_v001/prompt-input.json",
+      "promptPath": "evals/clip_composition/outputs/candidate-ranking/20260713-character-context-run1-v002/9dtwF5Exu5w_multiblock_material_v001/prompt.txt",
+      "leakCheckPath": "evals/clip_composition/outputs/candidate-ranking/20260713-character-context-run1-v002/9dtwF5Exu5w_multiblock_material_v001/leak-check.json",
+      "outputPath": "evals/clip_composition/outputs/candidate-ranking/20260713-character-context-run1-v002/9dtwF5Exu5w_multiblock_material_v001/run-01-gemini-output.json"
+    }
+  ]
+}

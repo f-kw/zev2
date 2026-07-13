@@ -1,0 +1,42 @@
+{
+  "rankedCandidates": [
+    {
+      "rank": 1,
+      "candidateId": 14,
+      "reason": "同期のタレントが叩かれるリスクを考慮する本人の具体的な優しさと、別のメンバーに相談先を変えるという明確な結論が理由文から読み取れるため。"
+    },
+    {
+      "rank": 2,
+      "candidateId": 57,
+      "reason": "緊迫した試合展開から劇的勝利を収め、大絶叫と涙を流して安堵を爆発させるという本人の最も強い感情反応が具体的に説明されているため。"
+    },
+    {
+      "rank": 3,
+      "candidateId": 40,
+      "reason": "期待していた固有戦術が外れたことに対して、本人が激しいツッコミと怒りを露わにするという明確なフリとリアクションが示されているため。"
+    },
+    {
+      "rank": 4,
+      "candidateId": 25,
+      "reason": "リスナーに選択を委ねた結果として手強い強敵を引き当ててしまい、本人が激しく動揺するまでの一連の展開とリアクションの因果関係が明確であるため。"
+    },
+    {
+      "rank": 5,
+      "candidateId": 9,
+      "reason": "療養中の他タレントによるアドバイスへの感謝だけでなく、卒業生という設定に合わせた独自の寸劇を繰り広げる本人の特別な言動と関係性が表れているため。"
+    }
+  ],
+  "runAt": "2026-07-13T14:13:41+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "generationSystem": "candidate-ranking-v002@gemini-web-flash",
+    "run": 1,
+    "inputPolicy": "candidateId+title+reason only"
+  },
+  "promptFile": "outputs/candidate-ranking/20260713-character-context-run1-v002/9dtwF5Exu5w_multiblock_material_v001/prompt.txt",
+  "pageUrl": "https://gemini.google.com/app/6252ef0c6f06dee7?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"rankedCandidates\": [\n    {\n      \"rank\": 1,\n      \"candidateId\": 14,\n      \"reason\": \"同期のタレントが叩かれるリスクを考慮する本人の具体的な優しさと、別のメンバーに相談先を変えるという明確な結論が理由文から読み取れるため。\"\n    },\n    {\n      \"rank\": 2,\n      \"candidateId\": 57,\n      \"reason\": \"緊迫した試合展開から劇的勝利を収め、大絶叫と涙を流して安堵を爆発させるという本人の最も強い感情反応が具体的に説明されているため。\"\n    },\n    {\n      \"rank\": 3,\n      \"candidateId\": 40,\n      \"reason\": \"期待していた固有戦術が外れたことに対して、本人が激しいツッコミと怒りを露わにするという明確なフリとリアクションが示されているため。\"\n    },\n    {\n      \"rank\": 4,\n      \"candidateId\": 25,\n      \"reason\": \"リスナーに選択を委ねた結果として手強い強敵を引き当ててしまい、本人が激しく動揺するまでの一連の展開とリアクションの因果関係が明確であるため。\"\n    },\n    {\n      \"rank\": 5,\n      \"candidateId\": 9,\n      \"reason\": \"療養中の他タレントによるアドバイスへの感謝だけでなく、卒業生という設定に合わせた独自の寸劇を繰り広げる本人の特別な言動と関係性が表れているため。\"\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}
