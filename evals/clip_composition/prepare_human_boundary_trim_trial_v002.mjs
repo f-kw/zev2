@@ -16,83 +16,112 @@ function rootDir() {
 const root = rootDir();
 const evalRoot = path.join(root, 'evals', 'clip_composition');
 const rankingRoot = path.join(evalRoot, 'outputs', 'candidate-ranking', '20260713-character-context-run1-v002');
-const rankingResultPath = path.join(rankingRoot, 'result.json');
-const rankingManifestPath = path.join(rankingRoot, 'run-manifest.json');
 const outputRoot = path.join(evalRoot, 'outputs', 'human-boundary-trim', '20260713-trial-v002');
-const manifestPath = path.join(outputRoot, 'manifest.json');
-const preflightPath = path.join(outputRoot, 'preflight.json');
-const htmlPath = path.join(outputRoot, 'index.html');
 const readJson = async (file) => JSON.parse(await readFile(file, 'utf8'));
-
 const labels = {
   nOEWCNc77MI_multiblock_material_v001: 'マリン・ころね Raft',
   '9dtwF5Exu5w_multiblock_material_v001': 'マリン 野球ゲーム'
 };
+const wordTimestampPaths = {
+  'YE-faluP7zY': path.join(evalRoot, 'stt', 'nOEWCNc77MI_YE-faluP7zY_local30_v001', 'source', 'word-timestamps.json'),
+  o8rZAhARXAc: path.join(evalRoot, 'stt', '9dtwF5Exu5w_o8rZAhARXAc_local30_v001', 'source', 'word-timestamps.json')
+};
 
-const html = String.raw`<!doctype html>
+function buildSpeechRows(rows, timestampWords) {
+  const merged = [];
+  for (const source of rows) {
+    const sourceText = String(source.text ?? '').trim();
+    const row = { id: source.speechId, startMs: source.sourceStartMs, endMs: source.sourceEndMs, text: sourceText, sourceText };
+    if ([...row.text].length === 1 && merged.length > 0) {
+      const previous = merged.at(-1);
+      previous.endMs = row.endMs;
+      previous.text += row.text;
+      previous.sourceText = null;
+    } else if (merged.at(-1)?.sourceText === sourceText) {
+      merged.at(-1).endMs = row.endMs;
+      merged.at(-1).text += sourceText;
+    } else {
+      merged.push(row);
+    }
+  }
+  if (merged.length > 1 && [...merged[0].text].length === 1) {
+    merged[1].startMs = merged[0].startMs;
+    merged[1].text = merged[0].text + merged[1].text;
+    merged[1].sourceText = null;
+    merged.shift();
+  }
+  if (merged.some((row) => [...row.text].length === 1)) throw new Error('1文字だけの発話文脈が残った');
+  let pointIndex = 0;
+  return merged.map((row, rowIndex) => {
+    const pieces = timestampWords
+      .filter((word) => word.startMs >= row.startMs && word.startMs < row.endMs && String(word.text ?? '').length > 0)
+      .map((word, localIndex) => ({ index: pointIndex++, rowIndex, localIndex, text: String(word.text), startMs: word.startMs, endMs: word.endMs }));
+    if (pieces.length === 0) throw new Error(`単語時刻なし: ${row.id}`);
+    const displayText = pieces.map((piece) => piece.text).join('');
+    if ([...displayText].length === 1) throw new Error(`1文字だけの発話文脈: ${row.id}`);
+    const { sourceText, ...visibleRow } = row;
+    return { ...visibleRow, displayText, pieces };
+  });
+}
+
+function buildHtml(manifest) {
+  const manifestJson = JSON.stringify(manifest).replace(/</g, '\\u003c');
+  return `<!doctype html>
 <html lang="ja">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>手直し試験 v002</title>
+  <title>候補の公開範囲を選ぶ</title>
   <style>
-    :root{color-scheme:dark;--bg:#0f1218;--panel:#191e27;--line:#343d4d;--text:#f5f7fb;--muted:#aab4c5;--blue:#67d2ff;--green:#72e4a3;--yellow:#ffd071;--red:#ff8b8b}
-    *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}main{max-width:1120px;margin:auto;padding:18px 18px 210px}h1{font-size:25px;margin:0 0 5px}h2{font-size:22px;margin:5px 0 9px}.muted{color:var(--muted)}.top{display:flex;justify-content:space-between;gap:16px}.pill{border:1px solid var(--line);border-radius:99px;padding:7px 11px;white-space:nowrap}.panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px;margin-top:14px}.candidate-list{display:grid;gap:8px;margin-top:12px}.candidate-list div{background:#11161e;border:1px solid var(--line);border-radius:10px;padding:11px}.candidate-list b{display:block;margin-bottom:3px}video{width:100%;max-height:55vh;background:#000;border-radius:10px}.times{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:10px}.time,.snap{background:#11161e;border:1px solid var(--line);border-radius:10px;padding:10px}.time strong{display:block;font-size:18px;margin-top:3px}.snap-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:10px}.snap-options{display:flex;flex-wrap:wrap;gap:7px;margin-top:7px}.snap-options button.selected{background:#17543a;border-color:var(--green)}button,input,textarea{font:inherit}button{color:var(--text);background:#252d39;border:1px solid #445064;border-radius:9px;padding:10px 13px;cursor:pointer}button:hover{border-color:var(--blue)}button:disabled{opacity:.4;cursor:not-allowed}.publish{background:#17613e;border-color:#2cad6e;font-weight:700}.skip{background:#4b3c1a;border-color:#aa812c}.unknown{background:#49365e;border-color:#8f67ba}.primary{background:#155e7c;border-color:#2da7d5;font-weight:700}.danger{background:#5e2626;border-color:#a94b4b}.direct-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:11px}.direct label{font-weight:700}.direct input{width:100%;margin-top:4px;color:var(--text);background:#0d1117;border:2px solid #596981;border-radius:9px;padding:10px;font-size:17px}.controls{display:flex;flex-wrap:wrap;gap:8px;margin-top:11px}textarea{width:100%;min-height:60px;color:var(--text);background:#11161e;border:1px solid var(--line);border-radius:9px;padding:9px}.bottom{position:fixed;left:0;right:0;bottom:0;background:rgba(15,18,24,.97);border-top:1px solid var(--line);padding:12px 18px;backdrop-filter:blur(8px)}.bottom-inner{max-width:1120px;margin:auto;display:flex;gap:9px;align-items:center;flex-wrap:wrap}.spacer{flex:1}.status{color:var(--muted)}.summary-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.summary-grid div{background:#11161e;border:1px solid var(--line);border-radius:10px;padding:12px}.summary-grid strong{display:block;font-size:23px}.hidden{display:none!important}@media(max-width:720px){.times,.snap-grid,.direct-grid,.summary-grid{grid-template-columns:1fr}.bottom-inner button{flex:1}.spacer{display:none}}
+    :root{color-scheme:dark;--bg:#0d1117;--panel:#161b22;--line:#30363d;--text:#f0f3f6;--muted:#a7b0bb;--blue:#58a6ff;--green:#2ea043;--yellow:#9e7b20;--purple:#6e4b91}
+    *{box-sizing:border-box}body{margin:0;padding:0 0 170px;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}header,main{width:min(1050px,calc(100% - 28px));margin:auto}header{padding:22px 0 8px}h1{margin:0 0 8px;font-size:clamp(24px,4vw,36px)}h2{line-height:1.35}.guide,.card,.selection,.copy-panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px;margin-top:12px}.guide{line-height:1.65}.muted{color:var(--muted)}.topline{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap}select,button,textarea{font:inherit}select{max-width:100%;color:var(--text);background:#21262d;border:1px solid #484f58;border-radius:9px;padding:9px}video{width:100%;max-height:52vh;background:#000;border-radius:12px}.selection{display:grid;grid-template-columns:1fr 1fr;gap:10px}.selection strong{display:block;margin-bottom:5px}.selection-text{line-height:1.65}.mode-controls{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.mode-controls button{flex:1}.transcript{display:grid;gap:9px;margin-top:12px;max-height:52vh;overflow:auto}.speech-row{background:#11161e;border:1px solid var(--line);border-radius:10px;padding:10px}.speech-row.in-range{background:#15253a;border-color:#315f8d}.speech-meta{margin-bottom:6px}.speech-text{font-size:18px;line-height:2.05;word-break:break-all}.piece{display:inline;color:var(--text);background:transparent;border:0;border-radius:3px;padding:3px 0;line-height:1.5}.piece:hover{background:#29405b}.piece.start{background:var(--green);color:#fff;box-shadow:-3px 0 0 #8bf0b4}.piece.end{background:#9e7b20;color:#fff;box-shadow:3px 0 0 #ffd071}.piece.in-range:not(.start):not(.end){background:#213a58}.piece:focus-visible{outline:3px solid var(--blue);outline-offset:2px}button{color:var(--text);background:#21262d;border:1px solid #484f58;border-radius:10px;padding:11px 14px;cursor:pointer}button:hover{border-color:var(--blue)}button.active{outline:3px solid var(--blue)}button:disabled{opacity:.4;cursor:not-allowed}.controls{display:flex;gap:9px;flex-wrap:wrap;margin-top:10px}.copy-panel textarea{width:100%;min-height:240px;margin-top:10px;background:#0d1117;color:var(--text);border:1px solid var(--line);border-radius:10px;padding:10px}.bottom{position:fixed;z-index:5;left:0;right:0;bottom:0;background:rgba(13,17,23,.97);border-top:1px solid var(--line);padding:11px 14px}.bottom-inner{width:min(1050px,100%);margin:auto}.choices{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.publish{background:#1f6f3f}.skip{background:#765d1a}.unknown{background:#54376e}.nav{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:8px}.nav button{min-width:110px}.hidden{display:none!important}@media(max-width:720px){body{padding-bottom:260px}.selection{grid-template-columns:1fr}.choices{grid-template-columns:1fr}.nav button{min-width:0;flex:1}}
   </style>
 </head>
 <body>
-<main>
-  <div class="top"><div><h1>手直し試験 v002</h1><div class="muted">上位5候補から公開する候補を選び、公開できる開始・終了へ直します。</div></div><div class="pill" id="progress">読込中</div></div>
-  <section id="intro" class="panel hidden"><h2 id="introTitle"></h2><p>上位5件を順に確認します。正解や過去の人間評価は表示しておらず、作業時間も測りません。</p><div id="introList" class="candidate-list"></div></section>
-  <div id="workspace" class="hidden">
-    <section class="panel"><div id="source" class="muted"></div><h2 id="title"></h2><p id="reason"></p></section>
-    <section class="panel"><video id="video" controls preload="metadata"></video><div class="times"><div class="time"><span class="muted">現在位置</span><strong id="current">--:--.---</strong></div><div class="time"><span class="muted">開始</span><strong id="start">--:--.---</strong></div><div class="time"><span class="muted">終了</span><strong id="end">--:--.---</strong></div></div></section>
-    <section id="editor" class="panel hidden"><h2>公開する境界を決める</h2><p class="muted">まず概算時刻を入力してください。直前・直後の単語境界へ合わせたあと、候補ボタンで周辺を短く試聴できます。</p><div class="direct-grid"><div class="direct"><label>開始<input id="directStart" inputmode="decimal" placeholder="4:13"></label></div><div class="direct"><label>終了<input id="directEnd" inputmode="decimal" placeholder="5:13"></label></div></div><div class="controls"><button id="applyTime" class="primary">時刻を単語境界へ合わせる</button><button id="preview">選択範囲を再生</button><button id="reset">仮区間へ戻す</button></div><div class="snap-grid"><div class="snap"><strong>開始候補</strong><div id="snapStart" class="snap-options"><span class="muted">時刻入力後に表示</span></div></div><div class="snap"><strong>終了候補</strong><div id="snapEnd" class="snap-options"><span class="muted">時刻入力後に表示</span></div></div></div><div class="controls"><button data-step="-5">−5秒</button><button data-step="-1">−1秒</button><button data-step="-0.1">−0.1秒</button><button data-step="0.1">＋0.1秒</button><button data-step="1">＋1秒</button><button data-step="5">＋5秒</button><button id="setStart">現在位置を開始</button><button id="setEnd">現在位置を終了</button></div><p><label>判断メモ（任意）<textarea id="notes"></textarea></label></p></section>
-  </div>
-  <section id="summary" class="panel hidden"><h2 id="summaryTitle"></h2><div class="summary-grid"><div>公開する<strong id="publishCount">0</strong></div><div>選ばない<strong id="skipCount">0</strong></div><div>文脈不明<strong id="unknownCount">0</strong></div></div><p class="muted">文脈不明は「つまらない」へ合算しません。</p></section>
-</main>
-<div class="bottom"><div class="bottom-inner"><button id="startMaterial" class="publish hidden">この配信の確認を開始</button><div id="decisionButtons" class="hidden"><button id="choosePublish" class="publish">公開する</button><button id="chooseSkip" class="skip">選ばない</button><button id="chooseUnknown" class="unknown">文脈不明</button></div><button id="savePublish" class="publish hidden">境界を保存して次へ</button><button id="nextMaterial" class="primary hidden">次の配信へ</button><span class="spacer"></span><span id="saveState" class="status"></span></div></div>
-<script>
-(() => {
-  const $=id=>document.getElementById(id);const video=$('video');let manifest,state,materialIndex=0,taskIndex=0,mode='intro',previewEndMs=null,snippetEndMs=null,directDirty=true,saveTimer;
-  const fmt=ms=>{if(!Number.isFinite(ms))return'--:--.---';const t=Math.max(0,Math.round(ms)),h=Math.floor(t/3600000),m=Math.floor((t%3600000)/60000),s=Math.floor((t%60000)/1000),x=t%1000;return(h?String(h).padStart(2,'0')+':':'')+String(m).padStart(2,'0')+':'+String(s).padStart(2,'0')+'.'+String(x).padStart(3,'0')};
-  const fmtInput=ms=>{const total=Math.max(0,ms)/1000,h=Math.floor(total/3600),m=Math.floor((total%3600)/60),s=total%60,ss=(Number.isInteger(s)?String(s).padStart(2,'0'):s.toFixed(3).padStart(6,'0').replace(/0+$/,'').replace(/\.$/,''));return h?h+':'+String(m).padStart(2,'0')+':'+ss:m+':'+ss};
-  const parse=value=>{const p=String(value).trim().split(':').map(Number);if(!p.length||p.length>3||p.some(x=>!Number.isFinite(x)||x<0))return null;if((p.length>=2&&p.at(-1)>=60)||(p.length===3&&p[1]>=60))return null;return Math.round((p.length===1?p[0]:p.length===2?p[0]*60+p[1]:p[0]*3600+p[1]*60+p[2])*1000)};
-  const material=()=>manifest.materials[materialIndex];const tasks=()=>material().taskIds.map(id=>manifest.tasks.find(t=>t.id===id));const task=()=>tasks()[taskIndex];const record=()=>state.tasks[task().id];const session=()=>state.sessions[material().fixtureId];
-  function ensure(){for(const m of manifest.materials)if(!state.sessions[m.fixtureId])state.sessions[m.fixtureId]={fixtureId:m.fixtureId,status:'not_started'};for(const t of manifest.tasks)if(!state.tasks[t.id])state.tasks[t.id]={taskId:t.id,fixtureId:t.fixtureId,candidateId:t.candidateId,rank:t.rank,status:'not_started',decision:null,provisionalStartMs:t.provisionalStartMs,provisionalEndMs:t.provisionalEndMs,finalStartMs:t.provisionalStartMs,finalEndMs:t.provisionalEndMs,notes:''};}
-  async function save(){$('saveState').textContent='保存中…';const r=await fetch('/api/save',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(state)});if(!r.ok)throw new Error(await r.text());$('saveState').textContent='保存済み'}
-  function schedule(){clearTimeout(saveTimer);saveTimer=setTimeout(()=>save().catch(e=>{$('saveState').textContent='保存失敗';console.error(e)}),300)}
-  function show(id,value){$(id).classList.toggle('hidden',!value)}
-  function intro(){mode='intro';const m=material();$('progress').textContent=(materialIndex+1)+' / '+manifest.materials.length+' 配信';$('introTitle').textContent=m.label+'：上位5候補';$('introList').innerHTML=tasks().map(t=>'<div><b>'+t.rank+'位　'+escapeHtml(t.title)+'</b><span class="muted">'+escapeHtml(t.reason)+'</span></div>').join('');show('intro',true);show('workspace',false);show('summary',false);show('startMaterial',true);show('decisionButtons',false);show('savePublish',false);show('nextMaterial',false);}
-  function escapeHtml(v){return String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
-  function startMaterial(){const s=session();if(s.status==='not_started')s.status='in_progress';taskIndex=Math.max(0,tasks().findIndex(t=>state.tasks[t.id].status!=='complete'));if(taskIndex<0)taskIndex=0;loadTask()}
-  function loadTask(){mode='task';const t=task(),r=record();if(r.status!=='complete')r.status='in_progress';$('progress').textContent=material().label+'　'+(taskIndex+1)+' / 5';$('source').textContent=material().label+' / '+t.rank+'位 / candidate '+t.candidateId;$('title').textContent=t.title;$('reason').textContent=t.reason;$('notes').value=r.notes||'';video.src=t.videoRoute;video.onloadedmetadata=()=>{video.currentTime=r.finalStartMs/1000;update()};directDirty=true;syncInputs();$('snapStart').innerHTML='<span class="muted">時刻入力後に表示</span>';$('snapEnd').innerHTML='<span class="muted">時刻入力後に表示</span>';show('intro',false);show('workspace',true);show('summary',false);show('startMaterial',false);show('decisionButtons',true);show('editor',r.decision==='publish');show('savePublish',r.decision==='publish');show('nextMaterial',false);update();schedule()}
-  function syncInputs(){$('directStart').value=fmtInput(record().finalStartMs);$('directEnd').value=fmtInput(record().finalEndMs);$('directStart').setCustomValidity('');$('directEnd').setCustomValidity('')}
-  function update(){$('current').textContent=fmt(video.currentTime*1000);if(mode==='task'){$('start').textContent=fmt(record().finalStartMs);$('end').textContent=fmt(record().finalEndMs)}}
-  function choosePublish(){const r=record();r.decision='publish';show('editor',true);show('savePublish',true);directDirty=true;syncInputs();video.currentTime=r.finalStartMs/1000;update()}
-  async function finish(decision){const r=record();if(decision==='publish'&&!(await applyDirect()))return;r.status='complete';r.decision=decision;r.notes=$('notes').value;await save();if(taskIndex<tasks().length-1){taskIndex+=1;loadTask()}else finishMaterial()}
-  async function finishMaterial(){const s=session();s.status='complete';await save();mode='summary';const rs=tasks().map(t=>state.tasks[t.id]),counts=k=>rs.filter(r=>r.decision===k).length;$('summaryTitle').textContent=material().label+' 完了';$('publishCount').textContent=counts('publish');$('skipCount').textContent=counts('skip');$('unknownCount').textContent=counts('context_unknown');show('intro',false);show('workspace',false);show('summary',true);show('decisionButtons',false);show('savePublish',false);show('nextMaterial',materialIndex<manifest.materials.length-1)}
-  function setBoundary(side,option,requested,automatic){const r=record();if(side==='start')r.finalStartMs=option.timeMs;else r.finalEndMs=option.timeMs;r.snapSelections=r.snapSelections||{};r.snapSelections[side]={requestedTimeMs:requested,selectedTimeMs:option.timeMs,relation:option.relation,word:option.word,context:option.context,automatic};directDirty=false;syncInputs();update()}
-  function renderOptions(side,data,selected){const box=side==='start'?$('snapStart'):$('snapEnd');box.textContent='';for(const o of data.options){const b=document.createElement('button');b.type='button';b.className=o.timeMs===selected?'selected':'';const rel=o.relation==='before'?'直前':o.relation==='after'?'直後':'一致';b.textContent=rel+' '+fmt(o.timeMs)+'「'+o.context+'」';b.onclick=()=>{setBoundary(side,o,data.requestedTimeMs,false);renderOptions(side,data,o.timeMs);video.currentTime=Math.max(0,(o.timeMs-2000)/1000);snippetEndMs=o.timeMs+2000;video.play().catch(()=>{})};box.appendChild(b)}}
-  async function fetchSnap(side,requested){const t=task(),res=await fetch('/api/boundary-options?sourceVideoId='+encodeURIComponent(t.sourceVideoId)+'&timeMs='+requested+'&side='+side);if(!res.ok)throw new Error(await res.text());const data=await res.json();if(!data.options.length)return requested;const selected=[...data.options].sort((a,b)=>{const d=Math.abs(a.timeMs-requested)-Math.abs(b.timeMs-requested);if(d)return d;if(side==='start')return a.timeMs-b.timeMs;return b.timeMs-a.timeMs})[0];setBoundary(side,selected,requested,true);renderOptions(side,data,selected.timeMs);return selected.timeMs}
-  async function applyDirect(){const r=record();if(!directDirty&&r.snapSelections?.start&&r.snapSelections?.end)return true;const a=parse($('directStart').value),b=parse($('directEnd').value);$('directStart').setCustomValidity(a==null?'4:13 のように入力してください':'');$('directEnd').setCustomValidity(b==null?'5:13 のように入力してください':'');if(a==null||b==null||a>=b){if(a!=null&&b!=null)$('directEnd').setCustomValidity('終了は開始より後にしてください');$('directStart').reportValidity();$('directEnd').reportValidity();return false}const sa=await fetchSnap('start',a),sb=await fetchSnap('end',b);if(sa>=sb){$('directEnd').setCustomValidity('単語境界へ合わせると終了が開始以前です');$('directEnd').reportValidity();return false}directDirty=false;return true}
-  async function preview(){if(!(await applyDirect()))return;video.currentTime=record().finalStartMs/1000;previewEndMs=record().finalEndMs;video.play().catch(()=>{})}
-  function step(sec){video.currentTime=Math.max(0,video.currentTime+sec)}
-  function manual(side){const v=Math.round(video.currentTime*1000),r=record();if(side==='start')r.finalStartMs=v;else r.finalEndMs=v;r.snapSelections=null;directDirty=true;syncInputs();update()}
-  function reset(){const r=record();r.finalStartMs=r.provisionalStartMs;r.finalEndMs=r.provisionalEndMs;r.snapSelections=null;directDirty=true;syncInputs();update()}
-  function restore(){ensure();let idx=manifest.materials.findIndex(m=>state.sessions[m.fixtureId].status!=='complete');if(idx<0){materialIndex=manifest.materials.length-1;finishMaterial();return}materialIndex=idx;const s=session();if(s.status==='in_progress'){taskIndex=Math.max(0,tasks().findIndex(t=>state.tasks[t.id].status!=='complete'));loadTask()}else intro()}
-  $('startMaterial').onclick=startMaterial;$('choosePublish').onclick=choosePublish;$('chooseSkip').onclick=()=>finish('skip');$('chooseUnknown').onclick=()=>finish('context_unknown');$('savePublish').onclick=()=>finish('publish');$('applyTime').onclick=applyDirect;$('preview').onclick=preview;$('reset').onclick=reset;$('setStart').onclick=()=>manual('start');$('setEnd').onclick=()=>manual('end');$('nextMaterial').onclick=()=>{materialIndex+=1;intro()};$('directStart').oninput=()=>{directDirty=true};$('directEnd').oninput=()=>{directDirty=true};$('notes').oninput=()=>{record().notes=$('notes').value;schedule()};document.querySelectorAll('[data-step]').forEach(b=>b.onclick=()=>step(Number(b.dataset.step)));
-  video.addEventListener('timeupdate',()=>{const ms=video.currentTime*1000;if((previewEndMs&&ms>=previewEndMs)||(snippetEndMs&&ms>=snippetEndMs)){video.pause();previewEndMs=null;snippetEndMs=null}update()});
-  setInterval(update,250);
-  Promise.all([fetch('/api/manifest').then(r=>r.json()),fetch('/api/state').then(r=>r.json())]).then(([m,s])=>{manifest=m;state=s;ensure();restore()}).catch(e=>{document.body.textContent='読込失敗: '+e.message});
-})();
-</script>
-</body></html>`;
+  <header>
+    <div class="topline"><div><h1>候補の公開範囲を選ぶ</h1><div id="progress" class="muted"></div></div><select id="jump"></select></div>
+    <div class="guide"><strong>やること:</strong> 動画を見て三択を選びます。公開する場合だけ、発話文の中から開始と終了を選びます。開始は「始めたい言葉の最初」、終了は「最後に残す言葉の最後」を押してください。1文字だけを孤立表示せず、発話全体の意味を読みながら選べます。時刻入力も確定保存もありません。</div>
+  </header>
+  <main>
+    <section class="card"><div id="source" class="muted"></div><h2 id="title"></h2><p id="reason"></p></section>
+    <section class="card"><video id="video" controls preload="metadata"></video><div class="controls"><button id="previewCandidate">候補全体を再生</button><button id="previewSelection">選んだ範囲を再生</button></div></section>
+    <section id="boundaryPanel" class="card hidden"><h2>発話文から公開範囲を選ぶ</h2><div class="selection"><div><strong>開始</strong><div id="startText" class="selection-text"></div></div><div><strong>終了</strong><div id="endText" class="selection-text"></div></div></div><div class="mode-controls"><button id="modeStart">開始を選ぶ</button><button id="modeEnd">終了を選ぶ</button></div><p id="modeGuide" class="muted"></p><div id="transcript" class="transcript"></div></section>
+    <section id="copyPanel" class="copy-panel hidden"><h2>確認結果</h2><p>「結果をコピー」を押して、そのままチャットへ貼り付けてください。ブラウザが直接コピーを許可しない場合は結果欄を選択するので、Command+Cだけ押してください。コピー後も候補を選び直せます。</p><button id="copy">結果をコピー</button><textarea id="output" readonly></textarea></section>
+  </main>
+  <div class="bottom"><div class="bottom-inner"><div class="choices"><button data-decision="publish" class="publish">公開する</button><button data-decision="skip" class="skip">選ばない</button><button data-decision="context_unknown" class="unknown">文脈不明</button></div><div class="nav"><button id="prev">前の候補</button><span id="status">未回答</span><button id="next">次の候補</button></div></div></div>
+  <script>
+    (()=>{
+      const manifest=${manifestJson};const items=manifest.tasks;const storageKey='zev-human-boundary-trim-v002-utterance-context-v002';const labels={publish:'公開する',skip:'選ばない',context_unknown:'文脈不明'};const $=id=>document.getElementById(id);const video=$('video');const pointsByTask=Object.fromEntries(items.map(t=>[t.id,t.transcriptRows.flatMap(row=>row.pieces)]));let previewEndMs=null;let mode='start';let state={current:0,answers:{}};try{state={...state,...(JSON.parse(localStorage.getItem(storageKey))||{})}}catch{}
+      function answer(item){if(!state.answers[item.id])state.answers[item.id]={decision:null,startPoint:0,endPoint:item.pointCount-1};return state.answers[item.id]}
+      items.forEach(t=>{const a=answer(t);if(!Number.isInteger(a.startPoint)||!Number.isInteger(a.endPoint)){state.answers[t.id]={decision:a.decision??null,startPoint:0,endPoint:t.pointCount-1}}});state.current=Math.min(Math.max(0,Number(state.current)||0),items.length-1);
+      function save(){localStorage.setItem(storageKey,JSON.stringify(state))}
+      function esc(value){return String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+      function item(){return items[state.current]}
+      function points(t){return pointsByTask[t.id]}
+      function valid(a){return a.decision&&a.startPoint<=a.endPoint}
+      function complete(){return items.every(t=>valid(answer(t)))}
+      function selected(t,a){return {start:points(t)[a.startPoint],end:points(t)[a.endPoint]}}
+      function boundaryText(t,index,side){const p=points(t)[index],row=t.transcriptRows[p.rowIndex],cut=side==='start'?p.localIndex:p.localIndex+1,before=row.pieces.slice(0,cut).map(x=>x.text).join(''),after=row.pieces.slice(cut).map(x=>x.text).join('');return '発話 '+(p.rowIndex+1)+': '+before+'｜'+after}
+      function play(startMs,endMs){video.currentTime=startMs/1000;previewEndMs=endMs;video.play().catch(()=>{})}
+      function renderTranscript(t,a){const scroll=$('transcript').scrollTop;$('transcript').innerHTML=t.transcriptRows.map((row,rowIndex)=>{const inside=row.pieces.some(p=>p.index>=a.startPoint&&p.index<=a.endPoint);return '<div class="speech-row '+(inside?'in-range':'')+'"><div class="speech-meta muted">発話 '+(rowIndex+1)+' / '+t.transcriptRows.length+'</div><div class="speech-text">'+row.pieces.map(p=>'<button class="piece '+(p.index>=a.startPoint&&p.index<=a.endPoint?'in-range ':'')+(p.index===a.startPoint?'start ':'')+(p.index===a.endPoint?'end':'')+'" data-point="'+p.index+'" aria-label="'+esc(row.displayText)+' 内の位置">'+esc(p.text)+'</button>').join('')+'</div></div>'}).join('');$('transcript').scrollTop=scroll;document.querySelectorAll('[data-point]').forEach(button=>button.onclick=()=>{const index=Number(button.dataset.point),p=points(t)[index];if(mode==='start'){a.startPoint=index;if(a.startPoint>a.endPoint)a.endPoint=a.startPoint;mode='end'}else{a.endPoint=index;if(a.endPoint<a.startPoint)a.startPoint=a.endPoint}save();render();const row=t.transcriptRows[p.rowIndex];play(row.startMs,row.endMs)})}
+      function buildOutput(){const lines=['手直し確認v002 発話文境界選択結果','確認者: kawafmm',''];items.forEach((t,index)=>{const a=answer(t);lines.push('確認'+(index+1)+': '+labels[a.decision]+' / '+t.fixtureId+' / candidate '+t.candidateId+' / '+t.title);if(a.decision==='publish'){const s=selected(t,a);lines.push('開始: '+s.start.startMs+'ms / '+boundaryText(t,a.startPoint,'start'));lines.push('終了: '+s.end.endMs+'ms / '+boundaryText(t,a.endPoint,'end'))}});return lines.join('\\n')}
+      function render(){const t=item(),a=answer(t),s=selected(t,a);$('progress').textContent=(state.current+1)+' / '+items.length+'　回答済み '+items.filter(x=>answer(x).decision).length+'件';$('jump').value=String(state.current);$('source').textContent=t.fixtureLabel+' / '+t.rank+'位 / candidate '+t.candidateId;$('title').textContent=t.title;$('reason').textContent=t.reason;if(video.dataset.source!==t.videoRoute){video.dataset.source=t.videoRoute;video.src=t.videoRoute;video.onloadedmetadata=()=>{video.currentTime=t.provisionalStartMs/1000}}$('boundaryPanel').classList.toggle('hidden',a.decision!=='publish');$('startText').textContent=boundaryText(t,a.startPoint,'start');$('endText').textContent=boundaryText(t,a.endPoint,'end');$('modeStart').classList.toggle('active',mode==='start');$('modeEnd').classList.toggle('active',mode==='end');$('modeGuide').textContent=mode==='start'?'始めたい言葉の最初の文字を、発話文の中で押してください。選ぶと終了選択へ移ります。':'最後に残す言葉の最後の文字を、発話文の中で押してください。';renderTranscript(t,a);document.querySelectorAll('[data-decision]').forEach(button=>button.classList.toggle('active',button.dataset.decision===a.decision));$('status').textContent=a.decision?labels[a.decision]:'未回答';$('prev').disabled=state.current===0;$('next').disabled=state.current===items.length-1;$('copyPanel').classList.toggle('hidden',!complete());if(complete())$('output').value=buildOutput()}
+      $('jump').innerHTML=items.map((t,index)=>'<option value="'+index+'">確認'+(index+1)+': '+esc(t.title)+'</option>').join('');$('jump').onchange=()=>{state.current=Number($('jump').value);mode='start';save();render()};$('modeStart').onclick=()=>{mode='start';render()};$('modeEnd').onclick=()=>{mode='end';render()};document.querySelectorAll('[data-decision]').forEach(button=>button.onclick=()=>{answer(item()).decision=button.dataset.decision;if(button.dataset.decision==='publish')mode='start';save();render()});$('prev').onclick=()=>{state.current=Math.max(0,state.current-1);mode='start';save();render();window.scrollTo({top:0,behavior:'smooth'})};$('next').onclick=()=>{state.current=Math.min(items.length-1,state.current+1);mode='start';save();render();window.scrollTo({top:0,behavior:'smooth'})};$('previewCandidate').onclick=()=>play(item().provisionalStartMs,item().provisionalEndMs);$('previewSelection').onclick=()=>{const t=item(),a=answer(t),s=selected(t,a);play(s.start.startMs,s.end.endMs)};$('copy').onclick=()=>{const text=buildOutput(),output=$('output'),button=$('copy');output.value=text;output.focus();output.select();let copied=false;try{copied=document.execCommand('copy')}catch{}button.textContent=copied?'コピーしました':'文章を選択しました';if(!copied&&navigator.clipboard?.writeText)navigator.clipboard.writeText(text).then(()=>{button.textContent='コピーしました'}).catch(()=>{})};video.addEventListener('timeupdate',()=>{if(previewEndMs!==null&&video.currentTime*1000>=previewEndMs){video.pause();previewEndMs=null}});save();render();
+    })();
+  </script>
+</body>
+</html>`;
+}
 
 async function main() {
-  const [ranking, runManifest] = await Promise.all([readJson(rankingResultPath), readJson(rankingManifestPath)]);
+  const [ranking, runManifest] = await Promise.all([
+    readJson(path.join(rankingRoot, 'result.json')),
+    readJson(path.join(rankingRoot, 'run-manifest.json'))
+  ]);
   if (ranking.generationSystem !== 'candidate-ranking-v002@gemini-web-flash') throw new Error('ランキング系統不一致');
   const sourceByFixture = new Map(runManifest.fixtures.map((item) => [item.fixtureId, item.sourceOutputPath]));
+  const promptInputCache = new Map();
+  const wordTimestampCache = new Map();
   const tasks = [];
   const materials = [];
   for (const fixture of ranking.fixtures) {
@@ -103,8 +132,18 @@ async function main() {
     for (const ranked of fixture.rankedCandidates) {
       const theme = themeOutput.themes[ranked.candidateId - 1];
       if (!theme || theme.title !== ranked.title) throw new Error(`候補対応不一致: ${fixture.fixtureId} ${ranked.candidateId}`);
-      if (theme.evidenceRanges.length !== 1) throw new Error(`v002手直しは単一根拠範囲だけ: ${fixture.fixtureId} ${ranked.candidateId}`);
+      if (theme.evidenceRanges.length !== 1) throw new Error(`単一根拠範囲でない: ${fixture.fixtureId} ${ranked.candidateId}`);
       const range = theme.evidenceRanges[0];
+      const promptInputPath = path.join(path.dirname(path.join(evalRoot, sourcePath)), 'windows', `${theme.windowId}-prompt-input.json`);
+      if (!promptInputCache.has(promptInputPath)) promptInputCache.set(promptInputPath, await readJson(promptInputPath));
+      const promptSource = promptInputCache.get(promptInputPath).modelInput.sources.find((item) => item.sourceVideoId === range.sourceVideoId);
+      const sourceRows = promptSource?.segments.filter((row) => row.sourceEndMs >= range.sourceStartMs && row.sourceStartMs <= range.sourceEndMs) ?? [];
+      const wordTimestampPath = wordTimestampPaths[range.sourceVideoId];
+      if (!wordTimestampPath) throw new Error(`単語時刻の対応なし: ${range.sourceVideoId}`);
+      if (!wordTimestampCache.has(wordTimestampPath)) wordTimestampCache.set(wordTimestampPath, (await readJson(wordTimestampPath)).words);
+      const transcriptRows = buildSpeechRows(sourceRows, wordTimestampCache.get(wordTimestampPath));
+      if (transcriptRows.length === 0) throw new Error(`発話テキストなし: ${fixture.fixtureId} ${ranked.candidateId}`);
+      const pointCount = transcriptRows.reduce((sum, row) => sum + row.pieces.length, 0);
       const id = `${fixture.fixtureId}__candidate-${String(ranked.candidateId).padStart(3, '0')}`;
       taskIds.push(id);
       tasks.push({
@@ -119,55 +158,52 @@ async function main() {
         provisionalStartMs: range.sourceStartMs,
         provisionalEndMs: range.sourceEndMs,
         videoRoute: `/video/${range.sourceVideoId}`,
-        rankingGenerationSystem: ranking.generationSystem,
-        themeGenerationSystem: themeOutput.params?.generationSystem ?? 'theme-llm-v002@gemini-web-flash',
-        sourceThemeOutputPath: sourcePath,
-        provisionalSelection: 'theme evidence range resolved from supporting speech IDs'
+        transcriptRows,
+        pointCount
       });
     }
-    if (taskIds.length !== 5) throw new Error(`上位5件でない: ${fixture.fixtureId}`);
     materials.push({ fixtureId: fixture.fixtureId, label: labels[fixture.fixtureId], taskIds });
   }
-  if (materials.length !== 2 || tasks.length !== 10) throw new Error(`対象数不一致 materials=${materials.length} tasks=${tasks.length}`);
+  if (materials.length !== 2 || tasks.length !== 10 || materials.some((item) => item.taskIds.length !== 5)) throw new Error('対象数不一致');
   const manifest = {
-    kind: 'human_boundary_trim_trial_manifest',
-    version: 'human-boundary-trim-v002',
+    kind: 'human_boundary_trim_utterance_context_manifest',
+    version: 'human-boundary-trim-v002-utterance-context-v001',
     reviewer: 'kawafmm',
-    trialStatus: 'approved-awaiting-human',
-    rankingGenerationSystem: ranking.generationSystem,
-    taskOrder: 'candidate-ranking-v002 saved rank 1-5 per material',
-    provisionalSelection: 'theme evidence range only; callback output not included',
+    priorProgress: 'invalid_due_to_unusable_ui_not_loaded',
+    serverPersistence: false,
+    resultDelivery: 'copy_to_chat',
+    boundaryInput: 'select_timestamped_position_inside_full_utterance_context',
     expectedBoundaryDataIncluded: false,
     previousHumanLabelsIncluded: false,
     callbackOutputIncluded: false,
-    humanWork: { materials: 2, candidatesPerMaterial: 5, timeMeasurement: false },
-    choices: ['publish', 'skip', 'context_unknown'],
     materials,
     tasks
   };
-  const humanVisibleCandidateData = JSON.stringify({ materials, tasks });
-  if (/expectedCuts|targetExpected|humanLabel|answerLabel|callback-detection/i.test(humanVisibleCandidateData)) throw new Error('人間用候補データへ非表示情報が混入');
+  const visible = JSON.stringify({ materials, tasks });
+  if (/expectedCuts|targetExpected|humanLabel|answerLabel|callback-detection/i.test(visible)) throw new Error('人間用データへ非表示情報が混入');
   const preflight = {
-    kind: 'human_boundary_trim_trial_preflight',
+    kind: 'human_boundary_trim_utterance_context_preflight',
     version: manifest.version,
     materialCount: materials.length,
     taskCount: tasks.length,
-    allTasksSingleEvidenceRange: true,
+    utteranceContextBoundarySelection: true,
+    isolatedSingleCharacterChoice: false,
+    resultCopy: true,
+    serverPersistence: false,
+    priorProgressLoaded: false,
     expectedBoundaryDataIncluded: false,
     previousHumanLabelsIncluded: false,
     callbackOutputIncluded: false,
-    sourceVideos: [...new Set(tasks.map((item) => item.sourceVideoId))],
-    sourceTranscriptsRequiredAtRuntime: true,
     newSttRequired: false,
     status: 'pass'
   };
   await mkdir(outputRoot, { recursive: true });
   await Promise.all([
-    writeFile(manifestPath, `${JSON.stringify(manifest, null, 2)}\n`),
-    writeFile(preflightPath, `${JSON.stringify(preflight, null, 2)}\n`),
-    writeFile(htmlPath, html)
+    writeFile(path.join(outputRoot, 'manifest.json'), `${JSON.stringify(manifest, null, 2)}\n`),
+    writeFile(path.join(outputRoot, 'preflight.json'), `${JSON.stringify(preflight, null, 2)}\n`),
+    writeFile(path.join(outputRoot, 'index.html'), buildHtml(manifest))
   ]);
-  console.log(JSON.stringify({ status: 'prepared', outputRoot: path.relative(root, outputRoot), materialCount: materials.length, taskCount: tasks.length }, null, 2));
+  console.log(JSON.stringify({ status: 'prepared', materialCount: materials.length, taskCount: tasks.length, transcriptRowCount: tasks.reduce((sum, item) => sum + item.transcriptRows.length, 0), selectablePointCount: tasks.reduce((sum, item) => sum + item.pointCount, 0) }, null, 2));
 }
 
 main().catch((error) => {

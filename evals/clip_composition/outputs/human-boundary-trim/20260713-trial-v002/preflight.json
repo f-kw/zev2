@@ -1,17 +1,16 @@
 {
-  "kind": "human_boundary_trim_trial_preflight",
-  "version": "human-boundary-trim-v002",
+  "kind": "human_boundary_trim_utterance_context_preflight",
+  "version": "human-boundary-trim-v002-utterance-context-v001",
   "materialCount": 2,
   "taskCount": 10,
-  "allTasksSingleEvidenceRange": true,
+  "utteranceContextBoundarySelection": true,
+  "isolatedSingleCharacterChoice": false,
+  "resultCopy": true,
+  "serverPersistence": false,
+  "priorProgressLoaded": false,
   "expectedBoundaryDataIncluded": false,
   "previousHumanLabelsIncluded": false,
   "callbackOutputIncluded": false,
-  "sourceVideos": [
-    "YE-faluP7zY",
-    "o8rZAhARXAc"
-  ],
-  "sourceTranscriptsRequiredAtRuntime": true,
   "newSttRequired": false,
   "status": "pass"
 }
