@@ -31,7 +31,7 @@
 CLIP_ID="YouTube動画IDまたは安全な短縮ID"
 CLIP_URL="https://www.youtube.com/watch?v=..."
 RUN_ID="$(date +%Y%m%d)-material-manufacturing-v001"
-STT_SERVER="http://192.168.1.4:8000"
+STT_SERVER="http://192.168.1.9:8000"
 ```
 
 `CLIP_ID` はディレクトリ名とSTT保存IDに使います。すでに同じIDがある場合は、既存fixtureを壊さないように別IDを使います。
