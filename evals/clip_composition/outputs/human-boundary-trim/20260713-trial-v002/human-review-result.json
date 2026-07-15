@@ -1,0 +1,207 @@
+{
+  "kind": "human_boundary_trim_human_review_result",
+  "reviewId": "human-boundary-trim-v002-ui-v003-human-v001",
+  "trialVersion": "human-boundary-trim-v002",
+  "uiVersion": "human-boundary-trim-v003-simple-context-v002",
+  "reviewer": "kawafmm",
+  "reviewedAt": "2026-07-15",
+  "source": "copy_to_chat",
+  "status": "completed_with_question_contract_limitation",
+  "priorUiResultsIncluded": false,
+  "humanWork": {
+    "interactionTimingRecorded": false,
+    "goal15MinutesEvaluated": false,
+    "additionalHumanWorkRequestedByThisRecord": "0件・0分"
+  },
+  "summary": {
+    "total": 10,
+    "publish": 3,
+    "skip": 4,
+    "contextUnknown": 3,
+    "contextUnknownRate": {
+      "numerator": 3,
+      "denominator": 10,
+      "ratio": 0.3
+    },
+    "byFixture": [
+      {
+        "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+        "total": 5,
+        "publish": 2,
+        "skip": 2,
+        "contextUnknown": 1
+      },
+      {
+        "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+        "total": 5,
+        "publish": 1,
+        "skip": 2,
+        "contextUnknown": 2
+      }
+    ]
+  },
+  "interpretation": {
+    "validFor": [
+      "固定上位5候補×2素材に対するUI v003上の三択回答",
+      "公開すると回答した3件の連続区間境界候補"
+    ],
+    "notValidFor": [
+      "区間内カット・無音除去・切り貼りを許した場合の候補価値",
+      "candidate-ranking-v002の合否",
+      "1配信15分条項の合否",
+      "凍結fixtureまたはexpectedCutsの変更"
+    ],
+    "limitation": "画面の問いが、そのまま連続区間として公開できるか、現在の区間内を編集すれば使えるか、別場面の文脈映像を足せば使える可能性があるかを分離していなかった。選ばない4件を編集後も価値なしとは扱わない。",
+    "boundaryStatus": "3件の境界はUI v003で選ばれた人間境界候補。長い発話内の文字位置を選べなかったため、最終教師またはfixture境界には昇格しない。"
+  },
+  "callbackConsideration": {
+    "registeredCondition": "正式な上位候補集合で文脈不明率が2割を超えた場合、人間へ着手検討を提案する",
+    "observed": "3/10 (30%)",
+    "conditionMet": true,
+    "implementationAuthorized": false,
+    "note": "条件成立はcallback次版の設計・実装許可ではなく、3件すべてをcallbackで解決できる証拠でもない。文脈不明は、必要な別場面が元配信内に実在することも保証しない。"
+  },
+  "items": [
+    {
+      "reviewIndex": 1,
+      "taskId": "nOEWCNc77MI_multiblock_material_v001__candidate-032",
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "rank": 1,
+      "candidateId": 32,
+      "title": "マリンの甘い言葉に急に冷たくなるころねと連呼される「キモい」",
+      "answer": "publish",
+      "answerLabel": "公開する",
+      "humanBoundary": {
+        "startMs": 2790074,
+        "endMs": 2848146,
+        "startDisplay": "00:46:30.074",
+        "endDisplay": "00:47:28.146",
+        "durationMs": 58072,
+        "durationDisplay": "00:00:58.072",
+        "startText": "なんか君の心みたいにあったかいあなたの心はどこ行った?",
+        "endText": "キモい!"
+      }
+    },
+    {
+      "reviewIndex": 2,
+      "taskId": "nOEWCNc77MI_multiblock_material_v001__candidate-036",
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "rank": 2,
+      "candidateId": 36,
+      "title": "マリンが我慢できず2回目のトイレへ、留守を預かるころねの緊張",
+      "answer": "skip",
+      "answerLabel": "選ばない"
+    },
+    {
+      "reviewIndex": 3,
+      "taskId": "nOEWCNc77MI_multiblock_material_v001__candidate-058",
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "rank": 3,
+      "candidateId": 58,
+      "title": "置き去りにされそうになって焦る戌神ころね",
+      "answer": "context_unknown",
+      "answerLabel": "文脈不明"
+    },
+    {
+      "reviewIndex": 4,
+      "taskId": "nOEWCNc77MI_multiblock_material_v001__candidate-037",
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "rank": 4,
+      "candidateId": 37,
+      "title": "肉を焼き忘れたころねにキレるマリンと、夫婦漫才からのバーベキュー完成",
+      "answer": "skip",
+      "answerLabel": "選ばない"
+    },
+    {
+      "reviewIndex": 5,
+      "taskId": "nOEWCNc77MI_multiblock_material_v001__candidate-046",
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "rank": 5,
+      "candidateId": 46,
+      "title": "ころねの頭の匂いを嗅いだマリンの一言にじわじわ泣いちゃうころね",
+      "answer": "publish",
+      "answerLabel": "公開する",
+      "humanBoundary": {
+        "startMs": 3991226,
+        "endMs": 4040050,
+        "startDisplay": "01:06:31.226",
+        "endDisplay": "01:07:20.050",
+        "durationMs": 48824,
+        "durationDisplay": "00:00:48.824",
+        "startText": "話題がすり減ってますとよしじゃあ出発しますかマリリン今更なんだけどさコーネのさ顔さもうちょい下げてもいいかもよマリリンの顔がさ可愛いフェイスが見えなくなっちゃうあでもね船長はねこうやって下を向いた時にコーネのねあの頭の匂い嗅いでるのからえ、いい匂い?",
+        "endText": "酷い酷いよあ、もうアンカー外したごめんねはいよーあ、待ってせーの出航!"
+      }
+    },
+    {
+      "reviewIndex": 6,
+      "taskId": "9dtwF5Exu5w_multiblock_material_v001__candidate-014",
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "rank": 1,
+      "candidateId": 14,
+      "title": "アドバイス起因の荒れを懸念し、こよりへの相談をやめるマリン",
+      "answer": "skip",
+      "answerLabel": "選ばない"
+    },
+    {
+      "reviewIndex": 7,
+      "taskId": "9dtwF5Exu5w_multiblock_material_v001__candidate-057",
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "rank": 2,
+      "candidateId": 57,
+      "title": "劇的勝利に大絶叫し涙を流すマリン船長",
+      "answer": "publish",
+      "answerLabel": "公開する",
+      "humanBoundary": {
+        "startMs": 11010002,
+        "endMs": 11121986,
+        "startDisplay": "03:03:30.002",
+        "endDisplay": "03:05:21.986",
+        "durationMs": 111984,
+        "durationDisplay": "00:01:51.984",
+        "startText": "あ…（STT上で「あ」448文字の連続発話）",
+        "startTextFullSource": "evals/clip_composition/stt/9dtwF5Exu5w_o8rZAhARXAc_local30_v001/source/word-timestamps.json",
+        "endText": "はいふぶちゃん何も上がってないのかー"
+      }
+    },
+    {
+      "reviewIndex": 8,
+      "taskId": "9dtwF5Exu5w_multiblock_material_v001__candidate-040",
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "rank": 3,
+      "candidateId": 40,
+      "title": "ビトが「魔物」ではなく「ラッキーボーイ」でブチギレるマリン",
+      "answer": "skip",
+      "answerLabel": "選ばない"
+    },
+    {
+      "reviewIndex": 9,
+      "taskId": "9dtwF5Exu5w_multiblock_material_v001__candidate-025",
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "rank": 4,
+      "candidateId": 25,
+      "title": "チャットの指示で対戦相手を選んだ結果、Bランクの高校を引いて焦るシーン",
+      "answer": "context_unknown",
+      "answerLabel": "文脈不明"
+    },
+    {
+      "reviewIndex": 10,
+      "taskId": "9dtwF5Exu5w_multiblock_material_v001__candidate-009",
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "rank": 5,
+      "candidateId": 9,
+      "title": "療養中のリリカからの助言と妄想を繰り広げる宝鐘マリン",
+      "answer": "context_unknown",
+      "answerLabel": "文脈不明"
+    }
+  ],
+  "uiReview": [
+    "人間向けの時刻はHH:MM:SSで表示する。内部のmsは保存用に残してよい。",
+    "長い発話は全文を文脈として見せたまま、全文内の文字時刻位置から開始・終了を選べるようにする。孤立した1文字一覧には戻さない。",
+    "次の候補へ移動した直後に、その候補のAI案を再生する。発話位置の選択では暗黙再生しない。",
+    "連続した前後延長は境界探索用であり、意味上の文脈追加とは扱わない。ゲーム場面では離れた前振りをつなぐ必要があり得る。",
+    "区間内カットや無音除去で使える候補を、二点境界だけの選択で価値なしへ分類しない。",
+    "現在区間の編集で使える状態と、別場面の文脈映像を足せば使える可能性がある状態を分ける。後者は文脈映像の存在未確認として保存する。",
+    "閲覧前に、そのまま公開できるか、現在区間を編集すれば使えるか、別場面の文脈を足せば使える可能性があるかのどれを聞くかを明記する。"
+  ],
+  "fixtureAndExpectedChanges": false
+}
