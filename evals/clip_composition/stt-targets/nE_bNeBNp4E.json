@@ -1,0 +1,49 @@
+{
+  "targetId": "nE_bNeBNp4E",
+  "title": "Liar's Barでころねすきーに精神攻撃をして揺さぶりをかけるマリン船長",
+  "createdAt": "2026-07-15T00:00:00+09:00",
+  "clip": {
+    "id": "nE_bNeBNp4E",
+    "sttId": "nE_bNeBNp4E",
+    "url": "https://www.youtube.com/watch?v=nE_bNeBNp4E",
+    "localVideoPath": "evals/clip_composition/research/downloads/nE_bNeBNp4E/nE_bNeBNp4E.mp4",
+    "durationSec": 780,
+    "sttRole": "clip",
+    "notes": [
+      "BGM、SE、字幕、編集による追加要素は正常なノイズとして扱う。",
+      "第三素材の3候補から人間が選定。候補Aは単純すぎる可能性があり、より厳しい複数場面素材として本件を選んだ。"
+    ]
+  },
+  "sourceDiscovery": {
+    "status": "source_fixed_before_stt",
+    "notes": [
+      "切り抜き説明欄が示す単一元配信を、STT・照合・expected作成前に固定した。",
+      "元配信のチャットリプレイが取得可能であることを選定前に確認した。",
+      "対応確定はローカルSTT、大域照合、素材ブロック再構成、人間確認後。"
+    ],
+    "primarySourceCandidate": {
+      "id": "qdczJpv8RCc",
+      "title": "Liar's Bar キミたちと初見であそぶ！視聴者参加型",
+      "url": "https://www.youtube.com/watch?v=qdczJpv8RCc",
+      "localVideoPath": "evals/clip_composition/research/downloads/nE_bNeBNp4E/sources/qdczJpv8RCc/qdczJpv8RCc.mp4",
+      "durationSec": 7760,
+      "durationText": "2:09:20",
+      "channel": "Marine Ch. 宝鐘マリン",
+      "sttId": "nE_bNeBNp4E_qdczJpv8RCc_local30_v001",
+      "notes": [
+        "説明欄が示す単一元配信。対応確定はローカルSTT、大域照合、素材ブロック再構成、人間確認後。"
+      ]
+    }
+  },
+  "requiredOutputs": [
+    "clip側STT結果",
+    "元動画候補の単語タイムスタンプ付きSTT結果",
+    "DP単調アラインメント結果",
+    "素材境界確認パッケージ",
+    "人間確認後のexpectedCuts候補"
+  ],
+  "freezeStatus": {
+    "readyForFreeze": false,
+    "reason": "元配信固定済み。ローカルSTT、照合、素材ブロック確認、人間確認、固定テーマが未完了。"
+  }
+}
