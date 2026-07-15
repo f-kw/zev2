@@ -1,0 +1,49 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "必死に命乞いをするマリン",
+      "reason": "Liar's Barのゲーム内で脱落したくない宝鐘マリンが、視聴者に向けて自分が生き残るべき理由を必死にアピールするシーンがコミカルで切り抜きに適しています。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "qdczJpv8RCc",
+          "sourceStartMs": 2684430,
+          "sourceEndMs": 2699740,
+          "supportingSpeechIds": [
+            "512-524"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "疑われて牽制し始めるマリン",
+      "reason": "カードの提出後に嘘を疑われていることを察知し、相手に対して必死に凄んで牽制する様子が見どころです。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "qdczJpv8RCc",
+          "sourceStartMs": 2761226,
+          "sourceEndMs": 2816838,
+          "supportingSpeechIds": [
+            "527-532"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-15T21:33:17+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_17_qdczJpv8RCc",
+    "windowSourceVideoId": "qdczJpv8RCc",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nE_bNeBNp4E_chat_velocity_top100_input_selection_v004/theme-llm-v002/20260715-chat-velocity-top100-third-material-v001/windows/window_17_qdczJpv8RCc-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/48d85bd3a3681f48?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"必死に命乞いをするマリン\",\n      \"reason\": \"Liar's Barのゲーム内で脱落したくない宝鐘マリンが、視聴者に向けて自分が生き残るべき理由を必死にアピールするシーンがコミカルで切り抜きに適しています。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"qdczJpv8RCc\",\n          \"sourceStartMs\": 2684430,\n          \"sourceEndMs\": 2699740,\n          \"supportingSpeechIds\": [\n            \"512-524\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"疑われて牽制し始めるマリン\",\n      \"reason\": \"カードの提出後に嘘を疑われていることを察知し、相手に対して必死に凄んで牽制する様子が見どころです。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"qdczJpv8RCc\",\n          \"sourceStartMs\": 2761226,\n          \"sourceEndMs\": 2816838,\n          \"supportingSpeechIds\": [\n            \"527-532\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

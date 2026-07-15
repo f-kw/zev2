@@ -16,12 +16,16 @@
     "estimatedMinutesTotal": "6-12",
     "timeTrackingInUi": false
   },
-  "answerStatus": "human-review-complete-awaiting-freeze-authorization",
+  "answerStatus": "human-review-complete-and-frozen",
   "completedSessionCount": 6,
   "nextSessionNumber": null,
   "fixedThemeAsEntered": "マリンLier's Bar",
+  "fixedThemeNormalized": "マリンLiar's Bar",
   "combinedResult": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/human-review-sessions-v001/results/combined-review-result-v001.json",
-  "freezeStatus": "not-frozen",
+  "freezeStatus": "frozen",
+  "fixtureId": "nE_bNeBNp4E_multiblock_material_v001",
+  "freezeDecision": "evals/clip_composition/outputs/boundary-review-responses/nE_bNeBNp4E/nE_bNeBNp4E-multiblock-human-decision-20260715-v001.json",
+  "frozenAt": "2026-07-15",
   "remainingDelivery": {
     "mode": "combined-single-page-by-human-request",
     "sessionNumbers": [
@@ -38,8 +42,8 @@
     "reason": "別リンク4件は一括導線ではなく、動画も実表示領域より大きかった。残り4境界を1ページ内の段階表示と一括コピーへ置換し、各段階の判断数4〜5は維持する。"
   },
   "productionImpact": {
-    "fixtureWrites": false,
-    "expectedWrites": false,
+    "fixtureWrites": true,
+    "expectedWrites": true,
     "confirmedPairWrites": false
   },
   "sessions": [

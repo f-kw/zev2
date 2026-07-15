@@ -1,0 +1,49 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "カード複数枚出しのルールに驚愕するマリン",
+      "reason": "対戦相手の3枚出しを見て、ゲーム『Liar's Bar』でカードを複数枚出せるルールがあることを初めて知り困惑する場面。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "qdczJpv8RCc",
+          "sourceStartMs": 821571,
+          "sourceEndMs": 839920,
+          "supportingSpeechIds": [
+            "81-92"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "手元の操作ミスに絶叫するマリン",
+      "reason": "複数枚出しの検証をしようとした矢先に、操作を間違えてしまい思わず大声を上げて悔しがる場面。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "qdczJpv8RCc",
+          "sourceStartMs": 842026,
+          "sourceEndMs": 853790,
+          "supportingSpeechIds": [
+            "93-94"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-15T21:09:17+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_04_qdczJpv8RCc",
+    "windowSourceVideoId": "qdczJpv8RCc",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nE_bNeBNp4E_chat_velocity_top100_input_selection_v004/theme-llm-v002/20260715-chat-velocity-top100-third-material-v001/windows/window_04_qdczJpv8RCc-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/9f5f81d422a4f4ad?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"カード複数枚出しのルールに驚愕するマリン\",\n      \"reason\": \"対戦相手の3枚出しを見て、ゲーム『Liar's Bar』でカードを複数枚出せるルールがあることを初めて知り困惑する場面。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"qdczJpv8RCc\",\n          \"sourceStartMs\": 821571,\n          \"sourceEndMs\": 839920,\n          \"supportingSpeechIds\": [\"81-92\"]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"手元の操作ミスに絶叫するマリン\",\n      \"reason\": \"複数枚出しの検証をしようとした矢先に、操作を間違えてしまい思わず大声を上げて悔しがる場面。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"qdczJpv8RCc\",\n          \"sourceStartMs\": 842026,\n          \"sourceEndMs\": 853790,\n          \"supportingSpeechIds\": [\"93-94\"]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

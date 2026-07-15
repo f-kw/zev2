@@ -232,12 +232,28 @@ function expectedFacts(expectedCuts, bins) {
 
 function topNSimulation(facts, ranked) {
   return [50, 100, 150].map((selectionCount) => {
+    const cutoff = ranked[selectionCount - 1];
+    if (!cutoff) {
+      return {
+        selectionCount,
+        selectionAvailable: false,
+        availableFullMinuteCount: ranked.length,
+        includedExpectedCount: null,
+        totalExpectedCount: facts.length,
+        includedExpectedIndexes: [],
+        excludedExpectedIndexes: [],
+        cutoffRelativeToStreamBaseline: null,
+        cutoffCommentCount: null,
+        completeMinutesTiedAtCutoffCount: null
+      };
+    }
     const selected = new Set(ranked.slice(0, selectionCount).map((bin) => bin.minuteIndex));
     const included = facts.filter((fact) => fact.overlappingMinutes.some((minute) => selected.has(minute.minuteIndex)));
-    const cutoff = ranked[selectionCount - 1];
     const tiedAtCutoff = ranked.filter((bin) => bin.commentCount === cutoff.commentCount).length;
     return {
       selectionCount,
+      selectionAvailable: true,
+      availableFullMinuteCount: ranked.length,
       includedExpectedCount: included.length,
       totalExpectedCount: facts.length,
       includedExpectedIndexes: included.map((fact) => fact.expectedIndex),
@@ -253,9 +269,10 @@ function reportMarkdown(result) {
   const expectedRows = result.expectedFacts.map((fact) => (
     `| ${fact.expectedIndex} | ${fact.label} | ${formatTime(fact.sourceStartMs)}–${formatTime(fact.sourceEndMs)} | ${fact.bestVelocityRank ?? '—'} | ${fact.bestMinuteIndex ?? '—'} | ${fact.bestRelativeToStreamBaseline === null ? '—' : fixed(fact.bestRelativeToStreamBaseline)} |`
   ));
-  const simulationRows = result.simulations.map((entry) => (
-    `| ${entry.selectionCount} | ${entry.includedExpectedCount}/${entry.totalExpectedCount} | ${entry.includedExpectedIndexes.join(', ') || 'なし'} | ${entry.excludedExpectedIndexes.join(', ') || 'なし'} | ${fixed(entry.cutoffRelativeToStreamBaseline)} | ${entry.completeMinutesTiedAtCutoffCount} |`
-  ));
+  const simulationRows = result.simulations.map((entry) => entry.selectionAvailable
+    ? `| ${entry.selectionCount} | ${entry.includedExpectedCount}/${entry.totalExpectedCount} | ${entry.includedExpectedIndexes.join(', ') || 'なし'} | ${entry.excludedExpectedIndexes.join(', ') || 'なし'} | ${fixed(entry.cutoffRelativeToStreamBaseline)} | ${entry.completeMinutesTiedAtCutoffCount} |`
+    : `| ${entry.selectionCount} | 算出不能 | — | — | — | 完全な1分区間が${entry.availableFullMinuteCount}件のみ |`
+  );
   const minuteRows = result.minuteSeries.map((bin) => (
     `| ${bin.minuteIndex} | ${formatTime(bin.sourceStartMs)}–${formatTime(bin.sourceEndMs)} | ${bin.commentCount} | ${fixed(bin.commentRatePerMinute)} | ${fixed(bin.relativeToStreamBaseline)} | ${bin.velocityRank ?? '対象外'} | ${bin.isFullMinute ? '1分' : `${fixed(bin.durationMs / 1000, 3)}秒`} |`
   ));

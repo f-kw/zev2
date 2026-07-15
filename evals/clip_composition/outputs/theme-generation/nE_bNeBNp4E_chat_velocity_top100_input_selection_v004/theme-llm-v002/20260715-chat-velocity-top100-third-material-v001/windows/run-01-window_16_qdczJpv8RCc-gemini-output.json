@@ -1,0 +1,57 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "誰も死なない異常な生存率に驚愕するマリン",
+      "reason": "対戦相手が嘘を見破られてもロシアンルーレットを生き残り続け、誰も脱落しない状況にマリンがツッコミを入れる一連の盛り上がり。 ",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "qdczJpv8RCc",
+          "sourceStartMs": 2280170,
+          "sourceEndMs": 2358736,
+          "supportingSpeechIds": [
+            "468-479"
+          ]
+        },
+        {
+          "sourceVideoId": "qdczJpv8RCc",
+          "sourceStartMs": 2461834,
+          "sourceEndMs": 2548399,
+          "supportingSpeechIds": [
+            "487-494"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "対戦相手の不敵な「3枚出し」を疑うマリン",
+      "reason": "プレイヤーが「スリー（3枚）」を提示したことに対し、本当に持っているのか怪しみながら揺さぶりをかける場面。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "qdczJpv8RCc",
+          "sourceStartMs": 2358736,
+          "sourceEndMs": 2395745,
+          "supportingSpeechIds": [
+            "480-482"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-15T21:33:03+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_16_qdczJpv8RCc",
+    "windowSourceVideoId": "qdczJpv8RCc",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nE_bNeBNp4E_chat_velocity_top100_input_selection_v004/theme-llm-v002/20260715-chat-velocity-top100-third-material-v001/windows/window_16_qdczJpv8RCc-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/062c3b7443234044?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"誰も死なない異常な生存率に驚愕するマリン\",\n      \"reason\": \"対戦相手が嘘を見破られてもロシアンルーレットを生き残り続け、誰も脱落しない状況にマリンがツッコミを入れる一連の盛り上がり。 \",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"qdczJpv8RCc\",\n          \"sourceStartMs\": 2280170,\n          \"sourceEndMs\": 2358736,\n          \"supportingSpeechIds\": [\n            \"468-479\"\n          ]\n        },\n        {\n          \"sourceVideoId\": \"qdczJpv8RCc\",\n          \"sourceStartMs\": 2461834,\n          \"sourceEndMs\": 2548399,\n          \"supportingSpeechIds\": [\n            \"487-494\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"対戦相手の不敵な「3枚出し」を疑うマリン\",\n      \"reason\": \"プレイヤーが「スリー（3枚）」を提示したことに対し、本当に持っているのか怪しみながら揺さぶりをかける場面。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"qdczJpv8RCc\",\n          \"sourceStartMs\": 2358736,\n          \"sourceEndMs\": 2395745,\n          \"supportingSpeechIds\": [\n            \"480-482\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

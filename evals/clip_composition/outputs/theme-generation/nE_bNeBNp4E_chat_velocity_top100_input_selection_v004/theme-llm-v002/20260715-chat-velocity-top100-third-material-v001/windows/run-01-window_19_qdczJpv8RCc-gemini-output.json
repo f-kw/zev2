@@ -1,0 +1,79 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "初手で即退場した『ユーダイ』に思いを馳せるマリン",
+      "reason": "ゲーム開始直後の1話目冒頭で速攻で退場してしまったプレイヤー「ユーダイ」に対し、マリンがその存在感の薄さと早すぎる死をイジりながら振り返るシーンです。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "qdczJpv8RCc",
+          "sourceStartMs": 3253312,
+          "sourceEndMs": 3299980,
+          "supportingSpeechIds": [
+            "567-568"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "対戦相手の心理を揺さぶるマリンのマウントトーク",
+      "reason": "プレイ中に自信がなさそうに首を振る対戦相手の「イルフィンさん」の仕草を見逃さず、執拗に心理的揺さぶりをかけていく様子が面白いため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "qdczJpv8RCc",
+          "sourceStartMs": 3330060,
+          "sourceEndMs": 3355306,
+          "supportingSpeechIds": [
+            "570-575"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_003",
+      "title": "「取引先じゃねえんだから」馴れ合うリスナーに激怒するマリン",
+      "reason": "ゲーム内でリスナー同士がライアーをせず信頼関係を築こうとしているのを見て、マリンが「もっと疑え」と煽り散らす掛け合いが盛り上がっているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "qdczJpv8RCc",
+          "sourceStartMs": 3420414,
+          "sourceEndMs": 3476566,
+          "supportingSpeechIds": [
+            "579-580"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_004",
+      "title": "絶対嘘なのに誰も疑ってくれず逆にキレるマリン",
+      "reason": "あからさまな嘘のカードを出したのにもかかわらず、誰もダウト（ライアー）をかけてくれず、理不尽にリスナーや相手へ逆ギレしていく一連のリアクションが特徴的です。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "qdczJpv8RCc",
+          "sourceStartMs": 3501013,
+          "sourceEndMs": 3539274,
+          "supportingSpeechIds": [
+            "583-590"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-15T21:49:16+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_19_qdczJpv8RCc",
+    "windowSourceVideoId": "qdczJpv8RCc",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nE_bNeBNp4E_chat_velocity_top100_input_selection_v004/theme-llm-v002/20260715-chat-velocity-top100-third-material-v001/windows/window_19_qdczJpv8RCc-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/b3f2a138ae8d56d2?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"初手で即退場した『ユーダイ』に思いを馳せるマリン\",\n      \"reason\": \"ゲーム開始直後の1話目冒頭で速攻で退場してしまったプレイヤー「ユーダイ」に対し、マリンがその存在感の薄さと早すぎる死をイジりながら振り返るシーンです。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"qdczJpv8RCc\",\n          \"sourceStartMs\": 3253312,\n          \"sourceEndMs\": 3299980,\n          \"supportingSpeechIds\": [\n            \"567-568\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"対戦相手の心理を揺さぶるマリンのマウントトーク\",\n      \"reason\": \"プレイ中に自信がなさそうに首を振る対戦相手の「イルフィンさん」の仕草を見逃さず、執拗に心理的揺さぶりをかけていく様子が面白いため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"qdczJpv8RCc\",\n          \"sourceStartMs\": 3330060,\n          \"sourceEndMs\": 3355306,\n          \"supportingSpeechIds\": [\n            \"570-575\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_003\",\n      \"title\": \"「取引先じゃねえんだから」馴れ合うリスナーに激怒するマリン\",\n      \"reason\": \"ゲーム内でリスナー同士がライアーをせず信頼関係を築こうとしているのを見て、マリンが「もっと疑え」と煽り散らす掛け合いが盛り上がっているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"qdczJpv8RCc\",\n          \"sourceStartMs\": 3420414,\n          \"sourceEndMs\": 3476566,\n          \"supportingSpeechIds\": [\n            \"579-580\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_004\",\n      \"title\": \"絶対嘘なのに誰も疑ってくれず逆にキレるマリン\",\n      \"reason\": \"あからさまな嘘のカードを出したのにもかかわらず、誰もダウト（ライアー）をかけてくれず、理不尽にリスナーや相手へ逆ギレしていく一連のリアクションが特徴的です。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"qdczJpv8RCc\",\n          \"sourceStartMs\": 3501013,\n          \"sourceEndMs\": 3539274,\n          \"supportingSpeechIds\": [\n            \"583-590\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

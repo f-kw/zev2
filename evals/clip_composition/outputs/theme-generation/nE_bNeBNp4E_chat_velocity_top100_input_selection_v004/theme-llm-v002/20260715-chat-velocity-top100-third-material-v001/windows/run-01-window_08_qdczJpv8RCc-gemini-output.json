@@ -1,0 +1,34 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "想定外の展開に驚愕し困惑するマリン船長",
+      "reason": "連続する短い驚きの発声から、ゲーム内で予想外の事態が発生して困惑している見どころシーンであると判断できます。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "qdczJpv8RCc",
+          "sourceStartMs": 1241549,
+          "sourceEndMs": 1247873,
+          "supportingSpeechIds": [
+            "200-237"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-15T21:25:57+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_08_qdczJpv8RCc",
+    "windowSourceVideoId": "qdczJpv8RCc",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nE_bNeBNp4E_chat_velocity_top100_input_selection_v004/theme-llm-v002/20260715-chat-velocity-top100-third-material-v001/windows/window_08_qdczJpv8RCc-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/40f685914585a2dd?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"想定外の展開に驚愕し困惑するマリン船長\",\n      \"reason\": \"連続する短い驚きの発声から、ゲーム内で予想外の事態が発生して困惑している見どころシーンであると判断できます。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"qdczJpv8RCc\",\n          \"sourceStartMs\": 1241549,\n          \"sourceEndMs\": 1247873,\n          \"supportingSpeechIds\": [\n            \"200-237\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

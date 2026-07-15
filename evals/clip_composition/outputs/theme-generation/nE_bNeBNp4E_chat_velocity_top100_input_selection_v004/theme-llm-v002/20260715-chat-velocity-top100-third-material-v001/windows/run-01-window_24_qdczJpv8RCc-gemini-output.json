@@ -1,0 +1,64 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "「コロネの命」を懸けた心理戦での見事な見破りと敗北",
+      "reason": "視聴者が戌神ころねの命（スキン・名前など）を背負って心理戦に挑む中、宝鐘マリンが初手の嘘を見破りつつも、最終的に相手が生き残る展開が具体的で切り抜きとして成立するため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "qdczJpv8RCc",
+          "sourceStartMs": 4650218,
+          "sourceEndMs": 4794577,
+          "supportingSpeechIds": [
+            "708-714"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "配信画面がぐちゃぐちゃになり慌てる宝鐘マリン",
+      "reason": "ゲーム終了後の画面転換の際にレイアウトが崩れ、操作がうまくいかずに慌てている様子が単独の面白いハプニングとして成立するため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "qdczJpv8RCc",
+          "sourceStartMs": 4833059,
+          "sourceEndMs": 4884714,
+          "supportingSpeechIds": [
+            "716-717"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_003",
+      "title": "ようやく落ち着いてきた引っ越し事情と今後のコラボ予定",
+      "reason": "新居への引っ越しや荷解きの進捗、今後のホロメン自宅招待の可能性やキャプチャーボード買い替えについて具体的に語る近況トークであるため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "qdczJpv8RCc",
+          "sourceStartMs": 4921122,
+          "sourceEndMs": 5038319,
+          "supportingSpeechIds": [
+            "719-724"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-15T22:05:48+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_24_qdczJpv8RCc",
+    "windowSourceVideoId": "qdczJpv8RCc",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nE_bNeBNp4E_chat_velocity_top100_input_selection_v004/theme-llm-v002/20260715-chat-velocity-top100-third-material-v001/windows/window_24_qdczJpv8RCc-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/de8bc8bac720d04c?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"「コロネの命」を懸けた心理戦での見事な見破りと敗北\",\n      \"reason\": \"視聴者が戌神ころねの命（スキン・名前など）を背負って心理戦に挑む中、宝鐘マリンが初手の嘘を見破りつつも、最終的に相手が生き残る展開が具体的で切り抜きとして成立するため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"qdczJpv8RCc\",\n          \"sourceStartMs\": 4650218,\n          \"sourceEndMs\": 4794577,\n          \"supportingSpeechIds\": [\n            \"708-714\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"配信画面がぐちゃぐちゃになり慌てる宝鐘マリン\",\n      \"reason\": \"ゲーム終了後の画面転換の際にレイアウトが崩れ、操作がうまくいかずに慌てている様子が単独の面白いハプニングとして成立するため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"qdczJpv8RCc\",\n          \"sourceStartMs\": 4833059,\n          \"sourceEndMs\": 4884714,\n          \"supportingSpeechIds\": [\n            \"716-717\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_003\",\n      \"title\": \"ようやく落ち着いてきた引っ越し事情と今後のコラボ予定\",\n      \"reason\": \"新居への引っ越しや荷解きの進捗、今後のホロメン自宅招待の可能性やキャプチャーボード買い替えについて具体的に語る近況トークであるため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"qdczJpv8RCc\",\n          \"sourceStartMs\": 4921122,\n          \"sourceEndMs\": 5038319,\n          \"supportingSpeechIds\": [\n            \"719-724\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

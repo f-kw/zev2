@@ -45,7 +45,10 @@
     "人間確認後のexpectedCuts候補"
   ],
   "freezeStatus": {
-    "readyForFreeze": false,
-    "reason": "教師STTは完了。元配信259チャンクのSTT、照合、素材ブロック確認、人間確認、固定テーマが未完了。"
+    "readyForFreeze": true,
+    "frozen": true,
+    "fixtureId": "nE_bNeBNp4E_multiblock_material_v001",
+    "frozenAt": "2026-07-15",
+    "reason": "教師・元配信STT、DP照合、全6境界の人間確認、固定テーマ、明示的な実凍結承認が完了。block 1・3・4・5・6・7をexpectedCutsへ固定し、block 2を採点対象外として記録した。"
   }
 }

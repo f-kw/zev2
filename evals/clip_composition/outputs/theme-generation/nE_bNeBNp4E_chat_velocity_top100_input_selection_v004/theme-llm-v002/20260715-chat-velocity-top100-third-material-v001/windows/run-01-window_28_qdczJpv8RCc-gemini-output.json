@@ -1,0 +1,64 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "300万人記念グッズのくまりぬいぐるみが届く",
+      "reason": "ファンから届いた「300万人記念グッズのくまりぬいぐるみがかわいすぎる」という報告に対し、嬉しそうに自慢する様子が切り抜きとして成立するため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "qdczJpv8RCc",
+          "sourceStartMs": 7452712,
+          "sourceEndMs": 7469920,
+          "supportingSpeechIds": [
+            "845-852"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "ハロウィンの『いたずらASMR』に自信がないマリン",
+      "reason": "明日のハロウィンで予定しているいたずらASMRについて、具体的に何をするべきか分からずリスナーに自信なさげに問いかける姿が愛らしいため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "qdczJpv8RCc",
+          "sourceStartMs": 7590080,
+          "sourceEndMs": 7648866,
+          "supportingSpeechIds": [
+            "858-861"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_003",
+      "title": "めんどくさい部分も含めた愛を求め「美少女無罪」を主張",
+      "reason": "リスナーへ自身の面倒くさい部分を含めた愛を強請りつつ、自船におけるお馴染みの「美少女無罪」を言い放って配信を締める一幕。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "qdczJpv8RCc",
+          "sourceStartMs": 7680118,
+          "sourceEndMs": 7690081,
+          "supportingSpeechIds": [
+            863
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-16T24:28:36+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_28_qdczJpv8RCc",
+    "windowSourceVideoId": "qdczJpv8RCc",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nE_bNeBNp4E_chat_velocity_top100_input_selection_v004/theme-llm-v002/20260715-chat-velocity-top100-third-material-v001/windows/window_28_qdczJpv8RCc-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/7a55fdba147448df?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"300万人記念グッズのくまりぬいぐるみが届く\",\n      \"reason\": \"ファンから届いた「300万人記念グッズのくまりぬいぐるみがかわいすぎる」という報告に対し、嬉しそうに自慢する様子が切り抜きとして成立するため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"qdczJpv8RCc\",\n          \"sourceStartMs\": 7452712,\n          \"sourceEndMs\": 7469920,\n          \"supportingSpeechIds\": [\n            \"845-852\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"ハロウィンの『いたずらASMR』に自信がないマリン\",\n      \"reason\": \"明日のハロウィンで予定しているいたずらASMRについて、具体的に何をするべきか分からずリスナーに自信なさげに問いかける姿が愛らしいため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"qdczJpv8RCc\",\n          \"sourceStartMs\": 7590080,\n          \"sourceEndMs\": 7648866,\n          \"supportingSpeechIds\": [\n            \"858-861\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_003\",\n      \"title\": \"めんどくさい部分も含めた愛を求め「美少女無罪」を主張\",\n      \"reason\": \"リスナーへ自身の面倒くさい部分を含めた愛を強請りつつ、自船におけるお馴染みの「美少女無罪」を言い放って配信を締める一幕。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"qdczJpv8RCc\",\n          \"sourceStartMs\": 7680118,\n          \"sourceEndMs\": 7690081,\n          \"supportingSpeechIds\": [\n            863\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

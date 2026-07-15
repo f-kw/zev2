@@ -1,0 +1,80 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "新居からの初配信で音響・表示設定に戸惑うマリン船長",
+      "reason": "引っ越し直後で配信環境が変わり、名前の表示バグや音響の不調に困惑しながら調整する様子が描かれているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "qdczJpv8RCc",
+          "sourceStartMs": 150802,
+          "sourceEndMs": 299026,
+          "supportingSpeechIds": [
+            "3-5",
+            "9-15"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "Liar's Barのプレイキャラにクセの強いツッコミを入れるマリン",
+      "reason": "ゲームに登場するキャラクターたちの特徴的なビジュアルに対し、マリン独自のユニークな偏見やツッコミを交えて評価しているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "qdczJpv8RCc",
+          "sourceStartMs": 210638,
+          "sourceEndMs": 265537,
+          "supportingSpeechIds": [
+            "6-9"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_003",
+      "title": "ボキ検定2級じゃないと打てない？ロビーID入力に独自の基準を設けるマリン",
+      "reason": "視聴者にロビーIDを共有する際、タイピング速度のハードルの高さを独特なボケを交えて説明しているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "qdczJpv8RCc",
+          "sourceStartMs": 300650,
+          "sourceEndMs": 329600,
+          "supportingSpeechIds": [
+            16
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_004",
+      "title": "視聴者とのキャラ被りで一人だけ空気が読めてない状態になるマリン",
+      "reason": "募集した視聴者が全員同じキャラクターで参入してきた結果、自分だけ別のキャラを選んでいて気まずくなる面白い展開となっているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "qdczJpv8RCc",
+          "sourceStartMs": 360060,
+          "sourceEndMs": 392491,
+          "supportingSpeechIds": [
+            "20-21"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-15T20:53:16+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_01_qdczJpv8RCc",
+    "windowSourceVideoId": "qdczJpv8RCc",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nE_bNeBNp4E_chat_velocity_top100_input_selection_v004/theme-llm-v002/20260715-chat-velocity-top100-third-material-v001/windows/window_01_qdczJpv8RCc-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/feb4011d8e13ce26?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"新居からの初配信で音響・表示設定に戸惑うマリン船長\",\n      \"reason\": \"引っ越し直後で配信環境が変わり、名前の表示バグや音響の不調に困惑しながら調整する様子が描かれているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"qdczJpv8RCc\",\n          \"sourceStartMs\": 150802,\n          \"sourceEndMs\": 299026,\n          \"supportingSpeechIds\": [\n            \"3-5\",\n            \"9-15\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"Liar's Barのプレイキャラにクセの強いツッコミを入れるマリン\",\n      \"reason\": \"ゲームに登場するキャラクターたちの特徴的なビジュアルに対し、マリン独自のユニークな偏見やツッコミを交えて評価しているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"qdczJpv8RCc\",\n          \"sourceStartMs\": 210638,\n          \"sourceEndMs\": 265537,\n          \"supportingSpeechIds\": [\n            \"6-9\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_003\",\n      \"title\": \"ボキ検定2級じゃないと打てない？ロビーID入力に独自の基準を設けるマリン\",\n      \"reason\": \"視聴者にロビーIDを共有する際、タイピング速度のハードルの高さを独特なボケを交えて説明しているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"qdczJpv8RCc\",\n          \"sourceStartMs\": 300650,\n          \"sourceEndMs\": 329600,\n          \"supportingSpeechIds\": [\n            16\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_004\",\n      \"title\": \"視聴者とのキャラ被りで一人だけ空気が読めてない状態になるマリン\",\n      \"reason\": \"募集した視聴者が全員同じキャラクターで参入してきた結果、自分だけ別のキャラを選んでいて気まずくなる面白い展開となっているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"qdczJpv8RCc\",\n          \"sourceStartMs\": 360060,\n          \"sourceEndMs\": 392491,\n          \"supportingSpeechIds\": [\n            \"20-21\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

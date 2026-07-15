@@ -638,8 +638,9 @@ function reportText(preview, resultPath, templatePath) {
   lines.push(`- themes: ${preview.plannedWrites.themesPath}`);
   lines.push(`- expected: ${preview.plannedWrites.expectedPath}`);
   lines.push('', '## 制約確認', '');
-  lines.push('- 人間確認前はpreviewとdecisionテンプレートだけを出す。');
-  lines.push('- fixture/expectedへの書き込みは実行していない。');
+  lines.push(preview.writeFixture
+    ? '- 人間確認・固定テーマ・明示承認を検証してからfixtureとexpectedを書き込んだ。'
+    : '- fixture/expectedへの書き込みは実行していない。');
   lines.push('- runtime、本体UI/API/キュー/DBへの書き込みはない。');
   lines.push('- 独自係数、重み付け、照合結果からの自動採否は追加していない。');
   return `${lines.join('\n')}\n`;

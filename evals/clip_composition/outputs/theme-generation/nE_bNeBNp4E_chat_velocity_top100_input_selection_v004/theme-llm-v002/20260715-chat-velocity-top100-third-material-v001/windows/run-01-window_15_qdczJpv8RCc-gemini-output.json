@@ -1,0 +1,49 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "リスナーが信者だから嘘を見抜けないと油断するマリン",
+      "reason": "同卓しているリスナーを信者扱いし、自分に「ライアー」と言えないはずだと心理戦を仕掛けるシーンが特徴的であるため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "qdczJpv8RCc",
+          "sourceStartMs": 2108588,
+          "sourceEndMs": 2159406,
+          "supportingSpeechIds": [
+            "451-457"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "あえての3枚出しブラフが通って驚くマリン",
+      "reason": "絶対に疑われるであろう3枚出しの心理戦を仕掛けたところ、そのまま通ってしまい困惑しつつも盛り上がる一連の流れが切り抜きとして成立するため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "qdczJpv8RCc",
+          "sourceStartMs": 2193742,
+          "sourceEndMs": 2278942,
+          "supportingSpeechIds": [
+            "459-467"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-15T21:32:49+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_15_qdczJpv8RCc",
+    "windowSourceVideoId": "qdczJpv8RCc",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nE_bNeBNp4E_chat_velocity_top100_input_selection_v004/theme-llm-v002/20260715-chat-velocity-top100-third-material-v001/windows/window_15_qdczJpv8RCc-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/4f838b567fa744fd?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"リスナーが信者だから嘘を見抜けないと油断するマリン\",\n      \"reason\": \"同卓しているリスナーを信者扱いし、自分に「ライアー」と言えないはずだと心理戦を仕掛けるシーンが特徴的であるため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"qdczJpv8RCc\",\n          \"sourceStartMs\": 2108588,\n          \"sourceEndMs\": 2159406,\n          \"supportingSpeechIds\": [\n            \"451-457\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"あえての3枚出しブラフが通って驚くマリン\",\n      \"reason\": \"絶対に疑われるであろう3枚出しの心理戦を仕掛けたところ、そのまま通ってしまい困惑しつつも盛り上がる一連の流れが切り抜きとして成立するため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"qdczJpv8RCc\",\n          \"sourceStartMs\": 2193742,\n          \"sourceEndMs\": 2278942,\n          \"supportingSpeechIds\": [\n            \"459-467\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

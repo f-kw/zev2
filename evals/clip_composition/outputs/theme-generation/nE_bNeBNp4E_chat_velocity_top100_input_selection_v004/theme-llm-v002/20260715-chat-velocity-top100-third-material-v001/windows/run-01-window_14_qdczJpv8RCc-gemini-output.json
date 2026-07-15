@@ -1,0 +1,64 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "ノスノスを疑うマリンとシマシカの自爆",
+      "reason": "ノスノスの過去のプレイスタイルから嘘を見破ろうと盛り上がり、シマシカが自爆して耐える一連の流れが面白いシーンです。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "qdczJpv8RCc",
+          "sourceStartMs": 1603366,
+          "sourceEndMs": 1738874,
+          "supportingSpeechIds": [
+            "409-414"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "3枚出しを嘘だと確信して勝負に出るマリン",
+      "reason": "相手の3枚出しが絶対に嘘であると確信し、コップを引いて自ら勝負に挑みながらゲームの主導権を主張する見どころ場面です。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "qdczJpv8RCc",
+          "sourceStartMs": 1770646,
+          "sourceEndMs": 1814967,
+          "supportingSpeechIds": [
+            "416-424"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_003",
+      "title": "驚異の生存率を見せる視聴者に困惑するマリン",
+      "reason": "ノスノスの3枚出しを嘘と見抜いてシマシカに勝負を促すも、全員が驚異的な確率で生き残り続ける結末に困惑するオチが効いている場面です。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "qdczJpv8RCc",
+          "sourceStartMs": 1846248,
+          "sourceEndMs": 1887930,
+          "supportingSpeechIds": [
+            "427-435"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-15T21:32:35+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_14_qdczJpv8RCc",
+    "windowSourceVideoId": "qdczJpv8RCc",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nE_bNeBNp4E_chat_velocity_top100_input_selection_v004/theme-llm-v002/20260715-chat-velocity-top100-third-material-v001/windows/window_14_qdczJpv8RCc-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/f31787ba40926b2d?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"ノスノスを疑うマリンとシマシカの自爆\",\n      \"reason\": \"ノスノスの過去のプレイスタイルから嘘を見破ろうと盛り上がり、シマシカが自爆して耐える一連の流れが面白いシーンです。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"qdczJpv8RCc\",\n          \"sourceStartMs\": 1603366,\n          \"sourceEndMs\": 1738874,\n          \"supportingSpeechIds\": [\n            \"409-414\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"3枚出しを嘘だと確信して勝負に出るマリン\",\n      \"reason\": \"相手の3枚出しが絶対に嘘であると確信し、コップを引いて自ら勝負に挑みながらゲームの主導権を主張する見どころ場面です。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"qdczJpv8RCc\",\n          \"sourceStartMs\": 1770646,\n          \"sourceEndMs\": 1814967,\n          \"supportingSpeechIds\": [\n            \"416-424\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_003\",\n      \"title\": \"驚異の生存率を見せる視聴者に困惑するマリン\",\n      \"reason\": \"ノスノスの3枚出しを嘘と見抜いてシマシカに勝負を促すも、全員が驚異的な確率で生き残り続ける結末に困惑するオチが効いている場面です。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"qdczJpv8RCc\",\n          \"sourceStartMs\": 1846248,\n          \"sourceEndMs\": 1887930,\n          \"supportingSpeechIds\": [\n            \"427-435\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

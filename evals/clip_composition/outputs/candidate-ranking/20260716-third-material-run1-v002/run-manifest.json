@@ -1,0 +1,49 @@
+{
+  "kind": "candidate_ranking_third_material_run_manifest",
+  "experimentId": "20260716-third-material-run1-v002",
+  "preparedAt": "2026-07-15T15:48:19.025Z",
+  "fixtureId": "nE_bNeBNp4E_multiblock_material_v001",
+  "generationSystem": "candidate-ranking-v002@gemini-web-flash",
+  "promptVersion": "candidate-ranking-v002",
+  "promptTemplatePath": "evals/clip_composition/prompts/candidate_ranking_prompt_v002.md",
+  "model": "gemini-web-flash",
+  "runCount": 1,
+  "inputPolicy": "candidateId+title+reason only",
+  "fixedCondition": "第三素材だけを変更し、入力、v002プロンプト、モデル、出力契約、形式検査を既存2素材から変更しない。",
+  "sourceThemeGeneration": {
+    "path": "evals/clip_composition/outputs/theme-generation/nE_bNeBNp4E_chat_velocity_top100_input_selection_v004/theme-llm-v002/20260715-chat-velocity-top100-third-material-v001/run-01-gemini-output.json",
+    "generationSystem": "theme-llm-v002@gemini-web-flash",
+    "candidateCount": 67
+  },
+  "scoringReferenceOnlyNotModelInput": {
+    "path": "evals/clip_composition/outputs/theme-generation/theme-llm-v002-20260715-chat-velocity-top100-third-material-v001-formal-score.json",
+    "expectedCount": 6,
+    "hitExpectedCount": 4,
+    "hitCandidateIds": [
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50
+    ]
+  },
+  "fixture": {
+    "fixtureId": "nE_bNeBNp4E_multiblock_material_v001",
+    "candidateCount": 67,
+    "promptInputPath": "evals/clip_composition/outputs/candidate-ranking/20260716-third-material-run1-v002/nE_bNeBNp4E_multiblock_material_v001/prompt-input.json",
+    "promptPath": "evals/clip_composition/outputs/candidate-ranking/20260716-third-material-run1-v002/nE_bNeBNp4E_multiblock_material_v001/prompt.txt",
+    "leakCheckPath": "evals/clip_composition/outputs/candidate-ranking/20260716-third-material-run1-v002/nE_bNeBNp4E_multiblock_material_v001/leak-check.json",
+    "outputPath": "evals/clip_composition/outputs/candidate-ranking/20260716-third-material-run1-v002/nE_bNeBNp4E_multiblock_material_v001/run-01-gemini-output.json"
+  },
+  "humanReviewAfterRanking": {
+    "thirdMaterialTaskCount": 5,
+    "thirdMaterialTimeLimitMinutes": 15,
+    "session1": "第三素材の順位1〜3と既判定候補2件を無印で混ぜる。既判定候補は再現性だけを別集計する。",
+    "session2": "第三素材の順位4〜5だけを提示する。",
+    "maximumDecisionsPerSession": 5
+  },
+  "fixtureAndExpectedChanges": false
+}

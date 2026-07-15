@@ -51,7 +51,8 @@
         "materialJumpMs": 13828,
         "definitionThresholdMs": 10000
       },
-      "requiresFinalHumanApproval": true
+      "requiresFinalHumanApproval": false,
+      "finalHumanApproval": "accepted"
     },
     {
       "boundaryIndex": 5,
@@ -90,11 +91,18 @@
   "fixedTheme": {
     "asEnteredByHuman": "マリンLier's Bar",
     "proposedNormalizedSpelling": "マリンLiar's Bar",
-    "normalizationStatus": "awaiting-human-confirmation"
+    "normalizationStatus": "human-confirmed",
+    "frozenValue": "マリンLiar's Bar"
   },
   "reviewComplete": true,
-  "freezeStatus": "not-frozen-awaiting-explicit-human-authorization",
-  "fixtureWrites": false,
-  "expectedWrites": false,
+  "finalAuthorization": {
+    "authorizedBy": "kawafmm",
+    "authorizedAt": "2026-07-15",
+    "instruction": "その内容で実凍結を承認する"
+  },
+  "freezeStatus": "frozen",
+  "fixtureId": "nE_bNeBNp4E_multiblock_material_v001",
+  "fixtureWrites": true,
+  "expectedWrites": true,
   "confirmedPairWrites": false
 }

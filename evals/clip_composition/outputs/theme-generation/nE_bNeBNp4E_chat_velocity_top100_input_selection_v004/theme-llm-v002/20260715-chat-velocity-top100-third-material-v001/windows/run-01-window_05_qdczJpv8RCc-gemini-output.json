@@ -1,0 +1,49 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "カードを3枚出すか迷うマリン",
+      "reason": "Liar's Barのゲームプレイ中に、カードを3枚一気に出すべきか自問自答しながら葛藤している場面です。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "qdczJpv8RCc",
+          "sourceStartMs": 901643,
+          "sourceEndMs": 928566,
+          "supportingSpeechIds": [
+            130
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "対戦相手の嘘を見破って一騎打ちへ",
+      "reason": "相手の嘘に気づいて「めっちゃ嘘つき」とツッコミを入れ、生き残ったプレイヤーとの一騎打ちに突入する盛り上がりの場面です。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "qdczJpv8RCc",
+          "sourceStartMs": 933106,
+          "sourceEndMs": 963175,
+          "supportingSpeechIds": [
+            "131-140"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-15T21:09:31+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_05_qdczJpv8RCc",
+    "windowSourceVideoId": "qdczJpv8RCc",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nE_bNeBNp4E_chat_velocity_top100_input_selection_v004/theme-llm-v002/20260715-chat-velocity-top100-third-material-v001/windows/window_05_qdczJpv8RCc-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/a6d631e63496503d?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"カードを3枚出すか迷うマリン\",\n      \"reason\": \"Liar's Barのゲームプレイ中に、カードを3枚一気に出すべきか自問自答しながら葛藤している場面です。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"qdczJpv8RCc\",\n          \"sourceStartMs\": 901643,\n          \"sourceEndMs\": 928566,\n          \"supportingSpeechIds\": [\n            130\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"対戦相手の嘘を見破って一騎打ちへ\",\n      \"reason\": \"相手の嘘に気づいて「めっちゃ嘘つき」とツッコミを入れ、生き残ったプレイヤーとの一騎打ちに突入する盛り上がりの場面です。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"qdczJpv8RCc\",\n          \"sourceStartMs\": 933106,\n          \"sourceEndMs\": 963175,\n          \"supportingSpeechIds\": [\n            \"131-140\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

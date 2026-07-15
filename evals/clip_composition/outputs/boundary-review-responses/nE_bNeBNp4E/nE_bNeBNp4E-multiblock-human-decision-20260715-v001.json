@@ -1,0 +1,192 @@
+{
+  "kind": "clip_composition_multiblock_material_human_decision",
+  "fixtureId": "nE_bNeBNp4E_multiblock_material_v001",
+  "targetId": "nE_bNeBNp4E",
+  "sourceVideoId": "qdczJpv8RCc",
+  "sourceSttId": "nE_bNeBNp4E_qdczJpv8RCc_local30_v001",
+  "evidence": {
+    "materialBlocksPath": "evals/clip_composition/outputs/material-blocks-nE_bNeBNp4E-20260715-full-local-stt-material-blocks-v001.json",
+    "materialBlocksSha256": "1980b61b3c3e5c2a1e8a9ed1a12998dc02c720bb1452c57c114e5938da499714",
+    "reviewPackagePath": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/index.html",
+    "reviewPackageSha256": "10734634d7f89163e15a5df17318a5fd48f901979016162deb34ce25a3a74c7e",
+    "humanResponsePath": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/human-review-sessions-v001/results/combined-review-result-v001.json"
+  },
+  "humanConfirmation": {
+    "checkedBy": "kawafmm",
+    "checkedAt": "2026-07-15",
+    "method": "境界確認パッケージの動画・音声確認と明示的な最終凍結承認",
+    "allBlocksReviewed": true,
+    "allBoundariesReviewed": true,
+    "note": "人間確認でblock 2を不採用とし、block 1・3・4・5・6・7を採用した。boundary 4は切り抜き側の場面切替だけ判定不能だったが、前後の素材対応と元配信位置切替が一致し、素材ジャンプ13828msが既定の10000ms以上であることを根拠に、最終承認で採用した。固定テーマ表記はLiar's Barへ正規化することも同時承認された。"
+  },
+  "blocks": [
+    {
+      "blockIndex": 1,
+      "status": "accepted",
+      "clipRange": { "startMs": 90098, "endMs": 137396 },
+      "sourceRange": { "startMs": 3932652, "endMs": 3987910 },
+      "note": ""
+    },
+    {
+      "blockIndex": 2,
+      "status": "rejected",
+      "clipRange": { "startMs": 144521, "endMs": 164139 },
+      "sourceRange": { "startMs": 4009379, "endMs": 4016766 },
+      "note": "boundary 2の前側で、切り抜きと元配信が同じ会話・場面ではないと人間が判定したため不採用。"
+    },
+    {
+      "blockIndex": 3,
+      "status": "accepted",
+      "clipRange": { "startMs": 188483, "endMs": 298173 },
+      "sourceRange": { "startMs": 4070075, "endMs": 4198226 },
+      "note": ""
+    },
+    {
+      "blockIndex": 4,
+      "status": "accepted",
+      "clipRange": { "startMs": 309885, "endMs": 328730 },
+      "sourceRange": { "startMs": 4230098, "endMs": 4251308 },
+      "note": ""
+    },
+    {
+      "blockIndex": 5,
+      "status": "accepted",
+      "clipRange": { "startMs": 338552, "endMs": 381924 },
+      "sourceRange": { "startMs": 4274958, "endMs": 4327614 },
+      "note": ""
+    },
+    {
+      "blockIndex": 6,
+      "status": "accepted",
+      "clipRange": { "startMs": 405518, "endMs": 687624 },
+      "sourceRange": { "startMs": 4366870, "endMs": 4700965 },
+      "note": ""
+    },
+    {
+      "blockIndex": 7,
+      "status": "accepted",
+      "clipRange": { "startMs": 706442, "endMs": 759546 },
+      "sourceRange": { "startMs": 4730747, "endMs": 4787332 },
+      "note": ""
+    }
+  ],
+  "boundaries": [
+    {
+      "boundaryIndex": 1,
+      "beforeBlockIndex": 1,
+      "afterBlockIndex": 2,
+      "status": "rejected",
+      "beforeMatches": true,
+      "afterMatches": true,
+      "sourcePositionSwitches": true,
+      "note": "clip連続再生=true / source位置切替=true / 前側対応=true / 後側対応=true。人間観察では境目自体は問題なし。不採用block 2へ接続するためfixture対象外。",
+      "humanObservation": {
+        "status": "confirmed",
+        "clipSwitch": true,
+        "sourcePositionSwitches": true,
+        "beforeMatches": true,
+        "afterMatches": true
+      },
+      "scoringTreatment": "excluded_with_rejected_adjacent_block"
+    },
+    {
+      "boundaryIndex": 2,
+      "beforeBlockIndex": 2,
+      "afterBlockIndex": 3,
+      "status": "rejected",
+      "beforeMatches": false,
+      "afterMatches": true,
+      "sourcePositionSwitches": true,
+      "note": "clip連続再生=true / source位置切替=true / 前側対応=false / 後側対応=true。不採用block 2側が元配信素材と一致しないためfixture対象外。",
+      "humanObservation": {
+        "status": "rejected",
+        "clipSwitch": true,
+        "sourcePositionSwitches": true,
+        "beforeMatches": false,
+        "afterMatches": true
+      },
+      "scoringTreatment": "excluded_with_rejected_adjacent_block"
+    },
+    {
+      "boundaryIndex": 3,
+      "beforeBlockIndex": 3,
+      "afterBlockIndex": 4,
+      "status": "confirmed",
+      "beforeMatches": true,
+      "afterMatches": true,
+      "sourcePositionSwitches": true,
+      "note": "clip連続再生=true / source位置切替=true / 前側対応=true / 後側対応=true。",
+      "humanObservation": {
+        "status": "confirmed",
+        "clipSwitch": true,
+        "sourcePositionSwitches": true,
+        "beforeMatches": true,
+        "afterMatches": true
+      }
+    },
+    {
+      "boundaryIndex": 4,
+      "beforeBlockIndex": 4,
+      "afterBlockIndex": 5,
+      "status": "confirmed",
+      "beforeMatches": true,
+      "afterMatches": true,
+      "sourcePositionSwitches": true,
+      "note": "clip連続再生は人間確認で判定不能。source位置切替・前側対応・後側対応はtrue。clip gap 9822ms、source gap 23650ms、素材ジャンプ13828msで、既定の10000ms以上。人間の明示的な最終承認により素材境界として採用。",
+      "humanObservation": {
+        "status": "unresolved",
+        "clipSwitch": "unresolved",
+        "sourcePositionSwitches": true,
+        "beforeMatches": true,
+        "afterMatches": true
+      },
+      "numericEvidence": {
+        "clipGapMs": 9822,
+        "sourceGapMs": 23650,
+        "materialJumpMs": 13828,
+        "definitionThresholdMs": 10000
+      },
+      "finalTreatment": "confirmed_by_correspondence_numeric_evidence_and_explicit_human_approval"
+    },
+    {
+      "boundaryIndex": 5,
+      "beforeBlockIndex": 5,
+      "afterBlockIndex": 6,
+      "status": "confirmed",
+      "beforeMatches": true,
+      "afterMatches": true,
+      "sourcePositionSwitches": true,
+      "note": "clip連続再生=true / source位置切替=true / 前側対応=true / 後側対応=true。",
+      "humanObservation": {
+        "status": "confirmed",
+        "clipSwitch": true,
+        "sourcePositionSwitches": true,
+        "beforeMatches": true,
+        "afterMatches": true
+      }
+    },
+    {
+      "boundaryIndex": 6,
+      "beforeBlockIndex": 6,
+      "afterBlockIndex": 7,
+      "status": "confirmed",
+      "beforeMatches": true,
+      "afterMatches": true,
+      "sourcePositionSwitches": true,
+      "note": "clip連続再生=true / source位置切替=true / 前側対応=true / 後側対応=true。",
+      "humanObservation": {
+        "status": "confirmed",
+        "clipSwitch": true,
+        "sourcePositionSwitches": true,
+        "beforeMatches": true,
+        "afterMatches": true
+      }
+    }
+  ],
+  "fixedTheme": {
+    "title": "マリンLiar's Bar",
+    "summary": "マリンLiar's Bar",
+    "compositionNote": "人間確認で採用した複数素材ブロックを、切り抜き内の順番どおり別々のselectedCutsとして扱う。"
+  },
+  "readyForFreeze": true
+}

@@ -1,0 +1,49 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "ジョーカーのルールをようやく理解した宝鐘マリン",
+      "reason": "ゲーム2回目にしてジョーカーが何にでも化けるルールをようやく完璧に理解し、テンションが上がっている様子が描かれているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "qdczJpv8RCc",
+          "sourceStartMs": 1447120,
+          "sourceEndMs": 1529960,
+          "supportingSpeechIds": [
+            "386-397"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "対戦相手を煽りまくりながら嘘を暴く宝鐘マリン",
+      "reason": "悩んでいるプレイヤーに「死が怖いか？」と煽り散らしながら嘘を看破する、マリンの特徴的なトークとゲーム展開が面白いため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "qdczJpv8RCc",
+          "sourceStartMs": 1530002,
+          "sourceEndMs": 1573473,
+          "supportingSpeechIds": [
+            "398-403"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-15T21:32:20+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_13_qdczJpv8RCc",
+    "windowSourceVideoId": "qdczJpv8RCc",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nE_bNeBNp4E_chat_velocity_top100_input_selection_v004/theme-llm-v002/20260715-chat-velocity-top100-third-material-v001/windows/window_13_qdczJpv8RCc-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/b79b3f90baf679fa?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"ジョーカーのルールをようやく理解した宝鐘マリン\",\n      \"reason\": \"ゲーム2回目にしてジョーカーが何にでも化けるルールをようやく完璧に理解し、テンションが上がっている様子が描かれているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"qdczJpv8RCc\",\n          \"sourceStartMs\": 1447120,\n          \"sourceEndMs\": 1529960,\n          \"supportingSpeechIds\": [\n            \"386-397\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"対戦相手を煽りまくりながら嘘を暴く宝鐘マリン\",\n      \"reason\": \"悩んでいるプレイヤーに「死が怖いか？」と煽り散らしながら嘘を看破する、マリンの特徴的なトークとゲーム展開が面白いため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"qdczJpv8RCc\",\n          \"sourceStartMs\": 1530002,\n          \"sourceEndMs\": 1573473,\n          \"supportingSpeechIds\": [\n            \"398-403\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

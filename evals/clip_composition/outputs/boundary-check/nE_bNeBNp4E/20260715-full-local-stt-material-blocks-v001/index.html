@@ -1,0 +1,465 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <title>Material boundary check nE_bNeBNp4E</title>
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif; margin: 24px; color: #111827; }
+    table { border-collapse: collapse; margin: 12px 0 20px; }
+    th, td { border: 1px solid #d1d5db; padding: 6px 9px; text-align: right; }
+    th:first-child, td:first-child { text-align: left; }
+    article { border-top: 1px solid #cbd5e1; padding-top: 20px; margin-top: 24px; }
+    .strip { margin: 18px 0; }
+    audio { display: block; width: 520px; max-width: 100%; margin: 6px 0 10px; }
+    video { display: block; width: 100%; background: #0f172a; }
+    .instructions { max-width: 980px; background: #f8fafc; border: 1px solid #cbd5e1; padding: 14px 16px; margin: 12px 0 18px; }
+    .instructions h2 { margin-top: 0; }
+    .instructions li { margin: 6px 0; }
+    .videos { display: grid; gap: 16px; align-items: start; }
+    .primary-videos { grid-template-columns: repeat(2, minmax(280px, 1fr)); margin-bottom: 18px; }
+    .support-videos { grid-template-columns: repeat(2, minmax(260px, 1fr)); }
+    .videos figure { margin: 0; }
+    .videos figcaption { font-size: 13px; line-height: 1.45; color: #374151; margin-top: 6px; }
+    .frames { display: grid; grid-template-columns: repeat(5, minmax(120px, 1fr)); gap: 10px; align-items: start; }
+    figure { margin: 0; }
+    img { width: 100%; border: 1px solid #d1d5db; background: #f9fafb; }
+    figcaption { font-size: 12px; color: #4b5563; line-height: 1.35; margin-top: 3px; }
+    @media (max-width: 900px) {
+      .primary-videos, .support-videos { grid-template-columns: 1fr; }
+      .frames { grid-template-columns: repeat(2, minmax(120px, 1fr)); }
+    }
+  </style>
+</head>
+<body>
+  <h1>素材境界確認 nE_bNeBNp4E</h1>
+  <section class="instructions">
+    <h2>何を見るか</h2>
+    <ol>
+      <li><strong>clip連続再生</strong>を見る。切り抜き単体で、境界前から境界後まで実際の順番で見る。ここで切り替わりが起きているかを見る。</li>
+      <li><strong>source前後連続再生</strong>を見る。元動画の前側対応2秒、後側対応2秒を順番につないだ人工連結。前後が別位置に見えるかを見る。</li>
+      <li><strong>前側対応確認</strong>と<strong>後側対応確認</strong>は補助。左が切り抜き、右が元動画。対応が合っていそうかを見る。</li>
+      <li>静止画は補助。切り替わり判定は連続再生動画で判断する。</li>
+      <li>見ないこと: 同一素材内の細かい詰め、口元の完全同期、expectedCutsの最終開始・終了秒の確定。</li>
+    </ol>
+  </section>
+  <h2>ブロック表</h2>
+  <table>
+    <thead><tr><th>block</th><th>run</th><th>clip</th><th>source</th><th>対応語</th><th>内部詰め候補</th></tr></thead>
+    <tbody><tr><td>1</td><td>212, 213, 215, 216, 218</td><td>1:30.098-2:17.396</td><td>65:32.652-66:27.910</td><td>157</td><td>+4880ms</td></tr>
+<tr><td>2</td><td>222, 224</td><td>2:24.521-2:44.139</td><td>66:49.379-66:56.766</td><td>26</td><td>+321ms</td></tr>
+<tr><td>3</td><td>235, 236, 238, 241, 242, 246, 248, 252, 259</td><td>3:08.483-4:58.173</td><td>67:50.075-69:58.226</td><td>300</td><td>+17086ms</td></tr>
+<tr><td>4</td><td>270, 275, 276</td><td>5:09.885-5:28.730</td><td>70:30.098-70:51.308</td><td>62</td><td>+0ms</td></tr>
+<tr><td>5</td><td>283, 284, 287, 291, 297</td><td>5:38.552-6:21.924</td><td>71:14.958-72:07.614</td><td>67</td><td>+6380ms</td></tr>
+<tr><td>6</td><td>308, 318, 324, 326, 327, 328, 330, 331, 333, 335, 336, 343, 344, 348, 349, 354, 356, 367, 370, 371, 373, 375, 379, 400</td><td>6:45.518-11:27.624</td><td>72:46.870-78:20.965</td><td>511</td><td>+43522ms</td></tr>
+<tr><td>7</td><td>405, 406, 409, 415, 416</td><td>11:46.442-12:39.546</td><td>78:50.747-79:47.332</td><td>87</td><td>+6021ms</td></tr></tbody>
+  </table>
+  <article>
+  <h2>境界1: block 1 -> 2</h2>
+  <table>
+    <tr><th>clip</th><td>2:17.396 -> 2:24.521</td><td>+7125ms</td></tr>
+    <tr><th>source</th><td>66:27.910 -> 66:49.379</td><td>+21469ms</td></tr>
+    <tr><th>素材飛び量</th><td colspan="2">+14344ms</td></tr>
+  </table>
+  <section class="watch">
+    <h3>最初に見る動画</h3>
+    <div class="videos primary-videos">
+      <figure>
+        <video controls src="videos/boundary_01_clip_context.mp4"></video>
+        <figcaption>clip連続再生。切り抜き単体で、境界前から境界後まで実際の順番で見る。</figcaption>
+      </figure>
+      <figure>
+        <video controls src="videos/boundary_01_source_sequence.mp4"></video>
+        <figcaption>source前後連続再生。元動画の前側対応2秒、後側対応2秒を順番につないだ人工連結。別位置に飛んでいるかを見る。</figcaption>
+      </figure>
+    </div>
+    <h3>対応確認の補助</h3>
+    <div class="videos support-videos">
+      <figure>
+        <video controls src="videos/boundary_01_before_match.mp4"></video>
+        <figcaption>前側対応確認。左が切り抜き、右が元動画。境界前の対応が合っているかを見る。</figcaption>
+      </figure>
+      <figure>
+        <video controls src="videos/boundary_01_after_match.mp4"></video>
+        <figcaption>後側対応確認。左が切り抜き、右が元動画。境界後の対応が合っているかを見る。</figcaption>
+      </figure>
+    </div>
+  </section>
+  <section class="strip">
+  <h3>clip前素材終端 2:17.396</h3>
+  <audio controls src="audio/boundary_01_clip_before_pm2s.wav"></audio>
+  <div class="frames"><figure><img src="stills/boundary_01/clip_before/clip_before_minus1000ms.jpg" alt="clip_before minus1000ms"><figcaption>clip前素材終端<br>minus1000ms<br>2:16.396</figcaption></figure>
+<figure><img src="stills/boundary_01/clip_before/clip_before_minus500ms.jpg" alt="clip_before minus500ms"><figcaption>clip前素材終端<br>minus500ms<br>2:16.896</figcaption></figure>
+<figure><img src="stills/boundary_01/clip_before/clip_before_exact.jpg" alt="clip_before exact"><figcaption>clip前素材終端<br>exact<br>2:17.396</figcaption></figure>
+<figure><img src="stills/boundary_01/clip_before/clip_before_plus500ms.jpg" alt="clip_before plus500ms"><figcaption>clip前素材終端<br>plus500ms<br>2:17.896</figcaption></figure>
+<figure><img src="stills/boundary_01/clip_before/clip_before_plus1000ms.jpg" alt="clip_before plus1000ms"><figcaption>clip前素材終端<br>plus1000ms<br>2:18.396</figcaption></figure></div>
+</section>
+<section class="strip">
+  <h3>clip後素材開始 2:24.521</h3>
+  <audio controls src="audio/boundary_01_clip_after_pm2s.wav"></audio>
+  <div class="frames"><figure><img src="stills/boundary_01/clip_after/clip_after_minus1000ms.jpg" alt="clip_after minus1000ms"><figcaption>clip後素材開始<br>minus1000ms<br>2:23.521</figcaption></figure>
+<figure><img src="stills/boundary_01/clip_after/clip_after_minus500ms.jpg" alt="clip_after minus500ms"><figcaption>clip後素材開始<br>minus500ms<br>2:24.021</figcaption></figure>
+<figure><img src="stills/boundary_01/clip_after/clip_after_exact.jpg" alt="clip_after exact"><figcaption>clip後素材開始<br>exact<br>2:24.521</figcaption></figure>
+<figure><img src="stills/boundary_01/clip_after/clip_after_plus500ms.jpg" alt="clip_after plus500ms"><figcaption>clip後素材開始<br>plus500ms<br>2:25.021</figcaption></figure>
+<figure><img src="stills/boundary_01/clip_after/clip_after_plus1000ms.jpg" alt="clip_after plus1000ms"><figcaption>clip後素材開始<br>plus1000ms<br>2:25.521</figcaption></figure></div>
+</section>
+<section class="strip">
+  <h3>source前素材終端 66:27.910</h3>
+  <audio controls src="audio/boundary_01_source_before_pm2s.wav"></audio>
+  <div class="frames"><figure><img src="stills/boundary_01/source_before/source_before_minus1000ms.jpg" alt="source_before minus1000ms"><figcaption>source前素材終端<br>minus1000ms<br>66:26.910</figcaption></figure>
+<figure><img src="stills/boundary_01/source_before/source_before_minus500ms.jpg" alt="source_before minus500ms"><figcaption>source前素材終端<br>minus500ms<br>66:27.410</figcaption></figure>
+<figure><img src="stills/boundary_01/source_before/source_before_exact.jpg" alt="source_before exact"><figcaption>source前素材終端<br>exact<br>66:27.910</figcaption></figure>
+<figure><img src="stills/boundary_01/source_before/source_before_plus500ms.jpg" alt="source_before plus500ms"><figcaption>source前素材終端<br>plus500ms<br>66:28.410</figcaption></figure>
+<figure><img src="stills/boundary_01/source_before/source_before_plus1000ms.jpg" alt="source_before plus1000ms"><figcaption>source前素材終端<br>plus1000ms<br>66:28.910</figcaption></figure></div>
+</section>
+<section class="strip">
+  <h3>source後素材開始 66:49.379</h3>
+  <audio controls src="audio/boundary_01_source_after_pm2s.wav"></audio>
+  <div class="frames"><figure><img src="stills/boundary_01/source_after/source_after_minus1000ms.jpg" alt="source_after minus1000ms"><figcaption>source後素材開始<br>minus1000ms<br>66:48.379</figcaption></figure>
+<figure><img src="stills/boundary_01/source_after/source_after_minus500ms.jpg" alt="source_after minus500ms"><figcaption>source後素材開始<br>minus500ms<br>66:48.879</figcaption></figure>
+<figure><img src="stills/boundary_01/source_after/source_after_exact.jpg" alt="source_after exact"><figcaption>source後素材開始<br>exact<br>66:49.379</figcaption></figure>
+<figure><img src="stills/boundary_01/source_after/source_after_plus500ms.jpg" alt="source_after plus500ms"><figcaption>source後素材開始<br>plus500ms<br>66:49.879</figcaption></figure>
+<figure><img src="stills/boundary_01/source_after/source_after_plus1000ms.jpg" alt="source_after plus1000ms"><figcaption>source後素材開始<br>plus1000ms<br>66:50.379</figcaption></figure></div>
+</section>
+</article>
+<article>
+  <h2>境界2: block 2 -> 3</h2>
+  <table>
+    <tr><th>clip</th><td>2:44.139 -> 3:08.483</td><td>+24344ms</td></tr>
+    <tr><th>source</th><td>66:56.766 -> 67:50.075</td><td>+53309ms</td></tr>
+    <tr><th>素材飛び量</th><td colspan="2">+28965ms</td></tr>
+  </table>
+  <section class="watch">
+    <h3>最初に見る動画</h3>
+    <div class="videos primary-videos">
+      <figure>
+        <video controls src="videos/boundary_02_clip_context.mp4"></video>
+        <figcaption>clip連続再生。切り抜き単体で、境界前から境界後まで実際の順番で見る。</figcaption>
+      </figure>
+      <figure>
+        <video controls src="videos/boundary_02_source_sequence.mp4"></video>
+        <figcaption>source前後連続再生。元動画の前側対応2秒、後側対応2秒を順番につないだ人工連結。別位置に飛んでいるかを見る。</figcaption>
+      </figure>
+    </div>
+    <h3>対応確認の補助</h3>
+    <div class="videos support-videos">
+      <figure>
+        <video controls src="videos/boundary_02_before_match.mp4"></video>
+        <figcaption>前側対応確認。左が切り抜き、右が元動画。境界前の対応が合っているかを見る。</figcaption>
+      </figure>
+      <figure>
+        <video controls src="videos/boundary_02_after_match.mp4"></video>
+        <figcaption>後側対応確認。左が切り抜き、右が元動画。境界後の対応が合っているかを見る。</figcaption>
+      </figure>
+    </div>
+  </section>
+  <section class="strip">
+  <h3>clip前素材終端 2:44.139</h3>
+  <audio controls src="audio/boundary_02_clip_before_pm2s.wav"></audio>
+  <div class="frames"><figure><img src="stills/boundary_02/clip_before/clip_before_minus1000ms.jpg" alt="clip_before minus1000ms"><figcaption>clip前素材終端<br>minus1000ms<br>2:43.139</figcaption></figure>
+<figure><img src="stills/boundary_02/clip_before/clip_before_minus500ms.jpg" alt="clip_before minus500ms"><figcaption>clip前素材終端<br>minus500ms<br>2:43.639</figcaption></figure>
+<figure><img src="stills/boundary_02/clip_before/clip_before_exact.jpg" alt="clip_before exact"><figcaption>clip前素材終端<br>exact<br>2:44.139</figcaption></figure>
+<figure><img src="stills/boundary_02/clip_before/clip_before_plus500ms.jpg" alt="clip_before plus500ms"><figcaption>clip前素材終端<br>plus500ms<br>2:44.639</figcaption></figure>
+<figure><img src="stills/boundary_02/clip_before/clip_before_plus1000ms.jpg" alt="clip_before plus1000ms"><figcaption>clip前素材終端<br>plus1000ms<br>2:45.139</figcaption></figure></div>
+</section>
+<section class="strip">
+  <h3>clip後素材開始 3:08.483</h3>
+  <audio controls src="audio/boundary_02_clip_after_pm2s.wav"></audio>
+  <div class="frames"><figure><img src="stills/boundary_02/clip_after/clip_after_minus1000ms.jpg" alt="clip_after minus1000ms"><figcaption>clip後素材開始<br>minus1000ms<br>3:07.483</figcaption></figure>
+<figure><img src="stills/boundary_02/clip_after/clip_after_minus500ms.jpg" alt="clip_after minus500ms"><figcaption>clip後素材開始<br>minus500ms<br>3:07.983</figcaption></figure>
+<figure><img src="stills/boundary_02/clip_after/clip_after_exact.jpg" alt="clip_after exact"><figcaption>clip後素材開始<br>exact<br>3:08.483</figcaption></figure>
+<figure><img src="stills/boundary_02/clip_after/clip_after_plus500ms.jpg" alt="clip_after plus500ms"><figcaption>clip後素材開始<br>plus500ms<br>3:08.983</figcaption></figure>
+<figure><img src="stills/boundary_02/clip_after/clip_after_plus1000ms.jpg" alt="clip_after plus1000ms"><figcaption>clip後素材開始<br>plus1000ms<br>3:09.483</figcaption></figure></div>
+</section>
+<section class="strip">
+  <h3>source前素材終端 66:56.766</h3>
+  <audio controls src="audio/boundary_02_source_before_pm2s.wav"></audio>
+  <div class="frames"><figure><img src="stills/boundary_02/source_before/source_before_minus1000ms.jpg" alt="source_before minus1000ms"><figcaption>source前素材終端<br>minus1000ms<br>66:55.766</figcaption></figure>
+<figure><img src="stills/boundary_02/source_before/source_before_minus500ms.jpg" alt="source_before minus500ms"><figcaption>source前素材終端<br>minus500ms<br>66:56.266</figcaption></figure>
+<figure><img src="stills/boundary_02/source_before/source_before_exact.jpg" alt="source_before exact"><figcaption>source前素材終端<br>exact<br>66:56.766</figcaption></figure>
+<figure><img src="stills/boundary_02/source_before/source_before_plus500ms.jpg" alt="source_before plus500ms"><figcaption>source前素材終端<br>plus500ms<br>66:57.266</figcaption></figure>
+<figure><img src="stills/boundary_02/source_before/source_before_plus1000ms.jpg" alt="source_before plus1000ms"><figcaption>source前素材終端<br>plus1000ms<br>66:57.766</figcaption></figure></div>
+</section>
+<section class="strip">
+  <h3>source後素材開始 67:50.075</h3>
+  <audio controls src="audio/boundary_02_source_after_pm2s.wav"></audio>
+  <div class="frames"><figure><img src="stills/boundary_02/source_after/source_after_minus1000ms.jpg" alt="source_after minus1000ms"><figcaption>source後素材開始<br>minus1000ms<br>67:49.075</figcaption></figure>
+<figure><img src="stills/boundary_02/source_after/source_after_minus500ms.jpg" alt="source_after minus500ms"><figcaption>source後素材開始<br>minus500ms<br>67:49.575</figcaption></figure>
+<figure><img src="stills/boundary_02/source_after/source_after_exact.jpg" alt="source_after exact"><figcaption>source後素材開始<br>exact<br>67:50.075</figcaption></figure>
+<figure><img src="stills/boundary_02/source_after/source_after_plus500ms.jpg" alt="source_after plus500ms"><figcaption>source後素材開始<br>plus500ms<br>67:50.575</figcaption></figure>
+<figure><img src="stills/boundary_02/source_after/source_after_plus1000ms.jpg" alt="source_after plus1000ms"><figcaption>source後素材開始<br>plus1000ms<br>67:51.075</figcaption></figure></div>
+</section>
+</article>
+<article>
+  <h2>境界3: block 3 -> 4</h2>
+  <table>
+    <tr><th>clip</th><td>4:58.173 -> 5:09.885</td><td>+11712ms</td></tr>
+    <tr><th>source</th><td>69:58.226 -> 70:30.098</td><td>+31872ms</td></tr>
+    <tr><th>素材飛び量</th><td colspan="2">+20160ms</td></tr>
+  </table>
+  <section class="watch">
+    <h3>最初に見る動画</h3>
+    <div class="videos primary-videos">
+      <figure>
+        <video controls src="videos/boundary_03_clip_context.mp4"></video>
+        <figcaption>clip連続再生。切り抜き単体で、境界前から境界後まで実際の順番で見る。</figcaption>
+      </figure>
+      <figure>
+        <video controls src="videos/boundary_03_source_sequence.mp4"></video>
+        <figcaption>source前後連続再生。元動画の前側対応2秒、後側対応2秒を順番につないだ人工連結。別位置に飛んでいるかを見る。</figcaption>
+      </figure>
+    </div>
+    <h3>対応確認の補助</h3>
+    <div class="videos support-videos">
+      <figure>
+        <video controls src="videos/boundary_03_before_match.mp4"></video>
+        <figcaption>前側対応確認。左が切り抜き、右が元動画。境界前の対応が合っているかを見る。</figcaption>
+      </figure>
+      <figure>
+        <video controls src="videos/boundary_03_after_match.mp4"></video>
+        <figcaption>後側対応確認。左が切り抜き、右が元動画。境界後の対応が合っているかを見る。</figcaption>
+      </figure>
+    </div>
+  </section>
+  <section class="strip">
+  <h3>clip前素材終端 4:58.173</h3>
+  <audio controls src="audio/boundary_03_clip_before_pm2s.wav"></audio>
+  <div class="frames"><figure><img src="stills/boundary_03/clip_before/clip_before_minus1000ms.jpg" alt="clip_before minus1000ms"><figcaption>clip前素材終端<br>minus1000ms<br>4:57.173</figcaption></figure>
+<figure><img src="stills/boundary_03/clip_before/clip_before_minus500ms.jpg" alt="clip_before minus500ms"><figcaption>clip前素材終端<br>minus500ms<br>4:57.673</figcaption></figure>
+<figure><img src="stills/boundary_03/clip_before/clip_before_exact.jpg" alt="clip_before exact"><figcaption>clip前素材終端<br>exact<br>4:58.173</figcaption></figure>
+<figure><img src="stills/boundary_03/clip_before/clip_before_plus500ms.jpg" alt="clip_before plus500ms"><figcaption>clip前素材終端<br>plus500ms<br>4:58.673</figcaption></figure>
+<figure><img src="stills/boundary_03/clip_before/clip_before_plus1000ms.jpg" alt="clip_before plus1000ms"><figcaption>clip前素材終端<br>plus1000ms<br>4:59.173</figcaption></figure></div>
+</section>
+<section class="strip">
+  <h3>clip後素材開始 5:09.885</h3>
+  <audio controls src="audio/boundary_03_clip_after_pm2s.wav"></audio>
+  <div class="frames"><figure><img src="stills/boundary_03/clip_after/clip_after_minus1000ms.jpg" alt="clip_after minus1000ms"><figcaption>clip後素材開始<br>minus1000ms<br>5:08.885</figcaption></figure>
+<figure><img src="stills/boundary_03/clip_after/clip_after_minus500ms.jpg" alt="clip_after minus500ms"><figcaption>clip後素材開始<br>minus500ms<br>5:09.385</figcaption></figure>
+<figure><img src="stills/boundary_03/clip_after/clip_after_exact.jpg" alt="clip_after exact"><figcaption>clip後素材開始<br>exact<br>5:09.885</figcaption></figure>
+<figure><img src="stills/boundary_03/clip_after/clip_after_plus500ms.jpg" alt="clip_after plus500ms"><figcaption>clip後素材開始<br>plus500ms<br>5:10.385</figcaption></figure>
+<figure><img src="stills/boundary_03/clip_after/clip_after_plus1000ms.jpg" alt="clip_after plus1000ms"><figcaption>clip後素材開始<br>plus1000ms<br>5:10.885</figcaption></figure></div>
+</section>
+<section class="strip">
+  <h3>source前素材終端 69:58.226</h3>
+  <audio controls src="audio/boundary_03_source_before_pm2s.wav"></audio>
+  <div class="frames"><figure><img src="stills/boundary_03/source_before/source_before_minus1000ms.jpg" alt="source_before minus1000ms"><figcaption>source前素材終端<br>minus1000ms<br>69:57.226</figcaption></figure>
+<figure><img src="stills/boundary_03/source_before/source_before_minus500ms.jpg" alt="source_before minus500ms"><figcaption>source前素材終端<br>minus500ms<br>69:57.726</figcaption></figure>
+<figure><img src="stills/boundary_03/source_before/source_before_exact.jpg" alt="source_before exact"><figcaption>source前素材終端<br>exact<br>69:58.226</figcaption></figure>
+<figure><img src="stills/boundary_03/source_before/source_before_plus500ms.jpg" alt="source_before plus500ms"><figcaption>source前素材終端<br>plus500ms<br>69:58.726</figcaption></figure>
+<figure><img src="stills/boundary_03/source_before/source_before_plus1000ms.jpg" alt="source_before plus1000ms"><figcaption>source前素材終端<br>plus1000ms<br>69:59.226</figcaption></figure></div>
+</section>
+<section class="strip">
+  <h3>source後素材開始 70:30.098</h3>
+  <audio controls src="audio/boundary_03_source_after_pm2s.wav"></audio>
+  <div class="frames"><figure><img src="stills/boundary_03/source_after/source_after_minus1000ms.jpg" alt="source_after minus1000ms"><figcaption>source後素材開始<br>minus1000ms<br>70:29.098</figcaption></figure>
+<figure><img src="stills/boundary_03/source_after/source_after_minus500ms.jpg" alt="source_after minus500ms"><figcaption>source後素材開始<br>minus500ms<br>70:29.598</figcaption></figure>
+<figure><img src="stills/boundary_03/source_after/source_after_exact.jpg" alt="source_after exact"><figcaption>source後素材開始<br>exact<br>70:30.098</figcaption></figure>
+<figure><img src="stills/boundary_03/source_after/source_after_plus500ms.jpg" alt="source_after plus500ms"><figcaption>source後素材開始<br>plus500ms<br>70:30.598</figcaption></figure>
+<figure><img src="stills/boundary_03/source_after/source_after_plus1000ms.jpg" alt="source_after plus1000ms"><figcaption>source後素材開始<br>plus1000ms<br>70:31.098</figcaption></figure></div>
+</section>
+</article>
+<article>
+  <h2>境界4: block 4 -> 5</h2>
+  <table>
+    <tr><th>clip</th><td>5:28.730 -> 5:38.552</td><td>+9822ms</td></tr>
+    <tr><th>source</th><td>70:51.308 -> 71:14.958</td><td>+23650ms</td></tr>
+    <tr><th>素材飛び量</th><td colspan="2">+13828ms</td></tr>
+  </table>
+  <section class="watch">
+    <h3>最初に見る動画</h3>
+    <div class="videos primary-videos">
+      <figure>
+        <video controls src="videos/boundary_04_clip_context.mp4"></video>
+        <figcaption>clip連続再生。切り抜き単体で、境界前から境界後まで実際の順番で見る。</figcaption>
+      </figure>
+      <figure>
+        <video controls src="videos/boundary_04_source_sequence.mp4"></video>
+        <figcaption>source前後連続再生。元動画の前側対応2秒、後側対応2秒を順番につないだ人工連結。別位置に飛んでいるかを見る。</figcaption>
+      </figure>
+    </div>
+    <h3>対応確認の補助</h3>
+    <div class="videos support-videos">
+      <figure>
+        <video controls src="videos/boundary_04_before_match.mp4"></video>
+        <figcaption>前側対応確認。左が切り抜き、右が元動画。境界前の対応が合っているかを見る。</figcaption>
+      </figure>
+      <figure>
+        <video controls src="videos/boundary_04_after_match.mp4"></video>
+        <figcaption>後側対応確認。左が切り抜き、右が元動画。境界後の対応が合っているかを見る。</figcaption>
+      </figure>
+    </div>
+  </section>
+  <section class="strip">
+  <h3>clip前素材終端 5:28.730</h3>
+  <audio controls src="audio/boundary_04_clip_before_pm2s.wav"></audio>
+  <div class="frames"><figure><img src="stills/boundary_04/clip_before/clip_before_minus1000ms.jpg" alt="clip_before minus1000ms"><figcaption>clip前素材終端<br>minus1000ms<br>5:27.730</figcaption></figure>
+<figure><img src="stills/boundary_04/clip_before/clip_before_minus500ms.jpg" alt="clip_before minus500ms"><figcaption>clip前素材終端<br>minus500ms<br>5:28.230</figcaption></figure>
+<figure><img src="stills/boundary_04/clip_before/clip_before_exact.jpg" alt="clip_before exact"><figcaption>clip前素材終端<br>exact<br>5:28.730</figcaption></figure>
+<figure><img src="stills/boundary_04/clip_before/clip_before_plus500ms.jpg" alt="clip_before plus500ms"><figcaption>clip前素材終端<br>plus500ms<br>5:29.230</figcaption></figure>
+<figure><img src="stills/boundary_04/clip_before/clip_before_plus1000ms.jpg" alt="clip_before plus1000ms"><figcaption>clip前素材終端<br>plus1000ms<br>5:29.730</figcaption></figure></div>
+</section>
+<section class="strip">
+  <h3>clip後素材開始 5:38.552</h3>
+  <audio controls src="audio/boundary_04_clip_after_pm2s.wav"></audio>
+  <div class="frames"><figure><img src="stills/boundary_04/clip_after/clip_after_minus1000ms.jpg" alt="clip_after minus1000ms"><figcaption>clip後素材開始<br>minus1000ms<br>5:37.552</figcaption></figure>
+<figure><img src="stills/boundary_04/clip_after/clip_after_minus500ms.jpg" alt="clip_after minus500ms"><figcaption>clip後素材開始<br>minus500ms<br>5:38.052</figcaption></figure>
+<figure><img src="stills/boundary_04/clip_after/clip_after_exact.jpg" alt="clip_after exact"><figcaption>clip後素材開始<br>exact<br>5:38.552</figcaption></figure>
+<figure><img src="stills/boundary_04/clip_after/clip_after_plus500ms.jpg" alt="clip_after plus500ms"><figcaption>clip後素材開始<br>plus500ms<br>5:39.052</figcaption></figure>
+<figure><img src="stills/boundary_04/clip_after/clip_after_plus1000ms.jpg" alt="clip_after plus1000ms"><figcaption>clip後素材開始<br>plus1000ms<br>5:39.552</figcaption></figure></div>
+</section>
+<section class="strip">
+  <h3>source前素材終端 70:51.308</h3>
+  <audio controls src="audio/boundary_04_source_before_pm2s.wav"></audio>
+  <div class="frames"><figure><img src="stills/boundary_04/source_before/source_before_minus1000ms.jpg" alt="source_before minus1000ms"><figcaption>source前素材終端<br>minus1000ms<br>70:50.308</figcaption></figure>
+<figure><img src="stills/boundary_04/source_before/source_before_minus500ms.jpg" alt="source_before minus500ms"><figcaption>source前素材終端<br>minus500ms<br>70:50.808</figcaption></figure>
+<figure><img src="stills/boundary_04/source_before/source_before_exact.jpg" alt="source_before exact"><figcaption>source前素材終端<br>exact<br>70:51.308</figcaption></figure>
+<figure><img src="stills/boundary_04/source_before/source_before_plus500ms.jpg" alt="source_before plus500ms"><figcaption>source前素材終端<br>plus500ms<br>70:51.808</figcaption></figure>
+<figure><img src="stills/boundary_04/source_before/source_before_plus1000ms.jpg" alt="source_before plus1000ms"><figcaption>source前素材終端<br>plus1000ms<br>70:52.308</figcaption></figure></div>
+</section>
+<section class="strip">
+  <h3>source後素材開始 71:14.958</h3>
+  <audio controls src="audio/boundary_04_source_after_pm2s.wav"></audio>
+  <div class="frames"><figure><img src="stills/boundary_04/source_after/source_after_minus1000ms.jpg" alt="source_after minus1000ms"><figcaption>source後素材開始<br>minus1000ms<br>71:13.958</figcaption></figure>
+<figure><img src="stills/boundary_04/source_after/source_after_minus500ms.jpg" alt="source_after minus500ms"><figcaption>source後素材開始<br>minus500ms<br>71:14.458</figcaption></figure>
+<figure><img src="stills/boundary_04/source_after/source_after_exact.jpg" alt="source_after exact"><figcaption>source後素材開始<br>exact<br>71:14.958</figcaption></figure>
+<figure><img src="stills/boundary_04/source_after/source_after_plus500ms.jpg" alt="source_after plus500ms"><figcaption>source後素材開始<br>plus500ms<br>71:15.458</figcaption></figure>
+<figure><img src="stills/boundary_04/source_after/source_after_plus1000ms.jpg" alt="source_after plus1000ms"><figcaption>source後素材開始<br>plus1000ms<br>71:15.958</figcaption></figure></div>
+</section>
+</article>
+<article>
+  <h2>境界5: block 5 -> 6</h2>
+  <table>
+    <tr><th>clip</th><td>6:21.924 -> 6:45.518</td><td>+23594ms</td></tr>
+    <tr><th>source</th><td>72:07.614 -> 72:46.870</td><td>+39256ms</td></tr>
+    <tr><th>素材飛び量</th><td colspan="2">+15662ms</td></tr>
+  </table>
+  <section class="watch">
+    <h3>最初に見る動画</h3>
+    <div class="videos primary-videos">
+      <figure>
+        <video controls src="videos/boundary_05_clip_context.mp4"></video>
+        <figcaption>clip連続再生。切り抜き単体で、境界前から境界後まで実際の順番で見る。</figcaption>
+      </figure>
+      <figure>
+        <video controls src="videos/boundary_05_source_sequence.mp4"></video>
+        <figcaption>source前後連続再生。元動画の前側対応2秒、後側対応2秒を順番につないだ人工連結。別位置に飛んでいるかを見る。</figcaption>
+      </figure>
+    </div>
+    <h3>対応確認の補助</h3>
+    <div class="videos support-videos">
+      <figure>
+        <video controls src="videos/boundary_05_before_match.mp4"></video>
+        <figcaption>前側対応確認。左が切り抜き、右が元動画。境界前の対応が合っているかを見る。</figcaption>
+      </figure>
+      <figure>
+        <video controls src="videos/boundary_05_after_match.mp4"></video>
+        <figcaption>後側対応確認。左が切り抜き、右が元動画。境界後の対応が合っているかを見る。</figcaption>
+      </figure>
+    </div>
+  </section>
+  <section class="strip">
+  <h3>clip前素材終端 6:21.924</h3>
+  <audio controls src="audio/boundary_05_clip_before_pm2s.wav"></audio>
+  <div class="frames"><figure><img src="stills/boundary_05/clip_before/clip_before_minus1000ms.jpg" alt="clip_before minus1000ms"><figcaption>clip前素材終端<br>minus1000ms<br>6:20.924</figcaption></figure>
+<figure><img src="stills/boundary_05/clip_before/clip_before_minus500ms.jpg" alt="clip_before minus500ms"><figcaption>clip前素材終端<br>minus500ms<br>6:21.424</figcaption></figure>
+<figure><img src="stills/boundary_05/clip_before/clip_before_exact.jpg" alt="clip_before exact"><figcaption>clip前素材終端<br>exact<br>6:21.924</figcaption></figure>
+<figure><img src="stills/boundary_05/clip_before/clip_before_plus500ms.jpg" alt="clip_before plus500ms"><figcaption>clip前素材終端<br>plus500ms<br>6:22.424</figcaption></figure>
+<figure><img src="stills/boundary_05/clip_before/clip_before_plus1000ms.jpg" alt="clip_before plus1000ms"><figcaption>clip前素材終端<br>plus1000ms<br>6:22.924</figcaption></figure></div>
+</section>
+<section class="strip">
+  <h3>clip後素材開始 6:45.518</h3>
+  <audio controls src="audio/boundary_05_clip_after_pm2s.wav"></audio>
+  <div class="frames"><figure><img src="stills/boundary_05/clip_after/clip_after_minus1000ms.jpg" alt="clip_after minus1000ms"><figcaption>clip後素材開始<br>minus1000ms<br>6:44.518</figcaption></figure>
+<figure><img src="stills/boundary_05/clip_after/clip_after_minus500ms.jpg" alt="clip_after minus500ms"><figcaption>clip後素材開始<br>minus500ms<br>6:45.018</figcaption></figure>
+<figure><img src="stills/boundary_05/clip_after/clip_after_exact.jpg" alt="clip_after exact"><figcaption>clip後素材開始<br>exact<br>6:45.518</figcaption></figure>
+<figure><img src="stills/boundary_05/clip_after/clip_after_plus500ms.jpg" alt="clip_after plus500ms"><figcaption>clip後素材開始<br>plus500ms<br>6:46.018</figcaption></figure>
+<figure><img src="stills/boundary_05/clip_after/clip_after_plus1000ms.jpg" alt="clip_after plus1000ms"><figcaption>clip後素材開始<br>plus1000ms<br>6:46.518</figcaption></figure></div>
+</section>
+<section class="strip">
+  <h3>source前素材終端 72:07.614</h3>
+  <audio controls src="audio/boundary_05_source_before_pm2s.wav"></audio>
+  <div class="frames"><figure><img src="stills/boundary_05/source_before/source_before_minus1000ms.jpg" alt="source_before minus1000ms"><figcaption>source前素材終端<br>minus1000ms<br>72:06.614</figcaption></figure>
+<figure><img src="stills/boundary_05/source_before/source_before_minus500ms.jpg" alt="source_before minus500ms"><figcaption>source前素材終端<br>minus500ms<br>72:07.114</figcaption></figure>
+<figure><img src="stills/boundary_05/source_before/source_before_exact.jpg" alt="source_before exact"><figcaption>source前素材終端<br>exact<br>72:07.614</figcaption></figure>
+<figure><img src="stills/boundary_05/source_before/source_before_plus500ms.jpg" alt="source_before plus500ms"><figcaption>source前素材終端<br>plus500ms<br>72:08.114</figcaption></figure>
+<figure><img src="stills/boundary_05/source_before/source_before_plus1000ms.jpg" alt="source_before plus1000ms"><figcaption>source前素材終端<br>plus1000ms<br>72:08.614</figcaption></figure></div>
+</section>
+<section class="strip">
+  <h3>source後素材開始 72:46.870</h3>
+  <audio controls src="audio/boundary_05_source_after_pm2s.wav"></audio>
+  <div class="frames"><figure><img src="stills/boundary_05/source_after/source_after_minus1000ms.jpg" alt="source_after minus1000ms"><figcaption>source後素材開始<br>minus1000ms<br>72:45.870</figcaption></figure>
+<figure><img src="stills/boundary_05/source_after/source_after_minus500ms.jpg" alt="source_after minus500ms"><figcaption>source後素材開始<br>minus500ms<br>72:46.370</figcaption></figure>
+<figure><img src="stills/boundary_05/source_after/source_after_exact.jpg" alt="source_after exact"><figcaption>source後素材開始<br>exact<br>72:46.870</figcaption></figure>
+<figure><img src="stills/boundary_05/source_after/source_after_plus500ms.jpg" alt="source_after plus500ms"><figcaption>source後素材開始<br>plus500ms<br>72:47.370</figcaption></figure>
+<figure><img src="stills/boundary_05/source_after/source_after_plus1000ms.jpg" alt="source_after plus1000ms"><figcaption>source後素材開始<br>plus1000ms<br>72:47.870</figcaption></figure></div>
+</section>
+</article>
+<article>
+  <h2>境界6: block 6 -> 7</h2>
+  <table>
+    <tr><th>clip</th><td>11:27.624 -> 11:46.442</td><td>+18818ms</td></tr>
+    <tr><th>source</th><td>78:20.965 -> 78:50.747</td><td>+29782ms</td></tr>
+    <tr><th>素材飛び量</th><td colspan="2">+10964ms</td></tr>
+  </table>
+  <section class="watch">
+    <h3>最初に見る動画</h3>
+    <div class="videos primary-videos">
+      <figure>
+        <video controls src="videos/boundary_06_clip_context.mp4"></video>
+        <figcaption>clip連続再生。切り抜き単体で、境界前から境界後まで実際の順番で見る。</figcaption>
+      </figure>
+      <figure>
+        <video controls src="videos/boundary_06_source_sequence.mp4"></video>
+        <figcaption>source前後連続再生。元動画の前側対応2秒、後側対応2秒を順番につないだ人工連結。別位置に飛んでいるかを見る。</figcaption>
+      </figure>
+    </div>
+    <h3>対応確認の補助</h3>
+    <div class="videos support-videos">
+      <figure>
+        <video controls src="videos/boundary_06_before_match.mp4"></video>
+        <figcaption>前側対応確認。左が切り抜き、右が元動画。境界前の対応が合っているかを見る。</figcaption>
+      </figure>
+      <figure>
+        <video controls src="videos/boundary_06_after_match.mp4"></video>
+        <figcaption>後側対応確認。左が切り抜き、右が元動画。境界後の対応が合っているかを見る。</figcaption>
+      </figure>
+    </div>
+  </section>
+  <section class="strip">
+  <h3>clip前素材終端 11:27.624</h3>
+  <audio controls src="audio/boundary_06_clip_before_pm2s.wav"></audio>
+  <div class="frames"><figure><img src="stills/boundary_06/clip_before/clip_before_minus1000ms.jpg" alt="clip_before minus1000ms"><figcaption>clip前素材終端<br>minus1000ms<br>11:26.624</figcaption></figure>
+<figure><img src="stills/boundary_06/clip_before/clip_before_minus500ms.jpg" alt="clip_before minus500ms"><figcaption>clip前素材終端<br>minus500ms<br>11:27.124</figcaption></figure>
+<figure><img src="stills/boundary_06/clip_before/clip_before_exact.jpg" alt="clip_before exact"><figcaption>clip前素材終端<br>exact<br>11:27.624</figcaption></figure>
+<figure><img src="stills/boundary_06/clip_before/clip_before_plus500ms.jpg" alt="clip_before plus500ms"><figcaption>clip前素材終端<br>plus500ms<br>11:28.124</figcaption></figure>
+<figure><img src="stills/boundary_06/clip_before/clip_before_plus1000ms.jpg" alt="clip_before plus1000ms"><figcaption>clip前素材終端<br>plus1000ms<br>11:28.624</figcaption></figure></div>
+</section>
+<section class="strip">
+  <h3>clip後素材開始 11:46.442</h3>
+  <audio controls src="audio/boundary_06_clip_after_pm2s.wav"></audio>
+  <div class="frames"><figure><img src="stills/boundary_06/clip_after/clip_after_minus1000ms.jpg" alt="clip_after minus1000ms"><figcaption>clip後素材開始<br>minus1000ms<br>11:45.442</figcaption></figure>
+<figure><img src="stills/boundary_06/clip_after/clip_after_minus500ms.jpg" alt="clip_after minus500ms"><figcaption>clip後素材開始<br>minus500ms<br>11:45.942</figcaption></figure>
+<figure><img src="stills/boundary_06/clip_after/clip_after_exact.jpg" alt="clip_after exact"><figcaption>clip後素材開始<br>exact<br>11:46.442</figcaption></figure>
+<figure><img src="stills/boundary_06/clip_after/clip_after_plus500ms.jpg" alt="clip_after plus500ms"><figcaption>clip後素材開始<br>plus500ms<br>11:46.942</figcaption></figure>
+<figure><img src="stills/boundary_06/clip_after/clip_after_plus1000ms.jpg" alt="clip_after plus1000ms"><figcaption>clip後素材開始<br>plus1000ms<br>11:47.442</figcaption></figure></div>
+</section>
+<section class="strip">
+  <h3>source前素材終端 78:20.965</h3>
+  <audio controls src="audio/boundary_06_source_before_pm2s.wav"></audio>
+  <div class="frames"><figure><img src="stills/boundary_06/source_before/source_before_minus1000ms.jpg" alt="source_before minus1000ms"><figcaption>source前素材終端<br>minus1000ms<br>78:19.965</figcaption></figure>
+<figure><img src="stills/boundary_06/source_before/source_before_minus500ms.jpg" alt="source_before minus500ms"><figcaption>source前素材終端<br>minus500ms<br>78:20.465</figcaption></figure>
+<figure><img src="stills/boundary_06/source_before/source_before_exact.jpg" alt="source_before exact"><figcaption>source前素材終端<br>exact<br>78:20.965</figcaption></figure>
+<figure><img src="stills/boundary_06/source_before/source_before_plus500ms.jpg" alt="source_before plus500ms"><figcaption>source前素材終端<br>plus500ms<br>78:21.465</figcaption></figure>
+<figure><img src="stills/boundary_06/source_before/source_before_plus1000ms.jpg" alt="source_before plus1000ms"><figcaption>source前素材終端<br>plus1000ms<br>78:21.965</figcaption></figure></div>
+</section>
+<section class="strip">
+  <h3>source後素材開始 78:50.747</h3>
+  <audio controls src="audio/boundary_06_source_after_pm2s.wav"></audio>
+  <div class="frames"><figure><img src="stills/boundary_06/source_after/source_after_minus1000ms.jpg" alt="source_after minus1000ms"><figcaption>source後素材開始<br>minus1000ms<br>78:49.747</figcaption></figure>
+<figure><img src="stills/boundary_06/source_after/source_after_minus500ms.jpg" alt="source_after minus500ms"><figcaption>source後素材開始<br>minus500ms<br>78:50.247</figcaption></figure>
+<figure><img src="stills/boundary_06/source_after/source_after_exact.jpg" alt="source_after exact"><figcaption>source後素材開始<br>exact<br>78:50.747</figcaption></figure>
+<figure><img src="stills/boundary_06/source_after/source_after_plus500ms.jpg" alt="source_after plus500ms"><figcaption>source後素材開始<br>plus500ms<br>78:51.247</figcaption></figure>
+<figure><img src="stills/boundary_06/source_after/source_after_plus1000ms.jpg" alt="source_after plus1000ms"><figcaption>source後素材開始<br>plus1000ms<br>78:51.747</figcaption></figure></div>
+</section>
+</article>
+</body>
+</html>

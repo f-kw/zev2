@@ -1,0 +1,52 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "豪語するマリンと驚異の確率を耐え抜く対戦相手",
+      "reason": "自分が運ゲーの覇者だと豪語するマリンに対し、対戦相手が2分の1や4分の1の確率を耐え抜き、マリンが驚愕して相手を称える一連の流れが見どころであるため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "qdczJpv8RCc",
+          "sourceStartMs": 1083870,
+          "sourceEndMs": 1209616,
+          "supportingSpeechIds": [
+            "171-172",
+            "184-185",
+            187,
+            "190-193"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "疑われることを見越して真実のカードで勝負に出るマリン",
+      "reason": "複数枚出しによる嘘の疑いを利用し、あえて「本当のカード」を出すことで裏をかこうと熱弁する心理戦のシーンが成立しているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "qdczJpv8RCc",
+          "sourceStartMs": 1209616,
+          "sourceEndMs": 1241549,
+          "supportingSpeechIds": [
+            "194-198"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-15T21:09:59+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_07_qdczJpv8RCc",
+    "windowSourceVideoId": "qdczJpv8RCc",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nE_bNeBNp4E_chat_velocity_top100_input_selection_v004/theme-llm-v002/20260715-chat-velocity-top100-third-material-v001/windows/window_07_qdczJpv8RCc-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/dd320b74cb79329e?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"豪語するマリンと驚異の確率を耐え抜く対戦相手\",\n      \"reason\": \"自分が運ゲーの覇者だと豪語するマリンに対し、対戦相手が2分の1や4分の1の確率を耐え抜き、マリンが驚愕して相手を称える一連の流れが見どころであるため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"qdczJpv8RCc\",\n          \"sourceStartMs\": 1083870,\n          \"sourceEndMs\": 1209616,\n          \"supportingSpeechIds\": [\n            \"171-172\",\n            \"184-185\",\n            187,\n            \"190-193\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"疑われることを見越して真実のカードで勝負に出るマリン\",\n      \"reason\": \"複数枚出しによる嘘の疑いを利用し、あえて「本当のカード」を出すことで裏をかこうと熱弁する心理戦のシーンが成立しているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"qdczJpv8RCc\",\n          \"sourceStartMs\": 1209616,\n          \"sourceEndMs\": 1241549,\n          \"supportingSpeechIds\": [\n            \"194-198\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

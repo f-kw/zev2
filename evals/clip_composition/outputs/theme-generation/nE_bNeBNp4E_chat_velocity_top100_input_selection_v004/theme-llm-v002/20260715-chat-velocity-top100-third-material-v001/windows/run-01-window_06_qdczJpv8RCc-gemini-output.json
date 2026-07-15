@@ -1,0 +1,49 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "マリン渾身のブラフと「釣れたよ今の！」",
+      "reason": "「エースめっちゃある」と嘘のフリをしてから嘘を見破らせる一連の流れが単独の切り抜きとして面白いため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "qdczJpv8RCc",
+          "sourceStartMs": 992626,
+          "sourceEndMs": 1030556,
+          "supportingSpeechIds": [
+            "143-159"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "「今度は本当に信じていい」再度の心理戦",
+      "reason": "前回の嘘を認めつつ「今度は本当に信じていい」と再び相手を揺さぶる交渉・言い訳が面白いため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "qdczJpv8RCc",
+          "sourceStartMs": 1050130,
+          "sourceEndMs": 1079006,
+          "supportingSpeechIds": [
+            "165-170"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-15T21:09:45+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_06_qdczJpv8RCc",
+    "windowSourceVideoId": "qdczJpv8RCc",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nE_bNeBNp4E_chat_velocity_top100_input_selection_v004/theme-llm-v002/20260715-chat-velocity-top100-third-material-v001/windows/window_06_qdczJpv8RCc-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/e01274d6ec30392a?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"マリン渾身のブラフと「釣れたよ今の！」\",\n      \"reason\": \"「エースめっちゃある」と嘘のフリをしてから嘘を見破らせる一連の流れが単独の切り抜きとして面白いため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"qdczJpv8RCc\",\n          \"sourceStartMs\": 992626,\n          \"sourceEndMs\": 1030556,\n          \"supportingSpeechIds\": [\n            \"143-159\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"「今度は本当に信じていい」再度の心理戦\",\n      \"reason\": \"前回の嘘を認めつつ「今度は本当に信じていい」と再び相手を揺さぶる交渉・言い訳が面白いため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"qdczJpv8RCc\",\n          \"sourceStartMs\": 1050130,\n          \"sourceEndMs\": 1079006,\n          \"supportingSpeechIds\": [\n            \"165-170\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

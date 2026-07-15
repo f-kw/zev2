@@ -1,0 +1,825 @@
+{
+  "kind": "chat_velocity_source_only_input_selection_plan",
+  "createdAt": "2026-07-15T11:52:24.487Z",
+  "inputSelectionVersion": "input-selection-v004",
+  "sourceVideoId": "qdczJpv8RCc",
+  "selectionMethod": {
+    "signal": "one-minute chat replay comment velocity",
+    "normalization": "relative to mean comment count of all complete one-minute intervals in the stream",
+    "ranking": "relative velocity descending, then earlier source time",
+    "absoluteThresholdUsed": false,
+    "selectionCount": 100,
+    "selectedDurationMs": 6000000,
+    "generalizationStatus": "N=100 was selected with reference to 13 expected ranges from one B-material stream; not validated for generalization"
+  },
+  "sourceOnlyGuard": {
+    "expectedUsedToCalculateRanks": false,
+    "expectedIncludedInPlan": false,
+    "chatTextIncludedInPlan": false,
+    "chatAuthorIncludedInPlan": false
+  },
+  "sourceTimeSeriesPath": "evals/clip_composition/outputs/chat-velocity-analysis/nE_bNeBNp4E-chat-velocity-generalization-20260715-v001-per-minute.csv",
+  "sourceTimeSeriesSha256": "c9630655504f8cd675f06c3ff7a23f1bb5126e7220740d841b0061d1060b5cc5",
+  "selectedRanges": [
+    {
+      "sourceVideoId": "qdczJpv8RCc",
+      "sourceStartMs": 3900000,
+      "sourceEndMs": 3960000,
+      "minuteIndex": 65,
+      "velocityRank": 1,
+      "relativeToStreamBaseline": 1.7228674631842178
+    },
+    {
+      "sourceVideoId": "qdczJpv8RCc",
+      "sourceStartMs": 1320000,
+      "sourceEndMs": 1380000,
+      "minuteIndex": 22,
+      "velocityRank": 2,
+      "relativeToStreamBaseline": 1.5938316198944151
+    },
+    {
+      "sourceVideoId": "qdczJpv8RCc",
+      "sourceStartMs": 2940000,
+      "sourceEndMs": 3000000,
+      "minuteIndex": 49,
+      "velocityRank": 3,
+      "relativeToStreamBaseline": 1.579494303973326
+    },
+    {
+      "sourceVideoId": "qdczJpv8RCc",
+      "sourceStartMs": 1260000,
+      "sourceEndMs": 1320000,
+      "minuteIndex": 21,
+      "velocityRank": 4,
+      "relativeToStreamBaseline": 1.5723256460127812
+    },
+    {
+      "sourceVideoId": "qdczJpv8RCc",
+      "sourceStartMs": 3360000,
+      "sourceEndMs": 3420000,
+      "minuteIndex": 56,
+      "velocityRank": 5,
+      "relativeToStreamBaseline": 1.5675465407057516
+    },
+    {
+      "sourceVideoId": "qdczJpv8RCc",
+      "sourceStartMs": 120000,
+      "sourceEndMs": 180000,
+      "minuteIndex": 2,
+      "velocityRank": 6,
+      "relativeToStreamBaseline": 1.5532092247846625
+    },
+    {
+      "sourceVideoId": "qdczJpv8RCc",
+      "sourceStartMs": 4800000,
+      "sourceEndMs": 4860000,
+      "minuteIndex": 80,
+      "velocityRank": 7,
+      "relativeToStreamBaseline": 1.5149763823284246
+    },
+    {
+      "sourceVideoId": "qdczJpv8RCc",
+      "sourceStartMs": 1380000,
+      "sourceEndMs": 1440000,
+      "minuteIndex": 23,
+      "velocityRank": 8,
+      "relativeToStreamBaseline": 1.5101972770213947
+    },
+    {
+      "sourceVideoId": "qdczJpv8RCc",
+      "sourceStartMs": 4140000,
+      "sourceEndMs": 4200000,
+      "minuteIndex": 69,
+      "velocityRank": 9,
+      "relativeToStreamBaseline": 1.505418171714365
+    },
+    {
+      "sourceVideoId": "qdczJpv8RCc",
+      "sourceStartMs": 4380000,
+      "sourceEndMs": 4440000,
+      "minuteIndex": 73,
+      "velocityRank": 10,
+      "relativeToStreamBaseline": 1.488691303139761
+    },
+    {
+      "sourceVideoId": "qdczJpv8RCc",
+      "sourceStartMs": 3060000,
+      "sourceEndMs": 3120000,
+      "minuteIndex": 51,
+      "velocityRank": 11,
+      "relativeToStreamBaseline": 1.4432898027229786
+    },
+    {
+      "sourceVideoId": "qdczJpv8RCc",
+      "sourceStartMs": 1080000,
+      "sourceEndMs": 1140000,
+      "minuteIndex": 18,
+      "velocityRank": 12,
+      "relativeToStreamBaseline": 1.4313420394554042
+    },
+    {
+      "sourceVideoId": "qdczJpv8RCc",
+      "sourceStartMs": 2520000,
+      "sourceEndMs": 2580000,
+      "minuteIndex": 42,
+      "velocityRank": 13,
+      "relativeToStreamBaseline": 1.41939427618783
+    },
+    {
+      "sourceVideoId": "qdczJpv8RCc",
+      "sourceStartMs": 7620000,
+      "sourceEndMs": 7680000,
+      "minuteIndex": 127,
+      "velocityRank": 14,
+      "relativeToStreamBaseline": 1.402667407613226
+    },
+    {
+      "sourceVideoId": "qdczJpv8RCc",
+      "sourceStartMs": 180000,
+      "sourceEndMs": 240000,
+      "minuteIndex": 3,
+      "velocityRank": 15,
+      "relativeToStreamBaseline": 1.397888302306196
+    },
+    {
+      "sourceVideoId": "qdczJpv8RCc",
+      "sourceStartMs": 3000000,
+      "sourceEndMs": 3060000,
+      "minuteIndex": 50,
+      "velocityRank": 16,
+      "relativeToStreamBaseline": 1.397888302306196
+    },
+    {
+      "sourceVideoId": "qdczJpv8RCc",
+      "sourceStartMs": 0,
+      "sourceEndMs": 60000,
+      "minuteIndex": 0,
+      "velocityRank": 17,
+      "relativeToStreamBaseline": 1.381161433731592
+    },
+    {
+      "sourceVideoId": "qdczJpv8RCc",
+      "sourceStartMs": 1500000,
+      "sourceEndMs": 1560000,
+      "minuteIndex": 25,
+      "velocityRank": 18,
+      "relativeToStreamBaseline": 1.381161433731592
+    },
+    {
+      "sourceVideoId": "qdczJpv8RCc",
+      "sourceStartMs": 720000,
+      "sourceEndMs": 780000,
+      "minuteIndex": 12,
+      "velocityRank": 19,
+      "relativeToStreamBaseline": 1.3548763545429285
+    },
+    {
+      "sourceVideoId": "qdczJpv8RCc",
+      "sourceStartMs": 4260000,
+      "sourceEndMs": 4320000,
+      "minuteIndex": 71,
+      "velocityRank": 20,
+      "relativeToStreamBaseline": 1.3548763545429285
+    },
+    {
+      "sourceVideoId": "qdczJpv8RCc",
+      "sourceStartMs": 600000,
+      "sourceEndMs": 660000,
+      "minuteIndex": 10,
+      "velocityRank": 21,
+      "relativeToStreamBaseline": 1.3405390386218394
+    },
+    {
+      "sourceVideoId": "qdczJpv8RCc",
+      "sourceStartMs": 4920000,
+      "sourceEndMs": 4980000,
+      "minuteIndex": 82,
+      "velocityRank": 22,
+      "relativeToStreamBaseline": 1.3190330647402055
+    },
+    {
+      "sourceVideoId": "qdczJpv8RCc",
+      "sourceStartMs": 4500000,
+      "sourceEndMs": 4560000,
+      "minuteIndex": 75,
+      "velocityRank": 23,
+      "relativeToStreamBaseline": 1.314253959433176
+    },
+    {
+      "sourceVideoId": "qdczJpv8RCc",
+      "sourceStartMs": 3240000,
+      "sourceEndMs": 3300000,
+      "minuteIndex": 54,
+      "velocityRank": 24,
+      "relativeToStreamBaseline": 1.311864406779661
+    },
+    {
+      "sourceVideoId": "qdczJpv8RCc",
+      "sourceStartMs": 7560000,
+      "sourceEndMs": 7620000,
+      "minuteIndex": 126,
+      "velocityRank": 25,
+      "relativeToStreamBaseline": 1.309474854126146
+    },
+    {
+      "sourceVideoId": "qdczJpv8RCc",
+      "sourceStartMs": 540000,
+      "sourceEndMs": 600000,
+      "minuteIndex": 9,
+      "velocityRank": 26,
+      "relativeToStreamBaseline": 1.3046957488191164
+    },
+    {
+      "sourceVideoId": "qdczJpv8RCc",
+      "sourceStartMs": 3840000,
+      "sourceEndMs": 3900000,
+      "minuteIndex": 64,
+      "velocityRank": 27,
+      "relativeToStreamBaseline": 1.3046957488191164
+    },
+    {
+      "sourceVideoId": "qdczJpv8RCc",
+      "sourceStartMs": 420000,
+      "sourceEndMs": 480000,
+      "minuteIndex": 7,
+      "velocityRank": 28,
+      "relativeToStreamBaseline": 1.2999166435120866
+    },
+    {
+      "sourceVideoId": "qdczJpv8RCc",
+      "sourceStartMs": 660000,
+      "sourceEndMs": 720000,
+      "minuteIndex": 11,
+      "velocityRank": 29,
+      "relativeToStreamBaseline": 1.278410669630453
+    },
+    {
+      "sourceVideoId": "qdczJpv8RCc",
+      "sourceStartMs": 4560000,
+      "sourceEndMs": 4620000,
+      "minuteIndex": 76,
+      "velocityRank": 30,
+      "relativeToStreamBaseline": 1.2664629063628785
+    },
+    {
+      "sourceVideoId": "qdczJpv8RCc",
+      "sourceStartMs": 60000,
+      "sourceEndMs": 120000,
+      "minuteIndex": 1,
+      "velocityRank": 31,
+      "relativeToStreamBaseline": 1.2616838010558489
+    },
+    {
+      "sourceVideoId": "qdczJpv8RCc",
+      "sourceStartMs": 360000,
+      "sourceEndMs": 420000,
+      "minuteIndex": 6,
+      "velocityRank": 32,
+      "relativeToStreamBaseline": 1.2449569324812448
+    },
+    {
+      "sourceVideoId": "qdczJpv8RCc",
+      "sourceStartMs": 240000,
+      "sourceEndMs": 300000,
+      "minuteIndex": 4,
+      "velocityRank": 33,
+      "relativeToStreamBaseline": 1.240177827174215
+    },
+    {
+      "sourceVideoId": "qdczJpv8RCc",
+      "sourceStartMs": 3660000,
+      "sourceEndMs": 3720000,
+      "minuteIndex": 61,
+      "velocityRank": 34,
+      "relativeToStreamBaseline": 1.2330091692136704
+    },
+    {
+      "sourceVideoId": "qdczJpv8RCc",
+      "sourceStartMs": 840000,
+      "sourceEndMs": 900000,
+      "minuteIndex": 14,
+      "velocityRank": 35,
+      "relativeToStreamBaseline": 1.2282300639066408
+    },
+    {
+      "sourceVideoId": "qdczJpv8RCc",
+      "sourceStartMs": 1140000,
+      "sourceEndMs": 1200000,
+      "minuteIndex": 19,
+      "velocityRank": 36,
+      "relativeToStreamBaseline": 1.223450958599611
+    },
+    {
+      "sourceVideoId": "qdczJpv8RCc",
+      "sourceStartMs": 4440000,
+      "sourceEndMs": 4500000,
+      "minuteIndex": 74,
+      "velocityRank": 37,
+      "relativeToStreamBaseline": 1.2186718532925813
+    },
+    {
+      "sourceVideoId": "qdczJpv8RCc",
+      "sourceStartMs": 1680000,
+      "sourceEndMs": 1740000,
+      "minuteIndex": 28,
+      "velocityRank": 38,
+      "relativeToStreamBaseline": 1.204334537371492
+    },
+    {
+      "sourceVideoId": "qdczJpv8RCc",
+      "sourceStartMs": 7680000,
+      "sourceEndMs": 7740000,
+      "minuteIndex": 128,
+      "velocityRank": 39,
+      "relativeToStreamBaseline": 1.1971658794109474
+    },
+    {
+      "sourceVideoId": "qdczJpv8RCc",
+      "sourceStartMs": 1440000,
+      "sourceEndMs": 1500000,
+      "minuteIndex": 24,
+      "velocityRank": 40,
+      "relativeToStreamBaseline": 1.1947763267574325
+    },
+    {
+      "sourceVideoId": "qdczJpv8RCc",
+      "sourceStartMs": 900000,
+      "sourceEndMs": 960000,
+      "minuteIndex": 15,
+      "velocityRank": 41,
+      "relativeToStreamBaseline": 1.1899972214504029
+    },
+    {
+      "sourceVideoId": "qdczJpv8RCc",
+      "sourceStartMs": 1020000,
+      "sourceEndMs": 1080000,
+      "minuteIndex": 17,
+      "velocityRank": 42,
+      "relativeToStreamBaseline": 1.1899972214504029
+    },
+    {
+      "sourceVideoId": "qdczJpv8RCc",
+      "sourceStartMs": 1980000,
+      "sourceEndMs": 2040000,
+      "minuteIndex": 33,
+      "velocityRank": 43,
+      "relativeToStreamBaseline": 1.1732703528757988
+    },
+    {
+      "sourceVideoId": "qdczJpv8RCc",
+      "sourceStartMs": 3600000,
+      "sourceEndMs": 3660000,
+      "minuteIndex": 60,
+      "velocityRank": 44,
+      "relativeToStreamBaseline": 1.170880800222284
+    },
+    {
+      "sourceVideoId": "qdczJpv8RCc",
+      "sourceStartMs": 960000,
+      "sourceEndMs": 1020000,
+      "minuteIndex": 16,
+      "velocityRank": 45,
+      "relativeToStreamBaseline": 1.1613225896082244
+    },
+    {
+      "sourceVideoId": "qdczJpv8RCc",
+      "sourceStartMs": 1800000,
+      "sourceEndMs": 1860000,
+      "minuteIndex": 30,
+      "velocityRank": 46,
+      "relativeToStreamBaseline": 1.1469852736871353
+    },
+    {
+      "sourceVideoId": "qdczJpv8RCc",
+      "sourceStartMs": 480000,
+      "sourceEndMs": 540000,
+      "minuteIndex": 8,
+      "velocityRank": 47,
+      "relativeToStreamBaseline": 1.1374270630730758
+    },
+    {
+      "sourceVideoId": "qdczJpv8RCc",
+      "sourceStartMs": 1740000,
+      "sourceEndMs": 1800000,
+      "minuteIndex": 29,
+      "velocityRank": 48,
+      "relativeToStreamBaseline": 1.1278688524590164
+    },
+    {
+      "sourceVideoId": "qdczJpv8RCc",
+      "sourceStartMs": 4620000,
+      "sourceEndMs": 4680000,
+      "minuteIndex": 77,
+      "velocityRank": 49,
+      "relativeToStreamBaseline": 1.1111419838844123
+    },
+    {
+      "sourceVideoId": "qdczJpv8RCc",
+      "sourceStartMs": 1860000,
+      "sourceEndMs": 1920000,
+      "minuteIndex": 31,
+      "velocityRank": 50,
+      "relativeToStreamBaseline": 1.0920255626562934
+    },
+    {
+      "sourceVideoId": "qdczJpv8RCc",
+      "sourceStartMs": 2100000,
+      "sourceEndMs": 2160000,
+      "minuteIndex": 35,
+      "velocityRank": 51,
+      "relativeToStreamBaseline": 1.0752986940816893
+    },
+    {
+      "sourceVideoId": "qdczJpv8RCc",
+      "sourceStartMs": 4080000,
+      "sourceEndMs": 4140000,
+      "minuteIndex": 68,
+      "velocityRank": 52,
+      "relativeToStreamBaseline": 1.0752986940816893
+    },
+    {
+      "sourceVideoId": "qdczJpv8RCc",
+      "sourceStartMs": 1200000,
+      "sourceEndMs": 1260000,
+      "minuteIndex": 20,
+      "velocityRank": 53,
+      "relativeToStreamBaseline": 1.0729091414281744
+    },
+    {
+      "sourceVideoId": "qdczJpv8RCc",
+      "sourceStartMs": 4320000,
+      "sourceEndMs": 4380000,
+      "minuteIndex": 72,
+      "velocityRank": 54,
+      "relativeToStreamBaseline": 1.0537927202000557
+    },
+    {
+      "sourceVideoId": "qdczJpv8RCc",
+      "sourceStartMs": 1560000,
+      "sourceEndMs": 1620000,
+      "minuteIndex": 26,
+      "velocityRank": 55,
+      "relativeToStreamBaseline": 1.0370658516254516
+    },
+    {
+      "sourceVideoId": "qdczJpv8RCc",
+      "sourceStartMs": 2460000,
+      "sourceEndMs": 2520000,
+      "minuteIndex": 41,
+      "velocityRank": 56,
+      "relativeToStreamBaseline": 1.0227285357043623
+    },
+    {
+      "sourceVideoId": "qdczJpv8RCc",
+      "sourceStartMs": 2340000,
+      "sourceEndMs": 2400000,
+      "minuteIndex": 39,
+      "velocityRank": 57,
+      "relativeToStreamBaseline": 1.0203389830508474
+    },
+    {
+      "sourceVideoId": "qdczJpv8RCc",
+      "sourceStartMs": 780000,
+      "sourceEndMs": 840000,
+      "minuteIndex": 13,
+      "velocityRank": 58,
+      "relativeToStreamBaseline": 1.0179494303973327
+    },
+    {
+      "sourceVideoId": "qdczJpv8RCc",
+      "sourceStartMs": 3420000,
+      "sourceEndMs": 3480000,
+      "minuteIndex": 57,
+      "velocityRank": 59,
+      "relativeToStreamBaseline": 1.0155598777438177
+    },
+    {
+      "sourceVideoId": "qdczJpv8RCc",
+      "sourceStartMs": 2820000,
+      "sourceEndMs": 2880000,
+      "minuteIndex": 47,
+      "velocityRank": 60,
+      "relativeToStreamBaseline": 1.0131703250903028
+    },
+    {
+      "sourceVideoId": "qdczJpv8RCc",
+      "sourceStartMs": 4200000,
+      "sourceEndMs": 4260000,
+      "minuteIndex": 70,
+      "velocityRank": 61,
+      "relativeToStreamBaseline": 1.0131703250903028
+    },
+    {
+      "sourceVideoId": "qdczJpv8RCc",
+      "sourceStartMs": 5100000,
+      "sourceEndMs": 5160000,
+      "minuteIndex": 85,
+      "velocityRank": 62,
+      "relativeToStreamBaseline": 1.0060016671297582
+    },
+    {
+      "sourceVideoId": "qdczJpv8RCc",
+      "sourceStartMs": 3120000,
+      "sourceEndMs": 3180000,
+      "minuteIndex": 52,
+      "velocityRank": 63,
+      "relativeToStreamBaseline": 1.0036121144762433
+    },
+    {
+      "sourceVideoId": "qdczJpv8RCc",
+      "sourceStartMs": 4740000,
+      "sourceEndMs": 4800000,
+      "minuteIndex": 79,
+      "velocityRank": 64,
+      "relativeToStreamBaseline": 1.0036121144762433
+    },
+    {
+      "sourceVideoId": "qdczJpv8RCc",
+      "sourceStartMs": 5220000,
+      "sourceEndMs": 5280000,
+      "minuteIndex": 87,
+      "velocityRank": 65,
+      "relativeToStreamBaseline": 0.9868852459016393
+    },
+    {
+      "sourceVideoId": "qdczJpv8RCc",
+      "sourceStartMs": 5520000,
+      "sourceEndMs": 5580000,
+      "minuteIndex": 92,
+      "velocityRank": 66,
+      "relativeToStreamBaseline": 0.9844956932481245
+    },
+    {
+      "sourceVideoId": "qdczJpv8RCc",
+      "sourceStartMs": 3720000,
+      "sourceEndMs": 3780000,
+      "minuteIndex": 62,
+      "velocityRank": 67,
+      "relativeToStreamBaseline": 0.9677688246735204
+    },
+    {
+      "sourceVideoId": "qdczJpv8RCc",
+      "sourceStartMs": 6120000,
+      "sourceEndMs": 6180000,
+      "minuteIndex": 102,
+      "velocityRank": 68,
+      "relativeToStreamBaseline": 0.9677688246735204
+    },
+    {
+      "sourceVideoId": "qdczJpv8RCc",
+      "sourceStartMs": 3540000,
+      "sourceEndMs": 3600000,
+      "minuteIndex": 59,
+      "velocityRank": 69,
+      "relativeToStreamBaseline": 0.9629897193664907
+    },
+    {
+      "sourceVideoId": "qdczJpv8RCc",
+      "sourceStartMs": 1620000,
+      "sourceEndMs": 1680000,
+      "minuteIndex": 27,
+      "velocityRank": 70,
+      "relativeToStreamBaseline": 0.9606001667129758
+    },
+    {
+      "sourceVideoId": "qdczJpv8RCc",
+      "sourceStartMs": 5940000,
+      "sourceEndMs": 6000000,
+      "minuteIndex": 99,
+      "velocityRank": 71,
+      "relativeToStreamBaseline": 0.9606001667129758
+    },
+    {
+      "sourceVideoId": "qdczJpv8RCc",
+      "sourceStartMs": 4680000,
+      "sourceEndMs": 4740000,
+      "minuteIndex": 78,
+      "velocityRank": 72,
+      "relativeToStreamBaseline": 0.958210614059461
+    },
+    {
+      "sourceVideoId": "qdczJpv8RCc",
+      "sourceStartMs": 2220000,
+      "sourceEndMs": 2280000,
+      "minuteIndex": 37,
+      "velocityRank": 73,
+      "relativeToStreamBaseline": 0.9343150875243122
+    },
+    {
+      "sourceVideoId": "qdczJpv8RCc",
+      "sourceStartMs": 2280000,
+      "sourceEndMs": 2340000,
+      "minuteIndex": 38,
+      "velocityRank": 74,
+      "relativeToStreamBaseline": 0.9319255348707974
+    },
+    {
+      "sourceVideoId": "qdczJpv8RCc",
+      "sourceStartMs": 2640000,
+      "sourceEndMs": 2700000,
+      "minuteIndex": 44,
+      "velocityRank": 75,
+      "relativeToStreamBaseline": 0.9175882189497082
+    },
+    {
+      "sourceVideoId": "qdczJpv8RCc",
+      "sourceStartMs": 5280000,
+      "sourceEndMs": 5340000,
+      "minuteIndex": 88,
+      "velocityRank": 76,
+      "relativeToStreamBaseline": 0.9128091136426785
+    },
+    {
+      "sourceVideoId": "qdczJpv8RCc",
+      "sourceStartMs": 4860000,
+      "sourceEndMs": 4920000,
+      "minuteIndex": 81,
+      "velocityRank": 77,
+      "relativeToStreamBaseline": 0.9104195609891637
+    },
+    {
+      "sourceVideoId": "qdczJpv8RCc",
+      "sourceStartMs": 2040000,
+      "sourceEndMs": 2100000,
+      "minuteIndex": 34,
+      "velocityRank": 78,
+      "relativeToStreamBaseline": 0.9080300083356487
+    },
+    {
+      "sourceVideoId": "qdczJpv8RCc",
+      "sourceStartMs": 6240000,
+      "sourceEndMs": 6300000,
+      "minuteIndex": 104,
+      "velocityRank": 79,
+      "relativeToStreamBaseline": 0.8936926924145596
+    },
+    {
+      "sourceVideoId": "qdczJpv8RCc",
+      "sourceStartMs": 2760000,
+      "sourceEndMs": 2820000,
+      "minuteIndex": 46,
+      "velocityRank": 80,
+      "relativeToStreamBaseline": 0.8913031397610447
+    },
+    {
+      "sourceVideoId": "qdczJpv8RCc",
+      "sourceStartMs": 6180000,
+      "sourceEndMs": 6240000,
+      "minuteIndex": 103,
+      "velocityRank": 81,
+      "relativeToStreamBaseline": 0.886524034454015
+    },
+    {
+      "sourceVideoId": "qdczJpv8RCc",
+      "sourceStartMs": 7380000,
+      "sourceEndMs": 7440000,
+      "minuteIndex": 123,
+      "velocityRank": 82,
+      "relativeToStreamBaseline": 0.8841344818005001
+    },
+    {
+      "sourceVideoId": "qdczJpv8RCc",
+      "sourceStartMs": 3960000,
+      "sourceEndMs": 4020000,
+      "minuteIndex": 66,
+      "velocityRank": 83,
+      "relativeToStreamBaseline": 0.8769658238399556
+    },
+    {
+      "sourceVideoId": "qdczJpv8RCc",
+      "sourceStartMs": 6540000,
+      "sourceEndMs": 6600000,
+      "minuteIndex": 109,
+      "velocityRank": 84,
+      "relativeToStreamBaseline": 0.8626285079188664
+    },
+    {
+      "sourceVideoId": "qdczJpv8RCc",
+      "sourceStartMs": 6300000,
+      "sourceEndMs": 6360000,
+      "minuteIndex": 105,
+      "velocityRank": 85,
+      "relativeToStreamBaseline": 0.8554598499583218
+    },
+    {
+      "sourceVideoId": "qdczJpv8RCc",
+      "sourceStartMs": 2160000,
+      "sourceEndMs": 2220000,
+      "minuteIndex": 36,
+      "velocityRank": 86,
+      "relativeToStreamBaseline": 0.8482911919977771
+    },
+    {
+      "sourceVideoId": "qdczJpv8RCc",
+      "sourceStartMs": 3300000,
+      "sourceEndMs": 3360000,
+      "minuteIndex": 55,
+      "velocityRank": 87,
+      "relativeToStreamBaseline": 0.8482911919977771
+    },
+    {
+      "sourceVideoId": "qdczJpv8RCc",
+      "sourceStartMs": 5820000,
+      "sourceEndMs": 5880000,
+      "minuteIndex": 97,
+      "velocityRank": 88,
+      "relativeToStreamBaseline": 0.8411225340372326
+    },
+    {
+      "sourceVideoId": "qdczJpv8RCc",
+      "sourceStartMs": 300000,
+      "sourceEndMs": 360000,
+      "minuteIndex": 5,
+      "velocityRank": 89,
+      "relativeToStreamBaseline": 0.8243956654626285
+    },
+    {
+      "sourceVideoId": "qdczJpv8RCc",
+      "sourceStartMs": 2880000,
+      "sourceEndMs": 2940000,
+      "minuteIndex": 48,
+      "velocityRank": 90,
+      "relativeToStreamBaseline": 0.8220061128091136
+    },
+    {
+      "sourceVideoId": "qdczJpv8RCc",
+      "sourceStartMs": 5160000,
+      "sourceEndMs": 5220000,
+      "minuteIndex": 86,
+      "velocityRank": 91,
+      "relativeToStreamBaseline": 0.8100583495415393
+    },
+    {
+      "sourceVideoId": "qdczJpv8RCc",
+      "sourceStartMs": 5640000,
+      "sourceEndMs": 5700000,
+      "minuteIndex": 94,
+      "velocityRank": 92,
+      "relativeToStreamBaseline": 0.8028896915809948
+    },
+    {
+      "sourceVideoId": "qdczJpv8RCc",
+      "sourceStartMs": 3480000,
+      "sourceEndMs": 3540000,
+      "minuteIndex": 58,
+      "velocityRank": 93,
+      "relativeToStreamBaseline": 0.7933314809669353
+    },
+    {
+      "sourceVideoId": "qdczJpv8RCc",
+      "sourceStartMs": 4980000,
+      "sourceEndMs": 5040000,
+      "minuteIndex": 83,
+      "velocityRank": 94,
+      "relativeToStreamBaseline": 0.7837732703528758
+    },
+    {
+      "sourceVideoId": "qdczJpv8RCc",
+      "sourceStartMs": 2700000,
+      "sourceEndMs": 2760000,
+      "minuteIndex": 45,
+      "velocityRank": 95,
+      "relativeToStreamBaseline": 0.7766046123923313
+    },
+    {
+      "sourceVideoId": "qdczJpv8RCc",
+      "sourceStartMs": 4020000,
+      "sourceEndMs": 4080000,
+      "minuteIndex": 67,
+      "velocityRank": 96,
+      "relativeToStreamBaseline": 0.7694359544317866
+    },
+    {
+      "sourceVideoId": "qdczJpv8RCc",
+      "sourceStartMs": 5340000,
+      "sourceEndMs": 5400000,
+      "minuteIndex": 89,
+      "velocityRank": 97,
+      "relativeToStreamBaseline": 0.7574881911642123
+    },
+    {
+      "sourceVideoId": "qdczJpv8RCc",
+      "sourceStartMs": 5400000,
+      "sourceEndMs": 5460000,
+      "minuteIndex": 90,
+      "velocityRank": 98,
+      "relativeToStreamBaseline": 0.7527090858571825
+    },
+    {
+      "sourceVideoId": "qdczJpv8RCc",
+      "sourceStartMs": 5700000,
+      "sourceEndMs": 5760000,
+      "minuteIndex": 95,
+      "velocityRank": 99,
+      "relativeToStreamBaseline": 0.7359822172825785
+    },
+    {
+      "sourceVideoId": "qdczJpv8RCc",
+      "sourceStartMs": 7440000,
+      "sourceEndMs": 7500000,
+      "minuteIndex": 124,
+      "velocityRank": 100,
+      "relativeToStreamBaseline": 0.7335926646290636
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "マリンを疑うリスナーにキレ散らかす宝鐘マリン",
+      "reason": "自分を疑って生き残ろうとするリスナーに対し、理不尽に激怒しながら「マリンが好きなんじゃなかったのか」と問い詰めるシーンが切り抜きとしてユーモラスで成立しやすいため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "qdczJpv8RCc",
+          "sourceStartMs": 4080650,
+          "sourceEndMs": 4100384,
+          "supportingSpeechIds": [
+            "653-661"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "戌神ころねファンのリスナーに「浮気」と詰め寄るマリン",
+      "reason": "ころねリスナーである参加者に対し、他の女（マリン）と遊んでいることを「浮気」と執拗にイジり、ころねを引き合いに出して揺さぶりをかける会話の掛け合いが面白いため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "qdczJpv8RCc",
+          "sourceStartMs": 4123746,
+          "sourceEndMs": 4198226,
+          "supportingSpeechIds": [
+            "664-668"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-15T22:05:17+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_22_qdczJpv8RCc",
+    "windowSourceVideoId": "qdczJpv8RCc",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nE_bNeBNp4E_chat_velocity_top100_input_selection_v004/theme-llm-v002/20260715-chat-velocity-top100-third-material-v001/windows/window_22_qdczJpv8RCc-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/448c6c0d2455a9d5?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"マリンを疑うリスナーにキレ散らかす宝鐘マリン\",\n      \"reason\": \"自分を疑って生き残ろうとするリスナーに対し、理不尽に激怒しながら「マリンが好きなんじゃなかったのか」と問い詰めるシーンが切り抜きとしてユーモラスで成立しやすいため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"qdczJpv8RCc\",\n          \"sourceStartMs\": 4080650,\n          \"sourceEndMs\": 4100384,\n          \"supportingSpeechIds\": [\n            \"653-661\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"戌神ころねファンのリスナーに「浮気」と詰め寄るマリン\",\n      \"reason\": \"ころねリスナーである参加者に対し、他の女（マリン）と遊んでいることを「浮気」と執拗にイジり、ころねを引き合いに出して揺さぶりをかける会話の掛け合いが面白いため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"qdczJpv8RCc\",\n          \"sourceStartMs\": 4123746,\n          \"sourceEndMs\": 4198226,\n          \"supportingSpeechIds\": [\n            \"664-668\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

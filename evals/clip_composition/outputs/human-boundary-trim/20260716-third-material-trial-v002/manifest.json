@@ -1,0 +1,174 @@
+{
+  "kind": "third_material_hand_trim_trial_manifest",
+  "version": "human-boundary-trim-v002-third-material-ui-v004",
+  "createdAt": "2026-07-15T15:48:19.150Z",
+  "sourceRanking": "evals/clip_composition/outputs/candidate-ranking/20260716-third-material-run1-v002/result.json",
+  "question": "AIの場面の外側境界を文字位置で調整し、同じ場面内のカット・無音除去を行えば公開候補にできるか。離れた別場面が必要なら文脈不足として分ける。",
+  "decisions": [
+    "区間内編集で公開候補",
+    "選ばない",
+    "文脈不明（別場面が必要）"
+  ],
+  "humanWork": {
+    "totalDecisionCount": 7,
+    "thirdMaterialDecisionCount": 5,
+    "reproducibilityControlCount": 2,
+    "baselineEstimateMinutesPerDecision": 3,
+    "totalBaselineEstimateMinutes": 21,
+    "thirdMaterialTimeLimitMinutes": 15,
+    "sessionDecisionCounts": [
+      5,
+      2
+    ],
+    "note": "UIは時間を計測しない。第三素材5件だけを15分条件で判定し、既判定2件は再現性を別集計する。"
+  },
+  "uiContract": {
+    "boundarySelection": "complete utterance context with selectable timed character positions; reviewer avoids mid-word boundaries",
+    "humanTimeDisplay": "HH:MM:SS",
+    "boundaryInput": "no numeric input",
+    "playback": "explicit buttons; next-candidate navigation autoplays next AI range",
+    "adjacentContext": "30-second chunks expandable to source edges; not treated as default solution",
+    "videoSizing": "max-height:min(38vh,420px); object-fit:contain",
+    "serverPersistence": false,
+    "resultDelivery": "copy to chat",
+    "interactionTimingRecorded": false,
+    "sessionAutoAdvance": false
+  },
+  "sessions": [
+    {
+      "sessionId": "session-1",
+      "page": "session-1.html",
+      "decisionCount": 5,
+      "taskIds": [
+        "nE_bNeBNp4E_multiblock_material_v001__candidate-035",
+        "nOEWCNc77MI_multiblock_material_v001__candidate-032",
+        "nE_bNeBNp4E_multiblock_material_v001__candidate-047",
+        "9dtwF5Exu5w_multiblock_material_v001__candidate-014",
+        "nE_bNeBNp4E_multiblock_material_v001__candidate-059"
+      ]
+    },
+    {
+      "sessionId": "session-2",
+      "page": "session-2.html",
+      "decisionCount": 2,
+      "taskIds": [
+        "nE_bNeBNp4E_multiblock_material_v001__candidate-010",
+        "nE_bNeBNp4E_multiblock_material_v001__candidate-054"
+      ]
+    }
+  ],
+  "tasks": [
+    {
+      "id": "nE_bNeBNp4E_multiblock_material_v001__candidate-035",
+      "fixtureId": "nE_bNeBNp4E_multiblock_material_v001",
+      "candidateId": 35,
+      "title": "友情崩壊？まさかの裏切りにブチギレるマリン",
+      "reason": "お互いに嘘をつかない約束で友情が芽生えた直後、裏切られて「友達じゃない！」と怒声をあげる落差が切り抜きとして非常に映えるため。",
+      "sourceVideoId": "qdczJpv8RCc",
+      "sourceChunkCount": 259,
+      "sourceDurationMs": 7760401,
+      "initialFirstChunk": 98,
+      "initialLastChunk": 101,
+      "provisionalStartMs": 2975023,
+      "provisionalEndMs": 3014776,
+      "role": "third-material-scored-item",
+      "rank": 1
+    },
+    {
+      "id": "nE_bNeBNp4E_multiblock_material_v001__candidate-047",
+      "fixtureId": "nE_bNeBNp4E_multiblock_material_v001",
+      "candidateId": 47,
+      "title": "戌神ころねファンのリスナーに「浮気」と詰め寄るマリン",
+      "reason": "ころねリスナーである参加者に対し、他の女（マリン）と遊んでいることを「浮気」と執拗にイジり、ころねを引き合いに出して揺さぶりをかける会話の掛け合いが面白いため。",
+      "sourceVideoId": "qdczJpv8RCc",
+      "sourceChunkCount": 259,
+      "sourceDurationMs": 7760401,
+      "initialFirstChunk": 136,
+      "initialLastChunk": 140,
+      "provisionalStartMs": 4123746,
+      "provisionalEndMs": 4198226,
+      "role": "third-material-scored-item",
+      "rank": 2
+    },
+    {
+      "id": "nE_bNeBNp4E_multiblock_material_v001__candidate-059",
+      "fixtureId": "nE_bNeBNp4E_multiblock_material_v001",
+      "candidateId": 59,
+      "title": "マリンのADHD的？な片付け事情と無意識の脱衣",
+      "reason": "引越し後の片付けで同時並行してあちこち手をつけてしまう癖を語りつつ、トーク中に無意識に服を脱いで寒がっているという驚きの私生活と天然な行動が面白いため。",
+      "sourceVideoId": "qdczJpv8RCc",
+      "sourceChunkCount": 259,
+      "sourceDurationMs": 7760401,
+      "initialFirstChunk": 197,
+      "initialLastChunk": 200,
+      "provisionalStartMs": 5941162,
+      "provisionalEndMs": 5992736,
+      "role": "third-material-scored-item",
+      "rank": 3
+    },
+    {
+      "id": "nE_bNeBNp4E_multiblock_material_v001__candidate-010",
+      "fixtureId": "nE_bNeBNp4E_multiblock_material_v001",
+      "candidateId": 10,
+      "title": "「なんで」連呼からのロシアンルーレット生存と狂気の勝利宣言",
+      "reason": "執拗な「なんで」の連呼からロシアンルーレットを引き当てて生き残り、一転して過激な言葉で大喜びする感情の起伏が非常に激しく切り抜きに最適なため。",
+      "sourceVideoId": "qdczJpv8RCc",
+      "sourceChunkCount": 259,
+      "sourceDurationMs": 7760401,
+      "initialFirstChunk": 24,
+      "initialLastChunk": 26,
+      "provisionalStartMs": 750246,
+      "provisionalEndMs": 778234,
+      "role": "third-material-scored-item",
+      "rank": 4
+    },
+    {
+      "id": "nE_bNeBNp4E_multiblock_material_v001__candidate-054",
+      "fixtureId": "nE_bNeBNp4E_multiblock_material_v001",
+      "candidateId": 54,
+      "title": "白銀ノエルのASMRマイクを仮パク中のマリン船長",
+      "reason": "引っ越しにより防音環境が改善した話題から、団長（白銀ノエル）からASMRマイクを買い取らずに「仮パク」状態であるというコミカルな関係性が明かされているため。",
+      "sourceVideoId": "qdczJpv8RCc",
+      "sourceChunkCount": 259,
+      "sourceDurationMs": 7760401,
+      "initialFirstChunk": 176,
+      "initialLastChunk": 178,
+      "provisionalStartMs": 5310034,
+      "provisionalEndMs": 5339442,
+      "role": "third-material-scored-item",
+      "rank": 5
+    },
+    {
+      "id": "nOEWCNc77MI_multiblock_material_v001__candidate-032",
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateId": 32,
+      "title": "マリンの甘い言葉に急に冷たくなるころねと連呼される「キモい」",
+      "reason": "宝鐘マリンのロマンチックなアプローチに対して戌神ころねが急に態度を冷たくし、「キモい」と激しく連呼する二人の温度差がコミカルで切り抜きとして成立するため。",
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceChunkCount": 395,
+      "sourceDurationMs": 11824121,
+      "initialFirstChunk": 92,
+      "initialLastChunk": 95,
+      "provisionalStartMs": 2790074,
+      "provisionalEndMs": 2848146,
+      "role": "reproducibility-control"
+    },
+    {
+      "id": "9dtwF5Exu5w_multiblock_material_v001__candidate-014",
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateId": 14,
+      "title": "アドバイス起因の荒れを懸念し、こよりへの相談をやめるマリン",
+      "reason": "こよりのアドバイスで育成がうまくいかなかった場合に彼女が叩かれるリスクを考慮し、優しさから相談をやめて星街すいせい（きまち）と決めることを選ぶ場面です。",
+      "sourceVideoId": "o8rZAhARXAc",
+      "sourceChunkCount": 397,
+      "sourceDurationMs": 11898441,
+      "initialFirstChunk": 123,
+      "initialLastChunk": 127,
+      "provisionalStartMs": 3723879,
+      "provisionalEndMs": 3794866,
+      "role": "reproducibility-control"
+    }
+  ],
+  "controlReferencePath": "evals/clip_composition/outputs/human-boundary-trim/20260716-third-material-trial-v002/control-reference.json",
+  "fixtureAndExpectedChanges": false
+}

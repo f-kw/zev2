@@ -1,0 +1,49 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "友情崩壊？まさかの裏切りにブチギレるマリン",
+      "reason": "お互いに嘘をつかない約束で友情が芽生えた直後、裏切られて「友達じゃない！」と怒声をあげる落差が切り抜きとして非常に映えるため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "qdczJpv8RCc",
+          "sourceStartMs": 2975023,
+          "sourceEndMs": 3014776,
+          "supportingSpeechIds": [
+            "540-548"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "手札最強アピールからの怒涛の煽りプレイで勝利",
+      "reason": "最強の手札を確信したマリンが、相手を「バーカ」と煽り倒しながら見事に勝利を収めて歓喜する一連の流れが面白いから。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "qdczJpv8RCc",
+          "sourceStartMs": 3025623,
+          "sourceEndMs": 3119740,
+          "supportingSpeechIds": [
+            "550-554"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-15T21:33:32+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_18_qdczJpv8RCc",
+    "windowSourceVideoId": "qdczJpv8RCc",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nE_bNeBNp4E_chat_velocity_top100_input_selection_v004/theme-llm-v002/20260715-chat-velocity-top100-third-material-v001/windows/window_18_qdczJpv8RCc-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/afb56c17a1fa0d69?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"友情崩壊？まさかの裏切りにブチギレるマリン\",\n      \"reason\": \"お互いに嘘をつかない約束で友情が芽生えた直後、裏切られて「友達じゃない！」と怒声をあげる落差が切り抜きとして非常に映えるため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"qdczJpv8RCc\",\n          \"sourceStartMs\": 2975023,\n          \"sourceEndMs\": 3014776,\n          \"supportingSpeechIds\": [\n            \"540-548\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"手札最強アピールからの怒涛の煽りプレイで勝利\",\n      \"reason\": \"最強の手札を確信したマリンが、相手を「バーカ」と煽り倒しながら見事に勝利を収めて歓喜する一連の流れが面白いから。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"qdczJpv8RCc\",\n          \"sourceStartMs\": 3025623,\n          \"sourceEndMs\": 3119740,\n          \"supportingSpeechIds\": [\n            \"550-554\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

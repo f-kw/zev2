@@ -1,0 +1,49 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "他のホロメンのリスナーに浮気疑惑を突きつけるマリン",
+      "reason": "コロネスキーや星読みの視聴者に対し、他の女（マリン）の配信を見ている浮気行為や掟について問い詰めて盛り上がっているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "qdczJpv8RCc",
+          "sourceStartMs": 4445826,
+          "sourceEndMs": 4524421,
+          "supportingSpeechIds": [
+            "696-703"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "コロネに密告すると脅され喜ぶリスナーに拗ねるマリン",
+      "reason": "マリンの配信に来たコロネスキーに対し「コロネに言っちゃおう」と脅すも、逆に喜ばれて報告をやめるというリスナーとの面白い掛け合いが生じているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "qdczJpv8RCc",
+          "sourceStartMs": 4541042,
+          "sourceEndMs": 4619286,
+          "supportingSpeechIds": [
+            "704-706"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-15T22:05:31+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_23_qdczJpv8RCc",
+    "windowSourceVideoId": "qdczJpv8RCc",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nE_bNeBNp4E_chat_velocity_top100_input_selection_v004/theme-llm-v002/20260715-chat-velocity-top100-third-material-v001/windows/window_23_qdczJpv8RCc-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/a9880830211767d3?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"他のホロメンのリスナーに浮気疑惑を突きつけるマリン\",\n      \"reason\": \"コロネスキーや星読みの視聴者に対し、他の女（マリン）の配信を見ている浮気行為や掟について問い詰めて盛り上がっているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"qdczJpv8RCc\",\n          \"sourceStartMs\": 4445826,\n          \"sourceEndMs\": 4524421,\n          \"supportingSpeechIds\": [\n            \"696-703\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"コロネに密告すると脅され喜ぶリスナーに拗ねるマリン\",\n      \"reason\": \"マリンの配信に来たコロネスキーに対し「コロネに言っちゃおう」と脅すも、逆に喜ばれて報告をやめるというリスナーとの面白い掛け合いが生じているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"qdczJpv8RCc\",\n          \"sourceStartMs\": 4541042,\n          \"sourceEndMs\": 4619286,\n          \"supportingSpeechIds\": [\n            \"704-706\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

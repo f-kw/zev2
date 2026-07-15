@@ -1,0 +1,874 @@
+{
+  "draftId": "nE_bNeBNp4E_multiblock_material_v001",
+  "fixtureId": "nE_bNeBNp4E_multiblock_material_v001",
+  "expectedCuts": [
+    {
+      "sourceStartMs": 3932652,
+      "sourceEndMs": 3987910,
+      "reason": "人間が切り抜き側と元配信側で同じ素材と確認した素材ブロックのため。",
+      "sourceVideoId": "qdczJpv8RCc",
+      "sourceUrl": "https://www.youtube.com/watch?v=qdczJpv8RCc",
+      "sourceSttId": "nE_bNeBNp4E_qdczJpv8RCc_local30_v001",
+      "clipId": "nE_bNeBNp4E",
+      "clipUrl": "https://www.youtube.com/watch?v=nE_bNeBNp4E",
+      "verificationStatus": "multiblock_material_human_confirmed",
+      "usableForClipLocationEval": true,
+      "usableForCompositionPromptEval": true,
+      "multicutPartIndex": 0,
+      "clipStartMs": 90098,
+      "clipEndMs": 137396,
+      "qualityGrade": "material_block_granularity",
+      "boundaryPrecision": {
+        "grade": "material_block_granularity",
+        "meaning": "素材対応の切り替わりを表す粒度。細かい詰めは境界にしない。"
+      },
+      "label": "block 1",
+      "materialBlock": {
+        "blockIndex": 1,
+        "matchedWordPairCount": 157,
+        "internalGapMs": {
+          "sourceExtraInsideMs": 4880,
+          "clipExtraInsideMs": 408,
+          "note": "同一素材ブロック内でsource側の進みがclip側より大きい分は、切り抜き内部の詰め候補として扱う。境界にはしない。"
+        },
+        "internalTransitions": [
+          {
+            "fromRun": 212,
+            "toRun": 213,
+            "clipGapMs": 0,
+            "sourceGapMs": 0,
+            "materialJumpMs": 0
+          },
+          {
+            "fromRun": 213,
+            "toRun": 215,
+            "clipGapMs": 15216,
+            "sourceGapMs": 20096,
+            "materialJumpMs": 4880
+          },
+          {
+            "fromRun": 215,
+            "toRun": 216,
+            "clipGapMs": 0,
+            "sourceGapMs": 0,
+            "materialJumpMs": 0
+          },
+          {
+            "fromRun": 216,
+            "toRun": 218,
+            "clipGapMs": 1129,
+            "sourceGapMs": 721,
+            "materialJumpMs": -408
+          }
+        ],
+        "runIndexes": [
+          212,
+          213,
+          215,
+          216,
+          218
+        ]
+      },
+      "humanVerification": {
+        "status": "confirmed",
+        "checkedBy": "kawafmm",
+        "checkedAt": "2026-07-15",
+        "method": "境界確認パッケージの動画・音声確認と明示的な最終凍結承認",
+        "note": "人間確認でblock 2を不採用とし、block 1・3・4・5・6・7を採用した。boundary 4は切り抜き側の場面切替だけ判定不能だったが、前後の素材対応と元配信位置切替が一致し、素材ジャンプ13828msが既定の10000ms以上であることを根拠に、最終承認で採用した。固定テーマ表記はLiar's Barへ正規化することも同時承認された。",
+        "acceptedBlocks": [
+          1,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "rejectedBlocks": [
+          2
+        ],
+        "unresolvedBlocks": [],
+        "confirmedBoundaries": [
+          3,
+          4,
+          5,
+          6
+        ],
+        "rejectedBoundaries": [
+          1,
+          2
+        ],
+        "unresolvedBoundaries": [],
+        "materialBlocksPath": "evals/clip_composition/outputs/material-blocks-nE_bNeBNp4E-20260715-full-local-stt-material-blocks-v001.json",
+        "materialBlocksSha256": "1980b61b3c3e5c2a1e8a9ed1a12998dc02c720bb1452c57c114e5938da499714",
+        "reviewPackagePath": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/index.html",
+        "reviewPackageSha256": "10734634d7f89163e15a5df17318a5fd48f901979016162deb34ce25a3a74c7e"
+      }
+    },
+    {
+      "sourceStartMs": 4070075,
+      "sourceEndMs": 4198226,
+      "reason": "人間が切り抜き側と元配信側で同じ素材と確認した素材ブロックのため。",
+      "sourceVideoId": "qdczJpv8RCc",
+      "sourceUrl": "https://www.youtube.com/watch?v=qdczJpv8RCc",
+      "sourceSttId": "nE_bNeBNp4E_qdczJpv8RCc_local30_v001",
+      "clipId": "nE_bNeBNp4E",
+      "clipUrl": "https://www.youtube.com/watch?v=nE_bNeBNp4E",
+      "verificationStatus": "multiblock_material_human_confirmed",
+      "usableForClipLocationEval": true,
+      "usableForCompositionPromptEval": true,
+      "multicutPartIndex": 1,
+      "clipStartMs": 188483,
+      "clipEndMs": 298173,
+      "qualityGrade": "material_block_granularity",
+      "boundaryPrecision": {
+        "grade": "material_block_granularity",
+        "meaning": "素材対応の切り替わりを表す粒度。細かい詰めは境界にしない。"
+      },
+      "label": "block 3",
+      "materialBlock": {
+        "blockIndex": 3,
+        "matchedWordPairCount": 300,
+        "internalGapMs": {
+          "sourceExtraInsideMs": 17086,
+          "clipExtraInsideMs": 261,
+          "note": "同一素材ブロック内でsource側の進みがclip側より大きい分は、切り抜き内部の詰め候補として扱う。境界にはしない。"
+        },
+        "internalTransitions": [
+          {
+            "fromRun": 235,
+            "toRun": 236,
+            "clipGapMs": 440,
+            "sourceGapMs": 300,
+            "materialJumpMs": -140
+          },
+          {
+            "fromRun": 236,
+            "toRun": 238,
+            "clipGapMs": 3225,
+            "sourceGapMs": 3363,
+            "materialJumpMs": 138
+          },
+          {
+            "fromRun": 238,
+            "toRun": 241,
+            "clipGapMs": 4242,
+            "sourceGapMs": 4183,
+            "materialJumpMs": -59
+          },
+          {
+            "fromRun": 241,
+            "toRun": 242,
+            "clipGapMs": 200,
+            "sourceGapMs": 4523,
+            "materialJumpMs": 4323
+          },
+          {
+            "fromRun": 242,
+            "toRun": 246,
+            "clipGapMs": 6249,
+            "sourceGapMs": 15796,
+            "materialJumpMs": 9547
+          },
+          {
+            "fromRun": 246,
+            "toRun": 248,
+            "clipGapMs": 3166,
+            "sourceGapMs": 5562,
+            "materialJumpMs": 2396
+          },
+          {
+            "fromRun": 248,
+            "toRun": 252,
+            "clipGapMs": 21910,
+            "sourceGapMs": 22592,
+            "materialJumpMs": 682
+          },
+          {
+            "fromRun": 252,
+            "toRun": 259,
+            "clipGapMs": 2644,
+            "sourceGapMs": 2582,
+            "materialJumpMs": -62
+          }
+        ],
+        "runIndexes": [
+          235,
+          236,
+          238,
+          241,
+          242,
+          246,
+          248,
+          252,
+          259
+        ]
+      },
+      "humanVerification": {
+        "status": "confirmed",
+        "checkedBy": "kawafmm",
+        "checkedAt": "2026-07-15",
+        "method": "境界確認パッケージの動画・音声確認と明示的な最終凍結承認",
+        "note": "人間確認でblock 2を不採用とし、block 1・3・4・5・6・7を採用した。boundary 4は切り抜き側の場面切替だけ判定不能だったが、前後の素材対応と元配信位置切替が一致し、素材ジャンプ13828msが既定の10000ms以上であることを根拠に、最終承認で採用した。固定テーマ表記はLiar's Barへ正規化することも同時承認された。",
+        "acceptedBlocks": [
+          1,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "rejectedBlocks": [
+          2
+        ],
+        "unresolvedBlocks": [],
+        "confirmedBoundaries": [
+          3,
+          4,
+          5,
+          6
+        ],
+        "rejectedBoundaries": [
+          1,
+          2
+        ],
+        "unresolvedBoundaries": [],
+        "materialBlocksPath": "evals/clip_composition/outputs/material-blocks-nE_bNeBNp4E-20260715-full-local-stt-material-blocks-v001.json",
+        "materialBlocksSha256": "1980b61b3c3e5c2a1e8a9ed1a12998dc02c720bb1452c57c114e5938da499714",
+        "reviewPackagePath": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/index.html",
+        "reviewPackageSha256": "10734634d7f89163e15a5df17318a5fd48f901979016162deb34ce25a3a74c7e"
+      }
+    },
+    {
+      "sourceStartMs": 4230098,
+      "sourceEndMs": 4251308,
+      "reason": "人間が切り抜き側と元配信側で同じ素材と確認した素材ブロックのため。",
+      "sourceVideoId": "qdczJpv8RCc",
+      "sourceUrl": "https://www.youtube.com/watch?v=qdczJpv8RCc",
+      "sourceSttId": "nE_bNeBNp4E_qdczJpv8RCc_local30_v001",
+      "clipId": "nE_bNeBNp4E",
+      "clipUrl": "https://www.youtube.com/watch?v=nE_bNeBNp4E",
+      "verificationStatus": "multiblock_material_human_confirmed",
+      "usableForClipLocationEval": true,
+      "usableForCompositionPromptEval": true,
+      "multicutPartIndex": 2,
+      "clipStartMs": 309885,
+      "clipEndMs": 328730,
+      "qualityGrade": "material_block_granularity",
+      "boundaryPrecision": {
+        "grade": "material_block_granularity",
+        "meaning": "素材対応の切り替わりを表す粒度。細かい詰めは境界にしない。"
+      },
+      "label": "block 4",
+      "materialBlock": {
+        "blockIndex": 4,
+        "matchedWordPairCount": 62,
+        "internalGapMs": {
+          "sourceExtraInsideMs": 0,
+          "clipExtraInsideMs": 375,
+          "note": "同一素材ブロック内でsource側の進みがclip側より大きい分は、切り抜き内部の詰め候補として扱う。境界にはしない。"
+        },
+        "internalTransitions": [
+          {
+            "fromRun": 270,
+            "toRun": 275,
+            "clipGapMs": 5197,
+            "sourceGapMs": 4822,
+            "materialJumpMs": -375
+          },
+          {
+            "fromRun": 275,
+            "toRun": 276,
+            "clipGapMs": 0,
+            "sourceGapMs": 0,
+            "materialJumpMs": 0
+          }
+        ],
+        "runIndexes": [
+          270,
+          275,
+          276
+        ]
+      },
+      "humanVerification": {
+        "status": "confirmed",
+        "checkedBy": "kawafmm",
+        "checkedAt": "2026-07-15",
+        "method": "境界確認パッケージの動画・音声確認と明示的な最終凍結承認",
+        "note": "人間確認でblock 2を不採用とし、block 1・3・4・5・6・7を採用した。boundary 4は切り抜き側の場面切替だけ判定不能だったが、前後の素材対応と元配信位置切替が一致し、素材ジャンプ13828msが既定の10000ms以上であることを根拠に、最終承認で採用した。固定テーマ表記はLiar's Barへ正規化することも同時承認された。",
+        "acceptedBlocks": [
+          1,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "rejectedBlocks": [
+          2
+        ],
+        "unresolvedBlocks": [],
+        "confirmedBoundaries": [
+          3,
+          4,
+          5,
+          6
+        ],
+        "rejectedBoundaries": [
+          1,
+          2
+        ],
+        "unresolvedBoundaries": [],
+        "materialBlocksPath": "evals/clip_composition/outputs/material-blocks-nE_bNeBNp4E-20260715-full-local-stt-material-blocks-v001.json",
+        "materialBlocksSha256": "1980b61b3c3e5c2a1e8a9ed1a12998dc02c720bb1452c57c114e5938da499714",
+        "reviewPackagePath": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/index.html",
+        "reviewPackageSha256": "10734634d7f89163e15a5df17318a5fd48f901979016162deb34ce25a3a74c7e"
+      }
+    },
+    {
+      "sourceStartMs": 4274958,
+      "sourceEndMs": 4327614,
+      "reason": "人間が切り抜き側と元配信側で同じ素材と確認した素材ブロックのため。",
+      "sourceVideoId": "qdczJpv8RCc",
+      "sourceUrl": "https://www.youtube.com/watch?v=qdczJpv8RCc",
+      "sourceSttId": "nE_bNeBNp4E_qdczJpv8RCc_local30_v001",
+      "clipId": "nE_bNeBNp4E",
+      "clipUrl": "https://www.youtube.com/watch?v=nE_bNeBNp4E",
+      "verificationStatus": "multiblock_material_human_confirmed",
+      "usableForClipLocationEval": true,
+      "usableForCompositionPromptEval": true,
+      "multicutPartIndex": 3,
+      "clipStartMs": 338552,
+      "clipEndMs": 381924,
+      "qualityGrade": "material_block_granularity",
+      "boundaryPrecision": {
+        "grade": "material_block_granularity",
+        "meaning": "素材対応の切り替わりを表す粒度。細かい詰めは境界にしない。"
+      },
+      "label": "block 5",
+      "materialBlock": {
+        "blockIndex": 5,
+        "matchedWordPairCount": 67,
+        "internalGapMs": {
+          "sourceExtraInsideMs": 6380,
+          "clipExtraInsideMs": 5228,
+          "note": "同一素材ブロック内でsource側の進みがclip側より大きい分は、切り抜き内部の詰め候補として扱う。境界にはしない。"
+        },
+        "internalTransitions": [
+          {
+            "fromRun": 283,
+            "toRun": 284,
+            "clipGapMs": 0,
+            "sourceGapMs": 0,
+            "materialJumpMs": 0
+          },
+          {
+            "fromRun": 284,
+            "toRun": 287,
+            "clipGapMs": 6092,
+            "sourceGapMs": 11222,
+            "materialJumpMs": 5130
+          },
+          {
+            "fromRun": 287,
+            "toRun": 291,
+            "clipGapMs": 12352,
+            "sourceGapMs": 7124,
+            "materialJumpMs": -5228
+          },
+          {
+            "fromRun": 291,
+            "toRun": 297,
+            "clipGapMs": 8966,
+            "sourceGapMs": 10216,
+            "materialJumpMs": 1250
+          }
+        ],
+        "runIndexes": [
+          283,
+          284,
+          287,
+          291,
+          297
+        ]
+      },
+      "humanVerification": {
+        "status": "confirmed",
+        "checkedBy": "kawafmm",
+        "checkedAt": "2026-07-15",
+        "method": "境界確認パッケージの動画・音声確認と明示的な最終凍結承認",
+        "note": "人間確認でblock 2を不採用とし、block 1・3・4・5・6・7を採用した。boundary 4は切り抜き側の場面切替だけ判定不能だったが、前後の素材対応と元配信位置切替が一致し、素材ジャンプ13828msが既定の10000ms以上であることを根拠に、最終承認で採用した。固定テーマ表記はLiar's Barへ正規化することも同時承認された。",
+        "acceptedBlocks": [
+          1,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "rejectedBlocks": [
+          2
+        ],
+        "unresolvedBlocks": [],
+        "confirmedBoundaries": [
+          3,
+          4,
+          5,
+          6
+        ],
+        "rejectedBoundaries": [
+          1,
+          2
+        ],
+        "unresolvedBoundaries": [],
+        "materialBlocksPath": "evals/clip_composition/outputs/material-blocks-nE_bNeBNp4E-20260715-full-local-stt-material-blocks-v001.json",
+        "materialBlocksSha256": "1980b61b3c3e5c2a1e8a9ed1a12998dc02c720bb1452c57c114e5938da499714",
+        "reviewPackagePath": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/index.html",
+        "reviewPackageSha256": "10734634d7f89163e15a5df17318a5fd48f901979016162deb34ce25a3a74c7e"
+      }
+    },
+    {
+      "sourceStartMs": 4366870,
+      "sourceEndMs": 4700965,
+      "reason": "人間が切り抜き側と元配信側で同じ素材と確認した素材ブロックのため。",
+      "sourceVideoId": "qdczJpv8RCc",
+      "sourceUrl": "https://www.youtube.com/watch?v=qdczJpv8RCc",
+      "sourceSttId": "nE_bNeBNp4E_qdczJpv8RCc_local30_v001",
+      "clipId": "nE_bNeBNp4E",
+      "clipUrl": "https://www.youtube.com/watch?v=nE_bNeBNp4E",
+      "verificationStatus": "multiblock_material_human_confirmed",
+      "usableForClipLocationEval": true,
+      "usableForCompositionPromptEval": true,
+      "multicutPartIndex": 4,
+      "clipStartMs": 405518,
+      "clipEndMs": 687624,
+      "qualityGrade": "material_block_granularity",
+      "boundaryPrecision": {
+        "grade": "material_block_granularity",
+        "meaning": "素材対応の切り替わりを表す粒度。細かい詰めは境界にしない。"
+      },
+      "label": "block 6",
+      "materialBlock": {
+        "blockIndex": 6,
+        "matchedWordPairCount": 511,
+        "internalGapMs": {
+          "sourceExtraInsideMs": 43522,
+          "clipExtraInsideMs": 1184,
+          "note": "同一素材ブロック内でsource側の進みがclip側より大きい分は、切り抜き内部の詰め候補として扱う。境界にはしない。"
+        },
+        "internalTransitions": [
+          {
+            "fromRun": 308,
+            "toRun": 318,
+            "clipGapMs": 6906,
+            "sourceGapMs": 13139,
+            "materialJumpMs": 6233
+          },
+          {
+            "fromRun": 318,
+            "toRun": 324,
+            "clipGapMs": 24842,
+            "sourceGapMs": 31193,
+            "materialJumpMs": 6351
+          },
+          {
+            "fromRun": 324,
+            "toRun": 326,
+            "clipGapMs": 9018,
+            "sourceGapMs": 9187,
+            "materialJumpMs": 169
+          },
+          {
+            "fromRun": 326,
+            "toRun": 327,
+            "clipGapMs": 0,
+            "sourceGapMs": 0,
+            "materialJumpMs": 0
+          },
+          {
+            "fromRun": 327,
+            "toRun": 328,
+            "clipGapMs": 0,
+            "sourceGapMs": 8904,
+            "materialJumpMs": 8904
+          },
+          {
+            "fromRun": 328,
+            "toRun": 330,
+            "clipGapMs": 1182,
+            "sourceGapMs": 1200,
+            "materialJumpMs": 18
+          },
+          {
+            "fromRun": 330,
+            "toRun": 331,
+            "clipGapMs": 0,
+            "sourceGapMs": 0,
+            "materialJumpMs": 0
+          },
+          {
+            "fromRun": 331,
+            "toRun": 333,
+            "clipGapMs": 1682,
+            "sourceGapMs": 2181,
+            "materialJumpMs": 499
+          },
+          {
+            "fromRun": 333,
+            "toRun": 335,
+            "clipGapMs": 1943,
+            "sourceGapMs": 3681,
+            "materialJumpMs": 1738
+          },
+          {
+            "fromRun": 335,
+            "toRun": 336,
+            "clipGapMs": 0,
+            "sourceGapMs": 0,
+            "materialJumpMs": 0
+          },
+          {
+            "fromRun": 336,
+            "toRun": 343,
+            "clipGapMs": 19410,
+            "sourceGapMs": 19424,
+            "materialJumpMs": 14
+          },
+          {
+            "fromRun": 343,
+            "toRun": 344,
+            "clipGapMs": 2698,
+            "sourceGapMs": 2782,
+            "materialJumpMs": 84
+          },
+          {
+            "fromRun": 344,
+            "toRun": 348,
+            "clipGapMs": 6818,
+            "sourceGapMs": 9650,
+            "materialJumpMs": 2832
+          },
+          {
+            "fromRun": 348,
+            "toRun": 349,
+            "clipGapMs": 0,
+            "sourceGapMs": 1641,
+            "materialJumpMs": 1641
+          },
+          {
+            "fromRun": 349,
+            "toRun": 354,
+            "clipGapMs": 8448,
+            "sourceGapMs": 10669,
+            "materialJumpMs": 2221
+          },
+          {
+            "fromRun": 354,
+            "toRun": 356,
+            "clipGapMs": 420,
+            "sourceGapMs": 980,
+            "materialJumpMs": 560
+          },
+          {
+            "fromRun": 356,
+            "toRun": 367,
+            "clipGapMs": 5406,
+            "sourceGapMs": 4582,
+            "materialJumpMs": -824
+          },
+          {
+            "fromRun": 367,
+            "toRun": 370,
+            "clipGapMs": 4989,
+            "sourceGapMs": 5842,
+            "materialJumpMs": 853
+          },
+          {
+            "fromRun": 370,
+            "toRun": 371,
+            "clipGapMs": 0,
+            "sourceGapMs": 0,
+            "materialJumpMs": 0
+          },
+          {
+            "fromRun": 371,
+            "toRun": 373,
+            "clipGapMs": 260,
+            "sourceGapMs": 4644,
+            "materialJumpMs": 4384
+          },
+          {
+            "fromRun": 373,
+            "toRun": 375,
+            "clipGapMs": 380,
+            "sourceGapMs": 20,
+            "materialJumpMs": -360
+          },
+          {
+            "fromRun": 375,
+            "toRun": 379,
+            "clipGapMs": 1683,
+            "sourceGapMs": 1821,
+            "materialJumpMs": 138
+          },
+          {
+            "fromRun": 379,
+            "toRun": 400,
+            "clipGapMs": 36319,
+            "sourceGapMs": 43202,
+            "materialJumpMs": 6883
+          }
+        ],
+        "runIndexes": [
+          308,
+          318,
+          324,
+          326,
+          327,
+          328,
+          330,
+          331,
+          333,
+          335,
+          336,
+          343,
+          344,
+          348,
+          349,
+          354,
+          356,
+          367,
+          370,
+          371,
+          373,
+          375,
+          379,
+          400
+        ]
+      },
+      "humanVerification": {
+        "status": "confirmed",
+        "checkedBy": "kawafmm",
+        "checkedAt": "2026-07-15",
+        "method": "境界確認パッケージの動画・音声確認と明示的な最終凍結承認",
+        "note": "人間確認でblock 2を不採用とし、block 1・3・4・5・6・7を採用した。boundary 4は切り抜き側の場面切替だけ判定不能だったが、前後の素材対応と元配信位置切替が一致し、素材ジャンプ13828msが既定の10000ms以上であることを根拠に、最終承認で採用した。固定テーマ表記はLiar's Barへ正規化することも同時承認された。",
+        "acceptedBlocks": [
+          1,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "rejectedBlocks": [
+          2
+        ],
+        "unresolvedBlocks": [],
+        "confirmedBoundaries": [
+          3,
+          4,
+          5,
+          6
+        ],
+        "rejectedBoundaries": [
+          1,
+          2
+        ],
+        "unresolvedBoundaries": [],
+        "materialBlocksPath": "evals/clip_composition/outputs/material-blocks-nE_bNeBNp4E-20260715-full-local-stt-material-blocks-v001.json",
+        "materialBlocksSha256": "1980b61b3c3e5c2a1e8a9ed1a12998dc02c720bb1452c57c114e5938da499714",
+        "reviewPackagePath": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/index.html",
+        "reviewPackageSha256": "10734634d7f89163e15a5df17318a5fd48f901979016162deb34ce25a3a74c7e"
+      }
+    },
+    {
+      "sourceStartMs": 4730747,
+      "sourceEndMs": 4787332,
+      "reason": "人間が切り抜き側と元配信側で同じ素材と確認した素材ブロックのため。",
+      "sourceVideoId": "qdczJpv8RCc",
+      "sourceUrl": "https://www.youtube.com/watch?v=qdczJpv8RCc",
+      "sourceSttId": "nE_bNeBNp4E_qdczJpv8RCc_local30_v001",
+      "clipId": "nE_bNeBNp4E",
+      "clipUrl": "https://www.youtube.com/watch?v=nE_bNeBNp4E",
+      "verificationStatus": "multiblock_material_human_confirmed",
+      "usableForClipLocationEval": true,
+      "usableForCompositionPromptEval": true,
+      "multicutPartIndex": 5,
+      "clipStartMs": 706442,
+      "clipEndMs": 759546,
+      "qualityGrade": "material_block_granularity",
+      "boundaryPrecision": {
+        "grade": "material_block_granularity",
+        "meaning": "素材対応の切り替わりを表す粒度。細かい詰めは境界にしない。"
+      },
+      "label": "block 7",
+      "materialBlock": {
+        "blockIndex": 7,
+        "matchedWordPairCount": 87,
+        "internalGapMs": {
+          "sourceExtraInsideMs": 6021,
+          "clipExtraInsideMs": 0,
+          "note": "同一素材ブロック内でsource側の進みがclip側より大きい分は、切り抜き内部の詰め候補として扱う。境界にはしない。"
+        },
+        "internalTransitions": [
+          {
+            "fromRun": 405,
+            "toRun": 406,
+            "clipGapMs": 260,
+            "sourceGapMs": 921,
+            "materialJumpMs": 661
+          },
+          {
+            "fromRun": 406,
+            "toRun": 409,
+            "clipGapMs": 2423,
+            "sourceGapMs": 5991,
+            "materialJumpMs": 3568
+          },
+          {
+            "fromRun": 409,
+            "toRun": 415,
+            "clipGapMs": 18224,
+            "sourceGapMs": 20016,
+            "materialJumpMs": 1792
+          },
+          {
+            "fromRun": 415,
+            "toRun": 416,
+            "clipGapMs": 0,
+            "sourceGapMs": 0,
+            "materialJumpMs": 0
+          }
+        ],
+        "runIndexes": [
+          405,
+          406,
+          409,
+          415,
+          416
+        ]
+      },
+      "humanVerification": {
+        "status": "confirmed",
+        "checkedBy": "kawafmm",
+        "checkedAt": "2026-07-15",
+        "method": "境界確認パッケージの動画・音声確認と明示的な最終凍結承認",
+        "note": "人間確認でblock 2を不採用とし、block 1・3・4・5・6・7を採用した。boundary 4は切り抜き側の場面切替だけ判定不能だったが、前後の素材対応と元配信位置切替が一致し、素材ジャンプ13828msが既定の10000ms以上であることを根拠に、最終承認で採用した。固定テーマ表記はLiar's Barへ正規化することも同時承認された。",
+        "acceptedBlocks": [
+          1,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "rejectedBlocks": [
+          2
+        ],
+        "unresolvedBlocks": [],
+        "confirmedBoundaries": [
+          3,
+          4,
+          5,
+          6
+        ],
+        "rejectedBoundaries": [
+          1,
+          2
+        ],
+        "unresolvedBoundaries": [],
+        "materialBlocksPath": "evals/clip_composition/outputs/material-blocks-nE_bNeBNp4E-20260715-full-local-stt-material-blocks-v001.json",
+        "materialBlocksSha256": "1980b61b3c3e5c2a1e8a9ed1a12998dc02c720bb1452c57c114e5938da499714",
+        "reviewPackagePath": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/index.html",
+        "reviewPackageSha256": "10734634d7f89163e15a5df17318a5fd48f901979016162deb34ce25a3a74c7e"
+      }
+    }
+  ],
+  "excludedRanges": [
+    {
+      "id": "rejected_material_block_2",
+      "sourceStartMs": 4009379,
+      "sourceEndMs": 4016766,
+      "clipStartMs": 144521,
+      "clipEndMs": 164139,
+      "sourceVideoId": "qdczJpv8RCc",
+      "sourceUrl": "https://www.youtube.com/watch?v=qdczJpv8RCc",
+      "evidenceStatus": "human_rejected_material_candidate",
+      "scoringTreatment": "excluded_from_fixture_expected",
+      "reason": "boundary 2の前側で、切り抜きと元配信が同じ会話・場面ではないと人間が判定したため不採用。"
+    }
+  ],
+  "excludedClipRanges": [
+    {
+      "id": "rejected_material_block_2",
+      "sourceStartMs": 4009379,
+      "sourceEndMs": 4016766,
+      "clipStartMs": 144521,
+      "clipEndMs": 164139,
+      "sourceVideoId": "qdczJpv8RCc",
+      "sourceUrl": "https://www.youtube.com/watch?v=qdczJpv8RCc",
+      "evidenceStatus": "human_rejected_material_candidate",
+      "scoringTreatment": "excluded_from_fixture_expected",
+      "reason": "boundary 2の前側で、切り抜きと元配信が同じ会話・場面ではないと人間が判定したため不採用。"
+    }
+  ],
+  "freezeGuard": {
+    "allMaterialBlocksReviewed": true,
+    "allBoundariesReviewed": true,
+    "acceptedBlocksHumanConfirmed": [
+      1,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "rejectedBlocks": [
+      2
+    ],
+    "unresolvedBlocks": [],
+    "fixedThemeHumanSpecified": true,
+    "fixedThemeTitle": "マリンLiar's Bar",
+    "checkedBy": "kawafmm",
+    "checkedAt": "2026-07-15",
+    "materialBlocksSha256": "1980b61b3c3e5c2a1e8a9ed1a12998dc02c720bb1452c57c114e5938da499714",
+    "reviewPackageSha256": "10734634d7f89163e15a5df17318a5fd48f901979016162deb34ce25a3a74c7e"
+  },
+  "humanConfirmation": {
+    "status": "confirmed",
+    "checkedBy": "kawafmm",
+    "checkedAt": "2026-07-15",
+    "method": "境界確認パッケージの動画・音声確認と明示的な最終凍結承認",
+    "note": "人間確認でblock 2を不採用とし、block 1・3・4・5・6・7を採用した。boundary 4は切り抜き側の場面切替だけ判定不能だったが、前後の素材対応と元配信位置切替が一致し、素材ジャンプ13828msが既定の10000ms以上であることを根拠に、最終承認で採用した。固定テーマ表記はLiar's Barへ正規化することも同時承認された。",
+    "acceptedBlocks": [
+      1,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "rejectedBlocks": [
+      2
+    ],
+    "unresolvedBlocks": [],
+    "confirmedBoundaries": [
+      3,
+      4,
+      5,
+      6
+    ],
+    "rejectedBoundaries": [
+      1,
+      2
+    ],
+    "unresolvedBoundaries": [],
+    "materialBlocksPath": "evals/clip_composition/outputs/material-blocks-nE_bNeBNp4E-20260715-full-local-stt-material-blocks-v001.json",
+    "materialBlocksSha256": "1980b61b3c3e5c2a1e8a9ed1a12998dc02c720bb1452c57c114e5938da499714",
+    "reviewPackagePath": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/index.html",
+    "reviewPackageSha256": "10734634d7f89163e15a5df17318a5fd48f901979016162deb34ce25a3a74c7e"
+  },
+  "boundaryPrecision": {
+    "grade": "material_block_granularity",
+    "meaning": "素材対応の切り替わりを表す粒度。細かい詰めは境界にしない。"
+  }
+}

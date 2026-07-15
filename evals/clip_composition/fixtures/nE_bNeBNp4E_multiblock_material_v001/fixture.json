@@ -1,0 +1,62 @@
+{
+  "fixtureId": "nE_bNeBNp4E_multiblock_material_v001",
+  "draftId": "nE_bNeBNp4E_multiblock_material_v001",
+  "description": "人間確認済みの複数素材ブロックを切り抜き内の順番で固定したfixture。",
+  "copiedFrom": [
+    "evals/clip_composition/stt-targets/nE_bNeBNp4E.json",
+    "evals/clip_composition/outputs/material-blocks-nE_bNeBNp4E-20260715-full-local-stt-material-blocks-v001.json",
+    "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/index.html",
+    "evals/clip_composition/outputs/boundary-review-responses/nE_bNeBNp4E/nE_bNeBNp4E-multiblock-human-decision-20260715-v001.json",
+    "evals/clip_composition/stt/nE_bNeBNp4E_qdczJpv8RCc_local30_v001/source/word-timestamps.json"
+  ],
+  "copiedAt": "2026-07-15T11:49:41.228Z",
+  "sourceUri": "https://www.youtube.com/watch?v=qdczJpv8RCc",
+  "transcriptPath": "transcript.json",
+  "themesPath": "themes.json",
+  "selectedThemeId": "theme_multiblock_material_1",
+  "notes": [
+    "評価実行時はruntime/artifactsを読まず、このfixture配下のファイルだけを読む。",
+    "expectedCutsは人間確認でacceptedになった素材ブロックだけ。",
+    "rejectedとunresolvedは採点対象外としてexpectedに記録する。",
+    "固定テーマは人間が正解区間から逆算して書いた。",
+    "同一素材内の細かい詰めはexpected境界にしない。"
+  ],
+  "humanConfirmation": {
+    "status": "confirmed",
+    "checkedBy": "kawafmm",
+    "checkedAt": "2026-07-15",
+    "method": "境界確認パッケージの動画・音声確認と明示的な最終凍結承認",
+    "note": "人間確認でblock 2を不採用とし、block 1・3・4・5・6・7を採用した。boundary 4は切り抜き側の場面切替だけ判定不能だったが、前後の素材対応と元配信位置切替が一致し、素材ジャンプ13828msが既定の10000ms以上であることを根拠に、最終承認で採用した。固定テーマ表記はLiar's Barへ正規化することも同時承認された。",
+    "acceptedBlocks": [
+      1,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "rejectedBlocks": [
+      2
+    ],
+    "unresolvedBlocks": [],
+    "confirmedBoundaries": [
+      3,
+      4,
+      5,
+      6
+    ],
+    "rejectedBoundaries": [
+      1,
+      2
+    ],
+    "unresolvedBoundaries": [],
+    "materialBlocksPath": "evals/clip_composition/outputs/material-blocks-nE_bNeBNp4E-20260715-full-local-stt-material-blocks-v001.json",
+    "materialBlocksSha256": "1980b61b3c3e5c2a1e8a9ed1a12998dc02c720bb1452c57c114e5938da499714",
+    "reviewPackagePath": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/index.html",
+    "reviewPackageSha256": "10734634d7f89163e15a5df17318a5fd48f901979016162deb34ce25a3a74c7e"
+  },
+  "boundaryPrecision": {
+    "grade": "material_block_granularity",
+    "meaning": "素材対応の切り替わりを表す粒度。細かい詰めは境界にしない。"
+  }
+}

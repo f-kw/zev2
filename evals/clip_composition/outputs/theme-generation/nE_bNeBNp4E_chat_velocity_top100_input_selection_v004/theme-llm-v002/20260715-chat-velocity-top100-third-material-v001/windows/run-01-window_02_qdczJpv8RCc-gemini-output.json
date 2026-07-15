@@ -1,0 +1,64 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "初プレイでルールが分からず困惑するマリン",
+      "reason": "Liar's Barの初プレイで、操作方法やゲームシステム（ダウト）が分からず慌てて指示を求める様子が切り抜きとして見どころになるため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "qdczJpv8RCc",
+          "sourceStartMs": 420586,
+          "sourceEndMs": 475301,
+          "supportingSpeechIds": [
+            "25-36"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "自分のキャラを激しく頷かせるもリスナーの画面酔いを心配してやめるマリン",
+      "reason": "周囲のプレイヤーに合わせて激しく頷くものの、リスナーが酔うことを懸念して気遣いから途中で止めるやり取りが面白いため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "qdczJpv8RCc",
+          "sourceStartMs": 511514,
+          "sourceEndMs": 533319,
+          "supportingSpeechIds": [
+            42
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_003",
+      "title": "初のカード提出でパニックになるマリン",
+      "reason": "カードを出す方法やボイスチャット、相手の嘘を見破る際のボタン操作が分からずにテンパっている様子がコミカルで面白いため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "qdczJpv8RCc",
+          "sourceStartMs": 543458,
+          "sourceEndMs": 578333,
+          "supportingSpeechIds": [
+            "45-46"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-15T20:58:36+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_02_qdczJpv8RCc",
+    "windowSourceVideoId": "qdczJpv8RCc",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nE_bNeBNp4E_chat_velocity_top100_input_selection_v004/theme-llm-v002/20260715-chat-velocity-top100-third-material-v001/windows/window_02_qdczJpv8RCc-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/bb3f5024257d0873?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"初プレイでルールが分からず困惑するマリン\",\n      \"reason\": \"Liar's Barの初プレイで、操作方法やゲームシステム（ダウト）が分からず慌てて指示を求める様子が切り抜きとして見どころになるため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"qdczJpv8RCc\",\n          \"sourceStartMs\": 420586,\n          \"sourceEndMs\": 475301,\n          \"supportingSpeechIds\": [\n            \"25-36\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"自分のキャラを激しく頷かせるもリスナーの画面酔いを心配してやめるマリン\",\n      \"reason\": \"周囲のプレイヤーに合わせて激しく頷くものの、リスナーが酔うことを懸念して気遣いから途中で止めるやり取りが面白いため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"qdczJpv8RCc\",\n          \"sourceStartMs\": 511514,\n          \"sourceEndMs\": 533319,\n          \"supportingSpeechIds\": [\n            42\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_003\",\n      \"title\": \"初のカード提出でパニックになるマリン\",\n      \"reason\": \"カードを出す方法やボイスチャット、相手の嘘を見破る際のボタン操作が分からずにテンパっている様子がコミカルで面白いため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"qdczJpv8RCc\",\n          \"sourceStartMs\": 543458,\n          \"sourceEndMs\": 578333,\n          \"supportingSpeechIds\": [\n            \"45-46\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

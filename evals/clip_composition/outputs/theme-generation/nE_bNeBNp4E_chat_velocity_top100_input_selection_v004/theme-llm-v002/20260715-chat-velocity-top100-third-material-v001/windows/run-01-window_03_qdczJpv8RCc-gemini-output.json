@@ -1,0 +1,64 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "カード選択を焦るマリンの操作ミス（？）と言い訳",
+      "reason": "ボイチャの切り忘れや操作に戸惑いながらカードを提出し、必死に「間違えてない」と言い訳する様子が面白いから。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "qdczJpv8RCc",
+          "sourceStartMs": 660226,
+          "sourceEndMs": 688570,
+          "supportingSpeechIds": [
+            "53-54"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "他プレイヤーを煽るも耐えられてキレるマリン",
+      "reason": "相手が嘘を見破られそうになり動揺しているところを煽るが、ロシアンルーレットを生き残られて理不尽に怒り狂う姿に見どころがあるため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "qdczJpv8RCc",
+          "sourceStartMs": 695365,
+          "sourceEndMs": 737049,
+          "supportingSpeechIds": [
+            "55-60"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_003",
+      "title": "「なんで」連呼からのロシアンルーレット生存と狂気の勝利宣言",
+      "reason": "執拗な「なんで」の連呼からロシアンルーレットを引き当てて生き残り、一転して過激な言葉で大喜びする感情の起伏が非常に激しく切り抜きに最適なため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "qdczJpv8RCc",
+          "sourceStartMs": 750246,
+          "sourceEndMs": 778234,
+          "supportingSpeechIds": [
+            "64-71"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-15T20:58:51+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_03_qdczJpv8RCc",
+    "windowSourceVideoId": "qdczJpv8RCc",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nE_bNeBNp4E_chat_velocity_top100_input_selection_v004/theme-llm-v002/20260715-chat-velocity-top100-third-material-v001/windows/window_03_qdczJpv8RCc-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/0a4189ce346796cb?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"カード選択を焦るマリンの操作ミス（？）と言い訳\",\n      \"reason\": \"ボイチャの切り忘れや操作に戸惑いながらカードを提出し、必死に「間違えてない」と言い訳する様子が面白いから。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"qdczJpv8RCc\",\n          \"sourceStartMs\": 660226,\n          \"sourceEndMs\": 688570,\n          \"supportingSpeechIds\": [\n            \"53-54\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"他プレイヤーを煽るも耐えられてキレるマリン\",\n      \"reason\": \"相手が嘘を見破られそうになり動揺しているところを煽るが、ロシアンルーレットを生き残られて理不尽に怒り狂う姿に見どころがあるため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"qdczJpv8RCc\",\n          \"sourceStartMs\": 695365,\n          \"sourceEndMs\": 737049,\n          \"supportingSpeechIds\": [\n            \"55-60\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_003\",\n      \"title\": \"「なんで」連呼からのロシアンルーレット生存と狂気の勝利宣言\",\n      \"reason\": \"執拗な「なんで」の連呼からロシアンルーレットを引き当てて生き残り、一転して過激な言葉で大喜びする感情の起伏が非常に激しく切り抜きに最適なため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"qdczJpv8RCc\",\n          \"sourceStartMs\": 750246,\n          \"sourceEndMs\": 778234,\n          \"supportingSpeechIds\": [\n            \"64-71\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

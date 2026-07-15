@@ -1,0 +1,42 @@
+{
+  "kind": "third_material_hand_trim_trial_preflight",
+  "version": "human-boundary-trim-v002-third-material-ui-v004",
+  "status": "pass",
+  "checks": {
+    "rankingCandidateCountFive": true,
+    "sessionDecisionCounts": [
+      5,
+      2
+    ],
+    "thirdMaterialItemsFive": true,
+    "blindControlsTwo": true,
+    "blindControlLabelsExcludedFromPages": true,
+    "questionStatesCurrentRangeEditingAndSeparateSceneContext": true,
+    "fullUtteranceWithTimedCharacterSelection": true,
+    "noNumericTimeInput": true,
+    "humanClockHhMmSs": true,
+    "explicitPlaybackOnlyForBoundarySelection": true,
+    "nextCandidateAutoplay": true,
+    "contextExpandableToSourceEdges": true,
+    "viewportBoundVideo": true,
+    "noInteractionTimer": true,
+    "noServerPersistence": true,
+    "copyResultAndEditAfterCompletion": true,
+    "noSessionAutoAdvance": true,
+    "sourceVideosPresent": true,
+    "existingFixtureAndExpectedUnchanged": true
+  },
+  "humanWork": {
+    "totalDecisionCount": 7,
+    "thirdMaterialDecisionCount": 5,
+    "reproducibilityControlCount": 2,
+    "baselineEstimateMinutesPerDecision": 3,
+    "totalBaselineEstimateMinutes": 21,
+    "thirdMaterialTimeLimitMinutes": 15,
+    "sessionDecisionCounts": [
+      5,
+      2
+    ],
+    "note": "UIは時間を計測しない。第三素材5件だけを15分条件で判定し、既判定2件は再現性を別集計する。"
+  }
+}

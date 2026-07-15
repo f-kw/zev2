@@ -1,0 +1,65 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "ReGLOSSの後輩たちへ家具を譲るマリン船長",
+      "reason": "引っ越しに伴い、リリカにソファーを、カナデに愛用していた巨大なクッションを譲るエピソードが具体的に語られており、後輩思いな一面が伝わるため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "qdczJpv8RCc",
+          "sourceStartMs": 5101318,
+          "sourceEndMs": 5188959,
+          "supportingSpeechIds": [
+            "729-731"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "白銀ノエルのASMRマイクを仮パク中のマリン船長",
+      "reason": "引っ越しにより防音環境が改善した話題から、団長（白銀ノエル）からASMRマイクを買い取らずに「仮パク」状態であるというコミカルな関係性が明かされているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "qdczJpv8RCc",
+          "sourceStartMs": 5310034,
+          "sourceEndMs": 5339442,
+          "supportingSpeechIds": [
+            "738-739"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_003",
+      "title": "モンスターハンターワイルズへの興味と武器選び",
+      "reason": "視聴者からモンハン最新作のプレイを勧められ、武器種が2本持てる仕様やおすすめの武器についてリスナーと楽しげに意見を交わしているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "qdczJpv8RCc",
+          "sourceStartMs": 5340000,
+          "sourceEndMs": 5459820,
+          "supportingSpeechIds": [
+            740,
+            "745-747"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-15T22:06:01+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_25_qdczJpv8RCc",
+    "windowSourceVideoId": "qdczJpv8RCc",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nE_bNeBNp4E_chat_velocity_top100_input_selection_v004/theme-llm-v002/20260715-chat-velocity-top100-third-material-v001/windows/window_25_qdczJpv8RCc-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/2ce4ab8f85dffa79?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"ReGLOSSの後輩たちへ家具を譲るマリン船長\",\n      \"reason\": \"引っ越しに伴い、リリカにソファーを、カナデに愛用していた巨大なクッションを譲るエピソードが具体的に語られており、後輩思いな一面が伝わるため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"qdczJpv8RCc\",\n          \"sourceStartMs\": 5101318,\n          \"sourceEndMs\": 5188959,\n          \"supportingSpeechIds\": [\n            \"729-731\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"白銀ノエルのASMRマイクを仮パク中のマリン船長\",\n      \"reason\": \"引っ越しにより防音環境が改善した話題から、団長（白銀ノエル）からASMRマイクを買い取らずに「仮パク」状態であるというコミカルな関係性が明かされているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"qdczJpv8RCc\",\n          \"sourceStartMs\": 5310034,\n          \"sourceEndMs\": 5339442,\n          \"supportingSpeechIds\": [\n            \"738-739\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_003\",\n      \"title\": \"モンスターハンターワイルズへの興味と武器選び\",\n      \"reason\": \"視聴者からモンハン最新作のプレイを勧められ、武器種が2本持てる仕様やおすすめの武器についてリスナーと楽しげに意見を交わしているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"qdczJpv8RCc\",\n          \"sourceStartMs\": 5340000,\n          \"sourceEndMs\": 5459820,\n          \"supportingSpeechIds\": [\n            740,\n            \"745-747\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

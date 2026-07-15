@@ -1,0 +1,79 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "船長がゲーム内で人を撃つのをためらう理由",
+      "reason": "善良な市民を殺すのはかわいそうだが、嘘つきなリスナーは善良ではないので撃っても平気であるという独自の倫理観を語っています。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "qdczJpv8RCc",
+          "sourceStartMs": 6153714,
+          "sourceEndMs": 6209302,
+          "supportingSpeechIds": [
+            "787-788"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "一味のガチスペックに驚くマリン船長",
+      "reason": "地球上にあるすべての船を運航可能だというハイレベルな資格（機関長）を持つリスナーに驚き、頼りにする姿が描かれています。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "qdczJpv8RCc",
+          "sourceStartMs": 6300002,
+          "sourceEndMs": 6359920,
+          "supportingSpeechIds": [
+            "793-795"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_003",
+      "title": "船長の「可愛さ」を24時間検証した一味の調査結果",
+      "reason": "リスナーが調査した「24時間いつでも船長は可愛い」という結論に対し、働きすぎて頭がおかしくなっていると突っ込む掛け合いが面白い場面です。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "qdczJpv8RCc",
+          "sourceStartMs": 6540022,
+          "sourceEndMs": 6599202,
+          "supportingSpeechIds": [
+            "803-804"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_004",
+      "title": "美魔女モデル・宝鐘マリンの超ドアップ圧攻撃",
+      "reason": "視聴者からのお願いに応えて、カメラをドアップにして「食べてやろうか！」と全力で圧をかける可愛らしくも迫力のあるリアクションをしています。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "qdczJpv8RCc",
+          "sourceStartMs": 7382519,
+          "sourceEndMs": 7446729,
+          "supportingSpeechIds": [
+            "836-843"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-16T24:12:53+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_27_qdczJpv8RCc",
+    "windowSourceVideoId": "qdczJpv8RCc",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nE_bNeBNp4E_chat_velocity_top100_input_selection_v004/theme-llm-v002/20260715-chat-velocity-top100-third-material-v001/windows/window_27_qdczJpv8RCc-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/58047f08066b7f07?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"船長がゲーム内で人を撃つのをためらう理由\",\n      \"reason\": \"善良な市民を殺すのはかわいそうだが、嘘つきなリスナーは善良ではないので撃っても平気であるという独自の倫理観を語っています。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"qdczJpv8RCc\",\n          \"sourceStartMs\": 6153714,\n          \"sourceEndMs\": 6209302,\n          \"supportingSpeechIds\": [\n            \"787-788\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"一味のガチスペックに驚くマリン船長\",\n      \"reason\": \"地球上にあるすべての船を運航可能だというハイレベルな資格（機関長）を持つリスナーに驚き、頼りにする姿が描かれています。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"qdczJpv8RCc\",\n          \"sourceStartMs\": 6300002,\n          \"sourceEndMs\": 6359920,\n          \"supportingSpeechIds\": [\n            \"793-795\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_003\",\n      \"title\": \"船長の「可愛さ」を24時間検証した一味の調査結果\",\n      \"reason\": \"リスナーが調査した「24時間いつでも船長は可愛い」という結論に対し、働きすぎて頭がおかしくなっていると突っ込む掛け合いが面白い場面です。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"qdczJpv8RCc\",\n          \"sourceStartMs\": 6540022,\n          \"sourceEndMs\": 6599202,\n          \"supportingSpeechIds\": [\n            \"803-804\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_004\",\n      \"title\": \"美魔女モデル・宝鐘マリンの超ドアップ圧攻撃\",\n      \"reason\": \"視聴者からのお願いに応えて、カメラをドアップにして「食べてやろうか！」と全力で圧をかける可愛らしくも迫力のあるリアクションをしています。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"qdczJpv8RCc\",\n          \"sourceStartMs\": 7382519,\n          \"sourceEndMs\": 7446729,\n          \"supportingSpeechIds\": [\n            \"836-843\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

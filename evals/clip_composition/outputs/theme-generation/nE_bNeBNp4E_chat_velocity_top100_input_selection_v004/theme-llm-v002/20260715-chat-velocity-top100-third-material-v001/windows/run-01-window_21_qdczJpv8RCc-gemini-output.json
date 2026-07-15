@@ -1,0 +1,64 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "ゲマズを忘れるマリン",
+      "reason": "期生を順番に数えていた宝鐘マリンがゲーマーズ（ゲマズ）をド忘れしてしまい、言い訳をするコミカルな場面。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "qdczJpv8RCc",
+          "sourceStartMs": 3897990,
+          "sourceEndMs": 3943540,
+          "supportingSpeechIds": [
+            "626-632"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "他人の命を賭けさせるマリン",
+      "reason": "対戦相手のリスナーにホロライブメンバーの命を賭けさせて戦わせる、宝鐘マリンの理不尽なゲームへの巻き込みが面白い場面。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "qdczJpv8RCc",
+          "sourceStartMs": 3930130,
+          "sourceEndMs": 3987910,
+          "supportingSpeechIds": [
+            "632-635"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_003",
+      "title": "リスナーの態度にキレるマリン",
+      "reason": "ゲーム内のあおりや煽動するような態度をとるリスナーに対し、マリンがヤクザ風にブチギレていく掛け合いが面白い場面。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "qdczJpv8RCc",
+          "sourceStartMs": 4067554,
+          "sourceEndMs": 4079940,
+          "supportingSpeechIds": [
+            "639-652"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-15T22:05:03+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_21_qdczJpv8RCc",
+    "windowSourceVideoId": "qdczJpv8RCc",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/nE_bNeBNp4E_chat_velocity_top100_input_selection_v004/theme-llm-v002/20260715-chat-velocity-top100-third-material-v001/windows/window_21_qdczJpv8RCc-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/a107f1eac40be22b?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"ゲマズを忘れるマリン\",\n      \"reason\": \"期生を順番に数えていた宝鐘マリンがゲーマーズ（ゲマズ）をド忘れしてしまい、言い訳をするコミカルな場面。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"qdczJpv8RCc\",\n          \"sourceStartMs\": 3897990,\n          \"sourceEndMs\": 3943540,\n          \"supportingSpeechIds\": [\n            \"626-632\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"他人の命を賭けさせるマリン\",\n      \"reason\": \"対戦相手のリスナーにホロライブメンバーの命を賭けさせて戦わせる、宝鐘マリンの理不尽なゲームへの巻き込みが面白い場面。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"qdczJpv8RCc\",\n          \"sourceStartMs\": 3930130,\n          \"sourceEndMs\": 3987910,\n          \"supportingSpeechIds\": [\n            \"632-635\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_003\",\n      \"title\": \"リスナーの態度にキレるマリン\",\n      \"reason\": \"ゲーム内のあおりや煽動するような態度をとるリスナーに対し、マリンがヤクザ風にブチギレていく掛け合いが面白い場面。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"qdczJpv8RCc\",\n          \"sourceStartMs\": 4067554,\n          \"sourceEndMs\": 4079940,\n          \"supportingSpeechIds\": [\n            \"639-652\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

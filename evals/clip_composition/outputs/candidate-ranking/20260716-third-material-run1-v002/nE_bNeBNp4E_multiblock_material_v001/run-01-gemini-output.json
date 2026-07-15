@@ -1,0 +1,42 @@
+{
+  "rankedCandidates": [
+    {
+      "rank": 1,
+      "candidateId": 35,
+      "reason": "お互いに嘘をつかないという約束で芽生えた友情が直後に裏切られ、「友達じゃない！」とブチギレるという、フリからオチへの明確な展開と強い感情反応が1文で具体的に説明されているため。"
+    },
+    {
+      "rank": 2,
+      "candidateId": 47,
+      "reason": "戌神ころねのファンである参加者に対し、他の女性である自分の配信を見ていることを「浮気」と執拗にイジり、ころねを引き合いに出して揺さぶりをかけるという出演者同士の関係性を絡めたトークの掛け合いが具体的に描写されているため。"
+    },
+    {
+      "rank": 3,
+      "candidateId": 59,
+      "reason": "引越し後の片付けの癖を語りながら、トーク中に無意識に服を脱いで寒がっているという、単独で内容が伝わる具体的かつユーモラスな私生活のハプニングが説明されているため。"
+    },
+    {
+      "rank": 4,
+      "candidateId": 10,
+      "reason": "執拗な「なんで」の連呼からロシアンルーレットを生き残り、一転して過激な言葉で大喜びするという、ゲーム内イベントをきっかけとした非常に激しい感情の起伏とリアクションが明確に示されているため。"
+    },
+    {
+      "rank": 5,
+      "candidateId": 54,
+      "reason": "新居の防音環境の話題から、白銀ノエルのASMRマイクを買い取らずに「仮パク」状態にしているという、外部のホロメンとの具体的かつコミカルな関係性・エピソードが独立したトピックとして語られているため。"
+    }
+  ],
+  "runAt": "2026-07-16T24:30:38+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "generationSystem": "candidate-ranking-v002@gemini-web-flash",
+    "run": 1,
+    "inputPolicy": "candidateId+title+reason only"
+  },
+  "promptFile": "outputs/candidate-ranking/20260716-third-material-run1-v002/nE_bNeBNp4E_multiblock_material_v001/prompt.txt",
+  "pageUrl": "https://gemini.google.com/app/3b91886e1f16bbf4?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"rankedCandidates\": [\n    {\n      \"rank\": 1,\n      \"candidateId\": 35,\n      \"reason\": \"お互いに嘘をつかないという約束で芽生えた友情が直後に裏切られ、「友達じゃない！」とブチギレるという、フリからオチへの明確な展開と強い感情反応が1文で具体的に説明されているため。\"\n    },\n    {\n      \"rank\": 2,\n      \"candidateId\": 47,\n      \"reason\": \"戌神ころねのファンである参加者に対し、他の女性である自分の配信を見ていることを「浮気」と執拗にイジり、ころねを引き合いに出して揺さぶりをかけるという出演者同士の関係性を絡めたトークの掛け合いが具体的に描写されているため。\"\n    },\n    {\n      \"rank\": 3,\n      \"candidateId\": 59,\n      \"reason\": \"引越し後の片付けの癖を語りながら、トーク中に無意識に服を脱いで寒がっているという、単独で内容が伝わる具体的かつユーモラスな私生活のハプニングが説明されているため。\"\n    },\n    {\n      \"rank\": 4,\n      \"candidateId\": 10,\n      \"reason\": \"執拗な「なんで」の連呼からロシアンルーレットを生き残り、一転して過激な言葉で大喜びするという、ゲーム内イベントをきっかけとした非常に激しい感情の起伏とリアクションが明確に示されているため。\"\n    },\n    {\n      \"rank\": 5,\n      \"candidateId\": 54,\n      \"reason\": \"新居の防音環境の話題から、白銀ノエルのASMRマイクを買い取らずに「仮パク」状態にしているという、外部のホロメンとの具体的かつコミカルな関係性・エピソードが独立したトピックとして語られているため。\"\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}
