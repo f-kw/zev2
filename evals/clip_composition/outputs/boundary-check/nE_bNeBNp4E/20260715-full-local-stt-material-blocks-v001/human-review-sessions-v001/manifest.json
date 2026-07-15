@@ -17,8 +17,19 @@
     "timeTrackingInUi": false
   },
   "answerStatus": "in-progress",
-  "completedSessionCount": 1,
-  "nextSessionNumber": 2,
+  "completedSessionCount": 2,
+  "nextSessionNumber": 3,
+  "remainingDelivery": {
+    "mode": "batched-links-by-human-request",
+    "sessionNumbers": [
+      3,
+      4,
+      5,
+      6
+    ],
+    "uiSessionsRemainSeparate": true,
+    "reason": "人間の往復回数を減らすため、セッション3以降はリンクと回答をまとめて受け渡す。各画面の独立判定数上限は維持する。"
+  },
   "productionImpact": {
     "fixtureWrites": false,
     "expectedWrites": false,
@@ -43,7 +54,9 @@
       ],
       "independentDecisionCount": 4,
       "includesFixedTheme": false,
-      "html": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/human-review-sessions-v001/session-02/index.html"
+      "html": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/human-review-sessions-v001/session-02/index.html",
+      "answerStatus": "confirmed",
+      "result": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/human-review-sessions-v001/results/session-02.json"
     },
     {
       "sessionNumber": 3,
