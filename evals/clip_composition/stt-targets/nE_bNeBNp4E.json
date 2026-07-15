@@ -4,7 +4,7 @@
   "createdAt": "2026-07-15T00:00:00+09:00",
   "clip": {
     "id": "nE_bNeBNp4E",
-    "sttId": "nE_bNeBNp4E",
+    "sttId": "nE_bNeBNp4E_local15_v001",
     "url": "https://www.youtube.com/watch?v=nE_bNeBNp4E",
     "localVideoPath": "evals/clip_composition/research/downloads/nE_bNeBNp4E/nE_bNeBNp4E.mp4",
     "durationSec": 780,
@@ -15,11 +15,12 @@
     ]
   },
   "sourceDiscovery": {
-    "status": "stt_server_restart_required",
+    "status": "source_stt_in_progress",
     "notes": [
       "切り抜き説明欄が示す単一元配信を、STT・照合・expected作成前に固定した。",
       "元配信のチャットリプレイが取得可能であることを選定前に確認した。",
       "教師27チャンク・元配信259チャンクの音声分割まで完了。2026-07-15時点でSTTがモデル取得時に誤ったプロキシ127.0.0.1:9へ接続して500を返すため、応答保存0件で停止。health 200だけでは再開しない。",
+      "サーバー修正後、教師は同じ失敗音声を15秒へ分割した別IDで53/53チャンクを完走。2,330発話・2,330単語時刻、境界除外0・補正0、単語時刻の非単調0を確認した。",
       "対応確定はローカルSTT、大域照合、素材ブロック再構成、人間確認後。"
     ],
     "primarySourceCandidate": {
@@ -45,6 +46,6 @@
   ],
   "freezeStatus": {
     "readyForFreeze": false,
-    "reason": "元配信固定と音声分割は完了。末尾9のSTTがfaster-whisper-large-v3取得時にプロキシ127.0.0.1:9への接続拒否で500を返すため、サーバー設定修正待ち。照合、素材ブロック確認、人間確認、固定テーマは未完了。"
+    "reason": "教師STTは完了。元配信259チャンクのSTT、照合、素材ブロック確認、人間確認、固定テーマが未完了。"
   }
 }
