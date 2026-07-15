@@ -1,0 +1,100 @@
+{
+  "kind": "clip_composition_material_boundary_human_review_combined_result",
+  "packageId": "human-review-sessions-v001",
+  "clipId": "nE_bNeBNp4E",
+  "sourceVideoId": "qdczJpv8RCc",
+  "reviewer": "kawafmm",
+  "reviewedAt": "2026-07-15",
+  "completedSessionNumbers": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "boundaryResults": [
+    {
+      "boundaryIndex": 1,
+      "clipSwitch": true,
+      "sourcePositionSwitches": true,
+      "beforeMatches": true,
+      "afterMatches": true,
+      "treatment": "accepted"
+    },
+    {
+      "boundaryIndex": 2,
+      "clipSwitch": true,
+      "sourcePositionSwitches": true,
+      "beforeMatches": false,
+      "afterMatches": true,
+      "treatment": "exclude-before-block"
+    },
+    {
+      "boundaryIndex": 3,
+      "clipSwitch": true,
+      "sourcePositionSwitches": true,
+      "beforeMatches": true,
+      "afterMatches": true,
+      "treatment": "accepted"
+    },
+    {
+      "boundaryIndex": 4,
+      "clipSwitch": "unresolved",
+      "sourcePositionSwitches": true,
+      "beforeMatches": true,
+      "afterMatches": true,
+      "treatment": "proposed-accept-from-correspondence-and-numeric-jump",
+      "numericEvidence": {
+        "clipGapMs": 9822,
+        "sourceGapMs": 23650,
+        "materialJumpMs": 13828,
+        "definitionThresholdMs": 10000
+      },
+      "requiresFinalHumanApproval": true
+    },
+    {
+      "boundaryIndex": 5,
+      "clipSwitch": true,
+      "sourcePositionSwitches": true,
+      "beforeMatches": true,
+      "afterMatches": true,
+      "treatment": "accepted"
+    },
+    {
+      "boundaryIndex": 6,
+      "clipSwitch": true,
+      "sourcePositionSwitches": true,
+      "beforeMatches": true,
+      "afterMatches": true,
+      "treatment": "accepted"
+    }
+  ],
+  "derivedMaterialBlockDraft": {
+    "acceptedBlockIndexes": [
+      1,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "excludedBlocks": [
+      {
+        "blockIndex": 2,
+        "reason": "境界2の前側について、切り抜きと元配信が同じ会話・場面ではないと人間が判定"
+      }
+    ],
+    "unresolvedBlockIndexes": []
+  },
+  "fixedTheme": {
+    "asEnteredByHuman": "マリンLier's Bar",
+    "proposedNormalizedSpelling": "マリンLiar's Bar",
+    "normalizationStatus": "awaiting-human-confirmation"
+  },
+  "reviewComplete": true,
+  "freezeStatus": "not-frozen-awaiting-explicit-human-authorization",
+  "fixtureWrites": false,
+  "expectedWrites": false,
+  "confirmedPairWrites": false
+}
