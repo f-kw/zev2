@@ -1,0 +1,1839 @@
+{
+  "kind": "clip_composition_material_blocks",
+  "runAt": "2026-07-15T09:11:28.553Z",
+  "clipId": "nE_bNeBNp4E",
+  "sourceVideoId": "qdczJpv8RCc",
+  "input": {
+    "dpResultPath": "evals/clip_composition/outputs/global-dp-word-alignment-nE_bNeBNp4E_qdczJpv8RCc_20260715-full-local-stt-v001_dp.json",
+    "candidateRunCount": 53,
+    "allLinearRunCount": 460,
+    "offsetJumpCandidateCount": 287
+  },
+  "definition": {
+    "expectedCutsBoundary": "素材対応の切り替わり点。元動画の別位置へ飛ぶ点だけを境界とし、同一素材内の詰めはinternalGapMs系の注記にする。",
+    "materialJumpThresholdMs": 10000,
+    "thresholdSource": "ユーザー指定の「10秒以上」を使用"
+  },
+  "confirmedPair": null,
+  "blocks": [
+    {
+      "blockIndex": 1,
+      "runIndexes": [
+        212,
+        213,
+        215,
+        216,
+        218
+      ],
+      "clipStartMs": 90098,
+      "clipEndMs": 137396,
+      "sourceStartMs": 3932652,
+      "sourceEndMs": 3987910,
+      "matchedWordPairCount": 157,
+      "clipDurationMs": 47298,
+      "sourceDurationMs": 55258,
+      "sourceMinusClipDurationMs": 7960,
+      "internalGapMs": {
+        "sourceExtraInsideMs": 4880,
+        "clipExtraInsideMs": 408,
+        "note": "同一素材ブロック内でsource側の進みがclip側より大きい分は、切り抜き内部の詰め候補として扱う。境界にはしない。"
+      },
+      "internalTransitions": [
+        {
+          "fromRun": 212,
+          "toRun": 213,
+          "clipGapMs": 0,
+          "sourceGapMs": 0,
+          "materialJumpMs": 0
+        },
+        {
+          "fromRun": 213,
+          "toRun": 215,
+          "clipGapMs": 15216,
+          "sourceGapMs": 20096,
+          "materialJumpMs": 4880
+        },
+        {
+          "fromRun": 215,
+          "toRun": 216,
+          "clipGapMs": 0,
+          "sourceGapMs": 0,
+          "materialJumpMs": 0
+        },
+        {
+          "fromRun": 216,
+          "toRun": 218,
+          "clipGapMs": 1129,
+          "sourceGapMs": 721,
+          "materialJumpMs": -408
+        }
+      ]
+    },
+    {
+      "blockIndex": 2,
+      "runIndexes": [
+        222,
+        224
+      ],
+      "clipStartMs": 144521,
+      "clipEndMs": 164139,
+      "sourceStartMs": 4009379,
+      "sourceEndMs": 4016766,
+      "matchedWordPairCount": 26,
+      "clipDurationMs": 19618,
+      "sourceDurationMs": 7387,
+      "sourceMinusClipDurationMs": -12231,
+      "internalGapMs": {
+        "sourceExtraInsideMs": 321,
+        "clipExtraInsideMs": 0,
+        "note": "同一素材ブロック内でsource側の進みがclip側より大きい分は、切り抜き内部の詰め候補として扱う。境界にはしない。"
+      },
+      "internalTransitions": [
+        {
+          "fromRun": 222,
+          "toRun": 224,
+          "clipGapMs": 160,
+          "sourceGapMs": 481,
+          "materialJumpMs": 321
+        }
+      ]
+    },
+    {
+      "blockIndex": 3,
+      "runIndexes": [
+        235,
+        236,
+        238,
+        241,
+        242,
+        246,
+        248,
+        252,
+        259
+      ],
+      "clipStartMs": 188483,
+      "clipEndMs": 298173,
+      "sourceStartMs": 4070075,
+      "sourceEndMs": 4198226,
+      "matchedWordPairCount": 300,
+      "clipDurationMs": 109690,
+      "sourceDurationMs": 128151,
+      "sourceMinusClipDurationMs": 18461,
+      "internalGapMs": {
+        "sourceExtraInsideMs": 17086,
+        "clipExtraInsideMs": 261,
+        "note": "同一素材ブロック内でsource側の進みがclip側より大きい分は、切り抜き内部の詰め候補として扱う。境界にはしない。"
+      },
+      "internalTransitions": [
+        {
+          "fromRun": 235,
+          "toRun": 236,
+          "clipGapMs": 440,
+          "sourceGapMs": 300,
+          "materialJumpMs": -140
+        },
+        {
+          "fromRun": 236,
+          "toRun": 238,
+          "clipGapMs": 3225,
+          "sourceGapMs": 3363,
+          "materialJumpMs": 138
+        },
+        {
+          "fromRun": 238,
+          "toRun": 241,
+          "clipGapMs": 4242,
+          "sourceGapMs": 4183,
+          "materialJumpMs": -59
+        },
+        {
+          "fromRun": 241,
+          "toRun": 242,
+          "clipGapMs": 200,
+          "sourceGapMs": 4523,
+          "materialJumpMs": 4323
+        },
+        {
+          "fromRun": 242,
+          "toRun": 246,
+          "clipGapMs": 6249,
+          "sourceGapMs": 15796,
+          "materialJumpMs": 9547
+        },
+        {
+          "fromRun": 246,
+          "toRun": 248,
+          "clipGapMs": 3166,
+          "sourceGapMs": 5562,
+          "materialJumpMs": 2396
+        },
+        {
+          "fromRun": 248,
+          "toRun": 252,
+          "clipGapMs": 21910,
+          "sourceGapMs": 22592,
+          "materialJumpMs": 682
+        },
+        {
+          "fromRun": 252,
+          "toRun": 259,
+          "clipGapMs": 2644,
+          "sourceGapMs": 2582,
+          "materialJumpMs": -62
+        }
+      ]
+    },
+    {
+      "blockIndex": 4,
+      "runIndexes": [
+        270,
+        275,
+        276
+      ],
+      "clipStartMs": 309885,
+      "clipEndMs": 328730,
+      "sourceStartMs": 4230098,
+      "sourceEndMs": 4251308,
+      "matchedWordPairCount": 62,
+      "clipDurationMs": 18845,
+      "sourceDurationMs": 21210,
+      "sourceMinusClipDurationMs": 2365,
+      "internalGapMs": {
+        "sourceExtraInsideMs": 0,
+        "clipExtraInsideMs": 375,
+        "note": "同一素材ブロック内でsource側の進みがclip側より大きい分は、切り抜き内部の詰め候補として扱う。境界にはしない。"
+      },
+      "internalTransitions": [
+        {
+          "fromRun": 270,
+          "toRun": 275,
+          "clipGapMs": 5197,
+          "sourceGapMs": 4822,
+          "materialJumpMs": -375
+        },
+        {
+          "fromRun": 275,
+          "toRun": 276,
+          "clipGapMs": 0,
+          "sourceGapMs": 0,
+          "materialJumpMs": 0
+        }
+      ]
+    },
+    {
+      "blockIndex": 5,
+      "runIndexes": [
+        283,
+        284,
+        287,
+        291,
+        297
+      ],
+      "clipStartMs": 338552,
+      "clipEndMs": 381924,
+      "sourceStartMs": 4274958,
+      "sourceEndMs": 4327614,
+      "matchedWordPairCount": 67,
+      "clipDurationMs": 43372,
+      "sourceDurationMs": 52656,
+      "sourceMinusClipDurationMs": 9284,
+      "internalGapMs": {
+        "sourceExtraInsideMs": 6380,
+        "clipExtraInsideMs": 5228,
+        "note": "同一素材ブロック内でsource側の進みがclip側より大きい分は、切り抜き内部の詰め候補として扱う。境界にはしない。"
+      },
+      "internalTransitions": [
+        {
+          "fromRun": 283,
+          "toRun": 284,
+          "clipGapMs": 0,
+          "sourceGapMs": 0,
+          "materialJumpMs": 0
+        },
+        {
+          "fromRun": 284,
+          "toRun": 287,
+          "clipGapMs": 6092,
+          "sourceGapMs": 11222,
+          "materialJumpMs": 5130
+        },
+        {
+          "fromRun": 287,
+          "toRun": 291,
+          "clipGapMs": 12352,
+          "sourceGapMs": 7124,
+          "materialJumpMs": -5228
+        },
+        {
+          "fromRun": 291,
+          "toRun": 297,
+          "clipGapMs": 8966,
+          "sourceGapMs": 10216,
+          "materialJumpMs": 1250
+        }
+      ]
+    },
+    {
+      "blockIndex": 6,
+      "runIndexes": [
+        308,
+        318,
+        324,
+        326,
+        327,
+        328,
+        330,
+        331,
+        333,
+        335,
+        336,
+        343,
+        344,
+        348,
+        349,
+        354,
+        356,
+        367,
+        370,
+        371,
+        373,
+        375,
+        379,
+        400
+      ],
+      "clipStartMs": 405518,
+      "clipEndMs": 687624,
+      "sourceStartMs": 4366870,
+      "sourceEndMs": 4700965,
+      "matchedWordPairCount": 511,
+      "clipDurationMs": 282106,
+      "sourceDurationMs": 334095,
+      "sourceMinusClipDurationMs": 51989,
+      "internalGapMs": {
+        "sourceExtraInsideMs": 43522,
+        "clipExtraInsideMs": 1184,
+        "note": "同一素材ブロック内でsource側の進みがclip側より大きい分は、切り抜き内部の詰め候補として扱う。境界にはしない。"
+      },
+      "internalTransitions": [
+        {
+          "fromRun": 308,
+          "toRun": 318,
+          "clipGapMs": 6906,
+          "sourceGapMs": 13139,
+          "materialJumpMs": 6233
+        },
+        {
+          "fromRun": 318,
+          "toRun": 324,
+          "clipGapMs": 24842,
+          "sourceGapMs": 31193,
+          "materialJumpMs": 6351
+        },
+        {
+          "fromRun": 324,
+          "toRun": 326,
+          "clipGapMs": 9018,
+          "sourceGapMs": 9187,
+          "materialJumpMs": 169
+        },
+        {
+          "fromRun": 326,
+          "toRun": 327,
+          "clipGapMs": 0,
+          "sourceGapMs": 0,
+          "materialJumpMs": 0
+        },
+        {
+          "fromRun": 327,
+          "toRun": 328,
+          "clipGapMs": 0,
+          "sourceGapMs": 8904,
+          "materialJumpMs": 8904
+        },
+        {
+          "fromRun": 328,
+          "toRun": 330,
+          "clipGapMs": 1182,
+          "sourceGapMs": 1200,
+          "materialJumpMs": 18
+        },
+        {
+          "fromRun": 330,
+          "toRun": 331,
+          "clipGapMs": 0,
+          "sourceGapMs": 0,
+          "materialJumpMs": 0
+        },
+        {
+          "fromRun": 331,
+          "toRun": 333,
+          "clipGapMs": 1682,
+          "sourceGapMs": 2181,
+          "materialJumpMs": 499
+        },
+        {
+          "fromRun": 333,
+          "toRun": 335,
+          "clipGapMs": 1943,
+          "sourceGapMs": 3681,
+          "materialJumpMs": 1738
+        },
+        {
+          "fromRun": 335,
+          "toRun": 336,
+          "clipGapMs": 0,
+          "sourceGapMs": 0,
+          "materialJumpMs": 0
+        },
+        {
+          "fromRun": 336,
+          "toRun": 343,
+          "clipGapMs": 19410,
+          "sourceGapMs": 19424,
+          "materialJumpMs": 14
+        },
+        {
+          "fromRun": 343,
+          "toRun": 344,
+          "clipGapMs": 2698,
+          "sourceGapMs": 2782,
+          "materialJumpMs": 84
+        },
+        {
+          "fromRun": 344,
+          "toRun": 348,
+          "clipGapMs": 6818,
+          "sourceGapMs": 9650,
+          "materialJumpMs": 2832
+        },
+        {
+          "fromRun": 348,
+          "toRun": 349,
+          "clipGapMs": 0,
+          "sourceGapMs": 1641,
+          "materialJumpMs": 1641
+        },
+        {
+          "fromRun": 349,
+          "toRun": 354,
+          "clipGapMs": 8448,
+          "sourceGapMs": 10669,
+          "materialJumpMs": 2221
+        },
+        {
+          "fromRun": 354,
+          "toRun": 356,
+          "clipGapMs": 420,
+          "sourceGapMs": 980,
+          "materialJumpMs": 560
+        },
+        {
+          "fromRun": 356,
+          "toRun": 367,
+          "clipGapMs": 5406,
+          "sourceGapMs": 4582,
+          "materialJumpMs": -824
+        },
+        {
+          "fromRun": 367,
+          "toRun": 370,
+          "clipGapMs": 4989,
+          "sourceGapMs": 5842,
+          "materialJumpMs": 853
+        },
+        {
+          "fromRun": 370,
+          "toRun": 371,
+          "clipGapMs": 0,
+          "sourceGapMs": 0,
+          "materialJumpMs": 0
+        },
+        {
+          "fromRun": 371,
+          "toRun": 373,
+          "clipGapMs": 260,
+          "sourceGapMs": 4644,
+          "materialJumpMs": 4384
+        },
+        {
+          "fromRun": 373,
+          "toRun": 375,
+          "clipGapMs": 380,
+          "sourceGapMs": 20,
+          "materialJumpMs": -360
+        },
+        {
+          "fromRun": 375,
+          "toRun": 379,
+          "clipGapMs": 1683,
+          "sourceGapMs": 1821,
+          "materialJumpMs": 138
+        },
+        {
+          "fromRun": 379,
+          "toRun": 400,
+          "clipGapMs": 36319,
+          "sourceGapMs": 43202,
+          "materialJumpMs": 6883
+        }
+      ]
+    },
+    {
+      "blockIndex": 7,
+      "runIndexes": [
+        405,
+        406,
+        409,
+        415,
+        416
+      ],
+      "clipStartMs": 706442,
+      "clipEndMs": 759546,
+      "sourceStartMs": 4730747,
+      "sourceEndMs": 4787332,
+      "matchedWordPairCount": 87,
+      "clipDurationMs": 53104,
+      "sourceDurationMs": 56585,
+      "sourceMinusClipDurationMs": 3481,
+      "internalGapMs": {
+        "sourceExtraInsideMs": 6021,
+        "clipExtraInsideMs": 0,
+        "note": "同一素材ブロック内でsource側の進みがclip側より大きい分は、切り抜き内部の詰め候補として扱う。境界にはしない。"
+      },
+      "internalTransitions": [
+        {
+          "fromRun": 405,
+          "toRun": 406,
+          "clipGapMs": 260,
+          "sourceGapMs": 921,
+          "materialJumpMs": 661
+        },
+        {
+          "fromRun": 406,
+          "toRun": 409,
+          "clipGapMs": 2423,
+          "sourceGapMs": 5991,
+          "materialJumpMs": 3568
+        },
+        {
+          "fromRun": 409,
+          "toRun": 415,
+          "clipGapMs": 18224,
+          "sourceGapMs": 20016,
+          "materialJumpMs": 1792
+        },
+        {
+          "fromRun": 415,
+          "toRun": 416,
+          "clipGapMs": 0,
+          "sourceGapMs": 0,
+          "materialJumpMs": 0
+        }
+      ]
+    }
+  ],
+  "boundaries": [
+    {
+      "boundaryIndex": 1,
+      "beforeBlockIndex": 1,
+      "afterBlockIndex": 2,
+      "beforeRun": 218,
+      "afterRun": 222,
+      "clipBeforeEndMs": 137396,
+      "clipAfterStartMs": 144521,
+      "sourceBeforeEndMs": 3987910,
+      "sourceAfterStartMs": 4009379,
+      "clipGapMs": 7125,
+      "sourceGapMs": 21469,
+      "materialJumpMs": 14344,
+      "supportingOffsetJumps": [
+        {
+          "pairIndex": 409,
+          "clipMs": 137396,
+          "sourceMs": 4003613,
+          "offsetJumpMs": 15562,
+          "clipText": "ま",
+          "sourceText": "ま"
+        },
+        {
+          "pairIndex": 412,
+          "clipMs": 141098,
+          "sourceMs": 4003853,
+          "offsetJumpMs": -2582,
+          "clipText": "あ",
+          "sourceText": "あ"
+        },
+        {
+          "pairIndex": 418,
+          "clipMs": 144521,
+          "sourceMs": 4009379,
+          "offsetJumpMs": 2343,
+          "clipText": "こ",
+          "sourceText": "こ"
+        }
+      ]
+    },
+    {
+      "boundaryIndex": 2,
+      "beforeBlockIndex": 2,
+      "afterBlockIndex": 3,
+      "beforeRun": 224,
+      "afterRun": 235,
+      "clipBeforeEndMs": 164139,
+      "clipAfterStartMs": 188483,
+      "sourceBeforeEndMs": 4016766,
+      "sourceAfterStartMs": 4070075,
+      "clipGapMs": 24344,
+      "sourceGapMs": 53309,
+      "materialJumpMs": 28965,
+      "supportingOffsetJumps": [
+        {
+          "pairIndex": 445,
+          "clipMs": 164139,
+          "sourceMs": 4037316,
+          "offsetJumpMs": 8311,
+          "clipText": "質",
+          "sourceText": "質"
+        },
+        {
+          "pairIndex": 450,
+          "clipMs": 164960,
+          "sourceMs": 4041579,
+          "offsetJumpMs": 3483,
+          "clipText": "る",
+          "sourceText": "る"
+        },
+        {
+          "pairIndex": 451,
+          "clipMs": 165000,
+          "sourceMs": 4054668,
+          "offsetJumpMs": 13049,
+          "clipText": "さ",
+          "sourceText": "さ"
+        },
+        {
+          "pairIndex": 457,
+          "clipMs": 166321,
+          "sourceMs": 4063112,
+          "offsetJumpMs": 7643,
+          "clipText": "か",
+          "sourceText": "か"
+        },
+        {
+          "pairIndex": 458,
+          "clipMs": 185979,
+          "sourceMs": 4067554,
+          "offsetJumpMs": -15216,
+          "clipText": "な",
+          "sourceText": "な"
+        }
+      ]
+    },
+    {
+      "boundaryIndex": 3,
+      "beforeBlockIndex": 3,
+      "afterBlockIndex": 4,
+      "beforeRun": 259,
+      "afterRun": 270,
+      "clipBeforeEndMs": 298173,
+      "clipAfterStartMs": 309885,
+      "sourceBeforeEndMs": 4198226,
+      "sourceAfterStartMs": 4230098,
+      "clipGapMs": 11712,
+      "sourceGapMs": 31872,
+      "materialJumpMs": 20160,
+      "supportingOffsetJumps": [
+        {
+          "pairIndex": 806,
+          "clipMs": 298173,
+          "sourceMs": 4208386,
+          "offsetJumpMs": 9439,
+          "clipText": "や",
+          "sourceText": "や"
+        },
+        {
+          "pairIndex": 818,
+          "clipMs": 301040,
+          "sourceMs": 4217213,
+          "offsetJumpMs": 6185,
+          "clipText": "1",
+          "sourceText": "1"
+        },
+        {
+          "pairIndex": 826,
+          "clipMs": 302721,
+          "sourceMs": 4219915,
+          "offsetJumpMs": 1782,
+          "clipText": "出",
+          "sourceText": "出"
+        },
+        {
+          "pairIndex": 834,
+          "clipMs": 306043,
+          "sourceMs": 4226059,
+          "offsetJumpMs": 2822,
+          "clipText": "で",
+          "sourceText": "で"
+        }
+      ]
+    },
+    {
+      "boundaryIndex": 4,
+      "beforeBlockIndex": 4,
+      "afterBlockIndex": 5,
+      "beforeRun": 276,
+      "afterRun": 283,
+      "clipBeforeEndMs": 328730,
+      "clipAfterStartMs": 338552,
+      "sourceBeforeEndMs": 4251308,
+      "sourceAfterStartMs": 4274958,
+      "clipGapMs": 9822,
+      "sourceGapMs": 23650,
+      "materialJumpMs": 13828,
+      "supportingOffsetJumps": [
+        {
+          "pairIndex": 912,
+          "clipMs": 332605,
+          "sourceMs": 4264310,
+          "offsetJumpMs": 9127,
+          "clipText": "ツ",
+          "sourceText": "ツ"
+        },
+        {
+          "pairIndex": 922,
+          "clipMs": 336670,
+          "sourceMs": 4270295,
+          "offsetJumpMs": 1941,
+          "clipText": "今",
+          "sourceText": "今"
+        },
+        {
+          "pairIndex": 924,
+          "clipMs": 337791,
+          "sourceMs": 4273998,
+          "offsetJumpMs": 2582,
+          "clipText": "い",
+          "sourceText": "い"
+        }
+      ]
+    },
+    {
+      "boundaryIndex": 5,
+      "beforeBlockIndex": 5,
+      "afterBlockIndex": 6,
+      "beforeRun": 297,
+      "afterRun": 308,
+      "clipBeforeEndMs": 381924,
+      "clipAfterStartMs": 405518,
+      "sourceBeforeEndMs": 4327614,
+      "sourceAfterStartMs": 4366870,
+      "clipGapMs": 23594,
+      "sourceGapMs": 39256,
+      "materialJumpMs": 15662,
+      "supportingOffsetJumps": [
+        {
+          "pairIndex": 1024,
+          "clipMs": 382585,
+          "sourceMs": 4331495,
+          "offsetJumpMs": 3220,
+          "clipText": "お",
+          "sourceText": "お"
+        },
+        {
+          "pairIndex": 1029,
+          "clipMs": 384529,
+          "sourceMs": 4341818,
+          "offsetJumpMs": 8380,
+          "clipText": "あ",
+          "sourceText": "あ"
+        },
+        {
+          "pairIndex": 1030,
+          "clipMs": 392994,
+          "sourceMs": 4345799,
+          "offsetJumpMs": -4484,
+          "clipText": "2",
+          "sourceText": "2"
+        },
+        {
+          "pairIndex": 1037,
+          "clipMs": 398502,
+          "sourceMs": 4357342,
+          "offsetJumpMs": 6016,
+          "clipText": "キ",
+          "sourceText": "キ"
+        },
+        {
+          "pairIndex": 1038,
+          "clipMs": 398522,
+          "sourceMs": 4364028,
+          "offsetJumpMs": 6666,
+          "clipText": "ン",
+          "sourceText": "ン"
+        },
+        {
+          "pairIndex": 1041,
+          "clipMs": 402868,
+          "sourceMs": 4366770,
+          "offsetJumpMs": -2183,
+          "clipText": "ン",
+          "sourceText": "ン"
+        },
+        {
+          "pairIndex": 1043,
+          "clipMs": 405278,
+          "sourceMs": 4366810,
+          "offsetJumpMs": -1829,
+          "clipText": "1",
+          "sourceText": "1"
+        }
+      ]
+    },
+    {
+      "boundaryIndex": 6,
+      "beforeBlockIndex": 6,
+      "afterBlockIndex": 7,
+      "beforeRun": 400,
+      "afterRun": 405,
+      "clipBeforeEndMs": 687624,
+      "clipAfterStartMs": 706442,
+      "sourceBeforeEndMs": 4700965,
+      "sourceAfterStartMs": 4730747,
+      "clipGapMs": 18818,
+      "sourceGapMs": 29782,
+      "materialJumpMs": 10964,
+      "supportingOffsetJumps": [
+        {
+          "pairIndex": 1757,
+          "clipMs": 688886,
+          "sourceMs": 4712572,
+          "offsetJumpMs": 10505,
+          "clipText": "ん",
+          "sourceText": "ん"
+        },
+        {
+          "pairIndex": 1758,
+          "clipMs": 688966,
+          "sourceMs": 4721319,
+          "offsetJumpMs": 8667,
+          "clipText": "な",
+          "sourceText": "な"
+        },
+        {
+          "pairIndex": 1763,
+          "clipMs": 706442,
+          "sourceMs": 4730747,
+          "offsetJumpMs": -8766,
+          "clipText": "コ",
+          "sourceText": "コ"
+        }
+      ]
+    }
+  ],
+  "confirmedRelation": {
+    "status": "not_checked",
+    "message": "この対象には確認済みペアをまだ持たせていないため、素材ブロックとの包含関係は未判定。"
+  },
+  "decisionsProposal": [
+    "- expectedCutsの開始・終了境界は「素材対応の切り替わり点」、つまり元動画の別位置へ飛ぶ点として扱う。同一素材対応の内部で間・沈黙・フィラーを詰めた箇所はexpectedCuts境界にしない。",
+    "- 同一素材ブロック内のジャンプカットや詰めは `internalGapMs` 系の注記として保持する。境界採点では「別素材への飛び」と「同一素材内の編集詰め」を分ける。",
+    "- 人間確認済みの使用範囲が、より粗い素材対応ブロックの内側に入る場合は矛盾ではない。境界を書き換える前に、素材切り替わり点と編集上の使用開始・終了を分けて確認する。"
+  ],
+  "outputs": {
+    "report": "evals/clip_composition/reports/material-blocks-nE_bNeBNp4E-20260715-full-local-stt-material-blocks-v001.md",
+    "htmlPackage": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/index.html"
+  },
+  "productionImpact": {
+    "fixtureCreated": false,
+    "expectedCreated": false,
+    "confirmedPairChanged": false,
+    "runtimeWrites": false,
+    "productionCodeChanged": false
+  },
+  "boundaryAssets": [
+    {
+      "boundaryIndex": 1,
+      "beforeBlockIndex": 1,
+      "afterBlockIndex": 2,
+      "videos": {
+        "beforeMatch": {
+          "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/videos/boundary_01_before_match.mp4",
+          "clipStartMs": 135396,
+          "sourceStartMs": 3985910,
+          "durationMs": 2000
+        },
+        "afterMatch": {
+          "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/videos/boundary_01_after_match.mp4",
+          "clipStartMs": 144521,
+          "sourceStartMs": 4009379,
+          "durationMs": 2000
+        },
+        "clipContext": {
+          "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/videos/boundary_01_clip_context.mp4",
+          "startMs": 135396,
+          "durationMs": 11125
+        },
+        "sourceSequence": {
+          "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/videos/boundary_01_source_sequence.mp4",
+          "beforeStartMs": 3985910,
+          "afterStartMs": 4009379,
+          "durationMs": 2000
+        }
+      },
+      "strips": [
+        {
+          "id": "clip_before",
+          "label": "clip前素材終端",
+          "centerMs": 137396,
+          "audioPath": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/audio/boundary_01_clip_before_pm2s.wav",
+          "stills": [
+            {
+              "offsetMs": -1000,
+              "timeMs": 136396,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_01/clip_before/clip_before_minus1000ms.jpg"
+            },
+            {
+              "offsetMs": -500,
+              "timeMs": 136896,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_01/clip_before/clip_before_minus500ms.jpg"
+            },
+            {
+              "offsetMs": 0,
+              "timeMs": 137396,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_01/clip_before/clip_before_exact.jpg"
+            },
+            {
+              "offsetMs": 500,
+              "timeMs": 137896,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_01/clip_before/clip_before_plus500ms.jpg"
+            },
+            {
+              "offsetMs": 1000,
+              "timeMs": 138396,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_01/clip_before/clip_before_plus1000ms.jpg"
+            }
+          ]
+        },
+        {
+          "id": "clip_after",
+          "label": "clip後素材開始",
+          "centerMs": 144521,
+          "audioPath": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/audio/boundary_01_clip_after_pm2s.wav",
+          "stills": [
+            {
+              "offsetMs": -1000,
+              "timeMs": 143521,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_01/clip_after/clip_after_minus1000ms.jpg"
+            },
+            {
+              "offsetMs": -500,
+              "timeMs": 144021,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_01/clip_after/clip_after_minus500ms.jpg"
+            },
+            {
+              "offsetMs": 0,
+              "timeMs": 144521,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_01/clip_after/clip_after_exact.jpg"
+            },
+            {
+              "offsetMs": 500,
+              "timeMs": 145021,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_01/clip_after/clip_after_plus500ms.jpg"
+            },
+            {
+              "offsetMs": 1000,
+              "timeMs": 145521,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_01/clip_after/clip_after_plus1000ms.jpg"
+            }
+          ]
+        },
+        {
+          "id": "source_before",
+          "label": "source前素材終端",
+          "centerMs": 3987910,
+          "audioPath": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/audio/boundary_01_source_before_pm2s.wav",
+          "stills": [
+            {
+              "offsetMs": -1000,
+              "timeMs": 3986910,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_01/source_before/source_before_minus1000ms.jpg"
+            },
+            {
+              "offsetMs": -500,
+              "timeMs": 3987410,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_01/source_before/source_before_minus500ms.jpg"
+            },
+            {
+              "offsetMs": 0,
+              "timeMs": 3987910,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_01/source_before/source_before_exact.jpg"
+            },
+            {
+              "offsetMs": 500,
+              "timeMs": 3988410,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_01/source_before/source_before_plus500ms.jpg"
+            },
+            {
+              "offsetMs": 1000,
+              "timeMs": 3988910,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_01/source_before/source_before_plus1000ms.jpg"
+            }
+          ]
+        },
+        {
+          "id": "source_after",
+          "label": "source後素材開始",
+          "centerMs": 4009379,
+          "audioPath": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/audio/boundary_01_source_after_pm2s.wav",
+          "stills": [
+            {
+              "offsetMs": -1000,
+              "timeMs": 4008379,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_01/source_after/source_after_minus1000ms.jpg"
+            },
+            {
+              "offsetMs": -500,
+              "timeMs": 4008879,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_01/source_after/source_after_minus500ms.jpg"
+            },
+            {
+              "offsetMs": 0,
+              "timeMs": 4009379,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_01/source_after/source_after_exact.jpg"
+            },
+            {
+              "offsetMs": 500,
+              "timeMs": 4009879,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_01/source_after/source_after_plus500ms.jpg"
+            },
+            {
+              "offsetMs": 1000,
+              "timeMs": 4010379,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_01/source_after/source_after_plus1000ms.jpg"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "boundaryIndex": 2,
+      "beforeBlockIndex": 2,
+      "afterBlockIndex": 3,
+      "videos": {
+        "beforeMatch": {
+          "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/videos/boundary_02_before_match.mp4",
+          "clipStartMs": 162139,
+          "sourceStartMs": 4014766,
+          "durationMs": 2000
+        },
+        "afterMatch": {
+          "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/videos/boundary_02_after_match.mp4",
+          "clipStartMs": 188483,
+          "sourceStartMs": 4070075,
+          "durationMs": 2000
+        },
+        "clipContext": {
+          "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/videos/boundary_02_clip_context.mp4",
+          "startMs": 162139,
+          "durationMs": 28344
+        },
+        "sourceSequence": {
+          "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/videos/boundary_02_source_sequence.mp4",
+          "beforeStartMs": 4014766,
+          "afterStartMs": 4070075,
+          "durationMs": 2000
+        }
+      },
+      "strips": [
+        {
+          "id": "clip_before",
+          "label": "clip前素材終端",
+          "centerMs": 164139,
+          "audioPath": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/audio/boundary_02_clip_before_pm2s.wav",
+          "stills": [
+            {
+              "offsetMs": -1000,
+              "timeMs": 163139,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_02/clip_before/clip_before_minus1000ms.jpg"
+            },
+            {
+              "offsetMs": -500,
+              "timeMs": 163639,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_02/clip_before/clip_before_minus500ms.jpg"
+            },
+            {
+              "offsetMs": 0,
+              "timeMs": 164139,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_02/clip_before/clip_before_exact.jpg"
+            },
+            {
+              "offsetMs": 500,
+              "timeMs": 164639,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_02/clip_before/clip_before_plus500ms.jpg"
+            },
+            {
+              "offsetMs": 1000,
+              "timeMs": 165139,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_02/clip_before/clip_before_plus1000ms.jpg"
+            }
+          ]
+        },
+        {
+          "id": "clip_after",
+          "label": "clip後素材開始",
+          "centerMs": 188483,
+          "audioPath": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/audio/boundary_02_clip_after_pm2s.wav",
+          "stills": [
+            {
+              "offsetMs": -1000,
+              "timeMs": 187483,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_02/clip_after/clip_after_minus1000ms.jpg"
+            },
+            {
+              "offsetMs": -500,
+              "timeMs": 187983,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_02/clip_after/clip_after_minus500ms.jpg"
+            },
+            {
+              "offsetMs": 0,
+              "timeMs": 188483,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_02/clip_after/clip_after_exact.jpg"
+            },
+            {
+              "offsetMs": 500,
+              "timeMs": 188983,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_02/clip_after/clip_after_plus500ms.jpg"
+            },
+            {
+              "offsetMs": 1000,
+              "timeMs": 189483,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_02/clip_after/clip_after_plus1000ms.jpg"
+            }
+          ]
+        },
+        {
+          "id": "source_before",
+          "label": "source前素材終端",
+          "centerMs": 4016766,
+          "audioPath": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/audio/boundary_02_source_before_pm2s.wav",
+          "stills": [
+            {
+              "offsetMs": -1000,
+              "timeMs": 4015766,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_02/source_before/source_before_minus1000ms.jpg"
+            },
+            {
+              "offsetMs": -500,
+              "timeMs": 4016266,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_02/source_before/source_before_minus500ms.jpg"
+            },
+            {
+              "offsetMs": 0,
+              "timeMs": 4016766,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_02/source_before/source_before_exact.jpg"
+            },
+            {
+              "offsetMs": 500,
+              "timeMs": 4017266,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_02/source_before/source_before_plus500ms.jpg"
+            },
+            {
+              "offsetMs": 1000,
+              "timeMs": 4017766,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_02/source_before/source_before_plus1000ms.jpg"
+            }
+          ]
+        },
+        {
+          "id": "source_after",
+          "label": "source後素材開始",
+          "centerMs": 4070075,
+          "audioPath": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/audio/boundary_02_source_after_pm2s.wav",
+          "stills": [
+            {
+              "offsetMs": -1000,
+              "timeMs": 4069075,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_02/source_after/source_after_minus1000ms.jpg"
+            },
+            {
+              "offsetMs": -500,
+              "timeMs": 4069575,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_02/source_after/source_after_minus500ms.jpg"
+            },
+            {
+              "offsetMs": 0,
+              "timeMs": 4070075,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_02/source_after/source_after_exact.jpg"
+            },
+            {
+              "offsetMs": 500,
+              "timeMs": 4070575,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_02/source_after/source_after_plus500ms.jpg"
+            },
+            {
+              "offsetMs": 1000,
+              "timeMs": 4071075,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_02/source_after/source_after_plus1000ms.jpg"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "boundaryIndex": 3,
+      "beforeBlockIndex": 3,
+      "afterBlockIndex": 4,
+      "videos": {
+        "beforeMatch": {
+          "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/videos/boundary_03_before_match.mp4",
+          "clipStartMs": 296173,
+          "sourceStartMs": 4196226,
+          "durationMs": 2000
+        },
+        "afterMatch": {
+          "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/videos/boundary_03_after_match.mp4",
+          "clipStartMs": 309885,
+          "sourceStartMs": 4230098,
+          "durationMs": 2000
+        },
+        "clipContext": {
+          "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/videos/boundary_03_clip_context.mp4",
+          "startMs": 296173,
+          "durationMs": 15712
+        },
+        "sourceSequence": {
+          "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/videos/boundary_03_source_sequence.mp4",
+          "beforeStartMs": 4196226,
+          "afterStartMs": 4230098,
+          "durationMs": 2000
+        }
+      },
+      "strips": [
+        {
+          "id": "clip_before",
+          "label": "clip前素材終端",
+          "centerMs": 298173,
+          "audioPath": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/audio/boundary_03_clip_before_pm2s.wav",
+          "stills": [
+            {
+              "offsetMs": -1000,
+              "timeMs": 297173,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_03/clip_before/clip_before_minus1000ms.jpg"
+            },
+            {
+              "offsetMs": -500,
+              "timeMs": 297673,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_03/clip_before/clip_before_minus500ms.jpg"
+            },
+            {
+              "offsetMs": 0,
+              "timeMs": 298173,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_03/clip_before/clip_before_exact.jpg"
+            },
+            {
+              "offsetMs": 500,
+              "timeMs": 298673,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_03/clip_before/clip_before_plus500ms.jpg"
+            },
+            {
+              "offsetMs": 1000,
+              "timeMs": 299173,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_03/clip_before/clip_before_plus1000ms.jpg"
+            }
+          ]
+        },
+        {
+          "id": "clip_after",
+          "label": "clip後素材開始",
+          "centerMs": 309885,
+          "audioPath": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/audio/boundary_03_clip_after_pm2s.wav",
+          "stills": [
+            {
+              "offsetMs": -1000,
+              "timeMs": 308885,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_03/clip_after/clip_after_minus1000ms.jpg"
+            },
+            {
+              "offsetMs": -500,
+              "timeMs": 309385,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_03/clip_after/clip_after_minus500ms.jpg"
+            },
+            {
+              "offsetMs": 0,
+              "timeMs": 309885,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_03/clip_after/clip_after_exact.jpg"
+            },
+            {
+              "offsetMs": 500,
+              "timeMs": 310385,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_03/clip_after/clip_after_plus500ms.jpg"
+            },
+            {
+              "offsetMs": 1000,
+              "timeMs": 310885,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_03/clip_after/clip_after_plus1000ms.jpg"
+            }
+          ]
+        },
+        {
+          "id": "source_before",
+          "label": "source前素材終端",
+          "centerMs": 4198226,
+          "audioPath": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/audio/boundary_03_source_before_pm2s.wav",
+          "stills": [
+            {
+              "offsetMs": -1000,
+              "timeMs": 4197226,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_03/source_before/source_before_minus1000ms.jpg"
+            },
+            {
+              "offsetMs": -500,
+              "timeMs": 4197726,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_03/source_before/source_before_minus500ms.jpg"
+            },
+            {
+              "offsetMs": 0,
+              "timeMs": 4198226,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_03/source_before/source_before_exact.jpg"
+            },
+            {
+              "offsetMs": 500,
+              "timeMs": 4198726,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_03/source_before/source_before_plus500ms.jpg"
+            },
+            {
+              "offsetMs": 1000,
+              "timeMs": 4199226,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_03/source_before/source_before_plus1000ms.jpg"
+            }
+          ]
+        },
+        {
+          "id": "source_after",
+          "label": "source後素材開始",
+          "centerMs": 4230098,
+          "audioPath": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/audio/boundary_03_source_after_pm2s.wav",
+          "stills": [
+            {
+              "offsetMs": -1000,
+              "timeMs": 4229098,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_03/source_after/source_after_minus1000ms.jpg"
+            },
+            {
+              "offsetMs": -500,
+              "timeMs": 4229598,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_03/source_after/source_after_minus500ms.jpg"
+            },
+            {
+              "offsetMs": 0,
+              "timeMs": 4230098,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_03/source_after/source_after_exact.jpg"
+            },
+            {
+              "offsetMs": 500,
+              "timeMs": 4230598,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_03/source_after/source_after_plus500ms.jpg"
+            },
+            {
+              "offsetMs": 1000,
+              "timeMs": 4231098,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_03/source_after/source_after_plus1000ms.jpg"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "boundaryIndex": 4,
+      "beforeBlockIndex": 4,
+      "afterBlockIndex": 5,
+      "videos": {
+        "beforeMatch": {
+          "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/videos/boundary_04_before_match.mp4",
+          "clipStartMs": 326730,
+          "sourceStartMs": 4249308,
+          "durationMs": 2000
+        },
+        "afterMatch": {
+          "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/videos/boundary_04_after_match.mp4",
+          "clipStartMs": 338552,
+          "sourceStartMs": 4274958,
+          "durationMs": 2000
+        },
+        "clipContext": {
+          "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/videos/boundary_04_clip_context.mp4",
+          "startMs": 326730,
+          "durationMs": 13822
+        },
+        "sourceSequence": {
+          "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/videos/boundary_04_source_sequence.mp4",
+          "beforeStartMs": 4249308,
+          "afterStartMs": 4274958,
+          "durationMs": 2000
+        }
+      },
+      "strips": [
+        {
+          "id": "clip_before",
+          "label": "clip前素材終端",
+          "centerMs": 328730,
+          "audioPath": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/audio/boundary_04_clip_before_pm2s.wav",
+          "stills": [
+            {
+              "offsetMs": -1000,
+              "timeMs": 327730,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_04/clip_before/clip_before_minus1000ms.jpg"
+            },
+            {
+              "offsetMs": -500,
+              "timeMs": 328230,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_04/clip_before/clip_before_minus500ms.jpg"
+            },
+            {
+              "offsetMs": 0,
+              "timeMs": 328730,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_04/clip_before/clip_before_exact.jpg"
+            },
+            {
+              "offsetMs": 500,
+              "timeMs": 329230,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_04/clip_before/clip_before_plus500ms.jpg"
+            },
+            {
+              "offsetMs": 1000,
+              "timeMs": 329730,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_04/clip_before/clip_before_plus1000ms.jpg"
+            }
+          ]
+        },
+        {
+          "id": "clip_after",
+          "label": "clip後素材開始",
+          "centerMs": 338552,
+          "audioPath": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/audio/boundary_04_clip_after_pm2s.wav",
+          "stills": [
+            {
+              "offsetMs": -1000,
+              "timeMs": 337552,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_04/clip_after/clip_after_minus1000ms.jpg"
+            },
+            {
+              "offsetMs": -500,
+              "timeMs": 338052,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_04/clip_after/clip_after_minus500ms.jpg"
+            },
+            {
+              "offsetMs": 0,
+              "timeMs": 338552,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_04/clip_after/clip_after_exact.jpg"
+            },
+            {
+              "offsetMs": 500,
+              "timeMs": 339052,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_04/clip_after/clip_after_plus500ms.jpg"
+            },
+            {
+              "offsetMs": 1000,
+              "timeMs": 339552,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_04/clip_after/clip_after_plus1000ms.jpg"
+            }
+          ]
+        },
+        {
+          "id": "source_before",
+          "label": "source前素材終端",
+          "centerMs": 4251308,
+          "audioPath": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/audio/boundary_04_source_before_pm2s.wav",
+          "stills": [
+            {
+              "offsetMs": -1000,
+              "timeMs": 4250308,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_04/source_before/source_before_minus1000ms.jpg"
+            },
+            {
+              "offsetMs": -500,
+              "timeMs": 4250808,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_04/source_before/source_before_minus500ms.jpg"
+            },
+            {
+              "offsetMs": 0,
+              "timeMs": 4251308,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_04/source_before/source_before_exact.jpg"
+            },
+            {
+              "offsetMs": 500,
+              "timeMs": 4251808,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_04/source_before/source_before_plus500ms.jpg"
+            },
+            {
+              "offsetMs": 1000,
+              "timeMs": 4252308,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_04/source_before/source_before_plus1000ms.jpg"
+            }
+          ]
+        },
+        {
+          "id": "source_after",
+          "label": "source後素材開始",
+          "centerMs": 4274958,
+          "audioPath": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/audio/boundary_04_source_after_pm2s.wav",
+          "stills": [
+            {
+              "offsetMs": -1000,
+              "timeMs": 4273958,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_04/source_after/source_after_minus1000ms.jpg"
+            },
+            {
+              "offsetMs": -500,
+              "timeMs": 4274458,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_04/source_after/source_after_minus500ms.jpg"
+            },
+            {
+              "offsetMs": 0,
+              "timeMs": 4274958,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_04/source_after/source_after_exact.jpg"
+            },
+            {
+              "offsetMs": 500,
+              "timeMs": 4275458,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_04/source_after/source_after_plus500ms.jpg"
+            },
+            {
+              "offsetMs": 1000,
+              "timeMs": 4275958,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_04/source_after/source_after_plus1000ms.jpg"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "boundaryIndex": 5,
+      "beforeBlockIndex": 5,
+      "afterBlockIndex": 6,
+      "videos": {
+        "beforeMatch": {
+          "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/videos/boundary_05_before_match.mp4",
+          "clipStartMs": 379924,
+          "sourceStartMs": 4325614,
+          "durationMs": 2000
+        },
+        "afterMatch": {
+          "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/videos/boundary_05_after_match.mp4",
+          "clipStartMs": 405518,
+          "sourceStartMs": 4366870,
+          "durationMs": 2000
+        },
+        "clipContext": {
+          "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/videos/boundary_05_clip_context.mp4",
+          "startMs": 379924,
+          "durationMs": 27594
+        },
+        "sourceSequence": {
+          "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/videos/boundary_05_source_sequence.mp4",
+          "beforeStartMs": 4325614,
+          "afterStartMs": 4366870,
+          "durationMs": 2000
+        }
+      },
+      "strips": [
+        {
+          "id": "clip_before",
+          "label": "clip前素材終端",
+          "centerMs": 381924,
+          "audioPath": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/audio/boundary_05_clip_before_pm2s.wav",
+          "stills": [
+            {
+              "offsetMs": -1000,
+              "timeMs": 380924,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_05/clip_before/clip_before_minus1000ms.jpg"
+            },
+            {
+              "offsetMs": -500,
+              "timeMs": 381424,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_05/clip_before/clip_before_minus500ms.jpg"
+            },
+            {
+              "offsetMs": 0,
+              "timeMs": 381924,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_05/clip_before/clip_before_exact.jpg"
+            },
+            {
+              "offsetMs": 500,
+              "timeMs": 382424,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_05/clip_before/clip_before_plus500ms.jpg"
+            },
+            {
+              "offsetMs": 1000,
+              "timeMs": 382924,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_05/clip_before/clip_before_plus1000ms.jpg"
+            }
+          ]
+        },
+        {
+          "id": "clip_after",
+          "label": "clip後素材開始",
+          "centerMs": 405518,
+          "audioPath": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/audio/boundary_05_clip_after_pm2s.wav",
+          "stills": [
+            {
+              "offsetMs": -1000,
+              "timeMs": 404518,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_05/clip_after/clip_after_minus1000ms.jpg"
+            },
+            {
+              "offsetMs": -500,
+              "timeMs": 405018,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_05/clip_after/clip_after_minus500ms.jpg"
+            },
+            {
+              "offsetMs": 0,
+              "timeMs": 405518,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_05/clip_after/clip_after_exact.jpg"
+            },
+            {
+              "offsetMs": 500,
+              "timeMs": 406018,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_05/clip_after/clip_after_plus500ms.jpg"
+            },
+            {
+              "offsetMs": 1000,
+              "timeMs": 406518,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_05/clip_after/clip_after_plus1000ms.jpg"
+            }
+          ]
+        },
+        {
+          "id": "source_before",
+          "label": "source前素材終端",
+          "centerMs": 4327614,
+          "audioPath": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/audio/boundary_05_source_before_pm2s.wav",
+          "stills": [
+            {
+              "offsetMs": -1000,
+              "timeMs": 4326614,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_05/source_before/source_before_minus1000ms.jpg"
+            },
+            {
+              "offsetMs": -500,
+              "timeMs": 4327114,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_05/source_before/source_before_minus500ms.jpg"
+            },
+            {
+              "offsetMs": 0,
+              "timeMs": 4327614,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_05/source_before/source_before_exact.jpg"
+            },
+            {
+              "offsetMs": 500,
+              "timeMs": 4328114,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_05/source_before/source_before_plus500ms.jpg"
+            },
+            {
+              "offsetMs": 1000,
+              "timeMs": 4328614,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_05/source_before/source_before_plus1000ms.jpg"
+            }
+          ]
+        },
+        {
+          "id": "source_after",
+          "label": "source後素材開始",
+          "centerMs": 4366870,
+          "audioPath": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/audio/boundary_05_source_after_pm2s.wav",
+          "stills": [
+            {
+              "offsetMs": -1000,
+              "timeMs": 4365870,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_05/source_after/source_after_minus1000ms.jpg"
+            },
+            {
+              "offsetMs": -500,
+              "timeMs": 4366370,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_05/source_after/source_after_minus500ms.jpg"
+            },
+            {
+              "offsetMs": 0,
+              "timeMs": 4366870,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_05/source_after/source_after_exact.jpg"
+            },
+            {
+              "offsetMs": 500,
+              "timeMs": 4367370,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_05/source_after/source_after_plus500ms.jpg"
+            },
+            {
+              "offsetMs": 1000,
+              "timeMs": 4367870,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_05/source_after/source_after_plus1000ms.jpg"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "boundaryIndex": 6,
+      "beforeBlockIndex": 6,
+      "afterBlockIndex": 7,
+      "videos": {
+        "beforeMatch": {
+          "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/videos/boundary_06_before_match.mp4",
+          "clipStartMs": 685624,
+          "sourceStartMs": 4698965,
+          "durationMs": 2000
+        },
+        "afterMatch": {
+          "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/videos/boundary_06_after_match.mp4",
+          "clipStartMs": 706442,
+          "sourceStartMs": 4730747,
+          "durationMs": 2000
+        },
+        "clipContext": {
+          "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/videos/boundary_06_clip_context.mp4",
+          "startMs": 685624,
+          "durationMs": 22818
+        },
+        "sourceSequence": {
+          "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/videos/boundary_06_source_sequence.mp4",
+          "beforeStartMs": 4698965,
+          "afterStartMs": 4730747,
+          "durationMs": 2000
+        }
+      },
+      "strips": [
+        {
+          "id": "clip_before",
+          "label": "clip前素材終端",
+          "centerMs": 687624,
+          "audioPath": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/audio/boundary_06_clip_before_pm2s.wav",
+          "stills": [
+            {
+              "offsetMs": -1000,
+              "timeMs": 686624,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_06/clip_before/clip_before_minus1000ms.jpg"
+            },
+            {
+              "offsetMs": -500,
+              "timeMs": 687124,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_06/clip_before/clip_before_minus500ms.jpg"
+            },
+            {
+              "offsetMs": 0,
+              "timeMs": 687624,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_06/clip_before/clip_before_exact.jpg"
+            },
+            {
+              "offsetMs": 500,
+              "timeMs": 688124,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_06/clip_before/clip_before_plus500ms.jpg"
+            },
+            {
+              "offsetMs": 1000,
+              "timeMs": 688624,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_06/clip_before/clip_before_plus1000ms.jpg"
+            }
+          ]
+        },
+        {
+          "id": "clip_after",
+          "label": "clip後素材開始",
+          "centerMs": 706442,
+          "audioPath": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/audio/boundary_06_clip_after_pm2s.wav",
+          "stills": [
+            {
+              "offsetMs": -1000,
+              "timeMs": 705442,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_06/clip_after/clip_after_minus1000ms.jpg"
+            },
+            {
+              "offsetMs": -500,
+              "timeMs": 705942,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_06/clip_after/clip_after_minus500ms.jpg"
+            },
+            {
+              "offsetMs": 0,
+              "timeMs": 706442,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_06/clip_after/clip_after_exact.jpg"
+            },
+            {
+              "offsetMs": 500,
+              "timeMs": 706942,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_06/clip_after/clip_after_plus500ms.jpg"
+            },
+            {
+              "offsetMs": 1000,
+              "timeMs": 707442,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_06/clip_after/clip_after_plus1000ms.jpg"
+            }
+          ]
+        },
+        {
+          "id": "source_before",
+          "label": "source前素材終端",
+          "centerMs": 4700965,
+          "audioPath": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/audio/boundary_06_source_before_pm2s.wav",
+          "stills": [
+            {
+              "offsetMs": -1000,
+              "timeMs": 4699965,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_06/source_before/source_before_minus1000ms.jpg"
+            },
+            {
+              "offsetMs": -500,
+              "timeMs": 4700465,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_06/source_before/source_before_minus500ms.jpg"
+            },
+            {
+              "offsetMs": 0,
+              "timeMs": 4700965,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_06/source_before/source_before_exact.jpg"
+            },
+            {
+              "offsetMs": 500,
+              "timeMs": 4701465,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_06/source_before/source_before_plus500ms.jpg"
+            },
+            {
+              "offsetMs": 1000,
+              "timeMs": 4701965,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_06/source_before/source_before_plus1000ms.jpg"
+            }
+          ]
+        },
+        {
+          "id": "source_after",
+          "label": "source後素材開始",
+          "centerMs": 4730747,
+          "audioPath": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/audio/boundary_06_source_after_pm2s.wav",
+          "stills": [
+            {
+              "offsetMs": -1000,
+              "timeMs": 4729747,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_06/source_after/source_after_minus1000ms.jpg"
+            },
+            {
+              "offsetMs": -500,
+              "timeMs": 4730247,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_06/source_after/source_after_minus500ms.jpg"
+            },
+            {
+              "offsetMs": 0,
+              "timeMs": 4730747,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_06/source_after/source_after_exact.jpg"
+            },
+            {
+              "offsetMs": 500,
+              "timeMs": 4731247,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_06/source_after/source_after_plus500ms.jpg"
+            },
+            {
+              "offsetMs": 1000,
+              "timeMs": 4731747,
+              "path": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/stills/boundary_06/source_after/source_after_plus1000ms.jpg"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
