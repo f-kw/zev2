@@ -15,10 +15,11 @@
     ]
   },
   "sourceDiscovery": {
-    "status": "source_fixed_before_stt",
+    "status": "stt_server_restart_required",
     "notes": [
       "切り抜き説明欄が示す単一元配信を、STT・照合・expected作成前に固定した。",
       "元配信のチャットリプレイが取得可能であることを選定前に確認した。",
+      "教師27チャンク・元配信259チャンクの音声分割まで完了。2026-07-15時点で末尾9のSTTがhealth timeoutのため、応答保存0件で停止。",
       "対応確定はローカルSTT、大域照合、素材ブロック再構成、人間確認後。"
     ],
     "primarySourceCandidate": {
@@ -44,6 +45,6 @@
   ],
   "freezeStatus": {
     "readyForFreeze": false,
-    "reason": "元配信固定済み。ローカルSTT、照合、素材ブロック確認、人間確認、固定テーマが未完了。"
+    "reason": "元配信固定と音声分割は完了。末尾9のSTTがhealth timeoutのため再開待ち。照合、素材ブロック確認、人間確認、固定テーマは未完了。"
   }
 }
