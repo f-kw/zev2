@@ -20,15 +20,19 @@
   "completedSessionCount": 2,
   "nextSessionNumber": 3,
   "remainingDelivery": {
-    "mode": "batched-links-by-human-request",
+    "mode": "combined-single-page-by-human-request",
     "sessionNumbers": [
       3,
       4,
       5,
       6
     ],
-    "uiSessionsRemainSeparate": true,
-    "reason": "人間の往復回数を減らすため、セッション3以降はリンクと回答をまとめて受け渡す。各画面の独立判定数上限は維持する。"
+    "uiStepsRemainSeparate": true,
+    "combinedHtml": "evals/clip_composition/outputs/boundary-check/nE_bNeBNp4E/20260715-full-local-stt-material-blocks-v001/human-review-sessions-v001/combined-sessions-03-to-06-v002/index.html",
+    "supersedesIndividualLinksForHumanDelivery": true,
+    "individualHtmlPreservedAsFailureHistory": true,
+    "videoSizing": "viewport-height-limited-and-contained",
+    "reason": "別リンク4件は一括導線ではなく、動画も実表示領域より大きかった。残り4境界を1ページ内の段階表示と一括コピーへ置換し、各段階の判断数4〜5は維持する。"
   },
   "productionImpact": {
     "fixtureWrites": false,
