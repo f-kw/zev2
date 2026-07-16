@@ -1,0 +1,115 @@
+{
+  "kind": "third_material_hand_trim_trial_session_result",
+  "version": "human-boundary-trim-v002-third-material-ui-v004",
+  "sessionId": "session-1",
+  "reviewer": "kawafmm",
+  "reviewDate": "2026-07-16",
+  "sourceManifest": "evals/clip_composition/outputs/human-boundary-trim/20260716-third-material-trial-v002/manifest.json",
+  "interactionTimingRecorded": false,
+  "fixtureAndExpectedChanges": false,
+  "results": [
+    {
+      "displayNumber": 1,
+      "role": "third-material-scored-item",
+      "fixtureId": "nE_bNeBNp4E_multiblock_material_v001",
+      "candidateId": 35,
+      "rank": 1,
+      "title": "友情崩壊？まさかの裏切りにブチギレるマリン",
+      "decision": "publish_within_scene_editing",
+      "provisionalRange": {
+        "sourceStartMs": 2975023,
+        "sourceEndMs": 3014776
+      },
+      "humanBoundary": {
+        "sourceStartMs": 2975023,
+        "sourceEndMs": 3119740,
+        "startText": "シマシカさんとは友情が芽生えてる今お互いにさライアーって言うのはやめようだってシマシカさん嘘つかないからそしてマリンも嘘つかないお前さ",
+        "endText": "バーカ無限に持ってんだよこっちは無限やねんこっちは血で行ってよし何がダーリンだバカ勝ち勝った勝ちました嬉しい"
+      },
+      "boundaryDeltaMs": {
+        "start": 0,
+        "end": 104964
+      },
+      "humanNote": "面白かった。このゲームでは発砲がオチになるため、そこまで見せる方がよい。長い場合は途中の不要部分をカットする。",
+      "interpretationLimit": "開始と終了は必要素材を含む外枠であり、144717msを連続したまま公開する判断ではない。区間内カット後の完成尺は未確定。"
+    },
+    {
+      "displayNumber": 2,
+      "role": "reproducibility-control",
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateId": 32,
+      "title": "マリンの甘い言葉に急に冷たくなるころねと連呼される「キモい」",
+      "decision": "skip",
+      "priorDecision": "publish",
+      "sameAsPriorDecision": false,
+      "priorSourceReview": "2026-07-15 UI v003正式回答"
+    },
+    {
+      "displayNumber": 3,
+      "role": "third-material-scored-item",
+      "fixtureId": "nE_bNeBNp4E_multiblock_material_v001",
+      "candidateId": 47,
+      "rank": 2,
+      "title": "戌神ころねファンのリスナーに「浮気」と詰め寄るマリン",
+      "decision": "publish_within_scene_editing",
+      "provisionalRange": {
+        "sourceStartMs": 4123746,
+        "sourceEndMs": 4198226
+      },
+      "humanBoundary": {
+        "sourceStartMs": 4117044,
+        "sourceEndMs": 4198226,
+        "startText": "ジョーカーか誰の番これ?",
+        "endText": "これコロネが知ったら悲しむよ他の女と遊んでるんだって"
+      },
+      "boundaryDeltaMs": {
+        "start": -6702,
+        "end": 0
+      }
+    },
+    {
+      "displayNumber": 4,
+      "role": "reproducibility-control",
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateId": 14,
+      "title": "アドバイス起因の荒れを懸念し、こよりへの相談をやめるマリン",
+      "decision": "skip",
+      "priorDecision": "skip",
+      "sameAsPriorDecision": true,
+      "priorSourceReview": "2026-07-15 UI v003正式回答"
+    },
+    {
+      "displayNumber": 5,
+      "role": "third-material-scored-item",
+      "fixtureId": "nE_bNeBNp4E_multiblock_material_v001",
+      "candidateId": 59,
+      "rank": 3,
+      "title": "マリンのADHD的？な片付け事情と無意識の脱衣",
+      "decision": "publish_within_scene_editing",
+      "provisionalRange": {
+        "sourceStartMs": 5941162,
+        "sourceEndMs": 5992736
+      },
+      "humanBoundary": {
+        "sourceStartMs": 5941162,
+        "sourceEndMs": 5992736,
+        "startText": "あ、さあ船長さあ何かやってる最中でもさあ違うことが気になったらそれやり始めちゃうんだよねこれやばいよねなんか最近さあ引っ越しがあってさあ片付けてるんだけど最中にそうだあれやらないとって思ったらやり始めるからあっちこっちで30%だけ進んだものが大量にあってでぐるぐる回りながら一つずつ片付けていくのうんでもね結局全部片付けてる",
+        "endText": "片付けよう1個ずつ片付けていくあ、そうだあれもこれもってやってるうちに1個ずつ片付いていって一応全部片付けはするの綺麗にはなるんだけどやりかけでいろんなことやり始めちゃう困ったもんですえ、なんか無意識にまた服脱いでたけど寒い気をこうしてと"
+      },
+      "boundaryDeltaMs": {
+        "start": 0,
+        "end": 0
+      }
+    }
+  ],
+  "summary": {
+    "thirdMaterialReviewedCount": 3,
+    "thirdMaterialPublishCandidateCount": 3,
+    "thirdMaterialSkipCount": 0,
+    "thirdMaterialContextRequiredCount": 0,
+    "reproducibilityControlCount": 2,
+    "reproducibilityControlSameDecisionCount": 1,
+    "reproducibilityControlChangedDecisionCount": 1,
+    "remainingThirdMaterialCount": 2
+  }
+}
