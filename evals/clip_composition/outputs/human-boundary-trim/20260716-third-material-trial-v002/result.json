@@ -1,0 +1,117 @@
+{
+  "kind": "third_material_fixed_pipeline_result",
+  "version": "third-material-fixed-pipeline-v001",
+  "fixtureId": "nE_bNeBNp4E_multiblock_material_v001",
+  "reviewer": "kawafmm",
+  "completedDate": "2026-07-16",
+  "generation": {
+    "inputSelection": "input-selection-v004",
+    "themeGeneration": "theme-llm-v002@gemini-web-flash",
+    "candidateRanking": "candidate-ranking-v002@gemini-web-flash",
+    "runCount": 1
+  },
+  "sourceResults": [
+    "evals/clip_composition/outputs/human-boundary-trim/20260716-third-material-trial-v002/results/session-1-human-review-20260716-v001.json",
+    "evals/clip_composition/outputs/human-boundary-trim/20260716-third-material-trial-v002/results/session-2-human-review-20260716-v001.json"
+  ],
+  "thirdMaterialResults": [
+    {
+      "candidateId": 35,
+      "rank": 1,
+      "knownRangeHit": false,
+      "decision": "publish_within_scene_editing",
+      "boundaryDeltaMs": {
+        "start": 0,
+        "end": 104964
+      },
+      "note": "発砲と勝利をオチとして含む外枠。途中の不要部分は区間内編集で切る。"
+    },
+    {
+      "candidateId": 47,
+      "rank": 2,
+      "knownRangeHit": true,
+      "decision": "publish_within_scene_editing",
+      "boundaryDeltaMs": {
+        "start": -6702,
+        "end": 0
+      }
+    },
+    {
+      "candidateId": 59,
+      "rank": 3,
+      "knownRangeHit": false,
+      "decision": "publish_within_scene_editing",
+      "boundaryDeltaMs": {
+        "start": 0,
+        "end": 0
+      }
+    },
+    {
+      "candidateId": 10,
+      "rank": 4,
+      "knownRangeHit": false,
+      "decision": "publish_within_scene_editing",
+      "boundaryDeltaMs": {
+        "start": -30766,
+        "end": -20
+      },
+      "note": "『なんで』の反応を理解できるよう、LIARと言われる直前の因果を含める。固定秒数の前方拡張規則にはしない。"
+    },
+    {
+      "candidateId": 54,
+      "rank": 5,
+      "knownRangeHit": false,
+      "decision": "skip"
+    }
+  ],
+  "aggregate": {
+    "thirdMaterialReviewedCount": 5,
+    "publishCandidateCount": 4,
+    "skipCount": 1,
+    "contextRequiredCount": 0,
+    "knownRangeHitPublishCount": 1,
+    "unlabeledPublishCount": 3,
+    "interactionTimingRecorded": false,
+    "fifteenMinuteCondition": "not_measured"
+  },
+  "reproducibilityControls": {
+    "reviewedCount": 2,
+    "sameDecisionCount": 1,
+    "changedDecisionCount": 1,
+    "excludedFromThirdMaterialScore": true,
+    "interpretationLimit": "問いの契約も以前より明確なため、2件から人間判定の一般再現率は算出しない。"
+  },
+  "comparison": [
+    {
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "expectedInputVisible": "12/13",
+      "themeRangeHit": "12/13",
+      "candidateRankingV002StrongTop5": "4/5"
+    },
+    {
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "expectedInputVisible": "18/25",
+      "themeRangeHit": "15/25",
+      "candidateRankingV002StrongTop5": "4/5"
+    },
+    {
+      "fixtureId": "nE_bNeBNp4E_multiblock_material_v001",
+      "expectedInputVisible": "6/6",
+      "themeRangeHit": "4/6",
+      "handTrimV002PublishableTop5": "4/5"
+    }
+  ],
+  "comparisonLimit": "既存2素材の4/5は候補価値監査の『強い候補』、第三素材の4/5は区間内編集後の『公開候補』で判定契約が異なる。数値の一致は部分再現の補助材料であり、同一指標の直接再現とは扱わない。",
+  "verdict": {
+    "status": "partial_reproduction_limited_pass",
+    "meaning": "固定条件の第三素材でもテーマ範囲hitが既存2素材の観測範囲内に入り、ランキング上位5から人間公開候補4/5を得た。既存2素材の強い候補4/5とは数値が一致するが、判定契約が異なるため部分再現に留める。",
+    "notProven": [
+      "配信者をまたぐ汎化",
+      "複数runでの揺れ",
+      "複数確認者での再現性",
+      "1配信15分条件",
+      "第二関門の正式通過"
+    ]
+  },
+  "fixtureAndExpectedChanges": false
+}

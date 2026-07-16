@@ -1,0 +1,53 @@
+{
+  "kind": "third_material_hand_trim_trial_session_result",
+  "version": "human-boundary-trim-v002-third-material-ui-v004",
+  "sessionId": "session-2",
+  "reviewer": "kawafmm",
+  "reviewDate": "2026-07-16",
+  "sourceManifest": "evals/clip_composition/outputs/human-boundary-trim/20260716-third-material-trial-v002/manifest.json",
+  "interactionTimingRecorded": false,
+  "fixtureAndExpectedChanges": false,
+  "results": [
+    {
+      "displayNumber": 1,
+      "role": "third-material-scored-item",
+      "fixtureId": "nE_bNeBNp4E_multiblock_material_v001",
+      "candidateId": 10,
+      "rank": 4,
+      "title": "「なんで」連呼からのロシアンルーレット生存と狂気の勝利宣言",
+      "decision": "publish_within_scene_editing",
+      "provisionalRange": {
+        "sourceStartMs": 750246,
+        "sourceEndMs": 778234
+      },
+      "humanBoundary": {
+        "sourceStartMs": 719480,
+        "sourceEndMs": 778214,
+        "startText": "え、嘘かも違う、できない罰だ罰目が合っちゃったほーらほらなんか自白してんじゃんもう首振ってさ首振ってたもんよ耐えた",
+        "endText": "馬鹿野郎!"
+      },
+      "boundaryDeltaMs": {
+        "start": -30766,
+        "end": -20
+      },
+      "humanNote": "「なんで」と繰り返した理由が分かるように、LIARと言われる流れから含めた。反応だけでなく、その反応を生んだ直前の因果が伝わることがこの候補で必要な文脈だった。",
+      "interpretationLimit": "30,766msの前方拡張を全候補へ適用する規則にはしない。必要な文脈は時間幅ではなく、反応を理解するための因果で判断する。"
+    },
+    {
+      "displayNumber": 2,
+      "role": "third-material-scored-item",
+      "fixtureId": "nE_bNeBNp4E_multiblock_material_v001",
+      "candidateId": 54,
+      "rank": 5,
+      "title": "白銀ノエルのASMRマイクを仮パク中のマリン船長",
+      "decision": "skip"
+    }
+  ],
+  "summary": {
+    "thirdMaterialReviewedCount": 2,
+    "thirdMaterialPublishCandidateCount": 1,
+    "thirdMaterialSkipCount": 1,
+    "thirdMaterialContextRequiredCount": 0,
+    "remainingThirdMaterialCount": 0
+  }
+}
