@@ -17,7 +17,7 @@ function workspaceRoot() {
 const root = workspaceRoot();
 const evalRoot = path.join(root, 'evals', 'clip_composition');
 const sourceId = 'DmWu0jVQfTE';
-const sttId = 'DmWu0jVQfTE_first_gate_unseen_v001';
+const sttId = 'DmWu0jVQfTE_first_gate_unseen_local120_v001';
 const inputSetId = 'DmWu0jVQfTE_chat_velocity_top100_input_selection_v004';
 const outputId = '20260716-first-gate-unseen-v001';
 const sttManifestPath = path.join(evalRoot, 'stt', sttId, 'source', 'manifest.json');
