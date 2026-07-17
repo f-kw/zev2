@@ -1,7 +1,7 @@
 {
   "kind": "first_gate_unseen_formal_hand_trim_manifest",
-  "version": "first-gate-unseen-hand-trim-formal-v001",
-  "createdAt": "2026-07-17T01:22:43.349Z",
+  "version": "first-gate-unseen-hand-trim-formal-v002",
+  "createdAt": "2026-07-17T02:14:43.640Z",
   "sourceId": "DmWu0jVQfTE",
   "sourceDurationMs": 8814021,
   "sourceRanking": "evals/clip_composition/outputs/candidate-ranking/20260716-first-gate-unseen-run1-v002/result.json",
@@ -14,13 +14,15 @@
   "humanWork": {
     "sessionCount": 1,
     "decisionCount": 5,
-    "timeLimitMinutes": 15,
+    "estimatedMinutes": 15,
+    "timeMeasurement": false,
+    "finishedVideoScaleMinutesApprox": 10,
+    "estimateMeaning": "実行部隊が人間へ持ち込む量を抑える設計目安。人間の合否条件ではなく、必要なら長く使ってよい。",
     "finish": "5件の採否と、公開候補3〜5本の外側境界・区間内編集指示の保存。動画書き出しは含めない。"
   },
   "uiContract": {
     "explicitStart": true,
-    "timerStartsAtFirstCandidateDisplay": true,
-    "timerLimitMinutes": 15,
+    "humanTimer": false,
     "characterBoundarySelection": true,
     "numericTimeInput": false,
     "internalCutInstructions": true,
