@@ -1,0 +1,48 @@
+{
+  "kind": "layer1_v003_conservative_long_gap_pair_review_package",
+  "version": "layer1-v003-long-gap-pair-review-v001",
+  "createdAt": "2026-07-17",
+  "sourcePreflight": "evals/clip_composition/outputs/internal-edit/20260717-layer1-v003-long-gap-preflight-v001/result.json",
+  "thresholdMs": 2000,
+  "edgePaddingMs": 120,
+  "itemCount": 3,
+  "reviewPath": "evals/clip_composition/outputs/internal-edit/20260717-layer1-v003-long-gap-pair-review-v001/human-pair-review/review.html",
+  "mediaVerification": [
+    {
+      "candidateId": "nE_bNeBNp4E_multiblock_material_v001:2:voice-013",
+      "beforeDurationMs": 27650,
+      "afterDurationMs": 25183,
+      "observedReductionMs": 2467,
+      "plannedReductionMs": 2480
+    },
+    {
+      "candidateId": "nE_bNeBNp4E_multiblock_material_v001:5:voice-067",
+      "beforeDurationMs": 23217,
+      "afterDurationMs": 21400,
+      "observedReductionMs": 1817,
+      "plannedReductionMs": 1820
+    },
+    {
+      "candidateId": "nE_bNeBNp4E_multiblock_material_v001:5:voice-190",
+      "beforeDurationMs": 29117,
+      "afterDurationMs": 26868,
+      "observedReductionMs": 2249,
+      "plannedReductionMs": 2240
+    }
+  ],
+  "htmlContract": {
+    "cardCount": 3,
+    "decisionInputCount": 9,
+    "seamNoteCount": 3,
+    "hasTimer": false,
+    "hasAutomaticStorage": false,
+    "hasResultCopy": true
+  },
+  "humanWork": {
+    "independentJudgments": 3,
+    "sessions": 1,
+    "estimatedMinutes": "3〜6",
+    "timerRequired": false
+  },
+  "layer1FreezeAfterReview": true
+}

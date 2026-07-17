@@ -45,7 +45,7 @@ export function renderLayer1PairReviewHtml(items) {
 <style>
 :root{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#18202a;background:#f3f5f8}body{margin:0;padding:24px}.wrap{max-width:1120px;margin:auto}.lead,.card,.empty{background:#fff;border:1px solid #d8dee8;border-radius:14px;padding:20px;margin-bottom:18px}.media-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.media-grid video{width:100%;max-height:45vh;background:#111}.choices{display:flex;gap:16px;flex-wrap:wrap;margin:18px 0}.choices label{padding:12px 16px;border:1px solid #bcc6d4;border-radius:10px}.note{display:block;margin:12px 0}.note input,.note textarea{box-sizing:border-box;width:100%;margin-top:6px;padding:10px;font:inherit}.muted{color:#5b6777}button{font:inherit;padding:12px 18px;border:0;border-radius:10px;background:#135ec4;color:#fff}.result{white-space:pre-wrap;background:#0f1720;color:#f1f5f9;padding:14px;border-radius:10px;min-height:48px}@media(max-width:760px){body{padding:10px}.media-grid{grid-template-columns:1fr}}
 </style></head><body><main class="wrap">
-<section class="lead"><h1>層1 詰め前/詰め後 比較</h1><p>最大5件です。時間は測りません。判定はいつでも変更でき、サーバーへ自動保存しません。</p><p>「繋ぎ目の自然さ」は判定を増やさず、違和感がある場合だけ番号を任意記入してください。</p></section>
+<section class="lead"><h1>層1 詰め前/詰め後 比較</h1><p>${items.length}件です。時間は測りません。判定はいつでも変更でき、サーバーへ自動保存しません。</p><p>「繋ぎ目の自然さ」は判定を増やさず、違和感がある場合だけ番号を任意記入してください。</p></section>
 ${itemHtml}
 ${items.length ? '<section class="card"><button id="make-result">結果を作る</button><button id="copy-result">結果をコピー</button><pre id="result" class="result"></pre></section>' : ''}
 </main><script>
@@ -73,15 +73,16 @@ async function renderRange(sourcePath, range, outputPath) {
 async function renderRanges(sourcePath, ranges, outputPath) {
   const filters = [];
   const concatInputs = [];
+  const inputStartMs = Math.min(...ranges.map((range) => range.startMs));
   ranges.forEach((range, index) => {
-    const start = range.startMs / 1000;
-    const end = range.endMs / 1000;
+    const start = (range.startMs - inputStartMs) / 1000;
+    const end = (range.endMs - inputStartMs) / 1000;
     filters.push(`[0:v]trim=start=${start}:end=${end},setpts=PTS-STARTPTS,scale='min(1280,iw)':-2[v${index}]`);
     filters.push(`[0:a]atrim=start=${start}:end=${end},asetpts=PTS-STARTPTS[a${index}]`);
     concatInputs.push(`[v${index}][a${index}]`);
   });
   filters.push(`${concatInputs.join('')}concat=n=${ranges.length}:v=1:a=1[outv][outa]`);
-  await run('ffmpeg', ['-hide_banner', '-loglevel', 'error', '-y', '-i', sourcePath, '-filter_complex', filters.join(';'), '-map', '[outv]', '-map', '[outa]', '-c:v', 'libx264', '-preset', 'veryfast', '-crf', '27', '-c:a', 'aac', '-b:a', '128k', '-movflags', '+faststart', outputPath]);
+  await run('ffmpeg', ['-hide_banner', '-loglevel', 'error', '-y', '-ss', String(inputStartMs / 1000), '-i', sourcePath, '-filter_complex', filters.join(';'), '-map', '[outv]', '-map', '[outa]', '-c:v', 'libx264', '-preset', 'veryfast', '-crf', '27', '-c:a', 'aac', '-b:a', '128k', '-movflags', '+faststart', outputPath]);
 }
 
 export async function buildLayer1PairReview(resultPath, outputRoot) {

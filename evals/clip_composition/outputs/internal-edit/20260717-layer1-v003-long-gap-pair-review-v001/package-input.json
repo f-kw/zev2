@@ -1,0 +1,157 @@
+{
+  "kind": "layer1_v003_conservative_long_gap_pair_review_input",
+  "version": "layer1-v003-long-gap-pair-review-v001",
+  "generationLineage": "layer1-v003-pair-review@deterministic-rule+webrtcvad-2.0.14",
+  "sourcePreflight": "evals/clip_composition/outputs/internal-edit/20260717-layer1-v003-long-gap-preflight-v001/result.json",
+  "thresholdMs": 2000,
+  "edgePaddingMs": 120,
+  "implementationScope": "人間ペア比較パッケージ専用。標準処理・本体接続ではない。",
+  "humanReview": {
+    "itemCount": 3,
+    "sessionCount": 1,
+    "timerRequired": false,
+    "resultContract": [
+      "詰め後が良い",
+      "差はない",
+      "詰め前が良い"
+    ],
+    "seamNaturalnessOptionalNote": true,
+    "selections": [
+      {
+        "fixtureId": "nE_bNeBNp4E_multiblock_material_v001",
+        "expectedIndex": 2,
+        "candidateId": "nE_bNeBNp4E_multiblock_material_v001:2:voice-013",
+        "sourcePath": "evals/clip_composition/research/downloads/nE_bNeBNp4E/sources/qdczJpv8RCc/qdczJpv8RCc.mp4",
+        "outerRange": {
+          "sourceVideoId": "qdczJpv8RCc",
+          "startMs": 4080650,
+          "endMs": 4108290
+        },
+        "context": {
+          "utteranceId": "chunk-0136-utterance-001",
+          "startMs": 4080650,
+          "endMs": 4108290,
+          "text": "マジ殺してやる!見ろ!バカが!なぁ!マリン疑ってんじゃねぇ!マリンが好きなんじゃなかったんか!てで!何生き残ってんだよぉ!生き残んなお前はぁ!デスカード、デビルカード来ないんだけど来るのかないつか来ない"
+        },
+        "cutDirectives": [
+          {
+            "cutId": "nE_bNeBNp4E_multiblock_material_v001:2:voice-013:cut-001",
+            "startMs": 4084435,
+            "endMs": 4086915,
+            "durationMs": 2480,
+            "beforeText": "な",
+            "afterText": "!",
+            "acousticAbsence": {
+              "startMs": 4084315,
+              "endMs": 4087035,
+              "durationMs": 2720
+            },
+            "edgePaddingMs": 120
+          }
+        ],
+        "remainingSourceRanges": [
+          {
+            "sourceVideoId": "qdczJpv8RCc",
+            "startMs": 4080650,
+            "endMs": 4084435
+          },
+          {
+            "sourceVideoId": "qdczJpv8RCc",
+            "startMs": 4086915,
+            "endMs": 4108290
+          }
+        ]
+      },
+      {
+        "fixtureId": "nE_bNeBNp4E_multiblock_material_v001",
+        "expectedIndex": 5,
+        "candidateId": "nE_bNeBNp4E_multiblock_material_v001:5:voice-067",
+        "sourcePath": "evals/clip_composition/research/downloads/nE_bNeBNp4E/sources/qdczJpv8RCc/qdczJpv8RCc.mp4",
+        "outerRange": {
+          "sourceVideoId": "qdczJpv8RCc",
+          "startMs": 4445826,
+          "endMs": 4469038
+        },
+        "context": {
+          "utteranceId": "chunk-0148-utterance-001",
+          "startMs": 4445826,
+          "endMs": 4469038,
+          "text": "あそっかペコラの命ペコラさようならペコラペコラの命が尊きペコラの命がツッキさんはさスイちゃんのさどこが好きなの?歌?なんかうなずきが小さくない?"
+        },
+        "cutDirectives": [
+          {
+            "cutId": "nE_bNeBNp4E_multiblock_material_v001:5:voice-067:cut-001",
+            "startMs": 4455270,
+            "endMs": 4457090,
+            "durationMs": 1820,
+            "beforeText": "命",
+            "afterText": "ツ",
+            "acousticAbsence": {
+              "startMs": 4455150,
+              "endMs": 4457210,
+              "durationMs": 2060
+            },
+            "edgePaddingMs": 120
+          }
+        ],
+        "remainingSourceRanges": [
+          {
+            "sourceVideoId": "qdczJpv8RCc",
+            "startMs": 4445826,
+            "endMs": 4455270
+          },
+          {
+            "sourceVideoId": "qdczJpv8RCc",
+            "startMs": 4457090,
+            "endMs": 4469038
+          }
+        ]
+      },
+      {
+        "fixtureId": "nE_bNeBNp4E_multiblock_material_v001",
+        "expectedIndex": 5,
+        "candidateId": "nE_bNeBNp4E_multiblock_material_v001:5:voice-190",
+        "sourcePath": "evals/clip_composition/research/downloads/nE_bNeBNp4E/sources/qdczJpv8RCc/qdczJpv8RCc.mp4",
+        "outerRange": {
+          "sourceVideoId": "qdczJpv8RCc",
+          "startMs": 4590178,
+          "endMs": 4619286
+        },
+        "context": {
+          "utteranceId": "chunk-0153-utterance-001",
+          "startMs": 4590178,
+          "endMs": 4619286,
+          "text": "僕のことをコロさんに言ってほしいみたいなてめぇはしゃぎやがってじゃ報告しないお前を喜ばしたりしない一旦さサクサクやろうやサクサクこんな序盤でさ嘘つかんから普通に"
+        },
+        "cutDirectives": [
+          {
+            "cutId": "nE_bNeBNp4E_multiblock_material_v001:5:voice-190:cut-001",
+            "startMs": 4611230,
+            "endMs": 4613470,
+            "durationMs": 2240,
+            "beforeText": "サ",
+            "afterText": "こ",
+            "acousticAbsence": {
+              "startMs": 4611110,
+              "endMs": 4613590,
+              "durationMs": 2480
+            },
+            "edgePaddingMs": 120
+          }
+        ],
+        "remainingSourceRanges": [
+          {
+            "sourceVideoId": "qdczJpv8RCc",
+            "startMs": 4590178,
+            "endMs": 4611230
+          },
+          {
+            "sourceVideoId": "qdczJpv8RCc",
+            "startMs": 4613470,
+            "endMs": 4619286
+          }
+        ]
+      }
+    ]
+  }
+}
