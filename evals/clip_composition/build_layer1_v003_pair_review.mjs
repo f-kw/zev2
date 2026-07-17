@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { spawnSync } from 'node:child_process';
+import vm from 'node:vm';
 import { buildLayer1PairReview } from './build_layer1_pair_review.mjs';
 import { loadChunkedSttWords } from './layer1_internal_trim.mjs';
 
@@ -121,13 +122,17 @@ async function main() {
     };
   });
   const html = fs.readFileSync(review.reviewPath, 'utf8');
+  const embeddedScript = html.match(/<script>([\s\S]*)<\/script>/)?.[1];
+  if (!embeddedScript) throw new Error('比較画面のスクリプトがありません');
+  new vm.Script(embeddedScript);
   const htmlContract = {
     cardCount: (html.match(/class="card" data-item=/g) ?? []).length,
     decisionInputCount: (html.match(/type="radio"/g) ?? []).length,
     seamNoteCount: (html.match(/data-seam-note="\d+"/g) ?? []).length,
     hasTimer: /timer|elapsed|performance\.now|Date\.now/.test(html),
     hasAutomaticStorage: /localStorage|sessionStorage|fetch\(/.test(html),
-    hasResultCopy: html.includes('結果をコピー')
+    hasResultCopy: html.includes('結果をコピー'),
+    scriptSyntaxPassed: true
   };
   if (htmlContract.cardCount !== 3 || htmlContract.decisionInputCount !== 9 || htmlContract.seamNoteCount !== 3 || htmlContract.hasTimer || htmlContract.hasAutomaticStorage || !htmlContract.hasResultCopy) {
     throw new Error(`比較画面の契約検査に失敗しました: ${JSON.stringify(htmlContract)}`);

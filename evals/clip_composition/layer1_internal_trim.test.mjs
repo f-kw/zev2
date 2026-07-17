@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
+import vm from 'node:vm';
 import { createLayer1TrimPlan } from './layer1_internal_trim.mjs';
 import { renderLayer1PairReviewHtml } from './build_layer1_pair_review.mjs';
 
@@ -83,4 +84,7 @@ test('ペア比較に繋ぎ目の任意メモ欄を含める', () => {
   assert.match(html, /繋ぎ目に違和感のある箇所があれば番号をメモ（任意）/);
   assert.match(html, /#1/);
   assert.match(html, /サーバーへ自動保存しません/);
+  const script = html.match(/<script>([\s\S]*)<\/script>/)?.[1];
+  assert.ok(script, '比較画面のスクリプトがありません');
+  assert.doesNotThrow(() => new vm.Script(script));
 });

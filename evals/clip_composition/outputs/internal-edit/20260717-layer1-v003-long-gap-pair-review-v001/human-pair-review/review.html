@@ -57,8 +57,7 @@
 <section class="card"><button id="make-result">結果を作る</button><button id="copy-result">結果をコピー</button><pre id="result" class="result"></pre></section>
 </main><script>
 const items=[{"fixtureId":"nE_bNeBNp4E_multiblock_material_v001","expectedIndex":2},{"fixtureId":"nE_bNeBNp4E_multiblock_material_v001","expectedIndex":5},{"fixtureId":"nE_bNeBNp4E_multiblock_material_v001","expectedIndex":5}];
-function resultText(){const lines=['層1 詰め前/詰め後 ペア比較結果'];items.forEach((item,index)=>{const decision=document.querySelector('input[name="decision-'+index+'"]:checked')?.value||'未回答';const seam=document.querySelector('[data-seam-note="'+index+'"]')?.value.trim()||'なし';const note=document.querySelector('[data-note="'+index+'"]')?.value.trim()||'なし';lines.push('確認'+(index+1)+': '+decision+' / '+item.fixtureId+' / expected '+item.expectedIndex);lines.push('繋ぎ目違和感: '+seam);lines.push('メモ: '+note)});return lines.join('
-')}
+function resultText(){const lines=['層1 詰め前/詰め後 ペア比較結果'];items.forEach((item,index)=>{const decision=document.querySelector('input[name="decision-'+index+'"]:checked')?.value||'未回答';const seam=document.querySelector('[data-seam-note="'+index+'"]')?.value.trim()||'なし';const note=document.querySelector('[data-note="'+index+'"]')?.value.trim()||'なし';lines.push('確認'+(index+1)+': '+decision+' / '+item.fixtureId+' / expected '+item.expectedIndex);lines.push('繋ぎ目違和感: '+seam);lines.push('メモ: '+note)});return lines.join('\n')}
 document.getElementById('make-result')?.addEventListener('click',()=>document.getElementById('result').textContent=resultText());
 document.getElementById('copy-result')?.addEventListener('click',async()=>{const text=resultText();document.getElementById('result').textContent=text;await navigator.clipboard.writeText(text)});
 </script></body></html>
