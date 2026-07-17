@@ -1,0 +1,1650 @@
+{
+  "kind": "layer1_v003_conservative_long_gap_preflight",
+  "version": "layer1-v003-long-gap-preflight-v001",
+  "runDate": "2026-07-17",
+  "sourceResult": "evals/clip_composition/outputs/internal-edit/20260717-layer1-trim-v002/result.json",
+  "scope": {
+    "fixtureCount": 7,
+    "expectedCount": 58,
+    "fixtureIds": [
+      "r_ztjHaHmcg_partial_material_v001",
+      "aX-axQMWR3c_single_material_v001",
+      "nOEWCNc77MI_multiblock_material_v001",
+      "9dtwF5Exu5w_multiblock_material_v001",
+      "nE_bNeBNp4E_multiblock_material_v001",
+      "IMQYaT_RWRA_context_v001",
+      "XauLZgnWHtA_part01_partial_material_v001"
+    ]
+  },
+  "thresholds": [
+    {
+      "thresholdMs": 1500,
+      "rawCandidateCount": 14,
+      "afterContextProtectionCount": 7,
+      "protectedCollisionCount": 1,
+      "usableCandidateCount": 7,
+      "referenceTargetCount": 1,
+      "guardReasonCounts": {
+        "outer_edge": 1,
+        "utterance_boundary": 2,
+        "speaker_change": 4
+      },
+      "byFixture": [
+        {
+          "fixtureId": "r_ztjHaHmcg_partial_material_v001",
+          "raw": 3,
+          "afterProtection": 2,
+          "protectedCollision": 0,
+          "referenceTargetCount": 0
+        },
+        {
+          "fixtureId": "aX-axQMWR3c_single_material_v001",
+          "raw": 0,
+          "afterProtection": 0,
+          "protectedCollision": 0,
+          "referenceTargetCount": 0
+        },
+        {
+          "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+          "raw": 0,
+          "afterProtection": 0,
+          "protectedCollision": 0,
+          "referenceTargetCount": 0
+        },
+        {
+          "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+          "raw": 0,
+          "afterProtection": 0,
+          "protectedCollision": 0,
+          "referenceTargetCount": 0
+        },
+        {
+          "fixtureId": "nE_bNeBNp4E_multiblock_material_v001",
+          "raw": 11,
+          "afterProtection": 5,
+          "protectedCollision": 1,
+          "referenceTargetCount": 1
+        },
+        {
+          "fixtureId": "IMQYaT_RWRA_context_v001",
+          "raw": 0,
+          "afterProtection": 0,
+          "protectedCollision": 0,
+          "referenceTargetCount": 0
+        },
+        {
+          "fixtureId": "XauLZgnWHtA_part01_partial_material_v001",
+          "raw": 0,
+          "afterProtection": 0,
+          "protectedCollision": 0,
+          "referenceTargetCount": 0
+        }
+      ],
+      "candidates": [
+        {
+          "fixtureId": "r_ztjHaHmcg_partial_material_v001",
+          "expectedIndex": 4,
+          "candidateId": "r_ztjHaHmcg_partial_material_v001:4:voice-003",
+          "startMs": 2344247,
+          "endMs": 2346127,
+          "durationMs": 1880,
+          "assignedTextCount": 1,
+          "midpointCoveredByAssignedText": true,
+          "guardAllowed": true,
+          "guardReason": null,
+          "previous": {
+            "id": "7144",
+            "text": "る",
+            "speaker": "SPEAKER_00",
+            "utteranceId": "chunk-0007-utterance-009"
+          },
+          "next": {
+            "id": "7146",
+            "text": "そ",
+            "speaker": "SPEAKER_00",
+            "utteranceId": "chunk-0007-utterance-009"
+          },
+          "referenceKeys": [],
+          "protectedIds": []
+        },
+        {
+          "fixtureId": "r_ztjHaHmcg_partial_material_v001",
+          "expectedIndex": 6,
+          "candidateId": "r_ztjHaHmcg_partial_material_v001:6:voice-021",
+          "startMs": 2433981,
+          "endMs": 2435481,
+          "durationMs": 1500,
+          "assignedTextCount": 2,
+          "midpointCoveredByAssignedText": true,
+          "guardAllowed": true,
+          "guardReason": null,
+          "previous": {
+            "id": "7498",
+            "text": "か",
+            "speaker": "SPEAKER_00",
+            "utteranceId": "chunk-0008-utterance-002"
+          },
+          "next": {
+            "id": "7501",
+            "text": "れ",
+            "speaker": "SPEAKER_00",
+            "utteranceId": "chunk-0008-utterance-002"
+          },
+          "referenceKeys": [],
+          "protectedIds": []
+        },
+        {
+          "fixtureId": "r_ztjHaHmcg_partial_material_v001",
+          "expectedIndex": 6,
+          "candidateId": "r_ztjHaHmcg_partial_material_v001:6:voice-022",
+          "startMs": 2436301,
+          "endMs": 2439901,
+          "durationMs": 3600,
+          "assignedTextCount": 1,
+          "midpointCoveredByAssignedText": true,
+          "guardAllowed": false,
+          "guardReason": "outer_edge",
+          "previous": {
+            "id": "7506",
+            "text": "よ",
+            "speaker": "SPEAKER_00",
+            "utteranceId": "chunk-0008-utterance-002"
+          },
+          "next": null,
+          "referenceKeys": [],
+          "protectedIds": []
+        },
+        {
+          "fixtureId": "nE_bNeBNp4E_multiblock_material_v001",
+          "expectedIndex": 1,
+          "candidateId": "nE_bNeBNp4E_multiblock_material_v001:1:voice-026",
+          "startMs": 3958992,
+          "endMs": 3960852,
+          "durationMs": 1860,
+          "assignedTextCount": 0,
+          "midpointCoveredByAssignedText": false,
+          "guardAllowed": false,
+          "guardReason": "utterance_boundary",
+          "previous": {
+            "id": "11618",
+            "text": "う",
+            "speaker": "SPEAKER_00",
+            "utteranceId": "chunk-0131-utterance-001"
+          },
+          "next": {
+            "id": "11619",
+            "text": "や",
+            "speaker": "SPEAKER_00",
+            "utteranceId": "chunk-0132-utterance-001"
+          },
+          "referenceKeys": [
+            "nE:1:2"
+          ],
+          "protectedIds": [
+            "protected-1"
+          ]
+        },
+        {
+          "fixtureId": "nE_bNeBNp4E_multiblock_material_v001",
+          "expectedIndex": 2,
+          "candidateId": "nE_bNeBNp4E_multiblock_material_v001:2:voice-013",
+          "startMs": 4084315,
+          "endMs": 4087035,
+          "durationMs": 2720,
+          "assignedTextCount": 1,
+          "midpointCoveredByAssignedText": true,
+          "guardAllowed": true,
+          "guardReason": null,
+          "previous": {
+            "id": "11921",
+            "text": "な",
+            "speaker": "SPEAKER_00",
+            "utteranceId": "chunk-0136-utterance-001"
+          },
+          "next": {
+            "id": "11923",
+            "text": "!",
+            "speaker": "SPEAKER_00",
+            "utteranceId": "chunk-0136-utterance-001"
+          },
+          "referenceKeys": [
+            "nE:2:2"
+          ],
+          "protectedIds": []
+        },
+        {
+          "fixtureId": "nE_bNeBNp4E_multiblock_material_v001",
+          "expectedIndex": 2,
+          "candidateId": "nE_bNeBNp4E_multiblock_material_v001:2:voice-077",
+          "startMs": 4153435,
+          "endMs": 4155195,
+          "durationMs": 1760,
+          "assignedTextCount": 1,
+          "midpointCoveredByAssignedText": true,
+          "guardAllowed": true,
+          "guardReason": null,
+          "previous": {
+            "id": "12102",
+            "text": "な",
+            "speaker": "SPEAKER_00",
+            "utteranceId": "chunk-0138-utterance-001"
+          },
+          "next": {
+            "id": "12104",
+            "text": "コ",
+            "speaker": "SPEAKER_00",
+            "utteranceId": "chunk-0138-utterance-001"
+          },
+          "referenceKeys": [],
+          "protectedIds": []
+        },
+        {
+          "fixtureId": "nE_bNeBNp4E_multiblock_material_v001",
+          "expectedIndex": 5,
+          "candidateId": "nE_bNeBNp4E_multiblock_material_v001:5:voice-001",
+          "startMs": 4368510,
+          "endMs": 4371430,
+          "durationMs": 2920,
+          "assignedTextCount": 1,
+          "midpointCoveredByAssignedText": true,
+          "guardAllowed": false,
+          "guardReason": "speaker_change",
+          "previous": {
+            "id": "12621",
+            "text": "す",
+            "speaker": "SPEAKER_00",
+            "utteranceId": "chunk-0145-utterance-001"
+          },
+          "next": {
+            "id": "12623",
+            "text": "3",
+            "speaker": "SPEAKER_01",
+            "utteranceId": "chunk-0145-utterance-001"
+          },
+          "referenceKeys": [],
+          "protectedIds": []
+        },
+        {
+          "fixtureId": "nE_bNeBNp4E_multiblock_material_v001",
+          "expectedIndex": 5,
+          "candidateId": "nE_bNeBNp4E_multiblock_material_v001:5:voice-008",
+          "startMs": 4378970,
+          "endMs": 4380570,
+          "durationMs": 1600,
+          "assignedTextCount": 0,
+          "midpointCoveredByAssignedText": false,
+          "guardAllowed": false,
+          "guardReason": "speaker_change",
+          "previous": {
+            "id": "12631",
+            "text": "?",
+            "speaker": "SPEAKER_01",
+            "utteranceId": "chunk-0145-utterance-002"
+          },
+          "next": {
+            "id": "12632",
+            "text": "ま",
+            "speaker": "SPEAKER_02",
+            "utteranceId": "chunk-0146-utterance-001"
+          },
+          "referenceKeys": [
+            "nE:5:1"
+          ],
+          "protectedIds": []
+        },
+        {
+          "fixtureId": "nE_bNeBNp4E_multiblock_material_v001",
+          "expectedIndex": 5,
+          "candidateId": "nE_bNeBNp4E_multiblock_material_v001:5:voice-058",
+          "startMs": 4443770,
+          "endMs": 4445390,
+          "durationMs": 1620,
+          "assignedTextCount": 0,
+          "midpointCoveredByAssignedText": false,
+          "guardAllowed": false,
+          "guardReason": "utterance_boundary",
+          "previous": {
+            "id": "12740",
+            "text": "に",
+            "speaker": "SPEAKER_00",
+            "utteranceId": "chunk-0147-utterance-001"
+          },
+          "next": {
+            "id": "12741",
+            "text": "あ",
+            "speaker": "SPEAKER_00",
+            "utteranceId": "chunk-0148-utterance-001"
+          },
+          "referenceKeys": [
+            "nE:5:5"
+          ],
+          "protectedIds": []
+        },
+        {
+          "fixtureId": "nE_bNeBNp4E_multiblock_material_v001",
+          "expectedIndex": 5,
+          "candidateId": "nE_bNeBNp4E_multiblock_material_v001:5:voice-067",
+          "startMs": 4455150,
+          "endMs": 4457210,
+          "durationMs": 2060,
+          "assignedTextCount": 1,
+          "midpointCoveredByAssignedText": true,
+          "guardAllowed": true,
+          "guardReason": null,
+          "previous": {
+            "id": "12773",
+            "text": "命",
+            "speaker": "SPEAKER_00",
+            "utteranceId": "chunk-0148-utterance-001"
+          },
+          "next": {
+            "id": "12775",
+            "text": "ツ",
+            "speaker": "SPEAKER_00",
+            "utteranceId": "chunk-0148-utterance-001"
+          },
+          "referenceKeys": [],
+          "protectedIds": []
+        },
+        {
+          "fixtureId": "nE_bNeBNp4E_multiblock_material_v001",
+          "expectedIndex": 5,
+          "candidateId": "nE_bNeBNp4E_multiblock_material_v001:5:voice-089",
+          "startMs": 4479470,
+          "endMs": 4481270,
+          "durationMs": 1800,
+          "assignedTextCount": 1,
+          "midpointCoveredByAssignedText": true,
+          "guardAllowed": true,
+          "guardReason": null,
+          "previous": {
+            "id": "12833",
+            "text": "ダ",
+            "speaker": "SPEAKER_00",
+            "utteranceId": "chunk-0149-utterance-001"
+          },
+          "next": {
+            "id": "12835",
+            "text": "ト",
+            "speaker": "SPEAKER_00",
+            "utteranceId": "chunk-0149-utterance-001"
+          },
+          "referenceKeys": [],
+          "protectedIds": []
+        },
+        {
+          "fixtureId": "nE_bNeBNp4E_multiblock_material_v001",
+          "expectedIndex": 5,
+          "candidateId": "nE_bNeBNp4E_multiblock_material_v001:5:voice-154",
+          "startMs": 4561310,
+          "endMs": 4564810,
+          "durationMs": 3500,
+          "assignedTextCount": 1,
+          "midpointCoveredByAssignedText": false,
+          "guardAllowed": false,
+          "guardReason": "speaker_change",
+          "previous": {
+            "id": "13072",
+            "text": "る",
+            "speaker": "unknown",
+            "utteranceId": "chunk-0151-utterance-001"
+          },
+          "next": {
+            "id": "13074",
+            "text": "ロ",
+            "speaker": "SPEAKER_00",
+            "utteranceId": "chunk-0152-utterance-001"
+          },
+          "referenceKeys": [
+            "nE:5:15"
+          ],
+          "protectedIds": []
+        },
+        {
+          "fixtureId": "nE_bNeBNp4E_multiblock_material_v001",
+          "expectedIndex": 5,
+          "candidateId": "nE_bNeBNp4E_multiblock_material_v001:5:voice-190",
+          "startMs": 4611110,
+          "endMs": 4613590,
+          "durationMs": 2480,
+          "assignedTextCount": 1,
+          "midpointCoveredByAssignedText": true,
+          "guardAllowed": true,
+          "guardReason": null,
+          "previous": {
+            "id": "13233",
+            "text": "サ",
+            "speaker": "SPEAKER_01",
+            "utteranceId": "chunk-0153-utterance-001"
+          },
+          "next": {
+            "id": "13235",
+            "text": "こ",
+            "speaker": "SPEAKER_01",
+            "utteranceId": "chunk-0153-utterance-001"
+          },
+          "referenceKeys": [],
+          "protectedIds": []
+        },
+        {
+          "fixtureId": "nE_bNeBNp4E_multiblock_material_v001",
+          "expectedIndex": 5,
+          "candidateId": "nE_bNeBNp4E_multiblock_material_v001:5:voice-198",
+          "startMs": 4619590,
+          "endMs": 4622630,
+          "durationMs": 3040,
+          "assignedTextCount": 0,
+          "midpointCoveredByAssignedText": false,
+          "guardAllowed": false,
+          "guardReason": "speaker_change",
+          "previous": {
+            "id": "13250",
+            "text": "に",
+            "speaker": "SPEAKER_01",
+            "utteranceId": "chunk-0153-utterance-001"
+          },
+          "next": {
+            "id": "13251",
+            "text": "早",
+            "speaker": "SPEAKER_00",
+            "utteranceId": "chunk-0154-utterance-001"
+          },
+          "referenceKeys": [
+            "nE:5:20"
+          ],
+          "protectedIds": []
+        }
+      ]
+    },
+    {
+      "thresholdMs": 2000,
+      "rawCandidateCount": 7,
+      "afterContextProtectionCount": 3,
+      "protectedCollisionCount": 0,
+      "usableCandidateCount": 3,
+      "referenceTargetCount": 1,
+      "guardReasonCounts": {
+        "outer_edge": 1,
+        "speaker_change": 3
+      },
+      "byFixture": [
+        {
+          "fixtureId": "r_ztjHaHmcg_partial_material_v001",
+          "raw": 1,
+          "afterProtection": 0,
+          "protectedCollision": 0,
+          "referenceTargetCount": 0
+        },
+        {
+          "fixtureId": "aX-axQMWR3c_single_material_v001",
+          "raw": 0,
+          "afterProtection": 0,
+          "protectedCollision": 0,
+          "referenceTargetCount": 0
+        },
+        {
+          "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+          "raw": 0,
+          "afterProtection": 0,
+          "protectedCollision": 0,
+          "referenceTargetCount": 0
+        },
+        {
+          "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+          "raw": 0,
+          "afterProtection": 0,
+          "protectedCollision": 0,
+          "referenceTargetCount": 0
+        },
+        {
+          "fixtureId": "nE_bNeBNp4E_multiblock_material_v001",
+          "raw": 6,
+          "afterProtection": 3,
+          "protectedCollision": 0,
+          "referenceTargetCount": 1
+        },
+        {
+          "fixtureId": "IMQYaT_RWRA_context_v001",
+          "raw": 0,
+          "afterProtection": 0,
+          "protectedCollision": 0,
+          "referenceTargetCount": 0
+        },
+        {
+          "fixtureId": "XauLZgnWHtA_part01_partial_material_v001",
+          "raw": 0,
+          "afterProtection": 0,
+          "protectedCollision": 0,
+          "referenceTargetCount": 0
+        }
+      ],
+      "candidates": [
+        {
+          "fixtureId": "r_ztjHaHmcg_partial_material_v001",
+          "expectedIndex": 6,
+          "candidateId": "r_ztjHaHmcg_partial_material_v001:6:voice-022",
+          "startMs": 2436301,
+          "endMs": 2439901,
+          "durationMs": 3600,
+          "assignedTextCount": 1,
+          "midpointCoveredByAssignedText": true,
+          "guardAllowed": false,
+          "guardReason": "outer_edge",
+          "previous": {
+            "id": "7506",
+            "text": "よ",
+            "speaker": "SPEAKER_00",
+            "utteranceId": "chunk-0008-utterance-002"
+          },
+          "next": null,
+          "referenceKeys": [],
+          "protectedIds": []
+        },
+        {
+          "fixtureId": "nE_bNeBNp4E_multiblock_material_v001",
+          "expectedIndex": 2,
+          "candidateId": "nE_bNeBNp4E_multiblock_material_v001:2:voice-013",
+          "startMs": 4084315,
+          "endMs": 4087035,
+          "durationMs": 2720,
+          "assignedTextCount": 1,
+          "midpointCoveredByAssignedText": true,
+          "guardAllowed": true,
+          "guardReason": null,
+          "previous": {
+            "id": "11921",
+            "text": "な",
+            "speaker": "SPEAKER_00",
+            "utteranceId": "chunk-0136-utterance-001"
+          },
+          "next": {
+            "id": "11923",
+            "text": "!",
+            "speaker": "SPEAKER_00",
+            "utteranceId": "chunk-0136-utterance-001"
+          },
+          "referenceKeys": [
+            "nE:2:2"
+          ],
+          "protectedIds": []
+        },
+        {
+          "fixtureId": "nE_bNeBNp4E_multiblock_material_v001",
+          "expectedIndex": 5,
+          "candidateId": "nE_bNeBNp4E_multiblock_material_v001:5:voice-001",
+          "startMs": 4368510,
+          "endMs": 4371430,
+          "durationMs": 2920,
+          "assignedTextCount": 1,
+          "midpointCoveredByAssignedText": true,
+          "guardAllowed": false,
+          "guardReason": "speaker_change",
+          "previous": {
+            "id": "12621",
+            "text": "す",
+            "speaker": "SPEAKER_00",
+            "utteranceId": "chunk-0145-utterance-001"
+          },
+          "next": {
+            "id": "12623",
+            "text": "3",
+            "speaker": "SPEAKER_01",
+            "utteranceId": "chunk-0145-utterance-001"
+          },
+          "referenceKeys": [],
+          "protectedIds": []
+        },
+        {
+          "fixtureId": "nE_bNeBNp4E_multiblock_material_v001",
+          "expectedIndex": 5,
+          "candidateId": "nE_bNeBNp4E_multiblock_material_v001:5:voice-067",
+          "startMs": 4455150,
+          "endMs": 4457210,
+          "durationMs": 2060,
+          "assignedTextCount": 1,
+          "midpointCoveredByAssignedText": true,
+          "guardAllowed": true,
+          "guardReason": null,
+          "previous": {
+            "id": "12773",
+            "text": "命",
+            "speaker": "SPEAKER_00",
+            "utteranceId": "chunk-0148-utterance-001"
+          },
+          "next": {
+            "id": "12775",
+            "text": "ツ",
+            "speaker": "SPEAKER_00",
+            "utteranceId": "chunk-0148-utterance-001"
+          },
+          "referenceKeys": [],
+          "protectedIds": []
+        },
+        {
+          "fixtureId": "nE_bNeBNp4E_multiblock_material_v001",
+          "expectedIndex": 5,
+          "candidateId": "nE_bNeBNp4E_multiblock_material_v001:5:voice-154",
+          "startMs": 4561310,
+          "endMs": 4564810,
+          "durationMs": 3500,
+          "assignedTextCount": 1,
+          "midpointCoveredByAssignedText": false,
+          "guardAllowed": false,
+          "guardReason": "speaker_change",
+          "previous": {
+            "id": "13072",
+            "text": "る",
+            "speaker": "unknown",
+            "utteranceId": "chunk-0151-utterance-001"
+          },
+          "next": {
+            "id": "13074",
+            "text": "ロ",
+            "speaker": "SPEAKER_00",
+            "utteranceId": "chunk-0152-utterance-001"
+          },
+          "referenceKeys": [
+            "nE:5:15"
+          ],
+          "protectedIds": []
+        },
+        {
+          "fixtureId": "nE_bNeBNp4E_multiblock_material_v001",
+          "expectedIndex": 5,
+          "candidateId": "nE_bNeBNp4E_multiblock_material_v001:5:voice-190",
+          "startMs": 4611110,
+          "endMs": 4613590,
+          "durationMs": 2480,
+          "assignedTextCount": 1,
+          "midpointCoveredByAssignedText": true,
+          "guardAllowed": true,
+          "guardReason": null,
+          "previous": {
+            "id": "13233",
+            "text": "サ",
+            "speaker": "SPEAKER_01",
+            "utteranceId": "chunk-0153-utterance-001"
+          },
+          "next": {
+            "id": "13235",
+            "text": "こ",
+            "speaker": "SPEAKER_01",
+            "utteranceId": "chunk-0153-utterance-001"
+          },
+          "referenceKeys": [],
+          "protectedIds": []
+        },
+        {
+          "fixtureId": "nE_bNeBNp4E_multiblock_material_v001",
+          "expectedIndex": 5,
+          "candidateId": "nE_bNeBNp4E_multiblock_material_v001:5:voice-198",
+          "startMs": 4619590,
+          "endMs": 4622630,
+          "durationMs": 3040,
+          "assignedTextCount": 0,
+          "midpointCoveredByAssignedText": false,
+          "guardAllowed": false,
+          "guardReason": "speaker_change",
+          "previous": {
+            "id": "13250",
+            "text": "に",
+            "speaker": "SPEAKER_01",
+            "utteranceId": "chunk-0153-utterance-001"
+          },
+          "next": {
+            "id": "13251",
+            "text": "早",
+            "speaker": "SPEAKER_00",
+            "utteranceId": "chunk-0154-utterance-001"
+          },
+          "referenceKeys": [
+            "nE:5:20"
+          ],
+          "protectedIds": []
+        }
+      ]
+    },
+    {
+      "thresholdMs": 3000,
+      "rawCandidateCount": 3,
+      "afterContextProtectionCount": 0,
+      "protectedCollisionCount": 0,
+      "usableCandidateCount": 0,
+      "referenceTargetCount": 0,
+      "guardReasonCounts": {
+        "outer_edge": 1,
+        "speaker_change": 2
+      },
+      "byFixture": [
+        {
+          "fixtureId": "r_ztjHaHmcg_partial_material_v001",
+          "raw": 1,
+          "afterProtection": 0,
+          "protectedCollision": 0,
+          "referenceTargetCount": 0
+        },
+        {
+          "fixtureId": "aX-axQMWR3c_single_material_v001",
+          "raw": 0,
+          "afterProtection": 0,
+          "protectedCollision": 0,
+          "referenceTargetCount": 0
+        },
+        {
+          "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+          "raw": 0,
+          "afterProtection": 0,
+          "protectedCollision": 0,
+          "referenceTargetCount": 0
+        },
+        {
+          "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+          "raw": 0,
+          "afterProtection": 0,
+          "protectedCollision": 0,
+          "referenceTargetCount": 0
+        },
+        {
+          "fixtureId": "nE_bNeBNp4E_multiblock_material_v001",
+          "raw": 2,
+          "afterProtection": 0,
+          "protectedCollision": 0,
+          "referenceTargetCount": 0
+        },
+        {
+          "fixtureId": "IMQYaT_RWRA_context_v001",
+          "raw": 0,
+          "afterProtection": 0,
+          "protectedCollision": 0,
+          "referenceTargetCount": 0
+        },
+        {
+          "fixtureId": "XauLZgnWHtA_part01_partial_material_v001",
+          "raw": 0,
+          "afterProtection": 0,
+          "protectedCollision": 0,
+          "referenceTargetCount": 0
+        }
+      ],
+      "candidates": [
+        {
+          "fixtureId": "r_ztjHaHmcg_partial_material_v001",
+          "expectedIndex": 6,
+          "candidateId": "r_ztjHaHmcg_partial_material_v001:6:voice-022",
+          "startMs": 2436301,
+          "endMs": 2439901,
+          "durationMs": 3600,
+          "assignedTextCount": 1,
+          "midpointCoveredByAssignedText": true,
+          "guardAllowed": false,
+          "guardReason": "outer_edge",
+          "previous": {
+            "id": "7506",
+            "text": "よ",
+            "speaker": "SPEAKER_00",
+            "utteranceId": "chunk-0008-utterance-002"
+          },
+          "next": null,
+          "referenceKeys": [],
+          "protectedIds": []
+        },
+        {
+          "fixtureId": "nE_bNeBNp4E_multiblock_material_v001",
+          "expectedIndex": 5,
+          "candidateId": "nE_bNeBNp4E_multiblock_material_v001:5:voice-154",
+          "startMs": 4561310,
+          "endMs": 4564810,
+          "durationMs": 3500,
+          "assignedTextCount": 1,
+          "midpointCoveredByAssignedText": false,
+          "guardAllowed": false,
+          "guardReason": "speaker_change",
+          "previous": {
+            "id": "13072",
+            "text": "る",
+            "speaker": "unknown",
+            "utteranceId": "chunk-0151-utterance-001"
+          },
+          "next": {
+            "id": "13074",
+            "text": "ロ",
+            "speaker": "SPEAKER_00",
+            "utteranceId": "chunk-0152-utterance-001"
+          },
+          "referenceKeys": [
+            "nE:5:15"
+          ],
+          "protectedIds": []
+        },
+        {
+          "fixtureId": "nE_bNeBNp4E_multiblock_material_v001",
+          "expectedIndex": 5,
+          "candidateId": "nE_bNeBNp4E_multiblock_material_v001:5:voice-198",
+          "startMs": 4619590,
+          "endMs": 4622630,
+          "durationMs": 3040,
+          "assignedTextCount": 0,
+          "midpointCoveredByAssignedText": false,
+          "guardAllowed": false,
+          "guardReason": "speaker_change",
+          "previous": {
+            "id": "13250",
+            "text": "に",
+            "speaker": "SPEAKER_01",
+            "utteranceId": "chunk-0153-utterance-001"
+          },
+          "next": {
+            "id": "13251",
+            "text": "早",
+            "speaker": "SPEAKER_00",
+            "utteranceId": "chunk-0154-utterance-001"
+          },
+          "referenceKeys": [
+            "nE:5:20"
+          ],
+          "protectedIds": []
+        }
+      ]
+    }
+  ],
+  "protectedTargets": [
+    {
+      "protectedId": "protected-1",
+      "description": "賭けの宣言からゲーム結果・反応まで",
+      "longestVoiceAbsenceMs": 1860,
+      "thresholds": {
+        "1500": "文脈保護",
+        "2000": "閾値未満",
+        "3000": "閾値未満"
+      }
+    },
+    {
+      "protectedId": "protected-2",
+      "description": "強い一言から相手の反応まで",
+      "longestVoiceAbsenceMs": 1080,
+      "thresholds": {
+        "1500": "閾値未満",
+        "2000": "閾値未満",
+        "3000": "閾値未満"
+      }
+    },
+    {
+      "protectedId": "protected-3",
+      "description": "動きによる回答を待つ間",
+      "longestVoiceAbsenceMs": 880,
+      "thresholds": {
+        "1500": "閾値未満",
+        "2000": "閾値未満",
+        "3000": "閾値未満"
+      }
+    }
+  ],
+  "wordTimestampBleed": {
+    "fixedCandidateCount": 27,
+    "midpointCovered": 25,
+    "items": [
+      {
+        "fixtureId": "r_ztjHaHmcg_partial_material_v001",
+        "expectedIndex": 6,
+        "candidateId": "r_ztjHaHmcg_partial_material_v001:6:voice-012",
+        "startMs": 2419601,
+        "endMs": 2420061,
+        "durationMs": 460,
+        "assignedTextCount": 1,
+        "midpointCoveredByAssignedText": true,
+        "guardAllowed": true,
+        "guardReason": null,
+        "previous": {
+          "id": "7428",
+          "text": "T",
+          "speaker": "SPEAKER_00",
+          "utteranceId": "chunk-0008-utterance-001"
+        },
+        "next": {
+          "id": "7430",
+          "text": "b",
+          "speaker": "SPEAKER_00",
+          "utteranceId": "chunk-0008-utterance-001"
+        },
+        "referenceKeys": [
+          "r:6:3"
+        ],
+        "protectedIds": []
+      },
+      {
+        "fixtureId": "nE_bNeBNp4E_multiblock_material_v001",
+        "expectedIndex": 2,
+        "candidateId": "nE_bNeBNp4E_multiblock_material_v001:2:voice-013",
+        "startMs": 4084315,
+        "endMs": 4087035,
+        "durationMs": 2720,
+        "assignedTextCount": 1,
+        "midpointCoveredByAssignedText": true,
+        "guardAllowed": true,
+        "guardReason": null,
+        "previous": {
+          "id": "11921",
+          "text": "な",
+          "speaker": "SPEAKER_00",
+          "utteranceId": "chunk-0136-utterance-001"
+        },
+        "next": {
+          "id": "11923",
+          "text": "!",
+          "speaker": "SPEAKER_00",
+          "utteranceId": "chunk-0136-utterance-001"
+        },
+        "referenceKeys": [
+          "nE:2:2"
+        ],
+        "protectedIds": []
+      },
+      {
+        "fixtureId": "nE_bNeBNp4E_multiblock_material_v001",
+        "expectedIndex": 2,
+        "candidateId": "nE_bNeBNp4E_multiblock_material_v001:2:voice-033",
+        "startMs": 4110715,
+        "endMs": 4111235,
+        "durationMs": 520,
+        "assignedTextCount": 1,
+        "midpointCoveredByAssignedText": true,
+        "guardAllowed": true,
+        "guardReason": null,
+        "previous": {
+          "id": "12010",
+          "text": "カ",
+          "speaker": "unknown",
+          "utteranceId": "chunk-0137-utterance-001"
+        },
+        "next": {
+          "id": "12012",
+          "text": "か",
+          "speaker": "unknown",
+          "utteranceId": "chunk-0137-utterance-001"
+        },
+        "referenceKeys": [
+          "nE:2:5"
+        ],
+        "protectedIds": []
+      },
+      {
+        "fixtureId": "nE_bNeBNp4E_multiblock_material_v001",
+        "expectedIndex": 2,
+        "candidateId": "nE_bNeBNp4E_multiblock_material_v001:2:voice-035",
+        "startMs": 4111475,
+        "endMs": 4112435,
+        "durationMs": 960,
+        "assignedTextCount": 1,
+        "midpointCoveredByAssignedText": true,
+        "guardAllowed": true,
+        "guardReason": null,
+        "previous": {
+          "id": "12010",
+          "text": "カ",
+          "speaker": "unknown",
+          "utteranceId": "chunk-0137-utterance-001"
+        },
+        "next": {
+          "id": "12012",
+          "text": "か",
+          "speaker": "unknown",
+          "utteranceId": "chunk-0137-utterance-001"
+        },
+        "referenceKeys": [
+          "nE:2:5"
+        ],
+        "protectedIds": []
+      },
+      {
+        "fixtureId": "nE_bNeBNp4E_multiblock_material_v001",
+        "expectedIndex": 2,
+        "candidateId": "nE_bNeBNp4E_multiblock_material_v001:2:voice-038",
+        "startMs": 4113575,
+        "endMs": 4114235,
+        "durationMs": 660,
+        "assignedTextCount": 1,
+        "midpointCoveredByAssignedText": true,
+        "guardAllowed": false,
+        "guardReason": "speaker_change",
+        "previous": {
+          "id": "12011",
+          "text": "ー",
+          "speaker": "unknown",
+          "utteranceId": "chunk-0137-utterance-001"
+        },
+        "next": {
+          "id": "12013",
+          "text": "誰",
+          "speaker": "SPEAKER_00",
+          "utteranceId": "chunk-0137-utterance-001"
+        },
+        "referenceKeys": [
+          "nE:2:5"
+        ],
+        "protectedIds": []
+      },
+      {
+        "fixtureId": "nE_bNeBNp4E_multiblock_material_v001",
+        "expectedIndex": 2,
+        "candidateId": "nE_bNeBNp4E_multiblock_material_v001:2:voice-040",
+        "startMs": 4114455,
+        "endMs": 4115095,
+        "durationMs": 640,
+        "assignedTextCount": 1,
+        "midpointCoveredByAssignedText": true,
+        "guardAllowed": false,
+        "guardReason": "speaker_change",
+        "previous": {
+          "id": "12011",
+          "text": "ー",
+          "speaker": "unknown",
+          "utteranceId": "chunk-0137-utterance-001"
+        },
+        "next": {
+          "id": "12013",
+          "text": "誰",
+          "speaker": "SPEAKER_00",
+          "utteranceId": "chunk-0137-utterance-001"
+        },
+        "referenceKeys": [
+          "nE:2:5"
+        ],
+        "protectedIds": []
+      },
+      {
+        "fixtureId": "nE_bNeBNp4E_multiblock_material_v001",
+        "expectedIndex": 2,
+        "candidateId": "nE_bNeBNp4E_multiblock_material_v001:2:voice-045",
+        "startMs": 4118595,
+        "endMs": 4119735,
+        "durationMs": 1140,
+        "assignedTextCount": 1,
+        "midpointCoveredByAssignedText": true,
+        "guardAllowed": true,
+        "guardReason": null,
+        "previous": {
+          "id": "12017",
+          "text": "れ",
+          "speaker": "SPEAKER_00",
+          "utteranceId": "chunk-0137-utterance-001"
+        },
+        "next": {
+          "id": "12019",
+          "text": "ポ",
+          "speaker": "SPEAKER_00",
+          "utteranceId": "chunk-0137-utterance-001"
+        },
+        "referenceKeys": [
+          "nE:2:5"
+        ],
+        "protectedIds": []
+      },
+      {
+        "fixtureId": "nE_bNeBNp4E_multiblock_material_v001",
+        "expectedIndex": 2,
+        "candidateId": "nE_bNeBNp4E_multiblock_material_v001:2:voice-046",
+        "startMs": 4119835,
+        "endMs": 4120255,
+        "durationMs": 420,
+        "assignedTextCount": 1,
+        "midpointCoveredByAssignedText": true,
+        "guardAllowed": true,
+        "guardReason": null,
+        "previous": {
+          "id": "12017",
+          "text": "れ",
+          "speaker": "SPEAKER_00",
+          "utteranceId": "chunk-0137-utterance-001"
+        },
+        "next": {
+          "id": "12019",
+          "text": "ポ",
+          "speaker": "SPEAKER_00",
+          "utteranceId": "chunk-0137-utterance-001"
+        },
+        "referenceKeys": [
+          "nE:2:5"
+        ],
+        "protectedIds": []
+      },
+      {
+        "fixtureId": "nE_bNeBNp4E_multiblock_material_v001",
+        "expectedIndex": 2,
+        "candidateId": "nE_bNeBNp4E_multiblock_material_v001:2:voice-060",
+        "startMs": 4132375,
+        "endMs": 4132795,
+        "durationMs": 420,
+        "assignedTextCount": 1,
+        "midpointCoveredByAssignedText": true,
+        "guardAllowed": true,
+        "guardReason": null,
+        "previous": {
+          "id": "12048",
+          "text": "さ",
+          "speaker": "SPEAKER_00",
+          "utteranceId": "chunk-0137-utterance-001"
+        },
+        "next": {
+          "id": "12050",
+          "text": "ど",
+          "speaker": "SPEAKER_00",
+          "utteranceId": "chunk-0137-utterance-001"
+        },
+        "referenceKeys": [
+          "nE:2:6"
+        ],
+        "protectedIds": []
+      },
+      {
+        "fixtureId": "nE_bNeBNp4E_multiblock_material_v001",
+        "expectedIndex": 2,
+        "candidateId": "nE_bNeBNp4E_multiblock_material_v001:2:voice-063",
+        "startMs": 4134475,
+        "endMs": 4135075,
+        "durationMs": 600,
+        "assignedTextCount": 1,
+        "midpointCoveredByAssignedText": true,
+        "guardAllowed": false,
+        "guardReason": "speaker_change",
+        "previous": {
+          "id": "12052",
+          "text": "な",
+          "speaker": "SPEAKER_00",
+          "utteranceId": "chunk-0137-utterance-001"
+        },
+        "next": {
+          "id": "12054",
+          "text": "?",
+          "speaker": "unknown",
+          "utteranceId": "chunk-0137-utterance-001"
+        },
+        "referenceKeys": [
+          "nE:2:6"
+        ],
+        "protectedIds": []
+      },
+      {
+        "fixtureId": "nE_bNeBNp4E_multiblock_material_v001",
+        "expectedIndex": 2,
+        "candidateId": "nE_bNeBNp4E_multiblock_material_v001:2:voice-064",
+        "startMs": 4135195,
+        "endMs": 4135875,
+        "durationMs": 680,
+        "assignedTextCount": 1,
+        "midpointCoveredByAssignedText": true,
+        "guardAllowed": false,
+        "guardReason": "speaker_change",
+        "previous": {
+          "id": "12052",
+          "text": "な",
+          "speaker": "SPEAKER_00",
+          "utteranceId": "chunk-0137-utterance-001"
+        },
+        "next": {
+          "id": "12054",
+          "text": "?",
+          "speaker": "unknown",
+          "utteranceId": "chunk-0137-utterance-001"
+        },
+        "referenceKeys": [
+          "nE:2:6"
+        ],
+        "protectedIds": []
+      },
+      {
+        "fixtureId": "nE_bNeBNp4E_multiblock_material_v001",
+        "expectedIndex": 4,
+        "candidateId": "nE_bNeBNp4E_multiblock_material_v001:4:voice-009",
+        "startMs": 4284138,
+        "endMs": 4284598,
+        "durationMs": 460,
+        "assignedTextCount": 1,
+        "midpointCoveredByAssignedText": true,
+        "guardAllowed": true,
+        "guardReason": null,
+        "previous": {
+          "id": "12506",
+          "text": "れ",
+          "speaker": "SPEAKER_00",
+          "utteranceId": "chunk-0142-utterance-001"
+        },
+        "next": {
+          "id": "12508",
+          "text": "怪",
+          "speaker": "SPEAKER_00",
+          "utteranceId": "chunk-0142-utterance-001"
+        },
+        "referenceKeys": [
+          "nE:4:2"
+        ],
+        "protectedIds": []
+      },
+      {
+        "fixtureId": "nE_bNeBNp4E_multiblock_material_v001",
+        "expectedIndex": 4,
+        "candidateId": "nE_bNeBNp4E_multiblock_material_v001:4:voice-012",
+        "startMs": 4285318,
+        "endMs": 4285778,
+        "durationMs": 460,
+        "assignedTextCount": 1,
+        "midpointCoveredByAssignedText": true,
+        "guardAllowed": true,
+        "guardReason": null,
+        "previous": {
+          "id": "12506",
+          "text": "れ",
+          "speaker": "SPEAKER_00",
+          "utteranceId": "chunk-0142-utterance-001"
+        },
+        "next": {
+          "id": "12508",
+          "text": "怪",
+          "speaker": "SPEAKER_00",
+          "utteranceId": "chunk-0142-utterance-001"
+        },
+        "referenceKeys": [
+          "nE:4:2"
+        ],
+        "protectedIds": []
+      },
+      {
+        "fixtureId": "nE_bNeBNp4E_multiblock_material_v001",
+        "expectedIndex": 4,
+        "candidateId": "nE_bNeBNp4E_multiblock_material_v001:4:voice-013",
+        "startMs": 4285958,
+        "endMs": 4286438,
+        "durationMs": 480,
+        "assignedTextCount": 1,
+        "midpointCoveredByAssignedText": true,
+        "guardAllowed": true,
+        "guardReason": null,
+        "previous": {
+          "id": "12506",
+          "text": "れ",
+          "speaker": "SPEAKER_00",
+          "utteranceId": "chunk-0142-utterance-001"
+        },
+        "next": {
+          "id": "12508",
+          "text": "怪",
+          "speaker": "SPEAKER_00",
+          "utteranceId": "chunk-0142-utterance-001"
+        },
+        "referenceKeys": [
+          "nE:4:2"
+        ],
+        "protectedIds": []
+      },
+      {
+        "fixtureId": "nE_bNeBNp4E_multiblock_material_v001",
+        "expectedIndex": 4,
+        "candidateId": "nE_bNeBNp4E_multiblock_material_v001:4:voice-015",
+        "startMs": 4287358,
+        "endMs": 4288538,
+        "durationMs": 1180,
+        "assignedTextCount": 1,
+        "midpointCoveredByAssignedText": true,
+        "guardAllowed": true,
+        "guardReason": null,
+        "previous": {
+          "id": "12506",
+          "text": "れ",
+          "speaker": "SPEAKER_00",
+          "utteranceId": "chunk-0142-utterance-001"
+        },
+        "next": {
+          "id": "12508",
+          "text": "怪",
+          "speaker": "SPEAKER_00",
+          "utteranceId": "chunk-0142-utterance-001"
+        },
+        "referenceKeys": [
+          "nE:4:2"
+        ],
+        "protectedIds": []
+      },
+      {
+        "fixtureId": "nE_bNeBNp4E_multiblock_material_v001",
+        "expectedIndex": 5,
+        "candidateId": "nE_bNeBNp4E_multiblock_material_v001:5:voice-003",
+        "startMs": 4373670,
+        "endMs": 4374410,
+        "durationMs": 740,
+        "assignedTextCount": 1,
+        "midpointCoveredByAssignedText": true,
+        "guardAllowed": true,
+        "guardReason": null,
+        "previous": {
+          "id": "12627",
+          "text": "ベ",
+          "speaker": "SPEAKER_01",
+          "utteranceId": "chunk-0145-utterance-001"
+        },
+        "next": {
+          "id": "12629",
+          "text": "!",
+          "speaker": "SPEAKER_01",
+          "utteranceId": "chunk-0145-utterance-001"
+        },
+        "referenceKeys": [
+          "nE:5:1"
+        ],
+        "protectedIds": []
+      },
+      {
+        "fixtureId": "nE_bNeBNp4E_multiblock_material_v001",
+        "expectedIndex": 5,
+        "candidateId": "nE_bNeBNp4E_multiblock_material_v001:5:voice-013",
+        "startMs": 4383150,
+        "endMs": 4383570,
+        "durationMs": 420,
+        "assignedTextCount": 1,
+        "midpointCoveredByAssignedText": false,
+        "guardAllowed": false,
+        "guardReason": "speaker_change",
+        "previous": {
+          "id": "12631",
+          "text": "?",
+          "speaker": "SPEAKER_01",
+          "utteranceId": "chunk-0145-utterance-002"
+        },
+        "next": {
+          "id": "12633",
+          "text": "あ",
+          "speaker": "SPEAKER_02",
+          "utteranceId": "chunk-0146-utterance-001"
+        },
+        "referenceKeys": [
+          "nE:5:1"
+        ],
+        "protectedIds": []
+      },
+      {
+        "fixtureId": "nE_bNeBNp4E_multiblock_material_v001",
+        "expectedIndex": 5,
+        "candidateId": "nE_bNeBNp4E_multiblock_material_v001:5:voice-044",
+        "startMs": 4426970,
+        "endMs": 4427450,
+        "durationMs": 480,
+        "assignedTextCount": 1,
+        "midpointCoveredByAssignedText": true,
+        "guardAllowed": true,
+        "guardReason": null,
+        "previous": {
+          "id": "12712",
+          "text": "な",
+          "speaker": "SPEAKER_00",
+          "utteranceId": "chunk-0147-utterance-001"
+        },
+        "next": {
+          "id": "12714",
+          "text": "よ",
+          "speaker": "SPEAKER_00",
+          "utteranceId": "chunk-0147-utterance-001"
+        },
+        "referenceKeys": [
+          "nE:5:3"
+        ],
+        "protectedIds": []
+      },
+      {
+        "fixtureId": "nE_bNeBNp4E_multiblock_material_v001",
+        "expectedIndex": 5,
+        "candidateId": "nE_bNeBNp4E_multiblock_material_v001:5:voice-047",
+        "startMs": 4431290,
+        "endMs": 4431970,
+        "durationMs": 680,
+        "assignedTextCount": 1,
+        "midpointCoveredByAssignedText": true,
+        "guardAllowed": true,
+        "guardReason": null,
+        "previous": {
+          "id": "12712",
+          "text": "な",
+          "speaker": "SPEAKER_00",
+          "utteranceId": "chunk-0147-utterance-001"
+        },
+        "next": {
+          "id": "12714",
+          "text": "よ",
+          "speaker": "SPEAKER_00",
+          "utteranceId": "chunk-0147-utterance-001"
+        },
+        "referenceKeys": [
+          "nE:5:3"
+        ],
+        "protectedIds": []
+      },
+      {
+        "fixtureId": "nE_bNeBNp4E_multiblock_material_v001",
+        "expectedIndex": 5,
+        "candidateId": "nE_bNeBNp4E_multiblock_material_v001:5:voice-071",
+        "startMs": 4463830,
+        "endMs": 4464470,
+        "durationMs": 640,
+        "assignedTextCount": 1,
+        "midpointCoveredByAssignedText": true,
+        "guardAllowed": true,
+        "guardReason": null,
+        "previous": {
+          "id": "12795",
+          "text": "の",
+          "speaker": "SPEAKER_00",
+          "utteranceId": "chunk-0148-utterance-001"
+        },
+        "next": {
+          "id": "12797",
+          "text": "歌",
+          "speaker": "SPEAKER_00",
+          "utteranceId": "chunk-0148-utterance-001"
+        },
+        "referenceKeys": [
+          "nE:5:8"
+        ],
+        "protectedIds": []
+      },
+      {
+        "fixtureId": "nE_bNeBNp4E_multiblock_material_v001",
+        "expectedIndex": 5,
+        "candidateId": "nE_bNeBNp4E_multiblock_material_v001:5:voice-097",
+        "startMs": 4489790,
+        "endMs": 4490610,
+        "durationMs": 820,
+        "assignedTextCount": 1,
+        "midpointCoveredByAssignedText": true,
+        "guardAllowed": true,
+        "guardReason": null,
+        "previous": {
+          "id": "12874",
+          "text": "う",
+          "speaker": "SPEAKER_00",
+          "utteranceId": "chunk-0149-utterance-001"
+        },
+        "next": {
+          "id": "12876",
+          "text": "な",
+          "speaker": "SPEAKER_00",
+          "utteranceId": "chunk-0149-utterance-001"
+        },
+        "referenceKeys": [
+          "nE:5:11"
+        ],
+        "protectedIds": []
+      },
+      {
+        "fixtureId": "nE_bNeBNp4E_multiblock_material_v001",
+        "expectedIndex": 5,
+        "candidateId": "nE_bNeBNp4E_multiblock_material_v001:5:voice-100",
+        "startMs": 4493410,
+        "endMs": 4494170,
+        "durationMs": 760,
+        "assignedTextCount": 1,
+        "midpointCoveredByAssignedText": true,
+        "guardAllowed": true,
+        "guardReason": null,
+        "previous": {
+          "id": "12893",
+          "text": "た",
+          "speaker": "SPEAKER_00",
+          "utteranceId": "chunk-0149-utterance-001"
+        },
+        "next": {
+          "id": "12895",
+          "text": "コ",
+          "speaker": "SPEAKER_00",
+          "utteranceId": "chunk-0149-utterance-001"
+        },
+        "referenceKeys": [
+          "nE:5:11"
+        ],
+        "protectedIds": []
+      },
+      {
+        "fixtureId": "nE_bNeBNp4E_multiblock_material_v001",
+        "expectedIndex": 5,
+        "candidateId": "nE_bNeBNp4E_multiblock_material_v001:5:voice-101",
+        "startMs": 4496330,
+        "endMs": 4497110,
+        "durationMs": 780,
+        "assignedTextCount": 2,
+        "midpointCoveredByAssignedText": true,
+        "guardAllowed": true,
+        "guardReason": null,
+        "previous": {
+          "id": "12909",
+          "text": "い",
+          "speaker": "SPEAKER_00",
+          "utteranceId": "chunk-0149-utterance-001"
+        },
+        "next": {
+          "id": "12912",
+          "text": "の",
+          "speaker": "SPEAKER_00",
+          "utteranceId": "chunk-0149-utterance-001"
+        },
+        "referenceKeys": [
+          "nE:5:11"
+        ],
+        "protectedIds": []
+      },
+      {
+        "fixtureId": "nE_bNeBNp4E_multiblock_material_v001",
+        "expectedIndex": 5,
+        "candidateId": "nE_bNeBNp4E_multiblock_material_v001:5:voice-119",
+        "startMs": 4517310,
+        "endMs": 4518570,
+        "durationMs": 1260,
+        "assignedTextCount": 1,
+        "midpointCoveredByAssignedText": true,
+        "guardAllowed": true,
+        "guardReason": null,
+        "previous": {
+          "id": "12975",
+          "text": "さ",
+          "speaker": "SPEAKER_00",
+          "utteranceId": "chunk-0150-utterance-001"
+        },
+        "next": {
+          "id": "12977",
+          "text": "あ",
+          "speaker": "SPEAKER_00",
+          "utteranceId": "chunk-0150-utterance-001"
+        },
+        "referenceKeys": [
+          "nE:5:12"
+        ],
+        "protectedIds": []
+      },
+      {
+        "fixtureId": "nE_bNeBNp4E_multiblock_material_v001",
+        "expectedIndex": 5,
+        "candidateId": "nE_bNeBNp4E_multiblock_material_v001:5:voice-154",
+        "startMs": 4561310,
+        "endMs": 4564810,
+        "durationMs": 3500,
+        "assignedTextCount": 1,
+        "midpointCoveredByAssignedText": false,
+        "guardAllowed": false,
+        "guardReason": "speaker_change",
+        "previous": {
+          "id": "13072",
+          "text": "る",
+          "speaker": "unknown",
+          "utteranceId": "chunk-0151-utterance-001"
+        },
+        "next": {
+          "id": "13074",
+          "text": "ロ",
+          "speaker": "SPEAKER_00",
+          "utteranceId": "chunk-0152-utterance-001"
+        },
+        "referenceKeys": [
+          "nE:5:15"
+        ],
+        "protectedIds": []
+      },
+      {
+        "fixtureId": "nE_bNeBNp4E_multiblock_material_v001",
+        "expectedIndex": 5,
+        "candidateId": "nE_bNeBNp4E_multiblock_material_v001:5:voice-172",
+        "startMs": 4596090,
+        "endMs": 4596510,
+        "durationMs": 420,
+        "assignedTextCount": 1,
+        "midpointCoveredByAssignedText": true,
+        "guardAllowed": true,
+        "guardReason": null,
+        "previous": {
+          "id": "13200",
+          "text": "っ",
+          "speaker": "SPEAKER_01",
+          "utteranceId": "chunk-0153-utterance-001"
+        },
+        "next": {
+          "id": "13202",
+          "text": "じ",
+          "speaker": "SPEAKER_01",
+          "utteranceId": "chunk-0153-utterance-001"
+        },
+        "referenceKeys": [
+          "nE:5:18"
+        ],
+        "protectedIds": []
+      },
+      {
+        "fixtureId": "nE_bNeBNp4E_multiblock_material_v001",
+        "expectedIndex": 5,
+        "candidateId": "nE_bNeBNp4E_multiblock_material_v001:5:voice-181",
+        "startMs": 4600490,
+        "endMs": 4600930,
+        "durationMs": 440,
+        "assignedTextCount": 1,
+        "midpointCoveredByAssignedText": true,
+        "guardAllowed": true,
+        "guardReason": null,
+        "previous": {
+          "id": "13200",
+          "text": "っ",
+          "speaker": "SPEAKER_01",
+          "utteranceId": "chunk-0153-utterance-001"
+        },
+        "next": {
+          "id": "13202",
+          "text": "じ",
+          "speaker": "SPEAKER_01",
+          "utteranceId": "chunk-0153-utterance-001"
+        },
+        "referenceKeys": [
+          "nE:5:18"
+        ],
+        "protectedIds": []
+      }
+    ]
+  },
+  "decision": "初期案2秒の保護後候補は全58区間で3件、3秒は0件。2秒の3件はすべて第三素材に集中し、他6fixture型は0件だった。「数件未満」に独自の数値境界を足さず、この実測をもって、最大3件のペア比較へ進むか、長い間が少ないとして層1を凍結するかを人間判断とする。実装は未承認。",
+  "implementationAuthorized": false,
+  "humanWork": {
+    "itemCount": 0,
+    "estimatedMinutes": 0
+  }
+}
