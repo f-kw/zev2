@@ -6,6 +6,10 @@
 
 依頼先: 実行部隊とは異種の強い相談役モデル
 
+## レビュー結果
+
+2026-07-17、相談役は第一関門の達成認定を支持し、kawafmmが正式達成を認定した。認定根拠は、正式初見での公開候補4/5、AI境界の無修正採用率の高さ、固定条件・漏洩なしの手続き的清潔さである。本資料の以下の設問は、認定前に検討した反対論の記録として保持する。
+
 ## 判断してほしいこと
 
 正式初見素材 `DmWu0jVQfTE` の結果に基づき、第一関門を達成と認定してよいか。次の三択で答え、理由と重大な反証を示してほしい。
@@ -59,7 +63,7 @@
 - `evals/clip_composition/outputs/human-boundary-trim/20260717-first-gate-unseen-formal-v001/human-result.json`
 - `evals/clip_composition/outputs/human-boundary-trim/20260717-first-gate-unseen-formal-v001/human-result-summary.md`
 - `docs/reports/first-gate/FIRST_GATE_DECISION_DRAFT_20260716.md`
-- `docs/GOAL_DEFINITION.md` v3.3
+- `docs/GOAL_DEFINITION.md` v3.3（レビュー時）/ v3.4（最終認定時の上限ガード改定）
 
 ## 先に検討してほしい反対論
 
