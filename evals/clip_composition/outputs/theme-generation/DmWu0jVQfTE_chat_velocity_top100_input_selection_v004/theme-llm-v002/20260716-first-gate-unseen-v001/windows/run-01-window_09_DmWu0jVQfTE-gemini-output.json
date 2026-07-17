@@ -1,0 +1,65 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "ウマ娘のIDバレとスマホに入れない理由",
+      "reason": "ミーティング中にウマ娘のIDが流出してフォローが急増した話や、配信直前の誤操作を防ぐためにスマホには絶対入れないと決めている理由を具体的に語っています。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "DmWu0jVQfTE",
+          "sourceStartMs": 3393654,
+          "sourceEndMs": 3598974,
+          "supportingSpeechIds": [
+            "148",
+            "151-154"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "遊戯王の可愛いイラストとパックの入手先",
+      "reason": "最新の遊戯王カードのイラストが可愛いと熱弁し、売り切れているパックを求めて田舎のおもちゃ屋を探そうとするコミカルなやり取りが展開されています。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "DmWu0jVQfTE",
+          "sourceStartMs": 3721418,
+          "sourceEndMs": 3839086,
+          "supportingSpeechIds": [
+            "161-168"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_003",
+      "title": "フェスに向けた宴の準備の呼びかけとルフィ問題",
+      "reason": "オンライン視聴者に向けたフェス参戦の宴の準備写真を募集しつつ、宴にまつわる「ルフィ問題」の解決について切り出しています。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "DmWu0jVQfTE",
+          "sourceStartMs": 3901506,
+          "sourceEndMs": 3987934,
+          "supportingSpeechIds": [
+            "171-174"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-17T10:08:30+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_09_DmWu0jVQfTE",
+    "windowSourceVideoId": "DmWu0jVQfTE",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/DmWu0jVQfTE_chat_velocity_top100_input_selection_v004/theme-llm-v002/20260716-first-gate-unseen-v001/windows/window_09_DmWu0jVQfTE-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/f4eaab3ec6968a4c?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"ウマ娘のIDバレとスマホに入れない理由\",\n      \"reason\": \"ミーティング中にウマ娘のIDが流出してフォローが急増した話や、配信直前の誤操作を防ぐためにスマホには絶対入れないと決めている理由を具体的に語っています。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"DmWu0jVQfTE\",\n          \"sourceStartMs\": 3393654,\n          \"sourceEndMs\": 3598974,\n          \"supportingSpeechIds\": [\"148\", \"151-154\"]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"遊戯王の可愛いイラストとパックの入手先\",\n      \"reason\": \"最新の遊戯王カードのイラストが可愛いと熱弁し、売り切れているパックを求めて田舎のおもちゃ屋を探そうとするコミカルなやり取りが展開されています。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"DmWu0jVQfTE\",\n          \"sourceStartMs\": 3721418,\n          \"sourceEndMs\": 3839086,\n          \"supportingSpeechIds\": [\"161-168\"]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_003\",\n      \"title\": \"フェスに向けた宴の準備の呼びかけとルフィ問題\",\n      \"reason\": \"オンライン視聴者に向けたフェス参戦の宴の準備写真を募集しつつ、宴にまつわる「ルフィ問題」の解決について切り出しています。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"DmWu0jVQfTE\",\n          \"sourceStartMs\": 3901506,\n          \"sourceEndMs\": 3987934,\n          \"supportingSpeechIds\": [\"171-174\"]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

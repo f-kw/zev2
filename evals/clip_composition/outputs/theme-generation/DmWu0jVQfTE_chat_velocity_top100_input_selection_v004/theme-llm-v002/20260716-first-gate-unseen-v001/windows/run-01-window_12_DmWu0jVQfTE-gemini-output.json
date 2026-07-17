@@ -1,0 +1,64 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "実はホロライブに入るまで自分の声の大きさに気づいていなかったスバル",
+      "reason": "放課後の雪合戦で声がでかすぎて一人だけ先生にバレた昔話から、ホロライブに入るまで周りに「声がでかい」と言われたことがなかったという意外な事実を語る展開が面白いから。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "DmWu0jVQfTE",
+          "sourceStartMs": 4770686,
+          "sourceEndMs": 4835322,
+          "supportingSpeechIds": [
+            "211-213"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "大声になってしまった原因？先輩の気が済むまで叫ばされる部活動の謎理論",
+      "reason": "学生時代の部活動において「声はでかければでかいほど良い」という風潮や、先輩の気が済むまでひたすら叫ばされていた理不尽な思い出を振り返るトークが共感を呼ぶから。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "DmWu0jVQfTE",
+          "sourceStartMs": 4835926,
+          "sourceEndMs": 4918442,
+          "supportingSpeechIds": [
+            "214-218"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_003",
+      "title": "監視カメラに見られていたら恥ずかしい！ダンス自主練習中の独り言オンパレード",
+      "reason": "一人のダンスレッスン中に「はいここでターンしてデデンデンバ」などと全力で独り言を言いながら練習している滑稽な様子を、スタジオの管理人に監視カメラで見られていないか心配する話が具体的で面白いから。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "DmWu0jVQfTE",
+          "sourceStartMs": 5068074,
+          "sourceEndMs": 5126562,
+          "supportingSpeechIds": [
+            "224-225"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-17T10:04:23+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_12_DmWu0jVQfTE",
+    "windowSourceVideoId": "DmWu0jVQfTE",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/DmWu0jVQfTE_chat_velocity_top100_input_selection_v004/theme-llm-v002/20260716-first-gate-unseen-v001/windows/window_12_DmWu0jVQfTE-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/11b5009972ac809a?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"実はホロライブに入るまで自分の声の大きさに気づいていなかったスバル\",\n      \"reason\": \"放課後の雪合戦で声がでかすぎて一人だけ先生にバレた昔話から、ホロライブに入るまで周りに「声がでかい」と言われたことがなかったという意外な事実を語る展開が面白いから。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"DmWu0jVQfTE\",\n          \"sourceStartMs\": 4770686,\n          \"sourceEndMs\": 4835322,\n          \"supportingSpeechIds\": [\n            \"211-213\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"大声になってしまった原因？先輩の気が済むまで叫ばされる部活動の謎理論\",\n      \"reason\": \"学生時代の部活動において「声はでかければでかいほど良い」という風潮や、先輩の気が済むまでひたすら叫ばされていた理不尽な思い出を振り返るトークが共感を呼ぶから。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"DmWu0jVQfTE\",\n          \"sourceStartMs\": 4835926,\n          \"sourceEndMs\": 4918442,\n          \"supportingSpeechIds\": [\n            \"214-218\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_003\",\n      \"title\": \"監視カメラに見られていたら恥ずかしい！ダンス自主練習中の独り言オンパレード\",\n      \"reason\": \"一人のダンスレッスン中に「はいここでターンしてデデンデンバ」などと全力で独り言を言いながら練習している滑稽な様子を、スタジオの管理人に監視カメラで見られていないか心配する話が具体的で面白いから。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"DmWu0jVQfTE\",\n          \"sourceStartMs\": 5068074,\n          \"sourceEndMs\": 5126562,\n          \"supportingSpeechIds\": [\n            \"224-225\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

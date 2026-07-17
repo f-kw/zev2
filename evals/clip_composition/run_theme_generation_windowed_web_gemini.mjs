@@ -257,13 +257,19 @@ function assertCompleteGeminiOutput(output, context) {
   }
 }
 
-async function validateOrArchiveSavedWindow(outputPath, context) {
+async function validateOrArchiveSavedWindow(outputPath, context, window) {
   if (!existsSync(outputPath)) return { valid: false, archivedPath: null };
   try {
     const output = await readJson(outputPath);
     assertCompleteGeminiOutput(output, context);
     if (!Array.isArray(output.themes)) {
       throw new Error(`${context} にthemes配列がありません`);
+    }
+    if (window) {
+      const promptInput = await readJson(path.join(root, window.payloadPath));
+      output.themes.forEach((theme, themeIndex) => {
+        normalizeTheme(theme, window, promptInput, `${context} theme ${themeIndex + 1}`);
+      });
     }
     return { valid: true, output, archivedPath: null };
   } catch (error) {
@@ -383,7 +389,7 @@ async function main() {
     });
     for (const window of plan.windows) {
       const outputPath = path.join(windowOutputDir, `run-${String(run).padStart(2, '0')}-${window.windowId}-gemini-output.json`);
-      const saved = await validateOrArchiveSavedWindow(outputPath, `run ${run} ${window.windowId}`);
+      const saved = await validateOrArchiveSavedWindow(outputPath, `run ${run} ${window.windowId}`, window);
       if (saved.valid) {
         console.log(`[skip] run ${run} ${window.windowId}`);
         continue;
@@ -444,7 +450,7 @@ async function main() {
             '--rejectPartialExtraction',
             '--closeTabAfterRun'
           ]);
-          const completed = await validateOrArchiveSavedWindow(outputPath, `run ${run} ${window.windowId}`);
+          const completed = await validateOrArchiveSavedWindow(outputPath, `run ${run} ${window.windowId}`, window);
           if (!completed.valid) {
             throw new Error(`run ${run} ${window.windowId} の保存結果が完全ではありません`);
           }

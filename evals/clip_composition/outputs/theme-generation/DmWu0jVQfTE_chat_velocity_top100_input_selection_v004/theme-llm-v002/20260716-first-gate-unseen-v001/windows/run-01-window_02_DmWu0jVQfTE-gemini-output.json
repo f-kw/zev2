@@ -1,0 +1,64 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "アカギの墓が削られている事実に驚愕するスバル",
+      "reason": "伝説のギャンブラー赤木しげるの墓が利益を求めて削られているという衝撃的な事実や、アカギが死ぬことを知って驚いたエピソードを面白おかしく語っているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "DmWu0jVQfTE",
+          "sourceStartMs": 504362,
+          "sourceEndMs": 599820,
+          "supportingSpeechIds": [
+            "17-20"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "フブキが買ってきたクソデカポップコーンに困惑",
+      "reason": "1時間弱の映画であるにもかかわらず、フブキが一番大きなハーフ＆ハーフのポップコーンを買ってきたため、フードファイト状態になりながら完食したエピソードが面白いから。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "DmWu0jVQfTE",
+          "sourceStartMs": 648010,
+          "sourceEndMs": 747170,
+          "supportingSpeechIds": [
+            "25-28"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_003",
+      "title": "同時視聴のやりすぎによる職業病を告白するスバル",
+      "reason": "普段から同時視聴配信をやりすぎているせいで、映画館で静かに見ている最中も脳内で合いの手を入れてしまったり、フブキと2人で無言の顔芸をしてしまったりする職業病を語っているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "DmWu0jVQfTE",
+          "sourceStartMs": 748246,
+          "sourceEndMs": 868022,
+          "supportingSpeechIds": [
+            "29-33"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-17T10:01:54+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_02_DmWu0jVQfTE",
+    "windowSourceVideoId": "DmWu0jVQfTE",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/DmWu0jVQfTE_chat_velocity_top100_input_selection_v004/theme-llm-v002/20260716-first-gate-unseen-v001/windows/window_02_DmWu0jVQfTE-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/60b5730746d73093?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"アカギの墓が削られている事実に驚愕するスバル\",\n      \"reason\": \"伝説のギャンブラー赤木しげるの墓が利益を求めて削られているという衝撃的な事実や、アカギが死ぬことを知って驚いたエピソードを面白おかしく語っているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"DmWu0jVQfTE\",\n          \"sourceStartMs\": 504362,\n          \"sourceEndMs\": 599820,\n          \"supportingSpeechIds\": [\n            \"17-20\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"フブキが買ってきたクソデカポップコーンに困惑\",\n      \"reason\": \"1時間弱の映画であるにもかかわらず、フブキが一番大きなハーフ＆ハーフのポップコーンを買ってきたため、フードファイト状態になりながら完食したエピソードが面白いから。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"DmWu0jVQfTE\",\n          \"sourceStartMs\": 648010,\n          \"sourceEndMs\": 747170,\n          \"supportingSpeechIds\": [\n            \"25-28\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_003\",\n      \"title\": \"同時視聴のやりすぎによる職業病を告白するスバル\",\n      \"reason\": \"普段から同時視聴配信をやりすぎているせいで、映画館で静かに見ている最中も脳内で合いの手を入れてしまったり、フブキと2人で無言の顔芸をしてしまったりする職業病を語っているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"DmWu0jVQfTE\",\n          \"sourceStartMs\": 748246,\n          \"sourceEndMs\": 868022,\n          \"supportingSpeechIds\": [\n            \"29-33\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

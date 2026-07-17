@@ -1,0 +1,79 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "勝手に「おかえお姉ちゃん」と呼んで洗脳を試みようとするスバル",
+      "reason": "おかゆに対して勝手に妹を名乗り、洗脳される側の気持ちをわからせようと妄想を膨らませる様子がコミカルで面白いため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "DmWu0jVQfTE",
+          "sourceStartMs": 2944154,
+          "sourceEndMs": 2997258,
+          "supportingSpeechIds": [
+            "129-130"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "解像度が高すぎるおかゆの妄想配信にリアルに怯えるスバル",
+      "reason": "おかゆが配信でした妄想の内容や解像度の高さに、スバルが本気で嫌がり恐怖しながら同時視聴している様子が見どころであるため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "DmWu0jVQfTE",
+          "sourceStartMs": 3000040,
+          "sourceEndMs": 3239940,
+          "supportingSpeechIds": [
+            "131-141"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_003",
+      "title": "これ以上は怪我をすると察して「戦略的撤退」を選ぶスバル",
+      "reason": "おかゆに関する妄想話でこれ以上踏み込むと怪我をすると判断し、急に得意な人に任せて話を切り上げようとするやり取りが面白いため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "DmWu0jVQfTE",
+          "sourceStartMs": 3275002,
+          "sourceEndMs": 3359450,
+          "supportingSpeechIds": [
+            "143-146"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_004",
+      "title": "気まずい話題から露骨にウマ娘の話に切り替えて逃げるスバル",
+      "reason": "直前の気まずい話題から「戦略的撤退」をしたスバルが、露骨にウマ娘の話題へと話をそらして熱弁し始める展開が面白いため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "DmWu0jVQfTE",
+          "sourceStartMs": 3336246,
+          "sourceEndMs": 3389018,
+          "supportingSpeechIds": [
+            "146-147"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-17T10:03:24+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_08_DmWu0jVQfTE",
+    "windowSourceVideoId": "DmWu0jVQfTE",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/DmWu0jVQfTE_chat_velocity_top100_input_selection_v004/theme-llm-v002/20260716-first-gate-unseen-v001/windows/window_08_DmWu0jVQfTE-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/f6a2c0103b5c26bb?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"勝手に「おかえお姉ちゃん」と呼んで洗脳を試みようとするスバル\",\n      \"reason\": \"おかゆに対して勝手に妹を名乗り、洗脳される側の気持ちをわからせようと妄想を膨らませる様子がコミカルで面白いため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"DmWu0jVQfTE\",\n          \"sourceStartMs\": 2944154,\n          \"sourceEndMs\": 2997258,\n          \"supportingSpeechIds\": [\n            \"129-130\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"解像度が高すぎるおかゆの妄想配信にリアルに怯えるスバル\",\n      \"reason\": \"おかゆが配信でした妄想の内容や解像度の高さに、スバルが本気で嫌がり恐怖しながら同時視聴している様子が見どころであるため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"DmWu0jVQfTE\",\n          \"sourceStartMs\": 3000040,\n          \"sourceEndMs\": 3239940,\n          \"supportingSpeechIds\": [\n            \"131-141\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_003\",\n      \"title\": \"これ以上は怪我をすると察して「戦略的撤退」を選ぶスバル\",\n      \"reason\": \"おかゆに関する妄想話でこれ以上踏み込むと怪我をすると判断し、急に得意な人に任せて話を切り上げようとするやり取りが面白いため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"DmWu0jVQfTE\",\n          \"sourceStartMs\": 3275002,\n          \"sourceEndMs\": 3359450,\n          \"supportingSpeechIds\": [\n            \"143-146\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_004\",\n      \"title\": \"気まずい話題から露骨にウマ娘の話に切り替えて逃げるスバル\",\n      \"reason\": \"直前の気まずい話題から「戦略的撤退」をしたスバルが、露骨にウマ娘の話題へと話をそらして熱弁し始める展開が面白いため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"DmWu0jVQfTE\",\n          \"sourceStartMs\": 3336246,\n          \"sourceEndMs\": 3389018,\n          \"supportingSpeechIds\": [\n            \"146-147\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

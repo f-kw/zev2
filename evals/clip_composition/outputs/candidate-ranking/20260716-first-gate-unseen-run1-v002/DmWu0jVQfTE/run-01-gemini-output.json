@@ -1,0 +1,43 @@
+{
+  "rankedCandidates": [
+    {
+      "rank": 1,
+      "candidateId": 1,
+      "reason": "映画の待ち合わせという具体的な状況下で、白上フブキの傘袋を「竹刀」と見間違えたスバルの疲労による滑稽な勘違いエピソードが、1つの出来事としてきれいに完結しており分かりやすいため。"
+    },
+    {
+      "rank": 2,
+      "candidateId": 12,
+      "reason": "ポルカから送られてきた『ウマ娘』に関するキモい返信に対して、配信中の自分なら同じことを言いかねないと共感し、内なるポルカを認めて葛藤する具体的なリアクションの掛け合いが丁寧に説明されているため。"
+    },
+    {
+      "rank": 3,
+      "candidateId": 13,
+      "reason": "実家の母親から突然『月刊ムー』が送られてきたという単独で十分に伝わる具体的なハプニングと、それを読んでみたら面白かったという意外な結論までが1文で綺麗にまとまっているため。"
+    },
+    {
+      "rank": 4,
+      "candidateId": 36,
+      "reason": "ダンスレッスン中の全力の独特な独り言を、スタジオの管理人に監視カメラで覗かれているのではないかと不安がる本人の具体的な心配ぶりや反応がはっきりと読み取れるため。"
+    },
+    {
+      "rank": 5,
+      "candidateId": 11,
+      "reason": "自身の希望のせいで楽屋にカレーしかない中、それをENメンバーに配る際に「カレーハラスメント」で訴えられないか本気で緊張したという、他者との関係性に基づくユニークな感情・反応が描かれているため。"
+    }
+  ],
+  "runAt": "2026-07-17T10:10:25+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": "web-default",
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "generationSystem": "candidate-ranking-v002@gemini-web-flash",
+    "run": 1,
+    "inputPolicy": "candidateId+title+reason only",
+    "resultRole": "first-gate-unseen-candidate-ranking"
+  },
+  "promptFile": "outputs/candidate-ranking/20260716-first-gate-unseen-run1-v002/DmWu0jVQfTE/prompt.txt",
+  "pageUrl": "https://gemini.google.com/app/a32a19b87f3e407f?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"rankedCandidates\": [\n    {\n      \"rank\": 1,\n      \"candidateId\": 1,\n      \"reason\": \"映画の待ち合わせという具体的な状況下で、白上フブキの傘袋を「竹刀」と見間違えたスバルの疲労による滑稽な勘違いエピソードが、1つの出来事としてきれいに完結しており分かりやすいため。\"\n    },\n    {\n      \"rank\": 2,\n      \"candidateId\": 12,\n      \"reason\": \"ポルカから送られてきた『ウマ娘』に関するキモい返信に対して、配信中の自分なら同じことを言いかねないと共感し、内なるポルカを認めて葛藤する具体的なリアクションの掛け合いが丁寧に説明されているため。\"\n    },\n    {\n      \"rank\": 3,\n      \"candidateId\": 13,\n      \"reason\": \"実家の母親から突然『月刊ムー』が送られてきたという単独で十分に伝わる具体的なハプニングと、それを読んでみたら面白かったという意外な結論までが1文で綺麗にまとまっているため。\"\n    },\n    {\n      \"rank\": 4,\n      \"candidateId\": 36,\n      \"reason\": \"ダンスレッスン中の全力の独特な独り言を、スタジオの管理人に監視カメラで覗かれているのではないかと不安がる本人の具体的な心配ぶりや反応がはっきりと読み取れるため。\"\n    },\n    {\n      \"rank\": 5,\n      \"candidateId\": 11,\n      \"reason\": \"自身の希望のせいで楽屋にカレーしかない中、それをENメンバーに配る際に「カレーハラスメント」で訴えられないか本気で緊張したという、他者との関係性に基づくユニークな感情・反応が描かれているため。\"\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

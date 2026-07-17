@@ -1,0 +1,49 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "フブキの傘を「竹刀」と見間違えるスバル",
+      "reason": "映画の待ち合わせ時に、白上フブキが持っていた細長い傘袋を疲れから「竹刀」と勘違いしてしまったエピソードが面白く、切り抜きとして単独で成立するため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "DmWu0jVQfTE",
+          "sourceStartMs": 271254,
+          "sourceEndMs": 419514,
+          "supportingSpeechIds": [
+            "6-12"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "アカギの墓のアクスタを見て勘違いするスバル",
+      "reason": "白上フブキに見せられた「赤木しげるの墓」のアクリルスタンドから会話が始まり、疲れのせいか「ゲゲゲの鬼太郎の作者」と勘違いしそうになるズレたやり取りが面白いため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "DmWu0jVQfTE",
+          "sourceStartMs": 420158,
+          "sourceEndMs": 503698,
+          "supportingSpeechIds": [
+            "13-16"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-17T10:00:59+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_01_DmWu0jVQfTE",
+    "windowSourceVideoId": "DmWu0jVQfTE",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/DmWu0jVQfTE_chat_velocity_top100_input_selection_v004/theme-llm-v002/20260716-first-gate-unseen-v001/windows/window_01_DmWu0jVQfTE-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/e2fa674154d2b42f?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"フブキの傘を「竹刀」と見間違えるスバル\",\n      \"reason\": \"映画の待ち合わせ時に、白上フブキが持っていた細長い傘袋を疲れから「竹刀」と勘違いしてしまったエピソードが面白く、切り抜きとして単独で成立するため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"DmWu0jVQfTE\",\n          \"sourceStartMs\": 271254,\n          \"sourceEndMs\": 419514,\n          \"supportingSpeechIds\": [\n            \"6-12\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"アカギの墓のアクスタを見て勘違いするスバル\",\n      \"reason\": \"白上フブキに見せられた「赤木しげるの墓」のアクリルスタンドから会話が始まり、疲れのせいか「ゲゲゲの鬼太郎の作者」と勘違いしそうになるズレたやり取りが面白いため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"DmWu0jVQfTE\",\n          \"sourceStartMs\": 420158,\n          \"sourceEndMs\": 503698,\n          \"supportingSpeechIds\": [\n            \"13-16\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

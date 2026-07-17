@@ -1,0 +1,49 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "ししろん（獅白ぼたん）に絶対やってほしいお気に入りゲーム",
+      "reason": "紹介しているゲームの要素（ボスや溺れそうなシーン）から、獅白ぼたん（ぼーたんちゃん）が絶対に好きそうだと熱を込めておすすめしているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "DmWu0jVQfTE",
+          "sourceStartMs": 7862065,
+          "sourceEndMs": 7918502,
+          "supportingSpeechIds": [
+            "401-403"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "ストーリーも面白い「電車アタック」ゲームの魅力",
+      "reason": "「電車アタック」という覚えやすい名前のゲームについて、並び替え要素だけでなくストーリーがあって面白いとリスナーへおすすめしているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "DmWu0jVQfTE",
+          "sourceStartMs": 8708130,
+          "sourceEndMs": 8759440,
+          "supportingSpeechIds": [
+            "459-460"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-17T10:05:38+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_17_DmWu0jVQfTE",
+    "windowSourceVideoId": "DmWu0jVQfTE",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/DmWu0jVQfTE_chat_velocity_top100_input_selection_v004/theme-llm-v002/20260716-first-gate-unseen-v001/windows/window_17_DmWu0jVQfTE-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/fbac45e44c86814a?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"ししろん（獅白ぼたん）に絶対やってほしいお気に入りゲーム\",\n      \"reason\": \"紹介しているゲームの要素（ボスや溺れそうなシーン）から、獅白ぼたん（ぼーたんちゃん）が絶対に好きそうだと熱を込めておすすめしているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"DmWu0jVQfTE\",\n          \"sourceStartMs\": 7862065,\n          \"sourceEndMs\": 7918502,\n          \"supportingSpeechIds\": [\"401-403\"]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"ストーリーも面白い「電車アタック」ゲームの魅力\",\n      \"reason\": \"「電車アタック」という覚えやすい名前のゲームについて、並び替え要素だけでなくストーリーがあって面白いとリスナーへおすすめしているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"DmWu0jVQfTE\",\n          \"sourceStartMs\": 8708130,\n          \"sourceEndMs\": 8759440,\n          \"supportingSpeechIds\": [\"459-460\"]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

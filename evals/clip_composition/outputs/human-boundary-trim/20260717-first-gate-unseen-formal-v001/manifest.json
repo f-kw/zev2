@@ -1,0 +1,84 @@
+{
+  "kind": "first_gate_unseen_formal_hand_trim_manifest",
+  "version": "first-gate-unseen-hand-trim-formal-v001",
+  "createdAt": "2026-07-17T01:22:43.349Z",
+  "sourceId": "DmWu0jVQfTE",
+  "sourceDurationMs": 8814021,
+  "sourceRanking": "evals/clip_composition/outputs/candidate-ranking/20260716-first-gate-unseen-run1-v002/result.json",
+  "sourceThemeGeneration": "evals/clip_composition/outputs/theme-generation/DmWu0jVQfTE_chat_velocity_top100_input_selection_v004/theme-llm-v002/20260716-first-gate-unseen-v001/run-01-gemini-output.json",
+  "generationSystems": {
+    "inputSelection": "input-selection-v004(chat-relative-velocity-top100)",
+    "theme": "theme-llm-v002@gemini-web-flash",
+    "ranking": "candidate-ranking-v002@gemini-web-flash"
+  },
+  "humanWork": {
+    "sessionCount": 1,
+    "decisionCount": 5,
+    "timeLimitMinutes": 15,
+    "finish": "5件の採否と、公開候補3〜5本の外側境界・区間内編集指示の保存。動画書き出しは含めない。"
+  },
+  "uiContract": {
+    "explicitStart": true,
+    "timerStartsAtFirstCandidateDisplay": true,
+    "timerLimitMinutes": 15,
+    "characterBoundarySelection": true,
+    "numericTimeInput": false,
+    "internalCutInstructions": true,
+    "reversibleDraft": true,
+    "serverPersistence": false,
+    "resultCopy": [
+      "plain-text",
+      "json"
+    ],
+    "nextCandidateAutoplay": true,
+    "videoFitsViewport": true
+  },
+  "tasks": [
+    {
+      "id": "rank-1-candidate-1",
+      "rank": 1,
+      "candidateId": 1,
+      "title": "フブキの傘を「竹刀」と見間違えるスバル",
+      "reason": "映画の待ち合わせ時に、白上フブキが持っていた細長い傘袋を疲れから「竹刀」と勘違いしてしまったエピソードが面白く、切り抜きとして単独で成立するため。",
+      "aiStartMs": 271254,
+      "aiEndMs": 419514
+    },
+    {
+      "id": "rank-2-candidate-12",
+      "rank": 2,
+      "candidateId": 12,
+      "title": "ポルカから送られてきた『ウマ娘』のキモい返信に共感してしまうスバル",
+      "reason": "ウマ娘のフジキセキの服装に興奮してポルカにスクショを送ったところ、キモい返信が来たものの、配信中なら自分も同じことを言っていたかもしれないと内なるポルカを認めて葛藤する一連のやり取りがユニークなため。",
+      "aiStartMs": 1710502,
+      "aiEndMs": 1866338
+    },
+    {
+      "id": "rank-3-candidate-13",
+      "rank": 3,
+      "candidateId": 13,
+      "title": "実家の母ちゃんから届いた謎の仕送り『月刊ムー』",
+      "reason": "天然な母親からの仕送りを開けたらなぜか『月刊ムー』が2冊入っており、初めて読んでみたら内容が面白かったという意外な親子エピソードが笑いを誘うため。",
+      "aiStartMs": 1920260,
+      "aiEndMs": 2008506
+    },
+    {
+      "id": "rank-4-candidate-36",
+      "rank": 4,
+      "candidateId": 36,
+      "title": "監視カメラに見られていたら恥ずかしい！ダンス自主練習中の独り言オンパレード",
+      "reason": "一人のダンスレッスン中に「はいここでターンしてデデンデンバ」などと全力で独り言を言いながら練習している滑稽な様子を、スタジオの管理人に監視カメラで見られていないか心配する話が具体的で面白いから。",
+      "aiStartMs": 5068074,
+      "aiEndMs": 5126562
+    },
+    {
+      "id": "rank-5-candidate-11",
+      "rank": 5,
+      "candidateId": 11,
+      "title": "ENメンバーにカレーを配るスバル",
+      "reason": "他メンバーのブースは和食や焼肉などのなか、スバルだけは自分の希望でカレーしかなく、ENメンバーにカレーを渡す際に『カレーハラスメント』で訴えられないか緊張したエピソードが面白く語られているため。",
+      "aiStartMs": 1594200,
+      "aiEndMs": 1708150
+    }
+  ],
+  "fixtureAndExpectedChanges": false
+}

@@ -1,0 +1,57 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "200万人耐久配信の企画を考えるスバル",
+      "reason": "100万人達成時の思い出を振り返りつつ、間近に迫る200万人達成に向けた耐久配信の企画アイデアや他メンバーの様子について楽しげに語っているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "DmWu0jVQfTE",
+          "sourceStartMs": 6195773,
+          "sourceEndMs": 6352446,
+          "supportingSpeechIds": [
+            "282-291"
+          ]
+        },
+        {
+          "sourceVideoId": "DmWu0jVQfTE",
+          "sourceStartMs": 6421246,
+          "sourceEndMs": 6568582,
+          "supportingSpeechIds": [
+            "294-302"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "「生配信は見てられない」と言われるマリオ配信への本音",
+      "reason": "切り抜きなら笑えるが生配信だと見ていられないというコメントに対し、配信にいるのは「選ばれし者（戦士）」しかいないとユーモアを交えて肯定しているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "DmWu0jVQfTE",
+          "sourceStartMs": 6363262,
+          "sourceEndMs": 6418950,
+          "supportingSpeechIds": [
+            "292-293"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-17T10:05:11+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_15_DmWu0jVQfTE",
+    "windowSourceVideoId": "DmWu0jVQfTE",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/DmWu0jVQfTE_chat_velocity_top100_input_selection_v004/theme-llm-v002/20260716-first-gate-unseen-v001/windows/window_15_DmWu0jVQfTE-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/b9a9eff0c353ba84?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"200万人耐久配信の企画を考えるスバル\",\n      \"reason\": \"100万人達成時の思い出を振り返りつつ、間近に迫る200万人達成に向けた耐久配信の企画アイデアや他メンバーの様子について楽しげに語っているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"DmWu0jVQfTE\",\n          \"sourceStartMs\": 6195773,\n          \"sourceEndMs\": 6352446,\n          \"supportingSpeechIds\": [\n            \"282-291\"\n          ]\n        },\n        {\n          \"sourceVideoId\": \"DmWu0jVQfTE\",\n          \"sourceStartMs\": 6421246,\n          \"sourceEndMs\": 6568582,\n          \"supportingSpeechIds\": [\n            \"294-302\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"「生配信は見てられない」と言われるマリオ配信への本音\",\n      \"reason\": \"切り抜きなら笑えるが生配信だと見ていられないというコメントに対し、配信にいるのは「選ばれし者（戦士）」しかいないとユーモアを交えて肯定しているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"DmWu0jVQfTE\",\n          \"sourceStartMs\": 6363262,\n          \"sourceEndMs\": 6418950,\n          \"supportingSpeechIds\": [\n            \"292-293\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

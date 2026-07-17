@@ -1,0 +1,79 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "ライブのゲスト予想ゼロ人説",
+      "reason": "自身のライブのゲストパートについて、予想できる人は誰もいないと自信満々に予言している場面が見どころとなるため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "DmWu0jVQfTE",
+          "sourceStartMs": 5909565,
+          "sourceEndMs": 5972414,
+          "supportingSpeechIds": [
+            "261-264"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "鼻の手術後に起きた声の変化",
+      "reason": "鼻の手術をしてから空気の抜けが良くなり、自分でも聞いたことのない声が出始めて驚いているという体験を語っているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "DmWu0jVQfTE",
+          "sourceStartMs": 6030198,
+          "sourceEndMs": 6087378,
+          "supportingSpeechIds": [
+            "268-269"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_003",
+      "title": "スタッフからの200万人プレッシャー",
+      "reason": "スタッフから「もうすぐ200万人ですね」と1年ほど言われ続けており、そろそろ達成しないと気まずいとプレッシャーを感じているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "DmWu0jVQfTE",
+          "sourceStartMs": 6095618,
+          "sourceEndMs": 6151802,
+          "supportingSpeechIds": [
+            "270-271"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_004",
+      "title": "100万人記念耐久配信をやっていない疑惑",
+      "reason": "過去にチャンネル登録者数の耐久配信をやったかどうかを振り返る中で、100万人耐久をやっていない可能性に気づいて混乱する場面が面白いため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "DmWu0jVQfTE",
+          "sourceStartMs": 6156826,
+          "sourceEndMs": 6195773,
+          "supportingSpeechIds": [
+            "272-281"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-17T10:04:56+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_14_DmWu0jVQfTE",
+    "windowSourceVideoId": "DmWu0jVQfTE",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/DmWu0jVQfTE_chat_velocity_top100_input_selection_v004/theme-llm-v002/20260716-first-gate-unseen-v001/windows/window_14_DmWu0jVQfTE-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/08733a3a26b5b979?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"ライブのゲスト予想ゼロ人説\",\n      \"reason\": \"自身のライブのゲストパートについて、予想できる人は誰もいないと自信満々に予言している場面が見どころとなるため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"DmWu0jVQfTE\",\n          \"sourceStartMs\": 5909565,\n          \"sourceEndMs\": 5972414,\n          \"supportingSpeechIds\": [\n            \"261-264\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"鼻の手術後に起きた声の変化\",\n      \"reason\": \"鼻の手術をしてから空気の抜けが良くなり、自分でも聞いたことのない声が出始めて驚いているという体験を語っているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"DmWu0jVQfTE\",\n          \"sourceStartMs\": 6030198,\n          \"sourceEndMs\": 6087378,\n          \"supportingSpeechIds\": [\n            \"268-269\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_003\",\n      \"title\": \"スタッフからの200万人プレッシャー\",\n      \"reason\": \"スタッフから「もうすぐ200万人ですね」と1年ほど言われ続けており、そろそろ達成しないと気まずいとプレッシャーを感じているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"DmWu0jVQfTE\",\n          \"sourceStartMs\": 6095618,\n          \"sourceEndMs\": 6151802,\n          \"supportingSpeechIds\": [\n            \"270-271\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_004\",\n      \"title\": \"100万人記念耐久配信をやっていない疑惑\",\n      \"reason\": \"過去にチャンネル登録者数の耐久配信をやったかどうかを振り返る中で、100万人耐久をやっていない可能性に気づいて混乱する場面が面白いため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"DmWu0jVQfTE\",\n          \"sourceStartMs\": 6156826,\n          \"sourceEndMs\": 6195773,\n          \"supportingSpeechIds\": [\n            \"272-281\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

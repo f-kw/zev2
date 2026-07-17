@@ -1,0 +1,50 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "スバルのバイオハザード実況プレイ歴史",
+      "reason": "デビュー初期に初めてプレイしたバイオハザード7の恐怖や、プレイ済みのナンバリングタイトルについて振り返っているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "DmWu0jVQfTE",
+          "sourceStartMs": 6997294,
+          "sourceEndMs": 7078790,
+          "supportingSpeechIds": [
+            "327-330"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "インディーゲームの裁判システムに大興奮するスバル",
+      "reason": "紹介映像を見ながら「裁判芸やん！」「大声裁判やん！」と推理系ゲームの要素に激しく反応しているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "DmWu0jVQfTE",
+          "sourceStartMs": 7680322,
+          "sourceEndMs": 7862065,
+          "supportingSpeechIds": [
+            "378-389",
+            400
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-17T10:05:25+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_16_DmWu0jVQfTE",
+    "windowSourceVideoId": "DmWu0jVQfTE",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/DmWu0jVQfTE_chat_velocity_top100_input_selection_v004/theme-llm-v002/20260716-first-gate-unseen-v001/windows/window_16_DmWu0jVQfTE-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/070db90d6150a5fe?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"スバルのバイオハザード実況プレイ歴史\",\n      \"reason\": \"デビュー初期に初めてプレイしたバイオハザード7の恐怖や、プレイ済みのナンバリングタイトルについて振り返っているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"DmWu0jVQfTE\",\n          \"sourceStartMs\": 6997294,\n          \"sourceEndMs\": 7078790,\n          \"supportingSpeechIds\": [\n            \"327-330\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"インディーゲームの裁判システムに大興奮するスバル\",\n      \"reason\": \"紹介映像を見ながら「裁判芸やん！」「大声裁判やん！」と推理系ゲームの要素に激しく反応しているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"DmWu0jVQfTE\",\n          \"sourceStartMs\": 7680322,\n          \"sourceEndMs\": 7862065,\n          \"supportingSpeechIds\": [\n            \"378-389\",\n            400\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

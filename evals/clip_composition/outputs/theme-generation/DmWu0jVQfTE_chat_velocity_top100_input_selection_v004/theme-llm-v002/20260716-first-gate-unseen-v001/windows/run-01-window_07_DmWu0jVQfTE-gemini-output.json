@@ -1,0 +1,64 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "ハコスの新曲MV絶賛と星街レッスンの筋肉痛",
+      "reason": "ハコス・ベールズの新曲MVを勧めつつ、星街すいせいのレッスンでハコスと自分（スバル）の筋肉痛への反応の違いを面白おかしく話しているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "DmWu0jVQfTE",
+          "sourceStartMs": 2443953,
+          "sourceEndMs": 2519980,
+          "supportingSpeechIds": [
+            "110-112"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "届いたお祝い段ボールが良すぎて捨てられないスバル",
+      "reason": "オフィシャルブックなどの入っていた段ボールのデザインが良すぎて大切に保存したいものの、どう飾るべきか悩んでいる葛藤が伝わるため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "DmWu0jVQfTE",
+          "sourceStartMs": 2584471,
+          "sourceEndMs": 2818746,
+          "supportingSpeechIds": [
+            "115-123"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_003",
+      "title": "裏でも姉妹のように仲が良いフブキとホロメンバーに困惑",
+      "reason": "猫又おかゆが白上フブキを「フブにゃは妹」と呼ぶ絡みが配信ネタではなく裏でも行われており、スバルがツッコミに迷ったエピソードが面白いため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "DmWu0jVQfTE",
+          "sourceStartMs": 2818746,
+          "sourceEndMs": 2908754,
+          "supportingSpeechIds": [
+            "123-127"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-17T10:03:09+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_07_DmWu0jVQfTE",
+    "windowSourceVideoId": "DmWu0jVQfTE",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/DmWu0jVQfTE_chat_velocity_top100_input_selection_v004/theme-llm-v002/20260716-first-gate-unseen-v001/windows/window_07_DmWu0jVQfTE-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/de90fb26dd1e9f3d?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"ハコスの新曲MV絶賛と星街レッスンの筋肉痛\",\n      \"reason\": \"ハコス・ベールズの新曲MVを勧めつつ、星街すいせいのレッスンでハコスと自分（スバル）の筋肉痛への反応の違いを面白おかしく話しているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"DmWu0jVQfTE\",\n          \"sourceStartMs\": 2443953,\n          \"sourceEndMs\": 2519980,\n          \"supportingSpeechIds\": [\n            \"110-112\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"届いたお祝い段ボールが良すぎて捨てられないスバル\",\n      \"reason\": \"オフィシャルブックなどの入っていた段ボールのデザインが良すぎて大切に保存したいものの、どう飾るべきか悩んでいる葛藤が伝わるため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"DmWu0jVQfTE\",\n          \"sourceStartMs\": 2584471,\n          \"sourceEndMs\": 2818746,\n          \"supportingSpeechIds\": [\n            \"115-123\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_003\",\n      \"title\": \"裏でも姉妹のように仲が良いフブキとホロメンバーに困惑\",\n      \"reason\": \"猫又おかゆが白上フブキを「フブにゃは妹」と呼ぶ絡みが配信ネタではなく裏でも行われており、スバルがツッコミに迷ったエピソードが面白いため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"DmWu0jVQfTE\",\n          \"sourceStartMs\": 2818746,\n          \"sourceEndMs\": 2908754,\n          \"supportingSpeechIds\": [\n            \"123-127\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

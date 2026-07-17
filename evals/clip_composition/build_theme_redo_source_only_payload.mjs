@@ -514,9 +514,12 @@ const forbiddenKeys = new Set([
   'label'
 ]);
 
-const forbiddenTexts = [
-  options.target
-];
+// 既存fixtureでは target は切り抜きIDなので、元配信だけから作る入力に
+// 現れたら漏洩である。一方、正式初見の探索では target 自体が元配信IDに
+// なるため、その場合まで禁止すると正当な sourceVideoId を誤検出する。
+const forbiddenTexts = options.target === options.sourceVideoId
+  ? []
+  : [options.target];
 
 function pathText(parts) {
   return parts.reduce((acc, part) => typeof part === 'number' ? `${acc}[${part}]` : (acc ? `${acc}.${part}` : part), '');

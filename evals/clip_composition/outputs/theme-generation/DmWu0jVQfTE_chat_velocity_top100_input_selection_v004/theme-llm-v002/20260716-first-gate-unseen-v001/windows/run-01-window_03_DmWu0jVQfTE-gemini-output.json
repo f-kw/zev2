@@ -1,0 +1,72 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "自分の楽屋の貼り紙だけ異質だった件",
+      "reason": "仕事に行くと大空スバルの楽屋だけ謎の画像がドアに貼られており、他のホロメンは普通なのに自分だけおかしな状況になっていた恐怖と困惑を話しているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "DmWu0jVQfTE",
+          "sourceStartMs": 1050198,
+          "sourceEndMs": 1122489,
+          "supportingSpeechIds": [
+            "45-49"
+          ]
+        },
+        {
+          "sourceVideoId": "DmWu0jVQfTE",
+          "sourceStartMs": 1175094,
+          "sourceEndMs": 1229958,
+          "supportingSpeechIds": [
+            "52-53"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "目立ちすぎる楽屋のせいでホロメンが大集合",
+      "reason": "謎の画像が貼られた楽屋が視認性が高すぎたため、国内外のホロメンが多数遊びに来る結果になったという面白い展開を語っているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "DmWu0jVQfTE",
+          "sourceStartMs": 1144038,
+          "sourceEndMs": 1173082,
+          "supportingSpeechIds": [
+            51
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_003",
+      "title": "楽屋の貼り紙が2日目に「龍が如く」化する",
+      "reason": "ドッキリだと思っていた楽屋の貼り紙が、2日目には「大空が如く」のようなデザインにパワーアップして遊ばれていたエピソードを語っているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "DmWu0jVQfTE",
+          "sourceStartMs": 1232566,
+          "sourceEndMs": 1313174,
+          "supportingSpeechIds": [
+            "54-56"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-17T10:02:10+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_03_DmWu0jVQfTE",
+    "windowSourceVideoId": "DmWu0jVQfTE",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/DmWu0jVQfTE_chat_velocity_top100_input_selection_v004/theme-llm-v002/20260716-first-gate-unseen-v001/windows/window_03_DmWu0jVQfTE-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/93d72d2182cfbe3a?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"自分の楽屋の貼り紙だけ異質だった件\",\n      \"reason\": \"仕事に行くと大空スバルの楽屋だけ謎の画像がドアに貼られており、他のホロメンは普通なのに自分だけおかしな状況になっていた恐怖と困惑を話しているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"DmWu0jVQfTE\",\n          \"sourceStartMs\": 1050198,\n          \"sourceEndMs\": 1122489,\n          \"supportingSpeechIds\": [\n            \"45-49\"\n          ]\n        },\n        {\n          \"sourceVideoId\": \"DmWu0jVQfTE\",\n          \"sourceStartMs\": 1175094,\n          \"sourceEndMs\": 1229958,\n          \"supportingSpeechIds\": [\n            \"52-53\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"目立ちすぎる楽屋のせいでホロメンが大集合\",\n      \"reason\": \"謎の画像が貼られた楽屋が視認性が高すぎたため、国内外のホロメンが多数遊びに来る結果になったという面白い展開を語っているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"DmWu0jVQfTE\",\n          \"sourceStartMs\": 1144038,\n          \"sourceEndMs\": 1173082,\n          \"supportingSpeechIds\": [\n            51\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_003\",\n      \"title\": \"楽屋の貼り紙が2日目に「龍が如く」化する\",\n      \"reason\": \"ドッキリだと思っていた楽屋の貼り紙が、2日目には「大空が如く」のようなデザインにパワーアップして遊ばれていたエピソードを語っているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"DmWu0jVQfTE\",\n          \"sourceStartMs\": 1232566,\n          \"sourceEndMs\": 1313174,\n          \"supportingSpeechIds\": [\n            \"54-56\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

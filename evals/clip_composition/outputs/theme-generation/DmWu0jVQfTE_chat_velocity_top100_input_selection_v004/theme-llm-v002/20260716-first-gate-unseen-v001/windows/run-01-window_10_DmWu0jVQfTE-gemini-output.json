@@ -1,0 +1,64 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "案件のセリフが「ルフィすぎる」問題",
+      "reason": "案件のセリフがルフィすぎるため先方と恐縮し合う丁寧なやり取りが発生したことや、ファンからの「この喋り方でルフィっぽさをなくせというのはもはやクレーム」というツッコミが面白いから。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "DmWu0jVQfTE",
+          "sourceStartMs": 3989794,
+          "sourceEndMs": 4078754,
+          "supportingSpeechIds": [
+            "175-178"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "会社に宴の開催を希望するスバル",
+      "reason": "面談で希望を聞かれたスバルが「会社で宴を開いてほしい」と要望したところ、面談相手に少し笑われてしまったというエピソードが面白いから。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "DmWu0jVQfTE",
+          "sourceStartMs": 4139062,
+          "sourceEndMs": 4255674,
+          "supportingSpeechIds": [
+            "181-189"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_003",
+      "title": "先輩風を吹かす「宴ハラスメント」への懸念",
+      "reason": "自身が2期生という先輩の立場であるため、無理に宴（飲み会）へ誘うと「宴ハラスメント」になって後輩を困らせてしまうのではないかと葛藤する様子が面白いから。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "DmWu0jVQfTE",
+          "sourceStartMs": 4260834,
+          "sourceEndMs": 4315226,
+          "supportingSpeechIds": [
+            "190-191"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-17T10:03:54+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_10_DmWu0jVQfTE",
+    "windowSourceVideoId": "DmWu0jVQfTE",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/DmWu0jVQfTE_chat_velocity_top100_input_selection_v004/theme-llm-v002/20260716-first-gate-unseen-v001/windows/window_10_DmWu0jVQfTE-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/443c9d2d5e478b8d?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"案件のセリフが「ルフィすぎる」問題\",\n      \"reason\": \"案件のセリフがルフィすぎるため先方と恐縮し合う丁寧なやり取りが発生したことや、ファンからの「この喋り方でルフィっぽさをなくせというのはもはやクレーム」というツッコミが面白いから。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"DmWu0jVQfTE\",\n          \"sourceStartMs\": 3989794,\n          \"sourceEndMs\": 4078754,\n          \"supportingSpeechIds\": [\n            \"175-178\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"会社に宴の開催を希望するスバル\",\n      \"reason\": \"面談で希望を聞かれたスバルが「会社で宴を開いてほしい」と要望したところ、面談相手に少し笑われてしまったというエピソードが面白いから。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"DmWu0jVQfTE\",\n          \"sourceStartMs\": 4139062,\n          \"sourceEndMs\": 4255674,\n          \"supportingSpeechIds\": [\n            \"181-189\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_003\",\n      \"title\": \"先輩風を吹かす「宴ハラスメント」への懸念\",\n      \"reason\": \"自身が2期生という先輩の立場であるため、無理に宴（飲み会）へ誘うと「宴ハラスメント」になって後輩を困らせてしまうのではないかと葛藤する様子が面白いから。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"DmWu0jVQfTE\",\n          \"sourceStartMs\": 4260834,\n          \"sourceEndMs\": 4315226,\n          \"supportingSpeechIds\": [\n            \"190-191\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

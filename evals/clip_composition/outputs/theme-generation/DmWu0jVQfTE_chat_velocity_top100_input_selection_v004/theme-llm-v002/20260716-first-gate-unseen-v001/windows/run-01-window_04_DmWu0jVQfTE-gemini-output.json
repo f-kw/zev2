@@ -1,0 +1,49 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "スバルの中で「魂」という言葉がトレンドワードになった話",
+      "reason": "サムネの影響や限界突破した疲労から「魂（プライド）」という言葉をスタッフとの会話で連呼し、スタッフ間にもそのワードが伝染して盛り上がったという具体的なやり取りを話しているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "DmWu0jVQfTE",
+          "sourceStartMs": 1410714,
+          "sourceEndMs": 1550229,
+          "supportingSpeechIds": [
+            "60-64"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "楽屋の弁当で2日連続カレーが出て、スタッフも巻き込まれた話",
+      "reason": "楽しみにしていた3日間の楽屋弁当で2日連続でカレーが出た驚きと、同じものを食べるスタッフや、遊びに来たメンバーに「カレー食べる？」と勧める展開がコミカルに描かれているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "DmWu0jVQfTE",
+          "sourceStartMs": 1552662,
+          "sourceEndMs": 1594200,
+          "supportingSpeechIds": [
+            "65-73"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-17T10:02:25+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_04_DmWu0jVQfTE",
+    "windowSourceVideoId": "DmWu0jVQfTE",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/DmWu0jVQfTE_chat_velocity_top100_input_selection_v004/theme-llm-v002/20260716-first-gate-unseen-v001/windows/window_04_DmWu0jVQfTE-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/09f84bad2751be5c?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"スバルの中で「魂」という言葉がトレンドワードになった話\",\n      \"reason\": \"サムネの影響や限界突破した疲労から「魂（プライド）」という言葉をスタッフとの会話で連呼し、スタッフ間にもそのワードが伝染して盛り上がったという具体的なやり取りを話しているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"DmWu0jVQfTE\",\n          \"sourceStartMs\": 1410714,\n          \"sourceEndMs\": 1550229,\n          \"supportingSpeechIds\": [\n            \"60-64\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"楽屋の弁当で2日連続カレーが出て、スタッフも巻き込まれた話\",\n      \"reason\": \"楽しみにしていた3日間の楽屋弁当で2日連続でカレーが出た驚きと、同じものを食べるスタッフや、遊びに来たメンバーに「カレー食べる？」と勧める展開がコミカルに描かれているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"DmWu0jVQfTE\",\n          \"sourceStartMs\": 1552662,\n          \"sourceEndMs\": 1594200,\n          \"supportingSpeechIds\": [\n            \"65-73\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

@@ -1,0 +1,122 @@
+{
+  "kind": "theme_redo_source_only_window_prompt_payload",
+  "runAt": "2026-07-17T00:58:06.493Z",
+  "target": "DmWu0jVQfTE",
+  "inputSetId": "DmWu0jVQfTE_chat_velocity_top100_input_selection_v004",
+  "sourceVideoId": "DmWu0jVQfTE",
+  "sourceSttId": "DmWu0jVQfTE_first_gate_unseen_local120_v001",
+  "sourceSttManifestPath": "evals/clip_composition/stt/DmWu0jVQfTE_first_gate_unseen_local120_v001/source/manifest.json",
+  "sourceSttComplete": true,
+  "generationSystem": "theme-llm-v002",
+  "promptVersion": "theme_generation_prompt_v002",
+  "requestedThemeCount": 8,
+  "windowKind": "primary",
+  "llmCall": false,
+  "modelInput": {
+    "task": "source_only_theme_generation",
+    "generationSystem": "theme-llm-v002",
+    "promptVersion": "theme_generation_prompt_v002",
+    "requestedThemeCount": 8,
+    "inputPolicy": {
+      "sourceOnly": true,
+      "noClipInfo": true,
+      "noExpected": true,
+      "noAlignment": true,
+      "noHumanReverseTheme": true
+    },
+    "windowing": {
+      "applied": true,
+      "mode": "speech-time",
+      "windowId": "window_17_DmWu0jVQfTE",
+      "reason": "元配信全体入力が長いため、発話境界を保った時間窓へ分割する。",
+      "maxPromptBytes": 13084,
+      "overlapMs": 0,
+      "sourceVideoId": "DmWu0jVQfTE",
+      "sourceStartMs": 7862065,
+      "sourceEndMs": 8759440
+    },
+    "sources": [
+      {
+        "sourceVideoId": "DmWu0jVQfTE",
+        "sourceUrl": "https://www.youtube.com/watch?v=DmWu0jVQfTE",
+        "sourceTitle": "【#生スバル】魂の雑談/Soul talk【ホロライブ/大空スバル】",
+        "transcriptKind": "local_stt",
+        "language": "ja-JP",
+        "durationSec": 8814.021,
+        "rawSegmentCount": 25899,
+        "promptSegmentCount": 6,
+        "segmentCompaction": {
+          "method": "source-only transcript segments concatenated until sentence-ending punctuation",
+          "scoringRole": "none",
+          "note": "読みやすさのための表現変換であり、expected、切り抜き、照合結果、人間確認メモは使わない。"
+        },
+        "segments": [
+          {
+            "speechId": 401,
+            "sourceVideoId": "DmWu0jVQfTE",
+            "sourceStartMs": 7862065,
+            "sourceEndMs": 7872094,
+            "text": "気になってああいうゲームうわぁ、フブちゃんめっちゃ好きそうだったな、確かに今のゲームなにこれ?"
+          },
+          {
+            "speechId": 402,
+            "sourceVideoId": "DmWu0jVQfTE",
+            "sourceStartMs": 7874150,
+            "sourceEndMs": 7890025,
+            "text": "すげぇボタンちゃん好きそうこれボタンにやってほしい絶対好きやろこのゲーム"
+          },
+          {
+            "speechId": 403,
+            "sourceVideoId": "DmWu0jVQfTE",
+            "sourceStartMs": 7903030,
+            "sourceEndMs": 7918502,
+            "text": "敬敵でどうにかなるんかこれボスいんのやばいうわー溺れそうこれぼーたんちゃん絶対好きやん"
+          },
+          {
+            "speechId": 458,
+            "sourceVideoId": "DmWu0jVQfTE",
+            "sourceStartMs": 8677434,
+            "sourceEndMs": 8705818,
+            "text": "あーまだいつかわかんないんだーえーおもろかったーまあでもやっぱあれかなやっぱアニマルブなんかプリズンブレイクみたいなやつかなプリズンブレイクアニマル気になりすぎるやろみたいななんかあっという間だったな"
+          },
+          {
+            "speechId": 459,
+            "sourceVideoId": "DmWu0jVQfTE",
+            "sourceStartMs": 8708130,
+            "sourceEndMs": 8733710,
+            "text": "ねーあと電車ね電車アタックね電車アタックはさ名前ちょっと覚えやすすぎるよ電車アタックねーでも夢物語みたいなゲームねやってるんだけど面白いしかも"
+          },
+          {
+            "speechId": 460,
+            "sourceVideoId": "DmWu0jVQfTE",
+            "sourceStartMs": 8734518,
+            "sourceEndMs": 8759440,
+            "text": "結構その並び替えだけじゃなくてストーリーがあるんよそれがね面白いんだよみんなもぜひやってみてということで本日もありがとうございましたちょっと長くなっちゃったけどじゃあそろそろちょっとまったり今日はお話し会でしたけど終わりたいと思います明日は"
+          }
+        ]
+      }
+    ],
+    "outputContract": {
+      "format": "json_only",
+      "schema": {
+        "themes": [
+          {
+            "themeId": "string",
+            "title": "string",
+            "reason": "string_one_sentence",
+            "evidenceRanges": [
+              {
+                "sourceVideoId": "string",
+                "sourceStartMs": "number",
+                "sourceEndMs": "number",
+                "supportingSpeechIds": [
+                  "number_or_range_string"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

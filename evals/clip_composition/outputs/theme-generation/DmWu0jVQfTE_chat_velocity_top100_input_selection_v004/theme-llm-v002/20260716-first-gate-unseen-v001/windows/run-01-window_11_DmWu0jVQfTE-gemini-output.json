@@ -1,0 +1,79 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "スバルがメンバーをもつ鍋に誘う時の葛藤とJPメンバーのフッカルさ",
+      "reason": "スバルが他のメンバーをもつ鍋に誘う際のドキドキする心境や、誘いやすいと感じるホロライブJPメンバーの反応について具体的に話しているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "DmWu0jVQfTE",
+          "sourceStartMs": 4410110,
+          "sourceEndMs": 4464526,
+          "supportingSpeechIds": [
+            "195-196"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "「人が好きなモンスター」と呼ばれる大空スバルとリスナーのプロレス",
+      "reason": "一人ではなく複数人で食事に行くのが好きだと語るスバルが、リスナーやみこちから「モンスター」扱いされて弁解するやり取りが面白いため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "DmWu0jVQfTE",
+          "sourceStartMs": 4469410,
+          "sourceEndMs": 4589298,
+          "supportingSpeechIds": [
+            "197-204"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_003",
+      "title": "大空スバルが語る自分の「感情の豊かさ」と声のデカさの自覚",
+      "reason": "人の5倍感情があると言われることや、配信で喜怒哀楽を全力で表現する理由についてスバル自身の考えを語っているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "DmWu0jVQfTE",
+          "sourceStartMs": 4591778,
+          "sourceEndMs": 4708398,
+          "supportingSpeechIds": [
+            "205-208"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_004",
+      "title": "「自分は優等生だと思っていた」スバルが明かす学生時代の通信簿の衝撃",
+      "reason": "自分の認識と他人の認識のギャップを示すエピソードとして、中学時代の通信簿に書かれていた担任からのリアルな評価を明かしているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "DmWu0jVQfTE",
+          "sourceStartMs": 4709110,
+          "sourceEndMs": 4738662,
+          "supportingSpeechIds": [
+            209
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-17T10:04:08+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_11_DmWu0jVQfTE",
+    "windowSourceVideoId": "DmWu0jVQfTE",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/DmWu0jVQfTE_chat_velocity_top100_input_selection_v004/theme-llm-v002/20260716-first-gate-unseen-v001/windows/window_11_DmWu0jVQfTE-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/2629ab77cd41d807?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"スバルがメンバーをもつ鍋に誘う時の葛藤とJPメンバーのフッカルさ\",\n      \"reason\": \"スバルが他のメンバーをもつ鍋に誘う際のドキドキする心境や、誘いやすいと感じるホロライブJPメンバーの反応について具体的に話しているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"DmWu0jVQfTE\",\n          \"sourceStartMs\": 4410110,\n          \"sourceEndMs\": 4464526,\n          \"supportingSpeechIds\": [\n            \"195-196\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"「人が好きなモンスター」と呼ばれる大空スバルとリスナーのプロレス\",\n      \"reason\": \"一人ではなく複数人で食事に行くのが好きだと語るスバルが、リスナーやみこちから「モンスター」扱いされて弁解するやり取りが面白いため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"DmWu0jVQfTE\",\n          \"sourceStartMs\": 4469410,\n          \"sourceEndMs\": 4589298,\n          \"supportingSpeechIds\": [\n            \"197-204\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_003\",\n      \"title\": \"大空スバルが語る自分の「感情の豊かさ」と声のデカさの自覚\",\n      \"reason\": \"人の5倍感情があると言われることや、配信で喜怒哀楽を全力で表現する理由についてスバル自身の考えを語っているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"DmWu0jVQfTE\",\n          \"sourceStartMs\": 4591778,\n          \"sourceEndMs\": 4708398,\n          \"supportingSpeechIds\": [\n            \"205-208\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_004\",\n      \"title\": \"「自分は優等生だと思っていた」スバルが明かす学生時代の通信簿の衝撃\",\n      \"reason\": \"自分の認識と他人の認識のギャップを示すエピソードとして、中学時代の通信簿に書かれていた担任からのリアルな評価を明かしているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"DmWu0jVQfTE\",\n          \"sourceStartMs\": 4709110,\n          \"sourceEndMs\": 4738662,\n          \"supportingSpeechIds\": [\n            209\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}

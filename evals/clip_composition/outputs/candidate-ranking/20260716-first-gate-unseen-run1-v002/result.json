@@ -1,0 +1,156 @@
+{
+  "kind": "candidate_ranking_v002_first_gate_unseen_run1_result",
+  "validatedAt": "2026-07-17T01:10:31.051Z",
+  "sourceId": "DmWu0jVQfTE",
+  "generationSystem": "candidate-ranking-v002@gemini-web-flash",
+  "model": "gemini-web-flash",
+  "runCount": 1,
+  "inputPolicy": "candidateId+title+reason only",
+  "formatValidation": {
+    "passed": true,
+    "errors": []
+  },
+  "leakCheck": {
+    "passed": true,
+    "allowedCandidateFields": [
+      "candidateId",
+      "title",
+      "reason"
+    ],
+    "foundForbiddenFields": [],
+    "candidateCount": 52,
+    "note": "正式初見素材でも固定済みv002と同じく、候補ID・題名・理由だけを渡す。時刻、本文、チャット、正解、人間ラベルは渡さない。"
+  },
+  "sourceCandidateCount": 52,
+  "rankedCandidates": [
+    {
+      "rank": 1,
+      "candidateId": 1,
+      "title": "フブキの傘を「竹刀」と見間違えるスバル",
+      "sourceReason": "映画の待ち合わせ時に、白上フブキが持っていた細長い傘袋を疲れから「竹刀」と勘違いしてしまったエピソードが面白く、切り抜きとして単独で成立するため。",
+      "selectionReason": "映画の待ち合わせという具体的な状況下で、白上フブキの傘袋を「竹刀」と見間違えたスバルの疲労による滑稽な勘違いエピソードが、1つの出来事としてきれいに完結しており分かりやすいため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "DmWu0jVQfTE",
+          "sourceStartMs": 271254,
+          "sourceEndMs": 419514,
+          "supportingSpeechIds": [
+            "6-12"
+          ],
+          "timingResolution": {
+            "source": "supportingSpeechIds",
+            "reportedSourceStartMs": 271254,
+            "reportedSourceEndMs": 419514,
+            "corrected": false
+          }
+        }
+      ],
+      "labelStatus": "formal-unseen-unlabeled-human-judgment-required"
+    },
+    {
+      "rank": 2,
+      "candidateId": 12,
+      "title": "ポルカから送られてきた『ウマ娘』のキモい返信に共感してしまうスバル",
+      "sourceReason": "ウマ娘のフジキセキの服装に興奮してポルカにスクショを送ったところ、キモい返信が来たものの、配信中なら自分も同じことを言っていたかもしれないと内なるポルカを認めて葛藤する一連のやり取りがユニークなため。",
+      "selectionReason": "ポルカから送られてきた『ウマ娘』に関するキモい返信に対して、配信中の自分なら同じことを言いかねないと共感し、内なるポルカを認めて葛藤する具体的なリアクションの掛け合いが丁寧に説明されているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "DmWu0jVQfTE",
+          "sourceStartMs": 1710502,
+          "sourceEndMs": 1866338,
+          "supportingSpeechIds": [
+            "79-84"
+          ],
+          "timingResolution": {
+            "source": "supportingSpeechIds",
+            "reportedSourceStartMs": 1710502,
+            "reportedSourceEndMs": 1866338,
+            "corrected": false
+          }
+        }
+      ],
+      "labelStatus": "formal-unseen-unlabeled-human-judgment-required"
+    },
+    {
+      "rank": 3,
+      "candidateId": 13,
+      "title": "実家の母ちゃんから届いた謎の仕送り『月刊ムー』",
+      "sourceReason": "天然な母親からの仕送りを開けたらなぜか『月刊ムー』が2冊入っており、初めて読んでみたら内容が面白かったという意外な親子エピソードが笑いを誘うため。",
+      "selectionReason": "実家の母親から突然『月刊ムー』が送られてきたという単独で十分に伝わる具体的なハプニングと、それを読んでみたら面白かったという意外な結論までが1文で綺麗にまとまっているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "DmWu0jVQfTE",
+          "sourceStartMs": 1920260,
+          "sourceEndMs": 2008506,
+          "supportingSpeechIds": [
+            "87-89"
+          ],
+          "timingResolution": {
+            "source": "supportingSpeechIds",
+            "reportedSourceStartMs": 1920260,
+            "reportedSourceEndMs": 2008506,
+            "corrected": false
+          }
+        }
+      ],
+      "labelStatus": "formal-unseen-unlabeled-human-judgment-required"
+    },
+    {
+      "rank": 4,
+      "candidateId": 36,
+      "title": "監視カメラに見られていたら恥ずかしい！ダンス自主練習中の独り言オンパレード",
+      "sourceReason": "一人のダンスレッスン中に「はいここでターンしてデデンデンバ」などと全力で独り言を言いながら練習している滑稽な様子を、スタジオの管理人に監視カメラで見られていないか心配する話が具体的で面白いから。",
+      "selectionReason": "ダンスレッスン中の全力の独特な独り言を、スタジオの管理人に監視カメラで覗かれているのではないかと不安がる本人の具体的な心配ぶりや反応がはっきりと読み取れるため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "DmWu0jVQfTE",
+          "sourceStartMs": 5068074,
+          "sourceEndMs": 5126562,
+          "supportingSpeechIds": [
+            "224-225"
+          ],
+          "timingResolution": {
+            "source": "supportingSpeechIds",
+            "reportedSourceStartMs": 5068074,
+            "reportedSourceEndMs": 5126562,
+            "corrected": false
+          }
+        }
+      ],
+      "labelStatus": "formal-unseen-unlabeled-human-judgment-required"
+    },
+    {
+      "rank": 5,
+      "candidateId": 11,
+      "title": "ENメンバーにカレーを配るスバル",
+      "sourceReason": "他メンバーのブースは和食や焼肉などのなか、スバルだけは自分の希望でカレーしかなく、ENメンバーにカレーを渡す際に『カレーハラスメント』で訴えられないか緊張したエピソードが面白く語られているため。",
+      "selectionReason": "自身の希望のせいで楽屋にカレーしかない中、それをENメンバーに配る際に「カレーハラスメント」で訴えられないか本気で緊張したという、他者との関係性に基づくユニークな感情・反応が描かれているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "DmWu0jVQfTE",
+          "sourceStartMs": 1594200,
+          "sourceEndMs": 1708150,
+          "supportingSpeechIds": [
+            "74-78"
+          ],
+          "timingResolution": {
+            "source": "supportingSpeechIds",
+            "reportedSourceStartMs": 1594200,
+            "reportedSourceEndMs": 1708150,
+            "corrected": false
+          }
+        }
+      ],
+      "labelStatus": "formal-unseen-unlabeled-human-judgment-required"
+    }
+  ],
+  "scoringStatus": "formal-unseen-no-teacher-score; awaiting-human-edit-instruction-trial",
+  "nextHumanTrial": {
+    "taskCount": 5,
+    "sessionCount": 1,
+    "timeLimitMinutes": 15,
+    "finishDefinition": "公開候補3〜5本について、採否・外側境界・区間内カットまたは無音除去の編集指示を保存する。動画書き出しは含めない。",
+    "maximumDecisionsPerSession": 5
+  },
+  "fixtureAndExpectedChanges": false
+}

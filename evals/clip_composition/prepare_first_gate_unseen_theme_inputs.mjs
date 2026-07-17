@@ -107,9 +107,10 @@ async function main() {
     '--selectionPlan', path.relative(root, selectionPlanPath)
   ]);
 
-  const [runManifest, windowPlan] = await Promise.all([
+  const [runManifest, windowPlan, leakageInspection] = await Promise.all([
     readJson(path.join(outputRoot, 'run-manifest.json')),
-    readJson(path.join(outputRoot, 'window-plan.json'))
+    readJson(path.join(outputRoot, 'window-plan.json')),
+    readJson(path.join(outputRoot, 'leakage-inspection.json'))
   ]);
   if (runManifest.generationSystem !== 'theme-llm-v002'
     || runManifest.promptVersion !== 'theme_generation_prompt_v002'
@@ -120,6 +121,11 @@ async function main() {
     || windowPlan.requestedThemeCount !== 8
     || windowPlan.runs !== 1) {
     throw new Error('生成したテーマ入力が第三素材から固定した条件と一致しません');
+  }
+  if (!Array.isArray(leakageInspection.results)
+    || leakageInspection.results.length !== windowPlan.windows.length + 1
+    || leakageInspection.results.some((result) => result.status !== 'pass')) {
+    throw new Error('正式初見入力の漏洩検査がpassしていません');
   }
   console.log(JSON.stringify({
     status: 'prepared',

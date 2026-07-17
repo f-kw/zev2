@@ -1,0 +1,64 @@
+{
+  "themes": [
+    {
+      "themeId": "theme_001",
+      "title": "ENメンバーにカレーを配るスバル",
+      "reason": "他メンバーのブースは和食や焼肉などのなか、スバルだけは自分の希望でカレーしかなく、ENメンバーにカレーを渡す際に『カレーハラスメント』で訴えられないか緊張したエピソードが面白く語られているため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "DmWu0jVQfTE",
+          "sourceStartMs": 1594200,
+          "sourceEndMs": 1708150,
+          "supportingSpeechIds": [
+            "74-78"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_002",
+      "title": "ポルカから送られてきた『ウマ娘』のキモい返信に共感してしまうスバル",
+      "reason": "ウマ娘のフジキセキの服装に興奮してポルカにスクショを送ったところ、キモい返信が来たものの、配信中なら自分も同じことを言っていたかもしれないと内なるポルカを認めて葛藤する一連のやり取りがユニークなため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "DmWu0jVQfTE",
+          "sourceStartMs": 1710502,
+          "sourceEndMs": 1866338,
+          "supportingSpeechIds": [
+            "79-84"
+          ]
+        }
+      ]
+    },
+    {
+      "themeId": "theme_003",
+      "title": "実家の母ちゃんから届いた謎の仕送り『月刊ムー』",
+      "reason": "天然な母親からの仕送りを開けたらなぜか『月刊ムー』が2冊入っており、初めて読んでみたら内容が面白かったという意外な親子エピソードが笑いを誘うため。",
+      "evidenceRanges": [
+        {
+          "sourceVideoId": "DmWu0jVQfTE",
+          "sourceStartMs": 1920260,
+          "sourceEndMs": 2008506,
+          "supportingSpeechIds": [
+            "87-89"
+          ]
+        }
+      ]
+    }
+  ],
+  "runAt": "2026-07-17T10:02:40+09:00",
+  "model": "gemini-web-flash",
+  "params": {
+    "temperature": 0,
+    "source": "gemini-web",
+    "runner": "edge-cdp-text-prompt",
+    "requestedThemeCount": 8,
+    "windowed": true,
+    "windowId": "window_05_DmWu0jVQfTE",
+    "windowSourceVideoId": "DmWu0jVQfTE",
+    "windowRequestedThemeCount": 8
+  },
+  "promptFile": "reports/theme-generation/DmWu0jVQfTE_chat_velocity_top100_input_selection_v004/theme-llm-v002/20260716-first-gate-unseen-v001/windows/window_05_DmWu0jVQfTE-prompt.md",
+  "pageUrl": "https://gemini.google.com/app/7161ab477868aff1?hl=ja",
+  "rawResponseText": "JSON\n{\n  \"themes\": [\n    {\n      \"themeId\": \"theme_001\",\n      \"title\": \"ENメンバーにカレーを配るスバル\",\n      \"reason\": \"他メンバーのブースは和食や焼肉などのなか、スバルだけは自分の希望でカレーしかなく、ENメンバーにカレーを渡す際に『カレーハラスメント』で訴えられないか緊張したエピソードが面白く語られているため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"DmWu0jVQfTE\",\n          \"sourceStartMs\": 1594200,\n          \"sourceEndMs\": 1708150,\n          \"supportingSpeechIds\": [\n            \"74-78\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_002\",\n      \"title\": \"ポルカから送られてきた『ウマ娘』のキモい返信に共感してしまうスバル\",\n      \"reason\": \"ウマ娘のフジキセキの服装に興奮してポルカにスクショを送ったところ、キモい返信が来たものの、配信中なら自分も同じことを言っていたかもしれないと内なるポルカを認めて葛藤する一連のやり取りがユニークなため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"DmWu0jVQfTE\",\n          \"sourceStartMs\": 1710502,\n          \"sourceEndMs\": 1866338,\n          \"supportingSpeechIds\": [\n            \"79-84\"\n          ]\n        }\n      ]\n    },\n    {\n      \"themeId\": \"theme_003\",\n      \"title\": \"実家の母ちゃんから届いた謎の仕送り『月刊ムー』\",\n      \"reason\": \"天然な母親からの仕送りを開けたらなぜか『月刊ムー』が2冊入っており、初めて読んでみたら内容が面白かったという意外な親子エピソードが笑いを誘うため。\",\n      \"evidenceRanges\": [\n        {\n          \"sourceVideoId\": \"DmWu0jVQfTE\",\n          \"sourceStartMs\": 1920260,\n          \"sourceEndMs\": 2008506,\n          \"supportingSpeechIds\": [\n            \"87-89\"\n          ]\n        }\n      ]\n    }\n  ]\n}\n\n\n\n\n\nFlash\n\nGemini は AI であり、間違えることがあります。"
+}
