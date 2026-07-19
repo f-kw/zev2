@@ -21,7 +21,7 @@
 - 人間へ提示する1本: `tljIGk4y5Do`
 - 理由: 観測できた演出が6種類あり、もう1本の4種類より多い。独自の係数・重み付けは使っていない。
 - 取得済みローカル動画: `evals/clip_composition/research/downloads/tljIGk4y5Do/tljIGk4y5Do.mp4`
-- 視聴入口: `../viewing-queue/04_新規_tljIGk4y5Do.mp4`
+- 視聴入口: `../viewing-queue/04_確認済み_tljIGk4y5Do.mp4`（2026-07-19に人間視聴完了）
 
 ## 結果の扱い
 
