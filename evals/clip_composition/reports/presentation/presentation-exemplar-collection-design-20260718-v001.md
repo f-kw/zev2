@@ -85,20 +85,22 @@
 
 ## 第一候補の選定
 
-凍結fixtureに対応し、教師切り抜きのMP4と取得時情報がすでにローカルにある8本を第一候補とした。同じ教師切り抜きを使う`IMQYaT_RWRA`の3変種は1本にまとめた。draft fixtureや、凍結fixtureに対応しない取得済み動画は含めていない。
+当初は、凍結fixtureに対応し、教師切り抜きのMP4と取得時情報がローカルにある8本を、そのまま第一候補とした。しかしこれは**技術的に利用可能な動画**と**人間へ視聴依頼してよい動画**を混同した誤選定だった。人間確認素材をホロライブ系・壱百満天原サロメ・小森めとへ限定する既存条件と、過去の拒否判断を入口で確認していなかった。
 
-| 順 | 教師切り抜き | 対応fixture | 尺 | ローカル確認 |
+2026-07-19に再監査し、現行の視聴対象を4本へ修正した。凍結fixture・教師MP4・過去記録は削除せず、対象外の動画だけを視聴キューから外す。今後は、配信者条件と既知の人間判断を通過した後に、ローカル媒体の有無を確認する。
+
+| 旧順 | 教師切り抜き | 対応fixture | 尺 | 再監査結果 |
 |---:|---|---|---:|---|
-| 1 | `IMQYaT_RWRA` | `IMQYaT_RWRA_context/clip_audio/audio_v001` | 00:19 | MP4・取得時情報あり |
-| 2 | `UpRyakf5j80` | `UpRyakf5j80_clip_audio_v001` | 00:43 | MP4・取得時情報あり |
-| 3 | `r_ztjHaHmcg` | `r_ztjHaHmcg_partial_material_v001` | 02:05 | MP4・取得時情報あり |
-| 4 | `aX-axQMWR3c` | `aX-axQMWR3c_single_material_v001` | 02:35 | MP4・取得時情報あり |
-| 5 | `nOEWCNc77MI` | `nOEWCNc77MI_multiblock_material_v001` | 08:27 | MP4・取得時情報あり |
-| 6 | `nE_bNeBNp4E` | `nE_bNeBNp4E_multiblock_material_v001` | 13:00 | MP4・取得時情報あり |
-| 7 | `XauLZgnWHtA` | `XauLZgnWHtA_part01_partial_material_v001` | 13:35 | MP4・取得時情報あり |
-| 8 | `9dtwF5Exu5w` | `9dtwF5Exu5w_multiblock_material_v001` | 17:07 | MP4・取得時情報あり |
+| 1 | `IMQYaT_RWRA` | `IMQYaT_RWRA_context/clip_audio/audio_v001` | 00:19 | AI対象外の参考。視聴済み、蒸留本数外 |
+| 2 | `UpRyakf5j80` | `UpRyakf5j80_clip_audio_v001` | 00:43 | **視聴対象・確認済み**（ホロライブ） |
+| 3 | `r_ztjHaHmcg` | `r_ztjHaHmcg_partial_material_v001` | 02:05 | 対象外（配信者条件外・過去の拒否判断あり） |
+| 4 | `aX-axQMWR3c` | `aX-axQMWR3c_single_material_v001` | 02:35 | 対象外（配信者条件外） |
+| 5 | `nOEWCNc77MI` | `nOEWCNc77MI_multiblock_material_v001` | 08:27 | **視聴対象**（ホロライブ） |
+| 6 | `nE_bNeBNp4E` | `nE_bNeBNp4E_multiblock_material_v001` | 13:00 | **視聴対象**（ホロライブ） |
+| 7 | `XauLZgnWHtA` | `XauLZgnWHtA_part01_partial_material_v001` | 13:35 | 対象外（配信者条件外） |
+| 8 | `9dtwF5Exu5w` | `9dtwF5Exu5w_multiblock_material_v001` | 17:07 | **視聴対象**（ホロライブ） |
 
-短い順に並べただけで、視聴順や本数の義務ではない。新規取得は不要である。
+現行視聴キューは、確認済み`UpRyakf5j80`、未確認`nOEWCNc77MI`、`nE_bNeBNp4E`、`9dtwF5Exu5w`の4本。順番や本数の義務はない。新規取得は不要である。
 
 ## 人間作業量
 
