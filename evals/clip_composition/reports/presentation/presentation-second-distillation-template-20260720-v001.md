@@ -1,6 +1,6 @@
 # 通常動画の演出文法 第2版蒸留テンプレート
 
-状態: **枠のみ。7・8本目の人間観測が入るまで結論欄を埋めない。**
+状態: **入力枠は通常動画8本・66観測で到達済み。観測の帰属訂正まで完了。蒸留結論は未入力。**
 
 ## 0. 蒸留前提の確認
 
@@ -20,8 +20,8 @@
 | 4 | `9dtwF5Exu5w` | 2 | 人間 | `collection.md` |
 | 5 | `tljIGk4y5Do` | 13 | 人間 | `collection.md` |
 | 6 | `YkGg-rtFcyg` | 9 | 人間 | `collection.md` |
-| 7 | `m8mpEaDykwM` | 未入力 | 未入力 | `collection.md` |
-| 8 | `TDNnR5xpzOc` | 未入力 | 未入力 | `collection.md` |
+| 7 | `m8mpEaDykwM` | 13 | 人間 | `collection.md` |
+| 8 | `TDNnR5xpzOc` | 3 | 人間 | `collection.md` |
 
 ## 2. G1〜G4の再確認
 
