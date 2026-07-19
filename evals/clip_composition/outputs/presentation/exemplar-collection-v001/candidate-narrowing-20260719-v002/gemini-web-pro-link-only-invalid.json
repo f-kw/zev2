@@ -1,0 +1,19 @@
+{
+  "status": "invalid",
+  "invalidReason": "Web GeminiがYouTubeリンク先の画面を直接確認できず、音声トランスクリプトだけで選定したため。機械絞り込みの観測根拠には使わない。",
+  "model": "gemini-web-pro",
+  "rawResponse": {
+    "selectedVideoId": "YkGg-rtFcyg",
+    "reasoning": "音声トランスクリプトより、状況や文脈を端的に説明する『文脈カード』と思われるテキスト情報（ナレーション）や、別人を演じている『モノマネ対象が話しているように見せる構成』の音声が明確に確認できたため。画面の視覚情報が直接取得できない制約下において、音声ログから最も確実に仮説候補の編集文法を裏付けられる本動画を選定しました。",
+    "confirmedTechniques": [
+      {
+        "techniqueName": "文脈カード",
+        "timestamps": ["00:07", "00:54"]
+      },
+      {
+        "techniqueName": "モノマネ対象が話しているように見せる構成",
+        "timestamps": ["10:36", "10:46"]
+      }
+    ]
+  }
+}
