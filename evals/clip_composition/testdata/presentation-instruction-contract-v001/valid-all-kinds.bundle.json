@@ -1,0 +1,176 @@
+{
+  "schemaVersion": "presentation-instruction-check-v001",
+  "instructionSet": {
+    "schemaVersion": "zev-presentation-instruction-v001",
+    "instructionSetId": "synthetic-instruction-set-v001",
+    "format": "normal-landscape",
+    "rendererContractVersion": "zev-renderer-boundary-v001",
+    "sourceProvenance": "synthetic-source-v001",
+    "resolutionPackageId": "synthetic-resolution-v001",
+    "resolutionPackageSha256": "6b4b8b53987f86c749bd8b4a9e60de380e160c4eefd9fc1d549ee2622a78abb9",
+    "presetRegistryVersion": "synthetic-preset-registry-v001",
+    "materialRegistryVersion": "synthetic-material-registry-v001",
+    "instructions": [
+      {
+        "instructionId": "instruction-caption",
+        "trigger": { "startAtomId": "a-01" },
+        "kind": "speech-caption",
+        "target": { "targetType": "caption-target", "targetRefIds": ["target-caption"] },
+        "presetId": "synthetic-style-v001",
+        "materialRefs": []
+      },
+      {
+        "instructionId": "instruction-emphasis-important",
+        "trigger": { "startAtomId": "a-02" },
+        "kind": "emphasis-important-statement",
+        "target": { "targetType": "source-atom-range", "targetRefIds": ["target-emphasis"] },
+        "presetId": "synthetic-style-v001",
+        "materialRefs": []
+      },
+      {
+        "instructionId": "instruction-emphasis-mistake",
+        "trigger": { "startAtomId": "a-03" },
+        "kind": "emphasis-mistake-realization",
+        "target": { "targetType": "source-atom-range", "targetRefIds": ["target-emphasis"] },
+        "presetId": "synthetic-style-v001",
+        "materialRefs": []
+      },
+      {
+        "instructionId": "instruction-emphasis-discovery",
+        "trigger": { "startAtomId": "a-04" },
+        "kind": "emphasis-discovery",
+        "target": { "targetType": "source-atom-range", "targetRefIds": ["target-emphasis"] },
+        "presetId": "synthetic-style-v001",
+        "materialRefs": []
+      },
+      {
+        "instructionId": "instruction-emphasis-emotion",
+        "trigger": { "startAtomId": "a-05" },
+        "kind": "emphasis-strong-emotion",
+        "target": { "targetType": "source-atom-range", "targetRefIds": ["target-emphasis"] },
+        "presetId": "synthetic-style-v001",
+        "materialRefs": []
+      },
+      {
+        "instructionId": "instruction-comment",
+        "trigger": { "startAtomId": "a-06" },
+        "kind": "information-comment",
+        "target": { "targetType": "information-item", "targetRefIds": ["target-comment"] },
+        "presetId": "synthetic-style-v001",
+        "materialRefs": ["material-speaker-icon"]
+      },
+      {
+        "instructionId": "instruction-narration",
+        "trigger": { "startAtomId": "a-07" },
+        "kind": "information-narration",
+        "target": { "targetType": "information-item", "targetRefIds": ["target-narration"] },
+        "presetId": "synthetic-style-v001",
+        "materialRefs": []
+      },
+      {
+        "instructionId": "instruction-lyrics",
+        "trigger": { "startAtomId": "a-08" },
+        "kind": "information-lyrics",
+        "target": { "targetType": "information-item", "targetRefIds": ["target-lyrics"] },
+        "presetId": "synthetic-style-v001",
+        "materialRefs": []
+      },
+      {
+        "instructionId": "instruction-speaker",
+        "trigger": { "startAtomId": "a-09" },
+        "kind": "speaker-identification",
+        "target": { "targetType": "speaker", "targetRefIds": ["target-speaker"] },
+        "presetId": "synthetic-style-v001",
+        "materialRefs": ["material-speaker-icon"]
+      },
+      {
+        "instructionId": "instruction-reference",
+        "trigger": { "startAtomId": "a-10" },
+        "kind": "reference-supplement",
+        "target": { "targetType": "reference-subject", "targetRefIds": ["target-reference"] },
+        "presetId": "synthetic-style-v001",
+        "materialRefs": ["material-reference-image"]
+      }
+    ]
+  },
+  "resolutionPackage": {
+    "schemaVersion": "presentation-resolution-package-v001",
+    "resolutionPackageId": "synthetic-resolution-v001",
+    "sourceProvenance": "synthetic-source-v001",
+    "atomGranularity": "word-timestamp",
+    "sourceAtomsSha256": "5af60167be0fc764bd34c36fe018e6c66a51992c899da29c3bab66d56e7d49e5",
+    "sourceAtoms": [
+      { "atomId": "a-01", "speechId": 1, "speaker": "SPEAKER_MARINE", "text": "発話", "startMs": 1000, "endMs": 1100 },
+      { "atomId": "a-02", "speechId": 2, "speaker": "SPEAKER_MARINE", "text": "重要", "startMs": 1100, "endMs": 1200 },
+      { "atomId": "a-03", "speechId": 3, "speaker": "SPEAKER_MARINE", "text": "間違い", "startMs": 1200, "endMs": 1300 },
+      { "atomId": "a-04", "speechId": 4, "speaker": "SPEAKER_MARINE", "text": "発見", "startMs": 1300, "endMs": 1400 },
+      { "atomId": "a-05", "speechId": 5, "speaker": "SPEAKER_MARINE", "text": "感情", "startMs": 1400, "endMs": 1500 },
+      { "atomId": "a-06", "speechId": 6, "speaker": "SPEAKER_KORONE", "text": "コメント", "startMs": 1500, "endMs": 1600 },
+      { "atomId": "a-07", "speechId": 7, "speaker": "SPEAKER_MARINE", "text": "説明", "startMs": 1600, "endMs": 1700 },
+      { "atomId": "a-08", "speechId": 8, "speaker": "SPEAKER_MARINE", "text": "歌詞", "startMs": 1700, "endMs": 1800 },
+      { "atomId": "a-09", "speechId": 9, "speaker": "SPEAKER_KORONE", "text": "ころね", "startMs": 1800, "endMs": 1900 },
+      { "atomId": "a-10", "speechId": 10, "speaker": "SPEAKER_MARINE", "text": "参照", "startMs": 1900, "endMs": 2000 }
+    ],
+    "targets": [
+      { "targetRefId": "target-caption", "targetType": "caption-target", "captionContractRefId": "caption-contract-001", "cueId": "cue-001" },
+      { "targetRefId": "target-emphasis", "targetType": "source-atom-range", "sourceAtomIds": ["a-02", "a-03", "a-04", "a-05"] },
+      { "targetRefId": "target-comment", "targetType": "information-item", "informationItemId": "information-comment-001", "sourceAtomIds": ["a-06"], "speakerId": "speaker-korone" },
+      { "targetRefId": "target-narration", "targetType": "information-item", "informationItemId": "information-narration-001", "sourceAtomIds": ["a-07"] },
+      { "targetRefId": "target-lyrics", "targetType": "information-item", "informationItemId": "information-lyrics-001", "sourceAtomIds": ["a-08"] },
+      { "targetRefId": "target-speaker", "targetType": "speaker", "speakerId": "speaker-korone", "speakerDisplayName": "戌神ころね", "sourceAtomIds": ["a-09"] },
+      { "targetRefId": "target-reference", "targetType": "reference-subject", "referenceSubjectId": "reference-post-001", "sourceAtomIds": ["a-10"] }
+    ],
+    "captionContracts": [
+      {
+        "captionContractRefId": "caption-contract-001",
+        "captionSchemaVersion": "presentation-caption-check-v001",
+        "captionTargets": [
+          { "targetId": "caption-source-target-001", "requiredAtomIds": ["a-01"], "allowedOmissionAtomIds": [] }
+        ],
+        "allowedSimultaneousGroups": [],
+        "captionPlan": {
+          "cues": [
+            {
+              "cueId": "cue-001",
+              "targetId": "caption-source-target-001",
+              "lines": [{ "atomIds": ["a-01"], "renderedText": "発話" }],
+              "startAnchor": { "atomId": "a-01", "edge": "start" },
+              "endAnchor": { "atomId": "a-01", "edge": "end" },
+              "startMs": 1000,
+              "endMs": 1100
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "presetValidationIndex": {
+    "registryVersion": "synthetic-preset-registry-v001",
+    "presets": [
+      {
+        "presetId": "synthetic-style-v001",
+        "format": "normal-landscape",
+        "kindPolicies": [
+          { "kind": "speech-caption", "endResponsibility": "target-anchor", "allowedMaterialRoles": [], "requiredMaterialRoles": [] },
+          { "kind": "emphasis-important-statement", "endResponsibility": "preset-policy", "endPolicyId": "end-emphasis-important-v001", "allowedMaterialRoles": [], "requiredMaterialRoles": [] },
+          { "kind": "emphasis-mistake-realization", "endResponsibility": "preset-policy", "endPolicyId": "end-emphasis-mistake-v001", "allowedMaterialRoles": [], "requiredMaterialRoles": [] },
+          { "kind": "emphasis-discovery", "endResponsibility": "preset-policy", "endPolicyId": "end-emphasis-discovery-v001", "allowedMaterialRoles": [], "requiredMaterialRoles": [] },
+          { "kind": "emphasis-strong-emotion", "endResponsibility": "preset-policy", "endPolicyId": "end-emphasis-emotion-v001", "allowedMaterialRoles": [], "requiredMaterialRoles": [] },
+          { "kind": "information-comment", "endResponsibility": "preset-policy", "endPolicyId": "end-comment-v001", "allowedMaterialRoles": ["speaker-icon"], "requiredMaterialRoles": [] },
+          { "kind": "information-narration", "endResponsibility": "preset-policy", "endPolicyId": "end-narration-v001", "allowedMaterialRoles": [], "requiredMaterialRoles": [] },
+          { "kind": "information-lyrics", "endResponsibility": "preset-policy", "endPolicyId": "end-lyrics-v001", "allowedMaterialRoles": [], "requiredMaterialRoles": [] },
+          { "kind": "speaker-identification", "endResponsibility": "preset-policy", "endPolicyId": "end-speaker-v001", "allowedMaterialRoles": ["speaker-icon"], "requiredMaterialRoles": [] },
+          { "kind": "reference-supplement", "endResponsibility": "preset-policy", "endPolicyId": "end-reference-v001", "allowedMaterialRoles": ["reference-image", "reference-video"], "requiredMaterialRoles": [] }
+        ]
+      }
+    ]
+  },
+  "materialValidationIndex": {
+    "registryVersion": "synthetic-material-registry-v001",
+    "materials": [
+      { "materialId": "material-speaker-icon", "role": "speaker-icon", "compatibleSubjects": [{ "subjectType": "speaker", "subjectId": "speaker-korone" }] },
+      { "materialId": "material-reference-image", "role": "reference-image", "compatibleSubjects": [{ "subjectType": "reference-subject", "subjectId": "reference-post-001" }] },
+      { "materialId": "material-reference-video", "role": "reference-video", "compatibleSubjects": [{ "subjectType": "reference-subject", "subjectId": "reference-post-001" }] }
+    ]
+  }
+}
