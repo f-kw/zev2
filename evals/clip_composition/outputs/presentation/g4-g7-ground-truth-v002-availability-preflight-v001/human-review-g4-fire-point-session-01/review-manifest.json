@@ -1,0 +1,108 @@
+{
+  "schemaVersion": "presentation-g4-ground-truth-v002-fire-point-human-review-v001",
+  "createdAt": "2026-07-20",
+  "status": "awaiting_human_fire_point_mapping",
+  "sourceStage1Result": "evals/clip_composition/outputs/presentation/g4-g7-ground-truth-v002-availability-preflight-v001/human-review-g4-session-01/result.json",
+  "target": "第1段で強調ありと認定された4件だけ",
+  "question": "教師側で追加演出が始まる瞬間と、元配信側の同じ意味・動作の瞬間を選び、2点が対応するかを判定する",
+  "independentJudgments": 4,
+  "pointSelectionsPerJudgment": 2,
+  "timeMeasurement": false,
+  "manualTimeEntry": false,
+  "sourceContextAdded": false,
+  "sourceMediaPolicy": "canonical候補内に丸ごと含まれる、人間確認済み対応ブロックだけを直接切り出す。前後文脈や新しい対応候補は足さない。",
+  "items": [
+    {
+      "reviewNumber": 1,
+      "stage1ReviewNumber": 1,
+      "candidateKey": "nOEWCNc77MI_multiblock_material_v001__candidate-032",
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateId": 32,
+      "teacherBlock": {
+        "expectedIndex": 4,
+        "sourceStartMs": 2790074,
+        "sourceEndMs": 2806680,
+        "clipStartMs": 59564,
+        "clipEndMs": 73795,
+        "sourceVideoId": "YE-faluP7zY",
+        "clipId": "nOEWCNc77MI",
+        "verificationStatus": "multiblock_material_human_confirmed"
+      },
+      "teacherMedia": "../human-review-g4-session-01/media/item-01-teacher.mp4",
+      "sourceBlockMedia": "media/item-01-source-block.mp4",
+      "teacherBlockDisplay": "00:00:59〜00:01:13",
+      "sourceBlockDisplay": "00:46:30〜00:46:46",
+      "sourceBlockSha256": "8afc45a2725edc6fa1af3d7743682179dd54d73b3895b8cf7b4082234f49c40d",
+      "teacherMediaSha256": "1b56a9074de5239ee4c1e0db768f352dcb461ffcfd5607de90337ed38eb2d614"
+    },
+    {
+      "reviewNumber": 2,
+      "stage1ReviewNumber": 2,
+      "candidateKey": "nOEWCNc77MI_multiblock_material_v001__candidate-037",
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateId": 37,
+      "teacherBlock": {
+        "expectedIndex": 6,
+        "sourceStartMs": 3180410,
+        "sourceEndMs": 3190215,
+        "clipStartMs": 104380,
+        "clipEndMs": 113446,
+        "sourceVideoId": "YE-faluP7zY",
+        "clipId": "nOEWCNc77MI",
+        "verificationStatus": "multiblock_material_human_confirmed"
+      },
+      "teacherMedia": "../human-review-g4-session-01/media/item-02-teacher.mp4",
+      "sourceBlockMedia": "media/item-02-source-block.mp4",
+      "teacherBlockDisplay": "00:01:44〜00:01:53",
+      "sourceBlockDisplay": "00:53:00〜00:53:10",
+      "sourceBlockSha256": "edf39d7e573d60d170de42be4b55abab6f8bcbdb5a51115c9b45e85a412aae68",
+      "teacherMediaSha256": "0aa3b497615d085a983263b473bade8d91592a24585aab118cd271e8bb7897ac"
+    },
+    {
+      "reviewNumber": 3,
+      "stage1ReviewNumber": 3,
+      "candidateKey": "nOEWCNc77MI_multiblock_material_v001__candidate-046",
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "candidateId": 46,
+      "teacherBlock": {
+        "expectedIndex": 9,
+        "sourceStartMs": 3998452,
+        "sourceEndMs": 4026707,
+        "clipStartMs": 230898,
+        "clipEndMs": 259188,
+        "sourceVideoId": "YE-faluP7zY",
+        "clipId": "nOEWCNc77MI",
+        "verificationStatus": "multiblock_material_human_confirmed"
+      },
+      "teacherMedia": "../human-review-g4-session-01/media/item-03-teacher.mp4",
+      "sourceBlockMedia": "media/item-03-source-block.mp4",
+      "teacherBlockDisplay": "00:03:50〜00:04:19",
+      "sourceBlockDisplay": "01:06:38〜01:07:06",
+      "sourceBlockSha256": "cbd2be3d24e63dc7247425c9672091f6f578033e4a8bfd1252bc8a853498c923",
+      "teacherMediaSha256": "e8118779e0c27ce9af0c0476287320297e049c27547bd7df3271df816ac5824e"
+    },
+    {
+      "reviewNumber": 4,
+      "stage1ReviewNumber": 5,
+      "candidateKey": "9dtwF5Exu5w_multiblock_material_v001__candidate-014",
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "candidateId": 14,
+      "teacherBlock": {
+        "expectedIndex": 9,
+        "sourceStartMs": 3741344,
+        "sourceEndMs": 3758425,
+        "clipStartMs": 162489,
+        "clipEndMs": 179660,
+        "sourceVideoId": "o8rZAhARXAc",
+        "clipId": "9dtwF5Exu5w",
+        "verificationStatus": "multiblock_material_human_confirmed"
+      },
+      "teacherMedia": "../human-review-g4-session-01/media/item-05-teacher.mp4",
+      "sourceBlockMedia": "media/item-04-source-block.mp4",
+      "teacherBlockDisplay": "00:02:42〜00:02:59",
+      "sourceBlockDisplay": "01:02:21〜01:02:38",
+      "sourceBlockSha256": "a20c1d101b79c6b33eadfd02cffa0ede19d29ae06420926c78e6c0212785595f",
+      "teacherMediaSha256": "904b0f65db6991f13d6b782362ff5876ed166ff9dbdab2c1d5561e69fcbf36e5"
+    }
+  ]
+}

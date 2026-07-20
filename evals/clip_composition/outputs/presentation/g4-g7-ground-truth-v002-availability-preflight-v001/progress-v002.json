@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "presentation-g4-g7-ground-truth-v002-progress-v001",
+  "updatedAt": "2026-07-20",
+  "status": "awaiting_human_g4_fire_point_mapping",
+  "stage1": {
+    "status": "human_confirmed",
+    "result": "evals/clip_composition/outputs/presentation/g4-g7-ground-truth-v002-availability-preflight-v001/human-review-g4-session-01/result.json",
+    "emphasisPresent": 4,
+    "g4NotApplicable": 1
+  },
+  "stage2": {
+    "status": "awaiting_human_review",
+    "manifest": "evals/clip_composition/outputs/presentation/g4-g7-ground-truth-v002-availability-preflight-v001/human-review-g4-fire-point-session-01/review-manifest.json",
+    "independentJudgments": 4,
+    "pointSelectionsPerJudgment": 2,
+    "timeMeasurement": false
+  },
+  "blockedUntilHumanResult": [
+    "G4正解凍結",
+    "意味検出器実装",
+    "LLM実走"
+  ]
+}
