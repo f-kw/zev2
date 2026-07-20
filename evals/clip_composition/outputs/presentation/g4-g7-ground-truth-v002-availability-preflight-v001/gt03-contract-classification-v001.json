@@ -1,0 +1,21 @@
+{
+  "schemaVersion": "presentation-g7-gt03-contract-classification-v001",
+  "createdAt": "2026-07-20",
+  "groundTruthId": "GT-03",
+  "sourceGroundTruth": "evals/clip_composition/outputs/presentation/g4-g7-ground-truth-v001/ground-truth-v001.json",
+  "humanAuthority": "kawafmm",
+  "decision": "not_applicable_current_G7",
+  "classification": "reconstruction-layer-context-card-composition",
+  "reason": "時間、場所、登場人物、状況を約2秒の新しい静止画へ組み直す仕事であり、利用可能な既存補足素材を参照対象へ対応させる現行G7の範囲を越える。",
+  "preservation": {
+    "deleteOriginalObservation": false,
+    "deleteFrozenGroundTruth": false,
+    "futureUse": "再構成層の再開条件が将来定義されたときの正解候補として保全"
+  },
+  "workNotRequiredForCurrentG7": [
+    "元配信候補5本の特定",
+    "媒体取得",
+    "STT",
+    "素材台帳整備"
+  ]
+}

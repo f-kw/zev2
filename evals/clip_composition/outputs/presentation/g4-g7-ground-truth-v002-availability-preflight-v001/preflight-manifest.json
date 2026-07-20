@@ -1,0 +1,332 @@
+{
+  "schemaVersion": "presentation-g4-g7-ground-truth-v002-availability-preflight-v001",
+  "createdAt": "2026-07-20",
+  "status": "ready_for_human_g4_session_01",
+  "designSource": "evals/clip_composition/reports/presentation/normal-video-presentation-g4-g7-ground-truth-v002-availability-first-collection-design-20260720-v001.md",
+  "selectionContract": {
+    "universe": "candidate-ranking-v002の保存済みcanonical上位5×3素材=15件",
+    "sort": "sourceVideoIdのUnicodeコードポイント昇順、候補開始時刻、候補ID",
+    "semanticSelectionUsed": false,
+    "excludedSelectionSignals": [
+      "title",
+      "reason",
+      "既知hit",
+      "ランキング順位",
+      "G4検出結果",
+      "補助探索モデル"
+    ],
+    "gate": "候補範囲が人間確認済み教師素材ブロックを丸ごと含むこと",
+    "partialOverlapPolicy": "不通過。教師素材の一部が候補入力外になるため。"
+  },
+  "counts": {
+    "canonicalCandidates": 15,
+    "passedG4TeacherCorrespondence": 5,
+    "notReady": 10,
+    "session01Items": 5,
+    "session01IndependentJudgments": 5
+  },
+  "candidates": [
+    {
+      "candidateKey": "nOEWCNc77MI_multiblock_material_v001__candidate-032",
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "sourceVideoId": "YE-faluP7zY",
+      "candidateId": 32,
+      "candidateStartMs": 2790074,
+      "candidateEndMs": 2848146,
+      "canonicalRangeSource": "evals/clip_composition/outputs/human-boundary-trim/20260713-trial-v002/manifest.json",
+      "upstreamRankingSource": "evals/clip_composition/outputs/candidate-ranking/20260713-character-context-run1-v002/final-result.json",
+      "generationSystem": "candidate-ranking-v002@gemini-web-flash",
+      "availabilityGate": {
+        "status": "passed_g4_teacher_correspondence",
+        "rule": "候補範囲が人間確認済み教師素材ブロックを丸ごと含む場合だけ通過。部分重複は、候補入力外の教師部分を正解へ混ぜるため不通過。",
+        "confirmedTeacherBlocks": [
+          {
+            "expectedIndex": 4,
+            "sourceStartMs": 2790074,
+            "sourceEndMs": 2806680,
+            "clipStartMs": 59564,
+            "clipEndMs": 73795,
+            "sourceVideoId": "YE-faluP7zY",
+            "clipId": "nOEWCNc77MI",
+            "verificationStatus": "multiblock_material_human_confirmed"
+          }
+        ]
+      }
+    },
+    {
+      "candidateKey": "nOEWCNc77MI_multiblock_material_v001__candidate-036",
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "sourceVideoId": "YE-faluP7zY",
+      "candidateId": 36,
+      "candidateStartMs": 3072540,
+      "candidateEndMs": 3179964,
+      "canonicalRangeSource": "evals/clip_composition/outputs/human-boundary-trim/20260713-trial-v002/manifest.json",
+      "upstreamRankingSource": "evals/clip_composition/outputs/candidate-ranking/20260713-character-context-run1-v002/final-result.json",
+      "generationSystem": "candidate-ranking-v002@gemini-web-flash",
+      "availabilityGate": {
+        "status": "not_ready_no_fully_contained_confirmed_teacher_block",
+        "rule": "候補範囲が人間確認済み教師素材ブロックを丸ごと含む場合だけ通過。部分重複は、候補入力外の教師部分を正解へ混ぜるため不通過。",
+        "confirmedTeacherBlocks": []
+      }
+    },
+    {
+      "candidateKey": "nOEWCNc77MI_multiblock_material_v001__candidate-037",
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "sourceVideoId": "YE-faluP7zY",
+      "candidateId": 37,
+      "candidateStartMs": 3180190,
+      "candidateEndMs": 3209684,
+      "canonicalRangeSource": "evals/clip_composition/outputs/human-boundary-trim/20260713-trial-v002/manifest.json",
+      "upstreamRankingSource": "evals/clip_composition/outputs/candidate-ranking/20260713-character-context-run1-v002/final-result.json",
+      "generationSystem": "candidate-ranking-v002@gemini-web-flash",
+      "availabilityGate": {
+        "status": "passed_g4_teacher_correspondence",
+        "rule": "候補範囲が人間確認済み教師素材ブロックを丸ごと含む場合だけ通過。部分重複は、候補入力外の教師部分を正解へ混ぜるため不通過。",
+        "confirmedTeacherBlocks": [
+          {
+            "expectedIndex": 6,
+            "sourceStartMs": 3180410,
+            "sourceEndMs": 3190215,
+            "clipStartMs": 104380,
+            "clipEndMs": 113446,
+            "sourceVideoId": "YE-faluP7zY",
+            "clipId": "nOEWCNc77MI",
+            "verificationStatus": "multiblock_material_human_confirmed"
+          }
+        ]
+      }
+    },
+    {
+      "candidateKey": "nOEWCNc77MI_multiblock_material_v001__candidate-046",
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "sourceVideoId": "YE-faluP7zY",
+      "candidateId": 46,
+      "candidateStartMs": 3991226,
+      "candidateEndMs": 4029707,
+      "canonicalRangeSource": "evals/clip_composition/outputs/human-boundary-trim/20260713-trial-v002/manifest.json",
+      "upstreamRankingSource": "evals/clip_composition/outputs/candidate-ranking/20260713-character-context-run1-v002/final-result.json",
+      "generationSystem": "candidate-ranking-v002@gemini-web-flash",
+      "availabilityGate": {
+        "status": "passed_g4_teacher_correspondence",
+        "rule": "候補範囲が人間確認済み教師素材ブロックを丸ごと含む場合だけ通過。部分重複は、候補入力外の教師部分を正解へ混ぜるため不通過。",
+        "confirmedTeacherBlocks": [
+          {
+            "expectedIndex": 9,
+            "sourceStartMs": 3998452,
+            "sourceEndMs": 4026707,
+            "clipStartMs": 230898,
+            "clipEndMs": 259188,
+            "sourceVideoId": "YE-faluP7zY",
+            "clipId": "nOEWCNc77MI",
+            "verificationStatus": "multiblock_material_human_confirmed"
+          }
+        ]
+      }
+    },
+    {
+      "candidateKey": "nOEWCNc77MI_multiblock_material_v001__candidate-058",
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "sourceVideoId": "YE-faluP7zY",
+      "candidateId": 58,
+      "candidateStartMs": 6300522,
+      "candidateEndMs": 6361383,
+      "canonicalRangeSource": "evals/clip_composition/outputs/human-boundary-trim/20260713-trial-v002/manifest.json",
+      "upstreamRankingSource": "evals/clip_composition/outputs/candidate-ranking/20260713-character-context-run1-v002/final-result.json",
+      "generationSystem": "candidate-ranking-v002@gemini-web-flash",
+      "availabilityGate": {
+        "status": "not_ready_no_fully_contained_confirmed_teacher_block",
+        "rule": "候補範囲が人間確認済み教師素材ブロックを丸ごと含む場合だけ通過。部分重複は、候補入力外の教師部分を正解へ混ぜるため不通過。",
+        "confirmedTeacherBlocks": []
+      }
+    },
+    {
+      "candidateKey": "9dtwF5Exu5w_multiblock_material_v001__candidate-009",
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "sourceVideoId": "o8rZAhARXAc",
+      "candidateId": 9,
+      "candidateStartMs": 2010874,
+      "candidateEndMs": 2155086,
+      "canonicalRangeSource": "evals/clip_composition/outputs/human-boundary-trim/20260713-trial-v002/manifest.json",
+      "upstreamRankingSource": "evals/clip_composition/outputs/candidate-ranking/20260713-character-context-run1-v002/final-result.json",
+      "generationSystem": "candidate-ranking-v002@gemini-web-flash",
+      "availabilityGate": {
+        "status": "passed_g4_teacher_correspondence",
+        "rule": "候補範囲が人間確認済み教師素材ブロックを丸ごと含む場合だけ通過。部分重複は、候補入力外の教師部分を正解へ混ぜるため不通過。",
+        "confirmedTeacherBlocks": [
+          {
+            "expectedIndex": 7,
+            "sourceStartMs": 2013635,
+            "sourceEndMs": 2017195,
+            "clipStartMs": 103872,
+            "clipEndMs": 107413,
+            "sourceVideoId": "o8rZAhARXAc",
+            "clipId": "9dtwF5Exu5w",
+            "verificationStatus": "multiblock_material_human_confirmed"
+          }
+        ]
+      }
+    },
+    {
+      "candidateKey": "9dtwF5Exu5w_multiblock_material_v001__candidate-014",
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "sourceVideoId": "o8rZAhARXAc",
+      "candidateId": 14,
+      "candidateStartMs": 3723879,
+      "candidateEndMs": 3794866,
+      "canonicalRangeSource": "evals/clip_composition/outputs/human-boundary-trim/20260713-trial-v002/manifest.json",
+      "upstreamRankingSource": "evals/clip_composition/outputs/candidate-ranking/20260713-character-context-run1-v002/final-result.json",
+      "generationSystem": "candidate-ranking-v002@gemini-web-flash",
+      "availabilityGate": {
+        "status": "passed_g4_teacher_correspondence",
+        "rule": "候補範囲が人間確認済み教師素材ブロックを丸ごと含む場合だけ通過。部分重複は、候補入力外の教師部分を正解へ混ぜるため不通過。",
+        "confirmedTeacherBlocks": [
+          {
+            "expectedIndex": 9,
+            "sourceStartMs": 3741344,
+            "sourceEndMs": 3758425,
+            "clipStartMs": 162489,
+            "clipEndMs": 179660,
+            "sourceVideoId": "o8rZAhARXAc",
+            "clipId": "9dtwF5Exu5w",
+            "verificationStatus": "multiblock_material_human_confirmed"
+          }
+        ]
+      }
+    },
+    {
+      "candidateKey": "9dtwF5Exu5w_multiblock_material_v001__candidate-025",
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "sourceVideoId": "o8rZAhARXAc",
+      "candidateId": 25,
+      "candidateStartMs": 5701367,
+      "candidateEndMs": 5755602,
+      "canonicalRangeSource": "evals/clip_composition/outputs/human-boundary-trim/20260713-trial-v002/manifest.json",
+      "upstreamRankingSource": "evals/clip_composition/outputs/candidate-ranking/20260713-character-context-run1-v002/final-result.json",
+      "generationSystem": "candidate-ranking-v002@gemini-web-flash",
+      "availabilityGate": {
+        "status": "not_ready_no_fully_contained_confirmed_teacher_block",
+        "rule": "候補範囲が人間確認済み教師素材ブロックを丸ごと含む場合だけ通過。部分重複は、候補入力外の教師部分を正解へ混ぜるため不通過。",
+        "confirmedTeacherBlocks": []
+      }
+    },
+    {
+      "candidateKey": "9dtwF5Exu5w_multiblock_material_v001__candidate-040",
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "sourceVideoId": "o8rZAhARXAc",
+      "candidateId": 40,
+      "candidateStartMs": 7618940,
+      "candidateEndMs": 7727619,
+      "canonicalRangeSource": "evals/clip_composition/outputs/human-boundary-trim/20260713-trial-v002/manifest.json",
+      "upstreamRankingSource": "evals/clip_composition/outputs/candidate-ranking/20260713-character-context-run1-v002/final-result.json",
+      "generationSystem": "candidate-ranking-v002@gemini-web-flash",
+      "availabilityGate": {
+        "status": "not_ready_no_fully_contained_confirmed_teacher_block",
+        "rule": "候補範囲が人間確認済み教師素材ブロックを丸ごと含む場合だけ通過。部分重複は、候補入力外の教師部分を正解へ混ぜるため不通過。",
+        "confirmedTeacherBlocks": []
+      }
+    },
+    {
+      "candidateKey": "9dtwF5Exu5w_multiblock_material_v001__candidate-057",
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "sourceVideoId": "o8rZAhARXAc",
+      "candidateId": 57,
+      "candidateStartMs": 11010002,
+      "candidateEndMs": 11106471,
+      "canonicalRangeSource": "evals/clip_composition/outputs/human-boundary-trim/20260713-trial-v002/manifest.json",
+      "upstreamRankingSource": "evals/clip_composition/outputs/candidate-ranking/20260713-character-context-run1-v002/final-result.json",
+      "generationSystem": "candidate-ranking-v002@gemini-web-flash",
+      "availabilityGate": {
+        "status": "not_ready_no_fully_contained_confirmed_teacher_block",
+        "rule": "候補範囲が人間確認済み教師素材ブロックを丸ごと含む場合だけ通過。部分重複は、候補入力外の教師部分を正解へ混ぜるため不通過。",
+        "confirmedTeacherBlocks": []
+      }
+    },
+    {
+      "candidateKey": "nE_bNeBNp4E_multiblock_material_v001__candidate-010",
+      "fixtureId": "nE_bNeBNp4E_multiblock_material_v001",
+      "sourceVideoId": "qdczJpv8RCc",
+      "candidateId": 10,
+      "candidateStartMs": 750246,
+      "candidateEndMs": 778234,
+      "canonicalRangeSource": "evals/clip_composition/outputs/human-boundary-trim/20260716-third-material-trial-v002/manifest.json",
+      "upstreamRankingSource": "evals/clip_composition/outputs/candidate-ranking/20260716-third-material-run1-v002/result.json",
+      "generationSystem": "candidate-ranking-v002@gemini-web-flash",
+      "availabilityGate": {
+        "status": "not_ready_no_fully_contained_confirmed_teacher_block",
+        "rule": "候補範囲が人間確認済み教師素材ブロックを丸ごと含む場合だけ通過。部分重複は、候補入力外の教師部分を正解へ混ぜるため不通過。",
+        "confirmedTeacherBlocks": []
+      }
+    },
+    {
+      "candidateKey": "nE_bNeBNp4E_multiblock_material_v001__candidate-035",
+      "fixtureId": "nE_bNeBNp4E_multiblock_material_v001",
+      "sourceVideoId": "qdczJpv8RCc",
+      "candidateId": 35,
+      "candidateStartMs": 2975023,
+      "candidateEndMs": 3014776,
+      "canonicalRangeSource": "evals/clip_composition/outputs/human-boundary-trim/20260716-third-material-trial-v002/manifest.json",
+      "upstreamRankingSource": "evals/clip_composition/outputs/candidate-ranking/20260716-third-material-run1-v002/result.json",
+      "generationSystem": "candidate-ranking-v002@gemini-web-flash",
+      "availabilityGate": {
+        "status": "not_ready_no_fully_contained_confirmed_teacher_block",
+        "rule": "候補範囲が人間確認済み教師素材ブロックを丸ごと含む場合だけ通過。部分重複は、候補入力外の教師部分を正解へ混ぜるため不通過。",
+        "confirmedTeacherBlocks": []
+      }
+    },
+    {
+      "candidateKey": "nE_bNeBNp4E_multiblock_material_v001__candidate-047",
+      "fixtureId": "nE_bNeBNp4E_multiblock_material_v001",
+      "sourceVideoId": "qdczJpv8RCc",
+      "candidateId": 47,
+      "candidateStartMs": 4123746,
+      "candidateEndMs": 4198226,
+      "canonicalRangeSource": "evals/clip_composition/outputs/human-boundary-trim/20260716-third-material-trial-v002/manifest.json",
+      "upstreamRankingSource": "evals/clip_composition/outputs/candidate-ranking/20260716-third-material-run1-v002/result.json",
+      "generationSystem": "candidate-ranking-v002@gemini-web-flash",
+      "availabilityGate": {
+        "status": "not_ready_no_fully_contained_confirmed_teacher_block",
+        "rule": "候補範囲が人間確認済み教師素材ブロックを丸ごと含む場合だけ通過。部分重複は、候補入力外の教師部分を正解へ混ぜるため不通過。",
+        "confirmedTeacherBlocks": []
+      }
+    },
+    {
+      "candidateKey": "nE_bNeBNp4E_multiblock_material_v001__candidate-054",
+      "fixtureId": "nE_bNeBNp4E_multiblock_material_v001",
+      "sourceVideoId": "qdczJpv8RCc",
+      "candidateId": 54,
+      "candidateStartMs": 5310034,
+      "candidateEndMs": 5339442,
+      "canonicalRangeSource": "evals/clip_composition/outputs/human-boundary-trim/20260716-third-material-trial-v002/manifest.json",
+      "upstreamRankingSource": "evals/clip_composition/outputs/candidate-ranking/20260716-third-material-run1-v002/result.json",
+      "generationSystem": "candidate-ranking-v002@gemini-web-flash",
+      "availabilityGate": {
+        "status": "not_ready_no_fully_contained_confirmed_teacher_block",
+        "rule": "候補範囲が人間確認済み教師素材ブロックを丸ごと含む場合だけ通過。部分重複は、候補入力外の教師部分を正解へ混ぜるため不通過。",
+        "confirmedTeacherBlocks": []
+      }
+    },
+    {
+      "candidateKey": "nE_bNeBNp4E_multiblock_material_v001__candidate-059",
+      "fixtureId": "nE_bNeBNp4E_multiblock_material_v001",
+      "sourceVideoId": "qdczJpv8RCc",
+      "candidateId": 59,
+      "candidateStartMs": 5941162,
+      "candidateEndMs": 5992736,
+      "canonicalRangeSource": "evals/clip_composition/outputs/human-boundary-trim/20260716-third-material-trial-v002/manifest.json",
+      "upstreamRankingSource": "evals/clip_composition/outputs/candidate-ranking/20260716-third-material-run1-v002/result.json",
+      "generationSystem": "candidate-ranking-v002@gemini-web-flash",
+      "availabilityGate": {
+        "status": "not_ready_no_fully_contained_confirmed_teacher_block",
+        "rule": "候補範囲が人間確認済み教師素材ブロックを丸ごと含む場合だけ通過。部分重複は、候補入力外の教師部分を正解へ混ぜるため不通過。",
+        "confirmedTeacherBlocks": []
+      }
+    }
+  ],
+  "session01CandidateKeys": [
+    "nOEWCNc77MI_multiblock_material_v001__candidate-032",
+    "nOEWCNc77MI_multiblock_material_v001__candidate-037",
+    "nOEWCNc77MI_multiblock_material_v001__candidate-046",
+    "9dtwF5Exu5w_multiblock_material_v001__candidate-009",
+    "9dtwF5Exu5w_multiblock_material_v001__candidate-014"
+  ]
+}
