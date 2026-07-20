@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>G4〜G7 正解候補 5件確認</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #101216;
+      color: #f5f7fb;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #101216; }
+    main { width: min(1040px, 100%); margin: 0 auto; padding: 20px 16px 56px; }
+    h1 { font-size: clamp(24px, 4vw, 38px); margin: 0 0 12px; }
+    .lead, .rule { line-height: 1.65; color: #cbd1dc; }
+    .rule {
+      border-left: 4px solid #6ea8fe;
+      background: #181c24;
+      padding: 12px 14px;
+      margin-bottom: 22px;
+    }
+    .card {
+      border: 1px solid #303746;
+      border-radius: 14px;
+      background: #181c24;
+      padding: 18px;
+      margin: 18px 0;
+    }
+    .card h2 { margin: 0 0 8px; font-size: 23px; }
+    .badge {
+      display: inline-block;
+      padding: 4px 9px;
+      border-radius: 999px;
+      background: #283853;
+      color: #d9e8ff;
+      font-weight: 700;
+      margin-right: 8px;
+    }
+    .question { font-size: 18px; line-height: 1.55; margin: 12px 0; }
+    .watch { color: #d7dce7; line-height: 1.6; }
+    video {
+      display: block;
+      width: 100%;
+      max-height: 65vh;
+      background: #000;
+      border-radius: 10px;
+      margin: 12px 0;
+    }
+    .seek-row, .choices, .footer-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 12px;
+    }
+    button {
+      appearance: none;
+      border: 1px solid #526078;
+      border-radius: 10px;
+      background: #252b36;
+      color: #fff;
+      padding: 12px 15px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    button:hover { background: #303847; }
+    .choice[data-selected="true"] { outline: 3px solid #76a9ff; background: #27446e; }
+    .approve { border-color: #4aa777; }
+    .reject { border-color: #c06068; }
+    .unknown { border-color: #a48a4c; }
+    .status { min-height: 1.5em; margin-top: 10px; color: #aeb8c8; }
+    .summary {
+      border: 1px solid #3b4659;
+      border-radius: 14px;
+      padding: 18px;
+      background: #141820;
+      margin-top: 26px;
+    }
+    textarea {
+      width: 100%;
+      min-height: 260px;
+      border: 1px solid #49546a;
+      border-radius: 10px;
+      background: #0e1116;
+      color: #eef2f8;
+      padding: 12px;
+      font: 14px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace;
+      margin-top: 12px;
+    }
+    .primary { background: #27579a; border-color: #6ea8fe; }
+    .notice { color: #9fb1c9; margin-top: 10px; }
+    @media (max-width: 620px) {
+      main { padding-inline: 10px; }
+      .card { padding: 13px; }
+      button { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+<main>
+  <h1>G4〜G7 正解候補 5件確認</h1>
+  <p class="lead">目的は、演出の好みを決めることではなく、今後の検出器を測るための「意味上の正解」として使える場面かを確認することです。</p>
+  <div class="rule">
+    <strong>見ること:</strong> 表示した場面が、書かれた意味の例として本当に成立しているか。<br>
+    <strong>見なくてよいこと:</strong> 動画全体の品質、フォントの好み、別の演出の発見。<br>
+    時間は測りません。回答は最後まで何度でも変更できます。
+  </div>
+
+  <section id="cards"></section>
+
+  <section class="summary">
+    <h2>回答結果</h2>
+    <p>一括ボタンは回答を埋めるだけです。コピー前でも後でも、各候補の回答を変更できます。</p>
+    <div class="footer-actions">
+      <button id="approveAll" type="button">全件を提案どおり採用</button>
+      <button id="clearAll" type="button">回答をすべて解除</button>
+      <button id="copyResult" class="primary" type="button">結果をコピー</button>
+    </div>
+    <div id="copyStatus" class="notice"></div>
+    <textarea id="result" readonly aria-label="回答結果"></textarea>
+  </section>
+</main>
+
+<script>
+const candidates = [
+  {
+    id: "GT-01",
+    grammar: "G4 強調候補",
+    proposed: "肯定例",
+    videoId: "nE_bNeBNp4E",
+    video: "../../../../research/downloads/nE_bNeBNp4E/nE_bNeBNp4E.mp4",
+    at: 750,
+    displayTime: "00:12:30",
+    question: "意表を突かれた反応は、『強調すべき瞬間』の正解例として使えますか？",
+    watch: "ズームと効果音の種類を評価するのではなく、この瞬間自体が重要な反応として強調候補になるかだけを見ます。"
+  },
+  {
+    id: "GT-02",
+    grammar: "G4 抑制",
+    proposed: "抑制例",
+    videoId: "9dtwF5Exu5w",
+    video: "../../../../research/downloads/9dtwF5Exu5w/9dtwF5Exu5w.mp4",
+    at: 949,
+    displayTime: "00:15:49",
+    question: "強い感情を顔アップだけで見せたこの場面は、『文字や効果音を追加しない』正解例として使えますか？",
+    watch: "完全な無演出ではありません。映像だけで十分なため、文字・効果音の追加を抑える例として成立するかを見ます。"
+  },
+  {
+    id: "GT-03",
+    grammar: "G7 補足素材候補",
+    proposed: "肯定例",
+    videoId: "tljIGk4y5Do",
+    video: "../../../../research/downloads/tljIGk4y5Do/tljIGk4y5Do.mp4",
+    at: 548,
+    displayTime: "00:09:08",
+    question: "時間・場所・登場人物・状況をまとめた静止画は、『発話だけでは分かりにくい参照先を補う』正解例として使えますか？",
+    watch: "カードのデザインではなく、この場面に補足情報を付ける意味判断が正しいかを見ます。"
+  },
+  {
+    id: "GT-04",
+    grammar: "G5 情報種別",
+    proposed: "肯定例",
+    videoId: "UpRyakf5j80",
+    video: "../../../../research/downloads/UpRyakf5j80/UpRyakf5j80.mp4",
+    at: 0,
+    displayTime: "00:00〜00:12（回答は00:16〜00:40）",
+    question: "冒頭のリスナーコメントは、『配信者本人の通常発話とは異なる情報種別』の正解例として使えますか？",
+    watch: "コメントの内容や面白さではなく、コメント引用と本人の回答を別種の情報として識別すべきかを見ます。"
+  },
+  {
+    id: "GT-05",
+    grammar: "G6 話者識別",
+    proposed: "肯定例",
+    videoId: "nOEWCNc77MI",
+    video: "../../../../research/downloads/nOEWCNc77MI/nOEWCNc77MI.mp4",
+    at: 110,
+    displayTime: "00:01:50〜00:01:54",
+    question: "2人分のテロップが同時に出るこの場面は、『複数人場面で誰の発話かを識別する』正解例として使えますか？",
+    watch: "黄系のマリン、青系のころねという見た目自体ではなく、複数話者を区別する必要がある場面かを見ます。"
+  }
+];
+
+const answers = Object.fromEntries(candidates.map(c => [c.id, null]));
+const answerLabels = {
+  approve: "提案どおり採用",
+  reject: "この文法の正解にしない",
+  unknown: "判断できない"
+};
+
+function seek(video, seconds, play) {
+  const apply = () => {
+    video.currentTime = Math.max(0, Math.min(seconds, Number.isFinite(video.duration) ? video.duration : seconds));
+    if (play) video.play().catch(() => {});
+  };
+  if (video.readyState >= 1) apply();
+  else video.addEventListener("loadedmetadata", apply, { once: true });
+}
+
+function makeCard(candidate, index) {
+  const card = document.createElement("article");
+  card.className = "card";
+  card.dataset.id = candidate.id;
+  card.innerHTML = `
+    <h2><span class="badge">${index + 1}/5</span>${candidate.id} — ${candidate.grammar}</h2>
+    <p><strong>動画:</strong> ${candidate.videoId}　<strong>観測位置:</strong> ${candidate.displayTime}</p>
+    <p class="question">${candidate.question}</p>
+    <p class="watch">${candidate.watch}</p>
+    <video controls preload="metadata" src="${candidate.video}"></video>
+    <div class="seek-row">
+      <button type="button" data-seek="before">観測位置の5秒前から再生</button>
+      <button type="button" data-seek="exact">観測位置から再生</button>
+    </div>
+    <div class="choices" role="group" aria-label="${candidate.id}の回答">
+      <button type="button" class="choice approve" data-answer="approve">提案どおり採用</button>
+      <button type="button" class="choice reject" data-answer="reject">正解にしない</button>
+      <button type="button" class="choice unknown" data-answer="unknown">判断できない</button>
+    </div>
+    <div class="status">未回答</div>
+  `;
+  const video = card.querySelector("video");
+  card.querySelector('[data-seek="before"]').addEventListener("click", () => seek(video, candidate.at - 5, true));
+  card.querySelector('[data-seek="exact"]').addEventListener("click", () => seek(video, candidate.at, true));
+  card.querySelectorAll("[data-answer]").forEach(button => {
+    button.addEventListener("click", () => setAnswer(candidate.id, button.dataset.answer));
+  });
+  video.addEventListener("loadedmetadata", () => seek(video, candidate.at, false), { once: true });
+  return card;
+}
+
+function setAnswer(id, value) {
+  answers[id] = value;
+  const card = document.querySelector(`[data-id="${id}"]`);
+  card.querySelectorAll("[data-answer]").forEach(button => {
+    button.dataset.selected = String(button.dataset.answer === value);
+  });
+  card.querySelector(".status").textContent = value ? `回答: ${answerLabels[value]}` : "未回答";
+  renderResult();
+}
+
+function renderResult() {
+  const today = new Date().toLocaleDateString("sv-SE", { timeZone: "Asia/Tokyo" });
+  const lines = [
+    "G4〜G7 正解候補5件 人間確認結果",
+    "確認者: kawafmm",
+    `確認日: ${today}`,
+    "時間計測: なし",
+    ""
+  ];
+  for (const c of candidates) {
+    lines.push(`${c.id}: ${answers[c.id] ? answerLabels[answers[c.id]] : "未回答"} / ${c.grammar} / ${c.videoId} / ${c.displayTime}`);
+  }
+  document.getElementById("result").value = lines.join("\n");
+}
+
+document.getElementById("cards").append(...candidates.map(makeCard));
+document.getElementById("approveAll").addEventListener("click", () => {
+  for (const c of candidates) setAnswer(c.id, "approve");
+});
+document.getElementById("clearAll").addEventListener("click", () => {
+  for (const c of candidates) setAnswer(c.id, null);
+  document.getElementById("copyStatus").textContent = "回答を解除しました。";
+});
+document.getElementById("copyResult").addEventListener("click", async () => {
+  const text = document.getElementById("result").value;
+  try {
+    await navigator.clipboard.writeText(text);
+    document.getElementById("copyStatus").textContent = "結果をコピーしました。";
+  } catch {
+    const area = document.getElementById("result");
+    area.focus();
+    area.select();
+    document.getElementById("copyStatus").textContent = "結果欄を選択しました。⌘Cでコピーしてください。";
+  }
+});
+renderResult();
+</script>
+</body>
+</html>

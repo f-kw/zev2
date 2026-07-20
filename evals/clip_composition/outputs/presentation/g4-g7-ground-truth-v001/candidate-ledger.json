@@ -17,7 +17,7 @@
       "timeObserver": "human-kawafmm",
       "humanObservation": "意表を突かれた瞬間をズームし、同時に効果音を付ける",
       "sourceObservationLocation": "collection.md / nE_bNeBNp4E / 演出の発火点",
-      "status": "ready-for-evidence-design"
+      "status": "ready-for-human-recognition"
     },
     {
       "candidateId": "GT-02",
@@ -28,7 +28,7 @@
       "timeObserver": "human-kawafmm",
       "humanObservation": "強い感情を、テロップや効果音を足さず顔のアップだけで見せる",
       "sourceObservationLocation": "collection.md / 9dtwF5Exu5w / 演出の発火点",
-      "status": "ready-for-evidence-design"
+      "status": "ready-for-human-recognition"
     },
     {
       "candidateId": "GT-03",
@@ -39,31 +39,45 @@
       "timeObserver": "human-kawafmm",
       "humanObservation": "時間・場所・登場人物・状況を約2秒の静止画へ圧縮する",
       "sourceObservationLocation": "collection.md / tljIGk4y5Do / 演出の発火点",
-      "status": "ready-for-evidence-design"
+      "status": "ready-for-human-recognition"
     },
     {
       "candidateId": "GT-04",
       "grammar": "G5",
       "proposedLabel": "positive",
-      "videoId": null,
+      "videoId": "UpRyakf5j80",
       "humanObservedTime": null,
-      "timeObserver": null,
+      "timeObserver": "ai-location-candidate@gemini-web-flash",
+      "aiLocatedTime": {
+        "listenerComment": "00:00-00:12",
+        "streamerResponse": "00:16-00:40"
+      },
+      "aiLocationSource": "g5-location-upRyakf5j80-gemini-web-flash-v001.json",
       "humanObservation": "コメント・ナレーション・歌詞を通常発話と区別する人間観測から1件を選ぶ",
       "sourceObservationLocation": "collection.md / UpRyakf5j80, nE_bNeBNp4E, YkGg-rtFcyg",
-      "status": "requires-approved-location-search"
+      "status": "ready-for-human-recognition"
     },
     {
       "candidateId": "GT-05",
       "grammar": "G6",
       "proposedLabel": "positive",
-      "videoId": null,
+      "videoId": "nOEWCNc77MI",
       "humanObservedTime": null,
-      "timeObserver": null,
+      "timeObserver": "ai-location-candidate@gemini-web-flash",
+      "aiLocatedTime": "01:50-01:54",
+      "aiLocationSource": "g6-location-nOEWCNc77MI-gemini-web-flash-v001.json",
       "humanObservation": "複数人場面の同時テロップまたは発話者アイコンの人間観測から1件を選ぶ",
       "sourceObservationLocation": "collection.md / nOEWCNc77MI, YkGg-rtFcyg, m8mpEaDykwM",
-      "status": "requires-approved-location-search"
+      "status": "ready-for-human-recognition"
     }
   ],
+  "humanReview": {
+    "status": "awaiting-human-recognition",
+    "candidateCount": 5,
+    "sessionCount": 1,
+    "timeMeasurementRequired": false,
+    "reviewPage": "human-review-v001/review.html"
+  },
   "rules": {
     "humanApprovalRequiredBeforeGroundTruth": true,
     "aiLocatedTimeIsGroundTruth": false,
