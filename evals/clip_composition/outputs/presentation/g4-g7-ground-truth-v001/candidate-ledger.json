@@ -6,7 +6,8 @@
     "observationCount": 66,
     "source": "evals/clip_composition/outputs/presentation/exemplar-collection-v001/collection.md"
   },
-  "status": "inventory-only-not-ground-truth",
+  "status": "frozen-ground-truth-v001",
+  "groundTruthFile": "ground-truth-v001.json",
   "candidates": [
     {
       "candidateId": "GT-01",
@@ -17,7 +18,10 @@
       "timeObserver": "human-kawafmm",
       "humanObservation": "意表を突かれた瞬間をズームし、同時に効果音を付ける",
       "sourceObservationLocation": "collection.md / nE_bNeBNp4E / 演出の発火点",
-      "status": "ready-for-human-recognition"
+      "status": "human-recognized-and-frozen",
+      "humanDecision": "approve-as-proposed",
+      "humanConfirmedBy": "kawafmm",
+      "humanConfirmedDate": "2026-07-20"
     },
     {
       "candidateId": "GT-02",
@@ -28,7 +32,10 @@
       "timeObserver": "human-kawafmm",
       "humanObservation": "強い感情を、テロップや効果音を足さず顔のアップだけで見せる",
       "sourceObservationLocation": "collection.md / 9dtwF5Exu5w / 演出の発火点",
-      "status": "ready-for-human-recognition"
+      "status": "human-recognized-and-frozen",
+      "humanDecision": "approve-as-proposed",
+      "humanConfirmedBy": "kawafmm",
+      "humanConfirmedDate": "2026-07-20"
     },
     {
       "candidateId": "GT-03",
@@ -39,7 +46,10 @@
       "timeObserver": "human-kawafmm",
       "humanObservation": "時間・場所・登場人物・状況を約2秒の静止画へ圧縮する",
       "sourceObservationLocation": "collection.md / tljIGk4y5Do / 演出の発火点",
-      "status": "ready-for-human-recognition"
+      "status": "human-recognized-and-frozen",
+      "humanDecision": "approve-as-proposed",
+      "humanConfirmedBy": "kawafmm",
+      "humanConfirmedDate": "2026-07-20"
     },
     {
       "candidateId": "GT-04",
@@ -55,7 +65,10 @@
       "aiLocationSource": "g5-location-upRyakf5j80-gemini-web-flash-v001.json",
       "humanObservation": "コメント・ナレーション・歌詞を通常発話と区別する人間観測から1件を選ぶ",
       "sourceObservationLocation": "collection.md / UpRyakf5j80, nE_bNeBNp4E, YkGg-rtFcyg",
-      "status": "ready-for-human-recognition"
+      "status": "human-recognized-and-frozen",
+      "humanDecision": "approve-as-proposed",
+      "humanConfirmedBy": "kawafmm",
+      "humanConfirmedDate": "2026-07-20"
     },
     {
       "candidateId": "GT-05",
@@ -68,18 +81,29 @@
       "aiLocationSource": "g6-location-nOEWCNc77MI-gemini-web-flash-v001.json",
       "humanObservation": "複数人場面の同時テロップまたは発話者アイコンの人間観測から1件を選ぶ",
       "sourceObservationLocation": "collection.md / nOEWCNc77MI, YkGg-rtFcyg, m8mpEaDykwM",
-      "status": "ready-for-human-recognition"
+      "status": "human-recognized-and-frozen",
+      "humanDecision": "approve-as-proposed",
+      "humanConfirmedBy": "kawafmm",
+      "humanConfirmedDate": "2026-07-20"
     }
   ],
   "humanReview": {
-    "status": "awaiting-human-recognition",
+    "status": "completed-all-approved",
     "candidateCount": 5,
     "sessionCount": 1,
     "timeMeasurementRequired": false,
-    "reviewPage": "human-review-v001/review.html"
+    "reviewPage": "human-review-v001/review.html",
+    "resultFile": "human-review-v001/result.md",
+    "confirmedBy": "kawafmm",
+    "confirmedDate": "2026-07-20",
+    "approvedCount": 5,
+    "rejectedCount": 0,
+    "undeterminedCount": 0,
+    "timeMeasurement": "none"
   },
   "rules": {
     "humanApprovalRequiredBeforeGroundTruth": true,
+    "humanApprovalCompleted": true,
     "aiLocatedTimeIsGroundTruth": false,
     "missingHumanObservationIsNegative": false,
     "frozenFixtureOrExpectedMutationAllowed": false

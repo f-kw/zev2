@@ -1,0 +1,97 @@
+{
+  "schemaVersion": "presentation-g4-g7-ground-truth-v001",
+  "format": "normal-landscape",
+  "status": "frozen-human-confirmed",
+  "frozenAt": "2026-07-20",
+  "humanAuthority": {
+    "name": "kawafmm",
+    "decision": "approved-all-5-as-proposed",
+    "timeMeasurement": "none"
+  },
+  "sources": {
+    "candidateLedger": "candidate-ledger.json",
+    "humanReviewResult": "human-review-v001/result.md",
+    "humanObservationCorpus": "evals/clip_composition/outputs/presentation/exemplar-collection-v001/collection.md",
+    "humanObservationVideoCount": 8,
+    "humanObservationCount": 66
+  },
+  "examples": [
+    {
+      "groundTruthId": "GT-01",
+      "grammar": "G4",
+      "label": "positive",
+      "videoId": "nE_bNeBNp4E",
+      "evidenceShape": "point-anchor",
+      "anchorMs": 750000,
+      "anchorDisplay": "00:12:30",
+      "meaning": "意表を突かれた瞬間を強調候補として検出する",
+      "observedPresentation": "ズームと効果音を同時に使う",
+      "humanDecision": "approve-as-proposed"
+    },
+    {
+      "groundTruthId": "GT-02",
+      "grammar": "G4",
+      "label": "suppression",
+      "videoId": "9dtwF5Exu5w",
+      "evidenceShape": "point-anchor",
+      "anchorMs": 949000,
+      "anchorDisplay": "00:15:49",
+      "meaning": "強い感情だが追加の文字・効果音を必須にしない",
+      "observedPresentation": "顔のアップだけで見せる",
+      "humanDecision": "approve-as-proposed"
+    },
+    {
+      "groundTruthId": "GT-03",
+      "grammar": "G7",
+      "label": "positive",
+      "videoId": "tljIGk4y5Do",
+      "evidenceShape": "point-anchor",
+      "anchorMs": 548000,
+      "anchorDisplay": "00:09:08",
+      "meaning": "時間・場所・登場人物・状況を補足する素材候補として検出する",
+      "observedPresentation": "約2秒の静止画へ文脈を圧縮する",
+      "humanDecision": "approve-as-proposed"
+    },
+    {
+      "groundTruthId": "GT-04",
+      "grammar": "G5",
+      "label": "positive",
+      "videoId": "UpRyakf5j80",
+      "evidenceShape": "typed-interval-with-contrast",
+      "primaryRangeMs": {
+        "startMs": 0,
+        "endMs": 12000,
+        "informationType": "listener-comment"
+      },
+      "contrastRangeMs": {
+        "startMs": 16000,
+        "endMs": 40000,
+        "informationType": "streamer-response"
+      },
+      "meaning": "リスナーコメントと配信者本人の回答を別の情報種別として識別する",
+      "locationProvenance": "g5-location-v001@gemini-web-flash, then human-confirmed",
+      "humanDecision": "approve-as-proposed"
+    },
+    {
+      "groundTruthId": "GT-05",
+      "grammar": "G6",
+      "label": "positive",
+      "videoId": "nOEWCNc77MI",
+      "evidenceShape": "interval",
+      "rangeMs": {
+        "startMs": 110000,
+        "endMs": 114000
+      },
+      "meaning": "複数人場面で同時表示された発話を話者ごとに識別する",
+      "observedPresentation": "マリンところねのテロップを同時表示し色で区別する",
+      "locationProvenance": "g6-location-v001@gemini-web-flash, then human-confirmed",
+      "humanDecision": "approve-as-proposed"
+    }
+  ],
+  "contracts": {
+    "pointAnchorsMustNotBeExpandedWithoutSeparateDesign": true,
+    "unlabeledScenesAreNegative": false,
+    "frozenFixtureOrExpectedMutationAllowed": false,
+    "meaningDetectorDesignApproved": false
+  }
+}
