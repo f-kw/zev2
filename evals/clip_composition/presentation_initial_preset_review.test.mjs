@@ -19,6 +19,7 @@ import {
   deriveEmptyMaterialValidationIndex,
   derivePresetValidationIndex,
   validateCandidateRegistry,
+  validatePreviewEvidence,
   validatePreviewPlan,
   validateReviewHtml,
 } from './build_presentation_initial_preset_review.mjs';
@@ -32,6 +33,7 @@ const sha256Canonical = async (value) => {
 const loadCandidate = async () => {
   const registry = validateCandidateRegistry(await readJson(CANDIDATE_REGISTRY_PATH));
   const plan = validatePreviewPlan(await readJson(PREVIEW_PLAN_PATH), registry);
+  await validatePreviewEvidence(plan);
   return { registry, plan };
 };
 
@@ -114,6 +116,32 @@ test('preview plan covers every kind once and reserves synthetic material for G7
   assert.equal(plan.scenes.filter((scene) => scene.previewOnlySyntheticMaterial === true).length, 1);
   assert.equal(plan.scenes.at(-1).kind, 'reference-supplement');
   assert.equal(plan.scenes[0].layers.length, 2);
+});
+
+test('lyrics preview uses a dedicated sung-audio segment for the whole lyrics scene', async () => {
+  const { plan } = await loadCandidate();
+  const lyricsScene = plan.scenes.find((scene) => scene.kind === 'information-lyrics');
+  const lyricsSegments = plan.sourceSelection.segments
+    .map((segment, index, segments) => ({
+      ...segment,
+      previewStartMs: segments.slice(0, index).reduce(
+        (sum, item) => sum + (item.endMs - item.startMs),
+        0,
+      ),
+    }))
+    .filter((segment) => segment.purpose === 'information-lyrics-audio');
+  assert.equal(lyricsSegments.length, 1);
+  assert.equal(lyricsSegments[0].previewStartMs, lyricsScene.startMs);
+  assert.equal(
+    lyricsSegments[0].previewStartMs + lyricsSegments[0].endMs - lyricsSegments[0].startMs,
+    lyricsScene.endMs,
+  );
+  assert.match(lyricsSegments[0].transcriptEvidence.text, /テン/);
+  const evidence = await validatePreviewEvidence(plan);
+  assert.equal(evidence.selectedStartMs, lyricsSegments[0].startMs);
+  assert.equal(evidence.selectedEndMs, lyricsSegments[0].endMs);
+  assert.match(evidence.selectedText, /テンテン/);
+  assert.match(evidence.selectedText, new RegExp(evidence.displayedText));
 });
 
 test('review UI keeps five decisions editable and excludes Q5 from bulk approval', async () => {

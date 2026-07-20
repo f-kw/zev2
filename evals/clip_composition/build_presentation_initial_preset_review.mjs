@@ -26,13 +26,13 @@ export const PREVIEW_PLAN_PATH = path.join(
   scriptDir,
   'candidates',
   'presentation',
-  'normal-landscape-readable-pop-preview-plan-v001.json',
+  'normal-landscape-readable-pop-preview-plan-v002.json',
 );
 export const OUTPUT_ROOT = path.join(
   scriptDir,
   'outputs',
   'presentation',
-  'initial-preset-registry-candidate-20260720-v001',
+  'initial-preset-registry-candidate-20260720-v002',
 );
 
 const REMOTION_BIN = path.join(workspaceRoot, 'runner', 'node_modules', '.bin', 'remotion');
@@ -69,7 +69,7 @@ const OUTPUT_FILES = Object.freeze({
   presetValidationIndex: 'candidate-preset-validation-index.json',
   materialValidationIndex: 'candidate-empty-material-validation-index.json',
   previewManifest: 'preview-manifest.json',
-  previewMedia: 'media/normal-landscape-readable-pop-preview-v001.mp4',
+  previewMedia: 'media/normal-landscape-readable-pop-preview-v002.mp4',
   reviewHtml: 'review.html',
   resultTemplate: 'result-template.md',
 });
@@ -187,7 +187,7 @@ export const validatePreviewPlan = (plan, registry) => {
   assert(plan.schemaVersion === 'presentation-preset-preview-plan-v001', 'preview plan schema mismatch');
   assert(plan.format === registry.format, 'preview plan format mismatch');
   assert(plan.presetId === registry.presets[0].presetId, 'preview plan preset mismatch');
-  assert(Array.isArray(plan.sourceSelection?.segments) && plan.sourceSelection.segments.length === 2, 'preview sources must stay fixed at two');
+  assert(Array.isArray(plan.sourceSelection?.segments) && plan.sourceSelection.segments.length >= 1, 'preview sources are missing');
   assert(Array.isArray(plan.scenes) && plan.scenes.length === 10, 'preview must contain ten scenes');
   assertExactStringArray(plan.scenes.map((scene) => scene.kind), EXPECTED_KINDS, 'preview scene kinds');
 
@@ -213,7 +213,77 @@ export const validatePreviewPlan = (plan, registry) => {
     0,
   );
   assert(sourceDurationMs === previousEndMs, 'source segment duration must exactly equal preview duration');
+
+  const lyricsScene = plan.scenes.find((scene) => scene.kind === 'information-lyrics');
+  assert(lyricsScene, 'lyrics preview scene is missing');
+  let previewCursorMs = 0;
+  let lyricsAudioSegmentCount = 0;
+  for (const segment of plan.sourceSelection.segments) {
+    assert(isNonEmptyString(segment.sourceId), 'preview sourceId is missing');
+    assert(isNonEmptyString(segment.path), `${segment.sourceId}: preview source path is missing`);
+    assert(isFiniteInteger(segment.startMs) && isFiniteInteger(segment.endMs) && segment.startMs < segment.endMs,
+      `${segment.sourceId}: preview source range is invalid`);
+    assert(['general-preview', 'information-lyrics-audio'].includes(segment.purpose),
+      `${segment.sourceId}: preview source purpose is invalid`);
+    const previewEndMs = previewCursorMs + (segment.endMs - segment.startMs);
+    if (segment.purpose === 'information-lyrics-audio') {
+      lyricsAudioSegmentCount += 1;
+      assert(previewCursorMs === lyricsScene.startMs && previewEndMs === lyricsScene.endMs,
+        'lyrics audio segment must exactly cover the lyrics preview scene');
+      assert(isObject(segment.transcriptEvidence), 'lyrics audio segment needs transcript evidence');
+      assert(isNonEmptyString(segment.transcriptEvidence.path), 'lyrics transcript evidence path is missing');
+      assert(isNonEmptyString(segment.transcriptEvidence.text), 'lyrics transcript evidence text is missing');
+    }
+    previewCursorMs = previewEndMs;
+  }
+  assert(lyricsAudioSegmentCount === 1, 'preview must contain exactly one lyrics audio segment');
   return plan;
+};
+
+const normalizeEvidenceText = (value) => String(value).replace(/[^\p{L}\p{N}ー]/gu, '');
+
+export const validatePreviewEvidence = async (plan) => {
+  const lyricsScene = plan.scenes.find((scene) => scene.kind === 'information-lyrics');
+  const lyricsLayerText = normalizeEvidenceText(
+    lyricsScene.layers.map((layer) => layer.text).join(''),
+  );
+  const segment = plan.sourceSelection.segments.find(
+    (item) => item.purpose === 'information-lyrics-audio',
+  );
+  const evidencePath = path.join(workspaceRoot, segment.transcriptEvidence.path);
+  await access(evidencePath);
+  const evidence = await readJson(evidencePath);
+  assert(Array.isArray(evidence.words), 'lyrics transcript evidence must contain word timestamps');
+  const selectedWords = evidence.words.filter(
+    (word) => word.startMs >= segment.startMs && word.endMs <= segment.endMs,
+  );
+  assert(selectedWords.length > 0, 'lyrics transcript evidence has no words inside the selected range');
+  assert(
+    selectedWords.some((word) => word.startMs === segment.startMs),
+    'lyrics audio start must align with an evidence word boundary',
+  );
+  assert(
+    selectedWords.some((word) => word.endMs === segment.endMs),
+    'lyrics audio end must align with an evidence word boundary',
+  );
+  const selectedText = normalizeEvidenceText(selectedWords.map((word) => word.text).join(''));
+  const declaredEvidenceText = normalizeEvidenceText(segment.transcriptEvidence.text);
+  assert(
+    selectedText.includes(declaredEvidenceText),
+    'declared lyrics evidence text is not present inside the selected range',
+  );
+  assert(
+    selectedText.includes(lyricsLayerText),
+    'displayed lyrics text is not grounded in the selected transcript evidence',
+  );
+  return {
+    path: repoPath(evidencePath),
+    selectedStartMs: segment.startMs,
+    selectedEndMs: segment.endMs,
+    selectedWordCount: selectedWords.length,
+    selectedText,
+    displayedText: lyricsLayerText,
+  };
 };
 
 export const derivePresetValidationIndex = (registry) => ({
@@ -668,6 +738,7 @@ const environmentManifest = async () => {
 const main = async () => {
   const registry = validateCandidateRegistry(await readJson(CANDIDATE_REGISTRY_PATH));
   const plan = validatePreviewPlan(await readJson(PREVIEW_PLAN_PATH), registry);
+  const previewEvidence = await validatePreviewEvidence(plan);
   const preset = registry.presets[0];
   const presetValidationIndex = derivePresetValidationIndex(registry);
   const materialValidationIndex = deriveEmptyMaterialValidationIndex();
@@ -854,6 +925,7 @@ const main = async () => {
       ...plan.sourceSelection,
       segments: sourceManifest,
     },
+    lyricsEvidence: previewEvidence,
     componentProvenance: componentManifest,
     fontAssets: registry.fontAssets,
     environment: await environmentManifest(),
