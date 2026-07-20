@@ -1,0 +1,905 @@
+{
+  "schemaVersion": "presentation-preset-preview-manifest-v001",
+  "previewId": "normal-landscape-readable-pop-preview-20260720-v001",
+  "generatedOn": "2026-07-20",
+  "purpose": "初期プリセット台帳の人間認定媒体。正式レンダラー、正式指示書、解決パッケージ、信頼bindingの実装・合格を意味しない。",
+  "llmUsed": false,
+  "modelRun": null,
+  "preset": {
+    "presetId": "normal-landscape-readable-pop-v001",
+    "registryVersion": "normal-landscape-preset-registry-v001",
+    "candidateRegistryPath": "candidate-preset-registry.json",
+    "candidateRegistrySha256": "5915d6aae47681c43ea202a20eee16cbf669abfe24fdc832f75fb127ad46dca4",
+    "presetValidationIndexPath": "candidate-preset-validation-index.json",
+    "presetValidationIndexSha256": "40609dbc63b7c2d1f4c2cd92ee22c493c08382c0d63c27ea06087535f5882067",
+    "defeatedProfileReused": false,
+    "defeatedProfileIds": [
+      "default-conservative-v001",
+      "boxed_readable",
+      "zev_glow"
+    ]
+  },
+  "materialIndex": {
+    "registryVersion": "presentation-material-registry-empty-v001",
+    "path": "candidate-empty-material-validation-index.json",
+    "sha256": "3958ad2d21233342e49aedd29cbd337785a228e1063d1802b64e92dc1793d1fc",
+    "materialCount": 0,
+    "g7RealInstructionPermitted": false,
+    "g7PreviewUsesSyntheticCardOnly": true
+  },
+  "formalTrustBindingWritten": false,
+  "preflightOnlyTrustBindingPersisted": false,
+  "sourceSelection": {
+    "type": "fixed-convenience-sample",
+    "representative": false,
+    "selectionNote": "既存の最小演出十分性診断で使用済みの、承認済み配信者による人間確認済みsource-only区間を再利用する。意味採点には使わない。",
+    "segments": [
+      {
+        "sourceId": "YE-faluP7zY",
+        "path": "evals/clip_composition/research/downloads/nOEWCNc77MI/sources/YE-faluP7zY/YE-faluP7zY.mp4",
+        "startMs": 3475241,
+        "endMs": 3485035,
+        "sha256": "b0b2d71aa34a780cee1642b28d8ce62a56d0658be64437fedf9a00d37206de0c"
+      },
+      {
+        "sourceId": "o8rZAhARXAc",
+        "path": "evals/clip_composition/research/downloads/9dtwF5Exu5w/sources/o8rZAhARXAc/o8rZAhARXAc.mp4",
+        "startMs": 3741344,
+        "endMs": 3758425,
+        "sha256": "4c9911c860f7ed42cf6c66c1ceda605e5818381f695c26116632b1f86c4c2a06"
+      }
+    ]
+  },
+  "componentProvenance": [
+    {
+      "path": "runner/src/remotion/Root.tsx",
+      "sha256": "9c58b452d81b3083c8637e6d2e8ec971bc948ae39ce0452675bb1fd2a005cc8f"
+    },
+    {
+      "path": "runner/src/remotion/renderer/TelopRenderer.tsx",
+      "sha256": "94b1ef2f132acbda86181034c89a57caabc72e4a150d213c01e5be8159327863"
+    },
+    {
+      "path": "runner/src/remotion/components/TelopText.tsx",
+      "sha256": "9e941db470dd2586485134f093679bda947e722c4d000d25b0e7fb6ec5daf001"
+    },
+    {
+      "path": "runner/src/telop/telop-render-model.ts",
+      "sha256": "5c32103a6f8faaa3ea1d30bb4624f0ca092385c8b77446aa5f51e3e3a0583412"
+    },
+    {
+      "path": "runner/src/telop/telop-line-break.ts",
+      "sha256": "3f136f17e6a1bf860aec4aa82b59de1c6f078499f860bf2d65fef82eaf66ff2d"
+    },
+    {
+      "path": "runner/src/remotion/utils/telop-font.ts",
+      "sha256": "fa2cb9c4c767e43006d77fa1aa8a0b6f1757b4059551ffc413d5c7fdf5cd441c"
+    }
+  ],
+  "fontAssets": [
+    {
+      "fontAssetId": "line-seed-jp-extra-bold-v001",
+      "fileName": "LINESeedJP_A_OTF_Eb.otf",
+      "path": "runner/public/font/LINESeedJP_A_OTF_Eb.otf",
+      "sha256": "4f20353d5ba41012fb8eaaa653d2ac46f80d63880301a6590765897bbdfedbfb",
+      "licensePath": "runner/public/font/OFL_LINESeedJP.txt"
+    },
+    {
+      "fontAssetId": "shippori-mincho-bold-v001",
+      "fileName": "ShipporiMincho-Bold.ttf",
+      "path": "runner/public/font/ShipporiMincho-Bold.ttf",
+      "sha256": "be85eeed197f573a8d8dcb26634787179574f3ff179afef077ecfb8d81daa20f",
+      "licensePath": "runner/public/font/OFL_ShipporiMincho-Bold.txt"
+    }
+  ],
+  "environment": {
+    "nodeVersion": "v20.19.6",
+    "nodeArch": "arm64",
+    "remotionVersion": "4.0.481",
+    "browserExecutable": "runner/node_modules/.remotion/chrome-headless-shell/mac-arm64/chrome-headless-shell-mac-arm64/chrome-headless-shell",
+    "browserVersion": "149.0.7790.0",
+    "ffmpegVersion": "ffmpeg version 8.0.1 Copyright (c) 2000-2025 the FFmpeg developers",
+    "ffprobeVersion": "ffprobe version 8.0.1 Copyright (c) 2007-2025 the FFmpeg developers",
+    "networkDownloadUsed": false
+  },
+  "indexCompatibility": {
+    "status": "passed",
+    "checkerVersion": "presentation-instruction-checker-v001",
+    "inputSha256": "5462d4d274a51fb08c1db9e5b3bee49ce119b2653dcceeb8aca488de1ad39e84",
+    "trustUsedForPreflightOnly": true,
+    "formalTrustBindingWritten": false
+  },
+  "layoutPreflight": {
+    "path": "evals/clip_composition/outputs/presentation/initial-preset-registry-candidate-20260720-v001/layout-preflight.json",
+    "status": "passed",
+    "violationCount": 0,
+    "twoLinePositiveIntersectionCount": 0
+  },
+  "fontFallbackChecks": [
+    {
+      "fontAssetId": "line-seed-jp-extra-bold-v001",
+      "managedFontSha256": "f859390188c254382d71813e1d6f6c7f8cf9db6a7497183154cbb55112e51dd7",
+      "fallbackControlSha256": "03a71eafa858b891f57a86e725d1965ca76fe9e0bb82f168fae67ddfa71aedb7",
+      "outputsDiffer": true
+    },
+    {
+      "fontAssetId": "shippori-mincho-bold-v001",
+      "managedFontSha256": "9c43ada474d01de04269996aff593e636a00db3ee2882fe4980aa9c7ff7c53ba",
+      "fallbackControlSha256": "db171f927e4d720305354ba5d56abe0e56f14107cf20a874ba153e0cf23ed534",
+      "outputsDiffer": true
+    }
+  ],
+  "deterministicStill": {
+    "layerId": "caption-short",
+    "firstSha256": "f859390188c254382d71813e1d6f6c7f8cf9db6a7497183154cbb55112e51dd7",
+    "secondSha256": "f859390188c254382d71813e1d6f6c7f8cf9db6a7497183154cbb55112e51dd7"
+  },
+  "scenes": [
+    {
+      "sceneId": "scene-01-caption",
+      "kind": "speech-caption",
+      "humanLabel": "通常発話：1行から2行への小気味よい切替",
+      "startMs": 0,
+      "endMs": 3000,
+      "layers": [
+        {
+          "layerId": "caption-short",
+          "text": "やばい、マリリン！",
+          "startMs": 220,
+          "endMs": 1420,
+          "renderProps": {
+            "text": "やばい、マリリン！",
+            "style": {
+              "fontFamily": "LINESeedJP_A_OTF_Eb.otf",
+              "fontSize": 96,
+              "fontColor": "#FFFDF8",
+              "borderColor": "#111827",
+              "borderWidth": 8,
+              "lineSpacing": 150,
+              "glowColor": "#000000",
+              "glowColorMode": "fixed",
+              "glowWidth": 12,
+              "glowOpacity": 82
+            },
+            "position": {
+              "preset": "bottom-center",
+              "alignment": "center",
+              "offsetX": 0,
+              "offsetY": -6
+            },
+            "maxCharsPerLine": 36,
+            "singleLine": false,
+            "width": 1920,
+            "height": 1080,
+            "glowSeedHint": "normal-landscape-readable-pop-v001/speech-caption/caption-core-v001"
+          },
+          "overlayPath": "evals/clip_composition/outputs/presentation/initial-preset-registry-candidate-20260720-v001/overlays/scene-01-caption-caption-short.png",
+          "overlaySha256": "f859390188c254382d71813e1d6f6c7f8cf9db6a7497183154cbb55112e51dd7",
+          "alphaInspection": {
+            "alphaMax": 1,
+            "bounds": {
+              "x": 511,
+              "y": 860,
+              "width": 865,
+              "height": 133,
+              "right": 1376,
+              "bottom": 993
+            }
+          }
+        },
+        {
+          "layerId": "caption-two-lines",
+          "text": "マジでさ、食材なくなったけど\n全ての食材を船長が握ってるからね",
+          "startMs": 1420,
+          "endMs": 2700,
+          "renderProps": {
+            "text": "マジでさ、食材なくなったけど\n全ての食材を船長が握ってるからね",
+            "style": {
+              "fontFamily": "LINESeedJP_A_OTF_Eb.otf",
+              "fontSize": 96,
+              "fontColor": "#FFFDF8",
+              "borderColor": "#111827",
+              "borderWidth": 8,
+              "lineSpacing": 150,
+              "glowColor": "#000000",
+              "glowColorMode": "fixed",
+              "glowWidth": 12,
+              "glowOpacity": 82
+            },
+            "position": {
+              "preset": "bottom-center",
+              "alignment": "center",
+              "offsetX": 0,
+              "offsetY": -6
+            },
+            "maxCharsPerLine": 36,
+            "singleLine": false,
+            "width": 1920,
+            "height": 1080,
+            "glowSeedHint": "normal-landscape-readable-pop-v001/speech-caption/caption-core-v001"
+          },
+          "overlayPath": "evals/clip_composition/outputs/presentation/initial-preset-registry-candidate-20260720-v001/overlays/scene-01-caption-caption-two-lines.png",
+          "overlaySha256": "1ef5c417e7de473fe71d98440a888c05569d635bd6d884aac07ab44a25949cb6",
+          "alphaInspection": {
+            "alphaMax": 1,
+            "bounds": {
+              "x": 172,
+              "y": 716,
+              "width": 1561,
+              "height": 277,
+              "right": 1733,
+              "bottom": 993
+            }
+          }
+        }
+      ],
+      "stateId": "caption-core-v001",
+      "endResponsibility": "target-anchor",
+      "representativeFrame": {
+        "sceneId": "scene-01-caption",
+        "midpointMs": 820,
+        "framePath": "evals/clip_composition/outputs/presentation/initial-preset-registry-candidate-20260720-v001/frames/scene-01-caption.png",
+        "frameSha256": "f5fc34c635dfd14e736755d717d6e2f73b440c1cebf84706ff02258ef2587638",
+        "changedPixelsAgainstSourceOnly": 1136120,
+        "overlayVisible": true
+      }
+    },
+    {
+      "sceneId": "scene-02-important",
+      "kind": "emphasis-important-statement",
+      "humanLabel": "重要な発言の強調",
+      "startMs": 3000,
+      "endMs": 5650,
+      "layers": [
+        {
+          "layerId": "important",
+          "text": "全ての食材を\n船長が握ってるからね",
+          "startMs": 3220,
+          "endMs": 5350,
+          "renderProps": {
+            "text": "全ての食材を\n船長が握ってるからね",
+            "style": {
+              "fontFamily": "LINESeedJP_A_OTF_Eb.otf",
+              "fontSize": 132,
+              "fontColor": "#FFE36E",
+              "borderColor": "#2B1820",
+              "borderWidth": 10,
+              "lineSpacing": 150,
+              "glowColor": "#080407",
+              "glowColorMode": "fixed",
+              "glowWidth": 18,
+              "glowOpacity": 86
+            },
+            "position": {
+              "preset": "center",
+              "alignment": "center",
+              "offsetX": 0,
+              "offsetY": 5
+            },
+            "maxCharsPerLine": 28,
+            "singleLine": false,
+            "width": 1920,
+            "height": 1080,
+            "glowSeedHint": "normal-landscape-readable-pop-v001/emphasis-important-statement/emphasis-important-warm-v001"
+          },
+          "overlayPath": "evals/clip_composition/outputs/presentation/initial-preset-registry-candidate-20260720-v001/overlays/scene-02-important-important.png",
+          "overlaySha256": "c145bee694b43949e470a92be5ccc7ed95269c1e62ca1564470993e5736d0d40",
+          "alphaInspection": {
+            "alphaMax": 1,
+            "bounds": {
+              "x": 273,
+              "y": 427,
+              "width": 1357,
+              "height": 379,
+              "right": 1630,
+              "bottom": 806
+            }
+          }
+        }
+      ],
+      "stateId": "emphasis-important-warm-v001",
+      "endResponsibility": "preset-policy",
+      "endPolicyId": "resolved-target-final-atom-v001",
+      "representativeFrame": {
+        "sceneId": "scene-02-important",
+        "midpointMs": 4285,
+        "framePath": "evals/clip_composition/outputs/presentation/initial-preset-registry-candidate-20260720-v001/frames/scene-02-important.png",
+        "frameSha256": "43e07628accf7175a6670be94779bf91a15da9ba08568de27c69883b1c0a3e0f",
+        "changedPixelsAgainstSourceOnly": 1301080,
+        "overlayVisible": true
+      }
+    },
+    {
+      "sceneId": "scene-03-mistake",
+      "kind": "emphasis-mistake-realization",
+      "humanLabel": "間違いに気づいた瞬間",
+      "startMs": 5650,
+      "endMs": 8300,
+      "layers": [
+        {
+          "layerId": "mistake",
+          "text": "あ、違うかも",
+          "startMs": 5870,
+          "endMs": 8000,
+          "renderProps": {
+            "text": "あ、違うかも",
+            "style": {
+              "fontFamily": "LINESeedJP_A_OTF_Eb.otf",
+              "fontSize": 136,
+              "fontColor": "#FFFFFF",
+              "borderColor": "#A51E42",
+              "borderWidth": 11,
+              "lineSpacing": 150,
+              "glowColor": "#26000C",
+              "glowColorMode": "fixed",
+              "glowWidth": 18,
+              "glowOpacity": 88
+            },
+            "position": {
+              "preset": "center",
+              "alignment": "center",
+              "offsetX": 0,
+              "offsetY": 4
+            },
+            "background": {
+              "color": "rgba(30, 4, 14, 0.78)",
+              "borderRadius": 18,
+              "paddingX": 34,
+              "paddingY": 20
+            },
+            "maxCharsPerLine": 28,
+            "singleLine": false,
+            "width": 1920,
+            "height": 1080,
+            "glowSeedHint": "normal-landscape-readable-pop-v001/emphasis-mistake-realization/emphasis-mistake-alert-v001"
+          },
+          "overlayPath": "evals/clip_composition/outputs/presentation/initial-preset-registry-candidate-20260720-v001/overlays/scene-03-mistake-mistake.png",
+          "overlaySha256": "ca46330e56725964ae18d75796b915114d6abd5a706cfbd14e7169674bcf4f43",
+          "alphaInspection": {
+            "alphaMax": 1,
+            "bounds": {
+              "x": 517,
+              "y": 466,
+              "width": 954,
+              "height": 278,
+              "right": 1471,
+              "bottom": 744
+            }
+          }
+        }
+      ],
+      "stateId": "emphasis-mistake-alert-v001",
+      "endResponsibility": "preset-policy",
+      "endPolicyId": "resolved-target-final-atom-v001",
+      "representativeFrame": {
+        "sceneId": "scene-03-mistake",
+        "midpointMs": 6935,
+        "framePath": "evals/clip_composition/outputs/presentation/initial-preset-registry-candidate-20260720-v001/frames/scene-03-mistake.png",
+        "frameSha256": "8704e314953b94a2adf527266dbad12144c29335504fb37699573f60b8f2382c",
+        "changedPixelsAgainstSourceOnly": 1292690,
+        "overlayVisible": true
+      }
+    },
+    {
+      "sceneId": "scene-04-discovery",
+      "kind": "emphasis-discovery",
+      "humanLabel": "何かを発見した瞬間",
+      "startMs": 8300,
+      "endMs": 10950,
+      "layers": [
+        {
+          "layerId": "discovery",
+          "text": "それだ！",
+          "startMs": 8520,
+          "endMs": 10650,
+          "renderProps": {
+            "text": "それだ！",
+            "style": {
+              "fontFamily": "LINESeedJP_A_OTF_Eb.otf",
+              "fontSize": 128,
+              "fontColor": "#A8F5FF",
+              "borderColor": "#083B55",
+              "borderWidth": 10,
+              "lineSpacing": 150,
+              "glowColor": "#00111B",
+              "glowColorMode": "fixed",
+              "glowWidth": 17,
+              "glowOpacity": 86
+            },
+            "position": {
+              "preset": "center",
+              "alignment": "center",
+              "offsetX": 0,
+              "offsetY": 3
+            },
+            "background": {
+              "color": "rgba(4, 28, 47, 0.76)",
+              "borderRadius": 22,
+              "paddingX": 34,
+              "paddingY": 20
+            },
+            "maxCharsPerLine": 12,
+            "singleLine": false,
+            "width": 1920,
+            "height": 1080,
+            "glowSeedHint": "normal-landscape-readable-pop-v001/emphasis-discovery/emphasis-discovery-clear-v001"
+          },
+          "overlayPath": "evals/clip_composition/outputs/presentation/initial-preset-registry-candidate-20260720-v001/overlays/scene-04-discovery-discovery.png",
+          "overlaySha256": "65374c08f33921fa12a64c3ec6bba26477e6d88d6c7bc9ca6de0f3150b5c53e0",
+          "alphaInspection": {
+            "alphaMax": 1,
+            "bounds": {
+              "x": 671,
+              "y": 462,
+              "width": 646,
+              "height": 264,
+              "right": 1317,
+              "bottom": 726
+            }
+          }
+        }
+      ],
+      "stateId": "emphasis-discovery-clear-v001",
+      "endResponsibility": "preset-policy",
+      "endPolicyId": "resolved-target-final-atom-v001",
+      "representativeFrame": {
+        "sceneId": "scene-04-discovery",
+        "midpointMs": 9585,
+        "framePath": "evals/clip_composition/outputs/presentation/initial-preset-registry-candidate-20260720-v001/frames/scene-04-discovery.png",
+        "frameSha256": "0a2f53273ffc366acad7199625e2af3ada1c944b6e58fb7160896e65b202d296",
+        "changedPixelsAgainstSourceOnly": 1207170,
+        "overlayVisible": true
+      }
+    },
+    {
+      "sceneId": "scene-05-emotion",
+      "kind": "emphasis-strong-emotion",
+      "humanLabel": "強い感情の強調",
+      "startMs": 10950,
+      "endMs": 13600,
+      "layers": [
+        {
+          "layerId": "emotion",
+          "text": "教えてくれないんだ！",
+          "startMs": 11170,
+          "endMs": 13300,
+          "renderProps": {
+            "text": "教えてくれないんだ！",
+            "style": {
+              "fontFamily": "LINESeedJP_A_OTF_Eb.otf",
+              "fontSize": 154,
+              "fontColor": "#FFF1A8",
+              "borderColor": "#C13A1D",
+              "borderWidth": 12,
+              "lineSpacing": 152,
+              "glowColor": "#2B0700",
+              "glowColorMode": "fixed",
+              "glowWidth": 24,
+              "glowOpacity": 90
+            },
+            "position": {
+              "preset": "center",
+              "alignment": "center",
+              "offsetX": 0,
+              "offsetY": 5
+            },
+            "maxCharsPerLine": 24,
+            "singleLine": false,
+            "width": 1920,
+            "height": 1080,
+            "glowSeedHint": "normal-landscape-readable-pop-v001/emphasis-strong-emotion/emphasis-emotion-impact-v001"
+          },
+          "overlayPath": "evals/clip_composition/outputs/presentation/initial-preset-registry-candidate-20260720-v001/overlays/scene-05-emotion-emotion.png",
+          "overlaySha256": "fa12e797f162c7fc92af9bb72e8545ec712d074f161b1549140001dbb8d76454",
+          "alphaInspection": {
+            "alphaMax": 1,
+            "bounds": {
+              "x": 155,
+              "y": 512,
+              "width": 1525,
+              "height": 217,
+              "right": 1680,
+              "bottom": 729
+            }
+          }
+        }
+      ],
+      "stateId": "emphasis-emotion-impact-v001",
+      "endResponsibility": "preset-policy",
+      "endPolicyId": "resolved-target-final-atom-v001",
+      "representativeFrame": {
+        "sceneId": "scene-05-emotion",
+        "midpointMs": 12235,
+        "framePath": "evals/clip_composition/outputs/presentation/initial-preset-registry-candidate-20260720-v001/frames/scene-05-emotion.png",
+        "frameSha256": "6fa9631940f806580b501b8c439f51fc0119f89c79c9f183d67a7fe720a4316b",
+        "changedPixelsAgainstSourceOnly": 1259840,
+        "overlayVisible": true
+      }
+    },
+    {
+      "sceneId": "scene-06-comment",
+      "kind": "information-comment",
+      "humanLabel": "リスナーコメントの専用表示",
+      "startMs": 13600,
+      "endMs": 16250,
+      "layers": [
+        {
+          "layerId": "comment",
+          "text": "リスナーコメント\n「こよりがわざと弱いのを教えた？」",
+          "startMs": 13820,
+          "endMs": 15950,
+          "renderProps": {
+            "text": "リスナーコメント\n「こよりがわざと弱いのを教えた？」",
+            "style": {
+              "fontFamily": "LINESeedJP_A_OTF_Eb.otf",
+              "fontSize": 72,
+              "fontColor": "#18243B",
+              "borderColor": "#18243B",
+              "borderWidth": 0,
+              "lineSpacing": 128,
+              "glowColor": "transparent",
+              "glowColorMode": "fixed",
+              "glowWidth": 0,
+              "glowOpacity": 0
+            },
+            "position": {
+              "preset": "lower-third",
+              "alignment": "left",
+              "offsetX": 0,
+              "offsetY": -4
+            },
+            "background": {
+              "color": "rgba(252, 249, 244, 0.96)",
+              "borderRadius": 26,
+              "paddingX": 50,
+              "paddingY": 30
+            },
+            "maxCharsPerLine": 42,
+            "singleLine": false,
+            "width": 1920,
+            "height": 1080,
+            "glowSeedHint": "normal-landscape-readable-pop-v001/information-comment/information-comment-card-v001"
+          },
+          "overlayPath": "evals/clip_composition/outputs/presentation/initial-preset-registry-candidate-20260720-v001/overlays/scene-06-comment-comment.png",
+          "overlaySha256": "31bd0b13ba8f10ef5211d3cf8b1c300ea36909aaa03630892388bc5e0768928a",
+          "alphaInspection": {
+            "alphaMax": 1,
+            "bounds": {
+              "x": 345,
+              "y": 588,
+              "width": 1330,
+              "height": 249,
+              "right": 1675,
+              "bottom": 837
+            }
+          }
+        }
+      ],
+      "stateId": "information-comment-card-v001",
+      "endResponsibility": "preset-policy",
+      "endPolicyId": "resolved-target-final-atom-v001",
+      "representativeFrame": {
+        "sceneId": "scene-06-comment",
+        "midpointMs": 14885,
+        "framePath": "evals/clip_composition/outputs/presentation/initial-preset-registry-candidate-20260720-v001/frames/scene-06-comment.png",
+        "frameSha256": "3aebbcea2f52f81867634ae57e79ec7670061ea9371838e37dcb677530730988",
+        "changedPixelsAgainstSourceOnly": 1439250,
+        "overlayVisible": true
+      }
+    },
+    {
+      "sceneId": "scene-07-narration",
+      "kind": "information-narration",
+      "humanLabel": "ナレーション・説明の専用表示",
+      "startMs": 16250,
+      "endMs": 18900,
+      "layers": [
+        {
+          "layerId": "narration",
+          "text": "ここから、相談をやめた理由へ",
+          "startMs": 16470,
+          "endMs": 18600,
+          "renderProps": {
+            "text": "ここから、相談をやめた理由へ",
+            "style": {
+              "fontFamily": "ShipporiMincho-Bold.ttf",
+              "fontSize": 70,
+              "fontColor": "#FFFDF7",
+              "borderColor": "#101827",
+              "borderWidth": 0,
+              "lineSpacing": 128,
+              "glowColor": "transparent",
+              "glowColorMode": "fixed",
+              "glowWidth": 0,
+              "glowOpacity": 0
+            },
+            "position": {
+              "preset": "lower-third",
+              "alignment": "center",
+              "offsetX": 0,
+              "offsetY": -3
+            },
+            "background": {
+              "color": "rgba(13, 20, 35, 0.88)",
+              "borderRadius": 14,
+              "paddingX": 46,
+              "paddingY": 28
+            },
+            "maxCharsPerLine": 22,
+            "singleLine": false,
+            "width": 1920,
+            "height": 1080,
+            "glowSeedHint": "normal-landscape-readable-pop-v001/information-narration/information-narration-card-v001"
+          },
+          "overlayPath": "evals/clip_composition/outputs/presentation/initial-preset-registry-candidate-20260720-v001/overlays/scene-07-narration-narration.png",
+          "overlaySha256": "9c43ada474d01de04269996aff593e636a00db3ee2882fe4980aa9c7ff7c53ba",
+          "alphaInspection": {
+            "alphaMax": 1,
+            "bounds": {
+              "x": 572,
+              "y": 601,
+              "width": 868,
+              "height": 240,
+              "right": 1440,
+              "bottom": 841
+            }
+          }
+        }
+      ],
+      "stateId": "information-narration-card-v001",
+      "endResponsibility": "preset-policy",
+      "endPolicyId": "resolved-target-final-atom-v001",
+      "representativeFrame": {
+        "sceneId": "scene-07-narration",
+        "midpointMs": 17535,
+        "framePath": "evals/clip_composition/outputs/presentation/initial-preset-registry-candidate-20260720-v001/frames/scene-07-narration.png",
+        "frameSha256": "d0247e5ac32758bd263d15917c00fffde5b33f78e1057ace9b400d61f517a398",
+        "changedPixelsAgainstSourceOnly": 1411960,
+        "overlayVisible": true
+      }
+    },
+    {
+      "sceneId": "scene-08-lyrics",
+      "kind": "information-lyrics",
+      "humanLabel": "歌詞の専用表示",
+      "startMs": 18900,
+      "endMs": 21550,
+      "layers": [
+        {
+          "layerId": "lyrics",
+          "text": "♪ やばい、マリリン",
+          "startMs": 19120,
+          "endMs": 21250,
+          "renderProps": {
+            "text": "♪ やばい、マリリン",
+            "style": {
+              "fontFamily": "ShipporiMincho-Bold.ttf",
+              "fontSize": 80,
+              "fontColor": "#FFF0FA",
+              "borderColor": "#5B174B",
+              "borderWidth": 3,
+              "lineSpacing": 128,
+              "glowColor": "#1A0016",
+              "glowColorMode": "fixed",
+              "glowWidth": 10,
+              "glowOpacity": 72
+            },
+            "position": {
+              "preset": "lower-third",
+              "alignment": "center",
+              "offsetX": 0,
+              "offsetY": -2
+            },
+            "background": {
+              "color": "rgba(67, 21, 72, 0.80)",
+              "borderRadius": 20,
+              "paddingX": 46,
+              "paddingY": 26
+            },
+            "maxCharsPerLine": 19,
+            "singleLine": false,
+            "width": 1920,
+            "height": 1080,
+            "glowSeedHint": "normal-landscape-readable-pop-v001/information-lyrics/information-lyrics-card-v001"
+          },
+          "overlayPath": "evals/clip_composition/outputs/presentation/initial-preset-registry-candidate-20260720-v001/overlays/scene-08-lyrics-lyrics.png",
+          "overlaySha256": "b451de54edf5d1fd455c4f18c720c9b0c6af362ffed185f59fd63baf2266ce10",
+          "alphaInspection": {
+            "alphaMax": 1,
+            "bounds": {
+              "x": 563,
+              "y": 637,
+              "width": 886,
+              "height": 186,
+              "right": 1449,
+              "bottom": 823
+            }
+          }
+        }
+      ],
+      "stateId": "information-lyrics-card-v001",
+      "endResponsibility": "preset-policy",
+      "endPolicyId": "resolved-target-final-atom-v001",
+      "representativeFrame": {
+        "sceneId": "scene-08-lyrics",
+        "midpointMs": 20185,
+        "framePath": "evals/clip_composition/outputs/presentation/initial-preset-registry-candidate-20260720-v001/frames/scene-08-lyrics.png",
+        "frameSha256": "baa94915836b99091ba845169f43103b3a7ba59f5234504d1e48bc75c53218fd",
+        "changedPixelsAgainstSourceOnly": 1301960,
+        "overlayVisible": true
+      }
+    },
+    {
+      "sceneId": "scene-09-speaker",
+      "kind": "speaker-identification",
+      "humanLabel": "複数人場面の話者名札",
+      "startMs": 21550,
+      "endMs": 24200,
+      "layers": [
+        {
+          "layerId": "speaker",
+          "text": "宝鐘マリン",
+          "startMs": 21770,
+          "endMs": 23900,
+          "renderProps": {
+            "text": "宝鐘マリン",
+            "style": {
+              "fontFamily": "LINESeedJP_A_OTF_Eb.otf",
+              "fontSize": 64,
+              "fontColor": "#FFFFFF",
+              "borderColor": "#FFFFFF",
+              "borderWidth": 0,
+              "lineSpacing": 120,
+              "glowColor": "transparent",
+              "glowColorMode": "fixed",
+              "glowWidth": 0,
+              "glowOpacity": 0
+            },
+            "position": {
+              "preset": "top-center",
+              "alignment": "center",
+              "offsetX": -34,
+              "offsetY": 4
+            },
+            "background": {
+              "color": "rgba(178, 47, 78, 0.95)",
+              "borderRadius": 18,
+              "paddingX": 38,
+              "paddingY": 18
+            },
+            "maxCharsPerLine": 12,
+            "singleLine": true,
+            "width": 1920,
+            "height": 1080,
+            "glowSeedHint": "normal-landscape-readable-pop-v001/speaker-identification/speaker-nameplate-v001"
+          },
+          "overlayPath": "evals/clip_composition/outputs/presentation/initial-preset-registry-candidate-20260720-v001/overlays/scene-09-speaker-speaker.png",
+          "overlaySha256": "a97f30e3b4cd21ae8b217e711261417de99054b6daa9bed66f38f8d46994b33f",
+          "alphaInspection": {
+            "alphaMax": 1,
+            "bounds": {
+              "x": 144,
+              "y": 65,
+              "width": 402,
+              "height": 123,
+              "right": 546,
+              "bottom": 188
+            }
+          }
+        }
+      ],
+      "stateId": "speaker-nameplate-v001",
+      "endResponsibility": "preset-policy",
+      "endPolicyId": "resolved-target-final-atom-v001",
+      "representativeFrame": {
+        "sceneId": "scene-09-speaker",
+        "midpointMs": 22835,
+        "framePath": "evals/clip_composition/outputs/presentation/initial-preset-registry-candidate-20260720-v001/frames/scene-09-speaker.png",
+        "frameSha256": "41af271a2341e59bba1d9ec5758422a7549cb40a0f6cfe68dfa30d7f279476a2",
+        "changedPixelsAgainstSourceOnly": 1414260,
+        "overlayVisible": true
+      }
+    },
+    {
+      "sceneId": "scene-10-reference",
+      "kind": "reference-supplement",
+      "humanLabel": "補足素材を置く小窓の配置",
+      "startMs": 24200,
+      "endMs": 26875,
+      "previewOnlySyntheticMaterial": true,
+      "layers": [
+        {
+          "layerId": "reference-card",
+          "text": "PREVIEW専用\n話題の投稿イメージ",
+          "startMs": 24420,
+          "endMs": 26575,
+          "renderProps": {
+            "text": "PREVIEW専用\n話題の投稿イメージ",
+            "style": {
+              "fontFamily": "LINESeedJP_A_OTF_Eb.otf",
+              "fontSize": 64,
+              "fontColor": "#F7FAFF",
+              "borderColor": "#F7FAFF",
+              "borderWidth": 0,
+              "lineSpacing": 126,
+              "glowColor": "transparent",
+              "glowColorMode": "fixed",
+              "glowWidth": 0,
+              "glowOpacity": 0
+            },
+            "position": {
+              "preset": "top-right",
+              "alignment": "left",
+              "offsetX": -5,
+              "offsetY": 6
+            },
+            "background": {
+              "color": "rgba(21, 36, 60, 0.94)",
+              "borderRadius": 22,
+              "paddingX": 42,
+              "paddingY": 30
+            },
+            "maxCharsPerLine": 24,
+            "singleLine": false,
+            "width": 1920,
+            "height": 1080,
+            "glowSeedHint": "normal-landscape-readable-pop-v001/reference-supplement/reference-card-v001"
+          },
+          "overlayPath": "evals/clip_composition/outputs/presentation/initial-preset-registry-candidate-20260720-v001/overlays/scene-10-reference-reference-card.png",
+          "overlaySha256": "4cf88f1287c19ca40b3f03afec473d28a40df5b1a50f88f1cf8e9b483c65be9b",
+          "alphaInspection": {
+            "alphaMax": 1,
+            "bounds": {
+              "x": 1165,
+              "y": 87,
+              "width": 666,
+              "height": 228,
+              "right": 1831,
+              "bottom": 315
+            }
+          }
+        }
+      ],
+      "stateId": "reference-card-v001",
+      "endResponsibility": "preset-policy",
+      "endPolicyId": "resolved-target-final-atom-v001",
+      "representativeFrame": {
+        "sceneId": "scene-10-reference",
+        "midpointMs": 25498,
+        "framePath": "evals/clip_composition/outputs/presentation/initial-preset-registry-candidate-20260720-v001/frames/scene-10-reference.png",
+        "frameSha256": "156a5bbcc010f1f7e4563f2cbec8a05a56a9dcd9df7530d2cd95e5ea5badabe5",
+        "changedPixelsAgainstSourceOnly": 1450730,
+        "overlayVisible": true
+      }
+    }
+  ],
+  "media": {
+    "publicPath": "media/normal-landscape-readable-pop-preview-v001.mp4",
+    "filePath": "evals/clip_composition/outputs/presentation/initial-preset-registry-candidate-20260720-v001/media/normal-landscape-readable-pop-preview-v001.mp4",
+    "durationMs": 26875,
+    "width": 1920,
+    "height": 1080,
+    "videoCodec": "h264",
+    "audioCodec": "aac",
+    "hasVideo": true,
+    "hasAudio": true,
+    "sha256": "c293fae11e961c9fa6cbbf0bf3f9a6e8a06f654eef40bdc17de3cf27a5387b37"
+  },
+  "preflight": {
+    "status": "passed",
+    "externalDownloadUsed": false,
+    "allTenKindsRendered": true,
+    "allRepresentativeFramesDifferFromSource": true,
+    "allOverlaysInsideSafeArea": true,
+    "managedFontsDifferFromFallback": true,
+    "representativeStillByteDeterministic": true,
+    "existingRendererAcceptanceClaimed": false
+  },
+  "humanWork": {
+    "requiredJudgements": 5,
+    "sessions": 1,
+    "timeMeasurement": false,
+    "exactTimeEntry": false,
+    "freeTextRequired": false
+  }
+}

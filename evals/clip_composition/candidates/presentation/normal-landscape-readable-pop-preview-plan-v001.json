@@ -1,0 +1,184 @@
+{
+  "schemaVersion": "presentation-preset-preview-plan-v001",
+  "previewId": "normal-landscape-readable-pop-preview-20260720-v001",
+  "format": "normal-landscape",
+  "presetId": "normal-landscape-readable-pop-v001",
+  "sourceSelection": {
+    "type": "fixed-convenience-sample",
+    "representative": false,
+    "selectionNote": "既存の最小演出十分性診断で使用済みの、承認済み配信者による人間確認済みsource-only区間を再利用する。意味採点には使わない。",
+    "segments": [
+      {
+        "sourceId": "YE-faluP7zY",
+        "path": "evals/clip_composition/research/downloads/nOEWCNc77MI/sources/YE-faluP7zY/YE-faluP7zY.mp4",
+        "startMs": 3475241,
+        "endMs": 3485035
+      },
+      {
+        "sourceId": "o8rZAhARXAc",
+        "path": "evals/clip_composition/research/downloads/9dtwF5Exu5w/sources/o8rZAhARXAc/o8rZAhARXAc.mp4",
+        "startMs": 3741344,
+        "endMs": 3758425
+      }
+    ]
+  },
+  "scenes": [
+    {
+      "sceneId": "scene-01-caption",
+      "kind": "speech-caption",
+      "humanLabel": "通常発話：1行から2行への小気味よい切替",
+      "startMs": 0,
+      "endMs": 3000,
+      "layers": [
+        {
+          "layerId": "caption-short",
+          "text": "やばい、マリリン！",
+          "startMs": 220,
+          "endMs": 1420
+        },
+        {
+          "layerId": "caption-two-lines",
+          "text": "マジでさ、食材なくなったけど\n全ての食材を船長が握ってるからね",
+          "startMs": 1420,
+          "endMs": 2700
+        }
+      ]
+    },
+    {
+      "sceneId": "scene-02-important",
+      "kind": "emphasis-important-statement",
+      "humanLabel": "重要な発言の強調",
+      "startMs": 3000,
+      "endMs": 5650,
+      "layers": [
+        {
+          "layerId": "important",
+          "text": "全ての食材を\n船長が握ってるからね",
+          "startMs": 3220,
+          "endMs": 5350
+        }
+      ]
+    },
+    {
+      "sceneId": "scene-03-mistake",
+      "kind": "emphasis-mistake-realization",
+      "humanLabel": "間違いに気づいた瞬間",
+      "startMs": 5650,
+      "endMs": 8300,
+      "layers": [
+        {
+          "layerId": "mistake",
+          "text": "あ、違うかも",
+          "startMs": 5870,
+          "endMs": 8000
+        }
+      ]
+    },
+    {
+      "sceneId": "scene-04-discovery",
+      "kind": "emphasis-discovery",
+      "humanLabel": "何かを発見した瞬間",
+      "startMs": 8300,
+      "endMs": 10950,
+      "layers": [
+        {
+          "layerId": "discovery",
+          "text": "それだ！",
+          "startMs": 8520,
+          "endMs": 10650
+        }
+      ]
+    },
+    {
+      "sceneId": "scene-05-emotion",
+      "kind": "emphasis-strong-emotion",
+      "humanLabel": "強い感情の強調",
+      "startMs": 10950,
+      "endMs": 13600,
+      "layers": [
+        {
+          "layerId": "emotion",
+          "text": "教えてくれないんだ！",
+          "startMs": 11170,
+          "endMs": 13300
+        }
+      ]
+    },
+    {
+      "sceneId": "scene-06-comment",
+      "kind": "information-comment",
+      "humanLabel": "リスナーコメントの専用表示",
+      "startMs": 13600,
+      "endMs": 16250,
+      "layers": [
+        {
+          "layerId": "comment",
+          "text": "リスナーコメント\n「こよりがわざと弱いのを教えた？」",
+          "startMs": 13820,
+          "endMs": 15950
+        }
+      ]
+    },
+    {
+      "sceneId": "scene-07-narration",
+      "kind": "information-narration",
+      "humanLabel": "ナレーション・説明の専用表示",
+      "startMs": 16250,
+      "endMs": 18900,
+      "layers": [
+        {
+          "layerId": "narration",
+          "text": "ここから、相談をやめた理由へ",
+          "startMs": 16470,
+          "endMs": 18600
+        }
+      ]
+    },
+    {
+      "sceneId": "scene-08-lyrics",
+      "kind": "information-lyrics",
+      "humanLabel": "歌詞の専用表示",
+      "startMs": 18900,
+      "endMs": 21550,
+      "layers": [
+        {
+          "layerId": "lyrics",
+          "text": "♪ やばい、マリリン",
+          "startMs": 19120,
+          "endMs": 21250
+        }
+      ]
+    },
+    {
+      "sceneId": "scene-09-speaker",
+      "kind": "speaker-identification",
+      "humanLabel": "複数人場面の話者名札",
+      "startMs": 21550,
+      "endMs": 24200,
+      "layers": [
+        {
+          "layerId": "speaker",
+          "text": "宝鐘マリン",
+          "startMs": 21770,
+          "endMs": 23900
+        }
+      ]
+    },
+    {
+      "sceneId": "scene-10-reference",
+      "kind": "reference-supplement",
+      "humanLabel": "補足素材を置く小窓の配置",
+      "startMs": 24200,
+      "endMs": 26875,
+      "previewOnlySyntheticMaterial": true,
+      "layers": [
+        {
+          "layerId": "reference-card",
+          "text": "PREVIEW専用\n話題の投稿イメージ",
+          "startMs": 24420,
+          "endMs": 26575
+        }
+      ]
+    }
+  ]
+}
