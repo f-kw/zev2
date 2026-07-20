@@ -10,9 +10,12 @@ import {
   EXPECTED_KINDS,
   OUTPUT_ROOT,
   PREVIEW_PLAN_PATH,
+  applyReviewAction,
   buildEphemeralTrust,
   buildReviewHtml,
   checkCandidateIndexCompatibility,
+  createInitialReviewState,
+  deriveReviewDecisionState,
   deriveEmptyMaterialValidationIndex,
   derivePresetValidationIndex,
   validateCandidateRegistry,
@@ -126,7 +129,47 @@ test('review UI keeps five decisions editable and excludes Q5 from bulk approval
   assert.equal((html.match(/data-question="q[1-5]"/g) ?? []).length, 5);
   assert.match(html, /Q1〜Q4をすべて承認/);
   assert.match(html, /Q5の最終承認だけは別/);
+  assert.doesNotMatch(html, /data-question-id="q1" data-answer="approved"/);
+  assert.match(html, /q5Approve\.disabled=!decision\.canApproveFinal/);
+  assert.match(html, /showResult'\)\.disabled=!decision\.canShowResult/);
   assert.doesNotMatch(html, /localStorage|fetch\(|elapsed/);
+});
+
+test('review state prevents incomplete or contradictory final approval', () => {
+  let state = createInitialReviewState();
+  assert.deepEqual(deriveReviewDecisionState(state), {
+    q1ToQ4Approved: false,
+    allAnswered: false,
+    canApproveFinal: false,
+    canShowResult: false,
+  });
+
+  state = applyReviewAction(state, { type: 'approve-q1-q4' });
+  assert.equal(state.answers.q1, 'approved');
+  assert.equal(Object.values(state.criteria).every(Boolean), true);
+  assert.equal(state.answers.q5, null);
+  assert.equal(deriveReviewDecisionState(state).canApproveFinal, true);
+  assert.equal(deriveReviewDecisionState(state).canShowResult, false);
+
+  state = applyReviewAction(state, { type: 'set-answer', questionId: 'q5', answer: 'approved' });
+  assert.equal(deriveReviewDecisionState(state).canShowResult, true);
+
+  state = applyReviewAction(state, { type: 'set-answer', questionId: 'q3', answer: 'needs_revision' });
+  assert.equal(state.answers.q5, null);
+  assert.equal(deriveReviewDecisionState(state).canApproveFinal, false);
+  assert.equal(deriveReviewDecisionState(state).canShowResult, false);
+
+  state = applyReviewAction(state, { type: 'set-answer', questionId: 'q5', answer: 'approved' });
+  assert.equal(state.answers.q5, null);
+  state = applyReviewAction(state, { type: 'set-answer', questionId: 'q5', answer: 'needs_revision' });
+  assert.equal(deriveReviewDecisionState(state).canShowResult, true);
+
+  state = createInitialReviewState();
+  state = applyReviewAction(state, { type: 'set-criterion', criterion: 'readable', checked: true });
+  assert.equal(state.answers.q1, 'needs_revision');
+  state = applyReviewAction(state, { type: 'approve-q1' });
+  assert.equal(state.answers.q1, 'approved');
+  assert.equal(Object.values(state.criteria).every(Boolean), true);
 });
 
 test('generated candidate artifacts preserve the source registry and empty material index', async () => {
