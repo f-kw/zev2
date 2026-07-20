@@ -1,0 +1,143 @@
+{
+  "kind": "normal-video-minimum-presentation-sufficiency-review-manifest",
+  "version": "v001",
+  "generatedAt": "2026-07-20T07:24:30.123Z",
+  "modelRun": null,
+  "llmUsed": false,
+  "style": {
+    "id": "default-conservative-v001",
+    "width": 1920,
+    "height": 1080,
+    "fontFamily": "LINESeedJP_A_OTF_Bd.otf",
+    "fontSize": 120,
+    "fontColor": "#ffffff",
+    "borderColor": "#000000",
+    "borderWidth": 3,
+    "lineSpacing": 50,
+    "glowColor": "#000000",
+    "glowColorMode": "fixed",
+    "glowWidth": 20,
+    "glowOpacity": 100,
+    "maxLineWeight": 16,
+    "maxLines": 2,
+    "positionPreset": "bottom-center"
+  },
+  "humanWork": {
+    "requiredJudgements": 2,
+    "sessions": 1,
+    "answerContract": [
+      "A",
+      "same",
+      "B"
+    ],
+    "exactTimeEntry": false,
+    "freeTextRequired": false,
+    "timeMeasurement": false
+  },
+  "items": [
+    {
+      "caseId": "minimum-sufficiency-01",
+      "fixtureId": "nOEWCNc77MI_multiblock_material_v001",
+      "teacherVideoId": "nOEWCNc77MI",
+      "sourceVideoId": "YE-faluP7zY",
+      "sourceSttId": "nOEWCNc77MI_YE-faluP7zY_local30_v001",
+      "blockIndex": 10,
+      "selectionBasis": "人間確認済みホロライブ教師ごとの、内部materialJumpが全て0msである最長連続ブロック",
+      "sourceRangeMs": [
+        3475241,
+        3485035
+      ],
+      "teacherRangeMs": [
+        183024,
+        193011
+      ],
+      "captionCueCount": 4,
+      "captionCheckStatus": "passed_with_declared_limit",
+      "captionPlanPath": "caption-plans/minimum-sufficiency-01-caption-contract.json",
+      "captionReportPath": "caption-plans/minimum-sufficiency-01-caption-check-report.json",
+      "generationInputExcludesTeacherPresentation": true,
+      "media": {
+        "teacher": {
+          "publicPath": "media/minimum-sufficiency-01-teacher.mp4",
+          "durationMs": 10043,
+          "width": 1920,
+          "height": 1080,
+          "hasVideo": true,
+          "hasAudio": true,
+          "sha256": "5a8d1d5eb1ba5babc0d43f4104b4fc12a6bc57adae16fd0918379231ee317509"
+        },
+        "conservative": {
+          "publicPath": "media/minimum-sufficiency-01-conservative.mp4",
+          "durationMs": 9794,
+          "width": 1920,
+          "height": 1080,
+          "hasVideo": true,
+          "hasAudio": true,
+          "sha256": "974e1bf59662846fdfaa06ee111159920f02d9b4f9baba8c61c9bcde07563332"
+        }
+      },
+      "assignment": {
+        "A": {
+          "kind": "teacher",
+          "publicPath": "media/minimum-sufficiency-01-teacher.mp4"
+        },
+        "B": {
+          "kind": "conservative",
+          "publicPath": "media/minimum-sufficiency-01-conservative.mp4"
+        }
+      }
+    },
+    {
+      "caseId": "minimum-sufficiency-02",
+      "fixtureId": "9dtwF5Exu5w_multiblock_material_v001",
+      "teacherVideoId": "9dtwF5Exu5w",
+      "sourceVideoId": "o8rZAhARXAc",
+      "sourceSttId": "9dtwF5Exu5w_o8rZAhARXAc_local30_v001",
+      "blockIndex": 10,
+      "selectionBasis": "人間確認済みホロライブ教師ごとの、内部materialJumpが全て0msである最長連続ブロック",
+      "sourceRangeMs": [
+        3741344,
+        3758425
+      ],
+      "teacherRangeMs": [
+        162489,
+        179660
+      ],
+      "captionCueCount": 9,
+      "captionCheckStatus": "passed_with_declared_limit",
+      "captionPlanPath": "caption-plans/minimum-sufficiency-02-caption-contract.json",
+      "captionReportPath": "caption-plans/minimum-sufficiency-02-caption-check-report.json",
+      "generationInputExcludesTeacherPresentation": true,
+      "media": {
+        "teacher": {
+          "publicPath": "media/minimum-sufficiency-02-teacher.mp4",
+          "durationMs": 17184,
+          "width": 1920,
+          "height": 1080,
+          "hasVideo": true,
+          "hasAudio": true,
+          "sha256": "9abf5e6a3648b3d09614cbf04121615678fa8ab2736c4c8ff66ae9e2c3540b2e"
+        },
+        "conservative": {
+          "publicPath": "media/minimum-sufficiency-02-conservative.mp4",
+          "durationMs": 17081,
+          "width": 1920,
+          "height": 1080,
+          "hasVideo": true,
+          "hasAudio": true,
+          "sha256": "b1461b4e865ecfc4179cef509e29ef4256719d619f323b78a0e7c3ec35595abc"
+        }
+      },
+      "assignment": {
+        "A": {
+          "kind": "teacher",
+          "publicPath": "media/minimum-sufficiency-02-teacher.mp4"
+        },
+        "B": {
+          "kind": "conservative",
+          "publicPath": "media/minimum-sufficiency-02-conservative.mp4"
+        }
+      }
+    }
+  ]
+}

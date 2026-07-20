@@ -1,0 +1,31 @@
+{
+  "checkerVersion": "presentation-caption-checker-v001",
+  "inputSha256": "a72b1c8d915e2d46c2a7b2245e3f3d4c81318173b98cc42cfa0c54cf1bab20b4",
+  "overallStatus": "passed_with_declared_limit",
+  "contract": {
+    "status": "passed",
+    "violations": [],
+    "observations": []
+  },
+  "checks": {
+    "G1": {
+      "status": "passed",
+      "violations": [],
+      "unverified": []
+    },
+    "G2": {
+      "status": "passed_with_declared_limit",
+      "violations": [],
+      "unverified": [
+        "linguistic_word_boundary",
+        "semantic_chunk_readability",
+        "on_screen_readability"
+      ]
+    },
+    "G3": {
+      "status": "passed",
+      "violations": [],
+      "unverified": []
+    }
+  }
+}
