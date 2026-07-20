@@ -1,0 +1,35 @@
+{
+  "kind": "normal-video-minimum-presentation-sufficiency-human-result",
+  "version": "v001",
+  "reviewer": "kawafmm",
+  "reviewedAt": "2026-07-20",
+  "timeMeasurement": false,
+  "assignmentRevealedAfterReview": true,
+  "items": [
+    {
+      "caseId": "minimum-sufficiency-01",
+      "rawAnswer": "A",
+      "decodedWinner": "teacher",
+      "reasons": ["caption_readability", "emphasis_fun", "reference_clarity"],
+      "note": "差がありすぎる。２行のテロップが重なってるよ。テロップの美しさ、バリエーション"
+    },
+    {
+      "caseId": "minimum-sufficiency-02",
+      "rawAnswer": "A",
+      "decodedWinner": "teacher",
+      "reasons": ["emphasis_fun", "reference_clarity"],
+      "note": "２行のテロップが重なっている。Aの方が演出の質が高い。ただのテロップじゃなくXのポスト欄のようなものを表示している"
+    }
+  ],
+  "preRegisteredOutcome": "teacher_wins_both",
+  "preRegisteredAction": "保守版の見劣りを2件で観測として保存し、負け方を次の演出設計の種にする。原因をG4〜G7欠如へ自動帰属しない",
+  "blockingFinding": {
+    "type": "baseline_two_line_overlap",
+    "fontSizePx": 120,
+    "lineSpacingPercent": 50,
+    "resolvedLineAdvancePx": 60,
+    "meaning": "保守版の基礎表示が不成立のため、整った基本テロップの十分性は未測定"
+  },
+  "sufficiencyConclusion": "not_determined",
+  "g4ToG7PriorityConclusion": "not_determined"
+}
