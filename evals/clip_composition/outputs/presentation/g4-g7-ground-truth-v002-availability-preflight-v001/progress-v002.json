@@ -1,7 +1,7 @@
 {
   "schemaVersion": "presentation-g4-g7-ground-truth-v002-progress-v001",
   "updatedAt": "2026-07-20",
-  "status": "awaiting_human_g4_fire_point_mapping",
+  "status": "held_after_stage2_human_workload_rejection",
   "stage1": {
     "status": "human_confirmed",
     "result": "evals/clip_composition/outputs/presentation/g4-g7-ground-truth-v002-availability-preflight-v001/human-review-g4-session-01/result.json",
@@ -9,15 +9,19 @@
     "g4NotApplicable": 1
   },
   "stage2": {
-    "status": "awaiting_human_review",
+    "status": "cancelled_do_not_use",
     "manifest": "evals/clip_composition/outputs/presentation/g4-g7-ground-truth-v002-availability-preflight-v001/human-review-g4-fire-point-session-01/review-manifest.json",
     "independentJudgments": 4,
     "pointSelectionsPerJudgment": 2,
-    "timeMeasurement": false
+    "timeMeasurement": false,
+    "reason": "教師と元配信から各1点を人間が探す方式は、4件でも最低8回の探索操作になり負荷過大。人間は機械候補の認定だけを行う方針へ変更した。",
+    "artifactPolicy": "失敗UIとして保持するが、人間確認には使用しない。"
   },
-  "blockedUntilHumanResult": [
+  "blockedUntilPriorityDecision": [
+    "次期G4〜G7正解セット収集の再開",
     "G4正解凍結",
     "意味検出器実装",
     "LLM実走"
-  ]
+  ],
+  "currentPriority": "normal-video-minimum-presentation-sufficiency-diagnosis-design-v001"
 }

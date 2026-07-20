@@ -1,7 +1,10 @@
 {
   "schemaVersion": "presentation-g4-ground-truth-v002-fire-point-human-review-v001",
   "createdAt": "2026-07-20",
-  "status": "awaiting_human_fire_point_mapping",
+  "status": "cancelled_do_not_use",
+  "cancelledAt": "2026-07-20",
+  "cancellationReason": "人間が教師側と元配信側の2点を作る方式は、4件でも最低8回の探索操作になり負荷過大。人間は機械候補の認定だけを行う方針へ変更した。",
+  "artifactPolicy": "失敗UIとして保持するが、人間確認には使用しない。",
   "sourceStage1Result": "evals/clip_composition/outputs/presentation/g4-g7-ground-truth-v002-availability-preflight-v001/human-review-g4-session-01/result.json",
   "target": "第1段で強調ありと認定された4件だけ",
   "question": "教師側で追加演出が始まる瞬間と、元配信側の同じ意味・動作の瞬間を選び、2点が対応するかを判定する",

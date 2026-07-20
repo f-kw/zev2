@@ -1,0 +1,45 @@
+{
+  "schemaVersion": "presentation-g4-g7-input-readiness-diagnostics-v001",
+  "recordedAt": "2026-07-20",
+  "decisionBy": "kawafmm",
+  "experimentDisposition": {
+    "status": "closed_without_semantic_smoke_run",
+    "reason": "意味G4の採点可能例が0件となったため、事前契約どおり検出器実装とLLM実走を強行しなかった。",
+    "frozenGroundTruthSearchAgain": false,
+    "postReviewRangeExpansion": false,
+    "upstreamRegeneration": false
+  },
+  "observations": [
+    {
+      "id": "coverage-GT-01-v001",
+      "kind": "upstream_candidate_coverage",
+      "groundTruthId": "GT-01",
+      "sampleSize": 1,
+      "humanConfirmedTeacherSourceCorrespondence": true,
+      "insideFrozenComposedCandidateRange": "not_available",
+      "insideFrozenThemeEvidenceRanges": false,
+      "interpretation": "失敗正解ではなく、現行上流候補系統が人間認定済み演出場面を覆わなかった診断例。将来のテーマ生成・候補選択・接続改版で参照するが、N=1で採否を決めない。"
+    },
+    {
+      "id": "source-mapping-known-errors-v001",
+      "kind": "teacher_to_source_mapping_quality",
+      "proposedMappingCount": 4,
+      "humanConfirmedCount": 2,
+      "humanRejectedDifferentSceneCount": 2,
+      "rejectedGroundTruthIds": [
+        "GT-02",
+        "GT-05"
+      ],
+      "methodNote": "4候補はDP単語照合を主に作成し、GT-04だけは固定55秒スライス内の字幕照合を用いた。",
+      "interpretation": "機械対応候補4件中2件が別場面だった既知実績。以後は機械が候補を作り、人間は媒体付き三択で認定する。人間へ正しい位置の探索を求めない。"
+    },
+    {
+      "id": "speaker-structure-GT-05-v001",
+      "kind": "speaker_binding_quality",
+      "groundTruthId": "GT-05",
+      "status": "machine_binding_rejected",
+      "humanFinding": "候補内の「あなた」はころね側。",
+      "interpretation": "人物割当を文字列やDP対応だけで確定しない。話者構造化候補は媒体付き人間認定を通し、補足だけで後付け正解化しない。"
+    }
+  ]
+}
