@@ -2,7 +2,7 @@
 
 日付: 2026-07-20
 
-状態: **読み取り棚卸し完了。人間確認済みの正確な教師→元配信対応が5件とも未凍結のため停止。入力生成・実装・動画解析・LLM実走なし。**
+状態: **読み取り棚卸し完了。人間確認済みの正確な教師→元配信対応が5件とも未凍結のため停止。次段の整備設計v001を提示済みだが、入力生成・媒体取得・STT・確認媒体・実装・動画解析・LLM実走は未承認。**
 
 ## 1. 目的と停止条件
 
@@ -62,3 +62,9 @@
 - `outputs/multiblock-material-fixture-freeze-preview-9dtwF5Exu5w_multiblock_material_v001-20260712-human-confirmed-freeze-v001.json`
 - `outputs/multiblock-material-fixture-freeze-preview-nOEWCNc77MI_multiblock_material_v001-20260711-human-confirmed-freeze-v001.json`
 - `reports/audio-compare-chunks-UpRyakf5j80_audio_confirmed_20260705_v002.md`
+
+## 7. 次段の設計
+
+`normal-video-presentation-g4-g7-input-readiness-preparation-design-20260720-v001.md`で、検出器へ見せる範囲、GTごとの整備内容、GT-03保留の4件先行案、5件フル整備案を分離した。
+
+採用済み素材ブロックは採点側の正解記録であり、検出器の入力範囲には使わない。検出器へ渡せるのは、正解を見ずに固定した元配信由来の上流候補入力だけである。正解位置がその外なら、後付けで範囲を広げず採点不能として記録する。
