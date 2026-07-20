@@ -1,0 +1,158 @@
+{
+  "schemaVersion": "presentation-g4-g7-source-mapping-candidates-v001",
+  "status": "proposed-awaiting-human-confirmation",
+  "candidates": [
+    {
+      "groundTruthId": "GT-01",
+      "grammar": "G4",
+      "teacherVideoId": "nE_bNeBNp4E",
+      "sourceVideoId": "qdczJpv8RCc",
+      "teacherEvidence": {
+        "shape": "point",
+        "anchorMs": 750000
+      },
+      "proposedSourceRange": {
+        "startMs": 4776126,
+        "endMs": 4779668
+      },
+      "method": "DP単語照合で、教師側の直前一致語「き」と直後一致語「何」に対応する元配信側の境界で挟んだ。点を比例換算していない。",
+      "evidence": {
+        "before": {
+          "teacher": {
+            "text": "き",
+            "startMs": 747273,
+            "endMs": 747293
+          },
+          "source": {
+            "text": "き",
+            "startMs": 4775525,
+            "endMs": 4776126
+          }
+        },
+        "after": {
+          "teacher": {
+            "text": "何",
+            "startMs": 751410,
+            "endMs": 752853
+          },
+          "source": {
+            "text": "何",
+            "startMs": 4779668,
+            "endMs": 4781209
+          }
+        }
+      },
+      "status": "proposed-awaiting-human"
+    },
+    {
+      "groundTruthId": "GT-02",
+      "grammar": "G4-suppression",
+      "teacherVideoId": "9dtwF5Exu5w",
+      "sourceVideoId": "o8rZAhARXAc",
+      "teacherEvidence": {
+        "shape": "point",
+        "anchorMs": 949000
+      },
+      "proposedSourceRange": {
+        "startMs": 10957847,
+        "endMs": 10980390
+      },
+      "method": "教師側の長い無発話表示を、前後で一致する「ろ」と「犠牲フライ」の元配信境界で挟んだ。却下block 30は採用せず、点の比例換算もしていない。",
+      "evidence": {
+        "before": {
+          "teacher": {
+            "text": "ろ",
+            "startMs": 945655,
+            "endMs": 955739
+          },
+          "source": {
+            "text": "ろ",
+            "startMs": 10957587,
+            "endMs": 10957847
+          }
+        },
+        "after": {
+          "teacher": {
+            "text": "犠牲フライ",
+            "startMs": 940013,
+            "endMs": 940833,
+            "note": "教師編集で順序が前に移っているため映像確認必須"
+          },
+          "source": {
+            "text": "犠牲フライ",
+            "startMs": 10980390,
+            "endMs": 10981031
+          }
+        }
+      },
+      "status": "proposed-awaiting-human",
+      "caution": "教師編集で発話順序が入れ替わって見えるため、4件中もっとも不確実。映像で同じ顔アップ場面かを確認する。"
+    },
+    {
+      "groundTruthId": "GT-04",
+      "grammar": "G5",
+      "teacherVideoId": "UpRyakf5j80",
+      "sourceVideoId": "kNX-wQTvsws",
+      "teacherEvidence": {
+        "shape": "typed-interval-with-contrast",
+        "listenerComment": {
+          "startMs": 0,
+          "endMs": 12000
+        },
+        "streamerResponse": {
+          "startMs": 16000,
+          "endMs": 40000
+        }
+      },
+      "proposedSourceRanges": {
+        "listenerComment": {
+          "startMs": 11364140,
+          "endMs": 11381180
+        },
+        "streamerResponse": {
+          "startMs": 11381340,
+          "endMs": 11404850
+        }
+      },
+      "method": "固定済み55秒スライス内の字幕本文を教師側の発話本文と照合し、コメント読み上げと本人回答の字幕境界を採用した。時間の比例換算はしていない。",
+      "status": "proposed-awaiting-human"
+    },
+    {
+      "groundTruthId": "GT-05",
+      "grammar": "G6",
+      "teacherVideoId": "nOEWCNc77MI",
+      "sourceVideoId": "YE-faluP7zY",
+      "teacherEvidence": {
+        "shape": "interval",
+        "startMs": 110000,
+        "endMs": 114000
+      },
+      "proposedSourceRange": {
+        "startMs": 3185593,
+        "endMs": 3190315
+      },
+      "method": "DP単語照合で教師区間の開始・終了をまたぐ単語を含む元配信側境界へ対応させた。区間端を比例換算していない。",
+      "proposedSpeakerBindings": [
+        {
+          "person": "マリン",
+          "startMs": 3185593,
+          "endMs": 3185773,
+          "text": "しっかりしてくれよ（末尾）"
+        },
+        {
+          "person": "ころね",
+          "startMs": 3185773,
+          "endMs": 3187193,
+          "text": "ごめんなさい"
+        },
+        {
+          "person": "マリン",
+          "startMs": 3187193,
+          "endMs": 3190315,
+          "text": "あなた、お前がちゃんとしないと"
+        }
+      ],
+      "status": "proposed-awaiting-human"
+    }
+  ]
+}

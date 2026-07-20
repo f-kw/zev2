@@ -1,0 +1,1814 @@
+{
+  "schemaVersion": "presentation-g4-g7-input-visibility-v001",
+  "createdAt": "2026-07-20",
+  "status": "provisional-until-human-source-mapping-confirmation",
+  "groundTruthSource": "evals/clip_composition/outputs/presentation/g4-g7-ground-truth-v001/ground-truth-v001.json",
+  "upstreamGenerationPolicy": {
+    "newlyGeneratedUpstreamInputs": false,
+    "frozenBeforeGroundTruth": true,
+    "unitDecisionTiming": "The dual-unit visibility rule was fixed after some GT source positions were partially known.",
+    "note": "入力を追加・拡張せず、凍結前から保存済みの同一候補を合成後範囲（主）とテーマ根拠範囲（従）の二粒度で検査した。"
+  },
+  "results": [
+    {
+      "groundTruthId": "GT-01",
+      "targetSourceRange": {
+        "startMs": 4776126,
+        "endMs": 4779668
+      },
+      "mainUnit": "theme-range-only-because-no-frozen-connection-output",
+      "visible": false,
+      "visibleCandidateIds": [],
+      "candidates": [
+        {
+          "candidateId": 35,
+          "rank": 1,
+          "title": "友情崩壊？まさかの裏切りにブチギレるマリン",
+          "ranges": [
+            {
+              "startMs": 2975023,
+              "endMs": 3014776
+            }
+          ]
+        },
+        {
+          "candidateId": 47,
+          "rank": 2,
+          "title": "戌神ころねファンのリスナーに「浮気」と詰め寄るマリン",
+          "ranges": [
+            {
+              "startMs": 4123746,
+              "endMs": 4198226
+            }
+          ]
+        },
+        {
+          "candidateId": 59,
+          "rank": 3,
+          "title": "マリンのADHD的？な片付け事情と無意識の脱衣",
+          "ranges": [
+            {
+              "startMs": 5941162,
+              "endMs": 5992736
+            }
+          ]
+        },
+        {
+          "candidateId": 10,
+          "rank": 4,
+          "title": "「なんで」連呼からのロシアンルーレット生存と狂気の勝利宣言",
+          "ranges": [
+            {
+              "startMs": 750246,
+              "endMs": 778234
+            }
+          ]
+        },
+        {
+          "candidateId": 54,
+          "rank": 5,
+          "title": "白銀ノエルのASMRマイクを仮パク中のマリン船長",
+          "ranges": [
+            {
+              "startMs": 5310034,
+              "endMs": 5339442
+            }
+          ]
+        }
+      ],
+      "provisionalScoringStatus": "unscorable_input_visibility"
+    },
+    {
+      "groundTruthId": "GT-02",
+      "targetSourceRange": {
+        "startMs": 10957847,
+        "endMs": 10980390
+      },
+      "mainUnit": "connection-v001-to-llm-v012-composed-range",
+      "main": {
+        "fullyVisible": false,
+        "visibleCandidateRuns": []
+      },
+      "secondary": {
+        "fullyVisible": false,
+        "visibleCandidateIds": []
+      },
+      "candidates": [
+        {
+          "candidateId": 5,
+          "themeRanges": [
+            {
+              "startMs": 1113054,
+              "endMs": 1317150
+            }
+          ],
+          "themeSourcePath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-005/prompt-input.json",
+          "composedRuns": [
+            {
+              "run": 1,
+              "generationSystem": "llm-v012@gemini-web-flash",
+              "ranges": [
+                {
+                  "startMs": 1113054,
+                  "endMs": 1317150
+                }
+              ],
+              "sourcePath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-005/run-01-gemini-output.json"
+            },
+            {
+              "run": 2,
+              "generationSystem": "llm-v012@gemini-web-flash",
+              "ranges": [
+                {
+                  "startMs": 1113054,
+                  "endMs": 1317150
+                }
+              ],
+              "sourcePath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-005/run-02-gemini-output.json"
+            },
+            {
+              "run": 3,
+              "generationSystem": "llm-v012@gemini-web-flash",
+              "ranges": [
+                {
+                  "startMs": 1113054,
+                  "endMs": 1317150
+                }
+              ],
+              "sourcePath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-005/run-03-gemini-output.json"
+            }
+          ],
+          "themeVisibility": {
+            "full": false,
+            "overlap": false
+          },
+          "composedVisibilityByRun": [
+            {
+              "run": 1,
+              "full": false,
+              "overlap": false
+            },
+            {
+              "run": 2,
+              "full": false,
+              "overlap": false
+            },
+            {
+              "run": 3,
+              "full": false,
+              "overlap": false
+            }
+          ]
+        },
+        {
+          "candidateId": 9,
+          "themeRanges": [
+            {
+              "startMs": 2010874,
+              "endMs": 2155086
+            }
+          ],
+          "themeSourcePath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-009/prompt-input.json",
+          "composedRuns": [
+            {
+              "run": 1,
+              "generationSystem": "llm-v012@gemini-web-flash",
+              "ranges": [
+                {
+                  "startMs": 2010874,
+                  "endMs": 2155086
+                }
+              ],
+              "sourcePath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-009/run-01-gemini-output.json"
+            },
+            {
+              "run": 2,
+              "generationSystem": "llm-v012@gemini-web-flash",
+              "ranges": [
+                {
+                  "startMs": 2010874,
+                  "endMs": 2155086
+                }
+              ],
+              "sourcePath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-009/run-02-gemini-output.json"
+            },
+            {
+              "run": 3,
+              "generationSystem": "llm-v012@gemini-web-flash",
+              "ranges": [
+                {
+                  "startMs": 2010874,
+                  "endMs": 2155086
+                }
+              ],
+              "sourcePath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-009/run-03-gemini-output.json"
+            }
+          ],
+          "themeVisibility": {
+            "full": false,
+            "overlap": false
+          },
+          "composedVisibilityByRun": [
+            {
+              "run": 1,
+              "full": false,
+              "overlap": false
+            },
+            {
+              "run": 2,
+              "full": false,
+              "overlap": false
+            },
+            {
+              "run": 3,
+              "full": false,
+              "overlap": false
+            }
+          ]
+        },
+        {
+          "candidateId": 13,
+          "themeRanges": [
+            {
+              "startMs": 3554885,
+              "endMs": 3723879
+            }
+          ],
+          "themeSourcePath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-013/prompt-input.json",
+          "composedRuns": [
+            {
+              "run": 1,
+              "generationSystem": "llm-v012@gemini-web-flash",
+              "ranges": [
+                {
+                  "startMs": 3554885,
+                  "endMs": 3723879
+                }
+              ],
+              "sourcePath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-013/run-01-gemini-output.json"
+            },
+            {
+              "run": 2,
+              "generationSystem": "llm-v012@gemini-web-flash",
+              "ranges": [
+                {
+                  "startMs": 3554885,
+                  "endMs": 3723879
+                }
+              ],
+              "sourcePath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-013/run-02-gemini-output.json"
+            },
+            {
+              "run": 3,
+              "generationSystem": "llm-v012@gemini-web-flash",
+              "ranges": [
+                {
+                  "startMs": 3554885,
+                  "endMs": 3723879
+                }
+              ],
+              "sourcePath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-013/run-03-gemini-output.json"
+            }
+          ],
+          "themeVisibility": {
+            "full": false,
+            "overlap": false
+          },
+          "composedVisibilityByRun": [
+            {
+              "run": 1,
+              "full": false,
+              "overlap": false
+            },
+            {
+              "run": 2,
+              "full": false,
+              "overlap": false
+            },
+            {
+              "run": 3,
+              "full": false,
+              "overlap": false
+            }
+          ]
+        },
+        {
+          "candidateId": 14,
+          "themeRanges": [
+            {
+              "startMs": 3723879,
+              "endMs": 3794866
+            }
+          ],
+          "themeSourcePath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-014/prompt-input.json",
+          "composedRuns": [
+            {
+              "run": 1,
+              "generationSystem": "llm-v012@gemini-web-flash",
+              "ranges": [
+                {
+                  "startMs": 3723879,
+                  "endMs": 3794866
+                }
+              ],
+              "sourcePath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-014/run-01-gemini-output.json"
+            },
+            {
+              "run": 2,
+              "generationSystem": "llm-v012@gemini-web-flash",
+              "ranges": [
+                {
+                  "startMs": 3723879,
+                  "endMs": 3794866
+                }
+              ],
+              "sourcePath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-014/run-02-gemini-output.json"
+            },
+            {
+              "run": 3,
+              "generationSystem": "llm-v012@gemini-web-flash",
+              "ranges": [
+                {
+                  "startMs": 3723879,
+                  "endMs": 3794866
+                }
+              ],
+              "sourcePath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-014/run-03-gemini-output.json"
+            }
+          ],
+          "themeVisibility": {
+            "full": false,
+            "overlap": false
+          },
+          "composedVisibilityByRun": [
+            {
+              "run": 1,
+              "full": false,
+              "overlap": false
+            },
+            {
+              "run": 2,
+              "full": false,
+              "overlap": false
+            },
+            {
+              "run": 3,
+              "full": false,
+              "overlap": false
+            }
+          ]
+        },
+        {
+          "candidateId": 16,
+          "themeRanges": [
+            {
+              "startMs": 4096310,
+              "endMs": 4379860
+            }
+          ],
+          "themeSourcePath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-016/prompt-input.json",
+          "composedRuns": [
+            {
+              "run": 1,
+              "generationSystem": "llm-v012@gemini-web-flash",
+              "ranges": [
+                {
+                  "startMs": 4200714,
+                  "endMs": 4379860
+                }
+              ],
+              "sourcePath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-016/run-01-gemini-output.json"
+            },
+            {
+              "run": 2,
+              "generationSystem": "llm-v012@gemini-web-flash",
+              "ranges": [
+                {
+                  "startMs": 4200714,
+                  "endMs": 4379860
+                }
+              ],
+              "sourcePath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-016/run-02-gemini-output.json"
+            },
+            {
+              "run": 3,
+              "generationSystem": "llm-v012@gemini-web-flash",
+              "ranges": [
+                {
+                  "startMs": 4096310,
+                  "endMs": 4139500
+                },
+                {
+                  "startMs": 4200714,
+                  "endMs": 4379860
+                }
+              ],
+              "sourcePath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-016/run-03-gemini-output.json"
+            }
+          ],
+          "themeVisibility": {
+            "full": false,
+            "overlap": false
+          },
+          "composedVisibilityByRun": [
+            {
+              "run": 1,
+              "full": false,
+              "overlap": false
+            },
+            {
+              "run": 2,
+              "full": false,
+              "overlap": false
+            },
+            {
+              "run": 3,
+              "full": false,
+              "overlap": false
+            }
+          ]
+        },
+        {
+          "candidateId": 22,
+          "themeRanges": [
+            {
+              "startMs": 4710742,
+              "endMs": 4738494
+            }
+          ],
+          "themeSourcePath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-022/prompt-input.json",
+          "composedRuns": [
+            {
+              "run": 1,
+              "generationSystem": "llm-v012@gemini-web-flash",
+              "ranges": [
+                {
+                  "startMs": 4710742,
+                  "endMs": 4738494
+                }
+              ],
+              "sourcePath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-022/run-01-gemini-output.json"
+            },
+            {
+              "run": 2,
+              "generationSystem": "llm-v012@gemini-web-flash",
+              "ranges": [
+                {
+                  "startMs": 4710742,
+                  "endMs": 4738494
+                }
+              ],
+              "sourcePath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-022/run-02-gemini-output.json"
+            },
+            {
+              "run": 3,
+              "generationSystem": "llm-v012@gemini-web-flash",
+              "ranges": [
+                {
+                  "startMs": 4710742,
+                  "endMs": 4738494
+                }
+              ],
+              "sourcePath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-022/run-03-gemini-output.json"
+            }
+          ],
+          "themeVisibility": {
+            "full": false,
+            "overlap": false
+          },
+          "composedVisibilityByRun": [
+            {
+              "run": 1,
+              "full": false,
+              "overlap": false
+            },
+            {
+              "run": 2,
+              "full": false,
+              "overlap": false
+            },
+            {
+              "run": 3,
+              "full": false,
+              "overlap": false
+            }
+          ]
+        },
+        {
+          "candidateId": 28,
+          "themeRanges": [
+            {
+              "startMs": 6281687,
+              "endMs": 6359980
+            }
+          ],
+          "themeSourcePath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-028/prompt-input.json",
+          "composedRuns": [
+            {
+              "run": 1,
+              "generationSystem": "llm-v012@gemini-web-flash",
+              "ranges": [
+                {
+                  "startMs": 6281687,
+                  "endMs": 6359980
+                }
+              ],
+              "sourcePath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-028/run-01-gemini-output.json"
+            },
+            {
+              "run": 2,
+              "generationSystem": "llm-v012@gemini-web-flash",
+              "ranges": [
+                {
+                  "startMs": 6281687,
+                  "endMs": 6359980
+                }
+              ],
+              "sourcePath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-028/run-02-gemini-output.json"
+            },
+            {
+              "run": 3,
+              "generationSystem": "llm-v012@gemini-web-flash",
+              "ranges": [
+                {
+                  "startMs": 5728519,
+                  "endMs": 6359980
+                }
+              ],
+              "sourcePath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-028/run-03-gemini-output.json"
+            }
+          ],
+          "themeVisibility": {
+            "full": false,
+            "overlap": false
+          },
+          "composedVisibilityByRun": [
+            {
+              "run": 1,
+              "full": false,
+              "overlap": false
+            },
+            {
+              "run": 2,
+              "full": false,
+              "overlap": false
+            },
+            {
+              "run": 3,
+              "full": false,
+              "overlap": false
+            }
+          ]
+        },
+        {
+          "candidateId": 30,
+          "themeRanges": [
+            {
+              "startMs": 6525131,
+              "endMs": 6539920
+            }
+          ],
+          "themeSourcePath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-030/prompt-input.json",
+          "composedRuns": [
+            {
+              "run": 1,
+              "generationSystem": "llm-v012@gemini-web-flash",
+              "ranges": [
+                {
+                  "startMs": 6525131,
+                  "endMs": 6539920
+                }
+              ],
+              "sourcePath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-030/run-01-gemini-output.json"
+            },
+            {
+              "run": 2,
+              "generationSystem": "llm-v012@gemini-web-flash",
+              "ranges": [
+                {
+                  "startMs": 6525131,
+                  "endMs": 6539920
+                }
+              ],
+              "sourcePath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-030/run-02-gemini-output.json"
+            },
+            {
+              "run": 3,
+              "generationSystem": "llm-v012@gemini-web-flash",
+              "ranges": [
+                {
+                  "startMs": 6525131,
+                  "endMs": 6539920
+                }
+              ],
+              "sourcePath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-030/run-03-gemini-output.json"
+            }
+          ],
+          "themeVisibility": {
+            "full": false,
+            "overlap": false
+          },
+          "composedVisibilityByRun": [
+            {
+              "run": 1,
+              "full": false,
+              "overlap": false
+            },
+            {
+              "run": 2,
+              "full": false,
+              "overlap": false
+            },
+            {
+              "run": 3,
+              "full": false,
+              "overlap": false
+            }
+          ]
+        },
+        {
+          "candidateId": 44,
+          "themeRanges": [
+            {
+              "startMs": 9126634,
+              "endMs": 9239820
+            }
+          ],
+          "themeSourcePath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-044/prompt-input.json",
+          "composedRuns": [
+            {
+              "run": 1,
+              "generationSystem": "llm-v012@gemini-web-flash",
+              "ranges": [
+                {
+                  "startMs": 9126634,
+                  "endMs": 9239820
+                }
+              ],
+              "sourcePath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-044/run-01-gemini-output.json"
+            },
+            {
+              "run": 2,
+              "generationSystem": "llm-v012@gemini-web-flash",
+              "ranges": [
+                {
+                  "startMs": 9126634,
+                  "endMs": 9239820
+                }
+              ],
+              "sourcePath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-044/run-02-gemini-output.json"
+            },
+            {
+              "run": 3,
+              "generationSystem": "llm-v012@gemini-web-flash",
+              "ranges": [
+                {
+                  "startMs": 9126634,
+                  "endMs": 9239820
+                }
+              ],
+              "sourcePath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-044/run-03-gemini-output.json"
+            }
+          ],
+          "themeVisibility": {
+            "full": false,
+            "overlap": false
+          },
+          "composedVisibilityByRun": [
+            {
+              "run": 1,
+              "full": false,
+              "overlap": false
+            },
+            {
+              "run": 2,
+              "full": false,
+              "overlap": false
+            },
+            {
+              "run": 3,
+              "full": false,
+              "overlap": false
+            }
+          ]
+        },
+        {
+          "candidateId": 52,
+          "themeRanges": [
+            {
+              "startMs": 10503922,
+              "endMs": 10618318
+            }
+          ],
+          "themeSourcePath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-052/prompt-input.json",
+          "composedRuns": [
+            {
+              "run": 1,
+              "generationSystem": "llm-v012@gemini-web-flash",
+              "ranges": [
+                {
+                  "startMs": 10503922,
+                  "endMs": 10618318
+                }
+              ],
+              "sourcePath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-052/run-01-gemini-output.json"
+            },
+            {
+              "run": 2,
+              "generationSystem": "llm-v012@gemini-web-flash",
+              "ranges": [
+                {
+                  "startMs": 10503922,
+                  "endMs": 10618318
+                }
+              ],
+              "sourcePath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-052/run-02-gemini-output.json"
+            },
+            {
+              "run": 3,
+              "generationSystem": "llm-v012@gemini-web-flash",
+              "ranges": [
+                {
+                  "startMs": 10503922,
+                  "endMs": 10618318
+                }
+              ],
+              "sourcePath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-052/run-03-gemini-output.json"
+            }
+          ],
+          "themeVisibility": {
+            "full": false,
+            "overlap": false
+          },
+          "composedVisibilityByRun": [
+            {
+              "run": 1,
+              "full": false,
+              "overlap": false
+            },
+            {
+              "run": 2,
+              "full": false,
+              "overlap": false
+            },
+            {
+              "run": 3,
+              "full": false,
+              "overlap": false
+            }
+          ]
+        },
+        {
+          "candidateId": 54,
+          "themeRanges": [
+            {
+              "startMs": 10776694,
+              "endMs": 10817172
+            }
+          ],
+          "themeSourcePath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-054/prompt-input.json",
+          "composedRuns": [
+            {
+              "run": 1,
+              "generationSystem": "llm-v012@gemini-web-flash",
+              "ranges": [
+                {
+                  "startMs": 10776694,
+                  "endMs": 10817172
+                }
+              ],
+              "sourcePath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-054/run-01-gemini-output.json"
+            },
+            {
+              "run": 2,
+              "generationSystem": "llm-v012@gemini-web-flash",
+              "ranges": [
+                {
+                  "startMs": 10776694,
+                  "endMs": 10817172
+                }
+              ],
+              "sourcePath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-054/run-02-gemini-output.json"
+            },
+            {
+              "run": 3,
+              "generationSystem": "llm-v012@gemini-web-flash",
+              "ranges": [
+                {
+                  "startMs": 10776694,
+                  "endMs": 10817172
+                }
+              ],
+              "sourcePath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-054/run-03-gemini-output.json"
+            }
+          ],
+          "themeVisibility": {
+            "full": false,
+            "overlap": false
+          },
+          "composedVisibilityByRun": [
+            {
+              "run": 1,
+              "full": false,
+              "overlap": false
+            },
+            {
+              "run": 2,
+              "full": false,
+              "overlap": false
+            },
+            {
+              "run": 3,
+              "full": false,
+              "overlap": false
+            }
+          ]
+        },
+        {
+          "candidateId": 59,
+          "themeRanges": [
+            {
+              "startMs": 11701322,
+              "endMs": 11789446
+            }
+          ],
+          "themeSourcePath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-059/prompt-input.json",
+          "composedRuns": [
+            {
+              "run": 1,
+              "generationSystem": "llm-v012@gemini-web-flash",
+              "ranges": [
+                {
+                  "startMs": 11701322,
+                  "endMs": 11789446
+                }
+              ],
+              "sourcePath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-059/run-01-gemini-output.json"
+            },
+            {
+              "run": 2,
+              "generationSystem": "llm-v012@gemini-web-flash",
+              "ranges": [
+                {
+                  "startMs": 11701322,
+                  "endMs": 11789446
+                }
+              ],
+              "sourcePath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-059/run-02-gemini-output.json"
+            },
+            {
+              "run": 3,
+              "generationSystem": "llm-v012@gemini-web-flash",
+              "ranges": [
+                {
+                  "startMs": 11699540,
+                  "endMs": 11789446
+                }
+              ],
+              "sourcePath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-main-v001/9dtwF5Exu5w_multiblock_material_v001/candidate-059/run-03-gemini-output.json"
+            }
+          ],
+          "themeVisibility": {
+            "full": false,
+            "overlap": false
+          },
+          "composedVisibilityByRun": [
+            {
+              "run": 1,
+              "full": false,
+              "overlap": false
+            },
+            {
+              "run": 2,
+              "full": false,
+              "overlap": false
+            },
+            {
+              "run": 3,
+              "full": false,
+              "overlap": false
+            }
+          ]
+        }
+      ],
+      "provisionalScoringStatus": "unscorable_input_visibility"
+    },
+    {
+      "groundTruthId": "GT-04",
+      "targetSourceRanges": {
+        "listenerComment": {
+          "startMs": 11364140,
+          "endMs": 11381180
+        },
+        "streamerResponse": {
+          "startMs": 11381340,
+          "endMs": 11404850
+        }
+      },
+      "mainUnit": "frozen-55-second-source-slice",
+      "fixedSliceRange": {
+        "startMs": 11357000,
+        "endMs": 11412000
+      },
+      "visible": true,
+      "provisionalScoringStatus": "scorable_deterministic_plumbing"
+    },
+    {
+      "groundTruthId": "GT-05",
+      "targetSourceRange": {
+        "startMs": 3185593,
+        "endMs": 3190315
+      },
+      "mainUnit": "connection-v001-to-llm-v012-composed-range",
+      "main": {
+        "fullyVisible": true,
+        "visibleCandidateRuns": [
+          {
+            "candidateId": 37,
+            "run": 1
+          },
+          {
+            "candidateId": 37,
+            "run": 2
+          },
+          {
+            "candidateId": 37,
+            "run": 3
+          }
+        ]
+      },
+      "secondary": {
+        "fullyVisible": true,
+        "visibleCandidateIds": [
+          37
+        ]
+      },
+      "candidates": [
+        {
+          "candidateId": 2,
+          "themeRanges": [
+            {
+              "startMs": 240202,
+              "endMs": 298984
+            }
+          ],
+          "themeSourcePath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-002/prompt-input.json",
+          "composedRuns": [
+            {
+              "run": 1,
+              "generationSystem": "llm-v012@gemini-web-flash",
+              "ranges": [
+                {
+                  "startMs": 240202,
+                  "endMs": 298984
+                }
+              ],
+              "sourcePath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-002/run-01-gemini-output.json"
+            },
+            {
+              "run": 2,
+              "generationSystem": "llm-v012@gemini-web-flash",
+              "ranges": [
+                {
+                  "startMs": 240202,
+                  "endMs": 298984
+                }
+              ],
+              "sourcePath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-002/run-02-gemini-output.json"
+            },
+            {
+              "run": 3,
+              "generationSystem": "llm-v012@gemini-web-flash",
+              "ranges": [
+                {
+                  "startMs": 240202,
+                  "endMs": 298984
+                }
+              ],
+              "sourcePath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-002/run-03-gemini-output.json"
+            }
+          ],
+          "themeVisibility": {
+            "full": false,
+            "overlap": false
+          },
+          "composedVisibilityByRun": [
+            {
+              "run": 1,
+              "full": false,
+              "overlap": false
+            },
+            {
+              "run": 2,
+              "full": false,
+              "overlap": false
+            },
+            {
+              "run": 3,
+              "full": false,
+              "overlap": false
+            }
+          ]
+        },
+        {
+          "candidateId": 3,
+          "themeRanges": [
+            {
+              "startMs": 300578,
+              "endMs": 328762
+            }
+          ],
+          "themeSourcePath": "evals/clip_composition/outputs/theme-composition-connection/20260712-context-pilot-v001/candidate-003/theme-window-plus-minus-5m/prompt-input.json",
+          "composedRuns": [
+            {
+              "run": 1,
+              "generationSystem": "llm-v012@gemini-web-flash",
+              "ranges": [
+                {
+                  "startMs": 278759,
+                  "endMs": 328762
+                }
+              ],
+              "sourcePath": "evals/clip_composition/outputs/theme-composition-connection/20260712-context-pilot-v001/candidate-003/theme-window-plus-minus-5m/run-01-gemini-output.json"
+            },
+            {
+              "run": 2,
+              "generationSystem": "llm-v012@gemini-web-flash",
+              "ranges": [
+                {
+                  "startMs": 278759,
+                  "endMs": 335402
+                }
+              ],
+              "sourcePath": "evals/clip_composition/outputs/theme-composition-connection/20260712-context-pilot-v001/candidate-003/theme-window-plus-minus-5m/run-02-gemini-output.json"
+            },
+            {
+              "run": 3,
+              "generationSystem": "llm-v012@gemini-web-flash",
+              "ranges": [
+                {
+                  "startMs": 278759,
+                  "endMs": 335402
+                }
+              ],
+              "sourcePath": "evals/clip_composition/outputs/theme-composition-connection/20260712-context-pilot-v001/candidate-003/theme-window-plus-minus-5m/run-03-gemini-output.json"
+            }
+          ],
+          "themeVisibility": {
+            "full": false,
+            "overlap": false
+          },
+          "composedVisibilityByRun": [
+            {
+              "run": 1,
+              "full": false,
+              "overlap": false
+            },
+            {
+              "run": 2,
+              "full": false,
+              "overlap": false
+            },
+            {
+              "run": 3,
+              "full": false,
+              "overlap": false
+            }
+          ]
+        },
+        {
+          "candidateId": 17,
+          "themeRanges": [
+            {
+              "startMs": 1021002,
+              "endMs": 1079852
+            }
+          ],
+          "themeSourcePath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-017/prompt-input.json",
+          "composedRuns": [
+            {
+              "run": 1,
+              "generationSystem": "llm-v012@gemini-web-flash",
+              "ranges": [
+                {
+                  "startMs": 1021002,
+                  "endMs": 1079852
+                }
+              ],
+              "sourcePath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-017/run-01-gemini-output.json"
+            },
+            {
+              "run": 2,
+              "generationSystem": "llm-v012@gemini-web-flash",
+              "ranges": [
+                {
+                  "startMs": 1021002,
+                  "endMs": 1079852
+                }
+              ],
+              "sourcePath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-017/run-02-gemini-output.json"
+            },
+            {
+              "run": 3,
+              "generationSystem": "llm-v012@gemini-web-flash",
+              "ranges": [
+                {
+                  "startMs": 1021002,
+                  "endMs": 1079852
+                }
+              ],
+              "sourcePath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-017/run-03-gemini-output.json"
+            }
+          ],
+          "themeVisibility": {
+            "full": false,
+            "overlap": false
+          },
+          "composedVisibilityByRun": [
+            {
+              "run": 1,
+              "full": false,
+              "overlap": false
+            },
+            {
+              "run": 2,
+              "full": false,
+              "overlap": false
+            },
+            {
+              "run": 3,
+              "full": false,
+              "overlap": false
+            }
+          ]
+        },
+        {
+          "candidateId": 32,
+          "themeRanges": [
+            {
+              "startMs": 2790074,
+              "endMs": 2848146
+            }
+          ],
+          "themeSourcePath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-032/prompt-input.json",
+          "composedRuns": [
+            {
+              "run": 1,
+              "generationSystem": "llm-v012@gemini-web-flash",
+              "ranges": [
+                {
+                  "startMs": 2790074,
+                  "endMs": 2848146
+                }
+              ],
+              "sourcePath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-032/run-01-gemini-output.json"
+            },
+            {
+              "run": 2,
+              "generationSystem": "llm-v012@gemini-web-flash",
+              "ranges": [
+                {
+                  "startMs": 2790074,
+                  "endMs": 2848146
+                }
+              ],
+              "sourcePath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-032/run-02-gemini-output.json"
+            },
+            {
+              "run": 3,
+              "generationSystem": "llm-v012@gemini-web-flash",
+              "ranges": [
+                {
+                  "startMs": 2790074,
+                  "endMs": 2848146
+                }
+              ],
+              "sourcePath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-032/run-03-gemini-output.json"
+            }
+          ],
+          "themeVisibility": {
+            "full": false,
+            "overlap": false
+          },
+          "composedVisibilityByRun": [
+            {
+              "run": 1,
+              "full": false,
+              "overlap": false
+            },
+            {
+              "run": 2,
+              "full": false,
+              "overlap": false
+            },
+            {
+              "run": 3,
+              "full": false,
+              "overlap": false
+            }
+          ]
+        },
+        {
+          "candidateId": 35,
+          "themeRanges": [
+            {
+              "startMs": 3000738,
+              "endMs": 3026556
+            }
+          ],
+          "themeSourcePath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-035/prompt-input.json",
+          "composedRuns": [
+            {
+              "run": 1,
+              "generationSystem": "llm-v012@gemini-web-flash",
+              "ranges": [
+                {
+                  "startMs": 3000738,
+                  "endMs": 3026556
+                }
+              ],
+              "sourcePath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-035/run-01-gemini-output.json"
+            },
+            {
+              "run": 2,
+              "generationSystem": "llm-v012@gemini-web-flash",
+              "ranges": [
+                {
+                  "startMs": 3000738,
+                  "endMs": 3026556
+                }
+              ],
+              "sourcePath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-035/run-02-gemini-output.json"
+            },
+            {
+              "run": 3,
+              "generationSystem": "llm-v012@gemini-web-flash",
+              "ranges": [
+                {
+                  "startMs": 3000738,
+                  "endMs": 3026556
+                }
+              ],
+              "sourcePath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-035/run-03-gemini-output.json"
+            }
+          ],
+          "themeVisibility": {
+            "full": false,
+            "overlap": false
+          },
+          "composedVisibilityByRun": [
+            {
+              "run": 1,
+              "full": false,
+              "overlap": false
+            },
+            {
+              "run": 2,
+              "full": false,
+              "overlap": false
+            },
+            {
+              "run": 3,
+              "full": false,
+              "overlap": false
+            }
+          ]
+        },
+        {
+          "candidateId": 37,
+          "themeRanges": [
+            {
+              "startMs": 3180190,
+              "endMs": 3209684
+            }
+          ],
+          "themeSourcePath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-037/prompt-input.json",
+          "composedRuns": [
+            {
+              "run": 1,
+              "generationSystem": "llm-v012@gemini-web-flash",
+              "ranges": [
+                {
+                  "startMs": 3180190,
+                  "endMs": 3209684
+                }
+              ],
+              "sourcePath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-037/run-01-gemini-output.json"
+            },
+            {
+              "run": 2,
+              "generationSystem": "llm-v012@gemini-web-flash",
+              "ranges": [
+                {
+                  "startMs": 3180190,
+                  "endMs": 3209684
+                }
+              ],
+              "sourcePath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-037/run-02-gemini-output.json"
+            },
+            {
+              "run": 3,
+              "generationSystem": "llm-v012@gemini-web-flash",
+              "ranges": [
+                {
+                  "startMs": 3180190,
+                  "endMs": 3209684
+                }
+              ],
+              "sourcePath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-037/run-03-gemini-output.json"
+            }
+          ],
+          "themeVisibility": {
+            "full": true,
+            "overlap": true
+          },
+          "composedVisibilityByRun": [
+            {
+              "run": 1,
+              "full": true,
+              "overlap": true
+            },
+            {
+              "run": 2,
+              "full": true,
+              "overlap": true
+            },
+            {
+              "run": 3,
+              "full": true,
+              "overlap": true
+            }
+          ]
+        },
+        {
+          "candidateId": 39,
+          "themeRanges": [
+            {
+              "startMs": 3252153,
+              "endMs": 3292350
+            }
+          ],
+          "themeSourcePath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-039/prompt-input.json",
+          "composedRuns": [
+            {
+              "run": 1,
+              "generationSystem": "llm-v012@gemini-web-flash",
+              "ranges": [
+                {
+                  "startMs": 3252153,
+                  "endMs": 3292350
+                }
+              ],
+              "sourcePath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-039/run-01-gemini-output.json"
+            },
+            {
+              "run": 2,
+              "generationSystem": "llm-v012@gemini-web-flash",
+              "ranges": [
+                {
+                  "startMs": 3252153,
+                  "endMs": 3292350
+                }
+              ],
+              "sourcePath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-039/run-02-gemini-output.json"
+            },
+            {
+              "run": 3,
+              "generationSystem": "llm-v012@gemini-web-flash",
+              "ranges": [
+                {
+                  "startMs": 3252153,
+                  "endMs": 3292350
+                }
+              ],
+              "sourcePath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-039/run-03-gemini-output.json"
+            }
+          ],
+          "themeVisibility": {
+            "full": false,
+            "overlap": false
+          },
+          "composedVisibilityByRun": [
+            {
+              "run": 1,
+              "full": false,
+              "overlap": false
+            },
+            {
+              "run": 2,
+              "full": false,
+              "overlap": false
+            },
+            {
+              "run": 3,
+              "full": false,
+              "overlap": false
+            }
+          ]
+        },
+        {
+          "candidateId": 41,
+          "themeRanges": [
+            {
+              "startMs": 3467816,
+              "endMs": 3519167
+            }
+          ],
+          "themeSourcePath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-041/prompt-input.json",
+          "composedRuns": [
+            {
+              "run": 1,
+              "generationSystem": "llm-v012@gemini-web-flash",
+              "ranges": [
+                {
+                  "startMs": 3467816,
+                  "endMs": 3519167
+                }
+              ],
+              "sourcePath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-041/run-01-gemini-output.json"
+            },
+            {
+              "run": 2,
+              "generationSystem": "llm-v012@gemini-web-flash",
+              "ranges": [
+                {
+                  "startMs": 3467816,
+                  "endMs": 3519167
+                }
+              ],
+              "sourcePath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-041/run-02-gemini-output.json"
+            },
+            {
+              "run": 3,
+              "generationSystem": "llm-v012@gemini-web-flash",
+              "ranges": [
+                {
+                  "startMs": 3467816,
+                  "endMs": 3519167
+                }
+              ],
+              "sourcePath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-041/run-03-gemini-output.json"
+            }
+          ],
+          "themeVisibility": {
+            "full": false,
+            "overlap": false
+          },
+          "composedVisibilityByRun": [
+            {
+              "run": 1,
+              "full": false,
+              "overlap": false
+            },
+            {
+              "run": 2,
+              "full": false,
+              "overlap": false
+            },
+            {
+              "run": 3,
+              "full": false,
+              "overlap": false
+            }
+          ]
+        },
+        {
+          "candidateId": 46,
+          "themeRanges": [
+            {
+              "startMs": 3991226,
+              "endMs": 4029707
+            }
+          ],
+          "themeSourcePath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-046/prompt-input.json",
+          "composedRuns": [
+            {
+              "run": 1,
+              "generationSystem": "llm-v012@gemini-web-flash",
+              "ranges": [
+                {
+                  "startMs": 3991226,
+                  "endMs": 4029707
+                }
+              ],
+              "sourcePath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-046/run-01-gemini-output.json"
+            },
+            {
+              "run": 2,
+              "generationSystem": "llm-v012@gemini-web-flash",
+              "ranges": [
+                {
+                  "startMs": 3991226,
+                  "endMs": 4029707
+                }
+              ],
+              "sourcePath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-046/run-02-gemini-output.json"
+            },
+            {
+              "run": 3,
+              "generationSystem": "llm-v012@gemini-web-flash",
+              "ranges": [
+                {
+                  "startMs": 3991226,
+                  "endMs": 4029707
+                }
+              ],
+              "sourcePath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-046/run-03-gemini-output.json"
+            }
+          ],
+          "themeVisibility": {
+            "full": false,
+            "overlap": false
+          },
+          "composedVisibilityByRun": [
+            {
+              "run": 1,
+              "full": false,
+              "overlap": false
+            },
+            {
+              "run": 2,
+              "full": false,
+              "overlap": false
+            },
+            {
+              "run": 3,
+              "full": false,
+              "overlap": false
+            }
+          ]
+        },
+        {
+          "candidateId": 52,
+          "themeRanges": [
+            {
+              "startMs": 5162499,
+              "endMs": 5189318
+            }
+          ],
+          "themeSourcePath": "evals/clip_composition/outputs/theme-composition-connection/20260712-context-pilot-v001/candidate-052/theme-window-plus-minus-5m/prompt-input.json",
+          "composedRuns": [
+            {
+              "run": 1,
+              "generationSystem": "llm-v012@gemini-web-flash",
+              "ranges": [
+                {
+                  "startMs": 5162499,
+                  "endMs": 5189318
+                }
+              ],
+              "sourcePath": "evals/clip_composition/outputs/theme-composition-connection/20260712-context-pilot-v001/candidate-052/theme-window-plus-minus-5m/run-01-gemini-output.json"
+            },
+            {
+              "run": 2,
+              "generationSystem": "llm-v012@gemini-web-flash",
+              "ranges": [
+                {
+                  "startMs": 5162499,
+                  "endMs": 5189318
+                }
+              ],
+              "sourcePath": "evals/clip_composition/outputs/theme-composition-connection/20260712-context-pilot-v001/candidate-052/theme-window-plus-minus-5m/run-02-gemini-output.json"
+            },
+            {
+              "run": 3,
+              "generationSystem": "llm-v012@gemini-web-flash",
+              "ranges": [
+                {
+                  "startMs": 5162499,
+                  "endMs": 5189318
+                }
+              ],
+              "sourcePath": "evals/clip_composition/outputs/theme-composition-connection/20260712-context-pilot-v001/candidate-052/theme-window-plus-minus-5m/run-03-gemini-output.json"
+            }
+          ],
+          "themeVisibility": {
+            "full": false,
+            "overlap": false
+          },
+          "composedVisibilityByRun": [
+            {
+              "run": 1,
+              "full": false,
+              "overlap": false
+            },
+            {
+              "run": 2,
+              "full": false,
+              "overlap": false
+            },
+            {
+              "run": 3,
+              "full": false,
+              "overlap": false
+            }
+          ]
+        },
+        {
+          "candidateId": 53,
+          "themeRanges": [
+            {
+              "startMs": 5190322,
+              "endMs": 5279310
+            }
+          ],
+          "themeSourcePath": "evals/clip_composition/outputs/theme-composition-connection/20260712-context-pilot-v001/candidate-053/theme-window-plus-minus-5m/prompt-input.json",
+          "composedRuns": [
+            {
+              "run": 1,
+              "generationSystem": "llm-v012@gemini-web-flash",
+              "ranges": [
+                {
+                  "startMs": 5190322,
+                  "endMs": 5279310
+                }
+              ],
+              "sourcePath": "evals/clip_composition/outputs/theme-composition-connection/20260712-context-pilot-v001/candidate-053/theme-window-plus-minus-5m/run-01-gemini-output.json"
+            },
+            {
+              "run": 2,
+              "generationSystem": "llm-v012@gemini-web-flash",
+              "ranges": [
+                {
+                  "startMs": 5190322,
+                  "endMs": 5244903
+                }
+              ],
+              "sourcePath": "evals/clip_composition/outputs/theme-composition-connection/20260712-context-pilot-v001/candidate-053/theme-window-plus-minus-5m/run-02-gemini-output.json"
+            },
+            {
+              "run": 3,
+              "generationSystem": "llm-v012@gemini-web-flash",
+              "ranges": [
+                {
+                  "startMs": 5190322,
+                  "endMs": 5279310
+                }
+              ],
+              "sourcePath": "evals/clip_composition/outputs/theme-composition-connection/20260712-context-pilot-v001/candidate-053/theme-window-plus-minus-5m/run-03-gemini-output.json"
+            }
+          ],
+          "themeVisibility": {
+            "full": false,
+            "overlap": false
+          },
+          "composedVisibilityByRun": [
+            {
+              "run": 1,
+              "full": false,
+              "overlap": false
+            },
+            {
+              "run": 2,
+              "full": false,
+              "overlap": false
+            },
+            {
+              "run": 3,
+              "full": false,
+              "overlap": false
+            }
+          ]
+        },
+        {
+          "candidateId": 87,
+          "themeRanges": [
+            {
+              "startMs": 11520066,
+              "endMs": 11549658
+            }
+          ],
+          "themeSourcePath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-087/prompt-input.json",
+          "composedRuns": [
+            {
+              "run": 1,
+              "generationSystem": "llm-v012@gemini-web-flash",
+              "ranges": [
+                {
+                  "startMs": 11520066,
+                  "endMs": 11549658
+                }
+              ],
+              "sourcePath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-087/run-01-gemini-output.json"
+            },
+            {
+              "run": 2,
+              "generationSystem": "llm-v012@gemini-web-flash",
+              "ranges": [
+                {
+                  "startMs": 11520066,
+                  "endMs": 1149658
+                }
+              ],
+              "sourcePath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-087/run-02-gemini-output.json"
+            },
+            {
+              "run": 3,
+              "generationSystem": "llm-v012@gemini-web-flash",
+              "ranges": [
+                {
+                  "startMs": 11520066,
+                  "endMs": 11549658
+                }
+              ],
+              "sourcePath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-087/run-03-gemini-output.json"
+            }
+          ],
+          "themeVisibility": {
+            "full": false,
+            "overlap": false
+          },
+          "composedVisibilityByRun": [
+            {
+              "run": 1,
+              "full": false,
+              "overlap": false
+            },
+            {
+              "run": 2,
+              "full": false,
+              "overlap": false
+            },
+            {
+              "run": 3,
+              "full": false,
+              "overlap": false
+            }
+          ]
+        },
+        {
+          "candidateId": 88,
+          "themeRanges": [
+            {
+              "startMs": 11551287,
+              "endMs": 11593310
+            }
+          ],
+          "themeSourcePath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-088/prompt-input.json",
+          "composedRuns": [
+            {
+              "run": 1,
+              "generationSystem": "llm-v012@gemini-web-flash",
+              "ranges": [
+                {
+                  "startMs": 11551287,
+                  "endMs": 11593310
+                }
+              ],
+              "sourcePath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-088/run-01-gemini-output.json"
+            },
+            {
+              "run": 2,
+              "generationSystem": "llm-v012@gemini-web-flash",
+              "ranges": [
+                {
+                  "startMs": 11551287,
+                  "endMs": 11593310
+                }
+              ],
+              "sourcePath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-088/run-02-gemini-output.json"
+            },
+            {
+              "run": 3,
+              "generationSystem": "llm-v012@gemini-web-flash",
+              "ranges": [
+                {
+                  "startMs": 11551287,
+                  "endMs": 11593310
+                }
+              ],
+              "sourcePath": "evals/clip_composition/outputs/theme-composition-connection/20260712-connection-main-v001/nOEWCNc77MI_multiblock_material_v001/candidate-088/run-03-gemini-output.json"
+            }
+          ],
+          "themeVisibility": {
+            "full": false,
+            "overlap": false
+          },
+          "composedVisibilityByRun": [
+            {
+              "run": 1,
+              "full": false,
+              "overlap": false
+            },
+            {
+              "run": 2,
+              "full": false,
+              "overlap": false
+            },
+            {
+              "run": 3,
+              "full": false,
+              "overlap": false
+            }
+          ]
+        }
+      ],
+      "provisionalScoringStatus": "scorable_deterministic_plumbing"
+    },
+    {
+      "groundTruthId": "GT-03",
+      "provisionalScoringStatus": "held_input_not_ready",
+      "note": "案Aで保留。現行G7か再構成層かの文書判定を保留解除条件として保持する。"
+    }
+  ]
+}

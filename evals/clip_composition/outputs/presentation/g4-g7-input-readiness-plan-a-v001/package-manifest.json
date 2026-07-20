@@ -1,0 +1,99 @@
+{
+  "schemaVersion": "presentation-g4-g7-input-readiness-review-package-v001",
+  "createdAt": "2026-07-20",
+  "decisionCount": 4,
+  "sessionCount": 1,
+  "timeMeasurement": "none",
+  "checks": [
+    {
+      "groundTruthId": "GT-01",
+      "title": "意表を突かれた瞬間",
+      "question": "教師側の強調点と、元配信側の提示区間は同じ出来事ですか？",
+      "options": [
+        "対応している",
+        "違う",
+        "わからない"
+      ]
+    },
+    {
+      "groundTruthId": "GT-02",
+      "title": "顔アップだけで見せた抑制例",
+      "question": "教師側の顔アップ区間と、元配信側の提示区間は同じ出来事ですか？",
+      "options": [
+        "対応している",
+        "違う",
+        "わからない"
+      ]
+    },
+    {
+      "groundTruthId": "GT-04",
+      "title": "コメント読み上げと本人回答",
+      "question": "元配信側も、前半がリスナーコメント、後半がマリン本人の回答という区別で合っていますか？",
+      "options": [
+        "区別も対応も正しい",
+        "対応は同じだが区別が違う",
+        "対応が違う",
+        "わからない"
+      ]
+    },
+    {
+      "groundTruthId": "GT-05",
+      "title": "マリンところねの話者識別",
+      "question": "同じ場面ですか？ また「マリン→ころね→マリン」の発話者対応で合っていますか？",
+      "options": [
+        "対応も人物も正しい",
+        "対応は正しいが人物が違う",
+        "対応が違う",
+        "わからない"
+      ]
+    }
+  ],
+  "files": {
+    "sourceMappingCandidates": "source-mapping-candidates.json",
+    "inputVisibilityManifest": "input-visibility-manifest.json",
+    "structuredInputCandidates": "structured-input-candidates.json",
+    "reviewPage": "human-review-v001/review.html"
+  },
+  "media": [
+    {
+      "id": "gt01-teacher",
+      "path": "evals/clip_composition/outputs/presentation/g4-g7-input-readiness-plan-a-v001/human-review-v001/media/gt01-teacher.mp4",
+      "sha256": "d413b24f5342ba44d67c1081529c4335bc2442ac0fca53613b1650e890e1b717"
+    },
+    {
+      "id": "gt01-source",
+      "path": "evals/clip_composition/outputs/presentation/g4-g7-input-readiness-plan-a-v001/human-review-v001/media/gt01-source.mp4",
+      "sha256": "3f499f466186d50ff49a266626999ecd6ce342157b8e47c5b21e1fe674cef012"
+    },
+    {
+      "id": "gt02-teacher",
+      "path": "evals/clip_composition/outputs/presentation/g4-g7-input-readiness-plan-a-v001/human-review-v001/media/gt02-teacher.mp4",
+      "sha256": "7174cda089263b83c2ab11415569cb030a7fbe2827d0b9c4b7cf0e57dc01db75"
+    },
+    {
+      "id": "gt02-source",
+      "path": "evals/clip_composition/outputs/presentation/g4-g7-input-readiness-plan-a-v001/human-review-v001/media/gt02-source.mp4",
+      "sha256": "db91026c98c8945ed1b7fce1b2ad70eedf976dd440457bb0dbc2c784eee3ffe4"
+    },
+    {
+      "id": "gt04-teacher",
+      "path": "evals/clip_composition/outputs/presentation/g4-g7-input-readiness-plan-a-v001/human-review-v001/media/gt04-teacher.mp4",
+      "sha256": "384f392233e043fcc176a46284601e87d46ff9d7113ad7c1b7acfbbd4a13d4db"
+    },
+    {
+      "id": "gt04-source",
+      "path": "evals/clip_composition/outputs/presentation/g4-g7-input-readiness-plan-a-v001/human-review-v001/media/gt04-source.mp4",
+      "sha256": "fefc922efbcba5bc88dcf63f6e5f8f6dc115b176c03fbd9e1212e3a94d8af3da"
+    },
+    {
+      "id": "gt05-teacher",
+      "path": "evals/clip_composition/outputs/presentation/g4-g7-input-readiness-plan-a-v001/human-review-v001/media/gt05-teacher.mp4",
+      "sha256": "221f4af17e5bb449183f25b1b92e32d85ce4f361137d5098f4cf6a8c4be8a471"
+    },
+    {
+      "id": "gt05-source",
+      "path": "evals/clip_composition/outputs/presentation/g4-g7-input-readiness-plan-a-v001/human-review-v001/media/gt05-source.mp4",
+      "sha256": "f0258b47369aaf8f604f76e22fc592e7b674e1bc8f2f98ef573ec897fb35ae52"
+    }
+  ]
+}

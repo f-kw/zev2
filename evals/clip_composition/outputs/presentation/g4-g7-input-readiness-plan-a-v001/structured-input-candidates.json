@@ -1,0 +1,52 @@
+{
+  "schemaVersion": "presentation-g4-g7-structured-input-candidates-v001",
+  "status": "proposed-awaiting-human-confirmation",
+  "inputs": [
+    {
+      "groundTruthId": "GT-04",
+      "sourceVideoId": "kNX-wQTvsws",
+      "informationSegments": [
+        {
+          "informationType": "listener-comment",
+          "startMs": 11364140,
+          "endMs": 11381180,
+          "textSummary": "世界2位の記事を見たリスナーコメントの読み上げ"
+        },
+        {
+          "informationType": "streamer-response",
+          "startMs": 11381340,
+          "endMs": 11404850,
+          "textSummary": "順位は変動するので素直に喜べないというマリン本人の回答"
+        }
+      ],
+      "derivation": "frozen-source-slice-caption-text-match",
+      "requiresHumanConfirmation": true
+    },
+    {
+      "groundTruthId": "GT-05",
+      "sourceVideoId": "YE-faluP7zY",
+      "speakerBindings": [
+        {
+          "person": "マリン",
+          "startMs": 3185593,
+          "endMs": 3185773,
+          "text": "しっかりしてくれよ（末尾）"
+        },
+        {
+          "person": "ころね",
+          "startMs": 3185773,
+          "endMs": 3187193,
+          "text": "ごめんなさい"
+        },
+        {
+          "person": "マリン",
+          "startMs": 3187193,
+          "endMs": 3190315,
+          "text": "あなた、お前がちゃんとしないと"
+        }
+      ],
+      "derivation": "teacher-source-word-alignment-plus-teacher-caption-color-and-video-review",
+      "requiresHumanConfirmation": true
+    }
+  ]
+}
