@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "presentation-caption-check-v001",
+  "format": "normal-landscape",
+  "source": {
+    "atomGranularity": "word-timestamp",
+    "atomProvenance": "synthetic-simultaneous-test-v001",
+    "atoms": [
+      { "atomId": "speaker-a-01", "speechId": 1, "speaker": "SPEAKER_A", "text": "はい", "startMs": 1000, "endMs": 1200 },
+      { "atomId": "speaker-b-01", "speechId": 2, "speaker": "SPEAKER_B", "text": "うん", "startMs": 1050, "endMs": 1250 }
+    ],
+    "captionTargets": [
+      { "targetId": "target-a", "requiredAtomIds": ["speaker-a-01"], "allowedOmissionAtomIds": [] },
+      { "targetId": "target-b", "requiredAtomIds": ["speaker-b-01"], "allowedOmissionAtomIds": [] }
+    ],
+    "allowedSimultaneousGroups": [
+      { "simultaneousGroupId": "group-01", "targetIds": ["target-a", "target-b"] }
+    ]
+  },
+  "captionPlan": {
+    "cues": [
+      {
+        "cueId": "cue-a",
+        "targetId": "target-a",
+        "lines": [{ "atomIds": ["speaker-a-01"], "renderedText": "はい" }],
+        "startAnchor": { "atomId": "speaker-a-01", "edge": "start" },
+        "endAnchor": { "atomId": "speaker-a-01", "edge": "end" },
+        "startMs": 1000,
+        "endMs": 1200,
+        "simultaneousGroupId": "group-01"
+      },
+      {
+        "cueId": "cue-b",
+        "targetId": "target-b",
+        "lines": [{ "atomIds": ["speaker-b-01"], "renderedText": "うん" }],
+        "startAnchor": { "atomId": "speaker-b-01", "edge": "start" },
+        "endAnchor": { "atomId": "speaker-b-01", "edge": "end" },
+        "startMs": 1050,
+        "endMs": 1250,
+        "simultaneousGroupId": "group-01"
+      }
+    ]
+  }
+}
