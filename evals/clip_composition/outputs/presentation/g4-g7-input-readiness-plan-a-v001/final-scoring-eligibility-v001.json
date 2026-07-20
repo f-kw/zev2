@@ -1,0 +1,66 @@
+{
+  "schemaVersion": "presentation-g4-g7-final-scoring-eligibility-v001",
+  "decidedAt": "2026-07-20",
+  "decidedBy": "kawafmm",
+  "humanReview": "human-review-v001/result.md",
+  "inputVisibilityManifest": "input-visibility-manifest.json",
+  "policy": {
+    "frozenGroundTruthUnchanged": true,
+    "noPostReviewRemapping": true,
+    "noPostReviewRangeExpansion": true,
+    "noUpstreamRegeneration": true,
+    "semanticSmokeRunRequiresHumanReturnWhenNoScorableSemanticExample": true
+  },
+  "results": [
+    {
+      "groundTruthId": "GT-01",
+      "grammar": "G4",
+      "sourceMappingDecision": "confirmed",
+      "inputVisibility": "outside_frozen_theme_evidence_ranges",
+      "finalScoringStatus": "unscorable_input_visibility",
+      "reason": "教師と元配信の出来事対応は人間確認できたが、接続未生成で、凍結前ランキング上位5のテーマ根拠範囲にも発火点が入っていない。"
+    },
+    {
+      "groundTruthId": "GT-02",
+      "grammar": "G4-suppression",
+      "sourceMappingDecision": "rejected",
+      "inputVisibility": "outside_frozen_composed_and_theme_ranges_for_rejected_candidate",
+      "finalScoringStatus": "unscorable_source_mapping",
+      "reason": "提示区間終盤に短い重複シーンはあるが、教師の顔アップ場面とは違うと人間が判定した。別候補探索は行わない。"
+    },
+    {
+      "groundTruthId": "GT-03",
+      "grammar": "G7",
+      "sourceMappingDecision": "not_attempted_plan_a_hold",
+      "inputVisibility": "not_checked",
+      "finalScoringStatus": "held_input_not_ready",
+      "reason": "現行G7か再構成層かの契約適合判定と元配信入力整備が未完了。"
+    },
+    {
+      "groundTruthId": "GT-04",
+      "grammar": "G5",
+      "sourceMappingDecision": "confirmed",
+      "structuredLabelDecision": "listener_comment_then_streamer_response_confirmed",
+      "inputVisibility": "inside_frozen_55_second_source_slice",
+      "finalScoringStatus": "scorable_deterministic_plumbing",
+      "reason": "教師と元配信の対応、および前半がリスナーコメント、後半が本人回答という情報種別を人間が認定した。"
+    },
+    {
+      "groundTruthId": "GT-05",
+      "grammar": "G6",
+      "sourceMappingDecision": "rejected",
+      "structuredLabelDecision": "rejected_with_speaker_correction_note",
+      "inputVisibility": "not_applicable_after_mapping_rejection",
+      "finalScoringStatus": "unscorable_source_mapping",
+      "reason": "提示場面の対応が違うと人間が判定した。さらに提示候補内の「あなた」はころね側であり、提案したマリン→ころね→マリンの人物割当も誤り。別場面のため、この補足だけで人物対応を正解化しない。"
+    }
+  ],
+  "summary": {
+    "semanticG4ScorableCount": 0,
+    "deterministicG5ScorableCount": 1,
+    "deterministicG6ScorableCount": 0,
+    "heldG7Count": 1,
+    "semanticLlmRunDecision": "stop_and_return_value_decision_to_human",
+    "detectorImplementationDecision": "not_started"
+  }
+}
