@@ -1,0 +1,49 @@
+{
+  "schemaVersion": "presentation-caption-check-v002",
+  "format": "normal-landscape",
+  "source": {
+    "atomGranularity": "character-timestamp",
+    "atomProvenance": "synthetic-test-v001",
+    "atoms": [
+      { "atomId": "a-01", "speechId": 1, "speaker": "SPEAKER_00", "text": "船", "startMs": 1000, "endMs": 1100 },
+      { "atomId": "a-02", "speechId": 1, "speaker": "SPEAKER_00", "text": "長", "startMs": 1100, "endMs": 1200 },
+      { "atomId": "a-03", "speechId": 1, "speaker": "SPEAKER_00", "text": "で", "startMs": 1200, "endMs": 1300 },
+      { "atomId": "a-04", "speechId": 1, "speaker": "SPEAKER_00", "text": "す", "startMs": 1300, "endMs": 1400 }
+    ],
+    "captionTargets": [
+      {
+        "targetId": "target-01",
+        "requiredAtomIds": ["a-01", "a-02", "a-03", "a-04"],
+        "allowedOmissionAtomIds": []
+      }
+    ],
+    "allowedSimultaneousGroups": []
+  },
+  "captionPlan": {
+    "cues": [
+      {
+        "cueId": "cue-01",
+        "targetId": "target-01",
+        "lines": [
+          { "atomIds": ["a-01"], "renderedText": "船" },
+          { "atomIds": ["a-02"], "renderedText": "長" }
+        ],
+        "startAnchor": { "atomId": "a-01", "edge": "start" },
+        "endAnchor": { "atomId": "a-02", "edge": "end" },
+        "startMs": 1000,
+        "endMs": 1200
+      },
+      {
+        "cueId": "cue-02",
+        "targetId": "target-01",
+        "lines": [
+          { "atomIds": ["a-03", "a-04"], "renderedText": "です" }
+        ],
+        "startAnchor": { "atomId": "a-03", "edge": "start" },
+        "endAnchor": { "atomId": "a-04", "edge": "end" },
+        "startMs": 1200,
+        "endMs": 1400
+      }
+    ]
+  }
+}

@@ -1,20 +1,20 @@
 # 解決パッケージ source atom 話者欄の契約改訂候補 v001
 
 - 作成日: 2026-07-20
-- 状態: **調査・改訂案のみ。未承認、未実装**
+- 状態: **2026-07-20に人間が修正版を一括承認。契約v002として実装完了**
 - 対象: `presentation-resolution-package-v001` の `sourceAtoms[].speaker`
 - 人間作業: **0件・0分**
-- 書き込み範囲: 本文書1本のみ。契約、検査器、テスト、fixture、DECISIONS、HANDOVERは変更していない。
+- 提案時の書き込み範囲: 本文書1本のみ。承認後の実装・正本同期は§11に記録する。
 
-## 1. 目的と停止点
+## 1. 目的と提案時の停止点
 
-現行の解決パッケージでは、元発話の `speaker` は任意欄として許可されている一方、値型を検査する専用コードがない。そのため、同時表示の話者区別や将来のG6生成へ入る前に、実データに基づいて次の3点を分離する。
+提案時の解決パッケージv001では、元発話の `speaker` は任意欄として許可されている一方、値型を検査する専用コードがなかった。そのため、同時表示の話者区別や将来のG6生成へ入る前に、実データに基づいて次の3点を分離した。
 
 1. 元STTが付けた、配信内だけで有効な話者ラベル。
 2. 人へ表示する名前と、人物を一意に示すID。
 3. 話者を判定できなかった状態。
 
-本文書は改訂候補の提示で停止する。契約版の改訂、コード変更、テスト追加、fixture変換は、kawafmmの個別承認後に別工程で行う。
+本文書は改訂候補の提示で一度停止した。その後、kawafmmの個別承認を受け、§11の別工程で契約版の改訂、コード変更、テスト追加を行った。fixtureは変更していない。
 
 ## 2. 調査対象
 
@@ -22,7 +22,7 @@
 
 `evals/clip_composition/fixtures/*/transcript.json` の全11ディレクトリ、35,618発話を読み取り、各発話の `speaker` の有無、JSON型、値を集計した。`draft_` で始まる1件は凍結済みfixtureと混ぜず、参考データとして分離した。
 
-### 2.2 現行契約
+### 2.2 提案時の契約v001
 
 次を照合した。
 
@@ -60,11 +60,11 @@
 
 したがって「SPEAKER_00型・表示名型・nullが既存fixtureに混在する」という前提は、現在の正本fixtureからは確認できなかった。表示名とnullを将来入力として受けられる構造は検討できるが、「実fixtureで観測済み」とは記録しない。
 
-## 4. 現行契約の問題
+## 4. 提案時の契約v001の問題
 
 ### 4.1 JSON型が未検査
 
-現在は `speaker: 1`、`speaker: {}`、`speaker: []` もsource atomの専用違反として検出されない。source atom全体をrejectする根拠が曖昧になる。
+提案時のv001では `speaker: 1`、`speaker: {}`、`speaker: []` もsource atomの専用違反として検出されなかった。source atom全体をrejectする根拠が曖昧だった。
 
 ### 4.2 人物でない値を既知話者として扱う
 
@@ -119,7 +119,7 @@ source atomごとに `speakerId`、`displayName`、信頼度を持つobjectへ�
 
 ## 7. 版改訂の範囲案
 
-この変更はsource atomの受理条件と同時表示判定の意味を変えるため、既存v001へ無断追記しない。実装承認後は少なくとも次を版付きで改訂する。
+この変更はsource atomの受理条件と同時表示判定の意味を変えるため、既存v001へ無断追記しない。承認後は少なくとも次を版付きで改訂する案とし、実装でもその境界を維持した。
 
 1. source grammarを持つcaption契約をv002にする。
 2. 解決パッケージを`presentation-resolution-package-v002`にする。
@@ -129,7 +129,7 @@ source atomごとに `speakerId`、`displayName`、信頼度を持つobjectへ�
 
 凍結済みfixtureは変更しない。fixture transcriptから解決パッケージを作る工程で、由来を保持したまま `unknown` / `youtube-auto-caption` を `null` へ明示変換する。
 
-## 8. 実装承認後に必要なテスト案
+## 8. 実装承認後に用いたテスト案
 
 ### 8.1 適合
 
@@ -152,16 +152,24 @@ source atomごとに `speakerId`、`displayName`、信頼度を持つobjectへ�
 - source atomのラベルだけからspeaker target、表示名、speaker icon compatible subjectを生成しないこと。
 - 全専用コードが意図した入力で1回以上発火し、export集合とテスト観測集合が一致すること。
 
-## 9. DECISIONS追記案（未反映）
+## 9. DECISIONS追記案（承認後に反映済み）
 
 > 解決パッケージのsource atom話者欄は、同一source内だけで比較する任意の配信内ラベルとし、欄なし=話者情報の供給なし、null=当該atom未判定、非空文字列=不透明ラベルと定義する。`unknown`と`youtube-auto-caption`は人物でない実測値なのでpackage生成時にnullへ写し、既知話者として扱わない。人物ID・表示名・素材適合はspeaker target側の明示対応を正本とし、source labelから暗黙生成しない。改訂はcaption source grammar・resolution package・境界契約の版を揃え、v001への無断緩和や後方互換分岐を行わない（改訂候補、2026-07-20）。
 
-## 10. 判断が必要になる地点
+## 10. 判断結果
 
-本文書の提示までは人間作業0件で完了した。次に必要なのは、次の3点を一括した**契約改訂方針の1判断**である。
+本文書の提示までは人間作業0件で完了した。2026-07-20に、次の3点を一括した契約改訂方針をkawafmmが承認した。
 
 1. `speaker?: null | non-empty-string`を採る。
 2. `unknown` / `youtube-auto-caption`を解決パッケージでは`null`へ写す。
 3. 人物表示名と人物IDはspeaker targetにだけ置き、source atomから暗黙生成しない。
 
-承認後に初めて、契約版の確定、コード、検査器、testdataの変更計画を提示する。本副線では実装しない。
+承認後、別成果物で実装設計を固定し、契約v002、生成器、検査器、testdata、版付き境界文書を実装した。
+
+## 11. 承認・実装記録
+
+- 実装設計: `presentation-resolution-source-atom-speaker-contract-revision-implementation-design-20260720-v001.md`
+- 実装完了報告: `presentation-resolution-source-atom-speaker-contract-revision-implementation-completion-20260720-v001.md`
+- 承認時に、非人物値一覧は有限で網羅保証しないこと、`null`写像の唯一の所有者と来歴を固定すること、既存73件を変更せずv002回帰を別に通すことを追加条件として確定した。
+- 実装結果は既存73/73、新規10/10、合計83/83合格。v002内でcaption 24/24、外枠27/27、外枠違反114/114の発火を確認した。
+- レンダラー本体、LLM、実データ描画は本承認に含めず未着手である。

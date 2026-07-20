@@ -1,0 +1,75 @@
+{
+  "schemaVersion": "presentation-resolution-package-build-request-v001",
+  "resolutionPackageId": "synthetic-speaker-resolution-v002",
+  "sourceProvenance": "synthetic-speaker-source-v001",
+  "atomGranularity": "word-timestamp",
+  "rawSourceAtoms": [
+    {
+      "atomId": "speaker-raw-01",
+      "speechId": 1,
+      "speaker": "unknown",
+      "text": "未判定",
+      "startMs": 1000,
+      "endMs": 1100,
+      "sourceRef": "synthetic-source-a-v001"
+    },
+    {
+      "atomId": "speaker-raw-02",
+      "speechId": 2,
+      "speaker": "youtube-auto-caption",
+      "text": "字幕由来",
+      "startMs": 1100,
+      "endMs": 1200,
+      "sourceRef": "synthetic-source-a-v001"
+    },
+    {
+      "atomId": "speaker-raw-03",
+      "speechId": 3,
+      "speaker": "SPEAKER_00",
+      "text": "通常ラベル",
+      "startMs": 1200,
+      "endMs": 1300,
+      "sourceRef": "synthetic-source-b-v001"
+    },
+    {
+      "atomId": "speaker-raw-04",
+      "speechId": 4,
+      "text": "欄なし",
+      "startMs": 1300,
+      "endMs": 1400,
+      "sourceRef": "synthetic-source-b-v001"
+    },
+    {
+      "atomId": "speaker-raw-05",
+      "speechId": 5,
+      "speaker": null,
+      "text": "明示未判定",
+      "startMs": 1400,
+      "endMs": 1500,
+      "sourceRef": "synthetic-source-b-v001"
+    },
+    {
+      "atomId": "speaker-raw-06",
+      "speechId": 6,
+      "speaker": "UNKNOWN",
+      "text": "未登録ラベル",
+      "startMs": 1500,
+      "endMs": 1600,
+      "sourceRef": "synthetic-source-b-v001"
+    }
+  ],
+  "targets": [],
+  "captionContracts": [],
+  "sourceArtifacts": [
+    {
+      "sourceRef": "synthetic-source-b-v001",
+      "path": "testdata/synthetic-source-b-v001.json",
+      "fileSha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+    },
+    {
+      "sourceRef": "synthetic-source-a-v001",
+      "path": "testdata/synthetic-source-a-v001.json",
+      "fileSha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    }
+  ]
+}
