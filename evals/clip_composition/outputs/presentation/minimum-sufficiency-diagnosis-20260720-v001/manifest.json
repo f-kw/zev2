@@ -1,9 +1,18 @@
 {
   "kind": "normal-video-minimum-presentation-sufficiency-review-manifest",
   "version": "v001",
-  "generatedAt": "2026-07-20T07:24:30.123Z",
+  "generatedAt": "2026-07-20T07:43:23.133Z",
   "modelRun": null,
   "llmUsed": false,
+  "selectionPolicy": {
+    "type": "deterministic-availability-sample",
+    "randomized": false,
+    "representative": false,
+    "convenienceSample": true,
+    "rule": "承認済み配信者の人間確認済み教師から、内部materialJumpと内部gapが0msで再構成不要な最長連続blockを教師ごとに1件選ぶ",
+    "interpretationLimit": "無作為抽出でも代表標本でもなく、公開前の飛行前点検に使う可用性標本",
+    "replacementAfterResults": false
+  },
   "style": {
     "id": "default-conservative-v001",
     "width": 1920,
@@ -32,6 +41,7 @@
     ],
     "exactTimeEntry": false,
     "freeTextRequired": false,
+    "optionalFreeTextFieldsPerItem": 1,
     "timeMeasurement": false
   },
   "items": [

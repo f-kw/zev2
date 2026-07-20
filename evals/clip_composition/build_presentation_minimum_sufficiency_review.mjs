@@ -380,21 +380,22 @@ const buildReviewHtml = (manifest) => {
 <html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>最小演出十分性 A/B比較</title>
 <style>
-:root{color-scheme:dark;font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans",sans-serif;background:#0c111b;color:#f4f7fb}*{box-sizing:border-box}body{margin:0;padding:0 0 104px}header{padding:16px 20px;background:#151d2b;border-bottom:1px solid #2b3850}h1{font-size:20px;margin:0 0 8px}.lead{margin:0;color:#cad4e5;line-height:1.5}.progress{margin-top:10px;color:#98a9c2}.item{padding:14px 18px}.videos{display:grid;grid-template-columns:1fr 1fr;gap:14px;max-width:1500px;margin:0 auto}.card{background:#151d2b;border:1px solid #2b3850;border-radius:12px;padding:10px}.card h2{font-size:18px;margin:0 0 8px}.card video{display:block;width:100%;max-height:37vh;background:#000;border-radius:8px}.media-actions{display:flex;gap:8px;margin-top:8px}.media-actions button,.dock button,.result-actions button{border:0;border-radius:9px;padding:11px 16px;font-size:15px;font-weight:700;cursor:pointer;background:#26344b;color:#fff}.note{max-width:1100px;margin:12px auto 0;color:#aebbd0}.dock{position:fixed;left:0;right:0;bottom:0;z-index:5;background:#151d2b;border-top:1px solid #32415a;padding:12px 16px}.choices{display:flex;gap:10px;justify-content:center}.choice{min-width:150px}.choice.active{background:#2f8f63}.nav{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:9px;color:#aebbd0}.result{padding:20px;max-width:900px;margin:0 auto}.result textarea{width:100%;height:230px;background:#0b1018;color:#fff;border:1px solid #40516d;border-radius:10px;padding:12px}.result-actions{display:flex;gap:10px;margin-top:10px}.reasons{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:8px;font-size:13px;color:#c9d3e4}.reasons label{background:#202b3e;padding:6px 9px;border-radius:8px}@media(max-width:800px){.videos{grid-template-columns:1fr}.card video{max-height:27vh}.choice{min-width:0;flex:1;padding:12px 6px}.choices{gap:6px}}
+:root{color-scheme:dark;font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans",sans-serif;background:#0c111b;color:#f4f7fb}*{box-sizing:border-box}body{margin:0;padding:0 0 104px}header{padding:16px 20px;background:#151d2b;border-bottom:1px solid #2b3850}h1{font-size:20px;margin:0 0 8px}.lead{margin:0;color:#cad4e5;line-height:1.5}.progress{margin-top:10px;color:#98a9c2}.item{padding:14px 18px}.videos{display:grid;grid-template-columns:1fr 1fr;gap:14px;max-width:1500px;margin:0 auto}.card{background:#151d2b;border:1px solid #2b3850;border-radius:12px;padding:10px}.card h2{font-size:18px;margin:0 0 8px}.card video{display:block;width:100%;max-height:37vh;background:#000;border-radius:8px}.media-actions{display:flex;gap:8px;margin-top:8px}.media-actions button,.dock button,.result-actions button{border:0;border-radius:9px;padding:11px 16px;font-size:15px;font-weight:700;cursor:pointer;background:#26344b;color:#fff}.note{max-width:1100px;margin:12px auto 0;color:#aebbd0}.dock{position:fixed;left:0;right:0;bottom:0;z-index:5;background:#151d2b;border-top:1px solid #32415a;padding:12px 16px}.choices{display:flex;gap:10px;justify-content:center}.choice{min-width:150px}.choice.active{background:#2f8f63}.nav{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:9px;color:#aebbd0}.result{padding:20px;max-width:900px;margin:0 auto}.result textarea{width:100%;height:230px;background:#0b1018;color:#fff;border:1px solid #40516d;border-radius:10px;padding:12px}.result-actions{display:flex;gap:10px;margin-top:10px}.reasons{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:8px;font-size:13px;color:#c9d3e4}.reasons label{background:#202b3e;padding:6px 9px;border-radius:8px}.free-note{display:flex;align-items:center;justify-content:center;gap:8px;margin:8px auto 0;max-width:920px;color:#c9d3e4;font-size:13px}.free-note input{flex:1;min-width:180px;background:#0b1018;color:#fff;border:1px solid #40516d;border-radius:8px;padding:8px 10px}@media(max-width:800px){.videos{grid-template-columns:1fr}.card video{max-height:27vh}.choice{min-width:0;flex:1;padding:12px 6px}.choices{gap:6px}.free-note{align-items:stretch;flex-direction:column}}
 </style></head><body>
 <header><h1>基本テロップだけで十分か：A/B比較</h1><p class="lead"><strong>見ること:</strong> 同じ内容のAとBを見て、全体として良い方を選んでください。どちらが教師かは伏せています。細かな時刻探しや修正は不要です。</p><div class="progress" id="progress"></div></header>
 <main id="items"></main>
 <section class="result" id="result" hidden><h2>回答結果</h2><p>コピーして、そのままチャットへ貼ってください。回答は戻って修正できます。</p><textarea id="resultText" readonly></textarea><div class="result-actions"><button id="back">回答へ戻る</button><button id="copy">結果をコピー</button></div></section>
-<div class="dock" id="dock"><div class="reasons"><span>差の理由（任意・回答前に選択）:</span><label><input type="checkbox" value="caption_readability">テロップの読みやすさ</label><label><input type="checkbox" value="caption_timing">テロップのタイミング</label><label><input type="checkbox" value="emphasis_fun">強調や楽しさ</label><label><input type="checkbox" value="reference_clarity">話者・参照先の分かりやすさ</label><label><input type="checkbox" value="audio">音・効果音・BGM</label></div><div class="choices"><button class="choice" data-answer="A">Aが良い</button><button class="choice" data-answer="same">差はない</button><button class="choice" data-answer="B">Bが良い</button></div><div class="nav"><button id="prev">前へ</button><span id="status"></span><button id="next">次へ</button><button id="showResult">結果を確認</button></div></div>
+<div class="dock" id="dock"><div class="reasons"><span>差の理由（任意・回答前に選択）:</span><label><input type="checkbox" value="caption_readability">テロップの読みやすさ</label><label><input type="checkbox" value="caption_timing">テロップのタイミング</label><label><input type="checkbox" value="emphasis_fun">強調や楽しさ</label><label><input type="checkbox" value="reference_clarity">話者・参照先の分かりやすさ</label><label><input type="checkbox" value="audio">音・効果音・BGM</label></div><label class="free-note"><span>任意メモ（どこで差を感じたか・回答前に入力）</span><input id="differenceNote" type="text" autocomplete="off"></label><div class="choices"><button class="choice" data-answer="A">Aが良い</button><button class="choice" data-answer="same">差はない</button><button class="choice" data-answer="B">Bが良い</button></div><div class="nav"><button id="prev">前へ</button><span id="status"></span><button id="next">次へ</button><button id="showResult">結果を確認</button></div></div>
 <script>
-const ITEMS=${JSON.stringify(publicItems)};const answers=ITEMS.map(()=>({answer:null,reasons:[]}));let current=0;
+const ITEMS=${JSON.stringify(publicItems)};const answers=ITEMS.map(()=>({answer:null,reasons:[],note:''}));let current=0;
 const itemsEl=document.getElementById('items'),progress=document.getElementById('progress'),dock=document.getElementById('dock'),result=document.getElementById('result');
 itemsEl.innerHTML=ITEMS.map((item,index)=>'<section class="item" data-index="'+index+'" hidden><div class="videos"><article class="card"><h2>A</h2><video controls preload="metadata" src="'+item.mediaA+'"></video><div class="media-actions"><button data-play="A">Aを先頭から再生</button></div></article><article class="card"><h2>B</h2><video controls preload="metadata" src="'+item.mediaB+'"></video><div class="media-actions"><button data-play="B">Bを先頭から再生</button></div></article></div><p class="note">比較 '+(index+1)+' / '+ITEMS.length+'。尺のわずかな差は対応測定の粒度によるものです。演出を含む完成度で判断してください。</p></section>').join('');
-function pauseAll(){document.querySelectorAll('video').forEach(v=>v.pause())}function render(){result.hidden=true;itemsEl.hidden=false;dock.hidden=false;document.querySelectorAll('.item').forEach((el,i)=>el.hidden=i!==current);progress.textContent='比較 '+(current+1)+' / '+ITEMS.length;document.querySelectorAll('.choice').forEach(b=>b.classList.toggle('active',b.dataset.answer===answers[current].answer));document.querySelectorAll('.reasons input').forEach(box=>box.checked=answers[current].reasons.includes(box.value));document.getElementById('prev').disabled=current===0;document.getElementById('next').disabled=current===ITEMS.length-1;document.getElementById('status').textContent=answers[current].answer?'回答済み':'未回答';pauseAll()}
+function pauseAll(){document.querySelectorAll('video').forEach(v=>v.pause())}function render(){result.hidden=true;itemsEl.hidden=false;dock.hidden=false;document.querySelectorAll('.item').forEach((el,i)=>el.hidden=i!==current);progress.textContent='比較 '+(current+1)+' / '+ITEMS.length;document.querySelectorAll('.choice').forEach(b=>b.classList.toggle('active',b.dataset.answer===answers[current].answer));document.querySelectorAll('.reasons input').forEach(box=>box.checked=answers[current].reasons.includes(box.value));document.getElementById('differenceNote').value=answers[current].note;document.getElementById('prev').disabled=current===0;document.getElementById('next').disabled=current===ITEMS.length-1;document.getElementById('status').textContent=answers[current].answer?'回答済み':'未回答';pauseAll()}
 document.addEventListener('click',event=>{const play=event.target.closest('[data-play]');if(play){const section=play.closest('.item');const video=section.querySelectorAll('video')[play.dataset.play==='A'?0:1];pauseAll();video.currentTime=0;video.play();return}const choice=event.target.closest('.choice');if(choice){answers[current].answer=choice.dataset.answer;document.querySelectorAll('.reasons input').forEach(box=>{if(box.checked&&!answers[current].reasons.includes(box.value))answers[current].reasons.push(box.value)});if(current<ITEMS.length-1){current+=1}render()}});
 document.querySelectorAll('.reasons input').forEach(box=>box.addEventListener('change',()=>{answers[current].reasons=[...document.querySelectorAll('.reasons input:checked')].map(x=>x.value)}));
+document.getElementById('differenceNote').addEventListener('input',event=>{answers[current].note=event.target.value});
 document.getElementById('prev').onclick=()=>{if(current>0){current-=1;render()}};document.getElementById('next').onclick=()=>{if(current<ITEMS.length-1){current+=1;render()}};
-function resultText(){const labels={A:'Aが良い',same:'差はない',B:'Bが良い'};return ['最小演出十分性診断 人間A/B比較結果','確認者: kawafmm','時間計測: なし','',...ITEMS.map((item,i)=>'比較'+(i+1)+': '+(labels[answers[i].answer]||'未回答')+' / 理由='+(answers[i].reasons.join(',')||'なし'))].join('\\n')}
+function resultText(){const labels={A:'Aが良い',same:'差はない',B:'Bが良い'};return ['最小演出十分性診断 人間A/B比較結果','確認者: kawafmm','時間計測: なし','',...ITEMS.map((item,i)=>'比較'+(i+1)+': '+(labels[answers[i].answer]||'未回答')+' / 理由='+(answers[i].reasons.join(',')||'なし')+' / メモ='+(answers[i].note.trim()||'なし'))].join('\\n')}
 document.getElementById('showResult').onclick=()=>{document.getElementById('resultText').value=resultText();itemsEl.hidden=true;dock.hidden=true;result.hidden=false;pauseAll()};document.getElementById('back').onclick=render;document.getElementById('copy').onclick=async()=>{const text=document.getElementById('resultText').value;try{await navigator.clipboard.writeText(text);document.getElementById('copy').textContent='コピーしました'}catch{document.getElementById('resultText').focus();document.getElementById('resultText').select()}};render();
 </script></body></html>`;
 };
@@ -411,6 +412,9 @@ const validateReviewHtml = (html, expectedItemCount) => {
   }
   if ((html.match(/data-answer=/g) ?? []).length !== 3) {
     throw new Error('review UI must contain exactly three answer buttons');
+  }
+  if (!html.includes('id="differenceNote"') || !html.includes("' / メモ='")) {
+    throw new Error('optional difference note is missing from review UI or copied result');
   }
   if (!html.includes(`比較 '+(index+1)+' / '+ITEMS.length`)) {
     throw new Error('review UI item progress is missing');
@@ -523,6 +527,15 @@ const main = async () => {
     generatedAt: new Date().toISOString(),
     modelRun: null,
     llmUsed: false,
+    selectionPolicy: {
+      type: 'deterministic-availability-sample',
+      randomized: false,
+      representative: false,
+      convenienceSample: true,
+      rule: '承認済み配信者の人間確認済み教師から、内部materialJumpと内部gapが0msで再構成不要な最長連続blockを教師ごとに1件選ぶ',
+      interpretationLimit: '無作為抽出でも代表標本でもなく、公開前の飛行前点検に使う可用性標本',
+      replacementAfterResults: false,
+    },
     style: STYLE,
     humanWork: {
       requiredJudgements: manifestItems.length,
@@ -530,6 +543,7 @@ const main = async () => {
       answerContract: ['A', 'same', 'B'],
       exactTimeEntry: false,
       freeTextRequired: false,
+      optionalFreeTextFieldsPerItem: 1,
       timeMeasurement: false,
     },
     items: manifestItems,
@@ -544,7 +558,7 @@ const main = async () => {
     '確認者: kawafmm',
     '時間計測: なし',
     '',
-    ...manifestItems.map((_, index) => `- 比較${index + 1}: Aが良い / 差はない / Bが良い`),
+    ...manifestItems.map((_, index) => `- 比較${index + 1}: Aが良い / 差はない / Bが良い / 理由=任意 / メモ=任意`),
     '',
   ].join('\n'));
   // 透明PNGは保守版mp4生成時だけ使う中間物で、確認画面と再現記録には不要。
