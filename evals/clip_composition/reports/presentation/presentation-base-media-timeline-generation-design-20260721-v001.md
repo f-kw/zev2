@@ -2,9 +2,9 @@
 
 日付: 2026-07-21
 
-状態: **人間承認待ち。設計のみ。生成器、合成testdata、実データ生成、実描画は未着手。**
+状態: **人間承認済み。合成データ範囲の生成器・時間対応表v002・レンダラーv002入口を実装完了。実データ生成・実描画は未着手。**
 
-人間作業: **1判断、1セッション。目安5分以内。時間計測なし。**
+人間作業: **設計承認1判断は完了。実装・検査工程の追加人間作業は0件。**
 
 今回の1承認で実装するのは、次の3点だけである。
 
@@ -170,16 +170,16 @@ CLIは`presentation-base-media-build-job-v001`を1件だけ受ける。
 
 映像の正本は30fpsの**論理source frame**とする。入力が30fpsなら入力frameをそのまま使い、60fpsなら時間軸0を起点として偶数番号のframeだけを採る。補間や近傍frameの独自選択は行わない。その他のfpsはv001で拒否する。
 
-各区間は、既存の30fps丸め規則`frameBoundaryV001`で次のように写す。
+各区間は、既存の30fps丸め規則`frameBoundaryV001`で次のように写す。ただし入力は整数msしか持たず、60fpsのdecoded frame数が奇数の場合は媒体終端を整数msで厳密に表せない。そこで**終了端だけ**、`sourceEndMs`が`floor(decodedFrameCount * 1000 / inputFps)`と完全一致した場合を「decoded媒体終端の整数ms表現」とし、30fps論理frame総数へ写す。内部終端と開始端にはこの規則を適用しない。
 
 ```text
 sourceStartFrame30 = frameBoundaryV001(sourceStartMs)
-sourceEndFrame30 = frameBoundaryV001(sourceEndMs)
+sourceEndFrame30 = decoded媒体終端ならlogicalFrameCount、その他はframeBoundaryV001(sourceEndMs)
 outputStartFrame = それ以前の区間の論理frame数の合計
 outputEndFrame = outputStartFrame + (sourceEndFrame30 - sourceStartFrame30)
 ```
 
-各区間で`sourceEndFrame30 - sourceStartFrame30 > 0`を必須とする。元時刻の内部点は、一度ミリ秒の出力時刻へ変換せず、次の式で直接output frameへ写す。
+媒体終端の特例は許容幅ではない。`sourceEndMs * inputFps <= decodedFrameCount * 1000`の有理比較を維持し、1msでも真の媒体尺を越える値は拒否する。各区間で`sourceEndFrame30 - sourceStartFrame30 > 0`を必須とする。元時刻の内部点は、一度ミリ秒の出力時刻へ変換せず、次の式で直接output frameへ写す。
 
 ```text
 sourceFrame30 = frameBoundaryV001(sourceMs)
@@ -234,7 +234,8 @@ base-media + timeline + generation-manifest <- validation-report
   "sourceFrameClock": {
     "inputFrameRate": "30/1 または 60/1",
     "logicalFrameRate": "30/1",
-    "extractionRuleId": "source-frame-30fps-identity-v001 または source-frame-60fps-global-even-v001"
+    "extractionRuleId": "source-frame-30fps-identity-v001 または source-frame-60fps-global-even-v001",
+    "decodedFrameCount": 181
   },
   "baseMedia": {
     "artifactId": "決定的ID",
@@ -257,7 +258,7 @@ base-media + timeline + generation-manifest <- validation-report
 }
 ```
 
-`inputFrameRate`と`extractionRuleId`の組合せは上記2通りだけ。targetの元ms半開区間は、先に人間由来msで1segment内へ完全包含されることを確認し、両端を`frameBoundaryV001`で30fps論理frameへ写す。そのframe差が正の場合だけ、segmentのsource/output frame差で直接output frameへ移す。segmentをまたぐtarget、0frameへ潰れるtarget、timeline v001は拒否する。
+`inputFrameRate`と`extractionRuleId`の組合せは上記2通りだけ。`decodedFrameCount`は生成manifestが実mediaから観測した値と完全一致させる。targetの元ms半開区間は、先に人間由来msで1segment内へ完全包含されることを確認する。開始は`frameBoundaryV001`、終了は§5の媒体終端特例を含む同一関数で30fps論理frameへ写す。そのframe差が正の場合だけ、segmentのsource/output frame差で直接output frameへ移す。segmentをまたぐtarget、0frameへ潰れるtarget、timeline v001は拒否する。
 
 既存レンダラーの意味検査、文字配置、preset、描画、音声stream-copyは変更しない。変更するのは、対象の元時刻を描画frameへ解決する入口だけである。
 
@@ -285,7 +286,24 @@ base-media + timeline + generation-manifest <- validation-report
     "path": "評価環境内相対path",
     "fileSha256": "...",
     "video": {"width": 1920, "height": 1080, "frameRate": "60/1", "timeBase": "1/60", "decodedFrameCount": 1, "firstPts": 0, "lastPts": 0, "rotation": 0},
-    "audio": {"present": true, "sampleRate": 48000, "channels": 2, "channelLayout": "stereo", "timeBase": "1/48000", "firstDecodedPts": 312, "lastDecodedPts": 312}
+    "audio": {
+      "present": true,
+      "codec": "aac",
+      "sampleRate": 48000,
+      "channels": 2,
+      "channelLayout": "stereo",
+      "timeBase": "1/48000",
+      "firstDecodedPts": 312,
+      "lastDecodedPts": 312,
+      "presentationClock": {
+        "authority": "stream-and-packet-v001",
+        "endSample": 192000,
+        "streamEndSample": 192000,
+        "packetEndSample": 192000,
+        "skipSamples": 1024,
+        "discardPadding": 0
+      }
+    }
   },
   "assemblyDecision": {"decisionId": "...", "fileSha256": "...", "payloadSha256": "...", "approvalRecordId": "..."},
   "basisEditPlan": {"kind": "edit_plan_json", "path": "...", "fileSha256": "..."},
@@ -309,7 +327,7 @@ base-media + timeline + generation-manifest <- validation-report
     "channelOrder": ["FL", "FR"],
     "canonicalPcmFormat": {"sampleFormat": "f32le", "packing": "interleaved"},
     "insertedSilenceSpans": [{"startSample": 0, "endSample": 312}],
-    "sourceGrid": {"sampleCount": 192000, "byteCount": 1536000, "payloadSha256": "..."},
+    "sourceGrid": {"sampleCount": 192000, "byteCount": 1536000, "payloadSha256": "...", "decodedSampleCount": 192608, "decodedTailPaddingSampleCount": 608},
     "encodeInput": {"sampleCount": 144000, "byteCount": 1152000, "payloadSha256": "..."},
     "encoded": {
       "codec": "aac",
@@ -318,7 +336,11 @@ base-media + timeline + generation-manifest <- validation-report
       "timeBase": "1/48000",
       "startPts": 0,
       "durationTs": 144000,
+      "containerDurationSamples": 144000,
       "presentationDurationSamples": 144000,
+      "videoPresentationDurationSamples": 144000,
+      "trailingVideoOnlySampleCount": 0,
+      "tailPolicy": "frame-aligned-v001",
       "rawDecodedSampleCount": 144384,
       "effectiveDecodedSampleCount": 144000,
       "effectiveDecodedPayloadSha256": "...",
@@ -327,6 +349,21 @@ base-media + timeline + generation-manifest <- validation-report
       "discardPadding": 0,
       "encoderDelay": 1024
     }
+  },
+  "execution": {
+    "commands": [
+      {
+        "stage": "video-build",
+        "tool": "ffmpeg",
+        "arguments": ["...", "<SOURCE_MEDIA>", "...", "<TEMP_VIDEO>"],
+        "filterGraph": "実際に使用した固定filter graph"
+      }
+    ],
+    "trustedSourceFiles": [
+      {"role": "renderer-v001-encode-source", "path": "evals/clip_composition/render_presentation_v001.mjs", "fileSha256": "..."},
+      {"role": "preview-builder-aac-source", "path": "evals/clip_composition/build_presentation_initial_preset_review.mjs", "fileSha256": "..."},
+      {"role": "caption-canonical-json-source", "path": "evals/clip_composition/presentation_caption_contract_v002.mjs", "fileSha256": "..."}
+    ]
   },
   "tools": {
     "expected": {"nodeVersion": "v20.19.6", "ffmpegVersion": "...", "ffprobeVersion": "..."},
@@ -343,12 +380,13 @@ base-media + timeline + generation-manifest <- validation-report
 }
 ```
 
-- `source`は上記fieldだけを持つ。音声なしの場合、子`audio`は`{"present": false}`だけとする。
+- `source`は上記fieldだけを持つ。音声なしの場合、子`audio`は`{"present": false}`だけとする。音声ありの場合、`presentationClock`はstream終端と全packet終端がsample単位で完全一致した`stream-and-packet-v001`だけを許す。時計が取れないcodecをdecoded frame長へfallbackしない。skip/discardは既にpacket時計へ反映された診断事実として記録し、終端から再減算しない。
 - `assemblyDecision`はdecision ID、file SHA-256、payload SHA-256、承認record IDだけを持つ。
 - `basisEditPlan`はkind、相対path、file SHA-256だけを持つ。
 - `segments`は上記8 fieldを入力順で持つ。音声なしの場合の`audioSamples`は`null`とする。
-- top-level `audio`は音声なしなら`{"present": false}`だけ。音声ありなら上記fieldだけを持つ。`skipSamples`、`discardPadding`、`encoderDelay`は診断値であり、合否の減算式へ使わない。
+- top-level `audio`は音声なしなら`{"present": false}`だけ。音声ありなら上記fieldだけを持つ。`sourceGrid.sampleCount`は提示終端で物理的に切ったcanonical PCM長、`decodedSampleCount`は切断前のdecoder出力長、両者の差は`decodedTailPaddingSampleCount`と一致させる。`containerDurationSamples`、`presentationDurationSamples`、`videoPresentationDurationSamples`を混同せず、映像だけの末尾を`trailingVideoOnlySampleCount`へ記録する。`skipSamples`、`discardPadding`、`encoderDelay`は診断値であり、合否の減算式へ使わない。
 - `job`、`versions`、`git`は上記fieldだけを持つ。`tools`は§7.3の期待値と実測値、`implementationFiles`は実行した評価環境内fileの相対pathとSHA-256を固定順で持つ。
+- `execution`は実行したFFmpeg工程を固定順で持つ。音声なしは`video-build`、音声ありは`video-build`→`audio-grid`→`audio-mux`だけを許し、実pathは固定placeholderへ置換する。`trustedSourceFiles`は上記3件のrole・path・承認時hashを固定順で持つ。
 - `outputs`は上記2子objectとfieldだけを持つ。音声なしの場合の`audioPacketPayloadSha256`は`null`とする。manifest自身とvalidation reportを参照しない。
 - `excludedLegacyFields`は旧テロップ・旧画面構成等、実行へ渡さなかったfield名を固定順で持つ。
 
@@ -447,6 +485,7 @@ render manifest v002のtop-levelは、`schemaVersion`、`rendererVersion`、`ren
 - 音声streamは0件または1件。複数音声streamは初期版で拒否する。
 - 音声がある場合のsample rateは44,100Hzまたは48,000Hz、channel layoutはmonoまたはstereoだけを受け付ける。AAC encoderが暗黙にrate・channel数・channel orderを変換する入力は受け付けず、出力にも同じ値を明示する。
 - decoded音声の先頭PTSが0であることは要求しない。decoded frameごとのPTSとsample数を元動画のpresentation time上のsample gridへ厳密に写し、PTSの逆転・負値・sample区間の重複は拒否する。正の空白は無音として同じ長さを保持し、区間ごとの開始・終了をmanifestへ記録する。現行YouTube由来Opusのように先頭audio PTSが映像frame 0より後でも、発話を前へ詰めない。
+- 音声の提示終端はstreamの開始・durationと全packetのPTS・durationをsampleへ厳密換算し、双方の終端が完全一致した場合だけ確定する。decoderがcodec frame幅へ展開した物理長は提示終端の正本にしない。時計の欠落・不一致をdecoded尺へfallbackせず拒否する。
 - rotation等により表示向きの解釈が必要なmediaは拒否する。
 - FFprobeで観測した尺が全区間を含む。
 
@@ -458,7 +497,8 @@ render manifest v002のtop-levelは、`schemaVersion`、`rendererVersion`、`ren
 - 出力は1920×1080・30fpsとする。画角変更、crop、拡大、速度変更、色補正は行わない。
 - 映像encode引数は、承認済みレンダラーv001と同じ`libx264 / preset fast / CRF 20 / yuv420p / +faststart`を固定する。由来正本`render_presentation_v001.mjs`の承認時file hash `13dc1c76ccdca415cb398ba1f3e0cb77e8cac5918f92c3647a273c4a6e4a281d`と実byteを起動時に完全一致検査する。
 - 音声境界を人間決定の生msから独立に丸めない。`samplesPerVideoFrame = sourceSampleRate / 30`を整数として求め、§5の実効映像frame境界から音声境界も決める。
-- 各区間に、元動画のpresentation time 0を起点とする`sourceStartSampleOnPresentationClock = sourceStartFrame30 * samplesPerVideoFrame`、`sourceEndSampleOnPresentationClock = sourceEndFrame30 * samplesPerVideoFrame`と、出力先頭を起点とする`outputStartSample = outputStartFrame * samplesPerVideoFrame`、`outputEndSample = outputEndFrame * samplesPerVideoFrame`を作る。全端点は非負整数、各区間長は正、source/output区間長は一致、outputは連続でなければならない。
+- 各区間に、元動画のpresentation time 0を起点とする`sourceStartSampleOnPresentationClock = sourceStartFrame30 * samplesPerVideoFrame`、`sourceEndSampleOnPresentationClock = sourceEndFrame30 * samplesPerVideoFrame`と、出力先頭を起点とする`outputStartSample = outputStartFrame * samplesPerVideoFrame`、`outputEndSample = outputFrame差に対応するsample終端`を作る。通常区間では全端点は非負整数、各区間長は正、source/output区間長は一致し、outputは連続でなければならない。
+- 唯一の例外として、最後のsegmentが§5のdecoded媒体終端に一致し、最後の論理映像frameの音声窓より実在PCM gridが短い場合は、**実在する最後sampleまでだけ**をsource/outputへコピーする。無音paddingを作らず、途中segmentや媒体終端以外の不足は従来どおり拒否する。映像尺、MP4 containerが宣言する音声track尺、実AAC packetのpresentation尺、映像だけが残る末尾sample数、適用したtail policyを別々にmanifestへ記録する。
 - decode後、`aresample=first_pts=0:min_hard_comp=0:max_soft_comp=0`を固定してpresentation time 0起点の連続PCM gridを作る。soft stretchは使わず、PTSの正の空白だけを同長のzero sampleで埋める。追加した無音区間をmanifestへ保存し、元音声streamが無い入力へ新しい音声trackを作る処理とは分離する。
 - 連続gridは`f32le`・interleaved・元channel order不変をcanonical PCM表現とし、sample数・byte数・SHA-256を保存する。そのgridを上記frame由来sample境界でsample ordinal trimし、時刻を0へresetして入力順でconcatする。これにより、先頭audio PTSが0でない元動画でも内容を前へずらさず、映像と音声を同じframe境界で切り替え、複数区間で位相差を累積させない。
 - 音声encodeは、人間が実描画previewで確認済みの媒体生成と同じ`AAC / 192k`を固定する。出力sample rate・channel layout・channel orderは入力と同じ値を明示し、自動変換を禁止する。MP4のmovie time scaleは出力fpsと同じ30へ固定し、1frame単位の音声尺を既定1000単位へ丸めない。由来正本`build_presentation_initial_preset_review.mjs`の承認時file hash `97cd4c4cfb2369103228c5156297b3b7a8ea2f14746f0ebd58927074f7ca2646`と実byteを起動時に完全一致検査する。
@@ -470,9 +510,10 @@ AAC encode前に、連結済みPCMのsample frame数とpayload SHA-256を正本�
 
 AAC後の合格条件は次の1経路へ固定する。
 
-1. `-movie_timescale 30`で生成したcontainerが宣言する音声のpresentation durationをstream time baseからsample rateへ有理数変換し、その値がencode前PCMのsample数と完全一致する。
+1. 実AAC packetの0以降のPTSとdurationが連続し、packetが示すpresentation sample数がencode前PCMのsample数と完全一致する。期待終端より後のpacketを許可しない。
 2. AACを通常decodeした後、出力先頭からencode前PCMと同じsample数へ**明示的にtrim**する。この有効範囲のdecoded sample数が期待値と一致することを検査し、そのpayload SHA-256を記録する。lossy encodeなのでencode前PCMのhashとの一致は要求しない。
-3. trim前の生decode sample数、packet duration、skip samples、discard padding、encoder delayは診断値として記録するが、相互に減算して合否値を作らない。
+3. containerのdurationは実packet尺以上・映像尺以下を必須とし、実packet尺との差を音声の創作とは数えない。通常区間では実packet尺と映像尺が一致しなければならない。§5の媒体終端特例だけは、映像尺から実packet尺を引いた非負差を`trailingVideoOnlySampleCount`として明示する。
+4. trim前の生decode sample数、container duration、packet presentation duration、skip samples、discard padding、encoder delayは別々の診断値として記録し、相互に減算して都合のよい合否値を作らない。
 
 44,100Hz・48,000Hzそれぞれについて、1frame・2frameという非1024倍のsample数を持つ合成音声で検査する。raw decodeには末尾paddingが現れても、containerのpresentation durationと明示trim後の有効sample数が期待値へ一致しなければならない。durationをsample数へ一意に変換できない場合や、明示trim後に期待数を得られない場合は独自許容幅で通さず停止する。各streamの先頭PTS、末尾PTS、duration、time base、音声packet payload SHA-256も記録する。演出レンダラーは、この検査済み基礎音声をstream copyして保持する。
 
@@ -512,10 +553,10 @@ AAC後の合格条件は次の1経路へ固定する。
 - workspaceから入力・出力までの全階層についてsymlinkを拒否し、実体pathが許可root内にあることを確認する。
 - すべての入力は、open・read・hashより前に許可root、realpath、全祖先symlinkを検査する。安全性未確認のpathを読んでから拒否しない。
 - 既存の成功ディレクトリへ上書きしない。同じjob IDが存在する場合も先勝ち・追記をせず停止する。
-- 出力jobごとに同一親のlock fileを排他的作成で取得する。lock取得後に一時ディレクトリを作り、成功・失敗のどちらでもfinallyで解放する。別processが同じ成功先を確保した場合は上書きせず停止する。
+- 出力jobごとに同一親のlock fileを排他的作成で取得する。lock取得後に、公開成果物だけを置くpublication temporary directoryと、source snapshot・encode中間物を置くworking directoryを分けて作る。lockのfile handleはfinallyでcloseするが、lock path、working directory、失敗時のpublication temporary directoryは成功・失敗とも自動unlink・自動削除しない。path検査と削除の間のsymlink競合をNodeのpath APIだけで完全に閉じられないため、**掃除より安全を優先し、安全を証明できない外部pathへ削除操作を出さない**ことを契約とする。残留pathは実行戻り値`retainedBuildPaths`と失敗reportの第1違反detailsへ記録し、既存出力またはlockがある再実行は従来どおり停止する。
 - 最終pathを先に決め、JSONには最終ディレクトリからの相対pathだけを記録する。一時pathは成果物へ残さない。
-- 最終出力と同じ親の一時ディレクトリへ生成する。rename直前にも出力先の不在・非symlinkを再検査し、全検査合格後にディレクトリ単位でrenameする。
-- 失敗時は成功名のMP4、timeline、manifestを残さない。診断reportだけを`outputs/presentation/base-media-failures/`配下へ別保存する。
+- 最終出力と同じ親のpublication temporary directoryへ公開成果物だけを生成する。rename直前には最終path自身だけでなく、workspaceから出力・一時先までの全親階層についてsymlink、realpath許可root、同一実親、最終先不在を再検査し、全検査合格後にディレクトリ単位でrenameする。
+- 失敗時は成功名のMP4、timeline、manifestを残さない。診断reportは`outputs/presentation/base-media-failures/`配下へ別保存し、残留したpublication temporary directory・working directory・lockは診断pathとして保持する。
 - fixture、expected、confirmed、正式preset/material台帳、信頼binding、runner、本体を変更しない。
 
 ## 10. 検査順と違反コード
@@ -639,6 +680,8 @@ manifest自身とvalidation reportのhashはmanifestへ入れない。
 3. 人間承認対象hash、採用区間列、未解決編集0件の機械一致。
 4. G4〜G7側が使う解決パッケージと、同じ`sourceRef`・`sourceProvenance`を使えること。
 5. 人間へ見せる確認媒体の件数と問い。
+6. `unresolvedEdits: []`へ確定するため、人間が「無音・言い淀みを詰める」等の定性的要求を具体的な最終区間列へ変換できる確認UI。
+7. その確認UIで人間へ要求する件数、1件あたりの見積り、合計、1セッションの判定数。生成器が定性的要求を自動で切断点へ変換する経路は作らない。
 
 現時点で実データ候補は確定しない。正式な組立決定artifactが存在するかを棚卸しした後、最短候補を別ゲートで提示する。
 
@@ -674,3 +717,13 @@ manifest自身とvalidation reportのhashはmanifestへ入れない。
 - 本体、runner、backend、client、scripts、runtimeの変更。
 
 **判断は1件: この設計と上記の合成実装範囲をまとめて承認するか。**
+
+## 16. 承認・実装記録
+
+- 2026-07-21、kawafmmが相談役レビューを貼り付け、本設計の§15に限定した合成実装を最終承認した。生成器、時間対応表v002、レンダラーv002入口は密結合のため一括承認とするが、完了報告では3部品を分けて報告する。
+- 実データの正式入口は時間対応表v002とレンダラーv002だけとする。時間対応表v001・レンダラーv001は削除せず実験記録として保持するが、実データへ使わない。
+- 実データゲートでは、層1で人間領分と確定した定性的な詰め要求を最終区間列へ確定する確認UIと作業量見積りを先に提示する。エージェントは切断点を自動具体化しない。
+- 実装前監査で、§7.2・§11はFFmpeg引数列とfilter graphのmanifest保存を必須としている一方、§6.3の厳密なtop-level例から保存欄`execution`が欠落している設計内矛盾を検出した。承認済みの記録要件を落とさない安全側で、`execution`を必須fieldとして本節・§6.3へ明示する欠落訂正を行った。同じschema名の意味を黙って変更したものとして扱わず、訂正理由と追加fieldを本記録、DECISIONS、完了報告へ残す。旧形を受けるfallbackは作らない。
+- 最終独立監査で、(a)レンダラーv002が無効jobでも既存出力を消し得る、(b)生成中の親directory差し替えを公開直前だけでは閉じ切れない、(c)60fps奇数frame入力の最終global-even frameが整数ms入力から到達不能、の3件を検出した。実装を停止し、v002正式入口を新規先限定・所有lock・検証済みdirectory一括公開へ変更し、生成器とレンダラーの本番経路から自動`rm`/`unlink`を撤去した。working directoryとlockは診断用に保持し、掃除より外部誤削除防止を優先する。
+- 60fps奇数frame終端は、`decodedFrameCount`をtimelineへ束縛し、整数msのdecoded媒体終端だけを論理frame総数へ写す。同じ監査の再確認で音声付き末尾の不足とAAC decode paddingの混入も検出し、stream/packet提示終端でcanonical PCMを物理的に切る契約へ補った。181frame・60fps・48kHz AACの実媒体では、stream/packet提示終端144,800 sample、decoder出力145,408 sample、診断padding 608 sampleを観測し、対象区間は実音声800 sampleだけを保存、映像1,600 sampleとの差800 sampleを映像のみの尾として検査した。これらの値は規則へ固定せず、各mediaの実時計から導出する。
+- 合成実装は、元動画の固定snapshot、実job byte、人間承認payload、元編集案、実行コマンド、固定した実装由来、基礎映像、時間対応表、レンダラー入口を一方向のhashと来歴で結んだ。実データ生成、人間視聴、G4〜G7生成側、LLM、本体接続は引き続き未承認である。
