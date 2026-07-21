@@ -1,0 +1,60 @@
+{
+  "schemaVersion": "presentation-first-real-data-rendered-comparison-human-observation-v001",
+  "observer": "kawafmm",
+  "observationDate": "2026-07-22",
+  "resultReference": {
+    "path": "evals/clip_composition/outputs/presentation/20260722-first-real-data-rendered-comparison-v002-human-response-v001/human-result.json",
+    "canonicalSha256": "12b9e1bfb8e848a29b875ead1e34aed8e8a604a0d6fadce742ec5b9210ec95d3"
+  },
+  "humanStatements": [
+    "なんか　の　か　が切られていた",
+    "ちゃんと発話の終了で切ってるか？かの最初に切られているようにも見えた"
+  ],
+  "diagnosis": {
+    "status": "confirmed_boundary_candidate_error",
+    "affectedGapId": "gap-01",
+    "affectedComparisonVariants": [
+      "cut-both",
+      "cut-gap1"
+    ],
+    "selectedVariantAffected": false,
+    "precedingTextTail": "この前そのなんか",
+    "finalCharacter": {
+      "characterId": "word-7057",
+      "text": "か",
+      "startMs": 1948038,
+      "endMs": 1948058,
+      "annotatedDurationMs": 20
+    },
+    "proposedGapStartMs": 1948058,
+    "comparisonMediaCut": {
+      "sourceEndFrame30": 58442,
+      "sourceEndAudioSample48k": 93507200,
+      "effectiveSourceEndMs": 1948066.667
+    },
+    "cause": "STTの文字終端が実際の語尾を覆わず、構造上の発話終端を音響上安全な切断点として提示した",
+    "mediaBuilderAssessment": "指定境界より早く切ってはいない",
+    "selectedVariantAssessment": "cut-gap2はgap-01を切らず、元動画1920260〜1977670msを連続保持する"
+  },
+  "selectedBoundaryKnownRisk": {
+    "gapId": "gap-02",
+    "precedingCharacter": {
+      "characterId": "word-7179",
+      "text": "ど",
+      "startMs": 1977650,
+      "endMs": 1977670,
+      "annotatedDurationMs": 20
+    },
+    "comparisonMediaSourceEndFrame30": 59330,
+    "comparisonMediaSourceEndMs": 1977666.667,
+    "followingCharacter": {
+      "characterId": "word-7180",
+      "text": "そ",
+      "startMs": 1981394
+    },
+    "comparisonMediaRestartFrame30": 59442,
+    "comparisonMediaRestartMs": 1981400,
+    "humanAudibleDefect": "not_reported",
+    "handling": "正式組立決定前の既知境界リスクとして保持"
+  }
+}

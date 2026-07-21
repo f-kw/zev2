@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "presentation-first-real-data-rendered-comparison-human-receipt-v001",
+  "receiptId": "DmWu0jVQfTE-candidate-13-rendered-comparison-receipt-v001",
+  "status": "received_with_boundary_diagnostic",
+  "comparisonPackage": {
+    "path": "evals/clip_composition/outputs/presentation/20260722-first-real-data-rendered-comparison-v002/comparison-preview-build-summary.json",
+    "fileSha256": "e4272a5c95a46546abc4287048e8b1a0b39c3b2f67b4ab647127b31baa2ca4fc"
+  },
+  "humanResult": {
+    "path": "evals/clip_composition/outputs/presentation/20260722-first-real-data-rendered-comparison-v002-human-response-v001/human-result.json",
+    "fileSha256": "626c0463db84594133d5c288d1125aa5125a2a6e0e1fef6bfe929786a0d6bcdf",
+    "canonicalSha256": "12b9e1bfb8e848a29b875ead1e34aed8e8a604a0d6fadce742ec5b9210ec95d3"
+  },
+  "humanObservation": {
+    "path": "evals/clip_composition/outputs/presentation/20260722-first-real-data-rendered-comparison-v002-human-response-v001/human-observation.json",
+    "fileSha256": "5e14ed036538eb1bcd27fc9c806eb1ba26932b40260208d306f1238fc5785829"
+  },
+  "validation": {
+    "fixedReferenceChain": "passed",
+    "resultSchema": "passed",
+    "resolutionRecomputation": "passed",
+    "recomputedResolution": {
+      "gap01": "keep",
+      "gap02": "cut",
+      "variantId": "cut-gap2"
+    },
+    "contractMayCreateFormalAssemblyDecision": true
+  },
+  "diagnosticImpact": {
+    "reportedDefectAffectsSelectedVariant": false,
+    "reportedDefectMeaning": "gap-01を切るB/C枝では『なんか』末尾の『か』が欠けるため、gap-01を残した",
+    "selectedVariantKnownRisk": "gap-02直前の『ど』も20ms注釈で、30fps終端は注釈終端より3.333ms早い",
+    "resultChanged": false
+  },
+  "workflow": {
+    "formalAssemblyDecisionCreated": false,
+    "baseMediaCreated": false,
+    "timelineCreated": false,
+    "renderingStarted": false,
+    "remainingCandidatesExpanded": false,
+    "nextGate": "正式組立決定への変換は別承認"
+  }
+}
