@@ -1,0 +1,347 @@
+{
+  "schemaVersion": "presentation-first-real-data-rendered-comparison-provenance-v001",
+  "comparisonId": "DmWu0jVQfTE-candidate-13-rendered-comparison-provenance-v001",
+  "purpose": "human-review-comparison-only",
+  "humanReviewOnly": true,
+  "formalAssemblyDecision": false,
+  "builderVersion": "presentation-first-real-data-rendered-comparison-builder-v001",
+  "source": {
+    "path": "evals/clip_composition/research/downloads/first-gate-unseen/DmWu0jVQfTE/native-1080p/DmWu0jVQfTE.native-1080p-h264-opus.mp4",
+    "fileSha256": "a2c4548d07eb387f095a198b8f6892121134c46e8c0d5315e4debf3e083234ee"
+  },
+  "fixedReferences": {
+    "mediaEquivalence": {
+      "path": "evals/clip_composition/outputs/presentation/20260721-first-real-data-assembly-gate-v001/media-equivalence.json",
+      "fileSha256": "98c0f2018553f39a855610c569f2908efecccc0dadb696fc2b156d19010c15ea"
+    },
+    "sourceIdentity": {
+      "path": "evals/clip_composition/outputs/presentation/20260721-first-real-data-assembly-gate-v001/source-identity.json",
+      "fileSha256": "a7c9e9a8c3917662bcf3b66fad46cedc56f5ca558467226453339ea370108993"
+    },
+    "candidateManifest": {
+      "path": "evals/clip_composition/outputs/presentation/20260721-first-real-data-assembly-gate-v001/candidate-manifest.json",
+      "fileSha256": "3937747e947ef0dd27a67e289d06cece8c17a55b655c85fa7d6aaf21f696ec12"
+    }
+  },
+  "candidate": {
+    "candidateId": 13,
+    "title": "実家の母ちゃんから届いた謎の仕送り『月刊ムー』",
+    "startMs": 1920260,
+    "endMs": 2008506
+  },
+  "gaps": [
+    {
+      "gapId": "gap-01",
+      "startMs": 1948058,
+      "endMs": 1949982
+    },
+    {
+      "gapId": "gap-02",
+      "startMs": 1977670,
+      "endMs": 1981394
+    }
+  ],
+  "sourceClock": {
+    "fps": 60,
+    "decodedFrameCount": 528840,
+    "logicalFrameCount": 264420
+  },
+  "audioClock": {
+    "sampleRate": 48000,
+    "channels": 2,
+    "channelLayout": "stereo",
+    "sourceGridMappingEndSample": 423073008
+  },
+  "seekWindow": {
+    "sourceStartSeconds": 1918,
+    "sourceStartFrame30": 57540,
+    "sourceStartSample": 92064000,
+    "durationSeconds": 90.53333333333333
+  },
+  "encoding": {
+    "video": "h264/libx264 fast crf20 yuv420p 1920x1080 30fps movie-timescale-30",
+    "audio": "aac 192kbps 48000Hz stereo",
+    "metadataPolicy": "removed",
+    "chaptersPolicy": "removed",
+    "ffmpegFilterGraphSha256": "37756b2a3f382b4a27e2d75ac6885fa2748685386dbd996532f85a39c6664a0c"
+  },
+  "variants": [
+    {
+      "variantId": "keep-both",
+      "cutGapIds": [],
+      "mappings": [
+        {
+          "segmentId": "segment-0001",
+          "sourceStartMs": 1920260,
+          "sourceEndMs": 2008506,
+          "sourceStartFrame30": 57608,
+          "sourceEndFrame30": 60255,
+          "outputStartFrame": 0,
+          "outputEndFrame": 2647,
+          "audioSamples": {
+            "sourceStart": 92172800,
+            "sourceEnd": 96408000,
+            "outputStart": 0,
+            "outputEnd": 4235200
+          }
+        }
+      ],
+      "expectedFrameCount": 2647,
+      "expectedAudioSampleCount": 4235200,
+      "media": {
+        "path": "media/keep-both.mp4",
+        "fileSha256": "efd0d4ceb79e7b5db7e2548ada6c3ffa791df2648c50640cd1fc7e9eaa79d08e",
+        "byteCount": 22476861
+      },
+      "inspection": {
+        "frameCount": 2647,
+        "decodedFramePayloadSha256": "c132201ece7a2d48f528e7c886388fb9ca854005c63162af6fa071e5103cfb8d",
+        "audio": {
+          "present": true,
+          "codec": "aac",
+          "timeBase": "1/48000",
+          "startPts": 0,
+          "durationTs": 4235200,
+          "containerDurationSamples": 4235200,
+          "presentationDurationSamples": 4235200,
+          "videoPresentationDurationSamples": 4235200,
+          "trailingVideoOnlySampleCount": 0,
+          "tailPolicy": "frame-aligned-v001",
+          "rawDecodedSampleCount": 4235264,
+          "effectiveDecodedSampleCount": 4235200,
+          "effectiveDecodedPayloadSha256": "9a2c074b4509d46ed04acfc6aab41142cf813c08da50dce7e62cf71a7cab4280",
+          "packetPayloadSha256": "ebab578a5f2afcea0a23c78d69b499452bcce69a2a77dfdae2fd1146e4fbc800",
+          "skipSamples": 1024,
+          "discardPadding": 0,
+          "encoderDelay": 1024
+        }
+      }
+    },
+    {
+      "variantId": "cut-both",
+      "cutGapIds": [
+        "gap-01",
+        "gap-02"
+      ],
+      "mappings": [
+        {
+          "segmentId": "segment-0001",
+          "sourceStartMs": 1920260,
+          "sourceEndMs": 1948058,
+          "sourceStartFrame30": 57608,
+          "sourceEndFrame30": 58442,
+          "outputStartFrame": 0,
+          "outputEndFrame": 834,
+          "audioSamples": {
+            "sourceStart": 92172800,
+            "sourceEnd": 93507200,
+            "outputStart": 0,
+            "outputEnd": 1334400
+          }
+        },
+        {
+          "segmentId": "segment-0002",
+          "sourceStartMs": 1949982,
+          "sourceEndMs": 1977670,
+          "sourceStartFrame30": 58499,
+          "sourceEndFrame30": 59330,
+          "outputStartFrame": 834,
+          "outputEndFrame": 1665,
+          "audioSamples": {
+            "sourceStart": 93598400,
+            "sourceEnd": 94928000,
+            "outputStart": 1334400,
+            "outputEnd": 2664000
+          }
+        },
+        {
+          "segmentId": "segment-0003",
+          "sourceStartMs": 1981394,
+          "sourceEndMs": 2008506,
+          "sourceStartFrame30": 59442,
+          "sourceEndFrame30": 60255,
+          "outputStartFrame": 1665,
+          "outputEndFrame": 2478,
+          "audioSamples": {
+            "sourceStart": 95107200,
+            "sourceEnd": 96408000,
+            "outputStart": 2664000,
+            "outputEnd": 3964800
+          }
+        }
+      ],
+      "expectedFrameCount": 2478,
+      "expectedAudioSampleCount": 3964800,
+      "media": {
+        "path": "media/cut-both.mp4",
+        "fileSha256": "ef73d4d98cbc81f50a89d2020d859eb7f63643918e716ad9c0e6a4ef195d4edc",
+        "byteCount": 20832739
+      },
+      "inspection": {
+        "frameCount": 2478,
+        "decodedFramePayloadSha256": "dd0a2f94654f24f4c45e41d1c52566f31578d0d57856b749ef80b4dca42f121a",
+        "audio": {
+          "present": true,
+          "codec": "aac",
+          "timeBase": "1/48000",
+          "startPts": 0,
+          "durationTs": 3964800,
+          "containerDurationSamples": 3964800,
+          "presentationDurationSamples": 3964800,
+          "videoPresentationDurationSamples": 3964800,
+          "trailingVideoOnlySampleCount": 0,
+          "tailPolicy": "frame-aligned-v001",
+          "rawDecodedSampleCount": 3964928,
+          "effectiveDecodedSampleCount": 3964800,
+          "effectiveDecodedPayloadSha256": "f1372cc13a15b26e0fafcbe20ef123cdb592a7e7fbf3f02a7b11c7c6d29bd236",
+          "packetPayloadSha256": "0f333f5350b1741151520071f994ddcf2fbb64afd66da1a3f56ec259da1703e2",
+          "skipSamples": 1024,
+          "discardPadding": 0,
+          "encoderDelay": 1024
+        }
+      }
+    },
+    {
+      "variantId": "cut-gap1",
+      "cutGapIds": [
+        "gap-01"
+      ],
+      "mappings": [
+        {
+          "segmentId": "segment-0001",
+          "sourceStartMs": 1920260,
+          "sourceEndMs": 1948058,
+          "sourceStartFrame30": 57608,
+          "sourceEndFrame30": 58442,
+          "outputStartFrame": 0,
+          "outputEndFrame": 834,
+          "audioSamples": {
+            "sourceStart": 92172800,
+            "sourceEnd": 93507200,
+            "outputStart": 0,
+            "outputEnd": 1334400
+          }
+        },
+        {
+          "segmentId": "segment-0002",
+          "sourceStartMs": 1949982,
+          "sourceEndMs": 2008506,
+          "sourceStartFrame30": 58499,
+          "sourceEndFrame30": 60255,
+          "outputStartFrame": 834,
+          "outputEndFrame": 2590,
+          "audioSamples": {
+            "sourceStart": 93598400,
+            "sourceEnd": 96408000,
+            "outputStart": 1334400,
+            "outputEnd": 4144000
+          }
+        }
+      ],
+      "expectedFrameCount": 2590,
+      "expectedAudioSampleCount": 4144000,
+      "media": {
+        "path": "media/cut-gap1.mp4",
+        "fileSha256": "61ca2d44e2c743aaa8ca2db225fe19580da4d8cfd02067ec8ab998578bf17f21",
+        "byteCount": 21929857
+      },
+      "inspection": {
+        "frameCount": 2590,
+        "decodedFramePayloadSha256": "8154f2b4c60e833911166c79359b8dc77ad85fcc066ec09c94342333d26d32d2",
+        "audio": {
+          "present": true,
+          "codec": "aac",
+          "timeBase": "1/48000",
+          "startPts": 0,
+          "durationTs": 4144000,
+          "containerDurationSamples": 4144000,
+          "presentationDurationSamples": 4144000,
+          "videoPresentationDurationSamples": 4144000,
+          "trailingVideoOnlySampleCount": 0,
+          "tailPolicy": "frame-aligned-v001",
+          "rawDecodedSampleCount": 4144128,
+          "effectiveDecodedSampleCount": 4144000,
+          "effectiveDecodedPayloadSha256": "73a357a816be6403b335c85badfefe5514655ccf20cc939909b2212a250dcd42",
+          "packetPayloadSha256": "0faa8e90a4dcd3a6e23d8800489a44b92e8f8562a45fa632b8685015982a6c8a",
+          "skipSamples": 1024,
+          "discardPadding": 0,
+          "encoderDelay": 1024
+        }
+      }
+    },
+    {
+      "variantId": "cut-gap2",
+      "cutGapIds": [
+        "gap-02"
+      ],
+      "mappings": [
+        {
+          "segmentId": "segment-0001",
+          "sourceStartMs": 1920260,
+          "sourceEndMs": 1977670,
+          "sourceStartFrame30": 57608,
+          "sourceEndFrame30": 59330,
+          "outputStartFrame": 0,
+          "outputEndFrame": 1722,
+          "audioSamples": {
+            "sourceStart": 92172800,
+            "sourceEnd": 94928000,
+            "outputStart": 0,
+            "outputEnd": 2755200
+          }
+        },
+        {
+          "segmentId": "segment-0002",
+          "sourceStartMs": 1981394,
+          "sourceEndMs": 2008506,
+          "sourceStartFrame30": 59442,
+          "sourceEndFrame30": 60255,
+          "outputStartFrame": 1722,
+          "outputEndFrame": 2535,
+          "audioSamples": {
+            "sourceStart": 95107200,
+            "sourceEnd": 96408000,
+            "outputStart": 2755200,
+            "outputEnd": 4056000
+          }
+        }
+      ],
+      "expectedFrameCount": 2535,
+      "expectedAudioSampleCount": 4056000,
+      "media": {
+        "path": "media/cut-gap2.mp4",
+        "fileSha256": "c2aed204784cb111c0b0f9752ccd886b40eac123b85d152b770ebd656ce8de69",
+        "byteCount": 21573997
+      },
+      "inspection": {
+        "frameCount": 2535,
+        "decodedFramePayloadSha256": "85a1e43941f651f6162a392f84f89d8b176d871d91b2420a6226e1d7f52ee5bd",
+        "audio": {
+          "present": true,
+          "codec": "aac",
+          "timeBase": "1/48000",
+          "startPts": 0,
+          "durationTs": 4056000,
+          "containerDurationSamples": 4056000,
+          "presentationDurationSamples": 4056000,
+          "videoPresentationDurationSamples": 4056000,
+          "trailingVideoOnlySampleCount": 0,
+          "tailPolicy": "frame-aligned-v001",
+          "rawDecodedSampleCount": 4056064,
+          "effectiveDecodedSampleCount": 4056000,
+          "effectiveDecodedPayloadSha256": "1248605b1ab89ac5e6d1cdc87328b15a31189bd7bc392c58cc846626f69f8b89",
+          "packetPayloadSha256": "e5ab462614d7f071b986c9dfabdaa14df177682d6bb5dbce3ca2a3fcd129fd7a",
+          "skipSamples": 1024,
+          "discardPadding": 0,
+          "encoderDelay": 1024
+        }
+      }
+    }
+  ],
+  "exclusions": [
+    "not-a-formal-assembly-decision",
+    "not-a-base-media-build",
+    "not-a-timeline-v002-build",
+    "not-a-renderer-v002-run"
+  ]
+}
