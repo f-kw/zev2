@@ -1,0 +1,160 @@
+{
+  "schemaVersion": "presentation-first-real-data-assembly-formalization-receipt-v001",
+  "formalizationId": "DmWu0jVQfTE-candidate-13-assembly-formalization-v001",
+  "formalizerVersion": "presentation-first-real-data-assembly-formalizer-v001",
+  "status": "passed",
+  "references": {
+    "humanResult": {
+      "path": "evals/clip_composition/outputs/presentation/20260722-first-real-data-rendered-comparison-v002-human-response-v001/human-result.json",
+      "fileSha256": "626c0463db84594133d5c288d1125aa5125a2a6e0e1fef6bfe929786a0d6bcdf"
+    },
+    "validationReceipt": {
+      "path": "evals/clip_composition/outputs/presentation/20260722-first-real-data-rendered-comparison-v002-human-response-v001/validation-receipt.json",
+      "fileSha256": "d0244597dfa944b4fae62c18b0015fa043419454b74e2de13289b6a9db9831d4"
+    },
+    "humanObservation": {
+      "path": "evals/clip_composition/outputs/presentation/20260722-first-real-data-rendered-comparison-v002-human-response-v001/human-observation.json",
+      "fileSha256": "5e14ed036538eb1bcd27fc9c806eb1ba26932b40260208d306f1238fc5785829"
+    },
+    "formalizationApproval": {
+      "path": "evals/clip_composition/outputs/presentation/20260722-first-real-data-rendered-comparison-v002-human-response-v001/formalization-approval.json",
+      "fileSha256": "785605592c9180b7371ddc977c8b36494e9d893a97188d9af7229dc891a60f6b"
+    },
+    "comparisonSummary": {
+      "path": "evals/clip_composition/outputs/presentation/20260722-first-real-data-rendered-comparison-v002/comparison-preview-build-summary.json",
+      "fileSha256": "e4272a5c95a46546abc4287048e8b1a0b39c3b2f67b4ab647127b31baa2ca4fc"
+    },
+    "comparisonProvenance": {
+      "path": "evals/clip_composition/outputs/presentation/20260722-first-real-data-rendered-comparison-v001/comparison-preview-provenance.json",
+      "fileSha256": "46bae75601c72d0a9880c099e930209ccb794a333ba17a9d77b6c744b86ba597"
+    },
+    "selectedMedia": {
+      "variantId": "cut-gap2",
+      "path": "evals/clip_composition/outputs/presentation/20260722-first-real-data-rendered-comparison-v001/media/cut-gap2.mp4",
+      "fileSha256": "c2aed204784cb111c0b0f9752ccd886b40eac123b85d152b770ebd656ce8de69"
+    },
+    "trustedArtifactSummary": {
+      "path": "evals/clip_composition/outputs/presentation/20260721-first-real-data-assembly-gate-v001/artifact-build-summary.json",
+      "fileSha256": "20f8d63fc421d7ab439e5c633b862a3d52f52c0305994b979080d2fb837f8199"
+    },
+    "sourceIdentity": {
+      "path": "evals/clip_composition/outputs/presentation/20260721-first-real-data-assembly-gate-v001/source-identity.json",
+      "fileSha256": "a7c9e9a8c3917662bcf3b66fad46cedc56f5ca558467226453339ea370108993"
+    },
+    "basisEditPlan": {
+      "path": "evals/clip_composition/outputs/presentation/20260721-first-real-data-assembly-gate-v001/basis-edit-plan.json",
+      "fileSha256": "31f93434d8a0ba2f1b8cb2e6d845fd48f0064bcf2fcfb5aaee967653e90f2e64"
+    },
+    "assemblyDecision": {
+      "path": "evals/clip_composition/outputs/presentation/20260722-first-real-data-assembly-decision-v001/assembly-decision.json",
+      "fileSha256": "b2360d5e2aa56075728d692a7d456455d2cac168d47325631cfea4d919e3aa32",
+      "payloadSha256": "7fbdc54c548be6e7a475cb54f221644c3d7ff5ce89442cd6a38fbccc7bd13755"
+    }
+  },
+  "selection": {
+    "candidateId": 13,
+    "variantId": "cut-gap2",
+    "gapDecisions": {
+      "gap01": "keep",
+      "gap02": "cut"
+    },
+    "mappingSource": "fixed-comparison-provenance-v001",
+    "viewedMappings": [
+      {
+        "segmentId": "segment-0001",
+        "sourceStartMs": 1920260,
+        "sourceEndMs": 1977670,
+        "sourceStartFrame30": 57608,
+        "sourceEndFrame30": 59330,
+        "outputStartFrame": 0,
+        "outputEndFrame": 1722,
+        "audioSamples": {
+          "sourceStart": 92172800,
+          "sourceEnd": 94928000,
+          "outputStart": 0,
+          "outputEnd": 2755200
+        }
+      },
+      {
+        "segmentId": "segment-0002",
+        "sourceStartMs": 1981394,
+        "sourceEndMs": 2008506,
+        "sourceStartFrame30": 59442,
+        "sourceEndFrame30": 60255,
+        "outputStartFrame": 1722,
+        "outputEndFrame": 2535,
+        "audioSamples": {
+          "sourceStart": 95107200,
+          "sourceEnd": 96408000,
+          "outputStart": 2755200,
+          "outputEnd": 4056000
+        }
+      }
+    ],
+    "expectedFrameCount": 2535,
+    "expectedAudioSampleCount": 4056000
+  },
+  "formalization": {
+    "segments": [
+      {
+        "sourceStartMs": 1920260,
+        "sourceEndMs": 1977670
+      },
+      {
+        "sourceStartMs": 1981394,
+        "sourceEndMs": 2008506
+      }
+    ],
+    "derivedMappings": [
+      {
+        "segmentId": "segment-0001",
+        "sourceStartMs": 1920260,
+        "sourceEndMs": 1977670,
+        "sourceStartFrame30": 57608,
+        "sourceEndFrame30": 59330,
+        "outputStartFrame": 0,
+        "outputEndFrame": 1722,
+        "audioSamples": {
+          "sourceStart": 92172800,
+          "sourceEnd": 94928000,
+          "outputStart": 0,
+          "outputEnd": 2755200
+        }
+      },
+      {
+        "segmentId": "segment-0002",
+        "sourceStartMs": 1981394,
+        "sourceEndMs": 2008506,
+        "sourceStartFrame30": 59442,
+        "sourceEndFrame30": 60255,
+        "outputStartFrame": 1722,
+        "outputEndFrame": 2535,
+        "audioSamples": {
+          "sourceStart": 95107200,
+          "sourceEnd": 96408000,
+          "outputStart": 2755200,
+          "outputEnd": 4056000
+        }
+      }
+    ],
+    "mappingsMatchViewedVariant": true,
+    "decisionPayloadSha256": "7fbdc54c548be6e7a475cb54f221644c3d7ff5ce89442cd6a38fbccc7bd13755",
+    "frameSchemaLimitation": "decision-v001はms区間のみを保持するため、正式生成時にも本receiptのframe・sample列との完全一致検査が必要"
+  },
+  "knownBoundaryRisk": {
+    "gapId": "gap-02",
+    "precedingCharacter": "ど",
+    "annotatedDurationMs": 20,
+    "effectiveFrameEndDeltaMs": -3.333,
+    "humanReconfirmationRequired": false,
+    "handling": "人間が実媒体Dを聴取・採用済みのため区間を変更せず既知事項として保持"
+  },
+  "workflow": {
+    "formalAssemblyDecisionCreated": true,
+    "baseMediaCreated": false,
+    "timelineCreated": false,
+    "renderingStarted": false,
+    "remainingCandidatesExpanded": false,
+    "nextGate": "正式基礎映像生成は別承認"
+  }
+}
