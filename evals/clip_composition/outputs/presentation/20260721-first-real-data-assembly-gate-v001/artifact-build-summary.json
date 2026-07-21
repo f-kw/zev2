@@ -1,0 +1,59 @@
+{
+  "schemaVersion": "presentation-first-real-data-artifact-build-summary-v001",
+  "status": "passed",
+  "artifactBindings": {
+    "mediaEquivalence": {
+      "path": "evals/clip_composition/outputs/presentation/20260721-first-real-data-assembly-gate-v001/media-equivalence.json",
+      "fileSha256": "98c0f2018553f39a855610c569f2908efecccc0dadb696fc2b156d19010c15ea"
+    },
+    "sourceIdentity": {
+      "path": "evals/clip_composition/outputs/presentation/20260721-first-real-data-assembly-gate-v001/source-identity.json",
+      "fileSha256": "a7c9e9a8c3917662bcf3b66fad46cedc56f5ca558467226453339ea370108993"
+    },
+    "basisEditPlan": {
+      "path": "evals/clip_composition/outputs/presentation/20260721-first-real-data-assembly-gate-v001/basis-edit-plan.json",
+      "fileSha256": "31f93434d8a0ba2f1b8cb2e6d845fd48f0064bcf2fcfb5aaee967653e90f2e64"
+    },
+    "candidateManifest": {
+      "path": "evals/clip_composition/outputs/presentation/20260721-first-real-data-assembly-gate-v001/candidate-manifest.json",
+      "fileSha256": "3937747e947ef0dd27a67e289d06cece8c17a55b655c85fa7d6aaf21f696ec12"
+    }
+  },
+  "workload": {
+    "independentJudgmentCount": 3,
+    "requiredExplicitOperationCount": 10,
+    "initialPositionSearchCount": 0,
+    "requiredPlaybackRanges": [
+      {
+        "playbackId": "original",
+        "label": "元候補",
+        "startMs": 1920260,
+        "endMs": 2008506,
+        "durationMs": 88246
+      },
+      {
+        "playbackId": "candidate-13-gap-01-context",
+        "label": "発話間1の前後発話",
+        "startMs": 1920260,
+        "endMs": 1977670,
+        "durationMs": 57410
+      },
+      {
+        "playbackId": "candidate-13-gap-02-context",
+        "label": "発話間2の前後発話",
+        "startMs": 1949982,
+        "endMs": 2008506,
+        "durationMs": 58524
+      }
+    ],
+    "editedPlaybackDurationRangeMs": {
+      "minimumMs": 82598,
+      "maximumMs": 88246
+    },
+    "totalInitialPlaybackDurationRangeMs": {
+      "minimumMs": 286778,
+      "maximumMs": 292426
+    }
+  },
+  "candidateManifestCanonicalSha256": "3a5c06f9e26f55f509f8742a874d167eec0243a52bcf444c3fc2457f06bcd543"
+}

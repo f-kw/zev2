@@ -1,0 +1,389 @@
+{
+  "schemaVersion": "presentation-source-media-equivalence-v001",
+  "equivalenceId": "DmWu0jVQfTE-native-1080p-v001",
+  "sourceVideoId": "DmWu0jVQfTE",
+  "status": "passed",
+  "provenance": {
+    "channelId": "UCvzGlP9oQwU--Y0r9id_jnA",
+    "webpageUrl": "https://www.youtube.com/watch?v=DmWu0jVQfTE",
+    "format299": {
+      "formatId": "299",
+      "extension": "mp4",
+      "videoCodec": "avc1.64002a",
+      "audioCodec": "none",
+      "width": 1920,
+      "height": 1080,
+      "framesPerSecond": 60
+    },
+    "format251": {
+      "formatId": "251",
+      "extension": "webm",
+      "videoCodec": "none",
+      "audioCodec": "opus"
+    },
+    "acquisitionCommand": "yt-dlp --no-overwrites --newline -f 299 -o 'native-1080p/DmWu0jVQfTE.f299.%(ext)s' https://www.youtube.com/watch?v=DmWu0jVQfTE",
+    "muxCommand": "ffmpeg -i DmWu0jVQfTE.f299.mp4 -i DmWu0jVQfTE.mp4 -map 0:v:0 -map 1:a:0 -c copy -map_metadata -1 -map_chapters -1 -movflags +faststart DmWu0jVQfTE.native-1080p-h264-opus.mp4"
+  },
+  "artifacts": {
+    "oldReviewMedia": {
+      "path": "evals/clip_composition/research/downloads/first-gate-unseen/DmWu0jVQfTE/DmWu0jVQfTE.mp4",
+      "fileSha256": "08306f79df970953da7dff51e8de0e4a7cdea46ca75f793ff7b860b30c1401d7"
+    },
+    "format299Video": {
+      "path": "evals/clip_composition/research/downloads/first-gate-unseen/DmWu0jVQfTE/native-1080p/DmWu0jVQfTE.f299.mp4",
+      "fileSha256": "7e5cc3339930efbc44455902610f3bcca49575676b7e9907809f5e302549b62a"
+    },
+    "newExecutionMedia": {
+      "path": "evals/clip_composition/research/downloads/first-gate-unseen/DmWu0jVQfTE/native-1080p/DmWu0jVQfTE.native-1080p-h264-opus.mp4",
+      "fileSha256": "a2c4548d07eb387f095a198b8f6892121134c46e8c0d5315e4debf3e083234ee"
+    },
+    "infoJson": {
+      "path": "evals/clip_composition/research/downloads/first-gate-unseen/DmWu0jVQfTE/DmWu0jVQfTE.info.json",
+      "fileSha256": "633d2d7f5d3487b9ce0cce6ee3de045e35fb9a6dea66946d4a1bf0a233e92f02"
+    },
+    "sttManifest": {
+      "path": "evals/clip_composition/stt/DmWu0jVQfTE_first_gate_unseen_local120_v001/source/manifest.json",
+      "fileSha256": "f7d2c04f8f9e67e27ff5b461236f01d3b68bb4f53ba448c0c4b5387c95a6d03b"
+    },
+    "sttTranscript": {
+      "path": "evals/clip_composition/stt/DmWu0jVQfTE_first_gate_unseen_local120_v001/source/transcript.json",
+      "fileSha256": "c0e006b381d60c2160a4ef59787bd32e47257baf9acc77b8706d74b5c8d3556d"
+    },
+    "sttWordTimestamps": {
+      "path": "evals/clip_composition/stt/DmWu0jVQfTE_first_gate_unseen_local120_v001/source/word-timestamps.json",
+      "fileSha256": "ebf0190c9ce0fd96b4e1faa18717f41d73126fc914172474ac791df7f17ad065"
+    },
+    "sttChunk16Flac": {
+      "path": "evals/clip_composition/stt/DmWu0jVQfTE_first_gate_unseen_local120_v001/source/chunks/chunk-0016.flac",
+      "fileSha256": "c29a293c3324b172a6e555c1eca242fe8749f93a190bb3281ea85451d2244054"
+    }
+  },
+  "formalEntry": {
+    "source": {
+      "video": {
+        "width": 1920,
+        "height": 1080,
+        "frameRate": "60/1",
+        "timeBase": "1/60",
+        "decodedFrameCount": 528840,
+        "firstPts": 0,
+        "lastPts": 528839,
+        "rotation": 0
+      },
+      "audio": {
+        "present": true,
+        "codec": "opus",
+        "sampleRate": 48000,
+        "channels": 2,
+        "channelLayout": "stereo",
+        "timeBase": "1/48000",
+        "firstDecodedPts": 312,
+        "lastDecodedPts": 423072048,
+        "presentationClock": {
+          "authority": "stream-and-packet-v001",
+          "endSample": 423073008,
+          "streamEndSample": 423073008,
+          "packetEndSample": 423073008,
+          "skipSamples": 0,
+          "discardPadding": 0
+        }
+      }
+    },
+    "fps": 60,
+    "decodedFrameCount": 528840,
+    "logicalFrameCount": 264420,
+    "audioClock": {
+      "sampleRate": 48000,
+      "channels": 2,
+      "channelLayout": "stereo",
+      "spans": [
+        {
+          "startSample": 0,
+          "endSample": 312
+        },
+        {
+          "startSample": 960,
+          "endSample": 1008
+        }
+      ],
+      "sourceGridSampleCount": 423073008,
+      "sourceGridMappingEndSample": 423073008,
+      "decodedTailPaddingSampleCount": 0
+    }
+  },
+  "videoStreamCopy": {
+    "format299Video": {
+      "stream": {
+        "codec": "h264",
+        "profile": "High",
+        "level": 42,
+        "width": 1920,
+        "height": 1080,
+        "pixelFormat": "yuv420p",
+        "timeBase": "1/15360",
+        "startPts": 0,
+        "durationTs": 135383040,
+        "extradataSize": 45,
+        "extradataSha256": "b865e483b46fa1d7a94c8cd8ed79ff4cae09e3c040a3f39bbc09bb57cd425ffd"
+      },
+      "packetClock": {
+        "packetCount": 528840,
+        "firstPts": 0,
+        "packetEndPts": 135383040,
+        "canonicalPacketSha256": "fea3492d258d10298cbf9c36f0a37e9dd54ed6239fd523302c4eb49094603f8b"
+      },
+      "packetPayload": {
+        "byteCount": 979437250,
+        "payloadSha256": "a4e96ef53fb35fea6bbcf00ebe4bdfad2b5d559c94e8db6ead67c92c589b37e2"
+      }
+    },
+    "newExecutionMedia": {
+      "stream": {
+        "codec": "h264",
+        "profile": "High",
+        "level": 42,
+        "width": 1920,
+        "height": 1080,
+        "pixelFormat": "yuv420p",
+        "timeBase": "1/15360",
+        "startPts": 0,
+        "durationTs": 135383040,
+        "extradataSize": 45,
+        "extradataSha256": "b865e483b46fa1d7a94c8cd8ed79ff4cae09e3c040a3f39bbc09bb57cd425ffd"
+      },
+      "packetClock": {
+        "packetCount": 528840,
+        "firstPts": 0,
+        "packetEndPts": 135383040,
+        "canonicalPacketSha256": "fea3492d258d10298cbf9c36f0a37e9dd54ed6239fd523302c4eb49094603f8b"
+      },
+      "packetPayload": {
+        "byteCount": 979437250,
+        "payloadSha256": "a4e96ef53fb35fea6bbcf00ebe4bdfad2b5d559c94e8db6ead67c92c589b37e2"
+      }
+    }
+  },
+  "videoClock": {
+    "oldReviewMedia": {
+      "frameRate": "60/1",
+      "averageFrameRate": "60/1",
+      "timeBase": "1/15360",
+      "startPts": 0,
+      "durationTs": 135383040,
+      "declaredFrameCount": 528840,
+      "decodedFrameCount": 528840,
+      "firstPts": 0,
+      "lastPts": 135382784,
+      "endMs": 8814000,
+      "canonicalPtsSha256": "751901397c4470f11d1306673c7a80f749ec3fa64c6d89c3e4d12febb824e54b"
+    },
+    "newExecutionMedia": {
+      "frameRate": "60/1",
+      "averageFrameRate": "60/1",
+      "timeBase": "1/15360",
+      "startPts": 0,
+      "durationTs": 135383040,
+      "declaredFrameCount": 528840,
+      "decodedFrameCount": 528840,
+      "firstPts": 0,
+      "lastPts": 135382784,
+      "endMs": 8814000,
+      "canonicalPtsSha256": "751901397c4470f11d1306673c7a80f749ec3fa64c6d89c3e4d12febb824e54b"
+    }
+  },
+  "audioEquivalence": {
+    "oldStream": {
+      "codec": "opus",
+      "sampleRate": 48000,
+      "channels": 2,
+      "channelLayout": "stereo",
+      "timeBase": "1/48000",
+      "startPts": 0,
+      "durationTs": 423073008,
+      "initialPadding": 312,
+      "extradataSize": 19,
+      "extradataSha256": "94ba1201d63e61e43c5240d902a95410dfbb0dcc81f0430f57be6840f1a5e47f"
+    },
+    "newStream": {
+      "codec": "opus",
+      "sampleRate": 48000,
+      "channels": 2,
+      "channelLayout": "stereo",
+      "timeBase": "1/48000",
+      "startPts": 0,
+      "durationTs": 423073008,
+      "initialPadding": 312,
+      "extradataSize": 19,
+      "extradataSha256": "94ba1201d63e61e43c5240d902a95410dfbb0dcc81f0430f57be6840f1a5e47f"
+    },
+    "oldPacketClock": {
+      "packetCount": 440701,
+      "firstPts": 0,
+      "packetEndSample": 423073008,
+      "skipSamples": 0,
+      "discardPadding": 0,
+      "canonicalPacketSha256": "e9a3bc31f5af2b8b9562184184ba183bd04aeeed92af9a15dd2cd2295234acd4"
+    },
+    "newPacketClock": {
+      "packetCount": 440701,
+      "firstPts": 0,
+      "packetEndSample": 423073008,
+      "skipSamples": 0,
+      "discardPadding": 0,
+      "canonicalPacketSha256": "e9a3bc31f5af2b8b9562184184ba183bd04aeeed92af9a15dd2cd2295234acd4"
+    },
+    "oldPacketPayload": {
+      "byteCount": 129762802,
+      "payloadSha256": "0269ec83bead17be953bd5e9d622c50039513dc1b8047f70cf71698755e2e4af"
+    },
+    "newPacketPayload": {
+      "byteCount": 129762802,
+      "payloadSha256": "0269ec83bead17be953bd5e9d622c50039513dc1b8047f70cf71698755e2e4af"
+    },
+    "oldDecodedPcm": {
+      "byteCount": 3384581184,
+      "payloadSha256": "d23c37fac84b5b782989e96ef52eb833792d802a06d2fa258f72b15119a893fe"
+    },
+    "newDecodedPcm": {
+      "byteCount": 3384581184,
+      "payloadSha256": "d23c37fac84b5b782989e96ef52eb833792d802a06d2fa258f72b15119a893fe"
+    }
+  },
+  "sttTransfer": {
+    "stt": {
+      "manifest": {
+        "fileSha256": "f7d2c04f8f9e67e27ff5b461236f01d3b68bb4f53ba448c0c4b5387c95a6d03b",
+        "partial": false,
+        "fullChunkCount": 74,
+        "processedChunkCount": 74,
+        "chunkCount": 74,
+        "chunksContinuous": true,
+        "chunk16": {
+          "index": 16,
+          "startMs": 1920000,
+          "endMs": 2040000
+        }
+      },
+      "transcript": {
+        "fileSha256": "c0e006b381d60c2160a4ef59787bd32e47257baf9acc77b8706d74b5c8d3556d",
+        "partial": false,
+        "durationMs": 8814021,
+        "segmentCount": 25899
+      },
+      "wordTimestamps": {
+        "fileSha256": "ebf0190c9ce0fd96b4e1faa18717f41d73126fc914172474ac791df7f17ad065",
+        "wordCount": 25899,
+        "declaredWordCount": 25899,
+        "wordsValid": true,
+        "boundaryContexts": [
+          {
+            "boundaryMs": 1920260,
+            "beforeWordId": 6931,
+            "afterWordId": 6932
+          },
+          {
+            "boundaryMs": 2008506,
+            "beforeWordId": 7285,
+            "afterWordId": 7286
+          },
+          {
+            "boundaryMs": 1948058,
+            "beforeWordId": 7057,
+            "afterWordId": 7058
+          },
+          {
+            "boundaryMs": 1949982,
+            "beforeWordId": 7057,
+            "afterWordId": 7058
+          },
+          {
+            "boundaryMs": 1977670,
+            "beforeWordId": 7179,
+            "afterWordId": 7180
+          },
+          {
+            "boundaryMs": 1981394,
+            "beforeWordId": 7179,
+            "afterWordId": 7180
+          }
+        ]
+      },
+      "chunk16Flac": {
+        "fileSha256": "c29a293c3324b172a6e555c1eca242fe8749f93a190bb3281ea85451d2244054"
+      }
+    },
+    "oldChunk16Pcm": {
+      "byteCount": 3840000,
+      "payloadSha256": "f5389c874cd8921324f9a1847921ac2da8bced99f490c1c629a0ba21780245c7"
+    },
+    "newChunk16Pcm": {
+      "byteCount": 3840000,
+      "payloadSha256": "f5389c874cd8921324f9a1847921ac2da8bced99f490c1c629a0ba21780245c7"
+    }
+  },
+  "browserPlayback": {
+    "schemaVersion": "presentation-browser-playback-observation-v001",
+    "status": "passed",
+    "browserName": "Microsoft Edge",
+    "browserVersion": "150.0.0.0",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0",
+    "pageUrl": "http://127.0.0.1:4318/review.html",
+    "mediaUrl": "http://127.0.0.1:4318/media",
+    "mediaFileSha256": "a2c4548d07eb387f095a198b8f6892121134c46e8c0d5315e4debf3e083234ee",
+    "metadataLoaded": true,
+    "naturalWidth": 1920,
+    "naturalHeight": 1080,
+    "seekTargetMs": 1920260,
+    "seeked": true,
+    "currentTimeAdvanced": true,
+    "mediaError": null,
+    "serverContract": "read-only-get-head-v001"
+  },
+  "checks": [
+    {
+      "checkId": "provenance",
+      "status": "passed"
+    },
+    {
+      "checkId": "frozen-file-hashes",
+      "status": "passed"
+    },
+    {
+      "checkId": "formal-entry",
+      "status": "passed"
+    },
+    {
+      "checkId": "format299-video-stream-copy",
+      "status": "passed"
+    },
+    {
+      "checkId": "video-clock",
+      "status": "passed"
+    },
+    {
+      "checkId": "audio-stream",
+      "status": "passed"
+    },
+    {
+      "checkId": "audio-packet-clock",
+      "status": "passed"
+    },
+    {
+      "checkId": "audio-packet-payload",
+      "status": "passed"
+    },
+    {
+      "checkId": "audio-decoded-pcm",
+      "status": "passed"
+    },
+    {
+      "checkId": "stt-transfer",
+      "status": "passed"
+    },
+    {
+      "checkId": "browser-playback",
+      "status": "passed"
+    }
+  ],
+  "violations": []
+}
