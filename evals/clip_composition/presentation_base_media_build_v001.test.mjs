@@ -30,6 +30,10 @@ import {
   PRESENTATION_BASE_MEDIA_TRUSTED_SOURCE_FILES,
   validatePresentationBaseMediaTimelineV002,
 } from './presentation_base_media_timeline_v002.mjs';
+import {
+  capturePresentationBaseMediaProjectionCaseV001,
+  writePresentationAudioGridRegressionProjectionV001,
+} from './presentation_audio_grid_regression_projection_v001.mjs';
 
 const MODULE_DIRECTORY = path.dirname(fileURLToPath(import.meta.url));
 const WORKSPACE_ROOT = path.resolve(MODULE_DIRECTORY, '../..');
@@ -38,7 +42,13 @@ const RUNTIME_ROOT = path.join(TESTDATA_ROOT, `.runtime-${process.pid}`);
 const OUTPUT_ROOT = path.join(MODULE_DIRECTORY, 'outputs/presentation/base-media');
 const BASIS_PATH = path.join(TESTDATA_ROOT, 'basis-edit-plan.json');
 const CLI_PATH = path.join(MODULE_DIRECTORY, 'presentation_base_media_build_v001.mjs');
+const PROJECTION_HARNESS_PATH = fileURLToPath(import.meta.url);
+const PROJECTION_HELPER_PATH = path.join(
+  MODULE_DIRECTORY,
+  'presentation_audio_grid_regression_projection_v001.mjs',
+);
 const runtimeOutputs = [];
+const regressionProjectionCases = [];
 
 const sha256 = (value) => createHash('sha256').update(value).digest('hex');
 const canonicalSha256 = (value) => sha256(canonicalJson(value));
@@ -59,6 +69,13 @@ const writeAndExecuteJob = async (job, suffix) => {
   const jobPath = path.join(RUNTIME_ROOT, `${suffix}-actual-job.json`);
   await writeJson(jobPath, job);
   return executeStoredJob(jobPath, job);
+};
+const captureRegressionProjection = async (caseId, outputDirectory) => {
+  if (!process.env.PRESENTATION_AUDIO_GRID_PROJECTION_OUTPUT) return;
+  regressionProjectionCases.push(await capturePresentationBaseMediaProjectionCaseV001({
+    caseId,
+    outputDirectory,
+  }));
 };
 
 const run = (command, args) => new Promise((resolve, reject) => {
@@ -300,6 +317,19 @@ before(async () => {
 });
 
 after(async () => {
+  if (process.env.PRESENTATION_AUDIO_GRID_PROJECTION_OUTPUT) {
+    const gitHead = (await run('git', ['rev-parse', 'HEAD'])).stdout.trim();
+    await writePresentationAudioGridRegressionProjectionV001({
+      outputPath: path.resolve(process.env.PRESENTATION_AUDIO_GRID_PROJECTION_OUTPUT),
+      suiteId: 'presentation-base-media-audio-normal-cases-v001',
+      role: process.env.PRESENTATION_AUDIO_GRID_PROJECTION_ROLE ?? 'unspecified',
+      gitHead,
+      builderPath: CLI_PATH,
+      harnessPaths: [PROJECTION_HARNESS_PATH, PROJECTION_HELPER_PATH],
+      tools: PRESENTATION_BASE_MEDIA_EXPECTED_TOOL_PROFILE,
+      cases: regressionProjectionCases,
+    });
+  }
   await Promise.all(runtimeOutputs.map((output) => rm(output, {recursive: true, force: true})));
   const ownedOutputEntries = (await readdir(OUTPUT_ROOT)).filter((name) => (
     name.includes(`synthetic-${process.pid}`)
@@ -498,6 +528,7 @@ test('60fps・181 decoded framesの48kHz AAC末尾は実在sampleだけを使い
   );
   assert.equal(manifest.audio.encoded.tailPolicy, 'source-audio-ended-no-padding-v001');
   assert.equal(manifest.outputs.baseMedia.frameCount, 1);
+  await captureRegressionProjection('video-60-odd-tail-audio-48000', fixture.outputPath);
 });
 
 for (const sampleRate of [44100, 48000]) {
@@ -527,6 +558,7 @@ for (const sampleRate of [44100, 48000]) {
       manifest.execution.commands.map((item) => item.arguments.at(-1)),
       ['<TEMP_VIDEO>', '<SOURCE_GRID>', '<BASE_MEDIA>'],
     );
+    await captureRegressionProjection(`${name}-two-frame`, fixture.outputPath);
 
     const oneFrameFixture = await makeFixture({
       name: `${name}-one-frame`, sourcePath,
@@ -537,6 +569,7 @@ for (const sampleRate of [44100, 48000]) {
     const oneFrameManifest = await readJson(path.join(oneFrameFixture.outputPath, 'generation-manifest.json'));
     assert.equal(oneFrameManifest.audio.encodeInput.sampleCount, sampleRate / 30);
     assert.equal(oneFrameManifest.audio.encoded.presentationDurationSamples, sampleRate / 30);
+    await captureRegressionProjection(`${name}-one-frame`, oneFrameFixture.outputPath);
   });
 }
 
@@ -560,6 +593,7 @@ test('positive source audio PTS is preserved as zero-filled canonical PCM instea
     manifest.source.audio.presentationClock.endSample,
   );
   assert.equal(manifest.audio.encodeInput.sampleCount, 8000);
+  await captureRegressionProjection('audio-delayed-48000', fixture.outputPath);
 });
 
 test('an internal audio PTS gap remains silent between real PCM before and after it', async () => {
@@ -583,6 +617,7 @@ test('an internal audio PTS gap remains silent between real PCM before and after
   const beforeRms = rms(decoded, 1, 0, internal.startSample - 1024, internal.startSample - 256);
   const afterRms = rms(decoded, 1, 0, internal.endSample + 256, internal.endSample + 1024);
   assert.ok(gapRms < beforeRms && gapRms < afterRms, {gapRms, beforeRms, afterRms});
+  await captureRegressionProjection('audio-internal-gap-3072', fixture.outputPath);
 });
 
 test('source audio without both stream and packet presentation clocks is rejected without decoded fallback', async () => {
@@ -609,6 +644,7 @@ test('non-contiguous selected tone segments preserve approved segment order in d
   const first = zeroCrossings(decoded, 1, 0, 256, 4800 - 256);
   const second = zeroCrossings(decoded, 1, 0, 4800 + 256, 9600 - 256);
   assert.ok(second > first, {first, second});
+  await captureRegressionProjection('audio-tone-order', fixture.outputPath);
 });
 
 test('stereo FL and FR channel order remains distinguishable in real decoded PCM', async () => {
@@ -625,6 +661,7 @@ test('stereo FL and FR channel order remains distinguishable in real decoded PCM
   const left = zeroCrossings(decoded, 2, 0, 256, 8000 - 256);
   const right = zeroCrossings(decoded, 2, 1, 256, 8000 - 256);
   assert.ok(right > left, {left, right});
+  await captureRegressionProjection('audio-stereo-order', fixture.outputPath);
 });
 
 test('raw millisecond endpoint beyond decoded source is rejected before frame rounding can hide it', () => {

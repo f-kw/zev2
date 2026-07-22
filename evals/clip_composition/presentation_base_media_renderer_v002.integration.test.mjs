@@ -7,9 +7,16 @@ import test from 'node:test';
 import {fileURLToPath} from 'node:url';
 
 import {buildPresentationResolutionPackageV002} from './build_presentation_resolution_package_v002.mjs';
-import {runPresentationBaseMediaBuildJobFileV001} from './presentation_base_media_build_v001.mjs';
+import {
+  PRESENTATION_BASE_MEDIA_EXPECTED_TOOL_PROFILE,
+  runPresentationBaseMediaBuildJobFileV001,
+} from './presentation_base_media_build_v001.mjs';
 import {PRESENTATION_BASE_MEDIA_TRUSTED_SOURCE_FILES} from './presentation_base_media_timeline_v002.mjs';
 import {canonicalJson} from './presentation_caption_contract_v002.mjs';
+import {
+  capturePresentationRendererProjectionV001,
+  writePresentationAudioGridRegressionProjectionV001,
+} from './presentation_audio_grid_regression_projection_v001.mjs';
 import {validatePresentationInstructionContract} from './presentation_instruction_contract_v002.mjs';
 import {
   PRESENTATION_RENDERER_OUTPUT_NAMES,
@@ -29,6 +36,12 @@ const REGISTRY_BINDING_PATH = path.join(REGISTRY_DIRECTORY, 'trusted-registry-bi
 const RUNTIME_PARENT = path.join(MODULE_DIRECTORY, 'testdata/presentation-renderer-v002');
 const BASE_MEDIA_OUTPUT_ROOT = path.join(MODULE_DIRECTORY, 'outputs/presentation/base-media');
 const RENDER_OUTPUT_ROOT = path.join(MODULE_DIRECTORY, 'outputs/presentation/renderer-v002-builder-e2e');
+const BUILDER_PATH = path.join(MODULE_DIRECTORY, 'presentation_base_media_build_v001.mjs');
+const PROJECTION_HARNESS_PATH = fileURLToPath(import.meta.url);
+const PROJECTION_HELPER_PATH = path.join(
+  MODULE_DIRECTORY,
+  'presentation_audio_grid_regression_projection_v001.mjs',
+);
 
 const sha256Bytes = (value) => createHash('sha256').update(value).digest('hex');
 const sha256Canonical = (value) => sha256Bytes(canonicalJson(value));
@@ -75,6 +88,7 @@ const runBuilderRendererCase = async ({
   sourceRef,
   segments,
   sourceAtom,
+  projectionCaseId = null,
   verify,
 }) => {
   await Promise.all([
@@ -284,6 +298,29 @@ const runBuilderRendererCase = async ({
       renderOutput,
       timeline,
     });
+    if (projectionCaseId && process.env.PRESENTATION_AUDIO_GRID_INTEGRATION_PROJECTION_OUTPUT) {
+      const gitHead = (await run('git', ['rev-parse', 'HEAD'])).stdout.trim();
+      const projectionCase = await capturePresentationRendererProjectionV001({
+        caseId: projectionCaseId,
+        baseOutputDirectory: baseOutput,
+        renderOutputDirectory: renderOutput,
+        outputNames: PRESENTATION_RENDERER_OUTPUT_NAMES,
+        plan,
+        qc,
+      });
+      await writePresentationAudioGridRegressionProjectionV001({
+        outputPath: path.resolve(
+          process.env.PRESENTATION_AUDIO_GRID_INTEGRATION_PROJECTION_OUTPUT,
+        ),
+        suiteId: 'presentation-builder-renderer-audio-integration-v001',
+        role: process.env.PRESENTATION_AUDIO_GRID_PROJECTION_ROLE ?? 'unspecified',
+        gitHead,
+        builderPath: BUILDER_PATH,
+        harnessPaths: [PROJECTION_HARNESS_PATH, PROJECTION_HELPER_PATH],
+        tools: PRESENTATION_BASE_MEDIA_EXPECTED_TOOL_PROFILE,
+        cases: [projectionCase],
+      });
+    }
   } finally {
     await Promise.all([
       rm(runtime, {recursive: true, force: true}),
@@ -307,6 +344,7 @@ test('承認済みdecisionから実builder成果物を作りrenderer v002正式�
     ],
     sourceProvenance: 'builder-renderer-e2e-source-provenance-v001',
     sourceRef: 'builder-renderer-e2e-source-v001',
+    projectionCaseId: '30fps-audio-builder-renderer-v002',
     segments: [{sourceStartMs: 0, sourceEndMs: 3000}],
     sourceAtom: {
       atomId: 'e2e-a-01',

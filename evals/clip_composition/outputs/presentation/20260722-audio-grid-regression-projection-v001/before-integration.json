@@ -1,0 +1,320 @@
+{
+  "schemaVersion": "presentation-audio-grid-regression-projection-v001",
+  "suiteId": "presentation-builder-renderer-audio-integration-v001",
+  "role": "before-fix",
+  "capturedFrom": {
+    "gitHead": "0317df825a9b65c9dccabe916bb4769dc6d41dd6",
+    "builderFileSha256": "c6be12ac1767d25603dcd94e2061425dabd48216a8c7604b07b42d82e6e8ffd9",
+    "harnessFiles": [
+      {
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_base_media_renderer_v002.integration.test.mjs",
+        "fileSha256": "c5bf6029fd1ab981ac68a4c364104b24072c747b6cd5ef898195ecf9a834bd3c"
+      },
+      {
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_audio_grid_regression_projection_v001.mjs",
+        "fileSha256": "05ddeb7091f640254ae39cbbb7d814ba050adce582714639539369863ef877df"
+      }
+    ],
+    "tools": {
+      "nodeVersion": "v20.19.6",
+      "ffmpegVersion": "ffmpeg version 8.0.1 Copyright (c) 2000-2025 the FFmpeg developers",
+      "ffprobeVersion": "ffprobe version 8.0.1 Copyright (c) 2007-2025 the FFmpeg developers"
+    }
+  },
+  "cases": [
+    {
+      "caseId": "30fps-audio-builder-renderer-v002",
+      "baseMedia": {
+        "caseId": "30fps-audio-builder-renderer-v002:base-media",
+        "sourceFileSha256": "5191b451ce8454399875f88986aa6f8c9d449adfb4aa9a51d6c43eea23430b8f",
+        "assemblyDecisionPayloadSha256": "db09f0b9e2e068f6c385b2ce7280e3014443f01bfdffaef202db24fe5317a884",
+        "baseMediaFileSha256": "d6c3467e90e407d00b0b2b1a09a30a9c2f00179fce3d2006cb7369d4df759c51",
+        "timelineFileSha256": "46727633f04bf9221f855b58725b3a7a48c459afca6bb9965768abe2c585ac2a",
+        "timeline": {
+          "schemaVersion": "presentation-base-media-timeline-v002",
+          "sourceFrameClock": {
+            "inputFrameRate": "30/1",
+            "logicalFrameRate": "30/1",
+            "extractionRuleId": "source-frame-30fps-identity-v001",
+            "decodedFrameCount": 90
+          },
+          "segments": [
+            {
+              "segmentId": "segment-0001",
+              "sourceStartMs": 0,
+              "sourceEndMs": 3000,
+              "sourceStartFrame30": 0,
+              "sourceEndFrame30": 90,
+              "outputStartFrame": 0,
+              "outputEndFrame": 90
+            }
+          ],
+          "baseMedia": {
+            "artifactId": "base-media-2e6af2f2acb5687e522b58d2",
+            "path": "base-media.mp4",
+            "fileSha256": "d6c3467e90e407d00b0b2b1a09a30a9c2f00179fce3d2006cb7369d4df759c51",
+            "frameRate": "30/1",
+            "expectedFrameCount": 90
+          }
+        },
+        "segments": [
+          {
+            "segmentId": "segment-0001",
+            "sourceStartMs": 0,
+            "sourceEndMs": 3000,
+            "sourceStartFrame30": 0,
+            "sourceEndFrame30": 90,
+            "outputStartFrame": 0,
+            "outputEndFrame": 90,
+            "audioSamples": {
+              "sourceStart": 0,
+              "sourceEnd": 144000,
+              "outputStart": 0,
+              "outputEnd": 144000
+            }
+          }
+        ],
+        "audio": {
+          "present": true,
+          "sampleRate": 48000,
+          "channels": 2,
+          "channelLayout": "stereo",
+          "channelOrder": [
+            "FL",
+            "FR"
+          ],
+          "canonicalPcmFormat": {
+            "sampleFormat": "f32le",
+            "packing": "interleaved"
+          },
+          "insertedSilenceSpans": [],
+          "sourceGrid": {
+            "sampleCount": 144000,
+            "byteCount": 1152000,
+            "payloadSha256": "d2e8ee05d1503059d1697e61b1873e3421ab7e45fd39bcff99c49e4ab77a5a5d",
+            "decodedSampleCount": 144384,
+            "decodedTailPaddingSampleCount": 384
+          },
+          "encodeInput": {
+            "sampleCount": 144000,
+            "byteCount": 1152000,
+            "payloadSha256": "d2e8ee05d1503059d1697e61b1873e3421ab7e45fd39bcff99c49e4ab77a5a5d"
+          },
+          "encoded": {
+            "codec": "aac",
+            "bitRate": "192k",
+            "movieTimeScale": 30,
+            "timeBase": "1/48000",
+            "startPts": 0,
+            "durationTs": 144000,
+            "containerDurationSamples": 144000,
+            "presentationDurationSamples": 144000,
+            "videoPresentationDurationSamples": 144000,
+            "trailingVideoOnlySampleCount": 0,
+            "tailPolicy": "frame-aligned-v001",
+            "rawDecodedSampleCount": 144384,
+            "effectiveDecodedSampleCount": 144000,
+            "effectiveDecodedPayloadSha256": "f5fe16f33c614ee8554257f5f4700de9f33a6b1eb21d3bfb010d4ced3f05d9f9",
+            "packetPayloadSha256": "b354571b68671beb9a842ae543b27701e8eea9a5a382b381b954b47b30bab22c",
+            "skipSamples": 1024,
+            "discardPadding": 0,
+            "encoderDelay": 1024
+          }
+        },
+        "output": {
+          "frameCount": 90,
+          "audioPacketPayloadSha256": "b354571b68671beb9a842ae543b27701e8eea9a5a382b381b954b47b30bab22c"
+        },
+        "validation": {
+          "status": "passed",
+          "checks": {
+            "approvalBinding": {
+              "status": "passed",
+              "violationCodes": []
+            },
+            "sourceBinding": {
+              "status": "passed",
+              "violationCodes": []
+            },
+            "videoQc": {
+              "status": "passed",
+              "violationCodes": []
+            },
+            "audioQc": {
+              "status": "passed",
+              "violationCodes": []
+            },
+            "timelineQc": {
+              "status": "passed",
+              "violationCodes": []
+            },
+            "hashGraph": {
+              "status": "passed",
+              "violationCodes": []
+            },
+            "publishPreconditions": {
+              "status": "passed",
+              "violationCodes": []
+            }
+          }
+        }
+      },
+      "renderedMediaFileSha256": "f60633430ecb675ddb8a35b9d5f3a26f99301d12b2af31cceae699680b305b87",
+      "renderPlan": {
+        "schemaVersion": "presentation-render-plan-v002",
+        "timelineSchemaVersion": "presentation-base-media-timeline-v002",
+        "elements": [
+          {
+            "instructionId": "builder-renderer-e2e-caption-instruction",
+            "kind": "speech-caption",
+            "text": "統合確認です",
+            "indexedLines": [
+              {
+                "lineIndex": 0,
+                "characters": [
+                  {
+                    "sourceIndex": 0,
+                    "character": "統",
+                    "codePoint": 32113,
+                    "role": "visible"
+                  },
+                  {
+                    "sourceIndex": 1,
+                    "character": "合",
+                    "codePoint": 21512,
+                    "role": "visible"
+                  },
+                  {
+                    "sourceIndex": 2,
+                    "character": "確",
+                    "codePoint": 30906,
+                    "role": "visible"
+                  },
+                  {
+                    "sourceIndex": 3,
+                    "character": "認",
+                    "codePoint": 35469,
+                    "role": "visible"
+                  },
+                  {
+                    "sourceIndex": 4,
+                    "character": "で",
+                    "codePoint": 12391,
+                    "role": "visible"
+                  },
+                  {
+                    "sourceIndex": 5,
+                    "character": "す",
+                    "codePoint": 12377,
+                    "role": "visible"
+                  }
+                ],
+                "renderedText": "統合確認です",
+                "text": "統合確認です",
+                "codePointIndices": [
+                  0,
+                  1,
+                  2,
+                  3,
+                  4,
+                  5
+                ]
+              }
+            ],
+            "sourceStartMs": 800,
+            "sourceEndMs": 1800,
+            "startFrame": 24,
+            "endFrameExclusive": 54,
+            "displayFrameCount": 30,
+            "requestedPresetId": "normal-landscape-readable-pop-v001",
+            "appliedPresetId": "normal-landscape-readable-pop-v001",
+            "presetId": "normal-landscape-readable-pop-v001",
+            "registryVersion": "normal-landscape-preset-registry-v001",
+            "presetRegistryVersion": "normal-landscape-preset-registry-v001",
+            "stateId": "caption-core-v001",
+            "visualState": {
+              "stateId": "caption-core-v001",
+              "textStyle": {
+                "fontAssetId": "line-seed-jp-extra-bold-v001",
+                "fontSizePx": 96,
+                "fontColor": "#FFFDF8",
+                "borderColor": "#111827",
+                "borderWidthPx": 8,
+                "lineSpacingPercent": 150,
+                "glowColor": "#000000",
+                "glowWidthPx": 12,
+                "glowOpacityPercent": 82
+              },
+              "position": {
+                "preset": "bottom-center",
+                "alignment": "center",
+                "offsetXPercent": 0,
+                "offsetYPercent": -6
+              },
+              "background": null,
+              "layout": {
+                "maxCharsPerLine": 36,
+                "maxLines": 2,
+                "singleLine": false
+              },
+              "transitionId": "quick-fade-4f-v001"
+            },
+            "transition": {
+              "transitionId": "quick-fade-4f-v001",
+              "entry": {
+                "type": "alpha-fade",
+                "frames": 4
+              },
+              "exit": {
+                "type": "alpha-fade",
+                "frames": 4
+              }
+            },
+            "timelineSegmentId": "segment-0001",
+            "targetProvenance": {
+              "targetRefId": "e2e-caption-target",
+              "targetType": "caption-target",
+              "sourceAtomIds": [
+                "e2e-a-01"
+              ],
+              "captionContractRefId": "e2e-caption-contract",
+              "cueId": "e2e-cue-001",
+              "captionTargetId": "e2e-caption-source-target",
+              "lineAtomIds": [
+                [
+                  "e2e-a-01"
+                ]
+              ],
+              "startAnchor": {
+                "atomId": "e2e-a-01",
+                "edge": "start"
+              },
+              "endAnchor": {
+                "atomId": "e2e-a-01",
+                "edge": "end"
+              }
+            },
+            "materialRefs": [],
+            "overlaySha256": "5eb7405bd60cc40bbd8190646099fdc70cdaf82e00d18b42f258ee006ce07ef3"
+          }
+        ]
+      },
+      "renderQc": {
+        "schemaVersion": "presentation-render-qc-v002",
+        "status": "passed",
+        "violationCodes": [],
+        "checks": {
+          "instructionApplication": {
+            "status": "passed"
+          },
+          "layoutAndVisibility": {
+            "status": "passed"
+          },
+          "media": {
+            "status": "passed"
+          }
+        }
+      }
+    }
+  ]
+}
