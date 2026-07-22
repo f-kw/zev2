@@ -1,0 +1,68 @@
+{
+  "schemaVersion": "presentation-base-media-validation-report-v001",
+  "buildId": "base-media-build-cc917bfc8faf1338dc614053",
+  "status": "passed",
+  "violations": [],
+  "inputs": {
+    "assemblyDecision": {
+      "path": "evals/clip_composition/outputs/presentation/20260722-first-real-data-assembly-decision-v001/assembly-decision.json",
+      "fileSha256": "b2360d5e2aa56075728d692a7d456455d2cac168d47325631cfea4d919e3aa32",
+      "payloadSha256": "7fbdc54c548be6e7a475cb54f221644c3d7ff5ce89442cd6a38fbccc7bd13755"
+    },
+    "basisEditPlan": {
+      "path": "evals/clip_composition/outputs/presentation/20260721-first-real-data-assembly-gate-v001/basis-edit-plan.json",
+      "fileSha256": "31f93434d8a0ba2f1b8cb2e6d845fd48f0064bcf2fcfb5aaee967653e90f2e64"
+    },
+    "sourceMedia": {
+      "path": "evals/clip_composition/research/downloads/first-gate-unseen/DmWu0jVQfTE/native-1080p/DmWu0jVQfTE.native-1080p-h264-opus.mp4",
+      "fileSha256": "a2c4548d07eb387f095a198b8f6892121134c46e8c0d5315e4debf3e083234ee"
+    }
+  },
+  "outputs": {
+    "baseMedia": {
+      "artifactId": "base-media-cc917bfc8faf1338dc614053",
+      "path": "base-media.mp4",
+      "fileSha256": "c0677893902b5a1eaf79b2a3937d67a477f270810200f7c6c01457b42b803c48"
+    },
+    "timeline": {
+      "timelineId": "timeline-cc917bfc8faf1338dc614053",
+      "path": "timeline.json",
+      "fileSha256": "802f570dd4f8ea90ef63b0b9afb9a026abf0b18e43e51f2aab51bd62c2180fec"
+    },
+    "generationManifest": {
+      "buildId": "base-media-build-cc917bfc8faf1338dc614053",
+      "path": "generation-manifest.json",
+      "fileSha256": "e06a606e7348a8c30a743edd9acd5da96e035125b2b69a33257d0c31cf9b81db"
+    }
+  },
+  "checks": {
+    "approvalBinding": {
+      "status": "passed",
+      "violationCodes": []
+    },
+    "sourceBinding": {
+      "status": "passed",
+      "violationCodes": []
+    },
+    "videoQc": {
+      "status": "passed",
+      "violationCodes": []
+    },
+    "audioQc": {
+      "status": "passed",
+      "violationCodes": []
+    },
+    "timelineQc": {
+      "status": "passed",
+      "violationCodes": []
+    },
+    "hashGraph": {
+      "status": "passed",
+      "violationCodes": []
+    },
+    "publishPreconditions": {
+      "status": "passed",
+      "violationCodes": []
+    }
+  }
+}
