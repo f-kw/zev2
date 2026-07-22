@@ -1,0 +1,117 @@
+{
+  "schemaVersion": "presentation-segmenter-boundary-preflight-job-v001",
+  "jobId": "DmWu0jVQfTE-candidate-13-segmenter-boundary-preflight-v001",
+  "artifactId": "DmWu0jVQfTE-candidate-13-v001",
+  "mode": "read-only-preflight",
+  "implementationBinding": {
+    "gitCommit": "051613f25d3259417e5a3522f98bc8946db22deb",
+    "files": [
+      {
+        "role": "core",
+        "path": "evals/clip_composition/presentation_segmenter_boundary_evidence_v001.mjs",
+        "fileSha256": "dac613292e463897ee2757be75a7d64f3ece9928141765a195ba54a0ebc6007a"
+      },
+      {
+        "role": "retainedSourceAtomsCore",
+        "path": "evals/clip_composition/presentation_retained_source_atoms_v001.mjs",
+        "fileSha256": "11036f09ceac1d1f5e19f5487eeae8d39c84ec7675cc8f9d693a203182d27f28"
+      },
+      {
+        "role": "runner",
+        "path": "evals/clip_composition/run_presentation_segmenter_boundary_preflight_v001.mjs",
+        "fileSha256": "3f35066d43746de3b7527b0e1dc3317faeea828f8beab8bb4dde8ae072a50352"
+      }
+    ]
+  },
+  "inputs": [
+    {
+      "role": "sourceAtoms",
+      "path": "evals/clip_composition/outputs/presentation/retained-source-atoms/DmWu0jVQfTE-candidate-13-v001/source-atoms.json",
+      "fileSha256": "8656549ec3fbbc0fb9447be7b9c2e784d22ebd18f08ee3e24c474ee62225c6d3"
+    },
+    {
+      "role": "sourceGenerationManifest",
+      "path": "evals/clip_composition/outputs/presentation/retained-source-atoms/DmWu0jVQfTE-candidate-13-v001/generation-manifest.json",
+      "fileSha256": "18094dd3729eead88c498f997e883253a1481ee8a33279882350aacfcf869cf1"
+    },
+    {
+      "role": "sourceValidationReport",
+      "path": "evals/clip_composition/outputs/presentation/retained-source-atoms/DmWu0jVQfTE-candidate-13-v001/validation-report.json",
+      "fileSha256": "be32244280a2564eda9a716a83d04da38f241120a6d2ba40e72e867072fc2ae6"
+    }
+  ],
+  "expectedSourceBinding": {
+    "sourceArtifactCanonicalSha256": "0bf1e10ab94388ec9521cb2270e6c339e7c7b6d8317443b469606b6b353df43c",
+    "rawSourceAtomsCanonicalSha256": "cd76bfd2fe7ab3b5156433f6d9e2229b20c3d3bbd7d94f2b9e9abbc804a6efb3"
+  },
+  "expectedRuntime": {
+    "nodeBinarySha256": "de4f3b493b15e7a0ee311f6a2c6dbf93858052f5802aa91cfafa2c57e9d6bc5c",
+    "nodeVersion": "v20.19.6",
+    "icuVersion": "77.1",
+    "resolvedLocale": "ja",
+    "resolvedGranularity": "word"
+  },
+  "expectedProjection": {
+    "sourceAtomCount": 354,
+    "containerCount": 3,
+    "boundaryCandidateCount": 205,
+    "wordLikeCandidateCount": 205,
+    "nonWordLikeCandidateCount": 0,
+    "timelineSegments": [
+      {
+        "timelineSegmentId": "segment-0001",
+        "sourceAtomCount": 248,
+        "boundaryCandidateCount": 138
+      },
+      {
+        "timelineSegmentId": "segment-0002",
+        "sourceAtomCount": 106,
+        "boundaryCandidateCount": 67
+      }
+    ],
+    "containers": [
+      {
+        "containerId": "segmenter-container-000001",
+        "timelineSegmentId": "segment-0001",
+        "speechId": 1,
+        "sourceAtomCount": 126,
+        "boundaryCandidateCount": 60
+      },
+      {
+        "containerId": "segmenter-container-000002",
+        "timelineSegmentId": "segment-0001",
+        "speechId": 2,
+        "sourceAtomCount": 122,
+        "boundaryCandidateCount": 78
+      },
+      {
+        "containerId": "segmenter-container-000003",
+        "timelineSegmentId": "segment-0002",
+        "speechId": 3,
+        "sourceAtomCount": 106,
+        "boundaryCandidateCount": 67
+      }
+    ],
+    "mixedRawSpeakerCandidateCount": 12,
+    "rawSpeakerExactSetQueryResults": [
+      {
+        "values": [
+          "unknown"
+        ],
+        "boundaryCandidateCount": 11
+      }
+    ],
+    "sourcePositiveOverlapCount": 0,
+    "membership": {
+      "missingCount": 0,
+      "duplicatedCount": 0,
+      "orderReversedCount": 0,
+      "crossSegmentCount": 0,
+      "crossSpeechCount": 0
+    }
+  },
+  "readOnlyGuard": {
+    "formalOutputPath": "evals/clip_composition/outputs/presentation/segmenter-boundary-evidence/DmWu0jVQfTE-candidate-13-v001",
+    "expectedState": "absent"
+  }
+}
