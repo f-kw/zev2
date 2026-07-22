@@ -1,0 +1,52 @@
+{
+  "schemaVersion": "presentation-retained-source-atoms-test-seed-v001",
+  "sourceRef": "youtube:synthetic-retained-atoms-v001",
+  "sourceProvenance": "youtube-format299-video+frozen-format251-audio-v001",
+  "candidate": {
+    "candidateId": 13,
+    "title": "合成fixtureの残存発話",
+    "outerRange": {
+      "startMs": 0,
+      "endMs": 800
+    }
+  },
+  "formalSegments": [
+    {
+      "sourceStartMs": 0,
+      "sourceEndMs": 300,
+      "sourceStartFrame30": 0,
+      "sourceEndFrame30": 9,
+      "outputStartFrame": 0,
+      "outputEndFrame": 9,
+      "audioSamples": {
+        "sourceStart": 0,
+        "sourceEnd": 14400,
+        "outputStart": 0,
+        "outputEnd": 14400
+      }
+    },
+    {
+      "sourceStartMs": 500,
+      "sourceEndMs": 800,
+      "sourceStartFrame30": 15,
+      "sourceEndFrame30": 24,
+      "outputStartFrame": 9,
+      "outputEndFrame": 18,
+      "audioSamples": {
+        "sourceStart": 24000,
+        "sourceEnd": 38400,
+        "outputStart": 14400,
+        "outputEnd": 28800
+      }
+    }
+  ],
+  "atoms": [
+    {"id": 1, "text": "合", "startMs": 0, "endMs": 100, "speaker": "SPEAKER_00", "speechId": 1},
+    {"id": 2, "text": "成", "startMs": 100, "endMs": 200, "speaker": "unknown", "speechId": 1},
+    {"id": 3, "text": "一", "startMs": 200, "endMs": 300, "speechId": 1},
+    {"id": 4, "text": "除", "startMs": 300, "endMs": 400, "speaker": null, "speechId": 2},
+    {"id": 5, "text": "合", "startMs": 500, "endMs": 600, "speaker": "opaque-cluster-A", "speechId": 3},
+    {"id": 6, "text": "成", "startMs": 600, "endMs": 700, "speaker": "unknown", "speechId": 3},
+    {"id": 7, "text": "二", "startMs": 700, "endMs": 800, "speaker": "SPEAKER_00", "speechId": 3}
+  ]
+}
