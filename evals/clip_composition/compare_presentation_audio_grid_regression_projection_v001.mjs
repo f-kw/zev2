@@ -125,7 +125,11 @@ const normalizedForComparison = (artifact) => {
   return result;
 };
 
-const compareSuite = (before, after, {label, suiteId, caseCount}) => {
+export const comparePresentationAudioGridProjectionSuiteV001 = (
+  before,
+  after,
+  {label, suiteId, caseCount},
+) => {
   validateProjection(before, {role: 'before-fix', suiteId, caseCount, label: `${label}:before`});
   validateProjection(after, {role: 'after-fix', suiteId, caseCount, label: `${label}:after`});
   const violations = [];
@@ -171,12 +175,12 @@ export const comparePresentationAudioGridRegressionProjectionsV001 = ({
   afterIntegration,
 }) => {
   const suites = [
-    compareSuite(beforeBuilder, afterBuilder, {
+    comparePresentationAudioGridProjectionSuiteV001(beforeBuilder, afterBuilder, {
       label: 'builder-audio-normal-cases',
       suiteId: 'presentation-base-media-audio-normal-cases-v001',
       caseCount: 9,
     }),
-    compareSuite(beforeIntegration, afterIntegration, {
+    comparePresentationAudioGridProjectionSuiteV001(beforeIntegration, afterIntegration, {
       label: 'builder-renderer-audio-integration',
       suiteId: 'presentation-builder-renderer-audio-integration-v001',
       caseCount: 1,

@@ -1,13 +1,61 @@
 import {createHash} from 'node:crypto';
-import {readFile, writeFile} from 'node:fs/promises';
+import {lstat, open, readFile} from 'node:fs/promises';
+import path from 'node:path';
+import {fileURLToPath} from 'node:url';
 
 import {canonicalJson} from './presentation_caption_contract_v002.mjs';
 
 export const PRESENTATION_AUDIO_GRID_REGRESSION_PROJECTION_SCHEMA_VERSION =
   'presentation-audio-grid-regression-projection-v001';
 
+const MODULE_DIRECTORY = path.dirname(fileURLToPath(import.meta.url));
+const WORKSPACE_ROOT = path.resolve(MODULE_DIRECTORY, '../..');
+const OUTPUT_ROOT = path.join(
+  MODULE_DIRECTORY,
+  'outputs/presentation/20260722-audio-grid-regression-projection-v001',
+);
+const FIXED_OUTPUT_FILE_BY_SUITE_AND_ROLE = Object.freeze({
+  'presentation-base-media-audio-normal-cases-v001:before-fix': 'before-builder.json',
+  'presentation-base-media-audio-normal-cases-v001:after-fix': 'after-builder.json',
+  'presentation-builder-renderer-audio-integration-v001:before-fix': 'before-integration.json',
+  'presentation-builder-renderer-audio-integration-v001:after-fix': 'after-integration.json',
+  'presentation-builder-renderer-audio-integration-v002:before-fix': 'before-integration-v002.json',
+  'presentation-builder-renderer-audio-integration-v002:after-fix': 'after-integration-v002.json',
+});
+
 const sha256Bytes = (value) => createHash('sha256').update(value).digest('hex');
 const fileSha256 = async (filePath) => sha256Bytes(await readFile(filePath));
+
+const assertNoSymlinkParent = async (targetPath) => {
+  const relative = path.relative(WORKSPACE_ROOT, targetPath);
+  if (relative === '' || relative.startsWith(`..${path.sep}`) || path.isAbsolute(relative)) {
+    throw new Error('projection output escapes workspace');
+  }
+  const parts = relative.split(path.sep);
+  let cursor = WORKSPACE_ROOT;
+  for (let index = 0; index < parts.length - 1; index += 1) {
+    cursor = path.join(cursor, parts[index]);
+    const info = await lstat(cursor);
+    if (info.isSymbolicLink()) throw new Error(`projection output has symlink parent: ${cursor}`);
+  }
+};
+
+const writeNewFixedProjection = async ({outputPath, suiteId, role, bytes}) => {
+  const fileName = FIXED_OUTPUT_FILE_BY_SUITE_AND_ROLE[`${suiteId}:${role}`];
+  if (!fileName) throw new Error(`projection suite/role is not registered: ${suiteId}:${role}`);
+  const expectedPath = path.join(OUTPUT_ROOT, fileName);
+  if (path.resolve(outputPath) !== expectedPath) {
+    throw new Error(`projection output must be ${path.relative(WORKSPACE_ROOT, expectedPath)}`);
+  }
+  await assertNoSymlinkParent(expectedPath);
+  const handle = await open(expectedPath, 'wx');
+  try {
+    await handle.writeFile(bytes);
+    await handle.sync();
+  } finally {
+    await handle.close();
+  }
+};
 
 const normalizeCheck = (check) => ({
   status: check?.status ?? null,
@@ -115,7 +163,7 @@ export const writePresentationAudioGridRegressionProjectionV001 = async ({
       gitHead,
       builderFileSha256: await fileSha256(builderPath),
       harnessFiles: await Promise.all(harnessPaths.map(async (filePath) => ({
-        path: filePath,
+        path: path.relative(WORKSPACE_ROOT, filePath),
         fileSha256: await fileSha256(filePath),
       }))),
       tools,
@@ -123,7 +171,7 @@ export const writePresentationAudioGridRegressionProjectionV001 = async ({
     cases: [...cases].sort((left, right) => left.caseId.localeCompare(right.caseId)),
   };
   const bytes = Buffer.from(`${JSON.stringify(artifact, null, 2)}\n`);
-  await writeFile(outputPath, bytes);
+  await writeNewFixedProjection({outputPath, suiteId, role, bytes});
   return {
     artifact,
     fileSha256: sha256Bytes(bytes),

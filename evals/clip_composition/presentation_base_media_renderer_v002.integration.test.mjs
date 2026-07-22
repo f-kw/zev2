@@ -96,8 +96,20 @@ const runBuilderRendererCase = async ({
     mkdir(BASE_MEDIA_OUTPUT_ROOT, {recursive: true}),
     mkdir(RENDER_OUTPUT_ROOT, {recursive: true}),
   ]);
-  const runtime = await mkdtemp(path.join(RUNTIME_PARENT, '.runtime-e2e-'));
-  const suffix = `${process.pid}-${path.basename(runtime)}`;
+  const legacyProjectionOutput = process.env.PRESENTATION_AUDIO_GRID_INTEGRATION_PROJECTION_OUTPUT;
+  const correctedProjectionOutput =
+    process.env.PRESENTATION_AUDIO_GRID_INTEGRATION_PROJECTION_V002_OUTPUT;
+  if (legacyProjectionOutput && correctedProjectionOutput) {
+    throw new Error('legacy and corrected projection outputs cannot be requested together');
+  }
+  const useDeterministicProjectionRuntime = Boolean(projectionCaseId && correctedProjectionOutput);
+  const runtime = useDeterministicProjectionRuntime
+    ? path.join(RUNTIME_PARENT, '.runtime-e2e-audio-grid-projection-v002')
+    : await mkdtemp(path.join(RUNTIME_PARENT, '.runtime-e2e-'));
+  if (useDeterministicProjectionRuntime) await mkdir(runtime);
+  const suffix = useDeterministicProjectionRuntime
+    ? 'audio-grid-projection-v002'
+    : `${process.pid}-${path.basename(runtime)}`;
   const baseOutput = path.join(BASE_MEDIA_OUTPUT_ROOT, `builder-renderer-e2e-${suffix}`);
   const renderOutput = path.join(RENDER_OUTPUT_ROOT, suffix);
   try {
@@ -298,7 +310,8 @@ const runBuilderRendererCase = async ({
       renderOutput,
       timeline,
     });
-    if (projectionCaseId && process.env.PRESENTATION_AUDIO_GRID_INTEGRATION_PROJECTION_OUTPUT) {
+    const projectionOutput = correctedProjectionOutput ?? legacyProjectionOutput;
+    if (projectionCaseId && projectionOutput) {
       const gitHead = (await run('git', ['rev-parse', 'HEAD'])).stdout.trim();
       const projectionCase = await capturePresentationRendererProjectionV001({
         caseId: projectionCaseId,
@@ -309,10 +322,10 @@ const runBuilderRendererCase = async ({
         qc,
       });
       await writePresentationAudioGridRegressionProjectionV001({
-        outputPath: path.resolve(
-          process.env.PRESENTATION_AUDIO_GRID_INTEGRATION_PROJECTION_OUTPUT,
-        ),
-        suiteId: 'presentation-builder-renderer-audio-integration-v001',
+        outputPath: path.resolve(projectionOutput),
+        suiteId: correctedProjectionOutput
+          ? 'presentation-builder-renderer-audio-integration-v002'
+          : 'presentation-builder-renderer-audio-integration-v001',
         role: process.env.PRESENTATION_AUDIO_GRID_PROJECTION_ROLE ?? 'unspecified',
         gitHead,
         builderPath: BUILDER_PATH,
