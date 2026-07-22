@@ -2,9 +2,10 @@
 
 import {createHash} from 'node:crypto';
 import {spawn} from 'node:child_process';
-import {createReadStream} from 'node:fs';
+import {constants as fsConstants, createReadStream} from 'node:fs';
 import {createInterface} from 'node:readline';
 import {
+  access,
   chmod,
   copyFile,
   lstat,
@@ -36,7 +37,7 @@ export const PRESENTATION_BASE_MEDIA_BUILD_JOB_SCHEMA_VERSION =
 export const PRESENTATION_BASE_MEDIA_ASSEMBLY_DECISION_SCHEMA_VERSION =
   'presentation-base-media-assembly-decision-v001';
 export const PRESENTATION_BASE_MEDIA_GENERATION_MANIFEST_SCHEMA_VERSION =
-  'presentation-base-media-generation-manifest-v001';
+  'presentation-base-media-generation-manifest-v002';
 export const PRESENTATION_BASE_MEDIA_VALIDATION_REPORT_SCHEMA_VERSION =
   'presentation-base-media-validation-report-v001';
 export const PRESENTATION_BASE_MEDIA_BUILDER_VERSION = 'presentation-base-media-builder-v001';
@@ -216,6 +217,40 @@ const readJsonBytes = async (filePath) => {
 
 const firstLine = (buffer) => buffer.toString().split('\n')[0];
 
+const resolveExecutableBinaryDiagnostic = async (command) => {
+  const candidates = command.includes(path.sep)
+    ? [path.resolve(command)]
+    : (process.env.PATH ?? '')
+      .split(path.delimiter)
+      .filter(isNonEmptyString)
+      .map((directory) => path.resolve(directory, command));
+  for (const candidate of candidates) {
+    try {
+      await access(candidate, fsConstants.X_OK);
+      const resolvedPath = await realpath(candidate);
+      const resolvedStat = await stat(resolvedPath);
+      if (!resolvedStat.isFile()) continue;
+      return {
+        resolvedPath,
+        fileSha256: await fileSha256Streaming(resolvedPath),
+      };
+    } catch (error) {
+      if (['EACCES', 'ENOENT', 'ENOTDIR'].includes(error?.code)) continue;
+      throw error;
+    }
+  }
+  throw new Error(`executable not found on PATH: ${command}`);
+};
+
+export const inspectPresentationBaseMediaToolBinaryDiagnosticsV001 = async () => {
+  const [node, ffmpeg, ffprobe] = await Promise.all([
+    resolveExecutableBinaryDiagnostic(process.execPath),
+    resolveExecutableBinaryDiagnostic('ffmpeg'),
+    resolveExecutableBinaryDiagnostic('ffprobe'),
+  ]);
+  return {node, ffmpeg, ffprobe};
+};
+
 export const evaluatePresentationBaseMediaToolProfileV001 = (observed) => {
   const violations = [];
   for (const field of ['nodeVersion', 'ffmpegVersion', 'ffprobeVersion']) {
@@ -378,7 +413,7 @@ const validateAudioObject = (audio, add, pathValue) => {
 };
 
 /** Renderer v002も使う、§6.3の厳密manifest検査。 */
-export const validatePresentationBaseMediaGenerationManifestV001 = (input) => {
+export const validatePresentationBaseMediaGenerationManifestV002 = (input) => {
   const violations = [];
   const add = (pathValue, details = null) => violations.push(makePresentationBaseMediaViolationV001(
     'BASE_MEDIA_GENERATION_MANIFEST_INVALID', pathValue, [], details,
@@ -454,10 +489,22 @@ export const validatePresentationBaseMediaGenerationManifestV001 = (input) => {
       !== canonicalJson(PRESENTATION_BASE_MEDIA_TRUSTED_SOURCE_FILES)) {
     add('$.execution.trustedSourceFiles');
   }
-  if (!exactFields(input.tools, ['expected', 'observed'])) add('$.tools');
+  if (!exactFields(input.tools, ['expected', 'observed', 'binaryDiagnostics'])) add('$.tools');
   for (const side of ['expected', 'observed']) {
     if (!exactFields(input.tools?.[side], ['nodeVersion', 'ffmpegVersion', 'ffprobeVersion'])) {
       add(`$.tools.${side}`);
+    }
+  }
+  if (!exactFields(input.tools?.binaryDiagnostics, ['node', 'ffmpeg', 'ffprobe'])) {
+    add('$.tools.binaryDiagnostics');
+  } else {
+    for (const tool of ['node', 'ffmpeg', 'ffprobe']) {
+      const diagnostic = input.tools.binaryDiagnostics[tool];
+      if (!exactFields(diagnostic, ['resolvedPath', 'fileSha256'])
+          || !path.isAbsolute(diagnostic?.resolvedPath ?? '')
+          || !SHA256_PATTERN.test(diagnostic?.fileSha256 ?? '')) {
+        add(`$.tools.binaryDiagnostics.${tool}`);
+      }
     }
   }
   if (!exactFields(input.versions, ['generatorVersion', 'timelineCheckerVersion'])) add('$.versions');
@@ -2029,7 +2076,10 @@ export const executePresentationBaseMediaBuildV001 = async (jobInput, context = 
     lockPath: ownsLock ? lockPath : null,
   }));
   try {
-    const observedTools = await inspectPresentationBaseMediaToolProfileV001();
+    const [observedTools, toolBinaryDiagnostics] = await Promise.all([
+      inspectPresentationBaseMediaToolProfileV001(),
+      inspectPresentationBaseMediaToolBinaryDiagnosticsV001(),
+    ]);
     const toolCheck = evaluatePresentationBaseMediaToolProfileV001(observedTools);
     if (toolCheck.status !== 'passed') {
       return resultWithRetainedPaths({status: 'failed', violations: toolCheck.violations});
@@ -2270,7 +2320,11 @@ export const executePresentationBaseMediaBuildV001 = async (jobInput, context = 
         commands: executionCommands,
         trustedSourceFiles: structuredClone(PRESENTATION_BASE_MEDIA_TRUSTED_SOURCE_FILES),
       },
-      tools: {expected: {...PRESENTATION_BASE_MEDIA_EXPECTED_TOOL_PROFILE}, observed: observedTools},
+      tools: {
+        expected: {...PRESENTATION_BASE_MEDIA_EXPECTED_TOOL_PROFILE},
+        observed: observedTools,
+        binaryDiagnostics: toolBinaryDiagnostics,
+      },
       versions: {
         generatorVersion: PRESENTATION_BASE_MEDIA_BUILDER_VERSION,
         timelineCheckerVersion: 'presentation-base-media-timeline-checker-v002',
@@ -2295,7 +2349,7 @@ export const executePresentationBaseMediaBuildV001 = async (jobInput, context = 
       },
       excludedLegacyFields: ['screenLayout', 'telopPlan'],
     };
-    const manifestValidation = validatePresentationBaseMediaGenerationManifestV001(manifest);
+    const manifestValidation = validatePresentationBaseMediaGenerationManifestV002(manifest);
     if (manifestValidation.status !== 'passed') {
       return resultWithRetainedPaths({status: 'failed', violations: manifestValidation.violations});
     }

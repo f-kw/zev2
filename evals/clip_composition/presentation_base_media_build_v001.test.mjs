@@ -23,7 +23,7 @@ import {
   validatePresentationBaseMediaHashGraphV001,
   validatePresentationBaseMediaAssemblyDecisionV001,
   validatePresentationBaseMediaBuildJobV001,
-  validatePresentationBaseMediaGenerationManifestV001,
+  validatePresentationBaseMediaGenerationManifestV002,
   validatePresentationBaseMediaSegmentPlanV001,
 } from './presentation_base_media_build_v001.mjs';
 import {
@@ -407,7 +407,7 @@ test('strict job, decision, tool and manifest contracts reject unknown or change
   const wrongTool = {...PRESENTATION_BASE_MEDIA_EXPECTED_TOOL_PROFILE, nodeVersion: 'v0.0.0'};
   assert.ok(evaluatePresentationBaseMediaToolProfileV001(wrongTool).violations
     .some((item) => item.code === 'BASE_MEDIA_TOOL_PROFILE_MISMATCH'));
-  assert.ok(validatePresentationBaseMediaGenerationManifestV001({}).violations
+  assert.ok(validatePresentationBaseMediaGenerationManifestV002({}).violations
     .some((item) => item.code === 'BASE_MEDIA_GENERATION_MANIFEST_INVALID'));
   const badGraph = validatePresentationBaseMediaHashGraphV001({
     timeline: {baseMedia: {fileSha256: 'a'.repeat(64)}},
@@ -443,7 +443,7 @@ test('30fps source without audio builds only the approved disjoint frame interva
     readJson(path.join(fixture.outputPath, 'timeline.json')),
     readJson(path.join(fixture.outputPath, 'validation-report.json')),
   ]);
-  assert.equal(validatePresentationBaseMediaGenerationManifestV001(manifest).status, 'passed');
+  assert.equal(validatePresentationBaseMediaGenerationManifestV002(manifest).status, 'passed');
   assert.equal(timeline.baseMedia.expectedFrameCount, 4);
   assert.deepEqual(timeline.segments.map((item) => [item.outputStartFrame, item.outputEndFrame]), [[0, 2], [2, 4]]);
   assert.equal(manifest.audio.present, false);
@@ -451,6 +451,25 @@ test('30fps source without audio builds only the approved disjoint frame interva
   assert.deepEqual(manifest.execution.trustedSourceFiles, PRESENTATION_BASE_MEDIA_TRUSTED_SOURCE_FILES);
   assert.equal(manifest.execution.commands[0].arguments.at(-1), '<TEMP_VIDEO>');
   assert.equal(manifest.execution.commands[0].arguments.includes('<SOURCE_MEDIA>'), true);
+  assert.deepEqual(Object.keys(manifest.tools.binaryDiagnostics).sort(), ['ffmpeg', 'ffprobe', 'node']);
+  for (const tool of ['node', 'ffmpeg', 'ffprobe']) {
+    const diagnostic = manifest.tools.binaryDiagnostics[tool];
+    assert.equal(path.isAbsolute(diagnostic.resolvedPath), true);
+    assert.equal(diagnostic.fileSha256, sha256(await readFile(diagnostic.resolvedPath)));
+  }
+  const missingDiagnosticManifest = clone(manifest);
+  delete missingDiagnosticManifest.tools.binaryDiagnostics;
+  assert.equal(
+    validatePresentationBaseMediaGenerationManifestV002(missingDiagnosticManifest).status,
+    'failed',
+    '承認後に生成するmanifestは診断情報を必須とする',
+  );
+  const invalidDiagnosticManifest = clone(manifest);
+  invalidDiagnosticManifest.tools.binaryDiagnostics.ffmpeg.fileSha256 = 'invalid';
+  assert.equal(
+    validatePresentationBaseMediaGenerationManifestV002(invalidDiagnosticManifest).status,
+    'failed',
+  );
   assert.equal(JSON.stringify(manifest).includes('.tmp-'), false, '一時pathを来歴へ漏らさない');
   assert.equal(manifest.job.fileSha256, sha256(await readFile(fixture.jobPath)));
   assert.equal(manifest.source.path, repoPath(sourcePath), 'manifestはsnapshotでなく元artifact来歴を指す');
@@ -959,7 +978,7 @@ test('every fixed violation code fires from its validator, binding, QC stage, or
   observe(evaluatePresentationBaseMediaToolProfileV001({
     ...PRESENTATION_BASE_MEDIA_EXPECTED_TOOL_PROFILE, ffmpegVersion: 'wrong',
   }));
-  observe(validatePresentationBaseMediaGenerationManifestV001({}));
+  observe(validatePresentationBaseMediaGenerationManifestV002({}));
   try {
     await assertSafePresentationBaseMediaInputPathV001('/private/tmp/not-approved.json', [MODULE_DIRECTORY]);
   } catch (error) {

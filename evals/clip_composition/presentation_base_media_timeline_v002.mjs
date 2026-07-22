@@ -1,6 +1,6 @@
 export const PRESENTATION_BASE_MEDIA_TIMELINE_SCHEMA_VERSION = 'presentation-base-media-timeline-v002';
 export const PRESENTATION_BASE_MEDIA_TIMELINE_CHECKER_VERSION = 'presentation-base-media-timeline-checker-v002';
-export const PRESENTATION_BASE_MEDIA_GENERATION_MANIFEST_SCHEMA_VERSION = 'presentation-base-media-generation-manifest-v001';
+export const PRESENTATION_BASE_MEDIA_GENERATION_MANIFEST_SCHEMA_VERSION = 'presentation-base-media-generation-manifest-v002';
 
 export const PRESENTATION_BASE_MEDIA_EXPECTED_TOOL_PROFILE = Object.freeze({
   nodeVersion: 'v20.19.6',
@@ -903,7 +903,9 @@ function inspectGenerationManifest(manifestInput, add) {
   }
 
   const tools = isObject(manifest.tools) ? manifest.tools : {};
-  if (!exactFields(manifest.tools, ['expected', 'observed'])) invalid('$generationManifest.tools');
+  if (!exactFields(manifest.tools, ['expected', 'observed', 'binaryDiagnostics'])) {
+    invalid('$generationManifest.tools');
+  }
   for (const field of ['expected', 'observed']) {
     const profile = tools[field];
     const path = `$generationManifest.tools.${field}`;
@@ -917,6 +919,22 @@ function inspectGenerationManifest(manifestInput, add) {
       tools.expected?.[field] !== PRESENTATION_BASE_MEDIA_EXPECTED_TOOL_PROFILE[field]
       || tools.observed?.[field] !== PRESENTATION_BASE_MEDIA_EXPECTED_TOOL_PROFILE[field]
     ) invalid(`$generationManifest.tools.${field}`);
+  }
+  const binaryDiagnostics = isObject(tools.binaryDiagnostics) ? tools.binaryDiagnostics : {};
+  if (!exactFields(tools.binaryDiagnostics, ['node', 'ffmpeg', 'ffprobe'])) {
+    invalid('$generationManifest.tools.binaryDiagnostics');
+  } else {
+    for (const tool of ['node', 'ffmpeg', 'ffprobe']) {
+      const diagnostic = binaryDiagnostics[tool];
+      const diagnosticPath = `$generationManifest.tools.binaryDiagnostics.${tool}`;
+      if (!exactFields(diagnostic, ['resolvedPath', 'fileSha256'])) invalid(diagnosticPath);
+      if (!isNonEmptyString(diagnostic?.resolvedPath) || !diagnostic.resolvedPath.startsWith('/')) {
+        invalid(`${diagnosticPath}.resolvedPath`);
+      }
+      if (!SHA256_PATTERN.test(diagnostic?.fileSha256 ?? '')) {
+        invalid(`${diagnosticPath}.fileSha256`);
+      }
+    }
   }
 
   const versions = isObject(manifest.versions) ? manifest.versions : {};

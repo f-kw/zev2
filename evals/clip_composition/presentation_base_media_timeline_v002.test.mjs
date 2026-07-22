@@ -225,6 +225,11 @@ function makeFixture({ inputFrameRate = '60/1', audio = false } = {}) {
     tools: {
       expected: {...PRESENTATION_BASE_MEDIA_EXPECTED_TOOL_PROFILE},
       observed: {...PRESENTATION_BASE_MEDIA_EXPECTED_TOOL_PROFILE},
+      binaryDiagnostics: {
+        node: {resolvedPath: '/fixture/bin/node', fileSha256: hash('9')},
+        ffmpeg: {resolvedPath: '/fixture/bin/ffmpeg', fileSha256: hash('a')},
+        ffprobe: {resolvedPath: '/fixture/bin/ffprobe', fileSha256: hash('b')},
+      },
     },
     versions: {
       generatorVersion: 'presentation-base-media-builder-v001',
@@ -362,6 +367,13 @@ test('v001・未知field・欠落fieldを近似受理しない', () => {
   assertHasCode(
     mapPresentationSourceIntervalV002(oldTimeline, 1101, 3901),
     'BASE_MEDIA_TIMELINE_INVALID',
+  );
+
+  const oldManifest = clone(fixture.manifest);
+  oldManifest.schemaVersion = 'presentation-base-media-generation-manifest-v001';
+  assertHasCode(
+    validatePresentationBaseMediaTimelineV002(fixture.timeline, oldManifest, fixture.observed),
+    'BASE_MEDIA_GENERATION_MANIFEST_INVALID',
   );
 
   const unknownTimeline = clone(fixture.timeline);
@@ -620,6 +632,17 @@ test('固定tool・実装2file・固定成果物名を厳密に検査する', ()
   tools.tools.observed.nodeVersion = 'v20.19.5';
   assertHasCode(
     validatePresentationBaseMediaTimelineV002(fixture.timeline, tools, fixture.observed),
+    'BASE_MEDIA_GENERATION_MANIFEST_INVALID',
+  );
+
+  const missingBinaryDiagnostics = clone(fixture.manifest);
+  delete missingBinaryDiagnostics.tools.binaryDiagnostics;
+  assertHasCode(
+    validatePresentationBaseMediaTimelineV002(
+      fixture.timeline,
+      missingBinaryDiagnostics,
+      fixture.observed,
+    ),
     'BASE_MEDIA_GENERATION_MANIFEST_INVALID',
   );
 

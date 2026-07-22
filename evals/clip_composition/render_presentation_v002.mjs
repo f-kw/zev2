@@ -322,10 +322,18 @@ export function validateBaseMediaToolProfileV002(generationManifest, actualVersi
   const expectedFields = ['nodeVersion', 'ffmpegVersion', 'ffprobeVersion'];
   const expected = generationManifest?.tools?.expected;
   const observed = generationManifest?.tools?.observed;
+  const binaryDiagnostics = generationManifest?.tools?.binaryDiagnostics;
   const current = Object.fromEntries(expectedFields.map((field) => [field, actualVersions?.[field]]));
-  const valid = exactFields(generationManifest?.tools, ['expected', 'observed'])
+  const binaryDiagnosticsValid = exactFields(binaryDiagnostics, ['node', 'ffmpeg', 'ffprobe'])
+    && ['node', 'ffmpeg', 'ffprobe'].every((tool) => (
+      exactFields(binaryDiagnostics[tool], ['resolvedPath', 'fileSha256'])
+      && path.isAbsolute(binaryDiagnostics[tool].resolvedPath)
+      && SHA256_PATTERN.test(binaryDiagnostics[tool].fileSha256)
+    ));
+  const valid = exactFields(generationManifest?.tools, ['expected', 'observed', 'binaryDiagnostics'])
     && exactFields(expected, expectedFields)
     && exactFields(observed, expectedFields)
+    && binaryDiagnosticsValid
     && expectedFields.every((field) => (
       isNonEmptyString(expected[field])
       && expected[field] === observed[field]

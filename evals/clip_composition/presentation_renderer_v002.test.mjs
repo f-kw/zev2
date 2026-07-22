@@ -11,6 +11,7 @@ import {
 } from './build_presentation_resolution_package_v002.mjs';
 import {canonicalJson} from './presentation_caption_contract_v002.mjs';
 import {
+  PRESENTATION_BASE_MEDIA_GENERATION_MANIFEST_SCHEMA_VERSION,
   PRESENTATION_BASE_MEDIA_TRUSTED_SOURCE_FILES,
   PRESENTATION_BASE_MEDIA_TIMELINE_VIOLATION_CODES,
   frameBoundaryV001 as timelineFrameBoundaryV001,
@@ -370,7 +371,7 @@ const makeBaseGenerationManifest = ({
     } : null,
   }));
   return {
-    schemaVersion: 'presentation-base-media-generation-manifest-v001',
+    schemaVersion: PRESENTATION_BASE_MEDIA_GENERATION_MANIFEST_SCHEMA_VERSION,
     buildId: 'presentation-renderer-synthetic-base-build-v001',
     job: {jobId: 'synthetic-base-build-job-v001', schemaVersion: 'presentation-base-media-build-job-v001', fileSha256: '3'.repeat(64)},
     source: {
@@ -450,7 +451,15 @@ const makeBaseGenerationManifest = ({
       ],
       trustedSourceFiles: clone(PRESENTATION_BASE_MEDIA_TRUSTED_SOURCE_FILES),
     },
-    tools: {expected: clone(tools), observed: clone(tools)},
+    tools: {
+      expected: clone(tools),
+      observed: clone(tools),
+      binaryDiagnostics: {
+        node: {resolvedPath: '/fixture/bin/node', fileSha256: 'a'.repeat(64)},
+        ffmpeg: {resolvedPath: '/fixture/bin/ffmpeg', fileSha256: 'b'.repeat(64)},
+        ffprobe: {resolvedPath: '/fixture/bin/ffprobe', fileSha256: 'c'.repeat(64)},
+      },
+    },
     versions: {generatorVersion: 'presentation-base-media-builder-v001', timelineCheckerVersion: 'presentation-base-media-timeline-checker-v002'},
     git: {head: '0'.repeat(40), dirty: true},
     implementationFiles: clone(implementationFiles),
@@ -911,7 +920,15 @@ test('02 固定信頼根・台帳・preview・描画部品・tool・fontを照�
   assert.equal(classifyPresentationRenderErrorV002(new Error('PRESENTATION_FONT_LOAD_FAILED:missing')), 'FONT_LOAD_FAILED');
   observedCodes.add('FONT_LOAD_FAILED');
   assert.equal(classifyPresentationRenderErrorV002(new Error('other failure')), null);
-  const baseToolManifest = {tools: {expected: rendererToolProfile(formal), observed: rendererToolProfile(formal)}};
+  const baseToolManifest = {tools: {
+    expected: rendererToolProfile(formal),
+    observed: rendererToolProfile(formal),
+    binaryDiagnostics: {
+      node: {resolvedPath: '/fixture/bin/node', fileSha256: 'a'.repeat(64)},
+      ffmpeg: {resolvedPath: '/fixture/bin/ffmpeg', fileSha256: 'b'.repeat(64)},
+      ffprobe: {resolvedPath: '/fixture/bin/ffprobe', fileSha256: 'c'.repeat(64)},
+    },
+  }};
   assert.equal(
     validateBaseMediaToolProfileV002(baseToolManifest, rendererToolProfile(formal)).status,
     'passed',
