@@ -93,6 +93,8 @@
 | 修正前・生成から描画までの通し1件 `before-integration-v003.json` | `146d5e6b9d9b3be3c18c8b1a2766125cd0314b09d3038561a9b8813260720067` |
 | 修正後・生成から描画までの通し1件 `after-integration-v003.json` | `c6ebf040a508ab9db69131470a9b86ba8414d5f534562cc2941289667941bdf6` |
 
+上記4つの対象projectionと`comparison-v003.json`は、commit `0b9dff304b6a9cccbfef822f67e8de90ab07a6d8`で保存した。比較記録内のbefore取得元commit `04e7c399dbce19f704cafe326cb333168774fa18`、after取得元commit `74c2a04d24581c494e873161d6cbcb8c74687937`とは役割を分け、成果物を後から追跡できるようにする。
+
 ## 5. 正式元媒体の読み取り専用全走査
 
 - 結果: **合格**
