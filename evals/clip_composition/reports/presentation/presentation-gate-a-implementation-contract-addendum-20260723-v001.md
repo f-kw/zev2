@@ -828,3 +828,4 @@ Gate Aは既存caption、instruction、timeline、base-media、rendererをimport
 ## 14. 改訂履歴
 
 - v001 / 2026-07-23: 夜間の実装可能性監査で発見した未固定9項目と§11.3/§15の範囲矛盾を具体化。起草中の独立再監査で、source snapshot、合法failure union、check責務、固定35 codeの到達可能性、report相互一致、read-only guardを補強し、残存P0/P1なしを確認。起草のみ承認され、人間承認待ちとして提示。実装・testdata・preflightは未着手。
+- 2026-07-23 / kawafmm承認: `evals/clip_composition/reports/presentation/presentation-gate-a-report-validator-entrypoint-addendum-20260723-v001.md`を追加承認。§10・§11.1のreport相互一致改変検査は、runnerが実際に使う同一の版付きpure validatorをexportして実行する。production CLIのjob path単一契約と注入口禁止は変更しない。
