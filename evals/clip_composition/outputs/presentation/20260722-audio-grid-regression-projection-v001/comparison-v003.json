@@ -1,0 +1,189 @@
+{
+  "schemaVersion": "presentation-audio-grid-regression-comparison-v003",
+  "comparisonId": "presentation-audio-grid-before-after-fixed-toolchain-v003",
+  "status": "passed",
+  "comparedCaseCount": 10,
+  "unchangedCaseCount": 10,
+  "correction": {
+    "originalEvidenceDeleted": false,
+    "v001Failure": "random temporary paths changed approved payload provenance",
+    "v002Failure": "the isolated before-fix worktree resolved a different ffmpeg binary that shared the same first-line version string",
+    "v003Change": "all ten cases are recaptured with one caller-fixed PATH and record exact node/ffmpeg/ffprobe paths, resolved paths, binary hashes, and complete version-output hashes; no production input or expected media value is changed"
+  },
+  "executableToolchain": {
+    "nodeProcess": {
+      "command": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+      "invokedPath": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+      "resolvedPath": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+      "fileSha256": "de4f3b493b15e7a0ee311f6a2c6dbf93858052f5802aa91cfafa2c57e9d6bc5c",
+      "version": {
+        "args": [
+          "--version"
+        ],
+        "stdoutSha256": "89abdb6ecfed00022752dc543087c9a6d28dd27f75417dfe1f17ac06065cc968",
+        "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "nodeOnPath": {
+      "command": "node",
+      "invokedPath": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+      "resolvedPath": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+      "fileSha256": "de4f3b493b15e7a0ee311f6a2c6dbf93858052f5802aa91cfafa2c57e9d6bc5c",
+      "version": {
+        "args": [
+          "--version"
+        ],
+        "stdoutSha256": "89abdb6ecfed00022752dc543087c9a6d28dd27f75417dfe1f17ac06065cc968",
+        "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "ffmpeg": {
+      "command": "ffmpeg",
+      "invokedPath": "/opt/homebrew/bin/ffmpeg",
+      "resolvedPath": "/opt/homebrew/Cellar/ffmpeg/8.0.1_1/bin/ffmpeg",
+      "fileSha256": "d105f770f53607ec1532b27e354ca7c3166a706dc1ccc6f96e3c8d3f54d7e798",
+      "version": {
+        "args": [
+          "-version"
+        ],
+        "stdoutSha256": "e2072a6da762ef5ee639c90f092eb6c1b9e9ef7ba6bc038fcdda0095d6995a1a",
+        "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "ffprobe": {
+      "command": "ffprobe",
+      "invokedPath": "/opt/homebrew/bin/ffprobe",
+      "resolvedPath": "/opt/homebrew/Cellar/ffmpeg/8.0.1_1/bin/ffprobe",
+      "fileSha256": "dcb242647fedaa21618f7048c5f2982e584fdfbcfca098553b3121d1a5d509d9",
+      "version": {
+        "args": [
+          "-version"
+        ],
+        "stdoutSha256": "4532f1cd6f067748d5751b8a78d43edd5ced9749c00bdee2ea8bed5379b34d80",
+        "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  },
+  "inputs": {
+    "beforeBuilder": {
+      "path": "evals/clip_composition/outputs/presentation/20260722-audio-grid-regression-projection-v001/before-builder-v003.json",
+      "fileSha256": "4bc5b25a004dba9fc0d798e29579f1ed9f0da124c56e66a9cbcc11c6896cfe8e",
+      "canonicalSha256": "81471f20930664da4ca1a688cc791717cb551b2be7900ec1bad488dfb712caed"
+    },
+    "afterBuilder": {
+      "path": "evals/clip_composition/outputs/presentation/20260722-audio-grid-regression-projection-v001/after-builder-v003.json",
+      "fileSha256": "887caf9f61ffa6f58159ac779530981996bf7e2f06d5a801220faf9d154069d2",
+      "canonicalSha256": "acbc0d7d8b0ec9e41b681d2ebb49d79a3556315762bcf065cf1d841b0bde4df5"
+    },
+    "beforeIntegration": {
+      "path": "evals/clip_composition/outputs/presentation/20260722-audio-grid-regression-projection-v001/before-integration-v003.json",
+      "fileSha256": "146d5e6b9d9b3be3c18c8b1a2766125cd0314b09d3038561a9b8813260720067",
+      "canonicalSha256": "a052c26c733c30ad911a8a6db6bedb442b00ac4333d0f25501c0b8f0de5f3e31"
+    },
+    "afterIntegration": {
+      "path": "evals/clip_composition/outputs/presentation/20260722-audio-grid-regression-projection-v001/after-integration-v003.json",
+      "fileSha256": "c6ebf040a508ab9db69131470a9b86ba8414d5f534562cc2941289667941bdf6",
+      "canonicalSha256": "2de64a025d1944098fc62fa8a432d0aecab76617b8a10414fc58dc673264d795"
+    },
+    "firstFailedComparison": {
+      "path": "evals/clip_composition/outputs/presentation/20260722-audio-grid-regression-projection-v001/comparison.json",
+      "fileSha256": "0be0611505fa863a68c8df4ebea70f4354523ffb80865bf8985f46a112f9de61",
+      "canonicalSha256": "a101093d1858e19850958d02bddf4c8e90794c91b6d75d62d09b0a31c6ab1ac4"
+    },
+    "secondFailedComparison": {
+      "path": "evals/clip_composition/outputs/presentation/20260722-audio-grid-regression-projection-v001/comparison-v002.json",
+      "fileSha256": "0f6469cbeee70cef759d16769eefbe5230f655621ae3ab17c80bc6d61a9e7121",
+      "canonicalSha256": "7a55f77cf71dd27a20d6ecece1db2c96d48f09a507dfa5301934f58cb5cbc6db"
+    }
+  },
+  "suites": [
+    {
+      "label": "builder-audio-normal-cases",
+      "status": "passed",
+      "before": {
+        "role": "before-fix",
+        "gitHead": "04e7c399dbce19f704cafe326cb333168774fa18",
+        "builderFileSha256": "c6be12ac1767d25603dcd94e2061425dabd48216a8c7604b07b42d82e6e8ffd9",
+        "caseCount": 9
+      },
+      "after": {
+        "role": "after-fix",
+        "gitHead": "74c2a04d24581c494e873161d6cbcb8c74687937",
+        "builderFileSha256": "6f38f400b8fe2400087f0fb5d7958e0c0c60f209cb21aab5ab544fe727cc4c26",
+        "caseCount": 9
+      },
+      "allowedMetadataDifferences": [
+        "$.role",
+        "$.capturedFrom.gitHead",
+        "$.capturedFrom.builderFileSha256"
+      ],
+      "caseResults": [
+        {
+          "caseId": "audio-44100-one-frame",
+          "status": "unchanged"
+        },
+        {
+          "caseId": "audio-44100-two-frame",
+          "status": "unchanged"
+        },
+        {
+          "caseId": "audio-48000-one-frame",
+          "status": "unchanged"
+        },
+        {
+          "caseId": "audio-48000-two-frame",
+          "status": "unchanged"
+        },
+        {
+          "caseId": "audio-delayed-48000",
+          "status": "unchanged"
+        },
+        {
+          "caseId": "audio-internal-gap-3072",
+          "status": "unchanged"
+        },
+        {
+          "caseId": "audio-stereo-order",
+          "status": "unchanged"
+        },
+        {
+          "caseId": "audio-tone-order",
+          "status": "unchanged"
+        },
+        {
+          "caseId": "video-60-odd-tail-audio-48000",
+          "status": "unchanged"
+        }
+      ],
+      "violations": []
+    },
+    {
+      "label": "builder-renderer-audio-integration-fixed-toolchain",
+      "status": "passed",
+      "before": {
+        "role": "before-fix",
+        "gitHead": "04e7c399dbce19f704cafe326cb333168774fa18",
+        "builderFileSha256": "c6be12ac1767d25603dcd94e2061425dabd48216a8c7604b07b42d82e6e8ffd9",
+        "caseCount": 1
+      },
+      "after": {
+        "role": "after-fix",
+        "gitHead": "74c2a04d24581c494e873161d6cbcb8c74687937",
+        "builderFileSha256": "6f38f400b8fe2400087f0fb5d7958e0c0c60f209cb21aab5ab544fe727cc4c26",
+        "caseCount": 1
+      },
+      "allowedMetadataDifferences": [
+        "$.role",
+        "$.capturedFrom.gitHead",
+        "$.capturedFrom.builderFileSha256"
+      ],
+      "caseResults": [
+        {
+          "caseId": "30fps-audio-builder-renderer-v002",
+          "status": "unchanged"
+        }
+      ],
+      "violations": []
+    }
+  ]
+}

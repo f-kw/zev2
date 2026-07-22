@@ -1,0 +1,253 @@
+{
+  "schemaVersion": "presentation-source-audio-clock-coverage-scan-v001",
+  "scanId": "DmWu0jVQfTE-native-1080p-audio-clock-coverage-v001",
+  "recordedAt": "2026-07-22T02:40:10.827Z",
+  "status": "passed",
+  "request": {
+    "path": "evals/clip_composition/outputs/presentation/20260722-source-audio-clock-coverage-scan-v001/scan-request.json",
+    "fileSha256": "b6e5a7513c0ca5e37b7f8098e898c0d380353c4820b6ccc466595725c45f1356"
+  },
+  "source": {
+    "path": "evals/clip_composition/research/downloads/first-gate-unseen/DmWu0jVQfTE/native-1080p/DmWu0jVQfTE.native-1080p-h264-opus.mp4",
+    "fileSha256": "a2c4548d07eb387f095a198b8f6892121134c46e8c0d5315e4debf3e083234ee",
+    "byteCount": 1122123146,
+    "device": 16777231,
+    "inode": 81009545,
+    "regularFile": true,
+    "symbolicLink": false,
+    "boundOpenHandleCount": 5,
+    "afterFileSha256": "a2c4548d07eb387f095a198b8f6892121134c46e8c0d5315e4debf3e083234ee",
+    "afterByteCount": 1122123146,
+    "unchangedDuringScan": true
+  },
+  "trustedPreflight": {
+    "path": "evals/clip_composition/outputs/presentation/20260721-first-real-data-assembly-gate-v001/media-equivalence.json",
+    "fileSha256": "98c0f2018553f39a855610c569f2908efecccc0dadb696fc2b156d19010c15ea",
+    "status": "passed",
+    "sourcePathMatches": true,
+    "sourceHashMatches": true,
+    "knownGapsMatchRequest": true,
+    "packetClockMatches": true,
+    "decodedPcmMatches": true
+  },
+  "tools": {
+    "nodeVersion": "v20.19.6",
+    "ffprobeVersion": "ffprobe version 8.0.1 Copyright (c) 2007-2025 the FFmpeg developers",
+    "ffmpegVersion": "ffmpeg version 8.0.1 Copyright (c) 2000-2025 the FFmpeg developers",
+    "scanner": {
+      "path": "evals/clip_composition/scan_presentation_source_audio_clock_v001.mjs",
+      "fileSha256": "9c6bfc8784ae72411fff9d5ac5e83e46e35595d1aaffaba7cae6065e8d047e79",
+      "afterFileSha256": "9c6bfc8784ae72411fff9d5ac5e83e46e35595d1aaffaba7cae6065e8d047e79",
+      "unchangedDuringScan": true,
+      "gitHead": "74c2a04d24581c494e873161d6cbcb8c74687937"
+    },
+    "probeArguments": [
+      "-v",
+      "error",
+      "-select_streams",
+      "a:0",
+      "-show_streams",
+      "-show_entries",
+      "stream=codec_name,sample_rate,channels,channel_layout,time_base,start_pts,duration_ts,initial_padding,extradata,extradata_size",
+      "-show_data",
+      "-of",
+      "json",
+      "<OPEN_SOURCE_FD>"
+    ],
+    "packetArguments": [
+      "-v",
+      "error",
+      "-select_streams",
+      "a:0",
+      "-show_packets",
+      "-show_entries",
+      "packet=pts,dts,duration,size,flags,side_data_list",
+      "-of",
+      "compact=p=0:nk=0",
+      "<OPEN_SOURCE_FD>"
+    ],
+    "decodedFrameArguments": [
+      "-v",
+      "error",
+      "-select_streams",
+      "a:0",
+      "-show_frames",
+      "-show_entries",
+      "frame=pts,best_effort_timestamp,nb_samples",
+      "-of",
+      "compact=p=0:nk=0",
+      "<OPEN_SOURCE_FD>"
+    ],
+    "sequentialPcmArguments": [
+      "-v",
+      "error",
+      "-i",
+      "<OPEN_SOURCE_FD>",
+      "-map",
+      "0:a:0",
+      "-ac",
+      "2",
+      "-ar",
+      "48000",
+      "-sample_fmt",
+      "flt",
+      "-f",
+      "f32le",
+      "pipe:1"
+    ],
+    "seekOrReadIntervalUsed": false
+  },
+  "scopeExclusions": [
+    "media-equivalence-inspected.json is untracked and failed; it is not a trust authority",
+    "no read interval and no seek may be used because Opus pre-skip would be reapplied at the seek start",
+    "this read-only scan does not authorize candidate 13 base-media regeneration"
+  ],
+  "stream": {
+    "codec": "opus",
+    "sampleRate": 48000,
+    "channels": 2,
+    "channelLayout": "stereo",
+    "timeBase": "1/48000",
+    "startPts": 0,
+    "durationTs": 423073008,
+    "initialPadding": 312,
+    "extradataSize": 19,
+    "extradataSha256": "94ba1201d63e61e43c5240d902a95410dfbb0dcc81f0430f57be6840f1a5e47f",
+    "streamEndSample": 423073008
+  },
+  "packetClock": {
+    "count": 440701,
+    "first": {
+      "ordinal": 0,
+      "pts": 0,
+      "dts": 0,
+      "duration": 1008,
+      "endSample": 1008,
+      "size": 589,
+      "flags": "K__",
+      "sideData": []
+    },
+    "last": {
+      "ordinal": 440700,
+      "pts": 423072048,
+      "dts": 423072048,
+      "duration": 960,
+      "endSample": 423073008,
+      "size": 3,
+      "flags": "K__",
+      "sideData": []
+    },
+    "sumDurationSamples": 423073008,
+    "packetEndSample": 423073008,
+    "rawCompactSha256": "e9a3bc31f5af2b8b9562184184ba183bd04aeeed92af9a15dd2cd2295234acd4",
+    "normalizedCanonicalSha256": "6fe0f48353bc9df6db201a9e9ba67d8eb8a45a831b9e6416ac51deafe605ab79",
+    "gaps": [],
+    "overlaps": [],
+    "ptsReversals": [],
+    "dtsReversals": [],
+    "dtsPtsMismatches": [],
+    "sideData": [],
+    "skipSamplesTotal": 0,
+    "discardPaddingTotal": 0
+  },
+  "decodedFrameClock": {
+    "count": 440701,
+    "first": {
+      "ordinal": 0,
+      "pts": 312,
+      "bestEffortTimestamp": 312,
+      "startSample": 312,
+      "nbSamples": 648,
+      "endSample": 960
+    },
+    "last": {
+      "ordinal": 440700,
+      "pts": 423072048,
+      "bestEffortTimestamp": 423072048,
+      "startSample": 423072048,
+      "nbSamples": 960,
+      "endSample": 423073008
+    },
+    "sumNbSamples": 423072648,
+    "decodedEndSample": 423073008,
+    "rawCompactSha256": "4192976987e09523eb23fda1ca459672b3388efcd8df17428eca768f148024b8",
+    "normalizedCanonicalSha256": "12e6b5a6679411a35956b5c7c2112cb29e667fb4c2605db1a3696156c226baf6",
+    "gaps": [
+      {
+        "kind": "leading",
+        "startSample": 0,
+        "endSample": 312
+      },
+      {
+        "kind": "internal",
+        "startSample": 960,
+        "endSample": 1008
+      }
+    ],
+    "gapTotalSampleCount": 360,
+    "overlaps": [],
+    "reversals": [],
+    "ptsBestEffortMismatches": [],
+    "nonIntegralRows": []
+  },
+  "sequentialPcmCrossCheck": {
+    "byteCount": 3384581184,
+    "payloadSha256": "d23c37fac84b5b782989e96ef52eb833792d802a06d2fa258f72b15119a893fe",
+    "sampleCount": 423072648,
+    "equalsDecodedFrameSampleSum": true,
+    "equalsTrustedPreflight": true
+  },
+  "coverage": {
+    "knownDecodedGaps": [
+      {
+        "kind": "leading",
+        "startSample": 0,
+        "endSample": 312
+      },
+      {
+        "kind": "internal",
+        "startSample": 960,
+        "endSample": 1008
+      }
+    ],
+    "observedDecodedGaps": [
+      {
+        "kind": "leading",
+        "startSample": 0,
+        "endSample": 312
+      },
+      {
+        "kind": "internal",
+        "startSample": 960,
+        "endSample": 1008
+      }
+    ],
+    "additionalDecodedGapCount": 0,
+    "additionalDecodedGaps": [],
+    "missingKnownGapCount": 0,
+    "missingKnownGaps": [],
+    "decodedIdentity": {
+      "sumNbSamples": 423072648,
+      "gapTotalSampleCount": 360,
+      "decodedEndSample": 423073008,
+      "passed": true
+    },
+    "packetStreamEnd": {
+      "packetEndSample": 423073008,
+      "streamEndSample": 423073008,
+      "passed": true
+    },
+    "decodedPresentationEnd": {
+      "decodedEndSample": 423073008,
+      "presentationEndSample": 423073008,
+      "tailPaddingSampleCount": 0,
+      "passed": true
+    }
+  },
+  "violations": [],
+  "retryDisposition": {
+    "formalBaseMediaRegenerationPerformed": false,
+    "nextAction": "report-to-human-and-stop",
+    "reason": "clock scan completion never authorizes candidate 13 regeneration"
+  }
+}

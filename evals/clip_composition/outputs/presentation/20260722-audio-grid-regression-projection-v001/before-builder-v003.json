@@ -1,0 +1,1322 @@
+{
+  "schemaVersion": "presentation-audio-grid-regression-projection-v002",
+  "suiteId": "presentation-base-media-audio-normal-cases-fixed-toolchain-v001",
+  "role": "before-fix",
+  "capturedFrom": {
+    "gitHead": "04e7c399dbce19f704cafe326cb333168774fa18",
+    "builderFileSha256": "c6be12ac1767d25603dcd94e2061425dabd48216a8c7604b07b42d82e6e8ffd9",
+    "harnessFiles": [
+      {
+        "path": "evals/clip_composition/presentation_base_media_build_v001.test.mjs",
+        "fileSha256": "d89bc1eecdc6e3ff833b8871530711b4cdbb9854c11c4b4ff1d3e2482aa2f89f"
+      },
+      {
+        "path": "evals/clip_composition/presentation_audio_grid_regression_projection_v001.mjs",
+        "fileSha256": "07889a82bd15b02bd87b75d0def5a040fcf9c0123952d6b48c8b80fcf57f7818"
+      }
+    ],
+    "tools": {
+      "nodeVersion": "v20.19.6",
+      "ffmpegVersion": "ffmpeg version 8.0.1 Copyright (c) 2000-2025 the FFmpeg developers",
+      "ffprobeVersion": "ffprobe version 8.0.1 Copyright (c) 2007-2025 the FFmpeg developers",
+      "executableBindings": {
+        "nodeProcess": {
+          "command": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+          "invokedPath": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+          "resolvedPath": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+          "fileSha256": "de4f3b493b15e7a0ee311f6a2c6dbf93858052f5802aa91cfafa2c57e9d6bc5c",
+          "version": {
+            "args": [
+              "--version"
+            ],
+            "stdoutSha256": "89abdb6ecfed00022752dc543087c9a6d28dd27f75417dfe1f17ac06065cc968",
+            "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        "nodeOnPath": {
+          "command": "node",
+          "invokedPath": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+          "resolvedPath": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+          "fileSha256": "de4f3b493b15e7a0ee311f6a2c6dbf93858052f5802aa91cfafa2c57e9d6bc5c",
+          "version": {
+            "args": [
+              "--version"
+            ],
+            "stdoutSha256": "89abdb6ecfed00022752dc543087c9a6d28dd27f75417dfe1f17ac06065cc968",
+            "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        "ffmpeg": {
+          "command": "ffmpeg",
+          "invokedPath": "/opt/homebrew/bin/ffmpeg",
+          "resolvedPath": "/opt/homebrew/Cellar/ffmpeg/8.0.1_1/bin/ffmpeg",
+          "fileSha256": "d105f770f53607ec1532b27e354ca7c3166a706dc1ccc6f96e3c8d3f54d7e798",
+          "version": {
+            "args": [
+              "-version"
+            ],
+            "stdoutSha256": "e2072a6da762ef5ee639c90f092eb6c1b9e9ef7ba6bc038fcdda0095d6995a1a",
+            "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        "ffprobe": {
+          "command": "ffprobe",
+          "invokedPath": "/opt/homebrew/bin/ffprobe",
+          "resolvedPath": "/opt/homebrew/Cellar/ffmpeg/8.0.1_1/bin/ffprobe",
+          "fileSha256": "dcb242647fedaa21618f7048c5f2982e584fdfbcfca098553b3121d1a5d509d9",
+          "version": {
+            "args": [
+              "-version"
+            ],
+            "stdoutSha256": "4532f1cd6f067748d5751b8a78d43edd5ced9749c00bdee2ea8bed5379b34d80",
+            "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        }
+      }
+    }
+  },
+  "cases": [
+    {
+      "caseId": "audio-44100-one-frame",
+      "sourceFileSha256": "0bed7aee365f6f2eb9d2d5589a458802605ada02e500f1542bb7227a27516788",
+      "assemblyDecisionPayloadSha256": "779f519b035a83d4c75386cebf4444e52bb843e63346cfccadb57793a6309d2d",
+      "baseMediaFileSha256": "a72ac194096e6fa204fb70622e9c4e958b997ed67ed25077af4a7f19da36490b",
+      "timelineFileSha256": "c9b99c8c603a7bd0a8526626debb0f7ea349a0b284222f033d4f9a8720d18304",
+      "timeline": {
+        "schemaVersion": "presentation-base-media-timeline-v002",
+        "sourceFrameClock": {
+          "inputFrameRate": "30/1",
+          "logicalFrameRate": "30/1",
+          "extractionRuleId": "source-frame-30fps-identity-v001",
+          "decodedFrameCount": 6
+        },
+        "segments": [
+          {
+            "segmentId": "segment-0001",
+            "sourceStartMs": 0,
+            "sourceEndMs": 17,
+            "sourceStartFrame30": 0,
+            "sourceEndFrame30": 1,
+            "outputStartFrame": 0,
+            "outputEndFrame": 1
+          }
+        ],
+        "baseMedia": {
+          "artifactId": "base-media-c7a64e8d96e8ad2a5bc18eb9",
+          "path": "base-media.mp4",
+          "fileSha256": "a72ac194096e6fa204fb70622e9c4e958b997ed67ed25077af4a7f19da36490b",
+          "frameRate": "30/1",
+          "expectedFrameCount": 1
+        }
+      },
+      "segments": [
+        {
+          "segmentId": "segment-0001",
+          "sourceStartMs": 0,
+          "sourceEndMs": 17,
+          "sourceStartFrame30": 0,
+          "sourceEndFrame30": 1,
+          "outputStartFrame": 0,
+          "outputEndFrame": 1,
+          "audioSamples": {
+            "sourceStart": 0,
+            "sourceEnd": 1470,
+            "outputStart": 0,
+            "outputEnd": 1470
+          }
+        }
+      ],
+      "audio": {
+        "present": true,
+        "sampleRate": 44100,
+        "channels": 1,
+        "channelLayout": "mono",
+        "channelOrder": [
+          "FC"
+        ],
+        "canonicalPcmFormat": {
+          "sampleFormat": "f32le",
+          "packing": "interleaved"
+        },
+        "insertedSilenceSpans": [],
+        "sourceGrid": {
+          "sampleCount": 8820,
+          "byteCount": 35280,
+          "payloadSha256": "a745950f6a0649e74cb7194106417f12109f24212e6d20aae7ee2f1871cac0a2",
+          "decodedSampleCount": 9216,
+          "decodedTailPaddingSampleCount": 396
+        },
+        "encodeInput": {
+          "sampleCount": 1470,
+          "byteCount": 5880,
+          "payloadSha256": "6c749bf483e9ad38925503a328bade739f4c417e2ca92d2208461b6c86ad80a4"
+        },
+        "encoded": {
+          "codec": "aac",
+          "bitRate": "192k",
+          "movieTimeScale": 30,
+          "timeBase": "1/44100",
+          "startPts": 0,
+          "durationTs": 1470,
+          "containerDurationSamples": 1470,
+          "presentationDurationSamples": 1470,
+          "videoPresentationDurationSamples": 1470,
+          "trailingVideoOnlySampleCount": 0,
+          "tailPolicy": "frame-aligned-v001",
+          "rawDecodedSampleCount": 2048,
+          "effectiveDecodedSampleCount": 1470,
+          "effectiveDecodedPayloadSha256": "350de5e94898f1e1c7ba9a5bf9016a62b709353a4eb80708980c981c1fe14a41",
+          "packetPayloadSha256": "212a0a29a0c201b49ca4652d48decc4419ce50135841ab978682a6f3dad490e4",
+          "skipSamples": 1024,
+          "discardPadding": 0,
+          "encoderDelay": 1024
+        }
+      },
+      "output": {
+        "frameCount": 1,
+        "audioPacketPayloadSha256": "212a0a29a0c201b49ca4652d48decc4419ce50135841ab978682a6f3dad490e4"
+      },
+      "validation": {
+        "status": "passed",
+        "checks": {
+          "approvalBinding": {
+            "status": "passed",
+            "violationCodes": []
+          },
+          "sourceBinding": {
+            "status": "passed",
+            "violationCodes": []
+          },
+          "videoQc": {
+            "status": "passed",
+            "violationCodes": []
+          },
+          "audioQc": {
+            "status": "passed",
+            "violationCodes": []
+          },
+          "timelineQc": {
+            "status": "passed",
+            "violationCodes": []
+          },
+          "hashGraph": {
+            "status": "passed",
+            "violationCodes": []
+          },
+          "publishPreconditions": {
+            "status": "passed",
+            "violationCodes": []
+          }
+        }
+      }
+    },
+    {
+      "caseId": "audio-44100-two-frame",
+      "sourceFileSha256": "0bed7aee365f6f2eb9d2d5589a458802605ada02e500f1542bb7227a27516788",
+      "assemblyDecisionPayloadSha256": "a68d0fd78c083365438c7356e875689ba3cd42c97d26c56ed263efb37f9a06b2",
+      "baseMediaFileSha256": "b2cbbfb31aace8a2789ef6f910c16a00d59ca090c904f860dcd7299127f60ccf",
+      "timelineFileSha256": "e5d5490ce8f4247a86a6668206f2acbceb4157377e92e45c675bb284afabdcce",
+      "timeline": {
+        "schemaVersion": "presentation-base-media-timeline-v002",
+        "sourceFrameClock": {
+          "inputFrameRate": "30/1",
+          "logicalFrameRate": "30/1",
+          "extractionRuleId": "source-frame-30fps-identity-v001",
+          "decodedFrameCount": 6
+        },
+        "segments": [
+          {
+            "segmentId": "segment-0001",
+            "sourceStartMs": 0,
+            "sourceEndMs": 67,
+            "sourceStartFrame30": 0,
+            "sourceEndFrame30": 2,
+            "outputStartFrame": 0,
+            "outputEndFrame": 2
+          }
+        ],
+        "baseMedia": {
+          "artifactId": "base-media-2667342bad9acd49c9ede552",
+          "path": "base-media.mp4",
+          "fileSha256": "b2cbbfb31aace8a2789ef6f910c16a00d59ca090c904f860dcd7299127f60ccf",
+          "frameRate": "30/1",
+          "expectedFrameCount": 2
+        }
+      },
+      "segments": [
+        {
+          "segmentId": "segment-0001",
+          "sourceStartMs": 0,
+          "sourceEndMs": 67,
+          "sourceStartFrame30": 0,
+          "sourceEndFrame30": 2,
+          "outputStartFrame": 0,
+          "outputEndFrame": 2,
+          "audioSamples": {
+            "sourceStart": 0,
+            "sourceEnd": 2940,
+            "outputStart": 0,
+            "outputEnd": 2940
+          }
+        }
+      ],
+      "audio": {
+        "present": true,
+        "sampleRate": 44100,
+        "channels": 1,
+        "channelLayout": "mono",
+        "channelOrder": [
+          "FC"
+        ],
+        "canonicalPcmFormat": {
+          "sampleFormat": "f32le",
+          "packing": "interleaved"
+        },
+        "insertedSilenceSpans": [],
+        "sourceGrid": {
+          "sampleCount": 8820,
+          "byteCount": 35280,
+          "payloadSha256": "a745950f6a0649e74cb7194106417f12109f24212e6d20aae7ee2f1871cac0a2",
+          "decodedSampleCount": 9216,
+          "decodedTailPaddingSampleCount": 396
+        },
+        "encodeInput": {
+          "sampleCount": 2940,
+          "byteCount": 11760,
+          "payloadSha256": "2687bf7b1d7281e9f14bdaf51f5cd7ded9a7af18bd17df46fb620f755fe29fe3"
+        },
+        "encoded": {
+          "codec": "aac",
+          "bitRate": "192k",
+          "movieTimeScale": 30,
+          "timeBase": "1/44100",
+          "startPts": 0,
+          "durationTs": 2940,
+          "containerDurationSamples": 2940,
+          "presentationDurationSamples": 2940,
+          "videoPresentationDurationSamples": 2940,
+          "trailingVideoOnlySampleCount": 0,
+          "tailPolicy": "frame-aligned-v001",
+          "rawDecodedSampleCount": 3072,
+          "effectiveDecodedSampleCount": 2940,
+          "effectiveDecodedPayloadSha256": "c6e2ecbcdd977a453e8ec8677577967d8e9f0592398c9226cbc831c59a2e8176",
+          "packetPayloadSha256": "5e1dd3b0262e6154c9589abe196d7be693197ea9b31ddf7c6bff4a201ddc9622",
+          "skipSamples": 1024,
+          "discardPadding": 0,
+          "encoderDelay": 1024
+        }
+      },
+      "output": {
+        "frameCount": 2,
+        "audioPacketPayloadSha256": "5e1dd3b0262e6154c9589abe196d7be693197ea9b31ddf7c6bff4a201ddc9622"
+      },
+      "validation": {
+        "status": "passed",
+        "checks": {
+          "approvalBinding": {
+            "status": "passed",
+            "violationCodes": []
+          },
+          "sourceBinding": {
+            "status": "passed",
+            "violationCodes": []
+          },
+          "videoQc": {
+            "status": "passed",
+            "violationCodes": []
+          },
+          "audioQc": {
+            "status": "passed",
+            "violationCodes": []
+          },
+          "timelineQc": {
+            "status": "passed",
+            "violationCodes": []
+          },
+          "hashGraph": {
+            "status": "passed",
+            "violationCodes": []
+          },
+          "publishPreconditions": {
+            "status": "passed",
+            "violationCodes": []
+          }
+        }
+      }
+    },
+    {
+      "caseId": "audio-48000-one-frame",
+      "sourceFileSha256": "b54eeb239ef68b5f2df6a02a81496a80e7106fada363905ace2d18bdb4dedf31",
+      "assemblyDecisionPayloadSha256": "4d32c1ee05d9230f6c0b865494ee41e8ef86c7b8a629d7df6272f5f2398bb174",
+      "baseMediaFileSha256": "6385f568431a719f961604c34bcb53d5aa6f71c4a07652bc82ec4005ed61da9d",
+      "timelineFileSha256": "770c4b21fbd6590d1560d6abb0f5a54ff90f2cb56a774b83116dcab055e98aaf",
+      "timeline": {
+        "schemaVersion": "presentation-base-media-timeline-v002",
+        "sourceFrameClock": {
+          "inputFrameRate": "30/1",
+          "logicalFrameRate": "30/1",
+          "extractionRuleId": "source-frame-30fps-identity-v001",
+          "decodedFrameCount": 6
+        },
+        "segments": [
+          {
+            "segmentId": "segment-0001",
+            "sourceStartMs": 0,
+            "sourceEndMs": 17,
+            "sourceStartFrame30": 0,
+            "sourceEndFrame30": 1,
+            "outputStartFrame": 0,
+            "outputEndFrame": 1
+          }
+        ],
+        "baseMedia": {
+          "artifactId": "base-media-f15207a61558bc7765216001",
+          "path": "base-media.mp4",
+          "fileSha256": "6385f568431a719f961604c34bcb53d5aa6f71c4a07652bc82ec4005ed61da9d",
+          "frameRate": "30/1",
+          "expectedFrameCount": 1
+        }
+      },
+      "segments": [
+        {
+          "segmentId": "segment-0001",
+          "sourceStartMs": 0,
+          "sourceEndMs": 17,
+          "sourceStartFrame30": 0,
+          "sourceEndFrame30": 1,
+          "outputStartFrame": 0,
+          "outputEndFrame": 1,
+          "audioSamples": {
+            "sourceStart": 0,
+            "sourceEnd": 1600,
+            "outputStart": 0,
+            "outputEnd": 1600
+          }
+        }
+      ],
+      "audio": {
+        "present": true,
+        "sampleRate": 48000,
+        "channels": 1,
+        "channelLayout": "mono",
+        "channelOrder": [
+          "FC"
+        ],
+        "canonicalPcmFormat": {
+          "sampleFormat": "f32le",
+          "packing": "interleaved"
+        },
+        "insertedSilenceSpans": [],
+        "sourceGrid": {
+          "sampleCount": 9600,
+          "byteCount": 38400,
+          "payloadSha256": "8bf9e503aed259d04dd455fb43d8e2aa36ba20bddaf73b7577898fcb0fc4678f",
+          "decodedSampleCount": 10240,
+          "decodedTailPaddingSampleCount": 640
+        },
+        "encodeInput": {
+          "sampleCount": 1600,
+          "byteCount": 6400,
+          "payloadSha256": "a43a2d3f51512b6f6c349dca55fc9234647c4b8f769f54e39ecb71f4a1d51ca6"
+        },
+        "encoded": {
+          "codec": "aac",
+          "bitRate": "192k",
+          "movieTimeScale": 30,
+          "timeBase": "1/48000",
+          "startPts": 0,
+          "durationTs": 1600,
+          "containerDurationSamples": 1600,
+          "presentationDurationSamples": 1600,
+          "videoPresentationDurationSamples": 1600,
+          "trailingVideoOnlySampleCount": 0,
+          "tailPolicy": "frame-aligned-v001",
+          "rawDecodedSampleCount": 2048,
+          "effectiveDecodedSampleCount": 1600,
+          "effectiveDecodedPayloadSha256": "d3920b4ddbad738f0ce784ac63b61e2be1800042a74487d6931f9e817fcea568",
+          "packetPayloadSha256": "1abdbc23eb0fc824d65fec3141ddc486cb815af0dff4e84f59c6e7c253aaf50b",
+          "skipSamples": 1024,
+          "discardPadding": 0,
+          "encoderDelay": 1024
+        }
+      },
+      "output": {
+        "frameCount": 1,
+        "audioPacketPayloadSha256": "1abdbc23eb0fc824d65fec3141ddc486cb815af0dff4e84f59c6e7c253aaf50b"
+      },
+      "validation": {
+        "status": "passed",
+        "checks": {
+          "approvalBinding": {
+            "status": "passed",
+            "violationCodes": []
+          },
+          "sourceBinding": {
+            "status": "passed",
+            "violationCodes": []
+          },
+          "videoQc": {
+            "status": "passed",
+            "violationCodes": []
+          },
+          "audioQc": {
+            "status": "passed",
+            "violationCodes": []
+          },
+          "timelineQc": {
+            "status": "passed",
+            "violationCodes": []
+          },
+          "hashGraph": {
+            "status": "passed",
+            "violationCodes": []
+          },
+          "publishPreconditions": {
+            "status": "passed",
+            "violationCodes": []
+          }
+        }
+      }
+    },
+    {
+      "caseId": "audio-48000-two-frame",
+      "sourceFileSha256": "b54eeb239ef68b5f2df6a02a81496a80e7106fada363905ace2d18bdb4dedf31",
+      "assemblyDecisionPayloadSha256": "3e70afd3cfc7135c84dd4b79d48868c8f1efdb5526d4c2fb76da4163e1845771",
+      "baseMediaFileSha256": "0ad340dbb825c24356cb8eb9ec4d1ff2033f9928a8d16219fbbe26365024a823",
+      "timelineFileSha256": "98934fc26470f7c9088511a151437af5e233b2b885c0c8793439b48d47b4db16",
+      "timeline": {
+        "schemaVersion": "presentation-base-media-timeline-v002",
+        "sourceFrameClock": {
+          "inputFrameRate": "30/1",
+          "logicalFrameRate": "30/1",
+          "extractionRuleId": "source-frame-30fps-identity-v001",
+          "decodedFrameCount": 6
+        },
+        "segments": [
+          {
+            "segmentId": "segment-0001",
+            "sourceStartMs": 0,
+            "sourceEndMs": 67,
+            "sourceStartFrame30": 0,
+            "sourceEndFrame30": 2,
+            "outputStartFrame": 0,
+            "outputEndFrame": 2
+          }
+        ],
+        "baseMedia": {
+          "artifactId": "base-media-406d719eb27536166b90614c",
+          "path": "base-media.mp4",
+          "fileSha256": "0ad340dbb825c24356cb8eb9ec4d1ff2033f9928a8d16219fbbe26365024a823",
+          "frameRate": "30/1",
+          "expectedFrameCount": 2
+        }
+      },
+      "segments": [
+        {
+          "segmentId": "segment-0001",
+          "sourceStartMs": 0,
+          "sourceEndMs": 67,
+          "sourceStartFrame30": 0,
+          "sourceEndFrame30": 2,
+          "outputStartFrame": 0,
+          "outputEndFrame": 2,
+          "audioSamples": {
+            "sourceStart": 0,
+            "sourceEnd": 3200,
+            "outputStart": 0,
+            "outputEnd": 3200
+          }
+        }
+      ],
+      "audio": {
+        "present": true,
+        "sampleRate": 48000,
+        "channels": 1,
+        "channelLayout": "mono",
+        "channelOrder": [
+          "FC"
+        ],
+        "canonicalPcmFormat": {
+          "sampleFormat": "f32le",
+          "packing": "interleaved"
+        },
+        "insertedSilenceSpans": [],
+        "sourceGrid": {
+          "sampleCount": 9600,
+          "byteCount": 38400,
+          "payloadSha256": "8bf9e503aed259d04dd455fb43d8e2aa36ba20bddaf73b7577898fcb0fc4678f",
+          "decodedSampleCount": 10240,
+          "decodedTailPaddingSampleCount": 640
+        },
+        "encodeInput": {
+          "sampleCount": 3200,
+          "byteCount": 12800,
+          "payloadSha256": "e8affcc7cde45c42427956e030b98253f41628adbf3c8e08ded0bd01e7f0ea9c"
+        },
+        "encoded": {
+          "codec": "aac",
+          "bitRate": "192k",
+          "movieTimeScale": 30,
+          "timeBase": "1/48000",
+          "startPts": 0,
+          "durationTs": 3200,
+          "containerDurationSamples": 3200,
+          "presentationDurationSamples": 3200,
+          "videoPresentationDurationSamples": 3200,
+          "trailingVideoOnlySampleCount": 0,
+          "tailPolicy": "frame-aligned-v001",
+          "rawDecodedSampleCount": 4096,
+          "effectiveDecodedSampleCount": 3200,
+          "effectiveDecodedPayloadSha256": "2834d04a61669c3e63ab62326f370936b219b35060755932395f1b70a377ab64",
+          "packetPayloadSha256": "0f6f6ead141e5830e788c6d53ebb314f70a26ca8b84ef028afdeb94942c67176",
+          "skipSamples": 1024,
+          "discardPadding": 0,
+          "encoderDelay": 1024
+        }
+      },
+      "output": {
+        "frameCount": 2,
+        "audioPacketPayloadSha256": "0f6f6ead141e5830e788c6d53ebb314f70a26ca8b84ef028afdeb94942c67176"
+      },
+      "validation": {
+        "status": "passed",
+        "checks": {
+          "approvalBinding": {
+            "status": "passed",
+            "violationCodes": []
+          },
+          "sourceBinding": {
+            "status": "passed",
+            "violationCodes": []
+          },
+          "videoQc": {
+            "status": "passed",
+            "violationCodes": []
+          },
+          "audioQc": {
+            "status": "passed",
+            "violationCodes": []
+          },
+          "timelineQc": {
+            "status": "passed",
+            "violationCodes": []
+          },
+          "hashGraph": {
+            "status": "passed",
+            "violationCodes": []
+          },
+          "publishPreconditions": {
+            "status": "passed",
+            "violationCodes": []
+          }
+        }
+      }
+    },
+    {
+      "caseId": "audio-delayed-48000",
+      "sourceFileSha256": "8571bf85e82a1c8e7b4d823881d2832ad93737b1dc8600fa7ec1e989f85475cf",
+      "assemblyDecisionPayloadSha256": "91a40ea30ab3a79db43a3e272e9b6e274aa1c9ed4ae5f88fed2a2c9b68f30ee8",
+      "baseMediaFileSha256": "127eb40014685f4a980e722166ab8f9578418e7b768d96a6ee4a342972e1a029",
+      "timelineFileSha256": "c0269fdb2aa0f552b1063e17f8f0edbffb934e6df45b0e2cc597181a21da6dd5",
+      "timeline": {
+        "schemaVersion": "presentation-base-media-timeline-v002",
+        "sourceFrameClock": {
+          "inputFrameRate": "30/1",
+          "logicalFrameRate": "30/1",
+          "extractionRuleId": "source-frame-30fps-identity-v001",
+          "decodedFrameCount": 6
+        },
+        "segments": [
+          {
+            "segmentId": "segment-0001",
+            "sourceStartMs": 0,
+            "sourceEndMs": 167,
+            "sourceStartFrame30": 0,
+            "sourceEndFrame30": 5,
+            "outputStartFrame": 0,
+            "outputEndFrame": 5
+          }
+        ],
+        "baseMedia": {
+          "artifactId": "base-media-dac8a15eb4ad1055ce7a8f5e",
+          "path": "base-media.mp4",
+          "fileSha256": "127eb40014685f4a980e722166ab8f9578418e7b768d96a6ee4a342972e1a029",
+          "frameRate": "30/1",
+          "expectedFrameCount": 5
+        }
+      },
+      "segments": [
+        {
+          "segmentId": "segment-0001",
+          "sourceStartMs": 0,
+          "sourceEndMs": 167,
+          "sourceStartFrame30": 0,
+          "sourceEndFrame30": 5,
+          "outputStartFrame": 0,
+          "outputEndFrame": 5,
+          "audioSamples": {
+            "sourceStart": 0,
+            "sourceEnd": 8000,
+            "outputStart": 0,
+            "outputEnd": 8000
+          }
+        }
+      ],
+      "audio": {
+        "present": true,
+        "sampleRate": 48000,
+        "channels": 2,
+        "channelLayout": "stereo",
+        "channelOrder": [
+          "FL",
+          "FR"
+        ],
+        "canonicalPcmFormat": {
+          "sampleFormat": "f32le",
+          "packing": "interleaved"
+        },
+        "insertedSilenceSpans": [
+          {
+            "startSample": 0,
+            "endSample": 1600
+          }
+        ],
+        "sourceGrid": {
+          "sampleCount": 8800,
+          "byteCount": 70400,
+          "payloadSha256": "5c658bb44ca6e3e681c7b31b7d7510f0325869ae3c4909bff537fbd2c7bb6c85",
+          "decodedSampleCount": 8800,
+          "decodedTailPaddingSampleCount": 0
+        },
+        "encodeInput": {
+          "sampleCount": 8000,
+          "byteCount": 64000,
+          "payloadSha256": "60e3b93d4f1ad50bec9029f70c4ed096799418dad2c5f04a4ff0207f07af0e4c"
+        },
+        "encoded": {
+          "codec": "aac",
+          "bitRate": "192k",
+          "movieTimeScale": 30,
+          "timeBase": "1/48000",
+          "startPts": 0,
+          "durationTs": 8000,
+          "containerDurationSamples": 8000,
+          "presentationDurationSamples": 8000,
+          "videoPresentationDurationSamples": 8000,
+          "trailingVideoOnlySampleCount": 0,
+          "tailPolicy": "frame-aligned-v001",
+          "rawDecodedSampleCount": 8192,
+          "effectiveDecodedSampleCount": 8000,
+          "effectiveDecodedPayloadSha256": "ab46bc32d8ba77ee06f0b4a96a126eaa3cc73789f8b1508b71ab92d7f9d7c810",
+          "packetPayloadSha256": "61646f0cc17c049e2a0e8e778160015db9e8fdb04e6015170498bd4137d62797",
+          "skipSamples": 1024,
+          "discardPadding": 0,
+          "encoderDelay": 1024
+        }
+      },
+      "output": {
+        "frameCount": 5,
+        "audioPacketPayloadSha256": "61646f0cc17c049e2a0e8e778160015db9e8fdb04e6015170498bd4137d62797"
+      },
+      "validation": {
+        "status": "passed",
+        "checks": {
+          "approvalBinding": {
+            "status": "passed",
+            "violationCodes": []
+          },
+          "sourceBinding": {
+            "status": "passed",
+            "violationCodes": []
+          },
+          "videoQc": {
+            "status": "passed",
+            "violationCodes": []
+          },
+          "audioQc": {
+            "status": "passed",
+            "violationCodes": []
+          },
+          "timelineQc": {
+            "status": "passed",
+            "violationCodes": []
+          },
+          "hashGraph": {
+            "status": "passed",
+            "violationCodes": []
+          },
+          "publishPreconditions": {
+            "status": "passed",
+            "violationCodes": []
+          }
+        }
+      }
+    },
+    {
+      "caseId": "audio-internal-gap-3072",
+      "sourceFileSha256": "06c6765a272f0a09b9018ab940fc7706714698022acc8c06e140a3226ec4e310",
+      "assemblyDecisionPayloadSha256": "fd4e47931201918732e239aea07f5ef392af45dad2e1ea81d5ed7c27f0182346",
+      "baseMediaFileSha256": "2dcce7d7780a780038fefe9893d7bc633ed87915d89301b3620bc4bbcb62fc66",
+      "timelineFileSha256": "6b6b1c6907c397986b8ca8fe40f1236db7b66c53f91b83439e73ddc5d1913973",
+      "timeline": {
+        "schemaVersion": "presentation-base-media-timeline-v002",
+        "sourceFrameClock": {
+          "inputFrameRate": "30/1",
+          "logicalFrameRate": "30/1",
+          "extractionRuleId": "source-frame-30fps-identity-v001",
+          "decodedFrameCount": 12
+        },
+        "segments": [
+          {
+            "segmentId": "segment-0001",
+            "sourceStartMs": 0,
+            "sourceEndMs": 267,
+            "sourceStartFrame30": 0,
+            "sourceEndFrame30": 8,
+            "outputStartFrame": 0,
+            "outputEndFrame": 8
+          }
+        ],
+        "baseMedia": {
+          "artifactId": "base-media-12c58ab220d5280bf68f0b24",
+          "path": "base-media.mp4",
+          "fileSha256": "2dcce7d7780a780038fefe9893d7bc633ed87915d89301b3620bc4bbcb62fc66",
+          "frameRate": "30/1",
+          "expectedFrameCount": 8
+        }
+      },
+      "segments": [
+        {
+          "segmentId": "segment-0001",
+          "sourceStartMs": 0,
+          "sourceEndMs": 267,
+          "sourceStartFrame30": 0,
+          "sourceEndFrame30": 8,
+          "outputStartFrame": 0,
+          "outputEndFrame": 8,
+          "audioSamples": {
+            "sourceStart": 0,
+            "sourceEnd": 12800,
+            "outputStart": 0,
+            "outputEnd": 12800
+          }
+        }
+      ],
+      "audio": {
+        "present": true,
+        "sampleRate": 48000,
+        "channels": 1,
+        "channelLayout": "mono",
+        "channelOrder": [
+          "FC"
+        ],
+        "canonicalPcmFormat": {
+          "sampleFormat": "f32le",
+          "packing": "interleaved"
+        },
+        "insertedSilenceSpans": [
+          {
+            "startSample": 5120,
+            "endSample": 8192
+          }
+        ],
+        "sourceGrid": {
+          "sampleCount": 16096,
+          "byteCount": 64384,
+          "payloadSha256": "e9945f0df903efd27bba124149a2cb6048dfec869b644bea0d59a198ee88e974",
+          "decodedSampleCount": 16384,
+          "decodedTailPaddingSampleCount": 288
+        },
+        "encodeInput": {
+          "sampleCount": 12800,
+          "byteCount": 51200,
+          "payloadSha256": "593f949c727351d1f14ac945e632288f737c277b3605a95b5f7ac6bb07fa5658"
+        },
+        "encoded": {
+          "codec": "aac",
+          "bitRate": "192k",
+          "movieTimeScale": 30,
+          "timeBase": "1/48000",
+          "startPts": 0,
+          "durationTs": 12800,
+          "containerDurationSamples": 12800,
+          "presentationDurationSamples": 12800,
+          "videoPresentationDurationSamples": 12800,
+          "trailingVideoOnlySampleCount": 0,
+          "tailPolicy": "frame-aligned-v001",
+          "rawDecodedSampleCount": 13312,
+          "effectiveDecodedSampleCount": 12800,
+          "effectiveDecodedPayloadSha256": "f970b597e9d008e89739ef335d2bc331ab4b6466a4a3dc54f50750e4c0370fea",
+          "packetPayloadSha256": "52d10084bacad18ebacf313da305f1ec55b28d02c65ed8a527319f146f2ca115",
+          "skipSamples": 1024,
+          "discardPadding": 0,
+          "encoderDelay": 1024
+        }
+      },
+      "output": {
+        "frameCount": 8,
+        "audioPacketPayloadSha256": "52d10084bacad18ebacf313da305f1ec55b28d02c65ed8a527319f146f2ca115"
+      },
+      "validation": {
+        "status": "passed",
+        "checks": {
+          "approvalBinding": {
+            "status": "passed",
+            "violationCodes": []
+          },
+          "sourceBinding": {
+            "status": "passed",
+            "violationCodes": []
+          },
+          "videoQc": {
+            "status": "passed",
+            "violationCodes": []
+          },
+          "audioQc": {
+            "status": "passed",
+            "violationCodes": []
+          },
+          "timelineQc": {
+            "status": "passed",
+            "violationCodes": []
+          },
+          "hashGraph": {
+            "status": "passed",
+            "violationCodes": []
+          },
+          "publishPreconditions": {
+            "status": "passed",
+            "violationCodes": []
+          }
+        }
+      }
+    },
+    {
+      "caseId": "audio-stereo-order",
+      "sourceFileSha256": "d51eb82b0efb1de104935d03d108204694a642a3aa2761478b81f4570eec2199",
+      "assemblyDecisionPayloadSha256": "d962d9832021941e6d4a16fd19eec02c943ab51911156edee66aa68b5e2d0113",
+      "baseMediaFileSha256": "95f4ee5eb7ff81f82e817d094e230034bb5094308367ce7a3b953157a01f4072",
+      "timelineFileSha256": "0407fc4cf6f4008d715e37e790e35c0360271212a7243ea5a87f295cf1642de0",
+      "timeline": {
+        "schemaVersion": "presentation-base-media-timeline-v002",
+        "sourceFrameClock": {
+          "inputFrameRate": "30/1",
+          "logicalFrameRate": "30/1",
+          "extractionRuleId": "source-frame-30fps-identity-v001",
+          "decodedFrameCount": 6
+        },
+        "segments": [
+          {
+            "segmentId": "segment-0001",
+            "sourceStartMs": 0,
+            "sourceEndMs": 167,
+            "sourceStartFrame30": 0,
+            "sourceEndFrame30": 5,
+            "outputStartFrame": 0,
+            "outputEndFrame": 5
+          }
+        ],
+        "baseMedia": {
+          "artifactId": "base-media-53b5473233109a9d41d1c03d",
+          "path": "base-media.mp4",
+          "fileSha256": "95f4ee5eb7ff81f82e817d094e230034bb5094308367ce7a3b953157a01f4072",
+          "frameRate": "30/1",
+          "expectedFrameCount": 5
+        }
+      },
+      "segments": [
+        {
+          "segmentId": "segment-0001",
+          "sourceStartMs": 0,
+          "sourceEndMs": 167,
+          "sourceStartFrame30": 0,
+          "sourceEndFrame30": 5,
+          "outputStartFrame": 0,
+          "outputEndFrame": 5,
+          "audioSamples": {
+            "sourceStart": 0,
+            "sourceEnd": 8000,
+            "outputStart": 0,
+            "outputEnd": 8000
+          }
+        }
+      ],
+      "audio": {
+        "present": true,
+        "sampleRate": 48000,
+        "channels": 2,
+        "channelLayout": "stereo",
+        "channelOrder": [
+          "FL",
+          "FR"
+        ],
+        "canonicalPcmFormat": {
+          "sampleFormat": "f32le",
+          "packing": "interleaved"
+        },
+        "insertedSilenceSpans": [],
+        "sourceGrid": {
+          "sampleCount": 9600,
+          "byteCount": 76800,
+          "payloadSha256": "bda47d5aa1530e2ffe682ddb8465e8f04aa282fd0e51ef7ea66717058fe770e7",
+          "decodedSampleCount": 10240,
+          "decodedTailPaddingSampleCount": 640
+        },
+        "encodeInput": {
+          "sampleCount": 8000,
+          "byteCount": 64000,
+          "payloadSha256": "14471f0ecf7b6b0924cf55abe6cf228818aac380931659ea26df4ddc8cffff81"
+        },
+        "encoded": {
+          "codec": "aac",
+          "bitRate": "192k",
+          "movieTimeScale": 30,
+          "timeBase": "1/48000",
+          "startPts": 0,
+          "durationTs": 8000,
+          "containerDurationSamples": 8000,
+          "presentationDurationSamples": 8000,
+          "videoPresentationDurationSamples": 8000,
+          "trailingVideoOnlySampleCount": 0,
+          "tailPolicy": "frame-aligned-v001",
+          "rawDecodedSampleCount": 8192,
+          "effectiveDecodedSampleCount": 8000,
+          "effectiveDecodedPayloadSha256": "690e9cd58919dea5097fdc7077a2bb028f1a8381527a64da8928321af3dedc84",
+          "packetPayloadSha256": "216795c919e165d08f184dcd6433b4d625fae9263c85b21fd3c8e64342625d09",
+          "skipSamples": 1024,
+          "discardPadding": 0,
+          "encoderDelay": 1024
+        }
+      },
+      "output": {
+        "frameCount": 5,
+        "audioPacketPayloadSha256": "216795c919e165d08f184dcd6433b4d625fae9263c85b21fd3c8e64342625d09"
+      },
+      "validation": {
+        "status": "passed",
+        "checks": {
+          "approvalBinding": {
+            "status": "passed",
+            "violationCodes": []
+          },
+          "sourceBinding": {
+            "status": "passed",
+            "violationCodes": []
+          },
+          "videoQc": {
+            "status": "passed",
+            "violationCodes": []
+          },
+          "audioQc": {
+            "status": "passed",
+            "violationCodes": []
+          },
+          "timelineQc": {
+            "status": "passed",
+            "violationCodes": []
+          },
+          "hashGraph": {
+            "status": "passed",
+            "violationCodes": []
+          },
+          "publishPreconditions": {
+            "status": "passed",
+            "violationCodes": []
+          }
+        }
+      }
+    },
+    {
+      "caseId": "audio-tone-order",
+      "sourceFileSha256": "ea2ebf022cac219f0bf934d22957663f9a0957463340485cb6541b327cb04e84",
+      "assemblyDecisionPayloadSha256": "5fbcbd09e4e98e1639d79c0df293e15e8f126f71a1b7e03782bfac64d7287a35",
+      "baseMediaFileSha256": "999e27e43f6b1edcfbd28f995013ca94ed0e89dea8cb8c5e4993e76d0ba03660",
+      "timelineFileSha256": "4f6eb24cdf07d0d7610c71e72bf621c9c5661c7b7bc7215963b4bdd66e682951",
+      "timeline": {
+        "schemaVersion": "presentation-base-media-timeline-v002",
+        "sourceFrameClock": {
+          "inputFrameRate": "30/1",
+          "logicalFrameRate": "30/1",
+          "extractionRuleId": "source-frame-30fps-identity-v001",
+          "decodedFrameCount": 9
+        },
+        "segments": [
+          {
+            "segmentId": "segment-0001",
+            "sourceStartMs": 0,
+            "sourceEndMs": 100,
+            "sourceStartFrame30": 0,
+            "sourceEndFrame30": 3,
+            "outputStartFrame": 0,
+            "outputEndFrame": 3
+          },
+          {
+            "segmentId": "segment-0002",
+            "sourceStartMs": 200,
+            "sourceEndMs": 300,
+            "sourceStartFrame30": 6,
+            "sourceEndFrame30": 9,
+            "outputStartFrame": 3,
+            "outputEndFrame": 6
+          }
+        ],
+        "baseMedia": {
+          "artifactId": "base-media-794144969c64426d5b8bdf68",
+          "path": "base-media.mp4",
+          "fileSha256": "999e27e43f6b1edcfbd28f995013ca94ed0e89dea8cb8c5e4993e76d0ba03660",
+          "frameRate": "30/1",
+          "expectedFrameCount": 6
+        }
+      },
+      "segments": [
+        {
+          "segmentId": "segment-0001",
+          "sourceStartMs": 0,
+          "sourceEndMs": 100,
+          "sourceStartFrame30": 0,
+          "sourceEndFrame30": 3,
+          "outputStartFrame": 0,
+          "outputEndFrame": 3,
+          "audioSamples": {
+            "sourceStart": 0,
+            "sourceEnd": 4800,
+            "outputStart": 0,
+            "outputEnd": 4800
+          }
+        },
+        {
+          "segmentId": "segment-0002",
+          "sourceStartMs": 200,
+          "sourceEndMs": 300,
+          "sourceStartFrame30": 6,
+          "sourceEndFrame30": 9,
+          "outputStartFrame": 3,
+          "outputEndFrame": 6,
+          "audioSamples": {
+            "sourceStart": 9600,
+            "sourceEnd": 14400,
+            "outputStart": 4800,
+            "outputEnd": 9600
+          }
+        }
+      ],
+      "audio": {
+        "present": true,
+        "sampleRate": 48000,
+        "channels": 1,
+        "channelLayout": "mono",
+        "channelOrder": [
+          "FC"
+        ],
+        "canonicalPcmFormat": {
+          "sampleFormat": "f32le",
+          "packing": "interleaved"
+        },
+        "insertedSilenceSpans": [],
+        "sourceGrid": {
+          "sampleCount": 14400,
+          "byteCount": 57600,
+          "payloadSha256": "c9734c5063a646d84e1563d7fdce545c366240ff09751dea4ae700d51e06cd2d",
+          "decodedSampleCount": 15360,
+          "decodedTailPaddingSampleCount": 960
+        },
+        "encodeInput": {
+          "sampleCount": 9600,
+          "byteCount": 38400,
+          "payloadSha256": "fd3649456b902668b728216f36f13ae4f93ddd31e582264c051a63c220250137"
+        },
+        "encoded": {
+          "codec": "aac",
+          "bitRate": "192k",
+          "movieTimeScale": 30,
+          "timeBase": "1/48000",
+          "startPts": 0,
+          "durationTs": 9600,
+          "containerDurationSamples": 9600,
+          "presentationDurationSamples": 9600,
+          "videoPresentationDurationSamples": 9600,
+          "trailingVideoOnlySampleCount": 0,
+          "tailPolicy": "frame-aligned-v001",
+          "rawDecodedSampleCount": 10240,
+          "effectiveDecodedSampleCount": 9600,
+          "effectiveDecodedPayloadSha256": "a9a714f34b52292033b63ccb7b5f413952a938311e0fc241ae14bdd6f65c0966",
+          "packetPayloadSha256": "0a490b375db4df95f4192fecbfeee3563a2d933bac142483f418c35422338daf",
+          "skipSamples": 1024,
+          "discardPadding": 0,
+          "encoderDelay": 1024
+        }
+      },
+      "output": {
+        "frameCount": 6,
+        "audioPacketPayloadSha256": "0a490b375db4df95f4192fecbfeee3563a2d933bac142483f418c35422338daf"
+      },
+      "validation": {
+        "status": "passed",
+        "checks": {
+          "approvalBinding": {
+            "status": "passed",
+            "violationCodes": []
+          },
+          "sourceBinding": {
+            "status": "passed",
+            "violationCodes": []
+          },
+          "videoQc": {
+            "status": "passed",
+            "violationCodes": []
+          },
+          "audioQc": {
+            "status": "passed",
+            "violationCodes": []
+          },
+          "timelineQc": {
+            "status": "passed",
+            "violationCodes": []
+          },
+          "hashGraph": {
+            "status": "passed",
+            "violationCodes": []
+          },
+          "publishPreconditions": {
+            "status": "passed",
+            "violationCodes": []
+          }
+        }
+      }
+    },
+    {
+      "caseId": "video-60-odd-tail-audio-48000",
+      "sourceFileSha256": "22a63928fd6911078457af41299df060fddfa7e4d0b4a373a5d912f56a35ee24",
+      "assemblyDecisionPayloadSha256": "cef0d314e661161be24e144351a14c03b6e1d674920c10f5897530623ff9a4be",
+      "baseMediaFileSha256": "59fc221f8df32e73ffc7a98695fceb46d0e8ddf1a90e009324d0c9141d938028",
+      "timelineFileSha256": "e46beb268569be881deb1a344cfa0a79e02d77c9c1392229112530b1f0666db6",
+      "timeline": {
+        "schemaVersion": "presentation-base-media-timeline-v002",
+        "sourceFrameClock": {
+          "inputFrameRate": "60/1",
+          "logicalFrameRate": "30/1",
+          "extractionRuleId": "source-frame-60fps-global-even-v001",
+          "decodedFrameCount": 181
+        },
+        "segments": [
+          {
+            "segmentId": "segment-0001",
+            "sourceStartMs": 3000,
+            "sourceEndMs": 3016,
+            "sourceStartFrame30": 90,
+            "sourceEndFrame30": 91,
+            "outputStartFrame": 0,
+            "outputEndFrame": 1
+          }
+        ],
+        "baseMedia": {
+          "artifactId": "base-media-1ed818536809930d7d38c292",
+          "path": "base-media.mp4",
+          "fileSha256": "59fc221f8df32e73ffc7a98695fceb46d0e8ddf1a90e009324d0c9141d938028",
+          "frameRate": "30/1",
+          "expectedFrameCount": 1
+        }
+      },
+      "segments": [
+        {
+          "segmentId": "segment-0001",
+          "sourceStartMs": 3000,
+          "sourceEndMs": 3016,
+          "sourceStartFrame30": 90,
+          "sourceEndFrame30": 91,
+          "outputStartFrame": 0,
+          "outputEndFrame": 1,
+          "audioSamples": {
+            "sourceStart": 144000,
+            "sourceEnd": 144800,
+            "outputStart": 0,
+            "outputEnd": 800
+          }
+        }
+      ],
+      "audio": {
+        "present": true,
+        "sampleRate": 48000,
+        "channels": 1,
+        "channelLayout": "mono",
+        "channelOrder": [
+          "FC"
+        ],
+        "canonicalPcmFormat": {
+          "sampleFormat": "f32le",
+          "packing": "interleaved"
+        },
+        "insertedSilenceSpans": [],
+        "sourceGrid": {
+          "sampleCount": 144800,
+          "byteCount": 579200,
+          "payloadSha256": "fb959beb2b435054d40946f7f6a2a30d8084970db5f8914fac2aed27669d0f20",
+          "decodedSampleCount": 145408,
+          "decodedTailPaddingSampleCount": 608
+        },
+        "encodeInput": {
+          "sampleCount": 800,
+          "byteCount": 3200,
+          "payloadSha256": "c66417cd8e29123856e071bf02304935c41018e05e7681aa6b0c3751333e8b91"
+        },
+        "encoded": {
+          "codec": "aac",
+          "bitRate": "192k",
+          "movieTimeScale": 30,
+          "timeBase": "1/48000",
+          "startPts": 0,
+          "durationTs": 1600,
+          "containerDurationSamples": 1600,
+          "presentationDurationSamples": 800,
+          "videoPresentationDurationSamples": 1600,
+          "trailingVideoOnlySampleCount": 800,
+          "tailPolicy": "source-audio-ended-no-padding-v001",
+          "rawDecodedSampleCount": 1024,
+          "effectiveDecodedSampleCount": 800,
+          "effectiveDecodedPayloadSha256": "ac95c14ed14b3041af0e8af5f262cbdafb90ee5baa271e0bfdd65eac36d65ed8",
+          "packetPayloadSha256": "e71850d1ee107adf0e117e204a482688d3dd65d4b718cf2bdd2a6ddd6cac4b25",
+          "skipSamples": 1024,
+          "discardPadding": 0,
+          "encoderDelay": 1024
+        }
+      },
+      "output": {
+        "frameCount": 1,
+        "audioPacketPayloadSha256": "e71850d1ee107adf0e117e204a482688d3dd65d4b718cf2bdd2a6ddd6cac4b25"
+      },
+      "validation": {
+        "status": "passed",
+        "checks": {
+          "approvalBinding": {
+            "status": "passed",
+            "violationCodes": []
+          },
+          "sourceBinding": {
+            "status": "passed",
+            "violationCodes": []
+          },
+          "videoQc": {
+            "status": "passed",
+            "violationCodes": []
+          },
+          "audioQc": {
+            "status": "passed",
+            "violationCodes": []
+          },
+          "timelineQc": {
+            "status": "passed",
+            "violationCodes": []
+          },
+          "hashGraph": {
+            "status": "passed",
+            "violationCodes": []
+          },
+          "publishPreconditions": {
+            "status": "passed",
+            "violationCodes": []
+          }
+        }
+      }
+    }
+  ]
+}
