@@ -83,14 +83,20 @@ const writeNewBoundFile = async (value, bytes) => {
   }
 };
 
-const validateProjection = (artifact, {role, suiteId, caseCount, label}) => {
+const validateProjection = (artifact, {
+  role,
+  suiteId,
+  caseCount,
+  label,
+  projectionSchemaVersion = PRESENTATION_AUDIO_GRID_REGRESSION_PROJECTION_SCHEMA_VERSION,
+}) => {
   const violations = [];
   const reject = (pathValue, expected, actual) => violations.push({path: pathValue, expected, actual});
   if (!exactKeys(artifact, ['schemaVersion', 'suiteId', 'role', 'capturedFrom', 'cases'])) {
     reject('$', 'exact projection top-level fields', Object.keys(artifact ?? {}));
   }
-  if (artifact?.schemaVersion !== PRESENTATION_AUDIO_GRID_REGRESSION_PROJECTION_SCHEMA_VERSION) {
-    reject('$.schemaVersion', PRESENTATION_AUDIO_GRID_REGRESSION_PROJECTION_SCHEMA_VERSION, artifact?.schemaVersion);
+  if (artifact?.schemaVersion !== projectionSchemaVersion) {
+    reject('$.schemaVersion', projectionSchemaVersion, artifact?.schemaVersion);
   }
   if (artifact?.suiteId !== suiteId) reject('$.suiteId', suiteId, artifact?.suiteId);
   if (artifact?.role !== role) reject('$.role', role, artifact?.role);
@@ -128,10 +134,27 @@ const normalizedForComparison = (artifact) => {
 export const comparePresentationAudioGridProjectionSuiteV001 = (
   before,
   after,
-  {label, suiteId, caseCount},
+  {
+    label,
+    suiteId,
+    caseCount,
+    projectionSchemaVersion = PRESENTATION_AUDIO_GRID_REGRESSION_PROJECTION_SCHEMA_VERSION,
+  },
 ) => {
-  validateProjection(before, {role: 'before-fix', suiteId, caseCount, label: `${label}:before`});
-  validateProjection(after, {role: 'after-fix', suiteId, caseCount, label: `${label}:after`});
+  validateProjection(before, {
+    role: 'before-fix',
+    suiteId,
+    caseCount,
+    label: `${label}:before`,
+    projectionSchemaVersion,
+  });
+  validateProjection(after, {
+    role: 'after-fix',
+    suiteId,
+    caseCount,
+    label: `${label}:after`,
+    projectionSchemaVersion,
+  });
   const violations = [];
   if (!sameCanonical(normalizedForComparison(before), normalizedForComparison(after))) {
     violations.push({

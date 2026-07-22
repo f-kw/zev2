@@ -31,6 +31,7 @@ import {
   validatePresentationBaseMediaTimelineV002,
 } from './presentation_base_media_timeline_v002.mjs';
 import {
+  capturePresentationProjectionExactToolchainV001,
   capturePresentationBaseMediaProjectionCaseV001,
   writePresentationAudioGridRegressionProjectionV001,
 } from './presentation_audio_grid_regression_projection_v001.mjs';
@@ -49,6 +50,7 @@ const PROJECTION_HELPER_PATH = path.join(
 );
 const runtimeOutputs = [];
 const regressionProjectionCases = [];
+let exactProjectionToolchainBindings = null;
 
 const sha256 = (value) => createHash('sha256').update(value).digest('hex');
 const canonicalSha256 = (value) => sha256(canonicalJson(value));
@@ -57,6 +59,16 @@ const resolveWorkspacePathForTest = (value) => path.resolve(WORKSPACE_ROOT, valu
 const readJson = async (value) => JSON.parse(await readFile(value, 'utf8'));
 const writeJson = async (value, data) => writeFile(value, `${JSON.stringify(data, null, 2)}\n`, 'utf8');
 const clone = (value) => structuredClone(value);
+const projectionOutputs = () => ({
+  legacy: process.env.PRESENTATION_AUDIO_GRID_PROJECTION_OUTPUT,
+  fixedToolchain: process.env.PRESENTATION_AUDIO_GRID_PROJECTION_V003_OUTPUT,
+});
+const requestedProjectionOutput = () => {
+  const outputs = projectionOutputs();
+  const requested = Object.values(outputs).filter(Boolean);
+  if (requested.length > 1) throw new Error('only one base-media projection output may be requested');
+  return outputs.fixedToolchain ?? outputs.legacy ?? null;
+};
 const executeStoredJob = async (jobPath, job = null) => {
   const jobFileBytes = await readFile(jobPath);
   const parsed = job ?? JSON.parse(jobFileBytes.toString('utf8'));
@@ -71,7 +83,7 @@ const writeAndExecuteJob = async (job, suffix) => {
   return executeStoredJob(jobPath, job);
 };
 const captureRegressionProjection = async (caseId, outputDirectory) => {
-  if (!process.env.PRESENTATION_AUDIO_GRID_PROJECTION_OUTPUT) return;
+  if (!requestedProjectionOutput()) return;
   regressionProjectionCases.push(await capturePresentationBaseMediaProjectionCaseV001({
     caseId,
     outputDirectory,
@@ -312,21 +324,44 @@ const makeFixture = async ({name, sourcePath, segments}) => {
 };
 
 before(async () => {
+  const outputs = projectionOutputs();
+  if (Object.values(outputs).filter(Boolean).length > 1) {
+    throw new Error('only one base-media projection output may be requested');
+  }
+  if (outputs.fixedToolchain) {
+    exactProjectionToolchainBindings = await capturePresentationProjectionExactToolchainV001();
+  }
   await mkdir(RUNTIME_ROOT, {recursive: true});
   await mkdir(OUTPUT_ROOT, {recursive: true});
 });
 
 after(async () => {
-  if (process.env.PRESENTATION_AUDIO_GRID_PROJECTION_OUTPUT) {
+  const output = requestedProjectionOutput();
+  if (output) {
+    const fixedToolchain = Boolean(projectionOutputs().fixedToolchain);
+    if (fixedToolchain) {
+      assert.equal(
+        canonicalJson(await capturePresentationProjectionExactToolchainV001()),
+        canonicalJson(exactProjectionToolchainBindings),
+        'executable toolchain changed while the projection was running',
+      );
+    }
     const gitHead = (await run('git', ['rev-parse', 'HEAD'])).stdout.trim();
     await writePresentationAudioGridRegressionProjectionV001({
-      outputPath: path.resolve(process.env.PRESENTATION_AUDIO_GRID_PROJECTION_OUTPUT),
-      suiteId: 'presentation-base-media-audio-normal-cases-v001',
+      outputPath: path.resolve(output),
+      suiteId: fixedToolchain
+        ? 'presentation-base-media-audio-normal-cases-fixed-toolchain-v001'
+        : 'presentation-base-media-audio-normal-cases-v001',
       role: process.env.PRESENTATION_AUDIO_GRID_PROJECTION_ROLE ?? 'unspecified',
       gitHead,
       builderPath: CLI_PATH,
       harnessPaths: [PROJECTION_HARNESS_PATH, PROJECTION_HELPER_PATH],
-      tools: PRESENTATION_BASE_MEDIA_EXPECTED_TOOL_PROFILE,
+      tools: fixedToolchain
+        ? {
+          ...PRESENTATION_BASE_MEDIA_EXPECTED_TOOL_PROFILE,
+          executableBindings: exactProjectionToolchainBindings,
+        }
+        : PRESENTATION_BASE_MEDIA_EXPECTED_TOOL_PROFILE,
       cases: regressionProjectionCases,
     });
   }

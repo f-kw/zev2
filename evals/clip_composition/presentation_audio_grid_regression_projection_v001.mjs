@@ -1,5 +1,7 @@
 import {createHash} from 'node:crypto';
-import {lstat, open, readFile} from 'node:fs/promises';
+import {spawn} from 'node:child_process';
+import {constants as fsConstants} from 'node:fs';
+import {access, lstat, open, readFile, realpath, stat} from 'node:fs/promises';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 
@@ -7,6 +9,8 @@ import {canonicalJson} from './presentation_caption_contract_v002.mjs';
 
 export const PRESENTATION_AUDIO_GRID_REGRESSION_PROJECTION_SCHEMA_VERSION =
   'presentation-audio-grid-regression-projection-v001';
+export const PRESENTATION_AUDIO_GRID_REGRESSION_FIXED_TOOLCHAIN_PROJECTION_SCHEMA_VERSION =
+  'presentation-audio-grid-regression-projection-v002';
 
 const MODULE_DIRECTORY = path.dirname(fileURLToPath(import.meta.url));
 const WORKSPACE_ROOT = path.resolve(MODULE_DIRECTORY, '../..');
@@ -21,10 +25,89 @@ const FIXED_OUTPUT_FILE_BY_SUITE_AND_ROLE = Object.freeze({
   'presentation-builder-renderer-audio-integration-v001:after-fix': 'after-integration.json',
   'presentation-builder-renderer-audio-integration-v002:before-fix': 'before-integration-v002.json',
   'presentation-builder-renderer-audio-integration-v002:after-fix': 'after-integration-v002.json',
+  'presentation-base-media-audio-normal-cases-fixed-toolchain-v001:before-fix': 'before-builder-v003.json',
+  'presentation-base-media-audio-normal-cases-fixed-toolchain-v001:after-fix': 'after-builder-v003.json',
+  'presentation-builder-renderer-audio-integration-fixed-toolchain-v001:before-fix': 'before-integration-v003.json',
+  'presentation-builder-renderer-audio-integration-fixed-toolchain-v001:after-fix': 'after-integration-v003.json',
 });
+const FIXED_TOOLCHAIN_SUITE_IDS = new Set([
+  'presentation-base-media-audio-normal-cases-fixed-toolchain-v001',
+  'presentation-builder-renderer-audio-integration-fixed-toolchain-v001',
+]);
 
 const sha256Bytes = (value) => createHash('sha256').update(value).digest('hex');
 const fileSha256 = async (filePath) => sha256Bytes(await readFile(filePath));
+
+const runVersionProbe = (command, args) => new Promise((resolve, reject) => {
+  const stdout = [];
+  const stderr = [];
+  const child = spawn(command, args, {env: process.env});
+  child.stdout.on('data', (chunk) => stdout.push(chunk));
+  child.stderr.on('data', (chunk) => stderr.push(chunk));
+  child.on('error', reject);
+  child.on('close', (code) => {
+    if (code !== 0) {
+      reject(new Error(`tool version probe failed (${code}): ${command} ${args.join(' ')}`));
+      return;
+    }
+    resolve({
+      args,
+      stdoutSha256: sha256Bytes(Buffer.concat(stdout)),
+      stderrSha256: sha256Bytes(Buffer.concat(stderr)),
+    });
+  });
+});
+
+const bindExecutable = async ({command, invokedPath, versionArgs}) => {
+  const resolvedPath = await realpath(invokedPath);
+  const version = await runVersionProbe(resolvedPath, versionArgs);
+  return {
+    command,
+    invokedPath,
+    resolvedPath,
+    fileSha256: await fileSha256(resolvedPath),
+    version,
+  };
+};
+
+const resolvePathExecutable = async (command, versionArgs) => {
+  const searchDirectories = (process.env.PATH ?? '').split(path.delimiter);
+  if (searchDirectories.some((directory) => directory.length === 0 || !path.isAbsolute(directory))) {
+    throw new Error('fixed-toolchain projection requires only non-empty absolute PATH entries');
+  }
+  for (const directory of searchDirectories) {
+    const candidate = path.join(directory, command);
+    try {
+      const info = await stat(candidate);
+      if (info.isFile()) {
+        await access(candidate, fsConstants.X_OK);
+        return bindExecutable({command, invokedPath: candidate, versionArgs});
+      }
+    } catch (error) {
+      if (!['EACCES', 'ENOENT', 'ENOTDIR'].includes(error?.code)) throw error;
+    }
+  }
+  throw new Error(`executable is not available on PATH: ${command}`);
+};
+
+export const capturePresentationProjectionExactToolchainV001 = async () => {
+  const nodeProcess = await bindExecutable({
+    command: process.execPath,
+    invokedPath: process.execPath,
+    versionArgs: ['--version'],
+  });
+  const nodeOnPath = await resolvePathExecutable('node', ['--version']);
+  if (nodeOnPath.resolvedPath !== nodeProcess.resolvedPath
+      || nodeOnPath.fileSha256 !== nodeProcess.fileSha256) {
+    throw new Error('node on PATH differs from the node process running the projection harness');
+  }
+  return {
+    nodeProcess,
+    nodeOnPath,
+    ffmpeg: await resolvePathExecutable('ffmpeg', ['-version']),
+    ffprobe: await resolvePathExecutable('ffprobe', ['-version']),
+  };
+};
 
 const assertNoSymlinkParent = async (targetPath) => {
   const relative = path.relative(WORKSPACE_ROOT, targetPath);
@@ -155,8 +238,14 @@ export const writePresentationAudioGridRegressionProjectionV001 = async ({
   tools,
   cases,
 }) => {
+  const fixedToolchainSuite = FIXED_TOOLCHAIN_SUITE_IDS.has(suiteId);
+  if (fixedToolchainSuite && !tools?.executableBindings) {
+    throw new Error(`fixed-toolchain projection lacks executable bindings: ${suiteId}`);
+  }
   const artifact = {
-    schemaVersion: PRESENTATION_AUDIO_GRID_REGRESSION_PROJECTION_SCHEMA_VERSION,
+    schemaVersion: fixedToolchainSuite
+      ? PRESENTATION_AUDIO_GRID_REGRESSION_FIXED_TOOLCHAIN_PROJECTION_SCHEMA_VERSION
+      : PRESENTATION_AUDIO_GRID_REGRESSION_PROJECTION_SCHEMA_VERSION,
     suiteId,
     role,
     capturedFrom: {

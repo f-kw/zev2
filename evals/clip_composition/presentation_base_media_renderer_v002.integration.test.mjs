@@ -14,6 +14,7 @@ import {
 import {PRESENTATION_BASE_MEDIA_TRUSTED_SOURCE_FILES} from './presentation_base_media_timeline_v002.mjs';
 import {canonicalJson} from './presentation_caption_contract_v002.mjs';
 import {
+  capturePresentationProjectionExactToolchainV001,
   capturePresentationRendererProjectionV001,
   writePresentationAudioGridRegressionProjectionV001,
 } from './presentation_audio_grid_regression_projection_v001.mjs';
@@ -97,18 +98,33 @@ const runBuilderRendererCase = async ({
     mkdir(RENDER_OUTPUT_ROOT, {recursive: true}),
   ]);
   const legacyProjectionOutput = process.env.PRESENTATION_AUDIO_GRID_INTEGRATION_PROJECTION_OUTPUT;
-  const correctedProjectionOutput =
+  const correctedProjectionOutputV002 =
     process.env.PRESENTATION_AUDIO_GRID_INTEGRATION_PROJECTION_V002_OUTPUT;
-  if (legacyProjectionOutput && correctedProjectionOutput) {
-    throw new Error('legacy and corrected projection outputs cannot be requested together');
+  const correctedProjectionOutputV003 =
+    process.env.PRESENTATION_AUDIO_GRID_INTEGRATION_PROJECTION_V003_OUTPUT;
+  const requestedProjectionOutputs = [
+    legacyProjectionOutput,
+    correctedProjectionOutputV002,
+    correctedProjectionOutputV003,
+  ].filter(Boolean);
+  if (requestedProjectionOutputs.length > 1) {
+    throw new Error('only one audio-grid projection output may be requested');
   }
-  const useDeterministicProjectionRuntime = Boolean(projectionCaseId && correctedProjectionOutput);
+  const correctionVersion = correctedProjectionOutputV003
+    ? 'v003'
+    : correctedProjectionOutputV002
+      ? 'v002'
+      : null;
+  const exactToolchainBindings = correctedProjectionOutputV003
+    ? await capturePresentationProjectionExactToolchainV001()
+    : null;
+  const useDeterministicProjectionRuntime = Boolean(projectionCaseId && correctionVersion);
   const runtime = useDeterministicProjectionRuntime
-    ? path.join(RUNTIME_PARENT, '.runtime-e2e-audio-grid-projection-v002')
+    ? path.join(RUNTIME_PARENT, `.runtime-e2e-audio-grid-projection-${correctionVersion}`)
     : await mkdtemp(path.join(RUNTIME_PARENT, '.runtime-e2e-'));
   if (useDeterministicProjectionRuntime) await mkdir(runtime);
   const suffix = useDeterministicProjectionRuntime
-    ? 'audio-grid-projection-v002'
+    ? `audio-grid-projection-${correctionVersion}`
     : `${process.pid}-${path.basename(runtime)}`;
   const baseOutput = path.join(BASE_MEDIA_OUTPUT_ROOT, `builder-renderer-e2e-${suffix}`);
   const renderOutput = path.join(RENDER_OUTPUT_ROOT, suffix);
@@ -310,8 +326,17 @@ const runBuilderRendererCase = async ({
       renderOutput,
       timeline,
     });
-    const projectionOutput = correctedProjectionOutput ?? legacyProjectionOutput;
+    const projectionOutput = correctedProjectionOutputV003
+      ?? correctedProjectionOutputV002
+      ?? legacyProjectionOutput;
     if (projectionCaseId && projectionOutput) {
+      if (correctedProjectionOutputV003) {
+        assert.equal(
+          canonicalJson(await capturePresentationProjectionExactToolchainV001()),
+          canonicalJson(exactToolchainBindings),
+          'executable toolchain changed while the projection was running',
+        );
+      }
       const gitHead = (await run('git', ['rev-parse', 'HEAD'])).stdout.trim();
       const projectionCase = await capturePresentationRendererProjectionV001({
         caseId: projectionCaseId,
@@ -323,14 +348,21 @@ const runBuilderRendererCase = async ({
       });
       await writePresentationAudioGridRegressionProjectionV001({
         outputPath: path.resolve(projectionOutput),
-        suiteId: correctedProjectionOutput
-          ? 'presentation-builder-renderer-audio-integration-v002'
-          : 'presentation-builder-renderer-audio-integration-v001',
+        suiteId: correctedProjectionOutputV003
+          ? 'presentation-builder-renderer-audio-integration-fixed-toolchain-v001'
+          : correctedProjectionOutputV002
+            ? 'presentation-builder-renderer-audio-integration-v002'
+            : 'presentation-builder-renderer-audio-integration-v001',
         role: process.env.PRESENTATION_AUDIO_GRID_PROJECTION_ROLE ?? 'unspecified',
         gitHead,
         builderPath: BUILDER_PATH,
         harnessPaths: [PROJECTION_HARNESS_PATH, PROJECTION_HELPER_PATH],
-        tools: PRESENTATION_BASE_MEDIA_EXPECTED_TOOL_PROFILE,
+        tools: correctedProjectionOutputV003
+          ? {
+            ...PRESENTATION_BASE_MEDIA_EXPECTED_TOOL_PROFILE,
+            executableBindings: exactToolchainBindings,
+          }
+          : PRESENTATION_BASE_MEDIA_EXPECTED_TOOL_PROFILE,
         cases: [projectionCase],
       });
     }
