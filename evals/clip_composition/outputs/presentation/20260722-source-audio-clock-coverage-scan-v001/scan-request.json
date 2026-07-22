@@ -1,0 +1,29 @@
+{
+  "schemaVersion": "presentation-source-audio-clock-scan-request-v001",
+  "scanId": "DmWu0jVQfTE-native-1080p-audio-clock-coverage-v001",
+  "source": {
+    "path": "evals/clip_composition/research/downloads/first-gate-unseen/DmWu0jVQfTE/native-1080p/DmWu0jVQfTE.native-1080p-h264-opus.mp4",
+    "fileSha256": "a2c4548d07eb387f095a198b8f6892121134c46e8c0d5315e4debf3e083234ee"
+  },
+  "trustedPreflight": {
+    "path": "evals/clip_composition/outputs/presentation/20260721-first-real-data-assembly-gate-v001/media-equivalence.json",
+    "fileSha256": "98c0f2018553f39a855610c569f2908efecccc0dadb696fc2b156d19010c15ea"
+  },
+  "knownDecodedGaps": [
+    {
+      "kind": "leading",
+      "startSample": 0,
+      "endSample": 312
+    },
+    {
+      "kind": "internal",
+      "startSample": 960,
+      "endSample": 1008
+    }
+  ],
+  "scopeExclusions": [
+    "media-equivalence-inspected.json is untracked and failed; it is not a trust authority",
+    "no read interval and no seek may be used because Opus pre-skip would be reapplied at the seek start",
+    "this read-only scan does not authorize candidate 13 base-media regeneration"
+  ]
+}

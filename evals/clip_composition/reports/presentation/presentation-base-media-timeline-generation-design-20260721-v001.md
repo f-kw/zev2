@@ -384,9 +384,9 @@ base-media + timeline + generation-manifest <- validation-report
 - `assemblyDecision`はdecision ID、file SHA-256、payload SHA-256、承認record IDだけを持つ。
 - `basisEditPlan`はkind、相対path、file SHA-256だけを持つ。
 - `segments`は上記8 fieldを入力順で持つ。音声なしの場合の`audioSamples`は`null`とする。
-- top-level `audio`は音声なしなら`{"present": false}`だけ。音声ありなら上記fieldだけを持つ。`sourceGrid.sampleCount`は提示終端で物理的に切ったcanonical PCM長、`decodedSampleCount`は切断前のdecoder出力長、両者の差は`decodedTailPaddingSampleCount`と一致させる。`containerDurationSamples`、`presentationDurationSamples`、`videoPresentationDurationSamples`を混同せず、映像だけの末尾を`trailingVideoOnlySampleCount`へ記録する。`skipSamples`、`discardPadding`、`encoderDelay`は診断値であり、合否の減算式へ使わない。
+- top-level `audio`は音声なしなら`{"present": false}`だけ。音声ありなら上記fieldだけを持つ。`sourceGrid.sampleCount`は提示終端で物理的に切ったcanonical PCM長、`decodedSampleCount`は記録済みの全時刻空白を配置した後・提示終端で切断する前の絶対時刻格子長であり、純粋な連続復号PCMのsample数ではない。両者の差は`decodedTailPaddingSampleCount`と一致させる。連続復号PCMの実sample数と復号frame時計のcanonical hashは外部schemaへ追加せず、修正実装の検査と読み取り専用走査成果物へ記録する。`containerDurationSamples`、`presentationDurationSamples`、`videoPresentationDurationSamples`を混同せず、映像だけの末尾を`trailingVideoOnlySampleCount`へ記録する。`skipSamples`、`discardPadding`、`encoderDelay`は診断値であり、合否の減算式へ使わない。
 - `job`、`versions`、`git`は上記fieldだけを持つ。`tools`は§7.3の期待値と実測値、`implementationFiles`は実行した評価環境内fileの相対pathとSHA-256を固定順で持つ。
-- `execution`は実行したFFmpeg工程を固定順で持つ。音声なしは`video-build`、音声ありは`video-build`→`audio-grid`→`audio-mux`だけを許し、実pathは固定placeholderへ置換する。`trustedSourceFiles`は上記3件のrole・path・承認時hashを固定順で持つ。
+- `execution`は実行した外部FFmpeg工程を固定順で持つ。音声なしは`video-build`、音声ありは`video-build`→`audio-grid`→`audio-mux`だけを許し、実pathは固定placeholderへ置換する。`audio-grid`内で行うNodeの絶対sample配置は新しい外部工程やfieldを増やさない決定的内部処理であり、全空白区間、最終gridのsample数・payload hash、生成器実装hashとGit来歴で追跡する。`trustedSourceFiles`は上記3件のrole・path・承認時hashを固定順で持つ。
 - `outputs`は上記2子objectとfieldだけを持つ。音声なしの場合の`audioPacketPayloadSha256`は`null`とする。manifest自身とvalidation reportを参照しない。
 - `excludedLegacyFields`は旧テロップ・旧画面構成等、実行へ渡さなかったfield名を固定順で持つ。
 
@@ -499,7 +499,8 @@ render manifest v002のtop-levelは、`schemaVersion`、`rendererVersion`、`ren
 - 音声境界を人間決定の生msから独立に丸めない。`samplesPerVideoFrame = sourceSampleRate / 30`を整数として求め、§5の実効映像frame境界から音声境界も決める。
 - 各区間に、元動画のpresentation time 0を起点とする`sourceStartSampleOnPresentationClock = sourceStartFrame30 * samplesPerVideoFrame`、`sourceEndSampleOnPresentationClock = sourceEndFrame30 * samplesPerVideoFrame`と、出力先頭を起点とする`outputStartSample = outputStartFrame * samplesPerVideoFrame`、`outputEndSample = outputFrame差に対応するsample終端`を作る。通常区間では全端点は非負整数、各区間長は正、source/output区間長は一致し、outputは連続でなければならない。
 - 唯一の例外として、最後のsegmentが§5のdecoded媒体終端に一致し、最後の論理映像frameの音声窓より実在PCM gridが短い場合は、**実在する最後sampleまでだけ**をsource/outputへコピーする。無音paddingを作らず、途中segmentや媒体終端以外の不足は従来どおり拒否する。映像尺、MP4 containerが宣言する音声track尺、実AAC packetのpresentation尺、映像だけが残る末尾sample数、適用したtail policyを別々にmanifestへ記録する。
-- decode後、`aresample=first_pts=0:min_hard_comp=0:max_soft_comp=0`を固定してpresentation time 0起点の連続PCM gridを作る。soft stretchは使わず、PTSの正の空白だけを同長のzero sampleで埋める。追加した無音区間をmanifestへ保存し、元音声streamが無い入力へ新しい音声trackを作る処理とは分離する。
+- decode後、presentation time 0起点の連続PCM gridを作り、PTSの正の空白だけを同長のzero sampleで埋める。追加した無音区間をmanifestへ保存し、元音声streamが無い入力へ新しい音声trackを作る処理とは分離する。
+  - **2026-07-22承認追補**: 当初指定した`aresample=first_pts=0:min_hard_comp=0:max_soft_comp=0`は、Opus初期遅延直後の48 sample内部空白を保持しないことが初回実データで判明したため、不適合な実現手段として廃止する。時刻空白を補正しない連続PCMを一度だけ復号し、全復号frame時計から得た絶対sample位置へNode側の決定的処理で配置し、全空白へ明示的にcanonical zero byteを書き込む。この追補は既存の空白保持契約への適合修正であり、外部schema・版・fieldの意味は変更しない。旧手段を受けるfallbackは作らない。
 - 連続gridは`f32le`・interleaved・元channel order不変をcanonical PCM表現とし、sample数・byte数・SHA-256を保存する。そのgridを上記frame由来sample境界でsample ordinal trimし、時刻を0へresetして入力順でconcatする。これにより、先頭audio PTSが0でない元動画でも内容を前へずらさず、映像と音声を同じframe境界で切り替え、複数区間で位相差を累積させない。
 - 音声encodeは、人間が実描画previewで確認済みの媒体生成と同じ`AAC / 192k`を固定する。出力sample rate・channel layout・channel orderは入力と同じ値を明示し、自動変換を禁止する。MP4のmovie time scaleは出力fpsと同じ30へ固定し、1frame単位の音声尺を既定1000単位へ丸めない。由来正本`build_presentation_initial_preset_review.mjs`の承認時file hash `97cd4c4cfb2369103228c5156297b3b7a8ea2f14746f0ebd58927074f7ca2646`と実byteを起動時に完全一致検査する。
 - 元動画に音声が無ければ無音を創作しない。
@@ -727,3 +728,4 @@ manifest自身とvalidation reportのhashはmanifestへ入れない。
 - 最終独立監査で、(a)レンダラーv002が無効jobでも既存出力を消し得る、(b)生成中の親directory差し替えを公開直前だけでは閉じ切れない、(c)60fps奇数frame入力の最終global-even frameが整数ms入力から到達不能、の3件を検出した。実装を停止し、v002正式入口を新規先限定・所有lock・検証済みdirectory一括公開へ変更し、生成器とレンダラーの本番経路から自動`rm`/`unlink`を撤去した。working directoryとlockは診断用に保持し、掃除より外部誤削除防止を優先する。
 - 60fps奇数frame終端は、`decodedFrameCount`をtimelineへ束縛し、整数msのdecoded媒体終端だけを論理frame総数へ写す。同じ監査の再確認で音声付き末尾の不足とAAC decode paddingの混入も検出し、stream/packet提示終端でcanonical PCMを物理的に切る契約へ補った。181frame・60fps・48kHz AACの実媒体では、stream/packet提示終端144,800 sample、decoder出力145,408 sample、診断padding 608 sampleを観測し、対象区間は実音声800 sampleだけを保存、映像1,600 sampleとの差800 sampleを映像のみの尾として検査した。これらの値は規則へ固定せず、各mediaの実時計から導出する。
 - 合成実装は、元動画の固定snapshot、実job byte、人間承認payload、元編集案、実行コマンド、固定した実装由来、基礎映像、時間対応表、レンダラー入口を一方向のhashと来歴で結んだ。実データ生成、人間視聴、G4〜G7生成側、LLM、本体接続は引き続き未承認である。
+- 2026-07-22、kawafmmが相談役レビューを貼り付け、`presentation-base-media-audio-grid-reconstruction-fix-design-20260722-v001.md`に基づく実装修正、追加合成検査、既存156件の全回帰、正常系結果不変比較、正式元媒体の読み取り専用全時計走査、完了報告までを最終承認した。この承認により§7.2の旧`aresample`固定を上記追補へ改訂し、§6.3の`decodedSampleCount`の既存意味と外部FFmpeg／内部Node処理の来歴区分も同じ承認に基づく意味明確化として追補する。candidate 13の正式再生成、旧途中物削除、演出指示書生成、描画、残り3候補への展開は含まない。

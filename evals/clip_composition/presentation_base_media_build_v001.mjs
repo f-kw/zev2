@@ -922,6 +922,7 @@ export const inspectPresentationBaseMediaSourceV001 = async (sourcePath) => {
   const ptsStep = ptsStepNumerator / ptsStepDenominator;
   let videoFrameCount = 0;
   let audioFrameCount = 0;
+  let audioDecodedPayloadSampleCount = 0;
   let audioPreviousEnd = 0;
   let audioFirstPts = null;
   let audioLastPts = null;
@@ -969,6 +970,7 @@ export const inspectPresentationBaseMediaSourceV001 = async (sourcePath) => {
       audioSpans.push({startSample: audioPreviousEnd, endSample: startSample});
     }
     audioPreviousEnd = startSample + sampleCount;
+    audioDecodedPayloadSampleCount += sampleCount;
     audioFirstPts ??= pts;
     audioLastPts = pts;
     audioFrameCount += 1;
@@ -978,6 +980,17 @@ export const inspectPresentationBaseMediaSourceV001 = async (sourcePath) => {
   let audioClock = null;
   if (audio) {
     if (audioFrameCount === 0) throwBuild('BASE_MEDIA_AUDIO_SOURCE_CLOCK_INVALID', '$source.audio.frames');
+    const insertedSilenceSampleCount = audioSpans.reduce(
+      (sum, span) => sum + span.endSample - span.startSample,
+      0,
+    );
+    if (audioDecodedPayloadSampleCount + insertedSilenceSampleCount !== audioPreviousEnd) {
+      throwBuild('BASE_MEDIA_AUDIO_SOURCE_CLOCK_INVALID', '$.source.audio.frames.coverage', {
+        decodedPayloadSampleCount: audioDecodedPayloadSampleCount,
+        insertedSilenceSampleCount,
+        decodedEndSample: audioPreviousEnd,
+      });
+    }
     const presentationClock = await inspectSourceAudioPresentationClockV001(
       sourcePath,
       audio,
@@ -1181,12 +1194,312 @@ export const buildPresentationBaseMediaVideoV001 = async (sourcePath, outputPath
   return {graph, args};
 };
 
+const AUDIO_GRID_MOVE_BUFFER_BYTE_COUNT = 1024 * 1024;
+
+const alignedAudioBufferByteCount = (bytesPerSampleFrame) => {
+  const aligned = Math.floor(AUDIO_GRID_MOVE_BUFFER_BYTE_COUNT / bytesPerSampleFrame)
+    * bytesPerSampleFrame;
+  return Math.max(bytesPerSampleFrame, aligned);
+};
+
+const readFileRangeExact = async (handle, buffer, byteCount, position, pathValue) => {
+  let total = 0;
+  while (total < byteCount) {
+    const {bytesRead} = await handle.read(buffer, total, byteCount - total, position + total);
+    if (bytesRead === 0) {
+      throwBuild('BASE_MEDIA_AUDIO_SOURCE_CLOCK_INVALID', pathValue, {
+        position,
+        requested: byteCount,
+        actual: total,
+      });
+    }
+    total += bytesRead;
+  }
+};
+
+const writeFileRangeExact = async (handle, buffer, byteCount, position, pathValue) => {
+  let total = 0;
+  while (total < byteCount) {
+    const {bytesWritten} = await handle.write(buffer, total, byteCount - total, position + total);
+    if (bytesWritten === 0) {
+      throwBuild('BASE_MEDIA_BUILD_FAILED', pathValue, {
+        position,
+        requested: byteCount,
+        actual: total,
+      });
+    }
+    total += bytesWritten;
+  }
+};
+
+const hashFileRange = async (handle, byteStart, byteCount, buffer, pathValue) => {
+  const hash = createHash('sha256');
+  let offset = 0;
+  while (offset < byteCount) {
+    const requested = Math.min(buffer.length, byteCount - offset);
+    await readFileRangeExact(handle, buffer, requested, byteStart + offset, pathValue);
+    hash.update(buffer.subarray(0, requested));
+    offset += requested;
+  }
+  return hash.digest('hex');
+};
+
+/**
+ * decoded frame時計の空白列から、前詰めPCMと絶対sample格子の対応を決める。
+ * manifest契約を増やさず、audio-grid工程内だけで使う決定的な内部計画である。
+ */
+export const buildPresentationAudioGridPlacementPlanV001 = (audioClock) => {
+  if (!isObject(audioClock)
+      || !isInteger(audioClock.sourceGridSampleCount)
+      || audioClock.sourceGridSampleCount <= 0
+      || !Array.isArray(audioClock.spans)) {
+    throwBuild('BASE_MEDIA_AUDIO_SOURCE_CLOCK_INVALID', '$audio.sourceGrid.placementPlan');
+  }
+  const absoluteSampleCount = audioClock.sourceGridSampleCount;
+  const gaps = [];
+  const runs = [];
+  let absoluteCursor = 0;
+  let rawCursor = 0;
+  let gapSampleCount = 0;
+  const addRunUntil = (targetEndSample) => {
+    if (targetEndSample === absoluteCursor) return;
+    const sampleCount = targetEndSample - absoluteCursor;
+    runs.push({
+      runId: `run-${String(runs.length + 1).padStart(6, '0')}`,
+      sourceStartSample: rawCursor,
+      sourceEndSample: rawCursor + sampleCount,
+      targetStartSample: absoluteCursor,
+      targetEndSample,
+    });
+    rawCursor += sampleCount;
+    absoluteCursor = targetEndSample;
+  };
+  audioClock.spans.forEach((span, index) => {
+    if (!isObject(span)
+        || !isInteger(span.startSample)
+        || !isInteger(span.endSample)
+        || span.startSample < absoluteCursor
+        || span.startSample >= span.endSample
+        || span.endSample > absoluteSampleCount) {
+      throwBuild('BASE_MEDIA_AUDIO_SOURCE_CLOCK_INVALID', `$audio.insertedSilenceSpans[${index}]`, {
+        span,
+        previousEndSample: absoluteCursor,
+        absoluteSampleCount,
+      });
+    }
+    addRunUntil(span.startSample);
+    gaps.push({
+      gapId: `gap-${String(gaps.length + 1).padStart(6, '0')}`,
+      startSample: span.startSample,
+      endSample: span.endSample,
+    });
+    gapSampleCount += span.endSample - span.startSample;
+    absoluteCursor = span.endSample;
+  });
+  addRunUntil(absoluteSampleCount);
+  if (absoluteCursor !== absoluteSampleCount
+      || rawCursor + gapSampleCount !== absoluteSampleCount) {
+    throwBuild('BASE_MEDIA_AUDIO_SOURCE_CLOCK_INVALID', '$audio.sourceGrid.placementPlan.coverage', {
+      rawSampleCount: rawCursor,
+      gapSampleCount,
+      absoluteSampleCount,
+      coveredEndSample: absoluteCursor,
+    });
+  }
+  let coverageCursor = 0;
+  const coverage = [
+    ...runs.map((run) => ({kind: 'run', startSample: run.targetStartSample, endSample: run.targetEndSample})),
+    ...gaps.map((gap) => ({kind: 'gap', startSample: gap.startSample, endSample: gap.endSample})),
+  ].sort((left, right) => left.startSample - right.startSample || left.endSample - right.endSample);
+  for (const item of coverage) {
+    if (item.startSample !== coverageCursor || item.endSample <= item.startSample) {
+      throwBuild('BASE_MEDIA_AUDIO_SOURCE_CLOCK_INVALID', '$audio.sourceGrid.placementPlan.coverage', {
+        expectedStartSample: coverageCursor,
+        item,
+      });
+    }
+    coverageCursor = item.endSample;
+  }
+  if (coverageCursor !== absoluteSampleCount) {
+    throwBuild('BASE_MEDIA_AUDIO_SOURCE_CLOCK_INVALID', '$audio.sourceGrid.placementPlan.coverage', {
+      expectedEndSample: absoluteSampleCount,
+      actualEndSample: coverageCursor,
+    });
+  }
+  return {
+    rawSampleCount: rawCursor,
+    gapSampleCount,
+    absoluteSampleCount,
+    runs,
+    gaps,
+  };
+};
+
+export const verifyPresentationAudioGridPlacementV001 = async ({
+  gridPath,
+  bytesPerSampleFrame,
+  plan,
+  runPayloadSha256,
+}) => {
+  const expectedByteCount = plan.absoluteSampleCount * bytesPerSampleFrame;
+  const actualByteCount = (await stat(gridPath)).size;
+  if (actualByteCount !== expectedByteCount) {
+    throwBuild('BASE_MEDIA_AUDIO_SOURCE_CLOCK_INVALID', '$audio.sourceGrid.placementLength', {
+      expected: expectedByteCount,
+      actual: actualByteCount,
+    });
+  }
+  if (!Array.isArray(runPayloadSha256)
+      || runPayloadSha256.length !== plan.runs.length) {
+    throwBuild('BASE_MEDIA_AUDIO_SOURCE_CLOCK_INVALID', '$audio.sourceGrid.runPayloadSha256');
+  }
+  const handle = await open(gridPath, 'r');
+  const buffer = Buffer.allocUnsafe(alignedAudioBufferByteCount(bytesPerSampleFrame));
+  try {
+    for (let index = 0; index < plan.runs.length; index += 1) {
+      const run = plan.runs[index];
+      const expectedHash = runPayloadSha256[index];
+      const actualHash = await hashFileRange(
+        handle,
+        run.targetStartSample * bytesPerSampleFrame,
+        (run.targetEndSample - run.targetStartSample) * bytesPerSampleFrame,
+        buffer,
+        '$audio.sourceGrid.runPayload',
+      );
+      if (!SHA256_PATTERN.test(expectedHash ?? '') || actualHash !== expectedHash) {
+        throwBuild('BASE_MEDIA_AUDIO_QC_FAILED', '$audio.sourceGrid.runPayload', {
+          runId: run.runId,
+          expected: expectedHash ?? null,
+          actual: actualHash,
+        });
+      }
+    }
+    for (const gap of plan.gaps) {
+      let byteOffset = gap.startSample * bytesPerSampleFrame;
+      const byteEnd = gap.endSample * bytesPerSampleFrame;
+      while (byteOffset < byteEnd) {
+        const requested = Math.min(buffer.length, byteEnd - byteOffset);
+        await readFileRangeExact(
+          handle,
+          buffer,
+          requested,
+          byteOffset,
+          '$audio.insertedSilenceSpans',
+        );
+        for (let index = 0; index < requested; index += 1) {
+          if (buffer[index] !== 0) {
+            throwBuild('BASE_MEDIA_AUDIO_QC_FAILED', '$audio.insertedSilenceSpans', {
+              gapId: gap.gapId,
+              startSample: gap.startSample,
+              endSample: gap.endSample,
+              firstNonZeroByteOffset: byteOffset + index,
+            });
+          }
+        }
+        byteOffset += requested;
+      }
+    }
+  } finally {
+    await handle.close();
+  }
+  return {
+    status: 'passed',
+    sampleCount: plan.absoluteSampleCount,
+    byteCount: expectedByteCount,
+    runCount: plan.runs.length,
+    gapCount: plan.gaps.length,
+  };
+};
+
+export const placePresentationAudioGridV001 = async ({
+  gridPath,
+  bytesPerSampleFrame,
+  audioClock,
+}) => {
+  const plan = buildPresentationAudioGridPlacementPlanV001(audioClock);
+  const initialByteCount = (await stat(gridPath)).size;
+  const expectedRawByteCount = plan.rawSampleCount * bytesPerSampleFrame;
+  if (initialByteCount !== expectedRawByteCount) {
+    throwBuild('BASE_MEDIA_AUDIO_SOURCE_CLOCK_INVALID', '$audio.sourceGrid.rawSampleCount', {
+      expected: plan.rawSampleCount,
+      actual: initialByteCount / bytesPerSampleFrame,
+      expectedByteCount: expectedRawByteCount,
+      actualByteCount: initialByteCount,
+    });
+  }
+  const handle = await open(gridPath, 'r+');
+  const buffer = Buffer.allocUnsafe(alignedAudioBufferByteCount(bytesPerSampleFrame));
+  const zeroBuffer = Buffer.alloc(buffer.length, 0);
+  const runPayloadSha256 = [];
+  try {
+    for (const run of plan.runs) {
+      runPayloadSha256.push(await hashFileRange(
+        handle,
+        run.sourceStartSample * bytesPerSampleFrame,
+        (run.sourceEndSample - run.sourceStartSample) * bytesPerSampleFrame,
+        buffer,
+        '$audio.sourceGrid.rawPayload',
+      ));
+    }
+    await handle.truncate(plan.absoluteSampleCount * bytesPerSampleFrame);
+    for (let runIndex = plan.runs.length - 1; runIndex >= 0; runIndex -= 1) {
+      const run = plan.runs[runIndex];
+      let remaining = (run.sourceEndSample - run.sourceStartSample) * bytesPerSampleFrame;
+      const sourceStartByte = run.sourceStartSample * bytesPerSampleFrame;
+      const targetStartByte = run.targetStartSample * bytesPerSampleFrame;
+      while (remaining > 0) {
+        const requested = Math.min(buffer.length, remaining);
+        const sourcePosition = sourceStartByte + remaining - requested;
+        const targetPosition = targetStartByte + remaining - requested;
+        await readFileRangeExact(
+          handle,
+          buffer,
+          requested,
+          sourcePosition,
+          '$audio.sourceGrid.move.read',
+        );
+        await writeFileRangeExact(
+          handle,
+          buffer,
+          requested,
+          targetPosition,
+          '$audio.sourceGrid.move.write',
+        );
+        remaining -= requested;
+      }
+    }
+    for (const gap of plan.gaps) {
+      let byteOffset = gap.startSample * bytesPerSampleFrame;
+      const byteEnd = gap.endSample * bytesPerSampleFrame;
+      while (byteOffset < byteEnd) {
+        const requested = Math.min(zeroBuffer.length, byteEnd - byteOffset);
+        await writeFileRangeExact(
+          handle,
+          zeroBuffer,
+          requested,
+          byteOffset,
+          '$audio.insertedSilenceSpans.write',
+        );
+        byteOffset += requested;
+      }
+    }
+  } finally {
+    await handle.close();
+  }
+  await verifyPresentationAudioGridPlacementV001({
+    gridPath,
+    bytesPerSampleFrame,
+    plan,
+    runPayloadSha256,
+  });
+  return {plan, runPayloadSha256};
+};
+
 export const buildPresentationBaseMediaAudioV001 = async (sourcePath, tempDirectory, audioClock, mappings) => {
   if (!audioClock) return {present: false};
   const gridPath = path.join(tempDirectory, 'source-grid.f32le');
   const gridArguments = [
     '-hide_banner', '-loglevel', 'error', '-y', '-i', sourcePath, '-map', '0:a:0',
-    '-af', 'aresample=first_pts=0:min_hard_comp=0:max_soft_comp=0',
     '-ar', String(audioClock.sampleRate), '-ac', String(audioClock.channels),
     '-c:a', 'pcm_f32le', '-f', 'f32le', gridPath,
   ];
@@ -1196,17 +1509,16 @@ export const buildPresentationBaseMediaAudioV001 = async (sourcePath, tempDirect
     throwBuild('BASE_MEDIA_BUILD_FAILED', '$ffmpeg.audioDecode', {message: error.message});
   }
   const bytesPerSampleFrame = audioClock.channels * 4;
-  const sourceGridByteCount = (await stat(gridPath)).size;
-  if (sourceGridByteCount % bytesPerSampleFrame !== 0) {
+  const rawSourceGridByteCount = (await stat(gridPath)).size;
+  if (rawSourceGridByteCount % bytesPerSampleFrame !== 0) {
     throwBuild('BASE_MEDIA_AUDIO_SOURCE_CLOCK_INVALID', '$audio.sourceGrid.byteCount');
   }
-  const decodedSourceGridSampleCount = sourceGridByteCount / bytesPerSampleFrame;
-  if (decodedSourceGridSampleCount !== audioClock.sourceGridSampleCount) {
-    throwBuild('BASE_MEDIA_AUDIO_SOURCE_CLOCK_INVALID', '$audio.sourceGrid.sampleCount', {
-      expected: audioClock.sourceGridSampleCount,
-      actual: decodedSourceGridSampleCount,
-    });
-  }
+  const placement = await placePresentationAudioGridV001({
+    gridPath,
+    bytesPerSampleFrame,
+    audioClock,
+  });
+  const decodedSourceGridSampleCount = placement.plan.absoluteSampleCount;
   if (audioClock.sourceGridMappingEndSample > decodedSourceGridSampleCount
       || decodedSourceGridSampleCount - audioClock.sourceGridMappingEndSample
         !== audioClock.decodedTailPaddingSampleCount) {
@@ -1226,37 +1538,6 @@ export const buildPresentationBaseMediaAudioV001 = async (sourcePath, tempDirect
       expected: sourceGridSampleCount * bytesPerSampleFrame,
       actual: canonicalSourceGridByteCount,
     });
-  }
-  // PTS空白を「無音として保持した」と主張する前に、canonical PCM上の該当byteが
-  // 実際に+0.0/-0.0だけであることを検査する。FFmpegの動作を宣言だけで信じない。
-  if (audioClock.spans.length > 0) {
-    const gridHandle = await open(gridPath, 'r');
-    const zeroBuffer = Buffer.allocUnsafe(1024 * 1024);
-    try {
-      for (const span of audioClock.spans) {
-        let byteOffset = span.startSample * bytesPerSampleFrame;
-        const byteEnd = span.endSample * bytesPerSampleFrame;
-        while (byteOffset < byteEnd) {
-          const requested = Math.min(zeroBuffer.length, byteEnd - byteOffset);
-          const {bytesRead} = await gridHandle.read(zeroBuffer, 0, requested, byteOffset);
-          if (bytesRead !== requested) {
-            throwBuild('BASE_MEDIA_AUDIO_SOURCE_CLOCK_INVALID', '$audio.insertedSilenceSpans', {
-              byteOffset, requested, bytesRead,
-            });
-          }
-          for (let index = 0; index < bytesRead; index += 4) {
-            if (zeroBuffer.readFloatLE(index) !== 0) {
-              throwBuild('BASE_MEDIA_AUDIO_QC_FAILED', '$audio.insertedSilenceSpans', {
-                startSample: span.startSample, endSample: span.endSample,
-              });
-            }
-          }
-          byteOffset += bytesRead;
-        }
-      }
-    } finally {
-      await gridHandle.close();
-    }
   }
   const encodePath = path.join(tempDirectory, 'encode-input.f32le');
   const sourceHandle = await open(gridPath, 'r');
