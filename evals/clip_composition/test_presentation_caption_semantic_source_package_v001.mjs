@@ -29,6 +29,9 @@ import {
   buildPresentationSegmenterBoundaryEvidenceV001,
   checkPresentationSegmenterBoundaryPreflightV001,
 } from './presentation_segmenter_boundary_evidence_v001.mjs';
+import {
+  verifyPresentationFirstRealDataFileReferenceV001,
+} from './presentation_first_real_data_gate_v001.mjs';
 
 const EXPECTED_CORE_EXPORTS = Object.freeze([
   'PRESENTATION_CAPTION_B1_VIOLATION_CODES_V001',
@@ -142,6 +145,83 @@ test('package runnerの公開入口は承認済み4件だけである', () => {
     'removeEmptyDirectory',
   ]);
   Object.values(adapter).forEach((entry) => assert.equal(typeof entry, 'function'));
+});
+
+test('package production読取handleは固定3入口・同期one-use・AsyncIterableで同一内容を返す', async () => {
+  const adapter =
+    packageRunner.createPresentationCaptionSemanticSourcePackageProductionFilesystemAdapterV001();
+  const absolutePath = resolve(WORKSPACE_ROOT, PACKAGE_RUNNER_REPOSITORY_PATH);
+  const expectedBytes = readFileSync(absolutePath);
+  const handle = await adapter.openReadOnly(absolutePath);
+  assert.equal(Object.isFrozen(handle), true);
+  assert.deepEqual(Object.keys(handle), [
+    'statBigInt',
+    'readChunksV001',
+    'close',
+  ]);
+  const before = await handle.statBigInt();
+  const chunks = handle.readChunksV001();
+  assert.equal(Buffer.isBuffer(chunks), false);
+  assert.equal(Array.isArray(chunks), false);
+  assert.equal(typeof chunks.then, 'undefined');
+  assert.equal(typeof chunks[Symbol.asyncIterator], 'function');
+  assert.throws(
+    () => handle.readChunksV001(),
+    /readChunksV001 may only be called once/u,
+  );
+  const iterator = chunks[Symbol.asyncIterator]();
+  assert.throws(
+    () => chunks[Symbol.asyncIterator](),
+    /chunk AsyncIterable may only be iterated once/u,
+  );
+  const observed = [];
+  for (;;) {
+    const item = await iterator.next();
+    if (item.done) break;
+    observed.push(Buffer.from(item.value));
+  }
+  const after = await handle.statBigInt();
+  await handle.close();
+  assert.equal(Buffer.concat(observed).equals(expectedBytes), true);
+  assert.equal(before.size, BigInt(expectedBytes.length));
+  assert.equal(after.size, before.size);
+  assert.equal(after.dev, before.dev);
+  assert.equal(after.ino, before.ino);
+});
+
+test('R3:3.38GB実fileのchunk hash/countは独立helperと完全一致し全byteを保持しない', async () => {
+  const reference = Object.freeze({
+    path:
+      'evals/clip_composition/outputs/presentation/base-media/'
+      + '.DmWu0jVQfTE-candidate-13-v002.work-ovnjGJ/source-grid.f32le',
+    fileSha256: '219cd4af6e6560a0819bbca67fe36433cdb5e3f4b3260b42a5285093e9030209',
+  });
+  const expectedSize = 3_384_584_064n;
+  assert.deepEqual(
+    await verifyPresentationFirstRealDataFileReferenceV001(reference),
+    reference,
+  );
+  const adapter =
+    packageRunner.createPresentationCaptionSemanticSourcePackageProductionFilesystemAdapterV001();
+  const handle = await adapter.openReadOnly(resolve(WORKSPACE_ROOT, reference.path));
+  const before = await handle.statBigInt();
+  const hash = createHash('sha256');
+  let byteCount = 0n;
+  for await (const chunk of handle.readChunksV001()) {
+    assert.equal(Buffer.isBuffer(chunk), true);
+    assert.equal(chunk.length > 0, true);
+    hash.update(chunk);
+    byteCount += BigInt(chunk.length);
+  }
+  const after = await handle.statBigInt();
+  await handle.close();
+  assert.equal(byteCount, expectedSize);
+  assert.equal(hash.digest('hex'), reference.fileSha256);
+  assert.equal(before.size, expectedSize);
+  assert.equal(after.size, expectedSize);
+  assert.equal(after.dev, before.dev);
+  assert.equal(after.ino, before.ino);
+  assert.equal(after.mtimeNs, before.mtimeNs);
 });
 
 test('strict JSONは適法なescapeと補助平面文字を無変更で往復する', () => {
@@ -1180,6 +1260,82 @@ const makeVirtualStats = (entry) => Object.freeze({
   isDirectory: () => entry.kind === 'directory',
   isSymbolicLink: () => false,
 });
+const overrideBigIntStats = (value, overrides = {}) => Object.freeze({
+  dev: overrides.dev ?? value.dev,
+  ino: overrides.ino ?? value.ino,
+  size: overrides.size ?? value.size,
+  mtimeNs: overrides.mtimeNs ?? value.mtimeNs,
+  nlink: overrides.nlink ?? value.nlink,
+  isFile: () => value.isFile(),
+  isDirectory: () => value.isDirectory(),
+  isSymbolicLink: () => value.isSymbolicLink(),
+});
+const makeOneUseChunkIterable = (chunkValues, readFailure = null) => {
+  let iteratorCreated = false;
+  return Object.freeze({
+    [Symbol.asyncIterator]() {
+      if (iteratorCreated) {
+        throw new TypeError('synthetic chunk AsyncIterable may only be iterated once');
+      }
+      iteratorCreated = true;
+      return (async function* iterateSyntheticChunks() {
+        for (let index = 0; index < chunkValues.length; index += 1) {
+          if (readFailure?.atChunkIndex === index) throw readFailure.error;
+          yield chunkValues[index];
+        }
+        if (readFailure?.atChunkIndex === chunkValues.length) {
+          throw readFailure.error;
+        }
+      })();
+    },
+  });
+};
+const makeSyntheticChunkHandle = ({
+  statAfterOpen,
+  statAfterRead = statAfterOpen,
+  chunks = [],
+  readFailure = null,
+  closeFailure = null,
+}) => {
+  let closed = false;
+  let readCalled = false;
+  let statCalls = 0;
+  return Object.freeze({
+    statBigInt: async () => {
+      assert.equal(closed, false);
+      statCalls += 1;
+      const value = statCalls === 1 ? statAfterOpen : statAfterRead;
+      if (value instanceof Error) throw value;
+      return value;
+    },
+    readChunksV001: () => {
+      assert.equal(closed, false);
+      if (readCalled) {
+        throw new TypeError('synthetic readChunksV001 may only be called once');
+      }
+      readCalled = true;
+      return makeOneUseChunkIterable(chunks, readFailure);
+    },
+    close: async () => {
+      assert.equal(closed, false);
+      closed = true;
+      if (closeFailure !== null) throw closeFailure;
+    },
+  });
+};
+const chunkBufferBySizes = (inputBytes, sizes) => {
+  const chunks = [];
+  let offset = 0;
+  for (const size of sizes) {
+    assert.equal(Number.isSafeInteger(size) && size > 0, true);
+    const end = Math.min(offset + size, inputBytes.length);
+    if (end > offset) chunks.push(Buffer.from(inputBytes.subarray(offset, end)));
+    offset = end;
+  }
+  if (offset < inputBytes.length) chunks.push(Buffer.from(inputBytes.subarray(offset)));
+  assert.equal(Buffer.concat(chunks).equals(inputBytes), true);
+  return chunks;
+};
 const makeVirtualDirent = (name, kind) => Object.freeze({
   name,
   isFile: () => kind === 'file',
@@ -1254,6 +1410,7 @@ const createHybridRunnerFilesystem = (
   let nextIno = 1000;
   let stagingScanned = false;
   let inputMutationDone = false;
+  let inputMutationStat = null;
   let formalRootLstatCount = 0;
   const absoluteJobPath = resolve(WORKSPACE_ROOT, runnerJob.jobPath);
   const absoluteJobRoot = dirname(absoluteJobPath);
@@ -1298,25 +1455,10 @@ const createHybridRunnerFilesystem = (
       .sort(([left], [right]) => compareUtf16(left, right))
       .map(([name, kind]) => makeVirtualDirent(name, kind));
   };
-  const readVirtualHandle = (pathValue, entry, {mutateRead = false} = {}) => {
-    let closed = false;
-    return Object.freeze({
-      statBigInt: async () => {
-        assert.equal(closed, false);
-        return makeVirtualStats(entry);
-      },
-      readAllBytes: async () => {
-        assert.equal(closed, false);
-        return mutateRead
-          ? Buffer.concat([entry.bytes, Buffer.from(' ', 'utf8')])
-          : Buffer.from(entry.bytes);
-      },
-      close: async () => {
-        assert.equal(closed, false);
-        closed = true;
-      },
-    });
-  };
+  const readVirtualHandle = (pathValue, entry) => makeSyntheticChunkHandle({
+    statAfterOpen: makeVirtualStats(entry),
+    chunks: entry.bytes.length === 0 ? [] : [Buffer.from(entry.bytes)],
+  });
 
   const adapter = Object.freeze({
     openReadOnly: async (pathValue) => {
@@ -1329,23 +1471,41 @@ const createHybridRunnerFilesystem = (
       if (isManaged(pathValue)) throw makeEnoent(pathValue);
       if (formalFailure === 'input'
         && stagingScanned
-        && !inputMutationDone
+        && inputMutationStat !== null
         && pathValue === absoluteGateAJobPath) {
         inputMutationDone = true;
         operations.push({operation: 'inputRecheckMutation', path: pathValue});
         const handle = await base.openReadOnly(pathValue);
+        let readCalled = false;
         let closed = false;
         return Object.freeze({
           statBigInt: async () => {
             assert.equal(closed, false);
-            return await handle.statBigInt();
+            return inputMutationStat;
           },
-          readAllBytes: async () => {
+          readChunksV001: () => {
             assert.equal(closed, false);
-            return Buffer.concat([
-              Buffer.from(await handle.readAllBytes()),
-              Buffer.from(' ', 'utf8'),
-            ]);
+            if (readCalled) {
+              throw new TypeError('synthetic readChunksV001 may only be called once');
+            }
+            readCalled = true;
+            let iteratorCreated = false;
+            return Object.freeze({
+              [Symbol.asyncIterator]() {
+                if (iteratorCreated) {
+                  throw new TypeError(
+                    'synthetic chunk AsyncIterable may only be iterated once',
+                  );
+                }
+                iteratorCreated = true;
+                return (async function* mutateInputRead() {
+                  for await (const chunk of handle.readChunksV001()) {
+                    yield chunk;
+                  }
+                  yield Buffer.from(' ', 'utf8');
+                })();
+              },
+            });
           },
           close: async () => {
             assert.equal(closed, false);
@@ -1405,6 +1565,18 @@ const createHybridRunnerFilesystem = (
       operations.push({operation: 'lstatBigInt', path: pathValue});
       const virtual = entries.get(pathValue);
       if (virtual !== undefined) return makeVirtualStats(virtual);
+      if (formalFailure === 'input'
+        && stagingScanned
+        && pathValue === absoluteGateAJobPath) {
+        if (inputMutationStat === null) {
+          const before = await base.lstatBigInt(pathValue);
+          inputMutationStat = overrideBigIntStats(before, {
+            ino: before.ino + 1n,
+            size: before.size + 1n,
+          });
+        }
+        return inputMutationStat;
+      }
       if (pathValue === absoluteFormalRoot) {
         formalRootLstatCount += 1;
         if (formalFailure === 'preRename' && formalRootLstatCount >= 2) {
@@ -1493,6 +1665,105 @@ const createHybridRunnerFilesystem = (
   });
 };
 
+const withSyntheticReadFault = (
+  baseAdapter,
+  {
+    matches,
+    kind,
+  },
+) => {
+  let matchedOpenCount = 0;
+  const openReadOnly = async (pathValue) => {
+    if (!matches(pathValue, matchedOpenCount)) {
+      return await baseAdapter.openReadOnly(pathValue);
+    }
+    matchedOpenCount += 1;
+    if (kind === 'open') throw new TypeError('synthetic open failure');
+    const baseHandle = await baseAdapter.openReadOnly(pathValue);
+    let readCalled = false;
+    let readCompleted = false;
+    let closed = false;
+    let firstStat = null;
+    return Object.freeze({
+      statBigInt: async () => {
+        assert.equal(closed, false);
+        const value = await baseHandle.statBigInt();
+        if (firstStat === null) firstStat = value;
+        if (kind === 'post-read-stat-error' && readCompleted) {
+          throw new TypeError('synthetic post-read fstat failure');
+        }
+        if (kind === 'post-read-stat' && readCompleted) {
+          return overrideBigIntStats(value, {ino: value.ino + 1n});
+        }
+        return value;
+      },
+      readChunksV001: () => {
+        assert.equal(closed, false);
+        if (readCalled) {
+          throw new TypeError('synthetic readChunksV001 may only be called once');
+        }
+        readCalled = true;
+        if (kind === 'return-buffer') return Buffer.from('not-an-iterable', 'utf8');
+        if (kind === 'return-array') return [];
+        if (kind === 'return-promise') return Promise.resolve([]);
+        let iteratorCreated = false;
+        return Object.freeze({
+          [Symbol.asyncIterator]() {
+            if (iteratorCreated) {
+              throw new TypeError(
+                'synthetic chunk AsyncIterable may only be iterated once',
+              );
+            }
+            iteratorCreated = true;
+            return (async function* transformRead() {
+              if (kind === 'read-throw') {
+                throw new TypeError('synthetic chunk read failure');
+              }
+              let pending = null;
+              for await (const sourceChunk of baseHandle.readChunksV001()) {
+                if (kind === 'non-buffer') {
+                  yield 'not-a-buffer';
+                  readCompleted = true;
+                  return;
+                }
+                if (kind === 'empty-chunk') {
+                  yield Buffer.alloc(0);
+                  readCompleted = true;
+                  return;
+                }
+                if (kind === 'short') {
+                  if (pending !== null) yield pending;
+                  pending = Buffer.from(sourceChunk);
+                } else {
+                  yield sourceChunk;
+                }
+              }
+              if (kind === 'short') {
+                if (pending !== null && pending.length > 1) {
+                  yield pending.subarray(0, pending.length - 1);
+                }
+              } else if (kind === 'over') {
+                yield Buffer.from('x', 'utf8');
+              }
+              readCompleted = true;
+            })();
+          },
+        });
+      },
+      close: async () => {
+        assert.equal(closed, false);
+        closed = true;
+        await baseHandle.close();
+        if (kind === 'close') throw new TypeError('synthetic close failure');
+      },
+    });
+  };
+  return Object.freeze({
+    ...baseAdapter,
+    openReadOnly,
+  });
+};
+
 const Q1_SYNTHETIC_WATCHED_FILE_NAME = 'q1-nonempty-watched-file-v001.txt';
 const Q1_SYNTHETIC_WATCHED_FILE_PATH =
   `${PRESENTATION_WATCHED_ROOT}/${Q1_SYNTHETIC_WATCHED_FILE_NAME}`;
@@ -1506,13 +1777,20 @@ const createQ1WatchedTreeFilesystem = (
     includeJob = true,
     watchedEntryKind = 'file',
     mutateDuringRead = false,
+    watchedBytes = Q1_SYNTHETIC_WATCHED_FILE_BYTES,
+    watchedChunkSizes = null,
+    watchedChunks = null,
+    readFailure = null,
+    closeFailure = null,
+    openFailure = null,
+    statAfterRead = null,
   } = {},
 ) => {
   const filesystem = createHybridRunnerFilesystem(runnerJob, {includeJob});
   const base = filesystem.adapter;
   const watchedEntry = {
     kind: 'file',
-    bytes: Buffer.from(Q1_SYNTHETIC_WATCHED_FILE_BYTES),
+    bytes: Buffer.from(watchedBytes),
     ino: 49001,
   };
   const watchedDirectoryEntry =
@@ -1521,32 +1799,36 @@ const createQ1WatchedTreeFilesystem = (
     openReadOnly: async (pathValue) => {
       if (pathValue !== Q1_SYNTHETIC_WATCHED_FILE_ABSOLUTE_PATH
         || watchedEntryKind !== 'file') return await base.openReadOnly(pathValue);
-      let closed = false;
-      return Object.freeze({
-        statBigInt: async () => {
-          assert.equal(closed, false);
-          return makeVirtualStats(watchedEntry);
-        },
-        readAllBytes: async () => {
-          assert.equal(closed, false);
-          if (mutateDuringRead) {
-            watchedEntry.bytes = Buffer.concat([
-              watchedEntry.bytes,
-              Buffer.from('changed-during-read', 'utf8'),
-            ]);
-            watchedEntry.ino += 1;
-            filesystem.operations.push({
-              operation: 'watchedReadMutation',
-              path: pathValue,
-            });
-            return Buffer.from(watchedEntry.bytes);
-          }
-          return Buffer.from(watchedEntry.bytes);
-        },
-        close: async () => {
-          assert.equal(closed, false);
-          closed = true;
-        },
+      if (openFailure !== null) throw openFailure;
+      const beforeStat = makeVirtualStats(watchedEntry);
+      if (mutateDuringRead) {
+        const originalBytes = Buffer.from(watchedEntry.bytes);
+        watchedEntry.bytes = Buffer.concat([
+          watchedEntry.bytes,
+          Buffer.from('changed-during-read', 'utf8'),
+        ]);
+        watchedEntry.ino += 1;
+        filesystem.operations.push({
+          operation: 'watchedReadMutation',
+          path: pathValue,
+        });
+        return makeSyntheticChunkHandle({
+          statAfterOpen: beforeStat,
+          statAfterRead: makeVirtualStats(watchedEntry),
+          chunks: originalBytes.length === 0 ? [] : [originalBytes],
+        });
+      }
+      const chunks = watchedChunks !== null
+        ? watchedChunks
+        : watchedChunkSizes === null
+          ? watchedEntry.bytes.length === 0 ? [] : [Buffer.from(watchedEntry.bytes)]
+          : chunkBufferBySizes(watchedEntry.bytes, watchedChunkSizes);
+      return makeSyntheticChunkHandle({
+        statAfterOpen: beforeStat,
+        statAfterRead: statAfterRead ?? beforeStat,
+        chunks,
+        readFailure,
+        closeFailure,
       });
     },
     openWriteExclusive: base.openWriteExclusive,
@@ -1687,6 +1969,105 @@ test('Q1:A監視投影入口はunsupported entryと読取中変化を固定diagn
       path: Q1_SYNTHETIC_WATCHED_FILE_ABSOLUTE_PATH,
     }],
   );
+});
+
+test('R3:監視投影は空fileを0 chunkで扱いone・multi・uneven chunkでも同じhashになる', async () => {
+  const rows = [
+    {
+      suffix: 'empty',
+      watchedBytes: Buffer.alloc(0),
+      watchedChunkSizes: [],
+    },
+    {
+      suffix: 'one',
+      watchedBytes: Q1_SYNTHETIC_WATCHED_FILE_BYTES,
+      watchedChunkSizes: [Q1_SYNTHETIC_WATCHED_FILE_BYTES.length],
+    },
+    {
+      suffix: 'multi',
+      watchedBytes: Q1_SYNTHETIC_WATCHED_FILE_BYTES,
+      watchedChunkSizes: [8, 8, 8, 8],
+    },
+    {
+      suffix: 'uneven',
+      watchedBytes: Q1_SYNTHETIC_WATCHED_FILE_BYTES,
+      watchedChunkSizes: [1, 7, 3, 11],
+    },
+  ];
+  for (const row of rows) {
+    const runnerJob = makeRunnerJob(
+      'read-only-preflight',
+      `r3-projection-${row.suffix}`,
+    );
+    const filesystem = createQ1WatchedTreeFilesystem(runnerJob, {
+      includeJob: false,
+      watchedBytes: row.watchedBytes,
+      watchedChunkSizes: row.watchedChunkSizes,
+    });
+    const result =
+      await packageRunner.inspectPresentationCaptionSemanticSourcePackagePreflightProjectionV001(
+        runnerJob.jobPath,
+        {filesystemAdapter: filesystem.adapter},
+      );
+    assert.deepEqual(result, {
+      kind: 'trusted-projection',
+      watchedRoot: PRESENTATION_WATCHED_ROOT,
+      excludedPaths: [runnerJob.jobPath],
+      expectedBeforeCanonicalSha256: canonicalSha256([{
+        path: Q1_SYNTHETIC_WATCHED_FILE_PATH,
+        kind: 'file',
+        contentSha256: sha256(row.watchedBytes),
+      }]),
+    }, row.suffix);
+  }
+});
+
+test('R3:監視投影はopen・不正chunk・短過読・読取後変化・close失敗を同じuntrustedへ閉じる', async () => {
+  const inputBytes = Buffer.from(Q1_SYNTHETIC_WATCHED_FILE_BYTES);
+  const changedEntry = {
+    kind: 'file',
+    bytes: inputBytes,
+    ino: 49002,
+  };
+  const rows = [
+    ['open', {openFailure: new TypeError('synthetic open failure')}],
+    ['non-buffer', {watchedChunks: ['not-a-buffer']}],
+    ['empty-chunk', {watchedChunks: [Buffer.alloc(0)]}],
+    ['read-throw', {
+      watchedChunks: [],
+      readFailure: {
+        atChunkIndex: 0,
+        error: new TypeError('synthetic chunk read failure'),
+      },
+    }],
+    ['short-read', {watchedChunks: [inputBytes.subarray(0, inputBytes.length - 1)]}],
+    ['over-read', {
+      watchedChunks: [inputBytes, Buffer.from('x', 'utf8')],
+    }],
+    ['post-read-stat', {statAfterRead: makeVirtualStats(changedEntry)}],
+    ['close', {closeFailure: new TypeError('synthetic close failure')}],
+  ];
+  for (const [suffix, options] of rows) {
+    const runnerJob = makeRunnerJob(
+      'read-only-preflight',
+      `r3-projection-failure-${suffix}`,
+    );
+    const filesystem = createQ1WatchedTreeFilesystem(runnerJob, {
+      includeJob: false,
+      ...options,
+    });
+    assert.deepEqual(
+      await packageRunner.inspectPresentationCaptionSemanticSourcePackagePreflightProjectionV001(
+        runnerJob.jobPath,
+        {filesystemAdapter: filesystem.adapter},
+      ),
+      {
+        kind: 'untrusted',
+        diagnostic: 'CAPTION_B1_PACKAGE_PREFLIGHT_PROJECTION_UNAVAILABLE',
+      },
+      suffix,
+    );
+  }
 });
 
 const createRunnerSpyBuilder = ({
@@ -1838,39 +2219,6 @@ test('Q1:A監視投影hashは同じ非空treeを読むproduction runner開始投
   );
   assert.equal(result.report.readOnlyObservation.unchanged, true);
 });
-
-const snapshotRealWatchedTree = (excludedPath) => {
-  const results = [];
-  const visit = (absoluteDirectory, repositoryDirectory) => {
-    const entries = readdirSync(absoluteDirectory, {withFileTypes: true})
-      .sort((left, right) => compareUtf16(left.name, right.name));
-    for (const entry of entries) {
-      const repositoryPath = `${repositoryDirectory}/${entry.name}`;
-      if (repositoryPath === excludedPath) continue;
-      const absolutePath = resolve(absoluteDirectory, entry.name);
-      if (entry.isDirectory()) {
-        results.push({path: repositoryPath, kind: 'directory', contentSha256: null});
-        visit(absolutePath, repositoryPath);
-      } else if (entry.isFile()) {
-        results.push({
-          path: repositoryPath,
-          kind: 'file',
-          contentSha256: sha256(readFileSync(absolutePath)),
-        });
-      } else if (entry.isSymbolicLink()) {
-        results.push({
-          path: repositoryPath,
-          kind: 'symlink',
-          contentSha256: sha256(Buffer.from(readlinkSync(absolutePath), 'utf8')),
-        });
-      } else {
-        throw new TypeError(`unsupported watched entry: ${repositoryPath}`);
-      }
-    }
-  };
-  visit(resolve(WORKSPACE_ROOT, PRESENTATION_WATCHED_ROOT), PRESENTATION_WATCHED_ROOT);
-  return results.sort((left, right) => compareUtf16(left.path, right.path));
-};
 
 test('外部表示5 JSONは承認済みfile/canonical hash対を保ちrenderer trustの4係数だけが小数である', () => {
   const fixture = makeValidFixture();
@@ -2115,6 +2463,170 @@ test('job validatorは正本field順の正常jobを受理し最小leaf pathで�
     packageCore.validatePresentationCaptionSemanticSourcePackageJobV001(invalid);
   assert.equal(result.status, 'invalid');
   assert.deepEqual(result.paths, ['$.expectedProjection.containers[0].sourceAtomCount']);
+});
+
+test('job投影は境界候補件数が不正な子を親集計へ部分利用しない', () => {
+  const fixture = makeValidFixture();
+  const invalidCandidateCount = clone(fixture.job.value);
+  invalidCandidateCount.expectedProjection.containers[0].boundaryCandidateCount = -1;
+  assert.deepEqual(
+    packageCore.validatePresentationCaptionSemanticSourcePackageJobV001(
+      invalidCandidateCount,
+    ).paths,
+    ['$.expectedProjection.containers[0].boundaryCandidateCount'],
+  );
+});
+
+test('job投影は両件数が不正な子について二つの子違反だけを返す', () => {
+  const fixture = makeValidFixture();
+  const invalidBoth = clone(fixture.job.value);
+  invalidBoth.expectedProjection.containers[0].sourceAtomCount = -1;
+  invalidBoth.expectedProjection.containers[0].boundaryCandidateCount = -1;
+  assert.deepEqual(
+    packageCore.validatePresentationCaptionSemanticSourcePackageJobV001(invalidBoth).paths,
+    [
+      '$.expectedProjection.containers[0].boundaryCandidateCount',
+      '$.expectedProjection.containers[0].sourceAtomCount',
+    ],
+  );
+});
+
+test('job投影は片側の子不正があっても他方の独立した親不一致を検出する', () => {
+  const fixture = makeValidFixture();
+  const invalidSourceWithIndependentParentMismatch = clone(fixture.job.value);
+  invalidSourceWithIndependentParentMismatch.expectedProjection
+    .containers[0].sourceAtomCount = -1;
+  invalidSourceWithIndependentParentMismatch.expectedProjection
+    .boundaryCandidateCount += 1;
+  assert.deepEqual(
+    packageCore.validatePresentationCaptionSemanticSourcePackageJobV001(
+      invalidSourceWithIndependentParentMismatch,
+    ).paths,
+    [
+      '$.expectedProjection.boundaryCandidateCount',
+      '$.expectedProjection.containers[0].sourceAtomCount',
+    ],
+  );
+});
+
+test('job投影は境界候補の子不正があっても対応元の親不一致を検出する', () => {
+  const fixture = makeValidFixture();
+  const invalidCandidateWithIndependentParentMismatch = clone(fixture.job.value);
+  invalidCandidateWithIndependentParentMismatch.expectedProjection
+    .containers[0].boundaryCandidateCount = -1;
+  invalidCandidateWithIndependentParentMismatch.expectedProjection.sourceAtomCount += 1;
+  assert.deepEqual(
+    packageCore.validatePresentationCaptionSemanticSourcePackageJobV001(
+      invalidCandidateWithIndependentParentMismatch,
+    ).paths,
+    [
+      '$.expectedProjection.containers[0].boundaryCandidateCount',
+      '$.expectedProjection.sourceAtomCount',
+    ],
+  );
+});
+
+test('job投影は未知fieldを持つ子を二種類の親集計から丸ごと除外する', () => {
+  const fixture = makeValidFixture();
+  const invalidShape = clone(fixture.job.value);
+  invalidShape.expectedProjection.containers[0] = {
+    ...invalidShape.expectedProjection.containers[0],
+    unknown: true,
+  };
+  assert.deepEqual(
+    packageCore.validatePresentationCaptionSemanticSourcePackageJobV001(invalidShape).paths,
+    ['$.expectedProjection.containers[0]'],
+  );
+});
+
+test('job投影はfield順違反の子を除外してもcontainer数の独立検査を維持する', () => {
+  const fixture = makeValidFixture();
+  const invalidShapeAndContainerCount = clone(fixture.job.value);
+  const validEntry = invalidShapeAndContainerCount.expectedProjection.containers[0];
+  invalidShapeAndContainerCount.expectedProjection.containers[0] = {
+    sourceAtomCount: validEntry.sourceAtomCount,
+    containerId: validEntry.containerId,
+    boundaryCandidateCount: validEntry.boundaryCandidateCount,
+  };
+  invalidShapeAndContainerCount.expectedProjection.containerCount += 1;
+  assert.deepEqual(
+    packageCore.validatePresentationCaptionSemanticSourcePackageJobV001(
+      invalidShapeAndContainerCount,
+    ).paths,
+    [
+      '$.expectedProjection.containerCount',
+      '$.expectedProjection.containers[0]',
+    ],
+  );
+});
+
+test('job投影は件数fieldが欠けた子を親集計へ部分利用しない', () => {
+  const fixture = makeValidFixture();
+  const missingCount = clone(fixture.job.value);
+  delete missingCount.expectedProjection.containers[0].sourceAtomCount;
+  assert.deepEqual(
+    packageCore.validatePresentationCaptionSemanticSourcePackageJobV001(missingCount).paths,
+    ['$.expectedProjection.containers[0]'],
+  );
+});
+
+test('job投影はshape違反と数値不正が併存する子を子全体の違反に限定する', () => {
+  const fixture = makeValidFixture();
+  const invalidShapeAndNumber = clone(fixture.job.value);
+  invalidShapeAndNumber.expectedProjection.containers[0].sourceAtomCount = -1;
+  invalidShapeAndNumber.expectedProjection.containers[0].unknown = true;
+  assert.deepEqual(
+    packageCore.validatePresentationCaptionSemanticSourcePackageJobV001(
+      invalidShapeAndNumber,
+    ).paths,
+    ['$.expectedProjection.containers[0]'],
+  );
+});
+
+test('job投影は非objectの子を親集計へ部分利用しない', () => {
+  const fixture = makeValidFixture();
+  const nonObject = clone(fixture.job.value);
+  nonObject.expectedProjection.containers[0] = null;
+  assert.deepEqual(
+    packageCore.validatePresentationCaptionSemanticSourcePackageJobV001(nonObject).paths,
+    ['$.expectedProjection.containers[0]'],
+  );
+});
+
+test('job投影は全子が有効なとき対応元の親合計不一致を検出する', () => {
+  const fixture = makeValidFixture();
+  const invalidParentTotal = clone(fixture.job.value);
+  invalidParentTotal.expectedProjection.sourceAtomCount += 1;
+  assert.deepEqual(
+    packageCore.validatePresentationCaptionSemanticSourcePackageJobV001(
+      invalidParentTotal,
+    ).paths,
+    ['$.expectedProjection.sourceAtomCount'],
+  );
+});
+
+test('job投影は全子が有効なとき境界候補の親合計不一致を検出する', () => {
+  const fixture = makeValidFixture();
+  const invalidCandidateParentTotal = clone(fixture.job.value);
+  invalidCandidateParentTotal.expectedProjection.boundaryCandidateCount += 1;
+  assert.deepEqual(
+    packageCore.validatePresentationCaptionSemanticSourcePackageJobV001(
+      invalidCandidateParentTotal,
+    ).paths,
+    ['$.expectedProjection.boundaryCandidateCount'],
+  );
+});
+
+test('job投影はcontainer数と配列長の独立検査を維持する', () => {
+  const fixture = makeValidFixture();
+  const invalidContainerCount = clone(fixture.job.value);
+  invalidContainerCount.expectedProjection.containerCount += 1;
+  assert.deepEqual(
+    packageCore.validatePresentationCaptionSemanticSourcePackageJobV001(
+      invalidContainerCount,
+    ).paths,
+    ['$.expectedProjection.containerCount'],
+  );
 });
 
 test('公開derive入口はGate A生観測を同一checker経路へ決定的に運び入力を変更しない', () => {
@@ -2593,6 +3105,135 @@ for (const [label, suffix, sequence] of [
     assertTargetCode(context, 'IMPLEMENTATION_MISMATCH', 'implementationBinding');
   });
 }
+
+const checkPackageImportGraphSuffix = (suffix, discriminator) => {
+  const context = makeValidFixture();
+  const index = 1;
+  const observation = context.implementationInputs[index];
+  observation.snapshot = stableSnapshotFromBytes(
+    observation.path,
+    Buffer.concat([observation.snapshot.bytes, bytes(`\n${suffix}\n`)]),
+    discriminator,
+  );
+  context.job.value.implementationBinding.files[index].fileSha256 =
+    observation.snapshot.fileSha256;
+  refreshJobSnapshot(context);
+  rebuildPackagePasses(context);
+  return packageCore.checkPresentationCaptionSemanticSourcePackageV001(context);
+};
+
+const R1_SCANNER_ACCEPTED_SOURCES = Object.freeze([
+  [
+    '通常member・optional member後の除算',
+    [
+      'const scannerR1Member = value.property / divisor;',
+      'const scannerR1OptionalProperty = value?.property / divisor;',
+      'const scannerR1OptionalBracket = value?.[field] / divisor;',
+    ].join('\n'),
+  ],
+  [
+    'spread三形とspread直後のregex',
+    [
+      'const scannerR1SpreadCall = resolve(root, ...parts);',
+      'const scannerR1SpreadObject = ({...entry});',
+      'const scannerR1SpreadArray = [...entries];',
+      'const scannerR1SpreadRegex = consume(.../import\\(/g);',
+    ].join('\n'),
+  ],
+  [
+    'regex・comment・string・template raw内の禁止語',
+    [
+      'const scannerR1Regex = /import\\s*\\(|require\\s*\\(|readFileSync\\(/gu;',
+      "const scannerR1String = \"import('x') require('x') readFileSync('x')\";",
+      "const scannerR1Template = `import('x') require('x') ${value}`;",
+      "// import('x'); require('x'); readFileSync('x');",
+      "/* import('x'); require('x'); readFileSync('x'); */",
+      'const scannerR1CommentThenRegex = /* comment */ /require\\(/u.test(value);',
+      "const scannerR1TemplateRegex = `${/import\\(/u.test(value)}`;",
+    ].join('\n'),
+  ],
+  [
+    '固定済み数値五形',
+    'const scannerR1Numbers = [0, 57, 0.04, 1n, 0xff, 0o600];',
+  ],
+  [
+    '制御条件内とstatement開始のregex',
+    [
+      'if (/require\\(/u.test(value)) consume(value);',
+      'if (condition) /import\\(/u.test(value);',
+    ].join('\n'),
+  ],
+]);
+
+for (const [index, [label, suffix]] of R1_SCANNER_ACCEPTED_SOURCES.entries()) {
+  test(`package R1 scannerは${label}を受理する`, () => {
+    const report = checkPackageImportGraphSuffix(suffix, 180 + index);
+    assert.equal(
+      report.violations.some((entry) => entry.code === 'IMPLEMENTATION_MISMATCH'),
+      false,
+    );
+  });
+}
+
+const R1_SCANNER_REJECTED_SOURCES = Object.freeze([
+  ['通常member経由file I/O', "const scannerR1Invalid = value.readFileSync('/tmp/x');"],
+  ['optional member経由file I/O', "const scannerR1Invalid = value?.readFileSync('/tmp/x');"],
+  ['spread内file I/O', "const scannerR1Invalid = consume(...readFileSync('/tmp/x'));"],
+  ['dynamic import', "const scannerR1Invalid = import('./x.mjs');"],
+  [
+    '関数内dynamic import',
+    "function scannerR1Deferred() { return import('./x.mjs'); }",
+  ],
+  ['spread内dynamic import', "const scannerR1Invalid = consume(...import('./x.mjs'));"],
+  ['template式内dynamic import', "const scannerR1Invalid = `${import('./x.mjs')}`;"],
+  ['property名のdynamic import', 'const scannerR1Invalid = object.import();'],
+  ['CommonJS require', "const scannerR1Invalid = require('node:fs');"],
+  ['arrow内CommonJS require', "const scannerR1Deferred = () => require('node:fs');"],
+  ['spread内CommonJS require', "const scannerR1Invalid = consume(...require('node:fs'));"],
+  ['template式内CommonJS require', "const scannerR1Invalid = `${require('node:fs')}`;"],
+  ['optional property名のrequire', 'const scannerR1Invalid = object?.require();'],
+  ['member待機中のslash', 'const scannerR1Invalid = value./pattern/;'],
+  ['二個のdot', 'const scannerR1Invalid = value..name;'],
+  ['四個のdot', 'const scannerR1Invalid = value....name;'],
+  ['未完のdot', 'const scannerR1Invalid = value.;'],
+  ['未完のoptional dot', 'const scannerR1Invalid = value?.;'],
+  ['未完のspread', 'const scannerR1Invalid = (...);'],
+  ['先頭dot小数', 'const scannerR1Invalid = .5;'],
+  ['末尾dot数値', 'const scannerR1Invalid = 1.;'],
+  ['二個dot数値member', 'const scannerR1Invalid = 1..name;'],
+  ['指数表記', 'const scannerR1Invalid = 1e2;'],
+  ['二進数表記', 'const scannerR1Invalid = 0b10;'],
+  ['separator付き数値', 'const scannerR1Invalid = 1_000;'],
+  ['optional call', 'const scannerR1Invalid = value?.();'],
+  ['optional private name', 'const scannerR1Invalid = value?.#name;'],
+  ['optional tagged template', 'const scannerR1Invalid = value?.tag`x`;'],
+  ['return直後spread', 'function scannerR1Deferred() { return ...value; }'],
+  ['二項演算子直後spread', 'const scannerR1Invalid = left + ...right;'],
+  ['未閉鎖regex', 'const scannerR1Invalid = /unterminated;'],
+  ['未閉鎖regex class', 'const scannerR1Invalid = /[abc/;'],
+  ['括弧不一致', 'const scannerR1Invalid = ([value);'],
+  ['閉じbrace直後slash', 'const scannerR1Invalid = {} / divisor;'],
+]);
+
+for (const [index, [label, suffix]] of R1_SCANNER_REJECTED_SOURCES.entries()) {
+  test(`package R1 scannerは${label}を拒否する`, () => {
+    const report = checkPackageImportGraphSuffix(suffix, 200 + index);
+    assert.equal(
+      report.violations.some((entry) => entry.code === 'IMPLEMENTATION_MISMATCH'),
+      true,
+    );
+  });
+}
+
+test('package R1 scannerは実package 2 sourceを受理する', () => {
+  const report = packageCore.checkPresentationCaptionSemanticSourcePackageV001(
+    makeValidFixture(),
+  );
+  assert.equal(
+    report.violations.some((entry) => entry.code === 'IMPLEMENTATION_MISMATCH'),
+    false,
+  );
+});
 
 test('Gate A build・決定性・reportの違反は段階ごとの担当checkから発火する', () => {
   const evidenceBuild = makeValidFixture();
@@ -3462,6 +4103,163 @@ test('formal runnerはstaging・input recheck・preRenameの各gateで止まり�
   }
 });
 
+test('R3:formal artifactのopen/read失敗はPUBLICATION_FAILEDへ帰属し完全snapshot不一致は53/54/56を維持する', async () => {
+  const transportRows = [
+    ['staging-open', 'open', (pathValue, filesystem) =>
+      pathValue.startsWith(`${filesystem.paths.work}/`), 'artifact-01-open'],
+    ['staging-read', 'read-throw', (pathValue, filesystem) =>
+      pathValue.startsWith(`${filesystem.paths.work}/`), 'artifact-01-read'],
+    ['staging-post-read-fstat', 'post-read-stat-error', (pathValue, filesystem) =>
+      pathValue.startsWith(`${filesystem.paths.work}/`), 'artifact-01-read'],
+    ['staging-close', 'close', (pathValue, filesystem) =>
+      pathValue.startsWith(`${filesystem.paths.work}/`), 'artifact-01-read'],
+    ['published-open', 'open', (pathValue, filesystem) =>
+      pathValue.startsWith(`${filesystem.paths.formalRoot}/`), 'artifact-01-open'],
+    ['published-read', 'read-throw', (pathValue, filesystem) =>
+      pathValue.startsWith(`${filesystem.paths.formalRoot}/`), 'artifact-01-read'],
+    ['published-post-read-fstat', 'post-read-stat-error', (pathValue, filesystem) =>
+      pathValue.startsWith(`${filesystem.paths.formalRoot}/`), 'artifact-01-read'],
+    ['published-close', 'close', (pathValue, filesystem) =>
+      pathValue.startsWith(`${filesystem.paths.formalRoot}/`), 'artifact-01-read'],
+    ['input-recheck-read', 'read-throw', (pathValue, filesystem) =>
+      pathValue === resolve(WORKSPACE_ROOT, GATE_A_JOB_PATH)
+        && filesystem.operations.some(
+          (entry) => entry.operation === 'stagingObserved',
+        ), 'input-recheck'],
+  ];
+  for (const [suffix, kind, pathMatcher, expectedFailurePoint] of transportRows) {
+    const runnerJob = makeRunnerJob('formal-generation', `r3-${suffix}`);
+    const filesystem = createHybridRunnerFilesystem(runnerJob);
+    const adapter = withSyntheticReadFault(filesystem.adapter, {
+      kind,
+      matches: (pathValue, matchedOpenCount) =>
+        matchedOpenCount === 0 && pathMatcher(pathValue, filesystem),
+    });
+    const result = await packageRunner.runPresentationCaptionSemanticSourcePackageV001(
+      runnerJob.jobPath,
+      {
+        filesystemAdapter: adapter,
+        builderAdapter: createRunnerSpyBuilder().adapter,
+      },
+    );
+    assertTrustedReportResult(result, 1);
+    assert.equal(result.report.status, 'failed');
+    assert.equal(
+      result.report.violations.some((entry) => entry.code === 'PUBLICATION_FAILED'),
+      true,
+      suffix,
+    );
+    assert.equal(
+      result.report.publicationFailures.some(
+        (entry) => entry.failurePoint === expectedFailurePoint,
+      ),
+      true,
+      suffix,
+    );
+  }
+
+  for (const [suffix, expectedCode, matcher] of [
+    ['staging-complete-mismatch', 'PUBLICATION_STAGING_INVALID',
+      (pathValue, filesystem) => pathValue.startsWith(`${filesystem.paths.work}/`)],
+    ['published-complete-mismatch', 'PUBLISHED_PACKAGE_INVALID',
+      (pathValue, filesystem) => pathValue.startsWith(`${filesystem.paths.formalRoot}/`)],
+  ]) {
+    const runnerJob = makeRunnerJob('formal-generation', `r3-${suffix}`);
+    const filesystem = createHybridRunnerFilesystem(runnerJob);
+    const adapter = withSyntheticReadFault(filesystem.adapter, {
+      kind: 'post-read-stat',
+      matches: (pathValue) => matcher(pathValue, filesystem),
+    });
+    const result = await packageRunner.runPresentationCaptionSemanticSourcePackageV001(
+      runnerJob.jobPath,
+      {
+        filesystemAdapter: adapter,
+        builderAdapter: createRunnerSpyBuilder().adapter,
+      },
+    );
+    assertTrustedReportResult(result, 1);
+    assert.equal(result.report.status, 'failed');
+    assert.equal(
+      result.report.violations.some((entry) => entry.code === expectedCode),
+      true,
+      suffix,
+    );
+    assert.equal(
+      result.report.violations.some((entry) => entry.code === 'PUBLICATION_FAILED'),
+      false,
+      suffix,
+    );
+  }
+
+  const inputJob = makeRunnerJob('formal-generation', 'r3-input-complete-mismatch');
+  const inputFilesystem = createHybridRunnerFilesystem(inputJob, {
+    formalFailure: 'input',
+  });
+  const inputResult =
+    await packageRunner.runPresentationCaptionSemanticSourcePackageV001(
+      inputJob.jobPath,
+      {
+        filesystemAdapter: inputFilesystem.adapter,
+        builderAdapter: createRunnerSpyBuilder().adapter,
+      },
+    );
+  assertTrustedReportResult(inputResult, 1);
+  assert.equal(
+    inputResult.report.violations.some(
+      (entry) => entry.code === 'PUBLICATION_INPUT_CHANGED',
+    ),
+    true,
+  );
+  assert.equal(
+    inputResult.report.violations.some((entry) => entry.code === 'PUBLICATION_FAILED'),
+    false,
+  );
+});
+
+test('R3:publication失敗記録後のjobPreReport読取分類不能はexit 2かつpartial reportなしになる', async () => {
+  const runnerJob = makeRunnerJob(
+    'formal-generation',
+    'r3-publication-failure-then-job-pre-report-untrusted',
+  );
+  const filesystem = createHybridRunnerFilesystem(runnerJob);
+  const publicationFailureAdapter = withSyntheticReadFault(filesystem.adapter, {
+    kind: 'read-throw',
+    matches: (pathValue, matchedOpenCount) =>
+      matchedOpenCount === 0
+      && pathValue.startsWith(`${filesystem.paths.work}/`),
+  });
+  const jobPreReportFailureAdapter = withSyntheticReadFault(
+    publicationFailureAdapter,
+    {
+      kind: 'read-throw',
+      matches: (pathValue, matchedOpenCount) =>
+        matchedOpenCount === 0
+        && pathValue === filesystem.paths.job
+        && filesystem.operations.some(
+          (entry) => entry.operation === 'stagingObserved',
+        ),
+    },
+  );
+  const result = await packageRunner.runPresentationCaptionSemanticSourcePackageV001(
+    runnerJob.jobPath,
+    {
+      filesystemAdapter: jobPreReportFailureAdapter,
+      builderAdapter: createRunnerSpyBuilder().adapter,
+    },
+  );
+  assert.deepEqual(result, {
+    kind: 'untrusted',
+    exitCode: 2,
+    diagnostic: 'CAPTION_B1_PACKAGE_CLI_INTERNAL_REPORT_INVALID',
+  });
+  assert.equal(Object.hasOwn(result, 'report'), false);
+  assert.equal(Object.hasOwn(result, 'reportBytes'), false);
+  assert.equal(
+    filesystem.operations.some((entry) => entry.operation === 'stagingObserved'),
+    true,
+  );
+});
+
 test('runner sourceは公開derive入口をproductionと検査で共用しGate A checkerを直importしない', () => {
   assert.match(
     PACKAGE_RUNNER_SOURCE,
@@ -3675,7 +4473,7 @@ test('production CLIの実process入口も0件・2件を同じusage診断で拒�
   }
 });
 
-test('production CLI実processは合成preflightのexit 0/1をstdout/stderr排他で返し書込を残さない', () => {
+test('production CLI実processはproduction chunk投影を共用しexit 0/1をstdout/stderr排他で返す', async () => {
   const runnerJob = makeRunnerJob('read-only-preflight', 'actual-process');
   const jobDirectory = resolve(WORKSPACE_ROOT, PACKAGE_PREFLIGHT_JOB_ROOT);
   const jobAbsolutePath = resolve(WORKSPACE_ROOT, runnerJob.jobPath);
@@ -3683,11 +4481,19 @@ test('production CLI実processは合成preflightのexit 0/1をstdout/stderr排�
   let ownedJob = null;
 
   try {
-    ownedJob = acquireOwnedExclusiveFile(jobAbsolutePath);
-    rewriteOwnedFile(ownedJob, jobAbsolutePath, runnerJob.bytes);
+    const projection =
+      await packageRunner.inspectPresentationCaptionSemanticSourcePackagePreflightProjectionV001(
+        runnerJob.jobPath,
+        {
+          filesystemAdapter:
+            packageRunner
+              .createPresentationCaptionSemanticSourcePackageProductionFilesystemAdapterV001(),
+        },
+      );
+    assert.equal(projection.kind, 'trusted-projection');
     runnerJob.value.readOnlyGuard.expectedBeforeCanonicalSha256 =
-      canonicalSha256(snapshotRealWatchedTree(runnerJob.jobPath));
-
+      projection.expectedBeforeCanonicalSha256;
+    ownedJob = acquireOwnedExclusiveFile(jobAbsolutePath);
     rewriteOwnedFile(ownedJob, jobAbsolutePath, formalBytes(runnerJob.value));
     assertOwnedRegularFile(
       ownedJob.fd,

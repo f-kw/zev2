@@ -1349,7 +1349,15 @@ const materializeRunnerWorkspace = ({abstained = false, invalidRaw = null} = {})
   return {root, context};
 };
 
-const createMappedFilesystemAdapter = (fixtureRoot, readBuffers = []) => {
+const createMappedFilesystemAdapter = (
+  fixtureRoot,
+  readBuffers = [],
+  {
+    chunkMode = 'stream',
+    chunkObservations = [],
+  } = {},
+) => {
+  assert.equal(['stream', 'one', 'multi', 'uneven'].includes(chunkMode), true);
   const mappedPath = (inputPath) => {
     const suffix = relative(WORKSPACE_ROOT, inputPath);
     return suffix !== '..' && !suffix.startsWith(`..${sep}`)
@@ -1359,12 +1367,67 @@ const createMappedFilesystemAdapter = (fixtureRoot, readBuffers = []) => {
   return Object.freeze({
     openReadOnly: async (inputPath) => {
       const handle = await open(mappedPath(inputPath), 'r');
+      let readCalled = false;
       return Object.freeze({
         statBigInt: () => handle.stat({bigint: true}),
-        readAllBytes: async () => {
-          const bytes = await handle.readFile();
-          readBuffers.push(bytes);
-          return bytes;
+        readChunksV001: () => {
+          if (readCalled) {
+            throw new TypeError('mapped readChunksV001 may only be called once');
+          }
+          readCalled = true;
+          let iteratorCreated = false;
+          return Object.freeze({
+            [Symbol.asyncIterator]() {
+              if (iteratorCreated) {
+                throw new TypeError(
+                  'mapped chunk AsyncIterable may only be iterated once',
+                );
+              }
+              iteratorCreated = true;
+              return (async function* mappedChunks() {
+                const observed = [];
+                for await (const chunk of handle.createReadStream({
+                  start: 0,
+                  autoClose: false,
+                })) {
+                  const owned = Buffer.from(chunk);
+                  observed.push(owned);
+                  if (chunkMode === 'stream') yield owned;
+                }
+                const completeBytes = Buffer.concat(observed);
+                if (chunkMode !== 'stream' && completeBytes.length > 0) {
+                  const chunks = chunkMode === 'one'
+                    ? [completeBytes]
+                    : chunkMode === 'multi'
+                      ? [
+                        completeBytes.subarray(0, Math.max(1, completeBytes.length >> 1)),
+                        completeBytes.subarray(Math.max(1, completeBytes.length >> 1)),
+                      ].filter((chunk) => chunk.length > 0)
+                      : [
+                        completeBytes.subarray(0, Math.min(1, completeBytes.length)),
+                        completeBytes.subarray(1, Math.min(4, completeBytes.length)),
+                        completeBytes.subarray(4, Math.min(11, completeBytes.length)),
+                        completeBytes.subarray(Math.min(11, completeBytes.length)),
+                      ].filter((chunk) => chunk.length > 0);
+                  for (const chunk of chunks) yield Buffer.from(chunk);
+                  chunkObservations.push({
+                    inputPath,
+                    byteCount: completeBytes.length,
+                    fileSha256: sha(completeBytes),
+                    chunkCount: chunks.length,
+                  });
+                } else {
+                  chunkObservations.push({
+                    inputPath,
+                    byteCount: completeBytes.length,
+                    fileSha256: sha(completeBytes),
+                    chunkCount: chunkMode === 'stream' ? observed.length : 0,
+                  });
+                }
+                readBuffers.push(completeBytes);
+              })();
+            },
+          });
         },
         close: () => handle.close(),
       });
@@ -1393,6 +1456,112 @@ const createMappedFilesystemAdapter = (fixtureRoot, readBuffers = []) => {
     })).sort((left, right) =>
       left.name < right.name ? -1 : left.name > right.name ? 1 : 0),
     readlink: (inputPath) => readlink(mappedPath(inputPath)),
+  });
+};
+
+const withSemanticSyntheticReadFault = (
+  baseAdapter,
+  {
+    kind,
+    matches = () => true,
+  },
+) => {
+  let matched = false;
+  return Object.freeze({
+    ...baseAdapter,
+    openReadOnly: async (inputPath) => {
+      if (matched || !matches(inputPath)) {
+        return await baseAdapter.openReadOnly(inputPath);
+      }
+      matched = true;
+      if (kind === 'open') throw new TypeError('synthetic semantic open failure');
+      const baseHandle = await baseAdapter.openReadOnly(inputPath);
+      let readCalled = false;
+      let readCompleted = false;
+      let closed = false;
+      return Object.freeze({
+        statBigInt: async () => {
+          assert.equal(closed, false);
+          const value = await baseHandle.statBigInt();
+          if (kind === 'post-read-stat-error' && readCompleted) {
+            throw new TypeError('synthetic semantic post-read fstat failure');
+          }
+          return kind === 'post-read-stat' && readCompleted
+            ? Object.freeze({
+              dev: value.dev,
+              ino: value.ino + 1n,
+              size: value.size,
+              mtimeNs: value.mtimeNs,
+              nlink: value.nlink,
+              isFile: () => value.isFile(),
+              isDirectory: () => value.isDirectory(),
+              isSymbolicLink: () => value.isSymbolicLink(),
+            })
+            : value;
+        },
+        readChunksV001: () => {
+          assert.equal(closed, false);
+          if (readCalled) {
+            throw new TypeError('synthetic semantic readChunksV001 may only be called once');
+          }
+          readCalled = true;
+          if (kind === 'return-buffer') return Buffer.from('invalid', 'utf8');
+          if (kind === 'return-array') return [];
+          if (kind === 'return-promise') return Promise.resolve([]);
+          let iteratorCreated = false;
+          return Object.freeze({
+            [Symbol.asyncIterator]() {
+              if (iteratorCreated) {
+                throw new TypeError(
+                  'synthetic semantic AsyncIterable may only be iterated once',
+                );
+              }
+              iteratorCreated = true;
+              return (async function* semanticFaultChunks() {
+                if (kind === 'read-throw') {
+                  throw new TypeError('synthetic semantic chunk read failure');
+                }
+                let pending = null;
+                for await (const sourceChunk of baseHandle.readChunksV001()) {
+                  if (kind === 'non-buffer') {
+                    yield 'not-a-buffer';
+                    readCompleted = true;
+                    return;
+                  }
+                  if (kind === 'empty-chunk') {
+                    yield Buffer.alloc(0);
+                    readCompleted = true;
+                    return;
+                  }
+                  if (kind === 'short') {
+                    if (pending !== null) yield pending;
+                    pending = Buffer.from(sourceChunk);
+                  } else {
+                    yield sourceChunk;
+                  }
+                }
+                if (kind === 'short') {
+                  if (pending !== null && pending.length > 1) {
+                    yield pending.subarray(0, pending.length - 1);
+                  }
+                } else if (kind === 'over') {
+                  yield Buffer.from('x', 'utf8');
+                }
+                readCompleted = true;
+              })();
+            },
+          });
+        },
+        close: async () => {
+          assert.equal(closed, false);
+          closed = true;
+          await baseHandle.close();
+          if (kind === 'close') {
+            throw new TypeError('synthetic semantic close failure');
+          }
+        },
+      });
+    },
   });
 };
 
@@ -1878,6 +2047,118 @@ for (const [label, suffix] of [
       .snapshot.bytes.toString('utf8');
     replaceImplementationSource(context, 'semanticCore', `${original}${suffix}`);
     assertViolation(context, 'IMPLEMENTATION_MISMATCH', 'implementationBinding');
+  });
+}
+
+const checkSemanticImportGraphSuffix = (suffix) => {
+  const context = makeFixture();
+  const original = context.implementationInputs
+    .find((entry) => entry.role === 'semanticCore')
+    .snapshot.bytes.toString('utf8');
+  replaceImplementationSource(context, 'semanticCore', `${original}\n${suffix}\n`);
+  return checked(context);
+};
+
+const R1_SCANNER_ACCEPTED_SOURCES = Object.freeze([
+  [
+    '通常member・optional member後の除算',
+    [
+      'const scannerR1Member = value.property / divisor;',
+      'const scannerR1OptionalProperty = value?.property / divisor;',
+      'const scannerR1OptionalBracket = value?.[field] / divisor;',
+    ].join('\n'),
+  ],
+  [
+    'spread三形とspread直後のregex',
+    [
+      'const scannerR1SpreadCall = resolve(root, ...parts);',
+      'const scannerR1SpreadObject = ({...entry});',
+      'const scannerR1SpreadArray = [...entries];',
+      'const scannerR1SpreadRegex = consume(.../import\\(/g);',
+    ].join('\n'),
+  ],
+  [
+    'regex・comment・string・template raw内の禁止語',
+    [
+      'const scannerR1Regex = /import\\s*\\(|require\\s*\\(|readFileSync\\(/gu;',
+      "const scannerR1String = \"import('x') require('x') readFileSync('x')\";",
+      "const scannerR1Template = `import('x') require('x') ${value}`;",
+      "// import('x'); require('x'); readFileSync('x');",
+      "/* import('x'); require('x'); readFileSync('x'); */",
+      'const scannerR1CommentThenRegex = /* comment */ /require\\(/u.test(value);',
+      "const scannerR1TemplateRegex = `${/import\\(/u.test(value)}`;",
+    ].join('\n'),
+  ],
+  [
+    '固定済み数値五形',
+    'const scannerR1Numbers = [0, 57, 0.04, 1n, 0xff, 0o600];',
+  ],
+  [
+    '制御条件内とstatement開始のregex',
+    [
+      'if (/require\\(/u.test(value)) consume(value);',
+      'if (condition) /import\\(/u.test(value);',
+    ].join('\n'),
+  ],
+]);
+
+for (const [label, suffix] of R1_SCANNER_ACCEPTED_SOURCES) {
+  test(`semantic R1 scannerは${label}を受理する`, () => {
+    const result = checkSemanticImportGraphSuffix(suffix);
+    assert.equal(
+      result.violations.some((entry) => entry.code === 'IMPLEMENTATION_MISMATCH'),
+      false,
+    );
+  });
+}
+
+const R1_SCANNER_REJECTED_SOURCES = Object.freeze([
+  ['通常member経由file I/O', "const scannerR1Invalid = value.readFileSync('/tmp/x');"],
+  ['optional member経由file I/O', "const scannerR1Invalid = value?.readFileSync('/tmp/x');"],
+  ['spread内file I/O', "const scannerR1Invalid = consume(...readFileSync('/tmp/x'));"],
+  ['dynamic import', "const scannerR1Invalid = import('./x.mjs');"],
+  [
+    '関数内dynamic import',
+    "function scannerR1Deferred() { return import('./x.mjs'); }",
+  ],
+  ['spread内dynamic import', "const scannerR1Invalid = consume(...import('./x.mjs'));"],
+  ['template式内dynamic import', "const scannerR1Invalid = `${import('./x.mjs')}`;"],
+  ['property名のdynamic import', 'const scannerR1Invalid = object.import();'],
+  ['CommonJS require', "const scannerR1Invalid = require('node:fs');"],
+  ['arrow内CommonJS require', "const scannerR1Deferred = () => require('node:fs');"],
+  ['spread内CommonJS require', "const scannerR1Invalid = consume(...require('node:fs'));"],
+  ['template式内CommonJS require', "const scannerR1Invalid = `${require('node:fs')}`;"],
+  ['optional property名のrequire', 'const scannerR1Invalid = object?.require();'],
+  ['member待機中のslash', 'const scannerR1Invalid = value./pattern/;'],
+  ['二個のdot', 'const scannerR1Invalid = value..name;'],
+  ['四個のdot', 'const scannerR1Invalid = value....name;'],
+  ['未完のdot', 'const scannerR1Invalid = value.;'],
+  ['未完のoptional dot', 'const scannerR1Invalid = value?.;'],
+  ['未完のspread', 'const scannerR1Invalid = (...);'],
+  ['先頭dot小数', 'const scannerR1Invalid = .5;'],
+  ['末尾dot数値', 'const scannerR1Invalid = 1.;'],
+  ['二個dot数値member', 'const scannerR1Invalid = 1..name;'],
+  ['指数表記', 'const scannerR1Invalid = 1e2;'],
+  ['二進数表記', 'const scannerR1Invalid = 0b10;'],
+  ['separator付き数値', 'const scannerR1Invalid = 1_000;'],
+  ['optional call', 'const scannerR1Invalid = value?.();'],
+  ['optional private name', 'const scannerR1Invalid = value?.#name;'],
+  ['optional tagged template', 'const scannerR1Invalid = value?.tag`x`;'],
+  ['return直後spread', 'function scannerR1Deferred() { return ...value; }'],
+  ['二項演算子直後spread', 'const scannerR1Invalid = left + ...right;'],
+  ['未閉鎖regex', 'const scannerR1Invalid = /unterminated;'],
+  ['未閉鎖regex class', 'const scannerR1Invalid = /[abc/;'],
+  ['括弧不一致', 'const scannerR1Invalid = ([value);'],
+  ['閉じbrace直後slash', 'const scannerR1Invalid = {} / divisor;'],
+]);
+
+for (const [label, suffix] of R1_SCANNER_REJECTED_SOURCES) {
+  test(`semantic R1 scannerは${label}を拒否する`, () => {
+    const result = checkSemanticImportGraphSuffix(suffix);
+    assert.equal(
+      result.violations.some((entry) => entry.code === 'IMPLEMENTATION_MISMATCH'),
+      true,
+    );
   });
 }
 
@@ -2459,6 +2740,174 @@ test('production filesystem adapterは読み取り専用5入口だけを公開�
   ]);
 });
 
+test('semantic production読取handleは固定3入口・同期one-use・AsyncIterableで同一内容を返す', async () => {
+  const adapter =
+    semanticRunner.createPresentationCaptionSemanticOutputProductionFilesystemAdapterV001();
+  const absolutePath = resolve(
+    WORKSPACE_ROOT,
+    'evals/clip_composition/run_presentation_caption_semantic_output_check_v001.mjs',
+  );
+  const expectedBytes = readFileSync(absolutePath);
+  const handle = await adapter.openReadOnly(absolutePath);
+  assert.equal(Object.isFrozen(handle), true);
+  assert.deepEqual(Object.keys(handle), [
+    'statBigInt',
+    'readChunksV001',
+    'close',
+  ]);
+  const before = await handle.statBigInt();
+  const chunks = handle.readChunksV001();
+  assert.equal(Buffer.isBuffer(chunks), false);
+  assert.equal(Array.isArray(chunks), false);
+  assert.equal(typeof chunks.then, 'undefined');
+  assert.equal(typeof chunks[Symbol.asyncIterator], 'function');
+  assert.throws(
+    () => handle.readChunksV001(),
+    /readChunksV001 may only be called once/u,
+  );
+  const iterator = chunks[Symbol.asyncIterator]();
+  assert.throws(
+    () => chunks[Symbol.asyncIterator](),
+    /chunk AsyncIterable may only be iterated once/u,
+  );
+  const observed = [];
+  for (;;) {
+    const item = await iterator.next();
+    if (item.done) break;
+    observed.push(Buffer.from(item.value));
+  }
+  const after = await handle.statBigInt();
+  await handle.close();
+  assert.equal(Buffer.concat(observed).equals(expectedBytes), true);
+  assert.equal(before.size, BigInt(expectedBytes.length));
+  assert.equal(after.size, before.size);
+  assert.equal(after.dev, before.dev);
+  assert.equal(after.ino, before.ino);
+});
+
+test('R3:semanticは空fileを0 chunkで受けone・multi・unevenでも同じhash/countとreportになる', async () => {
+  const fixture = materializeRunnerWorkspace();
+  try {
+    const emptyRepositoryPath =
+      `${fixture.context.job.value.readOnlyGuard.watchedRoot}/`
+      + 'semantic-r3-empty-v001.bin';
+    writeFileSync(resolve(fixture.root, emptyRepositoryPath), Buffer.alloc(0));
+    const watched = scanMonitoredTree(
+      fixture.root,
+      fixture.context.job.value.readOnlyGuard.watchedRoot,
+      JOB_PATH,
+    );
+    fixture.context.job.value.readOnlyGuard.expectedBeforeCanonicalSha256 =
+      canonicalSha(watched);
+    writeWorkspaceFile(
+      fixture.root,
+      JOB_PATH,
+      serialized(fixture.context.job.value),
+    );
+
+    const rows = [];
+    for (const chunkMode of ['one', 'multi', 'uneven']) {
+      const chunkObservations = [];
+      const result = await semanticRunner.runPresentationCaptionSemanticOutputCheckV001(
+        JOB_PATH,
+        {
+          filesystemAdapter: createMappedFilesystemAdapter(
+            fixture.root,
+            [],
+            {chunkMode, chunkObservations},
+          ),
+          builderAdapter: Object.freeze({
+            buildCompilerInput:
+              semanticCore.buildPresentationCaptionSemanticCompilerInputV001,
+          }),
+        },
+      );
+      assert.equal(result.kind, 'trusted-report', chunkMode);
+      assert.equal(result.exitCode, 0, chunkMode);
+      rows.push({
+        chunkMode,
+        reportBytes: result.reportBytes,
+        observations: chunkObservations,
+      });
+      const emptyObservations = chunkObservations.filter(
+        (entry) => entry.inputPath === resolve(WORKSPACE_ROOT, emptyRepositoryPath),
+      );
+      assert.equal(emptyObservations.length > 0, true, chunkMode);
+      assert.equal(
+        emptyObservations.every((entry) =>
+          entry.byteCount === 0
+          && entry.fileSha256 === sha(Buffer.alloc(0))
+          && entry.chunkCount === 0),
+        true,
+        chunkMode,
+      );
+    }
+    assert.equal(rows[0].reportBytes.equals(rows[1].reportBytes), true);
+    assert.equal(rows[0].reportBytes.equals(rows[2].reportBytes), true);
+    const projection = (row) => row.observations.map((entry) => ({
+      inputPath: entry.inputPath,
+      byteCount: entry.byteCount,
+      fileSha256: entry.fileSha256,
+    }));
+    assert.deepEqual(projection(rows[0]), projection(rows[1]));
+    assert.deepEqual(projection(rows[0]), projection(rows[2]));
+    assert.equal(
+      rows[0].observations.every((entry) =>
+        entry.chunkCount === (entry.byteCount === 0 ? 0 : 1)),
+      true,
+    );
+    assert.equal(rows[1].observations.some((entry) => entry.chunkCount > 1), true);
+    assert.equal(rows[2].observations.some((entry) => entry.chunkCount > 1), true);
+  } finally {
+    rmSync(fixture.root, {recursive: true, force: true});
+  }
+});
+
+test('R3:semantic chunk transport不正はexit 2かつpartial reportなしへ閉じる', async () => {
+  for (const kind of [
+    'open',
+    'return-buffer',
+    'return-array',
+    'return-promise',
+    'non-buffer',
+    'empty-chunk',
+    'read-throw',
+    'post-read-stat-error',
+    'short',
+    'over',
+    'close',
+  ]) {
+    const fixture = materializeRunnerWorkspace();
+    try {
+      const base = createMappedFilesystemAdapter(fixture.root);
+      const filesystemAdapter = withSemanticSyntheticReadFault(base, {
+        kind,
+        matches: (inputPath) =>
+          inputPath === resolve(WORKSPACE_ROOT, RAW_PATH),
+      });
+      const result = await semanticRunner.runPresentationCaptionSemanticOutputCheckV001(
+        JOB_PATH,
+        {
+          filesystemAdapter,
+          builderAdapter: Object.freeze({
+            buildCompilerInput:
+              semanticCore.buildPresentationCaptionSemanticCompilerInputV001,
+          }),
+        },
+      );
+      assert.deepEqual(result, {
+        kind: 'untrusted',
+        exitCode: 2,
+        diagnostic: 'CAPTION_B1_SEMANTIC_CLI_INTERNAL_REPORT_INVALID',
+      }, kind);
+      assert.equal(Object.hasOwn(result, 'report'), false, kind);
+      assert.equal(Object.hasOwn(result, 'reportBytes'), false, kind);
+    } finally {
+      rmSync(fixture.root, {recursive: true, force: true});
+    }
+  }
+});
+
 test('CLIは位置引数不成立を固定diagnosticとexit 2で返す', async () => {
   const stdout = [];
   const stderr = [];
@@ -2575,7 +3024,7 @@ test('semantic coreはstrict JSON・formal・canonical・hash・57 code列をpac
   assert.doesNotMatch(runnerSource, /\bJSON\.parse\s*\(/u);
 });
 
-test('B1実行import graphは実8 fileのbuiltin集合とlocal辺へ完全一致する', async () => {
+test('B1実行import graphは実8 fileのstatic builtin集合とlocal辺へ完全一致する', async () => {
   const expected = new Map([
     ['presentation_caption_semantic_source_package_v001.mjs', [
       'node:crypto',
@@ -2632,8 +3081,6 @@ test('B1実行import graphは実8 fileのbuiltin集合とlocal辺へ完全一致
     while ((match = pattern.exec(source)) !== null) actual.push(match[1]);
     assert.deepEqual([...actual].sort(), [...expectedSpecifiers].sort(), fileName);
     assert.equal(new Set(actual).size, actual.length, `${fileName}: duplicate import`);
-    assert.doesNotMatch(source, /\bimport\s*\(/u, `${fileName}: dynamic import`);
-    assert.doesNotMatch(source, /\brequire\s*\(/u, `${fileName}: require`);
     assert.doesNotMatch(source, /^await\b/mu, `${fileName}: top-level await`);
     assert.equal(
       actual.includes('./presentation_renderer_trust_v001.mjs')
@@ -2642,6 +3089,32 @@ test('B1実行import graphは実8 fileのbuiltin集合とlocal辺へ完全一致
       `${fileName}: renderer trust execution import`,
     );
   }
+});
+
+test('packageとsemanticのR1 scanner正本はbyte単位で同期する', async () => {
+  const begin = '// EXECUTABLE_JAVASCRIPT_SCANNER_GRAMMAR_V001_BEGIN';
+  const end = '// EXECUTABLE_JAVASCRIPT_SCANNER_GRAMMAR_V001_END';
+  const scannerBlock = (source, label) => {
+    const startIndex = source.indexOf(begin);
+    const endIndex = source.indexOf(end);
+    assert.equal(startIndex >= 0, true, `${label}: begin marker`);
+    assert.equal(endIndex > startIndex, true, `${label}: end marker`);
+    assert.equal(source.indexOf(begin, startIndex + begin.length), -1, `${label}: one begin`);
+    assert.equal(source.indexOf(end, endIndex + end.length), -1, `${label}: one end`);
+    return source.slice(startIndex, endIndex + end.length);
+  };
+  const packageSource = await readFile(
+    new URL('./presentation_caption_semantic_source_package_v001.mjs', import.meta.url),
+    'utf8',
+  );
+  const semanticSource = await readFile(
+    new URL('./presentation_caption_semantic_output_v001.mjs', import.meta.url),
+    'utf8',
+  );
+  assert.equal(
+    scannerBlock(packageSource, 'package'),
+    scannerBlock(semanticSource, 'semantic'),
+  );
 });
 
 test('productionのmodule-load file I/O検査を実際のsemantic実装7 fileへ適用する', () => {

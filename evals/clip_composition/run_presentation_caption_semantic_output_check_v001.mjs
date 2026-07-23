@@ -129,6 +129,86 @@ const sameStat = (left, right) => left.kind === right.kind
   && left.size === right.size
   && left.mtimeNs === right.mtimeNs
   && left.nlink === right.nlink;
+const READ_ONLY_CHUNK_HANDLE_FIELDS = Object.freeze([
+  'statBigInt',
+  'readChunksV001',
+  'close',
+]);
+const isPlainRecord = (value) => value !== null
+  && typeof value === 'object'
+  && !Array.isArray(value)
+  && (Object.getPrototypeOf(value) === Object.prototype
+    || Object.getPrototypeOf(value) === null);
+const validReadOnlyChunkHandle = (value) => Object.isFrozen(value)
+  && isPlainRecord(value)
+  && Object.keys(value).length === READ_ONLY_CHUNK_HANDLE_FIELDS.length
+  && Object.keys(value).every(
+    (key, index) => key === READ_ONLY_CHUNK_HANDLE_FIELDS[index],
+  )
+  && READ_ONLY_CHUNK_HANDLE_FIELDS.every((field) => typeof value[field] === 'function');
+
+const consumeReadOnlyChunksV001 = async (handle, collectBytes) => {
+  if (!validReadOnlyChunkHandle(handle) || typeof collectBytes !== 'boolean') {
+    throw new TypeError('invalid read-only chunk handle');
+  }
+  const chunks = handle.readChunksV001();
+  if (chunks === null
+    || typeof chunks !== 'object'
+    || Buffer.isBuffer(chunks)
+    || Array.isArray(chunks)
+    || typeof chunks.then === 'function'
+    || typeof chunks[Symbol.asyncIterator] !== 'function') {
+    throw new TypeError('readChunksV001 must return an AsyncIterable');
+  }
+
+  const hash = createHash('sha256');
+  const retainedChunks = collectBytes ? [] : null;
+  let byteCount = 0n;
+  for await (const chunk of chunks) {
+    if (!Buffer.isBuffer(chunk) || chunk.length === 0) {
+      throw new TypeError('readChunksV001 must yield non-empty Buffers');
+    }
+    const ownedChunk = Buffer.from(chunk);
+    hash.update(ownedChunk);
+    byteCount += BigInt(ownedChunk.length);
+    if (retainedChunks !== null) retainedChunks.push(ownedChunk);
+  }
+
+  const bytes = retainedChunks === null ? null : Buffer.concat(retainedChunks);
+  if (bytes !== null && BigInt(bytes.length) !== byteCount) {
+    throw new TypeError('retained chunk byte count mismatch');
+  }
+  return {
+    bytes,
+    fileSha256: hash.digest('hex'),
+    byteCount,
+  };
+};
+
+const readOpenedChunkHandleV001 = async (
+  handle,
+  pathLstatBeforeOpen,
+  collectBytes,
+) => {
+  if (!validReadOnlyChunkHandle(handle)) {
+    throw new TypeError('invalid read-only chunk handle');
+  }
+  const fdStatAfterOpen = statShape(await handle.statBigInt());
+  const content = await consumeReadOnlyChunksV001(handle, collectBytes);
+  const fdStatAfterRead = statShape(await handle.statBigInt());
+  const completeStableSnapshot = sameStat(pathLstatBeforeOpen, fdStatAfterOpen)
+    && sameStat(fdStatAfterOpen, fdStatAfterRead);
+  if (completeStableSnapshot
+    && content.byteCount !== BigInt(fdStatAfterOpen.size)) {
+    throw new TypeError('chunk byte count does not match stable file size');
+  }
+  return {
+    bytes: content.bytes,
+    fileSha256: content.fileSha256,
+    fdStatAfterOpen,
+    fdStatAfterRead,
+  };
+};
 
 const adapterFields = [
   'openReadOnly',
@@ -142,9 +222,26 @@ export function createPresentationCaptionSemanticOutputProductionFilesystemAdapt
   return Object.freeze({
     openReadOnly: async (pathValue) => {
       const handle = await open(pathValue, constants.O_RDONLY | constants.O_NOFOLLOW);
+      let readCalled = false;
       return Object.freeze({
         statBigInt: () => handle.stat({bigint: true}),
-        readAllBytes: () => handle.readFile(),
+        readChunksV001: () => {
+          if (readCalled) throw new TypeError('readChunksV001 may only be called once');
+          readCalled = true;
+          let iteratorCreated = false;
+          return Object.freeze({
+            [Symbol.asyncIterator]() {
+              if (iteratorCreated) {
+                throw new TypeError('chunk AsyncIterable may only be iterated once');
+              }
+              iteratorCreated = true;
+              return handle.createReadStream({
+                start: 0,
+                autoClose: false,
+              })[Symbol.asyncIterator]();
+            },
+          });
+        },
         close: () => handle.close(),
       });
     },
@@ -238,8 +335,14 @@ const readStableWorkspace = async (
   role,
   repositoryPath,
   adapter,
-  {preserveRegularHardlink = false} = {},
+  {
+    preserveRegularHardlink = false,
+    collectBytes = true,
+  } = {},
 ) => {
+  if (typeof preserveRegularHardlink !== 'boolean' || typeof collectBytes !== 'boolean') {
+    throw new TypeError('invalid stable read options');
+  }
   const inspected = await inspectWorkspaceResolution(root, repositoryPath, adapter);
   if (inspected.status === 'lexically-rejected') {
     return {role, path: repositoryPath, status: 'lexically-rejected', snapshot: null};
@@ -267,11 +370,9 @@ const readStableWorkspace = async (
   let handle;
   try {
     handle = await adapter.openReadOnly(inspected.absolutePath);
-    const afterOpen = statShape(await handle.statBigInt());
-    const bytes = await handle.readAllBytes();
-    const afterRead = statShape(await handle.statBigInt());
-    if (!Buffer.isBuffer(bytes)) throw new TypeError('read must return Buffer');
-    if (!sameStat(before, afterOpen) || !sameStat(before, afterRead)) {
+    const content = await readOpenedChunkHandleV001(handle, before, collectBytes);
+    if (!sameStat(before, content.fdStatAfterOpen)
+      || !sameStat(before, content.fdStatAfterRead)) {
       return {
         role,
         path: repositoryPath,
@@ -287,16 +388,16 @@ const readStableWorkspace = async (
       status: 'read',
       snapshot: {
         path: repositoryPath,
-        bytes,
-        fileSha256: shaBytes(bytes),
+        ...(collectBytes ? {bytes: content.bytes} : {}),
+        fileSha256: content.fileSha256,
         pathLstatBeforeOpen: before,
-        fdStatAfterOpen: afterOpen,
-        fdStatAfterRead: afterRead,
+        fdStatAfterOpen: content.fdStatAfterOpen,
+        fdStatAfterRead: content.fdStatAfterRead,
         pathResolutionObservation: inspected.observation,
       },
     };
   } finally {
-    if (handle) await handle.close();
+    if (handle && typeof handle.close === 'function') await handle.close();
   }
 };
 
@@ -320,11 +421,9 @@ const readNodeBinary = async (adapter) => {
   let handle;
   try {
     handle = await adapter.openReadOnly(target);
-    const afterOpen = statShape(await handle.statBigInt());
-    const bytes = await handle.readAllBytes();
-    const afterRead = statShape(await handle.statBigInt());
-    if (!sameStat(lstatBefore, afterOpen)
-      || !sameStat(lstatBefore, afterRead)
+    const content = await readOpenedChunkHandleV001(handle, lstatBefore, true);
+    if (!sameStat(lstatBefore, content.fdStatAfterOpen)
+      || !sameStat(lstatBefore, content.fdStatAfterRead)
       || lstatBefore.kind !== 'regular-file'
       || lstatBefore.nlink !== '1') {
       throw new TypeError('node binary changed');
@@ -334,11 +433,11 @@ const readNodeBinary = async (adapter) => {
       status: 'read',
       snapshot: {
         path: target,
-        bytes,
-        fileSha256: shaBytes(bytes),
+        bytes: content.bytes,
+        fileSha256: content.fileSha256,
         pathLstatBeforeOpen: lstatBefore,
-        fdStatAfterOpen: afterOpen,
-        fdStatAfterRead: afterRead,
+        fdStatAfterOpen: content.fdStatAfterOpen,
+        fdStatAfterRead: content.fdStatAfterRead,
         externalPathResolutionObservation: {
           inputAbsolutePath: input,
           targetRealPath: target,
@@ -402,7 +501,13 @@ const monitorTree = async (root, repositoryRoot, excludedPath, adapter) => {
       });
       return;
     }
-    const observation = await readStableWorkspace(root, 'monitor', relativePath, adapter);
+    const observation = await readStableWorkspace(
+      root,
+      'monitor',
+      relativePath,
+      adapter,
+      {collectBytes: false},
+    );
     if (observation.status !== 'read') throw new TypeError('monitored file unstable');
     entries.push({
       path: relativePath,

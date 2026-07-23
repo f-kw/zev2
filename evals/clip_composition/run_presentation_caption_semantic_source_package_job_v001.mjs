@@ -119,6 +119,127 @@ const isDenseArray = (value) => Array.isArray(value)
 const compareUtf16 = (left, right) => left < right ? -1 : left > right ? 1 : 0;
 const sha256Bytes = (bytes) => createHash('sha256').update(bytes).digest('hex');
 const toPosix = (value) => value.split(sep).join('/');
+const READ_ONLY_CHUNK_HANDLE_FIELDS = Object.freeze([
+  'statBigInt',
+  'readChunksV001',
+  'close',
+]);
+
+const validReadOnlyChunkHandle = (value) => Object.isFrozen(value)
+  && hasExactKeys(value, READ_ONLY_CHUNK_HANDLE_FIELDS)
+  && READ_ONLY_CHUNK_HANDLE_FIELDS.every((field) => typeof value[field] === 'function');
+
+const consumeReadOnlyChunksV001 = async (handle, collectBytes) => {
+  if (!validReadOnlyChunkHandle(handle) || typeof collectBytes !== 'boolean') {
+    throw new TypeError('invalid read-only chunk handle');
+  }
+  const chunks = handle.readChunksV001();
+  if (chunks === null
+    || typeof chunks !== 'object'
+    || Buffer.isBuffer(chunks)
+    || Array.isArray(chunks)
+    || typeof chunks.then === 'function'
+    || typeof chunks[Symbol.asyncIterator] !== 'function') {
+    throw new TypeError('readChunksV001 must return an AsyncIterable');
+  }
+
+  const hash = createHash('sha256');
+  const retainedChunks = collectBytes ? [] : null;
+  let byteCount = 0n;
+  for await (const chunk of chunks) {
+    if (!Buffer.isBuffer(chunk) || chunk.length === 0) {
+      throw new TypeError('readChunksV001 must yield non-empty Buffers');
+    }
+    const ownedChunk = Buffer.from(chunk);
+    hash.update(ownedChunk);
+    byteCount += BigInt(ownedChunk.length);
+    if (retainedChunks !== null) retainedChunks.push(ownedChunk);
+  }
+
+  const bytes = retainedChunks === null ? null : Buffer.concat(retainedChunks);
+  if (bytes !== null && BigInt(bytes.length) !== byteCount) {
+    throw new TypeError('retained chunk byte count mismatch');
+  }
+  return {
+    bytes,
+    fileSha256: hash.digest('hex'),
+    byteCount,
+  };
+};
+
+const readOpenedChunkHandleV001 = async (
+  handle,
+  pathLstatBeforeOpen,
+  collectBytes,
+) => {
+  if (!validReadOnlyChunkHandle(handle)) {
+    throw new TypeError('invalid read-only chunk handle');
+  }
+  const fdStatAfterOpen = statObservation(await handle.statBigInt());
+  const content = await consumeReadOnlyChunksV001(handle, collectBytes);
+  const fdStatAfterRead = statObservation(await handle.statBigInt());
+
+  const completeStableSnapshot =
+    sameRegularFileStatObservation(pathLstatBeforeOpen, fdStatAfterOpen)
+    && sameRegularFileStatObservation(fdStatAfterOpen, fdStatAfterRead);
+  if (completeStableSnapshot
+    && content.byteCount !== BigInt(fdStatAfterOpen.size)) {
+    throw new TypeError('chunk byte count does not match stable file size');
+  }
+  return {
+    bytes: content.bytes,
+    fileSha256: content.fileSha256,
+    fdStatAfterOpen,
+    fdStatAfterRead,
+  };
+};
+const READ_ONLY_OPERATION_STAGE = Symbol('presentationReadOnlyOperationStage');
+const stagedReadOnlyError = (stage, cause) => {
+  const error = new TypeError(`read-only ${stage} operation failed`, {cause});
+  Object.defineProperty(error, READ_ONLY_OPERATION_STAGE, {
+    value: stage,
+    enumerable: false,
+    configurable: false,
+    writable: false,
+  });
+  return error;
+};
+const openReadOnlyChunkHandleV001 = async (
+  filesystemAdapter,
+  absolutePath,
+) => {
+  try {
+    return await filesystemAdapter.openReadOnly(absolutePath);
+  } catch (error) {
+    throw stagedReadOnlyError('open', error);
+  }
+};
+const readAndCloseChunkHandleV001 = async (
+  handle,
+  pathLstatBeforeOpen,
+  collectBytes,
+) => {
+  let content = null;
+  let failure = null;
+  try {
+    content = await readOpenedChunkHandleV001(
+      handle,
+      pathLstatBeforeOpen,
+      collectBytes,
+    );
+  } catch (error) {
+    failure = stagedReadOnlyError('read', error);
+  }
+  if (typeof handle?.close === 'function') {
+    try {
+      await handle.close();
+    } catch (error) {
+      if (failure === null) failure = stagedReadOnlyError('read', error);
+    }
+  }
+  if (failure !== null) throw failure;
+  return content;
+};
 
 const diagnosticResult = (diagnostic) => Object.freeze({
   kind: 'untrusted',
@@ -237,9 +358,26 @@ export const createPresentationCaptionSemanticSourcePackageProductionFilesystemA
         pathValue,
         constants.O_RDONLY | constants.O_NOFOLLOW,
       );
+      let readCalled = false;
       return Object.freeze({
         statBigInt: () => handle.stat({bigint: true}),
-        readAllBytes: () => handle.readFile(),
+        readChunksV001: () => {
+          if (readCalled) throw new TypeError('readChunksV001 may only be called once');
+          readCalled = true;
+          let iteratorCreated = false;
+          return Object.freeze({
+            [Symbol.asyncIterator]() {
+              if (iteratorCreated) {
+                throw new TypeError('chunk AsyncIterable may only be iterated once');
+              }
+              iteratorCreated = true;
+              return handle.createReadStream({
+                start: 0,
+                autoClose: false,
+              })[Symbol.asyncIterator]();
+            },
+          });
+        },
         close: () => handle.close(),
       });
     },
@@ -382,7 +520,11 @@ const readStableWorkspaceObservation = async (
   repositoryPath,
   workspaceRoot,
   filesystemAdapter,
+  {collectBytes = true} = {},
 ) => {
+  if (typeof collectBytes !== 'boolean') {
+    throw new TypeError('collectBytes must be boolean');
+  }
   if (relativePathParts(repositoryPath) === null) {
     return {
       role,
@@ -400,14 +542,19 @@ const readStableWorkspaceObservation = async (
     if (error?.code === 'ENOENT') {
       return {role, path: repositoryPath, status: 'missing', snapshot: null};
     }
-    throw error;
+    throw stagedReadOnlyError('open', error);
   }
 
-  const resolution = await inspectWorkspaceResolution(
-    repositoryPath,
-    workspaceRoot,
-    filesystemAdapter,
-  );
+  let resolution;
+  try {
+    resolution = await inspectWorkspaceResolution(
+      repositoryPath,
+      workspaceRoot,
+      filesystemAdapter,
+    );
+  } catch (error) {
+    throw stagedReadOnlyError('open', error);
+  }
   if (resolution === null) {
     return {
       role,
@@ -441,33 +588,27 @@ const readStableWorkspaceObservation = async (
     };
   }
 
-  let handle;
-  let closeAttempted = false;
-  try {
-    handle = await filesystemAdapter.openReadOnly(absolutePath);
-    const fdStatAfterOpen = statObservation(await handle.statBigInt());
-    const bytes = Buffer.from(await handle.readAllBytes());
-    const fdStatAfterRead = statObservation(await handle.statBigInt());
-    closeAttempted = true;
-    await handle.close();
-    handle = null;
-    return {
-      role,
-      path: repositoryPath,
-      status: 'read',
-      snapshot: {
-        path: repositoryPath,
-        bytes,
-        fileSha256: sha256Bytes(bytes),
-        pathLstatBeforeOpen,
-        fdStatAfterOpen,
-        fdStatAfterRead,
-        pathResolutionObservation: resolution.observation,
-      },
-    };
-  } finally {
-    if (handle !== undefined && handle !== null && !closeAttempted) await handle.close();
-  }
+  const handle = await openReadOnlyChunkHandleV001(filesystemAdapter, absolutePath);
+  const content = await readAndCloseChunkHandleV001(
+    handle,
+    pathLstatBeforeOpen,
+    collectBytes,
+  );
+  const snapshot = {
+    path: repositoryPath,
+    ...(collectBytes ? {bytes: content.bytes} : {}),
+    fileSha256: content.fileSha256,
+    pathLstatBeforeOpen,
+    fdStatAfterOpen: content.fdStatAfterOpen,
+    fdStatAfterRead: content.fdStatAfterRead,
+    pathResolutionObservation: resolution.observation,
+  };
+  return {
+    role,
+    path: repositoryPath,
+    status: 'read',
+    snapshot,
+  };
 };
 
 const inspectExternalResolution = async (absolutePath, filesystemAdapter) => {
@@ -549,32 +690,25 @@ const readNodeBinaryObservation = async (filesystemAdapter) => {
     };
   }
 
-  let handle;
-  let closeAttempted = false;
-  try {
-    handle = await filesystemAdapter.openReadOnly(resolvedNodePath);
-    const fdStatAfterOpen = statObservation(await handle.statBigInt());
-    const bytes = Buffer.from(await handle.readAllBytes());
-    const fdStatAfterRead = statObservation(await handle.statBigInt());
-    closeAttempted = true;
-    await handle.close();
-    handle = null;
-    return {
-      role: 'nodeBinary',
-      status: 'read',
-      snapshot: {
-        path: resolvedNodePath,
-        bytes,
-        fileSha256: sha256Bytes(bytes),
-        pathLstatBeforeOpen,
-        fdStatAfterOpen,
-        fdStatAfterRead,
-        externalPathResolutionObservation: resolution,
-      },
-    };
-  } finally {
-    if (handle !== undefined && handle !== null && !closeAttempted) await handle.close();
-  }
+  const handle = await openReadOnlyChunkHandleV001(filesystemAdapter, resolvedNodePath);
+  const content = await readAndCloseChunkHandleV001(
+    handle,
+    pathLstatBeforeOpen,
+    true,
+  );
+  return {
+    role: 'nodeBinary',
+    status: 'read',
+    snapshot: {
+      path: resolvedNodePath,
+      bytes: content.bytes,
+      fileSha256: content.fileSha256,
+      pathLstatBeforeOpen,
+      fdStatAfterOpen: content.fdStatAfterOpen,
+      fdStatAfterRead: content.fdStatAfterRead,
+      externalPathResolutionObservation: resolution,
+    },
+  };
 };
 
 const readDecodedObservation = (observation) => {
@@ -636,6 +770,7 @@ const snapshotWatchedTree = async (
           repositoryPath,
           workspaceRoot,
           filesystemAdapter,
+          {collectBytes: false},
         );
         if (!isStableRegularFileReadObservation(observation)) {
           throw new TypeError('watched file unreadable or changed during read');
@@ -1863,38 +1998,29 @@ const artifactRead = async (
             ? workspaceRoot
             : workspaceAbsolutePath(workspaceRoot, entry.workspaceRelativePath)
         )
-      ));
+    ));
     if (onlyHardlinkIsUnsafe) {
-      let handle;
-      let closeAttempted = false;
-      try {
-        handle = await filesystemAdapter.openReadOnly(absolutePath);
-        const fdStatAfterOpen = statObservation(await handle.statBigInt());
-        const bytes = Buffer.from(await handle.readAllBytes());
-        const fdStatAfterRead = statObservation(await handle.statBigInt());
-        closeAttempted = true;
-        await handle.close();
-        handle = null;
-        return {
-          fileName,
-          status: 'read',
-          snapshot: {
-            path: repositoryPath,
-            bytes,
-            fileSha256: sha256Bytes(bytes),
-            pathLstatBeforeOpen: observation.pathLstatBeforeOpen,
-            fdStatAfterOpen,
-            fdStatAfterRead,
-            pathResolutionObservation: observation.pathResolutionObservation,
-          },
-          observedKind: 'regular-file',
-          failurePoint: null,
-        };
-      } finally {
-        if (handle !== undefined && handle !== null && !closeAttempted) {
-          await handle.close();
-        }
-      }
+      const handle = await openReadOnlyChunkHandleV001(filesystemAdapter, absolutePath);
+      const content = await readAndCloseChunkHandleV001(
+        handle,
+        observation.pathLstatBeforeOpen,
+        true,
+      );
+      return {
+        fileName,
+        status: 'read',
+        snapshot: {
+          path: repositoryPath,
+          bytes: content.bytes,
+          fileSha256: content.fileSha256,
+          pathLstatBeforeOpen: observation.pathLstatBeforeOpen,
+          fdStatAfterOpen: content.fdStatAfterOpen,
+          fdStatAfterRead: content.fdStatAfterRead,
+          pathResolutionObservation: observation.pathResolutionObservation,
+        },
+        observedKind: 'regular-file',
+        failurePoint: null,
+      };
     }
     return {
       fileName,
@@ -1903,13 +2029,16 @@ const artifactRead = async (
       observedKind: kind === 'directory' || kind === 'symlink' ? kind : 'other',
       failurePoint: null,
     };
-  } catch {
+  } catch (error) {
+    const failureStage = error?.[READ_ONLY_OPERATION_STAGE] === 'open'
+      ? 'open'
+      : 'read';
     return {
       fileName,
       status: 'io-error',
       snapshot: null,
       observedKind: null,
-      failurePoint: `artifact-${String(artifactOrdinal).padStart(2, '0')}-read`,
+      failurePoint: `artifact-${String(artifactOrdinal).padStart(2, '0')}-${failureStage}`,
     };
   }
 };

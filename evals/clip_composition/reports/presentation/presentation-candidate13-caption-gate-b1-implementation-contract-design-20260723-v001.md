@@ -1,10 +1,10 @@
 # candidate 13 基本テロップ ゲートB1完全実装契約設計 v001
 
 - 作成日: 2026-07-23
-- 状態: **2026-07-23 kawafmm承認済み。B2まで実行許可されたが、内包ゲートA検査結果の受け渡し入口不足を検出して合成検査前に停止。正式入力・prompt・Gemini・表示計画・描画は別承認**
+- 状態: **2026-07-24 R1・R2・R3実装後のpackage全件検査105/132・27不合格で停止。正式入力・prompt・Gemini・表示計画・描画は未実施**
 - 対象: ゲートB1のsource-only入力package、意味分割出力の受入、決定的展開、compiler入力
 - 非対象: prompt登録、Web版Gemini実走、正式cue・target・指示書、v003対生成、描画、人間の読みやすさ判定
-- 人間作業: 本設計承認時は1件。現在は実装契約追補を起草してよいかの1判断。媒体視聴・時刻入力・文字分割・時間計測はなし
+- 人間作業: 本設計承認時は1件。今回の実装・停止に必要な人間作業は0件。再開時はR1のhashbang修正設計への1判断。媒体視聴・時刻入力・文字分割・時間計測はなし
 
 ## 1. 目的
 
@@ -501,6 +501,13 @@ checker context validatorは、上記root field、配列順、snapshot shape、p
 
 ### 4.3 filesystem adapterのexact契約
 
+> 改訂案内（2026-07-24）:
+> 本節の`openReadOnly` handleは
+> `presentation-candidate13-caption-gate-b2-r1-r3-contract-clarification-addendum-20260724-v001.md`
+> §4.5の承認内容で、own key順`statBigInt`, `readChunksV001`, `close`の版付きchunk入口へ
+> 改訂する。formal publicationの失敗帰属は同追補§4.2〜§4.4を正本とし、
+> 既存code 55とCLI 0/1/2の意味を変更しない。
+
 両production runnerはworkspace rootをcwd、環境変数、job、CLI引数から受け取らない。各runner自身の`import.meta.url`に対して
 `fileURLToPath(new URL("../../", import.meta.url))`
 を適用し、そのdirectoryをadapterの`realpath`で一度解決した値だけをworkspace rootとする。runner実装file自身のrealpathが、そのroot直下の§4固定pathと一致しなければuntrusted exit 2とする。CLIのjob pathと全artifact pathはPOSIX workspace相対文字列だけを許し、このrootへ結合してからopenする。process cwdは診断にも合否にも使わず、test adapterも同じworkspace相対pathを同じanchorへ解決する。別rootを渡す引数・環境変数・fallback探索を置かない。
@@ -893,6 +900,12 @@ root field順:
 
 各container:
 `{containerId, sourceAtomCount, boundaryCandidateCount}`
+
+> 改訂案内（2026-07-24）:
+> job投影検査はR2のA裁定に従う。子のexact shape不成立では、その子を対応元文字数・
+> 境界候補数の両親集計へ部分利用せず、子全体の違反として記録する。件数だけが不正なら
+> 該当する親集計だけを停止し、他方の独立した親不一致と`containerCount`検査は維持する。
+> 除外した子の値から部分和を作って親違反を派生させない。
 
 `publication`:
 
@@ -2441,3 +2454,5 @@ B2が合格しても、B3正式package生成は別承認である。
 - 2026-07-23 / kawafmm追補承認: `presentation-candidate13-caption-gate-b1-gate-a-report-transfer-entrypoint-addendum-20260723-v001.md`を承認し、本設計の§4.1・§4.2・§4.5・§7.2・§20.4・§21を追補の範囲で改訂した。実装正本は本設計v001と承認済み追補v001の一組とする。B2の実装・合成検査・既存回帰・candidate 13読み取り専用preflightを再開し、正式入力package、prompt登録、Gemini実走、正式cue・target・指示書、描画は引き続き含めない。
 - 2026-07-24 / kawafmm追補承認: `presentation-candidate13-caption-gate-b1-json-and-width-trust-contract-addendum-20260723-v001.md`を第三原因のhash意味改訂込みで承認し、本設計の§4.1、§5.1〜§5.4、§6.1、§8.3(2)、§8.3(4)、§16、§20、§21を追補の範囲で改訂した。strict JSONの全objectはnull prototype、B1/Gemini往復は整数限定、外部表示台帳は固定4係数だけを専用profileで受理し、検査indexの信頼binding値はcanonical SHA-256として照合する。
 - 2026-07-24 / preflight入口追補承認: `presentation-candidate13-caption-b2-night-preflight-landmine-audit-20260723-v001.md`のQ1:A exact契約を承認し、本設計§4.1のpublic export集合へ読み取り専用の監視投影入口一件だけを追加した。Q2:Aのjob・成果物・package識別子も固定した。production CLIのjob path単一入口、job schema、57違反コード、正式package生成の停止点は変更しない。
+- 2026-07-24 / R1・R2・R3追補承認: `presentation-candidate13-caption-gate-b2-r1-r3-contract-clarification-addendum-20260724-v001.md`とR2のA裁定を承認し、本設計の§4.3、§4.4、§6.1、§12.1、§16.2、§17.3、§18.3を追補の範囲で改訂した。全量読取の後方互換分岐を置かず、同一file descriptorの版付きchunk入口へ統一し、formal publicationの既存code 55とCLI終了コードの帰属を維持する。投影検査は壊れた子を親集計へ部分利用せず、子の違反として可視化する。
+- 2026-07-24 / 実行記録: R1・R2・R3を実装後、package側全件検査は105/132・27不合格で停止した。R2関連13/13（案A固有12/12を含む）とR3基礎分割読取4/4は合格したが、production runner先頭のhashbangがR1受理契約に無く、R1受理側7検査と下流20検査が不成立になった。修正・再実行、意味回答側検査、回帰、candidate 13 preflightは行っていない。正本停止報告は`presentation-candidate13-caption-gate-b2-r1-r2-r3-full-test-stop-report-20260724-v001.md`。

@@ -289,10 +289,16 @@ const importSpecifiers = (bytes) => {
   const values = [];
   let match;
   while ((match = IMPORT_SPECIFIER_PATTERN.exec(source)) !== null) values.push(match[1]);
+  const scan = executableJavaScriptTokens(source);
+  const tokens = scan.valid ? scan.tokens : [];
   return {
     values,
-    hasDynamicImport: /\bimport\s*\(/u.test(source),
-    hasRequire: /\brequire\s*\(/u.test(source),
+    lexicallyValid: scan.valid,
+    hasDynamicImport: scan.valid && tokens.some((token, index) =>
+      token.value === 'import' && tokens[index + 1]?.value === '('),
+    hasRequire: scan.valid && tokens.some((token, index) =>
+      token.value === 'require' && tokens[index + 1]?.value === '('),
+    hasModuleLoadFileIo: scan.valid && hasTopLevelFileIoCall(tokens),
   };
 };
 
@@ -359,12 +365,135 @@ const CONCISE_ARROW_ASI_START_WORDS = new Set([
   'let',
   'var',
 ]);
+// EXECUTABLE_JAVASCRIPT_SCANNER_GRAMMAR_V001_BEGIN
+const EXECUTABLE_JAVASCRIPT_EXPRESSION_START_OPERATORS_V001 = Object.freeze([
+  '!',
+  '~',
+  '+',
+  '-',
+  '*',
+  '/',
+  '%',
+  '**',
+  '&',
+  '|',
+  '^',
+  '&&',
+  '||',
+  '??',
+  '<',
+  '<=',
+  '>',
+  '>=',
+  '==',
+  '===',
+  '!=',
+  '!==',
+  '<<',
+  '>>',
+  '>>>',
+  '=',
+  '+=',
+  '-=',
+  '*=',
+  '/=',
+  '%=',
+  '**=',
+  '&=',
+  '|=',
+  '^=',
+  '&&=',
+  '||=',
+  '??=',
+  '<<=',
+  '>>=',
+  '>>>=',
+]);
+const EXECUTABLE_JAVASCRIPT_EXPRESSION_START_KEYWORDS_V001 = Object.freeze([
+  'await',
+  'case',
+  'delete',
+  'do',
+  'else',
+  'in',
+  'instanceof',
+  'new',
+  'of',
+  'return',
+  'throw',
+  'typeof',
+  'void',
+  'yield',
+]);
+const EXECUTABLE_JAVASCRIPT_CONTROL_CONDITION_KEYWORDS_V001 = Object.freeze([
+  'if',
+  'for',
+  'while',
+  'with',
+  'switch',
+  'catch',
+]);
+const EXECUTABLE_JAVASCRIPT_EXPRESSION_START_KEYWORD_SET_V001 =
+  new Set(EXECUTABLE_JAVASCRIPT_EXPRESSION_START_KEYWORDS_V001);
+const EXECUTABLE_JAVASCRIPT_CONTROL_CONDITION_KEYWORD_SET_V001 =
+  new Set(EXECUTABLE_JAVASCRIPT_CONTROL_CONDITION_KEYWORDS_V001);
+const EXECUTABLE_JAVASCRIPT_NON_SLASH_OPERATORS_V001 = Object.freeze(
+  EXECUTABLE_JAVASCRIPT_EXPRESSION_START_OPERATORS_V001
+    .filter((value) => value !== '/' && value !== '/=')
+    .sort((left, right) => right.length - left.length || compareUtf16(left, right)),
+);
+const EXECUTABLE_JAVASCRIPT_SPREAD_PRECEDING_TOKENS_V001 =
+  new Set(['(', '[', '{', ',']);
+const EXECUTABLE_JAVASCRIPT_SCAN_STATE_START_V001 = 'expression-start';
+const EXECUTABLE_JAVASCRIPT_SCAN_STATE_END_V001 = 'expression-end';
+const EXECUTABLE_JAVASCRIPT_SCAN_STATE_BRACE_V001 = 'brace-slash-undecidable';
+const EXECUTABLE_JAVASCRIPT_LITERAL_TOKEN_V001 = '<literal>';
+const EXECUTABLE_JAVASCRIPT_DECIMAL_NUMBER_PATTERN_V001 =
+  /^(?:0|[1-9][0-9]*)\.[0-9]+/u;
+const EXECUTABLE_JAVASCRIPT_BIGINT_PATTERN_V001 = /^(?:0|[1-9][0-9]*)n/u;
+const EXECUTABLE_JAVASCRIPT_INTEGER_PATTERN_V001 = /^(?:0|[1-9][0-9]*)/u;
+const EXECUTABLE_JAVASCRIPT_HEX_PATTERN_V001 = /^0[xX][0-9A-Fa-f]+/u;
+const EXECUTABLE_JAVASCRIPT_OCTAL_PATTERN_V001 = /^0[oO][0-7]+/u;
+const EXECUTABLE_JAVASCRIPT_NUMBER_PATTERNS_V001 = Object.freeze([
+  EXECUTABLE_JAVASCRIPT_HEX_PATTERN_V001,
+  EXECUTABLE_JAVASCRIPT_OCTAL_PATTERN_V001,
+  EXECUTABLE_JAVASCRIPT_DECIMAL_NUMBER_PATTERN_V001,
+  EXECUTABLE_JAVASCRIPT_BIGINT_PATTERN_V001,
+  EXECUTABLE_JAVASCRIPT_INTEGER_PATTERN_V001,
+]);
 const executableJavaScriptTokens = (source) => {
   const tokens = [];
-  const modes = [{type: 'code', templateExpression: false, braceDepth: 0}];
+  const modes = [{
+    type: 'code',
+    templateExpression: false,
+    delimiters: [],
+    tokenStartIndex: 0,
+  }];
+  let state = EXECUTABLE_JAVASCRIPT_SCAN_STATE_START_V001;
+  let memberRequirement = null;
+  let spreadTargetRequired = false;
+  let optionalChainForbidsTag = false;
   let line = 1;
+  const invalid = () => ({valid: false, tokens: []});
   const advanceLine = (character) => {
     if (character === '\n') line += 1;
+  };
+  const isIdentifierStart = (character) =>
+    typeof character === 'string' && /^[A-Za-z_$]$/u.test(character);
+  const isIdentifierPart = (character) =>
+    typeof character === 'string' && /^[A-Za-z0-9_$]$/u.test(character);
+  const previousTokenValue = (mode) =>
+    tokens.length > mode.tokenStartIndex ? tokens[tokens.length - 1].value : null;
+  const pushToken = (value, tokenLine = line) => {
+    tokens.push({value, line: tokenLine});
+  };
+  const completeExpression = () => {
+    state = EXECUTABLE_JAVASCRIPT_SCAN_STATE_END_V001;
+    spreadTargetRequired = false;
+  };
+  const startExpression = () => {
+    state = EXECUTABLE_JAVASCRIPT_SCAN_STATE_START_V001;
+    optionalChainForbidsTag = false;
   };
   for (let index = 0; index < source.length;) {
     const mode = modes[modes.length - 1];
@@ -372,18 +501,30 @@ const executableJavaScriptTokens = (source) => {
     const next = source[index + 1];
     if (mode.type === 'template') {
       if (character === '\\') {
+        if (index + 1 >= source.length) return invalid();
         advanceLine(character);
-        if (index + 1 < source.length) advanceLine(source[index + 1]);
+        advanceLine(source[index + 1]);
         index += 2;
         continue;
       }
       if (character === '`') {
         modes.pop();
         index += 1;
+        pushToken(EXECUTABLE_JAVASCRIPT_LITERAL_TOKEN_V001, mode.startLine);
+        completeExpression();
+        optionalChainForbidsTag = false;
         continue;
       }
       if (character === '$' && next === '{') {
-        modes.push({type: 'code', templateExpression: true, braceDepth: 0});
+        modes.push({
+          type: 'code',
+          templateExpression: true,
+          delimiters: [],
+          tokenStartIndex: tokens.length,
+        });
+        startExpression();
+        spreadTargetRequired = false;
+        memberRequirement = null;
         index += 2;
         continue;
       }
@@ -391,7 +532,8 @@ const executableJavaScriptTokens = (source) => {
       index += 1;
       continue;
     }
-    if (mode.templateExpression && character === '}' && mode.braceDepth === 0) {
+    if (mode.templateExpression && character === '}' && mode.delimiters.length === 0) {
+      if (memberRequirement !== null || spreadTargetRequired) return invalid();
       modes.pop();
       index += 1;
       continue;
@@ -408,59 +550,289 @@ const executableJavaScriptTokens = (source) => {
     }
     if (character === '/' && next === '*') {
       index += 2;
+      let closed = false;
       while (index < source.length) {
         if (source[index] === '*' && source[index + 1] === '/') {
           index += 2;
+          closed = true;
           break;
         }
         advanceLine(source[index]);
         index += 1;
       }
+      if (!closed) return invalid();
+      continue;
+    }
+    if (memberRequirement !== null) {
+      if (memberRequirement.kind === 'optional-target' && character === '[') {
+        pushToken('[', line);
+        mode.delimiters.push({
+          value: '[',
+          controlCondition: false,
+          optionalChainContinuation: true,
+        });
+        memberRequirement = null;
+        startExpression();
+        index += 1;
+        continue;
+      }
+      if (!isIdentifierStart(character)) return invalid();
+      let end = index + 1;
+      while (end < source.length && isIdentifierPart(source[end])) end += 1;
+      pushToken(source.slice(index, end), line);
+      const optionalChain = memberRequirement.optionalChain;
+      memberRequirement = null;
+      completeExpression();
+      optionalChainForbidsTag = optionalChain;
+      index = end;
       continue;
     }
     if (character === '\'' || character === '"') {
       const quote = character;
+      const tokenLine = line;
       index += 1;
+      let closed = false;
       while (index < source.length) {
         const quoted = source[index];
         if (quoted === '\\') {
-          advanceLine(quoted);
-          if (index + 1 < source.length) advanceLine(source[index + 1]);
+          if (index + 1 >= source.length) return invalid();
+          advanceLine(source[index + 1]);
           index += 2;
           continue;
         }
+        if (quoted === '\n' || quoted === '\r'
+          || quoted === '\u2028' || quoted === '\u2029') {
+          return invalid();
+        }
         advanceLine(quoted);
         index += 1;
-        if (quoted === quote) break;
+        if (quoted === quote) {
+          closed = true;
+          break;
+        }
       }
+      if (!closed) return invalid();
+      pushToken(EXECUTABLE_JAVASCRIPT_LITERAL_TOKEN_V001, tokenLine);
+      completeExpression();
+      optionalChainForbidsTag = false;
       continue;
     }
     if (character === '`') {
-      modes.push({type: 'template'});
+      if (optionalChainForbidsTag) return invalid();
+      modes.push({type: 'template', startLine: line});
       index += 1;
       continue;
     }
-    if (/[A-Za-z_$]/u.test(character)) {
+    if (character === '/' && state === EXECUTABLE_JAVASCRIPT_SCAN_STATE_START_V001) {
+      const tokenLine = line;
+      let cursor = index + 1;
+      let inCharacterClass = false;
+      let closed = false;
+      while (cursor < source.length) {
+        const regexCharacter = source[cursor];
+        if (regexCharacter === '\n' || regexCharacter === '\r'
+          || regexCharacter === '\u2028' || regexCharacter === '\u2029') {
+          return invalid();
+        }
+        if (regexCharacter === '\\') {
+          if (cursor + 1 >= source.length) return invalid();
+          const escaped = source[cursor + 1];
+          if (escaped === '\n' || escaped === '\r'
+            || escaped === '\u2028' || escaped === '\u2029') {
+            return invalid();
+          }
+          cursor += 2;
+          continue;
+        }
+        if (regexCharacter === '[') {
+          inCharacterClass = true;
+          cursor += 1;
+          continue;
+        }
+        if (regexCharacter === ']' && inCharacterClass) {
+          inCharacterClass = false;
+          cursor += 1;
+          continue;
+        }
+        if (regexCharacter === '/' && !inCharacterClass) {
+          cursor += 1;
+          closed = true;
+          break;
+        }
+        cursor += 1;
+      }
+      if (!closed || inCharacterClass) return invalid();
+      while (cursor < source.length && /^[A-Za-z]$/u.test(source[cursor])) cursor += 1;
+      pushToken(EXECUTABLE_JAVASCRIPT_LITERAL_TOKEN_V001, tokenLine);
+      completeExpression();
+      optionalChainForbidsTag = false;
+      index = cursor;
+      continue;
+    }
+    if (character === '/') {
+      if (state !== EXECUTABLE_JAVASCRIPT_SCAN_STATE_END_V001) return invalid();
+      const value = next === '=' ? '/=' : '/';
+      pushToken(value, line);
+      index += value.length;
+      startExpression();
+      continue;
+    }
+    if (isIdentifierStart(character)) {
       let end = index + 1;
-      while (end < source.length && /[A-Za-z0-9_$]/u.test(source[end])) end += 1;
-      tokens.push({value: source.slice(index, end), line});
+      while (end < source.length && isIdentifierPart(source[end])) end += 1;
+      const value = source.slice(index, end);
+      pushToken(value, line);
+      if (EXECUTABLE_JAVASCRIPT_EXPRESSION_START_KEYWORD_SET_V001.has(value)) {
+        startExpression();
+      } else {
+        completeExpression();
+        optionalChainForbidsTag = false;
+      }
       index = end;
       continue;
     }
-    if (character === '=' && next === '>') {
-      tokens.push({value: '=>', line});
+    if (/^[0-9]$/u.test(character)) {
+      const remainder = source.slice(index);
+      let number = null;
+      for (const pattern of EXECUTABLE_JAVASCRIPT_NUMBER_PATTERNS_V001) {
+        const numberMatch = pattern.exec(remainder);
+        if (numberMatch !== null) {
+          number = numberMatch[0];
+          break;
+        }
+      }
+      if (number === null) return invalid();
+      const trailing = source[index + number.length];
+      if (isIdentifierPart(trailing)
+        || (typeof trailing === 'string' && /^[0-9.]$/u.test(trailing))) {
+        return invalid();
+      }
+      pushToken(number, line);
+      completeExpression();
+      optionalChainForbidsTag = false;
+      index += number.length;
+      continue;
+    }
+    if (source.startsWith('...', index)) {
+      if (state !== EXECUTABLE_JAVASCRIPT_SCAN_STATE_START_V001
+        || !EXECUTABLE_JAVASCRIPT_SPREAD_PRECEDING_TOKENS_V001.has(
+          previousTokenValue(mode),
+        )) {
+        return invalid();
+      }
+      pushToken('...', line);
+      spreadTargetRequired = true;
+      optionalChainForbidsTag = false;
+      index += 3;
+      continue;
+    }
+    if (source.startsWith('?.', index)) {
+      if (state !== EXECUTABLE_JAVASCRIPT_SCAN_STATE_END_V001
+        && state !== EXECUTABLE_JAVASCRIPT_SCAN_STATE_BRACE_V001) {
+        return invalid();
+      }
+      pushToken('?.', line);
+      memberRequirement = {kind: 'optional-target', optionalChain: true};
+      optionalChainForbidsTag = true;
       index += 2;
       continue;
     }
-    tokens.push({value: character, line});
-    if (mode.templateExpression) {
-      if (character === '{') mode.braceDepth += 1;
-      if (character === '}') mode.braceDepth = Math.max(0, mode.braceDepth - 1);
+    if (character === '.') {
+      if (state !== EXECUTABLE_JAVASCRIPT_SCAN_STATE_END_V001
+        && state !== EXECUTABLE_JAVASCRIPT_SCAN_STATE_BRACE_V001) {
+        return invalid();
+      }
+      pushToken('.', line);
+      memberRequirement = {
+        kind: 'member-name',
+        optionalChain: optionalChainForbidsTag,
+      };
+      index += 1;
+      continue;
     }
-    index += 1;
+    if (character === '=' && next === '>') {
+      if (spreadTargetRequired) return invalid();
+      pushToken('=>', line);
+      startExpression();
+      index += 2;
+      continue;
+    }
+    if ((character === '+' && next === '+') || (character === '-' && next === '-')) {
+      if (state !== EXECUTABLE_JAVASCRIPT_SCAN_STATE_END_V001
+        || spreadTargetRequired) {
+        return invalid();
+      }
+      pushToken(`${character}${next}`, line);
+      completeExpression();
+      optionalChainForbidsTag = false;
+      index += 2;
+      continue;
+    }
+    if (character === '(' || character === '[' || character === '{') {
+      const previous = previousTokenValue(mode);
+      const optionalChainContinuation =
+        state === EXECUTABLE_JAVASCRIPT_SCAN_STATE_END_V001
+        && optionalChainForbidsTag
+        && (character === '(' || character === '[');
+      const controlCondition = character === '('
+        && EXECUTABLE_JAVASCRIPT_CONTROL_CONDITION_KEYWORD_SET_V001.has(previous);
+      pushToken(character, line);
+      mode.delimiters.push({
+        value: character,
+        controlCondition,
+        optionalChainContinuation,
+      });
+      spreadTargetRequired = false;
+      startExpression();
+      index += 1;
+      continue;
+    }
+    if (character === ')' || character === ']' || character === '}') {
+      if (spreadTargetRequired) return invalid();
+      const expectedOpening = character === ')' ? '(' : character === ']' ? '[' : '{';
+      const opening = mode.delimiters.pop();
+      if (opening?.value !== expectedOpening) return invalid();
+      pushToken(character, line);
+      if (character === '}') {
+        state = EXECUTABLE_JAVASCRIPT_SCAN_STATE_BRACE_V001;
+        optionalChainForbidsTag = false;
+      } else if (opening.controlCondition) {
+        startExpression();
+      } else {
+        completeExpression();
+        optionalChainForbidsTag = opening.optionalChainContinuation;
+      }
+      index += 1;
+      continue;
+    }
+    const matchedOperator = EXECUTABLE_JAVASCRIPT_NON_SLASH_OPERATORS_V001
+      .find((value) => source.startsWith(value, index));
+    if (matchedOperator !== undefined) {
+      pushToken(matchedOperator, line);
+      startExpression();
+      index += matchedOperator.length;
+      continue;
+    }
+    if (character === ',' || character === ';' || character === ':'
+      || character === '?') {
+      if (spreadTargetRequired) return invalid();
+      pushToken(character, line);
+      startExpression();
+      index += 1;
+      continue;
+    }
+    return invalid();
   }
-  return tokens;
+  if (modes.length !== 1
+    || modes[0].type !== 'code'
+    || modes[0].delimiters.length !== 0
+    || memberRequirement !== null
+    || spreadTargetRequired) {
+    return invalid();
+  }
+  return {valid: true, tokens};
 };
+// EXECUTABLE_JAVASCRIPT_SCANNER_GRAMMAR_V001_END
 const tokenStructure = (tokens) => {
   const openingForClosing = new Map();
   const closingForOpening = new Map();
@@ -489,9 +861,7 @@ const sameTokenDepth = (left, right) =>
   left.paren === right.paren
   && left.bracket === right.bracket
   && left.brace === right.brace;
-const hasTopLevelFileIoCall = (bytes) => {
-  const source = bytes.toString('utf8');
-  const tokens = executableJavaScriptTokens(source);
+const hasTopLevelFileIoCall = (tokens) => {
   const {openingForClosing, closingForOpening, depths} = tokenStructure(tokens);
   const deferred = new Array(tokens.length).fill(false);
   const eagerFunctionBodies = new Set();
@@ -634,9 +1004,10 @@ const invalidPackageImportGraphIndexes = (implementationInputs) => {
     const imports = importSpecifiers(bytes);
     const builtins = imports.values.filter((specifier) => specifier.startsWith('node:'));
     const locals = imports.values.filter((specifier) => !specifier.startsWith('node:'));
-    if (imports.hasDynamicImport
+    if (!imports.lexicallyValid
+      || imports.hasDynamicImport
       || imports.hasRequire
-      || hasTopLevelFileIoCall(bytes)
+      || imports.hasModuleLoadFileIo
       || builtins.some((specifier) => !allowedBuiltins.has(specifier))
       || locals.some((specifier) => !allowedLocals.has(specifier))
       || new Set(builtins).size !== builtins.length
@@ -1027,19 +1398,27 @@ const validateProjectionJobShape = (value, paths, base) => {
   const ids = new Set();
   let atomTotal = 0;
   let candidateTotal = 0;
+  let atomTotalAvailable = true;
+  let candidateTotalAvailable = true;
   value.containers.forEach((entry, index) => {
     const entryPath = `${base}.containers[${index}]`;
     if (!exactKeys(entry, ['containerId', 'sourceAtomCount', 'boundaryCandidateCount'])) {
       addPath(paths, entryPath);
+      atomTotalAvailable = false;
+      candidateTotalAvailable = false;
       return;
     }
     if (!isNonEmptyString(entry.containerId) || ids.has(entry.containerId)) {
       addPath(paths, `${entryPath}.containerId`);
     }
     ids.add(entry.containerId);
-    if (!isNonNegativeInteger(entry.sourceAtomCount)) addPath(paths, `${entryPath}.sourceAtomCount`);
+    if (!isNonNegativeInteger(entry.sourceAtomCount)) {
+      addPath(paths, `${entryPath}.sourceAtomCount`);
+      atomTotalAvailable = false;
+    }
     if (!isNonNegativeInteger(entry.boundaryCandidateCount)) {
       addPath(paths, `${entryPath}.boundaryCandidateCount`);
+      candidateTotalAvailable = false;
     }
     if (isNonNegativeInteger(entry.sourceAtomCount)) atomTotal += entry.sourceAtomCount;
     if (isNonNegativeInteger(entry.boundaryCandidateCount)) {
@@ -1050,10 +1429,13 @@ const validateProjectionJobShape = (value, paths, base) => {
     && value.containerCount !== value.containers.length) {
     addPath(paths, `${base}.containerCount`);
   }
-  if (isNonNegativeInteger(value.sourceAtomCount) && value.sourceAtomCount !== atomTotal) {
+  if (atomTotalAvailable
+    && isNonNegativeInteger(value.sourceAtomCount)
+    && value.sourceAtomCount !== atomTotal) {
     addPath(paths, `${base}.sourceAtomCount`);
   }
-  if (isNonNegativeInteger(value.boundaryCandidateCount)
+  if (candidateTotalAvailable
+    && isNonNegativeInteger(value.boundaryCandidateCount)
     && value.boundaryCandidateCount !== candidateTotal) {
     addPath(paths, `${base}.boundaryCandidateCount`);
   }
