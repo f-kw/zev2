@@ -91,6 +91,8 @@ const MAX_LOGICAL_WIDTH = 36;
 const MAX_LINES = 2;
 const TRUST_CANONICAL_SHA256 =
   '9d5ffe631033dc594c917649e2529899e303f3cb8a7d7b1b65ea0d26b7c645f2';
+const STRICT_INTEGER_NUMBER_PROFILE = 'b1-integer';
+const EXTERNAL_DISPLAY_NUMBER_PROFILE = 'external-display';
 const SHA256_PATTERN = /^[0-9a-f]{64}$/;
 const COMMIT_PATTERN = /^[0-9a-f]{40}$/;
 const ID_PATTERN = /^[A-Za-z0-9][A-Za-z0-9._-]*$/;
@@ -110,6 +112,63 @@ const PRESET_ROOT =
   'evals/clip_composition/registries/presentation/normal-landscape-preset-registry-v001';
 const TRUST_PATH =
   'evals/clip_composition/registries/presentation/presentation-renderer-trust-v001/trust.json';
+const WIDTH_POLICY_SLOTS_V001 = Object.freeze([
+  Object.freeze({
+    role: 'presetRegistry',
+    path: `${PRESET_ROOT}/preset-registry.json`,
+    profile: 'integer-json',
+  }),
+  Object.freeze({
+    role: 'presetValidationIndex',
+    path: `${PRESET_ROOT}/preset-validation-index.json`,
+    profile: 'integer-json',
+  }),
+  Object.freeze({
+    role: 'materialValidationIndex',
+    path: `${PRESET_ROOT}/material-validation-index.json`,
+    profile: 'integer-json',
+  }),
+  Object.freeze({
+    role: 'registryBinding',
+    path: `${PRESET_ROOT}/trusted-registry-bindings.json`,
+    profile: 'integer-json',
+  }),
+  Object.freeze({
+    role: 'rendererTrust',
+    path: TRUST_PATH,
+    profile: 'renderer-trust-json',
+  }),
+  Object.freeze({
+    role: 'textLayoutImplementation',
+    path: TEXT_LAYOUT_IMPLEMENTATION_PATH,
+    profile: 'bytes',
+  }),
+]);
+const APPROVED_RENDERER_LAYOUT_RULES_V001 = Object.freeze({
+  layoutRuleVersion: 'normal-landscape-render-layout-v001',
+  fontWeight: 800,
+  minimumFontSizePx: 12,
+  textSafePaddingRatio: 0.04,
+  horizontalSafeMarginRatio: 0.04,
+  verticalSafeMarginRatio: 0.02,
+  fallbackTextAreaRatio: 0.98,
+  lowerThirdAnchorPercent: 67,
+  renderScale: 1,
+  characterWidthRule: 'U+0000..U+00FF=1; other Unicode code point=2',
+  borderStrokeWidthRule: '2 * max(0, borderWidthPx)',
+  glowStrokeWidthRule: '2 * max(0, glowWidthPx) + 2 * max(0, borderWidthPx)',
+  marginRule: 'max(glowStrokeWidth, borderStrokeWidth) / 2',
+  safePaddingRule: 'max(2, ceil(fontSizePx * textSafePaddingRatio))',
+  placementClampRule: 'clamp full alpha bounds inside canvas safe margins',
+  humanReapprovalRule:
+    'Any numeric or formula change requires a new rendered preview and human approval before a new trust and renderer version may be activated.',
+});
+const APPROVED_RENDERER_TRUST_DECIMALS_V001 = Object.freeze([
+  Object.freeze({path: 'layoutRules\u0000textSafePaddingRatio', value: 0.04}),
+  Object.freeze({path: 'layoutRules\u0000horizontalSafeMarginRatio', value: 0.04}),
+  Object.freeze({path: 'layoutRules\u0000verticalSafeMarginRatio', value: 0.02}),
+  Object.freeze({path: 'layoutRules\u0000fallbackTextAreaRatio', value: 0.98}),
+]);
 const WATCHED_ROOT = 'evals/clip_composition/outputs/presentation';
 const PREFLIGHT_JOB_ROOT =
   `${WATCHED_ROOT}/caption-semantic-source-package-preflight-jobs/`;
@@ -590,12 +649,25 @@ const invalidPackageImportGraphIndexes = (implementationInputs) => {
   return invalidIndexes;
 };
 
-const canonicalObject = (value) => {
-  if (Array.isArray(value)) return value.map(canonicalObject);
-  if (!isPlainObject(value)) return value;
-  const result = {};
-  for (const key of Object.keys(value).sort(compareUtf16)) result[key] = canonicalObject(value[key]);
-  return result;
+const canonicalJsonTextFromValidatedValue = (value) => {
+  if (value === null
+    || typeof value === 'boolean'
+    || typeof value === 'number'
+    || typeof value === 'string') {
+    return JSON.stringify(value);
+  }
+  if (Array.isArray(value)) {
+    return `[${value.map((entry) => canonicalJsonTextFromValidatedValue(entry)).join(',')}]`;
+  }
+  if (!isPlainObject(value)) throw new TypeError('canonical JSON value is not a plain object');
+  const members = Object.keys(value).sort(compareUtf16).map((key) => {
+    const descriptor = Object.getOwnPropertyDescriptor(value, key);
+    if (!descriptor || !hasOwn(descriptor, 'value')) {
+      throw new TypeError('canonical JSON object member is not a data property');
+    }
+    return `${JSON.stringify(key)}:${canonicalJsonTextFromValidatedValue(descriptor.value)}`;
+  });
+  return `{${members.join(',')}}`;
 };
 
 const hasLoneSurrogate = (value) => {
@@ -683,9 +755,10 @@ export function assertPresentationCaptionB1StrictValueV001(value) {
 }
 
 class StrictJsonParser {
-  constructor(text) {
+  constructor(text, numberProfile = STRICT_INTEGER_NUMBER_PROFILE) {
     this.text = text;
     this.index = 0;
+    this.numberProfile = numberProfile;
   }
   fail(reason = 'syntax-invalid') {
     const error = new SyntaxError(reason);
@@ -805,16 +878,29 @@ class StrictJsonParser {
     if (!match) this.fail();
     const token = match[0];
     this.index += token.length;
-    if (token.includes('.') || /[eE]/u.test(token)) this.fail('number-invalid');
+    if (this.numberProfile === STRICT_INTEGER_NUMBER_PROFILE
+      && (token.includes('.') || /[eE]/u.test(token))) {
+      this.fail('number-invalid');
+    }
+    if (![STRICT_INTEGER_NUMBER_PROFILE, EXTERNAL_DISPLAY_NUMBER_PROFILE].includes(
+      this.numberProfile,
+    )) {
+      this.fail('number-invalid');
+    }
     const value = Number(token);
-    if (!Number.isSafeInteger(value) || !Number.isFinite(value) || Object.is(value, -0)) {
+    if (!Number.isFinite(value)
+      || Object.is(value, -0)
+      || (Number.isInteger(value) && !Number.isSafeInteger(value))) {
+      this.fail('number-invalid');
+    }
+    if (this.numberProfile === STRICT_INTEGER_NUMBER_PROFILE && !Number.isSafeInteger(value)) {
       this.fail('number-invalid');
     }
     return value;
   }
 }
 
-export function decodePresentationCaptionB1StrictJsonV001(bytes) {
+const decodeJsonBytesWithNumberProfile = (bytes, numberProfile) => {
   if (!Buffer.isBuffer(bytes)) return {status: 'invalid', reason: 'invalid-utf8'};
   if (bytes.length >= 3
     && bytes[0] === 0xef
@@ -831,7 +917,7 @@ export function decodePresentationCaptionB1StrictJsonV001(bytes) {
   if (text.charCodeAt(0) === 0xfeff) return {status: 'invalid', reason: 'bom-present'};
   if (/^\s*```/u.test(text)) return {status: 'invalid', reason: 'code-fence'};
   try {
-    return {status: 'decoded', value: new StrictJsonParser(text).parse()};
+    return {status: 'decoded', value: new StrictJsonParser(text, numberProfile).parse()};
   } catch (error) {
     return {
       status: 'invalid',
@@ -845,6 +931,10 @@ export function decodePresentationCaptionB1StrictJsonV001(bytes) {
         : 'syntax-invalid',
     };
   }
+};
+
+export function decodePresentationCaptionB1StrictJsonV001(bytes) {
+  return decodeJsonBytesWithNumberProfile(bytes, STRICT_INTEGER_NUMBER_PROFILE);
 }
 
 export function serializePresentationCaptionB1FormalJsonV001(value) {
@@ -863,7 +953,7 @@ export function canonicalizePresentationCaptionB1JsonV001(value) {
   try {
     return {
       status: 'canonicalized',
-      bytes: Buffer.from(JSON.stringify(canonicalObject(value)), 'utf8'),
+      bytes: Buffer.from(canonicalJsonTextFromValidatedValue(value), 'utf8'),
     };
   } catch {
     return {status: 'invalid', reason: 'unsupported-value'};
@@ -1067,19 +1157,11 @@ export function validatePresentationCaptionSemanticSourcePackageJobV001(value) {
         addPath(paths, '$.implementationBinding.dependencyFiles');
       }
     }
-    const widthRoles = [
-      ['presetRegistry', `${PRESET_ROOT}/preset-registry.json`],
-      ['presetValidationIndex', `${PRESET_ROOT}/preset-validation-index.json`],
-      ['materialValidationIndex', `${PRESET_ROOT}/material-validation-index.json`],
-      ['registryBinding', `${PRESET_ROOT}/trusted-registry-bindings.json`],
-      ['rendererTrust', TRUST_PATH],
-      ['textLayoutImplementation', TEXT_LAYOUT_IMPLEMENTATION_PATH],
-    ];
     if (!isDenseArray(value.widthPolicyBindings)
-      || value.widthPolicyBindings.length !== widthRoles.length) {
+      || value.widthPolicyBindings.length !== WIDTH_POLICY_SLOTS_V001.length) {
       addPath(paths, '$.widthPolicyBindings');
     } else {
-      widthRoles.forEach(([role, path], index) => validateBinding(
+      WIDTH_POLICY_SLOTS_V001.forEach(({role, path}, index) => validateBinding(
         value.widthPolicyBindings[index],
         role,
         path,
@@ -1234,6 +1316,304 @@ const sameReadObservation = (initial, final) => validateReadObservation(initial)
   && initial.path === final.path
   && initial.snapshot.fileSha256 === final.snapshot.fileSha256
   && sameStat(initial.snapshot.pathLstatBeforeOpen, final.snapshot.pathLstatBeforeOpen);
+
+const exactPathAndHashRecord = (value, fields) => exactKeys(value, fields)
+  && fields.every((field) => {
+    if (field === 'path') return isSafeWorkspacePath(value[field]);
+    if (field.endsWith('Sha256')) return isSha256(value[field]);
+    return isNonEmptyString(value[field]);
+  });
+
+const validateApprovedRendererLayoutRulesV001 = (value) => {
+  const keys = Object.keys(APPROVED_RENDERER_LAYOUT_RULES_V001);
+  return exactKeys(value, keys)
+    && keys.every((key) => Object.is(
+      value[key],
+      APPROVED_RENDERER_LAYOUT_RULES_V001[key],
+    ));
+};
+
+const validateRendererTrustSchemaV001 = (value) => {
+  if (!exactKeys(value, [
+    'schemaVersion',
+    'trustVersion',
+    'rendererContractVersion',
+    'presetRegistry',
+    'registryBinding',
+    'approvedPreview',
+    'rendererDependencies',
+    'fontAssets',
+    'layoutRules',
+    'toolVersions',
+  ])
+    || value.schemaVersion !== 'presentation-renderer-trust-v001'
+    || value.trustVersion !== 'presentation-renderer-trust-v001'
+    || value.rendererContractVersion !== 'zev-renderer-boundary-v002'
+    || !exactPathAndHashRecord(
+      value.presetRegistry,
+      ['registryVersion', 'path', 'fileSha256', 'canonicalSha256'],
+    )
+    || !exactPathAndHashRecord(
+      value.registryBinding,
+      ['schemaVersion', 'path', 'fileSha256', 'canonicalSha256'],
+    )
+    || !exactKeys(value.approvedPreview, [
+      'previewId',
+      'path',
+      'fileSha256',
+      'canonicalSha256',
+      'componentProvenance',
+    ])
+    || !isNonEmptyString(value.approvedPreview.previewId)
+    || !isSafeWorkspacePath(value.approvedPreview.path)
+    || !isSha256(value.approvedPreview.fileSha256)
+    || !isSha256(value.approvedPreview.canonicalSha256)
+    || !isDenseArray(value.approvedPreview.componentProvenance)
+    || !value.approvedPreview.componentProvenance.every((entry) =>
+      exactPathAndHashRecord(entry, ['path', 'fileSha256']))
+    || !isDenseArray(value.rendererDependencies)
+    || !value.rendererDependencies.every((entry) =>
+      exactPathAndHashRecord(entry, ['path', 'fileSha256']))
+    || !isDenseArray(value.fontAssets)
+    || !value.fontAssets.every((entry) =>
+      exactPathAndHashRecord(entry, ['fontAssetId', 'path', 'fileSha256']))
+    || !validateApprovedRendererLayoutRulesV001(value.layoutRules)
+    || !exactKeys(value.toolVersions, [
+      'nodeVersion',
+      'remotionVersion',
+      'browserVersion',
+      'ffmpegVersion',
+      'ffprobeVersion',
+    ])
+    || !Object.values(value.toolVersions).every(isNonEmptyString)) {
+    return false;
+  }
+  return value.presetRegistry.registryVersion === 'normal-landscape-preset-registry-v001'
+    && value.registryBinding.schemaVersion === 'presentation-registry-trust-v001';
+};
+
+const validateWidthJsonSchemaAtSlotV001 = (value, slotIndex) => {
+  if (!isPlainObject(value)) return false;
+  if (slotIndex === 0) {
+    return exactKeys(value, [
+      'schemaVersion',
+      'registryVersion',
+      'format',
+      'canvas',
+      'fontAssets',
+      'componentProvenance',
+      'transitions',
+      'endPolicies',
+      'presets',
+    ])
+      && value.schemaVersion === 'presentation-preset-registry-v001'
+      && isNonEmptyString(value.registryVersion)
+      && isDenseArray(value.presets);
+  }
+  if (slotIndex === 1) {
+    return exactKeys(value, ['registryVersion', 'presets'])
+      && isNonEmptyString(value.registryVersion)
+      && isDenseArray(value.presets);
+  }
+  if (slotIndex === 2) {
+    return exactKeys(value, ['registryVersion', 'materials'])
+      && isNonEmptyString(value.registryVersion)
+      && isDenseArray(value.materials);
+  }
+  if (slotIndex === 3) {
+    return exactKeys(value, [
+      'schemaVersion',
+      'presetRegistryVersion',
+      'presetValidationIndexSha256',
+      'materialRegistryVersion',
+      'materialValidationIndexSha256',
+    ])
+      && value.schemaVersion === 'presentation-registry-trust-v001'
+      && isNonEmptyString(value.presetRegistryVersion)
+      && isSha256(value.presetValidationIndexSha256)
+      && isNonEmptyString(value.materialRegistryVersion)
+      && isSha256(value.materialValidationIndexSha256);
+  }
+  return slotIndex === 4 && validateRendererTrustSchemaV001(value);
+};
+
+const validateExternalDisplayNumbersAtSlotV001 = (
+  value,
+  slotIndex,
+  pathSegments = [],
+) => {
+  if (value === null || typeof value === 'boolean' || typeof value === 'string') return true;
+  if (typeof value === 'number') {
+    if (Number.isSafeInteger(value) && !Object.is(value, -0)) return true;
+    if (slotIndex !== 4 || !Number.isFinite(value) || Object.is(value, -0)) return false;
+    const path = pathSegments.join('\u0000');
+    return APPROVED_RENDERER_TRUST_DECIMALS_V001.some(
+      (entry) => entry.path === path && Object.is(entry.value, value),
+    );
+  }
+  if (Array.isArray(value)) {
+    return isDenseArray(value)
+      && value.every((entry, index) =>
+        validateExternalDisplayNumbersAtSlotV001(entry, slotIndex, [
+          ...pathSegments,
+          String(index),
+        ]));
+  }
+  if (!isPlainObject(value)) return false;
+  return Object.keys(value).every((key) =>
+    validateExternalDisplayNumbersAtSlotV001(value[key], slotIndex, [
+      ...pathSegments,
+      key,
+    ]));
+};
+
+const decodeWidthJsonAtFixedSlotV001 = (bytes, slotIndex) => {
+  if (!Number.isSafeInteger(slotIndex)
+    || slotIndex < 0
+    || slotIndex >= WIDTH_POLICY_SLOTS_V001.length - 1) {
+    return {status: 'invalid'};
+  }
+  const decoded = decodeJsonBytesWithNumberProfile(bytes, EXTERNAL_DISPLAY_NUMBER_PROFILE);
+  if (decoded.status !== 'decoded'
+    || !validateExternalDisplayNumbersAtSlotV001(decoded.value, slotIndex)
+    || !validateWidthJsonSchemaAtSlotV001(decoded.value, slotIndex)) {
+    return {status: 'invalid'};
+  }
+  const canonicalBytes = Buffer.from(
+    canonicalJsonTextFromValidatedValue(decoded.value),
+    'utf8',
+  );
+  return {
+    status: 'decoded',
+    value: decoded.value,
+    canonicalSha256: hashBytes(canonicalBytes),
+  };
+};
+
+const resolveWidthPolicySnapshotAtSlotV001 = (binding, snapshot, slotIndex) => {
+  const expected = WIDTH_POLICY_SLOTS_V001[slotIndex];
+  if (!expected
+    || !isPlainObject(binding)
+    || binding.role !== expected.role
+    || binding.path !== expected.path
+    || !validateStableSnapshot(snapshot)
+    || snapshot.path !== expected.path) {
+    return {status: 'unsafe'};
+  }
+  if (snapshot.fileSha256 !== binding.fileSha256) {
+    return {status: 'file-mismatch'};
+  }
+  if (expected.profile === 'bytes') {
+    return binding.canonicalSha256 === null
+      ? {
+        status: 'resolved',
+        role: expected.role,
+        path: expected.path,
+        snapshot,
+        value: null,
+        canonicalSha256: null,
+      }
+      : {status: 'canonical-mismatch'};
+  }
+  const decoded = decodeWidthJsonAtFixedSlotV001(snapshot.bytes, slotIndex);
+  if (decoded.status !== 'decoded') return {status: 'schema-unsupported'};
+  if (decoded.canonicalSha256 !== binding.canonicalSha256) {
+    return {status: 'canonical-mismatch'};
+  }
+  return {
+    status: 'resolved',
+    role: expected.role,
+    path: expected.path,
+    snapshot,
+    value: decoded.value,
+    canonicalSha256: decoded.canonicalSha256,
+  };
+};
+
+const resolveWidthPolicyObservationAtSlotV001 = (observation, binding, slotIndex) => {
+  const expected = WIDTH_POLICY_SLOTS_V001[slotIndex];
+  if (!expected
+    || !isPlainObject(observation)
+    || !isPlainObject(binding)
+    || binding.role !== expected.role
+    || binding.path !== expected.path
+    || observation.role !== expected.role
+    || observation.path !== expected.path
+    || observation.status === 'lexically-rejected'
+    || observation.status === 'observed-unsafe') {
+    return {status: 'unsafe'};
+  }
+  if (observation.status === 'missing') return {status: 'file-mismatch'};
+  if (!validateReadObservation(observation, expected.role)) return {status: 'unsafe'};
+  return resolveWidthPolicySnapshotAtSlotV001(binding, observation.snapshot, slotIndex);
+};
+
+const evaluateResolvedWidthPolicyV001 = (resolvedWidthPolicy) => {
+  if (!isDenseArray(resolvedWidthPolicy)
+    || resolvedWidthPolicy.length !== WIDTH_POLICY_SLOTS_V001.length
+    || !resolvedWidthPolicy.every((entry) => entry?.status === 'resolved')) {
+    return {status: 'hash-mismatch'};
+  }
+  const [registryInput, presetIndexInput, materialIndexInput, bindingInput, trustInput,
+    textLayoutInput] = resolvedWidthPolicy;
+  const registry = registryInput.value;
+  const presetIndex = presetIndexInput.value;
+  const materialIndex = materialIndexInput.value;
+  const registryBinding = bindingInput.value;
+  const trust = trustInput.value;
+  const trustPolicy = registry.presets.filter((entry) => entry?.presetId === PRESET_ID);
+  const stateMatches = isDenseArray(trustPolicy[0]?.visualStates)
+    ? trustPolicy[0].visualStates.filter((entry) => entry?.stateId === VISUAL_STATE_ID)
+    : [];
+  const policyMatches = presetIndex.presets.filter((entry) => entry?.presetId === PRESET_ID);
+  const trustDependency = trust.rendererDependencies.filter(
+    (entry) => entry?.path === TEXT_LAYOUT_IMPLEMENTATION_PATH,
+  );
+  const chainOk = trustInput.canonicalSha256 === TRUST_CANONICAL_SHA256
+    && registryBinding.presetRegistryVersion === registry.registryVersion
+    && presetIndex.registryVersion === registryBinding.presetRegistryVersion
+    && registryBinding.presetValidationIndexSha256 === presetIndexInput.canonicalSha256
+    && materialIndex.registryVersion === registryBinding.materialRegistryVersion
+    && registryBinding.materialValidationIndexSha256 === materialIndexInput.canonicalSha256
+    && trust.presetRegistry.registryVersion === registry.registryVersion
+    && trust.presetRegistry.path === registryInput.path
+    && trust.presetRegistry.fileSha256 === registryInput.snapshot.fileSha256
+    && trust.presetRegistry.canonicalSha256 === registryInput.canonicalSha256
+    && trust.registryBinding.schemaVersion === registryBinding.schemaVersion
+    && trust.registryBinding.path === bindingInput.path
+    && trust.registryBinding.fileSha256 === bindingInput.snapshot.fileSha256
+    && trust.registryBinding.canonicalSha256 === bindingInput.canonicalSha256
+    && trustDependency.length === 1
+    && trustDependency[0].fileSha256 === textLayoutInput.snapshot.fileSha256;
+  if (!chainOk) return {status: 'hash-mismatch'};
+  const projectionOk = trustPolicy.length === 1
+    && stateMatches.length === 1
+    && policyMatches.length === 1
+    && exactKeys(stateMatches[0].layout, ['maxCharsPerLine', 'maxLines', 'singleLine'])
+    && stateMatches[0].layout.maxCharsPerLine === MAX_LOGICAL_WIDTH
+    && stateMatches[0].layout.maxLines === MAX_LINES
+    && stateMatches[0].layout.singleLine === false
+    && trust.layoutRules.characterWidthRule
+      === PRESENTATION_RENDERER_CHARACTER_WIDTH_RULE_V001
+    && PRESENTATION_RENDERER_TEXT_LAYOUT_VERSION === 'presentation-renderer-text-layout-v001';
+  return {status: projectionOk ? 'passed' : 'projection-mismatch'};
+};
+
+const resolveWidthPolicySnapshotsForBuilderV001 = (job, snapshots) => {
+  if (!isDenseArray(snapshots)
+    || snapshots.length !== WIDTH_POLICY_SLOTS_V001.length
+    || !isDenseArray(job.widthPolicyBindings)
+    || job.widthPolicyBindings.length !== WIDTH_POLICY_SLOTS_V001.length) {
+    throw new TypeError('invalid width policy builder inputs');
+  }
+  const resolved = snapshots.map((snapshot, index) =>
+    resolveWidthPolicySnapshotAtSlotV001(job.widthPolicyBindings[index], snapshot, index));
+  if (resolved.some((entry) => entry.status !== 'resolved')
+    || evaluateResolvedWidthPolicyV001(resolved).status !== 'passed') {
+    throw new TypeError('width policy trust chain is not valid');
+  }
+  return resolved;
+};
 
 const validateRuntimeObservation = (value) => exactKeys(value, [
   'nodeBinaryInput',
@@ -1598,7 +1978,7 @@ const artifactFrom = (fileName, value, serializer = formalBytes) => {
   };
 };
 const embeddedReportBytes = (value) =>
-  Buffer.from(`${JSON.stringify(canonicalObject(value))}\n`, 'utf8');
+  Buffer.from(`${canonicalJsonTextFromValidatedValue(value)}\n`, 'utf8');
 const bindingForSnapshot = (snapshot, includeCanonical = true) => ({
   path: snapshot.path,
   fileSha256: snapshot.fileSha256,
@@ -1688,7 +2068,7 @@ const makeExpansionMap = ({
   job,
   evidence,
   sourceSnapshot,
-  widthPolicySnapshots,
+  resolvedWidthPolicy,
   implementationSnapshots,
   modelInputArtifact,
   evidenceArtifact,
@@ -1716,10 +2096,7 @@ const makeExpansionMap = ({
     });
   }
   const widthByRole = Object.fromEntries(
-    job.widthPolicyBindings.map((entry, index) => [entry.role, {
-      job: entry,
-      snapshot: widthPolicySnapshots[index],
-    }]),
+    resolvedWidthPolicy.map((entry) => [entry.role, entry]),
   );
   const implementationByRole = Object.fromEntries(
     job.implementationBinding.files.map((entry, index) => [entry.role, {
@@ -1730,7 +2107,7 @@ const makeExpansionMap = ({
   const jsonWidthBinding = (role) => ({
     path: widthByRole[role].snapshot.path,
     fileSha256: widthByRole[role].snapshot.fileSha256,
-    canonicalSha256: canonicalSha(decodeSnapshot(widthByRole[role].snapshot)),
+    canonicalSha256: widthByRole[role].canonicalSha256,
   });
   return {
     schemaVersion: EXPANSION_MAP_SCHEMA_VERSION,
@@ -1783,7 +2160,7 @@ const makeLeakageReport = ({
   expansionArtifact,
   sourceSnapshot,
   evidenceArtifact,
-  widthPolicySnapshots,
+  resolvedWidthPolicy,
   implementationSnapshots,
 }) => ({
   schemaVersion: LEAKAGE_REPORT_SCHEMA_VERSION,
@@ -1798,13 +2175,13 @@ const makeLeakageReport = ({
     sourceAtomsCanonicalSha256: canonicalSha(decodeSnapshot(sourceSnapshot)),
     boundaryEvidenceCanonicalSha256: evidenceArtifact.canonicalSha256,
     expansionMapCanonicalSha256: expansionArtifact.canonicalSha256,
-    presetRegistryCanonicalSha256: canonicalSha(decodeSnapshot(widthPolicySnapshots[0])),
-    presetValidationIndexCanonicalSha256: canonicalSha(decodeSnapshot(widthPolicySnapshots[1])),
-    materialValidationIndexCanonicalSha256: canonicalSha(decodeSnapshot(widthPolicySnapshots[2])),
-    registryBindingCanonicalSha256: canonicalSha(decodeSnapshot(widthPolicySnapshots[3])),
-    rendererTrustCanonicalSha256: canonicalSha(decodeSnapshot(widthPolicySnapshots[4])),
+    presetRegistryCanonicalSha256: resolvedWidthPolicy[0].canonicalSha256,
+    presetValidationIndexCanonicalSha256: resolvedWidthPolicy[1].canonicalSha256,
+    materialValidationIndexCanonicalSha256: resolvedWidthPolicy[2].canonicalSha256,
+    registryBindingCanonicalSha256: resolvedWidthPolicy[3].canonicalSha256,
+    rendererTrustCanonicalSha256: resolvedWidthPolicy[4].canonicalSha256,
     rendererTrustImplementationFileSha256: implementationSnapshots[2].fileSha256,
-    textLayoutImplementationFileSha256: widthPolicySnapshots[5].fileSha256,
+    textLayoutImplementationFileSha256: resolvedWidthPolicy[5].snapshot.fileSha256,
   },
   checks: LEAKAGE_CHECK_NAMES.map((name) => ({
     name,
@@ -1823,7 +2200,7 @@ const makeManifest = ({
   completionReportSnapshot,
   implementationSnapshots,
   sourceSnapshots,
-  widthPolicySnapshots,
+  resolvedWidthPolicy,
   runtimeObservation,
   embeddedReportArtifact,
   contentArtifacts,
@@ -1835,18 +2212,11 @@ const makeManifest = ({
       fileSha256: snapshot.fileSha256,
       canonicalSha256: canonicalSha(decodeSnapshot(snapshot)),
     })),
-    ...widthPolicySnapshots.map((snapshot, index) => ({
-      role: [
-        'presetRegistry',
-        'presetValidationIndex',
-        'materialValidationIndex',
-        'registryBinding',
-        'rendererTrust',
-        'textLayoutImplementation',
-      ][index],
-      path: snapshot.path,
-      fileSha256: snapshot.fileSha256,
-      canonicalSha256: index === 5 ? null : canonicalSha(decodeSnapshot(snapshot)),
+    ...resolvedWidthPolicy.map((entry) => ({
+      role: entry.role,
+      path: entry.snapshot.path,
+      fileSha256: entry.snapshot.fileSha256,
+      canonicalSha256: entry.canonicalSha256,
     })),
   ];
   const contentProjection = contentArtifacts.map((artifact, index) => ({
@@ -1996,6 +2366,10 @@ export function buildPresentationCaptionSemanticSourcePackageV001(context) {
   if (validatePresentationCaptionSemanticSourcePackageJobV001(job).status !== 'valid') {
     throw new TypeError('invalid package job');
   }
+  const resolvedWidthPolicy = resolveWidthPolicySnapshotsForBuilderV001(
+    job,
+    context.widthPolicySnapshots,
+  );
   const sourceArtifact = decodeSnapshot(context.sourceSnapshots[0]);
   const evidence = context.gateA.evidenceValue;
   const embeddedReport = context.gateA.embeddedReportValue;
@@ -2022,7 +2396,7 @@ export function buildPresentationCaptionSemanticSourcePackageV001(context) {
     job,
     evidence,
     sourceSnapshot: context.sourceSnapshots[0],
-    widthPolicySnapshots: context.widthPolicySnapshots,
+    resolvedWidthPolicy,
     implementationSnapshots: context.implementationSnapshots,
     modelInputArtifact,
     evidenceArtifact,
@@ -2032,7 +2406,7 @@ export function buildPresentationCaptionSemanticSourcePackageV001(context) {
     expansionArtifact,
     sourceSnapshot: context.sourceSnapshots[0],
     evidenceArtifact,
-    widthPolicySnapshots: context.widthPolicySnapshots,
+    resolvedWidthPolicy,
     implementationSnapshots: context.implementationSnapshots,
   }));
   const contentArtifacts = [
@@ -2050,7 +2424,7 @@ export function buildPresentationCaptionSemanticSourcePackageV001(context) {
     completionReportSnapshot: context.gateA.completionReportSnapshot,
     implementationSnapshots: context.implementationSnapshots,
     sourceSnapshots: context.sourceSnapshots,
-    widthPolicySnapshots: context.widthPolicySnapshots,
+    resolvedWidthPolicy,
     runtimeObservation: context.runtimeObservation,
     embeddedReportArtifact,
     contentArtifacts,
@@ -2643,17 +3017,22 @@ const deriveCoreChecks = (context, state) => {
     addViolation(state, 'implementationBinding', 'IMPLEMENTATION_MISMATCH', '$.implementationBindings');
   }
 
-  let inputPassed = jobPassed && context.widthPolicyInputs.length === 6;
-  const decodedWidth = [];
+  let inputPassed = jobPassed
+    && context.widthPolicyInputs.length === WIDTH_POLICY_SLOTS_V001.length;
+  const resolvedWidthPolicy = [];
   if (inputPassed) {
-    for (let index = 0; index < 6; index += 1) {
+    for (let index = 0; index < WIDTH_POLICY_SLOTS_V001.length; index += 1) {
       const binding = context.job.value.widthPolicyBindings[index];
-      const result = validateObservationAgainstBinding(context.widthPolicyInputs[index], binding);
-      decodedWidth.push(result.decoded);
-      if (result.unsafe) {
+      const result = resolveWidthPolicyObservationAtSlotV001(
+        context.widthPolicyInputs[index],
+        binding,
+        index,
+      );
+      resolvedWidthPolicy.push(result);
+      if (result.status === 'unsafe') {
         addViolation(state, 'inputBinding', 'INPUT_PATH_UNSAFE', `$.inputBindings[${index}].path`);
         inputPassed = false;
-      } else if (result.mismatch) {
+      } else if (result.status === 'file-mismatch') {
         addViolation(
           state,
           'inputBinding',
@@ -2661,12 +3040,20 @@ const deriveCoreChecks = (context, state) => {
           `$.inputBindings[${index}].fileSha256`,
         );
         inputPassed = false;
-      } else if (index < 5 && (result.decodeFailed || !isPlainObject(result.decoded))) {
+      } else if (result.status === 'schema-unsupported') {
         addViolation(
           state,
           'inputBinding',
           'INPUT_SCHEMA_UNSUPPORTED',
           `$.inputBindings[${index}].decodedValue`,
+        );
+        inputPassed = false;
+      } else if (result.status === 'canonical-mismatch') {
+        addViolation(
+          state,
+          'inputBinding',
+          'INPUT_HASH_MISMATCH',
+          `$.inputBindings[${index}].canonicalSha256`,
         );
         inputPassed = false;
       }
@@ -2675,73 +3062,17 @@ const deriveCoreChecks = (context, state) => {
     addViolation(state, 'inputBinding', 'INPUT_PATH_UNSAFE', '$.inputBindings');
   }
   if (inputPassed) {
-    const [registry, presetIndex, materialIndex, registryBinding, trust] = decodedWidth;
-    const trustPolicy = registry?.presets?.filter(
-      (entry) => entry?.presetId === PRESET_ID,
-    ) ?? [];
-    const stateMatches = trustPolicy[0]?.visualStates?.filter(
-      (entry) => entry?.stateId === VISUAL_STATE_ID,
-    ) ?? [];
-    const policyMatches = presetIndex?.presets?.filter(
-      (entry) => entry?.presetId === PRESET_ID,
-    ) ?? [];
-    const trustDependency = trust?.rendererDependencies?.filter(
-      (entry) => entry?.path === TEXT_LAYOUT_IMPLEMENTATION_PATH,
-    ) ?? [];
-    const schemaOk = registry?.schemaVersion === 'presentation-preset-registry-v001'
-      && isNonEmptyString(registry?.registryVersion)
-      && isDenseArray(presetIndex?.presets)
-      && isDenseArray(materialIndex?.materials)
-      && exactKeys(registryBinding, [
-        'schemaVersion',
-        'presetRegistryVersion',
-        'presetValidationIndexSha256',
-        'materialRegistryVersion',
-        'materialValidationIndexSha256',
-      ])
-      && trust?.schemaVersion === 'presentation-renderer-trust-v001'
-      && trust?.trustVersion === 'presentation-renderer-trust-v001'
-      && trust?.rendererContractVersion === 'zev-renderer-boundary-v002';
-    if (!schemaOk) {
-      addViolation(state, 'inputBinding', 'INPUT_SCHEMA_UNSUPPORTED', '$.inputBindings');
+    const trustEvaluation = evaluateResolvedWidthPolicyV001(resolvedWidthPolicy);
+    if (trustEvaluation.status === 'hash-mismatch') {
+      addViolation(state, 'inputBinding', 'INPUT_HASH_MISMATCH', '$.inputBindings');
       inputPassed = false;
-    } else {
-      const chainOk = canonicalSha(trust) === TRUST_CANONICAL_SHA256
-        && registryBinding.presetRegistryVersion === registry.registryVersion
-        && registryBinding.presetValidationIndexSha256
-          === context.widthPolicyInputs[1].snapshot.fileSha256
-        && registryBinding.materialRegistryVersion === materialIndex.registryVersion
-        && registryBinding.materialValidationIndexSha256
-          === context.widthPolicyInputs[2].snapshot.fileSha256
-        && trust.presetRegistry?.path === context.widthPolicyInputs[0].path
-        && trust.presetRegistry?.fileSha256 === context.widthPolicyInputs[0].snapshot.fileSha256
-        && trust.presetRegistry?.canonicalSha256 === canonicalSha(registry)
-        && trust.registryBinding?.path === context.widthPolicyInputs[3].path
-        && trust.registryBinding?.fileSha256 === context.widthPolicyInputs[3].snapshot.fileSha256
-        && trust.registryBinding?.canonicalSha256 === canonicalSha(registryBinding)
-        && trustDependency.length === 1
-        && trustDependency[0].fileSha256 === context.widthPolicyInputs[5].snapshot.fileSha256;
-      if (!chainOk) {
-        addViolation(state, 'inputBinding', 'INPUT_HASH_MISMATCH', '$.inputBindings');
-        inputPassed = false;
-      } else if (trustPolicy.length !== 1
-        || stateMatches.length !== 1
-        || policyMatches.length !== 1
-        || !exactKeys(stateMatches[0].layout, ['maxCharsPerLine', 'maxLines', 'singleLine'])
-        || stateMatches[0].layout.maxCharsPerLine !== MAX_LOGICAL_WIDTH
-        || stateMatches[0].layout.maxLines !== MAX_LINES
-        || stateMatches[0].layout.singleLine !== false
-        || trust.layoutRules?.characterWidthRule
-          !== PRESENTATION_RENDERER_CHARACTER_WIDTH_RULE_V001
-        || PRESENTATION_RENDERER_TEXT_LAYOUT_VERSION
-          !== 'presentation-renderer-text-layout-v001') {
-        addViolation(
-          state,
-          'modelInput',
-          'MODEL_INPUT_PROJECTION_MISMATCH',
-          '$.modelInput.displayConstraints',
-        );
-      }
+    } else if (trustEvaluation.status === 'projection-mismatch') {
+      addViolation(
+        state,
+        'modelInput',
+        'MODEL_INPUT_PROJECTION_MISMATCH',
+        '$.modelInput.displayConstraints',
+      );
     }
   }
 

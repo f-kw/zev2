@@ -126,6 +126,11 @@ const diagnosticResult = (diagnostic) => Object.freeze({
   diagnostic,
 });
 
+const PREFLIGHT_PROJECTION_UNAVAILABLE_RESULT = Object.freeze({
+  kind: 'untrusted',
+  diagnostic: 'CAPTION_B1_PACKAGE_PREFLIGHT_PROJECTION_UNAVAILABLE',
+});
+
 const statKind = (stats) => {
   if (stats.isFile()) return 'regular-file';
   if (stats.isDirectory()) return 'directory';
@@ -148,6 +153,27 @@ const statObservation = (stats) => ({
   mtimeNs: stats.mtimeNs.toString(10),
   nlink: stats.nlink.toString(10),
 });
+
+const sameRegularFileStatObservation = (left, right) => [
+  'kind',
+  'dev',
+  'ino',
+  'size',
+  'mtimeNs',
+  'nlink',
+].every((field) => left?.[field] === right?.[field])
+  && left?.kind === 'regular-file';
+
+const isStableRegularFileReadObservation = (observation) =>
+  observation?.status === 'read'
+  && sameRegularFileStatObservation(
+    observation.snapshot?.pathLstatBeforeOpen,
+    observation.snapshot?.fdStatAfterOpen,
+  )
+  && sameRegularFileStatObservation(
+    observation.snapshot?.fdStatAfterOpen,
+    observation.snapshot?.fdStatAfterRead,
+  );
 
 const identityObservation = (stats) => ({
   kind: stats.isDirectory()
@@ -611,7 +637,9 @@ const snapshotWatchedTree = async (
           workspaceRoot,
           filesystemAdapter,
         );
-        if (observation.status !== 'read') throw new TypeError('watched file unreadable');
+        if (!isStableRegularFileReadObservation(observation)) {
+          throw new TypeError('watched file unreadable or changed during read');
+        }
         results.push({
           path: repositoryPath,
           kind,
@@ -633,6 +661,107 @@ const snapshotWatchedTree = async (
   await visit(rootPath, WATCHED_ROOT);
   return results.sort((left, right) => compareUtf16(left.path, right.path));
 };
+
+const buildWatchedTreeProjection = async (
+  workspaceRoot,
+  filesystemAdapter,
+  excludedPaths,
+) => {
+  const entries = await snapshotWatchedTree(
+    workspaceRoot,
+    filesystemAdapter,
+    excludedPaths,
+  );
+  const canonicalSha256Value = canonicalSha256(entries);
+  if (!SHA256_PATTERN.test(canonicalSha256Value ?? '')) {
+    throw new TypeError('watched tree projection hash unavailable');
+  }
+  return {
+    entries,
+    canonicalSha256: canonicalSha256Value,
+  };
+};
+
+const missingPath = async (absolutePath, filesystemAdapter) => {
+  try {
+    await filesystemAdapter.lstatBigInt(absolutePath);
+    return false;
+  } catch (error) {
+    if (error?.code === 'ENOENT') return true;
+    throw error;
+  }
+};
+
+export async function inspectPresentationCaptionSemanticSourcePackagePreflightProjectionV001(
+  jobPath,
+  options,
+) {
+  try {
+    const filesystemAdapter = options?.filesystemAdapter;
+    if (typeof jobPath !== 'string'
+      || !hasExactKeys(options, ['filesystemAdapter'])
+      || !validAdapter(filesystemAdapter, PACKAGE_ADAPTER_FIELDS)
+      || !isDirectJsonUnder(jobPath, PREFLIGHT_JOB_ROOT)) {
+      return PREFLIGHT_PROJECTION_UNAVAILABLE_RESULT;
+    }
+
+    const workspaceRoot = await filesystemAdapter.realpath(LEXICAL_WORKSPACE_ROOT);
+    if (!isAbsolute(workspaceRoot)
+      || await filesystemAdapter.realpath(RUNNER_PATH)
+        !== workspaceAbsolutePath(workspaceRoot, EXPECTED_RUNNER_REPOSITORY_PATH)) {
+      return PREFLIGHT_PROJECTION_UNAVAILABLE_RESULT;
+    }
+
+    const absoluteJobPath = workspaceAbsolutePath(workspaceRoot, jobPath);
+    if (!await missingPath(absoluteJobPath, filesystemAdapter)) {
+      return PREFLIGHT_PROJECTION_UNAVAILABLE_RESULT;
+    }
+
+    const resolution = await inspectWorkspaceResolution(
+      jobPath,
+      workspaceRoot,
+      filesystemAdapter,
+    );
+    const parentObservation = resolution?.observation?.ancestors?.at(-1);
+    if (resolution === null
+      || resolution.absolutePath !== absoluteJobPath
+      || resolution.observation.workspaceRootRealPath !== workspaceRoot
+      || resolution.observation.lexicalWorkspaceRelativePath !== jobPath
+      || resolution.observation.targetRealPath !== null
+      || parentObservation?.workspaceRelativePath !== PREFLIGHT_JOB_ROOT
+      || parentObservation.lstatKind !== 'directory'
+      || parentObservation.realPath
+        !== workspaceAbsolutePath(workspaceRoot, PREFLIGHT_JOB_ROOT)
+      || resolution.observation.ancestors.some((entry) => (
+        entry.lstatKind !== 'directory'
+        || entry.realPath !== (
+          entry.workspaceRelativePath === ''
+            ? workspaceRoot
+            : workspaceAbsolutePath(workspaceRoot, entry.workspaceRelativePath)
+        )
+      ))) {
+      return PREFLIGHT_PROJECTION_UNAVAILABLE_RESULT;
+    }
+
+    const excludedPaths = Object.freeze([jobPath]);
+    const projection = await buildWatchedTreeProjection(
+      workspaceRoot,
+      makeFacade(filesystemAdapter, 'read-only-preflight'),
+      excludedPaths,
+    );
+    if (!await missingPath(absoluteJobPath, filesystemAdapter)) {
+      return PREFLIGHT_PROJECTION_UNAVAILABLE_RESULT;
+    }
+    return Object.freeze({
+      kind: 'trusted-projection',
+      watchedRoot: WATCHED_ROOT,
+      excludedPaths,
+      expectedBeforeCanonicalSha256: projection.canonicalSha256,
+    });
+  } catch {
+    return PREFLIGHT_PROJECTION_UNAVAILABLE_RESULT;
+  }
+}
 
 const inspectLegacyFormalPathState = async (absolutePath, filesystemAdapter) => {
   try {
@@ -1416,13 +1545,14 @@ const initialiseRunState = async (
   workspaceRoot,
   filesystemAdapter,
 ) => {
-  const beforeEntries = jobValue.mode === 'read-only-preflight'
-    ? await snapshotWatchedTree(
+  const beforeProjection = jobValue.mode === 'read-only-preflight'
+    ? await buildWatchedTreeProjection(
       workspaceRoot,
       filesystemAdapter,
       jobValue.readOnlyGuard.excludedPaths,
     )
     : null;
+  const beforeEntries = beforeProjection?.entries ?? null;
 
   const gateAJobInput = await readStableWorkspaceObservation(
     'gateAJob',
@@ -2680,11 +2810,12 @@ const buildRunReport = (state, finalCheck) => {
 };
 
 const finishReadOnlyProcessObservation = async (state) => {
-  const afterEntries = await snapshotWatchedTree(
+  const afterProjection = await buildWatchedTreeProjection(
     state.workspaceRoot,
     state.filesystemAdapter,
     state.jobValue.readOnlyGuard.excludedPaths,
   );
+  const afterEntries = afterProjection.entries;
   const finalInputs = await rereadNonJobInputs(
     state.nonJobDescriptors,
     state.workspaceRoot,

@@ -2,14 +2,22 @@ import assert from 'node:assert/strict';
 import {spawnSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
 import {
+  closeSync,
+  constants as fsConstants,
   existsSync,
+  fstatSync,
+  fsyncSync,
+  ftruncateSync,
+  lstatSync,
   mkdirSync,
+  openSync,
   readFileSync,
   readdirSync,
   readlinkSync,
+  realpathSync,
   rmdirSync,
-  rmSync,
-  writeFileSync,
+  unlinkSync,
+  writeSync,
 } from 'node:fs';
 import {dirname, resolve} from 'node:path';
 import {test} from 'node:test';
@@ -39,6 +47,7 @@ const EXPECTED_CORE_EXPORTS = Object.freeze([
 
 const EXPECTED_RUNNER_EXPORTS = Object.freeze([
   'createPresentationCaptionSemanticSourcePackageProductionFilesystemAdapterV001',
+  'inspectPresentationCaptionSemanticSourcePackagePreflightProjectionV001',
   'runPresentationCaptionSemanticSourcePackageCliV001',
   'runPresentationCaptionSemanticSourcePackageV001',
 ]);
@@ -114,7 +123,7 @@ test('package coreの公開入口と違反コードは承認済み集合だけ�
   );
 });
 
-test('package runnerの公開入口は承認済み3件だけである', () => {
+test('package runnerの公開入口は承認済み4件だけである', () => {
   assert.deepEqual(Object.keys(packageRunner).sort(), [...EXPECTED_RUNNER_EXPORTS].sort());
   const adapter =
     packageRunner.createPresentationCaptionSemanticSourcePackageProductionFilesystemAdapterV001();
@@ -145,7 +154,9 @@ test('strict JSONは適法なescapeと補助平面文字を無変更で往復す
   const formal = packageCore.serializePresentationCaptionB1FormalJsonV001(original);
   assert.equal(formal.status, 'serialized');
   const decoded = packageCore.decodePresentationCaptionB1StrictJsonV001(formal.bytes);
-  assert.deepEqual(decoded, {status: 'decoded', value: original});
+  assert.equal(decoded.status, 'decoded');
+  assert.equal(Object.getPrototypeOf(decoded.value), null);
+  assert.deepEqual({...decoded.value}, original);
 });
 
 for (const [name, input, reason] of [
@@ -155,6 +166,8 @@ for (const [name, input, reason] of [
   ['後続文字', bytes('{} trailing'), 'trailing-content'],
   ['複数JSON値', bytes('{} {}'), 'trailing-content'],
   ['重複key', bytes('{"x":1,"x":2}'), 'duplicate-key'],
+  ['小数token', bytes('{"x":1.0}'), 'number-invalid'],
+  ['指数token', bytes('{"x":1e2}'), 'number-invalid'],
   ['巨大指数', bytes('{"x":1e9999}'), 'number-invalid'],
   ['負のゼロ', bytes('{"x":-0}'), 'number-invalid'],
   ['孤立surrogate', bytes('{"x":"\\ud800"}'), 'surrogate-invalid'],
@@ -192,6 +205,7 @@ const invalidMemoryCases = [
   ['BigInt', 1n, 'unsupported-value'],
   ['NaN', Number.NaN, 'number-invalid'],
   ['Infinity', Number.POSITIVE_INFINITY, 'number-invalid'],
+  ['小数', 0.04, 'number-invalid'],
   ['負のゼロ', -0, 'number-invalid'],
   ['safe integer外', Number.MAX_SAFE_INTEGER + 1, 'number-invalid'],
   ['Date', new Date(0), 'non-plain-object'],
@@ -249,6 +263,109 @@ test('strict in-memory検査はaccessor・toJSON・symbol key・非列挙field�
   assert.deepEqual(
     packageCore.assertPresentationCaptionB1StrictValueV001(hidden),
     {status: 'invalid', reason: 'non-enumerable-property'},
+  );
+});
+
+test('strict decodeはrootと入れ子をnull prototypeのown data propertyとして復号する', () => {
+  const decoded = packageCore.decodePresentationCaptionB1StrictJsonV001(bytes(
+    '{"z":{"nested":{"value":1}},"array":[{"inside":2}],'
+      + '"__proto__":"safe","constructor":"plain","prototype":"plain"}',
+  ));
+  assert.equal(decoded.status, 'decoded');
+
+  const assertNullPrototypeObject = (value) => {
+    assert.equal(Object.getPrototypeOf(value), null);
+    for (const key of Object.keys(value)) {
+      const descriptor = Object.getOwnPropertyDescriptor(value, key);
+      assert.deepEqual(
+        {
+          enumerable: descriptor?.enumerable,
+          writable: descriptor?.writable,
+          configurable: descriptor?.configurable,
+          accessor: descriptor !== undefined
+            && (Object.hasOwn(descriptor, 'get') || Object.hasOwn(descriptor, 'set')),
+        },
+        {
+          enumerable: true,
+          writable: true,
+          configurable: true,
+          accessor: false,
+        },
+      );
+    }
+  };
+
+  assertNullPrototypeObject(decoded.value);
+  assertNullPrototypeObject(decoded.value.z);
+  assertNullPrototypeObject(decoded.value.z.nested);
+  assert.equal(Array.isArray(decoded.value.array), true);
+  assert.equal(Object.getPrototypeOf(decoded.value.array), Array.prototype);
+  assertNullPrototypeObject(decoded.value.array[0]);
+  assert.equal(Object.hasOwn(decoded.value, '__proto__'), true);
+  assert.equal(decoded.value.__proto__, 'safe');
+  assert.equal(decoded.value.constructor, 'plain');
+  assert.equal(decoded.value.prototype, 'plain');
+  assert.equal(Object.prototype.safe, undefined);
+});
+
+test('strict decodeの一般objectは整数風keyを保持しcanonical化だけがUTF-16順へ並べる', () => {
+  const decoded = packageCore.decodePresentationCaptionB1StrictJsonV001(bytes(
+    '{"10":"ten","2":"two","a":{"10":10,"2":2},"__proto__":"safe"}',
+  ));
+  assert.equal(decoded.status, 'decoded');
+  assert.equal(Object.getPrototypeOf(decoded.value), null);
+  assert.deepEqual(Object.keys(decoded.value), ['2', '10', 'a', '__proto__']);
+  assert.deepEqual(Object.keys(decoded.value.a), ['2', '10']);
+  assert.equal(decoded.value['10'], 'ten');
+  assert.equal(decoded.value['2'], 'two');
+
+  const canonical =
+    packageCore.canonicalizePresentationCaptionB1JsonV001(decoded.value);
+  assert.equal(canonical.status, 'canonicalized');
+  assert.equal(
+    canonical.bytes.toString('utf8'),
+    '{"10":"ten","2":"two","__proto__":"safe","a":{"10":10,"2":2}}',
+  );
+});
+
+test('strict in-memory検査は通常objectとnull prototype objectの双方を受理する', () => {
+  const nullPrototype = Object.create(null);
+  nullPrototype.integer = 1;
+  nullPrototype.nested = Object.create(null);
+  nullPrototype.nested.text = '保持';
+  assert.deepEqual(
+    packageCore.assertPresentationCaptionB1StrictValueV001(nullPrototype),
+    {status: 'valid'},
+  );
+  assert.deepEqual(
+    packageCore.assertPresentationCaptionB1StrictValueV001({
+      integer: 1,
+      nested: {text: '保持'},
+    }),
+    {status: 'valid'},
+  );
+});
+
+test('B1所有値と時刻・frame・sampleは小数をbyteでもメモリでも正式化でも拒否する', () => {
+  for (const field of ['startMs', 'endMs', 'frame', 'sample']) {
+    assert.deepEqual(
+      packageCore.decodePresentationCaptionB1StrictJsonV001(
+        bytes(`{"${field}":1.5}`),
+      ),
+      {status: 'invalid', reason: 'number-invalid'},
+    );
+    assert.deepEqual(
+      packageCore.assertPresentationCaptionB1StrictValueV001({[field]: 1.5}),
+      {status: 'invalid', reason: 'number-invalid'},
+    );
+  }
+  assert.deepEqual(
+    packageCore.serializePresentationCaptionB1FormalJsonV001({ratio: 0.04}),
+    {status: 'invalid', reason: 'number-invalid'},
+  );
+  assert.deepEqual(
+    packageCore.canonicalizePresentationCaptionB1JsonV001({ratio: 0.04}),
+    {status: 'invalid', reason: 'number-invalid'},
   );
 });
 
@@ -319,6 +436,44 @@ const WIDTH_POLICY_PATHS = Object.freeze([
     'evals/clip_composition/presentation_renderer_text_layout_v001.mjs',
   ],
 ]);
+const APPROVED_EXTERNAL_DISPLAY_HASHES = Object.freeze([
+  Object.freeze({
+    role: 'presetRegistry',
+    fileSha256: '8e9b0a039c8a4c9edf2c66b1df343c1d892d4688ebc4886a9af322bd44a6e5a8',
+    canonicalSha256: '5915d6aae47681c43ea202a20eee16cbf669abfe24fdc832f75fb127ad46dca4',
+  }),
+  Object.freeze({
+    role: 'presetValidationIndex',
+    fileSha256: 'd2665c7947564a56955bbc47de7d95d038c64487ea71b6cbc1a2cc61667c05a1',
+    canonicalSha256: '40609dbc63b7c2d1f4c2cd92ee22c493c08382c0d63c27ea06087535f5882067',
+  }),
+  Object.freeze({
+    role: 'materialValidationIndex',
+    fileSha256: '98213035bc6e395b090d7cff2639d4bf707fb838b7df50cb51bc60ab95d4758e',
+    canonicalSha256: '3958ad2d21233342e49aedd29cbd337785a228e1063d1802b64e92dc1793d1fc',
+  }),
+  Object.freeze({
+    role: 'registryBinding',
+    fileSha256: 'b26db5c57aac5dd290e084d953350778b527c6eb21f66f62dc7431bf24482fff',
+    canonicalSha256: 'bfbbcb5c611313d368305e6e8d552ddcdaf41949ed8d8f074485c8ed0aa2d43e',
+  }),
+  Object.freeze({
+    role: 'rendererTrust',
+    fileSha256: '04ec4971d078413b68c19869b0285130ec553f14601f45d27125738a7498eddc',
+    canonicalSha256: '9d5ffe631033dc594c917649e2529899e303f3cb8a7d7b1b65ea0d26b7c645f2',
+  }),
+]);
+const APPROVED_EXTERNAL_DISPLAY_HASH_BY_ROLE = Object.freeze(
+  Object.fromEntries(
+    APPROVED_EXTERNAL_DISPLAY_HASHES.map((entry) => [entry.role, entry]),
+  ),
+);
+const APPROVED_RENDERER_LAYOUT_DECIMALS = Object.freeze({
+  textSafePaddingRatio: 0.04,
+  horizontalSafeMarginRatio: 0.04,
+  verticalSafeMarginRatio: 0.02,
+  fallbackTextAreaRatio: 0.98,
+});
 const PACKAGE_CHECK_NAMES = Object.freeze([
   'jobBinding',
   'implementationBinding',
@@ -408,6 +563,8 @@ const formalBytes = (value) => {
   assert.equal(result.status, 'serialized');
   return result.bytes;
 };
+const externalDisplayJsonBytes = (value) =>
+  Buffer.from(`${JSON.stringify(value, null, 2)}\n`, 'utf8');
 const clone = (value) => {
   if (Buffer.isBuffer(value)) return Buffer.from(value);
   if (Array.isArray(value)) return value.map(clone);
@@ -487,6 +644,33 @@ const refreshJobSnapshot = (context) => {
   if (context.productionMode === 'formal-generation') {
     context.job.prePublicationInput = readObservation('job', clone(context.job.initialSnapshot));
   }
+};
+const replaceWidthPolicyJson = (
+  context,
+  index,
+  valueOrBytes,
+  {
+    updateFileBinding = true,
+    canonicalSha256Value = context.job.value.widthPolicyBindings[index].canonicalSha256,
+    discriminator = 660 + index,
+  } = {},
+) => {
+  const inputBytes = Buffer.isBuffer(valueOrBytes)
+    ? Buffer.from(valueOrBytes)
+    : externalDisplayJsonBytes(valueOrBytes);
+  const observation = context.widthPolicyInputs[index];
+  observation.snapshot = stableSnapshotFromBytes(
+    observation.path,
+    inputBytes,
+    discriminator,
+  );
+  if (updateFileBinding) {
+    context.job.value.widthPolicyBindings[index].fileSha256 =
+      observation.snapshot.fileSha256;
+  }
+  context.job.value.widthPolicyBindings[index].canonicalSha256 =
+    canonicalSha256Value;
+  refreshJobSnapshot(context);
 };
 const rebuildPackagePasses = (context) => {
   const builderContext = {
@@ -729,7 +913,7 @@ const makeValidFixture = () => {
     fileSha256: entry.snapshot.fileSha256,
     canonicalSha256: index === 5
       ? null
-      : canonicalSha256(JSON.parse(entry.snapshot.bytes.toString('utf8'))),
+      : APPROVED_EXTERNAL_DISPLAY_HASH_BY_ROLE[entry.role].canonicalSha256,
   }));
   const jobValue = {
     schemaVersion: 'presentation-caption-semantic-source-package-job-v001',
@@ -1061,7 +1245,7 @@ const makeRunnerJob = (mode, suffix) => {
 
 const createHybridRunnerFilesystem = (
   runnerJob,
-  {formalFailure = null} = {},
+  {formalFailure = null, includeJob = true} = {},
 ) => {
   const base =
     packageRunner.createPresentationCaptionSemanticSourcePackageProductionFilesystemAdapterV001();
@@ -1096,7 +1280,7 @@ const createHybridRunnerFilesystem = (
     return entry;
   };
   addEntry(absoluteJobRoot, 'directory');
-  addEntry(absoluteJobPath, 'file', runnerJob.bytes);
+  if (includeJob) addEntry(absoluteJobPath, 'file', runnerJob.bytes);
 
   const isManaged = (pathValue) => managedRoots.some(
     (root) => pathValue === root || pathValue.startsWith(`${root}/`),
@@ -1309,6 +1493,202 @@ const createHybridRunnerFilesystem = (
   });
 };
 
+const Q1_SYNTHETIC_WATCHED_FILE_NAME = 'q1-nonempty-watched-file-v001.txt';
+const Q1_SYNTHETIC_WATCHED_FILE_PATH =
+  `${PRESENTATION_WATCHED_ROOT}/${Q1_SYNTHETIC_WATCHED_FILE_NAME}`;
+const Q1_SYNTHETIC_WATCHED_FILE_ABSOLUTE_PATH =
+  resolve(WORKSPACE_ROOT, Q1_SYNTHETIC_WATCHED_FILE_PATH);
+const Q1_SYNTHETIC_WATCHED_FILE_BYTES =
+  bytes('Q1 shared production projection fixture\n');
+const createQ1WatchedTreeFilesystem = (
+  runnerJob,
+  {
+    includeJob = true,
+    watchedEntryKind = 'file',
+    mutateDuringRead = false,
+  } = {},
+) => {
+  const filesystem = createHybridRunnerFilesystem(runnerJob, {includeJob});
+  const base = filesystem.adapter;
+  const watchedEntry = {
+    kind: 'file',
+    bytes: Buffer.from(Q1_SYNTHETIC_WATCHED_FILE_BYTES),
+    ino: 49001,
+  };
+  const watchedDirectoryEntry =
+    makeVirtualDirent(Q1_SYNTHETIC_WATCHED_FILE_NAME, watchedEntryKind);
+  const adapter = Object.freeze({
+    openReadOnly: async (pathValue) => {
+      if (pathValue !== Q1_SYNTHETIC_WATCHED_FILE_ABSOLUTE_PATH
+        || watchedEntryKind !== 'file') return await base.openReadOnly(pathValue);
+      let closed = false;
+      return Object.freeze({
+        statBigInt: async () => {
+          assert.equal(closed, false);
+          return makeVirtualStats(watchedEntry);
+        },
+        readAllBytes: async () => {
+          assert.equal(closed, false);
+          if (mutateDuringRead) {
+            watchedEntry.bytes = Buffer.concat([
+              watchedEntry.bytes,
+              Buffer.from('changed-during-read', 'utf8'),
+            ]);
+            watchedEntry.ino += 1;
+            filesystem.operations.push({
+              operation: 'watchedReadMutation',
+              path: pathValue,
+            });
+            return Buffer.from(watchedEntry.bytes);
+          }
+          return Buffer.from(watchedEntry.bytes);
+        },
+        close: async () => {
+          assert.equal(closed, false);
+          closed = true;
+        },
+      });
+    },
+    openWriteExclusive: base.openWriteExclusive,
+    openDirectoryReadOnly: base.openDirectoryReadOnly,
+    lstatBigInt: async (pathValue) => {
+      if (pathValue === Q1_SYNTHETIC_WATCHED_FILE_ABSOLUTE_PATH
+        && watchedEntryKind === 'file') return makeVirtualStats(watchedEntry);
+      return await base.lstatBigInt(pathValue);
+    },
+    realpath: async (pathValue) => {
+      if (pathValue === Q1_SYNTHETIC_WATCHED_FILE_ABSOLUTE_PATH
+        && watchedEntryKind === 'file') return pathValue;
+      return await base.realpath(pathValue);
+    },
+    readdirWithTypes: async (pathValue) => {
+      if (pathValue === resolve(WORKSPACE_ROOT, PRESENTATION_WATCHED_ROOT)) {
+        return [watchedDirectoryEntry];
+      }
+      return await base.readdirWithTypes(pathValue);
+    },
+    readlink: base.readlink,
+    mkdirExclusive: base.mkdirExclusive,
+    mkdir: base.mkdir,
+    rename: base.rename,
+    removeEmptyDirectory: base.removeEmptyDirectory,
+  });
+  return Object.freeze({
+    ...filesystem,
+    adapter,
+  });
+};
+
+test('Q1:A監視投影入口は不存在preflight jobだけを除外しproductionと同じ読取経路を使う', async () => {
+  const runnerJob = makeRunnerJob('read-only-preflight', 'projection-entrypoint');
+  const filesystem = createHybridRunnerFilesystem(
+    runnerJob,
+    {includeJob: false},
+  );
+  const result =
+    await packageRunner.inspectPresentationCaptionSemanticSourcePackagePreflightProjectionV001(
+      runnerJob.jobPath,
+      {filesystemAdapter: filesystem.adapter},
+    );
+  assert.deepEqual(result, {
+    kind: 'trusted-projection',
+    watchedRoot: PRESENTATION_WATCHED_ROOT,
+    excludedPaths: [runnerJob.jobPath],
+    expectedBeforeCanonicalSha256: canonicalSha256([]),
+  });
+  assert.equal(
+    filesystem.operations.some((entry) => [
+      'openWriteExclusive',
+      'mkdirExclusive',
+      'mkdir',
+      'rename',
+      'removeEmptyDirectory',
+    ].includes(entry.operation)),
+    false,
+  );
+  assert.equal(
+    [...PACKAGE_RUNNER_SOURCE.matchAll(/buildWatchedTreeProjection\(/gu)].length,
+    3,
+  );
+});
+
+test('Q1:A監視投影入口は許可外path・既存target・追加optionをuntrustedで拒否する', async () => {
+  const expected = {
+    kind: 'untrusted',
+    diagnostic: 'CAPTION_B1_PACKAGE_PREFLIGHT_PROJECTION_UNAVAILABLE',
+  };
+  const runnerJob = makeRunnerJob('read-only-preflight', 'projection-rejection');
+  const existing = createHybridRunnerFilesystem(runnerJob);
+  assert.deepEqual(
+    await packageRunner.inspectPresentationCaptionSemanticSourcePackagePreflightProjectionV001(
+      runnerJob.jobPath,
+      {filesystemAdapter: existing.adapter},
+    ),
+    expected,
+  );
+
+  const missing = createHybridRunnerFilesystem(runnerJob, {includeJob: false});
+  assert.deepEqual(
+    await packageRunner.inspectPresentationCaptionSemanticSourcePackagePreflightProjectionV001(
+      '../outside.json',
+      {filesystemAdapter: missing.adapter},
+    ),
+    expected,
+  );
+  assert.deepEqual(
+    await packageRunner.inspectPresentationCaptionSemanticSourcePackagePreflightProjectionV001(
+      runnerJob.jobPath,
+      {filesystemAdapter: missing.adapter, extra: true},
+    ),
+    expected,
+  );
+});
+
+test('Q1:A監視投影入口はunsupported entryと読取中変化を固定diagnosticで拒否する', async () => {
+  const expected = {
+    kind: 'untrusted',
+    diagnostic: 'CAPTION_B1_PACKAGE_PREFLIGHT_PROJECTION_UNAVAILABLE',
+  };
+  const unsupportedJob = makeRunnerJob(
+    'read-only-preflight',
+    'projection-unsupported-entry',
+  );
+  const unsupported = createQ1WatchedTreeFilesystem(
+    unsupportedJob,
+    {includeJob: false, watchedEntryKind: 'other'},
+  );
+  assert.deepEqual(
+    await packageRunner.inspectPresentationCaptionSemanticSourcePackagePreflightProjectionV001(
+      unsupportedJob.jobPath,
+      {filesystemAdapter: unsupported.adapter},
+    ),
+    expected,
+  );
+
+  const changedJob = makeRunnerJob(
+    'read-only-preflight',
+    'projection-read-during-change',
+  );
+  const changed = createQ1WatchedTreeFilesystem(
+    changedJob,
+    {includeJob: false, mutateDuringRead: true},
+  );
+  assert.deepEqual(
+    await packageRunner.inspectPresentationCaptionSemanticSourcePackagePreflightProjectionV001(
+      changedJob.jobPath,
+      {filesystemAdapter: changed.adapter},
+    ),
+    expected,
+  );
+  assert.deepEqual(
+    changed.operations.filter((entry) => entry.operation === 'watchedReadMutation'),
+    [{
+      operation: 'watchedReadMutation',
+      path: Q1_SYNTHETIC_WATCHED_FILE_ABSOLUTE_PATH,
+    }],
+  );
+});
+
 const createRunnerSpyBuilder = ({
   failureStage = null,
   failurePass = null,
@@ -1405,6 +1785,60 @@ const assertTrustedReportResult = (result, expectedExitCode) => {
   );
 };
 
+test('Q1:A監視投影hashは同じ非空treeを読むproduction runner開始投影と完全一致する', async () => {
+  const runnerJob = makeRunnerJob(
+    'read-only-preflight',
+    'projection-production-equality',
+  );
+  const preparationFilesystem = createQ1WatchedTreeFilesystem(
+    runnerJob,
+    {includeJob: false},
+  );
+  const preparation =
+    await packageRunner.inspectPresentationCaptionSemanticSourcePackagePreflightProjectionV001(
+      runnerJob.jobPath,
+      {filesystemAdapter: preparationFilesystem.adapter},
+    );
+  const expectedTreeProjection = [{
+    path: Q1_SYNTHETIC_WATCHED_FILE_PATH,
+    kind: 'file',
+    contentSha256: sha256(Q1_SYNTHETIC_WATCHED_FILE_BYTES),
+  }];
+  assert.deepEqual(preparation, {
+    kind: 'trusted-projection',
+    watchedRoot: PRESENTATION_WATCHED_ROOT,
+    excludedPaths: [runnerJob.jobPath],
+    expectedBeforeCanonicalSha256: canonicalSha256(expectedTreeProjection),
+  });
+
+  runnerJob.value.readOnlyGuard.expectedBeforeCanonicalSha256 =
+    preparation.expectedBeforeCanonicalSha256;
+  const productionJob = Object.freeze({
+    ...runnerJob,
+    bytes: formalBytes(runnerJob.value),
+  });
+  const productionFilesystem = createQ1WatchedTreeFilesystem(productionJob);
+  const builder = createRunnerSpyBuilder();
+  const result = await packageRunner.runPresentationCaptionSemanticSourcePackageV001(
+    productionJob.jobPath,
+    {
+      filesystemAdapter: productionFilesystem.adapter,
+      builderAdapter: builder.adapter,
+    },
+  );
+  assertTrustedReportResult(result, 0);
+  assert.equal(result.report.status, 'passed');
+  assert.equal(
+    result.report.readOnlyObservation.beforeCanonicalSha256,
+    preparation.expectedBeforeCanonicalSha256,
+  );
+  assert.equal(
+    result.report.readOnlyObservation.afterCanonicalSha256,
+    preparation.expectedBeforeCanonicalSha256,
+  );
+  assert.equal(result.report.readOnlyObservation.unchanged, true);
+});
+
 const snapshotRealWatchedTree = (excludedPath) => {
   const results = [];
   const visit = (absoluteDirectory, repositoryDirectory) => {
@@ -1437,6 +1871,235 @@ const snapshotRealWatchedTree = (excludedPath) => {
   visit(resolve(WORKSPACE_ROOT, PRESENTATION_WATCHED_ROOT), PRESENTATION_WATCHED_ROOT);
   return results.sort((left, right) => compareUtf16(left.path, right.path));
 };
+
+test('外部表示5 JSONは承認済みfile/canonical hash対を保ちrenderer trustの4係数だけが小数である', () => {
+  const fixture = makeValidFixture();
+  for (let index = 0; index < APPROVED_EXTERNAL_DISPLAY_HASHES.length; index += 1) {
+    const expected = APPROVED_EXTERNAL_DISPLAY_HASHES[index];
+    const [role, repositoryPath] = WIDTH_POLICY_PATHS[index];
+    const fileBytes = readFileSync(resolve(WORKSPACE_ROOT, repositoryPath));
+    assert.equal(role, expected.role);
+    assert.equal(sha256(fileBytes), expected.fileSha256);
+    assert.deepEqual(fixture.job.value.widthPolicyBindings[index], {
+      role,
+      path: repositoryPath,
+      fileSha256: expected.fileSha256,
+      canonicalSha256: expected.canonicalSha256,
+    });
+    assert.notEqual(expected.fileSha256, expected.canonicalSha256);
+  }
+
+  const trust = decodeFile(WIDTH_POLICY_PATHS[4][1]);
+  assert.deepEqual(
+    Object.fromEntries(
+      Object.keys(APPROVED_RENDERER_LAYOUT_DECIMALS)
+        .map((key) => [key, trust.layoutRules[key]]),
+    ),
+    APPROVED_RENDERER_LAYOUT_DECIMALS,
+  );
+  const observedNonIntegers = [];
+  const visit = (value, pathValue = '$') => {
+    if (typeof value === 'number') {
+      if (!Number.isInteger(value)) observedNonIntegers.push([pathValue, value]);
+      return;
+    }
+    if (Array.isArray(value)) {
+      value.forEach((entry, index) => visit(entry, `${pathValue}[${index}]`));
+      return;
+    }
+    if (value !== null && typeof value === 'object') {
+      Object.entries(value).forEach(([key, entry]) => visit(entry, `${pathValue}.${key}`));
+    }
+  };
+  for (let index = 0; index < 5; index += 1) {
+    visit(decodeFile(WIDTH_POLICY_PATHS[index][1]));
+  }
+  assert.deepEqual(observedNonIntegers, [
+    ['$.layoutRules.textSafePaddingRatio', 0.04],
+    ['$.layoutRules.horizontalSafeMarginRatio', 0.04],
+    ['$.layoutRules.verticalSafeMarginRatio', 0.02],
+    ['$.layoutRules.fallbackTextAreaRatio', 0.98],
+  ]);
+});
+
+test('正式7成果物とGemini可視入力へ外部表示の小数係数を転記しない', () => {
+  const fixture = makeValidFixture();
+  const artifacts = fixture.packageBuildPasses[0].artifacts;
+  const assertIntegerNumbers = (value) => {
+    if (typeof value === 'number') {
+      assert.equal(Number.isSafeInteger(value), true);
+      return;
+    }
+    if (Array.isArray(value)) {
+      value.forEach(assertIntegerNumbers);
+      return;
+    }
+    if (value !== null && typeof value === 'object') {
+      Object.values(value).forEach(assertIntegerNumbers);
+    }
+  };
+  artifacts.forEach((artifact) => assertIntegerNumbers(artifact.value));
+  const packageValueText = JSON.stringify(artifacts.map((artifact) => artifact.value));
+  const modelInputText = artifacts
+    .find((artifact) => artifact.fileName === 'semantic-source-input.json')
+    .bytes
+    .toString('utf8');
+  for (const field of Object.keys(APPROVED_RENDERER_LAYOUT_DECIMALS)) {
+    assert.equal(packageValueText.includes(field), false, `package:${field}`);
+    assert.equal(modelInputText.includes(field), false, field);
+  }
+});
+
+test('外部表示profileはrenderer trustの未承認小数・別値・小数時刻をschema不成立にする', () => {
+  for (const mutate of [
+    (trust) => {
+      trust.layoutRules.textSafePaddingRatio = 0.05;
+    },
+    (trust) => {
+      trust.layoutRules.fontWeight = 800.5;
+    },
+    (trust) => {
+      trust.startMs = 1.5;
+    },
+  ]) {
+    const fixture = makeValidFixture();
+    const trust = decodeFile(WIDTH_POLICY_PATHS[4][1]);
+    mutate(trust);
+    replaceWidthPolicyJson(fixture, 4, trust);
+    const report = assertTargetCode(
+      fixture,
+      'INPUT_SCHEMA_UNSUPPORTED',
+      'inputBinding',
+    );
+    assert.equal(
+      checkByName(report, 'inputBinding').violationCodes.includes('INPUT_HASH_MISMATCH'),
+      false,
+    );
+  }
+});
+
+test('renderer trust以外の外部JSONでは小数を許可しない', () => {
+  const fixture = makeValidFixture();
+  const presetRegistry = decodeFile(WIDTH_POLICY_PATHS[0][1]);
+  presetRegistry.canvas.fps = 30.5;
+  replaceWidthPolicyJson(fixture, 0, presetRegistry);
+  const report = assertTargetCode(
+    fixture,
+    'INPUT_SCHEMA_UNSUPPORTED',
+    'inputBinding',
+  );
+  assert.equal(
+    checkByName(report, 'inputBinding').violationCodes.includes('INPUT_HASH_MISMATCH'),
+    false,
+  );
+});
+
+test('renderer trustの全layout ruleは型と固定値のexact一致を要求する', () => {
+  const pristineTrust = decodeFile(WIDTH_POLICY_PATHS[4][1]);
+  for (const field of Object.keys(pristineTrust.layoutRules)) {
+    const fixture = makeValidFixture();
+    const trust = clone(pristineTrust);
+    trust.layoutRules[field] = typeof trust.layoutRules[field] === 'number'
+      ? trust.layoutRules[field] + (Number.isInteger(trust.layoutRules[field]) ? 1 : 0.01)
+      : `${trust.layoutRules[field]}-changed`;
+    replaceWidthPolicyJson(fixture, 4, trust, {discriminator: 700});
+    const report = assertTargetCode(
+      fixture,
+      'INPUT_SCHEMA_UNSUPPORTED',
+      'inputBinding',
+    );
+    assert.equal(
+      checkByName(report, 'inputBinding').violationCodes.includes('INPUT_HASH_MISMATCH'),
+      false,
+      field,
+    );
+  }
+
+  for (const mutate of [
+    (trust) => {
+      delete trust.layoutRules.layoutRuleVersion;
+    },
+    (trust) => {
+      trust.layoutRules.unknown = 'not-approved';
+    },
+  ]) {
+    const fixture = makeValidFixture();
+    const trust = clone(pristineTrust);
+    mutate(trust);
+    replaceWidthPolicyJson(fixture, 4, trust, {discriminator: 701});
+    assertTargetCode(fixture, 'INPUT_SCHEMA_UNSUPPORTED', 'inputBinding');
+  }
+});
+
+test('外部JSONの別字句0.040は意味値が同じでもfile hash不一致を先に返す', () => {
+  const fixture = makeValidFixture();
+  const trustBytes = readFileSync(resolve(WORKSPACE_ROOT, WIDTH_POLICY_PATHS[4][1]));
+  const changedBytes = Buffer.from(
+    trustBytes.toString('utf8').replace(
+      '"textSafePaddingRatio": 0.04',
+      '"textSafePaddingRatio": 0.040',
+    ),
+    'utf8',
+  );
+  assert.notEqual(sha256(changedBytes), sha256(trustBytes));
+  replaceWidthPolicyJson(fixture, 4, changedBytes, {updateFileBinding: false});
+  const report = assertTargetCode(fixture, 'INPUT_HASH_MISMATCH', 'inputBinding');
+  assert.equal(
+    checkByName(report, 'inputBinding').violationCodes.includes('INPUT_SCHEMA_UNSUPPORTED'),
+    false,
+  );
+});
+
+test('検査indexのfile hashとcanonical hashを取り違えずbinding値をcanonicalとして照合する', () => {
+  const binding = decodeFile(WIDTH_POLICY_PATHS[3][1]);
+  assert.equal(
+    binding.presetValidationIndexSha256,
+    APPROVED_EXTERNAL_DISPLAY_HASH_BY_ROLE.presetValidationIndex.canonicalSha256,
+  );
+  assert.notEqual(
+    binding.presetValidationIndexSha256,
+    APPROVED_EXTERNAL_DISPLAY_HASH_BY_ROLE.presetValidationIndex.fileSha256,
+  );
+  assert.equal(
+    binding.materialValidationIndexSha256,
+    APPROVED_EXTERNAL_DISPLAY_HASH_BY_ROLE.materialValidationIndex.canonicalSha256,
+  );
+  assert.notEqual(
+    binding.materialValidationIndexSha256,
+    APPROVED_EXTERNAL_DISPLAY_HASH_BY_ROLE.materialValidationIndex.fileSha256,
+  );
+
+  for (const index of [1, 2]) {
+    const fixture = makeValidFixture();
+    fixture.job.value.widthPolicyBindings[index].canonicalSha256 =
+      fixture.job.value.widthPolicyBindings[index].fileSha256;
+    refreshJobSnapshot(fixture);
+    assertTargetCode(fixture, 'INPUT_HASH_MISMATCH', 'inputBinding');
+  }
+
+  const chainFixture = makeValidFixture();
+  const changedBinding = clone(binding);
+  changedBinding.presetValidationIndexSha256 =
+    APPROVED_EXTERNAL_DISPLAY_HASH_BY_ROLE.presetValidationIndex.fileSha256;
+  changedBinding.materialValidationIndexSha256 =
+    APPROVED_EXTERNAL_DISPLAY_HASH_BY_ROLE.materialValidationIndex.fileSha256;
+  replaceWidthPolicyJson(chainFixture, 3, changedBinding, {
+    canonicalSha256Value: canonicalSha256(changedBinding),
+    discriminator: 703,
+  });
+  assertTargetCode(chainFixture, 'INPUT_HASH_MISMATCH', 'inputBinding');
+});
+
+test('preset validation indexのregistryVersionはpreset registry版と一致しなければならない', () => {
+  const fixture = makeValidFixture();
+  const index = decodeFile(WIDTH_POLICY_PATHS[1][1]);
+  index.registryVersion = 'different-registry-v001';
+  replaceWidthPolicyJson(fixture, 1, index, {
+    canonicalSha256Value: canonicalSha256(index),
+    discriminator: 704,
+  });
+  assertTargetCode(fixture, 'INPUT_HASH_MISMATCH', 'inputBinding');
+});
 
 test('job validatorは正本field順の正常jobを受理し最小leaf pathで不成立を返す', () => {
   const fixture = makeValidFixture();
@@ -2877,6 +3540,110 @@ test('runnerは全phaseを同じcheckerへ渡し後続段を先行失敗後に�
   assert.match(PACKAGE_RUNNER_SOURCE, /if \(!checkPassed\(.*\)\) \{/su);
 });
 
+const filesystemIdentity = (stat) => Object.freeze({
+  dev: stat.dev,
+  ino: stat.ino,
+});
+const assertFilesystemIdentity = (actual, expected, label) => {
+  assert.equal(actual.dev, expected.dev, `${label}:dev`);
+  assert.equal(actual.ino, expected.ino, `${label}:ino`);
+};
+const assertOwnedRegularFile = (fd, pathValue, expectedIdentity, label) => {
+  const fdStat = fstatSync(fd, {bigint: true});
+  const pathStat = lstatSync(pathValue, {bigint: true});
+  assert.equal(fdStat.isFile(), true, `${label}:fd-kind`);
+  assert.equal(pathStat.isFile(), true, `${label}:path-kind`);
+  assert.equal(pathStat.isSymbolicLink(), false, `${label}:path-symlink`);
+  assert.equal(fdStat.nlink, 1n, `${label}:fd-nlink`);
+  assert.equal(pathStat.nlink, 1n, `${label}:path-nlink`);
+  assertFilesystemIdentity(filesystemIdentity(fdStat), expectedIdentity, `${label}:fd`);
+  assertFilesystemIdentity(filesystemIdentity(pathStat), expectedIdentity, `${label}:path`);
+};
+const acquireOwnedExclusiveFile = (pathValue) => {
+  const fd = openSync(
+    pathValue,
+    fsConstants.O_CREAT
+      | fsConstants.O_EXCL
+      | fsConstants.O_RDWR
+      | fsConstants.O_NOFOLLOW,
+    0o600,
+  );
+  try {
+    const fdStat = fstatSync(fd, {bigint: true});
+    const identity = filesystemIdentity(fdStat);
+    assertOwnedRegularFile(fd, pathValue, identity, 'exclusive-acquire');
+    return {fd, identity, closed: false};
+  } catch (error) {
+    closeSync(fd);
+    throw error;
+  }
+};
+const rewriteOwnedFile = (owned, pathValue, inputBytes) => {
+  assert.equal(owned.closed, false);
+  assert.equal(Buffer.isBuffer(inputBytes), true);
+  assertOwnedRegularFile(owned.fd, pathValue, owned.identity, 'before-rewrite');
+  ftruncateSync(owned.fd, 0);
+  let offset = 0;
+  while (offset < inputBytes.length) {
+    const written = writeSync(
+      owned.fd,
+      inputBytes,
+      offset,
+      inputBytes.length - offset,
+      offset,
+    );
+    assert.equal(written > 0, true);
+    offset += written;
+  }
+  fsyncSync(owned.fd);
+  assertOwnedRegularFile(owned.fd, pathValue, owned.identity, 'after-rewrite');
+};
+const releaseOwnedExclusiveFile = (owned, pathValue) => {
+  assert.equal(owned.closed, false);
+  try {
+    assertOwnedRegularFile(owned.fd, pathValue, owned.identity, 'before-unlink');
+    unlinkSync(pathValue);
+    assert.equal(fstatSync(owned.fd, {bigint: true}).nlink, 0n);
+  } finally {
+    closeSync(owned.fd);
+    owned.closed = true;
+  }
+};
+const prepareOwnedTestDirectory = (pathValue) => {
+  let created = false;
+  if (!existsSync(pathValue)) {
+    mkdirSync(pathValue, {mode: 0o700});
+    created = true;
+  }
+  const stat = lstatSync(pathValue, {bigint: true});
+  assert.equal(stat.isDirectory(), true);
+  assert.equal(stat.isSymbolicLink(), false);
+  assert.equal(realpathSync(pathValue), pathValue);
+  return {
+    created,
+    identity: filesystemIdentity(stat),
+    initialNames: readdirSync(pathValue).sort(compareUtf16),
+  };
+};
+const releaseOwnedTestDirectory = (pathValue, observation) => {
+  const finalStat = lstatSync(pathValue, {bigint: true});
+  assert.equal(finalStat.isDirectory(), true);
+  assert.equal(finalStat.isSymbolicLink(), false);
+  assertFilesystemIdentity(
+    filesystemIdentity(finalStat),
+    observation.identity,
+    'test-directory',
+  );
+  const finalNames = readdirSync(pathValue).sort(compareUtf16);
+  if (observation.created) {
+    assert.deepEqual(finalNames, []);
+    rmdirSync(pathValue);
+    assert.equal(existsSync(pathValue), false);
+  } else {
+    assert.deepEqual(finalNames, observation.initialNames);
+  }
+};
+
 test('CLIは0件・2件を固定usage診断でexit 2にしstdoutへ何も書かない', async () => {
   for (const argv of [[], ['one.json', 'two.json']]) {
     const stdout = [];
@@ -2912,18 +3679,22 @@ test('production CLI実processは合成preflightのexit 0/1をstdout/stderr排�
   const runnerJob = makeRunnerJob('read-only-preflight', 'actual-process');
   const jobDirectory = resolve(WORKSPACE_ROOT, PACKAGE_PREFLIGHT_JOB_ROOT);
   const jobAbsolutePath = resolve(WORKSPACE_ROOT, runnerJob.jobPath);
-  const directoryExisted = existsSync(jobDirectory);
-  const initialNames = directoryExisted
-    ? readdirSync(jobDirectory).sort(compareUtf16)
-    : [];
-  if (!directoryExisted) mkdirSync(jobDirectory, {recursive: true});
+  const directoryObservation = prepareOwnedTestDirectory(jobDirectory);
+  let ownedJob = null;
 
   try {
-    writeFileSync(jobAbsolutePath, runnerJob.bytes);
+    ownedJob = acquireOwnedExclusiveFile(jobAbsolutePath);
+    rewriteOwnedFile(ownedJob, jobAbsolutePath, runnerJob.bytes);
     runnerJob.value.readOnlyGuard.expectedBeforeCanonicalSha256 =
       canonicalSha256(snapshotRealWatchedTree(runnerJob.jobPath));
 
-    writeFileSync(jobAbsolutePath, formalBytes(runnerJob.value));
+    rewriteOwnedFile(ownedJob, jobAbsolutePath, formalBytes(runnerJob.value));
+    assertOwnedRegularFile(
+      ownedJob.fd,
+      jobAbsolutePath,
+      ownedJob.identity,
+      'before-passed-process',
+    );
     const passed = spawnSync(
       process.execPath,
       [resolve(WORKSPACE_ROOT, PACKAGE_RUNNER_REPOSITORY_PATH), runnerJob.jobPath],
@@ -2941,7 +3712,13 @@ test('production CLI実processは合成preflightのexit 0/1をstdout/stderr排�
 
     runnerJob.value.gateA.expectedEvidenceHashes.evidenceCanonicalSha256 =
       '0'.repeat(64);
-    writeFileSync(jobAbsolutePath, formalBytes(runnerJob.value));
+    rewriteOwnedFile(ownedJob, jobAbsolutePath, formalBytes(runnerJob.value));
+    assertOwnedRegularFile(
+      ownedJob.fd,
+      jobAbsolutePath,
+      ownedJob.identity,
+      'before-failed-process',
+    );
     const failed = spawnSync(
       process.execPath,
       [resolve(WORKSPACE_ROOT, PACKAGE_RUNNER_REPOSITORY_PATH), runnerJob.jobPath],
@@ -2964,14 +3741,13 @@ test('production CLI実processは合成preflightのexit 0/1をstdout/stderr排�
       }],
     );
   } finally {
-    rmSync(jobAbsolutePath, {force: true});
-    if (!directoryExisted) rmdirSync(jobDirectory);
+    if (ownedJob !== null && !ownedJob.closed) {
+      releaseOwnedExclusiveFile(ownedJob, jobAbsolutePath);
+    }
+    releaseOwnedTestDirectory(jobDirectory, directoryObservation);
   }
   assert.equal(existsSync(jobAbsolutePath), false);
-  assert.equal(existsSync(jobDirectory), directoryExisted);
-  if (directoryExisted) {
-    assert.deepEqual(readdirSync(jobDirectory).sort(compareUtf16), initialNames);
-  }
+  assert.equal(existsSync(jobDirectory), !directoryObservation.created);
 });
 
 test('package担当codeと担当checkの正本写像はcore実装と検査表で欠落しない', () => {
