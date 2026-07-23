@@ -2,8 +2,8 @@
 
 - 実施日: 2026-07-23
 - 対象: 承認済みB1 JSON・表示信頼境界追補の実装修正3点から、B2全検査、既存回帰、candidate 13読み取り専用preflight、次ゲート承認依頼起草まで
-- 状態: **静的監査のみ完了。実装・修正・検査実走・preflight・正式生成は未実施**
-- 停止点: 本書のB分類2問を人間へ提出して停止。回答受領後も、改訂版夜間指示を受け取るまで走行しない
+- 状態: **静的監査完了。2026-07-24にQ1:A・Q2:Aを人間確定し、改訂版夜間指示で実装からpreflight・次ゲート承認依頼起草までの走行を承認**
+- 停止点: §6のC分類、固定期待値不成立、第四原因、新しい設計判断、契約の曖昧さ・矛盾、実測前提の不一致を検出した時点。修正・再試行しない
 - 人間作業: B分類への2判断。時間計測なし
 
 ## 1. 目的
@@ -331,3 +331,13 @@ B2全検査・回帰・preflightが全て成立し、実測結果を既存B3契�
 2. candidate 13 preflight jobの3識別子
 
 残りは契約から導出できるか、実測時の停止条件へ落とせる。Q1・Q2への回答を受領しても自動では走行せず、改訂版夜間指示を待って停止する。
+
+## 9. 人間回答と夜間走行承認
+
+- 2026-07-24 / Q1: **A**。§5のexact契約どおり、package runnerへ版付き・読み取り専用の監視投影入口を一件追加する。runner本体とjob準備は同じprivate処理を使い、production CLI・job schema・57違反コードは変更しない。
+- 2026-07-24 / Q2: **A**。識別子を次で固定する。
+  - job ID: `DmWu0jVQfTE-candidate-13-caption-semantic-source-package-preflight-v001`
+  - 成果物ID: `DmWu0jVQfTE-candidate-13-v001`
+  - package ID: `DmWu0jVQfTE-candidate-13-caption-semantic-source-package-v001`
+- 2026-07-24 / 追補: `presentation-candidate13-caption-gate-b1-json-and-width-trust-contract-addendum-20260723-v001.md`を第三原因のhash意味改訂込みで承認。
+- 2026-07-24 / 走行範囲: 追補三点とQ1:A入口の実装、B2全検査、既存回帰、candidate 13読み取り専用preflight、完了報告、正式package＋Gemini runの次ゲート承認依頼起草まで。正式package生成、Gemini実走、指示書、描画は行わない。

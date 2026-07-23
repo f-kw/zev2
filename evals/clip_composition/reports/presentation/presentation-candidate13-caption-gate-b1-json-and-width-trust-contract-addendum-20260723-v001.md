@@ -1,7 +1,7 @@
 # candidate 13 基本テロップ ゲートB1 JSON・表示信頼境界 契約確定追補 v001
 
 - 日付: 2026-07-23
-- 状態: **承認待ちの起草。実装・検査再実行・正式入力生成は未承認**
+- 状態: **2026-07-24 kawafmm承認済み。第三原因のhash意味改訂を含む。実装・全件再実行・candidate 13読み取り専用preflightまで承認、正式入力生成は未承認**
 - 対象:
   - `presentation-candidate13-caption-gate-b1-implementation-contract-design-20260723-v001.md`
   - `presentation-candidate13-caption-gate-b2-completion-rerun-stop-report-20260723-v001.md`
@@ -344,3 +344,8 @@ fail-fastと帰属の順序は、次へ一意に固定する。
 承認文案:
 
 > ゲートB1 JSON・表示信頼境界 契約確定追補v001を、第三原因のhash意味改訂を含めて承認する。人間認定済み台帳・4係数・hashは変更せず、時刻は整数契約を維持する。次工程は追補の案内追記、実装、既存55件と追補追加検査の全件、既存回帰、candidate 13読み取り専用preflightまでとし、正式入力生成・Gemini実走・指示書・描画は含まない。不合格時は修正再試行せず停止する。
+
+## 13. 承認・改訂履歴
+
+- 2026-07-24 / kawafmm承認: §12の三点を一括承認。第三原因である検査index hashの意味を、信頼bindingではcanonical SHA-256、job・snapshot間ではfile SHA-256として別々に照合する改訂も承認対象に含む。人間認定済み台帳、4係数、時刻整数契約は変更しない。
+- 2026-07-24 / 実行範囲: 本追補の案内追記、三点の実装修正、Q1:Aの読み取り専用監視投影入口、B2全検査、既存回帰、Q2:Aの識別子を使うcandidate 13読み取り専用preflight、完了報告、次ゲート承認依頼の起草まで。正式package、Gemini、指示書、描画は含めない。
