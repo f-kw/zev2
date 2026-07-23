@@ -3,9 +3,9 @@
 - 作成日: 2026-07-23
 - 区分: 人間待ち充填方式による副線・主線承認文の補足準備
 - 対象: `presentation-candidate13-caption-planning-gate-b-direction-design-20260723-v001.md`
-- 状態: **未承認の補足案。元設計・方向設計・共有正本は未変更**
-- 人間作業: 新しい独立判断は0件。既存のゲートB方向判断1件へ統合する
-- 実装状態: コード、testdata、正式package、prompt、Gemini、v003、描画は全て未着手
+- 状態: **2026-07-23に方向設計v001と一組でkawafmm承認済み。filenameのdraftは履歴保持。新しい独立判断なし**
+- 人間作業: 新しい独立判断は0件。既存のゲートB方向判断1件として完了
+- 実装状態: B1完全実装契約の設計だけを提示・承認待ち。コード、testdata、正式package、prompt、Gemini、v003、描画は未着手
 
 ## 1. 目的
 
@@ -133,3 +133,8 @@ prompt本文の起草、prompt版登録、execution payload生成はB5のまま�
 - 媒体視聴、時刻入力、文字分割、時間計測: なし。
 
 本補足案から独立した第二の承認判断は発行しない。
+
+## 8. 改訂履歴
+
+- 2026-07-23 / kawafmm承認: `presentation-candidate13-caption-planning-gate-b-direction-design-20260723-v001.md`と一組で承認。元設計§7.2、Gate A保証範囲、仕事本文配置のB1委任を確定した。filenameと本文中の「案」は、承認前に何を判断したかを保持するため変更しない。
+- 2026-07-23 / B1提示: `presentation-candidate13-caption-gate-b1-implementation-contract-design-20260723-v001.md`で仕事本文の唯一の正本をsource-only packageへ置く案を含む完全契約を提示したが、同契約は承認待ちであり実装許可ではない。

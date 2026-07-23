@@ -1,10 +1,10 @@
 # candidate 13 基本テロップ意味分割 ゲートB方向設計 v001
 
 - 作成日: 2026-07-23
-- 状態: **方向設計の提示。未承認・未実装・未実走**
+- 状態: **2026-07-23 kawafmm承認済み（補足v001と一組）。B1完全実装契約は提示・承認待ち。コード・正式package・Gemini・v003・描画は未着手**
 - 前提: ゲートA合格済み（21/21、既存回帰50/50、candidate 13読み取り専用preflight 10/10）
 - 対象: `DmWu0jVQfTE` candidate 13の基本テロップだけを作る次工程
-- 今回の人間作業: 本設計の方向判断1件。媒体視聴・時刻入力・文字分割作業なし
+- 今回の人間作業: 方向判断1件は完了。次の判断はB1完全実装契約の承認1件。媒体視聴・時刻入力・文字分割作業なし
 
 ## 1. 結論
 
@@ -281,3 +281,8 @@ B1の実装契約では、少なくとも次を合成検査へ落とす。
 承認文案:
 
 > candidate 13 基本テロップ意味分割 ゲートB方向設計v001を承認する。境界証拠専用の中間公開機構は作らず、新しいゲートB jobが固定済みゲートA jobを不変bindingとして参照し、同じexport済み純粋処理・checker・report validatorから証拠と検査記録を作り、ゲートA完了後に観測した既知hashと照合してsource-only意味分割入力へ直接封入する。正式保存先は既存jobの`formalOutputPath`一箇所とし、複製を作らない。ゲートA runnerの正式1回実行記録は変更しない。機械的な完全対応とLLMの意味判断を分離し、LLMには行末境界候補ID以外の本文・時刻・自由IDを作らせない。承認済み元設計§10.2は、B1の入力・意味出力契約とB4のv003対生成契約へ分割改訂し、B4はGemini実走前に固定する。次工程はB1の実装契約完全化と提示までとし、コード、prompt登録、Gemini実走、v003対生成、描画は別承認まで開始しない。
+
+## 15. 改訂履歴
+
+- 2026-07-23 / kawafmm承認: `presentation-candidate13-caption-gate-b-direction-approval-clarification-draft-20260723-v001.md`と一組で本方向設計を承認。補足により、モデル可視の構造IDはcontainer IDだけ、ゲートA validatorの保証範囲は内包境界証拠まで、仕事本文の配置はB1契約で固定、と確定した。
+- 2026-07-23 / B1提示: `presentation-candidate13-caption-gate-b1-implementation-contract-design-20260723-v001.md`を提示して停止。正式package・prompt・Gemini・v003・描画は未着手であり、B1契約自体は承認待ち。

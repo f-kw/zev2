@@ -1,7 +1,7 @@
 # candidate 13 基本テロップ解決パッケージ対生成 段階実装設計 v001
 
 - 作成日: 2026-07-22
-- 状態: **設計提示。未承認・未実装・未実走**
+- 状態: **全体方針とゲートAは承認・完了。ゲートB方向設計と補足は承認済み。B1完全実装契約は提示・承認待ち。ゲートBコード・正式package・Gemini・v003・描画は未着手**
 - 主線: 正式残存source atom 354件から、基本テロップだけの指示書と専用解決パッケージを一対で生成する
 - 対象: `DmWu0jVQfTE` candidate 13
 - 人間作業: 本設計の確認1件。媒体視聴なし。時間計測なし
@@ -492,3 +492,6 @@ promptを追加する場合は、prompt本体とprompt版台帳を同一コミ�
 ## 17. 改訂履歴
 
 - 2026-07-23 / kawafmm承認: `evals/clip_composition/reports/presentation/presentation-gate-a-implementation-contract-addendum-20260723-v001.md`を承認。本設計の§5.1、§10.1、§11冒頭・§11.1、§12、§15は、同追補§2に列挙した範囲で改訂承認された。実装時は、本設計v001と承認済み追補v001を一組の正本として読む。設計本文は履歴保持のため書き換えず、承認済み追補への案内だけを追加した。
+- 2026-07-23 / ゲートA完了: 正式合成検査21/21、違反コード35/35、既存回帰50/50、candidate 13読み取り専用preflight 10/10が合格した。正式354文字から、欠落・重複・順序変更なしの機械境界候補205件を確認した。この完了は自然な日本語境界・意味分割・可読性の合格を意味せず、正式境界packageも生成していない。
+- 2026-07-23 / kawafmm承認: `presentation-candidate13-caption-planning-gate-b-direction-design-20260723-v001.md`と`presentation-candidate13-caption-gate-b-direction-approval-clarification-draft-20260723-v001.md`を一組で承認。元設計§7.2のモデル可視構造IDはcontainer IDへ集約し、§10.2の一枚契約予告はB1の入力・意味出力契約とB4の正式表示計画・v003対生成契約へ分割した。既存ゲートA検査の保証範囲は内包した境界証拠までで、B1 package全体へ拡張しない。仕事本文の配置はB1契約で固定する。本文は履歴保持のため黙って書き換えない。
+- 2026-07-23 / B1提示: `presentation-candidate13-caption-gate-b1-implementation-contract-design-20260723-v001.md`を提示して停止した。これは承認待ちの設計であり、コード、testdata、正式source-only package、prompt、Gemini、正式cue・target・指示書、v003、描画は未着手。
