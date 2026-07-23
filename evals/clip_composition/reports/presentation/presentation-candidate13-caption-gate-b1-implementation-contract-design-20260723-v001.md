@@ -2438,3 +2438,4 @@ B2が合格しても、B3正式package生成は別承認である。
 - 2026-07-23 / kawafmm承認: §24の範囲どおりB1を承認。B2の実装・合成検査・既存回帰・candidate 13読み取り専用preflightまでを許可し、正式入力生成、prompt登録、Gemini実走、指示書、描画は含めない。
 - 2026-07-23 / 同時追加指定: §2.4を承認内容として追加。`gemini-3.6-flash`を将来実走の第一候補とするが定数化せず、実行構成・execution manifest・attempt分離・実測tokenに基づく費用申告へ束縛した。B2ではモデル実走を行わない。
 - 2026-07-23 / B2停止: §7.2が要求する既存ゲートA`checkReport`をrunnerへ渡すpublic入口が§4.1に無いことを、実装開始後・合成検査前の照合で検出。契約を無断改訂せず停止し、途中コードを削除した。詳細は`presentation-candidate13-caption-gate-b2-night-stop-report-20260723-v001.md`へ分離した。これはB1承認の取消しではなく、実装契約追補待ちの運用状態である。
+- 2026-07-23 / kawafmm追補承認: `presentation-candidate13-caption-gate-b1-gate-a-report-transfer-entrypoint-addendum-20260723-v001.md`を承認し、本設計の§4.1・§4.2・§4.5・§7.2・§20.4・§21を追補の範囲で改訂した。実装正本は本設計v001と承認済み追補v001の一組とする。B2の実装・合成検査・既存回帰・candidate 13読み取り専用preflightを再開し、正式入力package、prompt登録、Gemini実走、正式cue・target・指示書、描画は引き続き含めない。

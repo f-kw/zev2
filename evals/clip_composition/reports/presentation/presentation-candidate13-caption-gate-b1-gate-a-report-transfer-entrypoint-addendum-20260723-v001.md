@@ -1,12 +1,12 @@
 # candidate 13 基本テロップ ゲートB1・ゲートA検査結果受け渡し入口 追補 v001
 
 - 作成日: 2026-07-23
-- 状態: **設計提示・承認待ち。実装、合成検査、回帰、preflightは未再開**
+- 状態: **kawafmm承認済み。B1契約v001の§4.1・§4.2・§4.5・§7.2・§20.4・§21を本追補の範囲で改訂し、B2を再開**
 - 追補先: `presentation-candidate13-caption-gate-b1-implementation-contract-design-20260723-v001.md`
 - 起草根拠:
   - `presentation-candidate13-caption-gate-b2-night-stop-report-20260723-v001.md`
   - 2026-07-23のkawafmmによる追補起草承認
-- 人間作業: 本追補の承認または却下という1判断。媒体視聴、時刻入力、文字分割、時間計測はない
+- 人間作業: 承認1判断を完了。B2の実装・合成検査・既存回帰・candidate 13読み取り専用preflightで追加の人間作業は0件
 
 ## 1. 目的
 
