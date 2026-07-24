@@ -3968,13 +3968,19 @@ const validateExpectedPublicationArtifacts = (artifacts) =>
     validateArtifactBytes(artifact)
     && hashBytes(artifact.bytes) === artifact.fileSha256
     && canonicalSha(artifact.value) === artifact.canonicalSha256);
-const validateObservedPublicationRead = (read, expectedArtifact, index) => {
+const validateObservedPublicationRead = (
+  read,
+  expectedArtifact,
+  index,
+  expectedRoot,
+) => {
   if (!exactKeys(read, ['fileName', 'status', 'snapshot', 'observedKind', 'failurePoint'])
     || read.fileName !== PACKAGE_FILES[index]
     || read.status !== 'read'
     || read.observedKind !== 'regular-file'
     || read.failurePoint !== null
     || !validateStableSnapshot(read.snapshot)
+    || read.snapshot.path !== `${expectedRoot}/${PACKAGE_FILES[index]}`
     || !Buffer.isBuffer(expectedArtifact?.bytes)
     || !read.snapshot.bytes.equals(expectedArtifact.bytes)
     || read.snapshot.fileSha256 !== expectedArtifact.fileSha256) return false;
@@ -3995,7 +4001,11 @@ const isObservedPublicationIoFailure = (read, index) => {
     `artifact-${ordinal}-read`,
   ].includes(read.failurePoint);
 };
-const inspectObservedArtifactSet = (observation, expectedArtifacts) => {
+const inspectObservedArtifactSet = (
+  observation,
+  expectedArtifacts,
+  expectedRoot,
+) => {
   if (observation?.status !== 'observed'
     || !isDenseArray(observation.directoryEntries)
     || !isDenseArray(observation.artifactReads)
@@ -4017,7 +4027,12 @@ const inspectObservedArtifactSet = (observation, expectedArtifacts) => {
       return;
     }
     if (!expectedArtifactsValid
-      || !validateObservedPublicationRead(read, expectedArtifacts[index], index)) {
+      || !validateObservedPublicationRead(
+        read,
+        expectedArtifacts[index],
+        index,
+        expectedRoot,
+      )) {
       nonIoReadsValid = false;
     }
   });
@@ -4026,8 +4041,16 @@ const inspectObservedArtifactSet = (observation, expectedArtifacts) => {
     ioFailureIndexes,
   };
 };
-const validateObservedArtifactSet = (observation, expectedArtifacts) => {
-  const inspected = inspectObservedArtifactSet(observation, expectedArtifacts);
+const validateObservedArtifactSet = (
+  observation,
+  expectedArtifacts,
+  expectedRoot,
+) => {
+  const inspected = inspectObservedArtifactSet(
+    observation,
+    expectedArtifacts,
+    expectedRoot,
+  );
   return inspected.nonIoValid && inspected.ioFailureIndexes.length === 0;
 };
 const recordObservedArtifactIoFailures = (state, stage, indexes) => {
@@ -4049,6 +4072,8 @@ const derivePublication = (context, state) => {
   if (context.productionMode !== 'formal-generation') return;
   const observation = context.publicationProcessObservation;
   const expectedArtifacts = context.packageBuildPasses?.[0]?.artifacts;
+  const publishedRoot = context.job.value.publication.formalOutputPath;
+  const stagingRoot = `${publishedRoot}.work`;
   if (!isPlainObject(observation) || observation.mode !== 'formal') {
     if (context.contextPhase === 'final-report') {
       publicationFailure(state, '$.publication');
@@ -4087,7 +4112,11 @@ const derivePublication = (context, state) => {
   if (observation.staging?.status === 'io-error') {
     publicationFailure(state, '$.publication.staging.failurePoint');
   } else if (observation.staging?.status === 'observed') {
-    const inspected = inspectObservedArtifactSet(observation.staging, expectedArtifacts);
+    const inspected = inspectObservedArtifactSet(
+      observation.staging,
+      expectedArtifacts,
+      stagingRoot,
+    );
     recordObservedArtifactIoFailures(
       state,
       'staging',
@@ -4168,7 +4197,11 @@ const derivePublication = (context, state) => {
   if (observation.published?.status === 'io-error') {
     publicationFailure(state, '$.publication.published.failurePoint');
   } else if (observation.published?.status === 'observed') {
-    const inspected = inspectObservedArtifactSet(observation.published, expectedArtifacts);
+    const inspected = inspectObservedArtifactSet(
+      observation.published,
+      expectedArtifacts,
+      publishedRoot,
+    );
     recordObservedArtifactIoFailures(
       state,
       'published',
@@ -4308,8 +4341,16 @@ const validateViolationRows = (violations) => isDenseArray(violations)
 const allCoreRowsPassed = (checked) => PACKAGE_CHECK_NAMES.every(
   (name) => checked.checks.find((entry) => entry.name === name)?.status === 'passed',
 );
-const projectedArtifactHashes = (observation, expectedArtifacts) => {
-  if (!validateObservedArtifactSet(observation, expectedArtifacts)) return null;
+const projectedArtifactHashes = (
+  observation,
+  expectedArtifacts,
+  expectedRoot,
+) => {
+  if (!validateObservedArtifactSet(
+    observation,
+    expectedArtifacts,
+    expectedRoot,
+  )) return null;
   const projection = [];
   for (const read of observation.artifactReads) {
     const decoded = decodePresentationCaptionB1StrictJsonV001(read.snapshot.bytes);
@@ -4375,9 +4416,12 @@ const expectedRunReport = (checkerContext, checked) => {
   } else {
     const publication = checkerContext.publicationProcessObservation;
     const expectedArtifacts = checkerContext.packageBuildPasses?.[0]?.artifacts;
+    const publishedRoot = job.value.publication.formalOutputPath;
+    const stagingRoot = `${publishedRoot}.work`;
     const publishedProjection = projectedArtifactHashes(
       publication.published,
       expectedArtifacts,
+      publishedRoot,
     );
     if (publishedProjection !== null
       && checked.checks.find((entry) => entry.name === 'publishedPackage')?.status === 'passed') {
@@ -4392,6 +4436,7 @@ const expectedRunReport = (checkerContext, checked) => {
       const stagingProjection = projectedArtifactHashes(
         publication.staging,
         expectedArtifacts,
+        stagingRoot,
       );
       const stagingInvalid = checked.violations.some((violation) =>
         ['PUBLICATION_STAGING_INVALID', 'PUBLICATION_INPUT_CHANGED'].includes(violation.code)

@@ -55,6 +55,16 @@ const EXPECTED_RUNNER_EXPORTS = Object.freeze([
   'runPresentationCaptionSemanticSourcePackageV001',
 ]);
 
+const TEST_PACKAGE_FILES_V001 = Object.freeze([
+  'segmenter-boundary-evidence.json',
+  'embedded-gate-a-validation-report.json',
+  'semantic-source-input.json',
+  'deterministic-expansion-map.json',
+  'source-only-leakage-report.json',
+  'package-manifest.json',
+  'package-validation-report.json',
+]);
+
 const EXPECTED_VIOLATION_CODES = Object.freeze([
   'CAPTION_B1_JOB_INVALID',
   'JOB_FILE_MISMATCH',
@@ -654,6 +664,12 @@ const clone = (value) => {
     return Object.fromEntries(Object.entries(value).map(([key, entry]) => [key, clone(entry)]));
   }
   return value;
+};
+const deepFreeze = (value, seen = new Set()) => {
+  if (value === null || typeof value !== 'object' || seen.has(value)) return value;
+  seen.add(value);
+  for (const key of Reflect.ownKeys(value)) deepFreeze(value[key], seen);
+  return Object.freeze(value);
 };
 const fakeStat = (bytes, discriminator = 1) => ({
   kind: 'regular-file',
@@ -1443,12 +1459,23 @@ const makeRunnerJob = (mode, suffix) => {
 
 const createHybridRunnerFilesystem = (
   runnerJob,
-  {formalFailure = null, includeJob = true} = {},
+  {
+    formalFailure = null,
+    includeJob = true,
+    onBeforeFirstStagingDirectoryListing = null,
+  } = {},
 ) => {
+  if (onBeforeFirstStagingDirectoryListing !== null
+    && typeof onBeforeFirstStagingDirectoryListing !== 'function') {
+    throw new TypeError(
+      'onBeforeFirstStagingDirectoryListing must be a function or null',
+    );
+  }
   const base =
     packageRunner.createPresentationCaptionSemanticSourcePackageProductionFilesystemAdapterV001();
   const entries = new Map();
   const operations = [];
+  const stagingDirectoryListings = [];
   let nextIno = 1000;
   let stagingScanned = false;
   let inputMutationDone = false;
@@ -1480,6 +1507,18 @@ const createHybridRunnerFilesystem = (
   };
   addEntry(absoluteJobRoot, 'directory');
   if (includeJob) addEntry(absoluteJobPath, 'file', runnerJob.bytes);
+  const formalParentChain = [];
+  let formalParentCursor = dirname(absoluteFormalRoot);
+  while (formalParentCursor !== absoluteWatchedRoot) {
+    if (!formalParentCursor.startsWith(`${absoluteWatchedRoot}/`)) {
+      throw new TypeError('formal output parent is outside the watched root');
+    }
+    formalParentChain.unshift(formalParentCursor);
+    formalParentCursor = dirname(formalParentCursor);
+  }
+  for (const parentPath of formalParentChain) {
+    if (!entries.has(parentPath)) addEntry(parentPath, 'directory');
+  }
 
   const isManaged = (pathValue) => managedRoots.some(
     (root) => pathValue === root || pathValue.startsWith(`${root}/`),
@@ -1646,7 +1685,24 @@ const createHybridRunnerFilesystem = (
         stagingScanned = true;
         operations.push({operation: 'stagingObserved', path: pathValue});
         const values = listVirtualDirectory(pathValue);
-        return formalFailure === 'staging' ? values.slice(1) : values;
+        if (onBeforeFirstStagingDirectoryListing !== null) {
+          const stagingEntries = TEST_PACKAGE_FILES_V001.map((fileName) => {
+            const entry = entries.get(`${absoluteWorkPath}/${fileName}`);
+            return Object.freeze({
+              fileName,
+              kind: entry?.kind ?? null,
+              bytes: entry === undefined ? null : Buffer.from(entry.bytes),
+            });
+          });
+          onBeforeFirstStagingDirectoryListing(
+            Object.freeze(stagingEntries),
+          );
+        }
+        const returnedValues = formalFailure === 'staging' ? values.slice(1) : values;
+        stagingDirectoryListings.push(Object.freeze(
+          returnedValues.map((entry) => entry.name),
+        ));
+        return returnedValues;
       }
       if (entries.get(pathValue)?.kind === 'directory') {
         return listVirtualDirectory(pathValue);
@@ -1698,6 +1754,7 @@ const createHybridRunnerFilesystem = (
     adapter,
     operations,
     entries,
+    stagingDirectoryListings,
     paths: Object.freeze({
       job: absoluteJobPath,
       formalRoot: absoluteFormalRoot,
@@ -1707,21 +1764,37 @@ const createHybridRunnerFilesystem = (
   });
 };
 
-const withSyntheticReadFault = (
+const buildSyntheticReadFault = (
   baseAdapter,
   {
     matches,
     kind,
+    faultId = null,
+    recordTrace = false,
   },
 ) => {
   let matchedOpenCount = 0;
+  const traceEntries = [];
   const openReadOnly = async (pathValue) => {
     if (!matches(pathValue, matchedOpenCount)) {
       return await baseAdapter.openReadOnly(pathValue);
     }
     matchedOpenCount += 1;
-    if (kind === 'open') throw new TypeError('synthetic open failure');
+    const traceEntry = recordTrace
+      ? {
+        faultId,
+        faultKind: kind,
+        path: pathValue,
+        phases: ['matched'],
+      }
+      : null;
+    if (traceEntry !== null) traceEntries.push(traceEntry);
+    if (kind === 'open') {
+      traceEntry?.phases.push('open-thrown');
+      throw new TypeError('synthetic open failure');
+    }
     const baseHandle = await baseAdapter.openReadOnly(pathValue);
+    traceEntry?.phases.push('opened');
     let readCalled = false;
     let readCompleted = false;
     let closed = false;
@@ -1730,13 +1803,18 @@ const withSyntheticReadFault = (
       statBigInt: async () => {
         assert.equal(closed, false);
         const value = await baseHandle.statBigInt();
-        if (firstStat === null) firstStat = value;
+        if (firstStat === null) {
+          firstStat = value;
+          traceEntry?.phases.push('pre-read-stat-ok');
+        }
         if (kind === 'post-read-stat-error' && readCompleted) {
+          traceEntry?.phases.push('post-read-stat-thrown');
           throw new TypeError('synthetic post-read fstat failure');
         }
         if (kind === 'post-read-stat' && readCompleted) {
           return overrideBigIntStats(value, {ino: value.ino + 1n});
         }
+        if (readCompleted) traceEntry?.phases.push('post-read-stat-ok');
         return value;
       },
       readChunksV001: () => {
@@ -1759,6 +1837,7 @@ const withSyntheticReadFault = (
             iteratorCreated = true;
             return (async function* transformRead() {
               if (kind === 'read-throw') {
+                traceEntry?.phases.push('read-thrown');
                 throw new TypeError('synthetic chunk read failure');
               }
               let pending = null;
@@ -1788,6 +1867,7 @@ const withSyntheticReadFault = (
                 yield Buffer.from('x', 'utf8');
               }
               readCompleted = true;
+              traceEntry?.phases.push('read-completed');
             })();
           },
         });
@@ -1796,13 +1876,243 @@ const withSyntheticReadFault = (
         assert.equal(closed, false);
         closed = true;
         await baseHandle.close();
-        if (kind === 'close') throw new TypeError('synthetic close failure');
+        if (kind === 'close') {
+          traceEntry?.phases.push('close-thrown');
+          throw new TypeError('synthetic close failure');
+        }
+        traceEntry?.phases.push('closed');
       },
     });
   };
-  return Object.freeze({
+  const adapter = Object.freeze({
     ...baseAdapter,
     openReadOnly,
+  });
+  return Object.freeze({
+    adapter,
+    snapshotTraceV001: () => deepFreeze(traceEntries.map((entry) => ({
+      faultId: entry.faultId,
+      faultKind: entry.faultKind,
+      path: entry.path,
+      phases: [...entry.phases],
+    }))),
+  });
+};
+
+const withSyntheticReadFault = (baseAdapter, options) =>
+  buildSyntheticReadFault(baseAdapter, options).adapter;
+
+const createSyntheticReadFaultTraceHarnessV001 = (
+  baseAdapter,
+  {
+    matches,
+    kind,
+    faultId,
+  },
+) => {
+  if (typeof faultId !== 'string' || faultId.length === 0) {
+    throw new TypeError('faultId must be a non-empty string');
+  }
+  return buildSyntheticReadFault(baseAdapter, {
+    matches,
+    kind,
+    faultId,
+    recordTrace: true,
+  });
+};
+
+const assertBoundStagingEntriesV001 = (stagingEntries, builderCalls) => {
+  assert.equal(builderCalls.packageResults.length, 2);
+  const expectedArtifacts = builderCalls.packageResults[0].artifacts;
+  assert.deepEqual(
+    expectedArtifacts.map((artifact) => artifact.fileName),
+    TEST_PACKAGE_FILES_V001,
+  );
+  const actual = stagingEntries.map((entry) => {
+    const decoded = Buffer.isBuffer(entry.bytes)
+      ? packageCore.decodePresentationCaptionB1StrictJsonV001(entry.bytes)
+      : {status: 'invalid'};
+    return {
+      kind: entry.kind,
+      fileName: entry.fileName,
+      bytes: entry.bytes,
+      fileSha256: Buffer.isBuffer(entry.bytes) ? sha256(entry.bytes) : null,
+      value: decoded.status === 'decoded' ? clone(decoded.value) : null,
+      canonicalSha256: decoded.status === 'decoded'
+        ? canonicalSha256(decoded.value)
+        : null,
+    };
+  });
+  const expected = expectedArtifacts.map((artifact) => ({
+    kind: 'file',
+    fileName: artifact.fileName,
+    bytes: artifact.bytes,
+    fileSha256: artifact.fileSha256,
+    value: clone(artifact.value),
+    canonicalSha256: artifact.canonicalSha256,
+  }));
+  assert.deepEqual(actual, expected);
+  return Object.freeze(actual.map((entry) => Object.freeze({
+    ...entry,
+    bytes: Buffer.from(entry.bytes),
+  })));
+};
+
+const projectFilesystemOperationsV001 = (operations, targetRoot) =>
+  deepFreeze(operations
+    .filter((entry) =>
+      ['lstatBigInt', 'realpath', 'openReadOnly'].includes(entry.operation)
+      && entry.path !== targetRoot
+      && entry.path.startsWith(`${targetRoot}/`))
+    .map((entry) => ({
+      operation: entry.operation,
+      path: entry.path,
+    })));
+
+const buildExpectedCompleteArtifactOperationsV001 = (targetRoot) => {
+  const projection = [];
+  TEST_PACKAGE_FILES_V001.forEach((fileName) => {
+    const pathValue = `${targetRoot}/${fileName}`;
+    projection.push(
+      {operation: 'lstatBigInt', path: pathValue},
+      {operation: 'lstatBigInt', path: pathValue},
+      {operation: 'realpath', path: pathValue},
+      {operation: 'openReadOnly', path: pathValue},
+    );
+  });
+  return deepFreeze(projection);
+};
+
+const buildExpectedFilesystemOperationsV001 = ({
+  stage,
+  faultKind,
+  stagingRoot,
+  publishedRoot,
+}) => {
+  assert.equal(
+    ['staging', 'published', 'input-recheck'].includes(stage),
+    true,
+  );
+  assert.equal(
+    ['open', 'read-throw', 'post-read-stat-error', 'close'].includes(faultKind),
+    true,
+  );
+  const targetRoot = stage === 'published' ? publishedRoot : stagingRoot;
+  const complete = buildExpectedCompleteArtifactOperationsV001(targetRoot);
+  if (stage === 'input-recheck' || faultKind !== 'open') return complete;
+  const failedOpenPath = `${targetRoot}/${TEST_PACKAGE_FILES_V001[0]}`;
+  return deepFreeze(complete.filter((entry) =>
+    !(entry.operation === 'openReadOnly' && entry.path === failedOpenPath)));
+};
+
+const TRANSPORT_FAULT_PHASES_V001 = Object.freeze({
+  open: Object.freeze(['matched', 'open-thrown']),
+  'read-throw': Object.freeze([
+    'matched',
+    'opened',
+    'pre-read-stat-ok',
+    'read-thrown',
+    'closed',
+  ]),
+  'post-read-stat-error': Object.freeze([
+    'matched',
+    'opened',
+    'pre-read-stat-ok',
+    'read-completed',
+    'post-read-stat-thrown',
+    'closed',
+  ]),
+  close: Object.freeze([
+    'matched',
+    'opened',
+    'pre-read-stat-ok',
+    'read-completed',
+    'post-read-stat-ok',
+    'close-thrown',
+  ]),
+});
+
+const assertSingleFrozenFaultTraceV001 = (
+  snapshot,
+  expectedFaultTrace = null,
+) => {
+  assert.equal(Array.isArray(snapshot), true);
+  assert.equal(snapshot.length, 1);
+  assert.equal(0 in snapshot, true);
+  assert.equal(Object.keys(snapshot).length, 1);
+  assert.equal(Object.isFrozen(snapshot), true);
+  assert.deepEqual(Object.keys(snapshot[0]), [
+    'faultId',
+    'faultKind',
+    'path',
+    'phases',
+  ]);
+  assert.equal(Object.isFrozen(snapshot[0]), true);
+  assert.equal(Object.isFrozen(snapshot[0].phases), true);
+  if (expectedFaultTrace !== null) {
+    assert.deepEqual(snapshot[0], expectedFaultTrace);
+  }
+};
+
+const buildTransportActualV001 = ({
+  harness,
+  filesystem,
+  targetRoot,
+  report,
+  expectedFaultTrace,
+}) => {
+  const faultTraceSnapshot = harness.snapshotTraceV001();
+  assertSingleFrozenFaultTraceV001(
+    faultTraceSnapshot,
+    expectedFaultTrace,
+  );
+  return deepFreeze({
+    faultTrace: faultTraceSnapshot[0],
+    filesystemOperations: projectFilesystemOperationsV001(
+      filesystem.operations,
+      targetRoot,
+    ),
+    violations: clone(report.violations),
+    publicationFailures: clone(report.publicationFailures),
+  });
+};
+
+const buildTransportExpectedV001 = ({
+  faultId,
+  faultKind,
+  stage,
+  failurePoint,
+  violationPath,
+  stagingRoot,
+  publishedRoot,
+  gateAJobPath,
+}) => {
+  const faultPath = stage === 'input-recheck'
+    ? gateAJobPath
+    : `${stage === 'published' ? publishedRoot : stagingRoot}/`
+      + TEST_PACKAGE_FILES_V001[0];
+  return deepFreeze({
+    faultTrace: {
+      faultId,
+      faultKind,
+      path: faultPath,
+      phases: [...TRANSPORT_FAULT_PHASES_V001[faultKind]],
+    },
+    filesystemOperations: buildExpectedFilesystemOperationsV001({
+      stage,
+      faultKind,
+      stagingRoot,
+      publishedRoot,
+    }),
+    violations: [{
+      code: 'PUBLICATION_FAILED',
+      path: violationPath,
+      details: {},
+    }],
+    publicationFailures: [{
+      path: violationPath,
+      failurePoint,
+    }],
   });
 };
 
@@ -3776,14 +4086,12 @@ test('package成果物とsource-only検査は改変を上流へ遡って自動�
     'packageShape',
   );
   assert.deepEqual(
-    [...new Set(collectCodes(knownContentFileHashReport))],
-    ['PACKAGE_HASH_MISMATCH'],
-  );
-  assert.equal(
-    knownContentFileHashReport.violations.some((entry) =>
-      entry.code === 'PACKAGE_HASH_MISMATCH'
-      && entry.path === '$.packageFiles[5].value.contentArtifacts[0].fileSha256'),
-    true,
+    knownContentFileHashReport.violations,
+    [{
+      code: 'PACKAGE_HASH_MISMATCH',
+      path: '$.packageFiles[5].value.contentArtifacts[0].fileSha256',
+      details: {},
+    }],
   );
   assert.equal(
     collectCodes(knownContentFileHashReport).includes('PACKAGE_BINDING_MISMATCH'),
@@ -3817,15 +4125,20 @@ test('package成果物とsource-only検査は改変を上流へ遡って自動�
   const outerSelfHashMismatch = makeValidFixture();
   outerSelfHashMismatch.packageBuildPasses.forEach((pass) => {
     pass.artifacts[5].fileSha256 = '0'.repeat(64);
-    pass.artifacts[6].value.manifestBinding.fileSha256 = '0'.repeat(64);
-    rehashArtifact(pass.artifacts[6]);
   });
   const outerSelfHashReport = assertTargetCode(
     outerSelfHashMismatch,
     'PACKAGE_HASH_MISMATCH',
     'packageShape',
   );
-  assert.deepEqual(collectCodes(outerSelfHashReport), ['PACKAGE_HASH_MISMATCH']);
+  assert.deepEqual(
+    outerSelfHashReport.violations,
+    [{
+      code: 'PACKAGE_HASH_MISMATCH',
+      path: '$.packageFiles[5]',
+      details: {},
+    }],
+  );
 
   const outerSchemaAndSelfHash = makeValidFixture();
   outerSchemaAndSelfHash.packageBuildPasses.forEach((pass) => {
@@ -4306,6 +4619,7 @@ test('job二時点差とpublication各段の違反は固有check・pathへ帰属
       'self-consistent-alternate-publication-package-v001';
     alternateSeed.job.value.publication.formalOutputPath =
       'evals/clip_composition/outputs/presentation/'
+        + 'segmenter-boundary-evidence/'
         + 'self-consistent-alternate-publication-package-v001';
     refreshJobSnapshot(alternateSeed);
     rebuildPackagePasses(alternateSeed);
@@ -4316,6 +4630,28 @@ test('job二時点差とpublication各段の違反は固有check・pathへ帰属
       alternateArtifacts,
     );
     assertPublicationInvalid(alternatePackage);
+
+    const differentParent = makePublicationArtifactFixture(stage);
+    const differentParentRoot =
+      'evals/clip_composition/outputs/presentation/'
+      + 'segmenter-boundary-evidence/'
+      + `different-${stage}-parent-package-v001`
+      + (stage === 'staging' ? '.work' : '');
+    differentParent.publicationProcessObservation[stage].artifactReads =
+      differentParent.publicationProcessObservation[stage].artifactReads.map(
+        (read, index) => ({
+          fileName: read.fileName,
+          status: read.status,
+          snapshot: stableSnapshotFromBytes(
+            `${differentParentRoot}/${read.fileName}`,
+            read.snapshot.bytes,
+            1300 + index,
+          ),
+          observedKind: read.observedKind,
+          failurePoint: read.failurePoint,
+        }),
+      );
+    assertPublicationInvalid(differentParent);
 
     const missing = makePublicationArtifactFixture(stage);
     missing.publicationProcessObservation[stage].directoryEntries =
@@ -4601,10 +4937,19 @@ test('formal runnerはstaging・input recheck・preRenameの各gateで止まり�
   ];
   for (const row of rows) {
     const runnerJob = makeRunnerJob('formal-generation', `formal-${row.failure}`);
+    const builder = createRunnerSpyBuilder();
+    let prebindingCallCount = 0;
+    let prebindingSnapshot = null;
     const filesystem = createHybridRunnerFilesystem(runnerJob, {
       formalFailure: row.failure,
+      onBeforeFirstStagingDirectoryListing: row.failure === 'staging'
+        ? (stagingEntries) => {
+          prebindingCallCount += 1;
+          prebindingSnapshot =
+            assertBoundStagingEntriesV001(stagingEntries, builder.calls);
+        }
+        : null,
     });
-    const builder = createRunnerSpyBuilder();
     const result = await packageRunner.runPresentationCaptionSemanticSourcePackageV001(
       runnerJob.jobPath,
       {
@@ -4622,6 +4967,69 @@ test('formal runnerはstaging・input recheck・preRenameの各gateで止まり�
     assert.equal(builder.calls.gateA.length, 2);
     assert.equal(builder.calls.embedded.length, 2);
     assert.equal(builder.calls.package.length, 2);
+    if (row.failure === 'staging') {
+      assert.equal(prebindingCallCount, 1);
+      assert.equal(prebindingSnapshot.length, TEST_PACKAGE_FILES_V001.length);
+      assert.equal(Object.isFrozen(prebindingSnapshot), true);
+      assert.deepEqual(
+        filesystem.stagingDirectoryListings,
+        [[
+          'embedded-gate-a-validation-report.json',
+          'package-manifest.json',
+          'package-validation-report.json',
+          'segmenter-boundary-evidence.json',
+          'semantic-source-input.json',
+          'source-only-leakage-report.json',
+        ]],
+      );
+      const actual = deepFreeze({
+        faultTrace: null,
+        filesystemOperations: projectFilesystemOperationsV001(
+          filesystem.operations,
+          filesystem.paths.work,
+        ),
+        violations: clone(result.report.violations),
+        publicationFailures: clone(result.report.publicationFailures),
+      });
+      const expected = deepFreeze({
+        faultTrace: null,
+        filesystemOperations: buildExpectedCompleteArtifactOperationsV001(
+          filesystem.paths.work,
+        ),
+        violations: [{
+          code: 'PUBLICATION_STAGING_INVALID',
+          path: '$.publication.staging',
+          details: {},
+        }],
+        publicationFailures: [],
+      });
+      assert.deepEqual(actual, expected);
+      assert.deepEqual(
+        actual.filesystemOperations
+          .filter((entry) => entry.operation === 'openReadOnly')
+          .map((entry) => entry.path),
+        TEST_PACKAGE_FILES_V001.map(
+          (fileName) => `${filesystem.paths.work}/${fileName}`,
+        ),
+      );
+      const stagingObservedIndexes = filesystem.operations
+        .map((entry, index) => (
+          entry.operation === 'stagingObserved' ? index : null
+        ))
+        .filter((index) => index !== null);
+      assert.equal(stagingObservedIndexes.length, 1);
+      assert.deepEqual(
+        filesystem.operations
+          .slice(stagingObservedIndexes[0] + 1)
+          .filter((entry) =>
+            entry.operation === 'openReadOnly'
+            && !entry.path.startsWith(`${filesystem.paths.work}/`)),
+        [],
+      );
+    } else {
+      assert.equal(prebindingCallCount, 0);
+      assert.equal(prebindingSnapshot, null);
+    }
     const operationNames = filesystem.operations.map((entry) => entry.operation);
     for (const operation of row.forbiddenOperations) {
       assert.equal(operationNames.includes(operation), false, `${row.failure}:${operation}`);
@@ -4661,44 +5069,70 @@ test('formal runnerはstaging・input recheck・preRenameの各gateで止まり�
     passedResult.report.checks.every((entry) => entry.status === 'passed'),
     true,
   );
+  assert.deepEqual(
+    projectFilesystemOperationsV001(
+      passedFilesystem.operations,
+      passedFilesystem.paths.work,
+    ),
+    buildExpectedCompleteArtifactOperationsV001(passedFilesystem.paths.work),
+  );
+  assert.deepEqual(
+    projectFilesystemOperationsV001(
+      passedFilesystem.operations,
+      passedFilesystem.paths.formalRoot,
+    ),
+    buildExpectedCompleteArtifactOperationsV001(
+      passedFilesystem.paths.formalRoot,
+    ),
+  );
 });
 
 test('R3:formal artifactのopen/read失敗はPUBLICATION_FAILEDへ帰属し完全snapshot不一致は53/54/56を維持する', async () => {
   const transportRows = [
-    ['staging-open', 'open', (pathValue, filesystem) =>
-      pathValue.startsWith(`${filesystem.paths.work}/`), 'artifact-01-open'],
-    ['staging-read', 'read-throw', (pathValue, filesystem) =>
-      pathValue.startsWith(`${filesystem.paths.work}/`), 'artifact-01-read'],
-    ['staging-post-read-fstat', 'post-read-stat-error', (pathValue, filesystem) =>
-      pathValue.startsWith(`${filesystem.paths.work}/`), 'artifact-01-read'],
-    ['staging-close', 'close', (pathValue, filesystem) =>
-      pathValue.startsWith(`${filesystem.paths.work}/`), 'artifact-01-read'],
-    ['published-open', 'open', (pathValue, filesystem) =>
-      pathValue.startsWith(`${filesystem.paths.formalRoot}/`), 'artifact-01-open'],
-    ['published-read', 'read-throw', (pathValue, filesystem) =>
-      pathValue.startsWith(`${filesystem.paths.formalRoot}/`), 'artifact-01-read'],
-    ['published-post-read-fstat', 'post-read-stat-error', (pathValue, filesystem) =>
-      pathValue.startsWith(`${filesystem.paths.formalRoot}/`), 'artifact-01-read'],
-    ['published-close', 'close', (pathValue, filesystem) =>
-      pathValue.startsWith(`${filesystem.paths.formalRoot}/`), 'artifact-01-read'],
-    ['input-recheck-read', 'read-throw', (pathValue, filesystem) =>
-      pathValue === resolve(WORKSPACE_ROOT, GATE_A_JOB_PATH)
-        && filesystem.operations.some(
-          (entry) => entry.operation === 'stagingObserved',
-        ), 'input-recheck'],
+    ['staging-open', 'open', 'staging', 'artifact-01-open'],
+    ['staging-read', 'read-throw', 'staging', 'artifact-01-read'],
+    [
+      'staging-post-read-fstat',
+      'post-read-stat-error',
+      'staging',
+      'artifact-01-read',
+    ],
+    ['staging-close', 'close', 'staging', 'artifact-01-read'],
+    ['published-open', 'open', 'published', 'artifact-01-open'],
+    ['published-read', 'read-throw', 'published', 'artifact-01-read'],
+    [
+      'published-post-read-fstat',
+      'post-read-stat-error',
+      'published',
+      'artifact-01-read',
+    ],
+    ['published-close', 'close', 'published', 'artifact-01-read'],
+    ['input-recheck-read', 'read-throw', 'input-recheck', 'input-recheck'],
   ];
-  for (const [suffix, kind, pathMatcher, expectedFailurePoint] of transportRows) {
+  for (const [suffix, kind, stage, expectedFailurePoint] of transportRows) {
     const runnerJob = makeRunnerJob('formal-generation', `r3-${suffix}`);
     const filesystem = createHybridRunnerFilesystem(runnerJob);
-    const adapter = withSyntheticReadFault(filesystem.adapter, {
+    const harness = createSyntheticReadFaultTraceHarnessV001(filesystem.adapter, {
+      faultId: suffix,
       kind,
-      matches: (pathValue, matchedOpenCount) =>
-        matchedOpenCount === 0 && pathMatcher(pathValue, filesystem),
+      matches: (pathValue, matchedOpenCount) => {
+        if (matchedOpenCount !== 0) return false;
+        if (stage === 'staging') {
+          return pathValue.startsWith(`${filesystem.paths.work}/`);
+        }
+        if (stage === 'published') {
+          return pathValue.startsWith(`${filesystem.paths.formalRoot}/`);
+        }
+        return pathValue === resolve(WORKSPACE_ROOT, GATE_A_JOB_PATH)
+          && filesystem.operations.some(
+            (entry) => entry.operation === 'stagingObserved',
+          );
+      },
     });
     const result = await packageRunner.runPresentationCaptionSemanticSourcePackageV001(
       runnerJob.jobPath,
       {
-        filesystemAdapter: adapter,
+        filesystemAdapter: harness.adapter,
         builderAdapter: createRunnerSpyBuilder().adapter,
       },
     );
@@ -4716,9 +5150,9 @@ test('R3:formal artifactのopen/read失敗はPUBLICATION_FAILEDへ帰属し完�
       true,
       suffix,
     );
-    const expectedViolationPath = suffix.startsWith('staging-')
+    const expectedViolationPath = stage === 'staging'
       ? '$.publication.staging.artifactReads[0].failurePoint'
-      : suffix.startsWith('published-')
+      : stage === 'published'
         ? '$.publication.published.artifactReads[0].failurePoint'
         : '$.publication.inputRecheck.failurePoint';
     assert.equal(
@@ -4739,7 +5173,28 @@ test('R3:formal artifactのopen/read失敗はPUBLICATION_FAILEDへ帰属し完�
       true,
       suffix,
     );
-    if (suffix.startsWith('staging-')) {
+    const targetRoot = stage === 'published'
+      ? filesystem.paths.formalRoot
+      : filesystem.paths.work;
+    const expected = buildTransportExpectedV001({
+      faultId: suffix,
+      faultKind: kind,
+      stage,
+      failurePoint: expectedFailurePoint,
+      violationPath: expectedViolationPath,
+      stagingRoot: filesystem.paths.work,
+      publishedRoot: filesystem.paths.formalRoot,
+      gateAJobPath: resolve(WORKSPACE_ROOT, GATE_A_JOB_PATH),
+    });
+    const actual = buildTransportActualV001({
+      harness,
+      filesystem,
+      targetRoot,
+      report: result.report,
+      expectedFaultTrace: expected.faultTrace,
+    });
+    assert.deepEqual(actual, expected, suffix);
+    if (stage === 'staging') {
       assert.equal(
         collectCodes(result.report).includes('PUBLICATION_STAGING_INVALID'),
         false,
@@ -4747,7 +5202,7 @@ test('R3:formal artifactのopen/read失敗はPUBLICATION_FAILEDへ帰属し完�
       );
       assert.equal(result.report.publicationObservation.state, 'not_started');
     }
-    if (suffix.startsWith('published-')) {
+    if (stage === 'published') {
       assert.equal(
         collectCodes(result.report).includes('PUBLISHED_PACKAGE_INVALID'),
         false,
@@ -4765,6 +5220,48 @@ test('R3:formal artifactのopen/read失敗はPUBLICATION_FAILEDへ帰属し完�
       );
     }
   }
+
+  const unmatchedJob = makeRunnerJob('formal-generation', 'r3-trace-unmatched');
+  const unmatchedFilesystem = createHybridRunnerFilesystem(unmatchedJob);
+  const unmatchedHarness = createSyntheticReadFaultTraceHarnessV001(
+    unmatchedFilesystem.adapter,
+    {
+      faultId: 'trace-unmatched',
+      kind: 'open',
+      matches: () => false,
+    },
+  );
+  assert.throws(
+    () => assertSingleFrozenFaultTraceV001(
+      unmatchedHarness.snapshotTraceV001(),
+    ),
+    assert.AssertionError,
+  );
+
+  const duplicateJob = makeRunnerJob('formal-generation', 'r3-trace-duplicate');
+  const duplicateFilesystem = createHybridRunnerFilesystem(duplicateJob);
+  const duplicateHarness = createSyntheticReadFaultTraceHarnessV001(
+    duplicateFilesystem.adapter,
+    {
+      faultId: 'trace-duplicate',
+      kind: 'open',
+      matches: () => true,
+    },
+  );
+  await assert.rejects(
+    duplicateHarness.adapter.openReadOnly(duplicateFilesystem.paths.job),
+    /synthetic open failure/u,
+  );
+  await assert.rejects(
+    duplicateHarness.adapter.openReadOnly(duplicateFilesystem.paths.job),
+    /synthetic open failure/u,
+  );
+  assert.throws(
+    () => assertSingleFrozenFaultTraceV001(
+      duplicateHarness.snapshotTraceV001(),
+    ),
+    assert.AssertionError,
+  );
 
   for (const [suffix, expectedCode, matcher] of [
     ['staging-complete-mismatch', 'PUBLICATION_STAGING_INVALID',
