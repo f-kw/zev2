@@ -187,6 +187,26 @@ const PACKAGE_FILES = Object.freeze([
   'package-manifest.json',
   'package-validation-report.json',
 ]);
+const FORMAL_START_INPUT_ROLES_V001 = Object.freeze([
+  'gateAJob',
+  'gateACompletionReport',
+  'core',
+  'retainedSourceAtomsCore',
+  'runner',
+  'sourceAtoms',
+  'sourceGenerationManifest',
+  'sourceValidationReport',
+  'packageCore',
+  'packageRunner',
+  'rendererTrustImplementation',
+  'presetRegistry',
+  'presetValidationIndex',
+  'materialValidationIndex',
+  'registryBinding',
+  'rendererTrust',
+  'textLayoutImplementation',
+  'nodeBinary',
+]);
 const CONTENT_ROLES = Object.freeze([
   'boundaryEvidence',
   'embeddedGateAReport',
@@ -3916,6 +3936,54 @@ const observationsEquivalent = (initial, final) => {
     return sameReadObservation(entry.observation, other.observation);
   });
 };
+const reconstructFormalStartInputsV001 = (value) => {
+  if (!exactKeys(value, [
+    'gateAJobInput',
+    'gateACompletionReportInput',
+    'gateAImplementationInputs',
+    'gateASourceInputs',
+    'implementationInputs',
+    'widthPolicyInputs',
+    'nodeBinaryInput',
+  ])
+    || !isDenseArray(value.gateAImplementationInputs)
+    || value.gateAImplementationInputs.length !== 3
+    || !isDenseArray(value.gateASourceInputs)
+    || value.gateASourceInputs.length !== 3
+    || !isDenseArray(value.implementationInputs)
+    || value.implementationInputs.length !== 3
+    || !isDenseArray(value.widthPolicyInputs)
+    || value.widthPolicyInputs.length !== 6) return null;
+  const observations = [
+    value.gateAJobInput,
+    value.gateACompletionReportInput,
+    ...value.gateAImplementationInputs,
+    ...value.gateASourceInputs,
+    ...value.implementationInputs,
+    ...value.widthPolicyInputs,
+    value.nodeBinaryInput,
+  ];
+  if (observations.length !== FORMAL_START_INPUT_ROLES_V001.length) return null;
+  for (let index = 0; index < observations.length - 1; index += 1) {
+    if (!validateReadObservation(
+      observations[index],
+      FORMAL_START_INPUT_ROLES_V001[index],
+    )) return null;
+  }
+  const nodeBinaryInput = observations[observations.length - 1];
+  if (!exactKeys(nodeBinaryInput, ['role', 'status', 'snapshot'])
+    || nodeBinaryInput.role !== 'nodeBinary'
+    || nodeBinaryInput.status !== 'read'
+    || !isPlainObject(nodeBinaryInput.snapshot)
+    || !Buffer.isBuffer(nodeBinaryInput.snapshot.bytes)
+    || !isSha256(nodeBinaryInput.snapshot.fileSha256)
+    || hashBytes(nodeBinaryInput.snapshot.bytes)
+      !== nodeBinaryInput.snapshot.fileSha256) return null;
+  return Object.freeze(observations.map((observation, index) => Object.freeze({
+    role: FORMAL_START_INPUT_ROLES_V001[index],
+    observation,
+  })));
+};
 
 const deriveReadOnly = (context, state) => {
   const observation = context.readOnlyProcessObservation;
@@ -4131,8 +4199,15 @@ const derivePublication = (context, state) => {
     publicationFailure(state, '$.publication.inputRecheck.failurePoint');
   } else if (observation.inputRecheck?.status === 'observed') {
     const inputs = observation.inputRecheck.observations;
-    const reread = context.readOnlyProcessObservation?.inputReread;
-    const initialInputs = reread?.status === 'completed' ? reread.initialInputs : null;
+    const initialInputs = reconstructFormalStartInputsV001({
+      gateAJobInput: context.gateA.jobInput,
+      gateACompletionReportInput: context.gateA.completionReportInput,
+      gateAImplementationInputs: context.gateA.implementationInputs,
+      gateASourceInputs: context.gateA.sourceInputs,
+      implementationInputs: context.implementationInputs,
+      widthPolicyInputs: context.widthPolicyInputs,
+      nodeBinaryInput: context.runtimeObservation.nodeBinaryInput,
+    });
     if (!isDenseArray(inputs)
       || !isDenseArray(initialInputs)
       || !observationsEquivalent(initialInputs, inputs)) {

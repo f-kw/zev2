@@ -4357,6 +4357,78 @@ const makeFormalFixture = () => {
   };
   return fixture;
 };
+const FORMAL_START_INPUT_ORACLE_ROLES_V001 = Object.freeze([
+  'gateAJob',
+  'gateACompletionReport',
+  'core',
+  'retainedSourceAtomsCore',
+  'runner',
+  'sourceAtoms',
+  'sourceGenerationManifest',
+  'sourceValidationReport',
+  'packageCore',
+  'packageRunner',
+  'rendererTrustImplementation',
+  'presetRegistry',
+  'presetValidationIndex',
+  'materialValidationIndex',
+  'registryBinding',
+  'rendererTrust',
+  'textLayoutImplementation',
+  'nodeBinary',
+]);
+const formalStartInputOracleV001 = (fixture) => {
+  const observations = [
+    fixture.gateA.jobInput,
+    fixture.gateA.completionReportInput,
+    ...fixture.gateA.implementationInputs,
+    ...fixture.gateA.sourceInputs,
+    ...fixture.implementationInputs,
+    ...fixture.widthPolicyInputs,
+    fixture.runtimeObservation.nodeBinaryInput,
+  ];
+  assert.equal(observations.length, FORMAL_START_INPUT_ORACLE_ROLES_V001.length);
+  observations.forEach((observation, index) => {
+    assert.equal(observation.role, FORMAL_START_INPUT_ORACLE_ROLES_V001[index]);
+  });
+  return observations.map((observation, index) => ({
+    role: FORMAL_START_INPUT_ORACLE_ROLES_V001[index],
+    observation: clone(observation),
+  }));
+};
+const useObservedFormalInputRecheckV001 = (fixture, observations) => {
+  fixture.publicationProcessObservation.inputRecheck = {
+    status: 'observed',
+    observations,
+    failurePoint: null,
+  };
+};
+const changeFormalInputObservationV001 = (row, index) => {
+  if (row.role === 'nodeBinary') {
+    const changedBytes = Buffer.from(`changed-node-binary-${index}`, 'utf8');
+    row.observation = {
+      role: 'nodeBinary',
+      status: 'read',
+      snapshot: {
+        bytes: changedBytes,
+        fileSha256: sha256(changedBytes),
+      },
+    };
+    return;
+  }
+  const changedBytes = Buffer.concat([
+    row.observation.snapshot.bytes,
+    Buffer.from(`changed-${index}`, 'utf8'),
+  ]);
+  row.observation = readObservation(
+    row.role,
+    stableSnapshotFromBytes(
+      row.observation.path,
+      changedBytes,
+      2000 + index,
+    ),
+  );
+};
 const makeObservedPublicationArtifactSet = (
   artifacts,
   repositoryRoot,
@@ -4429,6 +4501,105 @@ const replaceObservedArtifactWithIoFailure = (
     failurePoint,
   };
 };
+
+test('formal開始入力再構成は既存18観測と一致し一件差・列構造差を拒否する', () => {
+  const unchanged = makeFormalFixture();
+  const unchangedOracle = formalStartInputOracleV001(unchanged);
+  assert.deepEqual(
+    unchangedOracle.map((entry) => entry.role),
+    FORMAL_START_INPUT_ORACLE_ROLES_V001,
+  );
+  useObservedFormalInputRecheckV001(unchanged, clone(unchangedOracle));
+  const unchangedReport =
+    packageCore.checkPresentationCaptionSemanticSourcePackageV001(unchanged);
+  assertCheckedReportInvariants(unchangedReport, FORMAL_CHECK_NAMES, unchanged);
+  assert.deepEqual(unchangedReport.violations, []);
+
+  for (let index = 0; index < FORMAL_START_INPUT_ORACLE_ROLES_V001.length; index += 1) {
+    const changed = makeFormalFixture();
+    const changedOracle = formalStartInputOracleV001(changed);
+    changeFormalInputObservationV001(changedOracle[index], index);
+    useObservedFormalInputRecheckV001(changed, changedOracle);
+    const changedReport = assertTargetCode(
+      changed,
+      'PUBLICATION_INPUT_CHANGED',
+      'publication',
+    );
+    assert.deepEqual(changedReport.violations, [{
+      code: 'PUBLICATION_INPUT_CHANGED',
+      path: '$.publication.inputRecheck.observations',
+      details: {},
+    }]);
+  }
+
+  const structuralCases = [
+    {
+      name: '先頭欠落',
+      mutate: (rows) => rows.slice(1),
+    },
+    {
+      name: '中央欠落',
+      mutate: (rows) => rows.filter((entry, index) => index !== 9),
+    },
+    {
+      name: '末尾欠落',
+      mutate: (rows) => rows.slice(0, -1),
+    },
+    {
+      name: '余分な行',
+      mutate: (rows) => [...rows, clone(rows[0])],
+    },
+    {
+      name: '隣接行入れ替え',
+      mutate: (rows) => {
+        [rows[8], rows[9]] = [rows[9], rows[8]];
+        return rows;
+      },
+    },
+    {
+      name: '同一行重複',
+      mutate: (rows) => {
+        rows[1] = clone(rows[0]);
+        return rows;
+      },
+    },
+    {
+      name: '外側role変更',
+      mutate: (rows) => {
+        rows[0].role = 'unexpected';
+        return rows;
+      },
+    },
+    {
+      name: '内側role変更',
+      mutate: (rows) => {
+        rows[0].observation.role = 'unexpected';
+        return rows;
+      },
+    },
+  ];
+  for (const structuralCase of structuralCases) {
+    const changed = makeFormalFixture();
+    const changedOracle = structuralCase.mutate(
+      formalStartInputOracleV001(changed),
+    );
+    useObservedFormalInputRecheckV001(changed, changedOracle);
+    const changedReport = assertTargetCode(
+      changed,
+      'PUBLICATION_INPUT_CHANGED',
+      'publication',
+    );
+    assert.deepEqual(
+      changedReport.violations,
+      [{
+        code: 'PUBLICATION_INPUT_CHANGED',
+        path: '$.publication.inputRecheck.observations',
+        details: {},
+      }],
+      structuralCase.name,
+    );
+  }
+});
 
 test('job二時点差とpublication各段の違反は固有check・pathへ帰属する', () => {
   const jobPrePublication = makeFormalFixture();
