@@ -1,6 +1,6 @@
 # ZEV プロジェクト引き継ぎ資料 (HANDOVER)
 
-v136 / 2026-07-24 改訂(初版 2026-07-07) / 原本作成者: Claude (Fable 5、社外相談役)
+v137 / 2026-07-24 改訂(初版 2026-07-07) / 原本作成者: Claude (Fable 5、社外相談役)
 目的: 相談役・実行部隊のどちらのメモリが失われても、この1枚+リポジトリ内資料で文脈を完全復元するため。
 読み順: 本資料 → 目標定義書v3.6(`docs/GOAL_DEFINITION.md`) → DECISIONS.md → プロンプト版台帳(evals/clip_composition/prompts/README.md) → 製造手順書(FIXTURE_MANUFACTURING_RUNBOOK.md)。
 配置: `docs/HANDOVER.md`。大きな方針転換時は§6・§10を転換作業と同一コミットで更新すること。
@@ -59,7 +59,7 @@ v136 / 2026-07-24 改訂(初版 2026-07-07) / 原本作成者: Claude (Fable 5�
 ## 6. 現状(2026-07-24時点)
 
 - 実行部隊はCodexからGPT-5.6へ交代済み。復唱テスト合格をDECISIONS.mdへ記録済み。
-- 実行は人間待ち充填方式。正式初見`DmWu0jVQfTE` candidate 13は`gap01=keep / gap02=cut / cut-gap2`を人間採用し、D媒体と同じ2区間を正式決定へ固定した。音声時刻格子修正後の承認済みattempt v002は、絶対格子423,073,008 sample、既知2空白のzero、Dと同じ2,535 frame・4,056,000 sampleに合格し、正式4成果物を`DmWu0jVQfTE-candidate-13-v002`へ公開した。固定jobによる残存source atom 354件（区間別248/106）の抽出にも合格。続くテロップ計画ゲートAは、354文字を唯一の正本にして機械境界候補205件を作り、正式合成21/21・固有違反35/35・既存回帰50/50・candidate 13読み取り専用preflight 10/10に合格した。205件は機械的区切りであり、自然さ・読みやすさの認定ではない。ゲートB方向・補足・B1完全実装契約、受け渡し入口追補v001、JSON・表示信頼境界追補v001、R2案A、R3分割読取、hashbang限定受理は承認済み。hashbangをpackage・意味回答の同一scannerへ実装しrunnerを全byte不変に保ってpackage全132件を一度実行したが、118合格・14不合格で停止した。直接7件は6件合格し、残る1件は裸CR検査データが実際にはCRLFになる検査側欠陥。下流20件は7件合格し、残る13件はGate Aレポート検証呼出の入力形式・boolean戻り値契約不一致という第四原因で先行停止した。修正・再実行、意味回答側、既存回帰、candidate 13 preflightは行っておらず、正式入力package、prompt、Gemini、正式表示計画、描画も未着手。残り3候補は凍結し、candidate 13全完了後は新素材で配管一般性を先に検証する。production tool identityの期待binary完全束縛は別の契約改訂残件。
+- 実行は人間待ち充填方式。正式初見`DmWu0jVQfTE` candidate 13は`gap01=keep / gap02=cut / cut-gap2`を人間採用し、D媒体と同じ2区間を正式決定へ固定した。音声時刻格子修正後の承認済みattempt v002は、絶対格子423,073,008 sample、既知2空白のzero、Dと同じ2,535 frame・4,056,000 sampleに合格し、正式4成果物を`DmWu0jVQfTE-candidate-13-v002`へ公開した。固定jobによる残存source atom 354件（区間別248/106）の抽出にも合格。続くテロップ計画ゲートAは、354文字を唯一の正本にして機械境界候補205件を作り、正式合成21/21・固有違反35/35・既存回帰50/50・candidate 13読み取り専用preflight 10/10に合格した。205件は機械的区切りであり、自然さ・読みやすさの認定ではない。ゲートB方向・補足・B1完全実装契約、受け渡し入口追補v001、JSON・表示信頼境界追補v001、R2案A、R3分割読取、hashbang限定受理は承認済み。hashbangをpackage・意味回答の同一scannerへ実装しrunnerを全byte不変に保ってpackage全132件を一度実行したが、118合格・14不合格で停止した。直接7件は6件合格し、残る1件は裸CR検査データが実際にはCRLFになる検査側欠陥。下流20件は7件合格し、残る13件はpackage側だけがGate A検証の平坦な8項目入力・boolean戻り値を誤用した第四原因で先行停止した。Gate A側は承認済み契約どおりと確定し、改行fixture全体の水平監査と二欠陥の版付き修正設計v001を提示済み。実装・再実行、意味回答側、既存回帰、candidate 13 preflightは人間承認待ちで、正式入力package、prompt、Gemini、正式表示計画、描画も未着手。残り3候補は凍結し、candidate 13全完了後は新素材で配管一般性を先に検証する。production tool identityの期待binary完全束縛は別の契約改訂残件。
 - 生成系統への実モデル名付与は採点系へ実装済み。新規result.jsonで `llm-v012@gemini-web-flash` を確認し、既存result.jsonは変更していない。
 
 ### fixture(凍結8系統。IMQの3変種は1系統として数える)
@@ -380,7 +380,7 @@ v136 / 2026-07-24 改訂(初版 2026-07-07) / 原本作成者: Claude (Fable 5�
 19. **[完了]** 元発話の話者欄を契約v002へ改訂。欄なし・`null`・非空の不透明な配信内ラベルを区別し、実測非人物値2種だけを固定台帳でpackage生成時に`null`へ写す。人物情報は明示speaker targetだけを正本とし、旧v001は無変更。既存73/73・新規10/10、合計83/83に合格した。
 20. **[完了]** 正式台帳・空素材index・信頼binding・境界v002を前提にしたレンダラーv001は、合成データ実装と100/100検査まで完了。実データ、G4〜G7生成側、比較媒体、LLM、本体接続は実行していない。
 21. **[完了]** 「人間承認済み最終区間列→基礎映像＋frame時間対応表」の合成実装を完了。30/60fpsを30fps論理frameで直接写すtimeline v002とrenderer v002正式入口を一体で検査し、v001のms再丸めを実データ入口へ使わない。実データ生成・人間視聴・G4〜G7・LLM・本体接続は行っていない。
-22. **[主線・package全件検査の第四原因停止]** candidate 13の正式基礎映像・timeline v002・残存source atom 354件、テロップ計画ゲートAの正式合成21/21・違反35/35・既存回帰50/50・preflight 10/10までは合格済み。B1完全実装契約と各追補、R2案A、R3分割読取、hashbang限定受理はkawafmm承認済み。hashbangをpackage・意味回答の同一scannerへ実装しrunnerを全byte不変に保ってpackage側132件を一度実行した結果、118合格・14不合格で停止した。直接7件は6件合格し、残る1件は裸CR検査データが実際にはCRLFになる検査側欠陥。下流20件は7件合格し、残る13件はGate Aレポート検証の呼出形式とboolean戻り値の扱いが既存検証関数の契約に一致しない第四原因で`gateAReport / GATE_A_REPORT_INVALID`へ先行停止した。118件を部分合格にせず、修正・再実行、意味回答側、ゲートA・残存source回帰、candidate 13 preflight、正式7-file package、prompt、Gemini、表示計画、指示書、描画は未実行。再開には二欠陥の版付き修正設計と新しい全件実行の人間承認が必要。将来実走の第一候補`gemini-3.6-flash`はコードへ定数化せず実行manifestへ実モデルを記録する。candidate 11・12・36は既存提示・外側境界を保全して凍結し、candidate 13全完了後は同素材反復より新素材で配管一般性を先に検証する。
+22. **[主線・二欠陥修正設計の承認待ち]** candidate 13の正式基礎映像・timeline v002・残存source atom 354件、テロップ計画ゲートAの正式合成21/21・違反35/35・既存回帰50/50・preflight 10/10までは合格済み。B1完全実装契約と各追補、R2案A、R3分割読取、hashbang限定受理はkawafmm承認済み。hashbangをpackage・意味回答の同一scannerへ実装しrunnerを全byte不変に保ってpackage側132件を一度実行した結果、118合格・14不合格で停止した。直接7件は6件合格し、残る1件は裸CR検査データが実際にはCRLFになる検査側欠陥。下流20件は7件合格し、残る13件はpackage側だけがGate A検証の承認済み入力形式・boolean戻り値を誤用した第四原因で`gateAReport / GATE_A_REPORT_INVALID`へ先行停止した。Gate A側は正本どおりで契約追補不要と確定。改行表は両系統を横断し、package側の製造不一致2件（契約影響1・非阻害1）を記録した。二欠陥の修正設計`presentation-candidate13-caption-gate-b2-post-hashbang-two-defect-repair-design-20260724-v001.md`を提示済みで、実装・新しい全件実行は人間承認待ち。意味回答側、ゲートA・残存source回帰、candidate 13 preflight、正式7-file package、prompt、Gemini、表示計画、指示書、描画は未実行。将来実走の第一候補`gemini-3.6-flash`はコードへ定数化せず実行manifestへ実モデルを記録する。candidate 11・12・36は既存提示・外側境界を保全して凍結し、candidate 13全完了後は同素材反復より新素材で配管一般性を先に検証する。
 
 ## 11. 用語集
 
