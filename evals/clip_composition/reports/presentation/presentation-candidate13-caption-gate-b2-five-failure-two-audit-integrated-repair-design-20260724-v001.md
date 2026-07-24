@@ -459,6 +459,10 @@ evals/clip_composition/outputs/presentation/segmenter-boundary-evidence
 
 ## 18. 改訂履歴
 
+- 2026-07-24 承認済み追補の案内
+  - `presentation-candidate13-caption-gate-b2-observation-record-replacement-contract-addendum-20260724-v001.md`をkawafmmが承認
+  - 本設計§7.3、§7.4項目2〜4、§13、§15、§16のうち同追補が明示する範囲だけを上書き
+  - 承認後の実装前監査で、完全一致期待を変える未固定4点を検出し、コード変更・検査実行前に停止
 - v001 / 2026-07-24
   - 127/132停止の5不合格と事後監査2件を統合
   - 123／124を合成FSの同一中間親不足へ帰属

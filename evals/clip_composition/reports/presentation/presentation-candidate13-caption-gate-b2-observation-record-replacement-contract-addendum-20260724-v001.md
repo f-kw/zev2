@@ -1,13 +1,15 @@
 # candidate 13 基本テロップ ゲートB2 観測記録置換 契約追補 v001
 
 - 作成日: 2026-07-24
-- 状態: **起草済み・kawafmm承認待ち。設計のみ、実装・検査実行なし**
+- 状態: **kawafmm承認済み（2026-07-24）。実装前の完全性監査で未固定4点を検出し、コード変更・検査実行前に停止**
 - 追補先:
   `presentation-candidate13-caption-gate-b2-five-failure-two-audit-integrated-repair-design-20260724-v001.md`
 - 起草根拠:
   - `presentation-candidate13-caption-gate-b2-integrated-repair-implementation-preflight-stop-20260724-v001.md`
   - 2026-07-24のkawafmmによる、観測記録置換追補の起草承認
-- 人間作業: 本追補の承認または却下1判断。媒体視聴、時刻入力、正解生成は0件
+- 承認根拠:
+  - 2026-07-24のkawafmmによる本追補の明示承認と、2ファイル実装・全132件再検査の再開承認
+- 人間作業: 本追補の承認1判断は完了。現在の再開条件は§16の4点を一つの版付き追補として確定する1判断。媒体視聴、時刻入力、正解生成は0件
 
 ## 1. 目的
 
@@ -381,3 +383,24 @@ TAP全文とSHA-256を保存する既存条件は維持する。
 > 固定7 `openReadOnly`の完全一致へ置換してよいか。
 
 承認前は、コード変更、package側132件、後続検査、正式package、Gemini、指示書、描画を行わない。
+
+## 16. 承認後の実装前監査記録
+
+2026-07-24、kawafmmの承認を受領した後、§13のコード変更前に実装契約完全性を再監査した。
+その結果、次の4点は実装者判断なしに一意な期待列へ落とせないと判明した。
+
+1. test 123で、production builderが実行中に生成する固定7実体を「実行前」に束縛する時点
+2. jobの相対pathからabsolute pathへ変換する正本と、「対象root配下」がroot自身を含むか
+3. 故障後もrunnerが実際に継続した対象操作を集約記録へ含めるか
+4. 一件だけであるfault traceのsnapshot配列を、集約objectへ配列のまま入れるかentry一件へ展開するか
+
+いずれもTAPの完全一致期待を変える契約事項であり、§14の
+「全操作投影を実装者判断なしに作れない」「帰属が一意でない」
+「追補先設計との新しい矛盾・未固定事項」に該当する。
+このため、許可2ファイル、変更禁止runner、package側132件、後続検査には着手せず停止した。
+
+正本停止報告:
+`presentation-candidate13-caption-gate-b2-observation-replacement-implementation-preflight-stop-20260724-v001.md`
+
+本節は承認と停止の事実記録であり、上記4点を黙って補う契約改訂ではない。
+再開には、停止報告の推奨方向を版付き追補として確定する人間承認を要する。
