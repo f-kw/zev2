@@ -8,5 +8,21 @@
 - 安定点は、全検査合格、正式成果物のhash一致、`DECISIONS.md`と`docs/HANDOVER.md`の現在地同期、の3条件を満たす地点だけとする。
 - 各エントリには、日付とタグ名、実現できること、そこへ至る過程、撤退時に失われる作業範囲を書く。
 - 詳細な契約名や検査コードの列挙は避け、必要な証拠は既存の完了報告へリンクする。
+- 制度導入前の安定点へ付ける初回遡及タグだけは、3条件を読取監査で再確認し、このJOURNALの初回エントリを現在HEADの新規commitへ記録した上で、タグを過去の検証済みcommitへ付けてよい。エントリへタグ名と対象commitを明記する。この例外は初回だけで、以後のタグは原則どおり対象commitへエントリを同時記録する。
 
-現時点では安定点タグを発行していないため、実現記録のエントリはまだない。
+## 2026-07-24 — `stable/gate-a-complete-20260723`
+
+- タグ対象: `23a709a1b1ea7ccc02966702e1048add965725c0`（2026-07-23の安定点）。
+- 正式初見の配信から公開候補4本を選べて、第一関門「自分で使える」を通過した。
+- 動画の意味を決める役割と、文字や画面を描く役割を分け、後から描画方法を交換できる土台を作った。
+- 人間が選んだcandidate 13の二つの区間から、音を欠けさせず正式な基礎映像を作れるようになった。
+- 切り落とした箇所を字幕側が再参照しないよう、残った354文字だけを正式な入力として保存した。
+- その354文字から、欠落・重複・並べ替えなしで205個の字幕区切り候補を同じ結果で作れる。
+- ここで保証するのは文字を正しく引き継ぐところまでで、自然な読みやすさや完成した見た目ではない。
+- ここへ至るまでに、初見試験、演出と描画の責務分割、実データ音声の1msの欠落の発見と修正があった。
+- 小さな差を許容して進めず、人間が聴いて採用した編集と同じ映像・音声になるまで照合した。
+- 字幕区切り工程でも三度安全停止し、検査を弱めず不足と誤判定を直してから全検査を通した。
+- 詳細: [第一関門認定](docs/reports/first-gate/FIRST_GATE_FINAL_REVIEW_PACKAGE_20260717.md)、[演出と描画の責務分割](evals/clip_composition/reports/presentation/presentation-instruction-renderer-boundary-contract-20260720-v002.md)、[初の実データ基礎映像](evals/clip_composition/reports/presentation/presentation-first-real-data-base-media-attempt-v002-completion-20260722-v001.md)。
+- 詳細: [残存発話の正式抽出](evals/clip_composition/reports/presentation/presentation-candidate13-retained-source-atoms-formal-execution-20260722-v001.md)、[字幕区切り工程の完了](evals/clip_composition/reports/presentation/presentation-gate-a-implementation-completion-report-20260723-v001.md)、[遡及安定点の読み取り監査](evals/clip_composition/reports/presentation/presentation-gate-a-retrospective-stable-tag-audit-20260724-v001.md)。
+- このタグへ撤退すると、次の字幕入力パッケージの実装、検査修正、127/132で安全停止するまでの診断と文書更新に加え、ゲートC以降の接続準備監査と新素材候補の再照合監査を失う。
+- 正式入力パッケージ、Gemini実走、字幕指示書、描画はこの地点でも未実現なので、撤退で失う完成成果物はない。
