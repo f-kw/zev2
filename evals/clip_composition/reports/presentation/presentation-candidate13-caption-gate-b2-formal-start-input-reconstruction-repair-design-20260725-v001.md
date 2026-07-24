@@ -1,12 +1,15 @@
 # candidate 13 基本テロップ Gate B2 正式開始入力再構成 修正設計 v001
 
 - 作成日: 2026-07-25
-- 状態: **設計起草済み・未実装。kawafmmの実装承認待ち**
+- 状態: **2026-07-25 kawafmm承認済み。§5.1の対応関係を内容変更なしの明確化として追記。実装前**
 - 起点:
   - `presentation-candidate13-caption-gate-b2-test-repair-full-test-stop-report-20260725-v001.md`
   - package側正式検査 130/132、不合格2件、同attemptでの修正・再実行なし
-- 本設計の承認範囲: 実装、検査、再実行を含まない
+- 初回提示時の範囲: 設計のみ。2026-07-25の明示承認により、§11記載の限定実装・全件1回実行・合格時の既定後続まで進行可能
 - 人間作業: 本設計の承認1判断。媒体視聴、時刻入力、正解生成、時間計測は0件
+- 改訂履歴:
+  - 2026-07-25: kawafmmが§11の依頼文どおり実装を承認。
+  - 2026-07-25: 承認時条件に従い、§5.1へ最小exact objectの7 fieldと§4の18行との対応表を明確化追記。再構成元、行順、受理件数、公開面不変の契約は変更していない。
 
 ## 1. 本来の目的
 
@@ -127,12 +130,33 @@
 ### 5.1 入力を最小化する
 
 再構成処理へchecker context全体を渡さない。
-次の開始観測だけを持つexact objectを渡す。
+次の単体観測3つと配列4本だけを、表のown key順で持つexact objectを渡す。
 
-1. Gate Aの開始観測一式。
-2. B1実装の開始観測列。
-3. 描画幅方針と信頼情報の開始観測列。
-4. Node実体の開始観測。
+| own key順 | field | 形 | 件数 | 取得元となる既存開始観測 | §4の行 |
+|---:|---|---|---:|---|---:|
+| 1 | `gateAJobInput` | 単体観測 | 1 | Gate A jobの開始観測 | 1 |
+| 2 | `gateACompletionReportInput` | 単体観測 | 1 | Gate A完了報告の開始観測 | 2 |
+| 3 | `gateAImplementationInputs` | dense配列 | 3 | Gate A実装の開始観測列 | 3〜5 |
+| 4 | `gateASourceInputs` | dense配列 | 3 | Gate A入力の開始観測列 | 6〜8 |
+| 5 | `implementationInputs` | dense配列 | 3 | B1実装の開始観測列 | 9〜11 |
+| 6 | `widthPolicyInputs` | dense配列 | 6 | 描画幅方針と信頼情報の開始観測列 | 12〜17 |
+| 7 | `nodeBinaryInput` | 単体観測 | 1 | 実行環境に保持されたNode実体の開始観測 | 18 |
+
+checkerからこの最小objectを作る写像も固定する。
+
+| exact objectのfield | checkerに既存の取得元 |
+|---|---|
+| `gateAJobInput` | Gate A領域のjob開始観測 |
+| `gateACompletionReportInput` | Gate A領域の完了報告開始観測 |
+| `gateAImplementationInputs` | Gate A領域の実装開始観測列 |
+| `gateASourceInputs` | Gate A領域の入力開始観測列 |
+| `implementationInputs` | B1実装開始観測列 |
+| `widthPolicyInputs` | 描画幅方針と信頼情報の開始観測列 |
+| `nodeBinaryInput` | 実行環境観測内のNode実体開始観測 |
+
+この7 field以外を持つobject、field欠落、own key順違いは受理しない。
+§5.2の件数`3、3、3、6`は、上表の配列4本を同じ順に指す。
+単体観測3つをこの件数列へ含めない。
 
 これにより、処理から公開前再読値や読み取り専用preflight観測へ到達する経路を構造上なくす。
 
