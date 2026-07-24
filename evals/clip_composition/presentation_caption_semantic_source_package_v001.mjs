@@ -3962,29 +3962,93 @@ const deriveReadOnly = (context, state) => {
 
 const publicationFailure = (state, path) =>
   addViolation(state, 'publication', 'PUBLICATION_FAILED', path);
-const validateObservedArtifactSet = (observation) => {
+const validateExpectedPublicationArtifacts = (artifacts) =>
+  validatePackageArtifactSet(artifacts)
+  && artifacts.every((artifact) =>
+    validateArtifactBytes(artifact)
+    && hashBytes(artifact.bytes) === artifact.fileSha256
+    && canonicalSha(artifact.value) === artifact.canonicalSha256);
+const validateObservedPublicationRead = (read, expectedArtifact, index) => {
+  if (!exactKeys(read, ['fileName', 'status', 'snapshot', 'observedKind', 'failurePoint'])
+    || read.fileName !== PACKAGE_FILES[index]
+    || read.status !== 'read'
+    || read.observedKind !== 'regular-file'
+    || read.failurePoint !== null
+    || !validateStableSnapshot(read.snapshot)
+    || !Buffer.isBuffer(expectedArtifact?.bytes)
+    || !read.snapshot.bytes.equals(expectedArtifact.bytes)
+    || read.snapshot.fileSha256 !== expectedArtifact.fileSha256) return false;
+  const decoded = decodePresentationCaptionB1StrictJsonV001(read.snapshot.bytes);
+  return decoded.status === 'decoded'
+    && canonicalSha(decoded.value) === expectedArtifact.canonicalSha256
+    && sameJson(decoded.value, expectedArtifact.value);
+};
+const isObservedPublicationIoFailure = (read, index) => {
+  if (!exactKeys(read, ['fileName', 'status', 'snapshot', 'observedKind', 'failurePoint'])
+    || read.fileName !== PACKAGE_FILES[index]
+    || read.status !== 'io-error'
+    || read.snapshot !== null
+    || read.observedKind !== null) return false;
+  const ordinal = String(index + 1).padStart(2, '0');
+  return [
+    `artifact-${ordinal}-open`,
+    `artifact-${ordinal}-read`,
+  ].includes(read.failurePoint);
+};
+const inspectObservedArtifactSet = (observation, expectedArtifacts) => {
   if (observation?.status !== 'observed'
     || !isDenseArray(observation.directoryEntries)
     || !isDenseArray(observation.artifactReads)
-    || observation.artifactReads.length !== PACKAGE_FILES.length) return false;
-  const entries = observation.directoryEntries;
-  if (entries.length !== PACKAGE_FILES.length
-    || entries.some((entry, index) =>
-      !exactKeys(entry, ['name', 'kind'])
-      || entry.name !== PACKAGE_FILES[index]
-      || entry.kind !== 'file')) return false;
-  return observation.artifactReads.every((read, index) =>
-    exactKeys(read, ['fileName', 'status', 'snapshot', 'observedKind', 'failurePoint'])
-    && read.fileName === PACKAGE_FILES[index]
-    && read.status === 'read'
-    && read.observedKind === 'regular-file'
-    && read.failurePoint === null
-    && validateStableSnapshot(read.snapshot));
+    || observation.artifactReads.length !== PACKAGE_FILES.length) {
+    return {nonIoValid: false, ioFailureIndexes: []};
+  }
+  const expectedDirectoryFiles = [...PACKAGE_FILES].sort(compareUtf16);
+  const directoryValid = observation.directoryEntries.length === PACKAGE_FILES.length
+    && observation.directoryEntries.every((entry, index) =>
+      exactKeys(entry, ['name', 'kind'])
+      && entry.name === expectedDirectoryFiles[index]
+      && entry.kind === 'file');
+  const expectedArtifactsValid = validateExpectedPublicationArtifacts(expectedArtifacts);
+  const ioFailureIndexes = [];
+  let nonIoReadsValid = expectedArtifactsValid;
+  observation.artifactReads.forEach((read, index) => {
+    if (isObservedPublicationIoFailure(read, index)) {
+      ioFailureIndexes.push(index);
+      return;
+    }
+    if (!expectedArtifactsValid
+      || !validateObservedPublicationRead(read, expectedArtifacts[index], index)) {
+      nonIoReadsValid = false;
+    }
+  });
+  return {
+    nonIoValid: directoryValid && nonIoReadsValid,
+    ioFailureIndexes,
+  };
 };
+const validateObservedArtifactSet = (observation, expectedArtifacts) => {
+  const inspected = inspectObservedArtifactSet(observation, expectedArtifacts);
+  return inspected.nonIoValid && inspected.ioFailureIndexes.length === 0;
+};
+const recordObservedArtifactIoFailures = (state, stage, indexes) => {
+  for (const index of indexes) {
+    publicationFailure(
+      state,
+      `$.publication.${stage}.artifactReads[${index}].failurePoint`,
+    );
+  }
+};
+const validateObservedArtifactReadOrder = (observation) =>
+  isDenseArray(observation?.artifactReads)
+  && observation.artifactReads.length === PACKAGE_FILES.length
+  && observation.artifactReads.every((read, index) =>
+    exactKeys(read, ['fileName', 'status', 'snapshot', 'observedKind', 'failurePoint'])
+    && read.fileName === PACKAGE_FILES[index]);
 
 const derivePublication = (context, state) => {
   if (context.productionMode !== 'formal-generation') return;
   const observation = context.publicationProcessObservation;
+  const expectedArtifacts = context.packageBuildPasses?.[0]?.artifacts;
   if (!isPlainObject(observation) || observation.mode !== 'formal') {
     if (context.contextPhase === 'final-report') {
       publicationFailure(state, '$.publication');
@@ -4022,9 +4086,17 @@ const derivePublication = (context, state) => {
   ].includes(lock?.state)) publicationFailure(state, '$.publication.lock.failurePoint');
   if (observation.staging?.status === 'io-error') {
     publicationFailure(state, '$.publication.staging.failurePoint');
-  } else if (observation.staging?.status === 'observed'
-    && !validateObservedArtifactSet(observation.staging)) {
-    addViolation(state, 'publication', 'PUBLICATION_STAGING_INVALID', '$.publication.staging');
+  } else if (observation.staging?.status === 'observed') {
+    const inspected = inspectObservedArtifactSet(observation.staging, expectedArtifacts);
+    recordObservedArtifactIoFailures(
+      state,
+      'staging',
+      inspected.ioFailureIndexes,
+    );
+    if (!inspected.nonIoValid
+      || !validateObservedArtifactReadOrder(observation.staging)) {
+      addViolation(state, 'publication', 'PUBLICATION_STAGING_INVALID', '$.publication.staging');
+    }
   }
   if (observation.inputRecheck?.status === 'io-error') {
     publicationFailure(state, '$.publication.inputRecheck.failurePoint');
@@ -4095,9 +4167,18 @@ const derivePublication = (context, state) => {
   }
   if (observation.published?.status === 'io-error') {
     publicationFailure(state, '$.publication.published.failurePoint');
-  } else if (observation.published?.status === 'observed'
-    && !validateObservedArtifactSet(observation.published)) {
-    addViolation(state, 'publishedPackage', 'PUBLISHED_PACKAGE_INVALID', '$.publishedPackage');
+  } else if (observation.published?.status === 'observed') {
+    const inspected = inspectObservedArtifactSet(observation.published, expectedArtifacts);
+    recordObservedArtifactIoFailures(
+      state,
+      'published',
+      inspected.ioFailureIndexes,
+    );
+    if (inspected.ioFailureIndexes.length === 0
+      && (!inspected.nonIoValid
+        || !validateObservedArtifactReadOrder(observation.published))) {
+      addViolation(state, 'publishedPackage', 'PUBLISHED_PACKAGE_INVALID', '$.publishedPackage');
+    }
   }
 };
 
@@ -4227,8 +4308,8 @@ const validateViolationRows = (violations) => isDenseArray(violations)
 const allCoreRowsPassed = (checked) => PACKAGE_CHECK_NAMES.every(
   (name) => checked.checks.find((entry) => entry.name === name)?.status === 'passed',
 );
-const projectedArtifactHashes = (observation) => {
-  if (!validateObservedArtifactSet(observation)) return null;
+const projectedArtifactHashes = (observation, expectedArtifacts) => {
+  if (!validateObservedArtifactSet(observation, expectedArtifacts)) return null;
   const projection = [];
   for (const read of observation.artifactReads) {
     const decoded = decodePresentationCaptionB1StrictJsonV001(read.snapshot.bytes);
@@ -4293,7 +4374,11 @@ const expectedRunReport = (checkerContext, checked) => {
     };
   } else {
     const publication = checkerContext.publicationProcessObservation;
-    const publishedProjection = projectedArtifactHashes(publication.published);
+    const expectedArtifacts = checkerContext.packageBuildPasses?.[0]?.artifacts;
+    const publishedProjection = projectedArtifactHashes(
+      publication.published,
+      expectedArtifacts,
+    );
     if (publishedProjection !== null
       && checked.checks.find((entry) => entry.name === 'publishedPackage')?.status === 'passed') {
       publicationObservation = {
@@ -4304,7 +4389,10 @@ const expectedRunReport = (checkerContext, checked) => {
         observedFileSetCanonicalSha256: canonicalSha(publishedProjection),
       };
     } else {
-      const stagingProjection = projectedArtifactHashes(publication.staging);
+      const stagingProjection = projectedArtifactHashes(
+        publication.staging,
+        expectedArtifacts,
+      );
       const stagingInvalid = checked.violations.some((violation) =>
         ['PUBLICATION_STAGING_INVALID', 'PUBLICATION_INPUT_CHANGED'].includes(violation.code)
         || (violation.code === 'PUBLICATION_FAILED'

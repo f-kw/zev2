@@ -1,0 +1,841 @@
+TAP version 13
+# Subtest: package coreの公開入口と違反コードは承認済み集合だけである
+ok 1 - package coreの公開入口と違反コードは承認済み集合だけである
+  ---
+  duration_ms: 0.820125
+  ...
+# Subtest: package runnerの公開入口は承認済み4件だけである
+ok 2 - package runnerの公開入口は承認済み4件だけである
+  ---
+  duration_ms: 0.126666
+  ...
+# Subtest: package production読取handleは固定3入口・同期one-use・AsyncIterableで同一内容を返す
+ok 3 - package production読取handleは固定3入口・同期one-use・AsyncIterableで同一内容を返す
+  ---
+  duration_ms: 7.734125
+  ...
+# Subtest: R3:3.38GB実fileのchunk hash/countは独立helperと完全一致し全byteを保持しない
+ok 4 - R3:3.38GB実fileのchunk hash/countは独立helperと完全一致し全byteを保持しない
+  ---
+  duration_ms: 4453.71375
+  ...
+# Subtest: strict JSONは適法なescapeと補助平面文字を無変更で往復する
+ok 5 - strict JSONは適法なescapeと補助平面文字を無変更で往復する
+  ---
+  duration_ms: 1.049375
+  ...
+# Subtest: strict JSONは不正UTF-8を拒否する
+ok 6 - strict JSONは不正UTF-8を拒否する
+  ---
+  duration_ms: 0.06325
+  ...
+# Subtest: strict JSONはBOMを拒否する
+ok 7 - strict JSONはBOMを拒否する
+  ---
+  duration_ms: 0.031916
+  ...
+# Subtest: strict JSONは構文不成立を拒否する
+ok 8 - strict JSONは構文不成立を拒否する
+  ---
+  duration_ms: 0.137208
+  ...
+# Subtest: strict JSONは後続文字を拒否する
+ok 9 - strict JSONは後続文字を拒否する
+  ---
+  duration_ms: 0.043709
+  ...
+# Subtest: strict JSONは複数JSON値を拒否する
+ok 10 - strict JSONは複数JSON値を拒否する
+  ---
+  duration_ms: 0.037291
+  ...
+# Subtest: strict JSONは重複keyを拒否する
+ok 11 - strict JSONは重複keyを拒否する
+  ---
+  duration_ms: 0.16875
+  ...
+# Subtest: strict JSONは小数tokenを拒否する
+ok 12 - strict JSONは小数tokenを拒否する
+  ---
+  duration_ms: 0.122541
+  ...
+# Subtest: strict JSONは指数tokenを拒否する
+ok 13 - strict JSONは指数tokenを拒否する
+  ---
+  duration_ms: 0.163958
+  ...
+# Subtest: strict JSONは巨大指数を拒否する
+ok 14 - strict JSONは巨大指数を拒否する
+  ---
+  duration_ms: 0.055584
+  ...
+# Subtest: strict JSONは負のゼロを拒否する
+ok 15 - strict JSONは負のゼロを拒否する
+  ---
+  duration_ms: 0.094541
+  ...
+# Subtest: strict JSONは孤立surrogateを拒否する
+ok 16 - strict JSONは孤立surrogateを拒否する
+  ---
+  duration_ms: 0.063791
+  ...
+# Subtest: strict JSONはcode fenceを拒否する
+ok 17 - strict JSONはcode fenceを拒否する
+  ---
+  duration_ms: 0.034166
+  ...
+# Subtest: strict decodeはBuffer以外を不正引数としてthrowせず拒否する
+ok 18 - strict decodeはBuffer以外を不正引数としてthrowせず拒否する
+  ---
+  duration_ms: 0.151375
+  ...
+# Subtest: strict in-memory検査はJSON正式値だけを受理する
+ok 19 - strict in-memory検査はJSON正式値だけを受理する
+  ---
+  duration_ms: 0.107417
+  ...
+# Subtest: strict in-memory検査はundefinedを拒否する
+ok 20 - strict in-memory検査はundefinedを拒否する
+  ---
+  duration_ms: 0.244541
+  ...
+# Subtest: strict in-memory検査はfunctionを拒否する
+ok 21 - strict in-memory検査はfunctionを拒否する
+  ---
+  duration_ms: 0.042791
+  ...
+# Subtest: strict in-memory検査はsymbolを拒否する
+ok 22 - strict in-memory検査はsymbolを拒否する
+  ---
+  duration_ms: 0.033083
+  ...
+# Subtest: strict in-memory検査はBigIntを拒否する
+ok 23 - strict in-memory検査はBigIntを拒否する
+  ---
+  duration_ms: 0.132375
+  ...
+# Subtest: strict in-memory検査はNaNを拒否する
+ok 24 - strict in-memory検査はNaNを拒否する
+  ---
+  duration_ms: 0.033791
+  ...
+# Subtest: strict in-memory検査はInfinityを拒否する
+ok 25 - strict in-memory検査はInfinityを拒否する
+  ---
+  duration_ms: 0.029375
+  ...
+# Subtest: strict in-memory検査は小数を拒否する
+ok 26 - strict in-memory検査は小数を拒否する
+  ---
+  duration_ms: 0.022708
+  ...
+# Subtest: strict in-memory検査は負のゼロを拒否する
+ok 27 - strict in-memory検査は負のゼロを拒否する
+  ---
+  duration_ms: 0.022708
+  ...
+# Subtest: strict in-memory検査はsafe integer外を拒否する
+ok 28 - strict in-memory検査はsafe integer外を拒否する
+  ---
+  duration_ms: 0.13225
+  ...
+# Subtest: strict in-memory検査はDateを拒否する
+ok 29 - strict in-memory検査はDateを拒否する
+  ---
+  duration_ms: 0.032125
+  ...
+# Subtest: strict in-memory検査はMapを拒否する
+ok 30 - strict in-memory検査はMapを拒否する
+  ---
+  duration_ms: 0.021708
+  ...
+# Subtest: strict in-memory検査は孤立surrogateを拒否する
+ok 31 - strict in-memory検査は孤立surrogateを拒否する
+  ---
+  duration_ms: 0.0185
+  ...
+# Subtest: strict in-memory検査は疎な配列と追加propertyを区別して拒否する
+ok 32 - strict in-memory検査は疎な配列と追加propertyを区別して拒否する
+  ---
+  duration_ms: 0.063542
+  ...
+# Subtest: strict in-memory検査はaccessor・toJSON・symbol key・非列挙fieldを拒否する
+ok 33 - strict in-memory検査はaccessor・toJSON・symbol key・非列挙fieldを拒否する
+  ---
+  duration_ms: 0.070208
+  ...
+# Subtest: strict decodeはrootと入れ子をnull prototypeのown data propertyとして復号する
+ok 34 - strict decodeはrootと入れ子をnull prototypeのown data propertyとして復号する
+  ---
+  duration_ms: 0.172375
+  ...
+# Subtest: strict decodeの一般objectは整数風keyを保持しcanonical化だけがUTF-16順へ並べる
+ok 35 - strict decodeの一般objectは整数風keyを保持しcanonical化だけがUTF-16順へ並べる
+  ---
+  duration_ms: 0.340833
+  ...
+# Subtest: strict in-memory検査は通常objectとnull prototype objectの双方を受理する
+ok 36 - strict in-memory検査は通常objectとnull prototype objectの双方を受理する
+  ---
+  duration_ms: 0.172458
+  ...
+# Subtest: B1所有値と時刻・frame・sampleは小数をbyteでもメモリでも正式化でも拒否する
+ok 37 - B1所有値と時刻・frame・sampleは小数をbyteでもメモリでも正式化でも拒否する
+  ---
+  duration_ms: 0.1195
+  ...
+# Subtest: 正式JSONとcanonical JSONは目的どおり異なるbyteを作りhashできる
+ok 38 - 正式JSONとcanonical JSONは目的どおり異なるbyteを作りhashできる
+  ---
+  duration_ms: 0.275625
+  ...
+# Subtest: Q1:A監視投影入口は不存在preflight jobだけを除外しproductionと同じ読取経路を使う
+ok 39 - Q1:A監視投影入口は不存在preflight jobだけを除外しproductionと同じ読取経路を使う
+  ---
+  duration_ms: 307.736375
+  ...
+# Subtest: Q1:A監視投影入口は許可外path・既存target・追加optionをuntrustedで拒否する
+ok 40 - Q1:A監視投影入口は許可外path・既存target・追加optionをuntrustedで拒否する
+  ---
+  duration_ms: 14.096042
+  ...
+# Subtest: Q1:A監視投影入口はunsupported entryと読取中変化を固定diagnosticで拒否する
+ok 41 - Q1:A監視投影入口はunsupported entryと読取中変化を固定diagnosticで拒否する
+  ---
+  duration_ms: 24.946334
+  ...
+# Subtest: R3:監視投影は空fileを0 chunkで扱いone・multi・uneven chunkでも同じhashになる
+ok 42 - R3:監視投影は空fileを0 chunkで扱いone・multi・uneven chunkでも同じhashになる
+  ---
+  duration_ms: 52.998584
+  ...
+# Subtest: R3:監視投影はopen・不正chunk・短過読・読取後変化・close失敗を同じuntrustedへ閉じる
+ok 43 - R3:監視投影はopen・不正chunk・短過読・読取後変化・close失敗を同じuntrustedへ閉じる
+  ---
+  duration_ms: 100.741208
+  ...
+# Subtest: Q1:A監視投影hashは同じ非空treeを読むproduction runner開始投影と完全一致する
+ok 44 - Q1:A監視投影hashは同じ非空treeを読むproduction runner開始投影と完全一致する
+  ---
+  duration_ms: 2671.797333
+  ...
+# Subtest: 外部表示5 JSONは承認済みfile/canonical hash対を保ちrenderer trustの4係数だけが小数である
+ok 45 - 外部表示5 JSONは承認済みfile/canonical hash対を保ちrenderer trustの4係数だけが小数である
+  ---
+  duration_ms: 11.758708
+  ...
+# Subtest: 正式7成果物とGemini可視入力へ外部表示の小数係数を転記しない
+ok 46 - 正式7成果物とGemini可視入力へ外部表示の小数係数を転記しない
+  ---
+  duration_ms: 18.0825
+  ...
+# Subtest: 外部表示profileはrenderer trustの未承認小数・別値・小数時刻をschema不成立にする
+ok 47 - 外部表示profileはrenderer trustの未承認小数・別値・小数時刻をschema不成立にする
+  ---
+  duration_ms: 860.629875
+  ...
+# Subtest: renderer trust以外の外部JSONでは小数を許可しない
+ok 48 - renderer trust以外の外部JSONでは小数を許可しない
+  ---
+  duration_ms: 283.090166
+  ...
+# Subtest: renderer trustの全layout ruleは型と固定値のexact一致を要求する
+ok 49 - renderer trustの全layout ruleは型と固定値のexact一致を要求する
+  ---
+  duration_ms: 5105.913125
+  ...
+# Subtest: 外部JSONの別字句0.040は意味値が同じでもfile hash不一致を先に返す
+ok 50 - 外部JSONの別字句0.040は意味値が同じでもfile hash不一致を先に返す
+  ---
+  duration_ms: 283.647917
+  ...
+# Subtest: 検査indexのfile hashとcanonical hashを取り違えずbinding値をcanonicalとして照合する
+ok 51 - 検査indexのfile hashとcanonical hashを取り違えずbinding値をcanonicalとして照合する
+  ---
+  duration_ms: 850.484542
+  ...
+# Subtest: preset validation indexのregistryVersionはpreset registry版と一致しなければならない
+ok 52 - preset validation indexのregistryVersionはpreset registry版と一致しなければならない
+  ---
+  duration_ms: 283.502416
+  ...
+# Subtest: job validatorは正本field順の正常jobを受理し最小leaf pathで不成立を返す
+ok 53 - job validatorは正本field順の正常jobを受理し最小leaf pathで不成立を返す
+  ---
+  duration_ms: 9.855833
+  ...
+# Subtest: job投影は境界候補件数が不正な子を親集計へ部分利用しない
+ok 54 - job投影は境界候補件数が不正な子を親集計へ部分利用しない
+  ---
+  duration_ms: 10.124959
+  ...
+# Subtest: job投影は両件数が不正な子について二つの子違反だけを返す
+ok 55 - job投影は両件数が不正な子について二つの子違反だけを返す
+  ---
+  duration_ms: 9.5625
+  ...
+# Subtest: job投影は片側の子不正があっても他方の独立した親不一致を検出する
+ok 56 - job投影は片側の子不正があっても他方の独立した親不一致を検出する
+  ---
+  duration_ms: 10.070709
+  ...
+# Subtest: job投影は境界候補の子不正があっても対応元の親不一致を検出する
+ok 57 - job投影は境界候補の子不正があっても対応元の親不一致を検出する
+  ---
+  duration_ms: 9.540083
+  ...
+# Subtest: job投影は未知fieldを持つ子を二種類の親集計から丸ごと除外する
+ok 58 - job投影は未知fieldを持つ子を二種類の親集計から丸ごと除外する
+  ---
+  duration_ms: 9.323625
+  ...
+# Subtest: job投影はfield順違反の子を除外してもcontainer数の独立検査を維持する
+ok 59 - job投影はfield順違反の子を除外してもcontainer数の独立検査を維持する
+  ---
+  duration_ms: 9.7205
+  ...
+# Subtest: job投影は件数fieldが欠けた子を親集計へ部分利用しない
+ok 60 - job投影は件数fieldが欠けた子を親集計へ部分利用しない
+  ---
+  duration_ms: 10.8135
+  ...
+# Subtest: job投影はshape違反と数値不正が併存する子を子全体の違反に限定する
+ok 61 - job投影はshape違反と数値不正が併存する子を子全体の違反に限定する
+  ---
+  duration_ms: 10.936583
+  ...
+# Subtest: job投影は非objectの子を親集計へ部分利用しない
+ok 62 - job投影は非objectの子を親集計へ部分利用しない
+  ---
+  duration_ms: 9.293
+  ...
+# Subtest: job投影は全子が有効なとき対応元の親合計不一致を検出する
+ok 63 - job投影は全子が有効なとき対応元の親合計不一致を検出する
+  ---
+  duration_ms: 10.415375
+  ...
+# Subtest: job投影は全子が有効なとき境界候補の親合計不一致を検出する
+ok 64 - job投影は全子が有効なとき境界候補の親合計不一致を検出する
+  ---
+  duration_ms: 9.308792
+  ...
+# Subtest: job投影はcontainer数と配列長の独立検査を維持する
+ok 65 - job投影はcontainer数と配列長の独立検査を維持する
+  ---
+  duration_ms: 9.247541
+  ...
+# Subtest: 公開derive入口はGate A生観測を同一checker経路へ決定的に運び入力を変更しない
+ok 66 - 公開derive入口はGate A生観測を同一checker経路へ決定的に運び入力を変更しない
+  ---
+  duration_ms: 200.162875
+  ...
+# Subtest: package builderは同一snapshotから同一7成果物を作り入力を変更しない
+ok 67 - package builderは同一snapshotから同一7成果物を作り入力を変更しない
+  ---
+  duration_ms: 140.425083
+  ...
+# Subtest: 正常なpure checkerと最終report validatorは読み取り専用preflightを合格にする
+ok 68 - 正常なpure checkerと最終report validatorは読み取り専用preflightを合格にする
+  ---
+  duration_ms: 2608.482167
+  ...
+# Subtest: package前半の違反は正本checkerの担当checkから発火する
+ok 69 - package前半の違反は正本checkerの担当checkから発火する
+  ---
+  duration_ms: 6545.417042
+  ...
+# Subtest: package import graphは関数・block arrow・concise arrow内file I/Oをmodule-load扱いしない
+ok 70 - package import graphは関数・block arrow・concise arrow内file I/Oをmodule-load扱いしない
+  ---
+  duration_ms: 646.860709
+  ...
+# Subtest: package import graphはtemplate式でmodule-load時に実行されるfile I/Oを拒否する
+ok 71 - package import graphはtemplate式でmodule-load時に実行されるfile I/Oを拒否する
+  ---
+  duration_ms: 660.27075
+  ...
+# Subtest: package import graphはobject初期化で直接実行されるfile I/Oを拒否する
+ok 72 - package import graphはobject初期化で直接実行されるfile I/Oを拒否する
+  ---
+  duration_ms: 640.101708
+  ...
+# Subtest: package import graphはmodule-load時に実行されるconcise arrow IIFEを拒否する
+ok 73 - package import graphはmodule-load時に実行されるconcise arrow IIFEを拒否する
+  ---
+  duration_ms: 652.763084
+  ...
+# Subtest: package import graphはmodule-load時に実行されるblock arrow IIFEを拒否する
+ok 74 - package import graphはmodule-load時に実行されるblock arrow IIFEを拒否する
+  ---
+  duration_ms: 656.710333
+  ...
+# Subtest: package import graphはmodule-load時に実行されるfunction IIFEを拒否する
+ok 75 - package import graphはmodule-load時に実行されるfunction IIFEを拒否する
+  ---
+  duration_ms: 642.740958
+  ...
+# Subtest: package R1 scannerは通常member・optional member後の除算を受理する
+ok 76 - package R1 scannerは通常member・optional member後の除算を受理する
+  ---
+  duration_ms: 641.125833
+  ...
+# Subtest: package R1 scannerはspread三形とspread直後のregexを受理する
+ok 77 - package R1 scannerはspread三形とspread直後のregexを受理する
+  ---
+  duration_ms: 657.343584
+  ...
+# Subtest: package R1 scannerはregex・comment・string・template raw内の禁止語を受理する
+ok 78 - package R1 scannerはregex・comment・string・template raw内の禁止語を受理する
+  ---
+  duration_ms: 639.912416
+  ...
+# Subtest: package R1 scannerは固定済み数値五形を受理する
+ok 79 - package R1 scannerは固定済み数値五形を受理する
+  ---
+  duration_ms: 637.707375
+  ...
+# Subtest: package R1 scannerは制御条件内とstatement開始のregexを受理する
+ok 80 - package R1 scannerは制御条件内とstatement開始のregexを受理する
+  ---
+  duration_ms: 641.792583
+  ...
+# Subtest: package R1 scannerは通常member経由file I/Oを拒否する
+ok 81 - package R1 scannerは通常member経由file I/Oを拒否する
+  ---
+  duration_ms: 644.466167
+  ...
+# Subtest: package R1 scannerはoptional member経由file I/Oを拒否する
+ok 82 - package R1 scannerはoptional member経由file I/Oを拒否する
+  ---
+  duration_ms: 639.793458
+  ...
+# Subtest: package R1 scannerはspread内file I/Oを拒否する
+ok 83 - package R1 scannerはspread内file I/Oを拒否する
+  ---
+  duration_ms: 639.98775
+  ...
+# Subtest: package R1 scannerはdynamic importを拒否する
+ok 84 - package R1 scannerはdynamic importを拒否する
+  ---
+  duration_ms: 640.014208
+  ...
+# Subtest: package R1 scannerは関数内dynamic importを拒否する
+ok 85 - package R1 scannerは関数内dynamic importを拒否する
+  ---
+  duration_ms: 639.142584
+  ...
+# Subtest: package R1 scannerはspread内dynamic importを拒否する
+ok 86 - package R1 scannerはspread内dynamic importを拒否する
+  ---
+  duration_ms: 636.863291
+  ...
+# Subtest: package R1 scannerはtemplate式内dynamic importを拒否する
+ok 87 - package R1 scannerはtemplate式内dynamic importを拒否する
+  ---
+  duration_ms: 649.710292
+  ...
+# Subtest: package R1 scannerはproperty名のdynamic importを拒否する
+ok 88 - package R1 scannerはproperty名のdynamic importを拒否する
+  ---
+  duration_ms: 647.7325
+  ...
+# Subtest: package R1 scannerはCommonJS requireを拒否する
+ok 89 - package R1 scannerはCommonJS requireを拒否する
+  ---
+  duration_ms: 641.328875
+  ...
+# Subtest: package R1 scannerはarrow内CommonJS requireを拒否する
+ok 90 - package R1 scannerはarrow内CommonJS requireを拒否する
+  ---
+  duration_ms: 641.18275
+  ...
+# Subtest: package R1 scannerはspread内CommonJS requireを拒否する
+ok 91 - package R1 scannerはspread内CommonJS requireを拒否する
+  ---
+  duration_ms: 642.416875
+  ...
+# Subtest: package R1 scannerはtemplate式内CommonJS requireを拒否する
+ok 92 - package R1 scannerはtemplate式内CommonJS requireを拒否する
+  ---
+  duration_ms: 648.849084
+  ...
+# Subtest: package R1 scannerはoptional property名のrequireを拒否する
+ok 93 - package R1 scannerはoptional property名のrequireを拒否する
+  ---
+  duration_ms: 641.557292
+  ...
+# Subtest: package R1 scannerはmember待機中のslashを拒否する
+ok 94 - package R1 scannerはmember待機中のslashを拒否する
+  ---
+  duration_ms: 651.509917
+  ...
+# Subtest: package R1 scannerは二個のdotを拒否する
+ok 95 - package R1 scannerは二個のdotを拒否する
+  ---
+  duration_ms: 655.246333
+  ...
+# Subtest: package R1 scannerは四個のdotを拒否する
+ok 96 - package R1 scannerは四個のdotを拒否する
+  ---
+  duration_ms: 639.226958
+  ...
+# Subtest: package R1 scannerは未完のdotを拒否する
+ok 97 - package R1 scannerは未完のdotを拒否する
+  ---
+  duration_ms: 660.72
+  ...
+# Subtest: package R1 scannerは未完のoptional dotを拒否する
+ok 98 - package R1 scannerは未完のoptional dotを拒否する
+  ---
+  duration_ms: 642.52925
+  ...
+# Subtest: package R1 scannerは未完のspreadを拒否する
+ok 99 - package R1 scannerは未完のspreadを拒否する
+  ---
+  duration_ms: 639.167542
+  ...
+# Subtest: package R1 scannerは先頭dot小数を拒否する
+ok 100 - package R1 scannerは先頭dot小数を拒否する
+  ---
+  duration_ms: 661.145791
+  ...
+# Subtest: package R1 scannerは末尾dot数値を拒否する
+ok 101 - package R1 scannerは末尾dot数値を拒否する
+  ---
+  duration_ms: 639.287959
+  ...
+# Subtest: package R1 scannerは二個dot数値memberを拒否する
+ok 102 - package R1 scannerは二個dot数値memberを拒否する
+  ---
+  duration_ms: 660.481416
+  ...
+# Subtest: package R1 scannerは指数表記を拒否する
+ok 103 - package R1 scannerは指数表記を拒否する
+  ---
+  duration_ms: 639.173
+  ...
+# Subtest: package R1 scannerは二進数表記を拒否する
+ok 104 - package R1 scannerは二進数表記を拒否する
+  ---
+  duration_ms: 644.6455
+  ...
+# Subtest: package R1 scannerはseparator付き数値を拒否する
+ok 105 - package R1 scannerはseparator付き数値を拒否する
+  ---
+  duration_ms: 638.639917
+  ...
+# Subtest: package R1 scannerはoptional callを拒否する
+ok 106 - package R1 scannerはoptional callを拒否する
+  ---
+  duration_ms: 640.908083
+  ...
+# Subtest: package R1 scannerはoptional private nameを拒否する
+ok 107 - package R1 scannerはoptional private nameを拒否する
+  ---
+  duration_ms: 643.718333
+  ...
+# Subtest: package R1 scannerはoptional tagged templateを拒否する
+ok 108 - package R1 scannerはoptional tagged templateを拒否する
+  ---
+  duration_ms: 637.896125
+  ...
+# Subtest: package R1 scannerはreturn直後spreadを拒否する
+ok 109 - package R1 scannerはreturn直後spreadを拒否する
+  ---
+  duration_ms: 658.869
+  ...
+# Subtest: package R1 scannerは二項演算子直後spreadを拒否する
+ok 110 - package R1 scannerは二項演算子直後spreadを拒否する
+  ---
+  duration_ms: 641.209959
+  ...
+# Subtest: package R1 scannerは未閉鎖regexを拒否する
+ok 111 - package R1 scannerは未閉鎖regexを拒否する
+  ---
+  duration_ms: 637.339334
+  ...
+# Subtest: package R1 scannerは未閉鎖regex classを拒否する
+ok 112 - package R1 scannerは未閉鎖regex classを拒否する
+  ---
+  duration_ms: 663.04325
+  ...
+# Subtest: package R1 scannerは括弧不一致を拒否する
+ok 113 - package R1 scannerは括弧不一致を拒否する
+  ---
+  duration_ms: 643.179667
+  ...
+# Subtest: package R1 scannerは閉じbrace直後slashを拒否する
+ok 114 - package R1 scannerは閉じbrace直後slashを拒否する
+  ---
+  duration_ms: 661.277416
+  ...
+# Subtest: package R1 scannerは実package 2 sourceと限定hashbang表を契約どおり扱う
+ok 115 - package R1 scannerは実package 2 sourceと限定hashbang表を契約どおり扱う
+  ---
+  duration_ms: 17203.250583
+  ...
+# Subtest: Gate A build・決定性・reportの違反は段階ごとの担当checkから発火する
+ok 116 - Gate A build・決定性・reportの違反は段階ごとの担当checkから発火する
+  ---
+  duration_ms: 1885.90825
+  ...
+# Subtest: package側3 build stageはpass別の全失敗型を固定配列形と入力copy記録で拒否する
+ok 117 - package側3 build stageはpass別の全失敗型を固定配列形と入力copy記録で拒否する
+  ---
+  duration_ms: 1912.775083
+  ...
+# Subtest: package成果物とsource-only検査は改変を上流へ遡って自動修復しない
+not ok 118 - package成果物とsource-only検査は改変を上流へ遡って自動修復しない
+  ---
+  duration_ms: 2342.6695
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3712:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly deep-equal:
+    + actual - expected
+    
+      [
+    +   'PACKAGE_HASH_MISMATCH',
+        'PACKAGE_HASH_MISMATCH'
+      ]
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+    0: 'PACKAGE_HASH_MISMATCH'
+  actual:
+    0: 'PACKAGE_HASH_MISMATCH'
+    1: 'PACKAGE_HASH_MISMATCH'
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3828:10)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: job二時点差とpublication各段の違反は固有check・pathへ帰属する
+not ok 119 - job二時点差とpublication各段の違反は固有check・pathへ帰属する
+  ---
+  duration_ms: 11196.814917
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:4126:1'
+  failureType: 'testCodeFailure'
+  error: 'invalid package job'
+  code: 'ERR_TEST_FAILURE'
+  name: 'TypeError'
+  stack: |-
+    Module.buildPresentationCaptionSemanticSourcePackageV001 (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_caption_semantic_source_package_v001.mjs:2772:11)
+    file:///Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:779:19
+    Array.map (<anonymous>)
+    rebuildPackagePasses (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:777:72)
+    TestContext.<anonymous> (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:4311:5)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+  ...
+# Subtest: runner spyはGate A二段へのinput-mutated指定を設定時に拒否する
+ok 120 - runner spyはGate A二段へのinput-mutated指定を設定時に拒否する
+  ---
+  duration_ms: 72.914208
+  ...
+# Subtest: 公開runnerは読み取り専用preflightでderive結果を2回そのまま既存builderへ渡す
+ok 121 - 公開runnerは読み取り専用preflightでderive結果を2回そのまま既存builderへ渡す
+  ---
+  duration_ms: 2721.874083
+  ...
+# Subtest: 公開runnerは各build stage・pass・失敗型を同じBUILD_FAILEDへ閉じ後段を呼ばない
+ok 122 - 公開runnerは各build stage・pass・失敗型を同じBUILD_FAILEDへ閉じ後段を呼ばない
+  ---
+  duration_ms: 13575.898041
+  ...
+# Subtest: formal runnerはstaging・input recheck・preRenameの各gateで止まり後続publication I/Oを行わない
+not ok 123 - formal runnerはstaging・input recheck・preRenameの各gateで止まり後続publication I/Oを行わない
+  ---
+  duration_ms: 3692.836708
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:4581:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly deep-equal:
+    + actual - expected
+    
+      [
+        {
+          code: 'PUBLICATION_STAGING_INVALID',
+          details: {},
+          path: '$.publication.staging'
+    +   },
+    +   {
+    +     code: 'PUBLICATION_FAILED',
+    +     details: {},
+    +     path: '$.publication.staging.artifactReads[0].failurePoint'
+    +   },
+    +   {
+    +     code: 'PUBLICATION_FAILED',
+    +     details: {},
+    +     path: '$.publication.staging.artifactReads[1].failurePoint'
+    +   },
+    +   {
+    +     code: 'PUBLICATION_FAILED',
+    +     details: {},
+    +     path: '$.publication.staging.artifactReads[2].failurePoint'
+    +   },
+    +   {
+    +     code: 'PUBLICATION_FAILED',
+    +     details: {},
+    +     path: '$.publication.staging.artifactReads[3].failurePoint'
+    +   },
+    +   {
+    +     code: 'PUBLICATION_FAILED',
+    +     details: {},
+    +     path: '$.publication.staging.artifactReads[4].failurePoint'
+    +   },
+    +   {
+    +     code: 'PUBLICATION_FAILED',
+    +     details: {},
+    +     path: '$.publication.staging.artifactReads[5].failurePoint'
+    +   },
+    +   {
+    +     code: 'PUBLICATION_FAILED',
+    +     details: {},
+    +     path: '$.publication.staging.artifactReads[6].failurePoint'
+        }
+      ]
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+    0:
+      code: 'PUBLICATION_STAGING_INVALID'
+      path: '$.publication.staging'
+      details:
+  actual:
+    0:
+      code: 'PUBLICATION_STAGING_INVALID'
+      path: '$.publication.staging'
+      details:
+    1:
+      code: 'PUBLICATION_FAILED'
+      path: '$.publication.staging.artifactReads[0].failurePoint'
+      details:
+    2:
+      code: 'PUBLICATION_FAILED'
+      path: '$.publication.staging.artifactReads[1].failurePoint'
+      details:
+    3:
+      code: 'PUBLICATION_FAILED'
+      path: '$.publication.staging.artifactReads[2].failurePoint'
+      details:
+    4:
+      code: 'PUBLICATION_FAILED'
+      path: '$.publication.staging.artifactReads[3].failurePoint'
+      details:
+    5:
+      code: 'PUBLICATION_FAILED'
+      path: '$.publication.staging.artifactReads[4].failurePoint'
+      details:
+    6:
+      code: 'PUBLICATION_FAILED'
+      path: '$.publication.staging.artifactReads[5].failurePoint'
+      details:
+    7:
+      code: 'PUBLICATION_FAILED'
+      path: '$.publication.staging.artifactReads[6].failurePoint'
+      details:
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:4618:12)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: R3:formal artifactのopen/read失敗はPUBLICATION_FAILEDへ帰属し完全snapshot不一致は53/54/56を維持する
+not ok 124 - R3:formal artifactのopen/read失敗はPUBLICATION_FAILEDへ帰属し完全snapshot不一致は53/54/56を維持する
+  ---
+  duration_ms: 7345.843791
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:4666:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    staging-read
+    
+    false !== true
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:4712:12)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: R3:publication失敗記録後のjobPreReport読取分類不能はexit 2かつpartial reportなしになる
+ok 125 - R3:publication失敗記録後のjobPreReport読取分類不能はexit 2かつpartial reportなしになる
+  ---
+  duration_ms: 2521.534291
+  ...
+# Subtest: runner sourceは公開derive入口をproductionと検査で共用しGate A checkerを直importしない
+ok 126 - runner sourceは公開derive入口をproductionと検査で共用しGate A checkerを直importしない
+  ---
+  duration_ms: 0.878459
+  ...
+# Subtest: runnerは全phaseを同じcheckerへ渡し後続段を先行失敗後に実行しない構造を持つ
+ok 127 - runnerは全phaseを同じcheckerへ渡し後続段を先行失敗後に実行しない構造を持つ
+  ---
+  duration_ms: 0.348208
+  ...
+# Subtest: CLIは0件・2件を固定usage診断でexit 2にしstdoutへ何も書かない
+ok 128 - CLIは0件・2件を固定usage診断でexit 2にしstdoutへ何も書かない
+  ---
+  duration_ms: 0.139958
+  ...
+# Subtest: production CLIの実process入口も0件・2件を同じusage診断で拒否する
+ok 129 - production CLIの実process入口も0件・2件を同じusage診断で拒否する
+  ---
+  duration_ms: 79.59125
+  ...
+# Subtest: production CLI実processはproduction chunk投影を共用しexit 0/1をstdout/stderr排他で返す
+ok 130 - production CLI実processはproduction chunk投影を共用しexit 0/1をstdout/stderr排他で返す
+  ---
+  duration_ms: 41138.573041
+  ...
+# Subtest: package担当codeと担当checkの正本写像はcore実装と検査表で欠落しない
+ok 131 - package担当codeと担当checkの正本写像はcore実装と検査表で欠落しない
+  ---
+  duration_ms: 0.337209
+  ...
+# Subtest: package合成検査が動的に観測するcode×checkは承認済み割当だけである
+not ok 132 - package合成検査が動的に観測するcode×checkは承認済み割当だけである
+  ---
+  duration_ms: 0.71625
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:5259:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    NONDETERMINISTIC determinism
+    
+    false !== true
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:5274:12)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+1..132
+# tests 132
+# suites 0
+# pass 127
+# fail 5
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 159800.832583

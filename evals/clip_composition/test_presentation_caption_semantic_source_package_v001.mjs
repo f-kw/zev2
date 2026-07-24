@@ -1149,7 +1149,44 @@ const makeValidFixture = () => {
 const checkByName = (report, name) =>
   report.checks.find((entry) => entry.name === name);
 const collectCodes = (report) => report.violations.map((entry) => entry.code);
-const assertCheckedReportInvariants = (report, names) => {
+const resolveViolationCheckName = (context, violation) => {
+  const candidates = PACKAGE_CHECK_BY_CODE[violation.code] ?? [];
+  assert.equal(candidates.length >= 1, true, violation.code);
+  if (candidates.length === 1) return candidates[0];
+
+  let resolved = null;
+  if (violation.code === 'JOB_FILE_MISMATCH') {
+    resolved = {
+      '$.job.prePublicationInput': 'jobPrePublication',
+      '$.job.preReportInput': 'jobStability',
+    }[violation.path] ?? null;
+  } else if (violation.code === 'BUILD_FAILED') {
+    assert.equal(violation.path, '$.builds.buildFailure');
+    resolved = {
+      'gate-a-evidence': 'evidenceBuild',
+      'embedded-gate-a-report': 'embeddedReportBuild',
+      package: 'packageBuild',
+    }[context.buildFailure?.stage] ?? null;
+  } else if (violation.code === 'NONDETERMINISTIC') {
+    resolved = {
+      '$.builds.embeddedReportPasses': 'gateAReport',
+      '$.builds.packageBuildPasses': 'determinism',
+    }[violation.path] ?? null;
+  }
+
+  assert.notEqual(
+    resolved,
+    null,
+    `${violation.code}:${violation.path}:担当を同一checker contextから一意に解決できない`,
+  );
+  assert.equal(
+    candidates.includes(resolved),
+    true,
+    `${violation.code}:${violation.path}:${resolved}:担当候補外`,
+  );
+  return resolved;
+};
+const assertCheckedReportInvariants = (report, names, context) => {
   assert.equal(report.status, 'checked');
   assert.deepEqual(report.checks.map((entry) => entry.name), names);
   assert.deepEqual(
@@ -1164,10 +1201,13 @@ const assertCheckedReportInvariants = (report, names) => {
     assert.deepEqual(Object.keys(entry), ['code', 'path', 'details']);
     assert.deepEqual(entry.details, {});
   });
+  const assigned = report.violations.map((violation) => ({
+    code: violation.code,
+    checkName: resolveViolationCheckName(context, violation),
+  }));
   report.checks.forEach((entry) => {
-    const expected = report.violations
-      .filter((violation) =>
-        (PACKAGE_CHECK_BY_CODE[violation.code] ?? []).includes(entry.name))
+    const expected = assigned
+      .filter((violation) => violation.checkName === entry.name)
       .map((violation) => violation.code)
       .filter((code, index, values) => values.indexOf(code) === index)
       .sort((left, right) =>
@@ -1181,7 +1221,7 @@ const assertTargetCode = (context, code, checkName) => {
   const names = context.productionMode === 'formal-generation'
     ? FORMAL_CHECK_NAMES
     : PREFLIGHT_CHECK_NAMES;
-  assertCheckedReportInvariants(report, names);
+  assertCheckedReportInvariants(report, names, context);
   assert.equal(collectCodes(report).includes(code), true, `${code} was not emitted`);
   assert.equal(checkByName(report, checkName).violationCodes.includes(code), true);
   assert.equal(checkByName(report, checkName).status, 'failed');
@@ -2775,7 +2815,7 @@ test('package builderは同一snapshotから同一7成果物を作り入力を�
 test('正常なpure checkerと最終report validatorは読み取り専用preflightを合格にする', () => {
   const fixture = makeValidFixture();
   const report = packageCore.checkPresentationCaptionSemanticSourcePackageV001(fixture);
-  assertCheckedReportInvariants(report, PREFLIGHT_CHECK_NAMES);
+  assertCheckedReportInvariants(report, PREFLIGHT_CHECK_NAMES, fixture);
   assert.equal(report.violations.length, 0);
   assert.equal(report.checks.every((entry) => entry.status === 'passed'), true);
   assert.deepEqual(fixture.readOnlyProcessObservation.attemptedWriteCalls, []);
@@ -3435,7 +3475,7 @@ test('Gate A build・決定性・reportの違反は段階ごとの担当checkか
   const gateAPassed = makeValidFixture();
   const gateAPassedReport =
     packageCore.checkPresentationCaptionSemanticSourcePackageV001(gateAPassed);
-  assertCheckedReportInvariants(gateAPassedReport, PREFLIGHT_CHECK_NAMES);
+  assertCheckedReportInvariants(gateAPassedReport, PREFLIGHT_CHECK_NAMES, gateAPassed);
   assert.equal(checkByName(gateAPassedReport, 'gateAReport').status, 'passed');
   assert.equal(
     collectCodes(gateAPassedReport).some(
@@ -3719,8 +3759,8 @@ test('package成果物とsource-only検査は改変を上流へ遡って自動�
     assert.deepEqual(collectCodes(outerUnknownReport), ['PACKAGE_SCHEMA_INVALID']);
   }
 
-  const knownBindingMismatch = makeValidFixture();
-  knownBindingMismatch.packageBuildPasses.forEach((pass) => {
+  const knownContentFileHashMismatch = makeValidFixture();
+  knownContentFileHashMismatch.packageBuildPasses.forEach((pass) => {
     pass.artifacts[5].value.contentArtifacts[0].fileSha256 = '0'.repeat(64);
     rehashArtifact(pass.artifacts[5]);
     pass.artifacts[6].value.manifestBinding = {
@@ -3730,12 +3770,49 @@ test('package成果物とsource-only検査は改変を上流へ遡って自動�
     };
     rehashArtifact(pass.artifacts[6]);
   });
+  const knownContentFileHashReport = assertTargetCode(
+    knownContentFileHashMismatch,
+    'PACKAGE_HASH_MISMATCH',
+    'packageShape',
+  );
+  assert.deepEqual(
+    [...new Set(collectCodes(knownContentFileHashReport))],
+    ['PACKAGE_HASH_MISMATCH'],
+  );
+  assert.equal(
+    knownContentFileHashReport.violations.some((entry) =>
+      entry.code === 'PACKAGE_HASH_MISMATCH'
+      && entry.path === '$.packageFiles[5].value.contentArtifacts[0].fileSha256'),
+    true,
+  );
+  assert.equal(
+    collectCodes(knownContentFileHashReport).includes('PACKAGE_BINDING_MISMATCH'),
+    false,
+  );
+
+  const knownBindingMismatch = makeValidFixture();
+  knownBindingMismatch.packageBuildPasses.forEach((pass) => {
+    pass.artifacts[0].value.artifactId = 'different';
+    rehashArtifact(pass.artifacts[0]);
+    synchronizePackageMetadataFromContent(pass);
+  });
   const knownBindingReport = assertTargetCode(
     knownBindingMismatch,
     'PACKAGE_BINDING_MISMATCH',
     'packageShape',
   );
-  assert.deepEqual(collectCodes(knownBindingReport), ['PACKAGE_BINDING_MISMATCH']);
+  assert.deepEqual(
+    knownBindingReport.violations,
+    [{
+      code: 'PACKAGE_BINDING_MISMATCH',
+      path: '$.packageFiles[0].value',
+      details: {},
+    }],
+  );
+  assert.equal(
+    collectCodes(knownBindingReport).includes('PACKAGE_HASH_MISMATCH'),
+    false,
+  );
 
   const outerSelfHashMismatch = makeValidFixture();
   outerSelfHashMismatch.packageBuildPasses.forEach((pass) => {
@@ -3778,13 +3855,6 @@ test('package成果物とsource-only検査は改変を上流へ遡って自動�
     pass.artifacts[0].fileSha256 = sha256(pass.artifacts[0].bytes);
   });
   assertTargetCode(strict, 'PACKAGE_STRICT_JSON_INVALID', 'packageShape');
-
-  const binding = makeValidFixture();
-  binding.packageBuildPasses.forEach((pass) => {
-    pass.artifacts[0].value.artifactId = 'different';
-    rehashArtifact(pass.artifacts[0]);
-  });
-  assertTargetCode(binding, 'PACKAGE_BINDING_MISMATCH', 'packageShape');
 
   const hashMismatch = makeValidFixture();
   hashMismatch.packageBuildPasses.forEach((pass) => {
@@ -3980,6 +4050,78 @@ const makeFormalFixture = () => {
   };
   return fixture;
 };
+const makeObservedPublicationArtifactSet = (
+  artifacts,
+  repositoryRoot,
+  discriminatorBase,
+) => ({
+  status: 'observed',
+  directoryEntries: artifacts
+    .map((artifact) => ({name: artifact.fileName, kind: 'file'}))
+    .sort((left, right) => compareUtf16(left.name, right.name)),
+  artifactReads: artifacts.map((artifact, index) => ({
+    fileName: artifact.fileName,
+    status: 'read',
+    snapshot: stableSnapshotFromBytes(
+      `${repositoryRoot}/${artifact.fileName}`,
+      artifact.bytes,
+      discriminatorBase + index,
+    ),
+    observedKind: 'regular-file',
+    failurePoint: null,
+  })),
+  failurePoint: null,
+});
+const makePublicationArtifactFixture = (
+  stage,
+  observedArtifacts = null,
+) => {
+  assert.equal(['staging', 'published'].includes(stage), true);
+  const fixture = makeFormalFixture();
+  const expectedArtifacts = fixture.packageBuildPasses[0].artifacts;
+  const artifacts = observedArtifacts ?? expectedArtifacts;
+  fixture.publicationProcessObservation.staging =
+    makeObservedPublicationArtifactSet(
+      stage === 'staging' ? artifacts : expectedArtifacts,
+      `${fixture.job.value.publication.formalOutputPath}.work`,
+      1000,
+    );
+  if (stage === 'published') {
+    fixture.publicationProcessObservation.published =
+      makeObservedPublicationArtifactSet(
+        artifacts,
+        fixture.job.value.publication.formalOutputPath,
+        1100,
+      );
+  }
+  return fixture;
+};
+const replaceObservedArtifactBytes = (
+  observation,
+  artifactIndex,
+  inputBytes,
+  discriminator,
+) => {
+  const read = observation.artifactReads[artifactIndex];
+  read.snapshot = stableSnapshotFromBytes(
+    read.snapshot.path,
+    inputBytes,
+    discriminator,
+  );
+};
+const replaceObservedArtifactWithIoFailure = (
+  observation,
+  artifactIndex,
+  failurePoint,
+) => {
+  observation.artifactReads[artifactIndex] = {
+    fileName: observation.artifactReads[artifactIndex].fileName,
+    status: 'io-error',
+    snapshot: null,
+    observedKind: null,
+    failurePoint,
+  };
+};
 
 test('job二時点差とpublication各段の違反は固有check・pathへ帰属する', () => {
   const jobPrePublication = makeFormalFixture();
@@ -3991,6 +4133,52 @@ test('job二時点差とpublication各段の違反は固有check・pathへ帰属
   jobStability.job.preReportInput.snapshot =
     stableSnapshotFromBytes(jobStability.job.initialSnapshot.path, formalBytes({}), 900);
   assertTargetCode(jobStability, 'JOB_FILE_MISMATCH', 'jobStability');
+
+  const bothJobReads = makeFormalFixture();
+  bothJobReads.job.prePublicationInput.snapshot =
+    stableSnapshotFromBytes(
+      bothJobReads.job.initialSnapshot.path,
+      formalBytes({changedAt: 'pre-publication'}),
+      901,
+    );
+  bothJobReads.job.preReportInput.snapshot =
+    stableSnapshotFromBytes(
+      bothJobReads.job.initialSnapshot.path,
+      formalBytes({changedAt: 'pre-report'}),
+      902,
+    );
+  const bothJobReadsReport =
+    packageCore.checkPresentationCaptionSemanticSourcePackageV001(bothJobReads);
+  assertCheckedReportInvariants(
+    bothJobReadsReport,
+    FORMAL_CHECK_NAMES,
+    bothJobReads,
+  );
+  assert.deepEqual(
+    bothJobReadsReport.violations.filter(
+      (entry) => entry.code === 'JOB_FILE_MISMATCH',
+    ),
+    [
+      {
+        code: 'JOB_FILE_MISMATCH',
+        path: '$.job.prePublicationInput',
+        details: {},
+      },
+      {
+        code: 'JOB_FILE_MISMATCH',
+        path: '$.job.preReportInput',
+        details: {},
+      },
+    ],
+  );
+  assert.deepEqual(
+    checkByName(bothJobReadsReport, 'jobPrePublication').violationCodes,
+    ['JOB_FILE_MISMATCH'],
+  );
+  assert.deepEqual(
+    checkByName(bothJobReadsReport, 'jobStability').violationCodes,
+    ['JOB_FILE_MISMATCH'],
+  );
 
   const readOnly = makeValidFixture();
   readOnly.readOnlyProcessObservation.afterEntries = [{
@@ -4054,6 +4242,121 @@ test('job二時点差とpublication各段の違反は固有check・pathへ帰属
   const preRename = makeFormalFixture();
   preRename.publicationProcessObservation.preRename = {state: 'root-observed'};
   assertTargetCode(preRename, 'PUBLICATION_PRE_RENAME_INVALID', 'publication');
+
+  for (const stage of ['staging', 'published']) {
+    const expectedCode = stage === 'staging'
+      ? 'PUBLICATION_STAGING_INVALID'
+      : 'PUBLISHED_PACKAGE_INVALID';
+    const expectedCheck = stage === 'staging' ? 'publication' : 'publishedPackage';
+    const expectedPath = stage === 'staging'
+      ? '$.publication.staging'
+      : '$.publishedPackage';
+    const assertPublicationInvalid = (fixture) => {
+      const report = assertTargetCode(fixture, expectedCode, expectedCheck);
+      assert.deepEqual(
+        report.violations,
+        [{code: expectedCode, path: expectedPath, details: {}}],
+      );
+      return report;
+    };
+
+    const validObservation = makePublicationArtifactFixture(stage);
+    const validReport =
+      packageCore.checkPresentationCaptionSemanticSourcePackageV001(validObservation);
+    assertCheckedReportInvariants(validReport, FORMAL_CHECK_NAMES, validObservation);
+    assert.equal(collectCodes(validReport).includes(expectedCode), false);
+
+    const directoryOrder = makePublicationArtifactFixture(stage);
+    directoryOrder.publicationProcessObservation[stage].directoryEntries.reverse();
+    assertPublicationInvalid(directoryOrder);
+
+    const readOrder = makePublicationArtifactFixture(stage);
+    const reads = readOrder.publicationProcessObservation[stage].artifactReads;
+    [reads[0], reads[1]] = [reads[1], reads[0]];
+    assertPublicationInvalid(readOrder);
+
+    const strictJson = makePublicationArtifactFixture(stage);
+    const strictObservation = strictJson.publicationProcessObservation[stage];
+    replaceObservedArtifactBytes(
+      strictObservation,
+      0,
+      Buffer.concat([
+        Buffer.from([0xef, 0xbb, 0xbf]),
+        strictObservation.artifactReads[0].snapshot.bytes,
+      ]),
+      1200,
+    );
+    assertPublicationInvalid(strictJson);
+
+    const validJsonChanged = makePublicationArtifactFixture(stage);
+    const changedValue = clone(
+      validJsonChanged.packageBuildPasses[0].artifacts[0].value,
+    );
+    changedValue.artifactId = 'publication-observed-different-artifact';
+    replaceObservedArtifactBytes(
+      validJsonChanged.publicationProcessObservation[stage],
+      0,
+      formalBytes(changedValue),
+      1201,
+    );
+    assertPublicationInvalid(validJsonChanged);
+
+    const alternateSeed = makeFormalFixture();
+    alternateSeed.job.value.publication.packageId =
+      'self-consistent-alternate-publication-package-v001';
+    alternateSeed.job.value.publication.formalOutputPath =
+      'evals/clip_composition/outputs/presentation/'
+        + 'self-consistent-alternate-publication-package-v001';
+    refreshJobSnapshot(alternateSeed);
+    rebuildPackagePasses(alternateSeed);
+    const alternateArtifacts =
+      clone(alternateSeed.packageBuildPasses[0].artifacts);
+    const alternatePackage = makePublicationArtifactFixture(
+      stage,
+      alternateArtifacts,
+    );
+    assertPublicationInvalid(alternatePackage);
+
+    const missing = makePublicationArtifactFixture(stage);
+    missing.publicationProcessObservation[stage].directoryEntries =
+      missing.publicationProcessObservation[stage].directoryEntries.filter(
+        (entry) =>
+          entry.name
+          !== missing.publicationProcessObservation[stage].artifactReads[0].fileName,
+      );
+    missing.publicationProcessObservation[stage].artifactReads[0] = {
+      fileName:
+        missing.publicationProcessObservation[stage].artifactReads[0].fileName,
+      status: 'missing',
+      snapshot: null,
+      observedKind: null,
+      failurePoint: null,
+    };
+    assertPublicationInvalid(missing);
+
+    const nonRegular = makePublicationArtifactFixture(stage);
+    const nonRegularFileName =
+      nonRegular.publicationProcessObservation[stage].artifactReads[0].fileName;
+    nonRegular.publicationProcessObservation[stage].directoryEntries.find(
+      (entry) => entry.name === nonRegularFileName,
+    ).kind = 'directory';
+    nonRegular.publicationProcessObservation[stage].artifactReads[0] = {
+      fileName: nonRegularFileName,
+      status: 'non-regular',
+      snapshot: null,
+      observedKind: 'directory',
+      failurePoint: null,
+    };
+    assertPublicationInvalid(nonRegular);
+
+    const linked = makePublicationArtifactFixture(stage);
+    const linkedSnapshot =
+      linked.publicationProcessObservation[stage].artifactReads[0].snapshot;
+    linkedSnapshot.pathLstatBeforeOpen.nlink = '2';
+    linkedSnapshot.fdStatAfterOpen.nlink = '2';
+    linkedSnapshot.fdStatAfterRead.nlink = '2';
+    assertPublicationInvalid(linked);
+  }
 });
 
 test('runner spyはGate A二段へのinput-mutated指定を設定時に拒否する', () => {
@@ -4333,6 +4636,31 @@ test('formal runnerはstaging・input recheck・preRenameの各gateで止まり�
       assert.equal(operationNames.includes('preRenameRootReveal'), true);
     }
   }
+
+  const passedJob = makeRunnerJob(
+    'formal-generation',
+    'formal-publication-order-and-content-baseline',
+  );
+  const passedFilesystem = createHybridRunnerFilesystem(passedJob);
+  const passedResult =
+    await packageRunner.runPresentationCaptionSemanticSourcePackageV001(
+      passedJob.jobPath,
+      {
+        filesystemAdapter: passedFilesystem.adapter,
+        builderAdapter: createRunnerSpyBuilder().adapter,
+      },
+    );
+  assertTrustedReportResult(passedResult, 0);
+  assert.equal(passedResult.report.status, 'passed');
+  assert.deepEqual(passedResult.report.violations, []);
+  assert.equal(
+    passedResult.report.publicationObservation.state,
+    'published_validated',
+  );
+  assert.equal(
+    passedResult.report.checks.every((entry) => entry.status === 'passed'),
+    true,
+  );
 });
 
 test('R3:formal artifactのopen/read失敗はPUBLICATION_FAILEDへ帰属し完全snapshot不一致は53/54/56を維持する', async () => {
@@ -4388,6 +4716,54 @@ test('R3:formal artifactのopen/read失敗はPUBLICATION_FAILEDへ帰属し完�
       true,
       suffix,
     );
+    const expectedViolationPath = suffix.startsWith('staging-')
+      ? '$.publication.staging.artifactReads[0].failurePoint'
+      : suffix.startsWith('published-')
+        ? '$.publication.published.artifactReads[0].failurePoint'
+        : '$.publication.inputRecheck.failurePoint';
+    assert.equal(
+      result.report.violations.some(
+        (entry) =>
+          entry.code === 'PUBLICATION_FAILED'
+          && entry.path === expectedViolationPath,
+      ),
+      true,
+      suffix,
+    );
+    assert.equal(
+      result.report.publicationFailures.some(
+        (entry) =>
+          entry.path === expectedViolationPath
+          && entry.failurePoint === expectedFailurePoint,
+      ),
+      true,
+      suffix,
+    );
+    if (suffix.startsWith('staging-')) {
+      assert.equal(
+        collectCodes(result.report).includes('PUBLICATION_STAGING_INVALID'),
+        false,
+        suffix,
+      );
+      assert.equal(result.report.publicationObservation.state, 'not_started');
+    }
+    if (suffix.startsWith('published-')) {
+      assert.equal(
+        collectCodes(result.report).includes('PUBLISHED_PACKAGE_INVALID'),
+        false,
+        suffix,
+      );
+      assert.equal(
+        checkByName(result.report, 'publishedPackage').status,
+        'not_run_with_upstream_failure',
+        suffix,
+      );
+      assert.equal(
+        result.report.publicationObservation.state,
+        'staging_validated',
+        suffix,
+      );
+    }
   }
 
   for (const [suffix, expectedCode, matcher] of [
@@ -4445,6 +4821,77 @@ test('R3:formal artifactのopen/read失敗はPUBLICATION_FAILEDへ帰属し完�
   assert.equal(
     inputResult.report.violations.some((entry) => entry.code === 'PUBLICATION_FAILED'),
     false,
+  );
+
+  const stagingIndependentInvalid = makePublicationArtifactFixture('staging');
+  const stagingObservation =
+    stagingIndependentInvalid.publicationProcessObservation.staging;
+  stagingObservation.directoryEntries.reverse();
+  replaceObservedArtifactWithIoFailure(
+    stagingObservation,
+    0,
+    'artifact-01-open',
+  );
+  const stagingIndependentReport =
+    packageCore.checkPresentationCaptionSemanticSourcePackageV001(
+      stagingIndependentInvalid,
+    );
+  assertCheckedReportInvariants(
+    stagingIndependentReport,
+    FORMAL_CHECK_NAMES,
+    stagingIndependentInvalid,
+  );
+  assert.deepEqual(
+    stagingIndependentReport.violations.filter((entry) => [
+      'PUBLICATION_STAGING_INVALID',
+      'PUBLICATION_FAILED',
+    ].includes(entry.code)),
+    [
+      {
+        code: 'PUBLICATION_STAGING_INVALID',
+        path: '$.publication.staging',
+        details: {},
+      },
+      {
+        code: 'PUBLICATION_FAILED',
+        path: '$.publication.staging.artifactReads[0].failurePoint',
+        details: {},
+      },
+    ],
+  );
+
+  const publishedIoFailure = makePublicationArtifactFixture('published');
+  const publishedObservation =
+    publishedIoFailure.publicationProcessObservation.published;
+  publishedObservation.directoryEntries.reverse();
+  replaceObservedArtifactWithIoFailure(
+    publishedObservation,
+    0,
+    'artifact-01-read',
+  );
+  const publishedIoFailureReport =
+    packageCore.checkPresentationCaptionSemanticSourcePackageV001(
+      publishedIoFailure,
+    );
+  assertCheckedReportInvariants(
+    publishedIoFailureReport,
+    FORMAL_CHECK_NAMES,
+    publishedIoFailure,
+  );
+  assert.deepEqual(
+    publishedIoFailureReport.violations.filter((entry) => [
+      'PUBLICATION_FAILED',
+      'PUBLISHED_PACKAGE_INVALID',
+    ].includes(entry.code)),
+    [{
+      code: 'PUBLICATION_FAILED',
+      path: '$.publication.published.artifactReads[0].failurePoint',
+      details: {},
+    }],
+  );
+  assert.equal(
+    checkByName(publishedIoFailureReport, 'publishedPackage').status,
+    'not_run_with_upstream_failure',
   );
 });
 
