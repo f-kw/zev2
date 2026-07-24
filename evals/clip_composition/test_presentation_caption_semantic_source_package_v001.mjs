@@ -3320,34 +3320,130 @@ test('package R1 scannerは実package 2 sourceと限定hashbang表を契約ど�
   );
 
   const hashbangPrefix = bytes('#!/usr/bin/env node\n');
-  assert.equal(PACKAGE_RUNNER_BYTES.subarray(0, hashbangPrefix.length).equals(hashbangPrefix), true);
-  const runnerBody = PACKAGE_RUNNER_BYTES.subarray(hashbangPrefix.length);
-  const {accepted, rejected} = makeR1HashbangScannerCases(runnerBody);
+  const runnerBodyWithLeadingBlankLine = PACKAGE_RUNNER_BYTES.subarray(
+    hashbangPrefix.length,
+  );
+  const runnerBody = runnerBodyWithLeadingBlankLine.subarray(1);
+  const scannerProbeBody = Buffer.concat([
+    bytes('// hashbang scanner probe\n'),
+    runnerBody,
+  ]);
+  const {accepted, rejected} = makeR1HashbangScannerCases(scannerProbeBody);
+  const acceptedByLabel = new Map(accepted);
+  const rejectedByLabel = new Map(rejected);
+  const hashbangStem = bytes('#!/usr/bin/env node');
+  const byteShapeFailures = [];
+  const recordByteShape = (label, condition) => {
+    if (!condition) byteShapeFailures.push(label);
+  };
+  recordByteShape(
+    '実package runnerのhashbang',
+    PACKAGE_RUNNER_BYTES.subarray(0, hashbangPrefix.length).equals(hashbangPrefix),
+  );
+  recordByteShape(
+    '実package runner本文の既知先頭空行',
+    runnerBodyWithLeadingBlankLine[0] === 0x0a,
+  );
+  recordByteShape('合成本文の先頭はLFでない', runnerBody[0] !== 0x0a);
+  recordByteShape(
+    'LF終端',
+    acceptedByLabel.get('LF終端')
+      .subarray(hashbangStem.length, hashbangStem.length + 1)
+      .equals(Buffer.from([0x0a]))
+      && acceptedByLabel.get('LF終端')[hashbangStem.length + 1]
+        === scannerProbeBody[0],
+  );
+  recordByteShape(
+    'CRLF終端',
+    acceptedByLabel.get('CRLF終端')
+      .subarray(hashbangStem.length, hashbangStem.length + 2)
+      .equals(Buffer.from([0x0d, 0x0a]))
+      && acceptedByLabel.get('CRLF終端')[hashbangStem.length + 2]
+        === scannerProbeBody[0],
+  );
+  recordByteShape(
+    '裸CR終端',
+    rejectedByLabel.get('裸CR終端')
+      .subarray(hashbangStem.length, hashbangStem.length + 1)
+      .equals(Buffer.from([0x0d]))
+      && rejectedByLabel.get('裸CR終端')[hashbangStem.length + 1] !== 0x0a
+      && rejectedByLabel.get('裸CR終端')[hashbangStem.length + 1]
+        === scannerProbeBody[0],
+  );
+  recordByteShape(
+    'U+2028終端',
+    rejectedByLabel.get('U+2028終端')
+      .subarray(hashbangStem.length, hashbangStem.length + 3)
+      .equals(Buffer.from([0xe2, 0x80, 0xa8])),
+  );
+  recordByteShape(
+    'U+2029終端',
+    rejectedByLabel.get('U+2029終端')
+      .subarray(hashbangStem.length, hashbangStem.length + 3)
+      .equals(Buffer.from([0xe2, 0x80, 0xa9])),
+  );
+  recordByteShape(
+    '行終端なしEOF',
+    rejectedByLabel.get('行終端なしEOF').equals(hashbangStem),
+  );
+  recordByteShape(
+    'hashbang後の空行',
+    acceptedByLabel.get('hashbang後の空行')
+      .subarray(hashbangStem.length, hashbangStem.length + 2)
+      .equals(Buffer.from([0x0a, 0x0a]))
+      && acceptedByLabel.get('hashbang後の空行')[hashbangStem.length + 2]
+        === scannerProbeBody[0],
+  );
   accepted.unshift(['実package runner', Buffer.from(PACKAGE_RUNNER_BYTES)]);
 
-  accepted.forEach(([label, sourceBytes], index) => {
-    const acceptedReport = checkPackageRunnerImportGraphBytes(sourceBytes, 400 + index);
-    assert.equal(
-      acceptedReport.violations.some(
+  const acceptedFailures = accepted.map(([label, sourceBytes], index) => {
+    try {
+      const acceptedReport = checkPackageRunnerImportGraphBytes(
+        sourceBytes,
+        400 + index,
+      );
+      return acceptedReport.violations.some(
         (entry) => entry.code === 'IMPLEMENTATION_MISMATCH',
-      ),
-      false,
-      `hashbang accepted: ${label}`,
-    );
-  });
-  rejected.forEach(([label, sourceBytes], index) => {
-    const rejectedReport = checkPackageRunnerImportGraphBytes(sourceBytes, 500 + index);
-    assert.equal(
-      rejectedReport.violations.some(
+      )
+        ? label
+        : null;
+    } catch (error) {
+      return `${label}: ${error.name}: ${error.message}`;
+    }
+  }).filter((entry) => entry !== null);
+  const rejectedFailures = rejected.map(([label, sourceBytes], index) => {
+    try {
+      const rejectedReport = checkPackageRunnerImportGraphBytes(
+        sourceBytes,
+        500 + index,
+      );
+      return rejectedReport.violations.some(
         (entry) => entry.code === 'IMPLEMENTATION_MISMATCH',
-      ),
-      true,
-      `hashbang rejected: ${label}`,
-    );
-  });
+      )
+        ? null
+        : label;
+    } catch (error) {
+      return `${label}: ${error.name}: ${error.message}`;
+    }
+  }).filter((entry) => entry !== null);
+  assert.deepEqual(acceptedFailures, []);
+  assert.deepEqual(rejectedFailures, []);
+  assert.deepEqual(byteShapeFailures, []);
 });
 
 test('Gate A build・決定性・reportの違反は段階ごとの担当checkから発火する', () => {
+  const gateAPassed = makeValidFixture();
+  const gateAPassedReport =
+    packageCore.checkPresentationCaptionSemanticSourcePackageV001(gateAPassed);
+  assertCheckedReportInvariants(gateAPassedReport, PREFLIGHT_CHECK_NAMES);
+  assert.equal(checkByName(gateAPassedReport, 'gateAReport').status, 'passed');
+  assert.equal(
+    collectCodes(gateAPassedReport).some(
+      (code) => code === 'GATE_A_REPORT_INVALID' || code === 'GATE_A_NOT_PASSED',
+    ),
+    false,
+  );
+
   const evidenceBuild = makeValidFixture();
   evidenceBuild.gateA.evidencePasses = [null, null];
   evidenceBuild.gateA.embeddedReportPasses = [];
@@ -3408,6 +3504,22 @@ test('Gate A build・決定性・reportの違反は段階ごとの担当checkか
   };
   assertTargetCode(completion, 'GATE_A_REPORT_INVALID', 'gateAReport');
 
+  const gateAInvalid = makeValidFixture();
+  gateAInvalid.gateA.embeddedReportPasses = gateAInvalid.gateA.embeddedReportPasses.map(
+    (pass) => {
+      const value = clone(pass.value);
+      value.schemaVersion = 'invalid-gate-a-report-v001';
+      return buildSuccess(value, {embeddedCanonical: true});
+    },
+  );
+  rebuildPackagePasses(gateAInvalid);
+  const gateAInvalidReport = assertTargetCode(
+    gateAInvalid,
+    'GATE_A_REPORT_INVALID',
+    'gateAReport',
+  );
+  assert.equal(collectCodes(gateAInvalidReport).includes('GATE_A_NOT_PASSED'), false);
+
   const gateAFailed = makeValidFixture();
   gateAFailed.runtimeObservation.nodeVersion = 'v0.0.0-synthetic';
   gateAFailed.job.value.expectedRuntime.nodeVersion = 'v0.0.0-synthetic';
@@ -3435,7 +3547,15 @@ test('Gate A build・決定性・reportの違反は段階ごとの担当checkか
     buildSuccess(clone(failedEmbedded), {embeddedCanonical: true}),
     buildSuccess(clone(failedEmbedded), {embeddedCanonical: true}),
   ];
-  assertTargetCode(gateAFailed, 'GATE_A_NOT_PASSED', 'gateAReport');
+  const gateAFailedReport = assertTargetCode(
+    gateAFailed,
+    'GATE_A_NOT_PASSED',
+    'gateAReport',
+  );
+  assert.equal(
+    collectCodes(gateAFailedReport).includes('GATE_A_REPORT_INVALID'),
+    false,
+  );
 
   const packageBuildFailure = makeValidFixture();
   packageBuildFailure.packageBuildPasses = [null, null];

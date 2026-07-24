@@ -3595,23 +3595,16 @@ const deriveCoreChecks = (context, state) => {
             internalContextInvalid: true,
           };
         }
-        const valid = derived.status === 'derived'
-          && validatePresentationSegmenterBoundaryPreflightReportV001({
-            report: first.value,
-            reportBytes: first.bytes,
-            expectedExitCode: first.value.status === 'passed' ? 0 : 1,
-            checkerContext: {
-              jobValue: derived.value.jobValue,
-              jobSnapshot: derived.value.jobSnapshot,
-              observedImplementationBinding: gateABase.value.observedImplementationBinding,
-              inputSnapshots: derived.value.inputSnapshots,
-              runtimeBinding: derived.value.runtimeBinding,
-              evidencePasses: derived.value.evidencePasses,
-              buildFailure: null,
-              readOnlyGuard: derived.value.readOnlyGuard,
-              productionMode: true,
-            },
-          })?.valid === true;
+        const valid = validatePresentationSegmenterBoundaryPreflightReportV001({
+          report: first.value,
+          expectedExitCode: first.value.status === 'passed' ? 0 : 1,
+          jobValue: derived.value.jobValue,
+          jobSnapshot: derived.value.jobSnapshot,
+          inputSnapshots: derived.value.inputSnapshots,
+          runtimeBinding: derived.value.runtimeBinding,
+          evidencePasses: derived.value.evidencePasses,
+          readOnlyGuard: derived.value.readOnlyGuard,
+        });
         if (!valid) {
           addViolation(
             state,

@@ -3225,30 +3225,102 @@ test('packageとsemanticのR1 scanner正本・実経路・限定hashbang表は�
   }
 
   const textLayoutBytes = actualImplementationSources().textLayoutImplementation;
-  const {accepted, rejected} = makeR1HashbangScannerCases(textLayoutBytes);
+  const scannerProbeBody = Buffer.concat([
+    Buffer.from('// hashbang scanner probe\n', 'utf8'),
+    textLayoutBytes,
+  ]);
+  const {accepted, rejected} = makeR1HashbangScannerCases(scannerProbeBody);
+  const acceptedByLabel = new Map(accepted);
+  const rejectedByLabel = new Map(rejected);
+  const hashbangStem = Buffer.from('#!/usr/bin/env node', 'utf8');
+  const byteShapeFailures = [];
+  const recordByteShape = (label, condition) => {
+    if (!condition) byteShapeFailures.push(label);
+  };
+  recordByteShape('合成本文の先頭はLFでない', textLayoutBytes[0] !== 0x0a);
+  recordByteShape(
+    'LF終端',
+    acceptedByLabel.get('LF終端')
+      .subarray(hashbangStem.length, hashbangStem.length + 1)
+      .equals(Buffer.from([0x0a]))
+      && acceptedByLabel.get('LF終端')[hashbangStem.length + 1]
+        === scannerProbeBody[0],
+  );
+  recordByteShape(
+    'CRLF終端',
+    acceptedByLabel.get('CRLF終端')
+      .subarray(hashbangStem.length, hashbangStem.length + 2)
+      .equals(Buffer.from([0x0d, 0x0a]))
+      && acceptedByLabel.get('CRLF終端')[hashbangStem.length + 2]
+        === scannerProbeBody[0],
+  );
+  recordByteShape(
+    '裸CR終端',
+    rejectedByLabel.get('裸CR終端')
+      .subarray(hashbangStem.length, hashbangStem.length + 1)
+      .equals(Buffer.from([0x0d]))
+      && rejectedByLabel.get('裸CR終端')[hashbangStem.length + 1] !== 0x0a
+      && rejectedByLabel.get('裸CR終端')[hashbangStem.length + 1]
+        === scannerProbeBody[0],
+  );
+  recordByteShape(
+    'U+2028終端',
+    rejectedByLabel.get('U+2028終端')
+      .subarray(hashbangStem.length, hashbangStem.length + 3)
+      .equals(Buffer.from([0xe2, 0x80, 0xa8])),
+  );
+  recordByteShape(
+    'U+2029終端',
+    rejectedByLabel.get('U+2029終端')
+      .subarray(hashbangStem.length, hashbangStem.length + 3)
+      .equals(Buffer.from([0xe2, 0x80, 0xa9])),
+  );
+  recordByteShape(
+    '行終端なしEOF',
+    rejectedByLabel.get('行終端なしEOF').equals(hashbangStem),
+  );
+  recordByteShape(
+    'hashbang後の空行',
+    acceptedByLabel.get('hashbang後の空行')
+      .subarray(hashbangStem.length, hashbangStem.length + 2)
+      .equals(Buffer.from([0x0a, 0x0a]))
+      && acceptedByLabel.get('hashbang後の空行')[hashbangStem.length + 2]
+        === scannerProbeBody[0],
+  );
   accepted.unshift(['hashbangなし', Buffer.from(textLayoutBytes)]);
-  accepted.forEach(([label, sourceBytes]) => {
-    const result = checkSemanticImportGraphBytes(
-      'textLayoutImplementation',
-      sourceBytes,
-    );
-    assert.equal(
-      result.violations.some((entry) => entry.code === 'IMPLEMENTATION_MISMATCH'),
-      false,
-      `hashbang accepted: ${label}`,
-    );
-  });
-  rejected.forEach(([label, sourceBytes]) => {
-    const result = checkSemanticImportGraphBytes(
-      'textLayoutImplementation',
-      sourceBytes,
-    );
-    assert.equal(
-      result.violations.some((entry) => entry.code === 'IMPLEMENTATION_MISMATCH'),
-      true,
-      `hashbang rejected: ${label}`,
-    );
-  });
+  const acceptedFailures = accepted.map(([label, sourceBytes]) => {
+    try {
+      const result = checkSemanticImportGraphBytes(
+        'textLayoutImplementation',
+        sourceBytes,
+      );
+      return result.violations.some(
+        (entry) => entry.code === 'IMPLEMENTATION_MISMATCH',
+      )
+        ? label
+        : null;
+    } catch (error) {
+      return `${label}: ${error.name}: ${error.message}`;
+    }
+  }).filter((entry) => entry !== null);
+  const rejectedFailures = rejected.map(([label, sourceBytes]) => {
+    try {
+      const result = checkSemanticImportGraphBytes(
+        'textLayoutImplementation',
+        sourceBytes,
+      );
+      return result.violations.some(
+        (entry) => entry.code === 'IMPLEMENTATION_MISMATCH',
+      )
+        ? null
+        : label;
+    } catch (error) {
+      return `${label}: ${error.name}: ${error.message}`;
+    }
+  }).filter((entry) => entry !== null);
+  assert.deepEqual(acceptedFailures, []);
+  assert.deepEqual(rejectedFailures, []);
+  assert.deepEqual(byteShapeFailures, []);
 });
 
 test('productionのmodule-load file I/O検査を実際のsemantic実装7 fileへ適用する', () => {
