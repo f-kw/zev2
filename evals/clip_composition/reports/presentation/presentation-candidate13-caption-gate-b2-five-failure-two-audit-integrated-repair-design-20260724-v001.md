@@ -459,6 +459,11 @@ evals/clip_composition/outputs/presentation/segmenter-boundary-evidence
 
 ## 18. 改訂履歴
 
+- 2026-07-25 4点確定追補の案内
+  - `presentation-candidate13-caption-gate-b2-four-point-contract-clarification-addendum-20260725-v001.md`をkawafmmが承認
+  - 本設計§7.3と、観測記録置換追補v001の名指し4点だけを同追補で上書き
+  - 生成後・一覧欠落注入直前の固定7実体束縛、job由来absolute rootの子孫操作、故障後を含む実発生操作全件、snapshot厳密1件からentry objectへの格納を一意化
+  - production runner、R2案A、hash意味、既存違反コード、変更可能2ファイル、132件一括実行は不変
 - 2026-07-24 承認済み追補の案内
   - `presentation-candidate13-caption-gate-b2-observation-record-replacement-contract-addendum-20260724-v001.md`をkawafmmが承認
   - 本設計§7.3、§7.4項目2〜4、§13、§15、§16のうち同追補が明示する範囲だけを上書き
