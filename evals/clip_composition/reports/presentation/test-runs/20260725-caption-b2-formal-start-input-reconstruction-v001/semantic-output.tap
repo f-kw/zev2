@@ -1,0 +1,1077 @@
+TAP version 13
+# Subtest: semantic coreとrunnerは承認済みpublic exportだけを持つ
+ok 1 - semantic coreとrunnerは承認済みpublic exportだけを持つ
+  ---
+  duration_ms: 1.330084
+  ...
+# Subtest: 公開validator/checkerはthrowing getter・Proxyを外へ漏らさない
+ok 2 - 公開validator/checkerはthrowing getter・Proxyを外へ漏らさない
+  ---
+  duration_ms: 10.400208
+  ...
+# Subtest: production runnerは第二引数なし/nullをrejectせずuntrusted exit 2へ閉じる
+ok 3 - production runnerは第二引数なし/nullをrejectせずuntrusted exit 2へ閉じる
+  ---
+  duration_ms: 0.264291
+  ...
+# Subtest: export済みrunnerは合成filesystemとbuilderでcompleteを二pass検査しtrusted reportへ通す
+not ok 4 - export済みrunnerは合成filesystemとbuilderでcompleteを二pass検査しtrusted reportへ通す
+  ---
+  duration_ms: 578.775333
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_output_v001.mjs:1661:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    
+    1 !== 0
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 0
+  actual: 1
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_output_v001.mjs:1680:12)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: production runner本体はabstained回答でbuilderを呼ばずpartial compilerを作らない
+not ok 5 - production runner本体はabstained回答でbuilderを呼ばずpartial compilerを作らない
+  ---
+  duration_ms: 518.066417
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_output_v001.mjs:1703:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'failed'
+    - 'abstained'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'abstained'
+  actual: 'failed'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_output_v001.mjs:1721:14)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: production runner本体はinvalid回答でbuilderを呼ばずpartial compilerを作らない
+ok 6 - production runner本体はinvalid回答でbuilderを呼ばずpartial compilerを作らない
+  ---
+  duration_ms: 503.946334
+  ...
+# Subtest: compiler pass 1 thrownはrunner本体で停止し元入力を変えない
+not ok 7 - compiler pass 1 thrownはrunner本体で停止し元入力を変えない
+  ---
+  duration_ms: 517.409416
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_output_v001.mjs:1742:5'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'implementationBinding'
+    - 'compilerBuild'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'compilerBuild'
+  actual: 'implementationBinding'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_output_v001.mjs:1772:16)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: compiler pass 1 invalid-returnはrunner本体で停止し元入力を変えない
+not ok 8 - compiler pass 1 invalid-returnはrunner本体で停止し元入力を変えない
+  ---
+  duration_ms: 522.555375
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_output_v001.mjs:1742:5'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'implementationBinding'
+    - 'compilerBuild'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'compilerBuild'
+  actual: 'implementationBinding'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_output_v001.mjs:1772:16)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: compiler pass 1 input-mutatedはrunner本体で停止し元入力を変えない
+not ok 9 - compiler pass 1 input-mutatedはrunner本体で停止し元入力を変えない
+  ---
+  duration_ms: 511.56675
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_output_v001.mjs:1742:5'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'implementationBinding'
+    - 'compilerBuild'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'compilerBuild'
+  actual: 'implementationBinding'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_output_v001.mjs:1772:16)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: compiler pass 2 thrownはrunner本体で停止し元入力を変えない
+not ok 10 - compiler pass 2 thrownはrunner本体で停止し元入力を変えない
+  ---
+  duration_ms: 506.504292
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_output_v001.mjs:1742:5'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'implementationBinding'
+    - 'compilerBuild'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'compilerBuild'
+  actual: 'implementationBinding'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_output_v001.mjs:1772:16)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: compiler pass 2 invalid-returnはrunner本体で停止し元入力を変えない
+not ok 11 - compiler pass 2 invalid-returnはrunner本体で停止し元入力を変えない
+  ---
+  duration_ms: 512.993583
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_output_v001.mjs:1742:5'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'implementationBinding'
+    - 'compilerBuild'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'compilerBuild'
+  actual: 'implementationBinding'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_output_v001.mjs:1772:16)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: compiler pass 2 input-mutatedはrunner本体で停止し元入力を変えない
+not ok 12 - compiler pass 2 input-mutatedはrunner本体で停止し元入力を変えない
+  ---
+  duration_ms: 512.865708
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_output_v001.mjs:1742:5'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'implementationBinding'
+    - 'compilerBuild'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'compilerBuild'
+  actual: 'implementationBinding'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_output_v001.mjs:1772:16)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: runnerのcompiler失敗配列はpass 1とpass 2で固定形を分ける
+ok 13 - runnerのcompiler失敗配列はpass 1とpass 2で固定形を分ける
+  ---
+  duration_ms: 1.585875
+  ...
+# Subtest: 完全形は12検査を通り、決定的compilerへ全候補・全atomを一度ずつ戻す
+ok 14 - 完全形は12検査を通り、決定的compilerへ全候補・全atomを一度ずつ戻す
+  ---
+  duration_ms: 12.815084
+  ...
+# Subtest: abstainedは有効でありcompiler四検査だけが適用なしになる
+ok 15 - abstainedは有効でありcompiler四検査だけが適用なしになる
+  ---
+  duration_ms: 7.759041
+  ...
+# Subtest: 中間phaseは先頭6検査だけを評価する
+ok 16 - 中間phaseは先頭6検査だけを評価する
+  ---
+  duration_ms: 6.737334
+  ...
+# Subtest: job schema違反は担当検査一つへだけ帰属する
+ok 17 - job schema違反は担当検査一つへだけ帰属する
+  ---
+  duration_ms: 3.466541
+  ...
+# Subtest: job stability違反は担当検査一つへだけ帰属する
+not ok 18 - job stability違反は担当検査一つへだけ帰属する
+  ---
+  duration_ms: 8.17275
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_output_v001.mjs:1933:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    JOB_FILE_MISMATCH
+    
+    false !== true
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: 'strictEqual'
+  stack: |-
+    assertViolation (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_output_v001.mjs:1135:10)
+    TestContext.<anonymous> (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_output_v001.mjs:1936:5)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: implementation hash違反は担当検査一つへだけ帰属する
+ok 19 - implementation hash違反は担当検査一つへだけ帰属する
+  ---
+  duration_ms: 7.650292
+  ...
+# Subtest: raw path safety違反は担当検査一つへだけ帰属する
+ok 20 - raw path safety違反は担当検査一つへだけ帰属する
+  ---
+  duration_ms: 6.270166
+  ...
+# Subtest: raw hash違反は担当検査一つへだけ帰属する
+ok 21 - raw hash違反は担当検査一つへだけ帰属する
+  ---
+  duration_ms: 7.006625
+  ...
+# Subtest: runtime違反は担当検査一つへだけ帰属する
+ok 22 - runtime違反は担当検査一つへだけ帰属する
+  ---
+  duration_ms: 8.692667
+  ...
+# Subtest: package file set違反は担当検査一つへだけ帰属する
+ok 23 - package file set違反は担当検査一つへだけ帰属する
+  ---
+  duration_ms: 6.04725
+  ...
+# Subtest: package schema違反は担当検査一つへだけ帰属する
+ok 24 - package schema違反は担当検査一つへだけ帰属する
+  ---
+  duration_ms: 5.880708
+  ...
+# Subtest: package strict JSON違反は担当検査一つへだけ帰属する
+ok 25 - package strict JSON違反は担当検査一つへだけ帰属する
+  ---
+  duration_ms: 5.606041
+  ...
+# Subtest: package UTF-8 BOM違反は担当検査一つへだけ帰属する
+ok 26 - package UTF-8 BOM違反は担当検査一つへだけ帰属する
+  ---
+  duration_ms: 6.486292
+  ...
+# Subtest: package binding違反は担当検査一つへだけ帰属する
+ok 27 - package binding違反は担当検査一つへだけ帰属する
+  ---
+  duration_ms: 6.240458
+  ...
+# Subtest: package hash違反は担当検査一つへだけ帰属する
+ok 28 - package hash違反は担当検査一つへだけ帰属する
+  ---
+  duration_ms: 6.51475
+  ...
+# Subtest: implementation import graphはrenderer trust参照fileの実行importを拒否する
+ok 29 - implementation import graphはrenderer trust参照fileの実行importを拒否する
+  ---
+  duration_ms: 7.780959
+  ...
+# Subtest: implementation import graphは許可外local importを拒否する
+ok 30 - implementation import graphは許可外local importを拒否する
+  ---
+  duration_ms: 7.5965
+  ...
+# Subtest: implementation import graphはdynamic importを拒否する
+ok 31 - implementation import graphはdynamic importを拒否する
+  ---
+  duration_ms: 7.887625
+  ...
+# Subtest: implementation import graphはCommonJS requireを拒否する
+ok 32 - implementation import graphはCommonJS requireを拒否する
+  ---
+  duration_ms: 6.382916
+  ...
+# Subtest: implementation import graphはbuiltin allowlist外importを拒否する
+ok 33 - implementation import graphはbuiltin allowlist外importを拒否する
+  ---
+  duration_ms: 7.184792
+  ...
+# Subtest: implementation import graphはmodule-load時file読取を拒否する
+ok 34 - implementation import graphはmodule-load時file読取を拒否する
+  ---
+  duration_ms: 7.168083
+  ...
+# Subtest: module-load file I/O検査は文字列・comment・関数・arrow内のcallを実行扱いしない
+ok 35 - module-load file I/O検査は文字列・comment・関数・arrow内のcallを実行扱いしない
+  ---
+  duration_ms: 7.536708
+  ...
+# Subtest: module-load file I/O検査はtemplate式内で直接実行されるcallを拒否する
+ok 36 - module-load file I/O検査はtemplate式内で直接実行されるcallを拒否する
+  ---
+  duration_ms: 7.379958
+  ...
+# Subtest: module-load file I/O検査はobject初期化で直接実行されるcallを拒否する
+ok 37 - module-load file I/O検査はobject初期化で直接実行されるcallを拒否する
+  ---
+  duration_ms: 6.906625
+  ...
+# Subtest: module-load file I/O検査はconcise arrow IIFE内で直接実行されるcallを拒否する
+ok 38 - module-load file I/O検査はconcise arrow IIFE内で直接実行されるcallを拒否する
+  ---
+  duration_ms: 6.930542
+  ...
+# Subtest: module-load file I/O検査はblock arrow IIFE内で直接実行されるcallを拒否する
+ok 39 - module-load file I/O検査はblock arrow IIFE内で直接実行されるcallを拒否する
+  ---
+  duration_ms: 7.681125
+  ...
+# Subtest: module-load file I/O検査はfunction IIFE内で直接実行されるcallを拒否する
+ok 40 - module-load file I/O検査はfunction IIFE内で直接実行されるcallを拒否する
+  ---
+  duration_ms: 7.235125
+  ...
+# Subtest: semantic R1 scannerは通常member・optional member後の除算を受理する
+ok 41 - semantic R1 scannerは通常member・optional member後の除算を受理する
+  ---
+  duration_ms: 7.150583
+  ...
+# Subtest: semantic R1 scannerはspread三形とspread直後のregexを受理する
+ok 42 - semantic R1 scannerはspread三形とspread直後のregexを受理する
+  ---
+  duration_ms: 7.193209
+  ...
+# Subtest: semantic R1 scannerはregex・comment・string・template raw内の禁止語を受理する
+ok 43 - semantic R1 scannerはregex・comment・string・template raw内の禁止語を受理する
+  ---
+  duration_ms: 6.761125
+  ...
+# Subtest: semantic R1 scannerは固定済み数値五形を受理する
+ok 44 - semantic R1 scannerは固定済み数値五形を受理する
+  ---
+  duration_ms: 7.36025
+  ...
+# Subtest: semantic R1 scannerは制御条件内とstatement開始のregexを受理する
+ok 45 - semantic R1 scannerは制御条件内とstatement開始のregexを受理する
+  ---
+  duration_ms: 7.683917
+  ...
+# Subtest: semantic R1 scannerは通常member経由file I/Oを拒否する
+ok 46 - semantic R1 scannerは通常member経由file I/Oを拒否する
+  ---
+  duration_ms: 7.212417
+  ...
+# Subtest: semantic R1 scannerはoptional member経由file I/Oを拒否する
+ok 47 - semantic R1 scannerはoptional member経由file I/Oを拒否する
+  ---
+  duration_ms: 6.433
+  ...
+# Subtest: semantic R1 scannerはspread内file I/Oを拒否する
+ok 48 - semantic R1 scannerはspread内file I/Oを拒否する
+  ---
+  duration_ms: 6.9035
+  ...
+# Subtest: semantic R1 scannerはdynamic importを拒否する
+ok 49 - semantic R1 scannerはdynamic importを拒否する
+  ---
+  duration_ms: 7.007
+  ...
+# Subtest: semantic R1 scannerは関数内dynamic importを拒否する
+ok 50 - semantic R1 scannerは関数内dynamic importを拒否する
+  ---
+  duration_ms: 7.387792
+  ...
+# Subtest: semantic R1 scannerはspread内dynamic importを拒否する
+ok 51 - semantic R1 scannerはspread内dynamic importを拒否する
+  ---
+  duration_ms: 7.461
+  ...
+# Subtest: semantic R1 scannerはtemplate式内dynamic importを拒否する
+ok 52 - semantic R1 scannerはtemplate式内dynamic importを拒否する
+  ---
+  duration_ms: 6.158959
+  ...
+# Subtest: semantic R1 scannerはproperty名のdynamic importを拒否する
+ok 53 - semantic R1 scannerはproperty名のdynamic importを拒否する
+  ---
+  duration_ms: 7.122375
+  ...
+# Subtest: semantic R1 scannerはCommonJS requireを拒否する
+ok 54 - semantic R1 scannerはCommonJS requireを拒否する
+  ---
+  duration_ms: 7.360417
+  ...
+# Subtest: semantic R1 scannerはarrow内CommonJS requireを拒否する
+ok 55 - semantic R1 scannerはarrow内CommonJS requireを拒否する
+  ---
+  duration_ms: 6.730083
+  ...
+# Subtest: semantic R1 scannerはspread内CommonJS requireを拒否する
+ok 56 - semantic R1 scannerはspread内CommonJS requireを拒否する
+  ---
+  duration_ms: 7.412375
+  ...
+# Subtest: semantic R1 scannerはtemplate式内CommonJS requireを拒否する
+ok 57 - semantic R1 scannerはtemplate式内CommonJS requireを拒否する
+  ---
+  duration_ms: 6.81075
+  ...
+# Subtest: semantic R1 scannerはoptional property名のrequireを拒否する
+ok 58 - semantic R1 scannerはoptional property名のrequireを拒否する
+  ---
+  duration_ms: 6.215958
+  ...
+# Subtest: semantic R1 scannerはmember待機中のslashを拒否する
+ok 59 - semantic R1 scannerはmember待機中のslashを拒否する
+  ---
+  duration_ms: 7.507417
+  ...
+# Subtest: semantic R1 scannerは二個のdotを拒否する
+ok 60 - semantic R1 scannerは二個のdotを拒否する
+  ---
+  duration_ms: 7.369875
+  ...
+# Subtest: semantic R1 scannerは四個のdotを拒否する
+ok 61 - semantic R1 scannerは四個のdotを拒否する
+  ---
+  duration_ms: 6.65125
+  ...
+# Subtest: semantic R1 scannerは未完のdotを拒否する
+ok 62 - semantic R1 scannerは未完のdotを拒否する
+  ---
+  duration_ms: 7.378417
+  ...
+# Subtest: semantic R1 scannerは未完のoptional dotを拒否する
+ok 63 - semantic R1 scannerは未完のoptional dotを拒否する
+  ---
+  duration_ms: 6.858834
+  ...
+# Subtest: semantic R1 scannerは未完のspreadを拒否する
+ok 64 - semantic R1 scannerは未完のspreadを拒否する
+  ---
+  duration_ms: 6.803709
+  ...
+# Subtest: semantic R1 scannerは先頭dot小数を拒否する
+ok 65 - semantic R1 scannerは先頭dot小数を拒否する
+  ---
+  duration_ms: 7.4195
+  ...
+# Subtest: semantic R1 scannerは末尾dot数値を拒否する
+ok 66 - semantic R1 scannerは末尾dot数値を拒否する
+  ---
+  duration_ms: 6.682459
+  ...
+# Subtest: semantic R1 scannerは二個dot数値memberを拒否する
+ok 67 - semantic R1 scannerは二個dot数値memberを拒否する
+  ---
+  duration_ms: 6.962625
+  ...
+# Subtest: semantic R1 scannerは指数表記を拒否する
+ok 68 - semantic R1 scannerは指数表記を拒否する
+  ---
+  duration_ms: 6.897084
+  ...
+# Subtest: semantic R1 scannerは二進数表記を拒否する
+ok 69 - semantic R1 scannerは二進数表記を拒否する
+  ---
+  duration_ms: 6.98575
+  ...
+# Subtest: semantic R1 scannerはseparator付き数値を拒否する
+ok 70 - semantic R1 scannerはseparator付き数値を拒否する
+  ---
+  duration_ms: 7.33925
+  ...
+# Subtest: semantic R1 scannerはoptional callを拒否する
+ok 71 - semantic R1 scannerはoptional callを拒否する
+  ---
+  duration_ms: 7.097166
+  ...
+# Subtest: semantic R1 scannerはoptional private nameを拒否する
+ok 72 - semantic R1 scannerはoptional private nameを拒否する
+  ---
+  duration_ms: 6.107208
+  ...
+# Subtest: semantic R1 scannerはoptional tagged templateを拒否する
+ok 73 - semantic R1 scannerはoptional tagged templateを拒否する
+  ---
+  duration_ms: 6.81325
+  ...
+# Subtest: semantic R1 scannerはreturn直後spreadを拒否する
+ok 74 - semantic R1 scannerはreturn直後spreadを拒否する
+  ---
+  duration_ms: 7.218875
+  ...
+# Subtest: semantic R1 scannerは二項演算子直後spreadを拒否する
+ok 75 - semantic R1 scannerは二項演算子直後spreadを拒否する
+  ---
+  duration_ms: 6.900208
+  ...
+# Subtest: semantic R1 scannerは未閉鎖regexを拒否する
+ok 76 - semantic R1 scannerは未閉鎖regexを拒否する
+  ---
+  duration_ms: 7.477833
+  ...
+# Subtest: semantic R1 scannerは未閉鎖regex classを拒否する
+ok 77 - semantic R1 scannerは未閉鎖regex classを拒否する
+  ---
+  duration_ms: 7.317791
+  ...
+# Subtest: semantic R1 scannerは括弧不一致を拒否する
+ok 78 - semantic R1 scannerは括弧不一致を拒否する
+  ---
+  duration_ms: 6.10125
+  ...
+# Subtest: semantic R1 scannerは閉じbrace直後slashを拒否する
+ok 79 - semantic R1 scannerは閉じbrace直後slashを拒否する
+  ---
+  duration_ms: 7.151708
+  ...
+# Subtest: embedded Gate A reportは全domain schemaと固定配列順を再検査する
+ok 80 - embedded Gate A reportは全domain schemaと固定配列順を再検査する
+  ---
+  duration_ms: 5.564084
+  ...
+# Subtest: embedded Gate A reportは正本のcanonical field順以外を拒否する
+ok 81 - embedded Gate A reportは正本のcanonical field順以外を拒否する
+  ---
+  duration_ms: 6.336958
+  ...
+# Subtest: embedded Gate A report内部の相互対応不一致はschemaでなくbindingへ分離する
+ok 82 - embedded Gate A report内部の相互対応不一致はschemaでなくbindingへ分離する
+  ---
+  duration_ms: 5.704542
+  ...
+# Subtest: embedded Gate A report内部の証拠hash不一致はPACKAGE_HASH_MISMATCHへ分離する
+ok 83 - embedded Gate A report内部の証拠hash不一致はPACKAGE_HASH_MISMATCHへ分離する
+  ---
+  duration_ms: 5.9705
+  ...
+# Subtest: package reportのcontainer別source atom数はpackage内容から再導出して照合する
+ok 84 - package reportのcontainer別source atom数はpackage内容から再導出して照合する
+  ---
+  duration_ms: 6.457583
+  ...
+# Subtest: package reportのcontainer別boundary候補数はpackage内容から再導出して照合する
+ok 85 - package reportのcontainer別boundary候補数はpackage内容から再導出して照合する
+  ---
+  duration_ms: 6.076125
+  ...
+# Subtest: package reportの候補の最大論理幅はpackage内容から再導出して照合する
+ok 86 - package reportの候補の最大論理幅はpackage内容から再導出して照合する
+  ---
+  duration_ms: 6.335625
+  ...
+# Subtest: package内自己整合: report jobとmanifest package jobの不一致をbinding違反にする
+ok 87 - package内自己整合: report jobとmanifest package jobの不一致をbinding違反にする
+  ---
+  duration_ms: 5.808833
+  ...
+# Subtest: package内自己整合: evidence artifactとmanifest/job artifactの不一致をbinding違反にする
+ok 88 - package内自己整合: evidence artifactとmanifest/job artifactの不一致をbinding違反にする
+  ---
+  duration_ms: 6.162166
+  ...
+# Subtest: package内自己整合: evidence sourceとexpansion sourceの不一致をbinding違反にする
+ok 89 - package内自己整合: evidence sourceとexpansion sourceの不一致をbinding違反にする
+  ---
+  duration_ms: 5.180083
+  ...
+# Subtest: package内自己整合: embedded Gate A jobとmanifest Gate A jobの不一致をbinding違反にする
+ok 90 - package内自己整合: embedded Gate A jobとmanifest Gate A jobの不一致をbinding違反にする
+  ---
+  duration_ms: 5.835833
+  ...
+# Subtest: package内自己整合: manifest runtimeとevidence runtimeの不一致をbinding違反にする
+ok 91 - package内自己整合: manifest runtimeとevidence runtimeの不一致をbinding違反にする
+  ---
+  duration_ms: 5.849667
+  ...
+# Subtest: package内自己整合: manifest package coreとsemantic job package coreの不一致をbinding違反にする
+ok 92 - package内自己整合: manifest package coreとsemantic job package coreの不一致をbinding違反にする
+  ---
+  duration_ms: 6.298125
+  ...
+# Subtest: package内自己整合: manifest外部入力とwidth policyの不一致をbinding違反にする
+ok 93 - package内自己整合: manifest外部入力とwidth policyの不一致をbinding違反にする
+  ---
+  duration_ms: 5.504375
+  ...
+# Subtest: package内自己整合: text layoutとsemantic dependencyの不一致をbinding違反にする
+ok 94 - package内自己整合: text layoutとsemantic dependencyの不一致をbinding違反にする
+  ---
+  duration_ms: 6.300166
+  ...
+# Subtest: package内自己整合: leakage width由来とexpansion width由来の不一致をbinding違反にする
+ok 95 - package内自己整合: leakage width由来とexpansion width由来の不一致をbinding違反にする
+  ---
+  duration_ms: 6.281792
+  ...
+# Subtest: bytesの意味出力違反を機械検出する
+ok 96 - bytesの意味出力違反を機械検出する
+  ---
+  duration_ms: 6.156458
+  ...
+# Subtest: UTF-8 BOM bytesの意味出力違反を機械検出する
+ok 97 - UTF-8 BOM bytesの意味出力違反を機械検出する
+  ---
+  duration_ms: 6.648458
+  ...
+# Subtest: schemaの意味出力違反を機械検出する
+ok 98 - schemaの意味出力違反を機械検出する
+  ---
+  duration_ms: 5.221458
+  ...
+# Subtest: forbidden fieldの意味出力違反を機械検出する
+ok 99 - forbidden fieldの意味出力違反を機械検出する
+  ---
+  duration_ms: 6.075084
+  ...
+# Subtest: container setの意味出力違反を機械検出する
+ok 100 - container setの意味出力違反を機械検出する
+  ---
+  duration_ms: 5.262958
+  ...
+# Subtest: container orderの意味出力違反を機械検出する
+ok 101 - container orderの意味出力違反を機械検出する
+  ---
+  duration_ms: 6.182417
+  ...
+# Subtest: groupの意味出力違反を機械検出する
+ok 102 - groupの意味出力違反を機械検出する
+  ---
+  duration_ms: 5.209959
+  ...
+# Subtest: line countの意味出力違反を機械検出する
+ok 103 - line countの意味出力違反を機械検出する
+  ---
+  duration_ms: 6.614459
+  ...
+# Subtest: unknown boundaryの意味出力違反を機械検出する
+ok 104 - unknown boundaryの意味出力違反を機械検出する
+  ---
+  duration_ms: 6.428083
+  ...
+# Subtest: cross-container boundaryの意味出力違反を機械検出する
+ok 105 - cross-container boundaryの意味出力違反を機械検出する
+  ---
+  duration_ms: 6.121208
+  ...
+# Subtest: duplicate boundaryの意味出力違反を機械検出する
+ok 106 - duplicate boundaryの意味出力違反を機械検出する
+  ---
+  duration_ms: 6.371958
+  ...
+# Subtest: boundary orderの意味出力違反を機械検出する
+ok 107 - boundary orderの意味出力違反を機械検出する
+  ---
+  duration_ms: 6.143959
+  ...
+# Subtest: container endの意味出力違反を機械検出する
+ok 108 - container endの意味出力違反を機械検出する
+  ---
+  duration_ms: 6.246875
+  ...
+# Subtest: line widthの意味出力違反を機械検出する
+ok 109 - line widthの意味出力違反を機械検出する
+  ---
+  duration_ms: 5.669292
+  ...
+# Subtest: container ID重複は集合違反として独立検出する
+ok 110 - container ID重複は集合違反として独立検出する
+  ---
+  duration_ms: 6.446667
+  ...
+# Subtest: 0行のmeaning groupを行数違反として検出する
+ok 111 - 0行のmeaning groupを行数違反として検出する
+  ---
+  duration_ms: 5.750542
+  ...
+# Subtest: 3行のmeaning groupを行数違反として検出する
+ok 112 - 3行のmeaning groupを行数違反として検出する
+  ---
+  duration_ms: 6.152167
+  ...
+# Subtest: 意味出力の禁止field textを個別に拒否する
+ok 113 - 意味出力の禁止field textを個別に拒否する
+  ---
+  duration_ms: 5.802125
+  ...
+# Subtest: 意味出力の禁止field startMsを個別に拒否する
+ok 114 - 意味出力の禁止field startMsを個別に拒否する
+  ---
+  duration_ms: 5.587708
+  ...
+# Subtest: 意味出力の禁止field reasonを個別に拒否する
+ok 115 - 意味出力の禁止field reasonを個別に拒否する
+  ---
+  duration_ms: 6.494125
+  ...
+# Subtest: 意味出力の禁止field scoreを個別に拒否する
+ok 116 - 意味出力の禁止field scoreを個別に拒否する
+  ---
+  duration_ms: 5.965125
+  ...
+# Subtest: 意味出力の禁止field idを個別に拒否する
+ok 117 - 意味出力の禁止field idを個別に拒否する
+  ---
+  duration_ms: 6.297958
+  ...
+# Subtest: complete/abstainedのexact union: complete missing containersを拒否する
+ok 118 - complete/abstainedのexact union: complete missing containersを拒否する
+  ---
+  duration_ms: 5.632583
+  ...
+# Subtest: complete/abstainedのexact union: complete extra fieldを拒否する
+ok 119 - complete/abstainedのexact union: complete extra fieldを拒否する
+  ---
+  duration_ms: 5.82475
+  ...
+# Subtest: complete/abstainedのexact union: abstained missing statusを拒否する
+ok 120 - complete/abstainedのexact union: abstained missing statusを拒否する
+  ---
+  duration_ms: 5.122166
+  ...
+# Subtest: complete/abstainedのexact union: abstained extra containersを拒否する
+ok 121 - complete/abstainedのexact union: abstained extra containersを拒否する
+  ---
+  duration_ms: 6.621333
+  ...
+# Subtest: invalid意味回答ではcompilerの部分成果を一切受け取らない
+ok 122 - invalid意味回答ではcompilerの部分成果を一切受け取らない
+  ---
+  duration_ms: 5.9755
+  ...
+# Subtest: container順序だけの入替えは順序違反だけを発火し候補所有者違反を併発しない
+ok 123 - container順序だけの入替えは順序違反だけを発火し候補所有者違反を併発しない
+  ---
+  duration_ms: 6.300291
+  ...
+# Subtest: unknown fieldと独立したroot/container/group scaffold違反を併発する
+ok 124 - unknown fieldと独立したroot/container/group scaffold違反を併発する
+  ---
+  duration_ms: 17.476042
+  ...
+# Subtest: unknown field単独はschema/group違反を重ねない
+ok 125 - unknown field単独はschema/group違反を重ねない
+  ---
+  duration_ms: 5.864584
+  ...
+# Subtest: candidate missingの展開違反は全line走査から検出される
+ok 126 - candidate missingの展開違反は全line走査から検出される
+  ---
+  duration_ms: 7.726375
+  ...
+# Subtest: candidate duplicateの展開違反は全line走査から検出される
+ok 127 - candidate duplicateの展開違反は全line走査から検出される
+  ---
+  duration_ms: 7.175834
+  ...
+# Subtest: candidate orderの展開違反は全line走査から検出される
+ok 128 - candidate orderの展開違反は全line走査から検出される
+  ---
+  duration_ms: 6.328292
+  ...
+# Subtest: atom missingの展開違反は全line走査から検出される
+ok 129 - atom missingの展開違反は全line走査から検出される
+  ---
+  duration_ms: 7.252041
+  ...
+# Subtest: atom duplicateの展開違反は全line走査から検出される
+ok 130 - atom duplicateの展開違反は全line走査から検出される
+  ---
+  duration_ms: 7.72875
+  ...
+# Subtest: atom orderの展開違反は全line走査から検出される
+ok 131 - atom orderの展開違反は全line走査から検出される
+  ---
+  duration_ms: 6.9285
+  ...
+# Subtest: container crossの展開違反は全line走査から検出される
+ok 132 - container crossの展開違反は全line走査から検出される
+  ---
+  duration_ms: 7.507333
+  ...
+# Subtest: textの展開違反は全line走査から検出される
+ok 133 - textの展開違反は全line走査から検出される
+  ---
+  duration_ms: 7.1295
+  ...
+# Subtest: anchorの展開違反は全line走査から検出される
+ok 134 - anchorの展開違反は全line走査から検出される
+  ---
+  duration_ms: 6.337958
+  ...
+# Subtest: compiler schema違反を展開検査へ推測せず拒否する
+ok 135 - compiler schema違反を展開検査へ推測せず拒否する
+  ---
+  duration_ms: 12.281792
+  ...
+# Subtest: compiler binding違反を検出する
+ok 136 - compiler binding違反を検出する
+  ---
+  duration_ms: 7.587042
+  ...
+# Subtest: compiler build失敗をvalid abstainedと混同しない
+ok 137 - compiler build失敗をvalid abstainedと混同しない
+  ---
+  duration_ms: 5.837875
+  ...
+# Subtest: 二passのbyte差を非決定性として検出する
+ok 138 - 二passのbyte差を非決定性として検出する
+  ---
+  duration_ms: 6.484292
+  ...
+# Subtest: 監視投影・再読取・書込観測を一つのread-only契約として検査する
+ok 139 - 監視投影・再読取・書込観測を一つのread-only契約として検査する
+  ---
+  duration_ms: 7.256
+  ...
+# Subtest: semantic validation report validatorは全root fieldを生contextから再導出する
+ok 140 - semantic validation report validatorは全root fieldを生contextから再導出する
+  ---
+  duration_ms: 35.124583
+  ...
+# Subtest: abstained reportはexit 1かつ投影・compiler hashを載せない
+ok 141 - abstained reportはexit 1かつ投影・compiler hashを載せない
+  ---
+  duration_ms: 10.218959
+  ...
+# Subtest: production filesystem adapterは読み取り専用5入口だけを公開する
+ok 142 - production filesystem adapterは読み取り専用5入口だけを公開する
+  ---
+  duration_ms: 0.143041
+  ...
+# Subtest: semantic production読取handleは固定3入口・同期one-use・AsyncIterableで同一内容を返す
+ok 143 - semantic production読取handleは固定3入口・同期one-use・AsyncIterableで同一内容を返す
+  ---
+  duration_ms: 4.577541
+  ...
+# Subtest: R3:semanticは空fileを0 chunkで受けone・multi・unevenでも同じhash/countとreportになる
+not ok 144 - R3:semanticは空fileを0 chunkで受けone・multi・unevenでも同じhash/countとreportになる
+  ---
+  duration_ms: 555.665125
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_output_v001.mjs:2886:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    one
+    
+    1 !== 0
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 0
+  actual: 1
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_output_v001.mjs:2924:14)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: R3:semantic chunk transport不正はexit 2かつpartial reportなしへ閉じる
+ok 145 - R3:semantic chunk transport不正はexit 2かつpartial reportなしへ閉じる
+  ---
+  duration_ms: 804.303209
+  ...
+# Subtest: CLIは位置引数不成立を固定diagnosticとexit 2で返す
+ok 146 - CLIは位置引数不成立を固定diagnosticとexit 2で返す
+  ---
+  duration_ms: 0.277166
+  ...
+# Subtest: CLIはstream write例外もrejectせずexit 2へ閉じる
+ok 147 - CLIはstream write例外もrejectせずexit 2へ閉じる
+  ---
+  duration_ms: 0.077167
+  ...
+# Subtest: production CLI実processはtrusted 0/1とusage 2をstdout/stderrへ排他的に出す
+not ok 148 - production CLI実processはtrusted 0/1とusage 2をstdout/stderrへ排他的に出す
+  ---
+  duration_ms: 117.170209
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_output_v001.mjs:3042:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    
+    false !== true
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_output_v001.mjs:3058:14)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: production CLIにadapter・root・期待値の注入口がなくrunnerは同じcoreを呼ぶ
+ok 149 - production CLIにadapter・root・期待値の注入口がなくrunnerは同じcoreを呼ぶ
+  ---
+  duration_ms: 1.198416
+  ...
+# Subtest: semantic coreはstrict JSON・formal・canonical・hash・57 code列をpackage coreだけから使う
+ok 150 - semantic coreはstrict JSON・formal・canonical・hash・57 code列をpackage coreだけから使う
+  ---
+  duration_ms: 0.680334
+  ...
+# Subtest: B1実行import graphは実8 fileのstatic builtin集合とlocal辺へ完全一致する
+ok 151 - B1実行import graphは実8 fileのstatic builtin集合とlocal辺へ完全一致する
+  ---
+  duration_ms: 2.708875
+  ...
+# Subtest: packageとsemanticのR1 scanner正本・実経路・限定hashbang表は同期する
+ok 152 - packageとsemanticのR1 scanner正本・実経路・限定hashbang表は同期する
+  ---
+  duration_ms: 169.379958
+  ...
+# Subtest: productionのmodule-load file I/O検査を実際のsemantic実装7 fileへ適用する
+ok 153 - productionのmodule-load file I/O検査を実際のsemantic実装7 fileへ適用する
+  ---
+  duration_ms: 78.751833
+  ...
+# Subtest: semantic checkerの共有担当を含むcode×check観測集合と57 code partitionは完全一致する
+not ok 154 - semantic checkerの共有担当を含むcode×check観測集合と57 code partitionは完全一致する
+  ---
+  duration_ms: 1.14675
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_output_v001.mjs:3335:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly deep-equal:
+    + actual - expected ... Lines skipped
+    
+      [
+        'BUILD_FAILED\x00compilerBuild',
+    ...
+        'INPUT_HASH_MISMATCH\x00inputBinding',
+        'INPUT_PATH_UNSAFE\x00inputBinding',
+    -   'JOB_FILE_MISMATCH\x00jobStability',
+        'NONDETERMINISTIC\x00determinism',
+    ...
+        'SEMANTIC_OUTPUT_FORBIDDEN_FIELD\x00semanticOutput',
+        'SEMANTIC_OUTPUT_SCHEMA_INVALID\x00semanticOutput'
+      ]
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+    0: 'BUILD_FAILED\x00compilerBuild'
+    1: 'CAPTION_B1_JOB_INVALID\x00jobBinding'
+    2: 'COMPILER_INPUT_BINDING_MISMATCH\x00compilerInput'
+    3: 'COMPILER_INPUT_SCHEMA_INVALID\x00compilerInput'
+    4: 'EXPANSION_ANCHOR_MISMATCH\x00deterministicExpansion'
+    5: 'EXPANSION_CANDIDATE_DUPLICATED\x00deterministicExpansion'
+    6: 'EXPANSION_CANDIDATE_MISSING\x00deterministicExpansion'
+    7: 'EXPANSION_CANDIDATE_ORDER_REVERSED\x00deterministicExpansion'
+    8: 'EXPANSION_CONTAINER_CROSSED\x00deterministicExpansion'
+    9: 'EXPANSION_SOURCE_ATOM_DUPLICATED\x00deterministicExpansion'
+    10: 'EXPANSION_SOURCE_ATOM_MISSING\x00deterministicExpansion'
+    11: 'EXPANSION_SOURCE_ATOM_ORDER_REVERSED\x00deterministicExpansion'
+    12: 'EXPANSION_TEXT_MISMATCH\x00deterministicExpansion'
+    13: 'IMPLEMENTATION_MISMATCH\x00implementationBinding'
+    14: 'INPUT_HASH_MISMATCH\x00inputBinding'
+    15: 'INPUT_PATH_UNSAFE\x00inputBinding'
+    16: 'JOB_FILE_MISMATCH\x00jobStability'
+    17: 'NONDETERMINISTIC\x00determinism'
+    18: 'PACKAGE_BINDING_MISMATCH\x00packageShape'
+    19: 'PACKAGE_FILE_SET_INVALID\x00packageShape'
+    20: 'PACKAGE_HASH_MISMATCH\x00packageShape'
+    21: 'PACKAGE_SCHEMA_INVALID\x00packageShape'
+    22: 'PACKAGE_STRICT_JSON_INVALID\x00packageShape'
+    23: 'READ_ONLY_CONTRACT_VIOLATED\x00readOnlyCheck'
+    24: 'RUNTIME_MISMATCH\x00runtimeBinding'
+    25: 'SEMANTIC_BOUNDARY_ID_CROSS_CONTAINER\x00semanticOutput'
+    26: 'SEMANTIC_BOUNDARY_ID_DUPLICATE\x00semanticOutput'
+    27: 'SEMANTIC_BOUNDARY_ID_UNKNOWN\x00semanticOutput'
+    28: 'SEMANTIC_BOUNDARY_ORDER_INVALID\x00semanticOutput'
+    29: 'SEMANTIC_CONTAINER_END_MISSING\x00semanticOutput'
+    30: 'SEMANTIC_CONTAINER_ORDER_INVALID\x00semanticOutput'
+    31: 'SEMANTIC_CONTAINER_SET_INVALID\x00semanticOutput'
+    32: 'SEMANTIC_GROUP_INVALID\x00semanticOutput'
+    33: 'SEMANTIC_LINE_COUNT_INVALID\x00semanticOutput'
+    34: 'SEMANTIC_LINE_WIDTH_EXCEEDED\x00semanticOutput'
+    35: 'SEMANTIC_OUTPUT_BYTES_INVALID\x00semanticOutput'
+    36: 'SEMANTIC_OUTPUT_FORBIDDEN_FIELD\x00semanticOutput'
+    37: 'SEMANTIC_OUTPUT_SCHEMA_INVALID\x00semanticOutput'
+  actual:
+    0: 'BUILD_FAILED\x00compilerBuild'
+    1: 'CAPTION_B1_JOB_INVALID\x00jobBinding'
+    2: 'COMPILER_INPUT_BINDING_MISMATCH\x00compilerInput'
+    3: 'COMPILER_INPUT_SCHEMA_INVALID\x00compilerInput'
+    4: 'EXPANSION_ANCHOR_MISMATCH\x00deterministicExpansion'
+    5: 'EXPANSION_CANDIDATE_DUPLICATED\x00deterministicExpansion'
+    6: 'EXPANSION_CANDIDATE_MISSING\x00deterministicExpansion'
+    7: 'EXPANSION_CANDIDATE_ORDER_REVERSED\x00deterministicExpansion'
+    8: 'EXPANSION_CONTAINER_CROSSED\x00deterministicExpansion'
+    9: 'EXPANSION_SOURCE_ATOM_DUPLICATED\x00deterministicExpansion'
+    10: 'EXPANSION_SOURCE_ATOM_MISSING\x00deterministicExpansion'
+    11: 'EXPANSION_SOURCE_ATOM_ORDER_REVERSED\x00deterministicExpansion'
+    12: 'EXPANSION_TEXT_MISMATCH\x00deterministicExpansion'
+    13: 'IMPLEMENTATION_MISMATCH\x00implementationBinding'
+    14: 'INPUT_HASH_MISMATCH\x00inputBinding'
+    15: 'INPUT_PATH_UNSAFE\x00inputBinding'
+    16: 'NONDETERMINISTIC\x00determinism'
+    17: 'PACKAGE_BINDING_MISMATCH\x00packageShape'
+    18: 'PACKAGE_FILE_SET_INVALID\x00packageShape'
+    19: 'PACKAGE_HASH_MISMATCH\x00packageShape'
+    20: 'PACKAGE_SCHEMA_INVALID\x00packageShape'
+    21: 'PACKAGE_STRICT_JSON_INVALID\x00packageShape'
+    22: 'READ_ONLY_CONTRACT_VIOLATED\x00readOnlyCheck'
+    23: 'RUNTIME_MISMATCH\x00runtimeBinding'
+    24: 'SEMANTIC_BOUNDARY_ID_CROSS_CONTAINER\x00semanticOutput'
+    25: 'SEMANTIC_BOUNDARY_ID_DUPLICATE\x00semanticOutput'
+    26: 'SEMANTIC_BOUNDARY_ID_UNKNOWN\x00semanticOutput'
+    27: 'SEMANTIC_BOUNDARY_ORDER_INVALID\x00semanticOutput'
+    28: 'SEMANTIC_CONTAINER_END_MISSING\x00semanticOutput'
+    29: 'SEMANTIC_CONTAINER_ORDER_INVALID\x00semanticOutput'
+    30: 'SEMANTIC_CONTAINER_SET_INVALID\x00semanticOutput'
+    31: 'SEMANTIC_GROUP_INVALID\x00semanticOutput'
+    32: 'SEMANTIC_LINE_COUNT_INVALID\x00semanticOutput'
+    33: 'SEMANTIC_LINE_WIDTH_EXCEEDED\x00semanticOutput'
+    34: 'SEMANTIC_OUTPUT_BYTES_INVALID\x00semanticOutput'
+    35: 'SEMANTIC_OUTPUT_FORBIDDEN_FIELD\x00semanticOutput'
+    36: 'SEMANTIC_OUTPUT_SCHEMA_INVALID\x00semanticOutput'
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_output_v001.mjs:3340:10)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+1..154
+# tests 154
+# suites 0
+# pass 142
+# fail 12
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 7431.583375
