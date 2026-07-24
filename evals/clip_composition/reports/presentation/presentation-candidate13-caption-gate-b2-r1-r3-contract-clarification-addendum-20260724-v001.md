@@ -1,7 +1,7 @@
 # candidate 13 caption gate B2 R1・R3契約確定追補 v001
 
 - 日付: 2026-07-24
-- 状態: **2026-07-24 kawafmm承認済み。R2のA裁定を含めて実装後、package全件105/132・27不合格で停止**
+- 状態: **2026-07-24 hashbang限定受理を実装後、package全件118/132・14不合格で停止**
 - 追補対象（いずれも承認済みであり、両方が改訂対象）1:
   `presentation-candidate13-caption-gate-b2-full-test-repair-design-20260724-v001.md`
 - 追補対象（いずれも承認済みであり、両方が改訂対象）2:
@@ -9,7 +9,7 @@
 - 起草根拠:
   `presentation-candidate13-caption-gate-b2-implementation-stop-contract-conflict-20260724-v001.md`
 - 今回の人間作業: 0件・時間計測なし
-- 次に必要な人間判断: R1のhashbang未定義を扱う修正設計の承認または差し戻し1件
+- 次に必要な人間判断: 裸CR検査データとGate A検証呼出の版付き修正設計を起草するかの判断1件
 
 ## 1. 本来の目的
 
@@ -33,6 +33,11 @@ publication違反codeの追加・改名は行わない。
 「本追補による改訂」の案内と改訂履歴行だけを同一コミットで追記する。
 B2修正設計だけへの追補とは解釈しない。承認の効力、改訂案内、改訂履歴の対象は
 B2修正設計v001とB1実装契約設計v001の両方である。
+
+2026-07-24以降、hashbang処理は
+`presentation-candidate13-caption-gate-b2-r1-hashbang-limited-acceptance-addendum-20260724-v001.md`
+の承認内容で本追補§3・§5〜§7を上書きする。3token規則は維持し、その前に
+production runner先頭1行目の`#!`だけを非実行領域として処理する。
 
 本追補は次を上書きする。
 
@@ -405,3 +410,5 @@ R1へ重複帰属させない。
   R3基礎分割読取4/4は合格。
   R1 scannerはproduction runner先頭のhashbangを受理できず、hashbangの扱いは
   本追補に未定義だった。独自修正・再実行と後続工程は行っていない。
+- 2026-07-24 / hashbang追補承認: `presentation-candidate13-caption-gate-b2-r1-hashbang-limited-acceptance-addendum-20260724-v001.md`を承認し、本追補§3・§5〜§7をhashbang限定契約の範囲で改訂した。3token規則とR2・R3契約は変更せず、runner不変のまま全件再検査を再開した。
+- 2026-07-24 / hashbang実装後の全件検査停止: package全132件は118合格・14不合格。直接7件の残り1件は裸CR検査データ欠陥、下流13件はGate Aレポート検証呼出の既存契約不一致という第四原因だった。修正・再実行、意味回答側・回帰・preflightは行っていない。正本は`presentation-candidate13-caption-gate-b2-hashbang-full-test-stop-report-20260724-v001.md`。

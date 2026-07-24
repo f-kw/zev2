@@ -1084,10 +1084,13 @@ const replaceImplementationSource = (context, role, sourceText) => {
   const index = context.implementationInputs.findIndex((entry) => entry.role === role);
   assert.equal(index >= 0, true, role);
   const original = context.implementationInputs[index];
+  const sourceBytes = Buffer.isBuffer(sourceText)
+    ? Buffer.from(sourceText)
+    : Buffer.from(sourceText, 'utf8');
   const replacement = observation(
     role,
     original.path,
-    Buffer.from(sourceText, 'utf8'),
+    sourceBytes,
   );
   context.implementationInputs[index] = replacement;
   const bindings = index < 3
@@ -2057,6 +2060,101 @@ const checkSemanticImportGraphSuffix = (suffix) => {
     .snapshot.bytes.toString('utf8');
   replaceImplementationSource(context, 'semanticCore', `${original}\n${suffix}\n`);
   return checked(context);
+};
+
+const checkSemanticImportGraphBytes = (role, sourceBytes) => {
+  const context = makeFixture();
+  replaceImplementationSource(context, role, sourceBytes);
+  return checked(context);
+};
+
+const makeR1HashbangScannerCases = (bodyBytes) => {
+  const body = Buffer.from(bodyBytes);
+  const prefixed = (prefix) => Buffer.concat([Buffer.from(prefix, 'utf8'), body]);
+  const accepted = [
+    ['LF終端', prefixed('#!/usr/bin/env node\n')],
+    ['CRLF終端', prefixed('#!/usr/bin/env node\r\n')],
+    ['空payload', prefixed('#!\n')],
+    ['payload許可下端tab', prefixed('#!\t\n')],
+    ['payload許可上端0x7E', prefixed('#!~\n')],
+    ['hashbang後の空行', prefixed('#!/usr/bin/env node\n\n')],
+    [
+      'payload内の禁止語形',
+      prefixed('#! import( require( readFileSync(\n'),
+    ],
+    [
+      '文字列・comment・template・regex内のhashbang',
+      Buffer.concat([
+        body,
+        Buffer.from([
+          '',
+          "const scannerHashbangString = '#!';",
+          '/* #! */',
+          'const scannerHashbangTemplate = `#!`;',
+          'const scannerHashbangRegex = /#!/u;',
+          '',
+        ].join('\n'), 'utf8'),
+      ]),
+    ],
+  ];
+  const rejected = [
+    ['BOM後', Buffer.concat([Buffer.from([0xef, 0xbb, 0xbf]), prefixed('#!/usr/bin/env node\n')])],
+    ['先行space', prefixed(' #!/usr/bin/env node\n')],
+    ['先行tab', prefixed('\t#!/usr/bin/env node\n')],
+    ['先行改行', prefixed('\n#!/usr/bin/env node\n')],
+    ['分離hashbang', prefixed('# !/usr/bin/env node\n')],
+    ['逆順hashbang', prefixed('!#/usr/bin/env node\n')],
+    [
+      'JavaScript token後',
+      Buffer.concat([
+        Buffer.from('const scannerBeforeHashbang = 1;\n#!/usr/bin/env node\n', 'utf8'),
+        body,
+      ]),
+    ],
+    ['二行目のhashbang', prefixed('#!/usr/bin/env node\n#!/usr/bin/env node\n')],
+    ['裸CR終端', prefixed('#!/usr/bin/env node\r')],
+    ['U+2028終端', prefixed('#!/usr/bin/env node\u2028')],
+    ['U+2029終端', prefixed('#!/usr/bin/env node\u2029')],
+    ['行終端なしEOF', Buffer.from('#!/usr/bin/env node', 'utf8')],
+    [
+      'payload内NUL',
+      Buffer.concat([
+        Buffer.from('#!/usr/bin/', 'utf8'),
+        Buffer.from([0x00]),
+        Buffer.from('env node\n', 'utf8'),
+        body,
+      ]),
+    ],
+    ['payload内非ASCII', prefixed('#!/usr/bin/env ノード\n')],
+    [
+      'payload内未許可制御文字',
+      Buffer.concat([
+        Buffer.from('#!/usr/bin/', 'utf8'),
+        Buffer.from([0x01]),
+        Buffer.from('env node\n', 'utf8'),
+        body,
+      ]),
+    ],
+    [
+      'payload許可範囲直前0x1F',
+      Buffer.concat([
+        Buffer.from('#!/usr/bin/', 'utf8'),
+        Buffer.from([0x1f]),
+        Buffer.from('env node\n', 'utf8'),
+        body,
+      ]),
+    ],
+    [
+      'payload許可範囲直後0x7F',
+      Buffer.concat([
+        Buffer.from('#!/usr/bin/', 'utf8'),
+        Buffer.from([0x7f]),
+        Buffer.from('env node\n', 'utf8'),
+        body,
+      ]),
+    ],
+  ];
+  return {accepted, rejected};
 };
 
 const R1_SCANNER_ACCEPTED_SOURCES = Object.freeze([
@@ -3091,7 +3189,7 @@ test('B1実行import graphは実8 fileのstatic builtin集合とlocal辺へ完�
   }
 });
 
-test('packageとsemanticのR1 scanner正本はbyte単位で同期する', async () => {
+test('packageとsemanticのR1 scanner正本・実経路・限定hashbang表は同期する', async () => {
   const begin = '// EXECUTABLE_JAVASCRIPT_SCANNER_GRAMMAR_V001_BEGIN';
   const end = '// EXECUTABLE_JAVASCRIPT_SCANNER_GRAMMAR_V001_END';
   const scannerBlock = (source, label) => {
@@ -3115,6 +3213,42 @@ test('packageとsemanticのR1 scanner正本はbyte単位で同期する', async 
     scannerBlock(packageSource, 'package'),
     scannerBlock(semanticSource, 'semantic'),
   );
+  for (const [label, source] of [
+    ['package', packageSource],
+    ['semantic', semanticSource],
+  ]) {
+    assert.match(
+      source,
+      /const importSpecifiers = \(bytes\) => \{\s*const scan = executableJavaScriptTokensFromBytesV001\(bytes\);\s*const \{source\} = scan;/u,
+      `${label}: production import graph uses Buffer scanner entry`,
+    );
+  }
+
+  const textLayoutBytes = actualImplementationSources().textLayoutImplementation;
+  const {accepted, rejected} = makeR1HashbangScannerCases(textLayoutBytes);
+  accepted.unshift(['hashbangなし', Buffer.from(textLayoutBytes)]);
+  accepted.forEach(([label, sourceBytes]) => {
+    const result = checkSemanticImportGraphBytes(
+      'textLayoutImplementation',
+      sourceBytes,
+    );
+    assert.equal(
+      result.violations.some((entry) => entry.code === 'IMPLEMENTATION_MISMATCH'),
+      false,
+      `hashbang accepted: ${label}`,
+    );
+  });
+  rejected.forEach(([label, sourceBytes]) => {
+    const result = checkSemanticImportGraphBytes(
+      'textLayoutImplementation',
+      sourceBytes,
+    );
+    assert.equal(
+      result.violations.some((entry) => entry.code === 'IMPLEMENTATION_MISMATCH'),
+      true,
+      `hashbang rejected: ${label}`,
+    );
+  });
 });
 
 test('productionのmodule-load file I/O検査を実際のsemantic実装7 fileへ適用する', () => {

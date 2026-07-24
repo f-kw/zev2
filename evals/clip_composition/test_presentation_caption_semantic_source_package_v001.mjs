@@ -626,10 +626,12 @@ const PACKAGE_CORE_SOURCE = readFileSync(
   resolve(WORKSPACE_ROOT, PACKAGE_CORE_REPOSITORY_PATH),
   'utf8',
 );
-const PACKAGE_RUNNER_SOURCE = readFileSync(
+const PACKAGE_RUNNER_BYTES = readFileSync(
   resolve(WORKSPACE_ROOT, PACKAGE_RUNNER_REPOSITORY_PATH),
-  'utf8',
 );
+const PACKAGE_RUNNER_SOURCE = PACKAGE_RUNNER_BYTES.toString('utf8');
+const PACKAGE_RUNNER_BASELINE_SHA256 =
+  '1a1537f279cf8b69a90b4236e69a048e7bec2d1118f1819e5bad807373c8cbff';
 
 const sha256 = (value) => createHash('sha256').update(value).digest('hex');
 const canonicalBytes = (value) => {
@@ -3122,6 +3124,88 @@ const checkPackageImportGraphSuffix = (suffix, discriminator) => {
   return packageCore.checkPresentationCaptionSemanticSourcePackageV001(context);
 };
 
+const checkPackageRunnerImportGraphBytes = (sourceBytes, discriminator) => {
+  const context = makeValidFixture();
+  const index = 1;
+  const observation = context.implementationInputs[index];
+  observation.snapshot = stableSnapshotFromBytes(
+    observation.path,
+    sourceBytes,
+    discriminator,
+  );
+  context.job.value.implementationBinding.files[index].fileSha256 =
+    observation.snapshot.fileSha256;
+  refreshJobSnapshot(context);
+  rebuildPackagePasses(context);
+  return packageCore.checkPresentationCaptionSemanticSourcePackageV001(context);
+};
+
+const makeR1HashbangScannerCases = (bodyBytes) => {
+  const body = Buffer.from(bodyBytes);
+  const prefixed = (prefix) => Buffer.concat([Buffer.from(prefix, 'utf8'), body]);
+  const accepted = [
+    ['LF終端', prefixed('#!/usr/bin/env node\n')],
+    ['CRLF終端', prefixed('#!/usr/bin/env node\r\n')],
+    ['空payload', prefixed('#!\n')],
+    ['payload許可下端tab', prefixed('#!\t\n')],
+    ['payload許可上端0x7E', prefixed('#!~\n')],
+    ['hashbang後の空行', prefixed('#!/usr/bin/env node\n\n')],
+    [
+      'payload内の禁止語形',
+      prefixed('#! import( require( readFileSync(\n'),
+    ],
+    [
+      '文字列・comment・template・regex内のhashbang',
+      Buffer.concat([
+        body,
+        bytes([
+          '',
+          "const scannerHashbangString = '#!';",
+          '/* #! */',
+          'const scannerHashbangTemplate = `#!`;',
+          'const scannerHashbangRegex = /#!/u;',
+          '',
+        ].join('\n')),
+      ]),
+    ],
+  ];
+  const rejected = [
+    ['BOM後', Buffer.concat([Buffer.from([0xef, 0xbb, 0xbf]), prefixed('#!/usr/bin/env node\n')])],
+    ['先行space', prefixed(' #!/usr/bin/env node\n')],
+    ['先行tab', prefixed('\t#!/usr/bin/env node\n')],
+    ['先行改行', prefixed('\n#!/usr/bin/env node\n')],
+    ['分離hashbang', prefixed('# !/usr/bin/env node\n')],
+    ['逆順hashbang', prefixed('!#/usr/bin/env node\n')],
+    [
+      'JavaScript token後',
+      Buffer.concat([bytes('const scannerBeforeHashbang = 1;\n#!/usr/bin/env node\n'), body]),
+    ],
+    ['二行目のhashbang', prefixed('#!/usr/bin/env node\n#!/usr/bin/env node\n')],
+    ['裸CR終端', prefixed('#!/usr/bin/env node\r')],
+    ['U+2028終端', prefixed('#!/usr/bin/env node\u2028')],
+    ['U+2029終端', prefixed('#!/usr/bin/env node\u2029')],
+    ['行終端なしEOF', bytes('#!/usr/bin/env node')],
+    [
+      'payload内NUL',
+      Buffer.concat([bytes('#!/usr/bin/'), Buffer.from([0x00]), bytes('env node\n'), body]),
+    ],
+    ['payload内非ASCII', prefixed('#!/usr/bin/env ノード\n')],
+    [
+      'payload内未許可制御文字',
+      Buffer.concat([bytes('#!/usr/bin/'), Buffer.from([0x01]), bytes('env node\n'), body]),
+    ],
+    [
+      'payload許可範囲直前0x1F',
+      Buffer.concat([bytes('#!/usr/bin/'), Buffer.from([0x1f]), bytes('env node\n'), body]),
+    ],
+    [
+      'payload許可範囲直後0x7F',
+      Buffer.concat([bytes('#!/usr/bin/'), Buffer.from([0x7f]), bytes('env node\n'), body]),
+    ],
+  ];
+  return {accepted, rejected};
+};
+
 const R1_SCANNER_ACCEPTED_SOURCES = Object.freeze([
   [
     '通常member・optional member後の除算',
@@ -3225,7 +3309,8 @@ for (const [index, [label, suffix]] of R1_SCANNER_REJECTED_SOURCES.entries()) {
   });
 }
 
-test('package R1 scannerは実package 2 sourceを受理する', () => {
+test('package R1 scannerは実package 2 sourceと限定hashbang表を契約どおり扱う', () => {
+  assert.equal(sha256(PACKAGE_RUNNER_BYTES), PACKAGE_RUNNER_BASELINE_SHA256);
   const report = packageCore.checkPresentationCaptionSemanticSourcePackageV001(
     makeValidFixture(),
   );
@@ -3233,6 +3318,33 @@ test('package R1 scannerは実package 2 sourceを受理する', () => {
     report.violations.some((entry) => entry.code === 'IMPLEMENTATION_MISMATCH'),
     false,
   );
+
+  const hashbangPrefix = bytes('#!/usr/bin/env node\n');
+  assert.equal(PACKAGE_RUNNER_BYTES.subarray(0, hashbangPrefix.length).equals(hashbangPrefix), true);
+  const runnerBody = PACKAGE_RUNNER_BYTES.subarray(hashbangPrefix.length);
+  const {accepted, rejected} = makeR1HashbangScannerCases(runnerBody);
+  accepted.unshift(['実package runner', Buffer.from(PACKAGE_RUNNER_BYTES)]);
+
+  accepted.forEach(([label, sourceBytes], index) => {
+    const acceptedReport = checkPackageRunnerImportGraphBytes(sourceBytes, 400 + index);
+    assert.equal(
+      acceptedReport.violations.some(
+        (entry) => entry.code === 'IMPLEMENTATION_MISMATCH',
+      ),
+      false,
+      `hashbang accepted: ${label}`,
+    );
+  });
+  rejected.forEach(([label, sourceBytes], index) => {
+    const rejectedReport = checkPackageRunnerImportGraphBytes(sourceBytes, 500 + index);
+    assert.equal(
+      rejectedReport.violations.some(
+        (entry) => entry.code === 'IMPLEMENTATION_MISMATCH',
+      ),
+      true,
+      `hashbang rejected: ${label}`,
+    );
+  });
 });
 
 test('Gate A build・決定性・reportの違反は段階ごとの担当checkから発火する', () => {

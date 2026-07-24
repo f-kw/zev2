@@ -1,7 +1,7 @@
 # candidate 13 caption gate B2 R1 hashbang限定受理 契約追補設計 v001
 
 - 起草日: 2026-07-24
-- 状態: **kawafmmが「hashbangの限定受理」という方向を確定済み。本文の承認待ち**
+- 状態: **2026-07-24 kawafmm承認後に実装。package全件118/132で不合格となり、修正・再実行せず停止**
 - 対象: R1の実行可能JavaScript字句検査
 - 起草根拠:
   - `presentation-candidate13-caption-gate-b2-r1-r2-r3-full-test-stop-report-20260724-v001.md`
@@ -405,3 +405,15 @@ hashbangの細部を複数質問へ分解せず、§4・§5を一つの契約案
   - kawafmm裁定「runnerを変えず、先頭1行目の`#!`だけを限定受理」を契約化した。
   - 保存済み27不合格を、直接7件と下流未検証20件へ分離した。
   - 実装、検査再実行、正式入力生成、Gemini、描画は行っていない。
+- 2026-07-24 / kawafmm承認:
+  - 本追補を承認し、§2記載の既存3文書の改訂承認を兼ねる。
+  - 実装、package全132件、意味回答側、既存回帰、candidate 13読み取り専用preflight、
+    完了報告、次ゲート承認依頼起草までを再開した。
+  - 正式package、prompt、Gemini、表示計画、指示書、描画は承認範囲に含めない。
+- 2026-07-24 / package全件検査停止:
+  - production runnerを全byte不変のまま限定受理を実装した。
+  - package全132件は118合格・14不合格。直接7件の残り1件は検査データ欠陥、
+    下流13件はGate Aレポート検証呼出の既存契約不一致という第四原因だった。
+  - 意味回答側・回帰・preflightへ進まず、正本停止報告
+    `presentation-candidate13-caption-gate-b2-hashbang-full-test-stop-report-20260724-v001.md`
+    を作成した。

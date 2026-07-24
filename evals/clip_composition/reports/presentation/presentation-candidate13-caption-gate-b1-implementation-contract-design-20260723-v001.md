@@ -1,10 +1,16 @@
 # candidate 13 基本テロップ ゲートB1完全実装契約設計 v001
 
 - 作成日: 2026-07-23
-- 状態: **2026-07-24 R1・R2・R3実装後のpackage全件検査105/132・27不合格で停止。正式入力・prompt・Gemini・表示計画・描画は未実施**
+- 状態: **2026-07-24 hashbang限定受理を実装後、package全件118/132・14不合格で停止。意味回答側・回帰・preflight・正式入力・prompt・Gemini・表示計画・描画は未実施**
 - 対象: ゲートB1のsource-only入力package、意味分割出力の受入、決定的展開、compiler入力
 - 非対象: prompt登録、Web版Gemini実走、正式cue・target・指示書、v003対生成、描画、人間の読みやすさ判定
-- 人間作業: 本設計承認時は1件。今回の実装・停止に必要な人間作業は0件。再開時はR1のhashbang修正設計への1判断。媒体視聴・時刻入力・文字分割・時間計測はなし
+- 人間作業: 本設計とhashbang追補の承認は完了。今回の実装・検査に必要な人間作業は0件。媒体視聴・時刻入力・文字分割・時間計測はなし
+
+> 改訂案内（2026-07-24）:
+> R1 scannerのhashbang処理と該当検査は、
+> `presentation-candidate13-caption-gate-b2-r1-hashbang-limited-acceptance-addendum-20260724-v001.md`
+> の承認内容で上書きする。production runnerは変更せず、先頭1行目の`#!`だけを
+> scannerで限定受理する。
 
 ## 1. 目的
 
@@ -2456,3 +2462,5 @@ B2が合格しても、B3正式package生成は別承認である。
 - 2026-07-24 / preflight入口追補承認: `presentation-candidate13-caption-b2-night-preflight-landmine-audit-20260723-v001.md`のQ1:A exact契約を承認し、本設計§4.1のpublic export集合へ読み取り専用の監視投影入口一件だけを追加した。Q2:Aのjob・成果物・package識別子も固定した。production CLIのjob path単一入口、job schema、57違反コード、正式package生成の停止点は変更しない。
 - 2026-07-24 / R1・R2・R3追補承認: `presentation-candidate13-caption-gate-b2-r1-r3-contract-clarification-addendum-20260724-v001.md`とR2のA裁定を承認し、本設計の§4.3、§4.4、§6.1、§12.1、§16.2、§17.3、§18.3を追補の範囲で改訂した。全量読取の後方互換分岐を置かず、同一file descriptorの版付きchunk入口へ統一し、formal publicationの既存code 55とCLI終了コードの帰属を維持する。投影検査は壊れた子を親集計へ部分利用せず、子の違反として可視化する。
 - 2026-07-24 / 実行記録: R1・R2・R3を実装後、package側全件検査は105/132・27不合格で停止した。R2関連13/13（案A固有12/12を含む）とR3基礎分割読取4/4は合格したが、production runner先頭のhashbangがR1受理契約に無く、R1受理側7検査と下流20検査が不成立になった。修正・再実行、意味回答側検査、回帰、candidate 13 preflightは行っていない。正本停止報告は`presentation-candidate13-caption-gate-b2-r1-r2-r3-full-test-stop-report-20260724-v001.md`。
+- 2026-07-24 / hashbang追補承認: `presentation-candidate13-caption-gate-b2-r1-hashbang-limited-acceptance-addendum-20260724-v001.md`を承認し、本設計の§4.1、§16.2、§20、§21を追補の範囲で改訂した。runnerは基準SHA-256と全byte一致のまま、先頭1行目の`#!`だけをpackage・意味回答共通scannerで限定受理する。実装、package全132件、意味回答側、既存回帰、candidate 13読み取り専用preflight、完了報告、次ゲート承認依頼起草までを再開し、正式package、Gemini、指示書、描画は引き続き含めない。
+- 2026-07-24 / hashbang実装後の全件検査停止: production runnerを変更せず限定受理を実装した。package全132件は118合格・14不合格。直接7件の残り1件は裸CR検査データ欠陥、下流13件はGate Aレポート検証呼出の既存契約不一致という第四原因だった。意味回答側・回帰・candidate 13 preflightへ進まず停止した。正本は`presentation-candidate13-caption-gate-b2-hashbang-full-test-stop-report-20260724-v001.md`。

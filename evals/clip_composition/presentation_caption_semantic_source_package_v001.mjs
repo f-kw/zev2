@@ -285,11 +285,11 @@ const sameBytes = (left, right) => Buffer.isBuffer(left)
 const IMPORT_SPECIFIER_PATTERN =
   /(?:^|\n)\s*import(?:\s+[\s\S]*?\s+from\s+|\s*)['"]([^'"]+)['"]\s*;?/g;
 const importSpecifiers = (bytes) => {
-  const source = bytes.toString('utf8');
+  const scan = executableJavaScriptTokensFromBytesV001(bytes);
+  const {source} = scan;
   const values = [];
   let match;
   while ((match = IMPORT_SPECIFIER_PATTERN.exec(source)) !== null) values.push(match[1]);
-  const scan = executableJavaScriptTokens(source);
   const tokens = scan.valid ? scan.tokens : [];
   return {
     values,
@@ -461,7 +461,7 @@ const EXECUTABLE_JAVASCRIPT_NUMBER_PATTERNS_V001 = Object.freeze([
   EXECUTABLE_JAVASCRIPT_BIGINT_PATTERN_V001,
   EXECUTABLE_JAVASCRIPT_INTEGER_PATTERN_V001,
 ]);
-const executableJavaScriptTokens = (source) => {
+const executableJavaScriptTokens = (source, initialIndex = 0) => {
   const tokens = [];
   const modes = [{
     type: 'code',
@@ -495,7 +495,7 @@ const executableJavaScriptTokens = (source) => {
     state = EXECUTABLE_JAVASCRIPT_SCAN_STATE_START_V001;
     optionalChainForbidsTag = false;
   };
-  for (let index = 0; index < source.length;) {
+  for (let index = initialIndex; index < source.length;) {
     const mode = modes[modes.length - 1];
     const character = source[index];
     const next = source[index + 1];
@@ -831,6 +831,29 @@ const executableJavaScriptTokens = (source) => {
     return invalid();
   }
   return {valid: true, tokens};
+};
+const executableJavaScriptTokensFromBytesV001 = (bytes) => {
+  if (!Buffer.isBuffer(bytes)) return {valid: false, tokens: [], source: ''};
+  const source = bytes.toString('utf8');
+  let initialIndex = 0;
+  if (bytes.length >= 2 && bytes[0] === 0x23 && bytes[1] === 0x21) {
+    const lineFeedIndex = bytes.indexOf(0x0a, 2);
+    if (lineFeedIndex < 0) return {valid: false, tokens: [], source};
+    const hasCarriageReturn = bytes[lineFeedIndex - 1] === 0x0d;
+    const payloadEnd = hasCarriageReturn ? lineFeedIndex - 1 : lineFeedIndex;
+    for (let index = 2; index < payloadEnd; index += 1) {
+      const byte = bytes[index];
+      if (byte !== 0x09 && (byte < 0x20 || byte > 0x7e)) {
+        return {valid: false, tokens: [], source};
+      }
+    }
+    initialIndex = hasCarriageReturn ? lineFeedIndex - 1 : lineFeedIndex;
+    if (source.charCodeAt(initialIndex) !== bytes[initialIndex]) {
+      return {valid: false, tokens: [], source};
+    }
+  }
+  const scan = executableJavaScriptTokens(source, initialIndex);
+  return {valid: scan.valid, tokens: scan.tokens, source};
 };
 // EXECUTABLE_JAVASCRIPT_SCANNER_GRAMMAR_V001_END
 const tokenStructure = (tokens) => {
