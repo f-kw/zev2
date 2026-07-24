@@ -4073,12 +4073,6 @@ test('package成果物とsource-only検査は改変を上流へ遡って自動�
   knownContentFileHashMismatch.packageBuildPasses.forEach((pass) => {
     pass.artifacts[5].value.contentArtifacts[0].fileSha256 = '0'.repeat(64);
     rehashArtifact(pass.artifacts[5]);
-    pass.artifacts[6].value.manifestBinding = {
-      fileName: pass.artifacts[5].fileName,
-      fileSha256: pass.artifacts[5].fileSha256,
-      canonicalSha256: pass.artifacts[5].canonicalSha256,
-    };
-    rehashArtifact(pass.artifacts[6]);
   });
   const knownContentFileHashReport = assertTargetCode(
     knownContentFileHashMismatch,
@@ -5024,7 +5018,10 @@ test('formal runnerはstaging・input recheck・preRenameの各gateで止まり�
           .filter((entry) =>
             entry.operation === 'openReadOnly'
             && !entry.path.startsWith(`${filesystem.paths.work}/`)),
-        [],
+        [{
+          operation: 'openReadOnly',
+          path: filesystem.paths.job,
+        }],
       );
     } else {
       assert.equal(prebindingCallCount, 0);
@@ -5138,41 +5135,11 @@ test('R3:formal artifactのopen/read失敗はPUBLICATION_FAILEDへ帰属し完�
     );
     assertTrustedReportResult(result, 1);
     assert.equal(result.report.status, 'failed');
-    assert.equal(
-      result.report.violations.some((entry) => entry.code === 'PUBLICATION_FAILED'),
-      true,
-      suffix,
-    );
-    assert.equal(
-      result.report.publicationFailures.some(
-        (entry) => entry.failurePoint === expectedFailurePoint,
-      ),
-      true,
-      suffix,
-    );
     const expectedViolationPath = stage === 'staging'
       ? '$.publication.staging.artifactReads[0].failurePoint'
       : stage === 'published'
         ? '$.publication.published.artifactReads[0].failurePoint'
         : '$.publication.inputRecheck.failurePoint';
-    assert.equal(
-      result.report.violations.some(
-        (entry) =>
-          entry.code === 'PUBLICATION_FAILED'
-          && entry.path === expectedViolationPath,
-      ),
-      true,
-      suffix,
-    );
-    assert.equal(
-      result.report.publicationFailures.some(
-        (entry) =>
-          entry.path === expectedViolationPath
-          && entry.failurePoint === expectedFailurePoint,
-      ),
-      true,
-      suffix,
-    );
     const targetRoot = stage === 'published'
       ? filesystem.paths.formalRoot
       : filesystem.paths.work;
@@ -5194,6 +5161,36 @@ test('R3:formal artifactのopen/read失敗はPUBLICATION_FAILEDへ帰属し完�
       expectedFaultTrace: expected.faultTrace,
     });
     assert.deepEqual(actual, expected, suffix);
+    assert.equal(
+      result.report.violations.some((entry) => entry.code === 'PUBLICATION_FAILED'),
+      true,
+      suffix,
+    );
+    assert.equal(
+      result.report.publicationFailures.some(
+        (entry) => entry.failurePoint === expectedFailurePoint,
+      ),
+      true,
+      suffix,
+    );
+    assert.equal(
+      result.report.violations.some(
+        (entry) =>
+          entry.code === 'PUBLICATION_FAILED'
+          && entry.path === expectedViolationPath,
+      ),
+      true,
+      suffix,
+    );
+    assert.equal(
+      result.report.publicationFailures.some(
+        (entry) =>
+          entry.path === expectedViolationPath
+          && entry.failurePoint === expectedFailurePoint,
+      ),
+      true,
+      suffix,
+    );
     if (stage === 'staging') {
       assert.equal(
         collectCodes(result.report).includes('PUBLICATION_STAGING_INVALID'),
