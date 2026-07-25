@@ -558,6 +558,7 @@ const runTrusted = async (jobPath, jobSnapshot, job) => {
     && buildA.artifacts.every((entry, index) => entry.bytes.equals(buildB.artifacts[index].bytes));
   const displayPlan = buildA.artifacts?.[0]?.value;
   const mappings = {};
+  const nestedViolationCodes = [];
   let mappingPassed = true;
   if (displayPlan) {
     for (const cue of displayPlan.containers.flatMap((container) => container.cues)) {
@@ -567,9 +568,11 @@ const runTrusted = async (jobPath, jobSnapshot, job) => {
         cue.sourceEndMs,
       );
       if (mapped.status !== 'passed') mappingPassed = false;
+      const cueViolationCodes = mapped.violations.map((entry) => entry.code);
+      nestedViolationCodes.push(...cueViolationCodes);
       mappings[cue.cueId] = {
         segmentCount: mapped.status === 'passed' ? 1 : 0,
-        nestedViolationCodes: mapped.violations.map((entry) => entry.code),
+        nestedViolationCodes: cueViolationCodes,
       };
     }
   }
@@ -631,6 +634,7 @@ const runTrusted = async (jobPath, jobSnapshot, job) => {
       bindingMatches: inputMatches[3],
       validationPassed: timelineCheck.status === 'passed',
       mappingPassed,
+      nestedViolationCodes,
       mappings,
       segmentCount: timeline.segments.length,
       mappingByCue: mappings,

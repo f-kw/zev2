@@ -892,6 +892,43 @@ test('T079: 公開失敗4種は相互に別codeへ帰属する', () => {
 });
 
 let actualBuilderFixturePromise = null;
+const ZERO_FRAME_BOUNDARY_IDS = [
+  'segmenter-boundary-000073',
+  'segmenter-boundary-000074',
+  'segmenter-boundary-000075',
+];
+
+const makeSyntheticSemanticRawValue = (
+  semanticSource,
+  {independentZeroFrameCue = false} = {},
+) => ({
+  status: 'complete',
+  containers: semanticSource.containers.map((container) => {
+    const meaningGroups = [];
+    for (let index = 0; index < container.boundaryCandidates.length; index += 1) {
+      const candidate = container.boundaryCandidates[index];
+      if (!independentZeroFrameCue
+        && candidate.boundaryCandidateId === ZERO_FRAME_BOUNDARY_IDS[0]) {
+        assert.deepEqual(
+          container.boundaryCandidates
+            .slice(index, index + ZERO_FRAME_BOUNDARY_IDS.length)
+            .map((entry) => entry.boundaryCandidateId),
+          ZERO_FRAME_BOUNDARY_IDS,
+        );
+        meaningGroups.push({
+          lineEndBoundaryCandidateIds: [ZERO_FRAME_BOUNDARY_IDS.at(-1)],
+        });
+        index += ZERO_FRAME_BOUNDARY_IDS.length - 1;
+      } else {
+        meaningGroups.push({
+          lineEndBoundaryCandidateIds: [candidate.boundaryCandidateId],
+        });
+      }
+    }
+    return {containerId: container.containerId, meaningGroups};
+  }),
+});
+
 const actualBuilderFixture = async () => {
   if (actualBuilderFixturePromise) return actualBuilderFixturePromise;
   actualBuilderFixturePromise = (async () => {
@@ -918,15 +955,7 @@ const actualBuilderFixture = async () => {
       ][index], path, snapshot: snapshot(path, value)};
     });
     const semanticSource = jsonValue(`${SOURCE_ROOT}/semantic-source-input.json`);
-    const rawValue = {
-      status: 'complete',
-      containers: semanticSource.containers.map((container) => ({
-        containerId: container.containerId,
-        meaningGroups: container.boundaryCandidates.map((candidate) => ({
-          lineEndBoundaryCandidateIds: [candidate.boundaryCandidateId],
-        })),
-      })),
-    };
+    const rawValue = makeSyntheticSemanticRawValue(semanticSource);
     const rawPath = `${TESTDATA_ROOT}/synthetic-semantic-output.json`;
     const rawSnapshot = snapshot(rawPath, rawValue);
     const compiler = buildPresentationCaptionSemanticCompilerInputV001({
@@ -1148,8 +1177,16 @@ const implementationBinding = (runnerPath) => {
   };
 };
 
-const makeFormalJobFixture = async (suffix) => {
-  const {builtContext, rawValue} = await actualBuilderFixture();
+const makeFormalJobFixture = async (
+  suffix,
+  {independentZeroFrameCue = false} = {},
+) => {
+  const {builtContext} = await actualBuilderFixture();
+  const semanticSource = jsonValue(`${SOURCE_ROOT}/semantic-source-input.json`);
+  const rawValue = makeSyntheticSemanticRawValue(
+    semanticSource,
+    {independentZeroFrameCue},
+  );
   mkdirSync(repositoryAbsolute(TESTDATA_ROOT), {recursive: true});
   mkdirSync(repositoryAbsolute(JOB_ROOT), {recursive: true});
   mkdirSync(repositoryAbsolute(OUTPUT_PARENT), {recursive: true});
@@ -1176,6 +1213,19 @@ const makeFormalJobFixture = async (suffix) => {
     formalCompiler.semanticOutputBinding.canonicalSha256,
     canonicalSha(rawValue),
   );
+  const formalMeaningGroupCount = formalCompiler.containers.reduce(
+    (sum, container) => sum + container.meaningGroups.length,
+    0,
+  );
+  const formalLineCount = formalCompiler.containers.reduce(
+    (sum, container) => sum + container.meaningGroups.reduce(
+      (groupSum, group) => groupSum + group.lines.length,
+      0,
+    ),
+    0,
+  );
+  assert.equal(formalMeaningGroupCount, independentZeroFrameCue ? 205 : 203);
+  assert.equal(formalLineCount, independentZeroFrameCue ? 205 : 203);
   const formalReportValue = {
     status: 'passed',
     compilerInput: {
@@ -1242,9 +1292,9 @@ const makeFormalJobFixture = async (suffix) => {
       sourceAtomCount: 354,
       containerCount: 3,
       boundaryCandidateCount: 205,
-      meaningGroupCount: 205,
-      cueCount: 205,
-      lineCount: 205,
+      meaningGroupCount: formalMeaningGroupCount,
+      cueCount: formalMeaningGroupCount,
+      lineCount: formalLineCount,
       timelineSegmentCount: 2,
       compilerInputObservedByteSha256: shaBytes(formalBytes(formalCompiler)),
       compilerInputCanonicalSha256: canonicalSha(formalCompiler),
@@ -1272,7 +1322,7 @@ const makeFormalJobFixture = async (suffix) => {
     rmSync(repositoryAbsolute(semanticRawPath), {force: true});
     rmSync(repositoryAbsolute(semanticReportPath), {force: true});
   };
-  return {job, jobPath, formalOutputPath, cleanup};
+  return {job, jobPath, formalOutputPath, lockPath, workPath, cleanup};
 };
 
 test('T082: formal CLI successはexit 0・stdout一件・stderr 0 byteである', async () => {
@@ -1414,4 +1464,36 @@ test('T087: layout出力は専用入口を直接使い整数入口・独自parse
   );
   assert.equal(/JSON\.parse\(readFileSync\(outputPath\)/u.test(runner), false);
   assert.equal(/allowDecimals|numberProfile|layoutNumberProfile/u.test(runner), false);
+});
+
+test('T088: 0 frame拒否は内側理由を欠落なく上位報告する', async () => {
+  const fixture = await makeFormalJobFixture(
+    'timeline-zero-frame',
+    {independentZeroFrameCue: true},
+  );
+  try {
+    const result = spawnSync(process.execPath, [repositoryAbsolute(RUNNER_PATH), fixture.jobPath], {
+      cwd: WORKSPACE_ROOT,
+      encoding: null,
+      maxBuffer: 32 * 1024 * 1024,
+    });
+    assert.equal(result.status, 1);
+    assert.equal(result.stderr.length, 0);
+    const output = JSON.parse(result.stdout.toString('utf8'));
+    assert.equal(
+      output.schemaVersion,
+      'presentation-caption-display-pair-validation-report-v002',
+    );
+    assert.equal(output.status, 'failed');
+    assert.equal(output.violations[0].code, 'TIMELINE_MAPPING_FAILED');
+    assert.deepEqual(
+      output.violations[0].details.nestedViolationCodes,
+      ['INSTRUCTION_SOURCE_INTERVAL_ZERO_FRAME'],
+    );
+    assert.equal(existsSync(repositoryAbsolute(fixture.formalOutputPath)), false);
+    assert.equal(existsSync(repositoryAbsolute(fixture.lockPath)), false);
+    assert.equal(existsSync(repositoryAbsolute(fixture.workPath)), false);
+  } finally {
+    fixture.cleanup();
+  }
 });
