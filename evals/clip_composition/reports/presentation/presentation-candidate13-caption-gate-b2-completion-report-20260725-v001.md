@@ -150,6 +150,7 @@ package側合格後、意味回答側を全件実行した。
 | 論理一時領域 | `/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T` |
 | 実体一時領域 | `/private/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T` |
 | 実process起動 | 実体パスを使用 |
+| B4 v003正式検査の追加環境条件 | 固定TSXが内部IPC用Unix socketを作成できる環境を要する。socketは外部ネットワーク接続を伴わない。2026-07-25の承認済みネイティブ権限実行でもT082・T083は終了code 2のままで、この能力の成立は未確認 |
 
 productionの主要3ファイルは最終限定修正で変更していない。
 
