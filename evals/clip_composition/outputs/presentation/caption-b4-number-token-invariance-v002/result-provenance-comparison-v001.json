@@ -1,0 +1,102 @@
+{
+  "schemaVersion": "presentation-caption-result-provenance-invariance-comparison-v001",
+  "sourceObservationBindings": {
+    "before": {
+      "path": "evals/clip_composition/outputs/presentation/caption-b4-number-token-invariance-v002/before.json",
+      "expectedFileSha256": "885775b57e57c0f86755eae2259cdb5912877db58cf1bf6409acafb784d35ac0",
+      "startFileSha256": "885775b57e57c0f86755eae2259cdb5912877db58cf1bf6409acafb784d35ac0",
+      "endFileSha256": "885775b57e57c0f86755eae2259cdb5912877db58cf1bf6409acafb784d35ac0",
+      "unchanged": true
+    },
+    "after": {
+      "path": "evals/clip_composition/outputs/presentation/caption-b4-number-token-invariance-v002/after.json",
+      "expectedFileSha256": "7988633dcba02572bed1237b63bf2ab1a33e9a2074552d942c93b3c7e8719c5e",
+      "startFileSha256": "7988633dcba02572bed1237b63bf2ab1a33e9a2074552d942c93b3c7e8719c5e",
+      "endFileSha256": "7988633dcba02572bed1237b63bf2ab1a33e9a2074552d942c93b3c7e8719c5e",
+      "unchanged": true
+    },
+    "comparison": {
+      "path": "evals/clip_composition/outputs/presentation/caption-b4-number-token-invariance-v002/comparison.json",
+      "expectedFileSha256": "aff2a58d8d8b25464690003d17b9a23a56bd98ebce5ef6a518e5620e61fa7512",
+      "startFileSha256": "aff2a58d8d8b25464690003d17b9a23a56bd98ebce5ef6a518e5620e61fa7512",
+      "endFileSha256": "aff2a58d8d8b25464690003d17b9a23a56bd98ebce5ef6a518e5620e61fa7512",
+      "unchanged": true
+    }
+  },
+  "approvedImplementationChange": {
+    "path": "evals/clip_composition/presentation_caption_semantic_source_package_v001.mjs",
+    "before": {
+      "commit": "9f95e3fa2023d4d9755bdf1e0ab32f7cb163ca80",
+      "expectedFileSha256": "db3b5968207479d8f6849c9995224140b8286844ed1c17b1e75c89ac718bf224",
+      "observedFileSha256": "db3b5968207479d8f6849c9995224140b8286844ed1c17b1e75c89ac718bf224",
+      "matches": true
+    },
+    "after": {
+      "commit": "171751885fc75943b392c566309062916118ba98",
+      "expectedFileSha256": "c81ef4b9829d8bc3d5bc84a048eaae6886caec90cbb77b1635af916512cdd1b6",
+      "observedFileSha256": "c81ef4b9829d8bc3d5bc84a048eaae6886caec90cbb77b1635af916512cdd1b6",
+      "matches": true
+    }
+  },
+  "resultLayer": {
+    "b3StrictJsonUnchanged": true,
+    "externalDisplaySlotsUnchanged": true,
+    "firstFiveBuiltArtifactsUnchanged": true,
+    "fixedHashProbeUnchanged": true,
+    "status": "passed"
+  },
+  "provenanceLayer": {
+    "beforeReconstructionMatchesObservedHashes": true,
+    "afterReconstructionMatchesObservedHashes": true,
+    "approvedSourceHashTransitionMatches": true,
+    "changedLeafPaths": [
+      {
+        "artifact": "package-manifest.json",
+        "path": "$.packageJobBinding.fileSha256"
+      },
+      {
+        "artifact": "package-manifest.json",
+        "path": "$.implementationBinding.files[0].fileSha256"
+      },
+      {
+        "artifact": "package-validation-report.json",
+        "path": "$.jobBinding.fileSha256"
+      },
+      {
+        "artifact": "package-validation-report.json",
+        "path": "$.manifestBinding.fileSha256"
+      },
+      {
+        "artifact": "package-validation-report.json",
+        "path": "$.manifestBinding.canonicalSha256"
+      }
+    ],
+    "expectedChangedLeafPaths": [
+      {
+        "artifact": "package-manifest.json",
+        "path": "$.packageJobBinding.fileSha256"
+      },
+      {
+        "artifact": "package-manifest.json",
+        "path": "$.implementationBinding.files[0].fileSha256"
+      },
+      {
+        "artifact": "package-validation-report.json",
+        "path": "$.jobBinding.fileSha256"
+      },
+      {
+        "artifact": "package-validation-report.json",
+        "path": "$.manifestBinding.fileSha256"
+      },
+      {
+        "artifact": "package-validation-report.json",
+        "path": "$.manifestBinding.canonicalSha256"
+      }
+    ],
+    "unexpectedChangedLeafPaths": [],
+    "manifestDerivedHashesMatch": true,
+    "validationReportDerivedHashesMatch": true,
+    "status": "passed"
+  },
+  "status": "passed"
+}
