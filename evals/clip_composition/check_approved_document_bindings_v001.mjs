@@ -48,6 +48,22 @@ export const PRESENTATION_CAPTION_B4_APPROVED_DOCUMENT_BINDINGS_V001 = Object.fr
     byteLength: 22516,
     fileSha256: 'f07f5b2daef10c5bee2f20e6b6d7cf7cfddb600c445d69a41434c19f8a6e81c2',
   }),
+  Object.freeze({
+    path: 'evals/clip_composition/reports/presentation/presentation-candidate13-caption-gate-b4-number-token-invariance-comparison-stop-report-20260725-v001.md',
+    approvalCommit: '171751885fc75943b392c566309062916118ba98',
+    gitMode: '100644',
+    gitBlobObjectId: '3f1341fe2065db878855042ec10b85ae94e2fbc5',
+    byteLength: 6521,
+    fileSha256: 'd49f6ce300fa7a6ab6b606e2551c217c53e9a9fee739e0bdeddb99e34eef6486',
+  }),
+  Object.freeze({
+    path: 'evals/clip_composition/reports/presentation/presentation-candidate13-caption-gate-b4-result-provenance-invariance-comparison-contract-addendum-20260725-v001.md',
+    approvalCommit: 'ed8d1f64ade33f58c18d94ed910ef5903afb6efb',
+    gitMode: '100644',
+    gitBlobObjectId: 'a6db32d68c61f372d3a46b5163cf2026a4f24d20',
+    byteLength: 19781,
+    fileSha256: 'e3eca7b7067773d54bdfe2efc44c740de8b4b7d10faf14148f29df1554acd4de',
+  }),
 ]);
 
 const sha256 = (bytes) => createHash('sha256').update(bytes).digest('hex');
