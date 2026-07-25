@@ -3,7 +3,8 @@
 - 日付: 2026-07-25
 - 対象: B4正式合成検査 T082・T083
 - 種別: 承認済み契約追補に基づく版付き実装修正設計
-- 状態: **設計提示。実装承認待ちで停止**
+- 人間承認: **kawafmm、2026-07-25**
+- 状態: **設計承認済み。実装preflightで数値token表記の未固定を検出し、コードを基準状態へ戻して停止**
 - コード変更: なし
 - 検査再実行: なし
 - Gemini、正式表示計画、描画: なし
@@ -11,6 +12,14 @@
 - 正本:
   - `presentation-candidate13-caption-gate-b4-native-fatal-layout-number-boundary-diagnosis-and-contract-addendum-20260725-v001.md`
   - 2026-07-25 kawafmm承認
+
+### 承認後の停止記録
+
+- 実装着手時に、§8.1検査12の「指数表記は許可幾何fieldだけ受理し、整数fieldでは拒否」を、既存の厳密JSON解析処理が実現できないことを静的に検出した。
+- 既存の有限数値profileは`1e0`を数値`1`へ復号するが、復号後のexact schema検査には元token表記が残らない。したがって整数fieldへ入った`1e0`を、通常の`1`と区別できない。
+- path別の数値token規則を厳密JSON解析処理へ追加するか、指数表記規則を変更するかは本設計に未定義である。独自判断を避け、途中コードを全て基準状態へ戻した。
+- 正本停止報告:
+  `presentation-candidate13-caption-gate-b4-finite-number-decoder-implementation-preflight-stop-report-20260725-v001.md`
 
 ## 1. 目的
 
