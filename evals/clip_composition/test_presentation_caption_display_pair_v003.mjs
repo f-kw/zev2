@@ -1147,7 +1147,7 @@ const implementationBinding = (runnerPath) => {
 };
 
 const makeFormalJobFixture = async (suffix) => {
-  const {builtContext, compiler, rawValue, reportValue} = await actualBuilderFixture();
+  const {builtContext, rawValue} = await actualBuilderFixture();
   mkdirSync(repositoryAbsolute(TESTDATA_ROOT), {recursive: true});
   mkdirSync(repositoryAbsolute(JOB_ROOT), {recursive: true});
   mkdirSync(repositoryAbsolute(OUTPUT_PARENT), {recursive: true});
@@ -1157,7 +1157,32 @@ const makeFormalJobFixture = async (suffix) => {
   const semanticJob = {schemaVersion: 'synthetic-semantic-job-v001'};
   writeFileSync(repositoryAbsolute(semanticJobPath), formalBytes(semanticJob));
   writeFileSync(repositoryAbsolute(semanticRawPath), formalBytes(rawValue));
-  writeFileSync(repositoryAbsolute(semanticReportPath), formalBytes(reportValue));
+  const formalRawSnapshot = snapshot(
+    semanticRawPath,
+    readFileSync(repositoryAbsolute(semanticRawPath)),
+  );
+  const formalCompiler = buildPresentationCaptionSemanticCompilerInputV001({
+    sourcePackageSnapshots: builtContext.sourcePackageInputs.map((entry) => entry.snapshot),
+    rawSemanticOutputSnapshot: formalRawSnapshot,
+  });
+  assert.equal(formalCompiler.semanticOutputBinding.path, semanticRawPath);
+  assert.equal(
+    formalCompiler.semanticOutputBinding.fileSha256,
+    shaBytes(readFileSync(repositoryAbsolute(semanticRawPath))),
+  );
+  assert.equal(
+    formalCompiler.semanticOutputBinding.canonicalSha256,
+    canonicalSha(rawValue),
+  );
+  const formalReportValue = {
+    status: 'passed',
+    compilerInput: {
+      status: 'generated',
+      canonicalSha256: canonicalSha(formalCompiler),
+      observedByteSha256: shaBytes(formalBytes(formalCompiler)),
+    },
+  };
+  writeFileSync(repositoryAbsolute(semanticReportPath), formalBytes(formalReportValue));
   const pairId = `synthetic-b4-cli-${suffix}`;
   const jobId = `synthetic-b4-cli-${suffix}`;
   const jobPath = `${JOB_ROOT}/${jobId}.json`;
@@ -1187,8 +1212,8 @@ const makeFormalJobFixture = async (suffix) => {
       job: binding(semanticJobPath),
       rawSemanticOutput: binding(semanticRawPath),
       validationReport: binding(semanticReportPath),
-      expectedCompilerInputObservedByteSha256: shaBytes(formalBytes(compiler)),
-      expectedCompilerInputCanonicalSha256: canonicalSha(compiler),
+      expectedCompilerInputObservedByteSha256: shaBytes(formalBytes(formalCompiler)),
+      expectedCompilerInputCanonicalSha256: canonicalSha(formalCompiler),
     },
     retainedSourceBinding: {
       rootPath: RETAINED_ROOT,
@@ -1219,8 +1244,8 @@ const makeFormalJobFixture = async (suffix) => {
       cueCount: 205,
       lineCount: 205,
       timelineSegmentCount: 2,
-      compilerInputObservedByteSha256: shaBytes(formalBytes(compiler)),
-      compilerInputCanonicalSha256: canonicalSha(compiler),
+      compilerInputObservedByteSha256: shaBytes(formalBytes(formalCompiler)),
+      compilerInputCanonicalSha256: canonicalSha(formalCompiler),
     },
     publication: {pairId, formalOutputPath, lockPath, workPath},
     readOnlyGuard: {
