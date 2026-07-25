@@ -26,3 +26,20 @@
 - 詳細: [残存発話の正式抽出](evals/clip_composition/reports/presentation/presentation-candidate13-retained-source-atoms-formal-execution-20260722-v001.md)、[字幕区切り工程の完了](evals/clip_composition/reports/presentation/presentation-gate-a-implementation-completion-report-20260723-v001.md)、[遡及安定点の読み取り監査](evals/clip_composition/reports/presentation/presentation-gate-a-retrospective-stable-tag-audit-20260724-v001.md)。
 - このタグへ撤退すると、次の字幕入力パッケージの実装、検査修正、127/132で安全停止するまでの診断と文書更新に加え、ゲートC以降の接続準備監査と新素材候補の再照合監査を失う。
 - 正式入力パッケージ、Gemini実走、字幕指示書、描画はこの地点でも未実現なので、撤退で失う完成成果物はない。
+
+## 2026-07-25 — `stable/b2-complete-20260725`
+
+- candidate 13の354文字と205個の区切り候補から、Geminiへ渡す前の正式入力を安全に組み立てられるところまで完成した。
+- Geminiが返せるものを行末候補と1〜2行のまとまりへ限定し、元の文字や時刻を作り直させない受け口もできた。
+- 入力作り133件、回答受け入れ155件、既存の境界21件、残存発話50件がすべて合格した。
+- candidate 13の現物を使った読み取りだけの確認も17件すべて通り、正式成果物をまだ書いていないことを確認した。
+- 途中では、検査データ、公開手順、読取方法、パス表現の違いが何度も見つかった。
+- そのたびに部分合格や許容差で押し通さず、原因を記録して人間承認後に全件を最初から流し直した。
+- 最後の問題は、macOSが同じ一時ファイルを二つのパスで表すため、検査が実際の入口を起動できないことだった。
+- 本番処理を変えず、検査が起動するファイルだけを実体のパスへ合わせて解消した。
+- 既に完成していた基礎映像と残存発話の現物も再計算し、記録済みの値と一致した。
+- 詳細: [B2完了報告](evals/clip_composition/reports/presentation/presentation-candidate13-caption-gate-b2-completion-report-20260725-v001.md)。
+- この地点は、正式入力を作る処理と回答を検査する処理までの撤退先である。
+- 正式7ファイル、Geminiの回答、字幕指示書、描画動画はまだ作っていない。
+- 将来このタグへ撤退すると、タグ後に作る正式入力、Gemini実走、表示計画、指示書、描画を失う。
+- 次は正式入力を一件だけ生成し、そこで一度止まる。

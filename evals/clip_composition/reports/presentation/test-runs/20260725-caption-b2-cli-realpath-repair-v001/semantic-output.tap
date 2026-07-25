@@ -1,0 +1,785 @@
+TAP version 13
+# Subtest: semantic coreとrunnerは承認済みpublic exportだけを持つ
+ok 1 - semantic coreとrunnerは承認済みpublic exportだけを持つ
+  ---
+  duration_ms: 1.108292
+  ...
+# Subtest: 公開validator/checkerはthrowing getter・Proxyを外へ漏らさない
+ok 2 - 公開validator/checkerはthrowing getter・Proxyを外へ漏らさない
+  ---
+  duration_ms: 11.752875
+  ...
+# Subtest: production runnerは第二引数なし/nullをrejectせずuntrusted exit 2へ閉じる
+ok 3 - production runnerは第二引数なし/nullをrejectせずuntrusted exit 2へ閉じる
+  ---
+  duration_ms: 0.275334
+  ...
+# Subtest: 合成filesystemはproduction realpathと同じ絶対path正規化を返す
+ok 4 - 合成filesystemはproduction realpathと同じ絶対path正規化を返す
+  ---
+  duration_ms: 113.443
+  ...
+# Subtest: export済みrunnerは合成filesystemとbuilderでcompleteを二pass検査しtrusted reportへ通す
+ok 5 - export済みrunnerは合成filesystemとbuilderでcompleteを二pass検査しtrusted reportへ通す
+  ---
+  duration_ms: 782.865208
+  ...
+# Subtest: production runner本体はabstained回答でbuilderを呼ばずpartial compilerを作らない
+ok 6 - production runner本体はabstained回答でbuilderを呼ばずpartial compilerを作らない
+  ---
+  duration_ms: 681.991417
+  ...
+# Subtest: production runner本体はinvalid回答でbuilderを呼ばずpartial compilerを作らない
+ok 7 - production runner本体はinvalid回答でbuilderを呼ばずpartial compilerを作らない
+  ---
+  duration_ms: 660.67525
+  ...
+# Subtest: compiler pass 1 thrownはrunner本体で停止し元入力を変えない
+ok 8 - compiler pass 1 thrownはrunner本体で停止し元入力を変えない
+  ---
+  duration_ms: 692.139375
+  ...
+# Subtest: compiler pass 1 invalid-returnはrunner本体で停止し元入力を変えない
+ok 9 - compiler pass 1 invalid-returnはrunner本体で停止し元入力を変えない
+  ---
+  duration_ms: 675.944083
+  ...
+# Subtest: compiler pass 1 input-mutatedはrunner本体で停止し元入力を変えない
+ok 10 - compiler pass 1 input-mutatedはrunner本体で停止し元入力を変えない
+  ---
+  duration_ms: 673.057708
+  ...
+# Subtest: compiler pass 2 thrownはrunner本体で停止し元入力を変えない
+ok 11 - compiler pass 2 thrownはrunner本体で停止し元入力を変えない
+  ---
+  duration_ms: 687.995375
+  ...
+# Subtest: compiler pass 2 invalid-returnはrunner本体で停止し元入力を変えない
+ok 12 - compiler pass 2 invalid-returnはrunner本体で停止し元入力を変えない
+  ---
+  duration_ms: 672.942334
+  ...
+# Subtest: compiler pass 2 input-mutatedはrunner本体で停止し元入力を変えない
+ok 13 - compiler pass 2 input-mutatedはrunner本体で停止し元入力を変えない
+  ---
+  duration_ms: 669.4525
+  ...
+# Subtest: runnerのcompiler失敗配列はpass 1とpass 2で固定形を分ける
+ok 14 - runnerのcompiler失敗配列はpass 1とpass 2で固定形を分ける
+  ---
+  duration_ms: 1.598041
+  ...
+# Subtest: 完全形は12検査を通り、決定的compilerへ全候補・全atomを一度ずつ戻す
+ok 15 - 完全形は12検査を通り、決定的compilerへ全候補・全atomを一度ずつ戻す
+  ---
+  duration_ms: 8.589958
+  ...
+# Subtest: abstainedは有効でありcompiler四検査だけが適用なしになる
+ok 16 - abstainedは有効でありcompiler四検査だけが適用なしになる
+  ---
+  duration_ms: 8.175292
+  ...
+# Subtest: 中間phaseは先頭6検査だけを評価する
+ok 17 - 中間phaseは先頭6検査だけを評価する
+  ---
+  duration_ms: 6.459417
+  ...
+# Subtest: job schema違反は担当検査一つへだけ帰属する
+ok 18 - job schema違反は担当検査一つへだけ帰属する
+  ---
+  duration_ms: 3.572166
+  ...
+# Subtest: job stability違反は担当検査一つへだけ帰属する
+ok 19 - job stability違反は担当検査一つへだけ帰属する
+  ---
+  duration_ms: 7.923167
+  ...
+# Subtest: implementation hash違反は担当検査一つへだけ帰属する
+ok 20 - implementation hash違反は担当検査一つへだけ帰属する
+  ---
+  duration_ms: 7.986417
+  ...
+# Subtest: raw path safety違反は担当検査一つへだけ帰属する
+ok 21 - raw path safety違反は担当検査一つへだけ帰属する
+  ---
+  duration_ms: 5.925459
+  ...
+# Subtest: raw hash違反は担当検査一つへだけ帰属する
+ok 22 - raw hash違反は担当検査一つへだけ帰属する
+  ---
+  duration_ms: 7.212666
+  ...
+# Subtest: runtime違反は担当検査一つへだけ帰属する
+ok 23 - runtime違反は担当検査一つへだけ帰属する
+  ---
+  duration_ms: 8.18975
+  ...
+# Subtest: package file set違反は担当検査一つへだけ帰属する
+ok 24 - package file set違反は担当検査一つへだけ帰属する
+  ---
+  duration_ms: 6.466791
+  ...
+# Subtest: package schema違反は担当検査一つへだけ帰属する
+ok 25 - package schema違反は担当検査一つへだけ帰属する
+  ---
+  duration_ms: 5.89675
+  ...
+# Subtest: package strict JSON違反は担当検査一つへだけ帰属する
+ok 26 - package strict JSON違反は担当検査一つへだけ帰属する
+  ---
+  duration_ms: 5.840167
+  ...
+# Subtest: package UTF-8 BOM違反は担当検査一つへだけ帰属する
+ok 27 - package UTF-8 BOM違反は担当検査一つへだけ帰属する
+  ---
+  duration_ms: 7.028875
+  ...
+# Subtest: package binding違反は担当検査一つへだけ帰属する
+ok 28 - package binding違反は担当検査一つへだけ帰属する
+  ---
+  duration_ms: 5.893458
+  ...
+# Subtest: package hash違反は担当検査一つへだけ帰属する
+ok 29 - package hash違反は担当検査一つへだけ帰属する
+  ---
+  duration_ms: 6.596458
+  ...
+# Subtest: implementation import graphはrenderer trust参照fileの実行importを拒否する
+ok 30 - implementation import graphはrenderer trust参照fileの実行importを拒否する
+  ---
+  duration_ms: 7.604708
+  ...
+# Subtest: implementation import graphは許可外local importを拒否する
+ok 31 - implementation import graphは許可外local importを拒否する
+  ---
+  duration_ms: 8.102667
+  ...
+# Subtest: implementation import graphはdynamic importを拒否する
+ok 32 - implementation import graphはdynamic importを拒否する
+  ---
+  duration_ms: 7.435542
+  ...
+# Subtest: implementation import graphはCommonJS requireを拒否する
+ok 33 - implementation import graphはCommonJS requireを拒否する
+  ---
+  duration_ms: 6.414667
+  ...
+# Subtest: implementation import graphはbuiltin allowlist外importを拒否する
+ok 34 - implementation import graphはbuiltin allowlist外importを拒否する
+  ---
+  duration_ms: 7.501292
+  ...
+# Subtest: implementation import graphはmodule-load時file読取を拒否する
+ok 35 - implementation import graphはmodule-load時file読取を拒否する
+  ---
+  duration_ms: 7.597041
+  ...
+# Subtest: module-load file I/O検査は文字列・comment・関数・arrow内のcallを実行扱いしない
+ok 36 - module-load file I/O検査は文字列・comment・関数・arrow内のcallを実行扱いしない
+  ---
+  duration_ms: 6.79525
+  ...
+# Subtest: module-load file I/O検査はtemplate式内で直接実行されるcallを拒否する
+ok 37 - module-load file I/O検査はtemplate式内で直接実行されるcallを拒否する
+  ---
+  duration_ms: 7.332459
+  ...
+# Subtest: module-load file I/O検査はobject初期化で直接実行されるcallを拒否する
+ok 38 - module-load file I/O検査はobject初期化で直接実行されるcallを拒否する
+  ---
+  duration_ms: 7.084583
+  ...
+# Subtest: module-load file I/O検査はconcise arrow IIFE内で直接実行されるcallを拒否する
+ok 39 - module-load file I/O検査はconcise arrow IIFE内で直接実行されるcallを拒否する
+  ---
+  duration_ms: 7.362166
+  ...
+# Subtest: module-load file I/O検査はblock arrow IIFE内で直接実行されるcallを拒否する
+ok 40 - module-load file I/O検査はblock arrow IIFE内で直接実行されるcallを拒否する
+  ---
+  duration_ms: 7.637375
+  ...
+# Subtest: module-load file I/O検査はfunction IIFE内で直接実行されるcallを拒否する
+ok 41 - module-load file I/O検査はfunction IIFE内で直接実行されるcallを拒否する
+  ---
+  duration_ms: 6.280541
+  ...
+# Subtest: semantic R1 scannerは通常member・optional member後の除算を受理する
+ok 42 - semantic R1 scannerは通常member・optional member後の除算を受理する
+  ---
+  duration_ms: 7.154292
+  ...
+# Subtest: semantic R1 scannerはspread三形とspread直後のregexを受理する
+ok 43 - semantic R1 scannerはspread三形とspread直後のregexを受理する
+  ---
+  duration_ms: 7.246375
+  ...
+# Subtest: semantic R1 scannerはregex・comment・string・template raw内の禁止語を受理する
+ok 44 - semantic R1 scannerはregex・comment・string・template raw内の禁止語を受理する
+  ---
+  duration_ms: 6.241291
+  ...
+# Subtest: semantic R1 scannerは固定済み数値五形を受理する
+ok 45 - semantic R1 scannerは固定済み数値五形を受理する
+  ---
+  duration_ms: 8.13575
+  ...
+# Subtest: semantic R1 scannerは制御条件内とstatement開始のregexを受理する
+ok 46 - semantic R1 scannerは制御条件内とstatement開始のregexを受理する
+  ---
+  duration_ms: 7.344125
+  ...
+# Subtest: semantic R1 scannerは通常member経由file I/Oを拒否する
+ok 47 - semantic R1 scannerは通常member経由file I/Oを拒否する
+  ---
+  duration_ms: 6.332167
+  ...
+# Subtest: semantic R1 scannerはoptional member経由file I/Oを拒否する
+ok 48 - semantic R1 scannerはoptional member経由file I/Oを拒否する
+  ---
+  duration_ms: 6.904208
+  ...
+# Subtest: semantic R1 scannerはspread内file I/Oを拒否する
+ok 49 - semantic R1 scannerはspread内file I/Oを拒否する
+  ---
+  duration_ms: 7.604209
+  ...
+# Subtest: semantic R1 scannerはdynamic importを拒否する
+ok 50 - semantic R1 scannerはdynamic importを拒否する
+  ---
+  duration_ms: 7.033083
+  ...
+# Subtest: semantic R1 scannerは関数内dynamic importを拒否する
+ok 51 - semantic R1 scannerは関数内dynamic importを拒否する
+  ---
+  duration_ms: 7.991916
+  ...
+# Subtest: semantic R1 scannerはspread内dynamic importを拒否する
+ok 52 - semantic R1 scannerはspread内dynamic importを拒否する
+  ---
+  duration_ms: 7.588167
+  ...
+# Subtest: semantic R1 scannerはtemplate式内dynamic importを拒否する
+ok 53 - semantic R1 scannerはtemplate式内dynamic importを拒否する
+  ---
+  duration_ms: 7.072875
+  ...
+# Subtest: semantic R1 scannerはproperty名のdynamic importを拒否する
+ok 54 - semantic R1 scannerはproperty名のdynamic importを拒否する
+  ---
+  duration_ms: 7.633667
+  ...
+# Subtest: semantic R1 scannerはCommonJS requireを拒否する
+ok 55 - semantic R1 scannerはCommonJS requireを拒否する
+  ---
+  duration_ms: 7.574167
+  ...
+# Subtest: semantic R1 scannerはarrow内CommonJS requireを拒否する
+ok 56 - semantic R1 scannerはarrow内CommonJS requireを拒否する
+  ---
+  duration_ms: 6.393792
+  ...
+# Subtest: semantic R1 scannerはspread内CommonJS requireを拒否する
+ok 57 - semantic R1 scannerはspread内CommonJS requireを拒否する
+  ---
+  duration_ms: 7.288375
+  ...
+# Subtest: semantic R1 scannerはtemplate式内CommonJS requireを拒否する
+ok 58 - semantic R1 scannerはtemplate式内CommonJS requireを拒否する
+  ---
+  duration_ms: 7.482208
+  ...
+# Subtest: semantic R1 scannerはoptional property名のrequireを拒否する
+ok 59 - semantic R1 scannerはoptional property名のrequireを拒否する
+  ---
+  duration_ms: 6.820041
+  ...
+# Subtest: semantic R1 scannerはmember待機中のslashを拒否する
+ok 60 - semantic R1 scannerはmember待機中のslashを拒否する
+  ---
+  duration_ms: 7.281417
+  ...
+# Subtest: semantic R1 scannerは二個のdotを拒否する
+ok 61 - semantic R1 scannerは二個のdotを拒否する
+  ---
+  duration_ms: 7.115625
+  ...
+# Subtest: semantic R1 scannerは四個のdotを拒否する
+ok 62 - semantic R1 scannerは四個のdotを拒否する
+  ---
+  duration_ms: 6.858917
+  ...
+# Subtest: semantic R1 scannerは未完のdotを拒否する
+ok 63 - semantic R1 scannerは未完のdotを拒否する
+  ---
+  duration_ms: 7.661458
+  ...
+# Subtest: semantic R1 scannerは未完のoptional dotを拒否する
+ok 64 - semantic R1 scannerは未完のoptional dotを拒否する
+  ---
+  duration_ms: 6.703541
+  ...
+# Subtest: semantic R1 scannerは未完のspreadを拒否する
+ok 65 - semantic R1 scannerは未完のspreadを拒否する
+  ---
+  duration_ms: 7.455708
+  ...
+# Subtest: semantic R1 scannerは先頭dot小数を拒否する
+ok 66 - semantic R1 scannerは先頭dot小数を拒否する
+  ---
+  duration_ms: 7.416291
+  ...
+# Subtest: semantic R1 scannerは末尾dot数値を拒否する
+ok 67 - semantic R1 scannerは末尾dot数値を拒否する
+  ---
+  duration_ms: 7.216541
+  ...
+# Subtest: semantic R1 scannerは二個dot数値memberを拒否する
+ok 68 - semantic R1 scannerは二個dot数値memberを拒否する
+  ---
+  duration_ms: 7.384208
+  ...
+# Subtest: semantic R1 scannerは指数表記を拒否する
+ok 69 - semantic R1 scannerは指数表記を拒否する
+  ---
+  duration_ms: 7.255084
+  ...
+# Subtest: semantic R1 scannerは二進数表記を拒否する
+ok 70 - semantic R1 scannerは二進数表記を拒否する
+  ---
+  duration_ms: 6.263042
+  ...
+# Subtest: semantic R1 scannerはseparator付き数値を拒否する
+ok 71 - semantic R1 scannerはseparator付き数値を拒否する
+  ---
+  duration_ms: 7.34125
+  ...
+# Subtest: semantic R1 scannerはoptional callを拒否する
+ok 72 - semantic R1 scannerはoptional callを拒否する
+  ---
+  duration_ms: 8.000083
+  ...
+# Subtest: semantic R1 scannerはoptional private nameを拒否する
+ok 73 - semantic R1 scannerはoptional private nameを拒否する
+  ---
+  duration_ms: 6.943625
+  ...
+# Subtest: semantic R1 scannerはoptional tagged templateを拒否する
+ok 74 - semantic R1 scannerはoptional tagged templateを拒否する
+  ---
+  duration_ms: 7.275125
+  ...
+# Subtest: semantic R1 scannerはreturn直後spreadを拒否する
+ok 75 - semantic R1 scannerはreturn直後spreadを拒否する
+  ---
+  duration_ms: 6.895125
+  ...
+# Subtest: semantic R1 scannerは二項演算子直後spreadを拒否する
+ok 76 - semantic R1 scannerは二項演算子直後spreadを拒否する
+  ---
+  duration_ms: 7.04575
+  ...
+# Subtest: semantic R1 scannerは未閉鎖regexを拒否する
+ok 77 - semantic R1 scannerは未閉鎖regexを拒否する
+  ---
+  duration_ms: 7.7195
+  ...
+# Subtest: semantic R1 scannerは未閉鎖regex classを拒否する
+ok 78 - semantic R1 scannerは未閉鎖regex classを拒否する
+  ---
+  duration_ms: 7.382708
+  ...
+# Subtest: semantic R1 scannerは括弧不一致を拒否する
+ok 79 - semantic R1 scannerは括弧不一致を拒否する
+  ---
+  duration_ms: 6.993583
+  ...
+# Subtest: semantic R1 scannerは閉じbrace直後slashを拒否する
+ok 80 - semantic R1 scannerは閉じbrace直後slashを拒否する
+  ---
+  duration_ms: 7.34825
+  ...
+# Subtest: embedded Gate A reportは全domain schemaと固定配列順を再検査する
+ok 81 - embedded Gate A reportは全domain schemaと固定配列順を再検査する
+  ---
+  duration_ms: 5.468666
+  ...
+# Subtest: embedded Gate A reportは正本のcanonical field順以外を拒否する
+ok 82 - embedded Gate A reportは正本のcanonical field順以外を拒否する
+  ---
+  duration_ms: 6.800625
+  ...
+# Subtest: embedded Gate A report内部の相互対応不一致はschemaでなくbindingへ分離する
+ok 83 - embedded Gate A report内部の相互対応不一致はschemaでなくbindingへ分離する
+  ---
+  duration_ms: 5.431541
+  ...
+# Subtest: embedded Gate A report内部の証拠hash不一致はPACKAGE_HASH_MISMATCHへ分離する
+ok 84 - embedded Gate A report内部の証拠hash不一致はPACKAGE_HASH_MISMATCHへ分離する
+  ---
+  duration_ms: 6.362167
+  ...
+# Subtest: package reportのcontainer別source atom数はpackage内容から再導出して照合する
+ok 85 - package reportのcontainer別source atom数はpackage内容から再導出して照合する
+  ---
+  duration_ms: 6.051916
+  ...
+# Subtest: package reportのcontainer別boundary候補数はpackage内容から再導出して照合する
+ok 86 - package reportのcontainer別boundary候補数はpackage内容から再導出して照合する
+  ---
+  duration_ms: 6.831333
+  ...
+# Subtest: package reportの候補の最大論理幅はpackage内容から再導出して照合する
+ok 87 - package reportの候補の最大論理幅はpackage内容から再導出して照合する
+  ---
+  duration_ms: 6.346125
+  ...
+# Subtest: package内自己整合: report jobとmanifest package jobの不一致をbinding違反にする
+ok 88 - package内自己整合: report jobとmanifest package jobの不一致をbinding違反にする
+  ---
+  duration_ms: 5.978708
+  ...
+# Subtest: package内自己整合: evidence artifactとmanifest/job artifactの不一致をbinding違反にする
+ok 89 - package内自己整合: evidence artifactとmanifest/job artifactの不一致をbinding違反にする
+  ---
+  duration_ms: 6.168625
+  ...
+# Subtest: package内自己整合: evidence sourceとexpansion sourceの不一致をbinding違反にする
+ok 90 - package内自己整合: evidence sourceとexpansion sourceの不一致をbinding違反にする
+  ---
+  duration_ms: 6.023042
+  ...
+# Subtest: package内自己整合: embedded Gate A jobとmanifest Gate A jobの不一致をbinding違反にする
+ok 91 - package内自己整合: embedded Gate A jobとmanifest Gate A jobの不一致をbinding違反にする
+  ---
+  duration_ms: 6.67975
+  ...
+# Subtest: package内自己整合: manifest runtimeとevidence runtimeの不一致をbinding違反にする
+ok 92 - package内自己整合: manifest runtimeとevidence runtimeの不一致をbinding違反にする
+  ---
+  duration_ms: 5.993708
+  ...
+# Subtest: package内自己整合: manifest package coreとsemantic job package coreの不一致をbinding違反にする
+ok 93 - package内自己整合: manifest package coreとsemantic job package coreの不一致をbinding違反にする
+  ---
+  duration_ms: 6.009792
+  ...
+# Subtest: package内自己整合: manifest外部入力とwidth policyの不一致をbinding違反にする
+ok 94 - package内自己整合: manifest外部入力とwidth policyの不一致をbinding違反にする
+  ---
+  duration_ms: 5.381916
+  ...
+# Subtest: package内自己整合: text layoutとsemantic dependencyの不一致をbinding違反にする
+ok 95 - package内自己整合: text layoutとsemantic dependencyの不一致をbinding違反にする
+  ---
+  duration_ms: 6.532208
+  ...
+# Subtest: package内自己整合: leakage width由来とexpansion width由来の不一致をbinding違反にする
+ok 96 - package内自己整合: leakage width由来とexpansion width由来の不一致をbinding違反にする
+  ---
+  duration_ms: 5.933541
+  ...
+# Subtest: bytesの意味出力違反を機械検出する
+ok 97 - bytesの意味出力違反を機械検出する
+  ---
+  duration_ms: 6.698334
+  ...
+# Subtest: UTF-8 BOM bytesの意味出力違反を機械検出する
+ok 98 - UTF-8 BOM bytesの意味出力違反を機械検出する
+  ---
+  duration_ms: 6.56725
+  ...
+# Subtest: schemaの意味出力違反を機械検出する
+ok 99 - schemaの意味出力違反を機械検出する
+  ---
+  duration_ms: 5.498625
+  ...
+# Subtest: forbidden fieldの意味出力違反を機械検出する
+ok 100 - forbidden fieldの意味出力違反を機械検出する
+  ---
+  duration_ms: 6.372125
+  ...
+# Subtest: container setの意味出力違反を機械検出する
+ok 101 - container setの意味出力違反を機械検出する
+  ---
+  duration_ms: 5.236458
+  ...
+# Subtest: container orderの意味出力違反を機械検出する
+ok 102 - container orderの意味出力違反を機械検出する
+  ---
+  duration_ms: 6.299083
+  ...
+# Subtest: groupの意味出力違反を機械検出する
+ok 103 - groupの意味出力違反を機械検出する
+  ---
+  duration_ms: 5.400875
+  ...
+# Subtest: line countの意味出力違反を機械検出する
+ok 104 - line countの意味出力違反を機械検出する
+  ---
+  duration_ms: 6.578292
+  ...
+# Subtest: unknown boundaryの意味出力違反を機械検出する
+ok 105 - unknown boundaryの意味出力違反を機械検出する
+  ---
+  duration_ms: 5.659583
+  ...
+# Subtest: cross-container boundaryの意味出力違反を機械検出する
+ok 106 - cross-container boundaryの意味出力違反を機械検出する
+  ---
+  duration_ms: 6.528375
+  ...
+# Subtest: duplicate boundaryの意味出力違反を機械検出する
+ok 107 - duplicate boundaryの意味出力違反を機械検出する
+  ---
+  duration_ms: 6.919333
+  ...
+# Subtest: boundary orderの意味出力違反を機械検出する
+ok 108 - boundary orderの意味出力違反を機械検出する
+  ---
+  duration_ms: 5.950959
+  ...
+# Subtest: container endの意味出力違反を機械検出する
+ok 109 - container endの意味出力違反を機械検出する
+  ---
+  duration_ms: 6.5575
+  ...
+# Subtest: line widthの意味出力違反を機械検出する
+ok 110 - line widthの意味出力違反を機械検出する
+  ---
+  duration_ms: 5.429583
+  ...
+# Subtest: container ID重複は集合違反として独立検出する
+ok 111 - container ID重複は集合違反として独立検出する
+  ---
+  duration_ms: 6.449333
+  ...
+# Subtest: 0行のmeaning groupを行数違反として検出する
+ok 112 - 0行のmeaning groupを行数違反として検出する
+  ---
+  duration_ms: 6.075458
+  ...
+# Subtest: 3行のmeaning groupを行数違反として検出する
+ok 113 - 3行のmeaning groupを行数違反として検出する
+  ---
+  duration_ms: 6.624416
+  ...
+# Subtest: 意味出力の禁止field textを個別に拒否する
+ok 114 - 意味出力の禁止field textを個別に拒否する
+  ---
+  duration_ms: 5.43775
+  ...
+# Subtest: 意味出力の禁止field startMsを個別に拒否する
+ok 115 - 意味出力の禁止field startMsを個別に拒否する
+  ---
+  duration_ms: 6.689208
+  ...
+# Subtest: 意味出力の禁止field reasonを個別に拒否する
+ok 116 - 意味出力の禁止field reasonを個別に拒否する
+  ---
+  duration_ms: 6.408125
+  ...
+# Subtest: 意味出力の禁止field scoreを個別に拒否する
+ok 117 - 意味出力の禁止field scoreを個別に拒否する
+  ---
+  duration_ms: 6.248125
+  ...
+# Subtest: 意味出力の禁止field idを個別に拒否する
+ok 118 - 意味出力の禁止field idを個別に拒否する
+  ---
+  duration_ms: 6.876667
+  ...
+# Subtest: complete/abstainedのexact union: complete missing containersを拒否する
+ok 119 - complete/abstainedのexact union: complete missing containersを拒否する
+  ---
+  duration_ms: 5.846
+  ...
+# Subtest: complete/abstainedのexact union: complete extra fieldを拒否する
+ok 120 - complete/abstainedのexact union: complete extra fieldを拒否する
+  ---
+  duration_ms: 6.256041
+  ...
+# Subtest: complete/abstainedのexact union: abstained missing statusを拒否する
+ok 121 - complete/abstainedのexact union: abstained missing statusを拒否する
+  ---
+  duration_ms: 5.2285
+  ...
+# Subtest: complete/abstainedのexact union: abstained extra containersを拒否する
+ok 122 - complete/abstainedのexact union: abstained extra containersを拒否する
+  ---
+  duration_ms: 6.255458
+  ...
+# Subtest: invalid意味回答ではcompilerの部分成果を一切受け取らない
+ok 123 - invalid意味回答ではcompilerの部分成果を一切受け取らない
+  ---
+  duration_ms: 5.781458
+  ...
+# Subtest: container順序だけの入替えは順序違反だけを発火し候補所有者違反を併発しない
+ok 124 - container順序だけの入替えは順序違反だけを発火し候補所有者違反を併発しない
+  ---
+  duration_ms: 6.529875
+  ...
+# Subtest: unknown fieldと独立したroot/container/group scaffold違反を併発する
+ok 125 - unknown fieldと独立したroot/container/group scaffold違反を併発する
+  ---
+  duration_ms: 17.998375
+  ...
+# Subtest: unknown field単独はschema/group違反を重ねない
+ok 126 - unknown field単独はschema/group違反を重ねない
+  ---
+  duration_ms: 6.117416
+  ...
+# Subtest: candidate missingの展開違反は全line走査から検出される
+ok 127 - candidate missingの展開違反は全line走査から検出される
+  ---
+  duration_ms: 7.913583
+  ...
+# Subtest: candidate duplicateの展開違反は全line走査から検出される
+ok 128 - candidate duplicateの展開違反は全line走査から検出される
+  ---
+  duration_ms: 7.203542
+  ...
+# Subtest: candidate orderの展開違反は全line走査から検出される
+ok 129 - candidate orderの展開違反は全line走査から検出される
+  ---
+  duration_ms: 6.682459
+  ...
+# Subtest: atom missingの展開違反は全line走査から検出される
+ok 130 - atom missingの展開違反は全line走査から検出される
+  ---
+  duration_ms: 7.567333
+  ...
+# Subtest: atom duplicateの展開違反は全line走査から検出される
+ok 131 - atom duplicateの展開違反は全line走査から検出される
+  ---
+  duration_ms: 7.975417
+  ...
+# Subtest: atom orderの展開違反は全line走査から検出される
+ok 132 - atom orderの展開違反は全line走査から検出される
+  ---
+  duration_ms: 7.150584
+  ...
+# Subtest: container crossの展開違反は全line走査から検出される
+ok 133 - container crossの展開違反は全line走査から検出される
+  ---
+  duration_ms: 7.867791
+  ...
+# Subtest: textの展開違反は全line走査から検出される
+ok 134 - textの展開違反は全line走査から検出される
+  ---
+  duration_ms: 7.290625
+  ...
+# Subtest: anchorの展開違反は全line走査から検出される
+ok 135 - anchorの展開違反は全line走査から検出される
+  ---
+  duration_ms: 7.652458
+  ...
+# Subtest: compiler schema違反を展開検査へ推測せず拒否する
+ok 136 - compiler schema違反を展開検査へ推測せず拒否する
+  ---
+  duration_ms: 10.719667
+  ...
+# Subtest: compiler binding違反を検出する
+ok 137 - compiler binding違反を検出する
+  ---
+  duration_ms: 7.394416
+  ...
+# Subtest: compiler build失敗をvalid abstainedと混同しない
+ok 138 - compiler build失敗をvalid abstainedと混同しない
+  ---
+  duration_ms: 5.306333
+  ...
+# Subtest: 二passのbyte差を非決定性として検出する
+ok 139 - 二passのbyte差を非決定性として検出する
+  ---
+  duration_ms: 7.601625
+  ...
+# Subtest: 監視投影・再読取・書込観測を一つのread-only契約として検査する
+ok 140 - 監視投影・再読取・書込観測を一つのread-only契約として検査する
+  ---
+  duration_ms: 7.301125
+  ...
+# Subtest: semantic validation report validatorは全root fieldを生contextから再導出する
+ok 141 - semantic validation report validatorは全root fieldを生contextから再導出する
+  ---
+  duration_ms: 36.720542
+  ...
+# Subtest: abstained reportはexit 1かつ投影・compiler hashを載せない
+ok 142 - abstained reportはexit 1かつ投影・compiler hashを載せない
+  ---
+  duration_ms: 10.698875
+  ...
+# Subtest: production filesystem adapterは読み取り専用5入口だけを公開する
+ok 143 - production filesystem adapterは読み取り専用5入口だけを公開する
+  ---
+  duration_ms: 0.136291
+  ...
+# Subtest: semantic production読取handleは固定3入口・同期one-use・AsyncIterableで同一内容を返す
+ok 144 - semantic production読取handleは固定3入口・同期one-use・AsyncIterableで同一内容を返す
+  ---
+  duration_ms: 2.668917
+  ...
+# Subtest: R3:semanticは空fileを0 chunkで受けone・multi・unevenでも同じhash/countとreportになる
+ok 145 - R3:semanticは空fileを0 chunkで受けone・multi・unevenでも同じhash/countとreportになる
+  ---
+  duration_ms: 1978.413
+  ...
+# Subtest: R3:semantic chunk transport不正はexit 2かつpartial reportなしへ閉じる
+ok 146 - R3:semantic chunk transport不正はexit 2かつpartial reportなしへ閉じる
+  ---
+  duration_ms: 840.012125
+  ...
+# Subtest: CLIは位置引数不成立を固定diagnosticとexit 2で返す
+ok 147 - CLIは位置引数不成立を固定diagnosticとexit 2で返す
+  ---
+  duration_ms: 0.252583
+  ...
+# Subtest: CLIはstream write例外もrejectせずexit 2へ閉じる
+ok 148 - CLIはstream write例外もrejectせずexit 2へ閉じる
+  ---
+  duration_ms: 0.072709
+  ...
+# Subtest: production CLI実processはtrusted 0/1とusage 2をstdout/stderrへ排他的に出す
+ok 149 - production CLI実processはtrusted 0/1とusage 2をstdout/stderrへ排他的に出す
+  ---
+  duration_ms: 1433.975417
+  ...
+# Subtest: production CLIにadapter・root・期待値の注入口がなくrunnerは同じcoreを呼ぶ
+ok 150 - production CLIにadapter・root・期待値の注入口がなくrunnerは同じcoreを呼ぶ
+  ---
+  duration_ms: 1.0455
+  ...
+# Subtest: semantic coreはstrict JSON・formal・canonical・hash・57 code列をpackage coreだけから使う
+ok 151 - semantic coreはstrict JSON・formal・canonical・hash・57 code列をpackage coreだけから使う
+  ---
+  duration_ms: 0.751208
+  ...
+# Subtest: B1実行import graphは実8 fileのstatic builtin集合とlocal辺へ完全一致する
+ok 152 - B1実行import graphは実8 fileのstatic builtin集合とlocal辺へ完全一致する
+  ---
+  duration_ms: 3.081375
+  ...
+# Subtest: packageとsemanticのR1 scanner正本・実経路・限定hashbang表は同期する
+ok 153 - packageとsemanticのR1 scanner正本・実経路・限定hashbang表は同期する
+  ---
+  duration_ms: 168.732917
+  ...
+# Subtest: productionのmodule-load file I/O検査を実際のsemantic実装7 fileへ適用する
+ok 154 - productionのmodule-load file I/O検査を実際のsemantic実装7 fileへ適用する
+  ---
+  duration_ms: 70.178708
+  ...
+# Subtest: semantic checkerの共有担当を含むcode×check観測集合と57 code partitionは完全一致する
+ok 155 - semantic checkerの共有担当を含むcode×check観測集合と57 code partitionは完全一致する
+  ---
+  duration_ms: 0.210167
+  ...
+1..155
+# tests 155
+# suites 0
+# pass 155
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 11825.728208

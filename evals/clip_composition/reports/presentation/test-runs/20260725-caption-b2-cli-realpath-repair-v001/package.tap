@@ -1,0 +1,675 @@
+TAP version 13
+# Subtest: package coreの公開入口と違反コードは承認済み集合だけである
+ok 1 - package coreの公開入口と違反コードは承認済み集合だけである
+  ---
+  duration_ms: 1.108791
+  ...
+# Subtest: package runnerの公開入口は承認済み4件だけである
+ok 2 - package runnerの公開入口は承認済み4件だけである
+  ---
+  duration_ms: 0.196458
+  ...
+# Subtest: package production読取handleは固定3入口・同期one-use・AsyncIterableで同一内容を返す
+ok 3 - package production読取handleは固定3入口・同期one-use・AsyncIterableで同一内容を返す
+  ---
+  duration_ms: 9.744125
+  ...
+# Subtest: R3:3.38GB実fileのchunk hash/countは独立helperと完全一致し全byteを保持しない
+ok 4 - R3:3.38GB実fileのchunk hash/countは独立helperと完全一致し全byteを保持しない
+  ---
+  duration_ms: 4629.859833
+  ...
+# Subtest: strict JSONは適法なescapeと補助平面文字を無変更で往復する
+ok 5 - strict JSONは適法なescapeと補助平面文字を無変更で往復する
+  ---
+  duration_ms: 1.23125
+  ...
+# Subtest: strict JSONは不正UTF-8を拒否する
+ok 6 - strict JSONは不正UTF-8を拒否する
+  ---
+  duration_ms: 0.067666
+  ...
+# Subtest: strict JSONはBOMを拒否する
+ok 7 - strict JSONはBOMを拒否する
+  ---
+  duration_ms: 0.046875
+  ...
+# Subtest: strict JSONは構文不成立を拒否する
+ok 8 - strict JSONは構文不成立を拒否する
+  ---
+  duration_ms: 0.18525
+  ...
+# Subtest: strict JSONは後続文字を拒否する
+ok 9 - strict JSONは後続文字を拒否する
+  ---
+  duration_ms: 0.053041
+  ...
+# Subtest: strict JSONは複数JSON値を拒否する
+ok 10 - strict JSONは複数JSON値を拒否する
+  ---
+  duration_ms: 0.039625
+  ...
+# Subtest: strict JSONは重複keyを拒否する
+ok 11 - strict JSONは重複keyを拒否する
+  ---
+  duration_ms: 0.206542
+  ...
+# Subtest: strict JSONは小数tokenを拒否する
+ok 12 - strict JSONは小数tokenを拒否する
+  ---
+  duration_ms: 0.1495
+  ...
+# Subtest: strict JSONは指数tokenを拒否する
+ok 13 - strict JSONは指数tokenを拒否する
+  ---
+  duration_ms: 0.188583
+  ...
+# Subtest: strict JSONは巨大指数を拒否する
+ok 14 - strict JSONは巨大指数を拒否する
+  ---
+  duration_ms: 0.0605
+  ...
+# Subtest: strict JSONは負のゼロを拒否する
+ok 15 - strict JSONは負のゼロを拒否する
+  ---
+  duration_ms: 0.101416
+  ...
+# Subtest: strict JSONは孤立surrogateを拒否する
+ok 16 - strict JSONは孤立surrogateを拒否する
+  ---
+  duration_ms: 0.070834
+  ...
+# Subtest: strict JSONはcode fenceを拒否する
+ok 17 - strict JSONはcode fenceを拒否する
+  ---
+  duration_ms: 0.034875
+  ...
+# Subtest: strict decodeはBuffer以外を不正引数としてthrowせず拒否する
+ok 18 - strict decodeはBuffer以外を不正引数としてthrowせず拒否する
+  ---
+  duration_ms: 0.210792
+  ...
+# Subtest: strict in-memory検査はJSON正式値だけを受理する
+ok 19 - strict in-memory検査はJSON正式値だけを受理する
+  ---
+  duration_ms: 0.130209
+  ...
+# Subtest: strict in-memory検査はundefinedを拒否する
+ok 20 - strict in-memory検査はundefinedを拒否する
+  ---
+  duration_ms: 0.138416
+  ...
+# Subtest: strict in-memory検査はfunctionを拒否する
+ok 21 - strict in-memory検査はfunctionを拒否する
+  ---
+  duration_ms: 0.035167
+  ...
+# Subtest: strict in-memory検査はsymbolを拒否する
+ok 22 - strict in-memory検査はsymbolを拒否する
+  ---
+  duration_ms: 0.030375
+  ...
+# Subtest: strict in-memory検査はBigIntを拒否する
+ok 23 - strict in-memory検査はBigIntを拒否する
+  ---
+  duration_ms: 0.082709
+  ...
+# Subtest: strict in-memory検査はNaNを拒否する
+ok 24 - strict in-memory検査はNaNを拒否する
+  ---
+  duration_ms: 0.030916
+  ...
+# Subtest: strict in-memory検査はInfinityを拒否する
+ok 25 - strict in-memory検査はInfinityを拒否する
+  ---
+  duration_ms: 0.025792
+  ...
+# Subtest: strict in-memory検査は小数を拒否する
+ok 26 - strict in-memory検査は小数を拒否する
+  ---
+  duration_ms: 0.020666
+  ...
+# Subtest: strict in-memory検査は負のゼロを拒否する
+ok 27 - strict in-memory検査は負のゼロを拒否する
+  ---
+  duration_ms: 0.019542
+  ...
+# Subtest: strict in-memory検査はsafe integer外を拒否する
+ok 28 - strict in-memory検査はsafe integer外を拒否する
+  ---
+  duration_ms: 0.102166
+  ...
+# Subtest: strict in-memory検査はDateを拒否する
+ok 29 - strict in-memory検査はDateを拒否する
+  ---
+  duration_ms: 0.02525
+  ...
+# Subtest: strict in-memory検査はMapを拒否する
+ok 30 - strict in-memory検査はMapを拒否する
+  ---
+  duration_ms: 0.019334
+  ...
+# Subtest: strict in-memory検査は孤立surrogateを拒否する
+ok 31 - strict in-memory検査は孤立surrogateを拒否する
+  ---
+  duration_ms: 0.018708
+  ...
+# Subtest: strict in-memory検査は疎な配列と追加propertyを区別して拒否する
+ok 32 - strict in-memory検査は疎な配列と追加propertyを区別して拒否する
+  ---
+  duration_ms: 0.059416
+  ...
+# Subtest: strict in-memory検査はaccessor・toJSON・symbol key・非列挙fieldを拒否する
+ok 33 - strict in-memory検査はaccessor・toJSON・symbol key・非列挙fieldを拒否する
+  ---
+  duration_ms: 0.067333
+  ...
+# Subtest: strict decodeはrootと入れ子をnull prototypeのown data propertyとして復号する
+ok 34 - strict decodeはrootと入れ子をnull prototypeのown data propertyとして復号する
+  ---
+  duration_ms: 0.152667
+  ...
+# Subtest: strict decodeの一般objectは整数風keyを保持しcanonical化だけがUTF-16順へ並べる
+ok 35 - strict decodeの一般objectは整数風keyを保持しcanonical化だけがUTF-16順へ並べる
+  ---
+  duration_ms: 0.370916
+  ...
+# Subtest: strict in-memory検査は通常objectとnull prototype objectの双方を受理する
+ok 36 - strict in-memory検査は通常objectとnull prototype objectの双方を受理する
+  ---
+  duration_ms: 0.18075
+  ...
+# Subtest: B1所有値と時刻・frame・sampleは小数をbyteでもメモリでも正式化でも拒否する
+ok 37 - B1所有値と時刻・frame・sampleは小数をbyteでもメモリでも正式化でも拒否する
+  ---
+  duration_ms: 0.121875
+  ...
+# Subtest: 正式JSONとcanonical JSONは目的どおり異なるbyteを作りhashできる
+ok 38 - 正式JSONとcanonical JSONは目的どおり異なるbyteを作りhashできる
+  ---
+  duration_ms: 0.292916
+  ...
+# Subtest: Q1:A監視投影入口は不存在preflight jobだけを除外しproductionと同じ読取経路を使う
+ok 39 - Q1:A監視投影入口は不存在preflight jobだけを除外しproductionと同じ読取経路を使う
+  ---
+  duration_ms: 335.394417
+  ...
+# Subtest: Q1:A監視投影入口は許可外path・既存target・追加optionをuntrustedで拒否する
+ok 40 - Q1:A監視投影入口は許可外path・既存target・追加optionをuntrustedで拒否する
+  ---
+  duration_ms: 12.533583
+  ...
+# Subtest: Q1:A監視投影入口はunsupported entryと読取中変化を固定diagnosticで拒否する
+ok 41 - Q1:A監視投影入口はunsupported entryと読取中変化を固定diagnosticで拒否する
+  ---
+  duration_ms: 29.263542
+  ...
+# Subtest: R3:監視投影は空fileを0 chunkで扱いone・multi・uneven chunkでも同じhashになる
+ok 42 - R3:監視投影は空fileを0 chunkで扱いone・multi・uneven chunkでも同じhashになる
+  ---
+  duration_ms: 57.968792
+  ...
+# Subtest: R3:監視投影はopen・不正chunk・短過読・読取後変化・close失敗を同じuntrustedへ閉じる
+ok 43 - R3:監視投影はopen・不正chunk・短過読・読取後変化・close失敗を同じuntrustedへ閉じる
+  ---
+  duration_ms: 111.991667
+  ...
+# Subtest: Q1:A監視投影hashは同じ非空treeを読むproduction runner開始投影と完全一致する
+ok 44 - Q1:A監視投影hashは同じ非空treeを読むproduction runner開始投影と完全一致する
+  ---
+  duration_ms: 2876.76725
+  ...
+# Subtest: 外部表示5 JSONは承認済みfile/canonical hash対を保ちrenderer trustの4係数だけが小数である
+ok 45 - 外部表示5 JSONは承認済みfile/canonical hash対を保ちrenderer trustの4係数だけが小数である
+  ---
+  duration_ms: 14.63175
+  ...
+# Subtest: 正式7成果物とGemini可視入力へ外部表示の小数係数を転記しない
+ok 46 - 正式7成果物とGemini可視入力へ外部表示の小数係数を転記しない
+  ---
+  duration_ms: 20.008542
+  ...
+# Subtest: 外部表示profileはrenderer trustの未承認小数・別値・小数時刻をschema不成立にする
+ok 47 - 外部表示profileはrenderer trustの未承認小数・別値・小数時刻をschema不成立にする
+  ---
+  duration_ms: 938.223666
+  ...
+# Subtest: renderer trust以外の外部JSONでは小数を許可しない
+ok 48 - renderer trust以外の外部JSONでは小数を許可しない
+  ---
+  duration_ms: 315.302041
+  ...
+# Subtest: renderer trustの全layout ruleは型と固定値のexact一致を要求する
+ok 49 - renderer trustの全layout ruleは型と固定値のexact一致を要求する
+  ---
+  duration_ms: 5626.777625
+  ...
+# Subtest: 外部JSONの別字句0.040は意味値が同じでもfile hash不一致を先に返す
+ok 50 - 外部JSONの別字句0.040は意味値が同じでもfile hash不一致を先に返す
+  ---
+  duration_ms: 318.687292
+  ...
+# Subtest: 検査indexのfile hashとcanonical hashを取り違えずbinding値をcanonicalとして照合する
+ok 51 - 検査indexのfile hashとcanonical hashを取り違えずbinding値をcanonicalとして照合する
+  ---
+  duration_ms: 938.072292
+  ...
+# Subtest: preset validation indexのregistryVersionはpreset registry版と一致しなければならない
+ok 52 - preset validation indexのregistryVersionはpreset registry版と一致しなければならない
+  ---
+  duration_ms: 311.305833
+  ...
+# Subtest: job validatorは正本field順の正常jobを受理し最小leaf pathで不成立を返す
+ok 53 - job validatorは正本field順の正常jobを受理し最小leaf pathで不成立を返す
+  ---
+  duration_ms: 12.554708
+  ...
+# Subtest: job投影は境界候補件数が不正な子を親集計へ部分利用しない
+ok 54 - job投影は境界候補件数が不正な子を親集計へ部分利用しない
+  ---
+  duration_ms: 10.562167
+  ...
+# Subtest: job投影は両件数が不正な子について二つの子違反だけを返す
+ok 55 - job投影は両件数が不正な子について二つの子違反だけを返す
+  ---
+  duration_ms: 10.802666
+  ...
+# Subtest: job投影は片側の子不正があっても他方の独立した親不一致を検出する
+ok 56 - job投影は片側の子不正があっても他方の独立した親不一致を検出する
+  ---
+  duration_ms: 10.947792
+  ...
+# Subtest: job投影は境界候補の子不正があっても対応元の親不一致を検出する
+ok 57 - job投影は境界候補の子不正があっても対応元の親不一致を検出する
+  ---
+  duration_ms: 10.813583
+  ...
+# Subtest: job投影は未知fieldを持つ子を二種類の親集計から丸ごと除外する
+ok 58 - job投影は未知fieldを持つ子を二種類の親集計から丸ごと除外する
+  ---
+  duration_ms: 10.665917
+  ...
+# Subtest: job投影はfield順違反の子を除外してもcontainer数の独立検査を維持する
+ok 59 - job投影はfield順違反の子を除外してもcontainer数の独立検査を維持する
+  ---
+  duration_ms: 10.5615
+  ...
+# Subtest: job投影は件数fieldが欠けた子を親集計へ部分利用しない
+ok 60 - job投影は件数fieldが欠けた子を親集計へ部分利用しない
+  ---
+  duration_ms: 10.75875
+  ...
+# Subtest: job投影はshape違反と数値不正が併存する子を子全体の違反に限定する
+ok 61 - job投影はshape違反と数値不正が併存する子を子全体の違反に限定する
+  ---
+  duration_ms: 10.928541
+  ...
+# Subtest: job投影は非objectの子を親集計へ部分利用しない
+ok 62 - job投影は非objectの子を親集計へ部分利用しない
+  ---
+  duration_ms: 11.1725
+  ...
+# Subtest: job投影は全子が有効なとき対応元の親合計不一致を検出する
+ok 63 - job投影は全子が有効なとき対応元の親合計不一致を検出する
+  ---
+  duration_ms: 10.771917
+  ...
+# Subtest: job投影は全子が有効なとき境界候補の親合計不一致を検出する
+ok 64 - job投影は全子が有効なとき境界候補の親合計不一致を検出する
+  ---
+  duration_ms: 10.5225
+  ...
+# Subtest: job投影はcontainer数と配列長の独立検査を維持する
+ok 65 - job投影はcontainer数と配列長の独立検査を維持する
+  ---
+  duration_ms: 10.482542
+  ...
+# Subtest: 公開derive入口はGate A生観測を同一checker経路へ決定的に運び入力を変更しない
+ok 66 - 公開derive入口はGate A生観測を同一checker経路へ決定的に運び入力を変更しない
+  ---
+  duration_ms: 235.520333
+  ...
+# Subtest: package builderは同一snapshotから同一7成果物を作り入力を変更しない
+ok 67 - package builderは同一snapshotから同一7成果物を作り入力を変更しない
+  ---
+  duration_ms: 177.237708
+  ...
+# Subtest: 正常なpure checkerと最終report validatorは読み取り専用preflightを合格にする
+ok 68 - 正常なpure checkerと最終report validatorは読み取り専用preflightを合格にする
+  ---
+  duration_ms: 2814.895375
+  ...
+# Subtest: package前半の違反は正本checkerの担当checkから発火する
+ok 69 - package前半の違反は正本checkerの担当checkから発火する
+  ---
+  duration_ms: 7138.813958
+  ...
+# Subtest: package import graphは関数・block arrow・concise arrow内file I/Oをmodule-load扱いしない
+ok 70 - package import graphは関数・block arrow・concise arrow内file I/Oをmodule-load扱いしない
+  ---
+  duration_ms: 720.82925
+  ...
+# Subtest: package import graphはtemplate式でmodule-load時に実行されるfile I/Oを拒否する
+ok 71 - package import graphはtemplate式でmodule-load時に実行されるfile I/Oを拒否する
+  ---
+  duration_ms: 711.628875
+  ...
+# Subtest: package import graphはobject初期化で直接実行されるfile I/Oを拒否する
+ok 72 - package import graphはobject初期化で直接実行されるfile I/Oを拒否する
+  ---
+  duration_ms: 701.302042
+  ...
+# Subtest: package import graphはmodule-load時に実行されるconcise arrow IIFEを拒否する
+ok 73 - package import graphはmodule-load時に実行されるconcise arrow IIFEを拒否する
+  ---
+  duration_ms: 700.88325
+  ...
+# Subtest: package import graphはmodule-load時に実行されるblock arrow IIFEを拒否する
+ok 74 - package import graphはmodule-load時に実行されるblock arrow IIFEを拒否する
+  ---
+  duration_ms: 694.927583
+  ...
+# Subtest: package import graphはmodule-load時に実行されるfunction IIFEを拒否する
+ok 75 - package import graphはmodule-load時に実行されるfunction IIFEを拒否する
+  ---
+  duration_ms: 700.958292
+  ...
+# Subtest: package R1 scannerは通常member・optional member後の除算を受理する
+ok 76 - package R1 scannerは通常member・optional member後の除算を受理する
+  ---
+  duration_ms: 698.8225
+  ...
+# Subtest: package R1 scannerはspread三形とspread直後のregexを受理する
+ok 77 - package R1 scannerはspread三形とspread直後のregexを受理する
+  ---
+  duration_ms: 716.610375
+  ...
+# Subtest: package R1 scannerはregex・comment・string・template raw内の禁止語を受理する
+ok 78 - package R1 scannerはregex・comment・string・template raw内の禁止語を受理する
+  ---
+  duration_ms: 698.83925
+  ...
+# Subtest: package R1 scannerは固定済み数値五形を受理する
+ok 79 - package R1 scannerは固定済み数値五形を受理する
+  ---
+  duration_ms: 699.172375
+  ...
+# Subtest: package R1 scannerは制御条件内とstatement開始のregexを受理する
+ok 80 - package R1 scannerは制御条件内とstatement開始のregexを受理する
+  ---
+  duration_ms: 720.349459
+  ...
+# Subtest: package R1 scannerは通常member経由file I/Oを拒否する
+ok 81 - package R1 scannerは通常member経由file I/Oを拒否する
+  ---
+  duration_ms: 712.492292
+  ...
+# Subtest: package R1 scannerはoptional member経由file I/Oを拒否する
+ok 82 - package R1 scannerはoptional member経由file I/Oを拒否する
+  ---
+  duration_ms: 724.830458
+  ...
+# Subtest: package R1 scannerはspread内file I/Oを拒否する
+ok 83 - package R1 scannerはspread内file I/Oを拒否する
+  ---
+  duration_ms: 702.574083
+  ...
+# Subtest: package R1 scannerはdynamic importを拒否する
+ok 84 - package R1 scannerはdynamic importを拒否する
+  ---
+  duration_ms: 701.630042
+  ...
+# Subtest: package R1 scannerは関数内dynamic importを拒否する
+ok 85 - package R1 scannerは関数内dynamic importを拒否する
+  ---
+  duration_ms: 700.987042
+  ...
+# Subtest: package R1 scannerはspread内dynamic importを拒否する
+ok 86 - package R1 scannerはspread内dynamic importを拒否する
+  ---
+  duration_ms: 706.860834
+  ...
+# Subtest: package R1 scannerはtemplate式内dynamic importを拒否する
+ok 87 - package R1 scannerはtemplate式内dynamic importを拒否する
+  ---
+  duration_ms: 699.096541
+  ...
+# Subtest: package R1 scannerはproperty名のdynamic importを拒否する
+ok 88 - package R1 scannerはproperty名のdynamic importを拒否する
+  ---
+  duration_ms: 698.686291
+  ...
+# Subtest: package R1 scannerはCommonJS requireを拒否する
+ok 89 - package R1 scannerはCommonJS requireを拒否する
+  ---
+  duration_ms: 699.299333
+  ...
+# Subtest: package R1 scannerはarrow内CommonJS requireを拒否する
+ok 90 - package R1 scannerはarrow内CommonJS requireを拒否する
+  ---
+  duration_ms: 698.459167
+  ...
+# Subtest: package R1 scannerはspread内CommonJS requireを拒否する
+ok 91 - package R1 scannerはspread内CommonJS requireを拒否する
+  ---
+  duration_ms: 698.81175
+  ...
+# Subtest: package R1 scannerはtemplate式内CommonJS requireを拒否する
+ok 92 - package R1 scannerはtemplate式内CommonJS requireを拒否する
+  ---
+  duration_ms: 704.216042
+  ...
+# Subtest: package R1 scannerはoptional property名のrequireを拒否する
+ok 93 - package R1 scannerはoptional property名のrequireを拒否する
+  ---
+  duration_ms: 699.833917
+  ...
+# Subtest: package R1 scannerはmember待機中のslashを拒否する
+ok 94 - package R1 scannerはmember待機中のslashを拒否する
+  ---
+  duration_ms: 698.685833
+  ...
+# Subtest: package R1 scannerは二個のdotを拒否する
+ok 95 - package R1 scannerは二個のdotを拒否する
+  ---
+  duration_ms: 710.06825
+  ...
+# Subtest: package R1 scannerは四個のdotを拒否する
+ok 96 - package R1 scannerは四個のdotを拒否する
+  ---
+  duration_ms: 697.894375
+  ...
+# Subtest: package R1 scannerは未完のdotを拒否する
+ok 97 - package R1 scannerは未完のdotを拒否する
+  ---
+  duration_ms: 713.817333
+  ...
+# Subtest: package R1 scannerは未完のoptional dotを拒否する
+ok 98 - package R1 scannerは未完のoptional dotを拒否する
+  ---
+  duration_ms: 698.833667
+  ...
+# Subtest: package R1 scannerは未完のspreadを拒否する
+ok 99 - package R1 scannerは未完のspreadを拒否する
+  ---
+  duration_ms: 701.788667
+  ...
+# Subtest: package R1 scannerは先頭dot小数を拒否する
+ok 100 - package R1 scannerは先頭dot小数を拒否する
+  ---
+  duration_ms: 712.979875
+  ...
+# Subtest: package R1 scannerは末尾dot数値を拒否する
+ok 101 - package R1 scannerは末尾dot数値を拒否する
+  ---
+  duration_ms: 697.662084
+  ...
+# Subtest: package R1 scannerは二個dot数値memberを拒否する
+ok 102 - package R1 scannerは二個dot数値memberを拒否する
+  ---
+  duration_ms: 713.885667
+  ...
+# Subtest: package R1 scannerは指数表記を拒否する
+ok 103 - package R1 scannerは指数表記を拒否する
+  ---
+  duration_ms: 697.10125
+  ...
+# Subtest: package R1 scannerは二進数表記を拒否する
+ok 104 - package R1 scannerは二進数表記を拒否する
+  ---
+  duration_ms: 698.900583
+  ...
+# Subtest: package R1 scannerはseparator付き数値を拒否する
+ok 105 - package R1 scannerはseparator付き数値を拒否する
+  ---
+  duration_ms: 702.46025
+  ...
+# Subtest: package R1 scannerはoptional callを拒否する
+ok 106 - package R1 scannerはoptional callを拒否する
+  ---
+  duration_ms: 697.801125
+  ...
+# Subtest: package R1 scannerはoptional private nameを拒否する
+ok 107 - package R1 scannerはoptional private nameを拒否する
+  ---
+  duration_ms: 699.467958
+  ...
+# Subtest: package R1 scannerはoptional tagged templateを拒否する
+ok 108 - package R1 scannerはoptional tagged templateを拒否する
+  ---
+  duration_ms: 696.729917
+  ...
+# Subtest: package R1 scannerはreturn直後spreadを拒否する
+ok 109 - package R1 scannerはreturn直後spreadを拒否する
+  ---
+  duration_ms: 715.680667
+  ...
+# Subtest: package R1 scannerは二項演算子直後spreadを拒否する
+ok 110 - package R1 scannerは二項演算子直後spreadを拒否する
+  ---
+  duration_ms: 715.706459
+  ...
+# Subtest: package R1 scannerは未閉鎖regexを拒否する
+ok 111 - package R1 scannerは未閉鎖regexを拒否する
+  ---
+  duration_ms: 731.27425
+  ...
+# Subtest: package R1 scannerは未閉鎖regex classを拒否する
+ok 112 - package R1 scannerは未閉鎖regex classを拒否する
+  ---
+  duration_ms: 759.133833
+  ...
+# Subtest: package R1 scannerは括弧不一致を拒否する
+ok 113 - package R1 scannerは括弧不一致を拒否する
+  ---
+  duration_ms: 754.824916
+  ...
+# Subtest: package R1 scannerは閉じbrace直後slashを拒否する
+ok 114 - package R1 scannerは閉じbrace直後slashを拒否する
+  ---
+  duration_ms: 769.309417
+  ...
+# Subtest: package R1 scannerは実package 2 sourceと限定hashbang表を契約どおり扱う
+ok 115 - package R1 scannerは実package 2 sourceと限定hashbang表を契約どおり扱う
+  ---
+  duration_ms: 19498.312417
+  ...
+# Subtest: Gate A build・決定性・reportの違反は段階ごとの担当checkから発火する
+ok 116 - Gate A build・決定性・reportの違反は段階ごとの担当checkから発火する
+  ---
+  duration_ms: 1995.945291
+  ...
+# Subtest: package側3 build stageはpass別の全失敗型を固定配列形と入力copy記録で拒否する
+ok 117 - package側3 build stageはpass別の全失敗型を固定配列形と入力copy記録で拒否する
+  ---
+  duration_ms: 2026.518375
+  ...
+# Subtest: package成果物とsource-only検査は改変を上流へ遡って自動修復しない
+ok 118 - package成果物とsource-only検査は改変を上流へ遡って自動修復しない
+  ---
+  duration_ms: 9061.724917
+  ...
+# Subtest: formal開始入力再構成は既存18観測と一致し一件差・列構造差を拒否する
+ok 119 - formal開始入力再構成は既存18観測と一致し一件差・列構造差を拒否する
+  ---
+  duration_ms: 19508.822708
+  ...
+# Subtest: job二時点差とpublication各段の違反は固有check・pathへ帰属する
+ok 120 - job二時点差とpublication各段の違反は固有check・pathへ帰属する
+  ---
+  duration_ms: 23228.912333
+  ...
+# Subtest: runner spyはGate A二段へのinput-mutated指定を設定時に拒否する
+ok 121 - runner spyはGate A二段へのinput-mutated指定を設定時に拒否する
+  ---
+  duration_ms: 91.578917
+  ...
+# Subtest: 公開runnerは読み取り専用preflightでderive結果を2回そのまま既存builderへ渡す
+ok 122 - 公開runnerは読み取り専用preflightでderive結果を2回そのまま既存builderへ渡す
+  ---
+  duration_ms: 2830.359959
+  ...
+# Subtest: 公開runnerは各build stage・pass・失敗型を同じBUILD_FAILEDへ閉じ後段を呼ばない
+ok 123 - 公開runnerは各build stage・pass・失敗型を同じBUILD_FAILEDへ閉じ後段を呼ばない
+  ---
+  duration_ms: 14074.977208
+  ...
+# Subtest: formal runnerはstaging・input recheck・preRenameの各gateで止まり後続publication I/Oを行わない
+ok 124 - formal runnerはstaging・input recheck・preRenameの各gateで止まり後続publication I/Oを行わない
+  ---
+  duration_ms: 19533.12875
+  ...
+# Subtest: R3:formal artifactのopen/read失敗はPUBLICATION_FAILEDへ帰属し完全snapshot不一致は53/54/56を維持する
+ok 125 - R3:formal artifactのopen/read失敗はPUBLICATION_FAILEDへ帰属し完全snapshot不一致は53/54/56を維持する
+  ---
+  duration_ms: 57608.127583
+  ...
+# Subtest: R3:publication失敗記録後のjobPreReport読取分類不能はexit 2かつpartial reportなしになる
+ok 126 - R3:publication失敗記録後のjobPreReport読取分類不能はexit 2かつpartial reportなしになる
+  ---
+  duration_ms: 2684.952917
+  ...
+# Subtest: runner sourceは公開derive入口をproductionと検査で共用しGate A checkerを直importしない
+ok 127 - runner sourceは公開derive入口をproductionと検査で共用しGate A checkerを直importしない
+  ---
+  duration_ms: 0.824125
+  ...
+# Subtest: runnerは全phaseを同じcheckerへ渡し後続段を先行失敗後に実行しない構造を持つ
+ok 128 - runnerは全phaseを同じcheckerへ渡し後続段を先行失敗後に実行しない構造を持つ
+  ---
+  duration_ms: 0.332542
+  ...
+# Subtest: CLIは0件・2件を固定usage診断でexit 2にしstdoutへ何も書かない
+ok 129 - CLIは0件・2件を固定usage診断でexit 2にしstdoutへ何も書かない
+  ---
+  duration_ms: 0.13875
+  ...
+# Subtest: production CLIの実process入口も0件・2件を同じusage診断で拒否する
+ok 130 - production CLIの実process入口も0件・2件を同じusage診断で拒否する
+  ---
+  duration_ms: 96.1015
+  ...
+# Subtest: production CLI実processはproduction chunk投影を共用しexit 0/1をstdout/stderr排他で返す
+ok 131 - production CLI実processはproduction chunk投影を共用しexit 0/1をstdout/stderr排他で返す
+  ---
+  duration_ms: 43267.803166
+  ...
+# Subtest: package担当codeと担当checkの正本写像はcore実装と検査表で欠落しない
+ok 132 - package担当codeと担当checkの正本写像はcore実装と検査表で欠落しない
+  ---
+  duration_ms: 0.383333
+  ...
+# Subtest: package合成検査が動的に観測するcode×checkは承認済み割当だけである
+ok 133 - package合成検査が動的に観測するcode×checkは承認済み割当だけである
+  ---
+  duration_ms: 0.228042
+  ...
+1..133
+# tests 133
+# suites 0
+# pass 133
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 274553.631417

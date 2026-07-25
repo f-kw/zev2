@@ -1,0 +1,260 @@
+TAP version 13
+# Subtest: 01: 2つの正式区間と内部gapから残存atomを決定的に抽出する
+ok 1 - 01: 2つの正式区間と内部gapから残存atomを決定的に抽出する
+  ---
+  duration_ms: 68.801667
+  ...
+# Subtest: 02: cut gap内のatomを正式編集による除外として記録する
+ok 2 - 02: cut gap内のatomを正式編集による除外として記録する
+  ---
+  duration_ms: 59.943416
+  ...
+# Subtest: 03: 半開区間の境界接触を部分交差にしない
+ok 3 - 03: 半開区間の境界接触を部分交差にしない
+  ---
+  duration_ms: 57.293791
+  ...
+# Subtest: 04: source atomの正の時間重なりを拒否せず観測へ残す
+ok 4 - 04: source atomの正の時間重なりを拒否せず観測へ残す
+  ---
+  duration_ms: 57.504875
+  ...
+# Subtest: 05: 同一speechIdの完全一致コピーを一度だけ統合する
+ok 5 - 05: 同一speechIdの完全一致コピーを一度だけ統合する
+  ---
+  duration_ms: 57.970625
+  ...
+# Subtest: 06: speaker欠落・null・不透明値・unknownを加工せず保持する
+ok 6 - 06: speaker欠落・null・不透明値・unknownを加工せず保持する
+  ---
+  duration_ms: 59.324542
+  ...
+# Subtest: 07: 空の正式segmentを許し、全体にatomがあれば成功する
+ok 7 - 07: 空の正式segmentを許し、全体にatomがあれば成功する
+  ---
+  duration_ms: 59.495834
+  ...
+# Subtest: 08: jobの欠落・未知field・不正SHA・非整数candidateをexact schemaで拒否する
+ok 8 - 08: jobの欠落・未知field・不正SHA・非整数candidateをexact schemaで拒否する
+  ---
+  duration_ms: 58.735
+  ...
+# Subtest: 09: CLI usage・job読込・JSON parseはexit 2、危険pathは契約違反にする
+ok 9 - 09: CLI usage・job読込・JSON parseはexit 2、危険pathは契約違反にする
+  ---
+  duration_ms: 271.835709
+  ...
+# Subtest: 10: 注入入口はjobPath・bytes・SHA・parse済みobjectの4点一致を要求する
+ok 10 - 10: 注入入口はjobPath・bytes・SHA・parse済みobjectの4点一致を要求する
+  ---
+  duration_ms: 72.172084
+  ...
+# Subtest: 11: implementation bytes/path/import契約とexpected projection全項目を束縛する
+ok 11 - 11: implementation bytes/path/import契約とexpected projection全項目を束縛する
+  ---
+  duration_ms: 323.511
+  ...
+# Subtest: 12: direct・expanded全入力の実byte hash差を拒否する
+ok 12 - 12: direct・expanded全入力の実byte hash差を拒否する
+  ---
+  duration_ms: 2250.100625
+  ...
+# Subtest: 13: 既存finalと外国lockを保持して停止する
+ok 13 - 13: 既存finalと外国lockを保持して停止する
+  ---
+  duration_ms: 132.337166
+  ...
+# Subtest: 14: 出力親symlinkと処理中のfinal出現を公開前に拒否する
+ok 14 - 14: 出力親symlinkと処理中のfinal出現を公開前に拒否する
+  ---
+  duration_ms: 1288.86325
+  ...
+# Subtest: 15: publish直前にjob・実装・direct・expanded・mediaを全て再hashする
+ok 15 - 15: publish直前にjob・実装・direct・expanded・mediaを全て再hashする
+  ---
+  duration_ms: 857.552625
+  ...
+# Subtest: 16: 初回読込後の同byte symlink差し替えもpath契約で停止する
+ok 16 - 16: 初回読込後の同byte symlink差し替えもpath契約で停止する
+  ---
+  duration_ms: 146.255333
+  ...
+# Subtest: 17: directory rename失敗を原子的公開失敗として保持する
+ok 17 - 17: directory rename失敗を原子的公開失敗として保持する
+  ---
+  duration_ms: 157.891416
+  ...
+# Subtest: 18: failure記録を新規renameで作り、job byte差とUUID衝突を隠さない
+ok 18 - 18: failure記録を新規renameで作り、job byte差とUUID衝突を隠さない
+  ---
+  duration_ms: 284.879
+  ...
+# Subtest: 19: 未承認decision・payload SHA差・未解決編集を別々に拒否する
+ok 19 - 19: 未承認decision・payload SHA差・未解決編集を別々に拒否する
+  ---
+  duration_ms: 54.83725
+  ...
+# Subtest: 20: 組立決定欠落と正式化の候補・variant・区間・frame・sample差を拒否する
+ok 20 - 20: 組立決定欠落と正式化の候補・variant・区間・frame・sample差を拒否する
+  ---
+  duration_ms: 56.017625
+  ...
+# Subtest: 21: 正式化→trusted summary→4artifactの一方向鎖を完全一致させる
+ok 21 - 21: 正式化→trusted summary→4artifactの一方向鎖を完全一致させる
+  ---
+  duration_ms: 52.713208
+  ...
+# Subtest: 22: timeline・生成記録・合格記録のdecision/build/timeline/hash差を拒否する
+ok 22 - 22: timeline・生成記録・合格記録のdecision/build/timeline/hash差を拒否する
+  ---
+  duration_ms: 52.733292
+  ...
+# Subtest: 23: 基礎映像のfailed・violations・固定check不合格を拒否する
+ok 23 - 23: 基礎映像のfailed・violations・固定check不合格を拒否する
+  ---
+  duration_ms: 53.481
+  ...
+# Subtest: 24: sourceRef・provenance・元媒体SHAの差を拒否する
+ok 24 - 24: sourceRef・provenance・元媒体SHAの差を拒否する
+  ---
+  duration_ms: 54.374958
+  ...
+# Subtest: 25: source identityの展開参照差とmedia equivalence不合格を分けて記録する
+ok 25 - 25: source identityの展開参照差とmedia equivalence不合格を分けて記録する
+  ---
+  duration_ms: 53.782584
+  ...
+# Subtest: 26: candidate ID・outer range・参照artifact差を拒否する
+ok 26 - 26: candidate ID・outer range・参照artifact差を拒否する
+  ---
+  duration_ms: 60.337125
+  ...
+# Subtest: 27: STT partial・chunk差・discard/clampと件数差を区別して拒否する
+ok 27 - 27: STT partial・chunk差・discard/clampと件数差を区別して拒否する
+  ---
+  duration_ms: 56.164083
+  ...
+# Subtest: 28: transcriptと文字時刻列のID差を検出する
+ok 28 - 28: transcriptと文字時刻列のID差を検出する
+  ---
+  duration_ms: 55.698792
+  ...
+# Subtest: 29: transcriptと文字時刻列の本文差を検出する
+ok 29 - 29: transcriptと文字時刻列の本文差を検出する
+  ---
+  duration_ms: 55.204167
+  ...
+# Subtest: 30: transcriptと文字時刻列のstart/end差を検出する
+ok 30 - 30: transcriptと文字時刻列のstart/end差を検出する
+  ---
+  duration_ms: 55.257167
+  ...
+# Subtest: 31: transcriptと文字時刻列のraw speaker差を検出する
+ok 31 - 31: transcriptと文字時刻列のraw speaker差を検出する
+  ---
+  duration_ms: 56.152
+  ...
+# Subtest: 32: 同一speechIdの重複コピーが一文字でも違えば統合しない
+ok 32 - 32: 同一speechIdの重複コピーが一文字でも違えば統合しない
+  ---
+  duration_ms: 54.510458
+  ...
+# Subtest: 33: candidate character ID・本文・時刻のSTT差を検出する
+ok 33 - 33: candidate character ID・本文・時刻のSTT差を検出する
+  ---
+  duration_ms: 54.555625
+  ...
+# Subtest: 34: 正式区間内のatomにspeech対応が無ければ停止する
+ok 34 - 34: 正式区間内のatomにspeech対応が無ければ停止する
+  ---
+  duration_ms: 56.375459
+  ...
+# Subtest: 35: atom ID重複・元配列開始逆転・非正長をraw contractで拒否する
+ok 35 - 35: atom ID重複・元配列開始逆転・非正長をraw contractで拒否する
+  ---
+  duration_ms: 55.093333
+  ...
+# Subtest: 36: source atom重なりは同時発話候補として記録し成功する
+ok 36 - 36: source atom重なりは同時発話候補として記録し成功する
+  ---
+  duration_ms: 54.975333
+  ...
+# Subtest: 37: 空・逆転・正に重なる正式segmentを拒否する
+ok 37 - 37: 空・逆転・正に重なる正式segmentを拒否する
+  ---
+  duration_ms: 55.981166
+  ...
+# Subtest: 38: 1 atomが複数segmentへ完全包含される構造を拒否する
+ok 38 - 38: 1 atomが複数segmentへ完全包含される構造を拒否する
+  ---
+  duration_ms: 53.723292
+  ...
+# Subtest: 39: atomが正式境界を部分的にまたぐ場合は分割せず停止する
+ok 39 - 39: atomが正式境界を部分的にまたぐ場合は分割せず停止する
+  ---
+  duration_ms: 160.457209
+  ...
+# Subtest: 40: 採用atomが0件なら空成果物を公開しない
+ok 40 - 40: 採用atomが0件なら空成果物を公開しない
+  ---
+  duration_ms: 52.117584
+  ...
+# Subtest: 41: cut内atomをsource-atomsとsegment atomIdsの双方へ出さない
+ok 41 - 41: cut内atomをsource-atomsとsegment atomIdsの双方へ出さない
+  ---
+  duration_ms: 53.310834
+  ...
+# Subtest: 42: publish-tmp上のatom ID対応を独立再計算し、欠落・重複・順序・segment混入・件数・hash改変を拒否する
+ok 42 - 42: publish-tmp上のatom ID対応を独立再計算し、欠落・重複・順序・segment混入・件数・hash改変を拒否する
+  ---
+  duration_ms: 56.167917
+  ...
+# Subtest: 43: 同じ意味入力からsource-atoms.jsonをbyte単位で決定的に生成する
+ok 43 - 43: 同じ意味入力からsource-atoms.jsonをbyte単位で決定的に生成する
+  ---
+  duration_ms: 56.203625
+  ...
+# Subtest: 44: job IDと出力先だけの変更はsource-atoms.jsonへ混入させない
+ok 44 - 44: job IDと出力先だけの変更はsource-atoms.jsonへ混入させない
+  ---
+  duration_ms: 57.374292
+  ...
+# Subtest: 45: 各出力hash辺・未対応入力schema・抽出例外を固定コードで停止する
+ok 45 - 45: 各出力hash辺・未対応入力schema・抽出例外を固定コードで停止する
+  ---
+  duration_ms: 203.58725
+  ...
+# Subtest: 47: production CLIの終了コード0・1・2を実processで固定する
+ok 46 - 47: production CLIの終了コード0・1・2を実processで固定する
+  ---
+  duration_ms: 305.570625
+  ...
+# Subtest: 48: 合格実行の前後でjob・実装・直接入力・展開入力の全file SHAを変えない
+ok 47 - 48: 合格実行の前後でjob・実装・直接入力・展開入力の全file SHAを変えない
+  ---
+  duration_ms: 154.389708
+  ...
+# Subtest: 49: final directoryはsource atom・生成記録・合格記録の3件だけを公開する
+ok 48 - 49: final directoryはsource atom・生成記録・合格記録の3件だけを公開する
+  ---
+  duration_ms: 149.668292
+  ...
+# Subtest: candidate 13 read-only preflight: 正式入力をmemory投影し354件の期待値へ完全一致させる
+ok 49 - candidate 13 read-only preflight: 正式入力をmemory投影し354件の期待値へ完全一致させる
+  ---
+  duration_ms: 227.263417
+  ...
+# Subtest: 46: 固定31違反コード・観測コード・49シナリオ台帳を完全一致させる
+ok 50 - 46: 固定31違反コード・観測コード・49シナリオ台帳を完全一致させる
+  ---
+  duration_ms: 0.3265
+  ...
+1..50
+# tests 50
+# suites 0
+# pass 50
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 8969.49725

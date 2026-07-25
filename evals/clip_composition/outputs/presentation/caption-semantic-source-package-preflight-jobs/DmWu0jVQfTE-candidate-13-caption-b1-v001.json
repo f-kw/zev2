@@ -1,0 +1,121 @@
+{
+  "schemaVersion": "presentation-caption-semantic-source-package-job-v001",
+  "jobId": "DmWu0jVQfTE-candidate-13-caption-semantic-source-package-preflight-v001",
+  "artifactId": "DmWu0jVQfTE-candidate-13-v001",
+  "mode": "read-only-preflight",
+  "gateA": {
+    "job": {
+      "path": "evals/clip_composition/outputs/presentation/segmenter-boundary-preflight-jobs/DmWu0jVQfTE-candidate-13-v001.json",
+      "fileSha256": "e72d2f3ae91ca337cceca0c2d4ba3e5954f02372eeca0a0d02f8eb324de54ee0"
+    },
+    "completionReport": {
+      "path": "evals/clip_composition/reports/presentation/presentation-gate-a-implementation-completion-report-20260723-v001.md",
+      "fileSha256": "99a619fd2f729ef8596d0a1fff7b35d8e4bf112b959ce404143a407ca49eaefd"
+    },
+    "expectedEvidenceHashes": {
+      "boundaryCandidatesCanonicalSha256": "0f8e7b07c32befc4e4703e1945b61e7656a2e978a8ba959fd169a753efe454b6",
+      "sourceAtomMembershipCanonicalSha256": "b2da8ee1b3fef9c23b5598d73713d77831f392471cf98a9723392ef115ea50fd",
+      "evidenceCanonicalSha256": "be4344dd5d97596a815a92ae283d0da3c7353600b2983e93cf53b1947c5338eb"
+    }
+  },
+  "implementationBinding": {
+    "gitCommit": "88506d69c937f248aaa2e982acea9e99594f8cb6",
+    "files": [
+      {
+        "role": "packageCore",
+        "path": "evals/clip_composition/presentation_caption_semantic_source_package_v001.mjs",
+        "fileSha256": "db3b5968207479d8f6849c9995224140b8286844ed1c17b1e75c89ac718bf224"
+      },
+      {
+        "role": "packageRunner",
+        "path": "evals/clip_composition/run_presentation_caption_semantic_source_package_job_v001.mjs",
+        "fileSha256": "1a1537f279cf8b69a90b4236e69a048e7bec2d1118f1819e5bad807373c8cbff"
+      },
+      {
+        "role": "rendererTrustImplementation",
+        "path": "evals/clip_composition/presentation_renderer_plan_v002.mjs",
+        "fileSha256": "bedb4d9e66622372d9a564b26006dbb7b6cc689db86fd353ad8b7187ca3079de"
+      }
+    ],
+    "dependencyFiles": []
+  },
+  "widthPolicyBindings": [
+    {
+      "role": "presetRegistry",
+      "path": "evals/clip_composition/registries/presentation/normal-landscape-preset-registry-v001/preset-registry.json",
+      "fileSha256": "8e9b0a039c8a4c9edf2c66b1df343c1d892d4688ebc4886a9af322bd44a6e5a8",
+      "canonicalSha256": "5915d6aae47681c43ea202a20eee16cbf669abfe24fdc832f75fb127ad46dca4"
+    },
+    {
+      "role": "presetValidationIndex",
+      "path": "evals/clip_composition/registries/presentation/normal-landscape-preset-registry-v001/preset-validation-index.json",
+      "fileSha256": "d2665c7947564a56955bbc47de7d95d038c64487ea71b6cbc1a2cc61667c05a1",
+      "canonicalSha256": "40609dbc63b7c2d1f4c2cd92ee22c493c08382c0d63c27ea06087535f5882067"
+    },
+    {
+      "role": "materialValidationIndex",
+      "path": "evals/clip_composition/registries/presentation/normal-landscape-preset-registry-v001/material-validation-index.json",
+      "fileSha256": "98213035bc6e395b090d7cff2639d4bf707fb838b7df50cb51bc60ab95d4758e",
+      "canonicalSha256": "3958ad2d21233342e49aedd29cbd337785a228e1063d1802b64e92dc1793d1fc"
+    },
+    {
+      "role": "registryBinding",
+      "path": "evals/clip_composition/registries/presentation/normal-landscape-preset-registry-v001/trusted-registry-bindings.json",
+      "fileSha256": "b26db5c57aac5dd290e084d953350778b527c6eb21f66f62dc7431bf24482fff",
+      "canonicalSha256": "bfbbcb5c611313d368305e6e8d552ddcdaf41949ed8d8f074485c8ed0aa2d43e"
+    },
+    {
+      "role": "rendererTrust",
+      "path": "evals/clip_composition/registries/presentation/presentation-renderer-trust-v001/trust.json",
+      "fileSha256": "04ec4971d078413b68c19869b0285130ec553f14601f45d27125738a7498eddc",
+      "canonicalSha256": "9d5ffe631033dc594c917649e2529899e303f3cb8a7d7b1b65ea0d26b7c645f2"
+    },
+    {
+      "role": "textLayoutImplementation",
+      "path": "evals/clip_composition/presentation_renderer_text_layout_v001.mjs",
+      "fileSha256": "066a62adaa7fa3f8b8eda92c82e9a85940e43f372af976edc4b327ef4cf9ce5e",
+      "canonicalSha256": null
+    }
+  ],
+  "expectedRuntime": {
+    "nodeBinarySha256": "de4f3b493b15e7a0ee311f6a2c6dbf93858052f5802aa91cfafa2c57e9d6bc5c",
+    "nodeVersion": "v20.19.6",
+    "icuVersion": "77.1",
+    "resolvedLocale": "ja",
+    "resolvedGranularity": "word"
+  },
+  "expectedProjection": {
+    "sourceAtomCount": 354,
+    "containerCount": 3,
+    "boundaryCandidateCount": 205,
+    "containers": [
+      {
+        "containerId": "segmenter-container-000001",
+        "sourceAtomCount": 126,
+        "boundaryCandidateCount": 60
+      },
+      {
+        "containerId": "segmenter-container-000002",
+        "sourceAtomCount": 122,
+        "boundaryCandidateCount": 78
+      },
+      {
+        "containerId": "segmenter-container-000003",
+        "sourceAtomCount": 106,
+        "boundaryCandidateCount": 67
+      }
+    ]
+  },
+  "publication": {
+    "packageId": "DmWu0jVQfTE-candidate-13-caption-semantic-source-package-v001",
+    "formalOutputPath": "evals/clip_composition/outputs/presentation/segmenter-boundary-evidence/DmWu0jVQfTE-candidate-13-v001",
+    "expectedState": "absent"
+  },
+  "readOnlyGuard": {
+    "watchedRoot": "evals/clip_composition/outputs/presentation",
+    "excludedPaths": [
+      "evals/clip_composition/outputs/presentation/caption-semantic-source-package-preflight-jobs/DmWu0jVQfTE-candidate-13-caption-b1-v001.json"
+    ],
+    "expectedBeforeCanonicalSha256": "0b2716b0ea1e3636add9472cefdedf7ee6baa34286b9da80389582d310abf7b2"
+  }
+}
