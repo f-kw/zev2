@@ -3074,7 +3074,12 @@ test('production CLI実processはtrusted 0/1とusage 2をstdout/stderrへ排他�
   ]) {
     const fixture = materializeRunnerWorkspace(options);
     try {
-      const runnerPath = resolve(fixture.root, DIRECT[2][1]);
+      const logicalRunnerPath = resolve(fixture.root, DIRECT[2][1]);
+      const runnerPath = realpathSync(logicalRunnerPath);
+      assert.equal(
+        runnerPath,
+        resolve(realpathSync(fixture.root), DIRECT[2][1]),
+      );
       const result = spawnSync(process.execPath, [runnerPath, JOB_PATH], {
         cwd: fixture.root,
         encoding: null,
@@ -3095,7 +3100,12 @@ test('production CLI実processはtrusted 0/1とusage 2をstdout/stderrへ排他�
 
   const fixture = materializeRunnerWorkspace();
   try {
-    const runnerPath = resolve(fixture.root, DIRECT[2][1]);
+    const logicalRunnerPath = resolve(fixture.root, DIRECT[2][1]);
+    const runnerPath = realpathSync(logicalRunnerPath);
+    assert.equal(
+      runnerPath,
+      resolve(realpathSync(fixture.root), DIRECT[2][1]),
+    );
     const usage = spawnSync(process.execPath, [runnerPath], {
       cwd: fixture.root,
       encoding: 'utf8',
