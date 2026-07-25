@@ -15,6 +15,10 @@
 正式B4合成検査は、追加した時間対応負例を含む**88/88**に合格した。
 その後、承認済み順序どおり既存の意味回答・正式入力系133件を一回実行し、
 **126/133、7件不合格**となったため、同じ試行で直さず停止した。
+停止後の実行手順監査で、TAPの出力先を検査自身の監視対象
+`evals/clip_composition/outputs/presentation`の内側へ置いていたことを確認した。
+検査中に増え続けるTAPが監視対象を変更するため、この126/133はproduction回帰の
+有効な判定値には使えない。
 
 回帰95件、candidate 13読み取り専用preflight v002、B4完了報告、
 安定点tag、JOURNAL、B5承認依頼起草は実施していない。
@@ -96,8 +100,26 @@ TAP:
 - `evals/clip_composition/outputs/presentation/test-runs/20260726-caption-b4-timeline-repair-v001/semantic-source-package-133.tap`
 - SHA-256: `017df9a67bd6dd9e09eea512c0e35dc67780c865edd563577f06939cf2461efc`
 
-7件が一つの根因か複数原因か、B4修正との関係、検査設営か実装か契約かは
-この試行では確定していない。保存TAPだけから推測で帰属しない。
+### 3.3 実行手順の交絡
+
+133件の検査fileは、次を監視対象の正本にしている。
+
+- `evals/clip_composition/outputs/presentation`
+
+今回、NodeのTAP出力先を次へ直接指定した。
+
+- `evals/clip_composition/outputs/presentation/test-runs/20260726-caption-b4-timeline-repair-v001/semantic-source-package-133.tap`
+
+したがって、検査processが監視対象の不変性を確認している間に、test reporterが同じ
+監視対象内のfileを追記し続けた。過去の133/133正式実行では、TAPは監視対象外の
+`evals/clip_composition/reports/presentation/test-runs/`へ保存されていた。
+
+これは**テスト実行方法の欠陥**である。production実装、B4修正、既存133件の契約へ
+帰属しない。7件すべてがこの一因だけで説明できるかは再実行前に確定できないが、
+少なくとも今回の126/133をproduction不合格の証拠として扱うことはできない。
+
+停止後に気づいたため、同じattemptで出力先を変えて再実行していない。保存TAPは
+失敗した実行方法の証拠として保持する。
 
 ## 4. 変更範囲
 
@@ -125,4 +147,4 @@ TAP:
 
 次に必要な人間判断は1件である。
 
-> 保存済み133件TAPの7不合格について、再実行せず読み取り専用で原因を診断し、三分法（実装が契約に届かない／検査設営・期待が契約とずれる／契約矛盾）へ帰属してよいか。必要なら版付き修正設計を同じ文書へ提示し、実装・再実行は別承認とする。
+> 今回の126/133は、検査中に監視対象内へTAPを書いた実行方法の欠陥があるため無効な回帰判定として保持する。新attemptでTAPを監視対象外の`evals/clip_composition/reports/presentation/test-runs/`へ出し、コード・fixture・期待値を変更せず133件を頭から1回実行してよいか。133/133の場合だけ回帰95件、candidate 13 preflight v002、B4完了報告へ進み、不合格が残れば新しいTAPから改めて停止・診断する。
