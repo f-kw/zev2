@@ -6,11 +6,17 @@
 - 正式85件の再実行: **なし**
 - production、fixture、期待値、承認済み契約の変更: **なし**
 - 人間作業: 0件
-- 状態: **契約矛盾を確定。追補の人間承認待ちで停止**
+- 人間承認: **kawafmm、2026-07-25**
+- 状態: **配置数値境界追補を承認済み。fatal観測性は契約改訂候補として保留。版付き実装修正設計の提示で停止**
+
+### 改訂履歴
+
+- 2026-07-25: 初版。T082・T083の限定診断と契約確定追補案を提示。
+- 2026-07-25: kawafmm裁定を反映。環境原因と数値契約原因を訂正関係ではなく積層障害として明記し、配置数値境界を承認済み契約へ、fatal観測性を再評価条件付き残件へ確定した。§7のfield別数値区分、工程間の縫い目、実装契約完全性チェックへの追加事項を明文化した。
 
 ## 1. 結論
 
-ネイティブ権限でなお終了code 2だった原因は、前回観測したUnix socketの`EPERM`ではない。
+ネイティブ権限でなお終了code 2だった直接原因は、前回観測したUnix socketの`EPERM`より後段にあった。
 
 今回、T082・T083だけが使う正式CLI経路をリポジトリ外の一時観測器から起動し、次を確認した。
 
@@ -24,7 +30,7 @@
 
 したがって、今回の停止は環境権限でもfixtureでもなく、**表示座標を、意味データ用の整数限定数値契約で読んでいる工程間境界の矛盾**である。
 
-前回診断のうち「制限環境ではTSX内部socketが`EPERM`になった」という観測は正しい。一方、「socket作成可能なネイティブ環境へ移せばT082・T083が本来の経路へ進む」という単独原因の推定は不十分だった。ネイティブ環境でsocket問題を越えた後、別の契約矛盾が露出したため、本書を明示的な訂正記録とする。前回文書を上書きしない。
+前回診断の「制限環境ではTSX内部socketが`EPERM`になった」という観測は、その層の原因として正しい。ネイティブ環境はその第一層を解消し、その下に隠れていた第二層の数値契約矛盾を露出させた。二つを相互に否定する診断や訂正として扱わず、**積層障害の記録**として前回文書と本書を併存させる。
 
 ## 2. 診断範囲
 
@@ -94,13 +100,13 @@ T083は、本来確認する`OUTPUT_ROOT_ALREADY_EXISTS`へ到達していない
 
 T082と共通の実配置検査結果を整数限定読取器が拒否した時点で先にfatalになっている。したがってT083の終了2は、出力先既存契約の判定結果ではない。
 
-## 4. 環境仮説の生死
+## 4. 障害の積層
 
-### 4.1 生きている部分
+### 4.1 第一層: 制限環境のUnix socket拒否
 
 制限環境で行った前回の読み取り専用診断では、TSXが内部通信用Unix socketを作る段階で`EPERM`になり、配置検査sourceが起動せず、一時出力も作られなかった。この観測は撤回しない。
 
-### 4.2 反証された部分
+### 4.2 第二層: 配置結果の数値区分混同
 
 ネイティブ権限の今回観測では、次が成立した。
 
@@ -110,9 +116,9 @@ T082と共通の実配置検査結果を整数限定読取器が拒否した時�
 - 配置検査outputあり。
 - 配置検査自身のstatusは`passed`。
 
-よって「ネイティブ環境でも同じsocket問題が続いた」は反証された。
+よって第一層はネイティブ環境で解消した。その結果、配置検査が正常終了して返した小数の画面座標を、後段の整数限定読取器が拒否する第二層へ初めて到達した。
 
-また、「ネイティブ権限へ移れば環境原因だけが消えてT082・T083が合格する」という前回の単独原因推定も訂正する。環境原因は消えたが、その後段に独立した数値契約矛盾が存在した。
+前回の環境診断と今回の数値契約診断は、同じ停止の異なる深さを観測している。前者を誤診として消さず、後者をその下に積む。
 
 ### 4.3 現在の環境記録
 
@@ -137,7 +143,7 @@ B4正式実行にUnix socket作成可能環境が必要という記録は、制�
 
 これは、固定fatalが安全に詳細を隠す一方で、同じcode 2の再診断に追加観測を要するという**fatal観測性の既知契約課題**である。
 
-本書では観測性契約を勝手に変更しない。§9で人間判断へ戻す。
+本書では観測性契約を変更しない。§9のとおり契約改訂候補として保留する。
 
 ## 6. 帰属の三分法
 
@@ -167,6 +173,8 @@ B4正式実行にUnix socket作成可能環境が必要という記録は、制�
 
 第3領域を第1領域の整数限定読取器へ渡さない。
 
+この第3領域は、2026-07-24にkawafmmが確定した小数境界へ追加する独立区分である。既存の「B1・Gemini・正式成果物・時刻は整数」と「人間認定済み表示台帳の固定4係数だけ小数」のどちらも変更しない。認定済み4係数の値、path、台帳版、時刻の整数ms、実行段階の整数frame/sampleには一切触れない。
+
 ### 7.2 専用読取入口
 
 配置検査結果専用の版付き入口
@@ -194,24 +202,30 @@ rootは次の三fieldだけ。
 
 `status`は`passed | failed`。
 
-各itemは次だけ。
+各itemと数値区分は次だけとする。
 
-1. `layerId`: 文字列
-2. `stateId`: 文字列
-3. `resolvedText`: 文字列
-4. `lineCount`: safe integer
-5. `lineRects`: 配列
-6. `wrapper`: object
-7. `fontSizePx`: safe integer
-8. `lineHeightPx`: 有限number
+| path | 型・数値区分 |
+|---|---|
+| `$.items[*].layerId` | 文字列 |
+| `$.items[*].stateId` | 文字列 |
+| `$.items[*].resolvedText` | 文字列 |
+| `$.items[*].lineCount` | safe integer |
+| `$.items[*].lineRects` | 配列 |
+| `$.items[*].lineRects[*].left` | finite number |
+| `$.items[*].lineRects[*].top` | finite number |
+| `$.items[*].lineRects[*].right` | finite number |
+| `$.items[*].lineRects[*].bottom` | finite number |
+| `$.items[*].wrapper.top` | finite number |
+| `$.items[*].wrapper.left` | finite number |
+| `$.items[*].wrapper.width` | finite number |
+| `$.items[*].wrapper.height` | finite number |
+| `$.items[*].wrapper.renderScale` | finite number |
+| `$.items[*].wrapper.displayWidth` | finite number |
+| `$.items[*].wrapper.displayHeight` | finite number |
+| `$.items[*].fontSizePx` | safe integer |
+| `$.items[*].lineHeightPx` | finite number |
 
-line rectangleは`left / top / right / bottom`の有限numberだけ。
-
-wrapperは
-`top / left / width / height / renderScale / displayWidth / displayHeight`
-の有限numberだけ。
-
-有限numberはnegative zero、非有限、safe範囲外整数を拒否する。小数を許すのは上記の幾何値と`lineHeightPx`だけで、時刻fieldはこのschemaに存在しない。
+finite numberはJSON numberであり、`Number.isFinite`が真であることを必須とする。NaN、Infinity、非数、negative zero、safe範囲外整数を拒否する。小数を許すのは表でfinite numberとしたfieldだけで、時刻fieldはこのschemaに存在しない。
 
 violationは、固定配置検査が持つ三codeだけを受理する。
 各要素の共通fieldは`layerId / code / details`で、`layerId`は対応するitemの文字列IDである。
@@ -219,10 +233,17 @@ violationは、固定配置検査が持つ三codeだけを受理する。
 | code | details |
 |---|---|
 | `LINE_COUNT_EXCEEDS_CANDIDATE_LIMIT` | `actual / allowed`をsafe integer |
-| `LINE_BOX_OUTSIDE_SAFE_AREA` | `lineIndex`をsafe integer、`rect`を上記幾何値、`safeAreaPx`を整数 |
+| `LINE_BOX_OUTSIDE_SAFE_AREA` | `lineIndex`をsafe integer、`rect.left / top / right / bottom`をfinite number、`safeAreaPx.top / right / bottom / left`をsafe integer |
 | `LINE_BOX_POSITIVE_INTERSECTION` | `leftIndex / rightIndex`をsafe integer、`overlapWidth / overlapHeight`を有限number |
 
 未知field、未知code、型不一致、BOM、重複key、trailing content、code fence、不正UTF-8、lone surrogateを拒否する。
+
+専用入口の検査は、上表のfinite number fieldを小数で受理すると同時に、次を機械assertする。
+
+1. B1・Gemini・正式package・正式B4成果物は既存整数限定入口のままである。
+2. 時刻、frame、sample、件数、index、ID、意味データへ小数を流せない。
+3. 表示台帳の既存専用入口は固定4係数以外を受理しない。
+4. 配置結果専用入口をjob、環境変数、CLI引数から別profileへ差し替えられない。
 
 ### 7.4 B4正式成果物へ小数を流さない
 
@@ -238,9 +259,21 @@ line rectangle、wrapper、`lineHeightPx`等の小数幾何値を、`layout-pref
 
 ### 7.5 失敗時
 
-配置検査出力が専用schemaを満たさない場合、trusted reportを推測して作らない。現行fatal v001を維持するか、観測性をv002へ改訂するかは§9の別判断とする。
+配置検査出力が専用schemaを満たさない場合、trusted reportを推測して作らない。現行fatal v001を維持する。観測性改訂は§9の再評価条件が成立するまで行わない。
 
-### 7.6 禁止する解決
+### 7.6 工程間の縫い目
+
+混同が起きた受け渡し点は次である。
+
+| producer | 運搬物 | consumer | 誤った扱い |
+|---|---|---|---|
+| `inspect_presentation_preset_layout.ts` | `output.json`の内部配置結果 | `run_presentation_caption_display_pair_job_v001.mjs`の配置結果読取 | B1・Gemini・正式成果物用の整数限定入口へ渡した |
+
+配置検査自体とレンダラーの配置式は終了0・`status: passed`の正当な結果を作っており、修正対象ではない。修正対象はこの受け渡し点の専用読取入口と、その実装を正式bindingへ含める処理である。
+
+実装契約完全性チェックへ、**工程間受け渡しデータの数値区分**を追加する。数値fieldごとに、意味、整数／finite numberの区分、producer、consumer、使う読取入口、正式成果物へ流してよいか、不一致時の停止点を承認前に一意化する。
+
+### 7.7 禁止する解決
 
 - `833.2`を`833`へ丸める。
 - 承認済み配置係数、font、safe area、anchorを変更する。
@@ -268,30 +301,23 @@ line rectangle、wrapper、`lineHeightPx`等の小数幾何値を、`layout-pref
 
 今回の観測から、T082・T083はこの追補で同じ根本原因を解消する見込みである。ただし、修正後に初めて到達する下流不合格の有無は未実測であり、合格を予告しない。
 
-## 9. fatal観測性の判断
+## 9. fatal観測性の裁定
 
-### 案A: 現行fatal v001を維持し、既知限界として保留
+現行fatal v001を維持し、観測性改訂を**契約改訂候補**として残件へ登録する。
 
-- 固定fatalが未信頼の内部情報、絶対path、stackを外へ漏らさない利点を維持。
-- 今回の配置数値境界修正とは分離。
-- 同種のcode 2が再発した場合は、別承認の限定診断を要する。
+- 固定fatalが未信頼の内部情報、絶対path、stackを外へ漏らさない利点を維持する。
+- 今回の配置数値境界修正と診断表示の改訂を混ぜない。
+- 次にfatal診断が外側の公開情報だけでは分類不能になった時点を再評価条件とする。
+- 再評価時も、閉語彙の`causeClass`または`failureStage`だけを追加するv002を別ゲートで設計し、v001の暗黙受理・変換は行わない。
 
-### 案B: fatal v002の設計を別ゲートで起草
+これは放置ではない。再評価条件が成立するまで実装しない、版付きの契約改訂候補である。
 
-- 外へ出して安全な閉語彙の`causeClass`または`failureStage`だけを追加。
-- OS message、stack、絶対path、内部JSON本文は出さない。
-- usage / I/O / runtime / report-untrustedを外側から区別可能にする。
-- schema、検査、利用側を版付きで改訂し、v001の暗黙受理・変換は行わない。
+## 10. 承認結果と停止点
 
-**推奨は案A**。
+1. §7の配置数値境界追補は、kawafmmが2026-07-25に承認した。
+2. fatal観測性は、§9の再評価条件付き保留で確定した。
+3. 次は版付き実装修正設計を提示して停止する。
 
-理由は、現在のB4阻害要因は配置数値境界で一意に確定し、fatalの公開schemaを広げなくても修正設計へ進めるためである。観測性不足は実在するが、いま同時に直すと「処理を成立させる修正」と「診断表示の改訂」が混ざる。次にcode 2の再診断が必要になった時点、または外部自動運用へ接続する前に、案Bを独立した単変数として判断する。
+現時点の必須人間作業は、実装修正設計の承認または却下1件。時間計測は行わない。
 
-## 10. 人間へ求める判断
-
-1. §7の配置数値境界追補を承認するか。
-2. fatal観測性は推奨案Aとして保留するか、案Bの別設計を先に求めるか。
-
-必須の人間作業は上記2判断だけ。時間計測は行わない。
-
-承認された場合も、次は版付き実装修正設計の提示で停止する。実装、85件再実行、回帰、preflight、B4完了、tag、JOURNAL、B5、Gemini、正式pair、描画へ自動では進まない。
+実装、正式85件再実行、回帰、preflight、B4完了、tag、JOURNAL、B5、Gemini、正式pair、描画へ自動では進まない。
