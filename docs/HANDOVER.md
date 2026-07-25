@@ -1,6 +1,6 @@
 # ZEV プロジェクト引き継ぎ資料 (HANDOVER)
 
-v144 / 2026-07-25 改訂(初版 2026-07-07) / 原本作成者: Claude (Fable 5、社外相談役)
+v145 / 2026-07-25 改訂(初版 2026-07-07) / 原本作成者: Claude (Fable 5、社外相談役)
 目的: 相談役・実行部隊のどちらのメモリが失われても、この1枚+リポジトリ内資料で文脈を完全復元するため。
 読み順: 本資料 → 目標定義書v3.6(`docs/GOAL_DEFINITION.md`) → DECISIONS.md → プロンプト版台帳(evals/clip_composition/prompts/README.md) → 製造手順書(FIXTURE_MANUFACTURING_RUNBOOK.md)。
 配置: `docs/HANDOVER.md`。大きな方針転換時は§6・§10を転換作業と同一コミットで更新すること。
@@ -27,6 +27,7 @@ v144 / 2026-07-25 改訂(初版 2026-07-07) / 原本作成者: Claude (Fable 5�
 - 2026-07-25追補: kawafmmは上記4点を版付き追補として一括確定し、実装・再検査の再開を承認した。固定7実体は第一package生成結果の書込み・close・directory durability後、最初のstaging一覧欠落注入直前にtest-private固定名称順で束縛する。操作はjob由来absolute rootの子孫だけを対象に、故障後を含む実発生分を全件残す。fault snapshotは厳密一件を一度取得してentry objectを格納する。9故障行の期待操作列はactualから作らない。production runner、R2案A、hash意味、既存違反code、変更可能2ファイルは不変。独立監査を通過した場合だけ132件を一度実行する。
 - 2026-07-25追補3（最終現在地）: B2最終再検査はpackage 133/133、意味回答155/155、Gate A 21/21、残存発話50/50、candidate 13読み取り専用preflight 17/17に合格した。macOS一時領域の`/var`と`/private/var`の別名は、検査の実process起動対象だけを実体パスへ解決して是正し、production本体・契約・束縛hashは変更していない。合成正式公開の前提Pと、既存正式基礎映像4件・残存発話3件の現物hash再照合も合格。`stable/b2-complete-20260725`を新しい撤退点とする。正式7ファイルpackage、prompt、Gemini、表示計画、指示書、描画は未実施。次はB3正式source-only package一件の生成承認待ちで、Gemini実走はB3へ含めない。**本資料内に残る「B2停止中」「B2 tagなし」「後続検査未実施」は経緯記録であり、現在地としては本追補が全て上書きする。**
 - 2026-07-25追補4（最終現在地）: B3は、固定済み正式jobを一回だけ実行し、candidate 13のsource-only正式package 7ファイルを原子的に公開した。CLI exit 0、stderr 0 byte、run report 19/19、package検査15/15、違反0、公開後再読合格。preflight固定の354文字・3 container・205候補、内訳126/122/106・60/78/67、境界候補・文字所属・境界証拠の3 hashはすべて一致し、入力・実装・台帳も不変。`stable/b3-complete-20260725`を最新撤退点とする。prompt、Gemini、表示計画、演出指示書、描画、自然な改行・読みやすさの認定は未実施。次はB4表示計画契約の別判断で、B5 prompt／payload、B6 Gemini run 1と統合しない。**本資料内に残る「B3承認待ち」「正式7ファイル未実施」は経緯記録であり、現在地としては本追補が全て上書きする。**
+- 2026-07-25追補5（最終現在地）: kawafmmはB4実装契約追補v001を承認した。実装前の正本・実体照合で、B4が正式依存として要求するv003 caption検査とv003 instruction/resolution検査の実装file、path、公開入口が存在しないことを確認した。既存v002の代用は後方互換・暗黙変換・fallback禁止に反し、別file新設かB4内包かも正本から一意に決まらないため、新しい契約判断をせず実装前停止した。B4コード、testdata、job、合成85件、回帰95件、candidate 13 preflightは0件。B3正式7ファイルと`stable/b3-complete-20260725`は不変で、B4 tag・JOURNALは追加していない。次は、v003 caption coreとv003 instruction/resolution coreを別fileで新設する版付き実装契約追補の起草可否を人間へ戻す。B5、B6、Gemini、正式表示計画、描画へは進まない。**本資料内に残る「次はB4実装」の記述は経緯記録であり、現在地としては本追補が上書きする。**
 - 実データに使う正式入口は、承認済み最終区間列から基礎映像と`presentation-base-media-timeline-v002`を対生成し、`presentation-renderer-v002`へ渡す系統だけ。timeline/renderer/QC v001は削除せず実験記録として保持するが、実データへ使わない。candidate 13の4本は人間確認専用で、正式組立決定は採用Dの写像だけを唯一の変換元にして別artifactへ固定した。音声時刻格子は、連続PCMを全復号frameの絶対sample位置へ明示配置し、空白を明示zero化する方式。正常系比較はv1の一時path差9/10、v2の異なるFFmpeg実体差9/10を証拠保持し、同一Node・FFmpeg・FFprobe実体へ固定したv3で10/10厳密一致。正式attempt v002は生成manifestをv002へ上げ、3つの実行ツールの解決後pathとbinary SHAを診断記録した。合否は版文字列契約のままで、期待binaryとの完全同一性束縛は別の契約改訂候補。既存ゲートA検査結果の受け渡し入口を固定するB1実装契約追補v001は承認済み。production runnerとpackage checkerは同じ版付き純粋入口を使う。B2の4原因修正と公開再照合を実装したが、package側は127/132で停止中。118・119は検査fixture／oracle、123・124は合成fixture／raw観測経路の新しい不整合、132は118の派生。事後監査で公開snapshotの正規rootへのpath束縛と原因B対照の違反path完全一致も未実装と判明した。期待を緩めず、意味回答側・回帰・preflightへ進んでいない。正式package・Gemini・描画は引き続き別承認。
 - 迷ったら: 「その作業は、人間の手直し時間を減らすか、選択眼を実績に近づけるか」。
 
