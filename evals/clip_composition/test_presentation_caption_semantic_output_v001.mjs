@@ -979,7 +979,8 @@ const makeFixture = ({
     },
   };
   const jobBytes = serialized(job);
-  const jobSnapshot = snapshot(JOB_PATH, jobBytes);
+  const initialJobSnapshot = snapshot(JOB_PATH, jobBytes);
+  const preReportJobSnapshot = snapshot(JOB_PATH, jobBytes);
   const artifactReads = packageArtifacts.map((artifact) => ({
     fileName: artifact.fileName,
     status: 'read',
@@ -1031,12 +1032,12 @@ const makeFixture = ({
     contextPhase: 'final-report',
     job: {
       value: job,
-      initialSnapshot: jobSnapshot,
+      initialSnapshot: initialJobSnapshot,
       preReportInput: {
         role: 'job',
         path: JOB_PATH,
         status: 'read',
-        snapshot: jobSnapshot,
+        snapshot: preReportJobSnapshot,
       },
     },
     implementationInputs,
@@ -1440,7 +1441,7 @@ const createMappedFilesystemAdapter = (
       const mapped = mappedPath(inputPath);
       if (mapped !== inputPath) {
         await realpath(mapped);
-        return inputPath;
+        return resolve(inputPath);
       }
       return realpath(inputPath);
     },
@@ -1656,6 +1657,23 @@ test('production runnerは第二引数なし/nullをrejectせずuntrusted exit 2
       diagnostic: 'CAPTION_B1_SEMANTIC_CLI_JOB_CONTEXT_UNAVAILABLE',
     },
   );
+});
+
+test('合成filesystemはproduction realpathと同じ絶対path正規化を返す', async () => {
+  const fixture = materializeRunnerWorkspace();
+  try {
+    const adapter = createMappedFilesystemAdapter(fixture.root);
+    assert.equal(
+      await adapter.realpath(WORKSPACE_ROOT),
+      resolve(WORKSPACE_ROOT),
+    );
+    for (const [, repositoryPath] of [...DIRECT, ...DEPENDENCIES]) {
+      const absolutePath = resolve(WORKSPACE_ROOT, repositoryPath);
+      assert.equal(await adapter.realpath(absolutePath), absolutePath);
+    }
+  } finally {
+    rmSync(fixture.root, {recursive: true, force: true});
+  }
 });
 
 test('export済みrunnerは合成filesystemとbuilderでcompleteを二pass検査しtrusted reportへ通す', async () => {
@@ -1881,7 +1899,17 @@ for (const [name, code, checkName, mutate] of [
     context.job.value.mode = 'invalid';
   }],
   ['job stability', 'JOB_FILE_MISMATCH', 'jobStability', (context) => {
+    const initialBeforeReplacement = clone(context.job.initialSnapshot);
+    assert.notEqual(
+      context.job.initialSnapshot,
+      context.job.preReportInput.snapshot,
+    );
+    assert.notEqual(
+      context.job.initialSnapshot.bytes,
+      context.job.preReportInput.snapshot.bytes,
+    );
     context.job.preReportInput.snapshot.fileSha256 = 'f'.repeat(64);
+    assert.deepEqual(context.job.initialSnapshot, initialBeforeReplacement);
   }],
   ['implementation hash', 'IMPLEMENTATION_MISMATCH', 'implementationBinding', (context) => {
     context.implementationInputs[0].snapshot.fileSha256 = 'f'.repeat(64);
