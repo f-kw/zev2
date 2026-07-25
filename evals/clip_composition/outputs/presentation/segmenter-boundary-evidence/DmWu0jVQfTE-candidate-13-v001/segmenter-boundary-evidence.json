@@ -1,0 +1,4703 @@
+{
+  "schemaVersion": "presentation-segmenter-boundary-evidence-v001",
+  "artifactId": "DmWu0jVQfTE-candidate-13-v001",
+  "generatorVersion": "presentation-segmenter-boundary-evidence-generator-v001",
+  "sourceBinding": {
+    "sourceArtifactId": "DmWu0jVQfTE-candidate-13-retained-source-atoms-v001",
+    "sourceArtifactPath": "evals/clip_composition/outputs/presentation/retained-source-atoms/DmWu0jVQfTE-candidate-13-v001/source-atoms.json",
+    "sourceArtifactFileSha256": "8656549ec3fbbc0fb9447be7b9c2e784d22ebd18f08ee3e24c474ee62225c6d3",
+    "sourceArtifactCanonicalSha256": "0bf1e10ab94388ec9521cb2270e6c339e7c7b6d8317443b469606b6b353df43c",
+    "sourceRef": "youtube:DmWu0jVQfTE",
+    "sourceProvenance": "youtube-format299-video+frozen-format251-audio-v001",
+    "atomGranularity": "character-timestamp",
+    "rawSourceAtomsCanonicalSha256": "cd76bfd2fe7ab3b5156433f6d9e2229b20c3d3bbd7d94f2b9e9abbc804a6efb3"
+  },
+  "runtimeBinding": {
+    "nodeBinarySha256": "de4f3b493b15e7a0ee311f6a2c6dbf93858052f5802aa91cfafa2c57e9d6bc5c",
+    "nodeVersion": "v20.19.6",
+    "icuVersion": "77.1",
+    "resolvedLocale": "ja",
+    "resolvedGranularity": "word",
+    "diagnostics": {
+      "resolvedNodePath": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+      "platform": "darwin",
+      "arch": "arm64",
+      "v8Version": "11.3.244.8-node.33",
+      "unicodeVersion": "16.0",
+      "cldrVersion": "47.0"
+    }
+  },
+  "segmentationPolicy": {
+    "policyVersion": "presentation-segmenter-boundary-policy-v001",
+    "engine": "Intl.Segmenter",
+    "locale": "ja",
+    "granularity": "word",
+    "indexUnit": "utf16-code-unit",
+    "containerRule": "maximal-contiguous-run-by-timeline-segment-and-speech-v001",
+    "candidateIdRule": "source-order-six-digit-v001",
+    "unicodeNormalization": "none"
+  },
+  "boundaryCandidates": [
+    {
+      "boundaryCandidateId": "segmenter-boundary-000001",
+      "containerId": "segmenter-container-000001",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 1,
+      "sourceAtomIds": [
+        "word-6932",
+        "word-6933",
+        "word-6934",
+        "word-6935"
+      ],
+      "text": "母ちゃん",
+      "startAnchor": {
+        "atomId": "word-6932",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-6935",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 0,
+      "segmenterLengthUtf16": 4,
+      "isWordLike": true,
+      "sourceAtomCount": 4
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000002",
+      "containerId": "segmenter-container-000001",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 1,
+      "sourceAtomIds": [
+        "word-6936",
+        "word-6937"
+      ],
+      "text": "から",
+      "startAnchor": {
+        "atomId": "word-6936",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-6937",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 4,
+      "segmenterLengthUtf16": 2,
+      "isWordLike": true,
+      "sourceAtomCount": 2
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000003",
+      "containerId": "segmenter-container-000001",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 1,
+      "sourceAtomIds": [
+        "word-6938"
+      ],
+      "text": "で",
+      "startAnchor": {
+        "atomId": "word-6938",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-6938",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 6,
+      "segmenterLengthUtf16": 1,
+      "isWordLike": true,
+      "sourceAtomCount": 1
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000004",
+      "containerId": "segmenter-container-000001",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 1,
+      "sourceAtomIds": [
+        "word-6939",
+        "word-6940",
+        "word-6941"
+      ],
+      "text": "リアル",
+      "startAnchor": {
+        "atomId": "word-6939",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-6941",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 7,
+      "segmenterLengthUtf16": 3,
+      "isWordLike": true,
+      "sourceAtomCount": 3
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000005",
+      "containerId": "segmenter-container-000001",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 1,
+      "sourceAtomIds": [
+        "word-6942",
+        "word-6943",
+        "word-6944",
+        "word-6945"
+      ],
+      "text": "母ちゃん",
+      "startAnchor": {
+        "atomId": "word-6942",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-6945",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 10,
+      "segmenterLengthUtf16": 4,
+      "isWordLike": true,
+      "sourceAtomCount": 4
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000006",
+      "containerId": "segmenter-container-000001",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 1,
+      "sourceAtomIds": [
+        "word-6946",
+        "word-6947",
+        "word-6948",
+        "word-6949"
+      ],
+      "text": "ちょっと",
+      "startAnchor": {
+        "atomId": "word-6946",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-6949",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 14,
+      "segmenterLengthUtf16": 4,
+      "isWordLike": true,
+      "sourceAtomCount": 4
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000007",
+      "containerId": "segmenter-container-000001",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 1,
+      "sourceAtomIds": [
+        "word-6950",
+        "word-6951"
+      ],
+      "text": "その",
+      "startAnchor": {
+        "atomId": "word-6950",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-6951",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 18,
+      "segmenterLengthUtf16": 2,
+      "isWordLike": true,
+      "sourceAtomCount": 2
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000008",
+      "containerId": "segmenter-container-000001",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 1,
+      "sourceAtomIds": [
+        "word-6952",
+        "word-6953",
+        "word-6954"
+      ],
+      "text": "リアル",
+      "startAnchor": {
+        "atomId": "word-6952",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-6954",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 20,
+      "segmenterLengthUtf16": 3,
+      "isWordLike": true,
+      "sourceAtomCount": 3
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000009",
+      "containerId": "segmenter-container-000001",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 1,
+      "sourceAtomIds": [
+        "word-6955",
+        "word-6956",
+        "word-6957",
+        "word-6958"
+      ],
+      "text": "母ちゃん",
+      "startAnchor": {
+        "atomId": "word-6955",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-6958",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 23,
+      "segmenterLengthUtf16": 4,
+      "isWordLike": true,
+      "sourceAtomCount": 4
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000010",
+      "containerId": "segmenter-container-000001",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 1,
+      "sourceAtomIds": [
+        "word-6959"
+      ],
+      "text": "の",
+      "startAnchor": {
+        "atomId": "word-6959",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-6959",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 27,
+      "segmenterLengthUtf16": 1,
+      "isWordLike": true,
+      "sourceAtomCount": 1
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000011",
+      "containerId": "segmenter-container-000001",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 1,
+      "sourceAtomIds": [
+        "word-6960",
+        "word-6961",
+        "word-6962"
+      ],
+      "text": "贈り物",
+      "startAnchor": {
+        "atomId": "word-6960",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-6962",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 28,
+      "segmenterLengthUtf16": 3,
+      "isWordLike": true,
+      "sourceAtomCount": 3
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000012",
+      "containerId": "segmenter-container-000001",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 1,
+      "sourceAtomIds": [
+        "word-6963"
+      ],
+      "text": "の",
+      "startAnchor": {
+        "atomId": "word-6963",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-6963",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 31,
+      "segmenterLengthUtf16": 1,
+      "isWordLike": true,
+      "sourceAtomCount": 1
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000013",
+      "containerId": "segmenter-container-000001",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 1,
+      "sourceAtomIds": [
+        "word-6964"
+      ],
+      "text": "話",
+      "startAnchor": {
+        "atomId": "word-6964",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-6964",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 32,
+      "segmenterLengthUtf16": 1,
+      "isWordLike": true,
+      "sourceAtomCount": 1
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000014",
+      "containerId": "segmenter-container-000001",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 1,
+      "sourceAtomIds": [
+        "word-6965"
+      ],
+      "text": "を",
+      "startAnchor": {
+        "atomId": "word-6965",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-6965",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 33,
+      "segmenterLengthUtf16": 1,
+      "isWordLike": true,
+      "sourceAtomCount": 1
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000015",
+      "containerId": "segmenter-container-000001",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 1,
+      "sourceAtomIds": [
+        "word-6966",
+        "word-6967"
+      ],
+      "text": "する",
+      "startAnchor": {
+        "atomId": "word-6966",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-6967",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 34,
+      "segmenterLengthUtf16": 2,
+      "isWordLike": true,
+      "sourceAtomCount": 2
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000016",
+      "containerId": "segmenter-container-000001",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 1,
+      "sourceAtomIds": [
+        "word-6968"
+      ],
+      "text": "ん",
+      "startAnchor": {
+        "atomId": "word-6968",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-6968",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 36,
+      "segmenterLengthUtf16": 1,
+      "isWordLike": true,
+      "sourceAtomCount": 1
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000017",
+      "containerId": "segmenter-container-000001",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 1,
+      "sourceAtomIds": [
+        "word-6969",
+        "word-6970",
+        "word-6971"
+      ],
+      "text": "だけど",
+      "startAnchor": {
+        "atomId": "word-6969",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-6971",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 37,
+      "segmenterLengthUtf16": 3,
+      "isWordLike": true,
+      "sourceAtomCount": 3
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000018",
+      "containerId": "segmenter-container-000001",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 1,
+      "sourceAtomIds": [
+        "word-6972",
+        "word-6973"
+      ],
+      "text": "その",
+      "startAnchor": {
+        "atomId": "word-6972",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-6973",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 40,
+      "segmenterLengthUtf16": 2,
+      "isWordLike": true,
+      "sourceAtomCount": 2
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000019",
+      "containerId": "segmenter-container-000001",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 1,
+      "sourceAtomIds": [
+        "word-6974",
+        "word-6975",
+        "word-6976"
+      ],
+      "text": "リアル",
+      "startAnchor": {
+        "atomId": "word-6974",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-6976",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 42,
+      "segmenterLengthUtf16": 3,
+      "isWordLike": true,
+      "sourceAtomCount": 3
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000020",
+      "containerId": "segmenter-container-000001",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 1,
+      "sourceAtomIds": [
+        "word-6977",
+        "word-6978",
+        "word-6979",
+        "word-6980"
+      ],
+      "text": "母ちゃん",
+      "startAnchor": {
+        "atomId": "word-6977",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-6980",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 45,
+      "segmenterLengthUtf16": 4,
+      "isWordLike": true,
+      "sourceAtomCount": 4
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000021",
+      "containerId": "segmenter-container-000001",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 1,
+      "sourceAtomIds": [
+        "word-6981"
+      ],
+      "text": "は",
+      "startAnchor": {
+        "atomId": "word-6981",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-6981",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 49,
+      "segmenterLengthUtf16": 1,
+      "isWordLike": true,
+      "sourceAtomCount": 1
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000022",
+      "containerId": "segmenter-container-000001",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 1,
+      "sourceAtomIds": [
+        "word-6982",
+        "word-6983",
+        "word-6984",
+        "word-6985"
+      ],
+      "text": "ちょっと",
+      "startAnchor": {
+        "atomId": "word-6982",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-6985",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 50,
+      "segmenterLengthUtf16": 4,
+      "isWordLike": true,
+      "sourceAtomCount": 4
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000023",
+      "containerId": "segmenter-container-000001",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 1,
+      "sourceAtomIds": [
+        "word-6986",
+        "word-6987"
+      ],
+      "text": "天然",
+      "startAnchor": {
+        "atomId": "word-6986",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-6987",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 54,
+      "segmenterLengthUtf16": 2,
+      "isWordLike": true,
+      "sourceAtomCount": 2
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000024",
+      "containerId": "segmenter-container-000001",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 1,
+      "sourceAtomIds": [
+        "word-6988"
+      ],
+      "text": "な",
+      "startAnchor": {
+        "atomId": "word-6988",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-6988",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 56,
+      "segmenterLengthUtf16": 1,
+      "isWordLike": true,
+      "sourceAtomCount": 1
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000025",
+      "containerId": "segmenter-container-000001",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 1,
+      "sourceAtomIds": [
+        "word-6989"
+      ],
+      "text": "の",
+      "startAnchor": {
+        "atomId": "word-6989",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-6989",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 57,
+      "segmenterLengthUtf16": 1,
+      "isWordLike": true,
+      "sourceAtomCount": 1
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000026",
+      "containerId": "segmenter-container-000001",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 1,
+      "sourceAtomIds": [
+        "word-6990",
+        "word-6991",
+        "word-6992",
+        "word-6993"
+      ],
+      "text": "ほんとに",
+      "startAnchor": {
+        "atomId": "word-6990",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-6993",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 58,
+      "segmenterLengthUtf16": 4,
+      "isWordLike": true,
+      "sourceAtomCount": 4
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000027",
+      "containerId": "segmenter-container-000001",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 1,
+      "sourceAtomIds": [
+        "word-6994",
+        "word-6995",
+        "word-6996",
+        "word-6997"
+      ],
+      "text": "ちょっと",
+      "startAnchor": {
+        "atomId": "word-6994",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-6997",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 62,
+      "segmenterLengthUtf16": 4,
+      "isWordLike": true,
+      "sourceAtomCount": 4
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000028",
+      "containerId": "segmenter-container-000001",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 1,
+      "sourceAtomIds": [
+        "word-6998",
+        "word-6999",
+        "word-7000",
+        "word-7001"
+      ],
+      "text": "ちょっと",
+      "startAnchor": {
+        "atomId": "word-6998",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7001",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 66,
+      "segmenterLengthUtf16": 4,
+      "isWordLike": true,
+      "sourceAtomCount": 4
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000029",
+      "containerId": "segmenter-container-000001",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 1,
+      "sourceAtomIds": [
+        "word-7002",
+        "word-7003"
+      ],
+      "text": "天然",
+      "startAnchor": {
+        "atomId": "word-7002",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7003",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 70,
+      "segmenterLengthUtf16": 2,
+      "isWordLike": true,
+      "sourceAtomCount": 2
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000030",
+      "containerId": "segmenter-container-000001",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 1,
+      "sourceAtomIds": [
+        "word-7004"
+      ],
+      "text": "な",
+      "startAnchor": {
+        "atomId": "word-7004",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7004",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 72,
+      "segmenterLengthUtf16": 1,
+      "isWordLike": true,
+      "sourceAtomCount": 1
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000031",
+      "containerId": "segmenter-container-000001",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 1,
+      "sourceAtomIds": [
+        "word-7005"
+      ],
+      "text": "の",
+      "startAnchor": {
+        "atomId": "word-7005",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7005",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 73,
+      "segmenterLengthUtf16": 1,
+      "isWordLike": true,
+      "sourceAtomCount": 1
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000032",
+      "containerId": "segmenter-container-000001",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 1,
+      "sourceAtomIds": [
+        "word-7006",
+        "word-7007",
+        "word-7008"
+      ],
+      "text": "それで",
+      "startAnchor": {
+        "atomId": "word-7006",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7008",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 74,
+      "segmenterLengthUtf16": 3,
+      "isWordLike": true,
+      "sourceAtomCount": 3
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000033",
+      "containerId": "segmenter-container-000001",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 1,
+      "sourceAtomIds": [
+        "word-7009",
+        "word-7010",
+        "word-7011"
+      ],
+      "text": "なんか",
+      "startAnchor": {
+        "atomId": "word-7009",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7011",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 77,
+      "segmenterLengthUtf16": 3,
+      "isWordLike": true,
+      "sourceAtomCount": 3
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000034",
+      "containerId": "segmenter-container-000001",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 1,
+      "sourceAtomIds": [
+        "word-7012",
+        "word-7013"
+      ],
+      "text": "あの",
+      "startAnchor": {
+        "atomId": "word-7012",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7013",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 80,
+      "segmenterLengthUtf16": 2,
+      "isWordLike": true,
+      "sourceAtomCount": 2
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000035",
+      "containerId": "segmenter-container-000001",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 1,
+      "sourceAtomIds": [
+        "word-7014",
+        "word-7015"
+      ],
+      "text": "よく",
+      "startAnchor": {
+        "atomId": "word-7014",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7015",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 82,
+      "segmenterLengthUtf16": 2,
+      "isWordLike": true,
+      "sourceAtomCount": 2
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000036",
+      "containerId": "segmenter-container-000001",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 1,
+      "sourceAtomIds": [
+        "word-7016",
+        "word-7017",
+        "word-7018",
+        "word-7019"
+      ],
+      "text": "おにぎり",
+      "startAnchor": {
+        "atomId": "word-7016",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7019",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 84,
+      "segmenterLengthUtf16": 4,
+      "isWordLike": true,
+      "sourceAtomCount": 4
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000037",
+      "containerId": "segmenter-container-000001",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 1,
+      "sourceAtomIds": [
+        "word-7020",
+        "word-7021"
+      ],
+      "text": "とか",
+      "startAnchor": {
+        "atomId": "word-7020",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7021",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 88,
+      "segmenterLengthUtf16": 2,
+      "isWordLike": true,
+      "sourceAtomCount": 2
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000038",
+      "containerId": "segmenter-container-000001",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 1,
+      "sourceAtomIds": [
+        "word-7022"
+      ],
+      "text": "送",
+      "startAnchor": {
+        "atomId": "word-7022",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7022",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 90,
+      "segmenterLengthUtf16": 1,
+      "isWordLike": true,
+      "sourceAtomCount": 1
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000039",
+      "containerId": "segmenter-container-000001",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 1,
+      "sourceAtomIds": [
+        "word-7023",
+        "word-7024"
+      ],
+      "text": "って",
+      "startAnchor": {
+        "atomId": "word-7023",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7024",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 91,
+      "segmenterLengthUtf16": 2,
+      "isWordLike": true,
+      "sourceAtomCount": 2
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000040",
+      "containerId": "segmenter-container-000001",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 1,
+      "sourceAtomIds": [
+        "word-7025"
+      ],
+      "text": "き",
+      "startAnchor": {
+        "atomId": "word-7025",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7025",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 93,
+      "segmenterLengthUtf16": 1,
+      "isWordLike": true,
+      "sourceAtomCount": 1
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000041",
+      "containerId": "segmenter-container-000001",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 1,
+      "sourceAtomIds": [
+        "word-7026",
+        "word-7027"
+      ],
+      "text": "てく",
+      "startAnchor": {
+        "atomId": "word-7026",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7027",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 94,
+      "segmenterLengthUtf16": 2,
+      "isWordLike": true,
+      "sourceAtomCount": 2
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000042",
+      "containerId": "segmenter-container-000001",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 1,
+      "sourceAtomIds": [
+        "word-7028"
+      ],
+      "text": "れ",
+      "startAnchor": {
+        "atomId": "word-7028",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7028",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 96,
+      "segmenterLengthUtf16": 1,
+      "isWordLike": true,
+      "sourceAtomCount": 1
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000043",
+      "containerId": "segmenter-container-000001",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 1,
+      "sourceAtomIds": [
+        "word-7029"
+      ],
+      "text": "て",
+      "startAnchor": {
+        "atomId": "word-7029",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7029",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 97,
+      "segmenterLengthUtf16": 1,
+      "isWordLike": true,
+      "sourceAtomCount": 1
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000044",
+      "containerId": "segmenter-container-000001",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 1,
+      "sourceAtomIds": [
+        "word-7030"
+      ],
+      "text": "て",
+      "startAnchor": {
+        "atomId": "word-7030",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7030",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 98,
+      "segmenterLengthUtf16": 1,
+      "isWordLike": true,
+      "sourceAtomCount": 1
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000045",
+      "containerId": "segmenter-container-000001",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 1,
+      "sourceAtomIds": [
+        "word-7031"
+      ],
+      "text": "で",
+      "startAnchor": {
+        "atomId": "word-7031",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7031",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 99,
+      "segmenterLengthUtf16": 1,
+      "isWordLike": true,
+      "sourceAtomCount": 1
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000046",
+      "containerId": "segmenter-container-000001",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 1,
+      "sourceAtomIds": [
+        "word-7032",
+        "word-7033"
+      ],
+      "text": "あり",
+      "startAnchor": {
+        "atomId": "word-7032",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7033",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 100,
+      "segmenterLengthUtf16": 2,
+      "isWordLike": true,
+      "sourceAtomCount": 2
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000047",
+      "containerId": "segmenter-container-000001",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 1,
+      "sourceAtomIds": [
+        "word-7034"
+      ],
+      "text": "が",
+      "startAnchor": {
+        "atomId": "word-7034",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7034",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 102,
+      "segmenterLengthUtf16": 1,
+      "isWordLike": true,
+      "sourceAtomCount": 1
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000048",
+      "containerId": "segmenter-container-000001",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 1,
+      "sourceAtomIds": [
+        "word-7035"
+      ],
+      "text": "て",
+      "startAnchor": {
+        "atomId": "word-7035",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7035",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 103,
+      "segmenterLengthUtf16": 1,
+      "isWordLike": true,
+      "sourceAtomCount": 1
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000049",
+      "containerId": "segmenter-container-000001",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 1,
+      "sourceAtomIds": [
+        "word-7036"
+      ],
+      "text": "ー",
+      "startAnchor": {
+        "atomId": "word-7036",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7036",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 104,
+      "segmenterLengthUtf16": 1,
+      "isWordLike": true,
+      "sourceAtomCount": 1
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000050",
+      "containerId": "segmenter-container-000001",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 1,
+      "sourceAtomIds": [
+        "word-7037",
+        "word-7038"
+      ],
+      "text": "って",
+      "startAnchor": {
+        "atomId": "word-7037",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7038",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 105,
+      "segmenterLengthUtf16": 2,
+      "isWordLike": true,
+      "sourceAtomCount": 2
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000051",
+      "containerId": "segmenter-container-000001",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 1,
+      "sourceAtomIds": [
+        "word-7039",
+        "word-7040"
+      ],
+      "text": "感じ",
+      "startAnchor": {
+        "atomId": "word-7039",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7040",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 107,
+      "segmenterLengthUtf16": 2,
+      "isWordLike": true,
+      "sourceAtomCount": 2
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000052",
+      "containerId": "segmenter-container-000001",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 1,
+      "sourceAtomIds": [
+        "word-7041"
+      ],
+      "text": "で",
+      "startAnchor": {
+        "atomId": "word-7041",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7041",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 109,
+      "segmenterLengthUtf16": 1,
+      "isWordLike": true,
+      "sourceAtomCount": 1
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000053",
+      "containerId": "segmenter-container-000001",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 1,
+      "sourceAtomIds": [
+        "word-7042"
+      ],
+      "text": "食",
+      "startAnchor": {
+        "atomId": "word-7042",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7042",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 110,
+      "segmenterLengthUtf16": 1,
+      "isWordLike": true,
+      "sourceAtomCount": 1
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000054",
+      "containerId": "segmenter-container-000001",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 1,
+      "sourceAtomIds": [
+        "word-7043"
+      ],
+      "text": "べ",
+      "startAnchor": {
+        "atomId": "word-7043",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7043",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 111,
+      "segmenterLengthUtf16": 1,
+      "isWordLike": true,
+      "sourceAtomCount": 1
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000055",
+      "containerId": "segmenter-container-000001",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 1,
+      "sourceAtomIds": [
+        "word-7044",
+        "word-7045"
+      ],
+      "text": "てる",
+      "startAnchor": {
+        "atomId": "word-7044",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7045",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 112,
+      "segmenterLengthUtf16": 2,
+      "isWordLike": true,
+      "sourceAtomCount": 2
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000056",
+      "containerId": "segmenter-container-000001",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 1,
+      "sourceAtomIds": [
+        "word-7046"
+      ],
+      "text": "ん",
+      "startAnchor": {
+        "atomId": "word-7046",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7046",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 114,
+      "segmenterLengthUtf16": 1,
+      "isWordLike": true,
+      "sourceAtomCount": 1
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000057",
+      "containerId": "segmenter-container-000001",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 1,
+      "sourceAtomIds": [
+        "word-7047",
+        "word-7048",
+        "word-7049"
+      ],
+      "text": "だけど",
+      "startAnchor": {
+        "atomId": "word-7047",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7049",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 115,
+      "segmenterLengthUtf16": 3,
+      "isWordLike": true,
+      "sourceAtomCount": 3
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000058",
+      "containerId": "segmenter-container-000001",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 1,
+      "sourceAtomIds": [
+        "word-7050",
+        "word-7051",
+        "word-7052"
+      ],
+      "text": "この前",
+      "startAnchor": {
+        "atomId": "word-7050",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7052",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 118,
+      "segmenterLengthUtf16": 3,
+      "isWordLike": true,
+      "sourceAtomCount": 3
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000059",
+      "containerId": "segmenter-container-000001",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 1,
+      "sourceAtomIds": [
+        "word-7053",
+        "word-7054"
+      ],
+      "text": "その",
+      "startAnchor": {
+        "atomId": "word-7053",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7054",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 121,
+      "segmenterLengthUtf16": 2,
+      "isWordLike": true,
+      "sourceAtomCount": 2
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000060",
+      "containerId": "segmenter-container-000001",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 1,
+      "sourceAtomIds": [
+        "word-7055",
+        "word-7056",
+        "word-7057"
+      ],
+      "text": "なんか",
+      "startAnchor": {
+        "atomId": "word-7055",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7057",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 123,
+      "segmenterLengthUtf16": 3,
+      "isWordLike": true,
+      "sourceAtomCount": 3
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000061",
+      "containerId": "segmenter-container-000002",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 2,
+      "sourceAtomIds": [
+        "word-7058",
+        "word-7059"
+      ],
+      "text": "薄い",
+      "startAnchor": {
+        "atomId": "word-7058",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7059",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 0,
+      "segmenterLengthUtf16": 2,
+      "isWordLike": true,
+      "sourceAtomCount": 2
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000062",
+      "containerId": "segmenter-container-000002",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 2,
+      "sourceAtomIds": [
+        "word-7060",
+        "word-7061"
+      ],
+      "text": "包み",
+      "startAnchor": {
+        "atomId": "word-7060",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7061",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 2,
+      "segmenterLengthUtf16": 2,
+      "isWordLike": true,
+      "sourceAtomCount": 2
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000063",
+      "containerId": "segmenter-container-000002",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 2,
+      "sourceAtomIds": [
+        "word-7062"
+      ],
+      "text": "が",
+      "startAnchor": {
+        "atomId": "word-7062",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7062",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 4,
+      "segmenterLengthUtf16": 1,
+      "isWordLike": true,
+      "sourceAtomCount": 1
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000064",
+      "containerId": "segmenter-container-000002",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 2,
+      "sourceAtomIds": [
+        "word-7063"
+      ],
+      "text": "届",
+      "startAnchor": {
+        "atomId": "word-7063",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7063",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 5,
+      "segmenterLengthUtf16": 1,
+      "isWordLike": true,
+      "sourceAtomCount": 1
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000065",
+      "containerId": "segmenter-container-000002",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 2,
+      "sourceAtomIds": [
+        "word-7064"
+      ],
+      "text": "い",
+      "startAnchor": {
+        "atomId": "word-7064",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7064",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 6,
+      "segmenterLengthUtf16": 1,
+      "isWordLike": true,
+      "sourceAtomCount": 1
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000066",
+      "containerId": "segmenter-container-000002",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 2,
+      "sourceAtomIds": [
+        "word-7065"
+      ],
+      "text": "て",
+      "startAnchor": {
+        "atomId": "word-7065",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7065",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 7,
+      "segmenterLengthUtf16": 1,
+      "isWordLike": true,
+      "sourceAtomCount": 1
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000067",
+      "containerId": "segmenter-container-000002",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 2,
+      "sourceAtomIds": [
+        "word-7066",
+        "word-7067"
+      ],
+      "text": "これ",
+      "startAnchor": {
+        "atomId": "word-7066",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7067",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 8,
+      "segmenterLengthUtf16": 2,
+      "isWordLike": true,
+      "sourceAtomCount": 2
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000068",
+      "containerId": "segmenter-container-000002",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 2,
+      "sourceAtomIds": [
+        "word-7068"
+      ],
+      "text": "何",
+      "startAnchor": {
+        "atomId": "word-7068",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7068",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 10,
+      "segmenterLengthUtf16": 1,
+      "isWordLike": true,
+      "sourceAtomCount": 1
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000069",
+      "containerId": "segmenter-container-000002",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 2,
+      "sourceAtomIds": [
+        "word-7069",
+        "word-7070"
+      ],
+      "text": "なん",
+      "startAnchor": {
+        "atomId": "word-7069",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7070",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 11,
+      "segmenterLengthUtf16": 2,
+      "isWordLike": true,
+      "sourceAtomCount": 2
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000070",
+      "containerId": "segmenter-container-000002",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 2,
+      "sourceAtomIds": [
+        "word-7071"
+      ],
+      "text": "だ",
+      "startAnchor": {
+        "atomId": "word-7071",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7071",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 13,
+      "segmenterLengthUtf16": 1,
+      "isWordLike": true,
+      "sourceAtomCount": 1
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000071",
+      "containerId": "segmenter-container-000002",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 2,
+      "sourceAtomIds": [
+        "word-7072",
+        "word-7073"
+      ],
+      "text": "ろう",
+      "startAnchor": {
+        "atomId": "word-7072",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7073",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 14,
+      "segmenterLengthUtf16": 2,
+      "isWordLike": true,
+      "sourceAtomCount": 2
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000072",
+      "containerId": "segmenter-container-000002",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 2,
+      "sourceAtomIds": [
+        "word-7074",
+        "word-7075"
+      ],
+      "text": "って",
+      "startAnchor": {
+        "atomId": "word-7074",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7075",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 16,
+      "segmenterLengthUtf16": 2,
+      "isWordLike": true,
+      "sourceAtomCount": 2
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000073",
+      "containerId": "segmenter-container-000002",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 2,
+      "sourceAtomIds": [
+        "word-7076"
+      ],
+      "text": "な",
+      "startAnchor": {
+        "atomId": "word-7076",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7076",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 18,
+      "segmenterLengthUtf16": 1,
+      "isWordLike": true,
+      "sourceAtomCount": 1
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000074",
+      "containerId": "segmenter-container-000002",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 2,
+      "sourceAtomIds": [
+        "word-7077"
+      ],
+      "text": "っ",
+      "startAnchor": {
+        "atomId": "word-7077",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7077",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 19,
+      "segmenterLengthUtf16": 1,
+      "isWordLike": true,
+      "sourceAtomCount": 1
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000075",
+      "containerId": "segmenter-container-000002",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 2,
+      "sourceAtomIds": [
+        "word-7078"
+      ],
+      "text": "た",
+      "startAnchor": {
+        "atomId": "word-7078",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7078",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 20,
+      "segmenterLengthUtf16": 1,
+      "isWordLike": true,
+      "sourceAtomCount": 1
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000076",
+      "containerId": "segmenter-container-000002",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 2,
+      "sourceAtomIds": [
+        "word-7079"
+      ],
+      "text": "の",
+      "startAnchor": {
+        "atomId": "word-7079",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7079",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 21,
+      "segmenterLengthUtf16": 1,
+      "isWordLike": true,
+      "sourceAtomCount": 1
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000077",
+      "containerId": "segmenter-container-000002",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 2,
+      "sourceAtomIds": [
+        "word-7080",
+        "word-7081"
+      ],
+      "text": "この",
+      "startAnchor": {
+        "atomId": "word-7080",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7081",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 22,
+      "segmenterLengthUtf16": 2,
+      "isWordLike": true,
+      "sourceAtomCount": 2
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000078",
+      "containerId": "segmenter-container-000002",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 2,
+      "sourceAtomIds": [
+        "word-7082",
+        "word-7083"
+      ],
+      "text": "薄い",
+      "startAnchor": {
+        "atomId": "word-7082",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7083",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 24,
+      "segmenterLengthUtf16": 2,
+      "isWordLike": true,
+      "sourceAtomCount": 2
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000079",
+      "containerId": "segmenter-container-000002",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 2,
+      "sourceAtomIds": [
+        "word-7084",
+        "word-7085"
+      ],
+      "text": "包み",
+      "startAnchor": {
+        "atomId": "word-7084",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7085",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 26,
+      "segmenterLengthUtf16": 2,
+      "isWordLike": true,
+      "sourceAtomCount": 2
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000080",
+      "containerId": "segmenter-container-000002",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 2,
+      "sourceAtomIds": [
+        "word-7086"
+      ],
+      "text": "は",
+      "startAnchor": {
+        "atomId": "word-7086",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7086",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 28,
+      "segmenterLengthUtf16": 1,
+      "isWordLike": true,
+      "sourceAtomCount": 1
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000081",
+      "containerId": "segmenter-container-000002",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 2,
+      "sourceAtomIds": [
+        "word-7087"
+      ],
+      "text": "何",
+      "startAnchor": {
+        "atomId": "word-7087",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7087",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 29,
+      "segmenterLengthUtf16": 1,
+      "isWordLike": true,
+      "sourceAtomCount": 1
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000082",
+      "containerId": "segmenter-container-000002",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 2,
+      "sourceAtomIds": [
+        "word-7088",
+        "word-7089"
+      ],
+      "text": "なん",
+      "startAnchor": {
+        "atomId": "word-7088",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7089",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 30,
+      "segmenterLengthUtf16": 2,
+      "isWordLike": true,
+      "sourceAtomCount": 2
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000083",
+      "containerId": "segmenter-container-000002",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 2,
+      "sourceAtomIds": [
+        "word-7090"
+      ],
+      "text": "だ",
+      "startAnchor": {
+        "atomId": "word-7090",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7090",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 32,
+      "segmenterLengthUtf16": 1,
+      "isWordLike": true,
+      "sourceAtomCount": 1
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000084",
+      "containerId": "segmenter-container-000002",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 2,
+      "sourceAtomIds": [
+        "word-7091",
+        "word-7092"
+      ],
+      "text": "ろう",
+      "startAnchor": {
+        "atomId": "word-7091",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7092",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 33,
+      "segmenterLengthUtf16": 2,
+      "isWordLike": true,
+      "sourceAtomCount": 2
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000085",
+      "containerId": "segmenter-container-000002",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 2,
+      "sourceAtomIds": [
+        "word-7093",
+        "word-7094"
+      ],
+      "text": "って",
+      "startAnchor": {
+        "atomId": "word-7093",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7094",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 35,
+      "segmenterLengthUtf16": 2,
+      "isWordLike": true,
+      "sourceAtomCount": 2
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000086",
+      "containerId": "segmenter-container-000002",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 2,
+      "sourceAtomIds": [
+        "word-7095"
+      ],
+      "text": "言",
+      "startAnchor": {
+        "atomId": "word-7095",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7095",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 37,
+      "segmenterLengthUtf16": 1,
+      "isWordLike": true,
+      "sourceAtomCount": 1
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000087",
+      "containerId": "segmenter-container-000002",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 2,
+      "sourceAtomIds": [
+        "word-7096",
+        "word-7097"
+      ],
+      "text": "って",
+      "startAnchor": {
+        "atomId": "word-7096",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7097",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 38,
+      "segmenterLengthUtf16": 2,
+      "isWordLike": true,
+      "sourceAtomCount": 2
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000088",
+      "containerId": "segmenter-container-000002",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 2,
+      "sourceAtomIds": [
+        "word-7098"
+      ],
+      "text": "開",
+      "startAnchor": {
+        "atomId": "word-7098",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7098",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 40,
+      "segmenterLengthUtf16": 1,
+      "isWordLike": true,
+      "sourceAtomCount": 1
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000089",
+      "containerId": "segmenter-container-000002",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 2,
+      "sourceAtomIds": [
+        "word-7099"
+      ],
+      "text": "け",
+      "startAnchor": {
+        "atomId": "word-7099",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7099",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 41,
+      "segmenterLengthUtf16": 1,
+      "isWordLike": true,
+      "sourceAtomCount": 1
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000090",
+      "containerId": "segmenter-container-000002",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 2,
+      "sourceAtomIds": [
+        "word-7100",
+        "word-7101"
+      ],
+      "text": "たら",
+      "startAnchor": {
+        "atomId": "word-7100",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7101",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 42,
+      "segmenterLengthUtf16": 2,
+      "isWordLike": true,
+      "sourceAtomCount": 2
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000091",
+      "containerId": "segmenter-container-000002",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 2,
+      "sourceAtomIds": [
+        "word-7102",
+        "word-7103"
+      ],
+      "text": "ムー",
+      "startAnchor": {
+        "atomId": "word-7102",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7103",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 44,
+      "segmenterLengthUtf16": 2,
+      "isWordLike": true,
+      "sourceAtomCount": 2
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000092",
+      "containerId": "segmenter-container-000002",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 2,
+      "sourceAtomIds": [
+        "word-7104"
+      ],
+      "text": "が",
+      "startAnchor": {
+        "atomId": "word-7104",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7104",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 46,
+      "segmenterLengthUtf16": 1,
+      "isWordLike": true,
+      "sourceAtomCount": 1
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000093",
+      "containerId": "segmenter-container-000002",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 2,
+      "sourceAtomIds": [
+        "word-7105"
+      ],
+      "text": "2",
+      "startAnchor": {
+        "atomId": "word-7105",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7105",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 47,
+      "segmenterLengthUtf16": 1,
+      "isWordLike": true,
+      "sourceAtomCount": 1
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000094",
+      "containerId": "segmenter-container-000002",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 2,
+      "sourceAtomIds": [
+        "word-7106"
+      ],
+      "text": "冊",
+      "startAnchor": {
+        "atomId": "word-7106",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7106",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 48,
+      "segmenterLengthUtf16": 1,
+      "isWordLike": true,
+      "sourceAtomCount": 1
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000095",
+      "containerId": "segmenter-container-000002",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 2,
+      "sourceAtomIds": [
+        "word-7107"
+      ],
+      "text": "入",
+      "startAnchor": {
+        "atomId": "word-7107",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7107",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 49,
+      "segmenterLengthUtf16": 1,
+      "isWordLike": true,
+      "sourceAtomCount": 1
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000096",
+      "containerId": "segmenter-container-000002",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 2,
+      "sourceAtomIds": [
+        "word-7108",
+        "word-7109"
+      ],
+      "text": "って",
+      "startAnchor": {
+        "atomId": "word-7108",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7109",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 50,
+      "segmenterLengthUtf16": 2,
+      "isWordLike": true,
+      "sourceAtomCount": 2
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000097",
+      "containerId": "segmenter-container-000002",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 2,
+      "sourceAtomIds": [
+        "word-7110"
+      ],
+      "text": "て",
+      "startAnchor": {
+        "atomId": "word-7110",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7110",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 52,
+      "segmenterLengthUtf16": 1,
+      "isWordLike": true,
+      "sourceAtomCount": 1
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000098",
+      "containerId": "segmenter-container-000002",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 2,
+      "sourceAtomIds": [
+        "word-7111",
+        "word-7112",
+        "word-7113"
+      ],
+      "text": "それで",
+      "startAnchor": {
+        "atomId": "word-7111",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7113",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 53,
+      "segmenterLengthUtf16": 3,
+      "isWordLike": true,
+      "sourceAtomCount": 3
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000099",
+      "containerId": "segmenter-container-000002",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 2,
+      "sourceAtomIds": [
+        "word-7114",
+        "word-7115",
+        "word-7116"
+      ],
+      "text": "スバル",
+      "startAnchor": {
+        "atomId": "word-7114",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7116",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 56,
+      "segmenterLengthUtf16": 3,
+      "isWordLike": true,
+      "sourceAtomCount": 3
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000100",
+      "containerId": "segmenter-container-000002",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 2,
+      "sourceAtomIds": [
+        "word-7117",
+        "word-7118"
+      ],
+      "text": "人生",
+      "startAnchor": {
+        "atomId": "word-7117",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7118",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 59,
+      "segmenterLengthUtf16": 2,
+      "isWordLike": true,
+      "sourceAtomCount": 2
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000101",
+      "containerId": "segmenter-container-000002",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 2,
+      "sourceAtomIds": [
+        "word-7119"
+      ],
+      "text": "で",
+      "startAnchor": {
+        "atomId": "word-7119",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7119",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 61,
+      "segmenterLengthUtf16": 1,
+      "isWordLike": true,
+      "sourceAtomCount": 1
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000102",
+      "containerId": "segmenter-container-000002",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 2,
+      "sourceAtomIds": [
+        "word-7120",
+        "word-7121",
+        "word-7122"
+      ],
+      "text": "初めて",
+      "startAnchor": {
+        "atomId": "word-7120",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7122",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 62,
+      "segmenterLengthUtf16": 3,
+      "isWordLike": true,
+      "sourceAtomCount": 3
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000103",
+      "containerId": "segmenter-container-000002",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 2,
+      "sourceAtomIds": [
+        "word-7123",
+        "word-7124"
+      ],
+      "text": "その",
+      "startAnchor": {
+        "atomId": "word-7123",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7124",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 65,
+      "segmenterLengthUtf16": 2,
+      "isWordLike": true,
+      "sourceAtomCount": 2
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000104",
+      "containerId": "segmenter-container-000002",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 2,
+      "sourceAtomIds": [
+        "word-7125",
+        "word-7126"
+      ],
+      "text": "ムー",
+      "startAnchor": {
+        "atomId": "word-7125",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7126",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 67,
+      "segmenterLengthUtf16": 2,
+      "isWordLike": true,
+      "sourceAtomCount": 2
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000105",
+      "containerId": "segmenter-container-000002",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 2,
+      "sourceAtomIds": [
+        "word-7127"
+      ],
+      "text": "を",
+      "startAnchor": {
+        "atomId": "word-7127",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7127",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 69,
+      "segmenterLengthUtf16": 1,
+      "isWordLike": true,
+      "sourceAtomCount": 1
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000106",
+      "containerId": "segmenter-container-000002",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 2,
+      "sourceAtomIds": [
+        "word-7128"
+      ],
+      "text": "人",
+      "startAnchor": {
+        "atomId": "word-7128",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7128",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 70,
+      "segmenterLengthUtf16": 1,
+      "isWordLike": true,
+      "sourceAtomCount": 1
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000107",
+      "containerId": "segmenter-container-000002",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 2,
+      "sourceAtomIds": [
+        "word-7129",
+        "word-7130"
+      ],
+      "text": "から",
+      "startAnchor": {
+        "atomId": "word-7129",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7130",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 71,
+      "segmenterLengthUtf16": 2,
+      "isWordLike": true,
+      "sourceAtomCount": 2
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000108",
+      "containerId": "segmenter-container-000002",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 2,
+      "sourceAtomIds": [
+        "word-7131"
+      ],
+      "text": "も",
+      "startAnchor": {
+        "atomId": "word-7131",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7131",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 73,
+      "segmenterLengthUtf16": 1,
+      "isWordLike": true,
+      "sourceAtomCount": 1
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000109",
+      "containerId": "segmenter-container-000002",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 2,
+      "sourceAtomIds": [
+        "word-7132"
+      ],
+      "text": "ら",
+      "startAnchor": {
+        "atomId": "word-7132",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7132",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 74,
+      "segmenterLengthUtf16": 1,
+      "isWordLike": true,
+      "sourceAtomCount": 1
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000110",
+      "containerId": "segmenter-container-000002",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 2,
+      "sourceAtomIds": [
+        "word-7133"
+      ],
+      "text": "っ",
+      "startAnchor": {
+        "atomId": "word-7133",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7133",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 75,
+      "segmenterLengthUtf16": 1,
+      "isWordLike": true,
+      "sourceAtomCount": 1
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000111",
+      "containerId": "segmenter-container-000002",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 2,
+      "sourceAtomIds": [
+        "word-7134"
+      ],
+      "text": "た",
+      "startAnchor": {
+        "atomId": "word-7134",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7134",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 76,
+      "segmenterLengthUtf16": 1,
+      "isWordLike": true,
+      "sourceAtomCount": 1
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000112",
+      "containerId": "segmenter-container-000002",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 2,
+      "sourceAtomIds": [
+        "word-7135"
+      ],
+      "text": "の",
+      "startAnchor": {
+        "atomId": "word-7135",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7135",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 77,
+      "segmenterLengthUtf16": 1,
+      "isWordLike": true,
+      "sourceAtomCount": 1
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000113",
+      "containerId": "segmenter-container-000002",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 2,
+      "sourceAtomIds": [
+        "word-7136",
+        "word-7137",
+        "word-7138"
+      ],
+      "text": "なんで",
+      "startAnchor": {
+        "atomId": "word-7136",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7138",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 78,
+      "segmenterLengthUtf16": 3,
+      "isWordLike": true,
+      "sourceAtomCount": 3
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000114",
+      "containerId": "segmenter-container-000002",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 2,
+      "sourceAtomIds": [
+        "word-7139",
+        "word-7140",
+        "word-7141"
+      ],
+      "text": "かって",
+      "startAnchor": {
+        "atomId": "word-7139",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7141",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 81,
+      "segmenterLengthUtf16": 3,
+      "isWordLike": true,
+      "sourceAtomCount": 3
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000115",
+      "containerId": "segmenter-container-000002",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 2,
+      "sourceAtomIds": [
+        "word-7142",
+        "word-7143"
+      ],
+      "text": "言う",
+      "startAnchor": {
+        "atomId": "word-7142",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7143",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 84,
+      "segmenterLengthUtf16": 2,
+      "isWordLike": true,
+      "sourceAtomCount": 2
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000116",
+      "containerId": "segmenter-container-000002",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 2,
+      "sourceAtomIds": [
+        "word-7144"
+      ],
+      "text": "と",
+      "startAnchor": {
+        "atomId": "word-7144",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7144",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 86,
+      "segmenterLengthUtf16": 1,
+      "isWordLike": true,
+      "sourceAtomCount": 1
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000117",
+      "containerId": "segmenter-container-000002",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 2,
+      "sourceAtomIds": [
+        "word-7145",
+        "word-7146",
+        "word-7147"
+      ],
+      "text": "スバル",
+      "startAnchor": {
+        "atomId": "word-7145",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7147",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 87,
+      "segmenterLengthUtf16": 3,
+      "isWordLike": true,
+      "sourceAtomCount": 3
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000118",
+      "containerId": "segmenter-container-000002",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 2,
+      "sourceAtomIds": [
+        "word-7148"
+      ],
+      "text": "が",
+      "startAnchor": {
+        "atomId": "word-7148",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7148",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 90,
+      "segmenterLengthUtf16": 1,
+      "isWordLike": true,
+      "sourceAtomCount": 1
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000119",
+      "containerId": "segmenter-container-000002",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 2,
+      "sourceAtomIds": [
+        "word-7149",
+        "word-7150"
+      ],
+      "text": "ムー",
+      "startAnchor": {
+        "atomId": "word-7149",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7150",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 91,
+      "segmenterLengthUtf16": 2,
+      "isWordLike": true,
+      "sourceAtomCount": 2
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000120",
+      "containerId": "segmenter-container-000002",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 2,
+      "sourceAtomIds": [
+        "word-7151"
+      ],
+      "text": "読",
+      "startAnchor": {
+        "atomId": "word-7151",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7151",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 93,
+      "segmenterLengthUtf16": 1,
+      "isWordLike": true,
+      "sourceAtomCount": 1
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000121",
+      "containerId": "segmenter-container-000002",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 2,
+      "sourceAtomIds": [
+        "word-7152",
+        "word-7153"
+      ],
+      "text": "んで",
+      "startAnchor": {
+        "atomId": "word-7152",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7153",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 94,
+      "segmenterLengthUtf16": 2,
+      "isWordLike": true,
+      "sourceAtomCount": 2
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000122",
+      "containerId": "segmenter-container-000002",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 2,
+      "sourceAtomIds": [
+        "word-7154"
+      ],
+      "text": "み",
+      "startAnchor": {
+        "atomId": "word-7154",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7154",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 96,
+      "segmenterLengthUtf16": 1,
+      "isWordLike": true,
+      "sourceAtomCount": 1
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000123",
+      "containerId": "segmenter-container-000002",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 2,
+      "sourceAtomIds": [
+        "word-7155"
+      ],
+      "text": "て",
+      "startAnchor": {
+        "atomId": "word-7155",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7155",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 97,
+      "segmenterLengthUtf16": 1,
+      "isWordLike": true,
+      "sourceAtomCount": 1
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000124",
+      "containerId": "segmenter-container-000002",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 2,
+      "sourceAtomIds": [
+        "word-7156",
+        "word-7157"
+      ],
+      "text": "って",
+      "startAnchor": {
+        "atomId": "word-7156",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7157",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 98,
+      "segmenterLengthUtf16": 2,
+      "isWordLike": true,
+      "sourceAtomCount": 2
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000125",
+      "containerId": "segmenter-container-000002",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 2,
+      "sourceAtomIds": [
+        "word-7158"
+      ],
+      "text": "言",
+      "startAnchor": {
+        "atomId": "word-7158",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7158",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 100,
+      "segmenterLengthUtf16": 1,
+      "isWordLike": true,
+      "sourceAtomCount": 1
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000126",
+      "containerId": "segmenter-container-000002",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 2,
+      "sourceAtomIds": [
+        "word-7159"
+      ],
+      "text": "っ",
+      "startAnchor": {
+        "atomId": "word-7159",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7159",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 101,
+      "segmenterLengthUtf16": 1,
+      "isWordLike": true,
+      "sourceAtomCount": 1
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000127",
+      "containerId": "segmenter-container-000002",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 2,
+      "sourceAtomIds": [
+        "word-7160"
+      ],
+      "text": "た",
+      "startAnchor": {
+        "atomId": "word-7160",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7160",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 102,
+      "segmenterLengthUtf16": 1,
+      "isWordLike": true,
+      "sourceAtomCount": 1
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000128",
+      "containerId": "segmenter-container-000002",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 2,
+      "sourceAtomIds": [
+        "word-7161",
+        "word-7162"
+      ],
+      "text": "から",
+      "startAnchor": {
+        "atomId": "word-7161",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7162",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 103,
+      "segmenterLengthUtf16": 2,
+      "isWordLike": true,
+      "sourceAtomCount": 2
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000129",
+      "containerId": "segmenter-container-000002",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 2,
+      "sourceAtomIds": [
+        "word-7163",
+        "word-7164"
+      ],
+      "text": "多分",
+      "startAnchor": {
+        "atomId": "word-7163",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7164",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 105,
+      "segmenterLengthUtf16": 2,
+      "isWordLike": true,
+      "sourceAtomCount": 2
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000130",
+      "containerId": "segmenter-container-000002",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 2,
+      "sourceAtomIds": [
+        "word-7165",
+        "word-7166"
+      ],
+      "text": "ムー",
+      "startAnchor": {
+        "atomId": "word-7165",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7166",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 107,
+      "segmenterLengthUtf16": 2,
+      "isWordLike": true,
+      "sourceAtomCount": 2
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000131",
+      "containerId": "segmenter-container-000002",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 2,
+      "sourceAtomIds": [
+        "word-7167"
+      ],
+      "text": "を",
+      "startAnchor": {
+        "atomId": "word-7167",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7167",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 109,
+      "segmenterLengthUtf16": 1,
+      "isWordLike": true,
+      "sourceAtomCount": 1
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000132",
+      "containerId": "segmenter-container-000002",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 2,
+      "sourceAtomIds": [
+        "word-7168"
+      ],
+      "text": "送",
+      "startAnchor": {
+        "atomId": "word-7168",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7168",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 110,
+      "segmenterLengthUtf16": 1,
+      "isWordLike": true,
+      "sourceAtomCount": 1
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000133",
+      "containerId": "segmenter-container-000002",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 2,
+      "sourceAtomIds": [
+        "word-7169",
+        "word-7170"
+      ],
+      "text": "って",
+      "startAnchor": {
+        "atomId": "word-7169",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7170",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 111,
+      "segmenterLengthUtf16": 2,
+      "isWordLike": true,
+      "sourceAtomCount": 2
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000134",
+      "containerId": "segmenter-container-000002",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 2,
+      "sourceAtomIds": [
+        "word-7171"
+      ],
+      "text": "き",
+      "startAnchor": {
+        "atomId": "word-7171",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7171",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 113,
+      "segmenterLengthUtf16": 1,
+      "isWordLike": true,
+      "sourceAtomCount": 1
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000135",
+      "containerId": "segmenter-container-000002",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 2,
+      "sourceAtomIds": [
+        "word-7172",
+        "word-7173"
+      ],
+      "text": "てく",
+      "startAnchor": {
+        "atomId": "word-7172",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7173",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 114,
+      "segmenterLengthUtf16": 2,
+      "isWordLike": true,
+      "sourceAtomCount": 2
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000136",
+      "containerId": "segmenter-container-000002",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 2,
+      "sourceAtomIds": [
+        "word-7174"
+      ],
+      "text": "れ",
+      "startAnchor": {
+        "atomId": "word-7174",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7174",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 116,
+      "segmenterLengthUtf16": 1,
+      "isWordLike": true,
+      "sourceAtomCount": 1
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000137",
+      "containerId": "segmenter-container-000002",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 2,
+      "sourceAtomIds": [
+        "word-7175",
+        "word-7176"
+      ],
+      "text": "たん",
+      "startAnchor": {
+        "atomId": "word-7175",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7176",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 117,
+      "segmenterLengthUtf16": 2,
+      "isWordLike": true,
+      "sourceAtomCount": 2
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000138",
+      "containerId": "segmenter-container-000002",
+      "timelineSegmentId": "segment-0001",
+      "speechId": 2,
+      "sourceAtomIds": [
+        "word-7177",
+        "word-7178",
+        "word-7179"
+      ],
+      "text": "だけど",
+      "startAnchor": {
+        "atomId": "word-7177",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7179",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 119,
+      "segmenterLengthUtf16": 3,
+      "isWordLike": true,
+      "sourceAtomCount": 3
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000139",
+      "containerId": "segmenter-container-000003",
+      "timelineSegmentId": "segment-0002",
+      "speechId": 3,
+      "sourceAtomIds": [
+        "word-7180",
+        "word-7181"
+      ],
+      "text": "その",
+      "startAnchor": {
+        "atomId": "word-7180",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7181",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 0,
+      "segmenterLengthUtf16": 2,
+      "isWordLike": true,
+      "sourceAtomCount": 2
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000140",
+      "containerId": "segmenter-container-000003",
+      "timelineSegmentId": "segment-0002",
+      "speechId": 3,
+      "sourceAtomIds": [
+        "word-7182",
+        "word-7183"
+      ],
+      "text": "月刊",
+      "startAnchor": {
+        "atomId": "word-7182",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7183",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 2,
+      "segmenterLengthUtf16": 2,
+      "isWordLike": true,
+      "sourceAtomCount": 2
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000141",
+      "containerId": "segmenter-container-000003",
+      "timelineSegmentId": "segment-0002",
+      "speechId": 3,
+      "sourceAtomIds": [
+        "word-7184",
+        "word-7185"
+      ],
+      "text": "ムー",
+      "startAnchor": {
+        "atomId": "word-7184",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7185",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 4,
+      "segmenterLengthUtf16": 2,
+      "isWordLike": true,
+      "sourceAtomCount": 2
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000142",
+      "containerId": "segmenter-container-000003",
+      "timelineSegmentId": "segment-0002",
+      "speechId": 3,
+      "sourceAtomIds": [
+        "word-7186"
+      ],
+      "text": "が",
+      "startAnchor": {
+        "atomId": "word-7186",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7186",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 6,
+      "segmenterLengthUtf16": 1,
+      "isWordLike": true,
+      "sourceAtomCount": 1
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000143",
+      "containerId": "segmenter-container-000003",
+      "timelineSegmentId": "segment-0002",
+      "speechId": 3,
+      "sourceAtomIds": [
+        "word-7187"
+      ],
+      "text": "2",
+      "startAnchor": {
+        "atomId": "word-7187",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7187",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 7,
+      "segmenterLengthUtf16": 1,
+      "isWordLike": true,
+      "sourceAtomCount": 1
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000144",
+      "containerId": "segmenter-container-000003",
+      "timelineSegmentId": "segment-0002",
+      "speechId": 3,
+      "sourceAtomIds": [
+        "word-7188"
+      ],
+      "text": "冊",
+      "startAnchor": {
+        "atomId": "word-7188",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7188",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 8,
+      "segmenterLengthUtf16": 1,
+      "isWordLike": true,
+      "sourceAtomCount": 1
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000145",
+      "containerId": "segmenter-container-000003",
+      "timelineSegmentId": "segment-0002",
+      "speechId": 3,
+      "sourceAtomIds": [
+        "word-7189"
+      ],
+      "text": "で",
+      "startAnchor": {
+        "atomId": "word-7189",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7189",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 9,
+      "segmenterLengthUtf16": 1,
+      "isWordLike": true,
+      "sourceAtomCount": 1
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000146",
+      "containerId": "segmenter-container-000003",
+      "timelineSegmentId": "segment-0002",
+      "speechId": 3,
+      "sourceAtomIds": [
+        "word-7190",
+        "word-7191",
+        "word-7192"
+      ],
+      "text": "スバル",
+      "startAnchor": {
+        "atomId": "word-7190",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7192",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 10,
+      "segmenterLengthUtf16": 3,
+      "isWordLike": true,
+      "sourceAtomCount": 3
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000147",
+      "containerId": "segmenter-container-000003",
+      "timelineSegmentId": "segment-0002",
+      "speechId": 3,
+      "sourceAtomIds": [
+        "word-7193",
+        "word-7194",
+        "word-7195"
+      ],
+      "text": "初めて",
+      "startAnchor": {
+        "atomId": "word-7193",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7195",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 13,
+      "segmenterLengthUtf16": 3,
+      "isWordLike": true,
+      "sourceAtomCount": 3
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000148",
+      "containerId": "segmenter-container-000003",
+      "timelineSegmentId": "segment-0002",
+      "speechId": 3,
+      "sourceAtomIds": [
+        "word-7196",
+        "word-7197"
+      ],
+      "text": "ムー",
+      "startAnchor": {
+        "atomId": "word-7196",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7197",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 16,
+      "segmenterLengthUtf16": 2,
+      "isWordLike": true,
+      "sourceAtomCount": 2
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000149",
+      "containerId": "segmenter-container-000003",
+      "timelineSegmentId": "segment-0002",
+      "speechId": 3,
+      "sourceAtomIds": [
+        "word-7198"
+      ],
+      "text": "読",
+      "startAnchor": {
+        "atomId": "word-7198",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7198",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 18,
+      "segmenterLengthUtf16": 1,
+      "isWordLike": true,
+      "sourceAtomCount": 1
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000150",
+      "containerId": "segmenter-container-000003",
+      "timelineSegmentId": "segment-0002",
+      "speechId": 3,
+      "sourceAtomIds": [
+        "word-7199"
+      ],
+      "text": "ん",
+      "startAnchor": {
+        "atomId": "word-7199",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7199",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 19,
+      "segmenterLengthUtf16": 1,
+      "isWordLike": true,
+      "sourceAtomCount": 1
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000151",
+      "containerId": "segmenter-container-000003",
+      "timelineSegmentId": "segment-0002",
+      "speechId": 3,
+      "sourceAtomIds": [
+        "word-7200"
+      ],
+      "text": "だ",
+      "startAnchor": {
+        "atomId": "word-7200",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7200",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 20,
+      "segmenterLengthUtf16": 1,
+      "isWordLike": true,
+      "sourceAtomCount": 1
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000152",
+      "containerId": "segmenter-container-000003",
+      "timelineSegmentId": "segment-0002",
+      "speechId": 3,
+      "sourceAtomIds": [
+        "word-7201"
+      ],
+      "text": "ん",
+      "startAnchor": {
+        "atomId": "word-7201",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7201",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 21,
+      "segmenterLengthUtf16": 1,
+      "isWordLike": true,
+      "sourceAtomCount": 1
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000153",
+      "containerId": "segmenter-container-000003",
+      "timelineSegmentId": "segment-0002",
+      "speechId": 3,
+      "sourceAtomIds": [
+        "word-7202",
+        "word-7203",
+        "word-7204"
+      ],
+      "text": "だけど",
+      "startAnchor": {
+        "atomId": "word-7202",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7204",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 22,
+      "segmenterLengthUtf16": 3,
+      "isWordLike": true,
+      "sourceAtomCount": 3
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000154",
+      "containerId": "segmenter-container-000003",
+      "timelineSegmentId": "segment-0002",
+      "speechId": 3,
+      "sourceAtomIds": [
+        "word-7205",
+        "word-7206"
+      ],
+      "text": "面白",
+      "startAnchor": {
+        "atomId": "word-7205",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7206",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 25,
+      "segmenterLengthUtf16": 2,
+      "isWordLike": true,
+      "sourceAtomCount": 2
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000155",
+      "containerId": "segmenter-container-000003",
+      "timelineSegmentId": "segment-0002",
+      "speechId": 3,
+      "sourceAtomIds": [
+        "word-7207"
+      ],
+      "text": "か",
+      "startAnchor": {
+        "atomId": "word-7207",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7207",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 27,
+      "segmenterLengthUtf16": 1,
+      "isWordLike": true,
+      "sourceAtomCount": 1
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000156",
+      "containerId": "segmenter-container-000003",
+      "timelineSegmentId": "segment-0002",
+      "speechId": 3,
+      "sourceAtomIds": [
+        "word-7208"
+      ],
+      "text": "っ",
+      "startAnchor": {
+        "atomId": "word-7208",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7208",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 28,
+      "segmenterLengthUtf16": 1,
+      "isWordLike": true,
+      "sourceAtomCount": 1
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000157",
+      "containerId": "segmenter-container-000003",
+      "timelineSegmentId": "segment-0002",
+      "speechId": 3,
+      "sourceAtomIds": [
+        "word-7209"
+      ],
+      "text": "た",
+      "startAnchor": {
+        "atomId": "word-7209",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7209",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 29,
+      "segmenterLengthUtf16": 1,
+      "isWordLike": true,
+      "sourceAtomCount": 1
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000158",
+      "containerId": "segmenter-container-000003",
+      "timelineSegmentId": "segment-0002",
+      "speechId": 3,
+      "sourceAtomIds": [
+        "word-7210"
+      ],
+      "text": "わ",
+      "startAnchor": {
+        "atomId": "word-7210",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7210",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 30,
+      "segmenterLengthUtf16": 1,
+      "isWordLike": true,
+      "sourceAtomCount": 1
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000159",
+      "containerId": "segmenter-container-000003",
+      "timelineSegmentId": "segment-0002",
+      "speechId": 3,
+      "sourceAtomIds": [
+        "word-7211"
+      ],
+      "text": "前",
+      "startAnchor": {
+        "atomId": "word-7211",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7211",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 31,
+      "segmenterLengthUtf16": 1,
+      "isWordLike": true,
+      "sourceAtomCount": 1
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000160",
+      "containerId": "segmenter-container-000003",
+      "timelineSegmentId": "segment-0002",
+      "speechId": 3,
+      "sourceAtomIds": [
+        "word-7212"
+      ],
+      "text": "に",
+      "startAnchor": {
+        "atomId": "word-7212",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7212",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 32,
+      "segmenterLengthUtf16": 1,
+      "isWordLike": true,
+      "sourceAtomCount": 1
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000161",
+      "containerId": "segmenter-container-000003",
+      "timelineSegmentId": "segment-0002",
+      "speechId": 3,
+      "sourceAtomIds": [
+        "word-7213"
+      ],
+      "text": "読",
+      "startAnchor": {
+        "atomId": "word-7213",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7213",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 33,
+      "segmenterLengthUtf16": 1,
+      "isWordLike": true,
+      "sourceAtomCount": 1
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000162",
+      "containerId": "segmenter-container-000003",
+      "timelineSegmentId": "segment-0002",
+      "speechId": 3,
+      "sourceAtomIds": [
+        "word-7214",
+        "word-7215",
+        "word-7216"
+      ],
+      "text": "みたい",
+      "startAnchor": {
+        "atomId": "word-7214",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7216",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 34,
+      "segmenterLengthUtf16": 3,
+      "isWordLike": true,
+      "sourceAtomCount": 3
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000163",
+      "containerId": "segmenter-container-000003",
+      "timelineSegmentId": "segment-0002",
+      "speechId": 3,
+      "sourceAtomIds": [
+        "word-7217",
+        "word-7218"
+      ],
+      "text": "って",
+      "startAnchor": {
+        "atomId": "word-7217",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7218",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 37,
+      "segmenterLengthUtf16": 2,
+      "isWordLike": true,
+      "sourceAtomCount": 2
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000164",
+      "containerId": "segmenter-container-000003",
+      "timelineSegmentId": "segment-0002",
+      "speechId": 3,
+      "sourceAtomIds": [
+        "word-7219"
+      ],
+      "text": "お",
+      "startAnchor": {
+        "atomId": "word-7219",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7219",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 39,
+      "segmenterLengthUtf16": 1,
+      "isWordLike": true,
+      "sourceAtomCount": 1
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000165",
+      "containerId": "segmenter-container-000003",
+      "timelineSegmentId": "segment-0002",
+      "speechId": 3,
+      "sourceAtomIds": [
+        "word-7220"
+      ],
+      "text": "は",
+      "startAnchor": {
+        "atomId": "word-7220",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7220",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 40,
+      "segmenterLengthUtf16": 1,
+      "isWordLike": true,
+      "sourceAtomCount": 1
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000166",
+      "containerId": "segmenter-container-000003",
+      "timelineSegmentId": "segment-0002",
+      "speechId": 3,
+      "sourceAtomIds": [
+        "word-7221"
+      ],
+      "text": "す",
+      "startAnchor": {
+        "atomId": "word-7221",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7221",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 41,
+      "segmenterLengthUtf16": 1,
+      "isWordLike": true,
+      "sourceAtomCount": 1
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000167",
+      "containerId": "segmenter-container-000003",
+      "timelineSegmentId": "segment-0002",
+      "speechId": 3,
+      "sourceAtomIds": [
+        "word-7222"
+      ],
+      "text": "ば",
+      "startAnchor": {
+        "atomId": "word-7222",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7222",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 42,
+      "segmenterLengthUtf16": 1,
+      "isWordLike": true,
+      "sourceAtomCount": 1
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000168",
+      "containerId": "segmenter-container-000003",
+      "timelineSegmentId": "segment-0002",
+      "speechId": 3,
+      "sourceAtomIds": [
+        "word-7223"
+      ],
+      "text": "聞",
+      "startAnchor": {
+        "atomId": "word-7223",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7223",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 43,
+      "segmenterLengthUtf16": 1,
+      "isWordLike": true,
+      "sourceAtomCount": 1
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000169",
+      "containerId": "segmenter-container-000003",
+      "timelineSegmentId": "segment-0002",
+      "speechId": 3,
+      "sourceAtomIds": [
+        "word-7224"
+      ],
+      "text": "か",
+      "startAnchor": {
+        "atomId": "word-7224",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7224",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 44,
+      "segmenterLengthUtf16": 1,
+      "isWordLike": true,
+      "sourceAtomCount": 1
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000170",
+      "containerId": "segmenter-container-000003",
+      "timelineSegmentId": "segment-0002",
+      "speechId": 3,
+      "sourceAtomIds": [
+        "word-7225"
+      ],
+      "text": "れ",
+      "startAnchor": {
+        "atomId": "word-7225",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7225",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 45,
+      "segmenterLengthUtf16": 1,
+      "isWordLike": true,
+      "sourceAtomCount": 1
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000171",
+      "containerId": "segmenter-container-000003",
+      "timelineSegmentId": "segment-0002",
+      "speechId": 3,
+      "sourceAtomIds": [
+        "word-7226",
+        "word-7227"
+      ],
+      "text": "てる",
+      "startAnchor": {
+        "atomId": "word-7226",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7227",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 46,
+      "segmenterLengthUtf16": 2,
+      "isWordLike": true,
+      "sourceAtomCount": 2
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000172",
+      "containerId": "segmenter-container-000003",
+      "timelineSegmentId": "segment-0002",
+      "speechId": 3,
+      "sourceAtomIds": [
+        "word-7228",
+        "word-7229"
+      ],
+      "text": "そう",
+      "startAnchor": {
+        "atomId": "word-7228",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7229",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 48,
+      "segmenterLengthUtf16": 2,
+      "isWordLike": true,
+      "sourceAtomCount": 2
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000173",
+      "containerId": "segmenter-container-000003",
+      "timelineSegmentId": "segment-0002",
+      "speechId": 3,
+      "sourceAtomIds": [
+        "word-7230",
+        "word-7231"
+      ],
+      "text": "でも",
+      "startAnchor": {
+        "atomId": "word-7230",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7231",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 50,
+      "segmenterLengthUtf16": 2,
+      "isWordLike": true,
+      "sourceAtomCount": 2
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000174",
+      "containerId": "segmenter-container-000003",
+      "timelineSegmentId": "segment-0002",
+      "speechId": 3,
+      "sourceAtomIds": [
+        "word-7232",
+        "word-7233",
+        "word-7234"
+      ],
+      "text": "なんか",
+      "startAnchor": {
+        "atomId": "word-7232",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7234",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 52,
+      "segmenterLengthUtf16": 3,
+      "isWordLike": true,
+      "sourceAtomCount": 3
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000175",
+      "containerId": "segmenter-container-000003",
+      "timelineSegmentId": "segment-0002",
+      "speechId": 3,
+      "sourceAtomIds": [
+        "word-7235",
+        "word-7236",
+        "word-7237",
+        "word-7238"
+      ],
+      "text": "母ちゃん",
+      "startAnchor": {
+        "atomId": "word-7235",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7238",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 55,
+      "segmenterLengthUtf16": 4,
+      "isWordLike": true,
+      "sourceAtomCount": 4
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000176",
+      "containerId": "segmenter-container-000003",
+      "timelineSegmentId": "segment-0002",
+      "speechId": 3,
+      "sourceAtomIds": [
+        "word-7239",
+        "word-7240"
+      ],
+      "text": "から",
+      "startAnchor": {
+        "atomId": "word-7239",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7240",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 59,
+      "segmenterLengthUtf16": 2,
+      "isWordLike": true,
+      "sourceAtomCount": 2
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000177",
+      "containerId": "segmenter-container-000003",
+      "timelineSegmentId": "segment-0002",
+      "speechId": 3,
+      "sourceAtomIds": [
+        "word-7241",
+        "word-7242"
+      ],
+      "text": "ムー",
+      "startAnchor": {
+        "atomId": "word-7241",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7242",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 61,
+      "segmenterLengthUtf16": 2,
+      "isWordLike": true,
+      "sourceAtomCount": 2
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000178",
+      "containerId": "segmenter-container-000003",
+      "timelineSegmentId": "segment-0002",
+      "speechId": 3,
+      "sourceAtomIds": [
+        "word-7243"
+      ],
+      "text": "が",
+      "startAnchor": {
+        "atomId": "word-7243",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7243",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 63,
+      "segmenterLengthUtf16": 1,
+      "isWordLike": true,
+      "sourceAtomCount": 1
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000179",
+      "containerId": "segmenter-container-000003",
+      "timelineSegmentId": "segment-0002",
+      "speechId": 3,
+      "sourceAtomIds": [
+        "word-7244"
+      ],
+      "text": "家",
+      "startAnchor": {
+        "atomId": "word-7244",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7244",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 64,
+      "segmenterLengthUtf16": 1,
+      "isWordLike": true,
+      "sourceAtomCount": 1
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000180",
+      "containerId": "segmenter-container-000003",
+      "timelineSegmentId": "segment-0002",
+      "speechId": 3,
+      "sourceAtomIds": [
+        "word-7245"
+      ],
+      "text": "に",
+      "startAnchor": {
+        "atomId": "word-7245",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7245",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 65,
+      "segmenterLengthUtf16": 1,
+      "isWordLike": true,
+      "sourceAtomCount": 1
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000181",
+      "containerId": "segmenter-container-000003",
+      "timelineSegmentId": "segment-0002",
+      "speechId": 3,
+      "sourceAtomIds": [
+        "word-7246",
+        "word-7247"
+      ],
+      "text": "届く",
+      "startAnchor": {
+        "atomId": "word-7246",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7247",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 66,
+      "segmenterLengthUtf16": 2,
+      "isWordLike": true,
+      "sourceAtomCount": 2
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000182",
+      "containerId": "segmenter-container-000003",
+      "timelineSegmentId": "segment-0002",
+      "speechId": 3,
+      "sourceAtomIds": [
+        "word-7248",
+        "word-7249"
+      ],
+      "text": "こと",
+      "startAnchor": {
+        "atomId": "word-7248",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7249",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 68,
+      "segmenterLengthUtf16": 2,
+      "isWordLike": true,
+      "sourceAtomCount": 2
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000183",
+      "containerId": "segmenter-container-000003",
+      "timelineSegmentId": "segment-0002",
+      "speechId": 3,
+      "sourceAtomIds": [
+        "word-7250",
+        "word-7251"
+      ],
+      "text": "ある",
+      "startAnchor": {
+        "atomId": "word-7250",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7251",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 70,
+      "segmenterLengthUtf16": 2,
+      "isWordLike": true,
+      "sourceAtomCount": 2
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000184",
+      "containerId": "segmenter-container-000003",
+      "timelineSegmentId": "segment-0002",
+      "speechId": 3,
+      "sourceAtomIds": [
+        "word-7252"
+      ],
+      "text": "ん",
+      "startAnchor": {
+        "atomId": "word-7252",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7252",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 72,
+      "segmenterLengthUtf16": 1,
+      "isWordLike": true,
+      "sourceAtomCount": 1
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000185",
+      "containerId": "segmenter-container-000003",
+      "timelineSegmentId": "segment-0002",
+      "speechId": 3,
+      "sourceAtomIds": [
+        "word-7253"
+      ],
+      "text": "だ",
+      "startAnchor": {
+        "atomId": "word-7253",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7253",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 73,
+      "segmenterLengthUtf16": 1,
+      "isWordLike": true,
+      "sourceAtomCount": 1
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000186",
+      "containerId": "segmenter-container-000003",
+      "timelineSegmentId": "segment-0002",
+      "speechId": 3,
+      "sourceAtomIds": [
+        "word-7254",
+        "word-7255",
+        "word-7256"
+      ],
+      "text": "仕送り",
+      "startAnchor": {
+        "atomId": "word-7254",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7256",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 74,
+      "segmenterLengthUtf16": 3,
+      "isWordLike": true,
+      "sourceAtomCount": 3
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000187",
+      "containerId": "segmenter-container-000003",
+      "timelineSegmentId": "segment-0002",
+      "speechId": 3,
+      "sourceAtomIds": [
+        "word-7257"
+      ],
+      "text": "の",
+      "startAnchor": {
+        "atomId": "word-7257",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7257",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 77,
+      "segmenterLengthUtf16": 1,
+      "isWordLike": true,
+      "sourceAtomCount": 1
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000188",
+      "containerId": "segmenter-container-000003",
+      "timelineSegmentId": "segment-0002",
+      "speechId": 3,
+      "sourceAtomIds": [
+        "word-7258"
+      ],
+      "text": "中",
+      "startAnchor": {
+        "atomId": "word-7258",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7258",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 78,
+      "segmenterLengthUtf16": 1,
+      "isWordLike": true,
+      "sourceAtomCount": 1
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000189",
+      "containerId": "segmenter-container-000003",
+      "timelineSegmentId": "segment-0002",
+      "speechId": 3,
+      "sourceAtomIds": [
+        "word-7259"
+      ],
+      "text": "に",
+      "startAnchor": {
+        "atomId": "word-7259",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7259",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 79,
+      "segmenterLengthUtf16": 1,
+      "isWordLike": true,
+      "sourceAtomCount": 1
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000190",
+      "containerId": "segmenter-container-000003",
+      "timelineSegmentId": "segment-0002",
+      "speechId": 3,
+      "sourceAtomIds": [
+        "word-7260",
+        "word-7261"
+      ],
+      "text": "ムー",
+      "startAnchor": {
+        "atomId": "word-7260",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7261",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 80,
+      "segmenterLengthUtf16": 2,
+      "isWordLike": true,
+      "sourceAtomCount": 2
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000191",
+      "containerId": "segmenter-container-000003",
+      "timelineSegmentId": "segment-0002",
+      "speechId": 3,
+      "sourceAtomIds": [
+        "word-7262"
+      ],
+      "text": "が",
+      "startAnchor": {
+        "atomId": "word-7262",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7262",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 82,
+      "segmenterLengthUtf16": 1,
+      "isWordLike": true,
+      "sourceAtomCount": 1
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000192",
+      "containerId": "segmenter-container-000003",
+      "timelineSegmentId": "segment-0002",
+      "speechId": 3,
+      "sourceAtomIds": [
+        "word-7263"
+      ],
+      "text": "入",
+      "startAnchor": {
+        "atomId": "word-7263",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7263",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 83,
+      "segmenterLengthUtf16": 1,
+      "isWordLike": true,
+      "sourceAtomCount": 1
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000193",
+      "containerId": "segmenter-container-000003",
+      "timelineSegmentId": "segment-0002",
+      "speechId": 3,
+      "sourceAtomIds": [
+        "word-7264",
+        "word-7265"
+      ],
+      "text": "って",
+      "startAnchor": {
+        "atomId": "word-7264",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7265",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 84,
+      "segmenterLengthUtf16": 2,
+      "isWordLike": true,
+      "sourceAtomCount": 2
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000194",
+      "containerId": "segmenter-container-000003",
+      "timelineSegmentId": "segment-0002",
+      "speechId": 3,
+      "sourceAtomIds": [
+        "word-7266"
+      ],
+      "text": "る",
+      "startAnchor": {
+        "atomId": "word-7266",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7266",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 86,
+      "segmenterLengthUtf16": 1,
+      "isWordLike": true,
+      "sourceAtomCount": 1
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000195",
+      "containerId": "segmenter-container-000003",
+      "timelineSegmentId": "segment-0002",
+      "speechId": 3,
+      "sourceAtomIds": [
+        "word-7267",
+        "word-7268"
+      ],
+      "text": "こと",
+      "startAnchor": {
+        "atomId": "word-7267",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7268",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 87,
+      "segmenterLengthUtf16": 2,
+      "isWordLike": true,
+      "sourceAtomCount": 2
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000196",
+      "containerId": "segmenter-container-000003",
+      "timelineSegmentId": "segment-0002",
+      "speechId": 3,
+      "sourceAtomIds": [
+        "word-7269",
+        "word-7270"
+      ],
+      "text": "ある",
+      "startAnchor": {
+        "atomId": "word-7269",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7270",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 89,
+      "segmenterLengthUtf16": 2,
+      "isWordLike": true,
+      "sourceAtomCount": 2
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000197",
+      "containerId": "segmenter-container-000003",
+      "timelineSegmentId": "segment-0002",
+      "speechId": 3,
+      "sourceAtomIds": [
+        "word-7271"
+      ],
+      "text": "ん",
+      "startAnchor": {
+        "atomId": "word-7271",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7271",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 91,
+      "segmenterLengthUtf16": 1,
+      "isWordLike": true,
+      "sourceAtomCount": 1
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000198",
+      "containerId": "segmenter-container-000003",
+      "timelineSegmentId": "segment-0002",
+      "speechId": 3,
+      "sourceAtomIds": [
+        "word-7272"
+      ],
+      "text": "だ",
+      "startAnchor": {
+        "atomId": "word-7272",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7272",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 92,
+      "segmenterLengthUtf16": 1,
+      "isWordLike": true,
+      "sourceAtomCount": 1
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000199",
+      "containerId": "segmenter-container-000003",
+      "timelineSegmentId": "segment-0002",
+      "speechId": 3,
+      "sourceAtomIds": [
+        "word-7273",
+        "word-7274",
+        "word-7275",
+        "word-7276"
+      ],
+      "text": "びっくり",
+      "startAnchor": {
+        "atomId": "word-7273",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7276",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 93,
+      "segmenterLengthUtf16": 4,
+      "isWordLike": true,
+      "sourceAtomCount": 4
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000200",
+      "containerId": "segmenter-container-000003",
+      "timelineSegmentId": "segment-0002",
+      "speechId": 3,
+      "sourceAtomIds": [
+        "word-7277",
+        "word-7278"
+      ],
+      "text": "した",
+      "startAnchor": {
+        "atomId": "word-7277",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7278",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 97,
+      "segmenterLengthUtf16": 2,
+      "isWordLike": true,
+      "sourceAtomCount": 2
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000201",
+      "containerId": "segmenter-container-000003",
+      "timelineSegmentId": "segment-0002",
+      "speechId": 3,
+      "sourceAtomIds": [
+        "word-7279",
+        "word-7280"
+      ],
+      "text": "面白",
+      "startAnchor": {
+        "atomId": "word-7279",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7280",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 99,
+      "segmenterLengthUtf16": 2,
+      "isWordLike": true,
+      "sourceAtomCount": 2
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000202",
+      "containerId": "segmenter-container-000003",
+      "timelineSegmentId": "segment-0002",
+      "speechId": 3,
+      "sourceAtomIds": [
+        "word-7281"
+      ],
+      "text": "か",
+      "startAnchor": {
+        "atomId": "word-7281",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7281",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 101,
+      "segmenterLengthUtf16": 1,
+      "isWordLike": true,
+      "sourceAtomCount": 1
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000203",
+      "containerId": "segmenter-container-000003",
+      "timelineSegmentId": "segment-0002",
+      "speechId": 3,
+      "sourceAtomIds": [
+        "word-7282"
+      ],
+      "text": "っ",
+      "startAnchor": {
+        "atomId": "word-7282",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7282",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 102,
+      "segmenterLengthUtf16": 1,
+      "isWordLike": true,
+      "sourceAtomCount": 1
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000204",
+      "containerId": "segmenter-container-000003",
+      "timelineSegmentId": "segment-0002",
+      "speechId": 3,
+      "sourceAtomIds": [
+        "word-7283"
+      ],
+      "text": "た",
+      "startAnchor": {
+        "atomId": "word-7283",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7283",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 103,
+      "segmenterLengthUtf16": 1,
+      "isWordLike": true,
+      "sourceAtomCount": 1
+    },
+    {
+      "boundaryCandidateId": "segmenter-boundary-000205",
+      "containerId": "segmenter-container-000003",
+      "timelineSegmentId": "segment-0002",
+      "speechId": 3,
+      "sourceAtomIds": [
+        "word-7284",
+        "word-7285"
+      ],
+      "text": "内容",
+      "startAnchor": {
+        "atomId": "word-7284",
+        "edge": "start"
+      },
+      "endAnchor": {
+        "atomId": "word-7285",
+        "edge": "end"
+      },
+      "segmenterIndexUtf16": 104,
+      "segmenterLengthUtf16": 2,
+      "isWordLike": true,
+      "sourceAtomCount": 2
+    }
+  ],
+  "boundaryCandidatesCanonicalSha256": "0f8e7b07c32befc4e4703e1945b61e7656a2e978a8ba959fd169a753efe454b6",
+  "sourceAtomMembershipCanonicalSha256": "b2da8ee1b3fef9c23b5598d73713d77831f392471cf98a9723392ef115ea50fd"
+}
