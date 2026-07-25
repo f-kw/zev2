@@ -31,10 +31,11 @@ import {dirname, join, relative, resolve, sep} from 'node:path';
 import {fileURLToPath} from 'node:url';
 
 import {
+  buildPresentationCaptionDisplayPairValidationReportV002,
   buildPresentationCaptionDisplayPairV003,
   checkPresentationCaptionDisplayPairV003,
   validatePresentationCaptionDisplayPairGenerationJobV001,
-  validatePresentationCaptionDisplayPairValidationReportV001,
+  validatePresentationCaptionDisplayPairValidationReportV002,
 } from './presentation_caption_display_pair_v003.mjs';
 import {
   canonicalizePresentationCaptionB1JsonV001,
@@ -441,58 +442,6 @@ const makeManifest = ({jobPath, jobSnapshot, job, runtime, artifacts}) => ({
   },
 });
 
-const makeReport = ({
-  jobPath,
-  jobSnapshot,
-  job,
-  runtime,
-  artifacts,
-  manifestArtifact,
-  checked,
-  compilerObservation,
-}) => ({
-  schemaVersion: 'presentation-caption-display-pair-validation-report-v001',
-  validatorVersion: 'presentation-caption-display-pair-validator-v001',
-  status: checked.violations.length === 0 ? 'passed_pending_human_review' : 'failed',
-  failureStage: checked.violations.length === 0
-    ? null
-    : checked.checks.find((entry) => entry.status === 'failed')?.name ?? null,
-  jobBinding: {path: jobPath, fileSha256: jobSnapshot.fileSha256},
-  implementationBinding: structuredClone(job.implementationBinding),
-  runtimeBinding: structuredClone(runtime),
-  inputBindings: {
-    sourcePackageBinding: structuredClone(job.sourcePackageBinding),
-    semanticCheckBinding: structuredClone(job.semanticCheckBinding),
-    retainedSourceBinding: structuredClone(job.retainedSourceBinding),
-    baseMediaBinding: structuredClone(job.baseMediaBinding),
-    registryBinding: structuredClone(job.registryBinding),
-    compilerInput: {
-      observedByteSha256: compilerObservation?.observedByteSha256 ?? null,
-      canonicalSha256: compilerObservation?.canonicalSha256 ?? null,
-    },
-  },
-  outputBindings: {
-    displayPlan: {path: 'display-plan.json', fileSha256: artifacts[0].fileSha256, canonicalSha256: artifacts[0].canonicalSha256},
-    instructionBundle: {path: 'instruction-bundle.json', fileSha256: artifacts[1].fileSha256, canonicalSha256: artifacts[1].canonicalSha256},
-    captionCheckReport: {path: 'caption-check-report.json', fileSha256: artifacts[2].fileSha256, canonicalSha256: artifacts[2].canonicalSha256},
-    layoutPreflight: {path: 'layout-preflight.json', fileSha256: artifacts[3].fileSha256, canonicalSha256: artifacts[3].canonicalSha256},
-    reviewRenderRequest: {path: 'review-render-request.json', fileSha256: artifacts[4].fileSha256, canonicalSha256: artifacts[4].canonicalSha256},
-    pairGenerationManifest: {path: 'pair-generation-manifest.json', fileSha256: manifestArtifact.fileSha256, canonicalSha256: manifestArtifact.canonicalSha256},
-  },
-  checks: structuredClone(checked.checks),
-  violations: structuredClone(checked.violations),
-  observedProjection: structuredClone(checked.observedProjection),
-  reviewState: structuredClone(checked.reviewState),
-  readOnlyObservation: structuredClone(checked.readOnlyObservation),
-  scope: {
-    validatedState: 'display-pair-ready-for-review-render',
-    semanticQualityVerified: false,
-    naturalBreakQualityVerified: false,
-    onScreenReadabilityVerified: false,
-    renderedLayoutQcVerified: false,
-    publicationQualityVerified: false,
-  },
-});
 const artifact = (role, fileName, value) => {
   const bytes = formalBytes(value);
   return {
@@ -639,7 +588,13 @@ const runTrusted = async (jobPath, jobSnapshot, job) => {
     .filter((right) => Math.min(atom.endMs, right.endMs) - Math.max(atom.startMs, right.startMs) > 0).length, 0);
   const checkerContext = {
     contextPhase: 'report-finalization',
-    jobObservation: {value: job, prePublicationMatches: true, preReportMatches: true},
+    jobObservation: {
+      path: jobPath,
+      fileSha256: jobSnapshot.fileSha256,
+      value: job,
+      prePublicationMatches: true,
+      preReportMatches: true,
+    },
     implementationObservations: implementationMatches,
     inputObservations: inputMatches.map((matches) => ({
       pathSafe: true,
@@ -647,7 +602,11 @@ const runTrusted = async (jobPath, jobSnapshot, job) => {
       hashMatches: matches,
       schemaSupported: true,
     })),
-    runtimeObservation: {matches: runtimeMatches, mismatchPath: '$.runtime.nodeVersion'},
+    runtimeObservation: {
+      value: runtime,
+      matches: runtimeMatches,
+      mismatchPath: '$.runtime.nodeVersion',
+    },
     semanticObservation: {
       reportPassed: semanticValid,
       compilerInputAvailable: true,
@@ -657,6 +616,8 @@ const runTrusted = async (jobPath, jobSnapshot, job) => {
         === job.semanticCheckBinding.expectedCompilerInputObservedByteSha256
         && buildA.compilerObservation?.canonicalSha256
           === job.semanticCheckBinding.expectedCompilerInputCanonicalSha256,
+      compilerObservedByteSha256: buildA.compilerObservation?.observedByteSha256 ?? null,
+      compilerCanonicalSha256: buildA.compilerObservation?.canonicalSha256 ?? null,
       compilerInput: buildA.compilerObservation?.value ?? null,
     },
     sourceObservation: {
@@ -712,17 +673,28 @@ const runTrusted = async (jobPath, jobSnapshot, job) => {
   };
   const checked = checkPresentationCaptionDisplayPairV003(checkerContext);
   if (checked.status !== 'checked') throw new TypeError('checker context untrusted');
-  const reportValue = makeReport({
+  const trustedBuildFailure = checked.violations.some((entry) => entry.code === 'BUILD_FAILED');
+  const reportValue = buildPresentationCaptionDisplayPairValidationReportV002({
     jobPath,
-    jobSnapshot,
+    jobFileSha256: jobSnapshot.fileSha256,
     job,
     runtime,
-    artifacts: contentArtifacts,
-    manifestArtifact,
     checked,
     compilerObservation: buildA.compilerObservation,
+    contentArtifacts: trustedBuildFailure ? null : contentArtifacts,
+    manifestArtifact: trustedBuildFailure ? null : manifestArtifact,
   });
+  if (reportValue === null) throw new TypeError('report build failed');
   const reportBytes = formalBytes(reportValue);
+  const reportValidation = validatePresentationCaptionDisplayPairValidationReportV002({
+    report: reportValue,
+    checkerContext,
+    artifactBytes: trustedBuildFailure
+      ? []
+      : contentArtifacts.map((entry) => entry.bytes),
+    manifestBytes: trustedBuildFailure ? null : manifestArtifact?.bytes ?? null,
+  });
+  if (!reportValidation.valid) throw new TypeError('report validation failed');
   if (checked.violations.length > 0) {
     return {exitCode: 1, reportBytes};
   }
@@ -809,14 +781,6 @@ const runTrusted = async (jobPath, jobSnapshot, job) => {
   const after = monitoredProjection(job.readOnlyGuard.watchedRoot, ignored);
   if (before !== after || before !== job.readOnlyGuard.expectedBeforeCanonicalSha256) {
     throw new TypeError('read-only projection changed');
-  }
-  if (!validatePresentationCaptionDisplayPairValidationReportV001({
-    report: reportValue,
-    checkerContext,
-    artifactBytes: contentArtifacts.map((entry) => entry.bytes),
-    manifestBytes: manifestArtifact.bytes,
-  }).valid) {
-    throw new TypeError('report validation failed');
   }
   return {exitCode: 0, reportBytes};
 };

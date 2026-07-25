@@ -122,6 +122,103 @@ const CHECK_NAMES = Object.freeze([
   'readOnlyCheck',
   'publication',
 ]);
+const VIOLATION_OWNER_CHECKS_V001 = Object.freeze([
+  'jobBinding',
+  'jobBinding',
+  'implementationBinding',
+  'inputBinding',
+  'inputBinding',
+  'inputBinding',
+  'inputBinding',
+  'runtimeBinding',
+  'semanticSeam',
+  'semanticSeam',
+  'semanticSeam',
+  'semanticSeam',
+  'semanticSeam',
+  'semanticSeam',
+  'semanticSeam',
+  'semanticSeam',
+  'semanticSeam',
+  'semanticSeam',
+  'semanticSeam',
+  'semanticSeam',
+  'sourceAtoms',
+  'sourceAtoms',
+  'sourceAtoms',
+  'sourceAtoms',
+  'sourceAtoms',
+  'sourceAtoms',
+  'sourceAtoms',
+  'timeline',
+  'timeline',
+  'timeline',
+  'displayPlan',
+  'displayPlan',
+  'displayPlan',
+  'displayPlan',
+  'displayPlan',
+  'displayPlan',
+  'displayPlan',
+  'displayPlan',
+  'displayPlan',
+  'displayPlan',
+  'resolutionPackage',
+  'resolutionPackage',
+  'resolutionPackage',
+  'resolutionPackage',
+  'resolutionPackage',
+  'resolutionPackage',
+  'instructionBundle',
+  'instructionBundle',
+  'instructionBundle',
+  'instructionBundle',
+  'instructionBundle',
+  'instructionBundle',
+  'instructionBundle',
+  'captionG1G3',
+  'captionG1G3',
+  'layoutPreflight',
+  'reviewState',
+  'reviewRenderRequest',
+  'reviewRenderRequest',
+  'build-stage-dependent',
+  'determinism',
+  'readOnlyCheck',
+  'publication',
+  'publication',
+  'publication',
+  'publication',
+  'publication',
+  'publication',
+  'publication',
+]);
+if (VIOLATION_OWNER_CHECKS_V001.length !== PRESENTATION_CAPTION_B4_VIOLATION_CODES_V001.length) {
+  throw new TypeError('violation ownership table incomplete');
+}
+const VIOLATION_OWNER_BY_CODE_V001 = new Map(
+  PRESENTATION_CAPTION_B4_VIOLATION_CODES_V001.map(
+    (code, index) => [code, VIOLATION_OWNER_CHECKS_V001[index]],
+  ),
+);
+const BUILD_STAGE_OWNER_CHECK_V001 = Object.freeze({
+  'semantic-compiler-rebuild': 'semanticSeam',
+  'display-plan-build': 'displayPlan',
+  'resolution-package-build': 'resolutionPackage',
+  'instruction-bundle-build': 'instructionBundle',
+  'caption-check-build': 'captionG1G3',
+  'layout-inspection': 'layoutPreflight',
+  'review-request-build': 'reviewRenderRequest',
+  'pair-manifest-build': 'reviewRenderRequest',
+  'pair-report-build': 'reviewRenderRequest',
+});
+const ownerCheckForViolationV001 = (entry) => {
+  const owner = VIOLATION_OWNER_BY_CODE_V001.get(entry?.code);
+  if (owner === 'build-stage-dependent') {
+    return BUILD_STAGE_OWNER_CHECK_V001[entry?.details?.stage] ?? null;
+  }
+  return CHECK_NAMES.includes(owner) ? owner : null;
+};
 const ID = /^[A-Za-z0-9][A-Za-z0-9._-]*$/;
 const ID6 = /^[0-9]{6}$/;
 const SHA256 = /^[0-9a-f]{64}$/;
@@ -769,7 +866,7 @@ const buildLayoutPreflight = ({
     {name: 'trustedPreset', status: state ? 'passed' : 'failed', violationCodes: []},
     {name: 'safeArea', status: inspectorPassed ? 'passed' : 'failed', violationCodes: []},
     {name: 'lineIntersection', status: inspectorPassed ? 'passed' : 'failed', violationCodes: []},
-    {name: 'materialRegistry', status: materialIndex?.entries?.length === 0 ? 'passed' : 'failed', violationCodes: []},
+    {name: 'materialRegistry', status: materialIndex?.materials?.length === 0 ? 'passed' : 'failed', violationCodes: []},
   ].map((check) => ({
     ...check,
     violationCodes: check.status === 'passed' ? [] : ['LAYOUT_PREFLIGHT_FAILED'],
@@ -1065,10 +1162,31 @@ const addObservationViolations = (context, output) => {
   else if (semantic?.bindingsMatch === false) add('SEMANTIC_BINDING_MISMATCH', '$.semantic.bindings.rawSemanticOutput');
   else if (semantic?.compilerRebuildFailed === true) add('SEMANTIC_COMPILER_REBUILD_FAILED', '$.semantic.builds.compiler');
   else if (semantic?.compilerHashesMatch === false) add('SEMANTIC_COMPILER_HASH_MISMATCH', '$.semantic.compilerInputHash.canonicalSha256');
-  const compiler = semantic?.compilerInput;
-  if (compiler) validateCompilerInput(compiler, semantic, context.sourceObservation, add);
   const source = context.sourceObservation;
-  if (source) validateSourceObservation(source, compiler, add);
+  const sourceState = source
+    ? validateSourceObservation(source, add)
+    : {usableForParent: false, atoms: [], atomById: new Map()};
+  const compiler = semantic?.compilerInput;
+  const semanticPrerequisitesValid = semantic?.reportPassed !== false
+    && semantic?.compilerInputAvailable !== false
+    && semantic?.bindingsMatch !== false
+    && semantic?.compilerRebuildFailed !== true
+    && semantic?.compilerHashesMatch !== false;
+  const compilerState = compiler && semanticPrerequisitesValid
+    ? validateCompilerInput(compiler, semantic, sourceState, add)
+    : {usableForSourceComparison: false, atomIds: []};
+  if (sourceState.usableForParent && compilerState.usableForSourceComparison) {
+    const sourceIds = sourceState.atoms.map((atom) => atom.atomId);
+    if (!sameArray(compilerState.atomIds, sourceIds)) {
+      const sameMembers = compilerState.atomIds.length === sourceIds.length
+        && new Set(compilerState.atomIds).size === compilerState.atomIds.length
+        && sourceIds.every((atomId) => compilerState.atomIds.includes(atomId));
+      add(
+        sameMembers ? 'SOURCE_ATOM_ORDER_INVALID' : 'SOURCE_ATOM_COVERAGE_INVALID',
+        sameMembers ? '$.sourceAtoms.atoms[1].atomId' : '$.sourceAtoms.coverage',
+      );
+    }
+  }
   const timeline = context.timelineObservation;
   if (timeline) validateTimelineObservation(timeline, add);
   const built = context.buildObservation;
@@ -1133,22 +1251,22 @@ const addObservationViolations = (context, output) => {
   else if (publication?.publishedPairValid === false) add('PUBLISHED_PAIR_INVALID', '$.publishedPair.files[0]');
 };
 
-const validateCompilerInput = (compiler, semantic, source, add) => {
+const validateCompilerInput = (compiler, semantic, sourceState, add) => {
   if (!exactKeys(compiler, ['schemaVersion', 'artifactId', 'sourcePackageBinding', 'semanticOutputBinding', 'containers'])
     || compiler.schemaVersion !== 'presentation-caption-semantic-compiler-input-v001') {
     add('COMPILER_INPUT_SCHEMA_INVALID', '$.semantic.compilerInput.schemaVersion');
-    return;
+    return {usableForSourceComparison: false, atomIds: []};
   }
   if (!Array.isArray(compiler.containers)
     || compiler.containers.length === 0
     || (Number.isSafeInteger(semantic?.expectedContainerCount)
       && compiler.containers.length !== semantic.expectedContainerCount)) {
     add('COMPILER_CONTAINER_SET_INVALID', '$.semantic.compilerInput.containers');
-    return;
+    return {usableForSourceComparison: false, atomIds: []};
   }
   const allAtoms = [];
-  const sourceById = new Map((source?.atoms ?? []).map((atom) => [atom.atomId, atom]));
   let structuralFailure = false;
+  let representationFailure = false;
   compiler.containers.forEach((container, containerIndex) => {
     if (!isObject(container)
       || !Array.isArray(container.meaningGroups)
@@ -1181,61 +1299,93 @@ const validateCompilerInput = (compiler, semantic, source, add) => {
           return;
         }
         allAtoms.push(...line.sourceAtomIds);
-        const referenced = line.sourceAtomIds.map((atomId) => sourceById.get(atomId));
-        if (referenced.every(Boolean)
-          && line.text !== referenced.map((atom) => atom.text).join('')) {
-          add('COMPILER_TEXT_MISMATCH', `${linePath}.text`);
-        }
-        if (referenced.every(Boolean)
-          && (!sameJson(line.startAnchor, {
-            atomId: referenced[0].atomId,
-            edge: 'start',
-          }) || !sameJson(line.endAnchor, {
-            atomId: referenced.at(-1).atomId,
-            edge: 'end',
-          }))) {
-          add(
-            'COMPILER_ANCHOR_MISMATCH',
-            !sameJson(line.startAnchor, {
-              atomId: referenced[0].atomId,
-              edge: 'start',
-            })
-              ? `${linePath}.startAnchor`
-              : `${linePath}.endAnchor`,
+        if (sourceState.usableForParent) {
+          const sourceAtoms = sourceState.atoms;
+          const sourceById = sourceState.atomById;
+          const idAtoms = line.sourceAtomIds.map((atomId) => sourceById.get(atomId));
+          const idValid = idAtoms.every(Boolean)
+            && new Set(line.sourceAtomIds).size === line.sourceAtomIds.length;
+          const startIndex = sourceAtoms.findIndex(
+            (atom) => atom.atomId === line.startAnchor.atomId,
           );
+          const endIndex = sourceAtoms.findIndex(
+            (atom) => atom.atomId === line.endAnchor.atomId,
+          );
+          const rangeValid = line.startAnchor.edge === 'start'
+            && line.endAnchor.edge === 'end'
+            && startIndex >= 0
+            && endIndex >= startIndex;
+          const rangeAtoms = rangeValid ? sourceAtoms.slice(startIndex, endIndex + 1) : [];
+          const idRangeAgree = idValid
+            && rangeValid
+            && sameArray(line.sourceAtomIds, rangeAtoms.map((atom) => atom.atomId));
+          const idTextAgree = idValid
+            && line.text === idAtoms.map((atom) => atom.text).join('');
+          const rangeTextAgree = rangeValid
+            && line.text === rangeAtoms.map((atom) => atom.text).join('');
+          const agreementCount = [idRangeAgree, idTextAgree, rangeTextAgree]
+            .filter(Boolean).length;
+          if (agreementCount === 3) return;
+          if (rangeTextAgree && !idRangeAgree) {
+            add('COMPILER_ATOM_COVERAGE_INVALID', '$.semantic.compilerInput.containers');
+            representationFailure = true;
+          } else if (idRangeAgree && !idTextAgree) {
+            add('COMPILER_TEXT_MISMATCH', `${linePath}.text`);
+          } else if (idTextAgree && !idRangeAgree) {
+            add(
+              'COMPILER_ANCHOR_MISMATCH',
+              line.startAnchor.edge !== 'start'
+                || line.startAnchor.atomId !== line.sourceAtomIds[0]
+                ? `${linePath}.startAnchor`
+                : `${linePath}.endAnchor`,
+            );
+          } else {
+            add('COMPILER_ATOM_COVERAGE_INVALID', '$.semantic.compilerInput.containers');
+            add('COMPILER_TEXT_MISMATCH', `${linePath}.text`);
+            add('COMPILER_ANCHOR_MISMATCH', `${linePath}.endAnchor`);
+            representationFailure = true;
+          }
         }
       });
     });
   });
-  if (structuralFailure) return;
-  const sourceAtomIds = (source?.atoms ?? []).map((atom) => atom.atomId);
-  if (new Set(allAtoms).size !== allAtoms.length
-    || (sourceAtomIds.length > 0 && !sameArray(allAtoms, sourceAtomIds))) {
+  if (structuralFailure) return {usableForSourceComparison: false, atomIds: []};
+  if (new Set(allAtoms).size !== allAtoms.length) {
     add('COMPILER_ATOM_COVERAGE_INVALID', '$.semantic.compilerInput.containers');
+    representationFailure = true;
   }
+  return {
+    usableForSourceComparison: !representationFailure,
+    atomIds: allAtoms,
+  };
 };
 
-const validateSourceObservation = (source, compiler, add) => {
-  if (source.bindingMatches === false) add('SOURCE_PACKAGE_BINDING_MISMATCH', '$.sourceAtoms.binding.rawSourceAtomsCanonicalSha256');
+const validateSourceObservation = (source, add) => {
+  let usableForParent = true;
+  if (source.bindingMatches === false) {
+    add('SOURCE_PACKAGE_BINDING_MISMATCH', '$.sourceAtoms.binding.rawSourceAtomsCanonicalSha256');
+    usableForParent = false;
+  }
   const atoms = source.atoms;
   if (!Array.isArray(atoms)) {
     add('SOURCE_ATOM_SCHEMA_INVALID', '$.sourceAtoms.atoms[0]');
-    return;
+    return {usableForParent: false, atoms: [], atomById: new Map()};
   }
   const seen = new Set();
-  let idDuplicate = false;
-  let schemaInvalid = false;
   let priorStart = -Infinity;
   atoms.forEach((atom, index) => {
     const path = `$.sourceAtoms.atoms[${index}]`;
-    if (!exactKeys(atom, ['atomId', 'speechId', 'speaker', 'text', 'startMs', 'endMs'])) {
+    if (!exactKeys(atom, ['atomId', 'speechId', 'speaker', 'text', 'startMs', 'endMs'])
+      || !isNonEmptyString(atom.atomId)
+      || !isSafeInteger(atom.speechId)
+      || !isString(atom.text)) {
       add('SOURCE_ATOM_SCHEMA_INVALID', path);
-      schemaInvalid = true;
+      usableForParent = false;
       return;
     }
     if (seen.has(atom.atomId)) {
       add('SOURCE_ATOM_ID_DUPLICATE', `${path}.atomId`);
-      idDuplicate = true;
+      usableForParent = false;
     }
     seen.add(atom.atomId);
     if (!isSafeInteger(atom.startMs)
@@ -1244,28 +1394,25 @@ const validateSourceObservation = (source, compiler, add) => {
       || atom.endMs < 0
       || atom.startMs >= atom.endMs) {
       add('SOURCE_ATOM_TIME_INVALID', `${path}.endMs`);
+      usableForParent = false;
     }
-    if (atom.startMs < priorStart) add('SOURCE_ATOM_ORDER_INVALID', `${path}.atomId`);
+    if (atom.startMs < priorStart) {
+      add('SOURCE_ATOM_ORDER_INVALID', `${path}.atomId`);
+      usableForParent = false;
+    }
     priorStart = atom.startMs;
     if (!(atom.speaker === null || isNonEmptyString(atom.speaker))) {
       add('SOURCE_ATOM_SPEAKER_INVALID', `${path}.speaker`);
+      usableForParent = false;
     }
   });
-  const compilerAtoms = compiler?.containers?.flatMap((container) =>
-    container.meaningGroups.flatMap((group) =>
-      group.lines.flatMap((line) => line.sourceAtomIds))) ?? [];
-  if (compiler && !schemaInvalid && !idDuplicate) {
-    const sourceIds = atoms.map((atom) => atom.atomId);
-    if (!sameArray(compilerAtoms, sourceIds)) {
-      const sameMembers = compilerAtoms.length === sourceIds.length
-        && new Set(compilerAtoms).size === compilerAtoms.length
-        && sourceIds.every((atomId) => compilerAtoms.includes(atomId));
-      add(
-        sameMembers ? 'SOURCE_ATOM_ORDER_INVALID' : 'SOURCE_ATOM_COVERAGE_INVALID',
-        sameMembers ? '$.sourceAtoms.atoms[1].atomId' : '$.sourceAtoms.coverage',
-      );
-    }
-  }
+  return {
+    usableForParent,
+    atoms,
+    atomById: usableForParent
+      ? new Map(atoms.map((atom) => [atom.atomId, atom]))
+      : new Map(),
+  };
 };
 
 const validateTimelineObservation = (timeline, add) => {
@@ -1356,32 +1503,11 @@ export function checkPresentationCaptionDisplayPairV003(context) {
   const violations = [];
   addObservationViolations(context, violations);
   const preliminary = sortViolations(violations);
-  const rangeByCheck = {
-    jobBinding: [1, 2],
-    implementationBinding: [3, 3],
-    inputBinding: [4, 7],
-    runtimeBinding: [8, 8],
-    semanticSeam: [9, 20],
-    sourceAtoms: [21, 27],
-    timeline: [28, 30],
-    displayPlan: [31, 40],
-    resolutionPackage: [41, 46],
-    instructionBundle: [47, 53],
-    captionG1G3: [54, 55],
-    layoutPreflight: [56, 56],
-    reviewState: [57, 57],
-    reviewRenderRequest: [58, 59],
-    determinism: [60, 61],
-    readOnlyCheck: [62, 62],
-    publication: [63, 69],
-  };
-  const codeInCheck = (entry, name) => {
-    const [from, to] = rangeByCheck[name];
-    const number = (CODE_INDEX.get(entry.code) ?? -1) + 1;
-    return number >= from && number <= to;
-  };
+  if (preliminary.some((entry) => ownerCheckForViolationV001(entry) === null)) {
+    return {status: 'untrusted-context'};
+  }
   const preliminaryFailed = new Set(
-    CHECK_NAMES.filter((name) => preliminary.some((entry) => codeInCheck(entry, name))),
+    preliminary.map((entry) => ownerCheckForViolationV001(entry)),
   );
   let cutoff = CHECK_NAMES.length;
   if (preliminaryFailed.has('jobBinding')) cutoff = 1;
@@ -1396,12 +1522,14 @@ export function checkPresentationCaptionDisplayPairV003(context) {
     }
   }
   const sorted = preliminary.filter((entry) => {
-    const ownerIndex = CHECK_NAMES.findIndex((name) => codeInCheck(entry, name));
+    const ownerIndex = CHECK_NAMES.indexOf(ownerCheckForViolationV001(entry));
     return ownerIndex >= 0 && ownerIndex < cutoff;
   });
   const checks = CHECK_NAMES.map((name) => {
     const index = CHECK_NAMES.indexOf(name);
-    const own = sorted.filter((entry) => codeInCheck(entry, name)).map((entry) => entry.code);
+    const own = sorted
+      .filter((entry) => ownerCheckForViolationV001(entry) === name)
+      .map((entry) => entry.code);
     return {
       name,
       status: index >= cutoff
@@ -1455,25 +1583,186 @@ export function checkPresentationCaptionDisplayPairV003(context) {
   };
 }
 
-export function validatePresentationCaptionDisplayPairValidationReportV001({
-  report,
-  checkerContext,
-  artifactBytes,
-  manifestBytes,
-}) {
+const VALIDATION_REPORT_OUTPUTS_V002 = Object.freeze([
+  ['displayPlan', 'display-plan.json'],
+  ['instructionBundle', 'instruction-bundle.json'],
+  ['captionCheckReport', 'caption-check-report.json'],
+  ['layoutPreflight', 'layout-preflight.json'],
+  ['reviewRenderRequest', 'review-render-request.json'],
+  ['pairGenerationManifest', 'pair-generation-manifest.json'],
+]);
+const VALIDATION_REPORT_SCOPE_V002 = Object.freeze({
+  validatedState: 'display-pair-ready-for-review-render',
+  semanticQualityVerified: false,
+  naturalBreakQualityVerified: false,
+  onScreenReadabilityVerified: false,
+  renderedLayoutQcVerified: false,
+  publicationQualityVerified: false,
+});
+
+const reportOutputBindingV002 = (artifact, role, path) => {
+  if (!isObject(artifact)
+    || artifact.role !== role
+    || artifact.fileName !== path
+    || !Buffer.isBuffer(artifact.bytes)
+    || artifact.fileSha256 !== hashBytes(artifact.bytes)
+    || !SHA256.test(artifact.canonicalSha256)) return null;
+  return {
+    path,
+    fileSha256: artifact.fileSha256,
+    canonicalSha256: artifact.canonicalSha256,
+  };
+};
+
+export function buildPresentationCaptionDisplayPairValidationReportV002(input) {
   try {
-    if (!isObject(report)
-      || !Array.isArray(artifactBytes)
-      || !Buffer.isBuffer(manifestBytes)) return {valid: false};
-    const checked = checkPresentationCaptionDisplayPairV003(checkerContext);
-    if (checked.status !== 'checked') return {valid: false};
+    if (!exactKeys(input, [
+      'jobPath',
+      'jobFileSha256',
+      'job',
+      'runtime',
+      'checked',
+      'compilerObservation',
+      'contentArtifacts',
+      'manifestArtifact',
+    ])
+      || !safePath(input.jobPath)
+      || !SHA256.test(input.jobFileSha256)
+      || !validatePresentationCaptionDisplayPairGenerationJobV001(input.job).valid
+      || !isObject(input.runtime)
+      || input.checked?.status !== 'checked'
+      || !Array.isArray(input.checked.checks)
+      || !Array.isArray(input.checked.violations)) return null;
+    const buildFailure = input.checked.violations.find(
+      (entry) => entry.code === 'BUILD_FAILED',
+    );
+    const failedBuild = Boolean(buildFailure);
+    const successfulArtifacts = Array.isArray(input.contentArtifacts)
+      && input.contentArtifacts.length === 5
+      && isObject(input.manifestArtifact);
+    if (failedBuild === successfulArtifacts) return null;
+    if (failedBuild
+      && (!Object.hasOwn(BUILD_STAGE_OWNER_CHECK_V001, buildFailure.details?.stage)
+        || input.contentArtifacts !== null
+        || input.manifestArtifact !== null)) return null;
+    const allArtifacts = successfulArtifacts
+      ? [...input.contentArtifacts, input.manifestArtifact]
+      : [];
+    const outputEntries = VALIDATION_REPORT_OUTPUTS_V002.map(
+      ([role, path], index) => [
+        role,
+        failedBuild ? null : reportOutputBindingV002(allArtifacts[index], role, path),
+      ],
+    );
+    if (!failedBuild && outputEntries.some(([, binding]) => binding === null)) return null;
+    const compiler = input.compilerObservation;
+    const compilerObservedByteSha256 = compiler?.observedByteSha256 ?? null;
+    const compilerCanonicalSha256 = compiler?.canonicalSha256 ?? null;
+    if (!(compilerObservedByteSha256 === null || SHA256.test(compilerObservedByteSha256))
+      || !(compilerCanonicalSha256 === null || SHA256.test(compilerCanonicalSha256))) {
+      return null;
+    }
+    const firstFailedCheck = input.checked.checks.find((entry) => entry.status === 'failed');
+    const status = input.checked.violations.length === 0
+      ? 'passed_pending_human_review'
+      : 'failed';
     return {
-      valid: sameJson(report.checks, checked.checks)
-        && sameJson(report.violations, checked.violations)
-        && sameJson(report.observedProjection, checked.observedProjection)
-        && sameJson(report.reviewState, checked.reviewState)
-        && sameJson(report.readOnlyObservation, checked.readOnlyObservation),
+      schemaVersion: 'presentation-caption-display-pair-validation-report-v002',
+      validatorVersion: 'presentation-caption-display-pair-validator-v002',
+      status,
+      failureStage: status === 'passed_pending_human_review'
+        ? null
+        : buildFailure?.details?.stage ?? firstFailedCheck?.name ?? null,
+      jobBinding: {
+        path: input.jobPath,
+        fileSha256: input.jobFileSha256,
+      },
+      implementationBinding: clone(input.job.implementationBinding),
+      runtimeBinding: clone(input.runtime),
+      inputBindings: {
+        sourcePackageBinding: clone(input.job.sourcePackageBinding),
+        semanticCheckBinding: clone(input.job.semanticCheckBinding),
+        retainedSourceBinding: clone(input.job.retainedSourceBinding),
+        baseMediaBinding: clone(input.job.baseMediaBinding),
+        registryBinding: clone(input.job.registryBinding),
+        compilerInput: {
+          observedByteSha256: compilerObservedByteSha256,
+          canonicalSha256: compilerCanonicalSha256,
+        },
+      },
+      outputBindings: Object.fromEntries(outputEntries),
+      checks: clone(input.checked.checks),
+      violations: clone(input.checked.violations),
+      observedProjection: clone(input.checked.observedProjection),
+      reviewState: clone(input.checked.reviewState),
+      readOnlyObservation: clone(input.checked.readOnlyObservation),
+      scope: clone(VALIDATION_REPORT_SCOPE_V002),
     };
+  } catch {
+    return null;
+  }
+}
+
+const artifactFromValidationBytesV002 = (role, fileName, bytes) => {
+  if (!Buffer.isBuffer(bytes)) return null;
+  const decoded = decodePresentationCaptionB1StrictJsonV001(bytes);
+  if (decoded?.status !== 'decoded') return null;
+  return {
+    role,
+    fileName,
+    bytes,
+    fileSha256: hashBytes(bytes),
+    canonicalSha256: canonicalSha(decoded.value),
+  };
+};
+
+export function validatePresentationCaptionDisplayPairValidationReportV002(input) {
+  try {
+    if (!exactKeys(input, ['report', 'checkerContext', 'artifactBytes', 'manifestBytes'])
+      || !isObject(input.report)
+      || !Array.isArray(input.artifactBytes)) return {valid: false};
+    const checked = checkPresentationCaptionDisplayPairV003(input.checkerContext);
+    if (checked.status !== 'checked') return {valid: false};
+    const failedBuild = checked.violations.some((entry) => entry.code === 'BUILD_FAILED');
+    if (failedBuild
+      ? input.artifactBytes.length !== 0 || input.manifestBytes !== null
+      : input.artifactBytes.length !== 5 || !Buffer.isBuffer(input.manifestBytes)) {
+      return {valid: false};
+    }
+    const contentArtifacts = failedBuild
+      ? null
+      : input.artifactBytes.map((bytes, index) => artifactFromValidationBytesV002(
+        VALIDATION_REPORT_OUTPUTS_V002[index][0],
+        VALIDATION_REPORT_OUTPUTS_V002[index][1],
+        bytes,
+      ));
+    const manifestArtifact = failedBuild
+      ? null
+      : artifactFromValidationBytesV002(
+        'pairGenerationManifest',
+        'pair-generation-manifest.json',
+        input.manifestBytes,
+      );
+    if (!failedBuild
+      && (contentArtifacts.some((entry) => entry === null) || manifestArtifact === null)) {
+      return {valid: false};
+    }
+    const expected = buildPresentationCaptionDisplayPairValidationReportV002({
+      jobPath: input.checkerContext.jobObservation?.path,
+      jobFileSha256: input.checkerContext.jobObservation?.fileSha256,
+      job: input.checkerContext.jobObservation?.value,
+      runtime: input.checkerContext.runtimeObservation?.value,
+      checked,
+      compilerObservation: {
+        observedByteSha256:
+          input.checkerContext.semanticObservation?.compilerObservedByteSha256 ?? null,
+        canonicalSha256:
+          input.checkerContext.semanticObservation?.compilerCanonicalSha256 ?? null,
+      },
+      contentArtifacts,
+      manifestArtifact,
+    });
+    return {valid: expected !== null && sameJson(input.report, expected)};
   } catch {
     return {valid: false};
   }

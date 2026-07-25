@@ -12,6 +12,14 @@
 - 正式成果物生成: 0件
 - 人間作業: 承認判断1件。動画視聴、文字分割、時刻入力、時間計測はなし
 
+## 改訂履歴
+
+| 日付 | 承認根拠 | 改訂内容 |
+|---|---|---|
+| 2026-07-25 | `presentation-candidate13-caption-gate-b4-eight-failure-diagnosis-and-contract-resolution-addendum-20260725-v001.md`と`presentation-candidate13-caption-gate-b4-eight-failure-implementation-repair-design-20260725-v001.md`のkawafmm承認 | §7.1、§7.5、§10.3、§10.5、T060、T082、T083、T085のreport v001・違反所有記述を非互換改訂。69 codeの汎用所有表、code 60の段階別所有、report v002のpure builder/validator、全null失敗報告を新正本とする |
+
+本改訂は本文の旧記録を削除しない。上表の対象箇所で矛盾がある場合は、承認済み`presentation-candidate13-caption-gate-b4-eight-failure-diagnosis-and-contract-resolution-addendum-20260725-v001.md`と`presentation-candidate13-caption-gate-b4-eight-failure-implementation-repair-design-20260725-v001.md`を正本とする。v001 reportの受理、変換、互換処理を行わない。
+
 ## 1. 結論
 
 本追補は、元設計で確定したB4の責務、7成果物、69違反code、85検査、B4→B5→B6の順序を変えず、実装前監査で残った実装契約を一意化する。

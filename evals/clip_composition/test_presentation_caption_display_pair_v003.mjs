@@ -464,6 +464,8 @@ const makeContext = () => {
   return {
     contextPhase: 'report-finalization',
     jobObservation: {
+      path: 'synthetic/job.json',
+      fileSha256: HASH,
       value: makeJob(),
       prePublicationMatches: true,
       preReportMatches: true,
@@ -475,13 +477,19 @@ const makeContext = () => {
       hashMatches: true,
       schemaSupported: true,
     }],
-    runtimeObservation: {matches: true, mismatchPath: '$.runtime.nodeVersion'},
+    runtimeObservation: {
+      value: makeJob().expectedRuntime,
+      matches: true,
+      mismatchPath: '$.runtime.nodeVersion',
+    },
     semanticObservation: {
       reportPassed: true,
       compilerInputAvailable: true,
       bindingsMatch: true,
       compilerRebuildFailed: false,
       compilerHashesMatch: true,
+      compilerObservedByteSha256: HASH,
+      compilerCanonicalSha256: HASH,
       expectedContainerCount: 1,
       compilerInput: makeCompiler(),
     },
@@ -626,10 +634,136 @@ const probes = [
   ['T069', 'PUBLICATION_PRE_RENAME_INVALID', '$.publication.preRename.formalRoot', (x) => { x.publicationObservation.preRenameValid = false; }],
 ];
 
-for (const [id, code, path, mutate] of probes) {
+const expectedViolationOwners = [
+  'jobBinding',
+  'jobBinding',
+  'implementationBinding',
+  'inputBinding',
+  'inputBinding',
+  'inputBinding',
+  'inputBinding',
+  'runtimeBinding',
+  'semanticSeam',
+  'semanticSeam',
+  'semanticSeam',
+  'semanticSeam',
+  'semanticSeam',
+  'semanticSeam',
+  'semanticSeam',
+  'semanticSeam',
+  'semanticSeam',
+  'semanticSeam',
+  'semanticSeam',
+  'semanticSeam',
+  'sourceAtoms',
+  'sourceAtoms',
+  'sourceAtoms',
+  'sourceAtoms',
+  'sourceAtoms',
+  'sourceAtoms',
+  'sourceAtoms',
+  'timeline',
+  'timeline',
+  'timeline',
+  'displayPlan',
+  'displayPlan',
+  'displayPlan',
+  'displayPlan',
+  'displayPlan',
+  'displayPlan',
+  'displayPlan',
+  'displayPlan',
+  'displayPlan',
+  'displayPlan',
+  'resolutionPackage',
+  'resolutionPackage',
+  'resolutionPackage',
+  'resolutionPackage',
+  'resolutionPackage',
+  'resolutionPackage',
+  'instructionBundle',
+  'instructionBundle',
+  'instructionBundle',
+  'instructionBundle',
+  'instructionBundle',
+  'instructionBundle',
+  'instructionBundle',
+  'captionG1G3',
+  'captionG1G3',
+  'layoutPreflight',
+  'reviewState',
+  'reviewRenderRequest',
+  'reviewRenderRequest',
+  'displayPlan',
+  'determinism',
+  'readOnlyCheck',
+  'publication',
+  'publication',
+  'publication',
+  'publication',
+  'publication',
+  'publication',
+  'publication',
+];
+
+for (const [probeIndex, [id, code, path, mutate]] of probes.entries()) {
   test(`${id}: ${code}を単独帰属する`, () => {
     const result = resultOf(mutate);
     assertSingle(result, code, path);
+    assert.deepEqual(
+      result.checks.filter((entry) => entry.status === 'failed').map((entry) => entry.name),
+      [expectedViolationOwners[probeIndex]],
+    );
+    if (id === 'T060') {
+      const stages = [
+        ['semantic-compiler-rebuild', 'semanticSeam'],
+        ['display-plan-build', 'displayPlan'],
+        ['resolution-package-build', 'resolutionPackage'],
+        ['instruction-bundle-build', 'instructionBundle'],
+        ['caption-check-build', 'captionG1G3'],
+        ['layout-inspection', 'layoutPreflight'],
+        ['review-request-build', 'reviewRenderRequest'],
+        ['pair-manifest-build', 'reviewRenderRequest'],
+        ['pair-report-build', 'reviewRenderRequest'],
+      ];
+      stages.forEach(([stage, owner]) => {
+        const checkerContext = makeContext();
+        checkerContext.buildObservation.status = 'failed';
+        checkerContext.buildObservation.failureStage = stage;
+        const checked = b4Core.checkPresentationCaptionDisplayPairV003(checkerContext);
+        assert.deepEqual(
+          checked.checks.filter((entry) => entry.status === 'failed')
+            .map((entry) => entry.name),
+          [owner],
+        );
+        const report = b4Core.buildPresentationCaptionDisplayPairValidationReportV002({
+          jobPath: checkerContext.jobObservation.path,
+          jobFileSha256: checkerContext.jobObservation.fileSha256,
+          job: checkerContext.jobObservation.value,
+          runtime: checkerContext.runtimeObservation.value,
+          checked,
+          compilerObservation: {
+            observedByteSha256:
+              checkerContext.semanticObservation.compilerObservedByteSha256,
+            canonicalSha256:
+              checkerContext.semanticObservation.compilerCanonicalSha256,
+          },
+          contentArtifacts: null,
+          manifestArtifact: null,
+        });
+        assert.notEqual(report, null);
+        assert.ok(Object.values(report.outputBindings).every((entry) => entry === null));
+        assert.equal(
+          b4Core.validatePresentationCaptionDisplayPairValidationReportV002({
+            report,
+            checkerContext,
+            artifactBytes: [],
+            manifestBytes: null,
+          }).valid,
+          true,
+        );
+      });
+    }
     if (id === 'T053') {
       const valid = makeInstructionInput();
       const contract = valid.instructionBundle.resolutionPackage.captionContracts[0];
@@ -1125,7 +1259,12 @@ test('T082: formal CLI successはexit 0・stdout一件・stderr 0 byteである'
     assert.equal(result.status, 0);
     assert.equal(result.stderr.length, 0);
     const output = JSON.parse(result.stdout.toString('utf8'));
+    assert.equal(
+      output.schemaVersion,
+      'presentation-caption-display-pair-validation-report-v002',
+    );
     assert.equal(output.status, 'passed_pending_human_review');
+    assert.ok(Object.values(output.outputBindings).every((entry) => entry !== null));
     assert.equal(existsSync(repositoryAbsolute(fixture.formalOutputPath)), true);
   } finally {
     fixture.cleanup();
@@ -1144,8 +1283,13 @@ test('T083: formal CLI contract failureはexit 1・trusted report・stderr 0 byt
     assert.equal(result.status, 1);
     assert.equal(result.stderr.length, 0);
     const output = JSON.parse(result.stdout.toString('utf8'));
+    assert.equal(
+      output.schemaVersion,
+      'presentation-caption-display-pair-validation-report-v002',
+    );
     assert.equal(output.status, 'failed');
     assert.equal(output.violations[0].code, 'OUTPUT_ROOT_ALREADY_EXISTS');
+    assert.ok(Object.values(output.outputBindings).every((entry) => entry !== null));
   } finally {
     fixture.cleanup();
   }
@@ -1167,16 +1311,20 @@ test('T084: formal CLI usage不成立はexit 2・fatal JSON・stderr 0 byteで�
 test('T085: production runnerは承認済みpure入口を直接使いfixture注入口を持たない', () => {
   const runner = readFileSync(repositoryAbsolute(RUNNER_PATH), 'utf8');
   assert.match(runner, /buildPresentationCaptionDisplayPairV003/u);
+  assert.match(runner, /buildPresentationCaptionDisplayPairValidationReportV002/u);
   assert.match(runner, /checkPresentationCaptionDisplayPairV003/u);
+  assert.match(runner, /validatePresentationCaptionDisplayPairValidationReportV002/u);
+  assert.equal(runner.includes('validatePresentationCaptionDisplayPairValidationReportV001'), false);
   assert.equal(/fixture|alternateCore|process\.env/u.test(runner), false);
   assert.deepEqual(Object.keys(b4Core).sort(), [
     'PRESENTATION_CAPTION_B4_VIOLATION_CODES_V001',
     'buildPresentationCaptionDisplayPairStaticPreflightReportV001',
+    'buildPresentationCaptionDisplayPairValidationReportV002',
     'buildPresentationCaptionDisplayPairV003',
     'checkPresentationCaptionDisplayPairV003',
     'validatePresentationCaptionDisplayPairGenerationJobV001',
     'validatePresentationCaptionDisplayPairStaticPreflightJobV001',
-    'validatePresentationCaptionDisplayPairValidationReportV001',
+    'validatePresentationCaptionDisplayPairValidationReportV002',
   ].sort());
   assert.equal(
     b4Core.PRESENTATION_CAPTION_B4_VIOLATION_CODES_V001.length,

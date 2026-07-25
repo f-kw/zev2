@@ -6,6 +6,12 @@
 - 対象: `DmWu0jVQfTE` candidate 13「実家の母ちゃんから届いた謎の仕送り『月刊ムー』」
 - 人間作業見積り: **承認判断1件、動画視聴0件、操作0件**
 
+## 改訂履歴
+
+| 日付 | 承認根拠 | 改訂内容 |
+|---|---|---|
+| 2026-07-25 | `presentation-candidate13-caption-gate-b4-eight-failure-diagnosis-and-contract-resolution-addendum-20260725-v001.md`と`presentation-candidate13-caption-gate-b4-eight-failure-implementation-repair-design-20260725-v001.md`のkawafmm承認 | §11のvalidation reportをv002へ非互換改訂。v001は今後受理せず、構築失敗時だけ6 output bindingを全nullにする。詳細は承認済み2文書を正本とする |
+
 ## 1. 結論
 
 B4は、B6で機械検査を通った意味分割結果を、次の正式成果物へ**決定的に変換する契約**を先に固定する段階とする。
@@ -642,6 +648,8 @@ manifestの`inputBindings`はjobの次の五groupをfield順も含めてexact co
 `{resolvedNodePath, nodeBinarySha256, nodeVersion, icuVersion, resolvedLocale, resolvedGranularity}`。
 
 ## 11. `pair-validation-report.json`
+
+> **2026-07-25改訂**: 本節のv001 schemaとoutput binding常時非null契約は、承認済み`presentation-candidate13-caption-gate-b4-eight-failure-diagnosis-and-contract-resolution-addendum-20260725-v001.md` §6.3および`presentation-candidate13-caption-gate-b4-eight-failure-implementation-repair-design-20260725-v001.md` §7により、`presentation-caption-display-pair-validation-report-v002`へ非互換改訂された。v001の受理、変換、互換処理を行わない。本節のうち両文書と矛盾する記述は新正本で上書きされる。
 
 schema:
 `presentation-caption-display-pair-validation-report-v001`
