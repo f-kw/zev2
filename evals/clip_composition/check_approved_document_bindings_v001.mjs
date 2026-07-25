@@ -18,19 +18,19 @@ export const APPROVED_DOCUMENT_CHECK_SCHEMA_VERSION_V001 =
 export const PRESENTATION_CAPTION_B4_APPROVED_DOCUMENT_BINDINGS_V001 = Object.freeze([
   Object.freeze({
     path: 'evals/clip_composition/reports/presentation/presentation-candidate13-caption-gate-b4-display-plan-contract-design-20260725-v001.md',
-    approvalCommit: 'b86178e2066fc27dcf9ec2776d51a6927752ef25',
+    approvalCommit: 'a651e73b043bd8cb97bfffe2f284a35ede90abd7',
     gitMode: '100644',
-    gitBlobObjectId: 'f2d17273b9208cf7171488236e16f5efadb870c8',
-    byteLength: 39617,
-    fileSha256: '7a239e2d7c1b759aa4050686f85770abecd107120211db97f7f4985df074e946',
+    gitBlobObjectId: '0638369fd62e6e16a3ce4178cd25a0fd49d14c43',
+    byteLength: 40706,
+    fileSha256: 'd16aa8fb366157ef4be30a822831e95eaed5f3616d959f8b3751c74d72c86281',
   }),
   Object.freeze({
     path: 'evals/clip_composition/reports/presentation/presentation-candidate13-caption-gate-b4-implementation-contract-addendum-20260725-v001.md',
-    approvalCommit: 'cfa558abf936f2af983005f91daf9cddbb735631',
+    approvalCommit: 'a651e73b043bd8cb97bfffe2f284a35ede90abd7',
     gitMode: '100644',
-    gitBlobObjectId: 'b0f4f028f2d5161f446015173770102c392313ed',
-    byteLength: 59790,
-    fileSha256: '9e3d3e048b077ddffd8302c896853a3a9b49e655c7fffc110e056a0935f76f77',
+    gitBlobObjectId: '788c73c92c5ca85e8eacd9f464b40dc5185e9cec',
+    byteLength: 60791,
+    fileSha256: '50bd103a338449a7fe2395c9afcc58bb39d8853a6ca97b7e508c68144c056f0a',
   }),
   Object.freeze({
     path: 'evals/clip_composition/reports/presentation/presentation-candidate13-caption-gate-b4-v003-contract-core-implementation-addendum-20260725-v001.md',
