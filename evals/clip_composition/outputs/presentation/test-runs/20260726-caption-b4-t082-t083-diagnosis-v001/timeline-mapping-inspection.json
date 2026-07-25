@@ -1,0 +1,129 @@
+{
+  "schemaVersion": "presentation-caption-b4-timeline-mapping-read-only-inspection-v001",
+  "inputBindings": [
+    {
+      "path": "evals/clip_composition/outputs/presentation/segmenter-boundary-evidence/DmWu0jVQfTE-candidate-13-v001/deterministic-expansion-map.json",
+      "fileSha256": "33c42a4c625452c6d120f59ccb5a8e78822f9008f5121a91a32e9d3be7133b3d"
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/segmenter-boundary-evidence/DmWu0jVQfTE-candidate-13-v001/segmenter-boundary-evidence.json",
+      "fileSha256": "40230b94302914261b7e2c46c51cb0fc46ae18b26b99580ea2f74f1b02666c43"
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/retained-source-atoms/DmWu0jVQfTE-candidate-13-v001/source-atoms.json",
+      "fileSha256": "8656549ec3fbbc0fb9447be7b9c2e784d22ebd18f08ee3e24c474ee62225c6d3"
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/base-media/DmWu0jVQfTE-candidate-13-v002/timeline.json",
+      "fileSha256": "802f570dd4f8ea90ef63b0b9afb9a026abf0b18e43e51f2aab51bd62c2180fec"
+    }
+  ],
+  "inspectedBoundaryCandidateCount": 205,
+  "passedBoundaryCandidateCount": 204,
+  "failedBoundaryCandidateCount": 1,
+  "failed": [
+    {
+      "containerId": "segmenter-container-000002",
+      "timelineSegmentId": "segment-0001",
+      "boundaryCandidateId": "segmenter-boundary-000074",
+      "text": "っ",
+      "sourceAtomIds": [
+        "word-7077"
+      ],
+      "sourceStartMs": 1952663,
+      "sourceEndMs": 1952683,
+      "status": "failed",
+      "violations": [
+        {
+          "code": "INSTRUCTION_SOURCE_INTERVAL_ZERO_FRAME",
+          "path": "$sourceInterval",
+          "relatedIds": [
+            "segment-0001"
+          ],
+          "details": {
+            "sourceEndFrame30": 58580,
+            "sourceEndMs": 1952683,
+            "sourceStartFrame30": 58580,
+            "sourceStartMs": 1952663
+          }
+        }
+      ],
+      "mapping": null
+    }
+  ],
+  "mergeChecks": [
+    {
+      "name": "previous-and-zero-frame",
+      "boundaryCandidateIds": [
+        "segmenter-boundary-000073",
+        "segmenter-boundary-000074"
+      ],
+      "text": "なっ",
+      "sourceStartMs": 1952543,
+      "sourceEndMs": 1952683,
+      "result": {
+        "status": "passed",
+        "violations": [],
+        "mapping": {
+          "timelineSegmentId": "segment-0001",
+          "sourceStartMs": 1952543,
+          "sourceEndMs": 1952683,
+          "sourceStartFrame30": 58576,
+          "sourceEndFrame30": 58580,
+          "startFrame": 968,
+          "endFrameExclusive": 972,
+          "displayFrameCount": 4
+        }
+      }
+    },
+    {
+      "name": "zero-frame-and-next",
+      "boundaryCandidateIds": [
+        "segmenter-boundary-000074",
+        "segmenter-boundary-000075"
+      ],
+      "text": "った",
+      "sourceStartMs": 1952663,
+      "sourceEndMs": 1952803,
+      "result": {
+        "status": "passed",
+        "violations": [],
+        "mapping": {
+          "timelineSegmentId": "segment-0001",
+          "sourceStartMs": 1952663,
+          "sourceEndMs": 1952803,
+          "sourceStartFrame30": 58580,
+          "sourceEndFrame30": 58584,
+          "startFrame": 972,
+          "endFrameExclusive": 976,
+          "displayFrameCount": 4
+        }
+      }
+    },
+    {
+      "name": "morpheme-natta",
+      "boundaryCandidateIds": [
+        "segmenter-boundary-000073",
+        "segmenter-boundary-000074",
+        "segmenter-boundary-000075"
+      ],
+      "text": "なった",
+      "sourceStartMs": 1952543,
+      "sourceEndMs": 1952803,
+      "result": {
+        "status": "passed",
+        "violations": [],
+        "mapping": {
+          "timelineSegmentId": "segment-0001",
+          "sourceStartMs": 1952543,
+          "sourceEndMs": 1952803,
+          "sourceStartFrame30": 58576,
+          "sourceEndFrame30": 58584,
+          "startFrame": 968,
+          "endFrameExclusive": 976,
+          "displayFrameCount": 8
+        }
+      }
+    }
+  ]
+}
