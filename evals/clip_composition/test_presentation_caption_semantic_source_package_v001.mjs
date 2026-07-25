@@ -17,10 +17,11 @@ import {
   realpathSync,
   rmdirSync,
   unlinkSync,
+  writeFileSync,
   writeSync,
 } from 'node:fs';
 import {dirname, resolve} from 'node:path';
-import {test} from 'node:test';
+import {test as nodeTest} from 'node:test';
 import {fileURLToPath} from 'node:url';
 
 import * as packageCore from './presentation_caption_semantic_source_package_v001.mjs';
@@ -33,6 +34,13 @@ import {
   verifyPresentationFirstRealDataFileReferenceV001,
 } from './presentation_first_real_data_gate_v001.mjs';
 
+const NUMBER_TOKEN_PROJECTION_MODES = new Set([
+  '--emit-number-token-invariance-projection-v001',
+  '--compare-number-token-invariance-projections-v001',
+]);
+const NUMBER_TOKEN_PROJECTION_MODE = NUMBER_TOKEN_PROJECTION_MODES.has(process.argv[2]);
+const test = NUMBER_TOKEN_PROJECTION_MODE ? () => {} : nodeTest;
+
 const EXPECTED_CORE_EXPORTS = Object.freeze([
   'PRESENTATION_CAPTION_B1_VIOLATION_CODES_V001',
   'assertPresentationCaptionB1StrictValueV001',
@@ -41,6 +49,7 @@ const EXPECTED_CORE_EXPORTS = Object.freeze([
   'canonicalizePresentationCaptionB1JsonV001',
   'checkPresentationCaptionSemanticSourcePackageV001',
   'decodePresentationCaptionB1StrictJsonV001',
+  'decodePresentationCaptionB4LayoutInspectionJsonV001',
   'derivePresentationCaptionEmbeddedGateAReportContextV001',
   'serializePresentationCaptionB1FormalJsonV001',
   'sha256PresentationCaptionB1BytesV001',
@@ -5947,3 +5956,138 @@ test('package合成検査が動的に観測するcode×checkは承認済み割�
     [...expectedPairs].sort(),
   );
 });
+
+const NUMBER_TOKEN_INVARIANCE_SCHEMA =
+  'presentation-caption-b4-number-token-invariance-projection-v001';
+const NUMBER_TOKEN_INVARIANCE_COMPARISON_SCHEMA =
+  'presentation-caption-b4-number-token-invariance-comparison-v001';
+const NUMBER_TOKEN_INVARIANCE_PROBE =
+  'presentation-caption-b4-number-token-invariance-v001';
+const NUMBER_TOKEN_INVARIANCE_B3_ROOT =
+  'evals/clip_composition/outputs/presentation/segmenter-boundary-evidence/'
+  + 'DmWu0jVQfTE-candidate-13-v001';
+
+const buildNumberTokenInvarianceProjection = (phase) => {
+  assert.equal(['before', 'after'].includes(phase), true);
+  const b3StrictJson = TEST_PACKAGE_FILES_V001.map((fileName) => {
+    const path = `${NUMBER_TOKEN_INVARIANCE_B3_ROOT}/${fileName}`;
+    const inputBytes = readFileSync(resolve(WORKSPACE_ROOT, path));
+    const decoded = packageCore.decodePresentationCaptionB1StrictJsonV001(inputBytes);
+    assert.equal(decoded.status, 'decoded', path);
+    return {
+      path,
+      fileSha256: sha256(inputBytes),
+      decodeStatus: decoded.status,
+      canonicalSha256: canonicalSha256(decoded.value),
+    };
+  });
+  const fixture = makeValidFixture();
+  assert.equal(fixture.packageBuildPasses.length, 2);
+  assert.equal(fixture.packageBuildPasses[0].artifacts.length, 7);
+  const externalDisplaySlots = fixture.widthPolicyInputs.map((input, index) => ({
+    role: input.role,
+    path: input.path,
+    fileSha256: input.snapshot.fileSha256,
+    resolutionStatus: 'resolved',
+    canonicalSha256: fixture.job.value.widthPolicyBindings[index].canonicalSha256,
+  }));
+  const builtArtifacts = fixture.packageBuildPasses[0].artifacts.map((artifact) => ({
+    fileName: artifact.fileName,
+    fileSha256: artifact.fileSha256,
+    canonicalSha256: artifact.canonicalSha256,
+  }));
+  const probeBytes = Buffer.from(NUMBER_TOKEN_INVARIANCE_PROBE, 'utf8');
+  const returnedSha256 =
+    packageCore.sha256PresentationCaptionB1BytesV001(probeBytes);
+  const projection = {
+    b3StrictJson,
+    externalDisplaySlots,
+    builtArtifacts,
+    fixedHashProbe: {
+      utf8: NUMBER_TOKEN_INVARIANCE_PROBE,
+      inputBytesSha256: sha256(probeBytes),
+      returnedStatus: typeof returnedSha256 === 'string' ? 'hashed' : 'invalid',
+      returnedSha256,
+    },
+  };
+  const harnessFileSha256 = sha256(readFileSync(fileURLToPath(import.meta.url)));
+  const parserFileSha256 = sha256(readFileSync(
+    resolve(WORKSPACE_ROOT, PACKAGE_CORE_REPOSITORY_PATH),
+  ));
+  return {
+    schemaVersion: NUMBER_TOKEN_INVARIANCE_SCHEMA,
+    phase,
+    harnessFileSha256,
+    parserFileSha256,
+    projection,
+    projectionCanonicalSha256: canonicalSha256(projection),
+  };
+};
+
+const writeNumberTokenProjection = (phase, outputPath) => {
+  assert.equal(typeof outputPath, 'string');
+  const absolute = resolve(WORKSPACE_ROOT, outputPath);
+  mkdirSync(dirname(absolute), {recursive: true});
+  writeFileSync(absolute, formalBytes(buildNumberTokenInvarianceProjection(phase)), {
+    flag: 'wx',
+  });
+};
+
+const compareNumberTokenProjections = (beforePath, afterPath, outputPath) => {
+  const beforeBytes = readFileSync(resolve(WORKSPACE_ROOT, beforePath));
+  const afterBytes = readFileSync(resolve(WORKSPACE_ROOT, afterPath));
+  const before = JSON.parse(beforeBytes.toString('utf8'));
+  const after = JSON.parse(afterBytes.toString('utf8'));
+  assert.equal(before.schemaVersion, NUMBER_TOKEN_INVARIANCE_SCHEMA);
+  assert.equal(after.schemaVersion, NUMBER_TOKEN_INVARIANCE_SCHEMA);
+  assert.equal(before.phase, 'before');
+  assert.equal(after.phase, 'after');
+  const harnessUnchanged = before.harnessFileSha256 === after.harnessFileSha256;
+  const inputProjection = (value) => ({
+    b3StrictJson: value.projection.b3StrictJson.map(
+      ({path, fileSha256}) => ({path, fileSha256}),
+    ),
+    externalDisplaySlots: value.projection.externalDisplaySlots.map(
+      ({role, path, fileSha256}) => ({role, path, fileSha256}),
+    ),
+    fixedHashProbe: {
+      utf8: value.projection.fixedHashProbe.utf8,
+      inputBytesSha256: value.projection.fixedHashProbe.inputBytesSha256,
+    },
+  });
+  const inputsUnchanged =
+    canonicalSha256(inputProjection(before)) === canonicalSha256(inputProjection(after));
+  const projectionUnchanged =
+    canonicalBytes(before.projection).equals(canonicalBytes(after.projection));
+  const status = harnessUnchanged
+    && inputsUnchanged
+    && projectionUnchanged
+    && before.projectionCanonicalSha256 === after.projectionCanonicalSha256
+    ? 'passed'
+    : 'failed';
+  const comparison = {
+    schemaVersion: NUMBER_TOKEN_INVARIANCE_COMPARISON_SCHEMA,
+    beforeFileSha256: sha256(beforeBytes),
+    afterFileSha256: sha256(afterBytes),
+    harnessUnchanged,
+    inputsUnchanged,
+    projectionUnchanged,
+    beforeProjectionCanonicalSha256: before.projectionCanonicalSha256,
+    afterProjectionCanonicalSha256: after.projectionCanonicalSha256,
+    status,
+  };
+  const absolute = resolve(WORKSPACE_ROOT, outputPath);
+  mkdirSync(dirname(absolute), {recursive: true});
+  writeFileSync(absolute, formalBytes(comparison), {flag: 'wx'});
+  if (status !== 'passed') process.exitCode = 1;
+};
+
+if (NUMBER_TOKEN_PROJECTION_MODE) {
+  if (process.argv[2] === '--emit-number-token-invariance-projection-v001') {
+    const outputPath = process.argv[3];
+    const phase = outputPath?.endsWith('/before.json') ? 'before' : 'after';
+    writeNumberTokenProjection(phase, outputPath);
+  } else {
+    compareNumberTokenProjections(process.argv[3], process.argv[4], process.argv[5]);
+  }
+}
