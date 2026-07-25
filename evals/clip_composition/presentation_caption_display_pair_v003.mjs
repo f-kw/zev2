@@ -340,6 +340,7 @@ const validImplementationBinding = (value, preflight = false) => (
     'presetValidationIndex',
     'materialValidationIndex',
     'trustedRegistryBindings',
+    'sharedJsonContractCore',
   ])
   && [...value.files, ...value.dependencyFiles].every((entry) =>
     exactKeys(entry, ['role', 'path', 'fileSha256'])
@@ -370,6 +371,7 @@ const validImplementationBinding = (value, preflight = false) => (
     'evals/clip_composition/registries/presentation/normal-landscape-preset-registry-v001/preset-validation-index.json',
     'evals/clip_composition/registries/presentation/normal-landscape-preset-registry-v001/material-validation-index.json',
     'evals/clip_composition/registries/presentation/normal-landscape-preset-registry-v001/trusted-registry-bindings.json',
+    'evals/clip_composition/presentation_caption_semantic_source_package_v001.mjs',
   ])
 );
 const validExpectedRuntime = (value) => exactKeys(value, [

@@ -5997,8 +5997,10 @@ const buildNumberTokenInvarianceProjection = (phase) => {
     canonicalSha256: artifact.canonicalSha256,
   }));
   const probeBytes = Buffer.from(NUMBER_TOKEN_INVARIANCE_PROBE, 'utf8');
-  const returnedSha256 =
+  const returnedHash =
     packageCore.sha256PresentationCaptionB1BytesV001(probeBytes);
+  assert.equal(returnedHash.status, 'hashed');
+  assert.match(returnedHash.sha256, /^[0-9a-f]{64}$/u);
   const projection = {
     b3StrictJson,
     externalDisplaySlots,
@@ -6006,8 +6008,8 @@ const buildNumberTokenInvarianceProjection = (phase) => {
     fixedHashProbe: {
       utf8: NUMBER_TOKEN_INVARIANCE_PROBE,
       inputBytesSha256: sha256(probeBytes),
-      returnedStatus: typeof returnedSha256 === 'string' ? 'hashed' : 'invalid',
-      returnedSha256,
+      returnedStatus: returnedHash.status,
+      returnedSha256: returnedHash.sha256,
     },
   };
   const harnessFileSha256 = sha256(readFileSync(fileURLToPath(import.meta.url)));

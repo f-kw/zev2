@@ -366,6 +366,7 @@ const makeJob = () => {
         ['presetValidationIndex', `${REGISTRY_ROOT}/preset-validation-index.json`],
         ['materialValidationIndex', `${REGISTRY_ROOT}/material-validation-index.json`],
         ['trustedRegistryBindings', `${REGISTRY_ROOT}/trusted-registry-bindings.json`],
+        ['sharedJsonContractCore', 'evals/clip_composition/presentation_caption_semantic_source_package_v001.mjs'],
       ].map(([role, path]) => impl(role, path)),
     },
     sourcePackageBinding: {
@@ -1142,6 +1143,7 @@ const implementationBinding = (runnerPath) => {
       ['presetValidationIndex', `${REGISTRY_ROOT}/preset-validation-index.json`],
       ['materialValidationIndex', `${REGISTRY_ROOT}/material-validation-index.json`],
       ['trustedRegistryBindings', `${REGISTRY_ROOT}/trusted-registry-bindings.json`],
+      ['sharedJsonContractCore', 'evals/clip_composition/presentation_caption_semantic_source_package_v001.mjs'],
     ].map(([role, path]) => file(role, path)),
   };
 };
@@ -1359,4 +1361,57 @@ test('T085: production runnerは承認済みpure入口を直接使いfixture注�
     probes.map(([, code]) => code),
     b4Core.PRESENTATION_CAPTION_B4_VIOLATION_CODES_V001,
   );
+});
+
+test('T086: 13件目の共有JSON契約実体は欠落・別path・不正hashを拒否する', () => {
+  const valid = makeJob();
+  assert.deepEqual(
+    b4Core.validatePresentationCaptionDisplayPairGenerationJobV001(valid),
+    {valid: true},
+  );
+  assert.deepEqual(
+    valid.implementationBinding.dependencyFiles.at(-1),
+    {
+      role: 'sharedJsonContractCore',
+      path: 'evals/clip_composition/presentation_caption_semantic_source_package_v001.mjs',
+      fileSha256: HASH,
+    },
+  );
+
+  const missing = clone(valid);
+  missing.implementationBinding.dependencyFiles.pop();
+  assert.deepEqual(
+    b4Core.validatePresentationCaptionDisplayPairGenerationJobV001(missing),
+    {valid: false},
+  );
+
+  const wrongPath = clone(valid);
+  wrongPath.implementationBinding.dependencyFiles.at(-1).path =
+    'evals/clip_composition/presentation_caption_semantic_output_v001.mjs';
+  assert.deepEqual(
+    b4Core.validatePresentationCaptionDisplayPairGenerationJobV001(wrongPath),
+    {valid: false},
+  );
+
+  const invalidHash = clone(valid);
+  invalidHash.implementationBinding.dependencyFiles.at(-1).fileSha256 = 'f'.repeat(63);
+  assert.deepEqual(
+    b4Core.validatePresentationCaptionDisplayPairGenerationJobV001(invalidHash),
+    {valid: false},
+  );
+});
+
+test('T087: layout出力は専用入口を直接使い整数入口・独自parse・profile注入を使わない', () => {
+  const runner = readFileSync(repositoryAbsolute(RUNNER_PATH), 'utf8');
+  assert.match(
+    runner,
+    /decodePresentationCaptionB4LayoutInspectionJsonV001\(readFileSync\(outputPath\)\)/u,
+  );
+  assert.equal(
+    /decodePresentationCaptionB1StrictJsonV001\(readFileSync\(outputPath\)\)/u
+      .test(runner),
+    false,
+  );
+  assert.equal(/JSON\.parse\(readFileSync\(outputPath\)/u.test(runner), false);
+  assert.equal(/allowDecimals|numberProfile|layoutNumberProfile/u.test(runner), false);
 });

@@ -93,6 +93,41 @@ const TRUST_CANONICAL_SHA256 =
   '9d5ffe631033dc594c917649e2529899e303f3cb8a7d7b1b65ea0d26b7c645f2';
 const STRICT_INTEGER_NUMBER_PROFILE = 'b1-integer';
 const EXTERNAL_DISPLAY_NUMBER_PROFILE = 'external-display';
+const B4_LAYOUT_NUMBER_TOKEN_PROFILE =
+  'b4-layout-number-token-policy-v001';
+const B4_LAYOUT_INTEGER_NUMBER_PATHS = Object.freeze([
+  ['items', '*', 'lineCount'],
+  ['items', '*', 'fontSizePx'],
+  ['violations', '*', 'details', 'actual'],
+  ['violations', '*', 'details', 'allowed'],
+  ['violations', '*', 'details', 'lineIndex'],
+  ['violations', '*', 'details', 'safeAreaPx', 'top'],
+  ['violations', '*', 'details', 'safeAreaPx', 'right'],
+  ['violations', '*', 'details', 'safeAreaPx', 'bottom'],
+  ['violations', '*', 'details', 'safeAreaPx', 'left'],
+  ['violations', '*', 'details', 'leftIndex'],
+  ['violations', '*', 'details', 'rightIndex'],
+]);
+const B4_LAYOUT_GEOMETRY_NUMBER_PATHS = Object.freeze([
+  ['items', '*', 'lineRects', '*', 'left'],
+  ['items', '*', 'lineRects', '*', 'top'],
+  ['items', '*', 'lineRects', '*', 'right'],
+  ['items', '*', 'lineRects', '*', 'bottom'],
+  ['items', '*', 'wrapper', 'top'],
+  ['items', '*', 'wrapper', 'left'],
+  ['items', '*', 'wrapper', 'width'],
+  ['items', '*', 'wrapper', 'height'],
+  ['items', '*', 'wrapper', 'renderScale'],
+  ['items', '*', 'wrapper', 'displayWidth'],
+  ['items', '*', 'wrapper', 'displayHeight'],
+  ['items', '*', 'lineHeightPx'],
+  ['violations', '*', 'details', 'rect', 'left'],
+  ['violations', '*', 'details', 'rect', 'top'],
+  ['violations', '*', 'details', 'rect', 'right'],
+  ['violations', '*', 'details', 'rect', 'bottom'],
+  ['violations', '*', 'details', 'overlapWidth'],
+  ['violations', '*', 'details', 'overlapHeight'],
+]);
 const SHA256_PATTERN = /^[0-9a-f]{64}$/;
 const COMMIT_PATTERN = /^[0-9a-f]{40}$/;
 const ID_PATTERN = /^[A-Za-z0-9][A-Za-z0-9._-]*$/;
@@ -1168,6 +1203,27 @@ export function assertPresentationCaptionB1StrictValueV001(value) {
   }
 }
 
+const matchesB4LayoutNumberPath = (path, pattern) => (
+  path.length === pattern.length
+  && path.every((segment, index) => (
+    pattern[index] === '*'
+      ? segment.kind === 'index'
+        && Number.isSafeInteger(segment.value)
+        && segment.value >= 0
+      : segment.kind === 'key' && segment.value === pattern[index]
+  ))
+);
+const resolveB4LayoutNumberPathType = (path) => {
+  const integer = B4_LAYOUT_INTEGER_NUMBER_PATHS.some(
+    (pattern) => matchesB4LayoutNumberPath(path, pattern),
+  );
+  const geometry = B4_LAYOUT_GEOMETRY_NUMBER_PATHS.some(
+    (pattern) => matchesB4LayoutNumberPath(path, pattern),
+  );
+  if (integer === geometry) return null;
+  return integer ? 'integer' : 'geometry';
+};
+
 class StrictJsonParser {
   constructor(text, numberProfile = STRICT_INTEGER_NUMBER_PROFILE) {
     this.text = text;
@@ -1186,17 +1242,19 @@ class StrictJsonParser {
   }
   parse() {
     this.skipWhitespace();
-    const value = this.parseValue();
+    const value = this.parseValue([]);
     this.skipWhitespace();
     if (this.index !== this.text.length) this.fail('trailing-content');
     return value;
   }
-  parseValue() {
+  parseValue(path) {
     const character = this.text[this.index];
-    if (character === '{') return this.parseObject();
-    if (character === '[') return this.parseArray();
+    if (character === '{') return this.parseObject(path);
+    if (character === '[') return this.parseArray(path);
     if (character === '"') return this.parseString();
-    if (character === '-' || (character >= '0' && character <= '9')) return this.parseNumber();
+    if (character === '-' || (character >= '0' && character <= '9')) {
+      return this.parseNumber(path);
+    }
     for (const [token, value] of [['true', true], ['false', false], ['null', null]]) {
       if (this.text.startsWith(token, this.index)) {
         this.index += token.length;
@@ -1205,7 +1263,7 @@ class StrictJsonParser {
     }
     this.fail();
   }
-  parseObject() {
+  parseObject(path) {
     this.index += 1;
     this.skipWhitespace();
     const value = Object.create(null);
@@ -1223,7 +1281,7 @@ class StrictJsonParser {
       if (this.text[this.index] !== ':') this.fail();
       this.index += 1;
       this.skipWhitespace();
-      value[key] = this.parseValue();
+      value[key] = this.parseValue([...path, {kind: 'key', value: key}]);
       this.skipWhitespace();
       if (this.text[this.index] === '}') {
         this.index += 1;
@@ -1235,7 +1293,7 @@ class StrictJsonParser {
     }
     this.fail();
   }
-  parseArray() {
+  parseArray(path) {
     this.index += 1;
     this.skipWhitespace();
     const value = [];
@@ -1244,7 +1302,10 @@ class StrictJsonParser {
       return value;
     }
     while (this.index < this.text.length) {
-      value.push(this.parseValue());
+      value.push(this.parseValue([
+        ...path,
+        {kind: 'index', value: value.length},
+      ]));
       this.skipWhitespace();
       if (this.text[this.index] === ']') {
         this.index += 1;
@@ -1286,19 +1347,29 @@ class StrictJsonParser {
     }
     this.fail();
   }
-  parseNumber() {
+  parseNumber(path) {
     const rest = this.text.slice(this.index);
     const match = /^-?(?:0|[1-9][0-9]*)(?:\.[0-9]+)?(?:[eE][+-]?[0-9]+)?/u.exec(rest);
     if (!match) this.fail();
     const token = match[0];
     this.index += token.length;
-    if (this.numberProfile === STRICT_INTEGER_NUMBER_PROFILE
+    const b4PathType = this.numberProfile === B4_LAYOUT_NUMBER_TOKEN_PROFILE
+      ? resolveB4LayoutNumberPathType(path)
+      : null;
+    if ((this.numberProfile === STRICT_INTEGER_NUMBER_PROFILE
+      || b4PathType === 'integer')
       && (token.includes('.') || /[eE]/u.test(token))) {
       this.fail('number-invalid');
     }
-    if (![STRICT_INTEGER_NUMBER_PROFILE, EXTERNAL_DISPLAY_NUMBER_PROFILE].includes(
-      this.numberProfile,
-    )) {
+    if (this.numberProfile === B4_LAYOUT_NUMBER_TOKEN_PROFILE
+      && b4PathType === null) {
+      this.fail('number-invalid');
+    }
+    if (![
+      STRICT_INTEGER_NUMBER_PROFILE,
+      EXTERNAL_DISPLAY_NUMBER_PROFILE,
+      B4_LAYOUT_NUMBER_TOKEN_PROFILE,
+    ].includes(this.numberProfile)) {
       this.fail('number-invalid');
     }
     const value = Number(token);
@@ -1307,7 +1378,9 @@ class StrictJsonParser {
       || (Number.isInteger(value) && !Number.isSafeInteger(value))) {
       this.fail('number-invalid');
     }
-    if (this.numberProfile === STRICT_INTEGER_NUMBER_PROFILE && !Number.isSafeInteger(value)) {
+    if ((this.numberProfile === STRICT_INTEGER_NUMBER_PROFILE
+      || b4PathType === 'integer')
+      && !Number.isSafeInteger(value)) {
       this.fail('number-invalid');
     }
     return value;
@@ -1349,6 +1422,106 @@ const decodeJsonBytesWithNumberProfile = (bytes, numberProfile) => {
 
 export function decodePresentationCaptionB1StrictJsonV001(bytes) {
   return decodeJsonBytesWithNumberProfile(bytes, STRICT_INTEGER_NUMBER_PROFILE);
+}
+
+const isB4LayoutGeometryNumber = (value) => (
+  typeof value === 'number'
+  && Number.isFinite(value)
+  && !Object.is(value, -0)
+  && (!Number.isInteger(value) || Number.isSafeInteger(value))
+);
+const validateB4LayoutRect = (value) => (
+  exactKeys(value, ['left', 'top', 'right', 'bottom'])
+  && ['left', 'top', 'right', 'bottom'].every(
+    (field) => isB4LayoutGeometryNumber(value[field]),
+  )
+);
+const validateB4LayoutItem = (value) => (
+  exactKeys(value, [
+    'layerId',
+    'stateId',
+    'resolvedText',
+    'lineCount',
+    'lineRects',
+    'wrapper',
+    'fontSizePx',
+    'lineHeightPx',
+  ])
+  && isNonEmptyString(value.layerId)
+  && isNonEmptyString(value.stateId)
+  && typeof value.resolvedText === 'string'
+  && isNonNegativeInteger(value.lineCount)
+  && isDenseArray(value.lineRects)
+  && value.lineRects.every(validateB4LayoutRect)
+  && value.lineRects.length === value.lineCount
+  && exactKeys(value.wrapper, [
+    'top',
+    'left',
+    'width',
+    'height',
+    'renderScale',
+    'displayWidth',
+    'displayHeight',
+  ])
+  && Object.values(value.wrapper).every(isB4LayoutGeometryNumber)
+  && isPositiveInteger(value.fontSizePx)
+  && isB4LayoutGeometryNumber(value.lineHeightPx)
+);
+const validateB4LayoutViolation = (value) => {
+  if (!exactKeys(value, ['layerId', 'code', 'details'])
+    || !isNonEmptyString(value.layerId)
+    || !isPlainObject(value.details)) return false;
+  if (value.code === 'LINE_COUNT_EXCEEDS_CANDIDATE_LIMIT') {
+    return exactKeys(value.details, ['actual', 'allowed'])
+      && isNonNegativeInteger(value.details.actual)
+      && isNonNegativeInteger(value.details.allowed);
+  }
+  if (value.code === 'LINE_BOX_OUTSIDE_SAFE_AREA') {
+    return exactKeys(value.details, ['lineIndex', 'rect', 'safeAreaPx'])
+      && isNonNegativeInteger(value.details.lineIndex)
+      && validateB4LayoutRect(value.details.rect)
+      && exactKeys(value.details.safeAreaPx, ['top', 'right', 'bottom', 'left'])
+      && Object.values(value.details.safeAreaPx).every(isNonNegativeInteger);
+  }
+  if (value.code === 'LINE_BOX_POSITIVE_INTERSECTION') {
+    return exactKeys(value.details, [
+      'leftIndex',
+      'rightIndex',
+      'overlapWidth',
+      'overlapHeight',
+    ])
+      && isNonNegativeInteger(value.details.leftIndex)
+      && isNonNegativeInteger(value.details.rightIndex)
+      && isB4LayoutGeometryNumber(value.details.overlapWidth)
+      && isB4LayoutGeometryNumber(value.details.overlapHeight);
+  }
+  return false;
+};
+const validateB4LayoutInspection = (value) => {
+  if (!exactKeys(value, ['status', 'items', 'violations'])
+    || !['passed', 'failed'].includes(value.status)
+    || !isDenseArray(value.items)
+    || !value.items.every(validateB4LayoutItem)
+    || !isDenseArray(value.violations)
+    || !value.violations.every(validateB4LayoutViolation)) return false;
+  const layerIds = value.items.map((item) => item.layerId);
+  if (new Set(layerIds).size !== layerIds.length
+    || value.violations.some((violation) =>
+      layerIds.filter((layerId) => layerId === violation.layerId).length !== 1)) {
+    return false;
+  }
+  return value.status === (value.violations.length === 0 ? 'passed' : 'failed');
+};
+
+export function decodePresentationCaptionB4LayoutInspectionJsonV001(bytes) {
+  const decoded = decodeJsonBytesWithNumberProfile(
+    bytes,
+    B4_LAYOUT_NUMBER_TOKEN_PROFILE,
+  );
+  if (decoded.status !== 'decoded') return decoded;
+  return validateB4LayoutInspection(decoded.value)
+    ? decoded
+    : {status: 'invalid', reason: 'schema-invalid'};
 }
 
 export function serializePresentationCaptionB1FormalJsonV001(value) {

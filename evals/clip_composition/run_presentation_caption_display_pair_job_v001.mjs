@@ -40,6 +40,7 @@ import {
 import {
   canonicalizePresentationCaptionB1JsonV001,
   decodePresentationCaptionB1StrictJsonV001,
+  decodePresentationCaptionB4LayoutInspectionJsonV001,
   serializePresentationCaptionB1FormalJsonV001,
   sha256PresentationCaptionB1BytesV001,
 } from './presentation_caption_semantic_source_package_v001.mjs';
@@ -382,7 +383,8 @@ const runLayoutInspector = async (runtime, displayPlan, registry) => {
     if (![0, 1].includes(result.code) || !existsSync(outputPath)) {
       throw new TypeError('layout inspector failed');
     }
-    const decoded = decodePresentationCaptionB1StrictJsonV001(readFileSync(outputPath));
+    const decoded =
+      decodePresentationCaptionB4LayoutInspectionJsonV001(readFileSync(outputPath));
     if (decoded?.status !== 'decoded') throw new TypeError('layout output invalid');
     return decoded.value;
   } finally {
