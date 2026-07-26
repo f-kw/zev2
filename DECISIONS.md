@@ -1,6 +1,7 @@
 # DECISIONS.md — 意思決定の記録
 
 ## 実行体制
+- `approved-document-admission-ledger-v002`の承認後・実装前preflightで、①toolGraph外importを拒否するためのJavaScript字句・構文解釈と検査入口が未固定、②非登録commitで承認済み文書を一時変更して後で元byteへ戻す履歴をformal検査が捕捉しない、の2点を同一監査パスで検出した。いずれも検査結果・保証範囲を変えるため実装者判断で埋めず、schema・台帳・検査器・runner・test・承認記録を作る前に停止した。同一監査で同時発見したため撤退条件上の停止イベントは1件目として数える。推奨は、既存scannerを由来正本に固定したv002内単一scannerと、有効な承認文書identityを全first-parent隣接commitで追跡して非登録変更・復元を拒否する追補。正本は`presentation-approved-document-admission-ledger-v002-implementation-preflight-stop-report-20260726-v001.md`。次の独立停止が2件目になれば追加patchを止め、台帳束縛対象の範囲問題としてkawafmmへ戻す(2026-07-26、台帳v002実装前preflight停止1件目)
 - `approved-document-admission-ledger-v002`実装契約追補v001をkawafmmが承認し、schema・台帳・検査器・runner・test・既存6件のbyte同一移行・承認記録3件・bootstrap commit前後検査・完了または停止報告までの実装を許可した。B5設計・B5実装・token計測・API通信・Gemini実走は範囲外のまま。文書統治層の撤退条件は本承認時点から起算し、実装前preflightを含む人間判断が必要な独立停止が2件目に達した時点で追加patchを止め、「どの文書へ台帳束縛が必要か」の範囲問題としてkawafmmへ戻す。仮値・schema特例・二段commitへのfallbackは行わない(2026-07-26、台帳v002実装承認と撤退起算点の前倒し)
 - 2026-07-10 実行部隊をCodexからGPT-5.6に変更。復唱テスト合格を確認
 - ローカルSTTサーバーの現在接続先は`http://192.168.1.9:8000`。第三素材の製造ではこの接続先だけを使い、停止時に旧IPや代替STTへ切り替えない(2026-07-15、人間直接申告)
