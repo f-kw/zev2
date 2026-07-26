@@ -1,0 +1,18 @@
+{
+  "error": {
+    "code": 400,
+    "message": "Invalid value at 'generate_content_request.service_tier' (type.googleapis.com/google.ai.generativelanguage.v1beta.ServiceTier), \"SERVICE_TIER_STANDARD\"",
+    "status": "INVALID_ARGUMENT",
+    "details": [
+      {
+        "@type": "type.googleapis.com/google.rpc.BadRequest",
+        "fieldViolations": [
+          {
+            "field": "generate_content_request.service_tier",
+            "description": "Invalid value at 'generate_content_request.service_tier' (type.googleapis.com/google.ai.generativelanguage.v1beta.ServiceTier), \"SERVICE_TIER_STANDARD\""
+          }
+        ]
+      }
+    ]
+  }
+}
