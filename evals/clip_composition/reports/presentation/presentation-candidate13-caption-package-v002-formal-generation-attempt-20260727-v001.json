@@ -1,0 +1,138 @@
+{
+  "schemaVersion": "presentation-caption-semantic-source-package-run-report-v001",
+  "mode": "formal-generation",
+  "status": "failed",
+  "failureStage": "gateAContext",
+  "jobBinding": {
+    "path": "evals/clip_composition/outputs/presentation/caption-semantic-source-package-jobs/DmWu0jVQfTE-candidate-13-caption-b1-v002.json",
+    "fileSha256": "cdf1ba812b953d8ac7c847cd2bc0bbe0a81bcce4ffe2bb863722f208e52ed247"
+  },
+  "candidatePackage": {
+    "packageId": "DmWu0jVQfTE-candidate-13-caption-semantic-source-package-v002",
+    "formalOutputPath": "evals/clip_composition/outputs/presentation/segmenter-boundary-evidence/DmWu0jVQfTE-candidate-13-v002",
+    "manifestFileSha256": null,
+    "validationReportFileSha256": null,
+    "contentSetCanonicalSha256": null
+  },
+  "checks": [
+    {
+      "name": "jobBinding",
+      "status": "passed",
+      "violationCodes": []
+    },
+    {
+      "name": "implementationBinding",
+      "status": "passed",
+      "violationCodes": []
+    },
+    {
+      "name": "inputBinding",
+      "status": "passed",
+      "violationCodes": []
+    },
+    {
+      "name": "runtimeBinding",
+      "status": "passed",
+      "violationCodes": []
+    },
+    {
+      "name": "gateAContext",
+      "status": "failed",
+      "violationCodes": [
+        "GATE_A_CONTEXT_INVALID"
+      ]
+    },
+    {
+      "name": "evidenceBuild",
+      "status": "not_run_with_upstream_failure",
+      "violationCodes": []
+    },
+    {
+      "name": "evidenceDeterminism",
+      "status": "not_run_with_upstream_failure",
+      "violationCodes": []
+    },
+    {
+      "name": "embeddedReportBuild",
+      "status": "not_run_with_upstream_failure",
+      "violationCodes": []
+    },
+    {
+      "name": "gateAReport",
+      "status": "not_run_with_upstream_failure",
+      "violationCodes": []
+    },
+    {
+      "name": "packageBuild",
+      "status": "not_run_with_upstream_failure",
+      "violationCodes": []
+    },
+    {
+      "name": "packageShape",
+      "status": "not_run_with_upstream_failure",
+      "violationCodes": []
+    },
+    {
+      "name": "modelInput",
+      "status": "not_run_with_upstream_failure",
+      "violationCodes": []
+    },
+    {
+      "name": "expansionMap",
+      "status": "not_run_with_upstream_failure",
+      "violationCodes": []
+    },
+    {
+      "name": "sourceOnlyLeakage",
+      "status": "not_run_with_upstream_failure",
+      "violationCodes": []
+    },
+    {
+      "name": "determinism",
+      "status": "not_run_with_upstream_failure",
+      "violationCodes": []
+    },
+    {
+      "name": "jobPrePublication",
+      "status": "not_run_with_upstream_failure",
+      "violationCodes": []
+    },
+    {
+      "name": "publication",
+      "status": "not_run_with_upstream_failure",
+      "violationCodes": []
+    },
+    {
+      "name": "publishedPackage",
+      "status": "not_run_with_upstream_failure",
+      "violationCodes": []
+    },
+    {
+      "name": "jobStability",
+      "status": "passed",
+      "violationCodes": []
+    }
+  ],
+  "violations": [
+    {
+      "code": "GATE_A_CONTEXT_INVALID",
+      "path": "$.gateA",
+      "details": {}
+    }
+  ],
+  "readOnlyObservation": null,
+  "publicationObservation": {
+    "state": "not_started",
+    "publishedRoot": "evals/clip_composition/outputs/presentation/segmenter-boundary-evidence/DmWu0jVQfTE-candidate-13-v002",
+    "manifestFileSha256": null,
+    "validationReportFileSha256": null,
+    "observedFileSetCanonicalSha256": null
+  },
+  "publicationFailures": [],
+  "scope": {
+    "validatedState": "published-source-package",
+    "semanticQualityVerified": false,
+    "naturalBreakQualityVerified": false,
+    "nonCooperativePublicationRaceProtected": false
+  }
+}
