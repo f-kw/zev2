@@ -1,7 +1,7 @@
 # 承認済み文書 admission ledger v002 実装契約追補 v001
 
 - 日付: 2026-07-26
-- 状態: **実装契約追補の提示・人間承認待ち**
+- 状態: **人間承認済み・§17の実装許可**
 - 起点となる停止報告:
   `evals/clip_composition/reports/presentation/presentation-candidate13-caption-gate-b5-approved-document-binding-schema-stop-report-20260726-v001.md`
 - 対象: `approved-document-admission-ledger-v002`のschema、履歴再導出、bootstrap移行、検査契約
@@ -12,6 +12,7 @@
 
 - v001（2026-07-26）:
   B5設計承認文を同一commitで登録しようとした際に現行v001の`approvalCommit`が自己参照になることを受け、文書内容と登録commitの導出を分離するv002実装契約を新設した。
+  人間承認時の明示修正により、§15の撤退条件は実装attempt開始時ではなく本承認時点から数える。
 
 ## 1. 結論
 
@@ -1277,10 +1278,10 @@ v001 CLIを実行した事実はv002 checkerから観測できないため、発
 3. 承認済み改訂にbinding更新が追随せず停止。
 4. 今回、同一commit規則とv001 `approvalCommit`が自己参照になり停止。
 
-v002実装後の撤退条件を次へ固定する。
+本承認以後の撤退条件を次へ固定する。
 
 - 起算点:
-  将来、kawafmmがv002実装を承認し、最初の実装attemptを開始した時点。
+  kawafmmが本追補と§17の実装を承認した時点。コード変更前のpreflight停止も含める。
 - 数えるもの:
   ledger、schema、checker、bootstrap、migration、admissionという同じ文書統治層に帰属し、人間判断を要した独立停止イベント。
 - 数えないもの:
