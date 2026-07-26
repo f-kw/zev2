@@ -9,20 +9,23 @@ import {
   fsyncSync,
   ftruncateSync,
   lstatSync,
+  mkdtempSync,
   mkdirSync,
   openSync,
   readFileSync,
   readdirSync,
   readlinkSync,
   realpathSync,
+  rmSync,
   rmdirSync,
   unlinkSync,
   writeFileSync,
   writeSync,
 } from 'node:fs';
+import {tmpdir} from 'node:os';
 import {dirname, resolve} from 'node:path';
 import {test as nodeTest} from 'node:test';
-import {fileURLToPath} from 'node:url';
+import {fileURLToPath, pathToFileURL} from 'node:url';
 
 import * as packageCore from './presentation_caption_semantic_source_package_v001.mjs';
 import * as packageRunner from './run_presentation_caption_semantic_source_package_job_v001.mjs';
@@ -5868,39 +5871,153 @@ test('production CLIの実process入口も0件・2件を同じusage診断で拒�
   }
 });
 
+const assertSafeWorkspaceRelativePath = (repositoryPath) => {
+  assert.equal(typeof repositoryPath, 'string');
+  assert.equal(repositoryPath.length > 0, true);
+  assert.equal(repositoryPath.startsWith('/'), false);
+  assert.equal(repositoryPath.includes('\\'), false);
+  assert.equal(repositoryPath.split('/').includes('..'), false);
+  assert.equal(repositoryPath.split('/').includes('.'), false);
+};
+
+const snapshotImmutableFormalRoots = (repositoryPaths) => {
+  const visit = (currentPath, relativePath, entries) => {
+    const stat = lstatSync(currentPath);
+    assert.equal(stat.isSymbolicLink(), false);
+    if (stat.isDirectory()) {
+      entries.push({path: relativePath, kind: 'directory'});
+      for (const name of readdirSync(currentPath).sort(compareUtf16)) {
+        visit(
+          resolve(currentPath, name),
+          relativePath.length === 0 ? name : `${relativePath}/${name}`,
+          entries,
+        );
+      }
+      return;
+    }
+    assert.equal(stat.isFile(), true);
+    const fileBytes = readFileSync(currentPath);
+    entries.push({
+      path: relativePath,
+      kind: 'file',
+      byteLength: fileBytes.length,
+      fileSha256: sha256(fileBytes),
+    });
+  };
+
+  return repositoryPaths.map((repositoryPath) => {
+    assertSafeWorkspaceRelativePath(repositoryPath);
+    const absolutePath = resolve(WORKSPACE_ROOT, repositoryPath);
+    const entries = [];
+    visit(absolutePath, '', entries);
+    return {repositoryPath, entries};
+  });
+};
+
+const createActualProcessTestWorkspace = (runnerJob) => {
+  const temporaryRoot = realpathSync(tmpdir());
+  const workspaceRoot = realpathSync(
+    mkdtempSync(resolve(temporaryRoot, 'zev-caption-b1-process-workspace-')),
+  );
+  const gateAJob = decodeFile(runnerJob.value.gateA.job.path);
+  const sourcePaths = [
+    runnerJob.value.gateA.job.path,
+    runnerJob.value.gateA.completionReport.path,
+    ...runnerJob.value.implementationBinding.files.map((entry) => entry.path),
+    ...runnerJob.value.widthPolicyBindings.map((entry) => entry.path),
+    ...gateAJob.implementationBinding.files.map((entry) => entry.path),
+    ...gateAJob.inputs.map((entry) => entry.path),
+  ];
+  const uniqueSourcePaths = [...new Set(sourcePaths)].sort(compareUtf16);
+  assert.equal(uniqueSourcePaths.includes(PACKAGE_RUNNER_REPOSITORY_PATH), true);
+
+  try {
+    for (const repositoryPath of uniqueSourcePaths) {
+      assertSafeWorkspaceRelativePath(repositoryPath);
+      const sourcePath = resolve(WORKSPACE_ROOT, repositoryPath);
+      const destinationPath = resolve(workspaceRoot, repositoryPath);
+      assert.equal(sourcePath.startsWith(`${WORKSPACE_ROOT}/`), true);
+      assert.equal(destinationPath.startsWith(`${workspaceRoot}/`), true);
+      const sourceStat = lstatSync(sourcePath);
+      assert.equal(sourceStat.isFile(), true);
+      assert.equal(sourceStat.isSymbolicLink(), false);
+      const sourceBytes = readFileSync(sourcePath);
+      mkdirSync(dirname(destinationPath), {recursive: true, mode: 0o700});
+      writeFileSync(destinationPath, sourceBytes, {flag: 'wx', mode: 0o600});
+      assert.equal(readFileSync(destinationPath).equals(sourceBytes), true);
+    }
+
+    for (const repositoryPath of runnerJob.inputFormalOutputPaths) {
+      assertSafeWorkspaceRelativePath(repositoryPath);
+      assert.equal(existsSync(resolve(workspaceRoot, repositoryPath)), false);
+    }
+
+    return {
+      workspaceRoot,
+      runnerPath: resolve(workspaceRoot, PACKAGE_RUNNER_REPOSITORY_PATH),
+      jobPath: resolve(workspaceRoot, runnerJob.jobPath),
+      copiedRepositoryPaths: uniqueSourcePaths,
+    };
+  } catch (error) {
+    rmSync(workspaceRoot, {recursive: true, force: false});
+    throw error;
+  }
+};
+
+const releaseActualProcessTestWorkspace = (workspace) => {
+  const temporaryRoot = `${realpathSync(tmpdir())}/`;
+  assert.equal(workspace.workspaceRoot.startsWith(temporaryRoot), true);
+  assert.equal(
+    workspace.workspaceRoot.includes('/zev-caption-b1-process-workspace-'),
+    true,
+  );
+  rmSync(workspace.workspaceRoot, {recursive: true, force: false});
+  assert.equal(existsSync(workspace.workspaceRoot), false);
+};
+
 test('production CLI実processはproduction chunk投影を共用しexit 0/1をstdout/stderr排他で返す', async () => {
   const runnerJob = makeRunnerJob('read-only-preflight', 'actual-process');
-  const jobDirectory = resolve(WORKSPACE_ROOT, PACKAGE_PREFLIGHT_JOB_ROOT);
-  const jobAbsolutePath = resolve(WORKSPACE_ROOT, runnerJob.jobPath);
+  const immutableFormalRootsBefore =
+    snapshotImmutableFormalRoots(runnerJob.inputFormalOutputPaths);
+  const workspace = createActualProcessTestWorkspace(runnerJob);
+  const jobDirectory = dirname(workspace.jobPath);
   const directoryObservation = prepareOwnedTestDirectory(jobDirectory);
   let ownedJob = null;
 
   try {
+    const isolatedPackageRunner = await import(
+      pathToFileURL(workspace.runnerPath).href
+    );
+    assert.deepEqual(
+      Object.keys(isolatedPackageRunner).sort(),
+      [...EXPECTED_RUNNER_EXPORTS].sort(),
+    );
     const projection =
-      await packageRunner.inspectPresentationCaptionSemanticSourcePackagePreflightProjectionV001(
+      await isolatedPackageRunner
+        .inspectPresentationCaptionSemanticSourcePackagePreflightProjectionV001(
         runnerJob.jobPath,
         {
           filesystemAdapter:
-            packageRunner
+            isolatedPackageRunner
               .createPresentationCaptionSemanticSourcePackageProductionFilesystemAdapterV001(),
         },
       );
     assert.equal(projection.kind, 'trusted-projection');
     runnerJob.value.readOnlyGuard.expectedBeforeCanonicalSha256 =
       projection.expectedBeforeCanonicalSha256;
-    ownedJob = acquireOwnedExclusiveFile(jobAbsolutePath);
-    rewriteOwnedFile(ownedJob, jobAbsolutePath, formalBytes(runnerJob.value));
+    ownedJob = acquireOwnedExclusiveFile(workspace.jobPath);
+    rewriteOwnedFile(ownedJob, workspace.jobPath, formalBytes(runnerJob.value));
     assertOwnedRegularFile(
       ownedJob.fd,
-      jobAbsolutePath,
+      workspace.jobPath,
       ownedJob.identity,
       'before-passed-process',
     );
     const passed = spawnSync(
       process.execPath,
-      [resolve(WORKSPACE_ROOT, PACKAGE_RUNNER_REPOSITORY_PATH), runnerJob.jobPath],
+      [workspace.runnerPath, runnerJob.jobPath],
       {
-        cwd: WORKSPACE_ROOT,
+        cwd: workspace.workspaceRoot,
         encoding: 'utf8',
         maxBuffer: 64 * 1024 * 1024,
       },
@@ -5913,18 +6030,18 @@ test('production CLI実processはproduction chunk投影を共用しexit 0/1をst
 
     runnerJob.value.gateA.expectedEvidenceHashes.evidenceCanonicalSha256 =
       '0'.repeat(64);
-    rewriteOwnedFile(ownedJob, jobAbsolutePath, formalBytes(runnerJob.value));
+    rewriteOwnedFile(ownedJob, workspace.jobPath, formalBytes(runnerJob.value));
     assertOwnedRegularFile(
       ownedJob.fd,
-      jobAbsolutePath,
+      workspace.jobPath,
       ownedJob.identity,
       'before-failed-process',
     );
     const failed = spawnSync(
       process.execPath,
-      [resolve(WORKSPACE_ROOT, PACKAGE_RUNNER_REPOSITORY_PATH), runnerJob.jobPath],
+      [workspace.runnerPath, runnerJob.jobPath],
       {
-        cwd: WORKSPACE_ROOT,
+        cwd: workspace.workspaceRoot,
         encoding: 'utf8',
         maxBuffer: 64 * 1024 * 1024,
       },
@@ -5943,12 +6060,15 @@ test('production CLI実processはproduction chunk投影を共用しexit 0/1をst
     );
   } finally {
     if (ownedJob !== null && !ownedJob.closed) {
-      releaseOwnedExclusiveFile(ownedJob, jobAbsolutePath);
+      releaseOwnedExclusiveFile(ownedJob, workspace.jobPath);
     }
     releaseOwnedTestDirectory(jobDirectory, directoryObservation);
+    releaseActualProcessTestWorkspace(workspace);
   }
-  assert.equal(existsSync(jobAbsolutePath), false);
-  assert.equal(existsSync(jobDirectory), !directoryObservation.created);
+  assert.deepEqual(
+    snapshotImmutableFormalRoots(runnerJob.inputFormalOutputPaths),
+    immutableFormalRootsBefore,
+  );
 });
 
 test('package担当codeと担当checkの正本写像はcore実装と検査表で欠落しない', () => {
