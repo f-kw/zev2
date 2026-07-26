@@ -1444,7 +1444,8 @@ const captureRawBufferLeaves = (
 };
 
 const makeRunnerJob = (mode, suffix) => {
-  const value = clone(makeValidFixture().job.value);
+  const fixture = makeValidFixture();
+  const value = clone(fixture.job.value);
   const root = mode === 'read-only-preflight'
     ? PACKAGE_PREFLIGHT_JOB_ROOT
     : PACKAGE_FORMAL_JOB_ROOT;
@@ -1463,6 +1464,9 @@ const makeRunnerJob = (mode, suffix) => {
     value,
     bytes: formalBytes(value),
     formalRoot: value.publication.formalOutputPath,
+    inputFormalOutputPaths: Object.freeze([
+      fixture.gateA.jobValue.readOnlyGuard.formalOutputPath,
+    ]),
   });
 };
 
@@ -1497,11 +1501,33 @@ const createHybridRunnerFilesystem = (
   const absoluteWorkPath = `${absoluteFormalRoot}.work`;
   const absoluteGateAJobPath = resolve(WORKSPACE_ROOT, GATE_A_JOB_PATH);
   const absoluteWatchedRoot = resolve(WORKSPACE_ROOT, PRESENTATION_WATCHED_ROOT);
+  assert.equal(Array.isArray(runnerJob.inputFormalOutputPaths), true);
+  assert.equal(runnerJob.inputFormalOutputPaths.length > 0, true);
+  assert.equal(
+    runnerJob.inputFormalOutputPaths.every(
+      (pathValue) => typeof pathValue === 'string' && pathValue.length > 0,
+    ),
+    true,
+  );
+  const isolatedInputFormalRoots = runnerJob.inputFormalOutputPaths.map(
+    (pathValue) => resolve(WORKSPACE_ROOT, pathValue),
+  );
+  assert.equal(
+    isolatedInputFormalRoots.every(
+      (pathValue) => pathValue.startsWith(`${absoluteWatchedRoot}/`),
+    ),
+    true,
+  );
+  assert.equal(
+    new Set(isolatedInputFormalRoots).size,
+    isolatedInputFormalRoots.length,
+  );
   const managedRoots = [
     absoluteJobRoot,
     absoluteFormalRoot,
     absoluteLockPath,
     absoluteWorkPath,
+    ...isolatedInputFormalRoots,
   ];
 
   const addEntry = (pathValue, kind, inputBytes = Buffer.alloc(0)) => {
@@ -1634,7 +1660,10 @@ const createHybridRunnerFilesystem = (
     openDirectoryReadOnly: async (pathValue) => {
       operations.push({operation: 'openDirectoryReadOnly', path: pathValue});
       const virtual = entries.get(pathValue);
-      if (virtual === undefined) return await base.openDirectoryReadOnly(pathValue);
+      if (virtual === undefined) {
+        if (isManaged(pathValue)) throw makeEnoent(pathValue);
+        return await base.openDirectoryReadOnly(pathValue);
+      }
       if (virtual.kind !== 'directory') throw makeEnoent(pathValue);
       let closed = false;
       return Object.freeze({
@@ -1769,6 +1798,7 @@ const createHybridRunnerFilesystem = (
       formalRoot: absoluteFormalRoot,
       lock: absoluteLockPath,
       work: absoluteWorkPath,
+      isolatedInputFormalRoots: Object.freeze([...isolatedInputFormalRoots]),
     }),
   });
 };
@@ -2560,6 +2590,18 @@ test('Q1:A監視投影hashは同じ非空treeを読むproduction runner開始投
     bytes: formalBytes(runnerJob.value),
   });
   const productionFilesystem = createQ1WatchedTreeFilesystem(productionJob);
+  assert.deepEqual(
+    productionFilesystem.paths.isolatedInputFormalRoots,
+    productionJob.inputFormalOutputPaths.map(
+      (pathValue) => resolve(WORKSPACE_ROOT, pathValue),
+    ),
+  );
+  for (const isolatedRoot of productionFilesystem.paths.isolatedInputFormalRoots) {
+    await assert.rejects(
+      productionFilesystem.adapter.lstatBigInt(isolatedRoot),
+      (error) => error?.code === 'ENOENT',
+    );
+  }
   const builder = createRunnerSpyBuilder();
   const result = await packageRunner.runPresentationCaptionSemanticSourcePackageV001(
     productionJob.jobPath,
