@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "presentation-caption-b4-static-preflight-execution-record-v001",
+  "executedAt": "2026-07-26T10:30:30+09:00",
+  "implementationCommit": "29a461fc",
+  "environment": {
+    "kind": "native",
+    "platform": "darwin",
+    "arch": "arm64",
+    "nodeVersion": "v20.19.6",
+    "nodePath": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+    "nodeFileSha256": "de4f3b493b15e7a0ee311f6a2c6dbf93858052f5802aa91cfafa2c57e9d6bc5c"
+  },
+  "job": {
+    "path": "evals/clip_composition/outputs/presentation/caption-display-pair-static-preflight-jobs/DmWu0jVQfTE-candidate-13-caption-display-pair-b4-v002.json",
+    "fileSha256": "b2db7a7e5040d703dd279493d98a1471572e74d2e62134c0ce4029c18b9db660"
+  },
+  "execution": {
+    "attemptCount": 1,
+    "exitCode": 1,
+    "stdoutPath": "evals/clip_composition/reports/presentation/test-runs/20260726-caption-b4-semantic-source-process-workspace-isolation-v001/candidate13-preflight-v002.stdout.json",
+    "stdoutFileSha256": "214a7c49e7407336f62129161b9089f5451fd1e58b982424b6505f3849dd6baa",
+    "stderrPath": "evals/clip_composition/reports/presentation/test-runs/20260726-caption-b4-semantic-source-process-workspace-isolation-v001/candidate13-preflight-v002.stderr.txt",
+    "stderrFileSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderrBytes": 0,
+    "status": "failed",
+    "passedChecks": 11,
+    "failedChecks": 1,
+    "violationCodes": [
+      "READ_ONLY_CONTRACT_VIOLATED"
+    ]
+  },
+  "readOnlyObservation": {
+    "jobExpectedBeforeCanonicalSha256": "4ce8fe4f28ceefb3036c5d5fd521d939d1d11d96e93a05357c127684bc2c52ff",
+    "observedBeforeCanonicalSha256": "632386d80a190cc3a289e1653c1a18ffb2b2f2dd7371d2e3e9d8955348e4eee0",
+    "observedAfterCanonicalSha256": "632386d80a190cc3a289e1653c1a18ffb2b2f2dd7371d2e3e9d8955348e4eee0",
+    "observedBeforeAfterEqual": true,
+    "matchedJobExpectation": false
+  },
+  "automaticRetryCount": 0,
+  "sameAttemptRepair": false
+}
