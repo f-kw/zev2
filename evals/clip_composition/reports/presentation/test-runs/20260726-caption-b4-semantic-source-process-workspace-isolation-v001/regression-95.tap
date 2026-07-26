@@ -1,0 +1,485 @@
+TAP version 13
+# Subtest: 60fpsの偶数frame抽出契約と実mediaのhash・frame数を合格にする
+ok 1 - 60fpsの偶数frame抽出契約と実mediaのhash・frame数を合格にする
+  ---
+  duration_ms: 2.768958
+  ...
+# Subtest: 60fps・181frameのデコード終端だけを最後のglobal-even frame後ろへ写す
+ok 2 - 60fps・181frameのデコード終端だけを最後のglobal-even frame後ろへ写す
+  ---
+  duration_ms: 1.016166
+  ...
+# Subtest: 30fps identityと音声ありmanifestの厳密形を合格にする
+ok 3 - 30fps identityと音声ありmanifestの厳密形を合格にする
+  ---
+  duration_ms: 0.281833
+  ...
+# Subtest: 内部時刻をmsへ戻さずsource frame差でoutput frameへ写す
+ok 4 - 内部時刻をmsへ戻さずsource frame差でoutput frameへ写す
+  ---
+  duration_ms: 0.285875
+  ...
+# Subtest: v001・未知field・欠落fieldを近似受理しない
+ok 5 - v001・未知field・欠落fieldを近似受理しない
+  ---
+  duration_ms: 7.6765
+  ...
+# Subtest: 実行記録の未知・欠落・stage・tool・引数path・filter・信頼sourceを厳密に拒否する
+ok 6 - 実行記録の未知・欠落・stage・tool・引数path・filter・信頼sourceを厳密に拒否する
+  ---
+  duration_ms: 2.196291
+  ...
+# Subtest: frame clock・frame導出・区間順・連続性・速度を個別に拒否する
+ok 7 - frame clock・frame導出・区間順・連続性・速度を個別に拒否する
+  ---
+  duration_ms: 0.9625
+  ...
+# Subtest: 生成manifestとtimelineのsource・区間・成果物を相互照合する
+ok 8 - 生成manifestとtimelineのsource・区間・成果物を相互照合する
+  ---
+  duration_ms: 0.694458
+  ...
+# Subtest: source論理frame上限をmanifestのdecoded frame数へ束縛する
+ok 9 - source論理frame上限をmanifestのdecoded frame数へ束縛する
+  ---
+  duration_ms: 0.453875
+  ...
+# Subtest: 音声sample列をframe数・byte数・channel構成・開始PTSへ束縛する
+ok 10 - 音声sample列をframe数・byte数・channel構成・開始PTSへ束縛する
+  ---
+  duration_ms: 0.844416
+  ...
+# Subtest: 固定tool・実装2file・固定成果物名を厳密に検査する
+ok 11 - 固定tool・実装2file・固定成果物名を厳密に検査する
+  ---
+  duration_ms: 0.587166
+  ...
+# Subtest: 観測した基礎映像の入力形・hash・frame数を個別に拒否する
+ok 12 - 観測した基礎映像の入力形・hash・frame数を個別に拒否する
+  ---
+  duration_ms: 0.321583
+  ...
+# Subtest: source区間の未対応・複数segment跨ぎ・曖昧・0frameを区別する
+ok 13 - source区間の未対応・複数segment跨ぎ・曖昧・0frameを区別する
+  ---
+  duration_ms: 0.158292
+  ...
+# Subtest: 違反順と同一入力のreportを決定的にする
+ok 14 - 違反順と同一入力のreportを決定的にする
+  ---
+  duration_ms: 0.539375
+  ...
+# Subtest: exportした全固有違反コードを意図入力で発火できる
+ok 15 - exportした全固有違反コードを意図入力で発火できる
+  ---
+  duration_ms: 0.4595
+  ...
+# Subtest: 正常な文字相当入力は部分検査として通り、境界接触を重なりにしない
+ok 16 - 正常な文字相当入力は部分検査として通り、境界接触を重なりにしない
+  ---
+  duration_ms: 5.911084
+  ...
+# Subtest: 表示対象にcueが無ければG1_TARGET_WITHOUT_CAPTIONを検出する
+ok 17 - 表示対象にcueが無ければG1_TARGET_WITHOUT_CAPTIONを検出する
+  ---
+  duration_ms: 0.594542
+  ...
+# Subtest: 未知atom参照を検出する
+ok 18 - 未知atom参照を検出する
+  ---
+  duration_ms: 0.95175
+  ...
+# Subtest: cueによるtarget横断参照を検出する
+ok 19 - cueによるtarget横断参照を検出する
+  ---
+  duration_ms: 0.724083
+  ...
+# Subtest: 元発話に無い公開文言を厳密一致違反として検出する
+ok 20 - 元発話に無い公開文言を厳密一致違反として検出する
+  ---
+  duration_ms: 0.527834
+  ...
+# Subtest: 必須atomの欠落をG1とG2の両方で検出する
+ok 21 - 必須atomの欠落をG1とG2の両方で検出する
+  ---
+  duration_ms: 0.571584
+  ...
+# Subtest: atomの重複参照を検出する
+ok 22 - atomの重複参照を検出する
+  ---
+  duration_ms: 1.100209
+  ...
+# Subtest: atomの参照逆順を検出する
+ok 23 - atomの参照逆順を検出する
+  ---
+  duration_ms: 0.824709
+  ...
+# Subtest: 空cueを検出する
+ok 24 - 空cueを検出する
+  ---
+  duration_ms: 0.942625
+  ...
+# Subtest: 空lineを検出する
+ok 25 - 空lineを検出する
+  ---
+  duration_ms: 0.873167
+  ...
+# Subtest: renderedTextへの改行文字埋め込みを検出する
+ok 26 - renderedTextへの改行文字埋め込みを検出する
+  ---
+  duration_ms: 0.767167
+  ...
+# Subtest: anchorと異なる創作時刻を検出する
+ok 27 - anchorと異なる創作時刻を検出する
+  ---
+  duration_ms: 0.667417
+  ...
+# Subtest: cue論理順の逆転を検出する
+ok 28 - cue論理順の逆転を検出する
+  ---
+  duration_ms: 0.538584
+  ...
+# Subtest: 正の交差だけを未宣言重なりとして検出する
+ok 29 - 正の交差だけを未宣言重なりとして検出する
+  ---
+  duration_ms: 0.500166
+  ...
+# Subtest: 上流固定groupと異なる既知話者の同時表示だけを許可する
+ok 30 - 上流固定groupと異なる既知話者の同時表示だけを許可する
+  ---
+  duration_ms: 0.753708
+  ...
+# Subtest: cueの自己申告だけによる同時表示groupを拒否する
+ok 31 - cueの自己申告だけによる同時表示groupを拒否する
+  ---
+  duration_ms: 0.700667
+  ...
+# Subtest: 同一話者targetの同時表示groupを拒否する
+ok 32 - 同一話者targetの同時表示groupを拒否する
+  ---
+  duration_ms: 0.365292
+  ...
+# Subtest: source atomId重複を検出する
+ok 33 - source atomId重複を検出する
+  ---
+  duration_ms: 0.4715
+  ...
+# Subtest: source時刻逆転を検出する
+ok 34 - source時刻逆転を検出する
+  ---
+  duration_ms: 0.559833
+  ...
+# Subtest: source atomの境界接触は重なり記録にしない
+ok 35 - source atomの境界接触は重なり記録にしない
+  ---
+  duration_ms: 0.420167
+  ...
+# Subtest: source atom時刻の正の重なりは拒否せず記録する
+ok 36 - source atom時刻の正の重なりは拒否せず記録する
+  ---
+  duration_ms: 0.403792
+  ...
+# Subtest: 同一source atomの複数target登録を検出する
+ok 37 - 同一source atomの複数target登録を検出する
+  ---
+  duration_ms: 0.3005
+  ...
+# Subtest: 旧telopPlanはschema不成立になり推測変換しない
+ok 38 - 旧telopPlanはschema不成立になり推測変換しない
+  ---
+  duration_ms: 0.565375
+  ...
+# Subtest: 同じ入力の検査結果はバイト単位で一致する
+ok 39 - 同じ入力の検査結果はバイト単位で一致する
+  ---
+  duration_ms: 0.495833
+  ...
+# Subtest: 10種類を含む固定fixtureはhashまで一致して通る
+ok 40 - 10種類を含む固定fixtureはhashまで一致して通る
+  ---
+  duration_ms: 4.982917
+  ...
+# Subtest: 空の指示書と専用の空解決packageを許す
+ok 41 - 空の指示書と専用の空解決packageを許す
+  ---
+  duration_ms: 0.899792
+  ...
+# Subtest: caption契約は0件と1件を通し、2件を拒否する
+ok 42 - caption契約は0件と1件を通し、2件を拒否する
+  ---
+  duration_ms: 3.084083
+  ...
+# Subtest: caption cue ID重複を先勝ちで処理せず外枠接続を曖昧失敗にする
+ok 43 - caption cue ID重複を先勝ちで処理せず外枠接続を曖昧失敗にする
+  ---
+  duration_ms: 1.233666
+  ...
+# Subtest: sourceの既存検査を委譲し、重複・逆転・正の重なりを既存コードのまま保つ
+ok 44 - sourceの既存検査を委譲し、重複・逆転・正の重なりを既存コードのまま保つ
+  ---
+  duration_ms: 3.279542
+  ...
+# Subtest: 実captionだけのcharacter timestamp部分検査を上位へ伝播する
+ok 45 - 実captionだけのcharacter timestamp部分検査を上位へ伝播する
+  ---
+  duration_ms: 0.553167
+  ...
+# Subtest: information-commentの話者アイコンは無しと正しい人物を許し、別人物を拒否する
+ok 46 - information-commentの話者アイコンは無しと正しい人物を許し、別人物を拒否する
+  ---
+  duration_ms: 2.520917
+  ...
+# Subtest: G7素材ORは画像だけ・動画だけ・両方を許し、無しを拒否する
+ok 47 - G7素材ORは画像だけ・動画だけ・両方を許し、無しを拒否する
+  ---
+  duration_ms: 2.610958
+  ...
+# Subtest: 役割または対象が違う素材は必須素材とG7のORを満たしたことにしない
+ok 48 - 役割または対象が違う素材は必須素材とG7のORを満たしたことにしない
+  ---
+  duration_ms: 2.612417
+  ...
+# Subtest: G7の素材ORはpreset必須条件と独立し、対象が解けない時は素材対象不一致を推測しない
+ok 49 - G7の素材ORはpreset必須条件と独立し、対象が解けない時は素材対象不一致を推測しない
+  ---
+  duration_ms: 1.426292
+  ...
+# Subtest: caption本文改変は旧G1コードと旧reportのまま伝播して全体を失敗させる
+ok 50 - caption本文改変は旧G1コードと旧reportのまま伝播して全体を失敗させる
+  ---
+  duration_ms: 0.801458
+  ...
+# Subtest: 同一入力はバイト一致し、object key順はhash不変、artifact配列順はhashだけ変わる
+ok 51 - 同一入力はバイト一致し、object key順はhash不変、artifact配列順はhashだけ変わる
+  ---
+  duration_ms: 2.717416
+  ...
+# Subtest: 10種類は対応対象で通り、別対象種別へすり替えると全種類で失敗する
+ok 52 - 10種類は対応対象で通り、別対象種別へすり替えると全種類で失敗する
+  ---
+  duration_ms: 4.49225
+  ...
+# Subtest: 未使用preset・policy・materialもindex全体の不正として検出する
+ok 53 - 未使用preset・policy・materialもindex全体の不正として検出する
+  ---
+  duration_ms: 1.726667
+  ...
+# Subtest: caption内部のtarget横断参照は旧G1違反のまま委譲する
+ok 54 - caption内部のtarget横断参照は旧G1違反のまま委譲する
+  ---
+  duration_ms: 0.568
+  ...
+# Subtest: 固定1 presetでもpresetId省略を暗黙defaultへ変換しない
+ok 55 - 固定1 presetでもpresetId省略を暗黙defaultへ変換しない
+  ---
+  duration_ms: 0.566791
+  ...
+# Subtest: 未知field allowlistを全入れ子階層で拒否する
+ok 56 - 未知field allowlistを全入れ子階層で拒否する
+  ---
+  duration_ms: 9.749708
+  ...
+# Subtest: bundle・binding・指示書・解決package・指示・対象の必須field削除を対応コードで拒否する
+ok 57 - bundle・binding・指示書・解決package・指示・対象の必須field削除を対応コードで拒否する
+  ---
+  duration_ms: 26.29825
+  ...
+# Subtest: caption・preset・material各階層の必須field削除を対応コードで拒否する
+ok 58 - caption・preset・material各階層の必須field削除を対応コードで拒否する
+  ---
+  duration_ms: 24.018208
+  ...
+# Subtest: 任意fieldは許可条件だけを通し、caption終了方針の越権を拒否する
+ok 59 - 任意fieldは許可条件だけを通し、caption終了方針の越権を拒否する
+  ---
+  duration_ms: 1.790666
+  ...
+# Subtest: 全階層の必須fieldを1つずつ欠落させると対応する契約違反になる
+ok 60 - 全階層の必須fieldを1つずつ欠落させると対応する契約違反になる
+  ---
+  duration_ms: 34.868833
+  ...
+# Subtest: 任意fieldは許可された文脈だけで有無の両方を受け付ける
+ok 61 - 任意fieldは許可された文脈だけで有無の両方を受け付ける
+  ---
+  duration_ms: 1.558917
+  ...
+# Subtest: 重複IDは下流接続を満たしたことにせず曖昧失敗にする
+ok 62 - 重複IDは下流接続を満たしたことにせず曖昧失敗にする
+  ---
+  duration_ms: 3.75775
+  ...
+# Subtest: 未検査範囲は6件を固定順で明示する
+ok 63 - 未検査範囲は6件を固定順で明示する
+  ---
+  duration_ms: 0.466875
+  ...
+# Subtest: 旧telopPlanを推測変換しない
+ok 64 - 旧telopPlanを推測変換しない
+  ---
+  duration_ms: 6.148167
+  ...
+# Subtest: exportされた全外枠違反コードを意図入力で発火させ、所属grammarを固定する
+ok 65 - exportされた全外枠違反コードを意図入力で発火させ、所属grammarを固定する
+  ---
+  duration_ms: 49.039542
+  ...
+# Subtest: CLIは合格0・契約失敗1・処理失敗2を返し、任意の出力先へ同じreportを書く
+ok 66 - CLIは合格0・契約失敗1・処理失敗2を返し、任意の出力先へ同じreportを書く
+  ---
+  duration_ms: 373.610292
+  ...
+# Subtest: 01 jobとtimeline manifestの必須field・未知field・hash形式を固定検査する
+ok 67 - 01 jobとtimeline manifestの必須field・未知field・hash形式を固定検査する
+  ---
+  duration_ms: 17.311042
+  ...
+# Subtest: 01b 新規出力・所有lock・原子的publishを固定し既存成功物を変更しない
+ok 68 - 01b 新規出力・所有lock・原子的publishを固定し既存成功物を変更しない
+  ---
+  duration_ms: 11.630375
+  ...
+# Subtest: 01c directory publish成功後のlock異常を成功成果物の失敗へ戻さない
+ok 69 - 01c directory publish成功後のlock異常を成功成果物の失敗へ戻さない
+  ---
+  duration_ms: 4.327334
+  ...
+# Subtest: 02 固定信頼根・台帳・preview・描画部品・tool・fontを照合しfont失敗を分類する
+ok 70 - 02 固定信頼根・台帳・preview・描画部品・tool・fontを照合しfont失敗を分類する
+  ---
+  duration_ms: 23.040125
+  ...
+# Subtest: 03 v002だけを受理しv001と旧telopPlanを描画前に拒否する
+ok 71 - 03 v002だけを受理しv001と旧telopPlanを描画前に拒否する
+  ---
+  duration_ms: 1492.166167
+  ...
+# Subtest: 04 外枠passedだけを通しpartialとfailedを異なるコードで停止する
+ok 72 - 04 外枠passedだけを通しpartialとfailedを異なるコードで停止する
+  ---
+  duration_ms: 432.547959
+  ...
+# Subtest: 05 正式空素材で到達可能な9種類を1指示1要素へ解決する
+ok 73 - 05 正式空素材で到達可能な9種類を1指示1要素へ解決する
+  ---
+  duration_ms: 1.595
+  ...
+# Subtest: 06 caption本文・明示行・開始終了anchorを一文字も変えず保持する
+ok 74 - 06 caption本文・明示行・開始終了anchorを一文字も変えず保持する
+  ---
+  duration_ms: 0.157041
+  ...
+# Subtest: 07 非caption本文と終了責任を保ち句点・空白・元改行の文字indexを欠落なく追跡する
+ok 75 - 07 非caption本文と終了責任を保ち句点・空白・元改行の文字indexを欠落なく追跡する
+  ---
+  duration_ms: 0.525917
+  ...
+# Subtest: 08 speaker表示名は明示targetだけから解決しsource話者ラベルを人物名に使わない
+ok 76 - 08 speaker表示名は明示targetだけから解決しsource話者ラベルを人物名に使わない
+  ---
+  duration_ms: 0.792375
+  ...
+# Subtest: 09 1 source・cut対応・速度・frame数・未対応・曖昧・segment跨ぎを個別に止める
+ok 77 - 09 1 source・cut対応・速度・frame数・未対応・曖昧・segment跨ぎを個別に止める
+  ---
+  duration_ms: 4.386041
+  ...
+# Subtest: 10 v002はsource frameをoutput frameへ直接写し短尺alpha包絡を固定する
+ok 78 - 10 v002はsource frameをoutput frameへ直接写し短尺alpha包絡を固定する
+  ---
+  duration_ms: 0.218041
+  ...
+# Subtest: 11 正式台帳の種類・状態・font・背景・transitionをfallbackなしで解決する
+ok 79 - 11 正式台帳の種類・状態・font・背景・transitionをfallbackなしで解決する
+  ---
+  duration_ms: 0.823625
+  ...
+# Subtest: 12 行数・行の正の交差・安全領域・空alphaを独立して検出する
+ok 80 - 12 行数・行の正の交差・安全領域・空alphaを独立して検出する
+  ---
+  duration_ms: 6.085667
+  ...
+# Subtest: 13 時間と空間の正の交差だけを衝突とし境界接触は許容する
+ok 81 - 13 時間と空間の正の交差だけを衝突とし境界接触は許容する
+  ---
+  duration_ms: 0.621875
+  ...
+# Subtest: 14 空素材indexのG7を外枠で停止しpreviewカードを代用しない
+ok 82 - 14 空素材indexのG7を外枠で停止しpreviewカードを代用しない
+  ---
+  duration_ms: 220.382333
+  ...
+# Subtest: 15 9種類の透明PNGは非空・safe area内で同じ入力を同じhashへ再描画する
+ok 83 - 15 9種類の透明PNGは非空・safe area内で同じ入力を同じhashへ再描画する
+  ---
+  duration_ms: 109234.005583
+  ...
+# Subtest: 16 合成MP4の映像・代表frame差分・基礎音声packetを保全する
+ok 84 - 16 合成MP4の映像・代表frame差分・基礎音声packetを保全する
+  ---
+  duration_ms: 20677.935875
+  ...
+# Subtest: 17 適用結果・manifest・QC・CLI 0/1/2・publish後残留警告で成功を覆さない・全固有コード集合を固定する
+ok 85 - 17 適用結果・manifest・QC・CLI 0/1/2・publish後残留警告で成功を覆さない・全固有コード集合を固定する
+  ---
+  duration_ms: 450.04275
+  ...
+# Subtest: 1: 欄なし・null・不透明ラベル・表示名風文字列を構造上受理し、人物保証外を明示する
+ok 86 - 1: 欄なし・null・不透明ラベル・表示名風文字列を構造上受理し、人物保証外を明示する
+  ---
+  duration_ms: 5.364958
+  ...
+# Subtest: 2: 話者欄のnumber・boolean・object・arrayを同じ型違反として拒否する
+ok 87 - 2: 話者欄のnumber・boolean・object・arrayを同じ型違反として拒否する
+  ---
+  duration_ms: 2.467834
+  ...
+# Subtest: 3: 空文字・空白だけ・前後空白を区別し、trimした値を作らない
+ok 88 - 3: 空文字・空白だけ・前後空白を区別し、trimした値を作らない
+  ---
+  duration_ms: 2.560083
+  ...
+# Subtest: 4: 固定台帳2値だけを拒否し、台帳外文字列は保証外として通す
+ok 89 - 4: 固定台帳2値だけを拒否し、台帳外文字列は保証外として通す
+  ---
+  duration_ms: 1.518791
+  ...
+# Subtest: 5: 同時表示の話者状態・v001拒否・caption CLIと従来24意味ケースを検証する
+ok 90 - 5: 同時表示の話者状態・v001拒否・caption CLIと従来24意味ケースを検証する
+  ---
+  duration_ms: 282.019583
+  ...
+# Subtest: 6: 正式生成器だけが登録済み2値をnullへ写し、決定的なatom単位来歴を残す
+ok 91 - 6: 正式生成器だけが登録済み2値をnullへ写し、決定的なatom単位来歴を残す
+  ---
+  duration_ms: 1.680334
+  ...
+# Subtest: 7: 欄なし・null・通常値を保持し、不正値ではpackageを一切生成しない
+ok 92 - 7: 欄なし・null・通常値を保持し、不正値ではpackageを一切生成しない
+  ---
+  duration_ms: 1.18325
+  ...
+# Subtest: 8: 外枠がsource-onlyとfull-captionへ話者違反を無改変伝播し、従来27ケース・全114コードを保つ
+ok 93 - 8: 外枠がsource-onlyとfull-captionへ話者違反を無改変伝播し、従来27ケース・全114コードを保つ
+  ---
+  duration_ms: 33.911416
+  ...
+# Subtest: 9: source labelと人物targetを分離し、information-itemは明示speaker targetだけを参照する
+ok 94 - 9: source labelと人物targetを分離し、information-itemは明示speaker targetだけを参照する
+  ---
+  duration_ms: 2.5955
+  ...
+# Subtest: 10: v002入口が全v001版を拒否し、外枠CLIの0・1・2と決定性を保つ
+ok 95 - 10: v002入口が全v001版を拒否し、外枠CLIの0・1・2と決定性を保つ
+  ---
+  duration_ms: 224.633667
+  ...
+1..95
+# tests 95
+# suites 0
+# pass 95
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 132656.769167
