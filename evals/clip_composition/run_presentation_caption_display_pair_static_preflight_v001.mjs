@@ -11,7 +11,7 @@ import {
   realpath,
 } from 'node:fs/promises';
 import { dirname, relative, resolve, sep } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 
 import {
   buildPresentationCaptionDisplayPairStaticPreflightReportV001,
@@ -26,6 +26,7 @@ import {
 
 const JOB_ROOT =
   'evals/clip_composition/outputs/presentation/caption-display-pair-static-preflight-jobs/';
+const WATCHED_ROOT = 'evals/clip_composition/outputs/presentation';
 const PACKAGE_FILES = Object.freeze([
   'segmenter-boundary-evidence.json',
   'embedded-gate-a-validation-report.json',
@@ -261,6 +262,49 @@ const monitorProjection = async (rootPath, excludedPath) => {
   return canonicalSha(rows);
 };
 
+const PREFLIGHT_PROJECTION_UNAVAILABLE = Object.freeze({kind: 'unavailable'});
+const missingPath = async (absolutePath) => {
+  try {
+    await lstat(absolutePath);
+    return false;
+  } catch (error) {
+    if (error?.code === 'ENOENT') return true;
+    throw error;
+  }
+};
+
+export async function inspectPresentationCaptionDisplayPairStaticPreflightProjectionV001(
+  jobPath,
+) {
+  try {
+    if (!safeJobPath(jobPath)) return PREFLIGHT_PROJECTION_UNAVAILABLE;
+    const absoluteJobPath = resolve(workspaceRoot, jobPath);
+    const absoluteJobRoot = resolve(workspaceRoot, JOB_ROOT);
+    const absoluteWatchedRoot = resolve(workspaceRoot, WATCHED_ROOT);
+    if (absoluteJobPath !== `${workspaceRoot}${sep}${jobPath}`
+      || dirname(absoluteJobPath) !== absoluteJobRoot
+      || await realpath(absoluteJobRoot) !== absoluteJobRoot
+      || await realpath(absoluteWatchedRoot) !== absoluteWatchedRoot
+      || !await missingPath(absoluteJobPath)) {
+      return PREFLIGHT_PROJECTION_UNAVAILABLE;
+    }
+
+    const expectedBeforeCanonicalSha256 = await monitorProjection(
+      WATCHED_ROOT,
+      jobPath,
+    );
+    if (!await missingPath(absoluteJobPath)) return PREFLIGHT_PROJECTION_UNAVAILABLE;
+    return Object.freeze({
+      kind: 'trusted-projection',
+      watchedRoot: WATCHED_ROOT,
+      excludedPaths: Object.freeze([jobPath]),
+      expectedBeforeCanonicalSha256,
+    });
+  } catch {
+    return PREFLIGHT_PROJECTION_UNAVAILABLE;
+  }
+}
+
 const main = async () => {
   if (process.argv.length !== 3 || !safeJobPath(process.argv[2])) {
     process.stdout.write(formal(fatal('CAPTION_B4_PREFLIGHT_CLI_JOB_CONTEXT_UNAVAILABLE')));
@@ -361,4 +405,7 @@ const main = async () => {
   }
 };
 
-main();
+if (typeof process.argv[1] === 'string'
+  && import.meta.url === pathToFileURL(process.argv[1]).href) {
+  main();
+}
