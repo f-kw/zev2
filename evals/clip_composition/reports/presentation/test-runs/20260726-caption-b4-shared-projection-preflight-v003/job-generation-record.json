@@ -1,0 +1,36 @@
+{
+  "schemaVersion": "presentation-caption-display-pair-static-preflight-job-generation-record-v001",
+  "attemptId": "20260726-caption-b4-shared-projection-preflight-v003",
+  "recordedAt": "2026-07-26T11:14:52+09:00",
+  "generator": {
+    "kind": "one-time-formal-job-preparation",
+    "productionProjectionEntry": "inspectPresentationCaptionDisplayPairStaticPreflightProjectionV001",
+    "productionProjectionImplementation": "evals/clip_composition/run_presentation_caption_display_pair_static_preflight_v001.mjs",
+    "implementationCommit": "a5d3bacc56d25098157d400657c4d20241d586e9"
+  },
+  "sourceAttempt": {
+    "path": "evals/clip_composition/outputs/presentation/caption-display-pair-static-preflight-jobs/DmWu0jVQfTE-candidate-13-caption-display-pair-b4-v002.json",
+    "fileSha256": "b2db7a7e5040d703dd279493d98a1471572e74d2e62134c0ce4029c18b9db660",
+    "status": "preserved_failed_attempt"
+  },
+  "generatedAttempt": {
+    "path": "evals/clip_composition/outputs/presentation/caption-display-pair-static-preflight-jobs/DmWu0jVQfTE-candidate-13-caption-display-pair-b4-v003.json",
+    "fileSha256": "8a4c45a90ba14293c9eef11124391e61d054b10f3bf59354405a3f130f879620",
+    "expectedBeforeCanonicalSha256": "2f4a098dfb4072dc74c0b1864ddc56fe3502184de0eeadf3fcc20dca14ca1bfe",
+    "boundFileCount": 15,
+    "allBoundFileHashesMatched": true
+  },
+  "differenceFromSource": {
+    "allowedPaths": [
+      "$.jobId",
+      "$.artifactId",
+      "$.implementationBinding.gitCommit",
+      "$.implementationBinding.files[1].fileSha256",
+      "$.readOnlyGuard.excludedPaths[0]",
+      "$.readOnlyGuard.expectedBeforeCanonicalSha256"
+    ],
+    "observedPathsMatchedAllowedPathsExactly": true
+  },
+  "generationCount": 1,
+  "automaticRetryCount": 0
+}
