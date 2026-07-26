@@ -3,22 +3,24 @@
 import assert from 'node:assert/strict';
 import {mkdtemp, readFile, readdir, rm} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
-import {join} from 'node:path';
+import {dirname, join, resolve} from 'node:path';
 import test from 'node:test';
+import {fileURLToPath} from 'node:url';
 
 import {
-  buildPresentationCaptionGateB5RequestsV001,
-  executePresentationCaptionGateB5V001,
-} from './run_presentation_caption_gate_b5_v001.mjs';
+  buildPresentationCaptionGateB5RequestsV002,
+  executePresentationCaptionGateB5V002,
+} from './run_presentation_caption_gate_b5_v002.mjs';
 import {
   serializePresentationCaptionB1FormalJsonV001,
   sha256PresentationCaptionB1BytesV001,
 } from './presentation_caption_semantic_source_package_v001.mjs';
 
 const DESIGN_SHA =
-  '80bf9b1598744c97a205a96d7ddcde0bf930dccf81991a18c7885e553b856279';
+  '93bdc9e40ddf95b5cec9baba73501d9a0507d50a05329244c8123eb098e161cd';
 const PROJECTION_SHA = '7'.repeat(64);
 const TEST_DATE = '2026-07-27';
+const workspaceRoot = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 
 const formalBytes = (value) => {
   const result = serializePresentationCaptionB1FormalJsonV001(value);
@@ -78,7 +80,6 @@ const makeConfig = ({sourcePath, outputRoot, sourceBytes}) => ({
   expectedContainerCount: 2,
   expectedBoundaryCandidateCount: 3,
   modelId: 'gemini-3.6-flash',
-  tier: 'SERVICE_TIER_STANDARD',
   officialInputLimit: 1_048_576,
   officialOutputLimit: 65_536,
   inputPriceUsdPerMillion: '1.50',
@@ -102,7 +103,15 @@ test('pure builder keeps the source exact and uses every candidate once', () => 
     outputRoot: '/unused/output',
     sourceBytes,
   });
-  const built = buildPresentationCaptionGateB5RequestsV001({sourceBytes, config});
+  const built = buildPresentationCaptionGateB5RequestsV002({sourceBytes, config});
+  assert.equal(Object.hasOwn(built.generateRequest, 'serviceTier'), false);
+  assert.equal(
+    Object.hasOwn(
+      built.inputTokenCountRequest.generateContentRequest,
+      'serviceTier',
+    ),
+    false,
+  );
   assert.equal(
     built.generateRequest.contents[0].parts[0].text,
     sourceBytes.toString('utf8'),
@@ -128,6 +137,74 @@ test('pure builder keeps the source exact and uses every candidate once', () => 
   );
 });
 
+test('formal v002 requests differ from v001 only by omitted serviceTier fields', async () => {
+  const sourcePath = resolve(
+    workspaceRoot,
+    'evals/clip_composition/outputs/presentation/segmenter-boundary-evidence/DmWu0jVQfTE-candidate-13-v001/semantic-source-input.json',
+  );
+  const v001Root = resolve(
+    workspaceRoot,
+    'evals/clip_composition/outputs/presentation/caption-gate-b5/DmWu0jVQfTE-candidate-13-v001',
+  );
+  const [
+    sourceBytes,
+    v001GenerateBytes,
+    v001InputCountBytes,
+    v001MaximumCountBytes,
+  ] = await Promise.all([
+    readFile(sourcePath),
+    readFile(join(v001Root, 'generate-content-request.json')),
+    readFile(join(v001Root, 'input-token-count-request.json')),
+    readFile(join(v001Root, 'maximum-response-token-count-request.json')),
+  ]);
+  const config = {
+    ...makeConfig({
+      sourcePath,
+      outputRoot: '/unused/formal-v002-output',
+      sourceBytes,
+    }),
+    expectedCharacterCount: 354,
+    expectedContainerCount: 3,
+    expectedBoundaryCandidateCount: 205,
+  };
+  const built = buildPresentationCaptionGateB5RequestsV002({sourceBytes, config});
+
+  const projectedGenerate = JSON.parse(v001GenerateBytes.toString('utf8'));
+  assert.equal(
+    projectedGenerate.serviceTier,
+    'SERVICE_TIER_STANDARD',
+  );
+  delete projectedGenerate.serviceTier;
+  const projectedGenerateBytes = formalBytes(projectedGenerate);
+  assert.deepEqual(built.generateBytes, projectedGenerateBytes);
+  assert.equal(built.generateBytes.length, 36_913);
+  assert.equal(
+    sha256(built.generateBytes),
+    '7fa902580b78bb5da3d36025135e4655ab2528e401ba5a76537f2af3c1939ed2',
+  );
+
+  const projectedInputCount = JSON.parse(v001InputCountBytes.toString('utf8'));
+  assert.equal(
+    projectedInputCount.generateContentRequest.serviceTier,
+    'SERVICE_TIER_STANDARD',
+  );
+  delete projectedInputCount.generateContentRequest.serviceTier;
+  const projectedInputCountBytes = formalBytes(projectedInputCount);
+  assert.deepEqual(built.inputCountBytes, projectedInputCountBytes);
+  assert.equal(built.inputCountBytes.length, 37_209);
+  assert.equal(
+    sha256(built.inputCountBytes),
+    '83470ebfefe94ac07dda023fa7706aa0f63d007feb26dd59bdd21a7b70af07df',
+  );
+
+  assert.deepEqual(built.maximumCountBytes, v001MaximumCountBytes);
+  assert.equal(built.maximumCountBytes.length, 13_903);
+  assert.equal(
+    sha256(built.maximumCountBytes),
+    '0de805415b0fb62206d2a436b1bea1c85f4e73e6d518252fd9528eb1f25bb158',
+  );
+});
+
 test('missing environment key stops before output and communication', async () => {
   const root = await mkdtemp(join(tmpdir(), 'zev-b5-no-key-'));
   try {
@@ -136,7 +213,7 @@ test('missing environment key stops before output and communication', async () =
     const sourceBytes = formalBytes(syntheticSource);
     await import('node:fs/promises').then(({writeFile}) => writeFile(sourcePath, sourceBytes));
     let calls = 0;
-    const result = await executePresentationCaptionGateB5V001({
+    const result = await executePresentationCaptionGateB5V002({
       config: makeConfig({sourcePath, outputRoot, sourceBytes}),
       fetchImplementation: async () => {
         calls += 1;
@@ -170,7 +247,7 @@ test('unapproved execution values stop before output and communication', async (
     let calls = 0;
     const config = makeConfig({sourcePath, outputRoot, sourceBytes});
     config.modelId = 'different-model';
-    const result = await executePresentationCaptionGateB5V001({
+    const result = await executePresentationCaptionGateB5V002({
       config,
       fetchImplementation: async () => {
         calls += 1;
@@ -199,7 +276,7 @@ test('a reflected key is rejected before the raw response is saved', async () =>
     await writeFile(sourcePath, sourceBytes);
     const apiKey = 'test-only-reflected-key';
     let calls = 0;
-    const result = await executePresentationCaptionGateB5V001({
+    const result = await executePresentationCaptionGateB5V002({
       config: makeConfig({sourcePath, outputRoot, sourceBytes}),
       fetchImplementation: async () => {
         calls += 1;
@@ -236,7 +313,7 @@ test('a failed first call is not retried and never starts the second call', asyn
     const sourceBytes = formalBytes(syntheticSource);
     await writeFile(sourcePath, sourceBytes);
     let calls = 0;
-    const result = await executePresentationCaptionGateB5V001({
+    const result = await executePresentationCaptionGateB5V002({
       config: makeConfig({sourcePath, outputRoot, sourceBytes}),
       fetchImplementation: async () => {
         calls += 1;
@@ -286,7 +363,7 @@ test('two countTokens calls produce exactly six files and never start B6', async
         headers: {'content-type': 'application/json'},
       });
     };
-    const result = await executePresentationCaptionGateB5V001({
+    const result = await executePresentationCaptionGateB5V002({
       config: makeConfig({sourcePath, outputRoot, sourceBytes}),
       fetchImplementation,
       inspectUpstreamProjection: inspectProjection,
@@ -299,6 +376,16 @@ test('two countTokens calls produce exactly six files and never start B6', async
     assert.equal(result.maximumResponseStructureTokens, 456);
     assert.equal(result.b6Started, false);
     assert.equal(observedCalls.length, 2);
+    const observedInputCount = JSON.parse(observedCalls[0].body.toString('utf8'));
+    const observedMaximumCount = JSON.parse(observedCalls[1].body.toString('utf8'));
+    assert.equal(
+      Object.hasOwn(
+        observedInputCount.generateContentRequest,
+        'serviceTier',
+      ),
+      false,
+    );
+    assert.equal(Object.hasOwn(observedMaximumCount, 'serviceTier'), false);
 
     const names = (await readdir(outputRoot)).sort();
     assert.deepEqual(names, [
@@ -340,6 +427,14 @@ test('two countTokens calls produce exactly six files and never start B6', async
     assert.equal(manifest.transport.countTokensCalls, 2);
     assert.equal(manifest.transport.generateContentCalls, 0);
     assert.equal(manifest.transport.headers['x-goog-api-key'], '<redacted>');
+    assert.equal(
+      manifest.officialVerification.tier,
+      'PAID_STANDARD_DEFAULT_BY_OMISSION',
+    );
+    assert.equal(
+      manifest.checks[5].evidence.serviceTierRequestField,
+      'omitted',
+    );
     for (const artifact of manifest.artifacts) {
       const bytes = await readFile(join(outputRoot, artifact.fileName));
       assert.equal(artifact.fileSha256, sha256(bytes));

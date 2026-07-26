@@ -23,13 +23,13 @@ const workspaceRoot = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 
 const APPROVED_MODEL = 'gemini-3.6-flash';
 const APPROVED_MODEL_RESOURCE = `models/${APPROVED_MODEL}`;
-const APPROVED_TIER = 'SERVICE_TIER_STANDARD';
+const APPROVED_PRICING_TIER = 'PAID_STANDARD_DEFAULT_BY_OMISSION';
 const APPROVED_INPUT_LIMIT = 1_048_576;
 const APPROVED_OUTPUT_LIMIT = 65_536;
 const APPROVED_INPUT_PRICE = '1.50';
 const APPROVED_OUTPUT_PRICE = '7.50';
 const APPROVED_DESIGN_SHA256 =
-  '80bf9b1598744c97a205a96d7ddcde0bf930dccf81991a18c7885e553b856279';
+  '93bdc9e40ddf95b5cec9baba73501d9a0507d50a05329244c8123eb098e161cd';
 const SERVER_TIMEOUT_SECONDS = 600;
 const CLIENT_TIMEOUT_MILLISECONDS = 600_000;
 const COUNT_TOKENS_ENDPOINT =
@@ -42,7 +42,7 @@ const OFFICIAL_SOURCES = Object.freeze([
   'https://ai.google.dev/api/generate-content',
   'https://ai.google.dev/gemini-api/docs/generate-content/thinking',
   'https://ai.google.dev/gemini-api/docs/latest-model',
-  'https://ai.google.dev/gemini-api/docs/generate-content/flex-inference',
+  'https://ai.google.dev/gemini-api/docs/optimization',
 ]);
 
 const SYSTEM_INSTRUCTION = [
@@ -165,6 +165,19 @@ const sha256 = (bytes) => {
 
 const exactJson = (left, right) => JSON.stringify(left) === JSON.stringify(right);
 
+const containsPropertyName = (value, propertyName) => {
+  if (Array.isArray(value)) {
+    return value.some((entry) => containsPropertyName(entry, propertyName));
+  }
+  if (value && typeof value === 'object') {
+    return Object.entries(value).some(
+      ([key, child]) =>
+        key === propertyName || containsPropertyName(child, propertyName),
+    );
+  }
+  return false;
+};
+
 const pathExists = async (pathValue) => {
   try {
     await lstat(pathValue);
@@ -229,7 +242,6 @@ const parseCli = (argv) => {
     '--expected-container-count',
     '--expected-boundary-candidate-count',
     '--model',
-    '--tier',
     '--official-input-limit',
     '--official-output-limit',
     '--input-price-usd-per-million',
@@ -259,7 +271,6 @@ const parseCli = (argv) => {
       '--expected-boundary-candidate-count',
     ),
     modelId: required('--model'),
-    tier: required('--tier'),
     officialInputLimit: parsePositiveInteger(
       required('--official-input-limit'),
       '--official-input-limit',
@@ -286,7 +297,6 @@ const parseCli = (argv) => {
 const validateApprovedExecutionValues = (config, currentDate) => {
   const observed = {
     modelId: config.modelId,
-    tier: config.tier,
     inputLimit: config.officialInputLimit,
     outputLimit: config.officialOutputLimit,
     inputPriceUsdPerMillion: config.inputPriceUsdPerMillion,
@@ -294,7 +304,6 @@ const validateApprovedExecutionValues = (config, currentDate) => {
   };
   const expected = {
     modelId: APPROVED_MODEL,
-    tier: APPROVED_TIER,
     inputLimit: APPROVED_INPUT_LIMIT,
     outputLimit: APPROVED_OUTPUT_LIMIT,
     inputPriceUsdPerMillion: APPROVED_INPUT_PRICE,
@@ -368,7 +377,7 @@ const validateSemanticSource = (value, config) => {
   };
 };
 
-const buildGenerateRequest = (sourceText, outputLimit, tier) => ({
+const buildGenerateRequest = (sourceText, outputLimit) => ({
   systemInstruction: {
     parts: [
       {
@@ -394,7 +403,6 @@ const buildGenerateRequest = (sourceText, outputLimit, tier) => ({
       thinkingLevel: 'minimal',
     },
   },
-  serviceTier: tier,
 });
 
 const buildMaximumResponse = (source) => ({
@@ -518,7 +526,7 @@ const passedCheck = (id, meaning, evidence) => ({
   evidence,
 });
 
-export function buildPresentationCaptionGateB5RequestsV001({
+export function buildPresentationCaptionGateB5RequestsV002({
   sourceBytes,
   config,
 }) {
@@ -535,7 +543,6 @@ export function buildPresentationCaptionGateB5RequestsV001({
   const generateRequest = buildGenerateRequest(
     sourceText,
     config.officialOutputLimit,
-    config.tier,
   );
   const inputTokenCountRequest = {
     generateContentRequest: {
@@ -591,6 +598,11 @@ export function buildPresentationCaptionGateB5RequestsV001({
     || decodedMaximumCount.contents[0].parts[0].text !== maximumResponseText) {
     stop('REQUEST_CONTENT_IDENTITY_CHECK_FAILED');
   }
+  if (containsPropertyName(decodedGenerate, 'serviceTier')
+    || containsPropertyName(decodedInputCount, 'serviceTier')
+    || containsPropertyName(decodedMaximumCount, 'serviceTier')) {
+    stop('REQUEST_CONTAINS_SERVICE_TIER_FIELD');
+  }
   return {
     source,
     sourceText,
@@ -607,7 +619,7 @@ export function buildPresentationCaptionGateB5RequestsV001({
   };
 }
 
-export async function executePresentationCaptionGateB5V001({
+export async function executePresentationCaptionGateB5V002({
   config,
   fetchImplementation = globalThis.fetch,
   inspectUpstreamProjection =
@@ -622,7 +634,7 @@ export async function executePresentationCaptionGateB5V001({
       stop('FORMAL_OUTPUT_ROOT_ALREADY_EXISTS', {outputRoot: config.outputRoot});
     }
     const sourceBytes = await readFile(resolve(config.sourceInputPath));
-    const built = buildPresentationCaptionGateB5RequestsV001({sourceBytes, config});
+    const built = buildPresentationCaptionGateB5RequestsV002({sourceBytes, config});
     const projection = await inspectUpstreamProjection(config.projectionSentinelPath);
     if (projection?.kind !== 'trusted-projection'
       || projection.expectedBeforeCanonicalSha256 !== config.expectedUpstreamProjection) {
@@ -721,7 +733,8 @@ export async function executePresentationCaptionGateB5V001({
       }),
       passedCheck(6, '回答schemaとAPI設定が承認設計に一致', {
         modelId: config.modelId,
-        tier: config.tier,
+        tier: APPROVED_PRICING_TIER,
+        serviceTierRequestField: 'omitted',
         maxOutputTokens: config.officialOutputLimit,
         thinkingLevel: 'minimal',
         responseMimeType: 'application/json',
@@ -738,10 +751,10 @@ export async function executePresentationCaptionGateB5V001({
         maximumResponseStructureTokens: maximumTokens.totalTokens,
         officialOutputLimit: config.officialOutputLimit,
       }),
-      passedCheck(9, 'モデル・Standard tier・単価・実行日と費用式が一致', {
+      passedCheck(9, 'モデル・省略時Standard・単価・実行日と費用式が一致', {
         verificationDate: config.officialVerificationDate,
         modelId: config.modelId,
-        tier: config.tier,
+        tier: APPROVED_PRICING_TIER,
         inputPriceUsdPerMillion: config.inputPriceUsdPerMillion,
         outputPriceUsdPerMillion: config.outputPriceUsdPerMillion,
         observedInputCostUsd: tokenCost(
@@ -791,7 +804,7 @@ export async function executePresentationCaptionGateB5V001({
         modelResource: APPROVED_MODEL_RESOURCE,
         inputLimit: config.officialInputLimit,
         outputLimit: config.officialOutputLimit,
-        tier: config.tier,
+        tier: APPROVED_PRICING_TIER,
         inputPriceUsdPerMillion: config.inputPriceUsdPerMillion,
         outputPriceUsdPerMillion: config.outputPriceUsdPerMillion,
       },
@@ -914,7 +927,7 @@ const main = async () => {
   let result;
   try {
     const config = parseCli(process.argv.slice(2));
-    result = await executePresentationCaptionGateB5V001({config});
+    result = await executePresentationCaptionGateB5V002({config});
   } catch (error) {
     result = error instanceof B5Stop
       ? {
