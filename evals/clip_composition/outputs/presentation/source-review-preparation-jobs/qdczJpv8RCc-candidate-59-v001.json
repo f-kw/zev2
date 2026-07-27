@@ -1,0 +1,58 @@
+{
+  "schemaVersion": "presentation-source-assembly-job-v001",
+  "jobId": "qdczJpv8RCc-candidate-59-source-review-preparation-v001",
+  "action": "prepare-review",
+  "outputDirectory": "evals/clip_composition/outputs/presentation/source-review-preparations/qdczJpv8RCc-candidate-59-v001",
+  "identifiers": {
+    "sourceIdentityId": "qdczJpv8RCc-source-identity-v001",
+    "sourceMediaBindingId": "qdczJpv8RCc-source-media-binding-v001",
+    "sourceArtifactSummaryId": "qdczJpv8RCc-candidate-59-source-artifact-summary-v001",
+    "reviewId": "qdczJpv8RCc-candidate-59-source-review-v001"
+  },
+  "inputs": {
+    "source": {
+      "videoId": "qdczJpv8RCc",
+      "sourceUrl": "https://www.youtube.com/watch?v=qdczJpv8RCc",
+      "sourceRef": "youtube:qdczJpv8RCc",
+      "sourceProvenance": "nE_bNeBNp4E_multiblock_material_v001",
+      "media": {
+        "path": "evals/clip_composition/research/downloads/nE_bNeBNp4E/sources/qdczJpv8RCc/qdczJpv8RCc.mp4",
+        "fileSha256": "8359f59d8c205fb815c9165f5a464ec4bb9f109f9d91384b80e571410dc2fa25"
+      }
+    },
+    "stt": {
+      "manifest": {
+        "path": "evals/clip_composition/stt/nE_bNeBNp4E_qdczJpv8RCc_local30_v001/source/manifest.json",
+        "fileSha256": "b96810fc9b453d552b6628c36bbf11b483ad20d31412a6676fd3fbc87f5e1e98"
+      },
+      "transcript": {
+        "path": "evals/clip_composition/stt/nE_bNeBNp4E_qdczJpv8RCc_local30_v001/source/transcript.json",
+        "fileSha256": "5d7e2bf0f821eda23e0c93474e0c66281e3cc5328bf2c5e4bd4368402696799e"
+      },
+      "wordTimestamps": {
+        "path": "evals/clip_composition/stt/nE_bNeBNp4E_qdczJpv8RCc_local30_v001/source/word-timestamps.json",
+        "fileSha256": "549d5621241ce0bcb25562265e7e481dffc79b613efa9468a167cf8161d66407"
+      }
+    },
+    "candidate": {
+      "candidateId": 59,
+      "title": "マリンのADHD的？な片付け事情と無意識の脱衣",
+      "outerRange": {
+        "startMs": 5941162,
+        "endMs": 5992736
+      },
+      "speechGroups": [
+        {
+          "speechId": 777,
+          "sourceStartMs": 5941162,
+          "sourceEndMs": 5969820
+        },
+        {
+          "speechId": 778,
+          "sourceStartMs": 5970002,
+          "sourceEndMs": 5992736
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "schemaVersion": "presentation-source-review-output-audit-v001",
+  "status": "passed",
+  "outputDirectory": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/source-review-preparations/qdczJpv8RCc-candidate-59-v001",
+  "fileCount": 10,
+  "files": [
+    "assembly-review-manifest.json",
+    "assembly-review-provenance.json",
+    "assembly-review.mp4",
+    "audio-end-diagnostic.json",
+    "basis-edit-plan.json",
+    "candidate-speech-manifest.json",
+    "review.html",
+    "source-artifact-summary.json",
+    "source-identity.json",
+    "source-media-binding.json"
+  ],
+  "actualHashes": {
+    "assembly-review-manifest.json": "357df3e3c0878064aca469767b356b7bfc10100fa133eb220f41a6e637c8f9e6",
+    "assembly-review-provenance.json": "8d81de1f32eb0ca282b7c230f97a038faac64fec3032a240ce9debef467ac8d6",
+    "assembly-review.mp4": "b3c48912d1acd51b5a4313e61c14fdd6d8cbd72cb270ceb74d0fa01e62cfb115",
+    "audio-end-diagnostic.json": "3fa72980924c687f47a68f2658498f8a535464177910acab29c0642adc5c3966",
+    "basis-edit-plan.json": "e766cbcbeb28a9c04398eef2735e29cae71c1c055ba1c48a85d92a06f99d8572",
+    "candidate-speech-manifest.json": "17559012390bd8881bd4ef4368832b7dcc3c435d8c147ca3e5f0e5148114ca7e",
+    "review.html": "2210dc07faeded0a46027d5eeb61e48a82d42486f06c5cf0934565d767428a63",
+    "source-artifact-summary.json": "4ad474a180d1162240f7b9f9995cb35e23fcf7b78132e494e6612b86221ad25b",
+    "source-identity.json": "fb27b0c17e9663e6fee71489bcb5755964ad04fe0277609d93acd087c3437ac4",
+    "source-media-binding.json": "76c497cbfc6de3e87c431564907ade53e398b351b49182f9f582906f8efa9bce"
+  },
+  "media": {
+    "fileSha256": "b3c48912d1acd51b5a4313e61c14fdd6d8cbd72cb270ceb74d0fa01e62cfb115",
+    "video": {
+      "codecName": "h264",
+      "width": 1920,
+      "height": 1080,
+      "frameRate": "30/1",
+      "duration": "51.566667",
+      "decodedFrameCount": 1547
+    },
+    "audio": {
+      "codecName": "aac",
+      "sampleRate": 48000,
+      "channels": 2,
+      "channelLayout": "stereo",
+      "startSample": 0,
+      "sampleCount": 2475200,
+      "duration": "51.566667"
+    },
+    "specifiedDurationMs": 51574,
+    "actualDurationMs": 51566.666666666664,
+    "durationDifferenceMs": 7.333333333335759
+  },
+  "sourceAndStt": {
+    "sourceFileSha256": "8359f59d8c205fb815c9165f5a464ec4bb9f109f9d91384b80e571410dc2fa25",
+    "allBindingsMatch": true
+  },
+  "candidate": {
+    "atomCount": 281,
+    "speechGroupCount": 2,
+    "speechIds": [
+      777,
+      778
+    ]
+  },
+  "audioEndDiagnostic": {
+    "result": "ambiguous",
+    "mode0": "unavailable",
+    "mode3": "unavailable",
+    "reason": "vad-unavailable-decode-failed-or-frame-incomplete",
+    "localHumanReviewRequired": true
+  },
+  "humanReview": {
+    "assemblyDecisionCount": 1,
+    "conditionalAudioEndDecisionCount": 1,
+    "manualTimestampEntry": false,
+    "reviewPage": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/source-review-preparations/qdczJpv8RCc-candidate-59-v001/review.html",
+    "formalAssemblyDecisionGenerated": false
+  }
+}

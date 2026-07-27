@@ -1,0 +1,154 @@
+{
+  "schemaVersion": "presentation-caption-semantic-source-package-validation-report-v001",
+  "status": "passed",
+  "failureStage": null,
+  "jobBinding": {
+    "path": "evals/clip_composition/outputs/presentation/caption-semantic-source-package-jobs/qdczJpv8RCc-candidate-59-caption-b1-v001.json",
+    "fileSha256": "ea5de55f1726ba744b82f004e52c38da1037223ad427f2bec98606cdb2feadd1"
+  },
+  "package": {
+    "packageId": "qdczJpv8RCc-candidate-59-caption-semantic-source-package-v001",
+    "artifactId": "qdczJpv8RCc-candidate-59-v001",
+    "formalOutputPath": "evals/clip_composition/outputs/presentation/segmenter-boundary-evidence/qdczJpv8RCc-candidate-59-v001"
+  },
+  "manifestBinding": {
+    "fileName": "package-manifest.json",
+    "fileSha256": "c26aa7065a73cd6be391cc6eb7de3477480f84407e173b5882a99d08a8ae3cd0",
+    "canonicalSha256": "4f57c04e03db1fd232b991f2a30ad011ae91b0bbd02216d2a8ce2cd3804ce858"
+  },
+  "checks": [
+    {
+      "name": "jobBinding",
+      "status": "passed",
+      "violationCodes": []
+    },
+    {
+      "name": "implementationBinding",
+      "status": "passed",
+      "violationCodes": []
+    },
+    {
+      "name": "inputBinding",
+      "status": "passed",
+      "violationCodes": []
+    },
+    {
+      "name": "runtimeBinding",
+      "status": "passed",
+      "violationCodes": []
+    },
+    {
+      "name": "gateAContext",
+      "status": "passed",
+      "violationCodes": []
+    },
+    {
+      "name": "evidenceBuild",
+      "status": "passed",
+      "violationCodes": []
+    },
+    {
+      "name": "evidenceDeterminism",
+      "status": "passed",
+      "violationCodes": []
+    },
+    {
+      "name": "embeddedReportBuild",
+      "status": "passed",
+      "violationCodes": []
+    },
+    {
+      "name": "gateAReport",
+      "status": "passed",
+      "violationCodes": []
+    },
+    {
+      "name": "packageBuild",
+      "status": "passed",
+      "violationCodes": []
+    },
+    {
+      "name": "packageShape",
+      "status": "passed",
+      "violationCodes": []
+    },
+    {
+      "name": "modelInput",
+      "status": "passed",
+      "violationCodes": []
+    },
+    {
+      "name": "expansionMap",
+      "status": "passed",
+      "violationCodes": []
+    },
+    {
+      "name": "sourceOnlyLeakage",
+      "status": "passed",
+      "violationCodes": []
+    },
+    {
+      "name": "determinism",
+      "status": "passed",
+      "violationCodes": []
+    }
+  ],
+  "violations": [],
+  "validatedContentArtifacts": [
+    {
+      "role": "boundaryEvidence",
+      "fileName": "segmenter-boundary-evidence.json",
+      "fileSha256": "55f8c39bb7211b037e2b6dbd17d8f19e235fc633fdc399eb8cc6bae25807299f",
+      "canonicalSha256": "ef78a1ec86e8f72c337fb23b95e7bb4ee6ac6e567d4ea6aba4b0c0036bc3cfe8"
+    },
+    {
+      "role": "embeddedGateAReport",
+      "fileName": "embedded-gate-a-validation-report.json",
+      "fileSha256": "500bbf38dec8f98bfca3027dc26c7c3291a96efd59fdabc354cadb05c592e2a3",
+      "canonicalSha256": "24e466907102a0cfb246650482325253f18ac3a444b8ccdbd054a8d5fb9905a6"
+    },
+    {
+      "role": "semanticSourceInput",
+      "fileName": "semantic-source-input.json",
+      "fileSha256": "ead2a47ef57480c3da9e598a650059a92c1f1519b25b94d2617b86485f79433a",
+      "canonicalSha256": "6e89d79f021ecac7ba4a792008238852882538458d0545f5a95ec786536a0c21"
+    },
+    {
+      "role": "deterministicExpansionMap",
+      "fileName": "deterministic-expansion-map.json",
+      "fileSha256": "29dd63800c8f5947c54874b7cb55b70e1d1b32b069619dd54e7cd2a284c7ef6d",
+      "canonicalSha256": "9cd64d0f608806d46d95974a1ad410215ff098ac7c24bf54948fdd79569f5f49"
+    },
+    {
+      "role": "sourceOnlyLeakageReport",
+      "fileName": "source-only-leakage-report.json",
+      "fileSha256": "64ef172e54b84df3c60afdcd6b46aa159ea0befdba20a5ca5af45da678e9e6ed",
+      "canonicalSha256": "bfabb721d3f27cb7a199ef33325bf3f7a143d8f940d50789bfb100da7950dacc"
+    }
+  ],
+  "observedProjection": {
+    "sourceAtomCount": 281,
+    "containerCount": 2,
+    "boundaryCandidateCount": 164,
+    "containers": [
+      {
+        "containerId": "segmenter-container-000001",
+        "sourceAtomCount": 162,
+        "boundaryCandidateCount": 91
+      },
+      {
+        "containerId": "segmenter-container-000002",
+        "sourceAtomCount": 119,
+        "boundaryCandidateCount": 73
+      }
+    ],
+    "maximumObservedCandidateLogicalWidth": 8
+  },
+  "scope": {
+    "validatedState": "source-package-only",
+    "postPublishValidationRequired": true,
+    "semanticQualityVerified": false,
+    "naturalBreakQualityVerified": false,
+    "nonCooperativePublicationRaceProtected": false
+  }
+}

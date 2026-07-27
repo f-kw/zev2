@@ -1,0 +1,175 @@
+{
+  "schemaVersion": "presentation-retained-source-atoms-generation-manifest-v001",
+  "generatorVersion": "presentation-retained-source-atoms-extractor-v001",
+  "job": {
+    "jobId": "qdczJpv8RCc-candidate-59-source-finalization-v001",
+    "path": "evals/clip_composition/outputs/presentation/source-finalization-jobs/qdczJpv8RCc-candidate-59-v001.json",
+    "fileSha256": "c0f55a576114c452b475580cb1f632b82ece08c32a36ea64f008b6322ed76833"
+  },
+  "implementation": {
+    "approvedGitCommit": "117dc4c58cbaccffbe2efb4bb22971a72f6447da",
+    "files": [
+      {
+        "role": "retainedSourceAtomsCore",
+        "path": "evals/clip_composition/presentation_retained_source_atoms_v001.mjs",
+        "expectedFileSha256": "f28178327ddc0cc64f11527d850c71bfb5043b4e13f59f6da7997fd8f6d6cad0",
+        "actualFileSha256": "f28178327ddc0cc64f11527d850c71bfb5043b4e13f59f6da7997fd8f6d6cad0"
+      },
+      {
+        "role": "sourceAssemblyRunner",
+        "path": "evals/clip_composition/run_presentation_source_assembly_job_v001.mjs",
+        "expectedFileSha256": "81d3d9336d2eb39f71be603e8808874b53c20baf71a62d7f8b3f4e24c11759d1",
+        "actualFileSha256": "81d3d9336d2eb39f71be603e8808874b53c20baf71a62d7f8b3f4e24c11759d1"
+      }
+    ],
+    "runtime": {
+      "resolvedNodePath": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+      "nodeFileSha256": "de4f3b493b15e7a0ee311f6a2c6dbf93858052f5802aa91cfafa2c57e9d6bc5c",
+      "nodeVersion": "v20.19.6",
+      "bindingRole": "diagnostic-not-pass-fail"
+    }
+  },
+  "directInputs": [
+    {
+      "role": "sourceIdentity",
+      "path": "evals/clip_composition/outputs/presentation/source-review-preparations/qdczJpv8RCc-candidate-59-v001/source-identity.json",
+      "fileSha256": "fb27b0c17e9663e6fee71489bcb5755964ad04fe0277609d93acd087c3437ac4",
+      "schemaVersion": "presentation-material-source-identity-v001"
+    },
+    {
+      "role": "candidateManifest",
+      "path": "evals/clip_composition/outputs/presentation/source-review-preparations/qdczJpv8RCc-candidate-59-v001/candidate-speech-manifest.json",
+      "fileSha256": "17559012390bd8881bd4ef4368832b7dcc3c435d8c147ca3e5f0e5148114ca7e",
+      "schemaVersion": "presentation-candidate-speech-manifest-v001"
+    },
+    {
+      "role": "assemblyDecision",
+      "path": "evals/clip_composition/outputs/presentation/source-assembly-formalizations/qdczJpv8RCc-candidate-59-v001/assembly-decision.json",
+      "fileSha256": "72a1d9c95839a62a3f4dae395ffa9e67877910d75040c65796ca994ad3dd51a4",
+      "schemaVersion": "presentation-base-media-assembly-decision-v001"
+    },
+    {
+      "role": "formalizationReceipt",
+      "path": "evals/clip_composition/outputs/presentation/source-assembly-formalizations/qdczJpv8RCc-candidate-59-v001/formalization-receipt.json",
+      "fileSha256": "d8047cea238695518f9073b90ff4c618017e3cd8daf84a83d5a3ea0cbe073168",
+      "schemaVersion": "presentation-source-assembly-formalization-receipt-v001"
+    },
+    {
+      "role": "timeline",
+      "path": "evals/clip_composition/outputs/presentation/base-media/qdczJpv8RCc-candidate-59-v001/timeline.json",
+      "fileSha256": "dbebfe08882aabf66f4c7b13f4489f3bd7348e7bd499ec783250827ccddafcb2",
+      "schemaVersion": "presentation-base-media-timeline-v002"
+    },
+    {
+      "role": "baseMediaGenerationManifest",
+      "path": "evals/clip_composition/outputs/presentation/base-media/qdczJpv8RCc-candidate-59-v001/generation-manifest.json",
+      "fileSha256": "bc47f29089eaaf1a062593add2d8690971682d80d474d168dce6114aebf7b9e6",
+      "schemaVersion": "presentation-base-media-generation-manifest-v002"
+    },
+    {
+      "role": "baseMediaValidationReport",
+      "path": "evals/clip_composition/outputs/presentation/base-media/qdczJpv8RCc-candidate-59-v001/validation-report.json",
+      "fileSha256": "b091465fca55f258fd2c33076b1ae864b82ee8576af6b40f6f636c735b79d776",
+      "schemaVersion": "presentation-base-media-validation-report-v001"
+    }
+  ],
+  "expandedInputs": [
+    {
+      "role": "sttManifest",
+      "path": "evals/clip_composition/stt/nE_bNeBNp4E_qdczJpv8RCc_local30_v001/source/manifest.json",
+      "fileSha256": "b96810fc9b453d552b6628c36bbf11b483ad20d31412a6676fd3fbc87f5e1e98",
+      "schemaVersion": "clip_composition_local_stt_chunked_manifest"
+    },
+    {
+      "role": "transcript",
+      "path": "evals/clip_composition/stt/nE_bNeBNp4E_qdczJpv8RCc_local30_v001/source/transcript.json",
+      "fileSha256": "5d7e2bf0f821eda23e0c93474e0c66281e3cc5328bf2c5e4bd4368402696799e",
+      "schemaVersion": "transcript_json"
+    },
+    {
+      "role": "wordTimestamps",
+      "path": "evals/clip_composition/stt/nE_bNeBNp4E_qdczJpv8RCc_local30_v001/source/word-timestamps.json",
+      "fileSha256": "549d5621241ce0bcb25562265e7e481dffc79b613efa9468a167cf8161d66407",
+      "schemaVersion": "clip_composition_word_timestamps"
+    },
+    {
+      "role": "mediaEquivalence",
+      "path": "evals/clip_composition/outputs/presentation/source-review-preparations/qdczJpv8RCc-candidate-59-v001/source-media-binding.json",
+      "fileSha256": "76c497cbfc6de3e87c431564907ade53e398b351b49182f9f582906f8efa9bce",
+      "schemaVersion": "presentation-material-source-media-binding-v001"
+    },
+    {
+      "role": "trustedArtifactSummary",
+      "path": "evals/clip_composition/outputs/presentation/source-review-preparations/qdczJpv8RCc-candidate-59-v001/source-artifact-summary.json",
+      "fileSha256": "4ad474a180d1162240f7b9f9995cb35e23fcf7b78132e494e6612b86221ad25b",
+      "schemaVersion": "presentation-material-source-artifact-summary-v001"
+    },
+    {
+      "role": "basisEditPlan",
+      "path": "evals/clip_composition/outputs/presentation/source-review-preparations/qdczJpv8RCc-candidate-59-v001/basis-edit-plan.json",
+      "fileSha256": "e766cbcbeb28a9c04398eef2735e29cae71c1c055ba1c48a85d92a06f99d8572",
+      "schemaVersion": "presentation-candidate-basis-edit-plan-v001"
+    },
+    {
+      "role": "baseMedia",
+      "path": "evals/clip_composition/outputs/presentation/base-media/qdczJpv8RCc-candidate-59-v001/base-media.mp4",
+      "fileSha256": "faad660c7623cdbf3a8f3b55cdaffc34729d06683ce391997c51f10fbc076967",
+      "schemaVersion": null
+    }
+  ],
+  "source": {
+    "sourceRef": "youtube:qdczJpv8RCc",
+    "sourceProvenance": "nE_bNeBNp4E_multiblock_material_v001",
+    "atomGranularity": "character-timestamp"
+  },
+  "selection": {
+    "policyVersion": "presentation-retained-source-atom-selection-v001",
+    "candidateId": 59,
+    "assemblyDecisionId": "qdczJpv8RCc-candidate-59-base-media-assembly-decision-v001",
+    "assemblyDecisionPayloadSha256": "847ba38990f34bdf4b044b708764cd7a7a058ae80d34cfbae9d69710a7e3ecff",
+    "timelineId": "timeline-e625e110e6a2de97f73863dc",
+    "intervalSemantics": "half-open",
+    "segments": [
+      {
+        "timelineSegmentId": "segment-0001",
+        "sourceStartMs": 5941162,
+        "sourceEndMs": 5992736,
+        "atomCount": 281,
+        "firstAtomId": "word-17686",
+        "lastAtomId": "word-17966",
+        "atomIdsCanonicalSha256": "b11cccc19ae392f5fa24691cd4e9ebcbc2351feec39f5ef9f5e967eb76e7ac4b"
+      }
+    ]
+  },
+  "observations": {
+    "counts": {
+      "sttAtomCount": 23963,
+      "candidateOuterRangeAtomCount": 281,
+      "retainedAtomCount": 281,
+      "excludedByAssemblyCount": 0,
+      "boundaryPartialOverlapCount": 0
+    },
+    "speechGroups": [
+      {
+        "speechId": 777,
+        "atomCount": 162,
+        "firstAtomId": "word-17686",
+        "lastAtomId": "word-17847"
+      },
+      {
+        "speechId": 778,
+        "atomCount": 119,
+        "firstAtomId": "word-17848",
+        "lastAtomId": "word-17966"
+      }
+    ],
+    "sourceAtomPositiveOverlaps": []
+  },
+  "output": {
+    "artifactId": "qdczJpv8RCc-candidate-59-retained-source-atoms-v001",
+    "path": "source-atoms.json",
+    "fileSha256": "9fe657ace14e61d5af417897a67f56ba2e6e188d4346edde8320049643955996",
+    "canonicalSha256": "25d27b6b67d16fa63b0b9733505e4b7c77fa427755bab741aca060837457c36b",
+    "rawSourceAtomsCanonicalSha256": "e96b205716ee62f902a1fc828119a060770ea595792512cd70c7348d3d5e60fb"
+  }
+}

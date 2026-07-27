@@ -1,0 +1,67 @@
+{
+  "schemaVersion": "presentation-source-review-preflight-report-v001",
+  "status": "passed",
+  "job": {
+    "path": "evals/clip_composition/outputs/presentation/source-review-preparation-jobs/qdczJpv8RCc-candidate-59-v001.json",
+    "fileSha256": "698d7f56f5f3970ccc8ee1d490fd024704f0c65194b0a71130f76e108a2c58a4",
+    "byteCount": 2243
+  },
+  "sourceAndStt": {
+    "actualHashes": {
+      "evals/clip_composition/research/downloads/nE_bNeBNp4E/sources/qdczJpv8RCc/qdczJpv8RCc.mp4": "8359f59d8c205fb815c9165f5a464ec4bb9f109f9d91384b80e571410dc2fa25",
+      "evals/clip_composition/stt/nE_bNeBNp4E_qdczJpv8RCc_local30_v001/source/manifest.json": "b96810fc9b453d552b6628c36bbf11b483ad20d31412a6676fd3fbc87f5e1e98",
+      "evals/clip_composition/stt/nE_bNeBNp4E_qdczJpv8RCc_local30_v001/source/transcript.json": "5d7e2bf0f821eda23e0c93474e0c66281e3cc5328bf2c5e4bd4368402696799e",
+      "evals/clip_composition/stt/nE_bNeBNp4E_qdczJpv8RCc_local30_v001/source/word-timestamps.json": "549d5621241ce0bcb25562265e7e481dffc79b613efa9468a167cf8161d66407"
+    },
+    "sttDeclaredInputPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/research/downloads/nE_bNeBNp4E/sources/qdczJpv8RCc/qdczJpv8RCc.mp4",
+    "sttDeclaredInputFileSha256": "8359f59d8c205fb815c9165f5a464ec4bb9f109f9d91384b80e571410dc2fa25",
+    "allBindingsMatch": true
+  },
+  "candidate": {
+    "candidateId": 59,
+    "outerRange": {
+      "startMs": 5941162,
+      "endMs": 5992736
+    },
+    "specifiedDurationMs": 51574,
+    "atomCount": 281,
+    "speechGroupCount": 2,
+    "speechGroups": [
+      {
+        "speechId": 777,
+        "startMs": 5941162,
+        "endMs": 5969820,
+        "atomCount": 162,
+        "textCharacterCount": 162
+      },
+      {
+        "speechId": 778,
+        "startMs": 5970002,
+        "endMs": 5992736,
+        "atomCount": 119,
+        "textCharacterCount": 119
+      }
+    ],
+    "reviewGapCount": 0
+  },
+  "mapping": {
+    "sourceStartFrame30": 178235,
+    "sourceEndFrame30": 179782,
+    "outputStartFrame": 0,
+    "outputEndFrame": 1547,
+    "expectedFrameCount": 1547,
+    "audioSamples": {
+      "sourceStart": 285176000,
+      "sourceEnd": 287651200,
+      "outputStart": 0,
+      "outputEnd": 2475200
+    },
+    "expectedAudioSampleCount": 2475200,
+    "expectedDurationMs": 51566.666666666664
+  },
+  "outputDirectory": {
+    "path": "evals/clip_composition/outputs/presentation/source-review-preparations/qdczJpv8RCc-candidate-59-v001",
+    "unused": true
+  },
+  "result": "ready_for_review_media_generation"
+}

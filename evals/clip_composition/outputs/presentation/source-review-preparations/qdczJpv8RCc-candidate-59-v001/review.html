@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><title>組立確認</title>
+<style>body{font-family:sans-serif;max-width:960px;margin:24px auto;background:#111;color:#fff}video{width:100%}button{font-size:20px;margin:8px;padding:12px}pre{white-space:pre-wrap}</style></head>
+<body><h1>組立確認</h1>
+<p>保存上の区間: 51.574秒 / 実際に確認する媒体: 51.567秒</p>
+<video id="assembled" controls src="assembly-review.mp4"></video>
+<p><button data-choice="accept">この切り分けでよい</button><button data-choice="needs_edit">追加編集が必要</button></p>
+<section><h2>語尾の局所確認</h2>
+<p>機械確認が曖昧です。元配信の終端2秒前と、組立後の末尾2秒前を聞いてください。</p>
+<video id="source" controls preload="metadata"></video>
+<p><button id="sourceEnd">元配信を終端2秒前から確認</button><button id="assembledEnd">組立後を末尾2秒前から確認</button></p>
+<p><button data-audio="no_clipped_tail">語尾を切っていない</button><button data-audio="boundary_correction_required">境界修正が必要</button></p></section>
+<h2>結果</h2><pre id="result">未回答</pre>
+<script>const fixed={"reviewId":"qdczJpv8RCc-candidate-59-source-review-v001","candidate":{"candidateId":59,"title":"マリンのADHD的？な片付け事情と無意識の脱衣","outerRange":{"startMs":5941162,"endMs":5992736}},"reviewMedia":{"path":"assembly-review.mp4","fileSha256":"b3c48912d1acd51b5a4313e61c14fdd6d8cbd72cb270ceb74d0fa01e62cfb115","actualDurationMs":51566.666666666664,"expectedFrameCount":1547,"expectedAudioSampleCount":2475200},"audioEndDiagnostic":"ambiguous","sourceMediaUrl":"file:///Users/kawafmm/workspace/zev2/evals/clip_composition/research/downloads/nE_bNeBNp4E/sources/qdczJpv8RCc/qdczJpv8RCc.mp4","sourceEndSeekSeconds":5990.736};let assemblyChoice=null;let audioEndChoice=null;
+const show=()=>document.querySelector('#result').textContent=JSON.stringify({schemaVersion:'presentation-source-assembly-human-result-v001',resultId:fixed.reviewId+'-human-result',reviewId:fixed.reviewId,candidateId:fixed.candidate.candidateId,reviewMedia:fixed.reviewMedia,assemblyChoice,audioEndChoice,recordedAt:new Date().toISOString(),timeMeasurement:'not_measured'},null,2);
+document.querySelectorAll('[data-choice]').forEach(b=>b.onclick=()=>{assemblyChoice=b.dataset.choice;show()});
+document.querySelectorAll('[data-audio]').forEach(b=>b.onclick=()=>{audioEndChoice=b.dataset.audio;show()});
+document.querySelector('#assembledEnd').onclick=()=>{const v=document.querySelector('#assembled');v.currentTime=Math.max(0,v.duration-2);v.play()};
+const sourceVideo=document.querySelector('#source');sourceVideo.src=fixed.sourceMediaUrl;
+document.querySelector('#sourceEnd').onclick=()=>{sourceVideo.currentTime=fixed.sourceEndSeekSeconds;sourceVideo.play()};
+</script></body></html>

@@ -1,0 +1,45 @@
+{
+  "schemaVersion": "presentation-source-assembly-review-manifest-v001",
+  "reviewId": "qdczJpv8RCc-candidate-59-source-review-v001",
+  "candidate": {
+    "candidateId": 59,
+    "title": "マリンのADHD的？な片付け事情と無意識の脱衣",
+    "outerRange": {
+      "startMs": 5941162,
+      "endMs": 5992736
+    }
+  },
+  "specifiedDurationMs": 51574,
+  "media": {
+    "path": "assembly-review.mp4",
+    "fileSha256": "b3c48912d1acd51b5a4313e61c14fdd6d8cbd72cb270ceb74d0fa01e62cfb115",
+    "actualDurationMs": 51566.666666666664,
+    "expectedFrameCount": 1547,
+    "expectedAudioSampleCount": 2475200
+  },
+  "mapping": {
+    "segmentId": "segment-0001",
+    "sourceStartMs": 5941162,
+    "sourceEndMs": 5992736,
+    "sourceStartFrame30": 178235,
+    "sourceEndFrame30": 179782,
+    "outputStartFrame": 0,
+    "outputEndFrame": 1547,
+    "audioSamples": {
+      "sourceStart": 285176000,
+      "sourceEnd": 287651200,
+      "outputStart": 0,
+      "outputEnd": 2475200
+    }
+  },
+  "audioEndDiagnostic": {
+    "path": "evals/clip_composition/outputs/presentation/source-review-preparations/qdczJpv8RCc-candidate-59-v001/audio-end-diagnostic.json",
+    "fileSha256": "3fa72980924c687f47a68f2658498f8a535464177910acab29c0642adc5c3966",
+    "result": "ambiguous"
+  },
+  "requiredHumanDecisions": {
+    "assembly": 1,
+    "audioEnd": 1,
+    "manualTimestampEntry": false
+  }
+}

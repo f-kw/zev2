@@ -1,0 +1,105 @@
+{
+  "schemaVersion": "presentation-segmenter-boundary-preflight-job-v001",
+  "jobId": "qdczJpv8RCc-candidate-59-segmenter-boundary-preflight-v001",
+  "artifactId": "qdczJpv8RCc-candidate-59-v001",
+  "mode": "read-only-preflight",
+  "implementationBinding": {
+    "gitCommit": "117dc4c58cbaccffbe2efb4bb22971a72f6447da",
+    "files": [
+      {
+        "role": "core",
+        "path": "evals/clip_composition/presentation_segmenter_boundary_evidence_v001.mjs",
+        "fileSha256": "dac613292e463897ee2757be75a7d64f3ece9928141765a195ba54a0ebc6007a"
+      },
+      {
+        "role": "retainedSourceAtomsCore",
+        "path": "evals/clip_composition/presentation_retained_source_atoms_v001.mjs",
+        "fileSha256": "f28178327ddc0cc64f11527d850c71bfb5043b4e13f59f6da7997fd8f6d6cad0"
+      },
+      {
+        "role": "runner",
+        "path": "evals/clip_composition/run_presentation_segmenter_boundary_preflight_v001.mjs",
+        "fileSha256": "3f35066d43746de3b7527b0e1dc3317faeea828f8beab8bb4dde8ae072a50352"
+      }
+    ]
+  },
+  "inputs": [
+    {
+      "role": "sourceAtoms",
+      "path": "evals/clip_composition/outputs/presentation/retained-source-atoms/qdczJpv8RCc-candidate-59-v001/source-atoms.json",
+      "fileSha256": "9fe657ace14e61d5af417897a67f56ba2e6e188d4346edde8320049643955996"
+    },
+    {
+      "role": "sourceGenerationManifest",
+      "path": "evals/clip_composition/outputs/presentation/retained-source-atoms/qdczJpv8RCc-candidate-59-v001/generation-manifest.json",
+      "fileSha256": "7e681fdf1a9bd8223678ef091406ea48af3287dfcc66d6934993f24a2ebea381"
+    },
+    {
+      "role": "sourceValidationReport",
+      "path": "evals/clip_composition/outputs/presentation/retained-source-atoms/qdczJpv8RCc-candidate-59-v001/validation-report.json",
+      "fileSha256": "b71f79aed863499b433a8e166e4df63fc83a45a043318b46c5a24bfa5b2f5fbd"
+    }
+  ],
+  "expectedSourceBinding": {
+    "sourceArtifactCanonicalSha256": "25d27b6b67d16fa63b0b9733505e4b7c77fa427755bab741aca060837457c36b",
+    "rawSourceAtomsCanonicalSha256": "e96b205716ee62f902a1fc828119a060770ea595792512cd70c7348d3d5e60fb"
+  },
+  "expectedRuntime": {
+    "nodeBinarySha256": "de4f3b493b15e7a0ee311f6a2c6dbf93858052f5802aa91cfafa2c57e9d6bc5c",
+    "nodeVersion": "v20.19.6",
+    "icuVersion": "77.1",
+    "resolvedLocale": "ja",
+    "resolvedGranularity": "word"
+  },
+  "expectedProjection": {
+    "sourceAtomCount": 281,
+    "containerCount": 2,
+    "boundaryCandidateCount": 164,
+    "wordLikeCandidateCount": 160,
+    "nonWordLikeCandidateCount": 4,
+    "timelineSegments": [
+      {
+        "timelineSegmentId": "segment-0001",
+        "sourceAtomCount": 281,
+        "boundaryCandidateCount": 164
+      }
+    ],
+    "containers": [
+      {
+        "containerId": "segmenter-container-000001",
+        "timelineSegmentId": "segment-0001",
+        "speechId": 777,
+        "sourceAtomCount": 162,
+        "boundaryCandidateCount": 91
+      },
+      {
+        "containerId": "segmenter-container-000002",
+        "timelineSegmentId": "segment-0001",
+        "speechId": 778,
+        "sourceAtomCount": 119,
+        "boundaryCandidateCount": 73
+      }
+    ],
+    "mixedRawSpeakerCandidateCount": 7,
+    "rawSpeakerExactSetQueryResults": [
+      {
+        "values": [
+          "unknown"
+        ],
+        "boundaryCandidateCount": 8
+      }
+    ],
+    "sourcePositiveOverlapCount": 0,
+    "membership": {
+      "missingCount": 0,
+      "duplicatedCount": 0,
+      "orderReversedCount": 0,
+      "crossSegmentCount": 0,
+      "crossSpeechCount": 0
+    }
+  },
+  "readOnlyGuard": {
+    "formalOutputPath": "evals/clip_composition/outputs/presentation/segmenter-boundary-evidence/qdczJpv8RCc-candidate-59-v001",
+    "expectedState": "absent"
+  }
+}

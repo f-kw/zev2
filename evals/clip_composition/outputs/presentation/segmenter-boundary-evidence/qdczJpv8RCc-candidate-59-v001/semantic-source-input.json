@@ -1,0 +1,842 @@
+{
+  "schemaVersion": "presentation-caption-semantic-source-input-v001",
+  "taskDescription": "各containerのboundaryCandidatesを記載順どおり一度ずつ使用し、本文を変更せず、各行のlogicalWidth合計がmaxLogicalWidthPerLine以下になる意味の読める短い行へ分ける。連続する1行または2行を1つのmeaningGroupとしてまとめ、行末はboundaryCandidateIdで示す。",
+  "displayConstraints": {
+    "maxLogicalWidthPerLine": 36,
+    "maxLinesPerMeaningGroup": 2
+  },
+  "containers": [
+    {
+      "containerId": "segmenter-container-000001",
+      "text": "あ、さあ船長さあ何かやってる最中でもさあ違うことが気になったらそれやり始めちゃうんだよねこれやばいよねなんか最近さあ引っ越しがあってさあ片付けてるんだけど最中にそうだあれやらないとって思ったらやり始めるからあっちこっちで30%だけ進んだものが大量にあってでぐるぐる回りながら一つずつ片付けていくのうんでもね結局全部片付けてる",
+      "boundaryCandidates": [
+        {
+          "boundaryCandidateId": "segmenter-boundary-000001",
+          "text": "あ",
+          "logicalWidth": 2
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000002",
+          "text": "、",
+          "logicalWidth": 2
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000003",
+          "text": "さあ",
+          "logicalWidth": 4
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000004",
+          "text": "船長",
+          "logicalWidth": 4
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000005",
+          "text": "さあ",
+          "logicalWidth": 4
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000006",
+          "text": "何",
+          "logicalWidth": 2
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000007",
+          "text": "か",
+          "logicalWidth": 2
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000008",
+          "text": "や",
+          "logicalWidth": 2
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000009",
+          "text": "って",
+          "logicalWidth": 4
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000010",
+          "text": "る",
+          "logicalWidth": 2
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000011",
+          "text": "最",
+          "logicalWidth": 2
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000012",
+          "text": "中でも",
+          "logicalWidth": 6
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000013",
+          "text": "さあ",
+          "logicalWidth": 4
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000014",
+          "text": "違う",
+          "logicalWidth": 4
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000015",
+          "text": "こと",
+          "logicalWidth": 4
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000016",
+          "text": "が",
+          "logicalWidth": 2
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000017",
+          "text": "気",
+          "logicalWidth": 2
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000018",
+          "text": "に",
+          "logicalWidth": 2
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000019",
+          "text": "な",
+          "logicalWidth": 2
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000020",
+          "text": "っ",
+          "logicalWidth": 2
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000021",
+          "text": "たら",
+          "logicalWidth": 4
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000022",
+          "text": "それ",
+          "logicalWidth": 4
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000023",
+          "text": "や",
+          "logicalWidth": 2
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000024",
+          "text": "り",
+          "logicalWidth": 2
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000025",
+          "text": "始め",
+          "logicalWidth": 4
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000026",
+          "text": "ちゃう",
+          "logicalWidth": 6
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000027",
+          "text": "ん",
+          "logicalWidth": 2
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000028",
+          "text": "だ",
+          "logicalWidth": 2
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000029",
+          "text": "よね",
+          "logicalWidth": 4
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000030",
+          "text": "これ",
+          "logicalWidth": 4
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000031",
+          "text": "やばい",
+          "logicalWidth": 6
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000032",
+          "text": "よね",
+          "logicalWidth": 4
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000033",
+          "text": "なんか",
+          "logicalWidth": 6
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000034",
+          "text": "最近",
+          "logicalWidth": 4
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000035",
+          "text": "さあ",
+          "logicalWidth": 4
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000036",
+          "text": "引っ越し",
+          "logicalWidth": 8
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000037",
+          "text": "が",
+          "logicalWidth": 2
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000038",
+          "text": "あっ",
+          "logicalWidth": 4
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000039",
+          "text": "て",
+          "logicalWidth": 2
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000040",
+          "text": "さあ",
+          "logicalWidth": 4
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000041",
+          "text": "片付け",
+          "logicalWidth": 6
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000042",
+          "text": "てる",
+          "logicalWidth": 4
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000043",
+          "text": "ん",
+          "logicalWidth": 2
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000044",
+          "text": "だけど",
+          "logicalWidth": 6
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000045",
+          "text": "最中",
+          "logicalWidth": 4
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000046",
+          "text": "に",
+          "logicalWidth": 2
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000047",
+          "text": "そうだ",
+          "logicalWidth": 6
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000048",
+          "text": "あれ",
+          "logicalWidth": 4
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000049",
+          "text": "やら",
+          "logicalWidth": 4
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000050",
+          "text": "ない",
+          "logicalWidth": 4
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000051",
+          "text": "と",
+          "logicalWidth": 2
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000052",
+          "text": "って",
+          "logicalWidth": 4
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000053",
+          "text": "思",
+          "logicalWidth": 2
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000054",
+          "text": "っ",
+          "logicalWidth": 2
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000055",
+          "text": "たら",
+          "logicalWidth": 4
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000056",
+          "text": "や",
+          "logicalWidth": 2
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000057",
+          "text": "り",
+          "logicalWidth": 2
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000058",
+          "text": "始める",
+          "logicalWidth": 6
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000059",
+          "text": "から",
+          "logicalWidth": 4
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000060",
+          "text": "あっち",
+          "logicalWidth": 6
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000061",
+          "text": "こっち",
+          "logicalWidth": 6
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000062",
+          "text": "で",
+          "logicalWidth": 2
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000063",
+          "text": "30",
+          "logicalWidth": 2
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000064",
+          "text": "%",
+          "logicalWidth": 1
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000065",
+          "text": "だけ",
+          "logicalWidth": 4
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000066",
+          "text": "進",
+          "logicalWidth": 2
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000067",
+          "text": "ん",
+          "logicalWidth": 2
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000068",
+          "text": "だ",
+          "logicalWidth": 2
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000069",
+          "text": "もの",
+          "logicalWidth": 4
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000070",
+          "text": "が",
+          "logicalWidth": 2
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000071",
+          "text": "大量",
+          "logicalWidth": 4
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000072",
+          "text": "に",
+          "logicalWidth": 2
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000073",
+          "text": "あっ",
+          "logicalWidth": 4
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000074",
+          "text": "て",
+          "logicalWidth": 2
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000075",
+          "text": "で",
+          "logicalWidth": 2
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000076",
+          "text": "ぐるぐる",
+          "logicalWidth": 8
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000077",
+          "text": "回り",
+          "logicalWidth": 4
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000078",
+          "text": "ながら",
+          "logicalWidth": 6
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000079",
+          "text": "一つ",
+          "logicalWidth": 4
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000080",
+          "text": "ずつ",
+          "logicalWidth": 4
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000081",
+          "text": "片付け",
+          "logicalWidth": 6
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000082",
+          "text": "てい",
+          "logicalWidth": 4
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000083",
+          "text": "く",
+          "logicalWidth": 2
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000084",
+          "text": "の",
+          "logicalWidth": 2
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000085",
+          "text": "うん",
+          "logicalWidth": 4
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000086",
+          "text": "でも",
+          "logicalWidth": 4
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000087",
+          "text": "ね",
+          "logicalWidth": 2
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000088",
+          "text": "結局",
+          "logicalWidth": 4
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000089",
+          "text": "全部",
+          "logicalWidth": 4
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000090",
+          "text": "片付け",
+          "logicalWidth": 6
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000091",
+          "text": "てる",
+          "logicalWidth": 4
+        }
+      ]
+    },
+    {
+      "containerId": "segmenter-container-000002",
+      "text": "片付けよう1個ずつ片付けていくあ、そうだあれもこれもってやってるうちに1個ずつ片付いていって一応全部片付けはするの綺麗にはなるんだけどやりかけでいろんなことやり始めちゃう困ったもんですえ、なんか無意識にまた服脱いでたけど寒い気をこうしてと",
+      "boundaryCandidates": [
+        {
+          "boundaryCandidateId": "segmenter-boundary-000092",
+          "text": "片付け",
+          "logicalWidth": 6
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000093",
+          "text": "よう",
+          "logicalWidth": 4
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000094",
+          "text": "1",
+          "logicalWidth": 1
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000095",
+          "text": "個",
+          "logicalWidth": 2
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000096",
+          "text": "ずつ",
+          "logicalWidth": 4
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000097",
+          "text": "片付け",
+          "logicalWidth": 6
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000098",
+          "text": "てい",
+          "logicalWidth": 4
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000099",
+          "text": "く",
+          "logicalWidth": 2
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000100",
+          "text": "あ",
+          "logicalWidth": 2
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000101",
+          "text": "、",
+          "logicalWidth": 2
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000102",
+          "text": "そうだ",
+          "logicalWidth": 6
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000103",
+          "text": "あれ",
+          "logicalWidth": 4
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000104",
+          "text": "も",
+          "logicalWidth": 2
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000105",
+          "text": "これ",
+          "logicalWidth": 4
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000106",
+          "text": "も",
+          "logicalWidth": 2
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000107",
+          "text": "って",
+          "logicalWidth": 4
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000108",
+          "text": "や",
+          "logicalWidth": 2
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000109",
+          "text": "って",
+          "logicalWidth": 4
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000110",
+          "text": "る",
+          "logicalWidth": 2
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000111",
+          "text": "うち",
+          "logicalWidth": 4
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000112",
+          "text": "に",
+          "logicalWidth": 2
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000113",
+          "text": "1",
+          "logicalWidth": 1
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000114",
+          "text": "個",
+          "logicalWidth": 2
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000115",
+          "text": "ずつ",
+          "logicalWidth": 4
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000116",
+          "text": "片",
+          "logicalWidth": 2
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000117",
+          "text": "付",
+          "logicalWidth": 2
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000118",
+          "text": "い",
+          "logicalWidth": 2
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000119",
+          "text": "てい",
+          "logicalWidth": 4
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000120",
+          "text": "って",
+          "logicalWidth": 4
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000121",
+          "text": "一応",
+          "logicalWidth": 4
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000122",
+          "text": "全部",
+          "logicalWidth": 4
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000123",
+          "text": "片付け",
+          "logicalWidth": 6
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000124",
+          "text": "は",
+          "logicalWidth": 2
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000125",
+          "text": "する",
+          "logicalWidth": 4
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000126",
+          "text": "の",
+          "logicalWidth": 2
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000127",
+          "text": "綺麗",
+          "logicalWidth": 4
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000128",
+          "text": "に",
+          "logicalWidth": 2
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000129",
+          "text": "は",
+          "logicalWidth": 2
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000130",
+          "text": "なる",
+          "logicalWidth": 4
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000131",
+          "text": "ん",
+          "logicalWidth": 2
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000132",
+          "text": "だけど",
+          "logicalWidth": 6
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000133",
+          "text": "や",
+          "logicalWidth": 2
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000134",
+          "text": "り",
+          "logicalWidth": 2
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000135",
+          "text": "かけ",
+          "logicalWidth": 4
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000136",
+          "text": "で",
+          "logicalWidth": 2
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000137",
+          "text": "いろんな",
+          "logicalWidth": 8
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000138",
+          "text": "こと",
+          "logicalWidth": 4
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000139",
+          "text": "や",
+          "logicalWidth": 2
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000140",
+          "text": "り",
+          "logicalWidth": 2
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000141",
+          "text": "始め",
+          "logicalWidth": 4
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000142",
+          "text": "ちゃう",
+          "logicalWidth": 6
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000143",
+          "text": "困",
+          "logicalWidth": 2
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000144",
+          "text": "っ",
+          "logicalWidth": 2
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000145",
+          "text": "た",
+          "logicalWidth": 2
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000146",
+          "text": "もん",
+          "logicalWidth": 4
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000147",
+          "text": "です",
+          "logicalWidth": 4
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000148",
+          "text": "え",
+          "logicalWidth": 2
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000149",
+          "text": "、",
+          "logicalWidth": 2
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000150",
+          "text": "なんか",
+          "logicalWidth": 6
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000151",
+          "text": "無意識",
+          "logicalWidth": 6
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000152",
+          "text": "に",
+          "logicalWidth": 2
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000153",
+          "text": "また",
+          "logicalWidth": 4
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000154",
+          "text": "服",
+          "logicalWidth": 2
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000155",
+          "text": "脱",
+          "logicalWidth": 2
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000156",
+          "text": "い",
+          "logicalWidth": 2
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000157",
+          "text": "で",
+          "logicalWidth": 2
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000158",
+          "text": "た",
+          "logicalWidth": 2
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000159",
+          "text": "けど",
+          "logicalWidth": 4
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000160",
+          "text": "寒い",
+          "logicalWidth": 4
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000161",
+          "text": "気",
+          "logicalWidth": 2
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000162",
+          "text": "を",
+          "logicalWidth": 2
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000163",
+          "text": "こうして",
+          "logicalWidth": 8
+        },
+        {
+          "boundaryCandidateId": "segmenter-boundary-000164",
+          "text": "と",
+          "logicalWidth": 2
+        }
+      ]
+    }
+  ]
+}
