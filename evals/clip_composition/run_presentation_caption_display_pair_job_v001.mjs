@@ -98,6 +98,7 @@ const OUTPUT_FILES = Object.freeze([
   ['pairValidationReport', 'pair-validation-report.json'],
 ]);
 const SHA256 = /^[0-9a-f]{64}$/;
+const FORMAL_ID = /^[A-Za-z0-9][A-Za-z0-9._-]*$/;
 
 const formalBytes = (value) => {
   const result = serializePresentationCaptionB1FormalJsonV001(value);
@@ -307,6 +308,72 @@ const monitoredProjection = (rootPath, ignoredPaths) => {
   visit(repositoryAbsolute(rootPath));
   return canonicalSha(rows);
 };
+
+const FORMAL_PROJECTION_UNAVAILABLE = Object.freeze({
+  kind: 'untrusted',
+  diagnostic: 'CAPTION_B4_FORMAL_READ_ONLY_PROJECTION_UNAVAILABLE',
+});
+
+const pathIsMissing = (pathValue) => {
+  try {
+    lstatSync(repositoryAbsolute(pathValue));
+    return false;
+  } catch (error) {
+    if (error?.code === 'ENOENT') return true;
+    throw error;
+  }
+};
+
+export function inspectPresentationCaptionDisplayPairReadOnlyProjectionV001({
+  watchedRoot,
+  jobPath,
+  allowedWritePaths,
+} = {}) {
+  try {
+    if (typeof watchedRoot !== 'string'
+      || !safeJobPath(jobPath)
+      || !Array.isArray(allowedWritePaths)
+      || allowedWritePaths.length !== 3
+      || allowedWritePaths.some((pathValue) => typeof pathValue !== 'string')) {
+      return FORMAL_PROJECTION_UNAVAILABLE;
+    }
+    const [formalOutputPath, lockPath, workPath] = allowedWritePaths;
+    const formalPrefix = `${OUTPUT_PARENT}/`;
+    const pairId = formalOutputPath.slice(formalPrefix.length);
+    if (!formalOutputPath.startsWith(formalPrefix)
+      || !FORMAL_ID.test(pairId)
+      || ['.', '..'].includes(pairId)
+      || formalOutputPath.includes('\0')
+      || lockPath.includes('\0')
+      || workPath.includes('\0')
+      || lockPath !== `${formalOutputPath}.lock`
+      || workPath !== `${formalOutputPath}.work`) {
+      return FORMAL_PROJECTION_UNAVAILABLE;
+    }
+    const ignoredPaths = [jobPath, ...allowedWritePaths];
+    ignoredPaths.forEach(repositoryAbsolute);
+    repositoryAbsolute(watchedRoot);
+    if (ignoredPaths.some((pathValue) => !pathIsMissing(pathValue))) {
+      return FORMAL_PROJECTION_UNAVAILABLE;
+    }
+    const expectedBeforeCanonicalSha256 = monitoredProjection(
+      watchedRoot,
+      ignoredPaths,
+    );
+    if (ignoredPaths.some((pathValue) => !pathIsMissing(pathValue))) {
+      return FORMAL_PROJECTION_UNAVAILABLE;
+    }
+    return Object.freeze({
+      kind: 'trusted-projection',
+      watchedRoot,
+      excludedPaths: Object.freeze([jobPath]),
+      allowedWritePaths: Object.freeze([...allowedWritePaths]),
+      expectedBeforeCanonicalSha256,
+    });
+  } catch {
+    return FORMAL_PROJECTION_UNAVAILABLE;
+  }
+}
 
 const normalizedAtoms = (retained) => retained.rawSourceAtoms.map((atom) => {
   const normalized = normalizeSourceAtomSpeakerForPackage(atom).atom;
@@ -818,4 +885,12 @@ const main = async () => {
   }
 };
 
-main();
+const isDirectExecution = (() => {
+  try {
+    return typeof process.argv[1] === 'string'
+      && realpathSync(process.argv[1]) === realpathSync(fileURLToPath(import.meta.url));
+  } catch {
+    return false;
+  }
+})();
+if (isDirectExecution) main();

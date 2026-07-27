@@ -3,24 +3,27 @@ import {spawnSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
 import {createRequire} from 'node:module';
 import {
+  closeSync,
   existsSync,
   lstatSync,
   mkdirSync,
   openSync,
-  closeSync,
   readSync,
-  readlinkSync,
   readFileSync,
   readdirSync,
+  readlinkSync,
   realpathSync,
   rmSync,
+  symlinkSync,
   writeFileSync,
 } from 'node:fs';
 import {dirname, relative, resolve, sep} from 'node:path';
 import test from 'node:test';
-import {fileURLToPath} from 'node:url';
+import {fileURLToPath, pathToFileURL} from 'node:url';
 
 import * as b4Core from './presentation_caption_display_pair_v003.mjs';
+import * as displayPairRunner
+  from './run_presentation_caption_display_pair_job_v001.mjs';
 import * as captionV003 from './presentation_caption_contract_v003.mjs';
 import * as instructionV003 from './presentation_instruction_contract_v003.mjs';
 import {
@@ -1106,7 +1109,7 @@ const observeRuntime = () => {
   };
 };
 
-const monitoredProjection = (rootPath, ignoredPaths) => {
+const independentlyObservedProjection = (rootPath, ignoredPaths) => {
   const ignored = new Set(ignoredPaths);
   const rows = [];
   const fileHash = (absolute) => {
@@ -1244,6 +1247,10 @@ const makeFormalJobFixture = async (
   rmSync(repositoryAbsolute(formalOutputPath), {recursive: true, force: true});
   rmSync(repositoryAbsolute(lockPath), {force: true});
   rmSync(repositoryAbsolute(workPath), {recursive: true, force: true});
+  const independentlyExpectedBeforeCanonicalSha256 = independentlyObservedProjection(
+    TESTDATA_ROOT,
+    [jobPath, formalOutputPath, lockPath, workPath],
+  );
   const manifest = binding(`${SOURCE_ROOT}/package-manifest.json`);
   const packageReport = binding(`${SOURCE_ROOT}/package-validation-report.json`);
   const retainedManifest = binding(`${RETAINED_ROOT}/generation-manifest.json`);
@@ -1253,6 +1260,17 @@ const makeFormalJobFixture = async (
   const timeline = binding(`${BASE_ROOT}/timeline.json`);
   const baseReport = binding(`${BASE_ROOT}/validation-report.json`);
   const baseMedia = binding(`${BASE_ROOT}/base-media.mp4`, false);
+  const readOnlyGuard =
+    displayPairRunner.inspectPresentationCaptionDisplayPairReadOnlyProjectionV001({
+      watchedRoot: TESTDATA_ROOT,
+      jobPath,
+      allowedWritePaths: [formalOutputPath, lockPath, workPath],
+    });
+  assert.equal(readOnlyGuard.kind, 'trusted-projection');
+  assert.equal(
+    readOnlyGuard.expectedBeforeCanonicalSha256,
+    independentlyExpectedBeforeCanonicalSha256,
+  );
   const job = {
     schemaVersion: 'presentation-caption-display-pair-generation-job-v001',
     jobId,
@@ -1301,17 +1319,12 @@ const makeFormalJobFixture = async (
     },
     publication: {pairId, formalOutputPath, lockPath, workPath},
     readOnlyGuard: {
-      watchedRoot: TESTDATA_ROOT,
-      excludedPaths: [jobPath],
-      allowedWritePaths: [formalOutputPath, lockPath, workPath],
-      expectedBeforeCanonicalSha256: HASH,
+      watchedRoot: readOnlyGuard.watchedRoot,
+      excludedPaths: [...readOnlyGuard.excludedPaths],
+      allowedWritePaths: [...readOnlyGuard.allowedWritePaths],
+      expectedBeforeCanonicalSha256: readOnlyGuard.expectedBeforeCanonicalSha256,
     },
   };
-  writeFileSync(repositoryAbsolute(jobPath), formalBytes(job));
-  job.readOnlyGuard.expectedBeforeCanonicalSha256 = monitoredProjection(
-    job.readOnlyGuard.watchedRoot,
-    [jobPath, formalOutputPath, lockPath, workPath],
-  );
   writeFileSync(repositoryAbsolute(jobPath), formalBytes(job));
   const cleanup = () => {
     rmSync(repositoryAbsolute(formalOutputPath), {recursive: true, force: true});
@@ -1393,6 +1406,11 @@ test('T085: production runnerは承認済みpure入口を直接使いfixture注�
   assert.match(runner, /validatePresentationCaptionDisplayPairValidationReportV002/u);
   assert.equal(runner.includes('validatePresentationCaptionDisplayPairValidationReportV001'), false);
   assert.equal(/fixture|alternateCore|process\.env/u.test(runner), false);
+  assert.equal(
+    typeof displayPairRunner.inspectPresentationCaptionDisplayPairReadOnlyProjectionV001,
+    'function',
+  );
+  assert.match(runner, /if \(isDirectExecution\) main\(\);/u);
   assert.deepEqual(Object.keys(b4Core).sort(), [
     'PRESENTATION_CAPTION_B4_VIOLATION_CODES_V001',
     'buildPresentationCaptionDisplayPairStaticPreflightReportV001',
@@ -1411,6 +1429,54 @@ test('T085: production runnerは承認済みpure入口を直接使いfixture注�
     probes.map(([, code]) => code),
     b4Core.PRESENTATION_CAPTION_B4_VIOLATION_CODES_V001,
   );
+});
+
+test('B4監視投影入口はformal jobに使えないIDと既存symlinkをtrustedにしない', () => {
+  const invalidId =
+    displayPairRunner.inspectPresentationCaptionDisplayPairReadOnlyProjectionV001({
+      watchedRoot: TESTDATA_ROOT,
+      jobPath: `${JOB_ROOT}/invalid-id-projection.json`,
+      allowedWritePaths: [
+        `${OUTPUT_PARENT}/ bad`,
+        `${OUTPUT_PARENT}/ bad.lock`,
+        `${OUTPUT_PARENT}/ bad.work`,
+      ],
+    });
+  assert.equal(invalidId.kind, 'untrusted');
+
+  const pairId = 'dangling-link-projection';
+  const formalOutputPath = `${OUTPUT_PARENT}/${pairId}`;
+  const lockPath = `${formalOutputPath}.lock`;
+  const workPath = `${formalOutputPath}.work`;
+  mkdirSync(repositoryAbsolute(OUTPUT_PARENT), {recursive: true});
+  rmSync(repositoryAbsolute(formalOutputPath), {force: true});
+  symlinkSync('missing-target', repositoryAbsolute(formalOutputPath));
+  try {
+    const danglingLink =
+      displayPairRunner.inspectPresentationCaptionDisplayPairReadOnlyProjectionV001({
+        watchedRoot: TESTDATA_ROOT,
+        jobPath: `${JOB_ROOT}/dangling-link-projection.json`,
+        allowedWritePaths: [formalOutputPath, lockPath, workPath],
+      });
+    assert.equal(danglingLink.kind, 'untrusted');
+  } finally {
+    rmSync(repositoryAbsolute(formalOutputPath), {force: true});
+  }
+});
+
+test('B4 runnerのimport保護は呼出元argv pathが非実在でも例外にしない', () => {
+  const runnerUrl = pathToFileURL(repositoryAbsolute(RUNNER_PATH)).href;
+  const result = spawnSync(process.execPath, [
+    '--input-type=module',
+    '--eval',
+    `process.argv[1] = '/missing/b4-import-caller.mjs'; await import(${JSON.stringify(runnerUrl)});`,
+  ], {
+    cwd: WORKSPACE_ROOT,
+    encoding: null,
+  });
+  assert.equal(result.status, 0);
+  assert.equal(result.stdout.length, 0);
+  assert.equal(result.stderr.length, 0);
 });
 
 test('T086: 13件目の共有JSON契約実体は欠落・別path・不正hashを拒否する', () => {

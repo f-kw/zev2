@@ -1605,6 +1605,7 @@ test('semantic coreとrunnerは承認済みpublic exportだけを持つ', () => 
   ].sort());
   assert.deepEqual(Object.keys(semanticRunner).sort(), [
     'createPresentationCaptionSemanticOutputProductionFilesystemAdapterV001',
+    'inspectPresentationCaptionSemanticOutputReadOnlyProjectionV001',
     'runPresentationCaptionSemanticOutputCheckCliV001',
     'runPresentationCaptionSemanticOutputCheckV001',
   ].sort());
@@ -1657,6 +1658,68 @@ test('production runnerは第二引数なし/nullをrejectせずuntrusted exit 2
       diagnostic: 'CAPTION_B1_SEMANTIC_CLI_JOB_CONTEXT_UNAVAILABLE',
     },
   );
+});
+
+test('B1監視投影入口は未作成の固定job pathだけを除外し既存監視計算の値を返す', async () => {
+  const fixture = materializeRunnerWorkspace();
+  try {
+    rmSync(resolve(fixture.root, JOB_PATH));
+    const expectedBeforeCanonicalSha256 = canonicalSha(scanMonitoredTree(
+      fixture.root,
+      fixture.context.job.value.readOnlyGuard.watchedRoot,
+      JOB_PATH,
+    ));
+    const result =
+      await semanticRunner.inspectPresentationCaptionSemanticOutputReadOnlyProjectionV001(
+        JOB_PATH,
+        {filesystemAdapter: createMappedFilesystemAdapter(fixture.root)},
+      );
+    assert.deepEqual(result, {
+      kind: 'trusted-projection',
+      watchedRoot: 'evals/clip_composition/outputs/presentation',
+      excludedPaths: [JOB_PATH],
+      expectedBeforeCanonicalSha256,
+    });
+    assert.equal(Object.isFrozen(result), true);
+    assert.equal(Object.isFrozen(result.excludedPaths), true);
+  } finally {
+    rmSync(fixture.root, {recursive: true, force: true});
+  }
+});
+
+test('B1監視投影入口は既存job・範囲外path・追加optionを固定結果で拒否する', async () => {
+  const expected = {
+    kind: 'untrusted',
+    diagnostic: 'CAPTION_B1_SEMANTIC_PREFLIGHT_PROJECTION_UNAVAILABLE',
+  };
+  const fixture = materializeRunnerWorkspace();
+  try {
+    const adapter = createMappedFilesystemAdapter(fixture.root);
+    assert.deepEqual(
+      await semanticRunner.inspectPresentationCaptionSemanticOutputReadOnlyProjectionV001(
+        JOB_PATH,
+        {filesystemAdapter: adapter},
+      ),
+      expected,
+    );
+    rmSync(resolve(fixture.root, JOB_PATH));
+    assert.deepEqual(
+      await semanticRunner.inspectPresentationCaptionSemanticOutputReadOnlyProjectionV001(
+        '../outside.json',
+        {filesystemAdapter: adapter},
+      ),
+      expected,
+    );
+    assert.deepEqual(
+      await semanticRunner.inspectPresentationCaptionSemanticOutputReadOnlyProjectionV001(
+        JOB_PATH,
+        {filesystemAdapter: adapter, extra: true},
+      ),
+      expected,
+    );
+  } finally {
+    rmSync(fixture.root, {recursive: true, force: true});
+  }
 });
 
 test('合成filesystemはproduction realpathと同じ絶対path正規化を返す', async () => {

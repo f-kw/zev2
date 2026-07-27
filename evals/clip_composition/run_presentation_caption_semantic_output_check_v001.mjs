@@ -29,6 +29,7 @@ const RUNNER_PATH =
   'evals/clip_composition/run_presentation_caption_semantic_output_check_v001.mjs';
 const JOB_ROOT =
   'evals/clip_composition/outputs/presentation/caption-semantic-output-check-jobs/';
+const WATCHED_ROOT = 'evals/clip_composition/outputs/presentation';
 const PACKAGE_FILES = Object.freeze([
   'segmenter-boundary-evidence.json',
   'embedded-gate-a-validation-report.json',
@@ -1018,6 +1019,68 @@ const directJobPath = (value) => typeof value === 'string'
   && !value.slice(JOB_ROOT.length).includes('/')
   && value.endsWith('.json')
   && safeRelativeParts(value) !== null;
+
+const PREFLIGHT_PROJECTION_UNAVAILABLE_RESULT = Object.freeze({
+  kind: 'untrusted',
+  diagnostic: 'CAPTION_B1_SEMANTIC_PREFLIGHT_PROJECTION_UNAVAILABLE',
+});
+
+const missingPath = async (absolutePath, filesystemAdapter) => {
+  try {
+    await filesystemAdapter.lstatBigInt(absolutePath);
+    return false;
+  } catch (error) {
+    if (error?.code === 'ENOENT') return true;
+    throw error;
+  }
+};
+
+export async function inspectPresentationCaptionSemanticOutputReadOnlyProjectionV001(
+  jobPath,
+  options,
+) {
+  try {
+    if (!exactKeys(options, ['filesystemAdapter'])
+      || !directJobPath(jobPath)
+      || !validateAdapter(options.filesystemAdapter)) {
+      return PREFLIGHT_PROJECTION_UNAVAILABLE_RESULT;
+    }
+    const {filesystemAdapter} = options;
+    const workspaceRoot = await filesystemAdapter.realpath(WORKSPACE_ROOT_LEXICAL);
+    const runnerPath = resolve(workspaceRoot, RUNNER_PATH);
+    const watchedRootPath = resolve(workspaceRoot, WATCHED_ROOT);
+    const jobRootPath = resolve(workspaceRoot, JOB_ROOT.slice(0, -1));
+    const absoluteJobPath = resolve(workspaceRoot, ...jobPath.split('/'));
+    if (!isAbsolute(workspaceRoot)
+      || workspaceRelative(workspaceRoot, absoluteJobPath) !== jobPath
+      || dirname(absoluteJobPath) !== jobRootPath
+      || await filesystemAdapter.realpath(runnerPath) !== runnerPath
+      || await filesystemAdapter.realpath(watchedRootPath) !== watchedRootPath
+      || await filesystemAdapter.realpath(jobRootPath) !== jobRootPath
+      || !await missingPath(absoluteJobPath, filesystemAdapter)) {
+      return PREFLIGHT_PROJECTION_UNAVAILABLE_RESULT;
+    }
+    const entries = await monitorTree(
+      workspaceRoot,
+      WATCHED_ROOT,
+      jobPath,
+      filesystemAdapter,
+    );
+    const expectedBeforeCanonicalSha256 = canonicalSha(entries);
+    if (typeof expectedBeforeCanonicalSha256 !== 'string'
+      || !await missingPath(absoluteJobPath, filesystemAdapter)) {
+      return PREFLIGHT_PROJECTION_UNAVAILABLE_RESULT;
+    }
+    return Object.freeze({
+      kind: 'trusted-projection',
+      watchedRoot: WATCHED_ROOT,
+      excludedPaths: Object.freeze([jobPath]),
+      expectedBeforeCanonicalSha256,
+    });
+  } catch {
+    return PREFLIGHT_PROJECTION_UNAVAILABLE_RESULT;
+  }
+}
 
 const validStreams = (streams) => Object.isFrozen(streams)
   && exactKeys(streams, ['stdout', 'stderr'])
