@@ -3,6 +3,8 @@ import {spawn} from 'node:child_process';
 import {readFile} from 'node:fs/promises';
 
 export const PRESENTATION_RENDERER_QC_SCHEMA_VERSION = 'presentation-render-qc-v002';
+export const PRESENTATION_REVIEW_RENDERER_QC_SCHEMA_VERSION_V003 =
+  'presentation-review-render-qc-v003';
 
 export const PRESENTATION_RENDERER_QC_VIOLATION_CODES = Object.freeze([
   'LAYOUT_LINE_COUNT_EXCEEDED',
@@ -64,7 +66,16 @@ const overlap = (left, right) => ({
 const timeOverlap = (left, right) => Math.min(left.endFrameExclusive, right.endFrameExclusive)
   - Math.max(left.startFrame, right.startFrame);
 
-export function evaluatePresentationRendererQcV002({
+const QC_OUTPUT_PROFILE_V002 = Object.freeze({
+  schemaVersion: PRESENTATION_RENDERER_QC_SCHEMA_VERSION,
+  planFile: 'presentation-render-plan-v002.json',
+});
+const QC_OUTPUT_PROFILE_V003 = Object.freeze({
+  schemaVersion: PRESENTATION_REVIEW_RENDERER_QC_SCHEMA_VERSION_V003,
+  planFile: 'presentation-review-render-plan-v003.json',
+});
+
+function evaluatePresentationRendererQc({
   plan,
   applicationResults,
   overlayInspections,
@@ -73,7 +84,7 @@ export function evaluatePresentationRendererQcV002({
   expectedFrameCount,
   canvas,
   requireFinalVisibility = true,
-}) {
+}, outputProfile) {
   const violations = [];
   const instructionIds = (plan?.elements ?? []).map((element) => element.instructionId);
   const resultsByInstruction = new Map();
@@ -197,7 +208,7 @@ export function evaluatePresentationRendererQcV002({
       });
       if (
         results[0].finalPlanElementReference?.planFile
-          !== 'presentation-render-plan-v002.json'
+          !== outputProfile.planFile
         || results[0].finalPlanElementReference?.instructionId !== element.instructionId
         || results[0].finalPlanElementReference?.canonicalSha256 !== expectedFinalElementHash
       ) {
@@ -354,7 +365,7 @@ export function evaluatePresentationRendererQcV002({
     };
   });
   return {
-    schemaVersion: PRESENTATION_RENDERER_QC_SCHEMA_VERSION,
+    schemaVersion: outputProfile.schemaVersion,
     status: violations.length === 0 ? 'passed' : 'failed',
     instructionCount: instructionIds.length,
     checks: {
@@ -385,6 +396,14 @@ export function evaluatePresentationRendererQcV002({
     },
     violations,
   };
+}
+
+export function evaluatePresentationRendererQcV002(input) {
+  return evaluatePresentationRendererQc(input, QC_OUTPUT_PROFILE_V002);
+}
+
+export function evaluatePresentationReviewRendererQcV003(input) {
+  return evaluatePresentationRendererQc(input, QC_OUTPUT_PROFILE_V003);
 }
 
 export async function inspectOverlayPngV002({
