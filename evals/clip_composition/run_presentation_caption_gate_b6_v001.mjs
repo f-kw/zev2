@@ -35,16 +35,16 @@ import {
 
 const WORKSPACE_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 const MODEL_ID = 'gemini-3.6-flash';
-const RUN_DIRECTORY_ID = 'DmWu0jVQfTE-candidate-13-v002';
-const ATTEMPT_ID = 'DmWu0jVQfTE-candidate-13-caption-b6-v002';
+const RUN_DIRECTORY_ID = 'DmWu0jVQfTE-candidate-13-v003';
+const ATTEMPT_ID = 'DmWu0jVQfTE-candidate-13-caption-b6-v003';
 const REQUEST_SHA256 =
-  '7fa902580b78bb5da3d36025135e4655ab2528e401ba5a76537f2af3c1939ed2';
+  'd37363247724a664521fc68c396a5f6d307a1b340c70c032a79a08837213fe88';
 const REQUEST_PATH =
   'evals/clip_composition/outputs/presentation/caption-gate-b5/'
-  + 'DmWu0jVQfTE-candidate-13-v002/generate-content-request.json';
+  + 'DmWu0jVQfTE-candidate-13-v003/generate-content-request.json';
 const B5_MANIFEST_PATH =
   'evals/clip_composition/outputs/presentation/caption-gate-b5/'
-  + 'DmWu0jVQfTE-candidate-13-v002/b5-manifest.json';
+  + 'DmWu0jVQfTE-candidate-13-v003/b5-manifest.json';
 const OUTPUT_ROOT =
   'evals/clip_composition/outputs/presentation/caption-gate-b6/'
   + RUN_DIRECTORY_ID;
