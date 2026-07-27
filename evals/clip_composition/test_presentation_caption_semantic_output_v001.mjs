@@ -2410,9 +2410,6 @@ for (const [name, artifactIndex, mutate] of [
   ['manifest runtimeとevidence runtime', 5, (value) => {
     value.runtimeBinding.nodeVersion = 'v99.0.0';
   }],
-  ['manifest package coreとsemantic job package core', 5, (value) => {
-    value.implementationBinding.files[0].fileSha256 = '0'.repeat(64);
-  }],
   ['manifest外部入力とwidth policy', 5, (value) => {
     value.externalInputBindings[3].canonicalSha256 = '0'.repeat(64);
   }],
@@ -2438,6 +2435,68 @@ for (const [name, artifactIndex, mutate] of [
     );
   });
 }
+
+test('manifest生成時package core SHAとsemantic job live SHAの差だけでは違反にしない', () => {
+  const context = makeFixture();
+  const manifestEntry = context.sourcePackageObservation.artifactReads[5];
+  const manifest = packageCore.decodePresentationCaptionB1StrictJsonV001(
+    manifestEntry.snapshot.bytes,
+  ).value;
+  manifest.implementationBinding.files[0].fileSha256 = '0'.repeat(64);
+  replacePackageArtifact(context, 5, manifest);
+
+  const reportEntry = context.sourcePackageObservation.artifactReads[6];
+  const report = packageCore.decodePresentationCaptionB1StrictJsonV001(
+    reportEntry.snapshot.bytes,
+  ).value;
+  report.manifestBinding.fileSha256 = manifestEntry.snapshot.fileSha256;
+  report.manifestBinding.canonicalSha256 = canonicalSha(manifest);
+  replacePackageArtifact(context, 6, report);
+
+  context.job.value.sourcePackageBinding.manifest.fileSha256 =
+    manifestEntry.snapshot.fileSha256;
+  context.job.value.sourcePackageBinding.manifest.canonicalSha256 =
+    canonicalSha(manifest);
+  context.job.value.sourcePackageBinding.validationReport.fileSha256 =
+    reportEntry.snapshot.fileSha256;
+  context.job.value.sourcePackageBinding.validationReport.canonicalSha256 =
+    canonicalSha(report);
+
+  const reread = context.readOnlyProcessObservation.inputReread;
+  for (const entries of [reread.initialInputs, reread.finalInputs]) {
+    for (const index of [5, 6]) {
+      const artifact = context.sourcePackageObservation.artifactReads[index];
+      const matched = entries.find(
+        (entry) => entry.role === `sourcePackage.${artifact.fileName}`,
+      );
+      matched.observation.snapshot = clone(artifact.snapshot);
+    }
+  }
+  refreshJobSnapshots(context);
+
+  const compiler = semanticCore.buildPresentationCaptionSemanticCompilerInputV001({
+    sourcePackageSnapshots:
+      context.sourcePackageObservation.artifactReads.map((entry) => entry.snapshot),
+    rawSemanticOutputSnapshot: context.rawSemanticOutputInput.snapshot,
+  });
+  const compilerBytes = serialized(compiler);
+  const compilerPass = {
+    value: compiler,
+    bytes: compilerBytes,
+    fileSha256: sha(compilerBytes),
+    canonicalSha256: canonicalSha(compiler),
+    inputByteCopies: [],
+  };
+  context.compilerBuildPasses = [clone(compilerPass), clone(compilerPass)];
+
+  const result = checked(context);
+  assert.equal(result.status, 'checked');
+  assert.equal(result.violations.length, 0);
+  assert.equal(
+    result.checks.every((entry) => entry.status === 'passed'),
+    true,
+  );
+});
 
 for (const [name, code, mutateRaw] of [
   ['bytes', 'SEMANTIC_OUTPUT_BYTES_INVALID', () => Buffer.from('```json\\n{}\\n```')],

@@ -2415,8 +2415,7 @@ const observePackage = (context, state) => {
     const manifestPackageCore = manifest.implementationBinding.files[0];
     const manifestRendererTrustImplementation = manifest.implementationBinding.files[2];
     if (manifestPackageCore.role !== semanticPackageCore.role
-      || manifestPackageCore.path !== semanticPackageCore.path
-      || manifestPackageCore.fileSha256 !== semanticPackageCore.fileSha256) {
+      || manifestPackageCore.path !== semanticPackageCore.path) {
       addViolation(
         state,
         'PACKAGE_BINDING_MISMATCH',
