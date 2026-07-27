@@ -30,6 +30,8 @@ const APPROVED_INPUT_PRICE = '1.50';
 const APPROVED_OUTPUT_PRICE = '7.50';
 const APPROVED_DESIGN_SHA256 =
   '93bdc9e40ddf95b5cec9baba73501d9a0507d50a05329244c8123eb098e161cd';
+const APPROVED_REVISION_DECISION_DATE = '2026-07-27';
+const APPROVED_THINKING_LEVEL = 'medium';
 const SERVER_TIMEOUT_SECONDS = 600;
 const CLIENT_TIMEOUT_MILLISECONDS = 600_000;
 const COUNT_TOKENS_ENDPOINT =
@@ -125,8 +127,6 @@ const FORMAL_FILE_NAMES = Object.freeze([
   'generate-content-request.json',
   'input-token-count-request.json',
   'input-token-count-response.raw.json',
-  'maximum-response-token-count-request.json',
-  'maximum-response-token-count-response.raw.json',
   'b5-manifest.json',
 ]);
 
@@ -250,6 +250,11 @@ const parseCli = (argv) => {
     '--expected-upstream-projection',
     '--projection-sentinel',
     '--design-sha256',
+    '--previous-maximum-count-request',
+    '--previous-maximum-count-response',
+    '--expected-previous-maximum-count-request-sha256',
+    '--expected-previous-maximum-count-response-sha256',
+    '--expected-previous-maximum-response-tokens',
   ]);
   for (const name of entries.keys()) {
     if (!allowed.has(name)) stop('CLI_ARGUMENT_UNKNOWN', {argument: name});
@@ -291,6 +296,18 @@ const parseCli = (argv) => {
     expectedUpstreamProjection: required('--expected-upstream-projection'),
     projectionSentinelPath: required('--projection-sentinel'),
     designSha256: required('--design-sha256'),
+    previousMaximumCountRequestPath:
+      required('--previous-maximum-count-request'),
+    previousMaximumCountResponsePath:
+      required('--previous-maximum-count-response'),
+    expectedPreviousMaximumCountRequestSha256:
+      required('--expected-previous-maximum-count-request-sha256'),
+    expectedPreviousMaximumCountResponseSha256:
+      required('--expected-previous-maximum-count-response-sha256'),
+    expectedPreviousMaximumResponseTokens: parsePositiveInteger(
+      required('--expected-previous-maximum-response-tokens'),
+      '--expected-previous-maximum-response-tokens',
+    ),
   };
 };
 
@@ -320,7 +337,13 @@ const validateApprovedExecutionValues = (config, currentDate) => {
   }
   if (!/^[0-9a-f]{64}$/u.test(config.designSha256)
     || !/^[0-9a-f]{64}$/u.test(config.expectedSourceSha256)
-    || !/^[0-9a-f]{64}$/u.test(config.expectedUpstreamProjection)) {
+    || !/^[0-9a-f]{64}$/u.test(config.expectedUpstreamProjection)
+    || !/^[0-9a-f]{64}$/u.test(
+      config.expectedPreviousMaximumCountRequestSha256,
+    )
+    || !/^[0-9a-f]{64}$/u.test(
+      config.expectedPreviousMaximumCountResponseSha256,
+    )) {
     stop('EXPECTED_SHA256_INVALID');
   }
   if (config.designSha256 !== APPROVED_DESIGN_SHA256) {
@@ -400,7 +423,7 @@ const buildGenerateRequest = (sourceText, outputLimit) => ({
     responseMimeType: 'application/json',
     responseJsonSchema: RESPONSE_JSON_SCHEMA,
     thinkingConfig: {
-      thinkingLevel: 'minimal',
+      thinkingLevel: APPROVED_THINKING_LEVEL,
     },
   },
 });
@@ -526,7 +549,7 @@ const passedCheck = (id, meaning, evidence) => ({
   evidence,
 });
 
-export function buildPresentationCaptionGateB5RequestsV002({
+export function buildPresentationCaptionGateB5RequestsV003({
   sourceBytes,
   config,
 }) {
@@ -619,7 +642,7 @@ export function buildPresentationCaptionGateB5RequestsV002({
   };
 }
 
-export async function executePresentationCaptionGateB5V002({
+export async function executePresentationCaptionGateB5V003({
   config,
   fetchImplementation = globalThis.fetch,
   inspectUpstreamProjection =
@@ -634,7 +657,7 @@ export async function executePresentationCaptionGateB5V002({
       stop('FORMAL_OUTPUT_ROOT_ALREADY_EXISTS', {outputRoot: config.outputRoot});
     }
     const sourceBytes = await readFile(resolve(config.sourceInputPath));
-    const built = buildPresentationCaptionGateB5RequestsV002({sourceBytes, config});
+    const built = buildPresentationCaptionGateB5RequestsV003({sourceBytes, config});
     const projection = await inspectUpstreamProjection(config.projectionSentinelPath);
     if (projection?.kind !== 'trusted-projection'
       || projection.expectedBeforeCanonicalSha256 !== config.expectedUpstreamProjection) {
@@ -649,9 +672,57 @@ export async function executePresentationCaptionGateB5V002({
     const requestCandidates = [
       ['generate-content-request.json', built.generateBytes],
       ['input-token-count-request.json', built.inputCountBytes],
-      ['maximum-response-token-count-request.json', built.maximumCountBytes],
     ];
     assertNoSecret(apiKey, requestCandidates);
+
+    const [
+      previousMaximumCountRequestBytes,
+      previousMaximumCountResponseBytes,
+    ] = await Promise.all([
+      readFile(resolve(config.previousMaximumCountRequestPath)),
+      readFile(resolve(config.previousMaximumCountResponsePath)),
+    ]);
+    const previousMaximumCountRequestSha256 =
+      sha256(previousMaximumCountRequestBytes);
+    const previousMaximumCountResponseSha256 =
+      sha256(previousMaximumCountResponseBytes);
+    if (previousMaximumCountRequestSha256
+        !== config.expectedPreviousMaximumCountRequestSha256
+      || previousMaximumCountResponseSha256
+        !== config.expectedPreviousMaximumCountResponseSha256) {
+      stop('PREVIOUS_MAXIMUM_RESPONSE_DIAGNOSTIC_SHA256_MISMATCH');
+    }
+    if (!previousMaximumCountRequestBytes.equals(built.maximumCountBytes)) {
+      stop('MAXIMUM_RESPONSE_DIAGNOSTIC_REQUEST_CHANGED');
+    }
+    const maximumTokens = responseTotalTokens(
+      previousMaximumCountResponseBytes,
+      'PREVIOUS_MAXIMUM_RESPONSE_COUNT_TOKENS',
+    );
+    if (maximumTokens.totalTokens
+        !== config.expectedPreviousMaximumResponseTokens) {
+      stop('PREVIOUS_MAXIMUM_RESPONSE_TOKEN_COUNT_MISMATCH', {
+        expected: config.expectedPreviousMaximumResponseTokens,
+        observed: maximumTokens.totalTokens,
+      });
+    }
+    if (maximumTokens.totalTokens > config.officialOutputLimit) {
+      stop('MAXIMUM_RESPONSE_DIAGNOSTIC_EXCEEDS_MODEL_OUTPUT_LIMIT', {
+        maximumResponseTokens: maximumTokens.totalTokens,
+        officialOutputLimit: config.officialOutputLimit,
+      });
+    }
+    assertNoSecret(apiKey, [
+      ...requestCandidates,
+      [
+        config.previousMaximumCountRequestPath,
+        previousMaximumCountRequestBytes,
+      ],
+      [
+        config.previousMaximumCountResponsePath,
+        previousMaximumCountResponseBytes,
+      ],
+    ]);
 
     await mkdir(dirname(outputRoot), {recursive: true});
     await mkdir(outputRoot);
@@ -674,29 +745,6 @@ export async function executePresentationCaptionGateB5V002({
       inputResponse.rawBytes,
       'INPUT_COUNT_TOKENS',
     );
-
-    const maximumResponse = await performCountTokens({
-      apiKey,
-      bodyBytes: built.maximumCountBytes,
-      responsePath: resolve(outputRoot, 'maximum-response-token-count-response.raw.json'),
-      responseLabel: 'MAXIMUM_RESPONSE_COUNT_TOKENS',
-      fetchImplementation,
-    });
-    namedBytes.set(
-      'maximum-response-token-count-response.raw.json',
-      maximumResponse.rawBytes,
-    );
-    assertNoSecret(apiKey, namedBytes.entries());
-    const maximumTokens = responseTotalTokens(
-      maximumResponse.rawBytes,
-      'MAXIMUM_RESPONSE_COUNT_TOKENS',
-    );
-    if (maximumTokens.totalTokens > config.officialOutputLimit) {
-      stop('MAXIMUM_RESPONSE_DIAGNOSTIC_EXCEEDS_MODEL_OUTPUT_LIMIT', {
-        maximumResponseTokens: maximumTokens.totalTokens,
-        officialOutputLimit: config.officialOutputLimit,
-      });
-    }
 
     const sourceAfterBytes = await readFile(resolve(config.sourceInputPath));
     const sourceAfterSha256 = sha256(sourceAfterBytes);
@@ -736,20 +784,28 @@ export async function executePresentationCaptionGateB5V002({
         tier: APPROVED_PRICING_TIER,
         serviceTierRequestField: 'omitted',
         maxOutputTokens: config.officialOutputLimit,
-        thinkingLevel: 'minimal',
+        thinkingLevel: APPROVED_THINKING_LEVEL,
         responseMimeType: 'application/json',
         automaticRetries: 0,
       }),
-      passedCheck(7, '二つのtoken計測requestが承認済み内容を改変せず保持', {
+      passedCheck(7, '入力token計測requestを生成requestと同一に保ち、最大構造診断の不変を確認', {
         inputGenerateRequestIdentity: true,
         maximumResponseBoundaryCandidateCount:
           built.sourceFacts.boundaryCandidateCount,
         maximumResponseOneCandidatePerMeaningGroup: true,
+        previousMaximumCountRequestPath:
+          config.previousMaximumCountRequestPath,
+        previousMaximumCountRequestSha256,
+        maximumResponseRequestByteIdenticalToV002: true,
       }),
-      passedCheck(8, '二つの生応答が非負整数tokenを返し最大構造が上限内', {
+      passedCheck(8, '新版入力を1回計測し、検証済み最大構造診断が上限内', {
         inputTokens: inputTokens.totalTokens,
         maximumResponseStructureTokens: maximumTokens.totalTokens,
         officialOutputLimit: config.officialOutputLimit,
+        maximumResponseMeasurementReusedWithoutApiCall: true,
+        previousMaximumCountResponsePath:
+          config.previousMaximumCountResponsePath,
+        previousMaximumCountResponseSha256,
       }),
       passedCheck(9, 'モデル・省略時Standard・単価・実行日と費用式が一致', {
         verificationDate: config.officialVerificationDate,
@@ -762,7 +818,7 @@ export async function executePresentationCaptionGateB5V002({
           config.inputPriceUsdPerMillion,
         ),
       }),
-      passedCheck(10, '正式5 payloadをSHAで束縛しsecret 0件・上流不変を確認', {
+      passedCheck(10, '正式3 payloadをSHAで束縛しsecret 0件・上流不変を確認', {
         boundArtifactCount: artifactBindings.length,
         manifestSelfHashPolicy: 'manifest-is-not-self-hashed-v001',
         secretOccurrencesInFormalBytes: 0,
@@ -775,17 +831,26 @@ export async function executePresentationCaptionGateB5V002({
     ];
     const billingOrUsagePaths = [
       ...inputTokens.billingObservationPaths.map((path) => `input${path}`),
-      ...maximumTokens.billingObservationPaths.map((path) => `maximum${path}`),
+      ...maximumTokens.billingObservationPaths.map(
+        (path) => `reusedMaximum${path}`,
+      ),
     ];
     const chargeOrCostPaths = billingOrUsagePaths.filter(
       (path) => /(bill|cost|price|charge)/iu.test(path),
     );
     const manifest = {
-      schemaVersion: 'presentation-caption-gate-b5-manifest-v001',
+      schemaVersion: 'presentation-caption-gate-b5-manifest-v002',
       status: 'passed',
       stage: 'b5-token-diagnosis-only',
       designBinding: {
         fileSha256: config.designSha256,
+        baseDesignVersion: 'v002',
+        approvedRevision: {
+          source: 'DECISIONS.md',
+          decisionDate: APPROVED_REVISION_DECISION_DATE,
+          onlyRequestFieldChange:
+            'generationConfig.thinkingConfig.thinkingLevel:minimal-to-medium',
+        },
       },
       sourceBinding: {
         path: config.sourceInputPath,
@@ -820,13 +885,21 @@ export async function executePresentationCaptionGateB5V002({
         },
         clientTimeoutMilliseconds: CLIENT_TIMEOUT_MILLISECONDS,
         automaticRetries: 0,
-        countTokensCalls: 2,
+        countTokensCalls: 1,
         generateContentCalls: 0,
       },
       tokenDiagnosis: {
         inputTokens: inputTokens.totalTokens,
         maximumResponseStructureTokens: maximumTokens.totalTokens,
         maximumResponseStructureWithinOfficialOutputLimit: true,
+        maximumResponseStructureMeasurement: {
+          status: 'reused-from-b5-v002-with-byte-identical-request',
+          requestPath: config.previousMaximumCountRequestPath,
+          requestSha256: previousMaximumCountRequestSha256,
+          responsePath: config.previousMaximumCountResponsePath,
+          responseSha256: previousMaximumCountResponseSha256,
+          countTokensCallsInThisAttempt: 0,
+        },
       },
       cost: {
         inputEstimate: {
@@ -836,12 +909,13 @@ export async function executePresentationCaptionGateB5V002({
             config.inputPriceUsdPerMillion,
           ),
         },
-        maximumResponseStructureDiagnosticInputEstimate: {
+        reusedMaximumResponseStructureDiagnosticInputEstimate: {
           formula: `${maximumTokens.totalTokens} * ${config.inputPriceUsdPerMillion} / 1000000`,
           usd: tokenCost(
             maximumTokens.totalTokens,
             config.inputPriceUsdPerMillion,
           ),
+          incurredInThisAttempt: false,
         },
         theoreticalB6Guard: {
           inputLimitCostUsd: tokenCost(
@@ -873,7 +947,8 @@ export async function executePresentationCaptionGateB5V002({
       checks,
       nextStage: {
         b6AutomaticallyStarted: false,
-        humanApprovalRequired: true,
+        humanApprovalRequired: false,
+        continuationApprovedByDecisionDate: APPROVED_REVISION_DECISION_DATE,
       },
     };
     const manifestBytes = formalBytes(manifest);
@@ -927,7 +1002,7 @@ const main = async () => {
   let result;
   try {
     const config = parseCli(process.argv.slice(2));
-    result = await executePresentationCaptionGateB5V002({config});
+    result = await executePresentationCaptionGateB5V003({config});
   } catch (error) {
     result = error instanceof B5Stop
       ? {

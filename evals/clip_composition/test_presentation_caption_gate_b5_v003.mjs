@@ -1,16 +1,16 @@
 #!/usr/bin/env node
 
 import assert from 'node:assert/strict';
-import {mkdtemp, readFile, readdir, rm} from 'node:fs/promises';
+import {mkdtemp, readFile, readdir, rm, writeFile} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import {dirname, join, resolve} from 'node:path';
 import test from 'node:test';
 import {fileURLToPath} from 'node:url';
 
 import {
-  buildPresentationCaptionGateB5RequestsV002,
-  executePresentationCaptionGateB5V002,
-} from './run_presentation_caption_gate_b5_v002.mjs';
+  buildPresentationCaptionGateB5RequestsV003,
+  executePresentationCaptionGateB5V003,
+} from './run_presentation_caption_gate_b5_v003.mjs';
 import {
   serializePresentationCaptionB1FormalJsonV001,
   sha256PresentationCaptionB1BytesV001,
@@ -18,6 +18,10 @@ import {
 
 const DESIGN_SHA =
   '93bdc9e40ddf95b5cec9baba73501d9a0507d50a05329244c8123eb098e161cd';
+const PREVIOUS_MAXIMUM_REQUEST_SHA =
+  '0de805415b0fb62206d2a436b1bea1c85f4e73e6d518252fd9528eb1f25bb158';
+const PREVIOUS_MAXIMUM_RESPONSE_SHA =
+  '0f4af6abb87c012f4560864b481e38f9cb7e957abd098d3c3e53bb39906d0cc2';
 const PROJECTION_SHA = '7'.repeat(64);
 const TEST_DATE = '2026-07-27';
 const workspaceRoot = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
@@ -89,7 +93,53 @@ const makeConfig = ({sourcePath, outputRoot, sourceBytes}) => ({
   projectionSentinelPath:
     'evals/clip_composition/outputs/presentation/caption-display-pair-static-preflight-jobs/synthetic-caption-b5-v001-projection-sentinel.json',
   designSha256: DESIGN_SHA,
+  previousMaximumCountRequestPath:
+    resolve(
+      workspaceRoot,
+      'evals/clip_composition/outputs/presentation/caption-gate-b5/'
+        + 'DmWu0jVQfTE-candidate-13-v002/'
+        + 'maximum-response-token-count-request.json',
+    ),
+  previousMaximumCountResponsePath:
+    resolve(
+      workspaceRoot,
+      'evals/clip_composition/outputs/presentation/caption-gate-b5/'
+        + 'DmWu0jVQfTE-candidate-13-v002/'
+        + 'maximum-response-token-count-response.raw.json',
+    ),
+  expectedPreviousMaximumCountRequestSha256: PREVIOUS_MAXIMUM_REQUEST_SHA,
+  expectedPreviousMaximumCountResponseSha256: PREVIOUS_MAXIMUM_RESPONSE_SHA,
+  expectedPreviousMaximumResponseTokens: 3_758,
 });
+
+const prepareSyntheticMaximumDiagnostic = async ({
+  root,
+  sourcePath,
+  outputRoot,
+  sourceBytes,
+  totalTokens = 456,
+}) => {
+  const baseConfig = makeConfig({sourcePath, outputRoot, sourceBytes});
+  const built = buildPresentationCaptionGateB5RequestsV003({
+    sourceBytes,
+    config: baseConfig,
+  });
+  const requestPath = join(root, 'previous-maximum-count-request.json');
+  const responsePath = join(root, 'previous-maximum-count-response.raw.json');
+  const responseBytes = Buffer.from(`{"totalTokens":${totalTokens}}\n`, 'utf8');
+  await Promise.all([
+    writeFile(requestPath, built.maximumCountBytes),
+    writeFile(responsePath, responseBytes),
+  ]);
+  return {
+    ...baseConfig,
+    previousMaximumCountRequestPath: requestPath,
+    previousMaximumCountResponsePath: responsePath,
+    expectedPreviousMaximumCountRequestSha256: sha256(built.maximumCountBytes),
+    expectedPreviousMaximumCountResponseSha256: sha256(responseBytes),
+    expectedPreviousMaximumResponseTokens: totalTokens,
+  };
+};
 
 const inspectProjection = async () => ({
   kind: 'trusted-projection',
@@ -103,7 +153,7 @@ test('pure builder keeps the source exact and uses every candidate once', () => 
     outputRoot: '/unused/output',
     sourceBytes,
   });
-  const built = buildPresentationCaptionGateB5RequestsV002({sourceBytes, config});
+  const built = buildPresentationCaptionGateB5RequestsV003({sourceBytes, config});
   assert.equal(Object.hasOwn(built.generateRequest, 'serviceTier'), false);
   assert.equal(
     Object.hasOwn(
@@ -137,67 +187,69 @@ test('pure builder keeps the source exact and uses every candidate once', () => 
   );
 });
 
-test('formal v002 requests differ from v001 only by omitted serviceTier fields', async () => {
+test('formal v003 requests differ from v002 only by thinkingLevel medium', async () => {
   const sourcePath = resolve(
     workspaceRoot,
     'evals/clip_composition/outputs/presentation/segmenter-boundary-evidence/DmWu0jVQfTE-candidate-13-v001/semantic-source-input.json',
   );
-  const v001Root = resolve(
+  const v002Root = resolve(
     workspaceRoot,
-    'evals/clip_composition/outputs/presentation/caption-gate-b5/DmWu0jVQfTE-candidate-13-v001',
+    'evals/clip_composition/outputs/presentation/caption-gate-b5/DmWu0jVQfTE-candidate-13-v002',
   );
   const [
     sourceBytes,
-    v001GenerateBytes,
-    v001InputCountBytes,
-    v001MaximumCountBytes,
+    v002GenerateBytes,
+    v002InputCountBytes,
+    v002MaximumCountBytes,
   ] = await Promise.all([
     readFile(sourcePath),
-    readFile(join(v001Root, 'generate-content-request.json')),
-    readFile(join(v001Root, 'input-token-count-request.json')),
-    readFile(join(v001Root, 'maximum-response-token-count-request.json')),
+    readFile(join(v002Root, 'generate-content-request.json')),
+    readFile(join(v002Root, 'input-token-count-request.json')),
+    readFile(join(v002Root, 'maximum-response-token-count-request.json')),
   ]);
   const config = {
     ...makeConfig({
       sourcePath,
-      outputRoot: '/unused/formal-v002-output',
+      outputRoot: '/unused/formal-v003-output',
       sourceBytes,
     }),
     expectedCharacterCount: 354,
     expectedContainerCount: 3,
     expectedBoundaryCandidateCount: 205,
   };
-  const built = buildPresentationCaptionGateB5RequestsV002({sourceBytes, config});
+  const built = buildPresentationCaptionGateB5RequestsV003({sourceBytes, config});
 
-  const projectedGenerate = JSON.parse(v001GenerateBytes.toString('utf8'));
+  const projectedGenerate = JSON.parse(v002GenerateBytes.toString('utf8'));
   assert.equal(
-    projectedGenerate.serviceTier,
-    'SERVICE_TIER_STANDARD',
+    projectedGenerate.generationConfig.thinkingConfig.thinkingLevel,
+    'minimal',
   );
-  delete projectedGenerate.serviceTier;
+  projectedGenerate.generationConfig.thinkingConfig.thinkingLevel = 'medium';
   const projectedGenerateBytes = formalBytes(projectedGenerate);
   assert.deepEqual(built.generateBytes, projectedGenerateBytes);
-  assert.equal(built.generateBytes.length, 36_913);
+  assert.equal(built.generateBytes.length, 36_912);
   assert.equal(
     sha256(built.generateBytes),
-    '7fa902580b78bb5da3d36025135e4655ab2528e401ba5a76537f2af3c1939ed2',
+    'd37363247724a664521fc68c396a5f6d307a1b340c70c032a79a08837213fe88',
   );
 
-  const projectedInputCount = JSON.parse(v001InputCountBytes.toString('utf8'));
+  const projectedInputCount = JSON.parse(v002InputCountBytes.toString('utf8'));
   assert.equal(
-    projectedInputCount.generateContentRequest.serviceTier,
-    'SERVICE_TIER_STANDARD',
+    projectedInputCount.generateContentRequest.generationConfig
+      .thinkingConfig.thinkingLevel,
+    'minimal',
   );
-  delete projectedInputCount.generateContentRequest.serviceTier;
+  projectedInputCount.generateContentRequest.generationConfig
+    .thinkingConfig.thinkingLevel = 'medium';
   const projectedInputCountBytes = formalBytes(projectedInputCount);
   assert.deepEqual(built.inputCountBytes, projectedInputCountBytes);
-  assert.equal(built.inputCountBytes.length, 37_209);
+  assert.equal(built.inputCountBytes.length, 37_208);
   assert.equal(
     sha256(built.inputCountBytes),
-    '83470ebfefe94ac07dda023fa7706aa0f63d007feb26dd59bdd21a7b70af07df',
+    '8f57017d5eceb79e0ad2e917d184c433bc783b2f722ee3348af7b7f4f2ce22cd',
   );
 
-  assert.deepEqual(built.maximumCountBytes, v001MaximumCountBytes);
+  assert.deepEqual(built.maximumCountBytes, v002MaximumCountBytes);
   assert.equal(built.maximumCountBytes.length, 13_903);
   assert.equal(
     sha256(built.maximumCountBytes),
@@ -213,7 +265,7 @@ test('missing environment key stops before output and communication', async () =
     const sourceBytes = formalBytes(syntheticSource);
     await import('node:fs/promises').then(({writeFile}) => writeFile(sourcePath, sourceBytes));
     let calls = 0;
-    const result = await executePresentationCaptionGateB5V002({
+    const result = await executePresentationCaptionGateB5V003({
       config: makeConfig({sourcePath, outputRoot, sourceBytes}),
       fetchImplementation: async () => {
         calls += 1;
@@ -247,7 +299,7 @@ test('unapproved execution values stop before output and communication', async (
     let calls = 0;
     const config = makeConfig({sourcePath, outputRoot, sourceBytes});
     config.modelId = 'different-model';
-    const result = await executePresentationCaptionGateB5V002({
+    const result = await executePresentationCaptionGateB5V003({
       config,
       fetchImplementation: async () => {
         calls += 1;
@@ -274,10 +326,16 @@ test('a reflected key is rejected before the raw response is saved', async () =>
     const outputRoot = join(root, 'formal-output');
     const sourceBytes = formalBytes(syntheticSource);
     await writeFile(sourcePath, sourceBytes);
+    const config = await prepareSyntheticMaximumDiagnostic({
+      root,
+      sourcePath,
+      outputRoot,
+      sourceBytes,
+    });
     const apiKey = 'test-only-reflected-key';
     let calls = 0;
-    const result = await executePresentationCaptionGateB5V002({
-      config: makeConfig({sourcePath, outputRoot, sourceBytes}),
+    const result = await executePresentationCaptionGateB5V003({
+      config,
       fetchImplementation: async () => {
         calls += 1;
         return new Response(
@@ -312,9 +370,15 @@ test('a failed first call is not retried and never starts the second call', asyn
     const outputRoot = join(root, 'formal-output');
     const sourceBytes = formalBytes(syntheticSource);
     await writeFile(sourcePath, sourceBytes);
+    const config = await prepareSyntheticMaximumDiagnostic({
+      root,
+      sourcePath,
+      outputRoot,
+      sourceBytes,
+    });
     let calls = 0;
-    const result = await executePresentationCaptionGateB5V002({
-      config: makeConfig({sourcePath, outputRoot, sourceBytes}),
+    const result = await executePresentationCaptionGateB5V003({
+      config,
       fetchImplementation: async () => {
         calls += 1;
         throw new Error('simulated timeout');
@@ -332,7 +396,7 @@ test('a failed first call is not retried and never starts the second call', asyn
   }
 });
 
-test('two countTokens calls produce exactly six files and never start B6', async () => {
+test('one input countTokens call produces exactly four files and never starts B6', async () => {
   const root = await mkdtemp(join(tmpdir(), 'zev-b5-success-'));
   try {
     const {writeFile} = await import('node:fs/promises');
@@ -340,10 +404,13 @@ test('two countTokens calls produce exactly six files and never start B6', async
     const outputRoot = join(root, 'formal-output');
     const sourceBytes = formalBytes(syntheticSource);
     await writeFile(sourcePath, sourceBytes);
-    const rawResponses = [
-      Buffer.from('{"totalTokens":123}\n', 'utf8'),
-      Buffer.from('{"totalTokens":456}\n', 'utf8'),
-    ];
+    const config = await prepareSyntheticMaximumDiagnostic({
+      root,
+      sourcePath,
+      outputRoot,
+      sourceBytes,
+    });
+    const rawResponse = Buffer.from('{"totalTokens":123}\n', 'utf8');
     const observedCalls = [];
     const fetchImplementation = async (url, options) => {
       const index = observedCalls.length;
@@ -358,26 +425,25 @@ test('two countTokens calls produce exactly six files and never start B6', async
         url,
         body: Buffer.from(options.body),
       });
-      return new Response(rawResponses[index], {
+      return new Response(rawResponse, {
         status: 200,
         headers: {'content-type': 'application/json'},
       });
     };
-    const result = await executePresentationCaptionGateB5V002({
-      config: makeConfig({sourcePath, outputRoot, sourceBytes}),
+    const result = await executePresentationCaptionGateB5V003({
+      config,
       fetchImplementation,
       inspectUpstreamProjection: inspectProjection,
       currentDate: new Date('2026-07-27T03:00:00Z'),
       apiKey: 'test-only-key',
     });
     assert.equal(result.status, 'passed');
-    assert.equal(result.formalFileCount, 6);
+    assert.equal(result.formalFileCount, 4);
     assert.equal(result.inputTokens, 123);
     assert.equal(result.maximumResponseStructureTokens, 456);
     assert.equal(result.b6Started, false);
-    assert.equal(observedCalls.length, 2);
+    assert.equal(observedCalls.length, 1);
     const observedInputCount = JSON.parse(observedCalls[0].body.toString('utf8'));
-    const observedMaximumCount = JSON.parse(observedCalls[1].body.toString('utf8'));
     assert.equal(
       Object.hasOwn(
         observedInputCount.generateContentRequest,
@@ -385,7 +451,11 @@ test('two countTokens calls produce exactly six files and never start B6', async
       ),
       false,
     );
-    assert.equal(Object.hasOwn(observedMaximumCount, 'serviceTier'), false);
+    assert.equal(
+      observedInputCount.generateContentRequest.generationConfig
+        .thinkingConfig.thinkingLevel,
+      'medium',
+    );
 
     const names = (await readdir(outputRoot)).sort();
     assert.deepEqual(names, [
@@ -393,28 +463,14 @@ test('two countTokens calls produce exactly six files and never start B6', async
       'generate-content-request.json',
       'input-token-count-request.json',
       'input-token-count-response.raw.json',
-      'maximum-response-token-count-request.json',
-      'maximum-response-token-count-response.raw.json',
     ]);
     assert.deepEqual(
       await readFile(join(outputRoot, 'input-token-count-response.raw.json')),
-      rawResponses[0],
-    );
-    assert.deepEqual(
-      await readFile(
-        join(outputRoot, 'maximum-response-token-count-response.raw.json'),
-      ),
-      rawResponses[1],
+      rawResponse,
     );
     assert.deepEqual(
       observedCalls[0].body,
       await readFile(join(outputRoot, 'input-token-count-request.json')),
-    );
-    assert.deepEqual(
-      observedCalls[1].body,
-      await readFile(
-        join(outputRoot, 'maximum-response-token-count-request.json'),
-      ),
     );
     const manifest = JSON.parse(
       await readFile(join(outputRoot, 'b5-manifest.json'), 'utf8'),
@@ -422,9 +478,9 @@ test('two countTokens calls produce exactly six files and never start B6', async
     assert.equal(manifest.status, 'passed');
     assert.equal(manifest.checks.length, 10);
     assert.equal(manifest.checks.every((check) => check.status === 'passed'), true);
-    assert.equal(manifest.artifacts.length, 5);
+    assert.equal(manifest.artifacts.length, 3);
     assert.equal(manifest.manifestSelfHashPolicy, 'manifest-is-not-self-hashed-v001');
-    assert.equal(manifest.transport.countTokensCalls, 2);
+    assert.equal(manifest.transport.countTokensCalls, 1);
     assert.equal(manifest.transport.generateContentCalls, 0);
     assert.equal(manifest.transport.headers['x-goog-api-key'], '<redacted>');
     assert.equal(
@@ -434,6 +490,16 @@ test('two countTokens calls produce exactly six files and never start B6', async
     assert.equal(
       manifest.checks[5].evidence.serviceTierRequestField,
       'omitted',
+    );
+    assert.equal(manifest.checks[5].evidence.thinkingLevel, 'medium');
+    assert.equal(
+      manifest.tokenDiagnosis.maximumResponseStructureMeasurement.status,
+      'reused-from-b5-v002-with-byte-identical-request',
+    );
+    assert.equal(
+      manifest.tokenDiagnosis.maximumResponseStructureMeasurement
+        .countTokensCallsInThisAttempt,
+      0,
     );
     for (const artifact of manifest.artifacts) {
       const bytes = await readFile(join(outputRoot, artifact.fileName));
