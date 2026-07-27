@@ -75,3 +75,20 @@
 - このタグは、Geminiへ送る内容を固定するB5へ進める撤退点である。
 - このタグへ撤退すると、今後作るprompt、API送信内容、Gemini回答、正式表示計画、指示書、描画を失う。
 - タグ時点ではそれらは未作成なので、撤退で失う完成動画はない。
+
+## 2026-07-27 — `stable/first-clip-complete-20260727`
+
+- candidate 13について、元配信からの選択、切り分け、字幕の意味判断、表示計画、描画までを一つの経路で完走した。
+- B5 v004で、Geminiへ渡す内容と費用見積りを固定した。
+- Geminiは一回の実走で、元の文字を変えず20個の意味まとまりを読みやすい短い2行へ分けた。
+- 回答は既存の受入検査を通り、正式な表示計画になった。
+- v003描画経路はv002への変換や偽装をせず、その計画を直接mp4へ描いた。
+- できた動画は84.500秒、1920×1080、2,535 frameで、SHA-256は`82b216dca51e0c0c126e41e1272f0981b3318071dcb33ff4eb54cee0a472cbb8`。
+- 文字の欠落、重なり、画面外、frame変化、音声変化がないことを機械検査した。
+- 最後にkawafmmが目視し、「字幕は良い」と認定した。
+- これで基本テロップだけの「初の一本」が成立した。
+- 途中では、行幅の数値だけを追うと読みやすさから外れる問題、v003正式描画入口の不足、QCの版名依存を見つけた。
+- 意味を優先する行分け、v003専用成果物、版中立の同一QCへ直し、検査を緩めず完走した。
+- 詳細: [B5/B6 v004結果](evals/clip_composition/reports/presentation/presentation-candidate13-caption-gate-b6-readability-result-20260727-v004.md)、[描画manifest](evals/clip_composition/outputs/presentation/review-renders/DmWu0jVQfTE-candidate-13-caption-b6-v004-v002/presentation-review-render-manifest-v003.json)、[描画後QC](evals/clip_composition/outputs/presentation/review-renders/DmWu0jVQfTE-candidate-13-caption-b6-v004-v002/presentation-review-render-qc-v003.json)。
+- G4〜G7、素材、SE、タイトル、サムネイルはこのタグの完成範囲に含まれない。
+- タグ時点より後の作業はまだ無いため、今ここへ撤退して失う完成作業はない。
