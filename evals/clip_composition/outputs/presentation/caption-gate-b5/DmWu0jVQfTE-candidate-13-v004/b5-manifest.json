@@ -1,0 +1,234 @@
+{
+  "schemaVersion": "presentation-caption-gate-b5-manifest-v002",
+  "status": "passed",
+  "stage": "b5-token-diagnosis-only",
+  "designBinding": {
+    "fileSha256": "caf54f70f48849e5109a67e7135299118c15b5a529fb8eb0f5bc28d353bbbaa4",
+    "baseDesignVersion": "v004",
+    "approvedRevision": {
+      "source": "DECISIONS.md",
+      "decisionDate": "2026-07-27",
+      "onlyRequestFieldChange": "systemInstruction:append-one-readability-short-line-procedure"
+    }
+  },
+  "sourceBinding": {
+    "path": "evals/clip_composition/outputs/presentation/segmenter-boundary-evidence/DmWu0jVQfTE-candidate-13-v001/semantic-source-input.json",
+    "fileSha256": "c350a402db15ff7a5405894f939f0a66522482d6d8c78584fe5b55d9dc489980",
+    "characterCount": 354,
+    "containerCount": 3,
+    "boundaryCandidateCount": 205
+  },
+  "officialVerification": {
+    "observedAt": "2026-07-27",
+    "verificationMode": "execution-day-values-supplied-after-out-of-runner-official-review",
+    "runnerPerformedOfficialHttpFetch": false,
+    "sources": [
+      "https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash",
+      "https://ai.google.dev/gemini-api/docs/pricing",
+      "https://ai.google.dev/api/tokens",
+      "https://ai.google.dev/api/generate-content",
+      "https://ai.google.dev/gemini-api/docs/generate-content/thinking",
+      "https://ai.google.dev/gemini-api/docs/latest-model",
+      "https://ai.google.dev/gemini-api/docs/optimization"
+    ],
+    "modelId": "gemini-3.6-flash",
+    "modelResource": "models/gemini-3.6-flash",
+    "inputLimit": 1048576,
+    "outputLimit": 65536,
+    "tier": "PAID_STANDARD_DEFAULT_BY_OMISSION",
+    "inputPriceUsdPerMillion": "1.50",
+    "outputPriceUsdPerMillion": "7.50"
+  },
+  "transport": {
+    "product": "Gemini Developer API",
+    "apiVersion": "v1beta",
+    "endpoint": "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:countTokens",
+    "method": "POST",
+    "headers": {
+      "Content-Type": "application/json",
+      "X-Server-Timeout": "600",
+      "x-goog-api-key": "<redacted>"
+    },
+    "clientTimeoutMilliseconds": 600000,
+    "automaticRetries": 0,
+    "countTokensCalls": 1,
+    "generateContentCalls": 0
+  },
+  "tokenDiagnosis": {
+    "inputTokens": 9258,
+    "maximumResponseStructureTokens": 3758,
+    "maximumResponseStructureWithinOfficialOutputLimit": true,
+    "maximumResponseStructureMeasurement": {
+      "status": "reused-from-b5-v002-with-byte-identical-request",
+      "requestPath": "evals/clip_composition/outputs/presentation/caption-gate-b5/DmWu0jVQfTE-candidate-13-v002/maximum-response-token-count-request.json",
+      "requestSha256": "0de805415b0fb62206d2a436b1bea1c85f4e73e6d518252fd9528eb1f25bb158",
+      "responsePath": "evals/clip_composition/outputs/presentation/caption-gate-b5/DmWu0jVQfTE-candidate-13-v002/maximum-response-token-count-response.raw.json",
+      "responseSha256": "0f4af6abb87c012f4560864b481e38f9cb7e957abd098d3c3e53bb39906d0cc2",
+      "countTokensCallsInThisAttempt": 0
+    }
+  },
+  "cost": {
+    "inputEstimate": {
+      "formula": "9258 * 1.50 / 1000000",
+      "usd": "0.01388700"
+    },
+    "reusedMaximumResponseStructureDiagnosticInputEstimate": {
+      "formula": "3758 * 1.50 / 1000000",
+      "usd": "0.00563700",
+      "incurredInThisAttempt": false
+    },
+    "theoreticalB6Guard": {
+      "inputLimitCostUsd": "1.57286400",
+      "outputLimitCostUsd": "0.49152000",
+      "totalUsd": "2.06438400",
+      "actualCharge": "not-an-observed-charge"
+    }
+  },
+  "countTokensBillingObservation": {
+    "responseBillingOrUsagePaths": [],
+    "responseChargeOrCostPaths": [],
+    "responseReportedCharge": false,
+    "actualBillingTreatment": "not-observable-from-countTokens-responses",
+    "officialPricingPageObservation": "no-separate-countTokens-price-was-listed-on-the-observed-pricing-page"
+  },
+  "artifacts": [
+    {
+      "fileName": "generate-content-request.json",
+      "fileSha256": "92b8bee3426d6ad0822f0e81acb832a2340d468362ecff3d5b31f5a1b52bcfc0",
+      "byteLength": 37170
+    },
+    {
+      "fileName": "input-token-count-request.json",
+      "fileSha256": "734e4e1e49cc7a647ae89df78e0d93b862430017182e6daaab0351e63864e94f",
+      "byteLength": 37466
+    },
+    {
+      "fileName": "input-token-count-response.raw.json",
+      "fileSha256": "8f524acc5bc42a91edb89aaeb61eecc0a544be58e4d691140162d6233c8e20ea",
+      "byteLength": 121
+    }
+  ],
+  "manifestSelfHashPolicy": "manifest-is-not-self-hashed-v001",
+  "checks": [
+    {
+      "id": 1,
+      "status": "passed",
+      "meaning": "B3意味入力のpathとSHAが正本に一致",
+      "evidence": {
+        "path": "evals/clip_composition/outputs/presentation/segmenter-boundary-evidence/DmWu0jVQfTE-candidate-13-v001/semantic-source-input.json",
+        "fileSha256": "c350a402db15ff7a5405894f939f0a66522482d6d8c78584fe5b55d9dc489980"
+      }
+    },
+    {
+      "id": 2,
+      "status": "passed",
+      "meaning": "意味入力の文字・まとまり・候補件数が正本に一致",
+      "evidence": {
+        "characterCount": 354,
+        "containerCount": 3,
+        "boundaryCandidateCount": 205
+      }
+    },
+    {
+      "id": 3,
+      "status": "passed",
+      "meaning": "モデル可視入力をsystem・B3本文・回答schemaに限定",
+      "evidence": {
+        "visibleElements": [
+          "systemInstruction",
+          "semanticSourceInput",
+          "responseJsonSchema"
+        ]
+      }
+    },
+    {
+      "id": 4,
+      "status": "passed",
+      "meaning": "user contentがB3意味入力全文と一致",
+      "evidence": {
+        "sourceByteSha256": "c350a402db15ff7a5405894f939f0a66522482d6d8c78584fe5b55d9dc489980",
+        "userTextUtf8Sha256": "c350a402db15ff7a5405894f939f0a66522482d6d8c78584fe5b55d9dc489980"
+      }
+    },
+    {
+      "id": 5,
+      "status": "passed",
+      "meaning": "意味仕事はB3 taskDescriptionだけを正本として参照",
+      "evidence": {
+        "taskDescriptionDuplicatedInSystemInstruction": false
+      }
+    },
+    {
+      "id": 6,
+      "status": "passed",
+      "meaning": "回答schemaとAPI設定が承認設計に一致",
+      "evidence": {
+        "modelId": "gemini-3.6-flash",
+        "tier": "PAID_STANDARD_DEFAULT_BY_OMISSION",
+        "serviceTierRequestField": "omitted",
+        "maxOutputTokens": 65536,
+        "thinkingLevel": "medium",
+        "responseMimeType": "application/json",
+        "automaticRetries": 0
+      }
+    },
+    {
+      "id": 7,
+      "status": "passed",
+      "meaning": "入力token計測requestを生成requestと同一に保ち、最大構造診断の不変を確認",
+      "evidence": {
+        "inputGenerateRequestIdentity": true,
+        "maximumResponseBoundaryCandidateCount": 205,
+        "maximumResponseOneCandidatePerMeaningGroup": true,
+        "previousMaximumCountRequestPath": "evals/clip_composition/outputs/presentation/caption-gate-b5/DmWu0jVQfTE-candidate-13-v002/maximum-response-token-count-request.json",
+        "previousMaximumCountRequestSha256": "0de805415b0fb62206d2a436b1bea1c85f4e73e6d518252fd9528eb1f25bb158",
+        "maximumResponseRequestByteIdenticalToV002": true
+      }
+    },
+    {
+      "id": 8,
+      "status": "passed",
+      "meaning": "新版入力を1回計測し、検証済み最大構造診断が上限内",
+      "evidence": {
+        "inputTokens": 9258,
+        "maximumResponseStructureTokens": 3758,
+        "officialOutputLimit": 65536,
+        "maximumResponseMeasurementReusedWithoutApiCall": true,
+        "previousMaximumCountResponsePath": "evals/clip_composition/outputs/presentation/caption-gate-b5/DmWu0jVQfTE-candidate-13-v002/maximum-response-token-count-response.raw.json",
+        "previousMaximumCountResponseSha256": "0f4af6abb87c012f4560864b481e38f9cb7e957abd098d3c3e53bb39906d0cc2"
+      }
+    },
+    {
+      "id": 9,
+      "status": "passed",
+      "meaning": "モデル・省略時Standard・単価・実行日と費用式が一致",
+      "evidence": {
+        "verificationDate": "2026-07-27",
+        "modelId": "gemini-3.6-flash",
+        "tier": "PAID_STANDARD_DEFAULT_BY_OMISSION",
+        "inputPriceUsdPerMillion": "1.50",
+        "outputPriceUsdPerMillion": "7.50",
+        "observedInputCostUsd": "0.01388700"
+      }
+    },
+    {
+      "id": 10,
+      "status": "passed",
+      "meaning": "正式3 payloadをSHAで束縛しsecret 0件・上流不変を確認",
+      "evidence": {
+        "boundArtifactCount": 3,
+        "manifestSelfHashPolicy": "manifest-is-not-self-hashed-v001",
+        "secretOccurrencesInFormalBytes": 0,
+        "sourceShaBefore": "c350a402db15ff7a5405894f939f0a66522482d6d8c78584fe5b55d9dc489980",
+        "sourceShaAfter": "c350a402db15ff7a5405894f939f0a66522482d6d8c78584fe5b55d9dc489980",
+        "upstreamProjectionBeforePublication": "6011a33d166c1cfec8d5cc34b49a676d01c1036fa1a256d00c0c7c9f304f4974",
+        "writeScope": "evals/clip_composition/outputs/presentation/caption-gate-b5/DmWu0jVQfTE-candidate-13-v004"
+      }
+    }
+  ],
+  "nextStage": {
+    "b6AutomaticallyStarted": false,
+    "humanApprovalRequired": false,
+    "continuationApprovedByDecisionDate": "2026-07-27"
+  }
+}
