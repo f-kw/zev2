@@ -2499,6 +2499,100 @@ for (const [name, artifactIndex, mutate] of [
   });
 }
 
+const replacePackageManifestAndRefreshFixture = (context, mutate) => {
+  const manifestEntry = context.sourcePackageObservation.artifactReads[5];
+  const manifest = packageCore.decodePresentationCaptionB1StrictJsonV001(
+    manifestEntry.snapshot.bytes,
+  ).value;
+  mutate(manifest);
+  replacePackageArtifact(context, 5, manifest);
+
+  const reportEntry = context.sourcePackageObservation.artifactReads[6];
+  const report = packageCore.decodePresentationCaptionB1StrictJsonV001(
+    reportEntry.snapshot.bytes,
+  ).value;
+  report.manifestBinding.fileSha256 = manifestEntry.snapshot.fileSha256;
+  report.manifestBinding.canonicalSha256 = canonicalSha(manifest);
+  replacePackageArtifact(context, 6, report);
+
+  context.job.value.sourcePackageBinding.manifest.fileSha256 =
+    manifestEntry.snapshot.fileSha256;
+  context.job.value.sourcePackageBinding.manifest.canonicalSha256 =
+    canonicalSha(manifest);
+  context.job.value.sourcePackageBinding.validationReport.fileSha256 =
+    reportEntry.snapshot.fileSha256;
+  context.job.value.sourcePackageBinding.validationReport.canonicalSha256 =
+    canonicalSha(report);
+
+  const reread = context.readOnlyProcessObservation.inputReread;
+  for (const entries of [reread.initialInputs, reread.finalInputs]) {
+    for (const index of [5, 6]) {
+      const artifact = context.sourcePackageObservation.artifactReads[index];
+      const matched = entries.find(
+        (entry) => entry.role === `sourcePackage.${artifact.fileName}`,
+      );
+      matched.observation.snapshot = clone(artifact.snapshot);
+    }
+  }
+  refreshJobSnapshots(context);
+
+  const compiler = semanticCore.buildPresentationCaptionSemanticCompilerInputV001({
+    sourcePackageSnapshots:
+      context.sourcePackageObservation.artifactReads.map((entry) => entry.snapshot),
+    rawSemanticOutputSnapshot: context.rawSemanticOutputInput.snapshot,
+  });
+  const compilerBytes = serialized(compiler);
+  const compilerPass = {
+    value: compiler,
+    bytes: compilerBytes,
+    fileSha256: sha(compilerBytes),
+    canonicalSha256: canonicalSha(compiler),
+    inputByteCopies: [],
+  };
+  context.compilerBuildPasses = [clone(compilerPass), clone(compilerPass)];
+};
+
+test('Gate A生成時SHAとsemantic job live SHAの差だけでは違反にしない', () => {
+  const context = makeFixture();
+  replaceImplementationSource(
+    context,
+    'gateARetainedSourceAtomsCore',
+    `${IMPLEMENTATION_SOURCES.gateARetainedSourceAtomsCore}export const revision = 2;\n`,
+  );
+  const result = checked(context);
+  assert.equal(result.status, 'checked');
+  assert.equal(result.violations.length, 0);
+  assert.equal(result.checks.every((entry) => entry.status === 'passed'), true);
+});
+
+test('Gate A生成時実装のpath不一致はbinding違反にする', () => {
+  const context = makeFixture();
+  replacePackageManifestAndRefreshFixture(context, (manifest) => {
+    manifest.sourceGateBinding.gateAImplementationFiles[1].path =
+      'evals/clip_composition/other_retained_source_atoms_v001.mjs';
+  });
+  const result = checked(context);
+  assert.equal(
+    result.violations.some((entry) =>
+      entry.code === 'PACKAGE_BINDING_MISMATCH'
+      && entry.path
+        === '$.sourcePackage.files[5].value.sourceGateBinding.gateAImplementationFiles'),
+    true,
+  );
+});
+
+test('semantic jobのGate A role不一致はjob違反にする', () => {
+  const context = makeFixture();
+  context.job.value.implementationBinding.dependencyFiles[2].role =
+    'otherGateARetainedSourceAtomsCore';
+  refreshJobSnapshots(context);
+  const result = checked(context);
+  assert.equal(
+    result.violations.some((entry) => entry.code === 'CAPTION_B1_JOB_INVALID'),
+    true,
+  );
+});
+
 test('manifest生成時package core SHAとsemantic job live SHAの差だけでは違反にしない', () => {
   const context = makeFixture();
   const manifestEntry = context.sourcePackageObservation.artifactReads[5];

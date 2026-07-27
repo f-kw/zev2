@@ -2402,8 +2402,7 @@ const observePackage = (context, state) => {
     const semanticDependencies = job.implementationBinding.dependencyFiles.slice(1);
     if (gateDependencies.length !== semanticDependencies.length
       || gateDependencies.some((binding, index) =>
-        binding.path !== semanticDependencies[index]?.path
-        || binding.fileSha256 !== semanticDependencies[index]?.fileSha256)) {
+        binding.path !== semanticDependencies[index]?.path)) {
       addViolation(
         state,
         'PACKAGE_BINDING_MISMATCH',

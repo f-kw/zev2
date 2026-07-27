@@ -76,6 +76,8 @@ const TIMEOUT_MILLISECONDS = 600_000;
 const SERVER_TIMEOUT_SECONDS = 600;
 const INPUT_PRICE_USD_PER_MILLION = '1.50';
 const OUTPUT_PRICE_USD_PER_MILLION = '7.50';
+const SHA256_PATTERN = /^[0-9a-f]{64}$/u;
+const FORMAL_ID_PATTERN = /^[A-Za-z0-9][A-Za-z0-9._-]*$/u;
 
 const B1_DIRECT_IMPLEMENTATIONS = Object.freeze([
   ['packageCore', 'evals/clip_composition/presentation_caption_semantic_source_package_v001.mjs'],
@@ -433,6 +435,57 @@ const safeFacts = (facts) => {
       || typeof value === 'boolean'));
 };
 
+const B6_CONFIG_KEYS = Object.freeze([
+  'attemptId',
+  'requestPath',
+  'expectedRequestSha256',
+  'b5ManifestPath',
+  'outputRoot',
+  'rawResponsePath',
+  'semanticRawPath',
+  'b1JobPath',
+  'b1ReportPath',
+  'b4JobPath',
+  'b4PairId',
+  'b4OutputRoot',
+  'b4RunnerOutputPath',
+  'b4DisplayPlanPath',
+  'b4StaticTemplatePath',
+  'sourcePackageRoot',
+  'modelId',
+  'endpoint',
+  'inputPriceUsdPerMillion',
+  'outputPriceUsdPerMillion',
+]);
+
+const validateB6ConfiguredFormalInput = (config) => {
+  if (config === null || typeof config !== 'object' || Array.isArray(config)
+    || JSON.stringify(Object.keys(config).sort())
+      !== JSON.stringify([...B6_CONFIG_KEYS].sort())) {
+    stop('B6_CONFIG_SHAPE_INVALID');
+  }
+  if (!FORMAL_ID_PATTERN.test(config.attemptId)
+    || !FORMAL_ID_PATTERN.test(config.b4PairId)
+    || !FORMAL_ID_PATTERN.test(config.modelId)
+    || !SHA256_PATTERN.test(config.expectedRequestSha256)) {
+    stop('B6_CONFIG_VALUE_INVALID');
+  }
+  for (const key of B6_CONFIG_KEYS.filter((entry) =>
+    entry.endsWith('Path') || entry.endsWith('Root'))) {
+    repositoryAbsolute(config[key]);
+  }
+  const expectedEndpoint =
+    `https://generativelanguage.googleapis.com/v1beta/models/${config.modelId}`
+    + ':generateContent';
+  if (config.endpoint !== expectedEndpoint
+    || config.rawResponsePath
+      !== `${config.outputRoot}/generate-content-response.raw.json`) {
+    stop('B6_CONFIG_RELATION_INVALID');
+  }
+  decimalPriceParts(config.inputPriceUsdPerMillion);
+  decimalPriceParts(config.outputPriceUsdPerMillion);
+};
+
 export async function executePresentationCaptionGateB6V001({
   config = PRESENTATION_CAPTION_GATE_B6_FORMAL_CONFIG_V001,
   apiKey = process.env.GEMINI_API_KEY,
@@ -452,17 +505,11 @@ export async function executePresentationCaptionGateB6V001({
       || typeof continuePipeline !== 'function') {
       stop('B6_EXECUTION_DEPENDENCY_INVALID');
     }
-    if (config.expectedRequestSha256 !== REQUEST_SHA256
-      || config.attemptId !== ATTEMPT_ID
-      || config.modelId !== MODEL_ID
-      || config.endpoint !== ENDPOINT
-      || config.rawResponsePath !== `${config.outputRoot}/generate-content-response.raw.json`) {
-      stop('B6_FIXED_CONFIG_MISMATCH');
-    }
+    validateB6ConfiguredFormalInput(config);
     const request = await readStable(config.requestPath);
-    if (request.fileSha256 !== REQUEST_SHA256) {
+    if (request.fileSha256 !== config.expectedRequestSha256) {
       stop('B5_FIXED_REQUEST_SHA256_MISMATCH', {
-        expected: REQUEST_SHA256,
+        expected: config.expectedRequestSha256,
         observed: request.fileSha256,
       });
     }
@@ -965,27 +1012,30 @@ export async function continuePresentationCaptionGateB6ThroughB1B4V001({
   }
 }
 
-const FORMAL_PREEXISTENCE_PATHS = Object.freeze([
-  OUTPUT_ROOT,
-  SEMANTIC_RAW_PATH,
-  B1_JOB_PATH,
-  B4_JOB_PATH,
-  B4_OUTPUT_ROOT,
-  `${B4_OUTPUT_ROOT}.lock`,
-  `${B4_OUTPUT_ROOT}.work`,
+const formalPreexistencePaths = (config) => Object.freeze([
+  config.outputRoot,
+  config.semanticRawPath,
+  config.b1JobPath,
+  config.b4JobPath,
+  config.b4OutputRoot,
+  `${config.b4OutputRoot}.lock`,
+  `${config.b4OutputRoot}.work`,
 ]);
 
-export async function runPresentationCaptionGateB6FormalV001({
+export async function runPresentationCaptionGateB6ConfiguredFormalV001({
+  config,
   apiKey = process.env.GEMINI_API_KEY,
   fetchImplementation = globalThis.fetch,
   timeoutSignalFactory = (milliseconds) => AbortSignal.timeout(milliseconds),
   currentDate = new Date(),
-} = {}) {
+  continuePipeline = continuePresentationCaptionGateB6ThroughB1B4V001,
+}) {
   try {
+    validateB6ConfiguredFormalInput(config);
     await ensureRepositoryDirectory(
-      B1_JOB_PATH.slice(0, B1_JOB_PATH.lastIndexOf('/')),
+      config.b1JobPath.slice(0, config.b1JobPath.lastIndexOf('/')),
     );
-    for (const pathValue of FORMAL_PREEXISTENCE_PATHS) {
+    for (const pathValue of formalPreexistencePaths(config)) {
       if (await pathExists(pathValue)) {
         return {
           status: 'stopped',
@@ -998,9 +1048,9 @@ export async function runPresentationCaptionGateB6FormalV001({
       }
     }
     await Promise.all([
-      readStable(REQUEST_PATH),
-      readStable(B5_MANIFEST_PATH),
-      readStable(B4_STATIC_TEMPLATE_PATH),
+      readStable(config.requestPath),
+      readStable(config.b5ManifestPath),
+      readStable(config.b4StaticTemplatePath),
       ...B1_DIRECT_IMPLEMENTATIONS.map(([, path]) => readStable(path)),
       ...B1_DEPENDENCY_IMPLEMENTATIONS.map(([, path]) => readStable(path)),
       ...B4_DIRECT_IMPLEMENTATIONS.map(([, path]) => readStable(path)),
@@ -1018,6 +1068,22 @@ export async function runPresentationCaptionGateB6FormalV001({
     };
   }
   return executePresentationCaptionGateB6V001({
+    config,
+    apiKey,
+    fetchImplementation,
+    timeoutSignalFactory,
+    currentDate,
+    continuePipeline,
+  });
+}
+
+export async function runPresentationCaptionGateB6FormalV001({
+  apiKey = process.env.GEMINI_API_KEY,
+  fetchImplementation = globalThis.fetch,
+  timeoutSignalFactory = (milliseconds) => AbortSignal.timeout(milliseconds),
+  currentDate = new Date(),
+} = {}) {
+  return runPresentationCaptionGateB6ConfiguredFormalV001({
     config: PRESENTATION_CAPTION_GATE_B6_FORMAL_CONFIG_V001,
     apiKey,
     fetchImplementation,
