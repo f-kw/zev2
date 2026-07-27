@@ -248,16 +248,16 @@ test('固定requestをbyte同一で一回だけ送り、raw保存後にB1→B4�
     ));
     assert.equal(
       sha256(fixedRequest),
-      'd37363247724a664521fc68c396a5f6d307a1b340c70c032a79a08837213fe88',
+      '92b8bee3426d6ad0822f0e81acb832a2340d468362ecff3d5b31f5a1b52bcfc0',
     );
     assert.equal(
       PRESENTATION_CAPTION_GATE_B6_FORMAL_CONFIG_V001.attemptId,
-      'DmWu0jVQfTE-candidate-13-caption-b6-v003',
+      'DmWu0jVQfTE-candidate-13-caption-b6-v004',
     );
     assert.equal(
       PRESENTATION_CAPTION_GATE_B6_FORMAL_CONFIG_V001.outputRoot,
       'evals/clip_composition/outputs/presentation/caption-gate-b6/'
-        + 'DmWu0jVQfTE-candidate-13-v003',
+        + 'DmWu0jVQfTE-candidate-13-v004',
     );
     const semanticText = ' \n{"status":"complete","containers":[]}\n ';
     const generated = response(responseEnvelope({semanticText}));
@@ -316,7 +316,7 @@ test('固定requestをbyte同一で一回だけ送り、raw保存後にB1→B4�
     assert.equal(manifest.status, 'passed_pending_human_review');
     assert.equal(
       manifest.attemptId,
-      'DmWu0jVQfTE-candidate-13-caption-b6-v003',
+      'DmWu0jVQfTE-candidate-13-caption-b6-v004',
     );
     assert.equal(manifest.transport.generateContentCalls, 1);
     assert.equal(manifest.transport.automaticRetries, 0);
@@ -595,11 +595,11 @@ test('実packageと有効な合成回答を正式B1→B4経路へ通し表示計
     ), 'utf8'));
     assert.equal(
       b1Job.jobId,
-      'DmWu0jVQfTE-candidate-13-caption-b6-v003',
+      'DmWu0jVQfTE-candidate-13-caption-b6-v004',
     );
     assert.equal(
       b4Job.jobId,
-      'DmWu0jVQfTE-candidate-13-caption-b6-v003',
+      'DmWu0jVQfTE-candidate-13-caption-b6-v004',
     );
     const manifest = JSON.parse(await readFile(
       resolve(fixture.outputRoot, 'b6-manifest.json'),
