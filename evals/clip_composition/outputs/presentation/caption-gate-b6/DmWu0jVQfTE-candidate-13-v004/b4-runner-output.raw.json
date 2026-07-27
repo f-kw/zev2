@@ -1,0 +1,371 @@
+{
+  "schemaVersion": "presentation-caption-display-pair-validation-report-v002",
+  "validatorVersion": "presentation-caption-display-pair-validator-v002",
+  "status": "passed_pending_human_review",
+  "failureStage": null,
+  "jobBinding": {
+    "path": "evals/clip_composition/outputs/presentation/caption-display-pair-generation-jobs/DmWu0jVQfTE-candidate-13-caption-b6-v004.json",
+    "fileSha256": "8de4bdbd3f40583c3a3cd32010489dd44ac59ab9f343fb54abf5c9e95f9b2f6f"
+  },
+  "implementationBinding": {
+    "gitCommit": "6bf4ff9bf5ca745f31dbce6bfa0dbcf4f116911e",
+    "files": [
+      {
+        "role": "displayPairCore",
+        "path": "evals/clip_composition/presentation_caption_display_pair_v003.mjs",
+        "fileSha256": "925244d173bc4dfa36276ccc5f65a51c3562aa020e035be21ac072ac6c3cead1"
+      },
+      {
+        "role": "displayPairRunner",
+        "path": "evals/clip_composition/run_presentation_caption_display_pair_job_v001.mjs",
+        "fileSha256": "b30052e6c6fc2aeffd09a3fa249eec76019e48cd10e5298008f6bfa3ed3a7c8c"
+      }
+    ],
+    "dependencyFiles": [
+      {
+        "role": "semanticCore",
+        "path": "evals/clip_composition/presentation_caption_semantic_output_v001.mjs",
+        "fileSha256": "9c8653072e2ec69805014ba534192039eebc0b8fefe1c1a87f2c4f9c4ad64f4c"
+      },
+      {
+        "role": "semanticRunner",
+        "path": "evals/clip_composition/run_presentation_caption_semantic_output_check_v001.mjs",
+        "fileSha256": "d13e1becf0745915455947bc01e4175555ef19dc08ba9f69ee19566f6c119018"
+      },
+      {
+        "role": "captionCoreV003",
+        "path": "evals/clip_composition/presentation_caption_contract_v003.mjs",
+        "fileSha256": "a090caf2b1939bbc226a306cadd580b887ce34f0a0436af96e4f94480c4b9292"
+      },
+      {
+        "role": "instructionCoreV003",
+        "path": "evals/clip_composition/presentation_instruction_contract_v003.mjs",
+        "fileSha256": "24bf6b6f81f4039bf8a19a7a57391c347645231692287b89d7bf75935e2c86dd"
+      },
+      {
+        "role": "sourceSpeakerPolicy",
+        "path": "evals/clip_composition/presentation_source_speaker_policy_v001.mjs",
+        "fileSha256": "56d2d03d5bcee3a409b27acc9819a48c95abb867cdc00fd0b2bf2fe87bb9477b"
+      },
+      {
+        "role": "timelineV002",
+        "path": "evals/clip_composition/presentation_base_media_timeline_v002.mjs",
+        "fileSha256": "a1f72079f0e970cb5c6a67817427aa5909f2453ad0d04e81150cfd29c5b41ab2"
+      },
+      {
+        "role": "layoutPreflightCore",
+        "path": "evals/clip_composition/inspect_presentation_preset_layout.ts",
+        "fileSha256": "5b0ee2280ee2db3252b6b1a232ca5b59c7bd096502a520fec8a69d6685040442"
+      },
+      {
+        "role": "rendererLayoutCore",
+        "path": "runner/src/telop/telop-render-model.ts",
+        "fileSha256": "5c32103a6f8faaa3ea1d30bb4624f0ca092385c8b77446aa5f51e3e3a0583412"
+      },
+      {
+        "role": "presetRegistry",
+        "path": "evals/clip_composition/registries/presentation/normal-landscape-preset-registry-v001/preset-registry.json",
+        "fileSha256": "8e9b0a039c8a4c9edf2c66b1df343c1d892d4688ebc4886a9af322bd44a6e5a8"
+      },
+      {
+        "role": "presetValidationIndex",
+        "path": "evals/clip_composition/registries/presentation/normal-landscape-preset-registry-v001/preset-validation-index.json",
+        "fileSha256": "d2665c7947564a56955bbc47de7d95d038c64487ea71b6cbc1a2cc61667c05a1"
+      },
+      {
+        "role": "materialValidationIndex",
+        "path": "evals/clip_composition/registries/presentation/normal-landscape-preset-registry-v001/material-validation-index.json",
+        "fileSha256": "98213035bc6e395b090d7cff2639d4bf707fb838b7df50cb51bc60ab95d4758e"
+      },
+      {
+        "role": "trustedRegistryBindings",
+        "path": "evals/clip_composition/registries/presentation/normal-landscape-preset-registry-v001/trusted-registry-bindings.json",
+        "fileSha256": "b26db5c57aac5dd290e084d953350778b527c6eb21f66f62dc7431bf24482fff"
+      },
+      {
+        "role": "sharedJsonContractCore",
+        "path": "evals/clip_composition/presentation_caption_semantic_source_package_v001.mjs",
+        "fileSha256": "c81ef4b9829d8bc3d5bc84a048eaae6886caec90cbb77b1635af916512cdd1b6"
+      }
+    ]
+  },
+  "runtimeBinding": {
+    "resolvedNodePath": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+    "nodeBinarySha256": "de4f3b493b15e7a0ee311f6a2c6dbf93858052f5802aa91cfafa2c57e9d6bc5c",
+    "nodeVersion": "v20.19.6",
+    "icuVersion": "77.1",
+    "resolvedLocale": "ja",
+    "resolvedGranularity": "word",
+    "layoutExecutionBinding": {
+      "tsxEntryLogicalPath": "runner/node_modules/tsx/dist/cli.mjs",
+      "tsxEntryRealPath": "/Users/kawafmm/workspace/zev2/node_modules/.pnpm/tsx@4.22.3/node_modules/tsx/dist/cli.mjs",
+      "tsxEntryFileSha256": "5c916fa6ecad44aedbb01ca5815536d00ea07de6b73eeb9443d317326b0218d8",
+      "tsxPackageVersion": "4.22.3",
+      "tsxPackageTreeCanonicalSha256": "0b43d39cc98458933b23ca958e94b6c68311974e3b9de67e8f2e2c733a9afe7a",
+      "esbuildEntryRealPath": "/Users/kawafmm/workspace/zev2/node_modules/.pnpm/esbuild@0.28.0/node_modules/esbuild/lib/main.js",
+      "esbuildEntryFileSha256": "41abefec8704d24e069532fb38a418905d16f8fee4da88e54ecd65adc71f5507",
+      "esbuildPackageVersion": "0.28.0",
+      "esbuildPackageTreeCanonicalSha256": "5342a4075d5426e7518c9faaf68611da1037d70957583ceae42087abddffe532",
+      "esbuildBinaryRealPath": "/Users/kawafmm/workspace/zev2/node_modules/.pnpm/@esbuild+darwin-arm64@0.28.0/node_modules/@esbuild/darwin-arm64/bin/esbuild",
+      "esbuildBinaryFileSha256": "6f0e1237f63fa3bc03963e58f0b0be1b9bfacd8f2dc9a3f28483e8f97e4ef2d6"
+    }
+  },
+  "inputBindings": {
+    "sourcePackageBinding": {
+      "rootPath": "evals/clip_composition/outputs/presentation/segmenter-boundary-evidence/DmWu0jVQfTE-candidate-13-v001",
+      "manifest": {
+        "path": "evals/clip_composition/outputs/presentation/segmenter-boundary-evidence/DmWu0jVQfTE-candidate-13-v001/package-manifest.json",
+        "fileSha256": "da4ceb97487833bf50cbbb01252908b04d7e63230d667f625697557d6ae5ae96",
+        "canonicalSha256": "2a52aab31e9ae04defc8ce99693290087b59722af20a02cd3e40a7ba4970f3d1"
+      },
+      "validationReport": {
+        "path": "evals/clip_composition/outputs/presentation/segmenter-boundary-evidence/DmWu0jVQfTE-candidate-13-v001/package-validation-report.json",
+        "fileSha256": "18e9b315bba962c16e7e60112c9f08156e4d7ad7b0babef3ec08c0bfebfa8661",
+        "canonicalSha256": "0b2813cdf4d28318310d8d769122ef5758297efbddaf60b1aac9218df0571a1e"
+      }
+    },
+    "semanticCheckBinding": {
+      "job": {
+        "path": "evals/clip_composition/outputs/presentation/caption-semantic-output-check-jobs/DmWu0jVQfTE-candidate-13-caption-b6-v004.json",
+        "fileSha256": "b0556eac878e9f204970445d4261549904282f73debb4490ad1322ca000de8cd",
+        "canonicalSha256": "dacc605fca99bd8588619d67561605d4e8a038fcf1170d2d553bf50e8f4382d5"
+      },
+      "rawSemanticOutput": {
+        "path": "evals/clip_composition/outputs/presentation/caption-semantic-raw-outputs/DmWu0jVQfTE-candidate-13-caption-b6-v004.json",
+        "fileSha256": "5779a88f25433546badf28da35be6cc419eecb85c68a504468369d7a91e3f7dd",
+        "canonicalSha256": "e1d068be936d4f7517320473ce06a69f68a05500c108a08b7196793b02bec112"
+      },
+      "validationReport": {
+        "path": "evals/clip_composition/outputs/presentation/caption-gate-b6/DmWu0jVQfTE-candidate-13-v004/semantic-output-validation-report.json",
+        "fileSha256": "695dca84f05f32523a5e648fb4753c9c7f989b08e3883edbfad1f56079f24bab",
+        "canonicalSha256": "b37f3814efbde175b48f036f98e5578ec26e4f0d34e1df5b3422a147c7d34efc"
+      },
+      "expectedCompilerInputObservedByteSha256": "aa201b4369d116f4e04449b6d4d59ec80a77a55ad9ca641bc0d29abacb9581fa",
+      "expectedCompilerInputCanonicalSha256": "1e714993cf8fdd812d401ac4d23f05d4208dccc6b61950b4e14735ee2730139c"
+    },
+    "retainedSourceBinding": {
+      "rootPath": "evals/clip_composition/outputs/presentation/retained-source-atoms/DmWu0jVQfTE-candidate-13-v001",
+      "generationManifest": {
+        "path": "evals/clip_composition/outputs/presentation/retained-source-atoms/DmWu0jVQfTE-candidate-13-v001/generation-manifest.json",
+        "fileSha256": "18094dd3729eead88c498f997e883253a1481ee8a33279882350aacfcf869cf1",
+        "canonicalSha256": "8bf3394bfc762537d441c681b124e73b538b6581ba1be2f06440ffccc9305e24"
+      },
+      "sourceAtoms": {
+        "path": "evals/clip_composition/outputs/presentation/retained-source-atoms/DmWu0jVQfTE-candidate-13-v001/source-atoms.json",
+        "fileSha256": "8656549ec3fbbc0fb9447be7b9c2e784d22ebd18f08ee3e24c474ee62225c6d3",
+        "canonicalSha256": "0bf1e10ab94388ec9521cb2270e6c339e7c7b6d8317443b469606b6b353df43c"
+      },
+      "validationReport": {
+        "path": "evals/clip_composition/outputs/presentation/retained-source-atoms/DmWu0jVQfTE-candidate-13-v001/validation-report.json",
+        "fileSha256": "be32244280a2564eda9a716a83d04da38f241120a6d2ba40e72e867072fc2ae6",
+        "canonicalSha256": "f1d30f46131655d0a2fe82af4cf9ced5967811e808ad5ccafb725d4bbd10b1dc"
+      }
+    },
+    "baseMediaBinding": {
+      "rootPath": "evals/clip_composition/outputs/presentation/base-media/DmWu0jVQfTE-candidate-13-v002",
+      "generationManifest": {
+        "path": "evals/clip_composition/outputs/presentation/base-media/DmWu0jVQfTE-candidate-13-v002/generation-manifest.json",
+        "fileSha256": "e06a606e7348a8c30a743edd9acd5da96e035125b2b69a33257d0c31cf9b81db",
+        "canonicalSha256": "c7dd10e954e41e897df42bdbd852c842a5925055488aec4c1b95c1271b201678"
+      },
+      "timeline": {
+        "path": "evals/clip_composition/outputs/presentation/base-media/DmWu0jVQfTE-candidate-13-v002/timeline.json",
+        "fileSha256": "802f570dd4f8ea90ef63b0b9afb9a026abf0b18e43e51f2aab51bd62c2180fec",
+        "canonicalSha256": "033486434fe986dbead01d8415b9089aedb6382fed6c271a8b3a525f69d1f6b7"
+      },
+      "validationReport": {
+        "path": "evals/clip_composition/outputs/presentation/base-media/DmWu0jVQfTE-candidate-13-v002/validation-report.json",
+        "fileSha256": "e906b4424609176d019ddc4c8d314df056feb87de1e993bf84f247eff5c21079",
+        "canonicalSha256": "9009f00add4e3bdfb7e35109be3decd5aa1af18a25f56ddbb2959431ab4c8361"
+      },
+      "baseMedia": {
+        "path": "evals/clip_composition/outputs/presentation/base-media/DmWu0jVQfTE-candidate-13-v002/base-media.mp4",
+        "fileSha256": "c0677893902b5a1eaf79b2a3937d67a477f270810200f7c6c01457b42b803c48"
+      }
+    },
+    "registryBinding": {
+      "rootPath": "evals/clip_composition/registries/presentation/normal-landscape-preset-registry-v001",
+      "trustedRegistryBindings": {
+        "path": "evals/clip_composition/registries/presentation/normal-landscape-preset-registry-v001/trusted-registry-bindings.json",
+        "fileSha256": "b26db5c57aac5dd290e084d953350778b527c6eb21f66f62dc7431bf24482fff",
+        "canonicalSha256": "bfbbcb5c611313d368305e6e8d552ddcdaf41949ed8d8f074485c8ed0aa2d43e"
+      },
+      "presetRegistry": {
+        "path": "evals/clip_composition/registries/presentation/normal-landscape-preset-registry-v001/preset-registry.json",
+        "fileSha256": "8e9b0a039c8a4c9edf2c66b1df343c1d892d4688ebc4886a9af322bd44a6e5a8",
+        "canonicalSha256": "5915d6aae47681c43ea202a20eee16cbf669abfe24fdc832f75fb127ad46dca4"
+      },
+      "presetValidationIndex": {
+        "path": "evals/clip_composition/registries/presentation/normal-landscape-preset-registry-v001/preset-validation-index.json",
+        "fileSha256": "d2665c7947564a56955bbc47de7d95d038c64487ea71b6cbc1a2cc61667c05a1",
+        "canonicalSha256": "40609dbc63b7c2d1f4c2cd92ee22c493c08382c0d63c27ea06087535f5882067"
+      },
+      "materialValidationIndex": {
+        "path": "evals/clip_composition/registries/presentation/normal-landscape-preset-registry-v001/material-validation-index.json",
+        "fileSha256": "98213035bc6e395b090d7cff2639d4bf707fb838b7df50cb51bc60ab95d4758e",
+        "canonicalSha256": "3958ad2d21233342e49aedd29cbd337785a228e1063d1802b64e92dc1793d1fc"
+      }
+    },
+    "compilerInput": {
+      "observedByteSha256": "aa201b4369d116f4e04449b6d4d59ec80a77a55ad9ca641bc0d29abacb9581fa",
+      "canonicalSha256": "1e714993cf8fdd812d401ac4d23f05d4208dccc6b61950b4e14735ee2730139c"
+    }
+  },
+  "outputBindings": {
+    "displayPlan": {
+      "path": "display-plan.json",
+      "fileSha256": "c8fda888be8a10eb4f76ce5c21b9379b4e3b49d8e307f6007ebabc394a866207",
+      "canonicalSha256": "8f035a20260579678892aab5c2cd64fb0b7abe4f662667540f7cc2b599556c58"
+    },
+    "instructionBundle": {
+      "path": "instruction-bundle.json",
+      "fileSha256": "c9fc3b1512bd803084f17f9472ef91e6b4bb9c94ba3b9b0ded1947b63d640683",
+      "canonicalSha256": "cf901f6c7ac14ce6b7f322b806a0ef6d721b3abb4d3ef6f2619aff2add0e0ef0"
+    },
+    "captionCheckReport": {
+      "path": "caption-check-report.json",
+      "fileSha256": "74646d20a284161c49a316fa7ef20a7690351c4eaaf68b0828badedea838b0b7",
+      "canonicalSha256": "5d481360caf99a75c051249d69405b6043f8881ea43ca5b26fc11fb29c99b317"
+    },
+    "layoutPreflight": {
+      "path": "layout-preflight.json",
+      "fileSha256": "5ead635f00a3690db63dc21aa4f97ef32068206401bbe70e4f8552be8a9fd2ea",
+      "canonicalSha256": "731df23ffe5642c08225cabaed70f3f61f62e05dcf57748d778727b0f5b9285c"
+    },
+    "reviewRenderRequest": {
+      "path": "review-render-request.json",
+      "fileSha256": "ffb7b21270686bcfd757c7ec768f7fca966fd126eacd993f19a2a7a247ee4c78",
+      "canonicalSha256": "b2d5ea7bfaa08d80c242c5dc84282a7b0b2eddf7107136c99c7a318409aa6eec"
+    },
+    "pairGenerationManifest": {
+      "path": "pair-generation-manifest.json",
+      "fileSha256": "ec25cf71d3b93fc1516e31683477036b4dd4db063599f89519868af7fe28f7ef",
+      "canonicalSha256": "b2076840cd8a2e1e518499c42eec1325d319e92315621729d9bd43ff0ef11621"
+    }
+  },
+  "checks": [
+    {
+      "name": "jobBinding",
+      "status": "passed",
+      "violationCodes": []
+    },
+    {
+      "name": "implementationBinding",
+      "status": "passed",
+      "violationCodes": []
+    },
+    {
+      "name": "inputBinding",
+      "status": "passed",
+      "violationCodes": []
+    },
+    {
+      "name": "runtimeBinding",
+      "status": "passed",
+      "violationCodes": []
+    },
+    {
+      "name": "semanticSeam",
+      "status": "passed",
+      "violationCodes": []
+    },
+    {
+      "name": "sourceAtoms",
+      "status": "passed",
+      "violationCodes": []
+    },
+    {
+      "name": "timeline",
+      "status": "passed",
+      "violationCodes": []
+    },
+    {
+      "name": "displayPlan",
+      "status": "passed",
+      "violationCodes": []
+    },
+    {
+      "name": "resolutionPackage",
+      "status": "passed",
+      "violationCodes": []
+    },
+    {
+      "name": "instructionBundle",
+      "status": "passed",
+      "violationCodes": []
+    },
+    {
+      "name": "captionG1G3",
+      "status": "passed",
+      "violationCodes": []
+    },
+    {
+      "name": "layoutPreflight",
+      "status": "passed",
+      "violationCodes": []
+    },
+    {
+      "name": "reviewState",
+      "status": "passed",
+      "violationCodes": []
+    },
+    {
+      "name": "reviewRenderRequest",
+      "status": "passed",
+      "violationCodes": []
+    },
+    {
+      "name": "determinism",
+      "status": "passed",
+      "violationCodes": []
+    },
+    {
+      "name": "readOnlyCheck",
+      "status": "passed",
+      "violationCodes": []
+    },
+    {
+      "name": "publication",
+      "status": "passed",
+      "violationCodes": []
+    }
+  ],
+  "violations": [],
+  "observedProjection": {
+    "sourceAtomCount": 354,
+    "containerCount": 3,
+    "meaningGroupCount": 20,
+    "cueCount": 20,
+    "lineCount": 40,
+    "timelineSegmentCount": 2,
+    "maximumObservedLineLogicalWidth": 30,
+    "positiveCueOverlapCount": 0,
+    "sourceAtomPositiveOverlapObservationCount": 0
+  },
+  "reviewState": {
+    "stage": "review_input_ready",
+    "reviewOnly": true,
+    "publicationAllowed": false,
+    "segmenterBoundaryEvidence": "passed",
+    "semanticStructure": "passed",
+    "naturalBoundary": "pending_human_review",
+    "semanticReadability": "pending_human_review",
+    "layoutPreflight": "passed",
+    "renderedLayoutQc": "pending_render_qc",
+    "humanAssessment": "not_requested"
+  },
+  "readOnlyObservation": {
+    "status": "passed",
+    "beforeCanonicalSha256": "f6ac4c2578ac6f9c4027d6f7f4d0a29f60c8cadd8f3617247707ba0257a5087b",
+    "afterCanonicalSha256": "f6ac4c2578ac6f9c4027d6f7f4d0a29f60c8cadd8f3617247707ba0257a5087b",
+    "unchanged": true
+  },
+  "scope": {
+    "validatedState": "display-pair-ready-for-review-render",
+    "semanticQualityVerified": false,
+    "naturalBreakQualityVerified": false,
+    "onScreenReadabilityVerified": false,
+    "renderedLayoutQcVerified": false,
+    "publicationQualityVerified": false
+  }
+}

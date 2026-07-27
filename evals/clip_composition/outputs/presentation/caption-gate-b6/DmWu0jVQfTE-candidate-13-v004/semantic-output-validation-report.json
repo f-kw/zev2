@@ -1,0 +1,172 @@
+{
+  "schemaVersion": "presentation-caption-semantic-output-validation-report-v001",
+  "status": "passed",
+  "failureStage": null,
+  "jobBinding": {
+    "path": "evals/clip_composition/outputs/presentation/caption-semantic-output-check-jobs/DmWu0jVQfTE-candidate-13-caption-b6-v004.json",
+    "fileSha256": "b0556eac878e9f204970445d4261549904282f73debb4490ad1322ca000de8cd"
+  },
+  "implementationBinding": {
+    "gitCommit": "6bf4ff9bf5ca745f31dbce6bfa0dbcf4f116911e",
+    "files": [
+      {
+        "role": "packageCore",
+        "path": "evals/clip_composition/presentation_caption_semantic_source_package_v001.mjs",
+        "fileSha256": "c81ef4b9829d8bc3d5bc84a048eaae6886caec90cbb77b1635af916512cdd1b6"
+      },
+      {
+        "role": "semanticCore",
+        "path": "evals/clip_composition/presentation_caption_semantic_output_v001.mjs",
+        "fileSha256": "9c8653072e2ec69805014ba534192039eebc0b8fefe1c1a87f2c4f9c4ad64f4c"
+      },
+      {
+        "role": "semanticRunner",
+        "path": "evals/clip_composition/run_presentation_caption_semantic_output_check_v001.mjs",
+        "fileSha256": "d13e1becf0745915455947bc01e4175555ef19dc08ba9f69ee19566f6c119018"
+      }
+    ],
+    "dependencyFiles": [
+      {
+        "role": "textLayoutImplementation",
+        "path": "evals/clip_composition/presentation_renderer_text_layout_v001.mjs",
+        "fileSha256": "066a62adaa7fa3f8b8eda92c82e9a85940e43f372af976edc4b327ef4cf9ce5e"
+      },
+      {
+        "role": "gateACore",
+        "path": "evals/clip_composition/presentation_segmenter_boundary_evidence_v001.mjs",
+        "fileSha256": "dac613292e463897ee2757be75a7d64f3ece9928141765a195ba54a0ebc6007a"
+      },
+      {
+        "role": "gateARetainedSourceAtomsCore",
+        "path": "evals/clip_composition/presentation_retained_source_atoms_v001.mjs",
+        "fileSha256": "11036f09ceac1d1f5e19f5487eeae8d39c84ec7675cc8f9d693a203182d27f28"
+      },
+      {
+        "role": "gateARunner",
+        "path": "evals/clip_composition/run_presentation_segmenter_boundary_preflight_v001.mjs",
+        "fileSha256": "3f35066d43746de3b7527b0e1dc3317faeea828f8beab8bb4dde8ae072a50352"
+      }
+    ]
+  },
+  "runtimeBinding": {
+    "nodeBinarySha256": "de4f3b493b15e7a0ee311f6a2c6dbf93858052f5802aa91cfafa2c57e9d6bc5c",
+    "nodeVersion": "v20.19.6",
+    "icuVersion": "77.1",
+    "resolvedLocale": "ja",
+    "resolvedGranularity": "word",
+    "diagnostics": {
+      "nodeExecutableFileName": "node",
+      "platform": "darwin",
+      "arch": "arm64",
+      "v8Version": "11.3.244.8-node.33",
+      "unicodeVersion": "16.0",
+      "cldrVersion": "47.0"
+    }
+  },
+  "inputBindings": {
+    "sourcePackageManifest": {
+      "path": "evals/clip_composition/outputs/presentation/segmenter-boundary-evidence/DmWu0jVQfTE-candidate-13-v001/package-manifest.json",
+      "fileSha256": "da4ceb97487833bf50cbbb01252908b04d7e63230d667f625697557d6ae5ae96",
+      "canonicalSha256": "2a52aab31e9ae04defc8ce99693290087b59722af20a02cd3e40a7ba4970f3d1"
+    },
+    "sourcePackageValidationReport": {
+      "path": "evals/clip_composition/outputs/presentation/segmenter-boundary-evidence/DmWu0jVQfTE-candidate-13-v001/package-validation-report.json",
+      "fileSha256": "18e9b315bba962c16e7e60112c9f08156e4d7ad7b0babef3ec08c0bfebfa8661",
+      "canonicalSha256": "0b2813cdf4d28318310d8d769122ef5758297efbddaf60b1aac9218df0571a1e"
+    },
+    "rawSemanticOutput": {
+      "path": "evals/clip_composition/outputs/presentation/caption-semantic-raw-outputs/DmWu0jVQfTE-candidate-13-caption-b6-v004.json",
+      "observationStatus": "read",
+      "fileSha256": "5779a88f25433546badf28da35be6cc419eecb85c68a504468369d7a91e3f7dd",
+      "canonicalSha256": "e1d068be936d4f7517320473ce06a69f68a05500c108a08b7196793b02bec112"
+    }
+  },
+  "checks": [
+    {
+      "name": "jobBinding",
+      "status": "passed",
+      "violationCodes": []
+    },
+    {
+      "name": "implementationBinding",
+      "status": "passed",
+      "violationCodes": []
+    },
+    {
+      "name": "inputBinding",
+      "status": "passed",
+      "violationCodes": []
+    },
+    {
+      "name": "runtimeBinding",
+      "status": "passed",
+      "violationCodes": []
+    },
+    {
+      "name": "packageShape",
+      "status": "passed",
+      "violationCodes": []
+    },
+    {
+      "name": "semanticOutput",
+      "status": "passed",
+      "violationCodes": []
+    },
+    {
+      "name": "compilerBuild",
+      "status": "passed",
+      "violationCodes": []
+    },
+    {
+      "name": "compilerInput",
+      "status": "passed",
+      "violationCodes": []
+    },
+    {
+      "name": "deterministicExpansion",
+      "status": "passed",
+      "violationCodes": []
+    },
+    {
+      "name": "determinism",
+      "status": "passed",
+      "violationCodes": []
+    },
+    {
+      "name": "readOnlyCheck",
+      "status": "passed",
+      "violationCodes": []
+    },
+    {
+      "name": "jobStability",
+      "status": "passed",
+      "violationCodes": []
+    }
+  ],
+  "violations": [],
+  "observedProjection": {
+    "containerCount": 3,
+    "meaningGroupCount": 20,
+    "lineCount": 40,
+    "boundaryCandidateCount": 205,
+    "sourceAtomCount": 354,
+    "maximumObservedLineLogicalWidth": 30
+  },
+  "compilerInput": {
+    "status": "generated",
+    "canonicalSha256": "1e714993cf8fdd812d401ac4d23f05d4208dccc6b61950b4e14735ee2730139c",
+    "observedByteSha256": "aa201b4369d116f4e04449b6d4d59ec80a77a55ad9ca641bc0d29abacb9581fa"
+  },
+  "readOnlyObservation": {
+    "status": "verified",
+    "beforeCanonicalSha256": "e496cc37ab866aca1018e8d38120db1b62226bc30c8a06ba47abfe1c2ff12d26",
+    "afterCanonicalSha256": "e496cc37ab866aca1018e8d38120db1b62226bc30c8a06ba47abfe1c2ff12d26",
+    "unchanged": true
+  },
+  "scope": {
+    "validatedState": "semantic-boundary-selection-only",
+    "semanticQualityVerified": false,
+    "naturalBreakQualityVerified": false,
+    "renderReadabilityVerified": false
+  }
+}

@@ -1,0 +1,84 @@
+{
+  "schemaVersion": "presentation-caption-review-render-request-v003",
+  "requestId": "DmWu0jVQfTE-candidate-13-caption-b6-v004-review-render-request",
+  "purpose": "caption-readability-alignment-completeness-review",
+  "reviewOnly": true,
+  "publicationAllowed": false,
+  "displayPlanBinding": {
+    "path": "display-plan.json",
+    "fileSha256": "c8fda888be8a10eb4f76ce5c21b9379b4e3b49d8e307f6007ebabc394a866207",
+    "canonicalSha256": "8f035a20260579678892aab5c2cd64fb0b7abe4f662667540f7cc2b599556c58"
+  },
+  "instructionBundleBinding": {
+    "path": "instruction-bundle.json",
+    "fileSha256": "c9fc3b1512bd803084f17f9472ef91e6b4bb9c94ba3b9b0ded1947b63d640683",
+    "canonicalSha256": "cf901f6c7ac14ce6b7f322b806a0ef6d721b3abb4d3ef6f2619aff2add0e0ef0"
+  },
+  "captionCheckBinding": {
+    "path": "caption-check-report.json",
+    "fileSha256": "74646d20a284161c49a316fa7ef20a7690351c4eaaf68b0828badedea838b0b7",
+    "canonicalSha256": "5d481360caf99a75c051249d69405b6043f8881ea43ca5b26fc11fb29c99b317"
+  },
+  "layoutPreflightBinding": {
+    "path": "layout-preflight.json",
+    "fileSha256": "5ead635f00a3690db63dc21aa4f97ef32068206401bbe70e4f8552be8a9fd2ea",
+    "canonicalSha256": "731df23ffe5642c08225cabaed70f3f61f62e05dcf57748d778727b0f5b9285c"
+  },
+  "baseMediaBinding": {
+    "baseMedia": {
+      "path": "evals/clip_composition/outputs/presentation/base-media/DmWu0jVQfTE-candidate-13-v002/base-media.mp4",
+      "fileSha256": "c0677893902b5a1eaf79b2a3937d67a477f270810200f7c6c01457b42b803c48"
+    },
+    "timeline": {
+      "path": "evals/clip_composition/outputs/presentation/base-media/DmWu0jVQfTE-candidate-13-v002/timeline.json",
+      "fileSha256": "802f570dd4f8ea90ef63b0b9afb9a026abf0b18e43e51f2aab51bd62c2180fec",
+      "canonicalSha256": "033486434fe986dbead01d8415b9089aedb6382fed6c271a8b3a525f69d1f6b7"
+    },
+    "generationManifest": {
+      "path": "evals/clip_composition/outputs/presentation/base-media/DmWu0jVQfTE-candidate-13-v002/generation-manifest.json",
+      "fileSha256": "e06a606e7348a8c30a743edd9acd5da96e035125b2b69a33257d0c31cf9b81db",
+      "canonicalSha256": "c7dd10e954e41e897df42bdbd852c842a5925055488aec4c1b95c1271b201678"
+    },
+    "validationReport": {
+      "path": "evals/clip_composition/outputs/presentation/base-media/DmWu0jVQfTE-candidate-13-v002/validation-report.json",
+      "fileSha256": "e906b4424609176d019ddc4c8d314df056feb87de1e993bf84f247eff5c21079",
+      "canonicalSha256": "9009f00add4e3bdfb7e35109be3decd5aa1af18a25f56ddbb2959431ab4c8361"
+    }
+  },
+  "registryBindings": {
+    "trustedRegistryBindings": {
+      "path": "evals/clip_composition/registries/presentation/normal-landscape-preset-registry-v001/trusted-registry-bindings.json",
+      "fileSha256": "b26db5c57aac5dd290e084d953350778b527c6eb21f66f62dc7431bf24482fff",
+      "canonicalSha256": "bfbbcb5c611313d368305e6e8d552ddcdaf41949ed8d8f074485c8ed0aa2d43e"
+    },
+    "presetRegistry": {
+      "path": "evals/clip_composition/registries/presentation/normal-landscape-preset-registry-v001/preset-registry.json",
+      "fileSha256": "8e9b0a039c8a4c9edf2c66b1df343c1d892d4688ebc4886a9af322bd44a6e5a8",
+      "canonicalSha256": "5915d6aae47681c43ea202a20eee16cbf669abfe24fdc832f75fb127ad46dca4"
+    },
+    "presetValidationIndex": {
+      "path": "evals/clip_composition/registries/presentation/normal-landscape-preset-registry-v001/preset-validation-index.json",
+      "fileSha256": "d2665c7947564a56955bbc47de7d95d038c64487ea71b6cbc1a2cc61667c05a1",
+      "canonicalSha256": "40609dbc63b7c2d1f4c2cd92ee22c493c08382c0d63c27ea06087535f5882067"
+    },
+    "materialValidationIndex": {
+      "path": "evals/clip_composition/registries/presentation/normal-landscape-preset-registry-v001/material-validation-index.json",
+      "fileSha256": "98213035bc6e395b090d7cff2639d4bf707fb838b7df50cb51bc60ab95d4758e",
+      "canonicalSha256": "3958ad2d21233342e49aedd29cbd337785a228e1063d1802b64e92dc1793d1fc"
+    }
+  },
+  "requiredInputState": "review_input_ready",
+  "rendererEntry": "presentation-review-renderer-v003",
+  "expectedOutput": {
+    "state": "review_rendered",
+    "publicationAllowed": false,
+    "requiredQc": [
+      "preset_applied",
+      "no_text_overlap",
+      "inside_safe_area",
+      "no_missing_caption",
+      "base_frame_count_preserved",
+      "base_audio_preserved"
+    ]
+  }
+}
