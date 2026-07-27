@@ -35,6 +35,8 @@ import {
 
 const WORKSPACE_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 const MODEL_ID = 'gemini-3.6-flash';
+const RUN_DIRECTORY_ID = 'DmWu0jVQfTE-candidate-13-v002';
+const ATTEMPT_ID = 'DmWu0jVQfTE-candidate-13-caption-b6-v002';
 const REQUEST_SHA256 =
   '7fa902580b78bb5da3d36025135e4655ab2528e401ba5a76537f2af3c1939ed2';
 const REQUEST_PATH =
@@ -45,19 +47,19 @@ const B5_MANIFEST_PATH =
   + 'DmWu0jVQfTE-candidate-13-v002/b5-manifest.json';
 const OUTPUT_ROOT =
   'evals/clip_composition/outputs/presentation/caption-gate-b6/'
-  + 'DmWu0jVQfTE-candidate-13-v001';
+  + RUN_DIRECTORY_ID;
 const RAW_RESPONSE_PATH = `${OUTPUT_ROOT}/generate-content-response.raw.json`;
 const SEMANTIC_RAW_PATH =
   'evals/clip_composition/outputs/presentation/caption-semantic-raw-outputs/'
-  + 'DmWu0jVQfTE-candidate-13-caption-b6-v001.json';
+  + `${ATTEMPT_ID}.json`;
 const B1_JOB_PATH =
   'evals/clip_composition/outputs/presentation/caption-semantic-output-check-jobs/'
-  + 'DmWu0jVQfTE-candidate-13-caption-b6-v001.json';
+  + `${ATTEMPT_ID}.json`;
 const B1_REPORT_PATH = `${OUTPUT_ROOT}/semantic-output-validation-report.json`;
 const B4_JOB_PATH =
   'evals/clip_composition/outputs/presentation/caption-display-pair-generation-jobs/'
-  + 'DmWu0jVQfTE-candidate-13-caption-b6-v001.json';
-const B4_PAIR_ID = 'DmWu0jVQfTE-candidate-13-caption-b6-v001';
+  + `${ATTEMPT_ID}.json`;
+const B4_PAIR_ID = ATTEMPT_ID;
 const B4_OUTPUT_ROOT =
   `evals/clip_composition/outputs/presentation/caption-display-pairs/${B4_PAIR_ID}`;
 const B4_RUNNER_OUTPUT_PATH = `${OUTPUT_ROOT}/b4-runner-output.raw.json`;
@@ -123,6 +125,7 @@ const B4_DEPENDENCY_IMPLEMENTATIONS = Object.freeze([
 ]);
 
 export const PRESENTATION_CAPTION_GATE_B6_FORMAL_CONFIG_V001 = Object.freeze({
+  attemptId: ATTEMPT_ID,
   requestPath: REQUEST_PATH,
   expectedRequestSha256: REQUEST_SHA256,
   b5ManifestPath: B5_MANIFEST_PATH,
@@ -366,7 +369,7 @@ const makeBaseManifest = ({config, request, executionStartedAt}) => ({
   schemaVersion: 'presentation-caption-gate-b6-manifest-v001',
   status: 'running',
   stage: 'b6-one-shot-generate-accept-and-display-plan',
-  attemptId: 'DmWu0jVQfTE-candidate-13-caption-b6-v001',
+  attemptId: config.attemptId,
   executionStartedAt,
   fixedRequestBinding: {
     path: config.requestPath,
@@ -450,6 +453,7 @@ export async function executePresentationCaptionGateB6V001({
       stop('B6_EXECUTION_DEPENDENCY_INVALID');
     }
     if (config.expectedRequestSha256 !== REQUEST_SHA256
+      || config.attemptId !== ATTEMPT_ID
       || config.modelId !== MODEL_ID
       || config.endpoint !== ENDPOINT
       || config.rawResponsePath !== `${config.outputRoot}/generate-content-response.raw.json`) {
@@ -698,7 +702,7 @@ const buildB1Job = async ({config, semanticOutputBinding}) => {
   const runtime = packageManifest.value.runtimeBinding;
   const job = {
     schemaVersion: 'presentation-caption-semantic-output-check-job-v001',
-    jobId: 'DmWu0jVQfTE-candidate-13-caption-b6-v001',
+    jobId: config.attemptId,
     artifactId: packageManifest.value.artifactId,
     mode: 'read-only-check',
     implementationBinding: {
@@ -820,7 +824,7 @@ const buildB4Job = async ({config, b1}) => {
   }
   const job = {
     schemaVersion: 'presentation-caption-display-pair-generation-job-v001',
-    jobId: 'DmWu0jVQfTE-candidate-13-caption-b6-v001',
+    jobId: config.attemptId,
     artifactId: template.artifactId,
     mode: 'formal-generation',
     implementationBinding: {

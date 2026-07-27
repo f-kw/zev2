@@ -250,6 +250,15 @@ test('固定requestをbyte同一で一回だけ送り、raw保存後にB1→B4�
       sha256(fixedRequest),
       '7fa902580b78bb5da3d36025135e4655ab2528e401ba5a76537f2af3c1939ed2',
     );
+    assert.equal(
+      PRESENTATION_CAPTION_GATE_B6_FORMAL_CONFIG_V001.attemptId,
+      'DmWu0jVQfTE-candidate-13-caption-b6-v002',
+    );
+    assert.equal(
+      PRESENTATION_CAPTION_GATE_B6_FORMAL_CONFIG_V001.outputRoot,
+      'evals/clip_composition/outputs/presentation/caption-gate-b6/'
+        + 'DmWu0jVQfTE-candidate-13-v002',
+    );
     const semanticText = ' \n{"status":"complete","containers":[]}\n ';
     const generated = response(responseEnvelope({semanticText}));
     let calls = 0;
@@ -305,6 +314,10 @@ test('固定requestをbyte同一で一回だけ送り、raw保存後にB1→B4�
       'utf8',
     ));
     assert.equal(manifest.status, 'passed_pending_human_review');
+    assert.equal(
+      manifest.attemptId,
+      'DmWu0jVQfTE-candidate-13-caption-b6-v002',
+    );
     assert.equal(manifest.transport.generateContentCalls, 1);
     assert.equal(manifest.transport.automaticRetries, 0);
     assert.equal(manifest.response.responseModelVersion, 'gemini-3.6-flash');
@@ -571,6 +584,22 @@ test('実packageと有効な合成回答を正式B1→B4経路へ通し表示計
     assert.equal(
       displayPlan.containers.flatMap((container) => container.cues).length,
       203,
+    );
+    const b1Job = JSON.parse(await readFile(resolve(
+      WORKSPACE_ROOT,
+      fixture.config.b1JobPath,
+    ), 'utf8'));
+    const b4Job = JSON.parse(await readFile(resolve(
+      WORKSPACE_ROOT,
+      fixture.config.b4JobPath,
+    ), 'utf8'));
+    assert.equal(
+      b1Job.jobId,
+      'DmWu0jVQfTE-candidate-13-caption-b6-v002',
+    );
+    assert.equal(
+      b4Job.jobId,
+      'DmWu0jVQfTE-candidate-13-caption-b6-v002',
     );
     const manifest = JSON.parse(await readFile(
       resolve(fixture.outputRoot, 'b6-manifest.json'),
