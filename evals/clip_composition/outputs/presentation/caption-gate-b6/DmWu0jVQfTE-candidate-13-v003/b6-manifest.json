@@ -1,0 +1,101 @@
+{
+  "schemaVersion": "presentation-caption-gate-b6-manifest-v001",
+  "status": "rejected",
+  "stage": "b1-acceptance-stopped",
+  "attemptId": "DmWu0jVQfTE-candidate-13-caption-b6-v003",
+  "executionStartedAt": "2026-07-27T03:00:45.740Z",
+  "fixedRequestBinding": {
+    "path": "evals/clip_composition/outputs/presentation/caption-gate-b5/DmWu0jVQfTE-candidate-13-v003/generate-content-request.json",
+    "fileSha256": "d37363247724a664521fc68c396a5f6d307a1b340c70c032a79a08837213fe88",
+    "byteLength": 36912,
+    "byteIdenticalSendRequired": true
+  },
+  "transport": {
+    "product": "Gemini Developer API",
+    "apiVersion": "v1beta",
+    "endpoint": "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent",
+    "method": "POST",
+    "headers": {
+      "Content-Type": "application/json",
+      "X-Server-Timeout": "600",
+      "x-goog-api-key": "<redacted>"
+    },
+    "clientTimeoutMilliseconds": 600000,
+    "automaticRetries": 0,
+    "generateContentCalls": 1
+  },
+  "response": {
+    "httpStatus": 200,
+    "contentType": "application/json; charset=UTF-8",
+    "rawBinding": {
+      "path": "evals/clip_composition/outputs/presentation/caption-gate-b6/DmWu0jVQfTE-candidate-13-v003/generate-content-response.raw.json",
+      "fileSha256": "16b3d0e22e60a4ebf84eb87b9c2c22db30a67aa2c6a79cd560a33a3c9389a1c8",
+      "byteLength": 15432
+    },
+    "configuredModelId": "gemini-3.6-flash",
+    "responseModelVersion": "gemini-3.6-flash",
+    "usageMetadata": {
+      "promptTokenCount": 9212,
+      "candidatesTokenCount": 830,
+      "totalTokenCount": 15026,
+      "promptTokensDetails": [
+        {
+          "modality": "TEXT",
+          "tokenCount": 9212
+        }
+      ],
+      "thoughtsTokenCount": 4984,
+      "serviceTier": "standard"
+    }
+  },
+  "cost": {
+    "inputPriceUsdPerMillion": "1.50",
+    "outputPriceUsdPerMillion": "7.50",
+    "inputTokens": 9212,
+    "outputTokensIncludingThinking": 5814,
+    "inputUsageBasedCostUsd": "0.01381800",
+    "outputUsageBasedCostUsd": "0.04360500",
+    "totalUsageBasedCostUsd": "0.05742300",
+    "actualBilledAmountUsd": null,
+    "actualBillingObservation": "not-observable-from-generateContent-response"
+  },
+  "semanticOutputBinding": {
+    "path": "evals/clip_composition/outputs/presentation/caption-semantic-raw-outputs/DmWu0jVQfTE-candidate-13-caption-b6-v003.json",
+    "fileSha256": "cac1517c3148b3168ed51bd8dfd993284e1b05bac93d779191d9f4be5c80dfdd",
+    "byteLength": 2609
+  },
+  "b1": {
+    "exitCode": 1,
+    "status": "failed",
+    "jobBinding": {
+      "path": "evals/clip_composition/outputs/presentation/caption-semantic-output-check-jobs/DmWu0jVQfTE-candidate-13-caption-b6-v003.json",
+      "fileSha256": "2eda4856eb7c8b9dee0fd94c72d93318fe820b3c4f63b5abc787a6dbfe427ce9",
+      "byteLength": 3820
+    },
+    "validationReportBinding": {
+      "path": "evals/clip_composition/outputs/presentation/caption-gate-b6/DmWu0jVQfTE-candidate-13-v003/semantic-output-validation-report.json",
+      "fileSha256": "9f67134a63f2f12ba0a95c7e95c09deaef9de5e00ef1b24a313d0d50c1f3324b",
+      "byteLength": 6117,
+      "canonicalSha256": "7756cc9c6b90c401754da32e5dfbdb478e05799c0fcdefa63a016dabd0382ebe"
+    },
+    "fatalDiagnostic": null,
+    "compilerInput": {
+      "status": "not_generated",
+      "canonicalSha256": null,
+      "observedByteSha256": null
+    },
+    "observedProjection": {
+      "containerCount": null,
+      "meaningGroupCount": null,
+      "lineCount": null,
+      "boundaryCandidateCount": null,
+      "sourceAtomCount": null,
+      "maximumObservedLineLogicalWidth": null
+    }
+  },
+  "b4": null,
+  "stop": {
+    "reason": "B1_SEMANTIC_OUTPUT_REJECTED",
+    "facts": {}
+  }
+}
