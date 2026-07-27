@@ -997,10 +997,16 @@ const collectCandidateGroups = (job, directMap, sttAtoms, violations) => {
   return groups;
 };
 
-const selectAtoms = (job, directMap, sourceInfo, segments, sttAtoms, groups, violations) => {
-  const candidate = readRecord(directMap, 'candidateManifest');
-  const outer = candidate?.candidate?.outerRange;
-  const groupAtomIds = new Set([...groups.values()].flatMap((speech) => (
+const selectAtoms = (
+  candidateOuterRange,
+  sourceInfo,
+  segments,
+  sttAtoms,
+  speechGroups,
+  violations,
+) => {
+  const outer = candidateOuterRange;
+  const groupAtomIds = new Set(speechGroups.flatMap((speech) => (
     speech.characters.map((character) => character.characterId)
   )));
   const retainedBySegment = segments.map(() => []);
@@ -1112,8 +1118,13 @@ const selectAtoms = (job, directMap, sourceInfo, segments, sttAtoms, groups, vio
   };
 };
 
-const validateExpectedProjection = (job, segments, selection, groups, violations) => {
-  const expected = job.expectedProjection;
+const validateExpectedProjection = (
+  expected,
+  segments,
+  selection,
+  speechGroups,
+  violations,
+) => {
   const rawHash = sha256CanonicalV001(selection.rawSourceAtoms);
   if (selection.rawSourceAtoms.length !== expected.sourceAtomCount
     || rawHash !== expected.rawSourceAtomsCanonicalSha256
@@ -1139,9 +1150,10 @@ const validateExpectedProjection = (job, segments, selection, groups, violations
       });
     }
   });
-  const actualSpeechGroups = [...groups.entries()]
-    .sort(([left], [right]) => left - right)
-    .map(([speechId]) => ({
+  const actualSpeechGroups = speechGroups
+    .map(({speechId}) => speechId)
+    .sort((left, right) => left - right)
+    .map((speechId) => ({
       speechId,
       atomCount: selection.rawSourceAtoms.filter((atom) => atom.speechId === speechId).length,
     }));
@@ -1152,17 +1164,7 @@ const validateExpectedProjection = (job, segments, selection, groups, violations
   }
 };
 
-const buildSourceAtomsArtifact = (job, directMap, sourceInfo, baseInfo, segments, selection) => {
-  const decision = readRecord(directMap, 'assemblyDecision');
-  const formalization = readRecord(directMap, 'formalizationReceipt');
-  const timelineRecord = directMap.get('timeline');
-  const sourceIdentity = readRecord(directMap, 'sourceIdentity');
-  const atomProvenance = {
-    sttManifest: structuredClone(sourceIdentity.stt.manifest),
-    transcript: structuredClone(sourceIdentity.stt.transcript),
-    wordTimestamps: structuredClone(sourceIdentity.stt.wordTimestamps),
-    candidateManifest: recordReference(directMap.get('candidateManifest')),
-  };
+const buildSourceAtomsArtifact = (artifact, selectionContext, segments, selection) => {
   const outputSegments = segments.map((segment, index) => {
     const atomIds = selection.retainedBySegment[index].map((atom) => atom.atomId);
     return {
@@ -1178,22 +1180,22 @@ const buildSourceAtomsArtifact = (job, directMap, sourceInfo, baseInfo, segments
   });
   return {
     schemaVersion: PRESENTATION_RETAINED_SOURCE_ATOMS_SCHEMA_VERSION,
-    artifactId: job.artifactId,
+    artifactId: artifact.artifactId,
     extractorVersion: PRESENTATION_RETAINED_SOURCE_ATOMS_EXTRACTOR_VERSION,
-    sourceRef: sourceInfo.sourceRef,
-    sourceProvenance: sourceInfo.sourceProvenance,
-    atomGranularity: job.declaredAtomGranularity,
-    atomProvenance,
+    sourceRef: artifact.sourceRef,
+    sourceProvenance: artifact.sourceProvenance,
+    atomGranularity: artifact.declaredAtomGranularity,
+    atomProvenance: structuredClone(artifact.atomProvenance),
     selection: {
       policyVersion: PRESENTATION_RETAINED_SOURCE_ATOM_SELECTION_VERSION,
-      candidateId: job.candidateId,
-      assemblyDecisionId: decision.decisionId,
-      assemblyDecisionPayloadSha256: job.inputs.assemblyDecision.payloadCanonicalSha256,
-      formalizationId: formalization.formalizationId,
-      timelineId: baseInfo.timelineId,
-      timelineFileSha256: timelineRecord.fileSha256,
-      baseMediaArtifactId: baseInfo.baseMediaArtifactId,
-      baseMediaFileSha256: baseInfo.baseMediaFileSha256,
+      candidateId: artifact.candidateId,
+      assemblyDecisionId: selectionContext.assemblyDecisionId,
+      assemblyDecisionPayloadSha256: selectionContext.assemblyDecisionPayloadSha256,
+      formalizationId: selectionContext.formalizationId,
+      timelineId: selectionContext.timelineId,
+      timelineFileSha256: selectionContext.timelineFileSha256,
+      baseMediaArtifactId: selectionContext.baseMediaArtifactId,
+      baseMediaFileSha256: selectionContext.baseMediaFileSha256,
       intervalSemantics: 'half-open',
       segments: outputSegments,
     },
@@ -1203,30 +1205,26 @@ const buildSourceAtomsArtifact = (job, directMap, sourceInfo, baseInfo, segments
 };
 
 const buildGenerationManifest = (
-  job,
-  jobBinding,
-  implementation,
-  directInputs,
-  expandedInputs,
-  sourceInfo,
+  artifact,
+  selectionContext,
+  generation,
   sourceAtoms,
-  groups,
+  speechGroups,
   selection,
 ) => {
-  const decision = directInputs.find((entry) => entry.role === 'assemblyDecision').value;
   const sourceBytes = prettyJsonBytesV001(sourceAtoms);
   return {
     schemaVersion: PRESENTATION_RETAINED_SOURCE_ATOMS_GENERATION_MANIFEST_SCHEMA_VERSION,
     generatorVersion: PRESENTATION_RETAINED_SOURCE_ATOMS_EXTRACTOR_VERSION,
     job: {
-      jobId: job.jobId,
-      path: jobBinding.path,
-      fileSha256: jobBinding.fileSha256,
+      jobId: generation.job.jobId,
+      path: generation.job.path,
+      fileSha256: generation.job.fileSha256,
     },
     implementation: {
-      approvedGitCommit: job.implementationBinding.gitCommit,
-      files: job.implementationBinding.files.map((expected) => {
-        const actual = implementation.files.find((entry) => entry.role === expected.role);
+      approvedGitCommit: generation.implementationBinding.gitCommit,
+      files: generation.implementationBinding.files.map((expected) => {
+        const actual = generation.implementation.files.find((entry) => entry.role === expected.role);
         return {
           role: expected.role,
           path: expected.path,
@@ -1235,24 +1233,24 @@ const buildGenerationManifest = (
         };
       }),
       runtime: {
-        resolvedNodePath: implementation.runtime.resolvedNodePath,
-        nodeFileSha256: implementation.runtime.nodeFileSha256,
-        nodeVersion: implementation.runtime.nodeVersion,
+        resolvedNodePath: generation.implementation.runtime.resolvedNodePath,
+        nodeFileSha256: generation.implementation.runtime.nodeFileSha256,
+        nodeVersion: generation.implementation.runtime.nodeVersion,
         bindingRole: 'diagnostic-not-pass-fail',
       },
     },
-    directInputs: directInputs.map(recordForManifest),
-    expandedInputs: expandedInputs.map(recordForManifest),
+    directInputs: generation.directInputs.map(recordForManifest),
+    expandedInputs: generation.expandedInputs.map(recordForManifest),
     source: {
-      sourceRef: sourceInfo.sourceRef,
-      sourceProvenance: sourceInfo.sourceProvenance,
-      atomGranularity: job.declaredAtomGranularity,
+      sourceRef: artifact.sourceRef,
+      sourceProvenance: artifact.sourceProvenance,
+      atomGranularity: artifact.declaredAtomGranularity,
     },
     selection: {
       policyVersion: PRESENTATION_RETAINED_SOURCE_ATOM_SELECTION_VERSION,
-      candidateId: job.candidateId,
-      assemblyDecisionId: decision.decisionId,
-      assemblyDecisionPayloadSha256: job.inputs.assemblyDecision.payloadCanonicalSha256,
+      candidateId: artifact.candidateId,
+      assemblyDecisionId: selectionContext.assemblyDecisionId,
+      assemblyDecisionPayloadSha256: selectionContext.assemblyDecisionPayloadSha256,
       timelineId: sourceAtoms.selection.timelineId,
       intervalSemantics: 'half-open',
       segments: sourceAtoms.selection.segments.map((segment) => ({
@@ -1267,13 +1265,14 @@ const buildGenerationManifest = (
     },
     observations: {
       counts: {
-        sttAtomCount: expandedInputs.find((entry) => entry.role === 'transcript').value.segments.length,
+        sttAtomCount: generation.sttAtomCount,
         candidateOuterRangeAtomCount: selection.rawSourceAtoms.length + selection.excluded.length,
         retainedAtomCount: selection.rawSourceAtoms.length,
         excludedByAssemblyCount: selection.excluded.length,
         boundaryPartialOverlapCount: selection.boundaryPartialOverlapCount,
       },
-      speechGroups: [...groups.keys()].sort((left, right) => left - right).map((speechId) => {
+      speechGroups: speechGroups.map(({speechId}) => speechId)
+        .sort((left, right) => left - right).map((speechId) => {
         const atoms = selection.rawSourceAtoms.filter((atom) => atom.speechId === speechId);
         return {
           speechId,
@@ -1285,7 +1284,7 @@ const buildGenerationManifest = (
       sourceAtomPositiveOverlaps: selection.sourceAtomPositiveOverlaps,
     },
     output: {
-      artifactId: job.artifactId,
+      artifactId: artifact.artifactId,
       path: 'source-atoms.json',
       fileSha256: sha256BytesV001(sourceBytes),
       canonicalSha256: sha256CanonicalV001(sourceAtoms),
@@ -1294,20 +1293,20 @@ const buildGenerationManifest = (
   };
 };
 
-const buildValidationReport = (job, jobBinding, directInputs, expandedInputs, sourceAtoms, generationManifest) => ({
+const buildValidationReport = (artifact, generation, sourceAtoms, generationManifest) => ({
   schemaVersion: PRESENTATION_RETAINED_SOURCE_ATOMS_VALIDATION_REPORT_SCHEMA_VERSION,
-  artifactId: job.artifactId,
+  artifactId: artifact.artifactId,
   status: 'passed',
   violations: [],
-  job: {path: jobBinding.path, fileSha256: jobBinding.fileSha256},
-  inputs: [...directInputs, ...expandedInputs].map((record) => ({
+  job: {path: generation.job.path, fileSha256: generation.job.fileSha256},
+  inputs: [...generation.directInputs, ...generation.expandedInputs].map((record) => ({
     role: record.role,
     path: record.path,
     fileSha256: record.fileSha256,
   })),
   outputs: {
     sourceAtoms: {
-      artifactId: job.artifactId,
+      artifactId: artifact.artifactId,
       path: 'source-atoms.json',
       fileSha256: sha256BytesV001(prettyJsonBytesV001(sourceAtoms)),
       canonicalSha256: sha256CanonicalV001(sourceAtoms),
@@ -1325,6 +1324,167 @@ const failedBuild = (violations, unavailableChecks = new Set()) => {
   const sorted = sortViolations(violations);
   return {status: 'failed', violations: sorted, checks: makeChecks(sorted, unavailableChecks)};
 };
+
+/**
+ * Adapterで検査済みのplain objectだけを受け、残存文字の選択と現行3成果物の構築を行う。
+ * file I/O、入力schemaの分岐、媒体処理、時刻丸めはこの関数の責務に含めない。
+ */
+const buildPresentationRetainedSourceAtomsBundleFromNormalizedInternalV001 = (
+  input,
+  initialViolations = [],
+) => {
+  const violations = [...initialViolations];
+  try {
+    if (!exactFields(input, ['artifact', 'selection', 'generation'])
+      || !exactFields(input.artifact, [
+        'artifactId',
+        'candidateId',
+        'declaredAtomGranularity',
+        'sourceRef',
+        'sourceProvenance',
+        'atomProvenance',
+      ])
+      || !exactFields(input.selection, [
+        'candidateOuterRange',
+        'segments',
+        'sttAtoms',
+        'speechGroups',
+        'expectedProjection',
+        'assemblyDecisionId',
+        'assemblyDecisionPayloadSha256',
+        'formalizationId',
+        'timelineId',
+        'timelineFileSha256',
+        'baseMediaArtifactId',
+        'baseMediaFileSha256',
+      ])
+      || !exactFields(input.generation, [
+        'job',
+        'implementationBinding',
+        'implementation',
+        'directInputs',
+        'expandedInputs',
+        'sttAtomCount',
+      ])
+      || !isNonEmptyString(input.artifact.artifactId)
+      || !isInteger(input.artifact.candidateId)
+      || input.artifact.declaredAtomGranularity !== 'character-timestamp'
+      || !isNonEmptyString(input.artifact.sourceRef)
+      || !isNonEmptyString(input.artifact.sourceProvenance)
+      || !exactFields(input.artifact.atomProvenance, [
+        'sttManifest',
+        'transcript',
+        'wordTimestamps',
+        'candidateManifest',
+      ])
+      || !Object.values(input.artifact.atomProvenance).every(validateReference)
+      || !exactFields(input.selection.candidateOuterRange, ['startMs', 'endMs'])
+      || !isInteger(input.selection.candidateOuterRange.startMs)
+      || !isInteger(input.selection.candidateOuterRange.endMs)
+      || input.selection.candidateOuterRange.startMs >= input.selection.candidateOuterRange.endMs
+      || !Array.isArray(input.selection.segments)
+      || input.selection.segments.length === 0
+      || !Array.isArray(input.selection.sttAtoms)
+      || !Array.isArray(input.selection.speechGroups)
+      || input.selection.speechGroups.length === 0
+      || !isObject(input.selection.expectedProjection)
+      || !isNonEmptyString(input.selection.assemblyDecisionId)
+      || !SHA256_PATTERN.test(input.selection.assemblyDecisionPayloadSha256 ?? '')
+      || !isNonEmptyString(input.selection.formalizationId)
+      || !isNonEmptyString(input.selection.timelineId)
+      || !SHA256_PATTERN.test(input.selection.timelineFileSha256 ?? '')
+      || !isNonEmptyString(input.selection.baseMediaArtifactId)
+      || !SHA256_PATTERN.test(input.selection.baseMediaFileSha256 ?? '')
+      || !exactFields(input.generation.job, ['jobId', 'path', 'fileSha256'])
+      || !isNonEmptyString(input.generation.job.jobId)
+      || !isNonEmptyString(input.generation.job.path)
+      || !SHA256_PATTERN.test(input.generation.job.fileSha256 ?? '')
+      || !isObject(input.generation.implementationBinding)
+      || !isObject(input.generation.implementation)
+      || !Array.isArray(input.generation.directInputs)
+      || !Array.isArray(input.generation.expandedInputs)
+      || !isInteger(input.generation.sttAtomCount)
+      || input.generation.sttAtomCount < 0) {
+      addViolation(violations, 'RETAINED_ATOMS_BUILD_FAILED', '$.normalizedInput', {
+        reason: 'normalized-input-contract-invalid',
+      });
+      return failedBuild(violations);
+    }
+
+    const speechGroups = [...input.selection.speechGroups]
+      .sort((left, right) => left.speechId - right.speechId);
+    const selection = selectAtoms(
+      input.selection.candidateOuterRange,
+      {
+        sourceRef: input.artifact.sourceRef,
+        sourceProvenance: input.artifact.sourceProvenance,
+      },
+      input.selection.segments,
+      input.selection.sttAtoms,
+      speechGroups,
+      violations,
+    );
+    validateExpectedProjection(
+      input.selection.expectedProjection,
+      input.selection.segments,
+      selection,
+      speechGroups,
+      violations,
+    );
+    if (violations.length > 0) return failedBuild(violations);
+
+    const sourceAtoms = buildSourceAtomsArtifact(
+      input.artifact,
+      input.selection,
+      input.selection.segments,
+      selection,
+    );
+    const generationManifest = buildGenerationManifest(
+      input.artifact,
+      input.selection,
+      input.generation,
+      sourceAtoms,
+      speechGroups,
+      selection,
+    );
+    const validationReport = buildValidationReport(
+      input.artifact,
+      input.generation,
+      sourceAtoms,
+      generationManifest,
+    );
+    const published = validatePresentationRetainedSourceAtomsPublishedArtifactsV001({
+      sourceAtoms,
+      generationManifest,
+      validationReport,
+    });
+    if (published.status !== 'passed') return failedBuild(published.violations);
+    const serialized = {
+      sourceAtomsBytes: serializeJsonFileV001(sourceAtoms),
+      generationManifestBytes: serializeJsonFileV001(generationManifest),
+      validationReportBytes: serializeJsonFileV001(validationReport),
+    };
+    return {
+      status: 'passed',
+      violations: [],
+      checks: makeChecks([]),
+      sourceAtoms,
+      generationManifest,
+      validationReport,
+      serialized,
+    };
+  } catch (error) {
+    addViolation(violations, 'RETAINED_ATOMS_BUILD_FAILED', '$.normalizedInput', {
+      name: error instanceof Error ? error.name : 'UnknownError',
+      message: error instanceof Error ? error.message : String(error),
+    });
+    return failedBuild(violations);
+  }
+};
+
+export function buildPresentationRetainedSourceAtomsBundleFromNormalizedV001(input) {
+  return buildPresentationRetainedSourceAtomsBundleFromNormalizedInternalV001(input);
+}
 
 export function buildPresentationRetainedSourceAtomsV001(context) {
   const violations = [];
@@ -1368,52 +1528,56 @@ export function buildPresentationRetainedSourceAtomsV001(context) {
     const sourceInfo = validateSourceIdentity(directMap, expandedMap, violations);
     const sttAtoms = validateStt(expandedMap, violations);
     const groups = collectCandidateGroups(context.job, directMap, sttAtoms, violations);
-    const selection = selectAtoms(context.job, directMap, sourceInfo, segments, sttAtoms, groups, violations);
-    validateExpectedProjection(context.job, segments, selection, groups, violations);
-    if (violations.length > 0) return failedBuild(violations);
 
-    const sourceAtoms = buildSourceAtomsArtifact(
-      context.job, directMap, sourceInfo, baseInfo, segments, selection,
-    );
-    const generationManifest = buildGenerationManifest(
-      context.job,
-      context.jobBinding,
-      context.implementation,
-      context.directInputs,
-      context.expandedInputs,
-      sourceInfo,
-      sourceAtoms,
-      groups,
-      selection,
-    );
-    const validationReport = buildValidationReport(
-      context.job,
-      context.jobBinding,
-      context.directInputs,
-      context.expandedInputs,
-      sourceAtoms,
-      generationManifest,
-    );
-    const published = validatePresentationRetainedSourceAtomsPublishedArtifactsV001({
-      sourceAtoms,
-      generationManifest,
-      validationReport,
-    });
-    if (published.status !== 'passed') return failedBuild(published.violations);
-    const serialized = {
-      sourceAtomsBytes: serializeJsonFileV001(sourceAtoms),
-      generationManifestBytes: serializeJsonFileV001(generationManifest),
-      validationReportBytes: serializeJsonFileV001(validationReport),
+    const candidateManifest = readRecord(directMap, 'candidateManifest');
+    const sourceIdentity = readRecord(directMap, 'sourceIdentity');
+    const decision = readRecord(directMap, 'assemblyDecision');
+    const formalization = readRecord(directMap, 'formalizationReceipt');
+    const normalized = {
+      artifact: {
+        artifactId: context.job.artifactId,
+        candidateId: context.job.candidateId,
+        declaredAtomGranularity: context.job.declaredAtomGranularity,
+        sourceRef: sourceInfo.sourceRef,
+        sourceProvenance: sourceInfo.sourceProvenance,
+        atomProvenance: {
+          sttManifest: structuredClone(sourceIdentity.stt.manifest),
+          transcript: structuredClone(sourceIdentity.stt.transcript),
+          wordTimestamps: structuredClone(sourceIdentity.stt.wordTimestamps),
+          candidateManifest: recordReference(directMap.get('candidateManifest')),
+        },
+      },
+      selection: {
+        candidateOuterRange: structuredClone(candidateManifest.candidate.outerRange),
+        segments,
+        sttAtoms,
+        speechGroups: [...groups.values()],
+        expectedProjection: context.job.expectedProjection,
+        assemblyDecisionId: decision.decisionId,
+        assemblyDecisionPayloadSha256: context.job.inputs.assemblyDecision.payloadCanonicalSha256,
+        formalizationId: formalization.formalizationId,
+        timelineId: baseInfo.timelineId,
+        timelineFileSha256: directMap.get('timeline').fileSha256,
+        baseMediaArtifactId: baseInfo.baseMediaArtifactId,
+        baseMediaFileSha256: baseInfo.baseMediaFileSha256,
+      },
+      generation: {
+        job: {
+          jobId: context.job.jobId,
+          path: context.jobBinding.path,
+          fileSha256: context.jobBinding.fileSha256,
+        },
+        implementationBinding: context.job.implementationBinding,
+        implementation: context.implementation,
+        directInputs: context.directInputs,
+        expandedInputs: context.expandedInputs,
+        sttAtomCount: readRecord(expandedMap, 'transcript').segments.length,
+      },
     };
-    return {
-      status: 'passed',
-      violations: [],
-      checks: makeChecks([]),
-      sourceAtoms,
-      generationManifest,
-      validationReport,
-      serialized,
-    };
+    return buildPresentationRetainedSourceAtomsBundleFromNormalizedInternalV001(
+      normalized,
+      violations,
+    );
   } catch (error) {
     addViolation(violations, 'RETAINED_ATOMS_BUILD_FAILED', '$', {
       name: error instanceof Error ? error.name : 'UnknownError',
