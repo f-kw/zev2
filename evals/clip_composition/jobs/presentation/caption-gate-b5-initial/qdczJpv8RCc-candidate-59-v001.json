@@ -1,0 +1,34 @@
+{
+  "schemaVersion": "presentation-caption-gate-b5-initial-job-v001",
+  "jobId": "qdczJpv8RCc-candidate-59-caption-gate-b5-initial-v001",
+  "sourceBinding": {
+    "path": "evals/clip_composition/outputs/presentation/segmenter-boundary-evidence/qdczJpv8RCc-candidate-59-v001/semantic-source-input.json",
+    "fileSha256": "ead2a47ef57480c3da9e598a650059a92c1f1519b25b94d2617b86485f79433a",
+    "characterCount": 281,
+    "containerCount": 2,
+    "boundaryCandidateCount": 164
+  },
+  "requestBuilderBinding": {
+    "path": "evals/clip_composition/run_presentation_caption_gate_b5_v004.mjs",
+    "fileSha256": "f8d79be781680cbb41c908d36fd9cdfb7a0874a64a145067c68662f6cedc1ecb"
+  },
+  "upstreamProjection": {
+    "sentinelPath": "evals/clip_composition/outputs/presentation/caption-display-pair-static-preflight-jobs/qdczJpv8RCc-candidate-59-caption-gate-b5-initial-projection-probe-v001.json",
+    "expectedCanonicalSha256": "fdc4f650f17c9cef094f078708c52235a18c243cca4005694286eb07a90deef8"
+  },
+  "outputDirectory": "evals/clip_composition/outputs/presentation/caption-gate-b5/qdczJpv8RCc-candidate-59-v001",
+  "officialVerification": {
+    "observedAt": "2026-07-28",
+    "sources": [
+      "https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash",
+      "https://ai.google.dev/gemini-api/docs/pricing"
+    ],
+    "modelId": "gemini-3.6-flash",
+    "modelResource": "models/gemini-3.6-flash",
+    "inputLimit": 1048576,
+    "outputLimit": 65536,
+    "tier": "PAID_STANDARD_DEFAULT_BY_OMISSION",
+    "inputPriceUsdPerMillion": "1.50",
+    "outputPriceUsdPerMillion": "7.50"
+  }
+}
