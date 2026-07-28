@@ -1,0 +1,29 @@
+{
+  "model": "gemini-3.6-flash",
+  "responseMimeType": "application/json",
+  "promptPath": "gemini-layout-candidate-prompt.txt",
+  "promptSha256": "5a2577b555569e17cf517b45face6c92154e5aa8dbe6bc23c65e888b73671deb",
+  "promptByteLength": 1224,
+  "promptFileHasOneTrailingLfNotSent": true,
+  "candidates": [
+    {
+      "candidateId": "screen_speaker_body",
+      "candidateLabel": "画面と話者全体",
+      "candidateReason": "上に画面、下に顔を入れた話者全体を表示する",
+      "path": "candidate-preview-screen_speaker_body.jpg",
+      "sha256": "2112801db86c1fe303f01131a9b9d6dc19b1b8bf8be8fe4cc94c03814d296feb",
+      "grayscaleMean": 0.438026
+    },
+    {
+      "candidateId": "screen_speaker_face",
+      "candidateLabel": "画面と顔寄せ",
+      "candidateReason": "上に画面、下に顔の見やすさを優先した話者を表示する",
+      "path": "candidate-preview-screen_speaker_face.jpg",
+      "sha256": "abd605ed628a9dbe49f6a41ecef64ec9cf44b7b9bc9ba8e16ccaf43345db3f4d",
+      "grayscaleMean": 0.447541
+    }
+  ],
+  "apiKeySource": "not loaded while resuming saved responses",
+  "rawApiKeySaved": false,
+  "retryCount": 0
+}

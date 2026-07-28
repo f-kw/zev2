@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>縦型プリセット候補 5判断</title>
+  <style>
+    :root { color-scheme: dark; --bg:#0a0f1e; --card:#141b2f; --line:#2a3657; --accent:#65d6ff; }
+    * { box-sizing: border-box; }
+    body { margin:0; background:linear-gradient(135deg,#080c17,#121a31); color:#f7f8fc;
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans JP",sans-serif; }
+    main { max-width:1260px; margin:0 auto; padding:24px; }
+    h1 { margin:0 0 8px; font-size:clamp(24px,4vw,42px); }
+    .lede { margin:0 0 20px; color:#c9d3ec; line-height:1.65; }
+    .status { display:inline-block; padding:7px 12px; border-radius:999px; background:#183d32; color:#9ff3c7; font-weight:700; }
+    .grid { display:grid; grid-template-columns:minmax(300px,500px) 1fr; gap:22px; align-items:start; margin-top:20px; }
+    .viewer { position:sticky; top:14px; }
+    video { width:min(100%,430px); max-height:78vh; display:block; margin:0 auto; background:#000; border-radius:18px;
+      box-shadow:0 18px 60px #000a; }
+    .chapters { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px; margin-top:12px; }
+    button { cursor:pointer; }
+    .chapter { border:1px solid var(--line); background:#111a2e; color:#eef3ff; border-radius:10px; padding:10px;
+      text-align:left; }
+    .chapter:hover,.chapter.active { border-color:var(--accent); background:#18304a; }
+    .card { background:color-mix(in srgb,var(--card) 94%,transparent); border:1px solid var(--line); border-radius:16px;
+      padding:18px; margin-bottom:14px; }
+    .card h2 { margin:0 0 7px; font-size:20px; }
+    .hint { color:#b9c5df; font-size:14px; line-height:1.55; margin:0 0 13px; }
+    label.option { display:block; padding:10px 12px; border:1px solid #32405f; border-radius:10px; margin:8px 0;
+      background:#0e1629; }
+    label.option:has(input:checked) { border-color:var(--accent); background:#12304a; }
+    input { margin-right:8px; }
+    .note { padding:12px; border-left:4px solid #f4c95d; background:#322b19; color:#ffe9a3; border-radius:8px; line-height:1.55; }
+    .summary { white-space:pre-wrap; background:#090e1b; border:1px solid var(--line); border-radius:12px; padding:14px;
+      min-height:130px; color:#dbe7ff; }
+    .copy { border:0; border-radius:10px; padding:11px 16px; background:var(--accent); color:#04111b; font-weight:800; }
+    a { color:#8ce4ff; }
+    @media (max-width:850px) { .grid { grid-template-columns:1fr; } .viewer { position:static; } }
+  </style>
+</head>
+<body>
+<main>
+  <span class="status">認定前preview・正式使用なし</span>
+  <h1>縦型プリセット候補を5つだけ判断</h1>
+  <p class="lede">動画の章ボタンで該当箇所へ移動できます。時間計測は不要です。最後に結果をコピーしてください。</p>
+  <div class="grid">
+    <section class="viewer">
+      <video id="video" controls playsinline preload="metadata" src="vertical-preset-review-v001.mp4"></video>
+      <div class="chapters"><button type="button" class="chapter" data-time="0.000000">1. 文字造形 96px（横型値）</button>
+<button type="button" class="chapter" data-time="5.166667">2. 文字造形 79px（安全領域B最大）</button>
+<button type="button" class="chapter" data-time="10.333333">3. 文字造形 74px（安全領域A最大）</button>
+<button type="button" class="chapter" data-time="15.500000">4. 行幅上限16の実字幕</button>
+<button type="button" class="chapter" data-time="18.200000">5. 行幅上限20の実字幕</button>
+<button type="button" class="chapter" data-time="21.200000">6. 行幅上限24の実字幕</button>
+<button type="button" class="chapter" data-time="26.366667">7. 安全領域Aガイド</button>
+<button type="button" class="chapter" data-time="31.533333">8. 安全領域Bガイド</button>
+<button type="button" class="chapter" data-time="36.700000">9. タイトル上・字幕下の全体像</button></div>
+      <p class="note">安全領域A/Bは文字の位置を変えていません。同じ絵に、QCで守る境界線だけを重ねた比較です。</p>
+      <p><a href="preflight.json">機械検査結果を見る</a> / <a href="../legacy-crop/candidate-preview-screen_speaker_body.jpg">旧LLM crop静止画</a></p>
+    </section>
+    <section>
+      <form id="form">
+        <article class="card">
+          <h2>Q1 画面構成</h2>
+          <p class="hint">旧crop方式が選んだ「上=元画面、下=話者全体」です。動きの中で顔や重要情報が切れないかを見ます。</p>
+          <label class="option"><input required type="radio" name="q1_crop" value="approve-legacy-llm-crop">この上下構成でよい</label>
+          <label class="option"><input type="radio" name="q1_crop" value="request-human-crop">人間指定cropへ差し戻す</label>
+        </article>
+        <article class="card">
+          <h2>Q2 文字サイズ・造形</h2>
+          <p class="hint">96pxは横型値（縁8/glow12）。79pxはB内最大（縁7/glow10）、74pxはA内最大（縁6/glow9）です。</p>
+          <label class="option"><input required type="radio" name="q2_typography" value="font-96">96pxがよい</label>
+          <label class="option"><input type="radio" name="q2_typography" value="font-79">79pxがよい</label>
+          <label class="option"><input type="radio" name="q2_typography" value="font-74">74pxがよい</label>
+          <label class="option"><input type="radio" name="q2_typography" value="revise">どれも要修正</label>
+        </article>
+        <article class="card">
+          <h2>Q3 安全領域</h2>
+          <p class="hint">A=80px左右/40px上下、B=43px左右/38px上下。ガイドの内側をQC合格範囲にします。</p>
+          <label class="option"><input required type="radio" name="q3_safe_area" value="safe-A">A（広めの余白）</label>
+          <label class="option"><input type="radio" name="q3_safe_area" value="safe-B">B（実描画の既定余白）</label>
+          <label class="option"><input type="radio" name="q3_safe_area" value="revise">どちらも要修正</label>
+        </article>
+        <article class="card">
+          <h2>Q4 行幅の事故防止上限</h2>
+          <p class="hint">16・20・24の実字幕例です。数値は品質目標ではなく、長すぎる1行を止める保険です。</p>
+          <label class="option"><input required type="radio" name="q4_width" value="16">16</label>
+          <label class="option"><input type="radio" name="q4_width" value="20">20</label>
+          <label class="option"><input type="radio" name="q4_width" value="24">24</label>
+          <label class="option"><input type="radio" name="q4_width" value="revise">全部要修正</label>
+        </article>
+        <article class="card">
+          <h2>Q5 タイトル上・字幕下の重ね方</h2>
+          <p class="hint">最後の章で、タイトルと字幕を同時に重ねた全体像を見ます。</p>
+          <label class="option"><input required type="radio" name="q5_stack" value="approve">この重ね方でよい</label>
+          <label class="option"><input type="radio" name="q5_stack" value="revise">重ね方を直す</label>
+        </article>
+        <article class="card">
+          <h2>結果</h2>
+          <p class="hint"><span id="progress">0/5</span> 回答済み。5件揃うとコピーできます。</p>
+          <button type="button" class="copy" id="copy" disabled>結果をコピー</button>
+          <pre class="summary" id="summary">未回答です</pre>
+        </article>
+      </form>
+    </section>
+  </div>
+</main>
+<script>
+  const video = document.getElementById('video');
+  const chapters = [...document.querySelectorAll('.chapter')];
+  const form = document.getElementById('form');
+  const summary = document.getElementById('summary');
+  const progress = document.getElementById('progress');
+  const copy = document.getElementById('copy');
+  const names = ['q1_crop','q2_typography','q3_safe_area','q4_width','q5_stack'];
+  chapters.forEach((button) => button.addEventListener('click', () => {
+    video.currentTime = Number(button.dataset.time);
+    video.play();
+  }));
+  video.addEventListener('timeupdate', () => {
+    let active = chapters[0];
+    for (const button of chapters) if (Number(button.dataset.time) <= video.currentTime) active = button;
+    chapters.forEach((button) => button.classList.toggle('active', button === active));
+  });
+  function collect() {
+    const answers = Object.fromEntries(names.map((name) => [
+      name,
+      form.querySelector('input[name="' + name + '"]:checked')?.value ?? null,
+    ]));
+    const count = Object.values(answers).filter(Boolean).length;
+    progress.textContent = count + '/5';
+    copy.disabled = count !== 5;
+    const result = {
+      schemaVersion: 'vertical-preset-review-human-result-v001',
+      reviewId: 'qdczJpv8RCc-candidate-59-vertical-preset-v001-candidate',
+      answers,
+      timeMeasurement: 'not_measured',
+      formalRegistryPromotion: false,
+    };
+    summary.textContent = count === 0 ? '未回答です' : JSON.stringify(result, null, 2);
+    return result;
+  }
+  form.addEventListener('change', collect);
+  copy.addEventListener('click', async () => {
+    const result = collect();
+    await navigator.clipboard.writeText(JSON.stringify(result, null, 2));
+    copy.textContent = 'コピーしました';
+  });
+  collect();
+</script>
+</body>
+</html>

@@ -1,0 +1,325 @@
+{
+  "schemaVersion": "vertical-preset-review-preflight-v001",
+  "status": "passed",
+  "createdAt": "2026-07-28T07:41:05.053Z",
+  "formalUseApproved": false,
+  "externalApiCallsDuringPreviewManufacturing": 0,
+  "source": {
+    "path": "evals/clip_composition/outputs/presentation/base-media/qdczJpv8RCc-candidate-59-v001/base-media.mp4",
+    "sha256": "faad660c7623cdbf3a8f3b55cdaffc34729d06683ce391997c51f10fbc076967"
+  },
+  "crop": {
+    "source": "legacy LLM crop diagnostic",
+    "selectedLayout": "screen_speaker",
+    "selectedCandidateId": "screen_speaker_body",
+    "selectedPlan": {
+      "screenLayoutId": "screen_speaker",
+      "detections": {
+        "screen": [
+          0,
+          0,
+          1000,
+          1000
+        ],
+        "speaker": {
+          "face": [
+            180,
+            600,
+            520,
+            960
+          ],
+          "body": [
+            150,
+            520,
+            1000,
+            1000
+          ]
+        }
+      },
+      "viewports": {
+        "screen": [
+          0.18359375,
+          0,
+          0.81640625,
+          1
+        ],
+        "speaker": [
+          0.46210937500000004,
+          0.14999999999999997,
+          1,
+          1
+        ]
+      },
+      "displaySummary": "画面と話者",
+      "selectedCandidateId": "screen_speaker_body",
+      "candidateSummary": "画面と話者全体",
+      "selectionReason": "下半分の話者の構図において顔や衣装が切れずにバランス良く収まっており、自然に見えるため。",
+      "candidateOptions": [
+        {
+          "id": "screen_speaker_body",
+          "label": "画面と話者全体",
+          "reason": "上に画面、下に顔を入れた話者全体を表示する",
+          "viewports": {
+            "screen": [
+              0.18359375,
+              0,
+              0.81640625,
+              1
+            ],
+            "speaker": [
+              0.46210937500000004,
+              0.14999999999999997,
+              1,
+              1
+            ]
+          }
+        },
+        {
+          "id": "screen_speaker_face",
+          "label": "画面と顔寄せ",
+          "reason": "上に画面、下に顔の見やすさを優先した話者を表示する",
+          "viewports": {
+            "screen": [
+              0.18359375,
+              0,
+              0.81640625,
+              1
+            ],
+            "speaker": [
+              0.6000000000000001,
+              0.06555555555555553,
+              0.9600000000000001,
+              0.6344444444444444
+            ]
+          }
+        }
+      ]
+    },
+    "responseHashes": {
+      "editPlanRaw": "d8d27117b9b6c446a4627cca9a553ea0e2bc646e0f2c04182fee895a4b35912a",
+      "selectionRaw": "483c2711a22c2e2f25adf02787f5492c36ab01872e330ffcab1c3ff61da5d56d",
+      "cropDecision": "bc6d669b2d0e46f5c9660cc9b65d694f02bd629446cc3554d702fa0ecaf3ccdb"
+    },
+    "candidatePreviewNonBlack": true
+  },
+  "candidateValues": {
+    "typography": {
+      "fontFamily": "LINESeedJP_A_OTF_Eb.otf",
+      "fontSha256": "4f20353d5ba41012fb8eaaa653d2ac46f80d63880301a6590765897bbdfedbfb",
+      "candidates": [
+        {
+          "fontSizePx": 96,
+          "borderWidthPx": 8,
+          "glowWidthPx": 12
+        },
+        {
+          "fontSizePx": 79,
+          "borderWidthPx": 7,
+          "glowWidthPx": 10
+        },
+        {
+          "fontSizePx": 74,
+          "borderWidthPx": 6,
+          "glowWidthPx": 9
+        }
+      ],
+      "derivation": {
+        "74": "広めの安全領域Aに収まる最大整数文字サイズを正本描画モデルで全探索。縁とglowは96px値との比率を整数丸め",
+        "79": "既存描画余白Bに収まる最大整数文字サイズを正本描画モデルで全探索。縁とglowは96px値との比率を整数丸め",
+        "96": "人間認定済み横型caption-coreの値"
+      }
+    },
+    "safeAreas": [
+      {
+        "id": "A",
+        "top": 40,
+        "right": 80,
+        "bottom": 40,
+        "left": 80,
+        "origin": "人間認定済み横型registryの絶対px余白を縦型候補へそのまま移した比較案"
+      },
+      {
+        "id": "B",
+        "top": 38,
+        "right": 43,
+        "bottom": 38,
+        "left": 43,
+        "origin": "buildTelopRenderModelが実描画時に使う既存の画面余白を出力から再導出"
+      }
+    ],
+    "maxLogicalWidthPerLine": [
+      16,
+      20,
+      24
+    ],
+    "titleCaptionStack": {
+      "title": "top-center",
+      "caption": "bottom-center",
+      "positiveIntersection": false
+    }
+  },
+  "candidateClassification": {
+    "font96SafeA": "outside",
+    "font96SafeB": "outside",
+    "font79SafeB": "inside",
+    "font74SafeA": "inside",
+    "packagePassMeaning": "比較候補の想定された合否分類を正本描画モデルが再現した。96px候補自体を安全と認定した意味ではない。"
+  },
+  "scenes": [
+    {
+      "sceneId": "typography-96",
+      "label": "文字造形 96px（横型値）",
+      "purpose": "横型で認定済みの文字サイズを縦型へそのまま載せた比較",
+      "sourceCueId": "caption-cue-000001",
+      "sourceStartFrame": 0,
+      "sourceEndFrameExclusive": 155,
+      "overlayPath": "evals/clip_composition/outputs/presentation/vertical-preset-previews/qdczJpv8RCc-candidate-59-vertical-preset-v001-candidate/preview/overlays/caption-font-96-width-24.png",
+      "questionId": "Q2",
+      "expectedLayoutStatus": "outside-safe-area-comparison-candidate",
+      "frameCount": 155
+    },
+    {
+      "sceneId": "typography-79",
+      "label": "文字造形 79px（安全領域B最大）",
+      "purpose": "既存描画余白Bに収まる最大整数文字サイズ",
+      "sourceCueId": "caption-cue-000001",
+      "sourceStartFrame": 0,
+      "sourceEndFrameExclusive": 155,
+      "overlayPath": "evals/clip_composition/outputs/presentation/vertical-preset-previews/qdczJpv8RCc-candidate-59-vertical-preset-v001-candidate/preview/overlays/caption-font-79-width-24.png",
+      "questionId": "Q2",
+      "expectedLayoutStatus": "passes-safe-B",
+      "frameCount": 155
+    },
+    {
+      "sceneId": "typography-74",
+      "label": "文字造形 74px（安全領域A最大）",
+      "purpose": "広めの安全領域Aに収まる最大整数文字サイズ",
+      "sourceCueId": "caption-cue-000001",
+      "sourceStartFrame": 0,
+      "sourceEndFrameExclusive": 155,
+      "overlayPath": "evals/clip_composition/outputs/presentation/vertical-preset-previews/qdczJpv8RCc-candidate-59-vertical-preset-v001-candidate/preview/overlays/caption-font-74-width-24.png",
+      "questionId": "Q2",
+      "expectedLayoutStatus": "passes-safe-A-and-B",
+      "frameCount": 155
+    },
+    {
+      "sceneId": "line-width-16",
+      "label": "行幅上限16の実字幕",
+      "purpose": "既存cueの論理幅14/14を上限16で表示",
+      "sourceCueId": "caption-cue-000006",
+      "sourceStartFrame": 444,
+      "sourceEndFrameExclusive": 525,
+      "overlayPath": "evals/clip_composition/outputs/presentation/vertical-preset-previews/qdczJpv8RCc-candidate-59-vertical-preset-v001-candidate/preview/overlays/caption-font-74-width-16.png",
+      "questionId": "Q4",
+      "expectedLayoutStatus": "passes-safe-A-and-B",
+      "frameCount": 81
+    },
+    {
+      "sceneId": "line-width-20",
+      "label": "行幅上限20の実字幕",
+      "purpose": "既存cueの論理幅19/12を上限20で表示",
+      "sourceCueId": "caption-cue-000007",
+      "sourceStartFrame": 525,
+      "sourceEndFrameExclusive": 615,
+      "overlayPath": "evals/clip_composition/outputs/presentation/vertical-preset-previews/qdczJpv8RCc-candidate-59-vertical-preset-v001-candidate/preview/overlays/caption-font-74-width-20.png",
+      "questionId": "Q4",
+      "expectedLayoutStatus": "passes-safe-A-and-B",
+      "frameCount": 90
+    },
+    {
+      "sceneId": "line-width-24",
+      "label": "行幅上限24の実字幕",
+      "purpose": "既存cueの論理幅16/24を上限24で表示",
+      "sourceCueId": "caption-cue-000001",
+      "sourceStartFrame": 0,
+      "sourceEndFrameExclusive": 155,
+      "overlayPath": "evals/clip_composition/outputs/presentation/vertical-preset-previews/qdczJpv8RCc-candidate-59-vertical-preset-v001-candidate/preview/overlays/caption-font-74-width-24.png",
+      "questionId": "Q4",
+      "expectedLayoutStatus": "passes-safe-A-and-B",
+      "frameCount": 155
+    },
+    {
+      "sceneId": "safe-area-A",
+      "label": "安全領域Aガイド",
+      "purpose": "同一描画へ80px左右/40px上下のQC境界だけを重ねる",
+      "sourceCueId": "caption-cue-000001",
+      "sourceStartFrame": 0,
+      "sourceEndFrameExclusive": 155,
+      "overlayPath": "evals/clip_composition/outputs/presentation/vertical-preset-previews/qdczJpv8RCc-candidate-59-vertical-preset-v001-candidate/preview/overlays/title-caption-safe-A.png",
+      "questionId": "Q3",
+      "expectedLayoutStatus": "same-render-as-safe-B-except-guide",
+      "frameCount": 155
+    },
+    {
+      "sceneId": "safe-area-B",
+      "label": "安全領域Bガイド",
+      "purpose": "同一描画へ43px左右/38px上下のQC境界だけを重ねる",
+      "sourceCueId": "caption-cue-000001",
+      "sourceStartFrame": 0,
+      "sourceEndFrameExclusive": 155,
+      "overlayPath": "evals/clip_composition/outputs/presentation/vertical-preset-previews/qdczJpv8RCc-candidate-59-vertical-preset-v001-candidate/preview/overlays/title-caption-safe-B.png",
+      "questionId": "Q3",
+      "expectedLayoutStatus": "same-render-as-safe-A-except-guide",
+      "frameCount": 155
+    },
+    {
+      "sceneId": "title-caption-stack",
+      "label": "タイトル上・字幕下の全体像",
+      "purpose": "preview-onlyのタイトルと字幕を同時に重ねる",
+      "sourceCueId": "caption-cue-000001",
+      "sourceStartFrame": 0,
+      "sourceEndFrameExclusive": 155,
+      "overlayPath": "evals/clip_composition/outputs/presentation/vertical-preset-previews/qdczJpv8RCc-candidate-59-vertical-preset-v001-candidate/preview/overlays/title-caption-font-74-width-24.png",
+      "questionId": "Q1/Q5",
+      "expectedLayoutStatus": "passes-safe-A-and-B-with-no-positive-intersection",
+      "frameCount": 155
+    }
+  ],
+  "media": {
+    "path": "evals/clip_composition/outputs/presentation/vertical-preset-previews/qdczJpv8RCc-candidate-59-vertical-preset-v001-candidate/preview/vertical-preset-review-v001.mp4",
+    "sha256": "1613b1afaf8d677182d38884013000273f5be82535cd2bc577f014195ebdd528",
+    "width": 1080,
+    "height": 1920,
+    "fps": "30/1",
+    "frameCount": 1256,
+    "durationSeconds": 41.866016,
+    "expectedDurationSeconds": 41.86666666666667,
+    "audioCodec": "aac",
+    "audioSampleRate": 48000,
+    "audioChannels": 2,
+    "meanVolumeDb": -24.5
+  },
+  "overlayAlphaMeans": {
+    "caption-font-96-width-24.png": 0.0901681,
+    "caption-font-79-width-24.png": 0.0667256,
+    "caption-font-74-width-24.png": 0.0568848,
+    "caption-font-74-width-16.png": 0.0389029,
+    "caption-font-74-width-20.png": 0.0484951,
+    "title-font-74-width-24.png": 0.0678025,
+    "title-caption-font-74-width-24.png": 0.124687,
+    "guide-safe-A.png": 0.00959201,
+    "guide-safe-B.png": 0.00986545,
+    "title-caption-safe-A.png": 0.134027,
+    "title-caption-safe-B.png": 0.134409
+  },
+  "formalAssetImmutability": {
+    "baselinePath": "/private/tmp/zev2-vertical-preview-inspection/formal-assets-before.sha256",
+    "checkedFileCount": 520,
+    "changedFileCount": 0
+  },
+  "secretScan": {
+    "source": "external .env key loaded in memory only",
+    "exactOccurrenceCount": 0,
+    "envCopied": false,
+    "keySaved": false
+  },
+  "scope": {
+    "rendererContractRevision": false,
+    "presetRegistryRevision": false,
+    "formalCandidate13Or59AssetChanges": 0,
+    "g4ToG7Added": false,
+    "externalMaterialsAdded": false,
+    "soundEffectsAdded": false,
+    "titleLayerStatus": "preview-only; formal title rendering is not implemented"
+  }
+}

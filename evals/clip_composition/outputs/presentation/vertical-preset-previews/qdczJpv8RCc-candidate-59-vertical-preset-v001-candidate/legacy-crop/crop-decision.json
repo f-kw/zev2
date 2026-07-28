@@ -1,0 +1,232 @@
+{
+  "schemaVersion": "vertical-preset-legacy-crop-decision-v001",
+  "status": "passed",
+  "createdAt": "2026-07-28T07:22:15.465Z",
+  "source": {
+    "path": "evals/clip_composition/outputs/presentation/base-media/qdczJpv8RCc-candidate-59-v001/base-media.mp4",
+    "sha256": "faad660c7623cdbf3a8f3b55cdaffc34729d06683ce391997c51f10fbc076967",
+    "width": 1920,
+    "height": 1080,
+    "durationSeconds": 51.566667
+  },
+  "promptProvenance": {
+    "sourcePath": "runner/src/steps/edit-plan.ts",
+    "sourceFileSha256": "513fb11e6a7f34dd524b98f6897dfb218f388599775061367b53dded3ebdd291",
+    "editPromptFunctionSha256": "545887d43915797802db656b31e7ff3c03624ec5e2b13de562edf54e10fce276",
+    "selectionPromptFunctionSha256": "c930d820f4a7adc1a60a54ebe1a2bfdbf12c6982c6b21c1a905a920659d698f0",
+    "extraction": "現行sourceの関数本文を読み取り、引数型だけ除いて同じ関数を実行",
+    "promptModified": false
+  },
+  "candidateSet": {
+    "screenLayoutId": "screen_speaker",
+    "detections": {
+      "screen": [
+        0,
+        0,
+        1000,
+        1000
+      ],
+      "speaker": {
+        "face": [
+          180,
+          600,
+          520,
+          960
+        ],
+        "body": [
+          150,
+          520,
+          1000,
+          1000
+        ]
+      }
+    },
+    "displaySummary": "画面と話者",
+    "candidates": [
+      {
+        "id": "screen_speaker_body",
+        "label": "画面と話者全体",
+        "reason": "上に画面、下に顔を入れた話者全体を表示する",
+        "viewports": {
+          "screen": [
+            0.18359375,
+            0,
+            0.81640625,
+            1
+          ],
+          "speaker": [
+            0.46210937500000004,
+            0.14999999999999997,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "screen_speaker_face",
+        "label": "画面と顔寄せ",
+        "reason": "上に画面、下に顔の見やすさを優先した話者を表示する",
+        "viewports": {
+          "screen": [
+            0.18359375,
+            0,
+            0.81640625,
+            1
+          ],
+          "speaker": [
+            0.6000000000000001,
+            0.06555555555555553,
+            0.9600000000000001,
+            0.6344444444444444
+          ]
+        }
+      }
+    ]
+  },
+  "previews": [
+    {
+      "candidateId": "screen_speaker_body",
+      "candidateLabel": "画面と話者全体",
+      "candidateReason": "上に画面、下に顔を入れた話者全体を表示する",
+      "path": "candidate-preview-screen_speaker_body.jpg",
+      "sha256": "2112801db86c1fe303f01131a9b9d6dc19b1b8bf8be8fe4cc94c03814d296feb",
+      "grayscaleMean": 0.438026
+    },
+    {
+      "candidateId": "screen_speaker_face",
+      "candidateLabel": "画面と顔寄せ",
+      "candidateReason": "上に画面、下に顔の見やすさを優先した話者を表示する",
+      "path": "candidate-preview-screen_speaker_face.jpg",
+      "sha256": "abd605ed628a9dbe49f6a41ecef64ec9cf44b7b9bc9ba8e16ccaf43345db3f4d",
+      "grayscaleMean": 0.447541
+    }
+  ],
+  "selectedPlan": {
+    "screenLayoutId": "screen_speaker",
+    "detections": {
+      "screen": [
+        0,
+        0,
+        1000,
+        1000
+      ],
+      "speaker": {
+        "face": [
+          180,
+          600,
+          520,
+          960
+        ],
+        "body": [
+          150,
+          520,
+          1000,
+          1000
+        ]
+      }
+    },
+    "viewports": {
+      "screen": [
+        0.18359375,
+        0,
+        0.81640625,
+        1
+      ],
+      "speaker": [
+        0.46210937500000004,
+        0.14999999999999997,
+        1,
+        1
+      ]
+    },
+    "displaySummary": "画面と話者",
+    "selectedCandidateId": "screen_speaker_body",
+    "candidateSummary": "画面と話者全体",
+    "selectionReason": "下半分の話者の構図において顔や衣装が切れずにバランス良く収まっており、自然に見えるため。",
+    "candidateOptions": [
+      {
+        "id": "screen_speaker_body",
+        "label": "画面と話者全体",
+        "reason": "上に画面、下に顔を入れた話者全体を表示する",
+        "viewports": {
+          "screen": [
+            0.18359375,
+            0,
+            0.81640625,
+            1
+          ],
+          "speaker": [
+            0.46210937500000004,
+            0.14999999999999997,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "screen_speaker_face",
+        "label": "画面と顔寄せ",
+        "reason": "上に画面、下に顔の見やすさを優先した話者を表示する",
+        "viewports": {
+          "screen": [
+            0.18359375,
+            0,
+            0.81640625,
+            1
+          ],
+          "speaker": [
+            0.6000000000000001,
+            0.06555555555555553,
+            0.9600000000000001,
+            0.6344444444444444
+          ]
+        }
+      }
+    ]
+  },
+  "model": {
+    "requested": "gemini-3.6-flash",
+    "firstResponseModelVersion": "gemini-3.6-flash",
+    "secondResponseModelVersion": "gemini-3.6-flash"
+  },
+  "usage": {
+    "first": {
+      "inputTokens": 6772,
+      "outputTokens": 469,
+      "thoughtTokens": 1591,
+      "chargedOutputTokens": 2060,
+      "totalTokens": 8832,
+      "estimatedCostUsd": 0.025608,
+      "trafficType": null
+    },
+    "second": {
+      "inputTokens": 2559,
+      "outputTokens": 64,
+      "thoughtTokens": 342,
+      "chargedOutputTokens": 406,
+      "totalTokens": 2965,
+      "estimatedCostUsd": 0.0068835,
+      "trafficType": null
+    },
+    "totalEstimatedCostUsd": 0.0324915,
+    "priceBasis": {
+      "source": "DECISIONS.md 2026-07-23 kawafmm指定 Standard価格",
+      "inputUsdPerMillion": 1.5,
+      "outputUsdPerMillion": 7.5,
+      "thoughtsCountedAsOutput": true,
+      "actualBilledAmountObserved": false
+    },
+    "preflightExpectedCostFromHistoricalObservedUsageUsd": 0.066639,
+    "approvedMaximumUsd": 0.5
+  },
+  "calls": {
+    "generateContent": 2,
+    "retries": 0,
+    "resumedFromSavedResponses": true,
+    "additionalCallsDuringResume": 0
+  },
+  "secretScan": {
+    "rawApiKeySaved": false,
+    "envFileCopied": false
+  }
+}

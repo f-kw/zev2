@@ -1,0 +1,33 @@
+{
+  "schemaVersion": "vertical-preset-legacy-crop-local-preflight-v001",
+  "status": "passed",
+  "externalApiCalls": 0,
+  "source": {
+    "path": "evals/clip_composition/outputs/presentation/base-media/qdczJpv8RCc-candidate-59-v001/base-media.mp4",
+    "sha256": "faad660c7623cdbf3a8f3b55cdaffc34729d06683ce391997c51f10fbc076967"
+  },
+  "promptProvenance": {
+    "sourcePath": "runner/src/steps/edit-plan.ts",
+    "sourceFileSha256": "513fb11e6a7f34dd524b98f6897dfb218f388599775061367b53dded3ebdd291",
+    "editPromptFunctionSha256": "545887d43915797802db656b31e7ff3c03624ec5e2b13de562edf54e10fce276",
+    "selectionPromptFunctionSha256": "c930d820f4a7adc1a60a54ebe1a2bfdbf12c6982c6b21c1a905a920659d698f0",
+    "extraction": "現行sourceの関数本文を読み取り、引数型だけ除いて同じ関数を実行",
+    "promptModified": false
+  },
+  "resolvedEditPrompt": {
+    "path": "gemini-edit-plan-prompt.txt",
+    "sha256": "d435faaaebcd6cd45fc684fdd69dd77a6fcb48bbf139e1e5743cdab70e42daae",
+    "byteLength": 6080
+  },
+  "media": {
+    "path": "candidate-59-legacy-input-640.mp4",
+    "sha256": "535590429f26233a1b5bd5a41696b1dfb119b2743d8c9b0fa6404ae2585a68a2",
+    "byteLength": 4767399
+  },
+  "historicalUsageCostPreflight": {
+    "estimatedUsd": 0.066639,
+    "approvedMaximumUsd": 0.5,
+    "withinApprovedMaximum": true
+  },
+  "apiKeyLoaded": false
+}
