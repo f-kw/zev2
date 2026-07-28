@@ -1,0 +1,121 @@
+{
+  "schemaVersion": "presentation-caption-check-report-v003",
+  "checkerVersion": "presentation-caption-checker-v003",
+  "inputBindings": {
+    "displayPlan": {
+      "path": "display-plan.json",
+      "fileSha256": "48f9a7324b6207f87b35d52b9d09f722f1e382f90ff0b0604a75666861608921",
+      "canonicalSha256": "3b8e37425d6f5b753aa00fedf7b918275c5836c3325ddee1268a0b11e2812a22"
+    },
+    "instructionBundle": {
+      "path": "instruction-bundle.json",
+      "fileSha256": "7f2bc83f4e79554a89f2e65f91606e9cc617b14c7430cfabe6e18a3e65f29061",
+      "canonicalSha256": "d6c59a5081b5cd5470cc9528ddf393d1ded86476e11b244816343536f4dc1c22"
+    }
+  },
+  "overallStatus": "passed_with_declared_limit",
+  "contract": {
+    "status": "passed",
+    "violations": [],
+    "observations": []
+  },
+  "checks": {
+    "G1": {
+      "status": "passed",
+      "violations": [],
+      "unverified": []
+    },
+    "G2": {
+      "status": "passed_with_declared_limit",
+      "violations": [],
+      "unverified": [
+        "linguistic_word_boundary",
+        "semantic_chunk_readability",
+        "on_screen_readability"
+      ]
+    },
+    "G3": {
+      "status": "passed",
+      "violations": [],
+      "unverified": []
+    }
+  },
+  "observations": {
+    "sourceAtomPositiveOverlaps": [],
+    "boundaryContacts": [
+      {
+        "leftCueId": "caption-cue-000001",
+        "rightCueId": "caption-cue-000002",
+        "boundaryMs": 5946345
+      },
+      {
+        "leftCueId": "caption-cue-000002",
+        "rightCueId": "caption-cue-000003",
+        "boundaryMs": 5948907
+      },
+      {
+        "leftCueId": "caption-cue-000003",
+        "rightCueId": "caption-cue-000004",
+        "boundaryMs": 5949827
+      },
+      {
+        "leftCueId": "caption-cue-000004",
+        "rightCueId": "caption-cue-000005",
+        "boundaryMs": 5953610
+      },
+      {
+        "leftCueId": "caption-cue-000005",
+        "rightCueId": "caption-cue-000006",
+        "boundaryMs": 5955951
+      },
+      {
+        "leftCueId": "caption-cue-000006",
+        "rightCueId": "caption-cue-000007",
+        "boundaryMs": 5958653
+      },
+      {
+        "leftCueId": "caption-cue-000007",
+        "rightCueId": "caption-cue-000008",
+        "boundaryMs": 5961675
+      },
+      {
+        "leftCueId": "caption-cue-000008",
+        "rightCueId": "caption-cue-000009",
+        "boundaryMs": 5968359
+      },
+      {
+        "leftCueId": "caption-cue-000010",
+        "rightCueId": "caption-cue-000011",
+        "boundaryMs": 5973064
+      },
+      {
+        "leftCueId": "caption-cue-000011",
+        "rightCueId": "caption-cue-000012",
+        "boundaryMs": 5975265
+      },
+      {
+        "leftCueId": "caption-cue-000012",
+        "rightCueId": "caption-cue-000013",
+        "boundaryMs": 5978867
+      },
+      {
+        "leftCueId": "caption-cue-000013",
+        "rightCueId": "caption-cue-000014",
+        "boundaryMs": 5984951
+      },
+      {
+        "leftCueId": "caption-cue-000014",
+        "rightCueId": "caption-cue-000015",
+        "boundaryMs": 5986672
+      },
+      {
+        "leftCueId": "caption-cue-000015",
+        "rightCueId": "caption-cue-000016",
+        "boundaryMs": 5988353
+      }
+    ]
+  },
+  "scopeExclusions": [
+    "SOURCE_ATOM_SPEAKER_IDENTITY_CLASSIFICATION_OUTSIDE_REGISTRY_NOT_VERIFIED"
+  ]
+}

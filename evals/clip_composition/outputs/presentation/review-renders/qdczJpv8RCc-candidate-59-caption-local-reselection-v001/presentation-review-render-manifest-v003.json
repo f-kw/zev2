@@ -1,0 +1,448 @@
+{
+  "schemaVersion": "presentation-review-render-manifest-v003",
+  "state": "review_rendered",
+  "reviewOnly": true,
+  "publicReleaseAllowed": false,
+  "reviewRendererVersion": "presentation-review-renderer-v003",
+  "sharedRenderEngineVersion": "presentation-renderer-v002",
+  "rendererTrustCanonicalSha256": "9d5ffe631033dc594c917649e2529899e303f3cb8a7d7b1b65ea0d26b7c645f2",
+  "git": {
+    "head": "27c62d06300f56a031d9a30090d3306760149250",
+    "dirty": true
+  },
+  "rendererFiles": [
+    {
+      "path": "evals/clip_composition/presentation_renderer_entry_v001.tsx",
+      "fileSha256": "884c2361feab659264ed0e00e65ae726e681b030c1a594c80985bd0225d7dce7"
+    },
+    {
+      "path": "evals/clip_composition/presentation_base_media_timeline_v002.mjs",
+      "fileSha256": "a1f72079f0e970cb5c6a67817427aa5909f2453ad0d04e81150cfd29c5b41ab2"
+    },
+    {
+      "path": "evals/clip_composition/presentation_renderer_plan_v002.mjs",
+      "fileSha256": "bedb4d9e66622372d9a564b26006dbb7b6cc689db86fd353ad8b7187ca3079de"
+    },
+    {
+      "path": "evals/clip_composition/presentation_renderer_text_layout_v001.mjs",
+      "fileSha256": "066a62adaa7fa3f8b8eda92c82e9a85940e43f372af976edc4b327ef4cf9ce5e"
+    },
+    {
+      "path": "evals/clip_composition/presentation_renderer_qc_v002.mjs",
+      "fileSha256": "663e8b12c4a3a7ce93bb6be84ec86849c53a1e3c30d5f8e8563404b276c4ef1f"
+    },
+    {
+      "path": "evals/clip_composition/presentation_instruction_contract_v003.mjs",
+      "fileSha256": "24bf6b6f81f4039bf8a19a7a57391c347645231692287b89d7bf75935e2c86dd"
+    },
+    {
+      "path": "evals/clip_composition/render_presentation_v002.mjs",
+      "fileSha256": "71ed1a3dd83751e6047738a48c743637416adaf36cd96dd8e6f00a3b5143ae51"
+    },
+    {
+      "path": "evals/clip_composition/render_presentation_review_v003.mjs",
+      "fileSha256": "d1d29f4e1e004654f7b00a20a1b95e99c86b1de2d95e94dfbb8685ee35541dcd"
+    },
+    {
+      "path": "evals/clip_composition/inspect_presentation_render_layout_v001.ts",
+      "fileSha256": "db37458f3a9be49fb72a8e79cfdc7aa8e44606ecfc92aab59107caea33b847b0"
+    }
+  ],
+  "tools": {
+    "nodeVersion": "v20.19.6",
+    "remotionVersion": "4.0.481",
+    "browserVersion": "149.0.7790.0",
+    "ffmpegVersion": "ffmpeg version 8.0.1 Copyright (c) 2000-2025 the FFmpeg developers",
+    "ffprobeVersion": "ffprobe version 8.0.1 Copyright (c) 2007-2025 the FFmpeg developers"
+  },
+  "trustedAppearance": {
+    "rendererContractVersion": "zev-renderer-boundary-v002",
+    "approvedPreview": {
+      "previewId": "normal-landscape-readable-pop-preview-20260720-v002",
+      "path": "evals/clip_composition/outputs/presentation/initial-preset-registry-candidate-20260720-v002/preview-manifest.json",
+      "fileSha256": "75d4cb0cc95d7780b27b6007933845bb1daffccf28cb254f762bd4fa55825d7f",
+      "canonicalSha256": "df777e0801c907e20c80c39b3e2683a2eaf071f5f2a2b358440164b6211c2738",
+      "componentProvenance": [
+        {
+          "path": "runner/src/remotion/Root.tsx",
+          "fileSha256": "9c58b452d81b3083c8637e6d2e8ec971bc948ae39ce0452675bb1fd2a005cc8f"
+        },
+        {
+          "path": "runner/src/remotion/renderer/TelopRenderer.tsx",
+          "fileSha256": "94b1ef2f132acbda86181034c89a57caabc72e4a150d213c01e5be8159327863"
+        },
+        {
+          "path": "runner/src/remotion/components/TelopText.tsx",
+          "fileSha256": "9e941db470dd2586485134f093679bda947e722c4d000d25b0e7fb6ec5daf001"
+        },
+        {
+          "path": "runner/src/telop/telop-render-model.ts",
+          "fileSha256": "5c32103a6f8faaa3ea1d30bb4624f0ca092385c8b77446aa5f51e3e3a0583412"
+        },
+        {
+          "path": "runner/src/telop/telop-line-break.ts",
+          "fileSha256": "3f136f17e6a1bf860aec4aa82b59de1c6f078499f860bf2d65fef82eaf66ff2d"
+        },
+        {
+          "path": "runner/src/remotion/utils/telop-font.ts",
+          "fileSha256": "fa2cb9c4c767e43006d77fa1aa8a0b6f1757b4059551ffc413d5c7fdf5cd441c"
+        }
+      ]
+    },
+    "rendererDependencies": [
+      {
+        "path": "evals/clip_composition/presentation_renderer_entry_v001.tsx",
+        "fileSha256": "884c2361feab659264ed0e00e65ae726e681b030c1a594c80985bd0225d7dce7"
+      },
+      {
+        "path": "evals/clip_composition/presentation_renderer_text_layout_v001.mjs",
+        "fileSha256": "066a62adaa7fa3f8b8eda92c82e9a85940e43f372af976edc4b327ef4cf9ce5e"
+      },
+      {
+        "path": "runner/src/remotion/components/TelopText.tsx",
+        "fileSha256": "9e941db470dd2586485134f093679bda947e722c4d000d25b0e7fb6ec5daf001"
+      },
+      {
+        "path": "runner/src/remotion/utils/telop-font.ts",
+        "fileSha256": "fa2cb9c4c767e43006d77fa1aa8a0b6f1757b4059551ffc413d5c7fdf5cd441c"
+      },
+      {
+        "path": "runner/src/telop/telop-render-model.ts",
+        "fileSha256": "5c32103a6f8faaa3ea1d30bb4624f0ca092385c8b77446aa5f51e3e3a0583412"
+      },
+      {
+        "path": "runner/src/telop/telop-line-break.ts",
+        "fileSha256": "3f136f17e6a1bf860aec4aa82b59de1c6f078499f860bf2d65fef82eaf66ff2d"
+      },
+      {
+        "path": "runner/src/telop/text-metrics.ts",
+        "fileSha256": "6fe78a6b478d61a169ec724e6c9336fdfcbf00cfa7ddee7cbbb5fbc19d87478a"
+      },
+      {
+        "path": "runner/src/shared/telop-glow.ts",
+        "fileSha256": "bfad6788f7ccfdc721839a53b4552f18bb713ac1a26c3d2469096697d33b79f8"
+      }
+    ],
+    "fontAssets": [
+      {
+        "fontAssetId": "line-seed-jp-extra-bold-v001",
+        "path": "runner/public/font/LINESeedJP_A_OTF_Eb.otf",
+        "fileSha256": "4f20353d5ba41012fb8eaaa653d2ac46f80d63880301a6590765897bbdfedbfb"
+      },
+      {
+        "fontAssetId": "shippori-mincho-bold-v001",
+        "path": "runner/public/font/ShipporiMincho-Bold.ttf",
+        "fileSha256": "be85eeed197f573a8d8dcb26634787179574f3ff179afef077ecfb8d81daa20f"
+      }
+    ],
+    "layoutRules": {
+      "layoutRuleVersion": "normal-landscape-render-layout-v001",
+      "fontWeight": 800,
+      "minimumFontSizePx": 12,
+      "textSafePaddingRatio": 0.04,
+      "horizontalSafeMarginRatio": 0.04,
+      "verticalSafeMarginRatio": 0.02,
+      "fallbackTextAreaRatio": 0.98,
+      "lowerThirdAnchorPercent": 67,
+      "renderScale": 1,
+      "characterWidthRule": "U+0000..U+00FF=1; other Unicode code point=2",
+      "borderStrokeWidthRule": "2 * max(0, borderWidthPx)",
+      "glowStrokeWidthRule": "2 * max(0, glowWidthPx) + 2 * max(0, borderWidthPx)",
+      "marginRule": "max(glowStrokeWidth, borderStrokeWidth) / 2",
+      "safePaddingRule": "max(2, ceil(fontSizePx * textSafePaddingRatio))",
+      "placementClampRule": "clamp full alpha bounds inside canvas safe margins",
+      "humanReapprovalRule": "Any numeric or formula change requires a new rendered preview and human approval before a new trust and renderer version may be activated."
+    }
+  },
+  "inputs": {
+    "job": {
+      "jobId": "qdczJpv8RCc-candidate-59-caption-local-reselection-review-render-v001",
+      "reviewRenderRequest": {
+        "path": "evals/clip_composition/outputs/presentation/caption-display-pairs/qdczJpv8RCc-candidate-59-caption-local-reselection-v001/review-render-request.json",
+        "fileSha256": "3dcb7721d0ea6d3782b74a4ef185111bbe1e17b993f49fcc3366b939781daaaa",
+        "canonicalSha256": "915ae7da2fea86286f93df80c454816695031a241a4e9c0bc0c92f63d928366e"
+      },
+      "implementationBindings": [
+        {
+          "role": "shared-render-entry",
+          "path": "evals/clip_composition/render_presentation_v002.mjs",
+          "fileSha256": "71ed1a3dd83751e6047738a48c743637416adaf36cd96dd8e6f00a3b5143ae51"
+        },
+        {
+          "role": "review-renderer",
+          "path": "evals/clip_composition/render_presentation_review_v003.mjs",
+          "fileSha256": "d1d29f4e1e004654f7b00a20a1b95e99c86b1de2d95e94dfbb8685ee35541dcd"
+        },
+        {
+          "role": "renderer-qc",
+          "path": "evals/clip_composition/presentation_renderer_qc_v002.mjs",
+          "fileSha256": "663e8b12c4a3a7ce93bb6be84ec86849c53a1e3c30d5f8e8563404b276c4ef1f"
+        }
+      ]
+    },
+    "reviewRenderRequest": {
+      "path": "evals/clip_composition/outputs/presentation/caption-display-pairs/qdczJpv8RCc-candidate-59-caption-local-reselection-v001/review-render-request.json",
+      "fileSha256": "3dcb7721d0ea6d3782b74a4ef185111bbe1e17b993f49fcc3366b939781daaaa",
+      "canonicalSha256": "915ae7da2fea86286f93df80c454816695031a241a4e9c0bc0c92f63d928366e"
+    },
+    "displayPlan": {
+      "path": "evals/clip_composition/outputs/presentation/caption-display-pairs/qdczJpv8RCc-candidate-59-caption-local-reselection-v001/display-plan.json",
+      "fileSha256": "48f9a7324b6207f87b35d52b9d09f722f1e382f90ff0b0604a75666861608921",
+      "canonicalSha256": "3b8e37425d6f5b753aa00fedf7b918275c5836c3325ddee1268a0b11e2812a22"
+    },
+    "instructionBundle": {
+      "path": "evals/clip_composition/outputs/presentation/caption-display-pairs/qdczJpv8RCc-candidate-59-caption-local-reselection-v001/instruction-bundle.json",
+      "fileSha256": "7f2bc83f4e79554a89f2e65f91606e9cc617b14c7430cfabe6e18a3e65f29061",
+      "canonicalSha256": "d6c59a5081b5cd5470cc9528ddf393d1ded86476e11b244816343536f4dc1c22"
+    },
+    "captionCheck": {
+      "path": "evals/clip_composition/outputs/presentation/caption-display-pairs/qdczJpv8RCc-candidate-59-caption-local-reselection-v001/caption-check-report.json",
+      "fileSha256": "62c14863758c770718e3e0e1a9a0053b31708dc76f97fe52982ecb8e96f426df",
+      "canonicalSha256": "89aa3bbca72cbe676e7d267182c56f2d830fd0bc9f61fff8c5e154fa59e8834b"
+    },
+    "layoutPreflight": {
+      "path": "evals/clip_composition/outputs/presentation/caption-display-pairs/qdczJpv8RCc-candidate-59-caption-local-reselection-v001/layout-preflight.json",
+      "fileSha256": "07a9eace5f5ed7d31f77aa0a745531d5bab7357c4d46a9282b1e4380a8a6e069",
+      "canonicalSha256": "25540fbc878e1a76c282c7db4656db385e6b06e4429e290ea1038ee51b73d6ed"
+    },
+    "retainedSourceAtoms": {
+      "path": "evals/clip_composition/outputs/presentation/retained-source-atoms/qdczJpv8RCc-candidate-59-v001/source-atoms.json",
+      "fileSha256": "9fe657ace14e61d5af417897a67f56ba2e6e188d4346edde8320049643955996",
+      "canonicalSha256": "25d27b6b67d16fa63b0b9733505e4b7c77fa427755bab741aca060837457c36b"
+    },
+    "retainedSourceAtomsGenerationManifest": {
+      "path": "evals/clip_composition/outputs/presentation/retained-source-atoms/qdczJpv8RCc-candidate-59-v001/generation-manifest.json",
+      "fileSha256": "7e681fdf1a9bd8223678ef091406ea48af3287dfcc66d6934993f24a2ebea381",
+      "canonicalSha256": "e534ee75118aa2052bbade08e05a3f716f2d75801ff583d5600a515f07514ecf"
+    },
+    "retainedSourceAtomsValidationReport": {
+      "path": "evals/clip_composition/outputs/presentation/retained-source-atoms/qdczJpv8RCc-candidate-59-v001/validation-report.json",
+      "fileSha256": "b71f79aed863499b433a8e166e4df63fc83a45a043318b46c5a24bfa5b2f5fbd",
+      "canonicalSha256": "610b809fac3b185dcef2acb708d6e76293d5b510045f9f23992a62a35d8938b2"
+    },
+    "trustedRegistryBindings": {
+      "path": "evals/clip_composition/registries/presentation/normal-landscape-preset-registry-v001/trusted-registry-bindings.json",
+      "fileSha256": "b26db5c57aac5dd290e084d953350778b527c6eb21f66f62dc7431bf24482fff",
+      "canonicalSha256": "bfbbcb5c611313d368305e6e8d552ddcdaf41949ed8d8f074485c8ed0aa2d43e"
+    },
+    "presetRegistry": {
+      "path": "evals/clip_composition/registries/presentation/normal-landscape-preset-registry-v001/preset-registry.json",
+      "fileSha256": "8e9b0a039c8a4c9edf2c66b1df343c1d892d4688ebc4886a9af322bd44a6e5a8",
+      "canonicalSha256": "5915d6aae47681c43ea202a20eee16cbf669abfe24fdc832f75fb127ad46dca4"
+    },
+    "presetValidationIndex": {
+      "path": "evals/clip_composition/registries/presentation/normal-landscape-preset-registry-v001/preset-validation-index.json",
+      "fileSha256": "d2665c7947564a56955bbc47de7d95d038c64487ea71b6cbc1a2cc61667c05a1",
+      "canonicalSha256": "40609dbc63b7c2d1f4c2cd92ee22c493c08382c0d63c27ea06087535f5882067"
+    },
+    "materialValidationIndex": {
+      "path": "evals/clip_composition/registries/presentation/normal-landscape-preset-registry-v001/material-validation-index.json",
+      "fileSha256": "98213035bc6e395b090d7cff2639d4bf707fb838b7df50cb51bc60ab95d4758e",
+      "canonicalSha256": "3958ad2d21233342e49aedd29cbd337785a228e1063d1802b64e92dc1793d1fc"
+    },
+    "baseMediaGenerationManifest": {
+      "path": "evals/clip_composition/outputs/presentation/base-media/qdczJpv8RCc-candidate-59-v001/generation-manifest.json",
+      "fileSha256": "bc47f29089eaaf1a062593add2d8690971682d80d474d168dce6114aebf7b9e6",
+      "canonicalSha256": "d8e114512063104346b51ab58a98be557b80e376e0f46ba6e1160d74d7e56100"
+    },
+    "baseMediaValidationReport": {
+      "path": "evals/clip_composition/outputs/presentation/base-media/qdczJpv8RCc-candidate-59-v001/validation-report.json",
+      "fileSha256": "b091465fca55f258fd2c33076b1ae864b82ee8576af6b40f6f636c735b79d776",
+      "canonicalSha256": "30a2088780fe2c0c1828e8b38876e57e0b7fb405150f39a18328894dcde73488"
+    },
+    "baseMediaTimeline": {
+      "path": "evals/clip_composition/outputs/presentation/base-media/qdczJpv8RCc-candidate-59-v001/timeline.json",
+      "fileSha256": "dbebfe08882aabf66f4c7b13f4489f3bd7348e7bd499ec783250827ccddafcb2",
+      "canonicalSha256": "336c3f9fb9912143c11e460ff2a24be167606cb373a0eafb0341f1b9b13773aa"
+    },
+    "baseMedia": {
+      "path": "evals/clip_composition/outputs/presentation/base-media/qdczJpv8RCc-candidate-59-v001/base-media.mp4",
+      "fileSha256": "faad660c7623cdbf3a8f3b55cdaffc34729d06683ce391997c51f10fbc076967"
+    }
+  },
+  "instructionContract": {
+    "status": "passed_with_declared_limit",
+    "declaredLimits": [
+      "linguistic_word_boundary",
+      "semantic_chunk_readability",
+      "on_screen_readability"
+    ]
+  },
+  "instructionSetId": "qdczJpv8RCc-candidate-59-caption-local-reselection-v001-instruction-set",
+  "resolutionPackageId": "qdczJpv8RCc-candidate-59-caption-local-reselection-v001-resolution-package",
+  "timelineId": "timeline-e625e110e6a2de97f73863dc",
+  "presetRegistryVersion": "normal-landscape-preset-registry-v001",
+  "baseMediaToolVerification": {
+    "status": "passed",
+    "expected": {
+      "nodeVersion": "v20.19.6",
+      "ffmpegVersion": "ffmpeg version 8.0.1 Copyright (c) 2000-2025 the FFmpeg developers",
+      "ffprobeVersion": "ffprobe version 8.0.1 Copyright (c) 2007-2025 the FFmpeg developers"
+    },
+    "observed": {
+      "nodeVersion": "v20.19.6",
+      "ffmpegVersion": "ffmpeg version 8.0.1 Copyright (c) 2000-2025 the FFmpeg developers",
+      "ffprobeVersion": "ffprobe version 8.0.1 Copyright (c) 2007-2025 the FFmpeg developers"
+    }
+  },
+  "requiredReviewQc": {
+    "state": "passed",
+    "requiredQc": [
+      {
+        "name": "preset_applied",
+        "status": "passed",
+        "evidence": {
+          "instructionCount": 16,
+          "renderedCount": 16
+        }
+      },
+      {
+        "name": "no_text_overlap",
+        "status": "passed",
+        "evidence": {
+          "positiveIntersectionViolations": 0
+        }
+      },
+      {
+        "name": "inside_safe_area",
+        "status": "passed",
+        "evidence": {
+          "safeAreaViolations": 0
+        }
+      },
+      {
+        "name": "no_missing_caption",
+        "status": "passed",
+        "evidence": {
+          "instructionCount": 16,
+          "renderedCount": 16
+        }
+      },
+      {
+        "name": "base_frame_count_preserved",
+        "status": "passed",
+        "evidence": {
+          "expectedFrameCount": 1547,
+          "actualFrameCount": 1547
+        }
+      },
+      {
+        "name": "base_audio_preserved",
+        "status": "passed",
+        "evidence": {
+          "expectedCodecName": "aac",
+          "actualCodecName": "aac",
+          "expectedPacketPayloadSha256": "d18469bd3132356b03870ee8bc3d63e95947bd254961157e09d59cf9a53459ec",
+          "actualPacketPayloadSha256": "d18469bd3132356b03870ee8bc3d63e95947bd254961157e09d59cf9a53459ec"
+        }
+      }
+    ]
+  },
+  "output": {
+    "videoFile": "presentation-review-rendered-v003.mp4",
+    "videoFileSha256": "730410a9598ac9fda6d84b61b80686a0706ce8cebe4d83cca923422398e3b88b",
+    "video": {
+      "codecName": "h264",
+      "width": 1920,
+      "height": 1080,
+      "fps": 30,
+      "frameCount": 1547
+    },
+    "audio": {
+      "codecName": "aac",
+      "packetPayloadSha256": "d18469bd3132356b03870ee8bc3d63e95947bd254961157e09d59cf9a53459ec"
+    },
+    "planFile": "presentation-review-render-plan-v003.json",
+    "planFileSha256": "e434c42d5877fc006d8b9153a224cc1288fc4c4d63b813ce08fb3fc7ae71902d",
+    "applicationResultsFile": "presentation-review-render-application-results-v003.json",
+    "applicationResultsFileSha256": "ca04ed98028566d39b1ceafdf5eb1ec7d5cea8aa0249f9f42c2d07ffa5a36f79",
+    "qcFile": "presentation-review-render-qc-v003.json",
+    "qcFileSha256": "9b6d4e9b3d7814dd01a63864771dfc4b1e59dcbfc61987a93fc6a2b59b18744e",
+    "overlaySet": {
+      "directory": "overlays",
+      "files": [
+        {
+          "instructionId": "caption-instruction-000001",
+          "path": "overlays/01-d8d9f432d88c.png",
+          "fileSha256": "19707f556199385ce1862f91414dcf65947d6abf637db84b0dbbdb1917542ec2"
+        },
+        {
+          "instructionId": "caption-instruction-000002",
+          "path": "overlays/02-d15e07b898bc.png",
+          "fileSha256": "e903e11d4ae46bf5da19cbbaebdf757459f44470c21cc1e132ba7f3f192060c0"
+        },
+        {
+          "instructionId": "caption-instruction-000003",
+          "path": "overlays/03-b5778d86bc00.png",
+          "fileSha256": "7ea14084bc5b3966504550320cde446a250803be06de30182cf26d66b2975b47"
+        },
+        {
+          "instructionId": "caption-instruction-000004",
+          "path": "overlays/04-198732c98d1f.png",
+          "fileSha256": "e55545f81e4cfde653fdeefcb9617bdd7080a60ba3ecca97c829eeb95a3d15c9"
+        },
+        {
+          "instructionId": "caption-instruction-000005",
+          "path": "overlays/05-6c2979d93af4.png",
+          "fileSha256": "c762586e1bea2d47c067cf4c407ad6dab63bf5fbc172fc41ab78305c895f7ea1"
+        },
+        {
+          "instructionId": "caption-instruction-000006",
+          "path": "overlays/06-4f4aa89541ff.png",
+          "fileSha256": "45d731e1b37a61c22a60ac4e90b7fea78b40b6870c5f34ea5e46323e09af4631"
+        },
+        {
+          "instructionId": "caption-instruction-000007",
+          "path": "overlays/07-8edb321be421.png",
+          "fileSha256": "6314a122a485a9837c767f59ed344339cdf3e982de1dc12820a4fcb6d1cafc7a"
+        },
+        {
+          "instructionId": "caption-instruction-000008",
+          "path": "overlays/08-250f9130ea81.png",
+          "fileSha256": "629384e16c30e5eef1e4ed8c64a31139e8f7b28765dd8e8d75084653be4aba46"
+        },
+        {
+          "instructionId": "caption-instruction-000009",
+          "path": "overlays/09-ad3fd1ab950c.png",
+          "fileSha256": "8500af990f90c056945434f30d32df0147866af232afa615669a23386b47eb77"
+        },
+        {
+          "instructionId": "caption-instruction-000010",
+          "path": "overlays/10-4bbf5393cea3.png",
+          "fileSha256": "8755da2121386eb88233c88b4c48875f48053a8e76cf2e78110dadbcc8312031"
+        },
+        {
+          "instructionId": "caption-instruction-000011",
+          "path": "overlays/11-adf7b479e994.png",
+          "fileSha256": "23f24c8c9b3b99e5a434849c54811550f038ba71a7db20b50fa5a02e88cfabd6"
+        },
+        {
+          "instructionId": "caption-instruction-000012",
+          "path": "overlays/12-0fd2d8224e3d.png",
+          "fileSha256": "a4bd4c0142c0630223008279ae3e8da4ae99cd3e3d5afd1ef3f9577867dbbd7b"
+        },
+        {
+          "instructionId": "caption-instruction-000013",
+          "path": "overlays/13-e3514f38a2d2.png",
+          "fileSha256": "3a9158b4f2a42f4677f9cc54033ed88734c02dd9db7f819130f7106dac3259b8"
+        },
+        {
+          "instructionId": "caption-instruction-000014",
+          "path": "overlays/14-2aaa57b1e362.png",
+          "fileSha256": "d76f4fee19beec9e1d7777ad3c8b50c06ea4118be435517c6792d3aed0e48e0a"
+        },
+        {
+          "instructionId": "caption-instruction-000015",
+          "path": "overlays/15-ed01b4c0c8b0.png",
+          "fileSha256": "e5d1a9230315d37a45b526e6268992ae568e45a84123c2c784d49996ffac4f98"
+        },
+        {
+          "instructionId": "caption-instruction-000016",
+          "path": "overlays/16-984f6fe042c3.png",
+          "fileSha256": "c7694cac254722145b91995c7f3c2565c42727c40f2af62bc3075839d1cffc88"
+        }
+      ],
+      "canonicalSha256": "70dc4f4d27ce39d43da87a6ec9a3a0525bd92696a9ecbe6b79b1d2071b8efbbf"
+    }
+  }
+}

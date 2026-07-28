@@ -1,0 +1,84 @@
+{
+  "schemaVersion": "presentation-caption-review-render-request-v003",
+  "requestId": "qdczJpv8RCc-candidate-59-caption-local-reselection-v001-review-render-request",
+  "purpose": "caption-readability-alignment-completeness-review",
+  "reviewOnly": true,
+  "publicationAllowed": false,
+  "displayPlanBinding": {
+    "path": "display-plan.json",
+    "fileSha256": "48f9a7324b6207f87b35d52b9d09f722f1e382f90ff0b0604a75666861608921",
+    "canonicalSha256": "3b8e37425d6f5b753aa00fedf7b918275c5836c3325ddee1268a0b11e2812a22"
+  },
+  "instructionBundleBinding": {
+    "path": "instruction-bundle.json",
+    "fileSha256": "7f2bc83f4e79554a89f2e65f91606e9cc617b14c7430cfabe6e18a3e65f29061",
+    "canonicalSha256": "d6c59a5081b5cd5470cc9528ddf393d1ded86476e11b244816343536f4dc1c22"
+  },
+  "captionCheckBinding": {
+    "path": "caption-check-report.json",
+    "fileSha256": "62c14863758c770718e3e0e1a9a0053b31708dc76f97fe52982ecb8e96f426df",
+    "canonicalSha256": "89aa3bbca72cbe676e7d267182c56f2d830fd0bc9f61fff8c5e154fa59e8834b"
+  },
+  "layoutPreflightBinding": {
+    "path": "layout-preflight.json",
+    "fileSha256": "07a9eace5f5ed7d31f77aa0a745531d5bab7357c4d46a9282b1e4380a8a6e069",
+    "canonicalSha256": "25540fbc878e1a76c282c7db4656db385e6b06e4429e290ea1038ee51b73d6ed"
+  },
+  "baseMediaBinding": {
+    "baseMedia": {
+      "path": "evals/clip_composition/outputs/presentation/base-media/qdczJpv8RCc-candidate-59-v001/base-media.mp4",
+      "fileSha256": "faad660c7623cdbf3a8f3b55cdaffc34729d06683ce391997c51f10fbc076967"
+    },
+    "timeline": {
+      "path": "evals/clip_composition/outputs/presentation/base-media/qdczJpv8RCc-candidate-59-v001/timeline.json",
+      "fileSha256": "dbebfe08882aabf66f4c7b13f4489f3bd7348e7bd499ec783250827ccddafcb2",
+      "canonicalSha256": "336c3f9fb9912143c11e460ff2a24be167606cb373a0eafb0341f1b9b13773aa"
+    },
+    "generationManifest": {
+      "path": "evals/clip_composition/outputs/presentation/base-media/qdczJpv8RCc-candidate-59-v001/generation-manifest.json",
+      "fileSha256": "bc47f29089eaaf1a062593add2d8690971682d80d474d168dce6114aebf7b9e6",
+      "canonicalSha256": "d8e114512063104346b51ab58a98be557b80e376e0f46ba6e1160d74d7e56100"
+    },
+    "validationReport": {
+      "path": "evals/clip_composition/outputs/presentation/base-media/qdczJpv8RCc-candidate-59-v001/validation-report.json",
+      "fileSha256": "b091465fca55f258fd2c33076b1ae864b82ee8576af6b40f6f636c735b79d776",
+      "canonicalSha256": "30a2088780fe2c0c1828e8b38876e57e0b7fb405150f39a18328894dcde73488"
+    }
+  },
+  "registryBindings": {
+    "trustedRegistryBindings": {
+      "path": "evals/clip_composition/registries/presentation/normal-landscape-preset-registry-v001/trusted-registry-bindings.json",
+      "fileSha256": "b26db5c57aac5dd290e084d953350778b527c6eb21f66f62dc7431bf24482fff",
+      "canonicalSha256": "bfbbcb5c611313d368305e6e8d552ddcdaf41949ed8d8f074485c8ed0aa2d43e"
+    },
+    "presetRegistry": {
+      "path": "evals/clip_composition/registries/presentation/normal-landscape-preset-registry-v001/preset-registry.json",
+      "fileSha256": "8e9b0a039c8a4c9edf2c66b1df343c1d892d4688ebc4886a9af322bd44a6e5a8",
+      "canonicalSha256": "5915d6aae47681c43ea202a20eee16cbf669abfe24fdc832f75fb127ad46dca4"
+    },
+    "presetValidationIndex": {
+      "path": "evals/clip_composition/registries/presentation/normal-landscape-preset-registry-v001/preset-validation-index.json",
+      "fileSha256": "d2665c7947564a56955bbc47de7d95d038c64487ea71b6cbc1a2cc61667c05a1",
+      "canonicalSha256": "40609dbc63b7c2d1f4c2cd92ee22c493c08382c0d63c27ea06087535f5882067"
+    },
+    "materialValidationIndex": {
+      "path": "evals/clip_composition/registries/presentation/normal-landscape-preset-registry-v001/material-validation-index.json",
+      "fileSha256": "98213035bc6e395b090d7cff2639d4bf707fb838b7df50cb51bc60ab95d4758e",
+      "canonicalSha256": "3958ad2d21233342e49aedd29cbd337785a228e1063d1802b64e92dc1793d1fc"
+    }
+  },
+  "requiredInputState": "review_input_ready",
+  "rendererEntry": "presentation-review-renderer-v003",
+  "expectedOutput": {
+    "state": "review_rendered",
+    "publicationAllowed": false,
+    "requiredQc": [
+      "preset_applied",
+      "no_text_overlap",
+      "inside_safe_area",
+      "no_missing_caption",
+      "base_frame_count_preserved",
+      "base_audio_preserved"
+    ]
+  }
+}

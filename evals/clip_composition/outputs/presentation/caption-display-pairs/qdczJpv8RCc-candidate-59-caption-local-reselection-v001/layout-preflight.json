@@ -1,0 +1,120 @@
+{
+  "schemaVersion": "presentation-caption-layout-preflight-v001",
+  "inspectorVersion": "presentation-preset-layout-inspector-v001",
+  "inputBindings": [
+    {
+      "role": "displayPlan",
+      "path": "display-plan.json",
+      "fileSha256": "48f9a7324b6207f87b35d52b9d09f722f1e382f90ff0b0604a75666861608921",
+      "canonicalSha256": "3b8e37425d6f5b753aa00fedf7b918275c5836c3325ddee1268a0b11e2812a22"
+    },
+    {
+      "role": "instructionBundle",
+      "path": "instruction-bundle.json",
+      "fileSha256": "7f2bc83f4e79554a89f2e65f91606e9cc617b14c7430cfabe6e18a3e65f29061",
+      "canonicalSha256": "d6c59a5081b5cd5470cc9528ddf393d1ded86476e11b244816343536f4dc1c22"
+    },
+    {
+      "role": "trustedRegistryBindings",
+      "path": "evals/clip_composition/registries/presentation/normal-landscape-preset-registry-v001/trusted-registry-bindings.json",
+      "fileSha256": "b26db5c57aac5dd290e084d953350778b527c6eb21f66f62dc7431bf24482fff",
+      "canonicalSha256": "bfbbcb5c611313d368305e6e8d552ddcdaf41949ed8d8f074485c8ed0aa2d43e"
+    },
+    {
+      "role": "presetRegistry",
+      "path": "evals/clip_composition/registries/presentation/normal-landscape-preset-registry-v001/preset-registry.json",
+      "fileSha256": "8e9b0a039c8a4c9edf2c66b1df343c1d892d4688ebc4886a9af322bd44a6e5a8",
+      "canonicalSha256": "5915d6aae47681c43ea202a20eee16cbf669abfe24fdc832f75fb127ad46dca4"
+    },
+    {
+      "role": "presetValidationIndex",
+      "path": "evals/clip_composition/registries/presentation/normal-landscape-preset-registry-v001/preset-validation-index.json",
+      "fileSha256": "d2665c7947564a56955bbc47de7d95d038c64487ea71b6cbc1a2cc61667c05a1",
+      "canonicalSha256": "40609dbc63b7c2d1f4c2cd92ee22c493c08382c0d63c27ea06087535f5882067"
+    },
+    {
+      "role": "materialValidationIndex",
+      "path": "evals/clip_composition/registries/presentation/normal-landscape-preset-registry-v001/material-validation-index.json",
+      "fileSha256": "98213035bc6e395b090d7cff2639d4bf707fb838b7df50cb51bc60ab95d4758e",
+      "canonicalSha256": "3958ad2d21233342e49aedd29cbd337785a228e1063d1802b64e92dc1793d1fc"
+    }
+  ],
+  "presetResolution": {
+    "registryVersion": "normal-landscape-preset-registry-v001",
+    "presetId": "normal-landscape-readable-pop-v001",
+    "stateId": "caption-core-v001",
+    "fontAssetId": "line-seed-jp-extra-bold-v001",
+    "transitionId": "quick-fade-4f-v001",
+    "endResponsibility": "target-anchor",
+    "canvas": {
+      "width": 1920,
+      "height": 1080,
+      "fps": 30,
+      "safeAreaPx": {
+        "top": 40,
+        "right": 80,
+        "bottom": 40,
+        "left": 80
+      }
+    },
+    "safeAreaPx": {
+      "top": 40,
+      "right": 80,
+      "bottom": 40,
+      "left": 80
+    },
+    "layout": {
+      "maxCharsPerLine": 36,
+      "maxLines": 2,
+      "singleLine": false
+    }
+  },
+  "status": "passed",
+  "checks": [
+    {
+      "name": "lineCount",
+      "status": "passed",
+      "violationCodes": []
+    },
+    {
+      "name": "logicalWidth",
+      "status": "passed",
+      "violationCodes": []
+    },
+    {
+      "name": "trustedPreset",
+      "status": "passed",
+      "violationCodes": []
+    },
+    {
+      "name": "safeArea",
+      "status": "passed",
+      "violationCodes": []
+    },
+    {
+      "name": "lineIntersection",
+      "status": "passed",
+      "violationCodes": []
+    },
+    {
+      "name": "materialRegistry",
+      "status": "passed",
+      "violationCodes": []
+    }
+  ],
+  "observedProjection": {
+    "cueCount": 16,
+    "lineCount": 29,
+    "maximumObservedLineLogicalWidth": 34,
+    "safeAreaFailureCount": 0,
+    "positiveLineIntersectionCount": 0
+  },
+  "scopeExclusions": [
+    "font_fallback_not_verified_before_render",
+    "alpha_bounds_not_verified_before_render",
+    "final_overlay_intersection_not_verified_before_render",
+    "final_overlay_safe_area_not_verified_before_render",
+    "caption_presence_in_video_not_verified_before_render",
+    "base_audio_preservation_not_verified_before_render"
+  ]
+}

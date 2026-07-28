@@ -92,3 +92,21 @@
 - 詳細: [B5/B6 v004結果](evals/clip_composition/reports/presentation/presentation-candidate13-caption-gate-b6-readability-result-20260727-v004.md)、[描画manifest](evals/clip_composition/outputs/presentation/review-renders/DmWu0jVQfTE-candidate-13-caption-b6-v004-v002/presentation-review-render-manifest-v003.json)、[描画後QC](evals/clip_composition/outputs/presentation/review-renders/DmWu0jVQfTE-candidate-13-caption-b6-v004-v002/presentation-review-render-qc-v003.json)。
 - G4〜G7、素材、SE、タイトル、サムネイルはこのタグの完成範囲に含まれない。
 - タグ時点より後の作業はまだ無いため、今ここへ撤退して失う完成作業はない。
+
+## 2026-07-28 — `stable/second-clip-generality-20260728`
+
+- 宝鐘マリンのLiar's Bar元配信から選んだcandidate 59を、candidate 13とは別の素材で一本の字幕付き動画まで完成させた。
+- 元配信・候補・外側境界から組立と残存発話へ進む入口、素材ごとの初回token計測入口、固定jobからGemini・回答検査・表示計画へ進む入口の3点を共用化した。
+- 既存の計算を呼ぶ構造を維持し、candidate 59専用の計算や4つ目の入口は作っていない。
+- B1では、生成時の実装来歴と現在使う実装の検査を別の役割として扱い、両者の世代が同じであることだけを要求しないようにした。
+- 生成時の来歴、現在の実ファイル、参照関係、内容、実行後の再読と改変検知は引き続き検査している。
+- Geminiが作った16まとまりのうち1件だけが画面配置検査に抵触した。
+- kawafmmがその1件の分割候補を認定し、他の15まとまり、上流281文字、プリセット、行幅上限36を変えず局所再選択した。
+- 局所再選択後は、回答受入12/12、表示計画17/17、描画後QC 6/6に合格した。
+- 完成動画は51.566秒、1920×1080、1,547 frameで、SHA-256は`730410a9598ac9fda6d84b61b80686a0706ce8cebe4d83cca923422398e3b88b`。
+- kawafmmが全編を見て「何も問題ない」と認定した。
+- これで、最初の一本だけでなく、別の元配信でも同じ配管から一本を成立させた実績ができた。
+- 行幅36と横型プリセット1種は今回も固定であり、形式別の値差し替えはまだ実証していない。
+- 詳細: [一般化入口の実装完了](evals/clip_composition/reports/presentation/presentation-liars-bar-candidate59-minimal-generalization-implementation-completion-20260727-v001.md)、[candidate 59完成検証](evals/clip_composition/reports/presentation/presentation-liars-bar-candidate59-completion-verification-report-20260728-v002.md)、[描画後QC](evals/clip_composition/outputs/presentation/review-renders/qdczJpv8RCc-candidate-59-caption-local-reselection-v001/presentation-review-render-qc-v003.json)。
+- このタグへ撤退すると、candidate 59の完成動画と3つの一般化入口までは保持される。タグ発行時点より後の完成作業はまだないため、現時点で失う作業はない。
+- 一つ前の`stable/first-clip-complete-20260727`まで戻る場合は、candidate 59の全成果物、3つの一般化入口、B1世代差改訂、局所再選択の実績を失う。

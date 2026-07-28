@@ -1,0 +1,252 @@
+{
+  "schemaVersion": "presentation-caption-gate-b5-initial-manifest-v001",
+  "status": "passed",
+  "stage": "b5-initial-token-diagnosis-only",
+  "jobBinding": {
+    "path": "evals/clip_composition/jobs/presentation/caption-gate-b5-initial/qdczJpv8RCc-candidate-59-v001.json",
+    "fileSha256": "d282e3885e8c26098539096e2e3816e088f6779afd7b62f14159ee617950a152",
+    "jobId": "qdczJpv8RCc-candidate-59-caption-gate-b5-initial-v001"
+  },
+  "requestBuilderBinding": {
+    "path": "evals/clip_composition/run_presentation_caption_gate_b5_v004.mjs",
+    "fileSha256": "f8d79be781680cbb41c908d36fd9cdfb7a0874a64a145067c68662f6cedc1ecb"
+  },
+  "upstreamProjection": {
+    "sentinelPath": "evals/clip_composition/outputs/presentation/caption-display-pair-static-preflight-jobs/qdczJpv8RCc-candidate-59-caption-gate-b5-initial-projection-probe-v001.json",
+    "expectedCanonicalSha256": "fdc4f650f17c9cef094f078708c52235a18c243cca4005694286eb07a90deef8"
+  },
+  "sourceBinding": {
+    "path": "evals/clip_composition/outputs/presentation/segmenter-boundary-evidence/qdczJpv8RCc-candidate-59-v001/semantic-source-input.json",
+    "fileSha256": "ead2a47ef57480c3da9e598a650059a92c1f1519b25b94d2617b86485f79433a",
+    "characterCount": 281,
+    "containerCount": 2,
+    "boundaryCandidateCount": 164
+  },
+  "requestBindings": {
+    "generateContent": {
+      "path": "evals/clip_composition/outputs/presentation/caption-gate-b5/qdczJpv8RCc-candidate-59-v001/generate-content-request.json",
+      "fileSha256": "20a74de1f36802e4b6d414b718e0034731305b7111f621b5a4599bccd460284c",
+      "byteLength": 30517
+    },
+    "inputTokenCount": {
+      "path": "evals/clip_composition/outputs/presentation/caption-gate-b5/qdczJpv8RCc-candidate-59-v001/input-token-count-request.json",
+      "fileSha256": "8f00ae239786f5959ff6d7dc12ff6f875e52b51edddb178768daaf5aa57c1c00",
+      "byteLength": 30813
+    },
+    "maximumResponseTokenCount": {
+      "path": "evals/clip_composition/outputs/presentation/caption-gate-b5/qdczJpv8RCc-candidate-59-v001/maximum-response-token-count-request.json",
+      "fileSha256": "54ddd323c74b14d4637966e64be85af136313ec6e8b3a68cf4e3a1bec8220ed3",
+      "byteLength": 11128
+    }
+  },
+  "officialVerification": {
+    "observedAt": "2026-07-28",
+    "sources": [
+      "https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash",
+      "https://ai.google.dev/gemini-api/docs/pricing"
+    ],
+    "modelId": "gemini-3.6-flash",
+    "modelResource": "models/gemini-3.6-flash",
+    "inputLimit": 1048576,
+    "outputLimit": 65536,
+    "tier": "PAID_STANDARD_DEFAULT_BY_OMISSION",
+    "inputPriceUsdPerMillion": "1.50",
+    "outputPriceUsdPerMillion": "7.50"
+  },
+  "transport": {
+    "product": "Gemini Developer API",
+    "apiVersion": "v1beta",
+    "endpoint": "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:countTokens",
+    "method": "POST",
+    "headers": {
+      "Content-Type": "application/json",
+      "X-Server-Timeout": "600",
+      "x-goog-api-key": "<redacted>"
+    },
+    "clientTimeoutMilliseconds": 600000,
+    "automaticRetries": 0,
+    "countTokensCalls": 2,
+    "generateContentCalls": 0
+  },
+  "tokenDiagnosis": {
+    "inputTokens": 7474,
+    "maximumResponseStructureTokens": 3000,
+    "maximumResponseStructureWithinOfficialOutputLimit": true,
+    "inputMeasurement": {
+      "status": "measured-in-this-attempt",
+      "countTokensCallsInThisAttempt": 1,
+      "responsePath": "evals/clip_composition/outputs/presentation/caption-gate-b5/qdczJpv8RCc-candidate-59-v001/input-token-count-response.raw.json",
+      "responseSha256": "3db025b36634f24d01cd236ecaae40a525a35f6b3718ec814ed06478b149bb3f"
+    },
+    "maximumResponseStructureMeasurement": {
+      "status": "measured-in-this-attempt",
+      "countTokensCallsInThisAttempt": 1,
+      "responsePath": "evals/clip_composition/outputs/presentation/caption-gate-b5/qdczJpv8RCc-candidate-59-v001/maximum-response-token-count-response.raw.json",
+      "responseSha256": "fbc3bd9adb1623471ded7f9cb57eb36156996735e25bd5cb2d5d8d535cb2a1e0"
+    }
+  },
+  "cost": {
+    "calculationPolicy": "record-measured-tokens-official-unit-price-and-formula-without-private-helper",
+    "inputMeasurement": {
+      "measuredTokens": 7474,
+      "officialUnitPriceUsdPerMillion": "1.50",
+      "formula": "7474 * 1.50 / 1000000"
+    },
+    "maximumResponseStructureMeasurement": {
+      "measuredTokens": 3000,
+      "officialUnitPriceUsdPerMillion": "1.50",
+      "formula": "3000 * 1.50 / 1000000"
+    },
+    "theoreticalB6UpperBoundFormula": "1048576 * 1.50 / 1000000 + 65536 * 7.50 / 1000000",
+    "actualCharge": "not-observable-from-countTokens-responses"
+  },
+  "artifacts": [
+    {
+      "path": "evals/clip_composition/outputs/presentation/caption-gate-b5/qdczJpv8RCc-candidate-59-v001/generate-content-request.json",
+      "fileSha256": "20a74de1f36802e4b6d414b718e0034731305b7111f621b5a4599bccd460284c",
+      "byteLength": 30517
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/caption-gate-b5/qdczJpv8RCc-candidate-59-v001/input-token-count-request.json",
+      "fileSha256": "8f00ae239786f5959ff6d7dc12ff6f875e52b51edddb178768daaf5aa57c1c00",
+      "byteLength": 30813
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/caption-gate-b5/qdczJpv8RCc-candidate-59-v001/input-token-count-response.raw.json",
+      "fileSha256": "3db025b36634f24d01cd236ecaae40a525a35f6b3718ec814ed06478b149bb3f",
+      "byteLength": 121
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/caption-gate-b5/qdczJpv8RCc-candidate-59-v001/maximum-response-token-count-request.json",
+      "fileSha256": "54ddd323c74b14d4637966e64be85af136313ec6e8b3a68cf4e3a1bec8220ed3",
+      "byteLength": 11128
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/caption-gate-b5/qdczJpv8RCc-candidate-59-v001/maximum-response-token-count-response.raw.json",
+      "fileSha256": "fbc3bd9adb1623471ded7f9cb57eb36156996735e25bd5cb2d5d8d535cb2a1e0",
+      "byteLength": 121
+    }
+  ],
+  "checks": [
+    {
+      "id": 1,
+      "status": "passed",
+      "meaning": "B3意味入力のpath・SHA・件数をjobへ束縛",
+      "evidence": {
+        "sourcePath": "evals/clip_composition/outputs/presentation/segmenter-boundary-evidence/qdczJpv8RCc-candidate-59-v001/semantic-source-input.json",
+        "sourceSha256": "ead2a47ef57480c3da9e598a650059a92c1f1519b25b94d2617b86485f79433a",
+        "characterCount": 281,
+        "containerCount": 2,
+        "boundaryCandidateCount": 164
+      }
+    },
+    {
+      "id": 2,
+      "status": "passed",
+      "meaning": "B5 v004公開処理を3 requestの唯一の正本として使用",
+      "evidence": {
+        "requestBuilderPath": "evals/clip_composition/run_presentation_caption_gate_b5_v004.mjs",
+        "requestBuilderSha256": "f8d79be781680cbb41c908d36fd9cdfb7a0874a64a145067c68662f6cedc1ecb",
+        "requestCount": 3
+      }
+    },
+    {
+      "id": 3,
+      "status": "passed",
+      "meaning": "生成requestがB3意味入力をbyte同一のuser contentとして保持",
+      "evidence": {
+        "sourceSha256": "ead2a47ef57480c3da9e598a650059a92c1f1519b25b94d2617b86485f79433a",
+        "userContentSha256": "ead2a47ef57480c3da9e598a650059a92c1f1519b25b94d2617b86485f79433a"
+      }
+    },
+    {
+      "id": 4,
+      "status": "passed",
+      "meaning": "最大有効回答が全行末候補を記載順に一度ずつ使用",
+      "evidence": {
+        "boundaryCandidateCount": 164
+      }
+    },
+    {
+      "id": 5,
+      "status": "passed",
+      "meaning": "service tierをrequestへ送らずmedium・2行schemaを維持",
+      "evidence": {
+        "serviceTierRequestField": "omitted",
+        "thinkingLevel": "medium",
+        "maximumLinesPerMeaningGroup": 2
+      }
+    },
+    {
+      "id": 6,
+      "status": "passed",
+      "meaning": "countTokensを入力と最大構造へ各1回だけ実行",
+      "evidence": {
+        "inputCountTokensCalls": 1,
+        "maximumResponseCountTokensCalls": 1,
+        "totalCountTokensCalls": 2,
+        "automaticRetries": 0,
+        "generateContentCalls": 0
+      }
+    },
+    {
+      "id": 7,
+      "status": "passed",
+      "meaning": "raw responseを解析前に保存しSHAで束縛",
+      "evidence": {
+        "inputResponse": {
+          "path": "evals/clip_composition/outputs/presentation/caption-gate-b5/qdczJpv8RCc-candidate-59-v001/input-token-count-response.raw.json",
+          "fileSha256": "3db025b36634f24d01cd236ecaae40a525a35f6b3718ec814ed06478b149bb3f",
+          "byteLength": 121
+        },
+        "maximumResponse": {
+          "path": "evals/clip_composition/outputs/presentation/caption-gate-b5/qdczJpv8RCc-candidate-59-v001/maximum-response-token-count-response.raw.json",
+          "fileSha256": "fbc3bd9adb1623471ded7f9cb57eb36156996735e25bd5cb2d5d8d535cb2a1e0",
+          "byteLength": 121
+        }
+      }
+    },
+    {
+      "id": 8,
+      "status": "passed",
+      "meaning": "実測tokenが安全な整数で公式上限内",
+      "evidence": {
+        "inputTokens": 7474,
+        "inputLimit": 1048576,
+        "maximumResponseStructureTokens": 3000,
+        "outputLimit": 65536
+      }
+    },
+    {
+      "id": 9,
+      "status": "passed",
+      "meaning": "実行日・model・省略時Standard・公式単価を記録",
+      "evidence": {
+        "observedAt": "2026-07-28",
+        "modelId": "gemini-3.6-flash",
+        "tier": "PAID_STANDARD_DEFAULT_BY_OMISSION",
+        "inputPriceUsdPerMillion": "1.50",
+        "outputPriceUsdPerMillion": "7.50"
+      }
+    },
+    {
+      "id": 10,
+      "status": "passed",
+      "meaning": "secret非保存・入力不変・B6未開始を確認",
+      "evidence": {
+        "secretOccurrencesInFormalBytes": 0,
+        "sourceShaBefore": "ead2a47ef57480c3da9e598a650059a92c1f1519b25b94d2617b86485f79433a",
+        "sourceShaAfter": "ead2a47ef57480c3da9e598a650059a92c1f1519b25b94d2617b86485f79433a",
+        "requestBuilderShaBefore": "f8d79be781680cbb41c908d36fd9cdfb7a0874a64a145067c68662f6cedc1ecb",
+        "requestBuilderShaAfter": "f8d79be781680cbb41c908d36fd9cdfb7a0874a64a145067c68662f6cedc1ecb",
+        "jobShaBefore": "d282e3885e8c26098539096e2e3816e088f6779afd7b62f14159ee617950a152",
+        "jobShaAfter": "d282e3885e8c26098539096e2e3816e088f6779afd7b62f14159ee617950a152",
+        "upstreamProjectionBeforePublication": "fdc4f650f17c9cef094f078708c52235a18c243cca4005694286eb07a90deef8",
+        "b6AutomaticallyStarted": false
+      }
+    }
+  ],
+  "nextStage": {
+    "b6AutomaticallyStarted": false
+  }
+}

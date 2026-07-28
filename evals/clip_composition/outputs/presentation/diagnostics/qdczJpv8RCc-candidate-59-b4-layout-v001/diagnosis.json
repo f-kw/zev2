@@ -1,0 +1,156 @@
+{
+  "schemaVersion": "presentation-caption-b4-layout-diagnosis-v001",
+  "status": "failed",
+  "diagnosticOnly": true,
+  "formalArtifactsChanged": false,
+  "externalApiCalls": 0,
+  "sourceBindings": {
+    "b4Job": {
+      "path": "evals/clip_composition/outputs/presentation/caption-display-pair-generation-jobs/qdczJpv8RCc-candidate-59-caption-b6-v001-recheck-v001.json",
+      "fileSha256": "f301ea99f90494bfeef06241c6b69d66c7701f78bbcffc34046113579d2f0e05"
+    },
+    "semanticOutput": {
+      "path": "evals/clip_composition/outputs/presentation/caption-semantic-raw-outputs/qdczJpv8RCc-candidate-59-caption-b6-v001.json",
+      "fileSha256": "f8a87b23436dc73df948b09a8588a1516bd03b56df2cad44e52d70431d03c3e1"
+    },
+    "semanticValidationReport": {
+      "path": "evals/clip_composition/outputs/presentation/caption-gate-b6/qdczJpv8RCc-candidate-59-v001/semantic-output-validation-report-recheck-v001.json",
+      "fileSha256": "a06927b8f381ac4b60e3b364d24b2c2896b232b734264b5f473d1e91152810a8"
+    },
+    "presetRegistry": {
+      "path": "evals/clip_composition/registries/presentation/normal-landscape-preset-registry-v001/preset-registry.json",
+      "fileSha256": "8e9b0a039c8a4c9edf2c66b1df343c1d892d4688ebc4886a9af322bd44a6e5a8"
+    },
+    "layoutInspector": {
+      "path": "evals/clip_composition/inspect_presentation_preset_layout.ts",
+      "fileSha256": "5b0ee2280ee2db3252b6b1a232ca5b59c7bd096502a520fec8a69d6685040442"
+    }
+  },
+  "execution": {
+    "inspectorExitCode": 1,
+    "stdoutByteLength": 0,
+    "stderrByteLength": 0
+  },
+  "projection": {
+    "cueCount": 16,
+    "affectedCueCount": 1,
+    "violationCount": 1,
+    "violationCodes": [
+      "LINE_BOX_OUTSIDE_SAFE_AREA"
+    ]
+  },
+  "canvas": {
+    "width": 1920,
+    "height": 1080,
+    "safeAreaPx": {
+      "top": 40,
+      "right": 80,
+      "bottom": 40,
+      "left": 80
+    }
+  },
+  "preset": {
+    "presetId": "normal-landscape-readable-pop-v001",
+    "stateId": "caption-core-v001",
+    "maxCharsPerLine": 36,
+    "maxLinesPerCue": 2,
+    "fontSizePx": 96,
+    "lineSpacingPercent": 150,
+    "position": {
+      "preset": "bottom-center",
+      "alignment": "center",
+      "offsetXPercent": 0,
+      "offsetYPercent": -6
+    }
+  },
+  "affectedCues": [
+    {
+      "containerId": "segmenter-container-000002",
+      "speechId": 778,
+      "cueId": "caption-cue-000013",
+      "meaningGroupOrdinal": 4,
+      "sourceStartMs": 5978867,
+      "sourceEndMs": 5984951,
+      "lineCount": 2,
+      "twoLineComposition": true,
+      "lines": [
+        {
+          "lineIndex": 0,
+          "lineOrdinal": 1,
+          "text": "綺麗にはなるんだけど",
+          "logicalWidth": 20,
+          "affected": false
+        },
+        {
+          "lineIndex": 1,
+          "lineOrdinal": 2,
+          "text": "やりかけでいろんなことやり始めちゃう",
+          "logicalWidth": 36,
+          "affected": true
+        }
+      ],
+      "resolvedLayout": {
+        "layerId": "caption-cue-000013",
+        "stateId": "caption-core-v001",
+        "resolvedText": "綺麗にはなるんだけど\nやりかけでいろんなことやり始めちゃう",
+        "lineCount": 2,
+        "lineRects": [
+          {
+            "left": 465,
+            "top": 689.2,
+            "right": 1465,
+            "bottom": 825.2
+          },
+          {
+            "left": 81,
+            "top": 833.2,
+            "right": 1849,
+            "bottom": 969.2
+          }
+        ],
+        "wrapper": {
+          "top": 685.2,
+          "left": 77,
+          "width": 1776,
+          "height": 308,
+          "renderScale": 1,
+          "displayWidth": 1776,
+          "displayHeight": 308
+        },
+        "fontSizePx": 96,
+        "lineHeightPx": 144
+      },
+      "violations": [
+        {
+          "layerId": "caption-cue-000013",
+          "code": "LINE_BOX_OUTSIDE_SAFE_AREA",
+          "details": {
+            "lineIndex": 1,
+            "rect": {
+              "left": 81,
+              "top": 833.2,
+              "right": 1849,
+              "bottom": 969.2
+            },
+            "safeAreaPx": {
+              "top": 40,
+              "right": 80,
+              "bottom": 40,
+              "left": 80
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "artifactBindings": {
+    "layoutInput": {
+      "path": "evals/clip_composition/outputs/presentation/diagnostics/qdczJpv8RCc-candidate-59-b4-layout-v001/layout-input.json",
+      "fileSha256": "8c8d3e699ff5da95b2dd679eeae1544354f1ce699d91ea38472cdc1e24b3cac5"
+    },
+    "layoutInspection": {
+      "path": "evals/clip_composition/outputs/presentation/diagnostics/qdczJpv8RCc-candidate-59-b4-layout-v001/layout-inspection.json",
+      "fileSha256": "ed215d3e397934c1c86bf511d447082afe9d260bd289e018f26ce22c91bea0cf"
+    }
+  }
+}

@@ -1,0 +1,584 @@
+{
+  "schemaVersion": "presentation-caption-b4-layout-split-alternatives-v001",
+  "status": "diagnostic-complete",
+  "diagnosticOnly": true,
+  "externalApiCalls": 0,
+  "formalArtifactsChanged": false,
+  "sourceBindings": {
+    "diagnosis": {
+      "path": "evals/clip_composition/outputs/presentation/diagnostics/qdczJpv8RCc-candidate-59-b4-layout-v001/diagnosis.json",
+      "fileSha256": "fa66a33eb4f16c887e7a0d470ef3b95e508366e8756cd8f22ad76fefd879af7a"
+    },
+    "semanticSource": {
+      "path": "evals/clip_composition/outputs/presentation/segmenter-boundary-evidence/qdczJpv8RCc-candidate-59-v001/semantic-source-input.json",
+      "fileSha256": "ead2a47ef57480c3da9e598a650059a92c1f1519b25b94d2617b86485f79433a"
+    },
+    "semanticOutput": {
+      "path": "evals/clip_composition/outputs/presentation/caption-semantic-raw-outputs/qdczJpv8RCc-candidate-59-caption-b6-v001.json",
+      "fileSha256": "f8a87b23436dc73df948b09a8588a1516bd03b56df2cad44e52d70431d03c3e1"
+    },
+    "layoutInspector": {
+      "path": "evals/clip_composition/inspect_presentation_preset_layout.ts",
+      "fileSha256": "5b0ee2280ee2db3252b6b1a232ca5b59c7bd096502a520fec8a69d6685040442"
+    }
+  },
+  "target": {
+    "containerId": "segmenter-container-000002",
+    "cueId": "caption-cue-000013",
+    "meaningGroupOrdinal": 4,
+    "originalLineEndBoundaryCandidateIds": [
+      "segmenter-boundary-000132",
+      "segmenter-boundary-000142"
+    ],
+    "finalBoundaryCandidateId": "segmenter-boundary-000142"
+  },
+  "projection": {
+    "alternativeCount": 15,
+    "passingAlternativeCount": 4,
+    "failingAlternativeCount": 11
+  },
+  "alternatives": [
+    {
+      "lineEndBoundaryCandidateIds": [
+        "segmenter-boundary-000127",
+        "segmenter-boundary-000142"
+      ],
+      "textLines": [
+        "綺麗",
+        "にはなるんだけどやりかけでいろんなことやり始めちゃう"
+      ],
+      "logicalWidths": [
+        4,
+        52
+      ],
+      "status": "failed",
+      "violationCodes": [
+        "LINE_COUNT_EXCEEDS_CANDIDATE_LIMIT",
+        "LINE_BOX_OUTSIDE_SAFE_AREA"
+      ],
+      "lineRects": [
+        {
+          "left": 849,
+          "top": 545.2,
+          "right": 1081,
+          "bottom": 681.2
+        },
+        {
+          "left": 81,
+          "top": 689.2,
+          "right": 1849,
+          "bottom": 825.2
+        },
+        {
+          "left": 561,
+          "top": 833.2,
+          "right": 1369,
+          "bottom": 969.2
+        }
+      ]
+    },
+    {
+      "lineEndBoundaryCandidateIds": [
+        "segmenter-boundary-000128",
+        "segmenter-boundary-000142"
+      ],
+      "textLines": [
+        "綺麗に",
+        "はなるんだけどやりかけでいろんなことやり始めちゃう"
+      ],
+      "logicalWidths": [
+        6,
+        50
+      ],
+      "status": "failed",
+      "violationCodes": [
+        "LINE_COUNT_EXCEEDS_CANDIDATE_LIMIT",
+        "LINE_BOX_OUTSIDE_SAFE_AREA"
+      ],
+      "lineRects": [
+        {
+          "left": 801,
+          "top": 545.2,
+          "right": 1129,
+          "bottom": 681.2
+        },
+        {
+          "left": 81,
+          "top": 689.2,
+          "right": 1849,
+          "bottom": 825.2
+        },
+        {
+          "left": 609,
+          "top": 833.2,
+          "right": 1321,
+          "bottom": 969.2
+        }
+      ]
+    },
+    {
+      "lineEndBoundaryCandidateIds": [
+        "segmenter-boundary-000129",
+        "segmenter-boundary-000142"
+      ],
+      "textLines": [
+        "綺麗には",
+        "なるんだけどやりかけでいろんなことやり始めちゃう"
+      ],
+      "logicalWidths": [
+        8,
+        48
+      ],
+      "status": "failed",
+      "violationCodes": [
+        "LINE_COUNT_EXCEEDS_CANDIDATE_LIMIT",
+        "LINE_BOX_OUTSIDE_SAFE_AREA"
+      ],
+      "lineRects": [
+        {
+          "left": 753,
+          "top": 545.2,
+          "right": 1177,
+          "bottom": 681.2
+        },
+        {
+          "left": 81,
+          "top": 689.2,
+          "right": 1849,
+          "bottom": 825.2
+        },
+        {
+          "left": 657,
+          "top": 833.2,
+          "right": 1273,
+          "bottom": 969.2
+        }
+      ]
+    },
+    {
+      "lineEndBoundaryCandidateIds": [
+        "segmenter-boundary-000130",
+        "segmenter-boundary-000142"
+      ],
+      "textLines": [
+        "綺麗にはなる",
+        "んだけどやりかけでいろんなことやり始めちゃう"
+      ],
+      "logicalWidths": [
+        12,
+        44
+      ],
+      "status": "failed",
+      "violationCodes": [
+        "LINE_COUNT_EXCEEDS_CANDIDATE_LIMIT",
+        "LINE_BOX_OUTSIDE_SAFE_AREA"
+      ],
+      "lineRects": [
+        {
+          "left": 657,
+          "top": 545.2,
+          "right": 1273,
+          "bottom": 681.2
+        },
+        {
+          "left": 81,
+          "top": 689.2,
+          "right": 1849,
+          "bottom": 825.2
+        },
+        {
+          "left": 753,
+          "top": 833.2,
+          "right": 1177,
+          "bottom": 969.2
+        }
+      ]
+    },
+    {
+      "lineEndBoundaryCandidateIds": [
+        "segmenter-boundary-000131",
+        "segmenter-boundary-000142"
+      ],
+      "textLines": [
+        "綺麗にはなるん",
+        "だけどやりかけでいろんなことやり始めちゃう"
+      ],
+      "logicalWidths": [
+        14,
+        42
+      ],
+      "status": "failed",
+      "violationCodes": [
+        "LINE_COUNT_EXCEEDS_CANDIDATE_LIMIT",
+        "LINE_BOX_OUTSIDE_SAFE_AREA"
+      ],
+      "lineRects": [
+        {
+          "left": 609,
+          "top": 545.2,
+          "right": 1321,
+          "bottom": 681.2
+        },
+        {
+          "left": 81,
+          "top": 689.2,
+          "right": 1849,
+          "bottom": 825.2
+        },
+        {
+          "left": 801,
+          "top": 833.2,
+          "right": 1129,
+          "bottom": 969.2
+        }
+      ]
+    },
+    {
+      "lineEndBoundaryCandidateIds": [
+        "segmenter-boundary-000132",
+        "segmenter-boundary-000142"
+      ],
+      "textLines": [
+        "綺麗にはなるんだけど",
+        "やりかけでいろんなことやり始めちゃう"
+      ],
+      "logicalWidths": [
+        20,
+        36
+      ],
+      "status": "failed",
+      "violationCodes": [
+        "LINE_BOX_OUTSIDE_SAFE_AREA"
+      ],
+      "lineRects": [
+        {
+          "left": 465,
+          "top": 689.2,
+          "right": 1465,
+          "bottom": 825.2
+        },
+        {
+          "left": 81,
+          "top": 833.2,
+          "right": 1849,
+          "bottom": 969.2
+        }
+      ]
+    },
+    {
+      "lineEndBoundaryCandidateIds": [
+        "segmenter-boundary-000133",
+        "segmenter-boundary-000142"
+      ],
+      "textLines": [
+        "綺麗にはなるんだけどや",
+        "りかけでいろんなことやり始めちゃう"
+      ],
+      "logicalWidths": [
+        22,
+        34
+      ],
+      "status": "passed",
+      "violationCodes": [],
+      "lineRects": [
+        {
+          "left": 412,
+          "top": 689.2,
+          "right": 1508,
+          "bottom": 825.2
+        },
+        {
+          "left": 124,
+          "top": 833.2,
+          "right": 1796,
+          "bottom": 969.2
+        }
+      ]
+    },
+    {
+      "lineEndBoundaryCandidateIds": [
+        "segmenter-boundary-000134",
+        "segmenter-boundary-000142"
+      ],
+      "textLines": [
+        "綺麗にはなるんだけどやり",
+        "かけでいろんなことやり始めちゃう"
+      ],
+      "logicalWidths": [
+        24,
+        32
+      ],
+      "status": "passed",
+      "violationCodes": [],
+      "lineRects": [
+        {
+          "left": 364,
+          "top": 689.2,
+          "right": 1556,
+          "bottom": 825.2
+        },
+        {
+          "left": 172,
+          "top": 833.2,
+          "right": 1748,
+          "bottom": 969.2
+        }
+      ]
+    },
+    {
+      "lineEndBoundaryCandidateIds": [
+        "segmenter-boundary-000135",
+        "segmenter-boundary-000142"
+      ],
+      "textLines": [
+        "綺麗にはなるんだけどやりかけ",
+        "でいろんなことやり始めちゃう"
+      ],
+      "logicalWidths": [
+        28,
+        28
+      ],
+      "status": "passed",
+      "violationCodes": [],
+      "lineRects": [
+        {
+          "left": 268,
+          "top": 689.2,
+          "right": 1652,
+          "bottom": 825.2
+        },
+        {
+          "left": 268,
+          "top": 833.2,
+          "right": 1652,
+          "bottom": 969.2
+        }
+      ]
+    },
+    {
+      "lineEndBoundaryCandidateIds": [
+        "segmenter-boundary-000136",
+        "segmenter-boundary-000142"
+      ],
+      "textLines": [
+        "綺麗にはなるんだけどやりかけで",
+        "いろんなことやり始めちゃう"
+      ],
+      "logicalWidths": [
+        30,
+        26
+      ],
+      "status": "passed",
+      "violationCodes": [],
+      "lineRects": [
+        {
+          "left": 220,
+          "top": 689.2,
+          "right": 1700,
+          "bottom": 825.2
+        },
+        {
+          "left": 316,
+          "top": 833.2,
+          "right": 1604,
+          "bottom": 969.2
+        }
+      ]
+    },
+    {
+      "lineEndBoundaryCandidateIds": [
+        "segmenter-boundary-000137",
+        "segmenter-boundary-000142"
+      ],
+      "textLines": [
+        "綺麗にはなるんだけどやりかけでいろんな",
+        "ことやり始めちゃう"
+      ],
+      "logicalWidths": [
+        38,
+        18
+      ],
+      "status": "failed",
+      "violationCodes": [
+        "LINE_COUNT_EXCEEDS_CANDIDATE_LIMIT",
+        "LINE_BOX_OUTSIDE_SAFE_AREA"
+      ],
+      "lineRects": [
+        {
+          "left": 81,
+          "top": 545.2,
+          "right": 1849,
+          "bottom": 681.2
+        },
+        {
+          "left": 897,
+          "top": 689.2,
+          "right": 1033,
+          "bottom": 825.2
+        },
+        {
+          "left": 513,
+          "top": 833.2,
+          "right": 1417,
+          "bottom": 969.2
+        }
+      ]
+    },
+    {
+      "lineEndBoundaryCandidateIds": [
+        "segmenter-boundary-000138",
+        "segmenter-boundary-000142"
+      ],
+      "textLines": [
+        "綺麗にはなるんだけどやりかけでいろんなこと",
+        "やり始めちゃう"
+      ],
+      "logicalWidths": [
+        42,
+        14
+      ],
+      "status": "failed",
+      "violationCodes": [
+        "LINE_COUNT_EXCEEDS_CANDIDATE_LIMIT",
+        "LINE_BOX_OUTSIDE_SAFE_AREA"
+      ],
+      "lineRects": [
+        {
+          "left": 81,
+          "top": 545.2,
+          "right": 1849,
+          "bottom": 681.2
+        },
+        {
+          "left": 801,
+          "top": 689.2,
+          "right": 1129,
+          "bottom": 825.2
+        },
+        {
+          "left": 609,
+          "top": 833.2,
+          "right": 1321,
+          "bottom": 969.2
+        }
+      ]
+    },
+    {
+      "lineEndBoundaryCandidateIds": [
+        "segmenter-boundary-000139",
+        "segmenter-boundary-000142"
+      ],
+      "textLines": [
+        "綺麗にはなるんだけどやりかけでいろんなことや",
+        "り始めちゃう"
+      ],
+      "logicalWidths": [
+        44,
+        12
+      ],
+      "status": "failed",
+      "violationCodes": [
+        "LINE_COUNT_EXCEEDS_CANDIDATE_LIMIT",
+        "LINE_BOX_OUTSIDE_SAFE_AREA"
+      ],
+      "lineRects": [
+        {
+          "left": 81,
+          "top": 545.2,
+          "right": 1849,
+          "bottom": 681.2
+        },
+        {
+          "left": 753,
+          "top": 689.2,
+          "right": 1177,
+          "bottom": 825.2
+        },
+        {
+          "left": 657,
+          "top": 833.2,
+          "right": 1273,
+          "bottom": 969.2
+        }
+      ]
+    },
+    {
+      "lineEndBoundaryCandidateIds": [
+        "segmenter-boundary-000140",
+        "segmenter-boundary-000142"
+      ],
+      "textLines": [
+        "綺麗にはなるんだけどやりかけでいろんなことやり",
+        "始めちゃう"
+      ],
+      "logicalWidths": [
+        46,
+        10
+      ],
+      "status": "failed",
+      "violationCodes": [
+        "LINE_COUNT_EXCEEDS_CANDIDATE_LIMIT",
+        "LINE_BOX_OUTSIDE_SAFE_AREA"
+      ],
+      "lineRects": [
+        {
+          "left": 81,
+          "top": 545.2,
+          "right": 1849,
+          "bottom": 681.2
+        },
+        {
+          "left": 705,
+          "top": 689.2,
+          "right": 1225,
+          "bottom": 825.2
+        },
+        {
+          "left": 705,
+          "top": 833.2,
+          "right": 1225,
+          "bottom": 969.2
+        }
+      ]
+    },
+    {
+      "lineEndBoundaryCandidateIds": [
+        "segmenter-boundary-000141",
+        "segmenter-boundary-000142"
+      ],
+      "textLines": [
+        "綺麗にはなるんだけどやりかけでいろんなことやり始め",
+        "ちゃう"
+      ],
+      "logicalWidths": [
+        50,
+        6
+      ],
+      "status": "failed",
+      "violationCodes": [
+        "LINE_COUNT_EXCEEDS_CANDIDATE_LIMIT",
+        "LINE_BOX_OUTSIDE_SAFE_AREA"
+      ],
+      "lineRects": [
+        {
+          "left": 81,
+          "top": 545.2,
+          "right": 1849,
+          "bottom": 681.2
+        },
+        {
+          "left": 609,
+          "top": 689.2,
+          "right": 1321,
+          "bottom": 825.2
+        },
+        {
+          "left": 801,
+          "top": 833.2,
+          "right": 1129,
+          "bottom": 969.2
+        }
+      ]
+    }
+  ]
+}

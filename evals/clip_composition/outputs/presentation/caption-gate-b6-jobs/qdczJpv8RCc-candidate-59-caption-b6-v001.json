@@ -1,0 +1,53 @@
+{
+  "schemaVersion": "presentation-caption-gate-b6-execution-job-v001",
+  "jobId": "qdczJpv8RCc-candidate-59-caption-b6-v001",
+  "mode": "formal-one-shot",
+  "attemptId": "qdczJpv8RCc-candidate-59-caption-b6-v001",
+  "runDirectoryId": "qdczJpv8RCc-candidate-59-v001",
+  "implementationBinding": {
+    "b6Core": {
+      "path": "evals/clip_composition/run_presentation_caption_gate_b6_v001.mjs",
+      "fileSha256": "ef91b20545e5e48936a28ab86fbd0f2b19a1f208ac08bd4eb713c53022e07cb7"
+    },
+    "b6JobRunner": {
+      "path": "evals/clip_composition/run_presentation_caption_gate_b6_job_v001.mjs",
+      "fileSha256": "c9f494fe2b2c3670268cc6699f41f32d6ebbe52ca1ff3f1825bd77b6d6c453bf"
+    }
+  },
+  "b5": {
+    "initialManifest": {
+      "path": "evals/clip_composition/outputs/presentation/caption-gate-b5/qdczJpv8RCc-candidate-59-v001/b5-initial-manifest.json",
+      "fileSha256": "52e2e8c8b966f2850926578ed90dc8020fba43ba92e71977c741283c242e38a4"
+    },
+    "fixedRequest": {
+      "path": "evals/clip_composition/outputs/presentation/caption-gate-b5/qdczJpv8RCc-candidate-59-v001/generate-content-request.json",
+      "fileSha256": "20a74de1f36802e4b6d414b718e0034731305b7111f621b5a4599bccd460284c"
+    }
+  },
+  "sourcePackage": {
+    "rootPath": "evals/clip_composition/outputs/presentation/segmenter-boundary-evidence/qdczJpv8RCc-candidate-59-v001",
+    "manifest": {
+      "path": "evals/clip_composition/outputs/presentation/segmenter-boundary-evidence/qdczJpv8RCc-candidate-59-v001/package-manifest.json",
+      "fileSha256": "c26aa7065a73cd6be391cc6eb7de3477480f84407e173b5882a99d08a8ae3cd0"
+    },
+    "validationReport": {
+      "path": "evals/clip_composition/outputs/presentation/segmenter-boundary-evidence/qdczJpv8RCc-candidate-59-v001/package-validation-report.json",
+      "fileSha256": "0cef4e5ee6dea5218ad38b9d868f07a73b2252c7d6519496212b64217dcf1700"
+    }
+  },
+  "b4StaticTemplate": {
+    "path": "evals/clip_composition/outputs/presentation/caption-display-pair-static-preflight-jobs/qdczJpv8RCc-candidate-59-caption-display-pair-b4-v001.json",
+    "fileSha256": "d68043fb11093f0bcc18e165b2411195e773dd4b3dcc30e91f26f00b7c910242"
+  },
+  "publication": {
+    "outputRoot": "evals/clip_composition/outputs/presentation/caption-gate-b6/qdczJpv8RCc-candidate-59-v001",
+    "semanticRawPath": "evals/clip_composition/outputs/presentation/caption-semantic-raw-outputs/qdczJpv8RCc-candidate-59-caption-b6-v001.json",
+    "b1JobPath": "evals/clip_composition/outputs/presentation/caption-semantic-output-check-jobs/qdczJpv8RCc-candidate-59-caption-b6-v001.json",
+    "b1ReportPath": "evals/clip_composition/outputs/presentation/caption-gate-b6/qdczJpv8RCc-candidate-59-v001/semantic-output-validation-report.json",
+    "b4JobPath": "evals/clip_composition/outputs/presentation/caption-display-pair-generation-jobs/qdczJpv8RCc-candidate-59-caption-b6-v001.json",
+    "b4PairId": "qdczJpv8RCc-candidate-59-caption-b6-v001",
+    "b4OutputRoot": "evals/clip_composition/outputs/presentation/caption-display-pairs/qdczJpv8RCc-candidate-59-caption-b6-v001",
+    "b4RunnerOutputPath": "evals/clip_composition/outputs/presentation/caption-gate-b6/qdczJpv8RCc-candidate-59-v001/b4-runner-output.raw.json",
+    "b4DisplayPlanPath": "evals/clip_composition/outputs/presentation/caption-display-pairs/qdczJpv8RCc-candidate-59-caption-b6-v001/display-plan.json"
+  }
+}

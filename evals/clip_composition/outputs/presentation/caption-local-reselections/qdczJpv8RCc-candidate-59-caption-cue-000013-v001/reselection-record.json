@@ -1,0 +1,102 @@
+{
+  "schemaVersion": "presentation-caption-local-reselection-record-v001",
+  "recordId": "qdczJpv8RCc-candidate-59-caption-cue-000013-v001",
+  "status": "human-approved",
+  "reviewer": {
+    "kind": "human",
+    "id": "kawafmm"
+  },
+  "reviewedOn": "2026-07-28",
+  "target": {
+    "artifactId": "qdczJpv8RCc-candidate-59-v001",
+    "containerId": "segmenter-container-000002",
+    "cueId": "caption-cue-000013",
+    "meaningGroupOrdinal": 4,
+    "sourceStartMs": 5978867,
+    "sourceEndMs": 5984951
+  },
+  "originalSelection": {
+    "lineEndBoundaryCandidateIds": [
+      "segmenter-boundary-000132",
+      "segmenter-boundary-000142"
+    ],
+    "lines": [
+      {
+        "text": "綺麗にはなるんだけど",
+        "logicalWidth": 20
+      },
+      {
+        "text": "やりかけでいろんなことやり始めちゃう",
+        "logicalWidth": 36
+      }
+    ],
+    "layoutResult": {
+      "status": "failed",
+      "violationCode": "LINE_BOX_OUTSIDE_SAFE_AREA",
+      "rightOverflowPx": 9
+    }
+  },
+  "approvedSelection": {
+    "diagnosticCandidateOrdinal": 4,
+    "lineEndBoundaryCandidateIds": [
+      "segmenter-boundary-000136",
+      "segmenter-boundary-000142"
+    ],
+    "lines": [
+      {
+        "text": "綺麗にはなるんだけどやりかけで",
+        "logicalWidth": 30
+      },
+      {
+        "text": "いろんなことやり始めちゃう",
+        "logicalWidth": 26
+      }
+    ],
+    "approvalSource": "kawafmm direct decision"
+  },
+  "bindings": {
+    "originalSemanticOutput": {
+      "path": "evals/clip_composition/outputs/presentation/caption-semantic-raw-outputs/qdczJpv8RCc-candidate-59-caption-b6-v001.json",
+      "fileSha256": "f8a87b23436dc73df948b09a8588a1516bd03b56df2cad44e52d70431d03c3e1",
+      "canonicalSha256": "263cff6682847b97e497c7aa0362382844ff6f1445d0e335bc2fbe71cc3c14e0"
+    },
+    "derivedSemanticOutput": {
+      "path": "evals/clip_composition/outputs/presentation/caption-semantic-raw-outputs/qdczJpv8RCc-candidate-59-caption-b6-v001-local-reselection-v001.json",
+      "fileSha256": "b3b3cb76d8cf70cc33bb0adff5cc233c3269139e48d18419bb7484b2b77d165c",
+      "canonicalSha256": "ee3b34cdac402376ca659fd8d680759a0e691bcd7e1d9c610b50779a1d8952c6"
+    },
+    "retainedSourceAtoms": {
+      "path": "evals/clip_composition/outputs/presentation/retained-source-atoms/qdczJpv8RCc-candidate-59-v001/source-atoms.json",
+      "fileSha256": "9fe657ace14e61d5af417897a67f56ba2e6e188d4346edde8320049643955996",
+      "rawSourceAtomsCanonicalSha256": "e96b205716ee62f902a1fc828119a060770ea595792512cd70c7348d3d5e60fb"
+    },
+    "layoutDiagnosis": {
+      "path": "evals/clip_composition/outputs/presentation/diagnostics/qdczJpv8RCc-candidate-59-b4-layout-v001/diagnosis.json",
+      "fileSha256": "fa66a33eb4f16c887e7a0d470ef3b95e508366e8756cd8f22ad76fefd879af7a"
+    },
+    "splitAlternatives": {
+      "path": "evals/clip_composition/outputs/presentation/diagnostics/qdczJpv8RCc-candidate-59-b4-layout-v001/split-alternatives.json",
+      "fileSha256": "f76c669131b2649cee5cada9b645ae257fea0bcb7d925b2075d6f8d9e745e69b"
+    }
+  },
+  "invariants": {
+    "sourceAtomCount": 281,
+    "containerCount": 2,
+    "meaningGroupCount": 16,
+    "unchangedMeaningGroupCount": 15,
+    "unchangedMeaningGroupsProjection": {
+      "schema": "{containerId, meaningGroupOrdinal, lineEndBoundaryCandidateIds} in source order",
+      "count": 15,
+      "beforeCanonicalSha256": "19c7db8ee7ad793b7d0ce838102031998d95ea10e2689db1305c55edcdd1eba4",
+      "afterCanonicalSha256": "19c7db8ee7ad793b7d0ce838102031998d95ea10e2689db1305c55edcdd1eba4"
+    },
+    "targetMeaningGroupCanonicalSha256": {
+      "before": "fa03b5c9f1f25e611ec3604e902b2982bebee04c17b612e8c7ebace7b3f739a0",
+      "after": "c1ddad47641f8d4da6fc86f190214c99c63ee4a79b83dead823d715ebd30800e"
+    },
+    "presetId": "normal-landscape-readable-pop-v001",
+    "maxLogicalWidthPerLine": 36,
+    "upstreamTextChanged": false,
+    "apiCalls": 0
+  }
+}
