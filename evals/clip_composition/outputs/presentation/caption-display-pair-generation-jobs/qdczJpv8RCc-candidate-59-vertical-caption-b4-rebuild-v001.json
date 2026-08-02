@@ -1,0 +1,277 @@
+{
+  "schemaVersion": "presentation-caption-display-pair-generation-job-v002",
+  "jobId": "qdczJpv8RCc-candidate-59-vertical-caption-b4-rebuild-v001",
+  "artifactId": "qdczJpv8RCc-candidate-59-vertical-v001",
+  "mode": "formal-generation",
+  "implementationBinding": {
+    "gitCommit": "382670466eb7cd4ae39b40005cb2cd7ffbcc9203",
+    "files": [
+      {
+        "role": "displayPairCore",
+        "path": "evals/clip_composition/presentation_caption_display_pair_v004.mjs",
+        "fileSha256": "5cf01b4e4dc36b84be9b6938026be5849b61c0a28656d7864f8b5fd6c3991036"
+      },
+      {
+        "role": "displayPairRunner",
+        "path": "evals/clip_composition/run_presentation_caption_display_pair_job_v002.mjs",
+        "fileSha256": "c35e02a06a317e33613c16e8cd363805169040b16eef12344eb567e9b7357794"
+      }
+    ],
+    "dependencyFiles": [
+      {
+        "role": "displayPairCoreV003",
+        "path": "evals/clip_composition/presentation_caption_display_pair_v003.mjs",
+        "fileSha256": "a22aa6ad44a7cd07c75ba1ebde4d40601efe29915ca6cfe915f4e1a3d8808a04"
+      },
+      {
+        "role": "semanticCore",
+        "path": "evals/clip_composition/presentation_caption_semantic_output_v001.mjs",
+        "fileSha256": "9b9bb011dcd198e02cb075b70e79d3090ddfe17694198f56b83726f004e78c6d"
+      },
+      {
+        "role": "semanticRunner",
+        "path": "evals/clip_composition/run_presentation_caption_semantic_output_check_v002.mjs",
+        "fileSha256": "5ca545fa9997045364ee93bc29c29b9d6ee6ddb4ad30b9a771888729386125c4"
+      },
+      {
+        "role": "textLayoutImplementation",
+        "path": "evals/clip_composition/presentation_renderer_text_layout_v001.mjs",
+        "fileSha256": "066a62adaa7fa3f8b8eda92c82e9a85940e43f372af976edc4b327ef4cf9ce5e"
+      },
+      {
+        "role": "captionCoreV003",
+        "path": "evals/clip_composition/presentation_caption_contract_v003.mjs",
+        "fileSha256": "a090caf2b1939bbc226a306cadd580b887ce34f0a0436af96e4f94480c4b9292"
+      },
+      {
+        "role": "instructionCoreV004",
+        "path": "evals/clip_composition/presentation_instruction_contract_v004.mjs",
+        "fileSha256": "caab417919e03e2ff9b169aaeba731104f8ed01d9a2963f81f801bea79e1d21c"
+      },
+      {
+        "role": "instructionCoreV003",
+        "path": "evals/clip_composition/presentation_instruction_contract_v003.mjs",
+        "fileSha256": "c0a3c791c74a8c303e97e1fe0c81b8017c5dee35bd93e57668d8e11fa24925e7"
+      },
+      {
+        "role": "sourceSpeakerPolicy",
+        "path": "evals/clip_composition/presentation_source_speaker_policy_v001.mjs",
+        "fileSha256": "56d2d03d5bcee3a409b27acc9819a48c95abb867cdc00fd0b2bf2fe87bb9477b"
+      },
+      {
+        "role": "sourceSpeakerRegistry",
+        "path": "evals/clip_composition/registries/presentation/presentation-source-speaker-non-identity-registry-v001/registry.json",
+        "fileSha256": "9e6f6c5e57c0b0823840c70fe0e3de05592cbc88819def6020a7c1cfaf211f3a"
+      },
+      {
+        "role": "timelineV002",
+        "path": "evals/clip_composition/presentation_base_media_timeline_v002.mjs",
+        "fileSha256": "a1f72079f0e970cb5c6a67817427aa5909f2453ad0d04e81150cfd29c5b41ab2"
+      },
+      {
+        "role": "layoutPreflightCore",
+        "path": "evals/clip_composition/inspect_presentation_preset_layout.ts",
+        "fileSha256": "5b0ee2280ee2db3252b6b1a232ca5b59c7bd096502a520fec8a69d6685040442"
+      },
+      {
+        "role": "rendererLayoutCore",
+        "path": "runner/src/telop/telop-render-model.ts",
+        "fileSha256": "5c32103a6f8faaa3ea1d30bb4624f0ca092385c8b77446aa5f51e3e3a0583412"
+      },
+      {
+        "role": "presetRegistry",
+        "path": "evals/clip_composition/registries/presentation/vertical-short-preset-registry-v001/preset-registry.json",
+        "fileSha256": "3a3e0b7b9ce4e349f778b8035c60085a101f7631373404bdc8252a9cc7532133"
+      },
+      {
+        "role": "presetValidationIndex",
+        "path": "evals/clip_composition/registries/presentation/vertical-short-preset-registry-v001/preset-validation-index.json",
+        "fileSha256": "6d2eb554f2752383b54180a3c9d21f81620734aef760a2894be8c4914a8ff9e2"
+      },
+      {
+        "role": "materialValidationIndex",
+        "path": "evals/clip_composition/registries/presentation/vertical-short-preset-registry-v001/material-validation-index.json",
+        "fileSha256": "98213035bc6e395b090d7cff2639d4bf707fb838b7df50cb51bc60ab95d4758e"
+      },
+      {
+        "role": "trustedRegistryBindings",
+        "path": "evals/clip_composition/registries/presentation/vertical-short-preset-registry-v001/trusted-registry-bindings.json",
+        "fileSha256": "e980be0b96e8ff5b69e57fa4787e503fd77ca21e51764cf96098df5d65449ece"
+      },
+      {
+        "role": "rendererTrust",
+        "path": "evals/clip_composition/registries/presentation/presentation-vertical-renderer-trust-v001/trust.json",
+        "fileSha256": "af0738e2c96b7e6a8f6efc1d035191cd989f3c0adf52f939cb46fb945205e72e"
+      },
+      {
+        "role": "sharedJsonContractCore",
+        "path": "evals/clip_composition/presentation_caption_semantic_source_package_v001.mjs",
+        "fileSha256": "ac3dcbbc671af6f56dcceeea6a41c8ae9cbf9fc4ba28a8a00bbc5d6faff45bcd"
+      },
+      {
+        "role": "gateACore",
+        "path": "evals/clip_composition/presentation_segmenter_boundary_evidence_v001.mjs",
+        "fileSha256": "dac613292e463897ee2757be75a7d64f3ece9928141765a195ba54a0ebc6007a"
+      },
+      {
+        "role": "gateARetainedSourceAtomsCore",
+        "path": "evals/clip_composition/presentation_retained_source_atoms_v001.mjs",
+        "fileSha256": "f28178327ddc0cc64f11527d850c71bfb5043b4e13f59f6da7997fd8f6d6cad0"
+      },
+      {
+        "role": "gateARunner",
+        "path": "evals/clip_composition/run_presentation_segmenter_boundary_preflight_v001.mjs",
+        "fileSha256": "e83157cfe72197940193c9bd07a4f8c9be4b1716617dc55bf90e1e8c4f33812e"
+      }
+    ]
+  },
+  "sourcePackageBinding": {
+    "rootPath": "evals/clip_composition/outputs/presentation/segmenter-boundary-evidence/qdczJpv8RCc-candidate-59-vertical-v001",
+    "manifest": {
+      "path": "evals/clip_composition/outputs/presentation/segmenter-boundary-evidence/qdczJpv8RCc-candidate-59-vertical-v001/package-manifest.json",
+      "fileSha256": "2ece4fe5335fa7a64f6fe56d801fe571f3feaaef137661cc26134b5815ed6d78",
+      "canonicalSha256": "2f2c7de6d84cf6df46ca562d67519335ff78fde519de7da7ba4c699808c6b944"
+    },
+    "validationReport": {
+      "path": "evals/clip_composition/outputs/presentation/segmenter-boundary-evidence/qdczJpv8RCc-candidate-59-vertical-v001/package-validation-report.json",
+      "fileSha256": "581568832eb280a48f1b1d2fe42a33aa65ee1449ae22a2b512c21d846f20d8e6",
+      "canonicalSha256": "a82b94ab673c983fee166f28487686ecd467ec8df17760693096ab56d56a635f"
+    }
+  },
+  "semanticCheckBinding": {
+    "job": {
+      "path": "evals/clip_composition/outputs/presentation/caption-semantic-output-check-jobs/qdczJpv8RCc-candidate-59-vertical-caption-b6-v002.json",
+      "fileSha256": "440cd58884c70461a902cbb6420f033d5a933964ea3a0736bc809fbc084c29ad",
+      "byteLength": 5248,
+      "canonicalSha256": "f3c1e7349ed6f4b9aca451d32961d438134f258e43029c4d49ecc671aaf5ccc4"
+    },
+    "rawSemanticOutput": {
+      "path": "evals/clip_composition/outputs/presentation/caption-semantic-raw-outputs/qdczJpv8RCc-candidate-59-vertical-caption-b6-v002.json",
+      "fileSha256": "944c1bbf4d150c67252af5901660ff12e58d0956daf5abae2466654d17c1d08d",
+      "byteLength": 4581,
+      "canonicalSha256": "6e3a3f6f4e6f9b8fd1b73d84b33bc6b818ffad9475f04c1132ebf0fb1e255e64"
+    },
+    "validationReport": {
+      "path": "evals/clip_composition/outputs/presentation/caption-gate-b6/qdczJpv8RCc-candidate-59-vertical-v002/semantic-output-validation-report.json",
+      "fileSha256": "b2342ad39eb2e6c0519337925aa8505875d8a8372919f7a95a814613041de826",
+      "byteLength": 6893,
+      "canonicalSha256": "59fc9347b7a39671bfc09d0cbe7452f98674d25792d2a9444dd09b8d3dbe7b5a"
+    },
+    "expectedCompilerInputObservedByteSha256": "289d505f7f51ff442c740b23c6ff154290dc5c97005fef736d001cf69fecb929",
+    "expectedCompilerInputCanonicalSha256": "a0fb6e5160dc4c36c44717c97d259409e8b0c8eacd6687af408ab4c594db0f03"
+  },
+  "retainedSourceBinding": {
+    "rootPath": "evals/clip_composition/outputs/presentation/retained-source-atoms/qdczJpv8RCc-candidate-59-v001",
+    "generationManifest": {
+      "path": "evals/clip_composition/outputs/presentation/retained-source-atoms/qdczJpv8RCc-candidate-59-v001/generation-manifest.json",
+      "fileSha256": "7e681fdf1a9bd8223678ef091406ea48af3287dfcc66d6934993f24a2ebea381",
+      "canonicalSha256": "e534ee75118aa2052bbade08e05a3f716f2d75801ff583d5600a515f07514ecf"
+    },
+    "sourceAtoms": {
+      "path": "evals/clip_composition/outputs/presentation/retained-source-atoms/qdczJpv8RCc-candidate-59-v001/source-atoms.json",
+      "fileSha256": "9fe657ace14e61d5af417897a67f56ba2e6e188d4346edde8320049643955996",
+      "canonicalSha256": "25d27b6b67d16fa63b0b9733505e4b7c77fa427755bab741aca060837457c36b"
+    },
+    "validationReport": {
+      "path": "evals/clip_composition/outputs/presentation/retained-source-atoms/qdczJpv8RCc-candidate-59-v001/validation-report.json",
+      "fileSha256": "b71f79aed863499b433a8e166e4df63fc83a45a043318b46c5a24bfa5b2f5fbd",
+      "canonicalSha256": "610b809fac3b185dcef2acb708d6e76293d5b510045f9f23992a62a35d8938b2"
+    }
+  },
+  "baseMediaBinding": {
+    "rootPath": "evals/clip_composition/outputs/presentation/base-media/qdczJpv8RCc-candidate-59-v001",
+    "generationManifest": {
+      "path": "evals/clip_composition/outputs/presentation/base-media/qdczJpv8RCc-candidate-59-v001/generation-manifest.json",
+      "fileSha256": "bc47f29089eaaf1a062593add2d8690971682d80d474d168dce6114aebf7b9e6",
+      "canonicalSha256": "d8e114512063104346b51ab58a98be557b80e376e0f46ba6e1160d74d7e56100"
+    },
+    "timeline": {
+      "path": "evals/clip_composition/outputs/presentation/base-media/qdczJpv8RCc-candidate-59-v001/timeline.json",
+      "fileSha256": "dbebfe08882aabf66f4c7b13f4489f3bd7348e7bd499ec783250827ccddafcb2",
+      "canonicalSha256": "336c3f9fb9912143c11e460ff2a24be167606cb373a0eafb0341f1b9b13773aa"
+    },
+    "validationReport": {
+      "path": "evals/clip_composition/outputs/presentation/base-media/qdczJpv8RCc-candidate-59-v001/validation-report.json",
+      "fileSha256": "b091465fca55f258fd2c33076b1ae864b82ee8576af6b40f6f636c735b79d776",
+      "canonicalSha256": "30a2088780fe2c0c1828e8b38876e57e0b7fb405150f39a18328894dcde73488"
+    },
+    "baseMedia": {
+      "path": "evals/clip_composition/outputs/presentation/base-media/qdczJpv8RCc-candidate-59-v001/base-media.mp4",
+      "fileSha256": "faad660c7623cdbf3a8f3b55cdaffc34729d06683ce391997c51f10fbc076967"
+    }
+  },
+  "registryBinding": {
+    "rootPath": "evals/clip_composition/registries/presentation/vertical-short-preset-registry-v001",
+    "trustedRegistryBindings": {
+      "path": "evals/clip_composition/registries/presentation/vertical-short-preset-registry-v001/trusted-registry-bindings.json",
+      "fileSha256": "e980be0b96e8ff5b69e57fa4787e503fd77ca21e51764cf96098df5d65449ece",
+      "canonicalSha256": "30e34a626666d5e6b2df3ad5cb8734e41ea3bd25f1e8393234bbc0b56576acbc"
+    },
+    "presetRegistry": {
+      "path": "evals/clip_composition/registries/presentation/vertical-short-preset-registry-v001/preset-registry.json",
+      "fileSha256": "3a3e0b7b9ce4e349f778b8035c60085a101f7631373404bdc8252a9cc7532133",
+      "canonicalSha256": "cbe37484700436cf4ca6ff745273a7941654e412c744de11d24be387c0a10ef7"
+    },
+    "presetValidationIndex": {
+      "path": "evals/clip_composition/registries/presentation/vertical-short-preset-registry-v001/preset-validation-index.json",
+      "fileSha256": "6d2eb554f2752383b54180a3c9d21f81620734aef760a2894be8c4914a8ff9e2",
+      "canonicalSha256": "1f0afbe0511525aece5f74ae1808480755d90b03073d282cd0d1cfd1e12516b0"
+    },
+    "materialValidationIndex": {
+      "path": "evals/clip_composition/registries/presentation/vertical-short-preset-registry-v001/material-validation-index.json",
+      "fileSha256": "98213035bc6e395b090d7cff2639d4bf707fb838b7df50cb51bc60ab95d4758e",
+      "canonicalSha256": "3958ad2d21233342e49aedd29cbd337785a228e1063d1802b64e92dc1793d1fc"
+    }
+  },
+  "cropDecisionBinding": {
+    "path": "evals/clip_composition/outputs/presentation/vertical-preset-previews/qdczJpv8RCc-candidate-59-vertical-preset-v001-candidate/type-crop-v006/crop-decision-v006.json",
+    "fileSha256": "4fba3f371412310fc5122ccfb58634e390a5725aec185172bcf041dd0152a4ed"
+  },
+  "expectedRuntime": {
+    "resolvedNodePath": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+    "nodeBinarySha256": "de4f3b493b15e7a0ee311f6a2c6dbf93858052f5802aa91cfafa2c57e9d6bc5c",
+    "nodeVersion": "v20.19.6",
+    "icuVersion": "77.1",
+    "resolvedLocale": "ja",
+    "resolvedGranularity": "word",
+    "layoutExecutionBinding": {
+      "tsxEntryLogicalPath": "runner/node_modules/tsx/dist/cli.mjs",
+      "tsxEntryRealPath": "/Users/kawafmm/workspace/zev2/node_modules/.pnpm/tsx@4.22.3/node_modules/tsx/dist/cli.mjs",
+      "tsxEntryFileSha256": "5c916fa6ecad44aedbb01ca5815536d00ea07de6b73eeb9443d317326b0218d8",
+      "tsxPackageVersion": "4.22.3",
+      "tsxPackageTreeCanonicalSha256": "0b43d39cc98458933b23ca958e94b6c68311974e3b9de67e8f2e2c733a9afe7a",
+      "esbuildEntryRealPath": "/Users/kawafmm/workspace/zev2/node_modules/.pnpm/esbuild@0.28.0/node_modules/esbuild/lib/main.js",
+      "esbuildEntryFileSha256": "41abefec8704d24e069532fb38a418905d16f8fee4da88e54ecd65adc71f5507",
+      "esbuildPackageVersion": "0.28.0",
+      "esbuildPackageTreeCanonicalSha256": "5342a4075d5426e7518c9faaf68611da1037d70957583ceae42087abddffe532",
+      "esbuildBinaryRealPath": "/Users/kawafmm/workspace/zev2/node_modules/.pnpm/@esbuild+darwin-arm64@0.28.0/node_modules/@esbuild/darwin-arm64/bin/esbuild",
+      "esbuildBinaryFileSha256": "6f0e1237f63fa3bc03963e58f0b0be1b9bfacd8f2dc9a3f28483e8f97e4ef2d6"
+    }
+  },
+  "expectedProjection": {
+    "sourceAtomCount": 281,
+    "containerCount": 2,
+    "boundaryCandidateCount": 164,
+    "timelineSegmentCount": 1,
+    "sourceAtomPositiveOverlapCount": 0,
+    "adjacentBoundaryCandidatePositiveOverlapCount": 0
+  },
+  "publication": {
+    "pairId": "qdczJpv8RCc-candidate-59-vertical-caption-b4-rebuild-v001",
+    "formalOutputPath": "evals/clip_composition/outputs/presentation/caption-display-pairs/qdczJpv8RCc-candidate-59-vertical-caption-b4-rebuild-v001",
+    "lockPath": "evals/clip_composition/outputs/presentation/caption-display-pairs/qdczJpv8RCc-candidate-59-vertical-caption-b4-rebuild-v001.lock",
+    "workPath": "evals/clip_composition/outputs/presentation/caption-display-pairs/qdczJpv8RCc-candidate-59-vertical-caption-b4-rebuild-v001.work"
+  },
+  "readOnlyGuard": {
+    "watchedRoot": "evals/clip_composition/outputs/presentation",
+    "excludedPaths": [
+      "evals/clip_composition/outputs/presentation/caption-display-pair-generation-jobs/qdczJpv8RCc-candidate-59-vertical-caption-b4-rebuild-v001.json"
+    ],
+    "allowedWritePaths": [
+      "evals/clip_composition/outputs/presentation/caption-display-pairs/qdczJpv8RCc-candidate-59-vertical-caption-b4-rebuild-v001",
+      "evals/clip_composition/outputs/presentation/caption-display-pairs/qdczJpv8RCc-candidate-59-vertical-caption-b4-rebuild-v001.lock",
+      "evals/clip_composition/outputs/presentation/caption-display-pairs/qdczJpv8RCc-candidate-59-vertical-caption-b4-rebuild-v001.work"
+    ],
+    "expectedBeforeCanonicalSha256": "c2a54318d943f38f69eb0e6cfc187eb5e9a34ea7906dca97bf163c44bb16a2e8"
+  }
+}

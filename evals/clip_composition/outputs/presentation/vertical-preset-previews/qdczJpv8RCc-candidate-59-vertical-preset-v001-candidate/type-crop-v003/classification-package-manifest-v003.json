@@ -1,0 +1,59 @@
+{
+  "schemaVersion": "vertical-preset-type-crop-classification-package-v003",
+  "mode": "prepare",
+  "externalApiCallsByThisScript": 0,
+  "retryCount": 0,
+  "source": {
+    "sourceReviewJob": {
+      "path": "evals/clip_composition/outputs/presentation/source-review-preparation-jobs/qdczJpv8RCc-candidate-59-v001.json",
+      "fileSha256": "698d7f56f5f3970ccc8ee1d490fd024704f0c65194b0a71130f76e108a2c58a4"
+    },
+    "displayPlan": {
+      "path": "evals/clip_composition/outputs/presentation/caption-display-pairs/qdczJpv8RCc-candidate-59-caption-local-reselection-v001/display-plan.json",
+      "fileSha256": "48f9a7324b6207f87b35d52b9d09f722f1e382f90ff0b0604a75666861608921"
+    },
+    "baseMedia": {
+      "path": "evals/clip_composition/outputs/presentation/base-media/qdczJpv8RCc-candidate-59-v001/base-media.mp4",
+      "fileSha256": "faad660c7623cdbf3a8f3b55cdaffc34729d06683ce391997c51f10fbc076967",
+      "width": 1920,
+      "height": 1080,
+      "durationSeconds": 51.566667
+    },
+    "editPlanImplementation": {
+      "path": "runner/src/steps/edit-plan.ts",
+      "fileSha256": "7774121bc58f76332b8cff49e8b756f9d9ec1ac3ece75ede803d15866b82db70"
+    },
+    "screenLayoutImplementation": {
+      "path": "runner/src/screen-layout.ts",
+      "fileSha256": "63db69fa9a9280e26443dfffa0160de3715d0e434c313b423cb347f3f6452896"
+    }
+  },
+  "requestPackage": {
+    "prompt": {
+      "path": "classification-prompt.txt",
+      "fileSha256": "8695e2eb3636ce3309695c87fd057c984abc0ce0942d2ee32dbaf9f9e0cc8370",
+      "byteLength": 7317
+    },
+    "video": {
+      "path": "classification-input-640.mp4",
+      "fileSha256": "535590429f26233a1b5bd5a41696b1dfb119b2743d8c9b0fa6404ae2585a68a2",
+      "byteLength": 4767399,
+      "width": 640,
+      "height": 360,
+      "durationSeconds": 51.566667
+    },
+    "contentsOrder": [
+      "prompt",
+      "video"
+    ],
+    "expectedPlainJsonResponsePath": "classification-response.json",
+    "expectedWebObservationPath": "classification-web-observation-v001.json",
+    "responseHandling": "JSON.parse of exact saved bytes; no trim, fence removal, or repair"
+  },
+  "classificationContract": {
+    "classificationBeforeCrop": true,
+    "layoutIsNotHardcodedByThisPackage": true,
+    "cropIsNotHardcodedByThisPackage": true,
+    "canonicalCandidateBuilder": "buildScreenLayoutCandidateSetFromGemini from runner/src/screen-layout.ts"
+  }
+}

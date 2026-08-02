@@ -1598,8 +1598,10 @@ const snapshotWorkspaceFileHashes = (root) => {
 
 test('semantic coreとrunnerは承認済みpublic exportだけを持つ', () => {
   assert.deepEqual(Object.keys(semanticCore).sort(), [
+    'buildPresentationCaptionSemanticCompilerInputForContractV001',
     'buildPresentationCaptionSemanticCompilerInputV001',
     'checkPresentationCaptionSemanticOutputV001',
+    'validatePresentationCaptionSemanticSelectionForContractV001',
     'validatePresentationCaptionSemanticOutputCheckJobV001',
     'validatePresentationCaptionSemanticOutputValidationReportV001',
   ].sort());
@@ -3603,4 +3605,32 @@ test('semantic checkerの共有担当を含むcode×check観測集合と57 code 
     PACKAGE_OWNED_CODE_PARTITION.some((code) => SEMANTIC_OWNED_CODES.includes(code)),
     false,
   );
+});
+
+test('H02: 横長幅36を共有compiler計算へ渡して既存入口とbyte一致する', () => {
+  const fixture = makeFixture();
+  const input = {
+    sourcePackageSnapshots:
+      fixture.sourcePackageObservation.artifactReads.map((entry) => entry.snapshot),
+    rawSemanticOutputSnapshot: fixture.rawSemanticOutputInput.snapshot,
+  };
+  const contract = {
+    sourceInputSchemaVersion: 'presentation-caption-semantic-source-input-v001',
+    expansionMapSchemaVersion: 'presentation-caption-semantic-expansion-map-v001',
+    manifestSchemaVersion: 'presentation-caption-semantic-source-package-manifest-v001',
+    packageReportSchemaVersion:
+      'presentation-caption-semantic-source-package-validation-report-v001',
+    compilerSchemaVersion: 'presentation-caption-semantic-compiler-input-v001',
+    presetId: 'normal-landscape-readable-pop-v001',
+    visualStateId: 'caption-core-v001',
+    maxLogicalWidthPerLine: 36,
+    maxLinesPerMeaningGroup: 2,
+    characterWidthRule: 'U+0000..U+00FF=1; other Unicode code point=2',
+    manifestHasDisplayPolicy: false,
+  };
+  const existing = semanticCore.buildPresentationCaptionSemanticCompilerInputV001(input);
+  const shared =
+    semanticCore.buildPresentationCaptionSemanticCompilerInputForContractV001(input, contract);
+  assert.deepEqual(shared, existing);
+  assert.deepEqual(serialized(shared), serialized(existing));
 });

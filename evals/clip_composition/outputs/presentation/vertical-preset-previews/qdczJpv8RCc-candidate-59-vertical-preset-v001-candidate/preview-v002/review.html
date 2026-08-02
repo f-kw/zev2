@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>一人トーク用cropに差し替えた縦型preview</title>
+  <style>
+    :root { color-scheme:dark; --bg:#0a0f1e; --card:#141b2f; --line:#30405f; --accent:#65d6ff; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:linear-gradient(135deg,#080c17,#121a31); color:#f7f8fc;
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans JP",sans-serif; }
+    main { max-width:1100px; margin:0 auto; padding:24px; }
+    h1 { margin:0 0 8px; font-size:clamp(26px,4vw,42px); }
+    .lede { color:#c9d3ec; line-height:1.7; }
+    .grid { display:grid; grid-template-columns:minmax(300px,500px) 1fr; gap:22px; align-items:start; }
+    video { width:min(100%,430px); max-height:80vh; display:block; margin:0 auto; background:#000; border-radius:18px;
+      box-shadow:0 18px 60px #000a; }
+    .card { background:var(--card); border:1px solid var(--line); border-radius:16px; padding:18px; margin-bottom:14px; }
+    .status { display:inline-block; padding:7px 12px; border-radius:999px; background:#183d32; color:#9ff3c7; font-weight:700; }
+    dt { color:#a9b9dc; margin-top:12px; }
+    dd { margin:4px 0 0; line-height:1.65; }
+    .chapters { display:grid; grid-template-columns:1fr; gap:7px; }
+    button { border:1px solid var(--line); background:#0e1629; color:#eef3ff; border-radius:10px; padding:9px 11px;
+      text-align:left; cursor:pointer; }
+    button:hover { border-color:var(--accent); }
+    .check { border-left:4px solid #f4c95d; background:#322b19; color:#ffe9a3; border-radius:8px; padding:12px;
+      line-height:1.6; }
+    a { color:#8ce4ff; }
+    @media (max-width:820px) { .grid { grid-template-columns:1fr; } }
+  </style>
+</head>
+<body>
+<main>
+  <span class="status">種類判別 → 種類別crop → 描画済み</span>
+  <h1>一人トーク用cropに差し替えた縦型preview</h1>
+  <p class="lede">固定の上下分割ではありません。この動画の内容を先に判別し、その種類で使えるcrop候補だけから選んだ結果です。</p>
+  <div class="grid">
+    <section>
+      <video id="video" controls playsinline preload="metadata" src="vertical-type-crop-review-v002.mp4"></video>
+      <p class="check">見る点は1つだけです。人物が自然に収まり、意味のない上下分割になっていないか確認してください。</p>
+    </section>
+    <section>
+      <article class="card">
+        <h2>今回の判断</h2>
+        <dl>
+          <dt>動画の種類</dt><dd>speaker_only</dd>
+          <dt>分類理由</dt><dd>画面上に装飾枠やコメント欄、小さな静止パネルはあるが、場面理解に必須な独立映像はなく話者単体がメインであるため。</dd>
+          <dt>選んだcrop</dt><dd>speaker_only_body</dd>
+          <dt>選択理由</dt><dd>頭部の上部が見切れず、構図全体のバランスが良いため</dd>
+        </dl>
+      </article>
+      <article class="card">
+        <h2>字幕比較の章</h2>
+        <div class="chapters"><button type="button" data-time="0.000000">1. 文字造形 96px（横型値）</button>
+<button type="button" data-time="5.166667">2. 文字造形 79px（安全領域B最大）</button>
+<button type="button" data-time="10.333333">3. 文字造形 74px（安全領域A最大）</button>
+<button type="button" data-time="15.500000">4. 行幅上限16の実字幕</button>
+<button type="button" data-time="18.200000">5. 行幅上限20の実字幕</button>
+<button type="button" data-time="21.200000">6. 行幅上限24の実字幕</button>
+<button type="button" data-time="26.366667">7. 安全領域Aガイド</button>
+<button type="button" data-time="31.533333">8. 安全領域Bガイド</button>
+<button type="button" data-time="36.700000">9. タイトル上・字幕下の全体像</button></div>
+      </article>
+      <article class="card">
+        <h2>旧版との関係</h2>
+        <p>旧版は同じ人物を「画面＋話者」と誤分類した記録として残しています。今回の動画には独立したゲーム画面がないため、人物単体cropへ差し替えました。</p>
+        <p><a href="../preview/review.html">旧い上下構成版を見る</a> / <a href="preflight.json">機械検査結果</a></p>
+      </article>
+    </section>
+  </div>
+</main>
+<script>
+  const video = document.getElementById('video');
+  document.querySelectorAll('button[data-time]').forEach((button) => {
+    button.addEventListener('click', () => {
+      video.currentTime = Number(button.dataset.time);
+      video.play();
+    });
+  });
+</script>
+</body>
+</html>

@@ -110,3 +110,20 @@
 - 詳細: [一般化入口の実装完了](evals/clip_composition/reports/presentation/presentation-liars-bar-candidate59-minimal-generalization-implementation-completion-20260727-v001.md)、[candidate 59完成検証](evals/clip_composition/reports/presentation/presentation-liars-bar-candidate59-completion-verification-report-20260728-v002.md)、[描画後QC](evals/clip_composition/outputs/presentation/review-renders/qdczJpv8RCc-candidate-59-caption-local-reselection-v001/presentation-review-render-qc-v003.json)。
 - このタグへ撤退すると、candidate 59の完成動画と3つの一般化入口までは保持される。タグ発行時点より後の完成作業はまだないため、現時点で失う作業はない。
 - 一つ前の`stable/first-clip-complete-20260727`まで戻る場合は、candidate 59の全成果物、3つの一般化入口、B1世代差改訂、局所再選択の実績を失う。
+
+## 2026-08-02 — `stable/vertical-first-clip-20260802`
+
+- candidate 59を、正式な話者1人用cropと認定済みの大きな字幕で、ZEV初の縦型ショート形式動画にした。
+- 確認動画は51.566秒、1080×1920、1,547 frame、字幕30件・51行で、SHA-256は`2cc9a3407148e5005616474f37cb76bb57111dd2aedc318307ea6a7190a8d7a2`。
+- 字幕の適用、行の重なり、安全領域、文字の欠落、frame数、音声の6項目を機械検査し、全て合格した。
+- kawafmmが全編を見て、crop位置、テロップの読みやすさ、音声、終端を「問題なし」と認定した。
+- これは確認用の簡素な一本であり、演出、タイトル、サムネイル、公開はまだ含まない。
+- 安定点化では、横型保護検査が同じ棚に増えた縦型55ファイルを横型への追加と誤認して一度止まった。
+- 横型91ファイルは欠落も変更もなかったため、過去tag由来の横型root・fileだけを正確に守るよう検査範囲を直した。
+- 横型root内の追加、未登録横型root、欠落、内容変更は引き続き拒否し、別の版付き縦型rootだけを対象外にした。
+- stage済みの全変更を入力に、横型回帰H01〜H06は6/6へ合格した。
+- 実完成物から、配信時には上段の画面内タイトルが必要という次の観測も得たが、まだ実装していない。
+- 詳細: [描画完了報告](evals/clip_composition/reports/presentation/presentation-candidate59-vertical-render-completion-report-20260802-v001.md)、[安定点完了報告](evals/clip_composition/reports/presentation/presentation-candidate59-vertical-stable-point-completion-report-20260802-v001.md)、[描画後QC](evals/clip_composition/outputs/presentation/vertical-review-renders/qdczJpv8RCc-candidate-59-vertical-caption-b4-rebuild-v003-result/presentation-vertical-review-render-qc-v001.json)。
+- このタグへ撤退すると、横型2本、初の縦型一本、縦型正式経路までを保持できる。
+- タグ後に予定する無音・間の調整、意味サポート場面接続、スケルトン再構築は失われるが、タグ発行時点では全て未着手である。
+- 一つ前の`stable/second-clip-generality-20260728`まで戻る場合は、縦型preset、縦型B3〜B6・B1・B4・描画経路、Gemini実走と費用記録、縦型確認MP4、人間目視合格を失う。

@@ -1,0 +1,87 @@
+{
+  "schemaVersion": "presentation-vertical-preset-finalization-report-v001",
+  "status": "passed",
+  "jobBinding": {
+    "path": "evals/clip_composition/outputs/presentation/vertical-preset-finalization-jobs/vertical-speaker-only-preset-finalization-20260730-v001.json",
+    "fileSha256": "ffbe179b0dce0ba861b3c88b30d9321944d2fe37eaea684cb6b81539a263aba5",
+    "canonicalSha256": "d793ba68b03d281aad11c96b9c49eb6e8c3255a18e3139642292590b540d90fb"
+  },
+  "implementationBinding": {
+    "entry": {
+      "path": "evals/clip_composition/finalize_presentation_vertical_speaker_only_preset_v001.mjs",
+      "fileSha256": "e4e3246d578b2f614f3f6cb305bddf17571503566345aaa3867b4c4c91c83642"
+    },
+    "localImportClosure": [
+      {
+        "role": "canonical-json-core",
+        "path": "evals/clip_composition/presentation_retained_source_atoms_v001.mjs",
+        "fileSha256": "f28178327ddc0cc64f11527d850c71bfb5043b4e13f59f6da7997fd8f6d6cad0"
+      }
+    ]
+  },
+  "runtimeProfile": {
+    "node": {
+      "path": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+      "version": "v20.19.6",
+      "fileSha256": "de4f3b493b15e7a0ee311f6a2c6dbf93858052f5802aa91cfafa2c57e9d6bc5c"
+    },
+    "tsx": {
+      "path": "/Users/kawafmm/workspace/zev2/runner/node_modules/tsx/dist/cli.mjs",
+      "version": "tsx v4.22.3\nnode v20.19.6",
+      "fileSha256": "5c916fa6ecad44aedbb01ca5815536d00ea07de6b73eeb9443d317326b0218d8"
+    },
+    "remotion": {
+      "path": "/Users/kawafmm/workspace/zev2/runner/node_modules/@remotion/cli/remotion-cli.js",
+      "version": "4.0.481",
+      "fileSha256": "a10a711f052487d302dcf52dc08729c84c4deca0dc41c5b708edd1a7b7b48bfa"
+    },
+    "browser": {
+      "path": "/Users/kawafmm/workspace/zev2/runner/node_modules/.remotion/chrome-headless-shell/mac-arm64/chrome-headless-shell-mac-arm64/chrome-headless-shell",
+      "version": "Google Chrome for Testing 149.0.7790.0",
+      "fileSha256": "b469d05c698ccf9f4ae3dc43fb194fbdcf56f9da1fc46dcc19f2bf9fe2aa20b8"
+    },
+    "ffmpeg": {
+      "path": "/opt/homebrew/bin/ffmpeg",
+      "version": "ffmpeg version 8.0.1 Copyright (c) 2000-2025 the FFmpeg developers\nbuilt with Apple clang version 16.0.0 (clang-1600.0.26.6)\nconfiguration: --prefix=/opt/homebrew/Cellar/ffmpeg/8.0.1_1 --enable-shared --enable-pthreads --enable-version3 --cc=clang --host-cflags= --host-ldflags= --enable-ffplay --enable-gpl --enable-libsvtav1 --enable-libopus --enable-libx264 --enable-libmp3lame --enable-libdav1d --enable-libvpx --enable-libx265 --enable-videotoolbox --enable-audiotoolbox --enable-neon\nlibavutil      60.  8.100 / 60.  8.100\nlibavcodec     62. 11.100 / 62. 11.100\nlibavformat    62.  3.100 / 62.  3.100\nlibavdevice    62.  1.100 / 62.  1.100\nlibavfilter    11.  4.100 / 11.  4.100\nlibswscale      9.  1.100 /  9.  1.100\nlibswresample   6.  1.100 /  6.  1.100\n\nExiting with exit code 0",
+      "fileSha256": "d105f770f53607ec1532b27e354ca7c3166a706dc1ccc6f96e3c8d3f54d7e798"
+    },
+    "ffprobe": {
+      "path": "/opt/homebrew/bin/ffprobe",
+      "version": "ffprobe version 8.0.1 Copyright (c) 2007-2025 the FFmpeg developers\nbuilt with Apple clang version 16.0.0 (clang-1600.0.26.6)\nconfiguration: --prefix=/opt/homebrew/Cellar/ffmpeg/8.0.1_1 --enable-shared --enable-pthreads --enable-version3 --cc=clang --host-cflags= --host-ldflags= --enable-ffplay --enable-gpl --enable-libsvtav1 --enable-libopus --enable-libx264 --enable-libmp3lame --enable-libdav1d --enable-libvpx --enable-libx265 --enable-videotoolbox --enable-audiotoolbox --enable-neon\nlibavutil      60.  8.100 / 60.  8.100\nlibavcodec     62. 11.100 / 62. 11.100\nlibavformat    62.  3.100 / 62.  3.100\nlibavdevice    62.  1.100 / 62.  1.100\nlibavfilter    11.  4.100 / 11.  4.100\nlibswscale      9.  1.100 /  9.  1.100\nlibswresample   6.  1.100 /  6.  1.100",
+      "fileSha256": "dcb242647fedaa21618f7048c5f2982e584fdfbcfca098553b3121d1a5d509d9"
+    },
+    "imageMagick": {
+      "path": "/opt/homebrew/bin/magick",
+      "version": "Version: ImageMagick 7.1.2-12 Q16-HDRI aarch64 23490 https://imagemagick.org\nCopyright: (C) 1999 ImageMagick Studio LLC\nLicense: https://imagemagick.org/script/license.php\nFeatures: Cipher DPC HDRI Modules OpenMP \nDelegates (built-in): bzlib cairo fontconfig freetype heic jng jp2 jpeg jxl lcms lqr ltdl lzma openexr png raw rsvg tiff uhdr webp xml zip zlib zstd\nCompiler: clang (16.0.0)",
+      "fileSha256": "78311032c39a3192ad4ed34ffdf6aab60e21b8e635005f9398095d73c9bd7a29"
+    }
+  },
+  "violations": [],
+  "outputBindings": {
+    "presetRegistry": {
+      "path": "evals/clip_composition/registries/presentation/vertical-short-preset-registry-v001/preset-registry.json",
+      "fileSha256": "3a3e0b7b9ce4e349f778b8035c60085a101f7631373404bdc8252a9cc7532133",
+      "canonicalSha256": "cbe37484700436cf4ca6ff745273a7941654e412c744de11d24be387c0a10ef7"
+    },
+    "presetValidationIndex": {
+      "path": "evals/clip_composition/registries/presentation/vertical-short-preset-registry-v001/preset-validation-index.json",
+      "fileSha256": "6d2eb554f2752383b54180a3c9d21f81620734aef760a2894be8c4914a8ff9e2",
+      "canonicalSha256": "1f0afbe0511525aece5f74ae1808480755d90b03073d282cd0d1cfd1e12516b0"
+    },
+    "materialValidationIndex": {
+      "path": "evals/clip_composition/registries/presentation/vertical-short-preset-registry-v001/material-validation-index.json",
+      "fileSha256": "98213035bc6e395b090d7cff2639d4bf707fb838b7df50cb51bc60ab95d4758e",
+      "canonicalSha256": "3958ad2d21233342e49aedd29cbd337785a228e1063d1802b64e92dc1793d1fc"
+    },
+    "trustedRegistryBindings": {
+      "path": "evals/clip_composition/registries/presentation/vertical-short-preset-registry-v001/trusted-registry-bindings.json",
+      "fileSha256": "e980be0b96e8ff5b69e57fa4787e503fd77ca21e51764cf96098df5d65449ece",
+      "canonicalSha256": "30e34a626666d5e6b2df3ad5cb8734e41ea3bd25f1e8393234bbc0b56576acbc"
+    },
+    "rendererTrust": {
+      "path": "evals/clip_composition/registries/presentation/presentation-vertical-renderer-trust-v001/trust.json",
+      "fileSha256": "af0738e2c96b7e6a8f6efc1d035191cd989f3c0adf52f939cb46fb945205e72e",
+      "canonicalSha256": "ebbae1b09b24dcb128bc4c21455f4b0dcbae3f28a7ad19370512d804ba4f019f"
+    }
+  }
+}

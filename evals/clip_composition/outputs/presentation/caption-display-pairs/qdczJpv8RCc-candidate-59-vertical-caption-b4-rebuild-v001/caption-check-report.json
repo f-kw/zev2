@@ -1,0 +1,46 @@
+{
+  "schemaVersion": "presentation-caption-check-report-v004",
+  "checkerVersion": "presentation-caption-checker-v004",
+  "inputBindings": {
+    "displayPlan": {
+      "path": "display-plan.json",
+      "fileSha256": "77459b6c86d964a9c750e6395e48a334a9843e83d95b1c27c0ae8365117e8d88",
+      "canonicalSha256": "391a97e184f2eed6b4b87dc90087dc0ad7626a56a138fae9444e3cadea45bb87"
+    },
+    "instructionBundle": {
+      "path": "instruction-bundle.json",
+      "fileSha256": "b1cbf6378cb69d8230ea6cee611974cafba7db5ac4a0c82114f2a84dacc42b43",
+      "canonicalSha256": "ccef0ece2a3e61732e4b8eda81f960af93918a6d865d568397bb5930339a8a24"
+    }
+  },
+  "overallStatus": "passed",
+  "contract": {
+    "sourceAtomCount": 281,
+    "cueCount": 30,
+    "lineCount": 51
+  },
+  "checks": [
+    {
+      "name": "textPreservation",
+      "status": "passed",
+      "violationCodes": []
+    },
+    {
+      "name": "sourceAtomCoverage",
+      "status": "passed",
+      "violationCodes": []
+    },
+    {
+      "name": "anchorPreservation",
+      "status": "passed",
+      "violationCodes": []
+    }
+  ],
+  "observations": {
+    "sourceAtomPositiveOverlaps": [],
+    "boundaryContacts": []
+  },
+  "scopeExclusions": [
+    "physical_pixel_safety_is_verified_by_vertical_renderer"
+  ]
+}

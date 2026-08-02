@@ -32,6 +32,7 @@ export type ShortsRawScreenDetections = {
 
 export type ShortsScreenLayoutPlan = {
   screenLayoutId: ShortsScreenLayoutId;
+  classificationReason?: string;
   detections: ShortsRawScreenDetections;
   viewports: Partial<Record<ShortsViewportKey, ViewportCoords>>;
   displaySummary: string;
@@ -50,6 +51,7 @@ export type ShortsScreenLayoutCandidate = {
 
 export type ShortsScreenLayoutCandidateSet = {
   screenLayoutId: ShortsScreenLayoutId;
+  classificationReason?: string;
   detections: ShortsRawScreenDetections;
   displaySummary: string;
   candidates: ShortsScreenLayoutCandidate[];
@@ -254,6 +256,24 @@ function buildAspectCropContainingBox(
   );
 }
 
+function buildLargestAspectCropCenteredOnBox(
+  box: ViewportCoords,
+  expectedRatio16x9: number
+): ViewportCoords {
+  const cropAspectRatio = convertViewportRatioToCropAspectRatio(expectedRatio16x9);
+  const targetWidth = cropAspectRatio <= 1 ? cropAspectRatio : 1;
+  const targetHeight = cropAspectRatio <= 1 ? 1 : 1 / cropAspectRatio;
+  const centerX = (box[0] + box[2]) / 2;
+  const centerY = (box[1] + box[3]) / 2;
+
+  return shiftViewportRectIntoFrame(
+    centerX - targetWidth / 2,
+    centerY - targetHeight / 2,
+    targetWidth,
+    targetHeight
+  );
+}
+
 function boxFitsInsideViewport(box: ViewportCoords, crop: ViewportCoords): boolean {
   const rawBox = serializeViewportCoordsToRawYxyx(box);
   const rawCrop = serializeViewportCoordsToRawYxyx(crop);
@@ -287,6 +307,29 @@ function shiftViewportRectToContainBox(crop: ViewportCoords, box: ViewportCoords
   return shiftViewportRectIntoFrame(left, top, width, height);
 }
 
+function shiftViewportRectToContainPoint(
+  crop: ViewportCoords,
+  point: { x: number; y: number }
+): ViewportCoords {
+  const width = crop[2] - crop[0];
+  const height = crop[3] - crop[1];
+  let left = crop[0];
+  let top = crop[1];
+
+  if (point.x < left) {
+    left = point.x;
+  } else if (point.x > left + width) {
+    left = point.x - width;
+  }
+  if (point.y < top) {
+    top = point.y;
+  } else if (point.y > top + height) {
+    top = point.y - height;
+  }
+
+  return shiftViewportRectIntoFrame(left, top, width, height);
+}
+
 function normalizeSpeakerDetection(rawDetection: unknown, label: string): ShortsRawSpeakerDetection {
   const detection = recordFrom(rawDetection);
   return {
@@ -295,17 +338,25 @@ function normalizeSpeakerDetection(rawDetection: unknown, label: string): Shorts
   };
 }
 
-function buildSpeakerBodyViewportFromDetection(
+function normalizeSpeakerDetectionViewports(
   detection: ShortsRawSpeakerDetection,
-  expectedRatio16x9: number,
   label: string
-): ViewportCoords {
+): { face: ViewportCoords; body: ViewportCoords } {
   const face = normalizeDetectionViewportCoords(detection.face, `${label}.face`);
   const body = normalizeDetectionViewportCoords(detection.body, `${label}.body`);
   if (face[0] < body[0] || face[1] < body[1] || face[2] > body[2] || face[3] > body[3]) {
     throw new Error(`${label}の顔検出が人物全体の範囲から外れています`);
   }
 
+  return { face, body };
+}
+
+function buildSpeakerBodyViewportFromDetection(
+  detection: ShortsRawSpeakerDetection,
+  expectedRatio16x9: number,
+  label: string
+): ViewportCoords {
+  const { face, body } = normalizeSpeakerDetectionViewports(detection, label);
   const bodyCrop = buildAspectCropContainingBox(body, expectedRatio16x9);
   const crop = boxFitsInsideViewport(face, bodyCrop)
     ? bodyCrop
@@ -315,6 +366,25 @@ function buildSpeakerBodyViewportFromDetection(
   }
 
   return crop;
+}
+
+function buildSpeakerOnlyViewportCandidates(
+  detection: ShortsRawSpeakerDetection,
+  expectedRatio16x9: number,
+  label: string
+): { body: ViewportCoords; face: ViewportCoords } {
+  const { face, body } = normalizeSpeakerDetectionViewports(detection, label);
+  const faceCenter = {
+    x: (face[0] + face[2]) / 2,
+    y: (face[1] + face[3]) / 2
+  };
+  return {
+    body: shiftViewportRectToContainPoint(
+      buildLargestAspectCropCenteredOnBox(body, expectedRatio16x9),
+      faceCenter
+    ),
+    face: buildLargestAspectCropCenteredOnBox(face, expectedRatio16x9)
+  };
 }
 
 function buildSpeakerFaceViewportFromDetection(
@@ -405,7 +475,9 @@ function buildComputedViewportsFromDetections(
     if (!speakerDetection) {
       throw new Error(`${label}に${viewportKey}の検出結果がありません`);
     }
-    viewports[viewportKey] = buildSpeakerBodyViewportFromDetection(speakerDetection, expectedRatio, `${label}.${viewportKey}`);
+    viewports[viewportKey] = screenLayoutId === 'speaker_only'
+      ? buildSpeakerOnlyViewportCandidates(speakerDetection, expectedRatio, `${label}.${viewportKey}`).body
+      : buildSpeakerBodyViewportFromDetection(speakerDetection, expectedRatio, `${label}.${viewportKey}`);
   }
 
   return viewports;
@@ -467,17 +539,17 @@ function buildScreenLayoutCandidatesFromDetections(
     }
 
     const expectedRatio = resolveViewportRatioForLayout(screenLayoutId, 'speaker');
-    const speaker = buildSpeakerViewportCandidates(detections.speaker, expectedRatio, `${label}.speaker`);
+    const speaker = buildSpeakerOnlyViewportCandidates(detections.speaker, expectedRatio, `${label}.speaker`);
     pushUniqueCandidate(candidates, {
       id: 'speaker_only_body',
-      label: '話者全体を優先',
-      reason: '話者のみの縦長画面で、顔を入れたまま見えている人物全体をできるだけ入れる',
+      label: '人物全体の中心を優先',
+      reason: '話者のみの縦長画面で、人物全体の検出中心を9:16の表示範囲の基準にする',
       viewports: { speaker: speaker.body }
     });
     pushUniqueCandidate(candidates, {
       id: 'speaker_only_face',
-      label: '顔を優先',
-      reason: '話者のみの縦長画面で、顔の見やすさを優先する',
+      label: '顔の中心を優先',
+      reason: '話者のみの縦長画面で、顔の検出中心を9:16の表示範囲の基準にする',
       viewports: { speaker: speaker.face }
     });
     return candidates;
@@ -571,6 +643,9 @@ export function buildScreenLayoutCandidateSetFromGemini(
 ): ShortsScreenLayoutCandidateSet {
   const record = recordFrom(rawSegment);
   const screenLayoutId = normalizeShortsScreenLayoutId(record.screenLayoutId, label);
+  const classificationReason = typeof record.layoutReason === 'string' && record.layoutReason.trim()
+    ? record.layoutReason.trim()
+    : undefined;
   const detections = validateRawDetectionsForLayout(screenLayoutId, record.detections, label);
   const candidates = buildScreenLayoutCandidatesFromDetections(screenLayoutId, detections, label);
   if (candidates.length === 0) {
@@ -579,6 +654,7 @@ export function buildScreenLayoutCandidateSetFromGemini(
 
   return {
     screenLayoutId,
+    classificationReason,
     detections,
     displaySummary: displaySummaryForLayout(screenLayoutId),
     candidates
@@ -600,6 +676,7 @@ export function selectScreenLayoutCandidate(
 
   return {
     screenLayoutId: candidateSet.screenLayoutId,
+    classificationReason: candidateSet.classificationReason,
     detections: candidateSet.detections,
     viewports: candidate.viewports,
     displaySummary: candidateSet.displaySummary,
@@ -630,11 +707,15 @@ export function buildPrimaryScreenLayoutPlanFromGemini(
 ): ShortsScreenLayoutPlan {
   const record = recordFrom(rawSegment);
   const screenLayoutId = normalizeShortsScreenLayoutId(record.screenLayoutId, label);
+  const classificationReason = typeof record.layoutReason === 'string' && record.layoutReason.trim()
+    ? record.layoutReason.trim()
+    : undefined;
   const detections = validateRawDetectionsForLayout(screenLayoutId, record.detections, label);
   const viewports = buildComputedViewportsFromDetections(screenLayoutId, detections, label);
 
   return {
     screenLayoutId,
+    classificationReason,
     detections,
     viewports,
     displaySummary: displaySummaryForLayout(screenLayoutId)

@@ -24,8 +24,8 @@ const workspaceRoot = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 const APPROVED_MODEL = 'gemini-3.6-flash';
 const APPROVED_MODEL_RESOURCE = `models/${APPROVED_MODEL}`;
 const APPROVED_PRICING_TIER = 'PAID_STANDARD_DEFAULT_BY_OMISSION';
-const APPROVED_INPUT_LIMIT = 1_048_576;
-const APPROVED_OUTPUT_LIMIT = 65_536;
+const APPROVED_INPUT_LIMIT = 1048576;
+const APPROVED_OUTPUT_LIMIT = 65536;
 const APPROVED_INPUT_PRICE = '1.50';
 const APPROVED_OUTPUT_PRICE = '7.50';
 const APPROVED_DESIGN_SHA256 =
@@ -33,7 +33,7 @@ const APPROVED_DESIGN_SHA256 =
 const APPROVED_REVISION_DECISION_DATE = '2026-07-27';
 const APPROVED_THINKING_LEVEL = 'medium';
 const SERVER_TIMEOUT_SECONDS = 600;
-const CLIENT_TIMEOUT_MILLISECONDS = 600_000;
+const CLIENT_TIMEOUT_MILLISECONDS = 600000;
 const COUNT_TOKENS_ENDPOINT =
   `https://generativelanguage.googleapis.com/v1beta/models/${APPROVED_MODEL}:countTokens`;
 
@@ -356,7 +356,9 @@ const validateApprovedExecutionValues = (config, currentDate) => {
 };
 
 const validateSemanticSource = (value, config) => {
-  if (value?.schemaVersion !== 'presentation-caption-semantic-source-input-v001'
+  const expectedSchemaVersion = config.expectedSourceSchemaVersion
+    ?? 'presentation-caption-semantic-source-input-v001';
+  if (value?.schemaVersion !== expectedSchemaVersion
     || value.taskDescription !== EXPECTED_TASK_DESCRIPTION
     || !Array.isArray(value.containers)
     || value.containers.length !== config.expectedContainerCount) {
@@ -401,7 +403,11 @@ const validateSemanticSource = (value, config) => {
   };
 };
 
-const buildGenerateRequest = (sourceText, outputLimit) => ({
+const buildGenerateRequestWithPolicy = ({
+  sourceText,
+  outputLimit,
+  explicitCandidateCount,
+}) => ({
   systemInstruction: {
     parts: [
       {
@@ -420,6 +426,7 @@ const buildGenerateRequest = (sourceText, outputLimit) => ({
     },
   ],
   generationConfig: {
+    ...(explicitCandidateCount ? {candidateCount: 1} : {}),
     maxOutputTokens: outputLimit,
     responseMimeType: 'application/json',
     responseJsonSchema: RESPONSE_JSON_SCHEMA,
@@ -428,6 +435,13 @@ const buildGenerateRequest = (sourceText, outputLimit) => ({
     },
   },
 });
+
+const buildGenerateRequest = (sourceText, outputLimit) =>
+  buildGenerateRequestWithPolicy({
+    sourceText,
+    outputLimit,
+    explicitCandidateCount: false,
+  });
 
 const buildMaximumResponse = (source) => ({
   status: 'complete',
@@ -451,7 +465,7 @@ const decimalPriceParts = (value) => {
 };
 
 const formatHundredMillionths = (numerator) => {
-  const denominator = 100_000_000n;
+  const denominator = 100000000n;
   const whole = numerator / denominator;
   const fraction = (numerator % denominator).toString().padStart(8, '0');
   return `${whole}.${fraction}`;
@@ -640,6 +654,52 @@ export function buildPresentationCaptionGateB5RequestsV004({
     generateBytes,
     inputCountBytes,
     maximumCountBytes,
+  };
+}
+
+export function buildPresentationCaptionGateB5BoundRequestV002({
+  sourceBytes,
+  config,
+  maxOutputTokens,
+}) {
+  if (!Number.isSafeInteger(maxOutputTokens) || maxOutputTokens <= 0) {
+    stop('DERIVED_MAX_OUTPUT_TOKENS_INVALID');
+  }
+  const verticalConfig = {
+    ...config,
+    expectedSourceSchemaVersion:
+      'presentation-caption-semantic-source-input-v002',
+    officialOutputLimit: maxOutputTokens,
+  };
+  const built = buildPresentationCaptionGateB5RequestsV004({
+    sourceBytes,
+    config: verticalConfig,
+  });
+  const generateRequest = buildGenerateRequestWithPolicy({
+    sourceText: built.sourceText,
+    outputLimit: maxOutputTokens,
+    explicitCandidateCount: true,
+  });
+  const inputTokenCountRequest = {
+    generateContentRequest: {
+      model: `models/${config.modelId}`,
+      ...generateRequest,
+    },
+  };
+  const generateBytes = formalBytes(generateRequest);
+  const inputCountBytes = formalBytes(inputTokenCountRequest);
+  if (containsPropertyName(generateRequest, 'serviceTier')
+    || inputTokenCountRequest.generateContentRequest.candidateCount !== undefined
+    || generateRequest.generationConfig.candidateCount !== 1
+    || generateRequest.generationConfig.maxOutputTokens !== maxOutputTokens) {
+    stop('VERTICAL_REQUEST_POLICY_INVALID');
+  }
+  return {
+    ...built,
+    generateRequest,
+    inputTokenCountRequest,
+    generateBytes,
+    inputCountBytes,
   };
 }
 

@@ -1,0 +1,262 @@
+{
+  "schemaVersion": "vertical-fullwidth-caption-preview-preflight-v001",
+  "status": "passed",
+  "createdAt": "2026-07-29T00:34:59.596Z",
+  "externalApiCalls": 0,
+  "inputs": {
+    "baseMedia": {
+      "path": "evals/clip_composition/outputs/presentation/base-media/qdczJpv8RCc-candidate-59-v001/base-media.mp4",
+      "fileSha256": "faad660c7623cdbf3a8f3b55cdaffc34729d06683ce391997c51f10fbc076967"
+    },
+    "displayPlan": {
+      "path": "evals/clip_composition/outputs/presentation/caption-display-pairs/qdczJpv8RCc-candidate-59-caption-local-reselection-v001/display-plan.json",
+      "fileSha256": "48f9a7324b6207f87b35d52b9d09f722f1e382f90ff0b0604a75666861608921"
+    },
+    "cropDecision": {
+      "path": "evals/clip_composition/outputs/presentation/vertical-preset-previews/qdczJpv8RCc-candidate-59-vertical-preset-v001-candidate/type-crop-v006/crop-decision-v006.json",
+      "fileSha256": "4fba3f371412310fc5122ccfb58634e390a5725aec185172bcf041dd0152a4ed"
+    },
+    "registry": {
+      "path": "evals/clip_composition/registries/presentation/normal-landscape-preset-registry-v001/preset-registry.json",
+      "fileSha256": "8e9b0a039c8a4c9edf2c66b1df343c1d892d4688ebc4886a9af322bd44a6e5a8"
+    },
+    "previousHumanApprovedPreview": {
+      "path": "evals/clip_composition/outputs/presentation/vertical-preset-previews/qdczJpv8RCc-candidate-59-vertical-preset-v001-candidate/preview-v003/vertical-fullwidth-caption-review-v003.mp4",
+      "fileSha256": "ff446bd498753c8e4ff79a9d1e05b8ca4c95e91b2cebb56a57436c52013a1eb8",
+      "expectedFileSha256": "ff446bd498753c8e4ff79a9d1e05b8ca4c95e91b2cebb56a57436c52013a1eb8",
+      "preserved": true
+    }
+  },
+  "formatInput": {
+    "format": "vertical-short-1080x1920",
+    "maxVisibleCharactersPerLine": 7,
+    "maxLogicalWidthPerLine": 14,
+    "maxLines": 2,
+    "humanOrigin": "kawafmm 2026-07-29",
+    "notAppliedToLandscapeOrOtherFormats": true
+  },
+  "crop": {
+    "screenLayoutId": "speaker_only",
+    "selectedCandidateId": "speaker_only_body",
+    "unchangedFromHumanApprovedPreview": true
+  },
+  "typography": {
+    "sourcePresetId": "normal-landscape-readable-pop-v001",
+    "sourceStateId": "caption-core-v001",
+    "fontAssetId": "line-seed-jp-extra-bold-v001",
+    "fontFileSha256": "4f20353d5ba41012fb8eaaa653d2ac46f80d63880301a6590765897bbdfedbfb",
+    "widthProbeText": "これやばいよね",
+    "widthProbeVisibleCharacters": 7,
+    "widthProbeLogicalWidth": 14,
+    "selectedFontSizePx": 134,
+    "rejectedNextFontSizePx": 135,
+    "selectedBorderWidthPx": 11,
+    "selectedGlowWidthPx": 17,
+    "selectionRule": "7文字境界probeの実PNGが既存描画由来安全領域内・最大2行・行交差0を満たす最大整数",
+    "modelLowerBoundFontSizePx": 133,
+    "renderedPixelSearch": [
+      {
+        "fontSizePx": 133,
+        "imagePath": "evals/clip_composition/outputs/presentation/vertical-preset-previews/qdczJpv8RCc-candidate-59-vertical-preset-v001-candidate/preview-v008/overlays/qa-width-search-133px.png",
+        "imageFileSha256": "49bc6c82e9d6ecdb2ab814f6c8d5fdb402e6888774f8f948c228455bc4bc0b7d",
+        "alphaBounds": {
+          "width": 959,
+          "height": 183,
+          "x": 68,
+          "y": 1582,
+          "right": 1027,
+          "bottom": 1765
+        },
+        "insideSafeArea": true
+      },
+      {
+        "fontSizePx": 134,
+        "imagePath": "evals/clip_composition/outputs/presentation/vertical-preset-previews/qdczJpv8RCc-candidate-59-vertical-preset-v001-candidate/preview-v008/overlays/qa-width-search-134px.png",
+        "imageFileSha256": "129524f3c7f511238fd0f837223d48a98515f379fc3c3bc78c68b7a08d07b9ce",
+        "alphaBounds": {
+          "width": 966,
+          "height": 184,
+          "x": 68,
+          "y": 1581,
+          "right": 1034,
+          "bottom": 1765
+        },
+        "insideSafeArea": true
+      },
+      {
+        "fontSizePx": 135,
+        "imagePath": "evals/clip_composition/outputs/presentation/vertical-preset-previews/qdczJpv8RCc-candidate-59-vertical-preset-v001-candidate/preview-v008/overlays/qa-width-search-135px.png",
+        "imageFileSha256": "5fb3eb268275ff62015b0ddd5f3da4d14b76e3a92ea5608aef0b2749bc367048",
+        "alphaBounds": {
+          "width": 973,
+          "height": 185,
+          "x": 68,
+          "y": 1581,
+          "right": 1041,
+          "bottom": 1766
+        },
+        "insideSafeArea": false
+      }
+    ],
+    "safeArea": {
+      "top": 38,
+      "right": 43,
+      "bottom": 38,
+      "left": 43,
+      "origin": "buildTelopRenderModelが実描画で使う既存余白から再導出"
+    },
+    "selectedProbeModelRects": [
+      {
+        "left": 49,
+        "top": 1543.8,
+        "right": 1043,
+        "bottom": 1733.8
+      }
+    ],
+    "nextProbeModelRects": [
+      {
+        "left": 49,
+        "top": 1542.8,
+        "right": 1050,
+        "bottom": 1733.8
+      }
+    ],
+    "selectedProbeAlphaBounds": {
+      "width": 966,
+      "height": 184,
+      "x": 68,
+      "y": 1581,
+      "right": 1034,
+      "bottom": 1765
+    },
+    "nextProbeAlphaBounds": {
+      "width": 973,
+      "height": 185,
+      "x": 68,
+      "y": 1581,
+      "right": 1041,
+      "bottom": 1766
+    }
+  },
+  "scenes": [
+    {
+      "sceneId": "fullwidth-caption-01",
+      "label": "1行・7文字「これやばいよね」",
+      "cueId": "caption-cue-000003",
+      "text": "これやばいよね",
+      "sourceStartFrame": 232,
+      "sourceEndFrameExclusive": 260,
+      "frameCount": 28,
+      "overlayPath": "evals/clip_composition/outputs/presentation/vertical-preset-previews/qdczJpv8RCc-candidate-59-vertical-preset-v001-candidate/preview-v008/overlays/caption-01-caption-cue-000003.png",
+      "overlayFileSha256": "129524f3c7f511238fd0f837223d48a98515f379fc3c3bc78c68b7a08d07b9ce",
+      "lines": [
+        {
+          "text": "これやばいよね",
+          "visibleCharacters": 7,
+          "logicalWidth": 14
+        }
+      ],
+      "alphaBounds": {
+        "width": 966,
+        "height": 184,
+        "x": 68,
+        "y": 1581,
+        "right": 1034,
+        "bottom": 1765
+      }
+    },
+    {
+      "sceneId": "fullwidth-caption-02",
+      "label": "2行・7文字＋7文字",
+      "cueId": "caption-cue-000006",
+      "text": "やり始めるから\nあっちこっちで",
+      "sourceStartFrame": 444,
+      "sourceEndFrameExclusive": 525,
+      "frameCount": 81,
+      "overlayPath": "evals/clip_composition/outputs/presentation/vertical-preset-previews/qdczJpv8RCc-candidate-59-vertical-preset-v001-candidate/preview-v008/overlays/caption-02-caption-cue-000006.png",
+      "overlayFileSha256": "323c33457d40301c0f9e4c840b41111e6ab3cee64c2869f734dbabb5606f2c2c",
+      "lines": [
+        {
+          "text": "やり始めるから",
+          "visibleCharacters": 7,
+          "logicalWidth": 14
+        },
+        {
+          "text": "あっちこっちで",
+          "visibleCharacters": 7,
+          "logicalWidth": 14
+        }
+      ],
+      "alphaBounds": {
+        "width": 974,
+        "height": 381,
+        "x": 54,
+        "y": 1383,
+        "right": 1028,
+        "bottom": 1764
+      }
+    },
+    {
+      "sceneId": "fullwidth-caption-03",
+      "label": "1行・7文字「困ったもんです」",
+      "cueId": "caption-cue-000014",
+      "text": "困ったもんです",
+      "sourceStartFrame": 1314,
+      "sourceEndFrameExclusive": 1365,
+      "frameCount": 51,
+      "overlayPath": "evals/clip_composition/outputs/presentation/vertical-preset-previews/qdczJpv8RCc-candidate-59-vertical-preset-v001-candidate/preview-v008/overlays/caption-03-caption-cue-000014.png",
+      "overlayFileSha256": "d5fc8b473f1a1bb2a60fe2b994aa78572b93080751183897ae9de9e712df37b8",
+      "lines": [
+        {
+          "text": "困ったもんです",
+          "visibleCharacters": 7,
+          "logicalWidth": 14
+        }
+      ],
+      "alphaBounds": {
+        "width": 964,
+        "height": 179,
+        "x": 55,
+        "y": 1587,
+        "right": 1019,
+        "bottom": 1766
+      }
+    }
+  ],
+  "checks": {
+    "cropUnchanged": true,
+    "onlyExistingAcceptedCueBoundariesUsed": true,
+    "allVisibleLineLengthsWithinFormatInput": true,
+    "allLogicalLineWidthsWithinFormatInput": true,
+    "allScenesAtMost2Lines": true,
+    "allSceneModelsHaveExpectedLineCountAndNoPositiveIntersection": true,
+    "allSceneAlphaBoundsInsideSafeArea": true,
+    "noPositiveLineIntersection": true,
+    "sameFontBorderGlowForEveryScene": true,
+    "widthBoundaryProbeInsideSafeArea": true,
+    "nextIntegerFontRejectedByRenderedPixelBounds": true,
+    "outputSize1080x1920": true,
+    "outputFrameCountMatchesScenes": true,
+    "outputDurationWithinOneFrame": true,
+    "outputAudioShapeMatchesSource": true,
+    "previousPreviewPreserved": true
+  },
+  "media": {
+    "path": "evals/clip_composition/outputs/presentation/vertical-preset-previews/qdczJpv8RCc-candidate-59-vertical-preset-v001-candidate/preview-v008/vertical-fullwidth-caption-review-v008.mp4",
+    "fileSha256": "24a632ff99acadf97c2a18762420a7db4ecbc4b4b374b9bcae3d0d41bd3fe650",
+    "width": 1080,
+    "height": 1920,
+    "fps": "30/1",
+    "frameCount": 160,
+    "durationSeconds": 5.333008,
+    "expectedDurationSeconds": 5.333333333333333,
+    "audioCodec": "aac",
+    "audioSampleRate": 48000,
+    "audioChannels": 2
+  },
+  "limitations": [
+    "これは縦型preset認定用previewであり、正式な縦型完成動画ではない",
+    "全281文字の7文字分割は未実施であり、正式化時は短い意味単位の新選択が必要",
+    "7文字は縦型フォーマットの今回の人間指定入力で、横型へ流用しない"
+  ]
+}

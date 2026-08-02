@@ -1,0 +1,148 @@
+{
+  "schemaVersion": "presentation-caption-semantic-source-package-job-v002",
+  "jobId": "qdczJpv8RCc-candidate-59-vertical-caption-semantic-source-package-v001",
+  "artifactId": "qdczJpv8RCc-candidate-59-vertical-v001",
+  "mode": "formal-generation",
+  "gateA": {
+    "job": {
+      "path": "evals/clip_composition/outputs/presentation/segmenter-boundary-preflight-jobs/qdczJpv8RCc-candidate-59-vertical-v001.json",
+      "fileSha256": "363a3dee26d6218c45249f0fbb95e9a878dc96f5f434edd845bfd290751c39c2"
+    },
+    "completionReport": {
+      "path": "evals/clip_composition/reports/presentation/presentation-liars-bar-candidate59-minimal-generalization-implementation-completion-20260727-v001.md",
+      "fileSha256": "5034155f5ed8cfbe8cec926312cdad9d988302215200a0b2621d9a599b7c1a2e"
+    },
+    "expectedEvidenceHashes": {
+      "boundaryCandidatesCanonicalSha256": "4c43c6487e2c2ef9de6b476ff2e742419f6d1c504921259111bc8abe8dbfb1c5",
+      "sourceAtomMembershipCanonicalSha256": "f6a409410b3039a7c967dd00febc526d2f1b3bf84bde8d0c6cddf52a83bc4494",
+      "evidenceCanonicalSha256": "75516c3210c308637d10d46c6f7deed1cb3d76f1d7317828473f7c45109a9cad"
+    }
+  },
+  "implementationBinding": {
+    "gitCommit": "382670466eb7cd4ae39b40005cb2cd7ffbcc9203",
+    "files": [
+      {
+        "role": "packageCore",
+        "path": "evals/clip_composition/presentation_caption_semantic_source_package_v001.mjs",
+        "fileSha256": "ac3dcbbc671af6f56dcceeea6a41c8ae9cbf9fc4ba28a8a00bbc5d6faff45bcd"
+      },
+      {
+        "role": "packageRunner",
+        "path": "evals/clip_composition/run_presentation_caption_semantic_source_package_job_v002.mjs",
+        "fileSha256": "722e4d00f7634713f0c8f8bc4f3a05830aff4f366a062fccae7d984c20ef373c"
+      },
+      {
+        "role": "rendererTrustImplementation",
+        "path": "evals/clip_composition/presentation_renderer_plan_v002.mjs",
+        "fileSha256": "bedb4d9e66622372d9a564b26006dbb7b6cc689db86fd353ad8b7187ca3079de"
+      }
+    ],
+    "dependencyFiles": [
+      {
+        "role": "textLayoutImplementation",
+        "path": "evals/clip_composition/presentation_renderer_text_layout_v001.mjs",
+        "fileSha256": "066a62adaa7fa3f8b8eda92c82e9a85940e43f372af976edc4b327ef4cf9ce5e"
+      },
+      {
+        "role": "gateACore",
+        "path": "evals/clip_composition/presentation_segmenter_boundary_evidence_v001.mjs",
+        "fileSha256": "dac613292e463897ee2757be75a7d64f3ece9928141765a195ba54a0ebc6007a"
+      },
+      {
+        "role": "gateARetainedSourceAtomsCore",
+        "path": "evals/clip_composition/presentation_retained_source_atoms_v001.mjs",
+        "fileSha256": "f28178327ddc0cc64f11527d850c71bfb5043b4e13f59f6da7997fd8f6d6cad0"
+      },
+      {
+        "role": "gateARunner",
+        "path": "evals/clip_composition/run_presentation_segmenter_boundary_preflight_v001.mjs",
+        "fileSha256": "e83157cfe72197940193c9bd07a4f8c9be4b1716617dc55bf90e1e8c4f33812e"
+      }
+    ]
+  },
+  "widthPolicyBindings": [
+    {
+      "role": "presetRegistry",
+      "path": "evals/clip_composition/registries/presentation/vertical-short-preset-registry-v001/preset-registry.json",
+      "fileSha256": "3a3e0b7b9ce4e349f778b8035c60085a101f7631373404bdc8252a9cc7532133",
+      "canonicalSha256": "cbe37484700436cf4ca6ff745273a7941654e412c744de11d24be387c0a10ef7"
+    },
+    {
+      "role": "presetValidationIndex",
+      "path": "evals/clip_composition/registries/presentation/vertical-short-preset-registry-v001/preset-validation-index.json",
+      "fileSha256": "6d2eb554f2752383b54180a3c9d21f81620734aef760a2894be8c4914a8ff9e2",
+      "canonicalSha256": "1f0afbe0511525aece5f74ae1808480755d90b03073d282cd0d1cfd1e12516b0"
+    },
+    {
+      "role": "materialValidationIndex",
+      "path": "evals/clip_composition/registries/presentation/vertical-short-preset-registry-v001/material-validation-index.json",
+      "fileSha256": "98213035bc6e395b090d7cff2639d4bf707fb838b7df50cb51bc60ab95d4758e",
+      "canonicalSha256": "3958ad2d21233342e49aedd29cbd337785a228e1063d1802b64e92dc1793d1fc"
+    },
+    {
+      "role": "registryBinding",
+      "path": "evals/clip_composition/registries/presentation/vertical-short-preset-registry-v001/trusted-registry-bindings.json",
+      "fileSha256": "e980be0b96e8ff5b69e57fa4787e503fd77ca21e51764cf96098df5d65449ece",
+      "canonicalSha256": "30e34a626666d5e6b2df3ad5cb8734e41ea3bd25f1e8393234bbc0b56576acbc"
+    },
+    {
+      "role": "rendererTrust",
+      "path": "evals/clip_composition/registries/presentation/presentation-vertical-renderer-trust-v001/trust.json",
+      "fileSha256": "af0738e2c96b7e6a8f6efc1d035191cd989f3c0adf52f939cb46fb945205e72e",
+      "canonicalSha256": "ebbae1b09b24dcb128bc4c21455f4b0dcbae3f28a7ad19370512d804ba4f019f"
+    },
+    {
+      "role": "textLayoutImplementation",
+      "path": "evals/clip_composition/presentation_renderer_text_layout_v001.mjs",
+      "fileSha256": "066a62adaa7fa3f8b8eda92c82e9a85940e43f372af976edc4b327ef4cf9ce5e",
+      "canonicalSha256": null
+    }
+  ],
+  "formatSelection": {
+    "format": "vertical-short-1080x1920",
+    "screenLayoutId": "speaker_only",
+    "presetId": "vertical-short-speaker-only-readable-pop-v001",
+    "visualStateId": "caption-core-vertical-speaker-only-v001"
+  },
+  "displayConstraintInput": {
+    "maxLogicalWidthPerLine": 14,
+    "maxLinesPerMeaningGroup": 2,
+    "characterWidthRule": "U+0000..U+00FF=1; other Unicode code point=2"
+  },
+  "expectedRuntime": {
+    "nodeBinarySha256": "de4f3b493b15e7a0ee311f6a2c6dbf93858052f5802aa91cfafa2c57e9d6bc5c",
+    "nodeVersion": "v20.19.6",
+    "icuVersion": "77.1",
+    "resolvedLocale": "ja",
+    "resolvedGranularity": "word"
+  },
+  "expectedProjection": {
+    "sourceAtomCount": 281,
+    "containerCount": 2,
+    "boundaryCandidateCount": 164,
+    "containers": [
+      {
+        "containerId": "segmenter-container-000001",
+        "sourceAtomCount": 162,
+        "boundaryCandidateCount": 91
+      },
+      {
+        "containerId": "segmenter-container-000002",
+        "sourceAtomCount": 119,
+        "boundaryCandidateCount": 73
+      }
+    ]
+  },
+  "publication": {
+    "packageId": "qdczJpv8RCc-candidate-59-vertical-caption-semantic-source-package-v001",
+    "formalOutputPath": "evals/clip_composition/outputs/presentation/segmenter-boundary-evidence/qdczJpv8RCc-candidate-59-vertical-v001",
+    "expectedState": "absent"
+  },
+  "readOnlyGuard": {
+    "watchedRoot": "evals/clip_composition/outputs/presentation",
+    "excludedPaths": [
+      "evals/clip_composition/outputs/presentation/caption-semantic-source-package-jobs/qdczJpv8RCc-candidate-59-vertical-v001.json"
+    ],
+    "expectedBeforeCanonicalSha256": "a392e7d96fb191ea278628325560dad37dcf2ba0e573007c95d6a6cdaa37148e"
+  }
+}

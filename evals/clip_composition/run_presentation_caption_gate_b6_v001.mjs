@@ -72,7 +72,7 @@ const SOURCE_PACKAGE_ROOT =
   + 'DmWu0jVQfTE-candidate-13-v001';
 const ENDPOINT =
   `https://generativelanguage.googleapis.com/v1beta/models/${MODEL_ID}:generateContent`;
-const TIMEOUT_MILLISECONDS = 600_000;
+const TIMEOUT_MILLISECONDS = 600000;
 const SERVER_TIMEOUT_SECONDS = 600;
 const INPUT_PRICE_USD_PER_MILLION = '1.50';
 const OUTPUT_PRICE_USD_PER_MILLION = '7.50';
@@ -292,7 +292,7 @@ const decimalPriceParts = (value) => {
 };
 
 const formatHundredMillionths = (numerator) => {
-  const denominator = 100_000_000n;
+  const denominator = 100000000n;
   const whole = numerator / denominator;
   const fraction = (numerator % denominator).toString().padStart(8, '0');
   return `${whole}.${fraction}`;
@@ -360,6 +360,215 @@ const decodeCandidateText = (envelope) => {
   }
   return semanticBytes;
 };
+
+export async function executePresentationCaptionGateB6TransportV002({
+  requestBytes,
+  apiKey,
+  fetchImplementation = globalThis.fetch,
+  timeoutSignalFactory = (milliseconds) => AbortSignal.timeout(milliseconds),
+  rawResponseWriter,
+  endpoint =
+    'https://generativelanguage.googleapis.com/v1beta/'
+      + 'models/gemini-3.6-flash:generateContent',
+}) {
+  if (!Buffer.isBuffer(requestBytes)
+    || typeof apiKey !== 'string'
+    || apiKey.length === 0
+    || typeof fetchImplementation !== 'function'
+    || typeof timeoutSignalFactory !== 'function'
+    || typeof rawResponseWriter !== 'function') {
+    stop('B6_V002_TRANSPORT_INPUT_INVALID');
+  }
+  assertSecretAbsent(apiKey, [['generate-content-request.json', requestBytes]]);
+  let response;
+  try {
+    response = await fetchImplementation(endpoint, {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+        'x-goog-api-key': apiKey,
+      },
+      body: requestBytes,
+      redirect: 'error',
+      signal: timeoutSignalFactory(600000),
+    });
+  } catch (error) {
+    stop('GENERATE_CONTENT_REQUEST_FAILED', {
+      errorName: error?.name ?? 'Error',
+    });
+  }
+  let rawBytes;
+  try {
+    rawBytes = Buffer.from(await response.arrayBuffer());
+  } catch (error) {
+    stop('GENERATE_CONTENT_RESPONSE_READ_FAILED', {
+      errorName: error?.name ?? 'Error',
+    });
+  }
+  assertSecretAbsent(apiKey, [['generate-content-response.raw.json', rawBytes]]);
+  await rawResponseWriter(rawBytes);
+  const contentType = response.headers.get('content-type');
+  if (response.status !== 200
+    || contentType !== 'application/json; charset=UTF-8') {
+    stop('B6_V002_HTTP_ENVELOPE_INVALID', {httpStatus: response.status});
+  }
+  const metadata = decodeHttpMetadata(rawBytes);
+  if (metadata.modelVersion !== 'gemini-3.6-flash') {
+    stop('B6_V002_RESPONSE_MODEL_INVALID');
+  }
+  const rawUsage = metadata.envelope.usageMetadata;
+  if (![rawUsage?.promptTokenCount, rawUsage?.candidatesTokenCount,
+    rawUsage?.thoughtsTokenCount, rawUsage?.totalTokenCount]
+    .every((value) => Number.isSafeInteger(value) && value >= 0)
+    || rawUsage.totalTokenCount
+      !== rawUsage.promptTokenCount
+        + rawUsage.candidatesTokenCount
+        + rawUsage.thoughtsTokenCount) {
+    stop('B6_V002_USAGE_INVALID');
+  }
+  if (rawUsage.serviceTier !== undefined
+    && rawUsage.serviceTier !== 'standard') {
+    stop('B6_V002_RESPONSE_TIER_INVALID', {
+      observedServiceTier: rawUsage.serviceTier ?? null,
+    });
+  }
+  const candidate = metadata.envelope.candidates?.[0];
+  const part = candidate?.content?.parts?.[0];
+  const partKeys = part !== null
+    && typeof part === 'object'
+    && !Array.isArray(part)
+    ? Object.keys(part)
+    : [];
+  const partKeysValid = partKeys.length >= 1
+    && partKeys.length <= 2
+    && partKeys.includes('text')
+    && partKeys.every((key) =>
+      key === 'text' || key === 'thoughtSignature');
+  if (!Array.isArray(metadata.envelope.candidates)
+    || metadata.envelope.candidates.length !== 1) {
+    stop('B6_V002_CANDIDATE_COUNT_INVALID');
+  }
+  if (candidate?.content?.role !== 'model'
+    || !Array.isArray(candidate.content.parts)
+    || candidate.content.parts.length !== 1
+    || part === null
+    || typeof part !== 'object'
+    || Array.isArray(part)
+    || !partKeysValid
+    || typeof part.text !== 'string'
+    || part.text.length === 0
+    || (Object.hasOwn(part, 'thoughtSignature')
+      && (typeof part.thoughtSignature !== 'string'
+        || part.thoughtSignature.length === 0))) {
+    stop('B6_V002_CANDIDATE_CONTENT_INVALID');
+  }
+  const semanticBytes = decodeCandidateText(metadata.envelope);
+  return Object.freeze({
+    status: 'passed',
+    httpStatus: response.status,
+    contentType,
+    rawBytes,
+    semanticBytes,
+    responseModelVersion: metadata.modelVersion,
+    observedServiceTier: rawUsage.serviceTier ?? null,
+    candidateCount: metadata.envelope.candidates.length,
+    usageMetadata: Object.freeze({
+      promptTokenCount: rawUsage.promptTokenCount,
+      candidatesTokenCount: rawUsage.candidatesTokenCount,
+      thoughtsTokenCount: rawUsage.thoughtsTokenCount,
+      totalTokenCount: rawUsage.totalTokenCount,
+    }),
+  });
+}
+
+export function validatePresentationCaptionGateB6CostStateV002({
+  b5Manifest,
+  usageMetadata,
+}) {
+  const authorization = b5Manifest?.spendingAuthorization;
+  const diagnosis = b5Manifest?.tokenDiagnosis;
+  if (authorization === null
+    || typeof authorization !== 'object'
+    || Array.isArray(authorization)
+    || diagnosis === null
+    || typeof diagnosis !== 'object'
+    || Array.isArray(diagnosis)
+    || authorization.currency !== 'USD'
+    || authorization.maximumNanoUsd !== 500000000
+    || authorization.inputPriceNanoUsdPerToken !== 1500
+    || authorization.outputPriceNanoUsdPerToken !== 7500
+    || authorization.finalInputTokens !== diagnosis.finalInputTokens
+    || !Number.isSafeInteger(authorization.finalInputTokens)
+    || authorization.finalInputTokens <= 0
+    || !Number.isSafeInteger(authorization.maxOutputTokens)
+    || authorization.maxOutputTokens <= 0
+    || !Number.isSafeInteger(authorization.preSendEstimateNanoUsd)
+    || authorization.preSendEstimateNanoUsd <= 0
+    || authorization.status !== 'approved-for-single-send') {
+    return Object.freeze({
+      status: 'rejected',
+      code: 'API_BUDGET_BINDING_INVALID',
+    });
+  }
+  const preSend = BigInt(authorization.finalInputTokens) * 1500n
+    + BigInt(authorization.maxOutputTokens) * 7500n;
+  if (preSend !== BigInt(authorization.preSendEstimateNanoUsd)
+    || preSend > 500000000n) {
+    return Object.freeze({
+      status: 'rejected',
+      code: 'API_BUDGET_BINDING_INVALID',
+    });
+  }
+  if (usageMetadata === undefined) {
+    return Object.freeze({
+      status: 'passed-pre-send',
+      preSendEstimateNanoUsd: Number(preSend),
+    });
+  }
+  const keys = [
+    'promptTokenCount',
+    'candidatesTokenCount',
+    'thoughtsTokenCount',
+    'totalTokenCount',
+  ];
+  if (usageMetadata === null
+    || typeof usageMetadata !== 'object'
+    || Array.isArray(usageMetadata)
+    || JSON.stringify(Object.keys(usageMetadata)) !== JSON.stringify(keys)
+    || !keys.every((key) =>
+      Number.isSafeInteger(usageMetadata[key]) && usageMetadata[key] >= 0)
+    || usageMetadata.totalTokenCount
+      !== usageMetadata.promptTokenCount
+        + usageMetadata.candidatesTokenCount
+        + usageMetadata.thoughtsTokenCount) {
+    return Object.freeze({
+      status: 'rejected',
+      code: 'API_USAGE_ACCOUNTING_INVALID',
+    });
+  }
+  const observed = BigInt(usageMetadata.promptTokenCount) * 1500n
+    + BigInt(
+      usageMetadata.candidatesTokenCount + usageMetadata.thoughtsTokenCount,
+    ) * 7500n;
+  return Object.freeze({
+    status: observed <= 500000000n ? 'passed' : 'rejected',
+    code: observed <= 500000000n ? null : 'API_USAGE_BUDGET_VIOLATION',
+    promptCostNanoUsd: usageMetadata.promptTokenCount * 1500,
+    outputCostNanoUsd:
+      (usageMetadata.candidatesTokenCount + usageMetadata.thoughtsTokenCount)
+        * 7500,
+    observedUsageCostNanoUsd: Number(observed),
+    estimateComparison: Object.freeze({
+      promptTokensExceededFinalInputTokens:
+        usageMetadata.promptTokenCount > authorization.finalInputTokens,
+      outputTokensExceededDerivedMaxOutputTokens:
+        usageMetadata.candidatesTokenCount + usageMetadata.thoughtsTokenCount
+          > authorization.maxOutputTokens,
+      usageCostExceededPreSendEstimate:
+        observed > BigInt(authorization.preSendEstimateNanoUsd),
+    }),
+  });
+}
 
 const artifactBinding = (path, bytes) => ({
   path,

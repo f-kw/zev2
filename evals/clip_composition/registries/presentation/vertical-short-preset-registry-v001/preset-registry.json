@@ -1,0 +1,175 @@
+{
+  "schemaVersion": "presentation-preset-registry-v002",
+  "registryVersion": "vertical-short-preset-registry-v001",
+  "format": "vertical-short-1080x1920",
+  "screenLayoutVocabularyVersion": "shorts-screen-layout-v001",
+  "screenLayoutVocabulary": [
+    "speaker_only",
+    "screen_speaker",
+    "speaker_pair"
+  ],
+  "canvas": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30,
+    "safeAreaPx": {
+      "top": 38,
+      "right": 43,
+      "bottom": 38,
+      "left": 43
+    }
+  },
+  "fontAssets": [
+    {
+      "fontAssetId": "line-seed-jp-extra-bold-v001",
+      "fileName": "LINESeedJP_A_OTF_Eb.otf",
+      "path": "runner/public/font/LINESeedJP_A_OTF_Eb.otf",
+      "sha256": "4f20353d5ba41012fb8eaaa653d2ac46f80d63880301a6590765897bbdfedbfb",
+      "licensePath": "runner/public/font/OFL_LINESeedJP.txt"
+    }
+  ],
+  "componentProvenance": [
+    {
+      "role": "vertical-renderer",
+      "path": "evals/clip_composition/render_presentation_vertical_review_v001.ts",
+      "fileSha256": "b9f35e6a17a060286139367e2ffedcd3378239f47e74e4c178fea00659d67f54"
+    },
+    {
+      "role": "renderer-qc",
+      "path": "evals/clip_composition/presentation_renderer_qc_v002.mjs",
+      "fileSha256": "73ede4f3556f80afac98b8e0e3c4b81019f718b4644d2b3f8cb1ac037989f0d3"
+    },
+    {
+      "role": "renderer-core",
+      "path": "evals/clip_composition/render_presentation_v002.mjs",
+      "fileSha256": "d02d603f3fc04f9ab58ce889644f5e63bf17d7ec5cb19019e09110c6167a720b"
+    },
+    {
+      "role": "remotion-root",
+      "path": "runner/src/remotion/Root.tsx",
+      "fileSha256": "a08c4c888a0fcd356dc0911732aeb51badd3420305056b1d02ac109b39d0fd23"
+    },
+    {
+      "role": "telop-text",
+      "path": "runner/src/remotion/components/TelopText.tsx",
+      "fileSha256": "9e941db470dd2586485134f093679bda947e722c4d000d25b0e7fb6ec5daf001"
+    },
+    {
+      "role": "remotion-entry",
+      "path": "runner/src/remotion/index.ts",
+      "fileSha256": "8ad7cfb50e32546485a1a2ef5e468e5b6bdee2bc5c9b92d08882f96e3750b4a3"
+    },
+    {
+      "role": "telop-renderer",
+      "path": "runner/src/remotion/renderer/TelopRenderer.tsx",
+      "fileSha256": "7fe1296f6884c90acadb61dcd2e45c81d24e2fddac14cf78b120897f05ca289b"
+    },
+    {
+      "role": "telop-css",
+      "path": "runner/src/remotion/styles/telop.css",
+      "fileSha256": "ff68a607e2c935dcaa22f86bacf79fc90df4ec3616708ab4cda77185a55829ef"
+    },
+    {
+      "role": "telop-font",
+      "path": "runner/src/remotion/utils/telop-font.ts",
+      "fileSha256": "fa2cb9c4c767e43006d77fa1aa8a0b6f1757b4059551ffc413d5c7fdf5cd441c"
+    },
+    {
+      "role": "screen-layout",
+      "path": "runner/src/screen-layout.ts",
+      "fileSha256": "63db69fa9a9280e26443dfffa0160de3715d0e434c313b423cb347f3f6452896"
+    },
+    {
+      "role": "telop-glow",
+      "path": "runner/src/shared/telop-glow.ts",
+      "fileSha256": "bfad6788f7ccfdc721839a53b4552f18bb713ac1a26c3d2469096697d33b79f8"
+    },
+    {
+      "role": "telop-remotion",
+      "path": "runner/src/telop-remotion.ts",
+      "fileSha256": "4d641312585a41f0a0f539738f27c3df09c8b289952c6bb36d8e9f33dcc53812"
+    },
+    {
+      "role": "telop-line-break",
+      "path": "runner/src/telop/telop-line-break.ts",
+      "fileSha256": "3f136f17e6a1bf860aec4aa82b59de1c6f078499f860bf2d65fef82eaf66ff2d"
+    },
+    {
+      "role": "telop-render-model",
+      "path": "runner/src/telop/telop-render-model.ts",
+      "fileSha256": "5c32103a6f8faaa3ea1d30bb4624f0ca092385c8b77446aa5f51e3e3a0583412"
+    },
+    {
+      "role": "text-metrics",
+      "path": "runner/src/telop/text-metrics.ts",
+      "fileSha256": "6fe78a6b478d61a169ec724e6c9336fdfcbf00cfa7ddee7cbbb5fbc19d87478a"
+    }
+  ],
+  "transitions": [
+    {
+      "transitionId": "quick-fade-4f-v001",
+      "entry": {
+        "type": "alpha-fade",
+        "frames": 4
+      },
+      "exit": {
+        "type": "alpha-fade",
+        "frames": 4
+      }
+    }
+  ],
+  "endPolicies": [
+    {
+      "endPolicyId": "resolved-target-final-atom-v001",
+      "rule": "解決済み対象に含まれる最後のsource atomのendMsで表示を終了する",
+      "inventedDuration": false
+    }
+  ],
+  "presets": [
+    {
+      "presetId": "vertical-short-speaker-only-readable-pop-v001",
+      "format": "vertical-short-1080x1920",
+      "screenLayoutId": "speaker_only",
+      "styleFamily": "readable-pop",
+      "visualStates": [
+        {
+          "stateId": "caption-core-vertical-speaker-only-v001",
+          "textStyle": {
+            "fontAssetId": "line-seed-jp-extra-bold-v001",
+            "fontSizePx": 134,
+            "fontColor": "#FFFDF8",
+            "borderColor": "#111827",
+            "borderWidthPx": 11,
+            "lineSpacingPercent": 150,
+            "glowColor": "#000000",
+            "glowWidthPx": 17,
+            "glowOpacityPercent": 82
+          },
+          "position": {
+            "preset": "bottom-center",
+            "alignment": "center",
+            "offsetXPercent": 0,
+            "offsetYPercent": -6
+          },
+          "background": null,
+          "layout": {
+            "maxSupportedLogicalWidthPerLine": 14,
+            "maxLines": 2,
+            "singleLine": false,
+            "characterWidthRule": "U+0000..U+00FF=1; other Unicode code point=2"
+          },
+          "transitionId": "quick-fade-4f-v001"
+        }
+      ],
+      "kindPolicies": [
+        {
+          "kind": "speech-caption",
+          "stateId": "caption-core-vertical-speaker-only-v001",
+          "endResponsibility": "target-anchor",
+          "allowedMaterialRoles": [],
+          "requiredMaterialRoles": []
+        }
+      ]
+    }
+  ]
+}

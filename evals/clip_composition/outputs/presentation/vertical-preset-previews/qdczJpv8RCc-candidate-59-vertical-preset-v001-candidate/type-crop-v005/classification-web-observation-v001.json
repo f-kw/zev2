@@ -1,0 +1,21 @@
+{
+  "schemaVersion": "vertical-preset-type-crop-web-observation-v001",
+  "stage": "classification",
+  "observer": "gemini-web",
+  "modelLabel": "Google AI Pro にアップグレード",
+  "observedAt": "2026-07-28T09:51:10.840Z",
+  "inputs": [
+    {
+      "path": "classification-prompt.txt",
+      "fileSha256": "8695e2eb3636ce3309695c87fd057c984abc0ce0942d2ee32dbaf9f9e0cc8370"
+    },
+    {
+      "path": "classification-input-640.mp4",
+      "fileSha256": "535590429f26233a1b5bd5a41696b1dfb119b2743d8c9b0fa6404ae2585a68a2"
+    }
+  ],
+  "response": {
+    "path": "classification-response.json",
+    "fileSha256": "039a775a64b80def984748ff397fe1d9867919eec1c54309763dcb427ce71dfd"
+  }
+}

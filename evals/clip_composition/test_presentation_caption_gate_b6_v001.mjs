@@ -14,6 +14,7 @@ import {fileURLToPath} from 'node:url';
 import {
   PRESENTATION_CAPTION_GATE_B6_FORMAL_CONFIG_V001,
   continuePresentationCaptionGateB6ThroughB1B4V001,
+  executePresentationCaptionGateB6TransportV002,
   executePresentationCaptionGateB6V001,
 } from './run_presentation_caption_gate_b6_v001.mjs';
 import {
@@ -169,6 +170,7 @@ const makeValidActualPackageSemanticAnswer = async () => {
 
 const responseEnvelope = ({
   semanticText = '{"status":"complete","containers":[]}\n',
+  thoughtSignature,
   modelVersion = 'gemini-3.6-flash',
   promptTokenCount = 100,
   candidatesTokenCount = 20,
@@ -178,7 +180,10 @@ const responseEnvelope = ({
   candidates: [
     {
       content: {
-        parts: [{text: semanticText}],
+        parts: [{
+          text: semanticText,
+          ...(thoughtSignature === undefined ? {} : {thoughtSignature}),
+        }],
         role: 'model',
       },
       finishReason: 'STOP',
@@ -238,6 +243,75 @@ const allFileBytes = async (root) => {
   await visit(root);
   return values;
 };
+
+test('v002共有送信入口はraw保存後だけ解析しusageを4値へ固定する', async () => {
+  const semanticText = '{"status":"complete","containers":[]}\n';
+  const raw = responseEnvelope({
+    semanticText,
+    thoughtSignature: 'opaque-provider-metadata',
+  });
+  raw.candidates[0].content.parts[0] = {
+    thoughtSignature: 'opaque-provider-metadata',
+    text: semanticText,
+  };
+  raw.usageMetadata.serviceTier = 'standard';
+  const generated = response(raw);
+  const events = [];
+  const result = await executePresentationCaptionGateB6TransportV002({
+    requestBytes: Buffer.from('{"fixture":true}\n'),
+    apiKey: API_KEY,
+    fetchImplementation: async () => generated.response,
+    timeoutSignalFactory: () => ({synthetic: true}),
+    rawResponseWriter: async (bytes) => {
+      events.push('raw-saved');
+      assert.deepEqual(bytes, generated.bytes);
+    },
+  });
+  events.push('parsed');
+  assert.deepEqual(events, ['raw-saved', 'parsed']);
+  assert.deepEqual(result.usageMetadata, {
+    promptTokenCount: 100,
+    candidatesTokenCount: 20,
+    thoughtsTokenCount: 5,
+    totalTokenCount: 125,
+  });
+  assert.equal(result.observedServiceTier, 'standard');
+  assert.deepEqual(result.semanticBytes, Buffer.from(semanticText, 'utf8'));
+  assert.equal(Object.hasOwn(result, 'thoughtSignature'), false);
+});
+
+test('v002共有送信入口は未契約keyと不正なthoughtSignatureをraw保存後に拒否する', async () => {
+  const invalidParts = [
+    {text: '{}\n', thoughtSignature: 'opaque', extra: true},
+    {text: '{}\n', thoughtSignature: ''},
+    {text: '{}\n', thoughtSignature: 1},
+    {thoughtSignature: 'opaque'},
+  ];
+  for (const [index, part] of invalidParts.entries()) {
+    const raw = responseEnvelope();
+    raw.candidates[0].content.parts = [part];
+    const generated = response(raw);
+    let rawSaved = false;
+    await assert.rejects(
+      executePresentationCaptionGateB6TransportV002({
+        requestBytes: Buffer.from('{"fixture":true}\n'),
+        apiKey: API_KEY,
+        fetchImplementation: async () => generated.response,
+        timeoutSignalFactory: () => ({synthetic: true}),
+        rawResponseWriter: async (bytes) => {
+          rawSaved = true;
+          assert.deepEqual(bytes, generated.bytes);
+        },
+      }),
+      {
+        name: 'B6Stop',
+        reason: 'B6_V002_CANDIDATE_CONTENT_INVALID',
+      },
+      `invalid part ${index}`,
+    );
+    assert.equal(rawSaved, true, `invalid part ${index}`);
+  }
+});
 
 test('固定requestをbyte同一で一回だけ送り、raw保存後にB1→B4へ渡す', async () => {
   const fixture = await makeFixture();

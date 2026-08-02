@@ -13,6 +13,8 @@ export type TelopBackgroundStyle = {
 
 export type TelopPositionStyle = {
   preset: string;
+  offsetX?: number;
+  offsetY?: number;
   alignment?: 'left' | 'center' | 'right';
 };
 
@@ -89,6 +91,8 @@ function normalizeStyle(value: unknown, label: string): TelopVisualStyle {
     ...(Number.isFinite(Number(record.maxLines)) ? { maxLines: Math.max(1, Math.floor(Number(record.maxLines))) } : {}),
     position: {
       preset: typeof position.preset === 'string' && position.preset.trim() ? position.preset.trim() : 'bottom-center',
+      ...(Number.isFinite(Number(position.offsetX)) ? { offsetX: Number(position.offsetX) } : {}),
+      ...(Number.isFinite(Number(position.offsetY)) ? { offsetY: Number(position.offsetY) } : {}),
       ...(position.alignment === 'left' || position.alignment === 'center' || position.alignment === 'right'
         ? { alignment: position.alignment }
         : {})

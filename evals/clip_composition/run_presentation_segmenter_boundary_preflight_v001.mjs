@@ -1291,6 +1291,17 @@ export async function runPresentationSegmenterBoundaryPreflightCliV001(
   return result.exitCode;
 }
 
-if (process.argv[1] && resolve(process.argv[1]) === RUNNER_FILE_PATH) {
+const main = async () => {
   process.exitCode = await runPresentationSegmenterBoundaryPreflightCliV001();
+};
+
+if (process.argv[1] && resolve(process.argv[1]) === RUNNER_FILE_PATH) {
+  main().catch(() => {
+    const result = diagnosticResult(
+      'SEGMENTER_BOUNDARY_CLI_INTERNAL_REPORT_INVALID',
+    );
+    if (result.stdout.length > 0) process.stdout.write(result.stdout);
+    if (result.stderr.length > 0) process.stderr.write(result.stderr);
+    process.exitCode = result.exitCode;
+  });
 }

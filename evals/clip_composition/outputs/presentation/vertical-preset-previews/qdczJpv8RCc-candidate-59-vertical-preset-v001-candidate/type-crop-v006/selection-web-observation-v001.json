@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "vertical-preset-type-crop-web-observation-v001",
+  "stage": "selection",
+  "observer": "gemini-web",
+  "modelLabel": "Flash（モード選択ツールを開く（現在のモデル: Flash））",
+  "observedAt": "2026-07-28T09:56:23.072Z",
+  "inputs": [
+    {
+      "path": "selection-prompt.txt",
+      "fileSha256": "1ab8be8b7377e6ce0206add9783fe4b047d67352bb8e3510485db861f632cfb7"
+    },
+    {
+      "path": "crop-candidate-speaker_only_body.jpg",
+      "fileSha256": "6ba520db841a9f97effc4c213a085e854fd5b0a442950d84843fc1bfaf68a2c6"
+    },
+    {
+      "path": "crop-candidate-speaker_only_face.jpg",
+      "fileSha256": "a4b5d047e13eea7b2a08444642b4eea0a8461bae7e7c9121306b1878013763cc"
+    }
+  ],
+  "response": {
+    "path": "selection-response.json",
+    "fileSha256": "18d86223124e5461c84c43e5079ac66c6af20ba04bc42d80f690dda089eff408"
+  }
+}

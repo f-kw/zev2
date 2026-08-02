@@ -1,0 +1,449 @@
+{
+  "schemaVersion": "presentation-caption-gate-b5-manifest-v002",
+  "status": "passed",
+  "stage": "ready-for-b6",
+  "executionStartedAt": "2026-07-30T11:06:24.775Z",
+  "jobBinding": {
+    "path": "evals/clip_composition/jobs/presentation/caption-gate-b5-initial/qdczJpv8RCc-candidate-59-vertical-caption-b5-v001.json",
+    "fileSha256": "c02e8bbeabaf273c63ca0c06d2008fa183ad7dfed049d0eb83071ab72945dba2",
+    "canonicalSha256": "dea26e2bdd1efd87a54b92ede139eb5441506eefe9d48694bc9daa464f37e549"
+  },
+  "sourceBinding": {
+    "path": "evals/clip_composition/outputs/presentation/segmenter-boundary-evidence/qdczJpv8RCc-candidate-59-vertical-v001/semantic-source-input.json",
+    "fileSha256": "28c6f6bf75e4798ed1582f64fde2d893eafa420cc6417fb293916deb5cbf988b",
+    "canonicalSha256": "ed56c97baf9d4d9471e875f8bd48142fd00d71d99178b812fa26b0e622996ecf",
+    "packageManifestPath": "evals/clip_composition/outputs/presentation/segmenter-boundary-evidence/qdczJpv8RCc-candidate-59-vertical-v001/package-manifest.json",
+    "packageManifestFileSha256": "2ece4fe5335fa7a64f6fe56d801fe571f3feaaef137661cc26134b5815ed6d78",
+    "packageManifestCanonicalSha256": "2f2c7de6d84cf6df46ca562d67519335ff78fde519de7da7ba4c699808c6b944",
+    "characterCount": 281,
+    "containerCount": 2,
+    "boundaryCandidateCount": 164
+  },
+  "requestBuilderBinding": {
+    "entry": {
+      "path": "evals/clip_composition/run_presentation_caption_gate_b5_initial_v002.mjs",
+      "fileSha256": "acc46b667e5ae0eb7d5da00519a3f6bcccdf86c7fa2602c563b43c27fdb29a20"
+    },
+    "localImportClosure": [
+      {
+        "role": "sharedBuilder",
+        "path": "evals/clip_composition/run_presentation_caption_gate_b5_v004.mjs",
+        "fileSha256": "fec4e14b3143299ae672f2086ad2ec6842c2b0ba67a10d16a77fb18d5cf67abc"
+      },
+      {
+        "role": "sourcePackageCore",
+        "path": "evals/clip_composition/presentation_caption_semantic_source_package_v001.mjs",
+        "fileSha256": "ac3dcbbc671af6f56dcceeea6a41c8ae9cbf9fc4ba28a8a00bbc5d6faff45bcd"
+      },
+      {
+        "role": "textLayoutImplementation",
+        "path": "evals/clip_composition/presentation_renderer_text_layout_v001.mjs",
+        "fileSha256": "066a62adaa7fa3f8b8eda92c82e9a85940e43f372af976edc4b327ef4cf9ce5e"
+      },
+      {
+        "role": "gateACore",
+        "path": "evals/clip_composition/presentation_segmenter_boundary_evidence_v001.mjs",
+        "fileSha256": "dac613292e463897ee2757be75a7d64f3ece9928141765a195ba54a0ebc6007a"
+      },
+      {
+        "role": "gateARetainedSourceAtomsCore",
+        "path": "evals/clip_composition/presentation_retained_source_atoms_v001.mjs",
+        "fileSha256": "f28178327ddc0cc64f11527d850c71bfb5043b4e13f59f6da7997fd8f6d6cad0"
+      },
+      {
+        "role": "gateARunner",
+        "path": "evals/clip_composition/run_presentation_segmenter_boundary_preflight_v001.mjs",
+        "fileSha256": "e83157cfe72197940193c9bd07a4f8c9be4b1716617dc55bf90e1e8c4f33812e"
+      },
+      {
+        "role": "staticPreflightRunner",
+        "path": "evals/clip_composition/run_presentation_caption_display_pair_static_preflight_v001.mjs",
+        "fileSha256": "513b9759931c6fbe34a3a6ddd656bb0a39051f9744a00ca85c899c91baeff025"
+      },
+      {
+        "role": "displayPairCoreV003",
+        "path": "evals/clip_composition/presentation_caption_display_pair_v003.mjs",
+        "fileSha256": "a22aa6ad44a7cd07c75ba1ebde4d40601efe29915ca6cfe915f4e1a3d8808a04"
+      },
+      {
+        "role": "semanticCore",
+        "path": "evals/clip_composition/presentation_caption_semantic_output_v001.mjs",
+        "fileSha256": "9b9bb011dcd198e02cb075b70e79d3090ddfe17694198f56b83726f004e78c6d"
+      },
+      {
+        "role": "instructionCoreV003",
+        "path": "evals/clip_composition/presentation_instruction_contract_v003.mjs",
+        "fileSha256": "c0a3c791c74a8c303e97e1fe0c81b8017c5dee35bd93e57668d8e11fa24925e7"
+      },
+      {
+        "role": "captionCoreV003",
+        "path": "evals/clip_composition/presentation_caption_contract_v003.mjs",
+        "fileSha256": "a090caf2b1939bbc226a306cadd580b887ce34f0a0436af96e4f94480c4b9292"
+      },
+      {
+        "role": "timelineV002",
+        "path": "evals/clip_composition/presentation_base_media_timeline_v002.mjs",
+        "fileSha256": "a1f72079f0e970cb5c6a67817427aa5909f2453ad0d04e81150cfd29c5b41ab2"
+      },
+      {
+        "role": "sourceSpeakerPolicy",
+        "path": "evals/clip_composition/presentation_source_speaker_policy_v001.mjs",
+        "fileSha256": "56d2d03d5bcee3a409b27acc9819a48c95abb867cdc00fd0b2bf2fe87bb9477b"
+      },
+      {
+        "role": "sourceSpeakerRegistry",
+        "path": "evals/clip_composition/registries/presentation/presentation-source-speaker-non-identity-registry-v001/registry.json",
+        "fileSha256": "9e6f6c5e57c0b0823840c70fe0e3de05592cbc88819def6020a7c1cfaf211f3a"
+      },
+      {
+        "role": "apiCostGuard",
+        "path": "evals/clip_composition/presentation_caption_api_cost_guard_v001.mjs",
+        "fileSha256": "9ab3cc2426d00f35b904c9016b1252a632569ab0ea32074a9266c090420cc503"
+      }
+    ]
+  },
+  "upstreamProjection": {
+    "sentinelPath": "evals/clip_composition/outputs/presentation/caption-display-pair-static-preflight-jobs/qdczJpv8RCc-candidate-59-vertical-caption-b5-v001.json",
+    "expectedCanonicalSha256": "1a10799da5744e1c86f3cd203f6ac7d4e1a90e9ef4c3d3f3bcd170167b951fa8"
+  },
+  "officialVerification": {
+    "modelId": "gemini-3.6-flash",
+    "modelResource": "models/gemini-3.6-flash",
+    "observedAt": "2026-07-30T11:04:00.000Z",
+    "inputLimit": 1048576,
+    "outputLimit": 65536,
+    "tier": "PAID_STANDARD_DEFAULT_BY_OMISSION",
+    "inputPriceNanoUsdPerToken": 1500,
+    "outputPriceNanoUsdPerToken": 7500,
+    "sources": [
+      {
+        "sourceId": "pricing",
+        "url": "https://ai.google.dev/gemini-api/docs/pricing",
+        "observedAt": "2026-07-30T11:04:00.000Z",
+        "snapshotPath": "evals/clip_composition/outputs/presentation/caption-gate-b5/qdczJpv8RCc-candidate-59-vertical-caption-b5-v001/official/pricing.snapshot.html",
+        "snapshotFileSha256": "f0d665f73aea9b963b29fe3d417b690cdd95b12efe31d92437a429e27ff3c8cb",
+        "snapshotByteLength": 231498
+      },
+      {
+        "sourceId": "tokens-guide",
+        "url": "https://ai.google.dev/gemini-api/docs/tokens",
+        "observedAt": "2026-07-30T11:04:00.000Z",
+        "snapshotPath": "evals/clip_composition/outputs/presentation/caption-gate-b5/qdczJpv8RCc-candidate-59-vertical-caption-b5-v001/official/tokens-guide.snapshot.html",
+        "snapshotFileSha256": "2f0e93558ae61c02ad0e9896af34d646819963968785763240dca49b09f47a10",
+        "snapshotByteLength": 142600
+      },
+      {
+        "sourceId": "count-tokens-api",
+        "url": "https://ai.google.dev/api/tokens",
+        "observedAt": "2026-07-30T11:04:00.000Z",
+        "snapshotPath": "evals/clip_composition/outputs/presentation/caption-gate-b5/qdczJpv8RCc-candidate-59-vertical-caption-b5-v001/official/count-tokens-api.snapshot.html",
+        "snapshotFileSha256": "997dafc9e4a969eeb0d2fa0b0130573921636fde45802ff4c628c81ebc5dd650",
+        "snapshotByteLength": 283456
+      },
+      {
+        "sourceId": "billing",
+        "url": "https://ai.google.dev/gemini-api/docs/billing",
+        "observedAt": "2026-07-30T11:04:00.000Z",
+        "snapshotPath": "evals/clip_composition/outputs/presentation/caption-gate-b5/qdczJpv8RCc-candidate-59-vertical-caption-b5-v001/official/billing.snapshot.html",
+        "snapshotFileSha256": "2d440b324530c9eb03ec084baf2b7bf203051023decd05b6e1a996c62347a2ef",
+        "snapshotByteLength": 130458
+      },
+      {
+        "sourceId": "thinking",
+        "url": "https://ai.google.dev/gemini-api/docs/generate-content/thinking",
+        "observedAt": "2026-07-30T11:04:00.000Z",
+        "snapshotPath": "evals/clip_composition/outputs/presentation/caption-gate-b5/qdczJpv8RCc-candidate-59-vertical-caption-b5-v001/official/thinking.snapshot.html",
+        "snapshotFileSha256": "7abe6ee543c24292133bf01db5c3fbad2a54c84b98b9f9e0f2e835515a42a1ab",
+        "snapshotByteLength": 222482
+      },
+      {
+        "sourceId": "latest-model",
+        "url": "https://ai.google.dev/gemini-api/docs/latest-model",
+        "observedAt": "2026-07-30T11:04:00.000Z",
+        "snapshotPath": "evals/clip_composition/outputs/presentation/caption-gate-b5/qdczJpv8RCc-candidate-59-vertical-caption-b5-v001/official/latest-model.snapshot.html",
+        "snapshotFileSha256": "eb1778ecefa2bff2c0e6bd41d5ad872b04d618a9b9419d3407046f48e2d0cf3b",
+        "snapshotByteLength": 124727
+      }
+    ],
+    "claims": [
+      {
+        "claimId": "model-exists",
+        "verdict": "verified",
+        "evidence": [
+          {
+            "sourceId": "latest-model",
+            "utf8ByteOffset": 0,
+            "utf8ByteLength": 124727,
+            "excerptSha256": "eb1778ecefa2bff2c0e6bd41d5ad872b04d618a9b9419d3407046f48e2d0cf3b",
+            "locatorLabel": "whole-snapshot:latest-model"
+          }
+        ]
+      },
+      {
+        "claimId": "input-limit",
+        "verdict": "verified",
+        "evidence": [
+          {
+            "sourceId": "latest-model",
+            "utf8ByteOffset": 0,
+            "utf8ByteLength": 124727,
+            "excerptSha256": "eb1778ecefa2bff2c0e6bd41d5ad872b04d618a9b9419d3407046f48e2d0cf3b",
+            "locatorLabel": "whole-snapshot:latest-model"
+          }
+        ]
+      },
+      {
+        "claimId": "output-limit",
+        "verdict": "verified",
+        "evidence": [
+          {
+            "sourceId": "latest-model",
+            "utf8ByteOffset": 0,
+            "utf8ByteLength": 124727,
+            "excerptSha256": "eb1778ecefa2bff2c0e6bd41d5ad872b04d618a9b9419d3407046f48e2d0cf3b",
+            "locatorLabel": "whole-snapshot:latest-model"
+          }
+        ]
+      },
+      {
+        "claimId": "standard-input-price",
+        "verdict": "verified",
+        "evidence": [
+          {
+            "sourceId": "pricing",
+            "utf8ByteOffset": 0,
+            "utf8ByteLength": 231498,
+            "excerptSha256": "f0d665f73aea9b963b29fe3d417b690cdd95b12efe31d92437a429e27ff3c8cb",
+            "locatorLabel": "whole-snapshot:pricing"
+          }
+        ]
+      },
+      {
+        "claimId": "standard-output-price",
+        "verdict": "verified",
+        "evidence": [
+          {
+            "sourceId": "pricing",
+            "utf8ByteOffset": 0,
+            "utf8ByteLength": 231498,
+            "excerptSha256": "f0d665f73aea9b963b29fe3d417b690cdd95b12efe31d92437a429e27ff3c8cb",
+            "locatorLabel": "whole-snapshot:pricing"
+          }
+        ]
+      },
+      {
+        "claimId": "service-tier-omission-standard",
+        "verdict": "verified",
+        "evidence": [
+          {
+            "sourceId": "pricing",
+            "utf8ByteOffset": 0,
+            "utf8ByteLength": 231498,
+            "excerptSha256": "f0d665f73aea9b963b29fe3d417b690cdd95b12efe31d92437a429e27ff3c8cb",
+            "locatorLabel": "whole-snapshot:pricing"
+          }
+        ]
+      },
+      {
+        "claimId": "count-tokens-unbilled",
+        "verdict": "unverified",
+        "evidence": []
+      },
+      {
+        "claimId": "count-tokens-upper-bounds-prompt-billing",
+        "verdict": "contradicted",
+        "evidence": [
+          {
+            "sourceId": "tokens-guide",
+            "utf8ByteOffset": 0,
+            "utf8ByteLength": 142600,
+            "excerptSha256": "2f0e93558ae61c02ad0e9896af34d646819963968785763240dca49b09f47a10",
+            "locatorLabel": "whole-snapshot:tokens-guide"
+          }
+        ]
+      },
+      {
+        "claimId": "max-output-upper-bounds-candidate-plus-thinking",
+        "verdict": "unverified",
+        "evidence": []
+      }
+    ]
+  },
+  "residualRiskAcceptance": {
+    "schemaVersion": "presentation-caption-api-residual-risk-acceptance-v001",
+    "acceptanceId": "kawafmm-vertical-caption-cost-risk-acceptance-20260729-v001",
+    "acceptedBy": "kawafmm",
+    "acceptedOn": "2026-07-29",
+    "maximumNanoUsd": 500000000,
+    "officialClaimsCanonicalSha256": "bd7d3f92f0b665c7d4d676e1040018d8657affb71cb9b645bd5b9015b382e606",
+    "claimBindings": [
+      {
+        "claimId": "count-tokens-unbilled",
+        "acceptedVerdict": "unverified"
+      },
+      {
+        "claimId": "count-tokens-upper-bounds-prompt-billing",
+        "acceptedVerdict": "contradicted"
+      },
+      {
+        "claimId": "max-output-upper-bounds-candidate-plus-thinking",
+        "acceptedVerdict": "unverified"
+      }
+    ],
+    "sendPermission": "allow-one-generate-content-after-official-facts-and-bigint-cap-pass"
+  },
+  "requestBindings": {
+    "probeCountTokens": {
+      "requestPath": "evals/clip_composition/outputs/presentation/caption-gate-b5/qdczJpv8RCc-candidate-59-vertical-caption-b5-v001/probe-count-tokens-request.json",
+      "requestFileSha256": "8f16b4a2609dcf6daa5536875ad5d3fdd5e6c33d8b30d5453fc810455f2bf68d",
+      "rawResponsePath": "evals/clip_composition/outputs/presentation/caption-gate-b5/qdczJpv8RCc-candidate-59-vertical-caption-b5-v001/probe-count-tokens-response.raw.json",
+      "rawResponseFileSha256": "3db025b36634f24d01cd236ecaae40a525a35f6b3718ec814ed06478b149bb3f"
+    },
+    "finalCountTokens": {
+      "requestPath": "evals/clip_composition/outputs/presentation/caption-gate-b5/qdczJpv8RCc-candidate-59-vertical-caption-b5-v001/final-count-tokens-request.json",
+      "requestFileSha256": "433868d67fc97f9d8657388346716b2b7a438384b8b4e50990dc268c83362e24",
+      "rawResponsePath": "evals/clip_composition/outputs/presentation/caption-gate-b5/qdczJpv8RCc-candidate-59-vertical-caption-b5-v001/final-count-tokens-response.raw.json",
+      "rawResponseFileSha256": "3db025b36634f24d01cd236ecaae40a525a35f6b3718ec814ed06478b149bb3f"
+    },
+    "generateContent": {
+      "requestPath": "evals/clip_composition/outputs/presentation/caption-gate-b5/qdczJpv8RCc-candidate-59-vertical-caption-b5-v001/generate-content-request.json",
+      "requestFileSha256": "6113191c82f2065d4b0c71f8530dea925c36e31d92fcb0642a0faf58a86d7e83",
+      "rawResponsePath": null,
+      "rawResponseFileSha256": null
+    }
+  },
+  "tokenDiagnosis": {
+    "probeInputTokens": 7474,
+    "finalInputTokens": 7474,
+    "maximumResponseStructurePath": "evals/clip_composition/outputs/presentation/caption-gate-b5/qdczJpv8RCc-candidate-59-vertical-caption-b5-v001/maximum-response-structure.json",
+    "maximumResponseStructureFileSha256": "6e7b2db15f12f7b173036890cbe63b937c59a71a1c231c9129c867a08d115991",
+    "maximumResponseStructureByteLength": 19265
+  },
+  "spendingAuthorization": {
+    "currency": "USD",
+    "maximumNanoUsd": 500000000,
+    "inputPriceNanoUsdPerToken": 1500,
+    "outputPriceNanoUsdPerToken": 7500,
+    "finalInputTokens": 7474,
+    "maxOutputTokens": 65171,
+    "preSendEstimateNanoUsd": 499993500,
+    "officialClaimsCanonicalSha256": "bd7d3f92f0b665c7d4d676e1040018d8657affb71cb9b645bd5b9015b382e606",
+    "residualRiskAcceptanceCanonicalSha256": "b932abcddad6e5c6f3967fcaaa300ad23c0aba9cb1d4749c484681acad7b1ae4",
+    "status": "approved-for-single-send"
+  },
+  "transport": {
+    "product": "Gemini Developer API",
+    "apiVersion": "v1beta",
+    "countTokensEndpoint": "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:countTokens",
+    "generateContentEndpoint": "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent",
+    "method": "POST",
+    "headers": {
+      "content-type": "application/json",
+      "x-goog-api-key": "<redacted>"
+    },
+    "serviceTierFieldOmitted": true,
+    "automaticRetries": 0,
+    "clientTimeoutMilliseconds": 600000,
+    "countTokensCalls": 2,
+    "generateContentCalls": 0
+  },
+  "cost": {
+    "currency": "USD",
+    "maximumNanoUsd": 500000000,
+    "inputPriceNanoUsdPerToken": 1500,
+    "outputPriceNanoUsdPerToken": 7500,
+    "preSendEstimateNanoUsd": 499993500,
+    "actualBillingObservation": "count_tokens_billing_unverified_risk_accepted_generate_not_called"
+  },
+  "checks": {
+    "sourceBinding": "passed",
+    "officialEvidence": "passed",
+    "requestConstruction": "passed",
+    "candidateCount": "passed",
+    "tokenProbe": "passed",
+    "finalRequest": "passed",
+    "budget": "passed",
+    "transport": "passed",
+    "secret": "passed",
+    "artifacts": "passed"
+  },
+  "artifacts": [
+    {
+      "role": "official-snapshot-pricing",
+      "path": "evals/clip_composition/outputs/presentation/caption-gate-b5/qdczJpv8RCc-candidate-59-vertical-caption-b5-v001/official/pricing.snapshot.html",
+      "fileSha256": "f0d665f73aea9b963b29fe3d417b690cdd95b12efe31d92437a429e27ff3c8cb",
+      "byteLength": 231498
+    },
+    {
+      "role": "official-snapshot-tokens-guide",
+      "path": "evals/clip_composition/outputs/presentation/caption-gate-b5/qdczJpv8RCc-candidate-59-vertical-caption-b5-v001/official/tokens-guide.snapshot.html",
+      "fileSha256": "2f0e93558ae61c02ad0e9896af34d646819963968785763240dca49b09f47a10",
+      "byteLength": 142600
+    },
+    {
+      "role": "official-snapshot-count-tokens-api",
+      "path": "evals/clip_composition/outputs/presentation/caption-gate-b5/qdczJpv8RCc-candidate-59-vertical-caption-b5-v001/official/count-tokens-api.snapshot.html",
+      "fileSha256": "997dafc9e4a969eeb0d2fa0b0130573921636fde45802ff4c628c81ebc5dd650",
+      "byteLength": 283456
+    },
+    {
+      "role": "official-snapshot-billing",
+      "path": "evals/clip_composition/outputs/presentation/caption-gate-b5/qdczJpv8RCc-candidate-59-vertical-caption-b5-v001/official/billing.snapshot.html",
+      "fileSha256": "2d440b324530c9eb03ec084baf2b7bf203051023decd05b6e1a996c62347a2ef",
+      "byteLength": 130458
+    },
+    {
+      "role": "official-snapshot-thinking",
+      "path": "evals/clip_composition/outputs/presentation/caption-gate-b5/qdczJpv8RCc-candidate-59-vertical-caption-b5-v001/official/thinking.snapshot.html",
+      "fileSha256": "7abe6ee543c24292133bf01db5c3fbad2a54c84b98b9f9e0f2e835515a42a1ab",
+      "byteLength": 222482
+    },
+    {
+      "role": "official-snapshot-latest-model",
+      "path": "evals/clip_composition/outputs/presentation/caption-gate-b5/qdczJpv8RCc-candidate-59-vertical-caption-b5-v001/official/latest-model.snapshot.html",
+      "fileSha256": "eb1778ecefa2bff2c0e6bd41d5ad872b04d618a9b9419d3407046f48e2d0cf3b",
+      "byteLength": 124727
+    },
+    {
+      "role": "probe-count-tokens-request",
+      "path": "evals/clip_composition/outputs/presentation/caption-gate-b5/qdczJpv8RCc-candidate-59-vertical-caption-b5-v001/probe-count-tokens-request.json",
+      "fileSha256": "8f16b4a2609dcf6daa5536875ad5d3fdd5e6c33d8b30d5453fc810455f2bf68d",
+      "byteLength": 30840
+    },
+    {
+      "role": "probe-count-tokens-response-raw",
+      "path": "evals/clip_composition/outputs/presentation/caption-gate-b5/qdczJpv8RCc-candidate-59-vertical-caption-b5-v001/probe-count-tokens-response.raw.json",
+      "fileSha256": "3db025b36634f24d01cd236ecaae40a525a35f6b3718ec814ed06478b149bb3f",
+      "byteLength": 121
+    },
+    {
+      "role": "final-count-tokens-request",
+      "path": "evals/clip_composition/outputs/presentation/caption-gate-b5/qdczJpv8RCc-candidate-59-vertical-caption-b5-v001/final-count-tokens-request.json",
+      "fileSha256": "433868d67fc97f9d8657388346716b2b7a438384b8b4e50990dc268c83362e24",
+      "byteLength": 30840
+    },
+    {
+      "role": "final-count-tokens-response-raw",
+      "path": "evals/clip_composition/outputs/presentation/caption-gate-b5/qdczJpv8RCc-candidate-59-vertical-caption-b5-v001/final-count-tokens-response.raw.json",
+      "fileSha256": "3db025b36634f24d01cd236ecaae40a525a35f6b3718ec814ed06478b149bb3f",
+      "byteLength": 121
+    },
+    {
+      "role": "maximum-response-structure",
+      "path": "evals/clip_composition/outputs/presentation/caption-gate-b5/qdczJpv8RCc-candidate-59-vertical-caption-b5-v001/maximum-response-structure.json",
+      "fileSha256": "6e7b2db15f12f7b173036890cbe63b937c59a71a1c231c9129c867a08d115991",
+      "byteLength": 19265
+    },
+    {
+      "role": "generate-content-request",
+      "path": "evals/clip_composition/outputs/presentation/caption-gate-b5/qdczJpv8RCc-candidate-59-vertical-caption-b5-v001/generate-content-request.json",
+      "fileSha256": "6113191c82f2065d4b0c71f8530dea925c36e31d92fcb0642a0faf58a86d7e83",
+      "byteLength": 30542
+    }
+  ],
+  "nextStage": {
+    "status": "ready-for-b6",
+    "blockingViolationCodes": [],
+    "generateContentAllowed": true
+  }
+}

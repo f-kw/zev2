@@ -1,0 +1,206 @@
+{
+  "schemaVersion": "presentation-candidate59-vertical-b4-rebuild-diagnosis-v001",
+  "diagnosisId": "qdczJpv8RCc-candidate-59-vertical-b4-rebuild-20260802-v001",
+  "diagnosedAt": "2026-08-02",
+  "scope": {
+    "savedArtifactsOnly": true,
+    "apiCalls": 0,
+    "costUsd": "0",
+    "formalArtifactsChanged": 0,
+    "productionFilesChanged": 0
+  },
+  "observedFailure": {
+    "publicCode": "SEMANTIC_COMPILER_REBUILD_FAILED",
+    "publicPath": "$",
+    "b4RunnerOutputPath": "evals/clip_composition/outputs/presentation/caption-gate-b6/qdczJpv8RCc-candidate-59-vertical-v002/b4-runner-output.raw.json",
+    "b4RunnerOutputFileSha256": "faccccff17bf3c1251ca5bd5c128f0350c6fd8a1b6139fd84292c9dfe0d7adbc"
+  },
+  "compilerInputComparison": {
+    "b1ValidationReportPath": "evals/clip_composition/outputs/presentation/caption-gate-b6/qdczJpv8RCc-candidate-59-vertical-v002/semantic-output-validation-report.json",
+    "b1ValidationReportFileSha256": "b2342ad39eb2e6c0519337925aa8505875d8a8372919f7a95a814613041de826",
+    "b1Status": "passed",
+    "b1ObservedByteSha256": "289d505f7f51ff442c740b23c6ff154290dc5c97005fef736d001cf69fecb929",
+    "b4ReadOnlyRebuildObservedByteSha256": "289d505f7f51ff442c740b23c6ff154290dc5c97005fef736d001cf69fecb929",
+    "b1CanonicalSha256": "a0fb6e5160dc4c36c44717c97d259409e8b0c8eacd6687af408ab4c594db0f03",
+    "b4ReadOnlyRebuildCanonicalSha256": "a0fb6e5160dc4c36c44717c97d259409e8b0c8eacd6687af408ab4c594db0f03",
+    "byteOrShaMismatch": false,
+    "conclusion": "B1が合格させた内容と、保存物からB4用に再構築した内容は完全一致する"
+  },
+  "binaryInputs": [
+    {
+      "role": "boundaryEvidence",
+      "field": "input.sourcePackage.snapshots[0].bytes",
+      "path": "evals/clip_composition/outputs/presentation/segmenter-boundary-evidence/qdczJpv8RCc-candidate-59-vertical-v001/segmenter-boundary-evidence.json",
+      "byteLength": 96020,
+      "fileSha256": "98ebe52b21ff8abd7e478be4ade7b8e418aa004a3af491c901748111854d216b",
+      "b1RuntimeType": "Buffer",
+      "b4AfterDeterminismCloneRuntimeType": "Uint8Array",
+      "bytesChanged": false
+    },
+    {
+      "role": "embeddedGateAReport",
+      "field": "input.sourcePackage.snapshots[1].bytes",
+      "path": "evals/clip_composition/outputs/presentation/segmenter-boundary-evidence/qdczJpv8RCc-candidate-59-vertical-v001/embedded-gate-a-validation-report.json",
+      "byteLength": 4920,
+      "fileSha256": "2866be3e60f44b1aa9b6d524c96d0d495684f410b23ede84dc4997103f9e7dc4",
+      "b1RuntimeType": "Buffer",
+      "b4AfterDeterminismCloneRuntimeType": "Uint8Array",
+      "bytesChanged": false
+    },
+    {
+      "role": "semanticSourceInput",
+      "field": "input.sourcePackage.snapshots[2].bytes",
+      "path": "evals/clip_composition/outputs/presentation/segmenter-boundary-evidence/qdczJpv8RCc-candidate-59-vertical-v001/semantic-source-input.json",
+      "byteLength": 24257,
+      "fileSha256": "28c6f6bf75e4798ed1582f64fde2d893eafa420cc6417fb293916deb5cbf988b",
+      "b1RuntimeType": "Buffer",
+      "b4AfterDeterminismCloneRuntimeType": "Uint8Array",
+      "bytesChanged": false
+    },
+    {
+      "role": "deterministicExpansionMap",
+      "field": "input.sourcePackage.snapshots[3].bytes",
+      "path": "evals/clip_composition/outputs/presentation/segmenter-boundary-evidence/qdczJpv8RCc-candidate-59-vertical-v001/deterministic-expansion-map.json",
+      "byteLength": 69689,
+      "fileSha256": "b2115c65b0cd6c68fbd6f9aae848ee42bd4049814d78a65e18afc217602e07a3",
+      "b1RuntimeType": "Buffer",
+      "b4AfterDeterminismCloneRuntimeType": "Uint8Array",
+      "bytesChanged": false
+    },
+    {
+      "role": "sourceOnlyLeakageReport",
+      "field": "input.sourcePackage.snapshots[4].bytes",
+      "path": "evals/clip_composition/outputs/presentation/segmenter-boundary-evidence/qdczJpv8RCc-candidate-59-vertical-v001/source-only-leakage-report.json",
+      "byteLength": 2040,
+      "fileSha256": "7d404e744c56f210f6ee68a56e5de2a9a0eb429f2da92df85ed84f5e573b6020",
+      "b1RuntimeType": "Buffer",
+      "b4AfterDeterminismCloneRuntimeType": "Uint8Array",
+      "bytesChanged": false
+    },
+    {
+      "role": "packageManifest",
+      "field": "input.sourcePackage.snapshots[5].bytes",
+      "path": "evals/clip_composition/outputs/presentation/segmenter-boundary-evidence/qdczJpv8RCc-candidate-59-vertical-v001/package-manifest.json",
+      "byteLength": 10098,
+      "fileSha256": "2ece4fe5335fa7a64f6fe56d801fe571f3feaaef137661cc26134b5815ed6d78",
+      "b1RuntimeType": "Buffer",
+      "b4AfterDeterminismCloneRuntimeType": "Uint8Array",
+      "bytesChanged": false
+    },
+    {
+      "role": "packageValidationReport",
+      "field": "input.sourcePackage.snapshots[6].bytes",
+      "path": "evals/clip_composition/outputs/presentation/segmenter-boundary-evidence/qdczJpv8RCc-candidate-59-vertical-v001/package-validation-report.json",
+      "byteLength": 5047,
+      "fileSha256": "581568832eb280a48f1b1d2fe42a33aa65ee1449ae22a2b512c21d846f20d8e6",
+      "b1RuntimeType": "Buffer",
+      "b4AfterDeterminismCloneRuntimeType": "Uint8Array",
+      "bytesChanged": false
+    },
+    {
+      "role": "rawSemanticOutput",
+      "field": "input.semantic.rawSemanticOutputSnapshot.bytes",
+      "path": "evals/clip_composition/outputs/presentation/caption-semantic-raw-outputs/qdczJpv8RCc-candidate-59-vertical-caption-b6-v002.json",
+      "byteLength": 4581,
+      "fileSha256": "944c1bbf4d150c67252af5901660ff12e58d0956daf5abae2466654d17c1d08d",
+      "b1RuntimeType": "Buffer",
+      "b4AfterDeterminismCloneRuntimeType": "Uint8Array",
+      "bytesChanged": false
+    }
+  ],
+  "rootCauses": [
+    {
+      "order": 1,
+      "stage": "B4 runner deterministic double-build preparation",
+      "classification": "implementation_does_not_meet_contract",
+      "location": "evals/clip_composition/run_presentation_caption_display_pair_job_v002.mjs:92,453-454",
+      "fact": "structuredClone converts all eight Buffer byte fields to Uint8Array while preserving their byte values",
+      "rejectedBy": "evals/clip_composition/presentation_caption_semantic_output_v001.mjs:2918-2925",
+      "innerError": "TypeError: invalid compiler input context",
+      "materialSpecific": false
+    },
+    {
+      "order": 2,
+      "stage": "B4 display-plan semantic compiler binding assembly",
+      "classification": "implementation_does_not_meet_contract",
+      "location": "evals/clip_composition/presentation_caption_display_pair_v004.mjs:787,812",
+      "field": "$.semanticCompilerInputBinding.compilerInputObservedByteSha256",
+      "intendedValue": "289d505f7f51ff442c740b23c6ff154290dc5c97005fef736d001cf69fecb929",
+      "declaredIdentifier": "compilerObservedByteSha256",
+      "referencedIdentifier": "compilerInputObservedByteSha256",
+      "innerError": "ReferenceError: compilerInputObservedByteSha256 is not defined",
+      "materialSpecific": false,
+      "note": "原因1だけを診断上で補正した場合に必ず次に発火する潜在障害"
+    }
+  ],
+  "diagnosticSimulation": {
+    "method": "正式runnerと正式build実装をメモリ内だけで使い、原因1のbinary型保持と原因2の参照名だけを診断用に補正。publishはfalse",
+    "runnerExitCode": 0,
+    "status": "passed_pending_human_review",
+    "errors": 0,
+    "formalArtifact": false,
+    "conclusion": "現在確認できた二つの実装欠陥をともに直せば、保存済み入力はB4正常終了まで到達する。正式な修正・再実行結果ではない"
+  },
+  "testCoverageGap": {
+    "fact": "core検査はBuffer contextを直接渡し、runner検査はbuild stubを使うため、loadContextからstructuredCloneを経て正式buildへ入る正常経路が未検査だった",
+    "neededRegression": "保存物相当のBuffer contextを正式runnerから正式buildへ2回通し、同一成果物と正常終了を確認する"
+  },
+  "repairOptions": [
+    {
+      "id": "A",
+      "recommendation": "recommended",
+      "repairLocation": "B4 runnerの決定性用複製で8 byte fieldのBuffer型を維持し、B4 coreの誤参照名1件を正す。正式runner正常経路の回帰を追加",
+      "contractImpact": "なし。schema・内容検査・SHA検査・決定性二重buildを維持",
+      "scopeKind": "generic",
+      "extraCostUsd": "0"
+    },
+    {
+      "id": "B",
+      "recommendation": "not_recommended",
+      "repairLocation": "共有意味コンパイラをUint8Array受理へ拡張し、B4 coreの誤参照名を正す",
+      "contractImpact": "B1/B4共有入力境界へ波及。受理型を広げる契約判断が必要",
+      "scopeKind": "generic_but_broad",
+      "extraCostUsd": "0"
+    },
+    {
+      "id": "C",
+      "recommendation": "not_recommended",
+      "repairLocation": "B4 runnerのcontext複製を外し、B4 coreの誤参照名を正す",
+      "contractImpact": "schema変更はないが、構築処理による入力変異を二回のbuild間で隔離する性質が弱くなる",
+      "scopeKind": "generic",
+      "extraCostUsd": "0"
+    },
+    {
+      "id": "D",
+      "recommendation": "reject",
+      "repairLocation": "Geminiを再実走する",
+      "contractImpact": "実装欠陥は残るため解消しない",
+      "scopeKind": "material_attempt_only",
+      "extraCostUsd": "approximately_0.0618"
+    }
+  ],
+  "fatalObservability": {
+    "sameClassAsKnownBacklog": true,
+    "fact": "B4 coreの広いcatchが再構築後の例外もSEMANTIC_COMPILER_REBUILD_FAILEDへ集約し、内側理由を正式報告へ残さない",
+    "location": "evals/clip_composition/presentation_caption_display_pair_v004.mjs:1070-1071",
+    "contractRevisionInThisDiagnosis": false
+  },
+  "horizontalFormalArtifacts": {
+    "changed": false,
+    "readOnlyH01Result": "1/1 passed",
+    "candidate13": {
+      "pathCount": 95,
+      "treeSha256": "2c68a23d126586b5e071848858edba637e79839bcb5d0906613d4398e9c62464"
+    },
+    "candidate59Landscape": {
+      "pathCount": 91,
+      "treeSha256": "983763b52a60e10fd99126265e7178e4a600fd3024e00614f8abfcc90a724397"
+    }
+  },
+  "stopState": {
+    "humanDecisionStops": "1/2",
+    "implementationPerformed": false,
+    "b4FormalRerunPerformed": false,
+    "verticalRenderPerformed": false
+  }
+}

@@ -8,6 +8,7 @@ import test from 'node:test';
 import {fileURLToPath} from 'node:url';
 
 import {
+  buildPresentationCaptionGateB5BoundRequestV002,
   buildPresentationCaptionGateB5RequestsV004,
   executePresentationCaptionGateB5V004,
 } from './run_presentation_caption_gate_b5_v004.mjs';
@@ -186,6 +187,37 @@ test('pure builder keeps the source exact and uses every candidate once', () => 
       'synthetic-boundary-a2',
       'synthetic-boundary-b1',
     ],
+  );
+});
+
+test('v002入口は縦型schemaと導出上限を受け、横型builderを変えない', () => {
+  const source = structuredClone(syntheticSource);
+  source.schemaVersion = 'presentation-caption-semantic-source-input-v002';
+  source.displayConstraints.maxLogicalWidthPerLine = 14;
+  source.displayConstraints.maxLinesPerMeaningGroup = 2;
+  const sourceBytes = formalBytes(source);
+  const config = makeConfig({
+    sourcePath: '/unused/source-v002.json',
+    outputRoot: '/unused/output-v002',
+    sourceBytes,
+  });
+  const built = buildPresentationCaptionGateB5BoundRequestV002({
+    sourceBytes,
+    config,
+    maxOutputTokens: 12_345,
+  });
+  assert.equal(built.generateRequest.generationConfig.candidateCount, 1);
+  assert.equal(
+    built.generateRequest.generationConfig.maxOutputTokens,
+    12_345,
+  );
+  assert.equal(
+    Object.hasOwn(built.generateRequest, 'serviceTier'),
+    false,
+  );
+  assert.equal(
+    built.generateRequest.systemInstruction.parts[0].text.includes('14'),
+    false,
   );
 });
 

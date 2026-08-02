@@ -1,0 +1,476 @@
+TAP version 13
+# Subtest: H01: candidate 13/59の保存済み正式成果物treeは認定tagから不変
+ok 1 - H01: candidate 13/59の保存済み正式成果物treeは認定tagから不変
+  ---
+  duration_ms: 464.927083
+  ...
+# [{"candidateId":"DmWu0jVQfTE-candidate-13","pathCount":95,"treeSha256":"2c68a23d126586b5e071848858edba637e79839bcb5d0906613d4398e9c62464"},{"candidateId":"qdczJpv8RCc-candidate-59","pathCount":91,"treeSha256":"983763b52a60e10fd99126265e7178e4a600fd3024e00614f8abfcc90a724397"}]
+# Subtest: H02: 横型B3の処理結果projectionはbyte不変
+ok 2 - H02: 横型B3の処理結果projectionはbyte不変
+  ---
+  duration_ms: 281.6735
+  ...
+# {"artifacts":[{"path":"evals/clip_composition/outputs/presentation/segmenter-boundary-evidence/DmWu0jVQfTE-candidate-13-v001/segmenter-boundary-evidence.json","byteSha256":"40230b94302914261b7e2c46c51cb0fc46ae18b26b99580ea2f74f1b02666c43"},{"path":"evals/clip_composition/outputs/presentation/segmenter-boundary-evidence/DmWu0jVQfTE-candidate-13-v001/embedded-gate-a-validation-report.json","byteSha256":"2ffaa7ae5edfc0950163e664aa09c85057782dc1c74bd20bdcd1eb289565fa19"},{"path":"evals/clip_composition/outputs/presentation/segmenter-boundary-evidence/DmWu0jVQfTE-candidate-13-v001/semantic-source-input.json","byteSha256":"c350a402db15ff7a5405894f939f0a66522482d6d8c78584fe5b55d9dc489980"},{"path":"evals/clip_composition/outputs/presentation/segmenter-boundary-evidence/DmWu0jVQfTE-candidate-13-v001/deterministic-expansion-map.json","byteSha256":"33c42a4c625452c6d120f59ccb5a8e78822f9008f5121a91a32e9d3be7133b3d"},{"path":"evals/clip_composition/outputs/presentation/segmenter-boundary-evidence/DmWu0jVQfTE-candidate-13-v001/source-only-leakage-report.json","byteSha256":"e2963f6e4e1e68823a97bd66483b8e13688230961f03190bea259d29997003ec"}],"sharedCalculation":{"tests":161,"pass":1,"fail":0,"skipped":160}}
+# Subtest: H03: candidate 13 B6は処理結果と現在実装来歴を二層で照合する
+ok 3 - H03: candidate 13 B6は処理結果と現在実装来歴を二層で照合する
+  ---
+  duration_ms: 700.166959
+  ...
+# {"resultProjection":[{"path":"evals/clip_composition/outputs/presentation/caption-gate-b6/DmWu0jVQfTE-candidate-13-v004/b6-manifest.json","byteSha256":"c9b12c565eb56324627d4aeb327eaf63697fabe2fcd8bbe48189e4397c166053"},{"path":"evals/clip_composition/outputs/presentation/caption-gate-b6/DmWu0jVQfTE-candidate-13-v004/semantic-output-validation-report.json","byteSha256":"695dca84f05f32523a5e648fb4753c9c7f989b08e3883edbfad1f56079f24bab"},{"path":"evals/clip_composition/outputs/presentation/caption-gate-b6/DmWu0jVQfTE-candidate-13-v004/b4-runner-output.raw.json","byteSha256":"05d240dc26bf01402227be9cc1f589ba6a23372183db0f1d96684795c0db37b3"},{"path":"evals/clip_composition/outputs/presentation/caption-display-pairs/DmWu0jVQfTE-candidate-13-caption-b6-v004/display-plan.json","byteSha256":"c8fda888be8a10eb4f76ce5c21b9379b4e3b49d8e307f6007ebabc394a866207"},{"path":"evals/clip_composition/outputs/presentation/caption-semantic-output-check-jobs/DmWu0jVQfTE-candidate-13-caption-b6-v004.json","byteSha256":"b0556eac878e9f204970445d4261549904282f73debb4490ad1322ca000de8cd"},{"path":"evals/clip_composition/outputs/presentation/caption-display-pair-generation-jobs/DmWu0jVQfTE-candidate-13-caption-b6-v004.json","byteSha256":"8de4bdbd3f40583c3a3cd32010489dd44ac59ab9f343fb54abf5c9e95f9b2f6f"}],"liveResultProjection":{"compilerInputObservedByteSha256":"aa201b4369d116f4e04449b6d4d59ec80a77a55ad9ca641bc0d29abacb9581fa","compilerInputCanonicalSha256":"1e714993cf8fdd812d401ac4d23f05d4208dccc6b61950b4e14735ee2730139c","observedProjection":{"containerCount":3,"meaningGroupCount":20,"lineCount":40,"boundaryCandidateCount":205,"sourceAtomCount":354,"maximumObservedLineLogicalWidth":30}},"currentImplementation":[{"path":"evals/clip_composition/presentation_caption_display_pair_v003.mjs","currentSha256":"a22aa6ad44a7cd07c75ba1ebde4d40601efe29915ca6cfe915f4e1a3d8808a04"},{"path":"evals/clip_composition/presentation_caption_semantic_output_v001.mjs","currentSha256":"9b9bb011dcd198e02cb075b70e79d3090ddfe17694198f56b83726f004e78c6d"},{"path":"evals/clip_composition/presentation_caption_semantic_source_package_v001.mjs","currentSha256":"ac3dcbbc671af6f56dcceeea6a41c8ae9cbf9fc4ba28a8a00bbc5d6faff45bcd"},{"path":"evals/clip_composition/presentation_instruction_contract_v003.mjs","currentSha256":"c0a3c791c74a8c303e97e1fe0c81b8017c5dee35bd93e57668d8e11fa24925e7"},{"path":"evals/clip_composition/run_presentation_caption_display_pair_job_v001.mjs","currentSha256":"567757847273ba52dd82ea7c497531f5767a28ed8082072331d38e15605d8204"},{"path":"evals/clip_composition/run_presentation_caption_gate_b6_v001.mjs","currentSha256":"eb4c8a62e636b16cbcf0f0bf5fb0f134e04eede6a100daa6a7153a3594452e66"},{"path":"evals/clip_composition/run_presentation_segmenter_boundary_preflight_v001.mjs","currentSha256":"e83157cfe72197940193c9bd07a4f8c9be4b1716617dc55bf90e1e8c4f33812e"}],"sharedTransport":{"tests":10,"pass":1,"fail":0,"skipped":9}}
+# Subtest: H04: 横型B4とrendererは処理結果と現在実装来歴を二層で照合する
+ok 4 - H04: 横型B4とrendererは処理結果と現在実装来歴を二層で照合する
+  ---
+  duration_ms: 958.223417
+  ...
+# {"resultProjection":[{"path":"evals/clip_composition/outputs/presentation/caption-display-pairs/DmWu0jVQfTE-candidate-13-caption-b6-v004/caption-check-report.json","byteSha256":"74646d20a284161c49a316fa7ef20a7690351c4eaaf68b0828badedea838b0b7"},{"path":"evals/clip_composition/outputs/presentation/caption-display-pairs/DmWu0jVQfTE-candidate-13-caption-b6-v004/display-plan.json","byteSha256":"c8fda888be8a10eb4f76ce5c21b9379b4e3b49d8e307f6007ebabc394a866207"},{"path":"evals/clip_composition/outputs/presentation/caption-display-pairs/DmWu0jVQfTE-candidate-13-caption-b6-v004/instruction-bundle.json","byteSha256":"c9fc3b1512bd803084f17f9472ef91e6b4bb9c94ba3b9b0ded1947b63d640683"},{"path":"evals/clip_composition/outputs/presentation/caption-display-pairs/DmWu0jVQfTE-candidate-13-caption-b6-v004/layout-preflight.json","byteSha256":"5ead635f00a3690db63dc21aa4f97ef32068206401bbe70e4f8552be8a9fd2ea"},{"path":"evals/clip_composition/outputs/presentation/caption-display-pairs/DmWu0jVQfTE-candidate-13-caption-b6-v004/review-render-request.json","byteSha256":"ffb7b21270686bcfd757c7ec768f7fca966fd126eacd993f19a2a7a247ee4c78"},{"path":"evals/clip_composition/outputs/presentation/review-renders/DmWu0jVQfTE-candidate-13-caption-b6-v004-v002/presentation-review-render-plan-v003.json","byteSha256":"5365ddf6b03b7de3aaa8a2702a9a04dd7a756295d62357d05f4e0325d992669e"},{"path":"evals/clip_composition/outputs/presentation/review-renders/DmWu0jVQfTE-candidate-13-caption-b6-v004-v002/presentation-review-render-application-results-v003.json","byteSha256":"e28a4c9d0b90c3a44c87fcad9ab633365ca60cafb22f378d2d6f00cdf40680b8"},{"path":"evals/clip_composition/outputs/presentation/review-renders/DmWu0jVQfTE-candidate-13-caption-b6-v004-v002/presentation-review-render-qc-v003.json","byteSha256":"cd12027b6292024d00c6fbef7161ffefd2bd69ee2bfaaeea76105d2ef2847eb9"},{"path":"evals/clip_composition/outputs/presentation/caption-display-pair-generation-jobs/DmWu0jVQfTE-candidate-13-caption-b6-v004.json","byteSha256":"8de4bdbd3f40583c3a3cd32010489dd44ac59ab9f343fb54abf5c9e95f9b2f6f"},{"path":"evals/clip_composition/outputs/presentation/review-render-jobs/DmWu0jVQfTE-candidate-13-caption-b6-v004-v001.json","byteSha256":"e9957d5b1b1e1cf80d78fcae52738512869966d20e619ecad4adf374924b424b"},{"path":"evals/clip_composition/registries/presentation/presentation-renderer-trust-v001/trust.json","byteSha256":"04ec4971d078413b68c19869b0285130ec553f14601f45d27125738a7498eddc"}],"liveResultProjection":{"containerCount":3,"cueCount":20,"canonicalSha256":"3cf117fe8404db38bcc3f4db29b70a341c889e2d50e3589bc0c159d44f602490"},"currentImplementation":[{"path":"evals/clip_composition/presentation_caption_display_pair_v003.mjs","currentSha256":"a22aa6ad44a7cd07c75ba1ebde4d40601efe29915ca6cfe915f4e1a3d8808a04"},{"path":"evals/clip_composition/presentation_caption_semantic_output_v001.mjs","currentSha256":"9b9bb011dcd198e02cb075b70e79d3090ddfe17694198f56b83726f004e78c6d"},{"path":"evals/clip_composition/presentation_caption_semantic_source_package_v001.mjs","currentSha256":"ac3dcbbc671af6f56dcceeea6a41c8ae9cbf9fc4ba28a8a00bbc5d6faff45bcd"},{"path":"evals/clip_composition/presentation_instruction_contract_v003.mjs","currentSha256":"c0a3c791c74a8c303e97e1fe0c81b8017c5dee35bd93e57668d8e11fa24925e7"},{"path":"evals/clip_composition/presentation_renderer_qc_v002.mjs","currentSha256":"73ede4f3556f80afac98b8e0e3c4b81019f718b4644d2b3f8cb1ac037989f0d3"},{"path":"evals/clip_composition/render_presentation_v002.mjs","currentSha256":"d02d603f3fc04f9ab58ce889644f5e63bf17d7ec5cb19019e09110c6167a720b"},{"path":"evals/clip_composition/run_presentation_caption_display_pair_job_v001.mjs","currentSha256":"567757847273ba52dd82ea7c497531f5767a28ed8082072331d38e15605d8204"},{"path":"runner/src/remotion/Root.tsx","currentSha256":"a08c4c888a0fcd356dc0911732aeb51badd3420305056b1d02ac109b39d0fd23"},{"path":"runner/src/remotion/renderer/TelopRenderer.tsx","currentSha256":"7fe1296f6884c90acadb61dcd2e45c81d24e2fddac14cf78b120897f05ca289b"},{"path":"runner/src/telop-remotion.ts","currentSha256":"4d641312585a41f0a0f539738f27c3df09c8b289952c6bb36d8e9f33dcc53812"},{"path":"runner/src/telop-style.ts","currentSha256":"22d4fea92a0cb96f83cbf0dc85a80cc320950cc9052e357056218d24fc100847"}],"sharedCalculation":{"tests":91,"pass":1,"fail":0,"skipped":90}}
+# Subtest: H05: v002字幕回帰は24/24を維持する
+ok 5 - H05: v002字幕回帰は24/24を維持する
+  ---
+  duration_ms: 100.0565
+  ...
+# {"tests":24,"pass":24,"fail":0,"skipped":0}
+# Subtest: H06: 横型QC v003 wrapperは共通計算とbyte一致し現在実装来歴だけを照合する
+ok 6 - H06: 横型QC v003 wrapperは共通計算とbyte一致し現在実装来歴だけを照合する
+  ---
+  duration_ms: 80.037083
+  ...
+# {"resultProjection":[{"path":"evals/clip_composition/outputs/presentation/review-renders/DmWu0jVQfTE-candidate-13-caption-b6-v004-v002/presentation-review-render-qc-v003.json","byteSha256":"cd12027b6292024d00c6fbef7161ffefd2bd69ee2bfaaeea76105d2ef2847eb9"}],"liveResultProjection":{"instructionCount":20,"canonicalSha256":"81362c8aa69bc180cf42e50a40218f75ac18cf254cb8076e8c059d1ffa0ad265","formalByteSha256":"cd12027b6292024d00c6fbef7161ffefd2bd69ee2bfaaeea76105d2ef2847eb9"},"currentImplementation":[{"path":"evals/clip_composition/presentation_renderer_qc_v002.mjs","currentSha256":"73ede4f3556f80afac98b8e0e3c4b81019f718b4644d2b3f8cb1ac037989f0d3"}]}
+# Subtest: V01: speaker_onlyの正常viewportを共通crop計算へ渡す
+ok 7 - V01: speaker_onlyの正常viewportを共通crop計算へ渡す
+  ---
+  duration_ms: 9.376334
+  ...
+# Subtest: V02: 必須viewport欠落を拒否する
+ok 8 - V02: 必須viewport欠落を拒否する
+  ---
+  duration_ms: 0.372958
+  ...
+# Subtest: V03: 余分なviewportを拒否する
+ok 9 - V03: 余分なviewportを拒否する
+  ---
+  duration_ms: 0.067667
+  ...
+# Subtest: V04: 非有限・範囲外・逆転viewportを拒否する
+ok 10 - V04: 非有限・範囲外・逆転viewportを拒否する
+  ---
+  duration_ms: 0.108791
+  ...
+# Subtest: V05: crop decisionの入力SHA差し替えを専用codeへ帰属できる
+ok 11 - V05: crop decisionの入力SHA差し替えを専用codeへ帰属できる
+  ---
+  duration_ms: 0.140916
+  ...
+# Subtest: V06: screen-layout実装SHA不一致を専用codeへ帰属する
+ok 12 - V06: screen-layout実装SHA不一致を専用codeへ帰属する
+  ---
+  duration_ms: 6.298792
+  ...
+# Subtest: V07: crop filter構築不能を専用違反へ帰属する
+ok 13 - V07: crop filter構築不能を専用違反へ帰属する
+  ---
+  duration_ms: 0.140125
+  ...
+# Subtest: V08: crop後の1080x1920・30fps違反を拒否する
+ok 14 - V08: crop後の1080x1920・30fps違反を拒否する
+  ---
+  duration_ms: 0.0985
+  ...
+# Subtest: V09: frame数変化を拒否する
+ok 15 - V09: frame数変化を拒否する
+  ---
+  duration_ms: 0.059834
+  ...
+# Subtest: V10: 音声packet変化を拒否する
+ok 16 - V10: 音声packet変化を拒否する
+  ---
+  duration_ms: 0.09625
+  ...
+# Subtest: V11: B4明示行と文字modelの行不一致を拒否する
+ok 17 - V11: B4明示行と文字modelの行不一致を拒否する
+  ---
+  duration_ms: 6.192542
+  ...
+# Subtest: V12: 末尾句点を含む明示行はそのまま文字modelを通る
+ok 18 - V12: 末尾句点を含む明示行はそのまま文字modelを通る
+  ---
+  duration_ms: 2.14575
+  ...
+# Subtest: V13: 134px相当のalpha境界内と外を区別する
+ok 19 - V13: 134px相当のalpha境界内と外を区別する
+  ---
+  duration_ms: 0.223
+  ...
+# Subtest: V14: 版中立QCとfailure所有表は固定されたまま動く
+ok 20 - V14: 版中立QCとfailure所有表は固定されたまま動く
+  ---
+  duration_ms: 0.181333
+  ...
+# Subtest: V15: 縦型overlay adapterはfont失敗を許さない
+ok 21 - V15: 縦型overlay adapterはfont失敗を許さない
+  ---
+  duration_ms: 0.140125
+  ...
+# Subtest: V16: 正式Remotion入口は束縛実体とbrowserを必須にする
+ok 22 - V16: 正式Remotion入口は束縛実体とbrowserを必須にする
+  ---
+  duration_ms: 0.185916
+  ...
+# Subtest: V17: 縦型は共通下位描画入口を呼び独自合成器を持たない
+ok 23 - V17: 縦型は共通下位描画入口を呼び独自合成器を持たない
+  ---
+  duration_ms: 0.895334
+  ...
+# Subtest: V18: font check falseもstrict-cancel経路へ固定される
+ok 24 - V18: font check falseもstrict-cancel経路へ固定される
+  ---
+  duration_ms: 0.322584
+  ...
+# Subtest: V19: @zev2/sharedは固定symlinkとruntime exportへ解決する
+ok 25 - V19: @zev2/sharedは固定symlinkとruntime exportへ解決する
+  ---
+  duration_ms: 0.433834
+  ...
+# Subtest: V20: 非crop入力不一致のfailureは15件summaryとして表現する
+ok 26 - V20: 非crop入力不一致のfailureは15件summaryとして表現する
+  ---
+  duration_ms: 0.1375
+  ...
+# Subtest: V21: screen-layout以外の実装不一致は29件summaryへ帰属する
+ok 27 - V21: screen-layout以外の実装不一致は29件summaryへ帰属する
+  ---
+  duration_ms: 0.314125
+  ...
+# Subtest: R01: v002 registry resolves exactly one approved speaker_only preset
+ok 28 - R01: v002 registry resolves exactly one approved speaker_only preset
+  ---
+  duration_ms: 0.920292
+  ...
+# Subtest: R02: a missing screen-layout vocabulary member is rejected
+ok 29 - R02: a missing screen-layout vocabulary member is rejected
+  ---
+  duration_ms: 0.292333
+  ...
+# Subtest: R03: an extra screen-layout vocabulary member is rejected
+ok 30 - R03: an extra screen-layout vocabulary member is rejected
+  ---
+  duration_ms: 0.152292
+  ...
+# Subtest: R04: screen_speaker remains allowed vocabulary but unregistered
+ok 31 - R04: screen_speaker remains allowed vocabulary but unregistered
+  ---
+  duration_ms: 0.14925
+  ...
+# Subtest: R05: speaker_pair remains allowed vocabulary but unregistered
+ok 32 - R05: speaker_pair remains allowed vocabulary but unregistered
+  ---
+  duration_ms: 0.479666
+  ...
+# Subtest: R06: approved preview, five exact probe inputs, and RGBA decoder are bound
+ok 33 - R06: approved preview, five exact probe inputs, and RGBA decoder are bound
+  ---
+  duration_ms: 4.034542
+  ...
+# Subtest: R07: all fifteen component paths, local imports, and renderer trust bindings are exact
+ok 34 - R07: all fifteen component paths, local imports, and renderer trust bindings are exact
+  ---
+  duration_ms: 4.317666
+  ...
+# Subtest: R08: every human-approved layout boundary remains immutable
+ok 35 - R08: every human-approved layout boundary remains immutable
+  ---
+  duration_ms: 0.829334
+  ...
+# Subtest: R09: derivation, tool observation, reports, and output bytes are deterministic
+ok 36 - R09: derivation, tool observation, reports, and output bytes are deterministic
+  ---
+  duration_ms: 2885.727209
+  ...
+# Subtest: C01 必須6 claimがverifiedでなければ通信前拒否
+ok 37 - C01 必須6 claimがverifiedでなければ通信前拒否
+  ---
+  duration_ms: 1.667875
+  ...
+# Subtest: C02 countTokens課金未確認でも正しい受容記録なら通る
+ok 38 - C02 countTokens課金未確認でも正しい受容記録なら通る
+  ---
+  duration_ms: 1.502458
+  ...
+# Subtest: C03 prompt上界claimの受容改変をcode 24へ帰属
+ok 39 - C03 prompt上界claimの受容改変をcode 24へ帰属
+  ---
+  duration_ms: 0.905458
+  ...
+# Subtest: C04 output上界claimの受容改変をcode 25へ帰属
+ok 40 - C04 output上界claimの受容改変をcode 25へ帰属
+  ---
+  duration_ms: 0.438042
+  ...
+# Subtest: C05 受容記録のcanonical SHAは決定的
+ok 41 - C05 受容記録のcanonical SHAは決定的
+  ---
+  duration_ms: 0.305375
+  ...
+# Subtest: C06 countTokensのexact応答だけを受ける
+ok 42 - C06 countTokensのexact応答だけを受ける
+  ---
+  duration_ms: 0.502917
+  ...
+# Subtest: C07 送信前BigInt式は上限以下だけを受ける
+ok 43 - C07 送信前BigInt式は上限以下だけを受ける
+  ---
+  duration_ms: 0.094583
+  ...
+# Subtest: C08 入力費用で上限を使い切る場合は送信前拒否
+ok 44 - C08 入力費用で上限を使い切る場合は送信前拒否
+  ---
+  duration_ms: 0.04075
+  ...
+# Subtest: C09 countTokens wrapperはmodel以外を無改変で包む
+ok 45 - C09 countTokens wrapperはmodel以外を無改変で包む
+  ---
+  duration_ms: 0.3475
+  ...
+# Subtest: C10 事後usageとsecretを事実だけで検査する
+ok 46 - C10 事後usageとsecretを事実だけで検査する
+  ---
+  duration_ms: 0.143833
+  ...
+# Subtest: D01: v004正常外形・固定23 implementation binding・表示計画とreview入口を受理する
+ok 47 - D01: v004正常外形・固定23 implementation binding・表示計画とreview入口を受理する
+  ---
+  duration_ms: 4.674083
+  ...
+# Subtest: D02: format不一致を拒否する
+ok 48 - D02: format不一致を拒否する
+  ---
+  duration_ms: 0.459541
+  ...
+# Subtest: D03: packageとcropの画面型不一致を拒否する
+ok 49 - D03: packageとcropの画面型不一致を拒否する
+  ---
+  duration_ms: 1.2685
+  ...
+# Subtest: D04: crop provenanceのsource mediaと基礎映像由来不一致を拒否する
+ok 50 - D04: crop provenanceのsource mediaと基礎映像由来不一致を拒否する
+  ---
+  duration_ms: 1.074792
+  ...
+# Subtest: D05: packageとinstructionのpreset不一致を拒否する
+ok 51 - D05: packageとinstructionのpreset不一致を拒否する
+  ---
+  duration_ms: 1.144041
+  ...
+# Subtest: D06: packageとinstructionのstate不一致を拒否する
+ok 52 - D06: packageとinstructionのstate不一致を拒否する
+  ---
+  duration_ms: 0.981875
+  ...
+# Subtest: D07: package・意味入力・展開写像・表示計画の幅不一致を拒否する
+ok 53 - D07: package・意味入力・展開写像・表示計画の幅不一致を拒否する
+  ---
+  duration_ms: 1.382833
+  ...
+# Subtest: D08: 最大行数または文字幅規則の不一致を拒否する
+ok 54 - D08: 最大行数または文字幅規則の不一致を拒否する
+  ---
+  duration_ms: 0.969041
+  ...
+# Subtest: D09: B4 runnerはcrop decision実体のfile SHA差し替えを照合する
+ok 55 - D09: B4 runnerはcrop decision実体のfile SHA差し替えを照合する
+  ---
+  duration_ms: 0.322959
+  ...
+# Subtest: D10: v004入口は旧package v001と旧review request v003を拒否する
+ok 56 - D10: v004入口は旧package v001と旧review request v003を拒否する
+  ---
+  duration_ms: 1.687917
+  ...
+# Subtest: D11: 同一入力の6成果物+report byte一致とrunner exit 0・1・2を固定する
+ok 57 - D11: 同一入力の6成果物+report byte一致とrunner exit 0・1・2を固定する
+  ---
+  duration_ms: 2.968083
+  ...
+# Subtest: D12: cue幅はjob入力値で判定し14を受理・15を拒否する
+ok 58 - D12: cue幅はjob入力値で判定し14を受理・15を拒否する
+  ---
+  duration_ms: 0.695625
+  ...
+# Subtest: W09 B5は実装を束縛し幅不一致を通信0回で止める
+ok 59 - W09 B5は実装を束縛し幅不一致を通信0回で止める
+  ---
+  duration_ms: 260.739667
+  ...
+# Subtest: W10 B5 instructionは幅数値を焼き込まず入力fieldを参照する
+ok 60 - W10 B5 instructionは幅数値を焼き込まず入力fieldを参照する
+  ---
+  duration_ms: 0.879667
+  ...
+# Subtest: W11 B3の仕事本文だけが意味指示でB5は本文を複製しない
+ok 61 - W11 B3の仕事本文だけが意味指示でB5は本文を複製しない
+  ---
+  duration_ms: 207.718042
+  ...
+# Subtest: C11 固定jobとrequestを束縛し一回だけ送信する
+ok 62 - C11 固定jobとrequestを束縛し一回だけ送信する
+  ---
+  duration_ms: 341.467792
+  ...
+# Subtest: C12 raw保存後の応答外形違反をtransportへ帰属する
+ok 63 - C12 raw保存後の応答外形違反をtransportへ帰属する
+  ---
+  duration_ms: 150.098041
+  ...
+# Subtest: C13 生keyが応答へ反射したらsecret違反にする
+ok 64 - C13 生keyが応答へ反射したらsecret違反にする
+  ---
+  duration_ms: 146.1615
+  ...
+# Subtest: C14 usage算術不一致を拒否する
+ok 65 - C14 usage算術不一致を拒否する
+  ---
+  duration_ms: 0.200292
+  ...
+# Subtest: C15 事前見積り超過は事実記録し上限内なら停止しない
+ok 66 - C15 事前見積り超過は事実記録し上限内なら停止しない
+  ---
+  duration_ms: 153.111542
+  ...
+# Subtest: C16 Standard以外のtierを専用違反へ帰属する
+ok 67 - C16 Standard以外のtierを専用違反へ帰属する
+  ---
+  duration_ms: 148.183542
+  ...
+# Subtest: C17 事後usage換算が上限超過ならB1前停止
+ok 68 - C17 事後usage換算が上限超過ならB1前停止
+  ---
+  duration_ms: 149.239125
+  ...
+# Subtest: C18 candidateCountは整数1以外を通信前拒否する
+ok 69 - C18 candidateCountは整数1以外を通信前拒否する
+  ---
+  duration_ms: 145.71125
+  ...
+# Subtest: C19 応答candidateが複数ならusage違反でB1へ進めない
+ok 70 - C19 応答candidateが複数ならusage違反でB1へ進めない
+  ---
+  duration_ms: 150.689625
+  ...
+# Subtest: C20 残余riskの段間verdict改変をcode 24へ帰属する
+ok 71 - C20 残余riskの段間verdict改変をcode 24へ帰属する
+  ---
+  duration_ms: 146.079125
+  ...
+# Subtest: C21 child終了2をdownstream stopへ帰属する
+ok 72 - C21 child終了2をdownstream stopへ帰属する
+  ---
+  duration_ms: 156.662334
+  ...
+# Subtest: C22 abstainedはB4へ進めず検査済み停止として残す
+ok 73 - C22 abstainedはB4へ進めず検査済み停止として残す
+  ---
+  duration_ms: 154.294542
+  ...
+# Subtest: C23 commit recordを公開できなければfatalで成功を名乗らない
+ok 74 - C23 commit recordを公開できなければfatalで成功を名乗らない
+  ---
+  duration_ms: 216.102292
+  ...
+# Subtest: W01: B1 v002は幅14の正常回答と固定7 implementation bindingを受理する
+ok 75 - W01: B1 v002は幅14の正常回答と固定7 implementation bindingを受理する
+  ---
+  duration_ms: 9.766
+  ...
+# Subtest: W02: 同じjobで論理幅15の行を既存幅超過違反へ帰属する
+ok 76 - W02: 同じjobで論理幅15の行を既存幅超過違反へ帰属する
+  ---
+  duration_ms: 2.309458
+  ...
+# Subtest: W03: manifestと意味入力の幅不一致を拒否する
+ok 77 - W03: manifestと意味入力の幅不一致を拒否する
+  ---
+  duration_ms: 2.05225
+  ...
+# Subtest: W04: 意味入力と展開写像の幅不一致を拒否する
+ok 78 - W04: 意味入力と展開写像の幅不一致を拒否する
+  ---
+  duration_ms: 2.300416
+  ...
+# Subtest: W05: manifestと台帳bindingのpreset不一致を拒否する
+ok 79 - W05: manifestと台帳bindingのpreset不一致を拒否する
+  ---
+  duration_ms: 1.631625
+  ...
+# Subtest: W06: manifestと台帳bindingのstate不一致を拒否する
+ok 80 - W06: manifestと台帳bindingのstate不一致を拒否する
+  ---
+  duration_ms: 1.834584
+  ...
+# Subtest: W07: 1まとまり2行を受理する
+ok 81 - W07: 1まとまり2行を受理する
+  ---
+  duration_ms: 3.579291
+  ...
+# Subtest: W08: 3行拒否とrunnerのexit 0・1・2 stdout契約を固定する
+ok 82 - W08: 3行拒否とrunnerのexit 0・1・2 stdout契約を固定する
+  ---
+  duration_ms: 4.393083
+  ...
+# Subtest: S01: B3 v002正常jobと固定7 implementation bindingを受理する
+ok 83 - S01: B3 v002正常jobと固定7 implementation bindingを受理する
+  ---
+  duration_ms: 1.089583
+  ...
+# Subtest: S02: 同じbuild入力を2回評価したpackage 7成果物はbyte一致する
+ok 84 - S02: 同じbuild入力を2回評価したpackage 7成果物はbyte一致する
+  ---
+  duration_ms: 8.912667
+  ...
+# Subtest: S03: jobの欠落key・余分key・順序違いを拒否する
+ok 85 - S03: jobの欠落key・余分key・順序違いを拒否する
+  ---
+  duration_ms: 0.245833
+  ...
+# Subtest: S04: v001とv002のjob入口を相互変換しない
+ok 86 - S04: v001とv002のjob入口を相互変換しない
+  ---
+  duration_ms: 0.377291
+  ...
+# Subtest: S05: manifest v002は承認済み14 key順だけを使う
+ok 87 - S05: manifest v002は承認済み14 key順だけを使う
+  ---
+  duration_ms: 0.075667
+  ...
+# Subtest: S06: manifestのformatと表示制約はjob入力をbyte同一で写す
+ok 88 - S06: manifestのformatと表示制約はjob入力をbyte同一で写す
+  ---
+  duration_ms: 0.084667
+  ...
+# Subtest: S07: 幅の0・負数・小数・unsafe integerを拒否する
+ok 89 - S07: 幅の0・負数・小数・unsafe integerを拒否する
+  ---
+  duration_ms: 0.124
+  ...
+# Subtest: S08: job幅が選択stateの安全上限を超えるとbuild前に拒否する
+ok 90 - S08: job幅が選択stateの安全上限を超えるとbuild前に拒否する
+  ---
+  duration_ms: 0.260792
+  ...
+# Subtest: S09: 共有B3 coreはcandidate ID・素材SHA・縦長幅14を埋め込まない
+ok 91 - S09: 共有B3 coreはcandidate ID・素材SHA・縦長幅14を埋め込まない
+  ---
+  duration_ms: 0.535875
+  ...
+# Subtest: S10: B3 runnerはexit 0・1・2を単一JSON stdoutとstderr 0へ固定する
+ok 92 - S10: B3 runnerはexit 0・1・2を単一JSON stdoutとstderr 0へ固定する
+  ---
+  duration_ms: 0.938167
+  ...
+1..92
+# tests 92
+# suites 0
+# pass 92
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 9234.448833

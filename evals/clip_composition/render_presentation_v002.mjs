@@ -27,7 +27,9 @@ import {
   evaluatePresentationRendererQcV002,
   fileSha256V002,
   inspectOverlayPngV002,
+  inspectOverlayPngWithToolV001,
   inspectRenderedMediaV002,
+  inspectRenderedMediaWithToolsV001,
 } from './presentation_renderer_qc_v002.mjs';
 
 export const PRESENTATION_RENDER_JOB_SCHEMA_VERSION = 'presentation-render-job-v002';
@@ -397,7 +399,12 @@ export function validateBaseMediaGenerationBindingV002({
 }
 
 export const inspectFrameCount = async (filePath) => {
-  const result = await run('ffprobe', [
+  return inspectFrameCountWithToolV001(filePath, 'ffprobe');
+};
+
+export const inspectFrameCountWithToolV001 = async (filePath, ffprobePath) => {
+  if (!isNonEmptyString(ffprobePath)) throw new TypeError('ffprobePath is required');
+  const result = await run(ffprobePath, [
     '-v', 'error', '-count_frames', '-select_streams', 'v:0',
     '-show_entries', 'stream=nb_read_frames', '-of', 'json', filePath,
   ]);
@@ -675,14 +682,14 @@ export function validateOverlayDeterminismV002(firstSha256, secondSha256, instru
   };
 }
 
-const imageDifferencePixelsWithinBounds = async (leftPath, rightPath, bounds) => {
+const imageDifferencePixelsWithinBounds = async (leftPath, rightPath, bounds, imageMagickPath = 'magick') => {
   const width = bounds.right - bounds.left;
   const height = bounds.bottom - bounds.top;
   if (![bounds.left, bounds.top, width, height].every(Number.isInteger) || width <= 0 || height <= 0) {
     throw new TypeError('image comparison bounds are invalid');
   }
   const geometry = `${width}x${height}+${bounds.left}+${bounds.top}`;
-  const result = await run('magick', [
+  const result = await run(imageMagickPath, [
     'compare', '-metric', 'AE',
     '(', leftPath, '-crop', geometry, '+repage', ')',
     '(', rightPath, '-crop', geometry, '+repage', ')',
@@ -693,14 +700,21 @@ const imageDifferencePixelsWithinBounds = async (leftPath, rightPath, bounds) =>
   return value;
 };
 
-const extractFrame = async (inputPath, frame, outputPath) => {
-  await run('ffmpeg', [
+const extractFrame = async (inputPath, frame, outputPath, ffmpegPath = 'ffmpeg') => {
+  await run(ffmpegPath, [
     '-hide_banner', '-loglevel', 'error', '-y', '-i', inputPath,
     '-vf', `select=eq(n\\,${frame})`, '-frames:v', '1', outputPath,
   ]);
 };
 
-const composite = async ({baseMediaPath, plan, overlayRecords, expectedFrameCount, outputPath}) => {
+const composite = async ({
+  baseMediaPath,
+  plan,
+  overlayRecords,
+  expectedFrameCount,
+  outputPath,
+  ffmpegPath = 'ffmpeg',
+}) => {
   const args = ['-hide_banner', '-loglevel', 'error', '-y', '-i', baseMediaPath];
   for (const record of overlayRecords) {
     args.push('-loop', '1', '-framerate', String(plan.canvas.fps), '-i', record.pngPath);
@@ -730,8 +744,25 @@ const composite = async ({baseMediaPath, plan, overlayRecords, expectedFrameCoun
     '-c:v', 'libx264', '-preset', 'fast', '-crf', '20', '-pix_fmt', 'yuv420p',
     '-c:a', 'copy', '-movflags', '+faststart', outputPath,
   );
-  await run('ffmpeg', args);
+  await run(ffmpegPath, args);
 };
+
+const DEFAULT_PRESENTATION_OVERLAY_ADAPTER_V001 = Object.freeze({
+  buildProps: overlayPropsFor,
+  renderStill: renderOverlayStill,
+  renderLineMask: (props, lineIndex, outputPath) => renderOverlayStill(
+    {...props, inspectionLineIndex: lineIndex},
+    outputPath,
+  ),
+});
+
+const DEFAULT_PRESENTATION_DRAW_TOOL_PATHS_V001 = Object.freeze({
+  ffmpegPath: 'ffmpeg',
+  ffprobePath: 'ffprobe',
+  imageMagickPath: 'magick',
+  tsxPath: TSX_BIN,
+  layoutInspectorPath: LAYOUT_INSPECTOR,
+});
 
 export const PRESENTATION_RENDERER_OUTPUT_NAMES = Object.freeze({
   video: 'presentation-rendered-v002.mp4',
@@ -922,10 +953,42 @@ const assertRegularFile = async (filePath) => {
   }
 };
 
+const projectDefaultPresentationManifestArtifactsV002 = (
+  manifest,
+  artifactNames,
+) => ({
+  rootFiles: [
+    {
+      name: artifactNames.video,
+      declaredName: manifest?.output?.videoFile,
+      fileSha256: manifest?.output?.videoFileSha256,
+    },
+    {
+      name: artifactNames.plan,
+      declaredName: manifest?.output?.planFile,
+      fileSha256: manifest?.output?.planFileSha256,
+    },
+    {
+      name: artifactNames.applicationResults,
+      declaredName: manifest?.output?.applicationResultsFile,
+      fileSha256: manifest?.output?.applicationResultsFileSha256,
+    },
+    {
+      name: artifactNames.qc,
+      declaredName: manifest?.output?.qcFile,
+      fileSha256: manifest?.output?.qcFileSha256,
+    },
+  ],
+  overlayDirectory: manifest?.output?.overlaySet?.directory,
+  overlays: manifest?.output?.overlaySet?.files,
+  overlaySetCanonicalSha256: manifest?.output?.overlaySet?.canonicalSha256,
+});
+
 /** 公開予定一式がmanifestどおりで、余分・欠落・symlinkを含まないことを公開前に確定する。 */
 const validateStagedSuccessArtifactsV002 = async (
   stagingDirectory,
   artifactNames = PRESENTATION_RENDERER_OUTPUT_NAMES,
+  projectManifestArtifacts = projectDefaultPresentationManifestArtifactsV002,
 ) => {
   const successArtifactNames = successArtifactNamesFor(artifactNames);
   const stagingStat = await lstat(stagingDirectory);
@@ -945,30 +1008,41 @@ const validateStagedSuccessArtifactsV002 = async (
     await assertRegularFile(path.join(stagingDirectory, name));
   }
   const manifest = await readJson(path.join(stagingDirectory, artifactNames.manifest));
-  const expectedRootHashes = [
-    [artifactNames.video, manifest?.output?.videoFile, manifest?.output?.videoFileSha256],
-    [artifactNames.plan, manifest?.output?.planFile, manifest?.output?.planFileSha256],
-    [
-      artifactNames.applicationResults,
-      manifest?.output?.applicationResultsFile,
-      manifest?.output?.applicationResultsFileSha256,
-    ],
-    [artifactNames.qc, manifest?.output?.qcFile, manifest?.output?.qcFileSha256],
-  ];
-  for (const [expectedName, declaredName, declaredHash] of expectedRootHashes) {
-    if (declaredName !== expectedName || !SHA256_PATTERN.test(declaredHash)) {
+  if (typeof projectManifestArtifacts !== 'function') {
+    throw new TypeError('presentation render manifest artifact projector is invalid');
+  }
+  const projected = projectManifestArtifacts(manifest, artifactNames);
+  if (
+    !isObject(projected)
+    || !Array.isArray(projected.rootFiles)
+    || projected.rootFiles.length !== 4
+    || !Array.isArray(projected.overlays)
+    || (
+      projected.overlaySetCanonicalSource !== undefined
+      && !Array.isArray(projected.overlaySetCanonicalSource)
+    )
+  ) {
+    throw new Error('presentation render manifest artifact projection is invalid');
+  }
+  for (const entry of projected.rootFiles) {
+    const expectedName = entry?.name;
+    const declaredName = entry?.declaredName;
+    const declaredHash = entry?.fileSha256;
+    if (
+      !successArtifactNames.includes(expectedName)
+      || declaredName !== expectedName
+      || !SHA256_PATTERN.test(declaredHash)
+    ) {
       throw new Error(`presentation render manifest does not bind ${expectedName}`);
     }
     if (await fileSha256V002(path.join(stagingDirectory, expectedName)) !== declaredHash) {
       throw new Error(`presentation render staged hash mismatch: ${expectedName}`);
     }
   }
-  if (manifest?.output?.overlaySet?.directory !== artifactNames.overlays) {
+  if (projected.overlayDirectory !== artifactNames.overlays) {
     throw new Error('presentation render manifest does not bind the overlay directory');
   }
-  const declaredOverlays = Array.isArray(manifest?.output?.overlaySet?.files)
-    ? manifest.output.overlaySet.files
-    : [];
+  const declaredOverlays = projected.overlays;
   const expectedOverlayNames = [];
   for (const entry of declaredOverlays) {
     if (
@@ -992,7 +1066,10 @@ const validateStagedSuccessArtifactsV002 = async (
   if (JSON.stringify(actualOverlayNames) !== JSON.stringify(expectedOverlayNames.sort())) {
     throw new Error('presentation render staged overlay set does not match the manifest');
   }
-  if (sha256Canonical(declaredOverlays) !== manifest.output.overlaySet.canonicalSha256) {
+  if (
+    sha256Canonical(projected.overlaySetCanonicalSource ?? declaredOverlays)
+    !== projected.overlaySetCanonicalSha256
+  ) {
     throw new Error('presentation render staged overlay set canonical hash mismatch');
   }
 };
@@ -1090,6 +1167,7 @@ export const publishPresentationArtifactsV002 = async ({
   outputDirectory,
   reservation,
   artifactNames = PRESENTATION_RENDERER_OUTPUT_NAMES,
+  projectManifestArtifacts = projectDefaultPresentationManifestArtifactsV002,
 }) => {
   try {
     if (path.resolve(outputDirectory) !== reservation.outputDirectory) {
@@ -1106,6 +1184,7 @@ export const publishPresentationArtifactsV002 = async ({
     await validateStagedSuccessArtifactsV002(
       path.resolve(stagingDirectory),
       artifactNames,
+      projectManifestArtifacts,
     );
     // hash検査中の親差し替え・lock置換・出力先出現を、rename直前に再度止める。
     return commitValidatedPresentationArtifactsV002({
@@ -1165,7 +1244,32 @@ export async function executeValidatedPresentationDrawAndQcV001({
   expectedFrameCount,
   artifactNames = PRESENTATION_RENDERER_OUTPUT_NAMES,
   evaluateQc = evaluatePresentationRendererQcV002,
+  overlayAdapter = DEFAULT_PRESENTATION_OVERLAY_ADAPTER_V001,
+  toolPaths = DEFAULT_PRESENTATION_DRAW_TOOL_PATHS_V001,
+  validatedLayoutInspection = null,
 }) {
+  if (
+    !isObject(overlayAdapter)
+    || typeof overlayAdapter.buildProps !== 'function'
+    || typeof overlayAdapter.renderStill !== 'function'
+    || typeof overlayAdapter.renderLineMask !== 'function'
+  ) {
+    throw new TypeError('validated draw overlay adapter is invalid');
+  }
+  for (const key of ['ffmpegPath', 'ffprobePath', 'imageMagickPath']) {
+    if (!isNonEmptyString(toolPaths?.[key])) {
+      throw new TypeError(`validated draw tool path is missing: ${key}`);
+    }
+  }
+  if (
+    validatedLayoutInspection === null
+    && (
+      !isNonEmptyString(toolPaths?.tsxPath)
+      || !isNonEmptyString(toolPaths?.layoutInspectorPath)
+    )
+  ) {
+    throw new TypeError('layout inspector tool paths are required');
+  }
   let reservation;
   try {
     reservation = await acquirePresentationOutputReservationV002(outputDirectory);
@@ -1210,27 +1314,31 @@ export async function executeValidatedPresentationDrawAndQcV001({
   );
 
   try {
-    const overlayProps = plan.elements.map((element) => overlayPropsFor(element, plan, presetRegistry));
-    const layoutInputPath = path.join(scratchDirectory, 'layout-input.json');
-    const layoutOutputPath = path.join(scratchDirectory, 'layout-output.json');
-    await writeJson(layoutInputPath, {canvas: plan.canvas, overlays: overlayProps});
-    const layoutProcess = await run(
-      TSX_BIN,
-      [LAYOUT_INSPECTOR, layoutInputPath, layoutOutputPath],
-      {
-        allowedExitCodes: [0, 1],
-        env: {NODE_PATH: RENDER_NODE_MODULES},
-      },
+    const overlayProps = plan.elements.map(
+      (element) => overlayAdapter.buildProps(element, plan, presetRegistry),
     );
-    let layoutInspection;
-    try {
-      layoutInspection = await readJson(layoutOutputPath);
-    } catch (error) {
-      throw new Error(
-        `layout inspector produced no result (exit ${layoutProcess.code}): `
-        + `${layoutProcess.stderr.toString()}${layoutProcess.stdout.toString()}`,
-        {cause: error},
+    let layoutInspection = validatedLayoutInspection;
+    if (layoutInspection === null) {
+      const layoutInputPath = path.join(scratchDirectory, 'layout-input.json');
+      const layoutOutputPath = path.join(scratchDirectory, 'layout-output.json');
+      await writeJson(layoutInputPath, {canvas: plan.canvas, overlays: overlayProps});
+      const layoutProcess = await run(
+        toolPaths.tsxPath,
+        [toolPaths.layoutInspectorPath, layoutInputPath, layoutOutputPath],
+        {
+          allowedExitCodes: [0, 1],
+          env: {NODE_PATH: RENDER_NODE_MODULES},
+        },
       );
+      try {
+        layoutInspection = await readJson(layoutOutputPath);
+      } catch (error) {
+        throw new Error(
+          `layout inspector produced no result (exit ${layoutProcess.code}): `
+          + `${layoutProcess.stderr.toString()}${layoutProcess.stdout.toString()}`,
+          {cause: error},
+        );
+      }
     }
     if (layoutInspection.status !== 'passed') {
       return failAfterWork(layoutInspection.violations, 'layout-preflight', layoutInspection);
@@ -1245,8 +1353,8 @@ export async function executeValidatedPresentationDrawAndQcV001({
         `${String(index + 1).padStart(2, '0')}-${sha256Bytes(element.instructionId).slice(0, 12)}`;
       const pngPath = path.join(stagingDirectory, artifactNames.overlays, `${baseName}.png`);
       const repeatPath = path.join(scratchDirectory, 'frames', `${baseName}.repeat.png`);
-      await renderOverlayStill(overlayProps[index], pngPath);
-      await renderOverlayStill(overlayProps[index], repeatPath);
+      await overlayAdapter.renderStill(overlayProps[index], pngPath);
+      await overlayAdapter.renderStill(overlayProps[index], repeatPath);
       const [pngSha256, repeatSha256] = await Promise.all([
         fileSha256V002(pngPath),
         fileSha256V002(repeatPath),
@@ -1268,21 +1376,24 @@ export async function executeValidatedPresentationDrawAndQcV001({
           'frames',
           `${baseName}-line-${String(line.lineIndex + 1).padStart(2, '0')}.png`,
         );
-        await renderOverlayStill(
-          {...overlayProps[index], inspectionLineIndex: line.lineIndex},
+        await overlayAdapter.renderLineMask(
+          overlayProps[index],
+          line.lineIndex,
           lineMaskPath,
         );
-        const lineInspection = await inspectOverlayPngV002({
+        const lineInspection = await inspectOverlayPngWithToolV001({
           instructionId: element.instructionId,
           pngPath: lineMaskPath,
+          imageMagickPath: toolPaths.imageMagickPath,
         });
         if (lineInspection.alphaBounds) {
           lineAlphaBounds.push({lineIndex: line.lineIndex, ...lineInspection.alphaBounds});
         }
       }
-      const inspection = await inspectOverlayPngV002({
+      const inspection = await inspectOverlayPngWithToolV001({
         instructionId: element.instructionId,
         pngPath,
+        imageMagickPath: toolPaths.imageMagickPath,
         lineRects,
         lineAlphaBounds,
         appliedOverlayPropsCanonicalSha256: sha256Canonical(overlayProps[index]),
@@ -1326,12 +1437,21 @@ export async function executeValidatedPresentationDrawAndQcV001({
       overlayRecords,
       expectedFrameCount,
       outputPath: workVideo,
+      ffmpegPath: toolPaths.ffmpegPath,
     });
-    const outputMedia = await inspectRenderedMediaV002(workVideo);
-    if (outputMedia.video) outputMedia.video.frameCount = await inspectFrameCount(workVideo);
+    const outputMedia = await inspectRenderedMediaWithToolsV001(workVideo, {
+      ffprobePath: toolPaths.ffprobePath,
+      ffmpegPath: toolPaths.ffmpegPath,
+    });
+    if (outputMedia.video) {
+      outputMedia.video.frameCount = await inspectFrameCountWithToolV001(
+        workVideo,
+        toolPaths.ffprobePath,
+      );
+    }
 
     const transparentOverlayPath = path.join(scratchDirectory, 'frames', 'transparent-overlay.png');
-    await run('magick', [
+    await run(toolPaths.imageMagickPath, [
       '-size', `${plan.canvas.width}x${plan.canvas.height}`,
       'xc:none',
       transparentOverlayPath,
@@ -1351,9 +1471,10 @@ export async function executeValidatedPresentationDrawAndQcV001({
         overlayRecords: counterfactualRecords,
         expectedFrameCount,
         outputPath: omittedVideo,
+        ffmpegPath: toolPaths.ffmpegPath,
       });
-      await extractFrame(workVideo, representativeFrame, outputFrame);
-      await extractFrame(omittedVideo, representativeFrame, omittedFrame);
+      await extractFrame(workVideo, representativeFrame, outputFrame, toolPaths.ffmpegPath);
+      await extractFrame(omittedVideo, representativeFrame, omittedFrame, toolPaths.ffmpegPath);
       record.inspection.visibilityComparisonBasis = 'same-composite-with-instruction-omitted';
       record.inspection.representativeFrame = representativeFrame;
       record.inspection.changedPixelsAgainstInstructionOmittedFrame =
@@ -1361,6 +1482,7 @@ export async function executeValidatedPresentationDrawAndQcV001({
           outputFrame,
           omittedFrame,
           record.inspection.alphaBounds,
+          toolPaths.imageMagickPath,
         );
     }
 
@@ -1803,7 +1925,7 @@ export async function runPresentationRendererJobFileV002(jobPath) {
 }
 
 const isDirectExecution = process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url);
-if (isDirectExecution) {
+const main = async () => {
   const [, , jobPath] = process.argv;
   if (!jobPath || process.argv.length !== 3) {
     console.error('使い方: node render_presentation_v002.mjs <presentation-render-job-v002.json>');
@@ -1821,4 +1943,15 @@ if (isDirectExecution) {
     } else console.error(JSON.stringify(result.failure, null, 2));
     process.exitCode = result.exitCode;
   }
+};
+if (isDirectExecution) {
+  main().catch((error) => {
+    console.error(JSON.stringify({
+      schemaVersion: 'presentation-render-failure-v002',
+      status: 'process_failed',
+      stage: 'execution',
+      message: error instanceof Error ? error.message : String(error),
+    }, null, 2));
+    process.exitCode = 2;
+  });
 }

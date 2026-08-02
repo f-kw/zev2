@@ -1,0 +1,142 @@
+{
+  "schemaVersion": "presentation-caption-gate-b6-stop-report-v001",
+  "status": "blocked",
+  "stage": "response-envelope",
+  "executionStartedAt": "2026-07-30T11:14:59.331Z",
+  "jobBinding": {
+    "path": "evals/clip_composition/outputs/presentation/caption-gate-b6-jobs/qdczJpv8RCc-candidate-59-vertical-caption-b6-v001.json",
+    "fileSha256": "e63bb76d50f15e027d27f0fc116ac343877b9cfc6e14bfb7100786b043bd6818",
+    "canonicalSha256": "a8ce6287b99fc05b4d2cce5c3287fe51efe643a1a9c779f1cb0140fbcb51f368"
+  },
+  "implementationBinding": {
+    "entry": {
+      "path": "evals/clip_composition/run_presentation_caption_gate_b6_job_v002.mjs",
+      "fileSha256": "37910b7c0adbb4643514e0e5958a70d9bf8f17d3ed20056e6e75a01f5729328d"
+    },
+    "localImportClosure": [
+      {
+        "role": "b6Core",
+        "path": "evals/clip_composition/run_presentation_caption_gate_b6_v001.mjs",
+        "fileSha256": "eb4c8a62e636b16cbcf0f0bf5fb0f134e04eede6a100daa6a7153a3594452e66"
+      },
+      {
+        "role": "sourcePackageCore",
+        "path": "evals/clip_composition/presentation_caption_semantic_source_package_v001.mjs",
+        "fileSha256": "ac3dcbbc671af6f56dcceeea6a41c8ae9cbf9fc4ba28a8a00bbc5d6faff45bcd"
+      },
+      {
+        "role": "textLayoutImplementation",
+        "path": "evals/clip_composition/presentation_renderer_text_layout_v001.mjs",
+        "fileSha256": "066a62adaa7fa3f8b8eda92c82e9a85940e43f372af976edc4b327ef4cf9ce5e"
+      },
+      {
+        "role": "gateACore",
+        "path": "evals/clip_composition/presentation_segmenter_boundary_evidence_v001.mjs",
+        "fileSha256": "dac613292e463897ee2757be75a7d64f3ece9928141765a195ba54a0ebc6007a"
+      },
+      {
+        "role": "gateARetainedSourceAtomsCore",
+        "path": "evals/clip_composition/presentation_retained_source_atoms_v001.mjs",
+        "fileSha256": "f28178327ddc0cc64f11527d850c71bfb5043b4e13f59f6da7997fd8f6d6cad0"
+      },
+      {
+        "role": "gateARunner",
+        "path": "evals/clip_composition/run_presentation_segmenter_boundary_preflight_v001.mjs",
+        "fileSha256": "e83157cfe72197940193c9bd07a4f8c9be4b1716617dc55bf90e1e8c4f33812e"
+      },
+      {
+        "role": "semanticCore",
+        "path": "evals/clip_composition/presentation_caption_semantic_output_v001.mjs",
+        "fileSha256": "9b9bb011dcd198e02cb075b70e79d3090ddfe17694198f56b83726f004e78c6d"
+      },
+      {
+        "role": "semanticRunnerV001",
+        "path": "evals/clip_composition/run_presentation_caption_semantic_output_check_v001.mjs",
+        "fileSha256": "d13e1becf0745915455947bc01e4175555ef19dc08ba9f69ee19566f6c119018"
+      },
+      {
+        "role": "displayPairRunnerV001",
+        "path": "evals/clip_composition/run_presentation_caption_display_pair_job_v001.mjs",
+        "fileSha256": "567757847273ba52dd82ea7c497531f5767a28ed8082072331d38e15605d8204"
+      },
+      {
+        "role": "displayPairCoreV003",
+        "path": "evals/clip_composition/presentation_caption_display_pair_v003.mjs",
+        "fileSha256": "a22aa6ad44a7cd07c75ba1ebde4d40601efe29915ca6cfe915f4e1a3d8808a04"
+      },
+      {
+        "role": "instructionCoreV003",
+        "path": "evals/clip_composition/presentation_instruction_contract_v003.mjs",
+        "fileSha256": "c0a3c791c74a8c303e97e1fe0c81b8017c5dee35bd93e57668d8e11fa24925e7"
+      },
+      {
+        "role": "captionCoreV003",
+        "path": "evals/clip_composition/presentation_caption_contract_v003.mjs",
+        "fileSha256": "a090caf2b1939bbc226a306cadd580b887ce34f0a0436af96e4f94480c4b9292"
+      },
+      {
+        "role": "timelineV002",
+        "path": "evals/clip_composition/presentation_base_media_timeline_v002.mjs",
+        "fileSha256": "a1f72079f0e970cb5c6a67817427aa5909f2453ad0d04e81150cfd29c5b41ab2"
+      },
+      {
+        "role": "sourceSpeakerPolicy",
+        "path": "evals/clip_composition/presentation_source_speaker_policy_v001.mjs",
+        "fileSha256": "56d2d03d5bcee3a409b27acc9819a48c95abb867cdc00fd0b2bf2fe87bb9477b"
+      },
+      {
+        "role": "sourceSpeakerRegistry",
+        "path": "evals/clip_composition/registries/presentation/presentation-source-speaker-non-identity-registry-v001/registry.json",
+        "fileSha256": "9e6f6c5e57c0b0823840c70fe0e3de05592cbc88819def6020a7c1cfaf211f3a"
+      }
+    ]
+  },
+  "fixedRequestBinding": {
+    "path": "evals/clip_composition/outputs/presentation/caption-gate-b5/qdczJpv8RCc-candidate-59-vertical-caption-b5-v001/generate-content-request.json",
+    "fileSha256": "6113191c82f2065d4b0c71f8530dea925c36e31d92fcb0642a0faf58a86d7e83",
+    "byteLength": 30542
+  },
+  "transport": {
+    "product": "Gemini Developer API",
+    "apiVersion": "v1beta",
+    "generateContentEndpoint": "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent",
+    "method": "POST",
+    "headers": {
+      "content-type": "application/json",
+      "x-goog-api-key": "<redacted>"
+    },
+    "serviceTierFieldOmitted": true,
+    "automaticRetries": 0,
+    "clientTimeoutMilliseconds": 600000,
+    "generateContentCalls": 1
+  },
+  "responseBinding": {
+    "path": "evals/clip_composition/outputs/presentation/caption-gate-b6/qdczJpv8RCc-candidate-59-vertical-v001/generate-content-response.raw.json",
+    "fileSha256": "73e394a056ff2f8b985d9813d6e61cb074f748544ce510d2d4d52ba5f24422d0",
+    "byteLength": 18828,
+    "httpStatus": null,
+    "contentType": null
+  },
+  "childObservation": null,
+  "violations": [
+    {
+      "code": "API_TRANSPORT_CONTRACT_VIOLATION",
+      "relatedPaths": [
+        "$"
+      ]
+    }
+  ],
+  "artifacts": [
+    {
+      "role": "generate-content-response-raw",
+      "path": "evals/clip_composition/outputs/presentation/caption-gate-b6/qdczJpv8RCc-candidate-59-vertical-v001/generate-content-response.raw.json",
+      "fileSha256": "73e394a056ff2f8b985d9813d6e61cb074f748544ce510d2d4d52ba5f24422d0",
+      "byteLength": 18828
+    }
+  ],
+  "nextStage": {
+    "status": "stopped",
+    "b1Allowed": false,
+    "b4Allowed": false
+  }
+}

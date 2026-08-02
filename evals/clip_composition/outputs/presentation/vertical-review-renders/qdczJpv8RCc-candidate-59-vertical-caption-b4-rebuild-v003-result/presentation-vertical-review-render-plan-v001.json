@@ -1,0 +1,5460 @@
+{
+  "schemaVersion": "presentation-vertical-review-render-plan-v001",
+  "rendererVersion": "presentation-vertical-review-renderer-v001",
+  "sharedRenderEngineVersion": "presentation-renderer-v002",
+  "instructionSetId": "qdczJpv8RCc-candidate-59-vertical-caption-b4-rebuild-v002-instruction-set",
+  "resolutionPackageId": "qdczJpv8RCc-candidate-59-vertical-caption-b4-rebuild-v002-resolution-package",
+  "timelineId": "timeline-e625e110e6a2de97f73863dc",
+  "timelineSchemaVersion": "presentation-base-media-timeline-v002",
+  "presetRegistryVersion": "vertical-short-preset-registry-v001",
+  "format": "vertical-short-1080x1920",
+  "screenLayoutId": "speaker_only",
+  "canvas": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30,
+    "safeAreaPx": {
+      "top": 38,
+      "right": 43,
+      "bottom": 38,
+      "left": 43
+    }
+  },
+  "layoutRules": {
+    "maxLogicalWidthPerLine": 14,
+    "maxLinesPerMeaningGroup": 2,
+    "characterWidthRule": "U+0000..U+00FF=1; other Unicode code point=2"
+  },
+  "elements": [
+    {
+      "instructionId": "caption-instruction-000001",
+      "kind": "speech-caption",
+      "text": "あ、さあ船長さあ",
+      "indexedLines": [
+        {
+          "lineIndex": 0,
+          "characters": [
+            {
+              "sourceIndex": 0,
+              "character": "あ",
+              "codePoint": 12354,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 1,
+              "character": "、",
+              "codePoint": 12289,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 2,
+              "character": "さ",
+              "codePoint": 12373,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 3,
+              "character": "あ",
+              "codePoint": 12354,
+              "role": "visible"
+            }
+          ],
+          "renderedText": "あ、さあ",
+          "text": "あ、さあ",
+          "codePointIndices": [
+            0,
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "lineIndex": 1,
+          "characters": [
+            {
+              "sourceIndex": 4,
+              "character": "船",
+              "codePoint": 33337,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 5,
+              "character": "長",
+              "codePoint": 38263,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 6,
+              "character": "さ",
+              "codePoint": 12373,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 7,
+              "character": "あ",
+              "codePoint": 12354,
+              "role": "visible"
+            }
+          ],
+          "renderedText": "船長さあ",
+          "text": "船長さあ",
+          "codePointIndices": [
+            4,
+            5,
+            6,
+            7
+          ]
+        }
+      ],
+      "sourceStartMs": 5941162,
+      "sourceEndMs": 5944544,
+      "startFrame": 0,
+      "endFrameExclusive": 101,
+      "displayFrameCount": 101,
+      "requestedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+      "appliedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+      "presetId": "vertical-short-speaker-only-readable-pop-v001",
+      "registryVersion": "vertical-short-preset-registry-v001",
+      "presetRegistryVersion": "vertical-short-preset-registry-v001",
+      "stateId": "caption-core-vertical-speaker-only-v001",
+      "visualState": {
+        "stateId": "caption-core-vertical-speaker-only-v001",
+        "textStyle": {
+          "fontAssetId": "line-seed-jp-extra-bold-v001",
+          "fontSizePx": 134,
+          "fontColor": "#FFFDF8",
+          "borderColor": "#111827",
+          "borderWidthPx": 11,
+          "lineSpacingPercent": 150,
+          "glowColor": "#000000",
+          "glowWidthPx": 17,
+          "glowOpacityPercent": 82
+        },
+        "position": {
+          "preset": "bottom-center",
+          "alignment": "center",
+          "offsetXPercent": 0,
+          "offsetYPercent": -6
+        },
+        "background": null,
+        "layout": {
+          "maxSupportedLogicalWidthPerLine": 14,
+          "maxLines": 2,
+          "singleLine": false,
+          "characterWidthRule": "U+0000..U+00FF=1; other Unicode code point=2"
+        },
+        "transitionId": "quick-fade-4f-v001"
+      },
+      "transition": {
+        "transitionId": "quick-fade-4f-v001",
+        "entry": {
+          "type": "alpha-fade",
+          "frames": 4
+        },
+        "exit": {
+          "type": "alpha-fade",
+          "frames": 4
+        }
+      },
+      "timelineSegmentId": "segment-0001",
+      "targetProvenance": {
+        "targetRefId": "caption-target-000001",
+        "targetType": "caption-target",
+        "sourceAtomIds": [
+          "word-17686",
+          "word-17687",
+          "word-17688",
+          "word-17689",
+          "word-17690",
+          "word-17691",
+          "word-17692",
+          "word-17693"
+        ],
+        "cueId": "caption-cue-000001",
+        "captionTargetId": "caption-target-000001",
+        "lineAtomIds": [
+          [
+            "word-17686",
+            "word-17687",
+            "word-17688",
+            "word-17689"
+          ],
+          [
+            "word-17690",
+            "word-17691",
+            "word-17692",
+            "word-17693"
+          ]
+        ],
+        "startAnchor": {
+          "atomId": "word-17686",
+          "edge": "start"
+        },
+        "endAnchor": {
+          "atomId": "word-17693",
+          "edge": "end"
+        }
+      },
+      "materialRefs": [],
+      "overlaySha256": "24d018bb17d0a5ff6be4bc9a4d2ad177a5756e27d22d5b0ec7586e7e3a68164e"
+    },
+    {
+      "instructionId": "caption-instruction-000002",
+      "kind": "speech-caption",
+      "text": "何かやってる最中でもさあ",
+      "indexedLines": [
+        {
+          "lineIndex": 0,
+          "characters": [
+            {
+              "sourceIndex": 0,
+              "character": "何",
+              "codePoint": 20309,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 1,
+              "character": "か",
+              "codePoint": 12363,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 2,
+              "character": "や",
+              "codePoint": 12420,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 3,
+              "character": "っ",
+              "codePoint": 12387,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 4,
+              "character": "て",
+              "codePoint": 12390,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 5,
+              "character": "る",
+              "codePoint": 12427,
+              "role": "visible"
+            }
+          ],
+          "renderedText": "何かやってる",
+          "text": "何かやってる",
+          "codePointIndices": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ]
+        },
+        {
+          "lineIndex": 1,
+          "characters": [
+            {
+              "sourceIndex": 6,
+              "character": "最",
+              "codePoint": 26368,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 7,
+              "character": "中",
+              "codePoint": 20013,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 8,
+              "character": "で",
+              "codePoint": 12391,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 9,
+              "character": "も",
+              "codePoint": 12418,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 10,
+              "character": "さ",
+              "codePoint": 12373,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 11,
+              "character": "あ",
+              "codePoint": 12354,
+              "role": "visible"
+            }
+          ],
+          "renderedText": "最中でもさあ",
+          "text": "最中でもさあ",
+          "codePointIndices": [
+            6,
+            7,
+            8,
+            9,
+            10,
+            11
+          ]
+        }
+      ],
+      "sourceStartMs": 5944544,
+      "sourceEndMs": 5946345,
+      "startFrame": 101,
+      "endFrameExclusive": 155,
+      "displayFrameCount": 54,
+      "requestedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+      "appliedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+      "presetId": "vertical-short-speaker-only-readable-pop-v001",
+      "registryVersion": "vertical-short-preset-registry-v001",
+      "presetRegistryVersion": "vertical-short-preset-registry-v001",
+      "stateId": "caption-core-vertical-speaker-only-v001",
+      "visualState": {
+        "stateId": "caption-core-vertical-speaker-only-v001",
+        "textStyle": {
+          "fontAssetId": "line-seed-jp-extra-bold-v001",
+          "fontSizePx": 134,
+          "fontColor": "#FFFDF8",
+          "borderColor": "#111827",
+          "borderWidthPx": 11,
+          "lineSpacingPercent": 150,
+          "glowColor": "#000000",
+          "glowWidthPx": 17,
+          "glowOpacityPercent": 82
+        },
+        "position": {
+          "preset": "bottom-center",
+          "alignment": "center",
+          "offsetXPercent": 0,
+          "offsetYPercent": -6
+        },
+        "background": null,
+        "layout": {
+          "maxSupportedLogicalWidthPerLine": 14,
+          "maxLines": 2,
+          "singleLine": false,
+          "characterWidthRule": "U+0000..U+00FF=1; other Unicode code point=2"
+        },
+        "transitionId": "quick-fade-4f-v001"
+      },
+      "transition": {
+        "transitionId": "quick-fade-4f-v001",
+        "entry": {
+          "type": "alpha-fade",
+          "frames": 4
+        },
+        "exit": {
+          "type": "alpha-fade",
+          "frames": 4
+        }
+      },
+      "timelineSegmentId": "segment-0001",
+      "targetProvenance": {
+        "targetRefId": "caption-target-000002",
+        "targetType": "caption-target",
+        "sourceAtomIds": [
+          "word-17694",
+          "word-17695",
+          "word-17696",
+          "word-17697",
+          "word-17698",
+          "word-17699",
+          "word-17700",
+          "word-17701",
+          "word-17702",
+          "word-17703",
+          "word-17704",
+          "word-17705"
+        ],
+        "cueId": "caption-cue-000002",
+        "captionTargetId": "caption-target-000002",
+        "lineAtomIds": [
+          [
+            "word-17694",
+            "word-17695",
+            "word-17696",
+            "word-17697",
+            "word-17698",
+            "word-17699"
+          ],
+          [
+            "word-17700",
+            "word-17701",
+            "word-17702",
+            "word-17703",
+            "word-17704",
+            "word-17705"
+          ]
+        ],
+        "startAnchor": {
+          "atomId": "word-17694",
+          "edge": "start"
+        },
+        "endAnchor": {
+          "atomId": "word-17705",
+          "edge": "end"
+        }
+      },
+      "materialRefs": [],
+      "overlaySha256": "8188150a121ed35c57f5bd3270919bd208f7fd23c15fb988f700721729703fcb"
+    },
+    {
+      "instructionId": "caption-instruction-000003",
+      "kind": "speech-caption",
+      "text": "違うことが気になったら",
+      "indexedLines": [
+        {
+          "lineIndex": 0,
+          "characters": [
+            {
+              "sourceIndex": 0,
+              "character": "違",
+              "codePoint": 36949,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 1,
+              "character": "う",
+              "codePoint": 12358,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 2,
+              "character": "こ",
+              "codePoint": 12371,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 3,
+              "character": "と",
+              "codePoint": 12392,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 4,
+              "character": "が",
+              "codePoint": 12364,
+              "role": "visible"
+            }
+          ],
+          "renderedText": "違うことが",
+          "text": "違うことが",
+          "codePointIndices": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ]
+        },
+        {
+          "lineIndex": 1,
+          "characters": [
+            {
+              "sourceIndex": 5,
+              "character": "気",
+              "codePoint": 27671,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 6,
+              "character": "に",
+              "codePoint": 12395,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 7,
+              "character": "な",
+              "codePoint": 12394,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 8,
+              "character": "っ",
+              "codePoint": 12387,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 9,
+              "character": "た",
+              "codePoint": 12383,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 10,
+              "character": "ら",
+              "codePoint": 12425,
+              "role": "visible"
+            }
+          ],
+          "renderedText": "気になったら",
+          "text": "気になったら",
+          "codePointIndices": [
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+          ]
+        }
+      ],
+      "sourceStartMs": 5946345,
+      "sourceEndMs": 5947406,
+      "startFrame": 155,
+      "endFrameExclusive": 187,
+      "displayFrameCount": 32,
+      "requestedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+      "appliedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+      "presetId": "vertical-short-speaker-only-readable-pop-v001",
+      "registryVersion": "vertical-short-preset-registry-v001",
+      "presetRegistryVersion": "vertical-short-preset-registry-v001",
+      "stateId": "caption-core-vertical-speaker-only-v001",
+      "visualState": {
+        "stateId": "caption-core-vertical-speaker-only-v001",
+        "textStyle": {
+          "fontAssetId": "line-seed-jp-extra-bold-v001",
+          "fontSizePx": 134,
+          "fontColor": "#FFFDF8",
+          "borderColor": "#111827",
+          "borderWidthPx": 11,
+          "lineSpacingPercent": 150,
+          "glowColor": "#000000",
+          "glowWidthPx": 17,
+          "glowOpacityPercent": 82
+        },
+        "position": {
+          "preset": "bottom-center",
+          "alignment": "center",
+          "offsetXPercent": 0,
+          "offsetYPercent": -6
+        },
+        "background": null,
+        "layout": {
+          "maxSupportedLogicalWidthPerLine": 14,
+          "maxLines": 2,
+          "singleLine": false,
+          "characterWidthRule": "U+0000..U+00FF=1; other Unicode code point=2"
+        },
+        "transitionId": "quick-fade-4f-v001"
+      },
+      "transition": {
+        "transitionId": "quick-fade-4f-v001",
+        "entry": {
+          "type": "alpha-fade",
+          "frames": 4
+        },
+        "exit": {
+          "type": "alpha-fade",
+          "frames": 4
+        }
+      },
+      "timelineSegmentId": "segment-0001",
+      "targetProvenance": {
+        "targetRefId": "caption-target-000003",
+        "targetType": "caption-target",
+        "sourceAtomIds": [
+          "word-17706",
+          "word-17707",
+          "word-17708",
+          "word-17709",
+          "word-17710",
+          "word-17711",
+          "word-17712",
+          "word-17713",
+          "word-17714",
+          "word-17715",
+          "word-17716"
+        ],
+        "cueId": "caption-cue-000003",
+        "captionTargetId": "caption-target-000003",
+        "lineAtomIds": [
+          [
+            "word-17706",
+            "word-17707",
+            "word-17708",
+            "word-17709",
+            "word-17710"
+          ],
+          [
+            "word-17711",
+            "word-17712",
+            "word-17713",
+            "word-17714",
+            "word-17715",
+            "word-17716"
+          ]
+        ],
+        "startAnchor": {
+          "atomId": "word-17706",
+          "edge": "start"
+        },
+        "endAnchor": {
+          "atomId": "word-17716",
+          "edge": "end"
+        }
+      },
+      "materialRefs": [],
+      "overlaySha256": "8e42b10d91e080fa89a5dbb1607f8ea3e9d437d6fd7d6a06368e96ea0053ca2e"
+    },
+    {
+      "instructionId": "caption-instruction-000004",
+      "kind": "speech-caption",
+      "text": "それやり始めちゃうんだよね",
+      "indexedLines": [
+        {
+          "lineIndex": 0,
+          "characters": [
+            {
+              "sourceIndex": 0,
+              "character": "そ",
+              "codePoint": 12381,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 1,
+              "character": "れ",
+              "codePoint": 12428,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 2,
+              "character": "や",
+              "codePoint": 12420,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 3,
+              "character": "り",
+              "codePoint": 12426,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 4,
+              "character": "始",
+              "codePoint": 22987,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 5,
+              "character": "め",
+              "codePoint": 12417,
+              "role": "visible"
+            }
+          ],
+          "renderedText": "それやり始め",
+          "text": "それやり始め",
+          "codePointIndices": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ]
+        },
+        {
+          "lineIndex": 1,
+          "characters": [
+            {
+              "sourceIndex": 6,
+              "character": "ち",
+              "codePoint": 12385,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 7,
+              "character": "ゃ",
+              "codePoint": 12419,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 8,
+              "character": "う",
+              "codePoint": 12358,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 9,
+              "character": "ん",
+              "codePoint": 12435,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 10,
+              "character": "だ",
+              "codePoint": 12384,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 11,
+              "character": "よ",
+              "codePoint": 12424,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 12,
+              "character": "ね",
+              "codePoint": 12397,
+              "role": "visible"
+            }
+          ],
+          "renderedText": "ちゃうんだよね",
+          "text": "ちゃうんだよね",
+          "codePointIndices": [
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12
+          ]
+        }
+      ],
+      "sourceStartMs": 5947406,
+      "sourceEndMs": 5948907,
+      "startFrame": 187,
+      "endFrameExclusive": 232,
+      "displayFrameCount": 45,
+      "requestedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+      "appliedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+      "presetId": "vertical-short-speaker-only-readable-pop-v001",
+      "registryVersion": "vertical-short-preset-registry-v001",
+      "presetRegistryVersion": "vertical-short-preset-registry-v001",
+      "stateId": "caption-core-vertical-speaker-only-v001",
+      "visualState": {
+        "stateId": "caption-core-vertical-speaker-only-v001",
+        "textStyle": {
+          "fontAssetId": "line-seed-jp-extra-bold-v001",
+          "fontSizePx": 134,
+          "fontColor": "#FFFDF8",
+          "borderColor": "#111827",
+          "borderWidthPx": 11,
+          "lineSpacingPercent": 150,
+          "glowColor": "#000000",
+          "glowWidthPx": 17,
+          "glowOpacityPercent": 82
+        },
+        "position": {
+          "preset": "bottom-center",
+          "alignment": "center",
+          "offsetXPercent": 0,
+          "offsetYPercent": -6
+        },
+        "background": null,
+        "layout": {
+          "maxSupportedLogicalWidthPerLine": 14,
+          "maxLines": 2,
+          "singleLine": false,
+          "characterWidthRule": "U+0000..U+00FF=1; other Unicode code point=2"
+        },
+        "transitionId": "quick-fade-4f-v001"
+      },
+      "transition": {
+        "transitionId": "quick-fade-4f-v001",
+        "entry": {
+          "type": "alpha-fade",
+          "frames": 4
+        },
+        "exit": {
+          "type": "alpha-fade",
+          "frames": 4
+        }
+      },
+      "timelineSegmentId": "segment-0001",
+      "targetProvenance": {
+        "targetRefId": "caption-target-000004",
+        "targetType": "caption-target",
+        "sourceAtomIds": [
+          "word-17717",
+          "word-17718",
+          "word-17719",
+          "word-17720",
+          "word-17721",
+          "word-17722",
+          "word-17723",
+          "word-17724",
+          "word-17725",
+          "word-17726",
+          "word-17727",
+          "word-17728",
+          "word-17729"
+        ],
+        "cueId": "caption-cue-000004",
+        "captionTargetId": "caption-target-000004",
+        "lineAtomIds": [
+          [
+            "word-17717",
+            "word-17718",
+            "word-17719",
+            "word-17720",
+            "word-17721",
+            "word-17722"
+          ],
+          [
+            "word-17723",
+            "word-17724",
+            "word-17725",
+            "word-17726",
+            "word-17727",
+            "word-17728",
+            "word-17729"
+          ]
+        ],
+        "startAnchor": {
+          "atomId": "word-17717",
+          "edge": "start"
+        },
+        "endAnchor": {
+          "atomId": "word-17729",
+          "edge": "end"
+        }
+      },
+      "materialRefs": [],
+      "overlaySha256": "725bb1bded3766ac23584d8db54fccf8d949a26c9f5ad515ff7ff2f0813fd3b4"
+    },
+    {
+      "instructionId": "caption-instruction-000005",
+      "kind": "speech-caption",
+      "text": "これやばいよね",
+      "indexedLines": [
+        {
+          "lineIndex": 0,
+          "characters": [
+            {
+              "sourceIndex": 0,
+              "character": "こ",
+              "codePoint": 12371,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 1,
+              "character": "れ",
+              "codePoint": 12428,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 2,
+              "character": "や",
+              "codePoint": 12420,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 3,
+              "character": "ば",
+              "codePoint": 12400,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 4,
+              "character": "い",
+              "codePoint": 12356,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 5,
+              "character": "よ",
+              "codePoint": 12424,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 6,
+              "character": "ね",
+              "codePoint": 12397,
+              "role": "visible"
+            }
+          ],
+          "renderedText": "これやばいよね",
+          "text": "これやばいよね",
+          "codePointIndices": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6
+          ]
+        }
+      ],
+      "sourceStartMs": 5948907,
+      "sourceEndMs": 5949827,
+      "startFrame": 232,
+      "endFrameExclusive": 260,
+      "displayFrameCount": 28,
+      "requestedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+      "appliedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+      "presetId": "vertical-short-speaker-only-readable-pop-v001",
+      "registryVersion": "vertical-short-preset-registry-v001",
+      "presetRegistryVersion": "vertical-short-preset-registry-v001",
+      "stateId": "caption-core-vertical-speaker-only-v001",
+      "visualState": {
+        "stateId": "caption-core-vertical-speaker-only-v001",
+        "textStyle": {
+          "fontAssetId": "line-seed-jp-extra-bold-v001",
+          "fontSizePx": 134,
+          "fontColor": "#FFFDF8",
+          "borderColor": "#111827",
+          "borderWidthPx": 11,
+          "lineSpacingPercent": 150,
+          "glowColor": "#000000",
+          "glowWidthPx": 17,
+          "glowOpacityPercent": 82
+        },
+        "position": {
+          "preset": "bottom-center",
+          "alignment": "center",
+          "offsetXPercent": 0,
+          "offsetYPercent": -6
+        },
+        "background": null,
+        "layout": {
+          "maxSupportedLogicalWidthPerLine": 14,
+          "maxLines": 2,
+          "singleLine": false,
+          "characterWidthRule": "U+0000..U+00FF=1; other Unicode code point=2"
+        },
+        "transitionId": "quick-fade-4f-v001"
+      },
+      "transition": {
+        "transitionId": "quick-fade-4f-v001",
+        "entry": {
+          "type": "alpha-fade",
+          "frames": 4
+        },
+        "exit": {
+          "type": "alpha-fade",
+          "frames": 4
+        }
+      },
+      "timelineSegmentId": "segment-0001",
+      "targetProvenance": {
+        "targetRefId": "caption-target-000005",
+        "targetType": "caption-target",
+        "sourceAtomIds": [
+          "word-17730",
+          "word-17731",
+          "word-17732",
+          "word-17733",
+          "word-17734",
+          "word-17735",
+          "word-17736"
+        ],
+        "cueId": "caption-cue-000005",
+        "captionTargetId": "caption-target-000005",
+        "lineAtomIds": [
+          [
+            "word-17730",
+            "word-17731",
+            "word-17732",
+            "word-17733",
+            "word-17734",
+            "word-17735",
+            "word-17736"
+          ]
+        ],
+        "startAnchor": {
+          "atomId": "word-17730",
+          "edge": "start"
+        },
+        "endAnchor": {
+          "atomId": "word-17736",
+          "edge": "end"
+        }
+      },
+      "materialRefs": [],
+      "overlaySha256": "129524f3c7f511238fd0f837223d48a98515f379fc3c3bc78c68b7a08d07b9ce"
+    },
+    {
+      "instructionId": "caption-instruction-000006",
+      "kind": "speech-caption",
+      "text": "なんか最近さあ",
+      "indexedLines": [
+        {
+          "lineIndex": 0,
+          "characters": [
+            {
+              "sourceIndex": 0,
+              "character": "な",
+              "codePoint": 12394,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 1,
+              "character": "ん",
+              "codePoint": 12435,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 2,
+              "character": "か",
+              "codePoint": 12363,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 3,
+              "character": "最",
+              "codePoint": 26368,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 4,
+              "character": "近",
+              "codePoint": 36817,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 5,
+              "character": "さ",
+              "codePoint": 12373,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 6,
+              "character": "あ",
+              "codePoint": 12354,
+              "role": "visible"
+            }
+          ],
+          "renderedText": "なんか最近さあ",
+          "text": "なんか最近さあ",
+          "codePointIndices": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6
+          ]
+        }
+      ],
+      "sourceStartMs": 5949827,
+      "sourceEndMs": 5950608,
+      "startFrame": 260,
+      "endFrameExclusive": 283,
+      "displayFrameCount": 23,
+      "requestedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+      "appliedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+      "presetId": "vertical-short-speaker-only-readable-pop-v001",
+      "registryVersion": "vertical-short-preset-registry-v001",
+      "presetRegistryVersion": "vertical-short-preset-registry-v001",
+      "stateId": "caption-core-vertical-speaker-only-v001",
+      "visualState": {
+        "stateId": "caption-core-vertical-speaker-only-v001",
+        "textStyle": {
+          "fontAssetId": "line-seed-jp-extra-bold-v001",
+          "fontSizePx": 134,
+          "fontColor": "#FFFDF8",
+          "borderColor": "#111827",
+          "borderWidthPx": 11,
+          "lineSpacingPercent": 150,
+          "glowColor": "#000000",
+          "glowWidthPx": 17,
+          "glowOpacityPercent": 82
+        },
+        "position": {
+          "preset": "bottom-center",
+          "alignment": "center",
+          "offsetXPercent": 0,
+          "offsetYPercent": -6
+        },
+        "background": null,
+        "layout": {
+          "maxSupportedLogicalWidthPerLine": 14,
+          "maxLines": 2,
+          "singleLine": false,
+          "characterWidthRule": "U+0000..U+00FF=1; other Unicode code point=2"
+        },
+        "transitionId": "quick-fade-4f-v001"
+      },
+      "transition": {
+        "transitionId": "quick-fade-4f-v001",
+        "entry": {
+          "type": "alpha-fade",
+          "frames": 4
+        },
+        "exit": {
+          "type": "alpha-fade",
+          "frames": 4
+        }
+      },
+      "timelineSegmentId": "segment-0001",
+      "targetProvenance": {
+        "targetRefId": "caption-target-000006",
+        "targetType": "caption-target",
+        "sourceAtomIds": [
+          "word-17737",
+          "word-17738",
+          "word-17739",
+          "word-17740",
+          "word-17741",
+          "word-17742",
+          "word-17743"
+        ],
+        "cueId": "caption-cue-000006",
+        "captionTargetId": "caption-target-000006",
+        "lineAtomIds": [
+          [
+            "word-17737",
+            "word-17738",
+            "word-17739",
+            "word-17740",
+            "word-17741",
+            "word-17742",
+            "word-17743"
+          ]
+        ],
+        "startAnchor": {
+          "atomId": "word-17737",
+          "edge": "start"
+        },
+        "endAnchor": {
+          "atomId": "word-17743",
+          "edge": "end"
+        }
+      },
+      "materialRefs": [],
+      "overlaySha256": "45536c7740fb41c8ea4da070d5483af320c3028c200f09e9200a0e6a2ede81be"
+    },
+    {
+      "instructionId": "caption-instruction-000007",
+      "kind": "speech-caption",
+      "text": "引っ越しがあってさあ",
+      "indexedLines": [
+        {
+          "lineIndex": 0,
+          "characters": [
+            {
+              "sourceIndex": 0,
+              "character": "引",
+              "codePoint": 24341,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 1,
+              "character": "っ",
+              "codePoint": 12387,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 2,
+              "character": "越",
+              "codePoint": 36234,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 3,
+              "character": "し",
+              "codePoint": 12375,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 4,
+              "character": "が",
+              "codePoint": 12364,
+              "role": "visible"
+            }
+          ],
+          "renderedText": "引っ越しが",
+          "text": "引っ越しが",
+          "codePointIndices": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ]
+        },
+        {
+          "lineIndex": 1,
+          "characters": [
+            {
+              "sourceIndex": 5,
+              "character": "あ",
+              "codePoint": 12354,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 6,
+              "character": "っ",
+              "codePoint": 12387,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 7,
+              "character": "て",
+              "codePoint": 12390,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 8,
+              "character": "さ",
+              "codePoint": 12373,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 9,
+              "character": "あ",
+              "codePoint": 12354,
+              "role": "visible"
+            }
+          ],
+          "renderedText": "あってさあ",
+          "text": "あってさあ",
+          "codePointIndices": [
+            5,
+            6,
+            7,
+            8,
+            9
+          ]
+        }
+      ],
+      "sourceStartMs": 5950608,
+      "sourceEndMs": 5952309,
+      "startFrame": 283,
+      "endFrameExclusive": 334,
+      "displayFrameCount": 51,
+      "requestedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+      "appliedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+      "presetId": "vertical-short-speaker-only-readable-pop-v001",
+      "registryVersion": "vertical-short-preset-registry-v001",
+      "presetRegistryVersion": "vertical-short-preset-registry-v001",
+      "stateId": "caption-core-vertical-speaker-only-v001",
+      "visualState": {
+        "stateId": "caption-core-vertical-speaker-only-v001",
+        "textStyle": {
+          "fontAssetId": "line-seed-jp-extra-bold-v001",
+          "fontSizePx": 134,
+          "fontColor": "#FFFDF8",
+          "borderColor": "#111827",
+          "borderWidthPx": 11,
+          "lineSpacingPercent": 150,
+          "glowColor": "#000000",
+          "glowWidthPx": 17,
+          "glowOpacityPercent": 82
+        },
+        "position": {
+          "preset": "bottom-center",
+          "alignment": "center",
+          "offsetXPercent": 0,
+          "offsetYPercent": -6
+        },
+        "background": null,
+        "layout": {
+          "maxSupportedLogicalWidthPerLine": 14,
+          "maxLines": 2,
+          "singleLine": false,
+          "characterWidthRule": "U+0000..U+00FF=1; other Unicode code point=2"
+        },
+        "transitionId": "quick-fade-4f-v001"
+      },
+      "transition": {
+        "transitionId": "quick-fade-4f-v001",
+        "entry": {
+          "type": "alpha-fade",
+          "frames": 4
+        },
+        "exit": {
+          "type": "alpha-fade",
+          "frames": 4
+        }
+      },
+      "timelineSegmentId": "segment-0001",
+      "targetProvenance": {
+        "targetRefId": "caption-target-000007",
+        "targetType": "caption-target",
+        "sourceAtomIds": [
+          "word-17744",
+          "word-17745",
+          "word-17746",
+          "word-17747",
+          "word-17748",
+          "word-17749",
+          "word-17750",
+          "word-17751",
+          "word-17752",
+          "word-17753"
+        ],
+        "cueId": "caption-cue-000007",
+        "captionTargetId": "caption-target-000007",
+        "lineAtomIds": [
+          [
+            "word-17744",
+            "word-17745",
+            "word-17746",
+            "word-17747",
+            "word-17748"
+          ],
+          [
+            "word-17749",
+            "word-17750",
+            "word-17751",
+            "word-17752",
+            "word-17753"
+          ]
+        ],
+        "startAnchor": {
+          "atomId": "word-17744",
+          "edge": "start"
+        },
+        "endAnchor": {
+          "atomId": "word-17753",
+          "edge": "end"
+        }
+      },
+      "materialRefs": [],
+      "overlaySha256": "a216e88a45ec245f3c18c4072cbc047dc389c764406e964eecd907e73106d046"
+    },
+    {
+      "instructionId": "caption-instruction-000008",
+      "kind": "speech-caption",
+      "text": "片付けてるんだけど",
+      "indexedLines": [
+        {
+          "lineIndex": 0,
+          "characters": [
+            {
+              "sourceIndex": 0,
+              "character": "片",
+              "codePoint": 29255,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 1,
+              "character": "付",
+              "codePoint": 20184,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 2,
+              "character": "け",
+              "codePoint": 12369,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 3,
+              "character": "て",
+              "codePoint": 12390,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 4,
+              "character": "る",
+              "codePoint": 12427,
+              "role": "visible"
+            }
+          ],
+          "renderedText": "片付けてる",
+          "text": "片付けてる",
+          "codePointIndices": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ]
+        },
+        {
+          "lineIndex": 1,
+          "characters": [
+            {
+              "sourceIndex": 5,
+              "character": "ん",
+              "codePoint": 12435,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 6,
+              "character": "だ",
+              "codePoint": 12384,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 7,
+              "character": "け",
+              "codePoint": 12369,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 8,
+              "character": "ど",
+              "codePoint": 12393,
+              "role": "visible"
+            }
+          ],
+          "renderedText": "んだけど",
+          "text": "んだけど",
+          "codePointIndices": [
+            5,
+            6,
+            7,
+            8
+          ]
+        }
+      ],
+      "sourceStartMs": 5952309,
+      "sourceEndMs": 5953610,
+      "startFrame": 334,
+      "endFrameExclusive": 373,
+      "displayFrameCount": 39,
+      "requestedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+      "appliedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+      "presetId": "vertical-short-speaker-only-readable-pop-v001",
+      "registryVersion": "vertical-short-preset-registry-v001",
+      "presetRegistryVersion": "vertical-short-preset-registry-v001",
+      "stateId": "caption-core-vertical-speaker-only-v001",
+      "visualState": {
+        "stateId": "caption-core-vertical-speaker-only-v001",
+        "textStyle": {
+          "fontAssetId": "line-seed-jp-extra-bold-v001",
+          "fontSizePx": 134,
+          "fontColor": "#FFFDF8",
+          "borderColor": "#111827",
+          "borderWidthPx": 11,
+          "lineSpacingPercent": 150,
+          "glowColor": "#000000",
+          "glowWidthPx": 17,
+          "glowOpacityPercent": 82
+        },
+        "position": {
+          "preset": "bottom-center",
+          "alignment": "center",
+          "offsetXPercent": 0,
+          "offsetYPercent": -6
+        },
+        "background": null,
+        "layout": {
+          "maxSupportedLogicalWidthPerLine": 14,
+          "maxLines": 2,
+          "singleLine": false,
+          "characterWidthRule": "U+0000..U+00FF=1; other Unicode code point=2"
+        },
+        "transitionId": "quick-fade-4f-v001"
+      },
+      "transition": {
+        "transitionId": "quick-fade-4f-v001",
+        "entry": {
+          "type": "alpha-fade",
+          "frames": 4
+        },
+        "exit": {
+          "type": "alpha-fade",
+          "frames": 4
+        }
+      },
+      "timelineSegmentId": "segment-0001",
+      "targetProvenance": {
+        "targetRefId": "caption-target-000008",
+        "targetType": "caption-target",
+        "sourceAtomIds": [
+          "word-17754",
+          "word-17755",
+          "word-17756",
+          "word-17757",
+          "word-17758",
+          "word-17759",
+          "word-17760",
+          "word-17761",
+          "word-17762"
+        ],
+        "cueId": "caption-cue-000008",
+        "captionTargetId": "caption-target-000008",
+        "lineAtomIds": [
+          [
+            "word-17754",
+            "word-17755",
+            "word-17756",
+            "word-17757",
+            "word-17758"
+          ],
+          [
+            "word-17759",
+            "word-17760",
+            "word-17761",
+            "word-17762"
+          ]
+        ],
+        "startAnchor": {
+          "atomId": "word-17754",
+          "edge": "start"
+        },
+        "endAnchor": {
+          "atomId": "word-17762",
+          "edge": "end"
+        }
+      },
+      "materialRefs": [],
+      "overlaySha256": "4fe095be7502846a8b0c463804adac66e2e06924cd592b69728a6bee5f68aa7d"
+    },
+    {
+      "instructionId": "caption-instruction-000009",
+      "kind": "speech-caption",
+      "text": "最中にそうだ",
+      "indexedLines": [
+        {
+          "lineIndex": 0,
+          "characters": [
+            {
+              "sourceIndex": 0,
+              "character": "最",
+              "codePoint": 26368,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 1,
+              "character": "中",
+              "codePoint": 20013,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 2,
+              "character": "に",
+              "codePoint": 12395,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 3,
+              "character": "そ",
+              "codePoint": 12381,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 4,
+              "character": "う",
+              "codePoint": 12358,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 5,
+              "character": "だ",
+              "codePoint": 12384,
+              "role": "visible"
+            }
+          ],
+          "renderedText": "最中にそうだ",
+          "text": "最中にそうだ",
+          "codePointIndices": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ]
+        }
+      ],
+      "sourceStartMs": 5953610,
+      "sourceEndMs": 5954771,
+      "startFrame": 373,
+      "endFrameExclusive": 408,
+      "displayFrameCount": 35,
+      "requestedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+      "appliedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+      "presetId": "vertical-short-speaker-only-readable-pop-v001",
+      "registryVersion": "vertical-short-preset-registry-v001",
+      "presetRegistryVersion": "vertical-short-preset-registry-v001",
+      "stateId": "caption-core-vertical-speaker-only-v001",
+      "visualState": {
+        "stateId": "caption-core-vertical-speaker-only-v001",
+        "textStyle": {
+          "fontAssetId": "line-seed-jp-extra-bold-v001",
+          "fontSizePx": 134,
+          "fontColor": "#FFFDF8",
+          "borderColor": "#111827",
+          "borderWidthPx": 11,
+          "lineSpacingPercent": 150,
+          "glowColor": "#000000",
+          "glowWidthPx": 17,
+          "glowOpacityPercent": 82
+        },
+        "position": {
+          "preset": "bottom-center",
+          "alignment": "center",
+          "offsetXPercent": 0,
+          "offsetYPercent": -6
+        },
+        "background": null,
+        "layout": {
+          "maxSupportedLogicalWidthPerLine": 14,
+          "maxLines": 2,
+          "singleLine": false,
+          "characterWidthRule": "U+0000..U+00FF=1; other Unicode code point=2"
+        },
+        "transitionId": "quick-fade-4f-v001"
+      },
+      "transition": {
+        "transitionId": "quick-fade-4f-v001",
+        "entry": {
+          "type": "alpha-fade",
+          "frames": 4
+        },
+        "exit": {
+          "type": "alpha-fade",
+          "frames": 4
+        }
+      },
+      "timelineSegmentId": "segment-0001",
+      "targetProvenance": {
+        "targetRefId": "caption-target-000009",
+        "targetType": "caption-target",
+        "sourceAtomIds": [
+          "word-17763",
+          "word-17764",
+          "word-17765",
+          "word-17766",
+          "word-17767",
+          "word-17768"
+        ],
+        "cueId": "caption-cue-000009",
+        "captionTargetId": "caption-target-000009",
+        "lineAtomIds": [
+          [
+            "word-17763",
+            "word-17764",
+            "word-17765",
+            "word-17766",
+            "word-17767",
+            "word-17768"
+          ]
+        ],
+        "startAnchor": {
+          "atomId": "word-17763",
+          "edge": "start"
+        },
+        "endAnchor": {
+          "atomId": "word-17768",
+          "edge": "end"
+        }
+      },
+      "materialRefs": [],
+      "overlaySha256": "c01cedc68d6e651e4248c3953b4248f317e067d1abe90ef8eec263e6795117c2"
+    },
+    {
+      "instructionId": "caption-instruction-000010",
+      "kind": "speech-caption",
+      "text": "あれやらないとって思ったら",
+      "indexedLines": [
+        {
+          "lineIndex": 0,
+          "characters": [
+            {
+              "sourceIndex": 0,
+              "character": "あ",
+              "codePoint": 12354,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 1,
+              "character": "れ",
+              "codePoint": 12428,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 2,
+              "character": "や",
+              "codePoint": 12420,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 3,
+              "character": "ら",
+              "codePoint": 12425,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 4,
+              "character": "な",
+              "codePoint": 12394,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 5,
+              "character": "い",
+              "codePoint": 12356,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 6,
+              "character": "と",
+              "codePoint": 12392,
+              "role": "visible"
+            }
+          ],
+          "renderedText": "あれやらないと",
+          "text": "あれやらないと",
+          "codePointIndices": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6
+          ]
+        },
+        {
+          "lineIndex": 1,
+          "characters": [
+            {
+              "sourceIndex": 7,
+              "character": "っ",
+              "codePoint": 12387,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 8,
+              "character": "て",
+              "codePoint": 12390,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 9,
+              "character": "思",
+              "codePoint": 24605,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 10,
+              "character": "っ",
+              "codePoint": 12387,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 11,
+              "character": "た",
+              "codePoint": 12383,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 12,
+              "character": "ら",
+              "codePoint": 12425,
+              "role": "visible"
+            }
+          ],
+          "renderedText": "って思ったら",
+          "text": "って思ったら",
+          "codePointIndices": [
+            7,
+            8,
+            9,
+            10,
+            11,
+            12
+          ]
+        }
+      ],
+      "sourceStartMs": 5954771,
+      "sourceEndMs": 5955951,
+      "startFrame": 408,
+      "endFrameExclusive": 444,
+      "displayFrameCount": 36,
+      "requestedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+      "appliedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+      "presetId": "vertical-short-speaker-only-readable-pop-v001",
+      "registryVersion": "vertical-short-preset-registry-v001",
+      "presetRegistryVersion": "vertical-short-preset-registry-v001",
+      "stateId": "caption-core-vertical-speaker-only-v001",
+      "visualState": {
+        "stateId": "caption-core-vertical-speaker-only-v001",
+        "textStyle": {
+          "fontAssetId": "line-seed-jp-extra-bold-v001",
+          "fontSizePx": 134,
+          "fontColor": "#FFFDF8",
+          "borderColor": "#111827",
+          "borderWidthPx": 11,
+          "lineSpacingPercent": 150,
+          "glowColor": "#000000",
+          "glowWidthPx": 17,
+          "glowOpacityPercent": 82
+        },
+        "position": {
+          "preset": "bottom-center",
+          "alignment": "center",
+          "offsetXPercent": 0,
+          "offsetYPercent": -6
+        },
+        "background": null,
+        "layout": {
+          "maxSupportedLogicalWidthPerLine": 14,
+          "maxLines": 2,
+          "singleLine": false,
+          "characterWidthRule": "U+0000..U+00FF=1; other Unicode code point=2"
+        },
+        "transitionId": "quick-fade-4f-v001"
+      },
+      "transition": {
+        "transitionId": "quick-fade-4f-v001",
+        "entry": {
+          "type": "alpha-fade",
+          "frames": 4
+        },
+        "exit": {
+          "type": "alpha-fade",
+          "frames": 4
+        }
+      },
+      "timelineSegmentId": "segment-0001",
+      "targetProvenance": {
+        "targetRefId": "caption-target-000010",
+        "targetType": "caption-target",
+        "sourceAtomIds": [
+          "word-17769",
+          "word-17770",
+          "word-17771",
+          "word-17772",
+          "word-17773",
+          "word-17774",
+          "word-17775",
+          "word-17776",
+          "word-17777",
+          "word-17778",
+          "word-17779",
+          "word-17780",
+          "word-17781"
+        ],
+        "cueId": "caption-cue-000010",
+        "captionTargetId": "caption-target-000010",
+        "lineAtomIds": [
+          [
+            "word-17769",
+            "word-17770",
+            "word-17771",
+            "word-17772",
+            "word-17773",
+            "word-17774",
+            "word-17775"
+          ],
+          [
+            "word-17776",
+            "word-17777",
+            "word-17778",
+            "word-17779",
+            "word-17780",
+            "word-17781"
+          ]
+        ],
+        "startAnchor": {
+          "atomId": "word-17769",
+          "edge": "start"
+        },
+        "endAnchor": {
+          "atomId": "word-17781",
+          "edge": "end"
+        }
+      },
+      "materialRefs": [],
+      "overlaySha256": "0784be0e8489def3e0c0ecbc3bda1ef482dbfab84fd03eea1c616392671a6e3f"
+    },
+    {
+      "instructionId": "caption-instruction-000011",
+      "kind": "speech-caption",
+      "text": "やり始めるからあっちこっちで",
+      "indexedLines": [
+        {
+          "lineIndex": 0,
+          "characters": [
+            {
+              "sourceIndex": 0,
+              "character": "や",
+              "codePoint": 12420,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 1,
+              "character": "り",
+              "codePoint": 12426,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 2,
+              "character": "始",
+              "codePoint": 22987,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 3,
+              "character": "め",
+              "codePoint": 12417,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 4,
+              "character": "る",
+              "codePoint": 12427,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 5,
+              "character": "か",
+              "codePoint": 12363,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 6,
+              "character": "ら",
+              "codePoint": 12425,
+              "role": "visible"
+            }
+          ],
+          "renderedText": "やり始めるから",
+          "text": "やり始めるから",
+          "codePointIndices": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6
+          ]
+        },
+        {
+          "lineIndex": 1,
+          "characters": [
+            {
+              "sourceIndex": 7,
+              "character": "あ",
+              "codePoint": 12354,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 8,
+              "character": "っ",
+              "codePoint": 12387,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 9,
+              "character": "ち",
+              "codePoint": 12385,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 10,
+              "character": "こ",
+              "codePoint": 12371,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 11,
+              "character": "っ",
+              "codePoint": 12387,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 12,
+              "character": "ち",
+              "codePoint": 12385,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 13,
+              "character": "で",
+              "codePoint": 12391,
+              "role": "visible"
+            }
+          ],
+          "renderedText": "あっちこっちで",
+          "text": "あっちこっちで",
+          "codePointIndices": [
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13
+          ]
+        }
+      ],
+      "sourceStartMs": 5955951,
+      "sourceEndMs": 5958653,
+      "startFrame": 444,
+      "endFrameExclusive": 525,
+      "displayFrameCount": 81,
+      "requestedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+      "appliedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+      "presetId": "vertical-short-speaker-only-readable-pop-v001",
+      "registryVersion": "vertical-short-preset-registry-v001",
+      "presetRegistryVersion": "vertical-short-preset-registry-v001",
+      "stateId": "caption-core-vertical-speaker-only-v001",
+      "visualState": {
+        "stateId": "caption-core-vertical-speaker-only-v001",
+        "textStyle": {
+          "fontAssetId": "line-seed-jp-extra-bold-v001",
+          "fontSizePx": 134,
+          "fontColor": "#FFFDF8",
+          "borderColor": "#111827",
+          "borderWidthPx": 11,
+          "lineSpacingPercent": 150,
+          "glowColor": "#000000",
+          "glowWidthPx": 17,
+          "glowOpacityPercent": 82
+        },
+        "position": {
+          "preset": "bottom-center",
+          "alignment": "center",
+          "offsetXPercent": 0,
+          "offsetYPercent": -6
+        },
+        "background": null,
+        "layout": {
+          "maxSupportedLogicalWidthPerLine": 14,
+          "maxLines": 2,
+          "singleLine": false,
+          "characterWidthRule": "U+0000..U+00FF=1; other Unicode code point=2"
+        },
+        "transitionId": "quick-fade-4f-v001"
+      },
+      "transition": {
+        "transitionId": "quick-fade-4f-v001",
+        "entry": {
+          "type": "alpha-fade",
+          "frames": 4
+        },
+        "exit": {
+          "type": "alpha-fade",
+          "frames": 4
+        }
+      },
+      "timelineSegmentId": "segment-0001",
+      "targetProvenance": {
+        "targetRefId": "caption-target-000011",
+        "targetType": "caption-target",
+        "sourceAtomIds": [
+          "word-17782",
+          "word-17783",
+          "word-17784",
+          "word-17785",
+          "word-17786",
+          "word-17787",
+          "word-17788",
+          "word-17789",
+          "word-17790",
+          "word-17791",
+          "word-17792",
+          "word-17793",
+          "word-17794",
+          "word-17795"
+        ],
+        "cueId": "caption-cue-000011",
+        "captionTargetId": "caption-target-000011",
+        "lineAtomIds": [
+          [
+            "word-17782",
+            "word-17783",
+            "word-17784",
+            "word-17785",
+            "word-17786",
+            "word-17787",
+            "word-17788"
+          ],
+          [
+            "word-17789",
+            "word-17790",
+            "word-17791",
+            "word-17792",
+            "word-17793",
+            "word-17794",
+            "word-17795"
+          ]
+        ],
+        "startAnchor": {
+          "atomId": "word-17782",
+          "edge": "start"
+        },
+        "endAnchor": {
+          "atomId": "word-17795",
+          "edge": "end"
+        }
+      },
+      "materialRefs": [],
+      "overlaySha256": "323c33457d40301c0f9e4c840b41111e6ab3cee64c2869f734dbabb5606f2c2c"
+    },
+    {
+      "instructionId": "caption-instruction-000012",
+      "kind": "speech-caption",
+      "text": "30%だけ進んだものが",
+      "indexedLines": [
+        {
+          "lineIndex": 0,
+          "characters": [
+            {
+              "sourceIndex": 0,
+              "character": "3",
+              "codePoint": 51,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 1,
+              "character": "0",
+              "codePoint": 48,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 2,
+              "character": "%",
+              "codePoint": 37,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 3,
+              "character": "だ",
+              "codePoint": 12384,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 4,
+              "character": "け",
+              "codePoint": 12369,
+              "role": "visible"
+            }
+          ],
+          "renderedText": "30%だけ",
+          "text": "30%だけ",
+          "codePointIndices": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ]
+        },
+        {
+          "lineIndex": 1,
+          "characters": [
+            {
+              "sourceIndex": 5,
+              "character": "進",
+              "codePoint": 36914,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 6,
+              "character": "ん",
+              "codePoint": 12435,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 7,
+              "character": "だ",
+              "codePoint": 12384,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 8,
+              "character": "も",
+              "codePoint": 12418,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 9,
+              "character": "の",
+              "codePoint": 12398,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 10,
+              "character": "が",
+              "codePoint": 12364,
+              "role": "visible"
+            }
+          ],
+          "renderedText": "進んだものが",
+          "text": "進んだものが",
+          "codePointIndices": [
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+          ]
+        }
+      ],
+      "sourceStartMs": 5958653,
+      "sourceEndMs": 5960254,
+      "startFrame": 525,
+      "endFrameExclusive": 573,
+      "displayFrameCount": 48,
+      "requestedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+      "appliedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+      "presetId": "vertical-short-speaker-only-readable-pop-v001",
+      "registryVersion": "vertical-short-preset-registry-v001",
+      "presetRegistryVersion": "vertical-short-preset-registry-v001",
+      "stateId": "caption-core-vertical-speaker-only-v001",
+      "visualState": {
+        "stateId": "caption-core-vertical-speaker-only-v001",
+        "textStyle": {
+          "fontAssetId": "line-seed-jp-extra-bold-v001",
+          "fontSizePx": 134,
+          "fontColor": "#FFFDF8",
+          "borderColor": "#111827",
+          "borderWidthPx": 11,
+          "lineSpacingPercent": 150,
+          "glowColor": "#000000",
+          "glowWidthPx": 17,
+          "glowOpacityPercent": 82
+        },
+        "position": {
+          "preset": "bottom-center",
+          "alignment": "center",
+          "offsetXPercent": 0,
+          "offsetYPercent": -6
+        },
+        "background": null,
+        "layout": {
+          "maxSupportedLogicalWidthPerLine": 14,
+          "maxLines": 2,
+          "singleLine": false,
+          "characterWidthRule": "U+0000..U+00FF=1; other Unicode code point=2"
+        },
+        "transitionId": "quick-fade-4f-v001"
+      },
+      "transition": {
+        "transitionId": "quick-fade-4f-v001",
+        "entry": {
+          "type": "alpha-fade",
+          "frames": 4
+        },
+        "exit": {
+          "type": "alpha-fade",
+          "frames": 4
+        }
+      },
+      "timelineSegmentId": "segment-0001",
+      "targetProvenance": {
+        "targetRefId": "caption-target-000012",
+        "targetType": "caption-target",
+        "sourceAtomIds": [
+          "word-17796",
+          "word-17797",
+          "word-17798",
+          "word-17799",
+          "word-17800",
+          "word-17801",
+          "word-17802",
+          "word-17803",
+          "word-17804",
+          "word-17805",
+          "word-17806"
+        ],
+        "cueId": "caption-cue-000012",
+        "captionTargetId": "caption-target-000012",
+        "lineAtomIds": [
+          [
+            "word-17796",
+            "word-17797",
+            "word-17798",
+            "word-17799",
+            "word-17800"
+          ],
+          [
+            "word-17801",
+            "word-17802",
+            "word-17803",
+            "word-17804",
+            "word-17805",
+            "word-17806"
+          ]
+        ],
+        "startAnchor": {
+          "atomId": "word-17796",
+          "edge": "start"
+        },
+        "endAnchor": {
+          "atomId": "word-17806",
+          "edge": "end"
+        }
+      },
+      "materialRefs": [],
+      "overlaySha256": "f621fbc068d550e3fd216b4e817ec699e3fbd87892c4ad1615a90311df337433"
+    },
+    {
+      "instructionId": "caption-instruction-000013",
+      "kind": "speech-caption",
+      "text": "大量にあって",
+      "indexedLines": [
+        {
+          "lineIndex": 0,
+          "characters": [
+            {
+              "sourceIndex": 0,
+              "character": "大",
+              "codePoint": 22823,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 1,
+              "character": "量",
+              "codePoint": 37327,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 2,
+              "character": "に",
+              "codePoint": 12395,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 3,
+              "character": "あ",
+              "codePoint": 12354,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 4,
+              "character": "っ",
+              "codePoint": 12387,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 5,
+              "character": "て",
+              "codePoint": 12390,
+              "role": "visible"
+            }
+          ],
+          "renderedText": "大量にあって",
+          "text": "大量にあって",
+          "codePointIndices": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ]
+        }
+      ],
+      "sourceStartMs": 5960254,
+      "sourceEndMs": 5961675,
+      "startFrame": 573,
+      "endFrameExclusive": 615,
+      "displayFrameCount": 42,
+      "requestedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+      "appliedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+      "presetId": "vertical-short-speaker-only-readable-pop-v001",
+      "registryVersion": "vertical-short-preset-registry-v001",
+      "presetRegistryVersion": "vertical-short-preset-registry-v001",
+      "stateId": "caption-core-vertical-speaker-only-v001",
+      "visualState": {
+        "stateId": "caption-core-vertical-speaker-only-v001",
+        "textStyle": {
+          "fontAssetId": "line-seed-jp-extra-bold-v001",
+          "fontSizePx": 134,
+          "fontColor": "#FFFDF8",
+          "borderColor": "#111827",
+          "borderWidthPx": 11,
+          "lineSpacingPercent": 150,
+          "glowColor": "#000000",
+          "glowWidthPx": 17,
+          "glowOpacityPercent": 82
+        },
+        "position": {
+          "preset": "bottom-center",
+          "alignment": "center",
+          "offsetXPercent": 0,
+          "offsetYPercent": -6
+        },
+        "background": null,
+        "layout": {
+          "maxSupportedLogicalWidthPerLine": 14,
+          "maxLines": 2,
+          "singleLine": false,
+          "characterWidthRule": "U+0000..U+00FF=1; other Unicode code point=2"
+        },
+        "transitionId": "quick-fade-4f-v001"
+      },
+      "transition": {
+        "transitionId": "quick-fade-4f-v001",
+        "entry": {
+          "type": "alpha-fade",
+          "frames": 4
+        },
+        "exit": {
+          "type": "alpha-fade",
+          "frames": 4
+        }
+      },
+      "timelineSegmentId": "segment-0001",
+      "targetProvenance": {
+        "targetRefId": "caption-target-000013",
+        "targetType": "caption-target",
+        "sourceAtomIds": [
+          "word-17807",
+          "word-17808",
+          "word-17809",
+          "word-17810",
+          "word-17811",
+          "word-17812"
+        ],
+        "cueId": "caption-cue-000013",
+        "captionTargetId": "caption-target-000013",
+        "lineAtomIds": [
+          [
+            "word-17807",
+            "word-17808",
+            "word-17809",
+            "word-17810",
+            "word-17811",
+            "word-17812"
+          ]
+        ],
+        "startAnchor": {
+          "atomId": "word-17807",
+          "edge": "start"
+        },
+        "endAnchor": {
+          "atomId": "word-17812",
+          "edge": "end"
+        }
+      },
+      "materialRefs": [],
+      "overlaySha256": "15b4f2d363911237733ec3d197297a5f274533d1853975162f9efd687ba55c83"
+    },
+    {
+      "instructionId": "caption-instruction-000014",
+      "kind": "speech-caption",
+      "text": "でぐるぐる回りながら",
+      "indexedLines": [
+        {
+          "lineIndex": 0,
+          "characters": [
+            {
+              "sourceIndex": 0,
+              "character": "で",
+              "codePoint": 12391,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 1,
+              "character": "ぐ",
+              "codePoint": 12368,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 2,
+              "character": "る",
+              "codePoint": 12427,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 3,
+              "character": "ぐ",
+              "codePoint": 12368,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 4,
+              "character": "る",
+              "codePoint": 12427,
+              "role": "visible"
+            }
+          ],
+          "renderedText": "でぐるぐる",
+          "text": "でぐるぐる",
+          "codePointIndices": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ]
+        },
+        {
+          "lineIndex": 1,
+          "characters": [
+            {
+              "sourceIndex": 5,
+              "character": "回",
+              "codePoint": 22238,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 6,
+              "character": "り",
+              "codePoint": 12426,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 7,
+              "character": "な",
+              "codePoint": 12394,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 8,
+              "character": "が",
+              "codePoint": 12364,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 9,
+              "character": "ら",
+              "codePoint": 12425,
+              "role": "visible"
+            }
+          ],
+          "renderedText": "回りながら",
+          "text": "回りながら",
+          "codePointIndices": [
+            5,
+            6,
+            7,
+            8,
+            9
+          ]
+        }
+      ],
+      "sourceStartMs": 5961675,
+      "sourceEndMs": 5963296,
+      "startFrame": 615,
+      "endFrameExclusive": 664,
+      "displayFrameCount": 49,
+      "requestedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+      "appliedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+      "presetId": "vertical-short-speaker-only-readable-pop-v001",
+      "registryVersion": "vertical-short-preset-registry-v001",
+      "presetRegistryVersion": "vertical-short-preset-registry-v001",
+      "stateId": "caption-core-vertical-speaker-only-v001",
+      "visualState": {
+        "stateId": "caption-core-vertical-speaker-only-v001",
+        "textStyle": {
+          "fontAssetId": "line-seed-jp-extra-bold-v001",
+          "fontSizePx": 134,
+          "fontColor": "#FFFDF8",
+          "borderColor": "#111827",
+          "borderWidthPx": 11,
+          "lineSpacingPercent": 150,
+          "glowColor": "#000000",
+          "glowWidthPx": 17,
+          "glowOpacityPercent": 82
+        },
+        "position": {
+          "preset": "bottom-center",
+          "alignment": "center",
+          "offsetXPercent": 0,
+          "offsetYPercent": -6
+        },
+        "background": null,
+        "layout": {
+          "maxSupportedLogicalWidthPerLine": 14,
+          "maxLines": 2,
+          "singleLine": false,
+          "characterWidthRule": "U+0000..U+00FF=1; other Unicode code point=2"
+        },
+        "transitionId": "quick-fade-4f-v001"
+      },
+      "transition": {
+        "transitionId": "quick-fade-4f-v001",
+        "entry": {
+          "type": "alpha-fade",
+          "frames": 4
+        },
+        "exit": {
+          "type": "alpha-fade",
+          "frames": 4
+        }
+      },
+      "timelineSegmentId": "segment-0001",
+      "targetProvenance": {
+        "targetRefId": "caption-target-000014",
+        "targetType": "caption-target",
+        "sourceAtomIds": [
+          "word-17813",
+          "word-17814",
+          "word-17815",
+          "word-17816",
+          "word-17817",
+          "word-17818",
+          "word-17819",
+          "word-17820",
+          "word-17821",
+          "word-17822"
+        ],
+        "cueId": "caption-cue-000014",
+        "captionTargetId": "caption-target-000014",
+        "lineAtomIds": [
+          [
+            "word-17813",
+            "word-17814",
+            "word-17815",
+            "word-17816",
+            "word-17817"
+          ],
+          [
+            "word-17818",
+            "word-17819",
+            "word-17820",
+            "word-17821",
+            "word-17822"
+          ]
+        ],
+        "startAnchor": {
+          "atomId": "word-17813",
+          "edge": "start"
+        },
+        "endAnchor": {
+          "atomId": "word-17822",
+          "edge": "end"
+        }
+      },
+      "materialRefs": [],
+      "overlaySha256": "fc12550b48ea87d60571c6b4d452327b4ba1f863cd018447640f8ae3f23d1929"
+    },
+    {
+      "instructionId": "caption-instruction-000015",
+      "kind": "speech-caption",
+      "text": "一つずつ片付けていくの",
+      "indexedLines": [
+        {
+          "lineIndex": 0,
+          "characters": [
+            {
+              "sourceIndex": 0,
+              "character": "一",
+              "codePoint": 19968,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 1,
+              "character": "つ",
+              "codePoint": 12388,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 2,
+              "character": "ず",
+              "codePoint": 12378,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 3,
+              "character": "つ",
+              "codePoint": 12388,
+              "role": "visible"
+            }
+          ],
+          "renderedText": "一つずつ",
+          "text": "一つずつ",
+          "codePointIndices": [
+            0,
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "lineIndex": 1,
+          "characters": [
+            {
+              "sourceIndex": 4,
+              "character": "片",
+              "codePoint": 29255,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 5,
+              "character": "付",
+              "codePoint": 20184,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 6,
+              "character": "け",
+              "codePoint": 12369,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 7,
+              "character": "て",
+              "codePoint": 12390,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 8,
+              "character": "い",
+              "codePoint": 12356,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 9,
+              "character": "く",
+              "codePoint": 12367,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 10,
+              "character": "の",
+              "codePoint": 12398,
+              "role": "visible"
+            }
+          ],
+          "renderedText": "片付けていくの",
+          "text": "片付けていくの",
+          "codePointIndices": [
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+          ]
+        }
+      ],
+      "sourceStartMs": 5963296,
+      "sourceEndMs": 5968359,
+      "startFrame": 664,
+      "endFrameExclusive": 816,
+      "displayFrameCount": 152,
+      "requestedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+      "appliedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+      "presetId": "vertical-short-speaker-only-readable-pop-v001",
+      "registryVersion": "vertical-short-preset-registry-v001",
+      "presetRegistryVersion": "vertical-short-preset-registry-v001",
+      "stateId": "caption-core-vertical-speaker-only-v001",
+      "visualState": {
+        "stateId": "caption-core-vertical-speaker-only-v001",
+        "textStyle": {
+          "fontAssetId": "line-seed-jp-extra-bold-v001",
+          "fontSizePx": 134,
+          "fontColor": "#FFFDF8",
+          "borderColor": "#111827",
+          "borderWidthPx": 11,
+          "lineSpacingPercent": 150,
+          "glowColor": "#000000",
+          "glowWidthPx": 17,
+          "glowOpacityPercent": 82
+        },
+        "position": {
+          "preset": "bottom-center",
+          "alignment": "center",
+          "offsetXPercent": 0,
+          "offsetYPercent": -6
+        },
+        "background": null,
+        "layout": {
+          "maxSupportedLogicalWidthPerLine": 14,
+          "maxLines": 2,
+          "singleLine": false,
+          "characterWidthRule": "U+0000..U+00FF=1; other Unicode code point=2"
+        },
+        "transitionId": "quick-fade-4f-v001"
+      },
+      "transition": {
+        "transitionId": "quick-fade-4f-v001",
+        "entry": {
+          "type": "alpha-fade",
+          "frames": 4
+        },
+        "exit": {
+          "type": "alpha-fade",
+          "frames": 4
+        }
+      },
+      "timelineSegmentId": "segment-0001",
+      "targetProvenance": {
+        "targetRefId": "caption-target-000015",
+        "targetType": "caption-target",
+        "sourceAtomIds": [
+          "word-17823",
+          "word-17824",
+          "word-17825",
+          "word-17826",
+          "word-17827",
+          "word-17828",
+          "word-17829",
+          "word-17830",
+          "word-17831",
+          "word-17832",
+          "word-17833"
+        ],
+        "cueId": "caption-cue-000015",
+        "captionTargetId": "caption-target-000015",
+        "lineAtomIds": [
+          [
+            "word-17823",
+            "word-17824",
+            "word-17825",
+            "word-17826"
+          ],
+          [
+            "word-17827",
+            "word-17828",
+            "word-17829",
+            "word-17830",
+            "word-17831",
+            "word-17832",
+            "word-17833"
+          ]
+        ],
+        "startAnchor": {
+          "atomId": "word-17823",
+          "edge": "start"
+        },
+        "endAnchor": {
+          "atomId": "word-17833",
+          "edge": "end"
+        }
+      },
+      "materialRefs": [],
+      "overlaySha256": "31a768964f508ffb072a577d6a9506e3ff358828d133e2b600d4eb0e48fd11f6"
+    },
+    {
+      "instructionId": "caption-instruction-000016",
+      "kind": "speech-caption",
+      "text": "うんでもね",
+      "indexedLines": [
+        {
+          "lineIndex": 0,
+          "characters": [
+            {
+              "sourceIndex": 0,
+              "character": "う",
+              "codePoint": 12358,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 1,
+              "character": "ん",
+              "codePoint": 12435,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 2,
+              "character": "で",
+              "codePoint": 12391,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 3,
+              "character": "も",
+              "codePoint": 12418,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 4,
+              "character": "ね",
+              "codePoint": 12397,
+              "role": "visible"
+            }
+          ],
+          "renderedText": "うんでもね",
+          "text": "うんでもね",
+          "codePointIndices": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ]
+        }
+      ],
+      "sourceStartMs": 5968359,
+      "sourceEndMs": 5969340,
+      "startFrame": 816,
+      "endFrameExclusive": 845,
+      "displayFrameCount": 29,
+      "requestedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+      "appliedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+      "presetId": "vertical-short-speaker-only-readable-pop-v001",
+      "registryVersion": "vertical-short-preset-registry-v001",
+      "presetRegistryVersion": "vertical-short-preset-registry-v001",
+      "stateId": "caption-core-vertical-speaker-only-v001",
+      "visualState": {
+        "stateId": "caption-core-vertical-speaker-only-v001",
+        "textStyle": {
+          "fontAssetId": "line-seed-jp-extra-bold-v001",
+          "fontSizePx": 134,
+          "fontColor": "#FFFDF8",
+          "borderColor": "#111827",
+          "borderWidthPx": 11,
+          "lineSpacingPercent": 150,
+          "glowColor": "#000000",
+          "glowWidthPx": 17,
+          "glowOpacityPercent": 82
+        },
+        "position": {
+          "preset": "bottom-center",
+          "alignment": "center",
+          "offsetXPercent": 0,
+          "offsetYPercent": -6
+        },
+        "background": null,
+        "layout": {
+          "maxSupportedLogicalWidthPerLine": 14,
+          "maxLines": 2,
+          "singleLine": false,
+          "characterWidthRule": "U+0000..U+00FF=1; other Unicode code point=2"
+        },
+        "transitionId": "quick-fade-4f-v001"
+      },
+      "transition": {
+        "transitionId": "quick-fade-4f-v001",
+        "entry": {
+          "type": "alpha-fade",
+          "frames": 4
+        },
+        "exit": {
+          "type": "alpha-fade",
+          "frames": 4
+        }
+      },
+      "timelineSegmentId": "segment-0001",
+      "targetProvenance": {
+        "targetRefId": "caption-target-000016",
+        "targetType": "caption-target",
+        "sourceAtomIds": [
+          "word-17834",
+          "word-17835",
+          "word-17836",
+          "word-17837",
+          "word-17838"
+        ],
+        "cueId": "caption-cue-000016",
+        "captionTargetId": "caption-target-000016",
+        "lineAtomIds": [
+          [
+            "word-17834",
+            "word-17835",
+            "word-17836",
+            "word-17837",
+            "word-17838"
+          ]
+        ],
+        "startAnchor": {
+          "atomId": "word-17834",
+          "edge": "start"
+        },
+        "endAnchor": {
+          "atomId": "word-17838",
+          "edge": "end"
+        }
+      },
+      "materialRefs": [],
+      "overlaySha256": "efd11f2d03d0077e69a70892a324af9ae03815bff990ed0ab6d7442162d751e1"
+    },
+    {
+      "instructionId": "caption-instruction-000017",
+      "kind": "speech-caption",
+      "text": "結局全部片付けてる",
+      "indexedLines": [
+        {
+          "lineIndex": 0,
+          "characters": [
+            {
+              "sourceIndex": 0,
+              "character": "結",
+              "codePoint": 32080,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 1,
+              "character": "局",
+              "codePoint": 23616,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 2,
+              "character": "全",
+              "codePoint": 20840,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 3,
+              "character": "部",
+              "codePoint": 37096,
+              "role": "visible"
+            }
+          ],
+          "renderedText": "結局全部",
+          "text": "結局全部",
+          "codePointIndices": [
+            0,
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "lineIndex": 1,
+          "characters": [
+            {
+              "sourceIndex": 4,
+              "character": "片",
+              "codePoint": 29255,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 5,
+              "character": "付",
+              "codePoint": 20184,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 6,
+              "character": "け",
+              "codePoint": 12369,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 7,
+              "character": "て",
+              "codePoint": 12390,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 8,
+              "character": "る",
+              "codePoint": 12427,
+              "role": "visible"
+            }
+          ],
+          "renderedText": "片付けてる",
+          "text": "片付けてる",
+          "codePointIndices": [
+            4,
+            5,
+            6,
+            7,
+            8
+          ]
+        }
+      ],
+      "sourceStartMs": 5969340,
+      "sourceEndMs": 5969820,
+      "startFrame": 845,
+      "endFrameExclusive": 860,
+      "displayFrameCount": 15,
+      "requestedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+      "appliedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+      "presetId": "vertical-short-speaker-only-readable-pop-v001",
+      "registryVersion": "vertical-short-preset-registry-v001",
+      "presetRegistryVersion": "vertical-short-preset-registry-v001",
+      "stateId": "caption-core-vertical-speaker-only-v001",
+      "visualState": {
+        "stateId": "caption-core-vertical-speaker-only-v001",
+        "textStyle": {
+          "fontAssetId": "line-seed-jp-extra-bold-v001",
+          "fontSizePx": 134,
+          "fontColor": "#FFFDF8",
+          "borderColor": "#111827",
+          "borderWidthPx": 11,
+          "lineSpacingPercent": 150,
+          "glowColor": "#000000",
+          "glowWidthPx": 17,
+          "glowOpacityPercent": 82
+        },
+        "position": {
+          "preset": "bottom-center",
+          "alignment": "center",
+          "offsetXPercent": 0,
+          "offsetYPercent": -6
+        },
+        "background": null,
+        "layout": {
+          "maxSupportedLogicalWidthPerLine": 14,
+          "maxLines": 2,
+          "singleLine": false,
+          "characterWidthRule": "U+0000..U+00FF=1; other Unicode code point=2"
+        },
+        "transitionId": "quick-fade-4f-v001"
+      },
+      "transition": {
+        "transitionId": "quick-fade-4f-v001",
+        "entry": {
+          "type": "alpha-fade",
+          "frames": 4
+        },
+        "exit": {
+          "type": "alpha-fade",
+          "frames": 4
+        }
+      },
+      "timelineSegmentId": "segment-0001",
+      "targetProvenance": {
+        "targetRefId": "caption-target-000017",
+        "targetType": "caption-target",
+        "sourceAtomIds": [
+          "word-17839",
+          "word-17840",
+          "word-17841",
+          "word-17842",
+          "word-17843",
+          "word-17844",
+          "word-17845",
+          "word-17846",
+          "word-17847"
+        ],
+        "cueId": "caption-cue-000017",
+        "captionTargetId": "caption-target-000017",
+        "lineAtomIds": [
+          [
+            "word-17839",
+            "word-17840",
+            "word-17841",
+            "word-17842"
+          ],
+          [
+            "word-17843",
+            "word-17844",
+            "word-17845",
+            "word-17846",
+            "word-17847"
+          ]
+        ],
+        "startAnchor": {
+          "atomId": "word-17839",
+          "edge": "start"
+        },
+        "endAnchor": {
+          "atomId": "word-17847",
+          "edge": "end"
+        }
+      },
+      "materialRefs": [],
+      "overlaySha256": "9dc5fad0bbd113476db79c55623ac5c50a3cafe60324ff661a67132e8b61523a"
+    },
+    {
+      "instructionId": "caption-instruction-000018",
+      "kind": "speech-caption",
+      "text": "片付けよう",
+      "indexedLines": [
+        {
+          "lineIndex": 0,
+          "characters": [
+            {
+              "sourceIndex": 0,
+              "character": "片",
+              "codePoint": 29255,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 1,
+              "character": "付",
+              "codePoint": 20184,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 2,
+              "character": "け",
+              "codePoint": 12369,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 3,
+              "character": "よ",
+              "codePoint": 12424,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 4,
+              "character": "う",
+              "codePoint": 12358,
+              "role": "visible"
+            }
+          ],
+          "renderedText": "片付けよう",
+          "text": "片付けよう",
+          "codePointIndices": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ]
+        }
+      ],
+      "sourceStartMs": 5970002,
+      "sourceEndMs": 5970863,
+      "startFrame": 865,
+      "endFrameExclusive": 891,
+      "displayFrameCount": 26,
+      "requestedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+      "appliedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+      "presetId": "vertical-short-speaker-only-readable-pop-v001",
+      "registryVersion": "vertical-short-preset-registry-v001",
+      "presetRegistryVersion": "vertical-short-preset-registry-v001",
+      "stateId": "caption-core-vertical-speaker-only-v001",
+      "visualState": {
+        "stateId": "caption-core-vertical-speaker-only-v001",
+        "textStyle": {
+          "fontAssetId": "line-seed-jp-extra-bold-v001",
+          "fontSizePx": 134,
+          "fontColor": "#FFFDF8",
+          "borderColor": "#111827",
+          "borderWidthPx": 11,
+          "lineSpacingPercent": 150,
+          "glowColor": "#000000",
+          "glowWidthPx": 17,
+          "glowOpacityPercent": 82
+        },
+        "position": {
+          "preset": "bottom-center",
+          "alignment": "center",
+          "offsetXPercent": 0,
+          "offsetYPercent": -6
+        },
+        "background": null,
+        "layout": {
+          "maxSupportedLogicalWidthPerLine": 14,
+          "maxLines": 2,
+          "singleLine": false,
+          "characterWidthRule": "U+0000..U+00FF=1; other Unicode code point=2"
+        },
+        "transitionId": "quick-fade-4f-v001"
+      },
+      "transition": {
+        "transitionId": "quick-fade-4f-v001",
+        "entry": {
+          "type": "alpha-fade",
+          "frames": 4
+        },
+        "exit": {
+          "type": "alpha-fade",
+          "frames": 4
+        }
+      },
+      "timelineSegmentId": "segment-0001",
+      "targetProvenance": {
+        "targetRefId": "caption-target-000018",
+        "targetType": "caption-target",
+        "sourceAtomIds": [
+          "word-17848",
+          "word-17849",
+          "word-17850",
+          "word-17851",
+          "word-17852"
+        ],
+        "cueId": "caption-cue-000018",
+        "captionTargetId": "caption-target-000018",
+        "lineAtomIds": [
+          [
+            "word-17848",
+            "word-17849",
+            "word-17850",
+            "word-17851",
+            "word-17852"
+          ]
+        ],
+        "startAnchor": {
+          "atomId": "word-17848",
+          "edge": "start"
+        },
+        "endAnchor": {
+          "atomId": "word-17852",
+          "edge": "end"
+        }
+      },
+      "materialRefs": [],
+      "overlaySha256": "65f731a5582bc9cd6f93f3cd63b3ddaeec26af4f4de901a4fcbfeefba7283875"
+    },
+    {
+      "instructionId": "caption-instruction-000019",
+      "kind": "speech-caption",
+      "text": "1個ずつ片付けていく",
+      "indexedLines": [
+        {
+          "lineIndex": 0,
+          "characters": [
+            {
+              "sourceIndex": 0,
+              "character": "1",
+              "codePoint": 49,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 1,
+              "character": "個",
+              "codePoint": 20491,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 2,
+              "character": "ず",
+              "codePoint": 12378,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 3,
+              "character": "つ",
+              "codePoint": 12388,
+              "role": "visible"
+            }
+          ],
+          "renderedText": "1個ずつ",
+          "text": "1個ずつ",
+          "codePointIndices": [
+            0,
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "lineIndex": 1,
+          "characters": [
+            {
+              "sourceIndex": 4,
+              "character": "片",
+              "codePoint": 29255,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 5,
+              "character": "付",
+              "codePoint": 20184,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 6,
+              "character": "け",
+              "codePoint": 12369,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 7,
+              "character": "て",
+              "codePoint": 12390,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 8,
+              "character": "い",
+              "codePoint": 12356,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 9,
+              "character": "く",
+              "codePoint": 12367,
+              "role": "visible"
+            }
+          ],
+          "renderedText": "片付けていく",
+          "text": "片付けていく",
+          "codePointIndices": [
+            4,
+            5,
+            6,
+            7,
+            8,
+            9
+          ]
+        }
+      ],
+      "sourceStartMs": 5970863,
+      "sourceEndMs": 5973064,
+      "startFrame": 891,
+      "endFrameExclusive": 957,
+      "displayFrameCount": 66,
+      "requestedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+      "appliedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+      "presetId": "vertical-short-speaker-only-readable-pop-v001",
+      "registryVersion": "vertical-short-preset-registry-v001",
+      "presetRegistryVersion": "vertical-short-preset-registry-v001",
+      "stateId": "caption-core-vertical-speaker-only-v001",
+      "visualState": {
+        "stateId": "caption-core-vertical-speaker-only-v001",
+        "textStyle": {
+          "fontAssetId": "line-seed-jp-extra-bold-v001",
+          "fontSizePx": 134,
+          "fontColor": "#FFFDF8",
+          "borderColor": "#111827",
+          "borderWidthPx": 11,
+          "lineSpacingPercent": 150,
+          "glowColor": "#000000",
+          "glowWidthPx": 17,
+          "glowOpacityPercent": 82
+        },
+        "position": {
+          "preset": "bottom-center",
+          "alignment": "center",
+          "offsetXPercent": 0,
+          "offsetYPercent": -6
+        },
+        "background": null,
+        "layout": {
+          "maxSupportedLogicalWidthPerLine": 14,
+          "maxLines": 2,
+          "singleLine": false,
+          "characterWidthRule": "U+0000..U+00FF=1; other Unicode code point=2"
+        },
+        "transitionId": "quick-fade-4f-v001"
+      },
+      "transition": {
+        "transitionId": "quick-fade-4f-v001",
+        "entry": {
+          "type": "alpha-fade",
+          "frames": 4
+        },
+        "exit": {
+          "type": "alpha-fade",
+          "frames": 4
+        }
+      },
+      "timelineSegmentId": "segment-0001",
+      "targetProvenance": {
+        "targetRefId": "caption-target-000019",
+        "targetType": "caption-target",
+        "sourceAtomIds": [
+          "word-17853",
+          "word-17854",
+          "word-17855",
+          "word-17856",
+          "word-17857",
+          "word-17858",
+          "word-17859",
+          "word-17860",
+          "word-17861",
+          "word-17862"
+        ],
+        "cueId": "caption-cue-000019",
+        "captionTargetId": "caption-target-000019",
+        "lineAtomIds": [
+          [
+            "word-17853",
+            "word-17854",
+            "word-17855",
+            "word-17856"
+          ],
+          [
+            "word-17857",
+            "word-17858",
+            "word-17859",
+            "word-17860",
+            "word-17861",
+            "word-17862"
+          ]
+        ],
+        "startAnchor": {
+          "atomId": "word-17853",
+          "edge": "start"
+        },
+        "endAnchor": {
+          "atomId": "word-17862",
+          "edge": "end"
+        }
+      },
+      "materialRefs": [],
+      "overlaySha256": "ce77b2911c558d7892e67e6d6fdf3525e22242a60f1d028db28a00037a4e6996"
+    },
+    {
+      "instructionId": "caption-instruction-000020",
+      "kind": "speech-caption",
+      "text": "あ、そうだあれもこれも",
+      "indexedLines": [
+        {
+          "lineIndex": 0,
+          "characters": [
+            {
+              "sourceIndex": 0,
+              "character": "あ",
+              "codePoint": 12354,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 1,
+              "character": "、",
+              "codePoint": 12289,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 2,
+              "character": "そ",
+              "codePoint": 12381,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 3,
+              "character": "う",
+              "codePoint": 12358,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 4,
+              "character": "だ",
+              "codePoint": 12384,
+              "role": "visible"
+            }
+          ],
+          "renderedText": "あ、そうだ",
+          "text": "あ、そうだ",
+          "codePointIndices": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ]
+        },
+        {
+          "lineIndex": 1,
+          "characters": [
+            {
+              "sourceIndex": 5,
+              "character": "あ",
+              "codePoint": 12354,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 6,
+              "character": "れ",
+              "codePoint": 12428,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 7,
+              "character": "も",
+              "codePoint": 12418,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 8,
+              "character": "こ",
+              "codePoint": 12371,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 9,
+              "character": "れ",
+              "codePoint": 12428,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 10,
+              "character": "も",
+              "codePoint": 12418,
+              "role": "visible"
+            }
+          ],
+          "renderedText": "あれもこれも",
+          "text": "あれもこれも",
+          "codePointIndices": [
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+          ]
+        }
+      ],
+      "sourceStartMs": 5973064,
+      "sourceEndMs": 5974265,
+      "startFrame": 957,
+      "endFrameExclusive": 993,
+      "displayFrameCount": 36,
+      "requestedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+      "appliedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+      "presetId": "vertical-short-speaker-only-readable-pop-v001",
+      "registryVersion": "vertical-short-preset-registry-v001",
+      "presetRegistryVersion": "vertical-short-preset-registry-v001",
+      "stateId": "caption-core-vertical-speaker-only-v001",
+      "visualState": {
+        "stateId": "caption-core-vertical-speaker-only-v001",
+        "textStyle": {
+          "fontAssetId": "line-seed-jp-extra-bold-v001",
+          "fontSizePx": 134,
+          "fontColor": "#FFFDF8",
+          "borderColor": "#111827",
+          "borderWidthPx": 11,
+          "lineSpacingPercent": 150,
+          "glowColor": "#000000",
+          "glowWidthPx": 17,
+          "glowOpacityPercent": 82
+        },
+        "position": {
+          "preset": "bottom-center",
+          "alignment": "center",
+          "offsetXPercent": 0,
+          "offsetYPercent": -6
+        },
+        "background": null,
+        "layout": {
+          "maxSupportedLogicalWidthPerLine": 14,
+          "maxLines": 2,
+          "singleLine": false,
+          "characterWidthRule": "U+0000..U+00FF=1; other Unicode code point=2"
+        },
+        "transitionId": "quick-fade-4f-v001"
+      },
+      "transition": {
+        "transitionId": "quick-fade-4f-v001",
+        "entry": {
+          "type": "alpha-fade",
+          "frames": 4
+        },
+        "exit": {
+          "type": "alpha-fade",
+          "frames": 4
+        }
+      },
+      "timelineSegmentId": "segment-0001",
+      "targetProvenance": {
+        "targetRefId": "caption-target-000020",
+        "targetType": "caption-target",
+        "sourceAtomIds": [
+          "word-17863",
+          "word-17864",
+          "word-17865",
+          "word-17866",
+          "word-17867",
+          "word-17868",
+          "word-17869",
+          "word-17870",
+          "word-17871",
+          "word-17872",
+          "word-17873"
+        ],
+        "cueId": "caption-cue-000020",
+        "captionTargetId": "caption-target-000020",
+        "lineAtomIds": [
+          [
+            "word-17863",
+            "word-17864",
+            "word-17865",
+            "word-17866",
+            "word-17867"
+          ],
+          [
+            "word-17868",
+            "word-17869",
+            "word-17870",
+            "word-17871",
+            "word-17872",
+            "word-17873"
+          ]
+        ],
+        "startAnchor": {
+          "atomId": "word-17863",
+          "edge": "start"
+        },
+        "endAnchor": {
+          "atomId": "word-17873",
+          "edge": "end"
+        }
+      },
+      "materialRefs": [],
+      "overlaySha256": "009d7d85c62a738e49e8170ff3344c54b89fc6ecf68fd45a4ced6db928c695a9"
+    },
+    {
+      "instructionId": "caption-instruction-000021",
+      "kind": "speech-caption",
+      "text": "ってやってるうちに",
+      "indexedLines": [
+        {
+          "lineIndex": 0,
+          "characters": [
+            {
+              "sourceIndex": 0,
+              "character": "っ",
+              "codePoint": 12387,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 1,
+              "character": "て",
+              "codePoint": 12390,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 2,
+              "character": "や",
+              "codePoint": 12420,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 3,
+              "character": "っ",
+              "codePoint": 12387,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 4,
+              "character": "て",
+              "codePoint": 12390,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 5,
+              "character": "る",
+              "codePoint": 12427,
+              "role": "visible"
+            }
+          ],
+          "renderedText": "ってやってる",
+          "text": "ってやってる",
+          "codePointIndices": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ]
+        },
+        {
+          "lineIndex": 1,
+          "characters": [
+            {
+              "sourceIndex": 6,
+              "character": "う",
+              "codePoint": 12358,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 7,
+              "character": "ち",
+              "codePoint": 12385,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 8,
+              "character": "に",
+              "codePoint": 12395,
+              "role": "visible"
+            }
+          ],
+          "renderedText": "うちに",
+          "text": "うちに",
+          "codePointIndices": [
+            6,
+            7,
+            8
+          ]
+        }
+      ],
+      "sourceStartMs": 5974265,
+      "sourceEndMs": 5975265,
+      "startFrame": 993,
+      "endFrameExclusive": 1023,
+      "displayFrameCount": 30,
+      "requestedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+      "appliedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+      "presetId": "vertical-short-speaker-only-readable-pop-v001",
+      "registryVersion": "vertical-short-preset-registry-v001",
+      "presetRegistryVersion": "vertical-short-preset-registry-v001",
+      "stateId": "caption-core-vertical-speaker-only-v001",
+      "visualState": {
+        "stateId": "caption-core-vertical-speaker-only-v001",
+        "textStyle": {
+          "fontAssetId": "line-seed-jp-extra-bold-v001",
+          "fontSizePx": 134,
+          "fontColor": "#FFFDF8",
+          "borderColor": "#111827",
+          "borderWidthPx": 11,
+          "lineSpacingPercent": 150,
+          "glowColor": "#000000",
+          "glowWidthPx": 17,
+          "glowOpacityPercent": 82
+        },
+        "position": {
+          "preset": "bottom-center",
+          "alignment": "center",
+          "offsetXPercent": 0,
+          "offsetYPercent": -6
+        },
+        "background": null,
+        "layout": {
+          "maxSupportedLogicalWidthPerLine": 14,
+          "maxLines": 2,
+          "singleLine": false,
+          "characterWidthRule": "U+0000..U+00FF=1; other Unicode code point=2"
+        },
+        "transitionId": "quick-fade-4f-v001"
+      },
+      "transition": {
+        "transitionId": "quick-fade-4f-v001",
+        "entry": {
+          "type": "alpha-fade",
+          "frames": 4
+        },
+        "exit": {
+          "type": "alpha-fade",
+          "frames": 4
+        }
+      },
+      "timelineSegmentId": "segment-0001",
+      "targetProvenance": {
+        "targetRefId": "caption-target-000021",
+        "targetType": "caption-target",
+        "sourceAtomIds": [
+          "word-17874",
+          "word-17875",
+          "word-17876",
+          "word-17877",
+          "word-17878",
+          "word-17879",
+          "word-17880",
+          "word-17881",
+          "word-17882"
+        ],
+        "cueId": "caption-cue-000021",
+        "captionTargetId": "caption-target-000021",
+        "lineAtomIds": [
+          [
+            "word-17874",
+            "word-17875",
+            "word-17876",
+            "word-17877",
+            "word-17878",
+            "word-17879"
+          ],
+          [
+            "word-17880",
+            "word-17881",
+            "word-17882"
+          ]
+        ],
+        "startAnchor": {
+          "atomId": "word-17874",
+          "edge": "start"
+        },
+        "endAnchor": {
+          "atomId": "word-17882",
+          "edge": "end"
+        }
+      },
+      "materialRefs": [],
+      "overlaySha256": "b4ac70e068ee4c1084f0404257b26434a9087e3c0bd853142b42dae89bf48276"
+    },
+    {
+      "instructionId": "caption-instruction-000022",
+      "kind": "speech-caption",
+      "text": "1個ずつ片付いていって",
+      "indexedLines": [
+        {
+          "lineIndex": 0,
+          "characters": [
+            {
+              "sourceIndex": 0,
+              "character": "1",
+              "codePoint": 49,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 1,
+              "character": "個",
+              "codePoint": 20491,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 2,
+              "character": "ず",
+              "codePoint": 12378,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 3,
+              "character": "つ",
+              "codePoint": 12388,
+              "role": "visible"
+            }
+          ],
+          "renderedText": "1個ずつ",
+          "text": "1個ずつ",
+          "codePointIndices": [
+            0,
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "lineIndex": 1,
+          "characters": [
+            {
+              "sourceIndex": 4,
+              "character": "片",
+              "codePoint": 29255,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 5,
+              "character": "付",
+              "codePoint": 20184,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 6,
+              "character": "い",
+              "codePoint": 12356,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 7,
+              "character": "て",
+              "codePoint": 12390,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 8,
+              "character": "い",
+              "codePoint": 12356,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 9,
+              "character": "っ",
+              "codePoint": 12387,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 10,
+              "character": "て",
+              "codePoint": 12390,
+              "role": "visible"
+            }
+          ],
+          "renderedText": "片付いていって",
+          "text": "片付いていって",
+          "codePointIndices": [
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+          ]
+        }
+      ],
+      "sourceStartMs": 5975265,
+      "sourceEndMs": 5976446,
+      "startFrame": 1023,
+      "endFrameExclusive": 1058,
+      "displayFrameCount": 35,
+      "requestedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+      "appliedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+      "presetId": "vertical-short-speaker-only-readable-pop-v001",
+      "registryVersion": "vertical-short-preset-registry-v001",
+      "presetRegistryVersion": "vertical-short-preset-registry-v001",
+      "stateId": "caption-core-vertical-speaker-only-v001",
+      "visualState": {
+        "stateId": "caption-core-vertical-speaker-only-v001",
+        "textStyle": {
+          "fontAssetId": "line-seed-jp-extra-bold-v001",
+          "fontSizePx": 134,
+          "fontColor": "#FFFDF8",
+          "borderColor": "#111827",
+          "borderWidthPx": 11,
+          "lineSpacingPercent": 150,
+          "glowColor": "#000000",
+          "glowWidthPx": 17,
+          "glowOpacityPercent": 82
+        },
+        "position": {
+          "preset": "bottom-center",
+          "alignment": "center",
+          "offsetXPercent": 0,
+          "offsetYPercent": -6
+        },
+        "background": null,
+        "layout": {
+          "maxSupportedLogicalWidthPerLine": 14,
+          "maxLines": 2,
+          "singleLine": false,
+          "characterWidthRule": "U+0000..U+00FF=1; other Unicode code point=2"
+        },
+        "transitionId": "quick-fade-4f-v001"
+      },
+      "transition": {
+        "transitionId": "quick-fade-4f-v001",
+        "entry": {
+          "type": "alpha-fade",
+          "frames": 4
+        },
+        "exit": {
+          "type": "alpha-fade",
+          "frames": 4
+        }
+      },
+      "timelineSegmentId": "segment-0001",
+      "targetProvenance": {
+        "targetRefId": "caption-target-000022",
+        "targetType": "caption-target",
+        "sourceAtomIds": [
+          "word-17883",
+          "word-17884",
+          "word-17885",
+          "word-17886",
+          "word-17887",
+          "word-17888",
+          "word-17889",
+          "word-17890",
+          "word-17891",
+          "word-17892",
+          "word-17893"
+        ],
+        "cueId": "caption-cue-000022",
+        "captionTargetId": "caption-target-000022",
+        "lineAtomIds": [
+          [
+            "word-17883",
+            "word-17884",
+            "word-17885",
+            "word-17886"
+          ],
+          [
+            "word-17887",
+            "word-17888",
+            "word-17889",
+            "word-17890",
+            "word-17891",
+            "word-17892",
+            "word-17893"
+          ]
+        ],
+        "startAnchor": {
+          "atomId": "word-17883",
+          "edge": "start"
+        },
+        "endAnchor": {
+          "atomId": "word-17893",
+          "edge": "end"
+        }
+      },
+      "materialRefs": [],
+      "overlaySha256": "7f0059f2f2d89994b7332aad7f392b37aa35dfb8c6d1af7b463aa731fc06bc50"
+    },
+    {
+      "instructionId": "caption-instruction-000023",
+      "kind": "speech-caption",
+      "text": "一応全部片付けはするの",
+      "indexedLines": [
+        {
+          "lineIndex": 0,
+          "characters": [
+            {
+              "sourceIndex": 0,
+              "character": "一",
+              "codePoint": 19968,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 1,
+              "character": "応",
+              "codePoint": 24540,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 2,
+              "character": "全",
+              "codePoint": 20840,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 3,
+              "character": "部",
+              "codePoint": 37096,
+              "role": "visible"
+            }
+          ],
+          "renderedText": "一応全部",
+          "text": "一応全部",
+          "codePointIndices": [
+            0,
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "lineIndex": 1,
+          "characters": [
+            {
+              "sourceIndex": 4,
+              "character": "片",
+              "codePoint": 29255,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 5,
+              "character": "付",
+              "codePoint": 20184,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 6,
+              "character": "け",
+              "codePoint": 12369,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 7,
+              "character": "は",
+              "codePoint": 12399,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 8,
+              "character": "す",
+              "codePoint": 12377,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 9,
+              "character": "る",
+              "codePoint": 12427,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 10,
+              "character": "の",
+              "codePoint": 12398,
+              "role": "visible"
+            }
+          ],
+          "renderedText": "片付けはするの",
+          "text": "片付けはするの",
+          "codePointIndices": [
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+          ]
+        }
+      ],
+      "sourceStartMs": 5976446,
+      "sourceEndMs": 5978867,
+      "startFrame": 1058,
+      "endFrameExclusive": 1131,
+      "displayFrameCount": 73,
+      "requestedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+      "appliedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+      "presetId": "vertical-short-speaker-only-readable-pop-v001",
+      "registryVersion": "vertical-short-preset-registry-v001",
+      "presetRegistryVersion": "vertical-short-preset-registry-v001",
+      "stateId": "caption-core-vertical-speaker-only-v001",
+      "visualState": {
+        "stateId": "caption-core-vertical-speaker-only-v001",
+        "textStyle": {
+          "fontAssetId": "line-seed-jp-extra-bold-v001",
+          "fontSizePx": 134,
+          "fontColor": "#FFFDF8",
+          "borderColor": "#111827",
+          "borderWidthPx": 11,
+          "lineSpacingPercent": 150,
+          "glowColor": "#000000",
+          "glowWidthPx": 17,
+          "glowOpacityPercent": 82
+        },
+        "position": {
+          "preset": "bottom-center",
+          "alignment": "center",
+          "offsetXPercent": 0,
+          "offsetYPercent": -6
+        },
+        "background": null,
+        "layout": {
+          "maxSupportedLogicalWidthPerLine": 14,
+          "maxLines": 2,
+          "singleLine": false,
+          "characterWidthRule": "U+0000..U+00FF=1; other Unicode code point=2"
+        },
+        "transitionId": "quick-fade-4f-v001"
+      },
+      "transition": {
+        "transitionId": "quick-fade-4f-v001",
+        "entry": {
+          "type": "alpha-fade",
+          "frames": 4
+        },
+        "exit": {
+          "type": "alpha-fade",
+          "frames": 4
+        }
+      },
+      "timelineSegmentId": "segment-0001",
+      "targetProvenance": {
+        "targetRefId": "caption-target-000023",
+        "targetType": "caption-target",
+        "sourceAtomIds": [
+          "word-17894",
+          "word-17895",
+          "word-17896",
+          "word-17897",
+          "word-17898",
+          "word-17899",
+          "word-17900",
+          "word-17901",
+          "word-17902",
+          "word-17903",
+          "word-17904"
+        ],
+        "cueId": "caption-cue-000023",
+        "captionTargetId": "caption-target-000023",
+        "lineAtomIds": [
+          [
+            "word-17894",
+            "word-17895",
+            "word-17896",
+            "word-17897"
+          ],
+          [
+            "word-17898",
+            "word-17899",
+            "word-17900",
+            "word-17901",
+            "word-17902",
+            "word-17903",
+            "word-17904"
+          ]
+        ],
+        "startAnchor": {
+          "atomId": "word-17894",
+          "edge": "start"
+        },
+        "endAnchor": {
+          "atomId": "word-17904",
+          "edge": "end"
+        }
+      },
+      "materialRefs": [],
+      "overlaySha256": "606f3a32fd10cf9fa3ab4681e3b24880d5eb5a41cb787a47e3eeddeb627d4959"
+    },
+    {
+      "instructionId": "caption-instruction-000024",
+      "kind": "speech-caption",
+      "text": "綺麗にはなるんだけど",
+      "indexedLines": [
+        {
+          "lineIndex": 0,
+          "characters": [
+            {
+              "sourceIndex": 0,
+              "character": "綺",
+              "codePoint": 32186,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 1,
+              "character": "麗",
+              "codePoint": 40599,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 2,
+              "character": "に",
+              "codePoint": 12395,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 3,
+              "character": "は",
+              "codePoint": 12399,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 4,
+              "character": "な",
+              "codePoint": 12394,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 5,
+              "character": "る",
+              "codePoint": 12427,
+              "role": "visible"
+            }
+          ],
+          "renderedText": "綺麗にはなる",
+          "text": "綺麗にはなる",
+          "codePointIndices": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ]
+        },
+        {
+          "lineIndex": 1,
+          "characters": [
+            {
+              "sourceIndex": 6,
+              "character": "ん",
+              "codePoint": 12435,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 7,
+              "character": "だ",
+              "codePoint": 12384,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 8,
+              "character": "け",
+              "codePoint": 12369,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 9,
+              "character": "ど",
+              "codePoint": 12393,
+              "role": "visible"
+            }
+          ],
+          "renderedText": "んだけど",
+          "text": "んだけど",
+          "codePointIndices": [
+            6,
+            7,
+            8,
+            9
+          ]
+        }
+      ],
+      "sourceStartMs": 5978867,
+      "sourceEndMs": 5980869,
+      "startFrame": 1131,
+      "endFrameExclusive": 1191,
+      "displayFrameCount": 60,
+      "requestedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+      "appliedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+      "presetId": "vertical-short-speaker-only-readable-pop-v001",
+      "registryVersion": "vertical-short-preset-registry-v001",
+      "presetRegistryVersion": "vertical-short-preset-registry-v001",
+      "stateId": "caption-core-vertical-speaker-only-v001",
+      "visualState": {
+        "stateId": "caption-core-vertical-speaker-only-v001",
+        "textStyle": {
+          "fontAssetId": "line-seed-jp-extra-bold-v001",
+          "fontSizePx": 134,
+          "fontColor": "#FFFDF8",
+          "borderColor": "#111827",
+          "borderWidthPx": 11,
+          "lineSpacingPercent": 150,
+          "glowColor": "#000000",
+          "glowWidthPx": 17,
+          "glowOpacityPercent": 82
+        },
+        "position": {
+          "preset": "bottom-center",
+          "alignment": "center",
+          "offsetXPercent": 0,
+          "offsetYPercent": -6
+        },
+        "background": null,
+        "layout": {
+          "maxSupportedLogicalWidthPerLine": 14,
+          "maxLines": 2,
+          "singleLine": false,
+          "characterWidthRule": "U+0000..U+00FF=1; other Unicode code point=2"
+        },
+        "transitionId": "quick-fade-4f-v001"
+      },
+      "transition": {
+        "transitionId": "quick-fade-4f-v001",
+        "entry": {
+          "type": "alpha-fade",
+          "frames": 4
+        },
+        "exit": {
+          "type": "alpha-fade",
+          "frames": 4
+        }
+      },
+      "timelineSegmentId": "segment-0001",
+      "targetProvenance": {
+        "targetRefId": "caption-target-000024",
+        "targetType": "caption-target",
+        "sourceAtomIds": [
+          "word-17905",
+          "word-17906",
+          "word-17907",
+          "word-17908",
+          "word-17909",
+          "word-17910",
+          "word-17911",
+          "word-17912",
+          "word-17913",
+          "word-17914"
+        ],
+        "cueId": "caption-cue-000024",
+        "captionTargetId": "caption-target-000024",
+        "lineAtomIds": [
+          [
+            "word-17905",
+            "word-17906",
+            "word-17907",
+            "word-17908",
+            "word-17909",
+            "word-17910"
+          ],
+          [
+            "word-17911",
+            "word-17912",
+            "word-17913",
+            "word-17914"
+          ]
+        ],
+        "startAnchor": {
+          "atomId": "word-17905",
+          "edge": "start"
+        },
+        "endAnchor": {
+          "atomId": "word-17914",
+          "edge": "end"
+        }
+      },
+      "materialRefs": [],
+      "overlaySha256": "65a36c7e007a8ac34f9e86f912518d13c99ec47046abcf97c9885cd363b5704c"
+    },
+    {
+      "instructionId": "caption-instruction-000025",
+      "kind": "speech-caption",
+      "text": "やりかけでいろんなこと",
+      "indexedLines": [
+        {
+          "lineIndex": 0,
+          "characters": [
+            {
+              "sourceIndex": 0,
+              "character": "や",
+              "codePoint": 12420,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 1,
+              "character": "り",
+              "codePoint": 12426,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 2,
+              "character": "か",
+              "codePoint": 12363,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 3,
+              "character": "け",
+              "codePoint": 12369,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 4,
+              "character": "で",
+              "codePoint": 12391,
+              "role": "visible"
+            }
+          ],
+          "renderedText": "やりかけで",
+          "text": "やりかけで",
+          "codePointIndices": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ]
+        },
+        {
+          "lineIndex": 1,
+          "characters": [
+            {
+              "sourceIndex": 5,
+              "character": "い",
+              "codePoint": 12356,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 6,
+              "character": "ろ",
+              "codePoint": 12429,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 7,
+              "character": "ん",
+              "codePoint": 12435,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 8,
+              "character": "な",
+              "codePoint": 12394,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 9,
+              "character": "こ",
+              "codePoint": 12371,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 10,
+              "character": "と",
+              "codePoint": 12392,
+              "role": "visible"
+            }
+          ],
+          "renderedText": "いろんなこと",
+          "text": "いろんなこと",
+          "codePointIndices": [
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+          ]
+        }
+      ],
+      "sourceStartMs": 5980869,
+      "sourceEndMs": 5981809,
+      "startFrame": 1191,
+      "endFrameExclusive": 1219,
+      "displayFrameCount": 28,
+      "requestedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+      "appliedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+      "presetId": "vertical-short-speaker-only-readable-pop-v001",
+      "registryVersion": "vertical-short-preset-registry-v001",
+      "presetRegistryVersion": "vertical-short-preset-registry-v001",
+      "stateId": "caption-core-vertical-speaker-only-v001",
+      "visualState": {
+        "stateId": "caption-core-vertical-speaker-only-v001",
+        "textStyle": {
+          "fontAssetId": "line-seed-jp-extra-bold-v001",
+          "fontSizePx": 134,
+          "fontColor": "#FFFDF8",
+          "borderColor": "#111827",
+          "borderWidthPx": 11,
+          "lineSpacingPercent": 150,
+          "glowColor": "#000000",
+          "glowWidthPx": 17,
+          "glowOpacityPercent": 82
+        },
+        "position": {
+          "preset": "bottom-center",
+          "alignment": "center",
+          "offsetXPercent": 0,
+          "offsetYPercent": -6
+        },
+        "background": null,
+        "layout": {
+          "maxSupportedLogicalWidthPerLine": 14,
+          "maxLines": 2,
+          "singleLine": false,
+          "characterWidthRule": "U+0000..U+00FF=1; other Unicode code point=2"
+        },
+        "transitionId": "quick-fade-4f-v001"
+      },
+      "transition": {
+        "transitionId": "quick-fade-4f-v001",
+        "entry": {
+          "type": "alpha-fade",
+          "frames": 4
+        },
+        "exit": {
+          "type": "alpha-fade",
+          "frames": 4
+        }
+      },
+      "timelineSegmentId": "segment-0001",
+      "targetProvenance": {
+        "targetRefId": "caption-target-000025",
+        "targetType": "caption-target",
+        "sourceAtomIds": [
+          "word-17915",
+          "word-17916",
+          "word-17917",
+          "word-17918",
+          "word-17919",
+          "word-17920",
+          "word-17921",
+          "word-17922",
+          "word-17923",
+          "word-17924",
+          "word-17925"
+        ],
+        "cueId": "caption-cue-000025",
+        "captionTargetId": "caption-target-000025",
+        "lineAtomIds": [
+          [
+            "word-17915",
+            "word-17916",
+            "word-17917",
+            "word-17918",
+            "word-17919"
+          ],
+          [
+            "word-17920",
+            "word-17921",
+            "word-17922",
+            "word-17923",
+            "word-17924",
+            "word-17925"
+          ]
+        ],
+        "startAnchor": {
+          "atomId": "word-17915",
+          "edge": "start"
+        },
+        "endAnchor": {
+          "atomId": "word-17925",
+          "edge": "end"
+        }
+      },
+      "materialRefs": [],
+      "overlaySha256": "99a6a70be6df02788f9dffeb1c3d057510f29c5d3c44d6d28f94787adf60c660"
+    },
+    {
+      "instructionId": "caption-instruction-000026",
+      "kind": "speech-caption",
+      "text": "やり始めちゃう",
+      "indexedLines": [
+        {
+          "lineIndex": 0,
+          "characters": [
+            {
+              "sourceIndex": 0,
+              "character": "や",
+              "codePoint": 12420,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 1,
+              "character": "り",
+              "codePoint": 12426,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 2,
+              "character": "始",
+              "codePoint": 22987,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 3,
+              "character": "め",
+              "codePoint": 12417,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 4,
+              "character": "ち",
+              "codePoint": 12385,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 5,
+              "character": "ゃ",
+              "codePoint": 12419,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 6,
+              "character": "う",
+              "codePoint": 12358,
+              "role": "visible"
+            }
+          ],
+          "renderedText": "やり始めちゃう",
+          "text": "やり始めちゃう",
+          "codePointIndices": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6
+          ]
+        }
+      ],
+      "sourceStartMs": 5981809,
+      "sourceEndMs": 5984951,
+      "startFrame": 1219,
+      "endFrameExclusive": 1314,
+      "displayFrameCount": 95,
+      "requestedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+      "appliedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+      "presetId": "vertical-short-speaker-only-readable-pop-v001",
+      "registryVersion": "vertical-short-preset-registry-v001",
+      "presetRegistryVersion": "vertical-short-preset-registry-v001",
+      "stateId": "caption-core-vertical-speaker-only-v001",
+      "visualState": {
+        "stateId": "caption-core-vertical-speaker-only-v001",
+        "textStyle": {
+          "fontAssetId": "line-seed-jp-extra-bold-v001",
+          "fontSizePx": 134,
+          "fontColor": "#FFFDF8",
+          "borderColor": "#111827",
+          "borderWidthPx": 11,
+          "lineSpacingPercent": 150,
+          "glowColor": "#000000",
+          "glowWidthPx": 17,
+          "glowOpacityPercent": 82
+        },
+        "position": {
+          "preset": "bottom-center",
+          "alignment": "center",
+          "offsetXPercent": 0,
+          "offsetYPercent": -6
+        },
+        "background": null,
+        "layout": {
+          "maxSupportedLogicalWidthPerLine": 14,
+          "maxLines": 2,
+          "singleLine": false,
+          "characterWidthRule": "U+0000..U+00FF=1; other Unicode code point=2"
+        },
+        "transitionId": "quick-fade-4f-v001"
+      },
+      "transition": {
+        "transitionId": "quick-fade-4f-v001",
+        "entry": {
+          "type": "alpha-fade",
+          "frames": 4
+        },
+        "exit": {
+          "type": "alpha-fade",
+          "frames": 4
+        }
+      },
+      "timelineSegmentId": "segment-0001",
+      "targetProvenance": {
+        "targetRefId": "caption-target-000026",
+        "targetType": "caption-target",
+        "sourceAtomIds": [
+          "word-17926",
+          "word-17927",
+          "word-17928",
+          "word-17929",
+          "word-17930",
+          "word-17931",
+          "word-17932"
+        ],
+        "cueId": "caption-cue-000026",
+        "captionTargetId": "caption-target-000026",
+        "lineAtomIds": [
+          [
+            "word-17926",
+            "word-17927",
+            "word-17928",
+            "word-17929",
+            "word-17930",
+            "word-17931",
+            "word-17932"
+          ]
+        ],
+        "startAnchor": {
+          "atomId": "word-17926",
+          "edge": "start"
+        },
+        "endAnchor": {
+          "atomId": "word-17932",
+          "edge": "end"
+        }
+      },
+      "materialRefs": [],
+      "overlaySha256": "5b1ccc6d8ab8f6e933a75852be3e77fceb05863d00a22f7a82f28effcd3b36e6"
+    },
+    {
+      "instructionId": "caption-instruction-000027",
+      "kind": "speech-caption",
+      "text": "困ったもんです",
+      "indexedLines": [
+        {
+          "lineIndex": 0,
+          "characters": [
+            {
+              "sourceIndex": 0,
+              "character": "困",
+              "codePoint": 22256,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 1,
+              "character": "っ",
+              "codePoint": 12387,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 2,
+              "character": "た",
+              "codePoint": 12383,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 3,
+              "character": "も",
+              "codePoint": 12418,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 4,
+              "character": "ん",
+              "codePoint": 12435,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 5,
+              "character": "で",
+              "codePoint": 12391,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 6,
+              "character": "す",
+              "codePoint": 12377,
+              "role": "visible"
+            }
+          ],
+          "renderedText": "困ったもんです",
+          "text": "困ったもんです",
+          "codePointIndices": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6
+          ]
+        }
+      ],
+      "sourceStartMs": 5984951,
+      "sourceEndMs": 5986672,
+      "startFrame": 1314,
+      "endFrameExclusive": 1365,
+      "displayFrameCount": 51,
+      "requestedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+      "appliedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+      "presetId": "vertical-short-speaker-only-readable-pop-v001",
+      "registryVersion": "vertical-short-preset-registry-v001",
+      "presetRegistryVersion": "vertical-short-preset-registry-v001",
+      "stateId": "caption-core-vertical-speaker-only-v001",
+      "visualState": {
+        "stateId": "caption-core-vertical-speaker-only-v001",
+        "textStyle": {
+          "fontAssetId": "line-seed-jp-extra-bold-v001",
+          "fontSizePx": 134,
+          "fontColor": "#FFFDF8",
+          "borderColor": "#111827",
+          "borderWidthPx": 11,
+          "lineSpacingPercent": 150,
+          "glowColor": "#000000",
+          "glowWidthPx": 17,
+          "glowOpacityPercent": 82
+        },
+        "position": {
+          "preset": "bottom-center",
+          "alignment": "center",
+          "offsetXPercent": 0,
+          "offsetYPercent": -6
+        },
+        "background": null,
+        "layout": {
+          "maxSupportedLogicalWidthPerLine": 14,
+          "maxLines": 2,
+          "singleLine": false,
+          "characterWidthRule": "U+0000..U+00FF=1; other Unicode code point=2"
+        },
+        "transitionId": "quick-fade-4f-v001"
+      },
+      "transition": {
+        "transitionId": "quick-fade-4f-v001",
+        "entry": {
+          "type": "alpha-fade",
+          "frames": 4
+        },
+        "exit": {
+          "type": "alpha-fade",
+          "frames": 4
+        }
+      },
+      "timelineSegmentId": "segment-0001",
+      "targetProvenance": {
+        "targetRefId": "caption-target-000027",
+        "targetType": "caption-target",
+        "sourceAtomIds": [
+          "word-17933",
+          "word-17934",
+          "word-17935",
+          "word-17936",
+          "word-17937",
+          "word-17938",
+          "word-17939"
+        ],
+        "cueId": "caption-cue-000027",
+        "captionTargetId": "caption-target-000027",
+        "lineAtomIds": [
+          [
+            "word-17933",
+            "word-17934",
+            "word-17935",
+            "word-17936",
+            "word-17937",
+            "word-17938",
+            "word-17939"
+          ]
+        ],
+        "startAnchor": {
+          "atomId": "word-17933",
+          "edge": "start"
+        },
+        "endAnchor": {
+          "atomId": "word-17939",
+          "edge": "end"
+        }
+      },
+      "materialRefs": [],
+      "overlaySha256": "d5fc8b473f1a1bb2a60fe2b994aa78572b93080751183897ae9de9e712df37b8"
+    },
+    {
+      "instructionId": "caption-instruction-000028",
+      "kind": "speech-caption",
+      "text": "え、なんか無意識に",
+      "indexedLines": [
+        {
+          "lineIndex": 0,
+          "characters": [
+            {
+              "sourceIndex": 0,
+              "character": "え",
+              "codePoint": 12360,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 1,
+              "character": "、",
+              "codePoint": 12289,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 2,
+              "character": "な",
+              "codePoint": 12394,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 3,
+              "character": "ん",
+              "codePoint": 12435,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 4,
+              "character": "か",
+              "codePoint": 12363,
+              "role": "visible"
+            }
+          ],
+          "renderedText": "え、なんか",
+          "text": "え、なんか",
+          "codePointIndices": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ]
+        },
+        {
+          "lineIndex": 1,
+          "characters": [
+            {
+              "sourceIndex": 5,
+              "character": "無",
+              "codePoint": 28961,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 6,
+              "character": "意",
+              "codePoint": 24847,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 7,
+              "character": "識",
+              "codePoint": 35672,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 8,
+              "character": "に",
+              "codePoint": 12395,
+              "role": "visible"
+            }
+          ],
+          "renderedText": "無意識に",
+          "text": "無意識に",
+          "codePointIndices": [
+            5,
+            6,
+            7,
+            8
+          ]
+        }
+      ],
+      "sourceStartMs": 5986672,
+      "sourceEndMs": 5987452,
+      "startFrame": 1365,
+      "endFrameExclusive": 1389,
+      "displayFrameCount": 24,
+      "requestedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+      "appliedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+      "presetId": "vertical-short-speaker-only-readable-pop-v001",
+      "registryVersion": "vertical-short-preset-registry-v001",
+      "presetRegistryVersion": "vertical-short-preset-registry-v001",
+      "stateId": "caption-core-vertical-speaker-only-v001",
+      "visualState": {
+        "stateId": "caption-core-vertical-speaker-only-v001",
+        "textStyle": {
+          "fontAssetId": "line-seed-jp-extra-bold-v001",
+          "fontSizePx": 134,
+          "fontColor": "#FFFDF8",
+          "borderColor": "#111827",
+          "borderWidthPx": 11,
+          "lineSpacingPercent": 150,
+          "glowColor": "#000000",
+          "glowWidthPx": 17,
+          "glowOpacityPercent": 82
+        },
+        "position": {
+          "preset": "bottom-center",
+          "alignment": "center",
+          "offsetXPercent": 0,
+          "offsetYPercent": -6
+        },
+        "background": null,
+        "layout": {
+          "maxSupportedLogicalWidthPerLine": 14,
+          "maxLines": 2,
+          "singleLine": false,
+          "characterWidthRule": "U+0000..U+00FF=1; other Unicode code point=2"
+        },
+        "transitionId": "quick-fade-4f-v001"
+      },
+      "transition": {
+        "transitionId": "quick-fade-4f-v001",
+        "entry": {
+          "type": "alpha-fade",
+          "frames": 4
+        },
+        "exit": {
+          "type": "alpha-fade",
+          "frames": 4
+        }
+      },
+      "timelineSegmentId": "segment-0001",
+      "targetProvenance": {
+        "targetRefId": "caption-target-000028",
+        "targetType": "caption-target",
+        "sourceAtomIds": [
+          "word-17940",
+          "word-17941",
+          "word-17942",
+          "word-17943",
+          "word-17944",
+          "word-17945",
+          "word-17946",
+          "word-17947",
+          "word-17948"
+        ],
+        "cueId": "caption-cue-000028",
+        "captionTargetId": "caption-target-000028",
+        "lineAtomIds": [
+          [
+            "word-17940",
+            "word-17941",
+            "word-17942",
+            "word-17943",
+            "word-17944"
+          ],
+          [
+            "word-17945",
+            "word-17946",
+            "word-17947",
+            "word-17948"
+          ]
+        ],
+        "startAnchor": {
+          "atomId": "word-17940",
+          "edge": "start"
+        },
+        "endAnchor": {
+          "atomId": "word-17948",
+          "edge": "end"
+        }
+      },
+      "materialRefs": [],
+      "overlaySha256": "00972e39169b304e6e233f7277f6d61f0f5e797c0b6a4a3df57e583613628be2"
+    },
+    {
+      "instructionId": "caption-instruction-000029",
+      "kind": "speech-caption",
+      "text": "また服脱いでたけど寒い",
+      "indexedLines": [
+        {
+          "lineIndex": 0,
+          "characters": [
+            {
+              "sourceIndex": 0,
+              "character": "ま",
+              "codePoint": 12414,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 1,
+              "character": "た",
+              "codePoint": 12383,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 2,
+              "character": "服",
+              "codePoint": 26381,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 3,
+              "character": "脱",
+              "codePoint": 33073,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 4,
+              "character": "い",
+              "codePoint": 12356,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 5,
+              "character": "で",
+              "codePoint": 12391,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 6,
+              "character": "た",
+              "codePoint": 12383,
+              "role": "visible"
+            }
+          ],
+          "renderedText": "また服脱いでた",
+          "text": "また服脱いでた",
+          "codePointIndices": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6
+          ]
+        },
+        {
+          "lineIndex": 1,
+          "characters": [
+            {
+              "sourceIndex": 7,
+              "character": "け",
+              "codePoint": 12369,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 8,
+              "character": "ど",
+              "codePoint": 12393,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 9,
+              "character": "寒",
+              "codePoint": 23506,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 10,
+              "character": "い",
+              "codePoint": 12356,
+              "role": "visible"
+            }
+          ],
+          "renderedText": "けど寒い",
+          "text": "けど寒い",
+          "codePointIndices": [
+            7,
+            8,
+            9,
+            10
+          ]
+        }
+      ],
+      "sourceStartMs": 5987452,
+      "sourceEndMs": 5988933,
+      "startFrame": 1389,
+      "endFrameExclusive": 1433,
+      "displayFrameCount": 44,
+      "requestedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+      "appliedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+      "presetId": "vertical-short-speaker-only-readable-pop-v001",
+      "registryVersion": "vertical-short-preset-registry-v001",
+      "presetRegistryVersion": "vertical-short-preset-registry-v001",
+      "stateId": "caption-core-vertical-speaker-only-v001",
+      "visualState": {
+        "stateId": "caption-core-vertical-speaker-only-v001",
+        "textStyle": {
+          "fontAssetId": "line-seed-jp-extra-bold-v001",
+          "fontSizePx": 134,
+          "fontColor": "#FFFDF8",
+          "borderColor": "#111827",
+          "borderWidthPx": 11,
+          "lineSpacingPercent": 150,
+          "glowColor": "#000000",
+          "glowWidthPx": 17,
+          "glowOpacityPercent": 82
+        },
+        "position": {
+          "preset": "bottom-center",
+          "alignment": "center",
+          "offsetXPercent": 0,
+          "offsetYPercent": -6
+        },
+        "background": null,
+        "layout": {
+          "maxSupportedLogicalWidthPerLine": 14,
+          "maxLines": 2,
+          "singleLine": false,
+          "characterWidthRule": "U+0000..U+00FF=1; other Unicode code point=2"
+        },
+        "transitionId": "quick-fade-4f-v001"
+      },
+      "transition": {
+        "transitionId": "quick-fade-4f-v001",
+        "entry": {
+          "type": "alpha-fade",
+          "frames": 4
+        },
+        "exit": {
+          "type": "alpha-fade",
+          "frames": 4
+        }
+      },
+      "timelineSegmentId": "segment-0001",
+      "targetProvenance": {
+        "targetRefId": "caption-target-000029",
+        "targetType": "caption-target",
+        "sourceAtomIds": [
+          "word-17949",
+          "word-17950",
+          "word-17951",
+          "word-17952",
+          "word-17953",
+          "word-17954",
+          "word-17955",
+          "word-17956",
+          "word-17957",
+          "word-17958",
+          "word-17959"
+        ],
+        "cueId": "caption-cue-000029",
+        "captionTargetId": "caption-target-000029",
+        "lineAtomIds": [
+          [
+            "word-17949",
+            "word-17950",
+            "word-17951",
+            "word-17952",
+            "word-17953",
+            "word-17954",
+            "word-17955"
+          ],
+          [
+            "word-17956",
+            "word-17957",
+            "word-17958",
+            "word-17959"
+          ]
+        ],
+        "startAnchor": {
+          "atomId": "word-17949",
+          "edge": "start"
+        },
+        "endAnchor": {
+          "atomId": "word-17959",
+          "edge": "end"
+        }
+      },
+      "materialRefs": [],
+      "overlaySha256": "430ba417a84a3d72b3b3bda02dc50465c01347c2faaa0aa975cafac96eb16641"
+    },
+    {
+      "instructionId": "caption-instruction-000030",
+      "kind": "speech-caption",
+      "text": "気をこうしてと",
+      "indexedLines": [
+        {
+          "lineIndex": 0,
+          "characters": [
+            {
+              "sourceIndex": 0,
+              "character": "気",
+              "codePoint": 27671,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 1,
+              "character": "を",
+              "codePoint": 12434,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 2,
+              "character": "こ",
+              "codePoint": 12371,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 3,
+              "character": "う",
+              "codePoint": 12358,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 4,
+              "character": "し",
+              "codePoint": 12375,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 5,
+              "character": "て",
+              "codePoint": 12390,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 6,
+              "character": "と",
+              "codePoint": 12392,
+              "role": "visible"
+            }
+          ],
+          "renderedText": "気をこうしてと",
+          "text": "気をこうしてと",
+          "codePointIndices": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6
+          ]
+        }
+      ],
+      "sourceStartMs": 5988933,
+      "sourceEndMs": 5992736,
+      "startFrame": 1433,
+      "endFrameExclusive": 1547,
+      "displayFrameCount": 114,
+      "requestedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+      "appliedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+      "presetId": "vertical-short-speaker-only-readable-pop-v001",
+      "registryVersion": "vertical-short-preset-registry-v001",
+      "presetRegistryVersion": "vertical-short-preset-registry-v001",
+      "stateId": "caption-core-vertical-speaker-only-v001",
+      "visualState": {
+        "stateId": "caption-core-vertical-speaker-only-v001",
+        "textStyle": {
+          "fontAssetId": "line-seed-jp-extra-bold-v001",
+          "fontSizePx": 134,
+          "fontColor": "#FFFDF8",
+          "borderColor": "#111827",
+          "borderWidthPx": 11,
+          "lineSpacingPercent": 150,
+          "glowColor": "#000000",
+          "glowWidthPx": 17,
+          "glowOpacityPercent": 82
+        },
+        "position": {
+          "preset": "bottom-center",
+          "alignment": "center",
+          "offsetXPercent": 0,
+          "offsetYPercent": -6
+        },
+        "background": null,
+        "layout": {
+          "maxSupportedLogicalWidthPerLine": 14,
+          "maxLines": 2,
+          "singleLine": false,
+          "characterWidthRule": "U+0000..U+00FF=1; other Unicode code point=2"
+        },
+        "transitionId": "quick-fade-4f-v001"
+      },
+      "transition": {
+        "transitionId": "quick-fade-4f-v001",
+        "entry": {
+          "type": "alpha-fade",
+          "frames": 4
+        },
+        "exit": {
+          "type": "alpha-fade",
+          "frames": 4
+        }
+      },
+      "timelineSegmentId": "segment-0001",
+      "targetProvenance": {
+        "targetRefId": "caption-target-000030",
+        "targetType": "caption-target",
+        "sourceAtomIds": [
+          "word-17960",
+          "word-17961",
+          "word-17962",
+          "word-17963",
+          "word-17964",
+          "word-17965",
+          "word-17966"
+        ],
+        "cueId": "caption-cue-000030",
+        "captionTargetId": "caption-target-000030",
+        "lineAtomIds": [
+          [
+            "word-17960",
+            "word-17961",
+            "word-17962",
+            "word-17963",
+            "word-17964",
+            "word-17965",
+            "word-17966"
+          ]
+        ],
+        "startAnchor": {
+          "atomId": "word-17960",
+          "edge": "start"
+        },
+        "endAnchor": {
+          "atomId": "word-17966",
+          "edge": "end"
+        }
+      },
+      "materialRefs": [],
+      "overlaySha256": "905fcdd00232cc6510ea37173e15dc6843f0cbd135011ae03eb2195a78f12120"
+    }
+  ]
+}

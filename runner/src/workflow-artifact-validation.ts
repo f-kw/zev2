@@ -194,6 +194,9 @@ function assertViewportCoords(value: unknown, label: string): void {
 function assertScreenLayout(value: unknown, label: string): void {
   const record = assertRecord(value, label);
   assertLiteral(record.screenLayoutId, `${label}の画面枠`, ['speaker_only', 'screen_speaker', 'speaker_pair'] as const);
+  if (record.classificationReason !== undefined) {
+    assertNonEmptyString(record.classificationReason, `${label}の種類判定理由`);
+  }
   assertRecord(record.detections, `${label}の検出結果`);
   const viewports = assertRecord(record.viewports, `${label}の表示範囲`);
   assertNonEmptyString(record.displaySummary, `${label}の表示説明`);

@@ -2,6 +2,7 @@ import React from 'react';
 import { Composition, getInputProps } from 'remotion';
 import { TelopRenderer } from './renderer/TelopRenderer';
 import type { TelopGlowColorMode } from '../shared/telop-glow';
+import type { TelopFontFailurePolicy } from './renderer/TelopRenderer';
 
 export type TelopStillProps = {
   text: string;
@@ -20,6 +21,8 @@ export type TelopStillProps = {
   };
   position: {
     preset: string;
+    offsetX?: number;
+    offsetY?: number;
     alignment?: 'left' | 'center' | 'right';
     slotId?: 'slotA' | 'slotB' | 'canvas' | 'slotC';
   };
@@ -34,6 +37,8 @@ export type TelopStillProps = {
   width?: number;
   height?: number;
   glowSeedHint?: string;
+  inspectionLineIndex?: number | null;
+  fontFailurePolicy: TelopFontFailurePolicy;
 };
 
 const TelopStill: React.FC<TelopStillProps> = () => {
@@ -50,6 +55,8 @@ const TelopStill: React.FC<TelopStillProps> = () => {
       width={props.width ?? 1920}
       height={props.height ?? 1080}
       glowSeedHint={props.glowSeedHint}
+      inspectionLineIndex={props.inspectionLineIndex ?? null}
+      fontFailurePolicy={props.fontFailurePolicy}
     />
   );
 };
@@ -94,7 +101,9 @@ export const RemotionRoot: React.FC = () => {
           singleLine: false,
           width: 1920,
           height: 1080,
-          glowSeedHint: 'default'
+          glowSeedHint: 'default',
+          inspectionLineIndex: null,
+          fontFailurePolicy: 'preserve-existing-fallback'
         }}
       />
     </>

@@ -441,7 +441,10 @@ async function buildGeminiVideoClipInputs(
   return clips;
 }
 
-function buildGeminiEditPlanPrompt(composition: ClipCompositionArtifact, request: AgentRequest): string {
+export function buildGeminiEditPlanPrompt(
+  composition: ClipCompositionArtifact,
+  request: AgentRequest
+): string {
   const partsText = composition.parts
     .map((part, index) => {
       const speechLines = part.speechUnits
@@ -474,20 +477,28 @@ function buildGeminiEditPlanPrompt(composition: ClipCompositionArtifact, request
     '断片全体の文字起こしを1つのテロップにまとめないでください。読点、句点、問いかけ、返答など、人間が自然に読める意味の区切りごとに複数のtelopPlanへ分けてください。',
     'JSONだけを返してください。',
     '',
-    '画面枠:',
-    '- speaker_only: 話者1人だけ。話者を縦長の画面全体に表示する。',
-    '- screen_speaker: 画面と話者。上に画面、下に話者を横長の2枠で表示する。',
-    '- speaker_pair: 話者2人。話者1を上、話者2を下に横長の2枠で表示する。',
+    '最初に動画の種類を判別し、その種類に対応する画面枠を選んでください。検出範囲を考えてから種類を決めてはいけません。',
+    '動画種類と画面枠:',
+    '- speaker_only: 主要な視覚対象が話者1人で、場面の理解に同時表示が必要な独立映像がない。',
+    '- screen_speaker: 話者とは別に、ゲーム、共有画面、ブラウザ、資料、別映像など、場面の理解に同時表示が必要な独立映像がある。',
+    '- speaker_pair: 2人の話者の表情や反応を同時に残す必要がある。',
+    '- 背景、装飾枠、コメント欄、常設タイトル、小さな静止パネルが見えるだけでは、独立映像があるとは判定しない。',
+    '- 同じ話者を含む元映像全体と、その話者を上下へ重複表示してはいけません。',
+    '- layoutReasonには、映像を見て種類を選んだ理由を短く書いてください。',
     '',
     'detections:',
     '- 座標は [ymin, xmin, ymax, xmax] の順で、0..1000 の整数にしてください。',
-    '- screen は、その断片で見えている画面全体です。',
+    '- 種類を決めた後、その種類が必要とする対象だけを検出してください。',
+    '- screen は元映像全体ではなく、話者とは独立して内容理解に必要な情報画面の範囲です。',
     '- speaker / speaker1 / speaker2 は face と body を返してください。',
     '- face は顔全体、body は見えている人物全体です。face は必ず body の内側に収めてください。',
     '- speaker_only では speaker を返してください。',
     '- screen_speaker では screen と speaker を返してください。',
     '- speaker_pair では speaker1 と speaker2 を返してください。',
     '- final crop と selectedCandidateId は返さないでください。AIエージェントが検出結果から表示候補を作ります。',
+    '- speaker_onlyのdetections形: { "speaker": { "face": [ymin, xmin, ymax, xmax], "body": [ymin, xmin, ymax, xmax] } }',
+    '- screen_speakerのdetections形: { "screen": [ymin, xmin, ymax, xmax], "speaker": { "face": [ymin, xmin, ymax, xmax], "body": [ymin, xmin, ymax, xmax] } }',
+    '- speaker_pairのdetections形: { "speaker1": { "face": [ymin, xmin, ymax, xmax], "body": [ymin, xmin, ymax, xmax] }, "speaker2": { "face": [ymin, xmin, ymax, xmax], "body": [ymin, xmin, ymax, xmax] } }',
     '',
     '返すJSON:',
     '{',
@@ -497,11 +508,9 @@ function buildGeminiEditPlanPrompt(composition: ClipCompositionArtifact, request
     '    {',
     '      "role": "断片の役割",',
     '      "caption": "断片に出す短いテロップ",',
-    '      "screenLayoutId": "screen_speaker",',
-    '      "detections": {',
-    '        "screen": [0, 0, 1000, 1000],',
-    '        "speaker": { "face": [0, 0, 300, 300], "body": [0, 0, 1000, 1000] }',
-    '      }',
+    '      "screenLayoutId": "<speaker_only|screen_speaker|speaker_pair>",',
+    '      "layoutReason": "映像を見てこの種類を選んだ理由",',
+    '      "detections": {}',
     '    }',
     '  ],',
     '  "telopPlan": [',
@@ -644,7 +653,7 @@ async function buildCandidatePreviewInputs(
   return previews;
 }
 
-function buildGeminiCandidateSelectionPrompt(
+export function buildGeminiCandidateSelectionPrompt(
   composition: ClipCompositionArtifact,
   candidateDraft: CandidateEditPlanArtifact
 ): string {
@@ -659,6 +668,7 @@ function buildGeminiCandidateSelectionPrompt(
         `役割: ${segment.role}`,
         `テロップ: ${segment.caption}`,
         `画面パターン: ${candidateSet.displaySummary}`,
+        `種類判定理由: ${candidateSet.classificationReason ?? '応答に記録なし'}`,
         '候補:',
         candidates
       ].join('\n');

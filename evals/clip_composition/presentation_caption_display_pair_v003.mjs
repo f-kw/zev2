@@ -581,20 +581,17 @@ const normalizedAtoms = (retained) => retained.rawSourceAtoms.map((atom) => {
   };
 });
 
-const buildDisplayPlan = ({
-  job,
-  compilerInput,
-  retained,
-  timeline,
-  sourcePackage,
-  semantic,
-  retainedInputs,
-  baseInputs,
-  registryInputs,
-}) => {
-  const sourceById = new Map(normalizedAtoms(retained).map((atom) => [atom.atomId, atom]));
+export function buildPresentationCaptionDisplayContainersFormatNeutralV003(input) {
+  if (!exactKeys(input, ['compilerInput', 'retainedSourceAtoms'])
+    || !Array.isArray(input.compilerInput?.containers)
+    || !Array.isArray(input.retainedSourceAtoms?.rawSourceAtoms)) {
+    throw new TypeError('invalid format-neutral display calculation input');
+  }
+  const sourceById = new Map(
+    normalizedAtoms(input.retainedSourceAtoms).map((atom) => [atom.atomId, atom]),
+  );
   let globalCueOrdinal = 0;
-  const containers = compilerInput.containers.map((container) => ({
+  return input.compilerInput.containers.map((container) => ({
     containerId: container.containerId,
     timelineSegmentId: container.timelineSegmentId,
     speechId: container.speechId,
@@ -609,7 +606,12 @@ const buildDisplayPlan = ({
         endAnchor: clone(line.endAnchor),
         logicalWidth: line.logicalWidth,
       }));
-      const atoms = lines.flatMap((line) => line.sourceAtomIds).map((idValue) => sourceById.get(idValue));
+      const atoms = lines
+        .flatMap((line) => line.sourceAtomIds)
+        .map((atomId) => sourceById.get(atomId));
+      if (atoms.length === 0 || atoms.some((atom) => atom === undefined)) {
+        throw new TypeError('display source atom missing');
+      }
       return {
         cueId: `caption-cue-${id}`,
         targetRefId: `caption-target-${id}`,
@@ -624,6 +626,23 @@ const buildDisplayPlan = ({
       };
     }),
   }));
+}
+
+const buildDisplayPlan = ({
+  job,
+  compilerInput,
+  retained,
+  timeline,
+  sourcePackage,
+  semantic,
+  retainedInputs,
+  baseInputs,
+  registryInputs,
+}) => {
+  const containers = buildPresentationCaptionDisplayContainersFormatNeutralV003({
+    compilerInput,
+    retainedSourceAtoms: retained,
+  });
   const sourcePackageByRole = byRole(sourcePackage);
   const semanticByRole = byRole(semantic);
   const retainedByRole = byRole(retainedInputs);

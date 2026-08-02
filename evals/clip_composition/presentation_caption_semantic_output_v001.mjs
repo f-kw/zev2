@@ -22,6 +22,19 @@ const GATE_A_REPORT_SCHEMA =
   'presentation-segmenter-boundary-preflight-report-v001';
 const GATE_A_CHECK_REPORT_SCHEMA =
   'presentation-segmenter-boundary-check-report-v001';
+const HORIZONTAL_SEMANTIC_COMPILER_CONTRACT_V001 = Object.freeze({
+  sourceInputSchemaVersion: SOURCE_INPUT_SCHEMA,
+  expansionMapSchemaVersion: EXPANSION_MAP_SCHEMA,
+  manifestSchemaVersion: PACKAGE_MANIFEST_SCHEMA,
+  packageReportSchemaVersion: PACKAGE_REPORT_SCHEMA,
+  compilerSchemaVersion: COMPILER_SCHEMA,
+  presetId: 'normal-landscape-readable-pop-v001',
+  visualStateId: 'caption-core-v001',
+  maxLogicalWidthPerLine: 36,
+  maxLinesPerMeaningGroup: 2,
+  characterWidthRule: 'U+0000..U+00FF=1; other Unicode code point=2',
+  manifestHasDisplayPolicy: false,
+});
 
 const JOB_ROOT =
   'evals/clip_composition/outputs/presentation/caption-semantic-output-check-jobs/';
@@ -1414,20 +1427,23 @@ const validateEvidenceShape = (value) => exactKeys(value, [
   && SHA256.test(value.boundaryCandidatesCanonicalSha256 ?? '')
   && SHA256.test(value.sourceAtomMembershipCanonicalSha256 ?? '');
 
-const validateSourceInputShape = (value) => exactKeys(value, [
+const validateSourceInputShape = (
+  value,
+  contract = HORIZONTAL_SEMANTIC_COMPILER_CONTRACT_V001,
+) => exactKeys(value, [
   'schemaVersion',
   'taskDescription',
   'displayConstraints',
   'containers',
 ])
-  && value.schemaVersion === SOURCE_INPUT_SCHEMA
+  && value.schemaVersion === contract.sourceInputSchemaVersion
   && value.taskDescription === TASK_DESCRIPTION
   && exactKeys(value.displayConstraints, [
     'maxLogicalWidthPerLine',
     'maxLinesPerMeaningGroup',
   ])
-  && value.displayConstraints.maxLogicalWidthPerLine === 36
-  && value.displayConstraints.maxLinesPerMeaningGroup === 2
+  && value.displayConstraints.maxLogicalWidthPerLine === contract.maxLogicalWidthPerLine
+  && value.displayConstraints.maxLinesPerMeaningGroup === contract.maxLinesPerMeaningGroup
   && Array.isArray(value.containers)
   && value.containers.every((container) => exactKeys(container, [
     'containerId',
@@ -1447,7 +1463,10 @@ const validateSourceInputShape = (value) => exactKeys(value, [
       && isString(candidate.text)
       && isCount(candidate.logicalWidth)));
 
-const validateExpansionMapShape = (value) => exactKeys(value, [
+const validateExpansionMapShape = (
+  value,
+  contract = HORIZONTAL_SEMANTIC_COMPILER_CONTRACT_V001,
+) => exactKeys(value, [
   'schemaVersion',
   'artifactId',
   'sourceBindings',
@@ -1455,7 +1474,7 @@ const validateExpansionMapShape = (value) => exactKeys(value, [
   'modelInputBinding',
   'containers',
 ])
-  && value.schemaVersion === EXPANSION_MAP_SCHEMA
+  && value.schemaVersion === contract.expansionMapSchemaVersion
   && isNonEmptyString(value.artifactId)
   && exactKeys(value.sourceBindings, ['sourceAtoms', 'boundaryEvidence'])
   && validPathDualHash(value.sourceBindings.sourceAtoms)
@@ -1496,12 +1515,11 @@ const validateExpansionMapShape = (value) => exactKeys(value, [
   ].every(validPathDualHash)
   && validPathHash(value.widthPolicyBinding.rendererTrustImplementation)
   && validPathHash(value.widthPolicyBinding.textLayoutImplementation)
-  && value.widthPolicyBinding.presetId === 'normal-landscape-readable-pop-v001'
-  && value.widthPolicyBinding.visualStateId === 'caption-core-v001'
-  && value.widthPolicyBinding.maxLogicalWidthPerLine === 36
-  && value.widthPolicyBinding.maxLinesPerMeaningGroup === 2
-  && value.widthPolicyBinding.characterWidthRule
-    === 'U+0000..U+00FF=1; other Unicode code point=2'
+  && value.widthPolicyBinding.presetId === contract.presetId
+  && value.widthPolicyBinding.visualStateId === contract.visualStateId
+  && value.widthPolicyBinding.maxLogicalWidthPerLine === contract.maxLogicalWidthPerLine
+  && value.widthPolicyBinding.maxLinesPerMeaningGroup === contract.maxLinesPerMeaningGroup
+  && value.widthPolicyBinding.characterWidthRule === contract.characterWidthRule
   && exactKeys(value.modelInputBinding, ['fileName', 'fileSha256', 'canonicalSha256'])
   && value.modelInputBinding.fileName === PACKAGE_FILES[2]
   && SHA256.test(value.modelInputBinding.fileSha256 ?? '')
@@ -1946,6 +1964,166 @@ const validatePackageReportShape = (value) => exactKeys(value, [
   && value.scope.semanticQualityVerified === false
   && value.scope.naturalBreakQualityVerified === false
   && value.scope.nonCooperativePublicationRaceProtected === false;
+
+const validateSemanticCompilerContractV001 = (contract) => exactKeys(contract, [
+  'sourceInputSchemaVersion',
+  'expansionMapSchemaVersion',
+  'manifestSchemaVersion',
+  'packageReportSchemaVersion',
+  'compilerSchemaVersion',
+  'presetId',
+  'visualStateId',
+  'maxLogicalWidthPerLine',
+  'maxLinesPerMeaningGroup',
+  'characterWidthRule',
+  'manifestHasDisplayPolicy',
+])
+  && [
+    contract.sourceInputSchemaVersion,
+    contract.expansionMapSchemaVersion,
+    contract.manifestSchemaVersion,
+    contract.packageReportSchemaVersion,
+    contract.compilerSchemaVersion,
+    contract.presetId,
+    contract.visualStateId,
+    contract.characterWidthRule,
+  ].every(isNonEmptyString)
+  && Number.isSafeInteger(contract.maxLogicalWidthPerLine)
+  && contract.maxLogicalWidthPerLine > 0
+  && Number.isSafeInteger(contract.maxLinesPerMeaningGroup)
+  && contract.maxLinesPerMeaningGroup > 0
+  && typeof contract.manifestHasDisplayPolicy === 'boolean';
+
+const validateManifestShapeForCompilerContract = (value, contract) => {
+  if (!contract.manifestHasDisplayPolicy) return validateManifestShape(value);
+  return exactKeys(value, [
+    'schemaVersion',
+    'packageId',
+    'artifactId',
+    'formalOutputPath',
+    'packageJobBinding',
+    'sourceGateBinding',
+    'implementationBinding',
+    'runtimeBinding',
+    'externalInputBindings',
+    'formatSelection',
+    'displayConstraintInput',
+    'contentArtifacts',
+    'contentSetCanonicalSha256',
+    'validationReportDeclaration',
+  ])
+    && value.schemaVersion === contract.manifestSchemaVersion
+    && isNonEmptyString(value.packageId)
+    && isNonEmptyString(value.artifactId)
+    && safePath(value.formalOutputPath)
+    && validPathHash(value.packageJobBinding)
+    && exactKeys(value.implementationBinding, ['files', 'dependencyFiles'])
+    && Array.isArray(value.implementationBinding.files)
+    && value.implementationBinding.files.length === 3
+    && Array.isArray(value.implementationBinding.dependencyFiles)
+    && value.implementationBinding.dependencyFiles.length === 4
+    && [...value.implementationBinding.files, ...value.implementationBinding.dependencyFiles]
+      .every((entry) => exactKeys(entry, ['role', 'path', 'fileSha256'])
+        && isNonEmptyString(entry.role)
+        && safePath(entry.path)
+        && SHA256.test(entry.fileSha256 ?? ''))
+    && exactKeys(value.formatSelection, [
+      'format',
+      'screenLayoutId',
+      'presetId',
+      'visualStateId',
+    ])
+    && value.formatSelection.presetId === contract.presetId
+    && value.formatSelection.visualStateId === contract.visualStateId
+    && exactKeys(value.displayConstraintInput, [
+      'maxLogicalWidthPerLine',
+      'maxLinesPerMeaningGroup',
+      'characterWidthRule',
+    ])
+    && value.displayConstraintInput.maxLogicalWidthPerLine
+      === contract.maxLogicalWidthPerLine
+    && value.displayConstraintInput.maxLinesPerMeaningGroup
+      === contract.maxLinesPerMeaningGroup
+    && value.displayConstraintInput.characterWidthRule === contract.characterWidthRule
+    && Array.isArray(value.contentArtifacts)
+    && value.contentArtifacts.length === 5
+    && value.contentArtifacts.every((entry, index) => exactKeys(entry, [
+      'role',
+      'fileName',
+      'fileSha256',
+      'canonicalSha256',
+    ])
+      && entry.role === CONTENT_ROLES[index]
+      && entry.fileName === PACKAGE_FILES[index]
+      && SHA256.test(entry.fileSha256 ?? '')
+      && SHA256.test(entry.canonicalSha256 ?? ''))
+    && SHA256.test(value.contentSetCanonicalSha256 ?? '')
+    && exactKeys(value.validationReportDeclaration, [
+      'fileName',
+      'schemaVersion',
+      'selfHashPolicy',
+    ])
+    && value.validationReportDeclaration.fileName === PACKAGE_FILES[6]
+    && value.validationReportDeclaration.schemaVersion === contract.packageReportSchemaVersion;
+};
+
+const validatePackageReportShapeForCompilerContract = (value, contract) => {
+  if (!contract.manifestHasDisplayPolicy) return validatePackageReportShape(value);
+  return exactKeys(value, [
+    'schemaVersion',
+    'status',
+    'failureStage',
+    'jobBinding',
+    'package',
+    'manifestBinding',
+    'checks',
+    'violations',
+    'validatedContentArtifacts',
+    'observedProjection',
+    'scope',
+  ])
+    && value.schemaVersion === contract.packageReportSchemaVersion
+    && value.status === 'passed'
+    && value.failureStage === null
+    && validPathHash(value.jobBinding)
+    && exactKeys(value.package, ['packageId', 'artifactId', 'formalOutputPath'])
+    && exactKeys(value.manifestBinding, ['fileName', 'fileSha256', 'canonicalSha256'])
+    && Array.isArray(value.checks)
+    && value.checks.length === PACKAGE_CHECK_NAMES.length
+    && value.checks.every((entry, index) => exactKeys(entry, [
+      'name',
+      'status',
+      'violationCodes',
+    ])
+      && entry.name === PACKAGE_CHECK_NAMES[index]
+      && entry.status === 'passed'
+      && Array.isArray(entry.violationCodes)
+      && entry.violationCodes.length === 0)
+    && Array.isArray(value.violations)
+    && value.violations.length === 0
+    && Array.isArray(value.validatedContentArtifacts)
+    && value.validatedContentArtifacts.length === 5
+    && exactKeys(value.observedProjection, [
+      'sourceAtomCount',
+      'containerCount',
+      'boundaryCandidateCount',
+      'containers',
+      'maximumObservedCandidateLogicalWidth',
+      'formatSelection',
+      'displayConstraintInput',
+    ])
+    && exactKeys(value.observedProjection.formatSelection, [
+      'format',
+      'screenLayoutId',
+      'presetId',
+      'visualStateId',
+    ])
+    && exactKeys(value.observedProjection.displayConstraintInput, [
+      'maxLogicalWidthPerLine',
+      'maxLinesPerMeaningGroup',
+      'characterWidthRule',
+    ]);
+};
 
 const observePackage = (context, state) => {
   const observation = context.sourcePackageObservation;
@@ -2609,6 +2787,9 @@ const evaluateRawSemantic = (context, packageData, state) => {
   if (!scaffold) return {kind: 'invalid', value};
 
   const sourceInput = packageData.values[2];
+  const maximumLineWidth = sourceInput.displayConstraints.maxLogicalWidthPerLine;
+  const maximumLinesPerMeaningGroup =
+    sourceInput.displayConstraints.maxLinesPerMeaningGroup;
   const expectedContainers = sourceInput.containers;
   const actualIds = value.containers.map((container) => container.containerId);
   const expectedIds = expectedContainers.map((container) => container.containerId);
@@ -2674,7 +2855,7 @@ const evaluateRawSemantic = (context, packageData, state) => {
         return;
       }
       const ids = group.lineEndBoundaryCandidateIds;
-      if (ids.length < 1 || ids.length > 2) {
+      if (ids.length < 1 || ids.length > maximumLinesPerMeaningGroup) {
         addViolation(
           state,
           'SEMANTIC_LINE_COUNT_INVALID',
@@ -2702,7 +2883,9 @@ const evaluateRawSemantic = (context, packageData, state) => {
             .slice(priorPosition + 1, located.candidateIndex + 1);
           const width = lineCandidates.reduce((sum, candidate) => sum + candidate.logicalWidth, 0);
           const textWidth = logicalWidth(lineCandidates.map((candidate) => candidate.text).join(''));
-          if (width > 36 || textWidth > 36 || width !== textWidth) {
+          if (width > maximumLineWidth
+            || textWidth > maximumLineWidth
+            || width !== textWidth) {
             addViolation(state, 'SEMANTIC_LINE_WIDTH_EXCEEDED', idPath);
           }
         }
@@ -2725,7 +2908,13 @@ const evaluateRawSemantic = (context, packageData, state) => {
 const sourceSnapshotsForBuilder = (context) => context.sourcePackageObservation.artifactReads
   .map((entry) => entry.snapshot);
 
-export function buildPresentationCaptionSemanticCompilerInputV001(context) {
+export function buildPresentationCaptionSemanticCompilerInputForContractV001(
+  context,
+  contract,
+) {
+  if (!validateSemanticCompilerContractV001(contract)) {
+    throw new TypeError('invalid semantic compiler contract');
+  }
   if (!exactKeys(context, ['sourcePackageSnapshots', 'rawSemanticOutputSnapshot'])
     || !Array.isArray(context.sourcePackageSnapshots)
     || context.sourcePackageSnapshots.length !== PACKAGE_FILES.length
@@ -2749,10 +2938,23 @@ export function buildPresentationCaptionSemanticCompilerInputV001(context) {
   }
   const [evidence, , sourceInput, expansionMap, , manifest, packageReport] = decoded;
   if (!validateEvidenceShape(evidence)
-    || !validateSourceInputShape(sourceInput)
-    || !validateExpansionMapShape(expansionMap)
-    || !validateManifestShape(manifest)
-    || !validatePackageReportShape(packageReport)) {
+    || !validateSourceInputShape(sourceInput, contract)
+    || !validateExpansionMapShape(expansionMap, contract)
+    || !validateManifestShapeForCompilerContract(manifest, contract)
+    || !validatePackageReportShapeForCompilerContract(packageReport, contract)
+    || sourceInput.displayConstraints.maxLogicalWidthPerLine
+      !== expansionMap.widthPolicyBinding.maxLogicalWidthPerLine
+    || sourceInput.displayConstraints.maxLinesPerMeaningGroup
+      !== expansionMap.widthPolicyBinding.maxLinesPerMeaningGroup
+    || (contract.manifestHasDisplayPolicy
+      && (manifest.displayConstraintInput.maxLogicalWidthPerLine
+        !== sourceInput.displayConstraints.maxLogicalWidthPerLine
+        || manifest.displayConstraintInput.maxLinesPerMeaningGroup
+          !== sourceInput.displayConstraints.maxLinesPerMeaningGroup
+        || manifest.displayConstraintInput.characterWidthRule
+          !== expansionMap.widthPolicyBinding.characterWidthRule
+        || manifest.formatSelection.presetId !== expansionMap.widthPolicyBinding.presetId
+        || manifest.formatSelection.visualStateId !== expansionMap.widthPolicyBinding.visualStateId))) {
     throw new TypeError('invalid source package');
   }
 
@@ -2821,7 +3023,7 @@ export function buildPresentationCaptionSemanticCompilerInputV001(context) {
     };
   };
   return {
-    schemaVersion: COMPILER_SCHEMA,
+    schemaVersion: contract.compilerSchemaVersion,
     artifactId: manifest.artifactId,
     sourcePackageBinding: {
       manifest: binding('package-manifest.json'),
@@ -2835,6 +3037,132 @@ export function buildPresentationCaptionSemanticCompilerInputV001(context) {
       canonicalSha256: canonicalSha(rawResult.value),
     },
     containers,
+  };
+}
+
+export function buildPresentationCaptionSemanticCompilerInputV001(context) {
+  return buildPresentationCaptionSemanticCompilerInputForContractV001(
+    context,
+    HORIZONTAL_SEMANTIC_COMPILER_CONTRACT_V001,
+  );
+}
+
+export function validatePresentationCaptionSemanticSelectionForContractV001(input) {
+  const violations = [];
+  const add = (code, path) => violations.push({code, path, details: {}});
+  try {
+    if (!exactKeys(input, [
+      'rawSemanticOutput',
+      'sourceInput',
+      'expansionMap',
+      'contract',
+    ])
+      || !validateSemanticCompilerContractV001(input.contract)
+      || !validateSourceInputShape(input.sourceInput, input.contract)
+      || !validateExpansionMapShape(input.expansionMap, input.contract)) {
+      add('SEMANTIC_OUTPUT_SCHEMA_INVALID', '$');
+      return {status: 'rejected', kind: 'invalid', violations};
+    }
+    const {rawSemanticOutput, sourceInput, expansionMap, contract} = input;
+    if (exactKeys(rawSemanticOutput, ['status'])
+      && rawSemanticOutput.status === 'abstained') {
+      return {status: 'passed', kind: 'abstained', violations: []};
+    }
+    if (!exactKeys(rawSemanticOutput, ['status', 'containers'])
+      || rawSemanticOutput.status !== 'complete'
+      || !Array.isArray(rawSemanticOutput.containers)) {
+      add('SEMANTIC_OUTPUT_SCHEMA_INVALID', '$.rawSemanticOutput');
+      return {status: 'rejected', kind: 'invalid', violations};
+    }
+    const expectedIds = sourceInput.containers.map((entry) => entry.containerId);
+    const actualIds = rawSemanticOutput.containers.map((entry) => entry?.containerId);
+    if (!sameArray(actualIds, expectedIds)) {
+      add('SEMANTIC_CONTAINER_SET_INVALID', '$.rawSemanticOutput.containers');
+    }
+    const expansionByContainer = new Map(
+      expansionMap.containers.map((entry) => [entry.containerId, entry]),
+    );
+    rawSemanticOutput.containers.forEach((container, containerIndex) => {
+      const containerPath = `$.rawSemanticOutput.containers[${containerIndex}]`;
+      if (!exactKeys(container, ['containerId', 'meaningGroups'])
+        || !Array.isArray(container.meaningGroups)
+        || container.meaningGroups.length === 0) {
+        add('SEMANTIC_GROUP_INVALID', `${containerPath}.meaningGroups`);
+        return;
+      }
+      const sourceContainer = sourceInput.containers[containerIndex];
+      const mapContainer = expansionByContainer.get(container.containerId);
+      if (!sourceContainer || !mapContainer) return;
+      const candidateIndex = new Map(
+        sourceContainer.boundaryCandidates.map(
+          (candidate, index) => [candidate.boundaryCandidateId, index],
+        ),
+      );
+      let priorIndex = -1;
+      let finalBoundaryId = null;
+      container.meaningGroups.forEach((group, groupIndex) => {
+        const groupPath = `${containerPath}.meaningGroups[${groupIndex}]`;
+        if (!exactKeys(group, ['lineEndBoundaryCandidateIds'])
+          || !Array.isArray(group.lineEndBoundaryCandidateIds)) {
+          add('SEMANTIC_GROUP_INVALID', groupPath);
+          return;
+        }
+        if (group.lineEndBoundaryCandidateIds.length < 1
+          || group.lineEndBoundaryCandidateIds.length
+            > contract.maxLinesPerMeaningGroup) {
+          add(
+            'SEMANTIC_LINE_COUNT_INVALID',
+            `${groupPath}.lineEndBoundaryCandidateIds`,
+          );
+        }
+        group.lineEndBoundaryCandidateIds.forEach((boundaryId, lineIndex) => {
+          const linePath = `${groupPath}.lineEndBoundaryCandidateIds[${lineIndex}]`;
+          const endIndex = candidateIndex.get(boundaryId);
+          if (!Number.isSafeInteger(endIndex)) {
+            add('SEMANTIC_BOUNDARY_ID_UNKNOWN', linePath);
+            return;
+          }
+          if (endIndex <= priorIndex) {
+            add('SEMANTIC_BOUNDARY_ORDER_INVALID', linePath);
+            return;
+          }
+          const candidates = sourceContainer.boundaryCandidates.slice(
+            priorIndex + 1,
+            endIndex + 1,
+          );
+          const mapped = mapContainer.candidates.slice(priorIndex + 1, endIndex + 1);
+          const declaredWidth = mapped.reduce(
+            (sum, candidate) => sum + candidate.logicalWidth,
+            0,
+          );
+          const sourceWidth = candidates.reduce(
+            (sum, candidate) => sum + candidate.logicalWidth,
+            0,
+          );
+          const observedWidth = logicalWidth(
+            candidates.map((candidate) => candidate.text).join(''),
+          );
+          if (declaredWidth !== sourceWidth
+            || sourceWidth !== observedWidth
+            || observedWidth > contract.maxLogicalWidthPerLine) {
+            add('SEMANTIC_LINE_WIDTH_EXCEEDED', linePath);
+          }
+          priorIndex = endIndex;
+          finalBoundaryId = boundaryId;
+        });
+      });
+      if (finalBoundaryId !== sourceContainer.boundaryCandidates.at(-1)?.boundaryCandidateId) {
+        add('SEMANTIC_CONTAINER_END_MISSING', `${containerPath}.meaningGroups`);
+      }
+    });
+  } catch {
+    add('SEMANTIC_OUTPUT_SCHEMA_INVALID', '$');
+  }
+  const normalized = sortedViolations(violations);
+  return {
+    status: normalized.length === 0 ? 'passed' : 'rejected',
+    kind: normalized.length === 0 ? 'complete' : 'invalid',
+    violations: normalized,
   };
 }
 

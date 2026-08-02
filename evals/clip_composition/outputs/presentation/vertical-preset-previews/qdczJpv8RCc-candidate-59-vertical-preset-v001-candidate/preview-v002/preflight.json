@@ -1,0 +1,61 @@
+{
+  "schemaVersion": "vertical-type-crop-preview-preflight-v001",
+  "status": "passed",
+  "createdAt": "2026-07-28T10:00:47.993Z",
+  "externalApiCallsDuringRender": 0,
+  "inputs": {
+    "baseMedia": {
+      "path": "evals/clip_composition/outputs/presentation/base-media/qdczJpv8RCc-candidate-59-v001/base-media.mp4",
+      "fileSha256": "faad660c7623cdbf3a8f3b55cdaffc34729d06683ce391997c51f10fbc076967"
+    },
+    "cropDecision": {
+      "path": "evals/clip_composition/outputs/presentation/vertical-preset-previews/qdczJpv8RCc-candidate-59-vertical-preset-v001-candidate/type-crop-v006/crop-decision-v006.json",
+      "fileSha256": "4fba3f371412310fc5122ccfb58634e390a5725aec185172bcf041dd0152a4ed"
+    },
+    "sourcePreflight": {
+      "path": "evals/clip_composition/outputs/presentation/vertical-preset-previews/qdczJpv8RCc-candidate-59-vertical-preset-v001-candidate/preview/preflight.json",
+      "fileSha256": "4dd0328c5ea01ec173fa52013951940b0f193ac6b15b6d27899c86639da73fbe"
+    },
+    "sourceManifest": {
+      "path": "evals/clip_composition/outputs/presentation/vertical-preset-previews/qdczJpv8RCc-candidate-59-vertical-preset-v001-candidate/preview/preview-manifest.json",
+      "fileSha256": "0655ec955f04978c57f7957cfa102f608b1460bd0d5811bc3851054c354e3e04"
+    }
+  },
+  "classification": {
+    "screenLayoutId": "speaker_only",
+    "classificationReason": "画面上に装飾枠やコメント欄、小さな静止パネルはあるが、場面理解に必須な独立映像はなく話者単体がメインであるため。",
+    "selectedCandidateId": "speaker_only_body",
+    "selectionReason": "頭部の上部が見切れず、構図全体のバランスが良いため"
+  },
+  "checks": {
+    "cropUsesCanonicalLayoutFilter": true,
+    "sourceOverlayHashesMatch": true,
+    "outputSize1080x1920": true,
+    "outputFrameCountMatchesScenes": true,
+    "outputDurationWithinOneFrame": true,
+    "outputAudioShapeMatchesSource": true,
+    "oldWrongPreviewPreserved": true
+  },
+  "media": {
+    "path": "evals/clip_composition/outputs/presentation/vertical-preset-previews/qdczJpv8RCc-candidate-59-vertical-preset-v001-candidate/preview-v002/vertical-type-crop-review-v002.mp4",
+    "fileSha256": "cffca082673f67b5b7a353c61744922caffa6b0d98b9b2a2fadb155b948092bf",
+    "width": 1080,
+    "height": 1920,
+    "fps": "30/1",
+    "frameCount": 1256,
+    "durationSeconds": 41.866016,
+    "expectedDurationSeconds": 41.86666666666667,
+    "audioCodec": "aac",
+    "audioSampleRate": 48000,
+    "audioChannels": 2
+  },
+  "oldPreview": {
+    "path": "evals/clip_composition/outputs/presentation/vertical-preset-previews/qdczJpv8RCc-candidate-59-vertical-preset-v001-candidate/preview/vertical-preset-review-v001.mp4",
+    "fileSha256": "1613b1afaf8d677182d38884013000273f5be82535cd2bc577f014195ebdd528",
+    "status": "preserved_as_wrong_screen_speaker_classification_evidence"
+  },
+  "limitations": [
+    "この確認MP4は既存の字幕比較sceneを再利用しており、完成ショートの全編ではない",
+    "動画種類はspeaker_only/screen_speaker/speaker_pairの閉じた3型だけを扱う"
+  ]
+}

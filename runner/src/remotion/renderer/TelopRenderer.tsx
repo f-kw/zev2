@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { AbsoluteFill, continueRender, delayRender } from 'remotion';
+import { AbsoluteFill, cancelRender, continueRender, delayRender } from 'remotion';
 import { TelopText } from '../components/TelopText';
 import { ensureTelopFontLoaded, isManagedTelopFont } from '../utils/telop-font';
 import { type TelopGlowColorMode } from '../../shared/telop-glow';
@@ -35,6 +35,8 @@ export type TelopBackground = {
   paddingY: number;
 };
 
+export type TelopFontFailurePolicy = 'strict-cancel' | 'preserve-existing-fallback';
+
 export type TelopRendererProps = {
   text: string;
   style: TelopStyle;
@@ -45,6 +47,8 @@ export type TelopRendererProps = {
   width: number;
   height: number;
   glowSeedHint?: string;
+  inspectionLineIndex: number | null;
+  fontFailurePolicy: TelopFontFailurePolicy;
 };
 
 export const TelopRenderer: React.FC<TelopRendererProps> = ({
@@ -56,7 +60,9 @@ export const TelopRenderer: React.FC<TelopRendererProps> = ({
   singleLine = false,
   width,
   height,
-  glowSeedHint
+  glowSeedHint,
+  inspectionLineIndex,
+  fontFailurePolicy
 }) => {
   const needsManagedFont = isManagedTelopFont(style.fontFamily);
   const [fontHandle] = useState<number | null>(() => (
@@ -75,7 +81,26 @@ export const TelopRenderer: React.FC<TelopRendererProps> = ({
 
     // レイアウト計測前にフォント読み込みを揃える
     ensureTelopFontLoaded(style.fontFamily)
+      .then(() => {
+        if (
+          fontFailurePolicy === 'strict-cancel'
+          && typeof document !== 'undefined'
+          && typeof document.fonts?.check === 'function'
+          && !document.fonts.check(`800 32px "${style.fontFamily}"`)
+        ) {
+          throw new Error(`PRESENTATION_FONT_FALLBACK_DETECTED:${style.fontFamily ?? ''}`);
+        }
+      })
       .catch((error) => {
+        if (fontFailurePolicy === 'strict-cancel') {
+          const message = error instanceof Error ? error.message : String(error);
+          cancelRender(new Error(
+            message.includes('PRESENTATION_FONT_FALLBACK_DETECTED:')
+              ? message
+              : `PRESENTATION_FONT_LOAD_FAILED:${style.fontFamily ?? ''}:${message}`
+          ));
+          return;
+        }
         console.error('Telop layout font load failed:', style.fontFamily, error);
       })
       .finally(() => {
@@ -92,7 +117,7 @@ export const TelopRenderer: React.FC<TelopRendererProps> = ({
     return () => {
       cancelled = true;
     };
-  }, [fontHandle, needsManagedFont, style.fontFamily]);
+  }, [fontFailurePolicy, fontHandle, needsManagedFont, style.fontFamily]);
 
   const telopModel = useMemo(() => {
     // フォント読み込み完了後に同じ描画モデルを再計算する
@@ -108,6 +133,23 @@ export const TelopRenderer: React.FC<TelopRendererProps> = ({
       glowSeedHint
     });
   }, [fontReady, text, style, position, maxCharsPerLine, singleLine, width, height, glowSeedHint]);
+
+  const inspectionModel = useMemo(() => {
+    if (inspectionLineIndex === null) {
+      return telopModel.text;
+    }
+    if (
+      !Number.isInteger(inspectionLineIndex)
+      || inspectionLineIndex < 0
+      || inspectionLineIndex >= telopModel.text.lines.length
+    ) {
+      throw new Error(`inspectionLineIndex is out of range: ${inspectionLineIndex}`);
+    }
+    return {
+      ...telopModel.text,
+      lines: [telopModel.text.lines[inspectionLineIndex]]
+    };
+  }, [inspectionLineIndex, telopModel.text]);
 
   const textWrapperStyle: React.CSSProperties = {
     position: 'absolute',
@@ -126,7 +168,9 @@ export const TelopRenderer: React.FC<TelopRendererProps> = ({
     <AbsoluteFill className="telop-root">
       <div style={textWrapperStyle}>
         <TelopText
-          text={telopModel.resolvedText}
+          text={inspectionLineIndex === null
+            ? telopModel.resolvedText
+            : telopModel.text.lines[inspectionLineIndex]?.text ?? ''}
           fontFamily={telopModel.text.fontFamily}
           fontSize={telopModel.text.fontSize}
           fontColor={telopModel.text.fontColor}
@@ -139,7 +183,7 @@ export const TelopRenderer: React.FC<TelopRendererProps> = ({
           lineAlign={position.alignment || 'left'}
           maxCharsPerLine={telopModel.resolvedMaxChars}
           singleLine={singleLine}
-          renderModel={telopModel.text}
+          renderModel={inspectionModel}
         />
       </div>
     </AbsoluteFill>

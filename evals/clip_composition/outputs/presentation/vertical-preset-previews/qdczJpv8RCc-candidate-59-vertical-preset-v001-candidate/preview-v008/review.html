@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>縦型字幕 大文字preview</title>
+  <style>
+    :root { color-scheme:dark; --bg:#07111f; --card:#111d31; --text:#f7fbff; --muted:#b8c7dc; --accent:#62e6c6; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:linear-gradient(150deg,#07111f,#102442); color:var(--text);
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans JP",sans-serif; }
+    main { width:min(980px,94vw); margin:0 auto; padding:28px 0 48px; }
+    h1 { margin:0 0 8px; font-size:clamp(25px,4vw,42px); }
+    .status { display:inline-block; margin:0 0 14px; padding:7px 12px; border-radius:999px;
+      background:#153f35; color:#9ff3d8; font-weight:800; }
+    .lead { margin:0 0 18px; color:var(--muted); line-height:1.65; }
+    .grid { display:grid; grid-template-columns:minmax(280px,430px) 1fr; gap:18px; align-items:start; }
+    .card { background:rgba(17,29,49,.94); border:1px solid #2c4364; border-radius:16px; padding:16px; }
+    video { display:block; width:100%; max-height:78vh; background:#000; border-radius:12px; }
+    h2 { margin:0 0 10px; font-size:20px; }
+    .ask { border-left:5px solid var(--accent); padding:12px 14px; background:#0d2d2a;
+      border-radius:10px; font-size:18px; line-height:1.6; font-weight:800; }
+    ul { padding-left:22px; line-height:1.7; color:var(--muted); }
+    .chapters { display:grid; gap:8px; }
+    button { border:1px solid #446388; border-radius:10px; padding:10px 12px; text-align:left;
+      background:#142642; color:var(--text); cursor:pointer; font-weight:700; }
+    button:hover { border-color:var(--accent); }
+    code { color:#a9f3e1; }
+    @media (max-width:760px) { .grid { grid-template-columns:1fr; } }
+  </style>
+</head>
+<body>
+<main>
+  <span class="status">cropは合格済み・字幕サイズだけ再確認</span>
+  <h1>縦型字幕を画面幅まで大きくしました</h1>
+  <p class="lead">前のpreviewより左右の空きを減らし、
+    1行最大7文字を既存の安全領域へ収められる最大サイズで、同じ実字幕を描画しています。</p>
+  <div class="grid">
+    <section class="card">
+      <video id="preview" controls playsinline preload="metadata" src="vertical-fullwidth-caption-review-v008.mp4"></video>
+    </section>
+    <section class="card">
+      <h2>確認することは1つだけ</h2>
+      <p class="ask">字幕が横幅いっぱいの大きさになり、読みやすく見えるか。</p>
+      <ul>
+        <li>1行は最大7文字。今回の実例はすべて7文字です。</li>
+        <li>最大2行のままです。長文を4行へ折り返していません。</li>
+        <li>文字は134px、縁11px、glow 17pxです。</li>
+        <li>crop位置と元の音声・時刻は変えていません。</li>
+      </ul>
+      <h2>見たい場面へ移動</h2>
+      <div class="chapters"><button type="button" data-time="0.000000">1. 1行・7文字「これやばいよね」</button>
+<button type="button" data-time="0.933333">2. 2行・7文字＋7文字</button>
+<button type="button" data-time="3.633333">3. 1行・7文字「困ったもんです」</button></div>
+    </section>
+  </div>
+</main>
+<script>
+  const video = document.getElementById('preview');
+  document.querySelectorAll('[data-time]').forEach((button) => {
+    button.addEventListener('click', () => {
+      video.currentTime = Number(button.dataset.time);
+      video.play();
+    });
+  });
+</script>
+</body>
+</html>

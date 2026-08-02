@@ -89,6 +89,19 @@ const PRESET_ID = 'normal-landscape-readable-pop-v001';
 const VISUAL_STATE_ID = 'caption-core-v001';
 const MAX_LOGICAL_WIDTH = 36;
 const MAX_LINES = 2;
+const HORIZONTAL_SOURCE_PACKAGE_BUILD_CONTRACT_V001 = Object.freeze({
+  modelInputSchemaVersion: MODEL_INPUT_SCHEMA_VERSION,
+  expansionMapSchemaVersion: EXPANSION_MAP_SCHEMA_VERSION,
+  manifestSchemaVersion: MANIFEST_SCHEMA_VERSION,
+  packageReportSchemaVersion: PACKAGE_REPORT_SCHEMA_VERSION,
+  presetId: PRESET_ID,
+  visualStateId: VISUAL_STATE_ID,
+  maxLogicalWidthPerLine: MAX_LOGICAL_WIDTH,
+  maxLinesPerMeaningGroup: MAX_LINES,
+  characterWidthRule: PRESENTATION_RENDERER_CHARACTER_WIDTH_RULE_V001,
+  includeDisplayPolicyInManifest: false,
+  widthPolicyAlreadyValidated: false,
+});
 const TRUST_CANONICAL_SHA256 =
   '9d5ffe631033dc594c917649e2529899e303f3cb8a7d7b1b65ea0d26b7c645f2';
 const STRICT_INTEGER_NUMBER_PROFILE = 'b1-integer';
@@ -355,6 +368,153 @@ const importSpecifiers = (bytes) => {
       token.value === 'require' && tokens[index + 1]?.value === '('),
     hasModuleLoadFileIo: scan.valid && hasTopLevelFileIoCall(tokens),
   };
+};
+
+const inspectPresentationStaticImportGraphV001 = (bytes) => {
+  const inspection = importSpecifiers(bytes);
+  return Object.freeze({
+    lexicallyValid: inspection.lexicallyValid,
+    dynamic: inspection.hasDynamicImport,
+    require: inspection.hasRequire,
+    moduleLoadFileIo: inspection.hasModuleLoadFileIo,
+    specifiers: Object.freeze([...inspection.values]),
+  });
+};
+
+const STATIC_GRAPH_SOURCE_SPEAKER_POLICY_PATH =
+  'evals/clip_composition/presentation_source_speaker_policy_v001.mjs';
+const STATIC_GRAPH_SOURCE_SPEAKER_REGISTRY_PATH =
+  'evals/clip_composition/registries/presentation/'
+    + 'presentation-source-speaker-non-identity-registry-v001/registry.json';
+
+const normalizeStaticGraphPathV001 = (value) => {
+  if (typeof value !== 'string'
+    || value.length === 0
+    || value.startsWith('/')
+    || value.includes('\\')) {
+    return null;
+  }
+  const normalized = [];
+  for (const segment of value.split('/')) {
+    if (segment === '' || segment === '.') continue;
+    if (segment === '..') {
+      if (normalized.length === 0) return null;
+      normalized.pop();
+      continue;
+    }
+    normalized.push(segment);
+  }
+  return normalized.length === 0 ? null : normalized.join('/');
+};
+
+const resolveStaticGraphLocalPathV001 = (ownerPath, specifier) => {
+  const ownerSegments = ownerPath.split('/');
+  ownerSegments.pop();
+  return normalizeStaticGraphPathV001(
+    [...ownerSegments, ...specifier.split('/')].join('/'),
+  );
+};
+
+const makeStaticGraphFailureV001 = (path) => Object.freeze({
+  status: 'rejected',
+  code: 'API_BUDGET_BINDING_INVALID',
+  relatedPaths: Object.freeze([path]),
+  facts: Object.freeze({}),
+});
+
+const validatePresentationCaptionApiStaticImportGraphV001 = ({
+  entryPath,
+  implementationInputs,
+  dataBindingPaths,
+}) => {
+  if (typeof entryPath !== 'string'
+    || !Array.isArray(implementationInputs)
+    || !Array.isArray(dataBindingPaths)
+    || implementationInputs.length === 0
+    || JSON.stringify(dataBindingPaths) !== JSON.stringify([
+      STATIC_GRAPH_SOURCE_SPEAKER_REGISTRY_PATH,
+    ])) {
+    return makeStaticGraphFailureV001('$.implementationBinding');
+  }
+  const inputByPath = new Map();
+  for (let index = 0; index < implementationInputs.length; index += 1) {
+    const input = implementationInputs[index];
+    const normalizedPath = normalizeStaticGraphPathV001(input?.path);
+    if (!exactKeys(input, ['path', 'bytes'])
+      || !Buffer.isBuffer(input.bytes)
+      || normalizedPath !== input.path
+      || inputByPath.has(input.path)) {
+      return makeStaticGraphFailureV001(
+        `$.implementationInputs[${index}]`,
+      );
+    }
+    inputByPath.set(input.path, input.bytes);
+  }
+  if (!inputByPath.has(entryPath)
+    || !inputByPath.has(STATIC_GRAPH_SOURCE_SPEAKER_POLICY_PATH)) {
+    return makeStaticGraphFailureV001(
+      '$.implementationBinding.entry',
+    );
+  }
+  const edges = new Map();
+  for (const [path, bytes] of inputByPath) {
+    const inspection = inspectPresentationStaticImportGraphV001(bytes);
+    const expectedModuleLoadFileIo =
+      path === STATIC_GRAPH_SOURCE_SPEAKER_POLICY_PATH;
+    if (inspection?.lexicallyValid !== true
+      || inspection.dynamic !== false
+      || inspection.require !== false
+      || inspection.moduleLoadFileIo !== expectedModuleLoadFileIo
+      || !Array.isArray(inspection.specifiers)
+      || new Set(inspection.specifiers).size !== inspection.specifiers.length) {
+      return makeStaticGraphFailureV001(
+        `$.implementationBinding.graph.${path}`,
+      );
+    }
+    const localPaths = [];
+    for (const specifier of inspection.specifiers) {
+      if (typeof specifier !== 'string') {
+        return makeStaticGraphFailureV001(
+          `$.implementationBinding.graph.${path}`,
+        );
+      }
+      if (specifier.startsWith('node:')) continue;
+      if (!specifier.startsWith('./') && !specifier.startsWith('../')) {
+        return makeStaticGraphFailureV001(
+          `$.implementationBinding.graph.${path}`,
+        );
+      }
+      const resolvedPath =
+        resolveStaticGraphLocalPathV001(path, specifier);
+      if (resolvedPath === null || !inputByPath.has(resolvedPath)) {
+        return makeStaticGraphFailureV001(
+          `$.implementationBinding.graph.${path}`,
+        );
+      }
+      localPaths.push(resolvedPath);
+    }
+    edges.set(path, localPaths);
+  }
+  const reachable = new Set();
+  const pending = [entryPath];
+  while (pending.length > 0) {
+    const path = pending.shift();
+    if (reachable.has(path)) continue;
+    reachable.add(path);
+    pending.push(...(edges.get(path) ?? []));
+  }
+  if (reachable.size !== inputByPath.size
+    || [...inputByPath.keys()].some((path) => !reachable.has(path))) {
+    return makeStaticGraphFailureV001(
+      '$.implementationBinding.graph',
+    );
+  }
+  return Object.freeze({
+    status: 'passed',
+    entryPath,
+    implementationFileCount: inputByPath.size,
+    dataBindingCount: dataBindingPaths.length,
+  });
 };
 
 const MODULE_LOAD_FILE_IO_CALLS = new Set([
@@ -1079,13 +1239,13 @@ const invalidPackageImportGraphIndexes = (implementationInputs) => {
       invalidIndexes.push(index);
       return;
     }
-    const imports = importSpecifiers(bytes);
-    const builtins = imports.values.filter((specifier) => specifier.startsWith('node:'));
-    const locals = imports.values.filter((specifier) => !specifier.startsWith('node:'));
+    const imports = inspectPresentationStaticImportGraphV001(bytes);
+    const builtins = imports.specifiers.filter((specifier) => specifier.startsWith('node:'));
+    const locals = imports.specifiers.filter((specifier) => !specifier.startsWith('node:'));
     if (!imports.lexicallyValid
-      || imports.hasDynamicImport
-      || imports.hasRequire
-      || imports.hasModuleLoadFileIo
+      || imports.dynamic
+      || imports.require
+      || imports.moduleLoadFileIo
       || builtins.some((specifier) => !allowedBuiltins.has(specifier))
       || locals.some((specifier) => !allowedLocals.has(specifier))
       || new Set(builtins).size !== builtins.length
@@ -2582,15 +2742,26 @@ const bindingForSnapshot = (snapshot, includeCanonical = true) => ({
   fileSha256: snapshot.fileSha256,
   ...(includeCanonical ? {canonicalSha256: canonicalSha(decodeSnapshot(snapshot))} : {}),
 });
-const expectedBuilderContext = (context) => {
-  if (!exactKeys(context, [
+const expectedBuilderContext = (context, contract) => {
+  const contextKeys = contract.includeDisplayPolicyInManifest
+    ? [
+      'job',
+      'gateA',
+      'implementationSnapshots',
+      'dependencySnapshots',
+      'sourceSnapshots',
+      'widthPolicySnapshots',
+      'runtimeObservation',
+    ]
+    : [
     'job',
     'gateA',
     'implementationSnapshots',
     'sourceSnapshots',
     'widthPolicySnapshots',
     'runtimeObservation',
-  ])
+    ];
+  if (!exactKeys(context, contextKeys)
     || !exactKeys(context.job, ['value', 'snapshot'])
     || !exactKeys(context.gateA, [
       'jobValue',
@@ -2609,6 +2780,10 @@ const expectedBuilderContext = (context) => {
     || !isDenseArray(context.implementationSnapshots)
     || context.implementationSnapshots.length !== 3
     || !context.implementationSnapshots.every(validateStableSnapshot)
+    || (contract.includeDisplayPolicyInManifest
+      && (!isDenseArray(context.dependencySnapshots)
+        || context.dependencySnapshots.length !== 4
+        || !context.dependencySnapshots.every(validateStableSnapshot)))
     || !isDenseArray(context.sourceSnapshots)
     || context.sourceSnapshots.length !== 3
     || !context.sourceSnapshots.every(validateStableSnapshot)
@@ -2620,7 +2795,7 @@ const expectedBuilderContext = (context) => {
   }
 };
 
-const makeModelInput = (evidence) => {
+const makeModelInput = (evidence, contract) => {
   if (!isPlainObject(evidence) || !isDenseArray(evidence.boundaryCandidates)) {
     throw new TypeError('invalid boundary evidence');
   }
@@ -2652,11 +2827,11 @@ const makeModelInput = (evidence) => {
     });
   }
   return {
-    schemaVersion: MODEL_INPUT_SCHEMA_VERSION,
+    schemaVersion: contract.modelInputSchemaVersion,
     taskDescription: TASK_DESCRIPTION,
     displayConstraints: {
-      maxLogicalWidthPerLine: MAX_LOGICAL_WIDTH,
-      maxLinesPerMeaningGroup: MAX_LINES,
+      maxLogicalWidthPerLine: contract.maxLogicalWidthPerLine,
+      maxLinesPerMeaningGroup: contract.maxLinesPerMeaningGroup,
     },
     containers,
   };
@@ -2670,6 +2845,7 @@ const makeExpansionMap = ({
   implementationSnapshots,
   modelInputArtifact,
   evidenceArtifact,
+  contract,
 }) => {
   const byContainer = new Map();
   const containers = [];
@@ -2708,7 +2884,7 @@ const makeExpansionMap = ({
     canonicalSha256: widthByRole[role].canonicalSha256,
   });
   return {
-    schemaVersion: EXPANSION_MAP_SCHEMA_VERSION,
+    schemaVersion: contract.expansionMapSchemaVersion,
     artifactId: job.artifactId,
     sourceBindings: {
       sourceAtoms: {
@@ -2738,11 +2914,11 @@ const makeExpansionMap = ({
         path: widthByRole.textLayoutImplementation.snapshot.path,
         fileSha256: widthByRole.textLayoutImplementation.snapshot.fileSha256,
       },
-      presetId: PRESET_ID,
-      visualStateId: VISUAL_STATE_ID,
-      maxLogicalWidthPerLine: MAX_LOGICAL_WIDTH,
-      maxLinesPerMeaningGroup: MAX_LINES,
-      characterWidthRule: PRESENTATION_RENDERER_CHARACTER_WIDTH_RULE_V001,
+      presetId: contract.presetId,
+      visualStateId: contract.visualStateId,
+      maxLogicalWidthPerLine: contract.maxLogicalWidthPerLine,
+      maxLinesPerMeaningGroup: contract.maxLinesPerMeaningGroup,
+      characterWidthRule: contract.characterWidthRule,
     },
     modelInputBinding: {
       fileName: modelInputArtifact.fileName,
@@ -2802,6 +2978,7 @@ const makeManifest = ({
   runtimeObservation,
   embeddedReportArtifact,
   contentArtifacts,
+  contract,
 }) => {
   const externalInputBindings = [
     ...sourceSnapshots.map((snapshot, index) => ({
@@ -2823,8 +3000,8 @@ const makeManifest = ({
     fileSha256: artifact.fileSha256,
     canonicalSha256: artifact.canonicalSha256,
   }));
-  return {
-    schemaVersion: MANIFEST_SCHEMA_VERSION,
+  const common = {
+    schemaVersion: contract.manifestSchemaVersion,
     packageId: job.publication.packageId,
     artifactId: job.artifactId,
     formalOutputPath: job.publication.formalOutputPath,
@@ -2859,7 +3036,13 @@ const makeManifest = ({
         path: implementationSnapshots[index].path,
         fileSha256: implementationSnapshots[index].fileSha256,
       })),
-      dependencyFiles: [],
+      dependencyFiles: contract.includeDisplayPolicyInManifest
+        ? job.implementationBinding.dependencyFiles.map((entry, index) => ({
+          role: entry.role,
+          path: contextDependencySnapshotPath(contract, entry, index),
+          fileSha256: contextDependencySnapshotHash(contract, entry, index),
+        }))
+        : [],
     },
     runtimeBinding: {
       nodeBinarySha256: runtimeObservation.nodeBinaryInput.snapshot.fileSha256,
@@ -2877,12 +3060,26 @@ const makeManifest = ({
       },
     },
     externalInputBindings,
+  };
+  const declaration = {
+    fileName: 'package-validation-report.json',
+    schemaVersion: contract.packageReportSchemaVersion,
+    selfHashPolicy: 'report-is-not-hashed-by-manifest-v001',
+  };
+  if (contract.includeDisplayPolicyInManifest) {
+    return {
+      ...common,
+      formatSelection: cloneJson(job.formatSelection),
+      displayConstraintInput: cloneJson(job.displayConstraintInput),
+      contentArtifacts: contentProjection,
+      contentSetCanonicalSha256: canonicalSha(contentProjection),
+      validationReportDeclaration: declaration,
+    };
+  }
+  return {
+    ...common,
     contentArtifacts: contentProjection,
-    validationReportDeclaration: {
-      fileName: 'package-validation-report.json',
-      schemaVersion: PACKAGE_REPORT_SCHEMA_VERSION,
-      selfHashPolicy: 'report-is-not-hashed-by-manifest-v001',
-    },
+    validationReportDeclaration: declaration,
     contentSetCanonicalSha256: canonicalSha(contentProjection),
   };
 };
@@ -2918,8 +3115,9 @@ const makePackageValidationReport = ({
   manifestArtifact,
   contentArtifacts,
   projection,
+  contract,
 }) => ({
-  schemaVersion: PACKAGE_REPORT_SCHEMA_VERSION,
+  schemaVersion: contract.packageReportSchemaVersion,
   status: 'passed',
   failureStage: null,
   jobBinding: {
@@ -2948,7 +3146,13 @@ const makePackageValidationReport = ({
     fileSha256: artifact.fileSha256,
     canonicalSha256: artifact.canonicalSha256,
   })),
-  observedProjection: projection,
+  observedProjection: contract.includeDisplayPolicyInManifest
+    ? {
+      ...projection,
+      formatSelection: cloneJson(job.formatSelection),
+      displayConstraintInput: cloneJson(job.displayConstraintInput),
+    }
+    : projection,
   scope: {
     validatedState: 'source-package-only',
     postPublishValidationRequired: true,
@@ -2958,16 +3162,109 @@ const makePackageValidationReport = ({
   },
 });
 
-export function buildPresentationCaptionSemanticSourcePackageV001(context) {
-  expectedBuilderContext(context);
+const contextDependencySnapshotPath = (contract, entry, index) =>
+  contract.dependencySnapshots[index]?.path ?? entry.path;
+const contextDependencySnapshotHash = (contract, entry, index) =>
+  contract.dependencySnapshots[index]?.fileSha256 ?? entry.fileSha256;
+
+const resolveWidthPolicySnapshotsForDisplayContract = (job, snapshots, contract) => {
+  if (!isDenseArray(snapshots)
+    || snapshots.length !== 6
+    || !isDenseArray(job.widthPolicyBindings)
+    || job.widthPolicyBindings.length !== 6) {
+    throw new TypeError('invalid display policy builder inputs');
+  }
+  return snapshots.map((snapshot, index) => {
+    if (!validateStableSnapshot(snapshot)
+      || snapshot.path !== job.widthPolicyBindings[index].path
+      || snapshot.fileSha256 !== job.widthPolicyBindings[index].fileSha256) {
+      throw new TypeError('display policy snapshot mismatch');
+    }
+    const canonicalSha256 = index === 5
+      ? null
+      : canonicalSha(decodeSnapshot(snapshot));
+    if (job.widthPolicyBindings[index].canonicalSha256 !== canonicalSha256) {
+      throw new TypeError('display policy canonical hash mismatch');
+    }
+    return {
+      status: 'resolved',
+      role: job.widthPolicyBindings[index].role,
+      path: snapshot.path,
+      snapshot,
+      value: index === 5 ? null : decodeSnapshot(snapshot),
+      canonicalSha256,
+    };
+  });
+};
+
+const validateDisplayBuildContract = (contract) => {
+  if (!exactKeys(contract, [
+    'modelInputSchemaVersion',
+    'expansionMapSchemaVersion',
+    'manifestSchemaVersion',
+    'packageReportSchemaVersion',
+    'presetId',
+    'visualStateId',
+    'maxLogicalWidthPerLine',
+    'maxLinesPerMeaningGroup',
+    'characterWidthRule',
+    'includeDisplayPolicyInManifest',
+    'widthPolicyAlreadyValidated',
+    'dependencySnapshots',
+  ])
+    || ![
+      contract.modelInputSchemaVersion,
+      contract.expansionMapSchemaVersion,
+      contract.manifestSchemaVersion,
+      contract.packageReportSchemaVersion,
+      contract.presetId,
+      contract.visualStateId,
+      contract.characterWidthRule,
+    ].every(isNonEmptyString)
+    || !isPositiveInteger(contract.maxLogicalWidthPerLine)
+    || !isPositiveInteger(contract.maxLinesPerMeaningGroup)
+    || typeof contract.includeDisplayPolicyInManifest !== 'boolean'
+    || contract.widthPolicyAlreadyValidated !== true
+    || !isDenseArray(contract.dependencySnapshots)
+    || contract.dependencySnapshots.length !== 4) {
+    throw new TypeError('invalid source package display contract');
+  }
+};
+
+const buildPresentationCaptionSemanticSourcePackageForDisplayPolicyV001 = (
+  context,
+  contract,
+) => {
+  validateDisplayBuildContract(contract);
+  const normalizedContext = {
+    job: context.job,
+    gateA: context.gateA,
+    implementationSnapshots: context.implementationSnapshots,
+    dependencySnapshots: contract.dependencySnapshots,
+    sourceSnapshots: context.sourceSnapshots,
+    widthPolicySnapshots: context.widthPolicySnapshots,
+    runtimeObservation: context.runtimeObservation,
+  };
+  return buildPresentationCaptionSemanticSourcePackageFromContract(
+    normalizedContext,
+    contract,
+  );
+};
+
+const buildPresentationCaptionSemanticSourcePackageFromContract = (context, contract) => {
+  expectedBuilderContext(context, contract);
   const job = context.job.value;
-  if (validatePresentationCaptionSemanticSourcePackageJobV001(job).status !== 'valid') {
+  if (!contract.includeDisplayPolicyInManifest
+    && validatePresentationCaptionSemanticSourcePackageJobV001(job).status !== 'valid') {
     throw new TypeError('invalid package job');
   }
-  const resolvedWidthPolicy = resolveWidthPolicySnapshotsForBuilderV001(
-    job,
-    context.widthPolicySnapshots,
-  );
+  const resolvedWidthPolicy = contract.widthPolicyAlreadyValidated
+    ? resolveWidthPolicySnapshotsForDisplayContract(
+      job,
+      context.widthPolicySnapshots,
+      contract,
+    )
+    : resolveWidthPolicySnapshotsForBuilderV001(job, context.widthPolicySnapshots);
   const sourceArtifact = decodeSnapshot(context.sourceSnapshots[0]);
   const evidence = context.gateA.evidenceValue;
   const embeddedReport = context.gateA.embeddedReportValue;
@@ -2989,7 +3286,10 @@ export function buildPresentationCaptionSemanticSourcePackageV001(context) {
     fileSha256: hashBytes(context.gateA.embeddedReportBytes),
     canonicalSha256: canonicalSha(embeddedReport),
   };
-  const modelInputArtifact = artifactFrom(PACKAGE_FILES[2], makeModelInput(evidence));
+  const modelInputArtifact = artifactFrom(
+    PACKAGE_FILES[2],
+    makeModelInput(evidence, contract),
+  );
   const expansionArtifact = artifactFrom(PACKAGE_FILES[3], makeExpansionMap({
     job,
     evidence,
@@ -2998,6 +3298,7 @@ export function buildPresentationCaptionSemanticSourcePackageV001(context) {
     implementationSnapshots: context.implementationSnapshots,
     modelInputArtifact,
     evidenceArtifact,
+    contract,
   }));
   const leakageArtifact = artifactFrom(PACKAGE_FILES[4], makeLeakageReport({
     modelInputArtifact,
@@ -3026,6 +3327,10 @@ export function buildPresentationCaptionSemanticSourcePackageV001(context) {
     runtimeObservation: context.runtimeObservation,
     embeddedReportArtifact,
     contentArtifacts,
+    contract: {
+      ...contract,
+      dependencySnapshots: context.dependencySnapshots ?? [],
+    },
   }));
   const projection = buildProjection(sourceArtifact, evidence, modelInputArtifact.value);
   const validationArtifact = artifactFrom(PACKAGE_FILES[6], makePackageValidationReport({
@@ -3034,6 +3339,7 @@ export function buildPresentationCaptionSemanticSourcePackageV001(context) {
     manifestArtifact,
     contentArtifacts,
     projection,
+    contract,
   }));
   return {
     artifacts: [
@@ -3042,7 +3348,45 @@ export function buildPresentationCaptionSemanticSourcePackageV001(context) {
       validationArtifact,
     ],
   };
+};
+
+export function buildPresentationCaptionSemanticSourcePackageV001(context) {
+  return buildPresentationCaptionSemanticSourcePackageFromContract(
+    context,
+    HORIZONTAL_SOURCE_PACKAGE_BUILD_CONTRACT_V001,
+  );
 }
+
+Object.defineProperty(
+  buildPresentationCaptionSemanticSourcePackageV001,
+  'forDisplayPolicy',
+  {
+    value: buildPresentationCaptionSemanticSourcePackageForDisplayPolicyV001,
+    enumerable: false,
+    writable: false,
+    configurable: false,
+  },
+);
+Object.defineProperty(
+  buildPresentationCaptionSemanticSourcePackageV001,
+  'inspectPresentationStaticImportGraphV001',
+  {
+    value: inspectPresentationStaticImportGraphV001,
+    enumerable: false,
+    writable: false,
+    configurable: false,
+  },
+);
+Object.defineProperty(
+  buildPresentationCaptionSemanticSourcePackageV001,
+  'validatePresentationCaptionApiStaticImportGraphV001',
+  {
+    value: validatePresentationCaptionApiStaticImportGraphV001,
+    enumerable: false,
+    writable: false,
+    configurable: false,
+  },
+);
 
 const makeViolation = (code, path) => ({code, path, details: {}});
 const sortViolations = (violations) => [...violations].sort((left, right) => {

@@ -885,12 +885,7 @@ const main = async () => {
   }
 };
 
-const isDirectExecution = (() => {
-  try {
-    return typeof process.argv[1] === 'string'
-      && realpathSync(process.argv[1]) === realpathSync(fileURLToPath(import.meta.url));
-  } catch {
-    return false;
-  }
-})();
+const isDirectExecution =
+  typeof process.argv[1] === 'string'
+  && resolve(process.argv[1]) === fileURLToPath(import.meta.url);
 if (isDirectExecution) main();

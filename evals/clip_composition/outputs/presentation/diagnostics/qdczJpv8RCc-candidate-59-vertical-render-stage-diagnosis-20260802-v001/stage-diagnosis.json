@@ -1,0 +1,161 @@
+{
+  "schemaVersion": "presentation-vertical-render-stage-diagnosis-v001",
+  "diagnosisId": "qdczJpv8RCc-candidate-59-vertical-render-stage-diagnosis-20260802-v001",
+  "diagnosedAt": "2026-08-02",
+  "scope": {
+    "formalRenderReexecuted": false,
+    "externalApiCalls": 0,
+    "costUsd": 0,
+    "productionFilesChanged": 0,
+    "formalArtifactsChanged": 0,
+    "horizontalArtifactsChanged": 0,
+    "temporaryDiagnosticMediaRemoved": true
+  },
+  "savedInputs": {
+    "renderJob": {
+      "path": "evals/clip_composition/outputs/presentation/vertical-review-render-jobs/qdczJpv8RCc-candidate-59-vertical-caption-b4-rebuild-v002.json",
+      "fileSha256": "055a14e3fe0daa4b9aef6e5d3ce43ba77c1542e50bd660a134468c5105e0c90e"
+    },
+    "outerFatal": {
+      "path": "evals/clip_composition/outputs/presentation/diagnostics/qdczJpv8RCc-candidate-59-vertical-render-fatal-20260802-v002/renderer-output.raw.json",
+      "fileSha256": "f23ce48d77560e9bb3fd9b468fd0423478d8ba30029f313710bde5d2c94cf231",
+      "diagnosticCode": "VERTICAL_RENDER_V001_RUNNER_FATAL"
+    },
+    "displayPlan": {
+      "path": "evals/clip_composition/outputs/presentation/caption-display-pairs/qdczJpv8RCc-candidate-59-vertical-caption-b4-rebuild-v002/display-plan.json",
+      "fileSha256": "05feabbbbc75407239b96f9f341ca9b5130a7f8ac30d6e944d68352a462fe678"
+    },
+    "baseMedia": {
+      "path": "evals/clip_composition/outputs/presentation/base-media/qdczJpv8RCc-candidate-59-v001/base-media.mp4",
+      "fileSha256": "faad660c7623cdbf3a8f3b55cdaffc34729d06683ce391997c51f10fbc076967"
+    },
+    "cropDecision": {
+      "path": "evals/clip_composition/outputs/presentation/vertical-preset-previews/qdczJpv8RCc-candidate-59-vertical-preset-v001-candidate/type-crop-v006/crop-decision-v006.json",
+      "fileSha256": "4fba3f371412310fc5122ccfb58634e390a5725aec185172bcf041dd0152a4ed"
+    }
+  },
+  "implementationBindings": {
+    "verticalRenderer": {
+      "path": "evals/clip_composition/render_presentation_vertical_review_v001.ts",
+      "fileSha256": "b9f35e6a17a060286139367e2ffedcd3378239f47e74e4c178fea00659d67f54"
+    },
+    "rendererCore": {
+      "path": "evals/clip_composition/render_presentation_v002.mjs",
+      "fileSha256": "d02d603f3fc04f9ab58ce889644f5e63bf17d7ec5cb19019e09110c6167a720b"
+    },
+    "rendererQc": {
+      "path": "evals/clip_composition/presentation_renderer_qc_v002.mjs",
+      "fileSha256": "73ede4f3556f80afac98b8e0e3c4b81019f718b4644d2b3f8cb1ac037989f0d3"
+    }
+  },
+  "observedStages": [
+    {
+      "stage": "job-and-bindings",
+      "status": "passed",
+      "observations": [
+        "job schema passed",
+        "implementation bindings 29 of 29 passed",
+        "runtime tools 7 of 7 passed",
+        "input bindings 15 of 15 resolved",
+        "crop source binding passed",
+        "renderer trust passed"
+      ]
+    },
+    {
+      "stage": "crop-decision",
+      "status": "passed-read-only",
+      "observations": {
+        "screenLayoutId": "speaker_only",
+        "sourceWidth": 1920,
+        "sourceHeight": 1080,
+        "sourceFps": 30,
+        "sourceFrameCount": 1547,
+        "cropRect": {
+          "x": 1155,
+          "y": 0,
+          "width": 608,
+          "height": 1080
+        },
+        "targetWidth": 1080,
+        "targetHeight": 1920,
+        "filterCanonicalSha256": "c5e521d272296dad3a2635d2c695d1213e9b29b18dc10c0b56048d272ac045b2"
+      }
+    },
+    {
+      "stage": "formal-crop-execution",
+      "status": "threw",
+      "sourceLocation": "evals/clip_composition/render_presentation_vertical_review_v001.ts:863",
+      "errorType": "TypeError",
+      "errorMessage": "inspectFrameCountWithToolV001 is not a function"
+    },
+    {
+      "stage": "render-plan-read-only-probe",
+      "status": "passed",
+      "elementCount": 30,
+      "maxLogicalWidthPerLine": 14,
+      "maxLinesPerMeaningGroup": 2
+    },
+    {
+      "stage": "text-layout-read-only-probe",
+      "status": "passed",
+      "itemCount": 30,
+      "violationCount": 0
+    }
+  ],
+  "rootCause": {
+    "failureStage": "crop-source-frame-count",
+    "kind": "implementation-import-owner-mismatch",
+    "declaredImportModule": "evals/clip_composition/presentation_renderer_qc_v002.mjs",
+    "requestedExport": "inspectFrameCountWithToolV001",
+    "declaredModuleHasRequestedExport": false,
+    "actualOwnerModule": "evals/clip_composition/render_presentation_v002.mjs",
+    "actualOwnerHasRequestedExport": true,
+    "formalOrder": "source media inspection passed, then the undefined frame-count function was called before crop filter execution and before any formal output directory was created",
+    "outerFatalLostTheseDetails": true
+  },
+  "diagnosticOnlyCorrectionProbe": {
+    "description": "The missing import was not edited in production. The diagnostic process called the existing frame-count implementation from its actual owner and then used the existing crop filter and crop-output validator.",
+    "cropResult": {
+      "status": "passed",
+      "source": {
+        "width": 1920,
+        "height": 1080,
+        "frameCount": 1547,
+        "audioPacketPayloadSha256": "d18469bd3132356b03870ee8bc3d63e95947bd254961157e09d59cf9a53459ec"
+      },
+      "output": {
+        "width": 1080,
+        "height": 1920,
+        "frameCount": 1547,
+        "audioPacketPayloadSha256": "d18469bd3132356b03870ee8bc3d63e95947bd254961157e09d59cf9a53459ec"
+      },
+      "violationCount": 0
+    },
+    "firstRemotionOverlayProbe": {
+      "status": "passed",
+      "instructionId": "caption-instruction-000001",
+      "pngByteLength": 130027,
+      "pngFileSha256": "24d018bb17d0a5ff6be4bc9a4d2ad177a5756e27d22d5b0ec7586e7e3a68164e"
+    },
+    "verifiedReach": "crop output validation and the first Remotion caption still",
+    "notVerified": [
+      "all 30 caption stills and line masks",
+      "full video composition",
+      "post-render QC",
+      "publication"
+    ]
+  },
+  "testGap": {
+    "existingRendererTestsPassed": 21,
+    "missedPath": "The tests covered crop-filter construction and crop-output validation but did not invoke the real frame-count dependency used by createPresentationVerticalCroppedBaseMediaV001."
+  },
+  "fatalObservability": {
+    "practicalImpactExampleOrdinal": 4,
+    "observation": "The v001 fatal envelope discarded the crop stage and the missing-function cause, forcing a separate stage diagnosis."
+  },
+  "conclusion": {
+    "status": "root-cause-confirmed",
+    "fullVerticalVideoCompleted": false,
+    "recommendedRepair": "Move only the frame-count import to the existing renderer-core owner and add a regression that enters the real crop execution dependency."
+  }
+}

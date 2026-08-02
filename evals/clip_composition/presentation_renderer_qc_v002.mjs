@@ -5,6 +5,8 @@ import {readFile} from 'node:fs/promises';
 export const PRESENTATION_RENDERER_QC_SCHEMA_VERSION = 'presentation-render-qc-v002';
 export const PRESENTATION_REVIEW_RENDERER_QC_SCHEMA_VERSION_V003 =
   'presentation-review-render-qc-v003';
+export const PRESENTATION_VERTICAL_REVIEW_RENDERER_QC_SCHEMA_VERSION_V001 =
+  'presentation-vertical-review-renderer-qc-v001';
 
 export const PRESENTATION_RENDERER_QC_VIOLATION_CODES = Object.freeze([
   'LAYOUT_LINE_COUNT_EXCEEDED',
@@ -73,6 +75,10 @@ const QC_OUTPUT_PROFILE_V002 = Object.freeze({
 const QC_OUTPUT_PROFILE_V003 = Object.freeze({
   schemaVersion: PRESENTATION_REVIEW_RENDERER_QC_SCHEMA_VERSION_V003,
   planFile: 'presentation-review-render-plan-v003.json',
+});
+const QC_OUTPUT_PROFILE_VERTICAL_V001 = Object.freeze({
+  schemaVersion: PRESENTATION_VERTICAL_REVIEW_RENDERER_QC_SCHEMA_VERSION_V001,
+  planFile: 'presentation-vertical-review-render-plan-v001.json',
 });
 
 function evaluatePresentationRendererQc({
@@ -406,7 +412,23 @@ export function evaluatePresentationReviewRendererQcV003(input) {
   return evaluatePresentationRendererQc(input, QC_OUTPUT_PROFILE_V003);
 }
 
-export async function inspectOverlayPngV002({
+export function evaluatePresentationVerticalReviewRendererQcV001(input) {
+  return evaluatePresentationRendererQc(input, QC_OUTPUT_PROFILE_VERTICAL_V001);
+}
+
+export function evaluatePresentationRendererQcWithProfileV001(input, outputProfile) {
+  if (
+    !isObject(outputProfile)
+    || !isNonEmptyString(outputProfile.schemaVersion)
+    || !isNonEmptyString(outputProfile.planFile)
+    || Object.keys(outputProfile).sort().join('\u0000') !== ['planFile', 'schemaVersion'].join('\u0000')
+  ) {
+    throw new TypeError('renderer QC output profile is invalid');
+  }
+  return evaluatePresentationRendererQc(input, outputProfile);
+}
+
+async function inspectOverlayPngWithCommand({
   instructionId,
   pngPath,
   lineRects = [],
@@ -417,8 +439,8 @@ export async function inspectOverlayPngV002({
   appliedOverlayPropsCanonicalSha256 = null,
   overlayFile = null,
   overlaySha256 = null,
-}) {
-  const alpha = await runBuffer('magick', [pngPath, '-alpha', 'extract', '-format', '%[fx:maxima]', 'info:']);
+}, imageMagickPath) {
+  const alpha = await runBuffer(imageMagickPath, [pngPath, '-alpha', 'extract', '-format', '%[fx:maxima]', 'info:']);
   const alphaMax = Number(alpha.stdout.toString().trim());
   if (!(alphaMax > 0)) {
     return {
@@ -436,7 +458,7 @@ export async function inspectOverlayPngV002({
       overlaySha256,
     };
   }
-  const geometry = await runBuffer('magick', [pngPath, '-channel', 'A', '-trim', '-format', '%w %h %X %Y', 'info:']);
+  const geometry = await runBuffer(imageMagickPath, [pngPath, '-channel', 'A', '-trim', '-format', '%w %h %X %Y', 'info:']);
   const match = geometry.stdout.toString().trim().match(/^(\d+) (\d+) ([+-]\d+) ([+-]\d+)$/);
   if (!match) throw new Error(`alpha bounds could not be parsed: ${geometry.stdout.toString().trim()}`);
   const width = Number(match[1]);
@@ -459,16 +481,37 @@ export async function inspectOverlayPngV002({
   };
 }
 
-export async function audioPacketPayloadSha256V002(filePath) {
-  const result = await runBuffer('ffmpeg', [
+export async function inspectOverlayPngV002(input) {
+  return inspectOverlayPngWithCommand(input, 'magick');
+}
+
+export async function inspectOverlayPngWithToolV001(input) {
+  if (!isNonEmptyString(input?.imageMagickPath)) {
+    throw new TypeError('imageMagickPath is required');
+  }
+  const {imageMagickPath, ...inspectionInput} = input;
+  return inspectOverlayPngWithCommand(inspectionInput, imageMagickPath);
+}
+
+async function audioPacketPayloadSha256WithCommand(filePath, ffmpegPath) {
+  const result = await runBuffer(ffmpegPath, [
     '-hide_banner', '-loglevel', 'error', '-i', filePath,
     '-map', '0:a:0', '-c:a', 'copy', '-f', 'data', '-',
   ]);
   return createHash('sha256').update(result.stdout).digest('hex');
 }
 
-export async function inspectRenderedMediaV002(filePath) {
-  const result = await runBuffer('ffprobe', [
+export async function audioPacketPayloadSha256V002(filePath) {
+  return audioPacketPayloadSha256WithCommand(filePath, 'ffmpeg');
+}
+
+export async function audioPacketPayloadSha256WithToolV001(filePath, ffmpegPath) {
+  if (!isNonEmptyString(ffmpegPath)) throw new TypeError('ffmpegPath is required');
+  return audioPacketPayloadSha256WithCommand(filePath, ffmpegPath);
+}
+
+async function inspectRenderedMediaWithCommands(filePath, {ffprobePath, ffmpegPath}) {
+  const result = await runBuffer(ffprobePath, [
     '-v', 'error', '-count_frames',
     '-show_entries', 'format=duration:stream=index,codec_type,codec_name,width,height,avg_frame_rate,nb_read_frames',
     '-of', 'json',
@@ -492,9 +535,23 @@ export async function inspectRenderedMediaV002(filePath) {
     } : null,
     audio: audioStream ? {
       codecName: audioStream.codec_name,
-      packetPayloadSha256: await audioPacketPayloadSha256V002(filePath),
+      packetPayloadSha256: await audioPacketPayloadSha256WithCommand(filePath, ffmpegPath),
     } : null,
   };
+}
+
+export async function inspectRenderedMediaV002(filePath) {
+  return inspectRenderedMediaWithCommands(filePath, {
+    ffprobePath: 'ffprobe',
+    ffmpegPath: 'ffmpeg',
+  });
+}
+
+export async function inspectRenderedMediaWithToolsV001(filePath, tools) {
+  if (!isNonEmptyString(tools?.ffprobePath) || !isNonEmptyString(tools?.ffmpegPath)) {
+    throw new TypeError('ffprobePath and ffmpegPath are required');
+  }
+  return inspectRenderedMediaWithCommands(filePath, tools);
 }
 
 export async function fileSha256V002(filePath) {

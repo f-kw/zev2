@@ -31,6 +31,35 @@ export const PRESENTATION_INSTRUCTION_V003_OWNED_B4_VIOLATION_CODES = Object.fre
   'INSTRUCTION_MATERIAL_NOT_EMPTY',
   'INSTRUCTION_TRIGGER_MISMATCH',
 ]);
+const HORIZONTAL_INSTRUCTION_CONTRACT_PROFILE_V003 = Object.freeze({
+  bundleSchemaVersion: PRESENTATION_INSTRUCTION_BUNDLE_SCHEMA_VERSION_V003,
+  instructionSchemaVersion: PRESENTATION_INSTRUCTION_SCHEMA_VERSION_V003,
+  bundleKeys: Object.freeze([
+    'schemaVersion',
+    'pairId',
+    'displayPlanBinding',
+    'instructionSet',
+    'resolutionPackage',
+  ]),
+  instructionSetKeys: Object.freeze([
+    'schemaVersion',
+    'instructionSetId',
+    'format',
+    'rendererContractVersion',
+    'sourceProvenance',
+    'resolutionPackageId',
+    'resolutionPackageCanonicalSha256',
+    'presetRegistryBinding',
+    'materialRegistryBinding',
+    'instructions',
+  ]),
+  format: 'normal-landscape',
+  screenLayoutId: null,
+  rendererContractVersion: PRESENTATION_RENDERER_CONTRACT_VERSION_V003,
+  presetId: 'normal-landscape-readable-pop-v001',
+  presetRegistryVersion: 'normal-landscape-preset-registry-v001',
+  captionValidationMode: 'v003-format-bound',
+});
 
 const CODE_INDEX = new Map(
   PRESENTATION_INSTRUCTION_V003_OWNED_B4_VIOLATION_CODES
@@ -109,7 +138,7 @@ const displayCues = (displayPlan) => (
     : []
 );
 
-export function validatePresentationInstructionContractV003(input) {
+export function validatePresentationInstructionContractFormatNeutralV003(input, profile) {
   const violations = [];
   const add = (code, path, details = {}) => violations.push(makeViolation(code, path, details));
   const failed = () => ({
@@ -117,7 +146,24 @@ export function validatePresentationInstructionContractV003(input) {
     violations: uniqueSorted(violations),
     captionValidation: null,
   });
-  if (!exactKeys(input, [
+  if (!exactKeys(profile, [
+    'bundleSchemaVersion',
+    'instructionSchemaVersion',
+    'bundleKeys',
+    'instructionSetKeys',
+    'format',
+    'screenLayoutId',
+    'rendererContractVersion',
+    'presetId',
+    'presetRegistryVersion',
+    'captionValidationMode',
+  ])
+    || !Array.isArray(profile.bundleKeys)
+    || !Array.isArray(profile.instructionSetKeys)
+    || !['v003-format-bound', 'shared-mapping-only'].includes(
+      profile.captionValidationMode,
+    )
+    || !exactKeys(input, [
     'instructionBundle',
     'displayPlan',
     'retainedSourceAtoms',
@@ -139,32 +185,17 @@ export function validatePresentationInstructionContractV003(input) {
     presetValidationIndex,
     materialValidationIndex,
   } = input;
-  const bundleShape = exactKeys(instructionBundle, [
-    'schemaVersion',
-    'pairId',
-    'displayPlanBinding',
-    'instructionSet',
-    'resolutionPackage',
-  ]);
+  const bundleShape = exactKeys(instructionBundle, profile.bundleKeys);
   const instructionSet = instructionBundle?.instructionSet;
-  const instructionSetShape = exactKeys(instructionSet, [
-    'schemaVersion',
-    'instructionSetId',
-    'format',
-    'rendererContractVersion',
-    'sourceProvenance',
-    'resolutionPackageId',
-    'resolutionPackageCanonicalSha256',
-    'presetRegistryBinding',
-    'materialRegistryBinding',
-    'instructions',
-  ]);
+  const instructionSetShape = exactKeys(instructionSet, profile.instructionSetKeys);
   if (!bundleShape
-    || instructionBundle.schemaVersion !== PRESENTATION_INSTRUCTION_BUNDLE_SCHEMA_VERSION_V003
+    || instructionBundle.schemaVersion !== profile.bundleSchemaVersion
     || !instructionSetShape
-    || instructionSet.schemaVersion !== PRESENTATION_INSTRUCTION_SCHEMA_VERSION_V003
-    || instructionSet.format !== 'normal-landscape'
-    || instructionSet.rendererContractVersion !== PRESENTATION_RENDERER_CONTRACT_VERSION_V003
+    || instructionSet.schemaVersion !== profile.instructionSchemaVersion
+    || instructionSet.format !== profile.format
+    || (profile.screenLayoutId !== null
+      && instructionSet.screenLayoutId !== profile.screenLayoutId)
+    || instructionSet.rendererContractVersion !== profile.rendererContractVersion
     || !Array.isArray(instructionSet.instructions)) {
     add('INSTRUCTION_MAPPING_INVALID', '$.instructionBundle');
   }
@@ -334,8 +365,8 @@ export function validatePresentationInstructionContractV003(input) {
   instructions.forEach((instruction, index) => {
     const trustedPreset = trustedRegistryBindings?.presetRegistryVersion;
     const indexPreset = presetValidationIndex?.registryVersion;
-    if (instruction.presetId !== 'normal-landscape-readable-pop-v001'
-      || trustedPreset !== 'normal-landscape-preset-registry-v001'
+    if (instruction.presetId !== profile.presetId
+      || trustedPreset !== profile.presetRegistryVersion
       || indexPreset !== trustedPreset
       || presetRegistry?.registryVersion !== trustedPreset) {
       add('INSTRUCTION_PRESET_INVALID', `$.instructionBundle.instructionSet.instructions[${index}].presetId`);
@@ -363,7 +394,10 @@ export function validatePresentationInstructionContractV003(input) {
   if (violations.length > 0) return failed();
 
   let captionValidation = null;
-  if (resolutionShape && captionContract && isObject(displayPlan)) {
+  if (profile.captionValidationMode === 'v003-format-bound'
+    && resolutionShape
+    && captionContract
+    && isObject(displayPlan)) {
     captionValidation = validatePresentationCaptionContractV003({
       format: instructionSet?.format,
       source: {
@@ -380,8 +414,17 @@ export function validatePresentationInstructionContractV003(input) {
     });
   }
   const sorted = uniqueSorted(violations);
-  const status = sorted.length > 0 || captionValidation?.status === 'failed'
-    ? 'failed'
-    : captionValidation?.status ?? 'failed';
+  const status = profile.captionValidationMode === 'shared-mapping-only'
+    ? sorted.length > 0 ? 'failed' : 'passed'
+    : sorted.length > 0 || captionValidation?.status === 'failed'
+      ? 'failed'
+      : captionValidation?.status ?? 'failed';
   return { status, violations: sorted, captionValidation };
+}
+
+export function validatePresentationInstructionContractV003(input) {
+  return validatePresentationInstructionContractFormatNeutralV003(
+    input,
+    HORIZONTAL_INSTRUCTION_CONTRACT_PROFILE_V003,
+  );
 }

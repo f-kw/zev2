@@ -1,0 +1,239 @@
+{
+  "schemaVersion": "presentation-caption-gate-b6-manifest-v002",
+  "status": "stopped-after-response",
+  "stage": "response-validation",
+  "attemptId": "qdczJpv8RCc-candidate-59-vertical-caption-b6-v002",
+  "executionStartedAt": "2026-08-01T16:48:09.165Z",
+  "jobBinding": {
+    "path": "evals/clip_composition/outputs/presentation/caption-gate-b6-jobs/qdczJpv8RCc-candidate-59-vertical-caption-b6-v002.json",
+    "fileSha256": "5ea0d98c4e1c186df3b8cae223ee5d98073dc5d2eb4df2d520cda02c7f6db647",
+    "canonicalSha256": "0dd847b651acd56458acbca3193033d4ab7794a8c1f16d1c62c1b4dc9d0af5c9"
+  },
+  "implementationBinding": {
+    "entry": {
+      "path": "evals/clip_composition/run_presentation_caption_gate_b6_job_v002.mjs",
+      "fileSha256": "37910b7c0adbb4643514e0e5958a70d9bf8f17d3ed20056e6e75a01f5729328d"
+    },
+    "localImportClosure": [
+      {
+        "role": "b6Core",
+        "path": "evals/clip_composition/run_presentation_caption_gate_b6_v001.mjs",
+        "fileSha256": "636a733d1036158e7269022ca3ae6105c51ae595907874c6a6b1d53e8f3cff1d"
+      },
+      {
+        "role": "sourcePackageCore",
+        "path": "evals/clip_composition/presentation_caption_semantic_source_package_v001.mjs",
+        "fileSha256": "ac3dcbbc671af6f56dcceeea6a41c8ae9cbf9fc4ba28a8a00bbc5d6faff45bcd"
+      },
+      {
+        "role": "textLayoutImplementation",
+        "path": "evals/clip_composition/presentation_renderer_text_layout_v001.mjs",
+        "fileSha256": "066a62adaa7fa3f8b8eda92c82e9a85940e43f372af976edc4b327ef4cf9ce5e"
+      },
+      {
+        "role": "gateACore",
+        "path": "evals/clip_composition/presentation_segmenter_boundary_evidence_v001.mjs",
+        "fileSha256": "dac613292e463897ee2757be75a7d64f3ece9928141765a195ba54a0ebc6007a"
+      },
+      {
+        "role": "gateARetainedSourceAtomsCore",
+        "path": "evals/clip_composition/presentation_retained_source_atoms_v001.mjs",
+        "fileSha256": "f28178327ddc0cc64f11527d850c71bfb5043b4e13f59f6da7997fd8f6d6cad0"
+      },
+      {
+        "role": "gateARunner",
+        "path": "evals/clip_composition/run_presentation_segmenter_boundary_preflight_v001.mjs",
+        "fileSha256": "e83157cfe72197940193c9bd07a4f8c9be4b1716617dc55bf90e1e8c4f33812e"
+      },
+      {
+        "role": "semanticCore",
+        "path": "evals/clip_composition/presentation_caption_semantic_output_v001.mjs",
+        "fileSha256": "9b9bb011dcd198e02cb075b70e79d3090ddfe17694198f56b83726f004e78c6d"
+      },
+      {
+        "role": "semanticRunnerV001",
+        "path": "evals/clip_composition/run_presentation_caption_semantic_output_check_v001.mjs",
+        "fileSha256": "d13e1becf0745915455947bc01e4175555ef19dc08ba9f69ee19566f6c119018"
+      },
+      {
+        "role": "displayPairRunnerV001",
+        "path": "evals/clip_composition/run_presentation_caption_display_pair_job_v001.mjs",
+        "fileSha256": "567757847273ba52dd82ea7c497531f5767a28ed8082072331d38e15605d8204"
+      },
+      {
+        "role": "displayPairCoreV003",
+        "path": "evals/clip_composition/presentation_caption_display_pair_v003.mjs",
+        "fileSha256": "a22aa6ad44a7cd07c75ba1ebde4d40601efe29915ca6cfe915f4e1a3d8808a04"
+      },
+      {
+        "role": "instructionCoreV003",
+        "path": "evals/clip_composition/presentation_instruction_contract_v003.mjs",
+        "fileSha256": "c0a3c791c74a8c303e97e1fe0c81b8017c5dee35bd93e57668d8e11fa24925e7"
+      },
+      {
+        "role": "captionCoreV003",
+        "path": "evals/clip_composition/presentation_caption_contract_v003.mjs",
+        "fileSha256": "a090caf2b1939bbc226a306cadd580b887ce34f0a0436af96e4f94480c4b9292"
+      },
+      {
+        "role": "timelineV002",
+        "path": "evals/clip_composition/presentation_base_media_timeline_v002.mjs",
+        "fileSha256": "a1f72079f0e970cb5c6a67817427aa5909f2453ad0d04e81150cfd29c5b41ab2"
+      },
+      {
+        "role": "sourceSpeakerPolicy",
+        "path": "evals/clip_composition/presentation_source_speaker_policy_v001.mjs",
+        "fileSha256": "56d2d03d5bcee3a409b27acc9819a48c95abb867cdc00fd0b2bf2fe87bb9477b"
+      },
+      {
+        "role": "sourceSpeakerRegistry",
+        "path": "evals/clip_composition/registries/presentation/presentation-source-speaker-non-identity-registry-v001/registry.json",
+        "fileSha256": "9e6f6c5e57c0b0823840c70fe0e3de05592cbc88819def6020a7c1cfaf211f3a"
+      }
+    ]
+  },
+  "fixedRequestBinding": {
+    "path": "evals/clip_composition/outputs/presentation/caption-gate-b5/qdczJpv8RCc-candidate-59-vertical-caption-b5-v001/generate-content-request.json",
+    "fileSha256": "6113191c82f2065d4b0c71f8530dea925c36e31d92fcb0642a0faf58a86d7e83",
+    "byteLength": 30542
+  },
+  "transport": {
+    "product": "Gemini Developer API",
+    "apiVersion": "v1beta",
+    "generateContentEndpoint": "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent",
+    "method": "POST",
+    "headers": {
+      "content-type": "application/json",
+      "x-goog-api-key": "<redacted>"
+    },
+    "serviceTierFieldOmitted": true,
+    "automaticRetries": 0,
+    "clientTimeoutMilliseconds": 600000,
+    "generateContentCalls": 1
+  },
+  "response": {
+    "configuredModelId": "gemini-3.6-flash",
+    "responseModelVersion": "gemini-3.6-flash",
+    "httpStatus": 200,
+    "contentType": "application/json; charset=UTF-8",
+    "rawBinding": {
+      "path": "evals/clip_composition/outputs/presentation/caption-gate-b6/qdczJpv8RCc-candidate-59-vertical-v002/generate-content-response.raw.json",
+      "fileSha256": "476c4d4e6a2e944354e0509530f0e9131af991259e803e2c7fcecef408541c65",
+      "byteLength": 18466
+    },
+    "usageMetadata": {
+      "promptTokenCount": 7474,
+      "candidatesTokenCount": 1425,
+      "thoughtsTokenCount": 5321,
+      "totalTokenCount": 14220
+    },
+    "observedServiceTier": "standard",
+    "candidateCount": 1
+  },
+  "residualRiskAcceptance": {
+    "schemaVersion": "presentation-caption-api-residual-risk-acceptance-v001",
+    "acceptanceId": "kawafmm-vertical-caption-cost-risk-acceptance-20260729-v001",
+    "acceptedBy": "kawafmm",
+    "acceptedOn": "2026-07-29",
+    "maximumNanoUsd": 500000000,
+    "officialClaimsCanonicalSha256": "bd7d3f92f0b665c7d4d676e1040018d8657affb71cb9b645bd5b9015b382e606",
+    "claimBindings": [
+      {
+        "claimId": "count-tokens-unbilled",
+        "acceptedVerdict": "unverified"
+      },
+      {
+        "claimId": "count-tokens-upper-bounds-prompt-billing",
+        "acceptedVerdict": "contradicted"
+      },
+      {
+        "claimId": "max-output-upper-bounds-candidate-plus-thinking",
+        "acceptedVerdict": "unverified"
+      }
+    ],
+    "sendPermission": "allow-one-generate-content-after-official-facts-and-bigint-cap-pass"
+  },
+  "cost": {
+    "currency": "USD",
+    "inputPriceNanoUsdPerToken": 1500,
+    "outputPriceNanoUsdPerToken": 7500,
+    "promptCostNanoUsd": 11211000,
+    "outputCostNanoUsd": 50595000,
+    "totalUsageCostNanoUsd": 61806000,
+    "actualBillingObservation": "usage_metadata_list_price_estimate_invoice_not_observed"
+  },
+  "spendingAuthorization": {
+    "b5ManifestBinding": {
+      "path": "evals/clip_composition/outputs/presentation/caption-gate-b5/qdczJpv8RCc-candidate-59-vertical-caption-b5-v001/b5-manifest-v002.json",
+      "fileSha256": "79fe3f4cd0183fed4f9563b47f00fcc25c9b016bf3ae35e4ba0e16b2d13a1b9d",
+      "canonicalSha256": "ea22375d117cc57b802bf28a5589c592e2d3e48d48dad0f68af6f3989236f696"
+    },
+    "officialClaimsCanonicalSha256": "bd7d3f92f0b665c7d4d676e1040018d8657affb71cb9b645bd5b9015b382e606",
+    "residualRiskAcceptanceCanonicalSha256": "b932abcddad6e5c6f3967fcaaa300ad23c0aba9cb1d4749c484681acad7b1ae4",
+    "finalRequestBinding": {
+      "path": "evals/clip_composition/outputs/presentation/caption-gate-b5/qdczJpv8RCc-candidate-59-vertical-caption-b5-v001/generate-content-request.json",
+      "fileSha256": "6113191c82f2065d4b0c71f8530dea925c36e31d92fcb0642a0faf58a86d7e83",
+      "canonicalSha256": "0ab3e862f29edb989f09cfaade18d6160cd4ce5d06cd83655b1cbe2f08d1d491"
+    },
+    "finalInputTokens": 7474,
+    "maxOutputTokens": 65171,
+    "maximumNanoUsd": 500000000,
+    "preSendEstimateNanoUsd": 499993500,
+    "preSendStatus": "passed",
+    "observedPromptTokens": 7474,
+    "observedCandidateTokens": 1425,
+    "observedThinkingTokens": 5321,
+    "observedTotalTokens": 14220,
+    "observedUsageCostNanoUsd": 61806000,
+    "estimateComparison": {
+      "promptTokensExceededFinalInputTokens": false,
+      "outputTokensExceededDerivedMaxOutputTokens": false,
+      "usageCostExceededPreSendEstimate": false
+    },
+    "postSendStatus": "passed"
+  },
+  "semanticOutputBinding": {
+    "path": "evals/clip_composition/outputs/presentation/caption-semantic-raw-outputs/qdczJpv8RCc-candidate-59-vertical-caption-b6-v002.json",
+    "fileSha256": "944c1bbf4d150c67252af5901660ff12e58d0956daf5abae2466654d17c1d08d",
+    "byteLength": 4581
+  },
+  "b1": {
+    "exitCode": 0,
+    "status": "passed",
+    "jobBinding": {
+      "path": "evals/clip_composition/outputs/presentation/caption-semantic-output-check-jobs/qdczJpv8RCc-candidate-59-vertical-caption-b6-v002.json",
+      "fileSha256": "440cd58884c70461a902cbb6420f033d5a933964ea3a0736bc809fbc084c29ad",
+      "byteLength": 5248,
+      "canonicalSha256": "f3c1e7349ed6f4b9aca451d32961d438134f258e43029c4d49ecc671aaf5ccc4"
+    },
+    "validationReportBinding": {
+      "path": "evals/clip_composition/outputs/presentation/caption-gate-b6/qdczJpv8RCc-candidate-59-vertical-v002/semantic-output-validation-report.json",
+      "fileSha256": "b2342ad39eb2e6c0519337925aa8505875d8a8372919f7a95a814613041de826",
+      "byteLength": 6893,
+      "canonicalSha256": "59fc9347b7a39671bfc09d0cbe7452f98674d25792d2a9444dd09b8d3dbe7b5a"
+    }
+  },
+  "b4": {
+    "exitCode": 1,
+    "status": "rejected",
+    "jobBinding": {
+      "path": "evals/clip_composition/outputs/presentation/caption-display-pair-generation-jobs/qdczJpv8RCc-candidate-59-vertical-caption-b6-v002.json",
+      "fileSha256": "bb1372f07e7927b0058826add76f4359a066bb78a6d25486d955bf170775eee5",
+      "byteLength": 15186,
+      "canonicalSha256": "86b04acb7fba07d0fb15c7eab0a67d1081d1cd05942e634e8512636f4c0d8141"
+    },
+    "outputRoot": null,
+    "validationReportBinding": {
+      "path": "evals/clip_composition/outputs/presentation/caption-gate-b6/qdczJpv8RCc-candidate-59-vertical-v002/b4-runner-output.raw.json",
+      "fileSha256": "faccccff17bf3c1251ca5bd5c128f0350c6fd8a1b6139fd84292c9dfe0d7adbc",
+      "byteLength": 16906,
+      "canonicalSha256": "f1b4704702363ca17785b9d3b147aa1f73ec892bf2963227f720cfa6548f2067"
+    }
+  },
+  "stop": {
+    "reason": "display-plan-rejected",
+    "violationCodes": [
+      "SEMANTIC_COMPILER_REBUILD_FAILED"
+    ]
+  }
+}

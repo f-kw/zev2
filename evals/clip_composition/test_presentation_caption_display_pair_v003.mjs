@@ -1416,6 +1416,7 @@ test('T085: production runnerは承認済みpure入口を直接使いfixture注�
     'buildPresentationCaptionDisplayPairStaticPreflightReportV001',
     'buildPresentationCaptionDisplayPairValidationReportV002',
     'buildPresentationCaptionDisplayPairV003',
+    'buildPresentationCaptionDisplayContainersFormatNeutralV003',
     'checkPresentationCaptionDisplayPairV003',
     'validatePresentationCaptionDisplayPairGenerationJobV001',
     'validatePresentationCaptionDisplayPairStaticPreflightJobV001',
@@ -1562,4 +1563,38 @@ test('T088: 0 frame拒否は内側理由を欠落なく上位報告する', asyn
   } finally {
     fixture.cleanup();
   }
+});
+
+test('H04: 横長表示のcue計算は形式中立の共通入口へ36文字契約を渡しても同一になる', () => {
+  const compilerInput = makeCompiler();
+  const retainedSourceAtoms = makeRetained();
+  const calculated =
+    b4Core.buildPresentationCaptionDisplayContainersFormatNeutralV003({
+      compilerInput,
+      retainedSourceAtoms,
+    });
+
+  assert.deepEqual(calculated, makeDisplayPlan().containers);
+  assert.deepEqual(
+    calculated[0].cues.map((cue) => ({
+      cueId: cue.cueId,
+      text: cue.lines.map((line) => line.text).join(''),
+      sourceStartMs: cue.sourceStartMs,
+      sourceEndMs: cue.sourceEndMs,
+    })),
+    [
+      {
+        cueId: 'caption-cue-000001',
+        text: '母船',
+        sourceStartMs: 100,
+        sourceEndMs: 300,
+      },
+      {
+        cueId: 'caption-cue-000002',
+        text: '月刊',
+        sourceStartMs: 300,
+        sourceEndMs: 500,
+      },
+    ],
+  );
 });
