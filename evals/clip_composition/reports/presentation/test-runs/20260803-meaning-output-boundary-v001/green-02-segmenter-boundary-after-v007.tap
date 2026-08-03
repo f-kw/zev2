@@ -1,0 +1,115 @@
+TAP version 13
+# Subtest: exports use the approved fixed order and remain immutable
+ok 1 - exports use the approved fixed order and remain immutable
+  ---
+  duration_ms: 0.785292
+  ...
+# Subtest: generator treats atom IDs as opaque and uses raw array order
+ok 2 - generator treats atom IDs as opaque and uses raw array order
+  ---
+  duration_ms: 9.524291
+  ...
+# Subtest: generator output is byte deterministic for the same semantic input
+ok 3 - generator output is byte deterministic for the same semantic input
+  ---
+  duration_ms: 0.66675
+  ...
+# Subtest: generator emits the exact evidence, policy, candidate, anchor, and hash schemas
+ok 4 - generator emits the exact evidence, policy, candidate, anchor, and hash schemas
+  ---
+  duration_ms: 0.836375
+  ...
+# Subtest: checker accepts the generic full-contract fixture and returns the exact report shape
+ok 5 - checker accepts the generic full-contract fixture and returns the exact report shape
+  ---
+  duration_ms: 6.486875
+  ...
+# Subtest: checker rejects malformed internal context as an internal error, not a contract code
+ok 6 - checker rejects malformed internal context as an internal error, not a contract code
+  ---
+  duration_ms: 4.055042
+  ...
+# Subtest: all 35 fixed violation codes are reachable through the approved checker entrance
+ok 7 - all 35 fixed violation codes are reachable through the approved checker entrance
+  ---
+  duration_ms: 54.016958
+  ...
+# Subtest: check dependency graph runs independent checks and suppresses only true dependents
+ok 8 - check dependency graph runs independent checks and suppresses only true dependents
+  ---
+  duration_ms: 6.663
+  ...
+# Subtest: build-result union accepts only the three registered forms and fixes invalid paths
+ok 9 - build-result union accepts only the three registered forms and fixes invalid paths
+  ---
+  duration_ms: 14.660792
+  ...
+# Subtest: coverage is checked from readable membership even when segmentation is invalid
+ok 10 - coverage is checked from readable membership even when segmentation is invalid
+  ---
+  duration_ms: 4.7945
+  ...
+# Subtest: determinism compares formal bytes independently of evidence validity
+ok 11 - determinism compares formal bytes independently of evidence validity
+  ---
+  duration_ms: 3.59225
+  ...
+# Subtest: specific violation ownership suppresses only the generic alias for the same defect
+ok 12 - specific violation ownership suppresses only the generic alias for the same defect
+  ---
+  duration_ms: 8.511041
+  ...
+# Subtest: snapshot issue vocabularies, order, null states, and violation paths are deterministic
+ok 13 - snapshot issue vocabularies, order, null states, and violation paths are deterministic
+  ---
+  duration_ms: 3.784041
+  ...
+# Subtest: evidence exact schemas reject unknown, missing, type, and count-shape defects
+ok 14 - evidence exact schemas reject unknown, missing, type, and count-shape defects
+  ---
+  duration_ms: 8.494042
+  ...
+# Subtest: runtime pass-fail fields are fixed while diagnostics remain provenance only
+ok 15 - runtime pass-fail fields are fixed while diagnostics remain provenance only
+  ---
+  duration_ms: 6.222833
+  ...
+# Subtest: production filesystem adapter exposes only the approved read operations
+ok 16 - production filesystem adapter exposes only the approved read operations
+  ---
+  duration_ms: 0.136625
+  ...
+# Subtest: read-only runner and actual CLI cover success, contract failure, usage failure, and injection refusal
+ok 17 - read-only runner and actual CLI cover success, contract failure, usage failure, and injection refusal
+  ---
+  duration_ms: 1242.144666
+  ...
+# Subtest: the exported report validator rejects each independently corrupted cross-field binding
+ok 18 - the exported report validator rejects each independently corrupted cross-field binding
+  ---
+  duration_ms: 251.905917
+  ...
+# Subtest: stable reads detect replacement during and after reads for job, every input, and every implementation file
+ok 19 - stable reads detect replacement during and after reads for job, every input, and every implementation file
+  ---
+  duration_ms: 830.704375
+  ...
+# Subtest: runner rejects symbolic-link and non-regular observations for every input and implementation file
+ok 20 - runner rejects symbolic-link and non-regular observations for every input and implementation file
+  ---
+  duration_ms: 1213.573291
+  ...
+# Subtest: core and runner keep the read-only static import boundary
+ok 21 - core and runner keep the read-only static import boundary
+  ---
+  duration_ms: 1.475792
+  ...
+1..21
+# tests 21
+# suites 0
+# pass 21
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 3726.073708

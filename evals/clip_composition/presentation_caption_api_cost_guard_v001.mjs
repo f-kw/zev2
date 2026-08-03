@@ -44,6 +44,15 @@ export const PRESENTATION_CAPTION_API_COST_POLICY_V001 = Object.freeze({
       + 'models/gemini-3.6-flash:generateContent',
 });
 
+const PRESENTATION_API_PARAMETERIZED_COST_POLICY_V001 = Object.freeze({
+  modelOutputTokenLimit: PRESENTATION_CAPTION_API_COST_POLICY_V001.outputLimit,
+  inputPriceNanoUsdPerToken:
+    PRESENTATION_CAPTION_API_COST_POLICY_V001.inputPriceNanoUsdPerToken,
+  outputPriceNanoUsdPerToken:
+    PRESENTATION_CAPTION_API_COST_POLICY_V001.outputPriceNanoUsdPerToken,
+  maximumNanoUsd: PRESENTATION_CAPTION_API_COST_POLICY_V001.maximumNanoUsd,
+});
+
 export const PRESENTATION_CAPTION_API_OFFICIAL_CLAIM_IDS_V001 =
   Object.freeze([
     'model-exists',
@@ -449,15 +458,25 @@ export function parsePresentationCaptionCountTokensResponseV001({
   });
 }
 
-export function derivePresentationCaptionPreSendCostV001({
-  probeInputTokens,
-  finalInputTokens,
-}) {
-  if (!positiveSafeInteger(probeInputTokens)
-    || !positiveSafeInteger(finalInputTokens)) {
+export function derivePresentationApiPreSendCostV001(input) {
+  if (!exactKeys(input, ['probeInputTokens', 'finalInputTokens', 'policy'])) {
     return makeFailure('API_COST_PROBE_INVALID', '$.tokenDiagnosis');
   }
-  const policy = PRESENTATION_CAPTION_API_COST_POLICY_V001;
+  const {probeInputTokens, finalInputTokens, policy} = input;
+  if (!positiveSafeInteger(probeInputTokens)
+    || !positiveSafeInteger(finalInputTokens)
+    || !exactKeys(policy, [
+      'modelOutputTokenLimit',
+      'inputPriceNanoUsdPerToken',
+      'outputPriceNanoUsdPerToken',
+      'maximumNanoUsd',
+    ])
+    || !positiveSafeInteger(policy.modelOutputTokenLimit)
+    || !positiveSafeInteger(policy.inputPriceNanoUsdPerToken)
+    || !positiveSafeInteger(policy.outputPriceNanoUsdPerToken)
+    || !positiveSafeInteger(policy.maximumNanoUsd)) {
+    return makeFailure('API_COST_PROBE_INVALID', '$.tokenDiagnosis');
+  }
   const remaining = BigInt(policy.maximumNanoUsd)
     - BigInt(probeInputTokens) * BigInt(policy.inputPriceNanoUsdPerToken);
   if (remaining <= 0n) {
@@ -466,13 +485,13 @@ export function derivePresentationCaptionPreSendCostV001({
       '$.spendingAuthorization',
     );
   }
-  const maxOutputTokens = Number(
+  const derivedMaxOutputTokens = Number(
     remaining / BigInt(policy.outputPriceNanoUsdPerToken)
-      < BigInt(policy.outputLimit)
+      < BigInt(policy.modelOutputTokenLimit)
       ? remaining / BigInt(policy.outputPriceNanoUsdPerToken)
-      : BigInt(policy.outputLimit),
+      : BigInt(policy.modelOutputTokenLimit),
   );
-  if (!positiveSafeInteger(maxOutputTokens)) {
+  if (!positiveSafeInteger(derivedMaxOutputTokens)) {
     return makeFailure(
       'API_BUDGET_EXCEEDED_BEFORE_SEND',
       '$.spendingAuthorization.maxOutputTokens',
@@ -480,7 +499,7 @@ export function derivePresentationCaptionPreSendCostV001({
   }
   const preSendEstimate = BigInt(finalInputTokens)
       * BigInt(policy.inputPriceNanoUsdPerToken)
-    + BigInt(maxOutputTokens)
+    + BigInt(derivedMaxOutputTokens)
       * BigInt(policy.outputPriceNanoUsdPerToken);
   if (preSendEstimate > BigInt(policy.maximumNanoUsd)) {
     return makeFailure(
@@ -490,40 +509,112 @@ export function derivePresentationCaptionPreSendCostV001({
   }
   return Object.freeze({
     status: 'passed',
-    maxOutputTokens,
+    derivedMaxOutputTokens,
     preSendEstimateNanoUsd: Number(preSendEstimate),
   });
 }
 
-export function derivePresentationCaptionPostSendCostV001({
-  usageMetadata,
+export function derivePresentationCaptionPreSendCostV001({
+  probeInputTokens,
   finalInputTokens,
-  maxOutputTokens,
-  preSendEstimateNanoUsd,
 }) {
+  const result = derivePresentationApiPreSendCostV001({
+    probeInputTokens,
+    finalInputTokens,
+    policy: PRESENTATION_API_PARAMETERIZED_COST_POLICY_V001,
+  });
+  if (result.status !== 'passed') return result;
+  return Object.freeze({
+    status: result.status,
+    maxOutputTokens: result.derivedMaxOutputTokens,
+    preSendEstimateNanoUsd: result.preSendEstimateNanoUsd,
+  });
+}
+
+const STRICT_POST_SEND_PROFILE_V001 = Object.freeze({
+  validateRootAndAuthorization: true,
+  requireSafeCostProjection: true,
+  includeCostBreakdown: true,
+});
+const LEGACY_POST_SEND_PROFILE_V001 = Object.freeze({
+  validateRootAndAuthorization: false,
+  requireSafeCostProjection: false,
+  includeCostBreakdown: false,
+});
+
+const derivePresentationApiPostSendCostProjectionInternalV001 = (input, profile) => {
+  if (profile.validateRootAndAuthorization
+    && !exactKeys(input, [
+      'usageMetadata',
+      'finalInputTokens',
+      'derivedMaxOutputTokens',
+      'preSendEstimateNanoUsd',
+      'policy',
+    ])) {
+    return makeFailure('API_USAGE_ACCOUNTING_INVALID', '$.usageMetadata');
+  }
+  const {
+    usageMetadata,
+    finalInputTokens,
+    derivedMaxOutputTokens,
+    preSendEstimateNanoUsd,
+    policy,
+  } = input;
   if (!exactKeys(usageMetadata, [
     'promptTokenCount',
     'candidatesTokenCount',
     'thoughtsTokenCount',
     'totalTokenCount',
-  ])) {
+  ]) || (profile.validateRootAndAuthorization && (!exactKeys(policy, [
+      'modelOutputTokenLimit',
+      'inputPriceNanoUsdPerToken',
+      'outputPriceNanoUsdPerToken',
+      'maximumNanoUsd',
+    ])
+    || !positiveSafeInteger(policy.modelOutputTokenLimit)
+    || !positiveSafeInteger(policy.inputPriceNanoUsdPerToken)
+    || !positiveSafeInteger(policy.outputPriceNanoUsdPerToken)
+    || !positiveSafeInteger(policy.maximumNanoUsd)
+    || !positiveSafeInteger(finalInputTokens)
+    || !positiveSafeInteger(derivedMaxOutputTokens)
+    || derivedMaxOutputTokens > policy.modelOutputTokenLimit
+    || !positiveSafeInteger(preSendEstimateNanoUsd)))) {
     return makeFailure('API_USAGE_ACCOUNTING_INVALID', '$.usageMetadata');
   }
   const values = Object.values(usageMetadata);
-  if (!values.every((value) => Number.isSafeInteger(value) && value >= 0)
-    || usageMetadata.totalTokenCount
-      !== usageMetadata.promptTokenCount
-        + usageMetadata.candidatesTokenCount
-        + usageMetadata.thoughtsTokenCount) {
+  if (!values.every((value) => Number.isSafeInteger(value) && value >= 0)) {
     return makeFailure('API_USAGE_ACCOUNTING_INVALID', '$.usageMetadata');
   }
-  const policy = PRESENTATION_CAPTION_API_COST_POLICY_V001;
-  const observed = BigInt(usageMetadata.promptTokenCount)
-      * BigInt(policy.inputPriceNanoUsdPerToken)
-    + BigInt(
-      usageMetadata.candidatesTokenCount + usageMetadata.thoughtsTokenCount,
-    ) * BigInt(policy.outputPriceNanoUsdPerToken);
-  const result = {
+  const outputTokenCountNumber = usageMetadata.candidatesTokenCount
+    + usageMetadata.thoughtsTokenCount;
+  const totalMatches = profile.validateRootAndAuthorization
+    ? BigInt(usageMetadata.totalTokenCount)
+      === BigInt(usageMetadata.promptTokenCount)
+        + BigInt(usageMetadata.candidatesTokenCount)
+        + BigInt(usageMetadata.thoughtsTokenCount)
+    : usageMetadata.totalTokenCount
+      === usageMetadata.promptTokenCount
+        + usageMetadata.candidatesTokenCount
+        + usageMetadata.thoughtsTokenCount;
+  if (!totalMatches) {
+    return makeFailure('API_USAGE_ACCOUNTING_INVALID', '$.usageMetadata');
+  }
+  const outputTokenCount = profile.validateRootAndAuthorization
+    ? BigInt(usageMetadata.candidatesTokenCount)
+      + BigInt(usageMetadata.thoughtsTokenCount)
+    : BigInt(outputTokenCountNumber);
+  const promptCost = BigInt(usageMetadata.promptTokenCount)
+    * BigInt(policy.inputPriceNanoUsdPerToken);
+  const outputCost = outputTokenCount
+    * BigInt(policy.outputPriceNanoUsdPerToken);
+  const observed = promptCost + outputCost;
+  const maximumSafeInteger = BigInt(Number.MAX_SAFE_INTEGER);
+  if (profile.requireSafeCostProjection && (promptCost > maximumSafeInteger
+    || outputCost > maximumSafeInteger
+    || observed > maximumSafeInteger)) {
+    return makeFailure('API_USAGE_ACCOUNTING_INVALID', '$.usageMetadata');
+  }
+  const common = {
     status: observed <= BigInt(policy.maximumNanoUsd)
       ? 'passed'
       : 'rejected',
@@ -535,13 +626,60 @@ export function derivePresentationCaptionPostSendCostV001({
       promptTokensExceededFinalInputTokens:
         usageMetadata.promptTokenCount > finalInputTokens,
       outputTokensExceededDerivedMaxOutputTokens:
-        usageMetadata.candidatesTokenCount + usageMetadata.thoughtsTokenCount
-          > maxOutputTokens,
+        profile.validateRootAndAuthorization
+          ? outputTokenCount > BigInt(derivedMaxOutputTokens)
+          : outputTokenCountNumber > derivedMaxOutputTokens,
       usageCostExceededPreSendEstimate:
         observed > BigInt(preSendEstimateNanoUsd),
     },
   };
-  return Object.freeze(result);
+  return Object.freeze(profile.includeCostBreakdown ? {
+    status: common.status,
+    code: common.code,
+    promptCostNanoUsd: Number(promptCost),
+    outputCostNanoUsd: Number(outputCost),
+    observedUsageCostNanoUsd: common.observedUsageCostNanoUsd,
+    estimateComparison: common.estimateComparison,
+  } : common);
+};
+
+export function derivePresentationApiPostSendCostProjectionV001(input) {
+  return derivePresentationApiPostSendCostProjectionInternalV001(
+    input,
+    STRICT_POST_SEND_PROFILE_V001,
+  );
+}
+
+export function derivePresentationApiPostSendCostV001(input) {
+  const result = derivePresentationApiPostSendCostProjectionInternalV001(
+    input,
+    STRICT_POST_SEND_PROFILE_V001,
+  );
+  if (result.status === 'rejected'
+    && result.code === 'API_USAGE_ACCOUNTING_INVALID') {
+    return result;
+  }
+  return Object.freeze({
+    status: result.status,
+    code: result.code,
+    observedUsageCostNanoUsd: result.observedUsageCostNanoUsd,
+    estimateComparison: result.estimateComparison,
+  });
+}
+
+export function derivePresentationCaptionPostSendCostV001({
+  usageMetadata,
+  finalInputTokens,
+  maxOutputTokens,
+  preSendEstimateNanoUsd,
+}) {
+  return derivePresentationApiPostSendCostProjectionInternalV001({
+    usageMetadata,
+    finalInputTokens,
+    derivedMaxOutputTokens: maxOutputTokens,
+    preSendEstimateNanoUsd,
+    policy: PRESENTATION_API_PARAMETERIZED_COST_POLICY_V001,
+  }, LEGACY_POST_SEND_PROFILE_V001);
 }
 
 export function presentationCaptionApiBytesContainSecretV001(bytes, secret) {

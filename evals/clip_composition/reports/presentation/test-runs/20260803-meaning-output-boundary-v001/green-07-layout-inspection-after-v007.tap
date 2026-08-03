@@ -1,0 +1,70 @@
+TAP version 13
+# Subtest: 1 全許可item幾何pathの通常小数を含むpassedを受理する
+ok 1 - 1 全許可item幾何pathの通常小数を含むpassedを受理する
+  ---
+  duration_ms: 1.423125
+  ...
+# Subtest: 2 三違反種類と通常小数幾何を含むfailedを受理する
+ok 2 - 2 三違反種類と通常小数幾何を含むfailedを受理する
+  ---
+  duration_ms: 0.792417
+  ...
+# Subtest: 3 lineCountの小数tokenを拒否する
+ok 3 - 3 lineCountの小数tokenを拒否する
+  ---
+  duration_ms: 0.133583
+  ...
+# Subtest: 4 fontSizePxの小数tokenを拒否する
+ok 4 - 4 fontSizePxの小数tokenを拒否する
+  ---
+  duration_ms: 0.126334
+  ...
+# Subtest: 5 整数pathと幾何pathのnegative zeroを拒否する
+ok 5 - 5 整数pathと幾何pathのnegative zeroを拒否する
+  ---
+  duration_ms: 0.181666
+  ...
+# Subtest: 6 NaN・Infinity・非数を拒否する
+ok 6 - 6 NaN・Infinity・非数を拒否する
+  ---
+  duration_ms: 0.318125
+  ...
+# Subtest: 7 整数pathと幾何pathのsafe範囲外整数tokenを拒否する
+ok 7 - 7 整数pathと幾何pathのsafe範囲外整数tokenを拒否する
+  ---
+  duration_ms: 0.201667
+  ...
+# Subtest: 8 safeAreaPxの通常小数を拒否する
+ok 8 - 8 safeAreaPxの通常小数を拒否する
+  ---
+  duration_ms: 0.439917
+  ...
+# Subtest: 9 未知数値fieldと時刻風数値fieldをnumber-invalidで拒否する
+ok 9 - 9 未知数値fieldと時刻風数値fieldをnumber-invalidで拒否する
+  ---
+  duration_ms: 0.415208
+  ...
+# Subtest: 10 未知違反codeと既知codeのdetails形不一致を拒否する
+ok 10 - 10 未知違反codeと既知codeのdetails形不一致を拒否する
+  ---
+  duration_ms: 0.452333
+  ...
+# Subtest: 11 BOM・重複key・trailing content・code fence・不正Unicodeを既存reasonで拒否する
+ok 11 - 11 BOM・重複key・trailing content・code fence・不正Unicodeを既存reasonで拒否する
+  ---
+  duration_ms: 0.395083
+  ...
+# Subtest: 12 JSONPathごとの指数・小数点token方針を区別する
+ok 12 - 12 JSONPathごとの指数・小数点token方針を区別する
+  ---
+  duration_ms: 0.352875
+  ...
+1..12
+# tests 12
+# suites 0
+# pass 12
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 58.737291

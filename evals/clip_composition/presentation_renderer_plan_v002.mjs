@@ -403,6 +403,30 @@ const byUniqueId = (values, readId) => {
   return map;
 };
 
+/**
+ * 横型presetからkindに対応するpolicy・visual state・transitionを一意に解決する。
+ * 解決不能またはID重複時はnullを返し、呼出側が所有する違反へ帰属させる。
+ */
+export function resolvePresentationLandscapePresetProjectionV001(
+  presetRegistry,
+  presetId,
+  kind,
+) {
+  const presets = byUniqueId(presetRegistry?.presets, (preset) => preset?.presetId);
+  const transitions = byUniqueId(
+    presetRegistry?.transitions,
+    (transition) => transition?.transitionId,
+  );
+  const preset = presets.get(presetId);
+  const policies = byUniqueId(preset?.kindPolicies, (policy) => policy?.kind);
+  const states = byUniqueId(preset?.visualStates, (state) => state?.stateId);
+  const policy = policies.get(kind);
+  const visualState = policy ? states.get(policy.stateId) : null;
+  const transition = visualState ? transitions.get(visualState.transitionId) : null;
+  if (!preset || !policy || !visualState || !transition) return null;
+  return {preset, policy, visualState, transition};
+}
+
 const targetProvenance = (target) => {
   const result = {
     targetRefId: target.targetRefId,
@@ -462,8 +486,6 @@ export function buildPresentationRendererPlanV002({
     resolutionPackage?.captionContracts,
     (contract) => contract?.captionContractRefId,
   );
-  const presets = byUniqueId(presetRegistry?.presets, (preset) => preset?.presetId);
-  const transitions = byUniqueId(presetRegistry?.transitions, (transition) => transition?.transitionId);
   const planElements = [];
 
   for (const [instructionIndex, instruction] of (instructionSet?.instructions ?? []).entries()) {
@@ -472,12 +494,15 @@ export function buildPresentationRendererPlanV002({
     const triggerAtom = atoms.get(instruction?.trigger?.startAtomId);
     const targetIds = instruction?.target?.targetRefIds;
     const target = Array.isArray(targetIds) && targetIds.length === 1 ? targets.get(targetIds[0]) : null;
-    const preset = presets.get(instruction?.presetId);
-    const policies = byUniqueId(preset?.kindPolicies, (policy) => policy?.kind);
-    const states = byUniqueId(preset?.visualStates, (state) => state?.stateId);
-    const policy = policies.get(instruction?.kind);
-    const visualState = policy ? states.get(policy.stateId) : null;
-    const transition = visualState ? transitions.get(visualState.transitionId) : null;
+    const presetProjection = resolvePresentationLandscapePresetProjectionV001(
+      presetRegistry,
+      instruction?.presetId,
+      instruction?.kind,
+    );
+    const preset = presetProjection?.preset;
+    const policy = presetProjection?.policy;
+    const visualState = presetProjection?.visualState;
+    const transition = presetProjection?.transition;
     if (!triggerAtom || !target || !preset || !policy || !visualState || !transition) {
       add('TARGET_RESOLUTION_FAILED', path, [instructionId, targetIds?.[0], instruction?.presetId]);
       continue;

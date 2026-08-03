@@ -149,6 +149,22 @@ export const PRESENTATION_CAPTION_GATE_B6_FORMAL_CONFIG_V001 = Object.freeze({
   outputPriceUsdPerMillion: OUTPUT_PRICE_USD_PER_MILLION,
 });
 
+export const PRESENTATION_CAPTION_GATE_B6_PROVIDER_REJECTION_CODES_V001 =
+  Object.freeze([
+    'B6_V002_HTTP_ENVELOPE_INVALID',
+    'HTTP_RESPONSE_UTF8_INVALID',
+    'HTTP_RESPONSE_JSON_INVALID',
+    'HTTP_RESPONSE_SHAPE_INVALID',
+    'HTTP_RESPONSE_MODEL_VERSION_MISSING',
+    'HTTP_RESPONSE_USAGE_INVALID',
+    'B6_V002_RESPONSE_MODEL_INVALID',
+    'B6_V002_USAGE_INVALID',
+    'B6_V002_RESPONSE_TIER_INVALID',
+    'B6_V002_CANDIDATE_COUNT_INVALID',
+    'B6_V002_CANDIDATE_CONTENT_INVALID',
+    'HTTP_RESPONSE_CANDIDATE_TEXT_UTF8_INVALID',
+  ]);
+
 class B6Stop extends Error {
   constructor(reason, facts = {}) {
     super(reason);
@@ -309,22 +325,43 @@ const totalTokenCost = (inputTokens, outputTokens, inputPrice, outputPrice) =>
 
 const cloneJson = (value) => JSON.parse(JSON.stringify(value));
 
-const decodeHttpMetadata = (rawBytes) => {
+const parseProviderResponseRawOnceV001 = (rawBytes) => {
   let text;
   try {
     text = new TextDecoder('utf-8', {fatal: true}).decode(rawBytes);
   } catch {
-    stop('HTTP_RESPONSE_UTF8_INVALID');
+    return Object.freeze({
+      status: 'rejected',
+      code: 'HTTP_RESPONSE_UTF8_INVALID',
+      parserInvocationCount: 1,
+    });
   }
   let envelope;
   try {
     envelope = JSON.parse(text);
   } catch {
-    stop('HTTP_RESPONSE_JSON_INVALID');
+    return Object.freeze({
+      status: 'rejected',
+      code: 'HTTP_RESPONSE_JSON_INVALID',
+      parserInvocationCount: 1,
+    });
   }
   if (envelope === null || typeof envelope !== 'object' || Array.isArray(envelope)) {
-    stop('HTTP_RESPONSE_SHAPE_INVALID');
+    return Object.freeze({
+      status: 'rejected',
+      code: 'HTTP_RESPONSE_SHAPE_INVALID',
+      parserInvocationCount: 1,
+    });
   }
+  return Object.freeze({status: 'parsed', envelope, parserInvocationCount: 1});
+};
+
+const decodeHttpMetadata = (rawBytes) => {
+  const parsed = parseProviderResponseRawOnceV001(rawBytes);
+  if (parsed.status !== 'parsed') {
+    stop(parsed.code);
+  }
+  const {envelope} = parsed;
   if (typeof envelope.modelVersion !== 'string' || envelope.modelVersion.length === 0) {
     stop('HTTP_RESPONSE_MODEL_VERSION_MISSING');
   }
@@ -361,12 +398,205 @@ const decodeCandidateText = (envelope) => {
   return semanticBytes;
 };
 
-export async function executePresentationCaptionGateB6TransportV002({
+export function inspectPresentationCaptionGateB6ProviderResponseV001({
+  rawBytes,
+  httpStatus,
+  contentType,
+  expectedModelId,
+}) {
+  if (!Buffer.isBuffer(rawBytes)
+    || typeof expectedModelId !== 'string'
+    || expectedModelId.length === 0) {
+    throw new TypeError('provider response observation input is invalid');
+  }
+
+  const httpEnvelopeFailure = responseStatusAndTypeValid =>
+    responseStatusAndTypeValid
+      ? null
+      : Object.freeze({
+        code: 'B6_V002_HTTP_ENVELOPE_INVALID',
+        facts: Object.freeze({httpStatus}),
+      });
+  const responseStatusAndTypeValid = httpStatus === 200
+    && contentType === 'application/json; charset=UTF-8';
+  const parsed = parseProviderResponseRawOnceV001(rawBytes);
+  const envelope = parsed.status === 'parsed' ? parsed.envelope : null;
+
+  const responseModelVersion = envelope !== null
+    && typeof envelope.modelVersion === 'string'
+    && envelope.modelVersion.length > 0
+    ? envelope.modelVersion
+    : null;
+  const modelMissingCode = envelope !== null && responseModelVersion === null
+    ? 'HTTP_RESPONSE_MODEL_VERSION_MISSING'
+    : null;
+  const modelMismatchCode = responseModelVersion !== null
+    && responseModelVersion !== expectedModelId
+    ? 'B6_V002_RESPONSE_MODEL_INVALID'
+    : null;
+
+  const rawUsage = envelope !== null ? envelope.usageMetadata : null;
+  const preliminaryUsageValid = rawUsage !== null
+    && typeof rawUsage === 'object'
+    && !Array.isArray(rawUsage)
+    && Number.isSafeInteger(rawUsage.promptTokenCount)
+    && rawUsage.promptTokenCount >= 0
+    && Number.isSafeInteger(rawUsage.totalTokenCount)
+    && rawUsage.totalTokenCount >= rawUsage.promptTokenCount;
+  const usageValuesValid = preliminaryUsageValid
+    && [rawUsage.promptTokenCount, rawUsage.candidatesTokenCount,
+      rawUsage.thoughtsTokenCount, rawUsage.totalTokenCount]
+      .every((value) => Number.isSafeInteger(value) && value >= 0)
+    && BigInt(rawUsage.totalTokenCount)
+      === BigInt(rawUsage.promptTokenCount)
+        + BigInt(rawUsage.candidatesTokenCount)
+        + BigInt(rawUsage.thoughtsTokenCount);
+  const observedServiceTier = rawUsage !== null
+    && typeof rawUsage === 'object'
+    && !Array.isArray(rawUsage)
+    ? rawUsage.serviceTier ?? null
+    : null;
+  const tierValid = preliminaryUsageValid
+    && (rawUsage.serviceTier === undefined || rawUsage.serviceTier === 'standard');
+  const usageMetadata = usageValuesValid
+    ? Object.freeze({
+      promptTokenCount: rawUsage.promptTokenCount,
+      candidatesTokenCount: rawUsage.candidatesTokenCount,
+      thoughtsTokenCount: rawUsage.thoughtsTokenCount,
+      totalTokenCount: rawUsage.totalTokenCount,
+    })
+    : null;
+
+  const candidates = envelope !== null ? envelope.candidates : null;
+  const candidateCount = Array.isArray(candidates) ? candidates.length : null;
+  const candidateCountValid = candidateCount === 1;
+  const candidate = candidateCountValid ? candidates[0] : null;
+  const part = candidate?.content?.parts?.[0];
+  const partKeys = part !== null
+    && typeof part === 'object'
+    && !Array.isArray(part)
+    ? Object.keys(part)
+    : [];
+  const partKeysValid = partKeys.length >= 1
+    && partKeys.length <= 2
+    && partKeys.includes('text')
+    && partKeys.every((key) => key === 'text' || key === 'thoughtSignature');
+  const candidateContentShapeValid = candidateCountValid
+    && candidate?.content?.role === 'model'
+    && Array.isArray(candidate.content.parts)
+    && candidate.content.parts.length === 1
+    && part !== null
+    && typeof part === 'object'
+    && !Array.isArray(part)
+    && partKeysValid
+    && typeof part.text === 'string'
+    && part.text.length > 0
+    && (!Object.hasOwn(part, 'thoughtSignature')
+      || (typeof part.thoughtSignature === 'string'
+        && part.thoughtSignature.length > 0));
+  const semanticText = candidateContentShapeValid ? part.text : null;
+  const semanticBytes = semanticText === null
+    ? null
+    : Buffer.from(semanticText, 'utf8');
+  const candidateTextUtf8Valid = semanticText === null
+    || semanticBytes.toString('utf8') === semanticText;
+
+  const failures = [
+    httpEnvelopeFailure(responseStatusAndTypeValid),
+    parsed.status === 'parsed'
+      ? null
+      : Object.freeze({code: parsed.code, facts: Object.freeze({})}),
+    modelMissingCode === null
+      ? null
+      : Object.freeze({code: modelMissingCode, facts: Object.freeze({})}),
+    envelope === null || preliminaryUsageValid
+      ? null
+      : Object.freeze({
+        code: 'HTTP_RESPONSE_USAGE_INVALID',
+        facts: Object.freeze({}),
+      }),
+    modelMismatchCode === null
+      ? null
+      : Object.freeze({code: modelMismatchCode, facts: Object.freeze({})}),
+    envelope === null || !preliminaryUsageValid || usageValuesValid
+      ? null
+      : Object.freeze({code: 'B6_V002_USAGE_INVALID', facts: Object.freeze({})}),
+    envelope === null || !preliminaryUsageValid || !usageValuesValid || tierValid
+      ? null
+      : Object.freeze({
+        code: 'B6_V002_RESPONSE_TIER_INVALID',
+        facts: Object.freeze({observedServiceTier}),
+      }),
+    envelope === null || candidateCountValid
+      ? null
+      : Object.freeze({
+        code: 'B6_V002_CANDIDATE_COUNT_INVALID',
+        facts: Object.freeze({}),
+      }),
+    envelope === null || !candidateCountValid || candidateContentShapeValid
+      ? null
+      : Object.freeze({
+        code: 'B6_V002_CANDIDATE_CONTENT_INVALID',
+        facts: Object.freeze({}),
+      }),
+    candidateTextUtf8Valid
+      ? null
+      : Object.freeze({
+        code: 'HTTP_RESPONSE_CANDIDATE_TEXT_UTF8_INVALID',
+        facts: Object.freeze({}),
+      }),
+  ].filter((value) => value !== null);
+  const primaryFailure = failures[0] ?? null;
+  const checks = Object.freeze({
+    httpEnvelope: responseStatusAndTypeValid && parsed.status === 'parsed'
+      ? 'passed'
+      : 'failed',
+    model: envelope === null
+      ? 'blocked'
+      : modelMissingCode === null && modelMismatchCode === null
+        ? 'passed'
+        : 'failed',
+    usage: envelope === null
+      ? 'blocked'
+      : preliminaryUsageValid && usageValuesValid && tierValid
+        ? 'passed'
+        : 'failed',
+    responseCandidateCount: envelope === null
+      ? 'blocked'
+      : candidateCountValid
+        ? 'passed'
+        : 'failed',
+    candidateContent: envelope === null || !candidateCountValid
+      ? 'blocked'
+      : candidateContentShapeValid && candidateTextUtf8Valid
+        ? 'passed'
+        : 'failed',
+  });
+
+  return Object.freeze({
+    status: primaryFailure === null ? 'passed' : 'rejected',
+    parserInvocationCount: parsed.parserInvocationCount,
+    primaryRejectionCode: primaryFailure?.code ?? null,
+    primaryRejectionFacts: primaryFailure?.facts ?? Object.freeze({}),
+    checks,
+    httpStatus,
+    contentType,
+    responseModelVersion,
+    observedServiceTier,
+    usageMetadata,
+    candidateCount,
+    semanticText,
+    semanticBytes,
+  });
+}
+
+export async function executePresentationCaptionGateB6ObservationTransportV001({
   requestBytes,
   apiKey,
   fetchImplementation = globalThis.fetch,
   timeoutSignalFactory = (milliseconds) => AbortSignal.timeout(milliseconds),
   rawResponseWriter,
+  expectedModelId,
   endpoint =
     'https://generativelanguage.googleapis.com/v1beta/'
       + 'models/gemini-3.6-flash:generateContent',
@@ -376,7 +606,9 @@ export async function executePresentationCaptionGateB6TransportV002({
     || apiKey.length === 0
     || typeof fetchImplementation !== 'function'
     || typeof timeoutSignalFactory !== 'function'
-    || typeof rawResponseWriter !== 'function') {
+    || typeof rawResponseWriter !== 'function'
+    || typeof expectedModelId !== 'string'
+    || expectedModelId.length === 0) {
     stop('B6_V002_TRANSPORT_INPUT_INVALID');
   }
   assertSecretAbsent(apiKey, [['generate-content-request.json', requestBytes]]);
@@ -408,76 +640,51 @@ export async function executePresentationCaptionGateB6TransportV002({
   assertSecretAbsent(apiKey, [['generate-content-response.raw.json', rawBytes]]);
   await rawResponseWriter(rawBytes);
   const contentType = response.headers.get('content-type');
-  if (response.status !== 200
-    || contentType !== 'application/json; charset=UTF-8') {
-    stop('B6_V002_HTTP_ENVELOPE_INVALID', {httpStatus: response.status});
-  }
-  const metadata = decodeHttpMetadata(rawBytes);
-  if (metadata.modelVersion !== 'gemini-3.6-flash') {
-    stop('B6_V002_RESPONSE_MODEL_INVALID');
-  }
-  const rawUsage = metadata.envelope.usageMetadata;
-  if (![rawUsage?.promptTokenCount, rawUsage?.candidatesTokenCount,
-    rawUsage?.thoughtsTokenCount, rawUsage?.totalTokenCount]
-    .every((value) => Number.isSafeInteger(value) && value >= 0)
-    || rawUsage.totalTokenCount
-      !== rawUsage.promptTokenCount
-        + rawUsage.candidatesTokenCount
-        + rawUsage.thoughtsTokenCount) {
-    stop('B6_V002_USAGE_INVALID');
-  }
-  if (rawUsage.serviceTier !== undefined
-    && rawUsage.serviceTier !== 'standard') {
-    stop('B6_V002_RESPONSE_TIER_INVALID', {
-      observedServiceTier: rawUsage.serviceTier ?? null,
-    });
-  }
-  const candidate = metadata.envelope.candidates?.[0];
-  const part = candidate?.content?.parts?.[0];
-  const partKeys = part !== null
-    && typeof part === 'object'
-    && !Array.isArray(part)
-    ? Object.keys(part)
-    : [];
-  const partKeysValid = partKeys.length >= 1
-    && partKeys.length <= 2
-    && partKeys.includes('text')
-    && partKeys.every((key) =>
-      key === 'text' || key === 'thoughtSignature');
-  if (!Array.isArray(metadata.envelope.candidates)
-    || metadata.envelope.candidates.length !== 1) {
-    stop('B6_V002_CANDIDATE_COUNT_INVALID');
-  }
-  if (candidate?.content?.role !== 'model'
-    || !Array.isArray(candidate.content.parts)
-    || candidate.content.parts.length !== 1
-    || part === null
-    || typeof part !== 'object'
-    || Array.isArray(part)
-    || !partKeysValid
-    || typeof part.text !== 'string'
-    || part.text.length === 0
-    || (Object.hasOwn(part, 'thoughtSignature')
-      && (typeof part.thoughtSignature !== 'string'
-        || part.thoughtSignature.length === 0))) {
-    stop('B6_V002_CANDIDATE_CONTENT_INVALID');
-  }
-  const semanticBytes = decodeCandidateText(metadata.envelope);
-  return Object.freeze({
-    status: 'passed',
+  const observation = inspectPresentationCaptionGateB6ProviderResponseV001({
+    rawBytes,
     httpStatus: response.status,
     contentType,
-    rawBytes,
-    semanticBytes,
-    responseModelVersion: metadata.modelVersion,
-    observedServiceTier: rawUsage.serviceTier ?? null,
-    candidateCount: metadata.envelope.candidates.length,
-    usageMetadata: Object.freeze({
-      promptTokenCount: rawUsage.promptTokenCount,
-      candidatesTokenCount: rawUsage.candidatesTokenCount,
-      thoughtsTokenCount: rawUsage.thoughtsTokenCount,
-      totalTokenCount: rawUsage.totalTokenCount,
-    }),
+    expectedModelId,
+  });
+  return Object.freeze({...observation, rawBytes});
+}
+
+export async function executePresentationCaptionGateB6TransportV002({
+  requestBytes,
+  apiKey,
+  fetchImplementation = globalThis.fetch,
+  timeoutSignalFactory = (milliseconds) => AbortSignal.timeout(milliseconds),
+  rawResponseWriter,
+  endpoint =
+    'https://generativelanguage.googleapis.com/v1beta/'
+      + 'models/gemini-3.6-flash:generateContent',
+}) {
+  const observation =
+    await executePresentationCaptionGateB6ObservationTransportV001({
+      requestBytes,
+      apiKey,
+      fetchImplementation,
+      timeoutSignalFactory,
+      rawResponseWriter,
+      expectedModelId: 'gemini-3.6-flash',
+      endpoint,
+    });
+  if (observation.status !== 'passed') {
+    stop(
+      observation.primaryRejectionCode,
+      observation.primaryRejectionFacts,
+    );
+  }
+  return Object.freeze({
+    status: 'passed',
+    httpStatus: observation.httpStatus,
+    contentType: observation.contentType,
+    rawBytes: observation.rawBytes,
+    semanticBytes: observation.semanticBytes,
+    responseModelVersion: observation.responseModelVersion,
+    observedServiceTier: observation.observedServiceTier,
+    candidateCount: observation.candidateCount,
+    usageMetadata: observation.usageMetadata,
   });
 }
 

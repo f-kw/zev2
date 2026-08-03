@@ -1,0 +1,1035 @@
+TAP version 13
+# Subtest: MBA001 probe countTokens request exact happy path
+ok 1 - MBA001 probe countTokens request exact happy path
+  ---
+  duration_ms: 4.193083
+  ...
+# Subtest: MBA002 final countTokens request uses budget-derived output limit
+ok 2 - MBA002 final countTokens request uses budget-derived output limit
+  ---
+  duration_ms: 1.348083
+  ...
+# Subtest: MBA003 request invalid owns code 8
+ok 3 - MBA003 request invalid owns code 8
+  ---
+  duration_ms: 0.231916
+  ...
+# Subtest: MBA004 model mismatch owns code 16
+ok 4 - MBA004 model mismatch owns code 16
+  ---
+  duration_ms: 0.349459
+  ...
+# Subtest: MBA005 usage invalid owns code 17
+ok 5 - MBA005 usage invalid owns code 17
+  ---
+  duration_ms: 0.148167
+  ...
+# Subtest: MBA006 cost limit exceeded owns code 18
+ok 6 - MBA006 cost limit exceeded owns code 18
+  ---
+  duration_ms: 0.13625
+  ...
+# Subtest: MBA007 raw response unavailable owns code 19
+ok 7 - MBA007 raw response unavailable owns code 19
+  ---
+  duration_ms: 0.267708
+  ...
+# Subtest: MBA008 secret exposure owns code 20
+ok 8 - MBA008 secret exposure owns code 20
+  ---
+  duration_ms: 0.162875
+  ...
+# Subtest: MBA009 publication failure owns code 21 through the production publication inspector
+ok 9 - MBA009 publication failure owns code 21 through the production publication inspector
+  ---
+  duration_ms: 6.080542
+  ...
+# Subtest: MBA010 saved generate request bytes are the bytes sent
+ok 10 - MBA010 saved generate request bytes are the bytes sent
+  ---
+  duration_ms: 0.440875
+  ...
+# Subtest: MBA011 generate is one shot with retry zero and timeout 600 seconds
+ok 11 - MBA011 generate is one shot with retry zero and timeout 600 seconds
+  ---
+  duration_ms: 2.882375
+  ...
+# Subtest: MBA012 secret scan and raw wx publication precede provider interpretation
+ok 12 - MBA012 secret scan and raw wx publication precede provider interpretation
+  ---
+  duration_ms: 1.237583
+  ...
+# Subtest: MBA013 B5 and B6 jobs have exact 11-key schemas and distinct authorization
+ok 13 - MBA013 B5 and B6 jobs have exact 11-key schemas and distinct authorization
+  ---
+  duration_ms: 1.419125
+  ...
+# Subtest: MBA014 B5 11-key and B6 13-key manifests accept exact artifact unions
+ok 14 - MBA014 B5 11-key and B6 13-key manifests accept exact artifact unions
+  ---
+  duration_ms: 5.002
+  ...
+# Subtest: MBA015 maximum valid response uses every candidate exactly once
+ok 15 - MBA015 maximum valid response uses every candidate exactly once
+  ---
+  duration_ms: 1.133958
+  ...
+# Subtest: MBA016 provider envelope has nine keys and keeps thought signature raw-only
+ok 16 - MBA016 provider envelope has nine keys and keeps thought signature raw-only
+  ---
+  duration_ms: 0.147875
+  ...
+# Subtest: MBA017 B5 stops after measurement and never advances automatically to B6
+ok 17 - MBA017 B5 stops after measurement and never advances automatically to B6
+  ---
+  duration_ms: 0.495584
+  ...
+# Subtest: MBA018 six official inputs are copied with byte and SHA claims intact
+ok 18 - MBA018 six official inputs are copied with byte and SHA claims intact
+  ---
+  duration_ms: 2.544083
+  ...
+# Subtest: MBA019 both endpoints use exactly two headers and a 600-second signal
+ok 19 - MBA019 both endpoints use exactly two headers and a 600-second signal
+  ---
+  duration_ms: 2.157917
+  ...
+# Subtest: MBA020 old fixed cost adapter and new parameterized entry share the same result
+ok 20 - MBA020 old fixed cost adapter and new parameterized entry share the same result
+  ---
+  duration_ms: 4.198458
+  ...
+# Subtest: MBA021 post-send budget excess is rejected-cost and does not start B1
+ok 21 - MBA021 post-send budget excess is rejected-cost and does not start B1
+  ---
+  duration_ms: 1.97375
+  ...
+# Subtest: MBA022 transport extraction preserves V002 success and failure precedence
+ok 22 - MBA022 transport extraction preserves V002 success and failure precedence
+  ---
+  duration_ms: 1.223333
+  ...
+# Subtest: MBA023 invalid candidate count keeps raw usage and cost but no envelope
+ok 23 - MBA023 invalid candidate count keeps raw usage and cost but no envelope
+  ---
+  duration_ms: 1.975584
+  ...
+# Subtest: MBA024 invalid candidate content keeps raw usage and cost but no envelope
+ok 24 - MBA024 invalid candidate content keeps raw usage and cost but no envelope
+  ---
+  duration_ms: 1.6135
+  ...
+# Subtest: MBA025 HTTP or model rejection is parsed once and cost requires model plus usage
+ok 25 - MBA025 HTTP or model rejection is parsed once and cost requires model plus usage
+  ---
+  duration_ms: 4.691834
+  ...
+# Subtest: MBA026 usage invalid blocks cost and never reparses raw bytes
+ok 26 - MBA026 usage invalid blocks cost and never reparses raw bytes
+  ---
+  duration_ms: 1.390667
+  ...
+# Subtest: MSL001 complete exact union is accepted
+ok 27 - MSL001 complete exact union is accepted
+  ---
+  duration_ms: 389.470041
+  ...
+# Subtest: MSL002 abstained exact union stops as inspected abstention
+ok 28 - MSL002 abstained exact union stops as inspected abstention
+  ---
+  duration_ms: 2.090209
+  ...
+# Subtest: MSL003 invalid response owns code 22 at response schema
+ok 29 - MSL003 invalid response owns code 22 at response schema
+  ---
+  duration_ms: 1.560042
+  ...
+# Subtest: MSL004 invalid envelope owns code 9
+ok 30 - MSL004 invalid envelope owns code 9
+  ---
+  duration_ms: 2.34775
+  ...
+# Subtest: MSL005 container set mismatch owns code 11
+ok 31 - MSL005 container set mismatch owns code 11
+  ---
+  duration_ms: 1.362417
+  ...
+# Subtest: MSL006 unknown candidate owns code 12
+ok 32 - MSL006 unknown candidate owns code 12
+  ---
+  duration_ms: 1.698708
+  ...
+# Subtest: MSL007 non-monotonic end order owns code 13
+ok 33 - MSL007 non-monotonic end order owns code 13
+  ---
+  duration_ms: 1.324459
+  ...
+# Subtest: MSL008 non-final container end owns code 14
+ok 34 - MSL008 non-final container end owns code 14
+  ---
+  duration_ms: 1.239541
+  ...
+# Subtest: MSL009 discontinuous candidate coverage owns code 15
+ok 35 - MSL009 discontinuous candidate coverage owns code 15
+  ---
+  duration_ms: 0.121625
+  ...
+# Subtest: MSL010 two sources and a reused selection preserve timeline occurrences
+ok 36 - MSL010 two sources and a reused selection preserve timeline occurrences
+  ---
+  duration_ms: 1.801625
+  ...
+# Subtest: MSL011 caption text timing and AtomRef are mechanically restored from B3
+ok 37 - MSL011 caption text timing and AtomRef are mechanically restored from B3
+  ---
+  duration_ms: 1.344125
+  ...
+# Subtest: MSL012 identical response yields byte-identical B1 report
+ok 38 - MSL012 identical response yields byte-identical B1 report
+  ---
+  duration_ms: 1.999708
+  ...
+# Subtest: MSL013 job report selection triad and three caption projections are bound
+ok 39 - MSL013 job report selection triad and three caption projections are bound
+  ---
+  duration_ms: 1.477875
+  ...
+# Subtest: MSL014 old lineEnd response trim fence and repair are all rejected
+ok 40 - MSL014 old lineEnd response trim fence and repair are all rejected
+  ---
+  duration_ms: 0.463084
+  ...
+# Subtest: MSL015 exported 22-code set equals the three production owner sets
+ok 41 - MSL015 exported 22-code set equals the three production owner sets
+  ---
+  duration_ms: 0.070958
+  ...
+# Subtest: MSL016 missing invalid B5 B6 and provider rejection stop at responseEnvelope
+ok 42 - MSL016 missing invalid B5 B6 and provider rejection stop at responseEnvelope
+  ---
+  duration_ms: 5.936375
+  ...
+# Subtest: MSL017 swapped B5 source package is rejected before semantic text
+ok 43 - MSL017 swapped B5 source package is rejected before semantic text
+  ---
+  duration_ms: 0.927292
+  ...
+# Subtest: MSL018 swapped B5 B6 generate request binding is rejected
+ok 44 - MSL018 swapped B5 B6 generate request binding is rejected
+  ---
+  duration_ms: 1.242209
+  ...
+# Subtest: MSL019 swapped provider envelope raw binding is rejected
+ok 45 - MSL019 swapped provider envelope raw binding is rejected
+  ---
+  duration_ms: 0.946958
+  ...
+# Subtest: MSL020 failed or blocked responseEnvelope never reports a trusted raw binding
+ok 46 - MSL020 failed or blocked responseEnvelope never reports a trusted raw binding
+  ---
+  duration_ms: 1.728833
+  ...
+# Subtest: MSL021 strict JSON invalid owns code 22 and internal postconditions are fatal
+ok 47 - MSL021 strict JSON invalid owns code 22 and internal postconditions are fatal
+  ---
+  duration_ms: 59.354625
+  ...
+# Subtest: MBS001: 単一sourceの二発話containerを直接bindingからB3へ変換する
+ok 48 - MBS001: 単一sourceの二発話containerを直接bindingからB3へ変換する
+  ---
+  duration_ms: 105.764958
+  ...
+# Subtest: MBS002: 複数sourceをjob順に直接安定読取しtimeline初出順で全体再採番する
+ok 49 - MBS002: 複数sourceをjob順に直接安定読取しtimeline初出順で全体再採番する
+  ---
+  duration_ms: 25.939917
+  ...
+# Subtest: MBS003: 同一source区間を別timeline occurrenceとして保持する
+ok 50 - MBS003: 同一source区間を別timeline occurrenceとして保持する
+  ---
+  duration_ms: 1.909958
+  ...
+# Subtest: MBS004: source時刻が非単調なtimelineでも束縛済みevidenceを再計算しない
+ok 51 - MBS004: source時刻が非単調なtimelineでも束縛済みevidenceを再計算しない
+  ---
+  duration_ms: 1.169917
+  ...
+# Subtest: MBS005: MEANING_BOUNDARY_JOB_INVALIDをproduction runnerで発火する
+ok 52 - MBS005: MEANING_BOUNDARY_JOB_INVALIDをproduction runnerで発火する
+  ---
+  duration_ms: 39.132791
+  ...
+# Subtest: MBS006: MEANING_BOUNDARY_INPUT_BINDING_MISMATCHをproduction runnerで発火する
+ok 53 - MBS006: MEANING_BOUNDARY_INPUT_BINDING_MISMATCHをproduction runnerで発火する
+  ---
+  duration_ms: 55.892416
+  ...
+# Subtest: MBS007: MEANING_BOUNDARY_RUNTIME_BINDING_MISMATCHをproduction runnerで発火する
+ok 54 - MBS007: MEANING_BOUNDARY_RUNTIME_BINDING_MISMATCHをproduction runnerで発火する
+  ---
+  duration_ms: 9.957208
+  ...
+# Subtest: MBS008: MEANING_BOUNDARY_SOURCE_PACKAGE_INVALIDをproduction inspectorで発火する
+ok 55 - MBS008: MEANING_BOUNDARY_SOURCE_PACKAGE_INVALIDをproduction inspectorで発火する
+  ---
+  duration_ms: 0.1935
+  ...
+# Subtest: MBS009: MEANING_BOUNDARY_CONTAINER_ID_COLLISIONをproduction inspectorで発火する
+ok 56 - MBS009: MEANING_BOUNDARY_CONTAINER_ID_COLLISIONをproduction inspectorで発火する
+  ---
+  duration_ms: 1.139125
+  ...
+# Subtest: MBS010: MEANING_BOUNDARY_CANDIDATE_ID_COLLISIONをproduction inspectorで発火する
+ok 57 - MBS010: MEANING_BOUNDARY_CANDIDATE_ID_COLLISIONをproduction inspectorで発火する
+  ---
+  duration_ms: 1.083042
+  ...
+# Subtest: MBS011: MEANING_BOUNDARY_OCCURRENCE_MAPPING_MISMATCHをproduction runnerで発火する
+ok 58 - MBS011: MEANING_BOUNDARY_OCCURRENCE_MAPPING_MISMATCHをproduction runnerで発火する
+  ---
+  duration_ms: 10.553875
+  ...
+# Subtest: MBS012: B3から表示keyと表示指示が0件である
+ok 59 - MBS012: B3から表示keyと表示指示が0件である
+  ---
+  duration_ms: 1.184083
+  ...
+# Subtest: MBS013: 同一入力からB3 formal byteを決定的に再構成する
+ok 60 - MBS013: 同一入力からB3 formal byteを決定的に再構成する
+  ---
+  duration_ms: 1.938083
+  ...
+# Subtest: MIP001: 2 sourceと同一selection再利用を異なるAtomRef occurrenceのままpackage化する
+ok 61 - MIP001: 2 sourceと同一selection再利用を異なるAtomRef occurrenceのままpackage化する
+  ---
+  duration_ms: 187.595125
+  ...
+# Subtest: MIP002: MEANING_JOB_INVALIDをproduction入口で一件だけ発火してexact failure reportへ固定する
+ok 62 - MIP002: MEANING_JOB_INVALIDをproduction入口で一件だけ発火してexact failure reportへ固定する
+  ---
+  duration_ms: 42.237792
+  ...
+# Subtest: MIP003: MEANING_JOB_BINDING_MISMATCHをproduction入口で一件だけ発火してexact failure reportへ固定する
+ok 63 - MIP003: MEANING_JOB_BINDING_MISMATCHをproduction入口で一件だけ発火してexact failure reportへ固定する
+  ---
+  duration_ms: 132.897833
+  ...
+# Subtest: MIP004: TIMELINE_DECISION_INVALIDをproduction入口で一件だけ発火してexact failure reportへ固定する
+ok 64 - MIP004: TIMELINE_DECISION_INVALIDをproduction入口で一件だけ発火してexact failure reportへ固定する
+  ---
+  duration_ms: 1.9725
+  ...
+# Subtest: MIP005: TIMELINE_DECISION_BINDING_MISMATCHをproduction入口で一件だけ発火してexact failure reportへ固定する
+ok 65 - MIP005: TIMELINE_DECISION_BINDING_MISMATCHをproduction入口で一件だけ発火してexact failure reportへ固定する
+  ---
+  duration_ms: 2.000209
+  ...
+# Subtest: MIP006: SOURCE_IDENTITY_INVALIDをproduction入口で一件だけ発火してexact failure reportへ固定する
+ok 66 - MIP006: SOURCE_IDENTITY_INVALIDをproduction入口で一件だけ発火してexact failure reportへ固定する
+  ---
+  duration_ms: 61.115584
+  ...
+# Subtest: MIP007: SOURCE_MEDIA_BINDING_MISMATCHをproduction入口で一件だけ発火してexact failure reportへ固定する
+ok 67 - MIP007: SOURCE_MEDIA_BINDING_MISMATCHをproduction入口で一件だけ発火してexact failure reportへ固定する
+  ---
+  duration_ms: 61.040709
+  ...
+# Subtest: MIP008: RETAINED_ATOMS_BUNDLE_INVALIDをproduction入口で一件だけ発火してexact failure reportへ固定する
+ok 68 - MIP008: RETAINED_ATOMS_BUNDLE_INVALIDをproduction入口で一件だけ発火してexact failure reportへ固定する
+  ---
+  duration_ms: 2.122
+  ...
+# Subtest: MIP009: RETAINED_ATOMS_BINDING_MISMATCHをproduction入口で一件だけ発火してexact failure reportへ固定する
+ok 69 - MIP009: RETAINED_ATOMS_BINDING_MISMATCHをproduction入口で一件だけ発火してexact failure reportへ固定する
+  ---
+  duration_ms: 61.567958
+  ...
+# Subtest: MIP010: TIMELINE_SEGMENT_SOURCE_UNRESOLVEDをproduction入口で一件だけ発火してexact failure reportへ固定する
+ok 70 - MIP010: TIMELINE_SEGMENT_SOURCE_UNRESOLVEDをproduction入口で一件だけ発火してexact failure reportへ固定する
+  ---
+  duration_ms: 1.48075
+  ...
+# Subtest: MIP011: TIMELINE_SEGMENT_SELECTION_UNRESOLVEDをproduction入口で一件だけ発火してexact failure reportへ固定する
+ok 71 - MIP011: TIMELINE_SEGMENT_SELECTION_UNRESOLVEDをproduction入口で一件だけ発火してexact failure reportへ固定する
+  ---
+  duration_ms: 1.275875
+  ...
+# Subtest: MIP012: TIMELINE_SELECTION_SET_MISMATCHをproduction入口で一件だけ発火してexact failure reportへ固定する
+ok 72 - MIP012: TIMELINE_SELECTION_SET_MISMATCHをproduction入口で一件だけ発火してexact failure reportへ固定する
+  ---
+  duration_ms: 1.385833
+  ...
+# Subtest: MIP013: SOURCE_ATOM_UNRESOLVEDをproduction入口で一件だけ発火してexact failure reportへ固定する
+ok 73 - MIP013: SOURCE_ATOM_UNRESOLVEDをproduction入口で一件だけ発火してexact failure reportへ固定する
+  ---
+  duration_ms: 1.578417
+  ...
+# Subtest: MIP014: SOURCE_ATOM_PARTIAL_INTERSECTIONをproduction入口で一件だけ発火してexact failure reportへ固定する
+ok 74 - MIP014: SOURCE_ATOM_PARTIAL_INTERSECTIONをproduction入口で一件だけ発火してexact failure reportへ固定する
+  ---
+  duration_ms: 1.885625
+  ...
+# Subtest: MIP015: EXPECTED_ATOM_OCCURRENCE_INVALIDをproduction入口で一件だけ発火してexact failure reportへ固定する
+ok 75 - MIP015: EXPECTED_ATOM_OCCURRENCE_INVALIDをproduction入口で一件だけ発火してexact failure reportへ固定する
+  ---
+  duration_ms: 1.155708
+  ...
+# Subtest: MIP016: SEMANTIC_VALIDATION_INVALIDをproduction入口で一件だけ発火してexact failure reportへ固定する
+ok 76 - MIP016: SEMANTIC_VALIDATION_INVALIDをproduction入口で一件だけ発火してexact failure reportへ固定する
+  ---
+  duration_ms: 1.147875
+  ...
+# Subtest: MIP017: SEMANTIC_VALIDATION_BINDING_MISMATCHをproduction入口で一件だけ発火してexact failure reportへ固定する
+ok 77 - MIP017: SEMANTIC_VALIDATION_BINDING_MISMATCHをproduction入口で一件だけ発火してexact failure reportへ固定する
+  ---
+  duration_ms: 1.31275
+  ...
+# Subtest: MIP018: CAPTION_COUNT_INVALIDをproduction入口で一件だけ発火してexact failure reportへ固定する
+ok 78 - MIP018: CAPTION_COUNT_INVALIDをproduction入口で一件だけ発火してexact failure reportへ固定する
+  ---
+  duration_ms: 1.4465
+  ...
+# Subtest: MIP019: CAPTION_ATOM_COVERAGE_MISMATCHをproduction入口で一件だけ発火してexact failure reportへ固定する
+ok 79 - MIP019: CAPTION_ATOM_COVERAGE_MISMATCHをproduction入口で一件だけ発火してexact failure reportへ固定する
+  ---
+  duration_ms: 1.640583
+  ...
+# Subtest: MIP020: CAPTION_ATOM_SEQUENCE_MISMATCHをproduction入口で一件だけ発火してexact failure reportへ固定する
+ok 80 - MIP020: CAPTION_ATOM_SEQUENCE_MISMATCHをproduction入口で一件だけ発火してexact failure reportへ固定する
+  ---
+  duration_ms: 1.624916
+  ...
+# Subtest: MIP021: CAPTION_SEGMENT_SPAN_INVALIDをproduction入口で一件だけ発火してexact failure reportへ固定する
+ok 81 - MIP021: CAPTION_SEGMENT_SPAN_INVALIDをproduction入口で一件だけ発火してexact failure reportへ固定する
+  ---
+  duration_ms: 1.351625
+  ...
+# Subtest: MIP022: CAPTION_TEXT_MISMATCHをproduction入口で一件だけ発火してexact failure reportへ固定する
+ok 82 - MIP022: CAPTION_TEXT_MISMATCHをproduction入口で一件だけ発火してexact failure reportへ固定する
+  ---
+  duration_ms: 1.14325
+  ...
+# Subtest: MIP023: CAPTION_ANCHOR_MISMATCHをproduction入口で一件だけ発火してexact failure reportへ固定する
+ok 83 - MIP023: CAPTION_ANCHOR_MISMATCHをproduction入口で一件だけ発火してexact failure reportへ固定する
+  ---
+  duration_ms: 1.139458
+  ...
+# Subtest: MIP024: CAPTION_SOURCE_TIME_MISMATCHをproduction入口で一件だけ発火してexact failure reportへ固定する
+ok 84 - MIP024: CAPTION_SOURCE_TIME_MISMATCHをproduction入口で一件だけ発火してexact failure reportへ固定する
+  ---
+  duration_ms: 1.1245
+  ...
+# Subtest: MIP025: TITLE_INPUT_MISMATCHをproduction入口で一件だけ発火してexact failure reportへ固定する
+ok 85 - MIP025: TITLE_INPUT_MISMATCHをproduction入口で一件だけ発火してexact failure reportへ固定する
+  ---
+  duration_ms: 1.307875
+  ...
+# Subtest: MIP026: SEMANTIC_OBSERVATIONS_NOT_EMPTYをproduction入口で一件だけ発火してexact failure reportへ固定する
+ok 86 - MIP026: SEMANTIC_OBSERVATIONS_NOT_EMPTYをproduction入口で一件だけ発火してexact failure reportへ固定する
+  ---
+  duration_ms: 1.140792
+  ...
+# Subtest: MIP027: PRESENTATION_KEY_LEAKEDをproduction入口で一件だけ発火してexact failure reportへ固定する
+ok 87 - MIP027: PRESENTATION_KEY_LEAKEDをproduction入口で一件だけ発火してexact failure reportへ固定する
+  ---
+  duration_ms: 1.245833
+  ...
+# Subtest: MIP028: MEANING_PACKAGE_BYTE_INVALIDをproduction入口で一件だけ発火してexact failure reportへ固定する
+ok 88 - MIP028: MEANING_PACKAGE_BYTE_INVALIDをproduction入口で一件だけ発火してexact failure reportへ固定する
+  ---
+  duration_ms: 1.491375
+  ...
+# Subtest: MIP029: MEANING_PACKAGE_NON_DETERMINISTICをproduction入口で一件だけ発火してexact failure reportへ固定する
+ok 89 - MIP029: MEANING_PACKAGE_NON_DETERMINISTICをproduction入口で一件だけ発火してexact failure reportへ固定する
+  ---
+  duration_ms: 1.149084
+  ...
+# Subtest: MIP030: MEANING_PUBLICATION_TARGET_INVALIDをproduction入口で一件だけ発火してexact failure reportへ固定する
+ok 90 - MIP030: MEANING_PUBLICATION_TARGET_INVALIDをproduction入口で一件だけ発火してexact failure reportへ固定する
+  ---
+  duration_ms: 73.773166
+  ...
+# Subtest: MIP031: MEANING_PUBLICATION_FAILEDをproduction入口で一件だけ発火してexact failure reportへ固定する
+ok 91 - MIP031: MEANING_PUBLICATION_FAILEDをproduction入口で一件だけ発火してexact failure reportへ固定する
+  ---
+  duration_ms: 1.263292
+  ...
+# Subtest: MIP032: 同一入力2回のpackage formal byteが一致する
+ok 92 - MIP032: 同一入力2回のpackage formal byteが一致する
+  ---
+  duration_ms: 1.693334
+  ...
+# Subtest: MIP033: package code export集合と全テスト観測集合が完全一致する
+ok 93 - MIP033: package code export集合と全テスト観測集合が完全一致する
+  ---
+  duration_ms: 0.106291
+  ...
+# Subtest: OBM001: 正常な単一sourceをproduction runnerで実生成し成功4成果物を検査する
+ok 94 - OBM001: 正常な単一sourceをproduction runnerで実生成し成功4成果物を検査する
+  ---
+  duration_ms: 5387.5565
+  ...
+# Subtest: OBM002: OUTPUT_BASE_MEDIA_JOB_INVALIDをproduction runnerで固定stageとpathに発火する
+ok 95 - OBM002: OUTPUT_BASE_MEDIA_JOB_INVALIDをproduction runnerで固定stageとpathに発火する
+  ---
+  duration_ms: 149.149375
+  ...
+# Subtest: OBM003: OUTPUT_BASE_MEDIA_INPUT_BINDING_MISMATCHをproduction runnerで固定stageとpathに発火する
+ok 96 - OBM003: OUTPUT_BASE_MEDIA_INPUT_BINDING_MISMATCHをproduction runnerで固定stageとpathに発火する
+  ---
+  duration_ms: 76.250708
+  ...
+# Subtest: OBM004: OUTPUT_BASE_MEDIA_MEANING_PACKAGE_INVALIDをproduction runnerで固定stageとpathに発火する
+ok 97 - OBM004: OUTPUT_BASE_MEDIA_MEANING_PACKAGE_INVALIDをproduction runnerで固定stageとpathに発火する
+  ---
+  duration_ms: 74.597417
+  ...
+# Subtest: OBM005: OUTPUT_BASE_MEDIA_CAPABILITY_UNSUPPORTEDをproduction validatorと所有枝で立証する
+ok 98 - OBM005: OUTPUT_BASE_MEDIA_CAPABILITY_UNSUPPORTEDをproduction validatorと所有枝で立証する
+  ---
+  duration_ms: 0.7985
+  ...
+# Subtest: OBM006: OUTPUT_BASE_MEDIA_SOURCE_INSPECTION_FAILEDを共有所有入口からreportへ発火する
+ok 99 - OBM006: OUTPUT_BASE_MEDIA_SOURCE_INSPECTION_FAILEDを共有所有入口からreportへ発火する
+  ---
+  duration_ms: 0.184709
+  ...
+# Subtest: OBM007: OUTPUT_BASE_MEDIA_FRAME_MAPPING_INVALIDを共有所有入口からreportへ発火する
+ok 100 - OBM007: OUTPUT_BASE_MEDIA_FRAME_MAPPING_INVALIDを共有所有入口からreportへ発火する
+  ---
+  duration_ms: 0.091459
+  ...
+# Subtest: OBM008: OUTPUT_BASE_MEDIA_VIDEO_BUILD_FAILEDを共有所有入口からreportへ発火する
+ok 101 - OBM008: OUTPUT_BASE_MEDIA_VIDEO_BUILD_FAILEDを共有所有入口からreportへ発火する
+  ---
+  duration_ms: 0.15725
+  ...
+# Subtest: OBM009: OUTPUT_BASE_MEDIA_AUDIO_GRID_FAILEDを共有所有入口からreportへ発火する
+ok 102 - OBM009: OUTPUT_BASE_MEDIA_AUDIO_GRID_FAILEDを共有所有入口からreportへ発火する
+  ---
+  duration_ms: 0.118
+  ...
+# Subtest: OBM010: OUTPUT_BASE_MEDIA_AUDIO_BUILD_FAILEDを共有所有入口からreportへ発火する
+ok 103 - OBM010: OUTPUT_BASE_MEDIA_AUDIO_BUILD_FAILEDを共有所有入口からreportへ発火する
+  ---
+  duration_ms: 0.100791
+  ...
+# Subtest: OBM011: OUTPUT_BASE_MEDIA_MUX_FAILEDを共有所有入口からreportへ発火する
+ok 104 - OBM011: OUTPUT_BASE_MEDIA_MUX_FAILEDを共有所有入口からreportへ発火する
+  ---
+  duration_ms: 0.138417
+  ...
+# Subtest: OBM012: OUTPUT_BASE_MEDIA_OUTPUT_INSPECTION_FAILEDを共有所有入口からreportへ発火する
+ok 105 - OBM012: OUTPUT_BASE_MEDIA_OUTPUT_INSPECTION_FAILEDを共有所有入口からreportへ発火する
+  ---
+  duration_ms: 0.082834
+  ...
+# Subtest: OBM013: OUTPUT_BASE_MEDIA_HASH_GRAPH_MISMATCHをproduction validatorで発火する
+ok 106 - OBM013: OUTPUT_BASE_MEDIA_HASH_GRAPH_MISMATCHをproduction validatorで発火する
+  ---
+  duration_ms: 1.217417
+  ...
+# Subtest: OBM014: OUTPUT_BASE_MEDIA_PUBLICATION_TARGET_INVALIDをproduction runnerで発火する
+ok 107 - OBM014: OUTPUT_BASE_MEDIA_PUBLICATION_TARGET_INVALIDをproduction runnerで発火する
+  ---
+  duration_ms: 75.806708
+  ...
+# Subtest: OBM015: OUTPUT_BASE_MEDIA_PUBLICATION_FAILEDをproduction runnerで発火する
+ok 108 - OBM015: OUTPUT_BASE_MEDIA_PUBLICATION_FAILEDをproduction runnerで発火する
+  ---
+  duration_ms: 68.706792
+  ...
+# Subtest: OBM016: 失敗attemptは成功rootを作らず固定failure pathへ一件だけ公開する
+ok 109 - OBM016: 失敗attemptは成功rootを作らず固定failure pathへ一件だけ公開する
+  ---
+  duration_ms: 73.709875
+  ...
+# Subtest: OBM017: 同一入力のtimeline・manifest・receipt byteが一致する
+ok 110 - OBM017: 同一入力のtimeline・manifest・receipt byteが一致する
+  ---
+  duration_ms: 1.398209
+  ...
+# Subtest: OBM018: failure exact型・14 code所有・未観測値null規則を一括検査する
+ok 111 - OBM018: failure exact型・14 code所有・未観測値null規則を一括検査する
+  ---
+  duration_ms: 0.769542
+  ...
+# Subtest: OBM019: base media 14 code export集合と全テスト観測集合が完全一致する
+ok 112 - OBM019: base media 14 code export集合と全テスト観測集合が完全一致する
+  ---
+  duration_ms: 0.051
+  ...
+# Subtest: OCT001: output requestからaccepted reportを決定的に構築する
+ok 113 - OCT001: output requestからaccepted reportを決定的に構築する
+  ---
+  duration_ms: 12.761709
+  ...
+# Subtest: OCT002: OUTPUT_REQUEST_INVALIDを所有checkで一度だけ発火する
+ok 114 - OCT002: OUTPUT_REQUEST_INVALIDを所有checkで一度だけ発火する
+  ---
+  duration_ms: 0.794792
+  ...
+# Subtest: OCT003: OUTPUT_REQUEST_BINDING_MISMATCHを所有checkで一度だけ発火する
+ok 115 - OCT003: OUTPUT_REQUEST_BINDING_MISMATCHを所有checkで一度だけ発火する
+  ---
+  duration_ms: 0.21225
+  ...
+# Subtest: OCT004: MEANING_PACKAGE_INVALIDを所有checkで一度だけ発火する
+ok 116 - OCT004: MEANING_PACKAGE_INVALIDを所有checkで一度だけ発火する
+  ---
+  duration_ms: 0.280584
+  ...
+# Subtest: OCT005: MEANING_PACKAGE_BINDING_MISMATCHを所有checkで一度だけ発火する
+ok 117 - OCT005: MEANING_PACKAGE_BINDING_MISMATCHを所有checkで一度だけ発火する
+  ---
+  duration_ms: 0.1865
+  ...
+# Subtest: OCT006: BASE_MEDIA_INPUT_MISMATCHを所有checkで一度だけ発火する
+ok 118 - OCT006: BASE_MEDIA_INPUT_MISMATCHを所有checkで一度だけ発火する
+  ---
+  duration_ms: 0.201166
+  ...
+# Subtest: OCT007: SOURCE_MEDIA_CAPABILITY_UNSUPPORTEDを所有checkで一度だけ発火する
+ok 119 - OCT007: SOURCE_MEDIA_CAPABILITY_UNSUPPORTEDを所有checkで一度だけ発火する
+  ---
+  duration_ms: 0.269333
+  ...
+# Subtest: OCT008: SOURCE_MEDIA_BINDING_MISMATCHを所有checkで一度だけ発火する
+ok 120 - OCT008: SOURCE_MEDIA_BINDING_MISMATCHを所有checkで一度だけ発火する
+  ---
+  duration_ms: 0.218666
+  ...
+# Subtest: OCT009: TIMELINE_COMPOSITION_UNSUPPORTEDを所有checkで一度だけ発火する
+ok 121 - OCT009: TIMELINE_COMPOSITION_UNSUPPORTEDを所有checkで一度だけ発火する
+  ---
+  duration_ms: 0.296625
+  ...
+# Subtest: OCT010: TIMELINE_FRAME_MAPPING_INVALIDを所有checkで一度だけ発火する
+ok 122 - OCT010: TIMELINE_FRAME_MAPPING_INVALIDを所有checkで一度だけ発火する
+  ---
+  duration_ms: 0.378167
+  ...
+# Subtest: OCT011: CAPTION_SOURCE_RESOLUTION_FAILEDを所有checkで一度だけ発火する
+ok 123 - OCT011: CAPTION_SOURCE_RESOLUTION_FAILEDを所有checkで一度だけ発火する
+  ---
+  duration_ms: 0.266292
+  ...
+# Subtest: OCT012: DISPLAY_PAGE_LAYOUT_UNREPRESENTABLEを所有checkで一度だけ発火する
+ok 124 - OCT012: DISPLAY_PAGE_LAYOUT_UNREPRESENTABLEを所有checkで一度だけ発火する
+  ---
+  duration_ms: 0.231958
+  ...
+# Subtest: OCT013: DISPLAY_PAGE_TIMELINE_UNREPRESENTABLEを所有checkで一度だけ発火する
+ok 125 - OCT013: DISPLAY_PAGE_TIMELINE_UNREPRESENTABLEを所有checkで一度だけ発火する
+  ---
+  duration_ms: 0.200084
+  ...
+# Subtest: OCT014: TITLE_STYLE_UNAVAILABLEを所有checkで一度だけ発火する
+ok 126 - OCT014: TITLE_STYLE_UNAVAILABLEを所有checkで一度だけ発火する
+  ---
+  duration_ms: 0.298625
+  ...
+# Subtest: OCT015: STYLE_BINDING_MISMATCHを所有checkで一度だけ発火する
+ok 127 - OCT015: STYLE_BINDING_MISMATCHを所有checkで一度だけ発火する
+  ---
+  duration_ms: 0.220375
+  ...
+# Subtest: OCT016: PRESET_CAPABILITY_MISMATCHを所有checkで一度だけ発火する
+ok 128 - OCT016: PRESET_CAPABILITY_MISMATCHを所有checkで一度だけ発火する
+  ---
+  duration_ms: 0.211334
+  ...
+# Subtest: OCT017: CROP_BINDING_MISMATCHを所有checkで一度だけ発火する
+ok 129 - OCT017: CROP_BINDING_MISMATCHを所有checkで一度だけ発火する
+  ---
+  duration_ms: 0.2115
+  ...
+# Subtest: OCT018: MEANING_PROJECTION_CHANGEDを所有checkで一度だけ発火する
+ok 130 - OCT018: MEANING_PROJECTION_CHANGEDを所有checkで一度だけ発火する
+  ---
+  duration_ms: 0.309458
+  ...
+# Subtest: OCT019: OUTPUT_PUBLICATION_TARGET_INVALIDを所有checkで一度だけ発火する
+ok 131 - OCT019: OUTPUT_PUBLICATION_TARGET_INVALIDを所有checkで一度だけ発火する
+  ---
+  duration_ms: 0.194625
+  ...
+# Subtest: OCT020: COMMON_RENDER_PLAN_INVALIDを所有checkで一度だけ発火する
+ok 132 - OCT020: COMMON_RENDER_PLAN_INVALIDを所有checkで一度だけ発火する
+  ---
+  duration_ms: 0.199375
+  ...
+# Subtest: OCT021: export違反code集合と実発火観測集合が完全一致する
+ok 133 - OCT021: export違反code集合と実発火観測集合が完全一致する
+  ---
+  duration_ms: 0.186083
+  ...
+# Subtest: OPL001: 一行pageは本文・幅・物理検査を保つ
+ok 134 - OPL001: 一行pageは本文・幅・物理検査を保つ
+  ---
+  duration_ms: 8.735875
+  ...
+# Subtest: OPL002: 二行pageは明示した二境界を一pageに保持する
+ok 135 - OPL002: 二行pageは明示した二境界を一pageに保持する
+  ---
+  duration_ms: 4.538541
+  ...
+# Subtest: OPL003: AtomRef境界nodeは全量・順序・uniqueを保つ
+ok 136 - OPL003: AtomRef境界nodeは全量・順序・uniqueを保つ
+  ---
+  duration_ms: 2.121875
+  ...
+# Subtest: OPL004: 幅超過line候補は物理edgeへ入らない
+ok 137 - OPL004: 幅超過line候補は物理edgeへ入らない
+  ---
+  duration_ms: 1.526625
+  ...
+# Subtest: OPL005: 横型の物理edgeはsafe areaと非交差を通過したものだけである
+ok 138 - OPL005: 横型の物理edgeはsafe areaと非交差を通過したものだけである
+  ---
+  duration_ms: 3.190833
+  ...
+# Subtest: OPL006: 縦型の物理edgeはline矩形・safe area・非交差を通過する
+ok 139 - OPL006: 縦型の物理edgeはline矩形・safe area・非交差を通過する
+  ---
+  duration_ms: 51.592667
+  ...
+# Subtest: OPL007: 0-frame区間は物理edgeに残りtimeline edgeだけから除外される
+ok 140 - OPL007: 0-frame区間は物理edgeに残りtimeline edgeだけから除外される
+  ---
+  duration_ms: 1.385958
+  ...
+# Subtest: OPL008: 物理pathが無い場合はlayout違反が所有する
+ok 141 - OPL008: 物理pathが無い場合はlayout違反が所有する
+  ---
+  duration_ms: 0.878333
+  ...
+# Subtest: OPL009: 物理path成立後にtimeline pathが無い場合はtimeline違反が所有する
+ok 142 - OPL009: 物理path成立後にtimeline pathが無い場合はtimeline違反が所有する
+  ---
+  duration_ms: 2.076875
+  ...
+# Subtest: OPL010: 選択はpage数最少を第一目的にする
+ok 143 - OPL010: 選択はpage数最少を第一目的にする
+  ---
+  duration_ms: 1.640917
+  ...
+# Subtest: OPL011: 同じpage数なら一行pageを減らし二行pageを優先する
+ok 144 - OPL011: 同じpage数なら一行pageを減らし二行pageを優先する
+  ---
+  duration_ms: 1.708583
+  ...
+# Subtest: OPL012: page数と行数が同じなら最大行幅を最小化する
+ok 145 - OPL012: page数と行数が同じなら最大行幅を最小化する
+  ---
+  duration_ms: 1.667584
+  ...
+# Subtest: OPL013: 最大幅が同じなら行幅rangeを最小化する
+ok 146 - OPL013: 最大幅が同じなら行幅rangeを最小化する
+  ---
+  duration_ms: 1.630458
+  ...
+# Subtest: OPL014: tuple同値ならpage境界・行境界を辞書順で決める
+ok 147 - OPL014: tuple同値ならpage境界・行境界を辞書順で決める
+  ---
+  duration_ms: 1.408459
+  ...
+# Subtest: OPL015: pageとlineを連結すると意味本文・AtomRefが完全一致する
+ok 148 - OPL015: pageとlineを連結すると意味本文・AtomRefが完全一致する
+  ---
+  duration_ms: 1.937209
+  ...
+# Subtest: OPL016: page時刻はAtomRefの先頭startと末尾endだけから導く
+ok 149 - OPL016: page時刻はAtomRefの先頭startと末尾endだけから導く
+  ---
+  duration_ms: 1.003
+  ...
+# Subtest: OPL017: 同一入力二回でedge・predecessor・plan byteが一致する
+ok 150 - OPL017: 同一入力二回でedge・predecessor・plan byteが一致する
+  ---
+  duration_ms: 2.150125
+  ...
+# Subtest: OPL018: 横型と縦型の差は表示page/lineだけに閉じる
+ok 151 - OPL018: 横型と縦型の差は表示page/lineだけに閉じる
+  ---
+  duration_ms: 252.772166
+  ...
+# Subtest: OPL019: style差を通しても意味package byteは変化しない
+ok 152 - OPL019: style差を通しても意味package byteは変化しない
+  ---
+  duration_ms: 10.035291
+  ...
+# Subtest: OPL020: planner acceptedは日本語の読みやすさ合格を報告しない
+ok 153 - OPL020: planner acceptedは日本語の読みやすさ合格を報告しない
+  ---
+  duration_ms: 2.11875
+  ...
+# Subtest: OPL021: planner結果に旧B4 artifactを含めない
+ok 154 - OPL021: planner結果に旧B4 artifactを含めない
+  ---
+  duration_ms: 1.198333
+  ...
+# Subtest: OPL022: L=1/2とも有限で任意cutoffを持たずresource fatalを専用化する
+ok 155 - OPL022: L=1/2とも有限で任意cutoffを持たずresource fatalを専用化する
+  ---
+  duration_ms: 4.701333
+  ...
+# Subtest: OPL023: atom重複は一pageで保持し隣接pageまたはcaptionのframe重複だけを拒否する
+ok 156 - OPL023: atom重複は一pageで保持し隣接pageまたはcaptionのframe重複だけを拒否する
+  ---
+  duration_ms: 1.628417
+  ...
+# Subtest: OPL024: 999 pageを上限として1000 pageをtimeline不成立にする
+ok 157 - OPL024: 999 pageを上限として1000 pageをtimeline不成立にする
+  ---
+  duration_ms: 47.841125
+  ...
+# Subtest: OPL025: candidate 13保存caption/style fixtureは決定的である
+ok 158 - OPL025: candidate 13保存caption/style fixtureは決定的である
+  ---
+  duration_ms: 6999.728083
+  ...
+# Subtest: OPL026: candidate 59横型の既知20/36を拒否し30/26を受理する
+ok 159 - OPL026: candidate 59横型の既知20/36を拒否し30/26を受理する
+  ---
+  duration_ms: 3686.868833
+  ...
+# Subtest: OPL027: candidate 59縦型の認定caption/style fixtureは決定的である
+ok 160 - OPL027: candidate 59縦型の認定caption/style fixtureは決定的である
+  ---
+  duration_ms: 3111.724916
+  ...
+# Subtest: ORP001: native render planはexact 9 keyである
+ok 161 - ORP001: native render planはexact 9 keyである
+  ---
+  duration_ms: 1.996333
+  ...
+# Subtest: ORP002: native page一件をcommon core element一件へ写す
+ok 162 - ORP002: native page一件をcommon core element一件へ写す
+  ---
+  duration_ms: 1.691334
+  ...
+# Subtest: ORP003: meaning projection 7 fieldは意味packageから不変導出される
+ok 163 - ORP003: meaning projection 7 fieldは意味packageから不変導出される
+  ---
+  duration_ms: 0.370333
+  ...
+# Subtest: ORP004: base mediaの4 bindingをrequestからそのまま保持する
+ok 164 - ORP004: base mediaの4 bindingをrequestからそのまま保持する
+  ---
+  duration_ms: 0.227833
+  ...
+# Subtest: ORP005: title空はnot-requestedとなる
+ok 165 - ORP005: title空はnot-requestedとなる
+  ---
+  duration_ms: 0.3395
+  ...
+# Subtest: ORP006: title非空はv001で拒否する
+ok 166 - ORP006: title非空はv001で拒否する
+  ---
+  duration_ms: 0.068875
+  ...
+# Subtest: ORP007: instruction/resolution/旧B4 artifactを一件も生成しない
+ok 167 - ORP007: instruction/resolution/旧B4 artifactを一件も生成しない
+  ---
+  duration_ms: 0.863208
+  ...
+# Subtest: ORP008: common coreは新native planのpage値を実際に受ける
+ok 168 - ORP008: common coreは新native planのpage値を実際に受ける
+  ---
+  duration_ms: 0.466875
+  ...
+# Subtest: OEE001: 合成横型を意味packageからapplication/QC/manifestまで一気通貫する
+ok 169 - OEE001: 合成横型を意味packageからapplication/QC/manifestまで一気通貫する
+  ---
+  duration_ms: 9869.801
+  ...
+# Subtest: OEE002: 合成縦型をcrop前提の意味packageからQCまで一気通貫する
+ok 170 - OEE002: 合成縦型をcrop前提の意味packageからQCまで一気通貫する
+  ---
+  duration_ms: 9879.847334
+  ...
+# Subtest: OEE003: 横縦の出力形式差で意味package byteを変えない
+ok 171 - OEE003: 横縦の出力形式差で意味package byteを変えない
+  ---
+  duration_ms: 1.031291
+  ...
+# Subtest: OEE004: rejected時はcontrol 2件・render 0件でfallbackしない
+ok 172 - OEE004: rejected時はcontrol 2件・render 0件でfallbackしない
+  ---
+  duration_ms: 1593.675666
+  ...
+# Subtest: OEE005: core契約/QC失敗はrejected failure exact 10 keyへ帰属する
+ok 173 - OEE005: core契約/QC失敗はrejected failure exact 10 keyへ帰属する
+  ---
+  duration_ms: 6451.5795
+  ...
+# Subtest: OEE006: tool/I/O fatalはviolations空・exit 2相当へ帰属する
+ok 174 - OEE006: tool/I/O fatalはviolations空・exit 2相当へ帰属する
+  ---
+  duration_ms: 2786.096583
+  ...
+# Subtest: OEE007: staging exact検査不合格は旧publisherを呼ばず専用fatalにする
+ok 175 - OEE007: staging exact検査不合格は旧publisherを呼ばず専用fatalにする
+  ---
+  duration_ms: 9168.838708
+  ...
+# Subtest: OEE008: staging合格後だけ既存commit入口を一度呼ぶ
+ok 176 - OEE008: staging合格後だけ既存commit入口を一度呼ぶ
+  ---
+  duration_ms: 9433.426833
+  ...
+# Subtest: OEE009: coreのRENDER_OUTPUT違反はstage publishをpublicationへ読み替えない
+ok 177 - OEE009: coreのRENDER_OUTPUT違反はstage publishをpublicationへ読み替えない
+  ---
+  duration_ms: 0.809792
+  ...
+# Subtest: OPF001: 親契約2文書のSHAが承認値と一致する
+ok 178 - OPF001: 親契約2文書のSHAが承認値と一致する
+  ---
+  duration_ms: 0.62925
+  ...
+# Subtest: OPF002: §4の13正本は開始commit一致かつ非変更11件は現物不変である
+ok 179 - OPF002: §4の13正本は開始commit一致かつ非変更11件は現物不変である
+  ---
+  duration_ms: 627.931666
+  ...
+# Subtest: OPF003: X01〜X04は開始SHAと許可された共通入口を持つ
+ok 180 - OPF003: X01〜X04は開始SHAと許可された共通入口を持つ
+  ---
+  duration_ms: 388.24325
+  ...
+# Subtest: OPF004: 実装path集合はexact 27件で28件目を持たない
+ok 181 - OPF004: 実装path集合はexact 27件で28件目を持たない
+  ---
+  duration_ms: 180.227
+  ...
+# Subtest: OPF005: 参照exportが実在しproductionとtestが同入口を使う
+ok 182 - OPF005: 参照exportが実在しproductionとtestが同入口を使う
+  ---
+  duration_ms: 6.634709
+  ...
+# Subtest: OPF006: candidate 13横型stable treeは不変である
+ok 183 - OPF006: candidate 13横型stable treeは不変である
+  ---
+  duration_ms: 1261.457459
+  ...
+# Subtest: OPF007: candidate 59横型stable treeは不変である
+ok 184 - OPF007: candidate 59横型stable treeは不変である
+  ---
+  duration_ms: 1104.621917
+  ...
+# Subtest: OPF008: candidate 59縦型stable treeは不変である
+ok 185 - OPF008: candidate 59縦型stable treeは不変である
+  ---
+  duration_ms: 1714.842583
+  ...
+# Subtest: OPF009: 旧schema converter/fallback/併産を新経路に持たない
+ok 186 - OPF009: 旧schema converter/fallback/併産を新経路に持たない
+  ---
+  duration_ms: 1.813916
+  ...
+# Subtest: OPF010: 新規検査はAPI通信0件・secret保存0件である
+ok 187 - OPF010: 新規検査はAPI通信0件・secret保存0件である
+  ---
+  duration_ms: 2.674459
+  ...
+# Subtest: OPF011: O07はO03と既存validatorを出力作成前に実行する
+ok 188 - OPF011: O07はO03と既存validatorを出力作成前に実行する
+  ---
+  duration_ms: 0.637583
+  ...
+# Subtest: OPF012: 固定Node+TSX loaderでO05/O07実exportを使い追加loaderを持たない
+ok 189 - OPF012: 固定Node+TSX loaderでO05/O07実exportを使い追加loaderを持たない
+  ---
+  duration_ms: 701.566958
+  ...
+# Subtest: OSR001: 横型presetを既存registryから一意に解決する
+ok 190 - OSR001: 横型presetを既存registryから一意に解決する
+  ---
+  duration_ms: 7.134416
+  ...
+# Subtest: OSR002: 縦型speaker_only presetを既存registryから一意に解決する
+ok 191 - OSR002: 縦型speaker_only presetを既存registryから一意に解決する
+  ---
+  duration_ms: 7.40275
+  ...
+# Subtest: OSR003: 横型screenLayoutIdはnullかつcropはidentityである
+ok 192 - OSR003: 横型screenLayoutIdはnullかつcropはidentityである
+  ---
+  duration_ms: 1.38425
+  ...
+# Subtest: OSR004: 未登録の縦型layoutをfallbackせず拒否する
+ok 193 - OSR004: 未登録の縦型layoutをfallbackせず拒否する
+  ---
+  duration_ms: 1.709708
+  ...
+# Subtest: OSR005: 横縦の幅能力は同じfieldに明示され暗黙定数へ戻らない
+ok 194 - OSR005: 横縦の幅能力は同じfieldに明示され暗黙定数へ戻らない
+  ---
+  duration_ms: 2.994584
+  ...
+# Subtest: OSR006: crop decisionはレビュー時base mediaのpathとSHAへ束縛される
+ok 195 - OSR006: crop decisionはレビュー時base mediaのpathとSHAへ束縛される
+  ---
+  duration_ms: 4.442625
+  ...
+# Subtest: OSR007: 横型preset projectionは既存共通入口のbyte列と同一である
+ok 196 - OSR007: 横型preset projectionは既存共通入口のbyte列と同一である
+  ---
+  duration_ms: 1.14925
+  ...
+# Subtest: OSR008: 縦型cropは既存共通入口だけを呼び第二計算を持たない
+ok 197 - OSR008: 縦型cropは既存共通入口だけを呼び第二計算を持たない
+  ---
+  duration_ms: 2.321
+  ...
+# Subtest: OTM001: source半開区間を正しいoutput frameへ写す
+ok 198 - OTM001: source半開区間を正しいoutput frameへ写す
+  ---
+  duration_ms: 0.917584
+  ...
+# Subtest: OTM002: 30fps source終端をidentity frame境界で決める
+ok 199 - OTM002: 30fps source終端をidentity frame境界で決める
+  ---
+  duration_ms: 0.131583
+  ...
+# Subtest: OTM003: 60fps source終端をglobal-even frame境界で決める
+ok 200 - OTM003: 60fps source終端をglobal-even frame境界で決める
+  ---
+  duration_ms: 0.081791
+  ...
+# Subtest: OTM004: 30fpsで0 frameになるsource区間を拒否する
+ok 201 - OTM004: 30fpsで0 frameになるsource区間を拒否する
+  ---
+  duration_ms: 0.151333
+  ...
+# Subtest: OTM005: 複数segmentを跨ぐsource区間を拒否する
+ok 202 - OTM005: 複数segmentを跨ぐsource区間を拒否する
+  ---
+  duration_ms: 0.134333
+  ...
+# Subtest: OTM006: base mediaに含まれないsource区間を拒否する
+ok 203 - OTM006: base mediaに含まれないsource区間を拒否する
+  ---
+  duration_ms: 0.059541
+  ...
+# Subtest: OTM007: 非単調segment能力をtimeline不正として拒否する
+ok 204 - OTM007: 非単調segment能力をtimeline不正として拒否する
+  ---
+  duration_ms: 0.065875
+  ...
+# Subtest: OTM008: source msを変えずderived frameだけを追加する
+ok 205 - OTM008: source msを変えずderived frameだけを追加する
+  ---
+  duration_ms: 0.174916
+  ...
+1..205
+# tests 205
+# suites 0
+# pass 205
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 78299.066625

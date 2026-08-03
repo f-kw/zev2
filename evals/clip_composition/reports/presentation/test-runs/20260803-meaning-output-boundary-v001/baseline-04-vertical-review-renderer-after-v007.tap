@@ -1,0 +1,32 @@
+TAP version 13
+# node:internal/modules/esm/get_format:189
+#   throw new ERR_UNKNOWN_FILE_EXTENSION(ext, filepath);
+#         ^
+# TypeError [ERR_UNKNOWN_FILE_EXTENSION]: Unknown file extension ".ts" for /Users/kawafmm/workspace/zev2/runner/src/telop-remotion.ts
+#     at Object.getFileProtocolModuleFormat [as file:] (node:internal/modules/esm/get_format:189:9)
+#     at defaultGetFormat (node:internal/modules/esm/get_format:232:36)
+#     at defaultLoad (node:internal/modules/esm/load:145:22)
+#     at async ModuleLoader.loadAndTranslate (node:internal/modules/esm/loader:543:45) {
+#   code: 'ERR_UNKNOWN_FILE_EXTENSION'
+# }
+# Node.js v20.19.6
+# Subtest: /Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_vertical_review_renderer_v001.test.mjs
+not ok 1 - /Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_vertical_review_renderer_v001.test.mjs
+  ---
+  duration_ms: 37.075208
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_vertical_review_renderer_v001.test.mjs:1:1'
+  failureType: 'testCodeFailure'
+  exitCode: 1
+  signal: ~
+  error: 'test failed'
+  code: 'ERR_TEST_FAILURE'
+  ...
+1..1
+# tests 1
+# suites 0
+# pass 0
+# fail 1
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 39.681625

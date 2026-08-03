@@ -1,0 +1,395 @@
+TAP version 13
+# Subtest: 01 jobとtimeline manifestの必須field・未知field・hash形式を固定検査する
+ok 1 - 01 jobとtimeline manifestの必須field・未知field・hash形式を固定検査する
+  ---
+  duration_ms: 14.202708
+  ...
+# Subtest: 01b 新規出力・所有lock・原子的publishを固定し既存成功物を変更しない
+ok 2 - 01b 新規出力・所有lock・原子的publishを固定し既存成功物を変更しない
+  ---
+  duration_ms: 10.495875
+  ...
+# Subtest: 01c directory publish成功後のlock異常を成功成果物の失敗へ戻さない
+ok 3 - 01c directory publish成功後のlock異常を成功成果物の失敗へ戻さない
+  ---
+  duration_ms: 3.865083
+  ...
+# Subtest: 02 固定信頼根・台帳・preview・描画部品・tool・fontを照合しfont失敗を分類する
+not ok 4 - 02 固定信頼根・台帳・preview・描画部品・tool・fontを照合しfont失敗を分類する
+  ---
+  duration_ms: 15.55675
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_renderer_v002.test.mjs:889:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    [{"code":"RENDERER_COMPONENT_HASH_MISMATCH","path":"$.approvedPreview.componentProvenance[0]","relatedIds":["runner/src/remotion/Root.tsx"],"details":{"actualFileSha256":"a08c4c888a0fcd356dc0911732aeb51badd3420305056b1d02ac109b39d0fd23","expectedFileSha256":"9c58b452d81b3083c8637e6d2e8ec971bc948ae39ce0452675bb1fd2a005cc8f"}},{"code":"RENDERER_COMPONENT_HASH_MISMATCH","path":"$.approvedPreview.componentProvenance[1]","relatedIds":["runner/src/remotion/renderer/TelopRenderer.tsx"],"details":{"actualFileSha256":"7fe1296f6884c90acadb61dcd2e45c81d24e2fddac14cf78b120897f05ca289b","expectedFileSha256":"94b1ef2f132acbda86181034c89a57caabc72e4a150d213c01e5be8159327863"}}]
+    + actual - expected
+    
+    + 'failed'
+    - 'passed'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'passed'
+  actual: 'failed'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_renderer_v002.test.mjs:892:10)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: 03 v002だけを受理しv001と旧telopPlanを描画前に拒否する
+not ok 5 - 03 v002だけを受理しv001と旧telopPlanを描画前に拒否する
+  ---
+  duration_ms: 271.636375
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_renderer_v002.test.mjs:961:1'
+  failureType: 'testCodeFailure'
+  error: 'INSTRUCTION_CONTRACT_NOT_PASSED was not observed: [{"code":"RENDERER_COMPONENT_HASH_MISMATCH","path":"$.approvedPreview.componentProvenance[0]","relatedIds":["runner/src/remotion/Root.tsx"],"details":{"actualFileSha256":"a08c4c888a0fcd356dc0911732aeb51badd3420305056b1d02ac109b39d0fd23","expectedFileSha256":"9c58b452d81b3083c8637e6d2e8ec971bc948ae39ce0452675bb1fd2a005cc8f"}},{"code":"RENDERER_COMPONENT_HASH_MISMATCH","path":"$.approvedPreview.componentProvenance[1]","relatedIds":["runner/src/remotion/renderer/TelopRenderer.tsx"],"details":{"actualFileSha256":"7fe1296f6884c90acadb61dcd2e45c81d24e2fddac14cf78b120897f05ca289b","expectedFileSha256":"94b1ef2f132acbda86181034c89a57caabc72e4a150d213c01e5be8159327863"}}]'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: '=='
+  stack: |-
+    assertHasCode (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_renderer_v002.test.mjs:114:10)
+    TestContext.<anonymous> (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_renderer_v002.test.mjs:984:5)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: 04 外枠passedだけを通しpartialとfailedを異なるコードで停止する
+not ok 6 - 04 外枠passedだけを通しpartialとfailedを異なるコードで停止する
+  ---
+  duration_ms: 257.341875
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_renderer_v002.test.mjs:1040:1'
+  failureType: 'testCodeFailure'
+  error: 'INSTRUCTION_CONTRACT_NOT_PASSED was not observed: [{"code":"RENDERER_COMPONENT_HASH_MISMATCH","path":"$.approvedPreview.componentProvenance[0]","relatedIds":["runner/src/remotion/Root.tsx"],"details":{"actualFileSha256":"a08c4c888a0fcd356dc0911732aeb51badd3420305056b1d02ac109b39d0fd23","expectedFileSha256":"9c58b452d81b3083c8637e6d2e8ec971bc948ae39ce0452675bb1fd2a005cc8f"}},{"code":"RENDERER_COMPONENT_HASH_MISMATCH","path":"$.approvedPreview.componentProvenance[1]","relatedIds":["runner/src/remotion/renderer/TelopRenderer.tsx"],"details":{"actualFileSha256":"7fe1296f6884c90acadb61dcd2e45c81d24e2fddac14cf78b120897f05ca289b","expectedFileSha256":"94b1ef2f132acbda86181034c89a57caabc72e4a150d213c01e5be8159327863"}}]'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: '=='
+  stack: |-
+    assertHasCode (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_renderer_v002.test.mjs:114:10)
+    TestContext.<anonymous> (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_renderer_v002.test.mjs:1048:5)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: 05 正式空素材で到達可能な9種類を1指示1要素へ解決する
+ok 7 - 05 正式空素材で到達可能な9種類を1指示1要素へ解決する
+  ---
+  duration_ms: 1.488333
+  ...
+# Subtest: 06 caption本文・明示行・開始終了anchorを一文字も変えず保持する
+ok 8 - 06 caption本文・明示行・開始終了anchorを一文字も変えず保持する
+  ---
+  duration_ms: 0.118709
+  ...
+# Subtest: 07 非caption本文と終了責任を保ち句点・空白・元改行の文字indexを欠落なく追跡する
+ok 9 - 07 非caption本文と終了責任を保ち句点・空白・元改行の文字indexを欠落なく追跡する
+  ---
+  duration_ms: 0.31025
+  ...
+# Subtest: 08 speaker表示名は明示targetだけから解決しsource話者ラベルを人物名に使わない
+ok 10 - 08 speaker表示名は明示targetだけから解決しsource話者ラベルを人物名に使わない
+  ---
+  duration_ms: 0.69
+  ...
+# Subtest: 09 1 source・cut対応・速度・frame数・未対応・曖昧・segment跨ぎを個別に止める
+ok 11 - 09 1 source・cut対応・速度・frame数・未対応・曖昧・segment跨ぎを個別に止める
+  ---
+  duration_ms: 3.96825
+  ...
+# Subtest: 10 v002はsource frameをoutput frameへ直接写し短尺alpha包絡を固定する
+ok 12 - 10 v002はsource frameをoutput frameへ直接写し短尺alpha包絡を固定する
+  ---
+  duration_ms: 0.396583
+  ...
+# Subtest: 11 正式台帳の種類・状態・font・背景・transitionをfallbackなしで解決する
+ok 13 - 11 正式台帳の種類・状態・font・背景・transitionをfallbackなしで解決する
+  ---
+  duration_ms: 1.071333
+  ...
+# Subtest: 12 行数・行の正の交差・安全領域・空alphaを独立して検出する
+ok 14 - 12 行数・行の正の交差・安全領域・空alphaを独立して検出する
+  ---
+  duration_ms: 5.710292
+  ...
+# Subtest: 13 時間と空間の正の交差だけを衝突とし境界接触は許容する
+ok 15 - 13 時間と空間の正の交差だけを衝突とし境界接触は許容する
+  ---
+  duration_ms: 0.529709
+  ...
+# Subtest: 14 空素材indexのG7を外枠で停止しpreviewカードを代用しない
+not ok 16 - 14 空素材indexのG7を外枠で停止しpreviewカードを代用しない
+  ---
+  duration_ms: 254.62825
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_renderer_v002.test.mjs:1402:1'
+  failureType: 'testCodeFailure'
+  error: 'INSTRUCTION_CONTRACT_NOT_PASSED was not observed: [{"code":"RENDERER_COMPONENT_HASH_MISMATCH","path":"$.approvedPreview.componentProvenance[0]","relatedIds":["runner/src/remotion/Root.tsx"],"details":{"actualFileSha256":"a08c4c888a0fcd356dc0911732aeb51badd3420305056b1d02ac109b39d0fd23","expectedFileSha256":"9c58b452d81b3083c8637e6d2e8ec971bc948ae39ce0452675bb1fd2a005cc8f"}},{"code":"RENDERER_COMPONENT_HASH_MISMATCH","path":"$.approvedPreview.componentProvenance[1]","relatedIds":["runner/src/remotion/renderer/TelopRenderer.tsx"],"details":{"actualFileSha256":"7fe1296f6884c90acadb61dcd2e45c81d24e2fddac14cf78b120897f05ca289b","expectedFileSha256":"94b1ef2f132acbda86181034c89a57caabc72e4a150d213c01e5be8159327863"}}]'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: '=='
+  stack: |-
+    assertHasCode (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_renderer_v002.test.mjs:114:10)
+    TestContext.<anonymous> (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_renderer_v002.test.mjs:1423:5)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: 15 9種類の透明PNGは非空・safe area内で同じ入力を同じhashへ再描画する
+not ok 17 - 15 9種類の透明PNGは非空・safe area内で同じ入力を同じhashへ再描画する
+  ---
+  duration_ms: 2751.808375
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_renderer_v002.test.mjs:1430:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    {
+      "schemaVersion": "presentation-render-failure-v002",
+      "status": "failed",
+      "stage": "trust",
+      "violations": [
+        {
+          "code": "RENDERER_COMPONENT_HASH_MISMATCH",
+          "path": "$.approvedPreview.componentProvenance[0]",
+          "relatedIds": [
+            "runner/src/remotion/Root.tsx"
+          ],
+          "details": {
+            "actualFileSha256": "a08c4c888a0fcd356dc0911732aeb51badd3420305056b1d02ac109b39d0fd23",
+            "expectedFileSha256": "9c58b452d81b3083c8637e6d2e8ec971bc948ae39ce0452675bb1fd2a005cc8f"
+          }
+        },
+        {
+          "code": "RENDERER_COMPONENT_HASH_MISMATCH",
+          "path": "$.approvedPreview.componentProvenance[1]",
+          "relatedIds": [
+            "runner/src/remotion/renderer/TelopRenderer.tsx"
+          ],
+          "details": {
+            "actualFileSha256": "7fe1296f6884c90acadb61dcd2e45c81d24e2fddac14cf78b120897f05ca289b",
+            "expectedFileSha256": "94b1ef2f132acbda86181034c89a57caabc72e4a150d213c01e5be8159327863"
+          }
+        }
+      ],
+      "nested": {
+        "schemaVersion": "presentation-renderer-trust-report-v001",
+        "status": "failed",
+        "violations": [
+          {
+            "code": "RENDERER_COMPONENT_HASH_MISMATCH",
+            "path": "$.approvedPreview.componentProvenance[0]",
+            "relatedIds": [
+              "runner/src/remotion/Root.tsx"
+            ],
+            "details": {
+              "actualFileSha256": "a08c4c888a0fcd356dc0911732aeb51badd3420305056b1d02ac109b39d0fd23",
+              "expectedFileSha256": "9c58b452d81b3083c8637e6d2e8ec971bc948ae39ce0452675bb1fd2a005cc8f"
+            }
+          },
+          {
+            "code": "RENDERER_COMPONENT_HASH_MISMATCH",
+            "path": "$.approvedPreview.componentProvenance[1]",
+            "relatedIds": [
+              "runner/src/remotion/renderer/TelopRenderer.tsx"
+            ],
+            "details": {
+              "actualFileSha256": "7fe1296f6884c90acadb61dcd2e45c81d24e2fddac14cf78b120897f05ca289b",
+              "expectedFileSha256": "94b1ef2f132acbda86181034c89a57caabc72e4a150d213c01e5be8159327863"
+            }
+          }
+        ],
+        "trust": null,
+        "trustCanonicalSha256": "9d5ffe631033dc594c917649e2529899e303f3cb8a7d7b1b65ea0d26b7c645f2"
+      }
+    }
+    
+    
+    
+    1 !== 0
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 0
+  actual: 1
+  operator: 'strictEqual'
+  stack: |-
+    file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_renderer_v002.test.mjs:704:12
+    process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    async TestContext.<anonymous> (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_renderer_v002.test.mjs:1431:20)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: 16 合成MP4の映像・代表frame差分・基礎音声packetを保全する
+not ok 18 - 16 合成MP4の映像・代表frame差分・基礎音声packetを保全する
+  ---
+  duration_ms: 0.364875
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_renderer_v002.test.mjs:1470:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    {
+      "schemaVersion": "presentation-render-failure-v002",
+      "status": "failed",
+      "stage": "trust",
+      "violations": [
+        {
+          "code": "RENDERER_COMPONENT_HASH_MISMATCH",
+          "path": "$.approvedPreview.componentProvenance[0]",
+          "relatedIds": [
+            "runner/src/remotion/Root.tsx"
+          ],
+          "details": {
+            "actualFileSha256": "a08c4c888a0fcd356dc0911732aeb51badd3420305056b1d02ac109b39d0fd23",
+            "expectedFileSha256": "9c58b452d81b3083c8637e6d2e8ec971bc948ae39ce0452675bb1fd2a005cc8f"
+          }
+        },
+        {
+          "code": "RENDERER_COMPONENT_HASH_MISMATCH",
+          "path": "$.approvedPreview.componentProvenance[1]",
+          "relatedIds": [
+            "runner/src/remotion/renderer/TelopRenderer.tsx"
+          ],
+          "details": {
+            "actualFileSha256": "7fe1296f6884c90acadb61dcd2e45c81d24e2fddac14cf78b120897f05ca289b",
+            "expectedFileSha256": "94b1ef2f132acbda86181034c89a57caabc72e4a150d213c01e5be8159327863"
+          }
+        }
+      ],
+      "nested": {
+        "schemaVersion": "presentation-renderer-trust-report-v001",
+        "status": "failed",
+        "violations": [
+          {
+            "code": "RENDERER_COMPONENT_HASH_MISMATCH",
+            "path": "$.approvedPreview.componentProvenance[0]",
+            "relatedIds": [
+              "runner/src/remotion/Root.tsx"
+            ],
+            "details": {
+              "actualFileSha256": "a08c4c888a0fcd356dc0911732aeb51badd3420305056b1d02ac109b39d0fd23",
+              "expectedFileSha256": "9c58b452d81b3083c8637e6d2e8ec971bc948ae39ce0452675bb1fd2a005cc8f"
+            }
+          },
+          {
+            "code": "RENDERER_COMPONENT_HASH_MISMATCH",
+            "path": "$.approvedPreview.componentProvenance[1]",
+            "relatedIds": [
+              "runner/src/remotion/renderer/TelopRenderer.tsx"
+            ],
+            "details": {
+              "actualFileSha256": "7fe1296f6884c90acadb61dcd2e45c81d24e2fddac14cf78b120897f05ca289b",
+              "expectedFileSha256": "94b1ef2f132acbda86181034c89a57caabc72e4a150d213c01e5be8159327863"
+            }
+          }
+        ],
+        "trust": null,
+        "trustCanonicalSha256": "9d5ffe631033dc594c917649e2529899e303f3cb8a7d7b1b65ea0d26b7c645f2"
+      }
+    }
+    
+    
+    
+    1 !== 0
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 0
+  actual: 1
+  operator: 'strictEqual'
+  stack: |-
+    file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_renderer_v002.test.mjs:704:12
+    process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    async TestContext.<anonymous> (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_renderer_v002.test.mjs:1431:20)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: 17 適用結果・manifest・QC・CLI 0/1/2・publish後残留警告で成功を覆さない・全固有コード集合を固定する
+not ok 19 - 17 適用結果・manifest・QC・CLI 0/1/2・publish後残留警告で成功を覆さない・全固有コード集合を固定する
+  ---
+  duration_ms: 0.209416
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_renderer_v002.test.mjs:1539:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    {
+      "schemaVersion": "presentation-render-failure-v002",
+      "status": "failed",
+      "stage": "trust",
+      "violations": [
+        {
+          "code": "RENDERER_COMPONENT_HASH_MISMATCH",
+          "path": "$.approvedPreview.componentProvenance[0]",
+          "relatedIds": [
+            "runner/src/remotion/Root.tsx"
+          ],
+          "details": {
+            "actualFileSha256": "a08c4c888a0fcd356dc0911732aeb51badd3420305056b1d02ac109b39d0fd23",
+            "expectedFileSha256": "9c58b452d81b3083c8637e6d2e8ec971bc948ae39ce0452675bb1fd2a005cc8f"
+          }
+        },
+        {
+          "code": "RENDERER_COMPONENT_HASH_MISMATCH",
+          "path": "$.approvedPreview.componentProvenance[1]",
+          "relatedIds": [
+            "runner/src/remotion/renderer/TelopRenderer.tsx"
+          ],
+          "details": {
+            "actualFileSha256": "7fe1296f6884c90acadb61dcd2e45c81d24e2fddac14cf78b120897f05ca289b",
+            "expectedFileSha256": "94b1ef2f132acbda86181034c89a57caabc72e4a150d213c01e5be8159327863"
+          }
+        }
+      ],
+      "nested": {
+        "schemaVersion": "presentation-renderer-trust-report-v001",
+        "status": "failed",
+        "violations": [
+          {
+            "code": "RENDERER_COMPONENT_HASH_MISMATCH",
+            "path": "$.approvedPreview.componentProvenance[0]",
+            "relatedIds": [
+              "runner/src/remotion/Root.tsx"
+            ],
+            "details": {
+              "actualFileSha256": "a08c4c888a0fcd356dc0911732aeb51badd3420305056b1d02ac109b39d0fd23",
+              "expectedFileSha256": "9c58b452d81b3083c8637e6d2e8ec971bc948ae39ce0452675bb1fd2a005cc8f"
+            }
+          },
+          {
+            "code": "RENDERER_COMPONENT_HASH_MISMATCH",
+            "path": "$.approvedPreview.componentProvenance[1]",
+            "relatedIds": [
+              "runner/src/remotion/renderer/TelopRenderer.tsx"
+            ],
+            "details": {
+              "actualFileSha256": "7fe1296f6884c90acadb61dcd2e45c81d24e2fddac14cf78b120897f05ca289b",
+              "expectedFileSha256": "94b1ef2f132acbda86181034c89a57caabc72e4a150d213c01e5be8159327863"
+            }
+          }
+        ],
+        "trust": null,
+        "trustCanonicalSha256": "9d5ffe631033dc594c917649e2529899e303f3cb8a7d7b1b65ea0d26b7c645f2"
+      }
+    }
+    
+    
+    
+    1 !== 0
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 0
+  actual: 1
+  operator: 'strictEqual'
+  stack: |-
+    file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_renderer_v002.test.mjs:704:12
+    process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    async TestContext.<anonymous> (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_renderer_v002.test.mjs:1431:20)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+1..19
+# tests 19
+# suites 0
+# pass 12
+# fail 7
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 3654.323125

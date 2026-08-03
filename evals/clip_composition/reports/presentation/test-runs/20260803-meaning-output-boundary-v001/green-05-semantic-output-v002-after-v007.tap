@@ -1,0 +1,50 @@
+TAP version 13
+# Subtest: W01: B1 v002は幅14の正常回答と固定7 implementation bindingを受理する
+ok 1 - W01: B1 v002は幅14の正常回答と固定7 implementation bindingを受理する
+  ---
+  duration_ms: 10.592083
+  ...
+# Subtest: W02: 同じjobで論理幅15の行を既存幅超過違反へ帰属する
+ok 2 - W02: 同じjobで論理幅15の行を既存幅超過違反へ帰属する
+  ---
+  duration_ms: 2.257375
+  ...
+# Subtest: W03: manifestと意味入力の幅不一致を拒否する
+ok 3 - W03: manifestと意味入力の幅不一致を拒否する
+  ---
+  duration_ms: 2.141709
+  ...
+# Subtest: W04: 意味入力と展開写像の幅不一致を拒否する
+ok 4 - W04: 意味入力と展開写像の幅不一致を拒否する
+  ---
+  duration_ms: 2.37475
+  ...
+# Subtest: W05: manifestと台帳bindingのpreset不一致を拒否する
+ok 5 - W05: manifestと台帳bindingのpreset不一致を拒否する
+  ---
+  duration_ms: 1.862125
+  ...
+# Subtest: W06: manifestと台帳bindingのstate不一致を拒否する
+ok 6 - W06: manifestと台帳bindingのstate不一致を拒否する
+  ---
+  duration_ms: 1.799375
+  ...
+# Subtest: W07: 1まとまり2行を受理する
+ok 7 - W07: 1まとまり2行を受理する
+  ---
+  duration_ms: 4.009667
+  ...
+# Subtest: W08: 3行拒否とrunnerのexit 0・1・2 stdout契約を固定する
+ok 8 - W08: 3行拒否とrunnerのexit 0・1・2 stdout契約を固定する
+  ---
+  duration_ms: 5.328875
+  ...
+1..8
+# tests 8
+# suites 0
+# pass 8
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 86.939667
