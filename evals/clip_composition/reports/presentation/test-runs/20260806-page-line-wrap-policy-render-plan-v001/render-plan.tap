@@ -1,0 +1,257 @@
+TAP version 13
+# Subtest: ORP001: native render planはexact 9 keyである
+ok 1 - ORP001: native render planはexact 9 keyである
+  ---
+  duration_ms: 1.859041
+  ...
+# Subtest: ORP002: native page一件をcommon core element一件へ写す
+ok 2 - ORP002: native page一件をcommon core element一件へ写す
+  ---
+  duration_ms: 1.520291
+  ...
+# Subtest: ORP003: meaning projection 7 fieldは意味packageから不変導出される
+ok 3 - ORP003: meaning projection 7 fieldは意味packageから不変導出される
+  ---
+  duration_ms: 0.327209
+  ...
+# Subtest: ORP004: base mediaの4 bindingをrequestからそのまま保持する
+ok 4 - ORP004: base mediaの4 bindingをrequestからそのまま保持する
+  ---
+  duration_ms: 0.199833
+  ...
+# Subtest: ORP005: title空はnot-requestedとなる
+ok 5 - ORP005: title空はnot-requestedとなる
+  ---
+  duration_ms: 0.2415
+  ...
+# Subtest: ORP006: title非空はv001で拒否する
+ok 6 - ORP006: title非空はv001で拒否する
+  ---
+  duration_ms: 0.06325
+  ...
+# Subtest: ORP007: instruction/resolution/旧B4 artifactを一件も生成しない
+ok 7 - ORP007: instruction/resolution/旧B4 artifactを一件も生成しない
+  ---
+  duration_ms: 0.877584
+  ...
+# Subtest: ORP008: common coreは新native planのpage値を実際に受ける
+ok 8 - ORP008: common coreは新native planのpage値を実際に受ける
+  ---
+  duration_ms: 0.519625
+  ...
+# Subtest: OEE001: 合成横型を意味packageからapplication/QC/manifestまで一気通貫する
+not ok 9 - OEE001: 合成横型を意味packageからapplication/QC/manifestまで一気通貫する
+  ---
+  duration_ms: 3337.311792
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_output_render_plan_v001.test.mjs:1620:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'fatal'
+    - 'passed'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'passed'
+  actual: 'fatal'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_output_render_plan_v001.test.mjs:1622:10)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: OEE002: 合成縦型をcrop前提の意味packageからQCまで一気通貫する
+not ok 10 - OEE002: 合成縦型をcrop前提の意味packageからQCまで一気通貫する
+  ---
+  duration_ms: 3159.135292
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_output_render_plan_v001.test.mjs:1660:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'fatal'
+    - 'passed'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'passed'
+  actual: 'fatal'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_output_render_plan_v001.test.mjs:1662:10)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: OEE003: 横縦の出力形式差で意味package byteを変えない
+ok 11 - OEE003: 横縦の出力形式差で意味package byteを変えない
+  ---
+  duration_ms: 1.07675
+  ...
+# Subtest: OEE004: rejected時はcontrol 2件・render 0件でfallbackしない
+ok 12 - OEE004: rejected時はcontrol 2件・render 0件でfallbackしない
+  ---
+  duration_ms: 1591.913584
+  ...
+# Subtest: OEE005: core契約/QC失敗はrejected failure exact 10 keyへ帰属する
+not ok 13 - OEE005: core契約/QC失敗はrejected failure exact 10 keyへ帰属する
+  ---
+  duration_ms: 2514.838166
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_output_render_plan_v001.test.mjs:1714:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    
+    2 !== 1
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 1
+  actual: 2
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_output_render_plan_v001.test.mjs:1719:10)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: OEE006: tool/I/O fatalはviolations空・exit 2相当へ帰属する
+ok 14 - OEE006: tool/I/O fatalはviolations空・exit 2相当へ帰属する
+  ---
+  duration_ms: 2709.939667
+  ...
+# Subtest: OEE007: staging exact検査不合格は旧publisherを呼ばず専用fatalにする
+not ok 15 - OEE007: staging exact検査不合格は旧publisherを呼ばず専用fatalにする
+  ---
+  duration_ms: 2668.361042
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_output_render_plan_v001.test.mjs:1766:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    
+    0 !== 1
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 1
+  actual: 0
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_output_render_plan_v001.test.mjs:1771:10)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: OEE008: staging合格後だけ既存commit入口を一度呼ぶ
+not ok 16 - OEE008: staging合格後だけ既存commit入口を一度呼ぶ
+  ---
+  duration_ms: 2576.996875
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_output_render_plan_v001.test.mjs:1796:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    
+    0 !== 1
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 1
+  actual: 0
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_output_render_plan_v001.test.mjs:1801:10)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: OEE009: coreのRENDER_OUTPUT違反はstage publishをpublicationへ読み替えない
+ok 17 - OEE009: coreのRENDER_OUTPUT違反はstage publishをpublicationへ読み替えない
+  ---
+  duration_ms: 1.205875
+  ...
+# Subtest: OPF001: 親契約2文書のSHAが承認値と一致する
+ok 18 - OPF001: 親契約2文書のSHAが承認値と一致する
+  ---
+  duration_ms: 0.5175
+  ...
+# Subtest: OPF002: §4の13正本は開始commit一致かつ非変更11件は現物不変である
+ok 19 - OPF002: §4の13正本は開始commit一致かつ非変更11件は現物不変である
+  ---
+  duration_ms: 609.227833
+  ...
+# Subtest: OPF003: X01〜X04は開始SHAと許可された共通入口を持つ
+ok 20 - OPF003: X01〜X04は開始SHAと許可された共通入口を持つ
+  ---
+  duration_ms: 391.246416
+  ...
+# Subtest: OPF004: 実装path集合はexact 32件で33件目を持たない
+ok 21 - OPF004: 実装path集合はexact 32件で33件目を持たない
+  ---
+  duration_ms: 192.050792
+  ...
+# Subtest: OPF005: 参照exportが実在しproductionとtestが同入口を使う
+ok 22 - OPF005: 参照exportが実在しproductionとtestが同入口を使う
+  ---
+  duration_ms: 7.226334
+  ...
+# Subtest: OPF006: candidate 13横型stable treeは不変である
+ok 23 - OPF006: candidate 13横型stable treeは不変である
+  ---
+  duration_ms: 1245.159375
+  ...
+# Subtest: OPF007: candidate 59横型stable treeは不変である
+ok 24 - OPF007: candidate 59横型stable treeは不変である
+  ---
+  duration_ms: 1095.680666
+  ...
+# Subtest: OPF008: candidate 59縦型stable treeは不変である
+ok 25 - OPF008: candidate 59縦型stable treeは不変である
+  ---
+  duration_ms: 1694.547416
+  ...
+# Subtest: OPF009: 旧schema converter/fallback/併産を新経路に持たない
+ok 26 - OPF009: 旧schema converter/fallback/併産を新経路に持たない
+  ---
+  duration_ms: 2.424417
+  ...
+# Subtest: OPF010: 新規検査はAPI通信0件・secret保存0件である
+ok 27 - OPF010: 新規検査はAPI通信0件・secret保存0件である
+  ---
+  duration_ms: 3.094166
+  ...
+# Subtest: OPF011: O07はO03と既存validatorを出力作成前に実行する
+ok 28 - OPF011: O07はO03と既存validatorを出力作成前に実行する
+  ---
+  duration_ms: 2.524791
+  ...
+# Subtest: OPF012: 固定Node+TSX loaderでO05/O07実exportを使い追加loaderを持たない
+ok 29 - OPF012: 固定Node+TSX loaderでO05/O07実exportを使い追加loaderを持たない
+  ---
+  duration_ms: 693.653667
+  ...
+# Subtest: OPF013: 実行入力・crop適用の承認済み親設計SHAが一致する
+ok 30 - OPF013: 実行入力・crop適用の承認済み親設計SHAが一致する
+  ---
+  duration_ms: 0.263459
+  ...
+# Subtest: OPF014: 既存3本のstable tagは承認済みcommitを指す
+ok 31 - OPF014: 既存3本のstable tagは承認済みcommitを指す
+  ---
+  duration_ms: 143.089375
+  ...
+# Subtest: OPF015: v006原本とpresentation台帳の完全treeは初期HEADから不変である
+ok 32 - OPF015: v006原本とpresentation台帳の完全treeは初期HEADから不変である
+  ---
+  duration_ms: 1250.706375
+  ...
+# Subtest: OPF016: 実装baselineからの差分は承認済み15 pathだけである
+ok 33 - OPF016: 実装baselineからの差分は承認済み15 pathだけである
+  ---
+  duration_ms: 873.5545
+  ...
+1..33
+# tests 33
+# suites 0
+# pass 28
+# fail 5
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 27055.491958

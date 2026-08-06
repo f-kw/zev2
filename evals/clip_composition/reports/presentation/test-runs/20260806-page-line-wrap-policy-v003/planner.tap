@@ -1,0 +1,145 @@
+TAP version 13
+# Subtest: OPL001: 複数atomでも幅上限内なら一行に保つ
+ok 1 - OPL001: 複数atomでも幅上限内なら一行に保つ
+  ---
+  duration_ms: 10.89925
+  ...
+# Subtest: OPL002: 二行pageは明示した二境界を一pageに保持する
+ok 2 - OPL002: 二行pageは明示した二境界を一pageに保持する
+  ---
+  duration_ms: 2.962917
+  ...
+# Subtest: OPL003: AtomRef境界nodeは全量・順序・uniqueを保つ
+ok 3 - OPL003: AtomRef境界nodeは全量・順序・uniqueを保つ
+  ---
+  duration_ms: 2.968709
+  ...
+# Subtest: OPL004: 幅超過line候補は物理edgeへ入らない
+ok 4 - OPL004: 幅超過line候補は物理edgeへ入らない
+  ---
+  duration_ms: 2.066959
+  ...
+# Subtest: OPL005: 横型の物理edgeはsafe areaと非交差を通過したものだけである
+ok 5 - OPL005: 横型の物理edgeはsafe areaと非交差を通過したものだけである
+  ---
+  duration_ms: 4.265542
+  ...
+# Subtest: OPL006: 縦型の物理edgeはline矩形・safe area・非交差を通過する
+ok 6 - OPL006: 縦型の物理edgeはline矩形・safe area・非交差を通過する
+  ---
+  duration_ms: 57.446625
+  ...
+# Subtest: OPL007: 0-frame区間は物理edgeに残りtimeline edgeだけから除外される
+ok 7 - OPL007: 0-frame区間は物理edgeに残りtimeline edgeだけから除外される
+  ---
+  duration_ms: 1.425167
+  ...
+# Subtest: OPL008: 物理pathが無い場合はlayout違反が所有する
+ok 8 - OPL008: 物理pathが無い場合はlayout違反が所有する
+  ---
+  duration_ms: 1.074958
+  ...
+# Subtest: OPL009: 物理path成立後にtimeline pathが無い場合はtimeline違反が所有する
+ok 9 - OPL009: 物理path成立後にtimeline pathが無い場合はtimeline違反が所有する
+  ---
+  duration_ms: 2.311167
+  ...
+# Subtest: OPL010: 選択はpage数最少を第一目的にする
+ok 10 - OPL010: 選択はpage数最少を第一目的にする
+  ---
+  duration_ms: 1.830416
+  ...
+# Subtest: OPL011: 同じpage数なら総行数を減らし不要な改行を入れない
+ok 11 - OPL011: 同じpage数なら総行数を減らし不要な改行を入れない
+  ---
+  duration_ms: 2.044209
+  ...
+# Subtest: OPL012: page数と行数が同じなら最大行幅を最小化する
+ok 12 - OPL012: page数と行数が同じなら最大行幅を最小化する
+  ---
+  duration_ms: 1.494041
+  ...
+# Subtest: OPL013: 最大幅が同じなら行幅rangeを最小化する
+ok 13 - OPL013: 最大幅が同じなら行幅rangeを最小化する
+  ---
+  duration_ms: 3.954417
+  ...
+# Subtest: OPL014: tuple同値ならpage境界・行境界を辞書順で決める
+ok 14 - OPL014: tuple同値ならpage境界・行境界を辞書順で決める
+  ---
+  duration_ms: 1.998833
+  ...
+# Subtest: OPL015: pageとlineを連結すると意味本文・AtomRefが完全一致する
+ok 15 - OPL015: pageとlineを連結すると意味本文・AtomRefが完全一致する
+  ---
+  duration_ms: 1.573042
+  ...
+# Subtest: OPL016: page時刻はAtomRefの先頭startと末尾endだけから導く
+ok 16 - OPL016: page時刻はAtomRefの先頭startと末尾endだけから導く
+  ---
+  duration_ms: 1.458791
+  ...
+# Subtest: OPL017: 同一入力二回でedge・predecessor・plan byteが一致する
+ok 17 - OPL017: 同一入力二回でedge・predecessor・plan byteが一致する
+  ---
+  duration_ms: 2.191083
+  ...
+# Subtest: OPL018: 横型と縦型の差は表示page/lineだけに閉じる
+ok 18 - OPL018: 横型と縦型の差は表示page/lineだけに閉じる
+  ---
+  duration_ms: 253.424708
+  ...
+# Subtest: OPL019: style差を通しても意味package byteは変化しない
+ok 19 - OPL019: style差を通しても意味package byteは変化しない
+  ---
+  duration_ms: 10.078792
+  ...
+# Subtest: OPL020: planner acceptedは日本語の読みやすさ合格を報告しない
+ok 20 - OPL020: planner acceptedは日本語の読みやすさ合格を報告しない
+  ---
+  duration_ms: 1.950167
+  ...
+# Subtest: OPL021: planner結果に旧B4 artifactを含めない
+ok 21 - OPL021: planner結果に旧B4 artifactを含めない
+  ---
+  duration_ms: 1.200375
+  ...
+# Subtest: OPL022: L=1/2とも有限で任意cutoffを持たずresource fatalを専用化する
+ok 22 - OPL022: L=1/2とも有限で任意cutoffを持たずresource fatalを専用化する
+  ---
+  duration_ms: 3.485542
+  ...
+# Subtest: OPL023: atom重複は一pageで保持し隣接pageまたはcaptionのframe重複だけを拒否する
+ok 23 - OPL023: atom重複は一pageで保持し隣接pageまたはcaptionのframe重複だけを拒否する
+  ---
+  duration_ms: 1.902792
+  ...
+# Subtest: OPL024: 999 pageを上限として1000 pageをtimeline不成立にする
+ok 24 - OPL024: 999 pageを上限として1000 pageをtimeline不成立にする
+  ---
+  duration_ms: 50.797125
+  ...
+# Subtest: OPL025: candidate 13保存caption/style fixtureは決定的である
+ok 25 - OPL025: candidate 13保存caption/style fixtureは決定的である
+  ---
+  duration_ms: 7100.384458
+  ...
+# Subtest: OPL026: candidate 59横型の既知20/36を拒否し30/26を受理する
+ok 26 - OPL026: candidate 59横型の既知20/36を拒否し30/26を受理する
+  ---
+  duration_ms: 3756.30225
+  ...
+# Subtest: OPL027: candidate 59縦型の認定caption/style fixtureは決定的である
+ok 27 - OPL027: candidate 59縦型の認定caption/style fixtureは決定的である
+  ---
+  duration_ms: 3113.603167
+  ...
+1..27
+# tests 27
+# suites 0
+# pass 27
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 14608.954125

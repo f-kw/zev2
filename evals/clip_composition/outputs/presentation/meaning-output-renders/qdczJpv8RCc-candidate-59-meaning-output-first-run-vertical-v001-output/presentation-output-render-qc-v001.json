@@ -1,0 +1,1741 @@
+{
+  "schemaVersion": "presentation-output-render-qc-v001",
+  "receiptId": "qdczJpv8RCc-candidate-59-meaning-output-first-run-vertical-v001-output-qc",
+  "status": "passed",
+  "renderPlanBinding": {
+    "schemaVersion": "presentation-output-render-plan-v001",
+    "path": "evals/clip_composition/outputs/presentation/meaning-output-control/qdczJpv8RCc-candidate-59-meaning-output-first-run-vertical-v001/render-plan.json",
+    "fileSha256": "1be67a624dc2e3d0da0393f905d8d8a456902c43d6a3079a93993c5c3e484f04",
+    "canonicalSha256": "75e55e3fc24914aca2975b61662768619dd31eda94a72141a285120b1e44f9d9"
+  },
+  "applicationResultsBinding": {
+    "schemaVersion": "presentation-output-render-application-results-v001",
+    "path": "evals/clip_composition/outputs/presentation/meaning-output-renders/qdczJpv8RCc-candidate-59-meaning-output-first-run-vertical-v001-output/presentation-output-render-application-results-v001.json",
+    "fileSha256": "9d9478220c3f1b69699cc15b529257138f33d522d627a19eb9934aba1d284f78",
+    "canonicalSha256": "acb5641feef9e9320c5776f2708e959a4cc711ddd925d16eb6d81a615ac8ab86"
+  },
+  "outputMedia": {
+    "video": {
+      "path": "evals/clip_composition/outputs/presentation/meaning-output-renders/qdczJpv8RCc-candidate-59-meaning-output-first-run-vertical-v001-output/presentation-output-rendered-v001.mp4",
+      "fileSha256": "e1e3c14e73b511b7cadf24ca2cc71592eff60216168b91d25c7bbb31f0c3c58d"
+    },
+    "width": 1080,
+    "height": 1920,
+    "frameCount": 1547,
+    "sampleCount": 2475200,
+    "audioPacketPayloadSha256": "d18469bd3132356b03870ee8bc3d63e95947bd254961157e09d59cf9a53459ec"
+  },
+  "rendererQc": {
+    "schemaVersion": "presentation-vertical-review-renderer-qc-v001",
+    "status": "passed",
+    "instructionCount": 38,
+    "checks": {
+      "instructionApplication": {
+        "status": "passed"
+      },
+      "layoutAndVisibility": {
+        "status": "passed"
+      },
+      "media": {
+        "status": "passed"
+      }
+    },
+    "instructionEvidence": [
+      {
+        "instructionId": "display-page-000001-001",
+        "requestedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+        "appliedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+        "appliedPresetRegistryVersion": "vertical-short-preset-registry-v001",
+        "alphaMax": 1,
+        "alphaBounds": {
+          "left": 320,
+          "top": 1386,
+          "right": 768,
+          "bottom": 1766,
+          "width": 448,
+          "height": 380
+        },
+        "lineCount": 2,
+        "lineAlphaBounds": [
+          {
+            "lineIndex": 0,
+            "left": 320,
+            "top": 1386,
+            "right": 756,
+            "bottom": 1563,
+            "width": 436,
+            "height": 177
+          },
+          {
+            "lineIndex": 1,
+            "left": 320,
+            "top": 1583,
+            "right": 768,
+            "bottom": 1766,
+            "width": 448,
+            "height": 183
+          }
+        ],
+        "visibilityComparisonBasis": "same-composite-with-instruction-omitted",
+        "representativeFrame": 36,
+        "changedPixelsAgainstInstructionOmittedFrame": 170227,
+        "appliedOverlayPropsCanonicalSha256": "aa5d410faefbfa490a291ae67c8f5b38f6d580774c2ba969ab079822da0a0cee",
+        "applicationOverlayFile": "overlays/01-1afcc714f245.png",
+        "inspectedOverlayFile": "overlays/01-1afcc714f245.png",
+        "applicationOverlaySha256": "9aaaa9ade04a5f2fcb84cb411fd41b7f1c73dfe2656da812bf127ba2967a5747",
+        "overlaySha256": "9aaaa9ade04a5f2fcb84cb411fd41b7f1c73dfe2656da812bf127ba2967a5747"
+      },
+      {
+        "instructionId": "display-page-000002-001",
+        "requestedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+        "appliedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+        "appliedPresetRegistryVersion": "vertical-short-preset-registry-v001",
+        "alphaMax": 1,
+        "alphaBounds": {
+          "left": 118,
+          "top": 1383,
+          "right": 952,
+          "bottom": 1766,
+          "width": 834,
+          "height": 383
+        },
+        "lineCount": 2,
+        "lineAlphaBounds": [
+          {
+            "lineIndex": 0,
+            "left": 122,
+            "top": 1383,
+            "right": 952,
+            "bottom": 1565,
+            "width": 830,
+            "height": 182
+          },
+          {
+            "lineIndex": 1,
+            "left": 118,
+            "top": 1584,
+            "right": 951,
+            "bottom": 1766,
+            "width": 833,
+            "height": 182
+          }
+        ],
+        "visibilityComparisonBasis": "same-composite-with-instruction-omitted",
+        "representativeFrame": 107,
+        "changedPixelsAgainstInstructionOmittedFrame": 319181,
+        "appliedOverlayPropsCanonicalSha256": "1c4ca54f74d6ec9b53ac8798a7ea81180f1858a1f422d9601af0dc9caab76e7f",
+        "applicationOverlayFile": "overlays/02-c29a30b1fe46.png",
+        "inspectedOverlayFile": "overlays/02-c29a30b1fe46.png",
+        "applicationOverlaySha256": "7d0ca9f1b9cbd330cfd74be2aa30fe2397d03d1a52dc708868d755dc69375915",
+        "overlaySha256": "7d0ca9f1b9cbd330cfd74be2aa30fe2397d03d1a52dc708868d755dc69375915"
+      },
+      {
+        "instructionId": "display-page-000003-001",
+        "requestedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+        "appliedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+        "appliedPresetRegistryVersion": "vertical-short-preset-registry-v001",
+        "alphaMax": 1,
+        "alphaBounds": {
+          "left": 323,
+          "top": 1383,
+          "right": 766,
+          "bottom": 1763,
+          "width": 443,
+          "height": 380
+        },
+        "lineCount": 2,
+        "lineAlphaBounds": [
+          {
+            "lineIndex": 0,
+            "left": 323,
+            "top": 1383,
+            "right": 766,
+            "bottom": 1564,
+            "width": 443,
+            "height": 181
+          },
+          {
+            "lineIndex": 1,
+            "left": 324,
+            "top": 1587,
+            "right": 749,
+            "bottom": 1763,
+            "width": 425,
+            "height": 176
+          }
+        ],
+        "visibilityComparisonBasis": "same-composite-with-instruction-omitted",
+        "representativeFrame": 154,
+        "changedPixelsAgainstInstructionOmittedFrame": 168309,
+        "appliedOverlayPropsCanonicalSha256": "bd731e71e7705105afbc6087f96746c8758958a2c427aa24edd307c41a8f6f83",
+        "applicationOverlayFile": "overlays/03-a55e5e30671e.png",
+        "inspectedOverlayFile": "overlays/03-a55e5e30671e.png",
+        "applicationOverlaySha256": "6a0edc088783b3eb029a66e28ab3cada662cb1b8479edecf7aafb5a773cefa1d",
+        "overlaySha256": "6a0edc088783b3eb029a66e28ab3cada662cb1b8479edecf7aafb5a773cefa1d"
+      },
+      {
+        "instructionId": "display-page-000003-002",
+        "requestedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+        "appliedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+        "appliedPresetRegistryVersion": "vertical-short-preset-registry-v001",
+        "alphaMax": 1,
+        "alphaBounds": {
+          "left": 250,
+          "top": 1382,
+          "right": 821,
+          "bottom": 1763,
+          "width": 571,
+          "height": 381
+        },
+        "lineCount": 2,
+        "lineAlphaBounds": [
+          {
+            "lineIndex": 0,
+            "left": 316,
+            "top": 1382,
+            "right": 758,
+            "bottom": 1565,
+            "width": 442,
+            "height": 183
+          },
+          {
+            "lineIndex": 1,
+            "left": 250,
+            "top": 1588,
+            "right": 821,
+            "bottom": 1763,
+            "width": 571,
+            "height": 175
+          }
+        ],
+        "visibilityComparisonBasis": "same-composite-with-instruction-omitted",
+        "representativeFrame": 177,
+        "changedPixelsAgainstInstructionOmittedFrame": 217364,
+        "appliedOverlayPropsCanonicalSha256": "e645dd65a6f2f55383d1e5ec0d954ab7e6c553d10e3eac05b152a2f30329eb4c",
+        "applicationOverlayFile": "overlays/04-5f987d9b073f.png",
+        "inspectedOverlayFile": "overlays/04-5f987d9b073f.png",
+        "applicationOverlaySha256": "9e23ad15b6532da9a8eccc391f9e785a61562a9f6f5193612dfb081eaa92ab66",
+        "overlaySha256": "9e23ad15b6532da9a8eccc391f9e785a61562a9f6f5193612dfb081eaa92ab66"
+      },
+      {
+        "instructionId": "display-page-000004-001",
+        "requestedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+        "appliedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+        "appliedPresetRegistryVersion": "vertical-short-preset-registry-v001",
+        "alphaMax": 1,
+        "alphaBounds": {
+          "left": 320,
+          "top": 1384,
+          "right": 762,
+          "bottom": 1765,
+          "width": 442,
+          "height": 381
+        },
+        "lineCount": 2,
+        "lineAlphaBounds": [
+          {
+            "lineIndex": 0,
+            "left": 320,
+            "top": 1384,
+            "right": 757,
+            "bottom": 1564,
+            "width": 437,
+            "height": 180
+          },
+          {
+            "lineIndex": 1,
+            "left": 330,
+            "top": 1584,
+            "right": 762,
+            "bottom": 1765,
+            "width": 432,
+            "height": 181
+          }
+        ],
+        "visibilityComparisonBasis": "same-composite-with-instruction-omitted",
+        "representativeFrame": 196,
+        "changedPixelsAgainstInstructionOmittedFrame": 168393,
+        "appliedOverlayPropsCanonicalSha256": "0ee635c9ca0984868b4193817cc1d949d0210aae201850878ea382c05dc4db40",
+        "applicationOverlayFile": "overlays/05-d7bd5c64cfb5.png",
+        "inspectedOverlayFile": "overlays/05-d7bd5c64cfb5.png",
+        "applicationOverlaySha256": "b783157bb1b0fa062adfa320eceb9ccd4f56f4ba38e5c23a574f4ca6145ee74c",
+        "overlaySha256": "b783157bb1b0fa062adfa320eceb9ccd4f56f4ba38e5c23a574f4ca6145ee74c"
+      },
+      {
+        "instructionId": "display-page-000004-002",
+        "requestedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+        "appliedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+        "appliedPresetRegistryVersion": "vertical-short-preset-registry-v001",
+        "alphaMax": 1,
+        "alphaBounds": {
+          "left": 250,
+          "top": 1386,
+          "right": 829,
+          "bottom": 1763,
+          "width": 579,
+          "height": 377
+        },
+        "lineCount": 2,
+        "lineAlphaBounds": [
+          {
+            "lineIndex": 0,
+            "left": 323,
+            "top": 1386,
+            "right": 745,
+            "bottom": 1563,
+            "width": 422,
+            "height": 177
+          },
+          {
+            "lineIndex": 1,
+            "left": 250,
+            "top": 1584,
+            "right": 829,
+            "bottom": 1763,
+            "width": 579,
+            "height": 179
+          }
+        ],
+        "visibilityComparisonBasis": "same-composite-with-instruction-omitted",
+        "representativeFrame": 218,
+        "changedPixelsAgainstInstructionOmittedFrame": 218156,
+        "appliedOverlayPropsCanonicalSha256": "36733b46c4bb1f0e2ce2e4dd0dc76ec3173ace312d69ea91dcf6a2e3ce4b7b3b",
+        "applicationOverlayFile": "overlays/06-9228093ad74a.png",
+        "inspectedOverlayFile": "overlays/06-9228093ad74a.png",
+        "applicationOverlaySha256": "25aface4c6bcccd139ad2cb72208def3fc762c4547f65cb14284d02297b66951",
+        "overlaySha256": "25aface4c6bcccd139ad2cb72208def3fc762c4547f65cb14284d02297b66951"
+      },
+      {
+        "instructionId": "display-page-000005-001",
+        "requestedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+        "appliedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+        "appliedPresetRegistryVersion": "vertical-short-preset-registry-v001",
+        "alphaMax": 1,
+        "alphaBounds": {
+          "left": 254,
+          "top": 1384,
+          "right": 834,
+          "bottom": 1763,
+          "width": 580,
+          "height": 379
+        },
+        "lineCount": 2,
+        "lineAlphaBounds": [
+          {
+            "lineIndex": 0,
+            "left": 330,
+            "top": 1384,
+            "right": 757,
+            "bottom": 1564,
+            "width": 427,
+            "height": 180
+          },
+          {
+            "lineIndex": 1,
+            "left": 254,
+            "top": 1581,
+            "right": 834,
+            "bottom": 1763,
+            "width": 580,
+            "height": 182
+          }
+        ],
+        "visibilityComparisonBasis": "same-composite-with-instruction-omitted",
+        "representativeFrame": 246,
+        "changedPixelsAgainstInstructionOmittedFrame": 219638,
+        "appliedOverlayPropsCanonicalSha256": "bca32f3f258097495962d81c260ecb2ef22a558a5a0ff21f44b93d215ab91fff",
+        "applicationOverlayFile": "overlays/07-b50a8aaeeb4e.png",
+        "inspectedOverlayFile": "overlays/07-b50a8aaeeb4e.png",
+        "applicationOverlaySha256": "eaf3f8ab8dd67d2f1f7fb3f3e1077a887e40d0a3eb8f86de467c087c33b1fa0f",
+        "overlaySha256": "eaf3f8ab8dd67d2f1f7fb3f3e1077a887e40d0a3eb8f86de467c087c33b1fa0f"
+      },
+      {
+        "instructionId": "display-page-000006-001",
+        "requestedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+        "appliedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+        "appliedPresetRegistryVersion": "vertical-short-preset-registry-v001",
+        "alphaMax": 1,
+        "alphaBounds": {
+          "left": 246,
+          "top": 1387,
+          "right": 824,
+          "bottom": 1766,
+          "width": 578,
+          "height": 379
+        },
+        "lineCount": 2,
+        "lineAlphaBounds": [
+          {
+            "lineIndex": 0,
+            "left": 317,
+            "top": 1387,
+            "right": 763,
+            "bottom": 1562,
+            "width": 446,
+            "height": 175
+          },
+          {
+            "lineIndex": 1,
+            "left": 246,
+            "top": 1584,
+            "right": 824,
+            "bottom": 1766,
+            "width": 578,
+            "height": 182
+          }
+        ],
+        "visibilityComparisonBasis": "same-composite-with-instruction-omitted",
+        "representativeFrame": 271,
+        "changedPixelsAgainstInstructionOmittedFrame": 218933,
+        "appliedOverlayPropsCanonicalSha256": "5712ae784abf16adeee553d51f689856a2866c4717953da1d350c6c940d1c9b7",
+        "applicationOverlayFile": "overlays/08-cb2131022d01.png",
+        "inspectedOverlayFile": "overlays/08-cb2131022d01.png",
+        "applicationOverlaySha256": "24e5b7bc152b92db2abf058e06b73db6b221b27e9ed84d891335083480377adc",
+        "overlaySha256": "24e5b7bc152b92db2abf058e06b73db6b221b27e9ed84d891335083480377adc"
+      },
+      {
+        "instructionId": "display-page-000007-001",
+        "requestedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+        "appliedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+        "appliedPresetRegistryVersion": "vertical-short-preset-registry-v001",
+        "alphaMax": 1,
+        "alphaBounds": {
+          "left": 183,
+          "top": 1382,
+          "right": 898,
+          "bottom": 1764,
+          "width": 715,
+          "height": 382
+        },
+        "lineCount": 2,
+        "lineAlphaBounds": [
+          {
+            "lineIndex": 0,
+            "left": 183,
+            "top": 1382,
+            "right": 898,
+            "bottom": 1565,
+            "width": 715,
+            "height": 183
+          },
+          {
+            "lineIndex": 1,
+            "left": 186,
+            "top": 1587,
+            "right": 878,
+            "bottom": 1764,
+            "width": 692,
+            "height": 177
+          }
+        ],
+        "visibilityComparisonBasis": "same-composite-with-instruction-omitted",
+        "representativeFrame": 308,
+        "changedPixelsAgainstInstructionOmittedFrame": 273021,
+        "appliedOverlayPropsCanonicalSha256": "270078330c5336afd35f34ae0d4437347d0a9f23bfd04dbd0e8a02a986b4dfa1",
+        "applicationOverlayFile": "overlays/09-00e0c25c623b.png",
+        "inspectedOverlayFile": "overlays/09-00e0c25c623b.png",
+        "applicationOverlaySha256": "a216e88a45ec245f3c18c4072cbc047dc389c764406e964eecd907e73106d046",
+        "overlaySha256": "a216e88a45ec245f3c18c4072cbc047dc389c764406e964eecd907e73106d046"
+      },
+      {
+        "instructionId": "display-page-000008-001",
+        "requestedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+        "appliedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+        "appliedPresetRegistryVersion": "vertical-short-preset-registry-v001",
+        "alphaMax": 1,
+        "alphaBounds": {
+          "left": 185,
+          "top": 1382,
+          "right": 883,
+          "bottom": 1765,
+          "width": 698,
+          "height": 383
+        },
+        "lineCount": 2,
+        "lineAlphaBounds": [
+          {
+            "lineIndex": 0,
+            "left": 246,
+            "top": 1382,
+            "right": 824,
+            "bottom": 1565,
+            "width": 578,
+            "height": 183
+          },
+          {
+            "lineIndex": 1,
+            "left": 185,
+            "top": 1581,
+            "right": 883,
+            "bottom": 1765,
+            "width": 698,
+            "height": 184
+          }
+        ],
+        "visibilityComparisonBasis": "same-composite-with-instruction-omitted",
+        "representativeFrame": 353,
+        "changedPixelsAgainstInstructionOmittedFrame": 267253,
+        "appliedOverlayPropsCanonicalSha256": "3e58f141bc791448bfa42b249023355b42c75987f91d123d3801495f075925bf",
+        "applicationOverlayFile": "overlays/10-442626299b6d.png",
+        "inspectedOverlayFile": "overlays/10-442626299b6d.png",
+        "applicationOverlaySha256": "97dec422eaee23ba9abc5ae51990720c0d2f7b7ab47381603444aea92fcf6110",
+        "overlaySha256": "97dec422eaee23ba9abc5ae51990720c0d2f7b7ab47381603444aea92fcf6110"
+      },
+      {
+        "instructionId": "display-page-000009-001",
+        "requestedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+        "appliedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+        "appliedPresetRegistryVersion": "vertical-short-preset-registry-v001",
+        "alphaMax": 1,
+        "alphaBounds": {
+          "left": 385,
+          "top": 1385,
+          "right": 691,
+          "bottom": 1766,
+          "width": 306,
+          "height": 381
+        },
+        "lineCount": 2,
+        "lineAlphaBounds": [
+          {
+            "lineIndex": 0,
+            "left": 447,
+            "top": 1385,
+            "right": 633,
+            "bottom": 1565,
+            "width": 186,
+            "height": 180
+          },
+          {
+            "lineIndex": 1,
+            "left": 385,
+            "top": 1584,
+            "right": 691,
+            "bottom": 1766,
+            "width": 306,
+            "height": 182
+          }
+        ],
+        "visibilityComparisonBasis": "same-composite-with-instruction-omitted",
+        "representativeFrame": 384,
+        "changedPixelsAgainstInstructionOmittedFrame": 116585,
+        "appliedOverlayPropsCanonicalSha256": "b09f8ff7f932e0315534b8f72403c48fb936d6605823b74cb2f15229cb5202f1",
+        "applicationOverlayFile": "overlays/11-1b8a87560617.png",
+        "inspectedOverlayFile": "overlays/11-1b8a87560617.png",
+        "applicationOverlaySha256": "66744c3908eb73011e1f494f1e0035906f137f008a4bead299d4ec97dc01366a",
+        "overlaySha256": "66744c3908eb73011e1f494f1e0035906f137f008a4bead299d4ec97dc01366a"
+      },
+      {
+        "instructionId": "display-page-000010-001",
+        "requestedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+        "appliedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+        "appliedPresetRegistryVersion": "vertical-short-preset-registry-v001",
+        "alphaMax": 1,
+        "alphaBounds": {
+          "left": 248,
+          "top": 1383,
+          "right": 825,
+          "bottom": 1765,
+          "width": 577,
+          "height": 382
+        },
+        "lineCount": 2,
+        "lineAlphaBounds": [
+          {
+            "lineIndex": 0,
+            "left": 253,
+            "top": 1383,
+            "right": 823,
+            "bottom": 1563,
+            "width": 570,
+            "height": 180
+          },
+          {
+            "lineIndex": 1,
+            "left": 248,
+            "top": 1585,
+            "right": 825,
+            "bottom": 1765,
+            "width": 577,
+            "height": 180
+          }
+        ],
+        "visibilityComparisonBasis": "same-composite-with-instruction-omitted",
+        "representativeFrame": 409,
+        "changedPixelsAgainstInstructionOmittedFrame": 220350,
+        "appliedOverlayPropsCanonicalSha256": "cfa24d35c544a2e0082e6b6a28703a30ad7f0e7c3aa91898612811e0f5879134",
+        "applicationOverlayFile": "overlays/12-f4b3bb9e5792.png",
+        "inspectedOverlayFile": "overlays/12-f4b3bb9e5792.png",
+        "applicationOverlaySha256": "aa72c3e16f59c23b779c9ce85a361bbaf27b0a57a3a5d0405ec590c03cc3e149",
+        "overlaySha256": "aa72c3e16f59c23b779c9ce85a361bbaf27b0a57a3a5d0405ec590c03cc3e149"
+      },
+      {
+        "instructionId": "display-page-000010-002",
+        "requestedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+        "appliedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+        "appliedPresetRegistryVersion": "vertical-short-preset-registry-v001",
+        "alphaMax": 1,
+        "alphaBounds": {
+          "left": 246,
+          "top": 1389,
+          "right": 821,
+          "bottom": 1764,
+          "width": 575,
+          "height": 375
+        },
+        "lineCount": 2,
+        "lineAlphaBounds": [
+          {
+            "lineIndex": 0,
+            "left": 252,
+            "top": 1389,
+            "right": 816,
+            "bottom": 1561,
+            "width": 564,
+            "height": 172
+          },
+          {
+            "lineIndex": 1,
+            "left": 246,
+            "top": 1586,
+            "right": 821,
+            "bottom": 1764,
+            "width": 575,
+            "height": 178
+          }
+        ],
+        "visibilityComparisonBasis": "same-composite-with-instruction-omitted",
+        "representativeFrame": 433,
+        "changedPixelsAgainstInstructionOmittedFrame": 215496,
+        "appliedOverlayPropsCanonicalSha256": "4c2ffa373e5810e38d29659bfd2b54811804d315306d0d6632dfc85c85040ff2",
+        "applicationOverlayFile": "overlays/13-7bf4cd247eb3.png",
+        "inspectedOverlayFile": "overlays/13-7bf4cd247eb3.png",
+        "applicationOverlaySha256": "1994881e48f4cc7518e8de5a2f5055f7d8b815c5337e78dcf02675120d4da503",
+        "overlaySha256": "1994881e48f4cc7518e8de5a2f5055f7d8b815c5337e78dcf02675120d4da503"
+      },
+      {
+        "instructionId": "display-page-000011-001",
+        "requestedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+        "appliedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+        "appliedPresetRegistryVersion": "vertical-short-preset-registry-v001",
+        "alphaMax": 1,
+        "alphaBounds": {
+          "left": 251,
+          "top": 1383,
+          "right": 821,
+          "bottom": 1765,
+          "width": 570,
+          "height": 382
+        },
+        "lineCount": 2,
+        "lineAlphaBounds": [
+          {
+            "lineIndex": 0,
+            "left": 316,
+            "top": 1383,
+            "right": 768,
+            "bottom": 1564,
+            "width": 452,
+            "height": 181
+          },
+          {
+            "lineIndex": 1,
+            "left": 251,
+            "top": 1589,
+            "right": 821,
+            "bottom": 1765,
+            "width": 570,
+            "height": 176
+          }
+        ],
+        "visibilityComparisonBasis": "same-composite-with-instruction-omitted",
+        "representativeFrame": 461,
+        "changedPixelsAgainstInstructionOmittedFrame": 217667,
+        "appliedOverlayPropsCanonicalSha256": "b320f5de6e185d771354bad71b33f8ea9de8300b959c76b8973a48029860a058",
+        "applicationOverlayFile": "overlays/14-069b3edeb185.png",
+        "inspectedOverlayFile": "overlays/14-069b3edeb185.png",
+        "applicationOverlaySha256": "1e294b74b6650d5e84f2defd7569ecf49f80cb10c72c77bcb70640e19f3c5f8f",
+        "overlaySha256": "1e294b74b6650d5e84f2defd7569ecf49f80cb10c72c77bcb70640e19f3c5f8f"
+      },
+      {
+        "instructionId": "display-page-000012-001",
+        "requestedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+        "appliedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+        "appliedPresetRegistryVersion": "vertical-short-preset-registry-v001",
+        "alphaMax": 1,
+        "alphaBounds": {
+          "left": 263,
+          "top": 1387,
+          "right": 822,
+          "bottom": 1763,
+          "width": 559,
+          "height": 376
+        },
+        "lineCount": 2,
+        "lineAlphaBounds": [
+          {
+            "lineIndex": 0,
+            "left": 320,
+            "top": 1387,
+            "right": 750,
+            "bottom": 1563,
+            "width": 430,
+            "height": 176
+          },
+          {
+            "lineIndex": 1,
+            "left": 263,
+            "top": 1588,
+            "right": 822,
+            "bottom": 1763,
+            "width": 559,
+            "height": 175
+          }
+        ],
+        "visibilityComparisonBasis": "same-composite-with-instruction-omitted",
+        "representativeFrame": 501,
+        "changedPixelsAgainstInstructionOmittedFrame": 210151,
+        "appliedOverlayPropsCanonicalSha256": "758daac45dcf99820b6b4da5c5ad5a4f2f2dea0675e36855d948589cf03f2a3f",
+        "applicationOverlayFile": "overlays/15-759ed770f3de.png",
+        "inspectedOverlayFile": "overlays/15-759ed770f3de.png",
+        "applicationOverlaySha256": "29b20037bc8b0bb47c1e53f578b02b2980b876cc3e581df999a36110db9939c8",
+        "overlaySha256": "29b20037bc8b0bb47c1e53f578b02b2980b876cc3e581df999a36110db9939c8"
+      },
+      {
+        "instructionId": "display-page-000013-001",
+        "requestedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+        "appliedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+        "appliedPresetRegistryVersion": "vertical-short-preset-registry-v001",
+        "alphaMax": 1,
+        "alphaBounds": {
+          "left": 214,
+          "top": 1383,
+          "right": 864,
+          "bottom": 1765,
+          "width": 650,
+          "height": 382
+        },
+        "lineCount": 2,
+        "lineAlphaBounds": [
+          {
+            "lineIndex": 0,
+            "left": 214,
+            "top": 1383,
+            "right": 864,
+            "bottom": 1561,
+            "width": 650,
+            "height": 178
+          },
+          {
+            "lineIndex": 1,
+            "left": 245,
+            "top": 1584,
+            "right": 821,
+            "bottom": 1765,
+            "width": 576,
+            "height": 181
+          }
+        ],
+        "visibilityComparisonBasis": "same-composite-with-instruction-omitted",
+        "representativeFrame": 546,
+        "changedPixelsAgainstInstructionOmittedFrame": 248162,
+        "appliedOverlayPropsCanonicalSha256": "1047b10a040fb3217bd961ab89a1df061c8206b3582241a1979e78ff92b91254",
+        "applicationOverlayFile": "overlays/16-af5a54b48998.png",
+        "inspectedOverlayFile": "overlays/16-af5a54b48998.png",
+        "applicationOverlaySha256": "1d61b5c8b74e372a27899cea02eefbc8fef14d6d092d7343b45c2a56f29358fe",
+        "overlaySha256": "1d61b5c8b74e372a27899cea02eefbc8fef14d6d092d7343b45c2a56f29358fe"
+      },
+      {
+        "instructionId": "display-page-000013-002",
+        "requestedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+        "appliedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+        "appliedPresetRegistryVersion": "vertical-short-preset-registry-v001",
+        "alphaMax": 1,
+        "alphaBounds": {
+          "left": 250,
+          "top": 1382,
+          "right": 833,
+          "bottom": 1764,
+          "width": 583,
+          "height": 382
+        },
+        "lineCount": 2,
+        "lineAlphaBounds": [
+          {
+            "lineIndex": 0,
+            "left": 250,
+            "top": 1382,
+            "right": 833,
+            "bottom": 1565,
+            "width": 583,
+            "height": 183
+          },
+          {
+            "lineIndex": 1,
+            "left": 256,
+            "top": 1588,
+            "right": 809,
+            "bottom": 1764,
+            "width": 553,
+            "height": 176
+          }
+        ],
+        "visibilityComparisonBasis": "same-composite-with-instruction-omitted",
+        "representativeFrame": 591,
+        "changedPixelsAgainstInstructionOmittedFrame": 222603,
+        "appliedOverlayPropsCanonicalSha256": "afb1d082e12435a1e1d819eff7a9b0b72da94261da9e0b571c220c25603171e2",
+        "applicationOverlayFile": "overlays/17-c2a8d134a939.png",
+        "inspectedOverlayFile": "overlays/17-c2a8d134a939.png",
+        "applicationOverlaySha256": "3e0a3e14b353337e8b38aab7b76b076770a668a014997f326673c7ef5ed06d0a",
+        "overlaySha256": "3e0a3e14b353337e8b38aab7b76b076770a668a014997f326673c7ef5ed06d0a"
+      },
+      {
+        "instructionId": "display-page-000014-001",
+        "requestedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+        "appliedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+        "appliedPresetRegistryVersion": "vertical-short-preset-registry-v001",
+        "alphaMax": 1,
+        "alphaBounds": {
+          "left": 184,
+          "top": 1386,
+          "right": 888,
+          "bottom": 1764,
+          "width": 704,
+          "height": 378
+        },
+        "lineCount": 2,
+        "lineAlphaBounds": [
+          {
+            "lineIndex": 0,
+            "left": 185,
+            "top": 1386,
+            "right": 883,
+            "bottom": 1564,
+            "width": 698,
+            "height": 178
+          },
+          {
+            "lineIndex": 1,
+            "left": 184,
+            "top": 1583,
+            "right": 888,
+            "bottom": 1764,
+            "width": 704,
+            "height": 181
+          }
+        ],
+        "visibilityComparisonBasis": "same-composite-with-instruction-omitted",
+        "representativeFrame": 639,
+        "changedPixelsAgainstInstructionOmittedFrame": 266057,
+        "appliedOverlayPropsCanonicalSha256": "6047a73060b917787a91a48ac8cd06de027a3b78ddece2004b852ee78ea06ea4",
+        "applicationOverlayFile": "overlays/18-2bae1ae78bc4.png",
+        "inspectedOverlayFile": "overlays/18-2bae1ae78bc4.png",
+        "applicationOverlaySha256": "fc12550b48ea87d60571c6b4d452327b4ba1f863cd018447640f8ae3f23d1929",
+        "overlaySha256": "fc12550b48ea87d60571c6b4d452327b4ba1f863cd018447640f8ae3f23d1929"
+      },
+      {
+        "instructionId": "display-page-000015-001",
+        "requestedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+        "appliedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+        "appliedPresetRegistryVersion": "vertical-short-preset-registry-v001",
+        "alphaMax": 1,
+        "alphaBounds": {
+          "left": 111,
+          "top": 1380,
+          "right": 955,
+          "bottom": 1766,
+          "width": 844,
+          "height": 386
+        },
+        "lineCount": 2,
+        "lineAlphaBounds": [
+          {
+            "lineIndex": 0,
+            "left": 182,
+            "top": 1380,
+            "right": 898,
+            "bottom": 1565,
+            "width": 716,
+            "height": 185
+          },
+          {
+            "lineIndex": 1,
+            "left": 111,
+            "top": 1583,
+            "right": 955,
+            "bottom": 1766,
+            "width": 844,
+            "height": 183
+          }
+        ],
+        "visibilityComparisonBasis": "same-composite-with-instruction-omitted",
+        "representativeFrame": 740,
+        "changedPixelsAgainstInstructionOmittedFrame": 325462,
+        "appliedOverlayPropsCanonicalSha256": "b68f08f6b96c7ee345c37a72f7c44c7cb66038337931e38aa90d5c9f63a64b35",
+        "applicationOverlayFile": "overlays/19-6a1c22199737.png",
+        "inspectedOverlayFile": "overlays/19-6a1c22199737.png",
+        "applicationOverlaySha256": "bc9f28105fae1a91f8a00d0e4c4f589bf6c9bf285395bc61c6933b6a2a872883",
+        "overlaySha256": "bc9f28105fae1a91f8a00d0e4c4f589bf6c9bf285395bc61c6933b6a2a872883"
+      },
+      {
+        "instructionId": "display-page-000016-001",
+        "requestedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+        "appliedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+        "appliedPresetRegistryVersion": "vertical-short-preset-registry-v001",
+        "alphaMax": 1,
+        "alphaBounds": {
+          "left": 451,
+          "top": 1386,
+          "right": 630,
+          "bottom": 1762,
+          "width": 179,
+          "height": 376
+        },
+        "lineCount": 2,
+        "lineAlphaBounds": [
+          {
+            "lineIndex": 0,
+            "left": 458,
+            "top": 1386,
+            "right": 616,
+            "bottom": 1562,
+            "width": 158,
+            "height": 176
+          },
+          {
+            "lineIndex": 1,
+            "left": 451,
+            "top": 1588,
+            "right": 630,
+            "bottom": 1762,
+            "width": 179,
+            "height": 174
+          }
+        ],
+        "visibilityComparisonBasis": "same-composite-with-instruction-omitted",
+        "representativeFrame": 817,
+        "changedPixelsAgainstInstructionOmittedFrame": 67296,
+        "appliedOverlayPropsCanonicalSha256": "43a242f206ffcb74c9475e5e5626f0fd6d41fbeb25584f23981a839368c8c641",
+        "applicationOverlayFile": "overlays/20-e29e015d49c4.png",
+        "inspectedOverlayFile": "overlays/20-e29e015d49c4.png",
+        "applicationOverlaySha256": "ce33e43f54edbad48777ea6490de2f49b6e19dae851acf5e863548169ec6e19a",
+        "overlaySha256": "ce33e43f54edbad48777ea6490de2f49b6e19dae851acf5e863548169ec6e19a"
+      },
+      {
+        "instructionId": "display-page-000017-001",
+        "requestedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+        "appliedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+        "appliedPresetRegistryVersion": "vertical-short-preset-registry-v001",
+        "alphaMax": 1,
+        "alphaBounds": {
+          "left": 390,
+          "top": 1396,
+          "right": 700,
+          "bottom": 1763,
+          "width": 310,
+          "height": 367
+        },
+        "lineCount": 2,
+        "lineAlphaBounds": [
+          {
+            "lineIndex": 0,
+            "left": 453,
+            "top": 1396,
+            "right": 632,
+            "bottom": 1560,
+            "width": 179,
+            "height": 164
+          },
+          {
+            "lineIndex": 1,
+            "left": 390,
+            "top": 1588,
+            "right": 700,
+            "bottom": 1763,
+            "width": 310,
+            "height": 175
+          }
+        ],
+        "visibilityComparisonBasis": "same-composite-with-instruction-omitted",
+        "representativeFrame": 832,
+        "changedPixelsAgainstInstructionOmittedFrame": 113752,
+        "appliedOverlayPropsCanonicalSha256": "9015418a634e5393eb09fe1f6353cafc05da520d98a3c3e8d1bdfebd057377e2",
+        "applicationOverlayFile": "overlays/21-205e41fde69e.png",
+        "inspectedOverlayFile": "overlays/21-205e41fde69e.png",
+        "applicationOverlaySha256": "15f8b580ac18019ea054f517c1ca9147f99f394571d7a686ec33e7ace3ed5b6b",
+        "overlaySha256": "15f8b580ac18019ea054f517c1ca9147f99f394571d7a686ec33e7ace3ed5b6b"
+      },
+      {
+        "instructionId": "display-page-000018-001",
+        "requestedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+        "appliedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+        "appliedPresetRegistryVersion": "vertical-short-preset-registry-v001",
+        "alphaMax": 1,
+        "alphaBounds": {
+          "left": 179,
+          "top": 1381,
+          "right": 886,
+          "bottom": 1766,
+          "width": 707,
+          "height": 385
+        },
+        "lineCount": 2,
+        "lineAlphaBounds": [
+          {
+            "lineIndex": 0,
+            "left": 246,
+            "top": 1381,
+            "right": 834,
+            "bottom": 1565,
+            "width": 588,
+            "height": 184
+          },
+          {
+            "lineIndex": 1,
+            "left": 179,
+            "top": 1583,
+            "right": 886,
+            "bottom": 1766,
+            "width": 707,
+            "height": 183
+          }
+        ],
+        "visibilityComparisonBasis": "same-composite-with-instruction-omitted",
+        "representativeFrame": 852,
+        "changedPixelsAgainstInstructionOmittedFrame": 272030,
+        "appliedOverlayPropsCanonicalSha256": "78763af505b4ca45518ca6aad5808255ee7de510684bdb1839ceab3ace46f2b3",
+        "applicationOverlayFile": "overlays/22-e97778f17002.png",
+        "inspectedOverlayFile": "overlays/22-e97778f17002.png",
+        "applicationOverlaySha256": "9dc5fad0bbd113476db79c55623ac5c50a3cafe60324ff661a67132e8b61523a",
+        "overlaySha256": "9dc5fad0bbd113476db79c55623ac5c50a3cafe60324ff661a67132e8b61523a"
+      },
+      {
+        "instructionId": "display-page-000019-001",
+        "requestedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+        "appliedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+        "appliedPresetRegistryVersion": "vertical-short-preset-registry-v001",
+        "alphaMax": 1,
+        "alphaBounds": {
+          "left": 323,
+          "top": 1382,
+          "right": 736,
+          "bottom": 1763,
+          "width": 413,
+          "height": 381
+        },
+        "lineCount": 2,
+        "lineAlphaBounds": [
+          {
+            "lineIndex": 0,
+            "left": 380,
+            "top": 1382,
+            "right": 700,
+            "bottom": 1565,
+            "width": 320,
+            "height": 183
+          },
+          {
+            "lineIndex": 1,
+            "left": 323,
+            "top": 1587,
+            "right": 736,
+            "bottom": 1763,
+            "width": 413,
+            "height": 176
+          }
+        ],
+        "visibilityComparisonBasis": "same-composite-with-instruction-omitted",
+        "representativeFrame": 878,
+        "changedPixelsAgainstInstructionOmittedFrame": 157283,
+        "appliedOverlayPropsCanonicalSha256": "401c8466810b0bc5333016bcdc4882fd299e6fa5363a0cc94f1b417d53c77818",
+        "applicationOverlayFile": "overlays/23-73ee0af27a56.png",
+        "inspectedOverlayFile": "overlays/23-73ee0af27a56.png",
+        "applicationOverlaySha256": "500231987807f4855aba795a4eac9d5e515d587503fb8429124c4867e06525e6",
+        "overlaySha256": "500231987807f4855aba795a4eac9d5e515d587503fb8429124c4867e06525e6"
+      },
+      {
+        "instructionId": "display-page-000020-001",
+        "requestedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+        "appliedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+        "appliedPresetRegistryVersion": "vertical-short-preset-registry-v001",
+        "alphaMax": 1,
+        "alphaBounds": {
+          "left": 178,
+          "top": 1380,
+          "right": 880,
+          "bottom": 1766,
+          "width": 702,
+          "height": 386
+        },
+        "lineCount": 2,
+        "lineAlphaBounds": [
+          {
+            "lineIndex": 0,
+            "left": 212,
+            "top": 1380,
+            "right": 866,
+            "bottom": 1565,
+            "width": 654,
+            "height": 185
+          },
+          {
+            "lineIndex": 1,
+            "left": 178,
+            "top": 1583,
+            "right": 880,
+            "bottom": 1766,
+            "width": 702,
+            "height": 183
+          }
+        ],
+        "visibilityComparisonBasis": "same-composite-with-instruction-omitted",
+        "representativeFrame": 924,
+        "changedPixelsAgainstInstructionOmittedFrame": 270749,
+        "appliedOverlayPropsCanonicalSha256": "708b50069d18f3d0b7aa2265cb2e9f914c27880d7893d11a1d302157ea951236",
+        "applicationOverlayFile": "overlays/24-b7bbb49d4aac.png",
+        "inspectedOverlayFile": "overlays/24-b7bbb49d4aac.png",
+        "applicationOverlaySha256": "9dc743092ef0ca39a01152538c61aa8fe970bedfae729764560e4041de7fb41b",
+        "overlaySha256": "9dc743092ef0ca39a01152538c61aa8fe970bedfae729764560e4041de7fb41b"
+      },
+      {
+        "instructionId": "display-page-000021-001",
+        "requestedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+        "appliedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+        "appliedPresetRegistryVersion": "vertical-short-preset-registry-v001",
+        "alphaMax": 1,
+        "alphaBounds": {
+          "left": 320,
+          "top": 1387,
+          "right": 764,
+          "bottom": 1763,
+          "width": 444,
+          "height": 376
+        },
+        "lineCount": 2,
+        "lineAlphaBounds": [
+          {
+            "lineIndex": 0,
+            "left": 387,
+            "top": 1387,
+            "right": 626,
+            "bottom": 1563,
+            "width": 239,
+            "height": 176
+          },
+          {
+            "lineIndex": 1,
+            "left": 320,
+            "top": 1584,
+            "right": 764,
+            "bottom": 1763,
+            "width": 444,
+            "height": 179
+          }
+        ],
+        "visibilityComparisonBasis": "same-composite-with-instruction-omitted",
+        "representativeFrame": 963,
+        "changedPixelsAgainstInstructionOmittedFrame": 166923,
+        "appliedOverlayPropsCanonicalSha256": "bc42a13840e58d11069480dc158142efbef58b04d833d921f6e3a4344b7f63b4",
+        "applicationOverlayFile": "overlays/25-81b8510181c7.png",
+        "inspectedOverlayFile": "overlays/25-81b8510181c7.png",
+        "applicationOverlaySha256": "87f3852f1201d661e8cf08e53b8d48b0385e6ee739e7e943c6d26bbae566277f",
+        "overlaySha256": "87f3852f1201d661e8cf08e53b8d48b0385e6ee739e7e943c6d26bbae566277f"
+      },
+      {
+        "instructionId": "display-page-000022-001",
+        "requestedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+        "appliedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+        "appliedPresetRegistryVersion": "vertical-short-preset-registry-v001",
+        "alphaMax": 1,
+        "alphaBounds": {
+          "left": 263,
+          "top": 1387,
+          "right": 816,
+          "bottom": 1763,
+          "width": 553,
+          "height": 376
+        },
+        "lineCount": 2,
+        "lineAlphaBounds": [
+          {
+            "lineIndex": 0,
+            "left": 320,
+            "top": 1387,
+            "right": 758,
+            "bottom": 1563,
+            "width": 438,
+            "height": 176
+          },
+          {
+            "lineIndex": 1,
+            "left": 263,
+            "top": 1588,
+            "right": 816,
+            "bottom": 1763,
+            "width": 553,
+            "height": 175
+          }
+        ],
+        "visibilityComparisonBasis": "same-composite-with-instruction-omitted",
+        "representativeFrame": 982,
+        "changedPixelsAgainstInstructionOmittedFrame": 207862,
+        "appliedOverlayPropsCanonicalSha256": "c8a3d7f8f521b4e26357c65b7fe25f23e812a882edfb2fed9a7bbc3f04a9f8f8",
+        "applicationOverlayFile": "overlays/26-55857566c5d1.png",
+        "inspectedOverlayFile": "overlays/26-55857566c5d1.png",
+        "applicationOverlaySha256": "f1808626798c9843b3fb031fd7c4091698125eab7694a63bc2ab93617cfe9d83",
+        "overlaySha256": "f1808626798c9843b3fb031fd7c4091698125eab7694a63bc2ab93617cfe9d83"
+      },
+      {
+        "instructionId": "display-page-000022-002",
+        "requestedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+        "appliedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+        "appliedPresetRegistryVersion": "vertical-short-preset-registry-v001",
+        "alphaMax": 1,
+        "alphaBounds": {
+          "left": 252,
+          "top": 1384,
+          "right": 816,
+          "bottom": 1765,
+          "width": 564,
+          "height": 381
+        },
+        "lineCount": 2,
+        "lineAlphaBounds": [
+          {
+            "lineIndex": 0,
+            "left": 252,
+            "top": 1384,
+            "right": 816,
+            "bottom": 1564,
+            "width": 564,
+            "height": 180
+          },
+          {
+            "lineIndex": 1,
+            "left": 252,
+            "top": 1587,
+            "right": 816,
+            "bottom": 1765,
+            "width": 564,
+            "height": 178
+          }
+        ],
+        "visibilityComparisonBasis": "same-composite-with-instruction-omitted",
+        "representativeFrame": 1008,
+        "changedPixelsAgainstInstructionOmittedFrame": 214834,
+        "appliedOverlayPropsCanonicalSha256": "62ecd1aa4d7a412aeaf5103f9ff73e1b707f6bfe7bd27927252050c842088d47",
+        "applicationOverlayFile": "overlays/27-a2546cfc55fc.png",
+        "inspectedOverlayFile": "overlays/27-a2546cfc55fc.png",
+        "applicationOverlaySha256": "52c323cce5ac700bc86663d3df48ef6c3ae943a34bd8d9bb8602470845873c3a",
+        "overlaySha256": "52c323cce5ac700bc86663d3df48ef6c3ae943a34bd8d9bb8602470845873c3a"
+      },
+      {
+        "instructionId": "display-page-000023-001",
+        "requestedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+        "appliedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+        "appliedPresetRegistryVersion": "vertical-short-preset-registry-v001",
+        "alphaMax": 1,
+        "alphaBounds": {
+          "left": 145,
+          "top": 1380,
+          "right": 935,
+          "bottom": 1761,
+          "width": 790,
+          "height": 381
+        },
+        "lineCount": 2,
+        "lineAlphaBounds": [
+          {
+            "lineIndex": 0,
+            "left": 145,
+            "top": 1380,
+            "right": 935,
+            "bottom": 1565,
+            "width": 790,
+            "height": 185
+          },
+          {
+            "lineIndex": 1,
+            "left": 185,
+            "top": 1596,
+            "right": 877,
+            "bottom": 1761,
+            "width": 692,
+            "height": 165
+          }
+        ],
+        "visibilityComparisonBasis": "same-composite-with-instruction-omitted",
+        "representativeFrame": 1040,
+        "changedPixelsAgainstInstructionOmittedFrame": 300843,
+        "appliedOverlayPropsCanonicalSha256": "810417bd038cb5ac62a5a37f30a40bfc8acb3fd083b787170eabac0fa698f7a2",
+        "applicationOverlayFile": "overlays/28-bf75e3479386.png",
+        "inspectedOverlayFile": "overlays/28-bf75e3479386.png",
+        "applicationOverlaySha256": "0e2a2454805454071893a0a7beed25810a6eedfd7ccce94429df543bb1549570",
+        "overlaySha256": "0e2a2454805454071893a0a7beed25810a6eedfd7ccce94429df543bb1549570"
+      },
+      {
+        "instructionId": "display-page-000024-001",
+        "requestedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+        "appliedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+        "appliedPresetRegistryVersion": "vertical-short-preset-registry-v001",
+        "alphaMax": 1,
+        "alphaBounds": {
+          "left": 111,
+          "top": 1383,
+          "right": 956,
+          "bottom": 1766,
+          "width": 845,
+          "height": 383
+        },
+        "lineCount": 2,
+        "lineAlphaBounds": [
+          {
+            "lineIndex": 0,
+            "left": 182,
+            "top": 1383,
+            "right": 899,
+            "bottom": 1565,
+            "width": 717,
+            "height": 182
+          },
+          {
+            "lineIndex": 1,
+            "left": 111,
+            "top": 1583,
+            "right": 956,
+            "bottom": 1766,
+            "width": 845,
+            "height": 183
+          }
+        ],
+        "visibilityComparisonBasis": "same-composite-with-instruction-omitted",
+        "representativeFrame": 1094,
+        "changedPixelsAgainstInstructionOmittedFrame": 323540,
+        "appliedOverlayPropsCanonicalSha256": "e31d10bfb2087566cd2dc842202d50554a55f8f340b9c069845f18cac4e2a6d9",
+        "applicationOverlayFile": "overlays/29-98eae09f7b4f.png",
+        "inspectedOverlayFile": "overlays/29-98eae09f7b4f.png",
+        "applicationOverlaySha256": "b5e48a279eea3a7f1137b6231131872ce1916fe6c5355955da7c3aaa7753c542",
+        "overlaySha256": "b5e48a279eea3a7f1137b6231131872ce1916fe6c5355955da7c3aaa7753c542"
+      },
+      {
+        "instructionId": "display-page-000025-001",
+        "requestedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+        "appliedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+        "appliedPresetRegistryVersion": "vertical-short-preset-registry-v001",
+        "alphaMax": 1,
+        "alphaBounds": {
+          "left": 179,
+          "top": 1380,
+          "right": 898,
+          "bottom": 1765,
+          "width": 719,
+          "height": 385
+        },
+        "lineCount": 2,
+        "lineAlphaBounds": [
+          {
+            "lineIndex": 0,
+            "left": 179,
+            "top": 1380,
+            "right": 898,
+            "bottom": 1565,
+            "width": 719,
+            "height": 185
+          },
+          {
+            "lineIndex": 1,
+            "left": 185,
+            "top": 1581,
+            "right": 883,
+            "bottom": 1765,
+            "width": 698,
+            "height": 184
+          }
+        ],
+        "visibilityComparisonBasis": "same-composite-with-instruction-omitted",
+        "representativeFrame": 1161,
+        "changedPixelsAgainstInstructionOmittedFrame": 276684,
+        "appliedOverlayPropsCanonicalSha256": "6b73bf7ab08d561c81a9ea0d6f5017288706401c8511b878446b093324dbf726",
+        "applicationOverlayFile": "overlays/30-545020f3d9a2.png",
+        "inspectedOverlayFile": "overlays/30-545020f3d9a2.png",
+        "applicationOverlaySha256": "edc955a7020f284f1e3cfda0c9b2f166419d8d8bd8c8df9e3fbaadf2865aa520",
+        "overlaySha256": "edc955a7020f284f1e3cfda0c9b2f166419d8d8bd8c8df9e3fbaadf2865aa520"
+      },
+      {
+        "instructionId": "display-page-000026-001",
+        "requestedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+        "appliedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+        "appliedPresetRegistryVersion": "vertical-short-preset-registry-v001",
+        "alphaMax": 1,
+        "alphaBounds": {
+          "left": 316,
+          "top": 1384,
+          "right": 766,
+          "bottom": 1762,
+          "width": 450,
+          "height": 378
+        },
+        "lineCount": 2,
+        "lineAlphaBounds": [
+          {
+            "lineIndex": 0,
+            "left": 383,
+            "top": 1384,
+            "right": 684,
+            "bottom": 1564,
+            "width": 301,
+            "height": 180
+          },
+          {
+            "lineIndex": 1,
+            "left": 316,
+            "top": 1589,
+            "right": 766,
+            "bottom": 1762,
+            "width": 450,
+            "height": 173
+          }
+        ],
+        "visibilityComparisonBasis": "same-composite-with-instruction-omitted",
+        "representativeFrame": 1197,
+        "changedPixelsAgainstInstructionOmittedFrame": 170077,
+        "appliedOverlayPropsCanonicalSha256": "a04024f1cdb802f8b92afd09cb93e70d860e8102d81a92013bb39112fbb5acf8",
+        "applicationOverlayFile": "overlays/31-76880194bb71.png",
+        "inspectedOverlayFile": "overlays/31-76880194bb71.png",
+        "applicationOverlaySha256": "4f7103c4e2b33043d8acad9f1594c3b39b602bbc3b71495b27b869706cc5e40d",
+        "overlaySha256": "4f7103c4e2b33043d8acad9f1594c3b39b602bbc3b71495b27b869706cc5e40d"
+      },
+      {
+        "instructionId": "display-page-000027-001",
+        "requestedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+        "appliedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+        "appliedPresetRegistryVersion": "vertical-short-preset-registry-v001",
+        "alphaMax": 1,
+        "alphaBounds": {
+          "left": 317,
+          "top": 1387,
+          "right": 762,
+          "bottom": 1763,
+          "width": 445,
+          "height": 376
+        },
+        "lineCount": 2,
+        "lineAlphaBounds": [
+          {
+            "lineIndex": 0,
+            "left": 319,
+            "top": 1387,
+            "right": 762,
+            "bottom": 1562,
+            "width": 443,
+            "height": 175
+          },
+          {
+            "lineIndex": 1,
+            "left": 317,
+            "top": 1588,
+            "right": 749,
+            "bottom": 1763,
+            "width": 432,
+            "height": 175
+          }
+        ],
+        "visibilityComparisonBasis": "same-composite-with-instruction-omitted",
+        "representativeFrame": 1211,
+        "changedPixelsAgainstInstructionOmittedFrame": 167286,
+        "appliedOverlayPropsCanonicalSha256": "2de4fcc9f9c1343cf41fc0db6a865f8d844e14115fd828b5c7ef28cfc38e2c42",
+        "applicationOverlayFile": "overlays/32-47473ba94fc0.png",
+        "inspectedOverlayFile": "overlays/32-47473ba94fc0.png",
+        "applicationOverlaySha256": "b67f435dbbb161c3cdca458facfb2ca97c808ec3d83eebff4d204634e99560b8",
+        "overlaySha256": "b67f435dbbb161c3cdca458facfb2ca97c808ec3d83eebff4d204634e99560b8"
+      },
+      {
+        "instructionId": "display-page-000027-002",
+        "requestedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+        "appliedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+        "appliedPresetRegistryVersion": "vertical-short-preset-registry-v001",
+        "alphaMax": 1,
+        "alphaBounds": {
+          "left": 251,
+          "top": 1383,
+          "right": 810,
+          "bottom": 1764,
+          "width": 559,
+          "height": 381
+        },
+        "lineCount": 2,
+        "lineAlphaBounds": [
+          {
+            "lineIndex": 0,
+            "left": 316,
+            "top": 1383,
+            "right": 768,
+            "bottom": 1564,
+            "width": 452,
+            "height": 181
+          },
+          {
+            "lineIndex": 1,
+            "left": 251,
+            "top": 1587,
+            "right": 810,
+            "bottom": 1764,
+            "width": 559,
+            "height": 177
+          }
+        ],
+        "visibilityComparisonBasis": "same-composite-with-instruction-omitted",
+        "representativeFrame": 1266,
+        "changedPixelsAgainstInstructionOmittedFrame": 212653,
+        "appliedOverlayPropsCanonicalSha256": "3473d6dae7e69e73e837b279936d89947af4efe2bfa4fd961f6b29f46f013811",
+        "applicationOverlayFile": "overlays/33-c080fba6a369.png",
+        "inspectedOverlayFile": "overlays/33-c080fba6a369.png",
+        "applicationOverlaySha256": "1c481757e9b37c745f5ceb1cf2027a0a86af329f3c661abf215b061cd9911c91",
+        "overlaySha256": "1c481757e9b37c745f5ceb1cf2027a0a86af329f3c661abf215b061cd9911c91"
+      },
+      {
+        "instructionId": "display-page-000028-001",
+        "requestedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+        "appliedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+        "appliedPresetRegistryVersion": "vertical-short-preset-registry-v001",
+        "alphaMax": 1,
+        "alphaBounds": {
+          "left": 256,
+          "top": 1386,
+          "right": 814,
+          "bottom": 1766,
+          "width": 558,
+          "height": 380
+        },
+        "lineCount": 2,
+        "lineAlphaBounds": [
+          {
+            "lineIndex": 0,
+            "left": 317,
+            "top": 1386,
+            "right": 760,
+            "bottom": 1562,
+            "width": 443,
+            "height": 176
+          },
+          {
+            "lineIndex": 1,
+            "left": 256,
+            "top": 1587,
+            "right": 814,
+            "bottom": 1766,
+            "width": 558,
+            "height": 179
+          }
+        ],
+        "visibilityComparisonBasis": "same-composite-with-instruction-omitted",
+        "representativeFrame": 1339,
+        "changedPixelsAgainstInstructionOmittedFrame": 212001,
+        "appliedOverlayPropsCanonicalSha256": "0262c1c6fb28c27de17ec4f85e74490096b181251f9d8efccdaca2e7d1c44c5a",
+        "applicationOverlayFile": "overlays/34-84c833d2ac59.png",
+        "inspectedOverlayFile": "overlays/34-84c833d2ac59.png",
+        "applicationOverlaySha256": "0c318f360ec7ef2743ce27fcc6b611a65484bbf3c756858023bd36b09aa3f8cc",
+        "overlaySha256": "0c318f360ec7ef2743ce27fcc6b611a65484bbf3c756858023bd36b09aa3f8cc"
+      },
+      {
+        "instructionId": "display-page-000029-001",
+        "requestedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+        "appliedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+        "appliedPresetRegistryVersion": "vertical-short-preset-registry-v001",
+        "alphaMax": 1,
+        "alphaBounds": {
+          "left": 453,
+          "top": 1388,
+          "right": 628,
+          "bottom": 1763,
+          "width": 175,
+          "height": 375
+        },
+        "lineCount": 2,
+        "lineAlphaBounds": [
+          {
+            "lineIndex": 0,
+            "left": 453,
+            "top": 1388,
+            "right": 628,
+            "bottom": 1564,
+            "width": 175,
+            "height": 176
+          },
+          {
+            "lineIndex": 1,
+            "left": 454,
+            "top": 1661,
+            "right": 559,
+            "bottom": 1763,
+            "width": 105,
+            "height": 102
+          }
+        ],
+        "visibilityComparisonBasis": "same-composite-with-instruction-omitted",
+        "representativeFrame": 1366,
+        "changedPixelsAgainstInstructionOmittedFrame": 65625,
+        "appliedOverlayPropsCanonicalSha256": "a3c2a1509c04782cb74283d43cd0cd966116db5ff836ab47fa160b407798b9d7",
+        "applicationOverlayFile": "overlays/35-9638acbfcfaf.png",
+        "inspectedOverlayFile": "overlays/35-9638acbfcfaf.png",
+        "applicationOverlaySha256": "53d5823d70f405b059f7a2887b7b2380acca8c7d36f0f918ee9860b8507513e0",
+        "overlaySha256": "53d5823d70f405b059f7a2887b7b2380acca8c7d36f0f918ee9860b8507513e0"
+      },
+      {
+        "instructionId": "display-page-000030-001",
+        "requestedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+        "appliedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+        "appliedPresetRegistryVersion": "vertical-short-preset-registry-v001",
+        "alphaMax": 1,
+        "alphaBounds": {
+          "left": 246,
+          "top": 1383,
+          "right": 835,
+          "bottom": 1766,
+          "width": 589,
+          "height": 383
+        },
+        "lineCount": 2,
+        "lineAlphaBounds": [
+          {
+            "lineIndex": 0,
+            "left": 250,
+            "top": 1383,
+            "right": 835,
+            "bottom": 1566,
+            "width": 585,
+            "height": 183
+          },
+          {
+            "lineIndex": 1,
+            "left": 246,
+            "top": 1584,
+            "right": 823,
+            "bottom": 1766,
+            "width": 577,
+            "height": 182
+          }
+        ],
+        "visibilityComparisonBasis": "same-composite-with-instruction-omitted",
+        "representativeFrame": 1380,
+        "changedPixelsAgainstInstructionOmittedFrame": 225350,
+        "appliedOverlayPropsCanonicalSha256": "ee3b7543be1a98f9c45d4828a7200719ae9697f6af78851d9424d53e58198023",
+        "applicationOverlayFile": "overlays/36-fa3daffa5f0f.png",
+        "inspectedOverlayFile": "overlays/36-fa3daffa5f0f.png",
+        "applicationOverlaySha256": "7cf75fb383e5ab0703428fb71dc68374faa262cadebcfa8a32fb9631f8fe535b",
+        "overlaySha256": "7cf75fb383e5ab0703428fb71dc68374faa262cadebcfa8a32fb9631f8fe535b"
+      },
+      {
+        "instructionId": "display-page-000030-002",
+        "requestedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+        "appliedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+        "appliedPresetRegistryVersion": "vertical-short-preset-registry-v001",
+        "alphaMax": 1,
+        "alphaBounds": {
+          "left": 252,
+          "top": 1383,
+          "right": 830,
+          "bottom": 1762,
+          "width": 578,
+          "height": 379
+        },
+        "lineCount": 2,
+        "lineAlphaBounds": [
+          {
+            "lineIndex": 0,
+            "left": 253,
+            "top": 1383,
+            "right": 830,
+            "bottom": 1565,
+            "width": 577,
+            "height": 182
+          },
+          {
+            "lineIndex": 1,
+            "left": 252,
+            "top": 1581,
+            "right": 822,
+            "bottom": 1762,
+            "width": 570,
+            "height": 181
+          }
+        ],
+        "visibilityComparisonBasis": "same-composite-with-instruction-omitted",
+        "representativeFrame": 1404,
+        "changedPixelsAgainstInstructionOmittedFrame": 218978,
+        "appliedOverlayPropsCanonicalSha256": "83f07df1e105d821e482e7c5987241fc210240350e560f465485812a890e3321",
+        "applicationOverlayFile": "overlays/37-cd953822b4d8.png",
+        "inspectedOverlayFile": "overlays/37-cd953822b4d8.png",
+        "applicationOverlaySha256": "01e928ef940fdfd6bea96f446bd4c89a0360bac3b7b6107699417363d3ba47fa",
+        "overlaySha256": "01e928ef940fdfd6bea96f446bd4c89a0360bac3b7b6107699417363d3ba47fa"
+      },
+      {
+        "instructionId": "display-page-000031-001",
+        "requestedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+        "appliedPresetId": "vertical-short-speaker-only-readable-pop-v001",
+        "appliedPresetRegistryVersion": "vertical-short-preset-registry-v001",
+        "alphaMax": 1,
+        "alphaBounds": {
+          "left": 196,
+          "top": 1382,
+          "right": 856,
+          "bottom": 1764,
+          "width": 660,
+          "height": 382
+        },
+        "lineCount": 2,
+        "lineAlphaBounds": [
+          {
+            "lineIndex": 0,
+            "left": 246,
+            "top": 1382,
+            "right": 825,
+            "bottom": 1565,
+            "width": 579,
+            "height": 183
+          },
+          {
+            "lineIndex": 1,
+            "left": 196,
+            "top": 1587,
+            "right": 856,
+            "bottom": 1764,
+            "width": 660,
+            "height": 177
+          }
+        ],
+        "visibilityComparisonBasis": "same-composite-with-instruction-omitted",
+        "representativeFrame": 1481,
+        "changedPixelsAgainstInstructionOmittedFrame": 251922,
+        "appliedOverlayPropsCanonicalSha256": "b4e9ddf43238f310ac89e8e1bda3e5bdca0eff55cca75efa878ed2e016332a64",
+        "applicationOverlayFile": "overlays/38-d00f60391c7e.png",
+        "inspectedOverlayFile": "overlays/38-d00f60391c7e.png",
+        "applicationOverlaySha256": "8084c0b95fddacc0ab6b0e3d0bdb423d82b797dd7c7ec76f2584e0613865a348",
+        "overlaySha256": "8084c0b95fddacc0ab6b0e3d0bdb423d82b797dd7c7ec76f2584e0613865a348"
+      }
+    ],
+    "mediaEvidence": {
+      "observed": {
+        "durationMs": 51566,
+        "video": {
+          "codecName": "h264",
+          "width": 1080,
+          "height": 1920,
+          "fps": 30,
+          "frameCount": 1547
+        },
+        "audio": {
+          "codecName": "aac",
+          "packetPayloadSha256": "d18469bd3132356b03870ee8bc3d63e95947bd254961157e09d59cf9a53459ec"
+        }
+      },
+      "expectedAudio": {
+        "present": true,
+        "codecName": "aac",
+        "packetPayloadSha256": "d18469bd3132356b03870ee8bc3d63e95947bd254961157e09d59cf9a53459ec"
+      },
+      "expectedFrameCount": 1547
+    },
+    "violations": []
+  }
+}

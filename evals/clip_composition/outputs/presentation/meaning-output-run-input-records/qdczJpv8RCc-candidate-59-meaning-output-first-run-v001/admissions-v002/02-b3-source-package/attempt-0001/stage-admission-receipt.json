@@ -1,0 +1,77 @@
+{
+  "schemaVersion": "presentation-meaning-output-stage-admission-receipt-v002",
+  "receiptId": "qdczJpv8RCc-candidate-59-meaning-output-first-run-v001-02-b3-source-package-admission",
+  "status": "passed",
+  "stage": "b3-source-package",
+  "runInputRecordBinding": {
+    "schemaVersion": "presentation-meaning-output-run-input-record-v001",
+    "path": "evals/clip_composition/outputs/presentation/meaning-output-run-input-records/qdczJpv8RCc-candidate-59-meaning-output-first-run-v001/run-input-record.json",
+    "fileSha256": "5ac80deeb0daac08ea32cad7fa9b016cf04ab95ea551fa6981e6c8151ee28680",
+    "canonicalSha256": "22e869ae688e84081e7797189d5283efb855a6d3f075506c5b585ffec6dbaedd"
+  },
+  "jobBinding": {
+    "schemaVersion": "presentation-meaning-boundary-source-package-job-v001",
+    "path": "evals/clip_composition/outputs/presentation/meaning-boundary-jobs/qdczJpv8RCc-candidate-59-meaning-output-first-run-b3-v001.json",
+    "fileSha256": "a9914c45106047040efcb9c2cde63a5cb054f7840d85ce683c919cc68d65375a",
+    "canonicalSha256": "65a6d2c4555296c47166925a1e89fb5d08e90fabdb8d587c7ecce6056f72a2e9"
+  },
+  "upstreamBindings": [
+    {
+      "role": "timeline-decision",
+      "schemaVersion": "zev-timeline-composition-decision-v001",
+      "path": "evals/clip_composition/outputs/presentation/meaning-timeline-decisions/qdczJpv8RCc-candidate-59-meaning-output-first-run-timeline-v002/timeline-composition-decision.json",
+      "fileSha256": "3b240912c833f87019a987772da79cd5c6b5832c806312cf31cdca0949dee193",
+      "canonicalSha256": "b0574ca49db9d4b9db14a973d9d5d8276ef803480d4fe9c1f744ef757fcf4708"
+    }
+  ],
+  "checks": [
+    {
+      "name": "recordBinding",
+      "status": "passed",
+      "comparedPaths": [
+        "record:/schemaVersion",
+        "record:/recordId",
+        "job:/runInputRecordBinding"
+      ]
+    },
+    {
+      "name": "targetJobBinding",
+      "status": "passed",
+      "comparedPaths": [
+        "job:/targetJobBinding"
+      ]
+    },
+    {
+      "name": "upstreamBindings",
+      "status": "passed",
+      "comparedPaths": [
+        "upstream:timeline-decision:"
+      ]
+    },
+    {
+      "name": "stageProjection",
+      "status": "passed",
+      "comparedPaths": [
+        "record:/sourceAndInterval/sourceRef",
+        "record:/sourceAndInterval/sourceStartMs",
+        "record:/sourceAndInterval/sourceEndMs",
+        "job:/timelineCompositionDecisionBinding",
+        "upstream:timeline-decision:/sourceMedia/0/sourceRef",
+        "upstream:timeline-decision:/segments/0"
+      ]
+    },
+    {
+      "name": "prePublicationReread",
+      "status": "passed",
+      "comparedPaths": [
+        "job:/runInputRecordBinding",
+        "job:/targetJobBinding",
+        "job:/upstreamBindings"
+      ]
+    }
+  ],
+  "attempt": {
+    "attemptOrdinal": 1,
+    "supersedesReceipt": null
+  }
+}

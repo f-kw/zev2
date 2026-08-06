@@ -1,0 +1,111 @@
+{
+  "schemaVersion": "presentation-meaning-output-stage-admission-job-v002",
+  "jobId": "qdczJpv8RCc-candidate-59-meaning-output-first-run-v001-09-crop-application-v002-attempt-0001",
+  "action": "admit-stage",
+  "stage": "crop-application",
+  "runInputRecordBinding": {
+    "schemaVersion": "presentation-meaning-output-run-input-record-v001",
+    "path": "evals/clip_composition/outputs/presentation/meaning-output-run-input-records/qdczJpv8RCc-candidate-59-meaning-output-first-run-v001/run-input-record.json",
+    "fileSha256": "5ac80deeb0daac08ea32cad7fa9b016cf04ab95ea551fa6981e6c8151ee28680",
+    "canonicalSha256": "22e869ae688e84081e7797189d5283efb855a6d3f075506c5b585ffec6dbaedd"
+  },
+  "targetJobBinding": {
+    "schemaVersion": "presentation-output-crop-application-job-v001",
+    "path": "evals/clip_composition/outputs/presentation/meaning-output-crop-application-jobs/qdczJpv8RCc-candidate-59-meaning-output-first-run-crop-v001.json",
+    "fileSha256": "5a363f66a3e549c6080e1ba489b3fb71d6ea4f04c691ba97bc9be3208ab23fb4",
+    "canonicalSha256": "ab931c6781c89cb8e0c39f467dd07cc2e74647ab775330acb739275d45945c9e"
+  },
+  "upstreamBindings": [
+    {
+      "role": "reviewed-crop-decision",
+      "schemaVersion": "vertical-preset-type-crop-decision-v006",
+      "path": "evals/clip_composition/outputs/presentation/vertical-preset-previews/qdczJpv8RCc-candidate-59-vertical-preset-v001-candidate/type-crop-v006/crop-decision-v006.json",
+      "fileSha256": "4fba3f371412310fc5122ccfb58634e390a5725aec185172bcf041dd0152a4ed",
+      "canonicalSha256": "518ea4e8cc07b863e7368fadeb56d39457ca78ba7c6c3b52140ff443f28b3769"
+    },
+    {
+      "role": "reviewed-crop-selection",
+      "schemaVersion": "vertical-preset-type-crop-selection-package-v006",
+      "path": "evals/clip_composition/outputs/presentation/vertical-preset-previews/qdczJpv8RCc-candidate-59-vertical-preset-v001-candidate/type-crop-v006/selection-package-manifest-v006.json",
+      "fileSha256": "34bf1c56e3635f7b20c414307182c4f8c92e5d18d7a599616be5a9d7b0be3176",
+      "canonicalSha256": "3298b3fb69b324373e36203c8d94bc72b9b69486d3bad8dde7066ecf76bee0e7"
+    },
+    {
+      "role": "reviewed-base-media",
+      "schemaVersion": null,
+      "path": "evals/clip_composition/outputs/presentation/base-media/qdczJpv8RCc-candidate-59-v001/base-media.mp4",
+      "fileSha256": "faad660c7623cdbf3a8f3b55cdaffc34729d06683ce391997c51f10fbc076967",
+      "canonicalSha256": null
+    },
+    {
+      "role": "reviewed-timeline",
+      "schemaVersion": "presentation-base-media-timeline-v002",
+      "path": "evals/clip_composition/outputs/presentation/base-media/qdczJpv8RCc-candidate-59-v001/timeline.json",
+      "fileSha256": "dbebfe08882aabf66f4c7b13f4489f3bd7348e7bd499ec783250827ccddafcb2",
+      "canonicalSha256": "336c3f9fb9912143c11e460ff2a24be167606cb373a0eafb0341f1b9b13773aa"
+    },
+    {
+      "role": "reviewed-generation-manifest",
+      "schemaVersion": "presentation-base-media-generation-manifest-v002",
+      "path": "evals/clip_composition/outputs/presentation/base-media/qdczJpv8RCc-candidate-59-v001/generation-manifest.json",
+      "fileSha256": "bc47f29089eaaf1a062593add2d8690971682d80d474d168dce6114aebf7b9e6",
+      "canonicalSha256": "d8e114512063104346b51ab58a98be557b80e376e0f46ba6e1160d74d7e56100"
+    },
+    {
+      "role": "reviewed-validation-report",
+      "schemaVersion": "presentation-base-media-validation-report-v001",
+      "path": "evals/clip_composition/outputs/presentation/base-media/qdczJpv8RCc-candidate-59-v001/validation-report.json",
+      "fileSha256": "b091465fca55f258fd2c33076b1ae864b82ee8576af6b40f6f636c735b79d776",
+      "canonicalSha256": "30a2088780fe2c0c1828e8b38876e57e0b7fb405150f39a18328894dcde73488"
+    },
+    {
+      "role": "target-base-media",
+      "schemaVersion": null,
+      "path": "evals/clip_composition/outputs/presentation/meaning-output-base-media/qdczJpv8RCc-candidate-59-meaning-output-first-run-meaning-package-v002-meaning-information/base-media.mp4",
+      "fileSha256": "faad660c7623cdbf3a8f3b55cdaffc34729d06683ce391997c51f10fbc076967",
+      "canonicalSha256": null
+    },
+    {
+      "role": "target-timeline",
+      "schemaVersion": "presentation-base-media-timeline-v002",
+      "path": "evals/clip_composition/outputs/presentation/meaning-output-base-media/qdczJpv8RCc-candidate-59-meaning-output-first-run-meaning-package-v002-meaning-information/timeline.json",
+      "fileSha256": "688d89058977faa970db0f88b23bdb685a3e021a660ac1f6766c4d914536f2ba",
+      "canonicalSha256": "1ae176f65f01ff278f2a93d70106b925ba48ebeecfb405b0ada9ffaa223e8ad6"
+    },
+    {
+      "role": "target-generation-manifest",
+      "schemaVersion": "presentation-output-base-media-generation-manifest-v001",
+      "path": "evals/clip_composition/outputs/presentation/meaning-output-base-media/qdczJpv8RCc-candidate-59-meaning-output-first-run-meaning-package-v002-meaning-information/generation-manifest.json",
+      "fileSha256": "2d39c65cbae09a0f6072eea60d4ac3c7223747926ba936b90553b2ee4bec7423",
+      "canonicalSha256": "f3a764084aa4f65c6ecfb64a41294ea7cec00b63c0ebdb9fbbcc920f4606fb65"
+    },
+    {
+      "role": "target-validation-receipt",
+      "schemaVersion": "presentation-output-base-media-validation-receipt-v001",
+      "path": "evals/clip_composition/outputs/presentation/meaning-output-base-media/qdczJpv8RCc-candidate-59-meaning-output-first-run-meaning-package-v002-meaning-information/validation-receipt.json",
+      "fileSha256": "a3c6a238c44c0559fdd54a1c5a0e795d85e8fd8695b3434aad615f98121a8225",
+      "canonicalSha256": "34fcb46c5d38b2f344d2869a52474bddb94b8d3726df042d185421e37e062e04"
+    }
+  ],
+  "outputRoot": "evals/clip_composition/outputs/presentation/meaning-output-run-input-records/qdczJpv8RCc-candidate-59-meaning-output-first-run-v001/admissions-v002/09-crop-application/attempt-0001",
+  "implementationBindings": [
+    {
+      "path": "evals/clip_composition/presentation_meaning_output_run_input_record_v001.mjs",
+      "fileSha256": "6cda4ebdee30e887f9c4f916fc20c736025ca79f5d6c20051765c57315e7abbf",
+      "role": "run-input-record"
+    },
+    {
+      "path": "evals/clip_composition/run_presentation_meaning_output_run_input_record_v001.mjs",
+      "fileSha256": "ef0248d49586fcbeb90708ed5ea466e1d4281e62a6eedf294701d68be25a1e2f",
+      "role": "run-input-record-runner"
+    }
+  ],
+  "executionPolicy": {
+    "oneShot": true,
+    "allowOverwrite": false
+  },
+  "attempt": {
+    "attemptOrdinal": 1,
+    "supersedesReceipt": null
+  }
+}

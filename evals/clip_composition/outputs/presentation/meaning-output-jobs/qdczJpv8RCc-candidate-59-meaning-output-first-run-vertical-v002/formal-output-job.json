@@ -1,0 +1,124 @@
+{
+  "schemaVersion": "presentation-output-formal-job-v001",
+  "jobId": "qdczJpv8RCc-candidate-59-meaning-output-first-run-vertical-v002-formal-output",
+  "requestBinding": {
+    "schemaVersion": "presentation-output-request-v001",
+    "path": "evals/clip_composition/outputs/presentation/meaning-output-jobs/qdczJpv8RCc-candidate-59-meaning-output-first-run-vertical-v002/output-request.json",
+    "fileSha256": "ca45275a7f066dfb0f983af3a9b90313eb3a11a6c597e158e39194eb27ed90b8",
+    "canonicalSha256": "e525520c0a69a40db2d8b4a4c5c00de16a22250b1c913a903673916f1267ce13"
+  },
+  "runtimeProfile": {
+    "node": {
+      "path": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+      "version": "v20.19.6",
+      "fileSha256": "de4f3b493b15e7a0ee311f6a2c6dbf93858052f5802aa91cfafa2c57e9d6bc5c"
+    },
+    "tsx": {
+      "path": "/Users/kawafmm/workspace/zev2/runner/node_modules/tsx/dist/cli.mjs",
+      "version": "tsx v4.22.3\nnode v20.19.6",
+      "fileSha256": "5c916fa6ecad44aedbb01ca5815536d00ea07de6b73eeb9443d317326b0218d8"
+    },
+    "remotion": {
+      "path": "/Users/kawafmm/workspace/zev2/runner/node_modules/@remotion/cli/remotion-cli.js",
+      "version": "4.0.481",
+      "fileSha256": "a10a711f052487d302dcf52dc08729c84c4deca0dc41c5b708edd1a7b7b48bfa"
+    },
+    "browser": {
+      "path": "/Users/kawafmm/workspace/zev2/runner/node_modules/.remotion/chrome-headless-shell/mac-arm64/chrome-headless-shell-mac-arm64/chrome-headless-shell",
+      "version": "Google Chrome for Testing 149.0.7790.0",
+      "fileSha256": "b469d05c698ccf9f4ae3dc43fb194fbdcf56f9da1fc46dcc19f2bf9fe2aa20b8"
+    },
+    "ffmpeg": {
+      "path": "/opt/homebrew/bin/ffmpeg",
+      "version": "ffmpeg version 8.0.1 Copyright (c) 2000-2025 the FFmpeg developers\nbuilt with Apple clang version 16.0.0 (clang-1600.0.26.6)\nconfiguration: --prefix=/opt/homebrew/Cellar/ffmpeg/8.0.1_1 --enable-shared --enable-pthreads --enable-version3 --cc=clang --host-cflags= --host-ldflags= --enable-ffplay --enable-gpl --enable-libsvtav1 --enable-libopus --enable-libx264 --enable-libmp3lame --enable-libdav1d --enable-libvpx --enable-libx265 --enable-videotoolbox --enable-audiotoolbox --enable-neon\nlibavutil      60.  8.100 / 60.  8.100\nlibavcodec     62. 11.100 / 62. 11.100\nlibavformat    62.  3.100 / 62.  3.100\nlibavdevice    62.  1.100 / 62.  1.100\nlibavfilter    11.  4.100 / 11.  4.100\nlibswscale      9.  1.100 /  9.  1.100\nlibswresample   6.  1.100 /  6.  1.100\n\nExiting with exit code 0",
+      "fileSha256": "d105f770f53607ec1532b27e354ca7c3166a706dc1ccc6f96e3c8d3f54d7e798"
+    },
+    "ffprobe": {
+      "path": "/opt/homebrew/bin/ffprobe",
+      "version": "ffprobe version 8.0.1 Copyright (c) 2007-2025 the FFmpeg developers\nbuilt with Apple clang version 16.0.0 (clang-1600.0.26.6)\nconfiguration: --prefix=/opt/homebrew/Cellar/ffmpeg/8.0.1_1 --enable-shared --enable-pthreads --enable-version3 --cc=clang --host-cflags= --host-ldflags= --enable-ffplay --enable-gpl --enable-libsvtav1 --enable-libopus --enable-libx264 --enable-libmp3lame --enable-libdav1d --enable-libvpx --enable-libx265 --enable-videotoolbox --enable-audiotoolbox --enable-neon\nlibavutil      60.  8.100 / 60.  8.100\nlibavcodec     62. 11.100 / 62. 11.100\nlibavformat    62.  3.100 / 62.  3.100\nlibavdevice    62.  1.100 / 62.  1.100\nlibavfilter    11.  4.100 / 11.  4.100\nlibswscale      9.  1.100 /  9.  1.100\nlibswresample   6.  1.100 /  6.  1.100",
+      "fileSha256": "dcb242647fedaa21618f7048c5f2982e584fdfbcfca098553b3121d1a5d509d9"
+    },
+    "imageMagick": {
+      "path": "/opt/homebrew/bin/magick",
+      "version": "Version: ImageMagick 7.1.2-12 Q16-HDRI aarch64 23490 https://imagemagick.org\nCopyright: (C) 1999 ImageMagick Studio LLC\nLicense: https://imagemagick.org/script/license.php\nFeatures: Cipher DPC HDRI Modules OpenMP \nDelegates (built-in): bzlib cairo fontconfig freetype heic jng jp2 jpeg jxl lcms lqr ltdl lzma openexr png raw rsvg tiff uhdr webp xml zip zlib zstd\nCompiler: clang (16.0.0)",
+      "fileSha256": "78311032c39a3192ad4ed34ffdf6aab60e21b8e635005f9398095d73c9bd7a29"
+    }
+  },
+  "implementationBindings": [
+    {
+      "path": "evals/clip_composition/presentation_output_contract_v001.mjs",
+      "fileSha256": "b74a8a00774eb87330d6e0c289f9dd02ef57086c5bf96758798f05c3b437617f",
+      "role": "output-contract"
+    },
+    {
+      "path": "evals/clip_composition/presentation_output_page_line_planner_v001.mjs",
+      "fileSha256": "febb8c489db4585369d1d77f9cdcca02fe591cc83ceeae309896ad3e37f95262",
+      "role": "page-line-planner"
+    },
+    {
+      "path": "evals/clip_composition/presentation_output_style_resolver_v001.ts",
+      "fileSha256": "e63e4b4cf47d94d763333e13513570abe2dbac418e5ac5b396e1295b22956403",
+      "role": "style-resolver"
+    },
+    {
+      "path": "evals/clip_composition/presentation_output_crop_application_v001.mjs",
+      "fileSha256": "322fdc1e06a13600c522f577913336c6f042851305880e5053b8728f2d8640d3",
+      "role": "crop-application"
+    },
+    {
+      "path": "evals/clip_composition/presentation_output_render_plan_v001.mjs",
+      "fileSha256": "e2e5fb23562a50bc0560dad1f9d210ba8009548bdba05b7394ae4ed458783391",
+      "role": "render-plan"
+    },
+    {
+      "path": "evals/clip_composition/run_presentation_output_job_v001.ts",
+      "fileSha256": "4a0328299fe11498a684f8c2d9ba280252df6479f738179b88a2f80867bc1bd6",
+      "role": "output-runner"
+    },
+    {
+      "path": "evals/clip_composition/presentation_renderer_plan_v002.mjs",
+      "fileSha256": "3a77c7feb7005fa06d7e45a6364f76ab4bc40a8622370568cf557d5090f08b79",
+      "role": "landscape-preset"
+    },
+    {
+      "path": "evals/clip_composition/inspect_presentation_preset_layout.ts",
+      "fileSha256": "416a81b54b18be6a6ccdd5906d3a3730bd0455edfe4be7002c9c6c4ccf2f8843",
+      "role": "landscape-layout"
+    },
+    {
+      "path": "evals/clip_composition/render_presentation_v002.mjs",
+      "fileSha256": "d02d603f3fc04f9ab58ce889644f5e63bf17d7ec5cb19019e09110c6167a720b",
+      "role": "common-renderer"
+    },
+    {
+      "path": "evals/clip_composition/render_presentation_vertical_review_v001.ts",
+      "fileSha256": "e12117c04f7bbfe6a67459fc815dd609809ec02fa8792d548e183f58b8ececdd",
+      "role": "vertical-layout"
+    },
+    {
+      "path": "evals/clip_composition/presentation_caption_semantic_source_package_v001.mjs",
+      "fileSha256": "ac3dcbbc671af6f56dcceeea6a41c8ae9cbf9fc4ba28a8a00bbc5d6faff45bcd",
+      "role": "strict-json"
+    }
+  ],
+  "approvedContractBindings": [
+    {
+      "path": "evals/clip_composition/reports/presentation/presentation-meaning-information-package-contract-design-20260803-v001.md",
+      "fileSha256": "a38ef995c5c838f742c1de6c18acd5a7fd166ea57fb7537e51cf9a89abd4c0de",
+      "role": "meaning-package-contract"
+    },
+    {
+      "path": "evals/clip_composition/reports/presentation/presentation-output-side-acceptance-contract-design-20260803-v001.md",
+      "fileSha256": "c349d544e9cc954d2f5b9e5e05334801e6a11cdce383f57829c04ae301b678de",
+      "role": "output-side-contract"
+    }
+  ],
+  "controlOutputRoot": "evals/clip_composition/outputs/presentation/meaning-output-control/qdczJpv8RCc-candidate-59-meaning-output-first-run-vertical-v002",
+  "renderOutputRoot": "evals/clip_composition/outputs/presentation/meaning-output-renders/qdczJpv8RCc-candidate-59-meaning-output-first-run-vertical-v002-output",
+  "expectedOutputId": "qdczJpv8RCc-candidate-59-meaning-output-first-run-vertical-v002-output",
+  "executionPolicy": {
+    "oneShot": true,
+    "allowRetry": false,
+    "allowLegacyArtifacts": false
+  }
+}

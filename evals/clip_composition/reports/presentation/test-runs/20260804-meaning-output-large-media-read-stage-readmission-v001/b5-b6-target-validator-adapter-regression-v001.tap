@@ -1,0 +1,255 @@
+TAP version 13
+# Subtest: MBA001 probe countTokens request exact happy path
+ok 1 - MBA001 probe countTokens request exact happy path
+  ---
+  duration_ms: 4.538959
+  ...
+# Subtest: MBA002 final countTokens request uses budget-derived output limit
+ok 2 - MBA002 final countTokens request uses budget-derived output limit
+  ---
+  duration_ms: 1.61
+  ...
+# Subtest: MBA003 request invalid owns code 8
+ok 3 - MBA003 request invalid owns code 8
+  ---
+  duration_ms: 0.263709
+  ...
+# Subtest: MBA004 model mismatch owns code 16
+ok 4 - MBA004 model mismatch owns code 16
+  ---
+  duration_ms: 0.401792
+  ...
+# Subtest: MBA005 usage invalid owns code 17
+ok 5 - MBA005 usage invalid owns code 17
+  ---
+  duration_ms: 0.174917
+  ...
+# Subtest: MBA006 cost limit exceeded owns code 18
+ok 6 - MBA006 cost limit exceeded owns code 18
+  ---
+  duration_ms: 0.155291
+  ...
+# Subtest: MBA007 raw response unavailable owns code 19
+ok 7 - MBA007 raw response unavailable owns code 19
+  ---
+  duration_ms: 0.298083
+  ...
+# Subtest: MBA008 secret exposure owns code 20
+ok 8 - MBA008 secret exposure owns code 20
+  ---
+  duration_ms: 0.182333
+  ...
+# Subtest: MBA009 publication failure owns code 21 through the production publication inspector
+ok 9 - MBA009 publication failure owns code 21 through the production publication inspector
+  ---
+  duration_ms: 7.22475
+  ...
+# Subtest: MBA010 saved generate request bytes are the bytes sent
+ok 10 - MBA010 saved generate request bytes are the bytes sent
+  ---
+  duration_ms: 0.399291
+  ...
+# Subtest: MBA011 generate is one shot with retry zero and timeout 600 seconds
+ok 11 - MBA011 generate is one shot with retry zero and timeout 600 seconds
+  ---
+  duration_ms: 2.625584
+  ...
+# Subtest: MBA012 secret scan and raw wx publication precede provider interpretation
+ok 12 - MBA012 secret scan and raw wx publication precede provider interpretation
+  ---
+  duration_ms: 1.258666
+  ...
+# Subtest: MBA013 B5 and B6 jobs have exact 11-key schemas and distinct authorization
+ok 13 - MBA013 B5 and B6 jobs have exact 11-key schemas and distinct authorization
+  ---
+  duration_ms: 1.5805
+  ...
+# Subtest: MBA014 B5 11-key and B6 13-key manifests accept exact artifact unions
+ok 14 - MBA014 B5 11-key and B6 13-key manifests accept exact artifact unions
+  ---
+  duration_ms: 4.957708
+  ...
+# Subtest: MBA015 maximum valid response uses every candidate exactly once
+ok 15 - MBA015 maximum valid response uses every candidate exactly once
+  ---
+  duration_ms: 1.083167
+  ...
+# Subtest: MBA016 provider envelope has nine keys and keeps thought signature raw-only
+ok 16 - MBA016 provider envelope has nine keys and keeps thought signature raw-only
+  ---
+  duration_ms: 0.131417
+  ...
+# Subtest: MBA017 B5 stops after measurement and never advances automatically to B6
+ok 17 - MBA017 B5 stops after measurement and never advances automatically to B6
+  ---
+  duration_ms: 0.457334
+  ...
+# Subtest: MBA018 six official inputs are copied with byte and SHA claims intact
+ok 18 - MBA018 six official inputs are copied with byte and SHA claims intact
+  ---
+  duration_ms: 2.540041
+  ...
+# Subtest: MBA019 both endpoints use exactly two headers and a 600-second signal
+ok 19 - MBA019 both endpoints use exactly two headers and a 600-second signal
+  ---
+  duration_ms: 2.185417
+  ...
+# Subtest: MBA020 old fixed cost adapter and new parameterized entry share the same result
+ok 20 - MBA020 old fixed cost adapter and new parameterized entry share the same result
+  ---
+  duration_ms: 4.5535
+  ...
+# Subtest: MBA021 post-send budget excess is rejected-cost and does not start B1
+ok 21 - MBA021 post-send budget excess is rejected-cost and does not start B1
+  ---
+  duration_ms: 1.766417
+  ...
+# Subtest: MBA022 transport extraction preserves V002 success and failure precedence
+ok 22 - MBA022 transport extraction preserves V002 success and failure precedence
+  ---
+  duration_ms: 0.95325
+  ...
+# Subtest: MBA023 invalid candidate count keeps raw usage and cost but no envelope
+ok 23 - MBA023 invalid candidate count keeps raw usage and cost but no envelope
+  ---
+  duration_ms: 1.84275
+  ...
+# Subtest: MBA024 invalid candidate content keeps raw usage and cost but no envelope
+ok 24 - MBA024 invalid candidate content keeps raw usage and cost but no envelope
+  ---
+  duration_ms: 1.580125
+  ...
+# Subtest: MBA025 HTTP or model rejection is parsed once and cost requires model plus usage
+ok 25 - MBA025 HTTP or model rejection is parsed once and cost requires model plus usage
+  ---
+  duration_ms: 4.678375
+  ...
+# Subtest: MBA026 usage invalid blocks cost and never reparses raw bytes
+ok 26 - MBA026 usage invalid blocks cost and never reparses raw bytes
+  ---
+  duration_ms: 1.343125
+  ...
+# Subtest: schema、10工程、11違反codeの固定順を公開する
+ok 27 - schema、10工程、11違反codeの固定順を公開する
+  ---
+  duration_ms: 0.549959
+  ...
+# Subtest: 実行入力記録は業務入力5件をexact順で受理する
+ok 28 - 実行入力記録は業務入力5件をexact順で受理する
+  ---
+  duration_ms: 0.284958
+  ...
+# Subtest: 業務入力5件は各一差を拒否する
+ok 29 - 業務入力5件は各一差を拒否する
+  ---
+  duration_ms: 0.139083
+  ...
+# Subtest: 区間の1ms差はschema上有効であり、工程投影が不一致として所有する
+ok 30 - 区間の1ms差はschema上有効であり、工程投影が不一致として所有する
+  ---
+  duration_ms: 0.0515
+  ...
+# Subtest: 記録は未知key、欠落key、key順違いを拒否する
+ok 31 - 記録は未知key、欠落key、key順違いを拒否する
+  ---
+  duration_ms: 0.058792
+  ...
+# Subtest: 正式byteは2-space、末尾LF一つで決定的である
+ok 32 - 正式byteは2-space、末尾LF一つで決定的である
+  ---
+  duration_ms: 0.657458
+  ...
+# Subtest: 記録公開jobはexact 7 keyと固定公開先だけを受理する
+ok 33 - 記録公開jobはexact 7 keyと固定公開先だけを受理する
+  ---
+  duration_ms: 0.176584
+  ...
+# Subtest: 工程入場jobは10工程それぞれのupstream role順を固定する
+ok 34 - 工程入場jobは10工程それぞれのupstream role順を固定する
+  ---
+  duration_ms: 0.674
+  ...
+# Subtest: 工程入場v002 jobはv1の10 keyにattemptだけを加えた別入口である
+ok 35 - 工程入場v002 jobはv1の10 keyにattemptだけを加えた別入口である
+  ---
+  duration_ms: 0.532083
+  ...
+# Subtest: 工程入場v002 attempt 2以降は同record・同工程の直前receiptだけを束縛する
+ok 36 - 工程入場v002 attempt 2以降は同record・同工程の直前receiptだけを束縛する
+  ---
+  duration_ms: 0.334917
+  ...
+# Subtest: 10工程は固定入力・job・上流成果物の意味投影をそれぞれ通す
+ok 37 - 10工程は固定入力・job・上流成果物の意味投影をそれぞれ通す
+  ---
+  duration_ms: 9.974625
+  ...
+# Subtest: 10工程のreceiptはbuilder実体を通り一つのrecord SHAへだけ接続する
+ok 38 - 10工程のreceiptはbuilder実体を通り一つのrecord SHAへだけ接続する
+  ---
+  duration_ms: 3.010416
+  ...
+# Subtest: 工程入場v002 receiptはexact 9 keyでattemptを保存し固定10工程を同recordへ閉じる
+ok 39 - 工程入場v002 receiptはexact 9 keyでattemptを保存し固定10工程を同recordへ閉じる
+  ---
+  duration_ms: 3.888875
+  ...
+# Subtest: B5とB6の工程入場は実validatorのsame-job返値を受理し不正jobを拒否する
+ok 40 - B5とB6の工程入場は実validatorのsame-job返値を受理し不正jobを拒否する
+  ---
+  duration_ms: 1.696791
+  ...
+# Subtest: 任意objectを返す身代わりvalidatorは従来どおり工程入場で不合格となる
+ok 41 - 任意objectを返す身代わりvalidatorは従来どおり工程入場で不合格となる
+  ---
+  duration_ms: 0.261791
+  ...
+# Subtest: 工程入場v002 receiptのattempt番号・ID・直前bindingは一致しなければならない
+ok 42 - 工程入場v002 receiptのattempt番号・ID・直前bindingは一致しなければならない
+  ---
+  duration_ms: 0.316875
+  ...
+# Subtest: schema上有効な1ms区間差はtimeline工程の意味投影で拒否する
+ok 43 - schema上有効な1ms区間差はtimeline工程の意味投影で拒否する
+  ---
+  duration_ms: 0.153333
+  ...
+# Subtest: B6工程はB5で固定した生成requestと異なる送信requestを拒否する
+ok 44 - B6工程はB5で固定した生成requestと異なる送信requestを拒否する
+  ---
+  duration_ms: 0.46925
+  ...
+# Subtest: 工程入場receiptはexact 8 key、固定5検査、工程role順を受理する
+ok 45 - 工程入場receiptはexact 8 key、固定5検査、工程role順を受理する
+  ---
+  duration_ms: 0.125458
+  ...
+# Subtest: CLIはjob path一引数以外をfatal exit 2として扱う
+ok 46 - CLIはjob path一引数以外をfatal exit 2として扱う
+  ---
+  duration_ms: 7.444917
+  ...
+# Subtest: 不正なjob byteは修復せず検査済み拒否として版付き保存する
+ok 47 - 不正なjob byteは修復せず検査済み拒否として版付き保存する
+  ---
+  duration_ms: 51.928709
+  ...
+# Subtest: job外形が正しくrecord本文だけが不正なら専用違反へ帰属する
+ok 48 - job外形が正しくrecord本文だけが不正なら専用違反へ帰属する
+  ---
+  duration_ms: 49.051458
+  ...
+# Subtest: 正式publication runnerは参照3件を照合してrecord byteを一回だけ公開する
+ok 49 - 正式publication runnerは参照3件を照合してrecord byteを一回だけ公開する
+  ---
+  duration_ms: 7.477791
+  ...
+1..49
+# tests 49
+# suites 0
+# pass 49
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 343.486458

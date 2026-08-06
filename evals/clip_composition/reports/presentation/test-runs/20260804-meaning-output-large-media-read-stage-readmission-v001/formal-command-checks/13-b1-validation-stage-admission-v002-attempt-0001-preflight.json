@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "presentation-formal-command-preflight-v001",
+  "commandId": "b1-validation-stage-admission-v002-attempt-0001",
+  "checkedAt": "2026-08-04T09:54:44+09:00",
+  "checks": {
+    "fixedNode": {"status": "passed", "path": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node", "fileSha256": "de4f3b493b15e7a0ee311f6a2c6dbf93858052f5802aa91cfafa2c57e9d6bc5c"},
+    "fixedTsxLoader": {"status": "passed", "path": "/Users/kawafmm/workspace/zev2/node_modules/.pnpm/tsx@4.22.3/node_modules/tsx/dist/loader.mjs", "fileSha256": "f06fb3da72f722ec9a2c3e8502f750ae1b6300b93fb76e8a52548dba69b6730f"},
+    "nodeOptionsAbsent": {"status": "passed", "present": false},
+    "stageAdmissionJob": {"status": "passed", "path": "evals/clip_composition/outputs/presentation/meaning-output-stage-admission-jobs/qdczJpv8RCc-candidate-59-meaning-output-first-run-v001/v002/05-b1-validation-attempt-0001.json", "fileSha256": "315b3cf36023654237489258aedb29283b66d2b7b45667985ae6c073d5b6011e", "canonicalSha256": "0d0db02ea57ac867f2e8416b3854f8e3f0d27a7da7ac2cabf7d4020cfd7b4cd5", "formalDecoder": "passed", "valueValidator": "passed", "formalBytes": "passed"},
+    "targetJob": {"status": "passed", "path": "evals/clip_composition/outputs/presentation/meaning-boundary-validation-jobs/qdczJpv8RCc-candidate-59-meaning-output-first-run-b1-v001.json", "fileSha256": "58d09bdaa22e3b38cb265c77dcca8df4a575d3c6a7fdd65ee30660b2c5faf622", "canonicalSha256": "a2eef8d0f2c5975daeec325d1b0fb6941c09227d2aa9010114f225462bdb319c", "formalDecoder": "passed", "valueValidator": "passed", "formalBytes": "passed"},
+    "b6Transport": {"status": "passed", "manifestFileSha256": "8d51f0a0c85f7b73ef41fd2eac93c4f3bfcd6b716a890a574a0faa385b6b2f4a", "rawResponseFileSha256": "a9223966adc13ae2a3820bfaf4636a50857a586691ce9af6d4077027d1eab651", "providerEnvelopeFileSha256": "408616d5ffdca7d305e925a9d5b3632e77fb27f8b2d47f31ef0f89213a7790ce", "actualCostNanoUsd": 175911000},
+    "receiptRootUnused": {"status": "passed", "path": "evals/clip_composition/outputs/presentation/meaning-output-run-input-records/qdczJpv8RCc-candidate-59-meaning-output-first-run-v001/admissions-v002/05-b1-validation/attempt-0001"},
+    "b1OutputRootUnused": {"status": "passed", "path": "evals/clip_composition/outputs/presentation/meaning-boundary-validations/qdczJpv8RCc-candidate-59-meaning-output-first-run-b1-v001/attempt-v001"},
+    "parallelWriterAbsent": {"status": "passed"}
+  },
+  "argv": [
+    "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+    "--import",
+    "/Users/kawafmm/workspace/zev2/node_modules/.pnpm/tsx@4.22.3/node_modules/tsx/dist/loader.mjs",
+    "evals/clip_composition/run_presentation_meaning_output_run_input_record_v001.mjs",
+    "evals/clip_composition/outputs/presentation/meaning-output-stage-admission-jobs/qdczJpv8RCc-candidate-59-meaning-output-first-run-v001/v002/05-b1-validation-attempt-0001.json"
+  ]
+}

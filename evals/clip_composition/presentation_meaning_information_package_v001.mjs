@@ -871,17 +871,18 @@ const multiset = refs => {
   ));
 };
 
-export function validatePresentationMeaningInformationPackageV001(value, context = {}) {
+const MEANING_INFORMATION_PACKAGE_KEYS_V001 = Object.freeze([
+  'schemaVersion', 'packageId', 'sourceMedia', 'timelineComposition', 'captions',
+  'title', 'semanticObservations', 'provenance',
+]);
+
+const validatePresentationMeaningInformationPackageRootEnvelopeV001 = value => {
   const reject = (code, pointer) => ({
     status: 'rejected',
     violations: [makePresentationMeaningInformationViolationV001(code, pointer)],
   });
-  const packageKeys = [
-    'schemaVersion', 'packageId', 'sourceMedia', 'timelineComposition', 'captions',
-    'title', 'semanticObservations', 'provenance',
-  ];
   if (!isObject(value)
-    || !packageKeys.every(key => Object.hasOwn(value, key))
+    || !MEANING_INFORMATION_PACKAGE_KEYS_V001.every(key => Object.hasOwn(value, key))
     || value.schemaVersion !== PRESENTATION_MEANING_INFORMATION_PACKAGE_SCHEMA_V001
     || !FORMAL_ID.test(value.packageId)
     || !dense(value.sourceMedia) || value.sourceMedia.length < 1
@@ -936,6 +937,114 @@ export function validatePresentationMeaningInformationPackageV001(value, context
   if (!same(firstSeenSourceIds, value.sourceMedia.map(source => source.sourceMediaId))) {
     return reject('TIMELINE_DECISION_INVALID', '/timelineDecision');
   }
+  return {status: 'passed', violations: []};
+};
+
+const validatePresentationMeaningInformationMetadataEnvelopeV001 = value => {
+  const reject = (code, pointer) => ({
+    status: 'rejected',
+    violations: [makePresentationMeaningInformationViolationV001(code, pointer)],
+  });
+  if (!validateTitle(value.title)) {
+    return reject('TITLE_INPUT_MISMATCH', '/candidatePackage/title');
+  }
+  if (!dense(value.semanticObservations) || value.semanticObservations.length !== 0) {
+    return reject('SEMANTIC_OBSERVATIONS_NOT_EMPTY', '/candidatePackage/semanticObservations');
+  }
+  if (recursivelyContainsPresentationKey(value)) {
+    return reject('PRESENTATION_KEY_LEAKED', '/candidatePackage');
+  }
+  if (!exactKeys(value, MEANING_INFORMATION_PACKAGE_KEYS_V001)) {
+    return reject('MEANING_PACKAGE_BYTE_INVALID', '/candidatePackage');
+  }
+  return {status: 'passed', violations: []};
+};
+
+const validatePresentationMeaningCaptionEnvelopeV001 = value => {
+  const reject = (code, pointer) => ({
+    status: 'rejected',
+    violations: [makePresentationMeaningInformationViolationV001(code, pointer)],
+  });
+  for (const [index, caption] of value.captions.entries()) {
+    if (!exactKeys(caption, [
+      'captionId', 'ordinal', 'timelineSegmentId', 'text', 'atomRefs', 'startAnchor',
+      'endAnchor', 'sourceStartMs', 'sourceEndMs',
+    ])
+      || caption.captionId !== `caption-${String(index + 1).padStart(6, '0')}`
+      || caption.ordinal !== index + 1
+      || !FORMAL_ID.test(caption.timelineSegmentId)
+      || !dense(caption.atomRefs) || caption.atomRefs.length < 1
+      || !caption.atomRefs.every(validatePresentationMeaningAtomRefV001)) {
+      return reject('CAPTION_COUNT_INVALID', '/candidatePackage/captions');
+    }
+    if (typeof caption.text !== 'string' || caption.text.length === 0
+      || /[\r\n]/u.test(caption.text)
+      || !exactKeys(caption.startAnchor, ['atomRef', 'edge'])
+      || !validatePresentationMeaningAtomRefV001(caption.startAnchor.atomRef)
+      || !['start', 'end'].includes(caption.startAnchor.edge)
+      || !exactKeys(caption.endAnchor, ['atomRef', 'edge'])
+      || !validatePresentationMeaningAtomRefV001(caption.endAnchor.atomRef)
+      || !['start', 'end'].includes(caption.endAnchor.edge)
+      || !nonnegative(caption.sourceStartMs) || !positive(caption.sourceEndMs)
+      || caption.sourceStartMs >= caption.sourceEndMs) {
+      return reject('MEANING_PACKAGE_BYTE_INVALID', '/candidatePackage');
+    }
+  }
+  return {status: 'passed', violations: []};
+};
+
+const validatePresentationMeaningCaptionAnchorRelationsV001 = value => {
+  if (value.captions.some(caption =>
+    !same(caption.startAnchor, {atomRef: caption.atomRefs[0], edge: 'start'})
+    || !same(caption.endAnchor, {atomRef: caption.atomRefs.at(-1), edge: 'end'}))) {
+    return {
+      status: 'rejected',
+      violations: [makePresentationMeaningInformationViolationV001(
+        'CAPTION_ANCHOR_MISMATCH',
+        '/candidatePackage/captions',
+      )],
+    };
+  }
+  return {status: 'passed', violations: []};
+};
+
+const validatePresentationMeaningCaptionRelationsV001 = value => {
+  if (value.captions.some(caption =>
+    caption.atomRefs.some(ref => ref.timelineSegmentId !== caption.timelineSegmentId))) {
+    return {
+      status: 'rejected',
+      violations: [makePresentationMeaningInformationViolationV001(
+        'CAPTION_SEGMENT_SPAN_INVALID',
+        '/candidatePackage/captions',
+      )],
+    };
+  }
+  return {status: 'passed', violations: []};
+};
+
+/**
+ * 工程入場が所有する、文脈非依存の正式schema検査。
+ * AtomRef全量閉包はexpected occurrenceを復元できる工程本体だけが検査する。
+ */
+export function validatePresentationMeaningInformationPackageAdmissionEnvelopeV001(value) {
+  const root = validatePresentationMeaningInformationPackageRootEnvelopeV001(value);
+  if (root.status !== 'passed') return root;
+  const metadata = validatePresentationMeaningInformationMetadataEnvelopeV001(value);
+  if (metadata.status !== 'passed') return metadata;
+  const captions = validatePresentationMeaningCaptionEnvelopeV001(value);
+  if (captions.status !== 'passed') return captions;
+  const relations = validatePresentationMeaningCaptionRelationsV001(value);
+  if (relations.status !== 'passed') return relations;
+  return validatePresentationMeaningCaptionAnchorRelationsV001(value);
+}
+
+export function validatePresentationMeaningInformationPackageV001(value, context = {}) {
+  const reject = (code, pointer) => ({
+    status: 'rejected',
+    violations: [makePresentationMeaningInformationViolationV001(code, pointer)],
+  });
+  const root = validatePresentationMeaningInformationPackageRootEnvelopeV001(value);
+  if (root.status !== 'passed') return root;
   if (context.timelineDecision
     && (!same(value.sourceMedia, context.timelineDecision.sourceMedia)
       || !same(value.timelineComposition.segments, context.timelineDecision.segments))) {
@@ -957,19 +1066,9 @@ export function validatePresentationMeaningInformationPackageV001(value, context
     && !same(value.provenance.formalJobBinding, context.jobBinding)) {
     return reject('MEANING_JOB_BINDING_MISMATCH', '/job');
   }
-  if (!validateTitle(value.title)) {
-    return reject('TITLE_INPUT_MISMATCH', '/candidatePackage/title');
-  }
-  if (!dense(value.semanticObservations) || value.semanticObservations.length !== 0) {
-    return reject('SEMANTIC_OBSERVATIONS_NOT_EMPTY', '/candidatePackage/semanticObservations');
-  }
-  if (recursivelyContainsPresentationKey(value)) {
-    return reject('PRESENTATION_KEY_LEAKED', '/candidatePackage');
-  }
-  if (!exactKeys(value, packageKeys)) {
-    return reject('MEANING_PACKAGE_BYTE_INVALID', '/candidatePackage');
-  }
-  const expected = context.expectedAtomOccurrences ?? [];
+  const metadata = validatePresentationMeaningInformationMetadataEnvelopeV001(value);
+  if (metadata.status !== 'passed') return metadata;
+  const expected = context.expectedAtomOccurrences;
   if (!dense(expected) || !expected.every(validatePresentationMeaningAtomRefV001)) {
     return reject('EXPECTED_ATOM_OCCURRENCE_INVALID', '/expectedAtomOccurrences');
   }
@@ -977,32 +1076,19 @@ export function validatePresentationMeaningInformationPackageV001(value, context
     || (expected.length > 0 && (value.captions.length < 1 || value.captions.length > 999999))) {
     return reject('CAPTION_COUNT_INVALID', '/candidatePackage/captions');
   }
-  const actual = [];
-  for (const [index, caption] of value.captions.entries()) {
-    if (!exactKeys(caption, [
-      'captionId', 'ordinal', 'timelineSegmentId', 'text', 'atomRefs', 'startAnchor',
-      'endAnchor', 'sourceStartMs', 'sourceEndMs',
-    ])
-      || caption.captionId !== `caption-${String(index + 1).padStart(6, '0')}`
-      || caption.ordinal !== index + 1
-      || !FORMAL_ID.test(caption.timelineSegmentId)
-      || !dense(caption.atomRefs) || caption.atomRefs.length < 1
-      || !caption.atomRefs.every(validatePresentationMeaningAtomRefV001)) {
-      return reject('CAPTION_COUNT_INVALID', '/candidatePackage/captions');
-    }
-    actual.push(...caption.atomRefs);
-  }
+  const captionEnvelope = validatePresentationMeaningCaptionEnvelopeV001(value);
+  if (captionEnvelope.status !== 'passed') return captionEnvelope;
+  const actual = value.captions.flatMap(caption => caption.atomRefs);
   if (!same(multiset(actual), multiset(expected))) {
     return reject('CAPTION_ATOM_COVERAGE_MISMATCH', '/candidatePackage/captions');
   }
   if (!same(actual, expected)) {
     return reject('CAPTION_ATOM_SEQUENCE_MISMATCH', '/candidatePackage/captions');
   }
+  const captionRelations = validatePresentationMeaningCaptionRelationsV001(value);
+  if (captionRelations.status !== 'passed') return captionRelations;
   const atomRecords = context.occurrenceAtoms;
   for (const caption of value.captions) {
-    if (caption.atomRefs.some(ref => ref.timelineSegmentId !== caption.timelineSegmentId)) {
-      return reject('CAPTION_SEGMENT_SPAN_INVALID', '/candidatePackage/captions');
-    }
     if (atomRecords instanceof Map) {
       const records = caption.atomRefs.map(ref => atomRecords.get(occurrenceKey(ref)));
       if (records.some(record => !record)) {
@@ -1013,24 +1099,16 @@ export function validatePresentationMeaningInformationPackageV001(value, context
         || caption.text !== records.map(record => record.text).join('')) {
         return reject('CAPTION_TEXT_MISMATCH', '/candidatePackage/captions');
       }
-      if (!validateAnchor(caption.startAnchor, 'start')
-        || !validateAnchor(caption.endAnchor, 'end')
-        || !same(caption.startAnchor, {atomRef: caption.atomRefs[0], edge: 'start'})
+      if (!same(caption.startAnchor, {atomRef: caption.atomRefs[0], edge: 'start'})
         || !same(caption.endAnchor, {atomRef: caption.atomRefs.at(-1), edge: 'end'})) {
         return reject('CAPTION_ANCHOR_MISMATCH', '/candidatePackage/captions');
       }
-      if (!nonnegative(caption.sourceStartMs) || !positive(caption.sourceEndMs)
-        || caption.sourceStartMs >= caption.sourceEndMs
-        || caption.sourceStartMs !== records[0].startMs
+      if (caption.sourceStartMs !== records[0].startMs
         || caption.sourceEndMs !== records.at(-1).endMs) {
         return reject('CAPTION_SOURCE_TIME_MISMATCH', '/candidatePackage/captions');
       }
-    } else if (typeof caption.text !== 'string' || caption.text.length === 0
-      || /[\r\n]/u.test(caption.text)
-      || !validateAnchor(caption.startAnchor, 'start')
-      || !validateAnchor(caption.endAnchor, 'end')
-      || !nonnegative(caption.sourceStartMs) || !positive(caption.sourceEndMs)
-      || caption.sourceStartMs >= caption.sourceEndMs) {
+    } else if (!validateAnchor(caption.startAnchor, 'start')
+      || !validateAnchor(caption.endAnchor, 'end')) {
       return reject('MEANING_PACKAGE_BYTE_INVALID', '/candidatePackage');
     }
   }

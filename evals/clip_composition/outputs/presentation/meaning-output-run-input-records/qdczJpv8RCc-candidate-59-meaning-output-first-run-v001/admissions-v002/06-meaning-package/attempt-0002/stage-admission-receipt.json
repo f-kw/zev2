@@ -1,0 +1,97 @@
+{
+  "schemaVersion": "presentation-meaning-output-stage-admission-receipt-v002",
+  "receiptId": "qdczJpv8RCc-candidate-59-meaning-output-first-run-v001-06-meaning-package-admission",
+  "status": "passed",
+  "stage": "meaning-package",
+  "runInputRecordBinding": {
+    "schemaVersion": "presentation-meaning-output-run-input-record-v001",
+    "path": "evals/clip_composition/outputs/presentation/meaning-output-run-input-records/qdczJpv8RCc-candidate-59-meaning-output-first-run-v001/run-input-record.json",
+    "fileSha256": "5ac80deeb0daac08ea32cad7fa9b016cf04ab95ea551fa6981e6c8151ee28680",
+    "canonicalSha256": "22e869ae688e84081e7797189d5283efb855a6d3f075506c5b585ffec6dbaedd"
+  },
+  "jobBinding": {
+    "schemaVersion": "zev-meaning-information-package-job-v001",
+    "path": "evals/clip_composition/outputs/presentation/meaning-information-jobs/qdczJpv8RCc-candidate-59-meaning-output-first-run-meaning-package-v002.json",
+    "fileSha256": "bdae5817664073e7493f1523bd117c44631647e139b697c3f972cf31a24dc878",
+    "canonicalSha256": "7bd98c17bc101e8387bc69e9ba3ef153210d69aaeff4d28ed1a2597921eca8d2"
+  },
+  "upstreamBindings": [
+    {
+      "role": "timeline-decision",
+      "schemaVersion": "zev-timeline-composition-decision-v001",
+      "path": "evals/clip_composition/outputs/presentation/meaning-timeline-decisions/qdczJpv8RCc-candidate-59-meaning-output-first-run-timeline-v002/timeline-composition-decision.json",
+      "fileSha256": "3b240912c833f87019a987772da79cd5c6b5832c806312cf31cdca0949dee193",
+      "canonicalSha256": "b0574ca49db9d4b9db14a973d9d5d8276ef803480d4fe9c1f744ef757fcf4708"
+    },
+    {
+      "role": "semantic-validation",
+      "schemaVersion": "presentation-caption-meaning-boundary-validation-report-v001",
+      "path": "evals/clip_composition/outputs/presentation/meaning-boundary-validations/qdczJpv8RCc-candidate-59-meaning-output-first-run-b1-v002/attempt-v002/meaning-boundary-validation-report.json",
+      "fileSha256": "f7edb632fe35c909660660f01eb9068b935258c9399fcf0a1574a5a1b376e385",
+      "canonicalSha256": "7ac8e64496d2953dcaa625d87122b9fa8a42f543d4ff14305fa082b57e9cb82a"
+    },
+    {
+      "role": "semantic-selection",
+      "schemaVersion": "presentation-meaning-boundary-selection-v001",
+      "path": "evals/clip_composition/outputs/presentation/meaning-boundary-validations/qdczJpv8RCc-candidate-59-meaning-output-first-run-b1-v002/attempt-v002/meaning-boundary-selection.json",
+      "fileSha256": "5fe214649c67b0f8bda8e90a91789346735ce785af080ff5163aeda877c93105",
+      "canonicalSha256": "e7b4dfa288271699dab71f17522e14e311ea6e3be474834aa9be79ffdc7fe11f"
+    }
+  ],
+  "checks": [
+    {
+      "name": "recordBinding",
+      "status": "passed",
+      "comparedPaths": [
+        "record:/schemaVersion",
+        "record:/recordId",
+        "job:/runInputRecordBinding"
+      ]
+    },
+    {
+      "name": "targetJobBinding",
+      "status": "passed",
+      "comparedPaths": [
+        "job:/targetJobBinding"
+      ]
+    },
+    {
+      "name": "upstreamBindings",
+      "status": "passed",
+      "comparedPaths": [
+        "upstream:timeline-decision:",
+        "upstream:semantic-validation:",
+        "upstream:semantic-selection:"
+      ]
+    },
+    {
+      "name": "stageProjection",
+      "status": "passed",
+      "comparedPaths": [
+        "record:/title",
+        "job:/title",
+        "job:/timelineCompositionDecisionBinding",
+        "job:/semanticSelectionValidationBinding",
+        "job:/semanticSelectionBinding"
+      ]
+    },
+    {
+      "name": "prePublicationReread",
+      "status": "passed",
+      "comparedPaths": [
+        "job:/runInputRecordBinding",
+        "job:/targetJobBinding",
+        "job:/upstreamBindings"
+      ]
+    }
+  ],
+  "attempt": {
+    "attemptOrdinal": 2,
+    "supersedesReceipt": {
+      "schemaVersion": "presentation-meaning-output-stage-admission-receipt-v002",
+      "path": "evals/clip_composition/outputs/presentation/meaning-output-run-input-records/qdczJpv8RCc-candidate-59-meaning-output-first-run-v001/admissions-v002/06-meaning-package/attempt-0001/stage-admission-receipt.json",
+      "fileSha256": "cf104916fa7f18a91d79d61b6136d24b8c40e05aa88d9262444b87be5568d70e",
+      "canonicalSha256": "1697a25fb2e767ae630f4cc36ab4b03c5dfd2b2de287ebd084f35b4a90341d9b"
+    }
+  }
+}

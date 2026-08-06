@@ -1,0 +1,62 @@
+{
+  "schemaVersion": "presentation-meaning-output-stage-admission-job-v002",
+  "jobId": "qdczJpv8RCc-candidate-59-meaning-output-first-run-v001-08-output-landscape-v002-attempt-0001-current-byte-rebind-v001",
+  "action": "admit-stage",
+  "stage": "output-landscape",
+  "runInputRecordBinding": {
+    "schemaVersion": "presentation-meaning-output-run-input-record-v001",
+    "path": "evals/clip_composition/outputs/presentation/meaning-output-run-input-records/qdczJpv8RCc-candidate-59-meaning-output-first-run-v001/run-input-record.json",
+    "fileSha256": "5ac80deeb0daac08ea32cad7fa9b016cf04ab95ea551fa6981e6c8151ee28680",
+    "canonicalSha256": "22e869ae688e84081e7797189d5283efb855a6d3f075506c5b585ffec6dbaedd"
+  },
+  "targetJobBinding": {
+    "schemaVersion": "presentation-output-formal-job-v001",
+    "path": "evals/clip_composition/outputs/presentation/meaning-output-jobs/qdczJpv8RCc-candidate-59-meaning-output-first-run-landscape-v001/formal-output-job.json",
+    "fileSha256": "e710535d830829bf905550d89c62e87d6e083cbb233f3db72b23dfc45f6fe358",
+    "canonicalSha256": "b88d4e4823c39ed23230bf42db2cd8f49439ac6c71eca16e0ac29080951573bb"
+  },
+  "upstreamBindings": [
+    {
+      "role": "output-request",
+      "schemaVersion": "presentation-output-request-v001",
+      "path": "evals/clip_composition/outputs/presentation/meaning-output-jobs/qdczJpv8RCc-candidate-59-meaning-output-first-run-landscape-v001/output-request.json",
+      "fileSha256": "be1ab2d03ac6d5fd72bd17d728cd31f8c610c9da7ee9720c67c25e51db96b464",
+      "canonicalSha256": "16451f0052e131e7c2d1853fa7585b7939b43c13440c227b79a812ca2edcf5f1"
+    },
+    {
+      "role": "meaning-package",
+      "schemaVersion": "zev-meaning-information-package-v001",
+      "path": "evals/clip_composition/outputs/presentation/meaning-information-packages/qdczJpv8RCc-candidate-59-meaning-output-first-run-meaning-package-v002-meaning-information/meaning-information-package.json",
+      "fileSha256": "27769faadce76c5becec8ad03549300b8a037f728410ca058cc5e376cd3e9613",
+      "canonicalSha256": "918fc26e871533b4ae6bafcd9c1e405e739e085a8fe5a24ed4df8dc00d4d7ceb"
+    },
+    {
+      "role": "base-media",
+      "schemaVersion": null,
+      "path": "evals/clip_composition/outputs/presentation/meaning-output-base-media/qdczJpv8RCc-candidate-59-meaning-output-first-run-meaning-package-v002-meaning-information/base-media.mp4",
+      "fileSha256": "faad660c7623cdbf3a8f3b55cdaffc34729d06683ce391997c51f10fbc076967",
+      "canonicalSha256": null
+    }
+  ],
+  "outputRoot": "evals/clip_composition/outputs/presentation/meaning-output-run-input-records/qdczJpv8RCc-candidate-59-meaning-output-first-run-v001/admissions-v002/08-output-landscape/attempt-0001",
+  "implementationBindings": [
+    {
+      "path": "evals/clip_composition/presentation_meaning_output_run_input_record_v001.mjs",
+      "fileSha256": "6cda4ebdee30e887f9c4f916fc20c736025ca79f5d6c20051765c57315e7abbf",
+      "role": "run-input-record"
+    },
+    {
+      "path": "evals/clip_composition/run_presentation_meaning_output_run_input_record_v001.mjs",
+      "fileSha256": "ef0248d49586fcbeb90708ed5ea466e1d4281e62a6eedf294701d68be25a1e2f",
+      "role": "run-input-record-runner"
+    }
+  ],
+  "executionPolicy": {
+    "oneShot": true,
+    "allowOverwrite": false
+  },
+  "attempt": {
+    "attemptOrdinal": 1,
+    "supersedesReceipt": null
+  }
+}

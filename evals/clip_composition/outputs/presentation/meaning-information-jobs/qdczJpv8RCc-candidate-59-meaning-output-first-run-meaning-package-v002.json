@@ -1,0 +1,62 @@
+{
+  "schemaVersion": "zev-meaning-information-package-job-v001",
+  "jobId": "qdczJpv8RCc-candidate-59-meaning-output-first-run-meaning-package-v002",
+  "packageId": "qdczJpv8RCc-candidate-59-meaning-output-first-run-meaning-package-v002-meaning-information",
+  "title": {
+    "text": "",
+    "inputMode": "none"
+  },
+  "timelineCompositionDecisionBinding": {
+    "schemaVersion": "zev-timeline-composition-decision-v001",
+    "path": "evals/clip_composition/outputs/presentation/meaning-timeline-decisions/qdczJpv8RCc-candidate-59-meaning-output-first-run-timeline-v002/timeline-composition-decision.json",
+    "fileSha256": "3b240912c833f87019a987772da79cd5c6b5832c806312cf31cdca0949dee193",
+    "canonicalSha256": "b0574ca49db9d4b9db14a973d9d5d8276ef803480d4fe9c1f744ef757fcf4708"
+  },
+  "semanticSelectionValidationBinding": {
+    "schemaVersion": "presentation-caption-meaning-boundary-validation-report-v001",
+    "path": "evals/clip_composition/outputs/presentation/meaning-boundary-validations/qdczJpv8RCc-candidate-59-meaning-output-first-run-b1-v002/attempt-v002/meaning-boundary-validation-report.json",
+    "fileSha256": "f7edb632fe35c909660660f01eb9068b935258c9399fcf0a1574a5a1b376e385",
+    "canonicalSha256": "7ac8e64496d2953dcaa625d87122b9fa8a42f543d4ff14305fa082b57e9cb82a"
+  },
+  "semanticSelectionBinding": {
+    "schemaVersion": "presentation-meaning-boundary-selection-v001",
+    "path": "evals/clip_composition/outputs/presentation/meaning-boundary-validations/qdczJpv8RCc-candidate-59-meaning-output-first-run-b1-v002/attempt-v002/meaning-boundary-selection.json",
+    "fileSha256": "5fe214649c67b0f8bda8e90a91789346735ce785af080ff5163aeda877c93105",
+    "canonicalSha256": "e7b4dfa288271699dab71f17522e14e311ea6e3be474834aa9be79ffdc7fe11f"
+  },
+  "outputPath": "evals/clip_composition/outputs/presentation/meaning-information-packages/qdczJpv8RCc-candidate-59-meaning-output-first-run-meaning-package-v002-meaning-information/meaning-information-package.json",
+  "implementationBindings": [
+    {
+      "path": "evals/clip_composition/presentation_meaning_information_package_v001.mjs",
+      "fileSha256": "6f2e6b33dd7c73206abe3cdbb354d2f10f014192187a9655404b43b6c5dffe42",
+      "role": "meaning-package"
+    },
+    {
+      "path": "evals/clip_composition/run_presentation_meaning_information_package_job_v001.mjs",
+      "fileSha256": "eddf9dbe2d7b5f919154b748363d66085e378499d0099e988a8473e577416233",
+      "role": "meaning-package-runner"
+    },
+    {
+      "path": "evals/clip_composition/presentation_retained_source_atoms_v001.mjs",
+      "fileSha256": "f28178327ddc0cc64f11527d850c71bfb5043b4e13f59f6da7997fd8f6d6cad0",
+      "role": "retained-atoms"
+    },
+    {
+      "path": "evals/clip_composition/presentation_caption_semantic_source_package_v001.mjs",
+      "fileSha256": "ac3dcbbc671af6f56dcceeea6a41c8ae9cbf9fc4ba28a8a00bbc5d6faff45bcd",
+      "role": "strict-json"
+    }
+  ],
+  "approvedContractBindings": [
+    {
+      "path": "evals/clip_composition/reports/presentation/presentation-meaning-information-package-contract-design-20260803-v001.md",
+      "fileSha256": "a38ef995c5c838f742c1de6c18acd5a7fd166ea57fb7537e51cf9a89abd4c0de",
+      "role": "meaning-package-contract"
+    },
+    {
+      "path": "evals/clip_composition/reports/presentation/presentation-output-side-acceptance-contract-design-20260803-v001.md",
+      "fileSha256": "c349d544e9cc954d2f5b9e5e05334801e6a11cdce383f57829c04ae301b678de",
+      "role": "output-side-contract"
+    }
+  ]
+}

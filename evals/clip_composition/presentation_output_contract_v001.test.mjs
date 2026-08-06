@@ -475,6 +475,52 @@ test('OCT001: output requestからaccepted reportを決定的に構築する', a
   const sparseMaterialsRequest = request();
   sparseMaterialsRequest.styleInput.materials.length = 1;
   assert.equal(validatePresentationOutputRequestV001(sparseMaterialsRequest), false);
+  const verticalRequest = request();
+  verticalRequest.styleInput = {
+    ...verticalRequest.styleInput,
+    format: 'vertical-short-1080x1920',
+    screenLayoutId: 'speaker_only',
+    presetBinding: {
+      ...verticalRequest.styleInput.presetBinding,
+      trustedRegistryBindings: binding('presentation-registry-trust-v002', 'vertical-trust'),
+      presetRegistry: binding('presentation-preset-registry-v002', 'vertical-preset'),
+      presetValidationIndex: binding(
+        'vertical-short-preset-registry-v001', 'vertical-preset-index',
+      ),
+      rendererTrust: binding(
+        'presentation-vertical-renderer-trust-v001', 'vertical-renderer-trust',
+      ),
+      presetId: 'vertical-short-speaker-only-readable-pop-v001',
+    },
+    captionLayoutPolicy: {
+      ...verticalRequest.styleInput.captionLayoutPolicy,
+      maxLogicalWidthPerLine: 14,
+    },
+    cropPolicy: {
+      mode: 'bound-decision',
+      scope: 'all-segments',
+      application: binding(
+        'presentation-output-crop-application-v001', 'crop-application',
+      ),
+    },
+  };
+  assert.equal(validatePresentationOutputRequestV001(verticalRequest), true);
+  const legacyCropPolicy = structuredClone(verticalRequest);
+  legacyCropPolicy.styleInput.cropPolicy = {
+    mode: 'bound-decision',
+    scope: 'all-segments',
+    decision: binding('vertical-preset-type-crop-decision-v006', 'crop-decision'),
+    selectionPackageManifest: binding(
+      'vertical-preset-type-crop-selection-package-v006', 'crop-selection',
+    ),
+  };
+  assert.equal(validatePresentationOutputRequestV001(legacyCropPolicy), false);
+  const missingApplicationKey = structuredClone(verticalRequest);
+  delete missingApplicationKey.styleInput.cropPolicy.application.canonicalSha256;
+  assert.equal(validatePresentationOutputRequestV001(missingApplicationKey), false);
+  const extraApplicationKey = structuredClone(verticalRequest);
+  extraApplicationKey.styleInput.cropPolicy.application.extra = true;
+  assert.equal(validatePresentationOutputRequestV001(extraApplicationKey), false);
   const calls = [];
   const evaluation = await evaluatePresentationOutputAcceptanceChecksV001({
     evaluators: passedEvaluators(null, calls),

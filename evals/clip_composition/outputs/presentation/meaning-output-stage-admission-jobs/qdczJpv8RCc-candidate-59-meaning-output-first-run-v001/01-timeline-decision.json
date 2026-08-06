@@ -1,0 +1,36 @@
+{
+  "schemaVersion": "presentation-meaning-output-stage-admission-job-v001",
+  "jobId": "qdczJpv8RCc-candidate-59-meaning-output-first-run-v001-01-timeline-decision-job",
+  "action": "admit-stage",
+  "stage": "timeline-decision",
+  "runInputRecordBinding": {
+    "schemaVersion": "presentation-meaning-output-run-input-record-v001",
+    "path": "evals/clip_composition/outputs/presentation/meaning-output-run-input-records/qdczJpv8RCc-candidate-59-meaning-output-first-run-v001/run-input-record.json",
+    "fileSha256": "5ac80deeb0daac08ea32cad7fa9b016cf04ab95ea551fa6981e6c8151ee28680",
+    "canonicalSha256": "22e869ae688e84081e7797189d5283efb855a6d3f075506c5b585ffec6dbaedd"
+  },
+  "targetJobBinding": {
+    "schemaVersion": "zev-timeline-composition-decision-job-v001",
+    "path": "evals/clip_composition/outputs/presentation/meaning-timeline-decision-jobs/qdczJpv8RCc-candidate-59-meaning-output-first-run-timeline-v001.json",
+    "fileSha256": "e53de3623e89fe90a1e8ab8396e8a9a4dddadc30de8367ceaf5f0dff45c3b6dc",
+    "canonicalSha256": "ee8c236c3c567e82cbf97cb394eb6234469d01043e4ab4ce0cb544ab2bcc3553"
+  },
+  "upstreamBindings": [],
+  "outputRoot": "evals/clip_composition/outputs/presentation/meaning-output-run-input-records/qdczJpv8RCc-candidate-59-meaning-output-first-run-v001/admissions/01-timeline-decision",
+  "implementationBindings": [
+    {
+      "path": "evals/clip_composition/presentation_meaning_output_run_input_record_v001.mjs",
+      "fileSha256": "6b825bb51667fb321793f3b8408f919f3d5ac42969718481b79988be186d24a0",
+      "role": "run-input-record"
+    },
+    {
+      "path": "evals/clip_composition/run_presentation_meaning_output_run_input_record_v001.mjs",
+      "fileSha256": "8fe3791d0db74f1732567b2a43a42e343ddee6797449eb000a5c87cfc60da9aa",
+      "role": "run-input-record-runner"
+    }
+  ],
+  "executionPolicy": {
+    "oneShot": true,
+    "allowOverwrite": false
+  }
+}

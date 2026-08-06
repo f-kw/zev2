@@ -1,0 +1,104 @@
+{
+  "schemaVersion": "presentation-caption-meaning-boundary-validation-report-v001",
+  "reportId": "presentation-meaning-boundary-validation-report-f3af19835776408c9dbe004f92128c78",
+  "status": "passed",
+  "sourcePackageBinding": {
+    "schemaVersion": "presentation-meaning-boundary-source-package-v001",
+    "path": "evals/clip_composition/outputs/presentation/meaning-boundary-source-packages/qdczJpv8RCc-candidate-59-meaning-output-first-run-b3-v001/meaning-boundary-source-package.json",
+    "fileSha256": "f1c08064f8307dd2da0967f7c9e6d74e8027de81c0bd4828db0c1cab1cbdad15",
+    "canonicalSha256": "8de6370af6dacdf651aae38a08dea9658b4490fc7b77e777c16e245b36be00cf"
+  },
+  "rawResponseBinding": {
+    "path": "evals/clip_composition/outputs/presentation/meaning-boundary-b6-attempts/qdczJpv8RCc-candidate-59-meaning-output-first-run-b6-v001/attempt-v001/generate-content-response.raw.json",
+    "fileSha256": "a9223966adc13ae2a3820bfaf4636a50857a586691ce9af6d4077027d1eab651"
+  },
+  "selectionBinding": {
+    "schemaVersion": "presentation-meaning-boundary-selection-v001",
+    "path": "evals/clip_composition/outputs/presentation/meaning-boundary-validations/qdczJpv8RCc-candidate-59-meaning-output-first-run-b1-v002/attempt-v002/meaning-boundary-selection.json",
+    "fileSha256": "5fe214649c67b0f8bda8e90a91789346735ce785af080ff5163aeda877c93105",
+    "canonicalSha256": "e7b4dfa288271699dab71f17522e14e311ea6e3be474834aa9be79ffdc7fe11f"
+  },
+  "checks": [
+    {
+      "name": "sourcePackageBinding",
+      "status": "passed",
+      "violationCodes": []
+    },
+    {
+      "name": "responseEnvelope",
+      "status": "passed",
+      "violationCodes": []
+    },
+    {
+      "name": "responseSchema",
+      "status": "passed",
+      "violationCodes": []
+    },
+    {
+      "name": "containerBijection",
+      "status": "passed",
+      "violationCodes": []
+    },
+    {
+      "name": "candidateResolution",
+      "status": "passed",
+      "violationCodes": []
+    },
+    {
+      "name": "endMonotonicity",
+      "status": "passed",
+      "violationCodes": []
+    },
+    {
+      "name": "containerFinalEnd",
+      "status": "passed",
+      "violationCodes": []
+    },
+    {
+      "name": "candidateCoverage",
+      "status": "passed",
+      "violationCodes": []
+    },
+    {
+      "name": "atomOccurrenceCoverage",
+      "status": "passed",
+      "violationCodes": []
+    },
+    {
+      "name": "captionProjection",
+      "status": "passed",
+      "violationCodes": []
+    }
+  ],
+  "violations": [],
+  "selectionProjection": {
+    "containerCount": 2,
+    "meaningGroupCount": 31,
+    "selectedBoundaryCount": 31,
+    "selectionCanonicalSha256": "63ef1e8179f830f8a269b7a9274efbea8565e07f3a2a0fc5b31a851e0017b094"
+  },
+  "captionProjection": {
+    "captionCount": 31,
+    "atomOccurrenceCount": 281,
+    "captionTextSequenceCanonicalSha256": "464dca25fe345f4f697fc729a4f8dc52000539a343ddef62780542ecaa36038d",
+    "captionTimingSequenceCanonicalSha256": "21d35262b46c9226c77a6efc9e4359a14d1fc7add583d83b12f6b25f01219dc6",
+    "captionAtomRefSequenceCanonicalSha256": "013cc1603ea39de367742ae5b0274ac086e0ef70965924c2c29647425ce3dc89"
+  },
+  "implementationBindings": [
+    {
+      "path": "evals/clip_composition/presentation_meaning_boundary_selection_v001.mjs",
+      "fileSha256": "3ca051215d07c11d9d58ad49db1d785f34debb9a66686cddc75fbbdb6b363e69",
+      "role": "meaning-selection"
+    },
+    {
+      "path": "evals/clip_composition/presentation_meaning_boundary_source_package_v001.mjs",
+      "fileSha256": "fea5926ceffb2efc0815e4f31490e27f31fc3a59c90b122196b8385f01cd9a9b",
+      "role": "meaning-source-package"
+    },
+    {
+      "path": "evals/clip_composition/presentation_caption_semantic_source_package_v001.mjs",
+      "fileSha256": "ac3dcbbc671af6f56dcceeea6a41c8ae9cbf9fc4ba28a8a00bbc5d6faff45bcd",
+      "role": "strict-json-codec"
+    }
+  ]
+}

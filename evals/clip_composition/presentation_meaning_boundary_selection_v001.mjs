@@ -176,10 +176,11 @@ const validAbstainedResponse = value => exactKeys(value, ['status']) && value.st
 export function decodePresentationMeaningBoundaryResponseV001(bytes) {
   const decoded = decodePresentationCaptionB1StrictJsonV001(bytes);
   if (decoded.status !== 'decoded') return {status: 'invalid', reason: decoded.reason};
-  if (bytes.length < 3
+  const endsWithObject = bytes.at(-1) === 0x7d;
+  const endsWithObjectAndLf = bytes.at(-2) === 0x7d && bytes.at(-1) === 0x0a;
+  if (bytes.length < 2
     || bytes[0] !== 0x7b
-    || bytes.at(-2) !== 0x7d
-    || bytes.at(-1) !== 0x0a) {
+    || (!endsWithObject && !endsWithObjectAndLf)) {
     return {status: 'invalid', reason: 'byte-envelope-invalid'};
   }
   if (validAbstainedResponse(decoded.value)) return {status: 'abstained', response: decoded.value};

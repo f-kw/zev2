@@ -1,0 +1,40 @@
+{
+  "schemaVersion": "presentation-meaning-output-stage-admission-job-v002",
+  "jobId": "qdczJpv8RCc-candidate-59-meaning-output-first-run-v001-01-timeline-decision-v002-attempt-0001",
+  "action": "admit-stage",
+  "stage": "timeline-decision",
+  "runInputRecordBinding": {
+    "schemaVersion": "presentation-meaning-output-run-input-record-v001",
+    "path": "evals/clip_composition/outputs/presentation/meaning-output-run-input-records/qdczJpv8RCc-candidate-59-meaning-output-first-run-v001/run-input-record.json",
+    "fileSha256": "5ac80deeb0daac08ea32cad7fa9b016cf04ab95ea551fa6981e6c8151ee28680",
+    "canonicalSha256": "22e869ae688e84081e7797189d5283efb855a6d3f075506c5b585ffec6dbaedd"
+  },
+  "targetJobBinding": {
+    "schemaVersion": "zev-timeline-composition-decision-job-v001",
+    "path": "evals/clip_composition/outputs/presentation/meaning-timeline-decision-jobs/qdczJpv8RCc-candidate-59-meaning-output-first-run-timeline-v002.json",
+    "fileSha256": "beed7353d3afdc555da6cc6c9fff79e49f2bdc8be2f5b0f83e8bcbfbd0c52da9",
+    "canonicalSha256": "9c11b5ca4f5b001a9af9f5396e432f792088cae6424773ef4ba786bd6abdd52c"
+  },
+  "upstreamBindings": [],
+  "outputRoot": "evals/clip_composition/outputs/presentation/meaning-output-run-input-records/qdczJpv8RCc-candidate-59-meaning-output-first-run-v001/admissions-v002/01-timeline-decision/attempt-0001",
+  "implementationBindings": [
+    {
+      "path": "evals/clip_composition/presentation_meaning_output_run_input_record_v001.mjs",
+      "fileSha256": "39d27a60b569a4f4b8921806e56672bb5f271ad1a0f079b8ff01dd014b66d474",
+      "role": "run-input-record"
+    },
+    {
+      "path": "evals/clip_composition/run_presentation_meaning_output_run_input_record_v001.mjs",
+      "fileSha256": "ef0248d49586fcbeb90708ed5ea466e1d4281e62a6eedf294701d68be25a1e2f",
+      "role": "run-input-record-runner"
+    }
+  ],
+  "executionPolicy": {
+    "oneShot": true,
+    "allowOverwrite": false
+  },
+  "attempt": {
+    "attemptOrdinal": 1,
+    "supersedesReceipt": null
+  }
+}

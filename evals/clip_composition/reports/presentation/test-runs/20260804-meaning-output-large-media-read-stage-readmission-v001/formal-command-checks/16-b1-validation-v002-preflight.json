@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "presentation-formal-command-preflight-v001",
+  "commandId": "b1-validation-v002",
+  "checkedAt": "2026-08-04T12:12:35+09:00",
+  "checks": {
+    "fixedNode": {"status": "passed", "path": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node", "fileSha256": "de4f3b493b15e7a0ee311f6a2c6dbf93858052f5802aa91cfafa2c57e9d6bc5c"},
+    "fixedTsxLoader": {"status": "passed", "path": "/Users/kawafmm/workspace/zev2/node_modules/.pnpm/tsx@4.22.3/node_modules/tsx/dist/loader.mjs", "fileSha256": "f06fb3da72f722ec9a2c3e8502f750ae1b6300b93fb76e8a52548dba69b6730f"},
+    "nodeOptionsAbsent": {"status": "passed", "present": false},
+    "stageAdmissionReceipt": {"status": "passed", "path": "evals/clip_composition/outputs/presentation/meaning-output-run-input-records/qdczJpv8RCc-candidate-59-meaning-output-first-run-v001/admissions-v002/05-b1-validation/attempt-0002/stage-admission-receipt.json", "fileSha256": "c67b53a17d9f5c9b63bf764faf6b30e0cc71a0725a0227c34ae4590fb4cc653a"},
+    "targetJob": {"status": "passed", "path": "evals/clip_composition/outputs/presentation/meaning-boundary-validation-jobs/qdczJpv8RCc-candidate-59-meaning-output-first-run-b1-v002.json", "fileSha256": "f3af19835776408c9dbe004f92128c78c6801b6fc71bad5aaf91a4418079aa15", "formalDecoder": "passed", "valueValidator": "passed", "formalBytes": "passed"},
+    "savedRawResponse": {"status": "passed", "path": "evals/clip_composition/outputs/presentation/meaning-boundary-b6-attempts/qdczJpv8RCc-candidate-59-meaning-output-first-run-b6-v001/attempt-v001/generate-content-response.raw.json", "fileSha256": "a9223966adc13ae2a3820bfaf4636a50857a586691ce9af6d4077027d1eab651", "additionalApiCalls": 0},
+    "oldRejectedReport": {"status": "preserved", "path": "evals/clip_composition/outputs/presentation/meaning-boundary-validations/qdczJpv8RCc-candidate-59-meaning-output-first-run-b1-v001/attempt-v001/meaning-boundary-validation-report.json", "fileSha256": "65381d9932cf3ff73ce821e4f1b80591fe294b0f7d4bcff06b748eb9afb66b67"},
+    "outputRootUnused": {"status": "passed", "path": "evals/clip_composition/outputs/presentation/meaning-boundary-validations/qdczJpv8RCc-candidate-59-meaning-output-first-run-b1-v002/attempt-v002"},
+    "parallelWriterAbsent": {"status": "passed"}
+  },
+  "argv": [
+    "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+    "--import",
+    "/Users/kawafmm/workspace/zev2/node_modules/.pnpm/tsx@4.22.3/node_modules/tsx/dist/loader.mjs",
+    "evals/clip_composition/presentation_meaning_boundary_selection_v001.mjs",
+    "evals/clip_composition/outputs/presentation/meaning-boundary-validation-jobs/qdczJpv8RCc-candidate-59-meaning-output-first-run-b1-v002.json"
+  ]
+}

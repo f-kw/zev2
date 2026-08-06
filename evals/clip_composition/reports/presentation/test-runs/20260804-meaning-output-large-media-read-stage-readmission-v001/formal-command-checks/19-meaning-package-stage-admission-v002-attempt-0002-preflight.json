@@ -1,0 +1,24 @@
+{
+  "schemaVersion": "presentation-formal-command-preflight-v001",
+  "commandId": "meaning-package-stage-admission-v002-attempt-0002",
+  "checkedAt": "2026-08-04T15:06:15+09:00",
+  "checks": {
+    "fixedNode": {"status": "passed", "path": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node", "fileSha256": "de4f3b493b15e7a0ee311f6a2c6dbf93858052f5802aa91cfafa2c57e9d6bc5c"},
+    "fixedTsxLoader": {"status": "passed", "path": "/Users/kawafmm/workspace/zev2/node_modules/.pnpm/tsx@4.22.3/node_modules/tsx/dist/loader.mjs", "fileSha256": "f06fb3da72f722ec9a2c3e8502f750ae1b6300b93fb76e8a52548dba69b6730f"},
+    "nodeOptionsAbsent": {"status": "passed", "present": false},
+    "relatedTests": {"status": "passed", "passed": 33, "failed": 0, "tapPath": "evals/clip_composition/reports/presentation/test-runs/20260804-meaning-information-large-media-streaming-v001/meaning-information-package.tap", "tapFileSha256": "a26c1f4214205ffa40d910072156694ccf5d0fef896f90e745f130fda8a80aa1"},
+    "stageAdmissionJob": {"status": "passed", "path": "evals/clip_composition/outputs/presentation/meaning-output-stage-admission-jobs/qdczJpv8RCc-candidate-59-meaning-output-first-run-v001/v002/06-meaning-package-attempt-0002.json", "fileSha256": "0e9b24e4434c389e18eae6482248ca9d5be67172b1f97006aafe1e928697870d", "canonicalSha256": "5c4219121e4e452933e5475a48381d403babbc2597f5266d7e5e648a6b8068e3", "formalDecoder": "passed", "valueValidator": "passed", "formalBytes": "passed"},
+    "targetJob": {"status": "passed", "path": "evals/clip_composition/outputs/presentation/meaning-information-jobs/qdczJpv8RCc-candidate-59-meaning-output-first-run-meaning-package-v002.json", "fileSha256": "bdae5817664073e7493f1523bd117c44631647e139b697c3f972cf31a24dc878", "canonicalSha256": "7bd98c17bc101e8387bc69e9ba3ef153210d69aaeff4d28ed1a2597921eca8d2", "formalDecoder": "passed", "valueValidator": "passed", "formalBytes": "passed"},
+    "supersededReceipt": {"status": "preserved", "path": "evals/clip_composition/outputs/presentation/meaning-output-run-input-records/qdczJpv8RCc-candidate-59-meaning-output-first-run-v001/admissions-v002/06-meaning-package/attempt-0001/stage-admission-receipt.json", "fileSha256": "cf104916fa7f18a91d79d61b6136d24b8c40e05aa88d9262444b87be5568d70e"},
+    "receiptRootUnused": {"status": "passed", "path": "evals/clip_composition/outputs/presentation/meaning-output-run-input-records/qdczJpv8RCc-candidate-59-meaning-output-first-run-v001/admissions-v002/06-meaning-package/attempt-0002"},
+    "packageRootUnused": {"status": "passed", "path": "evals/clip_composition/outputs/presentation/meaning-information-packages/qdczJpv8RCc-candidate-59-meaning-output-first-run-meaning-package-v002-meaning-information"},
+    "parallelWriterAbsent": {"status": "passed"}
+  },
+  "argv": [
+    "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+    "--import",
+    "/Users/kawafmm/workspace/zev2/node_modules/.pnpm/tsx@4.22.3/node_modules/tsx/dist/loader.mjs",
+    "evals/clip_composition/run_presentation_meaning_output_run_input_record_v001.mjs",
+    "evals/clip_composition/outputs/presentation/meaning-output-stage-admission-jobs/qdczJpv8RCc-candidate-59-meaning-output-first-run-v001/v002/06-meaning-package-attempt-0002.json"
+  ]
+}

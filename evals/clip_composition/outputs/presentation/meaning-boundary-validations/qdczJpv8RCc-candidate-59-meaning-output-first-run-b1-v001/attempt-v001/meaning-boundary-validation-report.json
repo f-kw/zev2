@@ -1,0 +1,96 @@
+{
+  "schemaVersion": "presentation-caption-meaning-boundary-validation-report-v001",
+  "reportId": "presentation-meaning-boundary-validation-report-58d09bdaa22e3b38cb265c77dcca8df4",
+  "status": "rejected",
+  "sourcePackageBinding": {
+    "schemaVersion": "presentation-meaning-boundary-source-package-v001",
+    "path": "evals/clip_composition/outputs/presentation/meaning-boundary-source-packages/qdczJpv8RCc-candidate-59-meaning-output-first-run-b3-v001/meaning-boundary-source-package.json",
+    "fileSha256": "f1c08064f8307dd2da0967f7c9e6d74e8027de81c0bd4828db0c1cab1cbdad15",
+    "canonicalSha256": "8de6370af6dacdf651aae38a08dea9658b4490fc7b77e777c16e245b36be00cf"
+  },
+  "rawResponseBinding": {
+    "path": "evals/clip_composition/outputs/presentation/meaning-boundary-b6-attempts/qdczJpv8RCc-candidate-59-meaning-output-first-run-b6-v001/attempt-v001/generate-content-response.raw.json",
+    "fileSha256": "a9223966adc13ae2a3820bfaf4636a50857a586691ce9af6d4077027d1eab651"
+  },
+  "selectionBinding": null,
+  "checks": [
+    {
+      "name": "sourcePackageBinding",
+      "status": "passed",
+      "violationCodes": []
+    },
+    {
+      "name": "responseEnvelope",
+      "status": "passed",
+      "violationCodes": []
+    },
+    {
+      "name": "responseSchema",
+      "status": "failed",
+      "violationCodes": [
+        "MEANING_BOUNDARY_RESPONSE_SCHEMA_INVALID"
+      ]
+    },
+    {
+      "name": "containerBijection",
+      "status": "blocked",
+      "violationCodes": []
+    },
+    {
+      "name": "candidateResolution",
+      "status": "blocked",
+      "violationCodes": []
+    },
+    {
+      "name": "endMonotonicity",
+      "status": "blocked",
+      "violationCodes": []
+    },
+    {
+      "name": "containerFinalEnd",
+      "status": "blocked",
+      "violationCodes": []
+    },
+    {
+      "name": "candidateCoverage",
+      "status": "blocked",
+      "violationCodes": []
+    },
+    {
+      "name": "atomOccurrenceCoverage",
+      "status": "blocked",
+      "violationCodes": []
+    },
+    {
+      "name": "captionProjection",
+      "status": "blocked",
+      "violationCodes": []
+    }
+  ],
+  "violations": [
+    {
+      "code": "MEANING_BOUNDARY_RESPONSE_SCHEMA_INVALID",
+      "path": "/response",
+      "relatedIds": []
+    }
+  ],
+  "selectionProjection": null,
+  "captionProjection": null,
+  "implementationBindings": [
+    {
+      "path": "evals/clip_composition/presentation_meaning_boundary_selection_v001.mjs",
+      "fileSha256": "455e209fc00ae1cd14548f5e1dc950dd703736a2050c39988fcb91f55116afb9",
+      "role": "meaning-selection"
+    },
+    {
+      "path": "evals/clip_composition/presentation_meaning_boundary_source_package_v001.mjs",
+      "fileSha256": "fea5926ceffb2efc0815e4f31490e27f31fc3a59c90b122196b8385f01cd9a9b",
+      "role": "meaning-source-package"
+    },
+    {
+      "path": "evals/clip_composition/presentation_caption_semantic_source_package_v001.mjs",
+      "fileSha256": "ac3dcbbc671af6f56dcceeea6a41c8ae9cbf9fc4ba28a8a00bbc5d6faff45bcd",
+      "role": "strict-json-codec"
+    }
+  ]
+}

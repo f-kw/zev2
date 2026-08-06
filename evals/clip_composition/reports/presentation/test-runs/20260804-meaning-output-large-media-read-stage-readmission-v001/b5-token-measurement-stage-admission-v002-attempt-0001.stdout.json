@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "presentation-meaning-output-run-input-failure-report-v001",
+  "failureId": "meaning-output-run-input-failure-7265a3c1828ac5a9a2e7ca70fc92a087",
+  "status": "rejected",
+  "stage": "job-validation",
+  "jobFileObservation": {
+    "path": "evals/clip_composition/outputs/presentation/meaning-output-stage-admission-jobs/qdczJpv8RCc-candidate-59-meaning-output-first-run-v001/v002/03-b5-token-measurement-attempt-0001.json",
+    "fileSha256": "7265a3c1828ac5a9a2e7ca70fc92a08793eaa74365dacbe17d1c26ac0073e8b4",
+    "canonicalSha256": null
+  },
+  "violations": [
+    {
+      "code": "RUN_INPUT_PUBLICATION_JOB_INVALID",
+      "path": "/job",
+      "relatedIds": []
+    }
+  ],
+  "retainedPaths": [],
+  "environment": {
+    "nodePath": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+    "nodeFileSha256": "de4f3b493b15e7a0ee311f6a2c6dbf93858052f5802aa91cfafa2c57e9d6bc5c",
+    "nodeVersion": "v20.19.6",
+    "executedAt": "2026-08-03T22:47:11.122Z"
+  }
+}

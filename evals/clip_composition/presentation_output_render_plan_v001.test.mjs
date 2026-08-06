@@ -40,6 +40,11 @@ import {
 import {
   inspectPresentationBaseMediaSourceV001,
 } from './presentation_base_media_build_v001.mjs';
+import {
+  PRESENTATION_OUTPUT_CROP_APPLICATION_CHECKS_V001,
+  derivePresentationOutputCropSelectionProjectionV001,
+  serializePresentationOutputCropApplicationFormalJsonV001,
+} from './presentation_output_crop_application_v001.mjs';
 import presentationOutputStyleResolverV001 from './presentation_output_style_resolver_v001.ts';
 import {
   PRESENTATION_OUTPUT_RENDER_DIAGNOSTIC_CODES_V001,
@@ -79,6 +84,9 @@ const {
 
 const ROOT = process.cwd();
 const START_COMMIT = 'c2a172aa5d0d5e5ed2759b25a33d886886c89f8f';
+const RUN_INPUT_CROP_INITIAL_HEAD = 'cf7b2af9c77d71ad78644e7ec8f754804036fcf8';
+const RUN_INPUT_CROP_IMPLEMENTATION_BASELINE_COMMIT =
+  'a1fd43d890fe12bb2c6db432b4d9cdfd828d4a8f';
 const H = 'a'.repeat(64);
 const sha256 = bytes => createHash('sha256').update(bytes).digest('hex');
 const outputCanonicalSha256 = value => sha256(Buffer.from(
@@ -873,7 +881,14 @@ const buildFormalE2eMeaningPackage = async ({
   };
 };
 
-const formalE2eStyleInput = async ({format, baseMediaBinding}) => {
+const formalE2eStyleInput = async ({
+  format,
+  baseMediaInput,
+  baseMediaInspection,
+  fixtureRoot,
+  reviewedBaseMediaBinding,
+  sourceRef,
+}) => {
   const registryName = format === 'normal-landscape'
     ? 'normal-landscape-preset-registry-v001'
     : 'vertical-short-preset-registry-v001';
@@ -913,36 +928,110 @@ const formalE2eStyleInput = async ({format, baseMediaBinding}) => {
     );
     const selection = structuredClone(sourceSelection.value);
     selection.sourceMedia = {
-      path: baseMediaBinding.path,
-      fileSha256: baseMediaBinding.fileSha256,
+      path: reviewedBaseMediaBinding.path,
+      fileSha256: reviewedBaseMediaBinding.fileSha256,
       previewSecond: 0.5,
     };
-    const selectionPath = `${path.posix.dirname(baseMediaBinding.path)}/crop/selection-package-manifest-v006.json`;
+    const selectionPath = `${fixtureRoot}/reviewed-crop/selection-package-manifest-v006.json`;
     const selectionBytes = Buffer.from(`${JSON.stringify(selection, null, 2)}\n`, 'utf8');
     await writeFormalFixture(selectionPath, selection, selectionBytes);
-    const sourceDecision = await readOutputArtifact(`${FORMAL_E2E_CROP_ROOT}/crop-decision-v006.json`);
+    const sourceDecision = await readOutputArtifact(
+      `${FORMAL_E2E_CROP_ROOT}/crop-decision-v006.json`,
+    );
     const decision = structuredClone(sourceDecision.value);
     decision.provenance.selectionPackageManifest = {
       path: 'selection-package-manifest-v006.json',
       fileSha256: sha256(selectionBytes),
     };
-    const decisionPath = `${path.posix.dirname(baseMediaBinding.path)}/crop/crop-decision-v006.json`;
+    const decisionPath = `${fixtureRoot}/reviewed-crop/crop-decision-v006.json`;
     const decisionBytes = Buffer.from(`${JSON.stringify(decision, null, 2)}\n`, 'utf8');
     await writeFormalFixture(decisionPath, decision, decisionBytes);
+    const selectionArtifact = {
+      path: selectionPath,
+      value: selection,
+      bytes: selectionBytes,
+      binding: outputJsonBinding(
+        selection.schemaVersion, selectionPath, selection, selectionBytes,
+      ),
+    };
+    const decisionArtifact = {
+      path: decisionPath,
+      value: decision,
+      bytes: decisionBytes,
+      binding: outputJsonBinding(
+        decision.schemaVersion, decisionPath, decision, decisionBytes,
+      ),
+    };
+    const reviewedBaseMedia = {
+      baseMedia: reviewedBaseMediaBinding,
+      timeline: binding('presentation-base-media-timeline-v002', 'reviewed-timeline'),
+      generationManifest: binding(
+        'presentation-base-media-generation-manifest-v002',
+        'reviewed-generation-manifest',
+      ),
+      validationReport: binding(
+        'presentation-base-media-validation-report-v001',
+        'reviewed-validation-report',
+      ),
+    };
+    const application = {
+      schemaVersion: 'presentation-output-crop-application-v001',
+      applicationId: `${path.posix.basename(path.posix.dirname(baseMediaInput.baseMedia.path))}-crop`,
+      status: 'passed',
+      jobBinding: binding('presentation-output-crop-application-job-v001', 'crop-job'),
+      runInputRecordBinding: binding(
+        'presentation-meaning-output-run-input-record-v001', 'run-input-record',
+      ),
+      reviewedCrop: {
+        decision: decisionArtifact.binding,
+        selectionPackageManifest: selectionArtifact.binding,
+        reviewedBaseMedia,
+      },
+      targetBaseMedia: structuredClone(baseMediaInput),
+      sourceEquivalence: {
+        guarantee: 'same-source-and-timeline-only',
+        sourceRef,
+        sourceMedia: reviewedBaseMedia.baseMedia,
+        sourceFrameClock: {
+          inputFrameRate: '30/1', logicalFrameRate: '30/1',
+          extractionRuleId: 'formal-output-fixture-clock-v001',
+          decodedFrameCount: baseMediaInspection.frameCount,
+        },
+        segments: [{
+          sourceStartMs: 0, sourceEndMs: 1000,
+          sourceStartFrame30: 0, sourceEndFrame30: baseMediaInspection.frameCount,
+          outputStartFrame: 0, outputEndFrame: baseMediaInspection.frameCount,
+        }],
+        outputGeometry: {
+          width: baseMediaInspection.width,
+          height: baseMediaInspection.height,
+          frameRate: '30/1',
+          frameCount: baseMediaInspection.frameCount,
+        },
+        baseMediaByteRelation: reviewedBaseMediaBinding.fileSha256
+          === baseMediaInput.baseMedia.fileSha256 ? 'same' : 'different',
+      },
+      selectionProjection: derivePresentationOutputCropSelectionProjectionV001(
+        decisionArtifact.value,
+      ),
+      checks: Object.fromEntries(
+        PRESENTATION_OUTPUT_CROP_APPLICATION_CHECKS_V001.map(name => [name, 'passed']),
+      ),
+    };
+    const applicationPath = `${path.posix.dirname(baseMediaInput.baseMedia.path)}`
+      + '/crop/crop-application-v001.json';
+    const applicationBytes = serializePresentationOutputCropApplicationFormalJsonV001(
+      application,
+    );
+    await writeFormalFixture(applicationPath, application, applicationBytes);
     cropPolicy = {
       mode: 'bound-decision',
       scope: 'all-segments',
-      decision: outputJsonBinding(
-        'vertical-preset-type-crop-decision-v006',
-        decisionPath,
-        decision,
-        decisionBytes,
-      ),
-      selectionPackageManifest: outputJsonBinding(
-        'vertical-preset-type-crop-selection-package-v006',
-        selectionPath,
-        selection,
-        selectionBytes,
+      application: outputJsonBinding(
+        application.schemaVersion,
+        applicationPath,
+        application,
+        applicationBytes,
       ),
     };
   }
@@ -1127,6 +1216,12 @@ const runFormalOutputE2e = async (format, {
     ], {stdio: 'ignore'});
     const baseMediaBytes = await readFile(baseMediaAbsolute);
     const baseMediaBinding = {path: baseMediaPath, fileSha256: sha256(baseMediaBytes)};
+    const reviewedBaseMediaPath = `${fixtureRoot}/reviewed-base-media.mp4`;
+    await writeFormalFixture(reviewedBaseMediaPath, null, baseMediaBytes);
+    const reviewedBaseMediaBinding = {
+      path: reviewedBaseMediaPath,
+      fileSha256: baseMediaBinding.fileSha256,
+    };
     const meaning = await buildFormalE2eMeaningPackage({
       requestId,
       packagePath,
@@ -1210,33 +1305,45 @@ const runFormalOutputE2e = async (format, {
         documents.receiptBytes,
       ),
     ]);
+    const baseMediaInput = {
+      baseMedia: baseMediaBinding,
+      timeline: formalJsonBinding(
+        documents.timeline.schemaVersion,
+        `${baseOutputRoot}/timeline.json`,
+        documents.timeline,
+        documents.timelineBytes,
+      ),
+      generationManifest: formalJsonBinding(
+        documents.manifest.schemaVersion,
+        `${baseOutputRoot}/generation-manifest.json`,
+        documents.manifest,
+        documents.manifestBytes,
+      ),
+      validationReceipt: formalJsonBinding(
+        documents.receipt.schemaVersion,
+        `${baseOutputRoot}/validation-receipt.json`,
+        documents.receipt,
+        documents.receiptBytes,
+      ),
+    };
     const requestValue = {
       schemaVersion: 'presentation-output-request-v001',
       requestId,
       mode: 'formal-generation',
       meaningInformationPackage: meaning.packageBinding,
-      baseMediaInput: {
-        baseMedia: baseMediaBinding,
-        timeline: formalJsonBinding(
-          documents.timeline.schemaVersion,
-          `${baseOutputRoot}/timeline.json`,
-          documents.timeline,
-          documents.timelineBytes,
-        ),
-        generationManifest: formalJsonBinding(
-          documents.manifest.schemaVersion,
-          `${baseOutputRoot}/generation-manifest.json`,
-          documents.manifest,
-          documents.manifestBytes,
-        ),
-        validationReceipt: formalJsonBinding(
-          documents.receipt.schemaVersion,
-          `${baseOutputRoot}/validation-receipt.json`,
-          documents.receipt,
-          documents.receiptBytes,
-        ),
-      },
-      styleInput: await formalE2eStyleInput({format, baseMediaBinding}),
+      baseMediaInput,
+      styleInput: await formalE2eStyleInput({
+        format,
+        baseMediaInput,
+        baseMediaInspection: {
+          width: mediaInspection.video.width,
+          height: mediaInspection.video.height,
+          frameCount: decodedFrameCount,
+        },
+        fixtureRoot,
+        reviewedBaseMediaBinding,
+        sourceRef: meaning.sourceIdentity.sourceRef,
+      }),
       publication: {outputId, controlRoot, renderOutputRoot: renderRoot},
     };
     const requestBytes = formalBytes(requestValue);
@@ -1818,8 +1925,13 @@ const implementationPaths = [
   'evals/clip_composition/presentation_meaning_boundary_source_package_v001.test.mjs',
   'evals/clip_composition/presentation_meaning_boundary_b5_b6_v001.test.mjs',
   'evals/clip_composition/presentation_meaning_boundary_selection_v001.test.mjs',
+  'evals/clip_composition/presentation_meaning_output_run_input_record_v001.mjs',
+  'evals/clip_composition/run_presentation_meaning_output_run_input_record_v001.mjs',
+  'evals/clip_composition/presentation_meaning_output_run_input_record_v001.test.mjs',
   'evals/clip_composition/presentation_output_base_media_v001.mjs',
   'evals/clip_composition/run_presentation_output_base_media_job_v001.mjs',
+  'evals/clip_composition/presentation_output_crop_application_v001.mjs',
+  'evals/clip_composition/run_presentation_output_crop_application_job_v001.mjs',
   'evals/clip_composition/presentation_output_contract_v001.mjs',
   'evals/clip_composition/presentation_output_page_line_planner_v001.mjs',
   'evals/clip_composition/presentation_output_style_resolver_v001.ts',
@@ -1876,14 +1988,14 @@ test('OPF003: X01〜X04は開始SHAと許可された共通入口を持つ', asy
   }
 });
 
-test('OPF004: 実装path集合はexact 27件で28件目を持たない', async () => {
-  assert.equal(implementationPaths.length, 27);
-  assert.equal(new Set(implementationPaths).size, 27);
+test('OPF004: 実装path集合はexact 32件で33件目を持たない', async () => {
+  assert.equal(implementationPaths.length, 32);
+  assert.equal(new Set(implementationPaths).size, 32);
   for (const relativePath of implementationPaths) {
     assert.equal((await stat(path.join(ROOT, relativePath))).isFile(), true);
   }
   const isBoundaryImplementationPath = relativePath => (
-    /^(?:evals\/clip_composition\/)(?:presentation_(?:timeline_composition_decision|meaning_information_package|meaning_boundary|output_)|run_presentation_(?:meaning|output)|presentation_renderer_plan_v002\.mjs$|inspect_presentation_preset_layout\.ts$|presentation_caption_api_cost_guard_v001\.mjs$|run_presentation_caption_gate_b6_v001\.mjs$)/u
+    /^(?:evals\/clip_composition\/)(?:presentation_(?:timeline_composition_decision|meaning_information_package|meaning_boundary|meaning_output_|output_)|run_presentation_(?:meaning|output)|presentation_renderer_plan_v002\.mjs$|inspect_presentation_preset_layout\.ts$|presentation_caption_api_cost_guard_v001\.mjs$|run_presentation_caption_gate_b6_v001\.mjs$)/u
       .test(relativePath)
   );
   const trackedChanges = git([
@@ -2014,6 +2126,10 @@ test('OPF009: 旧schema converter/fallback/併産を新経路に持たない', a
   assert.doesNotMatch(code,
     /instruction-bundle|resolution-package|presentation-caption-display-plan-v00/iu);
   assert.doesNotMatch(code, /(?:convert|fallback).*(?:caption-display|instruction|resolution)/iu);
+  assert.doesNotMatch(code, /cropPolicy\.(?:decision|selectionPackageManifest)\b/u);
+  assert.match(code, /cropPolicy\.application\b/u);
+  assert.match(code, /inspectPresentationOutputCropApplicationEnvelopeV001\s*\(/u);
+  assert.match(code, /validatePresentationOutputCropApplicationV001\s*\(/u);
 });
 
 test('OPF010: 新規検査はAPI通信0件・secret保存0件である', async () => {
@@ -2138,4 +2254,105 @@ test('OPF012: 固定Node+TSX loaderでO05/O07実exportを使い追加loaderを�
     stage: 'job-validation',
     diagnosticCode: 'OUTPUT_FORMAL_JOB_INVALID',
   });
+});
+
+test('OPF013: 実行入力・crop適用の承認済み親設計SHAが一致する', async () => {
+  const relativePath =
+    'evals/clip_composition/reports/presentation/'
+    + 'presentation-meaning-output-run-input-and-crop-application-contract-design-20260803-v001.md';
+  assert.equal(
+    sha256(await readFile(path.join(ROOT, relativePath))),
+    '05ed3b6df0d5b05204df9ddb2dc0f78295d66f77ed125fa9c921037cb91cabc1',
+  );
+});
+
+test('OPF014: 既存3本のstable tagは承認済みcommitを指す', () => {
+  const expectedTagCommits = [
+    ['stable/first-clip-complete-20260727', 'cfa7811c917892fccd39edf9c85aa6e3af2dde97'],
+    ['stable/second-clip-generality-20260728', '09ce3c980e9607b6265b1062e05f3ef171f3c72c'],
+    ['stable/vertical-first-clip-20260802', 'c2a172aa5d0d5e5ed2759b25a33d886886c89f8f'],
+  ];
+  for (const [tag, expectedCommit] of expectedTagCommits) {
+    assert.equal(
+      git(['rev-parse', '--verify', `${tag}^{commit}`]).toString('utf8').trim(),
+      expectedCommit,
+    );
+  }
+});
+
+test('OPF015: v006原本とpresentation台帳の完全treeは初期HEADから不変である', async () => {
+  const protectedRoots = [
+    [FORMAL_E2E_CROP_ROOT, '28fe27051d632a09dfac162687d54aaf4e3b9de4'],
+    [FORMAL_E2E_REGISTRY_ROOT, 'b4a7c9b97bb20ced26b086180150bb1490f7098f'],
+  ];
+  for (const [root, expectedTreeOid] of protectedRoots) {
+    const treeLine = git([
+      'ls-tree', RUN_INPUT_CROP_INITIAL_HEAD, '--', root,
+    ]).toString('utf8').trim();
+    const match = /^040000 tree ([0-9a-f]{40})\t(.+)$/u.exec(treeLine);
+    assert.ok(match, root);
+    assert.equal(match[1], expectedTreeOid, root);
+    assert.equal(match[2], root, root);
+    await verifyStableRoot(RUN_INPUT_CROP_INITIAL_HEAD, root);
+  }
+});
+
+test('OPF016: 実装baselineからの差分は承認済み15 pathだけである', async () => {
+  const approvedRunInputCropImplementationPaths = [
+    'evals/clip_composition/presentation_meaning_output_run_input_record_v001.mjs',
+    'evals/clip_composition/run_presentation_meaning_output_run_input_record_v001.mjs',
+    'evals/clip_composition/presentation_meaning_output_run_input_record_v001.test.mjs',
+    'evals/clip_composition/presentation_output_crop_application_v001.mjs',
+    'evals/clip_composition/run_presentation_output_crop_application_job_v001.mjs',
+    'evals/clip_composition/presentation_output_contract_v001.mjs',
+    'evals/clip_composition/presentation_output_style_resolver_v001.ts',
+    'evals/clip_composition/run_presentation_output_job_v001.ts',
+    'evals/clip_composition/presentation_output_contract_v001.test.mjs',
+    'evals/clip_composition/presentation_output_style_resolver_v001.test.mjs',
+    'evals/clip_composition/presentation_output_page_line_planner_v001.test.mjs',
+    'evals/clip_composition/presentation_output_render_plan_v001.test.mjs',
+  ];
+  const approvedLargeMediaReadImplementationPaths = [
+    'evals/clip_composition/run_presentation_output_base_media_job_v001.mjs',
+    'evals/clip_composition/presentation_output_base_media_v001.test.mjs',
+  ];
+  const approvedPageLineWrapPolicyImplementationPaths = [
+    'evals/clip_composition/presentation_output_page_line_planner_v001.mjs',
+  ];
+  const approvedImplementationPaths = [
+    ...approvedRunInputCropImplementationPaths,
+    ...approvedLargeMediaReadImplementationPaths,
+    ...approvedPageLineWrapPolicyImplementationPaths,
+  ];
+  const newImplementationPaths = new Set(
+    approvedRunInputCropImplementationPaths.slice(0, 5),
+  );
+  const isRunInputCropImplementationPath = relativePath => (
+    /^evals\/clip_composition\/(?:presentation_(?:meaning_output_|output_)|run_presentation_(?:meaning_output_|output_)).*\.(?:mjs|ts)$/u
+      .test(relativePath)
+  );
+  const tracked = git([
+    'diff', '--name-only', RUN_INPUT_CROP_IMPLEMENTATION_BASELINE_COMMIT,
+    '--', 'evals/clip_composition',
+  ]).toString('utf8').trim().split('\n').filter(isRunInputCropImplementationPath);
+  const untracked = git([
+    'ls-files', '--others', '--exclude-standard', '--', 'evals/clip_composition',
+  ]).toString('utf8').trim().split('\n').filter(isRunInputCropImplementationPath);
+
+  assert.equal(approvedRunInputCropImplementationPaths.length, 12);
+  assert.equal(approvedLargeMediaReadImplementationPaths.length, 2);
+  assert.equal(approvedPageLineWrapPolicyImplementationPaths.length, 1);
+  assert.equal(approvedImplementationPaths.length, 15);
+  assert.equal(new Set(approvedImplementationPaths).size, 15);
+  assert.deepEqual(
+    [...new Set([...tracked, ...untracked])].sort(),
+    [...approvedImplementationPaths].sort(),
+  );
+  for (const relativePath of approvedImplementationPaths) {
+    assert.equal((await stat(path.join(ROOT, relativePath))).isFile(), true, relativePath);
+    const baselineEntry = git([
+      'ls-tree', RUN_INPUT_CROP_IMPLEMENTATION_BASELINE_COMMIT, '--', relativePath,
+    ]).toString('utf8').trim();
+    assert.equal(baselineEntry.length === 0, newImplementationPaths.has(relativePath), relativePath);
+  }
 });

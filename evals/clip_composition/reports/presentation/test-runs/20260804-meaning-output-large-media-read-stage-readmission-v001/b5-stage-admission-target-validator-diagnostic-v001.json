@@ -1,0 +1,30 @@
+{
+  "schemaVersion": "presentation-b5-stage-admission-target-validator-diagnostic-v001",
+  "diagnosedAt": "2026-08-04T09:04:05+09:00",
+  "inputs": {
+    "runInputRecordSha256": "5ac80deeb0daac08ea32cad7fa9b016cf04ab95ea551fa6981e6c8151ee28680",
+    "stageAdmissionJobPath": "evals/clip_composition/outputs/presentation/meaning-output-stage-admission-jobs/qdczJpv8RCc-candidate-59-meaning-output-first-run-v001/v002/03-b5-token-measurement-attempt-0001-formal-v001.json",
+    "stageAdmissionJobSha256": "e3710c04c84b240987f9aaec378932d1d38f9fe97771e410fbdf92359039b54e",
+    "b5TargetJobPath": "evals/clip_composition/outputs/presentation/meaning-boundary-b5-jobs/qdczJpv8RCc-candidate-59-meaning-output-first-run-b5-v001.json",
+    "b5TargetJobSha256": "daaab9eb08d865faf3552ce1190172d78d0aa2946b7f0fdbce6839ce2ed70df4"
+  },
+  "observations": {
+    "stageAdmissionFormalDecoder": "decoded",
+    "stageAdmissionValueValidator": true,
+    "stageAdmissionFormalBytesExact": true,
+    "b5TargetFormalDecoder": "decoded",
+    "b5TargetValueValidator": true,
+    "b5TargetFormalBytesExact": true,
+    "pureProjectionStatus": "rejected",
+    "pureProjectionViolationCode": "STAGE_ADMISSION_PROJECTION_MISMATCH",
+    "pureProjectionViolationPath": "/targetJob",
+    "receiptRootExists": false,
+    "apiCommunicationCount": 0
+  },
+  "cause": {
+    "classification": "production-adapter-defect",
+    "summary": "B5のvalidatorは合格時にjob objectを返すが、工程入場側の共通受理処理はtrueまたはstatus=passedだけを合格とみなすため、正しいB5 jobを不合格へ誤分類する",
+    "horizontalFinding": "B6 validatorも合格時にjob objectを返し、同じ工程入場受理処理を通るため、同型不整合がstage 04にも存在する",
+    "testGap": "工程投影testは実validatorではなくtargetJobValidatorとして常にtrueを返す代替関数を使用しており、実物の返値形式を検査していない"
+  }
+}

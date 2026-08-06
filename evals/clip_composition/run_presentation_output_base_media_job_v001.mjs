@@ -41,6 +41,7 @@ import {
 } from './presentation_retained_source_atoms_v001.mjs';
 import {
   PRESENTATION_TIMELINE_COMPOSITION_DECISION_SCHEMA_V001,
+  hashAbsoluteStableStreaming,
   validatePresentationSourceIdentityV001,
   validatePresentationTimelineCompositionDecisionV001,
 } from './presentation_timeline_composition_decision_v001.mjs';
@@ -117,46 +118,6 @@ const readAbsoluteStable = async absolute => {
 const readStable = async (workspaceRoot, relativePath) => {
   const {absolute} = await resolveWorkspacePath(workspaceRoot, relativePath);
   return readAbsoluteStable(absolute);
-};
-
-const hashFileHandle = async handle => {
-  const digest = createHash('sha256');
-  const buffer = Buffer.allocUnsafe(1024 * 1024);
-  let position = 0;
-  while (true) {
-    const {bytesRead} = await handle.read(buffer, 0, buffer.length, position);
-    if (bytesRead === 0) break;
-    digest.update(buffer.subarray(0, bytesRead));
-    position += bytesRead;
-  }
-  return digest.digest('hex');
-};
-
-const hashAbsoluteStableStreaming = async absolute => {
-  const beforePath = await lstat(absolute, {bigint: true});
-  if (!singleRegular(beforePath) || await realpath(absolute) !== absolute) {
-    throw new Error('unsafe-file');
-  }
-  const handle = await open(absolute, 'r');
-  let digest;
-  let afterHandle;
-  try {
-    const beforeHandle = await handle.stat({bigint: true});
-    if (!singleRegular(beforeHandle) || !sameIdentity(beforePath, beforeHandle)) {
-      throw new Error('unstable-file');
-    }
-    digest = await hashFileHandle(handle);
-    afterHandle = await handle.stat({bigint: true});
-    if (!singleRegular(afterHandle) || !sameIdentity(beforeHandle, afterHandle)) {
-      throw new Error('unstable-file');
-    }
-  } finally {
-    await handle.close();
-  }
-  const afterPath = await lstat(absolute, {bigint: true});
-  if (!singleRegular(afterPath) || !sameIdentity(afterHandle, afterPath)
-    || await realpath(absolute) !== absolute) throw new Error('unstable-file');
-  return digest;
 };
 
 const decodeStrict = bytes => {

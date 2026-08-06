@@ -1,0 +1,1433 @@
+{
+  "schemaVersion": "presentation-output-render-qc-v001",
+  "receiptId": "qdczJpv8RCc-candidate-59-meaning-output-first-run-landscape-v002-output-qc",
+  "status": "passed",
+  "renderPlanBinding": {
+    "schemaVersion": "presentation-output-render-plan-v001",
+    "path": "evals/clip_composition/outputs/presentation/meaning-output-control/qdczJpv8RCc-candidate-59-meaning-output-first-run-landscape-v002/render-plan.json",
+    "fileSha256": "78978adb1692bcc0750c7f2ecdebf124c26c744b3eaef520de6bdea0c01ceb04",
+    "canonicalSha256": "6b17c47777654a2f1c8d641879f57fb2143e5cacf99f3b140aa83d32b0329913"
+  },
+  "applicationResultsBinding": {
+    "schemaVersion": "presentation-output-render-application-results-v001",
+    "path": "evals/clip_composition/outputs/presentation/meaning-output-renders/qdczJpv8RCc-candidate-59-meaning-output-first-run-landscape-v002-output/presentation-output-render-application-results-v001.json",
+    "fileSha256": "1c4cc0fa75b342465e51ab6e302911708fe8eddc11bc420700bc3fa3651bdb68",
+    "canonicalSha256": "52793f3aef3c041dfd0413f20c5c8232ae14e1775dde98c9308f6b95fb0be64e"
+  },
+  "outputMedia": {
+    "video": {
+      "path": "evals/clip_composition/outputs/presentation/meaning-output-renders/qdczJpv8RCc-candidate-59-meaning-output-first-run-landscape-v002-output/presentation-output-rendered-v001.mp4",
+      "fileSha256": "c324de226a63397fb83eba13b341b96aa17963bc9c1d49bd5a66987dc8338aa1"
+    },
+    "width": 1920,
+    "height": 1080,
+    "frameCount": 1547,
+    "sampleCount": 2475200,
+    "audioPacketPayloadSha256": "d18469bd3132356b03870ee8bc3d63e95947bd254961157e09d59cf9a53459ec"
+  },
+  "rendererQc": {
+    "schemaVersion": "presentation-render-qc-v002",
+    "status": "passed",
+    "instructionCount": 31,
+    "checks": {
+      "instructionApplication": {
+        "status": "passed"
+      },
+      "layoutAndVisibility": {
+        "status": "passed"
+      },
+      "media": {
+        "status": "passed"
+      }
+    },
+    "instructionEvidence": [
+      {
+        "instructionId": "display-page-000001-001",
+        "requestedPresetId": "normal-landscape-readable-pop-v001",
+        "appliedPresetId": "normal-landscape-readable-pop-v001",
+        "appliedPresetRegistryVersion": "normal-landscape-preset-registry-v001",
+        "alphaMax": 1,
+        "alphaBounds": {
+          "left": 802,
+          "top": 702,
+          "right": 1124,
+          "bottom": 975,
+          "width": 322,
+          "height": 273
+        },
+        "lineCount": 2,
+        "lineAlphaBounds": [
+          {
+            "lineIndex": 0,
+            "left": 802,
+            "top": 702,
+            "right": 1115,
+            "bottom": 829,
+            "width": 313,
+            "height": 127
+          },
+          {
+            "lineIndex": 1,
+            "left": 802,
+            "top": 844,
+            "right": 1124,
+            "bottom": 975,
+            "width": 322,
+            "height": 131
+          }
+        ],
+        "visibilityComparisonBasis": "same-composite-with-instruction-omitted",
+        "representativeFrame": 36,
+        "changedPixelsAgainstInstructionOmittedFrame": 87694,
+        "appliedOverlayPropsCanonicalSha256": "e11224976d28b1f5da598c6e4717f3eaa937c492e093edbd6d5b485b9227c005",
+        "applicationOverlayFile": "overlays/01-1afcc714f245.png",
+        "inspectedOverlayFile": "overlays/01-1afcc714f245.png",
+        "applicationOverlaySha256": "d44de6b14d5b93c3f751da7646f9be7fdfd57ffb678b7b4aaabdcfa50de53f4d",
+        "overlaySha256": "d44de6b14d5b93c3f751da7646f9be7fdfd57ffb678b7b4aaabdcfa50de53f4d"
+      },
+      {
+        "instructionId": "display-page-000002-001",
+        "requestedPresetId": "normal-landscape-readable-pop-v001",
+        "appliedPresetId": "normal-landscape-readable-pop-v001",
+        "appliedPresetRegistryVersion": "normal-landscape-preset-registry-v001",
+        "alphaMax": 1,
+        "alphaBounds": {
+          "left": 658,
+          "top": 700,
+          "right": 1256,
+          "bottom": 975,
+          "width": 598,
+          "height": 275
+        },
+        "lineCount": 2,
+        "lineAlphaBounds": [
+          {
+            "lineIndex": 0,
+            "left": 660,
+            "top": 700,
+            "right": 1256,
+            "bottom": 831,
+            "width": 596,
+            "height": 131
+          },
+          {
+            "lineIndex": 1,
+            "left": 658,
+            "top": 844,
+            "right": 1255,
+            "bottom": 975,
+            "width": 597,
+            "height": 131
+          }
+        ],
+        "visibilityComparisonBasis": "same-composite-with-instruction-omitted",
+        "representativeFrame": 107,
+        "changedPixelsAgainstInstructionOmittedFrame": 164025,
+        "appliedOverlayPropsCanonicalSha256": "2fd1ca71ae570f0f635b3ab22cc5251faa3a2e8a3470f1c722bfb35f26965232",
+        "applicationOverlayFile": "overlays/02-c29a30b1fe46.png",
+        "inspectedOverlayFile": "overlays/02-c29a30b1fe46.png",
+        "applicationOverlaySha256": "0015b4764122f563e69849e1b4e8ce3300e7f6966d63b1c2413a6a97a4d2f0af",
+        "overlaySha256": "0015b4764122f563e69849e1b4e8ce3300e7f6966d63b1c2413a6a97a4d2f0af"
+      },
+      {
+        "instructionId": "display-page-000003-001",
+        "requestedPresetId": "normal-landscape-readable-pop-v001",
+        "appliedPresetId": "normal-landscape-readable-pop-v001",
+        "appliedPresetRegistryVersion": "normal-landscape-preset-registry-v001",
+        "alphaMax": 1,
+        "alphaBounds": {
+          "left": 607,
+          "top": 700,
+          "right": 1306,
+          "bottom": 975,
+          "width": 699,
+          "height": 275
+        },
+        "lineCount": 2,
+        "lineAlphaBounds": [
+          {
+            "lineIndex": 0,
+            "left": 660,
+            "top": 700,
+            "right": 1252,
+            "bottom": 830,
+            "width": 592,
+            "height": 130
+          },
+          {
+            "lineIndex": 1,
+            "left": 607,
+            "top": 844,
+            "right": 1306,
+            "bottom": 975,
+            "width": 699,
+            "height": 131
+          }
+        ],
+        "visibilityComparisonBasis": "same-composite-with-instruction-omitted",
+        "representativeFrame": 164,
+        "changedPixelsAgainstInstructionOmittedFrame": 191658,
+        "appliedOverlayPropsCanonicalSha256": "2b3b21b55516ced1bc98954ba65b8e531261ba7e50f88eea409414d4f38f0535",
+        "applicationOverlayFile": "overlays/03-a55e5e30671e.png",
+        "inspectedOverlayFile": "overlays/03-a55e5e30671e.png",
+        "applicationOverlaySha256": "2654adc297f62e73877461592531d835bbe50e803006137b23dbbf44c7d9978d",
+        "overlaySha256": "2654adc297f62e73877461592531d835bbe50e803006137b23dbbf44c7d9978d"
+      },
+      {
+        "instructionId": "display-page-000004-001",
+        "requestedPresetId": "normal-landscape-readable-pop-v001",
+        "appliedPresetId": "normal-landscape-readable-pop-v001",
+        "appliedPresetRegistryVersion": "normal-landscape-preset-registry-v001",
+        "alphaMax": 1,
+        "alphaBounds": {
+          "left": 612,
+          "top": 700,
+          "right": 1302,
+          "bottom": 973,
+          "width": 690,
+          "height": 273
+        },
+        "lineCount": 2,
+        "lineAlphaBounds": [
+          {
+            "lineIndex": 0,
+            "left": 658,
+            "top": 700,
+            "right": 1259,
+            "bottom": 830,
+            "width": 601,
+            "height": 130
+          },
+          {
+            "lineIndex": 1,
+            "left": 612,
+            "top": 844,
+            "right": 1302,
+            "bottom": 973,
+            "width": 690,
+            "height": 129
+          }
+        ],
+        "visibilityComparisonBasis": "same-composite-with-instruction-omitted",
+        "representativeFrame": 209,
+        "changedPixelsAgainstInstructionOmittedFrame": 187931,
+        "appliedOverlayPropsCanonicalSha256": "40a4024563bf7704f894ddf6393eb56de1c75ba4fa9b8a87c6f30abcbe727489",
+        "applicationOverlayFile": "overlays/04-d7bd5c64cfb5.png",
+        "inspectedOverlayFile": "overlays/04-d7bd5c64cfb5.png",
+        "applicationOverlaySha256": "3b4aa3ff789866475d82ca15c62b7575524a549287e306afc19ad130e46e245b",
+        "overlaySha256": "3b4aa3ff789866475d82ca15c62b7575524a549287e306afc19ad130e46e245b"
+      },
+      {
+        "instructionId": "display-page-000005-001",
+        "requestedPresetId": "normal-landscape-readable-pop-v001",
+        "appliedPresetId": "normal-landscape-readable-pop-v001",
+        "appliedPresetRegistryVersion": "normal-landscape-preset-registry-v001",
+        "alphaMax": 1,
+        "alphaBounds": {
+          "left": 755,
+          "top": 701,
+          "right": 1171,
+          "bottom": 973,
+          "width": 416,
+          "height": 272
+        },
+        "lineCount": 2,
+        "lineAlphaBounds": [
+          {
+            "lineIndex": 0,
+            "left": 809,
+            "top": 701,
+            "right": 1116,
+            "bottom": 830,
+            "width": 307,
+            "height": 129
+          },
+          {
+            "lineIndex": 1,
+            "left": 755,
+            "top": 842,
+            "right": 1171,
+            "bottom": 973,
+            "width": 416,
+            "height": 131
+          }
+        ],
+        "visibilityComparisonBasis": "same-composite-with-instruction-omitted",
+        "representativeFrame": 246,
+        "changedPixelsAgainstInstructionOmittedFrame": 112899,
+        "appliedOverlayPropsCanonicalSha256": "9dedb3475a60db97f2349730fa617f7138b807b5254772b3912c63b25c9422aa",
+        "applicationOverlayFile": "overlays/05-b50a8aaeeb4e.png",
+        "inspectedOverlayFile": "overlays/05-b50a8aaeeb4e.png",
+        "applicationOverlaySha256": "5b59cfed8733370610f9eeb65d1ab4f136c09854c85d466c92d73aed14e05196",
+        "overlaySha256": "5b59cfed8733370610f9eeb65d1ab4f136c09854c85d466c92d73aed14e05196"
+      },
+      {
+        "instructionId": "display-page-000006-001",
+        "requestedPresetId": "normal-landscape-readable-pop-v001",
+        "appliedPresetId": "normal-landscape-readable-pop-v001",
+        "appliedPresetRegistryVersion": "normal-landscape-preset-registry-v001",
+        "alphaMax": 1,
+        "alphaBounds": {
+          "left": 749,
+          "top": 703,
+          "right": 1164,
+          "bottom": 975,
+          "width": 415,
+          "height": 272
+        },
+        "lineCount": 2,
+        "lineAlphaBounds": [
+          {
+            "lineIndex": 0,
+            "left": 800,
+            "top": 703,
+            "right": 1120,
+            "bottom": 828,
+            "width": 320,
+            "height": 125
+          },
+          {
+            "lineIndex": 1,
+            "left": 749,
+            "top": 844,
+            "right": 1164,
+            "bottom": 975,
+            "width": 415,
+            "height": 131
+          }
+        ],
+        "visibilityComparisonBasis": "same-composite-with-instruction-omitted",
+        "representativeFrame": 271,
+        "changedPixelsAgainstInstructionOmittedFrame": 112689,
+        "appliedOverlayPropsCanonicalSha256": "753d51c9daf43e4811d386eb2ad6e2a9ecbc81f8de186f551f77201fea614dee",
+        "applicationOverlayFile": "overlays/06-cb2131022d01.png",
+        "inspectedOverlayFile": "overlays/06-cb2131022d01.png",
+        "applicationOverlaySha256": "d24f0cb7f9e125f74eae3e6f6db6f7fdf3e0434c9c26ec7c2726111c50a57ea4",
+        "overlaySha256": "d24f0cb7f9e125f74eae3e6f6db6f7fdf3e0434c9c26ec7c2726111c50a57ea4"
+      },
+      {
+        "instructionId": "display-page-000007-001",
+        "requestedPresetId": "normal-landscape-readable-pop-v001",
+        "appliedPresetId": "normal-landscape-readable-pop-v001",
+        "appliedPresetRegistryVersion": "normal-landscape-preset-registry-v001",
+        "alphaMax": 1,
+        "alphaBounds": {
+          "left": 704,
+          "top": 700,
+          "right": 1216,
+          "bottom": 973,
+          "width": 512,
+          "height": 273
+        },
+        "lineCount": 2,
+        "lineAlphaBounds": [
+          {
+            "lineIndex": 0,
+            "left": 704,
+            "top": 700,
+            "right": 1216,
+            "bottom": 831,
+            "width": 512,
+            "height": 131
+          },
+          {
+            "lineIndex": 1,
+            "left": 706,
+            "top": 846,
+            "right": 1202,
+            "bottom": 973,
+            "width": 496,
+            "height": 127
+          }
+        ],
+        "visibilityComparisonBasis": "same-composite-with-instruction-omitted",
+        "representativeFrame": 308,
+        "changedPixelsAgainstInstructionOmittedFrame": 139411,
+        "appliedOverlayPropsCanonicalSha256": "58303634a0448978070377daf3df9307930af4ebb6a5bb15d6114a3919556545",
+        "applicationOverlayFile": "overlays/07-00e0c25c623b.png",
+        "inspectedOverlayFile": "overlays/07-00e0c25c623b.png",
+        "applicationOverlaySha256": "d039510b71e14f51ea6ec6db5631757214dfa8de525e26460c30a7cd42bc9947",
+        "overlaySha256": "d039510b71e14f51ea6ec6db5631757214dfa8de525e26460c30a7cd42bc9947"
+      },
+      {
+        "instructionId": "display-page-000008-001",
+        "requestedPresetId": "normal-landscape-readable-pop-v001",
+        "appliedPresetId": "normal-landscape-readable-pop-v001",
+        "appliedPresetRegistryVersion": "normal-landscape-preset-registry-v001",
+        "alphaMax": 1,
+        "alphaBounds": {
+          "left": 705,
+          "top": 700,
+          "right": 1206,
+          "bottom": 974,
+          "width": 501,
+          "height": 274
+        },
+        "lineCount": 2,
+        "lineAlphaBounds": [
+          {
+            "lineIndex": 0,
+            "left": 749,
+            "top": 700,
+            "right": 1163,
+            "bottom": 831,
+            "width": 414,
+            "height": 131
+          },
+          {
+            "lineIndex": 1,
+            "left": 705,
+            "top": 842,
+            "right": 1206,
+            "bottom": 974,
+            "width": 501,
+            "height": 132
+          }
+        ],
+        "visibilityComparisonBasis": "same-composite-with-instruction-omitted",
+        "representativeFrame": 353,
+        "changedPixelsAgainstInstructionOmittedFrame": 137003,
+        "appliedOverlayPropsCanonicalSha256": "f02f6279b902b60b7f20126c00528837415650a85bb9d4d7ba532ef30b904aeb",
+        "applicationOverlayFile": "overlays/08-442626299b6d.png",
+        "inspectedOverlayFile": "overlays/08-442626299b6d.png",
+        "applicationOverlaySha256": "21719451038eea9df1b5e20de9ee3c5c080212e2a85ac13a6a61edc9f021ee7d",
+        "overlaySha256": "21719451038eea9df1b5e20de9ee3c5c080212e2a85ac13a6a61edc9f021ee7d"
+      },
+      {
+        "instructionId": "display-page-000009-001",
+        "requestedPresetId": "normal-landscape-readable-pop-v001",
+        "appliedPresetId": "normal-landscape-readable-pop-v001",
+        "appliedPresetRegistryVersion": "normal-landscape-preset-registry-v001",
+        "alphaMax": 1,
+        "alphaBounds": {
+          "left": 849,
+          "top": 701,
+          "right": 1069,
+          "bottom": 975,
+          "width": 220,
+          "height": 274
+        },
+        "lineCount": 2,
+        "lineAlphaBounds": [
+          {
+            "lineIndex": 0,
+            "left": 893,
+            "top": 701,
+            "right": 1027,
+            "bottom": 831,
+            "width": 134,
+            "height": 130
+          },
+          {
+            "lineIndex": 1,
+            "left": 849,
+            "top": 844,
+            "right": 1069,
+            "bottom": 975,
+            "width": 220,
+            "height": 131
+          }
+        ],
+        "visibilityComparisonBasis": "same-composite-with-instruction-omitted",
+        "representativeFrame": 384,
+        "changedPixelsAgainstInstructionOmittedFrame": 60229,
+        "appliedOverlayPropsCanonicalSha256": "2e15c1f5aac0bebd0fe452dc4ce0b236e4e4644ee5d4efc978cee09b61ae82c8",
+        "applicationOverlayFile": "overlays/09-1b8a87560617.png",
+        "inspectedOverlayFile": "overlays/09-1b8a87560617.png",
+        "applicationOverlaySha256": "3845c55411d6c12000bd3076cc299bfc9a28994b84f0d0abdf9811e652af28cb",
+        "overlaySha256": "3845c55411d6c12000bd3076cc299bfc9a28994b84f0d0abdf9811e652af28cb"
+      },
+      {
+        "instructionId": "display-page-000010-001",
+        "requestedPresetId": "normal-landscape-readable-pop-v001",
+        "appliedPresetId": "normal-landscape-readable-pop-v001",
+        "appliedPresetRegistryVersion": "normal-landscape-preset-registry-v001",
+        "alphaMax": 1,
+        "alphaBounds": {
+          "left": 562,
+          "top": 700,
+          "right": 1353,
+          "bottom": 973,
+          "width": 791,
+          "height": 273
+        },
+        "lineCount": 2,
+        "lineAlphaBounds": [
+          {
+            "lineIndex": 0,
+            "left": 562,
+            "top": 700,
+            "right": 1353,
+            "bottom": 830,
+            "width": 791,
+            "height": 130
+          },
+          {
+            "lineIndex": 1,
+            "left": 562,
+            "top": 846,
+            "right": 1348,
+            "bottom": 973,
+            "width": 786,
+            "height": 127
+          }
+        ],
+        "visibilityComparisonBasis": "same-composite-with-instruction-omitted",
+        "representativeFrame": 420,
+        "changedPixelsAgainstInstructionOmittedFrame": 215428,
+        "appliedOverlayPropsCanonicalSha256": "991b635d394411b6a192066e5416d0072105e45490cb06e5cfe8a12357ea8906",
+        "applicationOverlayFile": "overlays/10-f4b3bb9e5792.png",
+        "inspectedOverlayFile": "overlays/10-f4b3bb9e5792.png",
+        "applicationOverlaySha256": "0b5a8fdaa75780580f1016856f0a7ca6c072b3024ecc48ed4ce1ef5a83364364",
+        "overlaySha256": "0b5a8fdaa75780580f1016856f0a7ca6c072b3024ecc48ed4ce1ef5a83364364"
+      },
+      {
+        "instructionId": "display-page-000011-001",
+        "requestedPresetId": "normal-landscape-readable-pop-v001",
+        "appliedPresetId": "normal-landscape-readable-pop-v001",
+        "appliedPresetRegistryVersion": "normal-landscape-preset-registry-v001",
+        "alphaMax": 1,
+        "alphaBounds": {
+          "left": 752,
+          "top": 700,
+          "right": 1162,
+          "bottom": 974,
+          "width": 410,
+          "height": 274
+        },
+        "lineCount": 2,
+        "lineAlphaBounds": [
+          {
+            "lineIndex": 0,
+            "left": 799,
+            "top": 700,
+            "right": 1124,
+            "bottom": 830,
+            "width": 325,
+            "height": 130
+          },
+          {
+            "lineIndex": 1,
+            "left": 752,
+            "top": 848,
+            "right": 1162,
+            "bottom": 974,
+            "width": 410,
+            "height": 126
+          }
+        ],
+        "visibilityComparisonBasis": "same-composite-with-instruction-omitted",
+        "representativeFrame": 461,
+        "changedPixelsAgainstInstructionOmittedFrame": 111929,
+        "appliedOverlayPropsCanonicalSha256": "41e8c2592ecf40780d6577a69ce6352262e306196e6e1962618ee6f58efb2435",
+        "applicationOverlayFile": "overlays/11-069b3edeb185.png",
+        "inspectedOverlayFile": "overlays/11-069b3edeb185.png",
+        "applicationOverlaySha256": "26278019171bd38c99e62316d17eb641477533e7f1af8c28cf4a1b7fcdba4ba9",
+        "overlaySha256": "26278019171bd38c99e62316d17eb641477533e7f1af8c28cf4a1b7fcdba4ba9"
+      },
+      {
+        "instructionId": "display-page-000012-001",
+        "requestedPresetId": "normal-landscape-readable-pop-v001",
+        "appliedPresetId": "normal-landscape-readable-pop-v001",
+        "appliedPresetRegistryVersion": "normal-landscape-preset-registry-v001",
+        "alphaMax": 1,
+        "alphaBounds": {
+          "left": 761,
+          "top": 703,
+          "right": 1163,
+          "bottom": 972,
+          "width": 402,
+          "height": 269
+        },
+        "lineCount": 2,
+        "lineAlphaBounds": [
+          {
+            "lineIndex": 0,
+            "left": 802,
+            "top": 703,
+            "right": 1111,
+            "bottom": 829,
+            "width": 309,
+            "height": 126
+          },
+          {
+            "lineIndex": 1,
+            "left": 761,
+            "top": 847,
+            "right": 1163,
+            "bottom": 972,
+            "width": 402,
+            "height": 125
+          }
+        ],
+        "visibilityComparisonBasis": "same-composite-with-instruction-omitted",
+        "representativeFrame": 501,
+        "changedPixelsAgainstInstructionOmittedFrame": 107654,
+        "appliedOverlayPropsCanonicalSha256": "160e820bf9767e9145fe86493ad54feae3392dfa4e6935884aff68a4818c5d50",
+        "applicationOverlayFile": "overlays/12-759ed770f3de.png",
+        "inspectedOverlayFile": "overlays/12-759ed770f3de.png",
+        "applicationOverlaySha256": "423ec92b86ba3a0980541d81dfd234f397dd9a9ff65f0913488ae72e09bbf10a",
+        "overlaySha256": "423ec92b86ba3a0980541d81dfd234f397dd9a9ff65f0913488ae72e09bbf10a"
+      },
+      {
+        "instructionId": "display-page-000013-001",
+        "requestedPresetId": "normal-landscape-readable-pop-v001",
+        "appliedPresetId": "normal-landscape-readable-pop-v001",
+        "appliedPresetRegistryVersion": "normal-landscape-preset-registry-v001",
+        "alphaMax": 1,
+        "alphaBounds": {
+          "left": 535,
+          "top": 700,
+          "right": 1378,
+          "bottom": 975,
+          "width": 843,
+          "height": 275
+        },
+        "lineCount": 2,
+        "lineAlphaBounds": [
+          {
+            "lineIndex": 0,
+            "left": 535,
+            "top": 700,
+            "right": 1378,
+            "bottom": 830,
+            "width": 843,
+            "height": 130
+          },
+          {
+            "lineIndex": 1,
+            "left": 560,
+            "top": 844,
+            "right": 1345,
+            "bottom": 975,
+            "width": 785,
+            "height": 131
+          }
+        ],
+        "visibilityComparisonBasis": "same-composite-with-instruction-omitted",
+        "representativeFrame": 570,
+        "changedPixelsAgainstInstructionOmittedFrame": 231013,
+        "appliedOverlayPropsCanonicalSha256": "9115fd2979313b12094225981ec94f162b875d896f62ed6756c2a2e43fc14804",
+        "applicationOverlayFile": "overlays/13-af5a54b48998.png",
+        "inspectedOverlayFile": "overlays/13-af5a54b48998.png",
+        "applicationOverlaySha256": "fcf0edde7d79b487db1c2cbf900179bacfe3f5559b811b9a2eda521f7703201e",
+        "overlaySha256": "fcf0edde7d79b487db1c2cbf900179bacfe3f5559b811b9a2eda521f7703201e"
+      },
+      {
+        "instructionId": "display-page-000014-001",
+        "requestedPresetId": "normal-landscape-readable-pop-v001",
+        "appliedPresetId": "normal-landscape-readable-pop-v001",
+        "appliedPresetRegistryVersion": "normal-landscape-preset-registry-v001",
+        "alphaMax": 1,
+        "alphaBounds": {
+          "left": 704,
+          "top": 702,
+          "right": 1210,
+          "bottom": 974,
+          "width": 506,
+          "height": 272
+        },
+        "lineCount": 2,
+        "lineAlphaBounds": [
+          {
+            "lineIndex": 0,
+            "left": 706,
+            "top": 702,
+            "right": 1206,
+            "bottom": 830,
+            "width": 500,
+            "height": 128
+          },
+          {
+            "lineIndex": 1,
+            "left": 704,
+            "top": 844,
+            "right": 1210,
+            "bottom": 974,
+            "width": 506,
+            "height": 130
+          }
+        ],
+        "visibilityComparisonBasis": "same-composite-with-instruction-omitted",
+        "representativeFrame": 639,
+        "changedPixelsAgainstInstructionOmittedFrame": 136667,
+        "appliedOverlayPropsCanonicalSha256": "225a0b25280a78bbfe07c0d85fd9bf570b6304a0884fdf837cc7d0911def4a92",
+        "applicationOverlayFile": "overlays/14-2bae1ae78bc4.png",
+        "inspectedOverlayFile": "overlays/14-2bae1ae78bc4.png",
+        "applicationOverlaySha256": "b797219b37c9701f766669c992c94cf07dfadbe17641cb8fc160060a3663e7ca",
+        "overlaySha256": "b797219b37c9701f766669c992c94cf07dfadbe17641cb8fc160060a3663e7ca"
+      },
+      {
+        "instructionId": "display-page-000015-001",
+        "requestedPresetId": "normal-landscape-readable-pop-v001",
+        "appliedPresetId": "normal-landscape-readable-pop-v001",
+        "appliedPresetRegistryVersion": "normal-landscape-preset-registry-v001",
+        "alphaMax": 1,
+        "alphaBounds": {
+          "left": 652,
+          "top": 698,
+          "right": 1258,
+          "bottom": 975,
+          "width": 606,
+          "height": 277
+        },
+        "lineCount": 2,
+        "lineAlphaBounds": [
+          {
+            "lineIndex": 0,
+            "left": 703,
+            "top": 698,
+            "right": 1217,
+            "bottom": 831,
+            "width": 514,
+            "height": 133
+          },
+          {
+            "lineIndex": 1,
+            "left": 652,
+            "top": 844,
+            "right": 1258,
+            "bottom": 975,
+            "width": 606,
+            "height": 131
+          }
+        ],
+        "visibilityComparisonBasis": "same-composite-with-instruction-omitted",
+        "representativeFrame": 740,
+        "changedPixelsAgainstInstructionOmittedFrame": 167174,
+        "appliedOverlayPropsCanonicalSha256": "d6a1ca0db12105715ad98aa57d8ef46a208a22449f8d2869d64de3374e23ee7e",
+        "applicationOverlayFile": "overlays/15-6a1c22199737.png",
+        "inspectedOverlayFile": "overlays/15-6a1c22199737.png",
+        "applicationOverlaySha256": "06faac83842584e338c4c1b90785b669d336ee6fa6528e872ea7f93aad0f896e",
+        "overlaySha256": "06faac83842584e338c4c1b90785b669d336ee6fa6528e872ea7f93aad0f896e"
+      },
+      {
+        "instructionId": "display-page-000016-001",
+        "requestedPresetId": "normal-landscape-readable-pop-v001",
+        "appliedPresetId": "normal-landscape-readable-pop-v001",
+        "appliedPresetRegistryVersion": "normal-landscape-preset-registry-v001",
+        "alphaMax": 1,
+        "alphaBounds": {
+          "left": 896,
+          "top": 702,
+          "right": 1024,
+          "bottom": 972,
+          "width": 128,
+          "height": 270
+        },
+        "lineCount": 2,
+        "lineAlphaBounds": [
+          {
+            "lineIndex": 0,
+            "left": 901,
+            "top": 702,
+            "right": 1015,
+            "bottom": 829,
+            "width": 114,
+            "height": 127
+          },
+          {
+            "lineIndex": 1,
+            "left": 896,
+            "top": 847,
+            "right": 1024,
+            "bottom": 972,
+            "width": 128,
+            "height": 125
+          }
+        ],
+        "visibilityComparisonBasis": "same-composite-with-instruction-omitted",
+        "representativeFrame": 817,
+        "changedPixelsAgainstInstructionOmittedFrame": 34515,
+        "appliedOverlayPropsCanonicalSha256": "c0e768a0a40ce51f38efbe63ab5f404197b733b0994208a8a976fcec64fa6edf",
+        "applicationOverlayFile": "overlays/16-e29e015d49c4.png",
+        "inspectedOverlayFile": "overlays/16-e29e015d49c4.png",
+        "applicationOverlaySha256": "2e8634d10a62d2ee0d0b4462ba9768206797f253ed53634164af08c744e28452",
+        "overlaySha256": "2e8634d10a62d2ee0d0b4462ba9768206797f253ed53634164af08c744e28452"
+      },
+      {
+        "instructionId": "display-page-000017-001",
+        "requestedPresetId": "normal-landscape-readable-pop-v001",
+        "appliedPresetId": "normal-landscape-readable-pop-v001",
+        "appliedPresetRegistryVersion": "normal-landscape-preset-registry-v001",
+        "alphaMax": 1,
+        "alphaBounds": {
+          "left": 852,
+          "top": 710,
+          "right": 1075,
+          "bottom": 973,
+          "width": 223,
+          "height": 263
+        },
+        "lineCount": 2,
+        "lineAlphaBounds": [
+          {
+            "lineIndex": 0,
+            "left": 898,
+            "top": 710,
+            "right": 1026,
+            "bottom": 827,
+            "width": 128,
+            "height": 117
+          },
+          {
+            "lineIndex": 1,
+            "left": 852,
+            "top": 847,
+            "right": 1075,
+            "bottom": 973,
+            "width": 223,
+            "height": 126
+          }
+        ],
+        "visibilityComparisonBasis": "same-composite-with-instruction-omitted",
+        "representativeFrame": 832,
+        "changedPixelsAgainstInstructionOmittedFrame": 58576,
+        "appliedOverlayPropsCanonicalSha256": "29f9e103a6f074fcf3a3304f42d3d81d731807d158fc64d73334874dfa1b3b32",
+        "applicationOverlayFile": "overlays/17-205e41fde69e.png",
+        "inspectedOverlayFile": "overlays/17-205e41fde69e.png",
+        "applicationOverlaySha256": "8cb16cafc672923005ef46f3289e04b8c7913cfbc0c9de198f778ce7c6ea3b74",
+        "overlaySha256": "8cb16cafc672923005ef46f3289e04b8c7913cfbc0c9de198f778ce7c6ea3b74"
+      },
+      {
+        "instructionId": "display-page-000018-001",
+        "requestedPresetId": "normal-landscape-readable-pop-v001",
+        "appliedPresetId": "normal-landscape-readable-pop-v001",
+        "appliedPresetRegistryVersion": "normal-landscape-preset-registry-v001",
+        "alphaMax": 1,
+        "alphaBounds": {
+          "left": 701,
+          "top": 699,
+          "right": 1208,
+          "bottom": 975,
+          "width": 507,
+          "height": 276
+        },
+        "lineCount": 2,
+        "lineAlphaBounds": [
+          {
+            "lineIndex": 0,
+            "left": 749,
+            "top": 699,
+            "right": 1171,
+            "bottom": 831,
+            "width": 422,
+            "height": 132
+          },
+          {
+            "lineIndex": 1,
+            "left": 701,
+            "top": 844,
+            "right": 1208,
+            "bottom": 975,
+            "width": 507,
+            "height": 131
+          }
+        ],
+        "visibilityComparisonBasis": "same-composite-with-instruction-omitted",
+        "representativeFrame": 852,
+        "changedPixelsAgainstInstructionOmittedFrame": 139577,
+        "appliedOverlayPropsCanonicalSha256": "0b0b1a7331a78fafae91fbe9e44927625b6965a8c2054e3feedf3043cbf1891a",
+        "applicationOverlayFile": "overlays/18-e97778f17002.png",
+        "inspectedOverlayFile": "overlays/18-e97778f17002.png",
+        "applicationOverlaySha256": "4a60c2e19980b798315f6118d5d28f7292319d1d9074d14489b172c9b3b74d9a",
+        "overlaySha256": "4a60c2e19980b798315f6118d5d28f7292319d1d9074d14489b172c9b3b74d9a"
+      },
+      {
+        "instructionId": "display-page-000019-001",
+        "requestedPresetId": "normal-landscape-readable-pop-v001",
+        "appliedPresetId": "normal-landscape-readable-pop-v001",
+        "appliedPresetRegistryVersion": "normal-landscape-preset-registry-v001",
+        "alphaMax": 1,
+        "alphaBounds": {
+          "left": 804,
+          "top": 700,
+          "right": 1101,
+          "bottom": 973,
+          "width": 297,
+          "height": 273
+        },
+        "lineCount": 2,
+        "lineAlphaBounds": [
+          {
+            "lineIndex": 0,
+            "left": 845,
+            "top": 700,
+            "right": 1075,
+            "bottom": 831,
+            "width": 230,
+            "height": 131
+          },
+          {
+            "lineIndex": 1,
+            "left": 804,
+            "top": 846,
+            "right": 1101,
+            "bottom": 973,
+            "width": 297,
+            "height": 127
+          }
+        ],
+        "visibilityComparisonBasis": "same-composite-with-instruction-omitted",
+        "representativeFrame": 878,
+        "changedPixelsAgainstInstructionOmittedFrame": 80852,
+        "appliedOverlayPropsCanonicalSha256": "03e7fb75f567dbeaf4fa2581e264407ceda3e36db00013833e508c2ed47669ae",
+        "applicationOverlayFile": "overlays/19-73ee0af27a56.png",
+        "inspectedOverlayFile": "overlays/19-73ee0af27a56.png",
+        "applicationOverlaySha256": "de698192efdbd8482a6488223b2d2e359084521573d92b595cd8551ffe386dae",
+        "overlaySha256": "de698192efdbd8482a6488223b2d2e359084521573d92b595cd8551ffe386dae"
+      },
+      {
+        "instructionId": "display-page-000020-001",
+        "requestedPresetId": "normal-landscape-readable-pop-v001",
+        "appliedPresetId": "normal-landscape-readable-pop-v001",
+        "appliedPresetRegistryVersion": "normal-landscape-preset-registry-v001",
+        "alphaMax": 1,
+        "alphaBounds": {
+          "left": 700,
+          "top": 698,
+          "right": 1204,
+          "bottom": 975,
+          "width": 504,
+          "height": 277
+        },
+        "lineCount": 2,
+        "lineAlphaBounds": [
+          {
+            "lineIndex": 0,
+            "left": 724,
+            "top": 698,
+            "right": 1194,
+            "bottom": 831,
+            "width": 470,
+            "height": 133
+          },
+          {
+            "lineIndex": 1,
+            "left": 700,
+            "top": 844,
+            "right": 1204,
+            "bottom": 975,
+            "width": 504,
+            "height": 131
+          }
+        ],
+        "visibilityComparisonBasis": "same-composite-with-instruction-omitted",
+        "representativeFrame": 924,
+        "changedPixelsAgainstInstructionOmittedFrame": 138886,
+        "appliedOverlayPropsCanonicalSha256": "d108f99a77b46aeaaa0466879c25892d90e09eb2ea17178b3feeb18c2249277d",
+        "applicationOverlayFile": "overlays/20-b7bbb49d4aac.png",
+        "inspectedOverlayFile": "overlays/20-b7bbb49d4aac.png",
+        "applicationOverlaySha256": "92ceaaae12a44a02f987a5652a210691535e3148c3f6d59c4c0e9ef85bc665df",
+        "overlaySha256": "92ceaaae12a44a02f987a5652a210691535e3148c3f6d59c4c0e9ef85bc665df"
+      },
+      {
+        "instructionId": "display-page-000021-001",
+        "requestedPresetId": "normal-landscape-readable-pop-v001",
+        "appliedPresetId": "normal-landscape-readable-pop-v001",
+        "appliedPresetRegistryVersion": "normal-landscape-preset-registry-v001",
+        "alphaMax": 1,
+        "alphaBounds": {
+          "left": 802,
+          "top": 703,
+          "right": 1120,
+          "bottom": 973,
+          "width": 318,
+          "height": 270
+        },
+        "lineCount": 2,
+        "lineAlphaBounds": [
+          {
+            "lineIndex": 0,
+            "left": 850,
+            "top": 703,
+            "right": 1022,
+            "bottom": 829,
+            "width": 172,
+            "height": 126
+          },
+          {
+            "lineIndex": 1,
+            "left": 802,
+            "top": 844,
+            "right": 1120,
+            "bottom": 973,
+            "width": 318,
+            "height": 129
+          }
+        ],
+        "visibilityComparisonBasis": "same-composite-with-instruction-omitted",
+        "representativeFrame": 963,
+        "changedPixelsAgainstInstructionOmittedFrame": 85752,
+        "appliedOverlayPropsCanonicalSha256": "aa796ab49bf8f11dea4334029797df323cdde7b65080f41d288203ce33151fef",
+        "applicationOverlayFile": "overlays/21-81b8510181c7.png",
+        "inspectedOverlayFile": "overlays/21-81b8510181c7.png",
+        "applicationOverlaySha256": "0c0ca75b1e13a9b5b00935f9220c9c7b12e6ae0d6cc4da76bca275858fcba401",
+        "overlaySha256": "0c0ca75b1e13a9b5b00935f9220c9c7b12e6ae0d6cc4da76bca275858fcba401"
+      },
+      {
+        "instructionId": "display-page-000022-001",
+        "requestedPresetId": "normal-landscape-readable-pop-v001",
+        "appliedPresetId": "normal-landscape-readable-pop-v001",
+        "appliedPresetRegistryVersion": "normal-landscape-preset-registry-v001",
+        "alphaMax": 1,
+        "alphaBounds": {
+          "left": 562,
+          "top": 703,
+          "right": 1338,
+          "bottom": 974,
+          "width": 776,
+          "height": 271
+        },
+        "lineCount": 2,
+        "lineAlphaBounds": [
+          {
+            "lineIndex": 0,
+            "left": 610,
+            "top": 703,
+            "right": 1302,
+            "bottom": 829,
+            "width": 692,
+            "height": 126
+          },
+          {
+            "lineIndex": 1,
+            "left": 562,
+            "top": 845,
+            "right": 1338,
+            "bottom": 974,
+            "width": 776,
+            "height": 129
+          }
+        ],
+        "visibilityComparisonBasis": "same-composite-with-instruction-omitted",
+        "representativeFrame": 996,
+        "changedPixelsAgainstInstructionOmittedFrame": 209630,
+        "appliedOverlayPropsCanonicalSha256": "6c922bfda23027f2973516668c44abc84127f8cf5bc8135fa2ba1246b80b6f11",
+        "applicationOverlayFile": "overlays/22-55857566c5d1.png",
+        "inspectedOverlayFile": "overlays/22-55857566c5d1.png",
+        "applicationOverlaySha256": "803fa14579afdde0232d275fff80794e4bd8c013754479790ebefa787eecf824",
+        "overlaySha256": "803fa14579afdde0232d275fff80794e4bd8c013754479790ebefa787eecf824"
+      },
+      {
+        "instructionId": "display-page-000023-001",
+        "requestedPresetId": "normal-landscape-readable-pop-v001",
+        "appliedPresetId": "normal-landscape-readable-pop-v001",
+        "appliedPresetRegistryVersion": "normal-landscape-preset-registry-v001",
+        "alphaMax": 1,
+        "alphaBounds": {
+          "left": 677,
+          "top": 698,
+          "right": 1243,
+          "bottom": 971,
+          "width": 566,
+          "height": 273
+        },
+        "lineCount": 2,
+        "lineAlphaBounds": [
+          {
+            "lineIndex": 0,
+            "left": 677,
+            "top": 698,
+            "right": 1243,
+            "bottom": 831,
+            "width": 566,
+            "height": 133
+          },
+          {
+            "lineIndex": 1,
+            "left": 706,
+            "top": 853,
+            "right": 1202,
+            "bottom": 971,
+            "width": 496,
+            "height": 118
+          }
+        ],
+        "visibilityComparisonBasis": "same-composite-with-instruction-omitted",
+        "representativeFrame": 1040,
+        "changedPixelsAgainstInstructionOmittedFrame": 153881,
+        "appliedOverlayPropsCanonicalSha256": "914a912a02fefa996dd9a23b91a5c594754ab6114cab1147d50af78415213e3a",
+        "applicationOverlayFile": "overlays/23-bf75e3479386.png",
+        "inspectedOverlayFile": "overlays/23-bf75e3479386.png",
+        "applicationOverlaySha256": "6f01282a464ce3b3533211526ccd782fcb44325996dc4239eaf222b8705e7874",
+        "overlaySha256": "6f01282a464ce3b3533211526ccd782fcb44325996dc4239eaf222b8705e7874"
+      },
+      {
+        "instructionId": "display-page-000024-001",
+        "requestedPresetId": "normal-landscape-readable-pop-v001",
+        "appliedPresetId": "normal-landscape-readable-pop-v001",
+        "appliedPresetRegistryVersion": "normal-landscape-preset-registry-v001",
+        "alphaMax": 1,
+        "alphaBounds": {
+          "left": 652,
+          "top": 700,
+          "right": 1259,
+          "bottom": 975,
+          "width": 607,
+          "height": 275
+        },
+        "lineCount": 2,
+        "lineAlphaBounds": [
+          {
+            "lineIndex": 0,
+            "left": 703,
+            "top": 700,
+            "right": 1218,
+            "bottom": 831,
+            "width": 515,
+            "height": 131
+          },
+          {
+            "lineIndex": 1,
+            "left": 652,
+            "top": 844,
+            "right": 1259,
+            "bottom": 975,
+            "width": 607,
+            "height": 131
+          }
+        ],
+        "visibilityComparisonBasis": "same-composite-with-instruction-omitted",
+        "representativeFrame": 1094,
+        "changedPixelsAgainstInstructionOmittedFrame": 166578,
+        "appliedOverlayPropsCanonicalSha256": "82746df021646051681d7f5d3009443372e558c9cf9d88fda22efd1dee741cad",
+        "applicationOverlayFile": "overlays/24-98eae09f7b4f.png",
+        "inspectedOverlayFile": "overlays/24-98eae09f7b4f.png",
+        "applicationOverlaySha256": "3f4d6832608673ac0966795e5b3d2ed74d5a3e4148b6c54be3a03c3130084042",
+        "overlaySha256": "3f4d6832608673ac0966795e5b3d2ed74d5a3e4148b6c54be3a03c3130084042"
+      },
+      {
+        "instructionId": "display-page-000025-001",
+        "requestedPresetId": "normal-landscape-readable-pop-v001",
+        "appliedPresetId": "normal-landscape-readable-pop-v001",
+        "appliedPresetRegistryVersion": "normal-landscape-preset-registry-v001",
+        "alphaMax": 1,
+        "alphaBounds": {
+          "left": 701,
+          "top": 698,
+          "right": 1217,
+          "bottom": 974,
+          "width": 516,
+          "height": 276
+        },
+        "lineCount": 2,
+        "lineAlphaBounds": [
+          {
+            "lineIndex": 0,
+            "left": 701,
+            "top": 698,
+            "right": 1217,
+            "bottom": 831,
+            "width": 516,
+            "height": 133
+          },
+          {
+            "lineIndex": 1,
+            "left": 705,
+            "top": 842,
+            "right": 1206,
+            "bottom": 974,
+            "width": 501,
+            "height": 132
+          }
+        ],
+        "visibilityComparisonBasis": "same-composite-with-instruction-omitted",
+        "representativeFrame": 1161,
+        "changedPixelsAgainstInstructionOmittedFrame": 142045,
+        "appliedOverlayPropsCanonicalSha256": "82272e7273e402ca7446b1c8def65818f9b287108aa28733350c2310e01de569",
+        "applicationOverlayFile": "overlays/25-545020f3d9a2.png",
+        "inspectedOverlayFile": "overlays/25-545020f3d9a2.png",
+        "applicationOverlaySha256": "d8e25153f30d81ce76caca49100ef3f42b6d55f74ca8e4376008a4b50f50e616",
+        "overlaySha256": "d8e25153f30d81ce76caca49100ef3f42b6d55f74ca8e4376008a4b50f50e616"
+      },
+      {
+        "instructionId": "display-page-000026-001",
+        "requestedPresetId": "normal-landscape-readable-pop-v001",
+        "appliedPresetId": "normal-landscape-readable-pop-v001",
+        "appliedPresetRegistryVersion": "normal-landscape-preset-registry-v001",
+        "alphaMax": 1,
+        "alphaBounds": {
+          "left": 799,
+          "top": 701,
+          "right": 1122,
+          "bottom": 972,
+          "width": 323,
+          "height": 271
+        },
+        "lineCount": 2,
+        "lineAlphaBounds": [
+          {
+            "lineIndex": 0,
+            "left": 847,
+            "top": 701,
+            "right": 1063,
+            "bottom": 830,
+            "width": 216,
+            "height": 129
+          },
+          {
+            "lineIndex": 1,
+            "left": 799,
+            "top": 848,
+            "right": 1122,
+            "bottom": 972,
+            "width": 323,
+            "height": 124
+          }
+        ],
+        "visibilityComparisonBasis": "same-composite-with-instruction-omitted",
+        "representativeFrame": 1197,
+        "changedPixelsAgainstInstructionOmittedFrame": 87387,
+        "appliedOverlayPropsCanonicalSha256": "17316611b647ebd359e60773b70cb0e58bddf6c5816a2c55448744df16423fb4",
+        "applicationOverlayFile": "overlays/26-76880194bb71.png",
+        "inspectedOverlayFile": "overlays/26-76880194bb71.png",
+        "applicationOverlaySha256": "2ba0bb67e0b9a40a68889eda8341e607d39a58f769405976cfc257f67cbe0098",
+        "overlaySha256": "2ba0bb67e0b9a40a68889eda8341e607d39a58f769405976cfc257f67cbe0098"
+      },
+      {
+        "instructionId": "display-page-000027-001",
+        "requestedPresetId": "normal-landscape-readable-pop-v001",
+        "appliedPresetId": "normal-landscape-readable-pop-v001",
+        "appliedPresetRegistryVersion": "normal-landscape-preset-registry-v001",
+        "alphaMax": 1,
+        "alphaBounds": {
+          "left": 607,
+          "top": 703,
+          "right": 1298,
+          "bottom": 974,
+          "width": 691,
+          "height": 271
+        },
+        "lineCount": 2,
+        "lineAlphaBounds": [
+          {
+            "lineIndex": 0,
+            "left": 658,
+            "top": 703,
+            "right": 1252,
+            "bottom": 828,
+            "width": 594,
+            "height": 125
+          },
+          {
+            "lineIndex": 1,
+            "left": 607,
+            "top": 844,
+            "right": 1298,
+            "bottom": 974,
+            "width": 691,
+            "height": 130
+          }
+        ],
+        "visibilityComparisonBasis": "same-composite-with-instruction-omitted",
+        "representativeFrame": 1259,
+        "changedPixelsAgainstInstructionOmittedFrame": 186101,
+        "appliedOverlayPropsCanonicalSha256": "a657d629b5efad1a45efb1a76048b6dc39a3fcfc46dca68f1fe455d54afe9637",
+        "applicationOverlayFile": "overlays/27-47473ba94fc0.png",
+        "inspectedOverlayFile": "overlays/27-47473ba94fc0.png",
+        "applicationOverlaySha256": "52376a75a85174fa4005f59f9113236617ec1a336150694f84bc1825912894c2",
+        "overlaySha256": "52376a75a85174fa4005f59f9113236617ec1a336150694f84bc1825912894c2"
+      },
+      {
+        "instructionId": "display-page-000028-001",
+        "requestedPresetId": "normal-landscape-readable-pop-v001",
+        "appliedPresetId": "normal-landscape-readable-pop-v001",
+        "appliedPresetRegistryVersion": "normal-landscape-preset-registry-v001",
+        "alphaMax": 1,
+        "alphaBounds": {
+          "left": 756,
+          "top": 702,
+          "right": 1156,
+          "bottom": 975,
+          "width": 400,
+          "height": 273
+        },
+        "lineCount": 2,
+        "lineAlphaBounds": [
+          {
+            "lineIndex": 0,
+            "left": 800,
+            "top": 702,
+            "right": 1118,
+            "bottom": 828,
+            "width": 318,
+            "height": 126
+          },
+          {
+            "lineIndex": 1,
+            "left": 756,
+            "top": 847,
+            "right": 1156,
+            "bottom": 975,
+            "width": 400,
+            "height": 128
+          }
+        ],
+        "visibilityComparisonBasis": "same-composite-with-instruction-omitted",
+        "representativeFrame": 1339,
+        "changedPixelsAgainstInstructionOmittedFrame": 108776,
+        "appliedOverlayPropsCanonicalSha256": "e1fd8bc3e800551cf73726fe24d47c18974e12f23e1dbe277f19f08b728bce90",
+        "applicationOverlayFile": "overlays/28-84c833d2ac59.png",
+        "inspectedOverlayFile": "overlays/28-84c833d2ac59.png",
+        "applicationOverlaySha256": "bc272020263146f63849ee0c9198695b4a897828f9a87cf201b5d140f82c39c5",
+        "overlaySha256": "bc272020263146f63849ee0c9198695b4a897828f9a87cf201b5d140f82c39c5"
+      },
+      {
+        "instructionId": "display-page-000029-001",
+        "requestedPresetId": "normal-landscape-readable-pop-v001",
+        "appliedPresetId": "normal-landscape-readable-pop-v001",
+        "appliedPresetRegistryVersion": "normal-landscape-preset-registry-v001",
+        "alphaMax": 1,
+        "alphaBounds": {
+          "left": 898,
+          "top": 704,
+          "right": 1023,
+          "bottom": 972,
+          "width": 125,
+          "height": 268
+        },
+        "lineCount": 2,
+        "lineAlphaBounds": [
+          {
+            "lineIndex": 0,
+            "left": 898,
+            "top": 704,
+            "right": 1023,
+            "bottom": 830,
+            "width": 125,
+            "height": 126
+          },
+          {
+            "lineIndex": 1,
+            "left": 898,
+            "top": 900,
+            "right": 974,
+            "bottom": 972,
+            "width": 76,
+            "height": 72
+          }
+        ],
+        "visibilityComparisonBasis": "same-composite-with-instruction-omitted",
+        "representativeFrame": 1366,
+        "changedPixelsAgainstInstructionOmittedFrame": 33461,
+        "appliedOverlayPropsCanonicalSha256": "823fd761b4cfcd0a060bc799ede1ac3608bdebb48027045222522a4226588273",
+        "applicationOverlayFile": "overlays/29-9638acbfcfaf.png",
+        "inspectedOverlayFile": "overlays/29-9638acbfcfaf.png",
+        "applicationOverlaySha256": "8b48623da7a6d99170f8348f94d7a910813569511106f0318d772842351b33bb",
+        "overlaySha256": "8b48623da7a6d99170f8348f94d7a910813569511106f0318d772842351b33bb"
+      },
+      {
+        "instructionId": "display-page-000030-001",
+        "requestedPresetId": "normal-landscape-readable-pop-v001",
+        "appliedPresetId": "normal-landscape-readable-pop-v001",
+        "appliedPresetRegistryVersion": "normal-landscape-preset-registry-v001",
+        "alphaMax": 1,
+        "alphaBounds": {
+          "left": 560,
+          "top": 700,
+          "right": 1355,
+          "bottom": 975,
+          "width": 795,
+          "height": 275
+        },
+        "lineCount": 2,
+        "lineAlphaBounds": [
+          {
+            "lineIndex": 0,
+            "left": 560,
+            "top": 700,
+            "right": 1355,
+            "bottom": 831,
+            "width": 795,
+            "height": 131
+          },
+          {
+            "lineIndex": 1,
+            "left": 562,
+            "top": 842,
+            "right": 1350,
+            "bottom": 975,
+            "width": 788,
+            "height": 133
+          }
+        ],
+        "visibilityComparisonBasis": "same-composite-with-instruction-omitted",
+        "representativeFrame": 1392,
+        "changedPixelsAgainstInstructionOmittedFrame": 217920,
+        "appliedOverlayPropsCanonicalSha256": "c73a3b1104ab25f6ea86a787ed6249574a170424a1f958cbb08359bd58e850ea",
+        "applicationOverlayFile": "overlays/30-fa3daffa5f0f.png",
+        "inspectedOverlayFile": "overlays/30-fa3daffa5f0f.png",
+        "applicationOverlaySha256": "fe8d2aa449bff9e9b822cd6b4c45dafcb113b7e9cecd17777d42034ded2df45d",
+        "overlaySha256": "fe8d2aa449bff9e9b822cd6b4c45dafcb113b7e9cecd17777d42034ded2df45d"
+      },
+      {
+        "instructionId": "display-page-000031-001",
+        "requestedPresetId": "normal-landscape-readable-pop-v001",
+        "appliedPresetId": "normal-landscape-readable-pop-v001",
+        "appliedPresetRegistryVersion": "normal-landscape-preset-registry-v001",
+        "alphaMax": 1,
+        "alphaBounds": {
+          "left": 713,
+          "top": 700,
+          "right": 1187,
+          "bottom": 973,
+          "width": 474,
+          "height": 273
+        },
+        "lineCount": 2,
+        "lineAlphaBounds": [
+          {
+            "lineIndex": 0,
+            "left": 749,
+            "top": 700,
+            "right": 1164,
+            "bottom": 831,
+            "width": 415,
+            "height": 131
+          },
+          {
+            "lineIndex": 1,
+            "left": 713,
+            "top": 846,
+            "right": 1187,
+            "bottom": 973,
+            "width": 474,
+            "height": 127
+          }
+        ],
+        "visibilityComparisonBasis": "same-composite-with-instruction-omitted",
+        "representativeFrame": 1481,
+        "changedPixelsAgainstInstructionOmittedFrame": 128900,
+        "appliedOverlayPropsCanonicalSha256": "025da8e70c6870d163f6d4ff0a37aab5eb0841b12e20d71c08fd08820abdfd04",
+        "applicationOverlayFile": "overlays/31-d00f60391c7e.png",
+        "inspectedOverlayFile": "overlays/31-d00f60391c7e.png",
+        "applicationOverlaySha256": "d1003348fc040b4cafef3ccc668a0e06e31a0f95809b6488118acd448b758dfb",
+        "overlaySha256": "d1003348fc040b4cafef3ccc668a0e06e31a0f95809b6488118acd448b758dfb"
+      }
+    ],
+    "mediaEvidence": {
+      "observed": {
+        "durationMs": 51567,
+        "video": {
+          "codecName": "h264",
+          "width": 1920,
+          "height": 1080,
+          "fps": 30,
+          "frameCount": 1547
+        },
+        "audio": {
+          "codecName": "aac",
+          "packetPayloadSha256": "d18469bd3132356b03870ee8bc3d63e95947bd254961157e09d59cf9a53459ec"
+        }
+      },
+      "expectedAudio": {
+        "present": true,
+        "codecName": "aac",
+        "packetPayloadSha256": "d18469bd3132356b03870ee8bc3d63e95947bd254961157e09d59cf9a53459ec"
+      },
+      "expectedFrameCount": 1547
+    },
+    "violations": []
+  }
+}

@@ -323,7 +323,7 @@ const makeTimelineEdge = (edge, baseMediaTimeline) => {
 const stateKey = state => [
   state.boundaryOrdinal,
   state.pageCount,
-  state.oneLinePageCount,
+  state.totalLineCount,
   state.minimumLineLogicalWidth,
   state.maximumLineLogicalWidth,
   state.previousEndFrameExclusive,
@@ -359,8 +359,8 @@ const compareTiePaths = (left, right) => {
 
 const compareTerminalStates = (left, right) => {
   if (left.pageCount !== right.pageCount) return left.pageCount - right.pageCount;
-  if (left.oneLinePageCount !== right.oneLinePageCount) {
-    return left.oneLinePageCount - right.oneLinePageCount;
+  if (left.totalLineCount !== right.totalLineCount) {
+    return left.totalLineCount - right.totalLineCount;
   }
   if (left.maximumLineLogicalWidth !== right.maximumLineLogicalWidth) {
     return left.maximumLineLogicalWidth - right.maximumLineLogicalWidth;
@@ -383,7 +383,7 @@ const selectTimelinePath = (edges, finalBoundary) => {
   const startState = {
     boundaryOrdinal: 0,
     pageCount: 0,
-    oneLinePageCount: 0,
+    totalLineCount: 0,
     minimumLineLogicalWidth: null,
     maximumLineLogicalWidth: null,
     previousEndFrameExclusive: null,
@@ -403,7 +403,7 @@ const selectTimelinePath = (edges, finalBoundary) => {
         const next = {
           boundaryOrdinal: edge.endBoundaryOrdinal,
           pageCount: state.pageCount + 1,
-          oneLinePageCount: state.oneLinePageCount + (edge.lines.length === 1 ? 1 : 0),
+          totalLineCount: state.totalLineCount + edge.lines.length,
           minimumLineLogicalWidth: state.minimumLineLogicalWidth === null
             ? edgeMinimum
             : Math.min(state.minimumLineLogicalWidth, edgeMinimum),
@@ -595,7 +595,8 @@ const rejected = (code, physicalEdges, timelineEdges) => ({
 
 /**
  * 意味captionのAtomRef境界だけで有限page DAGを作り、物理成立後に時間写像し、
- * page数、2行優先、最大幅、幅range、境界辞書順の固定tupleで一意に選ぶ。
+ * page数、総行数、最大幅、幅range、境界辞書順の固定tupleで一意に選ぶ。
+ * 行幅上限内で1行に収まる本文へ不要な改行を入れない。
  */
 export async function buildPresentationOutputPageLinePlanV001({
   meaningPackage,

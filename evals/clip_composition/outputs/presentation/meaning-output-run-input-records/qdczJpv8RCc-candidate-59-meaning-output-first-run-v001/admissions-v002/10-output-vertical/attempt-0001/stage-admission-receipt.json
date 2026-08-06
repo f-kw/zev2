@@ -1,0 +1,99 @@
+{
+  "schemaVersion": "presentation-meaning-output-stage-admission-receipt-v002",
+  "receiptId": "qdczJpv8RCc-candidate-59-meaning-output-first-run-v001-10-output-vertical-admission",
+  "status": "passed",
+  "stage": "output-vertical",
+  "runInputRecordBinding": {
+    "schemaVersion": "presentation-meaning-output-run-input-record-v001",
+    "path": "evals/clip_composition/outputs/presentation/meaning-output-run-input-records/qdczJpv8RCc-candidate-59-meaning-output-first-run-v001/run-input-record.json",
+    "fileSha256": "5ac80deeb0daac08ea32cad7fa9b016cf04ab95ea551fa6981e6c8151ee28680",
+    "canonicalSha256": "22e869ae688e84081e7797189d5283efb855a6d3f075506c5b585ffec6dbaedd"
+  },
+  "jobBinding": {
+    "schemaVersion": "presentation-output-formal-job-v001",
+    "path": "evals/clip_composition/outputs/presentation/meaning-output-jobs/qdczJpv8RCc-candidate-59-meaning-output-first-run-vertical-v001/formal-output-job.json",
+    "fileSha256": "df5b6b20d1724bafa6114171f9ea016aeac5642b94882b4ec591de7db0e1b41b",
+    "canonicalSha256": "94362a4d7eb728633ada27d2f1121ec3e18a7eb639a2d179e908e8f7490d16d7"
+  },
+  "upstreamBindings": [
+    {
+      "role": "output-request",
+      "schemaVersion": "presentation-output-request-v001",
+      "path": "evals/clip_composition/outputs/presentation/meaning-output-jobs/qdczJpv8RCc-candidate-59-meaning-output-first-run-vertical-v001/output-request.json",
+      "fileSha256": "6ebb2806d47d76a7abead6d37e379df0d03f283ce79e38e4f81a519fba5dc018",
+      "canonicalSha256": "320efb616213394c3403e506d5d1eaaadb38961520b75a1ac9939e5edbce5663"
+    },
+    {
+      "role": "meaning-package",
+      "schemaVersion": "zev-meaning-information-package-v001",
+      "path": "evals/clip_composition/outputs/presentation/meaning-information-packages/qdczJpv8RCc-candidate-59-meaning-output-first-run-meaning-package-v002-meaning-information/meaning-information-package.json",
+      "fileSha256": "27769faadce76c5becec8ad03549300b8a037f728410ca058cc5e376cd3e9613",
+      "canonicalSha256": "918fc26e871533b4ae6bafcd9c1e405e739e085a8fe5a24ed4df8dc00d4d7ceb"
+    },
+    {
+      "role": "base-media",
+      "schemaVersion": null,
+      "path": "evals/clip_composition/outputs/presentation/meaning-output-base-media/qdczJpv8RCc-candidate-59-meaning-output-first-run-meaning-package-v002-meaning-information/base-media.mp4",
+      "fileSha256": "faad660c7623cdbf3a8f3b55cdaffc34729d06683ce391997c51f10fbc076967",
+      "canonicalSha256": null
+    },
+    {
+      "role": "crop-application",
+      "schemaVersion": "presentation-output-crop-application-v001",
+      "path": "evals/clip_composition/outputs/presentation/meaning-output-crop-applications/qdczJpv8RCc-candidate-59-meaning-output-first-run-crop-v001-application/crop-application.json",
+      "fileSha256": "6b24cc347c7672d1d9c1b285b192d1dcfeb6b7ceb049713aa8a5a881a75dacc2",
+      "canonicalSha256": "e2b46240495451ef956ca93cd02e6ac93869bd424b6f5c1a4e4997363475b1cc"
+    }
+  ],
+  "checks": [
+    {
+      "name": "recordBinding",
+      "status": "passed",
+      "comparedPaths": [
+        "record:/schemaVersion",
+        "record:/recordId",
+        "job:/runInputRecordBinding"
+      ]
+    },
+    {
+      "name": "targetJobBinding",
+      "status": "passed",
+      "comparedPaths": [
+        "job:/targetJobBinding"
+      ]
+    },
+    {
+      "name": "upstreamBindings",
+      "status": "passed",
+      "comparedPaths": [
+        "upstream:output-request:",
+        "upstream:meaning-package:",
+        "upstream:base-media:",
+        "upstream:crop-application:"
+      ]
+    },
+    {
+      "name": "stageProjection",
+      "status": "passed",
+      "comparedPaths": [
+        "record:/verticalStyle",
+        "job:/requestBinding",
+        "upstream:output-request:/styleInput",
+        "upstream:crop-application:"
+      ]
+    },
+    {
+      "name": "prePublicationReread",
+      "status": "passed",
+      "comparedPaths": [
+        "job:/runInputRecordBinding",
+        "job:/targetJobBinding",
+        "job:/upstreamBindings"
+      ]
+    }
+  ],
+  "attempt": {
+    "attemptOrdinal": 1,
+    "supersedesReceipt": null
+  }
+}

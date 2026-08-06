@@ -1,0 +1,62 @@
+{
+  "schemaVersion": "presentation-meaning-output-stage-admission-job-v002",
+  "jobId": "qdczJpv8RCc-candidate-59-meaning-output-first-run-v001-05-b1-validation-v002-attempt-0001",
+  "action": "admit-stage",
+  "stage": "b1-validation",
+  "runInputRecordBinding": {
+    "schemaVersion": "presentation-meaning-output-run-input-record-v001",
+    "path": "evals/clip_composition/outputs/presentation/meaning-output-run-input-records/qdczJpv8RCc-candidate-59-meaning-output-first-run-v001/run-input-record.json",
+    "fileSha256": "5ac80deeb0daac08ea32cad7fa9b016cf04ab95ea551fa6981e6c8151ee28680",
+    "canonicalSha256": "22e869ae688e84081e7797189d5283efb855a6d3f075506c5b585ffec6dbaedd"
+  },
+  "targetJobBinding": {
+    "schemaVersion": "presentation-meaning-boundary-validation-job-v001",
+    "path": "evals/clip_composition/outputs/presentation/meaning-boundary-validation-jobs/qdczJpv8RCc-candidate-59-meaning-output-first-run-b1-v001.json",
+    "fileSha256": "58d09bdaa22e3b38cb265c77dcca8df4a575d3c6a7fdd65ee30660b2c5faf622",
+    "canonicalSha256": "a2eef8d0f2c5975daeec325d1b0fb6941c09227d2aa9010114f225462bdb319c"
+  },
+  "upstreamBindings": [
+    {
+      "role": "source-package",
+      "schemaVersion": "presentation-meaning-boundary-source-package-v001",
+      "path": "evals/clip_composition/outputs/presentation/meaning-boundary-source-packages/qdczJpv8RCc-candidate-59-meaning-output-first-run-b3-v001/meaning-boundary-source-package.json",
+      "fileSha256": "f1c08064f8307dd2da0967f7c9e6d74e8027de81c0bd4828db0c1cab1cbdad15",
+      "canonicalSha256": "8de6370af6dacdf651aae38a08dea9658b4490fc7b77e777c16e245b36be00cf"
+    },
+    {
+      "role": "b6-manifest",
+      "schemaVersion": "presentation-meaning-boundary-b6-manifest-v001",
+      "path": "evals/clip_composition/outputs/presentation/meaning-boundary-b6-attempts/qdczJpv8RCc-candidate-59-meaning-output-first-run-b6-v001/attempt-v001/b6-manifest.json",
+      "fileSha256": "8d51f0a0c85f7b73ef41fd2eac93c4f3bfcd6b716a890a574a0faa385b6b2f4a",
+      "canonicalSha256": "43cc10442cb7ae2df0a53832916cee175f39c3e3fd2835577a079e2e6c5bc64f"
+    },
+    {
+      "role": "provider-envelope",
+      "schemaVersion": "presentation-meaning-boundary-provider-response-envelope-v001",
+      "path": "evals/clip_composition/outputs/presentation/meaning-boundary-b6-attempts/qdczJpv8RCc-candidate-59-meaning-output-first-run-b6-v001/attempt-v001/provider-response-envelope.json",
+      "fileSha256": "408616d5ffdca7d305e925a9d5b3632e77fb27f8b2d47f31ef0f89213a7790ce",
+      "canonicalSha256": "5aa86094ac42090658c5d9a03041f9279b482642241d3d7e0cbfeaa2176ed71e"
+    }
+  ],
+  "outputRoot": "evals/clip_composition/outputs/presentation/meaning-output-run-input-records/qdczJpv8RCc-candidate-59-meaning-output-first-run-v001/admissions-v002/05-b1-validation/attempt-0001",
+  "implementationBindings": [
+    {
+      "path": "evals/clip_composition/presentation_meaning_output_run_input_record_v001.mjs",
+      "fileSha256": "d61601e0f2437dcf0327c922bfeafd0a7964a5fbf58429282b5fa9a1d5ca2320",
+      "role": "run-input-record"
+    },
+    {
+      "path": "evals/clip_composition/run_presentation_meaning_output_run_input_record_v001.mjs",
+      "fileSha256": "ef0248d49586fcbeb90708ed5ea466e1d4281e62a6eedf294701d68be25a1e2f",
+      "role": "run-input-record-runner"
+    }
+  ],
+  "executionPolicy": {
+    "oneShot": true,
+    "allowOverwrite": false
+  },
+  "attempt": {
+    "attemptOrdinal": 1,
+    "supersedesReceipt": null
+  }
+}

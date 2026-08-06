@@ -1,0 +1,73 @@
+{
+  "schemaVersion": "presentation-formal-command-preflight-v001",
+  "commandId": "b6-generation-v001",
+  "checkedAt": "2026-08-04T09:51:32+09:00",
+  "checks": {
+    "fixedNode": {
+      "status": "passed",
+      "path": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+      "fileSha256": "de4f3b493b15e7a0ee311f6a2c6dbf93858052f5802aa91cfafa2c57e9d6bc5c"
+    },
+    "fixedTsxLoader": {
+      "status": "passed",
+      "path": "/Users/kawafmm/workspace/zev2/node_modules/.pnpm/tsx@4.22.3/node_modules/tsx/dist/loader.mjs",
+      "fileSha256": "f06fb3da72f722ec9a2c3e8502f750ae1b6300b93fb76e8a52548dba69b6730f"
+    },
+    "nodeOptionsAbsent": {
+      "status": "passed",
+      "present": false
+    },
+    "stageAdmissionReceipt": {
+      "status": "passed",
+      "path": "evals/clip_composition/outputs/presentation/meaning-output-run-input-records/qdczJpv8RCc-candidate-59-meaning-output-first-run-v001/admissions-v002/04-b6-generation/attempt-0001/stage-admission-receipt.json",
+      "fileSha256": "e91ae52c7cb492a39c56c7f89ece172faac20a46b0354a2fe0dccde97a0e5b72"
+    },
+    "targetJob": {
+      "status": "passed",
+      "path": "evals/clip_composition/outputs/presentation/meaning-boundary-b6-jobs/qdczJpv8RCc-candidate-59-meaning-output-first-run-b6-v001.json",
+      "fileSha256": "fbc7ada3ada68203e6b99c5ebdd8d39e149948c741a19eaca3d93d54a79e8a04",
+      "canonicalSha256": "57491b71d34dda19973a902380c153040a3fcce714e083bdbb8a108a56b7d70f",
+      "formalDecoder": "passed",
+      "valueValidator": "passed",
+      "formalBytes": "passed"
+    },
+    "generateRequest": {
+      "status": "passed",
+      "path": "evals/clip_composition/outputs/presentation/meaning-boundary-b5-attempts/qdczJpv8RCc-candidate-59-meaning-output-first-run-b5-v001/attempt-v001/generate-content-request.json",
+      "fileSha256": "ac93e47717ffcedde2e863f9acba928ef8e6f2951e1573282146b6233f4b87ca",
+      "byteUnchanged": true
+    },
+    "costGuard": {
+      "status": "passed",
+      "finalInputTokens": 92769,
+      "maxOutputTokens": 48112,
+      "preSendEstimateNanoUsd": 499993500,
+      "maximumNanoUsd": 500000000
+    },
+    "singleSendAuthorization": {
+      "status": "passed",
+      "decisionPath": "DECISIONS.md",
+      "lineNumber": 61,
+      "lineSha256": "afc33f2efddcd6e1168b89714a967bee37f4d7b2af4cc312c54748276a0a045f"
+    },
+    "secretSource": {
+      "status": "passed",
+      "path": "/Users/kawafmm/workspace/env/.env",
+      "policy": "process-environment-only"
+    },
+    "outputRootUnused": {
+      "status": "passed",
+      "path": "evals/clip_composition/outputs/presentation/meaning-boundary-b6-attempts/qdczJpv8RCc-candidate-59-meaning-output-first-run-b6-v001/attempt-v001"
+    },
+    "parallelWriterAbsent": {
+      "status": "passed"
+    }
+  },
+  "argv": [
+    "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+    "--import",
+    "/Users/kawafmm/workspace/zev2/node_modules/.pnpm/tsx@4.22.3/node_modules/tsx/dist/loader.mjs",
+    "evals/clip_composition/run_presentation_meaning_boundary_b5_b6_v001.mjs",
+    "evals/clip_composition/outputs/presentation/meaning-boundary-b6-jobs/qdczJpv8RCc-candidate-59-meaning-output-first-run-b6-v001.json"
+  ]
+}

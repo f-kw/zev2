@@ -14,10 +14,12 @@ import {
   buildPresentationVerticalOverlayAdapterV001,
   inspectPresentationVerticalTextLayoutV001,
   resolvePresentationVerticalPresetProjectionV001,
-  validatePresentationVerticalCropDecisionV001,
-  validatePresentationVerticalCropSourceBindingV001,
   validatePresentationVerticalRendererTrustV001,
 } from './render_presentation_vertical_review_v001.ts';
+import {
+  PRESENTATION_OUTPUT_CROP_APPLICATION_SCHEMA_V001,
+  validatePresentationOutputCropApplicationV001,
+} from './presentation_output_crop_application_v001.mjs';
 import {inspectPresentationPresetLayoutV001} from './inspect_presentation_preset_layout.ts';
 
 export const PRESENTATION_OUTPUT_CHARACTER_WIDTH_RULE_V001 =
@@ -101,6 +103,12 @@ export type PresentationOutputStyleArtifactsV001 = {
   presetValidationIndex: JsonObject;
   materialValidationIndex: JsonObject;
   rendererTrust: JsonObject;
+  cropApplicationArtifact?: {
+    path: string;
+    absolutePath: string;
+    bytes: Buffer;
+    value: JsonObject;
+  };
   cropDecisionArtifact?: {
     path: string;
     absolutePath: string;
@@ -208,13 +216,6 @@ const validateLandscapeTrustArtifacts = (
   ).status === 'passed';
 };
 
-const resolveCropSelectionManifestPath = (
-  decisionPath: string,
-  manifestPath: string,
-) => path.posix.dirname(manifestPath) === '.'
-  ? path.posix.normalize(path.posix.join(path.posix.dirname(decisionPath), manifestPath))
-  : path.posix.normalize(manifestPath);
-
 /**
  * 新しいforward-only出力経路のstyleを一意に解決する。
  * `resolvedStyle`は親契約§7.2のexact 10 keyそのものであり、O04/O06/O07が
@@ -223,14 +224,19 @@ const resolveCropSelectionManifestPath = (
 export async function resolvePresentationOutputStyleV001({
   styleInput,
   artifacts,
-  baseMediaBinding,
+  baseMediaInput,
   baseMediaInspection,
   runtimeProfile,
   implementationBindings,
 }: {
   styleInput: unknown;
   artifacts: PresentationOutputStyleArtifactsV001;
-  baseMediaBinding: {path: string; fileSha256: string};
+  baseMediaInput: {
+    baseMedia: JsonObject;
+    timeline: JsonObject;
+    generationManifest: JsonObject;
+    validationReceipt: JsonObject;
+  };
   baseMediaInspection: {
     width: number;
     height: number;
@@ -367,7 +373,7 @@ export async function resolvePresentationOutputStyleV001({
         !PRESENTATION_OUTPUT_SCREEN_LAYOUT_VOCABULARY_V001.includes(styleInput.screenLayoutId)
         || styleInput.screenLayoutId !== 'speaker_only'
         || !exactKeys(styleInput.cropPolicy, [
-          'mode', 'scope', 'decision', 'selectionPackageManifest',
+          'mode', 'scope', 'application',
         ])
         || styleInput.cropPolicy.mode !== 'bound-decision'
         || styleInput.cropPolicy.scope !== 'all-segments'
@@ -408,44 +414,37 @@ export async function resolvePresentationOutputStyleV001({
       if (baseMediaInspection === null) {
         throw new TypeError('vertical crop inspection is unavailable');
       }
+      const applicationArtifact = artifacts.cropApplicationArtifact;
       const decisionArtifact = artifacts.cropDecisionArtifact;
       const selectionArtifact = artifacts.cropSelectionPackageManifest;
-      if (!decisionArtifact || !isObject(decisionArtifact.value)
+      if (!applicationArtifact || !isObject(applicationArtifact.value)
+        || !decisionArtifact || !isObject(decisionArtifact.value)
         || !selectionArtifact || !isObject(selectionArtifact.value)) {
-        throw new TypeError('vertical crop decision artifact is missing');
+        throw new TypeError('vertical crop application artifacts are missing');
       }
-      const selectionProvenance = decisionArtifact.value.provenance?.selectionPackageManifest;
       if (
-        !sameJson(styleInput.cropPolicy.decision, {
-          schemaVersion: 'vertical-preset-type-crop-decision-v006',
-          path: decisionArtifact.path,
-          fileSha256: styleInput.cropPolicy.decision.fileSha256,
-          canonicalSha256: styleInput.cropPolicy.decision.canonicalSha256,
+        !sameJson(styleInput.cropPolicy.application, {
+          schemaVersion: PRESENTATION_OUTPUT_CROP_APPLICATION_SCHEMA_V001,
+          path: applicationArtifact.path,
+          fileSha256: createHash('sha256').update(applicationArtifact.bytes).digest('hex'),
+          canonicalSha256: canonicalSha256(applicationArtifact.value),
         })
-        || styleInput.cropPolicy.selectionPackageManifest.schemaVersion
-          !== 'vertical-preset-type-crop-selection-package-v006'
-        || styleInput.cropPolicy.selectionPackageManifest.path !== selectionArtifact.path
-        || !isObject(selectionProvenance)
-        || !isNonEmptyString(selectionProvenance.path)
-        || selectionProvenance.fileSha256
-          !== styleInput.cropPolicy.selectionPackageManifest.fileSha256
-        || resolveCropSelectionManifestPath(
-          decisionArtifact.path,
-          selectionProvenance.path,
-        ) !== styleInput.cropPolicy.selectionPackageManifest.path
       ) throw new TypeError('vertical crop binding schema is invalid');
-      const decisionReport = validatePresentationVerticalCropDecisionV001(decisionArtifact.value);
-      if (decisionReport.status !== 'passed') throw new TypeError('vertical crop decision is invalid');
-      const sourceReport = await validatePresentationVerticalCropSourceBindingV001({
-        cropDecisionArtifact: decisionArtifact as any,
-        baseMediaBinding,
+      const applicationReport = validatePresentationOutputCropApplicationV001({
+        application: applicationArtifact.value,
+        cropDecision: decisionArtifact.value,
+        selectionPackageManifest: selectionArtifact.value,
+        // The formal request decoder deliberately returns null-prototype objects.
+        // The crop contract owns ordinary JSON objects, so cross that boundary
+        // without changing any value before applying its exact-shape validator.
+        targetBaseMedia: structuredClone(baseMediaInput),
+        screenLayoutId: styleInput.screenLayoutId,
       });
-      if (sourceReport.status !== 'passed') throw new TypeError('vertical crop source differs');
-      if (decisionArtifact.value.selectedPlan?.screenLayoutId !== styleInput.screenLayoutId) {
-        throw new TypeError('vertical crop layout differs');
+      if (applicationReport.status !== 'passed') {
+        throw new TypeError('vertical crop application is invalid');
       }
       const filterReport = await buildPresentationVerticalCropFilterV001({
-        cropDecision: decisionArtifact.value,
+        cropDecision: applicationReport.cropDecision,
         sourceWidth: baseMediaInspection.width,
         sourceHeight: baseMediaInspection.height,
         frameCount: baseMediaInspection.frameCount,
@@ -457,10 +456,9 @@ export async function resolvePresentationOutputStyleV001({
         screenLayoutId: filterReport.screenLayoutId,
         filter: filterReport.filter,
         filterCanonicalSha256: filterReport.filterCanonicalSha256,
-        selectionPackageManifestBinding: {
-          path: selectionArtifact.path,
-          fileSha256: selectionProvenance.fileSha256,
-        },
+        cropDecision: applicationReport.cropDecision,
+        selectionProjection: applicationReport.selectionProjection,
+        applicationBindingProjection: applicationReport.applicationBindingProjection,
       };
       failureCode = 'STYLE_BINDING_MISMATCH';
       failurePath = '/styleInput/presetBinding/rendererTrust';

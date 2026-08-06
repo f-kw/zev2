@@ -1,0 +1,57 @@
+{
+  "status": "passed",
+  "stageJob": {
+    "path": "evals/clip_composition/outputs/presentation/meaning-output-stage-admission-jobs/qdczJpv8RCc-candidate-59-meaning-output-first-run-v001/v002/08-output-landscape-attempt-0001-current-byte-rebind-v001.json",
+    "fileSha256": "608be04ff134c4376feb66f48222050e0310e8ff1b46c8277f205f5d86f8b6b0",
+    "canonicalSha256": "10d0b0580e9815a2aeec75f529b9f91bb0fb0015af8269837141abb7d6126187",
+    "formalBytes": true,
+    "schemaAndValue": true
+  },
+  "runInputRecord": {
+    "fileSha256": "5ac80deeb0daac08ea32cad7fa9b016cf04ab95ea551fa6981e6c8151ee28680",
+    "canonicalSha256": "22e869ae688e84081e7797189d5283efb855a6d3f075506c5b585ffec6dbaedd"
+  },
+  "targetJob": {
+    "fileSha256": "e710535d830829bf905550d89c62e87d6e083cbb233f3db72b23dfc45f6fe358",
+    "canonicalSha256": "b88d4e4823c39ed23230bf42db2cd8f49439ac6c71eca16e0ac29080951573bb",
+    "formalBytes": true,
+    "value": true
+  },
+  "upstreams": [
+    {
+      "role": "output-request",
+      "fileSha256": "be1ab2d03ac6d5fd72bd17d728cd31f8c610c9da7ee9720c67c25e51db96b464",
+      "canonicalSha256": "16451f0052e131e7c2d1853fa7585b7939b43c13440c227b79a812ca2edcf5f1"
+    },
+    {
+      "role": "meaning-package",
+      "fileSha256": "27769faadce76c5becec8ad03549300b8a037f728410ca058cc5e376cd3e9613",
+      "canonicalSha256": "918fc26e871533b4ae6bafcd9c1e405e739e085a8fe5a24ed4df8dc00d4d7ceb"
+    },
+    {
+      "role": "base-media",
+      "fileSha256": "faad660c7623cdbf3a8f3b55cdaffc34729d06683ce391997c51f10fbc076967",
+      "canonicalSha256": null
+    }
+  ],
+  "implementations": [
+    {
+      "role": "run-input-record",
+      "fileSha256": "6cda4ebdee30e887f9c4f916fc20c736025ca79f5d6c20051765c57315e7abbf"
+    },
+    {
+      "role": "run-input-record-runner",
+      "fileSha256": "ef0248d49586fcbeb90708ed5ea466e1d4281e62a6eedf294701d68be25a1e2f"
+    }
+  ],
+  "outputRoot": {
+    "path": "evals/clip_composition/outputs/presentation/meaning-output-run-input-records/qdczJpv8RCc-candidate-59-meaning-output-first-run-v001/admissions-v002/08-output-landscape/attempt-0001",
+    "unused": true
+  },
+  "runtime": {
+    "nodePath": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+    "nodeVersion": "v20.19.6",
+    "nodeOptionsAbsent": true,
+    "tsxLoaderPath": "/Users/kawafmm/workspace/zev2/node_modules/.pnpm/tsx@4.22.3/node_modules/tsx/dist/loader.mjs"
+  }
+}

@@ -15,9 +15,6 @@ import {
   decodePresentationCaptionB1StrictJsonV001,
 } from './presentation_caption_semantic_source_package_v001.mjs';
 import {
-  canonicalJson as canonicalPresentationOutputFiniteJsonV001,
-} from './presentation_caption_contract_v002.mjs';
-import {
   derivePresentationMeaningCaptionProjectionV001,
   derivePresentationExpectedAtomOccurrencesV001,
   canonicalSha256PresentationMeaningInformationJsonV001,
@@ -64,6 +61,11 @@ import {
   inspectPresentationOutputDisplayPageV001,
   resolvePresentationOutputStyleV001,
 } from './presentation_output_style_resolver_v001.ts';
+import {
+  canonicalSha256PresentationOutputFiniteJsonV001 as canonicalSha256FiniteOutputJson,
+  decodePresentationOutputFiniteJsonV001,
+  inspectPresentationOutputCropApplicationEnvelopeV001,
+} from './presentation_output_crop_application_v001.mjs';
 import {
   buildPresentationOutputCommonCorePlanV001,
   buildPresentationOutputRenderApplicationResultsV001,
@@ -173,56 +175,12 @@ const decodeStrict = (bytes: Buffer) => {
   return decoded.status === 'decoded' ? decoded.value : null;
 };
 
-const hasLoneSurrogate = (value: string) => {
-  for (let index = 0; index < value.length; index += 1) {
-    const unit = value.charCodeAt(index);
-    if (unit >= 0xd800 && unit <= 0xdbff) {
-      const next = value.charCodeAt(index + 1);
-      if (!(next >= 0xdc00 && next <= 0xdfff)) return true;
-      index += 1;
-    } else if (unit >= 0xdc00 && unit <= 0xdfff) {
-      return true;
-    }
-  }
-  return false;
-};
-
-const isFiniteJsonValue = (value: unknown): boolean => {
-  if (value === null || typeof value === 'boolean') return true;
-  if (typeof value === 'string') return !hasLoneSurrogate(value);
-  if (typeof value === 'number') {
-    return Number.isFinite(value)
-      && !Object.is(value, -0)
-      && (!Number.isInteger(value) || Number.isSafeInteger(value));
-  }
-  if (Array.isArray(value)) return dense(value) && value.every(isFiniteJsonValue);
-  return isObject(value)
-    && Object.getPrototypeOf(value) === Object.prototype
-    && Object.keys(value).every(key => !hasLoneSurrogate(key))
-    && Object.values(value).every(isFiniteJsonValue);
-};
-
 // Crop and renderer geometry use the existing output-side finite-number domain.
 // Semantic/package JSON continues to use the integer-only strict decoder above.
-const decodeFiniteOutputJson = (bytes: Buffer) => {
-  if (!Buffer.isBuffer(bytes)
-    || (bytes.length >= 3 && bytes[0] === 0xef && bytes[1] === 0xbb && bytes[2] === 0xbf)) {
-    return null;
-  }
-  try {
-    const text = new TextDecoder('utf-8', {fatal: true}).decode(bytes);
-    if (text.charCodeAt(0) === 0xfeff || /^\s*```/u.test(text)) return null;
-    const value = JSON.parse(text);
-    return isFiniteJsonValue(value) ? value : null;
-  } catch {
-    return null;
-  }
+const decodeFiniteOutputJsonValue = (bytes: Buffer) => {
+  const decoded = decodePresentationOutputFiniteJsonV001(bytes);
+  return decoded.status === 'decoded' ? decoded.value : null;
 };
-
-const canonicalSha256FiniteOutputJson = (value: unknown) => hash(Buffer.from(
-  canonicalPresentationOutputFiniteJsonV001(value),
-  'utf8',
-));
 
 const resolveWorkspacePath = async (workspaceRoot: string, relativePath: string) => {
   if (!WORKSPACE_PATH.test(relativePath ?? '')) throw new Error('unsafe-workspace-path');
@@ -326,7 +284,7 @@ const observeJsonBinding = async (
     return {status: 'binding-mismatch' as const, ...observed, value: null};
   }
   const value = numberDomain === 'finite-output'
-    ? decodeFiniteOutputJson(observed.bytes)
+    ? decodeFiniteOutputJsonValue(observed.bytes)
     : decodeStrict(observed.bytes);
   if (!isObject(value)) return {status: 'invalid' as const, ...observed, value: null};
   let canonicalSha256: string;
@@ -679,29 +637,44 @@ const loadStyleArtifacts = async (
     artifacts[role] = item.value;
   }
   if (request.styleInput.format === 'vertical-short-1080x1920') {
+    const application = await observeJsonBinding(
+      workspaceRoot,
+      request.styleInput.cropPolicy.application,
+      tracked,
+      'finite-output',
+    );
+    if (application.status !== 'passed') return {status: 'rejected' as const};
+    const envelope = inspectPresentationOutputCropApplicationEnvelopeV001(application.value);
+    if (envelope.status !== 'passed') return {status: 'rejected' as const};
     const decision = await observeJsonBinding(
       workspaceRoot,
-      request.styleInput.cropPolicy.decision,
+      envelope.decisionBinding,
       tracked,
       'finite-output',
     );
     const selection = await observeJsonBinding(
       workspaceRoot,
-      request.styleInput.cropPolicy.selectionPackageManifest,
+      envelope.selectionPackageManifestBinding,
       tracked,
       'finite-output',
     );
     if (decision.status !== 'passed' || selection.status !== 'passed') {
       return {status: 'rejected' as const};
     }
+    artifacts.cropApplicationArtifact = {
+      path: request.styleInput.cropPolicy.application.path,
+      absolutePath: application.absolutePath,
+      bytes: application.bytes,
+      value: application.value,
+    };
     artifacts.cropDecisionArtifact = {
-      path: request.styleInput.cropPolicy.decision.path,
+      path: envelope.decisionBinding.path,
       absolutePath: decision.absolutePath,
       bytes: decision.bytes,
       value: decision.value,
     };
     artifacts.cropSelectionPackageManifest = {
-      path: request.styleInput.cropPolicy.selectionPackageManifest.path,
+      path: envelope.selectionPackageManifestBinding.path,
       absolutePath: selection.absolutePath,
       bytes: selection.bytes,
       value: selection.value,
@@ -873,7 +846,7 @@ const expectedRenderRootNames = () => [
 
 const readStagedJson = async (absolutePath: string) => {
   if (!await regularFileAt(absolutePath)) return null;
-  return decodeFiniteOutputJson(await readAbsoluteStable(absolutePath));
+  return decodeFiniteOutputJsonValue(await readAbsoluteStable(absolutePath));
 };
 
 /**
@@ -1049,8 +1022,8 @@ const verifyFormalJobEnvironment = async (
     readStable(workspaceRoot, PRESENTATION_OUTPUT_RUNTIME_PROFILE_SOURCE_V001.reportPath),
     readStable(workspaceRoot, PRESENTATION_OUTPUT_RUNTIME_PROFILE_SOURCE_V001.trustPath),
   ]);
-  const profileReport = decodeFiniteOutputJson(profileReportObserved.bytes);
-  const verticalTrust = decodeFiniteOutputJson(trustObserved.bytes);
+  const profileReport = decodeFiniteOutputJsonValue(profileReportObserved.bytes);
+  const verticalTrust = decodeFiniteOutputJsonValue(trustObserved.bytes);
   if (hash(profileReportObserved.bytes)
       !== PRESENTATION_OUTPUT_RUNTIME_PROFILE_SOURCE_V001.reportFileSha256
     || hash(trustObserved.bytes)
@@ -1228,26 +1201,15 @@ const buildOccurrenceRecords = (
   },
 ));
 
-const cropManifestMatchesBase = (styleState: JsonObject, request: JsonObject) => {
+const cropApplicationMatchesBase = (styleState: JsonObject, request: JsonObject) => {
   if (request.styleInput.format === 'normal-landscape') return true;
-  const manifest = styleState.artifacts?.cropSelectionPackageManifest?.value;
-  const decision = styleState.artifacts?.cropDecisionArtifact?.value;
-  return isObject(manifest)
-    && manifest.schemaVersion === 'vertical-preset-type-crop-selection-package-v006'
-    && same(manifest.sourceMedia, {
-      path: request.baseMediaInput.baseMedia.path,
-      fileSha256: request.baseMediaInput.baseMedia.fileSha256,
-      previewSecond: manifest.sourceMedia?.previewSecond,
-    })
-    && isObject(decision)
+  return isObject(styleState.cropContext?.applicationBindingProjection)
     && same(
-      styleState.cropContext?.selectionPackageManifestBinding,
-      {
-        path: request.styleInput.cropPolicy.selectionPackageManifest.path,
-        fileSha256: request.styleInput.cropPolicy.selectionPackageManifest.fileSha256,
-      },
+      styleState.cropContext.applicationBindingProjection.targetBaseMedia,
+      request.baseMediaInput,
     )
-    && decision.selectedPlan?.screenLayoutId === request.styleInput.screenLayoutId;
+    && styleState.cropContext?.selectionProjection?.screenLayoutId
+      === request.styleInput.screenLayoutId;
 };
 
 const publishRenderFailure = async ({
@@ -1708,7 +1670,7 @@ export async function runPresentationOutputJobV001({
         state.styleResolution = await resolvePresentationOutputStyleV001({
           styleInput: request.styleInput,
           artifacts: loaded.artifacts,
-          baseMediaBinding: request.baseMediaInput.baseMedia,
+          baseMediaInput: request.baseMediaInput,
           baseMediaInspection: state.baseMediaInspection === null
             ? null
             : {
@@ -1750,7 +1712,7 @@ export async function runPresentationOutputJobV001({
           bindingMatches: cropViolations.length === 0,
         });
       }
-      return acceptanceObservation('cropResolution', {bindingMatches: cropManifestMatchesBase({
+      return acceptanceObservation('cropResolution', {bindingMatches: cropApplicationMatchesBase({
         artifacts: state.styleArtifacts,
         cropContext: state.styleResolution.cropContext,
       }, request)});
@@ -2004,7 +1966,7 @@ export async function runPresentationOutputJobV001({
         }],
         operation: () => createPresentationVerticalCroppedBaseMediaV001({
           baseMediaPath: state.base.baseMedia.absolutePath,
-          cropDecision: state.styleArtifacts.cropDecisionArtifact.value,
+          cropDecision: state.styleResolution.cropContext.cropDecision,
           runtimeProfile: job.runtimeProfile,
         }),
       });

@@ -1,0 +1,63 @@
+{
+  "schemaVersion": "presentation-meaning-boundary-source-package-job-v001",
+  "jobId": "qdczJpv8RCc-candidate-59-meaning-output-first-run-b3-v001",
+  "packageId": "qdczJpv8RCc-candidate-59-meaning-output-first-run-b3-v001-package",
+  "timelineCompositionDecisionBinding": {
+    "schemaVersion": "zev-timeline-composition-decision-v001",
+    "path": "evals/clip_composition/outputs/presentation/meaning-timeline-decisions/qdczJpv8RCc-candidate-59-meaning-output-first-run-timeline-v002/timeline-composition-decision.json",
+    "fileSha256": "3b240912c833f87019a987772da79cd5c6b5832c806312cf31cdca0949dee193",
+    "canonicalSha256": "b0574ca49db9d4b9db14a973d9d5d8276ef803480d4fe9c1f744ef757fcf4708"
+  },
+  "segmenterSourceBindings": [
+    {
+      "sourceMediaId": "source-media-000001",
+      "preflightReportBinding": {
+        "schemaVersion": "presentation-segmenter-boundary-preflight-report-v001",
+        "path": "evals/clip_composition/outputs/presentation/segmenter-boundary-evidence/qdczJpv8RCc-candidate-59-v001/embedded-gate-a-validation-report.json",
+        "fileSha256": "500bbf38dec8f98bfca3027dc26c7c3291a96efd59fdabc354cadb05c592e2a3",
+        "canonicalSha256": "24e466907102a0cfb246650482325253f18ac3a444b8ccdbd054a8d5fb9905a6"
+      },
+      "evidenceBinding": {
+        "schemaVersion": "presentation-segmenter-boundary-evidence-v001",
+        "path": "evals/clip_composition/outputs/presentation/segmenter-boundary-evidence/qdczJpv8RCc-candidate-59-v001/segmenter-boundary-evidence.json",
+        "fileSha256": "55f8c39bb7211b037e2b6dbd17d8f19e235fc633fdc399eb8cc6bae25807299f",
+        "canonicalSha256": "ef78a1ec86e8f72c337fb23b95e7bb4ee6ac6e567d4ea6aba4b0c0036bc3cfe8"
+      }
+    }
+  ],
+  "outputPath": "evals/clip_composition/outputs/presentation/meaning-boundary-source-packages/qdczJpv8RCc-candidate-59-meaning-output-first-run-b3-v001/meaning-boundary-source-package.json",
+  "implementationBindings": [
+    {
+      "path": "evals/clip_composition/presentation_meaning_boundary_source_package_v001.mjs",
+      "fileSha256": "fea5926ceffb2efc0815e4f31490e27f31fc3a59c90b122196b8385f01cd9a9b",
+      "role": "meaning-source-package"
+    },
+    {
+      "path": "evals/clip_composition/presentation_segmenter_boundary_evidence_v001.mjs",
+      "fileSha256": "dac613292e463897ee2757be75a7d64f3ece9928141765a195ba54a0ebc6007a",
+      "role": "gate-a-core"
+    },
+    {
+      "path": "evals/clip_composition/run_presentation_segmenter_boundary_preflight_v001.mjs",
+      "fileSha256": "e83157cfe72197940193c9bd07a4f8c9be4b1716617dc55bf90e1e8c4f33812e",
+      "role": "gate-a-preflight"
+    },
+    {
+      "path": "evals/clip_composition/presentation_caption_semantic_source_package_v001.mjs",
+      "fileSha256": "ac3dcbbc671af6f56dcceeea6a41c8ae9cbf9fc4ba28a8a00bbc5d6faff45bcd",
+      "role": "strict-json"
+    }
+  ],
+  "approvedContractBindings": [
+    {
+      "path": "evals/clip_composition/reports/presentation/presentation-meaning-information-package-contract-design-20260803-v001.md",
+      "fileSha256": "a38ef995c5c838f742c1de6c18acd5a7fd166ea57fb7537e51cf9a89abd4c0de",
+      "role": "meaning-package-contract"
+    },
+    {
+      "path": "evals/clip_composition/reports/presentation/presentation-output-side-acceptance-contract-design-20260803-v001.md",
+      "fileSha256": "c349d544e9cc954d2f5b9e5e05334801e6a11cdce383f57829c04ae301b678de",
+      "role": "output-side-contract"
+    }
+  ]
+}

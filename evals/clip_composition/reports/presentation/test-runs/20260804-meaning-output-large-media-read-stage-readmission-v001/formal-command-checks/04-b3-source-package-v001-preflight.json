@@ -1,0 +1,35 @@
+{
+  "schemaVersion": "presentation-formal-command-preflight-v001",
+  "commandId": "b3-source-package-v001",
+  "checkedAt": "2026-08-04T06:53:31+09:00",
+  "checks": {
+    "fixedNode": {
+      "status": "passed",
+      "path": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+      "fileSha256": "de4f3b493b15e7a0ee311f6a2c6dbf93858052f5802aa91cfafa2c57e9d6bc5c"
+    },
+    "fixedTsxLoader": {
+      "status": "passed",
+      "path": "/Users/kawafmm/workspace/zev2/node_modules/.pnpm/tsx@4.22.3/node_modules/tsx/dist/loader.mjs",
+      "fileSha256": "f06fb3da72f722ec9a2c3e8502f750ae1b6300b93fb76e8a52548dba69b6730f"
+    },
+    "nodeOptionsAbsent": {
+      "status": "passed",
+      "present": false
+    },
+    "outputRootUnused": {
+      "status": "passed",
+      "path": "evals/clip_composition/outputs/presentation/meaning-boundary-source-packages/qdczJpv8RCc-candidate-59-meaning-output-first-run-b3-v001"
+    },
+    "parallelWriterAbsent": {
+      "status": "passed"
+    }
+  },
+  "argv": [
+    "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+    "--import",
+    "/Users/kawafmm/workspace/zev2/node_modules/.pnpm/tsx@4.22.3/node_modules/tsx/dist/loader.mjs",
+    "evals/clip_composition/presentation_meaning_boundary_source_package_v001.mjs",
+    "evals/clip_composition/outputs/presentation/meaning-boundary-jobs/qdczJpv8RCc-candidate-59-meaning-output-first-run-b3-v001.json"
+  ]
+}

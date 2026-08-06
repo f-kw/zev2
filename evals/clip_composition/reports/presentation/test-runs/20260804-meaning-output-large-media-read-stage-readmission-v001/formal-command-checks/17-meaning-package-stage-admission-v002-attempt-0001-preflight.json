@@ -1,0 +1,22 @@
+{
+  "schemaVersion": "presentation-formal-command-preflight-v001",
+  "commandId": "meaning-package-stage-admission-v002-attempt-0001",
+  "checkedAt": "2026-08-04T12:18:37+09:00",
+  "checks": {
+    "fixedNode": {"status": "passed", "path": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node", "fileSha256": "de4f3b493b15e7a0ee311f6a2c6dbf93858052f5802aa91cfafa2c57e9d6bc5c"},
+    "fixedTsxLoader": {"status": "passed", "path": "/Users/kawafmm/workspace/zev2/node_modules/.pnpm/tsx@4.22.3/node_modules/tsx/dist/loader.mjs", "fileSha256": "f06fb3da72f722ec9a2c3e8502f750ae1b6300b93fb76e8a52548dba69b6730f"},
+    "nodeOptionsAbsent": {"status": "passed", "present": false},
+    "stageAdmissionJob": {"status": "passed", "path": "evals/clip_composition/outputs/presentation/meaning-output-stage-admission-jobs/qdczJpv8RCc-candidate-59-meaning-output-first-run-v001/v002/06-meaning-package-attempt-0001.json", "fileSha256": "948bb6d2b070bc1a7ba1093cd87bcd00d5cdfcc367d4b868cc1ad45c80c27881", "canonicalSha256": "39150e0e8ddd8124e45853f893febdf4492fe9653590d5a73950088101523898", "formalDecoder": "passed", "valueValidator": "passed", "formalBytes": "passed"},
+    "targetJob": {"status": "passed", "path": "evals/clip_composition/outputs/presentation/meaning-information-jobs/qdczJpv8RCc-candidate-59-meaning-output-first-run-meaning-package-v001.json", "fileSha256": "8b2595b84f77e721871ad064e4cb86713d7b56f7b9611ab6475bfc7245766e9c", "canonicalSha256": "b9abd9305cfd4aff58b83d3d82a1296acd028a9308962c3f1919e62a518e732b", "formalDecoder": "passed", "valueValidator": "passed", "formalBytes": "passed"},
+    "receiptRootUnused": {"status": "passed", "path": "evals/clip_composition/outputs/presentation/meaning-output-run-input-records/qdczJpv8RCc-candidate-59-meaning-output-first-run-v001/admissions-v002/06-meaning-package/attempt-0001"},
+    "packageRootUnused": {"status": "passed", "path": "evals/clip_composition/outputs/presentation/meaning-information-packages/qdczJpv8RCc-candidate-59-meaning-output-first-run-meaning-package-v001-meaning-information"},
+    "parallelWriterAbsent": {"status": "passed"}
+  },
+  "argv": [
+    "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+    "--import",
+    "/Users/kawafmm/workspace/zev2/node_modules/.pnpm/tsx@4.22.3/node_modules/tsx/dist/loader.mjs",
+    "evals/clip_composition/run_presentation_meaning_output_run_input_record_v001.mjs",
+    "evals/clip_composition/outputs/presentation/meaning-output-stage-admission-jobs/qdczJpv8RCc-candidate-59-meaning-output-first-run-v001/v002/06-meaning-package-attempt-0001.json"
+  ]
+}

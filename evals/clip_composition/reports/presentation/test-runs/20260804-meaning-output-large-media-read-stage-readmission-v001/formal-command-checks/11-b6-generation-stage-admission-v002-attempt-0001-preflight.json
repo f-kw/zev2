@@ -1,0 +1,85 @@
+{
+  "schemaVersion": "presentation-formal-command-preflight-v001",
+  "commandId": "b6-generation-stage-admission-v002-attempt-0001",
+  "checkedAt": "2026-08-04T09:50:32+09:00",
+  "checks": {
+    "fixedNode": {
+      "status": "passed",
+      "path": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+      "fileSha256": "de4f3b493b15e7a0ee311f6a2c6dbf93858052f5802aa91cfafa2c57e9d6bc5c"
+    },
+    "fixedTsxLoader": {
+      "status": "passed",
+      "path": "/Users/kawafmm/workspace/zev2/node_modules/.pnpm/tsx@4.22.3/node_modules/tsx/dist/loader.mjs",
+      "fileSha256": "f06fb3da72f722ec9a2c3e8502f750ae1b6300b93fb76e8a52548dba69b6730f"
+    },
+    "nodeOptionsAbsent": {
+      "status": "passed",
+      "present": false
+    },
+    "stageAdmissionJobFormalDecoder": {
+      "status": "passed",
+      "path": "evals/clip_composition/outputs/presentation/meaning-output-stage-admission-jobs/qdczJpv8RCc-candidate-59-meaning-output-first-run-v001/v002/04-b6-generation-attempt-0001.json",
+      "fileSha256": "6388fd34a1853764bf0a5237f493f866f2ba07f6089e666ed4664b4c57d0eef5",
+      "canonicalSha256": "4c19dd018eec20b043524514ca0fa004bfa70f86605f0a860dbd15158446da81"
+    },
+    "stageAdmissionJobValueValidator": {
+      "status": "passed"
+    },
+    "stageAdmissionJobFormalBytes": {
+      "status": "passed",
+      "serializer": "serializePresentationMeaningOutputRunInputFormalJsonV001"
+    },
+    "targetJobFormalDecoder": {
+      "status": "passed",
+      "path": "evals/clip_composition/outputs/presentation/meaning-boundary-b6-jobs/qdczJpv8RCc-candidate-59-meaning-output-first-run-b6-v001.json",
+      "fileSha256": "fbc7ada3ada68203e6b99c5ebdd8d39e149948c741a19eaca3d93d54a79e8a04",
+      "canonicalSha256": "57491b71d34dda19973a902380c153040a3fcce714e083bdbb8a108a56b7d70f"
+    },
+    "targetJobValueValidator": {
+      "status": "passed"
+    },
+    "targetJobFormalBytes": {
+      "status": "passed",
+      "serializer": "serializePresentationCaptionB1FormalJsonV001"
+    },
+    "b5Manifest": {
+      "status": "passed",
+      "path": "evals/clip_composition/outputs/presentation/meaning-boundary-b5-attempts/qdczJpv8RCc-candidate-59-meaning-output-first-run-b5-v001/attempt-v001/b5-manifest.json",
+      "fileSha256": "7a0d4a653c0d5f6d89ab79a2e5a2ece4e998f676ef4ae5e3f5d7a4dc9c4b5346",
+      "finalInputTokens": 92769,
+      "maxOutputTokens": 48112,
+      "preSendEstimateNanoUsd": 499993500,
+      "maximumNanoUsd": 500000000
+    },
+    "generateRequest": {
+      "status": "passed",
+      "path": "evals/clip_composition/outputs/presentation/meaning-boundary-b5-attempts/qdczJpv8RCc-candidate-59-meaning-output-first-run-b5-v001/attempt-v001/generate-content-request.json",
+      "fileSha256": "ac93e47717ffcedde2e863f9acba928ef8e6f2951e1573282146b6233f4b87ca"
+    },
+    "singleSendAuthorization": {
+      "status": "passed",
+      "decisionPath": "DECISIONS.md",
+      "lineNumber": 61,
+      "lineSha256": "afc33f2efddcd6e1168b89714a967bee37f4d7b2af4cc312c54748276a0a045f"
+    },
+    "receiptRootUnused": {
+      "status": "passed",
+      "path": "evals/clip_composition/outputs/presentation/meaning-output-run-input-records/qdczJpv8RCc-candidate-59-meaning-output-first-run-v001/admissions-v002/04-b6-generation/attempt-0001"
+    },
+    "b6OutputRootUnused": {
+      "status": "passed",
+      "path": "evals/clip_composition/outputs/presentation/meaning-boundary-b6-attempts/qdczJpv8RCc-candidate-59-meaning-output-first-run-b6-v001/attempt-v001"
+    },
+    "parallelWriterAbsent": {
+      "status": "passed"
+    }
+  },
+  "argv": [
+    "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+    "--import",
+    "/Users/kawafmm/workspace/zev2/node_modules/.pnpm/tsx@4.22.3/node_modules/tsx/dist/loader.mjs",
+    "evals/clip_composition/run_presentation_meaning_output_run_input_record_v001.mjs",
+    "evals/clip_composition/outputs/presentation/meaning-output-stage-admission-jobs/qdczJpv8RCc-candidate-59-meaning-output-first-run-v001/v002/04-b6-generation-attempt-0001.json"
+  ]
+}

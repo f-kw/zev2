@@ -1,0 +1,82 @@
+{
+  "schemaVersion": "presentation-meaning-boundary-b6-manifest-v001",
+  "manifestId": "presentation-meaning-boundary-b6-manifest-fbc7ada3ada68203e6b99c5ebdd8d39e",
+  "status": "passed-transport",
+  "b6JobBinding": {
+    "schemaVersion": "presentation-meaning-boundary-b6-job-v001",
+    "path": "evals/clip_composition/outputs/presentation/meaning-boundary-b6-jobs/qdczJpv8RCc-candidate-59-meaning-output-first-run-b6-v001.json",
+    "fileSha256": "fbc7ada3ada68203e6b99c5ebdd8d39e149948c741a19eaca3d93d54a79e8a04",
+    "canonicalSha256": "57491b71d34dda19973a902380c153040a3fcce714e083bdbb8a108a56b7d70f"
+  },
+  "b5ManifestBinding": {
+    "schemaVersion": "presentation-meaning-boundary-b5-manifest-v001",
+    "path": "evals/clip_composition/outputs/presentation/meaning-boundary-b5-attempts/qdczJpv8RCc-candidate-59-meaning-output-first-run-b5-v001/attempt-v001/b5-manifest.json",
+    "fileSha256": "7a0d4a653c0d5f6d89ab79a2e5a2ece4e998f676ef4ae5e3f5d7a4dc9c4b5346",
+    "canonicalSha256": "ac3f43c886bf46b2089158f0aebc50ef3647cc5a001020a7a521f9121f1df1a6"
+  },
+  "generateRequestBinding": {
+    "path": "evals/clip_composition/outputs/presentation/meaning-boundary-b5-attempts/qdczJpv8RCc-candidate-59-meaning-output-first-run-b5-v001/attempt-v001/generate-content-request.json",
+    "fileSha256": "ac93e47717ffcedde2e863f9acba928ef8e6f2951e1573282146b6233f4b87ca"
+  },
+  "rawResponseBinding": {
+    "path": "evals/clip_composition/outputs/presentation/meaning-boundary-b6-attempts/qdczJpv8RCc-candidate-59-meaning-output-first-run-b6-v001/attempt-v001/generate-content-response.raw.json",
+    "fileSha256": "a9223966adc13ae2a3820bfaf4636a50857a586691ce9af6d4077027d1eab651"
+  },
+  "providerEnvelopeBinding": {
+    "schemaVersion": "presentation-meaning-boundary-provider-response-envelope-v001",
+    "path": "evals/clip_composition/outputs/presentation/meaning-boundary-b6-attempts/qdczJpv8RCc-candidate-59-meaning-output-first-run-b6-v001/attempt-v001/provider-response-envelope.json",
+    "fileSha256": "408616d5ffdca7d305e925a9d5b3632e77fb27f8b2d47f31ef0f89213a7790ce",
+    "canonicalSha256": "5aa86094ac42090658c5d9a03041f9279b482642241d3d7e0cbfeaa2176ed71e"
+  },
+  "usageListPriceEstimate": {
+    "currency": "USD",
+    "promptCostNanoUsd": 139153500,
+    "outputCostNanoUsd": 36757500,
+    "totalCostNanoUsd": 175911000,
+    "withinApprovedLimit": true,
+    "exceededPreSendEstimate": false,
+    "billingObservation": "usage-metadata-list-price-estimate-invoice-not-observed"
+  },
+  "primaryRejectionCode": null,
+  "transport": {
+    "endpoint": "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent",
+    "method": "POST",
+    "clientTimeoutMilliseconds": 600000,
+    "automaticRetries": 0,
+    "generateContentCalls": 1,
+    "authorizationHeader": "<redacted>"
+  },
+  "checks": {
+    "requestByte": "passed",
+    "rawFirst": "passed",
+    "httpEnvelope": "passed",
+    "model": "passed",
+    "usage": "passed",
+    "cost": "passed",
+    "responseCandidateCount": "passed",
+    "candidateContent": "passed",
+    "secretAbsence": "passed"
+  },
+  "implementationBindings": [
+    {
+      "path": "evals/clip_composition/run_presentation_meaning_boundary_b5_b6_v001.mjs",
+      "fileSha256": "3fc2ad6d5349e736117cc978de565d81171311190454f17a65150b986fc15d5e",
+      "role": "meaning-boundary-api-runner"
+    },
+    {
+      "path": "evals/clip_composition/run_presentation_caption_gate_b6_v001.mjs",
+      "fileSha256": "ecad17891d63038647e2be0634b5844d2d117c38ea6e07ccef470d2887e56204",
+      "role": "api-transport"
+    },
+    {
+      "path": "evals/clip_composition/presentation_caption_api_cost_guard_v001.mjs",
+      "fileSha256": "29ac0e7e4d54400d8063bd35caab5272a64474b3c00a306d49b33aa0092db57b",
+      "role": "api-cost-policy"
+    },
+    {
+      "path": "evals/clip_composition/presentation_caption_semantic_source_package_v001.mjs",
+      "fileSha256": "ac3dcbbc671af6f56dcceeea6a41c8ae9cbf9fc4ba28a8a00bbc5d6faff45bcd",
+      "role": "strict-json-codec"
+    }
+  ]
+}

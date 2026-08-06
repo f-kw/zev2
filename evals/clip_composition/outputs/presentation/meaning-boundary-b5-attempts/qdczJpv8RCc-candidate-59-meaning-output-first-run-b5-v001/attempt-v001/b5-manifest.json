@@ -1,0 +1,237 @@
+{
+  "schemaVersion": "presentation-meaning-boundary-b5-manifest-v001",
+  "manifestId": "presentation-meaning-boundary-b5-manifest-daaab9eb08d865faf3552ce1190172d7",
+  "status": "passed",
+  "b5JobBinding": {
+    "schemaVersion": "presentation-meaning-boundary-b5-job-v001",
+    "path": "evals/clip_composition/outputs/presentation/meaning-boundary-b5-jobs/qdczJpv8RCc-candidate-59-meaning-output-first-run-b5-v001.json",
+    "fileSha256": "daaab9eb08d865faf3552ce1190172d78d0aa2946b7f0fdbce6839ce2ed70df4",
+    "canonicalSha256": "c66a875c9800d7418006b4a5b5236dfd840d1bf0ce01991a9d276301367085a4"
+  },
+  "sourcePackageBinding": {
+    "schemaVersion": "presentation-meaning-boundary-source-package-v001",
+    "path": "evals/clip_composition/outputs/presentation/meaning-boundary-source-packages/qdczJpv8RCc-candidate-59-meaning-output-first-run-b3-v001/meaning-boundary-source-package.json",
+    "fileSha256": "f1c08064f8307dd2da0967f7c9e6d74e8027de81c0bd4828db0c1cab1cbdad15",
+    "canonicalSha256": "8de6370af6dacdf651aae38a08dea9658b4490fc7b77e777c16e245b36be00cf"
+  },
+  "generateRequestBinding": {
+    "path": "evals/clip_composition/outputs/presentation/meaning-boundary-b5-attempts/qdczJpv8RCc-candidate-59-meaning-output-first-run-b5-v001/attempt-v001/generate-content-request.json",
+    "fileSha256": "ac93e47717ffcedde2e863f9acba928ef8e6f2951e1573282146b6233f4b87ca"
+  },
+  "tokenCountBindings": {
+    "probeRequest": {
+      "path": "evals/clip_composition/outputs/presentation/meaning-boundary-b5-attempts/qdczJpv8RCc-candidate-59-meaning-output-first-run-b5-v001/attempt-v001/probe-count-tokens-request.json",
+      "fileSha256": "7e921863a361bcd7730c96e51fda34d1f20faad82c37ba7efec547f6dd930444"
+    },
+    "probeResponse": {
+      "path": "evals/clip_composition/outputs/presentation/meaning-boundary-b5-attempts/qdczJpv8RCc-candidate-59-meaning-output-first-run-b5-v001/attempt-v001/probe-count-tokens-response.raw.json",
+      "fileSha256": "4978edbc62805feb0507a8367cf7ecf53755443f32e1f5eca80a83c3bc3795f5"
+    },
+    "finalRequest": {
+      "path": "evals/clip_composition/outputs/presentation/meaning-boundary-b5-attempts/qdczJpv8RCc-candidate-59-meaning-output-first-run-b5-v001/attempt-v001/final-count-tokens-request.json",
+      "fileSha256": "4128647fd0e5d2b8a3bc7d13d9c8e34c8ea45abde04b4575518853a8ed88baf8"
+    },
+    "finalResponse": {
+      "path": "evals/clip_composition/outputs/presentation/meaning-boundary-b5-attempts/qdczJpv8RCc-candidate-59-meaning-output-first-run-b5-v001/attempt-v001/final-count-tokens-response.raw.json",
+      "fileSha256": "4978edbc62805feb0507a8367cf7ecf53755443f32e1f5eca80a83c3bc3795f5"
+    },
+    "maximumResponseStructure": {
+      "path": "evals/clip_composition/outputs/presentation/meaning-boundary-b5-attempts/qdczJpv8RCc-candidate-59-meaning-output-first-run-b5-v001/attempt-v001/maximum-response-structure.json",
+      "fileSha256": "1bd0614e325fbb7ffd526dbe02ca09685d0723766589bd30d20bba79a5624b17"
+    }
+  },
+  "officialSnapshot": {
+    "modelId": "gemini-3.6-flash",
+    "modelResource": "models/gemini-3.6-flash",
+    "observedAt": "2026-08-03T11:38:34.000Z",
+    "inputLimit": 1048576,
+    "outputLimit": 65536,
+    "tier": "PAID_STANDARD_DEFAULT_BY_OMISSION",
+    "inputPriceNanoUsdPerToken": 1500,
+    "outputPriceNanoUsdPerToken": 7500,
+    "sources": [
+      {
+        "sourceId": "pricing",
+        "url": "https://ai.google.dev/gemini-api/docs/pricing",
+        "observedAt": "2026-08-03T11:38:34.000Z",
+        "snapshotPath": "evals/clip_composition/outputs/presentation/meaning-boundary-b5-attempts/qdczJpv8RCc-candidate-59-meaning-output-first-run-b5-v001/attempt-v001/official/pricing.snapshot.html",
+        "snapshotFileSha256": "63e71fcefd146f5b9f3da08140fffac2fdd25d9a076789f0b4bc8c4718a6b741",
+        "snapshotByteLength": 239375
+      },
+      {
+        "sourceId": "tokens-guide",
+        "url": "https://ai.google.dev/gemini-api/docs/tokens",
+        "observedAt": "2026-08-03T11:38:33.000Z",
+        "snapshotPath": "evals/clip_composition/outputs/presentation/meaning-boundary-b5-attempts/qdczJpv8RCc-candidate-59-meaning-output-first-run-b5-v001/attempt-v001/official/tokens-guide.snapshot.html",
+        "snapshotFileSha256": "4053f4d0a940181a28cd2ec1ed69dcee114945282a6fa03773d2d5425073b5db",
+        "snapshotByteLength": 144590
+      },
+      {
+        "sourceId": "count-tokens-api",
+        "url": "https://ai.google.dev/api/tokens",
+        "observedAt": "2026-08-03T11:38:34.000Z",
+        "snapshotPath": "evals/clip_composition/outputs/presentation/meaning-boundary-b5-attempts/qdczJpv8RCc-candidate-59-meaning-output-first-run-b5-v001/attempt-v001/official/count-tokens-api.snapshot.html",
+        "snapshotFileSha256": "53ff536f8f9843e58ec730107322d27eb1d2bb03a43fa7fc1e95b7ab25852c16",
+        "snapshotByteLength": 283784
+      },
+      {
+        "sourceId": "billing",
+        "url": "https://ai.google.dev/gemini-api/docs/billing",
+        "observedAt": "2026-08-03T11:38:33.000Z",
+        "snapshotPath": "evals/clip_composition/outputs/presentation/meaning-boundary-b5-attempts/qdczJpv8RCc-candidate-59-meaning-output-first-run-b5-v001/attempt-v001/official/billing.snapshot.html",
+        "snapshotFileSha256": "8c19bac9bc5b8dc3a9a496f2715053b54b4f893791b1fafe9e8d0bd434806237",
+        "snapshotByteLength": 132736
+      },
+      {
+        "sourceId": "thinking",
+        "url": "https://ai.google.dev/gemini-api/docs/generate-content/thinking",
+        "observedAt": "2026-08-03T11:38:33.000Z",
+        "snapshotPath": "evals/clip_composition/outputs/presentation/meaning-boundary-b5-attempts/qdczJpv8RCc-candidate-59-meaning-output-first-run-b5-v001/attempt-v001/official/thinking.snapshot.html",
+        "snapshotFileSha256": "02d0b43ae0fbe03b49ba64da9668da67fd5c565f1cd303758154c1bb7b30f463",
+        "snapshotByteLength": 223615
+      },
+      {
+        "sourceId": "latest-model",
+        "url": "https://ai.google.dev/gemini-api/docs/latest-model",
+        "observedAt": "2026-08-03T11:38:34.000Z",
+        "snapshotPath": "evals/clip_composition/outputs/presentation/meaning-boundary-b5-attempts/qdczJpv8RCc-candidate-59-meaning-output-first-run-b5-v001/attempt-v001/official/latest-model.snapshot.html",
+        "snapshotFileSha256": "c76d2c82456ad5526cc09c66c83c5157ac3a63819e708b20336e50d6b3102b8c",
+        "snapshotByteLength": 126707
+      }
+    ],
+    "claims": [
+      {
+        "claimId": "model-exists",
+        "verdict": "verified",
+        "evidence": [
+          {
+            "sourceId": "latest-model",
+            "utf8ByteOffset": 0,
+            "utf8ByteLength": 126707,
+            "excerptSha256": "c76d2c82456ad5526cc09c66c83c5157ac3a63819e708b20336e50d6b3102b8c",
+            "locatorLabel": "whole-snapshot:latest-model"
+          }
+        ]
+      },
+      {
+        "claimId": "input-limit",
+        "verdict": "verified",
+        "evidence": [
+          {
+            "sourceId": "latest-model",
+            "utf8ByteOffset": 0,
+            "utf8ByteLength": 126707,
+            "excerptSha256": "c76d2c82456ad5526cc09c66c83c5157ac3a63819e708b20336e50d6b3102b8c",
+            "locatorLabel": "whole-snapshot:latest-model"
+          }
+        ]
+      },
+      {
+        "claimId": "output-limit",
+        "verdict": "verified",
+        "evidence": [
+          {
+            "sourceId": "latest-model",
+            "utf8ByteOffset": 0,
+            "utf8ByteLength": 126707,
+            "excerptSha256": "c76d2c82456ad5526cc09c66c83c5157ac3a63819e708b20336e50d6b3102b8c",
+            "locatorLabel": "whole-snapshot:latest-model"
+          }
+        ]
+      },
+      {
+        "claimId": "standard-input-price",
+        "verdict": "verified",
+        "evidence": [
+          {
+            "sourceId": "pricing",
+            "utf8ByteOffset": 0,
+            "utf8ByteLength": 239375,
+            "excerptSha256": "63e71fcefd146f5b9f3da08140fffac2fdd25d9a076789f0b4bc8c4718a6b741",
+            "locatorLabel": "whole-snapshot:pricing"
+          }
+        ]
+      },
+      {
+        "claimId": "standard-output-price",
+        "verdict": "verified",
+        "evidence": [
+          {
+            "sourceId": "pricing",
+            "utf8ByteOffset": 0,
+            "utf8ByteLength": 239375,
+            "excerptSha256": "63e71fcefd146f5b9f3da08140fffac2fdd25d9a076789f0b4bc8c4718a6b741",
+            "locatorLabel": "whole-snapshot:pricing"
+          }
+        ]
+      },
+      {
+        "claimId": "service-tier-omission-standard",
+        "verdict": "verified",
+        "evidence": [
+          {
+            "sourceId": "pricing",
+            "utf8ByteOffset": 0,
+            "utf8ByteLength": 239375,
+            "excerptSha256": "63e71fcefd146f5b9f3da08140fffac2fdd25d9a076789f0b4bc8c4718a6b741",
+            "locatorLabel": "whole-snapshot:pricing"
+          }
+        ]
+      },
+      {
+        "claimId": "count-tokens-unbilled",
+        "verdict": "unverified",
+        "evidence": []
+      },
+      {
+        "claimId": "count-tokens-upper-bounds-prompt-billing",
+        "verdict": "contradicted",
+        "evidence": [
+          {
+            "sourceId": "tokens-guide",
+            "utf8ByteOffset": 0,
+            "utf8ByteLength": 144590,
+            "excerptSha256": "4053f4d0a940181a28cd2ec1ed69dcee114945282a6fa03773d2d5425073b5db",
+            "locatorLabel": "whole-snapshot:tokens-guide"
+          }
+        ]
+      },
+      {
+        "claimId": "max-output-upper-bounds-candidate-plus-thinking",
+        "verdict": "unverified",
+        "evidence": []
+      }
+    ]
+  },
+  "tokenProjection": {
+    "probeInputTokenCount": 92769,
+    "finalInputTokenCount": 92769,
+    "modelOutputTokenLimit": 65536,
+    "derivedMaxOutputTokens": 48112,
+    "maximumValidResponseCanonicalByteLength": 11150
+  },
+  "costProjection": {
+    "currency": "USD",
+    "maximumNanoUsd": 500000000,
+    "preSendEstimateNanoUsd": 499993500,
+    "verdict": "within-approved-limit",
+    "residualRiskDecisionLineBinding": {
+      "path": "DECISIONS.md",
+      "lineText": "B5_MEANING_BOUNDARY_MEASUREMENT_AUTHORIZATION_V001|jobId=qdczJpv8RCc-candidate-59-meaning-output-first-run-b5-v001|attemptId=attempt-v001|maximumNanoUsd=500000000|status=approved-for-measurement|risks=countTokens-billing-unverified,output-tokenizer-equivalence-unverified,thinking-output-bound-unverified",
+      "lineSha256": "e2cb081b27fd8b6d1b149d189c650a29bcbd5060a120c232041d2d9b4eab0a74"
+    }
+  },
+  "checks": {
+    "sourceBinding": "passed",
+    "visibleInput": "passed",
+    "requestByte": "passed",
+    "responseSchema": "passed",
+    "officialSnapshot": "passed",
+    "probeTokenCount": "passed",
+    "finalTokenCount": "passed",
+    "maximumResponseDiagnosis": "passed",
+    "costLimit": "passed",
+    "secretAbsence": "passed",
+    "artifactHashGraph": "passed"
+  }
+}

@@ -24,6 +24,7 @@ import {
   sha256CanonicalV001 as canonicalSha256RetainedSourceAtomsV001,
 } from './presentation_retained_source_atoms_v001.mjs';
 import {
+  hashAbsoluteStableStreaming,
   validatePresentationSourceIdentityV001,
 } from './presentation_timeline_composition_decision_v001.mjs';
 import {
@@ -1016,6 +1017,13 @@ test('OBM001: 正常な単一sourceをproduction runnerで実生成し成功4成
 
   const fixture = await prepareProductionRunnerFixture();
   try {
+    assert.equal(
+      await hashAbsoluteStableStreaming(fixture.sourceAbsolute),
+      fixture.sourceIdentity.executionMedia.fileSha256,
+    );
+    const runnerSource = await readFile(path.join(REPOSITORY_ROOT, RUNNER_SOURCE_PATH), 'utf8');
+    assert.match(runnerSource, /hashAbsoluteStableStreaming,/u);
+    assert.doesNotMatch(runnerSource, /const hashFileHandle\s*=/u);
     const cli = await captureBaseMediaCli([fixture.jobPath]);
     assert.equal(cli.exitCode, 0);
     assert.equal(cli.stderr.length, 0);

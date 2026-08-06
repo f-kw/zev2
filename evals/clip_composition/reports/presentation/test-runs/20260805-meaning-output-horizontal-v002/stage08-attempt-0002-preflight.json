@@ -1,0 +1,57 @@
+{
+  "status": "passed",
+  "stageJob": {
+    "path": "evals/clip_composition/outputs/presentation/meaning-output-stage-admission-jobs/qdczJpv8RCc-candidate-59-meaning-output-first-run-v001/v002/08-output-landscape-attempt-0002.json",
+    "fileSha256": "fee28a258a6d06ef7abc7ef06f073a4a9380138ce3fb28e6ef44804eb2fbfe83",
+    "canonicalSha256": "4ea82288588160f6538cf5bc2533ba4fbc05d7c207f7fd19a82aca3e79435b8e",
+    "formalBytes": true,
+    "schemaAndValue": true
+  },
+  "runInputRecord": {
+    "fileSha256": "5ac80deeb0daac08ea32cad7fa9b016cf04ab95ea551fa6981e6c8151ee28680",
+    "canonicalSha256": "22e869ae688e84081e7797189d5283efb855a6d3f075506c5b585ffec6dbaedd"
+  },
+  "targetJob": {
+    "fileSha256": "1cb187de9ea8341cb0ed91f3367406433f87cf910c777e54727a011516d6052c",
+    "canonicalSha256": "399abed8371070a5624ca157a886e1fdcd34e7257b6ff6dfdac5e63d9e81c1b6",
+    "formalBytes": true,
+    "value": true
+  },
+  "upstreams": [
+    {
+      "role": "output-request",
+      "fileSha256": "e65d4ed4595f3d8bc53473ae8675f02089383ac95265bde29e89f40554948c3d",
+      "canonicalSha256": "8a0846af044c38a7b9d58ae1963d877043c76e0fe0e86b1d1f69937eec9e7fc0"
+    },
+    {
+      "role": "meaning-package",
+      "fileSha256": "27769faadce76c5becec8ad03549300b8a037f728410ca058cc5e376cd3e9613",
+      "canonicalSha256": "918fc26e871533b4ae6bafcd9c1e405e739e085a8fe5a24ed4df8dc00d4d7ceb"
+    },
+    {
+      "role": "base-media",
+      "fileSha256": "faad660c7623cdbf3a8f3b55cdaffc34729d06683ce391997c51f10fbc076967",
+      "canonicalSha256": null
+    }
+  ],
+  "implementations": [
+    {
+      "role": "run-input-record",
+      "fileSha256": "6cda4ebdee30e887f9c4f916fc20c736025ca79f5d6c20051765c57315e7abbf"
+    },
+    {
+      "role": "run-input-record-runner",
+      "fileSha256": "ef0248d49586fcbeb90708ed5ea466e1d4281e62a6eedf294701d68be25a1e2f"
+    }
+  ],
+  "outputRoot": {
+    "path": "evals/clip_composition/outputs/presentation/meaning-output-run-input-records/qdczJpv8RCc-candidate-59-meaning-output-first-run-v001/admissions-v002/08-output-landscape/attempt-0002",
+    "unused": true
+  },
+  "runtime": {
+    "nodePath": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+    "nodeVersion": "v20.19.6",
+    "nodeOptionsAbsent": true,
+    "tsxLoaderPath": "/Users/kawafmm/workspace/zev2/node_modules/.pnpm/tsx@4.22.3/node_modules/tsx/dist/loader.mjs"
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "schemaVersion": "presentation-meaning-output-stage-admission-receipt-v001",
+  "receiptId": "qdczJpv8RCc-candidate-59-meaning-output-first-run-v001-01-timeline-decision-admission",
+  "status": "passed",
+  "stage": "timeline-decision",
+  "runInputRecordBinding": {
+    "schemaVersion": "presentation-meaning-output-run-input-record-v001",
+    "path": "evals/clip_composition/outputs/presentation/meaning-output-run-input-records/qdczJpv8RCc-candidate-59-meaning-output-first-run-v001/run-input-record.json",
+    "fileSha256": "5ac80deeb0daac08ea32cad7fa9b016cf04ab95ea551fa6981e6c8151ee28680",
+    "canonicalSha256": "22e869ae688e84081e7797189d5283efb855a6d3f075506c5b585ffec6dbaedd"
+  },
+  "jobBinding": {
+    "schemaVersion": "zev-timeline-composition-decision-job-v001",
+    "path": "evals/clip_composition/outputs/presentation/meaning-timeline-decision-jobs/qdczJpv8RCc-candidate-59-meaning-output-first-run-timeline-v001.json",
+    "fileSha256": "e53de3623e89fe90a1e8ab8396e8a9a4dddadc30de8367ceaf5f0dff45c3b6dc",
+    "canonicalSha256": "ee8c236c3c567e82cbf97cb394eb6234469d01043e4ab4ce0cb544ab2bcc3553"
+  },
+  "upstreamBindings": [],
+  "checks": [
+    {
+      "name": "recordBinding",
+      "status": "passed",
+      "comparedPaths": [
+        "record:/schemaVersion",
+        "record:/recordId",
+        "job:/runInputRecordBinding"
+      ]
+    },
+    {
+      "name": "targetJobBinding",
+      "status": "passed",
+      "comparedPaths": [
+        "job:/targetJobBinding"
+      ]
+    },
+    {
+      "name": "upstreamBindings",
+      "status": "passed",
+      "comparedPaths": []
+    },
+    {
+      "name": "stageProjection",
+      "status": "passed",
+      "comparedPaths": [
+        "record:/sourceAndInterval/sourceRef",
+        "record:/sourceAndInterval/sourceStartMs",
+        "record:/sourceAndInterval/sourceEndMs",
+        "record:/sourceAndInterval/assemblyDecision",
+        "job:/sourceMedia/0/sourceRef",
+        "job:/segments/0"
+      ]
+    },
+    {
+      "name": "prePublicationReread",
+      "status": "passed",
+      "comparedPaths": [
+        "job:/runInputRecordBinding",
+        "job:/targetJobBinding",
+        "job:/upstreamBindings"
+      ]
+    }
+  ]
+}

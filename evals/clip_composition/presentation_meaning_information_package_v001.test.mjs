@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import {spawnSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
 import {
+  link,
   mkdir,
   mkdtemp,
   readFile,
@@ -27,6 +28,7 @@ import {
   derivePresentationMeaningCaptionProjectionV001,
   derivePresentationMeaningSelectionProjectionV001,
   serializePresentationMeaningInformationFormalJsonV001,
+  validatePresentationMeaningInformationPackageAdmissionEnvelopeV001,
   validatePresentationMeaningInformationPackageFormalBytesV001,
   validatePresentationMeaningInformationPackageV001,
 } from './presentation_meaning_information_package_v001.mjs';
@@ -41,10 +43,13 @@ import {
   validatePresentationMeaningInformationFailureReportV001,
 } from './run_presentation_meaning_information_package_job_v001.mjs';
 import {
+  PRESENTATION_TIMELINE_COMPOSITION_DECISION_VIOLATION_CODES_V001,
   createPresentationMeaningOwnedStagingRootV001,
   ensurePresentationMeaningSafePublicationParentV001,
   inspectPresentationTimelineInputsBeforePublicationV001,
+  observePresentationMeaningWorkspaceFileStableStreamingV001,
   publishPresentationMeaningOwnedStagingRootNoReplaceV001,
+  runPresentationTimelineCompositionDecisionV001,
   validatePresentationTimelineCompositionDecisionV001,
 } from './presentation_timeline_composition_decision_v001.mjs';
 
@@ -75,6 +80,148 @@ const writeFixtureBytes = async (workspaceRoot, relativePath, bytes) => {
 
 const writeFixtureJson = (workspaceRoot, relativePath, value) =>
   writeFixtureBytes(workspaceRoot, relativePath, formalBytes(value));
+
+const TIMELINE_CORE_PATH =
+  'evals/clip_composition/presentation_timeline_composition_decision_v001.mjs';
+const TIMELINE_STRICT_JSON_PATH =
+  'evals/clip_composition/presentation_caption_semantic_source_package_v001.mjs';
+const TIMELINE_CONTRACT_BINDINGS = Object.freeze([
+  Object.freeze({
+    path: 'evals/clip_composition/reports/presentation/presentation-meaning-information-package-contract-design-20260803-v001.md',
+    fileSha256: 'a38ef995c5c838f742c1de6c18acd5a7fd166ea57fb7537e51cf9a89abd4c0de',
+    role: 'meaning-package-contract',
+  }),
+  Object.freeze({
+    path: 'evals/clip_composition/reports/presentation/presentation-output-side-acceptance-contract-design-20260803-v001.md',
+    fileSha256: 'c349d544e9cc954d2f5b9e5e05334801e6a11cdce383f57829c04ae301b678de',
+    role: 'output-side-contract',
+  }),
+]);
+
+const runTimelineSourceObservationScenario = async ({
+  scenario,
+}) => {
+  const workspaceRoot = await mkdtemp(path.join(os.tmpdir(), `zev-timeline-${scenario}-`));
+  try {
+    const retainedValues = {};
+    const retainedSourceAtomsBinding = {};
+    for (const [name, fileName] of [
+      ['sourceAtoms', 'source-atoms.json'],
+      ['generationManifest', 'generation-manifest.json'],
+      ['validationReport', 'validation-report.json'],
+    ]) {
+      const bytes = await readFile(path.join(
+        REPOSITORY_ROOT,
+        'evals/clip_composition/outputs/presentation/retained-source-atoms/'
+          + `qdczJpv8RCc-candidate-59-v001/${fileName}`,
+      ));
+      const value = JSON.parse(bytes.toString('utf8'));
+      const relativePath = `fixtures/meaning-package/timeline-runner/${fileName}`;
+      retainedValues[name] = value;
+      retainedSourceAtomsBinding[name] = jsonBinding(
+        value.schemaVersion,
+        relativePath,
+        value,
+      );
+      await writeFixtureBytes(workspaceRoot, relativePath, bytes);
+    }
+    const sourceRef = retainedValues.sourceAtoms.sourceRef;
+    const retainedSegment = retainedValues.sourceAtoms.selection.segments[0];
+    const sourceMediaId = 'source-media-000001';
+    const mediaBytes = Buffer.alloc((2 * 1024 * 1024) + 31, 0x62);
+    mediaBytes.write('timeline-runner-source-media\n', 0, 'utf8');
+    const mediaBinding = {
+      path: 'fixtures/meaning-package/timeline-runner/source.mp4',
+      fileSha256: scenario === 'media-mismatch'
+        ? sha256(Buffer.from('different-media', 'utf8'))
+        : sha256(mediaBytes),
+    };
+    if (scenario !== 'media-missing') {
+      await writeFixtureBytes(workspaceRoot, mediaBinding.path, mediaBytes);
+    }
+    const supportBindings = {};
+    for (const name of ['media-equivalence', 'stt-manifest', 'transcript', 'word-timestamps']) {
+      const bytes = Buffer.from(`timeline-runner-${name}\n`, 'utf8');
+      const binding = {
+        path: `fixtures/meaning-package/timeline-runner/${name}.json`,
+        fileSha256: sha256(bytes),
+      };
+      supportBindings[name] = binding;
+      await writeFixtureBytes(workspaceRoot, binding.path, bytes);
+    }
+    const videoId = sourceRef.slice('youtube:'.length);
+    const sourceIdentity = scenario === 'identity-invalid'
+      ? {schemaVersion: 'presentation-real-data-source-identity-v001'}
+      : {
+        schemaVersion: 'presentation-real-data-source-identity-v001',
+        sourceIdentityId: `timeline-${scenario}-source-identity-v001`,
+        videoId,
+        sourceUrl: `https://www.youtube.com/watch?v=${videoId}`,
+        sourceProvenance: 'timeline streaming source observation fixture',
+        sourceRef,
+        executionMedia: mediaBinding,
+        mediaEquivalence: supportBindings['media-equivalence'],
+        stt: {
+          manifest: supportBindings['stt-manifest'],
+          transcript: supportBindings.transcript,
+          wordTimestamps: supportBindings['word-timestamps'],
+        },
+      };
+    const sourceIdentityBinding = jsonBinding(
+      'presentation-real-data-source-identity-v001',
+      'fixtures/meaning-package/timeline-runner/source-identity.json',
+      sourceIdentity,
+    );
+    await writeFixtureJson(workspaceRoot, sourceIdentityBinding.path, sourceIdentity);
+    const implementationBindings = [];
+    for (const [role, relativePath] of [
+      ['timeline-decision', TIMELINE_CORE_PATH],
+      ['strict-json', TIMELINE_STRICT_JSON_PATH],
+    ]) {
+      const bytes = await readFile(path.join(REPOSITORY_ROOT, relativePath));
+      await writeFixtureBytes(workspaceRoot, relativePath, bytes);
+      implementationBindings.push({path: relativePath, fileSha256: sha256(bytes), role});
+    }
+    for (const binding of TIMELINE_CONTRACT_BINDINGS) {
+      const bytes = await readFile(path.join(REPOSITORY_ROOT, binding.path));
+      assert.equal(sha256(bytes), binding.fileSha256);
+      await writeFixtureBytes(workspaceRoot, binding.path, bytes);
+    }
+    const jobId = `timeline-${scenario}-v001`;
+    const job = {
+      schemaVersion: 'zev-timeline-composition-decision-job-v001',
+      jobId,
+      decisionId: `${jobId}-decision`,
+      sourceMedia: [{
+        sourceMediaId,
+        ordinal: 1,
+        sourceRef,
+        mediaBinding,
+        sourceIdentityBinding,
+        retainedSourceAtomsBinding,
+      }],
+      segments: [{
+        segmentId: 'segment-0001',
+        ordinal: 1,
+        sourceMediaId,
+        sourceStartMs: retainedSegment.sourceStartMs,
+        sourceEndMs: retainedSegment.sourceEndMs,
+      }],
+      recordedBy: 'human',
+      recordedAt: '2026-08-03T00:00:00Z',
+      outputPath: `evals/clip_composition/outputs/presentation/meaning-timeline-decisions/`
+        + `${jobId}/timeline-composition-decision.json`,
+      implementationBindings,
+      approvedContractBindings: TIMELINE_CONTRACT_BINDINGS,
+    };
+    const jobPath = `evals/clip_composition/outputs/presentation/`
+      + `meaning-timeline-decision-jobs/${jobId}.json`;
+    await writeFixtureJson(workspaceRoot, jobPath, job);
+    return await runPresentationTimelineCompositionDecisionV001({workspaceRoot, jobPath});
+  } finally {
+    await rm(workspaceRoot, {recursive: true, force: true});
+  }
+};
 
 const B1_SUFFIX = '0123456789abcdef0123456789abcdef';
 const BOUNDARY_TASK =
@@ -939,14 +1086,23 @@ test('MIP001: 2 sourceと同一selection再利用を異なるAtomRef occurrence�
   );
   try {
     const trackedPath = 'tracked/source-media.bin';
-    const original = Buffer.from('timeline-input-original\n', 'utf8');
+    const original = Buffer.alloc((2 * 1024 * 1024) + 17, 0x61);
+    original.write('timeline-input-original\n', 0, 'utf8');
     const tracked = [{
       path: trackedPath,
       fileSha256: sha256(original),
       code: 'SOURCE_MEDIA_BINDING_MISMATCH',
       pointer: '/timelineDecision/sourceMedia',
+      readMode: 'streaming-sha256',
     }];
     await writeFixtureBytes(timelineRereadWorkspace, trackedPath, original);
+    assert.deepEqual(
+      await observePresentationMeaningWorkspaceFileStableStreamingV001({
+        workspaceRoot: timelineRereadWorkspace,
+        relativePath: trackedPath,
+      }),
+      {fileSha256: sha256(original), byteLength: original.length},
+    );
     assert.deepEqual(
       await inspectPresentationTimelineInputsBeforePublicationV001({
         workspaceRoot: timelineRereadWorkspace,
@@ -974,9 +1130,70 @@ test('MIP001: 2 sourceと同一selection再利用を異なるAtomRef occurrence�
       }),
       {status: 'fatal'},
     );
+    await writeFixtureBytes(timelineRereadWorkspace, trackedPath, original);
+    const symlinkPath = 'tracked/source-media-link.bin';
+    await symlink('source-media.bin', path.join(timelineRereadWorkspace, symlinkPath));
+    assert.deepEqual(
+      await inspectPresentationTimelineInputsBeforePublicationV001({
+        workspaceRoot: timelineRereadWorkspace,
+        tracked: [{...tracked[0], path: symlinkPath}],
+      }),
+      {status: 'fatal'},
+    );
+    const hardlinkPath = path.join(timelineRereadWorkspace, 'tracked/source-media-hardlink.bin');
+    await link(path.join(timelineRereadWorkspace, trackedPath), hardlinkPath);
+    assert.deepEqual(
+      await inspectPresentationTimelineInputsBeforePublicationV001({
+        workspaceRoot: timelineRereadWorkspace,
+        tracked,
+      }),
+      {status: 'fatal'},
+    );
   } finally {
     await rm(timelineRereadWorkspace, {recursive: true, force: true});
   }
+
+  assert.deepEqual(PRESENTATION_TIMELINE_COMPOSITION_DECISION_VIOLATION_CODES_V001, [
+    'MEANING_JOB_INVALID',
+    'MEANING_JOB_BINDING_MISMATCH',
+    'TIMELINE_DECISION_INVALID',
+    'SOURCE_IDENTITY_INVALID',
+    'SOURCE_MEDIA_BINDING_MISMATCH',
+    'TIMELINE_SEGMENT_SOURCE_UNRESOLVED',
+    'TIMELINE_SELECTION_SET_MISMATCH',
+    'MEANING_PUBLICATION_TARGET_INVALID',
+    'MEANING_PUBLICATION_FAILED',
+  ]);
+  assert.equal(
+    (await runTimelineSourceObservationScenario({scenario: 'passed'})).status,
+    'passed',
+  );
+  assert.deepEqual(
+    await runTimelineSourceObservationScenario({scenario: 'media-mismatch'}),
+    {
+      status: 'rejected',
+      violations: [{
+        code: 'SOURCE_MEDIA_BINDING_MISMATCH',
+        path: '/timelineDecision/sourceMedia',
+        relatedIds: [],
+      }],
+    },
+  );
+  assert.deepEqual(
+    await runTimelineSourceObservationScenario({scenario: 'identity-invalid'}),
+    {
+      status: 'rejected',
+      violations: [{
+        code: 'SOURCE_IDENTITY_INVALID',
+        path: '/timelineDecision/sourceMedia',
+        relatedIds: [],
+      }],
+    },
+  );
+  assert.deepEqual(
+    await runTimelineSourceObservationScenario({scenario: 'media-missing'}),
+    {status: 'fatal', violations: []},
+  );
 });
 
 const FAILURE_STAGE = Object.freeze({
@@ -1468,12 +1685,14 @@ for (const entry of FAILURE_CASES) {
       const rereadWorkspace = await mkdtemp(path.join(os.tmpdir(), 'zev-mip-reread-v001-'));
       try {
         const trackedPath = 'tracked/input.json';
-        const original = Buffer.from('original\n', 'utf8');
+        const original = Buffer.alloc((2 * 1024 * 1024) + 19, 0x63);
+        original.write('meaning-package-reread-original\n', 0, 'utf8');
         const tracked = [{
           path: trackedPath,
           fileSha256: sha256(original),
           code: 'MEANING_JOB_BINDING_MISMATCH',
           pointer: '/job',
+          readMode: 'streaming-sha256',
         }];
         await writeFixtureBytes(rereadWorkspace, trackedPath, original);
         assert.deepEqual(
@@ -1540,5 +1759,33 @@ test('MIP033: package code export集合と全テスト観測集合が完全一�
   assert.deepEqual(
     observedViolationCodes,
     [...PRESENTATION_MEANING_INFORMATION_PACKAGE_VIOLATION_CODES_V001],
+  );
+});
+
+test('MIP034: 工程入場envelopeは文脈なしで受理しfull検査は明示contextを要求する', () => {
+  const fixture = makeFixture();
+  assert.deepEqual(
+    validatePresentationMeaningInformationPackageAdmissionEnvelopeV001(
+      fixture.built.package,
+    ),
+    {status: 'passed', violations: []},
+  );
+  assert.deepEqual(
+    validatePresentationMeaningInformationPackageV001(fixture.built.package),
+    {
+      status: 'rejected',
+      violations: [{
+        code: 'EXPECTED_ATOM_OCCURRENCE_INVALID',
+        path: '/expectedAtomOccurrences',
+        relatedIds: [],
+      }],
+    },
+  );
+  assert.deepEqual(
+    validatePresentationMeaningInformationPackageV001(
+      fixture.built.package,
+      fixture.validationContext,
+    ),
+    {status: 'passed', violations: []},
   );
 });

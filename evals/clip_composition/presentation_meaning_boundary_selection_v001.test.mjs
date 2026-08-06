@@ -1111,8 +1111,16 @@ test('MSL013 job report selection triad and three caption projections are bound'
   ]);
 });
 
-test('MSL014 old lineEnd response trim fence and repair are all rejected', () => {
+test('MSL014 provider JSON accepts optional terminal LF while trim fence and repair stay rejected', () => {
   const valid = makeCompleteResponse(makeSourcePackage());
+  const validWithLf = formalBytes(valid);
+  const validWithoutLf = validWithLf.subarray(0, validWithLf.length - 1);
+  assert.equal(validWithLf.at(-1), 0x0a);
+  assert.equal(validWithoutLf.at(-1), 0x7d);
+  assert.deepEqual([
+    decodePresentationMeaningBoundaryResponseV001(validWithLf).status,
+    decodePresentationMeaningBoundaryResponseV001(validWithoutLf).status,
+  ], ['complete', 'complete']);
   const old = clone(valid);
   old.containers[0].meaningGroups[0] = {
     lineEndBoundaryCandidateId:
@@ -1123,11 +1131,13 @@ test('MSL014 old lineEnd response trim fence and repair are all rejected', () =>
     Buffer.from(`\`\`\`json\n${formalBytes(valid).toString('utf8')}\`\`\`\n`, 'utf8'),
     Buffer.from('{"status":"abstained",}\n', 'utf8'),
     Buffer.concat([Buffer.from(' ', 'utf8'), formalBytes(valid)]),
-    formalBytes(valid).subarray(0, formalBytes(valid).length - 1),
+    validWithoutLf.subarray(0, validWithoutLf.length - 1),
     Buffer.concat([formalBytes(valid), Buffer.from(' ', 'utf8')]),
+    Buffer.concat([validWithoutLf, Buffer.from('\n\n', 'utf8')]),
+    Buffer.concat([validWithoutLf, Buffer.from('\r\n', 'utf8')]),
   ];
   assert.deepEqual(cases.map(bytes => decodePresentationMeaningBoundaryResponseV001(bytes).status),
-    ['invalid', 'invalid', 'invalid', 'invalid', 'invalid', 'invalid']);
+    ['invalid', 'invalid', 'invalid', 'invalid', 'invalid', 'invalid', 'invalid', 'invalid']);
 });
 
 test('MSL015 exported 22-code set equals the three production owner sets', () => {

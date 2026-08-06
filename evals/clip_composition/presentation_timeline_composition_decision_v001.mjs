@@ -259,6 +259,73 @@ const sameStableFileIdentity = (left, right) => left.dev === right.dev
 
 const singleLinkRegularFile = value => value.isFile() && value.nlink === 1n;
 
+const hashFileHandle = async handle => {
+  const digest = createHash('sha256');
+  const buffer = Buffer.allocUnsafe(1024 * 1024);
+  let position = 0;
+  while (true) {
+    const {bytesRead} = await handle.read(buffer, 0, buffer.length, position);
+    if (bytesRead === 0) break;
+    digest.update(buffer.subarray(0, bytesRead));
+    position += bytesRead;
+  }
+  return digest.digest('hex');
+};
+
+const observeAbsoluteStableStreaming = async absolute => {
+  const beforePath = await lstat(absolute, {bigint: true});
+  if (!singleLinkRegularFile(beforePath) || beforePath.isSymbolicLink()
+    || await realpath(absolute) !== absolute) {
+    throw new Error('unsafe-file');
+  }
+  const handle = await open(absolute, 'r');
+  let fileSha256;
+  let afterHandle;
+  try {
+    const beforeHandle = await handle.stat({bigint: true});
+    if (!singleLinkRegularFile(beforeHandle)
+      || !sameStableFileIdentity(beforePath, beforeHandle)) {
+      throw new Error('unstable-file');
+    }
+    fileSha256 = await hashFileHandle(handle);
+    afterHandle = await handle.stat({bigint: true});
+    if (!singleLinkRegularFile(afterHandle)
+      || !sameStableFileIdentity(beforeHandle, afterHandle)) {
+      throw new Error('unstable-file');
+    }
+  } finally {
+    await handle.close();
+  }
+  const afterPath = await lstat(absolute, {bigint: true});
+  if (!singleLinkRegularFile(afterPath) || afterPath.isSymbolicLink()
+    || !sameStableFileIdentity(afterHandle, afterPath)
+    || await realpath(absolute) !== absolute) throw new Error('unstable-file');
+  return Object.freeze({fileSha256, byteLengthBigInt: afterPath.size});
+};
+
+export const hashAbsoluteStableStreaming = async absolute =>
+  (await observeAbsoluteStableStreaming(absolute)).fileSha256;
+
+export async function observePresentationMeaningWorkspaceFileStableStreamingV001({
+  workspaceRoot,
+  relativePath,
+}) {
+  if (typeof workspaceRoot !== 'string' || !WORKSPACE_PATH.test(relativePath)) {
+    throw new Error('unsafe-path');
+  }
+  const rootReal = await realpath(workspaceRoot);
+  const absolute = path.resolve(rootReal, relativePath);
+  if (!absolute.startsWith(`${rootReal}${path.sep}`)) throw new Error('unsafe-path');
+  const observed = await observeAbsoluteStableStreaming(absolute);
+  if (observed.byteLengthBigInt > BigInt(Number.MAX_SAFE_INTEGER)) {
+    throw new Error('unsafe-file-size');
+  }
+  return Object.freeze({
+    fileSha256: observed.fileSha256,
+    byteLength: Number(observed.byteLengthBigInt),
+  });
+}
+
 export async function readPresentationMeaningWorkspaceFileStableV001({
   workspaceRoot,
   relativePath,
@@ -642,8 +709,14 @@ const observeJsonBinding = async (workspaceRoot, binding) => {
   const bytes = await readStable(workspaceRoot, binding.path);
   if (hash(bytes) !== binding.fileSha256) throw new Error('binding-file-sha');
   const value = decode(bytes);
-  if (canonicalSha(value) !== binding.canonicalSha256
-    || value.schemaVersion !== binding.schemaVersion) throw new Error('binding-canonical-sha');
+  let observedCanonicalSha;
+  try {
+    observedCanonicalSha = canonicalSha(value);
+  } catch {
+    throw new Error('binding-content-invalid');
+  }
+  if (observedCanonicalSha !== binding.canonicalSha256
+    || value?.schemaVersion !== binding.schemaVersion) throw new Error('binding-canonical-sha');
   return {bytes, value};
 };
 
@@ -653,12 +726,22 @@ const observeMediaBinding = async (workspaceRoot, binding) => {
   return bytes;
 };
 
-const trackTimelineInput = (tracked, binding, code, pointer) => {
+const observeStreamingMediaBinding = async (workspaceRoot, binding) => {
+  const observed = await observePresentationMeaningWorkspaceFileStableStreamingV001({
+    workspaceRoot,
+    relativePath: binding.path,
+  });
+  if (observed.fileSha256 !== binding.fileSha256) throw new Error('media-binding-sha');
+  return observed;
+};
+
+const trackTimelineInput = (tracked, binding, code, pointer, readMode = 'buffer') => {
   tracked.push({
     path: binding.path,
     fileSha256: binding.fileSha256,
     code,
     pointer,
+    readMode,
   });
 };
 
@@ -672,8 +755,13 @@ export async function inspectPresentationTimelineInputsBeforePublicationV001({
   }
   try {
     for (const item of deduplicated.values()) {
-      const bytes = await readStable(workspaceRoot, item.path);
-      if (hash(bytes) !== item.fileSha256) {
+      const observedSha256 = item.readMode === 'streaming-sha256'
+        ? (await observePresentationMeaningWorkspaceFileStableStreamingV001({
+          workspaceRoot,
+          relativePath: item.path,
+        })).fileSha256
+        : hash(await readStable(workspaceRoot, item.path));
+      if (observedSha256 !== item.fileSha256) {
         return Object.freeze({status: 'rejected', changed: item});
       }
     }
@@ -695,12 +783,13 @@ const validateSourceIdentityFiles = async (workspaceRoot, sourceMedia, tracked) 
     if (!validatePresentationSourceIdentityV001(observed.value)
       || observed.value.sourceRef !== source.sourceRef) throw new Error('source-identity');
     if (!same(observed.value.executionMedia, source.mediaBinding)) throw new Error('source-media-binding');
-    await observeMediaBinding(workspaceRoot, source.mediaBinding);
+    await observeStreamingMediaBinding(workspaceRoot, source.mediaBinding);
     trackTimelineInput(
       tracked,
       source.mediaBinding,
       'SOURCE_MEDIA_BINDING_MISMATCH',
       '/timelineDecision/sourceMedia',
+      'streaming-sha256',
     );
     const mediaBindings = [
       ...(observed.value.mediaEquivalence ? [observed.value.mediaEquivalence] : []),
@@ -732,8 +821,12 @@ const validateSourceIdentityFiles = async (workspaceRoot, sourceMedia, tracked) 
         throw new Error('retained-source-ref');
       }
     }
-    const retainedValidation =
-      validatePresentationRetainedSourceAtomsPublishedArtifactsV001(retained);
+    let retainedValidation;
+    try {
+      retainedValidation = validatePresentationRetainedSourceAtomsPublishedArtifactsV001(retained);
+    } catch {
+      throw new Error('retained-atoms');
+    }
     if (retainedValidation.status !== 'passed') throw new Error('retained-atoms');
   }
 };
@@ -776,9 +869,20 @@ export async function runPresentationTimelineCompositionDecisionV001({
     }
   }
   try { await validateSourceIdentityFiles(workspaceRoot, job.sourceMedia, tracked); } catch (error) {
-    const code = error.message === 'source-media-binding' || error.message === 'media-binding-sha'
-      ? 'SOURCE_MEDIA_BINDING_MISMATCH' : 'SOURCE_IDENTITY_INVALID';
-    return {status: 'rejected', violations: [violation(code, '/timelineDecision/sourceMedia')]};
+    if (['source-media-binding', 'media-binding-sha'].includes(error?.message)) {
+      return {status: 'rejected', violations: [violation(
+        'SOURCE_MEDIA_BINDING_MISMATCH', '/timelineDecision/sourceMedia',
+      )]};
+    }
+    if ([
+      'binding-file-sha', 'binding-canonical-sha', 'invalid-json',
+      'binding-content-invalid', 'source-identity', 'retained-source-ref', 'retained-atoms',
+    ].includes(error?.message)) {
+      return {status: 'rejected', violations: [violation(
+        'SOURCE_IDENTITY_INVALID', '/timelineDecision/sourceMedia',
+      )]};
+    }
+    return {status: 'fatal', violations: []};
   }
   const jobBinding = {
     schemaVersion: job.schemaVersion,

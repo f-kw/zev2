@@ -18,6 +18,11 @@ import {
   resolvePresentationOutputStyleV001,
 } from './presentation_output_style_resolver_v001.ts';
 import {indexExplicitLinesV001} from './presentation_renderer_text_layout_v001.mjs';
+import {
+  PRESENTATION_OUTPUT_CROP_APPLICATION_CHECKS_V001,
+  derivePresentationOutputCropSelectionProjectionV001,
+  serializePresentationOutputCropApplicationFormalJsonV001,
+} from './presentation_output_crop_application_v001.mjs';
 
 const ROOT = process.cwd();
 const REGISTRY_ROOT = 'evals/clip_composition/registries/presentation';
@@ -26,6 +31,12 @@ const H = 'a'.repeat(64);
 const sha256 = bytes => createHash('sha256').update(bytes).digest('hex');
 const canonicalSha256 = value => sha256(Buffer.from(canonicalJson(value), 'utf8'));
 const binding = schemaVersion => ({schemaVersion, path: 'fixture.json', fileSha256: H, canonicalSha256: H});
+const baseMediaInput = baseMedia => ({
+  baseMedia,
+  timeline: binding('presentation-base-media-timeline-v002'),
+  generationManifest: binding('presentation-output-base-media-generation-manifest-v001'),
+  validationReceipt: binding('presentation-output-base-media-validation-receipt-v001'),
+});
 
 const readJson = async relativePath => JSON.parse(
   await readFile(path.join(ROOT, relativePath), 'utf8'),
@@ -42,6 +53,69 @@ const artifactBinding = (schemaVersion, artifact) => ({
   fileSha256: sha256(artifact.bytes),
   canonicalSha256: canonicalSha256(artifact.value),
 });
+
+const cropApplicationFixture = ({
+  cropDecisionArtifact,
+  cropSelectionPackageManifest,
+  targetBaseMedia,
+}) => {
+  const reviewedBaseMedia = {
+    baseMedia: {
+      path: cropSelectionPackageManifest.value.sourceMedia.path,
+      fileSha256: cropSelectionPackageManifest.value.sourceMedia.fileSha256,
+    },
+    timeline: binding('presentation-base-media-timeline-v002'),
+    generationManifest: binding('presentation-base-media-generation-manifest-v002'),
+    validationReport: binding('presentation-base-media-validation-report-v001'),
+  };
+  const application = {
+    schemaVersion: 'presentation-output-crop-application-v001',
+    applicationId: 'page-line-planner-crop-application-v001',
+    status: 'passed',
+    jobBinding: binding('presentation-output-crop-application-job-v001'),
+    runInputRecordBinding: binding('presentation-meaning-output-run-input-record-v001'),
+    reviewedCrop: {
+      decision: artifactBinding(
+        'vertical-preset-type-crop-decision-v006', cropDecisionArtifact,
+      ),
+      selectionPackageManifest: artifactBinding(
+        'vertical-preset-type-crop-selection-package-v006',
+        cropSelectionPackageManifest,
+      ),
+      reviewedBaseMedia,
+    },
+    targetBaseMedia,
+    sourceEquivalence: {
+      guarantee: 'same-source-and-timeline-only',
+      sourceRef: 'youtube:fixture0001',
+      sourceMedia: reviewedBaseMedia.baseMedia,
+      sourceFrameClock: {
+        inputFrameRate: '30/1', logicalFrameRate: '30/1',
+        extractionRuleId: 'fixture-frame-clock-v001', decodedFrameCount: 1547,
+      },
+      segments: [{
+        sourceStartMs: 0, sourceEndMs: 51567,
+        sourceStartFrame30: 0, sourceEndFrame30: 1547,
+        outputStartFrame: 0, outputEndFrame: 1547,
+      }],
+      outputGeometry: {width: 1920, height: 1080, frameRate: '30/1', frameCount: 1547},
+      baseMediaByteRelation: 'different',
+    },
+    selectionProjection: derivePresentationOutputCropSelectionProjectionV001(
+      cropDecisionArtifact.value,
+    ),
+    checks: Object.fromEntries(
+      PRESENTATION_OUTPUT_CROP_APPLICATION_CHECKS_V001.map(name => [name, 'passed']),
+    ),
+  };
+  const bytes = serializePresentationOutputCropApplicationFormalJsonV001(application);
+  return {
+    path: 'fixtures/page-line-planner-crop-application-v001.json',
+    absolutePath: path.join(ROOT, 'fixtures/page-line-planner-crop-application-v001.json'),
+    bytes,
+    value: application,
+  };
+};
 
 const landscapeStyle = async () => {
   const directory = `${REGISTRY_ROOT}/normal-landscape-preset-registry-v001`;
@@ -89,7 +163,7 @@ const landscapeStyle = async () => {
       materialValidationIndex: materialValidationIndex.value,
       rendererTrust: rendererTrust.value,
     },
-    baseMediaBinding: {path: 'fixtures/base-media.mp4', fileSha256: H},
+    baseMediaInput: baseMediaInput({path: 'fixtures/base-media.mp4', fileSha256: H}),
     baseMediaInspection: null,
   });
   assert.equal(result.status, 'resolved');
@@ -102,7 +176,15 @@ const verticalStyle = async () => {
   const cropSelectionPackageManifest = await readArtifact(
     `${CROP_ROOT}/selection-package-manifest-v006.json`,
   );
-  const selection = cropSelectionPackageManifest.value;
+  const targetBaseMedia = baseMediaInput({
+    path: 'fixtures/page-line-planner-target-base-media.mp4',
+    fileSha256: H,
+  });
+  const cropApplicationArtifact = cropApplicationFixture({
+    cropDecisionArtifact,
+    cropSelectionPackageManifest,
+    targetBaseMedia,
+  });
   const result = await resolvePresentationOutputStyleV001({
     styleInput: {
       format: 'vertical-short-1080x1920',
@@ -124,15 +206,9 @@ const verticalStyle = async () => {
       cropPolicy: {
         mode: 'bound-decision',
         scope: 'all-segments',
-        decision: {
-          schemaVersion: 'vertical-preset-type-crop-decision-v006',
-          path: cropDecisionArtifact.path,
-          fileSha256: sha256(cropDecisionArtifact.bytes),
-          canonicalSha256: canonicalSha256(cropDecisionArtifact.value),
-        },
-        selectionPackageManifest: artifactBinding(
-          'vertical-preset-type-crop-selection-package-v006',
-          cropSelectionPackageManifest,
+        application: artifactBinding(
+          'presentation-output-crop-application-v001',
+          cropApplicationArtifact,
         ),
       },
       sceneTransitionPolicy: {mode: 'straight-cut-only'},
@@ -145,10 +221,11 @@ const verticalStyle = async () => {
       presetValidationIndex: await readJson(`${directory}/preset-validation-index.json`),
       materialValidationIndex: await readJson(`${directory}/material-validation-index.json`),
       rendererTrust: await readJson(`${REGISTRY_ROOT}/presentation-vertical-renderer-trust-v001/trust.json`),
+      cropApplicationArtifact,
       cropDecisionArtifact,
       cropSelectionPackageManifest,
     },
-    baseMediaBinding: {path: selection.sourceMedia.path, fileSha256: selection.sourceMedia.fileSha256},
+    baseMediaInput: targetBaseMedia,
     baseMediaInspection: {width: 1920, height: 1080, frameCount: 1547, fps: 30},
   });
   assert.equal(result.status, 'resolved');
@@ -310,7 +387,7 @@ const pathSelectionTuple = pathEdges => {
   const widths = pathEdges.flatMap(edge => edge.lines.map(line => line.logicalWidth));
   return [
     pathEdges.length,
-    pathEdges.filter(edge => edge.lines.length === 1).length,
+    pathEdges.reduce((count, edge) => count + edge.lines.length, 0),
     Math.max(...widths),
     Math.max(...widths) - Math.min(...widths),
     pathEdges.map(edge => edge.endBoundaryOrdinal),
@@ -333,7 +410,7 @@ const displaySelectionTuple = display => {
   }
   return [
     display.pages.length,
-    display.pages.filter(page => page.lines.length === 1).length,
+    display.pages.reduce((count, page) => count + page.lines.length, 0),
     Math.max(...widths),
     Math.max(...widths) - Math.min(...widths),
     pageEnds,
@@ -350,15 +427,21 @@ const semanticDisplayProjection = display => ({
   sourceEndMs: display.pages.at(-1).sourceEndMs,
 });
 
-test('OPL001: 一行pageは本文・幅・物理検査を保つ', async () => {
-  const {input, result} = await plan({captionTexts: [['abc']]});
+test('OPL001: 複数atomでも幅上限内なら一行に保つ', async () => {
+  const style = withPolicy(await landscapeStyle(), 4, 2);
+  const {input, result} = await plan({captionTexts: [['a', 'b', 'c', 'd']], style});
   assert.equal(result.status, 'planned');
+  const completePaths = enumerateCompletePaths({
+    edges: result.timelineEdges[0].edges,
+    finalBoundary: 4,
+  });
+  assert.ok(completePaths.some(path => path.some(edge => edge.lines.length === 2)));
   const page = result.captionDisplays[0].pages[0];
   assert.equal(page.lines.length, 1);
-  assert.equal(page.lines[0].text, 'abc');
-  assert.equal(page.lines[0].logicalWidth, 3);
+  assert.equal(page.lines[0].text, 'abcd');
+  assert.equal(page.lines[0].logicalWidth, 4);
   assert.equal(validatePresentationOutputCaptionDisplaysV001(
-    result.captionDisplays, input.meaningPackage, (await landscapeStyle()).resolvedStyle,
+    result.captionDisplays, input.meaningPackage, style.resolvedStyle,
   ), true);
 });
 
@@ -450,12 +533,16 @@ test('OPL010: 選択はpage数最少を第一目的にする', async () => {
   assert.equal(result.captionDisplays[0].pages.length, 1);
 });
 
-test('OPL011: 同じpage数なら一行pageを減らし二行pageを優先する', async () => {
+test('OPL011: 同じpage数なら総行数を減らし不要な改行を入れない', async () => {
   const style = withPolicy(await landscapeStyle(), 4, 2);
   const {result} = await plan({captionTexts: [['あ', 'い', 'う', 'え', 'お']], style});
   assert.equal(result.status, 'planned');
   assert.equal(result.captionDisplays[0].pages.length, 2);
-  assert.equal(result.captionDisplays[0].pages.filter(page => page.lines.length === 1).length, 0);
+  assert.equal(
+    result.captionDisplays[0].pages.reduce((count, page) => count + page.lines.length, 0),
+    3,
+  );
+  assert.equal(result.captionDisplays[0].pages.filter(page => page.lines.length === 1).length, 1);
 });
 
 test('OPL012: page数と行数が同じなら最大行幅を最小化する', async () => {
@@ -467,8 +554,8 @@ test('OPL012: page数と行数が同じなら最大行幅を最小化する', as
     finalBoundary: 3,
   });
   const selected = displaySelectionTuple(result.captionDisplays[0]);
-  const competitor = [1, 0, 3, 2, [3], [1, 3]];
-  assert.deepEqual(selected, [1, 0, 2, 0, [3], [2, 3]]);
+  const competitor = [1, 2, 3, 2, [3], [1, 3]];
+  assert.deepEqual(selected, [1, 2, 2, 0, [3], [2, 3]]);
   assert.ok(paths.some(path => JSON.stringify(pathSelectionTuple(path))
     === JSON.stringify(competitor)));
   assert.ok(competitor[2] > selected[2]);
@@ -477,20 +564,20 @@ test('OPL012: page数と行数が同じなら最大行幅を最小化する', as
 
 test('OPL013: 最大幅が同じなら行幅rangeを最小化する', async () => {
   const style = withPolicy(await landscapeStyle(), 3, 2);
-  const {result} = await plan({captionTexts: [['aaa', 'bb', 'c', 'd', 'ee']], style});
+  const {result} = await plan({captionTexts: [['a', 'b', 'c', 'd', 'e', 'f', 'g']], style});
   assert.equal(result.status, 'planned');
   const paths = enumerateCompletePaths({
     edges: result.timelineEdges[0].edges,
-    finalBoundary: 5,
+    finalBoundary: 7,
   });
   const selected = displaySelectionTuple(result.captionDisplays[0]);
-  const competitor = [2, 0, 3, 2, [2, 5], [1, 2, 3, 5]];
-  assert.deepEqual(selected, [2, 0, 3, 1, [2, 5], [1, 2, 4, 5]]);
+  const competitor = [2, 3, 3, 2, [1, 7], [1, 4, 7]];
+  assert.deepEqual(selected, [2, 3, 3, 1, [2, 7], [2, 4, 7]]);
   assert.ok(paths.some(path => JSON.stringify(pathSelectionTuple(path))
     === JSON.stringify(competitor)));
   assert.equal(competitor[2], selected[2]);
   assert.ok(competitor[3] > selected[3]);
-  assert.ok(competitor[5][2] < selected[5][2]);
+  assert.ok(competitor[4][0] < selected[4][0]);
 });
 
 test('OPL014: tuple同値ならpage境界・行境界を辞書順で決める', async () => {
@@ -502,8 +589,8 @@ test('OPL014: tuple同値ならpage境界・行境界を辞書順で決める', 
     finalBoundary: 3,
   });
   const selectedPageBoundary = displaySelectionTuple(pageBoundary.result.captionDisplays[0]);
-  const laterPageBoundary = [2, 1, 2, 1, [2, 3], [1, 2, 3]];
-  assert.deepEqual(selectedPageBoundary, [2, 1, 2, 1, [1, 3], [1, 2, 3]]);
+  const laterPageBoundary = [2, 3, 2, 1, [2, 3], [1, 2, 3]];
+  assert.deepEqual(selectedPageBoundary, [2, 3, 2, 1, [1, 3], [1, 2, 3]]);
   assert.ok(pageBoundaryPaths.some(path => JSON.stringify(pathSelectionTuple(path))
     === JSON.stringify(laterPageBoundary)));
   assert.deepEqual(laterPageBoundary.slice(0, 4), selectedPageBoundary.slice(0, 4));
@@ -516,8 +603,8 @@ test('OPL014: tuple同値ならpage境界・行境界を辞書順で決める', 
     finalBoundary: 3,
   });
   const selectedLineBoundary = displaySelectionTuple(lineBoundary.result.captionDisplays[0]);
-  const laterLineBoundary = [1, 0, 2, 1, [3], [2, 3]];
-  assert.deepEqual(selectedLineBoundary, [1, 0, 2, 1, [3], [1, 3]]);
+  const laterLineBoundary = [1, 2, 2, 1, [3], [2, 3]];
+  assert.deepEqual(selectedLineBoundary, [1, 2, 2, 1, [3], [1, 3]]);
   assert.ok(lineBoundaryPaths.some(path => JSON.stringify(pathSelectionTuple(path))
     === JSON.stringify(laterLineBoundary)));
   assert.deepEqual(laterLineBoundary.slice(0, 5), selectedLineBoundary.slice(0, 5));
@@ -898,5 +985,24 @@ test('OPL027: candidate 59縦型の認定caption/style fixtureは決定的であ
     value, retainedSourceAtoms, baseMediaTimeline, styleResolution,
   );
   assert.equal(first.status, 'planned');
+  let physicallyRequiredShortWrapCount = 0;
+  for (const display of first.captionDisplays) {
+    const physical = first.physicalEdges.find(
+      entry => entry.semanticCaptionId === display.semanticCaptionId,
+    );
+    assert.ok(physical);
+    for (const page of display.pages) {
+      if (page.lines.length !== 2
+        || page.lines.reduce((sum, line) => sum + line.logicalWidth, 0) > 14) continue;
+      physicallyRequiredShortWrapCount += 1;
+      const pageAtomRefs = JSON.stringify(page.atomRefs);
+      const sameSpanOneLineEdges = physical.edges.filter(edge => (
+        edge.lines.length === 1
+        && JSON.stringify(edge.lines[0].atomRefs) === pageAtomRefs
+      ));
+      assert.equal(sameSpanOneLineEdges.length, 0, page.pageId);
+    }
+  }
+  assert.ok(physicallyRequiredShortWrapCount > 0);
   assert.equal(JSON.stringify(first), JSON.stringify(second));
 });

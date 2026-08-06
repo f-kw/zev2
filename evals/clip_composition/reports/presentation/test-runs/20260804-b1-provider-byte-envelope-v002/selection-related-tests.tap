@@ -1,0 +1,115 @@
+TAP version 13
+# Subtest: MSL001 complete exact union is accepted
+ok 1 - MSL001 complete exact union is accepted
+  ---
+  duration_ms: 375.662917
+  ...
+# Subtest: MSL002 abstained exact union stops as inspected abstention
+ok 2 - MSL002 abstained exact union stops as inspected abstention
+  ---
+  duration_ms: 2.023375
+  ...
+# Subtest: MSL003 invalid response owns code 22 at response schema
+ok 3 - MSL003 invalid response owns code 22 at response schema
+  ---
+  duration_ms: 1.419583
+  ...
+# Subtest: MSL004 invalid envelope owns code 9
+ok 4 - MSL004 invalid envelope owns code 9
+  ---
+  duration_ms: 1.945334
+  ...
+# Subtest: MSL005 container set mismatch owns code 11
+ok 5 - MSL005 container set mismatch owns code 11
+  ---
+  duration_ms: 1.359417
+  ...
+# Subtest: MSL006 unknown candidate owns code 12
+ok 6 - MSL006 unknown candidate owns code 12
+  ---
+  duration_ms: 1.567667
+  ...
+# Subtest: MSL007 non-monotonic end order owns code 13
+ok 7 - MSL007 non-monotonic end order owns code 13
+  ---
+  duration_ms: 1.161208
+  ...
+# Subtest: MSL008 non-final container end owns code 14
+ok 8 - MSL008 non-final container end owns code 14
+  ---
+  duration_ms: 1.173875
+  ...
+# Subtest: MSL009 discontinuous candidate coverage owns code 15
+ok 9 - MSL009 discontinuous candidate coverage owns code 15
+  ---
+  duration_ms: 0.098416
+  ...
+# Subtest: MSL010 two sources and a reused selection preserve timeline occurrences
+ok 10 - MSL010 two sources and a reused selection preserve timeline occurrences
+  ---
+  duration_ms: 2.26875
+  ...
+# Subtest: MSL011 caption text timing and AtomRef are mechanically restored from B3
+ok 11 - MSL011 caption text timing and AtomRef are mechanically restored from B3
+  ---
+  duration_ms: 1.316625
+  ...
+# Subtest: MSL012 identical response yields byte-identical B1 report
+ok 12 - MSL012 identical response yields byte-identical B1 report
+  ---
+  duration_ms: 1.802
+  ...
+# Subtest: MSL013 job report selection triad and three caption projections are bound
+ok 13 - MSL013 job report selection triad and three caption projections are bound
+  ---
+  duration_ms: 1.655917
+  ...
+# Subtest: MSL014 provider JSON accepts optional terminal LF while trim fence and repair stay rejected
+ok 14 - MSL014 provider JSON accepts optional terminal LF while trim fence and repair stay rejected
+  ---
+  duration_ms: 0.553
+  ...
+# Subtest: MSL015 exported 22-code set equals the three production owner sets
+ok 15 - MSL015 exported 22-code set equals the three production owner sets
+  ---
+  duration_ms: 0.064833
+  ...
+# Subtest: MSL016 missing invalid B5 B6 and provider rejection stop at responseEnvelope
+ok 16 - MSL016 missing invalid B5 B6 and provider rejection stop at responseEnvelope
+  ---
+  duration_ms: 5.53325
+  ...
+# Subtest: MSL017 swapped B5 source package is rejected before semantic text
+ok 17 - MSL017 swapped B5 source package is rejected before semantic text
+  ---
+  duration_ms: 0.937167
+  ...
+# Subtest: MSL018 swapped B5 B6 generate request binding is rejected
+ok 18 - MSL018 swapped B5 B6 generate request binding is rejected
+  ---
+  duration_ms: 1.353875
+  ...
+# Subtest: MSL019 swapped provider envelope raw binding is rejected
+ok 19 - MSL019 swapped provider envelope raw binding is rejected
+  ---
+  duration_ms: 0.903667
+  ...
+# Subtest: MSL020 failed or blocked responseEnvelope never reports a trusted raw binding
+ok 20 - MSL020 failed or blocked responseEnvelope never reports a trusted raw binding
+  ---
+  duration_ms: 1.485958
+  ...
+# Subtest: MSL021 strict JSON invalid owns code 22 and internal postconditions are fatal
+ok 21 - MSL021 strict JSON invalid owns code 22 and internal postconditions are fatal
+  ---
+  duration_ms: 60.242167
+  ...
+1..21
+# tests 21
+# suites 0
+# pass 21
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 610.347666

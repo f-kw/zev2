@@ -1,0 +1,73 @@
+{
+  "schemaVersion": "presentation-meaning-boundary-b6-job-v001",
+  "jobId": "qdczJpv8RCc-candidate-59-meaning-output-first-run-b6-v001",
+  "attemptId": "attempt-v001",
+  "action": "generate-once",
+  "b5ManifestBinding": {
+    "schemaVersion": "presentation-meaning-boundary-b5-manifest-v001",
+    "path": "evals/clip_composition/outputs/presentation/meaning-boundary-b5-attempts/qdczJpv8RCc-candidate-59-meaning-output-first-run-b5-v001/attempt-v001/b5-manifest.json",
+    "fileSha256": "7a0d4a653c0d5f6d89ab79a2e5a2ece4e998f676ef4ae5e3f5d7a4dc9c4b5346",
+    "canonicalSha256": "ac3f43c886bf46b2089158f0aebc50ef3647cc5a001020a7a521f9121f1df1a6"
+  },
+  "generateRequestBinding": {
+    "path": "evals/clip_composition/outputs/presentation/meaning-boundary-b5-attempts/qdczJpv8RCc-candidate-59-meaning-output-first-run-b5-v001/attempt-v001/generate-content-request.json",
+    "fileSha256": "ac93e47717ffcedde2e863f9acba928ef8e6f2951e1573282146b6233f4b87ca"
+  },
+  "outputRoot": "evals/clip_composition/outputs/presentation/meaning-boundary-b6-attempts/qdczJpv8RCc-candidate-59-meaning-output-first-run-b6-v001/attempt-v001",
+  "executionPolicy": {
+    "oneShot": true,
+    "allowRetry": false,
+    "timeoutMilliseconds": 600000,
+    "rawResponseMustPrecedeParsing": true,
+    "allowRepair": false
+  },
+  "sendAuthorization": {
+    "decisionLineBinding": {
+      "path": "DECISIONS.md",
+      "lineText": "B6_MEANING_BOUNDARY_SINGLE_SEND_AUTHORIZATION_V001|jobId=qdczJpv8RCc-candidate-59-meaning-output-first-run-b6-v001|attemptId=attempt-v001|generateRequestSha256=ac93e47717ffcedde2e863f9acba928ef8e6f2951e1573282146b6233f4b87ca|maximumNanoUsd=500000000|status=approved-for-single-send",
+      "lineSha256": "afc33f2efddcd6e1168b89714a967bee37f4d7b2af4cc312c54748276a0a045f"
+    },
+    "status": "approved-for-single-send",
+    "currency": "USD",
+    "maximumNanoUsd": 500000000,
+    "inputPriceNanoUsdPerToken": 1500,
+    "outputPriceNanoUsdPerToken": 7500,
+    "finalInputTokens": 92769,
+    "maxOutputTokens": 48112,
+    "preSendEstimateNanoUsd": 499993500
+  },
+  "implementationBindings": [
+    {
+      "path": "evals/clip_composition/run_presentation_meaning_boundary_b5_b6_v001.mjs",
+      "fileSha256": "3fc2ad6d5349e736117cc978de565d81171311190454f17a65150b986fc15d5e",
+      "role": "meaning-boundary-api-runner"
+    },
+    {
+      "path": "evals/clip_composition/run_presentation_caption_gate_b6_v001.mjs",
+      "fileSha256": "ecad17891d63038647e2be0634b5844d2d117c38ea6e07ccef470d2887e56204",
+      "role": "api-transport"
+    },
+    {
+      "path": "evals/clip_composition/presentation_caption_api_cost_guard_v001.mjs",
+      "fileSha256": "29ac0e7e4d54400d8063bd35caab5272a64474b3c00a306d49b33aa0092db57b",
+      "role": "api-cost-policy"
+    },
+    {
+      "path": "evals/clip_composition/presentation_caption_semantic_source_package_v001.mjs",
+      "fileSha256": "ac3dcbbc671af6f56dcceeea6a41c8ae9cbf9fc4ba28a8a00bbc5d6faff45bcd",
+      "role": "strict-json-codec"
+    }
+  ],
+  "approvedContractBindings": [
+    {
+      "path": "evals/clip_composition/reports/presentation/presentation-meaning-information-package-contract-design-20260803-v001.md",
+      "fileSha256": "a38ef995c5c838f742c1de6c18acd5a7fd166ea57fb7537e51cf9a89abd4c0de",
+      "role": "meaning-package-contract"
+    },
+    {
+      "path": "evals/clip_composition/reports/presentation/presentation-output-side-acceptance-contract-design-20260803-v001.md",
+      "fileSha256": "c349d544e9cc954d2f5b9e5e05334801e6a11cdce383f57829c04ae301b678de",
+      "role": "output-side-contract"
+    }
+  ]
+}

@@ -34,6 +34,7 @@ import {
 } from './presentation_meaning_information_package_v001.mjs';
 import {
   createPresentationMeaningOwnedStagingRootV001,
+  observePresentationMeaningWorkspaceFileStableStreamingV001,
   publishPresentationMeaningOwnedStagingRootNoReplaceV001,
   readPresentationMeaningWorkspaceFileStableV001,
   validatePresentationSourceIdentityV001,
@@ -171,6 +172,16 @@ const observeMediaBinding = async (workspaceRoot, binding) => {
   return hash(bytes) === binding.fileSha256
     ? {status: 'passed', bytes}
     : {status: 'binding-mismatch', bytes};
+};
+
+const observeStreamingMediaBinding = async (workspaceRoot, binding) => {
+  const observed = await observePresentationMeaningWorkspaceFileStableStreamingV001({
+    workspaceRoot,
+    relativePath: binding.path,
+  });
+  return observed.fileSha256 === binding.fileSha256
+    ? {status: 'passed', observed}
+    : {status: 'binding-mismatch', observed};
 };
 
 export async function observePresentationMeaningInformationNodeEnvironmentV001({
@@ -412,13 +423,15 @@ const fatalFailure = async (context, stage) => publishFailure({
   violations: [],
 });
 
-const trackBinding = (tracked, binding, code, pointer) => {
-  tracked.push({
+const trackBinding = (tracked, binding, code, pointer, readMode = 'buffer') => {
+  const item = {
     path: binding.path,
     fileSha256: binding.fileSha256,
     code,
     pointer,
-  });
+  };
+  if (readMode === 'streaming-sha256') item.readMode = readMode;
+  tracked.push(item);
 };
 
 export async function inspectPresentationMeaningTrackedInputsBeforePublicationV001({
@@ -431,8 +444,13 @@ export async function inspectPresentationMeaningTrackedInputsBeforePublicationV0
   }
   try {
     for (const item of deduplicated.values()) {
-      const bytes = await readStable(workspaceRoot, item.path);
-      if (hash(bytes) !== item.fileSha256) {
+      const observedSha256 = item.readMode === 'streaming-sha256'
+        ? (await observePresentationMeaningWorkspaceFileStableStreamingV001({
+          workspaceRoot,
+          relativePath: item.path,
+        })).fileSha256
+        : hash(await readStable(workspaceRoot, item.path));
+      if (observedSha256 !== item.fileSha256) {
         return Object.freeze({status: 'rejected', changed: item});
       }
     }
@@ -468,8 +486,14 @@ const validateSourceIdentityAndMedia = async ({workspaceRoot, source, tracked}) 
   if (!same(identity.value.executionMedia, source.mediaBinding)) {
     return {code: 'SOURCE_MEDIA_BINDING_MISMATCH', pointer: '/timelineDecision/sourceMedia'};
   }
-  const media = await observeMediaBinding(workspaceRoot, source.mediaBinding);
-  trackBinding(tracked, source.mediaBinding, 'SOURCE_MEDIA_BINDING_MISMATCH', '/timelineDecision/sourceMedia');
+  const media = await observeStreamingMediaBinding(workspaceRoot, source.mediaBinding);
+  trackBinding(
+    tracked,
+    source.mediaBinding,
+    'SOURCE_MEDIA_BINDING_MISMATCH',
+    '/timelineDecision/sourceMedia',
+    'streaming-sha256',
+  );
   if (media.status !== 'passed') {
     return {code: 'SOURCE_MEDIA_BINDING_MISMATCH', pointer: '/timelineDecision/sourceMedia'};
   }

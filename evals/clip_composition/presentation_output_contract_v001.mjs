@@ -117,6 +117,10 @@ export const PRESENTATION_OUTPUT_FORMAL_IMPLEMENTATION_ROLES_V001 = Object.freez
     path: 'evals/clip_composition/presentation_output_style_resolver_v001.ts',
   }),
   Object.freeze({
+    role: 'crop-application',
+    path: 'evals/clip_composition/presentation_output_crop_application_v001.mjs',
+  }),
+  Object.freeze({
     role: 'render-plan',
     path: 'evals/clip_composition/presentation_output_render_plan_v001.mjs',
   }),
@@ -540,17 +544,13 @@ const validateCropPolicy = (value, format) => {
     return exactKeys(value, ['mode']) && value.mode === 'identity';
   }
   return exactKeys(value, [
-    'mode', 'scope', 'decision', 'selectionPackageManifest',
+    'mode', 'scope', 'application',
   ])
     && value.mode === 'bound-decision'
     && value.scope === 'all-segments'
     && validJsonBindingSchema(
-      value.decision,
-      'vertical-preset-type-crop-decision-v006',
-    )
-    && validJsonBindingSchema(
-      value.selectionPackageManifest,
-      'vertical-preset-type-crop-selection-package-v006',
+      value.application,
+      'presentation-output-crop-application-v001',
     );
 };
 
