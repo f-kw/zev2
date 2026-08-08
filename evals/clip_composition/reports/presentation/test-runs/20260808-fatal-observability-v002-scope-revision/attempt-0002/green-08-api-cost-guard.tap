@@ -1,0 +1,60 @@
+TAP version 13
+# Subtest: C01 必須6 claimがverifiedでなければ通信前拒否
+ok 1 - C01 必須6 claimがverifiedでなければ通信前拒否
+  ---
+  duration_ms: 1.661667
+  ...
+# Subtest: C02 countTokens課金未確認でも正しい受容記録なら通る
+ok 2 - C02 countTokens課金未確認でも正しい受容記録なら通る
+  ---
+  duration_ms: 1.377292
+  ...
+# Subtest: C03 prompt上界claimの受容改変をcode 24へ帰属
+ok 3 - C03 prompt上界claimの受容改変をcode 24へ帰属
+  ---
+  duration_ms: 0.532541
+  ...
+# Subtest: C04 output上界claimの受容改変をcode 25へ帰属
+ok 4 - C04 output上界claimの受容改変をcode 25へ帰属
+  ---
+  duration_ms: 0.593667
+  ...
+# Subtest: C05 受容記録のcanonical SHAは決定的
+ok 5 - C05 受容記録のcanonical SHAは決定的
+  ---
+  duration_ms: 0.680541
+  ...
+# Subtest: C06 countTokensのexact応答だけを受ける
+ok 6 - C06 countTokensのexact応答だけを受ける
+  ---
+  duration_ms: 0.699541
+  ...
+# Subtest: C07 送信前BigInt式は上限以下だけを受ける
+ok 7 - C07 送信前BigInt式は上限以下だけを受ける
+  ---
+  duration_ms: 0.145
+  ...
+# Subtest: C08 入力費用で上限を使い切る場合は送信前拒否
+ok 8 - C08 入力費用で上限を使い切る場合は送信前拒否
+  ---
+  duration_ms: 0.050083
+  ...
+# Subtest: C09 countTokens wrapperはmodel以外を無改変で包む
+ok 9 - C09 countTokens wrapperはmodel以外を無改変で包む
+  ---
+  duration_ms: 0.431959
+  ...
+# Subtest: C10 事後usageとsecretを事実だけで検査する
+ok 10 - C10 事後usageとsecretを事実だけで検査する
+  ---
+  duration_ms: 0.208334
+  ...
+1..10
+# tests 10
+# suites 0
+# pass 10
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 121.341958

@@ -39,6 +39,8 @@ import {
   inspectPresentationMeaningPublicationExceptionV001,
   inspectPresentationMeaningPublicationTargetV001,
   observePresentationMeaningInformationNodeEnvironmentV001,
+  publishPresentationMeaningInformationFailureV002,
+  publishPresentationMeaningInformationFailureReportFileV002,
   runPresentationMeaningInformationPackageJobV001,
   validatePresentationMeaningInformationFailureReportV001,
 } from './run_presentation_meaning_information_package_job_v001.mjs';
@@ -52,6 +54,9 @@ import {
   runPresentationTimelineCompositionDecisionV001,
   validatePresentationTimelineCompositionDecisionV001,
 } from './presentation_timeline_composition_decision_v001.mjs';
+import {
+  buildPresentationFatalObservationV002,
+} from './presentation_fatal_observation_v002.mjs';
 
 const H = character => character.repeat(64);
 const HERE = path.dirname(fileURLToPath(import.meta.url));
@@ -63,6 +68,8 @@ const MEANING_PACKAGE_CLI_PATH = path.join(
 const clone = value => structuredClone(value);
 const sha256 = bytes => createHash('sha256').update(bytes).digest('hex');
 const formalBytes = value => serializePresentationMeaningInformationFormalJsonV001(value);
+const fatalObservation = (innerStage = 'unknown', innerCode = 'UNCLASSIFIED') =>
+  buildPresentationFatalObservationV002({innerStage, targetFile: null, innerCode});
 const jsonBinding = (schemaVersion, bindingPath, value) => ({
   schemaVersion,
   path: bindingPath,
@@ -85,6 +92,8 @@ const TIMELINE_CORE_PATH =
   'evals/clip_composition/presentation_timeline_composition_decision_v001.mjs';
 const TIMELINE_STRICT_JSON_PATH =
   'evals/clip_composition/presentation_caption_semantic_source_package_v001.mjs';
+const FATAL_OBSERVATION_PATH =
+  'evals/clip_composition/presentation_fatal_observation_v002.mjs';
 const TIMELINE_CONTRACT_BINDINGS = Object.freeze([
   Object.freeze({
     path: 'evals/clip_composition/reports/presentation/presentation-meaning-information-package-contract-design-20260803-v001.md',
@@ -177,6 +186,7 @@ const runTimelineSourceObservationScenario = async ({
     for (const [role, relativePath] of [
       ['timeline-decision', TIMELINE_CORE_PATH],
       ['strict-json', TIMELINE_STRICT_JSON_PATH],
+      ['fatal-observation', FATAL_OBSERVATION_PATH],
     ]) {
       const bytes = await readFile(path.join(REPOSITORY_ROOT, relativePath));
       await writeFixtureBytes(workspaceRoot, relativePath, bytes);
@@ -574,6 +584,11 @@ const makeFixture = () => {
         fileSha256: H('3'),
         role: 'strict-json-codec',
       },
+      {
+        path: FATAL_OBSERVATION_PATH,
+        fileSha256: H('4'),
+        role: 'fatal-observation',
+      },
     ],
   };
   const semanticValidationBinding = jsonBinding(
@@ -930,6 +945,11 @@ const makeMeaningPackageCliWorkspace = async ({corruptJobBinding = false} = {}) 
           fileSha256: H('3'),
           role: 'strict-json-codec',
         },
+        {
+          path: FATAL_OBSERVATION_PATH,
+          fileSha256: H('4'),
+          role: 'fatal-observation',
+        },
       ],
     };
     const semanticValidationBinding = jsonBinding(
@@ -1128,7 +1148,7 @@ test('MIP001: 2 sourceと同一selection再利用を異なるAtomRef occurrence�
         workspaceRoot: timelineRereadWorkspace,
         tracked,
       }),
-      {status: 'fatal'},
+      {status: 'fatal', fatalObservation: fatalObservation()},
     );
     await writeFixtureBytes(timelineRereadWorkspace, trackedPath, original);
     const symlinkPath = 'tracked/source-media-link.bin';
@@ -1138,7 +1158,7 @@ test('MIP001: 2 sourceと同一selection再利用を異なるAtomRef occurrence�
         workspaceRoot: timelineRereadWorkspace,
         tracked: [{...tracked[0], path: symlinkPath}],
       }),
-      {status: 'fatal'},
+      {status: 'fatal', fatalObservation: fatalObservation()},
     );
     const hardlinkPath = path.join(timelineRereadWorkspace, 'tracked/source-media-hardlink.bin');
     await link(path.join(timelineRereadWorkspace, trackedPath), hardlinkPath);
@@ -1147,7 +1167,7 @@ test('MIP001: 2 sourceと同一selection再利用を異なるAtomRef occurrence�
         workspaceRoot: timelineRereadWorkspace,
         tracked,
       }),
-      {status: 'fatal'},
+      {status: 'fatal', fatalObservation: fatalObservation()},
     );
   } finally {
     await rm(timelineRereadWorkspace, {recursive: true, force: true});
@@ -1192,7 +1212,12 @@ test('MIP001: 2 sourceと同一selection再利用を異なるAtomRef occurrence�
   );
   assert.deepEqual(
     await runTimelineSourceObservationScenario({scenario: 'media-missing'}),
-    {status: 'fatal', violations: []},
+    {
+      schemaVersion: 'zev-timeline-composition-failure-v002',
+      status: 'fatal',
+      violations: [],
+      fatalObservation: fatalObservation(),
+    },
   );
 });
 
@@ -1474,6 +1499,33 @@ const actualViolationFor = async (code, fixture) => {
         }),
         /unsafe-publication-parent/u,
       );
+      const failureParent = path.join(
+        workspaceRoot,
+        'evals/clip_composition/outputs/presentation',
+      );
+      await mkdir(failureParent, {recursive: true});
+      await symlink(
+        path.join(workspaceRoot, 'outside'),
+        path.join(failureParent, 'meaning-information-failures'),
+      );
+      const unsafeFailurePublication = await publishPresentationMeaningInformationFailureV002({
+        workspaceRoot,
+        pathJobId: fixture.job.jobId,
+        jobPath: fixture.jobBinding.path,
+        jobBytes: formalBytes(fixture.job),
+        jobValue: fixture.job,
+        status: 'rejected',
+        stage: 'job-validation',
+        fatalObservation: null,
+        violations: [{code: 'MEANING_JOB_INVALID', path: '/job', relatedIds: []}],
+        executedAt: '2026-08-03T00:00:00Z',
+      });
+      assert.equal(unsafeFailurePublication.status, 'fatal');
+      assert.equal(unsafeFailurePublication.exitCode, 2);
+      assert.deepEqual(
+        JSON.parse(unsafeFailurePublication.bytes.toString('utf8')).fatalObservation,
+        fatalObservation('failure-report-publication', 'REPORT_TARGET_INVALID'),
+      );
       const publicationClaim = await createPresentationMeaningOwnedStagingRootV001({
         workspaceRoot,
         relativeOutputRoot: 'formal/empty-target-race',
@@ -1579,6 +1631,27 @@ const actualViolationFor = async (code, fixture) => {
     });
   }
   if (code === 'MEANING_PUBLICATION_FAILED') {
+    const workspaceRoot = await mkdtemp(
+      path.join(await realpath(os.tmpdir()), 'zev-mip-report-publication-v002-'),
+    );
+    try {
+      const publication =
+        await publishPresentationMeaningInformationFailureReportFileV002({
+          workspaceRoot,
+          directoryPath: 'formal/report-publication-failure',
+          fileName: 'missing/failure-report.json',
+          bytes: Buffer.from('{}\n', 'utf8'),
+        });
+      assert.deepEqual(publication, {
+        status: 'fatal',
+        fatalObservation: fatalObservation(
+          'failure-report-publication',
+          'REPORT_PUBLICATION_FAILED',
+        ),
+      });
+    } finally {
+      await rm(workspaceRoot, {recursive: true, force: true});
+    }
     return inspectPresentationMeaningPublicationExceptionV001(
       Object.assign(new Error('fixture publication failure'), {code: 'EIO'}),
     );
@@ -1608,6 +1681,9 @@ for (const entry of FAILURE_CASES) {
       jobValue: fixture.job,
       status,
       stage: FAILURE_STAGE[entry.code],
+      fatalObservation: status === 'fatal'
+        ? fatalObservation('publication', 'PUBLICATION_FAILED')
+        : null,
       violations: result.violations,
       environment: {
         nodePath: '/fixture/node',
@@ -1625,8 +1701,17 @@ for (const entry of FAILURE_CASES) {
         encoding: null,
       });
       assert.equal(fatalCli.status, 2);
-      assert.equal(fatalCli.stdout.length, 0);
       assert.equal(fatalCli.stderr.length, 0);
+      assert.deepEqual(
+        JSON.parse(fatalCli.stdout.toString('utf8')),
+        {
+          schemaVersion: 'presentation-formal-runner-fatal-v002',
+          runnerId: 'zev-meaning-information-package-job-v001',
+          status: 'fatal',
+          diagnosticCode: 'MEANING_INFORMATION_RUNNER_FATAL',
+          fatalObservation: fatalObservation(),
+        },
+      );
       const missingNodeWorkspace = await mkdtemp(
         path.join(os.tmpdir(), 'zev-mip-missing-node-v001-'),
       );
@@ -1647,6 +1732,7 @@ for (const entry of FAILURE_CASES) {
         jobValue: fixture.job,
         status: 'fatal',
         stage: 'input-read',
+        fatalObservation: fatalObservation(),
         violations: [],
         environment: {
           nodePath: null,
@@ -1720,7 +1806,11 @@ for (const entry of FAILURE_CASES) {
             workspaceRoot: rereadWorkspace,
             tracked,
           }),
-          {status: 'fatal', stage: 'input-read'},
+          {
+            status: 'fatal',
+            stage: 'input-read',
+            fatalObservation: fatalObservation(),
+          },
         );
       } finally {
         await rm(rereadWorkspace, {recursive: true, force: true});

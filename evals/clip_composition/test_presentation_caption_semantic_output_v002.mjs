@@ -53,11 +53,15 @@ const direct = [
   ['semanticCore', 'evals/clip_composition/presentation_caption_semantic_output_v001.mjs'],
   ['semanticRunner', 'evals/clip_composition/run_presentation_caption_semantic_output_check_v002.mjs'],
 ];
-const dependencies = [
+const sourcePackageDependencies = [
   ['textLayoutImplementation', 'evals/clip_composition/presentation_renderer_text_layout_v001.mjs'],
   ['gateACore', 'evals/clip_composition/presentation_segmenter_boundary_evidence_v001.mjs'],
   ['gateARetainedSourceAtomsCore', 'evals/clip_composition/presentation_retained_source_atoms_v001.mjs'],
   ['gateARunner', 'evals/clip_composition/run_presentation_segmenter_boundary_preflight_v001.mjs'],
+];
+const liveDependencies = [
+  ...sourcePackageDependencies,
+  ['fatal-observation', 'evals/clip_composition/presentation_fatal_observation_v002.mjs'],
 ];
 const clone = (value) => structuredClone(value);
 const hash = (value) => createHash('sha256').update(value).digest('hex');
@@ -230,7 +234,7 @@ const makeFixture = ({text = 'あいうえおかき', lineEnds = null} = {}) => 
     sourceGateBinding: {},
     implementationBinding: {
       files: direct.map(([role, path]) => ({role, path, fileSha256: HASH})),
-      dependencyFiles: dependencies.map(
+      dependencyFiles: sourcePackageDependencies.map(
         ([role, path]) => ({role, path, fileSha256: HASH}),
       ),
     },
@@ -311,7 +315,7 @@ const makeFixture = ({text = 'あいうえおかき', lineEnds = null} = {}) => 
   };
   const rawBytes = bytes(raw);
   const implementationBytes = new Map(
-    [...direct, ...dependencies].map(([, path]) => [path, Buffer.from(path)]),
+    [...direct, ...liveDependencies].map(([, path]) => [path, Buffer.from(path)]),
   );
   const job = {
     schemaVersion: 'presentation-caption-semantic-output-check-job-v002',
@@ -325,7 +329,7 @@ const makeFixture = ({text = 'あいうえおかき', lineEnds = null} = {}) => 
         path,
         fileSha256: hash(implementationBytes.get(path)),
       })),
-      dependencyFiles: dependencies.map(([role, path]) => ({
+      dependencyFiles: liveDependencies.map(([role, path]) => ({
         role,
         path,
         fileSha256: hash(implementationBytes.get(path)),
@@ -371,8 +375,10 @@ const run = (fixture) => runPresentationCaptionSemanticOutputCheckV002(
   },
 );
 
-test('W01: B1 v002は幅14の正常回答と固定7 implementation bindingを受理する', async () => {
+test('W01: B1 v002は幅14の正常回答と固定8 implementation bindingを受理する', async () => {
   const fixture = makeFixture();
+  assert.equal(fixture.packageValues[5].implementationBinding.dependencyFiles.length, 4);
+  assert.equal(fixture.job.implementationBinding.dependencyFiles.length, 5);
   assert.equal(
     validatePresentationCaptionSemanticOutputCheckJobV002(fixture.job).status,
     'passed',
@@ -472,6 +478,37 @@ test('W07: 1まとまり2行を受理する', async () => {
 });
 
 test('W08: 3行拒否とrunnerのexit 0・1・2 stdout契約を固定する', async () => {
+  const mixedLiveJob = makeFixture();
+  mixedLiveJob.job.implementationBinding.dependencyFiles =
+    mixedLiveJob.job.implementationBinding.dependencyFiles.slice(0, 4);
+  assert.equal(
+    validatePresentationCaptionSemanticOutputCheckJobV002(mixedLiveJob.job).status,
+    'rejected',
+  );
+
+  const mixedSourcePackage = makeFixture();
+  const mixedManifest = mixedSourcePackage.packageValues[5];
+  mixedManifest.implementationBinding.dependencyFiles = liveDependencies.map(
+    ([role, path]) => ({role, path, fileSha256: HASH}),
+  );
+  mixedSourcePackage.packageBytes[5] = bytes(mixedManifest);
+  mixedSourcePackage.job.sourcePackageBinding.manifest = pathBinding(
+    `${PACKAGE_ROOT}/${PACKAGE_FILES[5]}`,
+    mixedManifest,
+  );
+  const mixedPackageReport = mixedSourcePackage.packageValues[6];
+  mixedPackageReport.manifestBinding = {
+    fileName: PACKAGE_FILES[5],
+    fileSha256: hash(mixedSourcePackage.packageBytes[5]),
+    canonicalSha256: canonicalSha(mixedManifest),
+  };
+  mixedSourcePackage.packageBytes[6] = bytes(mixedPackageReport);
+  mixedSourcePackage.job.sourcePackageBinding.validationReport = pathBinding(
+    `${PACKAGE_ROOT}/${PACKAGE_FILES[6]}`,
+    mixedPackageReport,
+  );
+  assert.equal((await run(mixedSourcePackage)).exitCode, 2);
+
   const rejected = await run(makeFixture({
     lineEnds: [
       'segmenter-boundary-000001',
@@ -489,5 +526,16 @@ test('W08: 3行拒否とrunnerのexit 0・1・2 stdout契約を固定する', as
   );
   assert.equal(usage, 2);
   assert.equal(writes.length, 1);
-  assert.equal(JSON.parse(writes[0]).status, 'fatal');
+  assert.deepEqual(JSON.parse(writes[0]), {
+    schemaVersion: 'presentation-formal-runner-fatal-v002',
+    runnerId: 'presentation-caption-semantic-output-check-job-v002',
+    status: 'fatal',
+    diagnosticCode: 'CAPTION_B1_V002_RUNNER_FATAL',
+    fatalObservation: {
+      schemaVersion: 'presentation-fatal-observation-v002',
+      innerStage: 'unknown',
+      targetFile: null,
+      innerCode: 'UNCLASSIFIED',
+    },
+  });
 });

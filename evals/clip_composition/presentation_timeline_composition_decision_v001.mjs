@@ -23,6 +23,11 @@ import {
 import {
   validatePresentationRetainedSourceAtomsPublishedArtifactsV001,
 } from './presentation_retained_source_atoms_v001.mjs';
+import {
+  buildPresentationFatalObservationV002,
+  classifyPresentationFatalInnerCodeV002,
+  selectPresentationFatalTargetFileV002,
+} from './presentation_fatal_observation_v002.mjs';
 
 export const PRESENTATION_TIMELINE_COMPOSITION_DECISION_SCHEMA_V001 =
   'zev-timeline-composition-decision-v001';
@@ -48,6 +53,8 @@ const OUTPUT_ROOT = `${ROOT}/meaning-timeline-decisions`;
 const SELF_PATH = 'evals/clip_composition/presentation_timeline_composition_decision_v001.mjs';
 const STRICT_JSON_PATH =
   'evals/clip_composition/presentation_caption_semantic_source_package_v001.mjs';
+const FATAL_OBSERVATION_PATH =
+  'evals/clip_composition/presentation_fatal_observation_v002.mjs';
 const FORMAL_ID = /^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$/u;
 const SHA = /^[0-9a-f]{64}$/u;
 const SOURCE_REF = /^youtube:[A-Za-z0-9_-]{11}$/u;
@@ -77,6 +84,75 @@ const nonnegative = value => Number.isSafeInteger(value) && value >= 0;
 const same = (left, right) => JSON.stringify(left) === JSON.stringify(right);
 const hash = bytes => createHash('sha256').update(bytes).digest('hex');
 const violation = (code, pointer) => Object.freeze({code, path: pointer, relatedIds: Object.freeze([])});
+const timelineFatalObservation = ({innerStage, evidence, targetFile = null}) => {
+  const innerCode = classifyPresentationFatalInnerCodeV002(evidence);
+  return buildPresentationFatalObservationV002({
+    innerStage: innerCode === 'UNCLASSIFIED' ? 'unknown' : innerStage,
+    targetFile: innerCode === 'UNCLASSIFIED' ? null : targetFile,
+    innerCode,
+  });
+};
+const timelineFatal = ({fatalObservation, violations = []}) => Object.freeze({
+  schemaVersion: 'zev-timeline-composition-failure-v002',
+  status: 'fatal',
+  violations: Object.freeze(violations),
+  fatalObservation,
+});
+const verifiedTimelineTargetSource = (sourceField, binding) => Object.freeze({
+  sourceField,
+  path: binding.path,
+  fileSha256: binding.fileSha256,
+});
+const buildTimelineVerifiedTargetSources = ({job, jobPath, jobBytes}) => Object.freeze([
+  verifiedTimelineTargetSource('job', {path: jobPath, fileSha256: hash(jobBytes)}),
+  ...job.implementationBindings.map(binding =>
+    verifiedTimelineTargetSource('job.implementationBindings[*]', binding)),
+  ...job.approvedContractBindings.map(binding =>
+    verifiedTimelineTargetSource('job.approvedContractBindings[*]', binding)),
+  ...job.sourceMedia.flatMap(source => [
+    verifiedTimelineTargetSource(
+      'job.sourceMedia[*].sourceIdentityBinding',
+      source.sourceIdentityBinding,
+    ),
+    verifiedTimelineTargetSource('job.sourceMedia[*].mediaBinding', source.mediaBinding),
+    verifiedTimelineTargetSource(
+      'job.sourceMedia[*].retainedSourceAtomsBinding.sourceAtoms',
+      source.retainedSourceAtomsBinding.sourceAtoms,
+    ),
+    verifiedTimelineTargetSource(
+      'job.sourceMedia[*].retainedSourceAtomsBinding.generationManifest',
+      source.retainedSourceAtomsBinding.generationManifest,
+    ),
+    verifiedTimelineTargetSource(
+      'job.sourceMedia[*].retainedSourceAtomsBinding.validationReport',
+      source.retainedSourceAtomsBinding.validationReport,
+    ),
+  ]),
+]);
+const deriveUniqueTimelineVerifiedTargetSource = ({binding, verifiedTargetSources}) => {
+  const matches = verifiedTargetSources.filter(source =>
+    source.path === binding.path && source.fileSha256 === binding.fileSha256);
+  return matches.length === 1 ? matches[0] : null;
+};
+const selectTimelineFatalTarget = ({binding, verifiedTargetSources}) => {
+  const source = deriveUniqueTimelineVerifiedTargetSource({binding, verifiedTargetSources});
+  return source === null
+    ? null
+    : selectPresentationFatalTargetFileV002({
+      boundaryId: 'timeline-composition',
+      sourceField: source.sourceField,
+      path: binding.path,
+      fileSha256: binding.fileSha256,
+      verifiedTargetSources,
+      sourceRecordVerified: true,
+    });
+};
+class PresentationTimelineFatalError extends Error {
+  constructor(fatalObservation) {
+    super('presentation timeline fatal');
+    this.fatalObservation = fatalObservation;
+  }
+}
 
 const validMediaBinding = value => exactKeys(value, ['path', 'fileSha256'])
   && WORKSPACE_PATH.test(value.path) && SHA.test(value.fileSha256);
@@ -182,12 +258,14 @@ export function validatePresentationTimelineCompositionDecisionJobV001(job) {
     || !['human', 'approved-machine-record'].includes(job.recordedBy)
     || typeof job.recordedAt !== 'string' || !UTC.test(job.recordedAt)
     || job.outputPath !== `${OUTPUT_ROOT}/${job.jobId}/timeline-composition-decision.json`
-    || !dense(job.implementationBindings) || job.implementationBindings.length !== 2
+    || !dense(job.implementationBindings) || job.implementationBindings.length !== 3
     || !job.implementationBindings.every(validImplementationBinding)
     || job.implementationBindings[0].role !== 'timeline-decision'
     || job.implementationBindings[0].path !== SELF_PATH
     || job.implementationBindings[1].role !== 'strict-json'
     || job.implementationBindings[1].path !== STRICT_JSON_PATH
+    || job.implementationBindings[2].role !== 'fatal-observation'
+    || job.implementationBindings[2].path !== FATAL_OBSERVATION_PATH
     || !dense(job.approvedContractBindings)
     || !same(job.approvedContractBindings, CONTRACT_BINDINGS)) return false;
   const sourceIds = new Set(job.sourceMedia.map(item => item.sourceMediaId));
@@ -735,26 +813,66 @@ const observeStreamingMediaBinding = async (workspaceRoot, binding) => {
   return observed;
 };
 
-const trackTimelineInput = (tracked, binding, code, pointer, readMode = 'buffer') => {
+const TIMELINE_SOURCE_REJECTION_CODES = Object.freeze({
+  'source-media-binding': 'SOURCE_MEDIA_BINDING_MISMATCH',
+  'media-binding-sha': 'SOURCE_MEDIA_BINDING_MISMATCH',
+  'binding-file-sha': 'SOURCE_IDENTITY_INVALID',
+  'binding-canonical-sha': 'SOURCE_IDENTITY_INVALID',
+  'invalid-json': 'SOURCE_IDENTITY_INVALID',
+  'binding-content-invalid': 'SOURCE_IDENTITY_INVALID',
+  'source-identity': 'SOURCE_IDENTITY_INVALID',
+  'retained-source-ref': 'SOURCE_IDENTITY_INVALID',
+  'retained-atoms': 'SOURCE_IDENTITY_INVALID',
+});
+const classifyTimelineSourceRejection = error => {
+  const code = typeof error?.message === 'string'
+    && Object.hasOwn(TIMELINE_SOURCE_REJECTION_CODES, error.message)
+    ? TIMELINE_SOURCE_REJECTION_CODES[error.message]
+    : undefined;
+  return code === undefined
+    ? null
+    : Object.freeze({code, path: '/timelineDecision/sourceMedia'});
+};
+
+const trackTimelineInput = (
+  tracked,
+  binding,
+  code,
+  pointer,
+  readMode = 'buffer',
+  sourceField = 'tracked-input',
+) => {
   tracked.push({
     path: binding.path,
     fileSha256: binding.fileSha256,
     code,
     pointer,
     readMode,
+    sourceField,
   });
 };
 
 export async function inspectPresentationTimelineInputsBeforePublicationV001({
   workspaceRoot,
   tracked,
+  jobPath,
+  jobBytes,
 }) {
+  const decodedJob = Buffer.isBuffer(jobBytes)
+    ? decodePresentationCaptionB1StrictJsonV001(jobBytes)
+    : null;
+  const sourceRecordVerified = decodedJob?.status === 'decoded'
+    && typeof jobPath === 'string'
+    && validatePresentationTimelineCompositionDecisionJobV001(decodedJob.value);
+  const verifiedTargetSources = sourceRecordVerified
+    ? buildTimelineVerifiedTargetSources({job: decodedJob.value, jobPath, jobBytes})
+    : Object.freeze([]);
   const deduplicated = new Map();
   for (const item of tracked) {
     if (!deduplicated.has(item.path)) deduplicated.set(item.path, item);
   }
-  try {
-    for (const item of deduplicated.values()) {
+  for (const item of deduplicated.values()) {
+    try {
       const observedSha256 = item.readMode === 'streaming-sha256'
         ? (await observePresentationMeaningWorkspaceFileStableStreamingV001({
           workspaceRoot,
@@ -764,32 +882,88 @@ export async function inspectPresentationTimelineInputsBeforePublicationV001({
       if (observedSha256 !== item.fileSha256) {
         return Object.freeze({status: 'rejected', changed: item});
       }
+    } catch (error) {
+      const innerStage = item.readMode === 'streaming-sha256'
+        ? 'source-media-read'
+        : 'input-read';
+      const source = deriveUniqueTimelineVerifiedTargetSource({
+        binding: item,
+        verifiedTargetSources,
+      });
+      return Object.freeze({
+        status: 'fatal',
+        fatalObservation: timelineFatalObservation({
+          innerStage,
+          evidence: {kind: 'node-error', code: error?.code ?? null},
+          targetFile: source === null
+            ? null
+            : selectPresentationFatalTargetFileV002({
+              boundaryId: 'timeline-composition',
+              sourceField: source.sourceField,
+              path: item.path,
+              fileSha256: item.fileSha256,
+              verifiedTargetSources,
+              sourceRecordVerified,
+            }),
+        }),
+      });
     }
-  } catch {
-    return Object.freeze({status: 'fatal'});
   }
   return Object.freeze({status: 'passed'});
 }
 
-const validateSourceIdentityFiles = async (workspaceRoot, sourceMedia, tracked) => {
+const validateSourceIdentityFiles = async ({
+  workspaceRoot,
+  sourceMedia,
+  tracked,
+  verifiedTargetSources,
+}) => {
   for (const source of sourceMedia) {
-    const observed = await observeJsonBinding(workspaceRoot, source.sourceIdentityBinding);
+    let observed;
+    try {
+      observed = await observeJsonBinding(workspaceRoot, source.sourceIdentityBinding);
+    } catch (error) {
+      if (classifyTimelineSourceRejection(error) !== null) throw error;
+      throw new PresentationTimelineFatalError(timelineFatalObservation({
+        innerStage: 'input-read',
+        evidence: {kind: 'node-error', code: error?.code ?? null},
+        targetFile: selectTimelineFatalTarget({
+          binding: source.sourceIdentityBinding,
+          verifiedTargetSources,
+        }),
+      }));
+    }
     trackTimelineInput(
       tracked,
       source.sourceIdentityBinding,
       'SOURCE_IDENTITY_INVALID',
       '/timelineDecision/sourceMedia',
+      'buffer',
+      'job.sourceMedia[*].sourceIdentityBinding',
     );
     if (!validatePresentationSourceIdentityV001(observed.value)
       || observed.value.sourceRef !== source.sourceRef) throw new Error('source-identity');
     if (!same(observed.value.executionMedia, source.mediaBinding)) throw new Error('source-media-binding');
-    await observeStreamingMediaBinding(workspaceRoot, source.mediaBinding);
+    try {
+      await observeStreamingMediaBinding(workspaceRoot, source.mediaBinding);
+    } catch (error) {
+      if (classifyTimelineSourceRejection(error) !== null) throw error;
+      throw new PresentationTimelineFatalError(timelineFatalObservation({
+        innerStage: 'source-media-read',
+        evidence: {kind: 'node-error', code: error?.code ?? null},
+        targetFile: selectTimelineFatalTarget({
+          binding: source.mediaBinding,
+          verifiedTargetSources,
+        }),
+      }));
+    }
     trackTimelineInput(
       tracked,
       source.mediaBinding,
       'SOURCE_MEDIA_BINDING_MISMATCH',
       '/timelineDecision/sourceMedia',
       'streaming-sha256',
+      'job.sourceMedia[*].mediaBinding',
     );
     const mediaBindings = [
       ...(observed.value.mediaEquivalence ? [observed.value.mediaEquivalence] : []),
@@ -809,12 +983,27 @@ const validateSourceIdentityFiles = async (workspaceRoot, sourceMedia, tracked) 
     }
     const retained = {};
     for (const [name, binding] of Object.entries(source.retainedSourceAtomsBinding)) {
-      const observed = await observeJsonBinding(workspaceRoot, binding);
+      let observed;
+      try {
+        observed = await observeJsonBinding(workspaceRoot, binding);
+      } catch (error) {
+        if (classifyTimelineSourceRejection(error) !== null) throw error;
+        throw new PresentationTimelineFatalError(timelineFatalObservation({
+          innerStage: 'input-read',
+          evidence: {kind: 'node-error', code: error?.code ?? null},
+          targetFile: selectTimelineFatalTarget({
+            binding,
+            verifiedTargetSources,
+          }),
+        }));
+      }
       trackTimelineInput(
         tracked,
         binding,
         'SOURCE_IDENTITY_INVALID',
         '/timelineDecision/sourceMedia',
+        'buffer',
+        `job.sourceMedia[*].retainedSourceAtomsBinding.${name}`,
       );
       retained[`${name}Bytes`] = observed.bytes;
       if (name === 'sourceAtoms' && observed.value.sourceRef !== source.sourceRef) {
@@ -830,6 +1019,49 @@ const validateSourceIdentityFiles = async (workspaceRoot, sourceMedia, tracked) 
     if (retainedValidation.status !== 'passed') throw new Error('retained-atoms');
   }
 };
+
+export async function publishPresentationTimelineCompositionDecisionV001({
+  workspaceRoot,
+  relativeOutputRoot,
+  fileName,
+  bytes,
+}) {
+  let publicationClaim;
+  try {
+    publicationClaim = await createPresentationMeaningOwnedStagingRootV001({
+      workspaceRoot,
+      relativeOutputRoot,
+    });
+  } catch (error) {
+    if (error.message === 'publication-target-exists') {
+      return Object.freeze({status: 'target-exists'});
+    }
+    return Object.freeze({
+      status: 'fatal',
+      fatalObservation: timelineFatalObservation({
+        innerStage: 'publication',
+        evidence: {kind: 'publication-failed'},
+      }),
+    });
+  }
+  try {
+    await writeFile(path.join(publicationClaim.stagingAbsolute, fileName), bytes, {flag: 'wx'});
+    const published = await publishPresentationMeaningOwnedStagingRootNoReplaceV001({
+      claim: publicationClaim,
+      expectedRelativeFiles: [fileName],
+    });
+    if (published.status !== 'published') throw new Error('publication-failed');
+    return Object.freeze({status: 'published'});
+  } catch {
+    return Object.freeze({
+      status: 'fatal',
+      fatalObservation: timelineFatalObservation({
+        innerStage: 'publication',
+        evidence: {kind: 'publication-failed'},
+      }),
+    });
+  }
+}
 
 export async function runPresentationTimelineCompositionDecisionV001({
   workspaceRoot,
@@ -848,41 +1080,76 @@ export async function runPresentationTimelineCompositionDecisionV001({
     return {status: 'rejected', violations: [violation('MEANING_JOB_INVALID', '/job')]};
   }
   let jobBytes;
-  try { jobBytes = await readStable(workspaceRoot, jobPath); } catch { throw new Error('job-read-failed'); }
+  try {
+    jobBytes = await readStable(workspaceRoot, jobPath);
+  } catch (error) {
+    throw new PresentationTimelineFatalError(timelineFatalObservation({
+      innerStage: 'job-read',
+      evidence: {kind: 'node-error', code: error?.code ?? null},
+    }));
+  }
   const decoded = decodePresentationCaptionB1StrictJsonV001(jobBytes);
   if (decoded.status !== 'decoded' || !validatePresentationTimelineCompositionDecisionJobV001(decoded.value)
     || decoded.value.jobId !== pathJobId) {
     return {status: 'rejected', violations: [violation('MEANING_JOB_INVALID', '/job')]};
   }
   const job = decoded.value;
+  const verifiedTargetSources = buildTimelineVerifiedTargetSources({job, jobPath, jobBytes});
   const tracked = [{
     path: jobPath,
     fileSha256: hash(jobBytes),
     code: 'MEANING_JOB_BINDING_MISMATCH',
     pointer: '/job',
+    sourceField: 'job',
   }];
   for (const binding of [...job.implementationBindings, ...job.approvedContractBindings]) {
-    const bytes = await readStable(workspaceRoot, binding.path);
-    trackTimelineInput(tracked, binding, 'MEANING_JOB_BINDING_MISMATCH', '/job');
+    const sourceField = job.implementationBindings.includes(binding)
+      ? 'job.implementationBindings[*]'
+      : 'job.approvedContractBindings[*]';
+    let bytes;
+    try {
+      bytes = await readStable(workspaceRoot, binding.path);
+    } catch (error) {
+      return timelineFatal({
+        fatalObservation: timelineFatalObservation({
+          innerStage: 'input-read',
+          evidence: {kind: 'node-error', code: error?.code ?? null},
+          targetFile: selectTimelineFatalTarget({binding, verifiedTargetSources}),
+        }),
+      });
+    }
+    trackTimelineInput(
+      tracked,
+      binding,
+      'MEANING_JOB_BINDING_MISMATCH',
+      '/job',
+      'buffer',
+      sourceField,
+    );
     if (hash(bytes) !== binding.fileSha256) {
       return {status: 'rejected', violations: [violation('MEANING_JOB_BINDING_MISMATCH', '/job')]};
     }
   }
-  try { await validateSourceIdentityFiles(workspaceRoot, job.sourceMedia, tracked); } catch (error) {
-    if (['source-media-binding', 'media-binding-sha'].includes(error?.message)) {
-      return {status: 'rejected', violations: [violation(
-        'SOURCE_MEDIA_BINDING_MISMATCH', '/timelineDecision/sourceMedia',
-      )]};
+  try {
+    await validateSourceIdentityFiles({
+      workspaceRoot,
+      sourceMedia: job.sourceMedia,
+      tracked,
+      verifiedTargetSources,
+    });
+  } catch (error) {
+    const rejected = classifyTimelineSourceRejection(error);
+    if (rejected !== null) {
+      return {status: 'rejected', violations: [violation(rejected.code, rejected.path)]};
     }
-    if ([
-      'binding-file-sha', 'binding-canonical-sha', 'invalid-json',
-      'binding-content-invalid', 'source-identity', 'retained-source-ref', 'retained-atoms',
-    ].includes(error?.message)) {
-      return {status: 'rejected', violations: [violation(
-        'SOURCE_IDENTITY_INVALID', '/timelineDecision/sourceMedia',
-      )]};
-    }
-    return {status: 'fatal', violations: []};
+    return timelineFatal({
+      fatalObservation: error instanceof PresentationTimelineFatalError
+        ? error.fatalObservation
+        : timelineFatalObservation({
+          innerStage: 'input-read',
+          evidence: {kind: 'node-error', code: error?.code ?? null},
+        }),
+    });
   }
   const jobBinding = {
     schemaVersion: job.schemaVersion,
@@ -891,67 +1158,97 @@ export async function runPresentationTimelineCompositionDecisionV001({
     canonicalSha256: canonicalSha(job),
   };
   const decision = buildPresentationTimelineCompositionDecisionV001({job, jobBinding});
-  const bytes = formalBytes(decision);
+  let bytes;
+  try {
+    bytes = formalBytes(decision);
+  } catch {
+    return timelineFatal({
+      fatalObservation: timelineFatalObservation({
+        innerStage: 'formal-serialization',
+        evidence: {kind: 'formal-json-value-invalid'},
+      }),
+    });
+  }
   const relativeOutputRoot = path.dirname(job.outputPath).split(path.sep).join('/');
   const reread = await inspectPresentationTimelineInputsBeforePublicationV001({
     workspaceRoot,
     tracked,
+    jobPath,
+    jobBytes,
   });
-  if (reread.status === 'fatal') return {status: 'fatal', violations: []};
+  if (reread.status === 'fatal') {
+    return timelineFatal({fatalObservation: reread.fatalObservation});
+  }
   if (reread.status === 'rejected') {
     return {
       status: 'rejected',
       violations: [violation(reread.changed.code, reread.changed.pointer)],
     };
   }
-  let publicationClaim;
-  try {
-    publicationClaim = await createPresentationMeaningOwnedStagingRootV001({
-      workspaceRoot,
-      relativeOutputRoot,
-    });
-  } catch (error) {
-    if (error.message === 'publication-target-exists') {
-      return {status: 'rejected', violations: [violation(
-        'MEANING_PUBLICATION_TARGET_INVALID', '/job/outputPath',
-      )]};
-    }
-    return {status: 'fatal', violations: [violation(
-      'MEANING_PUBLICATION_FAILED', '/job/outputPath',
+  const publication = await publishPresentationTimelineCompositionDecisionV001({
+    workspaceRoot,
+    relativeOutputRoot,
+    fileName: path.basename(job.outputPath),
+    bytes,
+  });
+  if (publication.status === 'target-exists') {
+    return {status: 'rejected', violations: [violation(
+      'MEANING_PUBLICATION_TARGET_INVALID', '/job/outputPath',
     )]};
   }
-  try {
-    const fileName = path.basename(job.outputPath);
-    await writeFile(path.join(publicationClaim.stagingAbsolute, fileName), bytes, {flag: 'wx'});
-    const published = await publishPresentationMeaningOwnedStagingRootNoReplaceV001({
-      claim: publicationClaim,
-      expectedRelativeFiles: [fileName],
+  if (publication.status === 'fatal') {
+    return timelineFatal({
+      violations: [violation('MEANING_PUBLICATION_FAILED', '/job/outputPath')],
+      fatalObservation: publication.fatalObservation,
     });
-    if (published.status !== 'published') throw new Error('publication-target-exists');
-  } catch {
-    return {status: 'fatal', violations: [violation('MEANING_PUBLICATION_FAILED', '/job/outputPath')]};
   }
   return {status: 'passed', decision, bytes};
 }
 
-export async function runPresentationTimelineCompositionDecisionCliV001(argv = process.argv.slice(2)) {
+export function writePresentationTimelineCompositionDecisionCliResultV001(
+  result,
+  writer = chunk => process.stdout.write(chunk),
+) {
+  const value = result.status === 'passed'
+    ? result.decision
+    : result.status === 'fatal'
+      ? timelineFatal({
+        violations: result.violations ?? [],
+        fatalObservation: result.fatalObservation,
+      })
+      : {status: result.status, violations: result.violations};
+  writer(formalBytes(value));
+  return result.status === 'passed' ? 0 : result.status === 'rejected' ? 1 : 2;
+}
+
+export async function runPresentationTimelineCompositionDecisionCliV001(
+  argv = process.argv.slice(2),
+  streams = {stdout: process.stdout},
+) {
+  const writer = chunk => streams.stdout.write(chunk);
   if (!Array.isArray(argv) || argv.length !== 1) {
-    process.stdout.write(`${JSON.stringify({status: 'fatal', violations: []})}\n`);
-    return 2;
+    return writePresentationTimelineCompositionDecisionCliResultV001(timelineFatal({
+      fatalObservation: timelineFatalObservation({
+        innerStage: 'unknown',
+        evidence: {kind: 'unclassified'},
+      }),
+    }), writer);
   }
   try {
     const result = await runPresentationTimelineCompositionDecisionV001({
       workspaceRoot: process.cwd(),
       jobPath: argv[0],
     });
-    process.stdout.write(formalBytes(result.status === 'passed' ? result.decision : {
-      status: result.status,
-      violations: result.violations,
-    }));
-    return result.status === 'passed' ? 0 : result.status === 'rejected' ? 1 : 2;
-  } catch {
-    process.stdout.write(`${JSON.stringify({status: 'fatal', violations: []})}\n`);
-    return 2;
+    return writePresentationTimelineCompositionDecisionCliResultV001(result, writer);
+  } catch (error) {
+    return writePresentationTimelineCompositionDecisionCliResultV001(timelineFatal({
+      fatalObservation: error instanceof PresentationTimelineFatalError
+        ? error.fatalObservation
+        : timelineFatalObservation({
+          innerStage: 'unknown',
+          evidence: {kind: 'unclassified'},
+        }),
+    }), writer);
   }
 }
 

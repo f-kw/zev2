@@ -15,7 +15,6 @@ import {
   validatePresentationRetainedSourceAtomsPublishedArtifactsV001,
 } from './presentation_retained_source_atoms_v001.mjs';
 import {
-  PRESENTATION_MEANING_INFORMATION_FAILURE_REPORT_SCHEMA_V001,
   PRESENTATION_MEANING_INFORMATION_PACKAGE_JOB_SCHEMA_V001,
   buildPresentationMeaningInformationPackageV001,
   canonicalSha256PresentationMeaningInformationJsonV001,
@@ -40,6 +39,15 @@ import {
   validatePresentationSourceIdentityV001,
   validatePresentationTimelineCompositionDecisionV001,
 } from './presentation_timeline_composition_decision_v001.mjs';
+import {
+  buildPresentationFatalObservationV002,
+  classifyPresentationFatalInnerCodeV002,
+  selectPresentationFatalTargetFileV002,
+  validatePresentationFatalObservationV002,
+} from './presentation_fatal_observation_v002.mjs';
+
+export const PRESENTATION_MEANING_INFORMATION_FAILURE_REPORT_SCHEMA_V002 =
+  'zev-meaning-information-failure-report-v002';
 
 const JOB_ROOT = 'evals/clip_composition/outputs/presentation/meaning-information-jobs';
 const PACKAGE_ROOT = 'evals/clip_composition/outputs/presentation/meaning-information-packages';
@@ -130,6 +138,115 @@ const dense = value => Array.isArray(value)
   && Object.keys(value).every((key, index) => key === String(index));
 const same = (left, right) => JSON.stringify(left) === JSON.stringify(right);
 const hash = bytes => createHash('sha256').update(bytes).digest('hex');
+const meaningFatalObservation = ({
+  innerStage = 'unknown',
+  evidence = {kind: 'unclassified'},
+  targetFile = null,
+} = {}) => {
+  const innerCode = classifyPresentationFatalInnerCodeV002(evidence);
+  return buildPresentationFatalObservationV002({
+    innerStage: innerCode === 'UNCLASSIFIED' ? 'unknown' : innerStage,
+    targetFile: innerCode === 'UNCLASSIFIED' ? null : targetFile,
+    innerCode,
+  });
+};
+const verifiedMeaningTargetSource = (sourceField, binding) => Object.freeze({
+  sourceField,
+  path: binding.path,
+  fileSha256: binding.fileSha256,
+});
+const buildMeaningJobVerifiedTargetSources = ({job, jobPath, jobBytes}) => Object.freeze([
+  verifiedMeaningTargetSource('job', {path: jobPath, fileSha256: hash(jobBytes)}),
+  ...job.implementationBindings.map(binding =>
+    verifiedMeaningTargetSource('job.implementationBindings[*]', binding)),
+  ...job.approvedContractBindings.map(binding =>
+    verifiedMeaningTargetSource('job.approvedContractBindings[*]', binding)),
+  verifiedMeaningTargetSource(
+    'job.timelineCompositionDecisionBinding',
+    job.timelineCompositionDecisionBinding,
+  ),
+  verifiedMeaningTargetSource(
+    'job.semanticSelectionValidationBinding',
+    job.semanticSelectionValidationBinding,
+  ),
+  verifiedMeaningTargetSource('job.semanticSelectionBinding', job.semanticSelectionBinding),
+]);
+const findVerifiedTimelineDecisionSourceRecord = ({job, observation}) => {
+  const binding = job.timelineCompositionDecisionBinding;
+  if (observation?.binding?.path !== binding.path
+    || observation.binding.fileSha256 !== binding.fileSha256
+    || !Buffer.isBuffer(observation.bytes)
+    || hash(observation.bytes) !== binding.fileSha256) return null;
+  const value = decodeStrict(observation.bytes);
+  if (value === null || value.schemaVersion !== binding.schemaVersion
+    || canonicalSha256PresentationMeaningInformationJsonV001(value)
+      !== binding.canonicalSha256
+    || !validatePresentationTimelineCompositionDecisionV001(value)) return null;
+  return value;
+};
+const buildMeaningVerifiedTargetSources = ({
+  job,
+  jobPath,
+  jobBytes,
+  timelineDecisionObservation,
+}) => {
+  const sources = [...buildMeaningJobVerifiedTargetSources({job, jobPath, jobBytes})];
+  const timelineDecision = findVerifiedTimelineDecisionSourceRecord({
+    job,
+    observation: timelineDecisionObservation,
+  });
+  if (timelineDecision !== null) {
+    for (const source of timelineDecision.sourceMedia) {
+      sources.push(
+        verifiedMeaningTargetSource(
+          'timelineDecision.sourceMedia[*].sourceIdentityBinding',
+          source.sourceIdentityBinding,
+        ),
+        verifiedMeaningTargetSource(
+          'timelineDecision.sourceMedia[*].mediaBinding',
+          source.mediaBinding,
+        ),
+        verifiedMeaningTargetSource(
+          'timelineDecision.sourceMedia[*].retainedSourceAtomsBinding.sourceAtoms',
+          source.retainedSourceAtomsBinding.sourceAtoms,
+        ),
+        verifiedMeaningTargetSource(
+          'timelineDecision.sourceMedia[*].retainedSourceAtomsBinding.generationManifest',
+          source.retainedSourceAtomsBinding.generationManifest,
+        ),
+        verifiedMeaningTargetSource(
+          'timelineDecision.sourceMedia[*].retainedSourceAtomsBinding.validationReport',
+          source.retainedSourceAtomsBinding.validationReport,
+        ),
+      );
+    }
+  }
+  return Object.freeze(sources);
+};
+const deriveUniqueMeaningVerifiedTargetSource = ({binding, verifiedTargetSources}) => {
+  const matches = verifiedTargetSources.filter(source =>
+    source.path === binding.path && source.fileSha256 === binding.fileSha256);
+  return matches.length === 1 ? matches[0] : null;
+};
+const selectMeaningFatalTarget = ({binding, verifiedTargetSources}) => {
+  const source = deriveUniqueMeaningVerifiedTargetSource({binding, verifiedTargetSources});
+  return source === null
+    ? null
+    : selectPresentationFatalTargetFileV002({
+      boundaryId: 'meaning-information-package',
+      sourceField: source.sourceField,
+      path: binding.path,
+      fileSha256: binding.fileSha256,
+      verifiedTargetSources,
+      sourceRecordVerified: true,
+    });
+};
+class PresentationMeaningInformationFatalError extends Error {
+  constructor(fatalObservation) {
+    super('presentation meaning information fatal');
+    this.fatalObservation = fatalObservation;
+  }
+}
 const sameStableFileIdentity = (left, right) => left.dev === right.dev
   && left.ino === right.ino
   && left.size === right.size
@@ -201,10 +318,10 @@ export async function observePresentationMeaningInformationNodeEnvironmentV001({
 
 export function validatePresentationMeaningInformationFailureReportV001(value) {
   if (!exactKeys(value, [
-    'schemaVersion', 'failureId', 'status', 'stage', 'jobFileObservation',
+    'schemaVersion', 'failureId', 'status', 'stage', 'fatalObservation', 'jobFileObservation',
     'violations', 'retainedPaths', 'environment',
   ])
-    || value.schemaVersion !== PRESENTATION_MEANING_INFORMATION_FAILURE_REPORT_SCHEMA_V001
+    || value.schemaVersion !== PRESENTATION_MEANING_INFORMATION_FAILURE_REPORT_SCHEMA_V002
     || !FORMAL_ID.test(value.failureId)
     || !['rejected', 'fatal'].includes(value.status)
     || ![
@@ -236,6 +353,9 @@ export function validatePresentationMeaningInformationFailureReportV001(value) {
         && value.environment.nodeVersion.length > 0)
     )
     || !UTC.test(value.environment.executedAt)) return false;
+  if ((value.status === 'fatal'
+    && !validatePresentationFatalObservationV002(value.fatalObservation))
+    || (value.status === 'rejected' && value.fatalObservation !== null)) return false;
   if (value.failureId
     !== `meaning-information-failure-${value.jobFileObservation.fileSha256.slice(0, 32)}`) {
     return false;
@@ -257,6 +377,7 @@ export function buildPresentationMeaningInformationFailureReportV001({
   jobValue,
   status,
   stage,
+  fatalObservation,
   violations,
   environment,
 }) {
@@ -266,10 +387,11 @@ export function buildPresentationMeaningInformationFailureReportV001({
   }
   const jobFileSha256 = hash(jobBytes);
   const report = {
-    schemaVersion: PRESENTATION_MEANING_INFORMATION_FAILURE_REPORT_SCHEMA_V001,
+    schemaVersion: PRESENTATION_MEANING_INFORMATION_FAILURE_REPORT_SCHEMA_V002,
     failureId: `meaning-information-failure-${jobFileSha256.slice(0, 32)}`,
     status,
     stage,
+    fatalObservation: status === 'rejected' ? null : fatalObservation,
     jobFileObservation: {
       path: jobPath,
       fileSha256: jobFileSha256,
@@ -285,6 +407,18 @@ export function buildPresentationMeaningInformationFailureReportV001({
   return report;
 }
 
+const PRESENTATION_MEANING_PUBLICATION_TARGET_INVALID_MESSAGES = Object.freeze(new Set([
+  'publication-target-exists',
+  'publication-staging-exists',
+  'unsafe-publication-path',
+  'publication-roots-not-siblings',
+  'unsafe-publication-parent',
+  'unsafe-staging-root',
+]));
+const isPresentationMeaningPublicationTargetInvalid = error =>
+  typeof error?.message === 'string'
+  && PRESENTATION_MEANING_PUBLICATION_TARGET_INVALID_MESSAGES.has(error.message);
+
 const publishOneFileRoot = async ({workspaceRoot, directoryPath, fileName, bytes}) => {
   let claim;
   try {
@@ -293,13 +427,89 @@ const publishOneFileRoot = async ({workspaceRoot, directoryPath, fileName, bytes
       relativeOutputRoot: directoryPath,
     });
   } catch (error) {
-    if (error.message === 'publication-target-exists') return {status: 'target-exists'};
+    if (isPresentationMeaningPublicationTargetInvalid(error)) {
+      return Object.freeze({status: 'target-invalid'});
+    }
     throw error;
   }
   await writeFile(path.join(claim.stagingAbsolute, fileName), bytes, {flag: 'wx'});
-  return publishPresentationMeaningOwnedStagingRootNoReplaceV001({
+  const published = await publishPresentationMeaningOwnedStagingRootNoReplaceV001({
     claim,
     expectedRelativeFiles: [fileName],
+  });
+  if (published.status !== 'published') throw new Error('publication-failed');
+  return published;
+};
+
+export async function publishPresentationMeaningInformationFailureReportFileV002({
+  workspaceRoot,
+  directoryPath,
+  fileName,
+  bytes,
+}) {
+  try {
+    const published = await publishOneFileRoot({
+      workspaceRoot,
+      directoryPath,
+      fileName,
+      bytes,
+    });
+    if (published.status === 'target-invalid') {
+      return Object.freeze({
+        status: 'fatal',
+        fatalObservation: buildPresentationMeaningInformationReportTargetFatalObservationV002(),
+      });
+    }
+    return published.status === 'published'
+      ? Object.freeze({status: 'published'})
+      : Object.freeze({
+        status: 'fatal',
+        fatalObservation:
+          buildPresentationMeaningInformationReportPublicationFatalObservationV002(),
+      });
+  } catch {
+    return Object.freeze({
+      status: 'fatal',
+      fatalObservation:
+        buildPresentationMeaningInformationReportPublicationFatalObservationV002(),
+    });
+  }
+}
+
+export const buildPresentationMeaningInformationReportTargetFatalObservationV002 = () =>
+  meaningFatalObservation({
+    innerStage: 'failure-report-publication',
+    evidence: {kind: 'report-target-invalid'},
+  });
+
+export const buildPresentationMeaningInformationReportPublicationFatalObservationV002 = () =>
+  meaningFatalObservation({
+    innerStage: 'failure-report-publication',
+    evidence: {kind: 'report-publication-failed'},
+  });
+
+export const buildPresentationMeaningInformationFormalRunnerFatalV002 = (
+  fatalObservation,
+) => {
+  if (!validatePresentationFatalObservationV002(fatalObservation)) {
+    throw new TypeError('meaning information fatal observation is invalid');
+  }
+  return Object.freeze({
+    schemaVersion: 'presentation-formal-runner-fatal-v002',
+    runnerId: PRESENTATION_MEANING_INFORMATION_PACKAGE_JOB_SCHEMA_V001,
+    status: 'fatal',
+    diagnosticCode: 'MEANING_INFORMATION_RUNNER_FATAL',
+    fatalObservation,
+  });
+};
+
+const formalRunnerFatalResult = (fatalObservation) => {
+  const value = buildPresentationMeaningInformationFormalRunnerFatalV002(fatalObservation);
+  return Object.freeze({
+    status: 'fatal',
+    exitCode: 2,
+    failureReport: null,
+    bytes: serializePresentationMeaningInformationFormalJsonV001(value),
   });
 };
 
@@ -330,7 +540,7 @@ const readFileAbsoluteStable = async absolute => {
   return bytes;
 };
 
-const publishFailure = async ({
+export async function publishPresentationMeaningInformationFailureV002({
   workspaceRoot,
   pathJobId,
   jobPath,
@@ -338,44 +548,68 @@ const publishFailure = async ({
   jobValue,
   status,
   stage,
+  fatalObservation,
   violations,
   executedAt,
-}) => {
+}) {
+  let environment;
   try {
-    const environment = await observePresentationMeaningInformationNodeEnvironmentV001({
+    environment = await observePresentationMeaningInformationNodeEnvironmentV001({
       executedAt,
     });
-    const report = buildPresentationMeaningInformationFailureReportV001({
+  } catch (error) {
+    return formalRunnerFatalResult(meaningFatalObservation({
+      innerStage: 'runner-bootstrap',
+      evidence: {kind: 'node-error', code: error?.code ?? null},
+    }));
+  }
+  let report;
+  let bytes;
+  try {
+    report = buildPresentationMeaningInformationFailureReportV001({
       jobPath,
       jobBytes,
       jobValue,
       status,
       stage,
+      fatalObservation,
       violations,
       environment,
     });
     const jobFileSha256 = hash(jobBytes);
     const directoryPath = `${FAILURE_ROOT}/${pathJobId}/${jobFileSha256}`;
-    const bytes = serializePresentationMeaningInformationFormalJsonV001(report);
-    const published = await publishOneFileRoot({
+    bytes = serializePresentationMeaningInformationFormalJsonV001(report);
+    const published = await publishPresentationMeaningInformationFailureReportFileV002({
       workspaceRoot,
       directoryPath,
       fileName: 'failure-report.json',
       bytes,
     });
-    if (published.status !== 'published') throw new Error('failure-target-exists');
+    if (published.status === 'fatal') {
+      return formalRunnerFatalResult(published.fatalObservation);
+    }
     return {status, exitCode: status === 'rejected' ? 1 : 2, failureReport: report, bytes};
   } catch {
-    return {status: 'fatal', exitCode: 2, failureReport: null, bytes: null};
+    return formalRunnerFatalResult(meaningFatalObservation({
+      innerStage: 'formal-serialization',
+      evidence: {kind: 'formal-json-value-invalid'},
+    }));
   }
-};
+}
 
-const codeFailure = async (context, code, pointer) => publishFailure({
+const codeFailure = async (context, code, pointer) =>
+  publishPresentationMeaningInformationFailureV002({
   ...context,
   status: code === 'MEANING_PUBLICATION_FAILED' ? 'fatal' : 'rejected',
   stage: CODE_STAGE[code],
+  fatalObservation: code === 'MEANING_PUBLICATION_FAILED'
+    ? meaningFatalObservation({
+      innerStage: 'publication',
+      evidence: {kind: 'publication-failed'},
+    })
+    : null,
   violations: [makePresentationMeaningInformationViolationV001(code, pointer)],
-});
+  });
 
 export function inspectPresentationMeaningPackageDeterminismV001(firstBytes, secondBytes) {
   if (!Buffer.isBuffer(firstBytes) || !Buffer.isBuffer(secondBytes)) {
@@ -416,14 +650,23 @@ export function inspectPresentationMeaningPublicationExceptionV001(error) {
   });
 }
 
-const fatalFailure = async (context, stage) => publishFailure({
+const fatalFailure = async (context, stage, fatalObservation = meaningFatalObservation()) =>
+  publishPresentationMeaningInformationFailureV002({
   ...context,
   status: 'fatal',
   stage,
+  fatalObservation,
   violations: [],
-});
+  });
 
-const trackBinding = (tracked, binding, code, pointer, readMode = 'buffer') => {
+const trackBinding = (
+  tracked,
+  binding,
+  code,
+  pointer,
+  readMode = 'buffer',
+  sourceField = 'tracked-input',
+) => {
   const item = {
     path: binding.path,
     fileSha256: binding.fileSha256,
@@ -431,19 +674,35 @@ const trackBinding = (tracked, binding, code, pointer, readMode = 'buffer') => {
     pointer,
   };
   if (readMode === 'streaming-sha256') item.readMode = readMode;
+  item.sourceField = sourceField;
   tracked.push(item);
 };
 
 export async function inspectPresentationMeaningTrackedInputsBeforePublicationV001({
   workspaceRoot,
   tracked,
+  jobPath,
+  jobBytes,
+  timelineDecisionObservation,
 }) {
+  const decodedJob = Buffer.isBuffer(jobBytes) ? decodeStrict(jobBytes) : null;
+  const sourceRecordVerified = decodedJob !== null
+    && typeof jobPath === 'string'
+    && validatePresentationMeaningInformationPackageJobV001(decodedJob);
+  const verifiedTargetSources = sourceRecordVerified
+    ? buildMeaningVerifiedTargetSources({
+      job: decodedJob,
+      jobPath,
+      jobBytes,
+      timelineDecisionObservation,
+    })
+    : Object.freeze([]);
   const deduplicated = new Map();
   for (const item of tracked) {
     if (!deduplicated.has(item.path)) deduplicated.set(item.path, item);
   }
-  try {
-    for (const item of deduplicated.values()) {
+  for (const item of deduplicated.values()) {
+    try {
       const observedSha256 = item.readMode === 'streaming-sha256'
         ? (await observePresentationMeaningWorkspaceFileStableStreamingV001({
           workspaceRoot,
@@ -453,9 +712,33 @@ export async function inspectPresentationMeaningTrackedInputsBeforePublicationV0
       if (observedSha256 !== item.fileSha256) {
         return Object.freeze({status: 'rejected', changed: item});
       }
+    } catch (error) {
+      const innerStage = item.readMode === 'streaming-sha256'
+        ? 'source-media-read'
+        : 'input-read';
+      const source = deriveUniqueMeaningVerifiedTargetSource({
+        binding: item,
+        verifiedTargetSources,
+      });
+      return Object.freeze({
+        status: 'fatal',
+        stage: 'input-read',
+        fatalObservation: meaningFatalObservation({
+          innerStage,
+          evidence: {kind: 'node-error', code: error?.code ?? null},
+          targetFile: source === null
+            ? null
+            : selectPresentationFatalTargetFileV002({
+              boundaryId: 'meaning-information-package',
+              sourceField: source.sourceField,
+              path: item.path,
+              fileSha256: item.fileSha256,
+              verifiedTargetSources,
+              sourceRecordVerified,
+            }),
+        }),
+      });
     }
-  } catch {
-    return Object.freeze({status: 'fatal', stage: 'input-read'});
   }
   return Object.freeze({status: 'passed'});
 }
@@ -475,9 +758,33 @@ const validateSemanticProjections = ({semanticValidation, semanticSelection, cap
     && same(semanticValidation.captionProjection, captionProjection);
 };
 
-const validateSourceIdentityAndMedia = async ({workspaceRoot, source, tracked}) => {
-  const identity = await observeJsonBinding(workspaceRoot, source.sourceIdentityBinding);
-  trackBinding(tracked, source.sourceIdentityBinding, 'SOURCE_IDENTITY_INVALID', '/timelineDecision/sourceMedia');
+const validateSourceIdentityAndMedia = async ({
+  workspaceRoot,
+  source,
+  tracked,
+  verifiedTargetSources,
+}) => {
+  let identity;
+  try {
+    identity = await observeJsonBinding(workspaceRoot, source.sourceIdentityBinding);
+  } catch (error) {
+    throw new PresentationMeaningInformationFatalError(meaningFatalObservation({
+      innerStage: 'input-read',
+      evidence: {kind: 'node-error', code: error?.code ?? null},
+      targetFile: selectMeaningFatalTarget({
+        binding: source.sourceIdentityBinding,
+        verifiedTargetSources,
+      }),
+    }));
+  }
+  trackBinding(
+    tracked,
+    source.sourceIdentityBinding,
+    'SOURCE_IDENTITY_INVALID',
+    '/timelineDecision/sourceMedia',
+    'buffer',
+    'timelineDecision.sourceMedia[*].sourceIdentityBinding',
+  );
   if (identity.status !== 'passed'
     || !validatePresentationSourceIdentityV001(identity.value)
     || identity.value.sourceRef !== source.sourceRef) {
@@ -486,13 +793,26 @@ const validateSourceIdentityAndMedia = async ({workspaceRoot, source, tracked}) 
   if (!same(identity.value.executionMedia, source.mediaBinding)) {
     return {code: 'SOURCE_MEDIA_BINDING_MISMATCH', pointer: '/timelineDecision/sourceMedia'};
   }
-  const media = await observeStreamingMediaBinding(workspaceRoot, source.mediaBinding);
+  let media;
+  try {
+    media = await observeStreamingMediaBinding(workspaceRoot, source.mediaBinding);
+  } catch (error) {
+    throw new PresentationMeaningInformationFatalError(meaningFatalObservation({
+      innerStage: 'source-media-read',
+      evidence: {kind: 'node-error', code: error?.code ?? null},
+      targetFile: selectMeaningFatalTarget({
+        binding: source.mediaBinding,
+        verifiedTargetSources,
+      }),
+    }));
+  }
   trackBinding(
     tracked,
     source.mediaBinding,
     'SOURCE_MEDIA_BINDING_MISMATCH',
     '/timelineDecision/sourceMedia',
     'streaming-sha256',
+    'timelineDecision.sourceMedia[*].mediaBinding',
   );
   if (media.status !== 'passed') {
     return {code: 'SOURCE_MEDIA_BINDING_MISMATCH', pointer: '/timelineDecision/sourceMedia'};
@@ -508,7 +828,15 @@ const validateSourceIdentityAndMedia = async ({workspaceRoot, source, tracked}) 
     if (!validateMediaBinding(binding)) {
       return {code: 'SOURCE_IDENTITY_INVALID', pointer: '/timelineDecision/sourceMedia'};
     }
-    const observed = await observeMediaBinding(workspaceRoot, binding);
+    let observed;
+    try {
+      observed = await observeMediaBinding(workspaceRoot, binding);
+    } catch (error) {
+      throw new PresentationMeaningInformationFatalError(meaningFatalObservation({
+        innerStage: 'input-read',
+        evidence: {kind: 'node-error', code: error?.code ?? null},
+      }));
+    }
     trackBinding(tracked, binding, 'SOURCE_IDENTITY_INVALID', '/timelineDecision/sourceMedia');
     if (observed.status !== 'passed') {
       return {code: 'SOURCE_IDENTITY_INVALID', pointer: '/timelineDecision/sourceMedia'};
@@ -517,13 +845,37 @@ const validateSourceIdentityAndMedia = async ({workspaceRoot, source, tracked}) 
   return null;
 };
 
-const readRetainedSource = async ({workspaceRoot, source, tracked}) => {
+const readRetainedSource = async ({
+  workspaceRoot,
+  source,
+  tracked,
+  verifiedTargetSources,
+}) => {
   const names = ['sourceAtoms', 'generationManifest', 'validationReport'];
   const observed = {};
   for (const name of names) {
     const binding = source.retainedSourceAtomsBinding[name];
-    const result = await observeJsonBinding(workspaceRoot, binding);
-    trackBinding(tracked, binding, 'RETAINED_ATOMS_BINDING_MISMATCH', '/retainedSources');
+    let result;
+    try {
+      result = await observeJsonBinding(workspaceRoot, binding);
+    } catch (error) {
+      throw new PresentationMeaningInformationFatalError(meaningFatalObservation({
+        innerStage: 'input-read',
+        evidence: {kind: 'node-error', code: error?.code ?? null},
+        targetFile: selectMeaningFatalTarget({
+          binding,
+          verifiedTargetSources,
+        }),
+      }));
+    }
+    trackBinding(
+      tracked,
+      binding,
+      'RETAINED_ATOMS_BINDING_MISMATCH',
+      '/retainedSources',
+      'buffer',
+      `timelineDecision.sourceMedia[*].retainedSourceAtomsBinding.${name}`,
+    );
     if (result.status === 'binding-mismatch') {
       return {status: 'rejected', code: 'RETAINED_ATOMS_BINDING_MISMATCH'};
     }
@@ -564,22 +916,25 @@ export async function runPresentationMeaningInformationPackageJobV001({
   executedAt = new Date().toISOString(),
 }) {
   if (typeof workspaceRoot !== 'string' || typeof jobPath !== 'string' || !UTC.test(executedAt)) {
-    return {status: 'fatal', exitCode: 2, failureReport: null, bytes: null};
+    return formalRunnerFatalResult(meaningFatalObservation());
   }
   const prefix = `${JOB_ROOT}/`;
   if (!jobPath.startsWith(prefix) || !jobPath.endsWith('.json')
     || jobPath.slice(prefix.length, -5).includes('/')) {
-    return {status: 'fatal', exitCode: 2, failureReport: null, bytes: null};
+    return formalRunnerFatalResult(meaningFatalObservation());
   }
   const pathJobId = jobPath.slice(prefix.length, -5);
   if (!FORMAL_ID.test(pathJobId)) {
-    return {status: 'fatal', exitCode: 2, failureReport: null, bytes: null};
+    return formalRunnerFatalResult(meaningFatalObservation());
   }
   let jobBytes;
   try {
     jobBytes = await readStable(workspaceRoot, jobPath);
-  } catch {
-    return {status: 'fatal', exitCode: 2, failureReport: null, bytes: null};
+  } catch (error) {
+    return formalRunnerFatalResult(meaningFatalObservation({
+      innerStage: 'job-read',
+      evidence: {kind: 'node-error', code: error?.code ?? null},
+    }));
   }
   const decodedJob = decodeStrict(jobBytes);
   const failureContext = {
@@ -596,18 +951,41 @@ export async function runPresentationMeaningInformationPackageJobV001({
     return codeFailure(failureContext, 'MEANING_JOB_INVALID', '/job');
   }
   const job = decodedJob;
+  const jobVerifiedTargetSources = buildMeaningJobVerifiedTargetSources({
+    job,
+    jobPath,
+    jobBytes,
+  });
   const tracked = [{
     path: jobPath,
     fileSha256: hash(jobBytes),
     code: 'MEANING_JOB_BINDING_MISMATCH',
     pointer: '/job',
+    sourceField: 'job',
   }];
   for (const binding of [...job.implementationBindings, ...job.approvedContractBindings]) {
+    const sourceField = job.implementationBindings.includes(binding)
+      ? 'job.implementationBindings[*]'
+      : 'job.approvedContractBindings[*]';
     let bytes;
-    try { bytes = await readStable(workspaceRoot, binding.path); } catch {
-      return fatalFailure(failureContext, 'input-read');
+    try { bytes = await readStable(workspaceRoot, binding.path); } catch (error) {
+      return fatalFailure(failureContext, 'input-read', meaningFatalObservation({
+        innerStage: 'input-read',
+        evidence: {kind: 'node-error', code: error?.code ?? null},
+        targetFile: selectMeaningFatalTarget({
+          binding,
+          verifiedTargetSources: jobVerifiedTargetSources,
+        }),
+      }));
     }
-    trackBinding(tracked, binding, 'MEANING_JOB_BINDING_MISMATCH', '/job');
+    trackBinding(
+      tracked,
+      binding,
+      'MEANING_JOB_BINDING_MISMATCH',
+      '/job',
+      'buffer',
+      sourceField,
+    );
     if (hash(bytes) !== binding.fileSha256) {
       return codeFailure(failureContext, 'MEANING_JOB_BINDING_MISMATCH', '/job');
     }
@@ -616,14 +994,23 @@ export async function runPresentationMeaningInformationPackageJobV001({
   let decisionObserved;
   try {
     decisionObserved = await observeJsonBinding(workspaceRoot, job.timelineCompositionDecisionBinding);
-  } catch {
-    return fatalFailure(failureContext, 'input-read');
+  } catch (error) {
+    return fatalFailure(failureContext, 'input-read', meaningFatalObservation({
+      innerStage: 'input-read',
+      evidence: {kind: 'node-error', code: error?.code ?? null},
+      targetFile: selectMeaningFatalTarget({
+        binding: job.timelineCompositionDecisionBinding,
+        verifiedTargetSources: jobVerifiedTargetSources,
+      }),
+    }));
   }
   trackBinding(
     tracked,
     job.timelineCompositionDecisionBinding,
     'TIMELINE_DECISION_BINDING_MISMATCH',
     '/timelineDecision',
+    'buffer',
+    'job.timelineCompositionDecisionBinding',
   );
   if (decisionObserved.status === 'binding-mismatch') {
     return codeFailure(
@@ -637,23 +1024,55 @@ export async function runPresentationMeaningInformationPackageJobV001({
     return codeFailure(failureContext, 'TIMELINE_DECISION_INVALID', '/timelineDecision');
   }
   const timelineDecision = decisionObserved.value;
+  const timelineDecisionObservation = {
+    binding: job.timelineCompositionDecisionBinding,
+    bytes: decisionObserved.bytes,
+  };
+  const verifiedTargetSources = buildMeaningVerifiedTargetSources({
+    job,
+    jobPath,
+    jobBytes,
+    timelineDecisionObservation,
+  });
 
   const retainedSources = [];
   for (const source of timelineDecision.sourceMedia) {
     let identityFailure;
     try {
-      identityFailure = await validateSourceIdentityAndMedia({workspaceRoot, source, tracked});
-    } catch {
-      return fatalFailure(failureContext, 'input-read');
+      identityFailure = await validateSourceIdentityAndMedia({
+        workspaceRoot,
+        source,
+        tracked,
+        verifiedTargetSources,
+      });
+    } catch (error) {
+      return fatalFailure(
+        failureContext,
+        'input-read',
+        error instanceof PresentationMeaningInformationFatalError
+          ? error.fatalObservation
+          : meaningFatalObservation(),
+      );
     }
     if (identityFailure) {
       return codeFailure(failureContext, identityFailure.code, identityFailure.pointer);
     }
     let retained;
     try {
-      retained = await readRetainedSource({workspaceRoot, source, tracked});
-    } catch {
-      return fatalFailure(failureContext, 'input-read');
+      retained = await readRetainedSource({
+        workspaceRoot,
+        source,
+        tracked,
+        verifiedTargetSources,
+      });
+    } catch (error) {
+      return fatalFailure(
+        failureContext,
+        'input-read',
+        error instanceof PresentationMeaningInformationFatalError
+          ? error.fatalObservation
+          : meaningFatalObservation(),
+      );
     }
     if (retained.status !== 'passed') {
       return codeFailure(failureContext, retained.code, '/retainedSources');
@@ -667,14 +1086,23 @@ export async function runPresentationMeaningInformationPackageJobV001({
       workspaceRoot,
       job.semanticSelectionValidationBinding,
     );
-  } catch {
-    return fatalFailure(failureContext, 'input-read');
+  } catch (error) {
+    return fatalFailure(failureContext, 'input-read', meaningFatalObservation({
+      innerStage: 'input-read',
+      evidence: {kind: 'node-error', code: error?.code ?? null},
+      targetFile: selectMeaningFatalTarget({
+        binding: job.semanticSelectionValidationBinding,
+        verifiedTargetSources,
+      }),
+    }));
   }
   trackBinding(
     tracked,
     job.semanticSelectionValidationBinding,
     'MEANING_JOB_BINDING_MISMATCH',
     '/job',
+    'buffer',
+    'job.semanticSelectionValidationBinding',
   );
   if (semanticValidationObserved.status !== 'passed') {
     return semanticValidationObserved.status === 'binding-mismatch'
@@ -694,14 +1122,23 @@ export async function runPresentationMeaningInformationPackageJobV001({
       workspaceRoot,
       semanticValidation.sourcePackageBinding,
     );
-  } catch {
-    return fatalFailure(failureContext, 'input-read');
+  } catch (error) {
+    return fatalFailure(failureContext, 'input-read', meaningFatalObservation({
+      innerStage: 'input-read',
+      evidence: {kind: 'node-error', code: error?.code ?? null},
+      targetFile: selectMeaningFatalTarget({
+        binding: semanticValidation.sourcePackageBinding,
+        verifiedTargetSources,
+      }),
+    }));
   }
   trackBinding(
     tracked,
     semanticValidation.sourcePackageBinding,
     'SEMANTIC_VALIDATION_BINDING_MISMATCH',
     '/semanticValidation/sourcePackageBinding',
+    'buffer',
+    'semanticValidation.sourcePackageBinding',
   );
   const sourcePackage = sourcePackageObserved.value;
   if (!validatePresentationMeaningBoundarySourcePackageForMeaningV001(sourcePackage)) {
@@ -717,14 +1154,23 @@ export async function runPresentationMeaningInformationPackageJobV001({
       workspaceRoot,
       job.semanticSelectionBinding,
     );
-  } catch {
-    return fatalFailure(failureContext, 'input-read');
+  } catch (error) {
+    return fatalFailure(failureContext, 'input-read', meaningFatalObservation({
+      innerStage: 'input-read',
+      evidence: {kind: 'node-error', code: error?.code ?? null},
+      targetFile: selectMeaningFatalTarget({
+        binding: job.semanticSelectionBinding,
+        verifiedTargetSources,
+      }),
+    }));
   }
   trackBinding(
     tracked,
     job.semanticSelectionBinding,
     'SEMANTIC_VALIDATION_BINDING_MISMATCH',
     '/semanticValidation/selectionBinding',
+    'buffer',
+    'job.semanticSelectionBinding',
   );
   const semanticSelection = semanticSelectionObserved.value;
   if (!validatePresentationMeaningSelectionWrapperV001(semanticSelection)) {
@@ -855,8 +1301,13 @@ export async function runPresentationMeaningInformationPackageJobV001({
   const reread = await inspectPresentationMeaningTrackedInputsBeforePublicationV001({
     workspaceRoot,
     tracked,
+    jobPath,
+    jobBytes,
+    timelineDecisionObservation,
   });
-  if (reread.status === 'fatal') return fatalFailure(failureContext, 'input-read');
+  if (reread.status === 'fatal') {
+    return fatalFailure(failureContext, 'input-read', reread.fatalObservation);
+  }
   if (reread.status === 'rejected') {
     return codeFailure(failureContext, reread.changed.code, reread.changed.pointer);
   }
@@ -880,13 +1331,14 @@ export async function runPresentationMeaningInformationPackageJobV001({
       fileName: path.basename(job.outputPath),
       bytes: firstBytes,
     });
-    if (published.status !== 'published') {
+    if (published.status === 'target-invalid') {
       return codeFailure(
         failureContext,
         'MEANING_PUBLICATION_TARGET_INVALID',
         '/job/outputPath',
       );
     }
+    if (published.status !== 'published') throw new Error('publication-failed');
   } catch (error) {
     inspectPresentationMeaningPublicationExceptionV001(error);
     return codeFailure(failureContext, 'MEANING_PUBLICATION_FAILED', '/job/outputPath');
@@ -902,8 +1354,15 @@ export async function runPresentationMeaningInformationPackageJobV001({
 
 export async function runPresentationMeaningInformationPackageJobCliV001(
   argv = process.argv.slice(2),
+  streams = {stdout: process.stdout},
 ) {
-  if (!Array.isArray(argv) || argv.length !== 1) return 2;
+  const writer = chunk => streams.stdout.write(chunk);
+  if (!Array.isArray(argv) || argv.length !== 1) {
+    return writePresentationMeaningInformationPackageCliResultV001(
+      formalRunnerFatalResult(meaningFatalObservation()),
+      writer,
+    );
+  }
   let result;
   try {
     result = await runPresentationMeaningInformationPackageJobV001({
@@ -911,9 +1370,19 @@ export async function runPresentationMeaningInformationPackageJobCliV001(
       jobPath: argv[0],
     });
   } catch {
-    return 2;
+    return writePresentationMeaningInformationPackageCliResultV001(
+      formalRunnerFatalResult(meaningFatalObservation()),
+      writer,
+    );
   }
-  if (result.bytes) process.stdout.write(result.bytes);
+  return writePresentationMeaningInformationPackageCliResultV001(result, writer);
+}
+
+export function writePresentationMeaningInformationPackageCliResultV001(
+  result,
+  writer = chunk => process.stdout.write(chunk),
+) {
+  if (result.bytes) writer(result.bytes);
   return result.exitCode;
 }
 

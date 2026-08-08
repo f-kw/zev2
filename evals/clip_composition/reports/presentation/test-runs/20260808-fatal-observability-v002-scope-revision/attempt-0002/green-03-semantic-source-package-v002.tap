@@ -1,0 +1,60 @@
+TAP version 13
+# Subtest: S01: B3 v002正常jobと固定7 implementation bindingを受理する
+ok 1 - S01: B3 v002正常jobと固定7 implementation bindingを受理する
+  ---
+  duration_ms: 1.113667
+  ...
+# Subtest: S02: 同じbuild入力を2回評価したpackage 7成果物はbyte一致する
+ok 2 - S02: 同じbuild入力を2回評価したpackage 7成果物はbyte一致する
+  ---
+  duration_ms: 8.924958
+  ...
+# Subtest: S03: jobの欠落key・余分key・順序違いを拒否する
+ok 3 - S03: jobの欠落key・余分key・順序違いを拒否する
+  ---
+  duration_ms: 0.202875
+  ...
+# Subtest: S04: v001とv002のjob入口を相互変換しない
+ok 4 - S04: v001とv002のjob入口を相互変換しない
+  ---
+  duration_ms: 0.418916
+  ...
+# Subtest: S05: manifest v002は承認済み14 key順だけを使う
+ok 5 - S05: manifest v002は承認済み14 key順だけを使う
+  ---
+  duration_ms: 0.090209
+  ...
+# Subtest: S06: manifestのformatと表示制約はjob入力をbyte同一で写す
+ok 6 - S06: manifestのformatと表示制約はjob入力をbyte同一で写す
+  ---
+  duration_ms: 0.088833
+  ...
+# Subtest: S07: 幅の0・負数・小数・unsafe integerを拒否する
+ok 7 - S07: 幅の0・負数・小数・unsafe integerを拒否する
+  ---
+  duration_ms: 0.134708
+  ...
+# Subtest: S08: job幅が選択stateの安全上限を超えるとbuild前に拒否する
+ok 8 - S08: job幅が選択stateの安全上限を超えるとbuild前に拒否する
+  ---
+  duration_ms: 0.28925
+  ...
+# Subtest: S09: 共有B3 coreはcandidate ID・素材SHA・縦長幅14を埋め込まない
+ok 9 - S09: 共有B3 coreはcandidate ID・素材SHA・縦長幅14を埋め込まない
+  ---
+  duration_ms: 0.689542
+  ...
+# Subtest: S10: B3 runnerはexit 0・1・2を単一JSON stdoutとstderr 0へ固定する
+ok 10 - S10: B3 runnerはexit 0・1・2を単一JSON stdoutとstderr 0へ固定する
+  ---
+  duration_ms: 1.029708
+  ...
+1..10
+# tests 10
+# suites 0
+# pass 10
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 135.347541

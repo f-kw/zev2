@@ -21,6 +21,9 @@ import {
 import {
   PRESENTATION_RENDERER_QC_VIOLATION_CODES,
 } from './presentation_renderer_qc_v002.mjs';
+import {
+  validatePresentationFatalObservationV002,
+} from './presentation_fatal_observation_v002.mjs';
 
 export {derivePresentationOutputMeaningProjectionV001};
 
@@ -32,8 +35,8 @@ export const PRESENTATION_OUTPUT_RENDER_QC_SCHEMA_V001 =
   'presentation-output-render-qc-v001';
 export const PRESENTATION_OUTPUT_RENDER_MANIFEST_SCHEMA_V001 =
   'presentation-output-render-manifest-v001';
-export const PRESENTATION_OUTPUT_RENDER_FAILURE_REPORT_SCHEMA_V001 =
-  'presentation-output-render-failure-report-v001';
+export const PRESENTATION_OUTPUT_RENDER_FAILURE_REPORT_SCHEMA_V002 =
+  'presentation-output-render-failure-report-v002';
 
 export const PRESENTATION_OUTPUT_RENDER_DIAGNOSTIC_CODES_V001 = Object.freeze([
   'OUTPUT_RENDER_CORE_CONTRACT_FAILED',
@@ -775,7 +778,7 @@ export function validatePresentationOutputRenderManifestV001(value, context = {}
   return {status: 'passed'};
 }
 
-export function buildPresentationOutputRenderFailureReportV001({
+export function buildPresentationOutputRenderFailureReportV002({
   outputId,
   formalJobFileSha256,
   status,
@@ -785,10 +788,11 @@ export function buildPresentationOutputRenderFailureReportV001({
   acceptanceReportBinding,
   renderPlanBinding,
   failureObservation,
+  fatalObservation,
   retainedSafetyArtifacts = [],
 }) {
   return {
-    schemaVersion: PRESENTATION_OUTPUT_RENDER_FAILURE_REPORT_SCHEMA_V001,
+    schemaVersion: PRESENTATION_OUTPUT_RENDER_FAILURE_REPORT_SCHEMA_V002,
     failureId: `${outputId}-render-failure-${formalJobFileSha256.slice(0, 32)}`,
     status,
     stage,
@@ -797,6 +801,7 @@ export function buildPresentationOutputRenderFailureReportV001({
     acceptanceReportBinding,
     renderPlanBinding,
     failureObservation,
+    fatalObservation,
     retainedSafetyArtifacts,
   };
 }
@@ -890,7 +895,7 @@ export function projectPresentationOutputRendererViolationsV001({
   return {status: 'passed', violations: projected};
 }
 
-export function validatePresentationOutputRenderFailureReportV001(value, context = {}) {
+export function validatePresentationOutputRenderFailureReportV002(value, context = {}) {
   if (!exactKeys(context, [
     'rendererCodes', 'outputId', 'formalJobFileSha256',
     'formalOutputJobBinding', 'outputRequestBinding',
@@ -911,9 +916,9 @@ export function validatePresentationOutputRenderFailureReportV001(value, context
   let valid = exactKeys(value, [
     'schemaVersion', 'failureId', 'status', 'stage', 'formalOutputJobBinding',
     'outputRequestBinding', 'acceptanceReportBinding', 'renderPlanBinding',
-    'failureObservation', 'retainedSafetyArtifacts',
+    'failureObservation', 'fatalObservation', 'retainedSafetyArtifacts',
   ])
-    && value.schemaVersion === PRESENTATION_OUTPUT_RENDER_FAILURE_REPORT_SCHEMA_V001
+    && value.schemaVersion === PRESENTATION_OUTPUT_RENDER_FAILURE_REPORT_SCHEMA_V002
     && value.failureId
       === `${context.outputId}-render-failure-${context.formalJobFileSha256.slice(0, 32)}`
     && ['rejected', 'fatal'].includes(value.status)
@@ -939,6 +944,9 @@ export function validatePresentationOutputRenderFailureReportV001(value, context
     ))
     && PRESENTATION_OUTPUT_RENDER_DIAGNOSTIC_CODES_V001
       .includes(value.failureObservation.diagnosticCode)
+    && (value.status === 'fatal'
+      ? validatePresentationFatalObservationV002(value.fatalObservation)
+      : value.fatalObservation === null)
     && dense(value.retainedSafetyArtifacts)
     && value.retainedSafetyArtifacts.every(item => exactKeys(item, ['code', 'path'])
       && [

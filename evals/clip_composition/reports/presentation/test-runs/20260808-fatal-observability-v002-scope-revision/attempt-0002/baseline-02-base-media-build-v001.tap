@@ -1,0 +1,335 @@
+TAP version 13
+# Subtest: strict job, decision, tool and manifest contracts reject unknown or changed facts
+ok 1 - strict job, decision, tool and manifest contracts reject unknown or changed facts
+  ---
+  duration_ms: 4.225125
+  ...
+# Subtest: 30fps source without audio builds only the approved disjoint frame intervals
+not ok 2 - 30fps source without audio builds only the approved disjoint frame intervals
+  ---
+  duration_ms: 712.250083
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_base_media_build_v001.test.mjs:427:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    [{"code":"BASE_MEDIA_TOOL_PROFILE_MISMATCH","path":"$implementationFiles","relatedIds":[],"details":{"actual":"a81d583d877e7e8a5410831f4a18bca18be08c92d28d6349d9a089fb9368086c","expected":"0fcb9f9c6b0ae2f50b4ca68ba1190c75dc0acfe9e7d27a3d504bd46a5d4ce789","path":"evals/clip_composition/presentation_caption_contract_v002.mjs","retainedBuildPaths":{"lockFile":null,"policy":"retain-without-automatic-delete-v001","publicationTemporaryDirectory":null,"workingDirectory":null}}}]
+    
+    1 !== 0
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 0
+  actual: 1
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_base_media_build_v001.test.mjs:434:10)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: 60fps globally takes even source frames and produces the same 30fps frame grid
+not ok 3 - 60fps globally takes even source frames and produces the same 30fps frame grid
+  ---
+  duration_ms: 553.713916
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_base_media_build_v001.test.mjs:493:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    [{"code":"BASE_MEDIA_TOOL_PROFILE_MISMATCH","path":"$implementationFiles","relatedIds":[],"details":{"actual":"a81d583d877e7e8a5410831f4a18bca18be08c92d28d6349d9a089fb9368086c","expected":"0fcb9f9c6b0ae2f50b4ca68ba1190c75dc0acfe9e7d27a3d504bd46a5d4ce789","path":"evals/clip_composition/presentation_caption_contract_v002.mjs","retainedBuildPaths":{"lockFile":null,"policy":"retain-without-automatic-delete-v001","publicationTemporaryDirectory":null,"workingDirectory":null}}}]
+    + actual - expected
+    
+    + 'failed'
+    - 'passed'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'passed'
+  actual: 'failed'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_base_media_build_v001.test.mjs:500:10)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: 60fps・181 decoded framesの最後のglobal-even frame 180を媒体終端までの区間で選べる
+not ok 4 - 60fps・181 decoded framesの最後のglobal-even frame 180を媒体終端までの区間で選べる
+  ---
+  duration_ms: 834.746375
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_base_media_build_v001.test.mjs:512:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    [{"code":"BASE_MEDIA_TOOL_PROFILE_MISMATCH","path":"$implementationFiles","relatedIds":[],"details":{"actual":"a81d583d877e7e8a5410831f4a18bca18be08c92d28d6349d9a089fb9368086c","expected":"0fcb9f9c6b0ae2f50b4ca68ba1190c75dc0acfe9e7d27a3d504bd46a5d4ce789","path":"evals/clip_composition/presentation_caption_contract_v002.mjs","retainedBuildPaths":{"lockFile":null,"policy":"retain-without-automatic-delete-v001","publicationTemporaryDirectory":null,"workingDirectory":null}}}]
+    + actual - expected
+    
+    + 'failed'
+    - 'passed'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'passed'
+  actual: 'failed'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_base_media_build_v001.test.mjs:524:10)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: 60fps・181 decoded framesの48kHz AAC末尾は実在sampleだけを使いvideo-only尾を明示する
+not ok 5 - 60fps・181 decoded framesの48kHz AAC末尾は実在sampleだけを使いvideo-only尾を明示する
+  ---
+  duration_ms: 867.946458
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_base_media_build_v001.test.mjs:539:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    [{"code":"BASE_MEDIA_TOOL_PROFILE_MISMATCH","path":"$implementationFiles","relatedIds":[],"details":{"actual":"a81d583d877e7e8a5410831f4a18bca18be08c92d28d6349d9a089fb9368086c","expected":"0fcb9f9c6b0ae2f50b4ca68ba1190c75dc0acfe9e7d27a3d504bd46a5d4ce789","path":"evals/clip_composition/presentation_caption_contract_v002.mjs","retainedBuildPaths":{"lockFile":null,"policy":"retain-without-automatic-delete-v001","publicationTemporaryDirectory":null,"workingDirectory":null}}}]
+    + actual - expected
+    
+    + 'failed'
+    - 'passed'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'passed'
+  actual: 'failed'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_base_media_build_v001.test.mjs:553:10)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: 44100Hz audio uses video-frame sample boundaries and keeps exact presentation duration
+not ok 6 - 44100Hz audio uses video-frame sample boundaries and keeps exact presentation duration
+  ---
+  duration_ms: 339.320917
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_base_media_build_v001.test.mjs:589:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    [{"code":"BASE_MEDIA_TOOL_PROFILE_MISMATCH","path":"$implementationFiles","relatedIds":[],"details":{"actual":"a81d583d877e7e8a5410831f4a18bca18be08c92d28d6349d9a089fb9368086c","expected":"0fcb9f9c6b0ae2f50b4ca68ba1190c75dc0acfe9e7d27a3d504bd46a5d4ce789","path":"evals/clip_composition/presentation_caption_contract_v002.mjs","retainedBuildPaths":{"lockFile":null,"policy":"retain-without-automatic-delete-v001","publicationTemporaryDirectory":null,"workingDirectory":null}}}]
+    
+    1 !== 0
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 0
+  actual: 1
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_base_media_build_v001.test.mjs:597:12)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: 48000Hz audio uses video-frame sample boundaries and keeps exact presentation duration
+not ok 7 - 48000Hz audio uses video-frame sample boundaries and keeps exact presentation duration
+  ---
+  duration_ms: 338.505791
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_base_media_build_v001.test.mjs:589:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    [{"code":"BASE_MEDIA_TOOL_PROFILE_MISMATCH","path":"$implementationFiles","relatedIds":[],"details":{"actual":"a81d583d877e7e8a5410831f4a18bca18be08c92d28d6349d9a089fb9368086c","expected":"0fcb9f9c6b0ae2f50b4ca68ba1190c75dc0acfe9e7d27a3d504bd46a5d4ce789","path":"evals/clip_composition/presentation_caption_contract_v002.mjs","retainedBuildPaths":{"lockFile":null,"policy":"retain-without-automatic-delete-v001","publicationTemporaryDirectory":null,"workingDirectory":null}}}]
+    
+    1 !== 0
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 0
+  actual: 1
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_base_media_build_v001.test.mjs:597:12)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: positive source audio PTS is preserved as zero-filled canonical PCM instead of moving speech forward
+not ok 8 - positive source audio PTS is preserved as zero-filled canonical PCM instead of moving speech forward
+  ---
+  duration_ms: 335.084333
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_base_media_build_v001.test.mjs:630:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    [{"code":"BASE_MEDIA_TOOL_PROFILE_MISMATCH","path":"$implementationFiles","relatedIds":[],"details":{"actual":"a81d583d877e7e8a5410831f4a18bca18be08c92d28d6349d9a089fb9368086c","expected":"0fcb9f9c6b0ae2f50b4ca68ba1190c75dc0acfe9e7d27a3d504bd46a5d4ce789","path":"evals/clip_composition/presentation_caption_contract_v002.mjs","retainedBuildPaths":{"lockFile":null,"policy":"retain-without-automatic-delete-v001","publicationTemporaryDirectory":null,"workingDirectory":null}}}]
+    
+    1 !== 0
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 0
+  actual: 1
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_base_media_build_v001.test.mjs:639:10)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: an internal audio PTS gap remains silent between real PCM before and after it
+not ok 9 - an internal audio PTS gap remains silent between real PCM before and after it
+  ---
+  duration_ms: 359.864333
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_base_media_build_v001.test.mjs:653:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    [{"code":"BASE_MEDIA_TOOL_PROFILE_MISMATCH","path":"$implementationFiles","relatedIds":[],"details":{"actual":"a81d583d877e7e8a5410831f4a18bca18be08c92d28d6349d9a089fb9368086c","expected":"0fcb9f9c6b0ae2f50b4ca68ba1190c75dc0acfe9e7d27a3d504bd46a5d4ce789","path":"evals/clip_composition/presentation_caption_contract_v002.mjs","retainedBuildPaths":{"lockFile":null,"policy":"retain-without-automatic-delete-v001","publicationTemporaryDirectory":null,"workingDirectory":null}}}]
+    
+    1 !== 0
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 0
+  actual: 1
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_base_media_build_v001.test.mjs:660:10)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: source audio without both stream and packet presentation clocks is rejected without decoded fallback
+ok 10 - source audio without both stream and packet presentation clocks is rejected without decoded fallback
+  ---
+  duration_ms: 571.342333
+  ...
+# Subtest: non-contiguous selected tone segments preserve approved segment order in decoded PCM
+not ok 11 - non-contiguous selected tone segments preserve approved segment order in decoded PCM
+  ---
+  duration_ms: 349.675458
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_base_media_build_v001.test.mjs:686:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    [{"code":"BASE_MEDIA_TOOL_PROFILE_MISMATCH","path":"$implementationFiles","relatedIds":[],"details":{"actual":"a81d583d877e7e8a5410831f4a18bca18be08c92d28d6349d9a089fb9368086c","expected":"0fcb9f9c6b0ae2f50b4ca68ba1190c75dc0acfe9e7d27a3d504bd46a5d4ce789","path":"evals/clip_composition/presentation_caption_contract_v002.mjs","retainedBuildPaths":{"lockFile":null,"policy":"retain-without-automatic-delete-v001","publicationTemporaryDirectory":null,"workingDirectory":null}}}]
+    
+    1 !== 0
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 0
+  actual: 1
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_base_media_build_v001.test.mjs:696:10)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: stereo FL and FR channel order remains distinguishable in real decoded PCM
+not ok 12 - stereo FL and FR channel order remains distinguishable in real decoded PCM
+  ---
+  duration_ms: 338.086875
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_base_media_build_v001.test.mjs:704:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    [{"code":"BASE_MEDIA_TOOL_PROFILE_MISMATCH","path":"$implementationFiles","relatedIds":[],"details":{"actual":"a81d583d877e7e8a5410831f4a18bca18be08c92d28d6349d9a089fb9368086c","expected":"0fcb9f9c6b0ae2f50b4ca68ba1190c75dc0acfe9e7d27a3d504bd46a5d4ce789","path":"evals/clip_composition/presentation_caption_contract_v002.mjs","retainedBuildPaths":{"lockFile":null,"policy":"retain-without-automatic-delete-v001","publicationTemporaryDirectory":null,"workingDirectory":null}}}]
+    
+    1 !== 0
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 0
+  actual: 1
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_base_media_build_v001.test.mjs:711:10)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: raw millisecond endpoint beyond decoded source is rejected before frame rounding can hide it
+ok 13 - raw millisecond endpoint beyond decoded source is rejected before frame rounding can hide it
+  ---
+  duration_ms: 0.564542
+  ...
+# Subtest: audio presentation shortfall is allowed only at the exact decoded-media terminal segment
+ok 14 - audio presentation shortfall is allowed only at the exact decoded-media terminal segment
+  ---
+  duration_ms: 0.405584
+  ...
+# Subtest: unsafe symlink is rejected before reading and existing output is never overwritten
+not ok 15 - unsafe symlink is rejected before reading and existing output is never overwritten
+  ---
+  duration_ms: 333.969917
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_base_media_build_v001.test.mjs:764:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    The expression evaluated to a falsy value:
+    
+      assert.ok(result.violations.some((item) => item.code === 'BASE_MEDIA_OUTPUT_PATH_UNSAFE'))
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: '=='
+  stack: |-
+    TestContext.<anonymous> (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_base_media_build_v001.test.mjs:782:10)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: parent directory replaced by symlink during processing is rejected immediately before publish
+ok 16 - parent directory replaced by symlink during processing is rejected immediately before publish
+  ---
+  duration_ms: 2.545167
+  ...
+# Subtest: basis declaration is checked against actual JSON kind and direct execution has no synthetic job-hash fallback
+not ok 17 - basis declaration is checked against actual JSON kind and direct execution has no synthetic job-hash fallback
+  ---
+  duration_ms: 339.039666
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_base_media_build_v001.test.mjs:817:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'BASE_MEDIA_TOOL_PROFILE_MISMATCH'
+    - 'ASSEMBLY_DECISION_BASIS_MISMATCH'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'ASSEMBLY_DECISION_BASIS_MISMATCH'
+  actual: 'BASE_MEDIA_TOOL_PROFILE_MISMATCH'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_base_media_build_v001.test.mjs:846:10)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: logical build is deterministic across two job ids and output directories
+not ok 18 - logical build is deterministic across two job ids and output directories
+  ---
+  duration_ms: 361.412875
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_base_media_build_v001.test.mjs:863:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    [{"code":"BASE_MEDIA_TOOL_PROFILE_MISMATCH","path":"$implementationFiles","relatedIds":[],"details":{"actual":"a81d583d877e7e8a5410831f4a18bca18be08c92d28d6349d9a089fb9368086c","expected":"0fcb9f9c6b0ae2f50b4ca68ba1190c75dc0acfe9e7d27a3d504bd46a5d4ce789","path":"evals/clip_composition/presentation_caption_contract_v002.mjs","retainedBuildPaths":{"lockFile":null,"policy":"retain-without-automatic-delete-v001","publicationTemporaryDirectory":null,"workingDirectory":null}}}]
+    + actual - expected
+    
+    + 'failed'
+    - 'passed'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'passed'
+  actual: 'failed'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_base_media_build_v001.test.mjs:879:10)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: CLI distinguishes invalid validated input from an unreadable path
+ok 19 - CLI distinguishes invalid validated input from an unreadable path
+  ---
+  duration_ms: 92.885959
+  ...
+# Subtest: every fixed violation code fires from its validator, binding, QC stage, or filesystem path
+not ok 20 - every fixed violation code fires from its validator, binding, QC stage, or filesystem path
+  ---
+  duration_ms: 2225.436708
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_base_media_build_v001.test.mjs:894:1'
+  failureType: 'testCodeFailure'
+  error: '失敗経路は掃除より安全を優先して残留させる'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: '=='
+  stack: |-
+    TestContext.<anonymous> (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_base_media_build_v001.test.mjs:1072:10)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+1..20
+# tests 20
+# suites 0
+# pass 6
+# fail 14
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 9087.837583

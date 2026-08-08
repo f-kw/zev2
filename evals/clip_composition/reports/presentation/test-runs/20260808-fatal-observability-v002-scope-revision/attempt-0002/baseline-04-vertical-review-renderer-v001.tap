@@ -1,0 +1,142 @@
+TAP version 13
+# Subtest: V01: speaker_onlyの正常viewportを共通crop計算へ渡す
+ok 1 - V01: speaker_onlyの正常viewportを共通crop計算へ渡す
+  ---
+  duration_ms: 10.78475
+  ...
+# Subtest: V02: 必須viewport欠落を拒否する
+ok 2 - V02: 必須viewport欠落を拒否する
+  ---
+  duration_ms: 0.479541
+  ...
+# Subtest: V03: 余分なviewportを拒否する
+ok 3 - V03: 余分なviewportを拒否する
+  ---
+  duration_ms: 0.083041
+  ...
+# Subtest: V04: 非有限・範囲外・逆転viewportを拒否する
+ok 4 - V04: 非有限・範囲外・逆転viewportを拒否する
+  ---
+  duration_ms: 0.116708
+  ...
+# Subtest: V05: crop decisionの入力SHA差し替えを専用codeへ帰属できる
+ok 5 - V05: crop decisionの入力SHA差し替えを専用codeへ帰属できる
+  ---
+  duration_ms: 0.204167
+  ...
+# Subtest: V06: screen-layout実装SHA不一致を専用codeへ帰属する
+ok 6 - V06: screen-layout実装SHA不一致を専用codeへ帰属する
+  ---
+  duration_ms: 6.339833
+  ...
+# Subtest: V07: crop filter構築不能を専用違反へ帰属する
+ok 7 - V07: crop filter構築不能を専用違反へ帰属する
+  ---
+  duration_ms: 0.148416
+  ...
+# Subtest: V08: crop後の1080x1920・30fps違反を拒否する
+ok 8 - V08: crop後の1080x1920・30fps違反を拒否する
+  ---
+  duration_ms: 0.120583
+  ...
+# Subtest: V09: frame数変化を拒否する
+ok 9 - V09: frame数変化を拒否する
+  ---
+  duration_ms: 0.066875
+  ...
+# Subtest: V10: 音声packet変化を拒否する
+ok 10 - V10: 音声packet変化を拒否する
+  ---
+  duration_ms: 0.1395
+  ...
+# Subtest: V11: B4明示行と文字modelの行不一致を拒否する
+ok 11 - V11: B4明示行と文字modelの行不一致を拒否する
+  ---
+  duration_ms: 6.042333
+  ...
+# Subtest: V12: 末尾句点を含む明示行はそのまま文字modelを通る
+ok 12 - V12: 末尾句点を含む明示行はそのまま文字modelを通る
+  ---
+  duration_ms: 2.093791
+  ...
+# Subtest: V13: 134px相当のalpha境界内と外を区別する
+ok 13 - V13: 134px相当のalpha境界内と外を区別する
+  ---
+  duration_ms: 0.17875
+  ...
+# Subtest: V14: 版中立QCとfailure所有表は固定されたまま動く
+ok 14 - V14: 版中立QCとfailure所有表は固定されたまま動く
+  ---
+  duration_ms: 0.176
+  ...
+# Subtest: V15: 縦型overlay adapterはfont失敗を許さない
+ok 15 - V15: 縦型overlay adapterはfont失敗を許さない
+  ---
+  duration_ms: 0.117542
+  ...
+# Subtest: V16: 正式Remotion入口は束縛実体とbrowserを必須にする
+ok 16 - V16: 正式Remotion入口は束縛実体とbrowserを必須にする
+  ---
+  duration_ms: 0.153541
+  ...
+# Subtest: V17: 縦型は共通下位描画入口を呼び独自合成器を持たない
+ok 17 - V17: 縦型は共通下位描画入口を呼び独自合成器を持たない
+  ---
+  duration_ms: 0.884416
+  ...
+# Subtest: V18: font check falseもstrict-cancel経路へ固定される
+ok 18 - V18: font check falseもstrict-cancel経路へ固定される
+  ---
+  duration_ms: 0.397791
+  ...
+# Subtest: V19: @zev2/sharedは固定symlinkとruntime exportへ解決する
+ok 19 - V19: @zev2/sharedは固定symlinkとruntime exportへ解決する
+  ---
+  duration_ms: 0.584084
+  ...
+# Subtest: V20: 非crop入力不一致のfailureは15件summaryとして表現する
+ok 20 - V20: 非crop入力不一致のfailureは15件summaryとして表現する
+  ---
+  duration_ms: 0.157666
+  ...
+# Subtest: V21: screen-layout以外の実装不一致は29件summaryへ帰属する
+ok 21 - V21: screen-layout以外の実装不一致は29件summaryへ帰属する
+  ---
+  duration_ms: 0.336292
+  ...
+# Subtest: V22: 生成時renderer来歴と現在実装のlive束縛を分離する
+not ok 22 - V22: 生成時renderer来歴と現在実装のlive束縛を分離する
+  ---
+  duration_ms: 4.263833
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_vertical_review_renderer_v001.test.mjs:386:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'rejected'
+    - 'passed'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'passed'
+  actual: 'rejected'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_vertical_review_renderer_v001.test.mjs:407:10)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: V23: 実crop入口は共通frame数読取処理を通してAVを保持する
+ok 23 - V23: 実crop入口は共通frame数読取処理を通してAVを保持する
+  ---
+  duration_ms: 264.3515
+  ...
+1..23
+# tests 23
+# suites 0
+# pass 22
+# fail 1
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 481.043833

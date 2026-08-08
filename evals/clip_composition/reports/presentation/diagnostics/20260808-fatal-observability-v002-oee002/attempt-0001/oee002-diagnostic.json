@@ -1,0 +1,135 @@
+{
+  "schemaVersion": "presentation-output-oee002-test-diagnostic-v001",
+  "testId": "OEE002",
+  "observed": {
+    "status": "rejected",
+    "exitCode": 1
+  },
+  "acceptanceReport": {
+    "schemaVersion": "presentation-output-acceptance-report-v001",
+    "reportId": "oee-vertical-86993-1-acceptance",
+    "status": "rejected",
+    "requestBinding": {
+      "schemaVersion": "presentation-output-request-v001",
+      "path": "evals/clip_composition/outputs/presentation/meaning-output-control/oee-vertical-86993-1/output-request.json",
+      "fileSha256": "d35091c224d0adc99b4071e41182f26938a7f08d07447cd587f3026564c0bcca",
+      "canonicalSha256": "02fe1fc72a07892ec41e685597baff3001d39aac7195c75d1e94fb5f0d7f824d"
+    },
+    "checks": [
+      {
+        "name": "requestSchema",
+        "status": "passed",
+        "violationCodes": []
+      },
+      {
+        "name": "meaningPackageBinding",
+        "status": "passed",
+        "violationCodes": []
+      },
+      {
+        "name": "meaningPackage",
+        "status": "passed",
+        "violationCodes": []
+      },
+      {
+        "name": "baseMediaInput",
+        "status": "passed",
+        "violationCodes": []
+      },
+      {
+        "name": "sourceMediaCapability",
+        "status": "passed",
+        "violationCodes": []
+      },
+      {
+        "name": "timelineCapability",
+        "status": "passed",
+        "violationCodes": []
+      },
+      {
+        "name": "timelineFrameMapping",
+        "status": "passed",
+        "violationCodes": []
+      },
+      {
+        "name": "styleResolution",
+        "status": "failed",
+        "violationCodes": [
+          "STYLE_BINDING_MISMATCH"
+        ]
+      },
+      {
+        "name": "cropResolution",
+        "status": "blocked",
+        "violationCodes": []
+      },
+      {
+        "name": "captionSourceResolution",
+        "status": "passed",
+        "violationCodes": []
+      },
+      {
+        "name": "captionDisplayLayout",
+        "status": "blocked",
+        "violationCodes": []
+      },
+      {
+        "name": "captionDisplayTimeline",
+        "status": "blocked",
+        "violationCodes": []
+      },
+      {
+        "name": "titleCapability",
+        "status": "blocked",
+        "violationCodes": []
+      },
+      {
+        "name": "meaningPreservation",
+        "status": "blocked",
+        "violationCodes": []
+      },
+      {
+        "name": "publicationTarget",
+        "status": "passed",
+        "violationCodes": []
+      },
+      {
+        "name": "commonRenderPlan",
+        "status": "blocked",
+        "violationCodes": []
+      }
+    ],
+    "violations": [
+      {
+        "code": "STYLE_BINDING_MISMATCH",
+        "path": "/styleInput/presetBinding",
+        "relatedIds": []
+      }
+    ],
+    "timelineProjection": {
+      "sourceMediaCount": 1,
+      "segmentCount": 1,
+      "outputFrameCount": 30,
+      "sourceToOutputMappingCanonicalSha256": "c5a23e210c3c6d56b871ea238b1299e31f2469fd2d6c97e4d77a5449fbfa296d",
+      "baseMediaFileSha256": "f0d3a0ac0e60b5540ca827c566f34ee7ae9c9fc1f5ec325b149da1300409db07"
+    },
+    "captionDisplayProjection": null,
+    "meaningProjection": {
+      "timelineSegmentCount": 1,
+      "captionCount": 1,
+      "titleState": "empty",
+      "semanticObservationCount": 0,
+      "captionTextSequenceCanonicalSha256": "97747f9ae1055853386fa25128b3b22802773771c38e8803078ca98d365814ca",
+      "captionTimingSequenceCanonicalSha256": "55d67b38809c23118d0d521d5d6401ae927a897ab9a7eff122b08a1a79ab11d5",
+      "timelineCompositionCanonicalSha256": "43cf2130acf89fc201c0e5bdf52be37e4757487a43f18f352f36dfbd8508ee18"
+    },
+    "resolvedStyleProjection": null,
+    "renderPlanBinding": null
+  },
+  "failureReport": null,
+  "controlNames": [
+    "output-acceptance-report.json",
+    "output-request.json"
+  ],
+  "renderNames": []
+}

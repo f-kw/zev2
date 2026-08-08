@@ -14,9 +14,6 @@ export const PRESENTATION_MEANING_INFORMATION_PACKAGE_SCHEMA_V001 =
   'zev-meaning-information-package-v001';
 export const PRESENTATION_MEANING_INFORMATION_PACKAGE_JOB_SCHEMA_V001 =
   'zev-meaning-information-package-job-v001';
-export const PRESENTATION_MEANING_INFORMATION_FAILURE_REPORT_SCHEMA_V001 =
-  'zev-meaning-information-failure-report-v001';
-
 export const PRESENTATION_MEANING_INFORMATION_PACKAGE_VIOLATION_CODES_V001 = Object.freeze([
   'MEANING_JOB_INVALID',
   'MEANING_JOB_BINDING_MISMATCH',
@@ -67,6 +64,10 @@ export const PRESENTATION_MEANING_INFORMATION_PACKAGE_IMPLEMENTATION_ROLES_V001 
     Object.freeze({
       role: 'strict-json',
       path: 'evals/clip_composition/presentation_caption_semantic_source_package_v001.mjs',
+    }),
+    Object.freeze({
+      role: 'fatal-observation',
+      path: 'evals/clip_composition/presentation_fatal_observation_v002.mjs',
     }),
   ]);
 
@@ -693,7 +694,7 @@ export const validatePresentationMeaningBoundaryValidationReportV001 = value => 
     || !SHA256.test(value.captionProjection.captionTimingSequenceCanonicalSha256)
     || !SHA256.test(value.captionProjection.captionAtomRefSequenceCanonicalSha256)
     || !dense(value.implementationBindings)
-    || value.implementationBindings.length !== 3
+    || value.implementationBindings.length !== 4
     || !value.implementationBindings.every(validatePresentationMeaningImplementationBindingV001)
     || !same(value.implementationBindings.map(({path: bindingPath, role}) => ({
       path: bindingPath,
@@ -710,6 +711,10 @@ export const validatePresentationMeaningBoundaryValidationReportV001 = value => 
       {
         path: 'evals/clip_composition/presentation_caption_semantic_source_package_v001.mjs',
         role: 'strict-json-codec',
+      },
+      {
+        path: 'evals/clip_composition/presentation_fatal_observation_v002.mjs',
+        role: 'fatal-observation',
       },
     ])) return false;
   return true;

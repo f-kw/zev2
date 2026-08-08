@@ -27,6 +27,11 @@ import {
   publishPresentationMeaningOwnedStagingRootNoReplaceV001,
   readPresentationMeaningWorkspaceFileStableV001,
 } from './presentation_timeline_composition_decision_v001.mjs';
+import {
+  buildPresentationFatalObservationV002,
+  classifyPresentationFatalInnerCodeV002,
+  selectPresentationFatalTargetFileV002,
+} from './presentation_fatal_observation_v002.mjs';
 export {PRESENTATION_MEANING_BOUNDARY_VIOLATION_CODES_V001};
 export {
   validatePresentationMeaningBoundaryB5ManifestV001,
@@ -53,6 +58,8 @@ const SOURCE_PACKAGE_PATH =
   'evals/clip_composition/presentation_meaning_boundary_source_package_v001.mjs';
 const STRICT_JSON_PATH =
   'evals/clip_composition/presentation_caption_semantic_source_package_v001.mjs';
+const FATAL_OBSERVATION_PATH =
+  'evals/clip_composition/presentation_fatal_observation_v002.mjs';
 const FORMAL_ID = /^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$/u;
 const SHA = /^[0-9a-f]{64}$/u;
 const SAFE_PATH = /^(?!\/)(?!.*(?:^|\/)\.{1,2}(?:\/|$))(?!.*\/\/)(?!.*\0).+$/u;
@@ -66,6 +73,7 @@ const IMPLEMENTATION_BINDING_SPECS = Object.freeze([
   Object.freeze({role: 'meaning-selection', path: SELF_PATH}),
   Object.freeze({role: 'meaning-source-package', path: SOURCE_PACKAGE_PATH}),
   Object.freeze({role: 'strict-json-codec', path: STRICT_JSON_PATH}),
+  Object.freeze({role: 'fatal-observation', path: FATAL_OBSERVATION_PATH}),
 ]);
 const CONTRACT_BINDINGS = Object.freeze([
   Object.freeze({
@@ -92,6 +100,128 @@ const exactKeys = (value, keys) => isObject(value)
 const dense = value => Array.isArray(value)
   && Object.keys(value).every((key, index) => key === String(index));
 const same = (left, right) => JSON.stringify(left) === JSON.stringify(right);
+const meaningBoundaryFatalObservation = ({
+  innerStage = 'unknown',
+  evidence = {kind: 'unclassified'},
+  targetFile = null,
+} = {}) => {
+  const innerCode = classifyPresentationFatalInnerCodeV002(evidence);
+  return buildPresentationFatalObservationV002({
+    innerStage: innerCode === 'UNCLASSIFIED' ? 'unknown' : innerStage,
+    targetFile: innerCode === 'UNCLASSIFIED' ? null : targetFile,
+    innerCode,
+  });
+};
+const selectMeaningBoundaryFatalTarget = ({
+  sourceField,
+  binding,
+  verifiedTargetSources,
+  sourceRecordVerified,
+}) =>
+  selectPresentationFatalTargetFileV002({
+    boundaryId: 'meaning-boundary-selection',
+    sourceField,
+    path: binding.path,
+    fileSha256: binding.fileSha256,
+    verifiedTargetSources,
+    sourceRecordVerified,
+  });
+const verifiedTargetSource = (sourceField, binding) => Object.freeze({
+  sourceField,
+  path: binding.path,
+  fileSha256: binding.fileSha256,
+});
+const buildJobVerifiedTargetSources = ({job, jobPath, jobBytes}) => Object.freeze([
+  verifiedTargetSource('job', {path: jobPath, fileSha256: hash(jobBytes)}),
+  ...job.implementationBindings.map(binding =>
+    verifiedTargetSource('job.implementationBindings[*]', binding)),
+  ...job.approvedContractBindings.map(binding =>
+    verifiedTargetSource('job.approvedContractBindings[*]', binding)),
+  verifiedTargetSource('job.sourcePackageBinding', job.sourcePackageBinding),
+  verifiedTargetSource('job.b6ManifestBinding', job.b6ManifestBinding),
+  verifiedTargetSource('job.providerEnvelopeBinding', job.providerEnvelopeBinding),
+]);
+const sourceRecordPassed = (validator, value) => {
+  try {
+    return validator(value).status === 'passed';
+  } catch {
+    return false;
+  }
+};
+const findVerifiedJsonSourceRecord = ({inputObservations, binding, validator}) => {
+  const matches = [];
+  for (const observation of inputObservations) {
+    if (observation?.kind !== 'json'
+      || observation.binding?.path !== binding.path
+      || observation.binding?.fileSha256 !== binding.fileSha256
+      || !Buffer.isBuffer(observation.bytes)
+      || hash(observation.bytes) !== binding.fileSha256) continue;
+    const decoded = decodePresentationCaptionB1StrictJsonV001(observation.bytes);
+    if (decoded.status !== 'decoded'
+      || decoded.value.schemaVersion !== binding.schemaVersion
+      || canonicalSha(decoded.value) !== binding.canonicalSha256
+      || !sourceRecordPassed(validator, decoded.value)) continue;
+    matches.push(decoded.value);
+  }
+  return matches.length === 1 ? matches[0] : null;
+};
+const buildMeaningBoundaryVerifiedTargetSources = ({
+  job,
+  jobPath,
+  jobBytes,
+  inputObservations,
+}) => {
+  const sources = [...buildJobVerifiedTargetSources({job, jobPath, jobBytes})];
+  const b6Manifest = findVerifiedJsonSourceRecord({
+    inputObservations,
+    binding: job.b6ManifestBinding,
+    validator: validatePresentationMeaningBoundaryB6ManifestV001,
+  });
+  if (b6Manifest !== null) {
+    sources.push(
+      verifiedTargetSource('b6Manifest.b5ManifestBinding', b6Manifest.b5ManifestBinding),
+      verifiedTargetSource('b6Manifest.b6JobBinding', b6Manifest.b6JobBinding),
+      verifiedTargetSource('b6Manifest.rawResponseBinding', b6Manifest.rawResponseBinding),
+      verifiedTargetSource('b6Manifest.generateRequestBinding', b6Manifest.generateRequestBinding),
+    );
+  }
+  const providerEnvelope = findVerifiedJsonSourceRecord({
+    inputObservations,
+    binding: job.providerEnvelopeBinding,
+    validator: validatePresentationMeaningBoundaryProviderEnvelopeV001,
+  });
+  if (providerEnvelope !== null) {
+    sources.push(verifiedTargetSource(
+      'providerEnvelope.rawResponseBinding',
+      providerEnvelope.rawResponseBinding,
+    ));
+  }
+  if (b6Manifest !== null) {
+    const b5Manifest = findVerifiedJsonSourceRecord({
+      inputObservations,
+      binding: b6Manifest.b5ManifestBinding,
+      validator: validatePresentationMeaningBoundaryB5ManifestV001,
+    });
+    if (b5Manifest !== null) {
+      sources.push(verifiedTargetSource(
+        'b5Manifest.generateRequestBinding',
+        b5Manifest.generateRequestBinding,
+      ));
+    }
+  }
+  return Object.freeze(sources);
+};
+const deriveUniqueVerifiedTargetSource = ({binding, verifiedTargetSources}) => {
+  const matches = verifiedTargetSources.filter(source =>
+    source.path === binding.path && source.fileSha256 === binding.fileSha256);
+  return matches.length === 1 ? matches[0] : null;
+};
+class PresentationMeaningBoundaryFatalError extends Error {
+  constructor(fatalObservation) {
+    super('presentation meaning boundary fatal');
+    this.fatalObservation = fatalObservation;
+  }
+}
 
 export function assertPresentationMeaningBoundaryAtomPostconditionV001(expected, observed) {
   if (!same(expected, observed)) {
@@ -637,18 +767,67 @@ export async function inspectPresentationMeaningBoundarySelectionInputsBeforePub
   inputObservations,
   graphSnapshots,
 }) {
+  let currentTarget = null;
+  const changed = (targetFile) => Object.freeze({
+    status: 'fatal',
+    stage: 'input-read',
+    fatalObservation: meaningBoundaryFatalObservation({
+      innerStage: 'input-read',
+      evidence: {kind: 'file-changed-during-read'},
+      targetFile,
+    }),
+  });
   try {
+    const decodedJob = decodePresentationCaptionB1StrictJsonV001(jobBytes);
+    const jobSourceRecordVerified = decodedJob.status === 'decoded'
+      && validatePresentationMeaningBoundaryValidationJobV001(decodedJob.value);
+    const jobBinding = {path: jobPath, fileSha256: hash(jobBytes)};
+    const verifiedTargetSources = jobSourceRecordVerified
+      ? buildMeaningBoundaryVerifiedTargetSources({
+        job: decodedJob.value,
+        jobPath,
+        jobBytes,
+        inputObservations,
+      })
+      : Object.freeze([]);
+    currentTarget = selectMeaningBoundaryFatalTarget({
+      sourceField: 'job',
+      binding: jobBinding,
+      verifiedTargetSources,
+      sourceRecordVerified: jobSourceRecordVerified,
+    });
     const jobBytesBeforePublication = await readStable(workspaceRoot, jobPath);
     if (!jobBytesBeforePublication.equals(jobBytes)) {
-      return Object.freeze({status: 'fatal', stage: 'input-read'});
+      return changed(currentTarget);
     }
     for (const binding of jobBindings) {
+      const source = deriveUniqueVerifiedTargetSource({binding, verifiedTargetSources});
+      currentTarget = source === null
+        ? null
+        : selectMeaningBoundaryFatalTarget({
+          sourceField: source.sourceField,
+          binding,
+          verifiedTargetSources,
+          sourceRecordVerified: jobSourceRecordVerified,
+        });
       const bytes = await readStable(workspaceRoot, binding.path);
       if (hash(bytes) !== binding.fileSha256) {
-        return Object.freeze({status: 'fatal', stage: 'input-read'});
+        return changed(currentTarget);
       }
     }
     for (const observation of inputObservations) {
+      const source = deriveUniqueVerifiedTargetSource({
+        binding: observation.binding,
+        verifiedTargetSources,
+      });
+      currentTarget = source === null
+        ? null
+        : selectMeaningBoundaryFatalTarget({
+          sourceField: source.sourceField,
+          binding: observation.binding,
+          verifiedTargetSources,
+          sourceRecordVerified: jobSourceRecordVerified,
+        });
       const current = await captureInputObservation({
         workspaceRoot,
         binding: observation.binding,
@@ -658,17 +837,41 @@ export async function inspectPresentationMeaningBoundarySelectionInputsBeforePub
         before: observation,
         after: current,
       }).status !== 'unchanged') {
-        return Object.freeze({status: 'fatal', stage: 'input-read'});
+        return changed(currentTarget);
       }
     }
     for (const snapshot of graphSnapshots) {
+      const snapshotBinding = {
+        path: snapshot.path,
+        fileSha256: hash(snapshot.bytes),
+      };
+      const source = deriveUniqueVerifiedTargetSource({
+        binding: snapshotBinding,
+        verifiedTargetSources,
+      });
+      currentTarget = source === null
+        ? null
+        : selectMeaningBoundaryFatalTarget({
+          sourceField: source.sourceField,
+          binding: snapshotBinding,
+          verifiedTargetSources,
+          sourceRecordVerified: jobSourceRecordVerified,
+        });
       const bytes = await readStable(workspaceRoot, snapshot.path);
       if (!bytes.equals(snapshot.bytes)) {
-        return Object.freeze({status: 'fatal', stage: 'input-read'});
+        return changed(currentTarget);
       }
     }
-  } catch {
-    return Object.freeze({status: 'fatal', stage: 'input-read'});
+  } catch (error) {
+    return Object.freeze({
+      status: 'fatal',
+      stage: 'input-read',
+      fatalObservation: meaningBoundaryFatalObservation({
+        innerStage: 'input-read',
+        evidence: {kind: 'node-error', code: error?.code ?? null},
+        targetFile: currentTarget,
+      }),
+    });
   }
   return Object.freeze({status: 'passed'});
 }
@@ -677,13 +880,42 @@ export async function runPresentationMeaningBoundarySelectionJobV001({workspaceR
   if (typeof workspaceRoot !== 'string' || typeof jobPath !== 'string') throw new TypeError('runner input');
   const match = new RegExp(`^${JOB_ROOT}/([^/]+)\\.json$`, 'u').exec(jobPath);
   if (!match || !FORMAL_ID.test(match[1])) throw new Error('job path invalid');
-  const jobBytes = await readStable(workspaceRoot, jobPath);
+  let jobBytes;
+  try {
+    jobBytes = await readStable(workspaceRoot, jobPath);
+  } catch (error) {
+    throw new PresentationMeaningBoundaryFatalError(meaningBoundaryFatalObservation({
+      innerStage: 'job-read',
+      evidence: {kind: 'node-error', code: error?.code ?? null},
+    }));
+  }
   const decoded = decodePresentationCaptionB1StrictJsonV001(jobBytes);
   if (decoded.status !== 'decoded' || !validatePresentationMeaningBoundaryValidationJobV001(decoded.value)
     || decoded.value.jobId !== match[1]) throw new Error('job invalid');
   const job = decoded.value;
+  const jobVerifiedTargetSources = buildJobVerifiedTargetSources({job, jobPath, jobBytes});
   for (const binding of [...job.implementationBindings, ...job.approvedContractBindings]) {
-    const bytes = await readStable(workspaceRoot, binding.path);
+    const source = deriveUniqueVerifiedTargetSource({
+      binding,
+      verifiedTargetSources: jobVerifiedTargetSources,
+    });
+    let bytes;
+    try {
+      bytes = await readStable(workspaceRoot, binding.path);
+    } catch (error) {
+      throw new PresentationMeaningBoundaryFatalError(meaningBoundaryFatalObservation({
+        innerStage: 'input-read',
+        evidence: {kind: 'node-error', code: error?.code ?? null},
+        targetFile: source === null
+          ? null
+          : selectMeaningBoundaryFatalTarget({
+            sourceField: source.sourceField,
+            binding,
+            verifiedTargetSources: jobVerifiedTargetSources,
+            sourceRecordVerified: true,
+          }),
+      }));
+    }
     if (hash(bytes) !== binding.fileSha256) throw new Error('job binding mismatch');
   }
   const inputObservations = [];
@@ -772,12 +1004,14 @@ export async function runPresentationMeaningBoundarySelectionJobV001({workspaceR
     inputObservations,
     graphSnapshots,
   });
-  if (reread.status !== 'passed') throw new Error('input-read-failed');
-  const publicationClaim = await createPresentationMeaningOwnedStagingRootV001({
-    workspaceRoot,
-    relativeOutputRoot: job.outputRoot,
-  });
+  if (reread.status !== 'passed') {
+    throw new PresentationMeaningBoundaryFatalError(reread.fatalObservation);
+  }
   try {
+    const publicationClaim = await createPresentationMeaningOwnedStagingRootV001({
+      workspaceRoot,
+      relativeOutputRoot: job.outputRoot,
+    });
     if (evaluation.status === 'passed') {
       await writeFile(path.join(publicationClaim.stagingAbsolute, 'meaning-boundary-selection.json'),
         formalBytes(evaluation.selection), {flag: 'wx'});
@@ -794,34 +1028,62 @@ export async function runPresentationMeaningBoundarySelectionJobV001({workspaceR
     });
     if (published.status !== 'published') throw new Error('output exists');
   } catch (error) {
-    throw error;
+    if (error instanceof PresentationMeaningBoundaryFatalError) throw error;
+    throw new PresentationMeaningBoundaryFatalError(meaningBoundaryFatalObservation({
+      innerStage: 'publication',
+      evidence: {kind: 'publication-failed'},
+    }));
   }
   return {status: evaluation.status, evaluation, report};
 }
 
-export function makePresentationMeaningBoundaryFatalCliResultV001() {
+export function makePresentationMeaningBoundaryFatalCliResultV001(
+  fatalObservation = meaningBoundaryFatalObservation(),
+) {
   return Object.freeze({
     exitCode: 2,
-    bytes: Buffer.from('{"status":"fatal","violations":[]}\n', 'utf8'),
+    bytes: formalBytes({
+      schemaVersion: 'presentation-caption-meaning-boundary-runner-fatal-v002',
+      status: 'fatal',
+      violations: [],
+      fatalObservation,
+    }),
   });
 }
 
-export async function runPresentationMeaningBoundarySelectionCliV001(argv = process.argv.slice(2)) {
+export function writePresentationMeaningBoundarySelectionCliResultV001(
+  result,
+  writer = chunk => process.stdout.write(chunk),
+) {
+  if (Buffer.isBuffer(result?.bytes) && result?.exitCode === 2) {
+    writer(result.bytes);
+    return result.exitCode;
+  }
+  writer(formalBytes(result.report));
+  return result.status === 'passed' ? 0 : 1;
+}
+
+export async function runPresentationMeaningBoundarySelectionCliV001(
+  argv = process.argv.slice(2),
+  streams = {stdout: process.stdout},
+) {
+  const writer = streams.stdout?.write?.bind(streams.stdout) ?? process.stdout.write.bind(process.stdout);
   if (!Array.isArray(argv) || argv.length !== 1) {
     const fatal = makePresentationMeaningBoundaryFatalCliResultV001();
-    process.stdout.write(fatal.bytes);
-    return fatal.exitCode;
+    return writePresentationMeaningBoundarySelectionCliResultV001(fatal, writer);
   }
   try {
     const result = await runPresentationMeaningBoundarySelectionJobV001({
       workspaceRoot: process.cwd(), jobPath: argv[0],
     });
-    process.stdout.write(formalBytes(result.report));
-    return result.status === 'passed' ? 0 : 1;
-  } catch {
-    const fatal = makePresentationMeaningBoundaryFatalCliResultV001();
-    process.stdout.write(fatal.bytes);
-    return fatal.exitCode;
+    return writePresentationMeaningBoundarySelectionCliResultV001(result, writer);
+  } catch (error) {
+    const fatal = makePresentationMeaningBoundaryFatalCliResultV001(
+      error instanceof PresentationMeaningBoundaryFatalError
+        ? error.fatalObservation
+        : meaningBoundaryFatalObservation(),
+    );
+    return writePresentationMeaningBoundarySelectionCliResultV001(fatal, writer);
   }
 }
 

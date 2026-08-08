@@ -69,24 +69,26 @@ import {
 import {
   buildPresentationOutputCommonCorePlanV001,
   buildPresentationOutputRenderApplicationResultsV001,
-  buildPresentationOutputRenderFailureReportV001,
+  buildPresentationOutputRenderFailureReportV002,
   buildPresentationOutputRenderManifestV001,
   buildPresentationOutputRenderPlanV001,
   buildPresentationOutputRenderQcV001,
+  PRESENTATION_OUTPUT_RENDER_DIAGNOSTIC_CODES_V001,
   projectPresentationOutputRendererViolationsV001,
   serializePresentationOutputRenderJsonV001,
   validatePresentationOutputRenderApplicationResultsV001,
-  validatePresentationOutputRenderFailureReportV001,
+  validatePresentationOutputRenderFailureReportV002,
   validatePresentationOutputRenderManifestV001,
   validatePresentationOutputRenderPlanV001,
   validatePresentationOutputRenderQcV001,
 } from './presentation_output_render_plan_v001.mjs';
+import * as presentationRendererCoreV002 from './render_presentation_v002.mjs';
 import {
-  PRESENTATION_RENDERER_VIOLATION_CODES,
-  commitValidatedPresentationArtifactsV002,
-  executeValidatedPresentationDrawAndQcV001,
-  inspectFrameCountWithToolV001,
-} from './render_presentation_v002.mjs';
+  buildPresentationFatalObservationV002,
+  classifyPresentationFatalInnerCodeV002,
+  selectPresentationFatalTargetFileV002,
+  validatePresentationFatalObservationV002,
+} from './presentation_fatal_observation_v002.mjs';
 import {
   createPresentationVerticalCroppedBaseMediaV001,
 } from './render_presentation_vertical_review_v001.ts';
@@ -100,6 +102,26 @@ export const PRESENTATION_OUTPUT_FORMAL_JOB_ROOT_V001 =
   'evals/clip_composition/outputs/presentation/meaning-output-jobs';
 export const PRESENTATION_OUTPUT_RENDER_FAILURE_ROOT_V001 =
   'evals/clip_composition/outputs/presentation/meaning-output-render-failures';
+
+export const PRESENTATION_OUTPUT_RUNNER_OUTER_CODES_V001 = Object.freeze([
+  'OUTPUT_ACCEPTANCE_EXECUTION_FAILED',
+  'OUTPUT_ACCEPTANCE_INPUT_CHANGED',
+  'OUTPUT_ACCEPTANCE_PUBLICATION_FAILED',
+  'OUTPUT_ACCEPTANCE_REPORT_BUILD_FAILED',
+  'OUTPUT_FORMAL_JOB_INVALID',
+  'OUTPUT_PLANNER_RESOURCE_EXHAUSTED',
+  'OUTPUT_RENDER_CORE_CONTRACT_FAILED',
+  'OUTPUT_RENDER_CORE_PROCESS_FAILED',
+  'OUTPUT_RENDER_FAILURE_REPORT_INVALID',
+  'OUTPUT_RENDER_FAILURE_TARGET_INVALID',
+  'OUTPUT_RENDER_PUBLICATION_FAILED',
+  'OUTPUT_RENDER_SAFETY_ARTIFACT_INVALID',
+  'OUTPUT_RENDER_STAGED_ARTIFACT_INVALID',
+]);
+
+if (!PRESENTATION_OUTPUT_RENDER_DIAGNOSTIC_CODES_V001.every(
+  code => PRESENTATION_OUTPUT_RUNNER_OUTER_CODES_V001.includes(code),
+)) throw new TypeError('output renderer diagnostic code set is not closed by its runner');
 
 const PRESENTATION_OUTPUT_RUNTIME_PROFILE_SOURCE_V001 = Object.freeze({
   reportPath: 'evals/clip_composition/registries/presentation/'
@@ -153,9 +175,86 @@ const exactKeys = (value: unknown, keys: readonly string[]) => (
 const dense = (value: unknown): value is unknown[] => (
   Array.isArray(value) && Object.keys(value).length === value.length
 );
+
+export const inspectPresentationOutputRendererCoreExportsV001 = (moduleNamespace: JsonObject) => {
+  const codes = moduleNamespace?.PRESENTATION_RENDERER_VIOLATION_CODES;
+  const valid = dense(codes)
+    && Object.isFrozen(codes)
+    && codes.length > 0
+    && codes.every(code => typeof code === 'string' && code.length > 0)
+    && new Set(codes).size === codes.length
+    && typeof moduleNamespace?.commitValidatedPresentationArtifactsV002 === 'function'
+    && typeof moduleNamespace?.executeValidatedPresentationDrawAndQcV001 === 'function'
+    && typeof moduleNamespace?.inspectFrameCountWithToolV001 === 'function';
+  return {status: valid ? 'passed' : 'failed'};
+};
+
+const {
+  PRESENTATION_RENDERER_VIOLATION_CODES,
+  commitValidatedPresentationArtifactsV002,
+  executeValidatedPresentationDrawAndQcV001,
+  inspectFrameCountWithToolV001,
+} = presentationRendererCoreV002;
 const same = (left: unknown, right: unknown) => JSON.stringify(left) === JSON.stringify(right);
 const hash = (bytes: Uint8Array) => createHash('sha256').update(bytes).digest('hex');
 const clone = <T>(value: T): T => structuredClone(value);
+const unknownFatalObservationV002 = () => buildPresentationFatalObservationV002({
+  innerStage: 'unknown',
+  targetFile: null,
+  innerCode: 'UNCLASSIFIED',
+});
+const buildClosedFatalObservationV002 = ({
+  innerStage,
+  targetFile = null,
+  evidence,
+}: {
+  innerStage: string;
+  targetFile?: JsonObject | null;
+  evidence: JsonObject;
+}) => {
+  const innerCode = classifyPresentationFatalInnerCodeV002(evidence);
+  if (innerCode === 'UNCLASSIFIED') return unknownFatalObservationV002();
+  try {
+    return buildPresentationFatalObservationV002({innerStage, targetFile, innerCode});
+  } catch {
+    return unknownFatalObservationV002();
+  }
+};
+const buildTrustedFatalObservationV002 = ({
+  innerStage,
+  targetFile = null,
+  innerCode,
+}: {
+  innerStage: string;
+  targetFile?: JsonObject | null;
+  innerCode: string;
+}) => {
+  try {
+    return buildPresentationFatalObservationV002({innerStage, targetFile, innerCode});
+  } catch {
+    return unknownFatalObservationV002();
+  }
+};
+const selectOutputJobTargetFileV002 = ({
+  sourceField,
+  binding,
+  verifiedTargetSources,
+  sourceRecordVerified,
+}: {
+  sourceField: 'job.requestBinding' | 'job.implementationBindings[*]';
+  binding: JsonObject;
+  verifiedTargetSources: JsonObject[];
+  sourceRecordVerified: boolean;
+}) => {
+  return selectPresentationFatalTargetFileV002({
+    boundaryId: 'output-runner',
+    sourceField,
+    path: binding?.path,
+    fileSha256: binding?.fileSha256,
+    verifiedTargetSources,
+    sourceRecordVerified,
+  });
+};
 const occurrenceKey = (ref: JsonObject) => (
   `${ref.timelineSegmentId}\u0000${ref.sourceMediaId}\u0000${ref.atomId}`
 );
@@ -304,29 +403,44 @@ const observeJsonBinding = async (
 
 // requestSchema check owns the request shape.  This envelope verifies only the
 // bound raw JSON bytes so decoded primitive/array inputs can reach that check.
-const observeRawRequestBinding = async (
+export const observePresentationOutputRawRequestBindingV001 = async (
   workspaceRoot: string,
   binding: JsonObject,
   tracked: TrackedFile[],
 ) => {
   const observed = await readStable(workspaceRoot, binding.path);
   tracked.push({absolutePath: observed.absolutePath, fileSha256: binding.fileSha256});
-  if (hash(observed.bytes) !== binding.fileSha256) {
-    return {status: 'binding-mismatch' as const, ...observed, value: undefined};
-  }
   const decoded = decodePresentationCaptionB1StrictJsonV001(observed.bytes);
   if (decoded.status !== 'decoded') {
-    return {status: 'invalid' as const, ...observed, value: undefined};
+    return {
+      status: 'invalid' as const,
+      reason: decoded.reason,
+      ...observed,
+      value: undefined,
+    };
+  }
+  if (hash(observed.bytes) !== binding.fileSha256) {
+    return {
+      status: 'binding-mismatch' as const,
+      bindingMismatchKind: 'file-sha' as const,
+      ...observed,
+      value: decoded.value,
+    };
   }
   let canonicalSha256: string;
   try {
     canonicalSha256 = canonicalSha256PresentationMeaningInformationJsonV001(decoded.value);
   } catch {
-    return {status: 'invalid' as const, ...observed, value: decoded.value};
+    return {
+      status: 'invalid' as const,
+      ...observed,
+      value: decoded.value,
+    };
   }
   if (canonicalSha256 !== binding.canonicalSha256) {
     return {
       status: 'binding-mismatch' as const,
+      bindingMismatchKind: 'canonical-sha' as const,
       ...observed,
       value: decoded.value,
       canonicalSha256,
@@ -338,6 +452,48 @@ const observeRawRequestBinding = async (
     value: decoded.value,
     canonicalSha256,
   };
+};
+
+export const inspectPresentationOutputRequestFatalObservationV002 = ({
+  job,
+  requestObservation,
+}: {
+  job: JsonObject;
+  requestObservation: JsonObject;
+}) => {
+  const acceptedJob = validatePresentationOutputFormalJobV001(job);
+  const targetFile = acceptedJob
+    ? selectOutputJobTargetFileV002({
+      sourceField: 'job.requestBinding',
+      binding: job.requestBinding,
+      verifiedTargetSources: [{
+        sourceField: 'job.requestBinding',
+        path: job.requestBinding.path,
+        fileSha256: job.requestBinding.fileSha256,
+      }],
+      sourceRecordVerified: true,
+    })
+    : null;
+  if (requestObservation?.status === 'invalid') {
+    return buildClosedFatalObservationV002({
+      innerStage: 'input-read',
+      targetFile,
+      evidence: typeof requestObservation.reason === 'string'
+        ? {
+          kind: 'strict-json-decode',
+          reason: requestObservation.reason,
+        }
+        : {kind: 'formal-json-value-invalid'},
+    });
+  }
+  if (requestObservation?.status === 'binding-mismatch') {
+    return buildClosedFatalObservationV002({
+      innerStage: 'input-read',
+      targetFile,
+      evidence: {kind: 'binding-reference-mismatch'},
+    });
+  }
+  return unknownFatalObservationV002();
 };
 
 const observeMeaningPackageProvenance = async ({
@@ -1212,7 +1368,7 @@ const cropApplicationMatchesBase = (styleState: JsonObject, request: JsonObject)
       === request.styleInput.screenLayoutId;
 };
 
-const publishRenderFailure = async ({
+export const publishPresentationOutputRenderFailureV002 = async ({
   workspaceRoot,
   request,
   job,
@@ -1228,7 +1384,7 @@ const publishRenderFailure = async ({
     request.publication.outputId}/${formalJobFileSha256}`;
   let report: JsonObject;
   try {
-    report = buildPresentationOutputRenderFailureReportV001({
+    report = buildPresentationOutputRenderFailureReportV002({
       outputId: request.publication.outputId,
       formalJobFileSha256,
       status: observation.status,
@@ -1238,9 +1394,10 @@ const publishRenderFailure = async ({
       acceptanceReportBinding,
       renderPlanBinding,
       failureObservation: observation.failureObservation,
+      fatalObservation: observation.fatalObservation,
       retainedSafetyArtifacts: safetyArtifacts,
     });
-    if (validatePresentationOutputRenderFailureReportV001(report, {
+    if (validatePresentationOutputRenderFailureReportV002(report, {
       rendererCodes: PRESENTATION_RENDERER_VIOLATION_CODES,
       outputId: request.publication.outputId,
       formalJobFileSha256,
@@ -1272,12 +1429,14 @@ const publishRenderFailure = async ({
       report: null,
       bytes: null,
       failureRoot: null,
-      stderr: {
-        schemaVersion: 'presentation-output-runner-diagnostic-v001',
-        status: 'fatal',
-        stage: 'publication',
-        diagnosticCode: 'OUTPUT_RENDER_PUBLICATION_FAILED',
-      },
+      stderr: fatalDiagnostic(
+        'publication',
+        'OUTPUT_RENDER_PUBLICATION_FAILED',
+        buildClosedFatalObservationV002({
+          innerStage: 'failure-report-publication',
+          evidence: {kind: 'report-publication-failed'},
+        }),
+      ).stderr,
     };
   }
 };
@@ -1302,8 +1461,16 @@ export const inspectPresentationOutputCoreFailureObservationV001 = (core: JsonOb
         violations: projected.violations,
         diagnosticCode: 'OUTPUT_RENDER_CORE_CONTRACT_FAILED',
       },
+      fatalObservation: null,
     };
   }
+  const processEvidence = core?.presentationFatalProcessEvidence;
+  const fatalObservation = isObject(processEvidence)
+    ? buildTrustedFatalObservationV002({
+      innerStage: processEvidence.innerStage,
+      innerCode: processEvidence.innerCode,
+    })
+    : unknownFatalObservationV002();
   return {
     status: 'fatal',
     stage: coreStage,
@@ -1313,21 +1480,118 @@ export const inspectPresentationOutputCoreFailureObservationV001 = (core: JsonOb
       violations: [],
       diagnosticCode: 'OUTPUT_RENDER_CORE_PROCESS_FAILED',
     },
+    fatalObservation,
   };
 };
 
-const fatalDiagnostic = (stage: string, diagnosticCode: string) => ({
-  status: 'fatal',
-  exitCode: 2,
-  report: null,
-  bytes: null,
-  stderr: {
-    schemaVersion: 'presentation-output-runner-diagnostic-v001',
+const fatalDiagnostic = (
+  stage: string,
+  diagnosticCode: string,
+  fatalObservation: JsonObject = unknownFatalObservationV002(),
+) => {
+  if (!PRESENTATION_OUTPUT_RUNNER_OUTER_CODES_V001.includes(diagnosticCode)) {
+    throw new TypeError('output runner diagnostic code is not owned');
+  }
+  const closedObservation = validatePresentationFatalObservationV002(fatalObservation)
+    ? fatalObservation
+    : unknownFatalObservationV002();
+  return {
     status: 'fatal',
-    stage,
-    diagnosticCode,
-  },
-});
+    exitCode: 2,
+    report: null,
+    bytes: null,
+    stderr: {
+      schemaVersion: 'presentation-output-runner-diagnostic-v002',
+      status: 'fatal',
+      stage,
+      diagnosticCode,
+      fatalObservation: closedObservation,
+    },
+  };
+};
+
+export const inspectPresentationOutputRendererCoreBootstrapV002 = async ({
+  workspaceRoot,
+  moduleNamespace,
+  job,
+}: {
+  workspaceRoot: string;
+  moduleNamespace: JsonObject;
+  job: JsonObject;
+}) => {
+  if (inspectPresentationOutputRendererCoreExportsV001(moduleNamespace).status === 'passed') {
+    return {status: 'passed' as const};
+  }
+  const acceptedJob = validatePresentationOutputFormalJobV001(job);
+  const commonRendererBindings = Array.isArray(job?.implementationBindings)
+    ? job.implementationBindings.filter(
+      (binding: JsonObject) => binding.role === 'common-renderer',
+    )
+    : [];
+  const commonRendererBinding = commonRendererBindings.length === 1
+    ? commonRendererBindings[0]
+    : null;
+  const verifiedTargetSources: JsonObject[] = [];
+  if (acceptedJob && commonRendererBinding !== null) {
+    try {
+      const observed = await readStable(workspaceRoot, commonRendererBinding.path);
+      if (hash(observed.bytes) === commonRendererBinding.fileSha256) {
+        verifiedTargetSources.push({
+          sourceField: 'job.implementationBindings[*]',
+          path: commonRendererBinding.path,
+          fileSha256: commonRendererBinding.fileSha256,
+        });
+      }
+    } catch {
+      // A missing or unstable implementation file cannot become a fatal target.
+    }
+  }
+  const targetFile = commonRendererBinding
+    ? selectOutputJobTargetFileV002({
+      sourceField: 'job.implementationBindings[*]',
+      binding: commonRendererBinding,
+      verifiedTargetSources,
+      sourceRecordVerified: acceptedJob,
+    })
+    : null;
+  return fatalDiagnostic(
+    'execution',
+    'OUTPUT_RENDER_CORE_PROCESS_FAILED',
+    buildClosedFatalObservationV002({
+      innerStage: 'runner-bootstrap',
+      targetFile,
+      evidence: {kind: 'required-export-missing'},
+    }),
+  );
+};
+
+export const inspectPresentationOutputRenderFailureTargetV002 = async ({
+  workspaceRoot,
+  outputId,
+  formalJobFileSha256,
+}: {
+  workspaceRoot: string;
+  outputId: string;
+  formalJobFileSha256: string;
+}) => {
+  const failureRoot = `${PRESENTATION_OUTPUT_RENDER_FAILURE_ROOT_V001}/${
+    outputId}/${formalJobFileSha256}`;
+  const targetInvalid = () => fatalDiagnostic(
+    'publication',
+    'OUTPUT_RENDER_FAILURE_TARGET_INVALID',
+    buildClosedFatalObservationV002({
+      innerStage: 'failure-report-publication',
+      evidence: {kind: 'report-target-invalid'},
+    }),
+  );
+  try {
+    const resolvedFailureRoot = await resolveWorkspacePath(workspaceRoot, failureRoot);
+    if (await lstatOrNull(resolvedFailureRoot.absolutePath)) return targetInvalid();
+  } catch {
+    return targetInvalid();
+  }
+  return {status: 'passed' as const, failureRoot};
+};
 
 export async function runPresentationOutputJobV001({
   workspaceRoot,
@@ -1365,14 +1629,46 @@ export async function runPresentationOutputJobV001({
       return fatalDiagnostic('job-validation', 'OUTPUT_FORMAL_JOB_INVALID');
     }
     tracked.push({absolutePath: jobObserved.absolutePath, fileSha256: hash(jobObserved.bytes)});
-    requestObserved = await observeRawRequestBinding(workspaceRoot, job.requestBinding, tracked);
-  } catch {
-    return fatalDiagnostic('job-validation', 'OUTPUT_FORMAL_JOB_INVALID');
+  } catch (error: any) {
+    return fatalDiagnostic(
+      'job-validation',
+      'OUTPUT_FORMAL_JOB_INVALID',
+      buildClosedFatalObservationV002({
+        innerStage: 'job-read',
+        evidence: typeof error?.code === 'string'
+          ? {kind: 'node-error', code: error.code}
+          : {kind: 'unclassified'},
+      }),
+    );
+  }
+  try {
+    requestObserved = await observePresentationOutputRawRequestBindingV001(
+      workspaceRoot,
+      job.requestBinding,
+      tracked,
+    );
+  } catch (error: any) {
+    return fatalDiagnostic(
+      'job-validation',
+      'OUTPUT_FORMAL_JOB_INVALID',
+      buildClosedFatalObservationV002({
+        innerStage: 'input-read',
+        evidence: typeof error?.code === 'string'
+          ? {kind: 'node-error', code: error.code}
+          : {kind: 'unclassified'},
+      }),
+    );
   }
   const request = requestObserved.value;
+  if (requestObserved.status !== 'passed') {
+    return fatalDiagnostic(
+      'job-validation',
+      'OUTPUT_FORMAL_JOB_INVALID',
+      inspectPresentationOutputRequestFatalObservationV002({job, requestObservation: requestObserved}),
+    );
+  }
   if (
-    requestObserved.status !== 'passed'
-    || !jobObserved.bytes.equals(formalBytes(job))
+    !jobObserved.bytes.equals(formalBytes(job))
     || !requestObserved.bytes.equals(formalBytes(request))
     || !validatePresentationOutputFormalJobV001(job)
     || job.requestBinding.path !== `${jobPrefix}${requestId}/output-request.json`
@@ -1381,6 +1677,13 @@ export async function runPresentationOutputJobV001({
     || job.expectedOutputId !== expectedOutputId
     || !await verifyFormalJobEnvironment(workspaceRoot, job, tracked)
   ) return fatalDiagnostic('job-validation', 'OUTPUT_FORMAL_JOB_INVALID');
+
+  const rendererBootstrap = await inspectPresentationOutputRendererCoreBootstrapV002({
+    workspaceRoot,
+    moduleNamespace: presentationRendererCoreV002,
+    job,
+  });
+  if (rendererBootstrap.status !== 'passed') return rendererBootstrap;
 
   const formalJobFileSha256 = hash(jobObserved.bytes);
   const formalOutputJobBinding = jsonBinding(
@@ -1539,6 +1842,7 @@ export async function runPresentationOutputJobV001({
             frameCount: await inspectFrameCountWithToolV001(
               state.base.baseMedia.absolutePath,
               job.runtimeProfile.ffprobe.path,
+              'input-read',
             ),
           }),
         });
@@ -1614,6 +1918,7 @@ export async function runPresentationOutputJobV001({
             decodedFrameCount: await inspectFrameCountWithToolV001(
               observed.absolutePath,
               job.runtimeProfile.ffprobe.path,
+              'input-read',
             ),
           }),
         });
@@ -1903,38 +2208,37 @@ export async function runPresentationOutputJobV001({
     };
   }
 
-  const failureRoot = `${PRESENTATION_OUTPUT_RENDER_FAILURE_ROOT_V001}/${
-    request.publication.outputId}/${formalJobFileSha256}`;
-  try {
-    const resolvedFailureRoot = await resolveWorkspacePath(workspaceRoot, failureRoot);
-    if (await lstatOrNull(resolvedFailureRoot.absolutePath)) {
-      return fatalDiagnostic('publication', 'OUTPUT_RENDER_FAILURE_TARGET_INVALID');
-    }
-  } catch {
-    return fatalDiagnostic('publication', 'OUTPUT_RENDER_FAILURE_TARGET_INVALID');
-  }
-
-  const publishSyntheticCoreFailure = async (stage: string) => publishRenderFailure({
+  const failureTargetObservation = await inspectPresentationOutputRenderFailureTargetV002({
     workspaceRoot,
-    request,
-    job,
+    outputId: request.publication.outputId,
     formalJobFileSha256,
-    formalOutputJobBinding,
-    controlRequestBinding,
-    acceptanceReportBinding,
-    renderPlanBinding: state.renderPlanBinding,
-    observation: {
-      status: 'fatal',
-      stage,
-      failureObservation: {
-        source: 'common-draw-core',
-        coreStage: stage,
-        violations: [],
-        diagnosticCode: 'OUTPUT_RENDER_CORE_PROCESS_FAILED',
-      },
-    },
-    safetyArtifacts: [],
   });
+  if (failureTargetObservation.status !== 'passed') return failureTargetObservation;
+
+  const publishSyntheticCoreFailure = async (stage: string) => (
+    publishPresentationOutputRenderFailureV002({
+      workspaceRoot,
+      request,
+      job,
+      formalJobFileSha256,
+      formalOutputJobBinding,
+      controlRequestBinding,
+      acceptanceReportBinding,
+      renderPlanBinding: state.renderPlanBinding,
+      observation: {
+        status: 'fatal',
+        stage,
+        failureObservation: {
+          source: 'common-draw-core',
+          coreStage: stage,
+          violations: [],
+          diagnosticCode: 'OUTPUT_RENDER_CORE_PROCESS_FAILED',
+        },
+        fatalObservation: unknownFatalObservationV002(),
+      },
+      safetyArtifacts: [],
+    })
+  );
 
   let commonPlan: JsonObject;
   let finalLayoutInspection: JsonObject;
@@ -2043,7 +2347,7 @@ export async function runPresentationOutputJobV001({
   }
   if (core.exitCode !== 0) {
     try {
-      return await publishRenderFailure({
+      return await publishPresentationOutputRenderFailureV002({
         workspaceRoot,
         request,
         job,
@@ -2200,7 +2504,7 @@ export async function runPresentationOutputJobV001({
       ),
     ]);
   } catch {
-    return await publishRenderFailure({
+    return await publishPresentationOutputRenderFailureV002({
       workspaceRoot,
       request,
       job,
@@ -2218,6 +2522,7 @@ export async function runPresentationOutputJobV001({
           violations: [],
           diagnosticCode: 'OUTPUT_RENDER_STAGED_ARTIFACT_INVALID',
         },
+        fatalObservation: unknownFatalObservationV002(),
       },
       safetyArtifacts,
     });
@@ -2256,7 +2561,7 @@ export async function runPresentationOutputJobV001({
     validatedStagingTree = [];
   }
   if (staged.status !== 'passed') {
-    return await publishRenderFailure({
+    return await publishPresentationOutputRenderFailureV002({
       workspaceRoot,
       request,
       job,
@@ -2274,6 +2579,7 @@ export async function runPresentationOutputJobV001({
           violations: [],
           diagnosticCode: 'OUTPUT_RENDER_STAGED_ARTIFACT_INVALID',
         },
+        fatalObservation: unknownFatalObservationV002(),
       },
       safetyArtifacts,
     });
@@ -2321,7 +2627,7 @@ export async function runPresentationOutputJobV001({
       reservation: core.reservation,
     });
   } catch {
-    return await publishRenderFailure({
+    return await publishPresentationOutputRenderFailureV002({
       workspaceRoot,
       request,
       job,
@@ -2339,6 +2645,10 @@ export async function runPresentationOutputJobV001({
           violations: [],
           diagnosticCode: 'OUTPUT_RENDER_PUBLICATION_FAILED',
         },
+        fatalObservation: buildClosedFatalObservationV002({
+          innerStage: 'publication',
+          evidence: {kind: 'publication-failed'},
+        }),
       },
       safetyArtifacts,
     });
@@ -2379,6 +2689,18 @@ export async function runPresentationOutputJobCliV001(
   } catch {
     return writeFatal('execution', 'OUTPUT_ACCEPTANCE_EXECUTION_FAILED');
   }
+  return writePresentationOutputJobCliResultV001(result, {stdout: writeStdout, stderr: writeStderr});
+}
+
+export function writePresentationOutputJobCliResultV001(
+  result: JsonObject,
+  writers: {
+    stdout?: (chunk: Buffer) => unknown;
+    stderr?: (chunk: Buffer) => unknown;
+  } = {},
+) {
+  const writeStdout = writers.stdout ?? ((chunk: Buffer) => process.stdout.write(chunk));
+  const writeStderr = writers.stderr ?? ((chunk: Buffer) => process.stderr.write(chunk));
   if (result.bytes) writeStdout(result.bytes);
   if (dense(result.retainedSafetyArtifacts)
     && result.retainedSafetyArtifacts.length > 0) {

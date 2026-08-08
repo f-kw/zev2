@@ -148,6 +148,10 @@ export const PRESENTATION_OUTPUT_FORMAL_IMPLEMENTATION_ROLES_V001 = Object.freez
     role: 'strict-json',
     path: 'evals/clip_composition/presentation_caption_semantic_source_package_v001.mjs',
   }),
+  Object.freeze({
+    role: 'fatal-observation',
+    path: 'evals/clip_composition/presentation_fatal_observation_v002.mjs',
+  }),
 ]);
 
 export const PRESENTATION_OUTPUT_APPROVED_CONTRACT_BINDINGS_V001 = Object.freeze([

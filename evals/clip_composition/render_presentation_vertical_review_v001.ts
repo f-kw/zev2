@@ -1502,19 +1502,13 @@ export async function validatePresentationVerticalRendererTrustV001({
       ));
       continue;
     }
-    if (dependency.role === 'vertical-renderer') {
-      continue;
-    }
     try {
       const bytes = await readFile(resolveRepoPath(dependency.path));
       const jobBinding = implementationByPath.get(dependency.path);
-      if (
-        sha256(bytes) !== dependency.fileSha256
-        || (
-          jobBinding !== undefined
-          && jobBinding.fileSha256 !== dependency.fileSha256
-        )
-      ) {
+      const observedSha256 = sha256(bytes);
+      if (jobBinding !== undefined
+        ? observedSha256 !== jobBinding.fileSha256
+        : observedSha256 !== dependency.fileSha256) {
         throw new TypeError('renderer trust dependency mismatch');
       }
     } catch {

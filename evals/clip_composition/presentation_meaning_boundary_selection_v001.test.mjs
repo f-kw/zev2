@@ -132,6 +132,11 @@ const SELECTION_IMPLEMENTATION_BINDINGS = Object.freeze([
     fileSha256: H('4'),
     role: 'strict-json-codec',
   }),
+  Object.freeze({
+    path: 'evals/clip_composition/presentation_fatal_observation_v002.mjs',
+    fileSha256: H('5'),
+    role: 'fatal-observation',
+  }),
 ]);
 const B6_IMPLEMENTATION_BINDINGS = Object.freeze([
   Object.freeze({
@@ -805,6 +810,8 @@ const makeSelectionCliArtifactGraph = async () => {
         'evals/clip_composition/presentation_meaning_boundary_source_package_v001.mjs'},
       {role: 'strict-json-codec', path:
         'evals/clip_composition/presentation_caption_semantic_source_package_v001.mjs'},
+      {role: 'fatal-observation', path:
+        'evals/clip_composition/presentation_fatal_observation_v002.mjs'},
     ];
     const makeSelectionJob = async ({jobId, sourceBinding}) => ({
       schemaVersion: 'presentation-meaning-boundary-validation-job-v001',
@@ -1319,14 +1326,32 @@ test('MSL021 strict JSON invalid owns code 22 and internal postconditions are fa
       await inspectPresentationMeaningBoundarySelectionInputsBeforePublicationV001(
         rereadInput,
       ),
-      {status: 'fatal', stage: 'input-read'},
+      {
+        status: 'fatal',
+        stage: 'input-read',
+        fatalObservation: {
+          schemaVersion: 'presentation-fatal-observation-v002',
+          innerStage: 'input-read',
+          targetFile: null,
+          innerCode: 'FILE_CHANGED_DURING_READ',
+        },
+      },
     );
     await rm(path.join(formalWorkspace, trackedJobPath));
     assert.deepEqual(
       await inspectPresentationMeaningBoundarySelectionInputsBeforePublicationV001(
         rereadInput,
       ),
-      {status: 'fatal', stage: 'input-read'},
+      {
+        status: 'fatal',
+        stage: 'input-read',
+        fatalObservation: {
+          schemaVersion: 'presentation-fatal-observation-v002',
+          innerStage: 'unknown',
+          targetFile: null,
+          innerCode: 'UNCLASSIFIED',
+        },
+      },
     );
   } finally {
     await rm(formalWorkspace, {recursive: true, force: true});
@@ -1338,11 +1363,21 @@ test('MSL021 strict JSON invalid owns code 22 and internal postconditions are fa
   ));
   const cliFatal = spawnSync(process.execPath, [cliPath], {encoding: null});
   assert.equal(cliFatal.status, 2);
-  assert.deepEqual(cliFatal.stdout,
-    Buffer.from('{"status":"fatal","violations":[]}\n', 'utf8'));
+  const fatalValue = {
+    schemaVersion: 'presentation-caption-meaning-boundary-runner-fatal-v002',
+    status: 'fatal',
+    violations: [],
+    fatalObservation: {
+      schemaVersion: 'presentation-fatal-observation-v002',
+      innerStage: 'unknown',
+      targetFile: null,
+      innerCode: 'UNCLASSIFIED',
+    },
+  };
+  assert.deepEqual(cliFatal.stdout, formalBytes(fatalValue));
   assert.deepEqual(makePresentationMeaningBoundaryFatalCliResultV001(), {
     exitCode: 2,
-    bytes: Buffer.from('{"status":"fatal","violations":[]}\n', 'utf8'),
+    bytes: formalBytes(fatalValue),
   });
   assert.equal(PRESENTATION_MEANING_BOUNDARY_SELECTION_SCHEMA_V001,
     'presentation-meaning-boundary-selection-v001');

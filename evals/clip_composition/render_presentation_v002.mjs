@@ -31,6 +31,10 @@ import {
   inspectRenderedMediaV002,
   inspectRenderedMediaWithToolsV001,
 } from './presentation_renderer_qc_v002.mjs';
+import {
+  buildPresentationFatalObservationV002,
+  classifyPresentationFatalInnerCodeV002,
+} from './presentation_fatal_observation_v002.mjs';
 
 export const PRESENTATION_RENDER_JOB_SCHEMA_VERSION = 'presentation-render-job-v002';
 export const PRESENTATION_RENDER_APPLICATION_RESULTS_SCHEMA_VERSION =
@@ -106,7 +110,48 @@ const repoPath = (absolutePath) => path.relative(WORKSPACE_ROOT, absolutePath);
 const readJson = async (filePath) => JSON.parse(await readFile(filePath, 'utf8'));
 const writeJson = async (filePath, value) => writeFile(filePath, `${JSON.stringify(value, null, 2)}\n`, 'utf8');
 
-const run = (command, args, options = {}) => new Promise((resolve, reject) => {
+const UNKNOWN_PRESENTATION_FATAL_PROCESS_EVIDENCE_V002 = Object.freeze({
+  innerStage: 'unknown',
+  innerCode: 'UNCLASSIFIED',
+});
+
+const closePresentationFatalProcessEvidenceV002 = (innerStage, innerCode) => {
+  try {
+    const observation = buildPresentationFatalObservationV002({
+      innerStage,
+      targetFile: null,
+      innerCode,
+    });
+    return Object.freeze({
+      innerStage: observation.innerStage,
+      innerCode: observation.innerCode,
+    });
+  } catch {
+    return UNKNOWN_PRESENTATION_FATAL_PROCESS_EVIDENCE_V002;
+  }
+};
+
+const presentationRendererChildProcessErrorV001 = ({
+  innerStage,
+  innerCode,
+  rendererViolationCode = null,
+}) => {
+  const error = new Error('presentation renderer child process failed');
+  if (rendererViolationCode !== null) error.rendererViolationCode = rendererViolationCode;
+  Object.defineProperty(error, 'presentationFatalProcessEvidence', {
+    configurable: false,
+    enumerable: false,
+    writable: false,
+    value: closePresentationFatalProcessEvidenceV002(innerStage, innerCode),
+  });
+  return error;
+};
+
+export const runPresentationRendererChildProcessV001 = (
+  command,
+  args,
+  options = {},
+) => new Promise((resolve, reject) => {
   const stdout = [];
   const stderr = [];
   const child = spawn(command, args, {
@@ -115,16 +160,37 @@ const run = (command, args, options = {}) => new Promise((resolve, reject) => {
   });
   child.stdout.on('data', (chunk) => stdout.push(chunk));
   child.stderr.on('data', (chunk) => stderr.push(chunk));
-  child.on('error', reject);
-  child.on('close', (code) => {
-    const result = {code, stdout: Buffer.concat(stdout), stderr: Buffer.concat(stderr)};
-    if ((options.allowedExitCodes ?? [0]).includes(code)) resolve(result);
+  child.on('error', (error) => {
+    const innerCode = classifyPresentationFatalInnerCodeV002(
+      ['EPERM', 'EACCES'].includes(error?.code)
+        ? {kind: 'node-error', code: error.code}
+        : {kind: 'child-process', event: 'spawn-failed'},
+    );
+    reject(presentationRendererChildProcessErrorV001({
+      innerStage: options.fatalInnerStage ?? 'unknown',
+      innerCode,
+    }));
+  });
+  child.on('close', (code, signal) => {
+    const result = {
+      code,
+      stdout: Buffer.concat(stdout),
+      stderr: Buffer.concat(stderr),
+    };
+    if (signal === null && (options.allowedExitCodes ?? [0]).includes(code)) resolve(result);
     else {
-      const error = new Error(
-        `${command} failed (${code ?? 'unknown'}): ${result.stderr.toString()}${result.stdout.toString()}`,
+      const innerCode = classifyPresentationFatalInnerCodeV002({
+        kind: 'child-process',
+        event: signal === null ? 'exit-nonzero' : 'signalled',
+      });
+      const rendererViolationCode = classifyPresentationRenderErrorV002(
+        `${result.stderr.toString()}${result.stdout.toString()}`,
       );
-      error.processResult = result;
-      reject(error);
+      reject(presentationRendererChildProcessErrorV001({
+        innerStage: options.fatalInnerStage ?? 'unknown',
+        innerCode,
+        rendererViolationCode,
+      }));
     }
   });
 });
@@ -132,8 +198,14 @@ const run = (command, args, options = {}) => new Promise((resolve, reject) => {
 /** レンダラーが成果物を書き始める前のcommitと作業木状態を記録する。 */
 export const inspectGitStateV001 = async () => {
   const [head, status] = await Promise.all([
-    run('git', ['rev-parse', 'HEAD']),
-    run('git', ['status', '--porcelain=v1', '--untracked-files=normal']),
+    runPresentationRendererChildProcessV001('git', ['rev-parse', 'HEAD'], {
+      fatalInnerStage: 'runner-bootstrap',
+    }),
+    runPresentationRendererChildProcessV001(
+      'git',
+      ['status', '--porcelain=v1', '--untracked-files=normal'],
+      {fatalInnerStage: 'runner-bootstrap'},
+    ),
   ]);
   return {
     head: head.stdout.toString().trim(),
@@ -307,8 +379,12 @@ export const actualToolVersions = async () => {
   const [remotionPackage, browserVersion, ffmpeg, ffprobe] = await Promise.all([
     readJson(path.join(WORKSPACE_ROOT, 'runner/node_modules/remotion/package.json')),
     readFile(path.join(WORKSPACE_ROOT, 'runner/node_modules/.remotion/chrome-headless-shell/VERSION'), 'utf8'),
-    run('ffmpeg', ['-version']),
-    run('ffprobe', ['-version']),
+    runPresentationRendererChildProcessV001('ffmpeg', ['-version'], {
+      fatalInnerStage: 'runner-bootstrap',
+    }),
+    runPresentationRendererChildProcessV001('ffprobe', ['-version'], {
+      fatalInnerStage: 'runner-bootstrap',
+    }),
   ]);
   return {
     nodeVersion: process.version,
@@ -399,15 +475,19 @@ export function validateBaseMediaGenerationBindingV002({
 }
 
 export const inspectFrameCount = async (filePath) => {
-  return inspectFrameCountWithToolV001(filePath, 'ffprobe');
+  return inspectFrameCountWithToolV001(filePath, 'ffprobe', 'input-read');
 };
 
-export const inspectFrameCountWithToolV001 = async (filePath, ffprobePath) => {
+export const inspectFrameCountWithToolV001 = async (
+  filePath,
+  ffprobePath,
+  fatalInnerStage = 'input-read',
+) => {
   if (!isNonEmptyString(ffprobePath)) throw new TypeError('ffprobePath is required');
-  const result = await run(ffprobePath, [
+  const result = await runPresentationRendererChildProcessV001(ffprobePath, [
     '-v', 'error', '-count_frames', '-select_streams', 'v:0',
     '-show_entries', 'stream=nb_read_frames', '-of', 'json', filePath,
-  ]);
+  ], {fatalInnerStage});
   const parsed = JSON.parse(result.stdout.toString());
   return Number(parsed.streams?.[0]?.nb_read_frames);
 };
@@ -638,24 +718,18 @@ const overlayPropsFor = (element, plan, presetRegistry) => {
 };
 
 const renderOverlayStill = async (props, outputPath) => {
-  try {
-    await run(REMOTION_BIN, [
-      'still', REMOTION_ENTRY, 'PresentationOverlayV001', outputPath,
-      '--props', JSON.stringify(props),
-      '--image-format', 'png',
-      '--public-dir', REMOTION_PUBLIC,
-      '--browser-executable', CHROME_BIN,
-      '--log', 'error',
-    ], {cwd: WORKSPACE_ROOT, env: {NODE_PATH: RENDER_NODE_MODULES}});
-  } catch (error) {
-    const violationCode = classifyPresentationRenderErrorV002(error);
-    if (violationCode) {
-      const mapped = new Error(error instanceof Error ? error.message : String(error));
-      mapped.rendererViolationCode = violationCode;
-      throw mapped;
-    }
-    throw error;
-  }
+  await runPresentationRendererChildProcessV001(REMOTION_BIN, [
+    'still', REMOTION_ENTRY, 'PresentationOverlayV001', outputPath,
+    '--props', JSON.stringify(props),
+    '--image-format', 'png',
+    '--public-dir', REMOTION_PUBLIC,
+    '--browser-executable', CHROME_BIN,
+    '--log', 'error',
+  ], {
+    cwd: WORKSPACE_ROOT,
+    env: {NODE_PATH: RENDER_NODE_MODULES},
+    fatalInnerStage: 'overlay-render',
+  });
 };
 
 /** Remotionの失敗文を未知失敗へ丸めず、既知のfont失敗だけを固定コードへ分類する。 */
@@ -689,22 +763,25 @@ const imageDifferencePixelsWithinBounds = async (leftPath, rightPath, bounds, im
     throw new TypeError('image comparison bounds are invalid');
   }
   const geometry = `${width}x${height}+${bounds.left}+${bounds.top}`;
-  const result = await run(imageMagickPath, [
+  const result = await runPresentationRendererChildProcessV001(imageMagickPath, [
     'compare', '-metric', 'AE',
     '(', leftPath, '-crop', geometry, '+repage', ')',
     '(', rightPath, '-crop', geometry, '+repage', ')',
     'null:',
-  ], {allowedExitCodes: [0, 1]});
+  ], {
+    allowedExitCodes: [0, 1],
+    fatalInnerStage: 'post-render-qc',
+  });
   const value = Number(result.stderr.toString().trim().split(/\s+/)[0]);
   if (!Number.isFinite(value)) throw new Error('bounded image difference could not be parsed');
   return value;
 };
 
 const extractFrame = async (inputPath, frame, outputPath, ffmpegPath = 'ffmpeg') => {
-  await run(ffmpegPath, [
+  await runPresentationRendererChildProcessV001(ffmpegPath, [
     '-hide_banner', '-loglevel', 'error', '-y', '-i', inputPath,
     '-vf', `select=eq(n\\,${frame})`, '-frames:v', '1', outputPath,
-  ]);
+  ], {fatalInnerStage: 'post-render-qc'});
 };
 
 const composite = async ({
@@ -714,6 +791,7 @@ const composite = async ({
   expectedFrameCount,
   outputPath,
   ffmpegPath = 'ffmpeg',
+  fatalInnerStage = 'overlay-render',
 }) => {
   const args = ['-hide_banner', '-loglevel', 'error', '-y', '-i', baseMediaPath];
   for (const record of overlayRecords) {
@@ -744,7 +822,9 @@ const composite = async ({
     '-c:v', 'libx264', '-preset', 'fast', '-crf', '20', '-pix_fmt', 'yuv420p',
     '-c:a', 'copy', '-movflags', '+faststart', outputPath,
   );
-  await run(ffmpegPath, args);
+  await runPresentationRendererChildProcessV001(ffmpegPath, args, {
+    fatalInnerStage,
+  });
 };
 
 const DEFAULT_PRESENTATION_OVERLAY_ADAPTER_V001 = Object.freeze({
@@ -1219,16 +1299,27 @@ const contractFailure = (
   },
 });
 
-const processFailure = (stage, error, cleanupWarnings = []) => ({
-  exitCode: 2,
-  failure: {
-    schemaVersion: 'presentation-render-failure-v002',
-    status: 'process_failed',
-    stage,
-    message: error instanceof Error ? error.message : String(error),
-    ...(cleanupWarnings.length === 0 ? {} : {cleanupWarnings}),
-  },
-});
+const processFailure = (stage, error, cleanupWarnings = []) => {
+  const result = {
+    exitCode: 2,
+    failure: {
+      schemaVersion: 'presentation-render-failure-v002',
+      status: 'process_failed',
+      stage,
+      message: error instanceof Error ? error.message : String(error),
+      ...(cleanupWarnings.length === 0 ? {} : {cleanupWarnings}),
+    },
+  };
+  if (error?.presentationFatalProcessEvidence) {
+    Object.defineProperty(result, 'presentationFatalProcessEvidence', {
+      configurable: false,
+      enumerable: false,
+      writable: false,
+      value: error.presentationFatalProcessEvidence,
+    });
+  }
+  return result;
+};
 
 /**
  * 合格済みの論理描画計画を、現行v002描画エンジンとQCへ一度だけ通す共通入口。
@@ -1322,22 +1413,19 @@ export async function executeValidatedPresentationDrawAndQcV001({
       const layoutInputPath = path.join(scratchDirectory, 'layout-input.json');
       const layoutOutputPath = path.join(scratchDirectory, 'layout-output.json');
       await writeJson(layoutInputPath, {canvas: plan.canvas, overlays: overlayProps});
-      const layoutProcess = await run(
+      await runPresentationRendererChildProcessV001(
         toolPaths.tsxPath,
         [toolPaths.layoutInspectorPath, layoutInputPath, layoutOutputPath],
         {
           allowedExitCodes: [0, 1],
           env: {NODE_PATH: RENDER_NODE_MODULES},
+          fatalInnerStage: 'layout-preflight',
         },
       );
       try {
         layoutInspection = await readJson(layoutOutputPath);
-      } catch (error) {
-        throw new Error(
-          `layout inspector produced no result (exit ${layoutProcess.code}): `
-          + `${layoutProcess.stderr.toString()}${layoutProcess.stdout.toString()}`,
-          {cause: error},
-        );
+      } catch {
+        throw new Error('layout inspector produced no result');
       }
     }
     if (layoutInspection.status !== 'passed') {
@@ -1438,6 +1526,7 @@ export async function executeValidatedPresentationDrawAndQcV001({
       expectedFrameCount,
       outputPath: workVideo,
       ffmpegPath: toolPaths.ffmpegPath,
+      fatalInnerStage: 'overlay-render',
     });
     const outputMedia = await inspectRenderedMediaWithToolsV001(workVideo, {
       ffprobePath: toolPaths.ffprobePath,
@@ -1447,15 +1536,16 @@ export async function executeValidatedPresentationDrawAndQcV001({
       outputMedia.video.frameCount = await inspectFrameCountWithToolV001(
         workVideo,
         toolPaths.ffprobePath,
+        'post-render-qc',
       );
     }
 
     const transparentOverlayPath = path.join(scratchDirectory, 'frames', 'transparent-overlay.png');
-    await run(toolPaths.imageMagickPath, [
+    await runPresentationRendererChildProcessV001(toolPaths.imageMagickPath, [
       '-size', `${plan.canvas.width}x${plan.canvas.height}`,
       'xc:none',
       transparentOverlayPath,
-    ]);
+    ], {fatalInnerStage: 'post-render-qc'});
     for (const record of overlayRecords) {
       const representativeFrame = record.element.startFrame
         + Math.floor(record.element.displayFrameCount / 2);
@@ -1472,6 +1562,7 @@ export async function executeValidatedPresentationDrawAndQcV001({
         expectedFrameCount,
         outputPath: omittedVideo,
         ffmpegPath: toolPaths.ffmpegPath,
+        fatalInnerStage: 'post-render-qc',
       });
       await extractFrame(workVideo, representativeFrame, outputFrame, toolPaths.ffmpegPath);
       await extractFrame(omittedVideo, representativeFrame, omittedFrame, toolPaths.ffmpegPath);

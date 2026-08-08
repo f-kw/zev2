@@ -13,6 +13,11 @@ import {
   buildPresentationCaptionSemanticCompilerInputForContractV001,
   validatePresentationCaptionSemanticSelectionForContractV001,
 } from './presentation_caption_semantic_output_v001.mjs';
+import {
+  buildPresentationFatalObservationV002,
+  classifyPresentationFatalInnerCodeV002,
+  selectPresentationFatalTargetFileV002,
+} from './presentation_fatal_observation_v002.mjs';
 
 export const PRESENTATION_CAPTION_SEMANTIC_OUTPUT_JOB_SCHEMA_V002 =
   'presentation-caption-semantic-output-check-job-v002';
@@ -52,6 +57,7 @@ const DEPENDENCY_BINDINGS = Object.freeze([
   ['gateACore', 'evals/clip_composition/presentation_segmenter_boundary_evidence_v001.mjs'],
   ['gateARetainedSourceAtomsCore', 'evals/clip_composition/presentation_retained_source_atoms_v001.mjs'],
   ['gateARunner', 'evals/clip_composition/run_presentation_segmenter_boundary_preflight_v001.mjs'],
+  ['fatal-observation', 'evals/clip_composition/presentation_fatal_observation_v002.mjs'],
 ]);
 const CHECK_NAMES = Object.freeze([
   'jobBinding',
@@ -190,12 +196,68 @@ const compilerContract = (manifest) => ({
   manifestHasDisplayPolicy: true,
 });
 
-const fatal = () => ({
-  schemaVersion: 'presentation-formal-runner-fatal-v001',
+const fatalObservation = ({innerStage = 'unknown', evidence = {kind: 'unclassified'},
+  targetFile = null} = {}) => {
+  const innerCode = classifyPresentationFatalInnerCodeV002(evidence);
+  return buildPresentationFatalObservationV002({
+    innerStage: innerCode === 'UNCLASSIFIED' ? 'unknown' : innerStage,
+    targetFile: innerCode === 'UNCLASSIFIED' ? null : targetFile,
+    innerCode,
+  });
+};
+const fatal = (observation = fatalObservation()) => ({
+  schemaVersion: 'presentation-formal-runner-fatal-v002',
   runnerId: RUNNER_ID,
   status: 'fatal',
   diagnosticCode: 'CAPTION_B1_V002_RUNNER_FATAL',
+  fatalObservation: observation,
 });
+
+const verifiedFatalTargetSource = (sourceField, binding) => Object.freeze({
+  sourceField,
+  path: binding.path,
+  fileSha256: binding.fileSha256,
+});
+
+const buildLegacyCaptionB1VerifiedTargetSources = ({job, jobPath, jobBytes}) =>
+  Object.freeze([
+    verifiedFatalTargetSource('job', {
+      path: jobPath,
+      fileSha256: hash(jobBytes),
+    }),
+    ...job.implementationBinding.files.map(binding => verifiedFatalTargetSource(
+      'job.implementationBinding.files[*]',
+      binding,
+    )),
+    ...job.implementationBinding.dependencyFiles.map(binding => verifiedFatalTargetSource(
+      'job.implementationBinding.dependencyFiles[*]',
+      binding,
+    )),
+    verifiedFatalTargetSource(
+      'job.sourcePackageBinding.manifest',
+      job.sourcePackageBinding.manifest,
+    ),
+    verifiedFatalTargetSource(
+      'job.sourcePackageBinding.validationReport',
+      job.sourcePackageBinding.validationReport,
+    ),
+    verifiedFatalTargetSource('job.semanticOutputBinding', job.semanticOutputBinding),
+  ]);
+
+const selectFatalTarget = ({binding, verifiedTargetSources}) => {
+  const matchingSources = verifiedTargetSources.filter(source => (
+    source.path === binding.path && source.fileSha256 === binding.fileSha256
+  ));
+  if (matchingSources.length !== 1) return null;
+  return selectPresentationFatalTargetFileV002({
+    boundaryId: 'legacy-caption-b1',
+    sourceField: matchingSources[0].sourceField,
+    path: binding.path,
+    fileSha256: binding.fileSha256,
+    verifiedTargetSources,
+    sourceRecordVerified: true,
+  });
+};
 
 const inside = (root, path) => {
   const absolute = resolve(root, path);
@@ -334,11 +396,12 @@ const report = ({
   };
 };
 
-const implementationValid = async (job, root, reader) => {
+const implementationValid = async (job, root, reader, beforeRead = () => {}) => {
   for (const entry of [
     ...job.implementationBinding.files,
     ...job.implementationBinding.dependencyFiles,
   ]) {
+    beforeRead(entry);
     const bytes = await reader(inside(root, entry.path));
     if (hash(bytes) !== entry.fileSha256) return false;
   }
@@ -389,6 +452,8 @@ export async function runPresentationCaptionSemanticOutputCheckV002(
   jobPath,
   options = {},
 ) {
+  let fatalRead = Object.freeze({innerStage: 'job-read', binding: null});
+  let verifiedTargetSources = Object.freeze([]);
   try {
     if (typeof jobPath !== 'string'
       || !jobPath.startsWith(JOB_ROOT)
@@ -419,7 +484,17 @@ export async function runPresentationCaptionSemanticOutputCheckV002(
         }),
       };
     }
-    if (!await implementationValid(job, root, reader)) {
+    verifiedTargetSources = buildLegacyCaptionB1VerifiedTargetSources({
+      job,
+      jobPath,
+      jobBytes,
+    });
+    if (!await implementationValid(job, root, reader, (binding) => {
+      fatalRead = Object.freeze({
+        innerStage: 'input-read',
+        binding,
+      });
+    })) {
       const violations = [{
         code: 'IMPLEMENTATION_MISMATCH',
         path: '$.implementationBinding',
@@ -464,6 +539,10 @@ export async function runPresentationCaptionSemanticOutputCheckV002(
         }),
       };
     }
+    fatalRead = Object.freeze({
+      innerStage: 'input-read',
+      binding: job.semanticOutputBinding,
+    });
     const rawBytes = await reader(inside(root, job.semanticOutputBinding.path));
     if (hash(rawBytes) !== job.semanticOutputBinding.fileSha256) {
       const violations = [{code: 'INPUT_HASH_MISMATCH', path: '$.semanticOutputBinding', details: {}}];
@@ -549,7 +628,7 @@ export async function runPresentationCaptionSemanticOutputCheckV002(
         contract,
       );
     if (!formalBytes(compilerA).equals(formalBytes(compilerB))) {
-      return {exitCode: 2, value: fatal()};
+      return {exitCode: 2, value: fatal(fatalObservation())};
     }
     const value = report({
       status: 'passed',
@@ -564,8 +643,21 @@ export async function runPresentationCaptionSemanticOutputCheckV002(
       compiler: compilerA,
     });
     return {exitCode: 0, value};
-  } catch {
-    return {exitCode: 2, value: fatal()};
+  } catch (error) {
+    const targetFile = fatalRead.binding === null
+      ? null
+      : selectFatalTarget({
+        binding: fatalRead.binding,
+        verifiedTargetSources,
+      });
+    return {
+      exitCode: 2,
+      value: fatal(fatalObservation({
+        innerStage: fatalRead.innerStage,
+        evidence: {kind: 'node-error', code: error?.code ?? null},
+        targetFile,
+      })),
+    };
   }
 }
 
@@ -576,7 +668,17 @@ export async function runPresentationCaptionSemanticOutputCheckCliV002(
   const result = argv.length === 1
     ? await runPresentationCaptionSemanticOutputCheckV002(argv[0])
     : {exitCode: 2, value: fatal()};
-  streams.stdout.write(formalBytes(result.value));
+  return writePresentationCaptionSemanticOutputCheckCliResultV002(
+    result,
+    chunk => streams.stdout.write(chunk),
+  );
+}
+
+export function writePresentationCaptionSemanticOutputCheckCliResultV002(
+  result,
+  writer = chunk => process.stdout.write(chunk),
+) {
+  writer(formalBytes(result.value));
   return result.exitCode;
 }
 

@@ -50,19 +50,23 @@ import {
   PRESENTATION_OUTPUT_RENDER_DIAGNOSTIC_CODES_V001,
   buildPresentationOutputCommonCorePlanV001,
   buildPresentationOutputRenderApplicationResultsV001,
-  buildPresentationOutputRenderFailureReportV001,
+  buildPresentationOutputRenderFailureReportV002,
   buildPresentationOutputRenderManifestV001,
   buildPresentationOutputRenderPlanV001,
   buildPresentationOutputRenderQcV001,
   projectPresentationOutputRendererViolationsV001,
   serializePresentationOutputRenderJsonV001,
   validatePresentationOutputRenderApplicationResultsV001,
-  validatePresentationOutputRenderFailureReportV001,
+  validatePresentationOutputRenderFailureReportV002,
   validatePresentationOutputRenderManifestV001,
   validatePresentationOutputRenderPlanV001,
   validatePresentationOutputRenderQcV001,
 } from './presentation_output_render_plan_v001.mjs';
+import {
+  buildPresentationFatalObservationV002,
+} from './presentation_fatal_observation_v002.mjs';
 import presentationOutputJobV001 from './run_presentation_output_job_v001.ts';
+import * as presentationRendererCoreV002 from './render_presentation_v002.mjs';
 import {
   PRESENTATION_RENDERER_VIOLATION_CODES,
   inspectFrameCountWithToolV001,
@@ -76,7 +80,12 @@ const {
 } = presentationOutputStyleResolverV001;
 const {
   OUTPUT_DRAW_ARTIFACT_NAMES_V001,
+  PRESENTATION_OUTPUT_RENDER_FAILURE_ROOT_V001,
+  inspectPresentationOutputRendererCoreExportsV001,
   inspectPresentationOutputCoreFailureObservationV001,
+  inspectPresentationOutputRequestFatalObservationV002,
+  inspectPresentationOutputRenderFailureTargetV002,
+  observePresentationOutputRawRequestBindingV001,
   runPresentationOutputJobCliV001,
   runPresentationOutputJobV001,
   validatePresentationOutputStagedArtifactsV001,
@@ -88,6 +97,11 @@ const RUN_INPUT_CROP_INITIAL_HEAD = 'cf7b2af9c77d71ad78644e7ec8f754804036fcf8';
 const RUN_INPUT_CROP_IMPLEMENTATION_BASELINE_COMMIT =
   'a1fd43d890fe12bb2c6db432b4d9cdfd828d4a8f';
 const H = 'a'.repeat(64);
+const unknownFatalObservation = () => buildPresentationFatalObservationV002({
+  innerStage: 'unknown',
+  targetFile: null,
+  innerCode: 'UNCLASSIFIED',
+});
 const sha256 = bytes => createHash('sha256').update(bytes).digest('hex');
 const outputCanonicalSha256 = value => sha256(Buffer.from(
   canonicalPresentationOutputFiniteJsonV001(value),
@@ -806,6 +820,11 @@ const buildFormalE2eMeaningPackage = async ({
         path: 'evals/clip_composition/presentation_caption_semantic_source_package_v001.mjs',
         fileSha256: H,
         role: 'strict-json-codec',
+      },
+      {
+        path: 'evals/clip_composition/presentation_fatal_observation_v002.mjs',
+        fileSha256: H,
+        role: 'fatal-observation',
       },
     ],
   };
@@ -1659,6 +1678,32 @@ test('OEE001: 合成横型を意味packageからapplication/QC/manifestまで一
 
 test('OEE002: 合成縦型をcrop前提の意味packageからQCまで一気通貫する', async () => {
   const result = await runFormalOutputE2e('vertical-short-1080x1920');
+  const diagnosticPath = process.env.PRESENTATION_OEE002_DIAGNOSTIC_PATH;
+  if (diagnosticPath !== undefined) {
+    assert.match(
+      diagnosticPath,
+      /^evals\/clip_composition\/reports\/presentation\/diagnostics\/[a-z0-9./-]+\.json$/u,
+    );
+    const diagnostic = {
+      schemaVersion: 'presentation-output-oee002-test-diagnostic-v001',
+      testId: 'OEE002',
+      observed: {
+        status: result.observed.status,
+        exitCode: result.observed.exitCode,
+      },
+      acceptanceReport: result.acceptance ?? null,
+      failureReport: result.failureReport ?? null,
+      controlNames: result.controlNames,
+      renderNames: result.renderNames,
+    };
+    const absoluteDiagnosticPath = path.join(ROOT, diagnosticPath);
+    await mkdir(path.dirname(absoluteDiagnosticPath), {recursive: true});
+    await writeFile(
+      absoluteDiagnosticPath,
+      Buffer.from(`${JSON.stringify(diagnostic, null, 2)}\n`, 'utf8'),
+      {flag: 'wx'},
+    );
+  }
   assert.equal(result.observed.status, 'passed');
   assert.equal(result.observed.exitCode, 0);
   assert.equal(result.acceptance.status, 'accepted-for-render');
@@ -1711,7 +1756,7 @@ test('OEE004: rejected時はcontrol 2件・render 0件でfallbackしない', asy
     /instruction-bundle|resolution-package|presentation-caption-display-plan-v00/u);
 });
 
-test('OEE005: core契約/QC失敗はrejected failure exact 10 keyへ帰属する', async () => {
+test('OEE005: core契約/QC失敗はrejected failure exact 11 keyへ帰属する', async () => {
   const result = await runFormalOutputE2e('normal-landscape', {
     atomTexts: [' ', ' '],
     useCli: true,
@@ -1723,8 +1768,9 @@ test('OEE005: core契約/QC失敗はrejected failure exact 10 keyへ帰属する
   ]);
   assert.deepEqual(result.renderNames, []);
   const report = result.failureReport;
-  assert.equal(Object.keys(report).length, 10);
+  assert.equal(Object.keys(report).length, 11);
   assert.equal(report.status, 'rejected');
+  assert.equal(report.fatalObservation, null);
   assert.equal(report.failureObservation.source, 'common-draw-core');
   assert.equal(report.stage, report.failureObservation.coreStage);
   assert.ok(report.failureObservation.violations.length > 0);
@@ -1736,7 +1782,60 @@ test('OEE005: core契約/QC失敗はrejected failure exact 10 keyへ帰属する
   assert.deepEqual(result.cli.stderr, renderFormalBytes(report.retainedSafetyArtifacts));
 });
 
-test('OEE006: tool/I/O fatalはviolations空・exit 2相当へ帰属する', async () => {
+test('OEE006: 複合不正は数値tokenを優先し、tool/I/O fatalはexit 2相当へ帰属する', async () => {
+  const occupiedOutputId = `oee006-occupied-${process.pid}`;
+  const occupiedFailureRoot = `${PRESENTATION_OUTPUT_RENDER_FAILURE_ROOT_V001}/${
+    occupiedOutputId}/${H}`;
+  await mkdir(path.join(ROOT, occupiedFailureRoot), {recursive: true});
+  try {
+    const occupiedTarget = await inspectPresentationOutputRenderFailureTargetV002({
+      workspaceRoot: ROOT,
+      outputId: occupiedOutputId,
+      formalJobFileSha256: H,
+    });
+    assert.equal(occupiedTarget.status, 'fatal');
+    assert.equal(occupiedTarget.exitCode, 2);
+    assert.equal(
+      occupiedTarget.stderr.diagnosticCode,
+      'OUTPUT_RENDER_FAILURE_TARGET_INVALID',
+    );
+    assert.equal(occupiedTarget.stderr.fatalObservation.innerCode, 'REPORT_TARGET_INVALID');
+  } finally {
+    await rm(path.join(
+      ROOT,
+      PRESENTATION_OUTPUT_RENDER_FAILURE_ROOT_V001,
+      occupiedOutputId,
+    ), {recursive: true, force: true});
+  }
+
+  const priorityFixtureRoot = `${FORMAL_E2E_ROOT}/oee006-request-priority-${process.pid}`;
+  const priorityRequestPath = `${priorityFixtureRoot}/output-request.json`;
+  const numericInvalidBytes = Buffer.from('{"value":1e0}\n', 'utf8');
+  assert.notEqual(sha256(numericInvalidBytes), H);
+  await writeFormalFixture(priorityRequestPath, null, numericInvalidBytes);
+  try {
+    const requestObservation = await observePresentationOutputRawRequestBindingV001(
+      ROOT,
+      {
+        path: priorityRequestPath,
+        fileSha256: H,
+        canonicalSha256: H,
+      },
+      [],
+    );
+    assert.equal(requestObservation.status, 'invalid');
+    assert.equal(requestObservation.reason, 'number-invalid');
+    assert.equal(
+      inspectPresentationOutputRequestFatalObservationV002({
+        job: {},
+        requestObservation,
+      }).innerCode,
+      'NUMERIC_TOKEN_INVALID',
+    );
+  } finally {
+    await rm(path.join(ROOT, priorityFixtureRoot), {recursive: true, force: true});
+  }
+
   const result = await runFormalOutputE2e('normal-landscape', {
     useCli: true,
     interferenceMode: 'overlay-output-directory',
@@ -1750,8 +1849,13 @@ test('OEE006: tool/I/O fatalはviolations空・exit 2相当へ帰属する', asy
   ]);
   assert.deepEqual(result.renderNames, []);
   const report = result.failureReport;
-  assert.equal(Object.keys(report).length, 10);
+  assert.equal(Object.keys(report).length, 11);
   assert.equal(report.status, 'fatal');
+  assert.deepEqual(report.fatalObservation, buildPresentationFatalObservationV002({
+    innerStage: 'overlay-render',
+    targetFile: null,
+    innerCode: 'CHILD_PROCESS_EXIT_NONZERO',
+  }));
   assert.equal(report.failureObservation.source, 'common-draw-core');
   assert.equal(report.failureObservation.diagnosticCode, 'OUTPUT_RENDER_CORE_PROCESS_FAILED');
   assert.deepEqual(report.failureObservation.violations, []);
@@ -1780,6 +1884,7 @@ test('OEE007: staging exact検査不合格は旧publisherを呼ばず専用fatal
     violations: [],
     diagnosticCode: 'OUTPUT_RENDER_STAGED_ARTIFACT_INVALID',
   });
+  assert.deepEqual(result.failureReport.fatalObservation, unknownFatalObservation());
   assert.deepEqual(result.cli.stdout, renderFormalBytes(result.failureReport));
   assert.deepEqual(
     result.cli.stderr,
@@ -1810,6 +1915,12 @@ test('OEE008: staging合格後だけ既存commit入口を一度呼ぶ', async ()
     violations: [],
     diagnosticCode: 'OUTPUT_RENDER_PUBLICATION_FAILED',
   });
+  assert.deepEqual(result.failureReport.fatalObservation,
+    buildPresentationFatalObservationV002({
+      innerStage: 'publication',
+      targetFile: null,
+      innerCode: 'PUBLICATION_FAILED',
+    }));
   assert.deepEqual(result.cli.stdout, renderFormalBytes(result.failureReport));
   assert.deepEqual(
     result.cli.stderr,
@@ -1836,6 +1947,7 @@ test('OEE009: coreのRENDER_OUTPUT違反はstage publishをpublicationへ読み�
       violations: [{code, path: '/render', relatedIds: []}],
       diagnosticCode: 'OUTPUT_RENDER_CORE_CONTRACT_FAILED',
     },
+    fatalObservation: null,
   });
   const formalOutputJobBinding = binding('presentation-output-formal-job-v001', 'job');
   const outputRequestBinding = binding('presentation-output-request-v001', 'request');
@@ -1843,7 +1955,7 @@ test('OEE009: coreのRENDER_OUTPUT違反はstage publishをpublicationへ読み�
     'presentation-output-acceptance-report-v001', 'acceptance',
   );
   const renderPlanBinding = binding('presentation-output-render-plan-v001', 'plan');
-  const report = buildPresentationOutputRenderFailureReportV001({
+  const report = buildPresentationOutputRenderFailureReportV002({
     outputId: 'output-e2e-009',
     formalJobFileSha256: H,
     ...observation,
@@ -1857,7 +1969,7 @@ test('OEE009: coreのRENDER_OUTPUT違反はstage publishをpublicationへ読み�
     acceptanceReportBinding, renderPlanBinding,
   });
   assert.equal(report.stage, 'publish');
-  assert.equal(validatePresentationOutputRenderFailureReportV001(report, context).status, 'passed');
+  assert.equal(validatePresentationOutputRenderFailureReportV002(report, context).status, 'passed');
 
   const pathlessQc = inspectPresentationOutputCoreFailureObservationV001({
     exitCode: 1,
@@ -1951,6 +2063,16 @@ const implementationPaths = [
 
 const git = args => execFileSync('git', args, {cwd: ROOT});
 const showAtStart = relativePath => git(['show', `${START_COMMIT}:${relativePath}`]);
+const APPROVED_FATAL_OBSERVABILITY_CURRENT_SHA_BY_PATH = new Map([
+  [
+    'evals/clip_composition/render_presentation_v002.mjs',
+    'ea775b314cc149c65d384603dbc39f3260e3ba8e4a32d99a6275941bf31dd223',
+  ],
+  [
+    'evals/clip_composition/render_presentation_vertical_review_v001.ts',
+    '6fb4edfd9c9a9161f474921368b05bd32c0aaef2b1fd5155e148d291134c8c75',
+  ],
+]);
 
 test('OPF001: 親契約2文書のSHAが承認値と一致する', async () => {
   for (const [relativePath, expected] of parentContracts) {
@@ -1958,12 +2080,18 @@ test('OPF001: 親契約2文書のSHAが承認値と一致する', async () => {
   }
 });
 
-test('OPF002: §4の13正本は開始commit一致かつ非変更11件は現物不変である', async () => {
+test('OPF002: §4の13正本は開始来歴と非変更9件・承認済み変更2件を別層で束縛する', async () => {
   assert.equal(startFiles.length, 13);
   assert.equal(new Set(startFiles.map(([relativePath]) => relativePath)).size, 13);
+  assert.equal(APPROVED_FATAL_OBSERVABILITY_CURRENT_SHA_BY_PATH.size, 2);
   for (const [relativePath, expected] of startFiles) {
     assert.equal(sha256(showAtStart(relativePath)), expected);
-    if (!relativePath.endsWith('presentation_caption_api_cost_guard_v001.mjs')
+    if (APPROVED_FATAL_OBSERVABILITY_CURRENT_SHA_BY_PATH.has(relativePath)) {
+      assert.equal(
+        sha256(await readFile(path.join(ROOT, relativePath))),
+        APPROVED_FATAL_OBSERVABILITY_CURRENT_SHA_BY_PATH.get(relativePath),
+      );
+    } else if (!relativePath.endsWith('presentation_caption_api_cost_guard_v001.mjs')
       && !relativePath.endsWith('run_presentation_caption_gate_b6_v001.mjs')) {
       assert.equal(sha256(await readFile(path.join(ROOT, relativePath))), expected);
     }
@@ -2030,14 +2158,19 @@ test('OPF005: 参照exportが実在しproductionとtestが同入口を使う', a
       'inspectPresentationOutputDisplayPageV001']],
     [renderModule, ['buildPresentationOutputCommonCorePlanV001',
       'buildPresentationOutputRenderApplicationResultsV001',
-      'buildPresentationOutputRenderFailureReportV001',
+      'buildPresentationOutputRenderFailureReportV002',
       'buildPresentationOutputRenderManifestV001', 'buildPresentationOutputRenderPlanV001',
       'buildPresentationOutputRenderQcV001',
       'validatePresentationOutputRenderApplicationResultsV001',
-      'validatePresentationOutputRenderFailureReportV001',
+      'validatePresentationOutputRenderFailureReportV002',
       'validatePresentationOutputRenderManifestV001',
       'validatePresentationOutputRenderPlanV001', 'validatePresentationOutputRenderQcV001']],
     [runnerModule, ['inspectPresentationOutputCoreFailureObservationV001',
+      'inspectPresentationOutputRendererCoreExportsV001',
+      'inspectPresentationOutputRenderFailureTargetV002',
+      'inspectPresentationOutputRequestFatalObservationV002',
+      'observePresentationOutputRawRequestBindingV001',
+      'publishPresentationOutputRenderFailureV002',
       'runPresentationOutputJobV001', 'runPresentationOutputJobCliV001',
       'validatePresentationOutputStagedArtifactsV001']],
   ];
@@ -2068,6 +2201,17 @@ test('OPF005: 参照exportが実在しproductionとtestが同入口を使う', a
   assert.equal(runnerModule.validatePresentationOutputStagedArtifactsV001,
     validatePresentationOutputStagedArtifactsV001);
   assert.equal(runnerModule.runPresentationOutputJobV001, runPresentationOutputJobV001);
+  assert.deepEqual(
+    inspectPresentationOutputRendererCoreExportsV001(presentationRendererCoreV002),
+    {status: 'passed'},
+  );
+  assert.deepEqual(
+    inspectPresentationOutputRendererCoreExportsV001({
+      ...presentationRendererCoreV002,
+      inspectFrameCountWithToolV001: undefined,
+    }),
+    {status: 'failed'},
+  );
 });
 
 const stableRoots = [
@@ -2209,10 +2353,11 @@ test('OPF011: O07はO03と既存validatorを出力作成前に実行する', asy
     report: null,
     bytes: null,
     stderr: {
-      schemaVersion: 'presentation-output-runner-diagnostic-v001',
+      schemaVersion: 'presentation-output-runner-diagnostic-v002',
       status: 'fatal',
       stage: 'job-validation',
       diagnosticCode: 'OUTPUT_FORMAL_JOB_INVALID',
+      fatalObservation: unknownFatalObservation(),
     },
   });
 });
@@ -2249,10 +2394,11 @@ test('OPF012: 固定Node+TSX loaderでO05/O07実exportを使い追加loaderを�
   assert.deepEqual(rejectedRuntime.renderNames, []);
   assert.equal(rejectedRuntime.cli.stdout.length, 0);
   assert.deepEqual(JSON.parse(rejectedRuntime.cli.stderr.toString('utf8')), {
-    schemaVersion: 'presentation-output-runner-diagnostic-v001',
+    schemaVersion: 'presentation-output-runner-diagnostic-v002',
     status: 'fatal',
     stage: 'job-validation',
     diagnosticCode: 'OUTPUT_FORMAL_JOB_INVALID',
+    fatalObservation: unknownFatalObservation(),
   });
 });
 
@@ -2297,7 +2443,7 @@ test('OPF015: v006原本とpresentation台帳の完全treeは初期HEADから不
   }
 });
 
-test('OPF016: 実装baselineからの差分は承認済み15 pathだけである', async () => {
+test('OPF016: 実装baselineからの差分は承認済み16 pathだけである', async () => {
   const approvedRunInputCropImplementationPaths = [
     'evals/clip_composition/presentation_meaning_output_run_input_record_v001.mjs',
     'evals/clip_composition/run_presentation_meaning_output_run_input_record_v001.mjs',
@@ -2319,10 +2465,14 @@ test('OPF016: 実装baselineからの差分は承認済み15 pathだけである
   const approvedPageLineWrapPolicyImplementationPaths = [
     'evals/clip_composition/presentation_output_page_line_planner_v001.mjs',
   ];
+  const approvedFatalObservabilityImplementationPaths = [
+    'evals/clip_composition/presentation_output_render_plan_v001.mjs',
+  ];
   const approvedImplementationPaths = [
     ...approvedRunInputCropImplementationPaths,
     ...approvedLargeMediaReadImplementationPaths,
     ...approvedPageLineWrapPolicyImplementationPaths,
+    ...approvedFatalObservabilityImplementationPaths,
   ];
   const newImplementationPaths = new Set(
     approvedRunInputCropImplementationPaths.slice(0, 5),
@@ -2342,8 +2492,9 @@ test('OPF016: 実装baselineからの差分は承認済み15 pathだけである
   assert.equal(approvedRunInputCropImplementationPaths.length, 12);
   assert.equal(approvedLargeMediaReadImplementationPaths.length, 2);
   assert.equal(approvedPageLineWrapPolicyImplementationPaths.length, 1);
-  assert.equal(approvedImplementationPaths.length, 15);
-  assert.equal(new Set(approvedImplementationPaths).size, 15);
+  assert.equal(approvedFatalObservabilityImplementationPaths.length, 1);
+  assert.equal(approvedImplementationPaths.length, 16);
+  assert.equal(new Set(approvedImplementationPaths).size, 16);
   assert.deepEqual(
     [...new Set([...tracked, ...untracked])].sort(),
     [...approvedImplementationPaths].sort(),

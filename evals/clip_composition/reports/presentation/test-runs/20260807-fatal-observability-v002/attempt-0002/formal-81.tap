@@ -1,0 +1,515 @@
+TAP version 13
+# Subtest: FOVI001: TSX権限拒否は生messageなしの閉じた観測になる
+ok 1 - FOVI001: TSX権限拒否は生messageなしの閉じた観測になる
+  ---
+  duration_ms: 7.751458
+  ...
+# Subtest: FOVI002: 配置小数token拒否はlayout段階として別attemptへ写せる
+ok 2 - FOVI002: 配置小数token拒否はlayout段階として別attemptへ写せる
+  ---
+  duration_ms: 39.526417
+  ...
+# Subtest: FOVI003: Gate A拒否はfatal専用語彙へ混入しない
+ok 3 - FOVI003: Gate A拒否はfatal専用語彙へ混入しない
+  ---
+  duration_ms: 0.309292
+  ...
+# Subtest: FOVI004: byte列型喪失はmemory対象を捏造せずnullで写す
+ok 4 - FOVI004: byte列型喪失はmemory対象を捏造せずnullで写す
+  ---
+  duration_ms: 25.756875
+  ...
+# Subtest: FOVI005: SHA参照不一致は一意な受理済みbindingだけを対象にする
+ok 5 - FOVI005: SHA参照不一致は一意な受理済みbindingだけを対象にする
+  ---
+  duration_ms: 25.513833
+  ...
+# Subtest: FOVI006: export欠落はcrop検査段階の安全な観測へ写せる
+ok 6 - FOVI006: export欠落はcrop検査段階の安全な観測へ写せる
+  ---
+  duration_ms: 25.481291
+  ...
+# Subtest: FOVI007: 描画指示欠落はQC失敗のままfatal専用語彙へ混入しない
+ok 7 - FOVI007: 描画指示欠落はQC失敗のままfatal専用語彙へ混入しない
+  ---
+  duration_ms: 0.550416
+  ...
+# Subtest: FOVI008: timelineと意味packageの大容量読取は別reportで保持できる
+ok 8 - FOVI008: timelineと意味packageの大容量読取は別reportで保持できる
+  ---
+  duration_ms: 112.08075
+  ...
+# Subtest: FOVI009: child signalからOS権限原因を推測しない
+ok 9 - FOVI009: child signalからOS権限原因を推測しない
+  ---
+  duration_ms: 25.581667
+  ...
+# Subtest: FOVB001: timeline context前fatalはv002 envelopeを持つ
+ok 10 - FOVB001: timeline context前fatalはv002 envelopeを持つ
+  ---
+  duration_ms: 1.067667
+  ...
+# Subtest: FOVB002: timeline context後fatalも共通fatalObservationを使用する
+ok 11 - FOVB002: timeline context後fatalも共通fatalObservationを使用する
+  ---
+  duration_ms: 8.173292
+  ...
+# Subtest: FOVB003: timelineはF01を末尾束縛しfatal専用rootを新設しない
+not ok 12 - FOVB003: timelineはF01を末尾束縛しfatal専用rootを新設しない
+  ---
+  duration_ms: 1.583917
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_fatal_observability_v002.integration.test.mjs:1239:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    
+    false !== true
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_fatal_observability_v002.integration.test.mjs:1245:10)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: FOVB004: 旧B1 context前fatalはformal runner v002を使う
+ok 13 - FOVB004: 旧B1 context前fatalはformal runner v002を使う
+  ---
+  duration_ms: 0.432042
+  ...
+# Subtest: FOVB005: 旧B1 context後fatalにもfatalObservationがある
+ok 14 - FOVB005: 旧B1 context後fatalにもfatalObservationがある
+  ---
+  duration_ms: 1.923541
+  ...
+# Subtest: FOVB006: 旧B1 fixtureだけがF01 dependencyを追加し既存statusを保つ
+ok 15 - FOVB006: 旧B1 fixtureだけがF01 dependencyを追加し既存statusを保つ
+  ---
+  duration_ms: 35.216
+  ...
+# Subtest: FOVB007: 意味終端context前fatalはrunner fatal v002を使う
+ok 16 - FOVB007: 意味終端context前fatalはrunner fatal v002を使う
+  ---
+  duration_ms: 0.270917
+  ...
+# Subtest: FOVB008: 意味終端context後fatalにfatalObservationがある
+not ok 17 - FOVB008: 意味終端context後fatalにfatalObservationがある
+  ---
+  duration_ms: 1.738458
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_fatal_observability_v002.integration.test.mjs:1455:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    
+    false !== true
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: 'strictEqual'
+  stack: |-
+    file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_fatal_observability_v002.integration.test.mjs:1462:12
+    async withTemporaryWorkspace (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_fatal_observability_v002.integration.test.mjs:119:12)
+    async TestContext.<anonymous> (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_fatal_observability_v002.integration.test.mjs:1456:3)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: FOVB009: 意味終端はF01を末尾束縛し通常validation schemaを維持する
+not ok 18 - FOVB009: 意味終端はF01を末尾束縛し通常validation schemaを維持する
+  ---
+  duration_ms: 1.470542
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_fatal_observability_v002.integration.test.mjs:1562:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    
+    false !== true
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_fatal_observability_v002.integration.test.mjs:1568:10)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: FOVB010: 意味package context前fatalはstdout用formal runner v002を作る
+ok 19 - FOVB010: 意味package context前fatalはstdout用formal runner v002を作る
+  ---
+  duration_ms: 1.170542
+  ...
+# Subtest: FOVB011: 意味package context後はF01束縛とdurable v002を持つ
+not ok 20 - FOVB011: 意味package context後はF01束縛とdurable v002を持つ
+  ---
+  duration_ms: 1.06975
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_fatal_observability_v002.integration.test.mjs:1675:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    
+    false !== true
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_fatal_observability_v002.integration.test.mjs:1681:10)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: FOVB012: 意味package同一job SHAの二回目はtarget不正へ分離される
+ok 21 - FOVB012: 意味package同一job SHAの二回目はtarget不正へ分離される
+  ---
+  duration_ms: 99.183625
+  ...
+# Subtest: FOVB013: 意味packageの実公開失敗はreport公開失敗へ分離される
+ok 22 - FOVB013: 意味packageの実公開失敗はreport公開失敗へ分離される
+  ---
+  duration_ms: 2.185583
+  ...
+# Subtest: FOVB014: 出力context前fatalはstderr用diagnostic v002を作る
+ok 23 - FOVB014: 出力context前fatalはstderr用diagnostic v002を作る
+  ---
+  duration_ms: 0.334708
+  ...
+# Subtest: FOVB015: 出力context後はF01束縛とdurable v002を持つ
+not ok 24 - FOVB015: 出力context後はF01束縛とdurable v002を持つ
+  ---
+  duration_ms: 2.248167
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_fatal_observability_v002.integration.test.mjs:1762:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    
+    false !== true
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_fatal_observability_v002.integration.test.mjs:1769:10)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: FOVB016: 出力同一job SHAの二回目はtarget不正へ分離される
+ok 25 - FOVB016: 出力同一job SHAの二回目はtarget不正へ分離される
+  ---
+  duration_ms: 6.714083
+  ...
+# Subtest: FOVB017: 出力の実公開失敗はreport公開失敗へ分離される
+ok 26 - FOVB017: 出力の実公開失敗はreport公開失敗へ分離される
+  ---
+  duration_ms: 2.605625
+  ...
+# Subtest: FOVB018: 出力runnerの外側13 codeは安全記録streamと共存する
+ok 27 - FOVB018: 出力runnerの外側13 codeは安全記録streamと共存する
+  ---
+  duration_ms: 4.463334
+  ...
+# Subtest: FOVF001: v001 fatalObservationはv002入口で拒否する
+ok 28 - FOVF001: v001 fatalObservationはv002入口で拒否する
+  ---
+  duration_ms: 0.072
+  ...
+# Subtest: FOVF002: v001からv002へのconverterをproductionへ作らない
+ok 29 - FOVF002: v001からv002へのconverterをproductionへ作らない
+  ---
+  duration_ms: 0.777958
+  ...
+# Subtest: FOVF003: fatal v002にfallbackを作らない
+ok 30 - FOVF003: fatal v002にfallbackを作らない
+  ---
+  duration_ms: 0.500333
+  ...
+# Subtest: FOVF004: v001/v002のunion受理・併産を作らない
+ok 31 - FOVF004: v001/v002のunion受理・併産を作らない
+  ---
+  duration_ms: 0.221958
+  ...
+# Subtest: FOVF005: 意味packageの正常formal経路は公開byteとCLI byteを一致させる
+ok 32 - FOVF005: 意味packageの正常formal経路は公開byteとCLI byteを一致させる
+  ---
+  duration_ms: 86.291834
+  ...
+# Subtest: FOVF006: 検査済み拒否のstatusと終了code契約をfatalへ統合しない
+not ok 33 - FOVF006: 検査済み拒否のstatusと終了code契約をfatalへ統合しない
+  ---
+  duration_ms: 39.886042
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_fatal_observability_v002.integration.test.mjs:1976:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    
+    false !== true
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: 'strictEqual'
+  stack: |-
+    file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_fatal_observability_v002.integration.test.mjs:737:12
+    async withTemporaryWorkspace (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_fatal_observability_v002.integration.test.mjs:119:12)
+    async TestContext.<anonymous> (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_fatal_observability_v002.integration.test.mjs:1985:20)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: FOVF007: 既存違反code集合へ14 inner codeを混入しない
+ok 34 - FOVF007: 既存違反code集合へ14 inner codeを混入しない
+  ---
+  duration_ms: 0.170625
+  ...
+# Subtest: FOVF008: 正式fatal byteに生文字列・secretを混入できない
+ok 35 - FOVF008: 正式fatal byteに生文字列・secretを混入できない
+  ---
+  duration_ms: 27.989417
+  ...
+# Subtest: FOVT001: 正式成果物treeは正本tagと完全一致する
+ok 36 - FOVT001: 正式成果物treeは正本tagと完全一致する
+  ---
+  duration_ms: 672.589667
+  ...
+# Subtest: FOVT002: 正式成果物treeは正本tagと完全一致する
+ok 37 - FOVT002: 正式成果物treeは正本tagと完全一致する
+  ---
+  duration_ms: 545.355958
+  ...
+# Subtest: FOVT003: 正式成果物treeは正本tagと完全一致する
+ok 38 - FOVT003: 正式成果物treeは正本tagと完全一致する
+  ---
+  duration_ms: 851.248333
+  ...
+# Subtest: FOVT004: 正式成果物treeは正本tagと完全一致する
+ok 39 - FOVT004: 正式成果物treeは正本tagと完全一致する
+  ---
+  duration_ms: 857.9475
+  ...
+# Subtest: FOVT005: 正式成果物treeは正本tagと完全一致する
+ok 40 - FOVT005: 正式成果物treeは正本tagと完全一致する
+  ---
+  duration_ms: 998.245542
+  ...
+# Subtest: FOVC001 targetFile=nullのfatalObservationを構築する
+ok 41 - FOVC001 targetFile=nullのfatalObservationを構築する
+  ---
+  duration_ms: 0.844167
+  ...
+# Subtest: FOVC002 検証済みbindingだけからtargetFile付きfatalObservationを構築する
+ok 42 - FOVC002 検証済みbindingだけからtargetFile付きfatalObservationを構築する
+  ---
+  duration_ms: 0.265042
+  ...
+# Subtest: FOVC003 validatorはnullとfile targetの両shapeだけを受理する
+ok 43 - FOVC003 validatorはnullとfile targetの両shapeだけを受理する
+  ---
+  duration_ms: 0.130917
+  ...
+# Subtest: FOVC004 fatalObservationのkey順をexactに固定する
+ok 44 - FOVC004 fatalObservationのkey順をexactに固定する
+  ---
+  duration_ms: 0.056208
+  ...
+# Subtest: FOVC005 targetFileのkey順をexactに固定する
+ok 45 - FOVC005 targetFileのkey順をexactに固定する
+  ---
+  duration_ms: 0.05625
+  ...
+# Subtest: FOVC006 serializerは2-spaceと末尾LFを固定する
+ok 46 - FOVC006 serializerは2-spaceと末尾LFを固定する
+  ---
+  duration_ms: 0.069084
+  ...
+# Subtest: FOVC007 serializerは同一入力からbyte同一結果を返す
+ok 47 - FOVC007 serializerは同一入力からbyte同一結果を返す
+  ---
+  duration_ms: 0.127416
+  ...
+# Subtest: FOVC008 innerStageの13値をexact exportする
+ok 48 - FOVC008 innerStageの13値をexact exportする
+  ---
+  duration_ms: 0.047041
+  ...
+# Subtest: FOVC009 innerCodeの14値をexact exportし閉じたevidenceだけを分類する
+ok 49 - FOVC009 innerCodeの14値をexact exportし閉じたevidenceだけを分類する
+  ---
+  duration_ms: 0.175625
+  ...
+# Subtest: FOVC010 stage/code所有matrixをexact exportする
+ok 50 - FOVC010 stage/code所有matrixをexact exportする
+  ---
+  duration_ms: 0.142875
+  ...
+# Subtest: FOVC011 未分類はunknown/null/UNCLASSIFIEDの三つ組だけを受理する
+ok 51 - FOVC011 未分類はunknown/null/UNCLASSIFIEDの三つ組だけを受理する
+  ---
+  duration_ms: 0.056667
+  ...
+# Subtest: FOVC012 未登録のinnerStageを拒否する
+ok 52 - FOVC012 未登録のinnerStageを拒否する
+  ---
+  duration_ms: 0.036958
+  ...
+# Subtest: FOVC013 未登録のinnerCodeを拒否する
+ok 53 - FOVC013 未登録のinnerCodeを拒否する
+  ---
+  duration_ms: 0.069916
+  ...
+# Subtest: FOVC014 matrix外のstage/code組合せを拒否する
+ok 54 - FOVC014 matrix外のstage/code組合せを拒否する
+  ---
+  duration_ms: 0.073042
+  ...
+# Subtest: FOVC015 fatalObservationの余分なkeyを拒否する
+ok 55 - FOVC015 fatalObservationの余分なkeyを拒否する
+  ---
+  duration_ms: 0.038
+  ...
+# Subtest: FOVC016 targetFileの余分なkeyを拒否する
+ok 56 - FOVC016 targetFileの余分なkeyを拒否する
+  ---
+  duration_ms: 0.040583
+  ...
+# Subtest: FOVC017 targetFile.path欠落を拒否する
+ok 57 - FOVC017 targetFile.path欠落を拒否する
+  ---
+  duration_ms: 0.033375
+  ...
+# Subtest: FOVC018 targetFile.fileSha256欠落を拒否する
+ok 58 - FOVC018 targetFile.fileSha256欠落を拒否する
+  ---
+  duration_ms: 0.139667
+  ...
+# Subtest: FOVC019 targetFileの絶対pathを拒否する
+ok 59 - FOVC019 targetFileの絶対pathを拒否する
+  ---
+  duration_ms: 0.042
+  ...
+# Subtest: FOVC020 targetFileのworkspace外escapeを拒否する
+ok 60 - FOVC020 targetFileのworkspace外escapeを拒否する
+  ---
+  duration_ms: 0.045875
+  ...
+# Subtest: FOVC021 targetFileの不正SHAを拒否する
+ok 61 - FOVC021 targetFileの不正SHAを拒否する
+  ---
+  duration_ms: 0.081667
+  ...
+# Subtest: FOVC022 5境界の固定source field表をexact exportし呼出側の自己許可を拒否する
+ok 62 - FOVC022 5境界の固定source field表をexact exportし呼出側の自己許可を拒否する
+  ---
+  duration_ms: 0.06275
+  ...
+# Subtest: FOVC023 bindingとpathが一致しない場合はtargetFileをnullにする
+ok 63 - FOVC023 bindingとpathが一致しない場合はtargetFileをnullにする
+  ---
+  duration_ms: 0.036375
+  ...
+# Subtest: FOVC024 bindingとSHAが一致しない場合はtargetFileをnullにする
+ok 64 - FOVC024 bindingとSHAが一致しない場合はtargetFileをnullにする
+  ---
+  duration_ms: 0.031917
+  ...
+# Subtest: FOVC025 binding一致が複数ある場合はtargetFileをnullにする
+ok 65 - FOVC025 binding一致が複数ある場合はtargetFileをnullにする
+  ---
+  duration_ms: 0.037
+  ...
+# Subtest: FOVC026 binding sourceが読めない場合はtargetFileをnullにする
+ok 66 - FOVC026 binding sourceが読めない場合はtargetFileをnullにする
+  ---
+  duration_ms: 0.029291
+  ...
+# Subtest: FOVC027 生message・stack・stderr・字幕・secretを観測値へ混入できない
+ok 67 - FOVC027 生message・stack・stderr・字幕・secretを観測値へ混入できない
+  ---
+  duration_ms: 0.149708
+  ...
+# Subtest: FOVO001 productionの大容量file読取枝がERR_FS_FILE_TOO_LARGEを発火する
+ok 68 - FOVO001 productionの大容量file読取枝がERR_FS_FILE_TOO_LARGEを発火する
+  ---
+  duration_ms: 0.255208
+  ...
+# Subtest: FOVO002 productionの読取中実体変化枝がFILE_CHANGED_DURING_READを発火する
+ok 69 - FOVO002 productionの読取中実体変化枝がFILE_CHANGED_DURING_READを発火する
+  ---
+  duration_ms: 9.887625
+  ...
+# Subtest: FOVO003 productionのstrict JSON数値token枝がNUMERIC_TOKEN_INVALIDを発火する
+ok 70 - FOVO003 productionのstrict JSON数値token枝がNUMERIC_TOKEN_INVALIDを発火する
+  ---
+  duration_ms: 2.191834
+  ...
+# Subtest: FOVO004 productionの正式JSON値不正枝がFORMAL_JSON_VALUE_INVALIDを発火する
+ok 71 - FOVO004 productionの正式JSON値不正枝がFORMAL_JSON_VALUE_INVALIDを発火する
+  ---
+  duration_ms: 48.350833
+  ...
+# Subtest: FOVO005 productionのbinding参照不一致枝がBINDING_REFERENCE_MISMATCHを発火する
+ok 72 - FOVO005 productionのbinding参照不一致枝がBINDING_REFERENCE_MISMATCHを発火する
+  ---
+  duration_ms: 1.798959
+  ...
+# Subtest: FOVO006 productionの実読取export guardがREQUIRED_EXPORT_MISSINGを発火する
+ok 73 - FOVO006 productionの実読取export guardがREQUIRED_EXPORT_MISSINGを発火する
+  ---
+  duration_ms: 1.669916
+  ...
+# Subtest: FOVO007 productionのOS権限拒否枝がOS_PERMISSION_DENIEDを発火する
+ok 74 - FOVO007 productionのOS権限拒否枝がOS_PERMISSION_DENIEDを発火する
+  ---
+  duration_ms: 0.192
+  ...
+# Subtest: FOVO008 productionの子process起動失敗枝がCHILD_PROCESS_SPAWN_FAILEDを発火する
+ok 75 - FOVO008 productionの子process起動失敗枝がCHILD_PROCESS_SPAWN_FAILEDを発火する
+  ---
+  duration_ms: 1.17475
+  ...
+# Subtest: FOVO009 productionの子process非0終了枝がCHILD_PROCESS_EXIT_NONZEROを発火する
+ok 76 - FOVO009 productionの子process非0終了枝がCHILD_PROCESS_EXIT_NONZEROを発火する
+  ---
+  duration_ms: 44.052875
+  ...
+# Subtest: FOVO010 productionの子process signal終了枝がCHILD_PROCESS_SIGNALLEDを発火する
+ok 77 - FOVO010 productionの子process signal終了枝がCHILD_PROCESS_SIGNALLEDを発火する
+  ---
+  duration_ms: 26.803625
+  ...
+# Subtest: FOVO011 productionの成果物公開失敗枝がPUBLICATION_FAILEDを発火する
+ok 78 - FOVO011 productionの成果物公開失敗枝がPUBLICATION_FAILEDを発火する
+  ---
+  duration_ms: 1.928583
+  ...
+# Subtest: FOVO012 productionのfailure report保存先拒否枝がREPORT_TARGET_INVALIDを発火する
+ok 79 - FOVO012 productionのfailure report保存先拒否枝がREPORT_TARGET_INVALIDを発火する
+  ---
+  duration_ms: 99.145833
+  ...
+# Subtest: FOVO013 productionのfailure report公開失敗枝がREPORT_PUBLICATION_FAILEDを発火する
+ok 80 - FOVO013 productionのfailure report公開失敗枝がREPORT_PUBLICATION_FAILEDを発火する
+  ---
+  duration_ms: 1.86275
+  ...
+# Subtest: FOVO014 productionの未分類fallback枝がunknown/null/UNCLASSIFIEDを発火する
+ok 81 - FOVO014 productionの未分類fallback枝がunknown/null/UNCLASSIFIEDを発火する
+  ---
+  duration_ms: 0.123708
+  ...
+1..81
+# tests 81
+# suites 0
+# pass 75
+# fail 6
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 5178.94625

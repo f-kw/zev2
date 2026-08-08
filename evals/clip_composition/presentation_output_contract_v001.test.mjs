@@ -19,6 +19,7 @@ import {
   validatePresentationOutputFormalJobV001,
   validatePresentationOutputRequestV001,
 } from './presentation_output_contract_v001.mjs';
+import {buildPresentationFatalObservationV002} from './presentation_fatal_observation_v002.mjs';
 import {runPresentationOutputJobCliV001} from './run_presentation_output_job_v001.ts';
 
 const ROOT = process.cwd();
@@ -380,6 +381,10 @@ test('OCT001: output requestからaccepted reportを決定的に構築する', a
   assert.equal(validatePresentationOutputRequestV001(value), true);
   assert.equal(validatePresentationOutputFormalJobV001(job), true);
   assert.equal(validatePresentationOutputFormalJobV001(job, value), true);
+  assert.deepEqual(PRESENTATION_OUTPUT_FORMAL_IMPLEMENTATION_ROLES_V001.at(-1), {
+    role: 'fatal-observation',
+    path: 'evals/clip_composition/presentation_fatal_observation_v002.mjs',
+  });
   assert.deepEqual(
     [...PRESENTATION_OUTPUT_ACCEPTANCE_CHECKS_V001],
     [...EXPECTED_ACCEPTANCE_CHECKS],
@@ -565,10 +570,15 @@ test('OCT001: output requestからaccepted reportを決定的に構築する', a
   assert.equal(guarded.exitCode, 2);
   assert.equal(guarded.stdout.length, 0);
   assert.deepEqual(JSON.parse(guarded.stderr.toString('utf8')), {
-    schemaVersion: 'presentation-output-runner-diagnostic-v001',
+    schemaVersion: 'presentation-output-runner-diagnostic-v002',
     status: 'fatal',
     stage: 'job-validation',
     diagnosticCode: 'OUTPUT_FORMAL_JOB_INVALID',
+    fatalObservation: buildPresentationFatalObservationV002({
+      innerStage: 'unknown',
+      targetFile: null,
+      innerCode: 'UNCLASSIFIED',
+    }),
   });
   assert.deepEqual(await captureCliWithWriter([]), guarded);
 
