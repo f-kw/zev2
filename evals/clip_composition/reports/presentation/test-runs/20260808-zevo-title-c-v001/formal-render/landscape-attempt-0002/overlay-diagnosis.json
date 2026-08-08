@@ -1,0 +1,82 @@
+{
+  "displayStatus": "built",
+  "commonStatus": "built",
+  "layoutStatus": "passed",
+  "inspection": {
+    "instructionId": "qdczJpv8RCc-candidate-59-c-title-landscape-v001-output-title-display",
+    "alphaMax": 1,
+    "alphaBounds": {
+      "left": 652,
+      "top": 73,
+      "right": 1264,
+      "bottom": 204,
+      "width": 612,
+      "height": 131
+    },
+    "lineCount": 1,
+    "lineRects": [
+      {
+        "left": 652,
+        "top": 44,
+        "right": 1268,
+        "bottom": 180
+      }
+    ],
+    "lineAlphaBounds": [
+      {
+        "lineIndex": 0,
+        "left": 652,
+        "top": 73,
+        "right": 1264,
+        "bottom": 204,
+        "width": 612,
+        "height": 131
+      }
+    ],
+    "visibilityComparisonBasis": null,
+    "representativeFrame": null,
+    "changedPixelsAgainstInstructionOmittedFrame": null,
+    "appliedOverlayPropsCanonicalSha256": "f207d0b70c3f9498cf562e6a96009ed25fb5cd068a991afcd0ceaf38ea215a0a",
+    "overlayFile": "overlays/01-c7fbdf18b350.png",
+    "overlaySha256": "dc37bba1f3fcbd6c28029955052e4588e9f4398de0be74abfd36e2562dfa26b4"
+  },
+  "application": {
+    "instructionId": "qdczJpv8RCc-candidate-59-c-title-landscape-v001-output-title-display",
+    "status": "rendered",
+    "requestedPresetId": "zevo-title-normal-landscape-top-v001",
+    "appliedPresetId": "zevo-title-normal-landscape-top-v001",
+    "appliedPresetRegistryVersion": "zevo-title-style-registry-v001",
+    "stateId": "zevo-title-normal-landscape-top-v001",
+    "appliedOverlayPropsCanonicalSha256": "f207d0b70c3f9498cf562e6a96009ed25fb5cd068a991afcd0ceaf38ea215a0a",
+    "overlayFile": "overlays/01-c7fbdf18b350.png",
+    "overlaySha256": "dc37bba1f3fcbd6c28029955052e4588e9f4398de0be74abfd36e2562dfa26b4",
+    "finalPlanElementReference": {
+      "planFile": "title-display-plan-v001.json",
+      "instructionId": "qdczJpv8RCc-candidate-59-c-title-landscape-v001-output-title-display",
+      "canonicalSha256": "750bb7d3b1b787162490ebdff11143cc78ee67b0f33685692d46783f5f7ab3fc"
+    }
+  },
+  "defaultQc": {
+    "status": "failed",
+    "violations": [
+      {
+        "code": "INSTRUCTION_RENDER_MISSING",
+        "relatedIds": [
+          "qdczJpv8RCc-candidate-59-c-title-landscape-v001-output-title-display"
+        ],
+        "details": {
+          "expectedFinalElementCanonicalSha256": "750bb7d3b1b787162490ebdff11143cc78ee67b0f33685692d46783f5f7ab3fc",
+          "finalPlanElementReference": {
+            "canonicalSha256": "750bb7d3b1b787162490ebdff11143cc78ee67b0f33685692d46783f5f7ab3fc",
+            "instructionId": "qdczJpv8RCc-candidate-59-c-title-landscape-v001-output-title-display",
+            "planFile": "title-display-plan-v001.json"
+          }
+        }
+      }
+    ]
+  },
+  "titleQc": {
+    "status": "passed",
+    "violations": []
+  }
+}

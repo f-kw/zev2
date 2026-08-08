@@ -1,0 +1,104 @@
+{
+  "schemaVersion": "zevo-title-renderer-evidence-v001",
+  "evidenceId": "qdczJpv8RCc-candidate-59-c-title-vertical-v002-output-title-plan-renderer-evidence",
+  "planBinding": {
+    "schemaVersion": "zevo-title-display-plan-v001",
+    "path": "evals/clip_composition/outputs/presentation/title-output-renders/qdczJpv8RCc-candidate-59-c-title-vertical-v002-output/title-display-plan-v001.json",
+    "fileSha256": "ebcfe6b2b4126533a8728639df96f36e4c7c7ce8ddee0529b929f7a8a2620628",
+    "canonicalSha256": "bae1144853b6580d50b68c600bb6fc9955d89d56b7d463ed9f59195a799da298"
+  },
+  "applicationResults": [
+    {
+      "instructionId": "qdczJpv8RCc-candidate-59-c-title-vertical-v002-output-title-display",
+      "status": "rendered",
+      "requestedPresetId": "zevo-title-vertical-short-top-v001",
+      "appliedPresetId": "zevo-title-vertical-short-top-v001",
+      "appliedPresetRegistryVersion": "zevo-title-style-registry-v001",
+      "stateId": "zevo-title-vertical-short-top-v001",
+      "appliedOverlayPropsCanonicalSha256": "b5eef486caee843a95a802483ae6a69a29fc0fc9fcaa718018e0fb25082d7d06",
+      "overlayFile": "overlays/01-f5bb41029434.png",
+      "overlaySha256": "859b2144b3725c39363ce3beadf6965345a06e4918dfc747a5d1dddfdec7200e",
+      "finalPlanElementReference": {
+        "planFile": "title-display-plan-v001.json",
+        "instructionId": "qdczJpv8RCc-candidate-59-c-title-vertical-v002-output-title-display",
+        "canonicalSha256": "a27a74037bf6a060273dd859ca6112243b0824060248afb026ba855e2796986c"
+      }
+    }
+  ],
+  "rendererQc": {
+    "schemaVersion": "presentation-render-qc-v002",
+    "status": "passed",
+    "instructionCount": 1,
+    "checks": {
+      "instructionApplication": {
+        "status": "passed"
+      },
+      "layoutAndVisibility": {
+        "status": "passed"
+      },
+      "media": {
+        "status": "passed"
+      }
+    },
+    "instructionEvidence": [
+      {
+        "instructionId": "qdczJpv8RCc-candidate-59-c-title-vertical-v002-output-title-display",
+        "requestedPresetId": "zevo-title-vertical-short-top-v001",
+        "appliedPresetId": "zevo-title-vertical-short-top-v001",
+        "appliedPresetRegistryVersion": "zevo-title-style-registry-v001",
+        "alphaMax": 1,
+        "alphaBounds": {
+          "left": 111,
+          "top": 84,
+          "right": 964,
+          "bottom": 266,
+          "width": 853,
+          "height": 182
+        },
+        "lineCount": 1,
+        "lineAlphaBounds": [
+          {
+            "lineIndex": 0,
+            "left": 111,
+            "top": 84,
+            "right": 964,
+            "bottom": 266,
+            "width": 853,
+            "height": 182
+          }
+        ],
+        "visibilityComparisonBasis": "same-composite-with-instruction-omitted",
+        "representativeFrame": 90,
+        "changedPixelsAgainstInstructionOmittedFrame": 155245,
+        "appliedOverlayPropsCanonicalSha256": "b5eef486caee843a95a802483ae6a69a29fc0fc9fcaa718018e0fb25082d7d06",
+        "applicationOverlayFile": "overlays/01-f5bb41029434.png",
+        "inspectedOverlayFile": "overlays/01-f5bb41029434.png",
+        "applicationOverlaySha256": "859b2144b3725c39363ce3beadf6965345a06e4918dfc747a5d1dddfdec7200e",
+        "overlaySha256": "859b2144b3725c39363ce3beadf6965345a06e4918dfc747a5d1dddfdec7200e"
+      }
+    ],
+    "mediaEvidence": {
+      "observed": {
+        "durationMs": 51566,
+        "video": {
+          "codecName": "h264",
+          "width": 1080,
+          "height": 1920,
+          "fps": 30,
+          "frameCount": 1547
+        },
+        "audio": {
+          "codecName": "aac",
+          "packetPayloadSha256": "d18469bd3132356b03870ee8bc3d63e95947bd254961157e09d59cf9a53459ec"
+        }
+      },
+      "expectedAudio": {
+        "present": true,
+        "codecName": "aac",
+        "packetPayloadSha256": "d18469bd3132356b03870ee8bc3d63e95947bd254961157e09d59cf9a53459ec"
+      },
+      "expectedFrameCount": 1547
+    },
+    "violations": []
+  }
+}

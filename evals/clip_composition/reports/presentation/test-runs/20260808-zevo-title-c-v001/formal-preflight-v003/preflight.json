@@ -1,0 +1,48 @@
+{
+  "schemaVersion": "zevo-title-c-formal-preflight-v001",
+  "attemptId": "formal-preflight-v003",
+  "executedAt": "2026-08-08",
+  "checks": [
+    {
+      "jobPath": "evals/clip_composition/outputs/presentation/title-output-jobs/qdczJpv8RCc-candidate-59-c-title-landscape-v002/formal-title-output-job.json",
+      "jobFileSha256": "d64a30ee2276217172be28ab45660fb3db09e19af928fa4c46d04e1465e6ccbd",
+      "exactSerializer": true,
+      "exactJob": true,
+      "registryValid": true,
+      "meaningReplacement": "passed",
+      "implementationBindings": 56,
+      "trackedBindings": 62,
+      "bindingMismatches": [],
+      "outputRoot": "evals/clip_composition/outputs/presentation/title-output-renders/qdczJpv8RCc-candidate-59-c-title-landscape-v002-output",
+      "outputRootUnused": true,
+      "profileId": "zevo-title-normal-landscape-top-v001",
+      "title": {
+        "text": "全部やりかけ",
+        "inputMode": "human"
+      }
+    },
+    {
+      "jobPath": "evals/clip_composition/outputs/presentation/title-output-jobs/qdczJpv8RCc-candidate-59-c-title-vertical-v002/formal-title-output-job.json",
+      "jobFileSha256": "b68c7016f5cf67aea46fa5d370f57c03120f1e983bfc814a365ec51b387bf0f0",
+      "exactSerializer": true,
+      "exactJob": true,
+      "registryValid": true,
+      "meaningReplacement": "passed",
+      "implementationBindings": 56,
+      "trackedBindings": 62,
+      "bindingMismatches": [],
+      "outputRoot": "evals/clip_composition/outputs/presentation/title-output-renders/qdczJpv8RCc-candidate-59-c-title-vertical-v002-output",
+      "outputRootUnused": true,
+      "profileId": "zevo-title-vertical-short-top-v001",
+      "title": {
+        "text": "全部やりかけ",
+        "inputMode": "human"
+      }
+    }
+  ],
+  "priorEvidence": [
+    "landscape v001 source-validation拒否",
+    "landscape v001 overlay-preflight拒否と保安保持work/lock"
+  ],
+  "verdict": "passed"
+}

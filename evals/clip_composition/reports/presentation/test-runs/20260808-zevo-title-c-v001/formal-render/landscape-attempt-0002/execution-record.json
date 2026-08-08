@@ -1,0 +1,34 @@
+{
+  "schemaVersion": "zevo-title-c-formal-render-attempt-record-v001",
+  "attemptId": "landscape-attempt-0002",
+  "executedAt": "2026-08-08",
+  "jobPath": "evals/clip_composition/outputs/presentation/title-output-jobs/qdczJpv8RCc-candidate-59-c-title-landscape-v001/formal-title-output-job.json",
+  "jobFileSha256": "308ab900189472693ea07b0b6f4cbf450d82d610d34bf050867267a659f4b731",
+  "result": {
+    "exitCode": 1,
+    "status": "rejected",
+    "stage": "overlay-preflight",
+    "code": "TITLE_OUTPUT_RENDER_REJECTED"
+  },
+  "retained": {
+    "lock": "evals/clip_composition/outputs/presentation/title-output-renders/.qdczJpv8RCc-candidate-59-c-title-landscape-v001-output.presentation-renderer-v002.lock",
+    "work": "evals/clip_composition/outputs/presentation/title-output-renders/.qdczJpv8RCc-candidate-59-c-title-landscape-v001-output.presentation-renderer-v002-work-AXUgfa"
+  },
+  "diagnosis": {
+    "layoutPassed": true,
+    "overlaySha256": "dc37bba1f3fcbd6c28029955052e4588e9f4398de0be74abfd36e2562dfa26b4",
+    "alphaBounds": {
+      "left": 652,
+      "top": 73,
+      "right": 1264,
+      "bottom": 204,
+      "width": 612,
+      "height": 131
+    },
+    "defaultQcViolation": "INSTRUCTION_RENDER_MISSING",
+    "cause": "共通QCの既定plan名とtitle専用plan名の不一致",
+    "sameQcWithTitlePlanName": "passed"
+  },
+  "apiCalls": 0,
+  "costUsd": 0
+}

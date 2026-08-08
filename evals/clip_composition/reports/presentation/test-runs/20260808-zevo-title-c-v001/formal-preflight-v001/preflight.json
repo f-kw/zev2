@@ -1,0 +1,52 @@
+{
+  "schemaVersion": "zevo-title-c-formal-preflight-v001",
+  "executedAt": "2026-08-08",
+  "environment": {
+    "nativeRequested": true,
+    "nodePath": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+    "nodeSha256": "de4f3b493b15e7a0ee311f6a2c6dbf93858052f5802aa91cfafa2c57e9d6bc5c",
+    "tsxLoaderPath": "/Users/kawafmm/workspace/zev2/node_modules/.pnpm/tsx@4.22.3/node_modules/tsx/dist/loader.mjs",
+    "tsxLoaderSha256": "f06fb3da72f722ec9a2c3e8502f750ae1b6300b93fb76e8a52548dba69b6730f",
+    "nodeOptionsPresent": false,
+    "fixedNodeFirstInPath": true
+  },
+  "checks": [
+    {
+      "jobPath": "evals/clip_composition/outputs/presentation/title-output-jobs/qdczJpv8RCc-candidate-59-c-title-landscape-v001/formal-title-output-job.json",
+      "jobFileSha256": "70aa5214d3d8707f7bceab8a3e15e0d94ab6ddadd19ab022d44b9e85e9ed897a",
+      "exactSerializer": true,
+      "exactJob": true,
+      "registryValid": true,
+      "meaningReplacement": "passed",
+      "implementationBindings": 56,
+      "trackedBindings": 62,
+      "bindingMismatches": [],
+      "outputRoot": "evals/clip_composition/outputs/presentation/title-output-renders/qdczJpv8RCc-candidate-59-c-title-landscape-v001-output",
+      "outputRootUnused": true,
+      "profileId": "zevo-title-normal-landscape-top-v001",
+      "title": {
+        "text": "全部やりかけ",
+        "inputMode": "human"
+      }
+    },
+    {
+      "jobPath": "evals/clip_composition/outputs/presentation/title-output-jobs/qdczJpv8RCc-candidate-59-c-title-vertical-v001/formal-title-output-job.json",
+      "jobFileSha256": "48d82ff07a405a40069fc06aa5112fdef817bf314a4241ac74024ac34cc1261b",
+      "exactSerializer": true,
+      "exactJob": true,
+      "registryValid": true,
+      "meaningReplacement": "passed",
+      "implementationBindings": 56,
+      "trackedBindings": 62,
+      "bindingMismatches": [],
+      "outputRoot": "evals/clip_composition/outputs/presentation/title-output-renders/qdczJpv8RCc-candidate-59-c-title-vertical-v001-output",
+      "outputRootUnused": true,
+      "profileId": "zevo-title-vertical-short-top-v001",
+      "title": {
+        "text": "全部やりかけ",
+        "inputMode": "human"
+      }
+    }
+  ],
+  "note": "各jobは正式serializer byte、schema、title差し替え、62追跡binding、未使用出力rootを実体で照合した。"
+}

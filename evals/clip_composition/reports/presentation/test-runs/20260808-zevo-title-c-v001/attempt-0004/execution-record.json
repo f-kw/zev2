@@ -1,0 +1,13 @@
+{
+  "schemaVersion": "zevo-title-c-test-execution-record-v001",
+  "attemptId": "attempt-0004",
+  "executedAt": "2026-08-08",
+  "result": {
+    "exitCode": 1,
+    "tests": 60,
+    "passed": 59,
+    "failed": 1
+  },
+  "cause": "新しい生成時job検査が、同一byteをjob側pathとcontrol側pathへ保存する既存正式構造に対しpath同一まで要求した検査実装欠陥",
+  "action": "schema・file SHA・canonical SHA一致と既存validatorでのID対応へ限定修正。同attempt再実行なし。"
+}

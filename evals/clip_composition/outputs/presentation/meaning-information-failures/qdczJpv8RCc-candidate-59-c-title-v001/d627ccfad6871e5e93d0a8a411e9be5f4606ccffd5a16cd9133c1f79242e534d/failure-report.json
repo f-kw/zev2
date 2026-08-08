@@ -1,0 +1,26 @@
+{
+  "schemaVersion": "zev-meaning-information-failure-report-v002",
+  "failureId": "meaning-information-failure-d627ccfad6871e5e93d0a8a411e9be5f",
+  "status": "rejected",
+  "stage": "input-validation",
+  "fatalObservation": null,
+  "jobFileObservation": {
+    "path": "evals/clip_composition/outputs/presentation/meaning-information-jobs/qdczJpv8RCc-candidate-59-c-title-v001.json",
+    "fileSha256": "d627ccfad6871e5e93d0a8a411e9be5f4606ccffd5a16cd9133c1f79242e534d",
+    "canonicalSha256": "8843e4d7e0ce9aae04d7ee93d64dfcee81c5dcbe1b24f70df8ce497ab34f07b9"
+  },
+  "violations": [
+    {
+      "code": "SEMANTIC_VALIDATION_INVALID",
+      "path": "/semanticValidation",
+      "relatedIds": []
+    }
+  ],
+  "retainedPaths": [],
+  "environment": {
+    "nodePath": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+    "nodeFileSha256": "de4f3b493b15e7a0ee311f6a2c6dbf93858052f5802aa91cfafa2c57e9d6bc5c",
+    "nodeVersion": "v20.19.6",
+    "executedAt": "2026-08-08T10:04:07.488Z"
+  }
+}

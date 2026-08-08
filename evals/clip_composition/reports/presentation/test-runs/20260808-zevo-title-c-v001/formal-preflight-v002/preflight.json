@@ -1,0 +1,55 @@
+{
+  "schemaVersion": "zevo-title-c-formal-preflight-v001",
+  "attemptId": "formal-preflight-v002",
+  "executedAt": "2026-08-08",
+  "environment": {
+    "native": true,
+    "nodePath": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+    "nodeSha256": "de4f3b493b15e7a0ee311f6a2c6dbf93858052f5802aa91cfafa2c57e9d6bc5c",
+    "tsxLoaderPath": "/Users/kawafmm/workspace/zev2/node_modules/.pnpm/tsx@4.22.3/node_modules/tsx/dist/loader.mjs",
+    "tsxLoaderSha256": "f06fb3da72f722ec9a2c3e8502f750ae1b6300b93fb76e8a52548dba69b6730f",
+    "nodeOptionsPresent": false,
+    "fixedNodeFirstInPath": true,
+    "chromiumVersion": "Google Chrome for Testing 149.0.7790.0"
+  },
+  "checks": [
+    {
+      "jobPath": "evals/clip_composition/outputs/presentation/title-output-jobs/qdczJpv8RCc-candidate-59-c-title-landscape-v001/formal-title-output-job.json",
+      "jobFileSha256": "308ab900189472693ea07b0b6f4cbf450d82d610d34bf050867267a659f4b731",
+      "exactSerializer": true,
+      "exactJob": true,
+      "registryValid": true,
+      "meaningReplacement": "passed",
+      "implementationBindings": 56,
+      "trackedBindings": 62,
+      "bindingMismatches": [],
+      "outputRoot": "evals/clip_composition/outputs/presentation/title-output-renders/qdczJpv8RCc-candidate-59-c-title-landscape-v001-output",
+      "outputRootUnused": true,
+      "profileId": "zevo-title-normal-landscape-top-v001",
+      "title": {
+        "text": "全部やりかけ",
+        "inputMode": "human"
+      }
+    },
+    {
+      "jobPath": "evals/clip_composition/outputs/presentation/title-output-jobs/qdczJpv8RCc-candidate-59-c-title-vertical-v001/formal-title-output-job.json",
+      "jobFileSha256": "da7785a9be8334d6a10caad42dbbbc4cca692146a2bb8103adfdbdd4212a6857",
+      "exactSerializer": true,
+      "exactJob": true,
+      "registryValid": true,
+      "meaningReplacement": "passed",
+      "implementationBindings": 56,
+      "trackedBindings": 62,
+      "bindingMismatches": [],
+      "outputRoot": "evals/clip_composition/outputs/presentation/title-output-renders/qdczJpv8RCc-candidate-59-c-title-vertical-v001-output",
+      "outputRootUnused": true,
+      "profileId": "zevo-title-vertical-short-top-v001",
+      "title": {
+        "text": "全部やりかけ",
+        "inputMode": "human"
+      }
+    }
+  ],
+  "priorAttempt": "landscape-attempt-0001はsource generation/live混同により描画前拒否。出力root未生成。",
+  "verdict": "passed"
+}

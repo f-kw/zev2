@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "zevo-title-c-formal-render-attempt-record-v001",
+  "attemptId": "landscape-attempt-0001",
+  "executedAt": "2026-08-08",
+  "jobPath": "evals/clip_composition/outputs/presentation/title-output-jobs/qdczJpv8RCc-candidate-59-c-title-landscape-v001/formal-title-output-job.json",
+  "jobFileSha256": "70aa5214d3d8707f7bceab8a3e15e0d94ab6ddadd19ab022d44b9e85e9ed897a",
+  "outputRoot": "evals/clip_composition/outputs/presentation/title-output-renders/qdczJpv8RCc-candidate-59-c-title-landscape-v001-output",
+  "outputRootCreated": false,
+  "result": {
+    "exitCode": 1,
+    "status": "rejected",
+    "stage": "source-validation",
+    "code": "TITLE_OUTPUT_SOURCE_INVALID"
+  },
+  "diagnosis": {
+    "sourceRequestValid": true,
+    "frozenFormalJobRejectedByCurrentValidator": true,
+    "sourceManifestRuntimeEqualsGenerationJob": true,
+    "sourceManifestImplementationEqualsGenerationJob": true,
+    "titleOnlyMeaningReplacementPassed": true,
+    "generationImplementationBindingCount": 11,
+    "currentImplementationRoleCount": 12,
+    "cause": "生成時implementation集合を現在集合へ一致させる不要な突き合わせ"
+  },
+  "apiCalls": 0,
+  "costUsd": 0
+}

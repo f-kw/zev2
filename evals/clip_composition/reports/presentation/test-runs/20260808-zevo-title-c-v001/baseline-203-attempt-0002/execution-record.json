@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "zevo-title-c-regression-execution-record-v001",
+  "attemptId": "baseline-203-attempt-0002",
+  "executedAt": "2026-08-08",
+  "commandMeaning": "既知baseline 6群を現行の正式起動条件で頭から実行し、既知不合格117件が増減しないことを確認",
+  "environment": {
+    "native": true,
+    "nodePath": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+    "nodeSha256": "de4f3b493b15e7a0ee311f6a2c6dbf93858052f5802aa91cfafa2c57e9d6bc5c",
+    "tsxLoaderPath": "/Users/kawafmm/workspace/zev2/node_modules/.pnpm/tsx@4.22.3/node_modules/tsx/dist/loader.mjs",
+    "tsxLoaderSha256": "f06fb3da72f722ec9a2c3e8502f750ae1b6300b93fb76e8a52548dba69b6730f",
+    "nodeOptionsPresent": false,
+    "fixedNodeFirstInPath": true,
+    "concurrency": 1
+  },
+  "result": {
+    "exitCode": 1,
+    "tests": 203,
+    "passed": 86,
+    "failed": 117,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0,
+    "stderrBytes": 0
+  },
+  "verdict": "expected-baseline-exact"
+}
