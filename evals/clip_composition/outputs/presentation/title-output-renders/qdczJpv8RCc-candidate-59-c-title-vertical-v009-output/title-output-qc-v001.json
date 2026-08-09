@@ -1,0 +1,45 @@
+{
+  "schemaVersion": "zevo-title-output-qc-v001",
+  "qcId": "qdczJpv8RCc-candidate-59-c-title-vertical-v009-output-title-qc",
+  "status": "passed",
+  "jobBinding": {
+    "schemaVersion": "zevo-title-output-job-v001",
+    "path": "evals/clip_composition/outputs/presentation/title-output-jobs/qdczJpv8RCc-candidate-59-c-title-vertical-v009/formal-title-output-job.json",
+    "fileSha256": "22999d5114a56b3f3a81d2fb31e07609ad6c9d64984c7429afd5e62c2af47a4c",
+    "canonicalSha256": "c46524f3f78cd90dd74ec107fb19991228b05f2e6eb57e23579297518dd80902"
+  },
+  "planBinding": {
+    "schemaVersion": "zevo-title-display-plan-v001",
+    "path": "evals/clip_composition/outputs/presentation/title-output-renders/qdczJpv8RCc-candidate-59-c-title-vertical-v009-output/title-display-plan-v001.json",
+    "fileSha256": "00a1dcc42f5571b59332e10c1ebfb2664f6c6407b439369bc1447288978f141d",
+    "canonicalSha256": "b89193b0f23f3521052f1663c0f29fcd16b617faa6d9572ab50856b5f4649d41"
+  },
+  "rendererEvidenceBinding": {
+    "schemaVersion": "zevo-title-renderer-evidence-v001",
+    "path": "evals/clip_composition/outputs/presentation/title-output-renders/qdczJpv8RCc-candidate-59-c-title-vertical-v009-output/title-application-results-v001.json",
+    "fileSha256": "9a9271748d669b5ef5aff16bcaa26acf6a1b142d981af3be2b3f34dc523b97aa",
+    "canonicalSha256": "abc80dc426aed1cdfbd6eca1536488afeb4735e0564ed0c1ab4cbc7b8d80106e"
+  },
+  "outputVideo": {
+    "path": "evals/clip_composition/outputs/presentation/title-output-renders/qdczJpv8RCc-candidate-59-c-title-vertical-v009-output/title-rendered-v001.mp4",
+    "fileSha256": "fcc9f91e879377baedfb2a4fa30036fac272ac15b6223d9006584309e166a396"
+  },
+  "checks": {
+    "sourceBinding": "passed",
+    "titleTextIntegrity": "passed",
+    "titleApplication": "passed",
+    "titleLayoutAndVisibility": "passed",
+    "mediaFramePreservation": "passed",
+    "audioPreservation": "passed"
+  },
+  "evidence": {
+    "sourceVideoFileSha256": "eeb72350373be88022966059f09cd9b3f474a005ffa3cc18db8417eafdaa9618",
+    "outputVideoFileSha256": "fcc9f91e879377baedfb2a4fa30036fac272ac15b6223d9006584309e166a396",
+    "titleTextCanonicalSha256": "2262f5fa3890e5f03a53f738c0f8e923b39f22109148be350ed5979c53ad80ac",
+    "titleDisplayCount": 1,
+    "sourceFrameCount": 1547,
+    "outputFrameCount": 1547,
+    "sourceAudioPacketPayloadSha256": "d18469bd3132356b03870ee8bc3d63e95947bd254961157e09d59cf9a53459ec",
+    "outputAudioPacketPayloadSha256": "d18469bd3132356b03870ee8bc3d63e95947bd254961157e09d59cf9a53459ec"
+  }
+}

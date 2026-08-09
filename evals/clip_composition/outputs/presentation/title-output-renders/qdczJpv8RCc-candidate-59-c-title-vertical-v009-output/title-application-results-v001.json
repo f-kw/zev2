@@ -1,0 +1,113 @@
+{
+  "schemaVersion": "zevo-title-renderer-evidence-v001",
+  "evidenceId": "qdczJpv8RCc-candidate-59-c-title-vertical-v009-output-title-plan-renderer-evidence",
+  "planBinding": {
+    "schemaVersion": "zevo-title-display-plan-v001",
+    "path": "evals/clip_composition/outputs/presentation/title-output-renders/qdczJpv8RCc-candidate-59-c-title-vertical-v009-output/title-display-plan-v001.json",
+    "fileSha256": "00a1dcc42f5571b59332e10c1ebfb2664f6c6407b439369bc1447288978f141d",
+    "canonicalSha256": "b89193b0f23f3521052f1663c0f29fcd16b617faa6d9572ab50856b5f4649d41"
+  },
+  "applicationResults": [
+    {
+      "instructionId": "qdczJpv8RCc-candidate-59-c-title-vertical-v009-output-title-display",
+      "status": "rendered",
+      "requestedPresetId": "zevo-title-vertical-short-top-v004",
+      "appliedPresetId": "zevo-title-vertical-short-top-v004",
+      "appliedPresetRegistryVersion": "zevo-title-style-registry-v004",
+      "stateId": "zevo-title-vertical-short-top-v004",
+      "appliedOverlayPropsCanonicalSha256": "b12795e244513203d0b8cdb700c1f17d836cbbdceb8ad5373ad8e62e9e442c9e",
+      "overlayFile": "overlays/01-262b8216bd4e.png",
+      "overlaySha256": "6f79992b6b87c9a86e3d8bb0873297d06ce06605513b0de758cfca5a4365d664",
+      "finalPlanElementReference": {
+        "planFile": "title-display-plan-v001.json",
+        "instructionId": "qdczJpv8RCc-candidate-59-c-title-vertical-v009-output-title-display",
+        "canonicalSha256": "3b471e8bc693260a01c853f5e00b95309f453fcdbe1cbb8d7e0cef00c7c9615e"
+      }
+    }
+  ],
+  "rendererQc": {
+    "schemaVersion": "presentation-render-qc-v002",
+    "status": "passed",
+    "instructionCount": 1,
+    "checks": {
+      "instructionApplication": {
+        "status": "passed"
+      },
+      "layoutAndVisibility": {
+        "status": "passed"
+      },
+      "media": {
+        "status": "passed"
+      }
+    },
+    "instructionEvidence": [
+      {
+        "instructionId": "qdczJpv8RCc-candidate-59-c-title-vertical-v009-output-title-display",
+        "requestedPresetId": "zevo-title-vertical-short-top-v004",
+        "appliedPresetId": "zevo-title-vertical-short-top-v004",
+        "appliedPresetRegistryVersion": "zevo-title-style-registry-v004",
+        "alphaMax": 1,
+        "alphaBounds": {
+          "left": 0,
+          "top": 0,
+          "right": 1080,
+          "bottom": 301,
+          "width": 1080,
+          "height": 301
+        },
+        "lineCount": 2,
+        "lineAlphaBounds": [
+          {
+            "lineIndex": 0,
+            "left": 125,
+            "top": 61,
+            "right": 955,
+            "bottom": 139,
+            "width": 830,
+            "height": 78
+          },
+          {
+            "lineIndex": 1,
+            "left": 228,
+            "top": 163,
+            "right": 853,
+            "bottom": 241,
+            "width": 625,
+            "height": 78
+          }
+        ],
+        "visibilityComparisonBasis": "same-composite-with-instruction-omitted",
+        "representativeFrame": 90,
+        "changedPixelsAgainstInstructionOmittedFrame": 325080,
+        "appliedOverlayPropsCanonicalSha256": "b12795e244513203d0b8cdb700c1f17d836cbbdceb8ad5373ad8e62e9e442c9e",
+        "applicationOverlayFile": "overlays/01-262b8216bd4e.png",
+        "inspectedOverlayFile": "overlays/01-262b8216bd4e.png",
+        "applicationOverlaySha256": "6f79992b6b87c9a86e3d8bb0873297d06ce06605513b0de758cfca5a4365d664",
+        "overlaySha256": "6f79992b6b87c9a86e3d8bb0873297d06ce06605513b0de758cfca5a4365d664"
+      }
+    ],
+    "mediaEvidence": {
+      "observed": {
+        "durationMs": 51566,
+        "video": {
+          "codecName": "h264",
+          "width": 1080,
+          "height": 1920,
+          "fps": 30,
+          "frameCount": 1547
+        },
+        "audio": {
+          "codecName": "aac",
+          "packetPayloadSha256": "d18469bd3132356b03870ee8bc3d63e95947bd254961157e09d59cf9a53459ec"
+        }
+      },
+      "expectedAudio": {
+        "present": true,
+        "codecName": "aac",
+        "packetPayloadSha256": "d18469bd3132356b03870ee8bc3d63e95947bd254961157e09d59cf9a53459ec"
+      },
+      "expectedFrameCount": 1547
+    },
+    "violations": []
+  }
+}

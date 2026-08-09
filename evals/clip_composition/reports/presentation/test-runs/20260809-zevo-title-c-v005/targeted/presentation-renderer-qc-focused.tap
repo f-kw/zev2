@@ -1,0 +1,105 @@
+TAP version 13
+# Subtest: 01 jobとtimeline manifestの必須field・未知field・hash形式を固定検査する
+ok 1 - 01 jobとtimeline manifestの必須field・未知field・hash形式を固定検査する # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.586875
+  ...
+# Subtest: 01b 新規出力・所有lock・原子的publishを固定し既存成功物を変更しない
+ok 2 - 01b 新規出力・所有lock・原子的publishを固定し既存成功物を変更しない # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.077625
+  ...
+# Subtest: 01c directory publish成功後のlock異常を成功成果物の失敗へ戻さない
+ok 3 - 01c directory publish成功後のlock異常を成功成果物の失敗へ戻さない # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.053667
+  ...
+# Subtest: 02 固定信頼根・台帳・preview・描画部品・tool・fontを照合しfont失敗を分類する
+ok 4 - 02 固定信頼根・台帳・preview・描画部品・tool・fontを照合しfont失敗を分類する # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.035416
+  ...
+# Subtest: 03 v002だけを受理しv001と旧telopPlanを描画前に拒否する
+ok 5 - 03 v002だけを受理しv001と旧telopPlanを描画前に拒否する # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.189709
+  ...
+# Subtest: 04 外枠passedだけを通しpartialとfailedを異なるコードで停止する
+ok 6 - 04 外枠passedだけを通しpartialとfailedを異なるコードで停止する # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.033833
+  ...
+# Subtest: 05 正式空素材で到達可能な9種類を1指示1要素へ解決する
+ok 7 - 05 正式空素材で到達可能な9種類を1指示1要素へ解決する # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.033667
+  ...
+# Subtest: 06 caption本文・明示行・開始終了anchorを一文字も変えず保持する
+ok 8 - 06 caption本文・明示行・開始終了anchorを一文字も変えず保持する # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.087042
+  ...
+# Subtest: 07 非caption本文と終了責任を保ち句点・空白・元改行の文字indexを欠落なく追跡する
+ok 9 - 07 非caption本文と終了責任を保ち句点・空白・元改行の文字indexを欠落なく追跡する # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.094208
+  ...
+# Subtest: 08 speaker表示名は明示targetだけから解決しsource話者ラベルを人物名に使わない
+ok 10 - 08 speaker表示名は明示targetだけから解決しsource話者ラベルを人物名に使わない # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.126125
+  ...
+# Subtest: 09 1 source・cut対応・速度・frame数・未対応・曖昧・segment跨ぎを個別に止める
+ok 11 - 09 1 source・cut対応・速度・frame数・未対応・曖昧・segment跨ぎを個別に止める # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.047042
+  ...
+# Subtest: 10 v002はsource frameをoutput frameへ直接写し短尺alpha包絡を固定する
+ok 12 - 10 v002はsource frameをoutput frameへ直接写し短尺alpha包絡を固定する # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.586542
+  ...
+# Subtest: 11 正式台帳の種類・状態・font・背景・transitionをfallbackなしで解決する
+ok 13 - 11 正式台帳の種類・状態・font・背景・transitionをfallbackなしで解決する # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.054666
+  ...
+# Subtest: 12 行数・行の正の交差・安全領域・空alphaを独立して検出する
+ok 14 - 12 行数・行の正の交差・安全領域・空alphaを独立して検出する
+  ---
+  duration_ms: 381.788375
+  ...
+# Subtest: 13 時間と空間の正の交差だけを衝突とし境界接触は許容する
+ok 15 - 13 時間と空間の正の交差だけを衝突とし境界接触は許容する # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.124334
+  ...
+# Subtest: 14 空素材indexのG7を外枠で停止しpreviewカードを代用しない
+ok 16 - 14 空素材indexのG7を外枠で停止しpreviewカードを代用しない # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.033792
+  ...
+# Subtest: 15 9種類の透明PNGは非空・safe area内で同じ入力を同じhashへ再描画する
+ok 17 - 15 9種類の透明PNGは非空・safe area内で同じ入力を同じhashへ再描画する # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.033833
+  ...
+# Subtest: 16 合成MP4の映像・代表frame差分・基礎音声packetを保全する
+ok 18 - 16 合成MP4の映像・代表frame差分・基礎音声packetを保全する # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.121709
+  ...
+# Subtest: 17 適用結果・manifest・QC・CLI 0/1/2・publish後残留警告で成功を覆さない・全固有コード集合を固定する
+ok 19 - 17 適用結果・manifest・QC・CLI 0/1/2・publish後残留警告で成功を覆さない・全固有コード集合を固定する # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.060042
+  ...
+1..19
+# tests 19
+# suites 0
+# pass 1
+# fail 0
+# cancelled 0
+# skipped 18
+# todo 0
+# duration_ms 524.820167

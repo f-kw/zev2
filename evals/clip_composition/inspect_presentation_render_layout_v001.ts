@@ -68,16 +68,37 @@ export const inspectPresentationRenderLayoutV001 = (input: InspectionInput) => {
       bottom: exact.wrapper.top + exact.wrapper.height,
     };
     const safe = input.canvas.safeAreaPx;
-    if (
+    const isTopBand = overlay.visualState.position.preset === 'top-band';
+    const topBandBoundsInvalid = isTopBand && (
+      wrapperBounds.left !== 0
+      || wrapperBounds.top !== 0
+      || wrapperBounds.right !== input.canvas.width
+      || wrapperBounds.bottom > input.canvas.height
+    );
+    const textBoundsInvalid = lineRects.some((bounds) => (
+      bounds.left < safe.left
+      || bounds.top < safe.top
+      || bounds.right > input.canvas.width - safe.right
+      || bounds.bottom > input.canvas.height - safe.bottom
+    ));
+    const regularBoundsInvalid = !isTopBand && (
       wrapperBounds.left < safe.left
       || wrapperBounds.top < safe.top
       || wrapperBounds.right > input.canvas.width - safe.right
       || wrapperBounds.bottom > input.canvas.height - safe.bottom
-    ) {
+    );
+    if (topBandBoundsInvalid || textBoundsInvalid || regularBoundsInvalid) {
       violations.push({
         code: 'LAYOUT_SAFE_AREA_VIOLATION',
         instructionId: overlay.instructionId,
-        details: {bounds: wrapperBounds, safeAreaPx: safe},
+        details: {
+          bounds: wrapperBounds,
+          lineRects,
+          safeAreaPx: safe,
+          geometryPolicy: isTopBand
+            ? 'canvas-top-band-with-text-safe-area'
+            : 'full-overlay-safe-area',
+        },
       });
     }
     return {

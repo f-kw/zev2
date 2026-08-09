@@ -1,0 +1,91 @@
+{
+  "schemaVersion": "zevo-title-c-render-verification-v001",
+  "verifiedAt": "2026-08-09",
+  "title": "片付けの「やりかけ癖」を語るマリン船長",
+  "apiCommunicationCount": 0,
+  "addedCostUsd": 0,
+  "runtimeChecklist": {
+    "fixedNode": "passed",
+    "fixedTsxLoader": "passed",
+    "nodeOptionsAbsent": "passed",
+    "nativeExecution": "passed",
+    "chromiumLaunchable": "passed",
+    "newOutputRootsUnusedBeforeRun": "passed"
+  },
+  "tests": {
+    "titleContractAndRunner": {
+      "passed": 63,
+      "failed": 0
+    },
+    "focusedTopBandQc": {
+      "passed": 1,
+      "failed": 0
+    }
+  },
+  "landscape": {
+    "status": "passed",
+    "videoPath": "evals/clip_composition/outputs/presentation/title-output-renders/qdczJpv8RCc-candidate-59-c-title-landscape-v006-output/title-rendered-v001.mp4",
+    "videoSha256": "ad6187e23f3f586e7ce1db1fa8b5fedb54abc950ebe6de2a50ffcb616757b486",
+    "width": 1920,
+    "height": 1080,
+    "durationSeconds": "51.566016",
+    "frameCount": 1547,
+    "titleFrameRange": [0, 180],
+    "titleLineCount": 1,
+    "backgroundAlphaBounds": {
+      "left": 0,
+      "top": 0,
+      "right": 1920,
+      "bottom": 200
+    },
+    "textAlphaBounds": [
+      {
+        "left": 203,
+        "top": 95,
+        "right": 1717,
+        "bottom": 173
+      }
+    ],
+    "qcPassed": 6,
+    "qcFailed": 0
+  },
+  "vertical": {
+    "status": "passed",
+    "videoPath": "evals/clip_composition/outputs/presentation/title-output-renders/qdczJpv8RCc-candidate-59-c-title-vertical-v006-output/title-rendered-v001.mp4",
+    "videoSha256": "dc37a08f5fe1a34180b219da67ffa9fdff0ab86b46ca3ed8d509dd8b7901196c",
+    "width": 1080,
+    "height": 1920,
+    "durationSeconds": "51.566016",
+    "frameCount": 1547,
+    "titleFrameRange": [0, 180],
+    "titleLineCount": 2,
+    "backgroundAlphaBounds": {
+      "left": 0,
+      "top": 0,
+      "right": 1080,
+      "bottom": 301
+    },
+    "textAlphaBounds": [
+      {
+        "left": 103,
+        "top": 93,
+        "right": 933,
+        "bottom": 171
+      },
+      {
+        "left": 232,
+        "top": 195,
+        "right": 857,
+        "bottom": 273
+      }
+    ],
+    "qcPassed": 6,
+    "qcFailed": 0
+  },
+  "failedAttemptEvidence": {
+    "landscapeV005": "overlay-preflight rejected because the old alpha-bounds measurement treated the translucent corner as trim background",
+    "verticalV005Run": false,
+    "publishedV005Output": false
+  },
+  "humanVisualApproval": "pending"
+}

@@ -1,0 +1,257 @@
+TAP version 13
+# Subtest: ZTC001 registry accepts exact landscape and vertical profiles
+ok 1 - ZTC001 registry accepts exact landscape and vertical profiles
+  ---
+  duration_ms: 0.859292
+  ...
+# Subtest: ZTC002 registry rejects an unknown root key
+ok 2 - ZTC002 registry rejects an unknown root key
+  ---
+  duration_ms: 0.063958
+  ...
+# Subtest: ZTC003 profile rejects a crop key
+ok 3 - ZTC003 profile rejects a crop key
+  ---
+  duration_ms: 0.086083
+  ...
+# Subtest: ZTC004 profile rejects a viewport key
+ok 4 - ZTC004 profile rejects a viewport key
+  ---
+  duration_ms: 0.074417
+  ...
+# Subtest: ZTC005 registry rejects duplicate profile IDs
+ok 5 - ZTC005 registry rejects duplicate profile IDs
+  ---
+  duration_ms: 0.074417
+  ...
+# Subtest: ZTC006 registry rejects an unbound font
+ok 6 - ZTC006 registry rejects an unbound font
+  ---
+  duration_ms: 0.061375
+  ...
+# Subtest: ZTC007 landscape profile rejects a portrait canvas
+ok 7 - ZTC007 landscape profile rejects a portrait canvas
+  ---
+  duration_ms: 0.060959
+  ...
+# Subtest: ZTC008 vertical profile rejects a landscape canvas
+ok 8 - ZTC008 vertical profile rejects a landscape canvas
+  ---
+  duration_ms: 0.059834
+  ...
+# Subtest: ZTC009 exact title job passes with a human-title package
+ok 9 - ZTC009 exact title job passes with a human-title package
+  ---
+  duration_ms: 1.069541
+  ...
+# Subtest: ZTC010 title job rejects an unknown key
+ok 10 - ZTC010 title job rejects an unknown key
+  ---
+  duration_ms: 0.138042
+  ...
+# Subtest: ZTC011 title job rejects an empty implementation set
+ok 11 - ZTC011 title job rejects an empty implementation set
+  ---
+  duration_ms: 0.163791
+  ...
+# Subtest: ZTC012 title job context rejects an empty title
+ok 12 - ZTC012 title job context rejects an empty title
+  ---
+  duration_ms: 0.689166
+  ...
+# Subtest: ZTC013 replacement permits package ID, timeline ID, and provenance changes
+ok 13 - ZTC013 replacement permits package ID, timeline ID, and provenance changes
+  ---
+  duration_ms: 1.033917
+  ...
+# Subtest: ZTC014 replacement rejects an empty target title
+ok 14 - ZTC014 replacement rejects an empty target title
+  ---
+  duration_ms: 0.195417
+  ...
+# Subtest: ZTC015 replacement rejects a source that already has a title
+ok 15 - ZTC015 replacement rejects a source that already has a title
+  ---
+  duration_ms: 0.199916
+  ...
+# Subtest: ZTC016 replacement rejects a source-media meaning change
+ok 16 - ZTC016 replacement rejects a source-media meaning change
+  ---
+  duration_ms: 0.43175
+  ...
+# Subtest: ZTC017 replacement rejects a timeline segment change
+ok 17 - ZTC017 replacement rejects a timeline segment change
+  ---
+  duration_ms: 0.184458
+  ...
+# Subtest: ZTC018 replacement rejects a caption change
+ok 18 - ZTC018 replacement rejects a caption change
+  ---
+  duration_ms: 0.242709
+  ...
+# Subtest: ZTC019 replacement rejects semantic observation leakage
+ok 19 - ZTC019 replacement rejects semantic observation leakage
+  ---
+  duration_ms: 0.142458
+  ...
+# Subtest: ZTC020 plan mechanically wraps a long title without text loss
+ok 20 - ZTC020 plan mechanically wraps a long title without text loss
+  ---
+  duration_ms: 1.890291
+  ...
+# Subtest: ZTC021 short title remains one line
+ok 21 - ZTC021 short title remains one line
+  ---
+  duration_ms: 1.147667
+  ...
+# Subtest: ZTC022 plan rejects a max-lines overflow
+ok 22 - ZTC022 plan rejects a max-lines overflow
+  ---
+  duration_ms: 0.786458
+  ...
+# Subtest: ZTC023 plan records requested and applied profile identically
+ok 23 - ZTC023 plan records requested and applied profile identically
+  ---
+  duration_ms: 1.182709
+  ...
+# Subtest: ZTC024 plan uses the profile start and end frames
+ok 24 - ZTC024 plan uses the profile start and end frames
+  ---
+  duration_ms: 2.04225
+  ...
+# Subtest: ZTC025 plan rejects an unknown key
+ok 25 - ZTC025 plan rejects an unknown key
+  ---
+  duration_ms: 1.131875
+  ...
+# Subtest: ZTC026 plan rejects a crop key
+ok 26 - ZTC026 plan rejects a crop key
+  ---
+  duration_ms: 1.023834
+  ...
+# Subtest: ZTC027 common core contains exactly one title-cover element
+ok 27 - ZTC027 common core contains exactly one title-cover element
+  ---
+  duration_ms: 1.514791
+  ...
+# Subtest: ZTC028 common core preserves title text, line indices, and frame interval
+ok 28 - ZTC028 common core preserves title text, line indices, and frame interval
+  ---
+  duration_ms: 1.23025
+  ...
+# Subtest: ZTC029 common core uses final canvas coordinates and no crop fields
+ok 29 - ZTC029 common core uses final canvas coordinates and no crop fields
+  ---
+  duration_ms: 1.002541
+  ...
+# Subtest: ZTC030 vertical format builds through the same common contract
+ok 30 - ZTC030 vertical format builds through the same common contract
+  ---
+  duration_ms: 0.957292
+  ...
+# Subtest: ZTC031 renderer evidence accepts one applied title and passed renderer QC
+ok 31 - ZTC031 renderer evidence accepts one applied title and passed renderer QC
+  ---
+  duration_ms: 1.57325
+  ...
+# Subtest: ZTC032 renderer evidence rejects a second title application
+ok 32 - ZTC032 renderer evidence rejects a second title application
+  ---
+  duration_ms: 1.178833
+  ...
+# Subtest: ZTC033 QC passes all six checks from bound renderer evidence
+ok 33 - ZTC033 QC passes all six checks from bound renderer evidence
+  ---
+  duration_ms: 1.563833
+  ...
+# Subtest: ZTC034 QC rejects a frame-count change
+ok 34 - ZTC034 QC rejects a frame-count change
+  ---
+  duration_ms: 1.386083
+  ...
+# Subtest: ZTC035 QC rejects an audio-payload change
+ok 35 - ZTC035 QC rejects an audio-payload change
+  ---
+  duration_ms: 1.259791
+  ...
+# Subtest: ZTC036 QC rejects an unknown key
+ok 36 - ZTC036 QC rejects an unknown key
+  ---
+  duration_ms: 0.946625
+  ...
+# Subtest: ZTC037 manifest exactly binds job, plan, renderer evidence, QC, and video
+ok 37 - ZTC037 manifest exactly binds job, plan, renderer evidence, QC, and video
+  ---
+  duration_ms: 2.22375
+  ...
+# Subtest: ZTC038 manifest rejects an unknown key
+ok 38 - ZTC038 manifest rejects an unknown key
+  ---
+  duration_ms: 0.873542
+  ...
+# Subtest: ZTC039 ZEVO v1 render plan is not accepted as a title plan
+ok 39 - ZTC039 ZEVO v1 render plan is not accepted as a title plan
+  ---
+  duration_ms: 0.049167
+  ...
+# Subtest: ZTC040 formal serializer is deterministic, two-space, and LF terminated
+ok 40 - ZTC040 formal serializer is deterministic, two-space, and LF terminated
+  ---
+  duration_ms: 0.144042
+  ...
+# Subtest: ZTC041 common core revalidates indexed title text before rendering
+ok 41 - ZTC041 common core revalidates indexed title text before rendering
+  ---
+  duration_ms: 0.750667
+  ...
+# Subtest: ZTC042 manifest context rejects a renderer-evidence binding swap
+ok 42 - ZTC042 manifest context rejects a renderer-evidence binding swap
+  ---
+  duration_ms: 1.766166
+  ...
+# Subtest: ZTC043 title job rejects a role bound to the wrong implementation path
+ok 43 - ZTC043 title job rejects a role bound to the wrong implementation path
+  ---
+  duration_ms: 0.182083
+  ...
+# Subtest: ZTC044 title job rejects the correct implementation set in a different order
+ok 44 - ZTC044 title job rejects the correct implementation set in a different order
+  ---
+  duration_ms: 0.158542
+  ...
+# Subtest: ZTC045 selected candidate 59 title wraps at the approved narration-card boundary
+ok 45 - ZTC045 selected candidate 59 title wraps at the approved narration-card boundary
+  ---
+  duration_ms: 0.844
+  ...
+# node:internal/modules/esm/get_format:189
+#   throw new ERR_UNKNOWN_FILE_EXTENSION(ext, filepath);
+#         ^
+# TypeError [ERR_UNKNOWN_FILE_EXTENSION]: Unknown file extension ".ts" for /Users/kawafmm/workspace/zev2/evals/clip_composition/run_presentation_output_title_job_v001.ts
+#     at Object.getFileProtocolModuleFormat [as file:] (node:internal/modules/esm/get_format:189:9)
+#     at defaultGetFormat (node:internal/modules/esm/get_format:232:36)
+#     at defaultLoad (node:internal/modules/esm/load:145:22)
+#     at async ModuleLoader.loadAndTranslate (node:internal/modules/esm/loader:543:45) {
+#   code: 'ERR_UNKNOWN_FILE_EXTENSION'
+# }
+# Node.js v20.19.6
+# Subtest: /Users/kawafmm/workspace/zev2/evals/clip_composition/run_presentation_output_title_job_v001.test.mjs
+not ok 2 - /Users/kawafmm/workspace/zev2/evals/clip_composition/run_presentation_output_title_job_v001.test.mjs
+  ---
+  duration_ms: 40.155583
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/run_presentation_output_title_job_v001.test.mjs:1:1'
+  failureType: 'testCodeFailure'
+  exitCode: 1
+  signal: ~
+  error: 'test failed'
+  code: 'ERR_TEST_FAILURE'
+  ...
+1..46
+# tests 46
+# suites 0
+# pass 45
+# fail 1
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 102.29025

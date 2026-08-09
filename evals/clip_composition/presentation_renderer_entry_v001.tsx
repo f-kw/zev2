@@ -1,4 +1,4 @@
-import React, {useEffect, useMemo, useRef, useState} from 'react';
+import React, {useEffect, useLayoutEffect, useMemo, useRef, useState} from 'react';
 import {
   AbsoluteFill,
   Composition,
@@ -13,6 +13,7 @@ import {
 import {TelopText} from '../../runner/src/remotion/components/TelopText';
 import {measureTextLine} from '../../runner/src/telop/text-metrics';
 import type {TelopTextRenderModel} from '../../runner/src/telop/telop-render-model';
+import {resolveVisibleCenterOffsetsV001} from './presentation_renderer_text_layout_v001.mjs';
 
 export const PRESENTATION_RENDERER_OVERLAY_PROPS_SCHEMA_VERSION =
   'presentation-renderer-overlay-props-v001';
@@ -46,7 +47,7 @@ type VisualState = {
     glowOpacityPercent: number;
   };
   position: {
-    preset: 'center' | 'bottom-center' | 'top-center' | 'lower-third' | 'top-right';
+    preset: 'center' | 'bottom-center' | 'top-center' | 'lower-third' | 'top-right' | 'top-band';
     alignment: 'left' | 'center' | 'right';
     offsetXPercent: number;
     offsetYPercent: number;
@@ -99,6 +100,39 @@ export type PresentationRendererOverlayPropsV001 = {
   fontFamilyName: string;
   fontFileName: string;
   inspectionLineIndex: number | null;
+  renderVisibleCenterCorrectionPx?: VisibleCenterOffset[];
+};
+
+type VisibleBounds = {
+  left: number;
+  top: number;
+  right: number;
+  bottom: number;
+};
+
+type VisibleCenterOffset = {
+  x: number;
+  y: number;
+};
+
+/**
+ * 実フォントの可視輪郭を全幅帯の中央へ移す整数pixel量を返す。
+ * 横は各行を個別に中央へ揃え、縦は全行unionを一つの文字塊として揃える。
+ */
+export const resolveTopBandVisibleCenterOffsetsV001 = ({
+  bandBounds,
+  lineBounds,
+  renderScale,
+}: {
+  bandBounds: VisibleBounds;
+  lineBounds: VisibleBounds[];
+  renderScale: number;
+}): VisibleCenterOffset[] => {
+  return resolveVisibleCenterOffsetsV001({
+    containerBounds: bandBounds,
+    lineBounds,
+    coordinateScale: renderScale,
+  });
 };
 
 const clamp = (value: number, minimum: number, maximum: number) =>
@@ -144,6 +178,18 @@ const assertProps = (props: PresentationRendererOverlayPropsV001) => {
   if (props.visualState.textStyle.fontSizePx < props.layoutRules.minimumFontSizePx) {
     throw new Error('renderer font size is below trusted minimum');
   }
+  if (
+    props.visualState.position.preset === 'top-band'
+    && (
+      props.visualState.position.alignment !== 'center'
+      || props.visualState.position.offsetXPercent !== 0
+      || props.visualState.position.offsetYPercent !== 0
+      || props.visualState.background === null
+      || props.visualState.background.borderRadiusPx !== 0
+      || !(props.visualState.background.paddingXPx > 0)
+      || !(props.visualState.background.paddingYPx > 0)
+    )
+  ) throw new Error('top band geometry is invalid');
   if (props.indexedLines.length === 0) throw new Error('indexed lines are missing');
   if (
     props.inspectionLineIndex !== null
@@ -151,6 +197,16 @@ const assertProps = (props: PresentationRendererOverlayPropsV001) => {
       || props.inspectionLineIndex < 0
       || props.inspectionLineIndex >= props.indexedLines.length)
   ) throw new Error('inspection line index is invalid');
+  if (
+    props.renderVisibleCenterCorrectionPx !== undefined
+    && (
+      props.visualState.position.preset !== 'top-band'
+      || props.renderVisibleCenterCorrectionPx.length !== props.indexedLines.length
+      || props.renderVisibleCenterCorrectionPx.some(offset => (
+        !Number.isInteger(offset?.x) || !Number.isInteger(offset?.y)
+      ))
+    )
+  ) throw new Error('visible center correction is invalid');
   const source = Array.from(props.text);
   const observed: number[] = [];
   for (const [lineIndex, line] of props.indexedLines.entries()) {
@@ -253,10 +309,42 @@ export const buildExactTextModel = (
 
   // 背景板のpaddingも実alpha領域である。文字SVGだけで位置を決めると、
   // 描画時に背景板だけがsafe areaを越えるため、外枠全体を配置単位にする。
-  const contentOffsetX = state.background?.paddingXPx ?? 0;
-  const contentOffsetY = state.background?.paddingYPx ?? 0;
-  const wrapperWidth = svgWidth + contentOffsetX * 2;
-  const wrapperHeight = svgHeight + contentOffsetY * 2;
+  const isTopBand = state.position.preset === 'top-band';
+  const topBandTextTopMargin = Math.max(
+    4,
+    Math.round(props.canvas.height * layoutRules.verticalSafeMarginRatio),
+    props.canvas.safeAreaPx.top,
+  );
+  const contentOffsetX = isTopBand
+    ? (props.canvas.width - svgWidth) / 2
+    : state.background?.paddingXPx ?? 0;
+  const contentOffsetY = isTopBand
+    ? topBandTextTopMargin + (state.background?.paddingYPx ?? 0)
+    : state.background?.paddingYPx ?? 0;
+  const wrapperWidth = isTopBand
+    ? props.canvas.width
+    : svgWidth + contentOffsetX * 2;
+  const wrapperHeight = isTopBand
+    ? svgHeight + contentOffsetY + (state.background?.paddingYPx ?? 0)
+    : svgHeight + contentOffsetY * 2;
+
+  // `top-band` is the explicit exception for a canvas-edge background. The
+  // band fills the top and both side edges, while the text itself remains
+  // centered with the approved inner padding and is checked separately
+  // against the text safe area.
+  if (isTopBand) {
+    return {
+      textModel,
+      wrapper: {
+        top: 0,
+        left: 0,
+        width: wrapperWidth,
+        height: wrapperHeight,
+        contentOffsetX,
+        contentOffsetY,
+      },
+    };
+  }
 
   const horizontalMargin = Math.max(
     4,
@@ -324,7 +412,13 @@ export const buildExactTextModel = (
 const ExactOverlay: React.FC<PresentationRendererOverlayPropsV001> = (props) => {
   const [fontHandle] = useState(() => delayRender(`load-renderer-font:${props.fontFileName}`));
   const [fontReady, setFontReady] = useState(false);
+  const [visibleCenterOffsets, setVisibleCenterOffsets] = useState<
+    VisibleCenterOffset[] | null
+  >(null);
   const settled = useRef(false);
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  const measurementRef = useRef<HTMLDivElement>(null);
+  const isTopBand = props.visualState.position.preset === 'top-band';
 
   useEffect(() => {
     let cancelled = false;
@@ -359,10 +453,7 @@ const ExactOverlay: React.FC<PresentationRendererOverlayPropsV001> = (props) => 
     };
     loadTrustedFont()
       .then(() => {
-        if (!cancelled && !settled.current) {
-          settled.current = true;
-          continueRender(fontHandle);
-        }
+        if (!cancelled) setFontReady(true);
       })
       .catch((error) => {
         if (!cancelled && !settled.current) {
@@ -376,13 +467,80 @@ const ExactOverlay: React.FC<PresentationRendererOverlayPropsV001> = (props) => 
   }, [fontHandle, props.fontFamilyName, props.fontFileName, props.layoutRules.fontWeight]);
 
   const exact = useMemo(() => buildExactTextModel(props), [fontReady, props]);
+  useLayoutEffect(() => {
+    if (!fontReady || !isTopBand || visibleCenterOffsets !== null || settled.current) return;
+    try {
+      const wrapper = wrapperRef.current;
+      const measurement = measurementRef.current;
+      const groups = measurement === null
+        ? []
+        : Array.from(measurement.querySelectorAll<SVGGElement>('svg > g'));
+      if (wrapper === null || groups.length !== exact.textModel.lines.length) {
+        throw new Error('top band visible text measurement is incomplete');
+      }
+      const bandRect = wrapper.getBoundingClientRect();
+      const lineBounds = groups.map((group) => {
+        const bounds = group.getBoundingClientRect();
+        return {
+          left: bounds.left,
+          top: bounds.top,
+          right: bounds.right,
+          bottom: bounds.bottom,
+        };
+      });
+      setVisibleCenterOffsets(resolveTopBandVisibleCenterOffsetsV001({
+        bandBounds: {
+          left: bandRect.left,
+          top: bandRect.top,
+          right: bandRect.right,
+          bottom: bandRect.bottom,
+        },
+        lineBounds,
+        renderScale: props.layoutRules.renderScale,
+      }));
+    } catch (error) {
+      settled.current = true;
+      cancelRender(error instanceof Error ? error : new Error(String(error)));
+    }
+  }, [
+    exact.textModel.lines.length,
+    fontReady,
+    isTopBand,
+    props.layoutRules.renderScale,
+    visibleCenterOffsets,
+  ]);
+
+  useEffect(() => {
+    if (
+      settled.current
+      || !fontReady
+      || (isTopBand && visibleCenterOffsets === null)
+    ) return;
+    settled.current = true;
+    continueRender(fontHandle);
+  }, [fontHandle, fontReady, isTopBand, visibleCenterOffsets]);
+
+  const centeredTextModel = isTopBand && visibleCenterOffsets !== null
+    ? {
+      ...exact.textModel,
+      lines: exact.textModel.lines.map((line, index) => ({
+        ...line,
+        x: line.x
+          + visibleCenterOffsets[index].x
+          + (props.renderVisibleCenterCorrectionPx?.[index]?.x ?? 0),
+        y: line.y
+          + visibleCenterOffsets[index].y
+          + (props.renderVisibleCenterCorrectionPx?.[index]?.y ?? 0),
+      })),
+    }
+    : exact.textModel;
   const background = props.visualState.background;
   const inspectionLineIndex = props.inspectionLineIndex;
   const renderModel = inspectionLineIndex === null
-    ? exact.textModel
+    ? centeredTextModel
     : {
-      ...exact.textModel,
-      lines: [exact.textModel.lines[inspectionLineIndex]],
+      ...centeredTextModel,
+      lines: [centeredTextModel.lines[inspectionLineIndex]],
     };
   const wrapperStyle: React.CSSProperties = {
     position: 'absolute',
@@ -395,27 +553,72 @@ const ExactOverlay: React.FC<PresentationRendererOverlayPropsV001> = (props) => 
       borderRadius: background.borderRadiusPx,
       padding: `${background.paddingYPx}px ${background.paddingXPx}px`,
     } : {}),
+    ...(isTopBand ? {
+      width: exact.wrapper.width,
+      height: exact.wrapper.height,
+      boxSizing: 'border-box',
+      padding: 0,
+      overflow: 'visible',
+    } : {}),
   };
+
+  const textContent = (model: TelopTextRenderModel, text: string) => (
+    <TelopText
+      text={text}
+      fontFamily={props.fontFamilyName}
+      fontSize={exact.textModel.fontSize}
+      fontColor={exact.textModel.fontColor}
+      borderColor={exact.textModel.borderColor}
+      borderWidth={exact.textModel.borderWidth}
+      lineSpacing={props.visualState.textStyle.lineSpacingPercent}
+      glowColor={exact.textModel.glowColor}
+      glowWidth={exact.textModel.glowWidth}
+      glowOpacity={props.visualState.textStyle.glowOpacityPercent}
+      lineAlign={props.visualState.position.alignment}
+      renderModel={model}
+    />
+  );
 
   return (
     <AbsoluteFill style={{backgroundColor: 'transparent'}} data-instruction-id={props.instructionId}>
-      <div style={wrapperStyle}>
-        <TelopText
-          text={inspectionLineIndex === null
+      <div ref={wrapperRef} style={wrapperStyle}>
+        {isTopBand ? (
+          <>
+            <div style={{
+              position: 'absolute',
+              left: exact.wrapper.contentOffsetX,
+              top: exact.wrapper.contentOffsetY,
+              opacity: visibleCenterOffsets === null ? 0 : 1,
+            }}>
+              {textContent(
+                renderModel,
+                inspectionLineIndex === null
+                  ? props.text
+                  : props.indexedLines[inspectionLineIndex].renderedText,
+              )}
+            </div>
+            {visibleCenterOffsets === null ? (
+              <div
+                ref={measurementRef}
+                aria-hidden="true"
+                style={{
+                  position: 'absolute',
+                  left: exact.wrapper.contentOffsetX,
+                  top: exact.wrapper.contentOffsetY,
+                  opacity: 0,
+                  pointerEvents: 'none',
+                }}
+              >
+                {textContent(exact.textModel, props.text)}
+              </div>
+            ) : null}
+          </>
+        ) : textContent(
+          renderModel,
+          inspectionLineIndex === null
             ? props.text
-            : props.indexedLines[inspectionLineIndex].renderedText}
-          fontFamily={props.fontFamilyName}
-          fontSize={exact.textModel.fontSize}
-          fontColor={exact.textModel.fontColor}
-          borderColor={exact.textModel.borderColor}
-          borderWidth={exact.textModel.borderWidth}
-          lineSpacing={props.visualState.textStyle.lineSpacingPercent}
-          glowColor={exact.textModel.glowColor}
-          glowWidth={exact.textModel.glowWidth}
-          glowOpacity={props.visualState.textStyle.glowOpacityPercent}
-          lineAlign={props.visualState.position.alignment}
-          renderModel={renderModel}
-        />
+            : props.indexedLines[inspectionLineIndex].renderedText,
+        )}
       </div>
     </AbsoluteFill>
   );

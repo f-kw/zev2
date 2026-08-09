@@ -230,14 +230,7 @@ function evaluatePresentationRendererQc({
     }
     const bounds = inspection.alphaBounds;
     const safe = canvas.safeAreaPx;
-    if (
-      bounds.left < safe.left
-      || bounds.top < safe.top
-      || bounds.right > canvas.width - safe.right
-      || bounds.bottom > canvas.height - safe.bottom
-    ) {
-      violations.push(makeViolation('LAYOUT_SAFE_AREA_VIOLATION', [element.instructionId], {bounds, safeAreaPx: safe}));
-    }
+    const isTopBand = element.visualState?.position?.preset === 'top-band';
     if (inspection.lineCount > element.visualState.layout.maxLines) {
       violations.push(makeViolation('LAYOUT_LINE_COUNT_EXCEEDED', [element.instructionId], {
         actual: inspection.lineCount,
@@ -247,7 +240,7 @@ function evaluatePresentationRendererQc({
     const lineAlphaBounds = Array.isArray(inspection.lineAlphaBounds)
       ? inspection.lineAlphaBounds
       : [];
-    if (
+    const lineAlphaBoundsInvalid = (
       lineAlphaBounds.length !== element.indexedLines.length
       || lineAlphaBounds.some((entry, index) => (
         entry?.lineIndex !== index
@@ -255,10 +248,61 @@ function evaluatePresentationRendererQc({
         || entry.right <= entry.left
         || entry.bottom <= entry.top
       ))
-    ) {
+    );
+    if (lineAlphaBoundsInvalid) {
       violations.push(makeViolation('OVERLAY_ALPHA_EMPTY', [element.instructionId], {
         expectedLineCount: element.indexedLines.length,
         observedLineAlphaBounds: lineAlphaBounds,
+      }));
+    }
+    const topBandBoundsInvalid = isTopBand && (
+      bounds.left !== 0
+      || bounds.top !== 0
+      || bounds.right !== canvas.width
+      || bounds.bottom > canvas.height
+    );
+    const topBandVisibleCenterInvalid = isTopBand
+      && !lineAlphaBoundsInvalid
+      && (
+        lineAlphaBounds.some(entry => (
+          Math.abs(
+            (entry.left + entry.right) - (bounds.left + bounds.right)
+          ) > 1
+        ))
+        || Math.abs(
+          (
+            Math.min(...lineAlphaBounds.map(entry => entry.top))
+            + Math.max(...lineAlphaBounds.map(entry => entry.bottom))
+          ) - (bounds.top + bounds.bottom)
+        ) > 1
+      );
+    const lineSafeAreaInvalid = lineAlphaBounds.some(entry => (
+      !entry
+      || ![entry.left, entry.top, entry.right, entry.bottom].every(Number.isFinite)
+      || entry.left < safe.left
+      || entry.top < safe.top
+      || entry.right > canvas.width - safe.right
+      || entry.bottom > canvas.height - safe.bottom
+    ));
+    const regularBoundsInvalid = !isTopBand && (
+      bounds.left < safe.left
+      || bounds.top < safe.top
+      || bounds.right > canvas.width - safe.right
+      || bounds.bottom > canvas.height - safe.bottom
+    );
+    if (
+      topBandBoundsInvalid
+      || topBandVisibleCenterInvalid
+      || lineSafeAreaInvalid
+      || regularBoundsInvalid
+    ) {
+      violations.push(makeViolation('LAYOUT_SAFE_AREA_VIOLATION', [element.instructionId], {
+        bounds,
+        lineAlphaBounds,
+        safeAreaPx: safe,
+        geometryPolicy: isTopBand
+          ? 'canvas-top-band-with-visible-text-centered-and-safe'
+          : 'full-overlay-safe-area',
       }));
     }
     for (let leftIndex = 0; leftIndex < lineAlphaBounds.length; leftIndex += 1) {
@@ -458,13 +502,28 @@ async function inspectOverlayPngWithCommand({
       overlaySha256,
     };
   }
-  const geometry = await runBuffer(imageMagickPath, [pngPath, '-channel', 'A', '-trim', '-format', '%w %h %X %Y', 'info:']);
+  // `-trim` compares against the corner pixel.  A full-width translucent band
+  // legitimately occupies that corner, so trimming the source image directly
+  // would mistake the band for background and retain only the opaque text.
+  // Extract alpha, turn every non-zero alpha into foreground, and add a known
+  // transparent border before trimming.  The artificial border makes the
+  // reference background independent of the overlay's corner pixels.
+  const geometry = await runBuffer(imageMagickPath, [
+    pngPath,
+    '-alpha', 'extract',
+    '-threshold', '0',
+    '-bordercolor', 'black',
+    '-border', '1',
+    '-trim',
+    '-format', '%w %h %X %Y',
+    'info:',
+  ]);
   const match = geometry.stdout.toString().trim().match(/^(\d+) (\d+) ([+-]\d+) ([+-]\d+)$/);
   if (!match) throw new Error(`alpha bounds could not be parsed: ${geometry.stdout.toString().trim()}`);
   const width = Number(match[1]);
   const height = Number(match[2]);
-  const left = Number(match[3]);
-  const top = Number(match[4]);
+  const left = Number(match[3]) - 1;
+  const top = Number(match[4]) - 1;
   return {
     instructionId,
     alphaMax,

@@ -118,6 +118,7 @@ const HEX_COLOR = /^#[0-9A-Fa-f]{6}$/u;
 const FORMATS = Object.freeze(['normal-landscape', 'vertical-short-1080x1920']);
 const POSITION_PRESETS = Object.freeze([
   'center', 'bottom-center', 'top-center', 'lower-third', 'top-right',
+  'top-band',
 ]);
 const ALIGNMENTS = Object.freeze(['left', 'center', 'right']);
 const RUNTIME_ROLES = Object.freeze([
@@ -220,6 +221,15 @@ const validVisualState = (value, fontIds, profile) => exactKeys(value, [
   && validTextStyle(value.textStyle, fontIds)
   && validPosition(value.position)
   && validBackground(value.background)
+  && (value.position.preset !== 'top-band' || (
+    value.position.alignment === 'center'
+    && value.position.offsetXPercent === 0
+    && value.position.offsetYPercent === 0
+    && value.background !== null
+    && value.background.borderRadiusPx === 0
+    && positive(value.background.paddingXPx)
+    && positive(value.background.paddingYPx)
+  ))
   && exactKeys(value.layout, ['maxCharsPerLine', 'maxLines', 'singleLine'])
   && value.layout.maxCharsPerLine === profile.maxLogicalWidth
   && value.layout.maxLines === profile.maxLines

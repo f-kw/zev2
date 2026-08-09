@@ -1,0 +1,56 @@
+{
+  "schemaVersion": "zevo-title-candidate-selection-history-v001",
+  "historyId": "qdczJpv8RCc-candidate-59-title-selection-20260809-v001",
+  "recordedDate": "2026-08-09",
+  "reviewer": "kawafmm",
+  "sourceVideoId": "qdczJpv8RCc",
+  "candidateId": 59,
+  "initialProvisionalTitle": "全部やりかけ",
+  "initialAssessment": "表示とタイミングは問題ないが、タイトルとして面白みに欠ける",
+  "candidateReview": {
+    "exactCandidateTextsAvailableInRepository": false,
+    "unavailableReason": "候補2と候補4の正確な全文は版付き成果物へ保存されていなかったため、会話から推測して復元しない",
+    "preferenceOrder": [
+      {
+        "candidateOrdinal": 4,
+        "rank": 1,
+        "assessment": "マリン船長のタイトルとして反応を得やすい可能性がある",
+        "reason": "やや刺激的な方向性を含むため",
+        "acceptedAsFinal": false
+      },
+      {
+        "candidateOrdinal": 2,
+        "rank": 2,
+        "assessment": "候補4以外では最も良い",
+        "reason": "具体性はあるが、なお改善余地がある",
+        "acceptedAsFinal": false
+      }
+    ]
+  },
+  "humanCorrections": [
+    {
+      "observation": "片付けは過去の記憶についての話で、服を脱いでいた話は現在の別話題である",
+      "decision": "服を脱ぐ話をタイトルへ混ぜない"
+    },
+    {
+      "observation": "配信者名を入れ、何について語る場面かを具体的に示す",
+      "decision": "最終文言を人間が直接確定する"
+    }
+  ],
+  "finalSelection": {
+    "text": "片付けの「やりかけ癖」を語るマリン船長",
+    "inputMode": "human",
+    "decision": "selected-after-candidate-review-and-partial-rewrite"
+  },
+  "artifactBindings": {
+    "meaningInformationPackage": {
+      "path": "evals/clip_composition/outputs/presentation/meaning-information-packages/qdczJpv8RCc-candidate-59-c-title-v002-meaning-information/meaning-information-package.json",
+      "fileSha256": "8838733cdcf20c44e5e64191331ed09f64198b9e5c4d0b418f283fb5670cfe0e"
+    },
+    "humanVisualReview": {
+      "path": "evals/clip_composition/reports/presentation/test-runs/20260809-zevo-title-c-v005/human-review-v001.json",
+      "fileSha256": "5391753824bfcad1ca729598567108b0c386c87f88f5632be14e2a572d7632a5"
+    }
+  },
+  "scopeNote": "これはタイトル候補選択式運用の最初の版付き選択履歴であり、候補生成機能や自動学習の実装完了を意味しない"
+}

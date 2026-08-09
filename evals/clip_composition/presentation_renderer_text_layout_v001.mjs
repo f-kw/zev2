@@ -2,6 +2,50 @@ export const PRESENTATION_RENDERER_TEXT_LAYOUT_VERSION = 'presentation-renderer-
 export const PRESENTATION_RENDERER_CHARACTER_WIDTH_RULE_V001 =
   'U+0000..U+00FF=1; other Unicode code point=2';
 
+/**
+ * 可視輪郭の実測boundsを、対象領域の中央へ移す整数pixel量へ変換する。
+ * 横は各行を個別に揃え、縦は全行unionを一つの文字塊として揃える。
+ */
+export function resolveVisibleCenterOffsetsV001({
+  containerBounds,
+  lineBounds,
+  coordinateScale = 1,
+}) {
+  const actualLines = Array.isArray(lineBounds) ? lineBounds : [];
+  const values = [
+    containerBounds?.left,
+    containerBounds?.top,
+    containerBounds?.right,
+    containerBounds?.bottom,
+    coordinateScale,
+    ...actualLines.flatMap(
+      bounds => [bounds?.left, bounds?.top, bounds?.right, bounds?.bottom],
+    ),
+  ];
+  if (
+    actualLines.length === 0
+    || values.some(value => !Number.isFinite(value))
+    || !(coordinateScale > 0)
+    || !(containerBounds.right > containerBounds.left)
+    || !(containerBounds.bottom > containerBounds.top)
+    || actualLines.some(bounds => (
+      !(bounds.right > bounds.left) || !(bounds.bottom > bounds.top)
+    ))
+  ) throw new TypeError('visible center bounds are invalid');
+
+  const centerX = (containerBounds.left + containerBounds.right) / 2;
+  const centerY = (containerBounds.top + containerBounds.bottom) / 2;
+  const unionTop = Math.min(...actualLines.map(bounds => bounds.top));
+  const unionBottom = Math.max(...actualLines.map(bounds => bounds.bottom));
+  const verticalOffset = Math.round(
+    (centerY - (unionTop + unionBottom) / 2) / coordinateScale,
+  );
+  return actualLines.map(bounds => ({
+    x: Math.round((centerX - (bounds.left + bounds.right) / 2) / coordinateScale),
+    y: verticalOffset,
+  }));
+}
+
 export const PRESENTATION_RENDERER_TEXT_LAYOUT_VIOLATION_CODES = Object.freeze([
   'TARGET_TEXT_MUTATED',
   'TARGET_TEXT_INDEX_GAP',

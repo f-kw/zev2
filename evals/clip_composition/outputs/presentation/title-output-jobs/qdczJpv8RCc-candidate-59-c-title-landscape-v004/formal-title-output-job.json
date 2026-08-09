@@ -1,0 +1,364 @@
+{
+  "schemaVersion": "zevo-title-output-job-v001",
+  "jobId": "qdczJpv8RCc-candidate-59-c-title-landscape-v004",
+  "outputId": "qdczJpv8RCc-candidate-59-c-title-landscape-v004-output",
+  "titleMeaningPackageBinding": {
+    "schemaVersion": "zev-meaning-information-package-v001",
+    "path": "evals/clip_composition/outputs/presentation/meaning-information-packages/qdczJpv8RCc-candidate-59-c-title-v002-meaning-information/meaning-information-package.json",
+    "fileSha256": "8838733cdcf20c44e5e64191331ed09f64198b9e5c4d0b418f283fb5670cfe0e",
+    "canonicalSha256": "24c5de352072fba8739f458d613c32856138d4122548770cdc2fc6099146bc78"
+  },
+  "sourceOutput": {
+    "manifest": {
+      "schemaVersion": "presentation-output-render-manifest-v001",
+      "path": "evals/clip_composition/outputs/presentation/meaning-output-renders/qdczJpv8RCc-candidate-59-meaning-output-first-run-landscape-v003-output/presentation-output-render-manifest-v001.json",
+      "fileSha256": "0b1085a57e44f06bdef3e70fcbbd90412690cfb3b7fb477b47971efe9c715219",
+      "canonicalSha256": "e86985bd36d37c1f00a077c4ca3a9133908ee8f3585038b216d9935f371003f6"
+    },
+    "renderPlan": {
+      "schemaVersion": "presentation-output-render-plan-v001",
+      "path": "evals/clip_composition/outputs/presentation/meaning-output-control/qdczJpv8RCc-candidate-59-meaning-output-first-run-landscape-v003/render-plan.json",
+      "fileSha256": "17a2c8a499bc8a7c49a8bdcf4993fa6e0e7618c6d64a6650c6ffda3755f44988",
+      "canonicalSha256": "a12d2b250b1537a5de4865c299cb92bff77327a3f421feed0fe6b695abddd636"
+    },
+    "qc": {
+      "schemaVersion": "presentation-output-render-qc-v001",
+      "path": "evals/clip_composition/outputs/presentation/meaning-output-renders/qdczJpv8RCc-candidate-59-meaning-output-first-run-landscape-v003-output/presentation-output-render-qc-v001.json",
+      "fileSha256": "70c95612a478ef53f9c8001d137d9ab90c12876d94f76e650d043f5921148f7c",
+      "canonicalSha256": "f3357857878cd5a1470a8b9b87533b7638aa6193d41ea1481e4cbeb89e74a8b7"
+    },
+    "video": {
+      "path": "evals/clip_composition/outputs/presentation/meaning-output-renders/qdczJpv8RCc-candidate-59-meaning-output-first-run-landscape-v003-output/presentation-output-rendered-v001.mp4",
+      "fileSha256": "175dc67489e86b2fc364894a737693a14a9c7c27fab492c0cb1873aedd6a77bc"
+    }
+  },
+  "styleRegistryBinding": {
+    "schemaVersion": "zevo-title-style-registry-v001",
+    "path": "evals/clip_composition/registries/presentation/zevo-title-style-registry-v003/registry.json",
+    "fileSha256": "cfc79fecd4415af2157c69c24c354b933aef2f2277e23ca859b76e76ddf72bc5",
+    "canonicalSha256": "76d9d35b01f390d403956ce7bade8b19397122a3e759d713685ad5352c9e1535"
+  },
+  "profileId": "zevo-title-normal-landscape-top-v003",
+  "publication": {
+    "outputRoot": "evals/clip_composition/outputs/presentation/title-output-renders/qdczJpv8RCc-candidate-59-c-title-landscape-v004-output"
+  },
+  "runtimeProfile": {
+    "node": {
+      "path": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+      "version": "v20.19.6",
+      "fileSha256": "de4f3b493b15e7a0ee311f6a2c6dbf93858052f5802aa91cfafa2c57e9d6bc5c"
+    },
+    "tsx": {
+      "path": "/Users/kawafmm/workspace/zev2/runner/node_modules/tsx/dist/cli.mjs",
+      "version": "tsx v4.22.3\nnode v20.19.6",
+      "fileSha256": "5c916fa6ecad44aedbb01ca5815536d00ea07de6b73eeb9443d317326b0218d8"
+    },
+    "remotion": {
+      "path": "/Users/kawafmm/workspace/zev2/runner/node_modules/@remotion/cli/remotion-cli.js",
+      "version": "4.0.481",
+      "fileSha256": "a10a711f052487d302dcf52dc08729c84c4deca0dc41c5b708edd1a7b7b48bfa"
+    },
+    "browser": {
+      "path": "/Users/kawafmm/workspace/zev2/runner/node_modules/.remotion/chrome-headless-shell/mac-arm64/chrome-headless-shell-mac-arm64/chrome-headless-shell",
+      "version": "Google Chrome for Testing 149.0.7790.0",
+      "fileSha256": "b469d05c698ccf9f4ae3dc43fb194fbdcf56f9da1fc46dcc19f2bf9fe2aa20b8"
+    },
+    "ffmpeg": {
+      "path": "/opt/homebrew/bin/ffmpeg",
+      "version": "ffmpeg version 8.0.1 Copyright (c) 2000-2025 the FFmpeg developers\nbuilt with Apple clang version 16.0.0 (clang-1600.0.26.6)\nconfiguration: --prefix=/opt/homebrew/Cellar/ffmpeg/8.0.1_1 --enable-shared --enable-pthreads --enable-version3 --cc=clang --host-cflags= --host-ldflags= --enable-ffplay --enable-gpl --enable-libsvtav1 --enable-libopus --enable-libx264 --enable-libmp3lame --enable-libdav1d --enable-libvpx --enable-libx265 --enable-videotoolbox --enable-audiotoolbox --enable-neon\nlibavutil      60.  8.100 / 60.  8.100\nlibavcodec     62. 11.100 / 62. 11.100\nlibavformat    62.  3.100 / 62.  3.100\nlibavdevice    62.  1.100 / 62.  1.100\nlibavfilter    11.  4.100 / 11.  4.100\nlibswscale      9.  1.100 /  9.  1.100\nlibswresample   6.  1.100 /  6.  1.100\n\nExiting with exit code 0",
+      "fileSha256": "d105f770f53607ec1532b27e354ca7c3166a706dc1ccc6f96e3c8d3f54d7e798"
+    },
+    "ffprobe": {
+      "path": "/opt/homebrew/bin/ffprobe",
+      "version": "ffprobe version 8.0.1 Copyright (c) 2007-2025 the FFmpeg developers\nbuilt with Apple clang version 16.0.0 (clang-1600.0.26.6)\nconfiguration: --prefix=/opt/homebrew/Cellar/ffmpeg/8.0.1_1 --enable-shared --enable-pthreads --enable-version3 --cc=clang --host-cflags= --host-ldflags= --enable-ffplay --enable-gpl --enable-libsvtav1 --enable-libopus --enable-libx264 --enable-libmp3lame --enable-libdav1d --enable-libvpx --enable-libx265 --enable-videotoolbox --enable-audiotoolbox --enable-neon\nlibavutil      60.  8.100 / 60.  8.100\nlibavcodec     62. 11.100 / 62. 11.100\nlibavformat    62.  3.100 / 62.  3.100\nlibavdevice    62.  1.100 / 62.  1.100\nlibavfilter    11.  4.100 / 11.  4.100\nlibswscale      9.  1.100 /  9.  1.100\nlibswresample   6.  1.100 /  6.  1.100",
+      "fileSha256": "dcb242647fedaa21618f7048c5f2982e584fdfbcfca098553b3121d1a5d509d9"
+    },
+    "imageMagick": {
+      "path": "/opt/homebrew/bin/magick",
+      "version": "Version: ImageMagick 7.1.2-12 Q16-HDRI aarch64 23490 https://imagemagick.org\nCopyright: (C) 1999 ImageMagick Studio LLC\nLicense: https://imagemagick.org/script/license.php\nFeatures: Cipher DPC HDRI Modules OpenMP \nDelegates (built-in): bzlib cairo fontconfig freetype heic jng jp2 jpeg jxl lcms lqr ltdl lzma openexr png raw rsvg tiff uhdr webp xml zip zlib zstd\nCompiler: clang (16.0.0)",
+      "fileSha256": "78311032c39a3192ad4ed34ffdf6aab60e21b8e635005f9398095d73c9bd7a29"
+    }
+  },
+  "implementationBindings": [
+    {
+      "path": "evals/clip_composition/presentation_caption_contract_v002.mjs",
+      "fileSha256": "a81d583d877e7e8a5410831f4a18bca18be08c92d28d6349d9a089fb9368086c",
+      "role": "formal-json-serializer"
+    },
+    {
+      "path": "evals/clip_composition/presentation_meaning_information_package_v001.mjs",
+      "fileSha256": "46562003fabb1032b1422c2fe266e79f8a6f30f8c27214302f8436c670276567",
+      "role": "meaning-package-contract"
+    },
+    {
+      "path": "evals/clip_composition/presentation_output_contract_v001.mjs",
+      "fileSha256": "95f1da2029a3cf0dda4fa873490321d2aa92ea6bfb548f38d939a0800f5bd5b8",
+      "role": "output-contract"
+    },
+    {
+      "path": "evals/clip_composition/presentation_renderer_text_layout_v001.mjs",
+      "fileSha256": "066a62adaa7fa3f8b8eda92c82e9a85940e43f372af976edc4b327ef4cf9ce5e",
+      "role": "title-text-layout"
+    },
+    {
+      "path": "evals/clip_composition/presentation_renderer_plan_v002.mjs",
+      "fileSha256": "3a77c7feb7005fa06d7e45a6364f76ab4bc40a8622370568cf557d5090f08b79",
+      "role": "renderer-plan-contract"
+    },
+    {
+      "path": "evals/clip_composition/presentation_output_title_compositor_v001.mjs",
+      "fileSha256": "daf37f04b8878140a39b6ccd0dbffc6ef151f5febcbff361ac845d5840fe6e5e",
+      "role": "title-compositor"
+    },
+    {
+      "path": "evals/clip_composition/presentation_timeline_composition_decision_v001.mjs",
+      "fileSha256": "6bd3adba0b12d118df93ffd978c29a727db49003c8391d47f82f23a14ea796ba",
+      "role": "stable-workspace-reader"
+    },
+    {
+      "path": "evals/clip_composition/presentation_output_crop_application_v001.mjs",
+      "fileSha256": "322fdc1e06a13600c522f577913336c6f042851305880e5053b8728f2d8640d3",
+      "role": "finite-json-decoder"
+    },
+    {
+      "path": "evals/clip_composition/presentation_output_render_plan_v001.mjs",
+      "fileSha256": "72789a7ec0b9d272c226543d7aa17e5a2e1f866e2cc31c21abb89311adf28c5b",
+      "role": "source-output-contract"
+    },
+    {
+      "path": "evals/clip_composition/presentation_renderer_qc_v002.mjs",
+      "fileSha256": "73ede4f3556f80afac98b8e0e3c4b81019f718b4644d2b3f8cb1ac037989f0d3",
+      "role": "renderer-qc"
+    },
+    {
+      "path": "evals/clip_composition/render_presentation_v002.mjs",
+      "fileSha256": "ea775b314cc149c65d384603dbc39f3260e3ba8e4a32d99a6275941bf31dd223",
+      "role": "common-renderer"
+    },
+    {
+      "path": "evals/clip_composition/run_presentation_output_title_job_v001.ts",
+      "fileSha256": "e3eba45c92a27e859b9ffd5c1e1916b38c11c15ea8b10d636fc02f878f14469b",
+      "role": "title-output-runner"
+    },
+    {
+      "path": "evals/clip_composition/presentation_instruction_contract_v002.mjs",
+      "fileSha256": "11c80c40d4fd9cbe88bb40ed5a941e084e381b5646123edecad8f224926c3e20",
+      "role": "instruction-contract"
+    },
+    {
+      "path": "evals/clip_composition/presentation_base_media_timeline_v002.mjs",
+      "fileSha256": "a1f72079f0e970cb5c6a67817427aa5909f2453ad0d04e81150cfd29c5b41ab2",
+      "role": "base-media-timeline"
+    },
+    {
+      "path": "evals/clip_composition/presentation_fatal_observation_v002.mjs",
+      "fileSha256": "cf95c2ba8785be681dcecc03dc4ec009d6f02b4161e3c39f7edbf431b92b6115",
+      "role": "fatal-observation"
+    },
+    {
+      "path": "evals/clip_composition/presentation_renderer_entry_v001.tsx",
+      "fileSha256": "884c2361feab659264ed0e00e65ae726e681b030c1a594c80985bd0225d7dce7",
+      "role": "title-renderer-entry"
+    },
+    {
+      "path": "evals/clip_composition/inspect_presentation_render_layout_v001.ts",
+      "fileSha256": "db37458f3a9be49fb72a8e79cfdc7aa8e44606ecfc92aab59107caea33b847b0",
+      "role": "title-layout-inspector"
+    },
+    {
+      "path": "evals/clip_composition/inspect_presentation_preset_layout.ts",
+      "fileSha256": "416a81b54b18be6a6ccdd5906d3a3730bd0455edfe4be7002c9c6c4ccf2f8843",
+      "role": "landscape-layout-inspector"
+    },
+    {
+      "path": "evals/clip_composition/presentation_base_media_build_v001.mjs",
+      "fileSha256": "5e76f31c71f6a3d95fc9d0a3980174b326a2d1e630c8800fdfaee57efa7d5287",
+      "role": "base-media-builder"
+    },
+    {
+      "path": "evals/clip_composition/presentation_caption_api_cost_guard_v001.mjs",
+      "fileSha256": "29ac0e7e4d54400d8063bd35caab5272a64474b3c00a306d49b33aa0092db57b",
+      "role": "caption-api-cost-guard"
+    },
+    {
+      "path": "evals/clip_composition/presentation_caption_contract_v003.mjs",
+      "fileSha256": "a090caf2b1939bbc226a306cadd580b887ce34f0a0436af96e4f94480c4b9292",
+      "role": "caption-contract-v003"
+    },
+    {
+      "path": "evals/clip_composition/presentation_caption_display_pair_v003.mjs",
+      "fileSha256": "a22aa6ad44a7cd07c75ba1ebde4d40601efe29915ca6cfe915f4e1a3d8808a04",
+      "role": "caption-display-pair-v003"
+    },
+    {
+      "path": "evals/clip_composition/presentation_caption_display_pair_v004.mjs",
+      "fileSha256": "9b93619c1285dca5bd66ff07bd762ea6235b66cec9c215260f95174689370e17",
+      "role": "caption-display-pair-v004"
+    },
+    {
+      "path": "evals/clip_composition/presentation_caption_semantic_output_v001.mjs",
+      "fileSha256": "9b9bb011dcd198e02cb075b70e79d3090ddfe17694198f56b83726f004e78c6d",
+      "role": "caption-semantic-output"
+    },
+    {
+      "path": "evals/clip_composition/presentation_caption_semantic_source_package_v001.mjs",
+      "fileSha256": "ac3dcbbc671af6f56dcceeea6a41c8ae9cbf9fc4ba28a8a00bbc5d6faff45bcd",
+      "role": "caption-semantic-source-package"
+    },
+    {
+      "path": "evals/clip_composition/presentation_instruction_contract_v003.mjs",
+      "fileSha256": "c0a3c791c74a8c303e97e1fe0c81b8017c5dee35bd93e57668d8e11fa24925e7",
+      "role": "instruction-contract-v003"
+    },
+    {
+      "path": "evals/clip_composition/presentation_instruction_contract_v004.mjs",
+      "fileSha256": "caab417919e03e2ff9b169aaeba731104f8ed01d9a2963f81f801bea79e1d21c",
+      "role": "instruction-contract-v004"
+    },
+    {
+      "path": "evals/clip_composition/presentation_meaning_boundary_selection_v001.mjs",
+      "fileSha256": "52ea9c4505c515ed998297136c242b2a19e1e02ff0f7ad80e9f0aa7a7db33771",
+      "role": "meaning-boundary-selection"
+    },
+    {
+      "path": "evals/clip_composition/presentation_meaning_boundary_source_package_v001.mjs",
+      "fileSha256": "fea5926ceffb2efc0815e4f31490e27f31fc3a59c90b122196b8385f01cd9a9b",
+      "role": "meaning-boundary-source-package"
+    },
+    {
+      "path": "evals/clip_composition/presentation_meaning_output_run_input_record_v001.mjs",
+      "fileSha256": "6cda4ebdee30e887f9c4f916fc20c736025ca79f5d6c20051765c57315e7abbf",
+      "role": "meaning-output-run-input-record"
+    },
+    {
+      "path": "evals/clip_composition/presentation_output_base_media_v001.mjs",
+      "fileSha256": "2a7c01e3b60059350ffbf80494b4e4ba041f0624b05bc96c92f356448e15fd06",
+      "role": "output-base-media"
+    },
+    {
+      "path": "evals/clip_composition/presentation_output_page_line_planner_v001.mjs",
+      "fileSha256": "febb8c489db4585369d1d77f9cdcca02fe591cc83ceeae309896ad3e37f95262",
+      "role": "page-line-planner"
+    },
+    {
+      "path": "evals/clip_composition/presentation_output_style_resolver_v001.ts",
+      "fileSha256": "e63e4b4cf47d94d763333e13513570abe2dbac418e5ac5b396e1295b22956403",
+      "role": "output-style-resolver"
+    },
+    {
+      "path": "evals/clip_composition/presentation_retained_source_atoms_v001.mjs",
+      "fileSha256": "f28178327ddc0cc64f11527d850c71bfb5043b4e13f59f6da7997fd8f6d6cad0",
+      "role": "retained-source-atoms"
+    },
+    {
+      "path": "evals/clip_composition/presentation_segmenter_boundary_evidence_v001.mjs",
+      "fileSha256": "dac613292e463897ee2757be75a7d64f3ece9928141765a195ba54a0ebc6007a",
+      "role": "segmenter-boundary-evidence"
+    },
+    {
+      "path": "evals/clip_composition/presentation_source_speaker_policy_v001.mjs",
+      "fileSha256": "56d2d03d5bcee3a409b27acc9819a48c95abb867cdc00fd0b2bf2fe87bb9477b",
+      "role": "source-speaker-policy"
+    },
+    {
+      "path": "evals/clip_composition/render_presentation_vertical_review_v001.ts",
+      "fileSha256": "6fb4edfd9c9a9161f474921368b05bd32c0aaef2b1fd5155e148d291134c8c75",
+      "role": "vertical-review-renderer"
+    },
+    {
+      "path": "evals/clip_composition/run_presentation_caption_display_pair_job_v001.mjs",
+      "fileSha256": "567757847273ba52dd82ea7c497531f5767a28ed8082072331d38e15605d8204",
+      "role": "caption-display-pair-job"
+    },
+    {
+      "path": "evals/clip_composition/run_presentation_caption_gate_b6_v001.mjs",
+      "fileSha256": "ecad17891d63038647e2be0634b5844d2d117c38ea6e07ccef470d2887e56204",
+      "role": "caption-gate-b6-runner"
+    },
+    {
+      "path": "evals/clip_composition/run_presentation_caption_semantic_output_check_v001.mjs",
+      "fileSha256": "d13e1becf0745915455947bc01e4175555ef19dc08ba9f69ee19566f6c119018",
+      "role": "caption-semantic-output-check"
+    },
+    {
+      "path": "evals/clip_composition/run_presentation_meaning_boundary_b5_b6_v001.mjs",
+      "fileSha256": "3fc2ad6d5349e736117cc978de565d81171311190454f17a65150b986fc15d5e",
+      "role": "meaning-boundary-b5-b6-runner"
+    },
+    {
+      "path": "evals/clip_composition/run_presentation_segmenter_boundary_preflight_v001.mjs",
+      "fileSha256": "e83157cfe72197940193c9bd07a4f8c9be4b1716617dc55bf90e1e8c4f33812e",
+      "role": "segmenter-boundary-preflight"
+    },
+    {
+      "path": "packages/shared/dist/activity.js",
+      "fileSha256": "e5d617b8a27c2fdac890233458c5fc30cf65f97c510b74a8457abe1c26aa7976",
+      "role": "shared-runtime-activity"
+    },
+    {
+      "path": "packages/shared/dist/common.js",
+      "fileSha256": "1cd80e95df559cb4a1077690fe8fbce6eb2ec490959e595935493ed2345cd09f",
+      "role": "shared-runtime-common"
+    },
+    {
+      "path": "packages/shared/dist/index.js",
+      "fileSha256": "ee73a5b6c935bef047286ff85100a5a53b0749a6cf78514ba1035fb467c53558",
+      "role": "shared-runtime-index"
+    },
+    {
+      "path": "packages/shared/dist/web-gemini-review.js",
+      "fileSha256": "ff68854979af3053726cb15980107015b249508871789f89fc81b3fcc4959933",
+      "role": "shared-runtime-web-gemini-review"
+    },
+    {
+      "path": "runner/src/remotion/components/TelopText.tsx",
+      "fileSha256": "9e941db470dd2586485134f093679bda947e722c4d000d25b0e7fb6ec5daf001",
+      "role": "telop-text-component"
+    },
+    {
+      "path": "runner/src/remotion/utils/telop-font.ts",
+      "fileSha256": "fa2cb9c4c767e43006d77fa1aa8a0b6f1757b4059551ffc413d5c7fdf5cd441c",
+      "role": "telop-font-utils"
+    },
+    {
+      "path": "runner/src/screen-layout.ts",
+      "fileSha256": "63db69fa9a9280e26443dfffa0160de3715d0e434c313b423cb347f3f6452896",
+      "role": "screen-layout"
+    },
+    {
+      "path": "runner/src/shared/telop-glow.ts",
+      "fileSha256": "bfad6788f7ccfdc721839a53b4552f18bb713ac1a26c3d2469096697d33b79f8",
+      "role": "telop-glow"
+    },
+    {
+      "path": "runner/src/telop-remotion.ts",
+      "fileSha256": "4d641312585a41f0a0f539738f27c3df09c8b289952c6bb36d8e9f33dcc53812",
+      "role": "telop-remotion"
+    },
+    {
+      "path": "runner/src/telop/telop-line-break.ts",
+      "fileSha256": "3f136f17e6a1bf860aec4aa82b59de1c6f078499f860bf2d65fef82eaf66ff2d",
+      "role": "telop-line-break"
+    },
+    {
+      "path": "runner/src/telop/telop-render-model.ts",
+      "fileSha256": "5c32103a6f8faaa3ea1d30bb4624f0ca092385c8b77446aa5f51e3e3a0583412",
+      "role": "telop-render-model"
+    },
+    {
+      "path": "runner/src/telop/text-metrics.ts",
+      "fileSha256": "6fe78a6b478d61a169ec724e6c9336fdfcbf00cfa7ddee7cbbb5fbc19d87478a",
+      "role": "telop-text-metrics"
+    },
+    {
+      "path": "packages/shared/package.json",
+      "fileSha256": "86ef760b8a76c64403b63517ddb3b1d346a19e7f151e4d7ca3ad5ff460254a16",
+      "role": "shared-package-manifest"
+    },
+    {
+      "path": "evals/clip_composition/registries/presentation/presentation-source-speaker-non-identity-registry-v001/registry.json",
+      "fileSha256": "9e6f6c5e57c0b0823840c70fe0e3de05592cbc88819def6020a7c1cfaf211f3a",
+      "role": "source-speaker-registry-v001"
+    }
+  ]
+}

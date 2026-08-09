@@ -314,7 +314,7 @@ const makeJob = () => ({
   styleRegistryBinding: jsonBinding(
     'zevo-title-style-registry-v001',
     'evals/clip_composition/registries/presentation/'
-      + 'zevo-title-style-registry-v001/registry.json',
+      + 'zevo-title-style-registry-v004/registry.json',
   ),
   profileId: 'landscape-title-v001',
   publication: {
@@ -532,7 +532,7 @@ test('ZTOR015 implementation graphの欠落・余分・role-path swapを拒否�
   assert.equal(ZEVO_TITLE_IMPLEMENTATION_ROLES_V001.length, 56);
   const graph = await collectLocalRuntimeImportGraph();
   assert.equal(graph.paths.length, 54);
-  assert.equal(graph.edgeCount, 138);
+  assert.equal(graph.edgeCount, 139);
   assert.equal(graph.literalDynamicEdgeCount, 2);
   assert.equal(
     graph.typeOnlyEdges.includes(

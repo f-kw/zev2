@@ -1,0 +1,330 @@
+TAP version 13
+# Subtest: ZTC001 registry accepts exact landscape and vertical profiles
+ok 1 - ZTC001 registry accepts exact landscape and vertical profiles
+  ---
+  duration_ms: 0.770042
+  ...
+# Subtest: ZTC002 registry rejects an unknown root key
+ok 2 - ZTC002 registry rejects an unknown root key
+  ---
+  duration_ms: 0.068666
+  ...
+# Subtest: ZTC003 profile rejects a crop key
+ok 3 - ZTC003 profile rejects a crop key
+  ---
+  duration_ms: 0.093584
+  ...
+# Subtest: ZTC004 profile rejects a viewport key
+ok 4 - ZTC004 profile rejects a viewport key
+  ---
+  duration_ms: 0.071167
+  ...
+# Subtest: ZTC005 registry rejects duplicate profile IDs
+ok 5 - ZTC005 registry rejects duplicate profile IDs
+  ---
+  duration_ms: 0.069
+  ...
+# Subtest: ZTC006 registry rejects an unbound font
+ok 6 - ZTC006 registry rejects an unbound font
+  ---
+  duration_ms: 0.058
+  ...
+# Subtest: ZTC007 landscape profile rejects a portrait canvas
+ok 7 - ZTC007 landscape profile rejects a portrait canvas
+  ---
+  duration_ms: 0.116333
+  ...
+# Subtest: ZTC008 vertical profile rejects a landscape canvas
+ok 8 - ZTC008 vertical profile rejects a landscape canvas
+  ---
+  duration_ms: 0.06075
+  ...
+# Subtest: ZTC009 exact title job passes with a human-title package
+ok 9 - ZTC009 exact title job passes with a human-title package
+  ---
+  duration_ms: 1.114375
+  ...
+# Subtest: ZTC010 title job rejects an unknown key
+ok 10 - ZTC010 title job rejects an unknown key
+  ---
+  duration_ms: 0.133125
+  ...
+# Subtest: ZTC011 title job rejects an empty implementation set
+ok 11 - ZTC011 title job rejects an empty implementation set
+  ---
+  duration_ms: 0.088083
+  ...
+# Subtest: ZTC012 title job context rejects an empty title
+ok 12 - ZTC012 title job context rejects an empty title
+  ---
+  duration_ms: 0.31475
+  ...
+# Subtest: ZTC013 replacement permits package ID, timeline ID, and provenance changes
+ok 13 - ZTC013 replacement permits package ID, timeline ID, and provenance changes
+  ---
+  duration_ms: 0.93075
+  ...
+# Subtest: ZTC014 replacement rejects an empty target title
+ok 14 - ZTC014 replacement rejects an empty target title
+  ---
+  duration_ms: 0.204041
+  ...
+# Subtest: ZTC015 replacement rejects a source that already has a title
+ok 15 - ZTC015 replacement rejects a source that already has a title
+  ---
+  duration_ms: 0.147334
+  ...
+# Subtest: ZTC016 replacement rejects a source-media meaning change
+ok 16 - ZTC016 replacement rejects a source-media meaning change
+  ---
+  duration_ms: 0.387584
+  ...
+# Subtest: ZTC017 replacement rejects a timeline segment change
+ok 17 - ZTC017 replacement rejects a timeline segment change
+  ---
+  duration_ms: 0.1695
+  ...
+# Subtest: ZTC018 replacement rejects a caption change
+ok 18 - ZTC018 replacement rejects a caption change
+  ---
+  duration_ms: 0.368125
+  ...
+# Subtest: ZTC019 replacement rejects semantic observation leakage
+ok 19 - ZTC019 replacement rejects semantic observation leakage
+  ---
+  duration_ms: 0.27275
+  ...
+# Subtest: ZTC020 plan mechanically wraps a long title without text loss
+ok 20 - ZTC020 plan mechanically wraps a long title without text loss
+  ---
+  duration_ms: 2.196292
+  ...
+# Subtest: ZTC021 short title remains one line
+ok 21 - ZTC021 short title remains one line
+  ---
+  duration_ms: 1.634833
+  ...
+# Subtest: ZTC022 plan rejects a max-lines overflow
+ok 22 - ZTC022 plan rejects a max-lines overflow
+  ---
+  duration_ms: 0.985208
+  ...
+# Subtest: ZTC023 plan records requested and applied profile identically
+ok 23 - ZTC023 plan records requested and applied profile identically
+  ---
+  duration_ms: 1.273375
+  ...
+# Subtest: ZTC024 plan uses the profile start and end frames
+ok 24 - ZTC024 plan uses the profile start and end frames
+  ---
+  duration_ms: 2.21925
+  ...
+# Subtest: ZTC025 plan rejects an unknown key
+ok 25 - ZTC025 plan rejects an unknown key
+  ---
+  duration_ms: 1.126667
+  ...
+# Subtest: ZTC026 plan rejects a crop key
+ok 26 - ZTC026 plan rejects a crop key
+  ---
+  duration_ms: 0.883625
+  ...
+# Subtest: ZTC027 common core contains exactly one title-cover element
+ok 27 - ZTC027 common core contains exactly one title-cover element
+  ---
+  duration_ms: 1.040958
+  ...
+# Subtest: ZTC028 common core preserves title text, line indices, and frame interval
+ok 28 - ZTC028 common core preserves title text, line indices, and frame interval
+  ---
+  duration_ms: 1.215625
+  ...
+# Subtest: ZTC029 common core uses final canvas coordinates and no crop fields
+ok 29 - ZTC029 common core uses final canvas coordinates and no crop fields
+  ---
+  duration_ms: 1.399542
+  ...
+# Subtest: ZTC030 vertical format builds through the same common contract
+ok 30 - ZTC030 vertical format builds through the same common contract
+  ---
+  duration_ms: 1.282958
+  ...
+# Subtest: ZTC031 renderer evidence accepts one applied title and passed renderer QC
+ok 31 - ZTC031 renderer evidence accepts one applied title and passed renderer QC
+  ---
+  duration_ms: 2.228417
+  ...
+# Subtest: ZTC032 renderer evidence rejects a second title application
+ok 32 - ZTC032 renderer evidence rejects a second title application
+  ---
+  duration_ms: 1.06875
+  ...
+# Subtest: ZTC033 QC passes all six checks from bound renderer evidence
+ok 33 - ZTC033 QC passes all six checks from bound renderer evidence
+  ---
+  duration_ms: 1.447625
+  ...
+# Subtest: ZTC034 QC rejects a frame-count change
+ok 34 - ZTC034 QC rejects a frame-count change
+  ---
+  duration_ms: 1.250208
+  ...
+# Subtest: ZTC035 QC rejects an audio-payload change
+ok 35 - ZTC035 QC rejects an audio-payload change
+  ---
+  duration_ms: 1.231125
+  ...
+# Subtest: ZTC036 QC rejects an unknown key
+ok 36 - ZTC036 QC rejects an unknown key
+  ---
+  duration_ms: 0.965917
+  ...
+# Subtest: ZTC037 manifest exactly binds job, plan, renderer evidence, QC, and video
+ok 37 - ZTC037 manifest exactly binds job, plan, renderer evidence, QC, and video
+  ---
+  duration_ms: 2.67725
+  ...
+# Subtest: ZTC038 manifest rejects an unknown key
+ok 38 - ZTC038 manifest rejects an unknown key
+  ---
+  duration_ms: 0.9435
+  ...
+# Subtest: ZTC039 ZEVO v1 render plan is not accepted as a title plan
+ok 39 - ZTC039 ZEVO v1 render plan is not accepted as a title plan
+  ---
+  duration_ms: 0.045417
+  ...
+# Subtest: ZTC040 formal serializer is deterministic, two-space, and LF terminated
+ok 40 - ZTC040 formal serializer is deterministic, two-space, and LF terminated
+  ---
+  duration_ms: 0.084
+  ...
+# Subtest: ZTC041 common core revalidates indexed title text before rendering
+ok 41 - ZTC041 common core revalidates indexed title text before rendering
+  ---
+  duration_ms: 0.775875
+  ...
+# Subtest: ZTC042 manifest context rejects a renderer-evidence binding swap
+ok 42 - ZTC042 manifest context rejects a renderer-evidence binding swap
+  ---
+  duration_ms: 1.346333
+  ...
+# Subtest: ZTC043 title job rejects a role bound to the wrong implementation path
+ok 43 - ZTC043 title job rejects a role bound to the wrong implementation path
+  ---
+  duration_ms: 0.126458
+  ...
+# Subtest: ZTC044 title job rejects the correct implementation set in a different order
+ok 44 - ZTC044 title job rejects the correct implementation set in a different order
+  ---
+  duration_ms: 0.129
+  ...
+# Subtest: ZTC045 selected title is one landscape line and two vertical lines at 80px
+ok 45 - ZTC045 selected title is one landscape line and two vertical lines at 80px
+  ---
+  duration_ms: 1.754459
+  ...
+# Subtest: ZTC046 top-band is a closed preset with required square centered background
+ok 46 - ZTC046 top-band is a closed preset with required square centered background
+  ---
+  duration_ms: 0.332333
+  ...
+# Subtest: ZTC047 top-band exact model fills canvas edges and keeps the base text model safe
+ok 47 - ZTC047 top-band exact model fills canvas edges and keeps the base text model safe
+  ---
+  duration_ms: 3.015292
+  ...
+# Subtest: ZTC048 top-band visible alpha centering resolves each line horizontally and all lines vertically
+ok 48 - ZTC048 top-band visible alpha centering resolves each line horizontally and all lines vertically
+  ---
+  duration_ms: 0.351833
+  ...
+# Subtest: ZTOR001 importは自動起動せずpure入口を公開し既知data読取だけを束縛する
+ok 49 - ZTOR001 importは自動起動せずpure入口を公開し既知data読取だけを束縛する
+  ---
+  duration_ms: 243.359875
+  ...
+# Subtest: ZTOR002 正式job pathは版付きroot直下のexact fileだけを受理する
+ok 50 - ZTOR002 正式job pathは版付きroot直下のexact fileだけを受理する
+  ---
+  duration_ms: 0.270666
+  ...
+# Subtest: ZTOR003 CLIはjob引数ちょうど1件だけを受理しfatalを閉語彙で返す
+ok 51 - ZTOR003 CLIはjob引数ちょうど1件だけを受理しfatalを閉語彙で返す
+  ---
+  duration_ms: 0.417083
+  ...
+# Subtest: ZTOR004 job root外・nested・traversal pathを拒否する
+ok 52 - ZTOR004 job root外・nested・traversal pathを拒否する
+  ---
+  duration_ms: 0.085791
+  ...
+# Subtest: ZTOR005 NODE_OPTIONSは空値を含め存在自体を拒否する
+ok 53 - ZTOR005 NODE_OPTIONSは空値を含め存在自体を拒否する
+  ---
+  duration_ms: 0.055083
+  ...
+# Subtest: ZTOR006 成果物集合は6名称へexact固定される
+ok 54 - ZTOR006 成果物集合は6名称へexact固定される
+  ---
+  duration_ms: 0.035625
+  ...
+# Subtest: ZTOR007 output rootはoutputIdから一意に導出する
+ok 55 - ZTOR007 output rootはoutputIdから一意に導出する
+  ---
+  duration_ms: 0.562333
+  ...
+# Subtest: ZTOR008 source manifest・QC・videoは同じ既存v1 rootへ束縛する
+ok 56 - ZTOR008 source manifest・QC・videoは同じ既存v1 rootへ束縛する
+  ---
+  duration_ms: 0.201791
+  ...
+# Subtest: ZTOR009 source planは既存control root外を拒否する
+ok 57 - ZTOR009 source planは既存control root外を拒否する
+  ---
+  duration_ms: 0.223667
+  ...
+# Subtest: ZTOR010 title packageは意味情報package正式root外を拒否する
+ok 58 - ZTOR010 title packageは意味情報package正式root外を拒否する
+  ---
+  duration_ms: 0.325792
+  ...
+# Subtest: ZTOR011 source v1 schemaと成果物名を変更しない
+ok 59 - ZTOR011 source v1 schemaと成果物名を変更しない
+  ---
+  duration_ms: 0.119416
+  ...
+# Subtest: ZTOR012 runnerは共通描画coreを一度呼び、no-replace commitを使う
+ok 60 - ZTOR012 runnerは共通描画coreを一度呼び、no-replace commitを使う
+  ---
+  duration_ms: 1.521458
+  ...
+# Subtest: ZTOR013 source成果物へのwrite・rename・unlink経路を持たない
+ok 61 - ZTOR013 source成果物へのwrite・rename・unlink経路を持たない
+  ---
+  duration_ms: 0.581583
+  ...
+# Subtest: ZTOR014 registry・font・license・source・implementation・runtimeを実読取監査する
+ok 62 - ZTOR014 registry・font・license・source・implementation・runtimeを実読取監査する
+  ---
+  duration_ms: 0.92475
+  ...
+# Subtest: ZTOR015 implementation graphの欠落・余分・role-path swapを拒否する
+ok 63 - ZTOR015 implementation graphの欠落・余分・role-path swapを拒否する
+  ---
+  duration_ms: 149.026916
+  ...
+# Subtest: ZTOR016 source manifestの全JSON・media参照を実読取し終了前に再照合する
+ok 64 - ZTOR016 source manifestの全JSON・media参照を実読取し終了前に再照合する
+  ---
+  duration_ms: 1.95875
+  ...
+1..64
+# tests 64
+# suites 0
+# pass 64
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 937.661208

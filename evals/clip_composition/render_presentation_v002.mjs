@@ -21,7 +21,10 @@ import {
   buildPresentationRendererPlanV002,
   loadAndValidatePresentationRendererTrustV001,
 } from './presentation_renderer_plan_v002.mjs';
-import {PRESENTATION_RENDERER_TEXT_LAYOUT_VIOLATION_CODES} from './presentation_renderer_text_layout_v001.mjs';
+import {
+  PRESENTATION_RENDERER_TEXT_LAYOUT_VIOLATION_CODES,
+  resolveVisibleCenterOffsetsV001,
+} from './presentation_renderer_text_layout_v001.mjs';
 import {
   PRESENTATION_RENDERER_QC_VIOLATION_CODES,
   evaluatePresentationRendererQcV002,
@@ -1441,6 +1444,45 @@ export async function executeValidatedPresentationDrawAndQcV001({
         `${String(index + 1).padStart(2, '0')}-${sha256Bytes(element.instructionId).slice(0, 12)}`;
       const pngPath = path.join(stagingDirectory, artifactNames.overlays, `${baseName}.png`);
       const repeatPath = path.join(scratchDirectory, 'frames', `${baseName}.repeat.png`);
+      const layoutItem = layoutByInstruction.get(element.instructionId);
+      if (element.visualState.position.preset === 'top-band') {
+        const calibrationLineBounds = [];
+        for (const line of element.indexedLines) {
+          const calibrationPath = path.join(
+            scratchDirectory,
+            'frames',
+            `${baseName}-visible-center-calibration-${String(line.lineIndex + 1).padStart(2, '0')}.png`,
+          );
+          await overlayAdapter.renderLineMask(
+            overlayProps[index],
+            line.lineIndex,
+            calibrationPath,
+          );
+          const calibration = await inspectOverlayPngWithToolV001({
+            instructionId: element.instructionId,
+            pngPath: calibrationPath,
+            imageMagickPath: toolPaths.imageMagickPath,
+          });
+          if (!calibration.alphaBounds) {
+            throw new Error('top band visible center calibration produced no alpha bounds');
+          }
+          calibrationLineBounds.push(calibration.alphaBounds);
+        }
+        const wrapper = layoutItem?.wrapper;
+        if (!wrapper) throw new Error('top band visible center calibration has no wrapper');
+        overlayProps[index] = {
+          ...overlayProps[index],
+          renderVisibleCenterCorrectionPx: resolveVisibleCenterOffsetsV001({
+            containerBounds: {
+              left: wrapper.left,
+              top: wrapper.top,
+              right: wrapper.left + wrapper.width,
+              bottom: wrapper.top + wrapper.height,
+            },
+            lineBounds: calibrationLineBounds,
+          }),
+        };
+      }
       await overlayAdapter.renderStill(overlayProps[index], pngPath);
       await overlayAdapter.renderStill(overlayProps[index], repeatPath);
       const [pngSha256, repeatSha256] = await Promise.all([
@@ -1456,7 +1498,7 @@ export async function executeValidatedPresentationDrawAndQcV001({
         return failAfterWork(determinism.violations, 'overlay-determinism');
       }
 
-      const lineRects = layoutByInstruction.get(element.instructionId)?.lineRects ?? [];
+      const lineRects = layoutItem?.lineRects ?? [];
       const lineAlphaBounds = [];
       for (const line of element.indexedLines) {
         const lineMaskPath = path.join(

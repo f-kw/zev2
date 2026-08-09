@@ -92,7 +92,7 @@ const TITLE_MEANING_ROOT =
   'evals/clip_composition/outputs/presentation/meaning-information-packages';
 const TITLE_STYLE_REGISTRY_PATH =
   'evals/clip_composition/registries/presentation/'
-  + 'zevo-title-style-registry-v001/registry.json';
+  + 'zevo-title-style-registry-v004/registry.json';
 const RUNTIME_ROLES = Object.freeze([
   'node', 'tsx', 'remotion', 'browser', 'ffmpeg', 'ffprobe', 'imageMagick',
 ]);

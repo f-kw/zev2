@@ -1,0 +1,104 @@
+{
+  "schemaVersion": "zevo-title-renderer-evidence-v001",
+  "evidenceId": "qdczJpv8RCc-candidate-59-c-title-landscape-v006-output-title-plan-renderer-evidence",
+  "planBinding": {
+    "schemaVersion": "zevo-title-display-plan-v001",
+    "path": "evals/clip_composition/outputs/presentation/title-output-renders/qdczJpv8RCc-candidate-59-c-title-landscape-v006-output/title-display-plan-v001.json",
+    "fileSha256": "1a30525ab811f9057c17a20b04ecbfa7e8917ab81ee9ebb36b1a1309aae88e4d",
+    "canonicalSha256": "7cd11c9e541640adea551715566fe3f384df4bfb72d3dde03d7e6058547c2d7e"
+  },
+  "applicationResults": [
+    {
+      "instructionId": "qdczJpv8RCc-candidate-59-c-title-landscape-v006-output-title-display",
+      "status": "rendered",
+      "requestedPresetId": "zevo-title-normal-landscape-top-v004",
+      "appliedPresetId": "zevo-title-normal-landscape-top-v004",
+      "appliedPresetRegistryVersion": "zevo-title-style-registry-v004",
+      "stateId": "zevo-title-normal-landscape-top-v004",
+      "appliedOverlayPropsCanonicalSha256": "c3fc496271c0eaccd6931b10829247a44e9e54617b1c434d8d85debed47fd61f",
+      "overlayFile": "overlays/01-60e238fc2e18.png",
+      "overlaySha256": "1aaffa6e6b37c8bb565ac60a4f33fb01b35ecf99feaf0f9d9388a889bfd93944",
+      "finalPlanElementReference": {
+        "planFile": "title-display-plan-v001.json",
+        "instructionId": "qdczJpv8RCc-candidate-59-c-title-landscape-v006-output-title-display",
+        "canonicalSha256": "21c928cd7363fd077a8c7eb48fcac991da23f8df43d0d2ef6eec6454b082e4f3"
+      }
+    }
+  ],
+  "rendererQc": {
+    "schemaVersion": "presentation-render-qc-v002",
+    "status": "passed",
+    "instructionCount": 1,
+    "checks": {
+      "instructionApplication": {
+        "status": "passed"
+      },
+      "layoutAndVisibility": {
+        "status": "passed"
+      },
+      "media": {
+        "status": "passed"
+      }
+    },
+    "instructionEvidence": [
+      {
+        "instructionId": "qdczJpv8RCc-candidate-59-c-title-landscape-v006-output-title-display",
+        "requestedPresetId": "zevo-title-normal-landscape-top-v004",
+        "appliedPresetId": "zevo-title-normal-landscape-top-v004",
+        "appliedPresetRegistryVersion": "zevo-title-style-registry-v004",
+        "alphaMax": 1,
+        "alphaBounds": {
+          "left": 0,
+          "top": 0,
+          "right": 1920,
+          "bottom": 200,
+          "width": 1920,
+          "height": 200
+        },
+        "lineCount": 1,
+        "lineAlphaBounds": [
+          {
+            "lineIndex": 0,
+            "left": 203,
+            "top": 95,
+            "right": 1717,
+            "bottom": 173,
+            "width": 1514,
+            "height": 78
+          }
+        ],
+        "visibilityComparisonBasis": "same-composite-with-instruction-omitted",
+        "representativeFrame": 90,
+        "changedPixelsAgainstInstructionOmittedFrame": 384000,
+        "appliedOverlayPropsCanonicalSha256": "c3fc496271c0eaccd6931b10829247a44e9e54617b1c434d8d85debed47fd61f",
+        "applicationOverlayFile": "overlays/01-60e238fc2e18.png",
+        "inspectedOverlayFile": "overlays/01-60e238fc2e18.png",
+        "applicationOverlaySha256": "1aaffa6e6b37c8bb565ac60a4f33fb01b35ecf99feaf0f9d9388a889bfd93944",
+        "overlaySha256": "1aaffa6e6b37c8bb565ac60a4f33fb01b35ecf99feaf0f9d9388a889bfd93944"
+      }
+    ],
+    "mediaEvidence": {
+      "observed": {
+        "durationMs": 51566,
+        "video": {
+          "codecName": "h264",
+          "width": 1920,
+          "height": 1080,
+          "fps": 30,
+          "frameCount": 1547
+        },
+        "audio": {
+          "codecName": "aac",
+          "packetPayloadSha256": "d18469bd3132356b03870ee8bc3d63e95947bd254961157e09d59cf9a53459ec"
+        }
+      },
+      "expectedAudio": {
+        "present": true,
+        "codecName": "aac",
+        "packetPayloadSha256": "d18469bd3132356b03870ee8bc3d63e95947bd254961157e09d59cf9a53459ec"
+      },
+      "expectedFrameCount": 1547
+    },
+    "violations": []
+  }
+}

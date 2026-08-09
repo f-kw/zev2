@@ -1,0 +1,124 @@
+{
+  "schemaVersion": "zevo-title-visible-center-render-verification-v001",
+  "verificationDate": "2026-08-09",
+  "candidate": {
+    "sourceVideoId": "qdczJpv8RCc",
+    "candidateId": 59,
+    "title": "片付けの「やりかけ癖」を語るマリン船長"
+  },
+  "change": {
+    "purpose": "center the visible title glyph contours inside the full-width top band",
+    "method": "coarse DOM layout followed by a second pass measured from actual rendered PNG alpha",
+    "hardCodedTitleSpecificOffset": false,
+    "unchanged": [
+      "top and side exterior gaps remain zero",
+      "inner padding remains 46px horizontal and 28px vertical",
+      "font size remains 80px",
+      "landscape remains one line",
+      "vertical remains two lines",
+      "display remains frames 0 through 179"
+    ]
+  },
+  "attempts": [
+    {
+      "id": "landscape-v007-attempt-0001",
+      "result": "fatal-before-render",
+      "cause": "fixed TSX loader could not create its internal Unix socket in the restricted environment",
+      "nativeReadOnlyDiagnosisExitCode": 0,
+      "sameOutputRootRetried": false
+    },
+    {
+      "id": "landscape-v008-attempt-0001",
+      "result": "rejected-before-publication",
+      "cause": "DOM SVG bounds differed from final visible PNG alpha bounds",
+      "observedVerticalCenterDeltaPx": 4,
+      "sameOutputRootRetried": false
+    }
+  ],
+  "finalRenders": {
+    "landscape": {
+      "job": {
+        "path": "evals/clip_composition/outputs/presentation/title-output-jobs/qdczJpv8RCc-candidate-59-c-title-landscape-v009/formal-title-output-job.json",
+        "fileSha256": "1b292f4c6672b57c4cd0dfd2cde7c156d3c0ab9dfc34f4bde0b4ea972fb2bb04"
+      },
+      "video": {
+        "path": "evals/clip_composition/outputs/presentation/title-output-renders/qdczJpv8RCc-candidate-59-c-title-landscape-v009-output/title-rendered-v001.mp4",
+        "fileSha256": "9ea78fa0a8105af78e755b429b1ae27d69537670d48953fbc5d0034b33764afe",
+        "width": 1920,
+        "height": 1080,
+        "durationSeconds": 51.566016,
+        "frameCount": 1547
+      },
+      "visibleGeometry": {
+        "band": { "left": 0, "top": 0, "right": 1920, "bottom": 200 },
+        "lines": [
+          { "left": 203, "top": 61, "right": 1717, "bottom": 139, "horizontalCenterDeltaPx": 0 }
+        ],
+        "allLinesVerticalCenterDeltaPx": 0
+      },
+      "qc": "6/6 passed",
+      "audioPacketShaPreserved": true
+    },
+    "vertical": {
+      "job": {
+        "path": "evals/clip_composition/outputs/presentation/title-output-jobs/qdczJpv8RCc-candidate-59-c-title-vertical-v009/formal-title-output-job.json",
+        "fileSha256": "22999d5114a56b3f3a81d2fb31e07609ad6c9d64984c7429afd5e62c2af47a4c"
+      },
+      "video": {
+        "path": "evals/clip_composition/outputs/presentation/title-output-renders/qdczJpv8RCc-candidate-59-c-title-vertical-v009-output/title-rendered-v001.mp4",
+        "fileSha256": "fcc9f91e879377baedfb2a4fa30036fac272ac15b6223d9006584309e166a396",
+        "width": 1080,
+        "height": 1920,
+        "durationSeconds": 51.566016,
+        "frameCount": 1547
+      },
+      "visibleGeometry": {
+        "band": { "left": 0, "top": 0, "right": 1080, "bottom": 301 },
+        "lines": [
+          { "left": 125, "top": 61, "right": 955, "bottom": 139, "horizontalCenterDeltaPx": 0 },
+          { "left": 228, "top": 163, "right": 853, "bottom": 241, "horizontalCenterDeltaPx": 0.5 }
+        ],
+        "allLinesVerticalCenterDeltaPx": 0.5
+      },
+      "qc": "6/6 passed",
+      "audioPacketShaPreserved": true
+    }
+  },
+  "comparisonToV006": {
+    "landscapeVisibleVerticalCenterDeltaPx": { "before": 34, "after": 0 },
+    "verticalVisibleUnionVerticalCenterDeltaPx": { "before": 32.5, "after": 0.5 },
+    "verticalLineHorizontalCenterDeltaPx": {
+      "before": [-22, 4.5],
+      "after": [0, 0.5]
+    }
+  },
+  "tests": {
+    "titleContractAndRunner": {
+      "result": "64/64 passed",
+      "tap": "evals/clip_composition/reports/presentation/test-runs/20260809-zevo-title-c-v005/targeted/title-contract-and-runner-attempt-0002.tap"
+    },
+    "focusedPhysicalCenterQc": {
+      "result": "1 selected test passed; 18 unrelated tests skipped",
+      "tap": "evals/clip_composition/reports/presentation/test-runs/20260809-zevo-title-c-v005/targeted/presentation-renderer-qc-focused.tap"
+    },
+    "legacyRendererSuite": {
+      "result": "12/19 passed",
+      "status": "blocked by old trust bindings before downstream cases",
+      "detail": "The fixed-trust test still names unrelated dirty Remotion preview components and the pre-change title renderer hashes. These bindings were not rewritten in this scoped title-centering change.",
+      "tap": "evals/clip_composition/reports/presentation/test-runs/20260809-zevo-title-c-v005/targeted/presentation-renderer-v002.tap"
+    }
+  },
+  "visualChecks": {
+    "landscapeScreenshot": {
+      "path": "evals/clip_composition/reports/presentation/test-runs/20260809-zevo-title-c-v005/visual-check/landscape-1s.png",
+      "fileSha256": "480ed3499bbf1cd5c865ae9d03eb4d26571270bb70959cfbb3f45bd41ee69b34"
+    },
+    "verticalScreenshot": {
+      "path": "evals/clip_composition/reports/presentation/test-runs/20260809-zevo-title-c-v005/visual-check/vertical-1s.png",
+      "fileSha256": "b3a47e7ddbfbb72b989e798bdc338526a2b62303a1adb6128085225a161eb634"
+    }
+  },
+  "externalApiCalls": 0,
+  "addedCostUsd": 0,
+  "humanReview": "pending"
+}

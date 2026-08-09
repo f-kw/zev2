@@ -5,6 +5,11 @@ import {
   PRESENTATION_RENDERER_IMPLEMENTED_LAYOUT_RULES_V001,
 } from './presentation_renderer_plan_v002.mjs';
 import {
+  PRESENTATION_RENDERER_OVERLAY_PROPS_SCHEMA_VERSION,
+  buildExactTextModel,
+  resolveTopBandVisibleCenterOffsetsV001,
+} from './presentation_renderer_entry_v001.tsx';
+import {
   ZEVO_TITLE_DISPLAY_PLAN_SCHEMA_V001,
   ZEVO_TITLE_IMPLEMENTATION_BINDINGS_V001,
   ZEVO_TITLE_IMPLEMENTATION_ROLES_V001,
@@ -218,6 +223,52 @@ const makeRegistry = () => ({
     visualState: visualState('title-vertical-state-v001', 134, 6, 2),
   }],
 });
+
+const makeTopBandRegistry = () => {
+  const registry = makeRegistry();
+  for (const profile of registry.profiles) {
+    const landscape = profile.format === 'normal-landscape';
+    const maxLogicalWidth = landscape ? 42 : 22;
+    profile.maxLogicalWidth = maxLogicalWidth;
+    profile.visualState.stateId = landscape
+      ? 'title-landscape-top-band-state-v004'
+      : 'title-vertical-top-band-state-v004';
+    profile.visualState.textStyle.fontSizePx = 80;
+    profile.visualState.position = {
+      preset: 'top-band',
+      alignment: 'center',
+      offsetXPercent: 0,
+      offsetYPercent: 0,
+    };
+    profile.visualState.background = {
+      color: 'rgba(13, 20, 35, 0.88)',
+      borderRadiusPx: 0,
+      paddingXPx: 46,
+      paddingYPx: 28,
+    };
+    profile.visualState.layout.maxCharsPerLine = maxLogicalWidth;
+  }
+  return registry;
+};
+
+const overlayPropsFor = (corePlan, registry) => {
+  const element = corePlan.elements[0];
+  const font = registry.fontAssets.find(
+    candidate => candidate.fontAssetId === element.visualState.textStyle.fontAssetId,
+  );
+  return {
+    schemaVersion: PRESENTATION_RENDERER_OVERLAY_PROPS_SCHEMA_VERSION,
+    canvas: structuredClone(corePlan.canvas),
+    instructionId: element.instructionId,
+    text: element.text,
+    indexedLines: structuredClone(element.indexedLines),
+    visualState: structuredClone(element.visualState),
+    layoutRules: structuredClone(corePlan.layoutRules),
+    fontFamilyName: `zev-renderer-${font.fontAssetId}`,
+    fontFileName: font.fileName,
+    inspectionLineIndex: null,
+  };
+};
 
 const makeJob = ({profileId = 'title-landscape-v001'} = {}) => {
   const outputId = profileId.includes('vertical')
@@ -801,4 +852,175 @@ test('ZTC044 title job rejects the correct implementation set in a different ord
     [job.implementationBindings[1], job.implementationBindings[0]];
   assert.equal(validateZevoTitleOutputJobV001(job), false);
   assert.equal(ZEVO_TITLE_IMPLEMENTATION_ROLES_V001.length, 56);
+});
+
+const buildSelectedTitlePlans = () => {
+  const registry = makeTopBandRegistry();
+  const source = makeMeaningPackage();
+  const titled = makeMeaningPackage({
+    packageId: 'candidate-59-selected-title-v004',
+    title: {text: '片付けの「やりかけ癖」を語るマリン船長', inputMode: 'human'},
+    provenanceSeed: 'selected-title-v004',
+  });
+  const build = profileId => {
+    const job = makeJob({profileId});
+    return buildZevoTitleDisplayPlanV001({
+      job,
+      jobBinding: jobBindingFor(job),
+      registry,
+      sourceMeaningPackage: source,
+      titleMeaningPackage: titled,
+    });
+  };
+  return {
+    registry,
+    landscape: build('title-landscape-v001'),
+    vertical: build('title-vertical-v001'),
+  };
+};
+
+test('ZTC045 selected title is one landscape line and two vertical lines at 80px', () => {
+  const {registry, landscape, vertical} = buildSelectedTitlePlans();
+  assert.equal(landscape.status, 'built');
+  assert.equal(vertical.status, 'built');
+  assert.equal(registry.profiles[0].visualState.textStyle.fontSizePx, 80);
+  assert.equal(registry.profiles[1].visualState.textStyle.fontSizePx, 80);
+  assert.deepEqual(
+    landscape.plan.titleDisplay.indexedLines.map(line => line.renderedText),
+    ['片付けの「やりかけ癖」を語るマリン船長'],
+  );
+  assert.deepEqual(
+    vertical.plan.titleDisplay.indexedLines.map(line => line.renderedText),
+    ['片付けの「やりかけ癖」', 'を語るマリン船長'],
+  );
+});
+
+test('ZTC046 top-band is a closed preset with required square centered background', () => {
+  const registry = makeTopBandRegistry();
+  assert.equal(validateZevoTitleStyleRegistryV001(registry), true);
+
+  const invalidMutations = [
+    profile => { profile.visualState.position.preset = 'top-strip'; },
+    profile => { profile.visualState.background = null; },
+    profile => { profile.visualState.background.borderRadiusPx = 1; },
+    profile => { profile.visualState.position.alignment = 'left'; },
+    profile => { profile.visualState.position.offsetXPercent = 1; },
+    profile => { profile.visualState.position.offsetYPercent = 1; },
+    profile => { profile.visualState.background.paddingXPx = 0; },
+    profile => { profile.visualState.background.paddingYPx = 0; },
+  ];
+  for (const mutate of invalidMutations) {
+    const invalid = structuredClone(registry);
+    mutate(invalid.profiles[0]);
+    assert.equal(validateZevoTitleStyleRegistryV001(invalid), false);
+  }
+});
+
+test('ZTC047 top-band exact model fills canvas edges and keeps the base text model safe', () => {
+  const {registry, landscape, vertical} = buildSelectedTitlePlans();
+  for (const result of [landscape, vertical]) {
+    assert.equal(result.status, 'built');
+    const common = buildZevoTitleCommonCorePlanV001({plan: result.plan, registry});
+    assert.equal(common.status, 'built');
+    const props = overlayPropsFor(common.plan, registry);
+    const exact = buildExactTextModel(props);
+    const paddingY = props.visualState.background.paddingYPx;
+    const textTopMargin = Math.max(
+      4,
+      Math.round(
+        props.canvas.height * props.layoutRules.verticalSafeMarginRatio,
+      ),
+      props.canvas.safeAreaPx.top,
+    );
+    assert.deepEqual(
+      {
+        left: exact.wrapper.left,
+        top: exact.wrapper.top,
+        width: exact.wrapper.width,
+        height: exact.wrapper.height,
+      },
+      {
+        left: 0,
+        top: 0,
+        width: props.canvas.width,
+        height: exact.textModel.svgHeight + textTopMargin + paddingY * 2,
+      },
+    );
+    assert.equal(
+      exact.wrapper.contentOffsetX,
+      (props.canvas.width - exact.textModel.svgWidth) / 2,
+    );
+    assert.equal(exact.wrapper.contentOffsetY, textTopMargin + paddingY);
+
+    const strokeExtent = Math.max(
+      exact.textModel.borderStrokeWidth,
+      exact.textModel.glowStrokeWidth,
+    ) / 2;
+    for (const line of exact.textModel.lines) {
+      const bounds = {
+        left: exact.wrapper.left + exact.wrapper.contentOffsetX + line.x - strokeExtent,
+        top: exact.wrapper.top + exact.wrapper.contentOffsetY + line.y - strokeExtent,
+        right: exact.wrapper.left + exact.wrapper.contentOffsetX
+          + line.x + line.width + strokeExtent,
+        bottom: exact.wrapper.top + exact.wrapper.contentOffsetY
+          + line.y + exact.textModel.fontSize + strokeExtent,
+      };
+      assert.ok(bounds.left >= props.canvas.safeAreaPx.left);
+      assert.ok(bounds.top >= props.canvas.safeAreaPx.top);
+      assert.ok(bounds.right <= props.canvas.width - props.canvas.safeAreaPx.right);
+      assert.ok(bounds.bottom <= props.canvas.height - props.canvas.safeAreaPx.bottom);
+    }
+  }
+});
+
+test('ZTC048 top-band visible alpha centering resolves each line horizontally and all lines vertically', () => {
+  const landscapeBand = {left: 0, top: 0, right: 1920, bottom: 200};
+  const landscapeLines = [{left: 203, top: 95, right: 1717, bottom: 173}];
+  const landscapeOffsets = resolveTopBandVisibleCenterOffsetsV001({
+    bandBounds: landscapeBand,
+    lineBounds: landscapeLines,
+    renderScale: 1,
+  });
+  assert.deepEqual(landscapeOffsets, [{x: 0, y: -34}]);
+  assert.deepEqual(resolveTopBandVisibleCenterOffsetsV001({
+    bandBounds: landscapeBand,
+    lineBounds: [{left: 203, top: 65, right: 1717, bottom: 143}],
+    renderScale: 1,
+  }), [{x: 0, y: -4}]);
+
+  const verticalBand = {left: 0, top: 0, right: 1080, bottom: 301};
+  const verticalLines = [
+    {left: 103, top: 93, right: 933, bottom: 171},
+    {left: 232, top: 195, right: 857, bottom: 273},
+  ];
+  const verticalOffsets = resolveTopBandVisibleCenterOffsetsV001({
+    bandBounds: verticalBand,
+    lineBounds: verticalLines,
+    renderScale: 1,
+  });
+  assert.deepEqual(verticalOffsets, [{x: 22, y: -32}, {x: -4, y: -32}]);
+
+  const centeredVerticalLines = verticalLines.map((bounds, index) => ({
+    left: bounds.left + verticalOffsets[index].x,
+    top: bounds.top + verticalOffsets[index].y,
+    right: bounds.right + verticalOffsets[index].x,
+    bottom: bounds.bottom + verticalOffsets[index].y,
+  }));
+  assert.ok(centeredVerticalLines.every(bounds => (
+    Math.abs(
+      (bounds.left + bounds.right) - (verticalBand.left + verticalBand.right)
+    ) <= 1
+  )));
+  assert.ok(Math.abs(
+    Math.min(...centeredVerticalLines.map(bounds => bounds.top))
+      + Math.max(...centeredVerticalLines.map(bounds => bounds.bottom))
+      - verticalBand.top
+      - verticalBand.bottom
+  ) <= 1);
+
+  assert.throws(() => resolveTopBandVisibleCenterOffsetsV001({
+    bandBounds: verticalBand,
+    lineBounds: [],
+    renderScale: 1,
+  }), /visible center bounds/u);
 });

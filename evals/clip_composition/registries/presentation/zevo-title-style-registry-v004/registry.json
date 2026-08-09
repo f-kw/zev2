@@ -1,0 +1,139 @@
+{
+  "schemaVersion": "zevo-title-style-registry-v001",
+  "registryId": "zevo-title-style-registry-v004",
+  "fontAssets": [
+    {
+      "fontAssetId": "shippori-mincho-bold-v001",
+      "fileName": "ShipporiMincho-Bold.ttf",
+      "path": "runner/public/font/ShipporiMincho-Bold.ttf",
+      "fileSha256": "be85eeed197f573a8d8dcb26634787179574f3ff179afef077ecfb8d81daa20f",
+      "licensePath": "runner/public/font/OFL_ShipporiMincho-Bold.txt"
+    }
+  ],
+  "layoutRules": {
+    "layoutRuleVersion": "normal-landscape-render-layout-v001",
+    "fontWeight": 800,
+    "minimumFontSizePx": 12,
+    "textSafePaddingRatio": 0.04,
+    "horizontalSafeMarginRatio": 0.04,
+    "verticalSafeMarginRatio": 0.02,
+    "fallbackTextAreaRatio": 0.98,
+    "lowerThirdAnchorPercent": 67,
+    "renderScale": 1,
+    "characterWidthRule": "U+0000..U+00FF=1; other Unicode code point=2",
+    "borderStrokeWidthRule": "2 * max(0, borderWidthPx)",
+    "glowStrokeWidthRule": "2 * max(0, glowWidthPx) + 2 * max(0, borderWidthPx)",
+    "marginRule": "max(glowStrokeWidth, borderStrokeWidth) / 2",
+    "safePaddingRule": "max(2, ceil(fontSizePx * textSafePaddingRatio))",
+    "placementClampRule": "clamp full alpha bounds inside canvas safe margins",
+    "humanReapprovalRule": "Any numeric or formula change requires a new rendered preview and human approval before a new trust and renderer version may be activated."
+  },
+  "profiles": [
+    {
+      "profileId": "zevo-title-normal-landscape-top-v004",
+      "format": "normal-landscape",
+      "canvas": {
+        "width": 1920,
+        "height": 1080,
+        "fps": 30
+      },
+      "safeArea": {
+        "top": 40,
+        "right": 80,
+        "bottom": 40,
+        "left": 80
+      },
+      "displayFrameRange": {
+        "startFrame": 0,
+        "endFrameExclusive": 180
+      },
+      "maxLogicalWidth": 42,
+      "maxLines": 2,
+      "visualState": {
+        "stateId": "zevo-title-normal-landscape-top-v004",
+        "textStyle": {
+          "fontAssetId": "shippori-mincho-bold-v001",
+          "fontSizePx": 80,
+          "fontColor": "#FFFDF7",
+          "borderColor": "#101827",
+          "borderWidthPx": 0,
+          "lineSpacingPercent": 128,
+          "glowColor": "#000000",
+          "glowWidthPx": 0,
+          "glowOpacityPercent": 0
+        },
+        "position": {
+          "preset": "top-band",
+          "alignment": "center",
+          "offsetXPercent": 0,
+          "offsetYPercent": 0
+        },
+        "background": {
+          "color": "rgba(13, 20, 35, 0.88)",
+          "borderRadiusPx": 0,
+          "paddingXPx": 46,
+          "paddingYPx": 28
+        },
+        "layout": {
+          "maxCharsPerLine": 42,
+          "maxLines": 2,
+          "singleLine": false
+        },
+        "transitionId": "quick-fade-4f-v001"
+      }
+    },
+    {
+      "profileId": "zevo-title-vertical-short-top-v004",
+      "format": "vertical-short-1080x1920",
+      "canvas": {
+        "width": 1080,
+        "height": 1920,
+        "fps": 30
+      },
+      "safeArea": {
+        "top": 38,
+        "right": 43,
+        "bottom": 38,
+        "left": 43
+      },
+      "displayFrameRange": {
+        "startFrame": 0,
+        "endFrameExclusive": 180
+      },
+      "maxLogicalWidth": 22,
+      "maxLines": 2,
+      "visualState": {
+        "stateId": "zevo-title-vertical-short-top-v004",
+        "textStyle": {
+          "fontAssetId": "shippori-mincho-bold-v001",
+          "fontSizePx": 80,
+          "fontColor": "#FFFDF7",
+          "borderColor": "#101827",
+          "borderWidthPx": 0,
+          "lineSpacingPercent": 128,
+          "glowColor": "#000000",
+          "glowWidthPx": 0,
+          "glowOpacityPercent": 0
+        },
+        "position": {
+          "preset": "top-band",
+          "alignment": "center",
+          "offsetXPercent": 0,
+          "offsetYPercent": 0
+        },
+        "background": {
+          "color": "rgba(13, 20, 35, 0.88)",
+          "borderRadiusPx": 0,
+          "paddingXPx": 46,
+          "paddingYPx": 28
+        },
+        "layout": {
+          "maxCharsPerLine": 22,
+          "maxLines": 2,
+          "singleLine": false
+        },
+        "transitionId": "quick-fade-4f-v001"
+      }
+    }
+  ]
+}

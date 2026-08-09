@@ -35,6 +35,7 @@ import {
   audioPacketPayloadSha256V002,
   evaluatePresentationRendererQcV002,
   fileSha256V002,
+  inspectOverlayPngWithToolV001,
   inspectRenderedMediaV002,
 } from './presentation_renderer_qc_v002.mjs';
 import {
@@ -1356,6 +1357,99 @@ test('12 行数・行の正の交差・安全領域・空alphaを独立して検
   const unsafe = clone(base);
   unsafe.overlayInspections[0].alphaBounds.left = 0;
   assertHasCode(evaluatePresentationRendererQcV002(unsafe), 'LAYOUT_SAFE_AREA_VIOLATION');
+
+  const topBandPlan = clone(base.plan);
+  topBandPlan.elements[0].visualState.position = {
+    preset: 'top-band',
+    alignment: 'center',
+    offsetXPercent: 0,
+    offsetYPercent: 0,
+  };
+  topBandPlan.elements[0].visualState.background = {
+    color: 'rgba(13, 20, 35, 0.88)',
+    borderRadiusPx: 0,
+    paddingXPx: 46,
+    paddingYPx: 28,
+  };
+  const topBand = makeValidQcInput(topBandPlan);
+  topBand.overlayInspections[0].alphaBounds = {
+    left: 0,
+    top: 0,
+    right: topBand.canvas.width,
+    bottom: 180,
+    width: topBand.canvas.width,
+    height: 180,
+  };
+  topBand.overlayInspections[0].lineAlphaBounds = [{
+    lineIndex: 0,
+    left: 920,
+    top: 80,
+    right: 1000,
+    bottom: 100,
+  }];
+  assert.equal(
+    codesOf(evaluatePresentationRendererQcV002(topBand))
+      .includes('LAYOUT_SAFE_AREA_VIOLATION'),
+    false,
+  );
+
+  const topBandWithTopGap = clone(topBand);
+  topBandWithTopGap.overlayInspections[0].alphaBounds.top = 1;
+  assertHasCode(
+    evaluatePresentationRendererQcV002(topBandWithTopGap),
+    'LAYOUT_SAFE_AREA_VIOLATION',
+  );
+  const topBandWithSideGaps = clone(topBand);
+  topBandWithSideGaps.overlayInspections[0].alphaBounds.left = 1;
+  topBandWithSideGaps.overlayInspections[0].alphaBounds.right = topBand.canvas.width - 1;
+  assertHasCode(
+    evaluatePresentationRendererQcV002(topBandWithSideGaps),
+    'LAYOUT_SAFE_AREA_VIOLATION',
+  );
+  const topBandWithUnsafeText = clone(topBand);
+  topBandWithUnsafeText.overlayInspections[0].lineAlphaBounds[0].left =
+    topBand.canvas.safeAreaPx.left - 1;
+  assertHasCode(
+    evaluatePresentationRendererQcV002(topBandWithUnsafeText),
+    'LAYOUT_SAFE_AREA_VIOLATION',
+  );
+  const topBandWithHorizontalTextDrift = clone(topBand);
+  topBandWithHorizontalTextDrift.overlayInspections[0].lineAlphaBounds[0].left -= 1;
+  topBandWithHorizontalTextDrift.overlayInspections[0].lineAlphaBounds[0].right -= 1;
+  assertHasCode(
+    evaluatePresentationRendererQcV002(topBandWithHorizontalTextDrift),
+    'LAYOUT_SAFE_AREA_VIOLATION',
+  );
+  const topBandWithVerticalTextDrift = clone(topBand);
+  topBandWithVerticalTextDrift.overlayInspections[0].lineAlphaBounds[0].top += 1;
+  topBandWithVerticalTextDrift.overlayInspections[0].lineAlphaBounds[0].bottom += 1;
+  assertHasCode(
+    evaluatePresentationRendererQcV002(topBandWithVerticalTextDrift),
+    'LAYOUT_SAFE_AREA_VIOLATION',
+  );
+
+  const alphaFixtureDirectory = await mkdtemp('/private/tmp/presentation-renderer-alpha-bounds-');
+  try {
+    const translucentTopBandPath = path.join(alphaFixtureDirectory, 'translucent-top-band.png');
+    const createTopBand = await run('magick', [
+      '-size', '320x180', 'xc:none',
+      '-fill', 'rgba(13,20,35,0.88)',
+      '-draw', 'rectangle 0,0 319,39',
+      translucentTopBandPath,
+    ]);
+    assert.equal(createTopBand.code, 0, createTopBand.stderr);
+    const translucentTopBand = await inspectOverlayPngWithToolV001({
+      imageMagickPath: 'magick',
+      instructionId: 'translucent-top-band',
+      pngPath: translucentTopBandPath,
+    });
+    assert.deepEqual(
+      translucentTopBand.alphaBounds,
+      {left: 0, top: 0, right: 320, bottom: 40, width: 320, height: 40},
+    );
+  } finally {
+    await rm(alphaFixtureDirectory, {recursive: true, force: true});
+  }
   const empty = clone(base);
   empty.overlayInspections[0].alphaMax = 0;
   empty.overlayInspections[0].alphaBounds = null;
