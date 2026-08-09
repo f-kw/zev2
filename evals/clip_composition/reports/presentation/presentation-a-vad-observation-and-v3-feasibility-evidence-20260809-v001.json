@@ -1,0 +1,130 @@
+{
+  "schemaVersion": "presentation-a-vad-feasibility-evidence-v001",
+  "evidenceId": "presentation-a-candidate59-and-layer1-v3-20260809-v001",
+  "observedDate": "2026-08-09",
+  "method": "read-only comparison of saved observations and current source-atom boundaries",
+  "externalCommunicationCount": 0,
+  "costUsd": 0,
+  "candidate59Evidence": {
+    "savedObservationSource": {
+      "path": "evals/clip_composition/reports/presentation/presentation-a-timeline-composition-silence-trim-contract-design-draft-20260809-v001.md",
+      "fileSha256": "0dd92bf1c5c8fedd2f794ed1a9a4c9efc1ffccd92fe3cb828a6e3d58c578304a"
+    },
+    "sourceAtoms": {
+      "path": "evals/clip_composition/outputs/presentation/retained-source-atoms/qdczJpv8RCc-candidate-59-v001/source-atoms.json",
+      "fileSha256": "9fe657ace14e61d5af417897a67f56ba2e6e188d4346edde8320049643955996"
+    },
+    "rawVadArtifactAvailable": false,
+    "rawVadArtifactNote": "独立した生VAD成果物は保存されていない。以下は既存の版付き設計draftに保存済みの6観測と正式source atomの照合記録であり、再実測値ではない",
+    "observations": [
+      {
+        "startMs": 5983902,
+        "endMs": 5984702,
+        "durationMs": 800,
+        "overlappingAtoms": [
+          {"atomId": "word-17932", "text": "う", "startMs": 5982369, "endMs": 5984951}
+        ],
+        "contractRelation": "partial-source-atom-intersection"
+      },
+      {
+        "startMs": 5967602,
+        "endMs": 5968362,
+        "durationMs": 760,
+        "overlappingAtoms": [
+          {"atomId": "word-17833", "text": "の", "startMs": 5964437, "endMs": 5968359},
+          {"atomId": "word-17834", "text": "う", "startMs": 5968359, "endMs": 5968439}
+        ],
+        "contractRelation": "partial-source-atom-intersection"
+      },
+      {
+        "startMs": 5964902,
+        "endMs": 5965502,
+        "durationMs": 600,
+        "overlappingAtoms": [
+          {"atomId": "word-17833", "text": "の", "startMs": 5964437, "endMs": 5968359}
+        ],
+        "contractRelation": "partial-source-atom-intersection"
+      },
+      {
+        "startMs": 5977982,
+        "endMs": 5978502,
+        "durationMs": 520,
+        "overlappingAtoms": [
+          {"atomId": "word-17904", "text": "の", "startMs": 5977687, "endMs": 5978867}
+        ],
+        "contractRelation": "partial-source-atom-intersection"
+      },
+      {
+        "startMs": 5982562,
+        "endMs": 5983082,
+        "durationMs": 520,
+        "overlappingAtoms": [
+          {"atomId": "word-17932", "text": "う", "startMs": 5982369, "endMs": 5984951}
+        ],
+        "contractRelation": "partial-source-atom-intersection"
+      },
+      {
+        "startMs": 5980022,
+        "endMs": 5980462,
+        "durationMs": 440,
+        "overlappingAtoms": [
+          {"atomId": "word-17914", "text": "ど", "startMs": 5979568, "endMs": 5980869}
+        ],
+        "contractRelation": "partial-source-atom-intersection"
+      }
+    ]
+  },
+  "layer1V3Evidence": {
+    "proposal": {
+      "path": "evals/clip_composition/outputs/internal-edit/20260717-layer1-v003-long-gap-pair-review-v001/package-input.json",
+      "fileSha256": "cfb43e60d8bf73d3377f39ff45d2d69156b6b5432d6944799b402ede764d5b0c"
+    },
+    "humanReview": {
+      "path": "evals/clip_composition/outputs/internal-edit/20260717-layer1-v003-long-gap-pair-review-v001/human-result.json",
+      "fileSha256": "cb08a7607b6d99f3f7fd5ef27582a90b096ac07356d9fd7fc59fef740b44a3bc",
+      "result": "3/3 same, seam issues 0",
+      "humanObservation": "劣化していないため短縮した方が良い。"
+    },
+    "manifest": {
+      "path": "evals/clip_composition/outputs/internal-edit/20260717-layer1-v003-long-gap-pair-review-v001/manifest.json",
+      "fileSha256": "4215a4467ce7b2fd88f5b6483813ddfef4359a4be71c47b9a494403b35ae72e3"
+    },
+    "sourceMedia": {
+      "path": "evals/clip_composition/research/downloads/nE_bNeBNp4E/sources/qdczJpv8RCc/qdczJpv8RCc.mp4",
+      "fileSha256": "8359f59d8c205fb815c9165f5a464ec4bb9f109f9d91384b80e571410dc2fa25"
+    },
+    "currentAtomReference": {
+      "path": "evals/clip_composition/fixtures/nE_bNeBNp4E_multiblock_material_v001/transcript.json",
+      "fileSha256": "3e6dc8fa8dd22ea02f296a4fa3bb2d311639af1fba1a56f999abbc6834bcfea3"
+    },
+    "cuts": [
+      {
+        "candidateId": "nE_bNeBNp4E_multiblock_material_v001:2:voice-013",
+        "outerRange": {"startMs": 4080650, "endMs": 4108290},
+        "approvedCut": {"startMs": 4084435, "endMs": 4086915, "durationMs": 2480},
+        "overlappingAtom": {"text": "ぁ", "startMs": 4083972, "endMs": 4087055},
+        "contractRelation": "approved-cut-is-wholly-inside-one-current-atom"
+      },
+      {
+        "candidateId": "nE_bNeBNp4E_multiblock_material_v001:5:voice-067",
+        "outerRange": {"startMs": 4445826, "endMs": 4469038},
+        "approvedCut": {"startMs": 4455270, "endMs": 4457090, "durationMs": 1820},
+        "overlappingAtom": {"text": "が", "startMs": 4453870, "endMs": 4457212},
+        "contractRelation": "approved-cut-is-wholly-inside-one-current-atom"
+      },
+      {
+        "candidateId": "nE_bNeBNp4E_multiblock_material_v001:5:voice-190",
+        "outerRange": {"startMs": 4590178, "endMs": 4619286},
+        "approvedCut": {"startMs": 4611230, "endMs": 4613470, "durationMs": 2240},
+        "overlappingAtom": {"text": "ク", "startMs": 4610824, "endMs": 4616745},
+        "contractRelation": "approved-cut-is-wholly-inside-one-current-atom"
+      }
+    ]
+  },
+  "conclusion": {
+    "visualSafety": "the three layer1 v3 cuts remain human-approved",
+    "currentContractSafety": "none of the three cuts satisfies current whole-source-atom closure",
+    "implementationVerdict": "stop-before-implementation",
+    "inventoryItem": "A-v002 candidate: cutting across character atoms and subtitle boundaries"
+  }
+}
